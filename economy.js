@@ -676,6 +676,14 @@ function navyAsleep(e){
 }
 
 function queueShip(e, sys, cls, oto){
+  /* ═══ FAZ 59: SABOTE EDİLMİŞ TERSANE ═══
+     Kilitli tezgâhta gemi üretilemez — oyuncu da AI da. */
+  if (sys && sys.yardLock && sys.yardLock > (G.memAge || 0)){
+    if (e && e.id === 0 && !oto)
+      say('⚓ ' + sys.name + ' tersanesi sabote edilmiş — ' +
+          (sys.yardLock - (G.memAge || 0)) + ' ay kapalı', 'war');
+    return false;
+  }
   /* FAZ 47: yalnız OTOMATİK çağrılar uykuya tabidir */
   if (oto){
     const uy = navyAsleep(e);

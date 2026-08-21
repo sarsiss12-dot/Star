@@ -81,6 +81,52 @@ function resTag(r, v){
 }
 
 /* ---------- gezegen türleri ---------- */
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 59 — CSS GEZEGEN KÜRESİ
+   Eski yol 26–34 px'lik bir sprite'ı büyütüyordu (imageSmoothing
+   kapalı) — pikselli ve bulanık görünüyordu. Artık gezegen saf CSS:
+     · radial-gradient  → küresel gölgelendirme, sol üstten ışık
+     · ikinci gradient  → yüzey lekeleri (kıta/bulut hissi)
+     · box-shadow       → atmosfer ışıması + iç terminatör (gece yüzü)
+   Vektörel olduğu için her ölçekte pürüzsüz; dış dosya yok,
+   canvas yok, çizim maliyeti sıfır.
+   ═══════════════════════════════════════════════════════════════════ */
+function planetOrb(tip, seed, boyut){
+  const P = PLANETS[tip];
+  const d = boyut || 34;
+  if (!P || !P.pal) return `<span style="display:inline-block;width:${d}px;height:${d}px"></span>`;
+  const pal = P.pal;
+  const koyu = pal[0], orta = pal[2] || pal[1], acik = pal[4] || pal[3] || pal[2];
+
+  /* Tohumdan sabit bir "yüzey dönüşü" — aynı gezegen hep aynı görünür */
+  const sd = ((seed || 0) * 2654435761) >>> 0;
+  const ax = 28 + (sd % 22);              // ışık kaynağı x (%)
+  const ay = 24 + ((sd >> 5) % 18);       // ışık kaynağı y (%)
+  const lx = 30 + ((sd >> 9) % 44);       // leke merkezi
+  const ly = 34 + ((sd >> 14) % 38);
+
+  /* Gaz devi ve yıldız türleri için farklı doku */
+  const gaz = P.k === 'gaz' || tip === 'gaz';
+  const leke = gaz
+    ? `radial-gradient(120% 32% at 50% ${ly}%, ${acik}44 0 18%, transparent 19%),
+       radial-gradient(120% 26% at 50% ${(ly+26)%80+10}%, ${koyu}55 0 16%, transparent 17%),`
+    : `radial-gradient(38% 30% at ${lx}% ${ly}%, ${acik}55 0 40%, transparent 62%),
+       radial-gradient(30% 24% at ${(lx+38)%80+8}% ${(ly+30)%70+12}%, ${koyu}66 0 44%, transparent 66%),`;
+
+  return `<span class="pOrb" style="
+    width:${d}px;height:${d}px;
+    background:
+      ${leke}
+      radial-gradient(circle at ${ax}% ${ay}%,
+        ${acik} 0%, ${orta} 38%, ${pal[1]} 62%, ${koyu} 88%, #01030a 100%);
+    box-shadow:
+      inset ${Math.round(-d*0.18)}px ${Math.round(-d*0.10)}px ${Math.round(d*0.34)}px rgba(2,4,10,.86),
+      inset ${Math.round(d*0.08)}px ${Math.round(d*0.06)}px ${Math.round(d*0.18)}px ${acik}22,
+      0 0 ${Math.round(d*0.30)}px ${orta}4d,
+      0 0 ${Math.round(d*0.10)}px ${acik}33;
+  "></span>`;
+}
+
 const PLANETS = {
   col :{n:'Çöl',        k:'hab', ik:'kuru',  pal:['#3a2a17','#7a5a2c','#c99a4e','#e8c079','#f7e6b4'], f:'land'},
   kur :{n:'Kurak',      k:'hab', ik:'kuru',  pal:['#3d2b20','#7d5237','#b8794a','#d9a271','#f0cd9f'], f:'land'},
@@ -3177,6 +3223,13 @@ function supplyDistance(e, f){
 /* 1 = tam ikmal … 0 = hat tamamen kopuk */
 function fleetSupply(e, f){
   if (!f || !f.ships || !f.ships.length) return 1;
+  /* ═══ FAZ 59: LOJİSTİK HACK ═══
+     Hacklenmiş sistemdeki filo tedarik tabanına düşer — hattın
+     içinde olsa bile ikmal alamaz. */
+  const bs = f.sys >= 0 ? G.sys[f.sys] : null;
+  if (bs && bs.supplyHack && bs.supplyHack > (G.memAge || 0) &&
+      bs.supplyHackBy !== f.e)
+    return SUPPLY_FLOOR;
   const d = supplyDistance(e, f);
   if (d <= SUPPLY_FREE) return 1;
   /* ═══ FAZ 54: KADEMELİ CEZA ═══
@@ -6585,6 +6638,28 @@ const UI = {
         this.keepScroll = true; this.refresh();
         break;
       }
+      case 'saboPick': {
+        const [tur, id] = x.split(':');
+        this.saboPick = {tur, emp: +id};
+        this.keepScroll = true; this.refresh();
+        break;
+      }
+      case 'saboCancel': {
+        this.saboPick = null;
+        this.keepScroll = true; this.refresh();
+        break;
+      }
+      case 'saboGo': {
+        const [tur, id, sid] = x.split(':');
+        const o = G.emps[+id];
+        const r = (typeof doSabotage === 'function')
+          ? doSabotage(G.p, o, tur, +sid) : {ok:false, why:'—'};
+        this.saboPick = null;
+        if (!r.ok) say(r.why, 'war');
+        else if (!r.caught && !r.sys) say(r.msg, 'war');
+        this.keepScroll = true; this.refresh();
+        break;
+      }
       case 'incite': {
         const o = G.emps[+x];
         const r = (typeof inciteRebellion === 'function')
@@ -7405,7 +7480,7 @@ const UI = {
       const mine = pl.owner === 0;
       h += `<div class="box">`;
       h += `<div style="display:flex;gap:9px;align-items:flex-start">`;
-      h += `<canvas class="pspr" data-t="${pl.t}" data-s="${pl.seed}" width="34" height="34" style="image-rendering:pixelated;width:34px;height:34px;flex:0 0 34px"></canvas>`;
+      h += planetOrb(pl.t, pl.seed, 34);   // FAZ 59: CSS küre
       h += `<div style="flex:1;min-width:0">`;
       let sym = '';
       if (pl.col && pl.owner === 0){
@@ -8993,6 +9068,49 @@ const UI = {
       }
     }
 
+    /* ═══ FAZ 59: AGRESİF SABOTAJLAR ═══ */
+    if (typeof canSabotage === 'function'){
+      [['yard','⚓ TERSANEYİ SABOTE ET',
+        'Hedef sistemde gemi üretimi 12 ay durur, tezgâhtaki siparişler iptal olur.',
+        typeof SABO_YARD_COST !== 'undefined' ? SABO_YARD_COST : 110],
+       ['supply','📦 LOJİSTİK AĞI HACKLE',
+        'Hedef sistemin ikmal hattı 6 ay çöker; oradaki filolar %40 güçte kalır.',
+        typeof SABO_SUPPLY_COST !== 'undefined' ? SABO_SUPPLY_COST : 130]
+      ].forEach(([tur, baslik, aciklama, bedel]) => {
+        h += `<div class="ph">${baslik}</div>`;
+        h += `<div class="mini">${aciklama} (${bedel} ◈)</div>`;
+        const uygun = tanidik.filter(o => canSabotage(e, o, tur).ok);
+        if (!uygun.length){
+          const ilk = tanidik.length ? canSabotage(e, tanidik[0], tur) : null;
+          h += `<div class="mini" style="color:#7d90ad">${
+            ilk && ilk.why ? esc(ilk.why) : 'Uygun hedef yok'}</div>`;
+          return;
+        }
+        uygun.forEach(o => {
+          const hd = canSabotage(e, o, tur).hedefler;
+          const secili = this.saboPick && this.saboPick.tur === tur &&
+                         this.saboPick.emp === o.id;
+          h += `<div class="box">
+            <div class="bt"><span style="color:${o.col}">${esc(o.name.slice(0,24))}</span>
+              <span class="tag b">${hd.length} hedef</span></div>`;
+          if (!secili){
+            h += `<div class="act2"><button class="abtn dgr"
+              data-a="saboPick" data-x="${tur}:${o.id}">HEDEF SEÇ</button></div>`;
+          } else {
+            h += `<div class="mini">Vurulacak sistemi seç:</div><div class="act2">`;
+            hd.slice(0, 8).forEach(x => {
+              h += `<button class="abtn dgr" data-a="saboGo"
+                data-x="${tur}:${o.id}:${x.sy.id}">${esc(x.sy.name.slice(0,14))}
+                <br><span style="font-size:9px">${esc(x.bilgi)}</span></button>`;
+            });
+            h += `</div><div class="act2"><button class="abtn"
+              data-a="saboCancel">✕ VAZGEÇ</button></div>`;
+          }
+          h += `</div>`;
+        });
+      });
+    }
+
     /* ═══ FAZ 42: İSYANI KIŞKIRT ═══ */
     if (typeof canIncite === 'function'){
       h += `<div class="ph">🔥 İSYANI KIŞKIRT</div>`;
@@ -10571,7 +10689,7 @@ const UI = {
       const sys = G.sys[c.s], pl = sys.planets[c.p];
       if (!pl.col) return;
       h += `<div class="pchip" data-a="selsys" data-x="${sys.id}">
-        <canvas class="pspr" data-t="${pl.t}" data-s="${pl.seed}" width="26" height="26" style="width:26px;height:26px"></canvas>
+        ${planetOrb(pl.t, pl.seed, 26)}
         <div class="pi"><div class="pn">${esc(pl.name)}</div>
         <div class="pm">${PLANETS[pl.t].n} · nüfus ${Math.floor(pl.col.pop)}</div></div></div>`;
     });
@@ -12232,7 +12350,45 @@ function setupClickHandler(e){
   else if (a === 'loadsave'){ loadGame().then(ok => { if (ok) enterGame(); else UI.alert('Kayıt bulunamadı'); }); }
 }
 document.addEventListener('click', setupClickHandler);
-document.addEventListener('pointerdown', setupClickHandler);
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 59 — KAYDIRMA/TIKLAMA AYRIMI
+   SORUN: setupClickHandler doğrudan 'pointerdown'a bağlıydı, yani
+   parmak DEĞER DEĞMEZ seçim yapıyordu. Civic listesi gibi uzun
+   sekmelerde oyuncu aşağı kaydırmak için dokununca istemeden
+   ilkeleri aç/kapa yapıyordu — kaydırmaya hiç şans yoktu.
+
+   ÇÖZÜM: pointerdown yalnız başlangıç noktasını KAYDEDER. Karar
+   pointerup'ta verilir: parmak SCROLL_TOLERANS pikselden fazla
+   kaydıysa bu bir kaydırmadır, tıklama iptal edilir.
+   Süre de bakılır — uzun basış (>700 ms) da tıklama sayılmaz.
+   ═══════════════════════════════════════════════════════════════════ */
+const SCROLL_TOLERANS = 12;      // px — bu kadarı titreme sayılır
+const TAP_MAX_MS      = 700;     // ms — daha uzunu basılı tutmadır
+
+let _tapBas = null;
+
+document.addEventListener('pointerdown', ev => {
+  const el = ev.target.closest && ev.target.closest('[data-a]');
+  if (!el) { _tapBas = null; return; }
+  const menu = $('menu');
+  if (!menu || menu.classList.contains('hidden')) { _tapBas = null; return; }
+  _tapBas = {x: ev.clientX, y: ev.clientY, t: Date.now(), el};
+}, {passive: true});
+
+document.addEventListener('pointercancel', () => { _tapBas = null; }, {passive: true});
+
+document.addEventListener('pointerup', ev => {
+  const bas = _tapBas;
+  _tapBas = null;
+  if (!bas) return;
+  const el = ev.target.closest && ev.target.closest('[data-a]');
+  if (!el || el !== bas.el) return;        // parmak başka öğeye kaydı
+  const dx = Math.abs(ev.clientX - bas.x);
+  const dy = Math.abs(ev.clientY - bas.y);
+  if (dx > SCROLL_TOLERANS || dy > SCROLL_TOLERANS) return;   // KAYDIRMA
+  if (Date.now() - bas.t > TAP_MAX_MS) return;                // uzun basış
+  setupClickHandler(ev);
+}, {passive: true});
 
 /* ═══════════════════════════════════════════════════════════════════
    FAZ 53 — TAM EKRAN BUTONU MOBİL ONARIMI

@@ -3268,6 +3268,7 @@ function diploTick(){
   if (typeof aiPatronageTick === 'function') aiPatronageTick();   // FAZ 45: AI himayesi
   if (typeof aiStatusQuoTick === 'function') aiStatusQuoTick();   // FAZ 49: statüko refleksi
   if (typeof fedFundTick === 'function') fedFundTick();           // FAZ 49: federal fon
+  if (typeof sabotageTick === 'function') sabotageTick();          // FAZ 59
   if (typeof warSubsidyTick === 'function') warSubsidyTick();     // FAZ 45: savaş yardımı
   if (typeof visionTick === 'function') visionTick();             // FAZ 48: paylaşılan görüş
   if (typeof colossusGuardLock === 'function') colossusGuardLock(); // FAZ 31: koruma kilidi
@@ -6664,4 +6665,149 @@ function claimPermanent(e){
   if (e.id === 0)
     say('Daimi hükümdarlık tasarın REDDEDİLDİ — galaksi seni diktatör adayı olarak gördü', 'war');
   return {ok:true, gecti:false, evet, hayir};
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 59 — AGRESİF SABOTAJLAR
+   İki yeni operasyon. İkisi de 2. seviye ağ ister ve hedef SİSTEM
+   seçimi gerektirir — imparatorluk geneline değil, tek bir noktaya
+   vururlar. Bu yüzden cerrahi: savaş açmadan cepheyi zayıflatırsın.
+   ═══════════════════════════════════════════════════════════════════ */
+const SABO_YARD_COST  = 110;   // tersane sabotajı
+const SABO_SUPPLY_COST = 130;  // lojistik hack (daha pahalı: daha yıkıcı)
+const SABO_YARD_MONTHS = 12;
+const SABO_SUPPLY_MONTHS = 6;
+
+/* Hedef devletin sabote edilebilecek sistemleri */
+function sabotageTargets(e, o, tur){
+  if (!e || !o || o.dead) return [];
+  const liste = [];
+  for (const sy of G.sys){
+    if (sy.owner !== o.id) continue;
+    if (sy.seen.indexOf(e.id) < 0) continue;        // görmediğin yeri vuramazsın
+    if (tur === 'yard'){
+      const n = (typeof yardCount === 'function') ? yardCount(sy) : 0;
+      if (!n) continue;
+      if (sy.yardLock && sy.yardLock > (G.memAge || 0)) continue;
+      liste.push({sy, bilgi: n + ' tersane'});
+    } else {
+      if (sy.supplyHack && sy.supplyHack > (G.memAge || 0)) continue;
+      /* Filo varsa cazip */
+      let filo = 0;
+      for (const f of G.fleets)
+        if (f.e === o.id && f.sys === sy.id && f.ships) filo += f.ships.length;
+      liste.push({sy, bilgi: filo ? filo + ' gemi konuşlu' : 'boş sistem'});
+    }
+  }
+  return liste;
+}
+
+function canSabotage(e, o, tur){
+  if (!e || !o || o.dead) return {ok:false, why:'Hedef yok'};
+  if (o.id === e.id) return {ok:false, why:'Kendini sabote edemezsin'};
+  if (o.wild || o.crisisSide) return {ok:false, why:'Bu tarafın altyapısı yok'};
+  const lvl = (typeof intelOf === 'function') ? intelOf(e, o.id) : 0;
+  if (lvl < 2) return {ok:false, why:'En az 2. seviye istihbarat gerekir'};
+  const bedel = tur === 'yard' ? SABO_YARD_COST : SABO_SUPPLY_COST;
+  if ((e.res.etk || 0) < bedel) return {ok:false, why:bedel + ' etki gerekir'};
+  const hedefler = sabotageTargets(e, o, tur);
+  if (!hedefler.length)
+    return {ok:false, why: tur === 'yard'
+      ? 'Görebildiğin, sabote edilmemiş tersanesi yok'
+      : 'Görebildiğin, hacklenmemiş sistemi yok'};
+  return {ok:true, hedefler};
+}
+
+function doSabotage(e, o, tur, sysId){
+  const chk = canSabotage(e, o, tur);
+  if (!chk.ok) return chk;
+  const sy = G.sys[sysId];
+  if (!sy || sy.owner !== o.id) return {ok:false, why:'Sistem geçersiz'};
+
+  const bedel = tur === 'yard' ? SABO_YARD_COST : SABO_SUPPLY_COST;
+  e.res.etk -= bedel;
+
+  const ch = (typeof sabotageChance === 'function')
+    ? sabotageChance(e, o) : {basari:.4, ifsa:.3};
+  /* Altyapı sabotajı casus sokmaktan zor: fiziksel erişim gerekir */
+  const basari = clamp(ch.basari * (tur === 'yard' ? .90 : .80), .05, .78);
+  const ifsa   = clamp(ch.ifsa   * (tur === 'yard' ? 1.10 : 1.25), .06, .70);
+
+  if (rnd() < basari){
+    if (tur === 'yard'){
+      sy.yardLock = (G.memAge || 0) + SABO_YARD_MONTHS;
+      /* Sıradaki üretim de iptal — tezgâh kapandı */
+      if (sy.queue) sy.queue.length = 0;
+      if (typeof recordSabotage === 'function') recordSabotage('yardSabo');
+      if (e.id === 0 && typeof UI !== 'undefined')
+        UI.eventArt('veri', 'TERSANE SABOTE EDİLDİ',
+          sy.name + ' tersanesinde kontrol sistemleri çöktü. ' +
+          SABO_YARD_MONTHS + ' ay boyunca tek bir gemi bile inşa edilemeyecek. ' +
+          'Tezgâhtaki siparişler de iptal oldu.');
+      else if (o.id === 0 && typeof UI !== 'undefined')
+        UI.eventArt('infaz', 'TERSANEMİZ SABOTE EDİLDİ',
+          sy.name + ' tersanesi ' + SABO_YARD_MONTHS +
+          ' ay devre dışı. Failin kim olduğunu bilmiyoruz.');
+    } else {
+      sy.supplyHack = (G.memAge || 0) + SABO_SUPPLY_MONTHS;
+      sy.supplyHackBy = e.id;
+      if (typeof recordSabotage === 'function') recordSabotage('supplyHack');
+      if (e.id === 0 && typeof UI !== 'undefined')
+        UI.eventArt('veri', 'LOJİSTİK AĞI ÇÖKERTİLDİ',
+          sy.name + ' sisteminin ikmal ağı ' + SABO_SUPPLY_MONTHS +
+          ' ay boyunca karanlıkta. Oradaki filolar tedariksiz kalacak ' +
+          've ciddi güç kaybı yaşayacak.');
+      else if (o.id === 0 && typeof UI !== 'undefined')
+        UI.eventArt('infaz', 'LOJİSTİK AĞIMIZ ÇÖKTÜ',
+          sy.name + ' sisteminde ikmal hatları kesildi. Filolarımız ' +
+          SABO_SUPPLY_MONTHS + ' ay boyunca tedariksiz savaşacak.');
+    }
+    /* Hedef bir şeyler döndüğünü sezer, faili bilmez */
+    o.hitLog = o.hitLog || [];
+    o.hitLog.push({t: G.memAge || 0, k: tur === 'yard' ? 'yardSabo' : 'supplyHack',
+                   by: e.id, caught: false, known: false, sys: sy.id});
+    return {ok:true, caught:false, sys:sy.name,
+      msg: sy.name + ' vuruldu — ' + (tur === 'yard'
+        ? 'tersane ' + SABO_YARD_MONTHS + ' ay kapalı'
+        : 'lojistik ' + SABO_SUPPLY_MONTHS + ' ay çökük')};
+  }
+
+  if (rnd() < ifsa){
+    if (typeof remember === 'function') remember(o, e.id, 'sabotaj');
+    o.rel[e.id] = clamp((o.rel[e.id] || 0) - 45, -100, 100);
+    o._lastCB = {n:'Altyapı Sabotajı', w:1.25};
+    e.threat = (e.threat || 0) + 18;
+    for (const x of G.emps){
+      if (x.dead || x.wild || x.crisisSide || x.id === e.id || x.id === o.id) continue;
+      x.rel[e.id] = clamp((x.rel[e.id] || 0) - 10, -100, 100);
+    }
+    if (typeof recordSabotage === 'function') recordSabotage('ifsa');
+    if (e.id === 0 && typeof UI !== 'undefined')
+      UI.eventArt('infaz', 'SABOTAJ EKİBİ YAKALANDI',
+        o.name + ' ekibimizi ' + sy.name + ' yörüngesinde yakaladı. ' +
+        'Kanıtlar galaksiye yayıldı; ellerinde meşru bir savaş nedeni var.');
+    return {ok:true, caught:true,
+      msg: 'Ekibimiz yakalandı — ' + o.name + ' savaş nedeni kazandı'};
+  }
+
+  if (typeof recordSabotage === 'function') recordSabotage('sessiz');
+  return {ok:true, caught:false, msg:'Ekip hedefe sızamadı, sessizce çekildi'};
+}
+
+/* Aylık temizlik: süresi dolan kilitler kalkar */
+function sabotageTick(){
+  const simdi = G.memAge || 0;
+  for (const sy of G.sys){
+    if (sy.yardLock && sy.yardLock <= simdi){
+      delete sy.yardLock;
+      if (sy.owner === 0)
+        say('⚓ ' + sy.name + ' tersanesi yeniden faal', 'win');
+    }
+    if (sy.supplyHack && sy.supplyHack <= simdi){
+      delete sy.supplyHack; delete sy.supplyHackBy;
+      if (sy.owner === 0)
+        say('📦 ' + sy.name + ' lojistik ağı onarıldı', 'win');
+    }
+  }
 }

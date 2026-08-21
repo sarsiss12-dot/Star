@@ -213,11 +213,42 @@ html.pwa body{
 html.pwa #tools{top:calc(var(--top) + 6px + env(safe-area-inset-top))}
 
 /* FAZ 54: .faux-fullscreen — doğrudan oyun konteynerini hedefler */
+/* ═══ FAZ 59: CSS GEZEGEN KÜRESİ ═══ */
+.pOrb{display:inline-block;flex:0 0 auto;border-radius:50%;
+  position:relative;vertical-align:middle}
+.pOrb::after{content:'';position:absolute;inset:0;border-radius:50%;
+  background:radial-gradient(circle at 30% 26%,
+    rgba(255,255,255,.30) 0%, rgba(255,255,255,.06) 22%, transparent 46%);
+  pointer-events:none}
+
+/* ═══ FAZ 59: Z-INDEX ONARIMI ═══
+   SORUN: .faux-fullscreen z-index 999999 ile KÖK öğeye
+   uygulanıyordu; içindeki sol menü (#tools, z-index 20) ve
+   paneller yeni yığma bağlamının altında kalıp görünmez oluyordu.
+
+   ÇÖZÜM: tam ekran katmanı yalnız KAPSAYICIYI konumlandırır,
+   kendi z-index'ini KULLANMAZ (auto). Böylece içerideki katman
+   sırası (tuval → menü → paneller → modal) bozulmadan korunur.
+   Kök öğede yığma bağlamı yaratmamak için isolation:auto. */
 html.fauxFull, body.fauxFull, .faux-fullscreen{
   position:fixed !important;inset:0 !important;
   width:100vw !important;height:100dvh !important;
   margin:0 !important;padding:0 !important;
-  overflow:hidden !important;z-index:999999 !important}
+  overflow:hidden !important;
+  z-index:auto !important;isolation:auto !important}
+
+/* Tam ekranda iç katmanlar açıkça yeniden sıralanır —
+   sol menü ve paneller her zaman tuvalin üstünde kalır. */
+body.fauxFull canvas#map{z-index:1 !important}
+body.fauxFull #tools{z-index:1200 !important}
+body.fauxFull #timepod,
+body.fauxFull #topbar{z-index:1200 !important}
+body.fauxFull #side,
+body.fauxFull #panel{z-index:1300 !important}
+body.fauxFull #diploPane{z-index:1400 !important}
+body.fauxFull #modal{z-index:1500 !important}
+body.fauxFull .scan{z-index:1100 !important}
+body.fauxFull .vig{z-index:1099 !important}
 body.fauxFull #game{width:100vw !important;height:100dvh !important;
   position:fixed;inset:0;margin:0}
 body.fauxFull canvas#map{width:100vw !important;height:100dvh !important}
