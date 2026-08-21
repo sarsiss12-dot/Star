@@ -3698,9 +3698,27 @@ function stepFleets(dt){
             ana.ships.push(...f.ships);
             f.ships.length = 0;
             if (empOf(f) && !empOf(f).ai)
-              say('İkmal ' + (ana.name || 'filoya') + ' katıldı');
+              say('⚓ İkmal ' + (ana.name || 'filoya') + ' katıldı');
+            delete f.joinFleet; delete f.rallyTo;
+          } else {
+            /* ═══ FAZ 60: HAREKETLİ FİLOYU TAKİP ═══
+               Hedef filo biz yoldayken başka sisteme gitmişse
+               ikmal orada kalıp öksüz kalıyordu. Artık peşinden
+               gidiyor: hedef nerede duruyorsa oraya yeni rota. */
+            const izle = G.fleets.find(x => x.id === f.joinFleet && x.ships.length);
+            if (izle && izle !== f){
+              const varis = izle.sys >= 0 ? izle.sys : (izle.mv ? izle.mv.to : -1);
+              if (varis >= 0 && varis !== f.sys && typeof orderMove === 'function'){
+                orderMove(f, varis);
+                f.rallyTo = varis;
+                /* joinFleet korunur — varınca yine birleşmeyi dener */
+              } else {
+                delete f.joinFleet; delete f.rallyTo;
+              }
+            } else {
+              delete f.joinFleet; delete f.rallyTo;   // hedef yok olmuş
+            }
           }
-          delete f.joinFleet; delete f.rallyTo;
         } f.mv = null; f.path.shift();
         arrive(f, G.sys[f.sys]);
       } else {
@@ -5957,18 +5975,12 @@ const View = {
         let yard = 0;
         for (const pl2 of s.planets)
           if (pl2.col && pl2.col.b && pl2.col.b.tersane) yard += pl2.col.b.tersane;
-        if (yard > 0){
-          const bizim = s.owner === 0;
-          const lvl2 = bizim ? 3
-            : (typeof intelOf === 'function' && s.owner >= 0 ? intelOf(G.p, s.owner) : 0);
-          if (bizim || lvl2 >= 2){
-            g.font = '10px ui-monospace,monospace';
-            g.textAlign = 'right';
-            g.fillStyle = bizim ? 'rgba(111,242,200,.85)' : 'rgba(255,155,61,.85)';
-            g.fillText('⚓×' + yard, p.x - sr - 5, p.y - 3);
-            g.textAlign = 'center';
-          }
-        }
+        /* ═══ FAZ 60: ÇİFT İKON HATASI ═══
+           Aynı ⚓×N göstergesi burada (solda, arka plansız) ve
+           Faz 47'nin bloğunda (sağ üstte, arka planlı) OLMAK ÜZERE
+           İKİ KEZ çiziliyordu. Üst üste binip okunmaz hale
+           geliyordu. Bu eski kopya kaldırıldı; tek kaynak Faz 47
+           bloğu (yardCount + yardVisible). */
       }
 
       // uzay yapıları rozeti
@@ -6199,6 +6211,41 @@ const View = {
       /* Tek bir filonun hatası haritayı karartmasın */
       try { this.drawFleet(g, f, p, t); }
       catch(err){ if (!this._fxWarn){ this._fxWarn = 1; console.warn('drawFleet:', err); } }
+    }
+
+    /* ═══ FAZ 60: RALLY LOJİSTİK HATTI ═══
+       Seçili tersane ile toplanma noktası arasında ince, akan
+       kesik çizgi. Yalnız seçili sistemde çizilir — harita
+       kalabalıklaşmaz. */
+    if (this.selSys && this.selSys.rally && this.selSys.rally[0]){
+      const ral = this.selSys.rally[0];
+      const hedefF = ral.fleet !== undefined
+        ? G.fleets.find(f2 => f2.id === ral.fleet && f2.ships.length) : null;
+      let hx, hy;
+      if (hedefF){ hx = hedefF.x; hy = hedefF.y; }
+      else if (ral.sys !== undefined && G.sys[ral.sys]){
+        hx = G.sys[ral.sys].x; hy = G.sys[ral.sys].y;
+      }
+      if (hx !== undefined){
+        const a = this.w2s(this.selSys.x, this.selSys.y);
+        const b = this.w2s(hx, hy);
+        g.save();
+        g.strokeStyle = 'rgba(111,242,200,.60)';
+        g.lineWidth = 1.2;
+        g.setLineDash([5, 5]);
+        g.lineDashOffset = -(t / 42) % 10;      // akan çizgi
+        g.beginPath(); g.moveTo(a.x, a.y); g.lineTo(b.x, b.y); g.stroke();
+        g.setLineDash([]);
+        /* Hedef ucunda küçük halka */
+        g.strokeStyle = 'rgba(111,242,200,.85)';
+        g.beginPath(); g.arc(b.x, b.y, 6, 0, Math.PI*2); g.stroke();
+        g.fillStyle = 'rgba(111,242,200,.85)';
+        g.font = '9px ui-monospace,monospace';
+        g.textAlign = 'center';
+        g.fillText('📍', b.x, b.y - 9);
+        g.restore();
+        g.textAlign = 'center';
+      }
     }
 
     this.drawPings(g, t);               // FAZ 47: bildirim ping halkası
@@ -6635,6 +6682,59 @@ const UI = {
         if (!r.ok) say(r.why, 'war');
         else if (r.kabul) say('🤝 ' + r.msg, 'win');
         else say(r.msg, 'war');
+        this.keepScroll = true; this.refresh();
+        break;
+      }
+      case 'dirTog': {
+        const [sid, pi] = x.split(':').map(Number);
+        const sy = G.sys[sid], pl2 = sy && sy.planets[pi];
+        if (pl2 && pl2.col){
+          pl2.col.auto = !pl2.col.auto;
+          delete pl2.col._dirWarn;
+          say(pl2.col.auto
+            ? '🏗 ' + (pl2.col.name || pl2.name) + ' otomatik inşa açıldı'
+            : '⏹ ' + (pl2.col.name || pl2.name) + ' otomasyonu kapatıldı',
+            pl2.col.auto ? 'win' : '');
+        }
+        this.keepScroll = true; this.refresh();
+        break;
+      }
+      case 'tplSave': {
+        saveTemplate().then(ad => {
+          say('💾 "' + ad + '" şablonu kaydedildi');
+          safeRenderSetup();
+        });
+        break;
+      }
+      case 'tplLoad': {
+        const t = TEMPLATES.find(q => q && q._ad === x);
+        if (t && applyTemplate(t)) say('📂 "' + x + '" şablonu yüklendi');
+        else say('Şablon bulunamadı', 'war');
+        safeRenderSetup();
+        break;
+      }
+      case 'tplDel': {
+        deleteTemplate(x).then(() => {
+          say('Şablon silindi: ' + x);
+          safeRenderSetup();
+        });
+        break;
+      }
+      case 'loopSet': {
+        const [sid, cls] = x.split(':');
+        const sy = G.sys[+sid];
+        if (sy){
+          sy.loopBuild = cls;
+          delete sy._loopWarn;
+          say('🔁 ' + sy.name + ' sürekli ' + SHIPS[cls].n + ' üretecek', 'win');
+        }
+        this.keepScroll = true; this.refresh();
+        break;
+      }
+      case 'loopOff': {
+        const sy = G.sys[+x];
+        if (sy){ delete sy.loopBuild; delete sy._loopWarn;
+          say('⏹ ' + sy.name + ' üretim döngüsü durduruldu'); }
         this.keepScroll = true; this.refresh();
         break;
       }
@@ -7599,6 +7699,30 @@ const UI = {
             </div>`;
           }
 
+          /* ═══ FAZ 61: YÖNELİM OTOMASYONU ═══ */
+          if (typeof directiveStatus === 'function' && pl.owner === 0 && pl.col.f){
+            const st = pl.col.auto ? directiveStatus(e, pl.col) : null;
+            const renk = !pl.col.auto ? '#7d90ad'
+                       : (st && st.dur) ? '#ff9b3d' : '#65e08a';
+            h += `<div class="row"><span>🏗 Otomatik inşa</span>
+              <b style="color:${renk}">${pl.col.auto
+                ? (st && st.dur ? 'BEKLİYOR' : 'AKTİF') : 'kapalı'}</b></div>`;
+            if (pl.col.auto && st && st.dur)
+              h += `<div class="mini" style="color:#ff9b3d">${esc(st.why)}</div>`;
+            else if (pl.col.auto && st && st.bina)
+              h += `<div class="mini">Sırada: <b>${esc(BUILDINGS[st.bina].n)}</b>
+                — boş alan açıldıkça ${esc(FOCUS[pl.col.f] ? FOCUS[pl.col.f].n : '')}
+                planı uygulanır.</div>`;
+            else if (!pl.col.auto)
+              h += `<div class="mini">Açarsan boş yapı alanları
+                <b>${esc(FOCUS[pl.col.f] ? FOCUS[pl.col.f].n : 'odak')}</b> planına
+                göre kendiliğinden dolar. Kaynak azalırsa duraklar.</div>`;
+            h += `<div class="act2"><button class="abtn ${pl.col.auto?'':'pri'}"
+              data-a="dirTog" data-x="${s.id}:${pl.i}">${
+                pl.col.auto ? '⏹ OTOMASYONU KAPAT' : '🏗 OTOMATİK İNŞAYI AÇ'}
+              </button></div>`;
+          }
+
           /* ═══ FAZ 42: AYRILIKÇI HAREKET GÖSTERGESİ ═══
              Sayaç işlemeye başlayınca beliriyor, istikrar düzelip
              sayaç sıfırlanınca kendiliğinden kayboluyor. */
@@ -7756,6 +7880,40 @@ const UI = {
     if (s.owner === 0 && hasYard(s)){
       h += `<div class="ph">TERSANE</div>`;
       if (s.queue.length){
+        /* ═══ FAZ 60: SÜREKLİ ÜRETİM DÖNGÜSÜ ═══ */
+        if (typeof loopBuildStatus === 'function' && s.owner === 0){
+          const lb = s.loopBuild;
+          const st = lb ? loopBuildStatus(e, s) : null;
+          h += `<div class="ph">🔁 SÜREKLİ ÜRETİM</div>`;
+          if (!lb){
+            h += `<div class="mini">Bir gemi tipi seç — tersane kaynak
+              yettiği sürece durmadan üretsin. Kasa
+              ${typeof LOOP_ALA_FLOOR !== 'undefined' ? LOOP_ALA_FLOOR : 400}
+              alaşımın altına inerse otomatik duraklar.</div>`;
+            const uygun = Object.keys(SHIPS).filter(k =>
+              !SHIPS[k].crisisOnly && (typeof shipUnlocked !== 'function' ||
+              shipUnlocked(e, k)));
+            h += `<div class="act2">`;
+            uygun.slice(0, 6).forEach(k => {
+              h += `<button class="abtn" data-a="loopSet" data-x="${s.id}:${k}">
+                🔁 ${esc(SHIPS[k].n)}</button>`;
+            });
+            h += `</div>`;
+          } else {
+            const renk = st && st.dur ? '#ff9b3d' : '#65e08a';
+            h += `<div class="box" style="border-color:${renk}">
+              <div class="bt"><span>🔁 ${esc(SHIPS[lb] ? SHIPS[lb].n : lb)}</span>
+                <span class="tag ${st && st.dur ? 'e' : 'p'}">${
+                  st && st.dur ? 'DURAKLADI' : 'ÜRETİYOR'}</span></div>
+              <div class="bd">${st && st.dur
+                ? '<b style="color:#ff9b3d">' + esc(st.why) +
+                  '</b> — kaynak toparlayınca kendiliğinden devam eder.'
+                : 'Kuyruk boşaldıkça otomatik yenileniyor.'}</div>
+              <div class="act2"><button class="abtn" data-a="loopOff"
+                data-x="${s.id}">✕ DÖNGÜYÜ DURDUR</button></div></div>`;
+          }
+        }
+
         const slots = yardCount(s);
         const totDays = Math.ceil(s.queue.reduce((a,q)=>a+q.left,0));
         h += `<div class="row"><span>Tersane yuvası</span><b style="color:#6ff2c8">${slots} paralel</b></div>`;
@@ -11706,6 +11864,80 @@ function safeRenderSetup(){
   }
 }
 
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 61 — KURULUM ŞABLONLARI
+   Oyuncunun tasarladığı imparatorluk (tür, fizyoloji, etik, civic,
+   köken, görünüş) tek tuşla kaydedilir ve yeni oyunda geri yüklenir.
+   Galaksi ayarları ve tohum KASTEN dışarıda: şablon "kim olduğun"u
+   saklar, "nerede oynadığın"ı değil.
+   ═══════════════════════════════════════════════════════════════════ */
+const TPL_KEY = 'yh_templates';
+const TPL_MAX = 6;
+let TEMPLATES = [];
+
+/* Şablona giren alanlar — galaksi/tohum/zorluk hariç */
+const TPL_FIELDS = ['name','race','traits','ethics','civics','origin',
+                    'physio','look','sigil','monoRes','mizac','color'];
+
+function snapshotCFG(){
+  const t = {};
+  for (const k of TPL_FIELDS){
+    const v = CFG[k];
+    t[k] = (v && typeof v === 'object') ? JSON.parse(JSON.stringify(v)) : v;
+  }
+  return t;
+}
+
+function applyTemplate(t){
+  if (!t) return false;
+  for (const k of TPL_FIELDS){
+    if (t[k] === undefined) continue;
+    CFG[k] = (t[k] && typeof t[k] === 'object')
+      ? JSON.parse(JSON.stringify(t[k])) : t[k];
+  }
+  /* Bütçe aşımına karşı güvenlik: bozuk şablon oyunu kilitlemesin */
+  if (typeof ethicSpent === 'function' && ethicSpent() > ETHIC_BUDGET)
+    CFG.ethics = blankEthics();
+  if (!Array.isArray(CFG.traits)) CFG.traits = [];
+  if (!Array.isArray(CFG.civics)) CFG.civics = [];
+  /* FAZ 61: eski sürümden kalan geçersiz anahtarları at */
+  CFG.traits = CFG.traits.filter(k => TRAITS[k]);
+  CFG.civics = CFG.civics.filter(k => CIVICS[k]);
+  if (!RACES[CFG.race])     CFG.race = 'insan';
+  if (!LOOKS[CFG.look])     CFG.look = 'humanoid';
+  if (!ORIGINS[CFG.origin]) CFG.origin = 'standart';
+  if (!PHYSIO[CFG.physio])  CFG.physio = 'humanoid';
+  return true;
+}
+
+async function loadTemplates(){
+  try {
+    const raw = await storeGet(TPL_KEY);
+    TEMPLATES = raw ? JSON.parse(raw) : [];
+    if (!Array.isArray(TEMPLATES)) TEMPLATES = [];
+  } catch(e){ TEMPLATES = []; }
+}
+
+async function saveTemplate(){
+  const t = snapshotCFG();
+  t._ad = (CFG.name || 'Hanedan').slice(0, 24);
+  t._t = Date.now();
+  /* Aynı adlı varsa üzerine yaz */
+  const ix = TEMPLATES.findIndex(x => x && x._ad === t._ad);
+  if (ix >= 0) TEMPLATES[ix] = t;
+  else {
+    TEMPLATES.unshift(t);
+    if (TEMPLATES.length > TPL_MAX) TEMPLATES.length = TPL_MAX;
+  }
+  try { await storeSet(TPL_KEY, JSON.stringify(TEMPLATES)); } catch(e){}
+  return t._ad;
+}
+
+async function deleteTemplate(ad){
+  TEMPLATES = TEMPLATES.filter(x => x && x._ad !== ad);
+  try { await storeSet(TPL_KEY, JSON.stringify(TEMPLATES)); } catch(e){}
+}
+
 function renderSetup(){
   /* ═══ ZIRH 1: GÜVENLİ BAŞLANGIÇ STATE ═══
      ETHICS'teki her eksen CFG.ethics'te sayısal olarak var olmalı.
@@ -11728,6 +11960,24 @@ function renderSetup(){
   h += `</div>`;
 
   /* ================= 1. MİZAÇ ================= */
+  /* ═══ FAZ 61: ŞABLON ŞERİDİ (her sekmede üstte) ═══ */
+  {
+    h += `<div class="tplBar">
+      <button class="tplBtn" data-a="tplSave">💾 ŞABLONU KAYDET</button>`;
+    if (TEMPLATES && TEMPLATES.length){
+      TEMPLATES.forEach(t => {
+        if (!t || !t._ad) return;
+        h += `<button class="tplBtn load" data-a="tplLoad" data-x="${esc(t._ad)}"
+          title="${esc(t._ad)} şablonunu yükle">📂 ${esc(t._ad.slice(0,14))}
+          <i data-a="tplDel" data-x="${esc(t._ad)}">✕</i></button>`;
+      });
+    } else {
+      h += `<span class="mini" style="align-self:center;color:#7d90ad">
+        Kayıtlı şablon yok</span>`;
+    }
+    h += `</div>`;
+  }
+
   if (SETUP_STEP === 'mizac'){
     h += `<div class="sect"><h2>HALKININ MİZACI</h2>
       <div class="mini" style="margin-bottom:8px">Mizaç, halkının dünyaya bakışıdır.
@@ -12055,10 +12305,17 @@ function renderSetup(){
   }
   h += `<div class="sumRow"><span>Tür</span><b style="color:${c.color||RACES[c.race].col}">${RACES[c.race].kisa}</b></div>`;
   h += `<div class="sumRow"><span>İdeoloji</span><b>${eth.length?eth.join(' · '):'Tarafsız'}</b></div>`;
-  h += `<div class="sumRow"><span>Civic</span><b>${c.civics.length?c.civics.map(k=>CIVICS[k].n).join(' · '):'—'}</b></div>`;
-  h += `<div class="sumRow"><span>Görünüş</span><b>${LOOKS[c.look].n}</b></div>`;
-  h += `<div class="sumRow"><span>Köken</span><b>${ORIGINS[c.origin].n}</b></div>`;
-  h += `<div class="sumRow"><span>Galaksi</span><b>${SIZES[c.size].n} · ${SHAPES[c.shape].n} · ${DIFFS[c.diff].n}</b></div>`;
+  /* ═══ FAZ 61: ÖZET SATIRI SAĞLAMLAŞTIRMA ═══
+     Şablondan gelen ya da elle bozulmuş bir anahtar (örn. eski
+     sürümden kalma look/origin adı) burada tanımsız dönüp tüm
+     kurulum ekranını çökertiyordu. Artık her arama korumalı. */
+  const gv = (tbl, key, yedek) => (tbl && tbl[key] && tbl[key].n) || yedek || '—';
+  h += `<div class="sumRow"><span>Civic</span><b>${c.civics.length
+    ? c.civics.map(k => gv(CIVICS, k, k)).join(' · ') : '—'}</b></div>`;
+  h += `<div class="sumRow"><span>Görünüş</span><b>${gv(LOOKS, c.look, 'Bilinmiyor')}</b></div>`;
+  h += `<div class="sumRow"><span>Köken</span><b>${gv(ORIGINS, c.origin, 'Bilinmiyor')}</b></div>`;
+  h += `<div class="sumRow"><span>Galaksi</span><b>${gv(SIZES, c.size)} · ${
+    gv(SHAPES, c.shape)} · ${gv(DIFFS, c.diff)}</b></div>`;
   h += `<div class="sumRow"><span>Kriz · Kalıntı</span><b>${CRISIS_TIMING[c.crisis].n} · ${RUIN_LEVELS[c.ruins].n}</b></div>`;
   h += `<div class="sumRow"><span>Konsey</span><b>${COUNCIL_PACE[c.council]?COUNCIL_PACE[c.council].n:'NORMAL'}</b></div>`;
   h += `</div>`;
@@ -12871,9 +13128,55 @@ const LOOP = {on:false, last:0, acc:0, uiAcc:0, panAcc:0, touch:0, aiIdx:0};
 
 /* Sekme arkaplandayken sesi askıya al — pil ve CPU tasarrufu */
 document.addEventListener('visibilitychange', ()=>{
-  if (typeof AUDIO === 'undefined') return;
-  try { document.hidden ? AUDIO.suspend() : AUDIO.resume(); } catch(e){}
+  if (typeof AUDIO !== 'undefined'){
+    try { document.hidden ? AUDIO.suspend() : AUDIO.resume(); } catch(e){}
+  }
+  /* ═══════════════════════════════════════════════════════════════
+     FAZ 60 — CONTEXT LOSS ONARIMI
+     Mobil tarayıcılar arka plandaki sekmenin WebGL/2D bağlamını
+     bellek için serbest bırakabiliyor. Oyuncu geri döndüğünde
+     tuval boş kalıyordu, çünkü çizim döngüsü yalnız DEĞİŞİKLİK
+     olduğunda kare basıyor — dönüşte çizilecek bir şey yoktu.
+     Dönüşte tuval ölçüleri yeniden kurulup bir kare ZORLANIYOR.
+     İki aşamalı: hemen bir kare, sonra yerleşim oturunca bir tane
+     daha (bazı cihazlarda ilk karede boyut henüz 0 geliyor). */
+  if (!document.hidden) forceRedraw();
 });
+
+function forceRedraw(){
+  const ciz = () => {
+    try {
+      if (typeof View === 'undefined' || !View.g) return;
+      View.resize();                       // tuval ölçüsünü yeniden kur
+      View._bolgeAt = -1;                  // bölge adı önbelleğini tazele
+      if (G && G.sys && G.sys.length) View.draw(performance.now());
+      if (typeof UI !== 'undefined' && UI.refresh) UI.refresh();
+    } catch(e){ console.warn('forceRedraw:', e); }
+  };
+  ciz();
+  setTimeout(ciz, 120);                    // yerleşim oturduktan sonra
+  if (typeof requestAnimationFrame === 'function') requestAnimationFrame(ciz);
+}
+
+/* Bazı cihazlar sekme dönüşünde visibilitychange yerine
+   pageshow/focus üretiyor — üçünü de dinliyoruz. */
+window.addEventListener('pageshow', ()=>{ forceRedraw(); });
+window.addEventListener('focus', ()=>{ if (!document.hidden) forceRedraw(); });
+
+/* Tuval bağlamı gerçekten kaybolursa tarayıcı bunu bildirir */
+(function(){
+  const cv = document.getElementById('map');
+  if (!cv) return;
+  cv.addEventListener('contextlost', ev => {
+    ev.preventDefault();                   // geri kazanıma izin ver
+    console.warn('Tuval bağlamı kayboldu — geri kazanım bekleniyor');
+  });
+  cv.addEventListener('contextrestored', ()=>{
+    console.warn('Tuval bağlamı geri geldi');
+    try { View.init && View.init(); } catch(e){}
+    forceRedraw();
+  });
+})();
 
 document.addEventListener('pointerdown', ()=>{ LOOP.touch = performance.now(); }, true);
 
@@ -13044,6 +13347,10 @@ window.addEventListener('load', ()=>{
   loadAudioPref();
   loadBgPref();                 // FAZ 19: ses tercihini oku
   loadAutoEventPref();          // FAZ 47: otomatik olay tercihi
+  loadTemplates().then(()=>{    // FAZ 61: kurulum şablonları
+    try { if (SETUP_STEP && $('menu') && !$('menu').classList.contains('hidden'))
+      safeRenderSetup(); } catch(e){}
+  });
   /* FAZ 20: önce ANA MENÜ. Kurulum ekranı arkada hazır bekler. */
   $('menu').classList.add('hidden');
   TITLE.start();

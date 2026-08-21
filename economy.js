@@ -2234,7 +2234,12 @@ function secede(e, sys, pl){
   const yeni = makeEmpire(id, e.race, ad + ' (' + (pl.col.name || pl.name) + ')',
     true, rnd, []);
   /* Ayrılıkçılar agresif ve otoriter doğar — hayatta kalma refleksi */
-  yeni.ethics = {mil: 1, aut: 1, mat: (e.ethics && e.ethics.mat) || 0};
+  /* ═══ FAZ 61: İDEOLOJİK ZITLIK ═══
+     Ayrılıkçılar rastgele değil, ana gövdenin TAM ZIDDI olarak
+     doğar — çünkü bölünmenin sebebi zaten o ideolojidir.
+     Militarist bir devletten kopanlar pasifist, otoriter bir
+     devletten kopanlar özgürlükçü olur. */
+  yeni.ethics = schismEthics(e);
   if (typeof shiftColor === 'function') yeni.col = shiftColor(e.col);
   G.emps.push(yeni);
 
@@ -2420,6 +2425,246 @@ function panopticonTick(){
             }
           }
         }
+      }
+    }
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 60 — TERSANE ÜRETİM OTOMASYONU
+   Tersane bir gemi tipine kilitlenip sürekli üretir. Kaynak
+   kritik sınırın altına inince kuyruk KENDİLİĞİNDEN duraklar —
+   otomasyon oyuncuyu iflasa sürüklemez.
+   ═══════════════════════════════════════════════════════════════════ */
+const LOOP_ALA_FLOOR = 400;    // bu alaşımın altında otomasyon uyur
+const LOOP_ENE_FLOOR = 250;    // enerji tabanı (bakım ödenemezse anlamsız)
+const LOOP_CAP_LIMIT = .92;    // filo kapasitesi bu oranı aşarsa dur
+
+/* Otomasyon şu an üretebilir mi? Neden olmasın? */
+function loopBuildStatus(e, sys){
+  if (!sys || !sys.loopBuild) return {aktif:false};
+  const cls = sys.loopBuild;
+  if (sys.yardLock && sys.yardLock > (G.memAge || 0))
+    return {aktif:true, dur:true, why:'Tersane sabote edilmiş'};
+  if ((e.res.ala || 0) < LOOP_ALA_FLOOR)
+    return {aktif:true, dur:true, why:'Alaşım ' + LOOP_ALA_FLOOR + ' altında'};
+  if ((e.res.ene || 0) < LOOP_ENE_FLOOR)
+    return {aktif:true, dur:true, why:'Enerji ' + LOOP_ENE_FLOOR + ' altında'};
+  const kap = Math.max(1, Math.round(e.cap || 1));
+  const kul = (typeof fleetUsage === 'function') ? fleetUsage(e) : 0;
+  if (kul / kap >= LOOP_CAP_LIMIT)
+    return {aktif:true, dur:true, why:'Filo kapasitesi %' +
+      Math.round(kul / kap * 100) + ' dolu'};
+  const S = SHIPS[cls];
+  if (S && S.cost){
+    for (const r in S.cost)
+      if ((e.res[r] || 0) < S.cost[r] * 1.5)
+        return {aktif:true, dur:true, why:'Kaynak yetersiz (' + r + ')'};
+  }
+  return {aktif:true, dur:false, cls};
+}
+
+/* Aylık: boş kalan döngü tersanelerini yeniden doldur */
+function loopBuildTick(){
+  for (const sys of G.sys){
+    if (!sys.loopBuild) continue;
+    const e = G.emps[sys.owner];
+    if (!e || e.dead) { delete sys.loopBuild; continue; }
+    /* Kuyrukta iş varsa karışma */
+    if (sys.queue && sys.queue.length) continue;
+
+    const st = loopBuildStatus(e, sys);
+    if (st.dur){
+      /* Ayda bir uyar, spam yapma */
+      if (e.id === 0 && sys._loopWarn !== (G.memAge || 0)){
+        sys._loopWarn = G.memAge || 0;
+        say('⏸ ' + sys.name + ' döngüsü duraklatıldı — ' + st.why, 'war');
+      }
+      continue;
+    }
+    if (queueShip(e, sys, st.cls, true) !== false && e.id === 0)
+      sys._loopWarn = -1;
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 61 — YÖNELİM OTOMASYONU (DIRECTIVES)
+   Odak yalnız çarpan veriyordu; artık boş yapı alanı açıldığında
+   o odağa uygun binayı KENDİ diker. Mikro-yönetim biter, ama
+   bütçe kilidi oyuncuyu iflasa sürüklemez.
+   ═══════════════════════════════════════════════════════════════════ */
+const DIRECTIVE_PLAN = {
+  sanayi  : ['maden', 'dokum', 'santral', 'fabrika'],
+  arastir : ['lab', 'arsiv', 'santral', 'maden'],
+  garnizon: ['kale', 'tersane', 'santral', 'maden'],
+  tarim   : ['ciftlik', 'klinik', 'santral', 'maden'],
+  yonetim : ['liman', 'arsiv', 'santral', 'ciftlik']
+};
+const DIRECTIVE_ALA_FLOOR = 300;   // bu altında otomasyon uyur
+const DIRECTIVE_MIN_FLOOR = 400;
+
+/* Bu koloni şu an otomatik bina dikebilir mi? */
+function directiveStatus(e, col){
+  if (!col || !col.auto) return {aktif:false};
+  const plan = DIRECTIVE_PLAN[col.f];
+  if (!plan) return {aktif:true, dur:true, why:'Bu odağın planı yok'};
+  if (col.q && col.q.length) return {aktif:true, dur:true, why:'Zaten inşa sürüyor'};
+  const bos = (col.cap || 0) - colonyUsed(col);
+  if (bos < 1) return {aktif:true, dur:true, why:'Boş yapı alanı yok'};
+  if ((e.res.min || 0) < DIRECTIVE_MIN_FLOOR)
+    return {aktif:true, dur:true, why:'Mineral ' + DIRECTIVE_MIN_FLOOR + ' altında'};
+  if ((e.res.ala || 0) < DIRECTIVE_ALA_FLOOR)
+    return {aktif:true, dur:true, why:'Alaşım ' + DIRECTIVE_ALA_FLOOR + ' altında'};
+
+  /* Plandaki ilk uygun binayı seç: az olandan çoğa doğru tamamla */
+  for (const k of plan){
+    const B = BUILDINGS[k];
+    if (!B) continue;
+    const mevcut = (col.b && col.b[k]) || 0;
+    if (B.max && mevcut >= B.max) continue;
+    /* Aynı binadan 3'ten fazlasını yığma — çeşitlilik korunur */
+    if (mevcut >= 3) continue;
+    if (B.c){
+      let yeter = true;
+      for (const r in B.c)
+        if ((e.res[r] || 0) < B.c[r] * 1.6) yeter = false;
+      if (!yeter) continue;
+    }
+    return {aktif:true, dur:false, bina:k};
+  }
+  return {aktif:true, dur:true, why:'Plandaki binalar tamam'};
+}
+
+/* Aylık: yönelim verilmiş kolonilerde otomatik inşa */
+function directiveTick(){
+  for (const e of G.emps){
+    if (e.dead || e.wild || e.crisisSide) continue;
+    for (const c of (e.colonies || [])){
+      const sys = G.sys[c.s];
+      const pl = sys && sys.planets[c.p];
+      if (!pl || !pl.col || !pl.col.auto) continue;
+
+      const st = directiveStatus(e, pl.col);
+      if (st.dur){
+        /* Yalnız kaynak sıkıntısını bildir, "alan yok"u değil */
+        if (e.id === 0 && st.why && /altında/.test(st.why) &&
+            pl.col._dirWarn !== (G.memAge || 0)){
+          pl.col._dirWarn = G.memAge || 0;
+          say('⏸ ' + (pl.col.name || pl.name) + ' otomasyonu bekliyor — ' +
+              st.why, 'war');
+        }
+        continue;
+      }
+      if (typeof queueBuilding === 'function'){
+        const r = queueBuilding(e, sys, pl, st.bina);
+        if (r !== false && e.id === 0)
+          say('🏗 ' + (pl.col.name || pl.name) + ' · ' +
+              BUILDINGS[st.bina].n + ' otomatik sıraya alındı', 'sci');
+      }
+    }
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 61 — İDEOLOJİK BÖLÜNME (SCHISM)
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Ana gövdenin zıttı bir etik profili üret */
+function schismEthics(e){
+  const ana = (e && e.ethics) || {};
+  const yeni = {};
+  let guclu = null, guclV = 0;
+  for (const ax in ETHICS){
+    const v = ana[ax] || 0;
+    /* Zıt işaret, benzer şiddet — ama tavanı aşma */
+    yeni[ax] = clamp(-Math.sign(v) * Math.min(Math.abs(v) || 1, 2),
+                     -ETHIC_MAX, ETHIC_MAX);
+    if (Math.abs(v) > guclV){ guclV = Math.abs(v); guclu = ax; }
+  }
+  /* Ana gövde tamamen nötrse bölünme yine de bir kimlik seçer:
+     baskıya karşı özgürlükçü + pasifist bir damar. */
+  if (!guclu || guclV === 0){ yeni.mil = -1; yeni.aut = -2; }
+  else {
+    /* En güçlü eksende zıtlık FANATİK olur — kopuşun sebebi odur */
+    yeni[guclu] = clamp(-Math.sign(ana[guclu]) * 2, -ETHIC_MAX, ETHIC_MAX);
+  }
+  return yeni;
+}
+
+/* Bölünme eşiği: uzun süreli düşük istikrar ya da casusluk baskısı */
+const SCHISM_STAB   = 25;    // bu istikrarın altı huzursuzluk sayılır
+const SCHISM_MONTHS = 48;    // bu kadar ay sürerse bölünme
+const SCHISM_MIN_SYS = 4;    // altında bölünecek gövde yok
+
+function schismTick(){
+  for (const e of G.emps){
+    if (e.dead || e.wild || e.crisisSide) continue;
+    let sysN = 0;
+    for (const sy of G.sys) if (sy.owner === e.id) sysN++;
+    if (sysN < SCHISM_MIN_SYS){ e.schism = 0; continue; }
+
+    /* İmparatorluk genelinde ortalama istikrar */
+    let top = 0, n = 0, enKotu = null, enKotuV = 999;
+    for (const c of (e.colonies || [])){
+      const sys = G.sys[c.s];
+      const pl = sys && sys.planets[c.p];
+      if (!pl || !pl.col) continue;
+      top += pl.col.stab; n++;
+      if (pl.col.stab < enKotuV && sys.id !== e.home){
+        enKotuV = pl.col.stab; enKotu = {sys, pl};
+      }
+    }
+    if (!n){ e.schism = 0; continue; }
+    const ort = top / n;
+
+    /* Casusluk baskısı: kışkırtılmış koloni sayacı hızlandırır */
+    let kiskirtma = 0;
+    for (const c of (e.colonies || [])){
+      const sys = G.sys[c.s];
+      const pl = sys && sys.planets[c.p];
+      if (pl && pl.col && pl.col.unrest) kiskirtma++;
+    }
+
+    if (ort < SCHISM_STAB){
+      e.schism = (e.schism || 0) + 1 + Math.min(2, kiskirtma);
+      /* Oyuncuya yarı yolda uyarı */
+      if (e.id === 0 && e.schism === Math.round(SCHISM_MONTHS * .5))
+        say('⚠ İMPARATORLUK BÖLÜNMENİN EŞİĞİNDE — halkın yarısı ' +
+            'yönetimi reddediyor. İstikrarı toparlamazsan ideolojik ' +
+            'bir kopuş yaşanacak.', 'war');
+    } else {
+      e.schism = Math.max(0, (e.schism || 0) - 2);
+      continue;
+    }
+
+    if (e.schism >= SCHISM_MONTHS && enKotu){
+      e.schism = 0;
+      const yeni = secede(e, enKotu.sys, enKotu.pl);
+      if (yeni){
+        /* ═══ YÜKSEK HUSUMET ═══ İdeolojik kopuş affedilmez */
+        yeni.rel[e.id] = -100;
+        e.rel[yeni.id] = -100;
+        yeni.schismOf = e.id;
+        if (typeof remember === 'function'){
+          remember(yeni, e.id, 'ihanet');
+          remember(e, yeni.id, 'ihanet');
+        }
+        if (typeof recalcMods === 'function'){ recalcMods(yeni); recalcMods(e); }
+        const et = yeni.ethics || {};
+        const tarif = [];
+        if (et.mil > 0) tarif.push('militarist'); else if (et.mil < 0) tarif.push('pasifist');
+        if (et.aut > 0) tarif.push('otoriter');   else if (et.aut < 0) tarif.push('özgürlükçü');
+        if (e.id === 0 && typeof UI !== 'undefined')
+          UI.eventArt('veri', 'İDEOLOJİK BÖLÜNME',
+            yeni.name + ' bağımsızlığını ilan etti. Kopanlar senin ' +
+            'yönetim anlayışını reddediyor ve tam zıttı bir düzen ' +
+            'kuruyorlar' + (tarif.length ? ' (' + tarif.join(', ') + ')' : '') +
+            '. Aranızda uzlaşma yok — bu bir husumet, bir anlaşmazlık değil.');
+        else if (typeof say === 'function')
+          say('⚡ ' + e.name + ' ideolojik olarak bölündü: ' + yeni.name, 'war');
       }
     }
   }

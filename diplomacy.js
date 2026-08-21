@@ -3269,6 +3269,9 @@ function diploTick(){
   if (typeof aiStatusQuoTick === 'function') aiStatusQuoTick();   // FAZ 49: statüko refleksi
   if (typeof fedFundTick === 'function') fedFundTick();           // FAZ 49: federal fon
   if (typeof sabotageTick === 'function') sabotageTick();          // FAZ 59
+  if (typeof loopBuildTick === 'function') loopBuildTick();        // FAZ 60
+  if (typeof directiveTick === 'function') directiveTick();        // FAZ 61
+  if (typeof schismTick === 'function') schismTick();              // FAZ 61
   if (typeof warSubsidyTick === 'function') warSubsidyTick();     // FAZ 45: savaş yardımı
   if (typeof visionTick === 'function') visionTick();             // FAZ 48: paylaşılan görüş
   if (typeof colossusGuardLock === 'function') colossusGuardLock(); // FAZ 31: koruma kilidi
