@@ -1,0 +1,35 @@
+{
+  "name": "Yıldız Hanedanı — Galaktik Strateji",
+  "short_name": "Yıldız Hanedanı",
+  "description": "16-bit galaktik 4X strateji oyunu. Hanedanını kur, galaksiyi yönet.",
+  "lang": "tr",
+  "dir": "ltr",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["fullscreen", "standalone", "minimal-ui"],
+  "orientation": "landscape",
+  "background_color": "#05070f",
+  "theme_color": "#05070f",
+  "categories": ["games", "strategy"],
+  "icons": [
+    {
+      "src": "data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' fill='%2305070f'/%3E%3Ccircle cx='256' cy='256' r='150' fill='none' stroke='%236ff2c8' stroke-width='10'/%3E%3Ccircle cx='256' cy='256' r='58' fill='%23f2d452'/%3E%3Ccircle cx='406' cy='256' r='22' fill='%236ff2c8'/%3E%3Ccircle cx='150' cy='150' r='14' fill='%23ff9b3d'/%3E%3Ccircle cx='340' cy='390' r='12' fill='%23ff5f6d'/%3E%3C/svg%3E",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' fill='%2305070f'/%3E%3Ccircle cx='256' cy='256' r='120' fill='none' stroke='%236ff2c8' stroke-width='14'/%3E%3Ccircle cx='256' cy='256' r='48' fill='%23f2d452'/%3E%3C/svg%3E",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    },
+    {
+      "src": "data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' fill='%2305070f'/%3E%3Ccircle cx='96' cy='96' r='56' fill='none' stroke='%236ff2c8' stroke-width='5'/%3E%3Ccircle cx='96' cy='96' r='22' fill='%23f2d452'/%3E%3C/svg%3E",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

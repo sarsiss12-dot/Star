@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#05070f">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Yıldız Hanedanı">
+<meta name="application-name" content="Yıldız Hanedanı">
+<meta name="format-detection" content="telephone=no">
+<!-- ═══ FAZ 57: PWA ═══
+     manifest + standalone. "Ana Ekrana Ekle" ile kurulunca
+     adres çubuğu tamamen kalkar — gerçek tam ekran. -->
+<link rel="manifest" href="./manifest.json">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%2305070f'/%3E%3Ccircle cx='32' cy='32' r='19' fill='none' stroke='%236ff2c8' stroke-width='2.5'/%3E%3Ccircle cx='32' cy='32' r='7' fill='%23f2d452'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' fill='%2305070f'/%3E%3Ccircle cx='90' cy='90' r='54' fill='none' stroke='%236ff2c8' stroke-width='6'/%3E%3Ccircle cx='90' cy='90' r='20' fill='%23f2d452'/%3E%3C/svg%3E">
+<title>YILDIZ HANEDANI — Galaktik Strateji</title>
+<style>
+/* ============================================================
+   YILDIZ HANEDANI  ·  16-bit galaktik strateji
+   Palet: void #05070f · hull #101828 · bulkhead #1b2740
+          phosphor #6ff2c8 · ember #ff9b3d · plasma #8b7bff · bone #d7e3f4
+   ============================================================ */
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;
+  -webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+:root{
+  --void:#05070f; --hull:#0e1524; --bulk:#182338; --line:#2b3c5c;
+  --phos:#6ff2c8; --ember:#ff9b3d; --plasma:#8b7bff; --bone:#d7e3f4;
+  --dim:#7d90ad; --bad:#ff5f6d; --good:#65e08a;
+  --mono:ui-monospace,"SF Mono","Cascadia Mono",Menlo,Consolas,"Roboto Mono",monospace;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --sb:302px; --top:34px;
+}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--void);
+  color:var(--bone);font-family:var(--sans);font-size:13px;
+  overscroll-behavior:none;touch-action:none}
+button{font-family:inherit;color:inherit;background:none;border:none;cursor:pointer}
+canvas{display:block}
+.mono{font-family:var(--mono)}
+.hidden{display:none!important}
+
+/* ---------- ORTAK KABUK ---------- */
+#app{position:fixed;inset:0}
+.scan{position:fixed;inset:0;pointer-events:none;z-index:900;
+  background:repeating-linear-gradient(180deg,rgba(0,0,0,.16) 0 1px,transparent 1px 3px);
+  opacity:.5;mix-blend-mode:multiply}
+.vig{position:fixed;inset:0;pointer-events:none;z-index:899;
+  background:radial-gradient(ellipse at 50% 50%,transparent 45%,rgba(0,0,0,.55) 100%)}
+
+/* ---------- MENÜ ---------- */
+#menu{position:fixed;inset:0;z-index:500;display:flex;flex-direction:column;
+  background:var(--void);overflow-y:auto;overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch}
+#menuStars{position:absolute;inset:0;z-index:0}
+.mwrap{position:relative;z-index:2;padding:18px 16px 40px;max-width:860px;margin:0 auto;width:100%}
+.brand{text-align:center;margin:8px 0 4px}
+.brand h1{font-family:var(--mono);font-size:30px;font-weight:800;letter-spacing:.34em;
+  color:var(--phos);text-shadow:0 0 18px rgba(111,242,200,.45);text-indent:.34em}
+.brand p{font-family:var(--mono);font-size:10px;letter-spacing:.32em;color:var(--dim);
+  margin-top:7px;text-indent:.32em}
+.rule{height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent);margin:16px 0}
+
+.sect{margin-bottom:18px}
+.sect>h2{font-family:var(--mono);font-size:10px;letter-spacing:.26em;color:var(--ember);
+  margin-bottom:9px;display:flex;align-items:center;gap:8px}
+.sect>h2:after{content:"";flex:1;height:1px;background:var(--line)}
+
+.grid{display:grid;gap:8px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+
+.card{background:linear-gradient(180deg,var(--bulk),var(--hull));border:1px solid var(--line);
+  padding:10px;text-align:left;position:relative;transition:border-color .12s,transform .08s}
+.card:active{transform:scale(.985)}
+.card.on{border-color:var(--phos);box-shadow:inset 0 0 0 1px rgba(111,242,200,.25),0 0 14px rgba(111,242,200,.14)}
+.card .cn{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.06em;display:flex;gap:7px;align-items:center}
+.card .cd{font-size:10.5px;color:var(--dim);line-height:1.45;margin-top:5px}
+.card .ct{font-family:var(--mono);font-size:9.5px;color:var(--phos);margin-top:6px;letter-spacing:.04em}
+.card .cw{font-family:var(--mono);font-size:9.5px;color:var(--ember);margin-top:2px;letter-spacing:.04em}
+.sig{width:22px;height:22px;flex:0 0 22px;image-rendering:pixelated}
+
+.opt{background:var(--hull);border:1px solid var(--line);padding:9px 6px;text-align:center;
+  font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--dim)}
+.opt.on{background:var(--bulk);border-color:var(--phos);color:var(--phos)}
+.opt small{display:block;font-size:8.5px;color:var(--dim);margin-top:3px;letter-spacing:0}
+.opt.on small{color:#8fb3a9}
+
+input[type=text]{width:100%;background:var(--void);border:1px solid var(--line);color:var(--bone);
+  font-family:var(--mono);font-size:14px;padding:9px 11px;letter-spacing:.06em;-webkit-user-select:text;user-select:text}
+input[type=text]:focus{outline:none;border-color:var(--phos)}
+
+.btn{display:block;width:100%;padding:14px;background:var(--phos);color:#04120d;
+  font-family:var(--mono);font-size:14px;font-weight:800;letter-spacing:.22em;
+  border:1px solid var(--phos);text-indent:.22em}
+.btn:active{background:#4dd0a6}
+.btn.ghost{background:transparent;color:var(--dim);border-color:var(--line);font-weight:600;font-size:11px;padding:11px}
+.btn.ghost:active{color:var(--bone);border-color:var(--dim)}
+.btnrow{display:flex;gap:8px;margin-top:6px}
+.btnrow>*{flex:1}
+
+.traitbar{display:flex;justify-content:space-between;align-items:center;
+  font-family:var(--mono);font-size:10px;color:var(--dim);letter-spacing:.1em;margin-bottom:8px}
+.traitbar b{color:var(--phos)}
+.tchip{background:var(--hull);border:1px solid var(--line);padding:8px 7px;text-align:left}
+.tchip.on{border-color:var(--plasma);background:#1a1a33}
+.tchip .tn{font-family:var(--mono);font-size:10.5px;font-weight:700}
+.tchip .tc{font-family:var(--mono);font-size:9px;color:var(--ember);float:right}
+.tchip.on .tc{color:var(--plasma)}
+.tchip .td{font-size:9.5px;color:var(--dim);margin-top:3px;line-height:1.4}
+
+/* ---------- KURULUM ADIMLARI ---------- */
+.steps{display:flex;gap:4px;margin-bottom:16px;position:sticky;top:0;z-index:5;
+  background:linear-gradient(180deg,var(--void) 72%,transparent);padding:6px 0 9px}
+.stp{flex:1;padding:7px 2px;border:1px solid var(--line);background:var(--hull);
+  display:flex;flex-direction:column;align-items:center;gap:3px}
+.stp b{font-family:var(--mono);font-size:11px;color:var(--dim);font-weight:700}
+.stp span{font-family:var(--mono);font-size:8px;letter-spacing:.1em;color:var(--dim)}
+.stp.on{border-color:var(--phos);background:var(--bulk)}
+.stp.on b,.stp.on span{color:var(--phos)}
+
+/* --- etik eksenleri --- */
+.axis{background:var(--hull);border:1px solid var(--line);padding:11px;margin-bottom:9px}
+.axHd{display:flex;justify-content:space-between;align-items:center;
+  font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--dim)}
+.axHd b{font-size:11px;letter-spacing:.06em}
+.axLbl{display:flex;justify-content:space-between;margin:9px 0 5px}
+.axLbl i{font-style:normal;font-family:var(--mono);font-size:8.5px;color:var(--dim);letter-spacing:.06em}
+.axRow{display:flex;gap:3px}
+.axDot{flex:1;height:30px;border:1px solid var(--line);background:var(--void);
+  font-family:var(--mono);font-size:10px;color:var(--dim)}
+.axDot.mid{color:#4a5a72}
+.axDot.on{border-color:var(--phos);background:var(--bulk);color:var(--phos);font-weight:700}
+.axDesc{font-size:10.5px;line-height:1.5;color:var(--dim);margin-top:8px;
+  border-left:2px solid var(--line);padding-left:8px}
+
+/* --- civic kartları --- */
+.card.civ{padding:9px}
+.civIco{font-size:15px;line-height:1}
+.card.civ.sars{border-color:#6b4a20}
+.card.civ.sars.on{border-color:var(--ember);box-shadow:inset 0 0 0 1px rgba(255,155,61,.28),0 0 14px rgba(255,155,61,.14)}
+.sarsTag{margin-left:auto;font-size:11px}
+.sigPrev{image-rendering:pixelated;display:block;margin:0 auto 3px}
+
+/* --- görünüş & renk --- */
+.opt.look{padding:6px 4px}
+.lookPrev{image-rendering:pixelated;display:block;margin:0 auto 3px}
+.colRow{display:flex;flex-wrap:wrap;gap:7px}
+.colDot{width:34px;height:34px;border:2px solid var(--line);border-radius:50%;flex:0 0 auto}
+.colDot.on{border-color:var(--bone);box-shadow:0 0 0 2px var(--void),0 0 12px currentColor}
+
+/* --- özet --- */
+.summary{background:var(--hull);border:1px solid var(--line);padding:10px;margin-top:14px}
+.sumRow{display:flex;justify-content:space-between;gap:10px;font-family:var(--mono);
+  font-size:10.5px;padding:4px 0;border-bottom:1px solid rgba(43,60,92,.4)}
+.sumRow:last-child{border-bottom:none}
+.sumRow span{color:var(--dim);flex:0 0 auto}
+.sumRow b{text-align:right;font-weight:600}
+
+/* ---------- GENİŞ DİPLOMASİ PANELİ ---------- */
+#diploPane{position:fixed;inset:0;z-index:640;display:none;background:rgba(3,5,10,.8)}
+#diploPane.show{display:flex;animation:fadeIn .15s ease}
+.dpBox{width:min(720px,94%);height:100%;background:linear-gradient(160deg,var(--bulk),var(--hull));
+  border-right:1px solid var(--phos);display:flex;flex-direction:column;
+  animation:slideR .2s cubic-bezier(.2,.8,.3,1)}
+@keyframes slideR{from{transform:translateX(-100%)}to{transform:none}}
+.dpHd{flex:0 0 auto;padding:12px 14px;border-bottom:1px solid var(--line);
+  display:flex;justify-content:space-between;align-items:center;
+  font-family:var(--mono);font-size:13px;letter-spacing:.16em;color:var(--phos)}
+.dpBody{flex:1;overflow-y:auto;overscroll-behavior:contain;padding:12px 14px 24px}
+.dpBody::-webkit-scrollbar{width:3px}
+.dpBody::-webkit-scrollbar-thumb{background:var(--line)}
+.dpGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:9px}
+/* FAZ 14: diplomasi listesi kompaktlaştırıldı — daha çok devlet
+   aynı anda ekrana sığsın. Kart 10px → 6px iç boşluk, portre
+   38px → 30px, satır aralıkları daraltıldı. */
+.dpCard{background:var(--hull);border:1px solid var(--line);padding:6px 8px;margin-bottom:4px}
+.dpCard .mini{margin:1px 0;line-height:1.25}
+.dpCard .row{padding:2px 0;font-size:10.5px}
+.dpCard.war{border-color:var(--bad)}
+.dpCard.ally{border-color:var(--phos)}
+.dpTop{display:flex;align-items:center;gap:6px;margin-bottom:3px}
+.dpTop canvas{image-rendering:pixelated;flex:0 0 auto;border:1px solid var(--line);background:var(--void)}
+.dpName{flex:1;min-width:0}
+.dpName b{font-family:var(--mono);font-size:12px;display:block;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dpName i{font-style:normal;font-size:9.5px;color:var(--dim)}
+.envRow{display:flex;align-items:center;justify-content:space-between;
+  background:var(--void);border:1px solid var(--line);padding:6px 9px;margin-bottom:9px;
+  font-family:var(--mono);font-size:11px}
+.envRow b{color:var(--phos)}
+/* ═══ FAZ 46: UZUN UYARI METNİ ═══
+   .envRow yatay flex; "Uygulanabilirlik" gibi uzun açıklamalar
+   kırmızı çerçevenin dışına taşıyordu. Bu varyant dikey sarar. */
+/* ═══ FAZ 46: CSS FAUX-FULLSCREEN ═══
+   Native API reddedilirse devreye girer. */
+html.fauxFull, body.fauxFull{
+  position:fixed;inset:0;width:100vw;height:100vh;
+  margin:0;padding:0;overflow:hidden;z-index:99999;background:#000}
+body.fauxFull #app{width:100vw;height:100vh}
+/* FAZ 53: fallback tuvali de zorunlu olarak tüm ekrana yayar —
+   native API reddedildiğinde bile oyun tam ekran görünür. */
+/* ═══ FAZ 57: PWA STANDALONE ═══
+   Kurulu uygulamada adres çubuğu yok; çentikli ekranlarda
+   güvenli alan payı bırakılır. */
+html.pwa body{
+  padding-top:env(safe-area-inset-top);
+  padding-bottom:env(safe-area-inset-bottom);
+  padding-left:env(safe-area-inset-left);
+  padding-right:env(safe-area-inset-right)}
+html.pwa #tools{top:calc(var(--top) + 6px + env(safe-area-inset-top))}
+
+/* FAZ 54: .faux-fullscreen — doğrudan oyun konteynerini hedefler */
+html.fauxFull, body.fauxFull, .faux-fullscreen{
+  position:fixed !important;inset:0 !important;
+  width:100vw !important;height:100dvh !important;
+  margin:0 !important;padding:0 !important;
+  overflow:hidden !important;z-index:999999 !important}
+body.fauxFull #game{width:100vw !important;height:100dvh !important;
+  position:fixed;inset:0;margin:0}
+body.fauxFull canvas#map{width:100vw !important;height:100dvh !important}
+
+.envRow.wrapRow{flex-direction:column;align-items:flex-start;gap:3px}
+.envRow.wrapRow b{white-space:normal;line-height:1.45;text-align:left;
+  word-break:break-word;max-width:100%}
+/* ═══ FAZ 47: HARİTA MODU BUTONLARI ═══ */
+.tool.mapMode{opacity:.55}
+.tool.mapMode.on{opacity:1;color:#6ff2c8;
+  box-shadow:inset 0 0 0 1px rgba(111,242,200,.55)}
+
+/* ═══ FAZ 46: DİPLOMASİ LİSTE MODU ═══
+   Tek satırlık kompakt barlar. Grid: renk noktası | ad (esner) |
+   rozetler | ilişki. Mobilde taşmaz, ad uzunsa kırpılır. */
+.viewTog{background:#1b2436;border:1px solid #35507a;border-radius:6px;
+  color:#9fb6cc;font-family:var(--mono);font-size:10px;padding:3px 8px;
+  letter-spacing:.04em;cursor:pointer}
+.viewTog:active{background:#26344d}
+.dpList{display:flex;flex-direction:column;gap:3px;margin:4px 0 6px}
+.dpRow{display:grid;grid-template-columns:10px 1fr auto auto;gap:7px;
+  align-items:center;padding:7px 9px;background:#111a2a;
+  border:1px solid #24354f;border-left-width:3px;border-radius:6px;
+  cursor:pointer;font-family:var(--mono);font-size:11px}
+.dpRow:active{background:#182337}
+.dpRow.war{border-left-color:#ff5f6d}
+.dpRow.ally{border-left-color:#65e08a}
+.dpDot{width:9px;height:9px;border-radius:50%}
+.dpNm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#e8f0ff}
+.dpTags{font-size:12px;letter-spacing:1px;opacity:.9}
+/* ═══ FAZ 52: ETİK BONUS MATRİSİ ═══ */
+.ethMx{margin:5px 0 2px;display:flex;flex-direction:column;gap:3px}
+.ethMxRow{display:flex;flex-direction:column;gap:1px;padding:5px 7px;
+  background:#0d1524;border:1px solid #24354f;border-radius:5px;
+  font-family:var(--mono);font-size:10px;line-height:1.45}
+.ethMxRow b{font-size:10px;letter-spacing:.05em}
+.ethMxRow span{color:#9fb6cc;word-break:break-word}
+.ethMxRow i{color:#7d90ad}
+
+/* ═══ FAZ 50: AKORDEON GÖVDESİ ═══ */
+.dpRow.open{border-color:#6ff2c8;border-bottom-left-radius:0;border-bottom-right-radius:0}
+.dpAcc{background:#0d1524;border:1px solid #6ff2c8;border-top:none;
+  border-radius:0 0 6px 6px;padding:7px 9px 9px;margin:-3px 0 3px}
+.dpAcc .act2{margin-top:5px}
+
+.envBtn{border:1px solid var(--line);padding:5px 9px;font-family:var(--mono);
+  font-size:10px;color:var(--dim);letter-spacing:.04em}
+.envBtn.on{border-color:var(--phos);color:var(--phos);background:rgba(111,242,200,.10)}
+.sBtn{border:1px solid var(--line);background:var(--void);color:var(--ember);
+  font-family:var(--mono);font-size:9px;padding:2px 5px;letter-spacing:0}
+.sBtn:active{border-color:var(--ember);background:#241a10}
+.bWrap{position:relative}
+.bInfo{position:absolute;top:2px;right:2px;width:16px;height:16px;z-index:2;
+  border:1px solid var(--line);background:var(--void);color:var(--dim);
+  font-family:var(--mono);font-size:9px;font-style:italic;
+  display:flex;align-items:center;justify-content:center;border-radius:50%}
+.bInfo:active{border-color:var(--phos);color:var(--phos)}
+.buildSym{display:inline-flex;align-items:center;gap:3px;font-family:var(--mono);
+  font-size:9px;color:var(--phos);margin-left:5px}
+.dealCols{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:620px){.dealCols{grid-template-columns:1fr}}
+.dealCol{background:var(--void);border:1px solid var(--line);padding:9px}
+.dealItem{display:flex;justify-content:space-between;align-items:center;gap:8px;
+  background:var(--hull);border:1px solid var(--line);padding:6px 8px;margin-bottom:5px;
+  font-family:var(--mono);font-size:10.5px}
+.dealItem button{color:var(--bad);font-size:12px;padding:0 4px}
+.luxRow{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.luxChip{font-family:var(--mono);font-size:9.5px;padding:2px 6px;
+  border:1px solid var(--line);display:flex;align-items:center;gap:3px}
+.luxChip.have{border-color:var(--good)}
+.luxChip.imp{border-color:var(--ember)}
+.luxChip.miss{opacity:.35}
+#fedBtn.hot{border-color:var(--ember);color:var(--ember);animation:pulseWarn 1.2s ease-in-out infinite}
+#diploBtn{position:absolute;left:6px;top:calc(var(--top) + 128px);z-index:21;
+  width:32px;height:32px;background:rgba(11,16,28,.9);border:1px solid var(--line);
+  color:var(--dim);font-size:14px;display:flex;align-items:center;justify-content:center}
+#diploBtn.hot{border-color:var(--ember);color:var(--ember)}
+
+/* ---------- IRK AYRINTI PANELİ ---------- */
+.card{position:relative}
+.infoBtn{position:absolute;top:6px;right:6px;width:22px;height:22px;z-index:3;
+  border:1px solid var(--line);background:var(--void);color:var(--dim);
+  font-family:var(--mono);font-size:11px;font-weight:700;font-style:italic;
+  display:flex;align-items:center;justify-content:center;border-radius:50%}
+.infoBtn:active{border-color:var(--phos);color:var(--phos)}
+.card.on .infoBtn{border-color:var(--phos);color:var(--phos)}
+
+#raceInfo{position:fixed;inset:0;z-index:700;display:none;justify-content:flex-end;
+  background:rgba(3,5,10,.72)}
+#raceInfo.show{display:flex;animation:fadeIn .16s ease}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.riBox{width:min(420px,92%);height:100%;background:linear-gradient(200deg,var(--bulk),var(--hull));
+  border-left:1px solid var(--phos);display:flex;flex-direction:column;
+  animation:slideL .22s cubic-bezier(.2,.8,.3,1)}
+@keyframes slideL{from{transform:translateX(100%)}to{transform:none}}
+.riHd{flex:0 0 auto;padding:13px 14px;border-bottom:1px solid var(--line);
+  display:flex;justify-content:space-between;align-items:center;
+  font-family:var(--mono);font-size:14px;font-weight:700;letter-spacing:.08em}
+.riX{width:30px;height:30px;border:1px solid var(--line);color:var(--dim);
+  font-size:13px;display:flex;align-items:center;justify-content:center}
+.riX:active{border-color:var(--bad);color:var(--bad)}
+.riBody{flex:1;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:12px 14px 20px}
+.riBody::-webkit-scrollbar{width:3px}
+.riBody::-webkit-scrollbar-thumb{background:var(--line)}
+.riTag{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--ember)}
+.riQuote{font-size:12px;line-height:1.65;color:#c4d3e8;font-style:italic;
+  border-left:2px solid var(--line);padding-left:10px;margin:9px 0 4px}
+.riSec{font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;color:var(--phos);
+  margin:15px 0 7px;display:flex;align-items:center;gap:7px}
+.riSec:after{content:"";flex:1;height:1px;background:var(--line)}
+.riSpec{font-size:11.5px;line-height:1.6;color:var(--bone);background:var(--void);
+  border:1px solid var(--line);padding:9px 10px}
+.riRow{display:flex;justify-content:space-between;font-family:var(--mono);
+  font-size:11px;padding:4px 0;border-bottom:1px solid rgba(43,60,92,.45)}
+.riRow span{color:var(--dim)}
+.riLi{font-family:var(--mono);font-size:11px;padding:3px 0;color:var(--dim)}
+.riLi.ok{color:var(--good)}
+.riLi.bad{color:var(--bad)}
+.riFt{flex:0 0 auto;padding:11px 14px;border-top:1px solid var(--line)}
+
+/* ---------- OYUN ---------- */
+#game{position:fixed;inset:0;z-index:100}
+#map{position:absolute;inset:0;z-index:1}
+
+#topbar{position:absolute;top:0;left:0;right:0;height:var(--top);z-index:20;
+  background:linear-gradient(180deg,rgba(9,13,24,.97),rgba(9,13,24,.82));
+  border-bottom:1px solid var(--line);display:flex;align-items:center;
+  padding:0 6px;gap:2px;overflow-x:auto;overscroll-behavior:contain;scrollbar-width:none}
+#topbar::-webkit-scrollbar{display:none}
+.res{display:flex;align-items:center;gap:3px;padding:0 7px;flex:0 0 auto;
+  font-family:var(--mono);font-size:11px;line-height:1}
+.res i{width:9px;height:9px;display:block;border-radius:1px}
+.res em{font-style:normal;font-size:12px;line-height:1}
+.res u{text-decoration:none;font-size:8.5px;letter-spacing:.08em;opacity:.85}
+.res b{font-weight:700;letter-spacing:.02em}
+.res s{text-decoration:none;font-size:9px;color:var(--dim)}
+.rt{font-family:var(--mono);font-size:10px;letter-spacing:.02em}
+.warnBtn{border:1px solid var(--bad)!important;padding:2px 8px!important;
+  animation:pulseWarn 1.1s ease-in-out infinite}
+@keyframes pulseWarn{0%,100%{opacity:.75}50%{opacity:1}}
+.qbox{max-height:158px;overflow-y:auto;overscroll-behavior:contain;padding-right:3px}
+.qbox::-webkit-scrollbar{width:3px}
+.qbox::-webkit-scrollbar-thumb{background:var(--line)}
+.stt{font-family:var(--mono);font-size:8.5px;padding:1px 5px;border:1px solid var(--line);
+  letter-spacing:.05em;white-space:nowrap}
+.stt.go{border-color:var(--phos);color:var(--phos)}
+.stt.wk{border-color:var(--plasma);color:var(--plasma)}
+.stt.ft{border-color:var(--bad);color:var(--bad)}
+.stt.id{border-color:var(--line);color:var(--dim)}
+.res s.p{color:var(--good)}
+.res s.n{color:var(--bad)}
+/* FAZ 14: diplomasi eylem sekmeleri */
+.dTabs{display:flex;gap:3px;margin:5px 0 4px}
+.dTab{flex:1;padding:4px 2px;font-size:9px;letter-spacing:.3px;
+  border:1px solid var(--line);background:var(--void);color:var(--dim);white-space:nowrap}
+.dTab.on{border-color:var(--phos);color:var(--phos);background:rgba(111,242,200,.08)}
+.dTab:active{border-color:var(--phos)}
+
+/* FAZ 14: yıkım tuşu ve yıkım kuyruğu satırı */
+.bq.dem{border-color:#ff5f6d}
+.bq.dem .bqBar{background:rgba(255,95,109,.16)}
+.demX{position:absolute;right:2px;top:2px;width:18px;height:18px;padding:0;
+  border:1px solid var(--line);background:var(--bulk);color:var(--dim);
+  font-size:10px;line-height:1;display:flex;align-items:center;justify-content:center;z-index:2}
+.demX:active{border-color:#ff5f6d;color:#ff5f6d}
+
+/* ═══ FAZ 31: OLAY PENCERESİ PİKSEL GÖRSELİ ═══ */
+.evArt{display:flex;justify-content:center;margin:2px 0 10px}
+.evArt canvas{image-rendering:pixelated;image-rendering:crisp-edges;
+  width:112px;height:112px;border:1px solid var(--line);background:var(--void);
+  animation:evPop .28s ease both}
+@keyframes evPop{from{opacity:0;transform:scale(.82)}to{opacity:1;transform:scale(1)}}
+@media (max-width:480px){.evArt canvas{width:92px;height:92px}}
+
+/* ═══ FAZ 45: KURULUM İSİM SATIRI ═══ */
+.nameRow{display:flex;gap:6px;align-items:stretch}
+.nameRow input{flex:1;min-width:0}
+.diceBtn{flex:0 0 auto;width:46px;font-size:18px;background:#1b2436;
+  border:1px solid #35507a;border-radius:8px;color:#e8f0ff;cursor:pointer}
+.diceBtn:active{background:#26344d}
+
+/* ═══ /* ═══ FAZ 31: OLAY PİKSEL SANATI ═══ */
+.evArt{display:flex;justify-content:center;padding:12px 0 4px;flex:0 0 auto;
+  background:linear-gradient(180deg,rgba(111,242,200,.05),transparent)}
+#eventCanvas{image-rendering:pixelated;image-rendering:crisp-edges;
+  width:96px;height:96px;filter:drop-shadow(0 0 10px rgba(0,0,0,.6))}
+@media (max-height:420px){ .evArt{padding:6px 0 2px} #eventCanvas{width:64px;height:64px} }
+
+/* ═══ FAZ 21: GEZEGEN SAVUNMASI (kalkan / garnizon) ═══
+   Grid tabanlı: ikon sabit, bar esner, sayı sabit. Dar ekranda
+   bar büzülür ama sayı ve ikon asla taşmaz. */
+.gDef{display:grid;grid-template-columns:1fr;gap:3px;margin:6px 0 2px;
+  padding:5px 6px;border:1px solid var(--line);background:var(--void)}
+.gRow{display:flex;align-items:center;gap:6px;min-width:0}
+.gIco{flex:0 0 auto;width:12px;text-align:center;font-size:11px;line-height:1}
+.gBarW{flex:1 1 auto;min-width:0;height:5px;background:#141b2b;
+  border:1px solid var(--line);overflow:hidden}
+.gBar{height:100%;transition:width .4s ease}
+.gRow b{flex:0 0 auto;font-size:10px;font-variant-numeric:tabular-nums;
+  min-width:34px;text-align:right}
+
+/* ═══ FAZ 20: SİNEMATİK ANA MENÜ ═══ */
+#title{position:fixed;inset:0;z-index:900;background:#04060d;
+  display:flex;align-items:center;justify-content:center;overflow:hidden}
+#title.hidden{display:none}
+#titleSky{position:absolute;inset:0;width:100%;height:100%;display:block}
+/* Kenarları karartan degrade — metin her zaman okunur kalsın */
+.tGrad{position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse at center,rgba(4,6,13,0) 30%,rgba(4,6,13,.72) 78%,rgba(4,6,13,.93) 100%)}
+.tWrap{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;
+  gap:clamp(14px,4vh,34px);padding:5vh 20px;width:100%;max-width:520px}
+.tLogo{text-align:center;animation:tIn .9s ease both}
+.tMark{font-size:clamp(26px,6vw,40px);color:var(--phos);line-height:1;
+  text-shadow:0 0 18px rgba(111,242,200,.55);animation:tSpin 26s linear infinite}
+.tLogo h1{margin:6px 0 0;font-family:var(--mono);font-weight:400;
+  font-size:clamp(26px,8.4vw,54px);letter-spacing:.16em;color:var(--bone);
+  text-shadow:0 0 26px rgba(111,242,200,.28);line-height:1.06}
+.tLogo h1 span{display:block;color:var(--phos);letter-spacing:.24em;
+  font-size:.82em;margin-top:2px}
+.tSub{margin-top:9px;font-size:clamp(8px,2.4vw,10.5px);letter-spacing:.34em;
+  color:var(--dim);font-family:var(--mono)}
+.tBtns{display:flex;flex-direction:column;gap:9px;width:100%;
+  animation:tIn 1.1s .18s ease both}
+.tBtn{width:100%;padding:13px 16px;text-align:left;background:rgba(14,21,36,.80);
+  border:1px solid var(--line);color:var(--bone);font-family:var(--mono);
+  font-size:clamp(11px,3.2vw,13px);letter-spacing:.13em;
+  transition:border-color .18s,background .18s,transform .12s;
+  -webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+.tBtn small{display:block;margin-top:3px;font-family:var(--sans);
+  font-size:10px;letter-spacing:.02em;color:var(--dim);text-transform:none}
+.tBtn.pri{border-color:var(--phos);color:var(--phos)}
+.tBtn.pri small{color:rgba(111,242,200,.62)}
+.tBtn:active:not([disabled]){transform:scale(.985);background:rgba(24,35,56,.9)}
+.tBtn[disabled]{opacity:.36;pointer-events:none}
+.tFoot{font-size:9.5px;letter-spacing:.16em;color:var(--dim);
+  font-family:var(--mono);animation:tIn 1.4s .4s ease both}
+@keyframes tIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes tSpin{to{transform:rotate(360deg)}}
+@media (hover:hover) and (pointer:fine){
+  .tBtn:hover:not([disabled]){border-color:var(--phos);background:rgba(24,35,56,.92)}
+}
+@media (max-height:420px){
+  .tWrap{max-width:640px;padding:3vh 18px;gap:10px}
+  .tLogo h1{font-size:clamp(20px,5.4vh,34px)}
+  .tBtn{padding:9px 13px}
+  .tBtn small{display:none}
+  .tFoot{display:none}
+}
+
+/* FAZ 13: gezegen inşaat kuyruğu satırları */
+.bq{position:relative;display:flex;align-items:center;gap:6px;margin-top:4px;
+  padding:5px 6px;border:1px solid var(--line);background:var(--void);overflow:hidden}
+.bq.on{border-color:#ff9b3d}
+.bqBar{position:absolute;left:0;top:0;bottom:0;background:rgba(255,155,61,.16);
+  transition:width .35s linear;pointer-events:none}
+.bqTxt{position:relative;flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.25}
+.bqTxt b{font-size:11px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bqTxt i{font-size:9px;color:var(--dim);font-style:normal}
+.bqX{position:relative;flex:0 0 auto;width:22px;height:22px;border:1px solid var(--line);
+  background:var(--bulk);color:var(--dim);font-size:11px;display:flex;
+  align-items:center;justify-content:center}
+.bqX:active{border-color:#ff5f6d;color:#ff5f6d}
+
+/* FAZ 12: sol çubuk ayracı + genel ekran sekmeleri + küçültme rozeti */
+.toolSep{height:1px;margin:4px 6px;background:var(--line);flex:0 0 auto}
+.gpTabs{display:flex;gap:4px;padding:8px 10px 0;flex:0 0 auto;overflow-x:auto}
+.gpTab{flex:0 0 auto;padding:6px 11px;font-size:11px;letter-spacing:.5px;
+  border:1px solid var(--line);background:var(--void);color:var(--dim);white-space:nowrap}
+.gpTab.on{border-color:var(--phos);color:var(--phos);background:rgba(111,242,200,.07)}
+.gpTab:active{border-color:var(--phos)}
+.minBadge{animation:minPulse 1.6s ease-in-out infinite}
+@keyframes minPulse{0%,100%{opacity:1}50%{opacity:.6}}
+/* Küçültme tuşu: kapatma değil, indirme hissi versin */
+.mClose{font-size:15px;line-height:1;padding-bottom:4px}
+
+/* FAZ 11: üst bar çalkantı/kriz rozeti */
+.upBadge{padding-left:6px !important;animation:upPulse 2.4s ease-in-out infinite}
+.upBadge b{font-variant-numeric:tabular-nums}
+@keyframes upPulse{0%,100%{opacity:1}50%{opacity:.72}}
+.tsep{width:1px;height:16px;background:var(--line);flex:0 0 auto;margin:0 2px}
+
+#sidebar{position:absolute;top:var(--top);right:0;bottom:0;width:var(--sb);z-index:18;
+  background:linear-gradient(270deg,rgba(11,16,28,.985),rgba(11,16,28,.93));
+  border-left:1px solid var(--line);display:flex;flex-direction:column;
+  transform:translateX(0);transition:transform .18s ease}
+#sidebar.off{transform:translateX(100%)}
+#tabs{display:flex;border-bottom:1px solid var(--line);flex:0 0 auto}
+.tab{flex:1;padding:8px 2px;font-family:var(--mono);font-size:9px;letter-spacing:.08em;
+  color:var(--dim);border-right:1px solid var(--line);text-align:center}
+.tab:last-child{border-right:none}
+.tab.on{color:var(--phos);background:rgba(111,242,200,.09);box-shadow:inset 0 -2px 0 var(--phos)}
+#panel{flex:1;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;
+  padding:9px 9px 26px}
+#panel::-webkit-scrollbar{width:3px}
+#panel::-webkit-scrollbar-thumb{background:var(--line)}
+
+#sbToggle{position:absolute;top:calc(var(--top) + 8px);right:var(--sb);z-index:19;
+  width:22px;height:44px;background:var(--bulk);border:1px solid var(--line);border-right:none;
+  color:var(--phos);font-size:13px;display:flex;align-items:center;justify-content:center;
+  transition:right .18s ease}
+#sbToggle.off{right:0}
+
+#timepod{position:absolute;left:6px;bottom:6px;z-index:20;display:flex;align-items:center;gap:5px;
+  background:rgba(11,16,28,.94);border:1px solid var(--line);padding:5px 7px}
+#stardate{font-family:var(--mono);font-size:12px;color:var(--phos);letter-spacing:.06em;min-width:74px}
+.sp{width:26px;height:26px;border:1px solid var(--line);background:var(--hull);
+  font-family:var(--mono);font-size:10px;color:var(--dim);display:flex;align-items:center;justify-content:center}
+.sp.on{border-color:var(--ember);color:var(--ember);background:#241a10}
+
+/* ═══ FAZ 53: SOL PANEL TAŞMA ONARIMI ═══
+   Yeni butonlar eklendikçe alt kısım ekranın altına taşıyordu.
+   Panel artık her ekranda görünür alan yüksekliğine sığar,
+   sığmazsa dikey kaydırılır ve scrollbar gizlenir. */
+#tools{position:absolute;left:6px;top:calc(var(--top) + 6px);z-index:20;
+  display:flex;flex-direction:column;gap:4px;
+  max-height:calc(100dvh - var(--top) - 14px);
+  overflow-y:auto;overflow-x:hidden;
+  scrollbar-width:none;-ms-overflow-style:none;
+  overscroll-behavior:contain;-webkit-overflow-scrolling:touch;
+  padding-bottom:4px}
+#tools::-webkit-scrollbar{display:none}
+#tools .tool{flex:0 0 auto}
+.tool{width:32px;height:32px;background:rgba(11,16,28,.9);border:1px solid var(--line);
+  color:var(--dim);font-size:14px;display:flex;align-items:center;justify-content:center}
+.tool.on{color:var(--phos);border-color:var(--phos)}
+
+#inbox{position:absolute;left:50%;transform:translateX(-50%);top:calc(var(--top) + 6px);z-index:26;
+  display:flex;flex-direction:column;gap:4px;width:min(420px,72%)}
+.nCard{display:flex;align-items:center;gap:9px;width:100%;text-align:left;
+  background:rgba(14,21,36,.97);border:1px solid var(--phos);padding:7px 10px;
+  box-shadow:0 3px 16px rgba(0,0,0,.55);animation:noteIn .22s cubic-bezier(.2,.8,.3,1)}
+.nCard.war{border-color:var(--bad)}
+.nCard.sci{border-color:var(--plasma)}
+.nCard:active{background:var(--bulk)}
+.nIco{font-size:16px;flex:0 0 auto}
+.nTxt{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.nTxt b{font-family:var(--mono);font-size:11px;letter-spacing:.04em;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nTxt i{font-style:normal;font-size:9.5px;color:var(--dim);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nGo{color:var(--phos);font-size:15px;flex:0 0 auto}
+.nCard.war .nGo{color:var(--bad)}
+.nCard.sci .nGo{color:var(--plasma)}
+@keyframes noteIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+
+/* FAZ 14 DÜZELTMESİ: bildirim katmanı diploPane(640) ve modal(760)
+   ALTINDA kalıyordu (z-index 20). Fısıltı gibi kaplama içinden
+   tetiklenen işlemlerin sonucu yazılıyor ama görünmüyordu.
+   Artık en üstte; pointer-events:none olduğu için tıklamayı engellemez. */
+#alerts{position:fixed;left:44px;top:calc(var(--top) + 6px);z-index:900;pointer-events:none;
+  display:flex;flex-direction:column;gap:3px;pointer-events:none;max-width:44%}
+.alert{background:rgba(11,16,28,.94);border-left:2px solid var(--phos);padding:5px 8px;
+  font-family:var(--mono);font-size:10px;color:var(--bone);letter-spacing:.02em;
+  animation:slideIn .2s ease;line-height:1.35}
+.alert.war{border-left-color:var(--bad);color:#ffc6ca}
+.alert.win{border-left-color:var(--good);color:#c3f5d3}
+.alert.sci{border-left-color:var(--plasma);color:#d3ccff}
+@keyframes slideIn{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:none}}
+
+#seltag{position:absolute;bottom:6px;left:50%;transform:translateX(-50%);z-index:20;
+  background:rgba(11,16,28,.95);border:1px solid var(--phos);padding:6px 12px;
+  font-family:var(--mono);font-size:11px;color:var(--phos);letter-spacing:.06em;
+  display:flex;gap:10px;align-items:center;white-space:nowrap}
+#seltag button{color:var(--ember);font-family:var(--mono);font-size:10px;
+  border:1px solid var(--line);padding:3px 7px}
+#seltag button.on{border-color:var(--ember);background:#241a10}
+
+/* ---------- PANEL İÇERİĞİ ---------- */
+.ph{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--ember);
+  margin:12px 0 7px;display:flex;align-items:center;gap:7px}
+.ph:first-child{margin-top:2px}
+.ph:after{content:"";flex:1;height:1px;background:var(--line)}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px;
+  font-family:var(--mono);font-size:11px;padding:4px 0}
+.row span{color:var(--dim)}
+.row b{font-weight:700}
+.box{background:var(--hull);border:1px solid var(--line);padding:8px;margin-bottom:6px}
+.box.act:active{border-color:var(--phos)}
+.bt{font-family:var(--mono);font-size:11.5px;font-weight:700;display:flex;
+  justify-content:space-between;align-items:center;gap:6px}
+.bd{font-size:10px;color:var(--dim);line-height:1.45;margin-top:4px}
+.bar{height:4px;background:var(--void);border:1px solid var(--line);margin-top:6px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--phos)}
+.bar.pl i{background:var(--plasma)}
+.bar.em i{background:var(--ember)}
+.bar.hp i{background:var(--bad)}
+.mini{font-family:var(--mono);font-size:9px;color:var(--dim);letter-spacing:.06em;margin-top:4px}
+.act2{display:flex;gap:5px;margin-top:7px;flex-wrap:wrap}
+.abtn{flex:1;min-width:66px;background:var(--bulk);border:1px solid var(--line);
+  padding:7px 4px;font-family:var(--mono);font-size:10px;letter-spacing:.04em;text-align:center;color:var(--bone)}
+.abtn:active{border-color:var(--phos);color:var(--phos)}
+.abtn.dis{opacity:.34}
+.abtn.pri{border-color:var(--phos);color:var(--phos)}
+.abtn.dgr{border-color:var(--bad);color:var(--bad)}
+.pchip{display:flex;gap:8px;align-items:center;padding:7px;background:var(--hull);
+  border:1px solid var(--line);margin-bottom:5px}
+.pchip canvas{image-rendering:pixelated;flex:0 0 auto}
+.pchip .pi{flex:1;min-width:0}
+.pchip .pn{font-family:var(--mono);font-size:11px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pchip .pm{font-family:var(--mono);font-size:9px;color:var(--dim);margin-top:2px}
+.flag{width:8px;height:8px;flex:0 0 8px;border-radius:1px;display:inline-block}
+.tag{font-family:var(--mono);font-size:8.5px;padding:1px 4px;border:1px solid var(--line);
+  color:var(--dim);letter-spacing:.04em}
+.tag.p{border-color:var(--phos);color:var(--phos)}
+.tag.e{border-color:var(--ember);color:var(--ember)}
+.tag.b{border-color:var(--bad);color:var(--bad)}
+.empty{font-family:var(--mono);font-size:10px;color:var(--dim);text-align:center;
+  padding:20px 10px;line-height:1.6;border:1px dashed var(--line)}
+
+/* ---------- MODAL ---------- */
+#modal{position:fixed;inset:0;z-index:760;background:rgba(3,5,10,.86);
+  display:flex;align-items:center;justify-content:center;padding:14px}
+.mbox{background:linear-gradient(180deg,var(--bulk),var(--hull));border:1px solid var(--phos);
+  max-width:520px;width:100%;max-height:88%;overflow-y:auto;overscroll-behavior:contain;
+  box-shadow:0 0 40px rgba(0,0,0,.8)}
+.mbox.war{border-color:var(--bad)}
+.mbox.sci{border-color:var(--plasma)}
+.mClose{position:absolute;top:8px;right:8px;z-index:3;width:28px;height:28px;
+  border:1px solid var(--line);background:var(--void);color:var(--dim);
+  font-size:13px;display:flex;align-items:center;justify-content:center}
+.mClose:active{border-color:var(--phos);color:var(--phos)}
+.mbox{position:relative}
+.mhd{padding:11px 40px 11px 13px;border-bottom:1px solid var(--line);
+  font-family:var(--mono);font-size:12px;letter-spacing:.16em;color:var(--phos);
+  display:flex;justify-content:space-between;align-items:center}
+.mbox.war .mhd{color:var(--bad)}
+.mbox.sci .mhd{color:var(--plasma)}
+.mbd{padding:13px;font-size:12px;line-height:1.62;color:#c4d3e8}
+.mbd .lead{color:var(--bone);font-style:italic;border-left:2px solid var(--line);padding-left:10px;margin-bottom:11px}
+.mft{padding:0 13px 13px;display:flex;flex-direction:column;gap:6px}
+.ch{background:var(--hull);border:1px solid var(--line);padding:10px;text-align:left}
+.ch:active{border-color:var(--phos)}
+.ch .cht{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--bone)}
+.ch .chd{font-size:10px;color:var(--dim);margin-top:4px;line-height:1.45}
+
+/* ---------- SAVAŞ RAPORU ---------- */
+.warlog{font-family:var(--mono);font-size:10px;line-height:1.7;background:var(--void);
+  border:1px solid var(--line);padding:9px;max-height:190px;overflow-y:auto}
+.warlog .a{color:var(--phos)}.warlog .b{color:var(--bad)}.warlog .n{color:var(--dim)}
+
+/* ---------- YÖNLENDİRME ---------- */
+#rotate{position:fixed;inset:0;z-index:1000;background:var(--void);display:none;
+  flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:30px;text-align:center}
+#rotate.show{display:flex}
+#rotate .ico{font-size:46px;animation:tilt 1.8s ease-in-out infinite}
+@keyframes tilt{0%,100%{transform:rotate(0)}50%{transform:rotate(-88deg)}}
+#rotate p{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--phos)}
+#rotate small{font-size:11px;color:var(--dim);line-height:1.6}
+
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 17 — EVRENSEL ARAYÜZ ESNEKLİĞİ
+   Tek bir cihaza değil, orana göre uyum. Üç kademe:
+     DAR   (<760px)  telefon — paneller ekranı kaplar, dokunma büyür
+     ORTA  (761-1200) tablet — dengeli
+     GENİŞ (>1200px) PC — panel genişler ama harita ferah kalır,
+                          kaplamalar ortada kutu hâlinde açılır
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ---------- DAR: telefon ---------- */
+@media (max-width:760px){
+  :root{--sb:270px}
+  /* Dokunmatik hedefler büyür (Apple/Google önerisi ~44px) */
+  .tab{padding:11px 2px;font-size:9.5px}
+  .abtn{min-height:38px}
+  .ch{min-height:44px}
+  .bqX,.demX{width:26px;height:26px}
+  /* Genel ekran kaplamaları ekranı efektif kaplasın */
+  #diploPane .dpBox{width:100%;max-width:none;height:100%;border-radius:0;border:0}
+  #modal .mbox{width:100%;max-width:none;max-height:100%;border-radius:0}
+}
+/* Çok dar telefon: yan panel ekranın çoğunu alsın ama haritayı boğmasın */
+@media (max-width:480px){
+  /* Çok dar ekranda panel haritayı tamamen yutmasın — kapatma
+     tuşuyla gizlenebiliyor ama açıkken de harita görünsün. */
+  :root{--sb:min(72vw,282px)}
+  .dTab{font-size:8.5px;padding:5px 1px}
+  .gpTab{font-size:9px;padding:5px 7px}
+}
+
+/* ---------- GENİŞ: PC ve tablet ---------- */
+@media (min-width:1200px){
+  /* Panel biraz genişler ama harita payı korunur */
+  :root{--sb:clamp(310px, 22vw, 420px); --top:38px}
+  .tab{font-size:10px;padding:9px 2px}
+  .res{font-size:12px}
+  /* Kaplamalar tam ekran yerine ORTADA ferah bir kutu olsun */
+  #diploPane{padding:4vh 0;align-items:center;justify-content:center}
+  #diploPane .dpBox{width:min(880px,72vw);max-height:92vh;height:auto;
+    border:1px solid var(--line);box-shadow:0 24px 80px rgba(0,0,0,.6)}
+  #modal .mbox{width:min(720px,62vw);max-height:88vh}
+  /* Bildirimler haritanın üstünü kapatmasın */
+  #alerts{max-width:min(420px,26vw)}
+  /* Diplomasi kartları iki sütuna yayılsın — dikey kaydırma azalsın */
+  .dpBody{column-gap:10px}
+}
+@media (min-width:1600px){
+  :root{--sb:clamp(340px, 20vw, 460px)}
+  #diploPane .dpBox{width:min(1040px,64vw)}
+  .dpCard{padding:8px 10px}
+  /* FAZ 17: çok geniş ekranda kaplama ortada dursun, kenara yapışmasın */
+  #modal .mbox{width:min(760px,52vw)}
+  /* Harita alanı korunur: kenar çubukları sabit tavana takılı */
+  #tools{left:12px}
+}
+
+/* ---------- ŞIK KAYDIRMA ÇUBUĞU ---------- */
+/* Varsayılan tarayıcı barı temayı bozuyordu; ince ve fosforlu. */
+*{scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+::-webkit-scrollbar{width:7px;height:7px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--line);border-radius:4px}
+::-webkit-scrollbar-thumb:hover{background:var(--phos)}
+::-webkit-scrollbar-corner{background:transparent}
+
+/* ---------- DOKUNMATİK vs FARE ---------- */
+/* Fare varsa hover ipuçları; yoksa hover kuralları hiç uygulanmaz
+   (mobilde "yapışkan hover" sorununu tamamen ortadan kaldırır). */
+@media (hover:hover) and (pointer:fine){
+  .tool:hover,.abtn:hover:not(.dis),.ch:hover,.opt:hover{border-color:var(--phos)}
+  .tool[title]:hover::after{
+    content:attr(title);position:absolute;left:calc(100% + 8px);top:50%;
+    transform:translateY(-50%);background:var(--hull);border:1px solid var(--line);
+    color:var(--bone);font-size:10px;padding:4px 8px;white-space:nowrap;
+    z-index:950;pointer-events:none;animation:fadeIn .12s ease}
+  .bqX:hover,.demX:hover{border-color:var(--bad);color:var(--bad)}
+}
+/* Dokunmatikte basılı tutma ipucu — .tipOn sınıfı JS ile eklenir */
+.tool{position:relative}
+.tool.tipOn::after{
+  content:attr(title);position:absolute;left:calc(100% + 8px);top:50%;
+  transform:translateY(-50%);background:var(--hull);border:1px solid var(--phos);
+  color:var(--bone);font-size:10px;padding:4px 8px;white-space:nowrap;
+  z-index:950;pointer-events:none}
+/* Dokunmatikte metin seçimi ve çift dokunma yakınlaştırması kapalı */
+@media (hover:none){
+  body{-webkit-user-select:none;user-select:none;touch-action:manipulation}
+  /* FAZ 17: Dokunmatikte hover yok — ipucu BASILI TUTMA ile gelir.
+     JS .hint sınıfını ekliyor, CSS onu balon olarak gösteriyor. */
+  .tool.hint::after,[title].hint::after{
+    content:attr(title);position:absolute;left:calc(100% + 8px);top:50%;
+    transform:translateY(-50%);background:var(--hull);border:1px solid var(--phos);
+    color:var(--bone);font-size:10px;font-family:var(--sans);white-space:nowrap;
+    padding:5px 8px;z-index:950;pointer-events:none;
+    animation:hintIn .12s ease}
+  /* Sağ kenara yakın öğelerde balon sola açılır */
+  .hintL::after{left:auto !important;right:calc(100% + 8px) !important}
+  @keyframes hintIn{from{opacity:0;transform:translateY(-50%) scale(.94)}
+                    to{opacity:1;transform:translateY(-50%) scale(1)}}
+}
+@media (max-height:400px){:root{--top:30px}.res{font-size:10px}
+  /* FAZ 12: sol çubuk 9 butona çıktı (7 → 9). 32px'lik butonlarla
+     369px ediyor ve 360px'lik yatay telefon ekranında taşıyordu.
+     Kısa ekranda butonlar küçülür, çubuk gerekirse kaydırılabilir. */
+  .tool{width:27px;height:27px;font-size:12px}
+  #tools{gap:3px;max-height:calc(100vh - var(--top) - 10px);
+    overflow-y:auto;scrollbar-width:none}
+  #tools::-webkit-scrollbar{display:none}
+  .toolSep{margin:2px 5px}
+  .gpTab{padding:5px 9px;font-size:10px}}
+@media (max-height:340px){.tool{width:24px;height:24px;font-size:11px}#tools{gap:2px}}
+</style>
+</head>
+<body>
+<div id="app">
+
+  <!-- ===== FAZ 20: SİNEMATİK ANA MENÜ =====
+       #menu (kurulum) ve #game'in üstünde ayrı bir katman.
+       Mevcut ekranlara dokunulmadı; bu katman kapanınca
+       eskisi gibi kurulum ya da oyun görünür. -->
+  <div id="title">
+    <canvas id="titleSky"></canvas>
+    <div class="tGrad"></div>
+    <div class="tWrap">
+      <div class="tLogo">
+        <div class="tMark">✦</div>
+        <h1>YILDIZ<span>HANEDANI</span></h1>
+        <div class="tSub">GALAKTİK STRATEJİ SİMÜLASYONU</div>
+      </div>
+      <div class="tBtns">
+        <button class="tBtn pri" data-a="tNew">YENİ OYUN
+          <small>Hanedanını kur ve yıldızlara açıl</small></button>
+        <button class="tBtn" id="tContBtn" data-a="tCont" disabled>OYUNA DEVAM ET
+          <small id="tContSub">Kayıt aranıyor…</small></button>
+        <button class="tBtn" data-a="tOpt">AYARLAR
+          <small>Ses ve rehber tercihleri</small></button>
+      </div>
+      <div class="tFoot">v1.0 · tek dosya, çevrimdışı çalışır</div>
+    </div>
+  </div>
+
+
+  <!-- ===== KURULUM ===== -->
+  <div id="menu">
+    <canvas id="menuStars"></canvas>
+    <div class="mwrap">
+      <div class="brand">
+        <h1>YILDIZ HANEDANI</h1>
+        <p>GALAKTİK EGEMENLİK SİMÜLASYONU</p>
+      </div>
+      <div class="rule"></div>
+      <div id="setup"></div>
+    </div>
+  </div>
+
+  <!-- ===== OYUN ===== -->
+  <div id="game" class="hidden">
+    <canvas id="map"></canvas>
+    <div id="topbar"></div>
+    <div id="tools"></div>
+      <div id="inbox" class="hidden"></div>
+    <div id="alerts"></div>
+    <div id="timepod"></div>
+    <div id="seltag" class="hidden"></div>
+    <button id="sbToggle">‹</button>
+    <div id="sidebar">
+      <div id="tabs"></div>
+      <div id="panel"></div>
+    </div>
+  </div>
+
+  <div id="diploPane"></div>
+  <div id="raceInfo"></div>
+  <div id="modal" class="hidden"></div>
+  <div class="scan"></div>
+  <div class="vig"></div>
+  <div id="rotate">
+    <div class="ico">📱</div>
+    <p>CİHAZI YATAY ÇEVİR</p>
+    <small>Yıldız haritası geniş ekran için tasarlandı.<br>Telefonunu yan çevir ve tam ekran tuşuna bas.</small>
+  </div>
+</div>
+<!-- ═══ YÜKLEME SIRASI KRİTİK ═══
+     main.js      : tüm veri sabitleri (RACES, SHIPS, TECHS...) burada
+                    tanımlanır, MUTLAKA ilk yüklenmelidir.
+     ai.js        : karar ağacı + hafıza mekanizması
+     diplomacy.js : onur/güven endeksi, casus belli, konsey
+     economy.js   : üretim, ticaret, ambargo
+     type="module" KULLANILMAZ — modül kapsamı global fonksiyonları
+     gizler ve yerel dosyada (file://) CORS hatası verir. -->
+<script src="main.js"></script>
+<script src="ai.js"></script>
+<script src="diplomacy.js"></script>
+<script src="economy.js"></script>
+<!-- FAZ 19: işlemsel ses. main.js'ten SONRA yüklenir (storeSet/storeGet
+     kullanır). Hiçbir ses dosyası yok; her şey Web Audio ile üretilir. -->
+<script src="audio.js"></script>
+<script>
+/* ═══ FAZ 57: SERVICE WORKER KAYDI ═══
+   PWA kurulabilirliğinin şartı. Kayıt başarısız olursa oyun
+   normal çalışır — sessizce yutulur. file:// protokolünde
+   worker desteklenmediği için protokol kontrolü var. */
+if ('serviceWorker' in navigator && location.protocol.startsWith('http')){
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js')
+      .catch(err => console.warn('SW kaydı yapılamadı:', err));
+  });
+}
+/* Standalone modda mıyız? Gövdeye sınıf ekle. */
+(function(){
+  try{
+    const stand = (window.matchMedia &&
+        (window.matchMedia('(display-mode: standalone)').matches ||
+         window.matchMedia('(display-mode: fullscreen)').matches)) ||
+      navigator.standalone === true;
+    if (stand) document.documentElement.classList.add('pwa');
+    window.__PWA_STANDALONE = !!stand;
+  }catch(e){ window.__PWA_STANDALONE = false; }
+})();
+</script>
+</body>
+</html>
