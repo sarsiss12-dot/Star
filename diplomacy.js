@@ -3270,6 +3270,7 @@ function diploTick(){
   if (typeof fedFundTick === 'function') fedFundTick();           // FAZ 49: federal fon
   if (typeof sabotageTick === 'function') sabotageTick();          // FAZ 59
   if (typeof loopBuildTick === 'function') loopBuildTick();        // FAZ 60
+  if (typeof aiDirectiveTick === 'function') aiDirectiveTick();    // FAZ 62
   if (typeof directiveTick === 'function') directiveTick();        // FAZ 61
   if (typeof schismTick === 'function') schismTick();              // FAZ 61
   if (typeof warSubsidyTick === 'function') warSubsidyTick();     // FAZ 45: savaş yardımı

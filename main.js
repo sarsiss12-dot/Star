@@ -3811,7 +3811,12 @@ function dailyTick(dt){
            doğrudan hedefe yollanır; ikmal siparişiyse belirtilen
            filoya katılmak üzere yola çıkar. */
         const ral = sys.rally && sys.rally[e.id];
-        if (ral){
+        /* ═══ FAZ 62: SİVİL GEMİLER RALLİYE GİTMEZ ═══
+           Koloni ve inşaat gemisi cepheye yollanmaz; oldukları
+           yerde bekler, oyuncu onları kendi görevine yönlendirir. */
+        const askeri = SHIPS[q.cls] && (SHIPS[q.cls].dmg > 0 ||
+                       SHIPS[q.cls].rol === 'ordu');
+        if (ral && askeri){
           /* İkmal hedefi filo ise ve o filo hâlâ buradaysa doğrudan kat */
           const hedefFilo = ral.fleet !== undefined
             ? G.fleets.find(f2 => f2.id === ral.fleet && f2.ships.length) : null;
@@ -4561,14 +4566,31 @@ function startStruct(e, sys, key, fleet){
   sys.work.push({key, e:e.id, left:days, tot:days});
   /* FAZ 6: harika inşası gizlenemez — galaksi görür ve tedirgin olur */
   if (S.mega && typeof announceMega === 'function') announceMega(e, sys, key);
+  /* ═══ FAZ 62: KALICI İNŞAAT GEMİSİ ═══
+     Eskiden inşaat gemisi yapıyı kurunca YOK EDİLİYORDU — her
+     istasyon için yeniden üretmek gerekiyordu, bu saf mikro-yönetim
+     yüküydü. Artık gemi kalır, yalnız işin süresince meşgul
+     (busy) işaretlenir; iş bitince boşa düşer ve tekrar kullanılır. */
   if (fleet){
-    fleet.ships = fleet.ships.filter(sh => sh.c !== 'ins');
-    if (!fleet.ships.length) G.fleets = G.fleets.filter(f => f !== fleet);
+    for (const sh of fleet.ships)
+      if (sh.c === 'ins'){ sh.busy = sys.id; break; }   // biri görevlensin
+    fleet.building = sys.id;
   }
   return true;
 }
 function structTick(dt){
   for (const sys of G.sys){
+    /* FAZ 62: bu sistemde iş bittiyse inşaatçıları serbest bırak */
+    if ((!sys.work || !sys.work.length)){
+      for (const f of G.fleets){
+        if (f.building !== sys.id) continue;
+        delete f.building;
+        for (const sh of f.ships) if (sh.busy === sys.id) delete sh.busy;
+        const e2 = G.emps[f.e];
+        if (e2 && !e2.ai)
+          say('🔧 İnşaat gemisi ' + sys.name + ' görevini bitirdi — yeniden hazır', 'sci');
+      }
+    }
     if (!sys.work || !sys.work.length) continue;
     for (let i = sys.work.length - 1; i >= 0; i--){
       const w = sys.work[i];
@@ -5912,12 +5934,24 @@ const View = {
         g.fillRect(p.x+sr+3, p.y-2, 3, 4);
       }
       if (showName){
-        g.font = '9px ui-monospace,monospace'; g.textAlign = 'center';
-        /* FAZ 47: sistem adı da diplomatik moda uyar */
+        /* ═══ FAZ 62: OKUNABİLİRLİK ═══
+           9 px çok küçüktü ve dış hat yoktu; gezegen diskinin
+           üstüne düşünce yazı kayboluyordu. 11 px'e çıkarıldı,
+           koyu dış hat eklendi ve gezegenin ALTINA, disk yarıçapı
+           kadar uzağa kaydırıldı. Ad KISALTILMIYOR. */
+        g.font = '600 11px ui-monospace,monospace';
+        g.textAlign = 'center';
+        g.textBaseline = 'top';
+        const ty = p.y + sr + 6;
+        g.lineWidth = 3;
+        g.lineJoin = 'round';
+        g.strokeStyle = 'rgba(4,7,14,.92)';
+        g.strokeText(s.name, p.x, ty);
         g.fillStyle = s.owner>=0
           ? ((MAP_MODE === 'diplomasi') ? diploColor(G.emps[s.owner]) : G.emps[s.owner].col)
-          : 'rgba(190,210,235,.72)';
-        g.fillText(s.name, p.x, p.y + sr + 13);
+          : 'rgba(214,228,246,.95)';
+        g.fillText(s.name, p.x, ty);
+        g.textBaseline = 'alphabetic';
         if (pSurv(s) && z > .42){
           const hab = s.planets.filter(pl=>PLANETS[pl.t].k==='hab').length;
           if (hab){
@@ -6371,16 +6405,23 @@ const View = {
         g.strokeStyle = 'rgba(120,150,190,.5)'; g.lineWidth = .6;
         g.strokeRect(bx-1, by-1, bw+2, 5);
       }
-      g.font = 'bold 9px ui-monospace,monospace'; g.textAlign = 'center';
-      g.fillStyle = e.col;
+      /* FAZ 62: filo gücü de dış hatlı ve daha büyük */
+      g.font = 'bold 11px ui-monospace,monospace'; g.textAlign = 'center';
       const label = armed ? fmt(fleetPower(f)) : (fleetHasRole(f,'bilim')?'BİL':'KOL');
-      g.fillText(label, p.x, p.y + h*.9 + 16);
+      const ly = p.y + h*.9 + 17;
+      g.lineWidth = 3; g.lineJoin = 'round';
+      g.strokeStyle = 'rgba(4,7,14,.92)';
+      g.strokeText(label, p.x, ly);
+      g.fillStyle = e.col;
+      g.fillText(label, p.x, ly);
       if (f.e === 0 && this.cam.z > .34){
         const st = fleetStatus(f);
         if (st.c !== 'id'){
-          g.font = '8px ui-monospace,monospace';
+          g.font = 'bold 9px ui-monospace,monospace';
+          g.strokeStyle = 'rgba(4,7,14,.92)';
+          g.strokeText(st.t, p.x, ly + 11);
           g.fillStyle = st.c === 'ft' ? '#ff5f6d' : st.c === 'wk' ? '#8b7bff' : '#6ff2c8';
-          g.fillText(st.t, p.x, p.y + h*.9 + 25);
+          g.fillText(st.t, p.x, ly + 11);
         }
       }
     }
@@ -6442,8 +6483,6 @@ const UI = {
        <button class="tool" id="impBtn" data-a="globalPane" data-x="imp" title="Devlet">👑</button>
        <button class="tool" data-a="diploPane" title="Diplomasi">🤝</button>
        <div class="toolSep"></div>
-       <button class="tool" id="muteBtn" data-a="mute"
-         title="Sesi aç/kapat">${AUDIO_OFF ? '🔇' : '🔊'}</button>
        <button class="tool" id="fedBtn" data-a="fedPane" title="Federasyon">🏛</button>
        <button class="tool" id="cncBtn" data-a="cncPane" title="Galaktik Konsey">🌐</button>`;
     document.body.addEventListener('click', e=>{
@@ -6626,6 +6665,9 @@ const UI = {
         break;
       }
       case 'bgTog': {
+        /* FAZ 62: ayarlar penceresi açıksa yenile */
+        setTimeout(()=>{ if (!$('modal').className.includes('hidden') &&
+          $('modal').innerHTML.includes('KAYIT VE AYARLAR')) this.saveMenu(); }, 0);
         BG_OFF = !BG_OFF;
         const bb = $('bgBtn'); if (bb) bb.className = 'tool' + (BG_OFF ? '' : ' on');
         storeSet('yh_bg', BG_OFF ? 'off' : 'on');
@@ -7497,6 +7539,43 @@ const UI = {
     h += `<div class="row"><span>Hâkimiyet</span><b style="color:${owner?owner.col:'#7d90ad'}">${owner?esc(owner.name):'Sahipsiz'}</b></div>`;
     h += `<div class="row"><span>Hiper yol</span><b>${s.lanes.length} bağlantı</b></div>`;
 
+    /* ═══════════════════════════════════════════════════════════
+       FAZ 62 — SAĞ PANELDE DİPLOMASİ
+       Yabancı bir sisteme tıklandığında diplomasi penceresini
+       açmaya gerek kalmadan siyasi durum ve ana eylemler burada.
+       ═══════════════════════════════════════════════════════════ */
+    if (owner && owner.id !== 0 && !owner.wild && !owner.crisisSide &&
+        e.contact[owner.id]){
+      const rel = Math.round(e.rel[owner.id] || 0);
+      const war = !!e.war[owner.id], ally = !!(e.ally && e.ally[owner.id]);
+      const rc = rel >= 40 ? '#65e08a' : rel >= 0 ? '#f2d452'
+               : rel >= -40 ? '#ff9b3d' : '#ff5f6d';
+      const P = (typeof personaOf === 'function') ? personaOf(owner) : null;
+      h += `<div class="ph">🏛 ${esc(owner.name.slice(0,22))}</div>`;
+      h += `<div class="row"><span>Durum</span>
+        <b style="color:${war?'#ff5f6d':ally?'#65e08a':'#7d90ad'}">${
+          war ? '⚔ SAVAŞTA' : ally ? '🤝 MÜTTEFİK' : 'barış'}</b></div>`;
+      h += `<div class="row"><span>İlişki</span>
+        <b style="color:${rc}">${rel>0?'+':''}${rel}</b></div>`;
+      if (P) h += `<div class="row"><span>Mizaç</span><b>${esc(P.n)}</b></div>`;
+      const pOK = canPeace(e, owner), wOK = canDeclareWarOn(e, owner);
+      h += `<div class="act2">`;
+      if (war)
+        h += `<button class="abtn ${pOK?'pri':'dis'}" data-a="peace"
+          data-x="${owner.id}">🕊 BARIŞ${pOK?'<br><span style="font-size:9px">30 ◈</span>':''}</button>`;
+      else
+        h += `<button class="abtn ${wOK.ok?'dgr':'dis'}" data-a="war"
+          data-x="${owner.id}">⚔ SAVAŞ İLAN ET${
+            wOK.ok?'':'<br><span style="font-size:9px">KİLİTLİ</span>'}</button>`;
+      h += `<button class="abtn" data-a="deal" data-x="${owner.id}">📜 MÜZAKERE</button>
+        </div><div class="act2">
+        <button class="abtn" data-a="gift" data-x="${owner.id}">🎁 HEDİYE</button>
+        <button class="abtn" data-a="spyOpen" data-x="${owner.id}">🕵 CASUSLUK</button>
+        </div>`;
+      if (!wOK.ok && !war && wOK.why)
+        h += `<div class="mini" style="color:#7d90ad">${esc(wOK.why)}</div>`;
+    }
+
     /* ═══ FAZ 56: LOJİSTİK KAPSAM GÖSTERGESİ ═══
        Haritada rota üstünde ve filo panelinde tedarik vardı ama
        SİSTEM panelinde yoktu — oyuncu "buraya filo yollarsam ne
@@ -7800,9 +7879,11 @@ const UI = {
             const B = BUILDINGS[k], n = c.b[k]||0;
             const full = n >= B.max || colonyUsed(c) >= colonySlots(c, e, pl);
             const afford = Object.keys(B.c).every(r => e.res[r] >= B.c[r]);
+            /* FAZ 62: 'i' butonu kaldırıldı — bilgi için binaya
+               UZUN BAS (data-hold). Mobilde parmak yeri kazandırır
+               ve yanlışlıkla bilgi açılması biter. */
             h += `<div class="bWrap" style="flex:1;min-width:66px">
-              <button class="bInfo" data-a="bInfo" data-x="${k}">i</button>
-              <button class="abtn ${full||!afford?'dis':''}" data-a="build" data-x="${s.id}:${pl.i}:${k}" style="width:100%">` +
+              <button class="abtn ${full||!afford?'dis':''}" data-a="build" data-hold="${k}" data-x="${s.id}:${pl.i}:${k}" style="width:100%">` +
                  `${B.n.split(' ')[0]} ${n}/${B.max}<br><span style="font-size:9px">` +
                  Object.entries(B.c).map(([r,v])=>`<span style="color:${e.res[r]>=v?RES[r].c:'#ff5f6d'}">${RES[r].ico}${v}</span>`).join(' ') +
                  `</span></button>` +
@@ -11581,7 +11662,17 @@ const UI = {
          <button class="ch" data-a="pno"><div class="cht">Reddet</div><div class="chd">Savaş sürer</div></button>
        </div>`,'war');
     this._hook('pyes', ()=>{ makePeace(G.p,o); this.closeModal(); this.refresh(); });
-    this._hook('pno', ()=>{ o.rel[0] -= 20; this.closeModal(); });
+    this._hook('pno', ()=>{
+      o.rel[0] -= 20;
+      /* FAZ 62: reddedilen teklif damgalanır — AI 12 ay daha
+         bekler (aiPeaceTick içindeki ceza). Spam biter. */
+      o.offerRefused = o.offerRefused || {};
+      o.offerRefused[0] = G.day;
+      this.closeModal();
+    });
+    this._hook('pyes', ()=>{
+      if (o.offerRefused) delete o.offerRefused[0];   // kabul → damga silinir
+    });
   },
   gameOver(){
     const w = G.over;
@@ -11621,9 +11712,20 @@ const UI = {
   saveMenu(){
     const auto = G.autoSave !== false;
     this.openModal(
-      `<div class="mhd"><span>KAYIT</span></div>
+      `<div class="mhd"><span>KAYIT VE AYARLAR</span></div>
        <div class="mbd" id="diagBox">Depolama sınanıyor…</div>
        <div class="mft">
+        <button class="ch" data-a="mute"><div class="cht">${
+          AUDIO_OFF ? '🔇 Ses kapalı' : '🔊 Ses açık'}</div>
+          <div class="chd">FAZ 62: müzik anahtarı araç çubuğundan buraya taşındı —
+            sol menüde yer açıldı</div></button>
+        <button class="ch" data-a="bgTog"><div class="cht">${
+          BG_OFF ? '🌌 Arka plan kapalı' : '🌌 Arka plan açık'}</div>
+          <div class="chd">Yıldız alanı ve bulutsu çizimi</div></button>
+        <button class="ch" data-a="autoEvent"><div class="cht">${
+          AUTO_EVENT ? '⚡ Olaylar otomatik geçiliyor' : '⚡ Olaylar soruluyor'}</div>
+          <div class="chd">Anomali ve rastgele olaylar; kritik bildirimler
+            daima gösterilir</div></button>
         <button class="ch" data-a="dlsave"><div class="cht">📥 Dosyaya kaydet</div>
           <div class="chd">İndirilenler klasörüne .sav dosyası yazar — en güvenilir yöntem</div></button>
         <button class="ch" data-a="ulsave"><div class="cht">📤 Dosyadan yükle</div>
@@ -12633,6 +12735,40 @@ document.addEventListener('pointerdown', ev => {
 }, {passive: true});
 
 document.addEventListener('pointercancel', () => { _tapBas = null; }, {passive: true});
+
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 62 — UZUN BASIŞ BİLGİ (data-hold)
+   Bina kartlarındaki 'i' butonu kaldırıldı. Artık karta 450 ms
+   basılı tutmak bilgi penceresini açıyor — mobil standardı.
+   Basış tamamlanınca normal tıklama İPTAL edilir ki bilgi
+   açılırken bina da inşa edilmesin.
+   ═══════════════════════════════════════════════════════════════════ */
+const HOLD_MS = 450;
+let _holdTimer = null, _holdFired = false;
+
+document.addEventListener('pointerdown', ev => {
+  const el = ev.target.closest && ev.target.closest('[data-hold]');
+  _holdFired = false;
+  if (_holdTimer){ clearTimeout(_holdTimer); _holdTimer = null; }
+  if (!el) return;
+  const key = el.dataset.hold;
+  _holdTimer = setTimeout(() => {
+    _holdFired = true;
+    _holdTimer = null;
+    try {
+      if (typeof UI !== 'undefined' && UI.buildingInfo) UI.buildingInfo(key);
+      else if (typeof UI !== 'undefined' && UI.act) UI.act('bInfo', key);
+    } catch(e){}
+  }, HOLD_MS);
+}, {passive: true});
+
+['pointerup','pointercancel','pointerleave'].forEach(t => {
+  document.addEventListener(t, () => {
+    if (_holdTimer){ clearTimeout(_holdTimer); _holdTimer = null; }
+    /* Uzun basış tetiklendiyse bu dokunuşun tıklamasını yut */
+    if (_holdFired) _tapBas = null;
+  }, {passive: true});
+});
 
 document.addEventListener('pointerup', ev => {
   const bas = _tapBas;

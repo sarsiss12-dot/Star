@@ -537,9 +537,15 @@ function aiTurn(e){
     if (rnd() > .22 + prof.dip*.15) continue;
     if (o.ai){ makePeace(e, o); continue; }
     // oyuncuya teklif: en fazla 15 ayda bir
+    /* ═══ FAZ 62: SPAM ENGELİ ═══
+       Normalde 15 ay bekler; oyuncu REDDETTİYSE ceza 12 ay daha
+       uzar (toplam 27 ay). Aynı teklifi üst üste yollayıp
+       oyuncuyu bezdirmesin. */
     e.lastOffer = e.lastOffer || {};
+    e.offerRefused = e.offerRefused || {};
     const lastOff = (e.lastOffer[o.id] !== undefined) ? e.lastOffer[o.id] : -9999;
-    if (G.day - lastOff < 450) continue;
+    const ceza = e.offerRefused[o.id] ? 360 : 0;      // 12 ay ek
+    if (G.day - lastOff < 450 + ceza) continue;
     e.lastOffer[o.id] = G.day;
     UI.peaceOffer(e);
   }
@@ -1525,6 +1531,25 @@ function aiStructTarget(e, f){
 }
 
 /* Aylık uzay inşaatı turu */
+/* ═══ FAZ 62: AI GEZEGEN OTOMASYONU ═══
+   Faz 61'in yönelim sistemi (col.auto) yalnız oyuncuda açıktı.
+   AI kolonileri kurulunca odak alıyor ama otomasyon bayrağı
+   düşmüyordu. Yeni koloniye odak verildiğinde AI için de açılır —
+   directiveTick zaten tüm devletleri geziyor, bütçe kilidi ortak. */
+function aiDirectiveTick(){
+  for (const e of G.emps){
+    if (e.dead || e.wild || e.crisisSide || !e.ai) continue;
+    for (const c of (e.colonies || [])){
+      const sys = G.sys[c.s];
+      const pl = sys && sys.planets[c.p];
+      if (!pl || !pl.col) continue;
+      if (pl.col.auto !== undefined) continue;      // karar verilmiş
+      /* Odağı olan her AI kolonisi otomasyona girer */
+      pl.col.auto = !!pl.col.f;
+    }
+  }
+}
+
 function aiStructTick(){
   if (typeof startStruct !== 'function') return;
   for (const e of G.emps){

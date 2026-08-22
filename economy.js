@@ -451,7 +451,14 @@ function economyTick(init){
       if (hasCivic(e,'oneparty')) target = Math.max(target, 35);
       if (hasPerk(e,'zeal')) target = Math.max(target, 60);
       if (hive) target = Math.max(target, 92);   // tek irade: moral sorunu olmaz
-      col.stab += clamp(target - col.stab, -3, 3);
+      /* FAZ 63: bombardıman altındaki koloni toparlanamaz —
+         yalnız düşüş yönünde hareket eder. */
+      if (col.bombed && col.bombed >= (G.memAge || 0)){
+        col.stab += Math.min(0, clamp(target - col.stab, -3, 3));
+      } else {
+        if (col.bombed) delete col.bombed;
+        col.stab += clamp(target - col.stab, -3, 3);
+      }
       col.stab = clamp(col.stab, 0, 100);
       if (col.pop < col.cap && !e.crisis && !hasCivic(e,'sleep')){
         const ptg = (typeof planetTrait === 'function' && planetTrait(col)) ? planetTrait(col).grow : 0;
@@ -1416,7 +1423,14 @@ function invasionTick(){
             col.garrison = Math.max(ateskesTabani, taban - etki);
             /* Bombardıman halkı da kırar */
             if (rnd() < .25) col.pop = Math.max(1, col.pop - .12);
-            col.stab = clamp(col.stab - .8, 0, 100);
+            /* ═══ FAZ 63: İSTİKRAR HATASI ═══
+               ÖLÇÜM (Faz 62): garnizon 60 → 9 eriyordu ama istikrar
+               80 → 100'e FIRLIYORDU. Sebep: bombardım −0.8 veriyor,
+               aynı ay istikrar hedefe doğru +3 topluyordu; net +2.2.
+               Artık damga konuyor — pasif yenilenme durur ve
+               istikrar her ay hızla sıfıra iner. */
+            col.bombed = (G.memAge || 0) + 1;
+            col.stab = clamp(col.stab - 9, 0, 100);
           }
         }
 
