@@ -224,8 +224,17 @@ html.pwa #tools{top:calc(var(--top) + 6px + env(safe-area-inset-top))}
 .grpDot{position:absolute;right:-3px;bottom:-3px;font-size:9px;
   font-style:normal;line-height:1;pointer-events:none;
   text-shadow:0 0 3px #05070f,0 0 3px #05070f}
+/* ═══ FAZ 67: KIRPILMA ONARIMI ═══
+   KÖK NEDEN: #tools konteynerinde overflow-y:auto + overflow-x:hidden
+   var (Faz 53'te sol panel taşmasını çözmek için eklenmişti).
+   Pop-out left:calc(100% + 6px) ile konteynerin DIŞINA açıldığı
+   için kırpılıyor ve hiç görünmüyordu — menü teknik olarak
+   açılıyor ama ekranda yoktu.
+   ÇÖZÜM: position:fixed. Sabit konumlu öğe atalarının overflow
+   kırpmasından etkilenmez. Konum JS'te butonun gerçek ekran
+   koordinatından hesaplanıyor (grpTog içinde). */
 .grpOut{
-  position:absolute;left:calc(100% + 6px);top:0;
+  position:fixed;left:0;top:0;
   display:flex;flex-direction:column;gap:3px;
   padding:5px;border-radius:9px;
   background:rgba(11,16,28,.96);border:1px solid #35507a;
@@ -233,7 +242,7 @@ html.pwa #tools{top:calc(var(--top) + 6px + env(safe-area-inset-top))}
   opacity:0;visibility:hidden;
   transform:translateX(-8px) scale(.96);transform-origin:left center;
   transition:opacity .16s ease, transform .16s ease, visibility .16s;
-  z-index:1250;max-height:70dvh;overflow-y:auto;
+  z-index:99999;max-height:70dvh;overflow-y:auto;
   scrollbar-width:none;-ms-overflow-style:none}
 .grpOut::-webkit-scrollbar{display:none}
 .grpOut.open{opacity:1;visibility:visible;transform:translateX(0) scale(1)}
@@ -267,6 +276,21 @@ html.pwa #tools{top:calc(var(--top) + 6px + env(safe-area-inset-top))}
   #outEmp .tool{min-width:78px;font-size:11px}
   #outEmp .tool span{font-size:9px}
 }
+
+/* ═══ FAZ 66: KARŞILIKLI PORTRELER ═══ */
+.faceOff{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+  gap:6px;padding:8px;margin:4px 0 6px;background:#0b1220;
+  border:1px solid var(--fo,#24354f);border-radius:8px}
+.faceOff canvas{width:100%;max-width:78px;aspect-ratio:1;border-radius:8px;
+  background:#070c16;border:2px solid var(--fo,#24354f);image-rendering:pixelated}
+.faceOff .foThem{justify-self:end}
+.foMid{display:flex;flex-direction:column;align-items:center;gap:2px;
+  font-family:var(--mono);font-size:9px;letter-spacing:.05em;white-space:nowrap}
+.foRel{font-size:14px;font-weight:700}
+.chipPort{width:34px;height:34px;border-radius:6px;background:#070c16;
+  image-rendering:pixelated;flex:0 0 34px}
+.notifPort{border-radius:6px;background:#070c16;image-rendering:pixelated;
+  vertical-align:middle;margin-right:7px}
 
 /* ═══ FAZ 61: KURULUM ŞABLON ŞERİDİ ═══ */
 .tplBar{display:flex;flex-wrap:wrap;gap:5px;margin:0 0 12px;

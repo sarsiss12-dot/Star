@@ -2688,3 +2688,94 @@ function schismTick(){
     }
   }
 }
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 66 — GALAKTİK PİYASA
+   Üç kaynak arasında takas. Kur SABİT DEĞİL: her işlem arz-talebi
+   kaydırır. Çok alınan pahalanır, çok satılan ucuzlar. Fiyatlar
+   zamanla taban değere geri süzülür (mean reversion) — böylece
+   piyasa ne donar ne de sonsuza kadar bozulur.
+   ═══════════════════════════════════════════════════════════════════ */
+const MARKET_RES = ['ene', 'min', 'ala'];
+/* Taban değerler: alaşım en kıymetli, enerji en bol */
+const MARKET_BASE = {ene: 1.0, min: 1.4, ala: 3.2};
+const MARKET_FEE  = .08;      // %8 komisyon — takas bedava değil
+const MARKET_DRIFT = .04;     // aylık taban değere dönüş oranı
+const MARKET_IMPACT = .00018; // birim başına fiyat kayması
+const MARKET_MIN = .35, MARKET_MAX = 3.0;   // taban çarpanı sınırları
+
+function marketInit(){
+  if (G.market) return G.market;
+  G.market = {mul: {ene: 1, min: 1, ala: 1}, hist: []};
+  return G.market;
+}
+
+/* Bir kaynağın güncel birim fiyatı */
+function marketPrice(r){
+  const m = marketInit();
+  return (MARKET_BASE[r] || 1) * (m.mul[r] || 1);
+}
+
+/* miktar kadar `sat` verip `al` almak kaç birim getirir? */
+function marketQuote(sat, al, miktar){
+  if (!MARKET_RES.includes(sat) || !MARKET_RES.includes(al) || sat === al)
+    return {ok: false, why: 'Geçersiz takas'};
+  if (!(miktar > 0)) return {ok: false, why: 'Miktar geçersiz'};
+  const deger = miktar * marketPrice(sat);
+  const brut = deger / marketPrice(al);
+  const net = brut * (1 - MARKET_FEE);
+  return {ok: true, alinan: net, komisyon: brut - net,
+          kurSat: marketPrice(sat), kurAl: marketPrice(al)};
+}
+
+function marketTrade(e, sat, al, miktar){
+  const q = marketQuote(sat, al, miktar);
+  if (!q.ok) return q;
+  if ((e.res[sat] || 0) < miktar)
+    return {ok: false, why: 'Yeterli ' + (RES[sat] ? RES[sat].n : sat) + ' yok'};
+
+  e.res[sat] -= miktar;
+  e.res[al] = (e.res[al] || 0) + q.alinan;
+
+  /* ═══ ARZ-TALEP KAYMASI ═══
+     Sattığın bollaşır → ucuzlar. Aldığın kıtlaşır → pahalanır. */
+  const m = marketInit();
+  m.mul[sat] = clamp(m.mul[sat] * (1 - miktar * MARKET_IMPACT), MARKET_MIN, MARKET_MAX);
+  m.mul[al]  = clamp(m.mul[al]  * (1 + q.alinan * MARKET_IMPACT), MARKET_MIN, MARKET_MAX);
+
+  if (e.id === 0)
+    say('💱 ' + Math.round(miktar) + ' ' + (RES[sat] ? RES[sat].n : sat) +
+        ' → ' + Math.round(q.alinan) + ' ' + (RES[al] ? RES[al].n : al) +
+        ' (komisyon %' + Math.round(MARKET_FEE * 100) + ')', 'sci');
+  return {ok: true, alinan: q.alinan};
+}
+
+/* Aylık: fiyatlar taban değere doğru süzülür + AI işlemleri
+   piyasayı hafifçe kıpırdatır (piyasa yalnız oyuncunun değil) */
+function marketTick(){
+  const m = marketInit();
+  for (const r of MARKET_RES){
+    m.mul[r] += (1 - m.mul[r]) * MARKET_DRIFT;
+    m.mul[r] = clamp(m.mul[r], MARKET_MIN, MARKET_MAX);
+  }
+  /* Galaktik arz: darlık çeken kaynağın fiyatı yükselir */
+  const stok = {ene: 0, min: 0, ala: 0};
+  let n = 0;
+  for (const e of G.emps){
+    if (e.dead || e.wild || e.crisisSide) continue;
+    n++;
+    for (const r of MARKET_RES) stok[r] += (e.res[r] || 0);
+  }
+  if (n){
+    const ort = (stok.ene + stok.min + stok.ala) / 3 || 1;
+    for (const r of MARKET_RES){
+      const oran = stok[r] / ort;           // 1 = dengede
+      if (oran < .7) m.mul[r] = clamp(m.mul[r] * 1.012, MARKET_MIN, MARKET_MAX);
+      else if (oran > 1.4) m.mul[r] = clamp(m.mul[r] * .990, MARKET_MIN, MARKET_MAX);
+    }
+  }
+  /* Grafik için son 40 ay */
+  m.hist.push({t: G.memAge || 0, ene: m.mul.ene, min: m.mul.min, ala: m.mul.ala});
+  if (m.hist.length > 40) m.hist.shift();
+}

@@ -111,15 +111,53 @@ function wildTurn(e){
 }
 
 /* Kriz filoları: en yakın kolonili sisteme acımasızca yürür */
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 68 — SÜRÜ HEDEF ÖNCELİKLENDİRMESİ
+   Hiçlik Sürüsü eskiden yalnız EN YAKIN kolonili sisteme
+   gidiyordu — kör bir dalga gibi. Artık stratejik: galaktik
+   geçitler lojistik ağın düğüm noktası olduğu için önce onları
+   koparıyor. Geçit düşünce galaksinin yarısı tedariksiz kalıyor.
+
+   Puanlama: mesafe cezası + hedef değeri. Değer sıralaması
+     geçit (900) > tersane (260) > nüfus (pop×8) > koloni (60)
+   Mesafe hâlâ ağır basıyor ki sürü galaksinin öbür ucuna
+   ışınlanmasın; ama eşit mesafede geçit her zaman kazanır.
+   ═══════════════════════════════════════════════════════════════════ */
+/* ÖLÇÜM: ilk denemede ceza `d * 1.15` idi ve galaksi mesafeleri
+   1000–2000 BİRİM olduğu için 900 puanlık geçit önceliği tamamen
+   eziliyordu (geçitli sistem hâlâ 3. sıradaydı). Mesafe artık
+   GALAKSİ GENİŞLİĞİNE NORMALİZE ediliyor: bir uçtan öbürüne
+   gitmek ~SWARM_DIST_PEN ceza. Böylece iki terim aynı ölçekte. */
+const SWARM_GATE_PRIO = 900;   // geçit önceliği
+const SWARM_DIST_PEN  = 780;   // galaksiyi baştan sona geçme cezası
+
+function swarmTargetScore(f, sy){
+  let deger = 60;                                    // kolonili sistem tabanı
+  /* Geçit: lojistik düğümü — sürünün baş hedefi */
+  if (sy.built && sy.built.kapi !== undefined) deger += SWARM_GATE_PRIO;
+  /* Tersane: yeni filo üretimini kaynağında kes */
+  if (typeof yardCount === 'function') deger += yardCount(sy) * 260;
+  /* Nüfus: yemek */
+  for (const pl of sy.planets)
+    if (pl.col) deger += (pl.col.pop || 0) * 8;
+  /* Kalkanlı gezegen daha zor lokma */
+  for (const pl of sy.planets)
+    if (pl.col && pl.shield > 0) deger -= pl.shield * 1.5;
+  const d = dist(G.sys[f.sys], sy);
+  const olcek = Math.max(1, Math.hypot(G.W || 4000, G.H || 4000));
+  return deger - (d / olcek) * SWARM_DIST_PEN;
+}
+
 function crisisFleetTurn(e){
   for (const f of G.fleets){
     if (f.e !== e.id || f.combat || f.path.length || f.mv || f.sys < 0) continue;
     const targets = G.sys.filter(sy => sy.owner >= 0 && !G.emps[sy.owner].wild &&
                                        sy.planets.some(p => p.col));
     if (!targets.length) continue;
-    targets.sort((a,b)=> dist(G.sys[f.sys], a) - dist(G.sys[f.sys], b));
-    // en yakın üç hedeften birini seç (öngörülemez olsun)
-    const pick2 = targets[Math.floor(rnd() * Math.min(3, targets.length))];
+    /* Puanla, en iyi üçten birini seç — öngörülemezlik korunur */
+    const puanli = targets.map(sy => ({sy, p: swarmTargetScore(f, sy)}))
+                          .sort((a, b) => b.p - a.p);
+    const pick2 = puanli[Math.floor(rnd() * Math.min(3, puanli.length))].sy;
     orderMove(f, pick2.id);
   }
 }
@@ -2851,6 +2889,113 @@ function aiForwardBaseTick(){
       e._fwdLast = {sys: aday.id, yapi, at: G.memAge || 0};
       if (G.p && !G.p.dead && G.p.contact && G.p.contact[e.id])
         say(e.name + ' sınırında ileri üs kuruyor: ' + aday.name, 'war');
+    }
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 68 — AI GALAKTİK PİYASA KULLANIMI
+   Piyasa Faz 66'da eklendi ama fiyatı yalnız oyuncu kıpırdatıyordu.
+   Artık AI da dengesizliğini piyasada çözüyor: bol olanı satıp
+   dar olanı alıyor. Böylece savaş dönemlerinde alaşım doğal olarak
+   pahalanıyor, barışta ucuzluyor — oyuncu hiç işlem yapmasa bile.
+   ═══════════════════════════════════════════════════════════════════ */
+const AI_MARKET_BOL   = 5000;   // bu üstü "fazla"
+const AI_MARKET_DAR   = 1200;   // bu altı "dar"
+const AI_MARKET_DILIM = .22;    // fazlanın bu kadarı satılır
+
+function aiMarketTick(){
+  if (typeof marketTrade !== 'function') return;
+  for (const e of G.emps){
+    if (e.dead || e.wild || e.crisisSide || !e.ai) continue;
+    if (e._mktCd && e._mktCd > (G.memAge || 0)) continue;
+
+    /* En bol ve en dar kaynağı bul */
+    let bol = null, bolV = 0, dar = null, darV = 1e9;
+    for (const r of MARKET_RES){
+      const v = e.res[r] || 0;
+      if (v > bolV){ bolV = v; bol = r; }
+      if (v < darV){ darV = v; dar = r; }
+    }
+    if (!bol || !dar || bol === dar) continue;
+    if (bolV < AI_MARKET_BOL || darV > AI_MARKET_DAR) continue;
+
+    /* Ne kadar satsın? Fazlanın bir dilimi, tavanlı */
+    const miktar = Math.min(2500, Math.floor((bolV - AI_MARKET_BOL) * AI_MARKET_DILIM));
+    if (miktar < 150) continue;
+
+    /* Kur çok kötüyse bekle — AI da aptal tüccar değil */
+    const q = marketQuote(bol, dar, miktar);
+    if (!q.ok) continue;
+    const oran = q.alinan / miktar;
+    const adilOran = (MARKET_BASE[bol] || 1) / (MARKET_BASE[dar] || 1) * .75;
+    if (oran < adilOran) { e._mktCd = (G.memAge || 0) + 6; continue; }
+
+    marketTrade(e, bol, dar, miktar);
+    e._mktCd = (G.memAge || 0) + 4;      // 4 ay bekleme
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 68 — AI KADEMELİ İSTİHBARAT TEKLİFLERİ
+   Sensör anlaşması güven eşiği düşük (müttefiklik ya da +55 ilişki).
+   Casusluk ağı paktı çok daha mahrem: +80 ilişki ya da ittifak
+   ister, çünkü ortağın gördüğü her şeyi görürsün.
+   ═══════════════════════════════════════════════════════════════════ */
+function aiIntelPactTick(){
+  for (const e of G.emps){
+    if (e.dead || e.wild || e.crisisSide || !e.ai) continue;
+    if (e._pactCd && e._pactCd > (G.memAge || 0)) continue;
+    if ((e.res.etk || 0) < 140) continue;
+
+    const P = (typeof personaOf === 'function') ? personaOf(e) : null;
+    /* İzolasyonist kimseye ağını açmaz */
+    if (P && P.n === 'İzolasyonist') continue;
+
+    for (const o of G.emps){
+      if (o.dead || o.wild || o.crisisSide || o.id === e.id) continue;
+      if (!e.contact[o.id] || e.war[o.id]) continue;
+      const rel = e.rel[o.id] || 0;
+      const mutt = !!(e.ally && e.ally[o.id]);
+
+      /* CASUSLUK AĞI: en mahrem pakt */
+      const zatenSpy = e.spynet && e.spynet[o.id];
+      if (!zatenSpy && (rel >= 80 || (mutt && rel >= 60))){
+        e._pactCd = (G.memAge || 0) + 36;
+        if (o.id === 0){
+          /* Oyuncuya teklif — kabul/ret oyuncunun */
+          if (typeof UI !== 'undefined' && UI.notify)
+            UI.notify({kind:'pact', data:{from:e.id, tur:'spynet'}, ico:'🕸',
+              cls:'sci', pause:false, title:'Casusluk Ağı Paktı',
+              sub:e.name + ' istihbarat ağlarını seninle birleştirmek istiyor',
+              key:'pact:' + e.id});
+        } else {
+          /* AI–AI: doğrudan kurulur */
+          e.spynet = e.spynet || {}; o.spynet = o.spynet || {};
+          e.spynet[o.id] = true; o.spynet[e.id] = true;
+          e.res.etk -= 120;
+        }
+        break;
+      }
+
+      /* SENSÖR ANLAŞMASI: daha kolay */
+      const zatenSen = e.visionFrom && e.visionFrom[o.id];
+      if (!zatenSen && (mutt || rel >= 55)){
+        e._pactCd = (G.memAge || 0) + 24;
+        if (o.id === 0){
+          if (typeof UI !== 'undefined' && UI.notify)
+            UI.notify({kind:'pact', data:{from:e.id, tur:'intel'}, ico:'👁',
+              cls:'sci', pause:false, title:'Sensör Anlaşması',
+              sub:e.name + ' harita görüşünü paylaşmak istiyor',
+              key:'pact:' + e.id});
+        } else {
+          e.visionFrom = e.visionFrom || {}; o.visionFrom = o.visionFrom || {};
+          e.visionFrom[o.id] = true; o.visionFrom[e.id] = true;
+          e.res.etk -= 45;
+        }
+        break;
+      }
     }
   }
 }

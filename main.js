@@ -1943,17 +1943,24 @@ const ART = (() => {
 
   /* Zırh/kıyafet siluetleri — 12 sütun, 5 satır. Mizaca göre değişir.
      'a' = agresif varyant (ilişki −30 altına düşünce devreye girer) */
+  /* ═══ FAZ 67: KAİDE TEMİZLİĞİ ═══
+     Eski siluetlerde `.#.######.#.` satırı vardı: solda ve sağda
+     ANA GÖVDEDEN KOPUK birer piksel. Portrenin altında iki noktalı
+     bir ayak/kaide gibi görünüyordu. Ayrıca son satır `.##########.`
+     düz bir bar olduğu için heykel kaidesi izlenimi veriyordu.
+     Yeni siluetler: tüm pikseller gövdeye BAĞLI, alt satır aşağı
+     doğru daralıyor (omuzdan göğse doğru bir V). Kopuk piksel yok. */
   const ARMOR = {
-    militarist  :{ n:['..#......#..','.###....###.','.##########.','.#.######.#.','.##########.'],
-                   a:['.##......##.','###A....A###','.##########.','##.######.##','.##########.'] },
-    tuccar      :{ n:['....####....','..########..','.####..####.','.##########.','..########..'],
-                   a:['...######...','..########..','.###.##.###.','.##########.','..########..'] },
-    pasifist    :{ n:['.....##.....','....####....','..########..','.##########.','..########..'],
-                   a:['....####....','..########..','.####..####.','.##########.','..########..'] },
-    yayilmaci   :{ n:['...#....#...','..##....##..','.##########.','.#.######.#.','.##########.'],
-                   a:['..#A....A#..','.###....###.','.##########.','##.######.##','.##########.'] },
-    izolasyonist:{ n:['..########..','.##########.','.##########.','.#.######.#.','.##########.'],
-                   a:['.##########.','###A####A###','.##########.','##.######.##','.##########.'] }
+    militarist  :{ n:['..##....##..','.##########.','.##########.','..########..','...######...'],
+                   a:['.###....###.','############','.##########.','..########..','...######...'] },
+    tuccar      :{ n:['....####....','..########..','.##########.','..########..','...######...'],
+                   a:['...######...','.##########.','.##########.','..########..','...######...'] },
+    pasifist    :{ n:['.....##.....','...######...','..########..','..########..','...######...'],
+                   a:['....####....','..########..','.##########.','..########..','...######...'] },
+    yayilmaci   :{ n:['...##..##...','..########..','.##########.','..########..','...######...'],
+                   a:['..###..###..','.##########.','.##########.','..########..','...######...'] },
+    izolasyonist:{ n:['..########..','.##########.','.##########.','..########..','...######...'],
+                   a:['.##########.','############','.##########.','..########..','...######...'] }
   };
   const PERSONA_KEYS = ['militarist','tuccar','pasifist','yayilmaci','izolasyonist'];
 
@@ -5525,6 +5532,20 @@ const View = {
       UI.refresh();
       return;
     }
+    /* ═══ FAZ 67: TERSANE RALLİ HEDEFİ SEÇİMİ ═══ */
+    if (this.rallyForSys !== undefined && s){
+      const kaynak = G.sys[this.rallyForSys];
+      this.rallyForSys = undefined;
+      if (kaynak){
+        kaynak.rally = kaynak.rally || {};
+        kaynak.rally[0] = {sys: s.id};
+        say('📍 ' + kaynak.name + ' → ' + s.name +
+            ' · yeni askeri gemiler oraya gidecek', 'sci');
+      }
+      UI.refresh();
+      return;
+    }
+
     /* FAZ 50: Panoptikon yeniden hedefleme */
     if (this.panoptFor !== undefined && s){
       const kay = this.panoptFor;
@@ -6179,8 +6200,12 @@ const View = {
             p0.x > this.vw+140 || p0.y > this.vh+140) continue;
 
         const kendi = f.e === 0;
+        /* FAZ 66: radar havuzlanmış istihbaratı kullanır —
+           casusluk ağı paktı olan ortağın gördüğünü sen de
+           görürsün. */
         const lvl = kendi ? 3
-          : (typeof intelOf === 'function' ? intelOf(G.p, f.e) : 0);
+          : (typeof pooledIntel === 'function' ? pooledIntel(G.p, f.e)
+             : (typeof intelOf === 'function' ? intelOf(G.p, f.e) : 0));
         /* FAZ 63: gemi modunda GÖRÜŞ yeterli — istihbarat aranmaz;
            askeri modda kademeli gizlilik korunur. */
         if (RADAR_ON){
@@ -6655,6 +6680,8 @@ const UI = {
              title="Galaktik Konsey">🌐<span>Konsey</span></button>
            <button class="tool" id="fedBtn" data-a="fedPane"
              title="Federasyon">🏛<span>Federasyon</span></button>
+           <button class="tool" data-a="marketPane"
+             title="Galaktik Piyasa">💱<span>Piyasa</span></button>
          </div>
        </div>`;
     document.body.addEventListener('click', e=>{
@@ -6714,6 +6741,26 @@ const UI = {
       case 'fit': View.fit(); break;
       case 'save': this.saveMenu(); break;
       /* FAZ 65: panel açılınca alt menü de kapansın */
+      case 'marketPane':
+        if (typeof closeAllGroups === 'function') closeAllGroups();
+        this.openMarket(); break;
+      case 'mktTrade': {
+        const [sat, al, mik] = x.split(':');
+        const r = (typeof marketTrade === 'function')
+          ? marketTrade(G.p, sat, al, +mik) : {ok:false, why:'—'};
+        if (!r.ok) say(r.why, 'war');
+        this.openMarket();
+        break;
+      }
+      case 'mktSel': {
+        const [alan, deger] = x.split(':');
+        this.mkt = this.mkt || {sat:'min', al:'ala', mik:200};
+        this.mkt[alan] = (alan === 'mik') ? +deger : deger;
+        if (this.mkt.sat === this.mkt.al)
+          this.mkt.al = MARKET_RES.find(r => r !== this.mkt.sat);
+        this.openMarket();
+        break;
+      }
       case 'diploPane':
         if (typeof closeAllGroups === 'function') closeAllGroups();
         this.openDiplo(); break;
@@ -6850,7 +6897,27 @@ const UI = {
         const el2 = $(hedef), el3 = $(diger);
         const acik = el2 && el2.classList.contains('open');
         if (el3) el3.classList.remove('open');
-        if (el2) el2.classList.toggle('open', !acik);
+        if (el2){
+          el2.classList.toggle('open', !acik);
+          /* ═══ FAZ 67: SABİT KONUM HESABI ═══
+             Menü artık position:fixed (konteyner kırpmasından
+             kaçmak için), bu yüzden konumu açılırken butonun
+             gerçek ekran koordinatından hesaplanıyor. */
+          if (!acik && el2.style){
+            const btn = el2.parentElement &&
+              el2.parentElement.querySelector('.grpHead');
+            if (btn && btn.getBoundingClientRect){
+              const r = btn.getBoundingClientRect();
+              el2.style.left = (r.right + 6) + 'px';
+              /* Ekran altına taşarsa yukarı kaydır */
+              const yuk = el2.offsetHeight || 200;
+              const ekran = window.innerHeight || 700;
+              let ust = r.top;
+              if (ust + yuk > ekran - 8) ust = Math.max(6, ekran - yuk - 8);
+              el2.style.top = ust + 'px';
+            }
+          }
+        }
         break;
       }
       case 'mapMode': {
@@ -6966,6 +7033,24 @@ const UI = {
           say('Şablon silindi: ' + x);
           safeRenderSetup();
         });
+        break;
+      }
+      case 'rallySysSet': {
+        View.rallyForSys = +x;
+        say('📍 Haritadan bir sistem seç — bu tersanenin ralli noktası olacak');
+        this.keepScroll = true; this.refresh();
+        break;
+      }
+      case 'rallySysCancel': {
+        View.rallyForSys = undefined;
+        this.keepScroll = true; this.refresh();
+        break;
+      }
+      case 'rallySysClear': {
+        const sy = G.sys[+x];
+        if (sy && sy.rally) delete sy.rally[0];
+        say('Ralli noktası kaldırıldı');
+        this.keepScroll = true; this.refresh();
         break;
       }
       case 'loopSet': {
@@ -7256,6 +7341,7 @@ const UI = {
       case 'dealRm': this.dealRm(x); break;
       case 'dealPact': this.dealPact(x); break;
       case 'dealSend': this.dealSend(); break;
+      case 'closeMarket': $('diploPane').classList.remove('show'); break;
       case 'closeDiplo': $('diploPane').classList.remove('show'); break;
       case 'spy': {
         if (assignSpy(G.p, +x)) this.openDiplo();
@@ -8215,6 +8301,46 @@ const UI = {
 
     if (s.owner === 0 && hasYard(s)){
       h += `<div class="ph">TERSANE</div>`;
+      /* ═══════════════════════════════════════════════════════
+         FAZ 67 — TERSANE RALLİ NOKTASI
+         Ralli yalnız filo panelinden atanabiliyordu. Artık
+         tersanenin kendi arayüzünde: bas, haritadan sistem seç,
+         bu tersaneden çıkan tüm ASKERİ gemiler oraya gitsin.
+         (Sivil gemiler Faz 62'deki kural gereği yerinde kalır.)
+         ═══════════════════════════════════════════════════════ */
+      if (s.owner === 0){
+        const ral = s.rally && s.rally[0];
+        const hedefSy = ral ? (ral.sys !== undefined ? G.sys[ral.sys] : null) : null;
+        const hedefFl = ral && ral.fleet !== undefined
+          ? G.fleets.find(q => q.id === ral.fleet && q.ships.length) : null;
+        const bekliyor = View.rallyForSys === s.id;
+        h += `<div class="ph">📍 RALLİ NOKTASI</div>`;
+        if (bekliyor){
+          h += `<div class="mini" style="color:#6ff2c8">Haritadan bir sistem seç —
+            buradan çıkan askeri gemiler oraya gidecek.</div>
+            <div class="act2"><button class="abtn" data-a="rallySysCancel">
+              ✕ VAZGEÇ</button></div>`;
+        } else if (ral){
+          h += `<div class="row"><span>Hedef</span>
+            <b style="color:#6ff2c8">${hedefFl ? esc(hedefFl.name || 'Filo')
+              : hedefSy ? esc(hedefSy.name) : '—'}</b></div>
+            <div class="mini">Yeni askeri gemiler otomatik olarak oraya intikal
+              eder${hedefFl ? ' ve filoya katılır' : ''}.</div>
+            <div class="act2">
+              <button class="abtn" data-a="rallySysSet" data-x="${s.id}">
+                📍 DEĞİŞTİR</button>
+              <button class="abtn" data-a="rallySysClear" data-x="${s.id}">
+                ✕ KALDIR</button></div>`;
+        } else {
+          h += `<div class="mini">Bu tersaneden çıkan askeri gemiler şu an
+            yerinde bekliyor. Bir toplanma noktası belirlersen doğrudan
+            cepheye gidebilirler.</div>
+            <div class="act2"><button class="abtn pri" data-a="rallySysSet"
+              data-x="${s.id}">📍 RALLİ NOKTASI SEÇ</button></div>`;
+        }
+      }
+
+
       if (s.queue.length){
         /* ═══ FAZ 60: SÜREKLİ ÜRETİM DÖNGÜSÜ ═══ */
         if (typeof loopBuildStatus === 'function' && s.owner === 0){
@@ -8765,6 +8891,28 @@ const UI = {
              Satırın hemen altına açılır; liste yerinde kalır. */
           if (acik){
             const pOK2 = canPeace(e,o), wOK2 = canDeclareWarOn(e,o);
+            /* ═══ FAZ 66: KARŞILIKLI PORTRELER ═══
+               Oyuncunun ve hedefin ırk portreleri karşı karşıya.
+               Çerçeve rengi ilişki durumunu anlatır: kırmızı
+               husumet, yeşil ittifak, sarı nötr. */
+            const cRenk = war ? '#ff5f6d' : ally ? '#65e08a'
+                        : rel >= 40 ? '#4fd8c4' : rel <= -40 ? '#ff9b3d' : '#f2d452';
+            const durumYazi = war ? '⚔ SAVAŞ' : ally ? '🤝 İTTİFAK'
+                        : rel >= 40 ? 'DOSTANE' : rel <= -40 ? 'GERGİN' : 'NÖTR';
+            h += `<div class="faceOff" style="--fo:${cRenk}">
+              <canvas class="dpPort foMe" width="96" height="96"
+                data-lk="${e.look||'humanoid'}" data-col="${e.col}"
+                data-pers="${typeof personaKey==='function'?personaKey(e):'yayilmaci'}"
+                data-mood="${war?-1:ally?1:0}"></canvas>
+              <div class="foMid">
+                <b style="color:${cRenk}">${durumYazi}</b>
+                <span class="foRel" style="color:${cRenk}">${rel>0?'+':''}${rel}</span>
+              </div>
+              <canvas class="dpPort foThem" width="96" height="96"
+                data-lk="${o.look||'humanoid'}" data-col="${o.col}"
+                data-pers="${typeof personaKey==='function'?personaKey(o):'yayilmaci'}"
+                data-mood="${war?-1:ally?1:0}"></canvas>
+            </div>`;
             const lvl2 = (typeof intelOf === 'function') ? intelOf(e, o.id) : 0;
             h += `<div class="dpAcc">
               <div class="mini">${esc((typeof personaOf==='function'
@@ -9078,8 +9226,11 @@ const UI = {
       f.members.forEach(m=>{
         const o = G.emps[m];
         if (!o) return;
-        h += `<div class="pchip"><span class="flag" style="background:${o.col}"></span>
-          <div class="pi"><div class="pn">${esc(o.name)}${m===0?' (sen)':''}</div>
+        /* FAZ 66: renk noktası yerine ırk portresi */
+        h += `<div class="pchip"><canvas class="dpPort chipPort" width="64" height="64"
+            data-lk="${o.look||'humanoid'}" data-col="${o.col}"
+            data-pers="${typeof personaKey==='function'?personaKey(o):'yayilmaci'}"></canvas>
+          <div class="pi"><div class="pn" style="color:${o.col}">${esc(o.name)}${m===0?' (sen)':''}</div>
           <div class="pm">${sysCount(o)} sistem · filo ${fmt(totalPower(o))}</div></div></div>`;
       });
 
@@ -11588,6 +11739,7 @@ const UI = {
       case 'event':   this.eventOpen(it.data); break;
       case 'anomaly': this.anomalyOpen(it.data.a, it.data.sys); break;
       case 'peace':   this.peaceOpen(G.emps[it.data]); break;
+      case 'pact':    this.pactOpen(it.data); break;   // FAZ 68
       case 'border':  this.borderOpen(G.emps[it.data.id], it.data.len); break;
       case 'fedvote': this.fedVoteOpen(it.data); break;
       case 'wardec':  this.warDecOpen(it.data); break;
@@ -11716,7 +11868,17 @@ const UI = {
   },
   /* FAZ 31: Kritik olaylar için görselli pencere açar. Zaten bir
      modal açıksa üstüne binmez — oyuncunun kararını bölmeyiz. */
-  eventArt(art, baslik, metin, cls){
+  /* ═══ FAZ 66: BİLDİRİMDE IRK PORTRESİ ═══
+     Devlet kimliği taşıyan bildirimlerde küçük bir portre. */
+  empChip(o, boy){
+    if (!o) return '';
+    const d = boy || 40;
+    return `<canvas class="dpPort notifPort" width="${d*2}" height="${d*2}"
+      style="width:${d}px;height:${d}px"
+      data-lk="${o.look||'humanoid'}" data-col="${o.col}"
+      data-pers="${typeof personaKey==='function'?personaKey(o):'yayilmaci'}"></canvas>`;
+  },
+  eventArt(art, baslik, metin, cls, kat, emp){
     /* ═══════════════════════════════════════════════════════════
        FAZ 58 — AKILLI FİLTRE (VARSAYILAN: GEÇME)
        ÖLÇÜM: eventArt'ın 17 çağrı noktasının TAMAMI casusluk,
@@ -11730,7 +11892,9 @@ const UI = {
        parametreyle açıkça 'siradan' işaretlenirse geçilebilir.
        Böylece ileride eklenecek yeni çağrı noktaları da yanlışlıkla
        susturulmaz — unutulursa kritik sayılır. */
-    const kat = arguments.length > 4 ? arguments[4] : 'kritik';
+    /* FAZ 66: kategori artık adlandırılmış parametre (kat).
+       Faz 58'deki arguments[4] okuması gereksiz kaldı. */
+    if (kat === undefined) kat = 'kritik';
     if (kat === 'siradan' && typeof AUTO_EVENT !== 'undefined' && AUTO_EVENT){
       const ozet = String(metin || '').replace(/\s+/g, ' ').trim();
       say('📜 ' + baslik + (ozet ? ' — ' + ozet.slice(0, 110) +
@@ -11739,7 +11903,7 @@ const UI = {
     }
     if (!$('modal').className.includes('hidden') && $('modal').innerHTML) return;
     this.openModal(
-      `<div class="mhd"><span>${esc(baslik)}</span></div>
+      `<div class="mhd">${emp ? this.empChip(emp, 34) : ''}<span>${esc(baslik)}</span></div>
        <div class="mbd"><div class="lead">${esc(metin)}</div></div>
        <div class="mft"><button class="ch" data-a="closem">
          <div class="cht">Anlaşıldı</div></button></div>`,
@@ -11907,6 +12071,59 @@ const UI = {
       this.closeModal(); this.refresh();
     });
   },
+  /* ═══ FAZ 68: AI PAKT TEKLİFİ ═══ */
+  pactOpen(d){
+    if (!d) return;
+    const o = G.emps[d.from];
+    if (!o || o.dead) return;
+    const spy = d.tur === 'spynet';
+    const bedel = spy ? 120 : 45;
+    const rel = Math.round(G.p.rel[o.id] || 0);
+    this.openModal(
+      `<div class="mhd">${this.empChip ? this.empChip(o, 34) : ''}<span>${
+         spy ? '🕸 CASUSLUK AĞI PAKTI' : '👁 SENSÖR ANLAŞMASI'}</span></div>
+       <div class="mbd"><div class="lead">${esc(o.name)} ${
+         spy ? 'istihbarat ağlarını seninkiyle birleştirmek istiyor.'
+             : 'harita görüşünü seninle paylaşmak istiyor.'}</div>
+         ${spy
+           ? 'Kabul edersen onun üçüncü devletler üzerindeki casusluk seviyesi ' +
+             'senin de olur — ve seninki onun. Bu çok mahrem bir bağdır; ' +
+             'savaşa girerseniz kendiliğinden kopar.'
+           : 'Harita görüşleri ve radar menzilleri paylaşılır. Gizli casusluk ' +
+             'bilgileri paylaşılmaz.'}
+         <div class="row" style="margin-top:8px"><span>İlişki</span>
+           <b style="color:${rel>=60?'#65e08a':'#f2d452'}">${rel>0?'+':''}${rel}</b></div>
+         <div class="row"><span>Sana maliyeti</span><b>${bedel} ◈</b></div></div>
+       <div class="mft">
+         <button class="ch" data-a="pactYes"><div class="cht">Kabul et</div>
+           <div class="chd">${bedel} etki harcanır</div></button>
+         <button class="ch" data-a="pactNo"><div class="cht">Reddet</div>
+           <div class="chd">İlişki hafif sarsılır</div></button>
+       </div>`, 'sci');
+    this._hook('pactYes', ()=>{
+      const e = G.p;
+      if ((e.res.etk || 0) < bedel){ say('Yetersiz etki', 'war'); this.closeModal(); return; }
+      e.res.etk -= bedel;
+      if (spy){
+        e.spynet = e.spynet || {}; o.spynet = o.spynet || {};
+        e.spynet[o.id] = true; o.spynet[e.id] = true;
+        say('🕸 Casusluk ağı paktı kuruldu — ' + o.name +
+            ' ne görüyorsa sen de görüyorsun', 'win');
+      } else {
+        e.visionFrom = e.visionFrom || {}; o.visionFrom = o.visionFrom || {};
+        e.visionFrom[o.id] = true; o.visionFrom[e.id] = true;
+        if (typeof shareVision === 'function') shareVision(o, e);
+        say('👁 Sensör anlaşması imzalandı', 'win');
+      }
+      o.rel[0] = clamp((o.rel[0] || 0) + 8, -100, 100);
+      this.closeModal(); this.refresh();
+    });
+    this._hook('pactNo', ()=>{
+      o.rel[0] = clamp((o.rel[0] || 0) - 6, -100, 100);
+      o._pactCd = (G.memAge || 0) + 48;     // bir daha çabuk sormasın
+      this.closeModal();
+    });
+  },
   peaceOpen(o){
     this.openModal(
       `<div class="mhd"><span>BARIŞ TEKLİFİ</span></div>
@@ -11963,6 +12180,63 @@ const UI = {
        <button class="ch" data-a="sandbox"><div class="cht">Galaksiyi yönetmeye devam et
          <small style="opacity:.7">Sandbox modu</small></div></button></div>`,
        win?'':'war');
+  },
+  /* ═══ FAZ 66: GALAKTİK PİYASA PANELİ ═══ */
+  openMarket(){
+    if (typeof marketInit !== 'function'){ say('Piyasa yok', 'war'); return; }
+    const e = G.p;
+    marketInit();
+    this.mkt = this.mkt || {sat:'min', al:'ala', mik:200};
+    const M = this.mkt;
+    const q = marketQuote(M.sat, M.al, M.mik);
+    let h = `<div class="dpBox"><div class="dpHd"><span>💱 GALAKTİK PİYASA</span>
+      <button class="riX" data-a="closeMarket">✕</button></div><div class="dpBody">`;
+    h += `<div class="mini">Kurlar arz ve talebe göre kayar. Çok alınan
+      pahalanır, çok satılan ucuzlar; zamanla taban değere döner.
+      Her takasta %${Math.round(MARKET_FEE*100)} komisyon kesilir.</div>`;
+    /* Kur tablosu */
+    h += `<div class="ph">GÜNCEL KURLAR</div>`;
+    MARKET_RES.forEach(r => {
+      const mul = G.market.mul[r];
+      const yon = mul > 1.05 ? {t:'▲', c:'#ff5f6d'} : mul < .95
+                ? {t:'▼', c:'#65e08a'} : {t:'—', c:'#7d90ad'};
+      h += `<div class="row"><span>${RES[r].ico||''} ${RES[r].n}</span>
+        <b style="color:${yon.c}">${marketPrice(r).toFixed(2)} ${yon.t}
+        <span style="font-size:9px;opacity:.7">(×${mul.toFixed(2)})</span></b></div>`;
+    });
+    /* Takas kurucu */
+    h += `<div class="ph">TAKAS</div><div class="mini">VER:</div><div class="act2">`;
+    MARKET_RES.forEach(r => {
+      h += `<button class="abtn ${M.sat===r?'pri':''}" data-a="mktSel"
+        data-x="sat:${r}">${RES[r].n}<br><span style="font-size:9px">${
+          Math.round(e.res[r]||0)}</span></button>`;
+    });
+    h += `</div><div class="mini">AL:</div><div class="act2">`;
+    MARKET_RES.filter(r => r !== M.sat).forEach(r => {
+      h += `<button class="abtn ${M.al===r?'pri':''}" data-a="mktSel"
+        data-x="al:${r}">${RES[r].n}</button>`;
+    });
+    h += `</div><div class="mini">MİKTAR:</div><div class="act2">`;
+    [100, 200, 500, 1000].forEach(v => {
+      h += `<button class="abtn ${M.mik===v?'pri':''}" data-a="mktSel"
+        data-x="mik:${v}">${v}</button>`;
+    });
+    h += `</div>`;
+    const yeter = (e.res[M.sat] || 0) >= M.mik;
+    h += `<div class="box" style="border-color:${yeter?'#6ff2c8':'#ff5f6d'}">
+      <div class="bt"><span>${M.mik} ${RES[M.sat].n}</span>
+        <b style="color:#6ff2c8">→ ${q.ok?Math.round(q.alinan):0} ${RES[M.al].n}</b></div>
+      <div class="bd">${q.ok
+        ? 'komisyon <b>' + Math.round(q.komisyon) + '</b> ' + RES[M.al].n +
+          ' · kur ' + q.kurSat.toFixed(2) + ' → ' + q.kurAl.toFixed(2)
+        : esc(q.why || '')}
+        ${yeter ? '' : '<br><b style="color:#ff5f6d">Yeterli kaynağın yok</b>'}</div>
+      <div class="act2"><button class="abtn ${yeter?'pri':'dis'}" data-a="mktTrade"
+        data-x="${M.sat}:${M.al}:${M.mik}">💱 TAKAS ET</button></div></div>`;
+    h += `</div></div>`;
+    const pane = $('diploPane');
+    pane.innerHTML = h;
+    pane.classList.add('show');
   },
   saveMenu(){
     const auto = G.autoSave !== false;
@@ -12824,6 +13098,27 @@ function setupClickHandler(e){
   setupClickHandler._el = el;
   setupClickHandler._t = stamp;
   const a = el.dataset.a, x = el.dataset.x;
+  /* ═══ FAZ 67: ŞABLON BUTONLARI ═══
+     KÖK NEDEN: tplSave/tplLoad/tplDel yalnız UI.act() içinde
+     tanımlıydı. Kurulum ekranı UI.act'ı HİÇ ÇAĞIRMIYOR — kendi
+     if/else zincirini kullanıyor. Butonlar bu yüzden ölüydü. */
+  if (a === 'tplSave'){
+    saveTemplate().then(ad => { say('💾 "' + ad + '" şablonu kaydedildi');
+      safeRenderSetup(); });
+    return;
+  }
+  if (a === 'tplLoad'){
+    const t = TEMPLATES.find(q => q && q._ad === x);
+    if (t && applyTemplate(t)) say('📂 "' + x + '" şablonu yüklendi');
+    else say('Şablon bulunamadı', 'war');
+    safeRenderSetup();
+    return;
+  }
+  if (a === 'tplDel'){
+    e.stopPropagation();
+    deleteTemplate(x).then(() => { say('Şablon silindi: ' + x); safeRenderSetup(); });
+    return;
+  }
   if (a === 'raceinfo'){ e.stopPropagation(); raceInfo(x); return; }
   if (a === 'closeinfo'){ closeRaceInfo(); return; }
   if (a === 'pickrace'){ CFG.race = x; CFG.color = RACES[x].col; closeRaceInfo(); safeRenderSetup(); return; }
@@ -12996,6 +13291,34 @@ document.addEventListener('pointerdown', ev => {
    dokunmak da kapatıyor — mobilde beklenen davranış.
    Menünün KENDİ içine dokunmak kapatmaz (seçim yapılabilsin).
    ═══════════════════════════════════════════════════════════════════ */
+/* ═══ FAZ 66: ESC — EKRANI TEMİZLE ═══
+   Sırayla: modal → yan paneller → alt menüler. Her basış bir
+   katman kapatır; hepsi kapalıysa hiçbir şey olmaz. */
+document.addEventListener('keydown', ev => {
+  if (ev.key !== 'Escape' && ev.key !== 'Esc') return;
+  let birSey = false;
+  /* FAZ 66 DÜZELTMESİ: className boş dizeyse (henüz sınıf
+     atanmamışsa) eski koşul `md.className &&` yüzünden dalı
+     ATLIYOR ama innerHTML doluysa modal gerçekten açıktır.
+     Ölçüt innerHTML + 'hidden' sınıfının YOKLUĞU olmalı. */
+  const md = document.getElementById('modal');
+  const modalAcik = md && md.innerHTML && md.innerHTML.length > 40 &&
+                    !(md.className || '').includes('hidden');
+  if (modalAcik){
+    try { UI.closeModal(); birSey = true; } catch(e){}
+  }
+  if (!birSey){
+    for (const id of ['diploPane','fedPane','cncPane','globalPane']){
+      const el = document.getElementById(id);
+      if (el && el.classList && el.classList.contains('show')){
+        el.classList.remove('show'); birSey = true;
+      }
+    }
+  }
+  if (!birSey) birSey = closeAllGroups();
+  if (birSey) ev.preventDefault();
+});
+
 function closeAllGroups(){
   let kapandi = false;
   for (const id of ['outMap', 'outEmp']){
@@ -13069,6 +13392,16 @@ const HOLD_MS = 450;
 let _holdTimer = null, _holdFired = false;
 
 document.addEventListener('pointerdown', ev => {
+  /* ═══ FAZ 67: KURULUM EKRANI YALITIMI ═══
+     Uzun basış yalnız OYUN İÇİNDE geçerli. Kurulum ekranı
+     açıkken (menu görünürken) hiç çalışmaz — orada her seçim
+     tek dokunuşla yapılır. */
+  const menu = document.getElementById('menu');
+  if (menu && !menu.classList.contains('hidden')){
+    _holdFired = false;
+    if (_holdTimer){ clearTimeout(_holdTimer); _holdTimer = null; }
+    return;
+  }
   const el = ev.target.closest && ev.target.closest('[data-hold]');
   _holdFired = false;
   if (_holdTimer){ clearTimeout(_holdTimer); _holdTimer = null; }
@@ -13101,7 +13434,11 @@ document.addEventListener('pointerup', ev => {
   const dx = Math.abs(ev.clientX - bas.x);
   const dy = Math.abs(ev.clientY - bas.y);
   if (dx > SCROLL_TOLERANS || dy > SCROLL_TOLERANS) return;   // KAYDIRMA
-  if (Date.now() - bas.t > TAP_MAX_MS) return;                // uzun basış
+  /* FAZ 67: kurulum ekranında süre sınırı yok — oyuncu düşünüp
+     parmağını bekletebilir, seçim yine de yapılır. */
+  const menu2 = document.getElementById('menu');
+  const kurulumda = menu2 && !menu2.classList.contains('hidden');
+  if (!kurulumda && Date.now() - bas.t > TAP_MAX_MS) return;  // uzun basış
   setupClickHandler(ev);
 }, {passive: true});
 

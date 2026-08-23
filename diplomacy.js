@@ -393,7 +393,8 @@ const DEAL_KINDS = {
   ally   :{n:'İttifak',           ico:'⚑'},
   warOn  :{n:'Üçüncü Tarafa Savaş',ico:'⚔'},
   peaceWith:{n:'Üçüncü Tarafla Barış',ico:'🤲'},
-  intel  :{n:'İstihbarat Paylaşımı',ico:'👁'},
+  intel  :{n:'Sensör Anlaşması',    ico:'👁'},
+  spynet :{n:'Casusluk Ağı Paktı',  ico:'🕸'},
   passage:{n:'Sınır Geçiş İzni',ico:'🚪'}
 };
 
@@ -410,7 +411,8 @@ function dealLabel(it){
     case 'ally':    return '⚑ İttifak';
     case 'warOn':   return '⚔ ' + (G.emps[it.target] ? G.emps[it.target].name : '?') + '\'a savaş ilanı';
     case 'peaceWith': return '🤲 ' + (G.emps[it.target] ? G.emps[it.target].name : '?') + ' ile barış';
-    case 'intel':   return '👁 İstihbarat paylaşımı';
+    case 'intel':   return '👁 Sensör anlaşması';
+    case 'spynet':  return '🕸 Casusluk ağı paktı';
     case 'passage': return '🚪 Sınır geçiş izni';
   }
   return '?';
@@ -505,6 +507,7 @@ function itemValue(e, it, other){
       return -60 * clamp(ratio, .4, 2.5);
     }
     case 'intel': return 45;
+    case 'spynet': return 120;      // FAZ 66: çok daha değerli
   }
   return 0;
 }
@@ -628,6 +631,21 @@ function applyItems(giver, taker, items){
         if (t && !t.dead && giver.war[t.id]) makePeace(giver, t);
         break;
       }
+      /* ═══ FAZ 66: CASUSLUK AĞI PAKTI ═══
+         Sensör anlaşmasından farkı: taraflar ÜÇÜNCÜ devletler
+         üzerindeki istihbarat seviyelerini havuzda birleştirir.
+         Ortağın bir devlette 3. seviye ağı varsa sen de o
+         devleti 3. seviyeden görürsün. Yüksek ilişki ister,
+         120 etkiye mal olur ve karşılıklıdır. */
+      case 'spynet':
+        taker.spynet = taker.spynet || {};
+        giver.spynet = giver.spynet || {};
+        taker.spynet[giver.id] = true;
+        giver.spynet[taker.id] = true;
+        if (typeof say === 'function' && (taker.id === 0 || giver.id === 0))
+          say('🕸 Casusluk ağı paktı — ortağın bildiği her şeyi artık sen de biliyorsun', 'sci');
+        break;
+
       case 'intel':
         taker.intel = taker.intel || {};
         taker.intel[giver.id] = Math.max(taker.intel[giver.id] || 0, 2);
@@ -3273,6 +3291,9 @@ function diploTick(){
   if (typeof aiDirectiveTick === 'function') aiDirectiveTick();    // FAZ 62
   if (typeof directiveTick === 'function') directiveTick();        // FAZ 61
   if (typeof schismTick === 'function') schismTick();              // FAZ 61
+  if (typeof marketTick === 'function') marketTick();              // FAZ 66
+  if (typeof aiMarketTick === 'function') aiMarketTick();          // FAZ 68
+  if (typeof aiIntelPactTick === 'function') aiIntelPactTick();    // FAZ 68
   if (typeof warSubsidyTick === 'function') warSubsidyTick();     // FAZ 45: savaş yardımı
   if (typeof visionTick === 'function') visionTick();             // FAZ 48: paylaşılan görüş
   if (typeof colossusGuardLock === 'function') colossusGuardLock(); // FAZ 31: koruma kilidi
@@ -6814,4 +6835,26 @@ function sabotageTick(){
         say('📦 ' + sy.name + ' lojistik ağı onarıldı', 'win');
     }
   }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 66 — HAVUZLANMIŞ İSTİHBARAT
+   Casusluk ağı paktı olan ortakların bir hedef üzerindeki
+   seviyeleri birleşir. En yüksek olan geçerli; ortak sayısı
+   arttıkça galaksinin görünmeyen köşesi kalmaz.
+   ═══════════════════════════════════════════════════════════════════ */
+function pooledIntel(e, targetId){
+  let en = (typeof intelOf === 'function') ? intelOf(e, targetId) : 0;
+  if (!e || !e.spynet) return en;
+  for (const pid in e.spynet){
+    if (!e.spynet[pid]) continue;
+    const ortak = G.emps[pid];
+    if (!ortak || ortak.dead || ortak.id === targetId) continue;
+    /* Savaşa girdiysek pakt fiilen ölür */
+    if (e.war[ortak.id]) continue;
+    const lv = (typeof intelOf === 'function') ? intelOf(ortak, targetId) : 0;
+    if (lv > en) en = lv;
+  }
+  return en;
 }
