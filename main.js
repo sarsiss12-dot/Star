@@ -3198,10 +3198,52 @@ function isSupplyNode(e, sys){
 }
 
 /* Filonun en yakın ikmal düğümüne sıçrama uzaklığı (BFS, sınırlı) */
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 63 — GALAKTİK GEÇİT LOJİSTİĞİ
+   Kullanılabilir bir geçidi olan sistem, başkent gibi tam ikmal
+   sağlar. Ağdaki geçitler arası mesafe SIFIR sayılır: bir uçtaki
+   filo, diğer uçtaki tersanenin hattındaymış gibi beslenir.
+   Güvenlik kilidi gateNetwork ile ortak — düşman geçidi işe yaramaz.
+   ═══════════════════════════════════════════════════════════════════ */
+function hasUsableGate(e, sys){
+  if (!sys || !sys.built || sys.built.kapi === undefined) return false;
+  if (sys.owner < 0) return false;
+  if (sys.owner === e.id) return true;
+  const o = G.emps[sys.owner];
+  if (!o || o.dead || o.wild || o.crisisSide) return false;
+  if (e.war[o.id]) return false;                       // düşman geçidi kapalı
+  if (e.ally && e.ally[o.id]) return true;
+  if (e.passage && e.passage[o.id]) return true;
+  if (typeof isVassal === 'function'){
+    if (isVassal(o) && o.overlord === e.id) return true;
+    if (isVassal(e) && e.overlord === o.id) return true;
+  }
+  return false;
+}
+
+/* Bu devletin erişebildiği geçit sistemleri — günlük önbellekli */
+function gateSupplyNodes(e){
+  if (!e) return [];
+  if (e._gateAt === G.day && e._gateList) return e._gateList;
+  const liste = [];
+  for (const sy of G.sys) if (hasUsableGate(e, sy)) liste.push(sy.id);
+  e._gateAt = G.day; e._gateList = liste;
+  return liste;
+}
+
 function supplyDistance(e, f){
   const sid = f.sys >= 0 ? f.sys : (f.mv ? f.mv.to : -1);
   if (sid < 0) return 0;
   if (isSupplyNode(e, G.sys[sid])) return 0;
+  /* FAZ 63: geçit varsa mesafe sıfır — ağ tek nokta gibi davranır */
+  const kapilar = gateSupplyNodes(e);
+  if (kapilar.length){
+    if (kapilar.indexOf(sid) >= 0) return 0;
+    /* Geçide komşuysak da ağa bağlıyız sayılır (1 atlama) */
+    const sy0 = G.sys[sid];
+    if (sy0 && sy0.lanes)
+      for (const l of sy0.lanes) if (kapilar.indexOf(l) >= 0) return 0;
+  }
   const gorulen = new Set([sid]);
   let sinir = [sid];
   for (let d = 1; d <= SUPPLY_LIMIT + 1; d++){
@@ -5556,7 +5598,21 @@ const View = {
        hakimiyet renkleri kalır — galaksi bir siyasi haritaya
        dönüşür. */
     this.politik = z < .05;
-    const pay = 90 / Math.max(.02, z);        // dünya birimi cinsinden pay
+    /* ═══ FAZ 64: CULLING PAYI GENİŞLETİLDİ ═══
+       ÖLÇÜM/RAPOR: 90 px pay, sistem etrafında çizilen en geniş
+       öğeler için yetmiyordu ve halkalar ekran kenarında BIÇAK
+       GİBİ KESİLİYORDU. En geniş çizimler:
+         · hakimiyet halesi (siyasi harita)      ~7 px
+         · radyasyon/enkaz halkaları             ~26 px
+         · ping halkası (genişleyen)             ~46 px
+         · sistem adı + tersane etiketi (altta)  ~24 px
+         · bölge adı (19 px font, ortalanmış)    ~120 px genişlik
+       Bunların hepsi merkez ekran DIŞINDAYKEN de görünür olmalı.
+       Pay 300 px'e çıkarıldı — istenen 200-300 aralığının üstü.
+       Maliyet: ULU galakside kare başına birkaç ek sistem taranır,
+       ölçülebilir bir fark yok (aşağıdaki testte doğrulandı). */
+    const RENDER_MARGIN = 300;               // ekran uzayında piksel
+    const pay = RENDER_MARGIN / Math.max(.02, z);   // dünya birimine çevir
     const halfW = this.vw / 2 / Math.max(.02, z);
     const halfH = this.vh / 2 / Math.max(.02, z);
     this.fx0 = this.cam.x - halfW - pay;
@@ -5786,7 +5842,7 @@ const View = {
         const sahip = s.owner >= 0 ? G.emps[s.owner] : null;
         if (sahip && !sahip.dead){
           /* FAZ 47: diplomatik modda renk ilişkiden gelir */
-          if (MAP_MODE === 'diplomasi'){
+          if (MAP_MODE === 'diplomasi' || MAP_MODE === 'savas'){
             const dc = diploColor(sahip);
             const yanip = G.p.war[sahip.id]
               ? (.55 + .45 * Math.sin(t / 260)) : 1;
@@ -5948,7 +6004,8 @@ const View = {
         g.strokeStyle = 'rgba(4,7,14,.92)';
         g.strokeText(s.name, p.x, ty);
         g.fillStyle = s.owner>=0
-          ? ((MAP_MODE === 'diplomasi') ? diploColor(G.emps[s.owner]) : G.emps[s.owner].col)
+          ? ((MAP_MODE === 'diplomasi' || MAP_MODE === 'savas')
+              ? diploColor(G.emps[s.owner]) : G.emps[s.owner].col)
           : 'rgba(214,228,246,.95)';
         g.fillText(s.name, p.x, ty);
         g.textBaseline = 'alphabetic';
@@ -6109,7 +6166,7 @@ const View = {
        Seviye 2   → hedef sistem + kesikli ok
        Seviye 3   → güç ve varış süresi (ETA) de listelenir
        Yalnız EKRANDA GÖRÜNEN hareketli filolar taranır. */
-    if (MAP_MODE === 'askeri'){
+    if (MAP_MODE === 'askeri' || RADAR_ON){
       g.save();
       g.textAlign = 'left';
       g.textBaseline = 'middle';
@@ -6117,12 +6174,22 @@ const View = {
         if (!f.mv || !f.ships || !f.ships.length) continue;
         if (!this.fleetVisible(f)) continue;
         const p0 = this.w2s(f.x, f.y);
-        if (p0.x < -60 || p0.y < -60 || p0.x > this.vw+60 || p0.y > this.vh+60) continue;
+        /* FAZ 64: rota etiketi sağa doğru ~140 px uzayabiliyor */
+        if (p0.x < -140 || p0.y < -140 ||
+            p0.x > this.vw+140 || p0.y > this.vh+140) continue;
 
         const kendi = f.e === 0;
         const lvl = kendi ? 3
           : (typeof intelOf === 'function' ? intelOf(G.p, f.e) : 0);
-        if (lvl < 2) continue;              // seviye 0-1: rota gizli
+        /* FAZ 63: gemi modunda GÖRÜŞ yeterli — istihbarat aranmaz;
+           askeri modda kademeli gizlilik korunur. */
+        if (RADAR_ON){
+          /* Radar görüşe dayanır: gördüğün her filoyu izlersin.
+             İstihbarat seviyesi yalnız ETİKET AYRINTISINI belirler
+             (aşağıda), rotanın görünmesini değil. */
+          if (!kendi && lvl < 1 && !pVis(G.sys[f.sys >= 0 ? f.sys :
+              (f.mv ? f.mv.to : 0)])) continue;
+        } else if (lvl < 2) continue;       // askeri mod: kademeli gizlilik
 
         const hedef = G.sys[f.mv.to];
         if (!hedef) continue;
@@ -6231,7 +6298,9 @@ const View = {
     for (const f of G.fleets){
       if (!this.fleetVisible(f)) continue;
       const p = this.w2s(f.x, f.y);
-      if (p.x<-40||p.y<-40||p.x>this.vw+40||p.y>this.vh+40) continue;
+      /* FAZ 64: 40 → 120. Filo ikonunun ALTINA güç ve durum
+         yazısı düşüyor; 40 px payla o yazılar kenarda kesiliyordu. */
+      if (p.x<-120||p.y<-120||p.x>this.vw+120||p.y>this.vh+120) continue;
       /* FAZ 45: siyasi haritada filo modelleri çizilmez — bu
          zoom'da zaten birkaç piksel. Yalnız hareket hâlindekiler
          renkli birer nokta olarak görünür ki cepheler okunsun. */
@@ -6280,6 +6349,84 @@ const View = {
         g.restore();
         g.textAlign = 'center';
       }
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       FAZ 63 — GEMİ MODU: TÜM RALLİ HATLARI
+       Normalde yalnız seçili tersanenin hattı çizilir; bu modda
+       hepsi birden görünür — lojistik ağının tamamı tek bakışta.
+       ═══════════════════════════════════════════════════════════ */
+    if (RADAR_ON){
+      g.save();
+      g.strokeStyle = 'rgba(111,242,200,.42)';
+      g.lineWidth = 1.1;
+      g.setLineDash([4, 6]);
+      g.lineDashOffset = -(t / 50) % 10;
+      for (const sy of G.sys){
+        if (!sy.rally || !sy.rally[0]) continue;
+        const ral = sy.rally[0];
+        const hf = ral.fleet !== undefined
+          ? G.fleets.find(q => q.id === ral.fleet && q.ships.length) : null;
+        let hx, hy;
+        if (hf){ hx = hf.x; hy = hf.y; }
+        else if (ral.sys !== undefined && G.sys[ral.sys]){
+          hx = G.sys[ral.sys].x; hy = G.sys[ral.sys].y;
+        }
+        if (hx === undefined) continue;
+        if (!this.inView(sy.x, sy.y) && !this.inView(hx, hy)) continue;
+        const a = this.w2s(sy.x, sy.y), b = this.w2s(hx, hy);
+        g.beginPath(); g.moveTo(a.x, a.y); g.lineTo(b.x, b.y); g.stroke();
+      }
+      g.setLineDash([]);
+      g.restore();
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       FAZ 63 — SAVAŞ MODU: HUSUMET AĞI
+       Savaşan her devlet çiftinin BAŞKENTLERİ arasına kırmızı,
+       nabız atan bir hat çizilir. Kim kiminle savaşıyor, tek
+       bakışta okunur. Kendi savaşlarımız daha parlak.
+       ═══════════════════════════════════════════════════════════ */
+    if (MAP_MODE === 'savas'){
+      g.save();
+      const nb = .55 + .45 * Math.sin(t / 320);
+      const cizildi = {};
+      for (const a of G.emps){
+        if (a.dead || a.wild || a.crisisSide) continue;
+        for (const wid in a.war){
+          if (!a.war[wid]) continue;
+          const b = G.emps[wid];
+          if (!b || b.dead || b.wild || b.crisisSide) continue;
+          const anahtar = Math.min(a.id, b.id) + '_' + Math.max(a.id, b.id);
+          if (cizildi[anahtar]) continue;
+          cizildi[anahtar] = 1;
+          const sa = G.sys[a.home], sb2 = G.sys[b.home];
+          if (!sa || !sb2) continue;
+          /* Görüş: en az bir tarafı tanımalıyız */
+          if (!G.p.contact[a.id] && !G.p.contact[b.id] && a.id !== 0 && b.id !== 0)
+            continue;
+          if (!this.inView(sa.x, sa.y) && !this.inView(sb2.x, sb2.y)) continue;
+          const bizim = (a.id === 0 || b.id === 0);
+          const pa = this.w2s(sa.x, sa.y), pb = this.w2s(sb2.x, sb2.y);
+          g.strokeStyle = bizim
+            ? 'rgba(255,95,109,' + (nb * .95).toFixed(2) + ')'
+            : 'rgba(255,95,109,' + (nb * .38).toFixed(2) + ')';
+          g.lineWidth = bizim ? 2.4 : 1.3;
+          g.setLineDash(bizim ? [] : [7, 5]);
+          g.beginPath(); g.moveTo(pa.x, pa.y); g.lineTo(pb.x, pb.y); g.stroke();
+          /* Orta noktada çatışma işareti */
+          if (bizim){
+            const mx = (pa.x + pb.x) / 2, my = (pa.y + pb.y) / 2;
+            g.fillStyle = 'rgba(255,95,109,' + nb.toFixed(2) + ')';
+            g.font = 'bold 13px ui-monospace,monospace';
+            g.textAlign = 'center';
+            g.fillText('⚔', mx, my + 4);
+          }
+        }
+      }
+      g.setLineDash([]);
+      g.restore();
+      g.textAlign = 'center';
     }
 
     this.drawPings(g, t);               // FAZ 47: bildirim ping halkası
@@ -6467,24 +6614,49 @@ const UI = {
        <button class="tool" data-a="home" title="Anavatan">⌂</button>
        <button class="tool" data-a="fit" title="Galaksi">✧</button>
        <button class="tool" data-a="save" title="Kaydet">▤</button>
-       <button class="tool" id="bgBtn" data-a="bgTog"
-         title="Arka planı aç/kapat">🌌</button>
-       <button class="tool" id="autoEvBtn" data-a="autoEvent"
-         title="Olayları otomatik geç — pencere açılmaz">⚡</button>
+       <!-- FAZ 64: 🌌 arka plan ve ⚡ otomatik olay ikonları
+            kaldırıldı — ikisi de Faz 62'de "KAYIT VE AYARLAR"
+            penceresine taşınmıştı, burada tekrar duruyorlardı. -->
        <div class="toolSep"></div>
-       <button class="tool mapMode" id="mm_siyasi" data-a="mapMode" data-x="siyasi"
-         title="Siyasi harita">🌐</button>
-       <button class="tool mapMode" id="mm_diplomasi" data-a="mapMode" data-x="diplomasi"
-         title="Diplomatik harita">🤝</button>
-       <button class="tool mapMode" id="mm_askeri" data-a="mapMode" data-x="askeri"
-         title="Askeri harita — filo rotaları">⚔</button>
-       <div class="toolSep"></div>
-       <button class="tool" id="bilimBtn" data-a="globalPane" data-x="bilim" title="Bilim">✦</button>
-       <button class="tool" id="impBtn" data-a="globalPane" data-x="imp" title="Devlet">👑</button>
-       <button class="tool" data-a="diploPane" title="Diplomasi">🤝</button>
-       <div class="toolSep"></div>
-       <button class="tool" id="fedBtn" data-a="fedPane" title="Federasyon">🏛</button>
-       <button class="tool" id="cncBtn" data-a="cncPane" title="Galaktik Konsey">🌐</button>`;
+       <!-- ═══ FAZ 64: KATEGORİ 1 — HARİTA MODLARI ═══
+            5 mod tek butonda toplandı. Basınca yana açılır. -->
+       <div class="toolGrp" id="grpMap">
+         <button class="tool grpHead" data-a="grpTog" data-x="map"
+           title="Harita modları">🗺<i class="grpDot" id="mapDot">🌐</i></button>
+         <div class="grpOut" id="outMap">
+           <button class="tool mapMode" id="mm_siyasi" data-a="mapMode" data-x="siyasi"
+             title="Siyasi">🌐<span>Siyasi</span></button>
+           <button class="tool mapMode" id="mm_diplomasi" data-a="mapMode" data-x="diplomasi"
+             title="Diplomatik">🤝<span>Diplomatik</span></button>
+           <button class="tool mapMode" id="mm_askeri" data-a="mapMode" data-x="askeri"
+             title="Askeri">⚔<span>Askeri</span></button>
+           <button class="tool mapMode" id="mm_savas" data-a="mapMode" data-x="savas"
+             title="Savaş">🔥<span>Savaş</span></button>
+         </div>
+       </div>
+       <!-- ═══ FAZ 65: BAĞIMSIZ RADAR KATMANI ═══
+            Harita modundan bağımsız. Hangi zemin açık olursa
+            olsun filo hareketleri üstüne binebilir. -->
+       <button class="tool radarBtn" id="radarBtn" data-a="radarTog"
+         title="Radar — filo hareketleri ve ralli hatları">🚀</button>
+       <!-- ═══ FAZ 64: KATEGORİ 2 — DEVLET VE DİPLOMASİ ═══ -->
+       <div class="toolGrp" id="grpEmp">
+         <button class="tool grpHead" data-a="grpTog" data-x="emp"
+           title="İmparatorluk">👑</button>
+         <div class="grpOut" id="outEmp">
+           <button class="tool" id="impBtn" data-a="globalPane" data-x="imp"
+             title="Devlet">👑<span>Devlet</span></button>
+           <button class="tool" id="bilimBtn" data-a="globalPane" data-x="bilim"
+             title="Bilim">✦<span>Bilim</span></button>
+           <button class="tool" data-a="diploPane" title="Diplomasi">🤝<span>Diplomasi</span></button>
+           <button class="tool" data-a="tab" data-x="intel"
+             title="İstihbarat">🕵<span>İstihbarat</span></button>
+           <button class="tool" id="cncBtn" data-a="cncPane"
+             title="Galaktik Konsey">🌐<span>Konsey</span></button>
+           <button class="tool" id="fedBtn" data-a="fedPane"
+             title="Federasyon">🏛<span>Federasyon</span></button>
+         </div>
+       </div>`;
     document.body.addEventListener('click', e=>{
       const el = e.target.closest('[data-a]');
       if (!el) return;
@@ -6541,8 +6713,13 @@ const UI = {
       case 'home': { const h=G.sys[G.p.home]; View.center(h.x,h.y); View.cam.z=Math.max(View.cam.z,.4); View.selSys=h; this.tab('sistem'); break; }
       case 'fit': View.fit(); break;
       case 'save': this.saveMenu(); break;
-      case 'diploPane': this.openDiplo(); break;
-      case 'globalPane': this.openGlobal(x); break;
+      /* FAZ 65: panel açılınca alt menü de kapansın */
+      case 'diploPane':
+        if (typeof closeAllGroups === 'function') closeAllGroups();
+        this.openDiplo(); break;
+      case 'globalPane':
+        if (typeof closeAllGroups === 'function') closeAllGroups();
+        this.openGlobal(x); break;
       case 'advClose': this.closeModal(); break;
       case 'advNever': {
         ADVISOR_OFF = true;
@@ -6654,13 +6831,42 @@ const UI = {
         this.keepScroll = true; this.refresh();
         break;
       }
+      case 'radarTog': {
+        RADAR_ON = !RADAR_ON;
+        const rb = $('radarBtn');
+        if (rb) rb.className = 'tool radarBtn' + (RADAR_ON ? ' on' : '');
+        try { storeSet('yh_radar', RADAR_ON ? 'on' : 'off'); } catch(err){}
+        say(RADAR_ON
+          ? '🚀 Radar açık — filo hareketleri ve ralli hatları görünür'
+          : '🚀 Radar kapalı');
+        break;
+      }
+      case 'grpTog': {
+        /* ═══ FAZ 64: ALT MENÜ AÇ/KAPA ═══
+           Aynı anda tek grup açık kalır; ikinciye basınca ilki
+           kapanır. Ekranı kapatmasın diye yana doğru açılıyor. */
+        const hedef = x === 'map' ? 'outMap' : 'outEmp';
+        const diger = x === 'map' ? 'outEmp' : 'outMap';
+        const el2 = $(hedef), el3 = $(diger);
+        const acik = el2 && el2.classList.contains('open');
+        if (el3) el3.classList.remove('open');
+        if (el2) el2.classList.toggle('open', !acik);
+        break;
+      }
       case 'mapMode': {
         MAP_MODE = x;
-        ['siyasi','diplomasi','askeri'].forEach(k=>{
+        ['siyasi','diplomasi','askeri','savas'].forEach(k=>{
           const b = $('mm_' + k);
           if (b) b.className = 'tool mapMode' + (k === x ? ' on' : '');
         });
-        const ad = x === 'siyasi' ? 'Siyasi' : x === 'diplomasi' ? 'Diplomatik' : 'Askeri';
+        /* FAZ 64: seçim yapılınca alt menü kapanır, başlık
+           butonundaki küçük rozet aktif modu gösterir. */
+        if (typeof closeAllGroups === 'function') closeAllGroups();
+        const dot = $('mapDot');
+        if (dot) dot.textContent = {siyasi:'🌐', diplomasi:'🤝',
+                                    askeri:'⚔', savas:'🔥'}[x] || '🌐';
+        const ad = {siyasi:'Siyasi', diplomasi:'Diplomatik',
+                    askeri:'Askeri', savas:'Savaş'}[x] || x;
         say('🗺 ' + ad + ' harita modu');
         break;
       }
@@ -6943,7 +7149,8 @@ const UI = {
         break;
       }
       case 'fedPane': this.openFed(); break;
-      case 'cncPane': this.openCouncil(); break;
+      case 'cncPane':
+        if (typeof closeAllGroups === 'function') closeAllGroups(); this.openCouncil(); break;
       case 'cncFound': {
         const r = foundCouncil(G.p);
         if (!r.ok) say(r.why, 'war');
@@ -7325,6 +7532,49 @@ const UI = {
         break;
       }
       case 'bInfo': {
+        /* ═══ FAZ 63: UZUN BASIŞ BİLGİSİ GENİŞLETİLDİ ═══
+           Artık gemi ve uzay yapısı kartları da bilgi veriyor.
+           Anahtar "ship:kru" / "struct:kapi" biçiminde gelir. */
+        if (x.indexOf(':') > 0){
+          const [tur, key] = x.split(':');
+          if (tur === 'ship' && SHIPS[key]){
+            const S = SHIPS[key];
+            const satir = (ad, v, renk) => v !== undefined && v !== 0
+              ? `<div class="row"><span>${ad}</span><b${renk?` style="color:${renk}"`:''}>${v}</b></div>` : '';
+            this.openModal(
+              `<div class="mhd"><span>${esc(S.n)}</span></div>
+               <div class="mbd">
+                 ${satir('Gövde', S.hull)}
+                 ${satir('Kalkan', S.sh)}
+                 ${satir('Hasar', S.dmg, '#ff5f6d')}
+                 ${satir('Hız', S.spd)}
+                 ${satir('Kapasite yükü', S.cap)}
+                 ${satir('Aylık bakım', S.up, '#ff9b3d')}
+                 ${S.rol ? `<div class="row"><span>Rol</span><b>${esc(S.rol)}</b></div>` : ''}
+                 <div class="ph">MALİYET</div>
+                 ${Object.entries(S.cost||{}).map(([r,v])=>
+                   `<div class="row"><span>${RES[r].n}</span><b>${v}</b></div>`).join('')}
+               </div>
+               <div class="mft"><button class="ch" data-a="closem">
+                 <div class="cht">Kapat</div></button></div>`);
+            break;
+          }
+          if (tur === 'struct' && STRUCTS[key]){
+            const T = STRUCTS[key];
+            this.openModal(
+              `<div class="mhd"><span>${T.ico||''} ${esc(T.n)}</span></div>
+               <div class="mbd"><div class="lead">${esc(T.d || '')}</div>
+                 <div class="ph">MALİYET</div>
+                 ${Object.entries(T.c||{}).map(([r,v])=>
+                   `<div class="row"><span>${RES[r].n}</span><b>${v}</b></div>`).join('')}
+                 <div class="row"><span>Süre</span><b>${T.ay} ay</b></div>
+                 ${T.mega ? '<div class="mini" style="color:#ff9b3d">Megayapı — inşası galaksiye duyurulur.</div>' : ''}
+               </div>
+               <div class="mft"><button class="ch" data-a="closem">
+                 <div class="cht">Kapat</div></button></div>`);
+            break;
+          }
+        }
         const B = BUILDINGS[x];
         if (!B) break;
         const gain = Object.entries(B.g||{}).map(([r,v])=>
@@ -7779,14 +8029,19 @@ const UI = {
           }
 
           /* ═══ FAZ 61: YÖNELİM OTOMASYONU ═══ */
-          if (typeof directiveStatus === 'function' && pl.owner === 0 && pl.col.f){
+          /* FAZ 63: odak olmasa da anahtar görünür — oyuncu önce
+             otomasyonu açıp sonra odak seçebilir. */
+          if (typeof directiveStatus === 'function' && pl.owner === 0){
             const st = pl.col.auto ? directiveStatus(e, pl.col) : null;
             const renk = !pl.col.auto ? '#7d90ad'
                        : (st && st.dur) ? '#ff9b3d' : '#65e08a';
             h += `<div class="row"><span>🏗 Otomatik inşa</span>
               <b style="color:${renk}">${pl.col.auto
                 ? (st && st.dur ? 'BEKLİYOR' : 'AKTİF') : 'kapalı'}</b></div>`;
-            if (pl.col.auto && st && st.dur)
+            if (!pl.col.f)
+              h += `<div class="mini" style="color:#ff9b3d">Önce bir odak seç —
+                otomasyon o odağın bina planını uygular.</div>`;
+            else if (pl.col.auto && st && st.dur)
               h += `<div class="mini" style="color:#ff9b3d">${esc(st.why)}</div>`;
             else if (pl.col.auto && st && st.bina)
               h += `<div class="mini">Sırada: <b>${esc(BUILDINGS[st.bina].n)}</b>
@@ -8016,7 +8271,7 @@ const UI = {
         const locked = d.tech && !e.techs[d.tech];
         const cost = shipCost(e,k);
         const afford = Object.keys(cost).every(r=>e.res[r]>=cost[r]);
-        h += `<button class="abtn ${locked||!afford?'dis':''}" data-a="ship" data-x="${s.id}:${k}" title="${d.n}">${d.ab}<br>` +
+        h += `<button class="abtn ${locked||!afford?'dis':''}" data-a="ship" data-hold="ship:${k}" data-x="${s.id}:${k}" title="${d.n}">${d.ab}<br>` +
              `<span style="font-size:9px">${locked?'<span style="color:#7d90ad">KİLİTLİ</span>':
                Object.entries(cost).map(([r,v])=>`<span style="color:${e.res[r]>=v?RES[r].c:'#ff5f6d'}">${RES[r].ico}${v}</span>`).join(' ')}</span></button>`;
       }
@@ -12734,7 +12989,74 @@ document.addEventListener('pointerdown', ev => {
   _tapBas = {x: ev.clientX, y: ev.clientY, t: Date.now(), el};
 }, {passive: true});
 
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 65 — DIŞARI DOKUNUNCA ALT MENÜLERİ KAPAT
+   Alt menüler yalnız kendi başlığına tekrar basınca kapanıyordu.
+   Artık harita boşluğuna ya da menü dışındaki herhangi bir yere
+   dokunmak da kapatıyor — mobilde beklenen davranış.
+   Menünün KENDİ içine dokunmak kapatmaz (seçim yapılabilsin).
+   ═══════════════════════════════════════════════════════════════════ */
+function closeAllGroups(){
+  let kapandi = false;
+  for (const id of ['outMap', 'outEmp']){
+    const el = document.getElementById(id);
+    if (el && el.classList && el.classList.contains('open')){
+      el.classList.remove('open');
+      kapandi = true;
+    }
+  }
+  return kapandi;
+}
+
+document.addEventListener('pointerdown', ev => {
+  /* Açık menü yoksa boşuna çalışma */
+  const varMi = ['outMap','outEmp'].some(id => {
+    const el = document.getElementById(id);
+    return el && el.classList && el.classList.contains('open');
+  });
+  if (!varMi) return;
+  /* Dokunulan yer bir grubun İÇİ mi ya da grup başlığı mı? */
+  const t = ev.target;
+  if (t && t.closest){
+    if (t.closest('.toolGrp')) return;      // menünün kendisi — dokunma
+  }
+  closeAllGroups();
+}, true);                                    // yakalama evresi: her şeyden önce
+
 document.addEventListener('pointercancel', () => { _tapBas = null; }, {passive: true});
+
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 65 — DIŞARI TIKLAYINCA ALT MENÜLERİ KAPAT
+   Açık .grpOut menüleri yalnız kendi başlığına tekrar basınca
+   kapanıyordu. Artık menünün ya da başlık butonunun DIŞINDA
+   herhangi bir yere dokunmak da kapatıyor — haritaya, panele,
+   nereye olursa.
+   ═══════════════════════════════════════════════════════════════════ */
+function closeToolGroups(){
+  let kapandi = false;
+  const acik = document.querySelectorAll
+    ? document.querySelectorAll('.grpOut.open') : [];
+  for (const el of acik){ el.classList.remove('open'); kapandi = true; }
+  return kapandi;
+}
+
+document.addEventListener('pointerdown', ev => {
+  /* Grubun kendi içine ya da başlık butonuna dokunulduysa karışma —
+     o zaten kendi mantığıyla açılıp kapanıyor. */
+  const ic = ev.target.closest && ev.target.closest('.toolGrp');
+  if (ic) return;
+  closeToolGroups();
+}, {capture: true, passive: true});
+
+/* FAZ 64: alt menü dışına dokununca kapansın */
+document.addEventListener('pointerdown', ev => {
+  const grp = ev.target.closest && ev.target.closest('.toolGrp');
+  if (grp) return;                        // grubun içindeyiz
+  ['outMap','outEmp'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.classList.remove('open');
+  });
+}, {passive: true});
 
 /* ═══════════════════════════════════════════════════════════════════
    FAZ 62 — UZUN BASIŞ BİLGİ (data-hold)
@@ -13013,13 +13335,32 @@ let BG_OFF = false;
    'diplomasi' → oyuncuya göre ilişki renkleri
    'askeri'    → istihbarata göre kademeli filo rota vektörleri
    ═══════════════════════════════════════════════════════════════════ */
+/* FAZ 63: 'savas' (husumet ağı) modu eklendi.
+   FAZ 65: 'gemi' modu listeden ÇIKARILDI — artık bağımsız bir
+   katman (RADAR_ON). Zemin haritası hangi modda olursa olsun
+   filo hareketleri üstüne bindirilebiliyor. Birbirini dışlayan
+   bir seçim olması stratejik olarak yanlıştı: oyuncu savaş
+   ağını görürken filoları da görmek istiyor. */
 let MAP_MODE = 'siyasi';
+let RADAR_ON = false;
 /* FAZ 47: küçük olayları otomatik çöz (ekonomi + minör anomali) */
 let AUTO_EVENT = false;
 
 /* Diplomatik moda göre bir devletin rengi */
 function diploColor(o){
   const e = G.p;
+  /* FAZ 63: savaş modunda herhangi bir savaşın içindeki devlet
+     kırmızıya döner — barıştakiler soluk gri kalır. */
+  if (MAP_MODE === 'savas'){
+    if (!o) return '#3a4356';
+    if (o.wild || o.crisisSide) return '#5a2d8f';
+    let savasta = false;
+    for (const w in o.war)
+      if (o.war[w] && G.emps[w] && !G.emps[w].dead) savasta = true;
+    if (!savasta) return '#3a4356';
+    if (e.war[o.id] || o.id === e.id) return '#ff5f6d';   // bizimki parlak
+    return '#a83a44';                                      // başkalarınınki koyu
+  }
   if (!o || !e || o.id === e.id) return '#6ff2c8';
   if (o.wild) return '#7a8596';
   if (o.crisisSide) return '#5a2d8f';
@@ -13034,6 +13375,15 @@ function diploColor(o){
 /* FAZ 47: otomatik olay tercihi kalıcı */
 async function loadAutoEventPref(){
   try { const v = await storeGet('yh_autoev'); AUTO_EVENT = (v === 'on'); } catch(e){}
+}
+/* FAZ 65: radar katmanı tercihi kalıcı */
+async function loadRadarPref(){
+  try {
+    const v = await storeGet('yh_radar');
+    RADAR_ON = (v === 'on');
+    const rb = document.getElementById('radarBtn');
+    if (rb) rb.className = 'tool radarBtn' + (RADAR_ON ? ' on' : '');
+  } catch(e){}
 }
 async function loadBgPref(){
   try {
@@ -13297,6 +13647,17 @@ function forceRedraw(){
 /* Bazı cihazlar sekme dönüşünde visibilitychange yerine
    pageshow/focus üretiyor — üçünü de dinliyoruz. */
 window.addEventListener('pageshow', ()=>{ forceRedraw(); });
+/* FAZ 63: ekran döndürme / klavye açılması / pencere boyutu
+   değişimi de bağlamı bozabiliyor — agresif tetikleme. */
+let _rsTimer = null;
+window.addEventListener('resize', ()=>{
+  if (_rsTimer) clearTimeout(_rsTimer);
+  _rsTimer = setTimeout(()=>{ _rsTimer = null; forceRedraw(); }, 90);
+});
+window.addEventListener('orientationchange', ()=>{
+  forceRedraw();
+  setTimeout(forceRedraw, 300);      // dönüş animasyonu bitince
+});
 window.addEventListener('focus', ()=>{ if (!document.hidden) forceRedraw(); });
 
 /* Tuval bağlamı gerçekten kaybolursa tarayıcı bunu bildirir */
@@ -13483,6 +13844,7 @@ window.addEventListener('load', ()=>{
   loadAudioPref();
   loadBgPref();                 // FAZ 19: ses tercihini oku
   loadAutoEventPref();          // FAZ 47: otomatik olay tercihi
+  loadRadarPref();              // FAZ 65: radar katmanı
   loadTemplates().then(()=>{    // FAZ 61: kurulum şablonları
     try { if (SETUP_STEP && $('menu') && !$('menu').classList.contains('hidden'))
       safeRenderSetup(); } catch(e){}

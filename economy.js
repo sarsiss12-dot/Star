@@ -18,6 +18,11 @@ function setFocus(e, sys, pl, key){
   if ((col.fcd||0) > 0 || col.f === key) return false;
   if (hasCivic(e,'oneparty') && col.fSet) return false;   // Tek Parti: odak kalıcı
   col.f = key;
+  /* FAZ 63: ODAK ARTIK OTO-İNŞAYI AÇMAZ.
+     Odak yalnız üretim çarpanı verir; otomatik inşa ayrı bir
+     karardır (col.auto) ve gezegen panelindeki kendi anahtarıyla
+     açılır. İkisini ayırmak oyuncuya "bonus istiyorum ama binayı
+     kendim seçeceğim" seçeneğini geri veriyor. */
   col.fcd = hasPerk(e,'ironWill') ? 0 : FOCUS_COOLDOWN;
   col.fSet = true;
   sys.def = sysDefense(sys);
