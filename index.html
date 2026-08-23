@@ -690,10 +690,17 @@ body.fauxFull canvas#map{width:100vw !important;height:100dvh !important}
    tetiklenen işlemlerin sonucu yazılıyor ama görünmüyordu.
    Artık en üstte; pointer-events:none olduğu için tıklamayı engellemez. */
 #alerts{position:fixed;left:44px;top:calc(var(--top) + 6px);z-index:900;pointer-events:none;
-  display:flex;flex-direction:column;gap:3px;pointer-events:none;max-width:44%}
-.alert{background:rgba(11,16,28,.94);border-left:2px solid var(--phos);padding:5px 8px;
-  font-family:var(--mono);font-size:10px;color:var(--bone);letter-spacing:.02em;
-  animation:slideIn .2s ease;line-height:1.35}
+  display:flex;flex-direction:column;gap:2px;pointer-events:none;max-width:38%}
+/* ═══ FAZ 70: BİLDİRİMLER KÜÇÜLDÜ ═══
+   10px/5-8px padding ekranda çok yer kaplıyordu. Font 8.5px'e,
+   iç boşluk 3px/6px'e indi; satır aralığı sıkıldı ve uzun
+   metinler iki satırla sınırlandı. */
+.alert{background:rgba(11,16,28,.93);border-left:2px solid var(--phos);
+  padding:3px 6px;border-radius:3px;
+  font-family:var(--mono);font-size:8.5px;color:var(--bone);letter-spacing:.01em;
+  animation:slideIn .18s ease;line-height:1.28;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
+  overflow:hidden;text-overflow:ellipsis}
 .alert.war{border-left-color:var(--bad);color:#ffc6ca}
 .alert.win{border-left-color:var(--good);color:#c3f5d3}
 .alert.sci{border-left-color:var(--plasma);color:#d3ccff}
@@ -831,7 +838,7 @@ body.fauxFull canvas#map{width:100vw !important;height:100dvh !important}
     border:1px solid var(--line);box-shadow:0 24px 80px rgba(0,0,0,.6)}
   #modal .mbox{width:min(720px,62vw);max-height:88vh}
   /* Bildirimler haritanın üstünü kapatmasın */
-  #alerts{max-width:min(420px,26vw)}
+  #alerts{max-width:min(360px,24vw)}
   /* Diplomasi kartları iki sütuna yayılsın — dikey kaydırma azalsın */
   .dpBody{column-gap:10px}
 }
@@ -979,10 +986,27 @@ body.fauxFull canvas#map{width:100vw !important;height:100dvh !important}
      economy.js   : üretim, ticaret, ambargo
      type="module" KULLANILMAZ — modül kapsamı global fonksiyonları
      gizler ve yerel dosyada (file://) CORS hatası verir. -->
+<!-- ═══ FAZ 74: MODÜL YÜKLEME SIRASI ═══
+     Dosyalar ES modülü değil, klasik script — hepsi aynı global
+     kapsamı paylaşıyor. Fonksiyon bildirimleri hoisting sayesinde
+     sıra bağımsız, AMA const/let bildirimleri değil (TDZ).
+     Bu yüzden veri tablolarını taşıyan main.js MUTLAKA ilk sırada.
+
+     1. main.js     — veri tabloları (RACES, SHIPS, PLANETS…),
+                      G durumu, oyun döngüsü, galaksi üretimi
+     2. map.js      — View (kamera/çizim) + ART (sprite üreteci)
+     3. combat.js   — battleRound
+     4. ai.js       — yapay zeka kararları
+     5. diplomacy.js— diplomasi, konsey, federasyon, vasallık
+     6. economy.js  — ekonomi, koloni, kuşatma, piyasa
+     7. ui.js       — arayüz (en son: hepsini çağırır)          -->
 <script src="main.js"></script>
+<script src="map.js"></script>
+<script src="combat.js"></script>
 <script src="ai.js"></script>
 <script src="diplomacy.js"></script>
 <script src="economy.js"></script>
+<script src="ui.js"></script>
 <!-- FAZ 19: işlemsel ses. main.js'ten SONRA yüklenir (storeSet/storeGet
      kullanır). Hiçbir ses dosyası yok; her şey Web Audio ile üretilir. -->
 <script src="audio.js"></script>

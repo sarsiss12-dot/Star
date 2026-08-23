@@ -2901,14 +2901,20 @@ function aiForwardBaseTick(){
    dar olanı alıyor. Böylece savaş dönemlerinde alaşım doğal olarak
    pahalanıyor, barışta ucuzluyor — oyuncu hiç işlem yapmasa bile.
    ═══════════════════════════════════════════════════════════════════ */
-const AI_MARKET_BOL   = 5000;   // bu üstü "fazla"
-const AI_MARKET_DAR   = 1200;   // bu altı "dar"
+/* FAZ 73: ÖLÇÜM (60 yıl) — 9 AI'da bolluk vardı ama hiçbirinde
+   darlık yoktu, eşik çok yüksekti ve pazar hiç kullanılmadı.
+   2000/500'e çekildi. */
+const AI_MARKET_BOL   = 2000;   // bu üstü "fazla"
+const AI_MARKET_DAR   = 500;    // bu altı "dar"
 const AI_MARKET_DILIM = .22;    // fazlanın bu kadarı satılır
 
 function aiMarketTick(){
   if (typeof marketTrade !== 'function') return;
   for (const e of G.emps){
     if (e.dead || e.wild || e.crisisSide || !e.ai) continue;
+    /* FAZ 73: Fanatik Arındırıcılar pazara girmez — kimseyle
+       alışveriş yapmazlar, doktrin bunu yasaklar. */
+    if (typeof isPurifier === 'function' && isPurifier(e)) continue;
     if (e._mktCd && e._mktCd > (G.memAge || 0)) continue;
 
     /* En bol ve en dar kaynağı bul */
@@ -2946,6 +2952,7 @@ function aiMarketTick(){
 function aiIntelPactTick(){
   for (const e of G.emps){
     if (e.dead || e.wild || e.crisisSide || !e.ai) continue;
+    if (typeof isPurifier === 'function' && isPurifier(e)) continue;  // FAZ 73
     if (e._pactCd && e._pactCd > (G.memAge || 0)) continue;
     if ((e.res.etk || 0) < 140) continue;
 
@@ -2996,6 +3003,186 @@ function aiIntelPactTick(){
         }
         break;
       }
+    }
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 71 — PROAKTİF SIĞINMA
+   Zayıf ve tehdit altındaki AI, yok olmaktansa boyun eğmeyi seçer:
+   güçlü ve kendisiyle savaşta OLMAYAN bir devlete "vasalınız olalım"
+   der. Teslimiyet değil, hesaplı hayatta kalma — senyör onu
+   savunmak zorundadır.
+   ═══════════════════════════════════════════════════════════════════ */
+function aiSubmitTick(){
+  if (typeof subjugate !== 'function' || typeof isVassal !== 'function') return;
+
+  for (const e of G.emps){
+    if (e.dead || e.wild || e.crisisSide || !e.ai) continue;
+    if (isVassal(e)) continue;
+    if (typeof isPurifier === 'function' && isPurifier(e)) continue;  // FAZ 73
+    if (e._submitCd && e._submitCd > (G.memAge || 0)) continue;
+    if (typeof vassalsOf === 'function' && vassalsOf(e).length) continue;
+
+    const gucum = totalPower(e);
+    let sysN = 0;
+    for (const sy of G.sys) if (sy.owner === e.id) sysN++;
+    if (sysN > 6) continue;
+
+    let tehdit = null, enGuc = 0;
+    for (const o of G.emps){
+      if (o.dead || o.wild || o.crisisSide || o.id === e.id) continue;
+      if (!e.war[o.id]) continue;
+      const g = totalPower(o);
+      if (g > gucum * 1.8 && g > enGuc){ enGuc = g; tehdit = o; }
+    }
+    if (!tehdit){
+      for (const o of G.emps){
+        if (o.dead || o.wild || o.crisisSide || o.id === e.id) continue;
+        if (!e.contact[o.id]) continue;
+        if ((e.rel[o.id] || 0) > -20) continue;
+        const g = totalPower(o);
+        if (g > gucum * 2.6 && g > enGuc){ enGuc = g; tehdit = o; }
+      }
+    }
+    if (!tehdit) continue;
+
+    let hami = null, enIyi = 0;
+    for (const o of G.emps){
+      if (o.dead || o.wild || o.crisisSide || o.id === e.id) continue;
+      if (o.id === tehdit.id || e.war[o.id]) continue;
+      if (!e.contact[o.id]) continue;
+      if (isVassal(o)) continue;
+      const g = totalPower(o);
+      if (g < gucum * 1.6) continue;
+      let puan = g / 1000;
+      puan += (e.rel[o.id] || 0) * .04;
+      if (o.war[tehdit.id]) puan += 12;
+      if (e.ally && e.ally[o.id]) puan += 8;
+      if (puan > enIyi){ enIyi = puan; hami = o; }
+    }
+    if (!hami) continue;
+
+    e._submitCd = (G.memAge || 0) + 60;
+
+    if (hami.id === 0){
+      if (typeof UI !== 'undefined' && UI.notify)
+        UI.notify({kind:'submit', data:{from: e.id, tehdit: tehdit.id},
+          ico:'⛓', cls:'sci', pause:false, title:'Sığınma Talebi',
+          sub: e.name + ' vasalın olmak istiyor', key:'sub:' + e.id});
+      continue;
+    }
+
+    const P = (typeof personaOf === 'function') ? personaOf(hami) : null;
+    let kabul = .55;
+    if (P && P.n === 'Militarist') kabul += .25;
+    if (P && P.n === 'İzolasyonist') kabul -= .30;
+    if (P && P.n === 'Pasifist') kabul -= .10;
+    if (hami.war[tehdit.id]) kabul += .25;
+    if (rnd() > clamp(kabul, .1, .9)) continue;
+
+    subjugate(hami, e, 'bekci');
+    e.rel[hami.id] = clamp((e.rel[hami.id] || 0) + 25, -100, 100);
+    e._submitted = true;
+    if (G.p && !G.p.dead && G.p.contact && G.p.contact[e.id])
+      say('⛓ ' + e.name + ', ' + hami.name + ' himayesine sığındı', 'sci');
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 72 — AI SENYÖR EMİRLERİ
+   Faz 71'de emir mekaniği yalnız oyuncuya açıktı; 60 yıllık
+   koşuda emir sayısı 0 çıkmıştı. Artık AI senyörler de vasal
+   sadakatini ölçüp uygun emri dayatıyor. Yanlış hesap yaparsa
+   isyanla karşılaşır — risk simetriktir.
+   ═══════════════════════════════════════════════════════════════════ */
+function aiEdictTick(){
+  if (typeof issueEdict !== 'function' || typeof vassalLoyalty !== 'function') return;
+
+  for (const lord of G.emps){
+    if (lord.dead || lord.wild || lord.crisisSide || !lord.ai) continue;
+    if (lord._aiEdictCd && lord._aiEdictCd > (G.memAge || 0)) continue;
+    if ((lord.res.etk || 0) < 200) continue;
+
+    const vasallar = (typeof vassalsOf === 'function') ? vassalsOf(lord) : [];
+    if (!vasallar.length) continue;
+
+    /* En sadık vasalı seç — riski en düşük olan */
+    let hedef = null, enSadik = -1;
+    for (const v of vasallar){
+      const l = vassalLoyalty(v);
+      if (l > enSadik){ enSadik = l; hedef = v; }
+    }
+    if (!hedef) continue;
+
+    /* Hangi emri istiyor? Mizaç ve duruma göre */
+    const P = (typeof personaOf === 'function') ? personaOf(lord) : null;
+    let savasta = false;
+    for (const w in lord.war)
+      if (lord.war[w] && G.emps[w] && !G.emps[w].wild) savasta = true;
+
+    const adaylar = [];
+    if (savasta) adaylar.push('savasCagri');
+    if (P && (P.n === 'Teknokrasi' || P.n === 'Tüccar')) adaylar.push('bilimPayi');
+    if ((lord.res.ala || 0) < 1500) adaylar.push('ekVergi');
+    if (typeof councilExists === 'function' && councilExists() &&
+        G.council.members.includes(lord.id)) adaylar.push('oyBirligi');
+    if (!adaylar.length) adaylar.push('ekVergi');
+
+    /* GÜVENLİ SEÇİM: sadakati yeten emirlerden en değerlisi.
+       AI kumar oynamaz — isyan riskini bilerek almaz. */
+    let secim = null;
+    for (const k of adaylar){
+      const E = EDICTS[k];
+      if (!E || (hedef.edicts && hedef.edicts[k])) continue;
+      if (enSadik >= E.sadakat + 8){ secim = k; break; }   // 8 puan pay
+    }
+    if (!secim) continue;
+
+    const r = issueEdict(lord, hedef, secim);
+    lord._aiEdictCd = (G.memAge || 0) + 30;
+    if (r && r.ok && !r.kabul && G.p && !G.p.dead &&
+        G.p.contact && G.p.contact[hedef.id])
+      say('⛓ ' + hedef.name + ', ' + lord.name + ' emrini reddetti — isyan!', 'war');
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 72 — AI FEDERASYON İÇ YASA OYLAMASI
+   AI üyeler kendi ideolojilerine uygun iç yasayı öneriyor.
+   ═══════════════════════════════════════════════════════════════════ */
+function aiFedLawTick(){
+  if (typeof proposeFedLaw !== 'function' || typeof findFed !== 'function') return;
+
+  for (const e of G.emps){
+    if (e.dead || e.wild || e.crisisSide || !e.ai) continue;
+    if (e._fedLawCd && e._fedLawCd > (G.memAge || 0)) continue;
+    if ((e.res.etk || 0) < 220) continue;
+
+    const f = findFed(e);
+    if (!f || f.lawVote) continue;
+    if (typeof fedCohesion === 'function' && fedCohesion(f) < 35) continue;
+
+    const P = (typeof personaOf === 'function') ? personaOf(e) : null;
+    const sira = [];
+    if (P){
+      if (P.n === 'Militarist') sira.push('ortakDon', 'serbest');
+      else if (P.n === 'Teknokrasi') sira.push('bilimAgi', 'serbest');
+      else if (P.n === 'Tüccar') sira.push('serbest', 'bilimAgi');
+      else if (P.n === 'Pasifist') sira.push('savasOnay', 'bilimAgi');
+      else sira.push('serbest', 'ortakDon');
+    } else sira.push('serbest');
+
+    for (const k of sira){
+      if (f.laws && f.laws[k]) continue;
+      if (!FED_INNER_LAWS[k]) continue;
+      if ((e.res.etk || 0) < FED_INNER_LAWS[k].c) continue;
+      const r = proposeFedLaw(e, k);
+      e._fedLawCd = (G.memAge || 0) + 36;
+      if (r && r.ok && r.gecti && f.members.includes(0))
+        say('🏛 ' + e.name + ' önerisi kabul edildi: ' +
+            FED_INNER_LAWS[k].n, 'sci');
+      break;
     }
   }
 }

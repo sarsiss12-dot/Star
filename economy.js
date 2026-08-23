@@ -334,6 +334,10 @@ function empireIncome(e){
      kendi yiyeceğinin bir kısmını üretir. */
   const ph = (typeof physioOf === 'function') ? physioOf(e) : null;
   if (bio === 'makine'){ inc.ene -= food*.55; inc.yiy = 0; }
+  else if (ph && ph.yiyer === 'enerji'){
+    /* FAZ 72: Makine Ağı fizyolojisi — enerji tüketir */
+    inc.ene -= food * .55; inc.yiy = 0;
+  }
   else if (bio === 'litoit' || (ph && ph.yiyer === 'mineral')){
     inc.min -= food*.60; inc.yiy = 0;
   }
@@ -452,6 +456,18 @@ function economyTick(init){
         } else {
           delete col.incited; delete col.inciteBy;
         }
+      }
+      /* ═══ FAZ 74: YIKIMIN İZLERİ ARTIK GEÇİCİ ═══
+         Faz 73'te ceza KALICIYDI (tavan 30) — bu, alınan gezegeni
+         sonsuza dek işe yaramaz kılıyordu ve oyuncuyu yıkıcı
+         bombardımandan tamamen caydırıyordu. Artık yara zamanla
+         kapanıyor: yılda ~1.8 puan siliniyor, bombardıman
+         sürmediği sürece birkaç on yılda tamamen geçiyor. */
+      if (col.scorched){
+        target -= col.scorched;
+        if (!col.bombed || col.bombed < (G.memAge || 0))
+          col.scorched = Math.max(0, col.scorched - .15);   // ~1.8/yıl
+        if (col.scorched <= 0) delete col.scorched;
       }
       if (hasCivic(e,'oneparty')) target = Math.max(target, 35);
       if (hasPerk(e,'zeal')) target = Math.max(target, 60);
@@ -1418,7 +1434,20 @@ function invasionTick(){
             }
             const ateskesTabani = (col.truce !== undefined)
               ? (col.garrisonBase || taban) * TRUCE_FLOOR : 0;
-            let etki = atis;
+            /* ═══════════════════════════════════════════════════
+               FAZ 73 — BOMBARDIMAN TİPLERİ
+               Kuşatan filonun seçtiği kip etkiyi belirler:
+                 hassas  → tahkimatı yavaş eritir, binalara dokunmaz
+                 yikici  → çok hızlı erir ama bina yıkar ve kalıcı
+                           istikrar cezası bırakır
+               Kip filoda saklanır (f.bombMode); sistemdeki en
+               agresif kip geçerli sayılır. */
+            let kip = 'hassas';
+            for (const bf of G.fleets){
+              if (bf.sys !== sys.id || bf.e !== +id) continue;
+              if (bf.bombMode === 'yikici'){ kip = 'yikici'; break; }
+            }
+            let etki = atis * (kip === 'yikici' ? 2.4 : 1);
             if (taban <= dipEsik) etki *= .22;
             else if (taban - etki < dipEsik){
               const ustKisim = taban - dipEsik;
@@ -1435,7 +1464,30 @@ function invasionTick(){
                Artık damga konuyor — pasif yenilenme durur ve
                istikrar her ay hızla sıfıra iner. */
             col.bombed = (G.memAge || 0) + 1;
-            col.stab = clamp(col.stab - 9, 0, 100);
+            col.bombKip = kip;
+            col.stab = clamp(col.stab - (kip === 'yikici' ? 16 : 9), 0, 100);
+
+            /* ═══ YIKICI BOMBARDIMANIN BEDELİ ═══
+               Bina yıkar ve kalıcı iz bırakır. Aldığın gezegen
+               harabe olur — hızlı zafer, uzun toparlanma. */
+            if (kip === 'yikici'){
+              if (rnd() < .16 && col.b){
+                const binalar = Object.keys(col.b).filter(k2 => col.b[k2] > 0);
+                if (binalar.length){
+                  const kurban = binalar[Math.floor(rnd() * binalar.length)];
+                  col.b[kurban]--;
+                  if (col.b[kurban] <= 0) delete col.b[kurban];
+                  if (sys.owner === 0)
+                    say('💥 ' + (col.name || pl.name) + ': ' +
+                        (BUILDINGS[kurban] ? BUILDINGS[kurban].n : kurban) +
+                        ' bombardımanda yıkıldı', 'war');
+                }
+              }
+              /* Kalıcı yara — işgalden sonra da sürer */
+              /* FAZ 74: tavan 30 → 22, birikim de yavaşlatıldı */
+              col.scorched = Math.min(22, (col.scorched || 0) + .4);
+              if (rnd() < .35) col.pop = Math.max(1, col.pop - .18);
+            }
           }
         }
 
@@ -2724,7 +2776,9 @@ function marketQuote(sat, al, miktar){
   if (!(miktar > 0)) return {ok: false, why: 'Miktar geçersiz'};
   const deger = miktar * marketPrice(sat);
   const brut = deger / marketPrice(al);
-  const net = brut * (1 - MARKET_FEE);
+  /* FAZ 72: Piyasa Regülasyonu yasası komisyonu düşürür */
+  const fee = (typeof marketFeeNow === 'function') ? marketFeeNow() : MARKET_FEE;
+  const net = brut * (1 - fee);
   return {ok: true, alinan: net, komisyon: brut - net,
           kurSat: marketPrice(sat), kurAl: marketPrice(al)};
 }
