@@ -3257,6 +3257,38 @@ function stepFleets(dt){
 
     if (!f.mv && f.path.length){
       const nxt = f.path[0];
+      /* ═══════════════════════════════════════════════════════════
+         FAZ 75 — İKMAL SINIRINDA DUR
+         Bilim ve inşaat gemileri keşfe çıkarken hattın dışına
+         taşıp yıpranmayla kendilerini yok ediyorlardı. Artık
+         SIÇRAMADAN ÖNCE bakılıyor: bir sonraki sistemde ikmal
+         tamamen kopacaksa gemi durur, rotasını iptal eder ve
+         oyuncuya haber verir.
+
+         ÖLÇÜM DÜZELTMESİ: ilk eşiği %1 koymuştum ama fleetSupply
+         asla SUPPLY_FLOOR'un (%40) altına inmiyor — eşik HİÇ
+         tetiklenmiyordu ve gemi yine yıpranıp ölüyordu. Gerçek
+         "ikmal tamamen kopuk" durumu TABANA ÇAKILMAKTIR.
+         Eşik SUPPLY_FLOOR + küçük pay olarak düzeltildi.
+         Savaş filoları ve kriz tarafları muaf: onlar zaten
+         bilerek düşman toprağına giriyor. */
+      const eSup = empOf(f);
+      if (eSup && !eSup.wild && !eSup.crisisSide && !f.combat &&
+          typeof fleetSupply === 'function' && !isArmed(f) && !f.joinFleet){
+        const sonra = fleetSupply(eSup, {sys: nxt, ships: f.ships, e: f.e});
+        const taban = (typeof SUPPLY_FLOOR !== 'undefined') ? SUPPLY_FLOOR : .40;
+        if (sonra <= taban + .015){
+          f.path = [];
+          f.stalled = true;
+          if (!eSup.ai && !f._stallSaid){
+            f._stallSaid = true;
+            say('⚓ ' + (f.name || 'Filo') + ' ikmal sınırına ulaştı ve durdu — ' +
+                G.sys[nxt].name + ' hattın tamamen dışında', 'war');
+          }
+          continue;
+        }
+        if (f.stalled){ delete f.stalled; delete f._stallSaid; }
+      }
       if (G.sys[f.sys].lanes.includes(nxt)) f.mv = {from:f.sys, to:nxt, t:0};
       else { const p = findPath(f.sys, nxt, empOf(f)); if (p) f.path = p.concat(f.path.slice(1)); else f.path = []; }
     }
@@ -3323,6 +3355,12 @@ function autoExploreTick(){
       if (sy.ruin || sy.nest) continue;
       const claim = claimOf(sy);
       if (claim >= 0 && claim !== 0 && e.war[claim]) continue;
+      /* FAZ 75: ikmalin tamamen kesildiği yere otomatik gitme —
+         orada yıpranıp yok oluyordu. Oyuncu elle yollayabilir. */
+      if (typeof fleetSupply === 'function'){
+        const tb = (typeof SUPPLY_FLOOR !== 'undefined') ? SUPPLY_FLOOR : .40;
+        if (fleetSupply(e, {sys: sy.id, ships: f.ships, e: 0}) <= tb + .015) continue;
+      }
       const d = dist(G.sys[f.sys], sy);
       if (!best || d < best.d) best = {sy, d};
     }

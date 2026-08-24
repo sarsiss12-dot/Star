@@ -738,7 +738,31 @@ const UI = {
         this.refresh();
         break;
       }
+      case 'dealBack': {
+        /* FAZ 75: müzakereden çık ama diplomasi panelinde kal —
+           ✕ her şeyi kapatıyordu, geri dönmek için baştan
+           tıklamak gerekiyordu. */
+        this.deal = null; this.dealMsg = '';
+        this.openDiplo();
+        break;
+      }
+      case 'memTog': {
+        this.memOpen = (this.memOpen === x) ? null : x;   // FAZ 75
+        this.keepScroll = true; this.refresh();
+        break;
+      }
       case 'spyOpen': {
+        /* FAZ 75: sağ paneli İSTİHBARAT sekmesine geçir ve
+           hedefi odak yap — ayrı pencere açmaya gerek yok. */
+        this.spyTarget = +x;
+        this.tab = 'intel';
+        if (typeof closeAllGroups === 'function') closeAllGroups();
+        const pane2 = $('diploPane');
+        if (pane2) pane2.classList.remove('show');
+        this.keepScroll = false; this.refresh();
+        break;
+      }
+      case '_spyOpenEski': {
         /* ═══ FAZ 51: DERİN BAĞLANTI ═══
            Yalnız sekmeyi açmakla kalmaz, o devleti aktif casusluk
            hedefi yapar ve paneli ona odaklar. */
@@ -783,9 +807,18 @@ const UI = {
         break;
       }
       case 'envoy': {
+        /* FAZ 75: elçi göndermek koca diplomasi ekranını AÇMASIN.
+           Oyuncu haritadan hızlıca elçi yollayıp işine dönebilsin;
+           panel zaten açıksa tazelenir. */
         const id = +x;
-        if (assignEnvoy(G.p, id)) this.openDiplo();
-        else say('Boşta elçin yok — birini geri çek');
+        const o2 = G.emps[id];
+        if (assignEnvoy(G.p, id)){
+          say('🎓 Elçi ' + (o2 ? o2.name : '') + ' sarayına gönderildi', 'sci');
+          const pane = $('diploPane');
+          if (pane && pane.classList.contains('show')) this.openDiplo();
+        }
+        else say('Boşta elçin yok — birini geri çek', 'war');
+        this.keepScroll = true; this.refresh();
         break;
       }
       case 'upInfo': {
@@ -2906,18 +2939,44 @@ const UI = {
           const son = olaylar.slice(0, 15);
           if (son.length){
             h += `<div class="ph">📜 GİZLİ DİPLOMATİK GEÇMİŞ</div>`;
-            h += `<div class="dpList">`;
+            /* ═══ FAZ 75: AKORDİYON GEÇMİŞ ═══
+               15 satır birden panelde çok yer kaplıyordu. Artık
+               devlet başına TEK ÖZET satırı; tıklayınca o devletle
+               yaşananların detayı açılıyor. */
+            const gruplar = {};
             son.forEach(x => {
-              const iyi = x.v > 0;
-              const yas = Math.max(0, Math.round(((G.memAge || 0) - x.t) / 12));
-              h += `<div class="dpRow">
-                <span class="dpDot" style="background:${x.col}"></span>
-                <span class="dpNm">${esc(x.ad)} — ${esc(x.kim.slice(0,16))}</span>
-                <span class="dpTags" style="font-size:10px;color:#7d90ad">${
-                  yas ? yas + 'y' : 'yeni'}</span>
-                <b style="color:${iyi?'#65e08a':'#ff5f6d'}">${iyi?'+':''}${Math.round(x.v)}</b>
-              </div>`;
+              (gruplar[x.kim] || (gruplar[x.kim] = {col:x.col, olay:[], net:0}))
+                .olay.push(x);
+              gruplar[x.kim].net += x.v;
             });
+            h += `<div class="dpList">`;
+            for (const kim in gruplar){
+              const G2 = gruplar[kim];
+              const acikG = this.memOpen === kim;
+              const iyiG = G2.net > 0;
+              const enAgir = G2.olay.slice().sort((a,b)=>Math.abs(b.v)-Math.abs(a.v))[0];
+              h += `<div class="dpRow" data-a="memTog" data-x="${esc(kim)}"
+                style="cursor:pointer">
+                <span class="dpDot" style="background:${G2.col}"></span>
+                <span class="dpNm">${esc(kim.slice(0,16))} — ${
+                  esc(enAgir ? enAgir.ad : '')}${G2.olay.length > 1
+                    ? ' <span style="opacity:.6">+' + (G2.olay.length-1) + '</span>' : ''}</span>
+                <span class="dpTags" style="font-size:10px;color:#7d90ad">${acikG?'▾':'▸'}</span>
+                <b style="color:${iyiG?'#65e08a':'#ff5f6d'}">${iyiG?'+':''}${Math.round(G2.net)}</b>
+              </div>`;
+              if (acikG){
+                G2.olay.forEach(x => {
+                  const iyi = x.v > 0;
+                  const yas = Math.max(0, Math.round(((G.memAge || 0) - x.t) / 12));
+                  h += `<div class="dpRow" style="padding-left:18px;opacity:.85">
+                    <span class="dpNm" style="font-size:10px">${esc(x.ad)}</span>
+                    <span class="dpTags" style="font-size:9px;color:#7d90ad">${
+                      yas ? yas + 'y' : 'yeni'}</span>
+                    <b style="color:${iyi?'#65e08a':'#ff5f6d'};font-size:10px">${
+                      iyi?'+':''}${Math.round(x.v)}</b></div>`;
+                });
+              }
+            }
             h += `</div>`;
           } else {
             h += `<div class="mini" style="color:#7d90ad">Kayda değer bir
@@ -4011,7 +4070,10 @@ const UI = {
     const short = ev.net < 0 ? Math.round(-ev.net) : 0;
 
     let h = `<div class="dpBox" style="width:min(760px,96%)">
-      <div class="dpHd"><span>MÜZAKERE · ${esc(o.name)}</span>
+      <div class="dpHd">
+        <button class="riX" data-a="dealBack"
+          title="Diplomasiye dön" style="margin-right:6px">‹</button>
+        <span>MÜZAKERE · ${esc(o.name)}</span>
         <button class="riX" data-a="closeDeal">✕</button></div>
       <div class="dpBody">`;
 

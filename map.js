@@ -1094,6 +1094,44 @@ const View = {
       }
     }
 
+    /* ═══════════════════════════════════════════════════════════
+       FAZ 75 — DİPLOMATİK BÖLGE BOYAMASI
+       Diplomatik ve savaş modlarında yalnız gezegen halkaları
+       değil, devletlerin HÜKÜM ALANI da şeffaf boyanıyor.
+       Poligon değil, sistem başına yumuşak bir hale çiziyoruz:
+       komşu sistemlerin haleleri birleşince doğal bir bölge
+       oluşuyor ve Voronoi hesabı gerekmeden sınır okunuyor.
+       Yollardan ÖNCE çizilir ki zemin katmanı olsun.
+       ═══════════════════════════════════════════════════════════ */
+    /* NOT: `politik` bu satırdan SONRA tanımlanıyor (TDZ), o yüzden
+       koşulu doğrudan zoom'dan okuyoruz — this.politik zaten
+       updateFrustum'da hesaplanmış oluyor. */
+    if ((MAP_MODE === 'diplomasi' || MAP_MODE === 'savas') && !this.politik){
+      g.save();
+      g.globalCompositeOperation = 'lighter';
+      for (const s of G.sys){
+        if (s.owner < 0) continue;
+        if (!pVis(s) && !s.seen.includes(0)) continue;
+        const sahip = G.emps[s.owner];
+        if (!sahip || sahip.dead) continue;
+        if (!this.inView(s.x, s.y)) continue;
+        const p2 = this.w2s(s.x, s.y);
+        /* Hale yarıçapı: sistemler arası tipik mesafenin yarısı */
+        const R = Math.max(26, 150 * z);
+        const dc = diploColor(sahip);
+        const yanip = G.p.war[sahip.id] ? (.55 + .45*Math.sin(t/260)) : 1;
+        const grad = g.createRadialGradient(p2.x, p2.y, 0, p2.x, p2.y, R);
+        grad.addColorStop(0,   dc + (G.p.war[sahip.id] ? '3a' : '2e'));
+        grad.addColorStop(.55, dc + '18');
+        grad.addColorStop(1,   dc + '00');
+        g.globalAlpha = yanip * .9;
+        g.fillStyle = grad;
+        g.beginPath(); g.arc(p2.x, p2.y, R, 0, Math.PI*2); g.fill();
+      }
+      g.globalAlpha = 1;
+      g.restore();
+    }
+
     // hiper yollar
     g.lineWidth = Math.max(.6, 1.1*Math.min(1,z*3));
     for (const s of G.sys){
@@ -1385,6 +1423,13 @@ const View = {
         g.textAlign = 'center';
         g.textBaseline = 'top';
         const ty = p.y + sr + 6;
+        /* FAZ 75: uzaklaşınca yazının arkasına koyu şerit —
+           yıldız kalabalığında okunabilirlik. */
+        if (z < .28){
+          const w3 = g.measureText(s.name).width;
+          g.fillStyle = 'rgba(5,8,16,.62)';
+          g.fillRect(p.x - w3/2 - 3, ty - 1, w3 + 6, 12);
+        }
         g.lineWidth = 3;
         g.lineJoin = 'round';
         g.strokeStyle = 'rgba(4,7,14,.92)';
@@ -1685,8 +1730,43 @@ const View = {
     }
 
     // filolar
+    /* ═══════════════════════════════════════════════════════════
+       FAZ 75 — GEMİ YIĞILMASI
+       Aynı sistemde duran bilim + koloni + savaş filoları üst üste
+       biniyor, harita okunmaz hale geliyordu. Artık DURAN filolar
+       sistem başına toplanıp gezegen adının altına tek özet
+       satırı olarak yazılıyor:  ⚔5.4K · 🛰×2 · 🚀×1
+       Hareket HÂLİNDEKİ filolar tek tek çizilmeye devam ediyor —
+       rota okunabilirliği önemli. Seçili filo da her zaman çizilir.
+       ═══════════════════════════════════════════════════════════ */
+    const yigin = {};
+    if (!politik){
+      for (const f of G.fleets){
+        if (!this.fleetVisible(f) || f.mv || f === this.sel) continue;
+        if (f.sys < 0 || !f.ships.length) continue;
+        const anahtar = f.sys + '_' + f.e;
+        const y = yigin[anahtar] || (yigin[anahtar] = {
+          sys: f.sys, e: f.e, guc: 0, bilim: 0, koloni: 0, sav: 0, insa: 0
+        });
+        if (isArmed(f)){ y.sav++; y.guc += fleetPower(f); }
+        else if (fleetHasRole(f, 'bilim')) y.bilim++;
+        else if (f.ships.some(sh => sh.c === 'ins')) y.insa++;
+        else y.koloni++;
+      }
+    }
+    /* Yığın oluşan sistemlerdeki duran filolar tek tek çizilmez */
+    const gizli = new Set();
+    for (const k in yigin){
+      const y = yigin[k];
+      if (y.sav + y.bilim + y.koloni + y.insa < 2) continue;   // tek filo yığın değil
+      gizli.add(k);
+    }
+
     for (const f of G.fleets){
       if (!this.fleetVisible(f)) continue;
+      /* FAZ 75: yığına düşen duran filo atlanır */
+      if (!f.mv && f !== this.sel && f.sys >= 0 &&
+          gizli.has(f.sys + '_' + f.e)) continue;
       const p = this.w2s(f.x, f.y);
       /* FAZ 64: 40 → 120. Filo ikonunun ALTINA güç ve durum
          yazısı düşüyor; 40 px payla o yazılar kenarda kesiliyordu. */
@@ -1704,6 +1784,41 @@ const View = {
       /* Tek bir filonun hatası haritayı karartmasın */
       try { this.drawFleet(g, f, p, t); }
       catch(err){ if (!this._fxWarn){ this._fxWarn = 1; console.warn('drawFleet:', err); } }
+    }
+
+    /* FAZ 75: yığın özet satırlarını çiz */
+    if (!politik){
+      g.save();
+      g.textAlign = 'center';
+      g.font = 'bold 10px ui-monospace,monospace';
+      g.lineWidth = 3; g.lineJoin = 'round';
+      for (const k of gizli){
+        const y = yigin[k];
+        const sy = G.sys[y.sys];
+        if (!sy || !this.inView(sy.x, sy.y)) continue;
+        const fe = G.emps[y.e];
+        if (!fe || fe.dead) continue;
+        const parca = [];
+        if (y.sav)    parca.push('⚔' + fmt(y.guc));
+        if (y.bilim)  parca.push('🛰×' + y.bilim);
+        if (y.koloni) parca.push('🚀×' + y.koloni);
+        if (y.insa)   parca.push('🔧×' + y.insa);
+        if (!parca.length) continue;
+        const txt = parca.join(' · ');
+        const p2 = this.w2s(sy.x, sy.y);
+        const sr2 = Math.max(2.2, sy.star.r * this.cam.z * 1.5);
+        const ty = p2.y + sr2 + 20;
+        /* Arka plan şeridi — sistem adıyla karışmasın */
+        const w = g.measureText(txt).width;
+        g.fillStyle = 'rgba(5,8,16,.72)';
+        g.fillRect(p2.x - w/2 - 4, ty - 8, w + 8, 13);
+        g.strokeStyle = 'rgba(4,7,14,.92)';
+        g.strokeText(txt, p2.x, ty);
+        g.fillStyle = fe.col;
+        g.fillText(txt, p2.x, ty);
+      }
+      g.restore();
+      g.textAlign = 'center';
     }
 
     /* ═══ FAZ 60: RALLY LOJİSTİK HATTI ═══
@@ -1817,6 +1932,59 @@ const View = {
       g.setLineDash([]);
       g.restore();
       g.textAlign = 'center';
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       FAZ 75 — OPERASYON ÇEMBERİ
+       Radar açıkken seçili filonun ikmal kopmadan ulaşabileceği
+       menzil kesik çizgili bir çemberle gösterilir. Yarıçap
+       gerçek hesaptan geliyor: hattaki her sisteme fleetSupply
+       sorulup en uzak GÜVENLİ nokta bulunuyor (günlük önbellekli).
+       ═══════════════════════════════════════════════════════════ */
+    if (RADAR_ON && this.sel && this.sel.ships && this.sel.ships.length &&
+        this.sel.sys >= 0 && typeof fleetSupply === 'function'){
+      const f = this.sel;
+      const fe = G.emps[f.e];
+      if (fe && !fe.dead){
+        /* Menzili günde bir hesapla — her karede tarama yapma */
+        if (f._opAt !== G.day){
+          f._opAt = G.day;
+          let enUzak = 0;
+          const bas = G.sys[f.sys];
+          for (const sy of G.sys){
+            const sup = fleetSupply(fe, {sys: sy.id, ships: f.ships, e: f.e});
+            if (sup < .55) continue;          // burada muharebe edemez
+            const d = dist(bas, sy);
+            if (d > enUzak) enUzak = d;
+          }
+          f._opR = enUzak;
+        }
+        if (f._opR > 0){
+          const c = this.w2s(f.x, f.y);
+          const r = f._opR * this.cam.z;
+          if (r > 12 && r < 4000){
+            g.save();
+            g.strokeStyle = 'rgba(111,242,200,.42)';
+            g.lineWidth = 1.4;
+            g.setLineDash([7, 7]);
+            g.lineDashOffset = -(t / 60) % 14;
+            g.beginPath(); g.arc(c.x, c.y, r, 0, Math.PI*2); g.stroke();
+            g.setLineDash([]);
+            /* Etiket: çemberin üstünde */
+            g.fillStyle = 'rgba(111,242,200,.75)';
+            g.font = '10px ui-monospace,monospace';
+            g.textAlign = 'center';
+            const et = 'operasyon menzili';
+            const w2 = g.measureText(et).width;
+            g.fillStyle = 'rgba(5,8,16,.7)';
+            g.fillRect(c.x - w2/2 - 4, c.y - r - 14, w2 + 8, 13);
+            g.fillStyle = 'rgba(111,242,200,.85)';
+            g.fillText(et, c.x, c.y - r - 4);
+            g.restore();
+            g.textAlign = 'center';
+          }
+        }
+      }
     }
 
     this.drawPings(g, t);               // FAZ 47: bildirim ping halkası
