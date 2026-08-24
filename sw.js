@@ -7,7 +7,9 @@
    geliştirme sırasında eski sürümün takılı kalması en can sıkıcı
    hata türüdür. Strateji "önce ağ, olmazsa önbellek".
    ═══════════════════════════════════════════════════════════════════ */
-const CACHE = 'yildiz-hanedani-v1';
+/* FAZ 74: dosya yapısı değişti — sürüm artırıldı ki eski
+   önbellekteki tek parça main.js temizlensin. */
+const CACHE = 'yildiz-hanedani-v2';
 
 /* Oyunun tamamı — hepsi yerel dosya, dış bağımlılık yok */
 const KABUK = [
@@ -15,6 +17,9 @@ const KABUK = [
   './index.html',
   './manifest.json',
   './main.js',
+  './map.js',           /* FAZ 74: yeni modüller */
+  './combat.js',
+  './ui.js',
   './ai.js',
   './diplomacy.js',
   './economy.js',
