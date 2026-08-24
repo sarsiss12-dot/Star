@@ -897,6 +897,47 @@ const View = {
       UI.refresh();
       return;
     }
+    /* ═══════════════════════════════════════════════════════════
+       FAZ 76 — NİŞANGAH MODU
+       Koloni/inşaat gemileri sürü halinde aynı hedefe gitmesin
+       diye tekil emir kipi: sağ panelden bir gemi seçilip
+       "hedef seç" denince oyun bu kipe giriyor, haritada tıklanan
+       sisteme YALNIZ O GEMİ yollanıyor.
+       ═══════════════════════════════════════════════════════════ */
+    if (this.aimFleet !== undefined && s){
+      const af = G.fleets.find(q => q.id === this.aimFleet && q.ships.length);
+      this.aimFleet = undefined;
+      if (af){
+        const kol = af.ships.some(sh => sh.c === 'kol');
+        if (kol){
+          /* Koloni gemisi: hedefte yerleşilebilir gezegen ara */
+          let hedefP = -1;
+          for (let i = 0; i < s.planets.length; i++){
+            const pl = s.planets[i];
+            if (!pl || pl.col) continue;
+            if (typeof canColonize === 'function' && !canColonize(G.p, s, pl)) continue;
+            if (typeof colonyClaimedBy === 'function' && colonyClaimedBy(pl, af.id)) continue;
+            hedefP = i; break;
+          }
+          if (hedefP >= 0){
+            if (typeof claimColony === 'function') claimColony(af, s, hedefP);
+            orderMove(af, s.id);
+            af.ord = {t:'kol', s:s.id, p:hedefP};
+            say('🎯 ' + (af.name || 'Gemi') + ' → ' +
+                s.planets[hedefP].name + ' (tekil emir)', 'sci');
+          } else {
+            say('🎯 ' + s.name + ' sisteminde yerleşilebilir boş gezegen yok', 'war');
+          }
+        } else {
+          orderMove(af, s.id);
+          say('🎯 ' + (af.name || 'Gemi') + ' → ' + s.name + ' (tekil emir)', 'sci');
+        }
+        this.sel = af;
+      }
+      UI.refresh();
+      return;
+    }
+
     /* ═══ FAZ 67: TERSANE RALLİ HEDEFİ SEÇİMİ ═══ */
     if (this.rallyForSys !== undefined && s){
       const kaynak = G.sys[this.rallyForSys];

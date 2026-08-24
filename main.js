@@ -1596,9 +1596,10 @@ const EVENTS = [
   {id:'e4', n:'Kayıp Sonda', t:'Yıllar önce fırlatılan bir sonda geri döndü. Hafızası şaşırtıcı derecede dolu.',
    ch:[{t:'Verileri işle', d:'+200 araştırma', f:g=>{g.p.res.ara+=200; return 'Sonda verileri çözüldü: +200 araştırma.';}},
        {t:'Halka aç', d:'+35 etki', f:g=>{g.p.res.etk+=35; return 'Keşif halkı coşturdu: +35 etki.';}}]},
-  {id:'e5', n:'Korsan Baskını', t:'Sınır sistemlerinde tanımlanamayan gemiler ticaret yollarını vuruyor.',
-   ch:[{t:'Devriye gönder', d:'−80 alaşım, tehdit biter', f:g=>{g.p.res.ala-=80; return 'Korsanlar dağıtıldı.';}},
-       {t:'Görmezden gel', d:'−140 enerji', f:g=>{g.p.res.ene-=140; return 'Ticaret kaybı ağır oldu: −140 enerji.';}}]}
+  /* FAZ 76: 'e5 Korsan Baskını' kaldırıldı — oyunda gerçek bir
+     korsan sistemi (raidTick) zaten var; bu rastgele olay onunla
+     çelişiyor ve "sınırda devriye görüldü" türü içi boş bir
+     bildirim üretiyordu. */
 ];
 /* =====================================================================
    SANAT — her piksel çalışma anında üretilir
@@ -3272,9 +3273,22 @@ function stepFleets(dt){
          Eşik SUPPLY_FLOOR + küçük pay olarak düzeltildi.
          Savaş filoları ve kriz tarafları muaf: onlar zaten
          bilerek düşman toprağına giriyor. */
+      /* ═══ FAZ 76 DÜZELTMESİ ═══
+         Faz 75'te kural TÜM silahsız filolara uygulanıyordu ve
+         KOLONİ/İNŞAAT gemilerini de durduruyordu. Ölçümde bir
+         koloni gemisi hedefine varamadan sys 31'de takıldı —
+         bu, uzak gezegenlere yerleşmeyi ve sınır genişletmeyi
+         imkânsız kılıyordu.
+
+         Oysa o gemilerin GÖREVİ zaten hattın ötesine geçmektir:
+         yerleştikleri an orası ikmal noktası olur. Kural artık
+         yalnız BİLİM gemilerine uygulanıyor — onların keşif
+         gezisi hattı ilerletmez, yalnız yıpranır. */
       const eSup = empOf(f);
+      const sivilKesif = !isArmed(f) && fleetHasRole(f, 'bilim') &&
+                         !f.ships.some(sh => sh.c === 'kol' || sh.c === 'ins');
       if (eSup && !eSup.wild && !eSup.crisisSide && !f.combat &&
-          typeof fleetSupply === 'function' && !isArmed(f) && !f.joinFleet){
+          typeof fleetSupply === 'function' && sivilKesif && !f.joinFleet){
         const sonra = fleetSupply(eSup, {sys: nxt, ships: f.ships, e: f.e});
         const taban = (typeof SUPPLY_FLOOR !== 'undefined') ? SUPPLY_FLOOR : .40;
         if (sonra <= taban + .015){
@@ -3392,8 +3406,18 @@ function arrive(f, sys){
     const pl = sys.planets[f.ord.p];
     if (pl && canColonize(e, sys, pl)){
       doColonize(e, sys, pl);
+      delete pl.colonyClaim;                    // FAZ 76: kilit çözüldü
       f.ships = f.ships.filter(s => s.c !== 'kol');
       if (!f.ships.length){ G.fleets = G.fleets.filter(x=>x!==f); return; }
+    } else {
+      /* ═══ FAZ 76: BUHARLAŞMA ONARIMI ═══
+         Hedef elden gitmişse gemi YOK OLMAZ — emri düşer, yerinde
+         bekler ve oyuncuya haber verilir. */
+      if (pl && pl.colonyClaim === f.id) delete pl.colonyClaim;
+      if (!e.ai && f.ships.some(sh => sh.c === 'kol'))
+        say('🚀 ' + (f.name || 'Koloni gemisi') + ' yerleşemedi — ' +
+            (pl && pl.col ? 'orası artık dolu' : 'şartlar değişti') +
+            '. Gemi ' + sys.name + ' yörüngesinde bekliyor.', 'war');
     }
     f.ord = null;
   }

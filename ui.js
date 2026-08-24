@@ -746,6 +746,41 @@ const UI = {
         this.openDiplo();
         break;
       }
+      case 'mergeArmed': {
+        /* FAZ 76: yalnız askeri filoları tek ID altında birleştir */
+        const sid2 = +x;
+        const sav2 = G.fleets.filter(q => q.e === 0 && q.sys === sid2 &&
+                                          q.ships.length && isArmed(q));
+        if (sav2.length < 2){ say('Birleşecek savaş filosu yok', 'war'); break; }
+        const ana = sav2[0];
+        let kac = 0;
+        for (let i = 1; i < sav2.length; i++){
+          ana.ships.push(...sav2[i].ships);
+          if (sav2[i].ord && !ana.ord) ana.ord = sav2[i].ord;
+          sav2[i].ships.length = 0;
+          kac++;
+        }
+        G.fleets = G.fleets.filter(q => q.ships.length);
+        View.sel = ana;
+        say('⚑ ' + (kac+1) + ' savaş filosu birleşti — ' + esc(ana.name) +
+            ' · ' + ana.ships.length + ' gemi', 'win');
+        this.keepScroll = true; this.refresh();
+        break;
+      }
+      case 'aimSet': {
+        /* FAZ 76: nişangah kipi — tek gemiye hedef seçtir */
+        View.aimFleet = +x;
+        const af = G.fleets.find(q => q.id === +x);
+        say('🎯 Haritadan hedef seç — yalnız ' +
+            (af ? esc(af.name || 'bu gemi') : 'bu gemi') + ' gidecek', 'sci');
+        this.keepScroll = true; this.refresh();
+        break;
+      }
+      case 'aimCancel': {
+        View.aimFleet = undefined;
+        this.keepScroll = true; this.refresh();
+        break;
+      }
       case 'memTog': {
         this.memOpen = (this.memOpen === x) ? null : x;   // FAZ 75
         this.keepScroll = true; this.refresh();
@@ -902,16 +937,31 @@ const UI = {
       case 'autoAll': {
         const sci = G.fleets.filter(f=>f.e===0 && fleetHasRole(f,'bilim'));
         const allOn = sci.length && sci.every(f=>f.auto);
-        sci.forEach(f=>f.auto = !allOn);
-        say(allOn ? 'Tüm bilim gemileri manuel' : sci.length + ' bilim gemisi otomatik keşifte', 'sci');
+        sci.forEach(f => {
+          f.auto = !allOn;
+          /* ═══ FAZ 76: MANUELE GEÇİNCE ROTAYI DA DURDUR ═══
+             Eskiden yalnız bayrak düşüyordu; gemi mevcut rotasını
+             sürdürüp keşfe devam ediyordu. "Manuel" demek
+             "kendi başına hiçbir yere gitme" demektir. */
+          if (allOn){
+            f.path = [];
+            delete f.stalled; delete f._stallSaid;
+            if (f.ord && f.ord.t !== 'kol') f.ord = null;
+          }
+        });
+        say(allOn
+          ? '🛰 ' + sci.length + ' bilim gemisi manuele alındı — rotaları durduruldu'
+          : sci.length + ' bilim gemisi otomatik keşifte', 'sci');
         this.refresh(); break;
       }
       case 'autoex': {
         const f = G.fleets.find(fl => fl.id === +x);
         if (f){
           f.auto = !f.auto;
+          if (!f.auto){ f.path = []; delete f.stalled; delete f._stallSaid; }
           say(f.auto ? esc(f.name) + ' otomatik keşfe geçti'
-                     : esc(f.name) + ' manuel kontrole döndü', f.auto?'sci':'');
+                     : esc(f.name) + ' manuel kontrole döndü — rotası durduruldu',
+              f.auto?'sci':'');
         }
         this.refresh(); break;
       }
@@ -2030,6 +2080,41 @@ const UI = {
     const f = View.sel && View.sel.e===0 ? View.sel : null;
     if (f && f.ships.length){
       const e = G.p;
+      /* ═══════════════════════════════════════════════════════════
+         FAZ 76 — SİSTEM FİLO LİSTESİ (ROSTER)
+         Seçili filonun bulunduğu sistemde başka filolar da varsa
+         hepsi üstte listelenir; tıklayarak aralarında geçilir.
+         "Tümünü birleştir" yalnız ASKERİ filoları birleştirir —
+         koloni/bilim gemileri sürüye karışmaz.
+         ═══════════════════════════════════════════════════════════ */
+      if (f.sys >= 0){
+        const ayni = mine.filter(q => q.sys === f.sys && q.ships.length);
+        if (ayni.length > 1){
+          const sav = ayni.filter(q => isArmed(q));
+          h += `<div class="ph">📋 ${esc(G.sys[f.sys].name)} · ${ayni.length} FİLO</div>`;
+          h += `<div class="dpList">`;
+          ayni.forEach(q => {
+            const secili = q === f;
+            const tur = isArmed(q) ? '⚔' :
+                        fleetHasRole(q,'bilim') ? '🛰' :
+                        q.ships.some(sh=>sh.c==='ins') ? '🔧' : '🚀';
+            const st2 = fleetStatus(q);
+            h += `<div class="dpRow" data-a="selfleet" data-x="${q.id}"
+              style="cursor:pointer;${secili?'border-left:2px solid #6ff2c8':''}">
+              <span class="dpNm">${tur} ${esc((q.name||'Filo').slice(0,18))}</span>
+              <span class="dpTags" style="font-size:9px;color:#7d90ad">${
+                q.ships.length} gemi · ${st2.t}</span>
+              <b style="font-size:10px;color:${secili?'#6ff2c8':'#9fb6cc'}">${
+                isArmed(q) ? fmt(fleetPower(q)) : '—'}</b></div>`;
+          });
+          h += `</div>`;
+          if (sav.length > 1)
+            h += `<div class="act2"><button class="abtn pri" data-a="mergeArmed"
+              data-x="${f.sys}">⚑ ${sav.length} SAVAŞ FİLOSUNU BİRLEŞTİR</button></div>
+              <div class="mini">Sivil gemiler (koloni, bilim, inşaat) birleşmez —
+                kendi görevlerinde kalırlar.</div>`;
+        }
+      }
       h += `<div class="ph">${esc(f.name)}</div>`;
       const st = fleetStatus(f);
       h += `<div class="row"><span>Durum</span><b><span class="stt ${st.c}">${st.t}</span></b></div>`;
@@ -2152,6 +2237,25 @@ const UI = {
         <button class="abtn" data-a="stance">DURUŞ</button>
         <button class="abtn" data-a="merge">BİRLEŞTİR</button>
         <button class="abtn" data-a="split">AYIR</button></div>`;
+
+      /* ═══ FAZ 76: NİŞANGAH — TEKİL EMİR ═══
+         Sivil gemiler (koloni/inşaat/bilim) için. Sürü halinde
+         aynı hedefe gitmelerini engeller. */
+      if (!isArmed(f)){
+        const bekliyor = View.aimFleet === f.id;
+        h += `<div class="ph">🎯 TEKİL EMİR</div>`;
+        if (bekliyor){
+          h += `<div class="mini" style="color:#6ff2c8">Haritadan bir sistem
+            seç — yalnız <b>${esc(f.name || 'bu gemi')}</b> yola çıkacak.</div>
+            <div class="act2"><button class="abtn" data-a="aimCancel">
+              ✕ VAZGEÇ</button></div>`;
+        } else {
+          h += `<div class="mini">Bu gemiye tek başına hedef ver — diğer
+            sivil gemiler yerinde kalır.</div>
+            <div class="act2"><button class="abtn pri" data-a="aimSet"
+              data-x="${f.id}">🎯 HEDEF SEÇ</button></div>`;
+        }
+      }
 
       /* ═══ FAZ 73: BOMBARDIMAN KİPİ ═══
          Yalnız düşman yörüngesindeki silahlı filoda görünür. */
@@ -5065,6 +5169,18 @@ const UI = {
         if (!f.ships.length){ G.fleets = G.fleets.filter(x=>x!==f); View.sel = null; }
       }
     } else {
+      /* ═══ FAZ 76: HEDEF KİLİDİ ═══
+         Başka bir koloni gemisi oraya çoktan yola çıktıysa
+         ikinci gemi gönderilmez — ikisinin de heba olması biter. */
+      if (typeof colonyClaimedBy === 'function' && colonyClaimedBy(pl, f.id)){
+        const sahip = G.fleets.find(q => q.id === pl.colonyClaim);
+        say('🚀 ' + pl.name + ' zaten hedefte — ' +
+            (sahip ? esc(sahip.name) : 'başka bir gemi') +
+            ' yolda. İkinci gemi boşa gitmesin.', 'war');
+        this.refresh();
+        return;
+      }
+      if (typeof claimColony === 'function') claimColony(f, sys, pi);
       orderMove(f, sid);
       f.ord = {t:'kol', s:sid, p:pi};
       View.sel = f;
@@ -5933,7 +6049,8 @@ const UI = {
   saveMenu(){
     const auto = G.autoSave !== false;
     this.openModal(
-      `<div class="mhd"><span>KAYIT VE AYARLAR</span></div>
+      `<div class="mhd"><span>KAYIT VE AYARLAR</span>
+         <button class="riX" data-a="closem">✕</button></div>
        <div class="mbd" id="diagBox">Depolama sınanıyor…</div>
        <div class="mft">
         <button class="ch" data-a="mute"><div class="cht">${
@@ -6144,9 +6261,34 @@ function renderSetup(){
     for (const k in PERSONAS){
       const P = PERSONAS[k];
       const on = (c.mizac === k);
+      /* ═══ FAZ 76: OKUNABİLİR DOKTRİN DÖKÜMÜ ═══
+         "kin ×0.95" kimseye bir şey anlatmıyordu. Artık somut
+         etkiler yazılıyor: hangi kaynak ne kadar artıyor,
+         ne kadar azalıyor. */
+        const etiket = {
+          dmgMul:'Gemi hasarı', rofMul:'Atış hızı', araMul:'Araştırma',
+          etkMul:'Etki', eneMul:'Enerji', tradeMul:'Ticaret',
+          hullMul:'Gövde', dipMul:'Diplomasi', opCost:'Casusluk bedeli',
+          stab:'İstikrar', sensor:'Sensör menzili', shipSpeed:'Gemi üretimi',
+          borderMul:'Sınır büyümesi', newColStab:'Yeni koloni istikrarı'
+        };
+        const arti = [], eksi = [];
+        for (const mk in (P.e || {})){
+          const v = P.e[mk];
+          if (!v) continue;
+          const ad = etiket[mk] || mk;
+          const yazi = (mk === 'stab' || mk === 'sensor' || mk === 'newColStab')
+            ? (v > 0 ? '+' : '') + v
+            : (v > 0 ? '+' : '−') + Math.round(Math.abs(v) * 100) + '%';
+          (v > 0 ? arti : eksi).push(ad + ' ' + yazi);
+        }
+        const savasEg = P.warBias > .1 ? 'savaşçı'
+                      : P.warBias < -.05 ? 'barışçı' : 'dengeli';
       h += `<button class="opt ${on?'on':''}" data-a="mizacSet" data-x="${k}">${P.ico} ${P.n}
-        <small>kin ×${P.grudge.toFixed(2)} · affetme ×${P.forgive.toFixed(2)} ·
-        savaş ${P.warBias>=0?'+':''}${P.warBias.toFixed(2)}</small></button>`;
+        <small>${arti.length ? '<b style="color:#65e08a">' + arti.join(' · ') + '</b>' : ''}
+        ${eksi.length ? '<br><b style="color:#ff9b3d">' + eksi.join(' · ') + '</b>' : ''}
+        ${(!arti.length && !eksi.length) ? 'dengeli profil' : ''}
+        <br><span style="opacity:.6">dış politika: ${savasEg}</span></small></button>`;
     }
     h += `</div>`;
     if (c.mizac && PERSONAS[c.mizac]){

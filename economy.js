@@ -951,6 +951,35 @@ function buildHabitat(e, sys, pl){
 }
 
 /* ---------- kolonizasyon ---------- */
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 76 — KOLONİ HEDEF KİLİDİ
+   İki koloni gemisi aynı gezegene yollanınca ikisi de heba
+   oluyordu. Artık gemi yola çıkarken gezegen pl.colonyClaim ile
+   işaretleniyor; başka gemi orayı hedefleyemiyor. Kilidi koyan
+   filo ölürse kilit kendiliğinden düşer.
+   ═══════════════════════════════════════════════════════════════════ */
+function colonyClaimedBy(pl, benimId){
+  if (!pl || pl.colonyClaim === undefined) return false;
+  if (pl.colonyClaim === benimId) return false;          // kendi kilidim
+  const sahip = G.fleets.find(q => q.id === pl.colonyClaim && q.ships.length);
+  if (!sahip){ delete pl.colonyClaim; return false; }    // sahibi ölmüş
+  return true;
+}
+
+function claimColony(f, sys, pIdx){
+  const pl = sys.planets[pIdx];
+  if (!pl) return false;
+  if (colonyClaimedBy(pl, f.id)) return false;
+  /* Eski hedefimin kilidini bırak */
+  if (f.ord && f.ord.t === 'kol'){
+    const eski = G.sys[f.ord.s];
+    const ep = eski && eski.planets[f.ord.p];
+    if (ep && ep.colonyClaim === f.id) delete ep.colonyClaim;
+  }
+  pl.colonyClaim = f.id;
+  return true;
+}
+
 function canColonize(e, sys, pl){
   /* FAZ 24: Parçalanmış dünya bir daha kolonileştirilemez */
   if (pl.shattered) return false;
