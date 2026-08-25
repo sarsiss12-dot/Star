@@ -2763,9 +2763,15 @@ function splitType(e, f, cls, count){
 function maxHull(cls, e){ return SHIPS[cls].hull * (1 + e.mods.hullMul); }
 function fleetPower(f){
   const e = empOf(f); let p = 0;
+  /* ═══ FAZ 78B: AMİRAL ETKİSİ ═══
+     Lider çarpanı imparatorluk modlarına TOPLAMSAL ekleniyor —
+     traits/civics ile aynı matematik (1 + a + b + c). */
+  const ldD = (typeof fleetLeaderMul === 'function') ? fleetLeaderMul(f, 'dmgMul') : 0;
+  const ldH = (typeof fleetLeaderMul === 'function') ? fleetLeaderMul(f, 'hullMul') : 0;
   for (const s of f.ships){
     const d = SHIPS[s.c];
-    p += d.dmg*(1+e.mods.dmgMul)*4 + d.hull*(1+e.mods.hullMul)*s.h*.5 + d.sh*(1+e.mods.shMul)*.6;
+    p += d.dmg*(1+e.mods.dmgMul+ldD)*4 + d.hull*(1+e.mods.hullMul+ldH)*s.h*.5 +
+         d.sh*(1+e.mods.shMul)*.6;
   }
   return Math.round(p);
 }
@@ -2839,7 +2845,9 @@ function fleetSpeed(f){
     if (sy2 && sy2.owner >= 0 && sy2.owner !== e.id && e.war[sy2.owner])
       neb *= (1 + e.mods.foeSpd);
   }
-  return sp * 26 * (1 + e.mods.spdMul + relay) * fastDeployMul(f) * jump * neb;
+  /* FAZ 78B: amiralin seyahat becerisi */
+  const ldS = (typeof fleetLeaderMul === 'function') ? fleetLeaderMul(f, 'spdMul') : 0;
+  return sp * 26 * (1 + e.mods.spdMul + relay + ldS) * fastDeployMul(f) * jump * neb;
 }
 /* Kendi sınırları içindeki filolar yarı bakım öder — ikmal hatları kısa. */
 function fleetInHome(e, f){
@@ -3580,7 +3588,9 @@ function arrive(f, sys){
     if (pl && canColonize(e, sys, pl)){
       doColonize(e, sys, pl);
       delete pl.colonyClaim;                    // FAZ 76: kilit çözüldü
-      f.ships = f.ships.filter(s => s.c !== 'kol');
+      /* FAZ 77E: yalnız BİR koloni gemisi harcanır (bkz. ui.js) */
+      const kIx2 = f.ships.findIndex(sh => sh.c === 'kol');
+      if (kIx2 >= 0) f.ships.splice(kIx2, 1);
       if (!f.ships.length){ G.fleets = G.fleets.filter(x=>x!==f); return; }
     } else {
       /* ═══ FAZ 76: BUHARLAŞMA ONARIMI ═══
@@ -5678,8 +5688,18 @@ async function storeGet(k){
 function serialize(){
   return JSON.stringify({
     v:3, cfg:G.cfg, day:G.day, year:G.year, month:G.month, seed:G.seed, log:G.log, rs:RND_STATE,
+    /* ═══ FAZ 77E: KAYIT KAPSAMI GENİŞLETİLDİ ═══
+       KÖK NEDEN: uzay yapıları (built), süren inşaatlar (work),
+       ralli noktaları ve coğrafya bayrakları HİÇ kaydedilmiyordu.
+       Yüklemeden sonra tersaneler, karakollar ve geçitler yok
+       oluyordu — sınır/hakimiyet çizimi de bunlara dayandığı için
+       harita yarım görünüyordu. */
     sys: G.sys.map(s=>({i:s.id, x:s.x, y:s.y, n:s.name, st:STARS.indexOf(s.star),
-      p:s.planets, l:s.lanes, o:s.owner, sv:s.surv, se:s.seen, q:s.queue, an:s.anom, ak:s.anomK, d:s.def})),
+      p:s.planets, l:s.lanes, o:s.owner, sv:s.surv, se:s.seen, q:s.queue,
+      an:s.anom, ak:s.anomK, d:s.def,
+      b:s.built, w:s.work, ry:s.rally, lb:s.loopBuild,
+      pu:s.pulsar, nb:s.nebulaS, wd:s.wander, wf:s.wanderFrom,
+      yl:s.yardLock, sh:s.supplyHack, rd:s.radiation})),
     emps: G.emps, fl: G.fleets, nf: G.nextFleet
   });
 }
@@ -5692,16 +5712,35 @@ function deserialize(txt){
   G.sys = d.sys.map(s=>({
     id:s.i, x:s.x, y:s.y, name:s.n, star:STARS[s.st]||STARS[0], planets:s.p,
     lanes:s.l, owner:s.o, surv:s.sv, seen:s.se, queue:s.q, anom:s.an,
-    anomK:s.ak || 'sinyal', def:s.d||0
+    anomK:s.ak || 'sinyal', def:s.d||0,
+    /* FAZ 77E: geri yüklenen alanlar */
+    built:s.b, work:s.w, rally:s.ry, loopBuild:s.lb,
+    pulsar:s.pu, nebulaS:s.nb, wander:s.wd, wanderFrom:s.wf,
+    yardLock:s.yl, supplyHack:s.sh, radiation:s.rd
   }));
   G.emps = d.emps; G.fleets = d.fl; G.nextFleet = d.nf;
   G.p = G.emps[0];
   View.sel = null; View.selSys = null; View.route = false; View.routed = false;
   G.over = null; G.speed = 0;
   G.nebula = ART.nebula(G.seed, 128, 128);
-  G.emps.forEach(x=>{ x._prof = null; recalcMods(x); });
+  G.emps.forEach(x=>{
+    x._prof = null;
+    /* ═══ FAZ 77E: BAYAT ÖNBELLEKLERİ TEMİZLE ═══
+       Günlük önbellekler G.day'e bağlı ve kayıttan dönen G.day
+       eski değerlerle uyuşabiliyor — hakimiyet, tedarik ve geçit
+       hesapları bayat kalıp sınır çizimini bozuyordu. */
+    x._powAt = -1; x._supAt = -1; x._gateAt = -1;
+    x._trAt = -1; x._trCache = null;
+    recalcMods(x);
+  });
+  if (typeof rebuildStructIndex === 'function') rebuildStructIndex();
   updateVision();
   economyTick(true);
+  /* Çizim katmanının önbellekleri de tazelensin */
+  if (typeof View !== 'undefined'){
+    View._bolgeAt = -1;
+    if (View.updateFrustum) { try { View.updateFrustum(); } catch(e){} }
+  }
   return true;
 }
 /* --- kaydı gerçek dosya olarak indir (her ortamda çalışır) --- */
@@ -5786,6 +5825,9 @@ function enterGame(fromSave){
   UI.setSpeed(2);
   View.selSys = G.sys[G.p.home];
   UI.refresh();
+  /* FAZ 77E: kayıttan dönüşte sınırlar ilk karede çizilmiyordu —
+     çizim döngüsü ancak değişiklikte kare basıyor. Zorla tazele. */
+  if (typeof forceRedraw === 'function') forceRedraw();
   UI.checkOrient();
   if (!fromSave) say('Yıl ' + G.year + ' — ' + G.p.name + ' yıldızlara açılıyor', 'win');
   /* FAZ 18: ilk turda danışman. Oyunu duraklatır ama kilitlemez —

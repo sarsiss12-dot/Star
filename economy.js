@@ -51,6 +51,18 @@ function colonyOutput(e, sys, pl){
      giriyor — tek nokta, tüm kaynaklara aynı anda. */
   const _radikalMul = (typeof throneMul === 'function' ? throneMul(e, sys.id) : 1) *
                       (typeof hungerMul === 'function' ? hungerMul(e) : 1);
+  /* ═══ FAZ 78B: VALİ ETKİSİ ═══
+     Tek noktadan giriyor, tıpkı radikal civic çarpanları gibi.
+     Toplamsal: (1 + valiÇarpanı) — traits/civics matematiğiyle aynı. */
+  let _vMin = 0, _vAra = 0, _vYiy = 0, _vEne = 0;
+  if (pl.col && pl.col.leader !== undefined && typeof leaderOf === 'function'){
+    const _L = leaderOf(e, pl.col.leader);
+    if (_L && LEADER_TRAITS[_L.trait] && LEADER_TRAITS[_L.trait].e){
+      const _T = LEADER_TRAITS[_L.trait].e, _k = 1 + _L.rank * .10;
+      _vMin = (_T.minMul || 0) * _k; _vAra = (_T.araMul || 0) * _k;
+      _vYiy = (_T.yiyMul || 0) * _k; _vEne = (_T.eneMul || 0) * _k;
+    }
+  }
   const col = pl.col, o = {min:0,ene:0,yiy:0,ala:0,ara:0,etk:0,tuk:0}, use = {min:0};
   const scale = clamp(.55 + col.pop*.045, .55, 1.7);
   const staff = colonyStaffing(col);
@@ -92,11 +104,12 @@ function colonyOutput(e, sys, pl){
   if (phO && phO.sever && phO.sever.indexOf(pl.t) >= 0){
     for (const k in o) o[k] *= 1.20;
   }
-  o.min *= (1 + (fm.minMul||0));
-  o.ene *= (1 + (fm.eneMul||0));
-  o.yiy *= (1 + (fm.yiyMul||0));
+  /* FAZ 78B: vali çarpanı odak çarpanıyla TOPLAMSAL birleşir */
+  o.min *= (1 + (fm.minMul||0) + _vMin);
+  o.ene *= (1 + (fm.eneMul||0) + _vEne);
+  o.yiy *= (1 + (fm.yiyMul||0) + _vYiy);
   o.ala *= (1 + (fm.alaMul||0));
-  o.ara *= (1 + (fm.araMul||0));
+  o.ara *= (1 + (fm.araMul||0) + _vAra);
   o.tuk *= (1 + (fm.minMul||0)*.6);
   o.etk += (fm.etkFlat||0);
   if (e.home === sys.id) { for (const k in o) o[k] *= 1.30; }
@@ -495,6 +508,13 @@ function economyTick(init){
         if (!col.bombed || col.bombed < (G.memAge || 0))
           col.scorched = Math.max(0, col.scorched - .15);   // ~1.8/yıl
         if (col.scorched <= 0) delete col.scorched;
+      }
+      /* FAZ 78B: "İlham Verici" vali istikrar hedefini yükseltir */
+      if (col.leader !== undefined && typeof leaderOf === 'function'){
+        const _LV = leaderOf(e, col.leader);
+        if (_LV && LEADER_TRAITS[_LV.trait] && LEADER_TRAITS[_LV.trait].e &&
+            LEADER_TRAITS[_LV.trait].e.stab)
+          target += LEADER_TRAITS[_LV.trait].e.stab * (1 + _LV.rank * .10);
       }
       if (hasCivic(e,'oneparty')) target = Math.max(target, 35);
       if (hasPerk(e,'zeal')) target = Math.max(target, 60);
@@ -2833,9 +2853,17 @@ const MARKET_DRIFT = .04;     // aylık taban değere dönüş oranı
 const MARKET_IMPACT = .00018; // birim başına fiyat kayması
 const MARKET_MIN = .35, MARKET_MAX = 3.0;   // taban çarpanı sınırları
 
+/* ═══ FAZ 78: BORSA KONSEY KARARIYLA AÇILIR ═══
+   Oyun başında borsa YOK. Galaktik Konsey "Galaktik Borsayı Kur"
+   yasasını geçirene kadar hiçbir devlet takas yapamaz. */
+function marketOpen(){
+  return !!(typeof councilExists === 'function' && councilExists() &&
+            G.council.laws && G.council.laws.borsaKur);
+}
+
 function marketInit(){
   if (G.market) return G.market;
-  G.market = {mul: {ene: 1, min: 1, ala: 1}, hist: []};
+  G.market = {mul: {ene: 1, min: 1, ala: 1}, hist: [], acildi: G.memAge || 0};
   return G.market;
 }
 
@@ -2860,6 +2888,10 @@ function marketQuote(sat, al, miktar){
 }
 
 function marketTrade(e, sat, al, miktar){
+  /* FAZ 78: borsa kurulmadan takas yok */
+  if (!marketOpen())
+    return {ok:false, why:'Galaktik Borsa henüz kurulmadı — konseyin ' +
+            'karar vermesi gerekiyor'};
   const q = marketQuote(sat, al, miktar);
   if (!q.ok) return q;
   if ((e.res[sat] || 0) < miktar)
@@ -2884,6 +2916,7 @@ function marketTrade(e, sat, al, miktar){
 /* Aylık: fiyatlar taban değere doğru süzülür + AI işlemleri
    piyasayı hafifçe kıpırdatır (piyasa yalnız oyuncunun değil) */
 function marketTick(){
+  if (!marketOpen()) return;        // FAZ 78: kapalı borsada fiyat oynamaz
   const m = marketInit();
   for (const r of MARKET_RES){
     m.mul[r] += (1 - m.mul[r]) * MARKET_DRIFT;
@@ -3914,4 +3947,179 @@ function rebuildThrone(e, sys){
       'Hanedanın yüzen başkenti geri döndü — felç sona erdi.',
       'win', 'kritik', e);
   return {ok:true};
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 78B — LİDERLER (AMİRAL VE VALİ)
+   Her liderin kalıcı bir seed'i var: portresi, adı ve özelliği
+   ondan türüyor. Amiral bir filoya, vali bir koloniye atanır.
+   Etkileri doğrudan o birime uygulanır — imparatorluk geneline
+   değil, ki atama kararı anlamlı olsun.
+   ═══════════════════════════════════════════════════════════════════ */
+const LEADER_TRAITS = {
+  lojistik  :{n:'Lojistik Uzmanı', ico:'⚓', tip:'amiral',
+              d:'Filo bakımı −%15', e:{upMul:-.15}},
+  taktikci  :{n:'Taktikçi',        ico:'⚔', tip:'amiral',
+              d:'Filo hasarı +%12', e:{dmgMul:.12}},
+  zirhci    :{n:'Zırh Ustası',     ico:'🛡', tip:'amiral',
+              d:'Gövde +%15',      e:{hullMul:.15}},
+  seyyah    :{n:'Seyyah',          ico:'🧭', tip:'amiral',
+              d:'Filo hızı +%20',  e:{spdMul:.20}},
+  korkak    :{n:'İhtiyatlı',       ico:'🐢', tip:'amiral',
+              d:'Hasar −%8 ama gövde +%20', e:{dmgMul:-.08, hullMul:.20}},
+
+  ilham     :{n:'İlham Verici',    ico:'✨', tip:'vali',
+              d:'İstikrar +10',    e:{stab:10}},
+  sanayici  :{n:'Sanayici',        ico:'🏭', tip:'vali',
+              d:'Mineral +%15',    e:{minMul:.15}},
+  alim      :{n:'Âlim',            ico:'📚', tip:'vali',
+              d:'Araştırma +%15',  e:{araMul:.15}},
+  ciftci    :{n:'Toprak Adamı',    ico:'🌾', tip:'vali',
+              d:'Yiyecek +%20',    e:{yiyMul:.20}},
+  yolsuz    :{n:'Yolsuz',          ico:'💰', tip:'vali',
+              d:'Gelirin %10 kadarını çalar', e:{minMul:-.10, eneMul:-.10}}
+};
+
+const LEADER_NAMES = ['Vex','Ardan','Kessa','Torin','Nyla','Draven','Sora','Kael',
+  'Imra','Zephyr','Rhea','Auren','Mira','Cassian','Vela','Orin','Thessa','Lyr',
+  'Kavon','Serai','Doran','Ilke','Bora','Ferran','Yaren','Sena','Altay','Deniz'];
+const LEADER_TITLES = {amiral:['Amiral','Komodor','Filo Beyi','Deniz Beyi'],
+                       vali:['Vali','Yönetici','Sancak Beyi','Muhafız']};
+
+let LEADER_ID = 1;
+
+function makeLeader(e, tip, rnd2){
+  const R2 = rnd2 || rnd;
+  const seed = Math.floor(R2() * 2147483647) || 1;
+  /* Özellik havuzu tipe göre süzülür */
+  const havuz = Object.keys(LEADER_TRAITS).filter(k => LEADER_TRAITS[k].tip === tip);
+  const trait = havuz[Math.floor(R2() * havuz.length)];
+  const ad = LEADER_NAMES[Math.floor(R2() * LEADER_NAMES.length)];
+  const unvan = LEADER_TITLES[tip][Math.floor(R2() * LEADER_TITLES[tip].length)];
+  return {
+    id: LEADER_ID++, seed, tip, trait,
+    name: unvan + ' ' + ad,
+    emp: e.id, rank: 0, xp: 0,
+    look: e.look || 'humanoid',
+    col: e.col || '#6ff2c8',
+    since: G.memAge || 0
+  };
+}
+
+/* Havuzu doldur — oyuncu buradan atama yapar */
+function leaderPool(e){
+  e.leaders = e.leaders || [];
+  return e.leaders;
+}
+
+function recruitLeader(e, tip){
+  const bedel = {etk: 60};
+  for (const r in bedel)
+    if ((e.res[r] || 0) < bedel[r])
+      return {ok:false, why:bedel[r] + ' etki gerekir'};
+  const havuz = leaderPool(e);
+  if (havuz.length >= 8) return {ok:false, why:'Havuz dolu (8 lider)'};
+  for (const r in bedel) e.res[r] -= bedel[r];
+  const L = makeLeader(e, tip);
+  havuz.push(L);
+  if (e.id === 0) say('👤 ' + L.name + ' hizmete alındı — ' +
+    LEADER_TRAITS[L.trait].ico + ' ' + LEADER_TRAITS[L.trait].n, 'win');
+  return {ok:true, leader:L};
+}
+
+function assignLeader(e, leaderId, hedefTip, hedefId){
+  const havuz = leaderPool(e);
+  const L = havuz.find(x => x.id === leaderId);
+  if (!L) return {ok:false, why:'Lider bulunamadı'};
+  if (L.tip !== hedefTip)
+    return {ok:false, why:L.tip === 'amiral' ? 'Bu bir amiral, filoya atanır'
+                                             : 'Bu bir vali, gezegene atanır'};
+  /* Eski görevden al */
+  if (L.post !== undefined){
+    if (L.tip === 'amiral'){
+      const eski = G.fleets.find(f => f.id === L.post);
+      if (eski) delete eski.leader;
+    } else {
+      for (const c of (e.colonies || [])){
+        const sy = G.sys[c.s], pl = sy && sy.planets[c.p];
+        if (pl && pl.col && pl.col.leader === L.id) delete pl.col.leader;
+      }
+    }
+  }
+  if (hedefTip === 'amiral'){
+    const f = G.fleets.find(q => q.id === hedefId && q.e === e.id);
+    if (!f) return {ok:false, why:'Filo yok'};
+    /* O filoda başka amiral varsa görevden al */
+    if (f.leader !== undefined){
+      const onc = havuz.find(x => x.id === f.leader);
+      if (onc) delete onc.post;
+    }
+    f.leader = L.id; L.post = f.id;
+  } else {
+    const [sid, pi] = String(hedefId).split(':').map(Number);
+    const sy = G.sys[sid], pl = sy && sy.planets[pi];
+    if (!pl || !pl.col || pl.owner !== e.id) return {ok:false, why:'Koloni yok'};
+    if (pl.col.leader !== undefined){
+      const onc2 = havuz.find(x => x.id === pl.col.leader);
+      if (onc2) delete onc2.post;
+    }
+    pl.col.leader = L.id; L.post = sid + ':' + pi;
+  }
+  return {ok:true, leader:L};
+}
+
+function leaderOf(e, id){
+  if (id === undefined) return null;
+  return (e.leaders || []).find(x => x.id === id) || null;
+}
+
+/* Bir filonun amiral çarpanı */
+function fleetLeaderMul(f, anahtar){
+  const e = G.emps[f.e];
+  if (!e || f.leader === undefined) return 0;
+  const L = leaderOf(e, f.leader);
+  if (!L) return 0;
+  const T = LEADER_TRAITS[L.trait];
+  if (!T || !T.e) return 0;
+  const v = T.e[anahtar] || 0;
+  /* Deneyim kazandıkça etki büyür: rank 0-4 → ×1 … ×1.4 */
+  return v * (1 + L.rank * .10);
+}
+
+/* Bir koloninin vali çarpanı */
+function colonyLeaderMul(col, anahtar){
+  if (!col || col.leader === undefined) return 0;
+  const e = G.emps[col._empId !== undefined ? col._empId : 0];
+  for (const emp of G.emps){
+    if (emp.dead) continue;
+    const L = leaderOf(emp, col.leader);
+    if (L){
+      const T = LEADER_TRAITS[L.trait];
+      if (!T || !T.e) return 0;
+      return (T.e[anahtar] || 0) * (1 + L.rank * .10);
+    }
+  }
+  return 0;
+}
+
+/* Aylık: deneyim ve terfi */
+function leaderTick(){
+  for (const e of G.emps){
+    if (e.dead || e.wild || e.crisisSide || !e.leaders) continue;
+    for (const L of e.leaders){
+      if (L.post === undefined) continue;          // boşta olan öğrenmez
+      let kazanc = 1;
+      if (L.tip === 'amiral'){
+        const f = G.fleets.find(q => q.id === L.post);
+        if (f && f.combat) kazanc = 4;             // muharebe hızlı öğretir
+      }
+      L.xp += kazanc;
+      const gerek = 40 + L.rank * 55;
+      if (L.xp >= gerek && L.rank < 4){
+        L.xp = 0; L.rank++;
+        if (e.id === 0)
+          say('👤 ' + L.name + ' terfi etti — rütbe ' + L.rank + '/4', 'win');
+      }
+    }
+  }
 }

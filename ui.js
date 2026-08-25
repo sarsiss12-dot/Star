@@ -476,6 +476,69 @@ const UI = {
         this.keepScroll = true; this.refresh();
         break;
       }
+      case 'ldrAssign': {
+        const [lid, tip, hedef] = x.split(':');
+        const r = assignLeader(G.p, +lid, tip,
+          tip === 'amiral' ? +hedef : x.split(':').slice(2).join(':'));
+        if (!r.ok) say(r.why, 'war');
+        else say('👤 ' + r.leader.name + ' göreve başladı', 'win');
+        this.keepScroll = true; this.refresh();
+        break;
+      }
+      case 'ldrUnassign': {
+        const L = leaderOf(G.p, +x);
+        if (L){
+          if (L.tip === 'amiral'){
+            const f2 = G.fleets.find(q => q.id === L.post);
+            if (f2) delete f2.leader;
+          } else if (L.post !== undefined){
+            const [si, pi2] = String(L.post).split(':').map(Number);
+            const sy2 = G.sys[si], pl2 = sy2 && sy2.planets[pi2];
+            if (pl2 && pl2.col) delete pl2.col.leader;
+          }
+          delete L.post;
+          say('👤 ' + L.name + ' görevden alındı');
+        }
+        this.keepScroll = true; this.refresh();
+        break;
+      }
+      case 'ldrHire': {
+        const r2 = recruitLeader(G.p, x);
+        if (!r2.ok) say(r2.why, 'war');
+        this.keepScroll = true; this.refresh();
+        break;
+      }
+      case 'fundSep': {
+        const v = G.emps[+x];
+        const r = fundSeparatists(G.p, v);
+        if (!r.ok) say(r.why, 'war');
+        this.keepScroll = true; this.refresh();
+        break;
+      }
+      case 'vassalDemand': {
+        const [id, tur] = x.split(':');
+        const o = G.emps[+id];
+        const r = demandVassal(G.p, o, tur);
+        if (!r.ok) say(r.why, 'war');
+        else if (r.kabul)
+          say('⛓ ' + o.name + ' biat etti — ' + VASSAL_TYPES[tur].n, 'win');
+        else
+          say('⛓ ' + o.name + ' biati REDDETTİ. Gurur kırıldı, ilişki bozuldu.', 'war');
+        this.keepScroll = true; this.refresh();
+        break;
+      }
+      case 'vassalSeek': {
+        const [id2, tur2] = x.split(':');
+        const o2 = G.emps[+id2];
+        const r2 = seekProtection(G.p, o2, tur2);
+        if (!r2.ok) say(r2.why, 'war');
+        else if (r2.kabul)
+          say('🛡 ' + o2.name + ' himayesine girdin — artık seni savunmak zorunda', 'win');
+        else
+          say('🛡 ' + o2.name + ' talebini geri çevirdi', 'war');
+        this.keepScroll = true; this.refresh();
+        break;
+      }
       case 'supIndep': {
         const o = G.emps[+x];
         const r = (typeof supportIndep === 'function')
@@ -1353,8 +1416,13 @@ const UI = {
     this.topbar();
     /* FAZ 12: bilim/diplo/imp artık sağ panelde değil — eski kayıtlı
        sekme seçimi varsa sisteme düşülür (kayıt uyumluluğu). */
-    if (this.cur !== 'sistem' && this.cur !== 'filo' && this.cur !== 'intel')
-      this.cur = 'sistem';
+    /* ═══ FAZ 77E: DURUMLAR SEKMESİ ONARIMI ═══
+       KÖK NEDEN: beyaz liste elle yazılmıştı ve Faz 77C'de eklenen
+       'durum' sekmesi listede yoktu — sekmeye basıldığı an
+       this.cur 'sistem'e geri düşüyordu, panel hiç değişmiyordu.
+       Artık liste TABS'tan türetiliyor: yeni sekme eklenince
+       burası kendiliğinden tanır. */
+    if (!TABS.some(t => t.k === this.cur)) this.cur = 'sistem';
     const el = $('panel');
     const y = el.scrollTop;
     el.innerHTML = this['p_'+this.cur] ? this['p_'+this.cur]() : '';
@@ -1498,6 +1566,37 @@ const UI = {
       }
       if (anlasma.length)
         h += `<div class="mini">Yürürlükte: ${anlasma.join(' · ')}</div>`;
+
+      /* ═══ FAZ 78: BİAT VE HİMAYE ═══ */
+      if (typeof canDemandVassal === 'function' && !war){
+        const dv = canDemandVassal(e, owner);
+        const sp = canSeekProtection(e, owner);
+        if (dv.ok || sp.ok){
+          h += `<div class="ph">⛓ SÜZERENLİK</div>`;
+          if (dv.ok){
+            const sans = Math.round(vassalAcceptChance(e, owner) * 100);
+            h += `<div class="mini">Güç oranın <b>${dv.oran.toFixed(1)}×</b>.
+              Biat ederse gelirinin <b>%20</b>'sini öder ve savaşlarına
+              katılır. Kabul şansı <b>%${sans}</b>.</div>
+              <div class="act2">`;
+            ['haracguzar','bekci','akademik'].forEach(t2 => {
+              const T = VASSAL_TYPES[t2];
+              h += `<button class="abtn" data-a="vassalDemand"
+                data-x="${owner.id}:${t2}">${T.ico} ${esc(T.n)}
+                <br><span style="font-size:9px">${VASSAL_DEMAND_COST} ◈</span></button>`;
+            });
+            h += `</div>`;
+          }
+          if (sp.ok){
+            h += `<div class="mini">${esc(owner.name.slice(0,20))} senden
+              <b>${sp.oran.toFixed(1)}×</b> güçlü. Himayesine girersen seni
+              savunmak zorunda kalır — ama gelirinin bir kısmı ona akar.</div>
+              <div class="act2"><button class="abtn" data-a="vassalSeek"
+                data-x="${owner.id}:bekci">🛡 KORUMA TALEP ET
+                <br><span style="font-size:9px">${VASSAL_SEEK_COST} ◈</span></button></div>`;
+          }
+        }
+      }
 
       /* ═══ FAZ 72: BAĞIMSIZLIĞI DESTEKLE ═══ */
       if (typeof canSupportIndep === 'function'){
@@ -1733,6 +1832,40 @@ const UI = {
                 İstikrarı ${typeof SECESSION_STAB !== 'undefined' ? SECESSION_STAB : 25}
                 üstüne çıkar ya da sıkıyönetim ilan et — hareket söner.</div>
             </div>`;
+          }
+
+          /* ═══ FAZ 78B: VALİ ═══ */
+          if (typeof leaderPool === 'function' && pl.owner === 0){
+            const vali = leaderOf(e, pl.col.leader);
+            h += `<div class="ph">👤 VALİ</div>`;
+            if (vali){
+              const TV = LEADER_TRAITS[vali.trait];
+              h += `<div class="ldrRow">
+                <canvas class="ldrPort" width="72" height="72"
+                  data-ldr="${vali.seed}" data-lk="${vali.look}"
+                  data-col="${vali.col}" data-rank="${vali.rank}"></canvas>
+                <div class="ldrInfo"><b>${esc(vali.name)}</b>
+                  <span>${TV.ico} ${esc(TV.n)} — ${esc(TV.d)}</span>
+                  <span style="color:#7d90ad">rütbe ${vali.rank}/4</span>
+                </div></div>
+                <div class="act2"><button class="abtn" data-a="ldrUnassign"
+                  data-x="${vali.id}">✕ GÖREVDEN AL</button></div>`;
+            } else {
+              const bosV = leaderPool(e).filter(L => L.tip === 'vali' && L.post === undefined);
+              if (bosV.length){
+                h += `<div class="act2">`;
+                bosV.slice(0, 4).forEach(L => {
+                  const T3 = LEADER_TRAITS[L.trait];
+                  h += `<button class="abtn" data-a="ldrAssign"
+                    data-x="${L.id}:vali:${s.id}:${pl.i}">${T3.ico}
+                    ${esc(L.name.slice(0,14))}
+                    <br><span style="font-size:9px">${esc(T3.d)}</span></button>`;
+                });
+                h += `</div>`;
+              } else {
+                h += `<div class="mini">Boşta vali yok.</div>`;
+              }
+            }
           }
 
           /* ═══ FAZ 61: YÖNELİM OTOMASYONU ═══ */
@@ -2275,6 +2408,42 @@ const UI = {
         <button class="abtn" data-a="stance">DURUŞ</button>
         <button class="abtn" data-a="merge">BİRLEŞTİR</button>
         <button class="abtn" data-a="split">AYIR</button></div>`;
+
+      /* ═══ FAZ 78B: AMİRAL ═══ */
+      if (typeof leaderPool === 'function' && isArmed(f)){
+        const amiral = leaderOf(e, f.leader);
+        h += `<div class="ph">👤 AMİRAL</div>`;
+        if (amiral){
+          const T = LEADER_TRAITS[amiral.trait];
+          h += `<div class="ldrRow">
+            <canvas class="ldrPort" width="72" height="72"
+              data-ldr="${amiral.seed}" data-lk="${amiral.look}"
+              data-col="${amiral.col}" data-rank="${amiral.rank}"></canvas>
+            <div class="ldrInfo">
+              <b>${esc(amiral.name)}</b>
+              <span>${T.ico} ${esc(T.n)} — ${esc(T.d)}</span>
+              <span style="color:#7d90ad">rütbe ${amiral.rank}/4 ·
+                ${amiral.xp} tecrübe</span>
+            </div></div>
+          <div class="act2"><button class="abtn" data-a="ldrUnassign"
+            data-x="${amiral.id}">✕ GÖREVDEN AL</button></div>`;
+        } else {
+          const bos = leaderPool(e).filter(L => L.tip === 'amiral' && L.post === undefined);
+          if (bos.length){
+            h += `<div class="mini">Boştaki amiraller:</div><div class="act2">`;
+            bos.slice(0, 4).forEach(L => {
+              const T2 = LEADER_TRAITS[L.trait];
+              h += `<button class="abtn" data-a="ldrAssign"
+                data-x="${L.id}:amiral:${f.id}">${T2.ico} ${esc(L.name.slice(0,16))}
+                <br><span style="font-size:9px">${esc(T2.d)}</span></button>`;
+            });
+            h += `</div>`;
+          } else {
+            h += `<div class="mini">Boşta amiral yok. Devlet panelinden
+              yeni lider alabilirsin.</div>`;
+          }
+        }
+      }
 
       /* ═══ FAZ 76: NİŞANGAH — TEKİL EMİR ═══
          Sivil gemiler (koloni/inşaat/bilim) için. Sürü halinde
@@ -2882,7 +3051,25 @@ const UI = {
       body1.addEventListener('scroll', ()=>{ this._diploScroll = body1.scrollTop; });
     }
     setTimeout(()=>{
-      [...document.querySelectorAll('canvas.dpPort')].forEach(cv=>{
+      /* FAZ 78B: lider portreleri — ART.cache sayesinde bir kez üretilir */
+    [...document.querySelectorAll('canvas.ldrPort')].forEach(cv=>{
+      if (cv.dataset.done) return;
+      cv.dataset.done = 1;
+      try {
+        const g3 = cv.getContext('2d');
+        g3.imageSmoothingEnabled = false;
+        const spr3 = ART.leaderPortrait({
+          seed: +cv.dataset.ldr, look: cv.dataset.lk,
+          col: cv.dataset.col, rank: +(cv.dataset.rank || 0), scale: 3
+        });
+        const sc3 = Math.min(cv.width/spr3.width, cv.height/spr3.height) * .92;
+        g3.clearRect(0, 0, cv.width, cv.height);
+        g3.drawImage(spr3, (cv.width - spr3.width*sc3)/2,
+          (cv.height - spr3.height*sc3)/2, spr3.width*sc3, spr3.height*sc3);
+      } catch(err){}
+    });
+
+    [...document.querySelectorAll('canvas.dpPort')].forEach(cv=>{
         const g = cv.getContext('2d');
         g.imageSmoothingEnabled = false;
         const spr = ART.portraitFull({
@@ -3541,6 +3728,42 @@ const UI = {
             else h += `<div class="mini" style="color:#7d90ad">${esc(chk.why)}</div>`;
           }
           h += `</div>`;
+        });
+      }
+    }
+
+    /* ═══ FAZ 78: AYRILIKÇILARI FONLA ═══
+       Rakibin vasalını hedef alır: sadakati aşındırır, sıfırlanınca
+       vasal kendiliğinden bağımsızlık savaşı başlatır. */
+    if (typeof canFundSeparatists === 'function'){
+      const vasallar = G.emps.filter(o => !o.dead && !o.wild && !o.crisisSide &&
+        typeof isVassal === 'function' && isVassal(o) && o.overlord !== 0 &&
+        e.contact[o.id]);
+      h += `<div class="ph">🕯 AYRILIKÇILARI FONLA</div>`;
+      h += `<div class="mini">Rakibinin vasalına gizlice para akıt.
+        Sadakati sıfırlanırsa isyan eder ve senyörüne savaş açar —
+        sen hiç savaşa girmeden arkasını yakarsın.
+        (${Object.keys(FUND_SEP_COST).map(r =>
+          FUND_SEP_COST[r] + ' ' + (RES[r] ? RES[r].n : r)).join(' · ')})</div>`;
+      if (!vasallar.length){
+        h += `<div class="mini" style="color:#7d90ad">Tanıdığın devletlerin
+          vasalı yok.</div>`;
+      } else {
+        vasallar.forEach(v => {
+          const chk = canFundSeparatists(e, v);
+          const lord2 = overlordOf(v);
+          const sad = vassalLoyalty(v);
+          const rc = sad > 60 ? '#65e08a' : sad > 30 ? '#f2d452' : '#ff5f6d';
+          h += `<div class="box">
+            <div class="bt"><span style="color:${v.col}">${esc(v.name.slice(0,20))}</span>
+              <span class="tag b">${lord2 ? esc(lord2.name.slice(0,14)) : '—'} vasalı</span></div>
+            <div class="bd">Sadakat: <b style="color:${rc}">${sad}</b>/100
+              ${v.sepFunded ? ' · <span style="color:#ff9b3d">fonlanıyor (−' +
+                Math.round(v.sepFunded) + ')</span>' : ''}</div>
+            <div class="act2"><button class="abtn ${chk.ok?'dgr':'dis'}"
+              data-a="fundSep" data-x="${v.id}">🕯 FONLA</button></div>
+            ${chk.ok ? '' : '<div class="mini" style="color:#ff9b3d">' +
+              esc(chk.why) + '</div>'}</div>`;
         });
       }
     }
@@ -5178,6 +5401,44 @@ const UI = {
     const lg = G.log.slice(-14).reverse();
     h += lg.length ? lg.map(l=>`<div class="mini" style="padding:3px 0;border-bottom:1px solid #182338">${esc(l.m)}</div>`).join('')
                    : `<div class="mini">Kayıt yok.</div>`;
+    /* ═══ FAZ 78B: LİDER HAVUZU ═══ */
+    if (typeof leaderPool === 'function'){
+      const hav = leaderPool(e);
+      const bosta = hav.filter(L => L.post === undefined).length;
+      h += `<div class="ph">👤 LİDERLER (${hav.length}/8)</div>`;
+      h += `<div class="mini">Amiraller filolara, valiler gezegenlere atanır.
+        Görevdeyken tecrübe kazanır ve etkileri büyür (rütbe başına +%10).
+        ${bosta ? '<b>' + bosta + ' lider boşta.</b>' : 'Hepsi görevde.'}</div>`;
+      if (hav.length){
+        h += `<div class="dpList">`;
+        hav.forEach(L => {
+          const T = LEADER_TRAITS[L.trait];
+          const yer = L.post === undefined ? 'boşta'
+            : L.tip === 'amiral'
+              ? ((G.fleets.find(q=>q.id===L.post)||{}).name || 'filo')
+              : (function(){ const [si,pi]=String(L.post).split(':').map(Number);
+                  const sy=G.sys[si], p2=sy&&sy.planets[pi];
+                  return p2 ? (p2.col && p2.col.name || p2.name) : 'gezegen'; })();
+          h += `<div class="dpRow">
+            <canvas class="ldrPort" width="48" height="48"
+              style="width:26px;height:26px;flex:0 0 26px"
+              data-ldr="${L.seed}" data-lk="${L.look}" data-col="${L.col}"
+              data-rank="${L.rank}"></canvas>
+            <span class="dpNm">${T.ico} ${esc(L.name.slice(0,18))}</span>
+            <span class="dpTags" style="font-size:9px;color:#7d90ad">${esc(yer)}</span>
+            <b style="font-size:10px;color:${L.rank?'#6ff2c8':'#7d90ad'}">R${L.rank}</b>
+          </div>`;
+        });
+        h += `</div>`;
+      }
+      h += `<div class="act2">
+        <button class="abtn ${(e.res.etk||0)>=60?'pri':'dis'}" data-a="ldrHire"
+          data-x="amiral">⚓ AMİRAL AL<br><span style="font-size:9px">60 ◈</span></button>
+        <button class="abtn ${(e.res.etk||0)>=60?'pri':'dis'}" data-a="ldrHire"
+          data-x="vali">🏛 VALİ AL<br><span style="font-size:9px">60 ◈</span></button>
+      </div>`;
+    }
+
     h += `<div class="act2" style="margin-top:12px"><button class="abtn" data-a="save">KAYIT MENÜSÜ</button></div>`;
     return h;
   },
@@ -5259,7 +5520,12 @@ const UI = {
     if (f.sys === sid){
       if (canColonize(G.p, sys, pl)){
         doColonize(G.p, sys, pl);
-        f.ships = f.ships.filter(s=>s.c!=='kol');
+        /* ═══ FAZ 77E: TEK KOLONİ GEMİSİ HARCA ═══
+           KÖK NEDEN: filter TÜM 'kol' gemilerini siliyordu; üç
+           koloni gemisi taşıyan filo tek yerleşimde üçünü birden
+           kaybediyordu. Artık yalnız ilk bulunan çıkarılıyor. */
+        const kIx = f.ships.findIndex(sh => sh.c === 'kol');
+        if (kIx >= 0) f.ships.splice(kIx, 1);
         if (!f.ships.length){ G.fleets = G.fleets.filter(x=>x!==f); View.sel = null; }
       }
     } else {
@@ -5727,6 +5993,7 @@ const UI = {
       data-pers="${typeof personaKey==='function'?personaKey(o):'yayilmaci'}"></canvas>`;
   },
   eventArt(art, baslik, metin, cls, kat, emp){
+
     /* ═══════════════════════════════════════════════════════════
        FAZ 58 — AKILLI FİLTRE (VARSAYILAN: GEÇME)
        ÖLÇÜM: eventArt'ın 17 çağrı noktasının TAMAMI casusluk,
@@ -6073,6 +6340,26 @@ const UI = {
   openMarket(){
     if (typeof marketInit !== 'function'){ say('Piyasa yok', 'war'); return; }
     const e = G.p;
+    /* ═══ FAZ 78: BORSA KONSEY KARARIYLA AÇILIR ═══ */
+    if (typeof marketOpen === 'function' && !marketOpen()){
+      const pane0 = $('diploPane');
+      const kns = (typeof councilExists === 'function' && councilExists());
+      pane0.innerHTML = `<div class="dpBox">
+        <div class="dpHd"><span>💱 BORSA KAPALI</span>
+          <button class="riX" data-a="closeMarket">✕</button></div>
+        <div class="dpBody"><div class="box" style="border-color:#ff9b3d">
+          <div class="bt"><span>Galaktik Borsa henüz kurulmadı</span></div>
+          <div class="bd">Ortak bir takas merkezi ancak Galaktik Konseyin
+            kararıyla açılır. ${kns
+              ? 'Konseyde <b>"Galaktik Borsayı Kur"</b> yasasını gündeme getir.'
+              : 'Önce bir <b>Galaktik Konsey</b> kurulmalı.'}</div>
+          <div class="act2"><button class="abtn pri" data-a="${
+            kns ? 'cncPane' : 'globalPane'}" data-x="imp">${
+            kns ? '🌐 KONSEYE GİT' : '🌐 KONSEY KUR'}</button></div>
+        </div></div></div>`;
+      pane0.classList.add('show');
+      return;
+    }
     /* FAZ 73: Arındırıcılar pazara giremez */
     if (typeof isPurifier === 'function' && isPurifier(e)){
       const pane = $('diploPane');
@@ -6294,6 +6581,34 @@ const UI = {
       g.clearRect(0,0,pc.width,pc.height);
       g.drawImage(spr, (pc.width-spr.width*sc)/2, (pc.height-spr.height*sc)/2, spr.width*sc, spr.height*sc);
     }
+    /* ═══════════════════════════════════════════════════════════
+       FAZ 77E — SAĞ PANEL PORTRE ONARIMI
+       KÖK NEDEN: dpPort canvas'ları yalnız openDiplo() ve
+       openGlobal() içindeki setTimeout bloklarında boyanıyordu.
+       Faz 71'de sağ panele (p_sistem) eklediğim portreler o
+       döngülerin dışında kaldığı için ÇİZİLMİYORDU — oyuncu boş
+       çerçeve görüyordu. paintSprites her karede çalıştığı için
+       boyama buraya taşındı; hangi panelde olursa olsun dolar. */
+    [...document.querySelectorAll('canvas.dpPort')].forEach(cv=>{
+      if (cv.dataset.done) return;
+      cv.dataset.done = 1;
+      try {
+        const g2 = cv.getContext('2d');
+        g2.imageSmoothingEnabled = false;
+        const spr2 = ART.portraitFull({
+          look: cv.dataset.lk || 'humanoid',
+          col:  cv.dataset.col || '#4aa8d8',
+          persona: cv.dataset.pers,
+          mood: +(cv.dataset.mood || 0),
+          scale: 3
+        });
+        const sc2 = Math.min(cv.width/spr2.width, cv.height/spr2.height) * .9;
+        g2.clearRect(0, 0, cv.width, cv.height);
+        g2.drawImage(spr2, (cv.width - spr2.width*sc2)/2,
+          (cv.height - spr2.height*sc2)/2, spr2.width*sc2, spr2.height*sc2);
+      } catch(err){ /* portre çizilemedi — panel yine de çalışsın */ }
+    });
+
     [...document.querySelectorAll('canvas.pspr')].forEach(c=>{
       if (c.dataset.done) return;
       c.dataset.done = 1;
@@ -6347,7 +6662,23 @@ function renderSetup(){
   }
 
   if (SETUP_STEP === 'mizac'){
-    h += `<div class="sect"><h2>DOKTRİN</h2>
+    /* ═══ FAZ 78: İMPARATORLUK ADI + ZAR ═══
+       KÖK NEDEN: rollName eylemi ve empName dinleyicisi kodda
+       vardı ama girdi kutusu HİÇ RENDER EDİLMİYORDU — oyuncu adı
+       hiç göremiyor, zar butonu da yoktu. */
+    h += `<div class="sect"><h2>HANEDAN ADI</h2>
+      <div class="nameRow">
+        <input id="empName" class="nameInp" type="text" maxlength="30"
+          value="${esc(c.name || 'Yeni Hanedan')}"
+          placeholder="Hanedanının adı">
+        <button class="diceBtn" data-a="rollName"
+          title="Etiğine uygun rastgele ad üret">🎲</button>
+      </div>
+      <div class="mini">Zar, seçtiğin ideoloji eksenlerine uygun bir ad üretir —
+        militarist bir devlet "Kılıç" duyar, ruhaniyetçi bir devlet "Mabet".</div>
+    </div>
+
+    <div class="sect"><h2>DOKTRİN</h2>
       <div class="mini" style="margin-bottom:8px">Mizaç, halkının dünyaya bakışıdır.
       Kin tutma hızını, savaş eşiğini, konseydeki duruşunu ve yüzünü belirler.
       Sonradan ideoloji reformuyla değiştirilebilir — ama bedeli ağırdır.</div>

@@ -1548,6 +1548,59 @@ function facTick(){
       e.unity = clamp(e.unity + clamp(target - e.unity, -2, 2), 0, 100);
       continue;
     }
+    /* ═══════════════════════════════════════════════════════════
+       FAZ 78B — HİZİP MORALİ OYUNCUYA TEPKİ VERİR
+       ÖLÇÜM: 180 ay boyunca moral 50'de ÇAKILI KALIYORDU — güç
+       payı moralden besleniyor ama morali besleyen hiçbir şey
+       yoktu. Sistem teknik olarak çalışıyor, hikâyesel olarak
+       ölüydü.
+
+       Artık her hizip devletin durumuna bakıyor. Tepki YAVAŞ
+       (ayda en çok ±0.8) ki bu bir bildirim yağmuruna değil,
+       arka planda usulca dolan bir sayaca dönüşsün. */
+    {
+      let savasN = 0, uzunSavas = 0;
+      for (const w in e.war){
+        if (!e.war[w] || !G.emps[w] || G.emps[w].wild) continue;
+        savasN++;
+        if ((e.warExh && e.warExh[w] || 0) > 60) uzunSavas++;
+      }
+      const kriz = !!e.crisis, darlik = !!e.shortage;
+      const araGelir = (e.inc && e.inc.ara) || 0;
+      const eneGelir = (e.inc && e.inc.ene) || 0;
+      let ortStab = 0, colN = 0;
+      for (const c of (e.colonies || [])){
+        const sy = G.sys[c.s], pl = sy && sy.planets[c.p];
+        if (pl && pl.col){ ortStab += pl.col.stab; colN++; }
+      }
+      ortStab = colN ? ortStab / colN : 60;
+
+      for (const f of e.factions){
+        let d = 0;
+        switch (f.k){
+          case 'asker':                       // savaş ister, barış küstürür
+            d = savasN ? .55 : -.35;
+            if (uzunSavas) d += .25;          // uzun savaş onları besler
+            break;
+          case 'bilim':                       // araştırma ve barış ister
+            d = (araGelir > 12 ? .45 : -.25) + (savasN ? -.35 : .20);
+            break;
+          case 'tuccar':                      // enerji akışı ve barış ister
+            d = (eneGelir > 8 ? .45 : -.30) + (savasN ? -.40 : .15);
+            break;
+          case 'halk':                        // istikrar ve barış ister
+            d = (ortStab > 60 ? .40 : -.35) + (uzunSavas ? -.45 : 0);
+            break;
+          case 'inanc':                       // istikrar ister, krizde küser
+            d = (ortStab > 55 ? .35 : -.30) + (kriz ? -.40 : 0);
+            break;
+        }
+        if (darlik) d -= .30;                 // kıtlık herkesi küstürür
+        if (kriz && f.k !== 'inanc') d -= .15;
+        f.mood = clamp(f.mood + clamp(d, -.8, .8), 0, 100);
+      }
+    }
+
     // memnuniyet güç payını çeker: memnun fraksiyon güçlenir
     let shift = 0;
     for (const f of e.factions){
@@ -2021,6 +2074,14 @@ const COUNCIL_FOUND_TURN = 100;      // konsey bu turda kendiliğinden doğar
 
 const RESOLUTIONS = {
   /* ═══ FAZ 72: İKİ YENİ KONSEY YASASI ═══ */
+  /* ═══ FAZ 78: GALAKTİK BORSANIN KURULUŞU ═══
+     Borsa artık oyunun başında AÇIK DEĞİL. Galaksinin ortak bir
+     pazara ihtiyaç duyduğuna konseyin karar vermesi gerekiyor —
+     ekonomik bütünleşme siyasi bir tercih olsun. */
+  borsaKur  :{n:'Galaktik Borsayı Kur', ico:'💱',
+    d:'Ortak bir takas merkezi açılır. Tüm devletler Enerji, Mineral ' +
+      've Alaşım arasında serbestçe alışveriş yapabilir. Kurlar arz ve ' +
+      'talebe göre dalgalanır.'},
   piyasaReg :{n:'Piyasa Regülasyonu', ico:'⚖',
     d:'Galaktik Piyasa komisyonu %8 → %3 iner. Ticaret ucuzlar, ' +
       'spekülasyon zorlaşır.'},
@@ -3308,6 +3369,8 @@ function diploTick(){
   if (typeof aiEdictTick === 'function') aiEdictTick();            // FAZ 72
   if (typeof aiFedLawTick === 'function') aiFedLawTick();          // FAZ 72
   if (typeof situationsTick === 'function') situationsTick();      // FAZ 77C
+  if (typeof separatistTick === 'function') separatistTick();      // FAZ 78
+  if (typeof leaderTick === 'function') leaderTick();              // FAZ 78B
   if (typeof throneTick === 'function') throneTick();              // FAZ 77B
   if (typeof hungerTick === 'function') hungerTick();              // FAZ 77B
   if (typeof warSubsidyTick === 'function') warSubsidyTick();     // FAZ 45: savaş yardımı
@@ -3806,6 +3869,8 @@ function vassalLoyalty(sub){
   /* FAZ 72: dış destek cesaret verir — her destekçi sadakati düşürür */
   const destek = (sub.indepBackers || []).length;
   l -= destek * 14;
+  /* FAZ 78: dışarıdan fonlanan ayrılıkçılar sadakati aşındırır */
+  l -= (sub.sepFunded || 0);
   return clamp(Math.round(l), 0, 100);
 }
 
@@ -3984,7 +4049,9 @@ function vassalJoinWars(lord, sub){
 }
 
 /* ── VERGİ VE HEGEMONYA TİKİ ── */
-const VASSAL_TAX = {min:.14, ene:.14, ala:.10};   // gelirin oranı
+/* FAZ 78: haraç oranı %20'ye çekildi (şartname). Mineral de
+   dahil — vasal senyörüne gerçekten yük olsun. */
+const VASSAL_TAX = {min:.20, ene:.20, ala:.20};   // gelirin oranı
 
 function vassalTick(){
   for (const sub of G.emps){
@@ -7311,4 +7378,220 @@ function joinIndepWar(sub, lord){
   }
   sub.indepBackers = [];              // söz yerine getirildi
   return kac;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 78 — BİAT VE HİMAYE MÜZAKERESİ
+   Vasallık motoru (subjugate, vassalLoyalty, EDICTS) Faz 71'de
+   kurulmuştu ama yalnız SAVAŞ SONUCU ya da AI sığınmasıyla
+   işliyordu. Artık masada da konuşulabiliyor:
+     · Biat İste  → güçlüyken zayıfa teklif
+     · Koruma Talep Et → zayıfken güçlüden isteme
+   ═══════════════════════════════════════════════════════════════════ */
+const VASSAL_DEMAND_COST = 160;   // biat isteme bedeli
+const VASSAL_SEEK_COST   = 90;    // koruma talep etme bedeli
+
+function canDemandVassal(e, o){
+  if (!e || !o || o.dead) return {ok:false, why:'Hedef yok'};
+  if (o.id === e.id) return {ok:false, why:'Kendine biat edemezsin'};
+  if (o.wild || o.crisisSide) return {ok:false, why:'Bu taraf müzakere etmez'};
+  if (!e.contact[o.id]) return {ok:false, why:'Temas yok'};
+  if (isVassal(o)) return {ok:false, why:o.name + ' zaten bir senyöre bağlı'};
+  if (isVassal(e)) return {ok:false, why:'Vasal, vasal edinemez'};
+  if (e.war[o.id]) return {ok:false, why:'Savaştayken masaya oturulmaz'};
+  if (typeof isPurifier === 'function' && isPurifier(e))
+    return {ok:false, why:'Doktrinin diplomasiye kapalı'};
+  if ((e.res.etk || 0) < VASSAL_DEMAND_COST)
+    return {ok:false, why:VASSAL_DEMAND_COST + ' etki gerekir'};
+  const oran = totalPower(e) / Math.max(1, totalPower(o));
+  if (oran < 1.6)
+    return {ok:false, why:'Yeterince güçlü değilsin (' + oran.toFixed(1) +
+            '× — en az 1.6× gerekir)'};
+  return {ok:true, oran};
+}
+
+/* Hedef kabul eder mi? Güç farkı, ilişki ve mizaç belirler. */
+function vassalAcceptChance(lord, sub){
+  const oran = totalPower(lord) / Math.max(1, totalPower(sub));
+  let p = clamp((oran - 1.6) * .28, 0, .55);
+  p += clamp((sub.rel[lord.id] || 0) / 320, -.20, .22);
+  let savasta = 0;
+  for (const w in sub.war) if (sub.war[w] && G.emps[w] && !G.emps[w].wild) savasta++;
+  p += savasta * .12;                                   // sıkışmışsa razı olur
+  let sysN = 0;
+  for (const sy of G.sys) if (sy.owner === sub.id) sysN++;
+  if (sysN <= 3) p += .15;                              // küçük devlet
+  const P = (typeof personaOf === 'function') ? personaOf(sub) : null;
+  if (P){
+    if (P.n === 'Militarist') p -= .22;
+    if (P.n === 'Fanatik Arındırıcılar') p = 0;
+    if (P.n === 'Pasifist') p += .12;
+  }
+  return clamp(p, 0, .88);
+}
+
+function demandVassal(e, o, tur){
+  const chk = canDemandVassal(e, o);
+  if (!chk.ok) return chk;
+  e.res.etk -= VASSAL_DEMAND_COST;
+  const sans = vassalAcceptChance(e, o);
+  if (rnd() < sans){
+    subjugate(e, o, VASSAL_TYPES[tur] ? tur : 'haracguzar');
+    o.rel[e.id] = clamp((o.rel[e.id] || 0) - 15, -100, 100);
+    return {ok:true, kabul:true, sans};
+  }
+  /* Ret: gurur kırılır, ilişki bozulur */
+  o.rel[e.id] = clamp((o.rel[e.id] || 0) - 25, -100, 100);
+  if (typeof remember === 'function') remember(o, e.id, 'sinirGergin');
+  o._vassalRefuse = (G.memAge || 0) + 60;     // 5 yıl bir daha sorma
+  return {ok:true, kabul:false, sans};
+}
+
+function canSeekProtection(e, o){
+  if (!e || !o || o.dead) return {ok:false, why:'Hedef yok'};
+  if (o.id === e.id) return {ok:false, why:'Kendinden koruma istenmez'};
+  if (o.wild || o.crisisSide) return {ok:false, why:'Bu taraf himaye vermez'};
+  if (!e.contact[o.id]) return {ok:false, why:'Temas yok'};
+  if (isVassal(e)) return {ok:false, why:'Zaten bir senyörün var'};
+  if (isVassal(o)) return {ok:false, why:o.name + ' de bir vasal'};
+  if (e.war[o.id]) return {ok:false, why:'Savaştığın devletten himaye istenmez'};
+  if (typeof vassalsOf === 'function' && vassalsOf(e).length)
+    return {ok:false, why:'Kendi vasalların varken boyun eğemezsin'};
+  if ((e.res.etk || 0) < VASSAL_SEEK_COST)
+    return {ok:false, why:VASSAL_SEEK_COST + ' etki gerekir'};
+  const oran = totalPower(o) / Math.max(1, totalPower(e));
+  if (oran < 1.3)
+    return {ok:false, why:'Yeterince güçlü değil — seni koruyamaz'};
+  return {ok:true, oran};
+}
+
+function seekProtection(e, o, tur){
+  const chk = canSeekProtection(e, o);
+  if (!chk.ok) return chk;
+  e.res.etk -= VASSAL_SEEK_COST;
+  /* Hami kabul eder mi? Zayıf vasal yük değil, kazançtır. */
+  const P = (typeof personaOf === 'function') ? personaOf(o) : null;
+  let p = .55 + clamp((e.rel[o.id] || 0) / 300, -.2, .25);
+  if (P){
+    if (P.n === 'Militarist') p += .20;
+    if (P.n === 'Fanatik Arındırıcılar') p = 0;
+    if (P.n === 'İzolasyonist') p -= .30;
+  }
+  /* Ortak düşman varsa çok cazip */
+  for (const w in e.war) if (e.war[w] && o.war[w]) p += .20;
+  if (rnd() < clamp(p, .05, .92)){
+    subjugate(o, e, VASSAL_TYPES[tur] ? tur : 'bekci');
+    e.rel[o.id] = clamp((e.rel[o.id] || 0) + 20, -100, 100);
+    return {ok:true, kabul:true};
+  }
+  e.rel[o.id] = clamp((e.rel[o.id] || 0) - 10, -100, 100);
+  return {ok:true, kabul:false};
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 78 — AYRILIKÇILARI FONLA (vasal sadakati sabotajı)
+   Mevcut inciteRebellion() bir devletin KENDİ kolonilerini
+   kışkırtıyor. Bu farklı: RAKİBİNİN VASALINI hedef alıyor ve
+   sadakati aşındırıyor. Sadakat dibe vurunca vasal kendiliğinden
+   bağımsızlık savaşı başlatıyor — sen hiç savaşa girmeden
+   rakibinin arkasını yakıyorsun.
+   ═══════════════════════════════════════════════════════════════════ */
+const FUND_SEP_COST = {etk: 70, ene: 300};
+const FUND_SEP_HIT  = 12;      // her fonlamada sadakat düşüşü
+const FUND_SEP_CD   = 12;      // ay
+
+function canFundSeparatists(e, sub){
+  if (!e || !sub || sub.dead) return {ok:false, why:'Hedef yok'};
+  if (sub.id === e.id) return {ok:false, why:'Kendi halkını fonlayamazsın'};
+  if (sub.wild || sub.crisisSide) return {ok:false, why:'Bu tarafta vasal yok'};
+  if (typeof isVassal !== 'function' || !isVassal(sub))
+    return {ok:false, why:'Bu devlet kimsenin vasalı değil'};
+  if (sub.overlord === e.id)
+    return {ok:false, why:'Kendi vasalını fonlamak intihardır'};
+  if (!e.contact[sub.id]) return {ok:false, why:'Temas yok'};
+  if (typeof isPurifier === 'function' && isPurifier(e))
+    return {ok:false, why:'Doktrinin gizli diplomasiye kapalı'};
+  if (sub._fundCd && sub._fundCd > (G.memAge || 0))
+    return {ok:false, why:'Ajanlar hâlâ sahada — ' +
+            (sub._fundCd - (G.memAge || 0)) + ' ay bekle'};
+  for (const r in FUND_SEP_COST)
+    if ((e.res[r] || 0) < FUND_SEP_COST[r])
+      return {ok:false, why:'Yetersiz ' + (RES[r] ? RES[r].n : r) +
+              ' (' + FUND_SEP_COST[r] + ' gerekir)'};
+  return {ok:true, sadakat: vassalLoyalty(sub)};
+}
+
+function fundSeparatists(e, sub){
+  const chk = canFundSeparatists(e, sub);
+  if (!chk.ok) return chk;
+  for (const r in FUND_SEP_COST) e.res[r] -= FUND_SEP_COST[r];
+  sub._fundCd = (G.memAge || 0) + FUND_SEP_CD;
+
+  const lord = overlordOf(sub);
+  /* Kalıcı sadakat aşınması — vassalLoyalty bunu okur */
+  sub.sepFunded = (sub.sepFunded || 0) + FUND_SEP_HIT;
+  sub.rel[e.id] = clamp((sub.rel[e.id] || 0) + 10, -100, 100);
+  const kalan = vassalLoyalty(sub);
+
+  /* İfşa riski: senyörün istihbaratı yakalayabilir */
+  const lvl = (lord && typeof intelOf === 'function') ? intelOf(lord, e.id) : 0;
+  const ifsa = clamp(.18 + lvl * .10, .05, .60);
+  if (lord && rnd() < ifsa){
+    lord.rel[e.id] = clamp((lord.rel[e.id] || 0) - 35, -100, 100);
+    if (typeof remember === 'function') remember(lord, e.id, 'komplo');
+    lord._lastCB = {n:'Vasal Kışkırtma', w:1.20};
+    if (e.id === 0)
+      say('⚠ Fonlama sızdı — ' + lord.name + ' arkasındaki eli gördü', 'war');
+    else if (lord.id === 0 && typeof UI !== 'undefined')
+      UI.eventArt('infaz', 'VASAL KIŞKIRTMA İFŞA OLDU',
+        e.name + ' vasalın ' + sub.name + ' içindeki ayrılıkçıları gizlice ' +
+        'finanse ediyor. Kanıtlar elimizde — savaş nedeni doğdu.',
+        'war', 'kritik', e);
+    return {ok:true, ifsa:true, sadakat:kalan};
+  }
+
+  if (e.id === 0)
+    say('🕯 ' + sub.name + ' içindeki ayrılıkçılara para aktı — sadakat %' +
+        kalan, 'sci');
+  return {ok:true, ifsa:false, sadakat:kalan};
+}
+
+/* Sadakat sıfırlanınca vasal kendiliğinden isyan eder */
+function separatistTick(){
+  for (const sub of G.emps){
+    if (sub.dead || sub.wild || sub.crisisSide) continue;
+    if (!isVassal(sub)) continue;
+    /* Fonlama zamanla soğur — sürekli beslenmezse etkisi geçer */
+    if (sub.sepFunded) sub.sepFunded = Math.max(0, sub.sepFunded - .35);
+    if (vassalLoyalty(sub) > 0) continue;
+
+    const lord = overlordOf(sub);
+    if (!lord || lord.dead) continue;
+    /* ═══ BAĞIMSIZLIK SAVAŞI ═══ */
+    sub.overlord = null;
+    delete sub.vassalType;
+    sub.edicts = {};
+    sub.sepFunded = 0;
+    sub.war[lord.id] = true; lord.war[sub.id] = true;
+    sub.warSince = sub.warSince || {}; sub.warSince[lord.id] = G.day;
+    sub.warCause = sub.warCause || {}; sub.warCause[lord.id] = 'Bağımsızlık Savaşı';
+    sub.rel[lord.id] = -100;
+    if (typeof recalcMods === 'function'){ recalcMods(sub); recalcMods(lord); }
+    if (typeof remember === 'function') remember(sub, lord.id, 'ihanet');
+    /* Destek sözü verenler de savaşa girer (Faz 72) */
+    if (typeof joinIndepWar === 'function') joinIndepWar(sub, lord);
+
+    if (lord.id === 0 && typeof UI !== 'undefined')
+      UI.eventArt('infaz', 'VASAL AYAKLANDI',
+        sub.name + ' sadakatini tamamen yitirdi ve bağımsızlık savaşı ' +
+        'başlattı. Aylardır birileri onların kulağına fısıldıyormuş.',
+        'war', 'kritik', sub);
+    else if (sub.id === 0 && typeof UI !== 'undefined')
+      UI.eventArt('veri', 'ZİNCİRLER KIRILDI',
+        lord.name + ' boyunduruğunu reddettik. Bağımsızlık savaşı başladı.',
+        'win', 'kritik', lord);
+    else if (typeof say === 'function')
+      say('⚡ ' + sub.name + ', ' + lord.name + ' senyörlüğüne başkaldırdı', 'war');
+  }
 }

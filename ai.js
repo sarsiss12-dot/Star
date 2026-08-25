@@ -2910,6 +2910,7 @@ const AI_MARKET_DILIM = .22;    // fazlanın bu kadarı satılır
 
 function aiMarketTick(){
   if (typeof marketTrade !== 'function') return;
+  if (typeof marketOpen === 'function' && !marketOpen()) return;   // FAZ 78
   for (const e of G.emps){
     if (e.dead || e.wild || e.crisisSide || !e.ai) continue;
     /* FAZ 73: Fanatik Arındırıcılar pazara girmez — kimseyle

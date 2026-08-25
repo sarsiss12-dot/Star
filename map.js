@@ -500,6 +500,106 @@ const ART = (() => {
 
   /* Katmanlı portre. opts: {look, col, persona, mood, scale}
      mood sayısal ilişki (−100..100) ya da −1/0/1 olabilir. */
+  /* ═══════════════════════════════════════════════════════════════
+     FAZ 78B — PROSEDÜREL LİDER PORTRESİ
+     Her liderin kalıcı bir seed'i var; portresi ondan türetiliyor:
+       1. TEN/KABUK TONU — ırk taban renginden HSL'de ±22° kayma
+       2. AKSESUAR — 5 küçük matristen seed'e göre 0-2 tanesi
+          kafa katmanının üstüne bindiriliyor
+       3. RÜTBE ÇERÇEVESİ — deneyim seviyesine göre kenar rengi
+     shadowBlur KULLANILMIYOR (Faz 77D ölçümü: kare başına 0.6 ms).
+     Sonuç ART.cache'e seed anahtarıyla yazılıyor — bir kez
+     üretilip her karede tek drawImage ile basılıyor.
+     ═══════════════════════════════════════════════════════════════ */
+  const LEADER_ACC = {
+    /* 12 sütunluk kafa matrisinin üstüne binen küçük parçalar.
+       Satır indeksi kafa matrisinin üst satırından sayılır. */
+    bant   :{r:4, m:['.##########.']},                  // göz bandı
+    yara   :{r:3, m:['...#........']},                  // yara izi
+    tac    :{r:0, m:['..#.#..#.#..']},                  // taç
+    tekGoz :{r:4, m:['....##......']},                  // tek göz teki
+    sakal  :{r:7, m:['..########..']}                   // çene örtüsü
+  };
+  const ACC_KEYS = Object.keys(LEADER_ACC);
+
+  /* HSL kaydırma — hex girer, hex çıkar */
+  function shiftHue(hex6, derece, satMul, ligMul){
+    const r0 = parseInt(hex6.slice(1,3),16)/255,
+          g0 = parseInt(hex6.slice(3,5),16)/255,
+          b0 = parseInt(hex6.slice(5,7),16)/255;
+    const mx = Math.max(r0,g0,b0), mn = Math.min(r0,g0,b0);
+    let h = 0, sL = 0; const l = (mx+mn)/2;
+    if (mx !== mn){
+      const d = mx-mn;
+      sL = l > .5 ? d/(2-mx-mn) : d/(mx+mn);
+      h = mx === r0 ? (g0-b0)/d + (g0<b0?6:0) : mx === g0 ? (b0-r0)/d+2 : (r0-g0)/d+4;
+      h /= 6;
+    }
+    h = (h + derece/360 + 1) % 1;
+    sL = Math.min(1, sL * (satMul||1));
+    const l2 = Math.min(.92, Math.max(.10, l * (ligMul||1)));
+    const q = l2 < .5 ? l2*(1+sL) : l2+sL-l2*sL, pp = 2*l2-q;
+    const kan = t2 => { t2=(t2+1)%1;
+      return t2<1/6 ? pp+(q-pp)*6*t2 : t2<.5 ? q : t2<2/3 ? pp+(q-pp)*(2/3-t2)*6 : pp; };
+    const to = v => Math.round(v*255).toString(16).padStart(2,'0');
+    return '#' + to(kan(h+1/3)) + to(kan(h)) + to(kan(h-1/3));
+  }
+
+  function leaderPortrait(opts){
+    opts = opts || {};
+    const seed  = (opts.seed | 0) || 1;
+    const look  = opts.look || 'humanoid';
+    const taban = opts.col || '#6ff2c8';
+    const rank  = Math.min(4, opts.rank | 0);
+    const scale = opts.scale || 3;
+    const key = 'ldr|' + seed + '|' + look + '|' + taban + '|' + rank + '|' + scale;
+    if (cache.has(key)) return cache.get(key);
+
+    /* Seed'den üç eksen türet */
+    let sd = (seed * 2654435761) >>> 0;
+    const nxt = () => { sd = (sd * 1664525 + 1013904223) >>> 0; return sd / 4294967296; };
+    const hueOfs = (nxt() * 44) - 22;          // ±22°
+    const satMul = .78 + nxt() * .5;
+    const ligMul = .82 + nxt() * .40;
+    const renk = shiftHue(taban, hueOfs, satMul, ligMul);
+
+    const head = PORTRAIT[look] || PORTRAIT.humanoid;
+    const cols = 12, pad = 1;
+    const W = (cols + pad*2) * scale, H = (head.length + pad*2) * scale;
+    const { c, g } = cv(W, H);
+    g.imageSmoothingEnabled = false;
+
+    /* Arka plan — rütbeye göre koyulaşan düz alan (gradyan yok) */
+    g.fillStyle = '#070c16';
+    g.fillRect(0, 0, W, H);
+
+    /* Kafa */
+    paintGrid(g, head, pad*scale, pad*scale, scale, hex(renk), 0, 1);
+
+    /* Aksesuarlar — 0-2 adet, seed'e göre */
+    const kacAcc = nxt() < .28 ? 0 : nxt() < .72 ? 1 : 2;
+    const secilen = [];
+    for (let i = 0; i < kacAcc; i++){
+      const k = ACC_KEYS[Math.floor(nxt() * ACC_KEYS.length)];
+      if (secilen.indexOf(k) >= 0) continue;
+      secilen.push(k);
+      const A = LEADER_ACC[k];
+      if (A.r >= head.length) continue;
+      const accRenk = shiftHue(renk, 150 + nxt()*60, 1.2, 1.25);
+      paintGrid(g, A.m, pad*scale, (pad + A.r)*scale, scale, hex(accRenk), 0, .92);
+    }
+
+    /* Rütbe çerçevesi — deneyim yükseldikçe parlar */
+    if (rank > 0){
+      const rc = ['#6a7285','#9fb6cc','#6ff2c8','#f2d452','#ff9b3d'][rank];
+      g.strokeStyle = rc;
+      g.lineWidth = Math.max(1, scale * .6);
+      g.strokeRect(g.lineWidth/2, g.lineWidth/2, W-g.lineWidth, H-g.lineWidth);
+    }
+    cache.set(key, c);
+    return c;
+  }
+
   function portraitFull(opts){
     opts = opts || {};
     const look    = opts.look || 'humanoid';
@@ -589,7 +689,7 @@ const ART = (() => {
     return c;
   }
 
-  return {planet, star, ship, emblem, portrait, portraitFull, nebula, cache,
+  return {planet, star, ship, emblem, portrait, portraitFull, leaderPortrait, nebula, cache,
           PORTRAIT, ARMOR, hexOf: hex, drawPixelArt, PIXEL_ART};
 })();
 
@@ -646,7 +746,9 @@ const View = {
     /* easeOutCubic — sonda yumuşak durur */
     const e = 1 - Math.pow(1 - k, 3);
     this.cam.x = p.x0 + (p.x1 - p.x0) * e;
+    /* FAZ 78B: animasyon sonunda da sınır uygulanır */
     this.cam.y = p.y0 + (p.y1 - p.y0) * e;
+    this.clampCam();
     if (k >= 1) this._pan = null;
   },
   ping(sy){
@@ -809,19 +911,15 @@ const View = {
         this.cam.z = nz;
         const mid2 = this.s2w((a.x+b.x)/2, (a.y+b.y)/2);
         this.cam.x += mid.x-mid2.x; this.cam.y += mid.y-mid2.y;
+        this.clampCam();                    // FAZ 78B
         moved = 99;
       } else if (pts.size === 1 && last){
         const p = pos(ev);
         const dx = p.x-last.x, dy = p.y-last.y;
         moved += Math.hypot(dx,dy);
         this.cam.x -= dx/this.cam.z; this.cam.y -= dy/this.cam.z;
-        /* ═══ FAZ 44: KAMERA SERBESTİSİ ═══
-           ÖLÇÜM: ±400 pan sınırı ULU/halka haritalarda kenardaki
-           sistemleri kutu gibi kesiyordu. Sınır artık harita
-           boyutuyla ölçekleniyor (en az 1000 px dışarı). */
-        const panPad = Math.max(1000, G.W * .18);
-        this.cam.x = clamp(this.cam.x, -panPad, G.W + panPad);
-        this.cam.y = clamp(this.cam.y, -panPad, G.H + panPad);
+        /* FAZ 78B: sabit panPad yerine zoom'a duyarlı merkezi sınır */
+        this.clampCam();
         last = p;
       }
     });
@@ -844,6 +942,7 @@ const View = {
       this.cam.z = clamp(this.cam.z * (ev.deltaY < 0 ? 1.14 : .88), .035, 1.9);
       const after = this.s2w(ev.clientX, ev.clientY);
       this.cam.x += before.x-after.x; this.cam.y += before.y-after.y;
+      this.clampCam();                      // FAZ 78B
     }, {passive:false});
   },
 
@@ -1005,7 +1104,35 @@ const View = {
     this.sel = null; this.selSys = null; this.route = false; UI.refresh();
   },
 
-  center(x,y){ this.cam.x = x; this.cam.y = y; },
+  /* ═══════════════════════════════════════════════════════════════
+     FAZ 78B — MERKEZİ KAMERA SINIRI
+     KÖK NEDEN: kamera 6 AYRI YERDE yazılıyordu (fit, pan, pinch,
+     wheel-zoom, center, animasyon) ama clamp yalnız BİRİNDE vardı.
+     Pinch ve tekerlek zoom'u sınırsız kaydırıyor, sonraki pan
+     hareketi kamerayı geri çekiyordu — oyuncu bunu "görünmez
+     duvar" olarak hissediyordu.
+
+     Yeni sınır ZOOM'A DUYARLI: kenardaki bir sistemin ekranın
+     ortasına gelebilmesi için kamera merkezinin harita kenarını
+     EKRANIN YARISI kadar aşabilmesi gerekir. Uzaklaştıkça
+     (z küçülür) yarım ekran dünya biriminde büyür, sınır da
+     doğal olarak genişler.
+     ═══════════════════════════════════════════════════════════════ */
+  clampCam(){
+    const c = this.cam;
+    if (!c) return;
+    const z = Math.max(.02, c.z || .4);
+    /* Ekranın yarısı, dünya biriminde */
+    const yariW = (this.vw || 900) / (2 * z);
+    const yariH = (this.vh || 420) / (2 * z);
+    /* Pay: ekranın yarısı + küçük bir nefes payı.
+       Taban 300 birim ki aşırı yakınlaştırmada da kenar okunsun. */
+    const padX = Math.max(300, yariW * .95);
+    const padY = Math.max(300, yariH * .95);
+    c.x = clamp(c.x, -padX, (G.W || 4000) + padX);
+    c.y = clamp(c.y, -padY, (G.H || 4000) + padY);
+  },
+  center(x,y){ this.cam.x = x; this.cam.y = y; this.clampCam(); },
 
   /* ---------- çizim ---------- */
   /* ═══ FAZ 21: GÖRÜŞ ALANI (FRUSTUM CULLING) ═══
@@ -2034,54 +2161,65 @@ const View = {
     }
 
     /* ═══════════════════════════════════════════════════════════
-       FAZ 75 — OPERASYON ÇEMBERİ
-       Radar açıkken seçili filonun ikmal kopmadan ulaşabileceği
-       menzil kesik çizgili bir çemberle gösterilir. Yarıçap
-       gerçek hesaptan geliyor: hattaki her sisteme fleetSupply
-       sorulup en uzak GÜVENLİ nokta bulunuyor (günlük önbellekli).
+       FAZ 77E — MENZİL HARESİ (node tabanlı)
+       ESKİSİ YANLIŞTI: kuş uçuşu devasa bir çember çiziliyordu.
+       Oyun hiper yol (node) tabanlı — Öklid mesafesinin oyunda
+       hiçbir karşılığı yok. Çember kaldırıldı.
+
+       Yerine: seçili filonun ikmali kopmadan ulaşabileceği HER
+       SİSTEMİN etrafına küçük parlak bir hare. Menzil gerçek
+       fleetSupply hesabından geliyor, günlük önbellekli (f._opAt)
+       — her karede tarama yok, yalnız listeyi çiziyoruz.
        ═══════════════════════════════════════════════════════════ */
     if (RADAR_ON && this.sel && this.sel.ships && this.sel.ships.length &&
         this.sel.sys >= 0 && typeof fleetSupply === 'function'){
       const f = this.sel;
       const fe = G.emps[f.e];
       if (fe && !fe.dead){
-        /* Menzili günde bir hesapla — her karede tarama yapma */
+        /* Menzildeki sistemleri günde bir hesapla */
         if (f._opAt !== G.day){
           f._opAt = G.day;
-          let enUzak = 0;
-          const bas = G.sys[f.sys];
+          const liste = [];
           for (const sy of G.sys){
+            if (!sy.seen.includes(f.e) && f.e === 0) continue;   // görmediğimiz yer
             const sup = fleetSupply(fe, {sys: sy.id, ships: f.ships, e: f.e});
-            if (sup < .55) continue;          // burada muharebe edemez
-            const d = dist(bas, sy);
-            if (d > enUzak) enUzak = d;
+            if (sup >= .55) liste.push(sy.id);                   // savaşabilir
           }
-          f._opR = enUzak;
+          f._opList = liste;
         }
-        if (f._opR > 0){
-          const c = this.w2s(f.x, f.y);
-          const r = f._opR * this.cam.z;
-          if (r > 12 && r < 4000){
-            g.save();
-            g.strokeStyle = 'rgba(111,242,200,.42)';
-            g.lineWidth = 1.4;
-            g.setLineDash([7, 7]);
-            g.lineDashOffset = -(t / 60) % 14;
-            g.beginPath(); g.arc(c.x, c.y, r, 0, Math.PI*2); g.stroke();
-            g.setLineDash([]);
-            /* Etiket: çemberin üstünde */
-            g.fillStyle = 'rgba(111,242,200,.75)';
-            g.font = '10px ui-monospace,monospace';
-            g.textAlign = 'center';
-            const et = 'operasyon menzili';
-            const w2 = g.measureText(et).width;
-            g.fillStyle = 'rgba(5,8,16,.7)';
-            g.fillRect(c.x - w2/2 - 4, c.y - r - 14, w2 + 8, 13);
-            g.fillStyle = 'rgba(111,242,200,.85)';
-            g.fillText(et, c.x, c.y - r - 4);
-            g.restore();
-            g.textAlign = 'center';
+        const liste = f._opList || [];
+        if (liste.length){
+          g.save();
+          const nb = .55 + .45 * Math.sin(t / 380);
+          for (const sid of liste){
+            const sy = G.sys[sid];
+            if (!sy || !this.inView(sy.x, sy.y)) continue;
+            const p2 = this.w2s(sy.x, sy.y);
+            const rr = Math.max(4, this.starR ? this.starR(sy)
+                       : Math.max(2.2, sy.star.r * this.cam.z * 1.5)) + 5;
+            /* Dış hare */
+            g.strokeStyle = 'rgba(111,242,200,' + (nb * .55).toFixed(2) + ')';
+            g.lineWidth = Math.max(.9, this.cam.z * 1.4);
+            g.beginPath(); g.arc(p2.x, p2.y, rr, 0, Math.PI * 2); g.stroke();
+            /* İç dolgu — çok soluk */
+            g.fillStyle = 'rgba(111,242,200,' + (nb * .10).toFixed(2) + ')';
+            g.beginPath(); g.arc(p2.x, p2.y, rr, 0, Math.PI * 2); g.fill();
           }
+          /* Filonun kendi sistemi vurgulu */
+          const kendi = G.sys[f.sys];
+          if (kendi && this.inView(kendi.x, kendi.y)){
+            const pk = this.w2s(kendi.x, kendi.y);
+            g.strokeStyle = 'rgba(111,242,200,.9)';
+            g.lineWidth = Math.max(1.4, this.cam.z * 2);
+            g.beginPath(); g.arc(pk.x, pk.y, 9, 0, Math.PI * 2); g.stroke();
+          }
+          /* Sayaç etiketi */
+          g.fillStyle = 'rgba(111,242,200,.85)';
+          g.font = '10px ui-monospace,monospace';
+          g.textAlign = 'left';
+          g.fillText('📡 menzilde ' + liste.length + ' sistem', 10, this.vh - 12);
+          g.restore();
+          g.textAlign = 'center';
         }
       }
     }
