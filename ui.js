@@ -781,6 +781,23 @@ const UI = {
         this.keepScroll = true; this.refresh();
         break;
       }
+      case 'throneBuild': {
+        const sy = G.sys[+x];
+        const r = (typeof rebuildThrone === 'function')
+          ? rebuildThrone(G.p, sy) : {ok:false, why:'—'};
+        if (!r.ok) say(r.why, 'war');
+        this.keepScroll = true; this.refresh();
+        break;
+      }
+      case 'sitPick': {
+        const [key, ix] = x.split(':');
+        const s2 = (G.sits || []).find(q => q.key === key);
+        if (!s2){ say('Durum bulunamadı', 'war'); break; }
+        const r = pickSituation(s2, +ix);
+        if (!r.ok) say(r.why, 'war');
+        this.keepScroll = true; this.refresh();
+        break;
+      }
       case 'memTog': {
         this.memOpen = (this.memOpen === x) ? null : x;   // FAZ 75
         this.keepScroll = true; this.refresh();
@@ -1905,6 +1922,27 @@ const UI = {
 
     if (s.owner === 0 && hasYard(s)){
       h += `<div class="ph">TERSANE</div>`;
+      /* ═══ FAZ 77D: TAHT GEMİSİ YENİDEN İNŞASI ═══
+         Yalnız doktrin sahibiyse VE gemi yok edilmişse görünür. */
+      if (typeof canRebuildThrone === 'function' &&
+          hasCivic(e, 'throneship') && !throneShipOf(e)){
+        const tc = canRebuildThrone(e, s);
+        const bedel = Object.keys(THRONE_REBUILD).map(r =>
+          THRONE_REBUILD[r] + ' ' + (RES[r] ? RES[r].n : r)).join(' · ');
+        h += `<div class="ph">👑 TAHT GEMİSİ</div>`;
+        h += `<div class="mini">Hanedanın yüzen başkenti enkazda.
+          ${e.throneLost > 0
+            ? '<b style="color:#ff5f6d">Felç: ' + e.throneLost +
+              ' ay kaldı</b> — üretimin yarısı kayıp.'
+            : 'Yeniden inşa edilebilir.'}</div>`;
+        h += `<div class="act2"><button class="abtn ${tc.ok?'pri':'dis'}"
+          data-a="throneBuild" data-x="${s.id}">👑 TAHT GEMİSİ İNŞA ET
+          <br><span style="font-size:9px">${esc(bedel)}</span></button></div>`;
+        if (!tc.ok)
+          h += `<div class="mini" style="color:#ff9b3d">${esc(tc.why)}</div>`;
+      }
+
+
       /* ═══════════════════════════════════════════════════════
          FAZ 67 — TERSANE RALLİ NOKTASI
          Ralli yalnız filo panelinden atanabiliyordu. Artık
@@ -2988,6 +3026,62 @@ const UI = {
      istihbarat geçmişi tek ekranda. Mobil için grid tabanlı,
      taşmayan yerleşim.
      ═══════════════════════════════════════════════════════════════ */
+  /* ═══ FAZ 77C: AKTİF DURUMLAR PANELİ ═══ */
+  p_durum(){
+    const e = G.p;
+    const list = (G.sits || []).filter(s2 => s2.emp === 0);
+    if (!list.length)
+      return `<div class="empty">Şu an aktif bir durum yok.<br><br>
+        <span class="mini">Durumlar galakside kendiliğinden doğar —
+        bir keşif, bir anomali, bir ziyaretçi. Başladığında burada
+        aşama aşama ilerler ve verdiğin kararlar kalıcı iz bırakır.</span></div>`;
+    let h = '';
+    for (const s2 of list){
+      const S = SITUATIONS[s2.key];
+      if (!S) continue;
+      const asama = S.asama[s2.stage - 1];
+      h += `<div class="ph">${S.ico} ${esc(S.n)}</div>`;
+      h += `<div class="row"><span>Aşama</span>
+        <b>${s2.stage} / ${S.asama.filter(a=>a.t!=='—').length}</b></div>`;
+      /* İki sayaç — çubuklu */
+      for (const k in S.say){
+        const C = S.say[k];
+        const v = Math.round(s2.say[k] || 0);
+        const max = C.max || 100;
+        const oran = Math.round(v / max * 100);
+        const renk = oran > 75 ? '#ff5f6d' : oran > 45 ? '#ff9b3d' : '#6ff2c8';
+        h += `<div class="row"><span>${C.ico} ${C.n}</span>
+          <b style="color:${renk}">${v}/${max}</b></div>
+          <div class="bar"><i style="width:${oran}%;background:${renk}"></i></div>`;
+      }
+      h += `<div class="mini" style="margin:6px 0">${esc(asama ? asama.t : '')}</div>`;
+      /* Seçenekler */
+      if (asama && asama.ops){
+        asama.ops.forEach((opt, ix) => {
+          const acik = sitOptionOpen(e, opt, s2);
+          const bedel = (typeof sitCostText === 'function')
+            ? sitCostText(e, opt)
+            : (opt.c ? Object.keys(opt.c).map(r =>
+                opt.c[r] + ' ' + (RES[r] ? RES[r].n : r)).join(', ') : '');
+          h += `<div class="box" style="border-color:${acik?'#24354f':'#3a2530'}">
+            <div class="bt"><span style="${acik?'':'opacity:.55'}">${esc(opt.t)}</span>
+              ${bedel ? '<span class="tag b">' + esc(bedel) + '</span>' : ''}</div>
+            <div class="bd" style="${acik?'':'opacity:.55'}">${esc(opt.d || '')}</div>`;
+          if (acik)
+            h += `<div class="act2"><button class="abtn pri" data-a="sitPick"
+              data-x="${s2.key}:${ix}">SEÇ</button></div>`;
+          else
+            h += `<div class="mini" style="color:#ff9b3d">🔒 ${
+              esc(sitOptionWhy(e, opt))}</div>`;
+          h += `</div>`;
+        });
+      }
+      if (s2.log && s2.log.length)
+        h += `<div class="mini" style="color:#7d90ad">${s2.log.length}
+          karar verildi · ${Math.round(s2.age)} aydır sürüyor</div>`;
+    }
+    return h;
+  },
   p_intel(){
     const e = G.p;
     const simdi = G.memAge || 0;
@@ -6347,15 +6441,35 @@ function renderSetup(){
     for (const k in PHYSIO){
       const P = PHYSIO[k];
       const on = (c.physio || 'humanoid') === k;
+      /* ═══ FAZ 77A: ŞEFFAF İSTATİSTİK ═══
+         Hikâye metninin yanına net sayılar. Oyuncu ne seçtiğini
+         yüzdeyle görsün. */
+      const st = [];
+      if (P.habBonus) st.push('Yaşanabilirlik ' + (P.habBonus>0?'+':'') +
+        Math.round(P.habBonus*100) + '%');
+      if (P.growMul) st.push((P.makine ? 'Montaj ' : 'Büyüme ') +
+        (P.growMul>0?'+':'') + Math.round(P.growMul*100) + '%');
+      for (const mk in (P.e || {})){
+        const v = P.e[mk];
+        if (!v) continue;
+        const ad = TRAIT_LABEL[mk] || mk;
+        st.push(ad + ' ' + (mk === 'stab' ? (v>0?'+':'') + v
+          : (v>0?'+':'−') + Math.round(Math.abs(v)*100) + '%'));
+      }
+      if (P.yiyer === 'enerji')  st.push('Enerjiyle beslenir');
+      if (P.yiyer === 'mineral') st.push('Mineralle beslenir');
       h += `<button class="opt ${on?'on':''}" data-a="physio" data-x="${k}">
-        ${P.ico} ${P.n}<small>${P.art}</small></button>`;
+        ${P.ico} ${P.n}<small>${st.length
+          ? '<b style="color:#9fdcc9">' + st.join(' · ') + '</b>' : P.art}</small></button>`;
     }
     h += `</div>`;
     const sec = PHYSIO[c.physio || 'humanoid'];
     h += `<div class="box" style="border-color:#6ff2c8;margin-top:8px">
       <div class="bt"><span>${sec.ico} ${sec.n}</span></div>
       <div class="bd">${sec.d}<br><br>
-        <b>Beslenme:</b> ${sec.yiyer === 'mineral' ? 'mineral (yiyecek tüketmez)' : 'yiyecek'}
+        <b>Beslenme:</b> ${
+          sec.yiyer === 'mineral' ? 'mineral (yiyecek tüketmez)' :
+          sec.yiyer === 'enerji'  ? 'ENERJİ (yiyecek tüketmez)' : 'yiyecek'}
         ${sec.photo ? ' + fotosentez' : ''}<br>
         <b>Yaşanabilirlik:</b> ${sec.habBonus ? (sec.habBonus>0?'+':'') +
           Math.round(sec.habBonus*100) + '%' : 'temel'}<br>
@@ -6365,38 +6479,54 @@ function renderSetup(){
         ${sec.sevmez ? '<br><b>Yaşayamaz:</b> ' + sec.sevmez.map(t=>PLANETS[t]?PLANETS[t].n:t).join(', ') : ''}
       </div></div>`;
     h += `</div>`;
-  }
-  else if (SETUP_STEP === 'tur'){
-    h += `<div class="sect"><h2>HANEDAN ADI</h2>
-      <div class="nameRow">
-        <input type="text" id="empName" maxlength="26" value="${esc(c.name)}">
-        <button class="diceBtn" data-a="rollName" title="Rastgele isim üret">🎲</button>
-      </div>
-      <div class="mini">Zar, seçtiğin etik ve rejime uygun bir isim üretir.</div></div>`;
+  
+    /* FAZ 77A: özellik ekranının sayaçları */
+    const spent       = traitCost(c.traits);
+    const negS        = traitNegCount(c.traits);
+    const negP        = traitNegGain(c.traits);
+    const gercekKalan = TRAIT_BUDGET + negP - spent;
 
-    h += `<div class="sect"><h2>TÜR VE YÖNETİM</h2><div class="grid g2">`;
-    for (const k in RACES){
-      const r = RACES[k];
-      h += `<div class="card ${c.race===k?'on':''}" data-a="race" data-x="${k}">
-        <button class="infoBtn" data-a="raceinfo" data-x="${k}" title="Ayrıntılar">i</button>
-        <div class="cn"><canvas class="sig" data-emb="${k}" data-col="${r.col}" width="22" height="22"></canvas>
-        <span style="color:${r.col}">${r.kisa}</span></div>
-        <div class="ct">${r.sifat}</div>
-        <div class="cd">${r.d}</div>
-        <div class="cw">ZAFER: ${r.winD}</div>
-      </div>`;
-    }
-    h += `</div></div>`;
-
-    const spent = traitCost(c.traits);
+    /* ═══ FAZ 77A: GENETİK ÖZELLİKLER BURAYA TAŞINDI ═══
+       KRİTİK BULGU: bu blok SETUP_STEP === 'tur' içindeydi ve o
+       sekme Faz 72'de kaldırılmıştı — 28 genetik özellik ve arma
+       stili oyuncuya HİÇ GÖRÜNMÜYORDU. */
     h += `<div class="sect"><h2>GENETİK ÖZELLİKLER</h2>
-      <div class="traitbar"><span>PUAN <b>${TRAIT_BUDGET-spent}</b> / ${TRAIT_BUDGET}</span>
-      <span>en fazla 4 özellik</span></div><div class="grid g2">`;
+      <div class="traitbar">
+        <span>PUAN <b style="color:${gercekKalan<0?'#ff5f6d':'#6ff2c8'}">${
+          gercekKalan}</b> / ${TRAIT_BUDGET}</span>
+        <span>özellik ${c.traits.length}/${TRAIT_MAX}</span>
+        <span>olumsuz ${negS}/${TRAIT_NEG_COUNT} · kazanç +${negP}/${TRAIT_NEG_MAX}</span>
+      </div>
+      <div class="mini" style="margin:0 0 8px">Olumsuz özellikler puan
+        kazandırır ama en fazla <b>${TRAIT_NEG_COUNT}</b> tane ve toplam
+        <b>+${TRAIT_NEG_MAX}</b> puan alabilirsin. Zıt özellikler birlikte
+        seçilemez.</div>
+      <div class="grid g2">`;
     for (const k in TRAITS){
       const t = TRAITS[k], on = c.traits.includes(k);
-      h += `<button class="tchip ${on?'on':''}" data-a="trait" data-x="${k}">
-        <span class="tc">${t.c>0?t.c:t.c}</span><div class="tn">${t.n}</div>
-        <div class="td">${t.d}</div></button>`;
+      const chk = on ? {ok:true} : canPickTrait(c.traits, k);
+      const kilit = !on && !chk.ok;
+      /* Etkileri sayıyla dök — hikâye değil, matematik */
+      const etki = [];
+      for (const mk in (t.e || {})){
+        const v = t.e[mk];
+        if (!v) continue;
+        const ad = (typeof TRAIT_LABEL !== 'undefined' && TRAIT_LABEL[mk]) || mk;
+        etki.push(ad + ' ' + (v > 0 ? '+' : '−') +
+          Math.round(Math.abs(v) * 100) + '%');
+      }
+      h += `<button class="tchip ${on?'on':''} ${kilit?'dis':''}"
+        data-a="trait" data-x="${k}"
+        ${kilit ? 'title="' + esc(chk.why || '') + '"' : ''}>
+        <span class="tc" style="color:${t.c<0?'#65e08a':'#f2d452'}">${
+          t.c > 0 ? '−' + t.c : '+' + (-t.c)}</span>
+        <div class="tn">${t.n}</div>
+        <div class="td">${etki.length
+          ? '<b style="color:' + (t.c<0?'#ff9b3d':'#9fdcc9') + '">' +
+            etki.join(' · ') + '</b>'
+          : t.d}</div>
+        ${kilit ? '<div class="td" style="color:#ff5f6d;font-size:9px">' +
+          esc(chk.why || '') + '</div>' : ''}</button>`;
     }
     h += `</div></div>`;
 
@@ -6494,17 +6624,62 @@ function renderSetup(){
 
   /* ================= 3. CIVIC ================= */
   if (SETUP_STEP === 'civic'){
+    /* ═══ FAZ 77B: YUVA GÖSTERGESİ ═══ */
+    const kullanilan = civicUsed(c.civics);
+    const radikalSecili = c.civics.find(k => isRadical(k));
     h += `<div class="sect"><h2>CIVIC — YÖNETİM İLKELERİ</h2>
-      <div class="traitbar"><span>SEÇİLEN <b>${c.civics.length}</b> / ${CIVIC_SLOTS}</span>
-      <span>⚡ işaretliler oyun tarzını değiştirir</span></div><div class="grid g2">`;
+      <div class="traitbar">
+        <span>YUVA <b style="color:${kullanilan>=CIVIC_SLOTS?'#f2d452':'#6ff2c8'}">${
+          kullanilan}</b> / ${CIVIC_SLOTS}</span>
+        <span>⚡ radikal = 2 yuva</span>
+      </div>
+      <div class="mini" style="margin:0 0 8px">İki normal politika ya da
+        <b>tek bir ⚡ radikal</b> seçebilirsin. Radikaller oyunun kurallarını
+        büker — güçlüdürler ama ağır bir bedelle gelirler.</div>`;
+    if (radikalSecili)
+      h += `<div class="mini" style="color:#ff9b3d;margin-bottom:8px">
+        ⚡ ${esc(CIVICS[radikalSecili].n)} iki yuvayı da kaplıyor —
+        başka politika seçemezsin.</div>`;
+    h += `<div class="grid g2">`;
     for (const k in CIVICS){
       const cv = CIVICS[k], on = c.civics.includes(k);
-      h += `<button class="card civ ${on?'on':''} ${cv.sars?'sars':''}" data-a="civic" data-x="${k}">
+      const chk = on ? {ok:true} : canPickCivic(c.civics, k);
+      const kilit = !on && !chk.ok;
+      /* Sayısal etkiler — hikâye değil matematik */
+      const etki = [];
+      for (const mk in (cv.e || {})){
+        const v = cv.e[mk];
+        if (!v) continue;
+        const ad = (typeof TRAIT_LABEL !== 'undefined' && TRAIT_LABEL[mk]) || mk;
+        etki.push(ad + ' ' + (mk === 'sensor'
+          ? (v>0?'+':'') + v
+          : (v>0?'+':'−') + Math.round(Math.abs(v)*100) + '%'));
+      }
+      h += `<button class="card civ ${on?'on':''} ${cv.sars?'sars':''} ${kilit?'dis':''}"
+        data-a="civic" data-x="${k}"
+        ${kilit ? 'title="' + esc(chk.why || '') + '"' : ''}>
         <div class="cn"><span class="civIco">${cv.ico}</span>
         <span style="color:${cv.sars?'#ff9b3d':'#6ff2c8'}">${cv.n}</span>
-        ${cv.sars?'<span class="sarsTag">⚡</span>':''}</div>
-        <div class="cd">${cv.d}</div>
+        ${cv.sars?'<span class="sarsTag">⚡ 2 YUVA</span>':''}</div>
+        <div class="cd">${cv.d}
+          ${etki.length ? '<br><b style="color:#9fdcc9">' + etki.join(' · ') + '</b>' : ''}
+          ${cv.bedel ? '<br><b style="color:#ff5f6d">BEDEL:</b> ' +
+            '<span style="color:#ff9b3d">' + cv.bedel + '</span>' : ''}
+          ${kilit ? '<br><b style="color:#ff5f6d">' + esc(chk.why||'') + '</b>' : ''}
+        </div>
       </button>`;
+      /* Tek Ürün seçiliyse hemen altında kaynak seçimi */
+      if (on && k === 'tek_urun'){
+        h += `<div class="box" style="grid-column:1/-1;border-color:#ff9b3d">
+          <div class="bt"><span>💎 Hangi kaynak?</span></div>
+          <div class="bd">Seçtiğin <b>+%60</b>, diğer ikisi <b>−%40</b>.</div>
+          <div class="act2">`;
+        [['ene','⚡ Enerji'],['min','⛏ Maden'],['yiy','🌾 Yiyecek']].forEach(([rk, ad]) => {
+          h += `<button class="abtn ${(c.monoRes||'min')===rk?'pri':''}"
+            data-a="monoRes" data-x="${rk}">${ad}</button>`;
+        });
+        h += `</div></div>`;
+      }
     }
     h += `</div>`;
     if (c.civics.some(k=>CIVICS[k] && CIVICS[k].flag==='mono')){
@@ -6692,6 +6867,10 @@ function setupClickHandler(e){
     }
     safeRenderSetup();
   }
+  else if (a === 'monoRes'){
+    CFG.monoRes = x;                      // FAZ 77B: tek ürün seçimi
+    safeRenderSetup();
+  }
   else if (a === 'step'){ SETUP_STEP = x; $('menu').scrollTop = 0; safeRenderSetup(); }
   else if (a === 'sigil'){ CFG.sigil = x; safeRenderSetup(); }
   else if (a === 'look'){ CFG.look = x; safeRenderSetup(); }
@@ -6798,9 +6977,17 @@ function setupClickHandler(e){
     }
   }
   else if (a === 'civic'){
+    /* FAZ 77B: yuva kuralı canPickCivic'te — radikal iki yuva kaplar */
     const i = CFG.civics.indexOf(x);
-    if (i >= 0) CFG.civics.splice(i,1);
-    else { if (CFG.civics.length >= CIVIC_SLOTS) return; CFG.civics.push(x); }
+    if (i >= 0){
+      CFG.civics.splice(i, 1);
+      if (x === 'tek_urun') delete CFG.monoRes;
+    } else {
+      const chk = canPickCivic(CFG.civics, x);
+      if (!chk.ok){ say(chk.why, 'war'); return; }
+      CFG.civics.push(x);
+      if (x === 'tek_urun' && !CFG.monoRes) CFG.monoRes = 'min';
+    }
     safeRenderSetup();
   }
   else if (a === 'mono'){ CFG.monoRes = x; safeRenderSetup(); }

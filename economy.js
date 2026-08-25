@@ -45,6 +45,12 @@ function colonyStaffing(col){
   return clamp(col.pop / jobs, 0, 1);
 }
 function colonyOutput(e, sys, pl){
+  /* ═══ FAZ 77B: RADİKAL CIVIC ÇARPANLARI ═══
+     Taht Gemisi (bulunduğu sistemde +%15 / kayıpsa −%50) ve
+     Yıldız Yiyen açlığı (tam açlıkta −%55) üretime burada
+     giriyor — tek nokta, tüm kaynaklara aynı anda. */
+  const _radikalMul = (typeof throneMul === 'function' ? throneMul(e, sys.id) : 1) *
+                      (typeof hungerMul === 'function' ? hungerMul(e) : 1);
   const col = pl.col, o = {min:0,ene:0,yiy:0,ala:0,ara:0,etk:0,tuk:0}, use = {min:0};
   const scale = clamp(.55 + col.pop*.045, .55, 1.7);
   const staff = colonyStaffing(col);
@@ -66,6 +72,13 @@ function colonyOutput(e, sys, pl){
     o.ene += col.b.kuyu * (hot ? 4 : 0) * staff;      // sıcak dünyalarda ek verim
   }
   if (col.b.asansor) for (const k in o) o[k] *= 1.18;
+  /* ═══ FAZ 77A: KOLONİ ŞOKU ═══
+     Yeni koloni ilk yıllarda %45 verimle başlar, üç yılda
+     (Öğrenen Sinapslar varsa 1.5 yılda) tam kapasiteye çıkar. */
+  if (col.shock){
+    const sm = colonyShockMul(e, col);
+    if (sm < 1) for (const k in o) o[k] *= sm;
+  }
   // gezegen karakteri
   if (typeof planetTrait === 'function'){
     const pt = planetTrait(col);
@@ -291,6 +304,12 @@ function empireIncome(e){
     const sys = G.sys[c.s], pl = sys.planets[c.p];
     if (!pl.col || pl.owner !== e.id) continue;
     const {o, use} = colonyOutput(e, sys, pl);
+    /* FAZ 77B: radikal civic çarpanı */
+    if (typeof throneMul === 'function' || typeof hungerMul === 'function'){
+      const rm = (typeof throneMul === 'function' ? throneMul(e, sys.id) : 1) *
+                 (typeof hungerMul === 'function' ? hungerMul(e) : 1);
+      if (rm !== 1) for (const k in o) o[k] *= rm;
+    }
     for (const k in o) inc[k] += o[k];
     inc.min -= (use.min||0);
     food += pl.col.pop * 1.15;                    // nüfus başına ağır beslenme yükü
@@ -325,8 +344,16 @@ function empireIncome(e){
 
   // tüketim malı talebi: nüfusun yaşam standardı
   const cgRate = hasCivic(e,'zerowaste') ? .40 : .60;
-  const cgNeed = pops * cgRate * (RACES[e.race].bio === 'makine' ? .5 : 1);
+  let cgNeed = pops * cgRate * (RACES[e.race].bio === 'makine' ? .5 : 1);
   e.cgNeed = cgNeed;
+  /* ═══ FAZ 77A: SAVAŞ PANİĞİ ═══
+     Savaştayken tüketim malı gideri artar — halk istifçilik yapar. */
+  if (e.mods.warTuk){
+    let savasta = false;
+    for (const w in e.war)
+      if (e.war[w] && G.emps[w] && !G.emps[w].dead) savasta = true;
+    if (savasta){ cgNeed *= (1 + e.mods.warTuk); e.cgNeed = cgNeed; }
+  }
   inc.tuk -= cgNeed;
   const bio = RACES[e.race].bio;
   /* ═══ FAZ 52: FİZYOLOJİ BESLENMESİ ═══
@@ -943,6 +970,12 @@ function buildHabitat(e, sys, pl){
   pl.col = {pop:2, stab:55, grow:0, b:{santral:1}, cap:5,
             name:pl.name + ' Habitatı', f:'sanayi', fcd:0,
             shield:0, garrison:0};
+  /* FAZ 77A: koloni şoku — Öğrenen Sinapslar süreyi kısaltır */
+  {
+    const kisalt = 1 + ((e.mods && e.mods.colShock) || 0);   // -0.50 → yarı
+    const ay = Math.max(0, Math.round(COL_SHOCK_MONTHS * kisalt));
+    if (ay > 0){ pl.col.shock = (G.memAge || 0) + ay; pl.col.shockTot = ay; }
+  }
   if (sys.owner < 0) sys.owner = e.id;
   e.colonies.push({s:sys.id, p:pl.i});
   recalcMods(e);
@@ -990,6 +1023,20 @@ function canColonize(e, sys, pl){
   if (claim >= 0 && claim !== e.id && !e.war[claim]) return false;
   return true;
 }
+/* ═══ FAZ 77A: KOLONİ ŞOKU ═══
+   Yeni koloni hemen tam verim vermez; birkaç yıl ayak uydurur.
+   "Öğrenen Sinapslar" bu süreyi yarıya indirir. */
+const COL_SHOCK_MONTHS = 36;
+
+function colonyShockMul(e, col){
+  if (!col || !col.shock) return 1;
+  const kalan = col.shock - (G.memAge || 0);
+  if (kalan <= 0){ delete col.shock; return 1; }
+  const toplam = col.shockTot || COL_SHOCK_MONTHS;
+  /* 0.45 → 1.0 arası doğrusal toparlanma */
+  return clamp(1 - (kalan / toplam) * .55, .45, 1);
+}
+
 function doColonize(e, sys, pl){
   pl.owner = e.id;
   pl.col = {pop: (hasCivic(e,'seedPop') ? 7 : 3) + (hasPerk(e,'migration') ? 3 : 0), stab:50, grow:0,
@@ -2861,4 +2908,1010 @@ function marketTick(){
   /* Grafik için son 40 ay */
   m.hist.push({t: G.memAge || 0, ene: m.mul.ene, min: m.mul.min, ala: m.mul.ala});
   if (m.hist.length > 40) m.hist.shift();
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 77B — ⚡ TAHT GEMİSİ
+   Başkent bir gezegen değil, bir gemidir. Bulunduğu sistemdeki
+   kolonilere +%15 üretim saçar. Yok edilirse imparatorluk 12 ay
+   felç olur (−%50 üretim).
+   ═══════════════════════════════════════════════════════════════════ */
+const THRONE_BUFF   = .15;
+const THRONE_PENALTY = .50;
+const THRONE_MONTHS = 12;
+
+function throneShipOf(e){
+  if (!e || !hasCivic(e, 'throneship')) return null;
+  for (const f of G.fleets){
+    if (f.e !== e.id || !f.ships) continue;
+    if (f.ships.some(sh => sh.throne)) return f;
+  }
+  return null;
+}
+
+/* Aylık: taht gemisi yaşıyor mu, felç sayacı işliyor mu? */
+function throneTick(){
+  for (const e of G.emps){
+    if (e.dead || e.wild || e.crisisSide) continue;
+    if (!hasCivic(e, 'throneship')) continue;
+
+    const gemi = throneShipOf(e);
+    if (gemi){
+      e.throneSys = gemi.sys;
+      if (e.throneLost){
+        delete e.throneLost;
+        if (!e.ai) say('👑 Taht Gemisi yeniden inşa edildi — hanedan ayakta', 'win');
+      }
+      continue;
+    }
+
+    /* Gemi yok: felç dönemi */
+    if (e.throneLost === undefined){
+      e.throneLost = THRONE_MONTHS;
+      delete e.throneSys;
+      if (!e.ai && typeof UI !== 'undefined')
+        UI.eventArt('infaz', 'TAHT GEMİSİ YOK EDİLDİ',
+          'Hanedanın yüzen başkenti enkaza döndü. ' + THRONE_MONTHS +
+          ' ay boyunca üretimin yarıya iner — imparatorluk felç oldu. ' +
+          'Yeni bir taht gemisi inşa edene kadar bu böyle sürecek.',
+          'war', 'kritik', e);
+      else if (G.p && G.p.contact && G.p.contact[e.id])
+        say('👑 ' + e.name + ' taht gemisini kaybetti', 'war');
+    } else if (e.throneLost > 0){
+      e.throneLost--;
+      if (e.throneLost === 0 && !e.ai)
+        say('👑 Felç dönemi bitti — ama taht gemin hâlâ yok', 'war');
+    }
+  }
+}
+
+/* Üretim çarpanı: taht gemisi varsa buff, kayıpsa ceza */
+function throneMul(e, sysId){
+  if (!hasCivic(e, 'throneship')) return 1;
+  if (e.throneLost > 0) return 1 - THRONE_PENALTY;
+  if (e.throneSys !== undefined && e.throneSys === sysId) return 1 + THRONE_BUFF;
+  return 1;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 77B — ⚡ YILDIZ YİYEN EKONOMİ
+   Maden istasyonları %40 verimle çalışır. Karşılığında gezegen
+   tüketilebilir: haritadan silinir, devasa kaynak verir.
+   Açlık sayacı her yıl artar; beslenmezse üretim ve ateş hızı çöker.
+   ═══════════════════════════════════════════════════════════════════ */
+const DEVOUR_MINE_EFF = .40;    // maden istasyonu verimi
+const HUNGER_PER_YEAR = 8;      // yıllık açlık artışı
+const HUNGER_MAX      = 100;
+
+function canDevour(e, sys, pl){
+  if (!hasCivic(e, 'devourer')) return {ok:false, why:'Bu doktrin sende yok'};
+  if (!pl) return {ok:false, why:'Gezegen yok'};
+  if (pl.devoured) return {ok:false, why:'Bu gezegen zaten tüketilmiş'};
+  if (pl.col && pl.owner !== e.id)
+    return {ok:false, why:'Başkasının kolonisi — önce işgal et'};
+  if (sys.owner >= 0 && sys.owner !== e.id && !e.war[sys.owner])
+    return {ok:false, why:'Yabancı toprakta tüketim savaş gerektirir'};
+  /* Yörüngede filo şart — yutacak bir şey lazım */
+  const filo = G.fleets.some(f => f.e === e.id && f.sys === sys.id && f.ships.length);
+  if (!filo) return {ok:false, why:'Sistemde filon yok'};
+  return {ok:true};
+}
+
+function devourPlanet(e, sys, pl){
+  const chk = canDevour(e, sys, pl);
+  if (!chk.ok) return chk;
+
+  /* Verim: gezegen boyutu ve türü belirler */
+  const boy = pl.size || 10;
+  const kazanc = {
+    min: Math.round(boy * 140 + rnd() * 400),
+    ala: Math.round(boy * 55  + rnd() * 160),
+    ene: Math.round(boy * 90  + rnd() * 260)
+  };
+  /* Koloniyse nüfus da yutulur — ağır bir suç */
+  let pop = 0;
+  if (pl.col){
+    pop = Math.round(pl.col.pop || 0);
+    const sahip = G.emps[pl.owner];
+    if (sahip){
+      const ix = sahip.colonies.findIndex(c => c.s === sys.id && c.p === pl.i);
+      if (ix >= 0) sahip.colonies.splice(ix, 1);
+    }
+    delete pl.col;
+    pl.owner = -1;
+    /* Galaksi bunu unutmaz */
+    for (const o of G.emps){
+      if (o.dead || o.wild || o.crisisSide || o.id === e.id) continue;
+      if (!o.contact[e.id]) continue;
+      o.rel[e.id] = clamp((o.rel[e.id] || 0) - 30, -100, 100);
+      if (typeof remember === 'function') remember(o, e.id, 'katliam');
+    }
+    e.threat = (e.threat || 0) + 25;
+  }
+
+  for (const r in kazanc) e.res[r] = (e.res[r] || 0) + kazanc[r];
+  pl.devoured = true;
+  pl.t = 'enkaz';
+  e.hunger = Math.max(0, (e.hunger || 0) - 30);   // açlık diner
+
+  if (!e.ai && typeof UI !== 'undefined')
+    UI.eventArt('catlak', 'GEZEGEN TÜKETİLDİ',
+      pl.name + ' artık yok. Kabuğu söküldü, çekirdeği emildi. ' +
+      '+' + kazanc.min + ' mineral, +' + kazanc.ala + ' alaşım, +' +
+      kazanc.ene + ' enerji' +
+      (pop ? '. ' + pop + ' milyar canlı da onunla gitti — galaksi bunu duyacak.' : '.'),
+      'war', 'kritik', e);
+  return {ok:true, kazanc, pop};
+}
+
+/* Aylık: açlık büyür, doyurulmazsa ceza ağırlaşır */
+function hungerTick(){
+  for (const e of G.emps){
+    if (e.dead || e.wild || e.crisisSide) continue;
+    if (!hasCivic(e, 'devourer')) continue;
+    e.hunger = Math.min(HUNGER_MAX, (e.hunger || 0) + HUNGER_PER_YEAR / 12);
+    if (!e.ai){
+      if (e.hunger >= 70 && e._hungerWarn !== 'kritik'){
+        e._hungerWarn = 'kritik';
+        say('🌟 AÇLIK KRİTİK (%' + Math.round(e.hunger) +
+            ') — üretimin ve ateş hızın çöküyor. Bir gezegen tüket.', 'war');
+      } else if (e.hunger < 40 && e._hungerWarn) delete e._hungerWarn;
+    }
+  }
+}
+
+/* Açlık çarpanı: 0 açlıkta 1.0, tam açlıkta 0.45 */
+function hungerMul(e){
+  if (!hasCivic(e, 'devourer')) return 1;
+  return 1 - ((e.hunger || 0) / HUNGER_MAX) * .55;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 77C — SITUATIONS (DURUMLAR) MOTORU
+   Tek tıkla biten olay değil; aylık işleyen, aşama atlayan,
+   iki sayaçla ilerleyen ve kaynak akışını sürekli etkileyen
+   uzun soluklu hikâye zincirleri.
+
+   PERFORMANS VE BELLEK:
+   · Aynı anda en çok SIT_MAX_ACTIVE (3) durum açık kalabilir.
+   · Tick yalnız AKTİF durumlar üzerinde döner — SITUATIONS
+     kataloğu taranmaz. Boş listede maliyet sıfır.
+   · Tetikleme denemesi ayda bir, %6 şansla ve yalnız oyuncu
+     için yapılır (AI'lar durum yaşamaz — 10 devlet × 4 zincir
+     yerine 1 devlet × 4 zincir).
+   · Biten durumlar diziden SİLİNİR, `done` bayrağıyla arşivde
+     birikmez; yalnız G.sitDone içine anahtarı yazılır ki aynı
+     zincir tekrar başlamasın. Bu bir dizi değil nesne — O(1).
+   · Durum objesi harita nesnelerine REFERANS tutmaz, yalnız
+     id saklar (sys id, emp id). Böylece silinen bir sistem
+     bellekte asılı kalmaz.
+   ═══════════════════════════════════════════════════════════════════ */
+const SIT_MAX_ACTIVE = 3;
+const SIT_TRY_CHANCE = .06;
+const SIT_MIN_YEAR   = 8;      // ilk 8 yıl sakin geçsin
+
+/* Bir seçenek şu an açık mı? Doktrin/fizyoloji kilidi. */
+function sitOptionOpen(e, opt){
+  if (!opt) return false;
+  if (opt.dokt && (e.mizac || e._pers) !== opt.dokt) return false;
+  if (opt.fizyo && (e.physio || 'humanoid') !== opt.fizyo) return false;
+  if (opt.civic && !hasCivic(e, opt.civic)) return false;
+  if (opt.minSay && (opt.minSay.k !== undefined)){
+    /* sayaç eşiği: {k:'korku', v:60, yon:'ust'} */
+    const s = arguments[2];
+    if (s){
+      const deger = s.say[opt.minSay.k] || 0;
+      if (opt.minSay.yon === 'alt' ? deger > opt.minSay.v : deger < opt.minSay.v)
+        return false;
+    }
+  }
+  return true;
+}
+
+function sitOptionWhy(e, opt){
+  if (opt.dokt) return (PERSONAS[opt.dokt] ? PERSONAS[opt.dokt].n : opt.dokt) +
+                       ' doktrini gerekir';
+  if (opt.fizyo) return (PHYSIO[opt.fizyo] ? PHYSIO[opt.fizyo].n : opt.fizyo) +
+                        ' fizyolojisi gerekir';
+  if (opt.civic) return 'Uygun sivil politika gerekir';
+  if (opt.minSay) return 'Sayaç eşiği tutmuyor';
+  return 'Şu an seçilemez';
+}
+
+/* Yeni durum başlat */
+function startSituation(e, key){
+  const S = SITUATIONS[key];
+  if (!S) return null;
+  G.sits = G.sits || [];
+  G.sitDone = G.sitDone || {};
+  if (G.sitDone[key]) return null;
+  if (G.sits.some(x => x.key === key)) return null;
+  if (G.sits.length >= SIT_MAX_ACTIVE) return null;
+
+  const s = {
+    key, emp: e.id, stage: 1, age: 0,
+    say: {},                       // sayaçlar
+    log: [],                       // oyuncunun verdiği kararlar
+    data: {}                       // zincire özel durum (sys id vb.)
+  };
+  for (const k in S.say) s.say[k] = S.say[k].bas;
+  if (S.kur) { try { S.kur(e, s); } catch(err){ console.warn('sit kur:', err); } }
+  G.sits.push(s);
+  if (e.id === 0 && typeof UI !== 'undefined' && UI.eventArt)
+    UI.eventArt(S.art || 'veri', S.n, S.giris, 'sci', 'kritik');
+  return s;
+}
+
+/* Durumu bitir — dizi temizlenir, anahtar arşive yazılır */
+function endSituation(s, sonucMetin, art){
+  const S = SITUATIONS[s.key];
+  G.sitDone = G.sitDone || {};
+  G.sitDone[s.key] = {t: G.memAge || 0, son: s.stage};
+  const e = G.emps[s.emp];
+  if (e && e.id === 0 && typeof UI !== 'undefined' && UI.eventArt)
+    UI.eventArt(art || 'veri', S.n + ' — SON', sonucMetin, 'win', 'kritik');
+  else if (typeof say === 'function') say('📜 ' + S.n + ' sona erdi', 'sci');
+  G.sits = (G.sits || []).filter(x => x !== s);
+}
+
+/* ═══ ANA DÖNGÜ — monthTick çağırır ═══ */
+function situationsTick(){
+  G.sits = G.sits || [];
+  G.sitDone = G.sitDone || {};
+
+  /* 1) Aktif durumları işle */
+  for (let i = G.sits.length - 1; i >= 0; i--){
+    const s = G.sits[i];
+    const S = SITUATIONS[s.key];
+    const e = G.emps[s.emp];
+    if (!S || !e || e.dead){ G.sits.splice(i, 1); continue; }
+    s.age++;
+
+    /* Sayaçlar ilerler */
+    for (const k in S.say){
+      const C = S.say[k];
+      let d = (typeof C.ay === 'function') ? C.ay(e, s) : (C.ay || 0);
+      s.say[k] = clamp((s.say[k] || 0) + d, 0, C.max || 100);
+    }
+
+    /* Aylık bedel — kaynak akışını sürekli etkiler */
+    if (S.bedel){
+      const b = S.bedel(e, s);
+      if (b) for (const r in b) e.res[r] = Math.max(0, (e.res[r] || 0) + b[r]);
+    }
+
+    /* Zincire özel aylık iş (harita nesnesi hareketi vb.) */
+    if (S.tick) { try { S.tick(e, s); } catch(err){ console.warn('sit tick:', err); } }
+
+    /* Aşama ilerlemesi */
+    const asama = S.asama[s.stage - 1];
+    if (asama && asama.gec && asama.gec(e, s) && s.stage < S.asama.length){
+      s.stage++;
+      s.age = 0;
+      if (e.id === 0 && typeof UI !== 'undefined' && UI.eventArt){
+        const yeni = S.asama[s.stage - 1];
+        UI.eventArt(S.art || 'veri', S.n + ' · Aşama ' + s.stage,
+          yeni.t, 'sci', 'kritik');
+      }
+    }
+    /* Zaman aşımı finali */
+    if (S.zamanAsimi && s.age > S.zamanAsimi.ay){
+      S.zamanAsimi.f(e, s);
+      continue;
+    }
+  }
+
+  /* 2) Yeni durum tetikleme — yalnız oyuncu, seyrek */
+  const p = G.p;
+  if (!p || p.dead) return;
+  if (G.year < (G.startYear || 2200) + SIT_MIN_YEAR) return;
+  if (G.sits.length >= SIT_MAX_ACTIVE) return;
+  if (rnd() > SIT_TRY_CHANCE) return;
+
+  const adaylar = [];
+  for (const k in SITUATIONS){
+    if (G.sitDone[k]) continue;
+    if (G.sits.some(x => x.key === k)) continue;
+    const S = SITUATIONS[k];
+    if (S.sart && !S.sart(p)) continue;
+    adaylar.push(k);
+  }
+  if (!adaylar.length) return;
+  startSituation(p, adaylar[Math.floor(rnd() * adaylar.length)]);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 77D — DİNAMİK BEDEL
+   Sabit sayılar oyunun her evresinde aynı acıyı vermiyordu:
+   erken oyunda 600 alaşım yıkıcı, geç oyunda bahşiş.
+   Artık bedel AYLIK GELİRE oranlanabiliyor: {ay:{ala:10}} =
+   10 aylık alaşım geliri.
+
+   NEGATİF GELİR TUZAĞI: gelir eksiyse çarpım da eksi çıkar ve
+   oyuncuya KAYNAK VERİRDİ — bu bir istismardı. İki katmanlı
+   koruma var: gelir Math.max(0, ...) ile taban alınıyor ve
+   sonuç asla `taban` değerinin altına inemiyor. Yani ekonomisi
+   çökmüş oyuncu da en az taban kadar öder.
+   ═══════════════════════════════════════════════════════════════════ */
+function sitCost(e, opt){
+  if (!opt) return null;
+  if (opt.c && !opt.ay) return opt.c;              // düz sabit
+  if (!opt.ay) return null;
+  const out = {};
+  for (const r in opt.ay){
+    const gelir = Math.max(0, (e.inc && e.inc[r]) || 0);   // negatif gelir 0 sayılır
+    const taban = (opt.c && opt.c[r]) || 0;                // asgari bedel
+    out[r] = Math.max(taban, Math.round(gelir * opt.ay[r]));
+    if (out[r] <= 0) out[r] = taban || 1;                  // sıfır bedel olmasın
+  }
+  return out;
+}
+
+/* Arayüzde gösterilecek bedel metni */
+function sitCostText(e, opt){
+  const b = sitCost(e, opt);
+  if (!b) return '';
+  return Object.keys(b).map(r =>
+    Math.round(b[r]) + ' ' + (RES[r] ? RES[r].n : r)).join(' · ');
+}
+
+/* Oyuncunun bir seçeneği seçmesi */
+function pickSituation(s, ix){
+  const S = SITUATIONS[s.key];
+  const e = G.emps[s.emp];
+  if (!S || !e) return {ok:false, why:'Durum yok'};
+  const asama = S.asama[s.stage - 1];
+  if (!asama || !asama.ops || !asama.ops[ix]) return {ok:false, why:'Seçenek yok'};
+  const opt = asama.ops[ix];
+  if (!sitOptionOpen(e, opt, s)) return {ok:false, why:sitOptionWhy(e, opt)};
+  const bedel = sitCost(e, opt);
+  if (bedel){
+    for (const r in bedel)
+      if ((e.res[r] || 0) < bedel[r])
+        return {ok:false, why:'Yetersiz ' + (RES[r] ? RES[r].n : r) +
+                ' (' + Math.round(bedel[r]) + ' gerekir)'};
+    for (const r in bedel) e.res[r] -= bedel[r];
+  }
+  s.log.push({stage: s.stage, ix, t: G.memAge || 0});
+  const sonuc = opt.f ? opt.f(e, s) : '';
+  if (sonuc && e.id === 0) say('📜 ' + sonuc, 'sci');
+  return {ok:true, msg: sonuc};
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 77C — HİKÂYE ZİNCİRLERİ
+   Her zincir: 2 sayaç · 5 aşama · doktrin/fizyoloji kilitli
+   seçenekler · aylık bedel · kalıcı sonuçlu finaller.
+   ═══════════════════════════════════════════════════════════════════ */
+const SITUATIONS = {
+
+/* ───────────────────── 1. KARANLIK ORMAN ───────────────────── */
+karanlik_orman:{
+  n:'Karanlık Orman Paranoyası', ico:'🌑', art:'veri',
+  giris:'Keşif filomuz camlaşmış bir gezegen buldu. Bir zamanlar orada ' +
+        'milyarlar yaşıyordu; hiçbiri savaşarak ölmemiş. Yörüngede tek bir ' +
+        'enkaz yok — sadece bir kere ateş edilmiş ve her şey bitmiş. ' +
+        'Haber sızdı. Halk geceleri gökyüzüne bakmıyor artık.',
+  say:{
+    korku       :{n:'Korku', ico:'😰', bas:20, max:100,
+                  ay:(e,s)=> 1.4 + s.stage * .5},
+    radikallesme:{n:'Radikalleşme', ico:'🔥', bas:5, max:100,
+                  ay:(e,s)=> (s.say.korku > 55 ? 1.8 : .4)}
+  },
+  sart:(e)=> G.sys.length > 10,
+  kur:(e,s)=>{
+    const aday = G.sys.filter(sy => sy.owner < 0 && !sy.ruin);
+    if (aday.length) s.data.sys = aday[Math.floor(rnd()*aday.length)].id;
+  },
+  bedel:(e,s)=>{
+    /* Korku istikrarı ve etkiyi yer */
+    const k = s.say.korku;
+    return {etk: -(k * .04)};
+  },
+  tick:(e,s)=>{
+    for (const c of (e.colonies || [])){
+      const sy = G.sys[c.s], pl = sy && sy.planets[c.p];
+      if (pl && pl.col) pl.col.stab = clamp(pl.col.stab - s.say.korku * .012, 0, 100);
+    }
+  },
+  asama:[
+    {t:'SESSİZ ÇIĞLIK — Kalıntılarda tek bir kurşun deliği yok. ' +
+        'Ne siper kazılmış ne sığınak açılmış. Milyarlarca kişi ' +
+        'öleceğini öğrenecek kadar bile yaşamamış. Halkımız bunu ' +
+        'öğrendi ve geceleri artık perdeler kapalı.',
+     gec:(e,s)=> s.say.korku >= 35,
+     ops:[
+       {t:'Bulguları mühürle', d:'Arşiv kapatılır, korku yavaşlar — ' +
+          'ama sızarsa güven biter',
+        ay:{etk:6}, c:{etk:40},
+        f:(e,s)=>{ s.say.korku -= 18;
+          return 'Kayıtlar mühürlendi. Bilenler sayıldı, listeye yazıldı.'; }},
+       {t:'Halka açıkla', d:'Şeffaflık bilim getirir, korkuyu da',
+        f:(e,s)=>{ e.res.ara += 60; s.say.korku += 12;
+          return 'Yayın bitince sokaklar sessizdi. Bir çocuk sordu: ' +
+                 '"Bize de mi yapacaklar?"'; }},
+       {t:'Nedensellik Testi', d:'⚙ Teknokrasi — camlaşmanın imzasını çöz',
+        dokt:'teknokrasi',
+        f:(e,s)=>{ e.res.ara += 240; s.say.korku -= 14; s.say.radikallesme += 6;
+          return 'Isı imzası tek bir noktadan geliyor. Bu bir kaza değildi; ' +
+                 'bir tetikti. Korkuyu bilgi bastırdı — şimdilik.'; }},
+       {t:'Panik Satışı', d:'🎭 Kriminal Sendika — korkudan servet',
+        dokt:'kriminal',
+        f:(e,s)=>{
+          const kar = Math.max(600, Math.round(Math.max(0, (e.inc.ene||0)) * 14));
+          e.res.ene += kar; s.say.korku += 10;
+          for (const c of (e.colonies || [])){
+            const sy = G.sys[c.s], pl = sy && sy.planets[c.p];
+            if (pl && pl.col) pl.col.stab = clamp(pl.col.stab - 6, 0, 100);
+          }
+          return 'Sığınak hisseleri tavan yaptı: +' + kar + ' enerji. ' +
+                 'İstikrar düştü ama kasa doldu. Korku iyi iş.'; }}
+     ]},
+    {t:'Sığınak tarikatları kuruldu. Gökyüzüne bakmak yasak sayılıyor.',
+     gec:(e,s)=> s.say.korku >= 60 || s.say.radikallesme >= 30,
+     ops:[
+       {t:'Tarikatları dağıt', d:'−60 etki · radikalleşme düşer',
+        c:{etk:60}, f:(e,s)=>{ s.say.radikallesme -= 20; return 'Meydanlar boşaltıldı.'; }},
+       {t:'Sessizlik protokolü', d:'Yayınları kes · korku −25',
+        f:(e,s)=>{ s.say.korku -= 25; e.res.ara -= 60;
+          return 'Galaksiye yaydığımız her sinyali kestik.'; }},
+       {t:'Kutsal savaş çağrısı', d:'Kutsal Meclis · radikalleşme +30',
+        dokt:'teokrasi',
+        f:(e,s)=>{ s.say.radikallesme += 30; e.res.etk += 120;
+          return 'Karanlık bir sınavdır. Halk arkanda toplandı.'; }}
+     ]},
+    {t:'Filolar gökyüzünü tarıyor. Her sessiz sistem bir tehdit sayılıyor.',
+     gec:(e,s)=> s.say.radikallesme >= 55,
+     ops:[
+       {t:'Savunma hattı kur', d:'−600 alaşım · korku −30',
+        c:{ala:600}, f:(e,s)=>{ s.say.korku -= 30;
+          for (const sy of G.sys) if (sy.owner === e.id) sy.def = sysDefense(sy);
+          return 'Sınırlar dikenli tellerle örüldü.'; }},
+       {t:'İlk temas protokolü', d:'Radikalleşme −25 · diplomasi',
+        f:(e,s)=>{ s.say.radikallesme -= 25; e.res.etk += 60;
+          return 'Belki de konuşmayı denemeliyiz.'; }}
+     ]},
+    {t:'Karar vakti. Halk bir cevap istiyor — ve iki cevap var.',
+     gec:(e,s)=> s.say.radikallesme >= 80 || s.say.korku >= 90,
+     ops:[
+       {t:'AVCI OL', d:'⚡ "Onlar bizi yok etmeden biz herkesi yok edeceğiz." ' +
+          'Doktrin zorla Fanatik Arındırıcılar olur — diplomasi kapanır.',
+        f:(e,s)=>{
+          e.mizac = 'izolasyonist'; e._pers = 'izolasyonist';
+          recalcMods(e);
+          for (const o of G.emps){
+            if (o.dead || o.wild || o.id === e.id) continue;
+            o.rel[e.id] = clamp((o.rel[e.id] || 0) - 60, -100, 100);
+          }
+          endSituation(s, 'Karanlıkta avcı olmayan av olur. Diplomasi ' +
+            'kapandı, gemi hasarımız +%40. Artık biz sessizliğiz.', 'infaz');
+          return 'AVCI OLDUK.';
+        }},
+       {t:'SESSİZ KARANLIK', d:'⚡ "Karanlıkta saklanmalıyız." Doktrin ' +
+          'zorla Pasifist olur — savaş açamayız ama gezegenler kaleye döner.',
+        f:(e,s)=>{
+          e.mizac = 'pasifist'; e._pers = 'pasifist';
+          recalcMods(e);
+          for (const c of (e.colonies || [])){
+            const sy = G.sys[c.s], pl = sy && sy.planets[c.p];
+            if (pl && pl.col){
+              /* FAZ 77D: %50 savunma kalkanı — mevcut değerin üstüne */
+              pl.col.garrison = Math.round((pl.col.garrison || 0) * 1.5 + 60);
+              pl.shield = Math.max(pl.shield || 0, 55);
+            }
+          }
+          endSituation(s, 'Sesimizi kestik ve kabuğumuza çekildik. Savaş ' +
+            'açamayız — ama gezegenlerimiz artık birer kale.', 'veri');
+          return 'SESSİZLİĞİ SEÇTİK.';
+        }}
+     ]},
+    {t:'—'}
+  ]
+},
+
+/* ───────────────────── 2. GÖÇEN GÜNEŞ ───────────────────── */
+gocen_gunes:{
+  n:'Göçen Güneşin Ağıdı', ico:'☄', art:'catlak',
+  giris:'Bir yıldız hareket ediyor. Yörüngesinden kopmuş değil — ' +
+        'yönlendiriliyor. Arkasında hiper yolları bir halı gibi ' +
+        'sürüklüyor; geçtiği yerde galaksinin haritası değişiyor.',
+  say:{
+    rezonans:{n:'Rezonans', ico:'〰', bas:10, max:100,
+              ay:(e,s)=> 1.2 + (s.data.yakin ? 2.5 : 0)},
+    sapma   :{n:'Yörünge Sapması', ico:'🌀', bas:0, max:100,
+              ay:(e,s)=> .9 + s.stage * .4}
+  },
+  sart:(e)=> G.sys.length > 14,
+  kur:(e,s)=>{
+    const aday = G.sys.filter(sy => sy.owner < 0);
+    if (aday.length){
+      const sec = aday[Math.floor(rnd()*aday.length)];
+      s.data.sys = sec.id;
+      sec.wander = true;              // FAZ 77D: haritada görünsün
+    }
+    s.data.hedef = -1;
+  },
+  bedel:(e,s)=> ({ene: -(s.say.rezonans * .35)}),
+  tick:(e,s)=>{
+    /* Yıldız komşu sisteme "göç eder": hiper yol bağlantısı taşınır */
+    if (s.age % 18 !== 0) return;
+    const sy = G.sys[s.data.sys];
+    if (!sy || !sy.lanes || !sy.lanes.length) return;
+    const yeni = sy.lanes[Math.floor(rnd() * sy.lanes.length)];
+    const hedefSys = G.sys[yeni];
+    if (!hedefSys) return;
+    s.data.sys = yeni;
+    s.data.yakin = (hedefSys.owner === e.id);
+    hedefSys.wander = true;
+    hedefSys.wanderFrom = sy.id;      // FAZ 77D: kuyruk çizimi için
+    delete sy.wander;
+    delete sy.wanderFrom;
+    if (e.id === 0)
+      say('☄ Göçen Güneş ' + hedefSys.name + ' sistemine kaydı', 'war');
+  },
+  asama:[
+    {t:'Yıldız yaklaşıyor. Rezonans gemi reaktörlerini zorluyor.',
+     gec:(e,s)=> s.say.rezonans >= 30,
+     ops:[
+       {t:'Rezonansı ölç', d:'+150 araştırma',
+        f:(e,s)=>{ e.res.ara += 150; return 'Titreşim bir dil gibi düzenli.'; }},
+       {t:'Tanrı ilan et', d:'Kutsal Meclis · +200 etki',
+        dokt:'teokrasi',
+        f:(e,s)=>{ e.res.etk += 200; s.say.rezonans += 15;
+          return 'Göklerde yürüyen ateş kutsandı.'; }},
+       {t:'Maden üssü kur', d:'Yayılmacı · −400 mineral, +alaşım akışı',
+        dokt:'yayilmaci', c:{min:400},
+        f:(e,s)=>{ s.data.maden = true;
+          return 'Hareketli bir yıldıza kazma vurduk. Kimse bunu yapmamıştı.'; }}
+     ]},
+    {t:'YOLUNDAKİ KOLONİLER — Yıldız artık bir merak değil, bir takvim. ' +
+        'Yörüngesindeki her dünya kaç ay kaldığını biliyor. Tahliye ' +
+        'gemileri limanlarda bekliyor; kimse ilk binmek istemiyor, ' +
+        'çünkü ilk binen kaçtığını kabul etmiş olur.',
+     gec:(e,s)=> s.say.sapma >= 35,
+     ops:[
+       {t:'Rotaları yeniden çiz', d:'Kaptanlara yeni haritalar — sapma azalır',
+        ay:{ene:8}, c:{ene:300},
+        f:(e,s)=>{ s.say.sapma -= 22;
+          return 'Her kaptan yeni yıldız haritasını ezberledi. Eskisini yaktık.'; }},
+       {t:'Ortak Gözlem Konseyi', d:'🕊 Pasifist — riski galaksiyle paylaş',
+        dokt:'pasifist',
+        f:(e,s)=>{
+          s.say.sapma -= 30; e.res.etk += 150;
+          for (const o of G.emps){
+            if (o.dead || o.wild || o.crisisSide || o.id === e.id) continue;
+            if (!e.contact[o.id]) continue;
+            o.rel[e.id] = clamp((o.rel[e.id] || 0) + 12, -100, 100);
+          }
+          return 'Yedi devletin gözlemcisi aynı masaya oturdu. Yıldız hepimizin ' +
+                 'sorunu oldu — ve bu, yükü hafifletti.'; }},
+       {t:'Kalıcı Çekim Halkası', d:'💰 Tüccar — devasa alaşım, kalıcı enerji',
+        dokt:'tuccar', ay:{ala:20}, c:{ala:800},
+        f:(e,s)=>{ s.say.rezonans += 20; s.data.kontrol = true;
+          e.extra = e.extra || {}; e.extra.eneMul = (e.extra.eneMul||0) + .12;
+          recalcMods(e);
+          return 'Yıldızın belini çelik bir kuşak sardı. Enerji +%12 kalıcı. ' +
+                 'Yıldız artık bizi dinliyor... sanırım.'; }},
+       {t:'Yönlendirmeyi dene', d:'Ağır alaşım bedeli · kontrol kazanılır',
+        ay:{ala:24}, c:{ala:900},
+        f:(e,s)=>{ s.say.rezonans += 20; s.data.kontrol = true;
+          return 'Çekim halkaları kuruldu. İlk itki verildi ve yıldız — ' +
+                 'bir an için — duraksadı.'; }}
+     ]},
+    {t:'Yıldız kontrol edilebilir hale geliyor. Ne yapacağız?',
+     gec:(e,s)=> s.say.rezonans >= 65,
+     ops:[
+       {t:'SIĞINAK GÜNEŞ', d:'Haritanın kenarında dost bir ışık uygarlığı ' +
+          'doğar · kalıcı enerji +%45',
+        f:(e,s)=>{
+          e.extra = e.extra || {}; e.extra.eneMul = (e.extra.eneMul || 0) + .45;
+          recalcMods(e);
+          /* Kenarda dost bir ışık uygarlığı */
+          try {
+            const dost = makeEmpire(G.emps.length, e.race, 'Işık Sürgünleri',
+                                    true, rnd, []);
+            dost.wild = true; dost.lightfolk = true; dost.col = '#ffd98a';
+            G.emps.push(dost);
+            const sy2 = G.sys[s.data.sys];
+            if (sy2) newFleet(dost, sy2.id, [{c:'kru'}], 'Işık Kervanı');
+          } catch(err){ console.warn('lightfolk:', err); }
+          endSituation(s, 'Yıldızı bir jeneratöre çevirdik ve etrafında ' +
+            'yaşamaya başlayanlar oldu — ısıyla beslenen, konuşmayan, ' +
+            'zarar vermeyen bir halk. Enerjimiz kalıcı +%45. ' +
+            'Ağıt bir ilahiye dönüştü.', 'veri');
+          return 'SIĞINAK GÜNEŞ KURULDU.';
+        }},
+       {t:'TAÇLANMIŞ GEZGİN', d:'⚔ Yıldızı zincirle ve düşmanın üstüne sür ' +
+          '— mobil bir kale, yürüyen bir infaz',
+        f:(e,s)=>{
+          if (!s.data.kontrol) return 'Yıldız üzerinde kontrolümüz yok — önce çekim halkaları gerek.';
+          let kurban = null;
+          for (const o of G.emps){
+            if (o.dead || o.wild || o.crisisSide || o.id === e.id) continue;
+            if (e.war[o.id]){ kurban = o; break; }
+          }
+          if (!kurban) return 'Savaştığın kimse yok — silah boşa yanar.';
+          let yutulan = 0;
+          for (const sy of G.sys){
+            if (sy.owner !== kurban.id) continue;
+            if (yutulan >= 2) break;
+            for (const pl of sy.planets) if (pl.col){ pl.col = null; pl.owner = -1; yutulan++; }
+            sy.owner = -1;
+          }
+          kurban.rel[e.id] = -100;
+          endSituation(s, kurban.name + ' devletinin ' + yutulan +
+            ' dünyası yıldızın yolunda buharlaştı. Galaksi bunu unutmayacak.', 'catlak');
+          return 'YILDIZ ATEŞLENDİ.';
+        }}
+     ]},
+    {t:'Sapma kritik. Yıldız kontrolden çıkmak üzere.', gec:()=>false, ops:[
+       {t:'Bırak gitsin', d:'Durum sona erer',
+        f:(e,s)=>{ endSituation(s, 'Yıldız galaksinin karanlığına doğru ' +
+          'süzüldü. Arkasında değişmiş bir harita bıraktı.', 'veri');
+          return 'Onu serbest bıraktık.'; }}
+     ]},
+    {t:'—'}
+  ],
+  zamanAsimi:{ay:240, f:(e,s)=> endSituation(s,
+    'Göçen Güneş menzilimizden çıktı. Bir daha görülmedi.', 'veri')}
+},
+
+/* ───────────────────── 3. YARINKİ TAHTIN ELÇİLERİ ───────────────────── */
+yarinki_taht:{
+  n:'Yarınki Tahtın Elçileri', ico:'⏳', art:'veri',
+  giris:'Sınırda bir filo belirdi. Gemilerinde bizim armamız var — ama ' +
+        'üç yüz yıl sonrasının tasarımıyla. Komutanları kendini bizim ' +
+        'soyumuzdan ilan ediyor ve tahtı istiyor. Kayıtlarımızda böyle ' +
+        'bir isim yok. Henüz.',
+  say:{
+    paradoks:{n:'Paradoks', ico:'⧗', bas:15, max:100,
+              ay:(e,s)=> 1.1 + s.stage * .6},
+    sadakat :{n:'Sadakat', ico:'⚑', bas:70, max:100,
+              ay:(e,s)=> -(s.say.paradoks * .035)}
+  },
+  sart:(e)=> (e.colonies || []).length >= 3,
+  kur:(e,s)=>{ s.data.tur = 0; },
+  bedel:(e,s)=> ({etk: -(s.say.paradoks * .05)}),
+  tick:(e,s)=>{
+    if (s.say.sadakat < 30){
+      for (const c of (e.colonies || [])){
+        const sy = G.sys[c.s], pl = sy && sy.planets[c.p];
+        if (pl && pl.col) pl.col.stab = clamp(pl.col.stab - .35, 0, 100);
+      }
+    }
+  },
+  asama:[
+    {t:'Elçiler görüşme istiyor. Halkın yarısı onlara inanıyor.',
+     gec:(e,s)=> s.age > 8 || s.say.paradoks >= 35,
+     ops:[
+       {t:'Kabul et, dinle', d:'+200 araştırma · paradoks +12',
+        f:(e,s)=>{ e.res.ara += 200; s.say.paradoks += 12;
+          return 'Anlattıkları hem tanıdık hem imkânsız.'; }},
+       {t:'Filoya saldır', d:'Militarist · sadakat +20, paradoks +25',
+        dokt:'militarist',
+        f:(e,s)=>{ s.say.sadakat += 20; s.say.paradoks += 25;
+          return 'Taht istemeye gelen, tahtın gücünü görür.'; }},
+       {t:'Sahte peygamber ilan et', d:'Kutsal Meclis · sadakat +30',
+        dokt:'teokrasi',
+        f:(e,s)=>{ s.say.sadakat += 30; s.say.paradoks += 8;
+          return 'Kürsüden okundu: gelecek Tanrı’nın tekelindedir.'; }}
+     ]},
+    {t:'HAFIZA YAĞMURU — Elçilerin anıları sisteme sızıyor. İnsanlar ' +
+        'yaşamadıkları savaşları hatırlamaya başladı: bir kuşatma, ' +
+        'bir ihanet, tahtta oturan tanımadıkları bir yüz. Arşivciler ' +
+        'henüz yazılmamış belgeleri dosyalıyor.',
+     gec:(e,s)=> s.say.paradoks >= 55,
+     ops:[
+       {t:'Anıları arşivle', d:'Yaşanmamış tarihi kayda geçir',
+        f:(e,s)=>{ e.res.ara += 800; s.say.paradoks += 25;
+          return 'Anlamadığımız şeyleri kopyaladık. Bir arşivci kendi ' +
+                 'ölüm tarihini okuyunca istifa etti.'; }},
+       {t:'Reddet ve mühürle', d:'Paradoks düşer, sadakat toparlanır',
+        f:(e,s)=>{ s.say.paradoks -= 30; s.say.sadakat += 15;
+          return 'Gelecek, geleceğe kalsın. Kapılar kapatıldı.'; }},
+       {t:'Gelecek Zihnini Ağa Bağla', d:'⚙ Makine Ağı — geçici devasa ' +
+          'bilim, paradoks fırlar',
+        fizyo:'machine',
+        f:(e,s)=>{ e.res.ara += 1600; s.say.paradoks += 35;
+          e.extra = e.extra || {}; e.extra.araMul = (e.extra.araMul||0) + .18;
+          recalcMods(e);
+          return 'Üç yüz yıllık hafızayı ağa yükledik. Araştırma +%18. ' +
+                 'Bazı düğümler kendi kapatılma emrini gördü ve donakaldı.'; }},
+       {t:'Tanıkları Ortadan Kaldır', d:'⚔ Militarist — acımasızca sustur',
+        dokt:'militarist',
+        f:(e,s)=>{ s.say.paradoks -= 40; s.say.sadakat += 25;
+          for (const c of (e.colonies || [])){
+            const sy = G.sys[c.s], pl = sy && sy.planets[c.p];
+            if (pl && pl.col) pl.col.stab = clamp(pl.col.stab - 10, 0, 100);
+          }
+          return 'Hatırlayanlar sustu. Paradoks çözüldü, vicdan değil.'; }}
+     ]},
+    {t:'Zaman çizgisi geriliyor. Bir karar verilmezse kırılacak.',
+     gec:(e,s)=> s.say.paradoks >= 80 || s.say.sadakat <= 20,
+     ops:[
+       {t:'İKİZ HANEDANLAR', d:'⚡ Kopyanla masaya otur — müttefik bir ' +
+          'kardeş devlet doğar',
+        f:(e,s)=>{
+          let ikiz = null;
+          try {
+            ikiz = makeEmpire(G.emps.length, e.race, 'İkiz ' + e.name, true, rnd, []);
+            ikiz.col = (typeof shiftColor === 'function') ? shiftColor(e.col) : e.col;
+            ikiz.techs = Object.assign({}, e.techs);
+            ikiz.mizac = e.mizac; ikiz._pers = e._pers;
+            ikiz.look = e.look; ikiz.sigil = e.sigil;
+            ikiz.twinOf = e.id;
+            G.emps.push(ikiz);
+            recalcMods(ikiz);
+            const bos = G.sys.find(sy => sy.owner < 0 && sy.planets.some(p2 => !p2.col));
+            if (bos){
+              bos.owner = ikiz.id; ikiz.home = bos.id;
+              const pl = bos.planets.find(p2 => !p2.col);
+              if (pl && typeof doColonize === 'function') doColonize(ikiz, bos, pl);
+              newFleet(ikiz, bos.id, [{c:'zir'},{c:'zir'}], null);
+            }
+            e.contact[ikiz.id] = true; ikiz.contact[e.id] = true;
+            ikiz.rel[e.id] = 85; e.rel[ikiz.id] = 85;
+            e.ally = e.ally || {}; ikiz.ally = ikiz.ally || {};
+            e.ally[ikiz.id] = true; ikiz.ally[e.id] = true;
+          } catch(err){ console.warn('ikiz:', err); }
+          endSituation(s, (ikiz ? ikiz.name : 'İkiz hanedan') + ' tahtı ' +
+            'paylaşmayı kabul etti. İki hanedan, tek soy — ve bir ittifak. ' +
+            'Aynadaki yüz artık arkanı kolluyor.', 'veri');
+          return 'İKİZ HANEDANLAR KURULDU.';
+        }},
+       {t:'ENTEGRE ET', d:'Teknolojileri devral, elçiler tarihe karışır',
+        f:(e,s)=>{
+          const kilitsiz = Object.keys(TECHS).filter(t => !e.techs[t]);
+          let n = 0;
+          for (const t of kilitsiz){ if (n >= 4) break; e.techs[t] = true; n++; }
+          recalcMods(e);
+          endSituation(s, 'Elçiler tahtın gölgesinde eridi; bilgileri kaldı. ' +
+            n + ' teknoloji anında açıldı. Gelecek artık bizim.', 'veri');
+          return 'ENTEGRE EDİLDİ.';
+        }},
+       {t:'KIRIK ZAMAN', d:'⚡ Kopyan haritada DÜŞMAN bir devlet olarak ' +
+          'doğar ve tahtı silahla ister',
+        f:(e,s)=>{
+          let ikiz = null;
+          try {
+            ikiz = makeEmpire(G.emps.length, e.race, 'İkinci ' + e.name, true, rnd, []);
+            ikiz.col = shiftColor ? shiftColor(e.col) : e.col;
+            ikiz.techs = Object.assign({}, e.techs);
+            ikiz.mizac = e.mizac; ikiz._pers = e._pers;
+            ikiz.look = e.look; ikiz.sigil = e.sigil;
+            ikiz.twinOf = e.id;
+            G.emps.push(ikiz);
+            recalcMods(ikiz);
+            /* Sınırda bir sisteme yerleştir */
+            const bos = G.sys.find(sy => sy.owner < 0 && sy.planets.some(p2 => !p2.col));
+            if (bos){
+              bos.owner = ikiz.id;
+              ikiz.home = bos.id;
+              const pl = bos.planets.find(p2 => !p2.col);
+              if (pl && typeof doColonize === 'function') doColonize(ikiz, bos, pl);
+              newFleet(ikiz, bos.id, [{c:'zir'},{c:'zir'},{c:'kru'}], null);
+            }
+            e.contact[ikiz.id] = true; ikiz.contact[e.id] = true;
+            /* KIRIK ZAMAN: kopya düşman doğar ve savaş açar */
+            ikiz.rel[e.id] = -100; e.rel[ikiz.id] = -100;
+            ikiz.war[e.id] = true; e.war[ikiz.id] = true;
+            ikiz.warSince = {}; ikiz.warSince[e.id] = G.day;
+            ikiz.warCause = {}; ikiz.warCause[e.id] = 'Taht İddiası';
+            recalcMods(e);
+          } catch(err){ console.warn('ikiz:', err); }
+          endSituation(s, 'Zaman çizgisi çatladı. ' +
+            (ikiz ? ikiz.name : 'İkiz hanedan') + ' galakside kendi tahtını ' +
+            'kurdu ve bize savaş ilan etti — bizim teknolojimiz, bizim ' +
+            'yüzümüz, bizim armamız. Aynada kendine ateş etmek gibi bir şey ' +
+            'bu; kim kazanırsa kaybeden yine biziz.', 'catlak');
+          return 'ÇİZGİ KIRILDI — SAVAŞ BAŞLADI.';
+        }}
+     ]},
+    {t:'—'}, {t:'—'}
+  ],
+  zamanAsimi:{ay:180, f:(e,s)=> endSituation(s,
+    'Elçiler geldiği gibi sessizce çekildi. Kayıtlar mühürlendi.', 'veri')}
+},
+
+/* ───────────────────── 4. CAM BAHÇELER ───────────────────── */
+cam_bahce:{
+  n:'Cam Bahçelerin Uyanışı', ico:'💠', art:'veri',
+  giris:'Çorak bir dünyada kristal tohumlar çatladı. Ölü kaya, saat ' +
+        'içinde damarlanan saydam bir ormana dönüştü. Yapı organik ' +
+        'değil ama büyüyor; mineral değil ama katı. Ve bize doğru ' +
+        'yayılıyor.',
+  say:{
+    yayilim:{n:'Yayılım', ico:'🌿', bas:12, max:100,
+             ay:(e,s)=> 1.5 + s.stage * .55},
+    uyum   :{n:'Uyum', ico:'🔗', bas:8, max:100,
+             ay:(e,s)=> (s.data.dost ? 2.2 : .3)}
+  },
+  sart:(e)=> G.sys.length > 12,
+  kur:(e,s)=>{
+    const aday = G.sys.filter(sy => sy.planets.some(p2 => !p2.col));
+    if (aday.length){
+      const sy = aday[Math.floor(rnd()*aday.length)];
+      s.data.sys = sy.id;
+      const pl = sy.planets.find(p2 => !p2.col);
+      s.data.p = pl ? pl.i : 0;
+    }
+  },
+  bedel:(e,s)=> ({min: -(s.say.yayilim * .30)}),
+  asama:[
+    {t:'Kristal orman büyüyor. Yakındaki madenlerimiz tıkanıyor.',
+     gec:(e,s)=> s.say.yayilim >= 35,
+     ops:[
+       {t:'Numune al', d:'+200 araştırma',
+        f:(e,s)=>{ e.res.ara += 200; return 'Kristaller ışığı hafızaya çeviriyor.'; }},
+       {t:'Yakarak temizle', d:'−500 enerji · yayılım −30',
+        c:{ene:500}, f:(e,s)=>{ s.say.yayilim -= 30; s.say.uyum -= 15;
+          return 'Ateş işe yaradı. Ama bahçe çığlık attı — hepimiz duyduk.'; }},
+       {t:'Sanal veri bahçesi', d:'Makine Ağı · uyum +35',
+        fizyo:'machine',
+        f:(e,s)=>{ s.data.dost = true; s.say.uyum += 35; e.res.ara += 400;
+          return 'Kristal kafesi bir veri merkezine çevirdik. Düşünüyor.'; }},
+       {t:'Kristalleri bedene aşıla', d:'Kayaç · kalıcı gövde bonusu',
+        fizyo:'lithoid',
+        f:(e,s)=>{ s.data.dost = true; s.say.uyum += 25;
+          e.extra = e.extra || {}; e.extra.hullMul = (e.extra.hullMul||0) + .12;
+          recalcMods(e);
+          return 'Halkımızın derisi artık ışığı kırıyor. Gövde +%12.'; }},
+       {t:'Ağı zihne bağla', d:'Kovan Zihni · uyum +45',
+        fizyo:'hive',
+        f:(e,s)=>{ s.data.dost = true; s.say.uyum += 45;
+          return 'Bahçe kovanın bir uzvu oldu. Tek irade büyüdü.'; }}
+     ]},
+    {t:'İLK ÇİÇEKLENEN DÜNYA — Gezegen uyandı. Kristal damarlar ' +
+        'yüzeyin altında nabız gibi atıyor ve her atışta gezegenin ' +
+        'kabuğu biraz daha inceliyor. Sondaj ekibimiz aşağıdan bir ' +
+        'ses kaydetti: bizim dilimizde, ama kimse konuşmamıştı.',
+     gec:(e,s)=> s.say.yayilim >= 60 || s.say.uyum >= 55,
+     ops:[
+       {t:'Hasat et', d:'Kristal ormanı biç — büyük mineral, uyum çöker',
+        f:(e,s)=>{
+          const kar = Math.max(1500, Math.round(Math.max(0,(e.inc.min||0)) * 30));
+          e.res.min += kar; s.say.uyum -= 40;
+          return 'Kristal ormanı biçtik: +' + kar + ' mineral. Kesilen her ' +
+                 'damar bir nota çıkardı. Kâr yüksek, vicdan ağır.'; }},
+       {t:'Yükselişine yardım et', d:'İskeleyi biz kuralım — uyum yükselir',
+        ay:{ala:16}, c:{ala:600},
+        f:(e,s)=>{ s.say.uyum += 30; s.data.dost = true;
+          return 'İskeleyi biz kurduk. Bahçe kalkacak — ve bunu unutmayacak.'; }},
+       {t:'Cam Kökleri Aşıla', d:'💎 Kayaç — gemi zırhı artar, büyüme düşer',
+        fizyo:'lithoid',
+        f:(e,s)=>{ s.data.dost = true; s.say.uyum += 20;
+          e.extra = e.extra || {};
+          e.extra.hullMul = (e.extra.hullMul||0) + .18;
+          e.extra.growMul = (e.extra.growMul||0) - .10;
+          recalcMods(e);
+          return 'Kristal kökler tersanelerimize aşılandı: gövde +%18, ' +
+                 'büyüme −%10. Gemilerimiz artık ışığı kırıyor.'; }},
+       {t:'Sanal Veri Bahçesi', d:'⚙ Makine Ağı — devasa bilim hasadı',
+        fizyo:'machine',
+        f:(e,s)=>{ s.data.dost = true; s.say.uyum += 30;
+          const kar = Math.max(1200, Math.round(Math.max(0,(e.inc.ara||0)) * 25));
+          e.res.ara += kar;
+          return 'Bahçenin kristal kafesini bir veri merkezine çevirdik: +' +
+                 kar + ' araştırma. Kafes düşünüyor ve düşüncesi bizim.'; }},
+       {t:'Ana Gangliona Bağla', d:'🐝 Kovan Zihni — uyum tavana çıkar',
+        fizyo:'hive',
+        f:(e,s)=>{ s.data.dost = true; s.say.uyum = 100;
+          return 'Bahçe kovanın bir uzvu oldu. Uyum %100. Tek irade ' +
+                 'bir dünya kadar büyüdü ve bunu fark etmedi bile.'; }}
+     ]},
+    {t:'Bahçe ayrılmaya hazır. Son karar bizde.',
+     gec:(e,s)=> s.say.yayilim >= 85 || s.say.uyum >= 80,
+     ops:[
+       {t:'GALAKTİK ARK', d:'⚡ Gezegen haritadan kopar ve tarafsız, ' +
+          'gezen bir Dünya-Gemi olur',
+        f:(e,s)=>{
+          const sy = G.sys[s.data.sys];
+          const pl = sy && sy.planets[s.data.p];
+          if (pl){ pl.devoured = true; pl.col = null; pl.owner = -1; }
+          /* Tarafsız gezgin fraksiyon */
+          try {
+            const wg = makeEmpire(G.emps.length, e.race, 'Cam Bahçe', true, rnd, []);
+            wg.wild = true; wg.worldship = true;
+            wg.col = '#7fe6d8';
+            G.emps.push(wg);
+            if (sy) newFleet(wg, sy.id, [{c:'zir'},{c:'zir'}], 'Dünya-Gemi');
+          } catch(err){ console.warn('worldship:', err); }
+          e.extra = e.extra || {}; e.extra.araMul = (e.extra.araMul||0) + .10;
+          recalcMods(e);
+          endSituation(s, 'Cam Bahçe kabuğunu kırdı ve galaksiye açıldı. ' +
+            'Artık kimsenin toprağı değil — gezen bir dünya. Bize veda ' +
+            'armağanı bıraktı: araştırma +%10.', 'veri');
+          return 'BAHÇE YÜKSELDİ.';
+        }},
+       {t:'CAM SİMBİYONT', d:'⚡ Gezegen kalıcı Cam Bahçe olur — ' +
+          'halkımıza pasif gıda ve uyum akıtır',
+        f:(e,s)=>{
+          const sy = G.sys[s.data.sys];
+          const pl = sy && sy.planets[s.data.p];
+          if (pl){
+            pl.glassGarden = true;
+            /* Sahipsizse bize bağlanır */
+            if (sy.owner < 0) sy.owner = e.id;
+            if (!pl.col && typeof doColonize === 'function'){
+              try { doColonize(e, sy, pl); } catch(err){}
+            }
+            if (pl.col){ pl.col.glass = true; pl.col.stab = Math.min(100, pl.col.stab + 25); }
+          }
+          e.extra = e.extra || {};
+          e.extra.yiyMul = (e.extra.yiyMul||0) + .25;
+          e.extra.stab   = (e.extra.stab||0) + 8;
+          recalcMods(e);
+          endSituation(s, 'Bahçe kalmayı seçti. Kökleri şehirlerimizin ' +
+            'altından geçiyor, meyveleri camdan ama besliyor. Yiyecek ' +
+            'üretimimiz kalıcı +%25, istikrar +8. Artık iki tür tek ' +
+            'gezegeni paylaşıyor.', 'veri');
+          return 'CAM SİMBİYONT KURULDU.';
+        }},
+       {t:'KÖKLERİNİ KES', d:'Bahçe ölür, depolar dolar — geri dönüşü yok',
+        f:(e,s)=>{
+          const kar = Math.max(3000, Math.round(Math.max(0,(e.inc.min||0)) * 55));
+          e.res.min += kar;
+          const sy = G.sys[s.data.sys];
+          const pl = sy && sy.planets[s.data.p];
+          if (pl) pl.scorchedWorld = true;
+          endSituation(s, 'Bahçeyi söktük: +' + kar + ' mineral. Depolarımız ' +
+            'doldu, gökyüzü sessizleşti. Son damar kesilirken çıkan ses ' +
+            'kayıtlarda duruyor — kimse bir daha dinlemedi. Bazı kararlar ' +
+            'kâr hanesine yazılmaz.', 'infaz');
+          return 'KÖKLER KESİLDİ.';
+        }}
+     ]},
+    {t:'—'}, {t:'—'}
+  ],
+  zamanAsimi:{ay:200, f:(e,s)=> endSituation(s,
+    'Cam Bahçe büyümesini durdurdu ve taşlaştı. Sessiz bir anıt kaldı.', 'veri')}
+}
+};
+
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 77D — TAHT GEMİSİ YENİDEN İNŞASI
+   Felç dönemi bittikten sonra tersaneden çok ağır bir bedelle
+   yeni bir taht gemisi çıkarılabilir. Bedel kasten yüksek:
+   bu civic'in bedeli gemiyi kaybetmenin acısıdır, ucuz bir
+   yedek parça değil.
+   ═══════════════════════════════════════════════════════════════════ */
+const THRONE_REBUILD = {ala: 5000, ene: 2500};
+
+function canRebuildThrone(e, sys){
+  if (!hasCivic(e, 'throneship'))
+    return {ok:false, why:'Taht Gemisi doktrinine sahip değilsin'};
+  if (throneShipOf(e))
+    return {ok:false, why:'Taht Gemin zaten yaşıyor'};
+  if (!sys || sys.owner !== e.id)
+    return {ok:false, why:'Kendi tersanende inşa edilir'};
+  if (typeof hasYard === 'function' && !hasYard(sys))
+    return {ok:false, why:'Bu sistemde tersane yok'};
+  if (sys.yardLock && sys.yardLock > (G.memAge || 0))
+    return {ok:false, why:'Tersane sabote edilmiş'};
+  if (e.throneLost > 0)
+    return {ok:false, why:'Enkaz hâlâ yanıyor — ' + e.throneLost +
+            ' ay sonra inşaya başlanabilir'};
+  for (const r in THRONE_REBUILD)
+    if ((e.res[r] || 0) < THRONE_REBUILD[r])
+      return {ok:false, why:'Yetersiz ' + (RES[r] ? RES[r].n : r) +
+              ' (' + THRONE_REBUILD[r] + ' gerekir)'};
+  return {ok:true};
+}
+
+function rebuildThrone(e, sys){
+  const chk = canRebuildThrone(e, sys);
+  if (!chk.ok) return chk;
+  for (const r in THRONE_REBUILD) e.res[r] -= THRONE_REBUILD[r];
+
+  const f = newFleet(e, sys.id, [{c:'zir'}, {c:'zir'}, {c:'kru'}],
+                     e.ai ? null : 'TAHT GEMİSİ');
+  if (f && f.ships.length) f.ships[0].throne = true;
+  delete e.throneLost;
+  e.throneSys = sys.id;
+  if (!e.ai && typeof UI !== 'undefined')
+    UI.eventArt('veri', 'YENİ TAHT KURULDU',
+      sys.name + ' tersanesinde yeni Taht Gemisi suya indirildi. ' +
+      'Hanedanın yüzen başkenti geri döndü — felç sona erdi.',
+      'win', 'kritik', e);
+  return {ok:true};
 }

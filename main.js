@@ -355,8 +355,110 @@ const TRAITS = {
   yavas_ureyen :{n:'Yavaş Üreyen',      c:-2,e:{growMul:-.25},d:'−%25 nüfus artışı'},
   obur         :{n:'Obur',              c:-1,e:{yiyMul:-.15}, d:'−%15 yiyecek'},
   itici        :{n:'İtici',             c:-2,e:{dipMul:-.30}, d:'−%30 ikna'},
-  savurgan     :{n:'Savurgan',          c:-1,e:{eneMul:-.15}, d:'−%15 enerji'}
+  savurgan     :{n:'Savurgan',          c:-1,e:{eneMul:-.15}, d:'−%15 enerji'},
+
+  /* ═══════════════════════════════════════════════════════════════
+     FAZ 77A — GENETİK ÖZELLİKLER
+     Mevcut 15 trait korundu; 13 yeni özellik eklendi.
+     Maliyet işareti mevcut sistemle uyumlu: c > 0 puan HARCAR,
+     c < 0 puan KAZANDIRIR.
+     ═══════════════════════════════════════════════════════════════ */
+  tutumlu      :{n:'Tutumlu Metabolizma', c:1, e:{upMul:-.15},
+                 d:'Bakım tüketimi −%15', zit:['doyumsuz']},
+  cevher_sezgi :{n:'Cevher Sezgisi',      c:1, e:{minMul:.10},
+                 d:'Maden üretimi +%10', zit:['cevher_kor']},
+  elektrotrof  :{n:'Elektrotrof Doku',    c:1, e:{eneMul:.10},
+                 d:'Enerji üretimi +%10', zit:['savurgan']},
+  bereketli    :{n:'Bereketli',           c:2, e:{growMul:.15},
+                 d:'Nüfus artışı +%15', zit:['yavas_cogalan','yavas_ureyen']},
+  ogrenen_sinaps:{n:'Öğrenen Sinapslar',  c:2, e:{colShock:-.50},
+                 d:'Koloni şoku yarı yarıya kısalır'},
+  uzun_omurlu  :{n:'Uzun Ömürlü',         c:1, e:{araMul:.10},
+                 d:'Araştırma +%10', zit:['kisa_omurlu']},
+  savas_korosu :{n:'Savaş Korosu',        c:2, e:{rofMul:.06, capMul:.10},
+                 d:'Ateş hızı +%6, filo kapasitesi +%10'},
+
+  doyumsuz     :{n:'Doyumsuz Metabolizma', c:-1, e:{upMul:.20},
+                 d:'Bakım tüketimi +%20', zit:['tutumlu']},
+  cevher_kor   :{n:'Cevher Körlüğü',      c:-1, e:{minMul:-.10},
+                 d:'Maden üretimi −%10', zit:['cevher_sezgi','endustriyel']},
+  kisa_omurlu  :{n:'Kısa Ömürlü',         c:-1, e:{araMul:-.10},
+                 d:'Araştırma −%10', zit:['uzun_omurlu','ustun_zeka']},
+  yavas_cogalan:{n:'Yavaş Çoğalan',       c:-2, e:{growMul:-.15},
+                 d:'Nüfus artışı −%15', zit:['bereketli','hizli_ureyen']},
+  sinyal_sizinti:{n:'Sinyal Sızıntısı',   c:-1, e:{foeSpd:-.15},
+                 d:'Düşman toprağında filo hızı −%15'},
+  savas_panigi :{n:'Savaş Paniği',        c:-2, e:{warTuk:.15},
+                 d:'Savaşta tüketim gideri +%15'}
 };
+
+/* Arayüzde okunabilir etiketler — hem trait hem doktrin/fizyoloji
+   kartları bu tabloyu kullanır. */
+const TRAIT_LABEL = {
+  araMul:'Araştırma', minMul:'Maden', eneMul:'Enerji', yiyMul:'Yiyecek',
+  dmgMul:'Gemi hasarı', rofMul:'Ateş hızı', hullMul:'Gövde',
+  growMul:'Nüfus artışı', habFlat:'Yaşanabilirlik', habBonus:'Yaşanabilirlik',
+  dipMul:'Diplomasi', etkFlat:'Etki', etkMul:'Etki', spdMul:'Filo hızı',
+  upMul:'Bakım gideri', capMul:'Filo kapasitesi', colShock:'Koloni şoku',
+  foeSpd:'Düşman toprağında hız', warTuk:'Savaşta tüketim',
+  stab:'İstikrar', sensor:'Sensör menzili', tradeMul:'Ticaret',
+  opCost:'Casusluk bedeli', shipSpeed:'Gemi üretimi',
+  borderMul:'Sınır büyümesi', newColStab:'Yeni koloni istikrarı'
+};
+
+/* Makine Ağında "nüfus artışı" montajdır; yiyecek etkileri enerjiye kayar */
+function traitLabelFor(e, key){
+  const makine = e && (typeof physioOf === 'function') &&
+                 physioOf(e) && physioOf(e).makine;
+  if (makine && key === 'growMul') return 'Montaj hızı';
+  if (makine && key === 'yiyMul')  return 'Enerji';
+  return TRAIT_LABEL[key] || key;
+}
+
+/* Seçilemez zıt çiftler — iki yönlü çalışır */
+function traitConflict(list, key){
+  const T = TRAITS[key];
+  if (!T) return null;
+  for (const k of list){
+    if (T.zit && T.zit.includes(k)) return k;
+    const O = TRAITS[k];
+    if (O && O.zit && O.zit.includes(key)) return k;
+  }
+  return null;
+}
+
+/* Negatif traitlerin kazandırabileceği toplam puan tavanı */
+const TRAIT_NEG_MAX = 3;
+const TRAIT_MAX = 5;
+const TRAIT_NEG_COUNT = 2;
+
+function traitNegGain(list){
+  return list.reduce((a,t)=> a + (TRAITS[t] && TRAITS[t].c < 0 ? -TRAITS[t].c : 0), 0);
+}
+function traitNegCount(list){
+  return list.filter(t => TRAITS[t] && TRAITS[t].c < 0).length;
+}
+
+/* Bir trait seçilebilir mi? Sebebiyle döner. */
+function canPickTrait(list, key){
+  const T = TRAITS[key];
+  if (!T) return {ok:false, why:'Bilinmeyen özellik'};
+  if (list.includes(key)) return {ok:true, kaldir:true};
+  if (list.length >= TRAIT_MAX)
+    return {ok:false, why:'En fazla ' + TRAIT_MAX + ' özellik'};
+  const cak = traitConflict(list, key);
+  if (cak) return {ok:false, why:TRAITS[cak].n + ' ile birlikte alınamaz'};
+  if (T.c < 0){
+    if (traitNegCount(list) >= TRAIT_NEG_COUNT)
+      return {ok:false, why:'En fazla ' + TRAIT_NEG_COUNT + ' olumsuz özellik'};
+    if (traitNegGain(list) + (-T.c) > TRAIT_NEG_MAX)
+      return {ok:false, why:'Olumsuz özellikler en çok +' + TRAIT_NEG_MAX + ' puan verir'};
+  } else {
+    if (traitCost(list) + T.c > TRAIT_BUDGET + traitNegGain(list))
+      return {ok:false, why:'Puan yetmiyor'};
+  }
+  return {ok:true};
+}
 
 /* ---------- ETİK EKSENLERİ (ideoloji) ----------
    Her eksen -3..+3. Pozitif tarafta 'ea', negatif tarafta 'eb' etkileri
@@ -481,79 +583,112 @@ const ETHIC_BUDGET = 4;   // toplam mutlak kaydırma bütçesi
    flag  : oyun kurallarını değiştiren özel mekanik
    sars  : oyun tarzını kökten değiştiren "sarsıcı" civic          */
 const CIVICS = {
-  /* --- güçlendirme odaklı --- */
-  savas_oncu :{n:'Savaş Öncüleri', ico:'⚔', e:{dmgMul:.06},
-    flag:'warFury', d:'Savaş ilan ettikten sonraki ilk 2 yıl filoların +%25 hasar verir.'},
-  burokrasi  :{n:'Bürokratik Verimlilik', ico:'🏛', e:{buildMul:.10, etkFlat:.6},
-    flag:'slots', d:'Her koloniye +2 yapı slotu, inşa +%10 hızlı, +0.6 etki.'},
-  tuccar_cum :{n:'Tüccar Cumhuriyeti', ico:'💰', e:{eneMul:.08},
-    flag:'trade', d:'Ticaret bağlantıları %4 yerine %7 enerji verir, ağ kapasitesi +4.'},
-  gen_oncu   :{n:'Gen Öncüleri', ico:'🧬', e:{growMul:.10},
-    flag:'seedPop', d:'Yeni koloniler 3 yerine 7 nüfusla kurulur.'},
-  sinyal_avci:{n:'Sinyal Avcısı', ico:'📡', e:{sensor:1, spdMul:.10},
-    flag:'scan', d:'Tarama %45 hızlı, anomali bulma şansı belirgin artar.'},
-  kale_dok   :{n:'Kale Doktrini', ico:'🛡', e:{hullMul:.06},
-    flag:'fortress', d:'Kale maliyeti −%40, tüm sistem savunması +%50.'},
-  kultur_hak :{n:'Kültürel Hâkimiyet', ico:'🎭', e:{dipMul:.20, etkFlat:.5},
-    flag:'allyCheap', d:'İttifak maliyeti −%45, ilişkiler her ay kendiliğinden düzelir.'},
-  ar_kolektif:{n:'Araştırma Kolektifi', ico:'🔬', e:{araMul:.08},
-    flag:'streak2', d:'Dal uzmanlık indirimi iki katı (−%20) ve 2 araştırmada devreye girer.'},
+  /* ═══════════════════════════════════════════════════════════════════
+     FAZ 77B — SİVİL POLİTİKALAR REVİZYONU
+     Eski 34 kalemlik havuz 13'e indirildi. ANAHTARLAR VE flag'LER
+     KORUNDU: hasCivic() 128 yerde `flag` üzerinden sorguluyor, o
+     yüzden mekanik bağlantılar kırılmadı. Kaldırılan civic'lerin
+     kodu ölü kalmıyor — hasCivic false döndüğü için sessizce
+     devre dışı.
 
-  /* --- sarsıcı: oyun tarzını değiştirir --- */
-  olumsuz_imp:{n:'Ölümsüz İmparator', ico:'⚰', sars:1, e:{minMul:.08, eneMul:.08, araMul:.08, alaMul:.08},
-    flag:'leader', d:'Tüm üretim +%8. ANCAK anavatanın düşerse önder ölür: 6 yıl boyunca tüm üretim −%40.'},
-  surgun     :{n:'Galaktik Sürgün', ico:'🌌', sars:1, e:{araMul:.12, eneMul:.10},
-    flag:'exile', d:'İttifak kuramaz, barış imzalayamazsın. Karşılığında hiçbir imparatorluk SANA savaş açamaz.'},
-  kan_hukuku :{n:'Kan Hukuku', ico:'🩸', sars:1, e:{dmgMul:.18, hullMul:.08, dipMul:-.40},
-    flag:'blood', d:'Barış teklif edemez/kabul edemezsin — savaş biri bitene dek sürer. Fethettiğin nüfus hiç azalmaz.'},
-  hafiza_sil :{n:'Hafıza Silinmesi', ico:'🧠', sars:1, e:{},
-    flag:'noStock', d:'Araştırma puanı biriktiremezsin (her ay sıfırlanır). Ama biten HER teknoloji diğer tümünü −%8 ucuzlatır.'},
-  tek_urun   :{n:'Tek Ürün Ekonomisi', ico:'💎', sars:1, e:{},
-    flag:'mono', d:'Seçtiğin tek kaynakta +%55, diğer üretimlerde −%50. Eksiğini ticaret ve diplomasiyle kapatırsın.'},
-  golge_kons :{n:'Gölge Konseyi', ico:'🏴', sars:1, e:{etkFlat:1.2},
-    flag:'shadow', d:'RESMİ SAVAŞ İLAN EDEMEZSİN. Karşılığında +2 casus, operasyon riski −%60, casusun asla yakalanmaz ve istihbarat %50 hızlı toplanır.'},
-  karsi_ist  :{n:'Karşı İstihbarat', ico:'🛰', e:{sensor:1, stab:6},
-    flag:'counter', d:'Sana yönelik istihbarat %65 yavaşlar, düşman operasyonlarının ifşa olma riski %80 artar.'},
-  korsan_avci:{n:'Korsan Avcısı', ico:'🏹', e:{dmgMul:.05},
-    flag:'corsair', d:'Yok ettiğin her korsan yuvası +50 ek etki verir; korsan avında ganimet artar.'},
-  konsey_mim :{n:'Konsey Mimarı', ico:'🤝', e:{dipMul:.15, etkFlat:.8},
-    flag:'council', d:'Federasyon oylamalarında oyun iki kat ağırlıkta sayılır.'},
-  sifir_atik :{n:'Sıfır Atık', ico:'🌾', e:{},
-    flag:'zerowaste', d:'Nüfusun tüketim malı ihtiyacı −%30. Kıtlık krizine çok daha geç düşersin.'},
-  sinir_kara :{n:'Sınır Karakolu Doktrini', ico:'🚧', e:{},
-    flag:'outpost', d:'Komşularla sınır sürtüşmesi yaşamazsın (ilişki aşınması yok).'},
-  suikast    :{n:'Suikast Ağı', ico:'🗡', sars:1, e:{},
-    flag:'assassin', d:'Casusluk menüsünden düşman fraksiyon liderlerini öldürebilirsin. Kendi liderini de değiştirebilirsin.'},
-  savas_kahra:{n:'Savaş Kahramanı', ico:'🎖', e:{dmgMul:.05},
-    flag:'warhero', d:'Savaş hedefini tamamlayınca TÜM fraksiyonlar +15 memnuniyet kazanır.'},
-  kriz_kahin :{n:'Kriz Kâhini', ico:'🔮', e:{araMul:.05, sensor:1},
-    flag:'seer', d:'Galaktik krizi 6 yıl önceden görürsün; kriz filolarına +%20 hasar.'},
-  kriz_miras :{n:'Kriz Mirasçısı', ico:'🌋', sars:1, e:{hullMul:.06},
-    flag:'crisisheir', d:'Krizi kendin erken tetikleyebilirsin — erken kriz daha zayıftır ama hazır değilsen felaket olur.'},
-  kadim_miras:{n:'Kadim Miras', ico:'📜', e:{stab:5},
-    flag:'heritage', d:'Gezegen karakteri iki kat hızlı olgunlaşır — Kadim ve Sadık dünyalar erken doğar.'},
-  sentez_lab :{n:'Sentez Laboratuvarı', ico:'⚗', e:{araMul:.06},
-    flag:'synth', d:'Teknoloji çapraz etkileri (sway) senin için %60 daha güçlü işler — büyük kazanç, büyük risk.'},
-  mega_muh   :{n:'Mega-Mühendisler', ico:'🏗', e:{buildMul:.10},
-    flag:'megaeng', d:'Mega yapılar %40 ucuz ve hızlı; uzay yapısı inşaatı genel olarak hızlanır.'},
-  kartel     :{n:'Kartel', ico:'💎', e:{eneMul:.06},
-    flag:'cartel', d:'Bir lüks malın galakside tek üreticisiysen o malın bonusu iki katına çıkar.'},
-  derin_uyku :{n:'Derin Uyku', ico:'🧊', sars:1, e:{},
-    flag:'sleep', d:'Kolonilerin BÜYÜMEZ — nüfus yalnızca fetihle artar. Karşılığında her nüfus birimi %45 daha verimli.'},
-  sonsuz_sef :{n:'Sonsuz Seferberlik', ico:'💀', sars:1, e:{},
-    flag:'mobilize', d:'Barışta filo bakımı iki katı. Ama her savaş ilanında filolarına KALICI +%30 güç eklenir (birikimli).'},
-  tek_parti  :{n:'Tek Parti', ico:'👑', sars:1, e:{stab:8},
-    flag:'oneparty', d:'İstikrar asla 35 altına düşmez. ANCAK koloni odağı kurulduktan sonra DEĞİŞTİRİLEMEZ.'},
-  acik_sinir :{n:'Açık Sınırlar', ico:'🗽', sars:1, e:{growMul:.08, dipMul:.10},
-    flag:'openborder', d:'Savaşta olduğun imparatorluklarla bile ticaret yapabilirsin. AMA sınırların düşmana kapanmaz — bölgene serbestçe koloni kurabilirler.'},
-  korsan_kral:{n:'Korsan Krallığı', ico:'☠', sars:1, e:{dmgMul:.10, spdMul:.10},
-    flag:'pirateking', d:'Diplomasi tamamen kapalı — herkesle savaştasın. Karşılığında korsan yuvalarını üs olarak kullanır, fetihte %40 fazla yağma alırsın.'},
-  evrensel_b :{n:'Evrensel Barış', ico:'🕊', sars:1, e:{etkFlat:2, dipMul:.25},
-    flag:'universal', d:'ASLA savaş ilan edemezsin. Karşılığında federasyon oylamalarında tek başına karar geçirebilirsin.'},
-  panoptikon :{n:'Panoptikon', ico:'👁', sars:1, e:{sensor:2, araMul:.05},
-    flag:'panopt', d:'Tüm galaksiyi baştan görürsün. Ama senin sistemlerin de herkese açıktır — sürpriz yapamazsın.'}
+     YUVA KURALI: her imparatorluğun 2 yuvası var.
+       normal civic  → 1 yuva  (slot:1)
+       ⚡ radikal      → 2 yuva (slot:2, sars:1) — tek başına alınır
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* ────────────── NORMAL (1 yuva) ────────────── */
+  burokrasi  :{n:'Bürokratik Verimlilik', ico:'🏛', slot:1, flag:'slots',
+               e:{buildMul:.10},
+               d:'+2 yapı slotu, gezegen inşaat hızı +%10'},
+
+  /* NOT: flag 'seedPop' — economy.js:1032 zaten bu bayrağı arıyor,
+     yeni bir ad uydurmak yerine mevcut kancaya bağlandı. */
+  gen_oncu   :{n:'Gen Öncüleri', ico:'🧬', slot:1, flag:'seedPop',
+               e:{},
+               d:'Yeni koloniler 3 yerine 7 nüfusla kurulur'},
+
+  kale_dok   :{n:'Kale Doktrini', ico:'🛡', slot:1, flag:'fortress',
+               e:{},
+               d:'Yıldız üssü/kale maliyeti −%40, savunma platformu gücü +%50'},
+
+  sinyal_avci:{n:'Sinyal Avcısı', ico:'📡', slot:1, flag:'scan',
+               e:{sensor:1},
+               d:'Tarama hızı +%45, anomali bulma şansı belirgin artar'},
+
+  maden_lonca:{n:'Madencilik Loncaları', ico:'⛏', slot:1, flag:'minerguild',
+               e:{minMul:.20},
+               d:'Tüm maden üretimi +%20'},
+
+  golge_kons :{n:'Gölge Konseyi', ico:'🏴', slot:1, flag:'shadow',
+               e:{opCost:-.30},
+               d:'Casusluk ve anlaşma etki maliyeti −%30'},
+
+  lojistik_k :{n:'Lojistik Komiserliği', ico:'📦', slot:1, flag:'logistics',
+               e:{upMul:-.15, capMul:.15},
+               d:'Filo bakımı −%15, filo kapasitesi +%15'},
+
+  enkaz_muh  :{n:'Enkaz Mühendisliği', ico:'♻', slot:1, flag:'salvage',
+               e:{},
+               d:'Yok edilen düşman gemilerinin alaşım maliyetinin %15\'i iade edilir'},
+
+  /* ────────────── ⚡ RADİKAL (2 yuva) ────────────── */
+  panoptikon :{n:'Panoptikon', ico:'👁', slot:2, sars:1, flag:'panopt',
+               e:{sensor:2},
+               d:'⚡ Savaş sisi tamamen kalkar — tüm galaksiyi görürsün.',
+               bedel:'Tanıştığın her devletle ilişkin −100 başlar. ' +
+                     'Kimse sana güvenmez; galaksi seni gözetleyici bilir.'},
+
+  kan_hukuku :{n:'Kan Hukuku', ico:'🩸', slot:2, sars:1, flag:'blood',
+               e:{},
+               d:'⚡ Savaştayken filolar +%15 hasar, tersaneler +%25 üretim hızı.',
+               bedel:'"Barış Yap" sana tamamen kapalıdır. Başlattığın savaş ' +
+                     'ancak bir taraf yok olunca biter.'},
+
+  taht_gemi  :{n:'Taht Gemisi', ico:'👑', slot:2, sars:1, flag:'throneship',
+               e:{},
+               d:'⚡ Başkentin bir gezegen değil, devasa bir Amiral Gemisidir. ' +
+                 'Bulunduğu sistemdeki kolonilere +%15 üretim verir.',
+               bedel:'Gemi yok edilirse imparatorluk 12 ay boyunca −%50 ' +
+                     'üretim cezası yer — hanedan felç olur.'},
+
+  tek_urun   :{n:'Tek Ürün Ekonomisi', ico:'💎', slot:2, sars:1, flag:'mono',
+               e:{},
+               d:'⚡ Seçtiğin kaynağın üretimi +%60.',
+               bedel:'Diğer iki kaynağın üretimi −%40 düşer. Tek ayak ' +
+                     'üstünde duran ekonomi kırılgandır.'},
+
+  yildiz_yiyen:{n:'Yıldız Yiyen Ekonomi', ico:'🌟', slot:2, sars:1, flag:'devourer',
+               e:{},
+               d:'⚡ Gezegenleri tüketebilirsin — haritadan silinir, ' +
+                 'karşılığında devasa kaynak verir.',
+               bedel:'Maden istasyonların %40 verimle çalışır. Açlık sayacı ' +
+                     'her yıl artar; gezegen yemezsen üretim ve ateş hızın çöker.'}
 };
-const CIVIC_SLOTS = 3;
+
+/* Yuva hesabı — radikal civic iki yuva birden kaplar */
+const CIVIC_SLOTS = 2;
+function civicSlotCost(k){ return (CIVICS[k] && CIVICS[k].slot) || 1; }
+function civicUsed(list){ return list.reduce((a,k)=>a+civicSlotCost(k), 0); }
+function isRadical(k){ return civicSlotCost(k) >= 2; }
+
+/* Bu civic şu an seçilebilir mi? Sebebiyle döner. */
+function canPickCivic(list, key){
+  const C = CIVICS[key];
+  if (!C) return {ok:false, why:'Bilinmeyen politika'};
+  if (list.includes(key)) return {ok:true, kaldir:true};
+  /* Zaten radikal seçilmişse ikinci yuva kilitli */
+  const varRadikal = list.some(k => isRadical(k));
+  if (varRadikal)
+    return {ok:false, why:'⚡ ' + CIVICS[list.find(k=>isRadical(k))].n +
+                          ' iki yuvayı da kaplıyor'};
+  if (civicUsed(list) + civicSlotCost(key) > CIVIC_SLOTS)
+    return {ok:false, why: isRadical(key)
+      ? 'Radikal politika iki boş yuva ister — önce diğerini kaldır'
+      : 'Yuva dolu (' + CIVIC_SLOTS + '/' + CIVIC_SLOTS + ')'};
+  return {ok:true};
+}
+/* FAZ 77B: eski `const CIVIC_SLOTS = 3` kaldırıldı — yuva sayısı
+   artık 2 ve yukarıda tanımlı. */
 
 /* ---------- KÖKENLER ---------- */
 const ORIGINS = {
@@ -1827,6 +1962,8 @@ function recalcMods(e){
     minMul:0, eneMul:0, yiyMul:0, alaMul:0, araMul:0, etkFlat:0, eneFlat:0,
     dmgMul:0, shMul:0, hullMul:0, spdMul:0, growMul:0, habFlat:0, dipMul:0,
     capFlat:0, upMul:0, buildMul:0, colCost:0, stab:0, sensor:0,
+    /* FAZ 77A: genetik özellik anahtarları */
+    capMul:0, colShock:0, foeSpd:0, warTuk:0,
     eDmgMul:0, eShMul:0,
     /* FAZ 48: diplomatik ahlak ekseni */
     trustCap:0, tradeMul:0, opCost:0, opBonus:0, opRisk:0, trustStart:0,
@@ -1929,16 +2066,22 @@ function recalcMods(e){
   if (e.collapseUntil && G.day < e.collapseUntil){
     m.minMul -= .40; m.eneMul -= .40; m.araMul -= .40; m.alaMul -= .40;
   }
-  // tek ürün ekonomisi
-  if (hasCivic(e,'mono') && e.monoRes){
-    for (const k of ['minMul','eneMul','araMul','alaMul']) m[k] -= .50;
-    const key = e.monoRes + 'Mul';
-    if (key in m) m[key] += 1.05;   // −50 iptal + net +55
+  /* ═══ FAZ 77B: TEK ÜRÜN EKONOMİSİ ═══
+     Şartname: seçilen kaynak +%60, diğer İKİSİ −%40.
+     Seçim havuzu üç temel kaynakla sınırlandı (enerji/maden/
+     yiyecek) — eskiden araştırma ve alaşım da havuzdaydı ve
+     "diğer ikisi" kuralı dört kalemi vuruyordu. */
+  if (hasCivic(e,'mono')){
+    const havuz = ['minMul', 'eneMul', 'yiyMul'];
+    const secim = (e.monoRes || 'min') + 'Mul';
+    for (const k of havuz) if (k !== secim) m[k] -= .40;
+    if (havuz.includes(secim)) m[secim] += .60;
   }
   e.mods = m;
   /* Sınır bekçisi vasallar senyörün donanma tavanını yükseltir */
   const vasalCap = (typeof vassalCapBonus === 'function') ? vassalCapBonus(e) : 0;
-  e.cap = 40 + m.capFlat + e.colonies.length*6 + vasalCap;
+  /* FAZ 77A: Savaş Korosu kapasiteyi ORANSAL artırır */
+  e.cap = (40 + m.capFlat + e.colonies.length*6 + vasalCap) * (1 + (m.capMul || 0));
   return m;
 }
 
@@ -2131,6 +2274,7 @@ function setupGame(cfg){
      hesapları physioOf(e) üzerinden bunu okur. */
   /* FAZ 72: doktrin oyuncuya aktarılır — recalcMods bonusları
      PERSONAS[e.mizac].e bloğundan okuyor. */
+  pe.monoRes = cfg.monoRes || 'min';    // FAZ 77B: tek ürün seçimi
   pe.mizac = cfg.mizac || 'yayilmaci';
   pe._pers = pe.mizac;
   pe.physio = cfg.physio || 'humanoid';
@@ -2180,7 +2324,7 @@ function setupGame(cfg){
     const civPool = Object.keys(CIVICS).filter(c => !CIVICS[c].sars || rnd() < .35);
     shuffle(rnd, civPool);
     ai.civics = civPool.slice(0, CIVIC_SLOTS);
-    if (hasCivic(ai,'mono')) ai.monoRes = pick(rnd, ['min','ene','ara','ala']);
+    if (hasCivic(ai,'mono')) ai.monoRes = pick(rnd, ['min','ene','yiy']);  // FAZ 77B
     ai.sigil = pick(rnd, Object.keys(SIGILS));
     ai.look = R.bio === 'makine' ? 'makine' : R.bio === 'litoit' ? 'kristal'
               : pick(rnd, ['humanoid','bocek','surungen','amorf','kanatli','akuatik']);
@@ -2371,6 +2515,17 @@ function setupGame(cfg){
     newFleet(e, sid, guardShips, e.ai?null:'1. Muhafız Filosu');
     const sci1 = newFleet(e, sid, [{c:'bil'}], e.ai?null:'Kâşif Vela');
     if (!e.ai) sci1.auto = true;
+    /* ═══ FAZ 77B: TAHT GEMİSİ ═══
+       Bu doktrinde başkent bir gemidir — oyun başında verilir. */
+    if (hasCivic(e, 'throneship')){
+      const tf = newFleet(e, sid, [{c:'zir'},{c:'zir'},{c:'kru'}],
+                          e.ai ? null : 'TAHT GEMİSİ');
+      if (tf && tf.ships.length){
+        tf.ships[0].throne = true;
+        tf.throne = true;
+        e.throneSys = sid;
+      }
+    }
     newFleet(e, sid, [{c:'kol'}], e.ai?null:'Yerleşim Konvoyu');
     if (e.origin === 'gocebe'){
       newFleet(e, sid, [{c:'kol'}], e.ai?null:'2. Yerleşim Konvoyu');
@@ -2678,6 +2833,12 @@ function fleetSpeed(f){
   let neb = 1;
   const sid2 = f && f.sys >= 0 ? f.sys : (f && f.mv ? f.mv.to : -1);
   if (sid2 >= 0 && G.sys[sid2] && G.sys[sid2].nebulaS) neb = .5;
+  /* FAZ 77A: Sinyal Sızıntısı — düşman toprağında yavaşlar */
+  if (e.mods.foeSpd && sid2 >= 0){
+    const sy2 = G.sys[sid2];
+    if (sy2 && sy2.owner >= 0 && sy2.owner !== e.id && e.war[sy2.owner])
+      neb *= (1 + e.mods.foeSpd);
+  }
   return sp * 26 * (1 + e.mods.spdMul + relay) * fastDeployMul(f) * jump * neb;
 }
 /* Kendi sınırları içindeki filolar yarı bakım öder — ikmal hatları kısa. */
@@ -3397,7 +3558,19 @@ function arrive(f, sys){
     const there = sys.owner === o.id || G.fleets.some(x=>x.e===o.id && x.sys===sys.id);
     if (there && !e.contact[o.id]){
       e.contact[o.id] = true; o.contact[e.id] = true;
-      if (!e.ai) say('İlk temas: ' + o.name, 'sci');
+      /* ═══ FAZ 77B: PANOPTİKON BEDELİ ═══
+         Her şeyi gören devlete kimse güvenmez. Tanışma anında
+         ilişki dibe çakılır — bu kalıcı bir damgadır. */
+      if (hasCivic(e, 'panopt')){
+        o.rel[e.id] = -100;
+        if (typeof remember === 'function') remember(o, e.id, 'komplo');
+        if (!e.ai) say('👁 ' + o.name + ' seni gözetleyici biliyor — ilişki dipte', 'war');
+      }
+      if (hasCivic(o, 'panopt')){
+        e.rel[o.id] = -100;
+        if (typeof remember === 'function') remember(e, o.id, 'komplo');
+      }
+      if (!e.ai && !hasCivic(e,'panopt')) say('İlk temas: ' + o.name, 'sci');
     }
   }
   if (f.path.length) return;
@@ -3421,7 +3594,11 @@ function arrive(f, sys){
     }
     f.ord = null;
   }
-  if (fleetHasRole(f,'bilim') && !sys.surv.includes(e.id)) f.surv = hasCivic(e,'scan') ? 17 : 29;
+  /* ═══ FAZ 77C: SİNYAL AVCISI TAM BAĞLANTI ═══
+     Tarama süresi −%45 (29 → 16 gün). Anomali bulma şansı da
+     ayrıca artıyor (anomChance). */
+  if (fleetHasRole(f,'bilim') && !sys.surv.includes(e.id))
+    f.surv = Math.round(SCAN_BASE * (hasCivic(e,'scan') ? (1 - SCAN_HUNTER) : 1));
 }
 
 function dailyTick(dt){
@@ -3660,7 +3837,31 @@ function applyDamage(e, fleets, amount){
     s.h -= take/mh; left -= take;
     if (s.h <= .001){ s.dead = true; killed++; targets.splice(targets.indexOf(t),1); }
   }
-  for (const f of fleets) f.ships = f.ships.filter(s => !s.dead);
+  /* ═══ FAZ 77B: ENKAZ MÜHENDİSLİĞİ ═══
+     Yok edilen düşman gemilerinin alaşım maliyetinin %15'i
+     karşı tarafa iade edilir. Kanca tam burada: gemilerin
+     ÖLÜ işaretlendiği ama henüz silinmediği an. */
+  let enkaz = 0;
+  for (const f of fleets){
+    for (const sh of f.ships){
+      if (!sh.dead) continue;
+      const S = SHIPS[sh.c];
+      if (S && S.cost && S.cost.ala) enkaz += S.cost.ala * .15;
+    }
+    f.ships = f.ships.filter(s => !s.dead);
+  }
+  /* `e` bu fonksiyonda hasarı VEREN taraf — enkazı o toplar. */
+  if (enkaz > 0){
+    const kazanan = e;
+    if (kazanan && !kazanan.dead && hasCivic(kazanan, 'salvage')){
+      kazanan.res.ala = (kazanan.res.ala || 0) + enkaz;
+      kazanan._salvage = (kazanan._salvage || 0) + enkaz;
+      if (kazanan.id === 0 && kazanan._salvage > 40){
+        say('♻ Enkaz toplandı: +' + Math.round(kazanan._salvage) + ' alaşım', 'win');
+        kazanan._salvage = 0;
+      }
+    }
+  }
   return killed;
 }
 
@@ -3969,9 +4170,28 @@ function structAllowed(e, sys, key){
   // gezegen türü gerektirenler
   return sys.planets.some(p => S.on.includes(PLANETS[p.t].k));
 }
+/* ═══ FAZ 77C: KALE DOKTRİNİ TAM BAĞLANTI ═══
+   Savunma yapılarının maliyeti −%40. Hangi yapıların "kale"
+   sayıldığı tek yerde tanımlı ki ileride yeni savunma yapısı
+   eklenince burası da güncellensin. */
+const FORTRESS_STRUCTS = {kale_u:1, platform:1, karakol:1, savunma_agi:1};
+const SCAN_BASE   = 29;    // taban tarama günü
+const SCAN_HUNTER = .45;   // Sinyal Avcısı indirimi
+
+/* Anomali bulma şansı — Sinyal Avcısı belirgin artırır */
+function anomChance(e, taban){
+  let c = taban;
+  if (typeof hasCivic === 'function' && hasCivic(e, 'scan')) c = Math.min(.95, c * 1.6);
+  return c;
+}
+
 function structCost(e, key){
   const S = STRUCTS[key], out = {};
-  for (const r in S.c) out[r] = Math.round(S.c[r] * (1 - (e.mods.buildMul || 0) * .3));
+  let ind = 1;
+  if (FORTRESS_STRUCTS[key] && typeof hasCivic === 'function' &&
+      hasCivic(e, 'fortress')) ind = .60;               // −%40
+  for (const r in S.c)
+    out[r] = Math.round(S.c[r] * ind * (1 - (e.mods.buildMul || 0) * .3));
   return out;
 }
 function startStruct(e, sys, key, fleet){
@@ -4042,7 +4262,21 @@ function rebuildStructIndex(){
       const S = STRUCTS[k];
       if (!S) continue;
       const b = idx[owner] || (idx[owner] = {min:0, ene:0, ara:0, role:0, sensor:0, gate:[], dyson:0});
-      if (S.g) for (const r in S.g) b[r] = (b[r]||0) + S.g[r];
+      if (S.g) for (const r in S.g){
+        let kat = 1;
+        /* ═══ FAZ 77C: YILDIZ YİYEN CEZASI ═══
+           DÜZELTME: ceza gezegen binalarına (BUILDINGS.maden)
+           değil, UZAYDAKİ maden istasyonlarına uygulanır.
+           Yıldız Yiyen sıradan madenciliği küçümser — kaynağı
+           gezegenin kendisini yutarak alır. */
+        /* DÜZELTME: bu kapsamda `e` yok — sahip `owner` id'sinde.
+           60 yıllık koşuda rebuildStructIndex'i çökertiyordu. */
+        const sahip = G.emps[owner];
+        if (k === 'maden_ist' && sahip && typeof hasCivic === 'function' &&
+            hasCivic(sahip, 'devourer'))
+          kat = (typeof DEVOUR_MINE_EFF !== 'undefined') ? DEVOUR_MINE_EFF : .40;
+        b[r] = (b[r]||0) + S.g[r] * kat;
+      }
       if (S.sp === 'role') b.role++;
       if (S.sp === 'sensor') b.sensor++;
       if (S.sp === 'gate') b.gate.push(sys.id);
@@ -4612,7 +4846,8 @@ const SPEEDS = [0, 0.8, 2.0, 4.5, 10];
    devlet, federasyon, konsey) tam ekran kaplama olarak açılır.
    ═══════════════════════════════════════════════════════════════════ */
 const TABS = [
-  {k:'sistem', n:'SİSTEM'}, {k:'filo', n:'FİLO'}, {k:'intel', n:'İSTİHBARAT'}
+  {k:'sistem', n:'SİSTEM'}, {k:'filo', n:'FİLO'}, {k:'intel', n:'İSTİHBARAT'},
+  {k:'durum', n:'DURUMLAR'}          // FAZ 77C
 ];
 /* Sol çubuğa taşınan genel ekranlar — hepsi diploPane kaplamasını
    paylaşır, ayrı bir pencere sistemi kurulmaz. */
@@ -4689,9 +4924,11 @@ function blankEthics(){
   for (const ax in ETHICS) o[ax] = 0;
   return o;
 }
+/* FAZ 77A: trait kuralları (TRAIT_MAX, canPickTrait vb.) zaten
+   satır ~432'de tanımlı — burada yalnız bütçe sabiti duruyor. */
 const TRAIT_BUDGET = 3;
 
-function traitCost(list){ return list.reduce((a,t)=>a+TRAITS[t].c,0); }
+function traitCost(list){ return list.reduce((a,t)=>a+(TRAITS[t]?TRAITS[t].c:0),0); }
 
 /* ═══ ZIRH 3: SEKME GEÇİŞİ KALKANI ═══
    Bir sekmenin çizimi hata verse bile arayüz kilitlenmez:

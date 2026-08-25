@@ -1361,6 +1361,64 @@ const View = {
         g.restore();
       }
 
+      /* ═══════════════════════════════════════════════════════════
+         FAZ 77D — GÖÇEN GÜNEŞ (sy.wander)
+         SEÇİM (A): hiper yollara DOKUNULMUYOR. Yıldızın göçü
+         yalnız görsel — findPath, supplyDistance, gateNetwork ve
+         updateVision'ın önbellekleri güvende kalıyor.
+
+         Efekt üç katman: dıştan içe daralan iki titreşen halka,
+         merkezde nabız atan bir korona ve arkada shadowBlur
+         parıltısı. Hepsi tek save/restore içinde; bayrak
+         doğrudan sistem nesnesinde (s.wander), tarama yok.
+         ═══════════════════════════════════════════════════════════ */
+      if (s.wander && z > .10){
+        g.save();
+        const faz = t / 700 + s.id;
+        /* Korona — yıldızın kendisi büyüyüp küçülüyor.
+           ÖLÇÜM (Faz 77D): shadowBlur kare başına 0.67 ms ekliyordu
+           (%89 artış). Canvas'ta gölge filtresi her çizimde tüm
+           tamponu yeniden tarıyor. Kaldırıldı — aynı parıltı
+           gradyanın kendisiyle veriliyor, maliyeti sıfır. */
+        const kor = sr * (1.9 + .45 * Math.sin(faz * 2));
+        const gr = g.createRadialGradient(p.x, p.y, 0, p.x, p.y, kor);
+        gr.addColorStop(0,   'rgba(255,246,205,1)');
+        gr.addColorStop(.18, 'rgba(255,224,140,.85)');
+        gr.addColorStop(.45, 'rgba(255,172,58,.48)');
+        gr.addColorStop(1,   'rgba(255,110,16,0)');
+        g.fillStyle = gr;
+        g.beginPath(); g.arc(p.x, p.y, kor, 0, Math.PI * 2); g.fill();
+
+        /* İki titreşen halka — dışarı doğru genişleyip sönüyor */
+        for (let i = 0; i < 2; i++){
+          const evre = ((t / 1500) + i * .5) % 1;         // 0…1 döngü
+          const rr3 = sr + 6 + evre * (sr * 5 + 26);
+          const alfa = (1 - evre) * .62;
+          g.strokeStyle = 'rgba(255,204,110,' + alfa.toFixed(2) + ')';
+          g.lineWidth = Math.max(.8, z * 1.6 * (1 - evre) + .4);
+          g.beginPath(); g.arc(p.x, p.y, rr3, 0, Math.PI * 2); g.stroke();
+        }
+
+        /* Sürüklenme kuyruğu — geldiği yöne doğru soluk bir iz.
+           ÖLÇÜM: createLinearGradient her karede yeniden kuruluyordu.
+           Aynı sönümlenme üç düz parçayla veriliyor: gradyan
+           nesnesi yok, görsel fark yok. */
+        if (s.wanderFrom !== undefined && G.sys[s.wanderFrom]){
+          const o2 = G.sys[s.wanderFrom];
+          const q = this.w2s(o2.x, o2.y);
+          g.lineWidth = Math.max(1.2, z * 2.4);
+          for (let i = 0; i < 3; i++){
+            const a0 = i / 3, a1 = (i + 1) / 3;
+            g.strokeStyle = 'rgba(255,190,90,' + (.42 * (1 - a0)).toFixed(2) + ')';
+            g.beginPath();
+            g.moveTo(p.x + (q.x - p.x) * a0, p.y + (q.y - p.y) * a0);
+            g.lineTo(p.x + (q.x - p.x) * a1, p.y + (q.y - p.y) * a1);
+            g.stroke();
+          }
+        }
+        g.restore();
+      }
+
       if (s._shat && z > .22){
         /* ═══ FAZ 35: İKİ TÜR ENKAZ ═══
            Colossus enkazı kızıl ve kesikli (patlama).

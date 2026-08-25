@@ -3307,6 +3307,9 @@ function diploTick(){
   if (typeof aiSubmitTick === 'function') aiSubmitTick();          // FAZ 71
   if (typeof aiEdictTick === 'function') aiEdictTick();            // FAZ 72
   if (typeof aiFedLawTick === 'function') aiFedLawTick();          // FAZ 72
+  if (typeof situationsTick === 'function') situationsTick();      // FAZ 77C
+  if (typeof throneTick === 'function') throneTick();              // FAZ 77B
+  if (typeof hungerTick === 'function') hungerTick();              // FAZ 77B
   if (typeof warSubsidyTick === 'function') warSubsidyTick();     // FAZ 45: savaş yardımı
   if (typeof visionTick === 'function') visionTick();             // FAZ 48: paylaşılan görüş
   if (typeof colossusGuardLock === 'function') colossusGuardLock(); // FAZ 31: koruma kilidi
