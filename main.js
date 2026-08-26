@@ -5830,6 +5830,8 @@ function enterGame(fromSave){
   /* FAZ 77E: kayıttan dönüşte sınırlar ilk karede çizilmiyordu —
      çizim döngüsü ancak değişiklikte kare basıyor. Zorla tazele. */
   if (typeof forceRedraw === 'function') forceRedraw();
+  /* FAZ 81: kayıttan dönen liderlerin portreleri yeniden basılsın */
+  if (typeof repaintPortraits === 'function') repaintPortraits();
   UI.checkOrient();
   if (!fromSave) say('Yıl ' + G.year + ' — ' + G.p.name + ' yıldızlara açılıyor', 'win');
   /* FAZ 18: ilk turda danışman. Oyunu duraklatır ama kilitlemez —
@@ -5912,6 +5914,27 @@ document.addEventListener('visibilitychange', ()=>{
   }
 });
 
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 81 — PORTRE KURTARMA
+   Canvas'lar bir kez boyanınca dataset.done ile işaretleniyor;
+   bu bayrak DOM'da yaşıyor. Kayıttan dönüşte ya da bağlam
+   kaybından sonra canvas bellekleri boşalıyor ama bayrak duruyor
+   — bu yüzden portreler siyah kutu olarak kalıyordu.
+   Bayrakları temizlemek yeniden boyanmalarını sağlıyor; ART.cache
+   sayesinde sprite yeniden ÜRETİLMİYOR, yalnız yeniden basılıyor.
+   ═══════════════════════════════════════════════════════════════════ */
+function repaintPortraits(){
+  try {
+    const seciciler = ['canvas.ldrPort', 'canvas.dpPort', 'canvas.pspr',
+                       'canvas.setPort', '#empPortrait'];
+    for (const sec of seciciler){
+      const list = document.querySelectorAll(sec);
+      for (const cv of list) if (cv.dataset) delete cv.dataset.done;
+    }
+    if (typeof UI !== 'undefined' && UI.paintSprites) UI.paintSprites();
+  } catch(e){ console.warn('repaintPortraits:', e); }
+}
+
 function forceRedraw(){
   const ciz = () => {
     try {
@@ -5920,6 +5943,7 @@ function forceRedraw(){
       View._bolgeAt = -1;                  // bölge adı önbelleğini tazele
       if (G && G.sys && G.sys.length) View.draw(performance.now());
       if (typeof UI !== 'undefined' && UI.refresh) UI.refresh();
+      repaintPortraits();          // FAZ 81: siyah kutu kalmasın
     } catch(e){ console.warn('forceRedraw:', e); }
   };
   ciz();

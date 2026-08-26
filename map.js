@@ -1128,8 +1128,27 @@ const View = {
      ═══════════════════════════════════════════════════════════════ */
   bolgeRenk(sahip){
     if (!sahip) return '#3a4356';
-    if (MAP_MODE === 'diplomasi' || MAP_MODE === 'savas')
-      return diploColor(sahip);
+    const e0 = G.p;
+    /* ═══ FAZ 81: SERT AYRIM ═══
+       diploColor() savaş moduna özel dallar taşıdığı için
+       diplomatik modda beklenen rengi vermiyordu. Diplomatik
+       mod artık KENDİ tablosunu okuyor — devlet rengiyle hiçbir
+       ortak noktası yok, saf ilişki göstergesi. */
+    if (MAP_MODE === 'diplomasi'){
+      if (!e0 || sahip.id === e0.id) return '#6ff2c8';        // biz
+      if (sahip.wild || sahip.crisisSide) return '#8b3ad8';   // korsan/kriz
+      if (e0.war[sahip.id]) return '#ff5f6d';                 // savaşta
+      if (e0.ally && e0.ally[sahip.id]) return '#65e08a';     // müttefik
+      if (typeof isVassal === 'function' && isVassal(sahip) &&
+          sahip.overlord === e0.id) return '#4fd8c4';         // vasalım
+      if (e0.pact && e0.pact[sahip.id]) return '#9fdcc9';     // saldırmazlık
+      if (!e0.contact[sahip.id]) return '#2e3646';            // tanımıyoruz
+      const r = e0.rel[sahip.id] || 0;
+      if (r >= 40) return '#a8e6a0';                          // dostane
+      if (r <= -40) return '#ff9b3d';                         // gergin
+      return '#7d90ad';                                        // nötr
+    }
+    if (MAP_MODE === 'savas') return diploColor(sahip);
     if (MAP_MODE === 'askeri'){
       /* Lojistik modu: kendi sistemlerimiz ikmal durumuna göre,
          yabancılar erişilebilirliğe göre renklenir. */
@@ -2185,6 +2204,89 @@ const View = {
       g.setLineDash([]);
       g.restore();
       g.textAlign = 'center';
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       FAZ 81 — DİNAMİK LOJİSTİK AĞI
+       Lojistik modu açıkken bir filo seçiliyse harita o filonun
+       BESLENME AĞINA dönüşür:
+         · ulaşabildiği sistemler arası hiper yollar parlak yeşil
+         · menzil dışı yollar soluk kırmızı
+         · ikmal limanları (tedarik tazeleyebileceği noktalar) ⚓
+       Hesap günde bir yapılıp f._logiNet'e yazılıyor; her karede
+       yalnız çizim var, pathfinding yok.
+       ═══════════════════════════════════════════════════════════ */
+    if (MAP_MODE === 'askeri' && this.sel && this.sel.ships &&
+        this.sel.ships.length && this.sel.sys >= 0 &&
+        typeof fleetSupply === 'function' && !this.politik){
+      const f = this.sel;
+      const fe = G.emps[f.e];
+      if (fe && !fe.dead){
+        if (f._logiAt !== G.day){
+          f._logiAt = G.day;
+          const ulasilir = new Set(), liman = [];
+          for (const sy of G.sys){
+            if (f.e === 0 && !sy.seen.includes(0)) continue;
+            const sup = fleetSupply(fe, {sys: sy.id, ships: f.ships, e: f.e});
+            if (sup >= .70) ulasilir.add(sy.id);
+            /* İkmal limanı: tedariki tam tazeleyen nokta */
+            if (typeof isSupplyNode === 'function' && isSupplyNode(fe, sy))
+              liman.push(sy.id);
+          }
+          f._logiNet = ulasilir;
+          f._logiPort = liman;
+        }
+        const net = f._logiNet || new Set();
+        const portlar = f._logiPort || [];
+        g.save();
+        /* Hiper yolları ikmal durumuna göre boya */
+        for (const sy of G.sys){
+          if (!this.inView(sy.x, sy.y)) continue;
+          for (const l of sy.lanes){
+            if (l < sy.id) continue;
+            const o2 = G.sys[l];
+            if (!o2) continue;
+            const ikiUcu = net.has(sy.id) && net.has(l);
+            const birUcu = net.has(sy.id) || net.has(l);
+            const a = this.w2s(sy.x, sy.y), b = this.w2s(o2.x, o2.y);
+            if (ikiUcu){
+              g.strokeStyle = 'rgba(111,242,200,.72)';
+              g.lineWidth = Math.max(1.4, z * 2.2);
+            } else if (birUcu){
+              g.strokeStyle = 'rgba(242,212,82,.34)';       // sınır hattı
+              g.lineWidth = Math.max(.9, z * 1.4);
+            } else {
+              g.strokeStyle = 'rgba(255,95,109,.16)';       // menzil dışı
+              g.lineWidth = Math.max(.6, z * 1);
+            }
+            g.beginPath(); g.moveTo(a.x, a.y); g.lineTo(b.x, b.y); g.stroke();
+          }
+        }
+        /* İkmal limanları — çapa işareti */
+        g.font = 'bold 12px ui-monospace,monospace';
+        g.textAlign = 'center';
+        const nb2 = .6 + .4 * Math.sin(t / 400);
+        for (const pid of portlar){
+          const sy = G.sys[pid];
+          if (!sy || !this.inView(sy.x, sy.y)) continue;
+          const p3 = this.w2s(sy.x, sy.y);
+          g.strokeStyle = 'rgba(111,242,200,' + nb2.toFixed(2) + ')';
+          g.lineWidth = Math.max(1, z * 1.6);
+          g.beginPath(); g.arc(p3.x, p3.y, 11, 0, Math.PI*2); g.stroke();
+          g.fillStyle = 'rgba(111,242,200,.9)';
+          g.fillText('⚓', p3.x, p3.y - 13);
+        }
+        /* Özet şerit */
+        g.fillStyle = 'rgba(5,8,16,.72)';
+        g.fillRect(6, this.vh - 30, 250, 20);
+        g.fillStyle = 'rgba(111,242,200,.9)';
+        g.font = '10px ui-monospace,monospace';
+        g.textAlign = 'left';
+        g.fillText('⚓ ' + net.size + ' sistem beslenebilir · ' +
+                   portlar.length + ' ikmal limanı', 12, this.vh - 16);
+        g.restore();
+        g.textAlign = 'center';
+      }
     }
 
     /* ═══════════════════════════════════════════════════════════

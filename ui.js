@@ -35,28 +35,23 @@ const UI = {
             kaldırıldı — ikisi de Faz 62'de "KAYIT VE AYARLAR"
             penceresine taşınmıştı, burada tekrar duruyorlardı. -->
        <div class="toolSep"></div>
-       <!-- ═══ FAZ 64: KATEGORİ 1 — HARİTA MODLARI ═══
-            5 mod tek butonda toplandı. Basınca yana açılır. -->
-       <div class="toolGrp" id="grpMap">
-         <button class="tool grpHead" data-a="grpTog" data-x="map"
-           title="Harita modları">🗺<i class="grpDot" id="mapDot">🌐</i></button>
-         <div class="grpOut" id="outMap">
-           <button class="tool mapMode" id="mm_siyasi" data-a="mapMode" data-x="siyasi"
-             title="Siyasi">🌐<span>Siyasi</span></button>
-           <button class="tool mapMode" id="mm_diplomasi" data-a="mapMode" data-x="diplomasi"
-             title="Diplomatik">🤝<span>Diplomatik</span></button>
-           <button class="tool mapMode" id="mm_askeri" data-a="mapMode" data-x="askeri"
-             title="Lojistik — tedarik hatları ve filo rotaları">⚔<span>Lojistik</span></button>
-           <button class="tool mapMode" id="mm_savas" data-a="mapMode" data-x="savas"
-             title="Savaş">🔥<span>Savaş</span></button>
-         </div>
-       </div>
-       <!-- ═══ FAZ 65: BAĞIMSIZ RADAR KATMANI ═══
-            Harita modundan bağımsız. Hangi zemin açık olursa
-            olsun filo hareketleri üstüne binebilir. -->
-       <button class="tool radarBtn" id="radarBtn" data-a="radarTog"
-         title="Radar — filo hareketleri ve ralli hatları">🚀</button>
-       <!-- ═══ FAZ 64: KATEGORİ 2 — DEVLET VE DİPLOMASİ ═══ -->
+       <!-- ═══════════════════════════════════════════════════════
+            FAZ 81 — TAKTİKSEL DİZİLİM
+            Sıra artık kullanım sıklığına göre: zemin haritası
+            (sürekli değişir) → paneller (ara sıra) → katmanlar
+            (aç/kapa). Harita modları akordiyondan ÇIKARILDI ve
+            doğrudan göründü — tek dokunuşla zemin değişiyor.
+            ═══════════════════════════════════════════════════════ -->
+       <!-- 1. HARİTA MODLARI — doğrudan, katlanmadan -->
+       <button class="tool mapMode" id="mm_siyasi" data-a="mapMode" data-x="siyasi"
+         title="Siyasi harita — devlet renkleri ve sınırlar">🌐</button>
+       <button class="tool mapMode" id="mm_diplomasi" data-a="mapMode" data-x="diplomasi"
+         title="Diplomatik harita — dost, düşman, tarafsız">🤝</button>
+       <button class="tool mapMode" id="mm_savas" data-a="mapMode" data-x="savas"
+         title="Savaş haritası — husumet ağı">🔥</button>
+
+       <div class="toolSep"></div>
+       <!-- 2. AKORDİYON: DEVLET VE DİPLOMASİ -->
        <div class="toolGrp" id="grpEmp">
          <button class="tool grpHead" data-a="grpTog" data-x="emp"
            title="İmparatorluk">👑</button>
@@ -75,7 +70,15 @@ const UI = {
            <button class="tool" data-a="marketPane"
              title="Galaktik Piyasa">💱<span>Piyasa</span></button>
          </div>
-       </div>`;
+       </div>
+
+       <div class="toolSep"></div>
+       <!-- 3. RADAR — bağımsız katman -->
+       <button class="tool radarBtn" id="radarBtn" data-a="radarTog"
+         title="Radar — filo hareketleri ve ralli hatları">🚀</button>
+       <!-- 4. LOJİSTİK — bağımsız katman, en altta -->
+       <button class="tool logiBtn" id="logiBtn" data-a="mapMode" data-x="askeri"
+         title="Lojistik — ikmal hatları, menzil ve tedarik">⚓</button>`;
     document.body.addEventListener('click', e=>{
       const el = e.target.closest('[data-a]');
       if (!el) return;
@@ -326,17 +329,21 @@ const UI = {
         break;
       }
       case 'mapMode': {
+        /* FAZ 81: lojistiğe ikinci basış onu kapatır */
+        if (x === 'askeri' && MAP_MODE === 'askeri') x = 'siyasi';
         MAP_MODE = x;
-        ['siyasi','diplomasi','askeri','savas'].forEach(k=>{
+        /* ═══ FAZ 81: LOJİSTİK ARTIK AYRI BUTONDA ═══
+           Üç zemin modu üstte, lojistik en altta bağımsız duruyor.
+           Aktif olan butonun kendisi işaretleniyor — rozete gerek
+           kalmadı. Lojistik ikinci kez basılınca siyasiye döner
+           (aç/kapa davranışı). */
+        ['siyasi','diplomasi','savas'].forEach(k=>{
           const b = $('mm_' + k);
           if (b) b.className = 'tool mapMode' + (k === x ? ' on' : '');
         });
-        /* FAZ 64: seçim yapılınca alt menü kapanır, başlık
-           butonundaki küçük rozet aktif modu gösterir. */
+        const lb = $('logiBtn');
+        if (lb) lb.className = 'tool logiBtn' + (x === 'askeri' ? ' on' : '');
         if (typeof closeAllGroups === 'function') closeAllGroups();
-        const dot = $('mapDot');
-        if (dot) dot.textContent = {siyasi:'🌐', diplomasi:'🤝',
-                                    askeri:'⚔', savas:'🔥'}[x] || '🌐';
         const ad = {siyasi:'Siyasi', diplomasi:'Diplomatik',
                     askeri:'Lojistik', savas:'Savaş'}[x] || x;
         /* FAZ 80: modun NE İŞE YARADIĞINI anlatan kısa toast */
