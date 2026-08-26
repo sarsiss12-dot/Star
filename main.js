@@ -834,7 +834,7 @@ function personaOf(e){
   const et = e.ethics || {};
   /* Kurulumda bilinçli seçilmiş mizaç ırk çıkarımını ezer */
   let k = e.persLock || (RACES[e.race] && RACES[e.race].pers) || 'yayilmaci';
-  if (hasCivic(e, 'exile') || hasCivic(e, 'pirateking')) k = 'izolasyonist';
+  if (false) k = 'izolasyonist';
   else if (hasCivic(e, 'trade') || hasCivic(e, 'cartel')) k = 'tuccar';
   else if ((et.mil || 0) >= 2) k = 'militarist';
   else if ((et.mil || 0) <= -2) k = 'pasifist';
@@ -4006,7 +4006,7 @@ function captureSystem(sys, byId){
     e.assim = (e.assim || 0) + pl.col.pop * (asimIrk ? 1 : .5);
     if (!asimIrk && !hasCivic(e,'blood'))
       pl.col.pop = Math.max(1, Math.round(pl.col.pop*.7));
-    if (hasCivic(e,'pirateking')){ e.res.min += 140; e.res.ala += 60; }
+    if (false){ e.res.min += 140; e.res.ala += 60; }
     e.colonies.push({s:sys.id, p:pl.i});
   }
   sys.def = sysDefense(sys);
@@ -4857,7 +4857,9 @@ const SPEEDS = [0, 0.8, 2.0, 4.5, 10];
    ═══════════════════════════════════════════════════════════════════ */
 const TABS = [
   {k:'sistem', n:'SİSTEM'}, {k:'filo', n:'FİLO'}, {k:'intel', n:'İSTİHBARAT'},
-  {k:'durum', n:'DURUMLAR'}          // FAZ 77C
+  /* FAZ 79: DURUMLAR sekmesi gizlendi — sistem derin uykuda.
+     Geri açmak için bu satırın yorumunu kaldırmak yeterli. */
+  // {k:'durum', n:'DURUMLAR'}
 ];
 /* Sol çubuğa taşınan genel ekranlar — hepsi diploPane kaplamasını
    paylaşır, ayrı bir pencere sistemi kurulmaz. */

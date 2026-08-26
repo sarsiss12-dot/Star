@@ -11,6 +11,44 @@
    ═══════════════════════════════════════════════════════════════════ */
 
 function battleRound(sys, A, fa, B, fb, def, band){
+  /* ═══════════════════════════════════════════════════════════
+     FAZ 79 — RİCAT ARTIK HASARDAN ÖNCE
+     KÖK NEDEN: bu blok tur SONUNDA çalışıyordu. Ölçümde tek
+     gemili bir filo savunma duruşundayken tek turda yok oldu ve
+     `!f.ships.length` koşulu bloğu atladı — yani ricat ancak
+     hayatta kalırsan çalışıyordu, ki o zaman zaten gerek yoktu.
+     Savunma duruşunun ANLAMI ölmeden çekilmektir.
+
+     Artık kontrol turun BAŞINDA: eşiğin altındaki filo bu tur
+     hiç ateş etmeden çekilir ve hasar almaz. Bir turluk gecikme
+     yok, "son anda kurtulma" gerçekten mümkün.
+     ═══════════════════════════════════════════════════════════ */
+  for (const side of [fa, fb]){
+    for (const f of side){
+      if (!f.ships.length || !f.combat) continue;
+      const st = STANCE[f.stance] || STANCE.agresif;
+      if (!st.kac) continue;
+      if (fleetHealth(f) > st.kac) continue;
+      const me = G.emps[f.e];
+      const home = G.sys[f.sys] ? G.sys[f.sys].lanes
+        .map(l=>G.sys[l])
+        .filter(sy => sy.owner === f.e || sy.owner < 0)
+        .sort((a,b)=> (a.owner===f.e?0:1) - (b.owner===f.e?0:1))[0] : null;
+      if (home){
+        f.combat = 0;
+        f.ord = null;
+        orderMove(f, home.id);
+        fx({k:'shield', x:f.x, y:f.y, life:18});
+        if (f.e === 0) say(esc(f.name) + ' ricat etti — ' + home.name, 'war');
+      }
+  /* Ricat edenler bu turun hasar hesabına GİRMEZ — çekilme
+     ateş açmamak demektir, yoksa "son anda kaçış" anlamsız olur. */
+  fa = fa.filter(f => f.ships.length && f.combat);
+  fb = fb.filter(f => f.ships.length && f.combat);
+  if (!fa.length || !fb.length) return;
+    }
+  }
+
   band = band || 1;
   const ea = G.emps[A], eb = G.emps[B];
   const sa = sideStats(ea, fa, eb, band);
@@ -162,27 +200,6 @@ function battleRound(sys, A, fa, B, fb, def, band){
     }
   }
 
-  // --- savunma duruşundaki ezilmiş filolar ricat eder ---
-  for (const side of [fa, fb]){
-    for (const f of side){
-      if (!f.ships.length || !f.combat) continue;
-      const st = STANCE[f.stance] || STANCE.agresif;
-      if (!st.kac) continue;
-      if (fleetHealth(f) > st.kac) continue;
-      const me = G.emps[f.e];
-      const home = G.sys[f.sys] ? G.sys[f.sys].lanes
-        .map(l=>G.sys[l])
-        .filter(sy => sy.owner === f.e || sy.owner < 0)
-        .sort((a,b)=> (a.owner===f.e?0:1) - (b.owner===f.e?0:1))[0] : null;
-      if (home){
-        f.combat = 0;
-        f.ord = null;
-        orderMove(f, home.id);
-        fx({k:'shield', x:f.x, y:f.y, life:18});
-        if (f.e === 0) say(esc(f.name) + ' ricat etti — ' + home.name, 'war');
-      }
-    }
-  }
   fa = fa.filter(f => f.ships.length && f.combat);
   fb = fb.filter(f => f.ships.length && f.combat);
 

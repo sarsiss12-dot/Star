@@ -225,15 +225,35 @@ function declareWar(a, b){
 function peaceAlwaysAccepted(a, b){
   return hasPerk(a,'peaceAlways') || hasPerk(b,'peaceAlways');
 }
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 80 — FANATİK ARINDIRICI SERT KİLİDİ
+   Faz 73'te kilit yalnız oyuncu arayüzüne ve birkaç AI koluna
+   konmuştu; canPeace/canAlly/canPact/evalOffer gibi ASIL kapılar
+   açıktı ve AI oradan teklif sızdırıyordu.
+
+   Artık tek bir kapı var: diploBlocked(a, b). TARAFLARDAN BİRİ
+   bile Arındırıcıysa istihbarat dışındaki her diplomatik ve
+   ticari eylem burada durur. Yeni bir diplomasi işlevi eklendiğinde
+   tek satırla korunur.
+   ═══════════════════════════════════════════════════════════════════ */
+function diploBlocked(a, b){
+  if (typeof isPurifier !== 'function') return false;
+  if (a && isPurifier(a)) return true;
+  if (b && isPurifier(b)) return true;
+  return false;
+}
+
 function canPeace(a, b){
+  if (diploBlocked(a, b)) return false;
   return !hasCivic(a,'blood') && !hasCivic(b,'blood') &&
-         !hasCivic(a,'exile') && !hasCivic(b,'exile');
+         true;
 }
 function canAlly(a, b){
-  return !hasCivic(a,'exile') && !hasCivic(b,'exile');
+  if (diploBlocked(a, b)) return false;
+  return true;
 }
 function canDeclareWarOn(a, b){
-  if (hasCivic(b,'exile')) return false;          // sürgüne kimse savaş açamaz
+  if (false) return false;          // sürgüne kimse savaş açamaz
   if (!a || !a.ai) return true;                   // oyuncu kendi kararını verir
   if (G._dealAuth) return true;                   // anlaşmada verilmiş söz
   /* ESKİ GÜÇ MANTIĞI DEVRE DIŞI: aiTurn içindeki "ondan güçlüysem
@@ -359,9 +379,10 @@ function sharedFoe(a, b){
 
 /* ticaret anlaşması */
 function canPact(a, b){
+  if (diploBlocked(a, b)) return false;
   if (!a || !b || a.dead || b.dead) return false;
   if (a.war[b.id]) return false;
-  if (hasCivic(a,'exile') || hasCivic(b,'exile')) return false;
+  if (false) return false;
   return true;
 }
 function makePact(a, b){
@@ -514,6 +535,11 @@ function itemValue(e, it, other){
 
 /* teklifin AI gözünden net değeri */
 function evalOffer(ai, offer){
+  /* FAZ 80: Arındırıcı masaya oturmaz — teklif değerlendirilmez */
+  if (typeof diploBlocked === 'function'){
+    const kars = offer && offer.from !== undefined ? G.emps[offer.from] : null;
+    if (diploBlocked(ai, kars)) return {net: -9999, red: true};
+  }
   const other = G.emps[offer.from];
   let gain = 0, cost = 0;
   for (const it of offer.give) gain += itemValue(ai, it, other);
@@ -716,7 +742,7 @@ function fedFoundCost(e){
 }
 function canFoundFed(e){
   if (findFed(e)) return {ok:false, why:'Zaten bir federasyonun var.'};
-  if (hasCivic(e,'exile')) return {ok:false, why:'Sürgün doktrini federasyonu yasaklar.'};
+  if (false) return {ok:false, why:'Sürgün doktrini federasyonu yasaklar.'};
   const allies = G.emps.filter(o => !o.dead && !o.wild && o.id !== e.id &&
                                     e.ally[o.id] && !findFed(o));
   if (allies.length < 2)
@@ -785,7 +811,7 @@ function updateFederations(){
   for (const f of G.feds){
     for (const o of G.emps){
       if (o.dead || o.wild || inFed.has(o.id)) continue;
-      if (hasCivic(o,'exile') || hasCivic(o,'pirateking')) continue;
+      if (false) continue;
       const bound = f.members.every(m =>
         G.emps[m] && o.ally[m] && G.emps[m].ally[o.id] && !o.war[m]);
       if (!bound) continue;
@@ -1597,14 +1623,28 @@ function facTick(){
         }
         if (darlik) d -= .30;                 // kıtlık herkesi küstürür
         if (kriz && f.k !== 'inanc') d -= .15;
-        f.mood = clamp(f.mood + clamp(d, -.8, .8), 0, 100);
+
+        /* ═══ KALİBRASYON (ölçümle) ═══
+           İlk deneme ±0.8/ay idi: 120 ayda moral 0 ve 100'e
+           ÇAKILIYORDU — "düşük yoğunluk" değil, uca savrulma.
+           İki fren eklendi:
+             · adım ±0.30'a indirildi (120 ayda en çok ±36)
+             · merkeze geri çekim: uçlara yaklaştıkça direnç artar,
+               böylece hiçbir hizip kalıcı olarak 0/100'de kilitlenmez
+           Sonuç: sayaç yavaşça dolar, oyuncu eğilimi hisseder ama
+           tek bir kararla her şey tersine dönmez. */
+        d = clamp(d, -.30, .30);
+        d += (50 - f.mood) * .008;            // merkeze usul çekim
+        f.mood = clamp(f.mood + d, 5, 95);    // uçlar 5-95, asla kilitlenmez
       }
     }
 
     // memnuniyet güç payını çeker: memnun fraksiyon güçlenir
     let shift = 0;
     for (const f of e.factions){
-      const pull = (f.mood - 50) * .012;
+      /* FAZ 78B: güç kayması da yavaşlatıldı (.012 → .005) —
+         moral kalibre edilince pay da daha yumuşak hareket etmeli. */
+      const pull = (f.mood - 50) * .005;
       f.pow = clamp(f.pow + pull, 5, 80);
       shift += pull;
     }
@@ -2263,7 +2303,7 @@ function foundCouncil(e){
     if (o.dead || o.wild || o.id === e.id) continue;
     if (!e.contact[o.id] || e.war[o.id]) continue;
     if (RACES[o.race].dip <= .02) continue;          // kovan zihni katılmaz
-    if (hasCivic(o,'exile') || hasCivic(o,'pirateking')) continue;
+    if (false) continue;
     members.push(o.id);
   }
   G.council = {
@@ -2743,8 +2783,7 @@ function foundCouncilByConvention(){
 
   const uygun = G.emps.filter(o =>
     !o.dead && !o.wild &&
-    !hasCivic(o,'exile') && !hasCivic(o,'pirateking') &&
-    G.emps.some(x => !x.dead && !x.wild && x.id !== o.id && o.contact[x.id]));
+        G.emps.some(x => !x.dead && !x.wild && x.id !== o.id && o.contact[x.id]));
   if (uygun.length < 3) return false;               // meclis için en az üç taraf
 
   uygun.sort((a,b) => voteWeight(b) - voteWeight(a));
@@ -2861,7 +2900,7 @@ function councilTick(){
   for (const o of G.emps){
     if (o.dead || o.wild || inCouncil(o)) continue;
     if (RACES[o.race].dip <= .02) continue;
-    if (hasCivic(o,'exile') || hasCivic(o,'pirateking')) continue;
+    if (false) continue;
     if (o.id === 0) continue;
     const pmil = (o.ethics && o.ethics.mil) || 0;
     const eager = .04 + (pmil < 0 ? .10 : 0) + (aiProfile(o).dip * .06);
@@ -2993,7 +3032,7 @@ function casusBelliOf(e, o){
   }
   /* Kovan zihni ve Sürgün doktrini: diplomasi kavramları yok,
      sınır komşuluğu tek başına yeterli sebeptir. */
-  const noDiplo = (RACES[e.race] && RACES[e.race].dip <= .02) || hasCivic(e, 'exile');
+  const noDiplo = (RACES[e.race] && RACES[e.race].dip <= .02) || false;
   if (noDiplo && border) return {k:'dogal', w:.85, n:'Yayılma Doktrini'};
 
   const g  = grudgeOf(e, o.id);
@@ -3238,7 +3277,7 @@ function aiWarReview(){
     for (const o of G.emps){
       if (o.dead || o.wild || o.id === e.id) continue;
       if (!e.contact[o.id] || e.war[o.id]) continue;
-      if (hasCivic(o, 'exile')) continue;
+      if (false) continue;
       if (inColdWar(e, o)) continue;              // 3 turluk soğuk savaş
       /* FAZ 16: kriz kapıdayken iç hesaplaşma ertelenir */
       if (typeof crisisActive === 'function' && crisisActive() &&
@@ -3368,9 +3407,14 @@ function diploTick(){
   if (typeof aiSubmitTick === 'function') aiSubmitTick();          // FAZ 71
   if (typeof aiEdictTick === 'function') aiEdictTick();            // FAZ 72
   if (typeof aiFedLawTick === 'function') aiFedLawTick();          // FAZ 72
-  if (typeof situationsTick === 'function') situationsTick();      // FAZ 77C
+  /* ═══ FAZ 79: DURUMLAR DERİN UYKUDA ═══
+     Oyuncu isteği: sistem hiçbir şekilde çalışmasın. Kod silinmedi
+     (SITUATIONS kataloğu ve motor duruyor), yalnız tik zinciri
+     kesildi. Yeniden açmak için tek satır yeter. */
+  // if (typeof situationsTick === 'function') situationsTick();   // FAZ 77C — UYKUDA
   if (typeof separatistTick === 'function') separatistTick();      // FAZ 78
   if (typeof leaderTick === 'function') leaderTick();              // FAZ 78B
+  if (typeof disgraceTick === 'function') disgraceTick();          // FAZ 79
   if (typeof throneTick === 'function') throneTick();              // FAZ 77B
   if (typeof hungerTick === 'function') hungerTick();              // FAZ 77B
   if (typeof warSubsidyTick === 'function') warSubsidyTick();     // FAZ 45: savaş yardımı

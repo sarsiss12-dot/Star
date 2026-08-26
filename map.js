@@ -1118,6 +1118,31 @@ const View = {
      (z küçülür) yarım ekran dünya biriminde büyür, sınır da
      doğal olarak genişler.
      ═══════════════════════════════════════════════════════════════ */
+  /* ═══════════════════════════════════════════════════════════════
+     FAZ 80 — MODA GÖRE BÖLGE RENGİ
+     Sınır boyaması artık her harita modunun mantığını yansıtıyor:
+       siyasi    → devletin kendi rengi (kim nerede)
+       diplomasi → bize göre duruş (dost/düşman/tarafsız)
+       savas     → savaşta mı (kırmızı) yoksa değil mi (soluk)
+       askeri    → LOJİSTİK: bizim ikmal ağımızda mı?
+     ═══════════════════════════════════════════════════════════════ */
+  bolgeRenk(sahip){
+    if (!sahip) return '#3a4356';
+    if (MAP_MODE === 'diplomasi' || MAP_MODE === 'savas')
+      return diploColor(sahip);
+    if (MAP_MODE === 'askeri'){
+      /* Lojistik modu: kendi sistemlerimiz ikmal durumuna göre,
+         yabancılar erişilebilirliğe göre renklenir. */
+      const e = G.p;
+      if (sahip.id === e.id) return '#6ff2c8';            // kendi hattımız
+      if (e.ally && e.ally[sahip.id]) return '#4fd8c4';   // müttefik limanı
+      if (e.passage && e.passage[sahip.id]) return '#f2d452'; // geçiş izni
+      if (e.war[sahip.id]) return '#ff5f6d';              // hat kapalı
+      return '#5a6478';                                    // nötr, geçilemez
+    }
+    return sahip.col;                                      // siyasi
+  },
+
   clampCam(){
     const c = this.cam;
     if (!c) return;
@@ -1274,7 +1299,9 @@ const View = {
     /* NOT: `politik` bu satırdan SONRA tanımlanıyor (TDZ), o yüzden
        koşulu doğrudan zoom'dan okuyoruz — this.politik zaten
        updateFrustum'da hesaplanmış oluyor. */
-    if ((MAP_MODE === 'diplomasi' || MAP_MODE === 'savas') && !this.politik){
+    /* FAZ 80: bölge boyaması artık DÖRT modda da çalışıyor.
+       Her mod kendi renk mantığını kullanıyor (bkz. bolgeRenk). */
+    if (MAP_MODE !== 'siyasi_yok' && !this.politik){
       g.save();
       g.globalCompositeOperation = 'lighter';
       for (const s of G.sys){
@@ -1286,7 +1313,7 @@ const View = {
         const p2 = this.w2s(s.x, s.y);
         /* Hale yarıçapı: sistemler arası tipik mesafenin yarısı */
         const R = Math.max(26, 150 * z);
-        const dc = diploColor(sahip);
+        const dc = this.bolgeRenk(sahip);
         const yanip = G.p.war[sahip.id] ? (.55 + .45*Math.sin(t/260)) : 1;
         const grad = g.createRadialGradient(p2.x, p2.y, 0, p2.x, p2.y, R);
         grad.addColorStop(0,   dc + (G.p.war[sahip.id] ? '3a' : '2e'));

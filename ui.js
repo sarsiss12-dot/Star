@@ -339,7 +339,15 @@ const UI = {
                                     askeri:'⚔', savas:'🔥'}[x] || '🌐';
         const ad = {siyasi:'Siyasi', diplomasi:'Diplomatik',
                     askeri:'Lojistik', savas:'Savaş'}[x] || x;
-        say('🗺 ' + ad + ' harita modu');
+        /* FAZ 80: modun NE İŞE YARADIĞINI anlatan kısa toast */
+        const aciklama = {
+          siyasi   :'Kim nerede — devlet renkleri ve sınırlar',
+          diplomasi:'Dost, düşman, tarafsız — bize göre duruş',
+          askeri   :'İkmal hatları, menzil ve tedarik durumu',
+          savas    :'Kim kiminle savaşıyor — husumet ağı'
+        }[x] || '';
+        if (typeof this.mapToast === 'function') this.mapToast(ad, aciklama);
+        else say('🗺 ' + ad + ' harita modu');
         break;
       }
       case 'bgTog': {
@@ -505,6 +513,17 @@ const UI = {
       case 'ldrHire': {
         const r2 = recruitLeader(G.p, x);
         if (!r2.ok) say(r2.why, 'war');
+        this.keepScroll = true; this.refresh();
+        break;
+      }
+      case 'bmPick': { this.bmPick = +x; this.keepScroll = true; this.refresh(); break; }
+      case 'bmCancel': { this.bmPick = null; this.keepScroll = true; this.refresh(); break; }
+      case 'bmGo': {
+        const [oid, lid] = x.split(':').map(Number);
+        const r = blackmailLeader(G.p, G.emps[oid], lid);
+        this.bmPick = null;
+        if (!r.ok) say(r.why, 'war');
+        else if (!r.basarili && !r.ifsa) say('Ajanlarımız belge bulamadı', 'war');
         this.keepScroll = true; this.refresh();
         break;
       }
@@ -2424,6 +2443,10 @@ const UI = {
               <span>${T.ico} ${esc(T.n)} — ${esc(T.d)}</span>
               <span style="color:#7d90ad">rütbe ${amiral.rank}/4 ·
                 ${amiral.xp} tecrübe</span>
+              ${amiral.disgraced && amiral.disgraced > (G.memAge||0)
+                ? '<span style="color:#ff5f6d">🎭 İFŞA OLMUŞ — birim %' +
+                  Math.round(BLACKMAIL_PENALTY*100) + ' zayıf (' +
+                  (amiral.disgraced - (G.memAge||0)) + ' ay)</span>' : ''}
             </div></div>
           <div class="act2"><button class="abtn" data-a="ldrUnassign"
             data-x="${amiral.id}">✕ GÖREVDEN AL</button></div>`;
@@ -3726,6 +3749,46 @@ const UI = {
                 <span style="font-size:9px">${typeof PATRONAGE_COST !== 'undefined'
                   ? PATRONAGE_COST : 150} ◈</span></button></div>`;
             else h += `<div class="mini" style="color:#7d90ad">${esc(chk.why)}</div>`;
+          }
+          h += `</div>`;
+        });
+      }
+    }
+
+    /* ═══ FAZ 79: LİDERE ŞANTAJ / İTİBAR SUİKASTI ═══ */
+    if (typeof canBlackmailLeader === 'function'){
+      h += `<div class="ph">🎭 İTİBAR SUİKASTI</div>`;
+      h += `<div class="mini">Rakip komutanı öldürmezsin — itibarını
+        bitirirsin. İfşa olmuş ama görevde kalan bir lider birimini
+        <b>%${Math.round(BLACKMAIL_PENALTY*100)}</b> zayıflatır,
+        ${BLACKMAIL_MONTHS} ay boyunca.
+        (${Object.keys(BLACKMAIL_COST).map(r =>
+          BLACKMAIL_COST[r] + ' ' + (RES[r] ? RES[r].n : r)).join(' · ')})</div>`;
+      const adaylar = tanidik.filter(o => canBlackmailLeader(e, o).ok);
+      if (!adaylar.length){
+        const ilk = tanidik.length ? canBlackmailLeader(e, tanidik[0]) : null;
+        h += `<div class="mini" style="color:#7d90ad">${
+          ilk && ilk.why ? esc(ilk.why) : 'Uygun hedef yok'}</div>`;
+      } else {
+        adaylar.forEach(o => {
+          const c2 = canBlackmailLeader(e, o);
+          const secili = this.bmPick === o.id;
+          h += `<div class="box">
+            <div class="bt"><span style="color:${o.col}">${esc(o.name.slice(0,20))}</span>
+              <span class="tag b">${c2.hedefler.length} lider</span></div>`;
+          if (!secili){
+            h += `<div class="act2"><button class="abtn dgr" data-a="bmPick"
+              data-x="${o.id}">🎭 HEDEF SEÇ</button></div>`;
+          } else {
+            h += `<div class="mini">Kimi ifşa edelim?</div><div class="act2">`;
+            c2.hedefler.slice(0, 6).forEach(L => {
+              const T = LEADER_TRAITS[L.trait];
+              h += `<button class="abtn dgr" data-a="bmGo" data-x="${o.id}:${L.id}">
+                ${T.ico} ${esc(L.name.slice(0,14))}
+                <br><span style="font-size:9px">${L.tip} · R${L.rank}</span></button>`;
+            });
+            h += `</div><div class="act2"><button class="abtn"
+              data-a="bmCancel">✕ VAZGEÇ</button></div>`;
           }
           h += `</div>`;
         });
@@ -5965,6 +6028,16 @@ const UI = {
     /* ═══ FAZ 31: OLAY PİKSEL SANATI ═══
        art anahtarı verilirse pencerenin üstüne 128×128 canvas
        eklenir ve matris fillRect ile çizilir. Görsel dosya yok. */
+    /* ═══ FAZ 80: GEÇERSİZ ART ANAHTARI SESSİZ KALMASIN ═══
+       Tanınmayan anahtar geldiğinde görsel katmanı zaten
+       atlanıyordu (sessiz hata). Artık geliştirme aşamasında
+       konsola düşüyor ve türe göre makul bir varsayılan
+       seçiliyor — böylece bildirim görselsiz kalmıyor. */
+    if (art && typeof ART !== 'undefined' && ART.PIXEL_ART &&
+        !ART.PIXEL_ART[art]){
+      console.warn('Bilinmeyen olay görseli:', art, '→ varsayılana düşüldü');
+      art = (cls === 'war') ? 'infaz' : (cls === 'win') ? 'veri' : 'veri';
+    }
     const sanat = (art && typeof ART !== 'undefined' && ART.PIXEL_ART && ART.PIXEL_ART[art])
       ? `<div class="evArt"><canvas id="eventCanvas" width="128" height="128"></canvas></div>` : '';
     $('modal').innerHTML = `<div class="mbox ${cls||''}">${extra}${sanat}${html}</div>`;
@@ -6023,6 +6096,19 @@ const UI = {
        <div class="mft"><button class="ch" data-a="closem">
          <div class="cht">Anlaşıldı</div></button></div>`,
       cls || 'war', true, art);
+  },
+  /* ═══ FAZ 80: HARİTA MODU TOAST'I ═══
+     Ekranın üst ortasında 2.6 saniye duran, tıklanamayan bir
+     şerit. Sol üstteki olay akışını kirletmiyor çünkü bu bir
+     olay değil, bir kip göstergesi. */
+  mapToast(baslik, aciklama){
+    const el = $('mapToast');
+    if (!el){ say('🗺 ' + baslik); return; }
+    el.innerHTML = `<b>${esc(baslik.toUpperCase())} HARİTASI</b>` +
+      (aciklama ? `<span>${esc(aciklama)}</span>` : '');
+    el.className = 'show';
+    clearTimeout(this._toastT);
+    this._toastT = setTimeout(() => { el.className = ''; }, 2600);
   },
   closeModal(){
     $('modal').className = 'hidden';
@@ -7108,8 +7194,12 @@ function renderSetup(){
     const v = c.ethics[ax]||0;
     if (v) eth.push((v>0?ETHICS[ax].a:ETHICS[ax].b) + ' ' + Math.abs(v));
   }
-  h += `<div class="sumRow"><span>Tür</span><b style="color:${c.color||RACES[c.race].col}">${RACES[c.race].kisa}</b></div>`;
-  h += `<div class="sumRow"><span>İdeoloji</span><b>${eth.length?eth.join(' · '):'Tarafsız'}</b></div>`;
+  /* ═══ FAZ 80: ÖLÜ ÖZET SATIRLARI KALDIRILDI ═══
+     "Tür: Sözleşme" satırı Faz 72'de silinen TÜR sekmesinden
+     kalmıştı — ırk artık doktrinden türetiliyor, oyuncu bunu
+     hiç seçmiyor. "İdeoloji: Tarafsız" da etik sekmesindeki
+     bilgiyi tekrar ediyordu. İkisi de özetten çıkarıldı;
+     doktrin/fizyoloji/etik satırları zaten aşağıda duruyor. */
   /* ═══ FAZ 61: ÖZET SATIRI SAĞLAMLAŞTIRMA ═══
      Şablondan gelen ya da elle bozulmuş bir anahtar (örn. eski
      sürümden kalma look/origin adı) burada tanımsız dönüp tüm

@@ -21,7 +21,7 @@ function aiProfile(e){
     exp:  clamp(r.exp + (et.aut||0)*.04, .2, 1.3),
     sci:  clamp((r.win==='bilim'?.9:.5) + (et.mat||0)*.08 + (hasCivic(e,'streak2')?.2:0), .2, 1.2),
     eco:  clamp((r.win==='ekonomi'?.9:.5) + (hasCivic(e,'trade')?.25:0), .2, 1.2),
-    dip:  clamp(r.dip - pw*.5 - (et.mil||0)*.08 + (hasCivic(e,'allyCheap')?.25:0) - (hasCivic(e,'exile')?1:0), 0, 1.2),
+    dip:  clamp(r.dip - pw*.5 - (et.mil||0)*.08 + (hasCivic(e,'allyCheap')?.25:0) - (false?1:0), 0, 1.2),
     turtle: clamp((hasCivic(e,'fortress')?.6:.2) - (et.mil||0)*.05, 0, 1)
   };
   e._prof = p;
@@ -588,6 +588,20 @@ function aiTurn(e){
     UI.peaceOffer(e);
   }
 
+  /* ═══════════════════════════════════════════════════════════════
+     FAZ 80 — ARINDIRICI DİPLOMASİ KAPISI
+     Bu noktadan sonraki her şey (elçi, müzakere teklifi, ticaret
+     anlaşması, ittifak arayışı, pakt, sığınma) masaya oturmayı
+     gerektirir. Fanatik Arındırıcılar bunların hiçbirini yapmaz.
+
+     Kilit TEK NOKTAYA konuldu — ileride buraya yeni bir diplomasi
+     kolu eklendiğinde de kendiliğinden korunur. İstihbarat ve
+     casusluk bölümleri bu bloğun DIŞINDA, dolayısıyla açık kalır. */
+  if (typeof isPurifier === 'function' && isPurifier(e)){
+    if (typeof aiSpyTurn === 'function') aiSpyTurn(e);   // casusluk serbest
+    return;
+  }
+
   /* --- 6-öncesi. elçi yerleştirme --- */
   e.envoy = e.envoy || {};
   if (envoysUsed(e) < envoyCap(e)){
@@ -683,7 +697,19 @@ function aiTurn(e){
   for (const f of armed){
     const here = f.sys >= 0 ? threatAt(e, f.sys) : 0;
     const mine2 = fleetPower(f);
-    if (here > mine2 * 1.25) f.stance = 'savunma';       // ezileceksen korun
+    /* ═══ FAZ 79: MİZAÇ DURUŞU BELİRLER ═══
+       Doktrin, taktik hesabın üstüne biner. Fanatik Arındırıcılar
+       geri çekilmeyi bilmez — ezilecekleri belliyken bile saldırır.
+       Pasifist ve Teknokrat ise gemisini korumayı önceler. */
+    const P2 = (typeof personaOf === 'function') ? personaOf(e) : null;
+    const mizacAd = P2 ? P2.n : '';
+    if (mizacAd === 'Fanatik Arındırıcılar'){
+      f.stance = 'agresif';                              // asla ricat yok
+    } else if (mizacAd === 'Pasifist' || mizacAd === 'Teknokrasi'){
+      f.stance = (mine2 > here * 2.2) ? 'agresif' : 'savunma';
+    } else if (mizacAd === 'Militarist'){
+      f.stance = (here > mine2 * 1.9) ? 'savunma' : 'agresif';
+    } else if (here > mine2 * 1.25) f.stance = 'savunma';  // ezileceksen korun
     else if (prof.war > .7 || mine2 > here * 1.6) f.stance = 'agresif';
     else f.stance = prof.turtle > .5 ? 'savunma' : 'agresif';
   }
@@ -988,7 +1014,7 @@ function aiTryFoundCouncil(){
     if (e.dead || e.wild || !e.ai) return false;
     const mil = (e.ethics && e.ethics.mil) || 0;
     if (mil > -2) return false;
-    if (hasCivic(e,'exile') || hasCivic(e,'pirateking')) return false;
+    if (false) return false;
     if (RACES[e.race].dip <= .02) return false;
     return canFoundCouncil(e).ok;
   });

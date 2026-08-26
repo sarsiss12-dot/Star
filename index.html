@@ -277,6 +277,18 @@ html.pwa #tools{top:calc(var(--top) + 6px + env(safe-area-inset-top))}
   #outEmp .tool span{font-size:9px}
 }
 
+/* ═══ FAZ 80: HARİTA MODU TOAST'I ═══ */
+#mapToast{position:fixed;left:50%;top:calc(var(--top) + 14px);
+  transform:translate(-50%,-14px);z-index:1600;pointer-events:none;
+  background:rgba(11,16,28,.94);border:1px solid #35507a;border-radius:8px;
+  padding:7px 16px;display:flex;flex-direction:column;align-items:center;gap:2px;
+  font-family:var(--mono);opacity:0;visibility:hidden;
+  transition:opacity .22s ease, transform .22s ease, visibility .22s;
+  box-shadow:0 6px 22px rgba(0,0,0,.5);max-width:82vw;text-align:center}
+#mapToast.show{opacity:1;visibility:visible;transform:translate(-50%,0)}
+#mapToast b{font-size:11px;letter-spacing:.10em;color:var(--phos)}
+#mapToast span{font-size:9.5px;color:#9fb6cc;letter-spacing:.02em}
+
 /* ═══ FAZ 78B: LİDER SATIRI ═══ */
 .ldrRow{display:flex;gap:9px;align-items:center;padding:7px;margin:4px 0;
   background:#0b1220;border:1px solid #24354f;border-radius:8px}
@@ -980,6 +992,8 @@ body.fauxFull canvas#map{width:100vw !important;height:100dvh !important}
     <canvas id="map"></canvas>
     <div id="topbar"></div>
     <div id="tools"></div>
+<!-- FAZ 80: harita modu bildirimi -->
+<div id="mapToast"></div>
       <div id="inbox" class="hidden"></div>
     <div id="alerts"></div>
     <div id="timepod"></div>

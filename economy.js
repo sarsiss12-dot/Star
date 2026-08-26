@@ -58,7 +58,8 @@ function colonyOutput(e, sys, pl){
   if (pl.col && pl.col.leader !== undefined && typeof leaderOf === 'function'){
     const _L = leaderOf(e, pl.col.leader);
     if (_L && LEADER_TRAITS[_L.trait] && LEADER_TRAITS[_L.trait].e){
-      const _T = LEADER_TRAITS[_L.trait].e, _k = 1 + _L.rank * .10;
+      const _dm = (typeof disgraceMul === 'function') ? disgraceMul(_L) : 1;
+      const _T = LEADER_TRAITS[_L.trait].e, _k = (1 + _L.rank * .10) * _dm;
       _vMin = (_T.minMul || 0) * _k; _vAra = (_T.araMul || 0) * _k;
       _vYiy = (_T.yiyMul || 0) * _k; _vEne = (_T.eneMul || 0) * _k;
     }
@@ -514,7 +515,11 @@ function economyTick(init){
         const _LV = leaderOf(e, col.leader);
         if (_LV && LEADER_TRAITS[_LV.trait] && LEADER_TRAITS[_LV.trait].e &&
             LEADER_TRAITS[_LV.trait].e.stab)
-          target += LEADER_TRAITS[_LV.trait].e.stab * (1 + _LV.rank * .10);
+          target += LEADER_TRAITS[_LV.trait].e.stab * (1 + _LV.rank * .10) *
+                    ((typeof disgraceMul === 'function') ? disgraceMul(_LV) : 1);
+        /* FAZ 79: ifşa edilmiş vali istikrarı ayrıca düşürür */
+        if (_LV && _LV.disgraced && _LV.disgraced > (G.memAge || 0))
+          target -= 12;
       }
       if (hasCivic(e,'oneparty')) target = Math.max(target, 35);
       if (hasPerk(e,'zeal')) target = Math.max(target, 60);
@@ -4082,8 +4087,10 @@ function fleetLeaderMul(f, anahtar){
   const T = LEADER_TRAITS[L.trait];
   if (!T || !T.e) return 0;
   const v = T.e[anahtar] || 0;
-  /* Deneyim kazandıkça etki büyür: rank 0-4 → ×1 … ×1.4 */
-  return v * (1 + L.rank * .10);
+  /* Deneyim kazandıkça etki büyür: rank 0-4 → ×1 … ×1.4
+     FAZ 79: ifşa edilmiş lider %25 zayıf çalışır. */
+  const dm = (typeof disgraceMul === 'function') ? disgraceMul(L) : 1;
+  return v * (1 + L.rank * .10) * dm;
 }
 
 /* Bir koloninin vali çarpanı */
@@ -4120,6 +4127,119 @@ function leaderTick(){
         if (e.id === 0)
           say('👤 ' + L.name + ' terfi etti — rütbe ' + L.rank + '/4', 'win');
       }
+    }
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 79 — LİDERE ŞANTAJ / İTİBAR SUİKASTI
+   Lideri ÖLDÜRMEZ — itibarını yok eder. Ölüm temiz bir sondur;
+   ifşa olmuş ama görevde kalan bir komutan hem kendi birimini
+   zehirler hem devletini utandırır. Rakip lideri görevden almak
+   zorunda kalır ya da bedelini öder.
+   ═══════════════════════════════════════════════════════════════════ */
+const BLACKMAIL_COST = {etk: 110, ene: 450};
+const BLACKMAIL_MONTHS = 36;      // ifşanın ömrü
+const BLACKMAIL_PENALTY = .25;    // −%25 filo gücü / koloni istikrarı
+
+function canBlackmailLeader(e, o){
+  if (!e || !o || o.dead) return {ok:false, why:'Hedef yok'};
+  if (o.id === e.id) return {ok:false, why:'Kendi liderine şantaj yapılmaz'};
+  if (o.wild || o.crisisSide) return {ok:false, why:'Bu tarafın lideri yok'};
+  if (!e.contact[o.id]) return {ok:false, why:'Temas yok'};
+  if (typeof isPurifier === 'function' && isPurifier(e))
+    return {ok:false, why:'Doktrinin gizli operasyonlara kapalı'};
+  const lvl = (typeof intelOf === 'function') ? intelOf(e, o.id) : 0;
+  if (lvl < 2) return {ok:false, why:'En az 2. seviye istihbarat gerekir'};
+  const hedefler = (o.leaders || []).filter(L => L.post !== undefined &&
+    !(L.disgraced && L.disgraced > (G.memAge || 0)));
+  if (!hedefler.length)
+    return {ok:false, why:'Görevde, ifşa edilmemiş lideri yok'};
+  for (const r in BLACKMAIL_COST)
+    if ((e.res[r] || 0) < BLACKMAIL_COST[r])
+      return {ok:false, why:'Yetersiz ' + (RES[r] ? RES[r].n : r) +
+              ' (' + BLACKMAIL_COST[r] + ' gerekir)'};
+  return {ok:true, hedefler, lvl};
+}
+
+function blackmailLeader(e, o, leaderId){
+  const chk = canBlackmailLeader(e, o);
+  if (!chk.ok) return chk;
+  const L = (o.leaders || []).find(x => x.id === leaderId) ||
+            chk.hedefler[Math.floor(rnd() * chk.hedefler.length)];
+  if (!L) return {ok:false, why:'Lider seçilemedi'};
+  for (const r in BLACKMAIL_COST) e.res[r] -= BLACKMAIL_COST[r];
+
+  const ch = (typeof sabotageChance === 'function')
+    ? sabotageChance(e, o) : {basari:.4, ifsa:.3};
+  /* İtibar suikastı sabotajdan kolaydır: fiziksel erişim gerekmez,
+     yalnız doğru belgeyi doğru kişiye ulaştırmak yeter. */
+  const basari = clamp(ch.basari * 1.15, .08, .82);
+  const ifsa   = clamp(ch.ifsa * .85, .04, .55);
+
+  if (rnd() < basari){
+    L.disgraced = (G.memAge || 0) + BLACKMAIL_MONTHS;
+    L.disgraceBy = e.id;
+    /* Rütbe düşer — itibar geri kazanılması gereken bir şey */
+    if (L.rank > 0){ L.rank--; L.xp = 0; }
+    /* Devletin geneline hafif utanç */
+    for (const c of (o.colonies || [])){
+      const sy = G.sys[c.s], pl = sy && sy.planets[c.p];
+      if (pl && pl.col) pl.col.stab = clamp(pl.col.stab - 4, 0, 100);
+    }
+    if (o.factions) for (const f of o.factions) f.mood = clamp(f.mood - 5, 5, 95);
+
+    o.hitLog = o.hitLog || [];
+    o.hitLog.push({t: G.memAge || 0, k: 'blackmail', by: e.id,
+                   caught: false, known: false});
+
+    if (e.id === 0 && typeof UI !== 'undefined')
+      UI.eventArt('veri', 'İTİBAR SUİKASTI',
+        L.name + ' hakkındaki belgeler doğru ellere ulaştı. ' +
+        o.name + ' onu görevden almadı — alamıyor, yerine kimse yok. ' +
+        'Artık emrindeki herkes ona farklı bakıyor. ' + BLACKMAIL_MONTHS +
+        ' ay boyunca birimi %' + Math.round(BLACKMAIL_PENALTY * 100) +
+        ' zayıf çalışacak.', 'sci', 'kritik', o);
+    else if (o.id === 0 && typeof UI !== 'undefined')
+      UI.eventArt('infaz', 'KOMUTANIMIZ İFŞA OLDU',
+        L.name + ' hakkında bilinmeyen belgeler ortaya çıktı. Suçlamalar ' +
+        'ağır ve zamanlaması şüpheli. Birimi ' + BLACKMAIL_MONTHS +
+        ' ay boyunca gölge altında çalışacak.', 'war', 'kritik');
+    return {ok:true, basarili:true, leader:L};
+  }
+
+  if (rnd() < ifsa){
+    o.rel[e.id] = clamp((o.rel[e.id] || 0) - 40, -100, 100);
+    if (typeof remember === 'function') remember(o, e.id, 'komplo');
+    o._lastCB = {n:'İtibar Suikastı', w:1.15};
+    if (e.id === 0)
+      say('⚠ Şantaj belgeleri bize kadar izlendi — ' + o.name + ' öfkeli', 'war');
+    else if (o.id === 0 && typeof UI !== 'undefined')
+      UI.eventArt('infaz', 'ŞANTAJ GİRİŞİMİ İFŞA OLDU',
+        e.name + ' komutanlarımızdan birine kumpas kurmaya çalıştı. ' +
+        'Belgeler sahteydi ve izi kaynağına kadar sürdük.', 'war', 'kritik', e);
+    return {ok:true, basarili:false, ifsa:true};
+  }
+  return {ok:true, basarili:false, ifsa:false};
+}
+
+/* İfşa edilmiş lider hâlâ görevde mi? Çarpanı burada uygulanır. */
+function disgraceMul(L){
+  if (!L || !L.disgraced) return 1;
+  if (L.disgraced <= (G.memAge || 0)) return 1;
+  return 1 - BLACKMAIL_PENALTY;
+}
+
+/* Aylık: süresi dolan ifşalar temizlenir */
+function disgraceTick(){
+  for (const e of G.emps){
+    if (e.dead || !e.leaders) continue;
+    for (const L of e.leaders){
+      if (!L.disgraced) continue;
+      if (L.disgraced > (G.memAge || 0)) continue;
+      delete L.disgraced; delete L.disgraceBy;
+      if (e.id === 0)
+        say('👤 ' + L.name + ' itibarını geri kazandı', 'win');
     }
   }
 }
