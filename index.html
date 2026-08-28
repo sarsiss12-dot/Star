@@ -242,7 +242,15 @@ html.pwa #tools{top:calc(var(--top) + 6px + env(safe-area-inset-top))}
   opacity:0;visibility:hidden;
   transform:translateX(-8px) scale(.96);transform-origin:left center;
   transition:opacity .16s ease, transform .16s ease, visibility .16s;
-  z-index:99999;max-height:70dvh;overflow-y:auto;
+  /* ═══ FAZ 82: ZAMAN ÇUBUĞU ÇAKIŞMASI ═══
+     #timepod (z-index 20) ekranın SOL ALTINDA duruyor ve açılan
+     akordiyon onun üstüne binince tıklanamıyordu. İki düzeltme:
+     akordiyon z-index'i timepod'un çok üstüne çıkarıldı, ve
+     yüksekliği alt çubuğa çarpmayacak şekilde kısıtlandı —
+     70dvh yerine "ekran eksi alt çubuk payı". */
+  z-index:99999;
+  max-height:calc(100dvh - var(--top) - 96px);
+  overflow-y:auto;
   scrollbar-width:none;-ms-overflow-style:none}
 .grpOut::-webkit-scrollbar{display:none}
 .grpOut.open{opacity:1;visibility:visible;transform:translateX(0) scale(1)}
@@ -368,8 +376,9 @@ html.fauxFull, body.fauxFull, .faux-fullscreen{
    sol menü ve paneller her zaman tuvalin üstünde kalır. */
 body.fauxFull canvas#map{z-index:1 !important}
 body.fauxFull #tools{z-index:1200 !important}
-body.fauxFull #timepod,
 body.fauxFull #topbar{z-index:1200 !important}
+/* FAZ 82: tam ekranda da timepod akordiyonun altında kalsın */
+body.fauxFull #timepod{z-index:900 !important}
 body.fauxFull #side,
 body.fauxFull #panel{z-index:1300 !important}
 body.fauxFull #diploPane{z-index:1400 !important}
@@ -682,6 +691,7 @@ body.fauxFull canvas#map{width:100vw !important;height:100dvh !important}
   transition:right .18s ease}
 #sbToggle.off{right:0}
 
+/* FAZ 82: zaman çubuğu akordiyonun ALTINDA kalmalı (99999 vs 20) */
 #timepod{position:absolute;left:6px;bottom:6px;z-index:20;display:flex;align-items:center;gap:5px;
   background:rgba(11,16,28,.94);border:1px solid var(--line);padding:5px 7px}
 #stardate{font-family:var(--mono);font-size:12px;color:var(--phos);letter-spacing:.06em;min-width:74px}

@@ -394,6 +394,23 @@ const TRAITS = {
 
 /* Arayüzde okunabilir etiketler — hem trait hem doktrin/fizyoloji
    kartları bu tabloyu kullanır. */
+/* ═══ FAZ 82: PUAN mı YÜZDE mi? ═══
+   KÖK NEDEN: kurulum kartları `stab` dışındaki HER değeri ×100
+   yapıp % ekliyordu. trustCap:10 bir PUAN (güven tavanına +10)
+   ama ekranda "+1000%" olarak görünüyordu. Önceki fazlarda
+   silinmemesinin sebebi de bu: değer doğruydu, yalnız BİÇİMİ
+   yanlıştı — kimse veriyi aramadı, herkes metni aradı.
+   Bu tablo hangi anahtarların düz sayı olduğunu tek yerde
+   tanımlıyor; üç kart tipi de buradan okuyor. */
+const FLAT_KEYS = {
+  stab:1, sensor:1, trustCap:1, trustStart:1, capFlat:1, etkFlat:1,
+  eneFlat:1, habFlat:1, newColStab:1, colShock:1,
+  /* FAZ 82: habBonus da düz puan — "Uyumlu" traiti +1000%
+     görünüyordu. Adı habFlat'tan farklı olduğu için ilk taramada
+     kaçmıştı; ikisi de aynı şeyi ifade ediyor. */
+  habBonus:1, minFlat:1, alaFlat:1, araFlat:1, yiyFlat:1
+};
+
 const TRAIT_LABEL = {
   araMul:'Araştırma', minMul:'Maden', eneMul:'Enerji', yiyMul:'Yiyecek',
   dmgMul:'Gemi hasarı', rofMul:'Ateş hızı', hullMul:'Gövde',
@@ -403,7 +420,8 @@ const TRAIT_LABEL = {
   foeSpd:'Düşman toprağında hız', warTuk:'Savaşta tüketim',
   stab:'İstikrar', sensor:'Sensör menzili', tradeMul:'Ticaret',
   opCost:'Casusluk bedeli', shipSpeed:'Gemi üretimi',
-  borderMul:'Sınır büyümesi', newColStab:'Yeni koloni istikrarı'
+  borderMul:'Sınır büyümesi', newColStab:'Yeni koloni istikrarı',
+  trustCap:'Güven tavanı', trustStart:'Başlangıç güveni'
 };
 
 /* Makine Ağında "nüfus artışı" montajdır; yiyecek etkileri enerjiye kayar */
@@ -4865,7 +4883,9 @@ const TABS = [
    paylaşır, ayrı bir pencere sistemi kurulmaz. */
 const GLOBAL_PANES = {
   bilim:{ico:'✦', n:'BİLİM',   fn:'p_bilim'},
-  imp  :{ico:'👑', n:'DEVLET',  fn:'p_imp'}
+  imp  :{ico:'👑', n:'DEVLET',  fn:'p_imp'},
+  /* FAZ 82: liderler devlet panelinden ayrıldı — orası kalabalıktı */
+  ldr  :{ico:'👤', n:'LİDERLER', fn:'p_liderler'}
 };
 
 /* FAZ 74: UI → ui.js taşındı */
@@ -5925,8 +5945,12 @@ document.addEventListener('visibilitychange', ()=>{
    ═══════════════════════════════════════════════════════════════════ */
 function repaintPortraits(){
   try {
+    /* FAZ 82: kapsam genişletildi — sağ panel vali portresi
+       (chipPort), bildirim portresi ve devlet paneli ana portresi
+       de listede. Eksik kalan her sınıf siyah kutu demekti. */
     const seciciler = ['canvas.ldrPort', 'canvas.dpPort', 'canvas.pspr',
-                       'canvas.setPort', '#empPortrait'];
+                       'canvas.setPort', 'canvas.chipPort', 'canvas.notifPort',
+                       '#empPortrait'];
     for (const sec of seciciler){
       const list = document.querySelectorAll(sec);
       for (const cv of list) if (cv.dataset) delete cv.dataset.done;

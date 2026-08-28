@@ -42,16 +42,27 @@ const UI = {
             (aç/kapa). Harita modları akordiyondan ÇIKARILDI ve
             doğrudan göründü — tek dokunuşla zemin değişiyor.
             ═══════════════════════════════════════════════════════ -->
-       <!-- 1. HARİTA MODLARI — doğrudan, katlanmadan -->
-       <button class="tool mapMode" id="mm_siyasi" data-a="mapMode" data-x="siyasi"
-         title="Siyasi harita — devlet renkleri ve sınırlar">🌐</button>
-       <button class="tool mapMode" id="mm_diplomasi" data-a="mapMode" data-x="diplomasi"
-         title="Diplomatik harita — dost, düşman, tarafsız">🤝</button>
-       <button class="tool mapMode" id="mm_savas" data-a="mapMode" data-x="savas"
-         title="Savaş haritası — husumet ağı">🔥</button>
+       <!-- ═══ FAZ 82: TEK AKORDİYON ═══
+            Beş görünüm modu (üç zemin + radar + lojistik) tek
+            butonda toplandı. Sol bar dokuz düğmeden altıya indi. -->
+       <div class="toolGrp" id="grpMap">
+         <button class="tool grpHead" data-a="grpTog" data-x="map"
+           title="Harita ve görünüm modları">🗺<i class="grpDot" id="mapDot">🌐</i></button>
+         <div class="grpOut" id="outMap">
+           <button class="tool mapMode" id="mm_siyasi" data-a="mapMode" data-x="siyasi"
+             title="Devlet renkleri ve sınırlar">🌐<span>Siyasi</span></button>
+           <button class="tool mapMode" id="mm_diplomasi" data-a="mapMode" data-x="diplomasi"
+             title="Dost, düşman, tarafsız">🤝<span>Diplomatik</span></button>
+           <button class="tool mapMode" id="mm_savas" data-a="mapMode" data-x="savas"
+             title="Husumet ağı">🔥<span>Savaş</span></button>
+           <button class="tool logiBtn" id="logiBtn" data-a="mapMode" data-x="askeri"
+             title="İkmal hatları, menzil ve tedarik">⚓<span>Lojistik</span></button>
+           <button class="tool radarBtn" id="radarBtn" data-a="radarTog"
+             title="Filo hareketleri ve ralli hatları">🚀<span>Radar</span></button>
+         </div>
+       </div>
 
-       <div class="toolSep"></div>
-       <!-- 2. AKORDİYON: DEVLET VE DİPLOMASİ -->
+       <!-- AKORDİYON: DEVLET VE DİPLOMASİ -->
        <div class="toolGrp" id="grpEmp">
          <button class="tool grpHead" data-a="grpTog" data-x="emp"
            title="İmparatorluk">👑</button>
@@ -71,14 +82,7 @@ const UI = {
              title="Galaktik Piyasa">💱<span>Piyasa</span></button>
          </div>
        </div>
-
-       <div class="toolSep"></div>
-       <!-- 3. RADAR — bağımsız katman -->
-       <button class="tool radarBtn" id="radarBtn" data-a="radarTog"
-         title="Radar — filo hareketleri ve ralli hatları">🚀</button>
-       <!-- 4. LOJİSTİK — bağımsız katman, en altta -->
-       <button class="tool logiBtn" id="logiBtn" data-a="mapMode" data-x="askeri"
-         title="Lojistik — ikmal hatları, menzil ve tedarik">⚓</button>`;
+`;
     document.body.addEventListener('click', e=>{
       const el = e.target.closest('[data-a]');
       if (!el) return;
@@ -343,6 +347,10 @@ const UI = {
         });
         const lb = $('logiBtn');
         if (lb) lb.className = 'tool logiBtn' + (x === 'askeri' ? ' on' : '');
+        /* FAZ 82: akordiyon başlığındaki rozet aktif modu gösterir */
+        const dot = $('mapDot');
+        if (dot) dot.textContent = {siyasi:'🌐', diplomasi:'🤝',
+                                    askeri:'⚓', savas:'🔥'}[x] || '🌐';
         if (typeof closeAllGroups === 'function') closeAllGroups();
         const ad = {siyasi:'Siyasi', diplomasi:'Diplomatik',
                     askeri:'Lojistik', savas:'Savaş'}[x] || x;
@@ -1454,6 +1462,9 @@ const UI = {
     el.innerHTML = this['p_'+this.cur] ? this['p_'+this.cur]() : '';
     if (this.keepScroll) el.scrollTop = y;
     this.keepScroll = false;
+    /* FAZ 82: panel her yenilendiğinde YENİ canvas'lar doğuyor;
+       done bayrağı olmayanlar hemen boyanmalı yoksa siyah kalıyor. */
+    this.paintSprites();
     this.seltag();
     $('stardate').textContent = G.year + '.' + String(G.month).padStart(2,'0');
   },
@@ -5085,6 +5096,59 @@ const UI = {
   },
 
   /* =============== DEVLET =============== */
+  /* ═══════════════════════════════════════════════════════════════
+     FAZ 82 — LİDERLER PANELİ
+     Devlet sekmesinden ayrıldı: orada ekonomi, etik, hizip ve
+     kayıt menüsüyle birlikte sıkışıyordu. Artık kendi ferah
+     sekmesinde — liste, portreler ve alım butonları bir arada.
+     ═══════════════════════════════════════════════════════════════ */
+  p_liderler(){
+    const e = G.p;
+    let h = '';
+    if (typeof leaderPool !== 'function')
+      return `<div class="empty">Lider sistemi yüklenmedi.</div>`;
+    /* ═══ FAZ 78B: LİDER HAVUZU ═══ */
+    if (typeof leaderPool === 'function'){
+      const hav = leaderPool(e);
+      const bosta = hav.filter(L => L.post === undefined).length;
+      h += `<div class="ph">👤 LİDERLER (${hav.length}/8)</div>`;
+      h += `<div class="mini">Amiraller filolara, valiler gezegenlere atanır.
+        Görevdeyken tecrübe kazanır ve etkileri büyür (rütbe başına +%10).
+        ${bosta ? '<b>' + bosta + ' lider boşta.</b>' : 'Hepsi görevde.'}</div>`;
+      if (hav.length){
+        h += `<div class="dpList">`;
+        hav.forEach(L => {
+          const T = LEADER_TRAITS[L.trait];
+          const yer = L.post === undefined ? 'boşta'
+            : L.tip === 'amiral'
+              ? ((G.fleets.find(q=>q.id===L.post)||{}).name || 'filo')
+              : (function(){ const [si,pi]=String(L.post).split(':').map(Number);
+                  const sy=G.sys[si], p2=sy&&sy.planets[pi];
+                  return p2 ? (p2.col && p2.col.name || p2.name) : 'gezegen'; })();
+          h += `<div class="dpRow">
+            <canvas class="ldrPort" width="48" height="48"
+              style="width:26px;height:26px;flex:0 0 26px"
+              data-ldr="${L.seed}" data-lk="${L.look}" data-col="${L.col}"
+              data-rank="${L.rank}"></canvas>
+            <span class="dpNm">${T.ico} ${esc(L.name.slice(0,18))}</span>
+            <span class="dpTags" style="font-size:9px;color:#7d90ad">${esc(yer)}</span>
+            <b style="font-size:10px;color:${L.rank?'#6ff2c8':'#7d90ad'}">R${L.rank}</b>
+          </div>`;
+        });
+        h += `</div>`;
+      }
+      h += `<div class="act2">
+        <button class="abtn ${(e.res.etk||0)>=60?'pri':'dis'}" data-a="ldrHire"
+          data-x="amiral">⚓ AMİRAL AL<br><span style="font-size:9px">60 ◈</span></button>
+        <button class="abtn ${(e.res.etk||0)>=60?'pri':'dis'}" data-a="ldrHire"
+          data-x="vali">🏛 VALİ AL<br><span style="font-size:9px">60 ◈</span></button>
+      </div>`;
+    }
+
+
+    return h;
+  },
+
   p_imp(){
     const e = G.p, race = RACES[e.race];
     let h = `<div class="ph">${esc(e.name)}</div>`;
@@ -5471,44 +5535,6 @@ const UI = {
     const lg = G.log.slice(-14).reverse();
     h += lg.length ? lg.map(l=>`<div class="mini" style="padding:3px 0;border-bottom:1px solid #182338">${esc(l.m)}</div>`).join('')
                    : `<div class="mini">Kayıt yok.</div>`;
-    /* ═══ FAZ 78B: LİDER HAVUZU ═══ */
-    if (typeof leaderPool === 'function'){
-      const hav = leaderPool(e);
-      const bosta = hav.filter(L => L.post === undefined).length;
-      h += `<div class="ph">👤 LİDERLER (${hav.length}/8)</div>`;
-      h += `<div class="mini">Amiraller filolara, valiler gezegenlere atanır.
-        Görevdeyken tecrübe kazanır ve etkileri büyür (rütbe başına +%10).
-        ${bosta ? '<b>' + bosta + ' lider boşta.</b>' : 'Hepsi görevde.'}</div>`;
-      if (hav.length){
-        h += `<div class="dpList">`;
-        hav.forEach(L => {
-          const T = LEADER_TRAITS[L.trait];
-          const yer = L.post === undefined ? 'boşta'
-            : L.tip === 'amiral'
-              ? ((G.fleets.find(q=>q.id===L.post)||{}).name || 'filo')
-              : (function(){ const [si,pi]=String(L.post).split(':').map(Number);
-                  const sy=G.sys[si], p2=sy&&sy.planets[pi];
-                  return p2 ? (p2.col && p2.col.name || p2.name) : 'gezegen'; })();
-          h += `<div class="dpRow">
-            <canvas class="ldrPort" width="48" height="48"
-              style="width:26px;height:26px;flex:0 0 26px"
-              data-ldr="${L.seed}" data-lk="${L.look}" data-col="${L.col}"
-              data-rank="${L.rank}"></canvas>
-            <span class="dpNm">${T.ico} ${esc(L.name.slice(0,18))}</span>
-            <span class="dpTags" style="font-size:9px;color:#7d90ad">${esc(yer)}</span>
-            <b style="font-size:10px;color:${L.rank?'#6ff2c8':'#7d90ad'}">R${L.rank}</b>
-          </div>`;
-        });
-        h += `</div>`;
-      }
-      h += `<div class="act2">
-        <button class="abtn ${(e.res.etk||0)>=60?'pri':'dis'}" data-a="ldrHire"
-          data-x="amiral">⚓ AMİRAL AL<br><span style="font-size:9px">60 ◈</span></button>
-        <button class="abtn ${(e.res.etk||0)>=60?'pri':'dis'}" data-a="ldrHire"
-          data-x="vali">🏛 VALİ AL<br><span style="font-size:9px">60 ◈</span></button>
-      </div>`;
-    }
-
     h += `<div class="act2" style="margin-top:12px"><button class="abtn" data-a="save">KAYIT MENÜSÜ</button></div>`;
     return h;
   },
@@ -6797,6 +6823,8 @@ function renderSetup(){
           const ad = etiket[mk] || mk;
           const yazi = (mk === 'stab' || mk === 'sensor' || mk === 'newColStab')
             ? (v > 0 ? '+' : '') + v
+            : (typeof FLAT_KEYS !== 'undefined' && FLAT_KEYS[mk])
+              ? (v > 0 ? '+' : '') + v                 // FAZ 82
             : (v > 0 ? '+' : '−') + Math.round(Math.abs(v) * 100) + '%';
           (v > 0 ? arti : eksi).push(ad + ' ' + yazi);
         }
@@ -6877,8 +6905,9 @@ function renderSetup(){
         const v = P.e[mk];
         if (!v) continue;
         const ad = TRAIT_LABEL[mk] || mk;
-        st.push(ad + ' ' + (mk === 'stab' ? (v>0?'+':'') + v
-          : (v>0?'+':'−') + Math.round(Math.abs(v)*100) + '%'));
+        st.push(ad + ' ' + ((typeof FLAT_KEYS !== 'undefined' && FLAT_KEYS[mk])
+            ? (v>0?'+':'') + v                       // FAZ 82: düz puan
+            : (v>0?'+':'−') + Math.round(Math.abs(v)*100) + '%'));
       }
       if (P.yiyer === 'enerji')  st.push('Enerjiyle beslenir');
       if (P.yiyer === 'mineral') st.push('Mineralle beslenir');
@@ -6936,8 +6965,10 @@ function renderSetup(){
         const v = t.e[mk];
         if (!v) continue;
         const ad = (typeof TRAIT_LABEL !== 'undefined' && TRAIT_LABEL[mk]) || mk;
-        etki.push(ad + ' ' + (v > 0 ? '+' : '−') +
-          Math.round(Math.abs(v) * 100) + '%');
+        /* FAZ 82: düz puan anahtarları yüzdeye çevrilmez */
+        etki.push(ad + ' ' + ((typeof FLAT_KEYS !== 'undefined' && FLAT_KEYS[mk])
+          ? (v > 0 ? '+' : '') + v
+          : (v > 0 ? '+' : '−') + Math.round(Math.abs(v) * 100) + '%'));
       }
       h += `<button class="tchip ${on?'on':''} ${kilit?'dis':''}"
         data-a="trait" data-x="${k}"
@@ -7077,7 +7108,9 @@ function renderSetup(){
         const ad = (typeof TRAIT_LABEL !== 'undefined' && TRAIT_LABEL[mk]) || mk;
         etki.push(ad + ' ' + (mk === 'sensor'
           ? (v>0?'+':'') + v
-          : (v>0?'+':'−') + Math.round(Math.abs(v)*100) + '%'));
+          : (typeof FLAT_KEYS !== 'undefined' && FLAT_KEYS[mk])
+            ? (v>0?'+':'') + v                       // FAZ 82: düz puan
+            : (v>0?'+':'−') + Math.round(Math.abs(v)*100) + '%'));
       }
       h += `<button class="card civ ${on?'on':''} ${cv.sars?'sars':''} ${kilit?'dis':''}"
         data-a="civic" data-x="${k}"

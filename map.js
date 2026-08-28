@@ -2250,8 +2250,8 @@ const View = {
             const birUcu = net.has(sy.id) || net.has(l);
             const a = this.w2s(sy.x, sy.y), b = this.w2s(o2.x, o2.y);
             if (ikiUcu){
-              g.strokeStyle = 'rgba(111,242,200,.72)';
-              g.lineWidth = Math.max(1.4, z * 2.2);
+              g.strokeStyle = 'rgba(111,242,200,.46)';   // FAZ 82: yumuşatıldı
+              g.lineWidth = Math.max(1, z * 1.5);
             } else if (birUcu){
               g.strokeStyle = 'rgba(242,212,82,.34)';       // sınır hattı
               g.lineWidth = Math.max(.9, z * 1.4);
@@ -2270,9 +2270,12 @@ const View = {
           const sy = G.sys[pid];
           if (!sy || !this.inView(sy.x, sy.y)) continue;
           const p3 = this.w2s(sy.x, sy.y);
-          g.strokeStyle = 'rgba(111,242,200,' + nb2.toFixed(2) + ')';
-          g.lineWidth = Math.max(1, z * 1.6);
+          /* FAZ 82: liman halkası da ince ve kesikli */
+          g.strokeStyle = 'rgba(111,242,200,' + (nb2 * .7).toFixed(2) + ')';
+          g.lineWidth = 1;
+          g.setLineDash([2, 3]);
           g.beginPath(); g.arc(p3.x, p3.y, 11, 0, Math.PI*2); g.stroke();
+          g.setLineDash([]);
           g.fillStyle = 'rgba(111,242,200,.9)';
           g.fillText('⚓', p3.x, p3.y - 13);
         }
@@ -2320,20 +2323,23 @@ const View = {
         if (liste.length){
           g.save();
           const nb = .55 + .45 * Math.sin(t / 380);
+          /* ═══ FAZ 82: ZARİF MENZİL ÇEMBERİ ═══
+             Eskiden her sistemin etrafına kalın bir halka VE soluk
+             bir dolgu çiziliyordu; onlarca sistem üst üste binince
+             ekran yeşil bir bulamaca dönüyordu.
+             Şimdi: dolgu YOK, çizgi 1 px, kesik çizgili, düşük
+             opaklık. Bilgi aynı, gürültü yok. */
+          g.setLineDash([3, 4]);
+          g.lineWidth = 1;
+          g.strokeStyle = 'rgba(111,242,200,' + (nb * .34).toFixed(2) + ')';
           for (const sid of liste){
             const sy = G.sys[sid];
             if (!sy || !this.inView(sy.x, sy.y)) continue;
             const p2 = this.w2s(sy.x, sy.y);
-            const rr = Math.max(4, this.starR ? this.starR(sy)
-                       : Math.max(2.2, sy.star.r * this.cam.z * 1.5)) + 5;
-            /* Dış hare */
-            g.strokeStyle = 'rgba(111,242,200,' + (nb * .55).toFixed(2) + ')';
-            g.lineWidth = Math.max(.9, this.cam.z * 1.4);
+            const rr = Math.max(4, Math.max(2.2, sy.star.r * this.cam.z * 1.5)) + 5;
             g.beginPath(); g.arc(p2.x, p2.y, rr, 0, Math.PI * 2); g.stroke();
-            /* İç dolgu — çok soluk */
-            g.fillStyle = 'rgba(111,242,200,' + (nb * .10).toFixed(2) + ')';
-            g.beginPath(); g.arc(p2.x, p2.y, rr, 0, Math.PI * 2); g.fill();
           }
+          g.setLineDash([]);
           /* Filonun kendi sistemi vurgulu */
           const kendi = G.sys[f.sys];
           if (kendi && this.inView(kendi.x, kendi.y)){
