@@ -2277,12 +2277,26 @@ function setupGame(cfg){
   G.emps = [];
   G.fleets = []; G.nextFleet = 1;
   G.day = 0; G.year = 2210; G.month = 1; G.log = []; G.over = null;
-  G.memAge = 0;                    // hafıza/soğuk savaş tur sayacı
-  // yeni oyunda konsey/kriz sayaçları sıfırlanmalı
-  G.cncAge = 0; G.council = null; G.feds = []; G.inbox = []; G.chainQueue = [];
-  G.raids = {}; G.friction = {}; G.fx = [];
-  G.fallStats = {uzay:0, teslim:0, katastrof:0, temiz:0, colossus:0, yutuldu:0, ayrilik:0};
-  G.sabStats = {basari:0, ifsa:0, sessiz:0, cift:0, tech:0, kiskirt:0, falseflag:0};
+  /* ═══ FAZ 85A: POLİTİK KÜRESEL SIFIRLAMA ═══
+     Eskiden yalnız memAge/cncAge/council/feds/friction elle
+     sıfırlanıyordu; fedUid, rebelAlliance, megaWatch ve sandbox
+     hiç sıfırlanmadığı için ÖNCEKİ oyundan yeni oyuna sızıyordu.
+     Dokuz alan da tek kaynaktan (politicalWorldDefaults) gelir. */
+  resetPoliticalRuntimeState();
+  /* ═══ FAZ 85D: KAMPANYA SIFIRLAMASI ═══
+     Eskiden yalnız chainQueue/fallStats/sabStats elle sıfırlanıyordu;
+     upheaval, upAge, upLast ve market hiç temizlenmediği için ÖNCEKİ
+     oyunun çalkantısı ve piyasa fiyatları yeni oyuna SIZIYORDU.
+     Yedi alan da tek merkezî kaynaktan gelir. */
+  resetCampaignRuntimeState();
+  /* FAZ 85F: korsan/kalıntı/baskın durumu, yeni oyunun kendi
+     üretimi (initRuins / korsan devleti) ÇALIŞMADAN ÖNCE temizlenir. */
+  resetSimulationRuntimeState();
+  /* FAZ 85E: bildirim kuyruğu, UID sayacı, görülmüş zincirler ve
+     geçici modal/teklif alanları tek merkezden temizlenir. */
+  resetEventsRuntimeState();
+  G.fx = [];
+  G._warAuth = null; G._warWhy = null; G._dealAuth = false;
 
   // oyuncu
   const pe = makeEmpire(0, cfg.race, cfg.name, false, rnd, cfg.traits);
@@ -2594,6 +2608,10 @@ function setupGame(cfg){
 
   // kayıp uygarlık kalıntıları ve kriz zamanlayıcısı
   if (typeof initRuins === 'function') initRuins(cfg, rnd);
+  /* FAZ 85C: önceki oturumun krizi/kriz kimliği yeni oyuna SIZMASIN.
+     Sızan bir crisisId yeni oyunda mevcut bir indekse denk gelirse
+     ensureCrisisEmpire() sıradan bir devleti kriz devleti sanardı. */
+  if (typeof resetCrisisRuntimeState === 'function') resetCrisisRuntimeState();
   if (typeof initCrisis === 'function') initCrisis();
 
   // Gölgeden kökeni: hiç temas kurulmamış başlar
@@ -2677,12 +2695,37 @@ function fxCompact(){
   arr.length = w;
 }
 
+/* ═══ FAZ 86C.2: YAN ETKİ TAMPONU ═══
+   `say` tek noktadan AUDIO.forLog + G.log + UI.alert tetikliyor. Bir
+   anlaşma işlemi sürerken bunlar DOM'a yayımlanırsa rollback ile
+   güvenilir biçimde silinemez. Transaction açıkken çağrılar sırayla
+   tamponlanır; G.log'a yazılmaz, ses ve modal çalışmaz. Başarılı
+   commit'ten sonra ÖZGÜN SIRAYLA birer kez yayımlanır; rollback
+   tamponu tamamen atar. Transaction dışında davranış DEĞİŞMEZ. */
 function say(msg, cls){
+  if (G._sideBuf){ G._sideBuf.push({tur:'say', msg, cls}); return; }
   /* FAZ 19: bildirim sınıfı sesi belirler (savaş/zafer/keşif) */
   if (typeof AUDIO !== 'undefined') { try { AUDIO.forLog(cls); } catch(err){} }
   G.log.push({m:msg, c:cls||'', d:G.day});
   if (G.log.length > 60) G.log.shift();
   UI.alert(msg, cls);
+}
+/* Doğrudan UI etkileri (ör. UI.warDeclared) de aynı politikaya bağlanır. */
+function deferUI(fn, ...args){
+  if (G._sideBuf){ G._sideBuf.push({tur:'ui', fn, args}); return; }
+  try { fn(...args); } catch(err){}
+}
+function flushSideBuffer(buf){
+  for (const it of buf){
+    if (it.tur === 'say'){
+      if (typeof AUDIO !== 'undefined') { try { AUDIO.forLog(it.cls); } catch(err){} }
+      G.log.push({m:it.msg, c:it.cls||'', d:G.day});
+      if (G.log.length > 60) G.log.shift();
+      try { UI.alert(it.msg, it.cls); } catch(err){}
+    } else if (it.tur === 'ui'){
+      try { it.fn(...it.args); } catch(err){}
+    }
+  }
 }
 
 /* ---------- filolar ---------- */
@@ -3965,11 +4008,13 @@ function purgeEmpire(e){
    ölçemediğim için kör atış yapmıştım; artık sayılıyor.
    G.fallStats üzerinden okunur, kayıtta saklanmaz. */
 function recordSabotage(tur){
-  if (!G.sabStats) G.sabStats = {basari:0, ifsa:0, sessiz:0, cift:0, tech:0, kiskirt:0, falseflag:0};
+  /* FAZ 85D: tek kanonik varsayılan — yardSabo ve supplyHack
+     eskiden kümede yoktu ve bu iki sayaç sessizce artmıyordu. */
+  if (!G.sabStats) G.sabStats = sabStatsDefaults();
   if (G.sabStats[tur] !== undefined) G.sabStats[tur]++;
 }
 function recordFall(tur){
-  if (!G.fallStats) G.fallStats = {uzay:0, teslim:0, katastrof:0, temiz:0, colossus:0, yutuldu:0, ayrilik:0};
+  if (!G.fallStats) G.fallStats = fallStatsDefaults();
   if (G.fallStats[tur] !== undefined) G.fallStats[tur]++;
 }
 function fallReport(){
@@ -4640,7 +4685,21 @@ function crisisScale(){
   return taban * tekMul * yayMul;
 }
 function ensureCrisisEmpire(){
-  if (G.crisisId !== undefined && G.emps[G.crisisId]) return G.emps[G.crisisId];
+  /* ═══ FAZ 85D: KİMLİK GUARD'I ═══
+     Eski hâl mevcut HERHANGİ bir sayısal kimliği, o devletin
+     gerçekten kriz tarafı olup olmadığına bakmadan kabul ediyordu.
+     Bayat/geçersiz bir crisisId sıradan bir oyuncu veya AI devletini
+     kriz devleti olarak döndürebilirdi. Artık dört koşul da aranır;
+     sağlanmazsa bayat kimlik TEMİZLENİR ve gerçek yeni kriz devleti
+     üretilir. */
+  const kid = G.crisisId;
+  if (typeof kid === 'number' && isFinite(kid)){
+    const mevcut = G.emps[kid];
+    if (mevcut && mevcut.crisisSide === true && !mevcut.dead) return mevcut;
+    delete G.crisisId;                 // bayat/geçersiz kimlik
+  } else if (kid !== undefined){
+    delete G.crisisId;                 // null veya sayı olmayan değer
+  }
   const c = makeEmpire(G.emps.length, 'klan',
     CRISIS_NAMES[Math.floor(rnd() * CRISIS_NAMES.length)], true, rnd, []);
   c.col = '#c026d3';
@@ -5452,7 +5511,10 @@ function menuStars(){
   if (!cv) return;
   const g = cv.getContext('2d');
   const fit = ()=>{ cv.width = cv.offsetWidth; cv.height = cv.offsetHeight; };
-  fit(); window.addEventListener('resize', fit);
+  fit();
+  /* FAZ 83.3: bağımsız dinleyici yerine merkezî abonelik */
+  if (typeof onResize === 'function') onResize('menuStars', fit);
+  else window.addEventListener('resize', fit);
   const rnd = mulberry32(4242);
   const st = [];
   for (let i=0;i<160;i++) st.push({x:rnd(), y:rnd(), r:rnd()<.8?1:2, a:.2+rnd()*.7, s:.02+rnd()*.06});
@@ -5707,9 +5769,1028 @@ async function storeGet(k){
   return MEM_SAVE;
 }
 
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 85A — POLİTİK DÜNYA DURUMU KAYDET/YÜKLE BÜTÜNLÜĞÜ
+
+   KÖK NEDEN: v3 kayıt yükü yalnız cfg/tarih/sistem/imparatorluk/filo
+   tutuyordu. Diplomatik dünyanın küresel durumu (Konsey, federasyonlar,
+   isyan ittifakı, sınır sürtüşmesi, mega-yapı gözlemi, sandbox ve
+   ay sayaçları) `G` üzerinde yaşıyor ve HİÇ kaydedilmiyordu. Sonuç:
+   yüklemede Konsey ve federasyonlar yok oluyor, zaman damgaları
+   yanlış yaşlanıyor ve aynı oturumda başka kayıt açılırsa ESKİ oyunun
+   politik verisi yeni yüke sızıyordu.
+
+   Bu üç yardımcı tek bir `world` alt nesnesini yönetir. Kriz, korsan,
+   ticaret, pazar ve olay kuyruğu KASTEN kapsam dışıdır (Faz 85B).
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Politik küresel alanların yeni-oyun/temiz varsayılanları.
+   Tek kaynak: hem setupGame hem de v3 göçü buradan beslenir. */
+function politicalWorldDefaults(){
+  return {memAge:0, cncAge:0, council:null, feds:[], fedUid:0,
+          friction:{}, rebelAlliance:null, megaWatch:[], sandbox:false};
+}
+
+/* JSON ile güvenle taşınabilir derin kopya. Fonksiyon, DOM düğümü,
+   Canvas ve türetilmiş önbellekler JSON.stringify tarafından zaten
+   düşürülür; döngüsel yapı gelirse sessizce varsayılana düşeriz. */
+function jsonSafeClone(v, yedek){
+  try {
+    const t = JSON.stringify(v);
+    return t === undefined ? yedek : JSON.parse(t);
+  } catch(e){ return yedek; }
+}
+
+/* --- KAYIT TARAFI --- */
+function serializePoliticalWorld(){
+  const d = politicalWorldDefaults();
+  return {
+    memAge: (typeof G.memAge === 'number') ? G.memAge : d.memAge,
+    cncAge: (typeof G.cncAge === 'number') ? G.cncAge : d.cncAge,
+    council: G.council ? jsonSafeClone(G.council, null) : null,
+    feds: jsonSafeClone(G.feds || [], []),
+    fedUid: (typeof G.fedUid === 'number') ? G.fedUid : d.fedUid,
+    friction: jsonSafeClone(G.friction || {}, {}),
+    rebelAlliance: G.rebelAlliance ? jsonSafeClone(G.rebelAlliance, null) : null,
+    megaWatch: jsonSafeClone(G.megaWatch || [], []),
+    /* sandbox gerçek bir boolean: false ile undefined ayrı anlam taşır */
+    sandbox: G.sandbox === true
+  };
+}
+
+/* --- SIFIRLAMA --- */
+/* Yeni oyunda ve politik veri taşımayan kayıtlarda çağrılır. Amaç:
+   önceki oyunun Konseyi, federasyonları, isyan ittifakı, fedUid'i ve
+   sandbox durumu YENİ duruma sızmasın. */
+function resetPoliticalRuntimeState(){
+  const d = politicalWorldDefaults();
+  G.memAge = d.memAge; G.cncAge = d.cncAge;
+  G.council = d.council; G.feds = d.feds; G.fedUid = d.fedUid;
+  G.friction = d.friction; G.rebelAlliance = d.rebelAlliance;
+  G.megaWatch = d.megaWatch; G.sandbox = d.sandbox;
+}
+
+/* --- YÜKLEME TARAFI --- */
+/* `data` v4 kaydındaki world nesnesi; v3'te YOKTUR.
+   `sv` kaydın sürümü (v3 kayıtlarda 3 veya undefined).
+
+   Kurallar:
+   · Geçerli 0 / false / null değerleri `||` ile ezilmez —
+     alan varlığı hasOwnProperty ile sorulur.
+   · v3'te politik veri KURTARILAMAZ; uydurmak yerine dürüstçe
+     varsayılana düşülür. Yalnız ay sayaçları kayıt tarihinden
+     deterministik olarak türetilir (global RNG TÜKETİLMEZ). */
+function restorePoliticalWorld(data, sv){
+  const has = (o,k) => o && Object.prototype.hasOwnProperty.call(o, k);
+  /* Her yükleme önce temiz zemine oturur: önceki oturumun politik
+     verisi hiçbir koşulda sızmaz. */
+  resetPoliticalRuntimeState();
+
+  if (!data || typeof data !== 'object'){
+    /* ── V3 GÖÇÜ ──
+       Konsey/federasyon/isyan bilgisi kayıtta hiç yok: varsayılan
+       kalır. Saatler sıfırlanmaz — mevcut zaman modeliyle uyumlu,
+       deterministik bir ay sayısına göç edilir (bir ay ≈ 30 gün). */
+    const ay = Math.max(0, Math.floor((G.day || 0) / 30));
+    G.memAge = ay;
+    G.cncAge = ay;
+    return {migrated:true, from:(sv || 3), months:ay};
+  }
+
+  if (has(data,'memAge') && typeof data.memAge === 'number') G.memAge = data.memAge;
+  if (has(data,'cncAge') && typeof data.cncAge === 'number') G.cncAge = data.cncAge;
+  if (has(data,'council'))  G.council = data.council ? jsonSafeClone(data.council, null) : null;
+  if (has(data,'feds') && Array.isArray(data.feds)) G.feds = jsonSafeClone(data.feds, []);
+  if (has(data,'fedUid') && typeof data.fedUid === 'number') G.fedUid = data.fedUid;
+  if (has(data,'friction') && data.friction && typeof data.friction === 'object')
+    G.friction = jsonSafeClone(data.friction, {});
+  if (has(data,'rebelAlliance'))
+    G.rebelAlliance = data.rebelAlliance ? jsonSafeClone(data.rebelAlliance, null) : null;
+  if (has(data,'megaWatch') && Array.isArray(data.megaWatch))
+    G.megaWatch = jsonSafeClone(data.megaWatch, []);
+  if (has(data,'sandbox')) G.sandbox = (data.sandbox === true);
+
+  /* BÜTÜNLÜK: fedUid mevcut en yüksek federasyon ID'sinden küçük
+     kalırsa yeni federasyon ÇAKIŞAN id alır. Yalnız bozuk durumda
+     düzeltiriz; geçerli veriyi "onarım" adına değiştirmeyiz. */
+  let enBuyuk = 0, onarim = null;
+  for (const f of G.feds) if (f && typeof f.id === 'number' && f.id > enBuyuk) enBuyuk = f.id;
+  if (G.fedUid < enBuyuk){
+    onarim = 'fedUid ' + G.fedUid + ' → ' + enBuyuk;
+    G.fedUid = enBuyuk;
+  }
+  return {migrated:false, from:(sv || 4), repair:onarim};
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 85C — OYUN SONU KRİZİ KAYDET/YÜKLE SÜREKLİLİĞİ
+
+   KÖK NEDEN: v4 yükü G.crisis ve G.crisisId'yi hiç taşımıyordu.
+   ÖLÇÜLEN SONUÇLAR (düzeltmeden önce):
+     · Aktif kriz yüklemede tamamen kayboluyordu (stage/timer/kills/
+       need/contrib/warned/over ve crisisId), ama crisisSide devleti
+       ve filoları emps/fl içinde ÖKSÜZ kalıyordu.
+     · Çözülmüş kriz (over=true) de kayboluyordu.
+     · Bekleyen krizde mevcut oturumun ZEHİRLİ G.crisis'i olduğu gibi
+       kalıyordu — kayıttaki değer geri gelmiyordu.
+     · G.crisisId aynı sayfada yeni oyuna SIZIYORDU. Sızan kimlik yeni
+       oyunda mevcut bir indekse denk gelirse ensureCrisisEmpire()
+       o SIRADAN devleti kriz devleti sanıp geri döndürüyordu.
+
+   TASARIM NOTU — null yasağı (FAZ 85D'de düzeltilen açıklama):
+   `G.emps[null]` JavaScript'te "null" ADLI özelliği arar ve normalde
+   undefined döner — doğrudan 0. indekse ÇÖZÜLMEZ. 0'a dönüşme yalnız
+   sayısal bağlamda olur (`+null === 0`, `G.emps[+null] === G.emps[0]`).
+   Yine de crisisId çalışma zamanında ASLA null bırakılmaz: mevcut kod
+   `G.crisisId !== undefined` ile varlık sınar ve null bu sınavı GEÇER,
+   yani null bir kimlik "tanımlı" sayılır. Bu yüzden ya sayıdır ya da
+   yoktur (delete). Kayıt yükünde null yalnız "kimlik yok" işaretidir.
+   ═══════════════════════════════════════════════════════════════════ */
+function crisisWorldDefaults(){
+  return {crisis:null, crisisId:null};
+}
+
+/* Kayıtta gerçek crisisSide devletlerini deterministik olarak bulur
+   (id sırasına göre). Yükleme sırasında RNG TÜKETMEZ. */
+function crisisSideCandidates(){
+  const a = [];
+  for (const e of G.emps)
+    if (e && !e.dead && e.crisisSide === true && typeof e.id === 'number') a.push(e.id);
+  a.sort((x,y) => x - y);
+  return a;
+}
+
+/* --- KAYIT TARAFI --- */
+function serializeCrisisWorld(){
+  return {
+    crisis: G.crisis ? jsonSafeClone(G.crisis, null) : null,
+    /* Kimlik yoksa kayıtta null; çalışma zamanında ASLA null olmaz. */
+    crisisId: (typeof G.crisisId === 'number') ? G.crisisId : null
+  };
+}
+
+/* --- SIFIRLAMA --- */
+function resetCrisisRuntimeState(){
+  G.crisis = null;
+  delete G.crisisId;          // null DEĞİL — G.emps[null] tuzağı
+}
+
+/* --- YÜKLEME TARAFI --- */
+/* `data` v5 kaydındaki threats nesnesi; v4 ve öncesinde YOKTUR. */
+function restoreCrisisWorld(data, sv){
+  const has = (o,k) => o && Object.prototype.hasOwnProperty.call(o, k);
+  /* Her yükleme temiz zemine oturur: önceki oturumun krizi sızmaz. */
+  resetCrisisRuntimeState();
+  const aday = crisisSideCandidates();
+  const bilgi = {migrated:false, from:(sv || 5), repair:null, note:null};
+
+  if (!data || typeof data !== 'object'){
+    return migrateCrisisFromLegacy(aday, sv, bilgi);
+  }
+
+  if (has(data,'crisis'))
+    G.crisis = data.crisis ? jsonSafeClone(data.crisis, null) : null;
+
+  const kayitliId = has(data,'crisisId') ? data.crisisId : null;
+  if (typeof kayitliId === 'number' &&
+      G.emps[kayitliId] && G.emps[kayitliId].crisisSide === true){
+    /* Geçerli kayıt — "onarım" adına DEĞİŞTİRİLMEZ. */
+    G.crisisId = kayitliId;
+  } else if (aday.length === 1){
+    G.crisisId = aday[0];
+    if (kayitliId !== null && kayitliId !== undefined)
+      bilgi.repair = 'crisisId ' + kayitliId + ' geçersiz → ' + aday[0];
+  } else if (aday.length > 1){
+    /* Deterministik seçim: en küçük id. */
+    G.crisisId = aday[0];
+    bilgi.repair = 'birden çok crisisSide adayı [' + aday.join(',') +
+                   '] → en küçük id ' + aday[0] + ' seçildi';
+  } else {
+    /* Aday YOK: sıradan bir devleti ASLA kriz tarafı yapma. */
+    if (kayitliId !== null && kayitliId !== undefined)
+      bilgi.repair = 'crisisId ' + kayitliId +
+                     ' geçersiz ve crisisSide adayı yok — bağlanmadı';
+    if (G.crisis && G.crisis.stage > 0 && !G.crisis.over){
+      /* Aktif kriz tarafsız yürüyemez: normal devleti ele geçirmek
+         yerine krizi güvenle sonlandırılmış say. */
+      G.crisis.over = true;
+      bilgi.note = 'aktif kriz tarafsız kaldı — güvenli biçimde devre dışı';
+    }
+  }
+  return bilgi;
+}
+
+/* --- V4 VE ÖNCESİ GÖÇÜ ---
+   Kesin bilgi geri UYDURULMAZ. RNG tüketilmez; gereken her yerde
+   G.seed'den yerel, saf bir hash kullanılır. */
+function crisisSeedHash(tuz){
+  /* Küçük deterministik hash — global rnd()/RND_STATE'e DOKUNMAZ. */
+  let h = 2166136261 ^ (((G.seed || 0) | 0) >>> 0);
+  const s = String(tuz);
+  for (let i = 0; i < s.length; i++){
+    h ^= s.charCodeAt(i);
+    h = Math.imul(h, 16777619) >>> 0;
+  }
+  return h >>> 0;
+}
+
+function migrateCrisisFromLegacy(aday, sv, bilgi){
+  bilgi.migrated = true;
+  bilgi.from = (sv || 4);
+  const key = (G.cfg && G.cfg.crisis) || 'normal';
+
+  /* 1) Kriz kapalıysa: hiçbir şey kurma. */
+  if (key === 'kapali' || (typeof crisisYear === 'function' && !crisisYear())){
+    G.crisis = null;
+    bilgi.note = 'cfg krizi kapalı — kriz kurulmadı';
+    return bilgi;
+  }
+
+  const ay = Math.max(0, Math.floor((G.day || 0) / 30));
+
+  /* 2) Kayıtta crisisSide devleti YOK → bekleyen zamanlayıcı. */
+  if (!aday.length){
+    const w = (typeof CRISIS_WINDOW !== 'undefined' && CRISIS_WINDOW[key])
+              ? CRISIS_WINDOW[key]
+              : (typeof CRISIS_WINDOW !== 'undefined' ? CRISIS_WINDOW.normal : [150,200]);
+    /* Deterministik: seed hash'i pencere içine düşürülür. */
+    const atMonth = w[0] + (crisisSeedHash('crisis:' + key) % (w[1] - w[0] + 1));
+    G.crisis = {stage:0, at: 2210 + Math.round(atMonth / 12), atMonth,
+                age: ay, kills:0, need:0, over:false, warned:false, contrib:{}};
+    bilgi.note = 'v4: kriz tarafı yok → bekleyen zamanlayıcı seed-hash ile ' +
+                 'kuruldu (özgün rastgele tarih KURTARILAMAZ), age=gün/30';
+    return bilgi;
+  }
+
+  /* Kriz tarafı var: öksüz bırakma, gerçek devlete bağla. */
+  G.crisisId = aday[0];
+  if (aday.length > 1)
+    bilgi.repair = 'v4: birden çok crisisSide adayı [' + aday.join(',') +
+                   '] → en küçük id ' + aday[0];
+  const canli = G.fleets.filter(f => f.e === G.crisisId &&
+                                     f.ships && f.ships.length).length;
+
+  if (canli > 0){
+    /* 3) Kriz tarafı VE yaşayan filo var → aktif kriz.
+       Filo sayısı aşamayı GÜVENİLİR biçimde vermez (dalgalar ölür,
+       swarmCap birleştirir), bu yüzden aşama uydurulmaz: en düşük
+       aktif aşama ile devam edilir. */
+    G.crisis = {stage:1, at: (G.year || 2210), atMonth: ay, age: ay,
+                kills:0, need:0, over:false, warned:true, contrib:{},
+                timer:0};
+    bilgi.note = 'v4: aktif kriz tarafı+filo bulundu → crisisId bağlandı; ' +
+                 'stage/timer/kills/need/contrib KURTARILAMADI, dürüst ' +
+                 'varsayılan (stage=1) kullanıldı';
+  } else {
+    /* 4) Kriz tarafı var ama filo yok → büyük olasılıkla ÇÖZÜLMÜŞ.
+       Krizi yeniden başlatıp galaksiyi ikinci kez cezalandırma. */
+    G.crisis = {stage:3, at: (G.year || 2210), atMonth: ay, age: ay,
+                kills:0, need:0, over:true, warned:true, contrib:{}, timer:0};
+    bilgi.note = 'v4: kriz tarafı var ama yaşayan kriz filosu yok → ' +
+                 'çözülmüş kabul edildi (over=true), kriz YENİDEN başlatılmadı';
+  }
+  return bilgi;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 85D — KONUMSAL OLMAYAN KAMPANYA DURUMU
+
+   ÖLÇÜLEN KÖK NEDEN (v5 kaydında yedi alanın HİÇBİRİ yoktu):
+     upheaval · upAge · upLast · market · chainQueue · fallStats · sabStats
+   Yükleme sonrası bu alanlar kayıttan gelmiyor, mevcut oturumun
+   değerleri olduğu gibi kalıyordu; aynı sayfada başka kayıt açmak
+   eski kampanyanın çalkantısını ve piyasa fiyatlarını yeni yüke
+   taşıyordu. setupGame ise chainQueue/fallStats/sabStats'ı
+   sıfırlarken upheaval/upAge/upLast/market'ı hiç temizlemiyordu.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── TEK KANONİK İSTATİSTİK VARSAYILANLARI ──
+   setupGame, göç, restore, recordFall ve recordSabotage AYNI kaynağı
+   kullanır. Böylece bir sayaç eklendiğinde tek yerde eklenir. */
+function fallStatsDefaults(){
+  return {uzay:0, teslim:0, katastrof:0, temiz:0, colossus:0,
+          yutuldu:0, ayrilik:0};
+}
+/* ÖLÇÜM: recordSabotage('yardSabo') ve ('supplyHack') çağrıları
+   kaynakta MEVCUTTU, ama varsayılan nesnede bu anahtarlar olmadığı
+   için `G.sabStats[tur] !== undefined` koşulu false dönüyor ve
+   sayaçlar SESSİZCE artmıyordu. Kanonik küme tamamlandı. */
+function sabStatsDefaults(){
+  return {basari:0, ifsa:0, sessiz:0, cift:0, tech:0, kiskirt:0,
+          falseflag:0, yardSabo:0, supplyHack:0};
+}
+
+/* Sayaç nesnesini kanonik kümeye normalize eder: eksik anahtar 0,
+   negatif/NaN/yanlış tip 0, geçerli değer AYNEN korunur. */
+function normalizeStats(kaynak, varsayilan){
+  const out = varsayilan;
+  if (kaynak && typeof kaynak === 'object'){
+    for (const k in out){
+      const v = kaynak[k];
+      if (typeof v === 'number' && isFinite(v) && v >= 0) out[k] = v;
+    }
+  }
+  return out;
+}
+
+function campaignWorldDefaults(){
+  return {upheaval:null, upAge:0, upLast:null, market:null,
+          chainQueue:[], fallStats:fallStatsDefaults(),
+          sabStats:sabStatsDefaults()};
+}
+
+/* --- KAYIT TARAFI --- */
+function serializeCampaignWorld(){
+  return {
+    upheaval: G.upheaval ? jsonSafeClone(G.upheaval, null) : null,
+    upAge: (typeof G.upAge === 'number' && isFinite(G.upAge)) ? G.upAge : 0,
+    /* Çalışma zamanında "geçmiş çalkantı yok" = undefined.
+       Kayıtta bu durum null ile temsil edilir. upLast === 0 GEÇERLİDİR. */
+    upLast: (typeof G.upLast === 'number' && isFinite(G.upLast)) ? G.upLast : null,
+    market: G.market ? jsonSafeClone(G.market, null) : null,
+    chainQueue: jsonSafeClone(G.chainQueue || [], []),
+    fallStats: jsonSafeClone(G.fallStats || fallStatsDefaults(), fallStatsDefaults()),
+    sabStats: jsonSafeClone(G.sabStats || sabStatsDefaults(), sabStatsDefaults())
+  };
+}
+
+/* --- SIFIRLAMA --- */
+function resetCampaignRuntimeState(){
+  const d = campaignWorldDefaults();
+  G.upheaval = d.upheaval;
+  G.upAge = d.upAge;
+  delete G.upLast;              // null DEĞİL: upheavalTick `!== undefined` bakar
+  G.market = d.market;
+  G.chainQueue = d.chainQueue;
+  G.fallStats = d.fallStats;
+  G.sabStats = d.sabStats;
+}
+
+/* --- DOĞRULAYICILAR --- */
+function validUpheaval(u){
+  if (!u || typeof u !== 'object') return null;
+  if (typeof UPHEAVALS === 'undefined' || !UPHEAVALS[u.k]) return null;
+  const say = x => (typeof x === 'number' && isFinite(x)) ? x : null;
+  const left = say(u.left), total = say(u.total), at = say(u.at);
+  if (left === null || total === null || at === null) return null;
+  if (left <= 0 || total <= 0) return null;
+  return {k:u.k, left, total, at};
+}
+function validMarket(m){
+  if (!m || typeof m !== 'object') return null;
+  const say = x => (typeof x === 'number' && isFinite(x) && x > 0) ? x : 1;
+  const mul = (m.mul && typeof m.mul === 'object') ? m.mul : {};
+  const hist = [];
+  if (Array.isArray(m.hist)){
+    for (const h of m.hist){
+      if (!h || typeof h !== 'object') continue;
+      hist.push({t: (typeof h.t === 'number' && isFinite(h.t)) ? h.t : 0,
+                 ene: say(h.ene), min: say(h.min), ala: say(h.ala)});
+    }
+  }
+  /* Mevcut 40 kayıt sınırı korunur — en yeniler tutulur. */
+  const kirp = hist.length > 40 ? hist.slice(hist.length - 40) : hist;
+  return {mul:{ene:say(mul.ene), min:say(mul.min), ala:say(mul.ala)},
+          hist:kirp,
+          acildi:(typeof m.acildi === 'number' && isFinite(m.acildi)) ? m.acildi : 0};
+}
+/* chainQueue yalnız sade {id, at} girdileri taşır. Geçerli aynı-id
+   girdileri KÖRLEMESİNE tekilleştirilmez; sıra ve içerik korunur. */
+function validChainQueue(q){
+  const out = [], bad = [];
+  if (Array.isArray(q)){
+    for (const e of q){
+      if (e && typeof e === 'object' &&
+          typeof e.id === 'string' && e.id &&
+          typeof e.at === 'number' && isFinite(e.at)){
+        out.push({id:e.id, at:e.at});
+      } else bad.push(e);
+    }
+  }
+  return {list:out, atilan:bad.length};
+}
+
+/* --- YÜKLEME TARAFI --- */
+function restoreCampaignWorld(data, sv){
+  const has = (o,k) => o && Object.prototype.hasOwnProperty.call(o, k);
+  resetCampaignRuntimeState();
+  const bilgi = {migrated:false, from:(sv || 6), repair:null,
+                 droppedChain:0, note:null};
+
+  if (!data || typeof data !== 'object'){
+    /* ── V5 VE ÖNCESİ GÖÇÜ ──
+       Aktif çalkantı, piyasa geçmişi, bekleyen zincir ve istatistikler
+       eski kayıtta HİÇ YOK: uydurulmaz, temiz zemin korunur.
+       Yalnız upAge kayıt gününden deterministik türetilir. */
+    bilgi.migrated = true;
+    bilgi.from = (sv || 5);
+    G.upAge = Math.max(0, Math.floor((G.day || 0) / 30));
+    bilgi.note = 'v5 göçü: upAge=gün/30 türetildi; çalkantı, piyasa ' +
+                 'geçmişi, bekleyen zincirler ve istatistikler eski ' +
+                 'kayıtta bulunmadığı için KURTARILAMADI (uydurulmadı)';
+    return bilgi;
+  }
+
+  if (has(data,'upAge') && typeof data.upAge === 'number' && isFinite(data.upAge))
+    G.upAge = data.upAge;
+
+  /* upLast: 0 GEÇERLİ bir değerdir; null ise çalışma zamanında YOK. */
+  if (has(data,'upLast') && typeof data.upLast === 'number' && isFinite(data.upLast))
+    G.upLast = data.upLast;
+  /* aksi hâlde resetCampaignRuntimeState zaten sildi */
+
+  if (has(data,'upheaval')){
+    const u = validUpheaval(data.upheaval);
+    G.upheaval = u;
+    if (data.upheaval && !u){
+      /* Bozuk çalkantı sıradan bir çalkantıya UYDURULMAZ. */
+      bilgi.repair = 'geçersiz upheaval (' +
+        (data.upheaval && data.upheaval.k) + ') → null';
+    }
+  }
+
+  if (has(data,'market')){
+    const m = validMarket(data.market);
+    G.market = m;
+    if (data.market && !m) bilgi.repair =
+      (bilgi.repair ? bilgi.repair + ' · ' : '') + 'geçersiz market → null';
+  }
+
+  if (has(data,'chainQueue')){
+    const q = validChainQueue(data.chainQueue);
+    G.chainQueue = q.list;
+    bilgi.droppedChain = q.atilan;
+  }
+
+  if (has(data,'fallStats'))
+    G.fallStats = normalizeStats(data.fallStats, fallStatsDefaults());
+  if (has(data,'sabStats'))
+    G.sabStats = normalizeStats(data.sabStats, sabStatsDefaults());
+
+  return bilgi;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 85E — BİLDİRİM/KARAR KUYRUĞU SÜREKLİLİĞİ
+
+   ÖLÇÜLEN KÖK NEDEN: G.inbox, G.inboxUid ve G.seenChains v6 kaydında
+   HİÇ yoktu; yükleme sonrası oturumun zehirli değerleri kalıyordu.
+   Ham JSON ile kaydetmek de mümkün değildi: `event` bildirimi TAM
+   EVENTS nesnesini (seçenek fonksiyonlarıyla), `anomaly` ise tam
+   anomaly + sys nesnesini data içinde taşıyor.
+
+   ÇÖZÜM: beyaz listeli bir codec. Kayda yalnız kararlı kimlikler ve
+   ilkel alanlar girer; yüklemede referanslar EVENTS / ANOMALIES /
+   G.sys / G.emps üzerinden YENİDEN KURULUR. Çözülemeyen referans
+   sessizce düşürülür ve onarım sayısına yazılır.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Kayda giren tek alan kümesi. Bunun dışındaki her şey (fonksiyon,
+   DOM düğümü, hook, tam nesne, modal HTML) KASTEN dışarıda kalır. */
+const NOTE_FIELDS = ['uid','kind','ico','cls','pause','title','sub','key','born'];
+
+function eventsWorldDefaults(){
+  return {inbox:[], inboxUid:0, seenChains:{}};
+}
+
+const _num = v => (typeof v === 'number' && isFinite(v)) ? v : null;
+const _str = v => (typeof v === 'string' && v) ? v : null;
+
+/* ── PAYLOAD CODEC ──
+   encode: runtime data → JSON-güvenli kararlı biçim
+   decode: kayıt biçimi → runtime data (referanslar yeniden kurulur)
+   Her ikisi de çözemezse null döner ve bildirim düşürülür. */
+const NOTE_CODEC = {
+  /* Tam EVENTS nesnesi yerine kararlı event kimliği */
+  event: {
+    enc: d => (d && _str(d.id)) ? {evId:d.id} : null,
+    dec: d => {
+      const id = d && _str(d.evId);
+      if (!id || typeof EVENTS === 'undefined') return null;
+      /* Katalogdaki GERÇEK nesne — seçenek fonksiyonları oradan gelir */
+      return EVENTS.find(e => e.id === id) || null;
+    }
+  },
+  /* Tam anomaly + sys nesnesi yerine {anId, sysId} */
+  anomaly: {
+    enc: d => (d && d.a && _str(d.a.id) && d.sys && _num(d.sys.id) !== null)
+              ? {anId:d.a.id, sysId:d.sys.id} : null,
+    dec: d => {
+      const aid = d && _str(d.anId), sid = d ? _num(d.sysId) : null;
+      if (!aid || sid === null || typeof ANOMALIES === 'undefined') return null;
+      const a = ANOMALIES.find(x => x.id === aid);
+      const sys = G.sys && G.sys[sid];
+      return (a && sys) ? {a, sys} : null;
+    }
+  },
+  /* Zaten kararlı zincir kimliği */
+  chain: {
+    enc: d => _str(d), dec: d => {
+      const id = _str(d);
+      return (id && typeof CHAINS !== 'undefined' && CHAINS[id]) ? id : null;
+    }
+  },
+  /* FAZ 85E: teklifin TAMAMI bildirimin kendi data'sında taşınır —
+     artık tekil UI.pendingOffer doğruluğun kaynağı değildir. */
+  aideal: {
+    enc: d => encodeOffer(d),
+    dec: d => { const o = encodeOffer(d); return (o && G.emps[o.from]) ? o : null; }
+  },
+  pact:   {enc: d => (d && _num(d.from)!==null && _str(d.tur)) ? {from:d.from, tur:d.tur} : null,
+           dec: d => (d && _num(d.from)!==null && _str(d.tur) && G.emps[d.from])
+                     ? {from:d.from, tur:d.tur} : null},
+  submit: {enc: d => (d && _num(d.from)!==null && _num(d.tehdit)!==null)
+                     ? {from:d.from, tehdit:d.tehdit} : null,
+           dec: d => (d && _num(d.from)!==null && G.emps[d.from])
+                     ? {from:d.from, tehdit:d.tehdit} : null},
+  border: {enc: d => (d && _num(d.id)!==null && _num(d.len)!==null) ? {id:d.id, len:d.len} : null,
+           dec: d => (d && _num(d.id)!==null && G.emps[d.id]) ? {id:d.id, len:d.len} : null}
+};
+/* Kimliği bir imparatorluğa bağlı, sade sayısal payload'lar */
+const NOTE_EMP_KINDS  = ['peace','cncnew','wardec','sqOffer'];
+/* Serbest sayısal payload (imparatorluk referansı DEĞİL) */
+const NOTE_NUM_KINDS  = ['crisis','criswarn','fedvote','crisend'];
+/* Sade dize payload */
+const NOTE_STR_KINDS  = ['cncvote','facdem','faccoup'];
+
+/* AI teklifini JSON-güvenli, ilkel alanlara indirger. */
+function encodeOffer(o){
+  if (!o || typeof o !== 'object') return null;
+  const from = _num(o.from), to = _num(o.to);
+  if (from === null) return null;
+  const kalem = liste => {
+    if (!Array.isArray(liste)) return null;
+    const out = [];
+    for (const it of liste){
+      if (!it || typeof it !== 'object') return null;
+      const t = _str(it.t); if (!t) return null;
+      /* dealLabel()'ın gerçekten okuduğu alanlar: t · r · v · id · k ·
+         target. `v` (miktar) ve `target` beyaz listede olmazsa teklif
+         tutarı ve savaş/barış hedefi kayıtta KAYBOLURDU. */
+      const e = {t};
+      if (_str(it.r) !== null) e.r = it.r;
+      if (_num(it.v) !== null) e.v = it.v;
+      if (_num(it.n) !== null) e.n = it.n;
+      if (_num(it.id) !== null) e.id = it.id;
+      if (_str(it.k) !== null) e.k = it.k;
+      if (_num(it.target) !== null) e.target = it.target;
+      out.push(e);
+    }
+    return out;
+  };
+  const give = kalem(o.give), want = kalem(o.want);
+  if (!give || !want) return null;
+  /* FAZ 86B: teklif ömrü alanları codec'te KAYBOLMAZ. */
+  const out = {from, to:(to === null ? 0 : to), give, want};
+  const bn = _num(o.born), ex = _num(o.expires);
+  if (bn !== null) out.born = bn;
+  if (ex !== null) out.expires = ex;
+  return out;
+}
+/* Aynı devletten gelen ŞARTLARI FARKLI iki teklif ayrı kalmalı:
+   imza şartları da içerir, yalnız göndereni değil. */
+function offerSignature(o){
+  const e = encodeOffer(o);
+  if (!e) return null;
+  const p = l => l.map(x => x.t + ':' + (x.r || x.k || x.id || x.target || '') +
+                            ':' + (x.v !== undefined ? x.v : (x.n || 0))).join('+');
+  return e.from + '|' + p(e.give) + '>' + p(e.want);
+}
+
+/* Tek bildirimi kayda hazırlar. Çözülemezse null. */
+function encodeNote(it){
+  if (!it || typeof it !== 'object') return null;
+  const kind = _str(it.kind); if (!kind) return null;
+  const out = {};
+  for (const f of NOTE_FIELDS){
+    const v = it[f];
+    if (v === undefined || v === null) continue;
+    if (typeof v === 'function' || typeof v === 'object') continue;  // güvenlik
+    out[f] = v;
+  }
+  if (_num(out.uid) === null) return null;
+  let data;
+  if (NOTE_CODEC[kind]) data = NOTE_CODEC[kind].enc(it.data);
+  else if (NOTE_EMP_KINDS.includes(kind) || NOTE_NUM_KINDS.includes(kind)) data = _num(it.data);
+  else if (NOTE_STR_KINDS.includes(kind)) data = _str(it.data);
+  else return null;                                   // bilinmeyen kind
+  if (data === null || data === undefined) return null;
+  out.data = data;
+  return out;
+}
+/* Kayıttaki bildirimi runtime biçimine döndürür. Çözülemezse null. */
+function decodeNote(rec){
+  if (!rec || typeof rec !== 'object') return null;
+  const kind = _str(rec.kind); if (!kind) return null;
+  const out = {};
+  for (const f of NOTE_FIELDS){
+    const v = rec[f];
+    if (v === undefined || v === null) continue;
+    if (typeof v === 'object' || typeof v === 'function') continue;
+    out[f] = v;
+  }
+  if (_num(out.uid) === null) return null;
+  let data;
+  if (NOTE_CODEC[kind]) data = NOTE_CODEC[kind].dec(rec.data);
+  else if (NOTE_EMP_KINDS.includes(kind)){
+    data = _num(rec.data);
+    if (data === null || !G.emps[data]) return null;   // devlet artık yok
+  }
+  else if (NOTE_NUM_KINDS.includes(kind)) data = _num(rec.data);
+  else if (NOTE_STR_KINDS.includes(kind)) data = _str(rec.data);
+  else return null;
+  if (data === null || data === undefined) return null;
+  out.data = data;
+  return out;
+}
+
+/* --- KAYIT TARAFI --- */
+function serializeEventsWorld(){
+  const kutu = [];
+  const gorulen = Array.isArray(G.inbox) ? G.inbox.slice() : [];
+  /* Kayıt anında AÇIK olan bildirim kaybolmasın: runtime state
+     DEĞİŞTİRİLMEDEN anlık görüntüye eklenir (UI._openNote okunur,
+     yazılmaz). Aynı UID zaten kutudaysa kopyalanmaz. */
+  if (typeof UI !== 'undefined' && UI && UI._openNote &&
+      !gorulen.some(x => x && x.uid === UI._openNote.uid))
+    gorulen.push(UI._openNote);
+  let enBuyuk = 0;
+  for (const it of gorulen){
+    const rec = encodeNote(it);
+    if (!rec) continue;
+    if (rec.uid > enBuyuk) enBuyuk = rec.uid;
+    kutu.push(rec);
+  }
+  const uid = _num(G.inboxUid);
+  const seen = {};
+  if (G.seenChains && typeof G.seenChains === 'object')
+    for (const k in G.seenChains) if (G.seenChains[k]) seen[k] = true;
+  return {inbox:kutu,
+          inboxUid: Math.max(uid === null ? 0 : uid, enBuyuk),
+          seenChains: seen};
+}
+
+/* --- SIFIRLAMA --- */
+function resetEventsRuntimeState(){
+  const d = eventsWorldDefaults();
+  G.inbox = d.inbox; G.inboxUid = d.inboxUid; G.seenChains = d.seenChains;
+  delete G.minNote; delete G.minRaw;          // ham modal HTML asla taşınmaz
+  if (typeof UI !== 'undefined' && UI){
+    UI._openNote = null;
+    UI.pendingOffer = null;
+  }
+}
+
+/* --- YÜKLEME TARAFI --- */
+function restoreEventsWorld(data, sv){
+  const has = (o,k) => o && Object.prototype.hasOwnProperty.call(o, k);
+  resetEventsRuntimeState();
+  const bilgi = {migrated:false, from:(sv || 7), dropped:0, note:null};
+
+  if (!data || typeof data !== 'object'){
+    /* ── V6 VE ÖNCESİ GÖÇÜ ── bilgi kayıtta yok; uydurulmaz. */
+    bilgi.migrated = true;
+    bilgi.from = (sv || 6);
+    bilgi.note = 'v6 göçü: inbox/inboxUid/seenChains eski kayıtta ' +
+                 'bulunmadığı için boş kuruldu (KURTARILAMADI, uydurulmadı)';
+    return bilgi;
+  }
+
+  if (has(data,'seenChains') && data.seenChains &&
+      typeof data.seenChains === 'object'){
+    const seen = {};
+    for (const k in data.seenChains) if (data.seenChains[k]) seen[k] = true;
+    G.seenChains = seen;
+  }
+
+  let enBuyuk = 0;
+  if (has(data,'inbox') && Array.isArray(data.inbox)){
+    const kutu = [];
+    for (const rec of data.inbox){
+      const it = decodeNote(rec);
+      if (!it){ bilgi.dropped++; continue; }
+      if (kutu.some(x => x.uid === it.uid)) continue;   // aynı UID kopyalanmaz
+      if (it.uid > enBuyuk) enBuyuk = it.uid;
+      kutu.push(it);                                    // SIRA korunur
+    }
+    /* Mevcut azami 6 bildirim politikası korunur. */
+    while (kutu.length > 6){
+      const i = kutu.findIndex(x => !x.pause);
+      kutu.splice(i >= 0 ? i : 0, 1);
+    }
+    G.inbox = kutu;
+  }
+  /* UID en büyük yüklenen kimlikten küçük kalırsa yeni bildirim
+     mevcut biriyle ÇAKIŞIRDI — güvenle yükseltilir. */
+  const uid = has(data,'inboxUid') ? _num(data.inboxUid) : null;
+  G.inboxUid = Math.max(uid === null ? 0 : uid, enBuyuk);
+  return bilgi;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 85F — KONUMSAL SİMÜLASYON DURUMU
+
+   ÖLÇÜLEN KÖK NEDEN: kompakt `sys` beyaz listesi nest/ruin/cr/
+   orbitHeld/supplyHackBy alanlarını hiç taşımıyordu; G.wildId,
+   G.nests, G.ruins, G.raids, G.monsterAt ve G._firstTech ise
+   tamamen kayıt dışıydı. Yükleme sonrası zehirli oturum değerleri
+   kalıyordu — ölçümde G.wildId=0 (OYUNCU) hayatta kaldı.
+
+   Kayıt adı → runtime alanı eşlemesi (seyrek `systems` listesi):
+     i  → sys.id          ne → sys.nest {hp,timer}
+     np → sys.nestPow     ru → sys.ruin {hp,max,rw,awake}
+     oh → sys.orbitHeld   cr → sys.cr
+     sb → sys.supplyHackBy
+   ═══════════════════════════════════════════════════════════════════ */
+function simulationWorldDefaults(){
+  return {wildId:null, nests:[], ruins:[], raids:{},
+          monsterAt:0, firstTech:{}, systems:[]};
+}
+
+/* --- ALAN DOĞRULAMA --- */
+function validNest(n){
+  if (!n || typeof n !== 'object') return null;
+  const hp = _num(n.hp), tm = _num(n.timer);
+  if (hp === null || tm === null) return null;
+  return {hp, timer:tm};
+}
+function validRuin(r){
+  if (!r || typeof r !== 'object') return null;
+  const hp = _num(r.hp), mx = _num(r.max), rw = _str(r.rw);
+  if (hp === null || mx === null || !rw) return null;
+  /* Ödül anahtarı katalogda BULUNMALI. Geçersizse kalıntı düşürülür;
+     rastgele yeni ödül SEÇİLMEZ ve RNG tüketilmez. */
+  if (typeof RUIN_REWARDS === 'undefined' ||
+      !RUIN_REWARDS.some(x => x.k === rw)) return null;
+  return {hp, max:mx, rw, awake: r.awake === true};
+}
+/* Yaşayan, geçerli bir imparatorluk kimliği mi? */
+function validEmpId(v){
+  const id = _num(v);
+  if (id === null) return null;
+  const e = G.emps && G.emps[id];
+  return (e && !e.dead) ? id : null;
+}
+/* ═══ FAZ 85F.1: KANONİK TİCARET ROTASI ANAHTARI ═══
+   HOTFIX. Gerçek üretim anahtarı economy.js/tradeLinks() içinde
+   `start+'_'+l` (küçük id önce) biçiminde üretilir — örn. "44_58".
+   Faz 85F restore'u ise anahtarı `split(':')` ile ayrıştırıyordu ve
+   GERÇEK üretim anahtarını "geçersiz" sayıp düşürüyordu; yağmalanmış
+   rota yüklemede erken yeniden açılıyordu. Artık serialize ve restore
+   AYNI saf yardımcıyı kullanır; hiçbir taraf biçim varsaymaz.
+
+   Kural: tam iki sonlu tam sayı · ikisi de G.sys'te · aynı sistem
+   olamaz · daima küçük id önce. RNG tüketmez, oyun durumunu
+   ilerletmez. Savunmalı uyumluluk: 85F'in kısa ömürlü ":" biçimi de
+   okunur ama çıktı DAİMA kanonik "_" biçimidir. */
+function canonRouteKey(k){
+  if (typeof k !== 'string' && typeof k !== 'number') return null;
+  const s = String(k);
+  const par = s.indexOf('_') >= 0 ? s.split('_')
+            : (s.indexOf(':') >= 0 ? s.split(':') : null);
+  if (!par || par.length !== 2) return null;
+  const a = Number(par[0]), b = Number(par[1]);
+  if (!isFinite(a) || !isFinite(b)) return null;
+  if (!Number.isInteger(a) || !Number.isInteger(b)) return null;
+  if (a === b) return null;
+  if (!G.sys || !G.sys[a] || !G.sys[b]) return null;
+  return (a < b) ? (a + '_' + b) : (b + '_' + a);
+}
+/* Ham raids sözlüğünü kanonik biçime indirger.
+   Aynı kanonik anahtara düşen iki kayıt varsa EN GEÇ bitiş günü
+   deterministik olarak korunur. */
+function canonRaids(ham, rapor){
+  const out = {};
+  for (const k in (ham || {})){
+    const g = _num(ham[k]);
+    const ck = canonRouteKey(k);
+    if (ck === null || g === null){
+      if (rapor) rapor.push('raid rotası "' + k + '" geçersiz -> düşürüldü');
+      continue;
+    }
+    if (out[ck] === undefined) out[ck] = g;
+    else {
+      const eski = out[ck];
+      out[ck] = Math.max(eski, g);
+      if (rapor) rapor.push('raid rotası "' + k + '" -> "' + ck +
+        '" ile birleşti (en geç bitiş ' + out[ck] + ')');
+    }
+  }
+  return out;
+}
+function validRange(v){
+  const c = _num(v);
+  if (c === null) return null;
+  if (c === 0) return 0;
+  return (typeof RANGE_NAMES !== 'undefined' && RANGE_NAMES[c]) ? c : null;
+}
+
+/* --- KAYIT TARAFI --- */
+function serializeSimulationWorld(){
+  const sistemler = [];
+  for (const s of (G.sys || [])){
+    if (!s) continue;
+    const rec = {};
+    const ne = validNest(s.nest);           if (ne) rec.ne = ne;
+    const np = _num(s.nestPow);             if (np !== null) rec.np = np;
+    const ru = validRuin(s.ruin);           if (ru) rec.ru = ru;
+    const oh = validEmpId(s.orbitHeld);     if (oh !== null) rec.oh = oh;
+    const cr = validRange(s.cr);            if (cr !== null && cr !== 0) rec.cr = cr;
+    const sb = validEmpId(s.supplyHackBy);  if (sb !== null) rec.sb = sb;
+    if (Object.keys(rec).length){ rec.i = s.id; sistemler.push(rec); }
+  }
+  /* Baskınlar: KANONİK rota anahtarı → bitiş günü.
+     serialize ve restore aynı yardımcıyı kullanır (FAZ 85F.1). */
+  const raids = canonRaids(G.raids, null);
+  /* İlk keşfeden: teknoloji katalogda, devlet listede olmalı */
+  const ft = {};
+  for (const t in (G._firstTech || {})){
+    if (typeof TECHS !== 'undefined' && !TECHS[t]) continue;
+    const id = _num(G._firstTech[t]);
+    if (id === null || !G.emps[id]) continue;
+    ft[t] = id;
+  }
+  return {
+    wildId: (typeof G.wildId === 'number' && isFinite(G.wildId)) ? G.wildId : null,
+    nests: (G.nests || []).filter(x => _num(x) !== null),
+    ruins: (G.ruins || []).filter(x => _num(x) !== null),
+    raids, monsterAt: (_num(G.monsterAt) === null ? 0 : _num(G.monsterAt)),
+    firstTech: ft, systems: sistemler
+  };
+}
+
+/* --- SIFIRLAMA --- */
+function resetSimulationRuntimeState(){
+  const d = simulationWorldDefaults();
+  delete G.wildId;                        // null DEĞİL: `!== undefined` sınanıyor
+  G.nests = d.nests; G.ruins = d.ruins; G.raids = d.raids;
+  G.monsterAt = d.monsterAt; G._firstTech = d.firstTech;
+  /* Yeni oyunun sistemlerinde önceki oyundan kalmış olabilecek
+     simulation alanları temizlenir. */
+  for (const s of (G.sys || [])){
+    if (!s) continue;
+    delete s.nest; delete s.nestPow; delete s.ruin;
+    delete s.orbitHeld; delete s.cr; delete s.supplyHackBy;
+  }
+}
+
+/* wildId: yalnız yaşayan, wild, crisisSide OLMAYAN devlet geçerli. */
+function validWildId(v){
+  const id = _num(v);
+  if (id === null) return null;
+  const e = G.emps && G.emps[id];
+  if (!e || e.dead || e.wild !== true || e.crisisSide === true) return null;
+  return id;
+}
+function wildCandidates(){
+  const a = [];
+  for (const e of (G.emps || []))
+    if (e && !e.dead && e.wild === true && e.crisisSide !== true &&
+        typeof e.id === 'number') a.push(e.id);
+  a.sort((x,y) => x - y);
+  return a;
+}
+
+/* Kayıttaki sırayı KORUYARAK indeksi uzlaştırır. */
+function reconcileIndex(kayitli, alan){
+  const out = [], gorulen = {};
+  let temizlenen = 0;
+  for (const raw of (Array.isArray(kayitli) ? kayitli : [])){
+    const id = _num(raw);
+    if (id === null || gorulen[id] || !G.sys[id] || !G.sys[id][alan]){
+      temizlenen++; continue;
+    }
+    gorulen[id] = true; out.push(id);
+  }
+  /* Sistemde yapı var ama indekste eksikse deterministik (id sırası) ekle */
+  let eklenen = 0;
+  for (const s of (G.sys || [])){
+    if (s && s[alan] && !gorulen[s.id]){ out.push(s.id); gorulen[s.id] = true; eklenen++; }
+  }
+  return {list:out, temizlenen, eklenen};
+}
+
+/* --- YÜKLEME TARAFI --- */
+function restoreSimulationWorld(data, sv){
+  const has = (o,k) => o && Object.prototype.hasOwnProperty.call(o, k);
+  resetSimulationRuntimeState();
+  const bilgi = {migrated:false, from:(sv || 8), repair:[],
+                 droppedSystems:0, note:null};
+
+  if (!data || typeof data !== 'object'){
+    /* ── V7 VE ÖNCESİ GÖÇÜ ──
+       nest/ruin/cr/orbitHeld/supplyHackBy ve indeksler v7 kaydında
+       BULUNMUYOR: uydurulmaz, boş bırakılır. Yalnız wildId mevcut
+       imparatorluk listesinden deterministik olarak geri bulunur. */
+    bilgi.migrated = true;
+    bilgi.from = (sv || 7);
+    const aday = wildCandidates();
+    if (aday.length){
+      G.wildId = aday[0];
+      if (aday.length > 1)
+        bilgi.repair.push('v7: birden çok wild adayı [' + aday.join(',') +
+                          '] -> en küçük id ' + aday[0]);
+    }
+    G.monsterAt = 0;
+    bilgi.note = 'v7 göçü: wildId yaşayan wild devletten geri bulundu; ' +
+                 'nests/ruins/sistem alanları/raids/firstTech eski kayıtta ' +
+                 'bulunmadığı için KURTARILAMADI (uydurulmadı)';
+    return bilgi;
+  }
+
+  /* 1) Sistem alanları — indeks uzlaştırmasından ÖNCE kurulmalı */
+  if (has(data,'systems') && Array.isArray(data.systems)){
+    for (const rec of data.systems){
+      const id = rec ? _num(rec.i) : null;
+      const s = (id !== null) ? G.sys[id] : null;
+      if (!s){ bilgi.droppedSystems++; continue; }
+      const ne = validNest(rec.ne);          if (ne) s.nest = ne;
+      const np = _num(rec.np);               if (np !== null) s.nestPow = np;
+      const ru = validRuin(rec.ru);
+      if (ru) s.ruin = ru;
+      else if (rec.ru) bilgi.repair.push('sys#' + id + ' geçersiz ruin ödülü -> düşürüldü');
+      const oh = validEmpId(rec.oh);
+      if (oh !== null) s.orbitHeld = oh;
+      else if (rec.oh !== undefined) bilgi.repair.push('sys#' + id + ' geçersiz orbitHeld -> temizlendi');
+      const cr = validRange(rec.cr);         if (cr !== null && cr !== 0) s.cr = cr;
+      const sb = validEmpId(rec.sb);
+      if (sb !== null) s.supplyHackBy = sb;
+      else if (rec.sb !== undefined)
+        /* Aktif sabotajın kendisi (sys.supplyHack) korunur; yalnız
+           atıf temizlenir — rastgele başka devlete BAĞLANMAZ. */
+        bilgi.repair.push('sys#' + id + ' geçersiz supplyHackBy -> atıf temizlendi');
+    }
+  }
+
+  /* 2) İndeksler — kayıttaki SIRA korunur (wildTurn RNG sırasını etkiler) */
+  const n = reconcileIndex(has(data,'nests') ? data.nests : [], 'nest');
+  G.nests = n.list;
+  if (n.temizlenen || n.eklenen)
+    bilgi.repair.push('nests: ' + n.temizlenen + ' geçersiz/tekrar temizlendi, ' +
+                      n.eklenen + ' eksik eklendi');
+  const r = reconcileIndex(has(data,'ruins') ? data.ruins : [], 'ruin');
+  G.ruins = r.list;
+  if (r.temizlenen || r.eklenen)
+    bilgi.repair.push('ruins: ' + r.temizlenen + ' geçersiz/tekrar temizlendi, ' +
+                      r.eklenen + ' eksik eklendi');
+
+  /* 3) wildId guard */
+  const kayitliW = has(data,'wildId') ? data.wildId : null;
+  const gecerli = validWildId(kayitliW);
+  if (gecerli !== null) G.wildId = gecerli;
+  else {
+    const aday = wildCandidates();
+    if (aday.length){
+      G.wildId = aday[0];
+      if (kayitliW !== null && kayitliW !== undefined)
+        bilgi.repair.push('wildId ' + kayitliW + ' geçersiz -> ' + aday[0]);
+      else if (aday.length > 1)
+        bilgi.repair.push('birden çok wild adayı -> en küçük id ' + aday[0]);
+    } else if (kayitliW !== null && kayitliW !== undefined){
+      /* Aday YOK: sıradan devleti ASLA korsan yapma, yeni devlet üretme. */
+      bilgi.repair.push('wildId ' + kayitliW + ' geçersiz ve wild aday yok — bağlanmadı');
+    }
+  }
+
+  /* 4) Baskınlar — yükleme raidTick ÇALIŞTIRMAZ, süresi geçmişi silmez */
+  if (has(data,'raids') && data.raids && typeof data.raids === 'object'){
+    /* FAZ 85F.1: gerçek üretim biçimi "a_b"; ":" yalnız savunmalı
+       uyumluluk için okunur ve kanonik biçime dönüştürülür. */
+    G.raids = canonRaids(data.raids, bilgi.repair);
+  }
+  if (has(data,'monsterAt')){
+    const m = _num(data.monsterAt);
+    G.monsterAt = (m === null ? 0 : m);
+  }
+  if (has(data,'firstTech') && data.firstTech &&
+      typeof data.firstTech === 'object'){
+    const ft = {};
+    for (const t in data.firstTech){
+      if (typeof TECHS !== 'undefined' && !TECHS[t]) continue;
+      const id = _num(data.firstTech[t]);
+      /* Devlet ölmüş olabilir — tarihsel kayıt korunur; yalnız
+         imparatorluk listesinde BULUNMASI aranır. */
+      if (id === null || !G.emps[id]) continue;
+      ft[t] = id;
+    }
+    G._firstTech = ft;
+  }
+  return bilgi;
+}
+
 function serialize(){
   return JSON.stringify({
-    v:3, cfg:G.cfg, day:G.day, year:G.year, month:G.month, seed:G.seed, log:G.log, rs:RND_STATE,
+    v:8, cfg:G.cfg, day:G.day, year:G.year, month:G.month, seed:G.seed, log:G.log, rs:RND_STATE,
+    /* FAZ 85A: politik küresel durum tek alt nesnede */
+    world: serializePoliticalWorld(),
+    /* FAZ 85C: oyun sonu krizi */
+    threats: serializeCrisisWorld(),
+    /* FAZ 85D: konumsal olmayan kampanya durumu */
+    campaign: serializeCampaignWorld(),
+    /* FAZ 85F: konumsal simülasyon durumu */
+    simulation: serializeSimulationWorld(),
+    /* FAZ 85E: bildirim/karar kuyruğu (JSON-güvenli codec) */
+    events: serializeEventsWorld(),
     /* ═══ FAZ 77E: KAYIT KAPSAMI GENİŞLETİLDİ ═══
        KÖK NEDEN: uzay yapıları (built), süren inşaatlar (work),
        ralli noktaları ve coğrafya bayrakları HİÇ kaydedilmiyordu.
@@ -5725,6 +6806,42 @@ function serialize(){
     emps: G.emps, fl: G.fleets, nf: G.nextFleet
   });
 }
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 83 — YÜKLEME SONRASI TÜRETİLMİŞ DURUM
+   `_reach` (sınır yarıçapı) türetilmiş veridir ve KASTEN
+   serialize edilmez — kayıt dosyasını şişirir ve bayatlar.
+   Ama deserialize sonrası yeniden hesaplanmıyordu: sistemlerin
+   _reach'i undefined kalıyor, buildBorders hiçbir alan
+   boyayamıyor ve sınırlar ilk ay geçene kadar görünmüyordu.
+
+   Türetilmiş her şey artık TEK YERDE, doğru sırayla kuruluyor.
+   Sıra önemli: modlar önce (reach onlara bakar), yapı indeksi
+   sonra, reach ondan sonra, görüş en son.
+   ═══════════════════════════════════════════════════════════════════ */
+function rebuildDerivedStateAfterLoad(){
+  /* 1. İmparatorluk geçici önbellekleri */
+  for (const x of G.emps){
+    x._prof = null;
+    x._powAt = -1; x._supAt = -1; x._gateAt = -1;
+    x._trAt = -1; x._trCache = null;
+    if (typeof recalcMods === 'function') recalcMods(x);
+  }
+  /* 2. Uzay yapıları indeksi (reach ve gelir buna bakar) */
+  if (typeof rebuildStructIndex === 'function') rebuildStructIndex();
+  /* 3. Sınır yarıçapları — _reach burada doğuyor */
+  if (typeof refreshReach === 'function') refreshReach();
+  /* 4. Görüş */
+  if (typeof updateVision === 'function') updateVision();
+  /* 5. Görsel önbellekler — eski dokular atılsın */
+  if (typeof View !== 'undefined' && View.invalidateRenderCaches)
+    View.invalidateRenderCaches('load');      // FAZ 83.1: merkezî
+  /* 6. Filo başına türetilmiş lojistik/menzil önbellekleri */
+  for (const f of G.fleets){
+    delete f._opAt; delete f._opList; delete f._opR;
+    delete f._logiAt; delete f._logiNet; delete f._logiPort;
+  }
+}
+
 function deserialize(txt){
   const d = JSON.parse(txt);
   if (!d || !d.sys) return false;
@@ -5742,6 +6859,30 @@ function deserialize(txt){
   }));
   G.emps = d.emps; G.fleets = d.fl; G.nextFleet = d.nf;
   G.p = G.emps[0];
+  /* ═══ FAZ 85A: POLİTİK DÜNYA ═══
+     Sıra önemli: G.day ve G.emps yerine oturduktan SONRA çağrılır
+     (v3 göçü G.day'e bakar, referans kontrolü G.emps'e bakar) ama
+     rebuildDerivedStateAfterLoad/economyTick'ten ÖNCE — türetilmiş
+     durum yasaları ve federasyonları okuyabilsin. */
+  G._loadWorldInfo = restorePoliticalWorld(d.world, d.v);
+  /* FAZ 85C: kriz dünyası — politik world'den SONRA (kriz konsey/
+     federasyon durumuna bakabilsin), rebuildDerivedStateAfterLoad
+     ve economyTick(true) çağrılarından ÖNCE. */
+  G._loadCrisisInfo = restoreCrisisWorld(d.threats, d.v);
+  /* FAZ 85D: kampanya durumu — kriz dünyasından SONRA,
+     rebuildDerivedStateAfterLoad/economyTick(true) ÖNCESİNDE, ki
+     çalkantı modları türetilmiş duruma hemen yansısın. */
+  G._loadCampaignInfo = restoreCampaignWorld(d.campaign, d.v);
+  /* FAZ 85E: bildirim kuyruğu — kampanyadan SONRA (zincir/olay
+     referansları çözülebilsin), türetilmiş durumdan ÖNCE. */
+  /* FAZ 85F: konumsal simülasyon — campaign'den SONRA, events'ten
+     ÖNCE (bildirim payload'ları sistem/devlet referansı çözebilsin),
+     her ikisi de türetilmiş durumdan ve gerçek tikten ÖNCE. */
+  G._loadSimInfo = restoreSimulationWorld(d.simulation, d.v);
+  G._loadEventsInfo = restoreEventsWorld(d.events, d.v);
+  /* Geçici yetkilendirme alanları kayıttan taşınmaz ve
+     önceki oturumdan sarkmamalı. */
+  G._warAuth = null; G._warWhy = null; G._dealAuth = false;
   View.sel = null; View.selSys = null; View.route = false; View.routed = false;
   G.over = null; G.speed = 0;
   G.nebula = ART.nebula(G.seed, 128, 128);
@@ -5755,8 +6896,7 @@ function deserialize(txt){
     x._trAt = -1; x._trCache = null;
     recalcMods(x);
   });
-  if (typeof rebuildStructIndex === 'function') rebuildStructIndex();
-  updateVision();
+  rebuildDerivedStateAfterLoad();
   economyTick(true);
   /* Çizim katmanının önbellekleri de tazelensin */
   if (typeof View !== 'undefined'){
@@ -5773,7 +6913,10 @@ function downloadSave(){
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'yildiz-hanedani-' + G.year + '-' + String(G.month).padStart(2,'0') + '.sav';
+    /* FAZ 83.2: yeni kayıtlar 'stars-' önekiyle iner. ESKİ
+       'yildiz-hanedani-*.sav' dosyaları yüklenmeye devam eder —
+       yükleyici uzantıya göre çalışıyor, isim kontrolü yok. */
+    a.download = 'stars-' + G.year + '-' + String(G.month).padStart(2,'0') + '.sav';
     document.body.appendChild(a);
     a.click();
     setTimeout(()=>{ try{ URL.revokeObjectURL(url); a.remove(); }catch(e){} }, 1500);
@@ -5849,7 +6992,7 @@ function enterGame(fromSave){
   UI.refresh();
   /* FAZ 77E: kayıttan dönüşte sınırlar ilk karede çizilmiyordu —
      çizim döngüsü ancak değişiklikte kare basıyor. Zorla tazele. */
-  if (typeof forceRedraw === 'function') forceRedraw();
+  if (typeof forceRedraw === 'function') forceRedraw('enterGame');
   /* FAZ 81: kayıttan dönen liderlerin portreleri yeniden basılsın */
   if (typeof repaintPortraits === 'function') repaintPortraits();
   UI.checkOrient();
@@ -5930,7 +7073,7 @@ document.addEventListener('visibilitychange', ()=>{
     LOOP.last = (typeof performance !== 'undefined') ? performance.now() : 0;
     LOOP.acc = 0; LOOP.uiAcc = 0; LOOP.panAcc = 0;
     if (typeof camSane === 'function') camSane();
-    forceRedraw();
+    scheduleRecovery('visible');      // FAZ 83: tek yol
   }
 });
 
@@ -5959,37 +7102,336 @@ function repaintPortraits(){
   } catch(e){ console.warn('repaintPortraits:', e); }
 }
 
-function forceRedraw(){
-  const ciz = () => {
-    try {
-      if (typeof View === 'undefined' || !View.g) return;
-      View.resize();                       // tuval ölçüsünü yeniden kur
-      View._bolgeAt = -1;                  // bölge adı önbelleğini tazele
-      if (G && G.sys && G.sys.length) View.draw(performance.now());
-      if (typeof UI !== 'undefined' && UI.refresh) UI.refresh();
-      repaintPortraits();          // FAZ 81: siyah kutu kalmasın
-    } catch(e){ console.warn('forceRedraw:', e); }
-  };
-  ciz();
-  setTimeout(ciz, 120);                    // yerleşim oturduktan sonra
-  if (typeof requestAnimationFrame === 'function') requestAnimationFrame(ciz);
+/* Tuval gerçekten çizilebilir durumda mı? Tek kontrol noktası. */
+function ensureContext(){
+  const cv = document.getElementById('map');
+  if (!cv) return {ok:false, why:'canvas yok'};
+  if (!cv.width || !cv.height){
+    cv.width = Math.max(1, cv.clientWidth || 1);
+    cv.height = Math.max(1, cv.clientHeight || 1);
+  }
+  let g = null;
+  try { g = cv.getContext('2d'); } catch(e){}
+  if (!g) return {ok:false, why:'2d context alınamadı'};
+  /* FAZ 83.1: hem context hem element referansı tazelensin —
+     verifyRenderHealth View.cv'ye bakıyor. */
+  if (typeof View !== 'undefined'){ View.g = g; View.cv = cv; }
+  return {ok:true, g, cv};
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 83.4 — forceRedraw ARTIK İNCE BİR SARMALAYICI
+   ESKİ DAVRANIŞ: ciz() üç ayrı yoldan tetikleniyordu (doğrudan +
+   setTimeout 120ms + rAF) ve her biri View.resize + View.draw +
+   UI.refresh + repaintPortraits çalıştırıyordu. Yani tek bir
+   forceRedraw çağrısı ÜÇ tam çizim üretiyordu.
+
+   O üçlü yol, Faz 83.1'den önce kurtarma diye bir kavram yokken
+   "bir tanesi tutar" mantığıyla yazılmıştı. Artık kanonik yol var:
+   scheduleRecovery → runRecovery, içinde ensureContext, tek
+   resize, tek draw, sağlık testi, tek retry, generation koruması
+   ve DIAG kaydı.
+
+   forceRedraw ikinci bir kurtarma sistemi olmayı bırakıp o yola
+   delege ediyor. `hemen=true` ile 16 ms'lik kısa debounce
+   kullanılıyor: ardışık çağrılar tek kurtarmada birleşiyor ama
+   kullanıcı gecikmeyi hissetmiyor.
+   ═══════════════════════════════════════════════════════════════════ */
+function forceRedraw(sebep){
+  scheduleRecovery('force:' + (sebep || 'bilinmeyen'), true);
 }
 
 /* Bazı cihazlar sekme dönüşünde visibilitychange yerine
    pageshow/focus üretiyor — üçünü de dinliyoruz. */
-window.addEventListener('pageshow', ()=>{ forceRedraw(); });
-/* FAZ 63: ekran döndürme / klavye açılması / pencere boyutu
-   değişimi de bağlamı bozabiliyor — agresif tetikleme. */
-let _rsTimer = null;
-window.addEventListener('resize', ()=>{
-  if (_rsTimer) clearTimeout(_rsTimer);
-  _rsTimer = setTimeout(()=>{ _rsTimer = null; forceRedraw(); }, 90);
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 83 — TEK KURTARMA YOLU
+   Beş ayrı olay (visibilitychange, pageshow, resize,
+   orientationchange, focus) her biri kendi başına forceRedraw
+   çağırıyordu. Ekran döndürmede üçü birden ateşlenip arka arkaya
+   dört-beş tam yeniden çizim üretiyordu.
+
+   Hepsi scheduleRecovery(sebep) üzerinden geçiyor: 70 ms
+   pencerede biriken çağrılar TEK kurtarmaya iniyor, sebep
+   tanılama tamponuna yazılıyor. requestAnimationFrame döngüsü
+   ÇOĞALTILMIYOR — yalnız mevcut döngüye bir kare zorlanıyor.
+   ═══════════════════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 83.1 — SAĞLIK KONTROLLÜ KURTARMA
+   DENETİM BULGUSU: Faz 83'ün forceRedraw'ı bcache/bkey'e HİÇ
+   dokunmuyordu ve refreshReach çağırmıyordu. Bu yüzden arka
+   plandan dönüşte sınırlar kaybolduğunda geri gelmiyordu —
+   kullanıcının "mod değiştirmek düzeltmiyor" bulgusu tam olarak
+   buydu. Ayrıca ciz() üç kez çalışıp üç tam çizim üretiyordu.
+
+   Yeni akış generation korumalı: geç gelen eski kurtarma
+   sessizce düşüyor, ağır iş bir kez yapılıyor, sağlık testi
+   başarısızsa YALNIZ BİR retry var — sonsuz döngü imkânsız.
+   ═══════════════════════════════════════════════════════════════════ */
+/* ═══ FAZ 83: TANILAMA HALKA TAMPONU ═══
+   Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
+   Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
+const DIAG_MAX = 40;
+const DIAG = [];
+function logDiag(tur, mesaj){
+  DIAG.push({t: Date.now(), tur, m: String(mesaj || '').slice(0, 220)});
+  if (DIAG.length > DIAG_MAX) DIAG.shift();
+}
+if (typeof window !== 'undefined'){
+  window.addEventListener('error', ev => {
+    logDiag('error', (ev && ev.message) + ' @' +
+      ((ev && ev.filename) || '').split('/').pop() + ':' + (ev && ev.lineno));
+  });
+  window.addEventListener('unhandledrejection', ev => {
+    logDiag('reject', ev && ev.reason && (ev.reason.message || ev.reason));
+  });
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 83.3 — MERKEZÎ RESIZE YÖNETİCİSİ
+   Faz 83.2 denetiminde dört bağımsız window.resize dinleyicisi
+   bulunmuştu. DÜZELTME: o raporda fit() ile View.resize()'ı
+   "işlevsel olarak örtüşüyor" demiştim — yanlıştı. Kodu okuyunca
+   FARKLI canvas'lar oldukları görüldü:
+     · main.js fit()      → #menuStars (ana menü arka planı)
+     · map.js View.resize → #map (harita)
+     · ui.js _onResize    → menü yıldız alanı
+   Yani gereksiz tekrar yoktu; ama DÖRT AYRI dinleyici vardı ve
+   her fiziksel olayda dördü bağımsız ateşleniyordu.
+
+   Artık tek dinleyici var. İki katman:
+     1. ANLIK layout — hafif, her olayda bir kez (ölçü/DPR)
+     2. DEBOUNCE ağır kurtarma — scheduleRecovery üzerinden
+   Alt bileşenler dinleyici kurmuyor; yönetici onları çağırıyor. */
+const RESIZE_ABONE = [];
+function onResize(ad, fn){
+  if (typeof fn === 'function') RESIZE_ABONE.push({ad, fn});
+}
+function resizeLayoutPass(){
+  for (const a of RESIZE_ABONE){
+    try { a.fn(); }
+    catch(e){ logDiag('resize', a.ad + ': ' + (e && e.message)); }
+  }
+}
+window.addEventListener('resize', () => {
+  resizeLayoutPass();                 // 1. anlık, tek geçiş
+  scheduleRecovery('resize');         // 2. debounce'lu ağır iş
 });
+
+let _recT = null, _recSebep = [], _recGen = 0, _recCalisiyor = false;
+
+function scheduleRecovery(sebep, hemen){
+  _recSebep.push(sebep);
+  /* 1. Bekleyen zamanlayıcıyı iptal et */
+  if (_recT){ clearTimeout(_recT); _recT = null; }
+  /* 2. Yeni generation */
+  const gen = ++_recGen;
+  /* 3. Yerleşimin oturması için bekle (manuel çağrıda kısa) */
+  _recT = setTimeout(() => {
+    _recT = null;
+    /* 4. Eski generation ise çık */
+    if (gen !== _recGen) return;
+    const sebepler = _recSebep.join(',');
+    _recSebep = [];
+    runRecovery(sebepler, 0);
+  }, hemen ? 16 : 120);
+}
+
+function runRecovery(sebep, deneme){
+  if (_recCalisiyor && deneme === 0) return;    // eşzamanlı giriş yok
+  _recCalisiyor = true;
+  try {
+    /* 5-6-7. Canvas ve context — ensureContext ikisini de yapar */
+    const ec = ensureContext();
+    if (!ec.ok){
+      logDiag('recovery', 'BAŞARISIZ ' + sebep + ': ' + ec.why);
+      _recCalisiyor = false;
+      return;
+    }
+    if (typeof View !== 'undefined' && View.resize) View.resize();  // TEK kez
+    /* 8. Kamera doğrula */
+    if (typeof camSane === 'function') camSane();
+    /* 9. Türetilmiş sınır yarıçapları */
+    if (typeof refreshReach === 'function') refreshReach();
+    /* 10. Görsel önbellekler */
+    if (typeof View !== 'undefined' && View.invalidateRenderCaches)
+      View.invalidateRenderCaches(sebep);
+    /* 11. TEK zorunlu çizim */
+    let cizHata = null;
+    try {
+      if (G && G.sys && G.sys.length) View.draw(performance.now());
+    } catch(e){ cizHata = e && e.message; }
+    /* 12. UI ve portreler */
+    try {
+      if (typeof UI !== 'undefined' && UI.refresh) UI.refresh();
+      if (typeof repaintPortraits === 'function') repaintPortraits();
+    } catch(e){ logDiag('recovery', 'ui: ' + (e && e.message)); }
+    /* 13. Sağlık testi — YALNIZ kurtarma çiziminden SONRA */
+    const h = verifyRenderHealth();
+
+    /* Sınır dokusu canlılığı da burada sınanıyor; bozuksa bir
+       sonraki buildBorders yeniden üretsin diye cache düşürülüyor.
+       (FAZ 83.3: bu kontrol artık kare döngüsünde DEĞİL.) */
+    if (h.kod === 'blank-borders' && typeof View !== 'undefined'){
+      View.bcache = null; View.bkey = '';
+    }
+
+    /* 14-15. BELİRSİZ sonuç retry doğurmaz — boş kararı verilmedi */
+    if (h.belirsiz){
+      logDiag('health', 'belirsiz: ' + h.why);
+      logDiag('recovery', 'ok(belirsiz):' + sebep);
+      _recCalisiyor = false;
+      return;
+    }
+    if ((!h.ok || cizHata) && deneme === 0){
+      logDiag('health', (h.kod || 'draw-error') + ': ' + (cizHata || h.why));
+      logDiag('recovery', 'tek yeniden kurma denemesi başlatıldı');
+      if (typeof View !== 'undefined'){
+        View.bcache = null; View.bkey = '';
+        try { View.resize && View.resize(); } catch(e){}
+      }
+      _recCalisiyor = false;
+      runRecovery(sebep + '+retry', 1);
+      return;
+    }
+    if (!h.ok || cizHata)
+      logDiag('health', 'retry sonrası hâlâ sağlıksız: ' +
+              (cizHata || (h.kod + ' — ' + h.why)));
+    else
+      logDiag('recovery', (deneme ? 'retry başarılı:' : 'ok:') + sebep +
+              ' [' + (h.kod || '?') + ']');
+  } catch(err){
+    logDiag('recovery', 'istisna: ' + (err && err.message));
+  }
+  _recCalisiyor = false;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 83.1 — CANVAS SAĞLIK TESTİ
+   Yalnız kurtarma sonrası çalışır; her karede DEĞİL.
+   ═══════════════════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 83.3 — GERÇEK BOŞ CANVAS KONTROLÜ
+   ESKİ SORUN: getImageData(0,0,1,1) dönen pikseli HİÇ İNCELEMİYORDU
+   — yalnız çağrının hata atmadığını sınıyordu. Tamamen şeffaf bir
+   tuval "sağlıklı" görünüyordu (Faz 83.2 denetiminde kanıtlandı).
+
+   YENİ: en fazla 5 adet 1×1 örnek. Tam tuval okuması YOK.
+   Örnek önceliği:
+     1. Viewport içindeki görünür + SAHİPLİ sistemin ekran noktası
+        (en güvenilir: orada mutlaka bir şey çizili olmalı)
+     2. Yoksa viewport içindeki herhangi bir görünür sistem
+     3. Ek olarak merkez + 3 dağıtılmış sabit nokta
+   Hiçbir GÜVENİLİR nokta (1 veya 2) yoksa sonuç "belirsiz" —
+   boş kararı verilmez, retry başlatılmaz.
+
+   Bu, "boş tuval" ile "karanlık uzaya bakan geçerli tuval"i
+   ayırt etmenin anahtarı: karar yalnız üzerinde bir şey OLMASI
+   GEREKEN noktalara bakılarak veriliyor.
+   ═══════════════════════════════════════════════════════════════════ */
+const HEALTH_MAX_SAMPLES = 5;
+
+function verifyRenderHealth(){
+  if (typeof View === 'undefined') return {ok:false, kod:'no-view', why:'View yok'};
+  const cv = View.cv || document.getElementById('map');
+  if (!cv) return {ok:false, kod:'no-canvas', why:'canvas elementi yok'};
+  if (!View.g) return {ok:false, kod:'no-ctx', why:'2d context yok'};
+  if (!(cv.width > 0 && cv.height > 0))
+    return {ok:false, kod:'zero-size',
+            why:'canvas ölçüsü sıfır (' + cv.width + '×' + cv.height + ')'};
+  if (!(View.vw > 0 && View.vh > 0))
+    return {ok:false, kod:'zero-viewport',
+            why:'viewport sıfır (' + View.vw + '×' + View.vh + ')'};
+  const c = View.cam || {};
+  if (!isFinite(c.x) || !isFinite(c.y) || !isFinite(c.z) || c.z <= 0)
+    return {ok:false, kod:'bad-cam', why:'kamera geçersiz'};
+
+  /* ── Örnek noktalarını topla ── */
+  const guvenilir = [];      // üzerinde mutlaka bir şey olmalı
+  const yedek = [];          // genel dağıtım
+  const icinde = (p) => p && p.x >= 2 && p.y >= 2 &&
+                        p.x < View.vw - 2 && p.y < View.vh - 2;
+  try {
+    if (typeof G !== 'undefined' && G.sys && View.w2s){
+      /* 1. öncelik: görünür + sahipli */
+      for (const sy of G.sys){
+        if (guvenilir.length >= 2) break;
+        if (sy.owner < 0) continue;
+        if (typeof pSeen === 'function' && !pSeen(sy)) continue;
+        const p = View.w2s(sy.x, sy.y);
+        if (icinde(p)) guvenilir.push({x:p.x|0, y:p.y|0, tur:'sahipli'});
+      }
+      /* 2. öncelik: görünür herhangi bir sistem */
+      if (!guvenilir.length){
+        for (const sy of G.sys){
+          if (guvenilir.length >= 1) break;
+          if (typeof pSeen === 'function' && !pSeen(sy)) continue;
+          const p = View.w2s(sy.x, sy.y);
+          if (icinde(p)) guvenilir.push({x:p.x|0, y:p.y|0, tur:'görünür'});
+        }
+      }
+    }
+  } catch(e){ /* w2s hatası — güvenilir örnek yok sayılır */ }
+
+  /* Merkez + 3 dağıtılmış sabit nokta (yalnız bilgi amaçlı) */
+  yedek.push({x:(View.vw/2)|0,     y:(View.vh/2)|0,     tur:'merkez'});
+  yedek.push({x:(View.vw*0.25)|0,  y:(View.vh*0.30)|0,  tur:'sol-üst'});
+  yedek.push({x:(View.vw*0.75)|0,  y:(View.vh*0.30)|0,  tur:'sağ-üst'});
+  yedek.push({x:(View.vw*0.50)|0,  y:(View.vh*0.75)|0,  tur:'alt'});
+
+  const ornekler = guvenilir.concat(yedek).slice(0, HEALTH_MAX_SAMPLES);
+
+  /* ── Örnekle ── */
+  let doluGuvenilir = 0, doluToplam = 0, okunan = 0;
+  for (const o of ornekler){
+    let d;
+    try { d = View.g.getImageData(o.x, o.y, 1, 1).data; }
+    catch(e){
+      return {ok:false, kod:'ctx-unreadable',
+              why:'getImageData hatası: ' + (e && e.message)};
+    }
+    okunan++;
+    if (d[3] > 0){
+      doluToplam++;
+      if (o.tur === 'sahipli' || o.tur === 'görünür') doluGuvenilir++;
+    }
+  }
+
+  /* ── Karar ── */
+  if (!guvenilir.length){
+    /* Güvenilir referans yok — boş kararı VERME, retry BAŞLATMA */
+    return {ok:true, belirsiz:true, kod:'inconclusive',
+            why:'örnekleme için viewport içinde güvenilir sistem yok (' +
+                okunan + ' genel örnek okundu, ' + doluToplam + ' dolu)'};
+  }
+  if (doluGuvenilir === 0 && doluToplam === 0)
+    return {ok:false, kod:'blank-canvas',
+            why:'ana canvas boş — ' + okunan + ' örneğin hepsi alpha=0 (' +
+                guvenilir.length + ' güvenilir nokta dahil)'};
+  if (doluGuvenilir === 0)
+    return {ok:false, kod:'blank-canvas',
+            why:'güvenilir noktaların hepsi boş (' + guvenilir.length +
+                ' sistem noktası alpha=0)'};
+
+  /* ── Sınır dokusu ayrı bir kontrol ── */
+  if (View.borderCacheAlive && View.bcache){
+    const b = View.borderCacheAlive();
+    if (!b.ok) return {ok:false, kod:'blank-borders', why:'sınır cache: ' + b.why};
+  }
+  return {ok:true, kod:'healthy',
+          why:doluGuvenilir + '/' + guvenilir.length + ' güvenilir nokta dolu'};
+}
+
+
+window.addEventListener('pageshow',          ()=> scheduleRecovery('pageshow'));
+/* FAZ 83.3: resize artık yukarıdaki merkezî yöneticide —
+   bu satır kaldırıldı (çift kayıt olurdu). */
 window.addEventListener('orientationchange', ()=>{
-  forceRedraw();
-  setTimeout(forceRedraw, 300);      // dönüş animasyonu bitince
+  scheduleRecovery('orient');
+  setTimeout(()=> scheduleRecovery('orient2'), 300);   // dönüş bitince
 });
-window.addEventListener('focus', ()=>{ if (!document.hidden) forceRedraw(); });
+window.addEventListener('focus', ()=>{
+  if (!document.hidden) scheduleRecovery('focus');
+});
 
 /* Tuval bağlamı gerçekten kaybolursa tarayıcı bunu bildirir */
 (function(){
@@ -6002,7 +7444,7 @@ window.addEventListener('focus', ()=>{ if (!document.hidden) forceRedraw(); });
   cv.addEventListener('contextrestored', ()=>{
     console.warn('Tuval bağlamı geri geldi');
     try { View.init && View.init(); } catch(e){}
-    forceRedraw();
+    forceRedraw('contextrestored');
   });
 })();
 

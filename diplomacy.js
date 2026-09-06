@@ -215,7 +215,9 @@ function declareWar(a, b){
     const foe = (a.id === 0) ? b : a;
     const byThem = (b.id === 0);
     say('SAVAŞ İLAN EDİLDİ — ' + foe.name, 'war');
-    if (byThem && UI && UI.warDeclared) UI.warDeclared(foe);
+    /* FAZ 86C.2: doğrudan UI etkisi de tamponlanır. */
+    if (byThem && UI && UI.warDeclared)
+      deferUI(UI.warDeclared.bind(UI), foe);
   }
   if (typeof fedDefend === 'function') fedDefend(a, b);
   if (typeof overlordDefend === 'function') overlordDefend(a, b);
@@ -251,6 +253,41 @@ function canPeace(a, b){
 function canAlly(a, b){
   if (diploBlocked(a, b)) return false;
   return true;
+}
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 86C.2 — GÖREV 1B: SAF SAVAŞ SÖZÜ KAPISI
+
+   ÖLÇÜLEN HATA: `canDeclareWarOn` AI için `_dealAuth`/`_warAuth`
+   geçici yetkilerini şart koşuyor. dealQuote SAF aşamada çalıştığı
+   için bu yetkiler henüz kurulmamış oluyor ve AI'ın anlaşma kapsamında
+   verdiği `warOn` sözü quote'ta "o devlete savaş açamaz" diye
+   ÖLÜYORDU (ölçüldü: quote.ok=false, _warAuth=null, _dealAuth=false).
+
+   `canPromiseWarOn` ANLAŞMA KAPSAMINDA verilen sözün geçerliliğini
+   sınar. Sıradan savaş meclisi yetkisinden (aiWarReview / _warAuth)
+   AYRIDIR: burada geçici yetki aranmaz, çünkü yetkiyi anlaşmanın
+   kendisi verir. SAFtır — global yetki alanlarına DOKUNMAZ ve RNG
+   TÜKETMEZ; sonuç deterministiktir. */
+function canPromiseWarOn(a, b){
+  if (!a || !b) return {ok:false, why:'hedef devlet yok'};
+  if (a.id === b.id)       return {ok:false, why:'kendine savaş açamaz'};
+  if (b.dead)              return {ok:false, why:'hedef devlet yok'};
+  if (b.wild)              return {ok:false, why:'korsanlara savaş sözü verilemez'};
+  if (b.crisisSide)        return {ok:false, why:'kriz tarafına savaş sözü verilemez'};
+  if (!a.contact[b.id])    return {ok:false, why:'hedefle temas yok'};
+  /* Savaş ilanını yasaklayan doktrinler */
+  if (typeof hasCivic === 'function' && hasCivic(a, 'shadow'))
+    return {ok:false, why:'doktrini vekâlet savaşını yasaklar'};
+  if (typeof isPurifier === 'function' && isPurifier(b))
+    return {ok:false, why:'o devlete savaş açamaz'};
+  /* Konsey yasağı: DETERMİNİSTİK sınanır (rnd() KULLANILMAZ). */
+  if (typeof councilExists === 'function' && councilExists() &&
+      G.council.laws && G.council.laws.savasYasak &&
+      typeof inCouncil === 'function' && inCouncil(a) && inCouncil(b))
+    return {ok:false, why:'Konsey savaş yasağı yürürlükte'};
+  /* Zaten savaştaysa yeni etki yok — redundant kurallarına bırakılır. */
+  if (a.war[b.id]) return {ok:true, redundant:true};
+  return {ok:true};
 }
 function canDeclareWarOn(a, b){
   if (false) return false;          // sürgüne kimse savaş açamaz
@@ -414,7 +451,10 @@ const DEAL_KINDS = {
   ally   :{n:'İttifak',           ico:'⚑'},
   warOn  :{n:'Üçüncü Tarafa Savaş',ico:'⚔'},
   peaceWith:{n:'Üçüncü Tarafla Barış',ico:'🤲'},
-  intel  :{n:'Sensör Anlaşması',    ico:'👁'},
+  /* FAZ 86C.1: `intel` TEK YÖNLÜdür — veren tarafın sensör verisini
+     alıcıya açar. Simetrik ortak casus ağı `spynet`tir. */
+  intel  :{n:'Sensör Verisi Paylaşımı', ico:'👁',
+           d:'Tek yönlü: sensör verisi paylaşılır (ortak casus ağı değildir)'},
   spynet :{n:'Casusluk Ağı Paktı',  ico:'🕸'},
   passage:{n:'Sınır Geçiş İzni',ico:'🚪'}
 };
@@ -534,68 +574,117 @@ function itemValue(e, it, other){
 }
 
 /* teklifin AI gözünden net değeri */
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 86C — GÖREV F: AÇIKLANABİLİR DEĞERLEME
+
+   ÖLÇÜLEN ESKİ evalOffer: yalnız ham ilişki (rel/220) ve aiProfile
+   (dip/war) kullanıyordu; sınırsızdı ve gerekçe üretmiyordu.
+   ARTIK bütün yumuşak faktörler AYRI hesaplanır, her biri kendi
+   cap'iyle sınırlanır ve kısa gerekçe döner. Karar DETERMİNİSTİK —
+   kabul/ret için RNG YOKTUR. Elçi etkisi bu fazda nötr (1.00);
+   görev sistemi 86D'de bağlanacak. */
+const DEAL_FACTOR_CAPS = {
+  rel:      [0.80, 1.20],   // mevcut ilişki
+  trust:    [0.85, 1.15],   // güven + önemli diplomatik hafıza
+  ethic:    [0.90, 1.10],   // etik/ideoloji uyumu (normalleştirilmiş)
+  honor:    [0.92, 1.08],   // onur/itibar
+  persona:  [0.90, 1.10],   // kişilik/doktrin/stratejik ihtiyaç
+  foe:      [1.00, 1.15],   // ortak düşman — YALNIZ güvenlik maddeleri
+  envoy:    [1.00, 1.00],   // FAZ 86D'ye kadar nötr
+  gainTot:  [0.60, 1.55],   // toplam fayda çarpanı
+  costTot:  [0.85, 1.20]    // toplam çekince çarpanı
+};
+const DEAL_SECURITY_KINDS = ['peace','nap','ally','intel','spynet','warOn','peaceWith'];
+function _cap(v, k){
+  const c = DEAL_FACTOR_CAPS[k];
+  return clamp(v, c[0], c[1]);
+}
+/* Normalleştirilmiş etik farkı: 0 (aynı) … 1 (tam zıt). */
+function ethicGap(a, b){
+  const eks = ['mil','aut','mat','ahl'];
+  let t = 0;
+  for (const k of eks) t += Math.abs((a.ethics[k] || 0) - (b.ethics[k] || 0));
+  return clamp(t / (eks.length * 6), 0, 1);   // her eksen −3..+3
+}
+/* Saf faktör hesabı — RNG yok, mutasyon yok. */
+function dealFactors(ai, other, n){
+  const f = {}, why = [];
+  const rel = ai.rel[other.id] || 0;
+  f.rel = _cap(1 + rel / 500, 'rel');
+  if (rel <= -40) why.push('İlişki düşmanca');
+  else if (rel >= 40) why.push('İlişki dostane');
+
+  const tr = (typeof trustOf === 'function') ? trustOf(ai, other.id) : 50;
+  f.trust = _cap(1 + (tr - 50) / 340, 'trust');
+  if (tr <= 30) why.push('Geçmiş ihlaller ağır basıyor');
+  else if (tr >= 70) why.push('Güven yüksek');
+
+  const gap = ethicGap(ai, other);
+  f.ethic = _cap(1.10 - gap * 0.20, 'ethic');
+  if (gap >= 0.55) why.push('İdeolojik güvensizlik');
+
+  const hn = (typeof honorOf === 'function') ? honorOf(other) : 0;
+  f.honor = _cap(1 + hn / 1250, 'honor');
+  if (hn <= -30) why.push('Karşı tarafın itibarı kötü');
+
+  const prof = ai.ai ? aiProfile(ai) : {dip:.5, war:.5};
+  f.persona = _cap(1 + (prof.dip - .5) * 0.20, 'persona');
+  f.greed   = _cap(1 + (prof.war - .5) * 0.20, 'costTot');
+
+  /* Ortak düşman YALNIZ güvenlik maddelerinde ve en fazla +%15. */
+  const guvenlikVar = n.give.concat(n.want).some(it =>
+    DEAL_SECURITY_KINDS.indexOf(it.t) >= 0);
+  const ortak = (typeof sharedFoe === 'function') && sharedFoe(ai, other);
+  f.foe = (guvenlikVar && ortak) ? _cap(1.15, 'foe') : 1;
+  if (f.foe > 1) why.push('Ortak tehdit güvenlik anlaşmasını değerli kılıyor');
+
+  f.envoy = _cap(1, 'envoy');       // 86D'ye kadar nötr
+  return {f, why, rel, trust:tr, ethicGap:gap, honor:hn, sharedFoe:!!ortak};
+}
 function evalOffer(ai, offer){
-  /* FAZ 80: Arındırıcı masaya oturmaz — teklif değerlendirilmez */
+  /* Sert kilit: Arındırıcı masaya oturmaz — para ile aşılamaz. */
   if (typeof diploBlocked === 'function'){
     const kars = offer && offer.from !== undefined ? G.emps[offer.from] : null;
-    if (diploBlocked(ai, kars)) return {net: -9999, red: true};
+    if (diploBlocked(ai, kars))
+      return {net: -9999, red: true, hardLock: true,
+              why: ['Doktrin bu devletle anlaşmayı yasaklıyor']};
   }
   const other = G.emps[offer.from];
+  if (!other) return {net: -9999, red: true, hardLock: true, why: ['Taraf yok']};
+  const n = (typeof normalizeDeal === 'function')
+            ? normalizeDeal(offer) : {give: offer.give || [], want: offer.want || []};
+  if (n.errors && n.errors.length)
+    return {net: -9999, red: true, hardLock: true, why: n.errors.slice(0, 2)};
+
   let gain = 0, cost = 0;
-  for (const it of offer.give) gain += itemValue(ai, it, other);
-  for (const it of offer.want) cost += itemValue(ai, it, other);
-  // ilişki ve kişilik teklifi renklendirir
-  const rel = ai.rel[other.id] || 0;
-  const prof = ai.ai ? aiProfile(ai) : {dip:.5, war:.5};
-  const trust = 1 + rel / 220 + (prof.dip - .5) * .18;
-  const greed = 1 + (prof.war - .5) * .22;          // savaşçı AI daha çok ister
-  return {gain: gain * trust, cost: cost * greed, net: gain * trust - cost * greed};
+  for (const it of n.give) gain += itemValue(ai, it, other);
+  for (const it of n.want) cost += itemValue(ai, it, other);
+
+  const F = dealFactors(ai, other, n);
+  const f = F.f;
+  /* Faktörler ÇARPILIR ama toplam iki uçta clamp'lenir — tek bir
+     faktör aşırı uç üretemez, aynı bilgi iki kez sayılmaz. */
+  const gainMul = _cap(f.rel * f.trust * f.ethic * f.honor * f.persona *
+                       f.foe * f.envoy, 'gainTot');
+  const costMul = _cap(f.greed, 'costTot');
+  const G2 = gain * gainMul, C2 = cost * costMul;
+  return {gain: G2, cost: C2, net: G2 - C2,
+          rawGain: gain, rawCost: cost,
+          factors: f, gainMul, costMul, why: F.why,
+          rel: F.rel, trust: F.trust, ethicGap: F.ethicGap,
+          honor: F.honor, sharedFoe: F.sharedFoe, hardLock: false};
 }
 
 /* teklifin uygulanabilirliği — taraflar sözünü tutabiliyor mu? */
-function canDeliver(e, items, other){
-  for (const it of items){
-    switch(it.t){
-      case 'res':     if ((e.res[it.r]||0) < it.v) return false; break;
-      case 'tribute': {
-        const inc = (e.inc && e.inc[it.r]) || 0;
-        const stock = e.res[it.r] || 0;
-        // ya düzenli gelirin yeter, ya da en az 2 yıllık stokun vardır
-        if (inc < it.v * .5 && stock < it.v * 24) return false;
-        break;
-      }
-      case 'sys': {
-        const sy = G.sys[it.id];
-        if (!sy || sy.owner !== e.id) return false;
-        if (e.home === it.id) return false;                 // başkent verilemez
-        break;
-      }
-      case 'tech':  if (!e.techs[it.id]) return false; break;
-      case 'lux':   if (!(e.luxOwn && e.luxOwn[it.k])) return false; break;
-      case 'peace': if (!e.war[other.id]) return false; break;
-      case 'ally':  if (!canAlly(e, other)) return false; break;
-      case 'pact':  if (!canPact(e, other)) return false; break;
-      case 'warOn': {
-        const t = G.emps[it.target];
-        if (!t || t.dead || !canDeclareWarOn(e, t)) return false;
-        if (hasCivic(e,'shadow')) return false;
-        break;
-      }
-      case 'peaceWith': {
-        const t = G.emps[it.target];
-        if (!t || t.dead || !e.war[t.id] || !canPeace(e, t)) return false;
-        break;
-      }
-    }
-  }
-  return true;
-}
-
 /* --------------------------------------------------------------------
    UYGULAMA — anlaşma kabul edilince maddeleri yürürlüğe koy
    -------------------------------------------------------------------- */
 function applyItems(giver, taker, items){
+  /* FAZ 86C: hata enjeksiyonu kancası — üretimde tanımsız, yalnız
+     atomiklik testleri bunu geçici olarak atar. */
   for (const it of items){
+    /* FAZ 86C.2: aşamalı kanca — `before:<tür>` mutasyondan ÖNCE. */
+    if (typeof G._dealFailInject === 'function') G._dealFailInject('before:' + it.t);
     switch(it.t){
       case 'res':
         giver.res[it.r] = Math.max(0, (giver.res[it.r]||0) - it.v);
@@ -689,21 +778,800 @@ function applyItems(giver, taker, items){
         giver.passage[taker.id] = true;
         break;
     }
+    /* FAZ 86C.2: `after:<tür>` madde POSTCONDITION'ı gerçekleştikten
+       SONRA çağrılır — kanca içinde DEĞİŞMİŞ durum görülebilir. */
+    if (!dealPostcondition(giver, taker, it))
+      throw new Error('postcondition başarısız: ' + it.t);
+    if (typeof G._dealFailInject === 'function') G._dealFailInject('after:' + it.t);
   }
 }
 
-function executeDeal(offer){
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 86B — KANONİK VE ATOMİK ANLAŞMA MOTORU
+
+   ÖN DENETİMDE GERÇEK ÜRETİM YOLUYLA KANITLANAN İSTİSMARLAR:
+   1) KAYNAK ÇOĞALTMA: canDeliver satırları AYRI AYRI sınıyordu.
+      1000 mineral stok + iki adet 800'lük satır → ikisi de geçti,
+      executeDeal başarılı oldu, toplam 1500 → 2100 (600 mineral
+      yoktan yaratıldı).
+   2) BOŞ ANLAŞMA: give:[] want:[] → executeDeal true ve +6 ilişki.
+      10 tekrar → +66 ilişki, sıfır maddeyle.
+   3) ANTLAŞMA TEKRARI: yürürlükteki NAP üç kez imzalandı,
+      ilişki 6 → 12 → 18. Süre uzamıyor ama ilişki sınırsız kasılıyor.
+   4) spynet: 0 UI üreticisi + 0 AI üreticisi → tamamen erişilemez.
+   5) canDeliver'da case'i OLMAYAN türler (hep "teslim edilebilir"):
+      nap · lux · intel · spynet · passage.
+
+   ÇÖZÜM: tek kanonik hat —
+     normalizeDeal → dealValidity → dealQuote → executeDeal
+   Her aşama SAF (RNG tüketmez, oyun durumu değiştirmez); yalnız
+   executeDeal yazar ve o da ancak tam doğrulamadan sonra.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── KANONİK İMZALAMA MALİYET TABLOSU ──
+   ÖLÇÜLEN ESKİ MALİYETLER (dağınık ve tutarsızdı):
+     diploAct peace  : 30  (zar ATILMADAN ÖNCE kesiliyordu → ret'te kayıp)
+     diploAct pact   : 40  (aynı sorun)
+     diploAct ally   : 90 / 55 (allyCheap) · sharedFoe ×0.5 (aynı sorun)
+     pactOpen intel  : 45  (AI teklifini KABUL EDEN oyuncudan kesiliyordu)
+     pactOpen spynet : 120 (aynı)
+     nap/passage     : maliyetsiz (oyuncu yolu zaten yoktu)
+   YENİ POLİTİKA: maliyet YALNIZ başarılı imzada, YALNIZ teklifi
+   GÖNDEREN taraftan, TAM BİR KEZ kesilir. Çok maddeli teklifte
+   antlaşma maddelerinin maliyeti TOPLANIR (kaynak/sistem/teknoloji
+   gibi maddi maddeler ek maliyet doğurmaz). */
+const DEAL_TREATY_COST = {
+  peace:30, pact:40, ally:90, intel:45, spynet:120,
+  nap:0, passage:0, warOn:0, peaceWith:0
+};
+function dealItemCost(sender, other, it){
+  let c = DEAL_TREATY_COST[it.t];
+  if (c === undefined) return 0;
+  if (it.t === 'ally'){
+    if (typeof hasCivic === 'function' && hasCivic(sender,'allyCheap')) c = 55;
+    if (typeof sharedFoe === 'function' && other && sharedFoe(sender, other))
+      c = Math.round(c * .5);
+  }
+  return c;
+}
+/* Teklifin toplam Etki maliyeti — GÖNDEREN öder. */
+function dealCost(offer){
+  /* ═══ FAZ 86C — GÖREV D: ÇOKLU ANTLAŞMA MALİYET POLİTİKASI ═══
+     Tabanlar korundu (peace 30 · pact 40 · ally 90 · intel 45 ·
+     spynet 120 · nap/passage/warOn/peaceWith 0). allyCheap ve
+     sharedFoe indirimleri ÖNCE her maddeye uygulanır.
+     Fiyatlama: EN PAHALI benzersiz ücret tam, diğerlerinin %25'i.
+     Aynı antlaşmanın iki yönde bulunması ikinci ücret doğurmaz.
+     Tavan 160 Etki. Round yalnız EN SONDA bir kez. */
   const a = G.emps[offer.from], b = G.emps[offer.to];
+  if (!a || !b) return 0;
+  /* FAZ 86C.1: maliyet YALNIZ effective plan üzerinden — redundant
+     antlaşma ücretlendirilmez. Ham teklif geldiyse normalize edilir. */
+  const nn = (offer.effectiveGive || offer.effectiveWant)
+             ? offer : normalizeDeal(offer);
+  const kalemler = (nn.effectiveGive || []).concat(nn.effectiveWant || []);
+  const gorulen = {};
+  const ucretler = [];
+  for (const it of kalemler){
+    if (!it || gorulen[it.t]) continue;
+    gorulen[it.t] = true;
+    const c = dealItemCost(a, b, it);
+    if (c > 0) ucretler.push(c);
+  }
+  if (!ucretler.length) return 0;
+  ucretler.sort((x, y) => y - x);
+  let t = ucretler[0];
+  for (let k = 1; k < ucretler.length; k++) t += ucretler[k] * 0.25;
+  return Math.min(160, Math.round(t));
+}
+
+/* Simetrik antlaşmalar: iki tarafı da bağlar, teklifte TEK madde olur. */
+const DEAL_SYMMETRIC = ['peace','nap','pact','ally','spynet'];
+/* Tek yönlü maddeler: yön metni gerekir. */
+const DEAL_DIRECTED  = ['res','tribute','sys','tech','lux','intel','passage',
+                        'warOn','peaceWith'];
+
+/* Bir maddenin kimliği — tekilleştirme anahtarı. */
+function dealItemKey(it){
+  if (!it || !it.t) return null;
+  switch(it.t){
+    case 'res': case 'tribute': return it.t + ':' + it.r;
+    case 'sys': case 'tech':    return it.t + ':' + it.id;
+    case 'lux':                 return it.t + ':' + it.k;
+    case 'warOn': case 'peaceWith': return it.t + ':' + it.target;
+    default:                    return it.t;
+  }
+}
+
+/* ── 1) NORMALİZE (SAF) ──
+   · Aynı kaynağın/haracın birden çok satırı TOPLANIR.
+   · Aynı sistem/teknoloji/lüks/hedefli madde TEKİLLEŞTİRİLİR.
+   · Simetrik antlaşma her iki listede de varsa TEK kanonik maddeye
+     indirilir (give tarafında tutulur).
+   · Bilinmeyen tür veya bozuk madde DÜŞÜRÜLÜR (gizlice geçerli
+     hâle getirilmez — düşenler `dropped` ile raporlanır).
+   Giriş nesnesi DEĞİŞTİRİLMEZ; yeni nesne döner. */
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 86C — GÖREV A: NORMALLEŞTİRME GEÇERSİZ TEKLİFİ KURTARMAZ
+
+   ÖLÇÜLEN ZAFİYET (86B): bilinmeyen madde türü, eksik alan ve geçersiz
+   miktar `dropped` listesine yazılıp SESSİZCE ATILIYOR, teklifin geri
+   kalanı uygulanıyordu. Yani "geçerli ödül + geçersiz yükümlülük"
+   paketinde ödül aktarılıp yükümlülük düşüyordu.
+
+   ARTIK üç ayrı sınıf döner:
+     normalizations : anlamı KORUYAN güvenli dönüşümler
+     redundant      : zaten yürürlükte / yeni etkisi olmayan maddeler
+     errors         : teklifin TAMAMINI geçersiz yapan FATAL hatalar
+   Tek bir fatal hata varsa teklif bütünüyle reddedilir. */
+function normalizeDeal(offer){
+  const normalizations = [], redundant = [], errors = [];
+  const bitir = () => ({from:null, to:null, give:[], want:[],
+                        normalizations, redundant, errors,
+                        dropped:errors.concat(normalizations)});
+  if (!offer || typeof offer !== 'object'){
+    errors.push('Teklif nesnesi yok'); return bitir();
+  }
+  /* ── TARAF DOĞRULAMASI ── */
+  const fa = Number(offer.from), fb = Number(offer.to);
+  if (!isFinite(fa) || !isFinite(fb) || !Number.isInteger(fa) || !Number.isInteger(fb)){
+    errors.push('Taraf kimliği sayı değil'); return bitir();
+  }
+  if (fa === fb){ errors.push('Bir devlet kendisiyle anlaşma yapamaz'); return bitir(); }
+  const A = G.emps[fa], B = G.emps[fb];
+  if (!A || !B){ errors.push('Taraflardan biri bulunamadı'); return bitir(); }
+  if (A.dead || B.dead){ errors.push('Ölü devletle anlaşma yapılamaz'); return bitir(); }
+  if (A.wild || B.wild){ errors.push('Korsanlarla müzakere edilemez'); return bitir(); }
+  if (A.crisisSide || B.crisisSide){
+    errors.push('Kriz tarafıyla müzakere edilemez'); return bitir(); }
+  if (!A.contact[B.id] || !B.contact[A.id]){
+    errors.push('Taraflar arasında temas yok'); return bitir(); }
+  /* Mevcut sert engeller (doktrin/purifier) kanonikleştirildi. */
+  if (typeof diploBlocked === 'function' &&
+      (diploBlocked(A, B) || diploBlocked(B, A))){
+    errors.push('Doktrin bu devletle her türlü anlaşmayı yasaklıyor');
+    return bitir();
+  }
+
+  const norm = (liste, taraf) => {
+    const out = [], idx = {};
+    for (const raw of (Array.isArray(liste) ? liste : [])){
+      if (!raw || typeof raw !== 'object'){
+        errors.push('Madde nesnesi bozuk'); continue; }
+      if (!DEAL_KINDS[raw.t]){
+        errors.push('Bilinmeyen madde türü: ' + String(raw.t)); continue; }
+      const it = {t: raw.t};
+      if (raw.r !== undefined) it.r = raw.r;
+      if (raw.k !== undefined) it.k = raw.k;
+      if (raw.id !== undefined) it.id = raw.id;
+      if (raw.target !== undefined) it.target = raw.target;
+      if (raw.v !== undefined){
+        const v = Number(raw.v);
+        if (!isFinite(v) || v <= 0){
+          errors.push(raw.t + ': geçersiz miktar (' + String(raw.v) + ')'); continue; }
+        it.v = v;
+      }
+      /* ── ZORUNLU ALAN + KATALOG DOĞRULAMASI (gerçek kataloglar) ── */
+      if (it.t === 'res' || it.t === 'tribute'){
+        if (it.v === undefined || !it.r){
+          errors.push(it.t + ': eksik kaynak veya miktar'); continue; }
+        if (!RES[it.r]){
+          errors.push(it.t + ': bilinmeyen kaynak "' + String(it.r) + '"'); continue; }
+      }
+      if (it.t === 'sys'){
+        const sy = (it.id !== undefined) ? G.sys[it.id] : null;
+        if (!sy){ errors.push('sys: geçersiz sistem kimliği'); continue; }
+      }
+      if (it.t === 'tech'){
+        if (it.id === undefined || !TECHS[it.id]){
+          errors.push('tech: katalogda olmayan teknoloji'); continue; }
+      }
+      if (it.t === 'lux'){
+        if (!it.k || (typeof LUXURY !== 'undefined' && !LUXURY[it.k])){
+          errors.push('lux: katalogda olmayan lüks mal'); continue; }
+      }
+      if (it.t === 'warOn' || it.t === 'peaceWith'){
+        const t = (it.target !== undefined) ? G.emps[it.target] : null;
+        if (!t || t.dead){ errors.push(it.t + ': geçersiz hedef devlet'); continue; }
+        if (t.id === taraf.id){
+          errors.push(it.t + ': taraf kendini hedef alamaz'); continue; }
+      }
+      const key = dealItemKey(it);
+      if (idx[key] !== undefined){
+        if (it.t === 'res' || it.t === 'tribute'){
+          /* GÜVENLİ NORMALLEŞTİRME: aynı kaynağın satırları toplanır. */
+          out[idx[key]].v += it.v;
+          normalizations.push(it.t + '/' + it.r + ': satırlar toplandı');
+        } else {
+          normalizations.push((DEAL_KINDS[it.t] ? DEAL_KINDS[it.t].n : it.t) +
+                              ': yinelenen madde tek maddeye indirildi');
+        }
+        continue;
+      }
+      idx[key] = out.length; out.push(it);
+    }
+    return out;
+  };
+  const give = norm(offer.give, A), want = norm(offer.want, B);
+  /* Simetrik antlaşma iki listede birden varsa TEK kanonik maddeye iner. */
+  for (const t of DEAL_SYMMETRIC){
+    const gi = give.findIndex(x => x.t === t), wi = want.findIndex(x => x.t === t);
+    if (gi >= 0 && wi >= 0){
+      want.splice(wi, 1);
+      normalizations.push((DEAL_KINDS[t] ? DEAL_KINDS[t].n : t) +
+                          ': simetrik antlaşma tek maddeye indirildi');
+    }
+  }
+  /* ═══ FAZ 86C.1 — YAPISAL EFFECTIVE PLAN ═══
+     ÖLÇÜLEN ZAFİYET: redundant antlaşma yalnız METİN olarak
+     işaretleniyor, norm.give/norm.want içinde KALIYOR ve applyItems
+     tarafından yeniden uygulanabiliyordu (NAP süresi uzuyor, pact
+     ilişkisi/hafızası yeniden tetikleniyordu).
+     ARTIK üç ayrı yapı üretilir:
+       give/want                  → kullanıcıya GÖSTERİLECEK maddeler
+       effectiveGive/effectiveWant→ gerçekten UYGULANACAK maddeler
+       redundantItems             → yön + kararlı madde anahtarıyla
+                                    YAPISAL kayıt (Türkçe metin değil) */
+  const effectiveGive = [], effectiveWant = [], redundantItems = [];
+  for (const it of give){
+    if (treatyAlreadyActive(A, B, it)){
+      redundantItems.push({yon:'give', key:dealItemKey(it), t:it.t, it});
+      redundant.push((DEAL_KINDS[it.t] ? DEAL_KINDS[it.t].n : it.t) + ' zaten yürürlükte');
+    } else effectiveGive.push(it);
+  }
+  for (const it of want){
+    if (treatyAlreadyActive(B, A, it)){
+      redundantItems.push({yon:'want', key:dealItemKey(it), t:it.t, it});
+      redundant.push((DEAL_KINDS[it.t] ? DEAL_KINDS[it.t].n : it.t) + ' zaten yürürlükte');
+    } else effectiveWant.push(it);
+  }
+
+  return {from: fa, to: fb, give, want,
+          effectiveGive, effectiveWant, redundantItems,
+          normalizations, redundant, errors,
+          /* Uyumluluk alanı. FAZ 86C.1: bu alan artık HİÇBİR karar
+             veya UI yolunda doğruluk kaynağı DEĞİLDİR — güvenli
+             normalleştirmeyi hata gibi göstermemek için ayrıldı. */
+          dropped: errors.slice(),
+          born: offer.born, expires: offer.expires};
+}
+
+/* Bir antlaşma maddesi ZATEN yürürlükte mi? (ilişki çiftliği önlemi) */
+function treatyAlreadyActive(a, b, it){
+  /* FAZ 86C.2: hedefle zaten savaştaysa warOn yeni etki üretmez. */
+  if (it && it.t === 'warOn'){
+    const t = G.emps[it.target];
+    return !!(t && a.war && a.war[t.id]);
+  }
+
+  if (!a || !b || !it) return false;
+  switch(it.t){
+    case 'peace':   return !a.war[b.id];
+    case 'nap':     return !!(a.nap && a.nap[b.id] > G.day);
+    case 'pact':    return !!(a.pact && a.pact[b.id]);
+    case 'ally':    return !!a.ally[b.id];
+    case 'spynet':  return !!(a.spynet && a.spynet[b.id]);
+    case 'intel':   return !!(b.visionFrom && b.visionFrom[a.id]);
+    case 'passage': return !!(a.passage && a.passage[b.id]);
+    default:        return false;
+  }
+}
+
+/* ── 2) GEÇERLİLİK (SAF, NEDENLİ) ──
+   Kaynak ve haraç yükümlülüklerini TOPLAM üzerinden sınar. */
+function dealValidity(offer){
+  const n = normalizeDeal(offer);
+  /* ═══ FAZ 86C: FATAL HATA → TEKLİFİN TAMAMI REDDEDİLİR ═══
+     Hatalı maddeyi sessizce atıp kalanı uygulamak YASAK. */
+  if (n.errors && n.errors.length)
+    return {ok:false, norm:n, reasons:n.errors.slice(),
+            giveFail:[], wantFail:[], newEffect:false, fatal:n.errors.slice()};
+  if (n.from === null || n.to === null)
+    return {ok:false, norm:n, reasons:['Teklif geçersiz'],
+            giveFail:[], wantFail:[], newEffect:false, fatal:['Teklif geçersiz']};
+  const a = G.emps[n.from], b = G.emps[n.to];
+  const reasons = [], giveFail = [], wantFail = [];
+  if (!a || !b || a.dead || b.dead)
+    return {ok:false, norm:n, reasons:['Taraflardan biri geçersiz'],
+            giveFail, wantFail, newEffect:false};
+
+  const yan = (veren, alan, items, fail) => {
+    /* TOPLAM kaynak/haraç yükümlülüğü */
+    const resTop = {}, tribTop = {};
+    for (const it of items){
+      if (it.t === 'res')     resTop[it.r]  = (resTop[it.r]  || 0) + it.v;
+      if (it.t === 'tribute') tribTop[it.r] = (tribTop[it.r] || 0) + it.v;
+    }
+    for (const r in resTop){
+      const stok = veren.res[r] || 0;
+      if (stok < resTop[r]){
+        const m = (RES[r] ? RES[r].n : r) + ': toplam ' + Math.round(resTop[r]) +
+                  ' gerekiyor, stok ' + Math.round(stok);
+        fail.push(m); reasons.push(veren.name + ' → ' + m);
+      }
+    }
+    for (const r in tribTop){
+      const inc = (veren.inc && veren.inc[r]) || 0, stok = veren.res[r] || 0;
+      if (inc < tribTop[r] * .5 && stok < tribTop[r] * 24){
+        const m = (RES[r] ? RES[r].n : r) + ' haracı taşınamıyor';
+        fail.push(m); reasons.push(veren.name + ' → ' + m);
+      }
+    }
+    for (const it of items){
+      let hata = null;
+      switch(it.t){
+        case 'sys': {
+          const sy = G.sys[it.id];
+          if (!sy || sy.owner !== veren.id) hata = 'sistem artık ona ait değil';
+          else if (veren.home === it.id)    hata = 'başkent verilemez';
+          break;
+        }
+        case 'tech': if (!veren.techs[it.id]) hata = 'teknoloji elinde değil'; break;
+        case 'lux':  if (!(veren.luxOwn && veren.luxOwn[it.k])) hata = 'lüks mal elinde değil'; break;
+        case 'peace': if (!veren.war[alan.id]) hata = 'zaten savaşta değilsiniz'; break;
+        case 'ally': if (typeof canAlly === 'function' && !canAlly(veren, alan))
+                       hata = 'ittifak mümkün değil'; break;
+        case 'pact': if (typeof canPact === 'function' && !canPact(veren, alan))
+                       hata = 'ticaret mümkün değil'; break;
+        case 'warOn': {
+          /* FAZ 86C.2: saf söz kapısı — geçici yetki aranmaz. */
+          const t = G.emps[it.target];
+          const pr = canPromiseWarOn(veren, t);
+          if (!pr.ok) hata = pr.why;
+          break;
+        }
+        case 'peaceWith': {
+          const t = G.emps[it.target];
+          if (!t || t.dead) hata = 'hedef devlet yok';
+          else if (!veren.war[t.id]) hata = 'o devletle zaten savaşta değil';
+          else if (typeof canPeace === 'function' && !canPeace(veren, t))
+            hata = 'o devletle barış mümkün değil';
+          break;
+        }
+      }
+      if (hata){
+        const m = (DEAL_KINDS[it.t] ? DEAL_KINDS[it.t].n : it.t) + ': ' + hata;
+        fail.push(m); reasons.push(veren.name + ' → ' + m);
+      }
+    }
+  };
+  /* ═══ FAZ 86C.2 — GÖREV 1A ═══
+     ÖLÇÜLEN HATA: teslim/uygunluk kontrolleri hâlâ `n.give/n.want`
+     üzerindeydi. "Zaten barıştayken redundant peace + yeni 10 mineral"
+     paketinde effectiveGive=[res] olmasına rağmen quote FALSE dönüyor,
+     gerekçe "Barış: zaten savaşta değilsiniz" oluyordu — redundant
+     madde ikinci kez HATA üretiyordu.
+     Fatal biçim/katalog doğrulaması normalizeDeal'de tüm GÖRÜNEN
+     teklif üzerinde kalır; uygulanabilirlik ise YALNIZ effective
+     plan üzerinden yürür. */
+  yan(a, b, n.effectiveGive, giveFail);
+  yan(b, a, n.effectiveWant, wantFail);
+
+  /* ═══ FAZ 86C — GÖREV B: PLANLANAN SON DURUMA GÖRE DOĞRULAMA ═══
+     Maddeleri sırayla mutasyona uğratarak değil, teklifin PLANLANAN
+     nihai diplomatik durumunu hesaplayarak sınarız. Böylece madde
+     sırası sonucu değiştirmez: "peace + nap" ile "nap + peace" aynı
+     geçerli sonucu verir; savaş sürerken YALNIZ nap geçersizdir. */
+  const hepsi = n.effectiveGive.concat(n.effectiveWant);
+  const plan = {
+    savas: !!a.war[b.id],
+    pact:  !!(a.pact && a.pact[b.id]),
+    ally:  !!a.ally[b.id]
+  };
+  for (const it of hepsi){
+    if (it.t === 'peace' || it.t === 'ally') plan.savas = false;
+    if (it.t === 'pact') plan.pact = true;
+    if (it.t === 'ally') plan.ally = true;
+  }
+  const planHata = m => { reasons.push(m); };
+  for (const it of hepsi){
+    switch(it.t){
+      case 'nap':
+        if (plan.savas) planHata(
+          'Saldırmazlık: savaş sürerken imzalanamaz — pakete barış ekle');
+        break;
+      case 'pact':
+        if (plan.savas) planHata(
+          'Ticaret anlaşması: savaş sürerken imzalanamaz — pakete barış ekle');
+        break;
+      case 'ally':
+        if (typeof canAlly === 'function' && !canAlly(a, b) && !plan.savas)
+          {/* zaten madde bazlı kontrolde yakalandı */}
+        break;
+      case 'passage':
+        if (plan.savas) planHata('Geçiş hakkı: savaş sürerken verilemez');
+        break;
+    }
+  }
+
+  /* YENİ ETKİ VAR MI? Boş teklif ve yürürlükteki antlaşmanın
+     tekrarı ilişki üretemez. */
+  let newEffect = false;
+  const bakim = (veren, alan, items) => {
+    for (const it of items){
+      if (DEAL_TREATY_COST[it.t] !== undefined || it.t === 'passage' || it.t === 'intel'){
+        if (!treatyAlreadyActive(veren, alan, it)) newEffect = true;
+      } else newEffect = true;          // maddi madde daima yeni etkidir
+    }
+  };
+  bakim(a, b, n.effectiveGive); bakim(b, a, n.effectiveWant);
+  if (!n.give.length && !n.want.length)
+    reasons.push('Teklif boş — hiçbir madde yok');
+  else if (!newEffect)
+    reasons.push('Bütün maddeler zaten yürürlükte — yeni etki yok');
+
+  const ok = reasons.length === 0;
+  return {ok, norm:n, reasons, giveFail, wantFail, newEffect};
+}
+/* Eski boolean yol — ince sarmalayıcı, ayrı formül KOPYASI değil. */
+/* ═══ FAZ 86C.1: KATI UYUMLULUK SARMALAYICISI ═══
+   ÖLÇÜLEN ZAFİYET: eski hâl yalnız `v.giveFail.length === 0` dönüyordu
+   ve beş ayrı senaryoda YANLIŞ POZİTİF üretiyordu — savaşta yalnız NAP,
+   fatal bilinmeyen madde, tamamen redundant antlaşma, yetersiz Etki ve
+   süresi dolmuş teklif. Artık tek doğruluk kaynağı dealQuote'tur.
+   Hiçbir kritik karar bu yardımcının kısmi sonucuna dayanmaz. */
+function canDeliver(e, items, other, offer){
+  if (!e || !other || e.id === other.id) return false;
+  /* Ömür alanları teklif nesnesinde yaşar; parça sınanırken de
+     taşınmalı, aksi hâlde süresi dolmuş teklif "teslim edilebilir"
+     görünüyordu (ölçülen 5. yanlış pozitif). */
+  const q = dealQuote({from:e.id, to:other.id, give:items, want:[],
+                       born:(offer && offer.born), expires:(offer && offer.expires)});
+  return q.ok === true;
+}
+/* Yalnız "bu taraf bu maddeleri fiziksel olarak teslim edebilir mi?"
+   sorusunun cevabı gerekiyorsa (maliyet/ömür/redundant hariç). */
+function canDeliverItems(e, items, other){
+  if (!e || !other || e.id === other.id) return false;
+  const v = dealValidity({from:e.id, to:other.id, give:items, want:[]});
+  return v.giveFail.length === 0;
+}
+
+/* ── 3) TEKLİF ÖZETİ (SAF) ── uygulanabilirlik + maliyet bölümü. */
+function dealQuote(offer){
+  const v = dealValidity(offer);
+  const a = G.emps[v.norm.from], b = G.emps[v.norm.to];
+  const cost = dealCost(v.norm);
+  const afford = !!a && (a.res.etk || 0) >= cost;
+  const bayat = dealExpired(offer);
+  const reasons = v.reasons.slice();
+  if (!afford) reasons.push('Gönderen tarafta yetersiz Etki (' + cost + ' ◈ gerekir)');
+  if (bayat)   reasons.push('Teklifin süresi doldu');
+  return {ok: v.ok && afford && !bayat, norm:v.norm, valid:v.ok,
+          reasons, giveFail:v.giveFail, wantFail:v.wantFail,
+          newEffect:v.newEffect, cost, costWho: a ? a.id : null,
+          affordable:afford, expired:bayat,
+          /* FAZ 86C: üç sınıf da dışarı taşınır */
+          fatal: v.fatal || [],
+          normalizations: v.norm.normalizations || [],
+          redundant: v.norm.redundant || [],
+          dropped:v.norm.dropped};
+}
+
+/* ── TEKLİF ÖMRÜ (18 ay / 540 gün) ── */
+const DEAL_OFFER_LIFE = 540;
+function dealExpired(offer){
+  if (!offer) return false;
+  const exp = Number(offer.expires);
+  if (isFinite(exp)) return G.day > exp;
+  /* GERİYE UYUM: eski tekliflerde `expires` yok. `born` varsa
+     deterministik olarak born+540 kullanılır; ikisi de yoksa
+     teklif süresiz sayılır (eski davranış korunur). */
+  const born = Number(offer.born);
+  if (isFinite(born)) return G.day > born + DEAL_OFFER_LIFE;
+  return false;
+}
+function dealTimeLeft(offer){
+  if (!offer) return null;
+  const exp = Number(offer.expires);
+  const born = Number(offer.born);
+  const son = isFinite(exp) ? exp : (isFinite(born) ? born + DEAL_OFFER_LIFE : null);
+  if (son === null) return null;
+  return Math.max(0, Math.round((son - G.day) / 30));
+}
+
+/* ── 4) ATOMİK UYGULAMA ──
+   executeDeal DIŞARIDAN veya bozuk kayıt üzerinden çağrılsa bile
+   kendi sınırında tüm guard'ları TEKRAR doğrular. */
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 86C — GÖREV E: DÜZ +6 İLİŞKİ İSTİSMARININ KAPATILMASI
+
+   ÖLÇÜLEN ESKİ DAVRANIŞ: her başarılı anlaşma KOŞULSUZ +6 veriyordu.
+   Dengeli takas da, 1 birimlik sembolik hediye de aynı ödülü alıyordu.
+
+   YENİ: goodwill YALNIZ tek yönlü GERÇEK hediyeden doğar ve alıcının
+   aylık gelirine göre ölçeklenir (mutlak sayı değil — 100 mineral
+   erken ekonomide büyük, geç ekonomide önemsizdir).
+     netFayda = alıcıya giden değer − alıcının verdiği değer
+     oran     = netFayda / max(20, alıcının aylık toplam geliri × 6)
+     goodwill = clamp(floor(oran × 6), 0, 4)
+   Eşik gerekçesi: 6 aylık gelire denk bir hediye tam 4 puan; altıda
+   biri 1 puan; çok küçük hediye 0 üretir. Antlaşmalar kendi ilişki
+   etkilerini applyItems içinde zaten uyguluyor — burada TEKRAR
+   eklenmez (çift sayım yok). Aynı devlet çifti arasında goodwill
+   12 ayda bir kazanılabilir; cooldown damgası imparatorluk verisinde
+   (e.giftAt) tutulur, yani v8 kaydıyla KALICIDIR. */
+function dealGiftValue(alan, veren, n){
+  /* Alıcının aldığı maddi değer − verdiği maddi değer (saf). */
+  let alinan = 0, verilen = 0;
+  const say = (items, kaynak, hedef) => {
+    let t = 0;
+    for (const it of items){
+      if (it.t === 'res')     t += it.v;
+      else if (it.t === 'tribute') t += it.v * 6;
+      else if (it.t === 'tech')    t += 60;
+      else if (it.t === 'lux')     t += 40;
+      else if (it.t === 'sys')     t += 150;
+    }
+    return t;
+  };
+  const _g = n.effectiveGive || n.give, _w = n.effectiveWant || n.want;
+  if (n.from === veren.id){ alinan = say(_g); verilen = say(_w); }
+  else                    { alinan = say(_w); verilen = say(_g); }
+  return alinan - verilen;
+}
+function dealGoodwill(alan, veren, n){
+  const net = dealGiftValue(alan, veren, n);
+  if (net <= 0) return 0;
+  let gelir = 0;
+  for (const r in (alan.inc || {})) gelir += Math.max(0, alan.inc[r] || 0);
+  const olcek = Math.max(20, gelir * 6);
+  return clamp(Math.floor((net / olcek) * 6), 0, 4);
+}
+const GIFT_COOLDOWN_MONTHS = 12;
+function giftOnCooldown(a, b){
+  const t = a.giftAt && a.giftAt[b.id];
+  return (t !== undefined) && ((G.memAge || 0) - t) < GIFT_COOLDOWN_MONTHS;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 86C.2 — TAM İŞLEM ATOMİKLİĞİ (86C.1 BORCU KAPANDI)
+   86C.1'de bu mekanizma SINIRLI olduğu için dürüstçe öyle etiketlenmişti.
+   Artık gerçek transaction var: dealTxBegin derin snapshot alır
+   (bütün imparatorluklar, sistemler/gezegenler/koloniler, filolar,
+   federasyonlar, konsey, sayaçlar, bildirim kuyruğu, RNG ve geçici
+   yetki alanları), dealTxRollback nesne KİMLİKLERİNİ koruyarak
+   yerinde geri yazar. Yan etkiler commit'e kadar tamponlanır.
+   Aşağıdaki goodwill/cooldown mantığı değişmedi.
+*/
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 86C.2 — GERÇEK ANLAŞMA TRANSACTION'I
+
+   ÖLÇÜLEN ESKİ ZAFİYET: dealJournal yalnız iki tarafı ve sys.owner'ı,
+   üstelik Object.assign ile YÜZEYSEL kopyalıyordu. İç içe diziler
+   (mem, colonies, ships) aynı nesneyi paylaştığı için derin değişiklik
+   geri gelmiyordu; üçüncü devletler, gezegenler, filolar, federasyon/
+   süzeren zincirleri, fraksiyonlar ve bildirimler hiç kapsanmıyordu.
+
+   ÇÖZÜM: açıkça seçilmiş KALICI KÖKLERİN derin snapshot'ı + nesne
+   kimliklerini KORUYARAK yerinde restore.
+   Seçilen kökler ve gerekçeleri:
+     G.emps      — bütün imparatorluklar (üçüncü devletler dahil):
+                   savaş, ilişki, hafıza, antlaşmalar, koloniler,
+                   kaynaklar, ölüm durumu, fraksiyonlar
+     G.sys       — sistem/gezegen/koloni verisi (sahiplik, def, seen)
+     G.fleets    — filo dizisi ve gemi nesneleri (purgeEmpire silebilir)
+     G.feds      — federasyon üyelik/yasa durumu
+     G.council   — konsey üyeliği ve yaptırımlar
+     G.fallStats / G.sabStats — global sayaçlar
+     G.log / G.inbox / G.inboxUid — bildirim durumu
+     RND_STATE   — councilPunish/declareWar RNG tüketebilir
+     _dealAuth / _warAuth / _warWhy — değer + ALAN VARLIĞI
+   KLONLANMAYANLAR: kataloglar (EVENTS/TECHS/OPS...), fonksiyonlar,
+   canvas/DOM nesneleri, View, UI. Bunlar kalıcı oyun verisi değildir.
+   Render/türetilmiş cache'ler (_reach, _trAt, _pers ...) snapshot'a
+   girer çünkü emps/sys köklerinin içindedir; rollback sonrası
+   kontrollü olarak yeniden hesaplanır. */
+const TX_SKIP_KEYS = {_dealFailInject:1};
+function txClone(v, derinlik){
+  if (v === null || typeof v !== 'object') return v;
+  if (derinlik > 12) return v;                      // güvenlik sınırı
+  if (typeof v === 'function') return v;
+  if (Array.isArray(v)){
+    const a = new Array(v.length);
+    for (let i = 0; i < v.length; i++) a[i] = txClone(v[i], derinlik + 1);
+    return a;
+  }
+  const o = {};
+  for (const k in v){
+    if (TX_SKIP_KEYS[k]) continue;
+    o[k] = txClone(v[k], derinlik + 1);
+  }
+  return o;
+}
+/* Yerinde restore: hedef nesnenin KİMLİĞİ korunur, içeriği geri yazılır.
+   Böylece G.p, sistem, gezegen ve filo referansları çalışmaya devam eder. */
+function txRestoreInto(hedef, kaynak, derinlik){
+  if (!hedef || !kaynak || typeof hedef !== 'object') return kaynak;
+  if (derinlik > 12) return kaynak;
+  if (Array.isArray(hedef) && Array.isArray(kaynak)){
+    hedef.length = kaynak.length;
+    for (let i = 0; i < kaynak.length; i++){
+      const k = kaynak[i];
+      if (k && typeof k === 'object' && hedef[i] && typeof hedef[i] === 'object')
+        txRestoreInto(hedef[i], k, derinlik + 1);
+      else hedef[i] = txClone(k, derinlik + 1);
+    }
+    return hedef;
+  }
+  for (const k in hedef){
+    if (TX_SKIP_KEYS[k]) continue;
+    if (!(k in kaynak)) delete hedef[k];            // alan-yok ayrımı korunur
+  }
+  for (const k in kaynak){
+    if (TX_SKIP_KEYS[k]) continue;
+    const kv = kaynak[k], hv = hedef[k];
+    if (kv && typeof kv === 'object' && hv && typeof hv === 'object' &&
+        Array.isArray(kv) === Array.isArray(hv))
+      txRestoreInto(hv, kv, derinlik + 1);
+    else hedef[k] = txClone(kv, derinlik + 1);
+  }
+  return hedef;
+}
+function dealTxBegin(){
+  const tx = {
+    emps      : G.emps.map(e => txClone(e, 0)),
+    empRefs   : G.emps.slice(),
+    sys       : G.sys.map(s => txClone(s, 0)),
+    sysRefs   : G.sys.slice(),
+    fleets    : G.fleets.map(f => txClone(f, 0)),
+    fleetRefs : G.fleets.slice(),
+    feds      : txClone(G.feds || [], 0),
+    council   : txClone(G.council || null, 0),
+    fallStats : txClone(G.fallStats || {}, 0),
+    sabStats  : txClone(G.sabStats || {}, 0),
+    log       : (G.log || []).slice(),
+    inbox     : (G.inbox || []).slice(),
+    inboxUid  : G.inboxUid,
+    rng       : RND_STATE,
+    auth      : {
+      dealHas:('_dealAuth' in G), deal:G._dealAuth,
+      warHas :('_warAuth'  in G), war :G._warAuth,
+      whyHas :('_warWhy'   in G), why :G._warWhy
+    }
+  };
+  return tx;
+}
+function dealTxRollback(tx){
+  /* İmparatorluklar: nesne KİMLİĞİ korunarak yerinde geri yazılır. */
+  for (let i = 0; i < tx.empRefs.length; i++)
+    txRestoreInto(tx.empRefs[i], tx.emps[i], 0);
+  G.emps.length = tx.empRefs.length;
+  for (let i = 0; i < tx.empRefs.length; i++) G.emps[i] = tx.empRefs[i];
+  /* Sistemler ve gezegen/koloniler */
+  for (let i = 0; i < tx.sysRefs.length; i++)
+    txRestoreInto(tx.sysRefs[i], tx.sys[i], 0);
+  G.sys.length = tx.sysRefs.length;
+  for (let i = 0; i < tx.sysRefs.length; i++) G.sys[i] = tx.sysRefs[i];
+  /* Filolar: purgeEmpire diziden çıkarmış olabilir — özgün SIRA ve
+     nesne KİMLİĞİ ile geri konur. */
+  for (let i = 0; i < tx.fleetRefs.length; i++)
+    txRestoreInto(tx.fleetRefs[i], tx.fleets[i], 0);
+  G.fleets.length = 0;
+  for (let i = 0; i < tx.fleetRefs.length; i++) G.fleets.push(tx.fleetRefs[i]);
+  /* Politik kökler */
+  if (Array.isArray(G.feds)) txRestoreInto(G.feds, tx.feds, 0);
+  else G.feds = txClone(tx.feds, 0);
+  if (tx.council === null) G.council = null;
+  else if (G.council && typeof G.council === 'object')
+    txRestoreInto(G.council, tx.council, 0);
+  else G.council = txClone(tx.council, 0);
+  txRestoreInto(G.fallStats = G.fallStats || {}, tx.fallStats, 0);
+  txRestoreInto(G.sabStats  = G.sabStats  || {}, tx.sabStats,  0);
+  /* Bildirim durumu */
+  G.log.length = 0;   for (const x of tx.log)   G.log.push(x);
+  if (Array.isArray(G.inbox)){ G.inbox.length = 0; for (const x of tx.inbox) G.inbox.push(x); }
+  G.inboxUid = tx.inboxUid;
+  rndSeed(tx.rng);                                  // RNG birebir geri
+  dealTxRestoreAuth(tx);
+}
+function dealTxRestoreAuth(tx){
+  const a = tx.auth;
+  if (a.dealHas) G._dealAuth = a.deal; else delete G._dealAuth;
+  if (a.warHas)  G._warAuth  = a.war;  else delete G._warAuth;
+  if (a.whyHas)  G._warWhy   = a.why;  else delete G._warWhy;
+}
+
+/* ── POSTCONDITION: her effective madde gerçekten uygulandı mı? ── */
+function dealPostcondition(giver, taker, it){
+  const T = (x) => G.emps[x];
+  switch(it.t){
+    case 'res':      return true;   // miktar kontrolü akış içinde
+    /* applyItems: VEREN tarafın tribute listesine kayıt eklenir. */
+    case 'tribute':  return Array.isArray(giver.tribute) &&
+                            giver.tribute.some(x => x && x.to === taker.id &&
+                                                    x.r === it.r && x.v === it.v);
+    case 'sys': {
+      const s = G.sys[it.id];
+      return !!(s && s.owner === taker.id);
+    }
+    case 'tech':     return !!taker.techs[it.id];
+    /* applyItems: ALAN tarafın luxGrant kaydı verene bağlanır. */
+    case 'lux':      return !!(taker.luxGrant && taker.luxGrant[it.k] === giver.id);
+    case 'peace':    return !giver.war[taker.id] && !taker.war[giver.id];
+    case 'peaceWith': {
+      const t = T(it.target);
+      return !!(t && !giver.war[t.id] && !t.war[giver.id]);
+    }
+    case 'nap':      return !!(giver.nap && giver.nap[taker.id] &&
+                               taker.nap && taker.nap[giver.id]);
+    case 'pact':     return !!(giver.pact && giver.pact[taker.id] &&
+                               taker.pact && taker.pact[giver.id]);
+    case 'ally':     return !!(giver.ally[taker.id] && taker.ally[giver.id]);
+    case 'spynet':   return !!(giver.spynet && giver.spynet[taker.id] &&
+                               taker.spynet && taker.spynet[giver.id]);
+    case 'warOn': {
+      const t = T(it.target);
+      return !!(t && giver.war[t.id] && t.war[giver.id]);
+    }
+    case 'intel':    return !!(taker.visionFrom && taker.visionFrom[giver.id]);
+    /* applyItems: VEREN taraf kendi sınırını alana açar. */
+    case 'passage':  return !!(giver.passage && giver.passage[taker.id]);
+    default:         return true;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 86C.2 — TAM TRANSACTION YAŞAM DÖNGÜSÜ
+
+   begin → apply → postcondition → commit
+   Herhangi bir aşamada istisna: rollback ile TÜM kalıcı durum
+   (imparatorluklar, sistemler/gezegenler/koloniler, filolar,
+   federasyonlar, konsey, sayaçlar, bildirim kuyruğu, RNG ve geçici
+   yetki alanları) BAŞLANGIÇ HÂLİNE döner; yan etki tamponu atılır.
+   İstisna dışarı SIZMAZ; executeDeal daima boolean döner. */
+function executeDeal(offer){
+  /* Dış/bozuk çağrı da aynı kanonik kapıdan geçer. */
+  const q = dealQuote(offer);
+  if (!q.ok) return false;
+  const n = q.norm;
+  const a = G.emps[n.from], b = G.emps[n.to];
   if (!a || !b) return false;
-  if (!canDeliver(a, offer.give, b) || !canDeliver(b, offer.want, a)) return false;
+
+  const tx  = dealTxBegin();
+  const buf = [];
+  const oncekiBuf = G._sideBuf;
+  G._sideBuf = buf;                       // bildirimler tamponlanır
   G._dealAuth = true;
+  let tamam = false;
   try {
-    applyItems(a, b, offer.give);
-    applyItems(b, a, offer.want);
-  } finally { G._dealAuth = false; }
-  a.rel[b.id] = clamp(a.rel[b.id] + 6, -100, 100);
-  b.rel[a.id] = clamp(b.rel[a.id] + 6, -100, 100);
+    /* FAZ 86C.1: yalnız effective maddeler uygulanır — redundant
+       antlaşma applyItems'a HİÇ girmez. */
+    applyItems(a, b, n.effectiveGive);
+    applyItems(b, a, n.effectiveWant);
+    if (typeof G._dealFailInject === 'function') G._dealFailInject('after:items');
+
+    a.res.etk = (a.res.etk || 0) - q.cost;     // maliyet: GÖNDEREN, TEK KEZ
+    if (typeof G._dealFailInject === 'function') G._dealFailInject('after:cost');
+
+    /* ── GOODWILL: koşulsuz +6 YERİNE gerçek net faydadan ── */
+    const gwB = giftOnCooldown(a, b) ? 0 : dealGoodwill(b, a, n);
+    const gwA = giftOnCooldown(b, a) ? 0 : dealGoodwill(a, b, n);
+    if (gwB > 0){
+      b.rel[a.id] = clamp(b.rel[a.id] + gwB, -100, 100);
+      a.giftAt = a.giftAt || {}; a.giftAt[b.id] = (G.memAge || 0);
+    }
+    if (gwA > 0){
+      a.rel[b.id] = clamp(a.rel[b.id] + gwA, -100, 100);
+      b.giftAt = b.giftAt || {}; b.giftAt[a.id] = (G.memAge || 0);
+    }
+    if (typeof G._dealFailInject === 'function') G._dealFailInject('after:goodwill');
+    if (typeof G._dealFailInject === 'function') G._dealFailInject('son');
+    tamam = true;
+  } catch(err){
+    G._sideBuf = oncekiBuf;
+    dealTxRollback(tx);                   // yetki alanları da geri gelir
+    /* Rollback sonrası türetilmiş durum kontrollü yenilenir. */
+    try { if (typeof recalcMods === 'function'){
+      for (const e of G.emps) if (e && !e.dead) recalcMods(e); } } catch(e2){}
+    return false;                          // istisna DIŞARI SIZMAZ
+  }
+  /* ── COMMIT ── */
+  G._sideBuf = oncekiBuf;
+  dealTxRestoreAuth(tx);                   // _dealAuth önceki hâline
+  if (!tamam){ dealTxRollback(tx); return false; }
   recalcMods(a); recalcMods(b);
+  if (typeof flushSideBuffer === 'function') flushSideBuffer(buf);
   return true;
 }
 
@@ -1024,10 +1892,12 @@ const OPS = {
               'Savaş öncesi hazırlığı çökertmenin en sessiz yolu.'}
 };
 
+/* FAZ 86A: SAF OKUMA. Eskiden `e.intel = {}` yazarak render sırasında
+   oyun verisini değiştiriyordu. Yazan yollar ensureIntel() kullanır. */
 function intelOf(e, id){
-  if (!e.intel) e.intel = {};
-  return clamp(e.intel[id] || 0, 0, 3);
+  return clamp((e.intel && e.intel[id]) || 0, 0, 3);
 }
+function ensureIntel(e){ if (!e.intel) e.intel = {}; return e.intel; }
 function spyCap(e){
   let n = 1;
   if (e.mods.sensor > 0) n++;
@@ -1112,20 +1982,158 @@ function powerLabel(viewer, target){
 }
 
 /* operasyon yürüt */
-function runOp(e, target, key){
-  const OP = OPS[key];
-  if (!OP) return {ok:false, msg:'Bilinmeyen operasyon'};
-  if (intelOf(e, target.id) < OP.lvl)
-    return {ok:false, msg:'Yetersiz istihbarat seviyesi (' + INTEL_LEVELS[OP.lvl].n + ' gerekli)'};
-  /* FAZ 48: DÜRÜST ekseni casusluğu pahalılaştırır */
-  const opKat = 1 + ((e.mods && e.mods.opCost) || 0);
-  for (const r in OP.cost) if ((e.res[r]||0) < Math.round(OP.cost[r] * opKat))
-    return {ok:false, msg:'Yetersiz kaynak'};
-  for (const r in OP.cost) e.res[r] -= Math.round(OP.cost[r] * opKat);  // FAZ 48
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 86A — TEK KANONİK, SAF OPERASYON ÖN KONTROLÜ
 
+   ÖLÇÜLEN SORUNLAR:
+   · runOp maliyeti kesip RNG'yi tüketip HİTLOG yazdıktan SONRA
+     uygulanabilir hedef arıyordu. Ölçüm: calTech/sabotaj/isyan/
+     hazine/suikast/ambargoKir/sorusturma/sahteKanit hedefsizken de
+     kaynak harcadı, rnd() tüketti ve ok:true döndü.
+   · opsMenu TABAN maliyet (opCost çarpanı yok) ve TABAN risk
+     (shadow/counter yok) gösteriyordu — ekrandaki sayı gerçek
+     kesintiyle uyuşmuyordu.
+   · ambargoKir kullanıcının seçtiği hedefi YOK SAYIP ambargo
+     uygulayanlar arasından rastgele üçüncü devlet seçiyordu; hitLog
+     ise seçilen hedefi mağdur yazıyordu.
+
+   opQuote RNG TÜKETMEZ ve oyun durumunu DEĞİŞTİRMEZ. runOp ve UI
+   aynı kanonik sonucu kullanır; arayüz formül kopyalamaz. */
+function opCostOf(e, OP){
+  const kat = 1 + ((e.mods && e.mods.opCost) || 0);
+  const out = {};
+  for (const r in OP.cost) out[r] = Math.round(OP.cost[r] * kat);
+  return out;
+}
+function opRiskOf(e, target, OP){
   let risk = OP.risk;
   if (hasCivic(e, 'shadow')) risk *= .4;
   if (hasCivic(target, 'counter')) risk = Math.min(.9, risk * 1.8);
+  return risk;
+}
+/* Operasyonun uygulanabileceği gerçek hedef var mı? RNG kullanmaz. */
+function opViable(e, target, key){
+  switch(key){
+    case 'calTech': {
+      const av = Object.keys(target.techs || {}).filter(t => !e.techs[t] && TECHS[t]);
+      return av.length ? {ok:true, n:av.length, d:av.length + ' çalınabilir teknoloji'}
+                       : {ok:false, why:'Çalınacak yeni teknolojisi yok'};
+    }
+    case 'sabotaj': {
+      const owned = G.sys.filter(sy => sy.owner === target.id &&
+        (sy.queue.length || sysDefense(sy) > 0));
+      return owned.length ? {ok:true, n:owned.length, d:owned.length + ' sabote edilebilir sistem'}
+                          : {ok:false, why:'Sabote edilecek tesisi yok'};
+    }
+    case 'isyan': {
+      const cols = (target.colonies || []).filter(c =>
+        G.sys[c.s] && G.sys[c.s].planets[c.p] && G.sys[c.s].planets[c.p].col);
+      return cols.length ? {ok:true, n:cols.length, d:cols.length + ' kışkırtılabilir koloni'}
+                         : {ok:false, why:'Kışkırtılacak kolonisi yok'};
+    }
+    case 'hazine': {
+      const zengin = ['min','ene','ala','ara'].filter(r => (target.res[r] || 0) >= 60);
+      return zengin.length ? {ok:true, n:zengin.length, d:zengin.length + ' yağmalanabilir stok'}
+                           : {ok:false, why:'Hazinesi baskına değmeyecek kadar boş'};
+    }
+    case 'suikast':
+      return (target.factions && target.factions.length)
+        ? {ok:true, n:target.factions.length, d:target.factions.length + ' fraksiyon lideri'}
+        : {ok:false, why:'Örgütlü bir siyasi yapısı yok'};
+    case 'ambargoKir': {
+      /* FAZ 86A DOĞRULUK: artık SEÇİLEN hedefin gerçekten ambargo
+         uygulayan devlet olması şartı. Rastgele üçüncü devlet seçilmez. */
+      const uygular = (typeof embargoOn === 'function') && embargoOn(target, e.id);
+      if (!uygular) return {ok:false, why:'Bu devlet sana ambargo uygulamıyor'};
+      if (e.smuggle && e.smuggle[target.id] > G.day)
+        return {ok:false, why:'Bu hat zaten delinmiş durumda'};
+      return {ok:true, n:1, d:'ambargo hattı açılabilir'};
+    }
+    case 'sorusturma': {
+      const benim = (e.hitLog || []).filter(w =>
+        w.known && w.by === target.id && w.framed !== undefined && w.framed !== e.id);
+      if (benim.length) return {ok:true, n:benim.length, d:'kendi dosyanda ' + benim.length + ' iftira'};
+      let n = 0;
+      for (const v of G.emps){
+        if (v.dead || v.wild || v.id === e.id) continue;
+        n += (v.hitLog || []).filter(w => w.framed === target.id).length;
+      }
+      return n ? {ok:true, n, d:n + ' çözülebilir iftira dosyası'}
+               : {ok:false, why:'Çözülecek iftira dosyası bulunamadı'};
+    }
+    case 'sahteKanit': {
+      const magdurlar = G.emps.filter(v => !v.dead && !v.wild &&
+        v.id !== e.id && v.id !== target.id &&
+        v.contact[target.id] && (v.hitLog || []).some(w => !w.known));
+      return magdurlar.length
+        ? {ok:true, n:magdurlar.length, d:magdurlar.length + ' açık dosyalı mağdur'}
+        : {ok:false, why:'Üstüne yıkılacak açık dosya yok'};
+    }
+    /* yalan · kervan · filoPlan · tersaneVir: hedefin kendisi yeterli */
+    default: return {ok:true, n:1, d:'hedef uygun'};
+  }
+}
+/* Yakalanmayan ama etkisi gözlenebilen operasyon için mağdura
+   gösterilecek metin. FAİL BİLGİSİ İÇERMEZ — yalnız gözlemlenebilir
+   kategori. Operasyonun niteliği gereği iz bırakmayanlar için genel
+   kategori döner. */
+const OP_VICTIM_HINT = {
+  calTech   : 'Araştırma arşivlerinde izinsiz erişim izi bulundu — fail bilinmiyor',
+  sabotaj   : 'Şüpheli tersane kesintisi tespit edildi — fail bilinmiyor',
+  isyan     : 'Bir kolonide örgütlü kışkırtma saptandı — fail bilinmiyor',
+  hazine    : 'Hazineden açıklanamayan bir kaynak çıkışı var — fail bilinmiyor',
+  suikast   : 'Bir fraksiyon lideri suikaste kurban gitti — fail bilinmiyor',
+  tersaneVir: 'Tersane sistemlerinde kötücül kod bulundu — fail bilinmiyor',
+  filoPlan  : 'Filo planlarının sızdırıldığına dair belirti var — fail bilinmiyor',
+  yalan     : 'İstihbarat raporlarında tutarsızlık saptandı — fail bilinmiyor',
+  kervan    : 'Ticaret rotalarının izlendiğine dair belirti var — fail bilinmiyor',
+  sahteKanit: 'Aleyhine yerleştirilmiş kanıt şüphesi doğdu — fail bilinmiyor'
+};
+function opVictimHint(key){
+  return OP_VICTIM_HINT[key] ||
+    'Şüpheli bir istihbarat faaliyeti tespit edildi — fail bilinmiyor';
+}
+function opQuote(e, target, key){
+  const OP = OPS[key];
+  if (!OP) return {ok:false, why:'Bilinmeyen operasyon', key};
+  const q = {key, op:OP, name:OP.n, ico:OP.ico, desc:OP.d,
+             lvlNeed:OP.lvl, lvlHave:0, cost:{}, afford:false,
+             risk:0, riskPct:0, viable:false, viableDesc:'',
+             ok:false, why:''};
+  if (!target || target.dead){ q.why = 'Hedef geçersiz'; return q; }
+  q.lvlHave = intelOf(e, target.id);
+  q.cost    = opCostOf(e, OP);
+  q.afford  = Object.keys(q.cost).every(r => (e.res[r] || 0) >= q.cost[r]);
+  q.risk    = opRiskOf(e, target, OP);
+  q.riskPct = Math.round(q.risk * 100);
+  const v   = opViable(e, target, key);
+  q.viable  = v.ok; q.viableDesc = v.ok ? v.d : '';
+  if (q.lvlHave < OP.lvl){
+    q.why = 'Yetersiz istihbarat seviyesi (' + INTEL_LEVELS[OP.lvl].n + ' gerekli)';
+    return q;
+  }
+  if (!q.afford){ q.why = 'Yetersiz kaynak'; return q; }
+  if (!v.ok){ q.why = v.why; return q; }
+  q.ok = true;
+  return q;
+}
+
+function runOp(e, target, key){
+  const OP = OPS[key];
+  if (!OP) return {ok:false, msg:'Bilinmeyen operasyon'};
+  /* ═══ FAZ 86A: TEK KANONİK KAPI ═══
+     Kaynak kesilmeden, RNG tüketilmeden ve hitLog yazılmadan ÖNCE
+     bütün ön koşullar (seviye · gerçek maliyet · uygulanabilir hedef)
+     opQuote ile sınanır. Eskiden uygulanabilir hedef switch içinde
+     aranıyordu ve bulunamasa bile bedel ödenmiş oluyordu. */
+  const q = opQuote(e, target, key);
+  if (!q.ok) return {ok:false, msg:q.why, why:q.why, quote:q};
+
+  /* FAZ 48: DÜRÜST ekseni casusluğu pahalılaştırır — opQuote'un
+     hesapladığı GERÇEK maliyet kesilir (ekranda gösterilenle aynı). */
+  for (const r in q.cost) e.res[r] -= q.cost[r];
+
+  const risk = q.risk;
   const caught = rnd() < risk;
 
   let msg = '';
@@ -1220,17 +2228,17 @@ function runOp(e, target, key){
       break;
     }
     case 'ambargoKir': {
-      /* Bize ambargo uygulayanlardan birini seç ve o hattı aç */
-      /* Zaten delinmiş hattı tekrar delmeye çalışma */
-      const uygulayan = G.emps.filter(o => !o.dead && !o.wild &&
-        typeof embargoOn === 'function' && embargoOn(o, e.id) &&
-        !(e.smuggle && e.smuggle[o.id] > G.day));
-      if (!uygulayan.length){ msg = 'Sana ambargo uygulayan yok.'; break; }
-      const kim = uygulayan[Math.floor(rnd() * uygulayan.length)];
+      /* ═══ FAZ 86A DOĞRULUK ONARIMI ═══
+         Eskiden ambargo uygulayanlar arasından rnd() ile RASTGELE
+         üçüncü bir devlet seçiliyordu; oyuncunun seçtiği hedef yok
+         sayılıyor, hitLog ise seçilen hedefi mağdur yazıyordu — yani
+         delinen hat ile suçlanan devlet farklı olabiliyordu.
+         Artık yalnız SEÇİLEN hedefin hattı delinir; uygunluk zaten
+         opQuote/opViable tarafından garanti edilmiştir. */
       e.smuggle = e.smuggle || {};
-      e.smuggle[kim.id] = G.day + 1440;            // 4 yıl
-      e._trAt = -1; kim._trAt = -1;
-      msg = kim.name + ' ambargosu delindi — o hattan ticaret yeniden akıyor.';
+      e.smuggle[target.id] = G.day + 1440;         // 4 yıl
+      e._trAt = -1; target._trAt = -1;
+      msg = target.name + ' ambargosu delindi — o hattan ticaret yeniden akıyor.';
       break;
     }
     /* ── FAZ 16: DERİN SORUŞTURMA ──
@@ -1381,10 +2389,24 @@ function runOp(e, target, key){
       say('CASUSLUK YAKALANDI — ' + e.name + ' sana "' + OP.n + '" operasyonu çekti', 'war');
     if (target.ai && target.rel[e.id] < -60 && rnd() < .3) declareWar(target, e);
   } else if (target.id === 0){
-    /* Oyuncu bir şeyler olduğunu sezer ama kimin yaptığını bilmez */
-    say('Bir şeyler ters gidiyor — bilinmeyen bir el işin içinde', 'war');
+    /* ═══ FAZ 86A: GÖZLEMLENEBİLİR MAĞDUR GERİ BİLDİRİMİ ═══
+       Eskiden her yakalanmayan operasyon için tek bir belirsiz
+       "Bir şeyler ters gidiyor" mesajı vardı. Artık ETKİLENEN alan
+       açıklanır, FAİL açıklanmaz. */
+    say((typeof opVictimHint === 'function')
+        ? opVictimHint(key)
+        : 'Şüpheli bir istihbarat faaliyeti tespit edildi — fail bilinmiyor', 'war');
   }
-  return {ok:true, msg, caught};
+  /* ═══ FAZ 86A: MERKEZÎ OPERASYON KAYDI ═══
+     Ölçüm: oyuncunun standart runOp operasyonları e.opLog'a HİÇ
+     yazılmıyordu (yalnız aiOpsTick kendi ek yazımını yapıyordu).
+     Kayıt artık burada, aktör kim olursa olsun TAM BİR KEZ tutulur;
+     aiOpsTick'teki ek yazım kaldırıldı (çift kayıt olmaz). */
+  e.opLog = e.opLog || [];
+  e.opLog.push({t:(G.memAge || 0), k:key, o:target.id, caught:caught,
+                actorSummary:(msg || '').slice(0, 120)});
+  if (e.opLog.length > 20) e.opLog.shift();
+  return {ok:true, msg, caught, key, target:target.id, quote:q};
 }
 
 /* sahte bilgi süresi dolunca temizle */

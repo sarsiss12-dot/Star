@@ -7,8 +7,8 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Yıldız Hanedanı">
-<meta name="application-name" content="Yıldız Hanedanı">
+<meta name="apple-mobile-web-app-title" content="Stars">
+<meta name="application-name" content="Stars">
 <meta name="format-detection" content="telephone=no">
 <!-- ═══ FAZ 57: PWA ═══
      manifest + standalone. "Ana Ekrana Ekle" ile kurulunca
@@ -16,10 +16,10 @@
 <link rel="manifest" href="./manifest.json">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%2305070f'/%3E%3Ccircle cx='32' cy='32' r='19' fill='none' stroke='%236ff2c8' stroke-width='2.5'/%3E%3Ccircle cx='32' cy='32' r='7' fill='%23f2d452'/%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' fill='%2305070f'/%3E%3Ccircle cx='90' cy='90' r='54' fill='none' stroke='%236ff2c8' stroke-width='6'/%3E%3Ccircle cx='90' cy='90' r='20' fill='%23f2d452'/%3E%3C/svg%3E">
-<title>YILDIZ HANEDANI — Galaktik Strateji</title>
+<title>STARS — Galaktik Strateji</title>
 <style>
 /* ============================================================
-   YILDIZ HANEDANI  ·  16-bit galaktik strateji
+   STARS  ·  16-bit galaktik strateji
    Palet: void #05070f · hull #101828 · bulkhead #1b2740
           phosphor #6ff2c8 · ember #ff9b3d · plasma #8b7bff · bone #d7e3f4
    ============================================================ */
@@ -789,6 +789,30 @@ body.fauxFull canvas#map{width:100vw !important;height:100dvh !important}
   padding:7px 4px;font-family:var(--mono);font-size:10px;letter-spacing:.04em;text-align:center;color:var(--bone)}
 .abtn:active{border-color:var(--phos);color:var(--phos)}
 .abtn.dis{opacity:.34}
+/* ═══ FAZ 86A: İSTİHBARAT KOMUTA MERKEZİ (mobil) ═══
+   Geniş dokunmatik hedefler; yatay taşma yok. */
+.ivNav{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin:0 0 6px}
+.ivNav .ivTab{display:flex;flex-direction:column;align-items:center;gap:2px;
+  min-height:46px;padding:6px 2px;border:1px solid #24405e;border-radius:8px;
+  background:#0d1724;color:#7d90ad;font-size:15px;line-height:1;
+  max-width:100%;overflow:hidden}
+.ivNav .ivTab span{font-size:9px;letter-spacing:.4px;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.ivNav .ivTab.on{border-color:var(--phos);color:var(--phos);background:#10202f}
+.ivRow{display:block;width:100%;text-align:left;min-height:46px;
+  padding:7px 9px;margin:0 0 4px;border:1px solid #1d3350;border-radius:8px;
+  background:#0c1521;color:#c8d6e5;overflow:hidden}
+.ivRow.on{border-color:var(--phos);background:#10202f}
+.ivTop{display:flex;justify-content:space-between;align-items:center;gap:6px}
+.ivTop span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ivSub{font-size:10px;color:#7d90ad;margin-top:2px;
+  overflow:hidden;text-overflow:ellipsis}
+.ivGroup{display:flex;justify-content:space-between;align-items:center;
+  width:100%;min-height:44px;padding:8px 10px;margin:4px 0 0;
+  border:1px solid #24405e;border-radius:8px;background:#0d1724;
+  color:#c8d6e5;font-size:12px;letter-spacing:.4px}
+.ivGroup.on{border-color:var(--phos);color:var(--phos)}
+.ivBody{padding:2px 0 4px}
 .abtn.pri{border-color:var(--phos);color:var(--phos)}
 .abtn.dgr{border-color:var(--bad);color:var(--bad)}
 .pchip{display:flex;gap:8px;align-items:center;padding:7px;background:var(--hull);
@@ -933,6 +957,14 @@ body.fauxFull canvas#map{width:100vw !important;height:100dvh !important}
 /* Dokunmatikte metin seçimi ve çift dokunma yakınlaştırması kapalı */
 @media (hover:none){
   body{-webkit-user-select:none;user-select:none;touch-action:manipulation}
+  /* ═══ FAZ 83: HARİTA touch-action İSTİSNASI ═══
+     Mobil medya sorgusundaki body{touch-action:manipulation}
+     kuralı canvas'a da miras kalıyordu; bazı Android WebView'lar
+     bunu görünce pointer akışını devralıp tek parmak kaydırmayı
+     iptal ediyordu. Harita canvas'ı açıkça none'a sabitlendi —
+     yüksek özgüllük ve !important ile miras kesildi. */
+  #map{touch-action:none !important;overscroll-behavior:none;
+    -webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
   /* FAZ 17: Dokunmatikte hover yok — ipucu BASILI TUTMA ile gelir.
      JS .hint sınıfını ekliyor, CSS onu balon olarak gösteriyor. */
   .tool.hint::after,[title].hint::after{
@@ -972,7 +1004,7 @@ body.fauxFull canvas#map{width:100vw !important;height:100dvh !important}
     <div class="tWrap">
       <div class="tLogo">
         <div class="tMark">✦</div>
-        <h1>YILDIZ<span>HANEDANI</span></h1>
+        <h1>STARS</h1>
         <div class="tSub">GALAKTİK STRATEJİ SİMÜLASYONU</div>
       </div>
       <div class="tBtns">
@@ -983,7 +1015,7 @@ body.fauxFull canvas#map{width:100vw !important;height:100dvh !important}
         <button class="tBtn" data-a="tOpt">AYARLAR
           <small>Ses ve rehber tercihleri</small></button>
       </div>
-      <div class="tFoot">v1.0 · tek dosya, çevrimdışı çalışır</div>
+      <div class="tFoot">v1.0 · çevrimdışı çalışır</div>
     </div>
   </div>
 
@@ -993,7 +1025,7 @@ body.fauxFull canvas#map{width:100vw !important;height:100dvh !important}
     <canvas id="menuStars"></canvas>
     <div class="mwrap">
       <div class="brand">
-        <h1>YILDIZ HANEDANI</h1>
+        <h1>STARS</h1>
         <p>GALAKTİK EGEMENLİK SİMÜLASYONU</p>
       </div>
       <div class="rule"></div>

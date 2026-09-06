@@ -9,7 +9,9 @@
    ═══════════════════════════════════════════════════════════════════ */
 /* FAZ 74: dosya yapısı değişti — sürüm artırıldı ki eski
    önbellekteki tek parça main.js temizlensin. */
-const CACHE = 'yildiz-hanedani-v2';
+/* FAZ 83: sürüm yükseltildi — eski ve yeni JS dosyalarının
+   karışmasını önler; activate'te eskiler siliniyor. */
+const CACHE = 'stars-v86c-3';
 
 /* Oyunun tamamı — hepsi yerel dosya, dış bağımlılık yok */
 const KABUK = [

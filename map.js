@@ -714,7 +714,11 @@ const View = {
       x: rnd()*G.W*3.0 - G.W*1.0, y: rnd()*G.H*3.0 - G.H*1.0,
       r: rnd()<.85 ? 1 : 2, a: .25 + rnd()*.6, p: .55 + rnd()*.40
     });
-    window.addEventListener('resize', ()=>this.resize());
+    /* FAZ 83.3: merkezî resize yöneticisine abone ol.
+       Yönetici henüz yüklenmediyse (yükleme sırası) eski yola
+       düş — davranış birebir aynı kalır. */
+    if (typeof onResize === 'function') onResize('map', () => this.resize());
+    else window.addEventListener('resize', ()=>this.resize());
     this.bind();
   },
   resize(){
@@ -792,15 +796,46 @@ const View = {
   /* ---------- SINIR KATMANI ----------
      Dünya bir ızgaraya bölünür, her hücrenin sahibi bulunur ve
      bölgeler imparatorluk renginde doldurulup kenarları çizilir. */
-  bcache:null, bkey:'',
+  bcache:null, bkey:'', _bRetry:0, _bRetryKey:'',
   rgbOf(hexs){
     const h = hexs.replace('#','');
     return [parseInt(h.substr(0,2),16), parseInt(h.substr(2,2),16), parseInt(h.substr(4,2),16)];
   },
   buildBorders(){
     const N = 240;
-    let key = '';
+    /* ═══════════════════════════════════════════════════════════
+       FAZ 83 — SINIR DOKUSU MODA UYUYOR
+       KÖK NEDEN: buildBorders doğrudan emp.col okuyordu, yani
+       uzak zoom'daki GERÇEK ALANLAR her modda devlet rengindeydi.
+       Yakın zoomdaki haleler bolgeRenk() kullandığı için mod
+       değişince onlar değişiyor, alanlar değişmiyordu — oyuncu
+       "renkler değişmiyor" diye bunu görüyordu.
+
+       Cache anahtarına MAP_MODE ve her devletin O MODDAKİ
+       hesaplanmış rengi katıldı; mod ya da ilişki değişince
+       anahtar doğal olarak değişip doku yeniden üretiliyor. */
+    let key = MAP_MODE + '|';
     for (const s of G.sys) key += s.owner + ':' + ((s._reach|0)/10|0) + ':' + (pSeen(s)?1:0) + ',';
+    key += '|';
+    for (const em of G.emps){
+      if (em.dead || em.wild) continue;
+      key += em.id + this.bolgeRenk(em) + ',';
+    }
+    /* FAZ 83.1: anahtar aynı olsa bile PİKSEL BELLEĞİ boşalmış
+       olabilir (Android arka plan). Nesne varlığına güvenme —
+       gerçekten dolu mu diye bak. Kontrol ucuz: tek piksel. */
+    /* ═══════════════════════════════════════════════════════════
+       FAZ 83.3 — CACHE-HIT YOLU ARTIK PİKSEL OKUMUYOR
+       ÖLÇÜM (Faz 83.2): 300 karede 299 getImageData — kare başına
+       tam bir tane. Sebep: borderCacheAlive bu satırda, yani doku
+       geçerliyken bile her kare bir piksel okunuyordu.
+       getImageData mobil GPU'da senkronizasyon noktası yaratır.
+
+       Canlılık kontrolü buradan ÇIKARILDI. Artık yalnız kurtarma
+       yolları (runRecovery / manuel yenileme) dokuyu sınıyor ve
+       bozuksa `bcache=null` yapıp bir sonraki buildBorders'ın
+       yeniden üretmesini sağlıyor. Normal kare döngüsünde sıfır
+       piksel okuması var. */
     if (this.bkey === key && this.bcache) return this.bcache;
 
     const c = document.createElement('canvas');
@@ -843,7 +878,8 @@ const View = {
       if (o < 0) continue;
       const emp = G.emps[o];
       if (!emp) continue;
-      const col = this.rgbOf(emp.col);
+      /* FAZ 83: renk kaynağı moda göre — emp.col değil */
+      const col = this.rgbOf(this.bolgeRenk(emp));
       // kaç komşu farklı? kenar yumuşaklığı buna göre ayarlanır
       let diff = 0, checked = 0;
       if (x > 0){   checked++; if (own[idx-1] !== o) diff++; }
@@ -996,6 +1032,30 @@ const View = {
       UI.refresh();
       return;
     }
+    /* ═══════════════════════════════════════════════════════════
+       FAZ 83 — TARAF SATIRI DOKUNMASI
+       Satırlar w2s ile çizildiği için hit-test de EKRAN
+       koordinatında yapılıyor; ikisi aynı dikdörtgenden geliyor,
+       ayrışamazlar. Aynı gruba tekrar dokunmak filolar arasında
+       döngü yapar.
+       ═══════════════════════════════════════════════════════════ */
+    if (this.rowHits && this.rowHits.length && !this.route){
+      const sp = pos(ev);
+      for (const r of this.rowHits){
+        if (sp.x < r.x || sp.x > r.x + r.w) continue;
+        if (sp.y < r.y || sp.y > r.y + r.h) continue;
+        const list = r.filolar.filter(f => f.ships.length);
+        if (!list.length) break;
+        /* Aynı grupta tekrar dokunma → sıradaki filo */
+        let ix = list.indexOf(this.sel);
+        ix = (ix < 0) ? 0 : (ix + 1) % list.length;
+        this.sel = list[ix];
+        this.selSys = G.sys[r.sys];
+        UI.tab('filo');
+        return;
+      }
+    }
+
     /* ═══════════════════════════════════════════════════════════
        FAZ 76 — NİŞANGAH MODU
        Koloni/inşaat gemileri sürü halinde aynı hedefe gitmesin
@@ -1160,6 +1220,65 @@ const View = {
       return '#5a6478';                                    // nötr, geçilemez
     }
     return sahip.col;                                      // siyasi
+  },
+
+  /* ═══════════════════════════════════════════════════════════════
+     FAZ 83.1 — MERKEZÎ RENDER CACHE GEÇERSİZLEŞTİRME
+     Yalnız YENİDEN ÜRETİLEBİLİR görsel önbellekleri siler.
+     Oyun verisine, kaynaklara, filolara, diplomasiye ve ART
+     sprite havuzuna DOKUNMAZ — sprite'lar seed'den deterministik
+     üretiliyor, her dönüşte silmek boşa CPU demek.
+     ═══════════════════════════════════════════════════════════════ */
+  invalidateRenderCaches(reason){
+    this.bcache = null;            // sınır dokusu (240×240)
+    this.bkey   = '';              // doku anahtarı
+    this._bolgeAt = -1;            // bölge rengi önbelleği
+    this.rowHits = [];             // filo satırı hit-test alanları
+    /* Filo başına türetilmiş menzil/lojistik listeleri */
+    if (typeof G !== 'undefined' && G.fleets){
+      for (const f of G.fleets){
+        delete f._opAt; delete f._opList; delete f._opR;
+        delete f._logiAt; delete f._logiNet; delete f._logiPort;
+      }
+    }
+    if (typeof logDiag === 'function') logDiag('cache', 'invalidate:' + (reason||'?'));
+  },
+
+  /* ═══════════════════════════════════════════════════════════════
+     FAZ 83.1 — SINIR DOKUSU GERÇEKTEN DOLU MU?
+     KRİTİK: bcache NESNESİNİN durması yetmez. Android WebView
+     arka planda canvas'ın PİKSEL BELLEĞİNİ boşaltıp JavaScript
+     nesnesini bırakabiliyor. bkey aynı kaldığı için buildBorders
+     "önbellek geçerli" deyip BOŞ dokuyu döndürüyordu — sınırlar
+     kayboluyor ve harita modunu değiştirmek bile geri
+     getirmiyordu (anahtar değişse de doku yeniden üretiliyor ama
+     eski boş nesne bazı yollarda hâlâ dönüyordu).
+     Çözüm: sahipli bir sistemin dünya koordinatını 240×240
+     dokuya çevirip TEK PİKSEL örnekliyoruz.
+     ═══════════════════════════════════════════════════════════════ */
+  borderCacheAlive(){
+    if (!this.bcache) return {ok:false, why:'bcache yok'};
+    const N = this.bcache.width || 240;
+    /* Görünür ve sahipli ilk sistemi bul */
+    let hedef = null;
+    for (const sy of G.sys){
+      if (sy.owner < 0) continue;
+      if (typeof pSeen === 'function' && !pSeen(sy)) continue;
+      hedef = sy; break;
+    }
+    if (!hedef) return {ok:true, why:'sahipli görünür sistem yok — test atlandı'};
+    const gx = Math.max(0, Math.min(N-1, Math.floor(hedef.x / G.W * N)));
+    const gy = Math.max(0, Math.min(N-1, Math.floor(hedef.y / G.H * N)));
+    try {
+      const bg = this.bcache.getContext('2d');
+      if (!bg) return {ok:false, why:'bcache context alınamadı'};
+      const d = bg.getImageData(gx, gy, 1, 1).data;
+      if (d[3] <= 0)
+        return {ok:false, why:'sınır dokusu boş (alpha=0 @' + gx + ',' + gy + ')'};
+      return {ok:true, alpha:d[3]};
+    } catch(e){
+      return {ok:false, why:'getImageData hatası: ' + (e && e.message)};
+    }
   },
 
   clampCam(){
@@ -2011,26 +2130,45 @@ const View = {
        Hareket HÂLİNDEKİ filolar tek tek çizilmeye devam ediyor —
        rota okunabilirliği önemli. Seçili filo da her zaman çizilir.
        ═══════════════════════════════════════════════════════════ */
+    /* ═══════════════════════════════════════════════════════════
+       FAZ 83 — SİSTEM VARLIK DÜZENİ (render-only)
+       ESKİ SORUN: yığın yalnız (sistem, devlet) çiftinde ve aynı
+       tarafta EN AZ İKİ filo varken oluşuyordu. Oyuncunun tek
+       filosu ile bir korsan filosu aynı sistemdeyse ikisi de
+       aynı X/Y'de çiziliyordu — üst üste biniyorlardı.
+
+       Artık sistemde BİRDEN ÇOK TARAF varsa her taraf kendi
+       satırını alıyor. Filoların dünya koordinatı DEĞİŞMİYOR;
+       bu yalnız çizim katmanı. Satır sırası sabit:
+         0 oyuncu · 1 vasal/müttefik · 2 tarafsız · 3 düşman ·
+         4 korsan/kriz
+       ═══════════════════════════════════════════════════════════ */
     const yigin = {};
+    const sysTaraf = {};              // sys -> {empId: satırVerisi}
     if (!politik){
       for (const f of G.fleets){
         if (!this.fleetVisible(f) || f.mv || f === this.sel) continue;
         if (f.sys < 0 || !f.ships.length) continue;
         const anahtar = f.sys + '_' + f.e;
         const y = yigin[anahtar] || (yigin[anahtar] = {
-          sys: f.sys, e: f.e, guc: 0, bilim: 0, koloni: 0, sav: 0, insa: 0
+          sys: f.sys, e: f.e, guc: 0, bilim: 0, koloni: 0, sav: 0, insa: 0,
+          filolar: []
         });
         if (isArmed(f)){ y.sav++; y.guc += fleetPower(f); }
         else if (fleetHasRole(f, 'bilim')) y.bilim++;
         else if (f.ships.some(sh => sh.c === 'ins')) y.insa++;
         else y.koloni++;
+        y.filolar.push(f);
+        (sysTaraf[f.sys] || (sysTaraf[f.sys] = {}))[f.e] = y;
       }
     }
-    /* Yığın oluşan sistemlerdeki duran filolar tek tek çizilmez */
+    /* Bir sistemde birden çok TARAF varsa hepsi satıra düşer;
+       tek taraf varsa eski kural (en az 2 filo) geçerli. */
     const gizli = new Set();
     for (const k in yigin){
       const y = yigin[k];
-      if (y.sav + y.bilim + y.koloni + y.insa < 2) continue;   // tek filo yığın değil
+      const tarafN = Object.keys(sysTaraf[y.sys] || {}).length;
+      if (tarafN < 2 && (y.sav + y.bilim + y.koloni + y.insa) < 2) continue;
       gizli.add(k);
     }
 
@@ -2058,36 +2196,94 @@ const View = {
       catch(err){ if (!this._fxWarn){ this._fxWarn = 1; console.warn('drawFleet:', err); } }
     }
 
-    /* FAZ 75: yığın özet satırlarını çiz */
+    /* ═══════════════════════════════════════════════════════════
+       FAZ 83 — TARAF SATIRLARI
+       Her sistem için taraflar sıraya dizilip 17 px aralıkla alt
+       alta yazılıyor. Hit-test dikdörtgeni AYNI hesaptan üretilip
+       this.rowHits'e yazılıyor — görsel ile dokunma alanı asla
+       ayrışmıyor. Dördüncü taraftan sonrası "+N" ile daralıyor.
+       ═══════════════════════════════════════════════════════════ */
+    this.rowHits = [];
     if (!politik){
       g.save();
-      g.textAlign = 'center';
       g.font = 'bold 10px ui-monospace,monospace';
+      g.textAlign = 'left';
       g.lineWidth = 3; g.lineJoin = 'round';
-      for (const k of gizli){
-        const y = yigin[k];
-        const sy = G.sys[y.sys];
+      const SIRA_H = 17, MAX_SIRA = 4;
+
+      for (const sid in sysTaraf){
+        const taraflar = sysTaraf[sid];
+        const anahtarlar = Object.keys(taraflar).filter(eid =>
+          gizli.has(sid + '_' + eid));
+        if (!anahtarlar.length) continue;
+        const sy = G.sys[+sid];
         if (!sy || !this.inView(sy.x, sy.y)) continue;
-        const fe = G.emps[y.e];
-        if (!fe || fe.dead) continue;
-        const parca = [];
-        if (y.sav)    parca.push('⚔' + fmt(y.guc));
-        if (y.bilim)  parca.push('🛰×' + y.bilim);
-        if (y.koloni) parca.push('🚀×' + y.koloni);
-        if (y.insa)   parca.push('🔧×' + y.insa);
-        if (!parca.length) continue;
-        const txt = parca.join(' · ');
+
+        /* Öncelik: oyuncu → dost → tarafsız → düşman → korsan */
+        const oncelik = (eid) => {
+          const fe = G.emps[eid];
+          if (!fe) return 9;
+          if (fe.id === 0) return 0;
+          if (fe.wild || fe.crisisSide) return 4;
+          if (G.p.ally && G.p.ally[fe.id]) return 1;
+          if (typeof isVassal === 'function' && isVassal(fe) &&
+              fe.overlord === 0) return 1;
+          if (G.p.war[fe.id]) return 3;
+          return 2;
+        };
+        anahtarlar.sort((a, b) => oncelik(a) - oncelik(b) ||
+                                  (G.emps[b] ? 0 : 1));
+
         const p2 = this.w2s(sy.x, sy.y);
         const sr2 = Math.max(2.2, sy.star.r * this.cam.z * 1.5);
-        const ty = p2.y + sr2 + 20;
-        /* Arka plan şeridi — sistem adıyla karışmasın */
-        const w = g.measureText(txt).width;
-        g.fillStyle = 'rgba(5,8,16,.72)';
-        g.fillRect(p2.x - w/2 - 4, ty - 8, w + 8, 13);
-        g.strokeStyle = 'rgba(4,7,14,.92)';
-        g.strokeText(txt, p2.x, ty);
-        g.fillStyle = fe.col;
-        g.fillText(txt, p2.x, ty);
+        let ty = p2.y + sr2 + 20;
+        const gosterilecek = anahtarlar.slice(0, MAX_SIRA);
+        const kalan = anahtarlar.length - gosterilecek.length;
+
+        for (const eid of gosterilecek){
+          const y = taraflar[eid];
+          const fe = G.emps[eid];
+          if (!fe || fe.dead) continue;
+          const parca = [];
+          if (y.sav)    parca.push('⚔' + fmt(y.guc));
+          if (y.bilim)  parca.push('🛰×' + y.bilim);
+          if (y.koloni) parca.push('🚀×' + y.koloni);
+          if (y.insa)   parca.push('🔧×' + y.insa);
+          if (!parca.length) continue;
+          const filoN = y.filolar.length;
+          const txt = (filoN > 1 ? '▮' + filoN + ' ' : '▮ ') + parca.join(' ');
+          const w = g.measureText(txt).width;
+          const x0 = p2.x - w/2 - 5;
+
+          /* Seçili filonun grubu vurgulanır */
+          const seciliGrup = this.sel && this.sel.e === +eid &&
+                             this.sel.sys === +sid;
+          g.fillStyle = seciliGrup ? 'rgba(111,242,200,.20)' : 'rgba(5,8,16,.76)';
+          g.fillRect(x0, ty - 9, w + 10, 14);
+          if (seciliGrup){
+            g.strokeStyle = 'rgba(111,242,200,.75)';
+            g.lineWidth = 1;
+            g.strokeRect(x0, ty - 9, w + 10, 14);
+            g.lineWidth = 3;
+          }
+          g.strokeStyle = 'rgba(4,7,14,.92)';
+          g.strokeText(txt, x0 + 5, ty);
+          g.fillStyle = fe.col;
+          g.fillText(txt, x0 + 5, ty);
+
+          /* Hit-test — çizimle BİREBİR aynı dikdörtgen */
+          this.rowHits.push({x: x0, y: ty - 9, w: w + 10, h: 14,
+                             sys: +sid, emp: +eid, filolar: y.filolar});
+          ty += SIRA_H;
+        }
+        if (kalan > 0){
+          const ek = '+' + kalan + ' taraf';
+          const w2 = g.measureText(ek).width;
+          g.fillStyle = 'rgba(5,8,16,.7)';
+          g.fillRect(p2.x - w2/2 - 4, ty - 9, w2 + 8, 13);
+          g.fillStyle = '#9fb6cc';
+          g.fillText(ek, p2.x - w2/2, ty);
+        }
       }
       g.restore();
       g.textAlign = 'center';

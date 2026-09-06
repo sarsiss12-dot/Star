@@ -623,7 +623,9 @@ function aiTurn(e){
     e.lastProp = e.lastProp || 0;
     if (G.day - e.lastProp > 540){
       const off = aiProposeTo(e, G.emps[0]);
-      if (off && canDeliver(e, off.give, G.emps[0])){
+      /* FAZ 86C.1: üretici TAM teklif üzerinden kanonik quote kullanır
+         (eskiden yalnız give tarafına canDeliver bakıyordu). */
+      if (off && typeof dealQuote === 'function' && dealQuote(off).ok){
         e.lastProp = G.day;
         UI.aiOffer(off);
       }
@@ -650,8 +652,16 @@ function aiTurn(e){
             UI.aiOffer({from:e.id, to:0, give, want:[{t:'pact'}]});
           }
         } else {
-          e.res.etk -= 70;
-          makePact(e, o);
+          /* ═══ FAZ 86C: AI-AI YOLU ARTIK KANONİK MOTORDAN GEÇER ═══
+             Eskiden doğrudan `e.res.etk -= 70; makePact(e,o)` yapıyordu:
+             kanonik doğrulamayı atlıyor ve tabloya UYMAYAN bir maliyet
+             (70, oysa pact 40) kesiyordu. Artık aynı normalize →
+             validate → quote → execute hattı kullanılır; maliyet,
+             geçerlilik ve goodwill kuralları oyuncununkiyle aynıdır. */
+          /* ═══ FAZ 86C.3: ARTIK KARŞILIKLI ═══
+             Alıcı AI teklifi değerlendirir; reddedebilir veya karşı
+             teklif verebilir. Tek taraflı dayatma kaldırıldı. */
+          aiNegotiate(e, o, [{t:'pact'}], []);
         }
         break;
       }
@@ -676,13 +686,12 @@ function aiTurn(e){
             UI.aiOffer({from:e.id, to:0, give:[{t:'intel'}], want:[{t:'ally'}]});
           }
         } else {
-          e.res.etk -= 150;
-          if (e.war[o.id] || o.war[e.id]){
-            e.war[o.id] = false; o.war[e.id] = false;
-            if (typeof resolveProxyWars === 'function') resolveProxyWars(e, o);
-          }
-          e.ally[o.id] = true; o.ally[e.id] = true;
-          e.rel[o.id] = Math.max(e.rel[o.id], 55); o.rel[e.id] = Math.max(o.rel[e.id], 55);
+          /* ═══ FAZ 86C: AI-AI İTTİFAKI DA KANONİK HATTA ═══
+             Eskiden ham ilişki ataması (rel=55) ve tablo dışı 150 Etki
+             ile motoru atlıyordu. `ally` maddesi applyItems içinde
+             savaşı da bitirir; maliyet kanonik tablodan (90) gelir. */
+          /* FAZ 86C.3: ittifak da karşılıklı müzakereden geçer. */
+          aiNegotiate(e, o, [{t:'ally'}], []);
         }
         break;
       }
@@ -857,10 +866,102 @@ function colonizeTargets(e){
 /* --------------------------------------------------------------------
    AI YANITI — kabul / karşı teklif / red
    -------------------------------------------------------------------- */
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 86C.3 — AI ↔ AI KARŞILIKLI MÜZAKERE
+
+   ÖLÇÜLEN ESKİ DAVRANIŞ: AI-AI pact/ally yolları fırsat kapısından
+   sonra DOĞRUDAN `executeDeal` çağırıyordu. Alıcı AI teklifi hiç
+   değerlendirmiyor, reddedemiyor, karşı teklif veremiyordu — yani
+   antlaşma tek taraflı dayatılıyordu. (86C'de maliyet tablosu
+   düzeltilmişti ama karşılıklılık yoktu.)
+
+   ARTIK aynı kanonik yol: normalize → validate → quote → evalOffer →
+   aiRespond. Tek tur karşı teklif desteklenir; teklif eden AI karşı
+   teklifi kendi `evalOffer`'ıyla değerlendirir. Sonsuz döngü yoktur:
+   en fazla BİR karşı tur.
+
+   ÖNEMLİ: bu fonksiyon oyuncuyu (id 0) ASLA hedef almaz — oyuncuya
+   giden teklifler mevcut `UI.aiOffer` onay yolunda kalır. */
+function aiNegotiate(proposer, target, give, want){
+  const sonuc = {tur:0, karar:null, uygulandi:false, why:'', karsi:null};
+  if (!proposer || !target) return sonuc;
+  if (proposer.id === 0 || target.id === 0) return sonuc;   // oyuncu hariç
+  if (proposer.dead || target.dead || proposer.wild || target.wild) return sonuc;
+
+  const teklif = {from:proposer.id, to:target.id,
+                  give:(give||[]).slice(), want:(want||[]).slice()};
+  /* 1) Teklif ETMEDEN önce kendi kanonik kapısı */
+  const q0 = dealQuote(teklif);
+  if (!q0.ok){
+    sonuc.karar = 'gecersiz';
+    sonuc.why = (q0.fatal && q0.fatal[0]) || (q0.reasons && q0.reasons[0]) ||
+                'teklif uygulanabilir değil';
+    return sonuc;
+  }
+  /* 2) ALICI değerlendirir — oyuncuyla AYNI aiRespond yolu */
+  sonuc.tur = 1;
+  const r1 = aiRespond(target, teklif);
+  sonuc.karar = r1.v;
+  sonuc.why = r1.why || '';
+  if (r1.v === 'kabul'){
+    sonuc.uygulandi = executeDeal(teklif);
+    return sonuc;
+  }
+  if (r1.v === 'red') return sonuc;
+
+  /* 3) KARŞI TEKLİF — tek tur. Alıcının istediği ekler teklif edenin
+        vermesi gereken maddelerdir. */
+  if (r1.v === 'karsi' && Array.isArray(r1.add) && r1.add.length){
+    const karsi = {from:proposer.id, to:target.id,
+                   give:teklif.give.concat(r1.add), want:teklif.want.slice()};
+    sonuc.karsi = r1.add.slice();
+    sonuc.tur = 2;
+    /* 3a) Karşı teklif kanonik olarak uygulanabilir mi? */
+    const q1 = dealQuote(karsi);
+    if (!q1.ok){
+      sonuc.karar = 'karsi-gecersiz';
+      sonuc.why = (q1.reasons && q1.reasons[0]) || 'karşı teklif uygulanabilir değil';
+      return sonuc;
+    }
+    /* 3b) TEKLİF EDEN kendi evalOffer'ıyla değerlendirir. Bakış açısı
+           ters: karşı tarafın perspektifinden gelen teklif. */
+    const tersi = {from:target.id, to:proposer.id,
+                   give:karsi.want.slice(), want:karsi.give.slice()};
+    const ev2 = evalOffer(proposer, tersi);
+    if (ev2.hardLock || ev2.net < 0){
+      sonuc.karar = 'karsi-red';
+      sonuc.why = (ev2.why && ev2.why[0]) || 'karşı teklif teklif edene değmiyor';
+      return sonuc;
+    }
+    /* 3c) İKİNCİ karşı tur YOK — kabul veya ret. */
+    sonuc.karar = 'karsi-kabul';
+    sonuc.uygulandi = executeDeal(karsi);
+    return sonuc;
+  }
+  sonuc.karar = 'red';
+  return sonuc;
+}
+
 function aiRespond(ai, offer){
+  /* ═══ FAZ 86C.1: İŞE dealQuote İLE BAŞLA ═══
+     ÖLÇÜLEN ZAFİYET: eski hâl yalnız `q.fatal` bakıyordu. fatal=[] ama
+     q.ok=false olan teklifler (ör. gönderende yetersiz Etki) canDeliver
+     TRUE döndüğü için "kabul" edilebiliyordu. Artık q.ok false ise
+     fatal olsun olmasın İLK ANLAMLI GEREKÇEYLE kesin RET. evalOffer
+     yalnız geçerli, normalize edilmiş teklif için çalıştırılır. */
+  const q = (typeof dealQuote === 'function') ? dealQuote(offer) : null;
+  if (q && !q.ok){
+    const neden = (q.fatal && q.fatal[0]) || (q.reasons && q.reasons[0]) ||
+                  'Teklif uygulanabilir değil';
+    return {v:'red', why:neden, quote:q};
+  }
   const ev = evalOffer(ai, offer);
-  if (!canDeliver(ai, offer.want, G.emps[offer.from]))
-    return {v:'red', why:'İstediğin şeyleri veremeyiz.'};
+  /* ═══ FAZ 86C: SERT KİLİT PARA İLE AŞILAMAZ ═══ */
+  if (ev.hardLock)
+    return {v:'red', ev, why:(ev.why && ev.why[0]) || 'Doktrin anlaşmayı yasaklıyor'};
+  /* Karşı tarafın istenenleri fiziksel olarak verebildiği ayrıca sınanır. */
+  if (!canDeliverItems(ai, offer.want, G.emps[offer.from]))
+    return {v:'red', ev, why:'İstediğin şeyleri veremeyiz.'};
 
   if (ev.net > 0) return {v:'kabul', ev};
 
@@ -873,9 +974,10 @@ function aiRespond(ai, offer){
   /* evalOffer kazancı 'trust' ile ölçekler; karşı teklif hesabı da
      aynı ölçeği kullanmalı. Aksi hâlde AI kendi istediği miktarı
      ekledikten sonra bile "yetersiz" diyordu. */
-  const relT = ai.rel[from.id] || 0;
-  const profT = ai.ai ? aiProfile(ai) : {dip:.5, war:.5};
-  const trustT = Math.max(.35, 1 + relT / 220 + (profT.dip - .5) * .18);
+  /* FAZ 86C: ölçek KANONİK quote'tan gelir — AI ayrı formül
+     kopyalamaz (eskiden rel/220 + dip formülü burada tekrarlanıyordu
+     ve evalOffer'ın capped çarpanıyla uyuşmuyordu). */
+  const trustT = Math.max(.35, ev.gainMul || 1);
 
   // teklifte hâlihazırda ne kadar kaynak var? (üst üste yığmayı engelle)
   const already = {};
@@ -914,6 +1016,16 @@ function aiRespond(ai, offer){
 
   if (gap <= 2) gap = 0;                 // yuvarlama artığını yok say
   if (gap <= 0 && extra.length){
+    /* FAZ 86C.1: karşı teklifin KENDİSİ de kanonik quote'tan geçer;
+       AI uygulanamaz bir karşı teklif öneremez. */
+    if (typeof dealQuote === 'function'){
+      const kq = dealQuote({from:offer.from, to:offer.to,
+        give:(offer.give || []).concat(extra), want:(offer.want || []).slice(),
+        born:offer.born, expires:offer.expires});
+      if (!kq.ok)
+        return {v:'red', ev,
+                why:(kq.reasons && kq.reasons[0]) || 'Karşı teklif uygulanabilir değil'};
+    }
     const list = extra.map(dealLabel).join(', ');
     return {v:'karsi', add: extra, ev,
             why:'Şunları da eklersen kabul ederiz: ' + list};
@@ -1879,12 +1991,20 @@ function aiPickOp(e, o){
      tekrar tekrar deliyor ve etkisini çöpe atıyordu (ölçümde
      operasyonların %66'sı buraydı). */
   if (typeof embargoOn === 'function'){
+    /* ═══ FAZ 86A DOĞRULUK UYARLAMASI ═══
+       Operasyon artık YALNIZ seçilen hedefin hattını deler (rastgele
+       üçüncü devlet seçilmiyor). Bu yüzden puan da hedefe özgü
+       olmalı: `o` gerçekten ambargo uygulamıyorsa operasyon zaten
+       opQuote tarafından reddedilirdi. Sıklık/denge puanı DEĞİŞMEDİ —
+       aynı katsayı, yalnız doğru hedef üzerinde uygulanıyor. */
     let acikHat = 0;
     for (const x of G.emps){
       if (x.dead || x.wild || x.id === e.id) continue;
       if (embargoOn(x, e.id) && !(e.smuggle && e.smuggle[x.id] > G.day)) acikHat++;
     }
-    if (acikHat) ekle('ambargoKir', .70 + acikHat * .18);
+    const hedefUygular = embargoOn(o, e.id) &&
+      !(e.smuggle && e.smuggle[o.id] > G.day);
+    if (acikHat && hedefUygular) ekle('ambargoKir', .70 + acikHat * .18);
   }
 
   /* ═══ FAZ 38: İSYANCI ÖNCELİĞİ ═══
@@ -2119,9 +2239,17 @@ function aiOpsTick(){
         : (key === 'incite' && typeof inciteRebellion === 'function')
         ? inciteRebellion(e, o) : runOp(e, o, key);
       if (r && r.ok){
-        e.opLog = e.opLog || [];
-        e.opLog.push({t: G.memAge || 0, k: key, o: o.id, caught: !!r.caught});
-        if (e.opLog.length > 20) e.opLog.shift();
+        /* ═══ FAZ 86A: ÇİFT KAYIT ÖNLEMİ ═══
+           opLog artık runOp içinde MERKEZÎ olarak yazılıyor. Buradaki
+           ek yazım yalnız runOp'tan GEÇMEYEN özel yollar (stealTech /
+           incite) için korunur; runOp yolunda tekrar yazılsaydı her AI
+           operasyonu iki kayıt üretirdi. */
+        const runOpYolu = (key !== 'stealTech' && key !== 'incite');
+        if (!runOpYolu){
+          e.opLog = e.opLog || [];
+          e.opLog.push({t: G.memAge || 0, k: key, o: o.id, caught: !!r.caught});
+          if (e.opLog.length > 20) e.opLog.shift();
+        }
         yapilan++;
       }
       /* FAZ 11: Gölge Konseyi doktrini ayda İKİ operasyon çevirebilir.

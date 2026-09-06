@@ -414,11 +414,30 @@ function empireIncome(e){
   return inc;
 }
 
-function economyTick(init){
-  // ay başında önbellekleri boşalt
-  for (const e of G.emps){ e._trAt = -1; e._powAt = -1; e._pressAt = -1; }
-  G._structAt = -1;
-  refreshReach();
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 85B — AYLIK DÜNYA İLERLEMESİ (yalnız gerçek ay geçişinde)
+
+   KÖK NEDEN: Bu sekiz tik `economyTick(init)` içinde `if (init) continue`
+   kontrolünden ÖNCE çağrılıyordu. deserialize() ve setupGame() de
+   economyTick(true) çağırdığı için KAYIT AÇMAK bir ay oynatıyordu.
+
+   ÖLÇÜLEN SONUÇ (düzeltmeden önce, tek bir economyTick(true) çağrısı):
+     groundTick     → col.shield 4→8 (tüm koloniler), garrisonBase 10→13
+     invasionTick   → col.siege 2→0
+     repairTick     → gemi gövdesi arttı, f.repairing yazıldı, kaynak yakıldı
+     colossusTick   → f.charge 3→0
+     terraformTick  → pl.terraform.left 5→4
+     radiationTick  → radyasyonlu sistemdeki HER filoda gövde −0.05
+     panopticonTick → sys.seen ve sys.panopt yazıldı
+     secessionTick  → ayrılık sayacı işlendi
+     ayrıca 4 adet say() bildirimi üretildi
+   Art arda yükleme kalkanı 4→8→12→16→20→22 diye şişiriyordu.
+
+   ÇÖZÜM: aylık ilerleme burada toplandı ve YALNIZ init === false
+   yolunda çağrılıyor. Sıra ve içerik economyTick(false) için birebir
+   korundu — bu bir davranış değişikliği değil, yalnız yükleme
+   yolundan çıkarma işlemidir. */
+function advanceMonthlyWorld(){
   if (typeof groundTick === 'function') groundTick();   // FAZ 21: kalkan/garnizon
   if (typeof invasionTick === 'function') invasionTick(); // FAZ 22: kara savaşları
   if (typeof repairTick === 'function') repairTick();     // FAZ 23: filo onarımı
@@ -427,6 +446,18 @@ function economyTick(init){
   if (typeof radiationTick === 'function') radiationTick(); // FAZ 37: radyasyon
   if (typeof panopticonTick === 'function') panopticonTick(); // FAZ 49: gözlem
   if (typeof secessionTick === 'function') secessionTick(); // FAZ 41: ayrılıkçılar
+}
+
+function economyTick(init){
+  // ay başında önbellekleri boşalt
+  for (const e of G.emps){ e._trAt = -1; e._powAt = -1; e._pressAt = -1; }
+  G._structAt = -1;
+  refreshReach();
+  /* FAZ 85B: aylık dünya YALNIZ gerçek ay geçişinde ilerler.
+     init === true (deserialize / setupGame) saf kalır: aşağıdaki
+     döngü yalnız türetilmiş ekonomiyi (recalcMods, empireIncome,
+     refreshLuxury) yeniden hesaplar. */
+  if (!init) advanceMonthlyWorld();
   for (const e of G.emps){
     if (e.dead) continue;
     recalcMods(e);
@@ -4012,8 +4043,31 @@ function makeLeader(e, tip, rnd2){
 }
 
 /* Havuzu doldur — oyuncu buradan atama yapar */
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 83.4 — OKUMA SAF, YAZMA AÇIK
+   ESKİ DAVRANIŞ: leaderPool okurken bile `e.leaders = []` yazıyordu.
+   Lider panelini AÇMAK bile imparatorluk nesnesini değiştiriyor,
+   serialize çıktısını 13 bayt büyütüyordu (Faz 83.3'te ölçüldü).
+   UI.refresh'in veri değiştirmesi mimari olarak yanlıştı.
+
+   Artık iki ayrı yol var:
+     leaderPool(e)       — SAF okuma. Havuz yoksa DONDURULMUŞ boş
+                           dizi döner; e'ye hiçbir alan yazılmaz.
+     ensureLeaderPool(e) — mutasyon. Yalnız gerçekten lider
+                           eklenecekken çağrılır ve kalıcı diziyi
+                           orada başlatır.
+   Boş görünüm dondurulmuş: yanlışlıkla ona push edilirse sessizce
+   kaybolmak yerine hemen belli olur (strict mod'da hata atar).
+   ═══════════════════════════════════════════════════════════════════ */
+const BOS_LIDER_HAVUZU = Object.freeze([]);
+
 function leaderPool(e){
-  e.leaders = e.leaders || [];
+  return (e && Array.isArray(e.leaders)) ? e.leaders : BOS_LIDER_HAVUZU;
+}
+
+function ensureLeaderPool(e){
+  if (!e) return BOS_LIDER_HAVUZU;
+  if (!Array.isArray(e.leaders)) e.leaders = [];
   return e.leaders;
 }
 
@@ -4022,10 +4076,13 @@ function recruitLeader(e, tip){
   for (const r in bedel)
     if ((e.res[r] || 0) < bedel[r])
       return {ok:false, why:bedel[r] + ' etki gerekir'};
-  const havuz = leaderPool(e);
-  if (havuz.length >= 8) return {ok:false, why:'Havuz dolu (8 lider)'};
+  /* FAZ 83.4: önce SAF okumayla sınırı sına — reddedilirse
+     hiçbir alan oluşmasın. Kalıcı dizi ancak gerçekten lider
+     eklenecekken açılıyor. */
+  if (leaderPool(e).length >= 8) return {ok:false, why:'Havuz dolu (8 lider)'};
   for (const r in bedel) e.res[r] -= bedel[r];
   const L = makeLeader(e, tip);
+  const havuz = ensureLeaderPool(e);        // gerçek mutasyon burada
   havuz.push(L);
   if (e.id === 0) say('👤 ' + L.name + ' hizmete alındı — ' +
     LEADER_TRAITS[L.trait].ico + ' ' + LEADER_TRAITS[L.trait].n, 'win');
@@ -4074,8 +4131,10 @@ function assignLeader(e, leaderId, hedefTip, hedefId){
 }
 
 function leaderOf(e, id){
-  if (id === undefined) return null;
-  return (e.leaders || []).find(x => x.id === id) || null;
+  /* FAZ 83.4: zaten saftı (`e.leaders || []` yazma yapmıyor),
+     ama tutarlılık için ortak okuma yolundan geçiyor. */
+  if (id === undefined || !e) return null;
+  return leaderPool(e).find(x => x.id === id) || null;
 }
 
 /* Bir filonun amiral çarpanı */
