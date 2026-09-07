@@ -632,11 +632,51 @@ function aiTurn(e){
     }
   }
 
+  /* ═══ FAZ 86C.4 — 6z. SALDIRMAZLIK PAKTI ═══
+     ÖLÇÜLDÜ: 3 seed × 360 ayda hiç NAP kurulmadı; AI'ın saldırmazlık
+     öneren bir yolu YOKTU (ai.js'de `t:'nap'` sıfır kez geçiyordu).
+     NAP mantıken pact/ally'den ÖNCE gelir: barış varken güveni
+     ucuza sabitler (kanonik maliyet 0), gerilim varken erken savaşı
+     önler. Kendi bağımsız fırsat kapısı vardır; mevcut pact ve ally
+     kapılarına DOKUNULMAZ. */
+  if (prof.dip > .25){
+    for (const o of G.emps){
+      if (o.dead || o.wild || o.id === e.id) continue;
+      if (!e.contact[o.id]) continue;
+      /* FAZ 86C.4: doktrini anlaşmayı YASAKLAYAN hedefe teklif
+         götürmek fırsat yuvasını boşa harcıyordu — ölçümde 200 ayda
+         84 müzakere yalnız bu yüzden geçersiz dönüyordu. */
+      if (typeof diploBlocked === 'function' && diploBlocked(e, o)) continue;
+      if (e.war[o.id]) continue;                        // savaşta NAP olmaz
+      if (e.nap && e.nap[o.id] > G.day) continue;       // zaten yürürlükte
+      if (e.ally[o.id]) continue;                       // ittifak zaten kapsar
+      /* Temkinli AI, ilişkisi ORTA olan komşuyla güvence arar:
+         çok dostsa gerek yok, çok düşmansa kabul edilmez. */
+      const rel = e.rel[o.id] || 0;
+      if (rel < -35 || rel > 65) continue;
+      const gerginlik = G.emps.some(x => !x.dead && x.war[o.id]) ? .10 : 0;
+      if (rnd() < .06 + prof.dip * .10 + gerginlik){
+        if (o.id === 0){
+          e.lastNapProp = e.lastNapProp || 0;
+          if (G.day - e.lastNapProp > 540){
+            e.lastNapProp = G.day;
+            UI.aiOffer({from:e.id, to:0, give:[{t:'nap'}], want:[]});
+          }
+        } else {
+          /* NAP maliyetsizdir; karşılık istemek anlamsız olurdu. */
+          aiNegotiate(e, o, [{t:'nap'}], []);
+        }
+        break;
+      }
+    }
+  }
+
   /* --- 6a. ticaret anlaşmaları --- */
   if (e.res.etk > 120 && prof.eco > .35){
     for (const o of G.emps){
       if (o.dead || o.id === e.id || e.war[o.id]) continue;
       if (!e.contact[o.id] || (e.pact && e.pact[o.id])) continue;
+      if (typeof diploBlocked === 'function' && diploBlocked(e, o)) continue;
       if (!canPact(e, o)) continue;
       const luxWant = LUX_KEYS.filter(k => ownLuxury(o)[k] && !ownLuxury(e)[k]).length;
       if (rnd() < .10 + prof.eco*.16 + (e.rel[o.id]+40)/400 + luxWant*.09){
@@ -661,7 +701,9 @@ function aiTurn(e){
           /* ═══ FAZ 86C.3: ARTIK KARŞILIKLI ═══
              Alıcı AI teklifi değerlendirir; reddedebilir veya karşı
              teklif verebilir. Tek taraflı dayatma kaldırıldı. */
-          aiNegotiate(e, o, [{t:'pact'}], []);
+          /* FAZ 86C.4: karşılıklı teklif — alıcı da bir bedel öder. */
+          const tp = aiProposeTerms(e, o, 'pact');
+          aiNegotiate(e, o, tp.give, tp.want);
         }
         break;
       }
@@ -673,6 +715,7 @@ function aiTurn(e){
     for (const o of G.emps){
       if (o.dead || o.id === e.id || e.ally[o.id] || e.war[o.id]) continue;
       if (!e.contact[o.id] || !canAlly(e, o)) continue;
+      if (typeof diploBlocked === 'function' && diploBlocked(e, o)) continue;
       if (RACES[o.race].dip <= .05) continue;
       // ortak düşman varsa ittifak cazip
       const commonFoe = G.emps.some(x => !x.dead && e.war[x.id] && o.war[x.id]);
@@ -691,7 +734,9 @@ function aiTurn(e){
              ile motoru atlıyordu. `ally` maddesi applyItems içinde
              savaşı da bitirir; maliyet kanonik tablodan (90) gelir. */
           /* FAZ 86C.3: ittifak da karşılıklı müzakereden geçer. */
-          aiNegotiate(e, o, [{t:'ally'}], []);
+          /* FAZ 86C.4: ittifak da karşılıklı. */
+          const ta = aiProposeTerms(e, o, 'ally');
+          aiNegotiate(e, o, ta.give, ta.want);
         }
         break;
       }
@@ -882,6 +927,50 @@ function colonizeTargets(e){
 
    ÖNEMLİ: bu fonksiyon oyuncuyu (id 0) ASLA hedef almaz — oyuncuya
    giden teklifler mevcut `UI.aiOffer` onay yolunda kalır. */
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 86C.4 — KARŞILIKLI TEKLİF ŞEKLİ
+
+   ÖLÇÜLEN SORUN: AI-AI teklifleri `give:[{t:'pact'}], want:[]`
+   biçimindeydi. Alıcının maliyeti 0, kazancı +45 → net +45; kabul
+   RASYONELDİ ve 3 seed × 360 ayda 159 müzakerenin 159'u kabul edildi.
+   Pazarlık mekaniği çalışıyordu ama hiç DEVREYE GİRMİYORDU.
+
+   ÇÖZÜM: teklif eden artık ölçülü bir KARŞILIK ister. Miktar
+   `itemValue` ölçeğiyle (res ≈ v × 0.38 × ihtiyaç) antlaşmanın Etki
+   maliyetine bağlanır, ilişkiye göre yumuşar ve alıcının stokunun
+   dörtte biriyle sınırlanır. Böylece:
+     · zengin ve dost alıcı  → kabul
+     · fakir veya soğuk alıcı → ret ya da karşı teklif
+   FIRSAT KAPILARI (rnd eşikleri, prof katsayıları, lastProp süreleri)
+   DEĞİŞTİRİLMEDİ — yalnız teklifin İÇERİĞİ değişti. */
+function aiProposeTerms(e, o, treaty){
+  const give = [{t:treaty}];
+  const want = [];
+  if (!e || !o) return {give, want};
+  const maliyet = (typeof dealCost === 'function')
+    ? dealCost({from:e.id, to:o.id, give, want:[]}) : 0;
+  if (maliyet <= 0) return {give, want};
+  /* İlişki iyi → daha az iste; soğuk → daha çok. %20–%80 arası. */
+  const rel = clamp(o.rel[e.id] || 0, -100, 100);
+  const pay = clamp(0.55 - rel / 400, 0.20, 0.80);
+  /* Etki maliyetini kaynak değerine çevir: itemValue res ≈ v×0.38 */
+  const hedefDeger = maliyet * pay / 0.38;
+  /* Alıcının EN BOL kaynağı — onu en az zorlayan karşılık. */
+  let r = 'min';
+  for (const k of ['min','ene','ala'])
+    if ((o.res[k] || 0) > (o.res[r] || 0)) r = k;
+  /* Stokunun dörtte birinden fazlasını ASLA isteme.
+     ⚠ ÖLÇÜLEN HATA: `Math.round(x/10)*10` tavanı AŞIYORDU — stok 20
+     iken tavan 5 olmasına rağmen 10 isteniyordu (round(0.5)=1).
+     Aşağı yuvarlama tavanı garanti eder; 10'un altına düşen istek
+     zaten anlamsız olduğu için hiç istenmez (teklif karşılıksız
+     kalır ve alıcı bunu değerlendirir). */
+  const tavan = (o.res[r] || 0) * 0.25;
+  const v = Math.floor(Math.min(hedefDeger, tavan) / 10) * 10;
+  if (v >= 10) want.push({t:'res', r, v});
+  return {give, want};
+}
+
 function aiNegotiate(proposer, target, give, want){
   const sonuc = {tur:0, karar:null, uygulandi:false, why:'', karsi:null};
   if (!proposer || !target) return sonuc;
@@ -923,14 +1012,31 @@ function aiNegotiate(proposer, target, give, want){
       sonuc.why = (q1.reasons && q1.reasons[0]) || 'karşı teklif uygulanabilir değil';
       return sonuc;
     }
-    /* 3b) TEKLİF EDEN kendi evalOffer'ıyla değerlendirir. Bakış açısı
-           ters: karşı tarafın perspektifinden gelen teklif. */
-    const tersi = {from:target.id, to:proposer.id,
-                   give:karsi.want.slice(), want:karsi.give.slice()};
-    const ev2 = evalOffer(proposer, tersi);
-    if (ev2.hardLock || ev2.net < 0){
+    /* 3b) TEKLİF EDEN karşı teklifi DELTA olarak değerlendirir.
+       ÖLÇÜLEN HATA: önce `tersi` teklifi kurulup `evalOffer` ile
+       bakılıyordu. Bu, SİMETRİK antlaşmayı (pact/ally/nap) teklif
+       eden için SAF MALİYET sayıyordu — oysa antlaşmadan o da
+       yararlanıyor. Sonuç: teklif edenin kendi teklifine bakışı bile
+       negatif çıkıyordu (ölçüldü: net −22.8) ve karşı teklif 3 seed
+       boyunca HİÇ kabul edilmiyordu (karsi-kabul = 0).
+       DOĞRUSU: teklif eden zaten orijinal teklifi yapmaya karar
+       vermişti; karar YALNIZ EK karşılık hakkındadır. Ek, antlaşmanın
+       teklif edene değerinin belirli bir oranını aşmadıkça kabul
+       edilir. */
+    const ekDeger = (r1.add || []).reduce(
+      (s, it) => s + itemValue(proposer, it, target), 0);
+    const antlasmaDegeri = teklif.give.reduce(
+      (s, it) => s + itemValue(proposer, it, target), 0);
+    /* Kendi antlaşma kazancının en fazla %60'ı kadar ek taviz. */
+    const tavan = Math.max(0, antlasmaDegeri) * 0.60;
+    const ozelKilit = (typeof diploBlocked === 'function') &&
+                      diploBlocked(proposer, target);
+    if (ozelKilit || ekDeger > tavan){
       sonuc.karar = 'karsi-red';
-      sonuc.why = (ev2.why && ev2.why[0]) || 'karşı teklif teklif edene değmiyor';
+      sonuc.why = ozelKilit
+        ? 'doktrin anlaşmayı yasaklıyor'
+        : ('istenen ek karşılık fazla — ' + Math.round(ekDeger) +
+           ' değerinde ek, kabul tavanı ' + Math.round(tavan));
       return sonuc;
     }
     /* 3c) İKİNCİ karşı tur YOK — kabul veya ret. */

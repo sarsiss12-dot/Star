@@ -919,57 +919,131 @@ const View = {
   s2w(x,y){ return {x:(x-this.vw/2)/this.cam.z + this.cam.x, y:(y-this.vh/2)/this.cam.z + this.cam.y}; },
 
   /* ---------- girdi ---------- */
+  /* ═══════════════════════════════════════════════════════════════
+     FAZ 86C.4H — DOKUNMA YAŞAM DÖNGÜSÜ ONARIMI
+
+     ÖLÇÜLEN KÖK NEDEN: `lostpointercapture` HİÇ dinlenmiyordu
+     (ölçüm: kaynak sürümde listener sayısı 0). Tarayıcı yakalamayı
+     bıraktığında `pointerup` tuvale GELMİYOR, o pointer `pts`
+     içinde SONSUZA DEK takılı kalıyordu. Sonuçları ölçüldü:
+       · sonraki TEK parmak `pts.size === 2` yapıyor → pinch dalına
+         giriyor, yani tek parmak ZOOM gibi davranıyor;
+       · `up` içindeki `pts.size === 1` koşulu bir daha sağlanmadığı
+         için gezegen seçimi ÇALIŞMIYOR (ölçüm: sonrakiTap = 0).
+     Bu, kullanıcının "kaydırma çalışıyor ama gezegene dokunma
+     çalışmıyor" gözlemiyle birebir örtüşür.
+
+     Ayrıca: bind() tekrar çağrılırsa listener birikirdi; artık
+     korumalı. Kesinti durumları (sekme gizlenmesi, odak kaybı,
+     kayıt yükleme, harita tamiri) için merkezî `resetGesture()`. */
+  resetGesture(){
+    const s = this._gest;
+    if (!s) return;
+    if (this.cv && this.cv.releasePointerCapture){
+      for (const id of s.pts.keys()){
+        try { this.cv.releasePointerCapture(id); } catch(e){}
+      }
+    }
+    s.pts.clear(); s.last = null; s.moved = 0; s.t0 = 0; s.pinch = null;
+  },
   bind(){
     const cv = this.cv;
-    let pts = new Map(), last = null, moved = 0, t0 = 0, pinch = null;
+    /* Tekrarlı bind listener biriktirmesin. */
+    if (this._boundCv === cv) return;
+    this._boundCv = cv;
+    const s = this._gest = {pts:new Map(), last:null, moved:0, t0:0, pinch:null};
+    const pts = s.pts;
     const pos = ev => ({x:ev.clientX, y:ev.clientY});
+    /* Bir temasın kaydını kapat; tap kararı ÇAĞIRANA aittir. */
+    const kapat = id => {
+      pts.delete(id);
+      try { if (cv.releasePointerCapture) cv.releasePointerCapture(id); } catch(e){}
+      if (pts.size < 2) s.pinch = null;
+      /* Pinch'ten tek parmağa düşülürse kalan temas için başlangıç
+         konumu YENİDEN kurulur — kamera sıçramaz. */
+      if (pts.size === 1) s.last = [...pts.values()][0];
+      if (pts.size === 0){ s.last = null; s.moved = 0; }
+    };
+    this._kapatTemas = kapat;
 
     cv.addEventListener('pointerdown', ev => {
-      cv.setPointerCapture(ev.pointerId);
+      try { cv.setPointerCapture(ev.pointerId); } catch(e){}
       pts.set(ev.pointerId, pos(ev));
-      if (pts.size === 1){ last = pos(ev); moved = 0; t0 = performance.now(); }
+      if (pts.size === 1){ s.last = pos(ev); s.moved = 0; s.t0 = performance.now(); }
       else if (pts.size === 2){
         const [a,b] = [...pts.values()];
-        pinch = {d: Math.hypot(a.x-b.x, a.y-b.y), z: this.cam.z,
-                 mx:(a.x+b.x)/2, my:(a.y+b.y)/2};
+        s.pinch = {d: Math.hypot(a.x-b.x, a.y-b.y), z: this.cam.z,
+                   mx:(a.x+b.x)/2, my:(a.y+b.y)/2};
       }
     });
     cv.addEventListener('pointermove', ev => {
       if (!pts.has(ev.pointerId)) return;
       pts.set(ev.pointerId, pos(ev));
-      if (pts.size === 2 && pinch){
+      if (pts.size === 2 && s.pinch){
         const [a,b] = [...pts.values()];
         const d = Math.hypot(a.x-b.x, a.y-b.y);
         /* FAZ 44: pinch-zoom mobilde asıl kullanılan yol —
            tekerlekle aynı sınıra çekildi (0.07 → 0.035). */
-        const nz = clamp(pinch.z * (d/pinch.d), .035, 1.9);
+        const nz = clamp(s.pinch.z * (d/s.pinch.d), .035, 1.9);
         const mid = this.s2w((a.x+b.x)/2, (a.y+b.y)/2);
         this.cam.z = nz;
         const mid2 = this.s2w((a.x+b.x)/2, (a.y+b.y)/2);
         this.cam.x += mid.x-mid2.x; this.cam.y += mid.y-mid2.y;
         this.clampCam();                    // FAZ 78B
-        moved = 99;
-      } else if (pts.size === 1 && last){
+        s.moved = 99;
+      } else if (pts.size === 1 && s.last){
         const p = pos(ev);
-        const dx = p.x-last.x, dy = p.y-last.y;
-        moved += Math.hypot(dx,dy);
+        const dx = p.x-s.last.x, dy = p.y-s.last.y;
+        /* Eşik CSS pikselinde ölçülür — zoom seviyesi tıklama
+           eşiğini DEĞİŞTİRMEZ (clientX/Y zaten CSS pikselidir). */
+        s.moved += Math.hypot(dx,dy);
         this.cam.x -= dx/this.cam.z; this.cam.y -= dy/this.cam.z;
         /* FAZ 78B: sabit panPad yerine zoom'a duyarlı merkezi sınır */
         this.clampCam();
-        last = p;
+        s.last = p;
       }
     });
     const up = ev => {
-      if (pts.size === 1 && moved < 14 && performance.now()-t0 < 420){
-        this.tap(pos(ev));
+      /* ═══ FAZ 86C.4H-R1: TEMİZLİK ÖNCE, TAP SONRA ═══
+         ÖLÇÜLEN HATA: eski sıra `this.tap(...)` → `kapat(...)` idi.
+         View.tap (veya onun çağırdığı UI.tab / UI.refresh) hata
+         atarsa `kapat` HİÇ çalışmıyor, pointer `pts` içinde takılı
+         kalıyordu. Sonraki tek parmak `pts.size === 2` yaptığı için
+         pinch/zoom olarak yorumlanıyordu.
+         ARTIK: karar ve koordinatın güvenli kopyası önce alınır,
+         pointer state KESİNLİKLE temizlenir, tap en sonda ve kendi
+         hata sınırında çalıştırılır. */
+      const tapEt = pts.has(ev.pointerId) && pts.size === 1 &&
+                    s.moved < 14 && performance.now() - s.t0 < 420;
+      const nokta = {x: ev.clientX, y: ev.clientY};
+      kapat(ev.pointerId);                    // ÖNCE temizle
+      if (!tapEt) return;
+      try {
+        this.tap(nokta);
+      } catch(err){
+        /* Hata MASKELENMEZ: açık tanı kaydı bırakılır. */
+        try {
+          if (typeof logDiag === 'function')
+            logDiag('map-input', 'View.tap hatası: ' +
+                    (err && err.message ? err.message : String(err)));
+          else console.error('map-input · View.tap hatası:', err);
+        } catch(e2){}
       }
-      pts.delete(ev.pointerId);
-      if (pts.size < 2) pinch = null;
-      if (pts.size === 1) last = [...pts.values()][0];
-      if (pts.size === 0) last = null;
     };
     cv.addEventListener('pointerup', up);
-    cv.addEventListener('pointercancel', ev => { pts.delete(ev.pointerId); pinch = null; });
+    /* İptal ve YAKALAMA KAYBI: tap ÜRETMEDEN temizle. Aynı temas için
+       birden fazla kapanış olayı gelmesi durumu bozmaz (delete
+       idempotenttir). */
+    cv.addEventListener('pointercancel', ev => kapat(ev.pointerId));
+    cv.addEventListener('lostpointercapture', ev => kapat(ev.pointerId));
+    /* Kesintiler: sekme gizlenmesi, odak kaybı ve haritayı kapatan
+       modal jest durumunu güvenle sıfırlar. Parmak harita dışında
+       bırakılırsa kalıcı sürükleme/pinch oluşmaz. */
+    const kesinti = () => this.resetGesture();
+    window.addEventListener('blur', kesinti);
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) kesinti();
+    });
     cv.addEventListener('wheel', ev => {
       ev.preventDefault();
       const before = this.s2w(ev.clientX, ev.clientY);
@@ -1018,7 +1092,16 @@ const View = {
     return f.mv && (pVis(G.sys[f.mv.from]) || pVis(G.sys[f.mv.to]));
   },
 
-  tap(sp){
+  /* ═══ FAZ 86C.4H-R1: PARAMETRE AÇIK ADLANDIRILDI ═══
+     ÖLÇÜLEN HATA: rowHits bloğu ekran konumunu bind() kapsamındaki
+     yardımcıdan yeniden türetmeye çalışıyordu. O yardımcı ve olay
+     nesnesi bu fonksiyonda TANIMSIZ; üstelik yerel bildirim
+     fonksiyon parametresini GÖLGELİYORDU. Gerçek cihazda
+     ReferenceError üretiyor ve filo satırı dokunuşu hiç
+     çalışmıyordu. Parametre artık `screenPos`; gölgeleme imkânsız
+     ve hit-test doğrudan parametreyi kullanıyor. */
+  tap(screenPos){
+    const sp = screenPos;
     const {f, s} = this.hit(sp);
     const now = performance.now();
     const dbl = (now - (this._lastTap||0) < 320) && this._lastPt &&
@@ -1040,7 +1123,8 @@ const View = {
        döngü yapar.
        ═══════════════════════════════════════════════════════════ */
     if (this.rowHits && this.rowHits.length && !this.route){
-      const sp = pos(ev);
+      /* FAZ 86C.4H-R1: yeniden türetme satırı KALDIRILDI —
+         doğrudan fonksiyon parametresi kullanılıyor. */
       for (const r of this.rowHits){
         if (sp.x < r.x || sp.x > r.x + r.w) continue;
         if (sp.y < r.y || sp.y > r.y + r.h) continue;

@@ -6883,6 +6883,13 @@ function deserialize(txt){
   /* Geçici yetkilendirme alanları kayıttan taşınmaz ve
      önceki oturumdan sarkmamalı. */
   G._warAuth = null; G._warWhy = null; G._dealAuth = false;
+  /* FAZ 86C.4H: seçim KOŞULSUZ silinmek yerine kimlikle saklanır;
+     aşağıda güncel oyun nesnesi üzerinden yeniden çözümlenir.
+     Çözülemezse temizlenir (eski davranışla aynı sonuç). */
+  const _selSysId = (View.selSys && typeof View.selSys.id === 'number')
+                    ? View.selSys.id : null;
+  const _selFleetId = (View.sel && typeof View.sel.id === 'number')
+                      ? View.sel.id : null;
   View.sel = null; View.selSys = null; View.route = false; View.routed = false;
   G.over = null; G.speed = 0;
   G.nebula = ART.nebula(G.seed, 128, 128);
@@ -6896,6 +6903,26 @@ function deserialize(txt){
     x._trAt = -1; x._trCache = null;
     recalcMods(x);
   });
+  /* ═══ FAZ 86C.4H: YÜKLEME SONRASI HARİTA GİRDİSİ ═══
+     Eski jest durumu (takılı pointer, yarım pinch) yeni oyun
+     verisiyle taşınmamalı; geçersiz seçim temizlenmeli. Harita hem
+     çizilebilir hem ETKİLEŞİLEBİLİR bırakılır. */
+  try {
+    if (typeof View !== 'undefined'){
+      if (View.resetGesture) View.resetGesture();
+      /* Seçim GÜNCEL nesne üzerinden yeniden çözümlenir; eski oyun
+         nesnesine referans TUTULMAZ. Çözülemezse temizli kalır. */
+      if (_selSysId !== null){
+        const _s = G.sys[_selSysId];
+        View.selSys = (_s && _s.id === _selSysId) ? _s : null;
+      }
+      if (_selFleetId !== null){
+        const _f = G.fleets.filter(f => f && f.id === _selFleetId)[0];
+        View.sel = _f || null;
+      }
+      View.bcache = null; View.bkey = null;   // çizim önbelleği yenilensin
+    }
+  } catch(e){}
   rebuildDerivedStateAfterLoad();
   economyTick(true);
   /* Çizim katmanının önbellekleri de tazelensin */
@@ -7236,16 +7263,45 @@ function scheduleRecovery(sebep, hemen){
   }, hemen ? 16 : 120);
 }
 
+/* ═══ FAZ 86C.4H-R1: TEK KANONİK AKTİF DÜNYA TESTİ ═══
+   ÖLÇÜLEN HATA: runRecovery aktif dünya kontrolü OLMADAN UI.refresh
+   çağırıyordu. Ana menüde / geçişte G.p null iken UI.topbar →
+   `G.p.res` zinciri "Cannot read properties of null (reading 'res')"
+   üretebiliyordu. Artık render eden hiçbir adım (UI.refresh,
+   View.draw, refreshReach, sağlık testi) dünya hazır değilken
+   çalışmaz; açık `skip` tanısı bırakılır ve bu ASLA "healthy"
+   sayılmaz. */
+function activeWorldState(){
+  if (typeof G === 'undefined' || !G) return {ok:false, why:'no-G'};
+  if (!G.p) return {ok:false, why:'no-player'};
+  if (!Array.isArray(G.sys) || !G.sys.length) return {ok:false, why:'no-systems'};
+  if (!Array.isArray(G.emps) || !G.emps.length) return {ok:false, why:'no-empires'};
+  /* Dünya VAR ama yapısal olarak bozuksa bu `skip` değildir. */
+  if (typeof G.p.id !== 'number' || !G.emps[G.p.id])
+    return {ok:false, bozuk:true, why:'player-not-in-empires'};
+  if (!G.p.res || typeof G.p.res !== 'object')
+    return {ok:false, bozuk:true, why:'player-res-missing'};
+  return {ok:true};
+}
 function runRecovery(sebep, deneme){
   if (_recCalisiyor && deneme === 0) return;    // eşzamanlı giriş yok
   _recCalisiyor = true;
   try {
+    /* 0. AKTİF DÜNYA KAPISI — render eden hiçbir adım öncesinde */
+    const aw = activeWorldState();
+    if (!aw.ok){
+      if (aw.bozuk)
+        logDiag('recovery', 'BAŞARISIZ ' + sebep + ': bozuk dünya (' + aw.why + ')');
+      else
+        logDiag('recovery', 'recovery skip:no-active-world:' + aw.why +
+                ' (' + sebep + ')');
+      return;                                   // finally _recCalisiyor'u indirir
+    }
     /* 5-6-7. Canvas ve context — ensureContext ikisini de yapar */
     const ec = ensureContext();
     if (!ec.ok){
       logDiag('recovery', 'BAŞARISIZ ' + sebep + ': ' + ec.why);
-      _recCalisiyor = false;
-      return;
+      return;                                   // finally _recCalisiyor'u indirir
     }
     if (typeof View !== 'undefined' && View.resize) View.resize();  // TEK kez
     /* 8. Kamera doğrula */
@@ -7301,8 +7357,17 @@ function runRecovery(sebep, deneme){
               ' [' + (h.kod || '?') + ']');
   } catch(err){
     logDiag('recovery', 'istisna: ' + (err && err.message));
+  } finally {
+    /* ═══ FAZ 86C.4H-R1: BAYRAK HER YOLDA SERBEST ═══
+       ÖLÇÜLEN HATA: eski hâlde `_recCalisiyor = false;` try/catch
+       bloğunun DIŞINDA, düz akışta duruyordu. try içindeki her
+       `return` (ensureContext başarısızlığı ve yeni aktif dünya
+       kapısı) bu satırı ATLIYOR, bayrak takılı kalıyor ve sonraki
+       BÜTÜN recovery çağrıları giriş guard'ında sessizce
+       düşüyordu. finally ile erken dönüş ve istisna yollarında da
+       kesin olarak eski durumuna döner. */
+    _recCalisiyor = false;
   }
-  _recCalisiyor = false;
 }
 
 /* ═══════════════════════════════════════════════════════════════════

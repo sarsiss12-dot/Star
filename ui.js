@@ -569,6 +569,16 @@ const UI = {
            Çift dokunma korumalı: scheduleRecovery generation
            kullandığı için ikinci çağrı birinciyi iptal eder,
            iki ayrı döngü başlamaz. */
+        /* ═══ FAZ 86C.4H-R1: KANONİK SIRA ═══
+           ÖLÇÜLEN EKSİK: bu yol YALNIZ scheduleRecovery çağırıyordu.
+           Görüntü geri geliyor ama takılı pointer / yarım pinch
+           `pts` içinde kalıyordu — "harita göründü ama gezegene
+           dokunulamıyor" tablosu buradan çıkıyordu.
+           1) jest durumu TAM BİR KEZ sıfırlanır
+           2) mevcut generation korumalı tek recovery planlanır
+           3) mevcut bildirim ve modal davranışı korunur */
+        if (typeof View !== 'undefined' && View.resetGesture)
+          View.resetGesture();
         if (typeof scheduleRecovery === 'function')
           scheduleRecovery('manual', true);
         say('🔄 Harita yenileniyor…', 'sci');
