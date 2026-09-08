@@ -42,23 +42,26 @@ const UI = {
             (aç/kapa). Harita modları akordiyondan ÇIKARILDI ve
             doğrudan göründü — tek dokunuşla zemin değişiyor.
             ═══════════════════════════════════════════════════════ -->
-       <!-- ═══ FAZ 82: TEK AKORDİYON ═══
-            Beş görünüm modu (üç zemin + radar + lojistik) tek
-            butonda toplandı. Sol bar dokuz düğmeden altıya indi. -->
+       <!-- ═══ FAZ 82 + 86C.4H-R2: TEK AKORDİYON ═══
+            ÜÇ ANA MOD (aynı anda yalnız biri) ve İKİ BAĞIMSIZ
+            KATMAN (her biri ayrı aç/kapat) açıkça ayrıldı.
+            Savaş + Radar + Lojistik aynı anda açık olabilir. -->
        <div class="toolGrp" id="grpMap">
          <button class="tool grpHead" data-a="grpTog" data-x="map"
            title="Harita ve görünüm modları">🗺<i class="grpDot" id="mapDot">🌐</i></button>
          <div class="grpOut" id="outMap">
+           <div class="modeHdr" id="mainModeHdr">ANA MOD</div>
            <button class="tool mapMode" id="mm_siyasi" data-a="mapMode" data-x="siyasi"
              title="Devlet renkleri ve sınırlar">🌐<span>Siyasi</span></button>
            <button class="tool mapMode" id="mm_diplomasi" data-a="mapMode" data-x="diplomasi"
              title="Dost, düşman, tarafsız">🤝<span>Diplomatik</span></button>
            <button class="tool mapMode" id="mm_savas" data-a="mapMode" data-x="savas"
              title="Husumet ağı">🔥<span>Savaş</span></button>
-           <button class="tool logiBtn" id="logiBtn" data-a="mapMode" data-x="askeri"
-             title="İkmal hatları, menzil ve tedarik">⚓<span>Lojistik</span></button>
+           <div class="modeHdr" id="layerHdr">KATMANLAR (bağımsız)</div>
+           <button class="tool logiBtn" id="logiBtn" data-a="logiToggle"
+             title="İkmal hatları, menzil ve tedarik — ana moddan bağımsız aç/kapat">⚓<span>Lojistik</span></button>
            <button class="tool radarBtn" id="radarBtn" data-a="radarTog"
-             title="Filo hareketleri ve ralli hatları">🚀<span>Radar</span></button>
+             title="Filo hareketleri ve ralli hatları — ana moddan bağımsız aç/kapat">🚀<span>Radar</span></button>
          </div>
        </div>
 
@@ -332,9 +335,29 @@ const UI = {
         }
         break;
       }
+      /* ═══ FAZ 86C.4H-R2: LOJİSTİK AYRI AKSİYON ═══
+         Lojistik artık ana modu DEĞİŞTİRMEZ; kendi aç/kapat
+         durumunu çevirir ve tercihi kalıcı yazar. */
+      case 'logiToggle': {
+        LOGI_ON = !LOGI_ON;
+        const lb0 = $('logiBtn');
+        if (lb0) lb0.className = 'tool logiBtn' + (LOGI_ON ? ' on' : '');
+        try { storeSet('yh_logi', LOGI_ON ? 'on' : 'off'); } catch(e){}
+        this.refresh();
+        break;
+      }
       case 'mapMode': {
-        /* FAZ 81: lojistiğe ikinci basış onu kapatır */
-        if (x === 'askeri' && MAP_MODE === 'askeri') x = 'siyasi';
+        /* FAZ 86C.4H-R2: 'askeri' artık bir ANA MOD değil. Eski
+           düğmelerden/kayıtlardan gelirse bağımsız katmana çevrilir
+           ve ana mod DEĞİŞMEZ. */
+        if (x === 'askeri'){
+          LOGI_ON = !LOGI_ON;
+          const lb1 = $('logiBtn');
+          if (lb1) lb1.className = 'tool logiBtn' + (LOGI_ON ? ' on' : '');
+          try { storeSet('yh_logi', LOGI_ON ? 'on' : 'off'); } catch(e){}
+          this.refresh();
+          break;
+        }
         MAP_MODE = x;
         /* ═══ FAZ 81: LOJİSTİK ARTIK AYRI BUTONDA ═══
            Üç zemin modu üstte, lojistik en altta bağımsız duruyor.
@@ -345,8 +368,9 @@ const UI = {
           const b = $('mm_' + k);
           if (b) b.className = 'tool mapMode' + (k === x ? ' on' : '');
         });
+        /* Lojistik düğmesi ana mod değişiminden ETKİLENMEZ. */
         const lb = $('logiBtn');
-        if (lb) lb.className = 'tool logiBtn' + (x === 'askeri' ? ' on' : '');
+        if (lb) lb.className = 'tool logiBtn' + (LOGI_ON ? ' on' : '');
         /* FAZ 82: akordiyon başlığındaki rozet aktif modu gösterir */
         const dot = $('mapDot');
         if (dot) dot.textContent = {siyasi:'🌐', diplomasi:'🤝',
@@ -585,6 +609,60 @@ const UI = {
         this.closeModal();
         break;
       }
+      /* ═══ FAZ 86C.4H-R4: TANI RAPORUNU DIŞA AKTAR ═══
+         Tek işlem: önce panoya, desteklenmezse dosya indirme. */
+      case 'diagCopy': {
+        if (this._diagCopyBusy) return;
+        this._diagCopyBusy = true;
+        return (async () => {
+          try {
+            let metin = '';
+            try {
+              metin = 'STARS tanı raporu — build ' +
+                ((typeof BUILD_ID !== 'undefined') ? BUILD_ID : '?') + '\n';
+              if (typeof renderReport === 'function')
+                metin += '\n[ANLIK]\n' + renderReportText(renderReport('rapor', null, true)) + '\n';
+              if (typeof SON_GIRIS !== 'undefined' && SON_GIRIS)
+                metin += '\n[SON KURTARMA ÖNCESİ]\n' + renderReportText(SON_GIRIS) + '\n';
+              if (typeof ILK_HATA !== 'undefined' && ILK_HATA)
+                metin += '\n[İLK BAŞARISIZLIK]\n' + renderReportText(ILK_HATA) + '\n';
+              if (typeof ONCEKI_HATA !== 'undefined' && ONCEKI_HATA)
+                metin += '\n[ÖNCEKİ OTURUM]\n' + renderReportText(ONCEKI_HATA) + '\n';
+              const D2 = (typeof DIAG !== 'undefined') ? DIAG : [];
+              metin += '\n[SON ' + D2.length + ' KAYIT]\n';
+              for (let i = D2.length - 1; i >= 0; i--)
+                metin += new Date(D2[i].t).toISOString() + ' ' + D2[i].tur + ': ' + D2[i].m + '\n';
+            } catch(e){ metin += '\nrapor hatası: ' + (e && e.message); }
+            try {
+              if (typeof navigator !== 'undefined' && navigator.clipboard && navigator.clipboard.writeText){
+                await navigator.clipboard.writeText(metin);
+                say('📋 Tanı raporu panoya kopyalandı', 'sci');
+                return true;
+              }
+            } catch(e){}
+            let a = null, url = null;
+            try {
+              const blob = new Blob([metin], {type:'text/plain'});
+              a = document.createElement('a');
+              url = URL.createObjectURL(blob);
+              a.href = url;
+              a.download = 'stars-tani.txt';
+              document.body.appendChild(a);
+              a.click();
+              say('📋 Tanı raporu indirme başlatıldı', 'sci');
+              return true;
+            } catch(e){
+              logDiag('diagnostics', 'rapor aktarımı: ' + (e && e.message));
+              say('Rapor alınamadı; Tanılama ekranından tekrar deneyebilirsin', 'war');
+              return false;
+            } finally {
+              setTimeout(() => {
+                try { if (url) URL.revokeObjectURL(url); if (a) a.remove(); } catch(e){}
+              }, 1500);
+            }
+          } finally { this._diagCopyBusy = false; }
+        })();
+      }
       case 'diagShow': {
         /* FAZ 83: son 40 olay/hata — üretim ekranını kaplamaz */
         const D = (typeof DIAG !== 'undefined') ? DIAG : [];
@@ -606,8 +684,32 @@ const UI = {
           }
           dh += `</div>`;
         }
+        /* ═══ FAZ 86C.4H-R4: ANLIK TANI ÖZETİ ═══
+           Oyuncu tek dokunuşla raporu alabilsin; ADB, konsol veya
+           uzun teknik işlem istenmiyor. */
+        try {
+          if (typeof renderReport === 'function'){
+            const R = renderReport('manuel', null, true);
+            dh += `<div class="mini" style="color:#6ff2c8">ANLIK DURUM</div>
+              <div class="mini" style="word-break:break-all">${
+                esc(renderReportText(R))}</div>`;
+          }
+          if (typeof ILK_HATA !== 'undefined' && ILK_HATA){
+            dh += `<div class="mini" style="color:#ff9b3d">İLK BAŞARISIZLIK
+              (korunan iz)</div>
+              <div class="mini" style="word-break:break-all">${
+                esc(renderReportText(ILK_HATA))}</div>`;
+          }
+          if (typeof ONCEKI_HATA !== 'undefined' && ONCEKI_HATA){
+            dh += `<div class="mini">ÖNCEKİ OTURUMUN HATA KAYDI
+              (${esc(ONCEKI_HATA.build)}) — TANI RAPORUNU AL ile paylaşılır.</div>`;
+          }
+        } catch(e){}
         /* FAZ 83.1: veri kaybetmeyen manuel kurtarma */
         dh += `</div><div class="mft">
+          <button class="ch" data-a="diagCopy">
+            <div class="cht">📋 TANI RAPORUNU AL</div>
+            <div class="chd">Panoya kopyalar; olmazsa dosya indirir</div></button>
           <button class="ch" data-a="mapFix">
             <div class="cht">🔄 HARİTAYI YENİLE</div>
             <div class="chd">Kayıt, gün ve kaynaklar korunur</div></button>
@@ -8330,4 +8432,3 @@ const TITLE = {
     g.fillRect(cx - R * .35, cy - R * .35 * sy - 20, R * .7, R * .7 * sy + 40);
   }
 };
-

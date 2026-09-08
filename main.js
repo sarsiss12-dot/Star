@@ -5648,6 +5648,7 @@ async function toggleFull(){
    3) bellek          : ikisi de yoksa (en azından oturum içinde çalışır)
    Ayrıca metin olarak dışa/içe aktarma her ortamda çalışır.        */
 let MEM_SAVE = null;
+const MEM_PREFS = new Map();
 /* FAZ 18: danışman tercihi — kalıcı depoda saklanır */
 let ADVISOR_OFF = false;
 /* FAZ 19: ses tercihi. Ses ancak kullanıcı etkileşiminde başlar
@@ -5669,6 +5670,15 @@ let BG_OFF = false;
    ağını görürken filoları da görmek istiyor. */
 let MAP_MODE = 'siyasi';
 let RADAR_ON = false;
+/* ═══ FAZ 86C.4H-R2: LOJİSTİK BAĞIMSIZ KATMAN ═══
+   ÖLÇÜLEN KUSUR: lojistik düğmesi `MAP_MODE='askeri'` yapıyor,
+   ikinci basış `MAP_MODE='siyasi'` yapıyordu. Yani lojistik bir
+   ANA MOD gibi davranıyor, açıldığında Siyasi/Diplomatik/Savaş
+   zeminini SİLİYOR, kapandığında da kullanıcıyı Siyasi'ye
+   zorluyordu — bağımsız katman DEĞİLDİ.
+   Artık RADAR_ON ile aynı desende bağımsız: üç ana moddan biri
+   + Radar aç/kapat + Lojistik aç/kapat serbestçe birleşir. */
+let LOGI_ON = false;
 /* FAZ 47: küçük olayları otomatik çöz (ekonomi + minör anomali) */
 let AUTO_EVENT = false;
 
@@ -5711,6 +5721,17 @@ async function loadRadarPref(){
     if (rb) rb.className = 'tool radarBtn' + (RADAR_ON ? ' on' : '');
   } catch(e){}
 }
+/* FAZ 86C.4H-R2: lojistik katman tercihi kalıcı (radar deseniyle
+   aynı; yeni depolama anahtarı EKLENMEDİ — mevcut yh_radar anahtarı
+   gibi ayrı bir anahtar yerine tercih tek yerde tutulur). */
+async function loadLogiPref(){
+  try {
+    const v = await storeGet('yh_logi');
+    LOGI_ON = (v === 'on');
+    const lb = document.getElementById('logiBtn');
+    if (lb) lb.className = 'tool logiBtn' + (LOGI_ON ? ' on' : '');
+  } catch(e){}
+}
 async function loadBgPref(){
   try {
     const v = await storeGet('yh_bg');
@@ -5749,7 +5770,8 @@ function storageKind(){
   return 'yalnızca oturum';
 }
 async function storeSet(k,v){
-  MEM_SAVE = v;
+  if (k === 'yildiz:save') MEM_SAVE = v;
+  else MEM_PREFS.set(k, v);
   let ok = false;
   if (hasHostStore()){
     try { await window.storage.set(k, v); ok = true; } catch(e){}
@@ -5757,7 +5779,7 @@ async function storeSet(k,v){
   if (!ok && hasLocalStore()){
     try { window.localStorage.setItem(k, v); ok = true; } catch(e){}
   }
-  return ok || !!MEM_SAVE;
+  return ok || (k === 'yildiz:save' ? !!MEM_SAVE : MEM_PREFS.has(k));
 }
 async function storeGet(k){
   if (hasHostStore()){
@@ -5766,7 +5788,7 @@ async function storeGet(k){
   if (hasLocalStore()){
     try { const v = window.localStorage.getItem(k); if (v) return v; } catch(e){}
   }
-  return MEM_SAVE;
+  return k === 'yildiz:save' ? MEM_SAVE : (MEM_PREFS.has(k) ? MEM_PREFS.get(k) : null);
 }
 
 /* ═══════════════════════════════════════════════════════════════════
@@ -6781,6 +6803,15 @@ function restoreSimulationWorld(data, sv){
 function serialize(){
   return JSON.stringify({
     v:8, cfg:G.cfg, day:G.day, year:G.year, month:G.month, seed:G.seed, log:G.log, rs:RND_STATE,
+    /* FAZ 86C.4H-R2: DÜNYA SINIRLARI KAYDA GİRİYOR.
+       ÖLÇÜLEN HATA: G.W/G.H yalnız setupGame'de kuruluyordu ve
+       kayda HİÇ yazılmıyordu. Küçük dünyalı bir oturumda büyük
+       bir kayıt açılınca G.W önceki oyundan kalıyordu (ölçüm:
+       ULU kayıt 6881 olmalıyken 4912'de kaldı) ve clampCam üst
+       sınırı 5212'ye düşüp 30 sistemi ERİŞİLEMEZ yapıyordu.
+       v8 KALIR — ek alan, okunamadığında deterministik olarak
+       yeniden türetilir. */
+    W:G.W, H:G.H,
     /* FAZ 85A: politik küresel durum tek alt nesnede */
     world: serializePoliticalWorld(),
     /* FAZ 85C: oyun sonu krizi */
@@ -6842,6 +6873,47 @@ function rebuildDerivedStateAfterLoad(){
   }
 }
 
+/* ═══ FAZ 86C.4H-R2: DÜNYA SINIRLARININ DETERMİNİSTİK KURULUMU ═══ */
+function worldBoundsFrom(d){
+  const say = (d && Array.isArray(d.sys)) ? d.sys.length : 0;
+  /* 1) Kayıttaki değer — sonlu ve makul ise. */
+  const gecerli = v => (typeof v === 'number' && isFinite(v) &&
+                        v >= 500 && v <= 200000);
+  let w = gecerli(d && d.W) ? d.W : null;
+  let h = gecerli(d && d.H) ? d.H : null;
+  /* 2) cfg.size katalog değeri (eski v8 kayıtları). */
+  if (w === null || h === null){
+    /* ⚠ SIZES[sz].n İSİMdir ('ULU'); sistem sayısı `.sys` alanıdır.
+       İsim kullanılırsa galaxyScale NaN üretir ve G.W NaN kalır
+       (ölçüldü: eski kayıtta ve bozuk girdide W null/NaN). */
+    let n = say;
+    const sz = d && d.cfg && d.cfg.size;
+    if (sz && typeof SIZES !== 'undefined' && SIZES[sz] &&
+        isFinite(SIZES[sz].sys)) n = SIZES[sz].sys;
+    if (!isFinite(n) || n <= 0) n = Math.max(30, say);
+    const g = galaxyScale(Math.max(30, n));
+    if (w === null) w = g;
+    if (h === null) h = g;
+  }
+  /* 3) Gerçek koordinatları KAPSA — dünya asla küçültülmez. */
+  let mx = 0, my = 0;
+  for (const s of (d && d.sys) || []){
+    if (s && isFinite(s.x) && s.x > mx) mx = s.x;
+    if (s && isFinite(s.y) && s.y > my) my = s.y;
+  }
+  if (mx > w) w = Math.ceil(mx);
+  if (my > h) h = Math.ceil(my);
+  /* Son emniyet: hiçbir yol sonlu değer üretemediyse kanonik taban. */
+  if (!isFinite(w) || w < 500) w = galaxyScale(Math.max(30, say));
+  if (!isFinite(h) || h < 500) h = galaxyScale(Math.max(30, say));
+  return {W:w, H:h};
+}
+function restoreWorldBounds(d){
+  const b = worldBoundsFrom(d);
+  G.W = b.W; G.H = b.H;
+  return b;
+}
+
 function deserialize(txt){
   const d = JSON.parse(txt);
   if (!d || !d.sys) return false;
@@ -6857,6 +6929,18 @@ function deserialize(txt){
     pulsar:s.pu, nebulaS:s.nb, wander:s.wd, wanderFrom:s.wf,
     yardLock:s.yl, supplyHack:s.sh, radiation:s.rd
   }));
+
+  /* ═══ FAZ 86C.4H-R2: TEK KANONİK DÜNYA SINIRI ═══
+     G.sys kurulduktan HEMEN SONRA, clampCam / boyuta bağlı çizim
+     önbellekleri / türetilmiş durum HESAPLANMADAN ÖNCE çalışır.
+     Öncelik sırası:
+       1) kayıttaki W/H (yeni kayıtlar)
+       2) cfg.size katalog değeri üzerinden galaxyScale
+       3) sistem sayısı üzerinden galaxyScale
+     Her durumda gerçek sistem koordinatlarını KAPSAYACAK şekilde
+     genişletilir — dünya asla kayda uydurulup küçültülmez ve
+     koordinatlar yeniden üretilmez. */
+  restoreWorldBounds(d);
   G.emps = d.emps; G.fleets = d.fl; G.nextFleet = d.nf;
   G.p = G.emps[0];
   /* ═══ FAZ 85A: POLİTİK DÜNYA ═══
@@ -7082,6 +7166,7 @@ const LOOP = {on:false, last:0, acc:0, uiAcc:0, panAcc:0, touch:0, aiIdx:0};
 
 /* Sekme arkaplandayken sesi askıya al — pil ve CPU tasarrufu */
 document.addEventListener('visibilitychange', ()=>{
+  izOlay('vis');
   if (typeof AUDIO !== 'undefined'){
     try { document.hidden ? AUDIO.suspend() : AUDIO.resume(); } catch(e){}
   }
@@ -7197,6 +7282,8 @@ function forceRedraw(sebep){
 /* ═══ FAZ 83: TANILAMA HALKA TAMPONU ═══
    Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
    Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
+/* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */
+const BUILD_ID = '86c-5';
 const DIAG_MAX = 40;
 const DIAG = [];
 function logDiag(tur, mesaj){
@@ -7246,6 +7333,236 @@ window.addEventListener('resize', () => {
 
 let _recT = null, _recSebep = [], _recGen = 0, _recCalisiyor = false;
 
+/* ═══ FAZ 86C.4H-R2: SINIRLI TANI ÖZETİ ═══
+   Kurtarma kaydına hata anını açıklayacak kadar bilgi ekler; her
+   karede pahalı tarama YAPMAZ ve tamponu tekrarlı kayıtla doldurmaz. */
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 86C.4H-R4 — HEDEFLİ TANI
+
+   Amaç: beyaz ekranın HANGİ dalda oluştuğunu ayırmak.
+     · çizim hiç başlamıyor mu            → drawStage yok / 'basladi'
+     · belirli aşamada hata mı veriyor    → drawStage + cizHata
+     · çizimden SONRA resize mi boşaltıyor → lastResize > drawEnd
+     · yanlış/eski yüzeye mi çiziliyor    → drawCv !== DOM canvas
+     · çizim tamam ama piksel boş mu      → stage 'tamam' + alpha 0
+     · piksel dolu ama görünmüyor mu      → alpha>0 + kullanıcı beyaz
+   Her karede çalışmaz; yalnız dönüş/hata/kurtarma anında toplanır. */
+const OLAY_IZI = [];
+function izOlay(ad){
+  OLAY_IZI.push({t: Date.now(), a: ad});
+  if (OLAY_IZI.length > 12) OLAY_IZI.shift();
+}
+let _lastResizeAt = 0, _opSeq = 0, _lastResizeSeq = 0;
+function nextSeq(){ return ++_opSeq; }
+function markResize(){
+  izOlay('resize');
+  _lastResizeAt = (typeof performance !== 'undefined')
+                  ? performance.now() : Date.now();
+  /* Zaman damgası aynı milisaniyeye düşebiliyor; sıra sayacı
+     "çizimden SONRA resize" ayrımını KESİN yapar. */
+  _lastResizeSeq = nextSeq();
+}
+/* İLK başarısızlık kaydı korunur: ardışık retry'lar asıl izi
+   tamponun dışına itmesin. */
+let ILK_HATA = null, ONCEKI_HATA = null, SON_GIRIS = null;
+let _diagLoadPromise = null;
+/* Keep diagnostic persistence independent of preference and save fallbacks.
+   R4 used storeSet here, overwriting MEM_SAVE with a diagnostic report. */
+async function persistRenderFailure(rapor){
+  const txt = JSON.stringify(rapor);
+  try { if (hasLocalStore()) window.localStorage.setItem('yh_lastfail', txt); } catch(e){}
+  try { if (hasHostStore()) await window.storage.set('yh_lastfail', txt); } catch(e){}
+}
+function loadLastRenderFailure(){
+  if (_diagLoadPromise) return _diagLoadPromise;
+  _diagLoadPromise = (async () => {
+    let txt = null;
+    try { if (hasLocalStore()) txt = window.localStorage.getItem('yh_lastfail'); } catch(e){}
+    if (!txt){
+      try { if (hasHostStore()){
+        const r = await window.storage.get('yh_lastfail'); txt = r && r.value;
+      } } catch(e){}
+    }
+    try {
+      if (typeof txt !== 'string' || txt.length > 65536) return null;
+      const r = JSON.parse(txt);
+      if (!r || typeof r !== 'object' || typeof r.build !== 'string' ||
+          !Number.isFinite(r.t)) return null;
+      // A late storage response cannot replace this session's first failure.
+      if (!ILK_HATA || r.t !== ILK_HATA.t || r.sebep !== ILK_HATA.sebep)
+        ONCEKI_HATA = r;
+    } catch(e){}
+    return ONCEKI_HATA;
+  })();
+  return _diagLoadPromise;
+}
+function ilkHataKaydet(rapor){
+  if (ILK_HATA) return;
+  try {
+    ILK_HATA = JSON.parse(JSON.stringify(rapor));
+    persistRenderFailure(ILK_HATA).catch(() => {});
+  } catch(e){ logDiag('render', 'ilk hata saklanamadı: ' + (e && e.message)); }
+}
+function renderReport(sebep, ek, sample){
+  const R = {sebep: sebep || '?', t: Date.now(), build: BUILD_ID};
+  try {
+    const domCv = document.getElementById('map');
+    const V = (typeof View !== 'undefined') ? View : null;
+    R.olaylar = OLAY_IZI.map(o => o.a).join('>');
+    R.events = OLAY_IZI.map(o => ({t:o.t, a:o.a}));
+    R.visibility = document.visibilityState;
+    R.fullscreen = !!document.fullscreenElement;
+    R.viewport = {w:window.innerWidth, h:window.innerHeight, dpr:window.devicePixelRatio || 1};
+    if (window.visualViewport) R.visualViewport = {
+      w:window.visualViewport.width, h:window.visualViewport.height,
+      scale:window.visualViewport.scale, x:window.visualViewport.offsetLeft,
+      y:window.visualViewport.offsetTop};
+    R.surfGen = (typeof _surfGen !== 'undefined') ? _surfGen : -1;
+    R.bindTok = V ? (V._bindToken || 0) : -1;
+    /* Yüzey eşleşmesi — yanlış/eski yüzeye çizim tespiti */
+    R.cvEsles = !!(V && domCv && V.cv === domCv);
+    R.gEsles   = !!(V && V.g && V.g.canvas === V.cv);
+    R.drawCvEsles = !!(V && V._drawCv && V._drawCv === V.cv);
+    if (domCv){
+      R.cvPx = domCv.width + 'x' + domCv.height;
+      R.cvCss = (domCv.clientWidth || '?') + 'x' + (domCv.clientHeight || '?');
+      const b = domCv.getBoundingClientRect();
+      R.rect = {x:b.left, y:b.top, w:b.width, h:b.height};
+      if (typeof window.getComputedStyle === 'function'){
+        const css = window.getComputedStyle(domCv);
+        R.css = {display:css.display, visibility:css.visibility, opacity:css.opacity};
+      }
+    }
+    R.vw = V ? V.vw : '?'; R.vh = V ? V.vh : '?';
+    R.dpr = V ? (V.dpr || 1) : '?';
+    /* Context kayıp durumu — YALNIZ destekleniyorsa */
+    try {
+      R.ctxLost = (V && V.g && typeof V.g.isContextLost === 'function')
+                  ? V.g.isContextLost() : 'yok';
+    } catch(e){ R.ctxLost = 'hata'; }
+    /* Transform / alpha / composite */
+    try {
+      if (V && V.g && typeof V.g.getTransform === 'function'){
+        const m = V.g.getTransform();
+        R.tf = [m.a, m.b, m.c, m.d, m.e, m.f].map(n => Math.round(n*100)/100).join(',');
+      } else R.tf = 'yok';
+      R.alpha = (V && V.g) ? V.g.globalAlpha : '?';
+      R.comp  = (V && V.g) ? V.g.globalCompositeOperation : '?';
+    } catch(e){ R.tf = 'hata'; }
+    /* Çizim aşaması ve zaman ilişkisi */
+    R.stage = V ? (V._drawStage || 'hic') : 'hic';
+    R.completedStage = V ? (V._drawCompleted || 'hic') : 'hic';
+    R.drawError = V ? (V._drawError || null) : null;
+    R.drawN = V ? (V._drawN || 0) : 0;
+    R.drawStart = V ? Math.round(V._drawStart || 0) : 0;
+    R.drawEnd   = V ? Math.round(V._drawEnd || 0) : 0;
+    R.lastResize = Math.round(_lastResizeAt || 0);
+    /* Çizimden SONRA resize tuvali boşaltmış olabilir mi? */
+    R.drawSeq = V ? (V._drawSeq || 0) : 0;
+    R.resizeSeq = _lastResizeSeq;
+    R.resizeAfterDraw = (_lastResizeSeq > 0 && R.drawSeq > 0 &&
+                         _lastResizeSeq > R.drawSeq);
+    R.camera = V && V.cam ? {x:V.cam.x, y:V.cam.y, z:V.cam.z} : null;
+    R.mode = MAP_MODE; R.radar = RADAR_ON; R.logistics = LOGI_ON;
+    if (sample) R.health = sample === 'entry'
+      ? verifyRenderHealth(true, 1, false) : verifyRenderHealth(true);
+    if (ek) R.ek = ek;
+  } catch(e){ R.hata = e && e.message; }
+  return R;
+}
+function renderReportText(R){
+  const p = [];
+  for (const k in R) p.push(k + '=' +
+    (R[k] && typeof R[k] === 'object' ? JSON.stringify(R[k]) : R[k]));
+  return p.join(' · ');
+}
+function canvasTani(){
+  try {
+    const cv = (typeof View !== 'undefined' && View.cv) ||
+               document.getElementById('map');
+    if (!cv) return 'cv:yok';
+    const d = (typeof View !== 'undefined' && View.dpr) || 1;
+    return 'cv:' + cv.width + 'x' + cv.height +
+           ' css:' + (cv.clientWidth || '?') + 'x' + (cv.clientHeight || '?') +
+           ' dpr:' + d +
+           ' ctx:' + ((typeof View !== 'undefined' && View.g) ? 'var' : 'yok') +
+           ' gen:' + (_surfGen || 0);
+  } catch(e){ return 'tani-hata'; }
+}
+/* ═══ FAZ 86C.4H-R2: ÇİZİM YÜZEYİNİ YENİDEN KUR ═══
+   Aynı elementten context almak işe yaramadığında yüzeyi baştan
+   kurar. Oyun durumu, kamera, seçim ve harita tercihleri KORUNUR;
+   yalnız DOM yüzeyi ve ona bağlı dinleyiciler yenilenir. */
+let _surfGen = 0;
+function rebuildCanvasSurface(sebep){
+  try {
+    const eski = document.getElementById('map');
+    if (!eski || !eski.parentNode) return false;
+    /* 1) Eski yüzeyin jest durumu ve dinleyicileri bırakılsın. */
+    if (typeof View !== 'undefined' && View.resetGesture) View.resetGesture();
+    /* 2) Korunacaklar: kamera, seçim, harita tercihleri. */
+    const kam = (typeof View !== 'undefined' && View.cam)
+      ? {x:View.cam.x, y:View.cam.y, z:View.cam.z} : null;
+    const secF = (typeof View !== 'undefined') ? View.sel : null;
+    const secS = (typeof View !== 'undefined') ? View.selSys : null;
+    /* 3) Yeni element — aynı id, aynı sınıf, aynı konum. */
+    const yeni = document.createElement('canvas');
+    yeni.id = eski.id;
+    yeni.className = eski.className || '';
+    if (eski.getAttribute && eski.getAttribute('style'))
+      yeni.setAttribute('style', eski.getAttribute('style'));
+    /* ═══ FAZ 86C.4H-R3: ÖNCE HAZIRLA, SONRA DEĞİŞTİR ═══
+       ÖLÇÜLEN HATA: element ÖNCE DOM'dan çıkarılıyor, context sonra
+       alınıyordu. Yeni context null gelirse eski element gitmiş,
+       View.cv yeniyi, View.g eskiyi gösteriyordu (View.g.canvas !==
+       View.cv) — yarım geçiş. Artık context ÖNCE hazırlanır;
+       hazırlanamazsa DOM'a hiç dokunulmaz ve eski yüzey aynen kalır. */
+    let g = null;
+    try { g = yeni.getContext('2d'); } catch(e){}
+    if (!g){
+      logDiag('recovery', 'yüzey hazırlanamadı (yeni context yok) — ' +
+              'eski yüzey korundu (' + sebep + ')');
+      return false;
+    }
+    const eskiCv = (typeof View !== 'undefined') ? View.cv : null;
+    const eskiG  = (typeof View !== 'undefined') ? View.g  : null;
+    eski.parentNode.replaceChild(yeni, eski);
+    _surfGen++;
+    /* 4) View yeni yüzeye bağlanır; bind() `_boundCv` sayesinde
+          yalnız YENİ element için bir kez çalışır (listener birikmez). */
+    if (typeof View !== 'undefined'){
+      View.cv = yeni;
+      View.g = g;
+      /* Hazırlık adımları da geri alınabilir olmalı. */
+      try {
+        if (View.resize) View.resize();
+        if (View.bind) View.bind();
+      } catch(hz){
+        /* ═══ FAZ 86C.4H-R4 — A: GERİ ALMA TEK GİRİŞ BIRAKIR ═══
+           Kısmi YENİ bağlama da sökülür; ardından eski yüzeye
+           yeniden bağlanılır. Böylece geri alma sonunda TEK etkin
+           giriş yolu kalır (eskiden iki bağlama üst üste biniyordu). */
+        try { yeni.parentNode.replaceChild(eski, yeni); } catch(e2){}
+        if (View.unbindSurface) View.unbindSurface();   // kısmi yeni bağlama
+        View.cv = eskiCv; View.g = eskiG;
+        if (View.bind && eskiCv) View.bind();
+        logDiag('recovery', 'yüzey hazırlığı başarısız, geri alındı: ' +
+                (hz && hz.message));
+        return false;
+      }
+      if (kam && View.cam){ View.cam.x = kam.x; View.cam.y = kam.y; View.cam.z = kam.z; }
+      View.sel = secF; View.selSys = secS;
+      View.bcache = null; View.bkey = '';
+      if (View.invalidateRenderCaches) View.invalidateRenderCaches('surface');
+    }
+    logDiag('recovery', 'yüzey yeniden kuruldu (' + sebep + ') ' + canvasTani());
+    return true;
+  } catch(e){
+    logDiag('recovery', 'yüzey yeniden kurulamadı: ' + (e && e.message));
+    return false;
+  }
+}
+
 function scheduleRecovery(sebep, hemen){
   _recSebep.push(sebep);
   /* 1. Bekleyen zamanlayıcıyı iptal et */
@@ -7253,10 +7570,22 @@ function scheduleRecovery(sebep, hemen){
   /* 2. Yeni generation */
   const gen = ++_recGen;
   /* 3. Yerleşimin oturması için bekle (manuel çağrıda kısa) */
+  const surfGen = _surfGen;
   _recT = setTimeout(() => {
     _recT = null;
     /* 4. Eski generation ise çık */
     if (gen !== _recGen) return;
+    /* ═══ FAZ 86C.4H-R3: YÜZEY NESLİ GERÇEK KARAR NOKTASINDA ═══
+       ÖLÇÜLEN HATA: `_surfGen` yalnız artırılıp tanıya yazılıyordu;
+       hiçbir karşılaştırmada kullanılmıyordu. Emekli yüzeyin
+       contextrestored işleyicisi YENİ bir kurtarma planlayabiliyordu.
+       Artık plan yapıldığı andaki yüzey nesli değiştiyse bu iş
+       emeklidir ve çalıştırılmaz. */
+    if (surfGen !== _surfGen){
+      logDiag('recovery', 'emekli yüzey işi atlandı (gen ' + surfGen +
+              '→' + _surfGen + ')');
+      return;
+    }
     const sebepler = _recSebep.join(',');
     _recSebep = [];
     runRecovery(sebepler, 0);
@@ -7297,13 +7626,50 @@ function runRecovery(sebep, deneme){
                 ' (' + sebep + ')');
       return;                                   // finally _recCalisiyor'u indirir
     }
+    // Capture the incoming surface BEFORE ensureContext/resize erase evidence.
+    if (deneme === 0){
+      SON_GIRIS = renderReport(sebep, {phase:'before-recovery', attempt:deneme}, 'entry');
+      if (SON_GIRIS.ctxLost === true || SON_GIRIS.drawError ||
+          (SON_GIRIS.drawN > 0 && !SON_GIRIS.resizeAfterDraw &&
+           SON_GIRIS.health && !SON_GIRIS.health.ok)) ilkHataKaydet(SON_GIRIS);
+    }
     /* 5-6-7. Canvas ve context — ensureContext ikisini de yapar */
     const ec = ensureContext();
     if (!ec.ok){
+      ilkHataKaydet(renderReport(sebep, {phase:'context', attempt:deneme, why:ec.why}, true));
+      /* ═══ FAZ 86C.4H-R3: CONTEXT YOKSA SON BASAMAĞA GEÇ ═══
+         ÖLÇÜLEN HATA: mevcut canvas getContext('2d') null döndüğünde
+         yalnız kaydedilip DÖNÜLÜYORDU; yüzey yeniden kurma sayısı 0
+         kalıyordu. Oysa kurtarmanın en çok gerektiği durum tam da
+         budur. Artık aynı elementten context alınamıyorsa yüzey
+         yeniden kurulur ve kurtarma bir kez daha denenir. */
       logDiag('recovery', 'BAŞARISIZ ' + sebep + ': ' + ec.why);
+      if (deneme < 2 && rebuildCanvasSurface(sebep + '+noctx')){
+        _recCalisiyor = false;
+        runRecovery(sebep + '+surface', 2);
+      }
       return;                                   // finally _recCalisiyor'u indirir
     }
-    if (typeof View !== 'undefined' && View.resize) View.resize();  // TEK kez
+    /* ═══ FAZ 86C.4H-R4 — C BULGUSU: HAZIRLIK HATASI KURTARMAYI KESMESİN ═══
+       ÖLÇÜLEN HATA: mevcut context'in setTransform'u hata verince
+       View.resize istisnası dış try/catch'e düşüyor, yalnız
+       'istisna: …' kaydedilip çıkılıyordu; yüzey yeniden kurma
+       sayısı 0 kalıyordu. Oysa tuval hazırlığı bozuksa kurtarmanın
+       tam da gerekli olduğu an budur. */
+    if (typeof View !== 'undefined' && View.resize){
+      try { View.resize(); }                                   // TEK kez
+      catch(rz){
+        ilkHataKaydet(renderReport(sebep, {phase:'resize', attempt:deneme,
+          why:String(rz && rz.message || rz)}, true));
+        logDiag('recovery', 'resize hatası (' + sebep + '): ' +
+                (rz && rz.message));
+        if (deneme < 2 && rebuildCanvasSurface(sebep + '+resize')){
+          _recCalisiyor = false;
+          runRecovery(sebep + '+surface', 2);
+        }
+        return;                                 // finally bayrağı indirir
+      }
+    }
     /* 8. Kamera doğrula */
     if (typeof camSane === 'function') camSane();
     /* 9. Türetilmiş sınır yarıçapları */
@@ -7315,14 +7681,19 @@ function runRecovery(sebep, deneme){
     let cizHata = null;
     try {
       if (G && G.sys && G.sys.length) View.draw(performance.now());
-    } catch(e){ cizHata = e && e.message; }
+    } catch(e){
+      cizHata = String(e && e.message || e);
+      View._drawError = {message:cizHata, stack:String(e && e.stack || '').slice(0,1500)};
+    }
     /* 12. UI ve portreler */
     try {
       if (typeof UI !== 'undefined' && UI.refresh) UI.refresh();
       if (typeof repaintPortraits === 'function') repaintPortraits();
     } catch(e){ logDiag('recovery', 'ui: ' + (e && e.message)); }
     /* 13. Sağlık testi — YALNIZ kurtarma çiziminden SONRA */
-    const h = verifyRenderHealth();
+    // One incoming pixel + four post-draw pixels + one border-cache check:
+    // retain the existing six-read budget for a successful recovery.
+    const h = verifyRenderHealth(true, 4);
 
     /* Sınır dokusu canlılığı da burada sınanıyor; bozuksa bir
        sonraki buildBorders yeniden üretsin diye cache düşürülüyor.
@@ -7331,12 +7702,30 @@ function runRecovery(sebep, deneme){
       View.bcache = null; View.bkey = '';
     }
 
-    /* 14-15. BELİRSİZ sonuç retry doğurmaz — boş kararı verilmedi */
-    if (h.belirsiz){
+    /* ═══ FAZ 86C.4H-R3: ÇİZİM HATASI BELİRSİZLİKTEN ÖNCELİKLİ ═══
+       ÖLÇÜLEN HATA: gerçek View.draw içinde fillRect hata attığında
+       `cizHata` doluyordu; ama viewport'ta güvenilir örnek yoksa
+       `h.belirsiz` dalı ÖNCE çalışıp "ok(belirsiz)" yazarak erken
+       dönüyordu. Yüzey yeniden kurma sayısı 0 kalıyordu — BİLİNEN
+       bir çizim hatası, örnekleme belirsizliği yüzünden maskeleniyordu.
+       Artık çizim hatası varsa belirsizlik onu ASLA "ok" yapmaz.
+       Sağlıklı ve gerçekten boş uzay görünümü ise (cizHata yok)
+       eskisi gibi gereksiz kurtarma başlatmaz. */
+    if (h.belirsiz && !cizHata){
       logDiag('health', 'belirsiz: ' + h.why);
       logDiag('recovery', 'ok(belirsiz):' + sebep);
-      _recCalisiyor = false;
-      return;
+      return;                                   // finally bayrağı indirir
+    }
+    if (h.belirsiz && cizHata)
+      logDiag('health', 'belirsiz ama ÇİZİM HATASI var: ' + cizHata);
+    /* FAZ 86C.4H-R4: başarısızlık anında AYRINTILI rapor — bir kez. */
+    if (!h.ok || cizHata){
+      const R = renderReport(sebep, {cizHata: cizHata || null,
+        saglik: h.kod || null, why: h.why || null, attempt:deneme});
+      R.health = h;
+      R.entry = SON_GIRIS;
+      ilkHataKaydet(R);
+      logDiag('render', renderReportText(R).slice(0, 210));
     }
     if ((!h.ok || cizHata) && deneme === 0){
       logDiag('health', (h.kod || 'draw-error') + ': ' + (cizHata || h.why));
@@ -7349,13 +7738,26 @@ function runRecovery(sebep, deneme){
       runRecovery(sebep + '+retry', 1);
       return;
     }
-    if (!h.ok || cizHata)
+    if (!h.ok || cizHata){
+      /* ═══ FAZ 86C.4H-R2: SON BASAMAK — YÜZEYİ YENİDEN KUR ═══
+         Hafif kurtarma (önbellek + resize + retry) yetmediyse aynı
+         #map elementinden getContext almayı sürdürmenin anlamı yok.
+         Bu basamak canvas ELEMENTİNİ güvenli biçimde yeniden kurar.
+         Dünya ÜRETMEZ, kayıt yüklemez, RNG tüketmez, tik oynatmaz. */
       logDiag('health', 'retry sonrası hâlâ sağlıksız: ' +
               (cizHata || (h.kod + ' — ' + h.why)));
+      if (deneme === 1 && rebuildCanvasSurface(sebep)){
+        _recCalisiyor = false;
+        runRecovery(sebep + '+surface', 2);
+        return;
+      }
+    }
     else
       logDiag('recovery', (deneme ? 'retry başarılı:' : 'ok:') + sebep +
-              ' [' + (h.kod || '?') + ']');
+              ' [' + (h.kod || '?') + '] ' + canvasTani());
   } catch(err){
+    ilkHataKaydet(renderReport(sebep, {phase:'recovery-exception', attempt:deneme,
+      why:String(err && err.message || err)}, true));
     logDiag('recovery', 'istisna: ' + (err && err.message));
   } finally {
     /* ═══ FAZ 86C.4H-R1: BAYRAK HER YOLDA SERBEST ═══
@@ -7395,11 +7797,15 @@ function runRecovery(sebep, deneme){
    ═══════════════════════════════════════════════════════════════════ */
 const HEALTH_MAX_SAMPLES = 5;
 
-function verifyRenderHealth(){
+function verifyRenderHealth(detail, limit, checkBorders){
+  const samples = [];
+  const result = r => detail ? Object.assign(r, {samples}) : r;
   if (typeof View === 'undefined') return {ok:false, kod:'no-view', why:'View yok'};
   const cv = View.cv || document.getElementById('map');
   if (!cv) return {ok:false, kod:'no-canvas', why:'canvas elementi yok'};
   if (!View.g) return {ok:false, kod:'no-ctx', why:'2d context yok'};
+  if (typeof View.g.isContextLost === 'function' && View.g.isContextLost())
+    return result({ok:false, kod:'context-lost', why:'2d context kayıp'});
   if (!(cv.width > 0 && cv.height > 0))
     return {ok:false, kod:'zero-size',
             why:'canvas ölçüsü sıfır (' + cv.width + '×' + cv.height + ')'};
@@ -7443,17 +7849,36 @@ function verifyRenderHealth(){
   yedek.push({x:(View.vw*0.75)|0,  y:(View.vh*0.30)|0,  tur:'sağ-üst'});
   yedek.push({x:(View.vw*0.50)|0,  y:(View.vh*0.75)|0,  tur:'alt'});
 
-  const ornekler = guvenilir.concat(yedek).slice(0, HEALTH_MAX_SAMPLES);
+  const maxSamples = Number.isFinite(limit)
+    ? Math.max(1, Math.min(HEALTH_MAX_SAMPLES, limit)) : HEALTH_MAX_SAMPLES;
+  const ornekler = guvenilir.concat(yedek).slice(0, maxSamples);
 
   /* ── Örnekle ── */
+  /* ═══ FAZ 86C.4H-R2: DPR DÖNÜŞÜMÜ ═══
+     ÖLÇÜLEN HATA: örnek noktaları EKRAN (CSS) koordinatındaydı ama
+     getImageData TUVAL PİKSEL (backing-store) koordinatı ister.
+     View.resize tuvali `vw*dpr × vh*dpr` yapıyor; DPR=2'de bütün
+     örnekler tuvalin sol-üst ÇEYREĞİNDEN okunuyordu. Dolu olması
+     gereken noktalar ıskalanıp alpha=0 görülebiliyor, bu da SAHTE
+     'blank-canvas' tanısı ve sonuçsuz retry döngüsü üretiyordu.
+     (Cihaz tanısındaki "5 örneğin hepsi alpha=0" tablosuyla
+     uyumlu güçlü bir aday; tek başına kesin neden İDDİA EDİLMİYOR.) */
+  const _dpr = (View.dpr && isFinite(View.dpr) && View.dpr > 0) ? View.dpr : 1;
+  const _maxX = cv.width - 1, _maxY = cv.height - 1;
   let doluGuvenilir = 0, doluToplam = 0, okunan = 0;
   for (const o of ornekler){
     let d;
-    try { d = View.g.getImageData(o.x, o.y, 1, 1).data; }
+    const px = Math.min(_maxX, Math.max(0, Math.round(o.x * _dpr)));
+    const py = Math.min(_maxY, Math.max(0, Math.round(o.y * _dpr)));
+    try { d = View.g.getImageData(px, py, 1, 1).data; }
     catch(e){
-      return {ok:false, kod:'ctx-unreadable',
-              why:'getImageData hatası: ' + (e && e.message)};
+      if (detail) samples.push({css:{x:o.x,y:o.y}, px, py, tur:o.tur,
+        error:String(e && e.message || e)});
+      return result({ok:false, kod:'ctx-unreadable',
+              why:'getImageData hatası: ' + (e && e.message)});
     }
+    if (detail) samples.push({css:{x:o.x,y:o.y}, px, py, tur:o.tur,
+      rgba:Array.from(d).slice(0,4)});
     okunan++;
     if (d[3] > 0){
       doluToplam++;
@@ -7464,54 +7889,58 @@ function verifyRenderHealth(){
   /* ── Karar ── */
   if (!guvenilir.length){
     /* Güvenilir referans yok — boş kararı VERME, retry BAŞLATMA */
-    return {ok:true, belirsiz:true, kod:'inconclusive',
+    return result({ok:true, belirsiz:true, kod:'inconclusive',
             why:'örnekleme için viewport içinde güvenilir sistem yok (' +
-                okunan + ' genel örnek okundu, ' + doluToplam + ' dolu)'};
+                okunan + ' genel örnek okundu, ' + doluToplam + ' dolu)'});
   }
   if (doluGuvenilir === 0 && doluToplam === 0)
-    return {ok:false, kod:'blank-canvas',
+    return result({ok:false, kod:'blank-canvas',
             why:'ana canvas boş — ' + okunan + ' örneğin hepsi alpha=0 (' +
-                guvenilir.length + ' güvenilir nokta dahil)'};
+                guvenilir.length + ' güvenilir nokta dahil)'});
   if (doluGuvenilir === 0)
-    return {ok:false, kod:'blank-canvas',
+    return result({ok:false, kod:'blank-canvas',
             why:'güvenilir noktaların hepsi boş (' + guvenilir.length +
-                ' sistem noktası alpha=0)'};
+                ' sistem noktası alpha=0)'});
 
   /* ── Sınır dokusu ayrı bir kontrol ── */
-  if (View.borderCacheAlive && View.bcache){
+  if (checkBorders !== false && View.borderCacheAlive && View.bcache){
     const b = View.borderCacheAlive();
-    if (!b.ok) return {ok:false, kod:'blank-borders', why:'sınır cache: ' + b.why};
+    if (!b.ok) return result({ok:false, kod:'blank-borders', why:'sınır cache: ' + b.why});
   }
-  return {ok:true, kod:'healthy',
-          why:doluGuvenilir + '/' + guvenilir.length + ' güvenilir nokta dolu'};
+  return result({ok:true, kod:'healthy',
+          why:doluGuvenilir + '/' + guvenilir.length + ' güvenilir nokta dolu'});
 }
 
 
-window.addEventListener('pageshow',          ()=> scheduleRecovery('pageshow'));
+window.addEventListener('pageshow', ()=>{
+  izOlay('pageshow');
+  scheduleRecovery('pageshow');
+});
+document.addEventListener('fullscreenchange', ()=>{
+  izOlay('fullscreen');
+  scheduleRecovery('fullscreen');
+});
 /* FAZ 83.3: resize artık yukarıdaki merkezî yöneticide —
    bu satır kaldırıldı (çift kayıt olurdu). */
 window.addEventListener('orientationchange', ()=>{
+  izOlay('orient');
   scheduleRecovery('orient');
   setTimeout(()=> scheduleRecovery('orient2'), 300);   // dönüş bitince
 });
 window.addEventListener('focus', ()=>{
+  izOlay('focus');
   if (!document.hidden) scheduleRecovery('focus');
 });
 
-/* Tuval bağlamı gerçekten kaybolursa tarayıcı bunu bildirir */
-(function(){
-  const cv = document.getElementById('map');
-  if (!cv) return;
-  cv.addEventListener('contextlost', ev => {
-    ev.preventDefault();                   // geri kazanıma izin ver
-    console.warn('Tuval bağlamı kayboldu — geri kazanım bekleniyor');
-  });
-  cv.addEventListener('contextrestored', ()=>{
-    console.warn('Tuval bağlamı geri geldi');
-    try { View.init && View.init(); } catch(e){}
-    forceRedraw('contextrestored');
-  });
-})();
+/* ═══ FAZ 86C.4H-R4 — B BULGUSU: BAŞLANGIÇ IIFE'Sİ KALDIRILDI ═══
+   ÖLÇÜLEN HATA: bu IIFE #map üzerine contextlost/contextrestored
+   bağlıyordu; R3'te View.bind() de aynı olayları bağlayınca İLK
+   canvas'ta her olaydan 2 adet oluştu. Emekli edilen ilk canvas'ta
+   IIFE'nin bağladığı kopya SÖKÜLEMİYORDU (yüzey kaydında yok) ve
+   eski contextrestored hâlâ kurtarma planlıyordu.
+   Context olaylarının TEK sahibi artık yüzey yaşam döngüsüdür
+   (map.js `_ekle('contextlost'/'contextrestored')`): ilk yüzey de
+   sonrakiler de aynı kurallarla bağlanır ve sökülür. */
 
 document.addEventListener('pointerdown', ()=>{ LOOP.touch = performance.now(); }, true);
 
@@ -7573,6 +8002,7 @@ function camSane(){
 let _frameHata = 0;
 
 function frame(t){
+  let frameStage = 'tick';
   try {
     /* dt tavanı: arka planda geçen uzun süre devasa adım
        üretmesin (Faz 70 öncesinde de vardı, korunuyor). */
@@ -7591,7 +8021,9 @@ function frame(t){
     }
 
     camSane();
+    frameStage = 'map';
     View.draw(t);
+    frameStage = 'ui';
     UI.paintSprites();
 
     if (View.sel && G.fleets.indexOf(View.sel) < 0) View.sel = null;
@@ -7606,12 +8038,19 @@ function frame(t){
     _frameHata = 0;                    // sağlıklı kare: sayacı sıfırla
   } catch(err){
     _frameHata++;
+    if (frameStage === 'map'){
+      View._drawError = {message:String(err && err.message || err),
+        stack:String(err && err.stack || '').slice(0,1500)};
+      if (_frameHata === 1){
+        ilkHataKaydet(renderReport('frame', {phase:frameStage}, true));
+        logDiag('render', 'frame/' + View._drawStage + ': ' + View._drawError.message);
+      }
+    }
     if (_frameHata < 4) console.warn('frame hatası (' + _frameHata + '):', err);
     /* Arka arkaya hata: tuval bağlamı gitmiş olabilir, yeniden kur */
-    if (_frameHata === 4){
+    if (_frameHata === 4 && frameStage === 'map'){
       console.warn('Ardışık kare hatası — tuval yeniden kuruluyor');
-      try { View.init && View.init(); View.resize && View.resize(); } catch(e){}
-      camSane();
+      scheduleRecovery('frame-error', true);
     }
   } finally {
     /* ═══ HER KOŞULDA bir sonraki kare ═══ */
@@ -7728,11 +8167,13 @@ document.addEventListener('visibilitychange', ()=>{
 });
 
 window.addEventListener('load', ()=>{
+  loadLastRenderFailure();
   loadAdvisorPref();               // FAZ 18: danışman tercihini oku
   loadAudioPref();
   loadBgPref();                 // FAZ 19: ses tercihini oku
   loadAutoEventPref();          // FAZ 47: otomatik olay tercihi
   loadRadarPref();              // FAZ 65: radar katmanı
+  loadLogiPref();               // FAZ 86C.4H-R2: lojistik katmanı
   loadTemplates().then(()=>{    // FAZ 61: kurulum şablonları
     try { if (SETUP_STEP && $('menu') && !$('menu').classList.contains('hidden'))
       safeRenderSetup(); } catch(e){}
@@ -7741,8 +8182,8 @@ window.addEventListener('load', ()=>{
   $('menu').classList.add('hidden');
   TITLE.start();
   refreshContinueBtn();
-  document.addEventListener('fullscreenchange', ()=>setTimeout(()=>View.cv&&View.resize(),200));
-  window.addEventListener('orientationchange', ()=>setTimeout(()=>{ View.cv&&View.resize(); UI.checkOrient(); },320));
+  // Fullscreen and orientation use the recovery owner above. No late resize
+  // may clear a repaired frame without scheduling its redraw.
 });
 
 /* ═══════════════════════════════════════════════════════════════════

@@ -722,6 +722,9 @@ const View = {
     this.bind();
   },
   resize(){
+    /* FAZ 86C.4H-R4: son boyutlandırma zamanı — çizimden SONRA
+       gelen bir resize tuvali boşaltmış olabilir; tanı bunu ayırır. */
+    try { if (typeof markResize === 'function') markResize(); } catch(e){}
     this.dpr = Math.min(2, window.devicePixelRatio||1);
     this.vw = window.innerWidth; this.vh = window.innerHeight;
     this.cv.width = this.vw*this.dpr; this.cv.height = this.vh*this.dpr;
@@ -814,7 +817,8 @@ const View = {
        Cache anahtarına MAP_MODE ve her devletin O MODDAKİ
        hesaplanmış rengi katıldı; mod ya da ilişki değişince
        anahtar doğal olarak değişip doku yeniden üretiliyor. */
-    let key = MAP_MODE + '|';
+    /* FAZ 86C.4H-R2: katman durumları da anahtara girer. */
+    let key = MAP_MODE + '|' + (RADAR_ON?'R':'-') + (LOGI_ON?'L':'-') + '|';
     for (const s of G.sys) key += s.owner + ':' + ((s._reach|0)/10|0) + ':' + (pSeen(s)?1:0) + ',';
     key += '|';
     for (const em of G.emps){
@@ -946,11 +950,47 @@ const View = {
     }
     s.pts.clear(); s.last = null; s.moved = 0; s.t0 = 0; s.pinch = null;
   },
+  /* ═══ FAZ 86C.4H-R4 — A BULGUSU: BAĞLAMA JETONU ═══
+     ÖLÇÜLEN HATA: geri alma yolunda `View._boundCv = null` yapılınca
+     `unbindSurface` eski dinleyici KAYDINI kullanamıyordu; ayrıca
+     `_guncel()` yalnız canvas KİMLİĞİNE bakıyordu, bu yüzden AYNI
+     canvas'a dönüşte eski bağlamanın callback'leri yeniden geçerli
+     oluyordu. Sonuç: tek dokunuş → İKİ filo seçimi, 40 px sürükleme
+     → 80 birim kamera hareketi.
+     Artık her bağlama kendi JETONUNU alır; `_guncel()` jetonu
+     karşılaştırır. Kayıt `_boundCv`'den bağımsız tutulur, bu yüzden
+     `_boundCv = null` yapılsa bile sökme çalışır. */
+  unbindSurface(){
+    const kayit = this._surfListeners;
+    const hedef = (this._boundCv) || (kayit && kayit._cv);
+    /* Jetonu geçersiz kıl: bu bağlamanın callback'leri artık etkisiz. */
+    this._bindToken = (this._bindToken || 0) + 1;
+    if (hedef && kayit){
+      for (const [tur, fn] of kayit){
+        try { hedef.removeEventListener(tur, fn); } catch(e){}
+      }
+    }
+    this._surfListeners = null;
+    this._boundCv = null;
+  },
   bind(){
     const cv = this.cv;
     /* Tekrarlı bind listener biriktirmesin. */
     if (this._boundCv === cv) return;
+    /* ═══ FAZ 86C.4H-R3: ESKİ YÜZEY ÖNCE SÖKÜLÜR ═══
+       Eskiden eski elementin dinleyicileri DURUYORDU; ölçümde eski
+       tuvalin pointer işleyicileri güncel kamerayı hâlâ
+       değiştirebiliyordu (3000 → 3040). */
+    this.unbindSurface();
     this._boundCv = cv;
+    /* Bu yüzeye ait her dinleyici kaydedilir ki sökülebilsin. */
+    const _kayit = this._surfListeners = [];
+    _kayit._cv = cv;                    // sökme, _boundCv'den bağımsız
+    const _ekle = (tur, fn) => { _kayit.push([tur, fn]); cv.addEventListener(tur, fn); };
+    /* Bu BAĞLAMAYA özgü jeton — canvas kimliği YETMEZ (aynı canvas
+       yeniden bağlanabilir). Yalnız jetonu güncel olan callback çalışır. */
+    const _jeton = this._bindToken = (this._bindToken || 0) + 1;
+    const _guncel = () => this._bindToken === _jeton && this._boundCv === cv;
     const s = this._gest = {pts:new Map(), last:null, moved:0, t0:0, pinch:null};
     const pts = s.pts;
     const pos = ev => ({x:ev.clientX, y:ev.clientY});
@@ -966,7 +1006,8 @@ const View = {
     };
     this._kapatTemas = kapat;
 
-    cv.addEventListener('pointerdown', ev => {
+    _ekle('pointerdown', ev => {
+      if (!_guncel()) return;          // emekli yüzey müdahale edemez
       try { cv.setPointerCapture(ev.pointerId); } catch(e){}
       pts.set(ev.pointerId, pos(ev));
       if (pts.size === 1){ s.last = pos(ev); s.moved = 0; s.t0 = performance.now(); }
@@ -976,7 +1017,8 @@ const View = {
                    mx:(a.x+b.x)/2, my:(a.y+b.y)/2};
       }
     });
-    cv.addEventListener('pointermove', ev => {
+    _ekle('pointermove', ev => {
+      if (!_guncel()) return;
       if (!pts.has(ev.pointerId)) return;
       pts.set(ev.pointerId, pos(ev));
       if (pts.size === 2 && s.pinch){
@@ -1004,6 +1046,7 @@ const View = {
       }
     });
     const up = ev => {
+      if (!_guncel()) return;
       /* ═══ FAZ 86C.4H-R1: TEMİZLİK ÖNCE, TAP SONRA ═══
          ÖLÇÜLEN HATA: eski sıra `this.tap(...)` → `kapat(...)` idi.
          View.tap (veya onun çağırdığı UI.tab / UI.refresh) hata
@@ -1030,21 +1073,54 @@ const View = {
         } catch(e2){}
       }
     };
-    cv.addEventListener('pointerup', up);
+    _ekle('pointerup', up);
     /* İptal ve YAKALAMA KAYBI: tap ÜRETMEDEN temizle. Aynı temas için
        birden fazla kapanış olayı gelmesi durumu bozmaz (delete
        idempotenttir). */
-    cv.addEventListener('pointercancel', ev => kapat(ev.pointerId));
-    cv.addEventListener('lostpointercapture', ev => kapat(ev.pointerId));
-    /* Kesintiler: sekme gizlenmesi, odak kaybı ve haritayı kapatan
-       modal jest durumunu güvenle sıfırlar. Parmak harita dışında
-       bırakılırsa kalıcı sürükleme/pinch oluşmaz. */
-    const kesinti = () => this.resetGesture();
-    window.addEventListener('blur', kesinti);
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) kesinti();
+    _ekle('pointercancel', ev => { if (_guncel()) kapat(ev.pointerId); });
+    _ekle('lostpointercapture', ev => { if (_guncel()) kapat(ev.pointerId); });
+    /* ═══ FAZ 86C.4H-R3: GLOBAL DİNLEYİCİLER TEK SEFER ═══
+       ÖLÇÜLEN HATA: bu iki dinleyici bind() içindeydi. bind() her
+       YENİ canvas için tekrar çalıştığından window/document
+       dinleyicileri de çoğalıyordu. Ölçüm: 4 yüzey yeniden
+       kurmadan sonra blur 1→5, visibilitychange 1→5; TEK bir blur
+       olayı resetGesture'ı 5 KEZ çalıştırıyordu. `_boundCv` yalnız
+       canvas'a ait dinleyicileri koruyordu, globalleri değil.
+       Artık global kesinti dinleyicileri ömürde BİR KEZ bağlanır ve
+       her zaman GÜNCEL yüzeye (this) uygulanır. */
+    /* ═══ FAZ 86C.4H-R3: CONTEXT OLAYLARI YÜZEYLE BİRLİKTE ═══
+       ÖLÇÜLEN HATA: contextlost/contextrestored yalnız açılıştaki
+       IIFE içinde İLK elemente bağlanıyordu. Yeniden kurulan yüzey
+       aynı korumayı ALMIYORDU; eski yüzeyin dinleyicileri ise
+       duruyordu. Artık her yüzey kendi korumasını alır ve
+       söküldüğünde birlikte kalkar. */
+    _ekle('contextlost', ev => {
+      if (!_guncel()) return;
+      try { ev.preventDefault && ev.preventDefault(); } catch(e){}
+      if (typeof logDiag === 'function') logDiag('canvas', 'contextlost');
+      if (typeof izOlay === 'function') izOlay('contextlost');
+      if (typeof ilkHataKaydet === 'function')
+        ilkHataKaydet(renderReport('contextlost', {phase:'event'}, !document.hidden));
+      if (!document.hidden && typeof scheduleRecovery === 'function')
+        scheduleRecovery('contextlost', true);
     });
-    cv.addEventListener('wheel', ev => {
+    _ekle('contextrestored', () => {
+      if (!_guncel()) return;
+      if (typeof logDiag === 'function') logDiag('canvas', 'contextrestored');
+      if (typeof izOlay === 'function') izOlay('contextrestored');
+      if (typeof scheduleRecovery === 'function')
+        scheduleRecovery('contextrestored', true);
+    });
+    if (!View._globalBound){
+      View._globalBound = true;
+      const kesinti = () => { try { View.resetGesture(); } catch(e){} };
+      window.addEventListener('blur', kesinti);
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) kesinti();
+      });
+    }
+    _ekle('wheel', ev => {
+      if (!_guncel()) return;
       ev.preventDefault();
       const before = this.s2w(ev.clientX, ev.clientY);
       /* FAZ 44: min zoom 0.07 → 0.035. ULU halka haritada tüm
@@ -1293,7 +1369,7 @@ const View = {
       return '#7d90ad';                                        // nötr
     }
     if (MAP_MODE === 'savas') return diploColor(sahip);
-    if (MAP_MODE === 'askeri'){
+    if (LOGI_ON && MAP_MODE === 'siyasi'){
       /* Lojistik modu: kendi sistemlerimiz ikmal durumuna göre,
          yabancılar erişilebilirliğe göre renklenir. */
       const e = G.p;
@@ -1435,12 +1511,26 @@ const View = {
   },
 
   draw(t){
+    /* ═══ FAZ 86C.4H-R4: HAFİF AŞAMA TAKİBİ ═══
+       Her karede LOG YAZMAZ, piksel TARAMAZ — yalnız birkaç alan
+       günceller. Ayrıntılı rapor dönüş/hata/kurtarma anında
+       `renderReport()` tarafından toplanır. */
+    this._drawStart = (typeof performance !== 'undefined')
+                      ? performance.now() : Date.now();
+    this._drawStage = 'basladi';
+    this._drawCompleted = 'hic';
+    this._drawEnd = 0;
+    this._drawError = null;
+    this._drawCv = this.cv;             // hangi yüzeye çiziliyor
+    this._drawN = (this._drawN || 0) + 1;
     const g = this.g;
     this.panStep();                     // FAZ 47: yumuşak kaydırma
     const z = this.cam.z;
     this.updateFrustum();
     g.fillStyle = '#05070f';
     g.fillRect(0,0,this.vw,this.vh);
+    this._drawStage = 'zemin';
+    this._drawCompleted = 'zemin';
 
     // bulutsu
     if (G.nebula && !BG_OFF){
@@ -1460,6 +1550,7 @@ const View = {
       g.fillRect(px|0, py|0, s.r, s.r);
     }
 
+    this._drawStage = 'sinirlar';
     // imparatorluk sınırları (renkli bölgeler + kenar çizgileri)
     const bmap = this.buildBorders();
     if (bmap){
@@ -1549,6 +1640,8 @@ const View = {
       g.restore();
     }
 
+    this._drawCompleted = 'sinirlar';
+    this._drawStage = 'yollar';
     // hiper yollar
     g.lineWidth = Math.max(.6, 1.1*Math.min(1,z*3));
     for (const s of G.sys){
@@ -1649,6 +1742,8 @@ const View = {
       }
     }
 
+    this._drawCompleted = 'yollar';
+    this._drawStage = 'sistemler';
     // sistemler
     const showName = z > .22;
     /* ═══════════════════════════════════════════════════════════
@@ -2072,7 +2167,8 @@ const View = {
        Seviye 2   → hedef sistem + kesikli ok
        Seviye 3   → güç ve varış süresi (ETA) de listelenir
        Yalnız EKRANDA GÖRÜNEN hareketli filolar taranır. */
-    if (MAP_MODE === 'askeri' || RADAR_ON){
+    /* FAZ 86C.4H-R2: lojistik artık bağımsız katman. */
+    if (LOGI_ON || RADAR_ON){
       g.save();
       g.textAlign = 'left';
       g.textBaseline = 'middle';
@@ -2204,6 +2300,8 @@ const View = {
       }
     }
 
+    this._drawCompleted = 'sistemler';
+    this._drawStage = 'filolar';
     // filolar
     /* ═══════════════════════════════════════════════════════════
        FAZ 75 — GEMİ YIĞILMASI
@@ -2496,7 +2594,7 @@ const View = {
        Hesap günde bir yapılıp f._logiNet'e yazılıyor; her karede
        yalnız çizim var, pathfinding yok.
        ═══════════════════════════════════════════════════════════ */
-    if (MAP_MODE === 'askeri' && this.sel && this.sel.ships &&
+    if (LOGI_ON && this.sel && this.sel.ships &&
         this.sel.ships.length && this.sel.sys >= 0 &&
         typeof fleetSupply === 'function' && !this.politik){
       const f = this.sel;
@@ -2641,6 +2739,8 @@ const View = {
 
     this.drawPings(g, t);               // FAZ 47: bildirim ping halkası
 
+    this._drawCompleted = 'filolar';
+    this._drawStage = 'efektler';
     // rota işaretleri
     for (let i=this.flash.length-1;i>=0;i--){
       const fl = this.flash[i];
@@ -2688,6 +2788,11 @@ const View = {
       }
       if (oldu) fxCompact();      // FAZ 21: ölüleri havuza iade et
     }
+    this._drawStage = 'tamam';
+    this._drawCompleted = 'tamam';
+    this._drawEnd = (typeof performance !== 'undefined')
+                    ? performance.now() : Date.now();
+    try { if (typeof nextSeq === 'function') this._drawSeq = nextSeq(); } catch(e){}
   },
 
   drawFleet(g, f, p, t){
@@ -2786,4 +2891,3 @@ const View = {
 
   boom(x,y){ this.flash.push({x,y,t:0,life:26}); }
 };
-
