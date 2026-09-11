@@ -2699,9 +2699,10 @@ function fxCompact(){
    `say` tek noktadan AUDIO.forLog + G.log + UI.alert tetikliyor. Bir
    anlaşma işlemi sürerken bunlar DOM'a yayımlanırsa rollback ile
    güvenilir biçimde silinemez. Transaction açıkken çağrılar sırayla
-   tamponlanır; G.log'a yazılmaz, ses ve modal çalışmaz. Başarılı
-   commit'ten sonra ÖZGÜN SIRAYLA birer kez yayımlanır; rollback
-   tamponu tamamen atar. Transaction dışında davranış DEĞİŞMEZ. */
+   tamponlanır; madde uygulanırken G.log'a yazılmaz, ses ve modal
+   çalışmaz. 86C.6: log son kontrol öncesinde işlem sınırında yazılır;
+   ses/UI başarılı commit'ten sonra sırayla yayımlanır. Rollback
+   hem logu hem tamponu geri alır. Transaction dışında davranış DEĞİŞMEZ. */
 function say(msg, cls){
   if (G._sideBuf){ G._sideBuf.push({tur:'say', msg, cls}); return; }
   /* FAZ 19: bildirim sınıfı sesi belirler (savaş/zafer/keşif) */
@@ -2715,15 +2716,26 @@ function deferUI(fn, ...args){
   if (G._sideBuf){ G._sideBuf.push({tur:'ui', fn, args}); return; }
   try { fn(...args); } catch(err){}
 }
+/* Kalıcı olay günlüğü işlem sınırında; ses/DOM ise yalnız commit sonrası. */
+function commitSideBuffer(buf){
+  for (const it of buf) if (it.tur === 'say'){
+    G.log.push({m:it.msg, c:it.cls||'', d:G.day});
+    if (G.log.length > 60) G.log.shift();
+  }
+}
+function sideBufferError(stage, err){
+  try { logDiag('deal-presentation', stage + ': ' + String(err && err.message || err)); }
+  catch(ignore){} // tanı hatası da commit sonucunu değiştiremez
+}
 function flushSideBuffer(buf){
   for (const it of buf){
     if (it.tur === 'say'){
-      if (typeof AUDIO !== 'undefined') { try { AUDIO.forLog(it.cls); } catch(err){} }
-      G.log.push({m:it.msg, c:it.cls||'', d:G.day});
-      if (G.log.length > 60) G.log.shift();
-      try { UI.alert(it.msg, it.cls); } catch(err){}
+      if (typeof AUDIO !== 'undefined'){
+        try { AUDIO.forLog(it.cls); } catch(err){ sideBufferError('audio',err); }
+      }
+      try { UI.alert(it.msg,it.cls); } catch(err){ sideBufferError('alert',err); }
     } else if (it.tur === 'ui'){
-      try { it.fn(...it.args); } catch(err){}
+      try { it.fn(...it.args); } catch(err){ sideBufferError('ui',err); }
     }
   }
 }
@@ -5126,6 +5138,8 @@ function paintEmblems(){
     g.drawImage(ART.emblem(cv.dataset.emb, cv.dataset.col, 22, CFG.sigil), 0, 0);
   });
   [...document.querySelectorAll('canvas[data-lk]')].forEach(cv=>{
+    // A leader carries its own seed/rank. Never overwrite it with a race portrait.
+    if (cv.classList.contains('ldrPort')) return;
     const g = cv.getContext('2d');
     g.imageSmoothingEnabled = false;
     g.clearRect(0,0,cv.width,cv.height);
@@ -5147,6 +5161,7 @@ function paintEmblems(){
     g.clearRect(0,0,cv.width,cv.height);
     g.drawImage(ART.emblem(CFG.race, cv.dataset.col, 26, cv.dataset.sg), 0, 0);
   });
+  if (typeof UI !== 'undefined' && UI.paintLeaderPortraits) UI.paintLeaderPortraits();
 }
 
 /* ═══ FAZ 20: ANA MENÜ EYLEMLERİ ═══
@@ -6943,6 +6958,11 @@ function deserialize(txt){
   restoreWorldBounds(d);
   G.emps = d.emps; G.fleets = d.fl; G.nextFleet = d.nf;
   G.p = G.emps[0];
+  /* 86G: Eski v8 kayıtlarında savaşla birlikte kalmış NAP/pakt/ittifak
+     alanlarını deterministik olarak kapat. Kayıt sürümü değişmez. */
+  G._loadTreatyInfo = (typeof normalizeWarTreaties === 'function')
+    ? normalizeWarTreaties() : {pairs:0,nap:0,pact:0,ally:0};
+  normalizeEnvoys(); // 86D: kayıt göçü; ay ilerletmez, RNG tüketmez
   /* ═══ FAZ 85A: POLİTİK DÜNYA ═══
      Sıra önemli: G.day ve G.emps yerine oturduktan SONRA çağrılır
      (v3 göçü G.day'e bakar, referans kontrolü G.emps'e bakar) ama
@@ -7283,7 +7303,7 @@ function forceRedraw(sebep){
    Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
    Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
 /* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */
-const BUILD_ID = '86c-5';
+const BUILD_ID = '87c';
 const DIAG_MAX = 40;
 const DIAG = [];
 function logDiag(tur, mesaj){

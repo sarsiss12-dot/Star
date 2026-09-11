@@ -152,15 +152,15 @@ function declareWar(a, b){
   if (typeof councilBlocksWar === 'function' && councilBlocksWar(a, b)){
     if (a.id === 0){
       say('KONSEY YASAĞI: ' + b.name + ' korunuyor. Yine de saldırırsan konsey sana döner.', 'war');
-      // oyuncu bilinçli çiğneyebilsin diye engellemiyoruz, cezalandırıyoruz
-      a.war[b.id] = true; b.war[a.id] = true;
-  a.warSince = a.warSince || {}; b.warSince = b.warSince || {};
-  a.warSince[b.id] = G.day; b.warSince[a.id] = G.day;   // FAZ 48
+      /* 86G: Oyuncu bilinçli çiğneyebilir; ceza uygulanır ama savaş
+         kurulumu aşağıdaki TEK ortak yoldan devam eder. Eski erken return,
+         NAP/pakt/ittifak temizliği, hafıza, fraksiyon ve UI bildirimlerini
+         atlıyordu. */
       councilPunish(a);
-      return true;
+    } else {
+      if (rnd() < .75) return false;               // AI genelde uyar
+      councilPunish(a);
     }
-    if (rnd() < .75) return false;                 // AI genelde uyar
-    councilPunish(a);
   }
   if (!canDeclareWarOn(a,b)){
     if (a.id === 0) say(b.name + ' kendini galaksiden soyutlamış — savaş ilan edilemiyor');
@@ -196,7 +196,7 @@ function declareWar(a, b){
   a.war[b.id] = true; b.war[a.id] = true;
   a.warSince = a.warSince || {}; b.warSince = b.warSince || {};
   a.warSince[b.id] = G.day; b.warSince[a.id] = G.day;   // FAZ 48
-  breakPact(a, b);
+  endTreatiesForWar(a, b);
   a.warStart = a.warStart || {}; b.warStart = b.warStart || {};
   a.warStart[b.id] = G.day; b.warStart[a.id] = G.day;
   a.ally[b.id] = false; b.ally[a.id] = false;
@@ -356,9 +356,73 @@ function makePeace(a, b){
   if (a.id === 0 || b.id === 0) say('Barış imzalandı — ' + (a.id===0?b.name:a.name), 'win');
   return true;
 }
-/* ---------- ELÇİLER ----------
-   Etki biriktirip zar atmak yerine elçi atarsın. Elçi orada durdukça
-   ilişki her ay artar. Elçi sayısı sınırlıdır — kimi kazanacağını seç. */
+/* ---------- ELÇİLER — FAZ 86D ----------
+   Kıdem yalnız çalışılan aylarda artar. Kaydı yüklemek, menü açmak ve
+   teklif hesaplamak elçiyi ilerletmez. Görev değişimi kıdemi sıfırlar. */
+const ENVOY_TASKS = Object.freeze({
+  yakinlasma: {n:'Yakınlaşma', relation:2.2, bonus:.02, rankBonus:.01,
+    kinds:null, scope:'Bütün olumlu teklif maddeleri'},
+  ticaret: {n:'Ticari heyet', relation:.9, bonus:.04, rankBonus:.03,
+    kinds:['res','tribute','tech','lux','pact'], scope:'Kaynak, haraç, teknoloji, lüks ve ticaret paktı'},
+  guvenlik: {n:'Güvenlik teması', relation:.8, bonus:.04, rankBonus:.03,
+    kinds:['peace','nap','ally','passage','intel','spynet','warOn','peaceWith'],
+    scope:'Barış, saldırmazlık, ittifak, geçiş, istihbarat ve savaş taahhütleri'}
+});
+function envoyMonth(){
+  return Number.isInteger(G.year) && Number.isInteger(G.month) && G.month>=1 && G.month<=12
+    ? G.year*12+G.month-1 : Math.floor((G.day||0)/30);
+}
+function envoyRecord(e,id){
+  if (!e || !e.envoy || !Object.prototype.hasOwnProperty.call(e.envoy,id)) return null;
+  const r=e.envoy[id], now=envoyMonth();
+  if (r===true) return {task:'yakinlasma',months:0,lastMonth:now};
+  if (!r || typeof r!=='object' || Array.isArray(r) ||
+      !Object.prototype.hasOwnProperty.call(ENVOY_TASKS,r.task)) return null;
+  return {task:r.task,
+    months:Number.isFinite(r.months)?clamp(Math.floor(r.months),0,Number.MAX_SAFE_INTEGER):0,
+    lastMonth:Number.isFinite(r.lastMonth)?Math.min(Math.floor(r.lastMonth),now):now};
+}
+function envoyPair(e,id){
+  const o=G.emps && G.emps[id];
+  return Number.isInteger(id) && e && G.emps[e.id]===e && o &&
+    e.id!==id && !e.dead && !o.dead && !e.wild && !o.wild &&
+    !e.crisisSide && !o.crisisSide ? o : null;
+}
+function envoyGate(e,id){
+  const o=envoyPair(e,id);
+  if (!o) return {ok:false,why:'Geçerli bir elçi hedefi yok'};
+  if (diploBlocked(e,o)) return {ok:false,why:'Doktrin elçi görevini yasaklıyor'};
+  if (!e.contact || !e.contact[id]) return {ok:false,why:'Temas kurulmadı'};
+  if ((e.war&&e.war[id]) || (o.war&&o.war[e.id]))
+    return {ok:false,why:'Savaş sürüyor'};
+  return {ok:true,why:''};
+}
+function envoyStatus(e,id){
+  const r=envoyRecord(e,id), gate=envoyGate(e,id);
+  const rank=r ? (r.months>=36?2:r.months>=12?1:0) : 0;
+  const task=r ? ENVOY_TASKS[r.task] : null;
+  return {record:r,task,rank,rankName:['Yeni','Kıdemli','Uzman'][rank],
+    active:!!r&&gate.ok,why:gate.why,
+    bonus:task?Math.min(.10,task.bonus+rank*task.rankBonus):0,
+    relation:task?task.relation*(1+rank*.1):0};
+}
+/* Eski v8 true → yeni Yakınlaşma, kıdem 0. Geçmiş aylar uydurulmaz.
+   Boolean false / bozuk görev / ölü hedef silinir; savaşta kayıt kalır.
+   Alanı olmayan imparatorluklara boş kayıt eklenmez. RNG tüketilmez. */
+function normalizeEnvoys(){
+  for (const e of G.emps||[]){
+    if (!e || !Object.prototype.hasOwnProperty.call(e,'envoy')) continue;
+    if (!e.envoy || typeof e.envoy!=='object' || Array.isArray(e.envoy)) {
+      e.envoy={}; continue;
+    }
+    for (const k of Object.keys(e.envoy)){
+      const r=envoyRecord(e,k);
+      if (String(+k)!==k || !envoyPair(e,+k) || !r) {delete e.envoy[k];continue;}
+      if (e.envoy[k]===true) e.envoy[k]=r;
+      else Object.assign(e.envoy[k],r);
+    }
+  }
+}
 function envoyCap(e){
   let n = 2;
   if (e.mods.dipMul > .25) n++;
@@ -371,39 +435,67 @@ function envoyCap(e){
   return n;
 }
 function envoysUsed(e){
-  let n = 0;
-  for (const k in (e.envoy||{})) if (e.envoy[k]) n++;
-  return n;
+  return Object.keys(e.envoy||{}).filter(k=>String(+k)===k &&
+    envoyPair(e,+k) && envoyRecord(e,k)).length;
 }
-function assignEnvoy(e, id){
-  e.envoy = e.envoy || {};
-  if (e.envoy[id]) { e.envoy[id] = false; return true; }   // geri çek
-  if (envoysUsed(e) >= envoyCap(e)) return false;
-  e.envoy[id] = true;
-  return true;
+function setEnvoyTask(e,id,task){
+  if (!Object.prototype.hasOwnProperty.call(ENVOY_TASKS,task))
+    return {ok:false,why:'Bilinmeyen elçi görevi'};
+  const gate=envoyGate(e,id);
+  if (!gate.ok) return gate;
+  const old=envoyRecord(e,id);
+  if (old && old.task===task) return {ok:true,changed:false,action:'same'};
+  if (!old && envoysUsed(e)>=envoyCap(e))
+    return {ok:false,why:'Boşta elçin yok — önce bir elçiyi geri çek'};
+  if (!e.envoy || typeof e.envoy!=='object' || Array.isArray(e.envoy)) e.envoy={};
+  e.envoy[id]={task,months:0,lastMonth:envoyMonth()};
+  return {ok:true,changed:true,action:old?'change':'send'};
+}
+function recallEnvoy(e,id){
+  if (!e || !envoyRecord(e,id)) return {ok:false,why:'Bu devlette elçin yok'};
+  delete e.envoy[id];
+  return {ok:true,changed:true,action:'recall'};
+}
+/* Eski çağıranlar için boolean dönüşlü toggle. Yeni UI/AI açık eylemleri kullanır. */
+function assignEnvoy(e,id){
+  return (envoyRecord(e,id)?recallEnvoy(e,id):setEnvoyTask(e,id,'yakinlasma')).ok;
 }
 function envoyTick(){
+  normalizeEnvoys();
+  const now=envoyMonth();
   for (const e of G.emps){
-    if (e.dead || e.wild || !e.envoy) continue;
-    for (const k in e.envoy){
-      if (!e.envoy[k]) continue;
-      const o = G.emps[k];
-      if (!o || o.dead || o.wild) { e.envoy[k] = false; continue; }
-      // savaşta elçi çalışmaz
-      if (e.war[o.id]) continue;
-      /* FAZ 30: Elçi ayda +2.2 ile kutuplaşmayı tek başına eziyordu
-         (ölçüm: 12 turda +11.71). Artık ilişki iyileştikçe getirisi
-         azalıyor — diplomasi sonsuz dostluk üretmiyor, sadece
-         düşmanlığı yumuşatıyor. */
-      const mevcut = e.rel[o.id] || 0;
-      /* Doygunluk: ilişki +40'ta yarıya, +70'te sıfıra yaklaşır.
-         Diplomasi düşmanlığı yumuşatır ama sonsuz dostluk üretmez. */
-      const doygun = clamp(1 - Math.max(0, mevcut) / 55, .05, 1);
-      const gain = 2.2 * (1 + e.mods.dipMul) * doygun;
-      e.rel[o.id] = clamp(e.rel[o.id] + gain, -100, 100);
-      o.rel[e.id] = clamp(o.rel[e.id] + gain * .6, -100, 100);
+    for (const k of Object.keys(e.envoy||{})){
+      const r=e.envoy[k];
+      if (r.lastMonth>=now) continue;
+      r.lastMonth=now; // duraklanan / atlanan aylar sonradan telafi edilmez
+      if (!envoyGate(e,+k).ok) continue;
+      r.months=Math.min(Number.MAX_SAFE_INTEGER,r.months+1);
+      const o=G.emps[k], status=envoyStatus(e,+k);
+      const mevcut=e.rel[o.id]||0;
+      const doygun=clamp(1-Math.max(0,mevcut)/55,.05,1);
+      const gain=status.relation*(1+e.mods.dipMul)*doygun;
+      e.rel[o.id]=clamp(mevcut+gain,-100,100);
+      o.rel[e.id]=clamp((o.rel[e.id]||0)+gain*.6,-100,100);
     }
   }
+}
+/* Saf teklif katkısı. Önceden hesaplanmış olumlu faydalarla ağırlıklandırılır:
+   küçücük bir ticaret maddesi tüm güvenlik paketine bonus taşıyamaz.
+   İki tarafın elçileri toplanmaz; her maddede uygun en güçlü katkı alınır. */
+function envoyDealFactor(ai,other,parts){
+  const states=[envoyStatus(ai,other.id),envoyStatus(other,ai.id)].filter(s=>s.active);
+  let total=0, extra=0, net=0;
+  for (const p of parts||[]){
+    net+=p.value;
+    if (!(p.value>0)) continue;
+    total+=p.value;
+    let bonus=0;
+    if (p.effective!==false) for (const s of states){
+      if (!s.task.kinds || s.task.kinds.includes(p.it.t)) bonus=Math.max(bonus,s.bonus);
+    }
+    extra+=p.value*bonus;
+  }
+  return total>0 && net>0 ? clamp(1+extra/total,1,1.10) : 1;
 }
 /* ortak düşman varsa anlaşmalar çok daha kolay */
 function sharedFoe(a, b){
@@ -433,6 +525,36 @@ function makePact(a, b){
 function breakPact(a, b){
   if (a.pact) a.pact[b.id] = false;
   if (b.pact) b.pact[a.id] = false;
+}
+/* 86G: Savaş ile aynı anda yürüyemeyen ikili antlaşmaların tek kapanış
+   noktası. NAP süre alanı silinmezse UI aynı çifti hem savaşta hem NAP'ta
+   gösteriyor, barıştan sonra eski söz yeniden canlanıyor ve yeni teklif
+   yanlışlıkla redundant sayılıyordu. */
+function endTreatiesForWar(a, b){
+  if (!a || !b) return;
+  if (a.nap) delete a.nap[b.id];
+  if (b.nap) delete b.nap[a.id];
+  breakPact(a, b);
+  if (a.ally) a.ally[b.id] = false;
+  if (b.ally) b.ally[a.id] = false;
+}
+/* Eski v8 kayıtlarındaki savaş+antlaşma çakışmasını ay ilerletmeden,
+   bildirim üretmeden ve RNG tüketmeden onarır. Savaş kaydı korunur. */
+function normalizeWarTreaties(){
+  const out={pairs:0,nap:0,pact:0,ally:0};
+  if (!G || !Array.isArray(G.emps)) return out;
+  for (let i=0;i<G.emps.length;i++) for (let j=i+1;j<G.emps.length;j++){
+    const a=G.emps[i],b=G.emps[j];
+    if (!a || !b || !((a.war&&a.war[b.id])||(b.war&&b.war[a.id]))) continue;
+    const hadNap=!!((a.nap&&Object.prototype.hasOwnProperty.call(a.nap,b.id))||
+                    (b.nap&&Object.prototype.hasOwnProperty.call(b.nap,a.id)));
+    const hadPact=!!((a.pact&&a.pact[b.id])||(b.pact&&b.pact[a.id]));
+    const hadAlly=!!((a.ally&&a.ally[b.id])||(b.ally&&b.ally[a.id]));
+    if (!(hadNap||hadPact||hadAlly)) continue;
+    out.pairs++;if(hadNap)out.nap++;if(hadPact)out.pact++;if(hadAlly)out.ally++;
+    endTreatiesForWar(a,b);
+  }
+  return out;
 }
 /* =====================================================================
    MÜZAKERE MASASI — teklif / değerlendirme / karşı teklif
@@ -581,8 +703,8 @@ function itemValue(e, it, other){
    (dip/war) kullanıyordu; sınırsızdı ve gerekçe üretmiyordu.
    ARTIK bütün yumuşak faktörler AYRI hesaplanır, her biri kendi
    cap'iyle sınırlanır ve kısa gerekçe döner. Karar DETERMİNİSTİK —
-   kabul/ret için RNG YOKTUR. Elçi etkisi bu fazda nötr (1.00);
-   görev sistemi 86D'de bağlanacak. */
+   kabul/ret için RNG YOKTUR. FAZ 86D: elçi katkısı yalnız uygun
+   olumlu maddelerin değeri oranında eklenir ve en fazla +%10'dur. */
 const DEAL_FACTOR_CAPS = {
   rel:      [0.80, 1.20],   // mevcut ilişki
   trust:    [0.85, 1.15],   // güven + önemli diplomatik hafıza
@@ -590,7 +712,7 @@ const DEAL_FACTOR_CAPS = {
   honor:    [0.92, 1.08],   // onur/itibar
   persona:  [0.90, 1.10],   // kişilik/doktrin/stratejik ihtiyaç
   foe:      [1.00, 1.15],   // ortak düşman — YALNIZ güvenlik maddeleri
-  envoy:    [1.00, 1.00],   // FAZ 86D'ye kadar nötr
+  envoy:    [1.00, 1.10],   // görev + kıdem; uygun olumlu maddelerde
   gainTot:  [0.60, 1.55],   // toplam fayda çarpanı
   costTot:  [0.85, 1.20]    // toplam çekince çarpanı
 };
@@ -607,7 +729,7 @@ function ethicGap(a, b){
   return clamp(t / (eks.length * 6), 0, 1);   // her eksen −3..+3
 }
 /* Saf faktör hesabı — RNG yok, mutasyon yok. */
-function dealFactors(ai, other, n){
+function dealFactors(ai, other, n, gainParts){
   const f = {}, why = [];
   const rel = ai.rel[other.id] || 0;
   f.rel = _cap(1 + rel / 500, 'rel');
@@ -638,7 +760,9 @@ function dealFactors(ai, other, n){
   f.foe = (guvenlikVar && ortak) ? _cap(1.15, 'foe') : 1;
   if (f.foe > 1) why.push('Ortak tehdit güvenlik anlaşmasını değerli kılıyor');
 
-  f.envoy = _cap(1, 'envoy');       // 86D'ye kadar nötr
+  f.envoy = _cap(envoyDealFactor(ai,other,gainParts), 'envoy');
+  if (f.envoy>1) why.push('Elçi görüşmeleri uygun faydayı +%' +
+    ((f.envoy-1)*100).toFixed(1) + ' destekliyor');
   return {f, why, rel, trust:tr, ethicGap:gap, honor:hn, sharedFoe:!!ortak};
 }
 function evalOffer(ai, offer){
@@ -657,10 +781,15 @@ function evalOffer(ai, offer){
     return {net: -9999, red: true, hardLock: true, why: n.errors.slice(0, 2)};
 
   let gain = 0, cost = 0;
-  for (const it of n.give) gain += itemValue(ai, it, other);
+  const gainParts=[];
+  for (const it of n.give){
+    const value=itemValue(ai,it,other);
+    gain+=value;
+    gainParts.push({it,value,effective:!n.effectiveGive||n.effectiveGive.includes(it)});
+  }
   for (const it of n.want) cost += itemValue(ai, it, other);
 
-  const F = dealFactors(ai, other, n);
+  const F = dealFactors(ai, other, n, gainParts);
   const f = F.f;
   /* Faktörler ÇARPILIR ama toplam iki uçta clamp'lenir — tek bir
      faktör aşırı uç üretemez, aynı bilgi iki kez sayılmaz. */
@@ -1047,9 +1176,12 @@ function treatyAlreadyActive(a, b, it){
   if (!a || !b || !it) return false;
   switch(it.t){
     case 'peace':   return !a.war[b.id];
-    case 'nap':     return !!(a.nap && a.nap[b.id] > G.day);
-    case 'pact':    return !!(a.pact && a.pact[b.id]);
-    case 'ally':    return !!a.ally[b.id];
+    case 'nap':     return !(a.war&&a.war[b.id]) && !(b.war&&b.war[a.id]) &&
+                           !!(a.nap && a.nap[b.id] > G.day);
+    case 'pact':    return !(a.war&&a.war[b.id]) && !(b.war&&b.war[a.id]) &&
+                           !!(a.pact && a.pact[b.id]);
+    case 'ally':    return !(a.war&&a.war[b.id]) && !(b.war&&b.war[a.id]) &&
+                           !!a.ally[b.id];
     case 'spynet':  return !!(a.spynet && a.spynet[b.id]);
     case 'intel':   return !!(b.visionFrom && b.visionFrom[a.id]);
     case 'passage': return !!(a.passage && a.passage[b.id]);
@@ -1324,152 +1456,89 @@ function giftOnCooldown(a, b){
   return (t !== undefined) && ((G.memAge || 0) - t) < GIFT_COOLDOWN_MONTHS;
 }
 
-/* ═══════════════════════════════════════════════════════════════════
-   FAZ 86C.2 — TAM İŞLEM ATOMİKLİĞİ (86C.1 BORCU KAPANDI)
-   86C.1'de bu mekanizma SINIRLI olduğu için dürüstçe öyle etiketlenmişti.
-   Artık gerçek transaction var: dealTxBegin derin snapshot alır
-   (bütün imparatorluklar, sistemler/gezegenler/koloniler, filolar,
-   federasyonlar, konsey, sayaçlar, bildirim kuyruğu, RNG ve geçici
-   yetki alanları), dealTxRollback nesne KİMLİKLERİNİ koruyarak
-   yerinde geri yazar. Yan etkiler commit'e kadar tamponlanır.
-   Aşağıdaki goodwill/cooldown mantığı değişmedi.
-*/
-/* ═══════════════════════════════════════════════════════════════════
-   FAZ 86C.2 — GERÇEK ANLAŞMA TRANSACTION'I
-
-   ÖLÇÜLEN ESKİ ZAFİYET: dealJournal yalnız iki tarafı ve sys.owner'ı,
-   üstelik Object.assign ile YÜZEYSEL kopyalıyordu. İç içe diziler
-   (mem, colonies, ships) aynı nesneyi paylaştığı için derin değişiklik
-   geri gelmiyordu; üçüncü devletler, gezegenler, filolar, federasyon/
-   süzeren zincirleri, fraksiyonlar ve bildirimler hiç kapsanmıyordu.
-
-   ÇÖZÜM: açıkça seçilmiş KALICI KÖKLERİN derin snapshot'ı + nesne
-   kimliklerini KORUYARAK yerinde restore.
-   Seçilen kökler ve gerekçeleri:
-     G.emps      — bütün imparatorluklar (üçüncü devletler dahil):
-                   savaş, ilişki, hafıza, antlaşmalar, koloniler,
-                   kaynaklar, ölüm durumu, fraksiyonlar
-     G.sys       — sistem/gezegen/koloni verisi (sahiplik, def, seen)
-     G.fleets    — filo dizisi ve gemi nesneleri (purgeEmpire silebilir)
-     G.feds      — federasyon üyelik/yasa durumu
-     G.council   — konsey üyeliği ve yaptırımlar
-     G.fallStats / G.sabStats — global sayaçlar
-     G.log / G.inbox / G.inboxUid — bildirim durumu
-     RND_STATE   — councilPunish/declareWar RNG tüketebilir
-     _dealAuth / _warAuth / _warWhy — değer + ALAN VARLIĞI
-   KLONLANMAYANLAR: kataloglar (EVENTS/TECHS/OPS...), fonksiyonlar,
-   canvas/DOM nesneleri, View, UI. Bunlar kalıcı oyun verisi değildir.
-   Render/türetilmiş cache'ler (_reach, _trAt, _pers ...) snapshot'a
-   girer çünkü emps/sys köklerinin içindedir; rollback sonrası
-   kontrollü olarak yeniden hesaplanır. */
-const TX_SKIP_KEYS = {_dealFailInject:1};
-function txClone(v, derinlik){
-  if (v === null || typeof v !== 'object') return v;
-  if (derinlik > 12) return v;                      // güvenlik sınırı
-  if (typeof v === 'function') return v;
-  if (Array.isArray(v)){
-    const a = new Array(v.length);
-    for (let i = 0; i < v.length; i++) a[i] = txClone(v[i], derinlik + 1);
-    return a;
-  }
-  const o = {};
-  for (const k in v){
-    if (TX_SKIP_KEYS[k]) continue;
-    o[k] = txClone(v[k], derinlik + 1);
-  }
-  return o;
-}
-/* Yerinde restore: hedef nesnenin KİMLİĞİ korunur, içeriği geri yazılır.
-   Böylece G.p, sistem, gezegen ve filo referansları çalışmaya devam eder. */
-function txRestoreInto(hedef, kaynak, derinlik){
-  if (!hedef || !kaynak || typeof hedef !== 'object') return kaynak;
-  if (derinlik > 12) return kaynak;
-  if (Array.isArray(hedef) && Array.isArray(kaynak)){
-    hedef.length = kaynak.length;
-    for (let i = 0; i < kaynak.length; i++){
-      const k = kaynak[i];
-      if (k && typeof k === 'object' && hedef[i] && typeof hedef[i] === 'object')
-        txRestoreInto(hedef[i], k, derinlik + 1);
-      else hedef[i] = txClone(k, derinlik + 1);
+/* 86C.6 — ANLAŞMA İŞLEM SINIRI
+   86C.2'nin derin kopyası iç içe nesne kimliğini, alias bağlantılarını
+   ve 12 seviyeden derin mutasyonları korumuyordu. Son recalcMods da
+   rollback sınırının dışındaydı. Aşağıdaki günlük bu yolları kapsar;
+   UI/audio commit sonrasında ayrı, geri alınmayan sunum etkileridir.
+   Kapsam ve gerçek üretim testleri: TRANSACTION-KAPSAMI.md. */
+/* 86C.6: tersinir nesne grafiği günlüğü. Kopyalardan yeni nesne üretmez;
+   her alanın ÖZGÜN referansını saklar. Paylaşılan bağlantılar, döngüler,
+   diziden çıkarılmış nesneler ve 12 seviyeden derin veri korunur.
+   Kapsam: aşağıdaki kökler ve bunların eriştiği oyun verisi. DOM, UI,
+   fonksiyon gövdeleri ve kataloglar işlem verisi değildir. */
+const DEAL_TX_ROOTS = ['emps','p','sys','fleets','feds','council',
+  'fallStats','sabStats','log','inbox','inboxUid'];
+const DEAL_TX_AUTH = ['_dealAuth','_warAuth','_warWhy','_sideBuf'];
+let _dealTxActive = false;
+function txCaptureGraph(values){
+  const seen = new Set(), records = [], pending = values.slice();
+  while (pending.length){
+    const obj = pending.pop();
+    if (!obj || typeof obj !== 'object' || seen.has(obj)) continue;
+    seen.add(obj);
+    const props = Object.getOwnPropertyDescriptors(obj);
+    const rec = {obj, props, proto:Object.getPrototypeOf(obj)};
+    if (obj instanceof Map){
+      rec.map = Array.from(obj.entries());
+      for (const [k,v] of rec.map) pending.push(k,v);
+    } else if (obj instanceof Set){
+      rec.set = Array.from(obj.values()); pending.push(...rec.set);
+    } else if (obj instanceof Date) rec.date = obj.getTime();
+    else if (obj instanceof ArrayBuffer) rec.bytes = new Uint8Array(obj).slice();
+    else if (ArrayBuffer.isView(obj)) pending.push(obj.buffer);
+    else if (obj instanceof WeakMap || obj instanceof WeakSet)
+      throw new Error('İşlem kökünde desteklenmeyen zayıf koleksiyon');
+    for (const k of Reflect.ownKeys(props)){
+      const d = props[k];
+      if ('value' in d) pending.push(d.value); // getter çalıştırılmaz
     }
-    return hedef;
+    records.push(rec);
   }
-  for (const k in hedef){
-    if (TX_SKIP_KEYS[k]) continue;
-    if (!(k in kaynak)) delete hedef[k];            // alan-yok ayrımı korunur
+  return records;
+}
+function txRestoreGraph(records){
+  for (const rec of records){
+    const obj = rec.obj, props = rec.props;
+    if (rec.map){ obj.clear(); for (const [k,v] of rec.map) obj.set(k,v); }
+    if (rec.set){ obj.clear(); for (const v of rec.set) obj.add(v); }
+    if ('date' in rec) obj.setTime(rec.date);
+    if (rec.bytes) new Uint8Array(obj).set(rec.bytes);
+    if (Object.getPrototypeOf(obj) !== rec.proto) Object.setPrototypeOf(obj,rec.proto);
+    for (const k of Reflect.ownKeys(obj)){
+      if (!Object.prototype.hasOwnProperty.call(props,k)) delete obj[k];
+    }
+    // Dizi uzunluğu en son: eski üyeler aynı nesnelerle ve sırayla bağlanır.
+    for (const k of Reflect.ownKeys(props)){
+      if (Array.isArray(obj) && k === 'length') continue;
+      Object.defineProperty(obj,k,props[k]);
+    }
+    if (Array.isArray(obj)) Object.defineProperty(obj,'length',props.length);
   }
-  for (const k in kaynak){
-    if (TX_SKIP_KEYS[k]) continue;
-    const kv = kaynak[k], hv = hedef[k];
-    if (kv && typeof kv === 'object' && hv && typeof hv === 'object' &&
-        Array.isArray(kv) === Array.isArray(hv))
-      txRestoreInto(hv, kv, derinlik + 1);
-    else hedef[k] = txClone(kv, derinlik + 1);
-  }
-  return hedef;
 }
 function dealTxBegin(){
-  const tx = {
-    emps      : G.emps.map(e => txClone(e, 0)),
-    empRefs   : G.emps.slice(),
-    sys       : G.sys.map(s => txClone(s, 0)),
-    sysRefs   : G.sys.slice(),
-    fleets    : G.fleets.map(f => txClone(f, 0)),
-    fleetRefs : G.fleets.slice(),
-    feds      : txClone(G.feds || [], 0),
-    council   : txClone(G.council || null, 0),
-    fallStats : txClone(G.fallStats || {}, 0),
-    sabStats  : txClone(G.sabStats || {}, 0),
-    log       : (G.log || []).slice(),
-    inbox     : (G.inbox || []).slice(),
-    inboxUid  : G.inboxUid,
-    rng       : RND_STATE,
-    auth      : {
-      dealHas:('_dealAuth' in G), deal:G._dealAuth,
-      warHas :('_warAuth'  in G), war :G._warAuth,
-      whyHas :('_warWhy'   in G), why :G._warWhy
-    }
-  };
-  return tx;
+  const roots = new Map(), auth = new Map(), values = [];
+  for (const key of DEAL_TX_ROOTS){
+    const d = Object.getOwnPropertyDescriptor(G,key);
+    roots.set(key,d);
+    if (d && 'value' in d) values.push(d.value);
+  }
+  for (const key of DEAL_TX_AUTH) auth.set(key,Object.getOwnPropertyDescriptor(G,key));
+  return {roots,auth,records:txCaptureGraph(values),rng:RND_STATE};
 }
 function dealTxRollback(tx){
-  /* İmparatorluklar: nesne KİMLİĞİ korunarak yerinde geri yazılır. */
-  for (let i = 0; i < tx.empRefs.length; i++)
-    txRestoreInto(tx.empRefs[i], tx.emps[i], 0);
-  G.emps.length = tx.empRefs.length;
-  for (let i = 0; i < tx.empRefs.length; i++) G.emps[i] = tx.empRefs[i];
-  /* Sistemler ve gezegen/koloniler */
-  for (let i = 0; i < tx.sysRefs.length; i++)
-    txRestoreInto(tx.sysRefs[i], tx.sys[i], 0);
-  G.sys.length = tx.sysRefs.length;
-  for (let i = 0; i < tx.sysRefs.length; i++) G.sys[i] = tx.sysRefs[i];
-  /* Filolar: purgeEmpire diziden çıkarmış olabilir — özgün SIRA ve
-     nesne KİMLİĞİ ile geri konur. */
-  for (let i = 0; i < tx.fleetRefs.length; i++)
-    txRestoreInto(tx.fleetRefs[i], tx.fleets[i], 0);
-  G.fleets.length = 0;
-  for (let i = 0; i < tx.fleetRefs.length; i++) G.fleets.push(tx.fleetRefs[i]);
-  /* Politik kökler */
-  if (Array.isArray(G.feds)) txRestoreInto(G.feds, tx.feds, 0);
-  else G.feds = txClone(tx.feds, 0);
-  if (tx.council === null) G.council = null;
-  else if (G.council && typeof G.council === 'object')
-    txRestoreInto(G.council, tx.council, 0);
-  else G.council = txClone(tx.council, 0);
-  txRestoreInto(G.fallStats = G.fallStats || {}, tx.fallStats, 0);
-  txRestoreInto(G.sabStats  = G.sabStats  || {}, tx.sabStats,  0);
-  /* Bildirim durumu */
-  G.log.length = 0;   for (const x of tx.log)   G.log.push(x);
-  if (Array.isArray(G.inbox)){ G.inbox.length = 0; for (const x of tx.inbox) G.inbox.push(x); }
-  G.inboxUid = tx.inboxUid;
-  rndSeed(tx.rng);                                  // RNG birebir geri
+  txRestoreGraph(tx.records);
+  for (const [key,d] of tx.roots){
+    if (d) Object.defineProperty(G,key,d); else delete G[key];
+  }
+  rndSeed(tx.rng);
   dealTxRestoreAuth(tx);
+  // Yeniden hesaplama YOK: mods/cap/cache de özgün haliyle geri geldi.
 }
 function dealTxRestoreAuth(tx){
-  const a = tx.auth;
-  if (a.dealHas) G._dealAuth = a.deal; else delete G._dealAuth;
-  if (a.warHas)  G._warAuth  = a.war;  else delete G._warAuth;
-  if (a.whyHas)  G._warWhy   = a.why;  else delete G._warWhy;
+  for (const [key,d] of tx.auth){
+    if (d) Object.defineProperty(G,key,d); else delete G[key];
+  }
 }
 
 /* ── POSTCONDITION: her effective madde gerçekten uygulandı mı? ── */
@@ -1511,40 +1580,30 @@ function dealPostcondition(giver, taker, it){
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════════
-   FAZ 86C.2 — TAM TRANSACTION YAŞAM DÖNGÜSÜ
-
-   begin → apply → postcondition → commit
-   Herhangi bir aşamada istisna: rollback ile TÜM kalıcı durum
-   (imparatorluklar, sistemler/gezegenler/koloniler, filolar,
-   federasyonlar, konsey, sayaçlar, bildirim kuyruğu, RNG ve geçici
-   yetki alanları) BAŞLANGIÇ HÂLİNE döner; yan etki tamponu atılır.
-   İstisna dışarı SIZMAZ; executeDeal daima boolean döner. */
+/* 86C.6: begin → apply → postcondition → recalc → log → commit.
+   Commit öncesindeki üretim hatası kayıtlı oyun grafiğini geri alır.
+   Sonrasında UI/audio ayrı ayrı korunur; bu etkiler tersinir değildir. */
 function executeDeal(offer){
-  /* Dış/bozuk çağrı da aynı kanonik kapıdan geçer. */
-  const q = dealQuote(offer);
-  if (!q.ok) return false;
-  const n = q.norm;
-  const a = G.emps[n.from], b = G.emps[n.to];
-  if (!a || !b) return false;
-
-  const tx  = dealTxBegin();
+  // İç içe işlem desteklenmiyor; dış işlemin tamponunu yayımlayamaz.
+  if (_dealTxActive) return false;
+  _dealTxActive = true;
+  let tx = null;
   const buf = [];
-  const oncekiBuf = G._sideBuf;
-  G._sideBuf = buf;                       // bildirimler tamponlanır
-  G._dealAuth = true;
-  let tamam = false;
   try {
-    /* FAZ 86C.1: yalnız effective maddeler uygulanır — redundant
-       antlaşma applyItems'a HİÇ girmez. */
+    if (G._sideBuf) return false; // başka bir tamponun sahipliğini alma
+    const q = dealQuote(offer);
+    if (!q.ok) return false;
+    const n = q.norm, a = G.emps[n.from], b = G.emps[n.to];
+    if (!a || !b) return false;
+    tx = dealTxBegin();
+    G._sideBuf = buf;
+    G._dealAuth = true;
     applyItems(a, b, n.effectiveGive);
     applyItems(b, a, n.effectiveWant);
     if (typeof G._dealFailInject === 'function') G._dealFailInject('after:items');
-
-    a.res.etk = (a.res.etk || 0) - q.cost;     // maliyet: GÖNDEREN, TEK KEZ
+    a.res.etk = (a.res.etk || 0) - q.cost;
     if (typeof G._dealFailInject === 'function') G._dealFailInject('after:cost');
 
-    /* ── GOODWILL: koşulsuz +6 YERİNE gerçek net faydadan ── */
     const gwB = giftOnCooldown(a, b) ? 0 : dealGoodwill(b, a, n);
     const gwA = giftOnCooldown(b, a) ? 0 : dealGoodwill(a, b, n);
     if (gwB > 0){
@@ -1556,22 +1615,21 @@ function executeDeal(offer){
       b.giftAt = b.giftAt || {}; b.giftAt[a.id] = (G.memAge || 0);
     }
     if (typeof G._dealFailInject === 'function') G._dealFailInject('after:goodwill');
+    recalcMods(a); recalcMods(b); // son hesaplama da geri alınabilir sınırda
+    if (typeof G._dealFailInject === 'function') G._dealFailInject('after:recalc');
+    commitSideBuffer(buf);       // kalıcı log, UI/audio yayımlanmadan önce
+    if (typeof G._dealFailInject === 'function') G._dealFailInject('after:log');
     if (typeof G._dealFailInject === 'function') G._dealFailInject('son');
-    tamam = true;
   } catch(err){
-    G._sideBuf = oncekiBuf;
-    dealTxRollback(tx);                   // yetki alanları da geri gelir
-    /* Rollback sonrası türetilmiş durum kontrollü yenilenir. */
-    try { if (typeof recalcMods === 'function'){
-      for (const e of G.emps) if (e && !e.dead) recalcMods(e); } } catch(e2){}
-    return false;                          // istisna DIŞARI SIZMAZ
+    if (tx) dealTxRollback(tx);
+    return false;
+  } finally {
+    if (tx) dealTxRestoreAuth(tx);
+    _dealTxActive = false;
   }
-  /* ── COMMIT ── */
-  G._sideBuf = oncekiBuf;
-  dealTxRestoreAuth(tx);                   // _dealAuth önceki hâline
-  if (!tamam){ dealTxRollback(tx); return false; }
-  recalcMods(a); recalcMods(b);
-  if (typeof flushSideBuffer === 'function') flushSideBuffer(buf);
+  // Artık commit edildi. Sunum hatası işlemi reddedilmiş gösteremez;
+  // yeniden ücretlendirme, yeniden uygulama veya geri alma yapılmaz.
+  flushSideBuffer(buf);
   return true;
 }
 
@@ -1910,11 +1968,31 @@ function spiesUsed(e){
   for (const k in (e.spy||{})) if (e.spy[k]) n++;
   return n;
 }
+/* 87A: arayüz ve yürütme aynı hedef kapısını kullanır; saf ön kontrol. */
+function spyTargetCheck(e, target){
+  if (!e || !G.emps || G.emps[e.id] !== e || e.dead || e.wild || !e.res)
+    return {ok:false, why:'Aktif ajan devleti bulunamadı'};
+  if (!target || G.emps[target.id] !== target || target.dead || target.wild || target.id === e.id)
+    return {ok:false, why:'Hedef geçersiz'};
+  if (!e.contact || !e.contact[target.id])
+    return {ok:false, why:'Hedefle temas kurulmadı'};
+  return {ok:true, why:''};
+}
+function spyAssignQuote(e, id){
+  if (!Number.isInteger(id) || id < 0) return {ok:false, why:'Hedef geçersiz'};
+  /* Eski/hedefsiz bir atama da geri çekilebilsin; yeni atama olamaz. */
+  if (e && G.emps && G.emps[e.id] === e && !e.dead && e.spy && e.spy[id])
+    return {ok:true, withdraw:true, why:''};
+  const q = spyTargetCheck(e, G.emps && G.emps[id]);
+  if (!q.ok) return q;
+  return spiesUsed(e) < spyCap(e) ? {ok:true, withdraw:false, why:''}
+    : {ok:false, why:'Boşta casusun yok — birini geri çek'};
+}
 function assignSpy(e, id){
+  const q = spyAssignQuote(e, id);
+  if (!q.ok) return false;
   e.spy = e.spy || {};
-  if (e.spy[id]){ e.spy[id] = false; return true; }
-  if (spiesUsed(e) >= spyCap(e)) return false;
-  e.spy[id] = true;
+  e.spy[id] = !q.withdraw;
   return true;
 }
 
@@ -1928,7 +2006,7 @@ function spyTick(){
       if (o.dead || o.wild || o.id === e.id) continue;
       let rate = 0;
       if (e.contact[o.id]) rate += .28;                       // temas yavaşça öğretir
-      if (e.envoy && e.envoy[o.id]) rate += .35;              // elçi gözlem yapar
+      if (envoyStatus(e,o.id).active) rate += .35;              // elçi gözlem yapar
       if (e.spy && e.spy[o.id]) rate += 1.5;                  // casus hızlı
       if (hasCivic(e, 'shadow')) rate *= 1.5;
       // karşı istihbarat savunması
@@ -2094,32 +2172,50 @@ function opVictimHint(key){
     'Şüpheli bir istihbarat faaliyeti tespit edildi — fail bilinmiyor';
 }
 function opQuote(e, target, key){
-  const OP = OPS[key];
+  const OP = Object.prototype.hasOwnProperty.call(OPS, key) ? OPS[key] : null;
   if (!OP) return {ok:false, why:'Bilinmeyen operasyon', key};
   const q = {key, op:OP, name:OP.n, ico:OP.ico, desc:OP.d,
              lvlNeed:OP.lvl, lvlHave:0, cost:{}, afford:false,
              risk:0, riskPct:0, viable:false, viableDesc:'',
              ok:false, why:''};
-  if (!target || target.dead){ q.why = 'Hedef geçersiz'; return q; }
+  const hedef = spyTargetCheck(e, target);
+  if (!hedef.ok){ q.why = hedef.why; return q; }
   q.lvlHave = intelOf(e, target.id);
   q.cost    = opCostOf(e, OP);
   q.afford  = Object.keys(q.cost).every(r => (e.res[r] || 0) >= q.cost[r]);
   q.risk    = opRiskOf(e, target, OP);
   q.riskPct = Math.round(q.risk * 100);
-  const v   = opViable(e, target, key);
-  q.viable  = v.ok; q.viableDesc = v.ok ? v.d : '';
   if (q.lvlHave < OP.lvl){
     q.why = 'Yetersiz istihbarat seviyesi (' + INTEL_LEVELS[OP.lvl].n + ' gerekli)';
     return q;
   }
+  /* Kilitli kartta gizli teknoloji/stok/koloni sayıları sızmasın. */
+  const v   = opViable(e, target, key);
+  q.viable  = v.ok; q.viableDesc = v.ok ? v.d : '';
   if (!q.afford){ q.why = 'Yetersiz kaynak'; return q; }
   if (!v.ok){ q.why = v.why; return q; }
   q.ok = true;
   return q;
 }
 
+/* 87A: görev kuyruğu değil, mevcut alanların salt okunur süreli etki özeti.
+   Rakibin gizli alanlarını okumaz; yalnız aktörün kendi kazanımlarıdır. */
+function opActiveEffects(e, target){
+  if (!spyTargetCheck(e, target).ok) return [];
+  const id = target.id, out = [];
+  const add = (key, name, until) => {
+    if (Number.isFinite(until) && until > G.day)
+      out.push({key, name, until, days:Math.ceil(until - G.day)});
+  };
+  add('yalan', 'Yanıltıcı güç raporu', e.fakeTo && e.fakeTo[id] && e.fakeTo[id].until);
+  add('kervan', 'Ticaret rotası bilgisi', e.routeIntel && e.routeIntel[id]);
+  add('filoPlan', 'Filo planı erişimi', e.fleetIntel && e.fleetIntel[id]);
+  add('ambargoKir', 'Kaçak ticaret hattı', e.smuggle && e.smuggle[id]);
+  return out;
+}
+
 function runOp(e, target, key){
-  const OP = OPS[key];
+  const OP = Object.prototype.hasOwnProperty.call(OPS, key) ? OPS[key] : null;
   if (!OP) return {ok:false, msg:'Bilinmeyen operasyon'};
   /* ═══ FAZ 86A: TEK KANONİK KAPI ═══
      Kaynak kesilmeden, RNG tüketilmeden ve hitLog yazılmadan ÖNCE
@@ -5605,8 +5701,31 @@ function sabotageChance(e, target){
    maliyetinin %50'si araştırma puanı olarak eklenir. Kilit
    doğrudan açılmaz — yarı yolu kısaltır.
    ═══════════════════════════════════════════════════════════════════ */
+/* 87C: Çözülmüş özel denemenin kaydı UI/AI çağıranında değil motorda.
+   ok ödenmiş deneme, basarili gerçek etki demektir. Sessiz başarısızlık
+   kurbana yeni bilgi vermez. Kayıt işlemi RNG tüketmez. */
+function finishSpecialOp(e, target, key, result, cost, location){
+  const r = Object.assign({}, result, {cost});
+  r.basarili = result.basarili === true;
+  r.outcome = r.basarili ? 'basari' : (r.caught ? 'ifsa' : 'sonucsuz');
+  e.opLog = e.opLog || [];
+  e.opLog.push({t:G.memAge || 0, k:key, o:target.id,
+    caught:!!r.caught, outcome:r.outcome, cost,
+    actorSummary:String(r.msg || '').slice(0,320)});
+  if (e.opLog.length > 20) e.opLog.splice(0, e.opLog.length - 20);
+  if (r.basarili || r.caught){
+    target.hitLog = target.hitLog || [];
+    target.hitLog.push(Object.assign({t:G.memAge || 0,
+      k:key === 'incite' ? 'kiskirt' : key, by:e.id,
+      caught:!!r.caught, known:!!r.caught, outcome:r.outcome}, location));
+    if (target.hitLog.length > 30) target.hitLog.splice(0, target.hitLog.length - 30);
+  }
+  return r;
+}
+
 function stealTech(e, target){
-  if (!e || !target) return {ok:false, why:'Hedef yok'};
+  const gate = spyTargetCheck(e, target);
+  if (!gate.ok) return gate;
   if (typeof intelOf !== 'function') return {ok:false, why:'—'};
   const lvl = intelOf(e, target.id);
   if (lvl < 2) return {ok:false, why:'En az 2. seviye istihbarat gerekir'};
@@ -5635,6 +5754,8 @@ function stealTech(e, target){
     e.res.ara = (e.res.ara || 0) + kazanc;
     if (typeof recordSabotage === 'function') recordSabotage('tech');
     const msg = TECHS[id].n + ' araştırma verileri çalındı — +' + kazanc + ' araştırma';
+    const result = finishSpecialOp(e, target, 'stealTech',
+      {ok:true, caught:false, basarili:true, msg, tech:id, kazanc}, 90);
     if (e.id === 0){
       say('📡 ' + msg, 'sci');
       if (typeof UI !== 'undefined' && UI.eventArt)
@@ -5644,8 +5765,8 @@ function stealTech(e, target){
           '<b style="color:#6ff2c8">+' + kazanc + ' araştırma</b>.', 'sci');
     }
     else if (target.id === 0)
-      say('VERİ SIZINTISI — ' + e.name + ' arşivlerimizden ' + TECHS[id].n + ' çaldı', 'war');
-    return {ok:true, caught:false, msg, tech:id, kazanc};
+      say('VERİ SIZINTISI — Arşivlerimizden ' + TECHS[id].n + ' araştırma verileri çalındı. Fail bilinmiyor.', 'war');
+    return result;
   }
 
   if (rnd() < ifsa){
@@ -5658,6 +5779,8 @@ function stealTech(e, target){
       x.rel[e.id] = clamp(x.rel[e.id] - 6, -100, 100);
     }
     const msg = 'Ajan infaz edildi — ' + target.name + ' hırsızlığı ifşa etti';
+    const result = finishSpecialOp(e, target, 'stealTech',
+      {ok:true, caught:true, msg}, 90);
     if (e.id === 0){
       say('☠ ' + msg, 'war');
       if (typeof UI !== 'undefined' && UI.eventArt)
@@ -5667,11 +5790,12 @@ function stealTech(e, target){
     }
     else if (target.id === 0)
       say('☠ TEKNOLOJİ HIRSIZI YAKALANDI — ' + e.name + ' arşivlerimize sızmaya çalıştı', 'win');
-    return {ok:true, caught:true, msg};
+    return result;
   }
 
   if (typeof recordSabotage === 'function') recordSabotage('sessiz');
-  return {ok:true, caught:false, msg:'Sızma sonuçsuz kaldı — veri bulunamadı'};
+  return finishSpecialOp(e, target, 'stealTech',
+    {ok:true, caught:false, msg:'Sızma sonuçsuz kaldı — veri bulunamadı'}, 90);
 }
 
 /* Aylık deneme — invasionTick sırasında kuşatma varsa çağrılır */
@@ -7246,8 +7370,8 @@ function incitablePlanet(e, target){
 }
 
 function canIncite(e, target){
-  if (!e || !target) return {ok:false, why:'Hedef yok'};
-  if (target.id === e.id) return {ok:false, why:'Kendini kışkırtamazsın'};
+  const gate = spyTargetCheck(e, target);
+  if (!gate.ok) return gate;
   if (target.dead || target.wild || target.crisisSide)
     return {ok:false, why:'Bu devletle casusluk yapılamaz'};
   const lvl = (typeof intelOf === 'function') ? intelOf(e, target.id) : 0;
@@ -7281,16 +7405,11 @@ function inciteRebellion(e, target){
     const tavan = (typeof SECESSION_LIMIT !== 'undefined') ? SECESSION_LIMIT + 4 : 34;
     col.secede = Math.min(tavan, (col.secede || 0) + INCITE_SEED);
     if (typeof recordSabotage === 'function') recordSabotage('kiskirt');
-    /* ═══ FAZ 43: FAİLİ MEÇHUL KAYIT ═══
-       Kurban bir şeylerin döndüğünü sezer ama faili bilmez.
-       Derin Soruşturma bu dosyayı açabilir.
-       (Faz 42'de bu kayıt kurgulanmıştı ama koda düşmemiş —
-        testte hitLog 0 çıkınca yakalandı.) */
-    target.hitLog = target.hitLog || [];
-    target.hitLog.push({t: G.memAge || 0, k: 'kiskirt', by: e.id,
-                        sys: sys.id, pi: pl.i,
-                        caught: false, known: false});
     const ad = col.name || pl.name;
+    const result = finishSpecialOp(e, target, 'incite',
+      {ok:true, caught:false, koloni:ad, basarili:true,
+        msg:ad + ' halkı ayaklandı — istikrar çöktü, ayrılıkçı sayaç ' + col.secede},
+      INCITE_COST, {sys:sys.id, pi:pl.i});
     if (e.id === 0)
       say('🔥 İSYAN KIŞKIRTILDI — ' + ad + ' halkı ayaklandı · istikrar −' +
           INCITE_STAB_HIT + ', ayrılıkçı sayaç ' + col.secede, 'sci');
@@ -7298,8 +7417,7 @@ function inciteRebellion(e, target){
       say('🔥 AYAKLANMA — ' + ad + ' halkı sokağa döküldü. Dış bir el var.', 'war');
     /* FAZ 42: alan adı `koloni` — arayüz ve testler bunu okuyor
        (kısa `ad` adı çağıran tarafta karışıklık yaratıyordu). */
-    return {ok:true, caught:false, koloni: ad, basarili: true,
-      msg: ad + ' halkı ayaklandı — istikrar çöktü, ayrılıkçı sayaç ' + col.secede};
+    return result;
   }
 
   if (rnd() < ifsa){
@@ -7314,13 +7432,18 @@ function inciteRebellion(e, target){
       x.rel[e.id] = clamp((x.rel[e.id] || 0) - 15, -100, 100);
     }
     if (typeof recordSabotage === 'function') recordSabotage('ifsa');
-    return {ok:true, caught:true,
+    const result = finishSpecialOp(e, target, 'incite', {ok:true, caught:true,
       msg: 'Ajan infaz edildi — ' + target.name +
-           ' iç işlerine müdahaleyi ifşa etti. Konseyde itibarın sarsıldı.'};
+           ' iç işlerine müdahaleyi ifşa etti. Konseyde itibarın sarsıldı.'},
+      INCITE_COST, {sys:sys.id, pi:pl.i});
+    if (target.id === 0)
+      say('KIŞKIRTMA GİRİŞİMİ YAKALANDI — ' + e.name + ' iç işlerimize müdahale etmeye çalıştı.', 'win');
+    return result;
   }
 
   if (typeof recordSabotage === 'function') recordSabotage('sessiz');
-  return {ok:true, caught:false, msg:'Halk kıpırdamadı — kışkırtma tutmadı'};
+  return finishSpecialOp(e, target, 'incite',
+    {ok:true, caught:false, msg:'Halk kıpırdamadı — kışkırtma tutmadı'}, INCITE_COST);
 }
 
 

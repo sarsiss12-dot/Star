@@ -235,6 +235,7 @@ html.pwa #tools{top:calc(var(--top) + 6px + env(safe-area-inset-top))}
    koordinatından hesaplanıyor (grpTog içinde). */
 .grpOut{
   position:fixed;left:0;top:0;
+  width:160px;max-width:calc(100vw - 56px);
   display:flex;flex-direction:column;gap:3px;
   padding:5px;border-radius:9px;
   background:rgba(11,16,28,.96);border:1px solid #35507a;
@@ -242,27 +243,26 @@ html.pwa #tools{top:calc(var(--top) + 6px + env(safe-area-inset-top))}
   opacity:0;visibility:hidden;
   transform:translateX(-8px) scale(.96);transform-origin:left center;
   transition:opacity .16s ease, transform .16s ease, visibility .16s;
-  /* ═══ FAZ 82: ZAMAN ÇUBUĞU ÇAKIŞMASI ═══
-     #timepod (z-index 20) ekranın SOL ALTINDA duruyor ve açılan
-     akordiyon onun üstüne binince tıklanamıyordu. İki düzeltme:
-     akordiyon z-index'i timepod'un çok üstüne çıkarıldı, ve
-     yüksekliği alt çubuğa çarpmayacak şekilde kısıtlandı —
-     70dvh yerine "ekran eksi alt çubuk payı". */
+  /* 86C.5.1: JS measures actual top/bottom controls on opening and resize.
+     Fixed-size touch targets scroll within the remaining visible height. */
   z-index:99999;
   max-height:calc(100dvh - var(--top) - 96px);
-  overflow-y:auto;
-  scrollbar-width:none;-ms-overflow-style:none}
-.grpOut::-webkit-scrollbar{display:none}
+  overflow-y:auto;overflow-x:hidden;
+  overscroll-behavior:contain;touch-action:pan-y;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:thin;scrollbar-color:#35507a transparent}
+.grpOut::-webkit-scrollbar{width:3px}
+.grpOut::-webkit-scrollbar-thumb{background:#35507a;border-radius:3px}
 .grpOut.open{opacity:1;visibility:visible;transform:translateX(0) scale(1)}
 /* Alt menüdeki butonlar etiketli ve geniş — mobilde rahat hedef */
-.grpOut .tool{width:auto;min-width:132px;height:34px;
+.grpOut .tool{width:auto;min-width:0;height:34px;flex:0 0 auto;
   display:flex;align-items:center;gap:8px;padding:0 11px;
   justify-content:flex-start;font-size:14px}
 .grpOut .tool span{font-family:var(--mono);font-size:10.5px;
   letter-spacing:.04em;color:#9fb6cc;white-space:nowrap}
 .grpOut .tool.on span{color:#6ff2c8}
 @media (max-width:430px){
-  .grpOut .tool{min-width:120px;height:32px}
+  .grpOut .tool{height:34px}
   .grpOut .tool span{font-size:10px}
 }
 
@@ -703,7 +703,7 @@ body.fauxFull canvas#map{width:100vw !important;height:100dvh !important}
    Yeni butonlar eklendikçe alt kısım ekranın altına taşıyordu.
    Panel artık her ekranda görünür alan yüksekliğine sığar,
    sığmazsa dikey kaydırılır ve scrollbar gizlenir. */
-#tools{position:absolute;left:6px;top:calc(var(--top) + 6px);z-index:20;
+#tools{position:absolute;left:6px;top:calc(var(--top) + 6px);z-index:27;
   display:flex;flex-direction:column;gap:4px;
   max-height:calc(100dvh - var(--top) - 14px);
   overflow-y:auto;overflow-x:hidden;
@@ -791,6 +791,7 @@ body.fauxFull canvas#map{width:100vw !important;height:100dvh !important}
 .abtn.dis{opacity:.34}
 /* FAZ 86C.4H-R2: ana mod / bağımsız katman ayrımı başlığı */
 .modeHdr{font-size:8px;letter-spacing:.6px;color:#5d6f88;
+  flex:0 0 auto;
   padding:4px 2px 2px;text-align:center;white-space:nowrap;
   overflow:hidden;text-overflow:ellipsis}
 /* ═══ FAZ 86A: İSTİHBARAT KOMUTA MERKEZİ (mobil) ═══
@@ -993,6 +994,40 @@ body.fauxFull canvas#map{width:100vw !important;height:100dvh !important}
   .toolSep{margin:2px 5px}
   .gpTab{padding:5px 9px;font-size:10px}}
 @media (max-height:340px){.tool{width:24px;height:24px;font-size:11px}#tools{gap:2px}}
+/* 86E: yalnız diplomasi merkezi; başlık ve gezinme sabit, içerik kayar. */
+#diploPane .dcBox{width:min(920px,100%);height:100%;max-height:100dvh;min-height:0;min-width:0}
+.dcBox .dpHd{gap:8px;padding:8px 12px;min-width:0}
+.dcBox .dpHd>span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;letter-spacing:.06em}
+.dcBox .riX{flex:0 0 44px;width:44px;height:44px}
+.dcNav{flex:0 0 auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-bottom:1px solid var(--line)}
+.dcNav button{min-height:44px;padding:8px 3px;font:11px var(--mono);color:var(--dim);border-bottom:2px solid transparent}
+.dcNav button.on{color:var(--phos);border-bottom-color:var(--phos);background:rgba(111,242,200,.06)}
+.dcNav button:disabled{opacity:.45}
+.dcBody{min-height:0;min-width:0;flex:1 1 auto;overflow:auto;padding:10px 12px max(16px,env(safe-area-inset-bottom));overflow-wrap:anywhere}
+.dcBody .act2,.dcFilters{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.dcBody .abtn{min-height:44px;white-space:normal;overflow-wrap:anywhere}
+.dcBody .dealItem button{min-width:44px;min-height:44px}
+.dcBody button:disabled{opacity:.45;cursor:default}
+.dcBody .dealCol{min-width:0}
+.dcOverview{display:flex;flex-wrap:wrap;gap:8px 18px;margin-bottom:10px;font:12px var(--mono);color:var(--phos)}
+.dcFilters{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:10px}
+.dcState{border:1px solid var(--line);background:var(--hull);min-width:0}
+.dcState.war{border-left:3px solid var(--bad)}
+.dcSelect{display:flex;justify-content:space-between;align-items:center;gap:12px;width:100%;min-height:52px;padding:10px;text-align:left;color:var(--bone)}
+.dcSelect b{min-width:0;overflow-wrap:anywhere;font-size:13px}
+.dcSelect>span{flex-shrink:0;font:11px var(--mono);color:var(--phos)}
+.dcState>.mini{padding:0 10px 8px}
+.dcIdentity{display:flex;gap:12px;align-items:center;margin-bottom:8px;min-width:0}
+.dcIdentity>div{min-width:0}
+.dcIdentity canvas{flex:0 0 60px;image-rendering:pixelated}
+.dcTreaties{display:flex;flex-wrap:wrap;gap:5px;margin:8px 0}
+.dcTreaties>span{padding:5px 7px;border:1px solid var(--line);font-size:11px;color:var(--phos)}
+.dcDetails{border:1px solid var(--line);margin:10px 0;padding:0 10px 8px}
+.dcDetails>summary{cursor:pointer;min-height:44px;padding:12px 0;color:var(--phos);font:12px var(--mono)}
+.dcDetails[open]>summary{border-bottom:1px solid var(--line);margin-bottom:8px}
+@media(max-width:420px){.dcNav button{font-size:10px}.dcSelect{align-items:flex-start;flex-direction:column;gap:5px}.dcBody{padding-left:8px;padding-right:8px}}
+@media(min-width:1200px){#diploPane .dcBox{max-height:92dvh}}
+
 </style>
 </head>
 <body>

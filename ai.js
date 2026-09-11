@@ -162,6 +162,27 @@ function crisisFleetTurn(e){
   }
 }
 
+/* 86D: görev seçimi deterministik; mevcut elçiyi her ay yeniden atayıp
+   kıdemini silmez. Yerleştirme olasılığı ve hedef sıralaması korunur. */
+function aiEnvoyTask(e,o){
+  if (sharedFoe(e,o)) return 'guvenlik';
+  if ((e.rel[o.id]||0)<20) return 'yakinlasma';
+  const ours=ownLuxury(e), theirs=ownLuxury(o);
+  if ((e.pact&&e.pact[o.id]) || LUX_KEYS.some(k=>theirs[k]&&!ours[k])) return 'ticaret';
+  return e.ally[o.id] ? 'guvenlik' : 'yakinlasma';
+}
+function aiEnvoyTurn(e,prof){
+  if (envoysUsed(e)>=envoyCap(e)) return;
+  const cands=G.emps.filter(o=>envoyGate(e,o.id).ok&&!envoyRecord(e,o.id));
+  if (!cands.length) return;
+  const ours=ownLuxury(e);
+  cands.sort((a,b)=>{
+    const la=LUX_KEYS.filter(k=>ownLuxury(a)[k]&&!ours[k]).length;
+    const lb=LUX_KEYS.filter(k=>ownLuxury(b)[k]&&!ours[k]).length;
+    return (lb*20+(e.rel[b.id]||0))-(la*20+(e.rel[a.id]||0));
+  });
+  if (rnd()<.4+prof.dip*.4) setEnvoyTask(e,cands[0].id,aiEnvoyTask(e,cands[0]));
+}
 function aiTurn(e){
   if (e.dead) return;
   if (e.crisisSide){ crisisFleetTurn(e); return; }
@@ -602,21 +623,8 @@ function aiTurn(e){
     return;
   }
 
-  /* --- 6-öncesi. elçi yerleştirme --- */
-  e.envoy = e.envoy || {};
-  if (envoysUsed(e) < envoyCap(e)){
-    const cands = G.emps.filter(o => !o.dead && !o.wild && o.id !== e.id &&
-      e.contact[o.id] && !e.war[o.id] && !e.envoy[o.id]);
-    if (cands.length){
-      // en çok fayda: ya zaten iyi ilişki (ittifak yolu) ya da lüks malı olan
-      cands.sort((a,b)=>{
-        const la = LUX_KEYS.filter(k => ownLuxury(a)[k] && !ownLuxury(e)[k]).length;
-        const lb = LUX_KEYS.filter(k => ownLuxury(b)[k] && !ownLuxury(e)[k]).length;
-        return (lb*20 + e.rel[b.id]) - (la*20 + e.rel[a.id]);
-      });
-      if (rnd() < .4 + prof.dip*.4) e.envoy[cands[0].id] = true;
-    }
-  }
+  /* --- 6-öncesi. elçi görevi — oyuncuyla aynı atama kapısı --- */
+  aiEnvoyTurn(e,prof);
 
   /* --- 6-0. oyuncuya müzakere teklifi --- */
   if (e.contact[0] && !G.emps[0].dead && rnd() < .05){
@@ -971,6 +979,32 @@ function aiProposeTerms(e, o, treaty){
   return {give, want};
 }
 
+/* 86F: Ek taviz bütçesi. Teknoloji satıcısında itemValue(tech)=0
+   (zaten biliyor) olduğundan paylaşım alıcıya kazandırdığı bilgi değeriyle
+   sayılır. Bu ekonomik kesinti değil, AI'ın paylaşma isteği sınırıdır.
+   Kaynak hediyesi simetrik antlaşma faydası sayılıp bütçeyi şişiremez.
+   Normalize/effective plan redundant maddelerin katkısını dışarıda tutar. */
+function aiCounterBudget(proposer,target,offer,extra){
+  const n=normalizeDeal(offer);
+  const symmetric=new Set(DEAL_SYMMETRIC);
+  const seen=new Set();
+  let benefit=0;
+  for(const it of n.effectiveGive.concat(n.effectiveWant)){
+    if(!symmetric.has(it.t)||seen.has(it.t))continue;
+    seen.add(it.t);benefit+=Math.max(0,itemValue(proposer,it,target));
+  }
+  /* Saf kaynak/teknoloji takası: ancak kendi başlangıç fazlası varsa
+     ek taviz düşünülebilir. Antlaşmaya yapay hediye eklemek katkı vermez. */
+  if(!seen.size){
+    const received=n.effectiveWant.reduce((sum,it)=>sum+itemValue(proposer,it,target),0);
+    const paid=n.effectiveGive.reduce((sum,it)=>sum+(it.t==='tech'?itemValue(target,it,proposer):itemValue(proposer,it,target)),0);
+    benefit=Math.max(0,received-paid);
+  }
+  const extraValue=extra.reduce((sum,it)=>sum+Math.max(0,it.t==='tech'
+    ? itemValue(target,it,proposer):itemValue(proposer,it,target)),0);
+  return {extraValue,benefit,cap:benefit*.60};
+}
+
 function aiNegotiate(proposer, target, give, want){
   const sonuc = {tur:0, karar:null, uygulandi:false, why:'', karsi:null};
   if (!proposer || !target) return sonuc;
@@ -1023,12 +1057,8 @@ function aiNegotiate(proposer, target, give, want){
        vermişti; karar YALNIZ EK karşılık hakkındadır. Ek, antlaşmanın
        teklif edene değerinin belirli bir oranını aşmadıkça kabul
        edilir. */
-    const ekDeger = (r1.add || []).reduce(
-      (s, it) => s + itemValue(proposer, it, target), 0);
-    const antlasmaDegeri = teklif.give.reduce(
-      (s, it) => s + itemValue(proposer, it, target), 0);
-    /* Kendi antlaşma kazancının en fazla %60'ı kadar ek taviz. */
-    const tavan = Math.max(0, antlasmaDegeri) * 0.60;
+    const budget=aiCounterBudget(proposer,target,teklif,r1.add);
+    const ekDeger=budget.extraValue, tavan=budget.cap;
     const ozelKilit = (typeof diploBlocked === 'function') &&
                       diploBlocked(proposer, target);
     if (ozelKilit || ekDeger > tavan){
@@ -1099,7 +1129,10 @@ function aiRespond(ai, offer){
     const needAmt = Math.ceil(gap / unit);
     const canGive = Math.floor(have * .80);
     const take = Math.min(needAmt, canGive);
-    if (take < 20) continue;
+    /* 86F: küçük açıkta da asgari 20 birim teklif edilebilir.
+       Eski take<20 kapısı, yeterli stok varken kaynağı atlayıp
+       çok daha değerli teknoloji istiyordu. Stok tavanını denetle. */
+    if (canGive < 20) continue;
     // YUKARI yuvarla — aşağı yuvarlamak minik bir açık bırakıp
     // sonraki kalemlerin "çok küçük" diye atlanmasına yol açıyordu
     const rounded = Math.min(canGive, Math.max(20, Math.ceil(take / 10) * 10));
@@ -1109,14 +1142,17 @@ function aiRespond(ai, offer){
 
   // hâlâ açık varsa teknolojiyle kapatmayı dene
   if (gap > 0){
-    const av = Object.keys(from.techs || {}).filter(t => !ai.techs[t] && TECHS[t]);
-    av.sort((a,b)=>TECHS[b].c - TECHS[a].c);
-    for (const id of av){
-      if (gap <= 0) break;
-      const v = itemValue(ai, {t:'tech', id}, from) * trustT;
-      if (v <= 0) continue;
-      extra.push({t:'tech', id});
-      gap -= v;
+    const av = Object.keys(from.techs || {}).filter(t => !ai.techs[t] && TECHS[t])
+      .map(id=>({id,value:itemValue(ai,{t:'tech',id},from)*trustT}))
+      .filter(x=>x.value>0)
+      .sort((a,b)=>a.value-b.value || (a.id<b.id?-1:a.id>b.id?1:0));
+    /* 86F: Açığı kapatan EN KÜÇÜK teknolojiyi seç. Tek teknoloji
+       yetmiyorsa en büyük katkıyla ilerle; eşitlik ID ile deterministik.
+       Kaynak karşılıkları hâlâ önce denenir, ikinci pazarlık turu yoktur. */
+    while(gap>0&&av.length){
+      const enough=av.findIndex(x=>x.value>=gap);
+      const pick=av.splice(enough>=0?enough:av.length-1,1)[0];
+      extra.push({t:'tech',id:pick.id});gap-=pick.value;
     }
   }
 
@@ -2054,9 +2090,19 @@ function aiDisbandTick(){
    Artık mizacına ve stratejik ihtiyacına göre operasyon seçiyor.
    ═══════════════════════════════════════════════════════════════════ */
 
+/* 87B: Standart operasyonların uygunluğu yürütmeyle aynı saf kapıdan.
+   Mevcut %40 rezerv politikası GERÇEK (doktrin/etik dahil) maliyet üzerindedir.
+   Puan, kota, risk ve fırsat zarını değiştirmez; RNG tüketmez. */
+function aiStandardOpReady(e, o, key){
+  const q = opQuote(e, o, key);
+  return q.ok && Object.keys(q.cost).every(r =>
+    (e.res[r] || 0) >= q.cost[r] * 1.4);
+}
+
 /* Hangi operasyon şu an mantıklı? Puanlar ihtiyaca göre verilir. */
 function aiPickOp(e, o){
   if (typeof OPS === 'undefined' || typeof intelOf !== 'function') return null;
+  if (!spyTargetCheck(e, o).ok) return null;
   const lvl = intelOf(e, o.id);
   const prof = aiProfile(e);
   const P = (typeof personaOf === 'function') ? personaOf(e) : null;
@@ -2275,15 +2321,14 @@ function aiPickOp(e, o){
       continue;
     }
     if (k === 'incite'){
+      /* Etik puanı, üstte uygun koloni bulunmasa da incite ekleyebilir. */
+      if (!canIncite(e, o).ok) continue;
       const bedel = (typeof INCITE_COST !== 'undefined') ? INCITE_COST : 120;
       if ((e.res.etk || 0) >= bedel * 1.4 && (!best || puan[k] > best.p))
         best = {k, p: puan[k]};
       continue;
     }
-    const OP = OPS[k];
-    let karsilar = true;
-    for (const r in OP.cost) if ((e.res[r] || 0) < OP.cost[r] * 1.4) karsilar = false;
-    if (!karsilar) continue;
+    if (!aiStandardOpReady(e, o, k)) continue;
     if (!best || puan[k] > best.p) best = {k, p: puan[k]};
   }
   return (best && best.p > .75) ? best.k : null;
@@ -2345,17 +2390,8 @@ function aiOpsTick(){
         : (key === 'incite' && typeof inciteRebellion === 'function')
         ? inciteRebellion(e, o) : runOp(e, o, key);
       if (r && r.ok){
-        /* ═══ FAZ 86A: ÇİFT KAYIT ÖNLEMİ ═══
-           opLog artık runOp içinde MERKEZÎ olarak yazılıyor. Buradaki
-           ek yazım yalnız runOp'tan GEÇMEYEN özel yollar (stealTech /
-           incite) için korunur; runOp yolunda tekrar yazılsaydı her AI
-           operasyonu iki kayıt üretirdi. */
-        const runOpYolu = (key !== 'stealTech' && key !== 'incite');
-        if (!runOpYolu){
-          e.opLog = e.opLog || [];
-          e.opLog.push({t: G.memAge || 0, k: key, o: o.id, caught: !!r.caught});
-          if (e.opLog.length > 20) e.opLog.shift();
-        }
+        /* 87C: standart ve özel motorlar kendi kayıtlarını bir kez yazar.
+           Kota, başarıdan bağımsız olarak çözülmüş denemeyi sayar. */
         yapilan++;
       }
       /* FAZ 11: Gölge Konseyi doktrini ayda İKİ operasyon çevirebilir.
