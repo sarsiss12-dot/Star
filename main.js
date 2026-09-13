@@ -2952,6 +2952,7 @@ function isSupplyNode(e, sys){
   if (sys.owner >= 0){
     const o = G.emps[sys.owner];
     if (o && !o.dead){
+      if (e.war && e.war[o.id]) return false;             // eski izin düşman limanını açmaz
       if (e.ally[o.id]) return true;                       // müttefik limanı
       if (o.passage && o.passage[e.id]) return true;       // geçiş izni ikmal sağlar
       if (typeof unityActive === 'function' && unityActive() &&
@@ -2975,14 +2976,15 @@ function isSupplyNode(e, sys){
    Güvenlik kilidi gateNetwork ile ortak — düşman geçidi işe yaramaz.
    ═══════════════════════════════════════════════════════════════════ */
 function hasUsableGate(e, sys){
-  if (!sys || !sys.built || sys.built.kapi === undefined) return false;
+  if (!e || (G.cfg && G.cfg.gates === false) ||
+      !sys || !sys.built || sys.built.kapi === undefined) return false;
   if (sys.owner < 0) return false;
   if (sys.owner === e.id) return true;
   const o = G.emps[sys.owner];
   if (!o || o.dead || o.wild || o.crisisSide) return false;
   if (e.war[o.id]) return false;                       // düşman geçidi kapalı
   if (e.ally && e.ally[o.id]) return true;
-  if (e.passage && e.passage[o.id]) return true;
+  if (o.passage && o.passage[e.id]) return true;
   if (typeof isVassal === 'function'){
     if (isVassal(o) && o.overlord === e.id) return true;
     if (isVassal(e) && e.overlord === o.id) return true;
@@ -2990,13 +2992,11 @@ function hasUsableGate(e, sys){
   return false;
 }
 
-/* Bu devletin erişebildiği geçit sistemleri — günlük önbellekli */
+/* 88A: izin/sahiplik aynı gün değişebilir; erişim günlük önbelleğe alınmaz. */
 function gateSupplyNodes(e){
   if (!e) return [];
-  if (e._gateAt === G.day && e._gateList) return e._gateList;
   const liste = [];
   for (const sy of G.sys) if (hasUsableGate(e, sy)) liste.push(sy.id);
-  e._gateAt = G.day; e._gateList = liste;
   return liste;
 }
 
@@ -3141,32 +3141,9 @@ function fleetUsage(e){
    açık bir devletin kapısıysa kullanılabilir.
    ═══════════════════════════════════════════════════════════════════ */
 function gateNetwork(traveler){
-  /* FAZ 53: yıldız kapıları kapalıysa ağ hiç kurulmaz */
-  if (G.cfg && G.cfg.gates === false) return {list:[], ok:()=>false};
-  if (!G._structIdx) return {list:[], ok:()=>false};
-  const izin = {};
-  for (const oid in G._structIdx){
-    const b = G._structIdx[oid];
-    if (!b.gate || !b.gate.length) continue;
-    const id = +oid;
-    let acik = false;
-    if (!traveler) acik = false;
-    else if (id === traveler.id) acik = true;
-    else {
-      const o = G.emps[id];
-      if (o && !o.dead && !o.wild && !o.crisisSide){
-        if (traveler.war[id]) acik = false;
-        else if (traveler.ally && traveler.ally[id]) acik = true;
-        else if (traveler.passage && traveler.passage[id]) acik = true;
-        else if (typeof isVassal === 'function' &&
-                 ((isVassal(o) && o.overlord === traveler.id) ||
-                  (isVassal(traveler) && traveler.overlord === id))) acik = true;
-      }
-    }
-    if (acik) for (const sid of b.gate) izin[sid] = 1;
-  }
-  const list = Object.keys(izin).map(Number);
-  return {list, ok:(sid)=>!!izin[sid]};
+  // 88A: yol ve ikmal aynı güncel izin kaynağını kullanır.
+  const list = gateSupplyNodes(traveler), ids = new Set(list);
+  return {list, ok:(sid)=>ids.has(sid)};
 }
 
 /* ═══ FAZ 47: OTOMATİK ÇÖZÜM YARDIMCILARI ═══ */
@@ -3215,7 +3192,8 @@ function safestChoice(ev){
   return en;
 }
 
-function findPath(from, to, traveler){
+function findPath(from, to, traveler, enter){
+  if (!Number.isInteger(from) || !Number.isInteger(to) || !G.sys[from] || !G.sys[to]) return null;
   if (from === to) return [];
   const gw = traveler ? gateNetwork(traveler) : null;
   const gateList = gw ? gw.list : null;
@@ -3231,6 +3209,7 @@ function findPath(from, to, traveler){
     if (u === to) break;
     vis[u] = true;
     for (const v of G.sys[u].lanes){
+      if (!G.sys[v] || (enter && !enter(v,u))) continue;
       /* FAZ 37: radyasyonlu sistem 4 kat pahalı sayılır — yön bulma
          mümkünse kaçınır, ama tek yol oysa yine de geçer (tıkanma
          olmaz). Hedefin kendisiyse ceza uygulanmaz. */
@@ -3244,7 +3223,7 @@ function findPath(from, to, traveler){
        kapıları kullanılabilir — düşman kapısı kapalıdır. */
     if (gateList && gateList.length && gateOk(u)){
       for (const v2 of gateList){
-        if (v2 === u || !gateOk(v2)) continue;
+        if (v2 === u || !gateOk(v2) || (enter && !enter(v2,u))) continue;
         const nd2 = dd[u] + 0.1;
         if (nd2 < dd[v2]){ dd[v2] = nd2; prev[v2] = u; }
       }
@@ -3278,26 +3257,32 @@ function fleetNeedsPass(f){
      sınırlar kesişince kimse genişleyemiyordu. */
   return f.ships.some(s => SHIPS[s.c].dmg > 0);
 }
-function pathAllowed(e, f, path){
+function pathAllowed(e, f, path, from){
   if (!fleetNeedsPass(f)) return true;
   /* GERİ ÇEKİLME KORİDORU: ikmali kesilmiş, dağılmakta olan bir filo
      kendi bölgesine dönerken sınırlardan geçebilir. Kimse savaşacak
      hâli kalmamış bir orduyu durdurmaz — ve durdurmak, filoyu yabancı
      toprakta yok olmaya mahkûm ederdi. */
   if (f && f.retreating) return true;
-  for (const id of path) if (!canEnter(e, G.sys[id])) return false;
+  let here=from;
+  for (const id of path){
+    // Kapı hakkı yalnız kapı kenarını açar, vasalın tüm sınırlarını değil.
+    if (!canEnter(e,G.sys[id]) &&
+        !(hasUsableGate(e,G.sys[here]) && hasUsableGate(e,G.sys[id]))) return false;
+    here=id;
+  }
   return true;
 }
 function orderMove(f, target, append){
+  if (!f || !Array.isArray(f.path) || !f.ships || !f.ships.length || !empOf(f)) return false;
   const start = f.path.length ? f.path[f.path.length-1] : (f.mv ? f.mv.to : f.sys);
-  if (!append) f.path = [];
   const from = append ? start : (f.mv ? f.mv.to : f.sys);
   /* FAZ 47: kapı ağı yolcuya göre değişir — kendi/müttefik/açık
      sınır kapıları kısayol, düşman kapıları kapalı. */
   let p = findPath(from, target, empOf(f));
   if (!p) return false;
   const e = empOf(f);
-  if (e && !pathAllowed(e, f, p)){
+  if (e && !pathAllowed(e, f, p, from)){
     // kısa yol kapalı — yalnızca girebildiğimiz sistemlerden geçen rota ara
     const alt = findPathAllowed(e, f, from, target);
     if (alt){
@@ -3308,34 +3293,39 @@ function orderMove(f, target, append){
       return false;
     }
   }
-  f.path = append ? f.path.concat(p) : p;
+  // 88A: başarısız emir eskisini silmez. Aktif bacak varışta tüketilecek
+  // ilk düğüm olarak kalır; hareket ortasında yeni rota bir durak atlamaz.
+  const base = append ? f.path.slice() : [];
+  if (f.mv && base[0] !== f.mv.to) base.unshift(f.mv.to);
+  f.path = base.concat(p);
   return true;
 }
 /* yalnız girilebilir sistemlerden geçen en kısa yol (Dijkstra) */
 function findPathAllowed(e, f, from, to){
-  if (from === to) return [];
-  const N = G.sys.length;
-  const dd = new Array(N).fill(Infinity);
-  const prev = new Array(N).fill(-1);
-  const vis = new Array(N).fill(false);
-  dd[from] = 0;
-  for (let k = 0; k < N; k++){
-    let u = -1, best = Infinity;
-    for (let i = 0; i < N; i++) if (!vis[i] && dd[i] < best){ best = dd[i]; u = i; }
-    if (u < 0) break;
-    if (u === to) break;
-    vis[u] = true;
-    for (const v of G.sys[u].lanes){
-      // hedefe girmek serbest (saldırı/varış), ara duraklar izinli olmalı
-      if (v !== to && !canEnter(e, G.sys[v])) continue;
-      const nd = dd[u] + dist(G.sys[u], G.sys[v]);
-      if (nd < dd[v]){ dd[v] = nd; prev[v] = u; }
-    }
+  // Hedef de sınır kapısından geçer. Gate/radyasyon maliyeti ortak kalır.
+  return findPath(from, to, e, (id,u)=>pathAllowed(e, f, [id], u));
+}
+
+/* 88A: ikmal varışı yeni rota kurmadan ÖNCE eski bacak tüketilmiş olmalı.
+   Çatışan ana filoda bekle; hareketliyse varış düğümünü takip et. */
+function followRallyFleet(f){
+  if (f.joinFleet === undefined || f.mv || f.path.length || !f.ships.length) return;
+  const ana = G.fleets.find(x=>x.id===f.joinFleet && x!==f && x.e===f.e && x.ships.length);
+  const clear = () => { delete f.joinFleet; delete f.rallyTo; };
+  if (!ana){ clear(); return; }
+  if (!ana.mv && ana.sys===f.sys){
+    if (ana.combat) return;
+    ana.ships.push(...f.ships); f.ships.length=0; clear();
+    if (!empOf(f).ai) say('⚓ İkmal ' + (ana.name || 'filoya') + ' katıldı');
+    return;
   }
-  if (dd[to] === Infinity) return null;
-  const path = []; let c = to;
-  while (c !== from && c >= 0){ path.unshift(c); c = prev[c]; }
-  return path;
+  const target = ana.mv ? ana.mv.to : ana.sys;
+  if (target === f.sys) return; // ana filo bu sisteme doğru yolda
+  if (target >= 0 && orderMove(f,target)) f.rallyTo=target;
+  else {
+    clear();
+    if (!empOf(f).ai) say('⚓ ' + (f.name || 'İkmal filosu') + ' ana filoya ulaşamıyor — mevcut sistemde bekliyor', 'war');
+  }
 }
 
 /* ---------- görüş ---------- */
@@ -3498,8 +3488,22 @@ function stepFleets(dt){
       continue;
     }
 
+    if (!f.mv && !f.path.length && f.sys >= 0) followRallyFleet(f);
+    if (!f.ships.length) continue;
     if (!f.mv && f.path.length){
-      const nxt = f.path[0];
+      const nxt = f.path[0], eMove = empOf(f), here = G.sys[f.sys];
+      // Her yeni bacakta güncel sınır ve gerçek bağlantı doğrulanır.
+      const lane = here && here.lanes.includes(nxt);
+      const gate = hasUsableGate(eMove,here) && hasUsableGate(eMove,G.sys[nxt]);
+      if (!here || !G.sys[nxt] || !pathAllowed(eMove,f,[nxt],f.sys) || (!lane && !gate)){
+        const p = here ? findPathAllowed(eMove,f,f.sys,nxt) : null;
+        if (p && p.length) f.path = p.concat(f.path.slice(1));
+        else {
+          f.path = []; delete f.rallyTo; delete f.joinFleet;
+          if (f.e===0) say('Rota artık geçerli değil — filo mevcut sistemde bekliyor', 'war');
+        }
+        continue;
+      }
       /* ═══════════════════════════════════════════════════════════
          FAZ 75 — İKMAL SINIRINDA DUR
          Bilim ve inşaat gemileri keşfe çıkarken hattın dışına
@@ -3545,45 +3549,22 @@ function stepFleets(dt){
         }
         if (f.stalled){ delete f.stalled; delete f._stallSaid; }
       }
-      if (G.sys[f.sys].lanes.includes(nxt)) f.mv = {from:f.sys, to:nxt, t:0};
-      else { const p = findPath(f.sys, nxt, empOf(f)); if (p) f.path = p.concat(f.path.slice(1)); else f.path = []; }
+      f.mv = {from:f.sys, to:nxt, t:0};
+      if (gate) f.mv.gate = true;
     }
     if (f.mv){
       const a = G.sys[f.mv.from], b = G.sys[f.mv.to];
-      const len = dist(a,b);
+      // Kapı kenarının yol bulmadaki 0.1 maliyeti hareket için de geçerli.
+      const len = f.mv.gate ? .1 : Math.max(.1,dist(a,b));
       f.mv.t += fleetSpeed(f)*dt/len;
       if (f.mv.t >= 1){
         f.sys = f.mv.to;
-        /* FAZ 48: ikmal filosu hedefe vardı — ana filoya katıl */
-        if (f.joinFleet !== undefined){
-          const ana = G.fleets.find(x => x.id === f.joinFleet &&
-            x.ships.length && x.sys === f.sys && !x.combat);
-          if (ana && ana !== f){
-            ana.ships.push(...f.ships);
-            f.ships.length = 0;
-            if (empOf(f) && !empOf(f).ai)
-              say('⚓ İkmal ' + (ana.name || 'filoya') + ' katıldı');
-            delete f.joinFleet; delete f.rallyTo;
-          } else {
-            /* ═══ FAZ 60: HAREKETLİ FİLOYU TAKİP ═══
-               Hedef filo biz yoldayken başka sisteme gitmişse
-               ikmal orada kalıp öksüz kalıyordu. Artık peşinden
-               gidiyor: hedef nerede duruyorsa oraya yeni rota. */
-            const izle = G.fleets.find(x => x.id === f.joinFleet && x.ships.length);
-            if (izle && izle !== f){
-              const varis = izle.sys >= 0 ? izle.sys : (izle.mv ? izle.mv.to : -1);
-              if (varis >= 0 && varis !== f.sys && typeof orderMove === 'function'){
-                orderMove(f, varis);
-                f.rallyTo = varis;
-                /* joinFleet korunur — varınca yine birleşmeyi dener */
-              } else {
-                delete f.joinFleet; delete f.rallyTo;
-              }
-            } else {
-              delete f.joinFleet; delete f.rallyTo;   // hedef yok olmuş
-            }
-          }
-        } f.mv = null; f.path.shift();
+        f.x = b.x; f.y = b.y;
+        f.mv = null;
+        if (f.path[0] === f.sys) f.path.shift();
+        followRallyFleet(f);
+        if (!f.path.length && f.joinFleet===undefined && f.rallyTo===f.sys) delete f.rallyTo;
+        if (!f.ships.length) continue;
         arrive(f, G.sys[f.sys]);
       } else {
         f.x = lerp(a.x,b.x,f.mv.t); f.y = lerp(a.y,b.y,f.mv.t);
@@ -3597,6 +3578,16 @@ function stepFleets(dt){
 
 /* Otomatik keşif: boşta kalan bilim gemisi en yakın taranmamış
    güvenli sisteme kendiliğinden gider. */
+function explorationRoute(e,f,sys){
+  const from=f.mv ? f.mv.to : f.sys;
+  const p=findPathAllowed(e,f,from,sys.id);
+  if (!p) return null;
+  const scienceOnly=!isArmed(f) && fleetHasRole(f,'bilim') &&
+    !f.ships.some(s=>s.c==='kol'||s.c==='ins');
+  if (scienceOnly && !e.wild && !e.crisisSide && f.joinFleet===undefined &&
+      p.some(id=>fleetSupply(e,{sys:id,ships:f.ships,e:f.e})<=SUPPLY_FLOOR+.015)) return null;
+  return p;
+}
 function autoExploreTick(){
   for (const f of G.fleets){
     if (f.e !== 0 || !f.auto) continue;
@@ -3618,11 +3609,12 @@ function autoExploreTick(){
         if (fleetSupply(e, {sys: sy.id, ships: f.ships, e: 0}) <= tb + .015) continue;
       }
       const d = dist(G.sys[f.sys], sy);
-      if (!best || d < best.d) best = {sy, d};
+      if ((!best || d < best.d) && explorationRoute(e,f,sy)) best = {sy, d};
     }
     if (best){
       orderMove(f, best.sy.id);
       f.ord = null;
+      if (best.sy.id===f.sys && !f.mv) arrive(f,best.sy);
     } else {
       f.auto = false;
       say(esc(f.name) + ' taranacak yer bulamadı — otomatik keşif kapandı');
@@ -3684,6 +3676,27 @@ function arrive(f, sys){
     f.surv = Math.round(SCAN_BASE * (hasCivic(e,'scan') ? (1 - SCAN_HUNTER) : 1));
 }
 
+/* 88A.1: üretim sonucu yalnız gerçekten başlayan sevki ilan eder. */
+function dispatchBuiltFleet(e,f,delivery){
+  let target;
+  if (delivery.fleet!==undefined){
+    const ana=G.fleets.find(x=>x.id===delivery.fleet && x!==f && x.e===e.id && x.ships.length);
+    target=fleetDeliveryTarget(e,ana);
+    if (target===null) return 'hedef filo yok — tersanede bekliyor';
+    if (target===f.sys){
+      f.joinFleet=ana.id;
+      followRallyFleet(f);
+      return f.ships.length ? 'ana filo bekleniyor' : 'ana filoya katıldı';
+    }
+  } else target=delivery.sys;
+  if (!Number.isInteger(target) || !G.sys[target]) return 'geçersiz hedef — tersanede bekliyor';
+  if (target===f.sys) return 'toplanma noktasında';
+  if (!orderMove(f,target)) return 'rota kapalı — tersanede bekliyor';
+  f.rallyTo=target;
+  if (delivery.fleet!==undefined) f.joinFleet=delivery.fleet;
+  return 'toplanma noktasına sevk';
+}
+
 function dailyTick(dt){
   stepFleets(dt);
   // tersane kuyrukları
@@ -3704,40 +3717,21 @@ function dailyTick(dt){
         const grp = c => SHIPS[c].rol === 'sav' ? 'sav' : SHIPS[c].rol;
         let host = G.fleets.find(f => f.e===e.id && f.sys===sys.id && !f.combat && f.ships.length &&
           grp(f.ships[0].c) === grp(q.cls) && f.ships.length < 24);
-        /* ═══ FAZ 48: İKMAL VE TOPLANMA NOKTASI ═══
-           Sistemde bu devlete ait bir rally kaydı varsa gemi
-           doğrudan hedefe yollanır; ikmal siparişiyse belirtilen
-           filoya katılmak üzere yola çıkar. */
-        const ral = sys.rally && sys.rally[e.id];
-        /* ═══ FAZ 62: SİVİL GEMİLER RALLİYE GİTMEZ ═══
-           Koloni ve inşaat gemisi cepheye yollanmaz; oldukları
-           yerde bekler, oyuncu onları kendi görevine yönlendirir. */
-        const askeri = SHIPS[q.cls] && (SHIPS[q.cls].dmg > 0 ||
-                       SHIPS[q.cls].rol === 'ordu');
+        // 88A.1: özel sipariş hedefi genel tersane tercihinden bağımsızdır.
+        const ral = Object.prototype.hasOwnProperty.call(q,'delivery')
+          ? q.delivery : (sys.rally && sys.rally[e.id]);
+        const askeri = SHIPS[q.cls] && (SHIPS[q.cls].dmg > 0 || SHIPS[q.cls].rol === 'ordu');
+        let sonuc = '';
         if (ral && askeri){
-          /* İkmal hedefi filo ise ve o filo hâlâ buradaysa doğrudan kat */
-          const hedefFilo = ral.fleet !== undefined
-            ? G.fleets.find(f2 => f2.id === ral.fleet && f2.ships.length) : null;
-          if (hedefFilo && hedefFilo.sys === sys.id){
-            hedefFilo.ships.push({c:q.cls, h:1});
-          } else {
-            const nf3 = newFleet(e, sys.id, [{c:q.cls}]);
-            const varis = (hedefFilo && hedefFilo.sys >= 0) ? hedefFilo.sys : ral.sys;
-            if (varis !== undefined && varis !== sys.id &&
-                typeof orderMove === 'function'){
-              orderMove(nf3, varis);
-              nf3.rallyTo = varis;
-              nf3.joinFleet = ral.fleet;
-            }
-          }
-          if (!e.ai) say(SHIPS[q.cls].n + ' hazır — ' + sys.name + ' · toplanma noktasına sevk');
-        }
-        else if (host) host.ships.push({c:q.cls, h:1});
+          const nf = newFleet(e,sys.id,[{c:q.cls}]);
+          sonuc = dispatchBuiltFleet(e,nf,ral);
+        } else if (host && !host.mv) host.ships.push({c:q.cls,h:1});
         else {
-          const nf2 = newFleet(e, sys.id, [{c:q.cls}]);
-          if (!e.ai && SHIPS[q.cls].rol === 'bilim') nf2.auto = true;
+          const nf = newFleet(e,sys.id,[{c:q.cls}]);
+          if (!e.ai && SHIPS[q.cls].rol === 'bilim') nf.auto=true;
         }
-        if (!e.ai && !ral) say(SHIPS[q.cls].n + ' hazır — ' + sys.name);
+        if (!e.ai) say(SHIPS[q.cls].n + ' hazır — ' + sys.name +
+          (sonuc ? ' · '+sonuc : ''));
       }
     }
   }
@@ -3849,7 +3843,14 @@ function combatTick(dt){
         break;
       }
     }
-    if (A === null) { list.forEach(f=>f.combat=0); sys.cr = 0; continue; }
+    if (A === null) {
+      list.forEach(f=>f.combat=0); sys.cr = 0;
+      if (sys.battleReport && !sys.battleReport.done){
+        sys.battleReport.done=true; sys.battleReport.winner=null;
+        sys.battleReport.ended=G.day;
+      }
+      continue;
+    }
 
     const fa = list.filter(f=>f.e===A), fb = list.filter(f=>f.e===B);
     fa.concat(fb).forEach(f=>{ f.combat = 2; f.mv = null; });
@@ -3865,7 +3866,7 @@ function combatTick(dt){
 /* band: o turdaki muharebe mesafesi (3 uzak → 1 yakın).
    Sadece menzili banda yeten gemiler ateş eder; gövde/kalkan hep sayılır. */
 function sideStats(e, fleets, enemy, band){
-  let dmg=0, hull=0, sh=0, n=0, ready=0;
+  let dmg=0, hull=0, sh=0, n=0, ready=0, supTotal=0, supShips=0;
   for (const f of fleets){
     const st = STANCE[f.stance] || STANCE.agresif;
     /* ═══ FAZ 54: TEDARİK HATTI MUHAREBEYE BAĞLANDI ═══
@@ -3878,6 +3879,8 @@ function sideStats(e, fleets, enemy, band){
       ? fleetSupply(e, f) : 1;
     f.supply = sup;
     const supSh = sup < 1 ? Math.max(.30, sup * .85) : 1;
+    supTotal += sup * f.ships.length;
+    supShips += f.ships.length;
     for (const s of f.ships){
       const d = SHIPS[s.c];
       const rg = d.rng || 0;
@@ -3890,7 +3893,8 @@ function sideStats(e, fleets, enemy, band){
       n++;
     }
   }
-  return {dmg:Math.max(0,dmg), hull, sh:Math.max(0,sh), n, ready};
+  return {dmg:Math.max(0,dmg), hull, sh:Math.max(0,sh), n, ready,
+          supply:supShips ? supTotal/supShips : 1};
 }
 /* filonun aldığı hasar duruşuna göre ölçeklenir */
 function sideTakeMul(fleets){
@@ -3903,10 +3907,10 @@ function sideTakeMul(fleets){
   return c ? t/c : 1;
 }
 
-function applyDamage(e, fleets, amount){
+function applyDamage(victim, fleets, amount, attacker){
   const targets = [];
   for (const f of fleets) for (let i=0;i<f.ships.length;i++) targets.push({f, i});
-  if (!targets.length) return 0;
+  if (!targets.length) return {killed:0,damage:0};
   let killed = 0;
   // öncelik: silahlı gemiler
   targets.sort((a,b)=> (SHIPS[b.f.ships[b.i].c].dmg||0) - (SHIPS[a.f.ships[a.i].c].dmg||0));
@@ -3915,7 +3919,7 @@ function applyDamage(e, fleets, amount){
     const t = targets[Math.floor(rnd()*Math.min(4,targets.length))];
     const s = t.f.ships[t.i];
     if (!s){ targets.splice(targets.indexOf(t),1); continue; }
-    const mh = maxHull(s.c, e);
+    const mh = maxHull(s.c, victim);
     const take = Math.min(left, mh*s.h);
     s.h -= take/mh; left -= take;
     if (s.h <= .001){ s.dead = true; killed++; targets.splice(targets.indexOf(t),1); }
@@ -3933,9 +3937,9 @@ function applyDamage(e, fleets, amount){
     }
     f.ships = f.ships.filter(s => !s.dead);
   }
-  /* `e` bu fonksiyonda hasarı VEREN taraf — enkazı o toplar. */
+  /* Enkazı hasarı veren taraf toplar; kendi kaybından ödül çıkmaz. */
   if (enkaz > 0){
-    const kazanan = e;
+    const kazanan = attacker;
     if (kazanan && !kazanan.dead && hasCivic(kazanan, 'salvage')){
       kazanan.res.ala = (kazanan.res.ala || 0) + enkaz;
       kazanan._salvage = (kazanan._salvage || 0) + enkaz;
@@ -3945,7 +3949,21 @@ function applyDamage(e, fleets, amount){
       }
     }
   }
-  return killed;
+  return {killed,damage:Math.max(0,amount-left)};
+}
+
+/* Oyuncuya ait savaş görünümü. AI-AI raporunu ayrıntılandırmaz. */
+function battleReportForPlayer(sys){
+  const r=sys && sys.battleReport;
+  if (!r || (r.a!==0 && r.b!==0)) return null;
+  const me=r.a===0 ? 0 : 1, foe=1-me, ids=[r.a,r.b], last=r.last;
+  const side=i=>({id:ids[i],loss:r.loss[i]||0,retreat:r.retreat[i]||0,
+    ships:last ? last.ships[i] : null,
+    ready:last ? last.ready[i] : null,
+    dealt:last ? last.dealt[i] : null,
+    supply:last ? last.supply[i] : null});
+  return {active:!r.done,winner:r.winner,rounds:r.rounds,band:r.band,
+          mine:side(me),enemy:side(foe),started:r.at,ended:r.ended};
 }
 
 /* Yörüngede hâlâ ayakta olan SAVUNMA YAPISI gücü.
@@ -4418,55 +4436,66 @@ function yardVisible(sys){
 const FLEET_SOFT_CAP = 30;        // "tam filo" referansı
 
 /* Filonun eksiği: en kalabalık gemi sınıfına göre tamamlanır */
-function reinforceFleet(e, f){
-  if (!e || !f || !f.ships) return {ok:false, why:'Filo yok'};
-  const hedefN = Math.min(FLEET_SOFT_CAP, f.capTarget || FLEET_SOFT_CAP);
-  const eksik = hedefN - f.ships.length;
-  if (eksik <= 0) return {ok:false, why:'Filo zaten dolu'};
-
-  /* Hangi sınıftan? Filodaki baskın savaş gemisi sınıfı */
-  const say = {};
-  for (const sh of f.ships) say[sh.c] = (say[sh.c] || 0) + 1;
-  let cls = null, en = 0;
-  for (const k in say){
-    if (SHIPS[k] && SHIPS[k].rol === 'sav' && !SHIPS[k].crisisOnly &&
-        say[k] > en){ en = say[k]; cls = k; }
+function pendingFleetShips(e,f){
+  let n=0;
+  for (const s of G.sys) for (const q of (s.queue || [])){
+    const d=Object.prototype.hasOwnProperty.call(q,'delivery') ? q.delivery : s.rally && s.rally[e.id];
+    if (q.e===e.id && d && d.fleet===f.id && SHIPS[q.cls] &&
+        (SHIPS[q.cls].dmg>0 || SHIPS[q.cls].rol==='ordu')) n++;
   }
-  if (!cls) cls = 'kor';
-
-  /* Tersaneler — filoya en yakından başlayarak */
-  const kaynak = f.sys >= 0 ? G.sys[f.sys] : (f.mv ? G.sys[f.mv.to] : null);
-  /* ÖLÇÜM: hasStructYard() STRUCTS (megayapı) tablosuna bakıyor,
-     ama normal tersane BUILDINGS'te ve koloni binası olarak
-     sayılıyor. yardCount() ikisini de doğru topluyor — ikmal
-     onu kullanmalı, yoksa "hiç tersanen yok" der. */
-  const yardlar = G.sys.filter(sy => sy.owner === e.id && yardCount(sy) > 0);
-  if (!yardlar.length) return {ok:false, why:'Hiç tersanen yok'};
-  if (kaynak) yardlar.sort((x, y) => dist(x, kaynak) - dist(y, kaynak));
-
-  let siparis = 0;
-  for (let i = 0; i < eksik; i++){
-    const yard = yardlar[i % yardlar.length];
-    if (!queueShip(e, yard, cls)) break;        // kaynak bitti
-    /* Yeni gemi bu filoya katılsın */
-    yard.rally = yard.rally || {};
-    yard.rally[e.id] = {fleet: f.id, sys: kaynak ? kaynak.id : yard.id};
+  for (const x of G.fleets) if (x!==f && x.e===e.id && x.joinFleet===f.id) n+=x.ships.length;
+  return n;
+}
+function fleetDeliveryTarget(e,f){
+  if (!e || e.dead || G.emps[e.id]!==e || !f || !G.fleets.includes(f) ||
+      f.e!==e.id || !f.ships || !f.ships.length) return null;
+  const sid=f.mv ? f.mv.to : f.sys;
+  return Number.isInteger(sid) && G.sys[sid] ? sid : null;
+}
+function canShipToFleet(e,sys,cls,f){
+  const target=fleetDeliveryTarget(e,f);
+  if (target===null || !sys || sys.owner!==e.id || !SHIPS[cls]) return false;
+  // Ana filonun ricat ayrıcalığı yeni gemiye taşınmaz.
+  return findPathAllowed(e,{ships:[{c:cls}],e:e.id},sys.id,target)!==null;
+}
+function queueFleetShip(e,sys,cls,f){
+  if (!canShipToFleet(e,sys,cls,f) || !queueShip(e,sys,cls)) return false;
+  sys.queue[sys.queue.length-1].delivery={fleet:f.id};
+  return true;
+}
+function reinforceFleet(e, f){
+  if (fleetDeliveryTarget(e,f)===null) return {ok:false,why:'Geçerli kendi filon yok'};
+  const hedefN=Math.min(FLEET_SOFT_CAP,Math.max(1,f.capTarget || FLEET_SOFT_CAP));
+  const beklenen=pendingFleetShips(e,f), eksik=hedefN-f.ships.length-beklenen;
+  if (eksik<=0) return {ok:false,why:beklenen ? 'Eksik gemiler zaten siparişte veya yolda' : 'Filo zaten dolu'};
+  const counts={};
+  for (const sh of f.ships) counts[sh.c]=(counts[sh.c]||0)+1;
+  let cls=null,en=0;
+  for (const k in counts) if (SHIPS[k] && SHIPS[k].rol==='sav' && !SHIPS[k].crisisOnly && counts[k]>en){en=counts[k];cls=k;}
+  if (!cls) return {ok:false,why:'Bu filo savaş gemisi ikmali alamaz'};
+  const hedef=G.sys[fleetDeliveryTarget(e,f)];
+  const yards=G.sys.filter(sy=>sy.owner===e.id && yardCount(sy)>0 &&
+    !(sy.yardLock && sy.yardLock>(G.memAge||0)) && canShipToFleet(e,sy,cls,f));
+  yards.sort((a,b)=>dist(a,hedef)-dist(b,hedef));
+  if (!yards.length) return {ok:false,why:'Filoya ulaşabilen açık tersane yok'};
+  let siparis=0;
+  for (let i=0;i<eksik;i++){
+    if (!queueFleetShip(e,yards[i%yards.length],cls,f)) break;
     siparis++;
   }
-  if (!siparis) return {ok:false, why:'Kaynak yetersiz'};
-  return {ok:true, siparis, cls, eksik};
+  return siparis ? {ok:true,siparis,cls,eksik,beklenen} : {ok:false,why:'Kaynak yetersiz'};
 }
 
-/* Toplanma noktası: sistemde üretilen gemiler oraya gider */
-function setRally(e, sys, hedefSysId){
-  if (!sys) return {ok:false, why:'Sistem yok'};
-  sys.rally = sys.rally || {};
-  if (hedefSysId === null || hedefSysId === undefined){
-    delete sys.rally[e.id];
-    return {ok:true, temizlendi:true};
-  }
-  sys.rally[e.id] = {sys: hedefSysId};
-  return {ok:true, hedef: hedefSysId};
+/* Genel toplanma tercihi özel siparişlere geriye dönük uygulanmaz. */
+function setRally(e,sys,hedefSysId){
+  if (!e || e.dead || G.emps[e.id]!==e || !sys || G.sys[sys.id]!==sys || sys.owner!==e.id)
+    return {ok:false,why:'Kendi sistemini seç'};
+  if (hedefSysId!==null && hedefSysId!==undefined &&
+      (!Number.isInteger(hedefSysId) || !G.sys[hedefSysId])) return {ok:false,why:'Geçerli hedef seç'};
+  sys.rally=sys.rally || {};
+  if (hedefSysId===null || hedefSysId===undefined){delete sys.rally[e.id];return {ok:true,temizlendi:true};}
+  sys.rally[e.id]={sys:hedefSysId};
+  return {ok:true,hedef:hedefSysId};
 }
 
 function hasStructYard(sys){
@@ -6621,6 +6650,32 @@ function validRange(v){
   if (c === 0) return 0;
   return (typeof RANGE_NAMES !== 'undefined' && RANGE_NAMES[c]) ? c : null;
 }
+function validBattleReport(v){
+  if (!v || typeof v!=='object') return null;
+  const a=validEmpId(v.a), b=validEmpId(v.b);
+  if (a===null || b===null || a===b) return null;
+  const nums=(x,len,lo,hi)=>{
+    if (!Array.isArray(x) || x.length!==len) return null;
+    const out=[];
+    for (const raw of x){const n=_num(raw);if(n===null || n<lo || n>hi)return null;out.push(n);}
+    return out;
+  };
+  const loss=nums(v.loss,2,0,100000), retreat=nums(v.retreat,2,0,100000);
+  if (!loss || !retreat) return null;
+  const rounds=_num(v.rounds), band=validRange(v.band), at=_num(v.at);
+  if (rounds===null || rounds<0 || at===null || band===null || band===0) return null;
+  const out={a,b,at,rounds:Math.floor(rounds),band,loss,retreat,
+    done:v.done===true,winner:null,last:null};
+  const winner=validEmpId(v.winner);
+  if (winner!==null && (winner===a || winner===b)) out.winner=winner;
+  const ended=_num(v.ended); if (ended!==null) out.ended=ended;
+  if (v.last && typeof v.last==='object'){
+    const ships=nums(v.last.ships,2,0,100000), ready=nums(v.last.ready,2,0,100000);
+    const dealt=nums(v.last.dealt,2,0,1e12), supply=nums(v.last.supply,2,0,1);
+    if (ships && ready && dealt && supply) out.last={ships,ready,dealt,supply};
+  }
+  return out;
+}
 
 /* --- KAYIT TARAFI --- */
 function serializeSimulationWorld(){
@@ -6634,6 +6689,7 @@ function serializeSimulationWorld(){
     const oh = validEmpId(s.orbitHeld);     if (oh !== null) rec.oh = oh;
     const cr = validRange(s.cr);            if (cr !== null && cr !== 0) rec.cr = cr;
     const sb = validEmpId(s.supplyHackBy);  if (sb !== null) rec.sb = sb;
+    const br = validBattleReport(s.battleReport); if (br) rec.br = br;
     if (Object.keys(rec).length){ rec.i = s.id; sistemler.push(rec); }
   }
   /* Baskınlar: KANONİK rota anahtarı → bitiş günü.
@@ -6667,7 +6723,7 @@ function resetSimulationRuntimeState(){
   for (const s of (G.sys || [])){
     if (!s) continue;
     delete s.nest; delete s.nestPow; delete s.ruin;
-    delete s.orbitHeld; delete s.cr; delete s.supplyHackBy;
+    delete s.orbitHeld; delete s.cr; delete s.supplyHackBy; delete s.battleReport;
   }
 }
 
@@ -6756,6 +6812,10 @@ function restoreSimulationWorld(data, sv){
         /* Aktif sabotajın kendisi (sys.supplyHack) korunur; yalnız
            atıf temizlenir — rastgele başka devlete BAĞLANMAZ. */
         bilgi.repair.push('sys#' + id + ' geçersiz supplyHackBy -> atıf temizlendi');
+      const br = validBattleReport(rec.br);
+      if (br) s.battleReport = br;
+      else if (rec.br !== undefined)
+        bilgi.repair.push('sys#' + id + ' geçersiz battleReport -> temizlendi');
     }
   }
 
@@ -7303,7 +7363,7 @@ function forceRedraw(sebep){
    Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
    Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
 /* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */
-const BUILD_ID = '87c';
+const BUILD_ID = '88b';
 const DIAG_MAX = 40;
 const DIAG = [];
 function logDiag(tur, mesaj){

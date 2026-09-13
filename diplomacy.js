@@ -1382,6 +1382,34 @@ function dealQuote(offer){
 
 /* ── TEKLİF ÖMRÜ (18 ay / 540 gün) ── */
 const DEAL_OFFER_LIFE = 540;
+/* 87D: oyuncunun aynı şartlara verdiği ret 27 ay hatırlanır.
+   Barışın mevcut 15+12 aylık politikasından ayrı; fırsat/AI değerlendirme
+   katsayısı değildir. Damga ve madde sırası şartları değiştirmez. */
+const PLAYER_OFFER_REFUSAL_DAYS = 810;
+function playerOfferTermsKey(offer){
+  const o = encodeOffer(offer);
+  if (!o || o.to !== 0 || o.from === 0) return null;
+  const terms = list => list.map(it=>JSON.stringify(it)).sort();
+  return JSON.stringify([o.from,o.to,terms(o.give),terms(o.want)]);
+}
+function playerOfferWait(offer){
+  const key = playerOfferTermsKey(offer);
+  if (!key || !G.p || !Array.isArray(G.p.offerRefusals)) return 0;
+  return G.p.offerRefusals.reduce((n,r)=>r && r.key===key && Number.isFinite(r.until)
+    ? Math.max(n,r.until-G.day) : n,0);
+}
+function recordPlayerOfferRefusal(offer){
+  const key = playerOfferTermsKey(offer), o = offer && G.emps[offer.from];
+  if (!key || !G.p || G.p!==G.emps[0] || !o || o.dead || o.wild ||
+      dealExpired(offer) || playerOfferWait(offer)>0) return false;
+  const records = Array.isArray(G.p.offerRefusals) ? G.p.offerRefusals : [];
+  G.p.offerRefusals = records.filter(r=>r && typeof r.key==='string' &&
+    Number.isFinite(r.until) && r.until>G.day && r.key!==key).slice(-63);
+  G.p.offerRefusals.push({key,until:G.day+PLAYER_OFFER_REFUSAL_DAYS});
+  // Aynı şartların eski kutu kopyalarını kaldır; farklı teklifler korunur.
+  G.inbox = (G.inbox || []).filter(n=>n.kind!=='aideal' || playerOfferTermsKey(n.data)!==key);
+  return true;
+}
 function dealExpired(offer){
   if (!offer) return false;
   const exp = Number(offer.expires);
@@ -6415,6 +6443,10 @@ function falseFlagCost(){ return {etk: 140}; }
 
 /* Uygun mu? Hem hedef hem günah keçisi gerekir. */
 function canFalseFlag(e, target, patsy){
+  for (const o of [target,patsy]){
+    const q = spyTargetCheck(e, o);
+    if (!q.ok) return q;
+  }
   if (!e || !target || !patsy) return {ok:false, why:'Hedef ve günah keçisi gerekir'};
   if (target.id === patsy.id) return {ok:false, why:'Aynı devlet olamaz'};
   if (target.id === e.id || patsy.id === e.id) return {ok:false, why:'Kendini seçemezsin'};
@@ -6429,7 +6461,24 @@ function canFalseFlag(e, target, patsy){
 }
 
 /* tur: 'sabotaj' (konsey oyu) veya 'tekno' (teknoloji hırsızlığı) */
+function falseFlagResult(e, target, patsy, r){
+  r.cost = falseFlagCost().etk;
+  r.basarili = !!r.framed;
+  r.outcome = r.basarili ? 'basari' : (r.caught ? 'ifsa' : 'sonucsuz');
+  e.opLog = e.opLog || [];
+  e.opLog.push({t:G.memAge || 0, k:'falseFlag', o:target.id, patsy:patsy.id,
+    caught:!!r.caught, outcome:r.outcome, cost:r.cost, actorSummary:r.msg});
+  if (e.opLog.length > 20) e.opLog.splice(0,e.opLog.length-20);
+  if (r.caught){
+    target.hitLog = target.hitLog || [];
+    target.hitLog.push({t:G.memAge || 0, k:'falseFlag', by:e.id, caught:true, known:true, outcome:'ifsa'});
+  }
+  if (target.hitLog && target.hitLog.length > 30)
+    target.hitLog.splice(0,target.hitLog.length-30);
+  return r;
+}
 function falseFlagOp(e, target, patsy, tur){
+  if (tur !== 'tekno' && tur !== 'sabotaj') return {ok:false, why:'Bilinmeyen sahte bayrak türü'};
   const chk = canFalseFlag(e, target, patsy);
   if (!chk.ok) return chk;
   e.res.etk -= falseFlagCost().etk;
@@ -6446,7 +6495,7 @@ function falseFlagOp(e, target, patsy, tur){
 
   if (rnd() < basari){
     /* ── İŞ GÖRÜLDÜ ── */
-    let sonuc = '';
+    let sonuc = '', payloadApplied = false;
     if (tur === 'tekno'){
       const adaylar = [];
       for (const id in (target.techs || {}))
@@ -6456,6 +6505,7 @@ function falseFlagOp(e, target, patsy, tur){
         const id = adaylar[Math.floor(rnd() * Math.min(3, adaylar.length))];
         const kazanc = Math.round((TECHS[id].c || 0) * .5);
         e.res.ara = (e.res.ara || 0) + kazanc;
+        payloadApplied = kazanc > 0;
         sonuc = TECHS[id].n + ' çalındı (+' + kazanc + ' araştırma)';
       } else sonuc = 'Çalınacak veri bulunamadı';
     } else {
@@ -6463,8 +6513,10 @@ function falseFlagOp(e, target, patsy, tur){
       const c = G.council;
       if (c && c.campaign){
         c.campaign.blackmailed.push({id: target.id, yon: 1});
+        payloadApplied = true;
         sonuc = target.name + ' senatoda susturuldu';
       } else sonuc = 'Hedefin diplomatik ağı sarsıldı';
+      payloadApplied = payloadApplied || target.res.etk > 0;
       target.res.etk = Math.max(0, (target.res.etk || 0) - 80);
     }
 
@@ -6479,16 +6531,22 @@ function falseFlagOp(e, target, patsy, tur){
     let savas = false;
     if (rnd() < inandirici * .55 && !target.war[patsy.id] &&
         typeof warAuthorize === 'function'){
-      target._lastCB = {n: 'Sahte Bayrak Kanıtı', w: 1.30};
-      warAuthorize(target, patsy, target._lastCB);
-      declareWar(target, patsy);
-      if (typeof warAuthClear === 'function') warAuthClear();
-      savas = true;
+      const auth = ['_warAuth','_warWhy'].map(k => [k,Object.prototype.hasOwnProperty.call(G,k),G[k]]);
+      const hadCB = Object.prototype.hasOwnProperty.call(target,'_lastCB'), oldCB = target._lastCB;
+      try {
+        target._lastCB = {n: 'Sahte Bayrak Kanıtı', w: 1.30};
+        warAuthorize(target, patsy, target._lastCB);
+        declareWar(target, patsy);
+      } finally {
+        savas = !!(target.war[patsy.id] && patsy.war[target.id]);
+        for (const [k,had,value] of auth){ if (had) G[k]=value; else delete G[k]; }
+        if (!savas){ if (hadCB) target._lastCB=oldCB; else delete target._lastCB; }
+      }
     }
     if (typeof recordSabotage === 'function') recordSabotage('falseflag');
-    return {ok:true, caught:false, savas, sonuc,
+    return falseFlagResult(e, target, patsy, {ok:true, caught:false, framed:true, payloadApplied, savas, sonuc,
       msg: sonuc + ' — suç ' + patsy.name + ' üstüne yıkıldı' +
-           (savas ? '. ' + target.name + ' ona SAVAŞ İLAN ETTİ!' : '')};
+           (savas ? '. ' + target.name + ' ona SAVAŞ İLAN ETTİ!' : '')});
   }
 
   if (rnd() < fiyasko){
@@ -6536,15 +6594,16 @@ function falseFlagOp(e, target, patsy, tur){
     }
     if (typeof recalcMods === 'function') G.emps.forEach(x => { if (!x.dead) recalcMods(x); });
     if (typeof recordSabotage === 'function') recordSabotage('ifsa');
-    return {ok:true, caught:true, vurulan,
+    return falseFlagResult(e, target, patsy, {ok:true, caught:true, vurulan,
       msg: 'SUÇÜSTÜ YAKALANDIN — GALAKTİK PARYA İLAN EDİLDİN. Konseyden ihraç ' +
            'edildin, tüm sınırlar kapandı ve ' + vurulan +
-           ' sınır dünyasının kalkanı yarıya düştü.'};
+           ' sınır dünyasının kalkanı yarıya düştü.'});
   }
 
   /* Sessiz başarısızlık */
   if (typeof recordSabotage === 'function') recordSabotage('sessiz');
-  return {ok:true, caught:false, msg:'Operasyon sonuçsuz kaldı — iz bırakılmadı'};
+  return falseFlagResult(e, target, patsy,
+    {ok:true, caught:false, msg:'Operasyon sonuçsuz kaldı — ifşa olmadı'});
 }
 
 

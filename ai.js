@@ -183,6 +183,17 @@ function aiEnvoyTurn(e,prof){
   });
   if (rnd()<.4+prof.dip*.4) setEnvoyTask(e,cands[0].id,aiEnvoyTask(e,cands[0]));
 }
+/* 88A.1: mevcut tek gemilik üretim kararına hedef bağlar; ek bütçe/tur yok. */
+function aiQueueMilitaryShip(e,yard,cls){
+  const candidates=G.fleets.filter(f=>f.e===e.id && f.ships.length &&
+    f.ships.every(sh=>SHIPS[sh.c] && SHIPS[sh.c].rol==='sav' && !SHIPS[sh.c].crisisOnly) &&
+    !f.federal && !f.guardLocked && !f.retreating && f.joinFleet===undefined &&
+    f.ships.length+pendingFleetShips(e,f)<Math.min(FLEET_SOFT_CAP,f.capTarget||FLEET_SOFT_CAP) &&
+    canShipToFleet(e,yard,cls,f));
+  candidates.sort((a,b)=>dist(yard,G.sys[fleetDeliveryTarget(e,a)])-
+    dist(yard,G.sys[fleetDeliveryTarget(e,b)]) || a.id-b.id);
+  return candidates.length ? queueFleetShip(e,yard,cls,candidates[0]) : queueShip(e,yard,cls);
+}
 function aiTurn(e){
   if (e.dead) return;
   if (e.crisisSide){ crisisFleetTurn(e); return; }
@@ -485,13 +496,13 @@ function aiTurn(e){
       let savasVar = false;
       for (const w in e.war) if (e.war[w] && G.emps[w] && !G.emps[w].wild) savasVar = true;
       if (e._navySleep && !savasVar) return;
-      if (canAfford(cls)) queueShip(e, yard, cls);
+      if (canAfford(cls)) aiQueueMilitaryShip(e, yard, cls);
     }
   }
 
   /* --- 3. keşif --- */
   for (const f of G.fleets){
-    if (f.e !== e.id || f.path.length || f.mv || f.combat) continue;
+    if (f.e !== e.id || f.path.length || f.mv || f.combat || f.surv>0) continue;
     if (fleetHasRole(f,'bilim')){
       const from = f.sys;
       let best = null;
@@ -499,9 +510,12 @@ function aiTurn(e){
         if (s.surv.includes(e.id)) continue;
         if (s.owner >= 0 && s.owner !== e.id && e.war[s.owner]) continue;
         const d = dist(G.sys[from], s);
-        if (!best || d < best.d) best = {s, d};
+        if ((!best || d < best.d) && explorationRoute(e,f,s)) best = {s, d};
       }
-      if (best) orderMove(f, best.s.id);
+      if (best){
+        if (best.s.id===from) arrive(f,best.s);
+        else orderMove(f,best.s.id);
+      }
     }
   }
 
@@ -1500,7 +1514,40 @@ function whisperExposureRisk(e, a, b){
 
 /* blame verilirse SAHTE BAYRAK: kurbanlar suçu üçüncü tarafta bilir.
    Kazanç büyük — ama ifşa olursa üç devlet birden düşman kesilir. */
+function whisperCheck(e, a, b, blame){
+  for (const target of [a,b]){
+    const q = spyTargetCheck(e, target);
+    if (!q.ok) return q;
+  }
+  if (a.id === b.id) return {ok:false, why:'İki farklı hedef seç'};
+  if (a.war[b.id] || b.war[a.id]) return {ok:false, why:'Zaten savaştalar — bozacak bir şey yok'};
+  if (blame){
+    if (G.emps[blame.id] !== blame || blame.dead || blame.wild ||
+        [e.id,a.id,b.id].includes(blame.id)) return {ok:false, why:'Suçlanacak devlet geçersiz'};
+    if (!a.contact[blame.id] || !b.contact[blame.id])
+      return {ok:false, why:'Hedefler suçlanan tarafı tanımıyor — inandırıcı olmaz'};
+  }
+  const cost = WHISPER_COST + (blame ? FALSE_FLAG_EXTRA : 0);
+  return e.res.etk >= cost ? {ok:true, cost} : {ok:false, why:cost + ' etki gerekir'};
+}
+/* whisperLog eski karşı istihbarat sözleşmesini korur. opLog yalnız actor
+   ekranının özetidir; ikinci bir mağdur/soruşturma kaydı açılmaz. */
+function whisperResult(e, a, b, blame, basari, ifsa){
+  const cost = WHISPER_COST + (blame ? FALSE_FLAG_EXTRA : 0);
+  const outcome = basari ? (ifsa ? 'basari-ifsa' : 'basari') : (ifsa ? 'ifsa' : 'sonucsuz');
+  const msg = (basari ? a.name + ' ile ' + b.name + ' arası bozuldu' : 'Fısıltı sonuçsuz kaldı') +
+    (blame && basari ? (ifsa ? ' — iftira açığa çıktı' : ' — suç ' + blame.name + ' üstüne yıkıldı') : '') +
+    (ifsa ? ' · ağın ifşa oldu' : ' · anında ifşa olmadı');
+  e.opLog = e.opLog || [];
+  e.opLog.push({t:G.memAge || 0, k:blame?'whisperFrame':'whisper', o:a.id, other:b.id,
+    caught:ifsa, outcome, cost, actorSummary:msg});
+  if (e.opLog.length > 20) e.opLog.splice(0,e.opLog.length-20);
+  // ok eski runWhisper sözleşmesinde etki başarısıdır; resolved ücretli denemedir.
+  return {ok:basari, resolved:true, basarili:basari, ifsa, caught:ifsa, outcome, cost, msg};
+}
 function runWhisper(e, a, b, blame){
+  const q = whisperCheck(e, a, b, blame);
+  if (!q.ok) return Object.assign({resolved:false},q);
   e.res.etk -= WHISPER_COST + (blame ? FALSE_FLAG_EXTRA : 0);
   let ifsaRisk = whisperExposureRisk(e, a, b);
   if (blame) ifsaRisk *= FALSE_FLAG_RISK_MUL;      // iz gizlemek zordur
@@ -1551,9 +1598,9 @@ function runWhisper(e, a, b, blame){
     b.rel[e.id] = clamp(b.rel[e.id] - 22, -100, 100);
     if (a.id === 0 || b.id === 0)
       say('FISILTI AĞI İFŞA OLDU — ' + e.name + ' arayı bozmaya çalışıyormuş', 'war');
-    return {ok:basari, ifsa:true};
+    return whisperResult(e, a, b, blame, basari, true);
   }
-  return {ok:basari, ifsa:false};
+  return whisperResult(e, a, b, blame, basari, false);
 }
 
 /* ── OYUNCU FISILTISI ──
@@ -1562,28 +1609,14 @@ function runWhisper(e, a, b, blame){
    nedeni. Entrika yapan bedelini öder — oyuncu dahil. */
 function playerWhisper(a, b, blame){
   const e = G.p;
-  if (!a || !b || a.id === b.id) return {ok:false, why:'İki farklı hedef seç'};
-  if (a.id === 0 || b.id === 0) return {ok:false, why:'Kendi aranı bozamazsın'};
-  if (a.wild || b.wild) return {ok:false, why:'Bu taraf diplomasi tanımıyor'};
-  if (!e.contact[a.id] || !e.contact[b.id]) return {ok:false, why:'Her iki tarafla da temas gerekir'};
-  if (a.war[b.id]) return {ok:false, why:'Zaten savaştalar — bozacak bir şey yok'};
-  const bedel = WHISPER_COST + (blame ? FALSE_FLAG_EXTRA : 0);
-  if ((e.res.etk || 0) < bedel) return {ok:false, why:bedel + ' etki gerekir'};
-  if (blame){
-    if (blame.wild || blame.dead) return {ok:false, why:'Bu taraf suçlanamaz'};
-    if (blame.id === a.id || blame.id === b.id || blame.id === 0)
-      return {ok:false, why:'Suçu yıkacağın taraf hedeflerden farklı olmalı'};
-    if (!a.contact[blame.id] || !b.contact[blame.id])
-      return {ok:false, why:'Hedefler suçlanan tarafı tanımıyor — inandırıcı olmaz'};
-  }
-
   const r = runWhisper(e, a, b, blame);
+  if (!r.resolved) return r;
   e.whisperLog = e.whisperLog || [];
   e.whisperLog.push({a:a.id, b:b.id, ok:r.ok, ifsa:r.ifsa,
                      blame: blame ? blame.id : undefined,
                      t:(G.memAge || 0), found:r.ifsa});
   if (e.whisperLog.length > 40) e.whisperLog.shift();
-  return {ok:true, basari:r.ok, ifsa:r.ifsa};
+  return Object.assign({},r,{ok:true, basari:r.ok});
 }
 
 /* ── SAHTE BAYRAK HEDEFİ ──
@@ -1640,6 +1673,7 @@ function whisperTick(){
     if (!t) continue;
     const blame = pickBlameTarget(e, t.a, t.b);
     const r = runWhisper(e, t.a, t.b, blame);
+    if (!r.resolved) continue;
     e.whisperLog = e.whisperLog || [];
     /* found: sonradan çözüldü mü? Faz 4'te karşı istihbarat bu kaydı
        yıllar sonra ortaya çıkarabilir. İfşa olmuş operasyon zaten

@@ -1181,7 +1181,7 @@ const UI = {
         this.ensureDiploWorld();
         const c = this.dealCounter;
         if (c){ const co = G.emps[c.from];
-          if (co) co.rel[0] = clamp(co.rel[0] - 5, -100, 100); }
+          if (co && recordPlayerOfferRefusal(c)) co.rel[0] = clamp(co.rel[0] - 5, -100, 100); }
         this.dealCounter = null;
         this.drawDeal();
         break;
@@ -1498,16 +1498,14 @@ const UI = {
       case 'whisperGo': {
         const a = G.emps[this.wA], b = G.emps[this.wB];
         const c = (this.wC !== null && this.wC !== undefined) ? G.emps[this.wC] : null;
+        if (this.wC !== null && this.wC !== undefined && !c){
+          say('Suçlanacak devlet artık bulunamıyor', 'war'); this.whisperMenu(); break;
+        }
         const r = playerWhisper(a, b, c);
         if (!r.ok){ say(r.why, 'war'); this.whisperMenu(); break; }
         this.wA = null; this.wB = null; this.wC = null;
         this.closeModal();
-        say(r.basari
-          ? (c ? 'Fısıltı yayıldı — suç ' + esc(c.name) + ' üstünde kaldı'
-               : 'Fısıltı yayıldı — ' + esc(a.name) + ' ile ' + esc(b.name) + ' arası bozuldu')
-          : 'Fısıltı tutmadı — kimse yutmadı', r.basari ? 'sci' : '');
-        if (r.ifsa) say(c ? 'SAHTE BAYRAK ÇÖKTÜ — üç devlet birden seni biliyor!'
-                          : 'AĞIN İFŞA OLDU — her iki taraf da senden biliyor!', 'war');
+        say(r.msg + ' · ' + r.cost + ' ◈ harcandı', r.ifsa ? 'war' : (r.basari ? 'sci' : ''));
         this.openDiplo();
         break;
       }
@@ -1838,8 +1836,33 @@ const UI = {
         <b style="color:${renk}">${durum} (%${yuzde})</b></div>`;
       if (sup < 1)
         h += `<div class="mini" style="color:${renk}">Buraya gönderilen filo
-          <b>%${yuzde}</b> güçte savaşır. Yakınına karakol ya da tersane kurmak
+          <b>%${yuzde}</b> hasarla savaşır; kalkanı %${Math.round(Math.max(.30,sup*.85)*100)} çalışır.
+          Gövde dayanımı değişmez. Yakınına karakol ya da tersane kurmak
           hattı ileri taşır.</div>`;
+    }
+    if (typeof battleReportForPlayer==='function'){
+      const br=battleReportForPlayer(s);
+      if (br){
+        const foe=G.emps[br.enemy.id];
+        const foeName=foe && this.diploKnown(foe.id) ? esc(foe.name) : 'Tanımlanamayan düşman';
+        const durum=br.active ? 'SÜRÜYOR' : br.winner===0 ? 'ZAFER' :
+          br.winner===null ? 'SONUÇSUZ' : 'YENİLGİ';
+        const col=br.active?'#ff9b3d':br.winner===0?'#65e08a':'#ff5f6d';
+        h += `<div class="box" style="border-color:${col}"><div class="bt">
+          <span>⚔ MUHAREBE RAPORU</span><b style="color:${col}">${durum}</b></div>
+          <div class="row"><span>Rakip</span><b>${foeName}</b></div>
+          <div class="row"><span>Kayıplar</span><b>Biz ${br.mine.loss} · Düşman ${br.enemy.loss}</b></div>
+          <div class="row"><span>Ricat eden filo</span><b>Biz ${br.mine.retreat} · Düşman ${br.enemy.retreat}</b></div>`;
+        if (br.mine.dealt!==null){
+          h += `<div class="row"><span>Son tur gerçek gövde hasarı</span>
+            <b>Verdik ${fmt(br.mine.dealt)} · Aldık ${fmt(br.enemy.dealt)}</b></div>
+            <div class="row"><span>Ateş açabilen gemi</span>
+            <b>Biz ${br.mine.ready}/${br.mine.ships} · Düşman ${br.enemy.ready}/${br.enemy.ships}</b></div>
+            <div class="mini">${RANGE_NAMES[br.band]||''} · ${br.rounds}. tur ·
+              bizim ikmal %${Math.round(br.mine.supply*100)}</div>`;
+        }
+        h += `</div>`;
+      }
     }
     if (s.ruin){
       const pct = clamp(s.ruin.hp / s.ruin.max * 100, 0, 100);
@@ -2575,12 +2598,12 @@ const UI = {
           <b style="color:${col}">${lbl} (${d} sıçrama)</b></div>`;
         if (sup < 1){
           const kayip = Math.round((1 - sup) * 9);
-          h += `<div class="mini" style="color:${col}">⚠ Aylık ~%${kayip} gemi yıpranması ·
+          h += `<div class="mini" style="color:${col}">⚠ Aylık ~%${kayip} gövde yıpranması ·
             bakım ×${(1 + (1 - sup) * 2.2).toFixed(1)}</div>`;
         }
         if (f.retreating) h += `<div class="mini" style="color:#ff9b3d">↩ İkmale çekiliyor</div>`;
       }
-      h += `<div class="row"><span>Muharebe gücü</span><b style="color:#6ff2c8">${fmt(fleetPower(f))}</b></div>`;
+      h += `<div class="row"><span>Stratejik filo gücü</span><b style="color:#6ff2c8">${fmt(fleetPower(f))}</b></div>`;
       h += `<div class="row"><span>Hız</span><b>${fleetSpeed(f).toFixed(0)} bg/gün</b></div>`;
       const stc = STANCE[f.stance] || STANCE.agresif;
       h += `<div class="row"><span>Duruş</span><b style="color:${f.stance==='agresif'?'#ff5f6d':'#6ff2c8'}">${stc.ico} ${stc.n}</b></div>`;
@@ -3394,9 +3417,12 @@ const UI = {
      hiçbir ad veya kimlik SIZDIRILMAZ. */
   opRecordName(key){
     return ({stealTech:'Teknoloji Verisi Hırsızlığı', incite:'İsyan Kışkırtma',
+      whisper:'Fısıltı Ağı', whisperFrame:'Fısıltı Ağı · İftira',
+      falseFlag:'Sahte Bayrak', teknoCal:'Teknoloji Verisi Hırsızlığı',
       kiskirt:'İsyan Kışkırtma'})[key] || (OPS[key] && OPS[key].n) || key;
   },
   opOutcomeLabel(w){
+    if (w.outcome === 'basari-ifsa') return 'BAŞARILI · aynı denemede İFŞA OLDU';
     if (w.outcome === 'basari') return 'BAŞARILI · ifşa edilmedi';
     if (w.outcome === 'ifsa') return 'İFŞA OLDU · etki oluşmadı';
     if (w.outcome === 'sonucsuz') return 'SONUÇSUZ · ifşa edilmedi';
@@ -5034,16 +5060,18 @@ const UI = {
 
     const A = this.wA !== null ? G.emps[this.wA] : null;
     const B = this.wB !== null ? G.emps[this.wB] : null;
+    const C = (this.wC !== null && this.wC !== undefined) ? G.emps[this.wC] : null;
+    const totalCost = bedel + (C ? FALSE_FLAG_EXTRA : 0);
     const hazir = !!(A && B);
     const zatenSavas = hazir && A.war[B.id];
 
     let h = `<div class="mhd"><span>🕸 FISILTI AĞI</span></div>
       <div class="mbd"><div class="lead">İki imparatorluğun arasına kin ek. Kaynak görünmez
       kalır — ama sonsuza dek değil.</div>
-      <div class="row"><span>Etkin</span><b style="color:${e.res.etk>=bedel?'#6ff2c8':'#ff5f6d'}">${fmt(e.res.etk)} / ${bedel} ◈</b></div>`;
+      <div class="row"><span>Etkin</span><b style="color:${e.res.etk>=totalCost?'#6ff2c8':'#ff5f6d'}">${fmt(e.res.etk)} / ${totalCost} ◈</b></div>`;
 
     if (typeof whisperSuccessChance === 'function'){
-      const sans = Math.round(whisperSuccessChance(e) * 100);
+      const sans = Math.round(whisperSuccessChance(e) * (C ? .88 : 1) * 100);
       h += `<div class="row"><span>Başarı şansın</span><b style="color:#65e08a">%${sans}</b></div>`;
       if (hazir){
         const ffMul = (this.wC !== null && this.wC !== undefined &&
@@ -5096,10 +5124,11 @@ const UI = {
       }
     }
 
-    const C = (this.wC !== null && this.wC !== undefined) ? G.emps[this.wC] : null;
     const toplam = bedel + (C ? ffEk : 0);
     const yeter = e.res.etk >= toplam;
-    const gecerli = hazir && !zatenSavas && yeter;
+    const check = hazir ? whisperCheck(e,A,B,C) : {ok:false};
+    const gecerli = hazir && !zatenSavas && yeter && check.ok;
+    if (hazir && !check.ok && check.why) h += `<div class="mini">${esc(check.why)}</div>`;
     h += `<button class="ch ${gecerli ? '' : 'dis'}" data-a="${gecerli ? 'whisperGo' : 'x'}">
       <div class="cht">${C ? '🎭 SAHTE BAYRAK OPERASYONU' : '🕸 OPERASYONU BAŞLAT'} (${toplam} ◈)</div>
       <div class="chd">${hazir ? esc(A.name) + ' ↔ ' + esc(B.name) +
@@ -5377,7 +5406,8 @@ const UI = {
 
   /* AI'nın sana getirdiği teklif */
   aiOffer(offer){
-    const o = G.emps[offer.from];
+    const o = offer && G.emps[offer.from];
+    if (!o || o.dead || o.wild || o.id===0 || playerOfferWait(offer)>0) return false;
     /* ═══ FAZ 85E: TEKLİF ARTIK BİLDİRİMİN KENDİ VERİSİNDE ═══
        Eskiden şartlar tekil `UI.pendingOffer` alanında tutuluyordu;
        ikinci bir teklif geldiğinde birincisininkini EZİYORDU ve
@@ -5392,7 +5422,11 @@ const UI = {
         ((typeof DEAL_OFFER_LIFE !== 'undefined') ? DEAL_OFFER_LIFE : 540);
     const kendi = (typeof encodeOffer === 'function')
                   ? encodeOffer(damgali) : null;
-    if (!kendi) return;
+    if (!kendi || kendi.to!==0 || dealExpired(kendi)) return false;
+    const termsKey = playerOfferTermsKey(kendi);
+    const same = n => n.kind==='aideal' && playerOfferTermsKey(n.data)===termsKey;
+    if ((G.inbox || []).some(n=>same(n) && !dealExpired(n.data))) return false;
+    G.inbox = (G.inbox || []).filter(n=>!same(n) || !dealExpired(n.data));
     /* Anahtar İMZAdır: aynı devletten gelen ŞARTLARI FARKLI iki teklif
        yanlışlıkla tekilleştirilmez, birebir aynısı tekrarlanmaz. */
     const imza = (typeof offerSignature === 'function')
@@ -5403,6 +5437,7 @@ const UI = {
         ((typeof dealTimeLeft === 'function' && dealTimeLeft(kendi) !== null)
           ? ' · ' + dealTimeLeft(kendi) + ' ay kaldı' : ''),
       key:'aideal:' + imza});
+    return true;
   },
   aiDealOpen(payload){
     /* FAZ 85E: teklif SEÇİLEN bildirimin kendi verisinden gelir.
@@ -5413,6 +5448,13 @@ const UI = {
       : null;
     const o = offer ? G.emps[offer.from] : null;
     if (!offer || !o || o.dead){ say('Teklif geçerliliğini yitirdi'); return; }
+    const world = G.emps, player = G.p, token = {};
+    let settled = false;
+    const claim = () => {
+      if (settled || this._aiDealToken!==token || G.emps!==world || G.p!==player) return false;
+      settled = true;
+      return true;
+    };
     const teklif = {from:offer.from, to:0, give:offer.give, want:offer.want,
                     born:offer.born, expires:offer.expires};
     const q = (typeof dealQuote === 'function') ? dealQuote(teklif) : null;
@@ -5446,9 +5488,11 @@ const UI = {
          <button class="ch" data-a="offCounter"><div class="cht">Masaya otur</div>
            <div class="chd">Karşı teklif hazırla · orijinal teklif korunur</div></button>
          <button class="ch" data-a="offNo"><div class="cht">Reddet</div>
-           <div class="chd">Kaynak ve Etki değişmez</div></button>
+           <div class="chd">Kaynak ve Etki değişmez · aynı şartlar 27 ay tekrar gönderilmez</div></button>
        </div>`);
+    this._aiDealToken = token;
     this._hook('offYes', ()=>{
+      if (!claim()) return;
       if (this._dealBusy) return;          // tek dokunuş = tek uygulama
       this._dealBusy = true;
       const q2 = (typeof dealQuote === 'function') ? dealQuote(teklif) : null;
@@ -5461,6 +5505,7 @@ const UI = {
       this.closeModal(); this.refresh();
     });
     this._hook('offCounter', ()=>{
+      if (!claim()) return;
       /* ═══ FAZ 86B: KARŞI TEKLİF ORİJİNALİ DEĞİŞTİRMEZ ═══
          AI'nın teklifi ayrı bir kartta saklanır; oyuncu düzenlemeye
          geçse bile "Düzenlemeye dön / Kabul et / Reddet" yollarıyla
@@ -5477,8 +5522,9 @@ const UI = {
       this.drawDeal();
     });
     this._hook('offNo', ()=>{
+      if (!claim()) return;
       /* RET: kaynak, Etki ve RNG değişmez. */
-      o.rel[0] = clamp(o.rel[0] - 5, -100, 100);
+      if (recordPlayerOfferRefusal(offer)) o.rel[0] = clamp(o.rel[0] - 5, -100, 100);
       this._openNote = null;
       this.closeModal(); this.refresh();
     });
@@ -6563,6 +6609,7 @@ const UI = {
   },
 
   openModal(html, cls, stashable, art){
+    this._aiDealToken = null;
     this._opPending = null;
     delete this._envoyMenuSpeed;
     /* FAZ 19: pencere türüne göre giriş sesi */
@@ -6732,6 +6779,7 @@ const UI = {
   },
 
   closeModal(){
+    this._aiDealToken = null;
     this._opPending = null;
     const envoySpeed=this._envoyMenuSpeed;
     delete this._envoyMenuSpeed;
