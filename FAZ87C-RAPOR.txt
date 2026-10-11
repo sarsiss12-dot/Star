@@ -1,0 +1,95 @@
+GELİŞTİRİCİ RAPORU — STARS FAZ 87C
+ÖZEL CASUSLUK SONUÇLARI VE DOSYA TUTARLILIĞI
+
+1) KAYNAK
+stars-faz87b.zip
+SHA-256: d5c465b0e1feb53f8d2dc924b7b9ee3da7ef6fcb193b6436720b62e99bf58aa0
+Çıktı: stars-faz87c.zip · build 87c · cache stars-v87c.
+Çıktı ZIP SHA-256 teslim mesajındadır. Dosya karşılaştırması:
+tests/sha-87c.json. Gerçek v8 kayıt fixture'ı kullanıldı.
+
+2) KAPSAM
+stealTech: 90 Etki, araştırma verisi puanı. Standart calTech değildir.
+inciteRebellion: 120 Etki, uygun sınır kolonisinde kışkırtma.
+Bu iki yolda başarı, yakalanma ve sessiz sonuçsuzluk ayrıldı. Fısıltı Ağı,
+sahte bayrak ve otomatik kuşatma sabotajı bu fazda değiştirilmedi.
+
+3) KAYNAKTAKİ SOMUT EKSİKLER
+Oyuncu özel operasyonu actor geçmişine yazmıyordu. AI tick ayrıca kendi
+özet içermeyen kaydını yazıyordu. caught:false kayıtları başarı ile sessiz
+başarısızlığı ayıramıyor, tam dosyada TEMİZ etiketi görünüyordu.
+Teknoloji hırsızlığında yakalanmayan AI'ın adı oyuncu kurbana açıklanıyordu.
+Teknoloji hırsızlığı mağdur dosyası üretmiyordu; kışkırtmada yalnız başarı
+dosyası vardı, bu liste o yolda sınırlandırılmıyordu.
+Özel motorlar güncel dünya nesnesi/temas kontrolünü ortak kapıdan almıyordu.
+
+4) UYGULANAN DÜZELTME
+finishSpecialOp çözülmüş denemeyi motor içinde bir kez kaydeder.
+Sonuç alanları: ok, basarili, caught, outcome, cost ve mevcut msg/etki alanları.
+ok:true = bedeli ödenmiş deneme; başarılı etki garantisi değildir.
+outcome bu iki motor için basari / ifsa / sonucsuz değerlerini alır.
+Actor: her ücretli deneme, sonuç/ücret/özet, en fazla 20 kayıt.
+Kurban: başarıda fail bilinmiyor; ifşada fail biliniyor; sessiz sonuçsuzlukta
+yeni kayıt ve bildirim yok. En fazla 30 kayıt. kiskirt ve sys/pi korunur.
+AI tick'teki ikinci yazım kaldırıldı; kota hesabı değiştirilmedi.
+Kayıtlar UI/ses bildiriminden önce yazılır. Başarıdaki teknoloji hırsızının
+ismi gizlenir; yakalanan kışkırtıcı oyuncu kurbana bildirilir.
+spyTargetCheck iki özel girişe bağlandı: eski dünya hedefi, temassızlık,
+ölü aktör ve kendine girişim kaynak/RNG/geçmiş mutasyonu olmadan reddedilir.
+
+5) OYUNCU GERİ BİLDİRİMİ
+DOSYALAR ve TAM İSTİHBARAT DOSYASI özel operasyon adını, sonuç ayrımını,
+gerçek harcamayı ve kalıcı özeti gösterir. Eski özet/sonuç/ücret eksikse
+uydurulmaz; ifşa edilmemek başarı diye etiketlenmez. Gizli fail adı yalnız
+known olduğunda görünür. HTML gösteriminde metin kaçışları korunur.
+Özel düğmelerin mevcut doğrudan yürütmesi değişmedi; bunlara standart
+87A onay akışı eklenmiş gibi raporlanmıyor.
+
+6) TEST VE ÖNCE/SONRA KANITI
+Yeni tests/faz87c_special_operation_outcomes_test.js: 39 geçen, 0 kalan.
+18 matris senaryosu: 2 operasyon × 3 sonuç × oyuncu/AI→oyuncu/AI→AI.
+10 geçersiz giriş, 2 gerçek AI tick kaydı, 6 gerçek UI eylemi ve
+3 eski kayıt/sınırlama-v8/görsel-hata senaryosu.
+Matris: tek 90/120 kesinti, doğru etki, doğru zar sayısı, tek actor kaydı,
+mağdur anonimliği ve iki UI görünümü. UI.act ile gerçek motorlar çalışır.
+RNG yalnız sonuç dallarını seçmek için testte kontrollüdür; üretim oranları
+ve zar sırası değiştirilmedi. Sahte DOM gerçek Android değildir.
+Aynı yeni sözleşme testi değiştirilmemiş 87B'de: 4 geçen / 35 kalan.
+Bu 35 ayrı kök neden demek değildir; çoğu yeni sonuç alanının/kaydın
+olmamasını sınar. Önce/sonra tam loglar tests/87c-*.log dosyalarındadır.
+
+Tam regresyon: 36 paket · 3644 geçen · 0 kalan.
+Önceki 3605 kontrole 39 yeni senaryo eklendi. Paketler bazı yerde iddia,
+bazı yerde birden çok iddialı senaryo sayar. tests/results-87c.json ölçümdür.
+23 eski testte yalnız build/cache beklentisi 87b→87c güncellendi; diğer
+beklentiler, test sayıları ve davranış kontrolleri korunmuştur.
+Mevcut native Skia Canvas testi de geçti; Chrome/Android kabulü değildir.
+Paketleme sonrası ZIP üyeleri sınanan dosyalarla bayt düzeyinde karşılaştırılır
+ve yeni test ayrı çıkarılmış ZIP üzerinde yeniden çalıştırılır.
+
+7) DEĞİŞEN / KORUNAN
+diplomacy.js: ortak özel sonuç kaydı, hedef kapısı ve kurban bildirimi.
+ai.js: özel yolun ikinci actor yazımı kaldırıldı.
+ui.js: iki geçmiş ekranında isim, ayrık sonuç, ücret ve eski kayıt açıklaması.
+main.js yalnız BUILD_ID; sw.js yalnız cache adı.
+Bayt düzeyinde aynı 6 üretim dosyası: map.js, economy.js, combat.js,
+audio.js, index.html, manifest.json.
+Save v8 ve depolama anahtarları aynı; ek geçmiş alanları mevcut kayıt
+yapısında korunur. Harita kurtarma, menü/portre, bağımsız katmanlar,
+anlaşma transaction'ı, elçi, AI bütçesi ve Situation regresyonları geçti.
+
+8) SINIRLAR / DAVRANIŞ ETKİSİ
+Yeni mağdur dosyaları mevcut soruşturma/AI yollarında değerlendirilebilir;
+kampanya sonucu veya uzun koşu RNG sonu eski sürümle aynı denmez.
+Ücret/başarı/ifşa ve doğrudan etki katsayıları değiştirilmedi.
+Özel operasyonlar transaction değildir. UI.eventArt hata atarsa çağırana
+sızması hâlâ mümkündür; test, oluşan etkinin ve geçmişin birlikte kaldığını
+doğrular. Tam atomiklik veya bütün yan etkilerin güvenliği iddia edilmez.
+Bu fazda fiziksel Android testi yapılmadı; kullanıcı test arası sürüyor.
+Yeni tam günlük kampanya/diplomasi denge ölçümü yapılmadı.
+
+9) DEVAM
+87C.1: Fısıltı Ağı / sahte bayrak sonuç ve fail akışının denetimi;
+kuşatma sabotajını ayrı otomatik yol olarak sınıflandırma. Astra — High.
+Ardından 87D: diplomasi teklif tekrarları. Güncel faz/devir/kullanıcı
+bug-test planı pakettedir; şu anda kullanıcıdan cihaz testi istenmiyor.

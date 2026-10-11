@@ -1,0 +1,84 @@
+STARS — FAZ 86C.5.1
+SOL MENÜ YERLEŞİMİ VE LİDER PORTRELERİ
+
+KAYNAK: stars-faz86c-5.zip
+SHA-256: 38b9d03f2c5f2133709f1c17c79fb0a1667cfcbed271c04822b79fad4fcf7b75
+Kaynak SHA ve ZIP bütünlüğü doğrulandı.
+
+CİHAZ GERİ BİLDİRİMİ
+Kullanıcı 86C.5 denemesinde beyaz ekran oluşmadığını bildirdi.
+Bu ilk olumlu cihaz sonucudur; her arka plan/GPU koşulunun kanıtı değildir.
+Yeni bulgular: sol menüler zaman çubuğuna kadar uzanıyor; atanan valinin
+portresi gezegen panelinde boş, liderler listesinde ise görünür.
+
+1. VALİ PORTRESİ — KÖK NEDEN
+p_sistem doğru lider verisini taşıyan canvas.ldrPort üretiyordu.
+UI.paintSprites bu sınıfı hiç boyamıyordu. openDiplo içinde ayrı,
+gecikmeli bir lider çizimi vardı. Liderler penceresindeki paintEmblems
+ise bütün data-lk tuvallere genel ırk portresi basıyordu; liderin seed
+ve rütbesini dikkate almıyor ve başka paneldeki portreyi ezebiliyordu.
+
+DÜZELTME
+UI.paintLeaderPortraits tek lider çizim yolu oldu. Panel yenileme,
+liderler penceresi, diplomasi ve portre kurtarma aynı yolu kullanır.
+Genel ırk portresi çizimi lider tuvallerini atlar.
+Tamamlandı işareti yalnız başarılı çizimden sonra verilir; eksik/hatalı
+context tekrar denenebilir. Başarılı portre her kare yeniden çizilmez.
+Seed/görünüş/renk/rütbe ve tuval boyutu değişirse portre yenilenir.
+Amiral paneli de aynı düzeltmeden yararlanır.
+
+2. SOL MENÜLER — KÖK NEDEN
+Önceki konum hesabı yalnız window.innerHeight alt sınırına bakıyordu.
+Üst kaynak çubuğu, alt zaman/seçim çubukları ve değişen görsel viewport
+yerleşimde hesaba katılmıyordu. Menü butonun üstünden aşağı uzanıyordu.
+#tools ve #timepod aynı stacking seviyesindeydi; alt menünün yüksek
+z-index'i tek başına üst atasının stacking sınırını aşmıyordu.
+
+DÜZELTME
+Menü butonun merkezi çevresinde açılır ve kaynak çubuğu ile alt kontroller
+arasına sığdırılır. Yüksekliği sınırlanır; dokunma hedefleri küçülmeden
+menü kendi içinde kayar. Kaydırma çubuğu görünürdür. Sol araç katmanı
+zaman çubuğunun üzerinde konumlanır. Pencere/görsel viewport boyutu ve
+sol araç listesi kayması sonrası açık menünün konumu güncellenir.
+Yeni bağlamalar UI.boot tarafından bir kez yapılır; harita tuvali
+yeniden kurulduğunda çoğalmaz. Yerleşim harita tuvalini boyutlandırmaz.
+Siyasi/Diplomatik/Savaş ile bağımsız Radar/Lojistik davranışı korunur.
+
+3. HEDEFLİ DOĞRULAMA
+Yeni test: faz86c_5_1_ui_portraits_native_canvas_test.js — 48/0.
+Aynı test 86C.5 kaynağına yöneltilince 22/26: portre ve menü
+kusurları eski sürümde yakalanıyor. Eski sürümün genel regresyon
+başarısı bu iki kullanıcı bulgusunu yakalamamıştı.
+
+Portre: gerçek recruitLeader/assignLeader/UI.act/UI.refresh ve üretim
+panel HTML'i kullanılır; ART.leaderPortrait taklit edilmez. Yerel Skia
+Canvas pikselleri gerçek olarak okunur. Vali/amiral, liderler listesi,
+yenileme, context hatası, rütbe ve kayıt/RNG korunumu sınanır.
+Menü: 900×420, 900×300, 740×280, 640×240, 320×640 kontrollü CSS geometri
+girdileri; iki menünün konumu, kısa ekranda kaydırma alanı, görsel
+viewport değişimi, toolbar scroll ve dinleyici tekliği sınanır.
+
+Genel regresyon: 28 paket, 2870 geçen, 0 kalan. Ayrıntılı sonuç
+tests/results-86c5-1.json içindedir. Test edilen dosyalar teslim ZIP
+üyeleriyle birebir karşılaştırıldı; ZIP CRC kontrolü geçti.
+Önceki davranış iddiaları silinmedi veya gevşetilmedi; sürüm/cache
+beklentileri güncellendi. Kaynak fixture ve önceki testler korundu.
+
+SINIR: Canvas pikselleri gerçek, DOM/olay ve menü geometri ortamı
+sentetiktir. Bu teslim gerçek Chrome layout veya Android dokunmatik
+kabulü iddia etmez. Cihazda menünün son satırına erişim ayrıca görülmeli.
+
+4. DOSYALAR / UYUMLULUK
+Değişen üretim: ui.js, main.js, index.html, sw.js.
+main.js: genel portre sahibini ayırma ve build etiketi; kurtarma,
+save/load, transaction ve oyun döngüsü kodu değişmedi.
+sw.js: yalnız cache adı stars-v86c-5-1. Build: 86c-5-1.
+Birebir korunan: map.js, economy.js, combat.js, audio.js,
+manifest.json, diplomacy.js, ai.js (7 dosya).
+Kayıt v8, anahtarlar, oyun dengesi ve Situation karantinası korundu.
+
+5. SIRADAKİ İŞ
+86C.6 transaction kabul denetimi — Astra / Extra High (xhigh).
+Bu UI fazı için öneri Sol / High. Faz planı FAZ-PLANI.md içinde.
+Kısa cihaz kontrolü: harita ve devlet menülerinin son satırına eriş;
+atanmış valinin portresini gezegen ve liderler ekranlarında kontrol et.

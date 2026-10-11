@@ -1,0 +1,69 @@
+STARS FAZ 90RC — BÜTÜNLEŞİK TESLİM ADAYI
+
+KAYNAK
+stars-faz89b.zip
+SHA-256 ce8afbb031c3628d22c51e3329313ece141c530dffc59275108958b40bbf2cbf
+Build 90rc / SW cache stars-v90rc.
+
+AMAÇ VE SINIR
+Bu faz yeni oyun özelliği veya denge katsayısı eklemez. Temiz oyun, güncel
+ve eski v8 kayıt, art arda yükleme, yerel dosya bütünlüğü ve PWA güncelleme
+sınırlarını denetler. Gerçek Chrome/Android testi yapılmadı; cihaz kabulü
+87T hattında kullanıcı hazır olduğunda yapılacaktır.
+
+BULGU 1 — EKSİK PWA KABUĞU ESKİ ÇALIŞAN SÜRÜMÜ BOZABİLİYORDU
+Önce install sırasında cache.addAll hatası yutuluyor ve skipWaiting daha
+kabuk tamamlanmadan çalışıyordu. Eksik bir dağıtım yeni worker'ı etkinleştirip
+activate aşamasında eski çalışan Stars cache'ini silebilirdi.
+Sonra install ancak KABUK eksiksiz cache'lendikten sonra skipWaiting çağırır.
+Bir dosya eksikse install reddedilir; eski worker/cache yerinde kalır.
+
+BULGU 2 — ACTIVATE AYNI ORIGIN'DEKİ YABANCI CACHE'LERİ SİLİYORDU
+Önce geçerli cache dışında bütün cache adları siliniyordu. Sonra yalnız
+`stars-v` önekli eski Stars cache'leri silinir; başka uygulamanın cache'i
+korunur.
+
+BULGU 3 — SÖZDİZİMİ DOĞRU AMA YAPISI BOZUK KAYIT DÜNYAYI YARIM
+DEĞİŞTİREBİLİYORDU
+deserialize yalnız d.sys varlığını sınayıp atamalara başlıyordu. emps kökü,
+sistem/gezegen dizileri, kimlik sürekliliği veya filo sahibi daha sonra hata
+verirse çalışan dünya kısmen değişmiş kalabiliyordu. validSaveEnvelope temel
+kökleri ve doğrudan kullanılan kimlikleri mutasyondan önce sınar. Ölçülen dört
+bozuk zarf false döndü; mevcut kayıt zarfı ve RNG byte karşılaştırmasında aynı
+kaldı. Bu kapı keyfi büyüklükte/kötücül JSON için güvenlik sandbox'ı değildir.
+
+KARŞILAŞTIRMALI YENİ TEST
+tests/faz90rc_release_candidate_test.js: 15 senaryo.
+Kaynak 89B: 8 geçen / 7 kalan.
+90RC:       15 geçen / 0 kalan.
+Yakalanan farklar: eksik kabuk install'ı, yabancı cache silme, dört bozuk
+kayıt zarfı ve RC build/cache kimliği. Temiz kurulum, güncel kayıt, gerçek
+eski v8 fixture ve yerel saveGame/loadGame yolu iki sürümde de çalıştı.
+
+TAM REGRESYON
+44 paket / 3811 geçen / 0 kalan.
+89B: 43 paket / 3796 geçen / 0 kalan. Fark yalnız 15 yeni RC senaryosudur.
+Node/sahte DOM ve projedeki yerel Skia testleri çalıştı. Fiziksel Android,
+gerçek Chrome Canvas ve çevrimdışı gerçek service-worker yükseltmesi yapılmadı.
+
+DOSYALAR
+DEĞİŞEN main.js: validSaveEnvelope + BUILD_ID 90rc.
+DEĞİŞEN sw.js: güvenli install, Stars önekli cache temizliği, cache adı.
+YENİ tests/faz90rc_release_candidate_test.js, tests/results-90rc.json,
+tests/sha-90rc.json ve RC devir/kabul belgeleri.
+BYTE-FOR-BYTE AYNI: economy.js, map.js, combat.js, audio.js, manifest.json,
+ui.js, diplomacy.js, ai.js, index.html (9/9).
+
+KORUNANLAR
+Save v8; mevcut depolama anahtarları; Situation karantinası; 89B günlük
+kampanya; anlaşma transaction'ı; diplomasi/casusluk; filo rota ve sevki;
+savaş raporu; vali portresi; sol menü; Radar/Lojistik ayrımı.
+
+AÇIK KABUL
+Otomatik denetimde açık P0/P1 yok. Android yaşam döngüsü, beyaz harita,
+gerçek PWA güncellemesi ve dokunmatik/yerleşim 87T cihaz kabulünü bekliyor.
+Yayınlama yapılmadı.
+
+SONRAKİ ÇALIŞMA
+90RC.1 / 87T cihaz kabulü: Sol — High. Beyaz harita, kayıt bozulması veya
+karmaşık motor hatası yeniden görülürse Astra — High.

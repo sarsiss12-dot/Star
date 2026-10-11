@@ -411,6 +411,7 @@ function empireIncome(e){
   e.adminCost = admin;
   inc.ene -= upk * 1.6 + fleetE + admin;
   e.foodNeed = food;
+  if (typeof fedApplyIncomeLaws === 'function') fedApplyIncomeLaws(e, inc);
   return inc;
 }
 
@@ -483,6 +484,9 @@ function economyTick(init){
     else if (bio2 === 'litoit' && e.res.min <= 0 && e.inc.min < 0){ e.crisis = 'mineral'; }
     else if (bio2 === 'organik' && e.res.yiy < 0){ e.res.yiy = 0; e.crisis = 'yiyecek'; }
     else e.crisis = null;
+    // 89B: enerji krizi yukarıdaki else-if zincirini kesebilir; stok
+    // temizliği kriz önceliğinden bağımsızdır, yiyecek borcu birikmez.
+    if (e.res.yiy < 0) e.res.yiy = 0;
     if (e.res.min < 0) e.res.min = 0;
     if (e.res.ala < 0) e.res.ala = 0;
     if (e.res.etk < 0) e.res.etk = 0;
@@ -743,9 +747,21 @@ function autoResearch(e, branch){
 }
 
 /* ---------- inşa ---------- */
+// Bütün sipariş ve tamamlanma yollarının ortak teknoloji/özel izin kapısı.
+function shipBuildAccess(e, cls){
+  if (!e || e.dead) return {ok:false, why:'Üretici devlet geçersiz'};
+  const d = Object.prototype.hasOwnProperty.call(SHIPS, cls) && SHIPS[cls];
+  if (!d) return {ok:false, why:'Bilinmeyen gemi'};
+  if (d.crisisOnly && !e.crisisSide) return {ok:false, why:'Yalnız kriz tarafı üretebilir'};
+  if (d.tech && !(e.techs && e.techs[d.tech]))
+    return {ok:false, why:'Araştırma gerekli: ' + (TECHS[d.tech] ? TECHS[d.tech].n : d.tech)};
+  if (cls === 'col_s' && councilExists() && G.council.laws.colYasak && inCouncil(e))
+    return {ok:false, why:'Süper Silah Yasağı yürürlükte'};
+  return {ok:true};
+}
 function canBuildShip(e, cls){
+  if (!shipBuildAccess(e, cls).ok) return false;
   const d = SHIPS[cls];
-  if (d.tech && !e.techs[d.tech]) return false;
   for (const r in d.cost) if (e.res[r] < shipCost(e,cls)[r]) return false;
   return true;
 }
@@ -787,6 +803,8 @@ function navyAsleep(e){
 }
 
 function queueShip(e, sys, cls, oto){
+  if (!shipBuildAccess(e, cls).ok || !sys || G.emps[e.id] !== e ||
+      G.sys[sys.id] !== sys) return false;
   /* ═══ FAZ 59: SABOTE EDİLMİŞ TERSANE ═══
      Kilitli tezgâhta gemi üretilemez — oyuncu da AI da. */
   if (sys && sys.yardLock && sys.yardLock > (G.memAge || 0)){
@@ -800,15 +818,6 @@ function queueShip(e, sys, cls, oto){
     const uy = navyAsleep(e);
     if (uy.uyku) return false;
   }
-  /* FAZ 34: organik sürü gemileri yalnız krize aittir */
-  if (SHIPS[cls] && SHIPS[cls].crisisOnly && !e.crisisSide) return false;
-  /* ═══ FAZ 32: SÜPER SİLAH YASAĞI ═══
-     Konseyden geçtiyse üyeler Colossus inşa edemez. */
-  if (cls === 'col_s' && typeof councilExists === 'function' && councilExists() &&
-      G.council.laws.colYasak && typeof inCouncil === 'function' && inCouncil(e)){
-    if (e.id === 0) say('Süper Silah Yasağı yürürlükte — Colossus inşa edilemez', 'war');
-    return false;
-  }
   if (!hasYard(sys) || sys.owner !== e.id) return false;
   const c = shipCost(e, cls);
   for (const r in c) if (e.res[r] < c[r]) return false;
@@ -816,6 +825,16 @@ function queueShip(e, sys, cls, oto){
   const days = Math.round((SHIPS[cls].sz*14 + 16) / (1 + e.mods.buildMul));
   sys.queue.push({cls, e:e.id, left:days, tot:days});
   return true;
+}
+// Eski kayıttaki kilitli işler korunur; açık işler bunların arkasında takılmaz.
+function activeShipQueue(sys){
+  const active = [], slots = yardCount(sys);
+  if (sys.yardLock && sys.yardLock > (G.memAge || 0)) return active;
+  for (let i=0; i<sys.queue.length && active.length<slots; i++){
+    const q=sys.queue[i], e=G.emps[q.e];
+    if (e && sys.owner===e.id && shipBuildAccess(e,q.cls).ok) active.push(i);
+  }
+  return active;
 }
 /* ═══════════════════════════════════════════════════════════════════
    FAZ 13 — ZAMANLI İNŞAAT KUYRUĞU
@@ -1019,7 +1038,7 @@ function buildHabitat(e, sys, pl){
   const c = BUILDINGS.habitat.c;
   for (const r in c) if (e.res[r] < c[r]) return false;
   for (const r in c) e.res[r] -= c[r];
-  pl.owner = e.id;
+  territoryOwnerSet(pl, e.id);
   pl.hab = true;                                       // habitat kolonisi
   /* FAZ 21: kara savaşı altyapısı — shield (0-100) ve garrison.
      Bu fazda YALNIZCA veri; muharebe matematiği yazılmadı. */
@@ -1032,7 +1051,7 @@ function buildHabitat(e, sys, pl){
     const ay = Math.max(0, Math.round(COL_SHOCK_MONTHS * kisalt));
     if (ay > 0){ pl.col.shock = (G.memAge || 0) + ay; pl.col.shockTot = ay; }
   }
-  if (sys.owner < 0) sys.owner = e.id;
+  if (sys.owner < 0) territoryOwnerSet(sys, e.id);
   e.colonies.push({s:sys.id, p:pl.i});
   recalcMods(e);
   if (!e.ai) say('Habitat kuruldu — ' + pl.name, 'win');
@@ -1094,11 +1113,11 @@ function colonyShockMul(e, col){
 }
 
 function doColonize(e, sys, pl){
-  pl.owner = e.id;
+  territoryOwnerSet(pl, e.id);
   pl.col = {pop: (hasCivic(e,'seedPop') ? 7 : 3) + (hasPerk(e,'migration') ? 3 : 0), stab:50, grow:0,
             b:{maden:1, santral:1, ciftlik:1}, cap:8, name:pl.name, f:'sanayi', fcd:0,
             shield:0, garrison:0};
-  if (sys.owner < 0) sys.owner = e.id;
+  if (sys.owner < 0) territoryOwnerSet(sys, e.id);
   e.colonies.push({s:sys.id, p:pl.i});
   recalcMods(e);
   if (typeof facEvent === 'function') facEvent(e,'colony');
@@ -1637,6 +1656,8 @@ function invasionTick(){
           col.garrison = Math.max(0, savunma - garnKayip);
 
           /* Kaybı transport filolarına dağıt */
+          const hamOrdu=()=>K.tf.reduce((n,f)=>n+f.ships.reduce((v,s)=>v+(SHIPS[s.c].ground||0)*s.h,0),0);
+          const onceOrdu=hamOrdu();
           let kalanKayip = orduKayip;
           for (const tf of K.tf){
             if (kalanKayip <= 0) break;
@@ -1654,6 +1675,7 @@ function invasionTick(){
               }
             }
           }
+          warLedgerGround(+id,pl.owner,onceOrdu-hamOrdu(),savunma-col.garrison);
           G.fleets = G.fleets.filter(f => f.ships.length || f.e !== +id);
 
           /* ── 4. TEMİZ İŞGAL ── */
@@ -1672,7 +1694,8 @@ function invasionTick(){
             if (typeof captureSystem === 'function' && sys.owner !== +id)
               captureSystem(sys, +id);
             else if (typeof planetFlip === 'function'){
-              planetFlip(pl); pl.owner = +id;
+              planetFlip(pl); territoryOwnerSet(pl, +id);
+              warLedgerCapture(sys,pl.i,eskiSahip,+id);
             }
             col.pop = popKoru;
             col.b = binaKoru;
@@ -1730,7 +1753,8 @@ function invasionTick(){
           if (typeof captureSystem === 'function' && sys.owner !== +id)
             captureSystem(sys, +id);
           else if (typeof planetFlip === 'function'){
-            planetFlip(pl); pl.owner = +id;
+            planetFlip(pl); territoryOwnerSet(pl, +id);
+            warLedgerCapture(sys,pl.i,eski,+id);
           }
           /* Sahiplik gerçekten geçmediyse enkaz üretme — döngünün
              ikinci kapısı. */
@@ -1937,7 +1961,7 @@ function colossusFire(f, pl, mod){
   if (mod === 'catlat'){
     /* ── GEZEGEN ÇATLATAN ── */
     pl.col = null;
-    pl.owner = -1;
+    territoryOwnerSet(pl, -1);
     pl.shattered = true;
     pl.hab = 0;
     pl.t = 'ast';                       // parçalanmış kütle
@@ -1987,7 +2011,7 @@ function colossusFire(f, pl, mod){
     pl.col.stab = 0;
     pl.col.q = [];
     pl.col = null;                      // koloni biter, YAPI ayakta kalır
-    pl.owner = -1;
+    territoryOwnerSet(pl, -1);
     pl.neutroned = (G.memAge || 0);
     say('☢ NÖTRON SÜPÜRÜLDÜ — ' + ad + ' bomboş, yapılar sağlam', 'war');
     for (const x of G.emps){
@@ -2001,7 +2025,7 @@ function colossusFire(f, pl, mod){
   /* Sistem sahipliği: gezegeni kalmayan sistem sahipsiz düşer.
      DÜĞÜM VE HİPER YOLLAR AYNEN DURUR. */
   const kalan = sys.planets.some(p2 => p2.col);
-  if (!kalan && sys.owner === eskiSahip) sys.owner = -1;
+  if (!kalan && sys.owner === eskiSahip) territoryOwnerSet(sys, -1);
   sys.def = sysDefense(sys);
   if (eski) recalcMods(eski);
   recalcMods(e);
@@ -2099,7 +2123,7 @@ function swarmDevour(sys, pl){
 
   /* ── YUTULDU ── */
   pl.col = null;
-  pl.owner = -1;
+  territoryOwnerSet(pl, -1);
   pl.shattered = true;
   pl.devoured = (G.memAge || 0);
   pl.hab = 0;
@@ -2110,7 +2134,7 @@ function swarmDevour(sys, pl){
 
   /* Sistem sahipsiz düşer, DÜĞÜM VE HİPER YOLLAR DURUR */
   const kalan = sys.planets.some(p2 => p2.col);
-  if (!kalan && sys.owner === eskiSahip) sys.owner = -1;
+  if (!kalan && sys.owner === eskiSahip) territoryOwnerSet(sys, -1);
   sys.def = sysDefense(sys);
   if (eski) recalcMods(eski);
 
@@ -2449,14 +2473,14 @@ function secede(e, sys, pl){
   /* Çekirdek gezegen */
   const devret = (sy2, pl2) => {
     if (!pl2.col || pl2.owner !== e.id) return false;
-    pl2.owner = yeni.id;
+    territoryOwnerSet(pl2, yeni.id);
     yeni.colonies.push({s: sy2.id, p: pl2.i});
     e.colonies = e.colonies.filter(c => !(c.s === sy2.id && c.p === pl2.i));
     pl2.col.stab = 50;
     pl2.col.secede = 0;
     pl2.recent_conquest = 24;
     const kalan = sy2.planets.some(p3 => p3.col && p3.owner === e.id);
-    if (!kalan) sy2.owner = yeni.id;
+    if (!kalan) territoryOwnerSet(sy2, yeni.id);
     return true;
   };
   devret(sys, pl);
@@ -2648,6 +2672,8 @@ const LOOP_CAP_LIMIT = .92;    // filo kapasitesi bu oranı aşarsa dur
 function loopBuildStatus(e, sys){
   if (!sys || !sys.loopBuild) return {aktif:false};
   const cls = sys.loopBuild;
+  const access = shipBuildAccess(e, cls);
+  if (!access.ok) return {aktif:true, dur:true, why:access.why};
   if (sys.yardLock && sys.yardLock > (G.memAge || 0))
     return {aktif:true, dur:true, why:'Tersane sabote edilmiş'};
   if ((e.res.ala || 0) < LOOP_ALA_FLOOR)
@@ -3087,7 +3113,7 @@ function devourPlanet(e, sys, pl){
       if (ix >= 0) sahip.colonies.splice(ix, 1);
     }
     delete pl.col;
-    pl.owner = -1;
+    territoryOwnerSet(pl, -1);
     /* Galaksi bunu unutmaz */
     for (const o of G.emps){
       if (o.dead || o.wild || o.crisisSide || o.id === e.id) continue;
@@ -3604,8 +3630,8 @@ gocen_gunes:{
           for (const sy of G.sys){
             if (sy.owner !== kurban.id) continue;
             if (yutulan >= 2) break;
-            for (const pl of sy.planets) if (pl.col){ pl.col = null; pl.owner = -1; yutulan++; }
-            sy.owner = -1;
+            for (const pl of sy.planets) if (pl.col){ pl.col = null; territoryOwnerSet(pl, -1); yutulan++; }
+            territoryOwnerSet(sy, -1);
           }
           kurban.rel[e.id] = -100;
           endSituation(s, kurban.name + ' devletinin ' + yutulan +
@@ -3713,7 +3739,7 @@ yarinki_taht:{
             recalcMods(ikiz);
             const bos = G.sys.find(sy => sy.owner < 0 && sy.planets.some(p2 => !p2.col));
             if (bos){
-              bos.owner = ikiz.id; ikiz.home = bos.id;
+              territoryOwnerSet(bos, ikiz.id); ikiz.home = bos.id;
               const pl = bos.planets.find(p2 => !p2.col);
               if (pl && typeof doColonize === 'function') doColonize(ikiz, bos, pl);
               newFleet(ikiz, bos.id, [{c:'zir'},{c:'zir'}], null);
@@ -3754,7 +3780,7 @@ yarinki_taht:{
             /* Sınırda bir sisteme yerleştir */
             const bos = G.sys.find(sy => sy.owner < 0 && sy.planets.some(p2 => !p2.col));
             if (bos){
-              bos.owner = ikiz.id;
+              territoryOwnerSet(bos, ikiz.id);
               ikiz.home = bos.id;
               const pl = bos.planets.find(p2 => !p2.col);
               if (pl && typeof doColonize === 'function') doColonize(ikiz, bos, pl);
@@ -3876,7 +3902,7 @@ cam_bahce:{
         f:(e,s)=>{
           const sy = G.sys[s.data.sys];
           const pl = sy && sy.planets[s.data.p];
-          if (pl){ pl.devoured = true; pl.col = null; pl.owner = -1; }
+          if (pl){ pl.devoured = true; pl.col = null; territoryOwnerSet(pl, -1); }
           /* Tarafsız gezgin fraksiyon */
           try {
             const wg = makeEmpire(G.emps.length, e.race, 'Cam Bahçe', true, rnd, []);
@@ -3900,7 +3926,7 @@ cam_bahce:{
           if (pl){
             pl.glassGarden = true;
             /* Sahipsizse bize bağlanır */
-            if (sy.owner < 0) sy.owner = e.id;
+            if (sy.owner < 0) territoryOwnerSet(sy, e.id);
             if (!pl.col && typeof doColonize === 'function'){
               try { doColonize(e, sy, pl); } catch(err){}
             }

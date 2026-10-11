@@ -1,0 +1,418 @@
+{
+  "suites": 58,
+  "pass": 4168,
+  "fail": 0,
+  "skipped": [],
+  "ok": true,
+  "method": "Initial full run followed by six affected suites after narrow serialization fix and build expectation updates. Other 52 suites not rerun after fix.",
+  "rerun_suites": [
+    "faz86c_4h_r4_diagnosis_test.js",
+    "faz86c_4h_r4_targeted_diag_test.js",
+    "faz90rc_release_candidate_test.js",
+    "faz92b_settlement_proposal_test.js",
+    "faz85b_load_idempotency_test.js",
+    "faz85f_spatial_simulation_continuity_test.js"
+  ],
+  "results": [
+    {
+      "name": "faz83_2_brand_test.js",
+      "exit": 0,
+      "pass": 55,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz83_3_render_recovery_test.js",
+      "exit": 0,
+      "pass": 54,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz83_4_redraw_leaders_test.js",
+      "exit": 0,
+      "pass": 71,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz84a_intel_dedup_test.js",
+      "exit": 0,
+      "pass": 80,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz84b_vassal_state_dedup_test.js",
+      "exit": 0,
+      "pass": 118,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz84c_state_visibility_gate_test.js",
+      "exit": 0,
+      "pass": 114,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz85a_political_save_integrity_test.js",
+      "exit": 0,
+      "pass": 169,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz85b_load_idempotency_test.js",
+      "exit": 0,
+      "pass": 128,
+      "fail": 0
+    },
+    {
+      "name": "faz85c_crisis_save_continuity_test.js",
+      "exit": 0,
+      "pass": 136,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz85d_campaign_save_continuity_test.js",
+      "exit": 0,
+      "pass": 179,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz85e_event_inbox_continuity_test.js",
+      "exit": 0,
+      "pass": 143,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz85f_spatial_simulation_continuity_test.js",
+      "exit": 0,
+      "pass": 160,
+      "fail": 0
+    },
+    {
+      "name": "faz86a_intel_command_center_test.js",
+      "exit": 0,
+      "pass": 119,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz86b_deal_engine_test.js",
+      "exit": 0,
+      "pass": 124,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz86c_1_quote_effective_plan_test.js",
+      "exit": 0,
+      "pass": 94,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz86c_2_transaction_test.js",
+      "exit": 0,
+      "pass": 103,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz86c_3_ai_negotiation_test.js",
+      "exit": 0,
+      "pass": 82,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz86c_4_reciprocal_offers_test.js",
+      "exit": 0,
+      "pass": 90,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz86c_4h_map_input_test.js",
+      "exit": 0,
+      "pass": 75,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz86c_4h_r1_exact_regression_test.js",
+      "exit": 0,
+      "pass": 104,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz86c_4h_r2_surface_camera_layers_test.js",
+      "exit": 0,
+      "pass": 77,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz86c_4h_r3_surface_lifecycle_test.js",
+      "exit": 0,
+      "pass": 89,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz86c_4h_r4_diagnosis_test.js",
+      "exit": 0,
+      "pass": 85,
+      "fail": 0
+    },
+    {
+      "name": "faz86c_4h_r4_targeted_diag_test.js",
+      "exit": 0,
+      "pass": 87,
+      "fail": 0
+    },
+    {
+      "name": "faz86c_5_1_ui_portraits_native_canvas_test.js",
+      "exit": 0,
+      "pass": 48,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz86c_5_diagnostics_test.js",
+      "exit": 0,
+      "pass": 38,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz86c_5_native_canvas_test.js",
+      "exit": 0,
+      "pass": 66,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz86c_6_transaction_acceptance_test.js",
+      "exit": 0,
+      "pass": 529,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz86c_strict_deal_ai_test.js",
+      "exit": 0,
+      "pass": 139,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz86d_envoy_missions_test.js",
+      "exit": 0,
+      "pass": 58,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz86e_diplomacy_center_test.js",
+      "exit": 0,
+      "pass": 45,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz86f_ai_balance_test.js",
+      "exit": 0,
+      "pass": 25,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz86g_integration_handoff_test.js",
+      "exit": 0,
+      "pass": 16,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz87a_espionage_feedback_test.js",
+      "exit": 0,
+      "pass": 36,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz87b_ai_operation_selection_test.js",
+      "exit": 0,
+      "pass": 26,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz87c_1_intrigue_outcomes_test.js",
+      "exit": 0,
+      "pass": 45,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz87c_special_operation_outcomes_test.js",
+      "exit": 0,
+      "pass": 39,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz87d_offer_repetition_test.js",
+      "exit": 0,
+      "pass": 24,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz88a_1_ship_dispatch_test.js",
+      "exit": 0,
+      "pass": 30,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz88a_fleet_routes_test.js",
+      "exit": 0,
+      "pass": 38,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz88b_combat_feedback_test.js",
+      "exit": 0,
+      "pass": 24,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz89a_memory_factions_test.js",
+      "exit": 0,
+      "pass": 24,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz89b_daily_campaign_test.js",
+      "exit": 0,
+      "pass": 11,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz90rc_1_save_boundary_test.js",
+      "exit": 0,
+      "pass": 19,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz90rc_2_load_feedback_test.js",
+      "exit": 0,
+      "pass": 14,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz90rc_3_load_transaction_test.js",
+      "exit": 0,
+      "pass": 48,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz90rc_release_candidate_test.js",
+      "exit": 0,
+      "pass": 15,
+      "fail": 0
+    },
+    {
+      "name": "faz91a_special_presentation_test.js",
+      "exit": 0,
+      "pass": 37,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz91b_campaign_observer_test.js",
+      "exit": 0,
+      "pass": 5,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz91b_faction_share_test.js",
+      "exit": 0,
+      "pass": 8,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz91c_ai_candidates_test.js",
+      "exit": 0,
+      "pass": 6,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz91c_pirate_combat_test.js",
+      "exit": 0,
+      "pass": 21,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz91d_1_fleet_names_native_canvas_test.js",
+      "exit": 0,
+      "pass": 29,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz91d_territory_native_canvas_test.js",
+      "exit": 0,
+      "pass": 40,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz91e_1_federation_policy_test.js",
+      "exit": 0,
+      "pass": 31,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz91e_federation_laws_test.js",
+      "exit": 0,
+      "pass": 31,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz92a_war_contribution_test.js",
+      "exit": 0,
+      "pass": 34,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz92b_settlement_proposal_test.js",
+      "exit": 0,
+      "pass": 33,
+      "fail": 0
+    }
+  ]
+}

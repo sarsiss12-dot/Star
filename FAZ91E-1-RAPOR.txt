@@ -1,0 +1,77 @@
+STARS FAZ 91E.1 — FEDERASYON POLİTİKALARI VE SAVAŞ İZNİ
+
+KAYNAK
+stars-faz91e.zip
+SHA-256: 71634609074157993030cc47767ddaef8911480c4c5f944a6bfe66238ae8dd15
+Build: 91e-1; SW cache: stars-v91e-1.
+
+TESLİM
+Mevcut dört temel yasa korundu. İç yasa kataloğu 11 yasaya genişledi;
+beş kategoride sunuluyor. Bütçe, bilim ve üretim/refah politikaları
+birbirine alternatif. Kabul edilen yeni politika aynı ailedeki eski
+politikayı kaldırıyor. İç yasalar yarı teklif maliyetiyle kaldırma
+oylamasına sunulabiliyor. Bütün işlemler mevcut tek f.vote gündeminde.
+
+Yeni seçenekler: Sivil Fon, Patent Özerkliği, Seri Üretim, Refah,
+Ortak Doktrin, Ortak Seyir Standartları ve Uyum Programı.
+Gelir, araştırma, federal fon, savaş gücü, bakım, seyir ve uyum
+etkileri gerçek hesaplara bağlandı. Ayrılma/kaldırma sonrası kalıcı
+bonus bırakılmıyor. Ayrıntılı maliyet ve ödünleşimler:
+FEDERASYON-YASALARI.md.
+
+SAVAŞ ONAYI
+Önceden kapalı olan yeni Savaş Onayı teklifleri açıldı. Yasa yürürlükte
+iken yeni saldırı savaşı için aktör/hedef çiftine özgü izin gerekiyor.
+Oylamanın kabulü otomatik savaş açmıyor. İzin 180 gün geçerli ve tek
+kullanımlık; tekrar talep bekleme süresi 90 gün. Normal savaş yetkisi,
+temas, hedef ve doktrin kontrolleri korunuyor. AI izin isteyebiliyor,
+sonrasında olağan savaş değerlendirmesini kullanıyor.
+Gerçek savunma yükümlülüğü ayrıca tanınıyor; saldırı ittifakına savunma
+etiketi takılarak izin atlanamıyor. Mevcut savaşlar geriye dönük olarak
+izne bağlanmıyor. Eski kayıtta bulunmayan savunma geçmişi uydurulmuyor.
+Anlaşmadaki warOn sözü de izin kapısından geçiyor; başarısız anlaşma
+işlemi tüketilen izni geri alıyor.
+
+DOĞRULAMA
+56 paket için tam çalışma yapıldı: ilk sonuç 4100 geçen / 1 kalan.
+Kalan yeni testin kurulumunda teklif tarafları temas/arıtıcı diplomasi
+kapısına takılıyordu. Üretim kodu değiştirilmeden test tarafı temaslı,
+arıtıcı olmayan imparatorluğa düzeltildi. Yeni 91E.1 paketi yeniden
+çalıştırıldı: 31 geçen / 0 kalan.
+Birleşik son sonuç: 56 paket, 4101 geçen, 0 kalan, 0 atlanan.
+Bu sayı son tam çalışma + yalnız test kurulumu düzeltmesinden sonraki
+hedefli tekrarın birleşimidir; bütün paketlerin tekrar çalıştığı iddia
+edilmiyor. İlk sonuç, son hedefli log ve birleşik sonuç tests/ altında.
+
+Yeni senaryolar tüm 11 iç yasayı yürürlüğe koyma/kaldırma, alternatif
+politikalar, gerçek gelir/modifier etkileri, üyelik, izin süresi,
+reddetme, savunma, kayıt/yükleme, AI, UI ve işlem geri alma yollarını
+sınıyor. Önceki 55 paket geçti. Önceki federasyon testindeki artık
+geçersiz Savaş Onayı kapalı beklentisi yeni sözleşmeye güncellendi;
+geçersiz anahtar kontrolü constructor girdisiyle korundu. Diğer eski
+testlerde sürüm/cache kimliği beklentileri güncellendi.
+
+Native Canvas regresyonları çalıştı. Bu fazda gerçek tarayıcı veya
+Android testi yapılmadı; native piksel çıktıları ayrıca gözle incelenmedi.
+Çıktı ZIP'i açılarak manifest bütünlüğü denetlenir; bu paket kontrolü
+oyun testlerinin ZIP üzerinden yeniden koşulması anlamına gelmez.
+
+DOSYALAR
+Üretim değişiklikleri: diplomacy.js, main.js, economy.js, ai.js,
+ui.js; sw.js yalnız cache kimliği. Yeni hedefli test ve devir/plan
+belgeleri eklendi/güncellendi.
+map.js, combat.js, audio.js, index.html ve manifest.json kaynak 91E
+ile byte-for-byte aynı. Harita kurtarma ve girdi yolları değiştirilmedi.
+Kayıt v8; mevcut kayıt uyumluluğu ve Situation karantinası korunuyor.
+
+AÇIK KALANLAR
+Uzun dönem ekonomi/AI politika dengesi ve fiziksel cihaz menü akışı
+henüz doğrulanmadı. Galaktik konseyin bütün yasaları kopyalanmadı;
+federasyon seçimi, üyelik anayasası ve yaptırımlar bu teslimde eklenmedi.
+Kullanıcının cihaz test arası sürüyor; senaryolar birikim listesinde.
+87T adayı stars-faz91c.zip dondurulmuş olarak korunuyor.
+
+SONRAKİ SIRA
+92A: ortak savaş katılımcı ve katkı kaydı (Astra / High).
+92B–92C: gerekçeli toprak paylaşım teklifi ve güvenli uygulama.
+91F: civic metin/etki denetimi. Yayın/deploy yapılmadı.

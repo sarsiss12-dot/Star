@@ -1,0 +1,81 @@
+✗ korsan filosu savaş ilanı olmadan gerçek muharebeye girer — Expected values to be strictly equal:
+
+undefined !== 1
+
+✗ korsan husumeti iki yönlü ve RNG tüketmeden hesaplanır — Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- true
+
+✓ normal taraflar savaş ilanı olmadan çatışmaz
+✗ olmayan/ölü korsan tarafı hedef olamaz — Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- false
+
+✗ muhafızsız yuva hasar alır ve oyuncuya karşı ateş eder — The expression evaluated to a falsy value:
+
+  assert.ok(h.run('S.nest.hp<1200'))
+
+✗ filo sırası yuvanın erken kaybetmesine yol açmaz false — Expected values to be strictly equal:
+
+2 !== 0
+
+✗ filo sırası yuvanın erken kaybetmesine yol açmaz true — Expected values to be strictly equal:
+
+2 !== 0
+
+✗ yuvanın dayanımı bitince kaldırılır ve ödül tekrarlanmaz — Expected values to be strictly equal:
++ actual - expected
+
++ {
++   hp: 1,
++   timer: 120
++ }
+- null
+
+✗ iki normal devletin savaşı taraf olmayan yuvaya hasar vermez — Expected values to be strictly equal:
++ actual - expected
+
++ 1161.1185
+- 1200
+
+✗ korsan yuvası sistemin normal sahibini hayatta tutan savunma sayılmaz — Expected values to be strictly equal:
+
+3 !== 0
+
+✗ normal devletin savaşı taraf olmayan kalıntıya hasar vermez — Expected values to be strictly equal:
+
+2966.673 !== 3000
+
+✗ silahlı filo uyanan kalıntıyla karşılıklı savaşır — The expression evaluated to a falsy value:
+
+  assert.ok(h.run('fleetHealth(A)<hull'))
+
+✗ korsanın sahip olduğu sisteme saldırı rotası engellenmez — Expected values to be strictly equal:
+
+false !== true
+
+✓ yuvanın varlığı tarafsız üçüncü devletin sınırını açmaz
+✗ gerçek SALDIR eylemi rota kurar ve varıştan sonra yuvaya ateş açılır — The expression evaluated to a falsy value:
+
+  assert.ok(h.run('!S.nest||S.nest.hp<1200'))
+
+✗ korsan filosu AI tehdit hesabına girer, barıştaki normal filo girmez — The expression evaluated to a falsy value:
+
+  assert.ok(h.run('threatAt(E,S.id)>0'))
+
+✗ yuvadan gerçek ricat saldırganı hasardan önce çıkarır — Cannot read properties of undefined (reading 'retreat')
+✗ muhafız ricat etse de yuva aynı turda savaşa devam eder — Cannot read properties of undefined (reading 'retreat')
+✗ geri çekilemeyen düşük gövdeli filo yuvaya karşı donmaz — Cannot read properties of undefined (reading 'rounds')
+✗ panel salt varlığı sürmekte olan kuşatma diye göstermez — The expression evaluated to a falsy value:
+
+  assert.ok(h.run('html.includes("Korsanlara savaş ilanı gerekmez")'))
+
+✗ v8 yüklemeden sonra korsan çatışması ve yuva dayanımı devam eder — The expression evaluated to a falsy value:
+
+  assert.ok(h.run('G.sys[0].nest.hp<hp'))
+
+GEÇEN: 2 KALAN: 19

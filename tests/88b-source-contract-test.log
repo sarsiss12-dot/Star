@@ -1,0 +1,62 @@
+✗ gerçek tur oyuncu raporu üretir — battleReportForPlayer is not defined
+✗ rapor taraf kimliklerini gerçek savaştan alır — Cannot read properties of undefined (reading 'a')
+✗ son tur verilen hasar gerçek düşman gövde farkıdır — battleReportForPlayer is not defined
+✗ son tur alınan hasar gerçek oyuncu gövde farkıdır — battleReportForPlayer is not defined
+✗ ateş açabilen gemi sayısı menzil hesabından gelir — Cannot read properties of undefined (reading 'last')
+✗ ikmal oranı turun sideStats sonucuyla aynıdır — battleReportForPlayer is not defined
+✗ sistem paneli hasar ve kalkanı ayrı anlatır — Expected values to be strictly equal:
+
+false !== true
+
+✗ sistem paneli gövde dayanımının değişmediğini söyler — Expected values to be strictly equal:
+
+false !== true
+
+✗ eski yanıltıcı toplam güç cümlesi kaldırıldı — Expected values to be strictly equal:
+
+false !== true
+
+✗ filo paneli yıpranmayı gövde olarak adlandırır — Expected values to be strictly equal:
+
+false !== true
+
+✗ ham güç stratejik filo gücü diye etiketlenir — Expected values to be strictly equal:
+
+false !== true
+
+✗ oyunculu savaşın sistem panelinde tur raporu görünür — Expected values to be strictly equal:
+
+false !== true
+
+✗ AI-AI raporu oyuncuya ayrıntı sızdırmaz — battleReportForPlayer is not defined
+✗ tanınmayan rakibin adı panelde gizlenir — Expected values to be strictly equal:
+
+false !== true
+
+✗ kesin zafer raporu gerçek kayıpları mesajda taşır — battleReportForPlayer is not defined
+✗ son silahsız gemiler de kesin sonuç kaybına eklenir — battleReportForPlayer is not defined
+✗ zafer raporunun kayıp sayısı kalan gemi farkıyla tutarlıdır — battleReportForPlayer is not defined
+✗ savunma duruşu ricadı rapora işler — battleReportForPlayer is not defined
+✗ ricat mesajı gövde ve ikmali gerçek değerle gösterir — Expected values to be strictly equal:
+
+false !== true
+
+✗ çatışma barışla kesilirse rapor sonuçsuz kapanır — Cannot read properties of undefined (reading 'done')
+✗ enkaz ödülü hasarı veren Enkaz Mühendisine gider — Expected values to be strictly equal:
+
+false !== true
+
+✗ kurbanın Enkaz Mühendisliği kendi kaybını ödüllendirmez — Expected values to be strictly equal:
++ actual - expected
+
++ 57.943479075
+- 53.143479075
+
+✗ muharebe raporu v8 kaydet yüklede korunur — Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- true
+
+✓ bozuk kayıt raporu yüklemede temizlenir
+GEÇEN: 1 KALAN: 23

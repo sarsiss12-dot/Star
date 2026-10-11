@@ -1,0 +1,533 @@
+✗ stealTech basari oyuncu: gerçek etki, tek bedel ve iki bakış açısı — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- 'basari'
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:7:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:32:21
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:6:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:28:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ stealTech basari AI→oyuncu: gerçek etki, tek bedel ve iki bakış açısı — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- 'basari'
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:7:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:32:21
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:6:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:28:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ stealTech basari AI→AI: gerçek etki, tek bedel ve iki bakış açısı — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- 'basari'
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:7:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:32:21
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:6:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:28:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ stealTech ifsa oyuncu: gerçek etki, tek bedel ve iki bakış açısı — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- 'ifsa'
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:7:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:32:21
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:6:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:28:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ stealTech ifsa AI→oyuncu: gerçek etki, tek bedel ve iki bakış açısı — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- 'ifsa'
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:7:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:32:21
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:6:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:28:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ stealTech ifsa AI→AI: gerçek etki, tek bedel ve iki bakış açısı — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- 'ifsa'
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:7:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:32:21
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:6:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:28:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ stealTech sonucsuz oyuncu: gerçek etki, tek bedel ve iki bakış açısı — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- 'sonucsuz'
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:7:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:32:21
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:6:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:28:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ stealTech sonucsuz AI→oyuncu: gerçek etki, tek bedel ve iki bakış açısı — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- 'sonucsuz'
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:7:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:32:21
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:6:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:28:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ stealTech sonucsuz AI→AI: gerçek etki, tek bedel ve iki bakış açısı — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- 'sonucsuz'
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:7:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:32:21
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:6:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:28:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ incite basari oyuncu: gerçek etki, tek bedel ve iki bakış açısı — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- 'basari'
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:7:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:32:21
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:6:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:28:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ incite basari AI→oyuncu: gerçek etki, tek bedel ve iki bakış açısı — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- 'basari'
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:7:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:32:21
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:6:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:28:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ incite basari AI→AI: gerçek etki, tek bedel ve iki bakış açısı — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- 'basari'
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:7:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:32:21
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:6:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:28:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ incite ifsa oyuncu: gerçek etki, tek bedel ve iki bakış açısı — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- 'ifsa'
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:7:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:32:21
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:6:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:28:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ incite ifsa AI→oyuncu: gerçek etki, tek bedel ve iki bakış açısı — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- 'ifsa'
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:7:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:32:21
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:6:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:28:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ incite ifsa AI→AI: gerçek etki, tek bedel ve iki bakış açısı — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- 'ifsa'
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:7:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:32:21
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:6:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:28:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ incite sonucsuz oyuncu: gerçek etki, tek bedel ve iki bakış açısı — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- 'sonucsuz'
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:7:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:32:21
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:6:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:28:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ incite sonucsuz AI→oyuncu: gerçek etki, tek bedel ve iki bakış açısı — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- 'sonucsuz'
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:7:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:32:21
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:6:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:28:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ incite sonucsuz AI→AI: gerçek etki, tek bedel ve iki bakış açısı — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- 'sonucsuz'
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:7:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:32:21
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:6:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:28:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ stealTech eski hedef: ret; masraf, RNG veya kayıt yok — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+true !== false
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:7:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:64:3
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:6:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:62:3)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ stealTech temassız: ret; masraf, RNG veya kayıt yok — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+true !== false
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:7:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:64:3
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:6:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:62:3)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ stealTech ölü aktör: ret; masraf, RNG veya kayıt yok — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+true !== false
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:7:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:64:3
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:6:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:62:3)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✓ stealTech kendisi: ret; masraf, RNG veya kayıt yok
+✓ stealTech yetersiz etki: ret; masraf, RNG veya kayıt yok
+✗ incite eski hedef: ret; masraf, RNG veya kayıt yok — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+true !== false
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:7:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:64:3
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:6:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:62:3)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ incite temassız: ret; masraf, RNG veya kayıt yok — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+true !== false
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:7:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:64:3
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:6:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:62:3)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ incite ölü aktör: ret; masraf, RNG veya kayıt yok — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+true !== false
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:7:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:64:3
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:6:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:62:3)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✓ incite kendisi: ret; masraf, RNG veya kayıt yok
+✓ incite yetersiz etki: ret; masraf, RNG veya kayıt yok
+✗ stealTech AI aylık yolu tek actor kaydı ve tek kota tüketir — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+0 !== 1
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:7:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:71:33
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:6:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:66:41)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ incite AI aylık yolu tek actor kaydı ve tek kota tüketir — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- 'basari'
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:7:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:73:3
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:6:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:66:41)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ stealTech oyuncu eylemi basari: iki dosyada aynı sonuç ve ücret — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+0 !== 1
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:7:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:79:3
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:6:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:76:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ stealTech oyuncu eylemi ifsa: iki dosyada aynı sonuç ve ücret — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+0 !== 1
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:7:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:79:3
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:6:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:76:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ stealTech oyuncu eylemi sonucsuz: iki dosyada aynı sonuç ve ücret — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+0 !== 1
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:7:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:79:3
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:6:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:76:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ incite oyuncu eylemi basari: iki dosyada aynı sonuç ve ücret — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+0 !== 1
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:7:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:79:3
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:6:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:76:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ incite oyuncu eylemi ifsa: iki dosyada aynı sonuç ve ücret — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+0 !== 1
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:7:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:79:3
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:6:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:76:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ incite oyuncu eylemi sonucsuz: iki dosyada aynı sonuç ve ücret — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+0 !== 1
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:7:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:79:3
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:6:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:76:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ eski özel kayıttan başarı uydurulmaz; ham anahtar veya TEMİZ etiketi yok — AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert.ok(html.includes('sonuç kaydedilmemiş'))
+
+    at /workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:89:12
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:6:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:86:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+✗ kayıtlar sınırlı ve v8 yükleme sonrası sonuç/ücret/anonimlik aynı — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+0 !== 20
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:7:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:97:3
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:6:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:93:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ başarı kaydı, olay görseli hata atsa da gerçek etkiyle birlikte tutulur — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+0 !== 1
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:7:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:103:22
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:6:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c/tests/faz87c_special_operation_outcomes_test.js:100:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+GEÇEN: 4 KALAN: 35

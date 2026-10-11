@@ -1,0 +1,61 @@
+STARS FAZ 88A.1 — TERSANE SEVKİ VE AI İKMAL EMİRLERİ
+
+KAYNAK
+stars-faz88a.zip
+SHA-256: 93a33bb2650223ed20dd63945a5db142630b98b1c6d98619f5878fbc40e9e1b5
+Build 88a-1 / SW stars-v88a-1. Yayınlama yapılmadı.
+
+SONUÇ
+1. Aynı tersanede iki filonun tamamlama siparişleri artık ayrı hedef taşır.
+   q.delivery.fleet genel rally tercihini ezmez; v8 yüklemesi hedefi korur.
+2. Kuyruktaki ve yoldaki ikmal eksikten düşülür; tekrar tamamlama aynı
+   gemi için ikinci bedel kesmez. Fiyat/süre kanonik queueShip'ten gelir.
+3. Hareketli filonun güncel varış sistemi izlenir. Silinmiş/yabancı hedef
+   veya kapalı rota üretilen gemiyi tersanede bırakır; sahte sevk mesajı yok.
+   Çatışmadaki ana filoya üretim anında bedelsiz/ani birleşme yapılmaz.
+4. Sabotajlı/erişilemeyen tersaneler tamamlama adaylarından elenir.
+   Genel toplanma ayarı yalnız kendi güncel sisteminde değiştirilebilir.
+5. AI mevcut normal askeri üretim kararında uygun eksik filoyu hedefler.
+   Uygun filo yoksa önceki üretim yolu sürer. Ek üretim fırsatı, toplu
+   tamamlama turu veya yeni fiyat/sıklık katsayısı eklenmedi.
+6. Oyuncu/AI bilim keşfi gerçek yol ve ara durak ikmalini denetler.
+   Bulunduğu sistemin taraması başlayabilir; süren AI taraması sıfırlanmaz.
+7. Kullanılabilir iki vasal kapı arasındaki kenar gerçek hareketle geçilir;
+   bu hak sıradan kapalı vasal sınırlarına yayılmaz.
+
+ÖNCE / SONRA
+Yeni 30 senaryo kaynak 88A'da: 5 geçen / 25 kalan.
+Aynı senaryolar 88A.1'de: 30 geçen / 0 kalan.
+Bu, 25 ayrı kök neden demek değildir; iki senaryo yeni AI yardımcısının
+kaynakta bulunmamasından başarısızdır. Loglar tests/ içinde saklandı.
+
+AI ÜRETİM KARŞILAŞTIRMASI
+Seed 11, 99, 404: üç ayrı hazırlanmış dünya, gerçek aiTurn üretim fırsatı.
+Her seed için önce ve sonra 1 korvet, yalnız 32 alaşım harcama ve aynı
+son RNG. Kaynakta hedefli sipariş 0, çıktıda 1. Tam kampanya veya uzun
+dönem ekonomi dengesi kanıtı değildir. Ham JSON ve probe scripti pakette.
+
+DOĞRULAMA
+40 test paketi: 3781 geçen / 0 kalan; önceki toplam 3751 + 30.
+Paketlerin bazıları iddia, bazıları birden fazla iddialı senaryo sayar.
+Native Skia Canvas 66 ve UI/portre 48 kontrolleri de toplam içindedir.
+Gerçek tarayıcı/Android testi bu fazda yapılmadı; kullanıcı testi bekliyor.
+Eski testlerde yalnız güncel build/cache beklentileri değişti; davranış
+iddiası silinmedi veya gevşetilmedi. Hedefli test gerçek dailyTick,
+stepFleets, aiTurn ve serialize/deserialize yollarını kullanır.
+
+DOSYA FARKLARI
+Değişen: main.js, ai.js, sw.js (yalnız cache satırı).
+Byte-for-byte aynı: map.js, ui.js, diplomacy.js, economy.js, combat.js,
+audio.js, index.html, manifest.json — 8/8.
+Kayıt v8; yeni depolama anahtarı yok. Sipariş nesnesine isteğe bağlı
+delivery alanı eklendi; eski kuyrukların genel rally davranışı korunuyor.
+Harita kurtarma, portre, bağımsız Radar/Lojistik ve Situation karantinası
+korundu. Kampanya sonucu/RNG'nin tüm oyun boyunca aynı olduğu iddia edilmez.
+
+AÇIK SINIRLAR / SONRAKİ FAZ
+Uzun günlük kampanya ve AI kuvvet dağılımı 89B'de ölçülecek. Yeni bilim
+hedefi aramasının büyük galakside cihaz performansı henüz ölçülmedi.
+Cihaz kontrolleri birikim listesinde; kullanıcıdan şimdi test istenmiyor.
+Sıradaki 88B: savaş geri bildirimi — Sol High; motor kusuru için Astra High.
+Devir, geçmiş dökümü ve ileri faz/bugtest planları pakette güncellendi.

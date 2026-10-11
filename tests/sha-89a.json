@@ -1,0 +1,46 @@
+{
+  "main.js": {
+    "before": "2d12846cda4fa049200db359d4d0f38c322d696f7a7b86d0427445af34f24806",
+    "after": "0d1893f60b5515610396c50ae3c1974ca860e79d791f10e3cd1c01c0ddb31c57"
+  },
+  "ui.js": {
+    "before": "8972e4e2c7ff3c41562043957b4c1ea688ecaedc7064a48b9f6703a89a8a005d",
+    "after": "c9decfe93edf4ef02389053626c9e7ae45ac842b116975ba5353bda3e69208b4"
+  },
+  "ai.js": {
+    "before": "407f365c0a7762db3167c1ff4aea998432469b786b16ee2d9bf1f5e3bb4d22ae",
+    "after": "af10ba53483fd9201078c3d2c0d9042ddac10061cb74f43cfe54154802051368"
+  },
+  "diplomacy.js": {
+    "before": "fc550b92c082fd853eb60f0a32b90572b8370958980e16d510d179810501e955",
+    "after": "5560e12ff3e84ff1cb73c4a15e59e96a72d0ca7644b6ed0e09deb74b677e8bc1"
+  },
+  "map.js": {
+    "before": "d5be2b3821aede53ea89c7ed4c22ed7814bb1750fc81df8735102f61cfa4c5f8",
+    "after": "d5be2b3821aede53ea89c7ed4c22ed7814bb1750fc81df8735102f61cfa4c5f8"
+  },
+  "economy.js": {
+    "before": "3daaae63ee7e747d01b56badff0e933309d99274a59ed1f78f436b72afde9936",
+    "after": "3daaae63ee7e747d01b56badff0e933309d99274a59ed1f78f436b72afde9936"
+  },
+  "combat.js": {
+    "before": "eadca3cfb99bcc645d9905c89056f78ba8d40d18df95f170a4f7209f6be70bdc",
+    "after": "eadca3cfb99bcc645d9905c89056f78ba8d40d18df95f170a4f7209f6be70bdc"
+  },
+  "audio.js": {
+    "before": "804226980179698a6b56d292d88c0c7226d1e54f06001aab63b52d6db5685262",
+    "after": "804226980179698a6b56d292d88c0c7226d1e54f06001aab63b52d6db5685262"
+  },
+  "manifest.json": {
+    "before": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
+    "after": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310"
+  },
+  "index.html": {
+    "before": "f8bb5abd9cbc0dd5a6a949bdaefdb7f1d4a282d22fe5a64c5ebe574773eafc0d",
+    "after": "f8bb5abd9cbc0dd5a6a949bdaefdb7f1d4a282d22fe5a64c5ebe574773eafc0d"
+  },
+  "sw.js": {
+    "before": "049d0bedddf3d5042c1d2cc09cae01edd592ef8f2932733d476d24b6366ffc71",
+    "after": "a0a985564aa0a55807a244c3a1870701f6c04dd54ab660e1c330d5223376cb46"
+  }
+}

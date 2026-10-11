@@ -1,0 +1,46 @@
+STARS FAZ 88B — SAVAŞ GERİ BİLDİRİMİ
+
+KAYNAK
+stars-faz88a-1.zip
+SHA-256: 427ed35bc50c30d6a1a1f0e2e97d1c9dc3d7d6be27732af62a601fbe28bff668
+Build 88b / SW stars-v88b. Yayınlama yapılmadı.
+
+BULGULAR VE DÜZELTMELER
+1. Sistem paneli “%X güçte savaşır” diyordu. Motor hasarı %X, kalkanı
+   max(%30, %X×0.85) ile çarpıyor; gövdeyi değiştirmiyor. Metin artık üç
+   etkiyi ayrı ve gerçek formülle gösteriyor. “Gemi yıpranması” ifadesi
+   “gövde yıpranması”, ham fleetPower ise “Stratejik filo gücü” oldu.
+2. Zafer/yenilgi yalnız başlık veriyordu. battleRound artık son tur gerçek
+   gövde hasarını, ateş açabilen gemiyi, ikmali, toplam kaybı ve ricadı tek
+   raporda topluyor. Sistem paneli ve kesin sonuç mesajı aynı kaydı okuyor.
+3. applyDamage kurban devletini “hasarı veren” sanarak Enkaz Mühendisliği
+   ödülünü kendi gemisini kaybeden tarafa verebiliyordu. Saldıran açık
+   parametre oldu; ödül gerçekten imha eden civic sahibine gidiyor.
+4. Oyuncunun taraf olmadığı savaş için ayrıntı yardımcısı null döner. Temas
+   yoksa oyunculu savaşta bile rakibin adı “Tanımlanamayan düşman” kalır.
+5. Rapor v8 simulation kayıt alanına doğrulamalı eklenir. Bozuk devlet,
+   negatif kayıp veya geçersiz dizi yüklemede temizlenir; RNG/tik çalışmaz.
+
+DENGE
+Gemi hasarı, kalkan, gövde, menzil, ikmal, yıpranma, ricat eşiği, enkaz
+oranı ve savaş yorgunluğu katsayıları değiştirilmedi. applyDamage'ın dönüşü
+iç yardımcı nesne oldu; gerçekleşmiş hasar ve kayıp bir kez hesaplanıyor.
+
+TEST
+Yeni faz88b_combat_feedback_test.js: 24 geçen / 0 kalan.
+Aynı test kaynak 88A.1'de: 1 geçen / 23 kalan. Bu sayı 23 ayrı kök neden
+demek değildir. Tam regresyon: 41 paket, 3782 geçen / 0 kalan. Önceki 3781
+toplamındaki 23 tarihsel combat.js byte kilidi dosya bu fazda değiştiği için
+koruma listelerinden çıkarıldı; 24 davranış senaryosu eklendi. Hiçbir test
+dosyası silinmedi. Native Canvas paketleri geçti; Chrome/Android yapılmadı.
+
+DOSYALAR
+Değişen: main.js, combat.js, ui.js; sw.js yalnız cache satırı.
+Byte-for-byte aynı: map.js, ai.js, diplomacy.js, economy.js, audio.js,
+index.html, manifest.json (7/7). Kayıt v8 ve depolama anahtarları aynı.
+
+SINIRLAR
+Rapor oyuncunun taraf olduğu son sistem savaşını gösterir; ayrıntılı savaş
+geçmişi arşivi değildir. Yörünge/yüzey kuşatmasının ayrı uzun dönem özeti
+bu fazda eklenmedi. Fiziksel cihaz okunabilirliği birikim listesinde.
+Sıradaki 89A: iç siyaset/civic/hafıza bağlantıları — Astra High.

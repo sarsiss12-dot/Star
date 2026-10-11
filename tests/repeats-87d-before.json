@@ -1,0 +1,251 @@
+{
+  "method": "120 monthly ticks; all living non-wild contacts; player rejects every delivered offer; no daily exploration/combat; separate forced stream is not normal offer frequency",
+  "stress": {
+    "forcedMonthlyAttempts": 12,
+    "delivered": 12,
+    "declineDelta": -60,
+    "expiredOfferRenewed": false
+  },
+  "runs": [
+    {
+      "seed": 11,
+      "months": 120,
+      "stats": {
+        "playerAttempts": 31,
+        "playerDelivered": 15,
+        "playerRejected": 15,
+        "aiNegotiations": 37,
+        "aiRejected": 0,
+        "aiRepeatedWithin180": 0,
+        "aiExecuted": 37
+      },
+      "playerDays": [
+        {
+          "day": 510,
+          "from": 7
+        },
+        {
+          "day": 540,
+          "from": 4
+        },
+        {
+          "day": 600,
+          "from": 3
+        },
+        {
+          "day": 630,
+          "from": 7
+        },
+        {
+          "day": 690,
+          "from": 1
+        },
+        {
+          "day": 690,
+          "from": 5
+        },
+        {
+          "day": 810,
+          "from": 6
+        },
+        {
+          "day": 960,
+          "from": 7
+        },
+        {
+          "day": 1020,
+          "from": 3
+        },
+        {
+          "day": 1020,
+          "from": 6
+        },
+        {
+          "day": 1050,
+          "from": 5
+        },
+        {
+          "day": 1080,
+          "from": 4
+        },
+        {
+          "day": 1410,
+          "from": 1
+        },
+        {
+          "day": 1500,
+          "from": 6
+        },
+        {
+          "day": 1530,
+          "from": 7
+        }
+      ],
+      "rng": -1801422633
+    },
+    {
+      "seed": 99,
+      "months": 120,
+      "stats": {
+        "playerAttempts": 47,
+        "playerDelivered": 21,
+        "playerRejected": 21,
+        "aiNegotiations": 49,
+        "aiRejected": 0,
+        "aiRepeatedWithin180": 0,
+        "aiExecuted": 49
+      },
+      "playerDays": [
+        {
+          "day": 450,
+          "from": 3
+        },
+        {
+          "day": 510,
+          "from": 5
+        },
+        {
+          "day": 540,
+          "from": 2
+        },
+        {
+          "day": 570,
+          "from": 5
+        },
+        {
+          "day": 570,
+          "from": 6
+        },
+        {
+          "day": 600,
+          "from": 1
+        },
+        {
+          "day": 690,
+          "from": 4
+        },
+        {
+          "day": 900,
+          "from": 3
+        },
+        {
+          "day": 960,
+          "from": 3
+        },
+        {
+          "day": 960,
+          "from": 5
+        },
+        {
+          "day": 960,
+          "from": 6
+        },
+        {
+          "day": 1020,
+          "from": 2
+        },
+        {
+          "day": 1140,
+          "from": 1
+        },
+        {
+          "day": 1230,
+          "from": 4
+        },
+        {
+          "day": 1260,
+          "from": 4
+        },
+        {
+          "day": 1260,
+          "from": 6
+        },
+        {
+          "day": 1410,
+          "from": 6
+        },
+        {
+          "day": 1500,
+          "from": 2
+        },
+        {
+          "day": 1530,
+          "from": 5
+        },
+        {
+          "day": 1590,
+          "from": 5
+        },
+        {
+          "day": 1650,
+          "from": 3
+        }
+      ],
+      "rng": -271079320
+    },
+    {
+      "seed": 404,
+      "months": 120,
+      "stats": {
+        "playerAttempts": 29,
+        "playerDelivered": 12,
+        "playerRejected": 12,
+        "aiNegotiations": 41,
+        "aiRejected": 0,
+        "aiRepeatedWithin180": 0,
+        "aiExecuted": 41
+      },
+      "playerDays": [
+        {
+          "day": 540,
+          "from": 2
+        },
+        {
+          "day": 540,
+          "from": 4
+        },
+        {
+          "day": 600,
+          "from": 1
+        },
+        {
+          "day": 660,
+          "from": 1
+        },
+        {
+          "day": 690,
+          "from": 5
+        },
+        {
+          "day": 810,
+          "from": 6
+        },
+        {
+          "day": 990,
+          "from": 7
+        },
+        {
+          "day": 1110,
+          "from": 1
+        },
+        {
+          "day": 1140,
+          "from": 4
+        },
+        {
+          "day": 1230,
+          "from": 2
+        },
+        {
+          "day": 1290,
+          "from": 1
+        },
+        {
+          "day": 1350,
+          "from": 5
+        }
+      ],
+      "rng": 471070072
+    }
+  ]
+}

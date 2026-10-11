@@ -1,0 +1,106 @@
+STARS — FAZ 91D
+PARÇALI DEVLET ALANLARI · TEK ETİKET YOLU · KARMA KOLONİ SAHİPLİĞİ
+
+1. KAYNAK
+stars-faz91c.zip
+SHA-256: d7c6af0d0565906d74b795154194bdedb6f481cfe42983e8abe123376b4f8ec2
+Çalışma kopyası bu ZIP'ten açıldı; 91C sabit cihaz adayı değiştirilmedi.
+Çıktı: stars-faz91d.zip. Build 91d; SW cache stars-v91d.
+Paket içi dosya SHA-256 listesi RELEASE-MANIFEST.json içindedir.
+
+2. ÖNCEKİ SORUN
+map.js'te iki farklı devlet adı çizimi vardı. İkisi de aynı devletin
+sistemlerini tek bir ortalama noktaya topluyordu. Ayrılmış alanlar kendi
+etiketini alamıyor; tek sistemli devlet atlanabiliyor veya gerçek adı
+yerine ırk adı gösteriliyordu. Uzak zoom yolu keşfedilmiş sistem kapısını
+uygulamıyordu. Diğer yolda temas edilmeyen devletin tam adı açılabiliyordu.
+Uzak etiket önbelleği yalnız gün sayısına bağlıydı; aynı gün el değiştirme
+ve temas olaylarını güvenilir biçimde yansıtmıyordu.
+
+3. YENİ ÇİZİM
+İki eski yol kaldırıldı. territoryRegions yalnız keşfedilmiş, yaşayan
+normal devlet sistemlerini kullanır; aynı sahipli hiper-yol bileşenleri
+ayrı parçalar oluşturur. Gizli sistem bu parçaları birbirine bağlamaz.
+Önbellek sistem dizisinin kimliği ve sahiplik/konum/yol/ad/temas imzasını
+izler. Aynı gün işgal, yeni temas ve yüklenen yeni nesneler hemen yansır.
+
+drawTerritoryLabels ekranda bulunan gerçek bir sistemi seçer; etiket ile
+sistem arasına ince çizgi çizer. Tek sistemli devlet de kendi adını alır.
+Uzun adlar sığacak biçimde kısalır; panel tam adı gösterir. Ekran kenarında
+etiket içeride tutulur. Etiket kutuları yıldız, sistem adı, filo satırı,
+ana araçlar, kaynak/zaman çubuğu ve açık yan panelle çakışmaz.
+Seçili bölge ve oyuncunun bölgeleri önce yerleştirilir.
+
+SINIR: Aşırı yoğun veya dar görünümde tüm adların aynı anda görünmesi
+garanti edilmez; sığmayan etiket atlanır. Hiper-yol bileşeni coğrafi dolgu
+poligonu değildir. Yeni bir sınır geometrisi veya egemenlik kuralı eklenmedi.
+Özel kriz/korsan işaretleri mevcut çizim yolunda kalır.
+
+4. GİZLİLİK VE KARMA HÂKİMİYET
+territoryOwnerInfo: kendi devleti veya temas edilmiş devlet tam ad/rengiyle;
+diğerleri Bilinmeyen devlet ve nötr etiket rengiyle gösterilir. Keşif
+paylaşımı konumu gösterebilir, üçüncü tarafın diplomatik kimliğini açmaz.
+Bu faz bütün eski istihbarat/renk yollarının kapsamlı denetimi değildir.
+
+territoryColonyOwners yalnız görülmüş VE taranmış sistemlerde koloni
+sahiplerini sayar. Sistemin hâkiminden farklı koloni varsa haritada
+KARMA HÂKİMİYET görünür. Sistem paneli hâkimiyet ve koloni sayılarını,
+gezegen kartı o koloninin sahibini yazar. Adlar HTML-escape edilir.
+Sistem/gezegen sahibi değiştirilmez; bu bir savaş sonu paylaşım mekanizması
+değildir. Paylaşım 92A–92C kapsamındadır.
+
+5. HEDEFLİ KANIT
+tests/faz91d_territory_native_canvas_test.js — 40/0.
+Aynı test 91C üzerinde: 7 geçen, 33 kalan. Bunlar 33 ayrı kök neden
+değildir; yeni özellik, yeni çıktı yapısı ve farklı görünüm iddialarıdır.
+Üretim View.draw ve View.tap kullanılır. fillText kaydı gerçek native
+çizime delege eder; Canvas no-op değildir. DOM geometrisi test tarafından
+verilir, tarayıcının layout motoru veya Android davranışı taklit edilmez.
+
+Kapsam: iki kopuk parça; tek sistem/aynı ırktan farklı devlet; gizli ad;
+görünmeyen köprü; aynı gün keşif/temas/sahiplik/ad değişimi; yeni sistem
+dizisine referans; ekran dışı merkez; sol/sağ kenar; panel ve yoğun görünüm;
+karma koloni/tarama kapısı; HTML-escape; save/RNG saflığı; gerçek sistem
+ve filo satırı dokunuşu; DPR 1/2; 12 mod/katman birleşimi; paylaşılan keşif.
+Gerçek eski oyuncu kaydı .04/.4/1.9 zoom'da çizildi, veri/RNG korundu.
+
+Native Skia ile üretilip görsel olarak incelenen PNG'ler:
+  tests/artifacts-91d/territory-fragments-native.png
+  tests/artifacts-91d/territory-mixed-native.png
+  tests/artifacts-91d/territory-real-save-native.png
+Font ve ölçüler bu ortamın native Canvas'ına aittir; Android görüntüsü değil.
+
+6. TAM REGRESYON
+53 paket · 4010 GEÇEN · 0 KALAN · 0 ATLANAN.
+Ham özet tests/results-91d.json; kısa önce/sonra logları tests/91d-*.log.
+91C toplamı 3970 idi; 40 yeni iddia eklendi. Oynanış testi silinmedi.
+
+Eski beklentiler açıkça güncellendi:
+  - 25 eski testte güncel build/cache literal'i 91d oldu.
+  - 15 eski iddiada bütün map.js'nin değişmediği varsayımı artık geçersiz.
+    tests/helpers/map-preservation.js, 91C'deki sprite/giriş/kurtarma/
+    kamera/filo çizimi kaynaklarının sabit SHA-256 değerlerini denetler.
+    Etiket/draw değişikliği bu kilidin dışında, yeni davranış testindedir.
+    referans-sha.json'un eski map hash'i değiştirilmedi. Tap/kurtarma/filo
+    kaynağına mutasyon eklenince bu kilidin gerçekten reddettiği sınandı.
+İlk genel koşu bu 15 tarihsel tam-dosya beklentisinde kaldı; sözleşme
+düzeltildikten sonra 53 paketin tamamı yeniden çalıştırıldı ve geçti.
+
+7. DEĞİŞEN / KORUNAN
+Üretim: map.js ve ui.js. main.js yalnız BUILD_ID; sw.js yalnız cache adı.
+Byte-for-byte aynı: ai.js, combat.js, diplomacy.js, economy.js, audio.js,
+index.html, manifest.json — 7/7. Kayıt v8, depolama anahtarları, harita
+kurtarma yaşam döngüsü ve Situation karantinası korunur.
+Altı uzun kampanya bu fazda yeniden ölçülmedi; 91C ölçümleri tarihsel
+kanıttır. Mevcut kısa günlük kampanya ve korsan regresyonları yeniden geçti.
+Motor/diplomasi dengesi bu değişikliğin konusu değildir.
+
+8. CİHAZ VE SONRAKİ FAZ
+Gerçek tarayıcı ve fiziksel Android bu fazda çalıştırılmadı. Yeni etiket
+yerleşiminin cihazdaki okunabilirliği ve kare maliyeti kabul bekler.
+Kullanıcı test arası istedi; yeni test talebi yok. Notlar birikim dosyasında.
+91C sabit 87T adayıdır; 91D ayrı geliştirme paketidir. Yayın yapılmadı.
+
+Sıradaki 91E — Astra / High: federasyon iç yasa teklif ekranı, gerçek
+oyuncu oyu, kaydedilebilir tek gündem ve dört yasanın gerçek etkileri.
+Sonra 92A katkı kaydı, 92B paylaşım teklifi, 92C güvenli ortak uygulama.

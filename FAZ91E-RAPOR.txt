@@ -1,0 +1,77 @@
+STARS FAZ 91E — FEDERASYON İÇ YASA GÜNDEMİ
+
+KAYNAK
+stars-faz91d-1.zip
+SHA-256: fc34e5d48a6959e0db0778793eff25c1b09bc111cd8c5c4728acc7cc9e845a64
+Çıktı: stars-faz91e.zip. Build 91e; SW cache stars-v91e.
+ZIP SHA-256 kendisine dahil edilmez; teslimde hesaplanır.
+
+SONUÇ
+Oyuncu Federasyon panelinden Serbest Dolaşım, Ortak Donanma ve Bilim Ağı
+önerebilir. Temel dört yasanın otomatik gündemi ile iç yasa yolu artık
+aynı f.vote yaşam döngüsünde: tek gündem, gerçek oyuncu oyu, 90 gün süre.
+Süre sonunda kullanılmayan oy çekimser; eşitlikte ret. Öneri bedeli tek
+kez alınır, ret halinde iade edilmez. Oyuncu kendi önerisine ayrıca oy verir.
+AI üyeler profil/uyum/ilişki eğilimiyle oy verir; AI-only birlik hemen
+sonuçlanır. Bildirim hatası kararı geri almaz. Gündem, seçmenler, sayaç
+ve son sonuç v8 kaydında kalır. Aktif katalogda bulunmayan council flag
+için eski çift oy uyumluluğu korunur; yeni civic açılmadı.
+
+KORUMALAR
+- Gündem kimliği eski pencerenin yeni öneriye oy yazmasını engeller.
+- Yüklemeden önceki pencere aynı kimlikli yeni dünya nesnesine oy yazamaz.
+- Tekrar oy / ayrılmış veya ölmüş üye / yeni üyenin eski gündeme oyu yok.
+- Yinelenen oy kayıtları bir kez sayılır; devlet nesnesi de doğrulanır.
+- Otomatik gündem açık oylamayı değiştiremez.
+- Eski v8 temel gündemleri süre uydurulmadan okunur ve kullanılabilir.
+- Ücret, oy, RNG, yasa, kapasite mevcut tersinir oyun grafiği transaction
+  altyapısıyla korunur. Motor hatasında geri alma; sunum hatasında karar
+  korunur. Katalog dışı/prototype anahtarları öneri olarak kabul edilmez.
+
+GERÇEK ETKİLER
+Serbest Dolaşım: mevcut üyeliğe bağlı dinamik geçiş. Kalıcı passage
+alanına yeni izin yazılmaz; ayrılan üyeye federasyon izni kalmaz.
+Eski kayıtların geçmişte yazılmış passage izinlerinin kaynağı ayrılamadığı
+için silinmez. Zaten müttefik olan üyeler de açık sınırdan yararlanır;
+yasa, mevcut ittifak izninden ayrı bir federasyon kuralıdır.
+
+Ortak Donanma: sabit +15 kapasite; tekrar hesapta birikmez. Mevcut
+fedFundTick fonu pozitif aylık alaşım/enerji gelirinin %5'i yerine %9'unu
+toplar. Yeni paralel fon/vergi yok. Stok yeterliyse kesilir; eksik kaynak
+atlanır, tam eşit stok ödeyebilir. Mevcut federal gemi bakım/komuta yolu
+korunur. Ayrılma veya dağılmada kapasite bonusu kalkar.
+
+Bilim Ağı: gerçek empireIncome araştırma gelirine 1,12 çarpanı.
+Üyelik sona erince çarpan kalkar. economyTick(true) fon kesmez, stok
+eklemez, oy sonuçlandırmaz. Ortak Araştırma Fonu ayrı mevcut yasadır.
+
+Temel Ortak Filo metni gerçeğe düzeltildi: ayda 4 alaşım treasury birikimi
+otomatik gemi üretmez. Bu eski hazinenin ekonomisi değiştirilmedi.
+
+AÇIK KALAN: SAVAŞ ONAYI
+Dördüncü iç yasada _warOk arayan ceza var; savaş izni üreten gündem yok.
+Yeni önerisi gerekçesiyle kapalı. Eski kayıtta etkin yasa davranışı korunur;
+metin gerçek cezayı açıklar. DÖRT YASANIN HEPSİ TAMAMLANDI DENMİYOR.
+91E.1 hedefli savaş izni, savunma ayrımı, süre/üyelik sınırlarını tamamlar.
+Önceki dört-yasa hedefi üç çalışan yasa + açık borç olarak ayrıldı.
+
+DOĞRULAMA
+Yeni faz91e_federation_laws_test.js: 31 senaryo / 0 kalan.
+Tam regresyon: 55 paket / 4070 geçen / 0 kalan / 0 atlanan.
+Kanıt: tests/results-91e.json. Node ve kontrollü DOM; mevcut native Skia
+Canvas regresyonları da çalıştı. Gerçek tarayıcı/Android testi yapılmadı.
+Yeni federasyon panelinin fiziksel mobil yerleşimi doğrulanmadı.
+25 eski testte yalnız build/cache 91d-1 → 91e literal değişti.
+Eski testler silinmedi; davranış beklentileri gevşetilmedi.
+
+DOSYALAR
+Değişen: diplomacy.js, main.js, economy.js, ai.js, ui.js, sw.js.
+Byte-for-byte korunan: map.js, combat.js, audio.js, index.html, manifest.json.
+SW yalnız cache adı; fetch/activate/KABUK aynı. Save v8; yeni depolama
+anahtarı yok. Situation karantinası korunur. Yayın/deploy yapılmadı.
+
+PLAN
+Kullanıcı testleri bekletiyor. 91C, 87T için sabit aday; 91E ayrı geliştirme
+paketi ve önceki cihaz kabulünü devralmaz. 91E.1: Astra / High. Ardından
+92A katkı kaydı → 92B paylaşım müzakeresi → 92C güvenli toprak devri.
+Civic metin/etki denetimi 91F olarak bekliyor.

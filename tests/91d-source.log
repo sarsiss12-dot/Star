@@ -1,0 +1,206 @@
+  ✓ Historical source lock still detects changes to tap, recovery and fleet drawing
+  ✗ Separated same-owner pieces each draw their actual state name — Expected values to be strictly equal:
+
+0 !== 2
+
+  ✗ Singleton state uses its own name, even with the same race as its neighbour — The expression evaluated to a falsy value:
+
+  assert.ok(h.texts.includes('Güney Birliği'))
+
+  ✗ No contact: real drawing does not disclose state identity — The expression evaluated to a falsy value:
+
+  assert.ok(!h.texts.includes('GİZLİ_KİMLİK'))
+
+  ✓ Unseen states never receive labels
+  ✗ All region anchors are actual visible systems of that owner — Expected values to be strictly equal:
+
+0 !== 5
+
+  ✗ Native label boxes avoid stars, system names, one another, and HUD — Expected values to be strictly equal:
+
+0 !== 5
+
+  ✗ Native text generates real pixels in the name box — The expression evaluated to a falsy value:
+
+  assert.ok(l)
+
+  ✗ Hidden bridge does not join the two known fragments — View.territoryRegions is not a function
+  ✗ Discovering bridge joins components immediately without a day tick — View.territoryRegions is not a function
+  ✓ Contact reveals the proper name on the same day
+  ✗ Ownership change and rename invalidate labels on the same day — The expression evaluated to a falsy value:
+
+  assert.ok(l)
+
+  ✗ Loading an equivalent new system graph rebinds cached region references — View.territoryRegions is not a function
+  ✗ Offscreen territory centre does not suppress the on-screen piece — The expression evaluated to a falsy value:
+
+  assert.ok(labels(h).some(l=>l.owner===1&&l.anchor===2))
+
+  ✗ Near left and right viewport edges, singleton names stay visible — The expression evaluated to a falsy value:
+
+  assert.ok(labels(edge).some(l=>l.anchor===3))
+
+  ✗ Sidebar is a real obstruction; selected region label moves into free space — The expression evaluated to a falsy value:
+
+  assert.ok(ls.some(l=>l.anchor===2))
+
+  ✗ Surveyed colony with different owner draws a mixed-sovereignty marker — The expression evaluated to a falsy value:
+
+  assert.ok(mixed.texts.includes('KARMA HÂKİMİYET'))
+
+  ✗ System panel distinguishes system control from colony ownership — The input did not match the regular expression /Sistem hâkimiyeti/. Input:
+
+'<div class="ph">Sistem 0</div><div class="row"><span>Yıldız</span><b style="color:#ff7b5c">M Kırmızı Cüce</b></div><div class="row"><span>Hâkimiyet</span><b style="color:#5c9ef5">Kuzey Birliği</b></div><div class="row"><span>Hiper yol</span><b>1 bağlantı</b></div><div class="dcIdentity">\n' +
+  '      <canvas class="dpPort" width="60" height="72" data-lk="makine"\n' +
+  '        data-col="#5c9ef5" data-pers="yayilmaci"\n' +
+  '        data-mood="-30"></canvas><div><b>Kuzey Birliği</b>\n' +
+  '      <div class="mini">4 sistem · YABANCI</div>\n' +
+  '      <div class="mini">Filo gücü: ≈203 ?</div>\n' +
+  '      </div></div>\n' +
+  '      <div class="row"><span>İlişkin</span><b>-30</b></div><div class="dcTreaties"><span>Yürürlükte ortak antlaşma yok</span></div><div class="act2">\n' +
+  '        <button class="abtn pri" data-a="diploRelation" data-x="1">🤝 İLİŞKİ VE EYLEMLER</button>\n' +
+  '        <button class="abtn" data-a="spyOpen" data-x="1">🕵 CASUSLUK</button></div><div class="row"><span>📦 Lojistik ağ</span>\n' +
+  '        <b style="color:#ff5f6d">Kapsam dışı — 8 atlama (%40)</b></div><div class="mini" style="color:#ff5f6d">Buraya gönderilen filo\n' +
+  '          <b>%40</b> hasarla savaşır; kalkanı %34 çalışır.\n' +
+  '          Gövde dayanımı değişmez. Yakınına karakol ya da tersane kurmak\n' +
+  '          hattı ileri taşır.</div><div class="ph">GEZEGENLER</div><div class="box"><div style="display:flex;gap:9px;align-items:flex-start"><span class="pOrb" style="\n' +
+  '    width:34px;height:34px;\n' +
+  '    background:\n' +
+  '      radial-gradient(38% 30% at 8% 15%, #ffbf5555 0 40%, transparent 62%),\n' +
+  '       radial-gradient(30% 24% at 54% 57%, #1a0d0966 0 44%, transparent 66%),\n' +
+  '      radial-gradient(circle at 43% 12%,\n' +
+  '        #ffbf55 0%, #8c2c12 38%, #4a1a10 62%, #1a0d09 88%, #01030a 100%);\n' +
+  '    box-shadow:\n' +
+  '      inset -6px -3px 12px rgba(2,4,10,.86),\n' +
+  '      inset 3px 2px 6px #ffbf5522,\n' +
+  '      0 0 10px #8c2c124d,\n' +
+  '      0 0 3px #ffbf5533;\n' +
+  '  "></span><div style="flex:1;min-width:0"><div class="bt"><span>Orrnex I</span><span class="flag" style="background:#983e8f"></span></div><div class="bd">Volkanik · boyut 18</div><div class="mini" style="color:#6ff2c8">◈ Zengin Mineral Damarı (+5 Mineral)</div></div></div><div class="row" style="margin-top:6px"><span>Nüfus</span><b>15 / 30</b></div><div class="bar"><i style="width:50%"></i></div><div class="row"><span>İstikrar / moral</span><b style="color:#65e08a">75</b></div><div class="bar "><i style="width:75%;background:#65e08a"></i></div></div><div class="box"><div style="display:flex;gap:9px;align-items:flex-start"><span class="pOrb" style="\n' +
+  '    width:34px;height:34px;\n' +
+  '    background:\n' +
+  '      radial-gradient(38% 30% at 58% 40%, #b8aa9455 0 40%, transparent 62%),\n' +
+  '       radial-gradient(30% 24% at 24% 12%, #1a171366 0 44%, transparent 66%),\n' +
+  '      radial-gradient(circle at 48% 24%,\n' +
+  '        #b8aa94 0%, #5e5346 38%, #3a332b 62%, #1a1713 88%, #01030a 100%);\n' +
+  '    box-shadow:\n' +
+  '      inset -6px -3px 12px rgba(2,4,10,.86),\n' +
+  '      inset 3px 2px 6px #b8aa9422,\n' +
+  '      0 0 10px #5e53464d,\n' +
+  '      0 0 3px #b8aa9433;\n' +
+  '  "></span><div style="flex:1;min-width:0"><div class="bt"><span>Orrnex II</span></div><div class="bd">Asteroit Kuşağı</div><div class="mini" style="color:#6ff2c8">◈ Zengin Mineral Damarı (+5 Mineral)</div></div></div></div><div class="ph">UZAY YAPILARI</div><div class="mini">Uzay yapısı için İnşaat Gemisi gerekir (tersanede İNŞ).</div>'
+
+  ✓ Unsurveyed colonies do not disclose mixed ownership
+  ✗ Unknown colony owner uses neutral identity and names are HTML-escaped — The input did not match the regular expression /Koloni sahibi:.*Bilinmeyen devlet/. Input:
+
+'<div class="ph">Sistem 0</div><div class="row"><span>Yıldız</span><b style="color:#ff7b5c">M Kırmızı Cüce</b></div><div class="row"><span>Hâkimiyet</span><b style="color:#5c9ef5">&lt;b&gt;Kuzey&lt;/b&gt;</b></div><div class="row"><span>Hiper yol</span><b>1 bağlantı</b></div><div class="dcIdentity">\n' +
+  '      <canvas class="dpPort" width="60" height="72" data-lk="makine"\n' +
+  '        data-col="#5c9ef5" data-pers="yayilmaci"\n' +
+  '        data-mood="-30"></canvas><div><b>&lt;b&gt;Kuzey&lt;/b&gt;</b>\n' +
+  '      <div class="mini">4 sistem · YABANCI</div>\n' +
+  '      <div class="mini">Filo gücü: ≈203 ?</div>\n' +
+  '      </div></div>\n' +
+  '      <div class="row"><span>İlişkin</span><b>-30</b></div><div class="dcTreaties"><span>Yürürlükte ortak antlaşma yok</span></div><div class="act2">\n' +
+  '        <button class="abtn pri" data-a="diploRelation" data-x="1">🤝 İLİŞKİ VE EYLEMLER</button>\n' +
+  '        <button class="abtn" data-a="spyOpen" data-x="1">🕵 CASUSLUK</button></div><div class="row"><span>📦 Lojistik ağ</span>\n' +
+  '        <b style="color:#ff5f6d">Kapsam dışı — 8 atlama (%40)</b></div><div class="mini" style="color:#ff5f6d">Buraya gönderilen filo\n' +
+  '          <b>%40</b> hasarla savaşır; kalkanı %34 çalışır.\n' +
+  '          Gövde dayanımı değişmez. Yakınına karakol ya da tersane kurmak\n' +
+  '          hattı ileri taşır.</div><div class="ph">GEZEGENLER</div><div class="box"><div style="display:flex;gap:9px;align-items:flex-start"><span class="pOrb" style="\n' +
+  '    width:34px;height:34px;\n' +
+  '    background:\n' +
+  '      radial-gradient(38% 30% at 8% 15%, #ffbf5555 0 40%, transparent 62%),\n' +
+  '       radial-gradient(30% 24% at 54% 57%, #1a0d0966 0 44%, transparent 66%),\n' +
+  '      radial-gradient(circle at 43% 12%,\n' +
+  '        #ffbf55 0%, #8c2c12 38%, #4a1a10 62%, #1a0d09 88%, #01030a 100%);\n' +
+  '    box-shadow:\n' +
+  '      inset -6px -3px 12px rgba(2,4,10,.86),\n' +
+  '      inset 3px 2px 6px #ffbf5522,\n' +
+  '      0 0 10px #8c2c124d,\n' +
+  '      0 0 3px #ffbf5533;\n' +
+  '  "></span><div style="flex:1;min-width:0"><div class="bt"><span>Orrnex I</span><span class="flag" style="background:#f5c25c"></span></div><div class="bd">Volkanik · boyut 18</div><div class="mini" style="color:#6ff2c8">◈ Zengin Mineral Damarı (+5 Mineral)</div></div></div><div class="row" style="margin-top:6px"><span>Nüfus</span><b>15 / 30</b></div><div class="bar"><i style="width:50%"></i></div><div class="row"><span>İstikrar / moral</span><b style="color:#65e08a">75</b></div><div class="bar "><i style="width:75%;background:#65e08a"></i></div></div><div class="box"><div style="display:flex;gap:9px;align-items:flex-start"><span class="pOrb" style="\n' +
+  '    width:34px;height:34px;\n' +
+  '    background:\n' +
+  '      radial-gradient(38% 30% at 58% 40%, #b8aa9455 0 40%, transparent 62%),\n' +
+  '       radial-gradient(30% 24% at 24% 12%, #1a171366 0 44%, transparent 66%),\n' +
+  '      radial-gradient(circle at 48% 24%,\n' +
+  '        #b8aa94 0%, #5e5346 38%, #3a332b 62%, #1a1713 88%, #01030a 100%);\n' +
+  '    box-shadow:\n' +
+  '      inset -6px -3px 12px rgba(2,4,10,.86),\n' +
+  '      inset 3px 2px 6px #b8aa9422,\n' +
+  '      0 0 10px #5e53464d,\n' +
+  '      0 0 3px #b8aa9433;\n' +
+  '  "></span><div style="flex:1;min-width:0"><div class="bt"><span>Orrnex II</span></div><div class="bd">Asteroit Kuşağı</div><div class="mini" style="color:#6ff2c8">◈ Zengin Mineral Damarı (+5 Mineral)</div></div></div></div><div class="ph">UZAY YAPILARI</div><div class="mini">Uzay yapısı için İnşaat Gemisi gerekir (tersanede İNŞ).</div>'
+
+  ✓ Repeated label planning/drawing preserves save and RNG
+  ✓ Real pointer tap still opens a system below the new labels
+  ✓ Fleet hit rows keep priority, labels avoid them, real tap selects that fleet
+  ✗ DPR 2 gives the same CSS label positions and still renders native pixels — The expression evaluated to a falsy value:
+
+  assert.ok(l)
+
+  ✗ Owner names persist in siyasi, radar=false, logistics=false — The expression evaluated to a falsy value:
+
+  assert.ok(input.texts.includes('Kuzey Birliği'))
+
+  ✗ Owner names persist in siyasi, radar=false, logistics=true — The expression evaluated to a falsy value:
+
+  assert.ok(input.texts.includes('Kuzey Birliği'))
+
+  ✗ Owner names persist in siyasi, radar=true, logistics=false — The expression evaluated to a falsy value:
+
+  assert.ok(input.texts.includes('Kuzey Birliği'))
+
+  ✗ Owner names persist in siyasi, radar=true, logistics=true — The expression evaluated to a falsy value:
+
+  assert.ok(input.texts.includes('Kuzey Birliği'))
+
+  ✗ Owner names persist in diplomasi, radar=false, logistics=false — The expression evaluated to a falsy value:
+
+  assert.ok(input.texts.includes('Kuzey Birliği'))
+
+  ✗ Owner names persist in diplomasi, radar=false, logistics=true — The expression evaluated to a falsy value:
+
+  assert.ok(input.texts.includes('Kuzey Birliği'))
+
+  ✗ Owner names persist in diplomasi, radar=true, logistics=false — The expression evaluated to a falsy value:
+
+  assert.ok(input.texts.includes('Kuzey Birliği'))
+
+  ✗ Owner names persist in diplomasi, radar=true, logistics=true — The expression evaluated to a falsy value:
+
+  assert.ok(input.texts.includes('Kuzey Birliği'))
+
+  ✗ Owner names persist in savas, radar=false, logistics=false — The expression evaluated to a falsy value:
+
+  assert.ok(input.texts.includes('Kuzey Birliği'))
+
+  ✗ Owner names persist in savas, radar=false, logistics=true — The expression evaluated to a falsy value:
+
+  assert.ok(input.texts.includes('Kuzey Birliği'))
+
+  ✗ Owner names persist in savas, radar=true, logistics=false — The expression evaluated to a falsy value:
+
+  assert.ok(input.texts.includes('Kuzey Birliği'))
+
+  ✗ Owner names persist in savas, radar=true, logistics=true — The expression evaluated to a falsy value:
+
+  assert.ok(input.texts.includes('Kuzey Birliği'))
+
+  ✗ Far zoom never labels entirely unseen empires — The expression evaluated to a falsy value:
+
+  assert.ok(!far.texts.includes('GÖRÜNMEZ_DEVLET'))
+
+  ✗ Shared discovery shows location without granting third-party diplomatic identity — The expression evaluated to a falsy value:
+
+  assert.ok(labels(shared).some(l=>l.owner===4&&l.name==='Bilinmeyen devlet'))
+
+  ✗ Crowded viewport gives selected region first choice without label overlaps — The expression evaluated to a falsy value:
+
+  assert.ok(ls.some(l=>l.anchor===3))
+
+  ✗ Real old player save still draws at far, medium and near zoom without changing data — The expression evaluated to a falsy value:
+
+  assert.ok(labels(real).length)
+
+
+GEÇEN: 7 KALAN: 33

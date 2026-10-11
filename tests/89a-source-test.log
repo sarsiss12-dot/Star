@@ -1,0 +1,277 @@
+✗ anlık ifşa eski komplo/sabotajı korur actor=0 success=false — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ '[[{"k":"sabotaj","v":-60.9,"t":5}],[]]'
+- '[[{"k":"komplo","v":-60.9,"t":5},{"k":"sabotaj","v":-60.9,"t":5}],[{"k":"komplo","v":-35.699999999999996,"t":5}]]'
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:26:22
+    at test (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:23:60)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ anlık ifşa eski komplo/sabotajı korur actor=0 success=true — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ '[[{"k":"sabotaj","v":-60.9,"t":5}],[]]'
+- '[[{"k":"komplo","v":-60.9,"t":5},{"k":"sabotaj","v":-60.9,"t":5}],[{"k":"komplo","v":-35.699999999999996,"t":5}]]'
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:26:22
+    at test (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:23:60)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ anlık ifşa eski komplo/sabotajı korur actor=2 success=false — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ '[[{"k":"sabotaj","v":-60.9,"t":5}],[]]'
+- '[[{"k":"komplo","v":-60.9,"t":5},{"k":"sabotaj","v":-60.9,"t":5}],[{"k":"komplo","v":-35.699999999999996,"t":5}]]'
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:26:22
+    at test (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:23:60)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ anlık ifşa eski komplo/sabotajı korur actor=2 success=true — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ '[[{"k":"sabotaj","v":-60.9,"t":5}],[]]'
+- '[[{"k":"komplo","v":-60.9,"t":5},{"k":"sabotaj","v":-60.9,"t":5}],[{"k":"komplo","v":-35.699999999999996,"t":5}]]'
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:26:22
+    at test (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:23:60)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ aynı ayın iki iftirası birleşmez; yalnız çözülen temizlenir — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+false !== true
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:31:2
+    at test (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:28:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ gecikmeli ifşa başka failin komplo izini korur — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+0 !== 1
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:39:27
+    at test (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:34:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ kaynak taşımayan eski v8 fısıltı ifşası anıları topluca silmez — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ '[]'
+- '[{"k":"komplo","v":-60.9,"t":5}]'
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:44:37
+    at test (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:41:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ gerçek falseFlag → deepInvestigate yalnız ilgili sabotajı siler actor=0 — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ 'undefined'
+- 'string'
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:50:49
+    at test (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:46:26)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ gerçek falseFlag → deepInvestigate yalnız ilgili sabotajı siler actor=2 — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ 'undefined'
+- 'string'
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:50:49
+    at test (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:46:26)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ eski kaynak taşımayan hitLog ifşası gerçek sabotajı korur — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ '[]'
+- '[{"k":"sabotaj","v":-60.9,"t":5}]'
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:56:2
+    at test (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:53:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ sahteKanit → hedefli sorusturma yalnız dosya anısını temizler — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+false !== true
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:62:20
+    at test (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:58:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ yakalanan sahteKanit önceki farklı masum dosyalarını doğru taraftan temizler — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+0 !== 1
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:68:72
+    at test (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:64:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ v8 kaynak kimliklerini ve sıradaki kimliği korur; yükleme RNG/günü değiştirmez — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- true
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:74:2
+    at test (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:71:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✓ tür bazında normal anı birleştirmesi korunur
+✓ reddedilen fısıltı olay kimliği üretmez
+✗ fraksiyon günlüğü gerçek değişimi bildirir 98/18 — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+18 !== 2
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:91:48
+    at test (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:89:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ fraksiyon günlüğü gerçek değişimi bildirir 3/-14 — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+-14 !== -3
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:91:48
+    at test (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:89:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ fraksiyon günlüğü gerçek değişimi bildirir 100/18 — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+18 !== 0
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:91:48
+    at test (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:89:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ fraksiyon günlüğü gerçek değişimi bildirir 0/-14 — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+-14 !== 0
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:91:48
+    at test (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:89:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✓ fraksiyon günlüğü gerçek değişimi bildirir 50/18
+✗ Uzlaşı talep metni gerçekleşen ceza ile aynı — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+false !== true
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:100:41
+    at test (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz89a/tests/faz89a_memory_factions_test.js:94:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✓ mutlu fraksiyon modları recalcMods içinde üretim etkisine bağlanır
+✓ 13 civic flag kendi katalog girdisini tanır; counter hâlâ kaldırılmıştır
+✓ Panoptikon karşı istihbaratı kendi mevcut formülüyle artırır
+GEÇEN: 6 KALAN: 18

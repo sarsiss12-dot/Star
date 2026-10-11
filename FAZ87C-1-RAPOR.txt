@@ -1,0 +1,95 @@
+GELİŞTİRİCİ RAPORU — STARS FAZ 87C.1
+FISILTI AĞI / SAHTE BAYRAK SONUÇ VE GEÇMİŞİ
+
+KAYNAK
+stars-faz87c.zip
+SHA-256: b232e67c9a1b1dc4264920830b8d5585a6f014a8c00bc4dcc529c26de6e6de68
+Çıktı: stars-faz87c-1.zip. Build 87c-1; cache stars-v87c-1.
+Çıktı ZIP SHA-256 teslim mesajında; üretim dosyası SHA'ları
+tests/sha-87c-1.json içindedir.
+
+1. FISILTI AĞININ DÖRT SONUCU
+Bu motor başarıdan sonra ayrıca ifşa zarı atar. Başarılı+ifşa olmuş,
+başarılı+gizli, başarısız+ifşa olmuş ve başarısız+gizli mümkün.
+87C'nin iki özel motorundaki üçlü ayrım buraya zorlanmadı.
+Yeni whisperResult actor geçmişine sonuç, maliyet ve iki hedefli özeti
+bir kez yazar. UI aynı denemede başarı+ifşayı birlikte gösterir.
+İftira açığa çıkmışsa artık "suç masumun üstünde kaldı" denmez.
+
+runWhisper.ok eski anlamıyla etki başarısı olarak KALDI. resolved ücretli
+denemeyi belirtir. playerWhisper.ok eskisi gibi ücretli deneme, basari
+ise etki sonucudur. Eski whisperLog.ok/found yapısı ve counterIntelTick
+korundu; ikinci mağdur hitLog'u ve ikinci soruşturma zarı eklenmedi.
+
+2. GERÇEK MALİYET / GÖSTERİM / UYGUNLUK
+Yalın fısıltı 45, iftiralı fısıltı 80 Etki. Menü başlığı iftira seçilince
+45 göstermeyi bıraktı. Başarı yüzdesi motorun .88 çarpanını artık içerir.
+Üretim olasılıkları ve ücretleri değiştirilmedi.
+whisperCheck güncel aktör/hedef, temas, ayrı hedefler, savaş ve bütçeyi
+motor girişinde kontrol eder. Geçersiz doğrudan çağrı ücret/RNG/geçmiş
+değiştirmeden reddedilir. UI ve AI aynı kapıdan geçer.
+
+3. 140 ETKİ SAHTE BAYRAK
+Bu yol Fısıltı Ağı'ndan AYRIDIR: senato sabotajı veya araştırma verisi,
+iftira ve olası savaş. Bilinmeyen tür ile eski/geçersiz aktör/hedef
+artık kesinti öncesinde reddedilir. Actor dosyası en fazla 20, mağdur
+hitLog'u en fazla 30 kayıt tutar. Yakalanmada bilinen fail kaydı açılır;
+sessiz sonuçsuzlukta yeni mağdur dosyası oluşturulmaz.
+Başarıdaki by=masum, framed=gerçek fail sözleşmesi korunur. Oyuncu kurban
+gerçek kuklacıyı dosya çözülmeden göremez; gerçek deepInvestigate ile sınandı.
+payloadApplied asıl veri/sabotaj etkisini, framed iftiranın tutmasını ayırır.
+Veri bulunamadığında bile mevcut mekanik gereği iftira tutabilir; araştırma
+puanı oluştuğu uydurulmaz.
+
+4. "SAVAŞ ÇIKTI" YANLIŞ BİLDİRİMİ
+Önce declareWar reddetse bile savas=true dönüyordu. Artık sonuç iki taraflı
+gerçek war alanlarından alınır. Gölge Konseyi savaş yasağı testinde gerçek
+savaş yoksa sonuçta/bildirimde de savaş yok; izinli senaryoda savaş var.
+Geçici _warAuth/_warWhy finally ile önceki değer ve alan varlığına döner.
+Savaş kurulmazsa eski _lastCB korunur. Yasakları aşan yeni yetki yoktur.
+
+5. TESTLER
+Yeni hedefli paket: 45 geçen / 0 kalan.
+16 fısıltı matrisi: 2 actor × iftira açık/kapalı × başarı × ifşa.
+8 geçersiz fısıltı, 6 sahte bayrak sonuç/tür, 6 geçersiz sahte bayrak,
+2 gerçek savaş, alan varlığı, veri yokluğu, kurban/soruşturma gizliliği,
+gerçek UI maliyet/yüzde/sonuç, AI tick ve v8/gecikmeli soruşturma senaryoları.
+İlk test kurulumunda civic kimliği yerine 'shadow' bayrağı kullanılmıştı;
+katalogdaki gerçek 'golge_kons' kimliğiyle düzeltildi. Beklenti gevşetilmedi.
+Aynı yeni sözleşme testi değiştirilmemiş 87C'de 1 geçen / 44 kalan verir.
+Bu, 44 ayrı eski bug demek değildir; yeni alanların yokluğu da sayılır.
+Önce/sonra loglar tests/87c1-*.log dosyalarında.
+
+Tam regresyon: 37 paket · 3689 geçen · 0 kalan (önceki 3644 + yeni 45).
+23 eski testte yalnız build/cache beklentisi güncellendi; davranış
+beklentileri ve önceki test sayıları korunmuştur.
+Node/sahte DOM ile gerçek üretim fonksiyonları ve UI.act çalıştırıldı.
+Mevcut native Skia Canvas regresyonu geçti; gerçek Chrome/Android testi değil.
+Paketleme sonrası üye baytları sınanan dosyalarla doğrulanır ve yeni hedefli
+test ayrı çıkarılmış ZIP üzerinde tekrar çalıştırılır.
+
+6. KORUNANLAR / SINIRLAR
+Değişen: ai.js, diplomacy.js, ui.js; main.js yalnız build, sw.js yalnız cache.
+Bayt düzeyinde aynı: map.js, economy.js, combat.js, audio.js, index.html,
+manifest.json. Kaydın v8 sürümü ve depolama anahtarları değişmedi.
+Harita/portre/menü, transaction, elçi, AI bütçesi, 87A/87B/87C kazanımları ve
+Situation regresyonları geçti. Fiziksel cihaz testleri kullanıcı isteğiyle
+bekliyor; kontrol listesi güncellendi. Siteye yayın yapılmadı.
+
+Kuşatma trySabotage ayrı otomatik yoldur. Çift ajan saldırgana kasıtlı
+sahte başarı bildirir; bu aldatma mekanizması değiştirilmedi.
+Özel operasyonlara transaction eklenmedi; UI/declareWar istisnaları için
+tam rollback veya daima boolean/sonuç nesnesi dönüşü iddia edilmez.
+Yeni actor kayıtları ortak 20 kayıt sınırını kullanır. Eski kayıtların
+tutulması ve geçmişi kullanan AI seçimleri değişebilir; kampanyanın eski
+sürümle birebir aynı kalacağı veya RNG sonunun aynı olacağı söylenmez.
+
+Açık bulgu: iftira çözülürken anıların tür bazında topluca silinmesi farklı
+geçmiş olayları da etkileyebilir. remember anıları birleştirdiğinden bu iş
+operasyon kimliği/v8 politikası gerektirir; 89A hafıza incelemesine yazıldı.
+Actor özeti deneme anına aittir; gecikmeli ifşa eski whisperLog ve mevcut
+bildirimlerde kalır, actor özeti geriye dönük yeniden yazılmaz.
+
+SONRAKİ FAZ
+87D — diplomasi teklif tekrarlarını ve bildirim yükünü ölçme.
+Önerilen model/düşünme: Astra — High. Cihaz testi talebi yok.

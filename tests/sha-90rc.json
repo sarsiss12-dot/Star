@@ -1,0 +1,46 @@
+{
+  "main.js": {
+    "before": "534f1a6755b084b8449b86f40065e111165f018abcf51411c4ff7f97dfb585a3",
+    "after": "6594e48c4b3c86f0c8cc51c60aed68bfbcff4a8bb5863baa3b08d21650a4f900"
+  },
+  "sw.js": {
+    "before": "d399e7873a389c6fbaa710c7c7a8f55847681982fb377f8b7866548692088d7d",
+    "after": "edb75a8f51b19dcf933e4e0b69362d92a7eae6a4e998b0b9f40de69fb10d37ae"
+  },
+  "economy.js": {
+    "before": "65f9ea6f981177f49a36043a60bfe490edc5e0775e2f0aa703ad0b9dd69dcf2f",
+    "after": "65f9ea6f981177f49a36043a60bfe490edc5e0775e2f0aa703ad0b9dd69dcf2f"
+  },
+  "map.js": {
+    "before": "d5be2b3821aede53ea89c7ed4c22ed7814bb1750fc81df8735102f61cfa4c5f8",
+    "after": "d5be2b3821aede53ea89c7ed4c22ed7814bb1750fc81df8735102f61cfa4c5f8"
+  },
+  "combat.js": {
+    "before": "cb170d06659ea9d29f4f92491ff5c734fa1bc3a7875b2b3b0c082a674b95cf83",
+    "after": "cb170d06659ea9d29f4f92491ff5c734fa1bc3a7875b2b3b0c082a674b95cf83"
+  },
+  "audio.js": {
+    "before": "804226980179698a6b56d292d88c0c7226d1e54f06001aab63b52d6db5685262",
+    "after": "804226980179698a6b56d292d88c0c7226d1e54f06001aab63b52d6db5685262"
+  },
+  "manifest.json": {
+    "before": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
+    "after": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310"
+  },
+  "ui.js": {
+    "before": "3872bd41b78400112e9fe52da1cd235e01ad7b1d36b333e1d97ff73fb0778c7a",
+    "after": "3872bd41b78400112e9fe52da1cd235e01ad7b1d36b333e1d97ff73fb0778c7a"
+  },
+  "diplomacy.js": {
+    "before": "5560e12ff3e84ff1cb73c4a15e59e96a72d0ca7644b6ed0e09deb74b677e8bc1",
+    "after": "5560e12ff3e84ff1cb73c4a15e59e96a72d0ca7644b6ed0e09deb74b677e8bc1"
+  },
+  "ai.js": {
+    "before": "af10ba53483fd9201078c3d2c0d9042ddac10061cb74f43cfe54154802051368",
+    "after": "af10ba53483fd9201078c3d2c0d9042ddac10061cb74f43cfe54154802051368"
+  },
+  "index.html": {
+    "before": "f8bb5abd9cbc0dd5a6a949bdaefdb7f1d4a282d22fe5a64c5ebe574773eafc0d",
+    "after": "f8bb5abd9cbc0dd5a6a949bdaefdb7f1d4a282d22fe5a64c5ebe574773eafc0d"
+  }
+}

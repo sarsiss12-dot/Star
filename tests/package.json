@@ -1,0 +1,6 @@
+{
+  "name": "stars-validation",
+  "private": true,
+  "scripts": {"test": "node run-all.js"},
+  "devDependencies": {"@napi-rs/canvas": "0.1.100"}
+}

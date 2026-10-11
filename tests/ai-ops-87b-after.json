@@ -1,0 +1,109 @@
+{
+  "kind": "Operation-only laboratory; contact/intel/resources prepared; no daily exploration/economy; special resolved is not success",
+  "runs": [
+    {
+      "seed": 11,
+      "steps": 120,
+      "calls": 168,
+      "executed": 168,
+      "rejected": 0,
+      "types": {
+        "yalan": 22,
+        "sahteKanit": 84,
+        "tersaneVir": 18,
+        "isyan": 20,
+        "filoPlan": 8,
+        "sorusturma": 11,
+        "suikast": 5
+      },
+      "reasons": {},
+      "special": {
+        "stealTech": {
+          "calls": 0,
+          "resolved": 0,
+          "rejected": 0
+        },
+        "incite": {
+          "calls": 0,
+          "resolved": 0,
+          "rejected": 0
+        }
+      },
+      "selectedInvalid": 0,
+      "quotaViolations": 0,
+      "maxResolvedPerActorStep": 2,
+      "pickRngChanges": 0,
+      "rng": -565478371,
+      "stateSha256": "6aba80b10fd00f70e554921c3634a748c5dc85721a54dad6c55846d68aebb168"
+    },
+    {
+      "seed": 99,
+      "steps": 120,
+      "calls": 175,
+      "executed": 175,
+      "rejected": 0,
+      "types": {
+        "yalan": 25,
+        "sahteKanit": 92,
+        "sorusturma": 19,
+        "tersaneVir": 13,
+        "isyan": 17,
+        "filoPlan": 5,
+        "suikast": 4
+      },
+      "reasons": {},
+      "special": {
+        "stealTech": {
+          "calls": 0,
+          "resolved": 0,
+          "rejected": 0
+        },
+        "incite": {
+          "calls": 0,
+          "resolved": 0,
+          "rejected": 0
+        }
+      },
+      "selectedInvalid": 0,
+      "quotaViolations": 0,
+      "maxResolvedPerActorStep": 2,
+      "pickRngChanges": 0,
+      "rng": -1829149623,
+      "stateSha256": "e411fc8d5be560d377968ecad1f2f4ae66f10a32f96c07c9e267833cd145b854"
+    },
+    {
+      "seed": 404,
+      "steps": 120,
+      "calls": 155,
+      "executed": 155,
+      "rejected": 0,
+      "types": {
+        "yalan": 21,
+        "sahteKanit": 98,
+        "sorusturma": 14,
+        "tersaneVir": 9,
+        "isyan": 9,
+        "filoPlan": 4
+      },
+      "reasons": {},
+      "special": {
+        "stealTech": {
+          "calls": 0,
+          "resolved": 0,
+          "rejected": 0
+        },
+        "incite": {
+          "calls": 0,
+          "resolved": 0,
+          "rejected": 0
+        }
+      },
+      "selectedInvalid": 0,
+      "quotaViolations": 0,
+      "maxResolvedPerActorStep": 2,
+      "pickRngChanges": 0,
+      "rng": -2013396609,
+      "stateSha256": "f53bbe6767d28a35cd432dc3b5dabdd3ae2e48d873e433e38793e2a20d7c96a8"
+    }
+  ]
+}

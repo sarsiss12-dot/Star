@@ -1,0 +1,35 @@
+{
+  "noResource": {
+    "decision": "karsi",
+    "extra": [
+      {
+        "t": "tech",
+        "id": "m_gaia"
+      }
+    ],
+    "value": 1965.6000000000001
+  },
+  "withResource": {
+    "decision": "karsi",
+    "extra": [
+      {
+        "t": "tech",
+        "id": "m_gaia"
+      }
+    ]
+  },
+  "costlyOwnerValue": 0,
+  "costlyRecipientValue": 1965.6000000000001,
+  "costlyResult": {
+    "tur": 2,
+    "karar": "karsi-kabul",
+    "uygulandi": true,
+    "why": "enjekte edilmiş alıcı talebi",
+    "karsi": [
+      {
+        "t": "tech",
+        "id": "m_gaia"
+      }
+    ]
+  }
+}

@@ -1,0 +1,96 @@
+GELİŞTİRİCİ RAPORU — STARS FAZ 87B
+AI OPERASYON UYGUNLUĞU VE GERÇEK MALİYET REZERVİ
+
+1) KAYNAK
+stars-faz87a.zip
+Beklenen / hesaplanan SHA-256:
+23a72efd872c097bd8e8f369f4692ffce3bd6829b1d9c4b86ba16a4fad680b73
+Çıktı: stars-faz87b.zip — çıktı SHA teslim mesajında.
+Build 87b; SW cache stars-v87b. Kayıt v8.
+
+2) KÖK NEDENLER / DÜZELTME
+aiPickOp standart adayları puan ve TABAN maliyet üzerinden seçiyordu.
+Geçerli teknoloji/dosya/tesis olup olmadığı runOp'a kadar sınanmıyordu.
+Yüksek puanlı geçersiz aday düşük puanlı geçerli alternatifi bastırıyordu.
+
+aiStandardOpReady, seçimin son sıralamasını opQuote'a bağlar. Uygunsuz
+aday atlanır; sonraki uygun aday aynı puan/eşik/sıralama kurallarıyla seçilir.
+Hiçbir uygun seçenek yoksa null döner; zorla operasyon oluşturulmaz.
+
+Mevcut %40 rezerv katsayısı korunur; artık q.cost üzerindedir. Örnek:
+kervan taban bedeli 40, opCost +1 ise gerçek bedel 80 olur. Eski seçim
+56 stokta yeterli sayıyordu; yeni seçim rezerv dahil 112 gerektirir.
+opCost −0.5 durumunda gerçek bedel 20, gerekli stok 28 olur. Yürütme
+maliyet formülü değişmedi. Alaşım içeren operasyonda rezerv iki kaynak
+için de sınanır. Bu değişiklik ekonomik seçim davranışını etkiler;
+"yalnız isim değişti" denmiyor.
+
+Etik puanı, canIncite başarısızken de incite adayını ekleyebiliyordu.
+Son incite seçiminde kanonik canIncite kontrolü eklendi. stealTech'in
+ayrı 90 etki, incite'ın ayrı 120 etki yolu korunur. Standart katalogla
+birleştirilmez. aiPickOp girişinde 87A'nın ortak hedef kapısı kullanılır.
+
+3) KORUNAN KARARLAR
+Operasyon puanları, .75 seçim eşiği, eşit puanda eski sıra; aylık fırsat
+olasılığı; normal 1/Gölge Konseyi 2 kota; son 24 ay tekrar filtresi;
+süren virüs/filo bilgisi/rota/yanıltıcı rapor filtresi değişmedi.
+aiOpsTick gövdesi ve operasyon yürütme motorları değişmedi.
+
+Yeni uygunluk yardımcısı saftır: 2400 çağrı kaynak/log/RNG değiştirmedi.
+aiPickOp'un tümü saf DEĞİLDİR; mevcut profil/mizaç önbelleği ve
+_lockTarget yazımı korunur. Seçici ölçümde RNG tüketmedi.
+Farklı geçerli seçimler yürüdüğü için uzun koşunun son RNG ve dünya
+hash'i önceki sürümden farklıdır. Aynı sürüm/seed tekrarı birebir aynıdır.
+
+4) ÖNCE / SONRA LABORATUVARI
+Gerçek kayıt fixture'ı, yaşayan devletlere temas, ağ seviyesi 3 ve yüksek
+stok; 120 aiOpsTick adımı. Her adımda gün +30, memAge +1; günlük keşif ve
+ekonomi çalıştırılmıyor. Tam kampanya veya Android performans kanıtı değil.
+
+seed    runOp çağrısı       uygulanan         geçersiz ret
+11        388 → 168          166 → 168          222 → 0
+99        356 → 175          173 → 175          183 → 0
+404       323 → 155          153 → 155          170 → 0
+TOPLAM   1067 → 498          492 → 498          575 → 0
+
+Geçersiz standart seçim 0; kota ihlali 0; aktör/adım üst sınırı 2;
+seçicide RNG değişimi 0. Fırsat formülü aynı olsa da yürütülen operasyon
+sayısı ve dağılımı değişti. Özel stealTech/incite girişimi bu fixture'da
+0'dır; bu sıfır onların genel kullanımının kanıtı DEĞİLDİR. İki özel yol
+ayrı uygun hedef senaryolarında gerçek seçici ve yürütmeyle sınandı.
+
+Araç: tests/ai-operation-selection-probe.js
+Ölçümler: tests/ai-ops-87b-before.json ve ai-ops-87b-after.json.
+Eski 87A ölçüm dosyaları tarihsel kayıt olarak değiştirilmedi.
+
+5) HEDEFLİ TEST / REGRESYON
+Yeni test: faz87b_ai_operation_selection_test.js — 26 geçen / 0 kalan.
+Geçersiz soruşturma yerine filo planı; uygun seçenek yok; geçerli teknoloji
+ve soruşturma; 6 rezerv sınırı; alaşım rezervi; gerçek pahalı aday seçimi;
+2400 saf kontrol; aktif etki/24 ay; uygunsuz ve uygun incite; geçersiz
+hedefler; seçim eşiği; özel teknoloji; 3 seed'de tekrarlı deterministik
+laboratuvar, kota ve standart uygunluk sınandı.
+
+Aynı test 87A kaynağında 7 geçen / 19 kalan. Bunların bir kısmı yeni
+yardımcının yokluğudur; 19 bağımsız eski bug olarak sunulmaz.
+
+TAM SONUÇ: 35 paket, 3605 geçen / 0 kalan (3579 + 26).
+Eski testlerin yalnız build/cache sabitleri güncellendi. Test kaldırılmadı,
+davranış beklentisi gevşetilmedi. Sonuç tests/results-87b.json içindedir.
+Node/sentetik DOM ve mevcut native Skia piksel regresyonları çalıştı.
+Gerçek Chrome/WebView/Android testi yapılmadı; kullanıcı testi bekleniyor.
+
+6) DOSYA SINIRI
+Değişen: ai.js; main.js yalnız build; sw.js yalnız cache satırı.
+Bayt düzeyinde korunan 8 dosya: ui.js, diplomacy.js, map.js, economy.js,
+combat.js, audio.js, index.html, manifest.json.
+Kaynak/çıktı dosya hash'leri tests/sha-87b.json içindedir.
+87A onay akışı; 86C.6 transaction; elçi/diplomasi/bütçe/savaş-antlaşma;
+harita/menü/portre; v8, depolama ve Situation karantinası korunur.
+
+7) SIRADAKİ FAZ / AÇIK BORÇ
+87C — özel casusluk sonuçları. Astra — High.
+Özel yollarda ok:true ile başarılı etki arasındaki fark, anonimlik ve
+oyuncu/AI geçmiş yazımı denetlenecek. Önce stealTech/incite; diğer yollar
+kapsama göre sonraki alt faza ayrılabilir. Genel kampanya dengesi ve
+reddedilen ittifak tekrarları ayrı planda kalır. Cihaz testi istenmedi.

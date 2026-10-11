@@ -1,0 +1,29 @@
+{
+  "build": "86c-5-1",
+  "identity": {
+    "array": false,
+    "member": false,
+    "originalMemberValue": false,
+    "mods": false
+  },
+  "depth": 2,
+  "finalCalculation": {
+    "result": null,
+    "error": "final calc",
+    "minDelta": -100
+  },
+  "nestedLog": 2,
+  "absentBuffer": true,
+  "nestedExecute": {
+    "parent": false,
+    "child": true,
+    "alerts": 1
+  },
+  "performance": {
+    "samples": 40,
+    "systems": 100,
+    "fleets": 63,
+    "medianMs": 2.993324,
+    "p95Ms": 6.437174
+  }
+}

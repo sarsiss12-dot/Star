@@ -43,7 +43,7 @@ const UI = {
             doğrudan göründü — tek dokunuşla zemin değişiyor.
             ═══════════════════════════════════════════════════════ -->
        <!-- ═══ FAZ 82 + 86C.4H-R2: TEK AKORDİYON ═══
-            ÜÇ ANA MOD (aynı anda yalnız biri) ve İKİ BAĞIMSIZ
+            ÜÇ ANA MOD (aynı anda yalnız biri) ve bağımsız
             KATMAN (her biri ayrı aç/kapat) açıkça ayrıldı.
             Savaş + Radar + Lojistik aynı anda açık olabilir. -->
        <div class="toolGrp" id="grpMap">
@@ -62,6 +62,8 @@ const UI = {
              title="İkmal hatları, menzil ve tedarik — ana moddan bağımsız aç/kapat">⚓<span>Lojistik</span></button>
            <button class="tool radarBtn" id="radarBtn" data-a="radarTog"
              title="Filo hareketleri ve ralli hatları — ana moddan bağımsız aç/kapat">🚀<span>Radar</span></button>
+           <button class="tool fleetNamesBtn${FLEET_NAMES_ON?' on':''}" id="fleetNamesBtn" data-a="fleetNamesToggle"
+             aria-pressed="${FLEET_NAMES_ON}" title="Görünen filoların hangi devlete ait olduğunu göster — bağımsız aç/kapat">🏷<span>Filo sahipleri</span></button>
          </div>
        </div>
 
@@ -354,6 +356,14 @@ const UI = {
           : '🚀 Radar kapalı');
         break;
       }
+      case 'fleetNamesToggle': {
+        FLEET_NAMES_ON=!FLEET_NAMES_ON;FLEET_NAMES_REV++;
+        const b=$('fleetNamesBtn');
+        if(b){b.className='tool fleetNamesBtn'+(FLEET_NAMES_ON?' on':'');
+          b.setAttribute('aria-pressed',String(FLEET_NAMES_ON));}
+        try { storeSet('yh_fleetnames',FLEET_NAMES_ON?'on':'off'); } catch(e){}
+        break;
+      }
       case 'grpTog': {
         /* ═══ FAZ 64: ALT MENÜ AÇ/KAPA ═══
            Aynı anda tek grup açık kalır; ikinciye basınca ilki
@@ -548,7 +558,7 @@ const UI = {
       case 'loopSet': {
         const [sid, cls] = x.split(':');
         const sy = G.sys[+sid];
-        if (sy){
+        if (sy && sy.owner === G.p.id && shipBuildAccess(G.p, cls).ok){
           sy.loopBuild = cls;
           delete sy._loopWarn;
           say('🔁 ' + sy.name + ' sürekli ' + SHIPS[cls].n + ' üretecek', 'win');
@@ -856,15 +866,14 @@ const UI = {
         const r = (typeof inciteRebellion === 'function')
           ? inciteRebellion(G.p, o) : {ok:false, why:'—'};
         if (!r.ok){
-          say(r.why, 'war');                       // geçersiz işlem — tek mesaj
+          specialOpNotify(r.why, 'war');           // geçersiz işlem — tek mesaj
         } else if (r.caught){
-          say('☠ ' + r.msg, 'war');
-          this.eventArt('infaz', 'KIŞKIRTMA İFŞA OLDU', r.msg);
+          specialOpNotify('☠ ' + r.msg, 'war', ['infaz', 'KIŞKIRTMA İFŞA OLDU', r.msg]);
         } else if (!r.basarili){
-          say('🔥 ' + r.msg, 'sci');               // sessiz başarısızlık
+          specialOpNotify('🔥 ' + r.msg, 'sci');   // sessiz başarısızlık
         }
         /* r.basarili → motor zaten bildirdi, ikinci kez basmıyoruz */
-        this.keepScroll = true; this.refresh();
+        this.keepScroll = true; specialOpPresent('refresh', ()=>this.refresh());
         break;
       }
       case 'deepInv': {
@@ -937,9 +946,9 @@ const UI = {
       case 'stealTech': {
         const o = G.emps[+x];
         const r = (typeof stealTech === 'function') ? stealTech(G.p, o) : {ok:false, why:'—'};
-        if (!r.ok) say(r.why, 'war');
-        else if (r.msg && !r.caught && r.tech === undefined) say(r.msg);
-        this.keepScroll = true; this.refresh();
+        if (!r.ok) specialOpNotify(r.why, 'war');
+        else if (r.msg && !r.caught && r.tech === undefined) specialOpNotify(r.msg);
+        this.keepScroll = true; specialOpPresent('refresh', ()=>this.refresh());
         break;
       }
       case 'colFire': {
@@ -984,6 +993,7 @@ const UI = {
         break;
       }
       case 'fedPane': this.openFed(); break;
+      case 'shareOpen': this.openSettlement(+x); break;
       case 'cncPane':
         if (typeof closeAllGroups === 'function') closeAllGroups(); this.openCouncil(); break;
       case 'cncFound': {
@@ -1028,12 +1038,23 @@ const UI = {
       }
       case 'fedVoteYes': {
         const f = findFed(G.p);
-        if (f && f.vote){ f.vote.yes.push(0); finishFedVote(f); }
-        this.openFed(); break;
+        if (f && f.vote) this.fedVoteOpen(f.id);
+        break;
       }
       case 'fedVoteNo': {
         const f = findFed(G.p);
-        if (f && f.vote){ f.vote.no.push(0); finishFedVote(f); }
+        if (f && f.vote) this.fedVoteOpen(f.id);
+        break;
+      }
+      case 'fedLawPropose':
+      case 'fedLawRepeal': {
+        const r = proposeFedLaw(G.p, x, a === 'fedLawRepeal');
+        if (!r.ok) say(r.why, 'war');
+        this.openFed(); break;
+      }
+      case 'fedWarRequest': {
+        const r = proposeFedWar(G.p, G.emps[+x]);
+        if (!r.ok) say(r.why, 'war');
         this.openFed(); break;
       }
       case 'closeFed': $('diploPane').classList.remove('show'); break;
@@ -1250,6 +1271,9 @@ const UI = {
       case 'setwg': {
         const [id, k] = x.split(':');
         const o = G.emps[+id];
+        if (!o || !fedWarAllowed(G.p,o)){
+          say('Önce federasyon savaş izni al', 'war'); this.closeModal(); this.openFed(); break;
+        }
         if (setWarGoal(G.p, o, k)){
           declareWar(G.p, o);
           say('Savaş hedefi: ' + WAR_GOALS[k].n, 'war');
@@ -1802,10 +1826,18 @@ const UI = {
     View.selSys = s;
     const e = G.p;
     const owner = s.owner>=0 ? G.emps[s.owner] : null;
+    const ownerInfo = pSeen(s) ? territoryOwnerInfo(s.owner) : null;
     const surv = pSurv(s);
     let h = `<div class="ph">${esc(s.name)}</div>`;
     h += `<div class="row"><span>Yıldız</span><b style="color:${s.star.c}">${s.star.n}</b></div>`;
-    h += `<div class="row"><span>Hâkimiyet</span><b style="color:${owner?owner.col:'#7d90ad'}">${owner?esc(owner.name):'Sahipsiz'}</b></div>`;
+    h += `<div class="row"><span>Sistem hâkimiyeti</span><b style="color:${ownerInfo?ownerInfo.col:'#7d90ad'}">${ownerInfo?esc(ownerInfo.name):pSeen(s)?'Sahipsiz':'Bilinmiyor'}</b></div>`;
+    const colonyOwners = territoryColonyOwners(s);
+    if (colonyOwners.some(o=>o.id!==s.owner)){
+      h += `<div class="box"><div class="bt">KARMA HÂKİMİYET</div>
+        <div class="bd">Sistem hâkimiyeti bütün gezegenlerin aynı devlete ait olduğu anlamına gelmez.</div>`;
+      for(const o of colonyOwners)h += `<div class="row"><span style="color:${o.col}">${esc(o.name)}</span><b>${o.count} koloni</b></div>`;
+      h += `</div>`;
+    }
     h += `<div class="row"><span>Hiper yol</span><b>${s.lanes.length} bağlantı</b></div>`;
 
     /* 86E: sağ panel kısa özet; ayrıntılı kararlar tek ilişki sayfasında. */
@@ -1856,7 +1888,7 @@ const UI = {
         if (br.mine.dealt!==null){
           h += `<div class="row"><span>Son tur gerçek gövde hasarı</span>
             <b>Verdik ${fmt(br.mine.dealt)} · Aldık ${fmt(br.enemy.dealt)}</b></div>
-            <div class="row"><span>Ateş açabilen gemi</span>
+            <div class="row"><span>Tur başında ateş açabilen / toplam gemi</span>
             <b>Biz ${br.mine.ready}/${br.mine.ships} · Düşman ${br.enemy.ready}/${br.enemy.ships}</b></div>
             <div class="mini">${RANGE_NAMES[br.band]||''} · ${br.rounds}. tur ·
               bizim ikmal %${Math.round(br.mine.supply*100)}</div>`;
@@ -1888,9 +1920,15 @@ const UI = {
         <span class="mono" style="color:#ff5f6d">${Math.max(0,Math.round(s.nest.hp))} dayanım</span></div>
         <div class="bar hp"><i style="width:${clamp(s.nest.hp/1400*100,0,100)}%"></i></div>
         <div class="bd">Düzenli akıncı gönderiyor. Yok edilirse bölge güvenli olur ve
-        <b style="color:#65e08a">+260 alaşım, +180 mineral, +40 etki</b> kazanırsın.</div>`;
+        <b style="color:#65e08a">+260 alaşım, +180 mineral, +40 etki</b> kazanırsın.
+        <br>Korsanlara savaş ilanı gerekmez. Silahlı filon yuvaya ulaşınca saldırır;
+        yol üzerindeki diğer devletlerin geçiş izinleri geçerlidir.</div>`;
       if (myPow > 0){
-        h += `<div class="mini" style="color:#6ff2c8">⚔ Filon kuşatmayı sürdürüyor — güç ${fmt(myPow)}</div>`;
+        const br = s.battleReport;
+        const engaged = br && !br.done && [br.a,br.b].includes(0) &&
+          [br.a,br.b].includes(G.wildId) && here.some(f=>f.combat);
+        h += `<div class="mini" style="color:#6ff2c8">⚔ ${engaged ? 'Filon korsanlarla savaşıyor' :
+          'Filon yuvanın bulunduğu sistemde'} — güç ${fmt(myPow)}</div>`;
       } else {
         const armed = G.fleets.filter(f=>f.e===0 && isArmed(f));
         h += armed.length
@@ -1939,6 +1977,10 @@ const UI = {
       }
       h += `<div class="bt"><span>${esc(pl.name)}${sym}</span>${pl.owner>=0?`<span class="flag" style="background:${G.emps[pl.owner].col}"></span>`:''}</div>`;
       h += `<div class="bd">${def.n}${def.k==='hab'?` · yaşanabilirlik <b style="color:${hab>=60?'#65e08a':hab>=35?'#ff9b3d':'#ff5f6d'}">%${hab}</b>`:''}${pl.sz?` · boyut ${pl.sz}`:''}</div>`;
+      if(pl.col){
+        const colonyOwner=territoryOwnerInfo(pl.owner);
+        h += `<div class="mini">Koloni sahibi: <b style="color:${colonyOwner?colonyOwner.col:'#8b98ad'}">${colonyOwner?esc(colonyOwner.name):'Bilinmiyor'}</b></div>`;
+      }
       const pTrait = pl.col ? planetTrait(pl.col) : null;
       if (pTrait) h += `<div class="mini" style="color:#6ff2c8">${pTrait.ico} ${pTrait.n} — ${pTrait.d}</div>`;
 
@@ -2339,8 +2381,7 @@ const UI = {
               ${typeof LOOP_ALA_FLOOR !== 'undefined' ? LOOP_ALA_FLOOR : 400}
               alaşımın altına inerse otomatik duraklar.</div>`;
             const uygun = Object.keys(SHIPS).filter(k =>
-              !SHIPS[k].crisisOnly && (typeof shipUnlocked !== 'function' ||
-              shipUnlocked(e, k)));
+              !SHIPS[k].crisisOnly && shipBuildAccess(e, k).ok);
             h += `<div class="act2">`;
             uygun.slice(0, 6).forEach(k => {
               h += `<button class="abtn" data-a="loopSet" data-x="${s.id}:${k}">
@@ -2355,7 +2396,7 @@ const UI = {
                   st && st.dur ? 'DURAKLADI' : 'ÜRETİYOR'}</span></div>
               <div class="bd">${st && st.dur
                 ? '<b style="color:#ff9b3d">' + esc(st.why) +
-                  '</b> — kaynak toparlayınca kendiliğinden devam eder.'
+                  '</b> — üretim koşulları sağlanınca kendiliğinden devam eder.'
                 : 'Kuyruk boşaldıkça otomatik yenileniyor.'}</div>
               <div class="act2"><button class="abtn" data-a="loopOff"
                 data-x="${s.id}">✕ DÖNGÜYÜ DURDUR</button></div></div>`;
@@ -2367,12 +2408,15 @@ const UI = {
         h += `<div class="row"><span>Tersane yuvası</span><b style="color:#6ff2c8">${slots} paralel</b></div>`;
         h += `<div class="row"><span>Kuyrukta</span><b>${s.queue.length} gemi</b></div>`;
         h += `<div class="qbox">`;
+        const active = activeShipQueue(s);
         s.queue.forEach((q,i)=>{
-          const act = i < slots;
+          const access = shipBuildAccess(G.emps[q.e], q.cls);
+          const act = active.includes(i);
           h += `<div class="box" style="${act?'border-color:#ff9b3d':''}">
                 <div class="bt"><span>${act?'▸ ':''}${SHIPS[q.cls].n}</span>
                 <span class="mono" style="color:${act?'#ff9b3d':'#7d90ad'}">${Math.ceil(q.left)}g</span></div>
-                <div class="bar em"><i style="width:${(1-q.left/q.tot)*100}%"></i></div></div>`;
+                <div class="bar em"><i style="width:${(1-q.left/q.tot)*100}%"></i></div>
+                ${!access.ok ? '<div class="mini">BEKLİYOR · '+esc(access.why)+'</div>' : ''}</div>`;
         });
         h += `</div>`;
       }
@@ -2380,10 +2424,11 @@ const UI = {
       for (const k in SHIPS){
         if (SHIPS[k].crisisOnly) continue;      // FAZ 34: organik sürü gemileri gizli
         const d = SHIPS[k];
-        const locked = d.tech && !e.techs[d.tech];
+        const access = shipBuildAccess(e, k);
+        const locked = !access.ok;
         const cost = shipCost(e,k);
         const afford = Object.keys(cost).every(r=>e.res[r]>=cost[r]);
-        h += `<button class="abtn ${locked||!afford?'dis':''}" data-a="ship" data-hold="ship:${k}" data-x="${s.id}:${k}" title="${d.n}">${d.ab}<br>` +
+        h += `<button class="abtn ${locked||!afford?'dis':''}" ${locked||!afford?'disabled':''} data-a="ship" data-hold="ship:${k}" data-x="${s.id}:${k}" title="${esc(locked?access.why:d.n)}">${d.ab}<br>` +
              `<span style="font-size:9px">${locked?'<span style="color:#7d90ad">KİLİTLİ</span>':
                Object.entries(cost).map(([r,v])=>`<span style="color:${e.res[r]>=v?RES[r].c:'#ff5f6d'}">${RES[r].ico}${v}</span>`).join(' ')}</span></button>`;
       }
@@ -2945,7 +2990,7 @@ const UI = {
       <span>Elçi ${envoysUsed(e)}/${envoyCap(e)}</span></div><div class="dcFilters">`;
     h+=[['all','Tümü'],['war','Savaş'],['ally','Müttefik'],['envoy','Elçi var']].map(([k,n])=>
       `<button class="abtn ${filter===k?'pri':''}" aria-pressed="${filter===k}" data-a="diploFilter" data-x="${k}">${n}</button>`).join('');
-    h+='</div><div class="dpList">';
+    h+='</div>'+this.settlementAgenda()+'<div class="dpList">';
     for (const o of shown){
       const rel=Math.round(e.rel[o.id]||0),war=e.war[o.id]||o.war[e.id];
       h+=`<article class="dcState ${war?'war':''}"><button class="dcSelect" data-a="diploPick" data-x="${o.id}">
@@ -3019,9 +3064,26 @@ const UI = {
 
     return h;
   },
+  warContribution(e,o){
+    const v=warLedgerView(e,o.id);if(!v)return '';
+    const m=v.mine;
+    const partners=v.partners.map(id=>esc(G.emps[id].name)).join(', ');
+    const waiting=(G.settlements?.offers||[]).some(x=>x.campaign===v.campaign&&x.members.includes(e.id)&&
+      settlementState(x).state==='pending'&&!x.votes.some(y=>y.by===e.id));
+    return `<details class="dcDetails"><summary>Savaş katkı kaydı · ${v.active?'sürüyor':'sona erdi'}</summary>
+      <div class="mini">Bu cephedeki katkın. ${v.legacy?'Kısmi kayıt: önceki katkılar bilinmiyor.':'Savaş başlangıcından beri kaydediliyor.'}</div>
+      <div class="row"><span>Kaybedilen / imha edilen gemi</span><b>${m.shipsLost} / ${m.shipsDestroyed}</b></div>
+      <div class="row"><span>Verilen gövde hasarı</span><b>${Math.round(m.damageDealt)}</b></div>
+      <div class="row"><span>Çıkarmada kaybedilen taarruz / kırılan garnizon</span><b>${Math.round(m.groundLost)} / ${Math.round(m.garrisonReduced)}</b></div>
+      <div class="row"><span>Ele geçirilen farklı sistem / koloni</span><b>${m.systems.length} / ${m.planets.length}</b></div>
+      ${partners?'<div class="mini">Aynı seferde destek veren tanıdık devletler: '+partners+'</div>':''}
+      <div class="mini">Ele geçirme sayısı bugünkü sahiplik veya paylaşım hakkı değildir. Paylaşım bütün ortakların onayını gerektirir.</div>
+      <button class="abtn" data-a="shareOpen" data-x="${v.campaign}">⚖ ${waiting?'PAYLAŞIM · OYUN BEKLENİYOR':'PAYLAŞIM TASLAĞI'}</button></details>`;
+  },
   diploRelationship(e,o){
     const lvl=intelOf(e,o.id),blocked=diploBlocked(e,o),war=!!(e.war[o.id]||o.war[e.id]);
     let h=this.diploIdentity(e,o)+this.diploTreaties(e,o);
+    h+=this.warContribution(e,o);
     if (e.pact&&e.pact[o.id]) h+=`<div class="mini">Ticaret takasın: ${esc((e.lastSwap&&e.lastSwap[o.id])||'—')}
       · ${((e.tradeFlow&&e.tradeFlow[o.id])||0).toFixed(1)} birim/ay</div>`;
     h+='<div class="ph">NEDEN BU İLİŞKİ?</div>';
@@ -3051,6 +3113,11 @@ const UI = {
       h+=`<details class="dcDetails"><summary>Savaş ve baskı</summary>
         <button class="abtn dgr" data-a="war" data-x="${o.id}" ${w.ok?'':'disabled'}>⚔ SAVAŞ HEDEFİ SEÇ</button>
         ${w.ok?'':'<div class="mini">'+esc(w.why||'Savaş ilanı şu an mümkün değil')+'</div>'}`;
+      if (fedHasLaw(e,'savasOnay') && !fedWarAllowed(e,o)){
+        const gate = canFedWarRequest(e,o);
+        h += `<button class="abtn" data-a="fedWarRequest" data-x="${o.id}" ${gate.ok?'':'disabled'}>⚖ SAVAŞ İZNİ ÖNER</button>
+          <div class="mini">${esc(gate.ok ? 'Kabul savaş başlatmaz; hedefi sonra seçersin.' : gate.why)}</div>`;
+      }
       if (!blocked) h+=`<button class="abtn" data-a="${embargoOn(e,o.id)?'unembargo':'embargo'}" data-x="${o.id}">
         ${embargoOn(e,o.id)?'AMBARGOYU KALDIR':'AMBARGO UYGULA'}</button>`;
       h+='</details>';
@@ -3188,17 +3255,53 @@ const UI = {
           <div class="bd">${L.d}</div></div>`;
       }
 
+      h += `<div class="ph">İÇ YASA ÖNERİLERİ · UYUM %${fedCohesion(f)}</div>
+        <div class="mini">Öneri bedeli bir kez ödenir, ret halinde iade edilmez. Oyunu ayrıca kullanırsın.
+        Süre 90 gün; kullanılmayan oy çekimserdir. Eşitlikte öneri reddedilir.</div>`;
+      for (const category of [...new Set(Object.values(FED_INNER_LAWS).map(L=>L.cat))]){
+        const keys = Object.keys(FED_INNER_LAWS).filter(k=>FED_INNER_LAWS[k].cat===category);
+        h += `<details class="dcDetails"><summary>${esc(category)} · ${keys.filter(k=>f.laws[k]).length}/${keys.length} yürürlükte</summary>`;
+        for (const k of keys){
+          const L = FED_INNER_LAWS[k], on = !!f.laws[k], gate = canFedLaw(e,k,on);
+          const conflicts = fedLawConflicts(f,k);
+          h += `<div class="box"><div class="bt"><span>${L.ico} ${L.n}</span>
+            <b>${on ? 'YÜRÜRLÜKTE' : L.c + ' ◈'}</b></div><div class="bd">${L.d}</div>
+            ${!on && conflicts.length ? `<div class="mini">Kabul edilirse yerine geçer: ${conflicts.map(k=>esc(FED_INNER_LAWS[k].n)).join(', ')}</div>` : ''}
+            <button class="abtn ${gate.ok ? 'pri' : 'dis'}" data-a="${on?'fedLawRepeal':'fedLawPropose'}" data-x="${k}"
+              ${gate.ok ? '' : 'disabled'}>${on?'KALDIRMAYI ÖNER · '+fedLawCost(k,true)+' ◈':'YASA ÖNER'}</button>
+            ${gate.ok ? '' : `<div class="mini">${esc(gate.why)}</div>`}</div>`;
+        }
+        h += '</details>';
+      }
+      if (f.laws.savasOnay){
+        h += '<details class="dcDetails"><summary>⚔ Savaş izni önerileri</summary><div class="mini">İzin önerisi ücretsizdir. Aynı hedef için 90 gün beklenir. Kabul savaşı başlatmaz.</div>';
+        for (const target of G.emps.filter(o=>!o.dead && !o.wild && !o.crisisSide && !f.members.includes(o.id) && e.contact[o.id])){
+          const gate = canFedWarRequest(e,target), p = f.warPermits && f.warPermits[e.id+'>'+target.id];
+          h += `<div class="box"><b>${esc(target.name)}</b><div class="mini">${p && p.expires>G.day ? 'İzin: '+(p.expires-G.day)+' gün kaldı' : esc(gate.why || 'Federasyonun onayına sun')}</div>
+            <button class="abtn" data-a="fedWarRequest" data-x="${target.id}" ${gate.ok?'':'disabled'}>İZİN ÖNER</button></div>`;
+        }
+        h += '</details>';
+      }
+      if (f.lastVote){
+        const L = fedVoteLaw(f.lastVote);
+        h += `<div class="mini">Son sonuç: ${esc(L ? L.n : f.lastVote.law)} ${f.lastVote.repeal?'(kaldırma)':''} —
+          ${f.lastVote.passed ? 'KABUL' : 'RED'} · ${f.lastVote.yes} evet / ${f.lastVote.no} hayır /
+          ${f.lastVote.abstain || 0} çekimser ${esc(f.lastVote.invalid || '')}</div>${this.fedAgendaContext(f.lastVote)}`;
+      }
       if (f.laws.filo)
         h += `<div class="row"><span>Ortak filo hazinesi</span><b>${Math.round(f.treasury)} ▰</b></div>`;
 
       h += `<div class="ph">OYLAMA</div>`;
       if (f.vote){
-        const L = FED_LAWS[f.vote.law];
+        const L = fedVoteLaw(f.vote) || {ico:'🏛', n:'Eski gündem', d:'Bu gündem desteklenmiyor.'};
+        const tally = fedVoteCounts(f);
         h += `<div class="box" style="border-color:#ff9b3d">
           <div class="bt"><span>${L.ico} ${L.n}</span><span class="tag e">AÇIK</span></div>
-          <div class="bd">${L.d}</div>
-          <div class="row"><span>Oylar</span><b><span style="color:#65e08a">${f.vote.yes.length} evet</span>
-            · <span style="color:#ff5f6d">${f.vote.no.length} hayır</span></b></div>
+          <div class="bd">${L.d}</div>${this.fedAgendaContext(f.vote)}
+          <div class="row"><span>Ağırlıklı oylar</span><b><span style="color:#65e08a">${tally.yes} evet</span>
+            · <span style="color:#ff5f6d">${tally.no} hayır</span></b></div>
+          <div class="mini">${tally.waiting.length} üyenin oyu bekleniyor ·
+            ${Number.isFinite(f.vote.expires) ? Math.max(0, f.vote.expires-G.day) + ' gün kaldı' : 'Eski kayıt: süre sınırı yok'}</div>
           <div class="act2"><button class="abtn pri" data-a="fedVoteNow" data-x="${f.id}">OY KULLAN</button></div></div>`;
       } else {
         const ay = Math.max(0, Math.ceil((f.nextVote - G.day)/30));
@@ -5545,28 +5648,121 @@ const UI = {
     });
   },
 
+  settlementAgenda(){
+    const latest=new Map();
+    for(const o of G.settlements?.offers||[])if(o.members.includes(G.p.id))latest.set(o.campaign,o);
+    if(!latest.size)return '';
+    const label={pending:'Oyun bekleniyor',approved:'Onaylandı · Uygula',applied:'Tamamlandı',
+      rejected:'Reddedildi',expired:'Süresi doldu',invalid:'Koşullar değişti',withdrawn:'Geri çekildi'};
+    const items=[...latest.values()].map(o=>({o,s:settlementState(o).state}));
+    items.sort((a,b)=>Number(['pending','approved'].includes(b.s))-Number(['pending','approved'].includes(a.s))||b.o.id-a.o.id);
+    return '<details class="dcDetails" open><summary>Ortak savaş paylaşımları</summary>'+items.slice(0,12).map(({o,s})=>
+      `<button class="abtn" data-a="shareOpen" data-x="${o.campaign}">⚖ Sefer ${o.campaign} · ${label[s]||'İncele'}</button>`).join('')+
+      '<div class="mini">Oy vermek tek başına devir yapmaz. Onaylanan paylaşımı ayrıca uygula. Son 12 gündem gösterilir.</div></details>';
+  },
+  openSettlement(campaign,assignments=null,expectedStamp=null,newDraft=false){
+    const player=G.p,store=G.settlements;
+    const current=()=>G.p===player&&G.settlements===store;
+    const q=settlementPreview(player,campaign,assignments);
+    const o=!newDraft&&(G.settlements?.offers||[]).filter(x=>x.campaign===campaign&&x.members.includes(player.id)).slice(-1)[0];
+    const state=o&&settlementState(o);
+    if(!o&&(!q.ok||expectedStamp!==null&&q.stamp!==expectedStamp)){
+      this.openModal(`<div class="mhd"><span>PAYLAŞIM TASLAĞI</span></div><div class="mbd">${esc(q.ok?'Taslak eskidi; yeniden açıp incele.':q.why)}</div>
+        <div class="mft"><button class="ch" data-a="closem">Kapat</button></div>`);return;
+    }
+    const proposal=o||q;
+    const name=id=>id===player.id||player.contact[id]?esc(G.emps[id]?.name||'Ayrılmış devlet'):'Bilinmeyen ortak';
+    const rows=proposal.rows.map((r,i)=>{
+      const s=G.sys[r.sys],pl=r.planet===null?null:s?.planets[r.planet],visible=settlementVisible(player,r);
+      const title=visible?(r.planet===null?s.name:(pl.col?.name||pl.name)+' · '+s.name):'Keşif bilgisi yetersiz';
+      return `<div class="lrow"><b>${esc(title)}</b><div class="mini">${name(r.from)} → ${name(r.to)} · ağırlık ${r.value}</div>
+        <div class="mini">${visible?esc(r.why):'Kabul için bu toprağı incelemelisin.'}</div>
+        ${!o?`<button class="abtn" data-a="shareNext" data-x="${i}">Alıcıyı değiştir</button>`:''}</div>`;
+    }).join('');
+    const labels={pending:'Ortakların onayı bekleniyor',approved:'Oybirliğiyle onaylandı · uygulanmayı bekliyor',applied:'Paylaşım uygulandı',rejected:'Reddedildi',expired:'Süresi doldu',invalid:'Bilgiler değişti · teklif geçersiz',withdrawn:'Geri çekildi'};
+    const application=o&&state.state==='approved'?settlementApplyQuote(player,o.id):null;
+    const canVote=o&&state.state==='pending'&&!o.votes.some(v=>v.by===player.id);
+    const visible=proposal.rows.every(r=>settlementVisible(player,r))&&proposal.members.every(id=>id===player.id||player.contact[id]);
+    const summary=proposal.shares.map(s=>`<div class="row"><span>${name(s.id)} · katkı ${s.points}</span><b>${s.held} → ${s.allocated}</b></div>`).join('');
+    this.openModal(`<div class="mhd"><span>ORTAK SAVAŞ PAYLAŞIMI</span></div><div class="mbd">
+      <div class="lead">${o?labels[state.state]:'İncelenecek taslak'}</div>
+      <div class="mini">Öneri ücretsiz. Ağırlıklar kaynak değildir: koloni 3, boş sistem 1.
+      Mevcut kontrol → önerilen pay aşağıda. Oybirliğinden sonra bir ortak Uygula düğmesine basar.
+      Koloni devri yörüngeyi veya filoları devretmez; nüfus ve yapılar korunur.
+      Vali eski devletinde kalır, otomatik inşa kapanır. Son koloni verilemez.</div>
+      ${summary}${rows}${o?'<div class="mini">'+esc(state.why||'')+'</div>'+o.votes.map(v=>
+        '<div class="mini">'+name(v.by)+': '+(v.yes?'EVET':'HAYIR')+' — '+esc(v.why)+'</div>').join(''):''}
+      ${application&&!application.ok?'<div class="mini">Uygulanamıyor: '+esc(application.why)+'</div>':''}
+      ${o&&state.state==='applied'?'<div class="mini">'+o.receipt.transfers.length+' devir tamamlandı · oyun günü '+o.receipt.at+'</div>':''}
+      <div class="mini">Gövde hasarı, imha, çıkarma ve farklı ele geçirmeler katkı ağırlığını belirler.
+      Fetih hedefi ve mevcut kontrol öneriyi etkiler. Bütün yaşayan ortakların açık onayı gerekir.</div></div>
+      <div class="mft">${!o?`<button class="ch" data-a="shareSend" ${visible?'':'disabled'}>Taslağı onaylayıp sun</button>`:''}
+      ${canVote?`<button class="ch" data-a="shareYes" ${visible?'':'disabled'}>Paylaşımı onayla</button><button class="ch" data-a="shareNo">Reddet</button>`:''}
+      ${application?`<button class="ch" data-a="shareApply" ${application.ok?'':'disabled'}>Onaylı paylaşımı uygula</button>`:''}
+      ${o&&o.proposer===player.id&&['pending','approved'].includes(state.state)?'<button class="ch" data-a="shareWithdraw">Teklifi geri çek</button>':''}
+      ${o&&!['pending','approved','applied'].includes(state.state)?'<button class="ch" data-a="shareNew">Yeni taslak</button>':''}
+      <button class="ch" data-a="closem">Kapat</button></div>`);
+    const result=r=>{if(!r.ok)say(r.why,'war');this.openSettlement(campaign);};
+    this._hook('shareNext',i=>{
+      if(!current()||o||!q.rows[i])return;
+      const a=Object.fromEntries(q.rows.map(r=>[r.key,r.to])),r=q.rows[i];
+      a[r.key]=q.members[(q.members.indexOf(r.to)+1)%q.members.length];
+      this.openSettlement(campaign,a,q.stamp,true);
+    });
+    this._hook('shareSend',()=>{if(current()&&!o)result(settlementSubmit(player,campaign,q.stamp,Object.fromEntries(q.rows.map(r=>[r.key,r.to]))));});
+    this._hook('shareYes',()=>{if(current()&&canVote&&settlementOffer(o.id)===o)result(settlementVote(player,o.id,true));});
+    this._hook('shareNo',()=>{if(current()&&canVote&&settlementOffer(o.id)===o)result(settlementVote(player,o.id,false));});
+    this._hook('shareApply',()=>{if(current()&&o&&settlementOffer(o.id)===o)result(settlementApply(player,o.id));});
+    this._hook('shareWithdraw',()=>{if(current()&&o&&settlementOffer(o.id)===o)result(settlementWithdraw(player,o.id));});
+    this._hook('shareNew',()=>{if(current())this.openSettlement(campaign,null,null,true);});
+  },
+
   /* =============== FEDERASYON OYLAMASI =============== */
+  fedAgendaContext(v){
+    if (!v) return '';
+    if (v.repeal) return '<div class="mini">Öneri: bu yasayı yürürlükten kaldır. Kabulde etkileri sona erer.</div>';
+    if (v.kind !== 'war') return '';
+    const who = G.emps[v.proposer], target = G.emps[v.target];
+    const name = target && (target.id === G.p.id || G.p.contact[target.id]) ? target.name : 'Temassız devlet';
+    return `<div class="mini">Öneren: ${esc(who ? who.name : 'Ayrılmış üye')} · Hedef: ${esc(name)}</div>`;
+  },
   fedVote(f){
+    const L = fedVoteLaw(f.vote);
+    if (!L) return;
     this.notify({kind:'fedvote', data:f.id, ico:'🏛', pause:true,
-      title:'Federasyon oylaması', sub:FED_LAWS[f.vote.law].n, key:'fed:'+f.id});
+      title:'Federasyon oylaması', sub:L.n+(f.vote.repeal?' — kaldırma':''), key:'fed:'+f.id+':'+fedVoteToken(f.vote)});
   },
   fedVoteOpen(fid){
     const f = fedOf(fid);
-    if (!f || !f.vote){ return; }
-    const L = FED_LAWS[f.vote.law];
-    const yes = f.vote.yes.length, no = f.vote.no.length;
+    if (!f || !f.vote || !f.members.includes(G.p.id)){ return; }
+    const L = fedVoteLaw(f.vote);
+    if (!L) return;
+    const token = fedVoteToken(f.vote), counts = fedVoteCounts(f);
+    const {yes, no} = counts;
+    const canVote = counts.waiting.includes(G.p.id) &&
+      !(Number.isFinite(f.vote.expires) && G.day >= f.vote.expires);
     this.openModal(
       `<div class="mhd"><span>${esc(f.name)}</span></div>
-       <div class="mbd"><div class="lead">${L.ico} ${L.n}</div>${L.d}
+       <div class="mbd"><div class="lead">${L.ico} ${L.n}</div>${L.d}${this.fedAgendaContext(f.vote)}
        <div class="row" style="margin-top:10px"><span>Mevcut oylar</span>
          <b><span style="color:#65e08a">${yes} evet</span> · <span style="color:#ff5f6d">${no} hayır</span></b></div>
-       <div class="mini">Üyeler: ${f.members.map(m=>esc(G.emps[m].name)).join(' · ')}</div></div>
+       <div class="mini">Seçmenler: ${counts.eligible.map(m=>esc(G.emps[m].name)).join(' · ')}</div>
+       <div class="mini">${canVote ? 'Oyun bekleniyor.' : 'Oy kullandın veya bu gündemde oy hakkın yok.'}
+         ${Number.isFinite(f.vote.expires) ? Math.max(0,f.vote.expires-G.day)+' gün kaldı.' : ''}
+         Eşitlikte ret; süre sonunda kullanılmayan oylar çekimser.</div></div>
        <div class="mft">
-         <button class="ch" data-a="fedYes"><div class="cht">EVET oy ver</div></button>
-         <button class="ch" data-a="fedNo"><div class="cht">HAYIR oy ver</div></button>
+         <button class="ch" data-a="fedYes" ${canVote ? '' : 'disabled'}><div class="cht">EVET oy ver</div></button>
+         <button class="ch" data-a="fedNo" ${canVote ? '' : 'disabled'}><div class="cht">HAYIR oy ver</div></button>
        </div>`);
-    this._hook('fedYes', ()=>{ f.vote.yes.push(0); finishFedVote(f); this.closeModal(); this.refresh(); });
-    this._hook('fedNo',  ()=>{ f.vote.no.push(0);  finishFedVote(f); this.closeModal(); this.refresh(); });
+    const vote = yes => {
+      if (fedOf(fid) !== f){ this.closeModal(); return; } // yüklemeden kalan modal
+      const r = castFedVote(G.p, fid, token, yes);
+      if (!r.ok) say(r.why, 'war');
+      this.closeModal(); this.refresh();
+      if ($('diploPane').classList.contains('show')) this.openFed();
+    };
+    this._hook('fedYes', ()=>vote(true));
+    this._hook('fedNo', ()=>vote(false));
   },
 
   /* =============== DEVLET =============== */
@@ -6069,6 +6265,8 @@ const UI = {
   },
   buildShip(x){
     const [sid,k] = x.split(':');
+    const access = shipBuildAccess(G.p, k);
+    if (!access.ok){ say(access.why, 'war'); return; }
     /* ═══ FAZ 47: DONANMA UYKUSU UYARISI ═══
        Kasa alaşımı 500 altına düştüğünde ya da filo kapasitesi
        %90'ı aştığında oyuncuyu uyar — inşa yine de yapılabilir,
@@ -6168,7 +6366,10 @@ const UI = {
   diploAct(kind, id){
     const e = G.p, o = G.emps[id];
     if (!o) return;
-    if (kind === 'war'){ this.warGoalMenu(o.id); return; }
+    if (kind === 'war'){
+      if (!fedWarAllowed(e,o)){ this.openFed(); return; }
+      this.warGoalMenu(o.id); return;
+    }
     if (kind === 'peace' || kind === 'ally' || kind === 'pact'){
       /* Ön kontrol: kilitliyse nedenini söyle, müzakereyi açma. */
       if (kind === 'peace' && typeof canPeace === 'function' && !canPeace(e,o)){
@@ -6309,7 +6510,7 @@ const UI = {
        <div class="row"><span>Fraksiyon gücü</span><b style="color:${F.col}">%${f.pow}</b></div>
        <div class="row"><span>Memnuniyet</span><b style="color:#ff5f6d">${Math.round(f.mood)}</b></div>
        <div class="row"><span>Süre</span><b>${f.demand.left} ay</b></div>
-       <div class="mini" style="margin-top:8px">Karşılarsan +18 memnuniyet; karşılamazsan −14.
+       <div class="mini" style="margin-top:8px">Mevcut memnuniyetle karşılarsan +${Math.round(facMoodDelta(G.p, f.mood, 18))}; karşılamazsan ${Math.round(facMoodDelta(G.p, f.mood, -14))} memnuniyet.
        Bu fraksiyonu görmezden gelmek diğerlerini güçlendirir — bir seçim, ceza değil.</div></div>
        <div class="mft"><button class="ch" data-a="closem"><div class="cht">Anlaşıldı</div></button></div>`, 'war');
   },
@@ -7214,7 +7415,46 @@ const UI = {
     pane.innerHTML = h;
     pane.classList.add('show');
   },
+  confirmSaveLoad(txt, kaynak){
+    const q = inspectSaveText(txt);
+    if (!q.ok){
+      say((kaynak === 'cihaz' ? 'Cihazdaki kayıt' : 'Dosya') +
+          ' geçerli bir kayıt değil — açık oyun korunuyor', 'war');
+      return false;
+    }
+    this._pendingSaveLoad = {txt, kaynak:kaynak || 'dosya'};
+    const mevcut = (G && G.p && G.sys && G.sys.length)
+      ? `${esc(G.p.name || 'Hanedan')} · ${G.year}.${String(G.month).padStart(2,'0')}`
+      : 'açık oyun yok';
+    this.openModal(`<div class="mhd"><span>KAYDI YÜKLE</span></div>
+      <div class="mbd"><div class="box"><div class="bt"><span>Seçilen kayıt</span>
+        <b>${esc(q.name)}</b></div><div class="bd">Yıl ${q.year}.${String(q.month).padStart(2,'0')}</div></div>
+        <div class="mini" style="margin-top:10px">Mevcut oyun: ${mevcut}<br>
+        Onaylarsan açık dünya seçilen kayıtla değiştirilir.</div></div>
+      <div class="mft"><button class="ch" data-a="loadConfirm"><div class="cht">YÜKLE</div></button>
+      <button class="ch" data-a="save"><div class="cht">VAZGEÇ</div></button></div>`);
+    this._hook('loadConfirm', async ()=>{
+      if (this._loadApplying || !this._pendingSaveLoad) return;
+      this._loadApplying = true;
+      const p = this._pendingSaveLoad;
+      this._pendingSaveLoad = null;
+      try {
+        let ok = false;
+        try { ok = deserialize(p.txt); } catch(e){ ok = false; }
+        if (!ok){
+          say('Kayıt uygulanamadı', 'war');
+          this.saveMenu(); return;
+        }
+        await storeSet('yildiz:save', p.txt);
+        this.closeModal(); this.refresh();
+        say(p.kaynak === 'cihaz' ? 'Kayıt cihazdan yüklendi'
+          : 'Kayıt dosyadan yüklendi', 'win');
+      } finally { this._loadApplying = false; }
+    });
+    return true;
+  },
   saveMenu(){
+    this._pendingSaveLoad = null;
     const auto = G.autoSave !== false;
     this.openModal(
       `<div class="mhd"><span>KAYIT VE AYARLAR</span>
@@ -7268,12 +7508,12 @@ const UI = {
       if (ok) this.closeModal();
     });
     this._hook('ulsave', ()=>{
-      uploadSave(txt=>{
-        if (!txt){ say('Dosya okunamadı'); return; }
-        let ok = false;
-        try { ok = deserialize(txt); } catch(e){ ok = false; }
-        if (ok){ storeSet('yildiz:save', txt); this.closeModal(); this.refresh(); say('Kayıt dosyadan yüklendi', 'win'); }
-        else say('Dosya geçerli bir kayıt değil', 'war');
+      uploadSave((txt, durum)=>{
+        if (durum === 'cancel') return;
+        if (durum !== 'ok'){
+          say('Dosya okunamadı — açık oyun korunuyor', 'war'); return;
+        }
+        this.confirmSaveLoad(txt, 'dosya');
       });
     });
     this._hook('autotog', ()=>{ G.autoSave = !(G.autoSave !== false); this.saveMenu(); });
@@ -7282,11 +7522,13 @@ const UI = {
         <div class="mini" style="margin-top:8px">Kalıcı olduğundan emin olmak için "Dosyaya kaydet"i kullan.</div></div>
       <div class="mft"><button class="ch" data-a="closem"><div class="cht">Kapat</div></button></div>`);
     }); });
-    this._hook('doload', ()=>{ loadGame().then(ok=>{
-      if (ok){ this.closeModal(); this.refresh(); say('Kayıt yüklendi'); }
-      else this.openModal(`<div class="mhd"><span>KAYIT</span></div><div class="mbd">Kayıt bulunamadı.</div>
+    this._hook('doload', async ()=>{
+      let txt = null;
+      try { txt = await storeGet('yildiz:save'); } catch(e){}
+      if (txt){ this.confirmSaveLoad(txt, 'cihaz'); return; }
+      this.openModal(`<div class="mhd"><span>KAYIT</span></div><div class="mbd">Kayıt bulunamadı.</div>
       <div class="mft"><button class="ch" data-a="closem"><div class="cht">Kapat</div></button></div>`);
-    }); });
+    });
     this._hook('doexport', ()=>{
       const txt = serialize();
       this.openModal(

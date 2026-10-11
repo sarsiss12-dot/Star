@@ -1,0 +1,26 @@
+{
+  "fleetRally": {
+    "chosen": 5,
+    "overwrittenYard": "{\"fleet\":72,\"sys\":5}",
+    "mainFleetAt": 2,
+    "actualDestination": 2,
+    "status": "toplanma noktasına sevk"
+  },
+  "blockedDelivery": {
+    "targetRetained": false,
+    "shipsPreserved": 1,
+    "message": "⚓ 3. Filo ana filoya ulaşamıyor — mevcut sistemde bekliyor"
+  },
+  "pending": {
+    "actualShips": 1,
+    "queued": 2,
+    "uiMissingFormula": 2,
+    "engineMissing": 0
+  },
+  "lockedClass": {
+    "ok": false,
+    "reason": "Kaynak yetersiz",
+    "queue": 0,
+    "stock": 100000
+  }
+}

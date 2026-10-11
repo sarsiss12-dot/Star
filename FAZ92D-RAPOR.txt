@@ -1,0 +1,77 @@
+GELİŞTİRİCİ RAPORU — STARS FAZ 92D
+BARIŞ SONRASI AI PAYLAŞIM GÜNDEMİ + LOJİSTİK İNCELEMESİ
+11 Ekim 2026
+
+KAYNAK
+stars-faz92c.zip
+SHA-256: bb83226eb25d5e4a20e81f86a9c1256dced2d15d5803e66bc1f1010feef22c11
+Kaynak doğrulandı. 92C kopyası üzerinde çalışıldı; eski paket değiştirilmedi.
+
+YENİ DAVRANIŞ
+- monthTick sonunda settlementAgendaTick çalışır. Kapanmış, kısmi olmayan
+  seferlerde barıştan sonraki 180 gün içinde AI ortak teklif hazırlayabilir.
+- Her aylık çalışmada en fazla iki yeni teklif. RNG kullanılmaz.
+- Yaşayan, teması/keşfi yeterli ve kendi payını kabul eden AI önerir.
+  Oylar, katkı ve sahiplik aynı kanonik 92B/92C kapılarından geçer.
+- Sefer/taraf için bir teklif varsa AI yeniden sunmaz (ret/iptal/süre dolması
+  dahil). Oyuncu yeni manuel taslak hazırlayabilir. Sıfır devirli öneri atlanır.
+- Oyuncunun oyu otomatik değildir. Oyuncu dahilse onay sonrası otomatik
+  devir de yoktur; ayrıca Uygula gerekir. AI-only oybirliği settlementApply
+  ile atomik uygulanır. Başarısız uygulama onaylı kalır, sonraki ay tekrar
+  kontrol edilir; yeni savaş/süre/ölüm/sahiplik kapıları korunur.
+- Diplomasi merkezinde oyuncunun son 12 paylaşımı, açık olanlar önce,
+  doğrudan açılabilir. Yabancı AI-only teklifler gösterilmez. Geçici bildirim
+  kaçırılsa bile teklif kayıtlıdır. Toprak paylaşımı henüz uygulanmaz diyen
+  eski katkı-paneli metni düzeltildi.
+- Yeni kayıt alanı/tercih anahtarı yok. Kayıt v8 korunur. Yükleme işlem yapmaz.
+
+LOJİSTİK BULGULARI (BU FAZDA DÜZELTİLMEDİ)
+Gerçek View.tap ve üretim sevk fonksiyonuyla:
+seçilen nokta 5; başka tersanenin hedefi 4'ten {fleet:72,sys:5}'e yazıldı;
+oluşan gemi ana filonun bulunduğu 2'ye yöneldi. Hedef türleri çelişiyor.
+1/3 filo + 2 sipariş: motor eksiği 0; UI formülü eksiği 2 gösteriyor.
+Kilitli Muhrip + 100000 alaşım: üretim engelleniyor ama mesaj Kaynak yetersiz.
+Rota engelinde gemi korunuyor/bildirim veriliyor, ana filo bağı bırakılıyor.
+Karma filoda sınıf başına kadro tutulmuyor; baskın sınıf sipariş ediliyor.
+Ayrıntı ve öneri sırası LOJISTIK-INCELEME-92D.md içindedir.
+
+HEDEFLİ DOĞRULAMA
+14 senaryo: AI teklif/oy/gerçek devir, oyuncu rızası, tekrar/ret/yükleme,
+gizlilik, aktif savaş/kısmi kayıt/ölüm/süre, transaction ve sunum hataları,
+atomik geri alma ve tekrar uygulama, gerçek monthTick çağrısı.
+İlk çalışmada AI-only fixture'ı savaş meclisi yetkisini kurmadığı için
+4 kurulum hatası verdi; fixture geçerli savaş yetkisiyle düzeltildi.
+Üretim kapısı gevşetilmedi. Son hedefli sonuç 14 geçen / 0 kalan.
+Eski testlerde yalnız build/cache beklentisi 92d'ye güncellendi.
+
+DOĞAL KAMPANYA — GÜNLÜK TİK, TEMAS ZORLANMADI
+seed  hedef ay  gerçekleşen  gündem çağrısı  teklif  devir  cephe / destek cephesi
+11       240       240            240           0      0       4 / 1
+99       240       219            218           0      0      17 / 5
+404      240       240            240           0      0      46 / 34
+Toplam 699 ay. Seed99 oyuncunun son kolonisini kaybetmesiyle normal bitti.
+NaN/negatif stok/filo referansı/rapor sayacı/fraksiyon toplamı denetiminde
+ilk hata kaydı yok; Situation 0. tests/campaign-92d.json ölçümdür.
+Destek cepheleri kapanmış ve paylaşılabilir toprak bulunan sefer demek
+DEĞİLDİR. Sıfır teklifin bütün nedenleri ayrı sınıflandırılmadı. Bu ölçüm
+natural paylaşım sıklığı/adil denge kanıtı değildir. Zorlanmış temas veya
+sahiplik ile doğal ölçüm varmış gibi sunulmadı. Çalışan transfer yolu
+kontrollü ortak savaş senaryolarında doğrulandı.
+
+KORUNANLAR
+map.js, economy.js, ai.js, combat.js, audio.js, index.html, manifest.json
+92C ile birebir. main.js yalnız build + aylık çağrı; diplomacy.js yeni
+gündem; ui.js gündem listesi + eski metin düzeltmesi. sw.js cache adı.
+91C/87T sabit cihaz adayı değişmedi. GitHub/publish yapılmadı.
+Gerçek tarayıcı veya Android testi bu fazda yapılmadı. Native Canvas
+regresyonu GPU/telefon kabulü değildir. Cihaz senaryoları listede birikir.
+
+SIRADAKİ
+93A — Astra / High: tersane hedefi ve hareketli filo takviyesini ayır;
+üretimde/yolda/eksik sayıları; doğru ret sebebi; eski kayıt/kuyruk korunumu.
+93B: kapanan rotada bekleyen sevkiyat ve yeniden hedefleme.
+93C: sınıf bazlı filo şablonu + üretim/seyahat tahmini.
+Doğal paylaşım adaylarının niçin elendiğinin ölçümü ayrıca açık denge işi.
+
+TAM REGRESYON: 61 paket / 4229 geçen / 0 kalan / 0 atlanan.
+Native Canvas paketleri dahil. Son üretim kodu üzerinde tek tam koşu.

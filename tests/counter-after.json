@@ -1,0 +1,36 @@
+{
+  "noResource": {
+    "decision": "karsi",
+    "extra": [
+      {
+        "t": "tech",
+        "id": "t_tarim"
+      }
+    ],
+    "value": 36.400000000000006
+  },
+  "withResource": {
+    "decision": "karsi",
+    "extra": [
+      {
+        "t": "res",
+        "r": "ala",
+        "v": 20
+      }
+    ]
+  },
+  "costlyOwnerValue": 0,
+  "costlyRecipientValue": 1965.6000000000001,
+  "costlyResult": {
+    "tur": 2,
+    "karar": "karsi-red",
+    "uygulandi": false,
+    "why": "istenen ek karşılık fazla — 1966 değerinde ek, kabul tavanı 33",
+    "karsi": [
+      {
+        "t": "tech",
+        "id": "m_gaia"
+      }
+    ]
+  }
+}

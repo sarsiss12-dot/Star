@@ -1,0 +1,35 @@
+STARS — 90F HAZIRLIK
+SÜRÜM KİMLİĞİ, AÇIK RİSKLER VE DEVİR
+
+Kaynak stars-faz90rc-3.zip:
+0b2f6c03ecf6c701d151782deb01d0ef53cd3132743dedd0e38ab74434260515
+Çıktı stars-faz90f-hazirlik.zip. Oyun build 90rc-3 ve cache stars-v90rc-3.
+
+Üretim değişikliği YOK. 11 ana dosya kaynağa byte-for-byte eşit.
+Yeni geliştirme aracı tools/verify-release.py: stdlib Python, salt okunur
+SHA-256 dosya kontrolü; eksik/değişmiş/manifest dışı dosyayı reddeder.
+RELEASE-MANIFEST.json bütün teslim dosyalarını (kendisi hariç) kapsar.
+
+Yeni belgeler: 90F-OKU.md, ACIK-RISKLER.md, ILERI-GELISTIRME-PLANI.md.
+Devir, geçmiş ve faz planı güncellendi. 89B gerçek günlük kampanya ölçümü
+artık 'hiç yapılmamış' gibi listelenmiyor; daha geniş denge kabulü ayrı açık.
+
+Regresyon: kaynak 90RC.3'ün 47 paket / 3892 geçen / 0 kalan kanıtı devralındı.
+Üretim/test/fixture değişmediği için yeniden tam regresyon yapılmadı; yeni
+koşu veya artmış test toplamı iddiası yok. Native Skia gerçek Android değildir.
+Yeni aracın temiz paket, değiştirilmiş dosya, eksik dosya ve ek dosya davranışı
+geçici kopyada sınandı: 4/4 beklenen sonuç. Kaynak paket değiştirilmedi.
+Index'in 8 yerel script'i ve SW kabuğundaki yerel dosyalar eksiksizdir.
+
+Nihai kabul AÇIK: fiziksel Android, gerçek PWA güncellemesi, mobil menü/portre,
+büyük kaydın cihaz akıcılığı. Kullanıcı testlere ara vermiştir; şimdi test
+istenmez. Kayıt v8 ve Situation karantinası aynı. Yayın yapılmadı.
+
+İlerleme değerlendirmesi: hedefli otomatik kontroller %100 geçiyor; bu kod
+kapsamı veya bugsızlık oranı değildir. İlk stabilizasyon hedefinde yaklaşık
+%80 öznel mühendislik tahmini; oyunun bütünü için doğrulanmış yüzde yok.
+
+Sonraki çalışma 91A: özel operasyonların UI hatası sınırı — Astra / High.
+Korunan adayın ayrı kopyasında geliştirilir. Ardından 91B bütünleşik AI
+kampanya ölçümü; 91C ölçüme dayalı tek denge konusu; 91D geri bildirim ve
+civic metin/etki tutarlılığı. 87T kullanıcının hazır olduğu zaman yürütülür.

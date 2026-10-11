@@ -1,0 +1,128 @@
+GELİŞTİRİCİ RAPORU — STARS FAZ 91C
+KORSAN ÇATIŞMASI / YUVA SAVUNMASI / AI ADAY FİLTRESİ
+
+1. KAYNAK VE TESLİM
+Kaynak: stars-faz91b.zip
+SHA-256: 11eeeb17cb7b89e5bb91b52dc76882e837f2cfb68e1761ede4c09b6c8268ab61
+Hesaplanan kaynak özeti eşleşti. Çıktı: stars-faz91c.zip.
+Build 91c; SW cache stars-v91c. Fetch/activate/KABUK değişmedi.
+Bu paket sonraki 87T cihaz turu için sabit adaydır. Yayın yapılmadı.
+
+2. KULLANICININ KORSAN BULGUSU — ÜRETİLDİ
+hostile yalnız G.emps[a].war[b] okuyordu. Yeni oyunda korsanın da bütün
+savaş bayrakları false; normal diplomasi ekranı korsanla savaş ilanı
+sunmuyor. Gerçek combatTick'te yan yana filolar çatışmıyor ve muhafızsız
+yuvanın saldırı kapısı açılmıyordu. Hareket ile muharebe ayrı sınandı:
+gerçek UI.act('sendhere') rota kuruyor, varış sonrası yuva hasar almıyordu.
+
+Düzeltme: yaşayan farklı taraflardan biri wild ise hostile true.
+Saf kontroldür; RNG, savaş bayrağı, antlaşma, Konsey veya hafıza yazmaz.
+Normal tarafların barış ilişkisi korunur. canEnter ve AI threatAt aynı
+kontrolü kullanır. Yuva varlığı üçüncü devletin kapalı sınırını açmaz.
+
+3. YUVA VE MUHAREBE TARAFI
+Yuva toplam savunmada görünüyordu ama orbitDefenseAlive içine girmiyordu;
+muhafızsız yuva karşı ateş edemiyordu. Savunma yalnız B tarafına yazılıyor,
+bitirme kararı da toplam sistem savunmasını B'nin gücü sayıyordu.
+Filo sırası ters olduğunda yuva ayaktayken erken zafer riski vardı.
+
+wildDefenseAlive yuvayı/kalıntıyı yalnız geçerli G.wildId tarafına bağlar.
+Yörünge savunması iki tarafta da hesaplanır. Zafer canlı filo ve o tarafa
+ait savunma üzerinden sınanır; yuva normal sistem sahibini hayatta tutmaz.
+Yuva/kalıntı, wild tarafının bulunmadığı iki normal devlet savaşından
+hasar almaz. Eski wildId fallback'i yanlış tarafa saldırı yazıyordu.
+Mevcut HP, hasar ve ödül katsayılarına yeni denge değerleri eklenmedi.
+
+Ricat döngüsündeki erken filtre/return tüm filoların ricadı bittikten
+sonraya taşındı. Kaçan saldırgan hasar almaz; muhafız kaçsa bile yuva
+savaşa devam eder. Kaçamayan düşük gövdeli filo yuvaya karşı donmaz.
+
+Yuva yok edilince indeks temizlenir ve aynı ödül tekrar verilmez.
+Mevcut +260 alaşım/+180 mineral/+40 Etki yuva ödülü ile +90 alaşım/
++120 araştırma korsan zafer ganimeti korundu; özel yeni ödül eklenmedi.
+Panel savaş ilanı gerekmediğini açıklar; filo sadece orada duruyorsa
+henüz başlamamış kuşatmayı sürüyormuş gibi göstermez.
+
+4. PLANLANMIŞ AI ADAY DÜZELTMESİ
+Pact/ally döngüleri wild hedefi erken elemiyordu. Fırsat kapısı geçiliyor,
+aiNegotiate tur 0/karar null dönüyor, döngü break ile sona eriyordu.
+Artık wild uygunluk/fırsat kapısından önce elenir; geçerli sonraki devlet
+gerçek aiRespond → quote → transaction yoluna ulaşır.
+Oyuncu hedefi UI.aiOffer onayı bekler; kanonik wild reddi ayrıca korunur.
+
+5. HEDEFLİ KANIT
+tests/faz91c_pirate_combat_test.js: kaynak 2 geçen/19 kalan → çıktı 21/0.
+Gerçek SALDIR, varış, combatTick, battleRound, karşı ateş, iki filo sırası,
+ricat, yuva yok oluşu/tek ganimet, normal barış ve sınır, üçüncü taraf,
+kalıntı, AI tehdit, panel ve v8 devamlılığı. Çatışma motoru stub'lanmadı.
+tests/faz91c_ai_candidates_test.js: kaynak 2/4 → çıktı 6/0.
+Fırsat RNG'si kontrollü; teklif üretimi, alıcı cevabı, quote ve commit gerçek.
+27 senaryonun 23'ü eski sürümde başarısızdı; 23 ayrı kök neden değildir.
+Kaynak çıktıları tests/91c-pirate-source.log ve tests/91c-ai-source.log.
+
+6. REGRESYON
+Son üretim koduyla 52 paket / 3970 geçen / 0 kalan / 0 atlanan.
+Tam sonuç: tests/results-91c.json. Önceki 3942'ye 27 yeni senaryo ve
+bir eski testte net +1 kontrollü senaryo eklendi.
+
+İlk tam koşu 3967/1 çıktı. Başarısız eski iddia üç sabit aylık kampanyada
+karşı teklif hem kabul hem ret çıkmasını şart koşuyordu. Wild filtresi
+RNG akışını değiştirince dört karşı teklifin dördü kabul gördü (1/2/1).
+Motoru istenen oranı üretmeye zorlamadık. Eski frekans iddiasını gerçek
+aiRespond/aiNegotiate/executeDeal ile iki kontrollü senaryoya dönüştürdük:
+bütçe aşımı → karşı ret ve sıfır mutasyon; bütçe içi → karşı kabul ve
+iki yönlü pakt. Aylık kampanya karar/tur/sayım kontrolleri korundu.
+25 eski test dosyasında sürüm/cache beklentisi 91c'ye güncellendi.
+
+7. DOĞAL GÜNLÜK KAMPANYA — SON KOD
+60/100 sistem × seed 11/99/404 × 240 ay. Temas zorlanmadı; gerçek
+keşif/hareket/günlük muharebe/aylık ekonomi ve AI çalıştı. Oyuncu eylemi
+yok; Konsey/kriz kapalı; normal zorluk. Normal yenilgide koşu durur.
+
+sistem seed  ay   müzakere  uygulama  karşı  wild-giriş
+  60    11  240     31        28       0       0
+  60    99  240     58        49      13       0
+  60   404  240     36        35       2       0
+ 100    11  240     63        62       3       0
+ 100    99  240     37        36       7       0
+ 100   404  240    156       146      17       0
+
+Toplam 1440 ay / 381 karar / 356 uygulama / 42 karşı teklif.
+Kararlar: 336 kabul, 3 ret, 20 karşı kabul, 22 karşı ret; max tur 2.
+Seed 11/60 sistem koşusu 240. ayda normal oyuncu yenilgisiyle bitti.
+6/6 koşuda ölçülen durum ihlali/istisna yok; Situation tetiklenmedi.
+509 casusluk girişimi, kapı reddi 0; 45560 AI filo-ayı, 2209 düşük ikmal,
+373 kritik ikmal, 16 yıpranma gemi kaybı; 141 ikmal ricadı/0 rota hatası.
+Ölçüm açık/kapalı oyun kaydı ve RNG eşitliği regresyonda tekrar geçti.
+
+91B karşılaştırması: 1223 ay / 1022 çağrı / 500 wild sonuçsuz girişim.
+91C: 1440 ay / 381 çağrı / 0 wild sonuçsuz girişim.
+Çözümlenen muharebe turu 7171→30539. Bu sayı daha iyi denge göstergesi
+değildir; korsanlar ve üs savunmaları artık gerçekten savaşıyor. Aday
+filtresi ve muharebe birlikte değişti; kampanya farkları tek başına
+filtreye atfedilemez. Ham önceki/son ölçümler pakette tutuldu.
+
+8. DEĞİŞEN / KORUNAN
+Değişen: main.js, combat.js, ai.js, ui.js, sw.js (cache adı tek satır).
+Byte-for-byte aynı: map.js, diplomacy.js, economy.js, audio.js,
+index.html, manifest.json — 6/6.
+Harita kurtarma kodu, kayıt v8, depolama anahtarları ve Situation
+karantinası korunur. Yeni oyuna zorlama veya kayıt silme yapılmadı.
+
+9. KULLANICININ DİĞER İSTEKLERİNİN DURUMU
+Harita: iki ayrı merkez etiketi kopuk alanları açıklayamıyor; bir yol
+tek sistemli devleti atlıyor ve görünürlük filtresi eksik. 91D sırada.
+Federasyon: temel yasa oylamaları var. İç yasa sunma kodu/AI yolu var,
+oyuncu düğmesi yok; iç yasa yolu oyuncu oyunu da rastgele hesaplayabiliyor.
+Bazı vaat edilen iç yasa etkilerinin bağlantısı bulunmadı. 91E'de tamamlama.
+Ortak savaş paylaşımı: mevcut çift taraflı statusQuoPeace yeterli değil;
+92A katkı kaydı, 92B paylaşım teklifi, 92C güvenli uygulama. Henüz eklenmedi.
+Eski civic işi 91F olarak planda durur. Ayrıntı ILERI-GELISTIRME-PLANI.md.
+
+10. DOĞRULAMA SINIRI VE SONRAKİ ADIM
+Node + sahte DOM üretim testi ve mevcut native Skia Canvas regresyonları
+çalıştı. Gerçek tarayıcı/Android bu turda çalıştırılmadı. Korsan/kalıntı
+savunmasının etkinleşmesi oynanış zorluğunu değiştirebilir; cihazdaki
+oyuncu deneyimini test sayısından çıkarmıyoruz.
+Kullanıcının test arası korunuyor. 91C sabit aday, 87T hazır olduğunda
+yaklaşık 20 dakika; sıradaki geliştirme ayrı kopyada 91D — Astra / High.

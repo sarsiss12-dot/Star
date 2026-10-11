@@ -1,0 +1,680 @@
+✗ fısıltı actor=0, iftira=false, başarı=false, ifşa=false — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- true
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:26:2
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:23:26)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ fısıltı actor=2, iftira=false, başarı=false, ifşa=false — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- true
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:26:2
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:23:26)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ fısıltı actor=0, iftira=false, başarı=false, ifşa=true — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- true
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:26:2
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:23:26)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ fısıltı actor=2, iftira=false, başarı=false, ifşa=true — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- true
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:26:2
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:23:26)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ fısıltı actor=0, iftira=false, başarı=true, ifşa=false — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- true
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:26:2
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:23:26)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ fısıltı actor=2, iftira=false, başarı=true, ifşa=false — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- true
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:26:2
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:23:26)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ fısıltı actor=0, iftira=false, başarı=true, ifşa=true — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- true
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:26:2
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:23:26)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ fısıltı actor=2, iftira=false, başarı=true, ifşa=true — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- true
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:26:2
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:23:26)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ fısıltı actor=0, iftira=true, başarı=false, ifşa=false — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- true
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:26:2
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:23:26)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ fısıltı actor=2, iftira=true, başarı=false, ifşa=false — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- true
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:26:2
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:23:26)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ fısıltı actor=0, iftira=true, başarı=false, ifşa=true — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- true
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:26:2
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:23:26)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ fısıltı actor=2, iftira=true, başarı=false, ifşa=true — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- true
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:26:2
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:23:26)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ fısıltı actor=0, iftira=true, başarı=true, ifşa=false — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- true
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:26:2
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:23:26)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ fısıltı actor=2, iftira=true, başarı=true, ifşa=false — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- true
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:26:2
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:23:26)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ fısıltı actor=0, iftira=true, başarı=true, ifşa=true — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- true
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:26:2
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:23:26)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ fısıltı actor=2, iftira=true, başarı=true, ifşa=true — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- true
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:26:2
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:23:26)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ fısıltı eski hedef: doğrudan motor saf ret — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- false
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:42:2
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:40:3)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ fısıltı ölü hedef: doğrudan motor saf ret — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- false
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:42:2
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:40:3)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ fısıltı temassız: doğrudan motor saf ret — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- false
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:42:2
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:40:3)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ fısıltı ölü aktör: doğrudan motor saf ret — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- false
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:42:2
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:40:3)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ fısıltı yetersiz kaynak: doğrudan motor saf ret — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- false
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:42:2
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:40:3)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ fısıltı eski suçlanan: doğrudan motor saf ret — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- false
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:42:2
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:40:3)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ fısıltı aynı hedef: doğrudan motor saf ret — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- false
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:42:2
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:40:3)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ fısıltı savaşta: doğrudan motor saf ret — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- false
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:42:2
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:40:3)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ sahte bayrak tekno basari: tek maliyet ve kayıt — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- 'basari'
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:48:20
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:45:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ sahte bayrak tekno ifsa: tek maliyet ve kayıt — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- 'ifsa'
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:48:20
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:45:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ sahte bayrak tekno sonucsuz: tek maliyet ve kayıt — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- 'sonucsuz'
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:48:20
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:45:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ sahte bayrak sabotaj basari: tek maliyet ve kayıt — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- 'basari'
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:48:20
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:45:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ sahte bayrak sabotaj ifsa: tek maliyet ve kayıt — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- 'ifsa'
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:48:20
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:45:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ sahte bayrak sabotaj sonucsuz: tek maliyet ve kayıt — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- 'sonucsuz'
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:48:20
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:45:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ sahte bayrak bilinmeyen tür: kesinti/zar/kayıt yok — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+true !== false
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:61:2
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:59:3)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ sahte bayrak eski hedef: kesinti/zar/kayıt yok — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+true !== false
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:61:2
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:59:3)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ sahte bayrak eski suçlanan: kesinti/zar/kayıt yok — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+true !== false
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:61:2
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:59:3)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ sahte bayrak korsan: kesinti/zar/kayıt yok — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+true !== false
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:61:2
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:59:3)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ sahte bayrak temassız: kesinti/zar/kayıt yok — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+true !== false
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:61:2
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:59:3)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ sahte bayrak ölü aktör: kesinti/zar/kayıt yok — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+true !== false
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:61:2
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:59:3)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ kritik sahte bayrak: gerçek savaş kuruluyor — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+false !== true
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:69:2
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:63:35)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ kritik sahte bayrak: gerçek savaş reddediliyor — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+true !== false
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:67:2
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:63:35)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ başarısız savaşta önceden olmayan yetki alanları tekrar yoktur — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+true !== false
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:75:2
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:72:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ veri yokken iftira başarısı, araştırma kazanımı diye sunulmaz — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- true
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:79:2
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:77:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✓ kurban dosyası masumu gösterir; gerçek kuklacı yalnız soruşturma sonrası görünür
+✗ fısıltı menüsü iftira seçilince gerçek 80 Etki ve yüzde .88 başarıyı gösterir — AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert.ok(html.includes('/ 80 ◈'))
+
+    at /workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:94:9
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:90:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+✗ gerçek UI ifşa edilmiş başarılı iftirayı masumun üstünde kaldı diye anlatmaz — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+0 !== 1
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:98:2
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:96:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ AI fısıltısı actor ve eski karşı istihbarat kaydını birer kez yazar — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+0 !== 1
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:108:2
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:104:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ v8 ücret/sonuç/geçmişi korur; gecikmeli fısıltı ifşası eski yoldan çalışır — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+0 !== 1
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:7:29)
+    at /workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:116:2
+    at test (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:6:25)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87c-1/tests/faz87c_1_intrigue_outcomes_test.js:110:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+GEÇEN: 1 KALAN: 44

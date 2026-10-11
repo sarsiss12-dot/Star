@@ -1,0 +1,71 @@
+STARS FAZ 92B.1 — GEMİ ARAŞTIRMA KİLİDİ VE KURULUM SEKMESİ
+Tarih: 2026-09-28
+
+KAYNAK
+stars-faz92b.zip
+SHA-256: d48f500798cce54e8da060c996ae5d1fc386c7441aa6e600ef6ae797bc603ca0
+Build: 92b1; SW cache: stars-v92b1. Kayıt sürümü v8 korundu.
+
+KÖK NEDEN VE ÖLÇÜM
+Kaynak sürüm gerçek queueShip yolunda, m_muhrip ve m_kruvazor
+araştırmaları silinmişken iki siparişi de kabul etti:
+muhrip:true, kruvazor:true, queue:[muh,kru].
+UI kilit gösteriyordu ama queueShip teknoloji şartını kontrol etmiyordu.
+Sürekli üretim menüsü ayrıca hiç tanımlanmayan shipUnlocked yardımcısını
+opsiyonel çağırıyordu: fonksiyon yokken tüm normal sınıflar listeleniyordu.
+
+DÜZELTME
+shipBuildAccess(e,cls): bilinmeyen sınıf, geçersiz/ölü üretici,
+araştırma, kriz tarafı ve Konsey süper silah yasağı için ortak izin kapısı.
+queueShip, canBuildShip, sürekli üretim, UI ve federal üretim bu kapıya
+bağlandı. AI ve filo takviyesi de queueShip üzerinden aynı kuralı izler.
+Kilitli/yetersiz kaynaklı düğmeler gerçek disabled niteliği taşır;
+doğrudan UI eylemi ve motor çağrısı da kilidi aşamaz.
+
+ESKİ KAYITLAR
+activeShipQueue günlük ilerleme/tamamlanma için uygun işleri seçer.
+Önceden hatayla sıraya girmiş kilitli sipariş silinmez, geri ödeme veya
+ikinci ücret yapılmaz. Araştırma tamamlanana kadar BEKLİYOR ve gerekçe
+gösterilir. Arkadaki izinli siparişler tersane yuvalarını kullanabilir.
+Araştırmadan sonra eski iş kaldığı süreden devam eder. Süresi önceden
+sıfıra düşmüş kilitli bir iş de araştırmasız gemiye dönüşemez.
+Sabotaj altındaki tersanenin mevcut işleri de sabotaj bitene kadar durur.
+Önceden tamamlanmış filolar geriye dönük silinmez veya dönüştürülmez.
+
+FİZYOLOJİ
+Kurulumun üçüncü sekmesindeki tek başına duran DNA emojisi kaldırıldı.
+Yedi sekmenin sayı + metin düzeni korundu. Fizyoloji seçimleri ve etkileri
+değişmedi; yeni raster görsel/harici asset eklenmedi.
+
+DOĞRULAMA
+Yeni hedefli test: 19 senaryo, 19 geçen / 0 kalan.
+İlk hedefli koşuda test yardımcısının undefined argümanını varsayılan true
+olarak yorumlaması bir test hatası üretti; açık assert.equal ile düzeltildi.
+Gerçek UI.act, UI.p_sistem, queueShip, queueFleetShip, reinforceFleet,
+buildFederalShip, loopBuildTick, dailyTick ve serialize/deserialize
+yolları kullanıldı. Kilit reddinde kaynak/oyun durumu/RNG korunumu,
+açık sınıf maliyeti, federal fon, AI, kriz, Konsey, eski sipariş,
+sabotaj, kayıt sonrası bekleme ve gerçek panel HTML'i kontrol edildi.
+
+Son üretim koduyla TAM REGRESYON: 59 paket, 4187 geçen / 0 kalan;
+atlanan paket yok. Native Canvas paketleri dahil.
+tests/results-92b1.json tam koşu kanıtıdır.
+Eski testlerde yalnız build/cache beklentileri 92b1'e yükseltildi.
+Test silinmedi veya davranış beklentisi gevşetilmedi.
+Bu fazda fiziksel Android veya gerçek tarayıcı testi yapılmadı.
+No-op DOM / native Skia koşuları mobil yerleşim kabulü değildir.
+
+DOSYALAR
+economy.js: ortak izin, sipariş/otomasyon kapısı, aktif kuyruk seçimi.
+main.js: günlük üretim seçimi, Fizyoloji etiketi, build kimliği.
+ui.js: disabled düğme, ortak kapı, döngü filtresi ve bekleme gerekçesi.
+diplomacy.js: federal üretimin aynı izin şartına bağlanması.
+sw.js: yalnız cache adı.
+map.js / ai.js / combat.js / audio.js / index.html / manifest.json aynı.
+
+SIRADAKİ FAZ
+92C — Astra / High: onaylı savaş paylaşımının güvenli gerçek devri,
+yeniden doğrulama, rollback ve çift uygulama koruması.
+Bu ara düzeltmede 92B paylaşım davranışı değiştirilmedi.
+Kullanıcıdan yeni cihaz testi istenmedi; senaryolar birikim listesine
+eklendi. 91C/87T dondurulmuş aday değişmedi. Yayın/deploy yapılmadı.

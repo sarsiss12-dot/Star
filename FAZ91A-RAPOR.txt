@@ -1,0 +1,79 @@
+GELİŞTİRİCİ RAPORU — STARS FAZ 91A
+TEKNOLOJİ HIRSIZLIĞI / İSYAN KIŞKIRTMA SUNUM HATASI SINIRI
+
+1) KAYNAK VE KAPSAM
+Kaynak: stars-faz90f-hazirlik.zip (oyun kodu 90RC.3)
+SHA-256: 5887f28a26f4fa6a25ab5d61aa12ec0deb5648add5dc42175b8ceb11ca3c84ca
+Çıktı: stars-faz91a.zip; build 91a; cache stars-v91a.
+Bu faz yalnız stealTech / inciteRebellion ve bunların oyuncu UI yollarını
+kapsar. Diğer özel operasyonlar veya genel diplomasi transaction yapılmadı.
+
+2) ÖNCE / SONRA
+Önce: bedel, araştırma/koloni etkisi ve geçmiş tamamlandıktan sonra
+UI.alert veya UI.eventArt hata atınca çağıran sonuç nesnesini alamıyordu.
+Oyuncu UI akışı yarıda kesiliyor; AI→oyuncu bildirim hatası aiOpsTick'in
+çözülmüş deneme sayımına ulaşmasını engelleyebiliyordu. Sonuç sonrası
+refresh hatası da UI.act dışına sızıyordu. AUDIO hatası say içinde sessizce
+yutuluyor; teşhis kaydı bırakmıyordu.
+
+Sonra: özel bildirimler specialOpNotify ile önce kalıcı oyun günlüğüne,
+ardından ses/alert/görsele yayımlanır. Her sunum etkisi ayrı hata sınırında;
+alert bozulsa da görsel denenir. UI refresh specialOpPresent ile ayrılır.
+Tanı: op-presentation. Tanı yazımı da hata atarsa tamamlanmış sonuç korunur.
+Yeni RNG çağrısı, retry veya ikinci ücret/etki uygulaması yok.
+
+3) İŞLEM SINIRI
+Bedel, başarı/ifşa kararı, gerçek etki ve actor/victim geçmişi mekanik
+işlemdir; hataları gizlenmez. UI/audio/refresh sunumdur; hata sonucu geri
+çevirmez. Mevcut G._sideBuf varsa sahipliği değiştirilmeden olaylar ona
+eklenir; sahibinin commit'inden önce log/ses/UI yayımlanmaz.
+Bu iki operasyon için mekanik rollback eklenmedi. Yeni kullanıcı tıklaması
+yeni operasyon olabilir; bu faz genel çift tıklama/idempotency politikası
+iddiası taşımaz. Tek fonksiyon çağrısında bedel/etki/geçmiş bir kezdir.
+
+4) KARŞILAŞTIRMALI KANIT
+Yeni tests/faz91a_special_presentation_test.js: 37 senaryo.
+Kaynak üretim kodunda: 8 geçen / 29 kalan.
+Çıktıda: 37 geçen / 0 kalan. 29 ayrı kök neden iddiası değildir.
+
+24 UI matrisi: 2 operasyon × 3 sonuç (başarı/ifşa/sonuçsuz) × 4 hata
+(alert/eventArt/audio/refresh). Her koşu hatasız eş koşuyla emps/sys/log/
+sabotaj istatistiği/RNG ve rastgele çağrı sayısı bakımından karşılaştırılır.
+Diğer 13 senaryo: doğrudan dönüş, AI kota akışı, ret saflığı, bildirim
+sırası ve this alıcısı, tanı hatası, mevcut tampon sahipliği, mekanik
+hataların görünür kalması ve gizli fail politikasının korunması.
+Gerçek motor ve UI.act çalışır; hata enjeksiyonu sunum tüketicilerindedir.
+
+5) REGRESYON
+48 paket / 3929 geçen / 0 kalan / 0 atlanan.
+Sonuç: tests/results-91a.json. 3892 eski + 37 yeni senaryo.
+86C.6 anlaşma kabulü 529/0, 90RC.3 yükleme geri alma 48/0 korunmuştur.
+Eski testlerde build/cache beklentileri güncellendi. 84A ve 87C bildirim
+sayaçları say yerine gerçek tüketici UI.alert üzerinden ölçer; yeni tampon
+yolunu kaçırmaz. 87C'nin 'eventArt hatası dışarı sızar' beklentisi kapatılan
+borca göre tersine çevrildi; tanı varlığı ayrıca zorunlu tutuldu.
+Test silinmedi; eski bedel/etki/anonimlik beklentileri korunur.
+
+6) DOSYALAR
+main.js dc2ce04486a40792 → 3e46c6ae57e7252b
+  sideBufferError isteğe bağlı tanı kapsamı; flushSideBuffer olayın scope
+  alanını taşır. Argüman verilmezse eski deal-presentation davranışı aynı.
+  BUILD_ID=91a.
+diplomacy.js 02f6dc780be0ca02 → 180b868a77aec374
+  specialOpPresent / specialOpNotify; iki özel motorun bildirimleri.
+ui.js 79e612a1a14945b2 → 501202a389daa3df
+  incite/stealTech sonucu ve refresh sunum sınırı.
+sw.js: yalnız cache satırı; KABUK/install/activate/fetch değişmedi.
+AYNI 7: map.js, combat.js, ai.js, economy.js, audio.js, index.html,
+manifest.json. Save v8, depolama anahtarları, Situation karantinası aynı.
+Oranlar, maliyetler, süreler ve AI seçim/kota kodu değiştirilmedi.
+
+7) DOĞRULAMA SINIRI
+Node/sahte DOM regresyonu ve mevcut native Skia kontrolleri çalıştı.
+Gerçek Chrome/Android testi yapılmadı; bu faz UI görüntüsünü değiştirmiyor.
+Kuşatma sabotajı, entrika ve diğer özel yolların sunum sınırı ayrı açık
+risk olarak tutuldu. Fiziksel kabul bekliyor; yayın yapılmadı.
+
+8) DEVAM
+91B — bütünleşik günlük AI kampanya ölçümü. Öneri Astra / High.
+Kullanıcıdan şimdi cihaz testi istenmez; 87T listesi güncellendi.

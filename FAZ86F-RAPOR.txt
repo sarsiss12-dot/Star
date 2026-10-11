@@ -1,0 +1,49 @@
+GELİŞTİRİCİ RAPORU — STARS FAZ 86F
+AI KARŞI TEKLİFLERİ VE ÖLÇÜLEN İLİŞKİ EĞRİSİ
+
+Kaynak: stars-faz86e.zip
+SHA-256: cd48ca307243d418bcd62f33ace896d9efe3132933f5ab8f6423834d488e9e27
+Çıktı: stars-faz86f.zip (çıktı hash'i teslim mesajında)
+
+DÜZELTİLENLER
+- Teknoloji paylaşımı AI ek taviz bütçesinde sıfır değer sayılmıyor.
+- Kaynak hediyesi antlaşma faydasını/bütçesini yapay büyütmüyor.
+- Küçük açık kaynakla kapanabiliyorsa asgari 20 birim kullanılıyor.
+- Kaynak yetmezse en pahalı yerine yeterli en küçük teknoloji seçiliyor.
+- %60 taviz sınırı, teklif fırsat sıklığı, ilişki katsayıları değişmedi.
+
+HEDEFLİ ÖLÇÜM
+Küçük açık, kaynak yok: m_gaia 1965.6 -> t_tarim 36.4 değer.
+Kaynak var: teknoloji -> 20 alaşım.
+Enjekte pahalı teknoloji talebi: kabul -> karşı ret; 33 bütçe tavanı.
+Ayrıntı ve gerçek üretim yolu sınırları AI-PAZARLIK-DENGESI.md içinde.
+
+UZUN AYLIK ÖLÇÜM
+Seed 11: teklif 105->103, uygulama 94->72, ort. ilişki -25.97->-4.54.
+Seed 99: teklif 131->136, uygulama 126->126, ilişki -41.21->-36.18.
+Seed 404: teklif 107->107, uygulama 105->105, ilişki -28.76->-28.76.
+Üçünde NAP var; max 2 tur; başarısız işlem/NaN/negatif stok/Situation 0.
+7 AI, 21 çift, 60 sistem; oyuncu teması açılmadı. 360 ayda memAge 360.
+Günlük keşif ve muharebe çalışmıyor; tam kampanya denemesi değildir.
+Ortalama hâlâ negatif; genel denge tamamlandı iddiası YOK.
+Savaşla beraber kalan NAP bitiş alanları ayrı sayıldı: 0/3/2 çift.
+Bu durumun UI/kayıt tutarlılığı 86G incelemesine bırakıldı.
+
+DOSYALAR
+ai.js: taviz bütçesi ve karşılık seçimi.
+main.js: yalnız build 86f. sw.js: yalnız cache stars-v86f.
+8/8 korunan: ui.js, map.js, diplomacy.js, economy.js, combat.js,
+audio.js, index.html, manifest.json. Hash'ler tests/sha-86f.json içinde.
+Kayıt v8, depolama anahtarları, Situation karantinası korundu.
+
+TESTLER
+32 paket, 3527 geçen, 0 kalan. Yeni 25 senaryo; eski toplam 3502.
+Eski iki aylık testin mükerrer memAge artışı düzeltildi. Bütçe kontrolü
+üretim yardımcısına bağlandı; build/cache ve korunan dosya hash'leri
+kaynak fazına uygun güncellendi. Test silinmedi/tolerans gevşetilmedi.
+Gerçek Canvas piksel regresyonları native Skia'da; tam tarayıcı veya
+fiziksel Android testi yapılmadı. Cihaz kontrol listesi birikiyor.
+
+SONRAKİ FAZ
+86G — bütünleşik kontrol ve devir hazırlığı. Sol — Medium.
+Cihaz denemesi beklenmeden otomatik geliştirme devam eder.

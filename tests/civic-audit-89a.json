@@ -1,0 +1,334 @@
+{
+  "catalogCount": 13,
+  "active": [
+    {
+      "key": "burokrasi",
+      "flag": "slots",
+      "name": "Bürokratik Verimlilik",
+      "calls": [
+        "main.js:1977",
+        "economy.js:409"
+      ]
+    },
+    {
+      "key": "gen_oncu",
+      "flag": "seedPop",
+      "name": "Gen Öncüleri",
+      "calls": [
+        "main.js:2537",
+        "economy.js:1098"
+      ]
+    },
+    {
+      "key": "kale_dok",
+      "flag": "fortress",
+      "name": "Kale Doktrini",
+      "calls": [
+        "main.js:2538",
+        "main.js:3419",
+        "main.js:4295",
+        "economy.js:1229",
+        "diplomacy.js:25",
+        "ai.js:25"
+      ]
+    },
+    {
+      "key": "sinyal_avci",
+      "flag": "scan",
+      "name": "Sinyal Avcısı",
+      "calls": [
+        "main.js:3676",
+        "main.js:4287"
+      ]
+    },
+    {
+      "key": "maden_lonca",
+      "flag": "minerguild",
+      "name": "Madencilik Loncaları",
+      "calls": []
+    },
+    {
+      "key": "golge_kons",
+      "flag": "shadow",
+      "name": "Gölge Konseyi",
+      "calls": [
+        "diplomacy.js:143",
+        "diplomacy.js:279",
+        "diplomacy.js:1990",
+        "diplomacy.js:2039",
+        "diplomacy.js:2054",
+        "diplomacy.js:2116",
+        "diplomacy.js:4421",
+        "diplomacy.js:5708",
+        "diplomacy.js:5724",
+        "diplomacy.js:6134",
+        "diplomacy.js:6662",
+        "ai.js:1443",
+        "ai.js:1517",
+        "ai.js:1645",
+        "ai.js:1737",
+        "ai.js:1770",
+        "ai.js:2247",
+        "ai.js:2325",
+        "ai.js:2343",
+        "ai.js:2398",
+        "ai.js:2419",
+        "ai.js:2475",
+        "ai.js:2887"
+      ]
+    },
+    {
+      "key": "lojistik_k",
+      "flag": "logistics",
+      "name": "Lojistik Komiserliği",
+      "calls": []
+    },
+    {
+      "key": "enkaz_muh",
+      "flag": "salvage",
+      "name": "Enkaz Mühendisliği",
+      "calls": [
+        "main.js:3943"
+      ]
+    },
+    {
+      "key": "panoptikon",
+      "flag": "panopt",
+      "name": "Panoptikon",
+      "calls": [
+        "main.js:3333",
+        "main.js:3637",
+        "main.js:3642",
+        "main.js:3646",
+        "diplomacy.js:26",
+        "diplomacy.js:1991",
+        "ai.js:1444",
+        "ai.js:1518",
+        "ai.js:1736"
+      ]
+    },
+    {
+      "key": "kan_hukuku",
+      "flag": "blood",
+      "name": "Kan Hukuku",
+      "calls": [
+        "main.js:2802",
+        "main.js:4100",
+        "economy.js:1533",
+        "economy.js:2065",
+        "diplomacy.js:250",
+        "diplomacy.js:250",
+        "ai.js:20",
+        "ui.js:6175"
+      ]
+    },
+    {
+      "key": "taht_gemi",
+      "flag": "throneship",
+      "name": "Taht Gemisi",
+      "calls": [
+        "main.js:2552",
+        "economy.js:2993",
+        "economy.js:3005",
+        "economy.js:3039",
+        "economy.js:3950",
+        "ui.js:2272"
+      ]
+    },
+    {
+      "key": "tek_urun",
+      "flag": "mono",
+      "name": "Tek Ürün Ekonomisi",
+      "calls": [
+        "main.js:2092",
+        "main.js:2359",
+        "ui.js:5651"
+      ]
+    },
+    {
+      "key": "yildiz_yiyen",
+      "flag": "devourer",
+      "name": "Yıldız Yiyen Ekonomi",
+      "calls": [
+        "main.js:4379",
+        "economy.js:3056",
+        "economy.js:3120",
+        "economy.js:3134"
+      ]
+    }
+  ],
+  "inactive": [
+    {
+      "flag": "trade",
+      "calls": [
+        "main.js:856",
+        "economy.js:242",
+        "economy.js:271",
+        "ai.js:23"
+      ]
+    },
+    {
+      "flag": "cartel",
+      "calls": [
+        "main.js:856",
+        "main.js:2013"
+      ]
+    },
+    {
+      "flag": "megaeng",
+      "calls": [
+        "main.js:2055",
+        "ai.js:1858"
+      ]
+    },
+    {
+      "flag": "warFury",
+      "calls": [
+        "main.js:2082",
+        "main.js:2801",
+        "economy.js:1228",
+        "diplomacy.js:169",
+        "ai.js:20"
+      ]
+    },
+    {
+      "flag": "mobilize",
+      "calls": [
+        "main.js:3074",
+        "main.js:3110",
+        "diplomacy.js:170"
+      ]
+    },
+    {
+      "flag": "openborder",
+      "calls": [
+        "main.js:3250",
+        "economy.js:1013"
+      ]
+    },
+    {
+      "flag": "leader",
+      "calls": [
+        "main.js:4107"
+      ]
+    },
+    {
+      "flag": "heritage",
+      "calls": [
+        "main.js:4533"
+      ]
+    },
+    {
+      "flag": "seer",
+      "calls": [
+        "main.js:4841"
+      ]
+    },
+    {
+      "flag": "corsair",
+      "calls": [
+        "combat.js:165"
+      ]
+    },
+    {
+      "flag": "oneparty",
+      "calls": [
+        "economy.js:19",
+        "economy.js:555"
+      ]
+    },
+    {
+      "flag": "sleep",
+      "calls": [
+        "economy.js:70",
+        "economy.js:567"
+      ]
+    },
+    {
+      "flag": "zerowaste",
+      "calls": [
+        "economy.js:360"
+      ]
+    },
+    {
+      "flag": "noStock",
+      "calls": [
+        "economy.js:603",
+        "economy.js:622"
+      ]
+    },
+    {
+      "flag": "streak2",
+      "calls": [
+        "economy.js:635",
+        "economy.js:636",
+        "ai.js:22"
+      ]
+    },
+    {
+      "flag": "synth",
+      "calls": [
+        "economy.js:645"
+      ]
+    },
+    {
+      "flag": "outpost",
+      "calls": [
+        "diplomacy.js:116",
+        "diplomacy.js:116"
+      ]
+    },
+    {
+      "flag": "universal",
+      "calls": [
+        "diplomacy.js:147",
+        "diplomacy.js:3412",
+        "diplomacy.js:3842",
+        "diplomacy.js:4421"
+      ]
+    },
+    {
+      "flag": "allyCheap",
+      "calls": [
+        "diplomacy.js:430",
+        "diplomacy.js:960",
+        "ai.js:24",
+        "ui.js:3127"
+      ]
+    },
+    {
+      "flag": "council",
+      "calls": [
+        "diplomacy.js:1695",
+        "diplomacy.js:1904",
+        "diplomacy.js:1905",
+        "diplomacy.js:3411",
+        "ui.js:3208"
+      ]
+    },
+    {
+      "flag": "counter",
+      "calls": [
+        "diplomacy.js:2041",
+        "diplomacy.js:2117",
+        "diplomacy.js:5709",
+        "diplomacy.js:6663",
+        "ai.js:1519",
+        "ai.js:1520",
+        "ai.js:1735"
+      ]
+    },
+    {
+      "flag": "warhero",
+      "calls": [
+        "diplomacy.js:3101"
+      ]
+    },
+    {
+      "flag": "crisisheir",
+      "calls": [
+        "ui.js:5677"
+      ]
+    }
+  ]
+}

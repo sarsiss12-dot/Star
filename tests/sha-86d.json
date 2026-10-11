@@ -1,0 +1,85 @@
+{
+  "source": "stars-faz86c-6.zip",
+  "sourceSha256": "fc387d00d9f94bd4724ad46095c15783d8059a6a7a6a4606201a30608258b9ce",
+  "production": [
+    {
+      "file": "main.js",
+      "before": "e90b6f208a8b025c19866a3d750eb0696c67df36a107fc261afef07e6c73abe2",
+      "after": "f11228aab07607cfc2d6b038348f587cb700fd22e1b92ae04ee0997c2138c4db"
+    },
+    {
+      "file": "diplomacy.js",
+      "before": "cfc4f2ed0f5e56fc25350826594633076829a6a663cafaa079752bdebb4db517",
+      "after": "0265cfd0373f66c08012743fe4f9e1b7fdb3fe10bd6ae9618b29328952334b67"
+    },
+    {
+      "file": "ai.js",
+      "before": "156dcb214bcb69f532274b58fccea0b8dc5986497c8b897e3104d47529735350",
+      "after": "c19eda57d4320c5426e19685813a51b919a7571bfee7b1afe9d1dd862d76e592"
+    },
+    {
+      "file": "ui.js",
+      "before": "da622beafb0f4bf9282d43dff490f8a52c0ef3bba18fad27b6785dec4b56f512",
+      "after": "f6558e68871631a4b264653b5ad282c37c9c303ab82f64ec27e8fa32d1746b6a"
+    },
+    {
+      "file": "sw.js",
+      "before": "6c0b83e349e26d23682408412705807ff315f82b1b990c894a92bcecacf67e66",
+      "after": "bc7d25bb4971987fa131beebe17de326c8ab7a7b7bd69f85256240f3de7c1cae"
+    },
+    {
+      "file": "map.js",
+      "before": "d5be2b3821aede53ea89c7ed4c22ed7814bb1750fc81df8735102f61cfa4c5f8",
+      "after": "d5be2b3821aede53ea89c7ed4c22ed7814bb1750fc81df8735102f61cfa4c5f8"
+    },
+    {
+      "file": "economy.js",
+      "before": "3daaae63ee7e747d01b56badff0e933309d99274a59ed1f78f436b72afde9936",
+      "after": "3daaae63ee7e747d01b56badff0e933309d99274a59ed1f78f436b72afde9936"
+    },
+    {
+      "file": "combat.js",
+      "before": "812ac3e9e7dfd9c994bd0581ac3776ece038e7a10c5d7947cfb4f6ae8a83516b",
+      "after": "812ac3e9e7dfd9c994bd0581ac3776ece038e7a10c5d7947cfb4f6ae8a83516b"
+    },
+    {
+      "file": "audio.js",
+      "before": "804226980179698a6b56d292d88c0c7226d1e54f06001aab63b52d6db5685262",
+      "after": "804226980179698a6b56d292d88c0c7226d1e54f06001aab63b52d6db5685262"
+    },
+    {
+      "file": "index.html",
+      "before": "95852e0fcd09c0351137e1d84519056d6b8615c2615a9b084506dda7a2374568",
+      "after": "95852e0fcd09c0351137e1d84519056d6b8615c2615a9b084506dda7a2374568"
+    },
+    {
+      "file": "manifest.json",
+      "before": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
+      "after": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310"
+    }
+  ],
+  "updatedExistingTests": [
+    "faz85b_load_idempotency_test.js",
+    "faz86c_3_ai_negotiation_test.js",
+    "faz85a_political_save_integrity_test.js",
+    "faz86c_4_reciprocal_offers_test.js",
+    "faz85d_campaign_save_continuity_test.js",
+    "faz85e_event_inbox_continuity_test.js",
+    "faz85c_crisis_save_continuity_test.js",
+    "faz84a_intel_dedup_test.js",
+    "faz86b_deal_engine_test.js",
+    "faz86c_4h_r4_targeted_diag_test.js",
+    "faz86c_4h_r1_exact_regression_test.js",
+    "faz86c_2_transaction_test.js",
+    "faz86c_1_quote_effective_plan_test.js",
+    "faz85f_spatial_simulation_continuity_test.js",
+    "faz86c_4h_r3_surface_lifecycle_test.js",
+    "faz86c_strict_deal_ai_test.js",
+    "faz86c_4h_r2_surface_camera_layers_test.js",
+    "faz86a_intel_command_center_test.js",
+    "faz84b_vassal_state_dedup_test.js",
+    "faz86c_4h_r4_diagnosis_test.js",
+    "faz84c_state_visibility_gate_test.js",
+    "faz86c_4h_map_input_test.js"
+  ]
+}

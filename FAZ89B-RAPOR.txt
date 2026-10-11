@@ -1,0 +1,63 @@
+STARS FAZ 89B — GERÇEK GÜNLÜK KAMPANYA
+
+KAYNAK stars-faz89a.zip
+SHA-256 ecba9fb9afae2b8b304bebd08e77de99d80ab554da7e5bda79aace085bca4aec
+Build 89b / SW stars-v89b. SW yalnız cache satırı değişti.
+
+YÖNTEM
+setupGame ile 3 temiz galaksi. frame'in simülasyon sırası 0,5 günlük
+adımlarla: dailyTick → structTick → colonyBuildTick → autoExploreTick →
+ay sınırında monthTick. Gerçek hareket, tarama, temas, savaş, diplomasi ve
+standart operasyon yolları çalışır. Temas/antlaşma/savaş elle kurulmadı.
+Otomatik kayıt testte kapalı; oyuncuya karar veren bot eklenmedi.
+Çizim ve gerçek UI etkileşimi bu kampanya koşusunda yoktur.
+
+ÖNCEKİ KODDA İLK İHLALLER
+Seed 11, gün 3044,5: savaş raporu düşman ready=2 / ships=1.
+Seed 99, gün 3464,5: yine rapor sayıları tutarsız.
+Seed 404, gün 2329: ready=12 / ships=4.
+Seed 404, gün 3300: economyTick sonunda devlet 9 yiyecek -3,4571041426.
+
+DÜZELTMELER
+1. battleReportRound: payda kayıp sonrasındaki filo dizisinden değil,
+   ateş edebilme sayısıyla aynı anın sideStats.n sonucundan gelir.
+   UI “Tur başında ateş açabilen / toplam gemi” olarak açıklar.
+   Eski v8 kaydında ready>ships varsa sadece last ayrıntısı düşürülür;
+   toplam kayıp ve sonuç korunur. Geçmiş sayı tahmin edilmez.
+2. economyTick: enerji krizi else-if dalı yiyecek sıfırlamasını atlıyordu.
+   Negatif yiyecek temizliği kriz seçiminden bağımsız hale getirildi.
+   Enerji krizi önceliği/kıtlık katsayıları değişmedi; init=true saf kaldı.
+
+SON KAMPANYA ÖLÇÜMÜ
+seed  ay   varış  tarama  muharebe turu  müzakere  standart op  temas çiftleri
+11   120   1300    229       41           49         17          0→12
+99   120   1097    193       32           25          8          0→21
+404  119    820    211       85           31         19          0→26
+404 normal oyuncu yenilgisiyle bitti; oyun sonu silinip 120 aya zorlanmadı.
+Müzakere/operasyon sayıları girişimdir; hepsinin başarılı olduğu söylenmiyor.
+Taranan stok/finite/filo referansı/rapor oranı/fraksiyon toplamı ihlali 0.
+Gün adımı/ay takvimi tutarlı; Situation 0. RNG son değerleri önce/sonra aynı.
+Bu sınırlı koşular bütün oyun durumlarının güvenli olduğu anlamına gelmez.
+Tek koşu yaklaşık 4–5 saniye; Node ölçümü, Android performans iddiası değil.
+
+TESTLER
+Yeni 11 senaryo: kaynak 3 geçen / 8 kalan; çıktı 11 / 0.
+Tam regresyon: 43 paket / 3796 geçen / 0 kalan.
+Sayı hesabı: 3808 - 23 eski ekonomi dosya-sabitliği iddiası + 11 = 3796.
+Ekonomi artık değiştiği için bu 23 kimlik iddiası korunan kümeden çıkarıldı.
+Davranış testi dosyası silinmedi. Diğer eski beklentilerde yalnız build/cache
+adı güncellendi. 89A kampanya dağılım beklentileri değiştirilmedi.
+Node/sahte DOM ve yerel Skia piksel testleri çalıştı. Fiziksel Android veya
+Chrome Canvas 2D testi yapılmadı; bu katmanlar ayrı kabul olarak bekliyor.
+
+DOSYALAR
+DEĞİŞEN main.js (rapor doğrulaması+build), combat.js (rapor paydası),
+economy.js (yiyecek alt sınırı), ui.js (etiket), sw.js (cache).
+AYNI ai.js, diplomacy.js, map.js, audio.js, manifest.json, index.html (6).
+Hashlar tests/sha-89b.json'da. Save v8 ve mevcut depolama anahtarları aynı.
+89A ifşa hafızası, 88A.1 sipariş, harita/vali portresi/Radar/Lojistik ve
+transaction regresyonları korundu. Yayınlama yapılmadı.
+
+SONRAKİ FAZ
+90RC — bütünleşik teslim adayı. Sol / High; karmaşık yeni motor hatası için
+Astra / High. Cihaz kabulü kullanıcı hazır olunca, tek güncel paketle.

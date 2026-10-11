@@ -693,6 +693,24 @@ const ART = (() => {
           PORTRAIT, ARMOR, hexOf: hex, drawPixelArt, PIXEL_ART};
 })();
 
+// 91D: Harita ve sistem paneli aynı kimlik/görüş kapısını kullanır.
+function territoryOwnerInfo(id){
+  const e = G.emps[id];
+  if (!e || e.dead) return null;
+  const known = G.p && (id === G.p.id || !!G.p.contact[id]);
+  return {id, name:known ? e.name : 'Bilinmeyen devlet',
+    col:known ? e.col : '#8b98ad', known:!!known};
+}
+function territoryColonyOwners(s){
+  if (!pSeen(s) || !pSurv(s)) return [];
+  const counts = new Map();
+  for (const p of s.planets){
+    if (!p.col || !territoryOwnerInfo(p.owner)) continue;
+    counts.set(p.owner, (counts.get(p.owner)||0)+1);
+  }
+  return [...counts].sort((a,b)=>a[0]-b[0]).map(([id,count])=>({...territoryOwnerInfo(id),count}));
+}
+
 const View = {
   cam:{x:2100, y:2100, z:.30}, vw:0, vh:0, dpr:1,
   sel:null, selSys:null, route:false, routed:false, hl:null, stars:[], flash:[],
@@ -1510,6 +1528,168 @@ const View = {
     return !(lx1 < this.fx0 || lx0 > this.fx1 || ly1 < this.fy0 || ly0 > this.fy1);
   },
 
+  // Yalnız keşfedilmiş sistemlerin aynı sahipli hiper-yol bileşenleri.
+  // Gün sayacı yeterli değildir: işgal, temas ve yükleme aynı gün olabilir.
+  territoryRegions(){
+    const nodes = G.sys.filter(s=>pSeen(s) && G.emps[s.owner] &&
+      !G.emps[s.owner].dead && !G.emps[s.owner].wild && !G.emps[s.owner].crisisSide);
+    const key = JSON.stringify(nodes.map(s=>[s.id,s.owner,s.x,s.y,s.lanes,territoryOwnerInfo(s.owner)]));
+    if (this._territories && this._territories.world===G.sys && this._territories.key===key)
+      return this._territories.regions;
+    const byId = new Map(nodes.map(s=>[s.id,s])), edges = new Map(nodes.map(s=>[s.id,[]]));
+    for (const s of nodes) for (const id of s.lanes){
+      const other = byId.get(id);
+      if (!other || other.owner!==s.owner) continue;
+      edges.get(s.id).push(id); edges.get(id).push(s.id);
+    }
+    const done = new Set(), regions = [];
+    for (const s of nodes){
+      if (done.has(s.id)) continue;
+      const queue=[s.id], systems=[];done.add(s.id);
+      for(let i=0;i<queue.length;i++){
+        const id=queue[i];systems.push(byId.get(id));
+        for(const next of edges.get(id))if(!done.has(next)){done.add(next);queue.push(next);}
+      }
+      systems.sort((a,b)=>a.id-b.id);
+      regions.push({owner:s.owner,systems,...territoryOwnerInfo(s.owner)});
+    }
+    this._territories = {world:G.sys,key,regions};
+    return regions;
+  },
+  // 91D.1: filoların dünya koordinatına bağlı, salt çizim katmanı.
+  drawFleetOwnerLabels(g){
+    this._fleetOwnerLabels=[];
+    if(!FLEET_NAMES_ON||!G.p)return;
+    const rows=this.rowHits||[],stacked=new Set(rows.flatMap(r=>r.filolar.map(f=>f.id)));
+    const jobs=[];
+    for(const r of rows)jobs.push({emp:r.emp,ids:r.filolar.map(f=>f.id),x:r.x+r.w+7,y:r.y-1,row:true});
+    for(const f of G.fleets){
+      if(!f.ships.length||!this.fleetVisible(f)||stacked.has(f.id))continue;
+      // Uzak siyasi görünümde duran filolar çizilmez; etiketleri de açılmaz.
+      if(this.cam.z<.05&&!f.mv)continue;
+      const p=this.w2s(f.x,f.y);
+      if(p.x<0||p.y<0||p.x>this.vw||p.y>this.vh)continue;
+      let dy=12;
+      if(this.cam.z>=.05){
+        const e=G.emps[f.e];if(!e)continue;
+        if(f.ships.some(s=>!s||!SHIPS[s.c]))continue;
+        const cls=f.ships.reduce((a,s)=>SHIPS[s.c].sz>SHIPS[a].sz?s.c:a,f.ships[0].c);
+        const height=ART.ship(cls,e.col,1).height*clamp(this.cam.z*2.4,.7,2.2)*(this.sel===f?1.25:1);
+        dy=height*.9+(this.cam.z>.18?(f.e===0&&this.cam.z>.34?36:25):10);
+      }
+      jobs.push({emp:f.e,ids:[f.id],x:p.x,y:p.y+dy,row:false,selected:this.sel===f});
+    }
+    jobs.sort((a,b)=>Number(b.selected)-Number(a.selected)||Number(b.emp===0)-Number(a.emp===0));
+    const blocks=(this._mapLabelBlocks||[]).concat(rows),cvRect=this.cv.getBoundingClientRect();
+    for(const id of ['topbar','tools','sidebar','timepod','seltag']){
+      const el=$(id);if(!el||el.classList.contains('hidden'))continue;
+      const r=el.getBoundingClientRect();
+      if(r.width>0&&r.height>0)blocks.push({x:r.left-cvRect.left,y:r.top-cvRect.top,w:r.width,h:r.height});
+    }
+    const overlap=(a,b)=>a.x<b.x+b.w+2&&a.x+a.w+2>b.x&&a.y<b.y+b.h+2&&a.y+a.h+2>b.y;
+    g.save();g.font='600 11px ui-monospace,monospace';g.textAlign='left';
+    g.textBaseline='middle';g.globalAlpha=1;g.letterSpacing='0px';g.setLineDash([]);
+    for(const j of jobs){
+      const e=G.emps[j.emp],info=territoryOwnerInfo(j.emp);if(!info)continue;
+      const name=e.wild?'Korsanlar':e.crisisSide?'Kriz filosu':info.name;
+      const chars=Array.from(name),max=Math.min(190,this.vw-24);
+      let text=name;
+      while(chars.length&&g.measureText(text).width>max-14){chars.pop();text=chars.join('')+'…';}
+      const w=Math.ceil(g.measureText(text).width)+14,h=19;
+      const x=j.row?j.x:j.x-w/2;
+      let b=null;
+      for(const dy of [0,22,44,66]){
+        const candidate={x:clamp(x,6,this.vw-w-6),y:j.y+dy,w,h};
+        if(candidate.y<6||candidate.y+h>this.vh-6||blocks.some(r=>overlap(candidate,r)))continue;
+        b=candidate;break;
+      }
+      if(!b)continue;
+      if(b.y!==j.y){
+        g.strokeStyle=info.col;g.lineWidth=.75;g.beginPath();
+        g.moveTo(j.x,j.y);g.lineTo(clamp(j.x,b.x,b.x+b.w),b.y);g.stroke();
+      }
+      g.fillStyle='rgba(5,8,16,.92)';g.fillRect(b.x,b.y,b.w,b.h);
+      g.fillStyle=info.col;g.fillRect(b.x,b.y,2,b.h);g.fillText(text,b.x+7,b.y+h/2);
+      this._fleetOwnerLabels.push({...b,emp:j.emp,ids:j.ids,text,name});
+      blocks.push(b);this._mapLabelBlocks.push(b);
+    }
+    g.restore();
+  },
+  drawTerritoryLabels(g){
+    this._territoryLabels=[];
+    if (!G.p || this.vw<40 || this.vh<40) return;
+    const overlap=(a,b)=>a.x<b.x+b.w+3 && a.x+a.w+3>b.x && a.y<b.y+b.h+3 && a.y+a.h+3>b.y;
+    const blocks=(this._mapLabelBlocks||[]).concat(this.rowHits||[]);
+    // Canvas CSS koordinatları; DPR ile ikinci kez ölçeklenmez.
+    const cvRect=this.cv.getBoundingClientRect();
+    for(const id of ['topbar','tools','sidebar','timepod','seltag']){
+      const el=$(id);
+      if(!el || el.classList.contains('hidden'))continue;
+      const r=el.getBoundingClientRect();
+      if(r.width>0&&r.height>0)blocks.push({x:r.left-cvRect.left,y:r.top-cvRect.top,w:r.width,h:r.height});
+    }
+    const inside=p=>p.x>=6&&p.y>=6&&p.x<=this.vw-6&&p.y<=this.vh-6;
+    const groups=this.territoryRegions().map(r=>({...r,visible:r.systems.filter(s=>inside(this.w2s(s.x,s.y)))}))
+      .filter(r=>r.visible.length);
+    const selected=this.selSys && this.selSys.id;
+    const jobs=groups.map(r=>({owner:r.owner,name:r.name,col:r.col,kind:'region',
+      systems:r.visible,selected:r.visible.some(s=>s.id===selected),own:r.owner===G.p.id}));
+    // Sistem hâkimiyeti, kolonilerin tamamının aynı devlette olduğunu söylemez.
+    for(const s of G.sys){
+      if(!pSeen(s)||!inside(this.w2s(s.x,s.y)))continue;
+      const owners=territoryColonyOwners(s);
+      if(owners.some(o=>o.id!==s.owner))jobs.push({owner:s.owner,name:'KARMA HÂKİMİYET',
+        col:'#f2d452',kind:'mixed',systems:[s],selected:s.id===selected,own:s.owner===G.p.id});
+    }
+    jobs.sort((a,b)=>Number(b.selected)-Number(a.selected)||Number(b.own)-Number(a.own)||
+      (a.kind==='mixed'?1:0)-(b.kind==='mixed'?1:0)||b.systems.length-a.systems.length||
+      a.owner-b.owner||a.systems[0].id-b.systems[0].id);
+    g.save();
+    g.textAlign='left';g.textBaseline='middle';g.globalAlpha=1;
+    g.letterSpacing='0px';g.setLineDash([]);
+    for(const job of jobs){
+      const fs=job.kind==='mixed'?10:this.cam.z>.22?12:11;
+      g.font='600 '+fs+'px ui-monospace,monospace';
+      const maxWidth=Math.min(220,this.vw-24);
+      let text=job.name;
+      if(g.measureText(text).width>maxWidth-16){
+        const chars=Array.from(text);
+        while(chars.length && g.measureText(chars.join('')+'…').width>maxWidth-16)chars.pop();
+        text=chars.join('')+'…';
+      }
+      const w=Math.ceil(g.measureText(text).width)+16,h=fs+10;
+      // Seçili sistem, sonra ekranda gerçekten görülen parçanın merkezi.
+      const mx=job.systems.reduce((v,s)=>v+s.x,0)/job.systems.length;
+      const my=job.systems.reduce((v,s)=>v+s.y,0)/job.systems.length;
+      const anchors=job.systems.slice().sort((a,b)=>Number(b.id===selected)-Number(a.id===selected)||
+        Math.hypot(a.x-mx,a.y-my)-Math.hypot(b.x-mx,b.y-my)||a.id-b.id);
+      let placed=null;
+      for(const s of anchors){
+        const p=this.w2s(s.x,s.y),rr=Math.max(9,(s.star.r||3)*this.cam.z*1.5)+5;
+        const offsets=[[-w/2,-rr-h-3],[-w/2,-rr-h-28],[-w/2,rr+28],
+          [rr+5,-h/2],[-rr-w-5,-h/2],[-w/2,rr+53],[-w/2,-rr-h-53]];
+        for(const [dx,dy] of offsets){
+          // Kenardaki sistemin adı ekranın dışında kalmasın; bağlantı çizgisi
+          // kaydırılmış etiketi hâlâ gerçek sisteme bağlar.
+          const box={x:clamp(p.x+dx,6,this.vw-w-6),y:clamp(p.y+dy,6,this.vh-h-6),w,h};
+          if(box.x<6||box.y<6||box.x+w>this.vw-6||box.y+h>this.vh-6||blocks.some(b=>overlap(box,b)))continue;
+          placed={...box,anchor:s.id,px:p.x,py:p.y,owner:job.owner,name:job.name,text,kind:job.kind};break;
+        }
+        if(placed)break;
+      }
+      // Yoğun görünümde üst üste yazmayız; seçili parça önce yerleştirilir.
+      if(!placed)continue;
+      const b=placed;
+      g.strokeStyle=job.col;g.lineWidth=1;
+      g.beginPath();g.moveTo(b.px,b.py);g.lineTo(clamp(b.px,b.x,b.x+b.w),clamp(b.py,b.y,b.y+b.h));g.stroke();
+      g.fillStyle='rgba(5,8,16,.90)';g.fillRect(b.x,b.y,b.w,b.h);
+      g.fillStyle=job.col;g.fillRect(b.x,b.y,3,b.h);
+      g.fillText(text,b.x+9,b.y+b.h/2);
+      blocks.push(b);this._territoryLabels.push(b);
+    }
+    g.restore();
+  },
+
   draw(t){
     /* ═══ FAZ 86C.4H-R4: HAFİF AŞAMA TAKİBİ ═══
        Her karede LOG YAZMAZ, piksel TARAMAZ — yalnız birkaç alan
@@ -1524,6 +1704,7 @@ const View = {
     this._drawCv = this.cv;             // hangi yüzeye çiziliyor
     this._drawN = (this._drawN || 0) + 1;
     const g = this.g;
+    this._mapLabelBlocks=[];
     this.panStep();                     // FAZ 47: yumuşak kaydırma
     const z = this.cam.z;
     this.updateFrustum();
@@ -1564,41 +1745,6 @@ const View = {
       g.restore();
     }
 
-    // imparatorluk adları — kendi renkli bölgesinin merkezinde
-    if (z > .10){
-      const cen = {};
-      for (const sy of G.sys){
-        if (sy.owner < 0 || !pSeen(sy)) continue;
-        const o = cen[sy.owner] || (cen[sy.owner] = {x:0, y:0, n:0});
-        o.x += sy.x; o.y += sy.y; o.n++;
-      }
-      for (const id in cen){
-        const c2 = cen[id];
-        if (c2.n < 1) continue;
-        const emp = G.emps[id];
-        if (!emp) continue;
-        const p2 = this.w2s(c2.x/c2.n, c2.y/c2.n);
-        if (p2.x < -80 || p2.y < -40 || p2.x > this.vw+80 || p2.y > this.vh+40) continue;
-        // az sistem görünüyorsa yalnızca kısaltma yaz
-        const wide = z > .26 && c2.n >= 2;
-        const label = wide ? emp.name.toUpperCase()
-                           : (RACES[emp.race] ? RACES[emp.race].kisa.toUpperCase() : '?');
-        const fs = wide ? Math.round(clamp(11 + z*8, 11, 17)) : Math.round(clamp(10 + z*6, 10, 14));
-        g.save();
-        g.font = 'bold ' + fs + 'px ui-monospace,monospace';
-        g.textAlign = 'center';
-        g.letterSpacing = '2px';
-        // arkasına koyu gölge, okunabilirlik için
-        g.lineWidth = 4;
-        g.strokeStyle = 'rgba(5,7,15,.85)';
-        g.strokeText(label, p2.x, p2.y);
-        g.fillStyle = emp.col;
-        g.globalAlpha = .78;
-        g.fillText(label, p2.x, p2.y);
-        g.globalAlpha = 1;
-        g.restore();
-      }
-    }
 
     /* ═══════════════════════════════════════════════════════════
        FAZ 75 — DİPLOMATİK BÖLGE BOYAMASI
@@ -1767,6 +1913,7 @@ const View = {
         continue;
       }
       const sr = Math.max(2.2, s.star.r*z*1.5);
+      this._mapLabelBlocks.push({x:p.x-sr-8,y:p.y-sr-8,w:(sr+8)*2,h:(sr+8)*2});
 
       /* ═══ FAZ 45: SİYASİ HARİTA — ERKEN ÇIKIŞ ═══
          Bu eşiğin altında sistem tek bir noktadır. Sahipliyse
@@ -1993,6 +2140,8 @@ const View = {
         g.textAlign = 'center';
         g.textBaseline = 'top';
         const ty = p.y + sr + 6;
+        const labelWidth=g.measureText(s.name).width;
+        this._mapLabelBlocks.push({x:p.x-labelWidth/2-3,y:ty-2,w:labelWidth+6,h:16});
         /* FAZ 75: uzaklaşınca yazının arkasına koyu şerit —
            yıldız kalabalığında okunabilirlik. */
         if (z < .28){
@@ -2258,47 +2407,6 @@ const View = {
       g.textBaseline = 'alphabetic';
     }
 
-    /* ═══ FAZ 46: BÖLGE ADLARI ═══
-       Siyasi haritada her imparatorluğun hakimiyet ağırlık
-       merkezine TAM adı saydam yazılır. Ağırlık merkezi ayda
-       bir hesaplanıp önbelleğe alınır — her karede sistem
-       taraması yapılmaz. */
-    if (politik && z > .022){
-      if (this._bolgeAt !== G.day){
-        this._bolgeAt = G.day;
-        const acc = {};
-        for (const sy of G.sys){
-          if (sy.owner < 0) continue;
-          const a = acc[sy.owner] || (acc[sy.owner] = {x:0, y:0, n:0});
-          a.x += sy.x; a.y += sy.y; a.n++;
-        }
-        this._bolge = [];
-        for (const id in acc){
-          const a = acc[id], em = G.emps[id];
-          if (!em || em.dead || em.wild || em.crisisSide) continue;
-          if (a.n < 2) continue;               // tek sistemli devlete etiket yok
-          this._bolge.push({x:a.x/a.n, y:a.y/a.n, name:em.name, col:em.col, n:a.n});
-        }
-      }
-      if (this._bolge && this._bolge.length){
-        g.save();
-        g.textAlign = 'center';
-        g.textBaseline = 'middle';
-        for (const b of this._bolge){
-          if (!this.inView(b.x, b.y)) continue;
-          const p2 = this.w2s(b.x, b.y);
-          const fs = clamp(9 + b.n * .55, 10, 19);
-          g.font = '600 ' + fs.toFixed(0) + 'px ui-monospace,monospace';
-          /* Okunurluk için koyu dış hat + saydam dolgu */
-          g.lineWidth = 3;
-          g.strokeStyle = 'rgba(6,10,18,.75)';
-          g.strokeText(b.name, p2.x, p2.y);
-          g.fillStyle = b.col + 'cc';
-          g.fillText(b.name, p2.x, p2.y);
-        }
-        g.restore();
-      }
-    }
 
     this._drawCompleted = 'sistemler';
     this._drawStage = 'filolar';
@@ -2737,6 +2845,8 @@ const View = {
       }
     }
 
+    this.drawFleetOwnerLabels(g);      // 91D.1: görünen filoların aidiyeti
+    this.drawTerritoryLabels(g);       // 91D: sahiplik adlarının tek çizim yolu
     this.drawPings(g, t);               // FAZ 47: bildirim ping halkası
 
     this._drawCompleted = 'filolar';

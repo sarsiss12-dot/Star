@@ -2095,11 +2095,16 @@ function recalcMods(e){
     for (const k of havuz) if (k !== secim) m[k] -= .40;
     if (havuz.includes(secim)) m[secim] += .60;
   }
+  if (typeof fedHasLaw === 'function'){
+    if (fedHasLaw(e, 'ortakDoktrin')){ m.dmgMul += .08; m.upMul += .05; }
+    if (fedHasLaw(e, 'ikmalStandardi')){ m.spdMul += .08; m.upMul += .06; }
+  }
   e.mods = m;
   /* Sınır bekçisi vasallar senyörün donanma tavanını yükseltir */
   const vasalCap = (typeof vassalCapBonus === 'function') ? vassalCapBonus(e) : 0;
   /* FAZ 77A: Savaş Korosu kapasiteyi ORANSAL artırır */
   e.cap = (40 + m.capFlat + e.colonies.length*6 + vasalCap) * (1 + (m.capMul || 0));
+  if (typeof fedHasLaw === 'function' && fedHasLaw(e, 'ortakDon')) e.cap += 15;
   return m;
 }
 
@@ -2271,6 +2276,8 @@ function colorFor(i, rnd){
 
 function setupGame(cfg){
   G.cfg = cfg;
+  G.warLedger = warLedgerEmpty();
+  G.settlements = settlementEmpty();
   rndSeed(cfg.seed ^ 0x5f3a91);
   const rnd = generateGalaxy(cfg);
   const nAI = SIZES[cfg.size].ai;
@@ -2469,7 +2476,7 @@ function setupGame(cfg){
     const sid = homes[i % homes.length];
     const s = G.sys[sid];
     e.home = sid;
-    s.owner = e.id;
+    territoryOwnerSet(s, e.id);
     if (!s.surv.includes(e.id)) s.surv.push(e.id);
     if (!s.seen.includes(e.id)) s.seen.push(e.id);
     s.anom = false;
@@ -2481,7 +2488,7 @@ function setupGame(cfg){
     hw.t = race.bio==='makine' ? 'mak' :
            (HAB_TYPES.filter(t=>PLANETS[t].ik===race.ik)[Math.floor(rnd()*3)%2] || 'oky');
     hw.sz = 18; hw.dep = 'bereket';
-    hw.owner = e.id;
+    territoryOwnerSet(hw, e.id);
     hw.col = {
       pop: 12, stab: 60, grow: 0,
       b: {maden:2, santral:2, ciftlik:2, lab:1, dokum:1, fabrika:2, tersane:1, kale:0, liman:0},
@@ -2575,10 +2582,10 @@ function setupGame(cfg){
         if (sy2.owner >= 0) continue;
         const pl2 = sy2.planets.find(pp => PLANETS[pp.t].k === 'hab' && pp.owner < 0);
         if (!pl2) continue;
-        pl2.owner = e.id;
+        territoryOwnerSet(pl2, e.id);
         pl2.col = {pop:9, stab:60, grow:0, b:{maden:2, santral:2, ciftlik:1, fabrika:1},
                    cap:12, name:pl2.name, f:'sanayi', fcd:0};
-        sy2.owner = e.id;
+        territoryOwnerSet(sy2, e.id);
         e.colonies.push({s:sy2.id, p:pl2.i});
         planted++;
       }
@@ -2723,19 +2730,19 @@ function commitSideBuffer(buf){
     if (G.log.length > 60) G.log.shift();
   }
 }
-function sideBufferError(stage, err){
-  try { logDiag('deal-presentation', stage + ': ' + String(err && err.message || err)); }
+function sideBufferError(stage, err, scope = 'deal-presentation'){
+  try { logDiag(scope, stage + ': ' + String(err && err.message || err)); }
   catch(ignore){} // tanı hatası da commit sonucunu değiştiremez
 }
 function flushSideBuffer(buf){
   for (const it of buf){
     if (it.tur === 'say'){
       if (typeof AUDIO !== 'undefined'){
-        try { AUDIO.forLog(it.cls); } catch(err){ sideBufferError('audio',err); }
+        try { AUDIO.forLog(it.cls); } catch(err){ sideBufferError('audio',err,it.scope); }
       }
-      try { UI.alert(it.msg,it.cls); } catch(err){ sideBufferError('alert',err); }
+      try { UI.alert(it.msg,it.cls); } catch(err){ sideBufferError('alert',err,it.scope); }
     } else if (it.tur === 'ui'){
-      try { it.fn(...it.args); } catch(err){ sideBufferError('ui',err); }
+      try { it.fn(...it.args); } catch(err){ sideBufferError('ui',err,it.scope); }
     }
   }
 }
@@ -3245,8 +3252,9 @@ function canEnter(e, sys){
   if (owner < 0 || owner === e.id) return true;
   const o = G.emps[owner];
   if (!o || o.dead) return true;
-  if (e.war[owner]) return true;                    // savaştaysan zaten girersin
+  if (hostile(e.id, owner)) return true;            // savaş veya korsan hedefi
   if (e.ally[owner]) return true;                   // müttefik sınırı açıktır
+  if (typeof fedHasLaw === 'function' && fedHasLaw(e, 'serbest') && findFed(e) === findFed(o)) return true;
   if (hasCivic(o, 'openborder')) return true;       // Açık Sınırlar doktrini
   if (o.passage && o.passage[e.id]) return true;    // verilmiş geçiş izni
   return false;
@@ -3399,15 +3407,15 @@ function pVis(s){
   return false;
 }
 function pSurv(s){ return s.surv.includes(0); }
-function sysDefense(sys){
+function sysDefense(sys, includeWild = true){
   let d = 0;
   for (const p of sys.planets) if (p.col){
     d += (p.col.b.kale||0) * 180;
     d += (focusOf(p.col).e.defFlat || 0);
   }
   if (typeof structDefense === 'function') d += structDefense(sys);
-  if (sys.nest) d += Math.max(0, sys.nest.hp) * .25;      // korsan yuvası savunma sayılır
-  if (typeof ruinDefense === 'function') d += ruinDefense(sys);
+  if (includeWild && sys.nest) d += Math.max(0, sys.nest.hp) * .25;
+  if (includeWild && typeof ruinDefense === 'function') d += ruinDefense(sys);
   if (typeof planetTrait === 'function'){
     let bonus = 0;
     for (const p of sys.planets) if (p.col){
@@ -3698,6 +3706,8 @@ function dispatchBuiltFleet(e,f,delivery){
 }
 
 function dailyTick(dt){
+  warLedgerSync();
+  settlementTick();
   stepFleets(dt);
   // tersane kuyrukları
   for (const sys of G.sys){
@@ -3705,9 +3715,10 @@ function dailyTick(dt){
     const slots = yardCount(sys);
     if (slots <= 0) continue;                 // tersane yıkıldıysa üretim durur
     // her tersane ayrı bir gemi üzerinde çalışır
-    for (let qi = 0; qi < Math.min(slots, sys.queue.length); qi++) sys.queue[qi].left -= dt;
+    const active = activeShipQueue(sys);
+    for (const qi of active) sys.queue[qi].left -= dt;
     const doneIdx = [];
-    for (let qi = 0; qi < Math.min(slots, sys.queue.length); qi++)
+    for (const qi of active)
       if (sys.queue[qi].left <= 0) doneIdx.push(qi);
     for (let d = doneIdx.length - 1; d >= 0; d--){
       const q = sys.queue[doneIdx[d]];
@@ -3803,7 +3814,11 @@ function battleCount(){
 }
 function hostile(a, b){
   if (a === b) return false;
-  return G.emps[a].war[b];
+  const ea = G.emps[a], eb = G.emps[b];
+  if (!ea || !eb || ea.dead || eb.dead) return false;
+  // 91C: korsan/canavar çatışması diplomatik savaş ilanı gerektirmez.
+  // Bayrakları değiştirmeyiz: antlaşma, Konsey ve savaş hafızası ayrı kalır.
+  return !!(ea.wild || eb.wild || (ea.war && ea.war[b]));
 }
 function combatTick(dt){
   const bySys = {};
@@ -3970,8 +3985,9 @@ function battleReportForPlayer(sys){
    Gezegen yüzeyindeki tahkimat buraya girmez — o ancak
    bombardıman aşamasında devreye girer (savunucu olarak). */
 function orbitDefenseAlive(sys, defenderId){
-  if (!sys || sys.owner !== defenderId) return 0;
-  let g = 0;
+  if (!sys) return 0;
+  let g = wildDefenseAlive(sys, defenderId);
+  if (sys.owner !== defenderId) return g;
   if (sys.built){
     for (const k in sys.built){
       if (sys.built[k] === undefined) continue;
@@ -3985,6 +4001,14 @@ function orbitDefenseAlive(sys, defenderId){
   for (const pl of sys.planets)
     if (pl.col && pl.shield > 0) g += pl.shield * .35;
   return g;
+}
+
+// Sahipsiz sistemdeki yuva/kalıntı da gerçek bir muharebe tarafıdır.
+// Başka iki devletin savaşına savunma veya hasar hedefi olarak katılmaz.
+function wildDefenseAlive(sys, defenderId){
+  const e = G.emps[defenderId];
+  if (!sys || defenderId !== G.wildId || !e || e.dead || !e.wild) return 0;
+  return (sys.nest ? Math.max(0, sys.nest.hp) * .25 : 0) + ruinDefense(sys);
 }
 
 /* FAZ 74: battleRound → combat.js taşındı */
@@ -4020,7 +4044,8 @@ function purgeEmpire(e){
   if (G.council && G.council.members)
     G.council.members = G.council.members.filter(m => m !== e.id);
   /* Sistem sahipliği boşa düşer */
-  for (const sy of G.sys) if (sy.owner === e.id) sy.owner = -1;
+  for (const sy of G.sys) if (sy.owner === e.id) territoryOwnerSet(sy, -1);
+  warLedgerSync('eliminated');
 }
 
 /* ═══════════════════════════════════════════════════════════════════
@@ -4063,14 +4088,21 @@ function hasDefendedColony(sys, byId){
   return false;
 }
 
-function captureSystem(sys, byId){
+// Monoton sayaç: sahip değişip eski sahibine dönse de eski paylaşım onayı geçmez.
+function territoryOwnerSet(place, owner){
+  if (place.owner !== owner) place.shareRev = (place.shareRev || 0) + 1;
+  place.owner = owner;
+}
+function captureSystem(sys, byId, cause = 'conquest'){
   /* FAZ 34: Hiçlik Sürüsü sistem sahiplenmez — yalnız yutar. */
   if (G.emps[byId] && G.emps[byId].crisisSide) return;
   const e = G.emps[byId];
   const old = sys.owner;
+  const oldPlanets = sys.planets.filter(pl=>pl.col).map(pl=>({i:pl.i,owner:pl.owner}));
   if (e && e.wild) return;                  // vahşiler sistem sahiplenmez
   if (old === byId) return;
-  sys.owner = byId;
+  sys.shareRev = (sys.shareRev || 0) + 1;
+  territoryOwnerSet(sys, byId);
   /* Kolonisi olmayan sistemin devri "uzay" sayılır */
   if (typeof recordFall === 'function' && !sys.planets.some(p2 => p2.col))
     recordFall('uzay');
@@ -4082,7 +4114,7 @@ function captureSystem(sys, byId){
       recalcMods(oe);
     }
     if (typeof planetFlip === 'function') planetFlip(pl);
-    pl.owner = byId;
+    territoryOwnerSet(pl, byId);
     pl.col.stab = 25;
     pl.recent_conquest = 36;          // FAZ 27: 3 yıl dokunulmazlık
     pl.martial_law = 24;              // FAZ 29: sıkıyönetim
@@ -4120,6 +4152,10 @@ function captureSystem(sys, byId){
   }
   if (byId === 0) say('Sistem ele geçirildi — ' + sys.name, 'win');
   else if (old === 0) say('Sistem kaybedildi — ' + sys.name, 'war');
+  if (cause === 'conquest'){
+    warLedgerCapture(sys,null,old,byId);
+    for (const pl of oldPlanets) warLedgerCapture(sys,pl.i,pl.owner,byId);
+  }
   if (old >= 0 && G.emps[old].colonies.length === 0 &&
       !G.emps[old].wild && !G.emps[old].crisisSide){
     G.emps[old].dead = true;
@@ -4345,7 +4381,7 @@ function structTick(dt){
       sys.built[w.key] = e.id;
       G._structAt = -1;                     // indeks geçersiz
       const S = STRUCTS[w.key];
-      if (S.sp === 'claim' && sys.owner < 0) sys.owner = e.id;
+      if (S.sp === 'claim' && sys.owner < 0) territoryOwnerSet(sys, e.id);
       if (S.sp === 'def') sys.def = sysDefense(sys);
       recalcMods(e);
       if (w.e === 0) say(S.n + ' tamamlandı — ' + sys.name, 'win');
@@ -4555,6 +4591,7 @@ function planetCharTick(){
 }
 /* sistem/koloni el değiştirince ve kriz yaşanınca çağrılır */
 function planetFlip(pl){
+  pl.shareRev = (pl.shareRev || 0) + 1;
   if (!pl.col) return;
   const h = planetHist(pl.col);
   h.flips++; h.peace = 0; h.own = 0;
@@ -5018,7 +5055,7 @@ Object.defineProperty(CFG, 'autoResolveEvents', {
 const STEPS = [
   {k:'mizac',  n:'DOKTRİN'},
   {k:'goruns', n:'GÖRÜNÜŞ'},
-  {k:'fizyo',  n:'🧬 FİZYOLOJİ'},   // FAZ 52
+  {k:'fizyo',  n:'FİZYOLOJİ'},   // Diğer kurulum sekmeleriyle aynı metin düzeni.
   /* FAZ 72: TÜR sekmesi kaldırıldı — ırk artık doktrinden türetiliyor */
   {k:'etik',   n:'ETİK'},
   {k:'civic',  n:'CIVIC'},
@@ -5225,7 +5262,7 @@ document.addEventListener('click', e=>{
       try { AUDIO.start(); AUDIO.resume(); } catch(err){}
     }
     loadGame().then(ok => {
-      if (!ok){ refreshContinueBtn(); return; }
+      if (!ok){ refreshContinueBtn(LAST_LOAD_STATUS); return; }
       leaveTitle(null);
       $('menu').classList.add('hidden');
       $('game').classList.remove('hidden');
@@ -5723,6 +5760,8 @@ let RADAR_ON = false;
    Artık RADAR_ON ile aynı desende bağımsız: üç ana moddan biri
    + Radar aç/kapat + Lojistik aç/kapat serbestçe birleşir. */
 let LOGI_ON = false;
+// 91D.1: filo aidiyeti, zemin ve diğer katmanlardan bağımsızdır.
+let FLEET_NAMES_ON = false, FLEET_NAMES_REV = 0;
 /* FAZ 47: küçük olayları otomatik çöz (ekonomi + minör anomali) */
 let AUTO_EVENT = false;
 
@@ -5780,6 +5819,17 @@ async function loadBgPref(){
   try {
     const v = await storeGet('yh_bg');
     BG_OFF = (v === 'off');
+  } catch(e){}
+}
+async function loadFleetNamesPref(){
+  const rev=FLEET_NAMES_REV;
+  try {
+    const v=await storeGet('yh_fleetnames');
+    if(rev!==FLEET_NAMES_REV)return; // geç dönen okuma kullanıcının yeni seçimini ezmesin
+    FLEET_NAMES_ON=(v==='on');
+    const b=document.getElementById('fleetNamesBtn');
+    if(b){b.className='tool fleetNamesBtn'+(FLEET_NAMES_ON?' on':'');
+      b.setAttribute('aria-pressed',String(FLEET_NAMES_ON));}
   } catch(e){}
 }
 async function loadAudioPref(){
@@ -6501,7 +6551,7 @@ function resetEventsRuntimeState(){
   const d = eventsWorldDefaults();
   G.inbox = d.inbox; G.inboxUid = d.inboxUid; G.seenChains = d.seenChains;
   delete G.minNote; delete G.minRaw;          // ham modal HTML asla taşınmaz
-  if (typeof UI !== 'undefined' && UI){
+  if (!_loadTxActive && typeof UI !== 'undefined' && UI){
     UI._openNote = null;
     UI.pendingOffer = null;
   }
@@ -6672,7 +6722,9 @@ function validBattleReport(v){
   if (v.last && typeof v.last==='object'){
     const ships=nums(v.last.ships,2,0,100000), ready=nums(v.last.ready,2,0,100000);
     const dealt=nums(v.last.dealt,2,0,1e12), supply=nums(v.last.supply,2,0,1);
-    if (ships && ready && dealt && supply) out.last={ships,ready,dealt,supply};
+    // Eski raporda tur öncesi pay / tur sonrası payda karışmışsa ayrıntıyı düşür.
+    if (ships && ready && dealt && supply && ready.every((n,i)=>n<=ships[i]))
+      out.last={ships,ready,dealt,supply};
   }
   return out;
 }
@@ -6886,7 +6938,7 @@ function serialize(){
        sınırı 5212'ye düşüp 30 sistemi ERİŞİLEMEZ yapıyordu.
        v8 KALIR — ek alan, okunamadığında deterministik olarak
        yeniden türetilir. */
-    W:G.W, H:G.H,
+    W:G.W, H:G.H, warLedger:G.warLedger, settlements:G.settlements,
     /* FAZ 85A: politik küresel durum tek alt nesnede */
     world: serializePoliticalWorld(),
     /* FAZ 85C: oyun sonu krizi */
@@ -6905,7 +6957,7 @@ function serialize(){
        harita yarım görünüyordu. */
     sys: G.sys.map(s=>({i:s.id, x:s.x, y:s.y, n:s.name, st:STARS.indexOf(s.star),
       p:s.planets, l:s.lanes, o:s.owner, sv:s.surv, se:s.seen, q:s.queue,
-      an:s.anom, ak:s.anomK, d:s.def,
+      an:s.anom, ak:s.anomK, d:s.def, sr:s.shareRev,
       b:s.built, w:s.work, ry:s.rally, lb:s.loopBuild,
       pu:s.pulsar, nb:s.nebulaS, wd:s.wander, wf:s.wanderFrom,
       yl:s.yardLock, sh:s.supplyHack, rd:s.radiation})),
@@ -6924,7 +6976,7 @@ function serialize(){
    Sıra önemli: modlar önce (reach onlara bakar), yapı indeksi
    sonra, reach ondan sonra, görüş en son.
    ═══════════════════════════════════════════════════════════════════ */
-function rebuildDerivedStateAfterLoad(){
+function rebuildDerivedStateAfterLoad(deferRender){
   /* 1. İmparatorluk geçici önbellekleri */
   for (const x of G.emps){
     x._prof = null;
@@ -6939,7 +6991,7 @@ function rebuildDerivedStateAfterLoad(){
   /* 4. Görüş */
   if (typeof updateVision === 'function') updateVision();
   /* 5. Görsel önbellekler — eski dokular atılsın */
-  if (typeof View !== 'undefined' && View.invalidateRenderCaches)
+  if (!deferRender && typeof View !== 'undefined' && View.invalidateRenderCaches)
     View.invalidateRenderCaches('load');      // FAZ 83.1: merkezî
   /* 6. Filo başına türetilmiş lojistik/menzil önbellekleri */
   for (const f of G.fleets){
@@ -6989,16 +7041,86 @@ function restoreWorldBounds(d){
   return b;
 }
 
+function validSaveEnvelope(d){
+  /* JSON sözdizimi doğru olsa bile eksik bir zarf, atamalar başladıktan
+     sonra hata verip çalışan dünyayı yarım değiştirebiliyordu. Burada yalnız
+     deserialize'ın doğrudan kullandığı temel kökleri ve kimlikleri sınarız. */
+  const record = x => x !== null && typeof x === 'object' && !Array.isArray(x);
+  if (!record(d) || !Array.isArray(d.sys) || !d.sys.length ||
+      !Array.isArray(d.emps) || !d.emps.length || !Array.isArray(d.fl) ||
+      !record(d.cfg)) return false;
+  /* 90RC.1: temel zarfın içindeki bozuk değerler de atamalardan önce
+     reddedilir. Eski negatif stoklar burada düzeltilmez veya silinmez. */
+  if (!Number.isFinite(d.day) || d.day < 0 || !Number.isInteger(d.year) ||
+      !Number.isInteger(d.month) || d.month < 1 || d.month > 12) return false;
+  if (!d.sys.every((s,i) => s && Number.isInteger(s.i) && s.i === i &&
+      Number.isFinite(s.x) && Number.isFinite(s.y) &&
+      Array.isArray(s.p) && s.p.every(record) && Array.isArray(s.l))) return false;
+  if (!d.emps.every((e,i) => e && Number.isInteger(e.id) && e.id === i &&
+      record(e.res) && Object.keys(RES).every(k => Number.isFinite(e.res[k])) &&
+      Array.isArray(e.colonies))) return false;
+  const fleetIds = new Set();
+  return d.fl.every(f => {
+    if (!record(f) || !Number.isInteger(f.id) || fleetIds.has(f.id) ||
+        !Number.isInteger(f.e) || !d.emps[f.e] || !Array.isArray(f.ships) ||
+        !f.ships.every(sh => record(sh) && typeof sh.c === 'string')) return false;
+    fleetIds.add(f.id);
+    return true;
+  });
+}
+/* 90RC.2: yükleme onay ekranı kayıt metnini dünyaya dokunmadan tanır.
+   Ayrıntılı uygulama kapısı yine deserialize/validSaveEnvelope'dur. */
+function inspectSaveText(txt){
+  try {
+    const d = JSON.parse(txt);
+    if (!validSaveEnvelope(d)) return {ok:false, why:'invalid'};
+    return {ok:true, year:d.year, month:d.month,
+      name:(d.emps[0] && typeof d.emps[0].name === 'string' && d.emps[0].name)
+        ? d.emps[0].name : 'Hanedan'};
+  } catch(e){ return {ok:false, why:'invalid'}; }
+}
+/* 90RC.3: bütün G grafiği özgün referanslarıyla geri alınır. G.nebula
+   yalnız değiştirilen bir çizim yüzeyidir; piksel belleği günlüğe alınmaz.
+   View/DOM/pointer ve UI bildirim seçimi commit öncesi DEĞİŞMEZ. */
+let _loadTxActive = false;
+function loadCheckpoint(stage){
+  if (typeof G._loadFailInject === 'function') G._loadFailInject(stage);
+}
 function deserialize(txt){
-  const d = JSON.parse(txt);
-  if (!d || !d.sys) return false;
+  if (_loadTxActive || G._sideBuf || (typeof _dealTxActive !== 'undefined' && _dealTxActive)) return false;
+  let tx = null, selection, buf = [];
+  _loadTxActive = true;
+  try {
+    const d = JSON.parse(txt);
+    if (!validSaveEnvelope(d)) return false;
+    selection = {sys:View.selSys && View.selSys.id, fleet:View.sel && View.sel.id};
+    tx = {records:txCaptureGraph([G], new Set([G.nebula])), rng:RND_STATE,
+      side:Object.getOwnPropertyDescriptor(G,'_sideBuf')};
+    G._sideBuf = buf;
+    loadCheckpoint('before:apply');
+    applySaveData(d);
+    loadCheckpoint('after:economy');
+    commitSideBuffer(buf);
+    loadCheckpoint('before:commit');
+    if (tx.side) Object.defineProperty(G,'_sideBuf',tx.side); else delete G._sideBuf;
+  } catch(e){
+    if (tx){ txRestoreGraph(tx.records); RND_STATE = tx.rng; }
+    try { logDiag('load', 'Kayıt uygulanamadı: ' + String(e && e.message || e)); } catch(ignore){}
+    return false;
+  } finally { _loadTxActive = false; }
+  // Geri alınamaz tarayıcı etkileri ancak dünya başarıyla kurulduktan sonra.
+  finishSaveLoad(selection);
+  flushSideBuffer(buf);
+  return true;
+}
+function applySaveData(d){
   G.cfg = d.cfg; G.day = d.day; G.year = d.year; G.month = d.month;
   G.seed = d.seed; G.log = d.log || [];
   if (typeof d.rs === 'number') rndSeed(d.rs);
   G.sys = d.sys.map(s=>({
     id:s.i, x:s.x, y:s.y, name:s.n, star:STARS[s.st]||STARS[0], planets:s.p,
     lanes:s.l, owner:s.o, surv:s.sv, seen:s.se, queue:s.q, anom:s.an,
-    anomK:s.ak || 'sinyal', def:s.d||0,
+    anomK:s.ak || 'sinyal', def:s.d||0, shareRev:s.sr,
     /* FAZ 77E: geri yüklenen alanlar */
     built:s.b, work:s.w, rally:s.ry, loopBuild:s.lb,
     pulsar:s.pu, nebulaS:s.nb, wander:s.wd, wanderFrom:s.wf,
@@ -7018,43 +7140,47 @@ function deserialize(txt){
   restoreWorldBounds(d);
   G.emps = d.emps; G.fleets = d.fl; G.nextFleet = d.nf;
   G.p = G.emps[0];
+  loadCheckpoint('after:roots');
   /* 86G: Eski v8 kayıtlarında savaşla birlikte kalmış NAP/pakt/ittifak
      alanlarını deterministik olarak kapat. Kayıt sürümü değişmez. */
   G._loadTreatyInfo = (typeof normalizeWarTreaties === 'function')
     ? normalizeWarTreaties() : {pairs:0,nap:0,pact:0,ally:0};
   normalizeEnvoys(); // 86D: kayıt göçü; ay ilerletmez, RNG tüketmez
+  loadCheckpoint('after:treaties');
   /* ═══ FAZ 85A: POLİTİK DÜNYA ═══
      Sıra önemli: G.day ve G.emps yerine oturduktan SONRA çağrılır
      (v3 göçü G.day'e bakar, referans kontrolü G.emps'e bakar) ama
      rebuildDerivedStateAfterLoad/economyTick'ten ÖNCE — türetilmiş
      durum yasaları ve federasyonları okuyabilsin. */
   G._loadWorldInfo = restorePoliticalWorld(d.world, d.v);
+  restoreWarLedger(d.warLedger);
+  restoreSettlements(d.settlements);
+  loadCheckpoint('after:world');
   /* FAZ 85C: kriz dünyası — politik world'den SONRA (kriz konsey/
      federasyon durumuna bakabilsin), rebuildDerivedStateAfterLoad
      ve economyTick(true) çağrılarından ÖNCE. */
   G._loadCrisisInfo = restoreCrisisWorld(d.threats, d.v);
+  loadCheckpoint('after:crisis');
   /* FAZ 85D: kampanya durumu — kriz dünyasından SONRA,
      rebuildDerivedStateAfterLoad/economyTick(true) ÖNCESİNDE, ki
      çalkantı modları türetilmiş duruma hemen yansısın. */
   G._loadCampaignInfo = restoreCampaignWorld(d.campaign, d.v);
+  loadCheckpoint('after:campaign');
   /* FAZ 85E: bildirim kuyruğu — kampanyadan SONRA (zincir/olay
      referansları çözülebilsin), türetilmiş durumdan ÖNCE. */
   /* FAZ 85F: konumsal simülasyon — campaign'den SONRA, events'ten
      ÖNCE (bildirim payload'ları sistem/devlet referansı çözebilsin),
      her ikisi de türetilmiş durumdan ve gerçek tikten ÖNCE. */
   G._loadSimInfo = restoreSimulationWorld(d.simulation, d.v);
+  loadCheckpoint('after:simulation');
   G._loadEventsInfo = restoreEventsWorld(d.events, d.v);
+  loadCheckpoint('after:events');
   /* Geçici yetkilendirme alanları kayıttan taşınmaz ve
      önceki oturumdan sarkmamalı. */
   G._warAuth = null; G._warWhy = null; G._dealAuth = false;
   /* FAZ 86C.4H: seçim KOŞULSUZ silinmek yerine kimlikle saklanır;
      aşağıda güncel oyun nesnesi üzerinden yeniden çözümlenir.
      Çözülemezse temizlenir (eski davranışla aynı sonuç). */
-  const _selSysId = (View.selSys && typeof View.selSys.id === 'number')
-                    ? View.selSys.id : null;
-  const _selFleetId = (View.sel && typeof View.sel.id === 'number')
-                      ? View.sel.id : null;
-  View.sel = null; View.selSys = null; View.route = false; View.routed = false;
   G.over = null; G.speed = 0;
   G.nebula = ART.nebula(G.seed, 128, 128);
   G.emps.forEach(x=>{
@@ -7067,34 +7193,41 @@ function deserialize(txt){
     x._trAt = -1; x._trCache = null;
     recalcMods(x);
   });
+  loadCheckpoint('after:mods');
+  rebuildDerivedStateAfterLoad(true);
+  loadCheckpoint('after:derived');
+  economyTick(true);
+}
+function finishSaveLoad(selection){
+  const _selSysId = selection.sys, _selFleetId = selection.fleet;
+  // Her sunum adımı ayrı korunur: hata yüklenmiş dünyayı reddedilmiş göstermez.
+  const present = (name, fn) => {
+    try { fn(); } catch(e){
+      try { logDiag('load-view', name + ': ' + String(e && e.message || e)); } catch(ignore){}
+    }
+  };
+  present('events', ()=>{ UI._openNote = null; UI.pendingOffer = null; });
+  present('selection', ()=>{
+    View.selSys = G.sys.find(s=>s.id === _selSysId) || null;
+    View.sel = G.fleets.find(f=>f.id === _selFleetId) || null;
+    View.route = false; View.routed = false;
+  });
   /* ═══ FAZ 86C.4H: YÜKLEME SONRASI HARİTA GİRDİSİ ═══
      Eski jest durumu (takılı pointer, yarım pinch) yeni oyun
      verisiyle taşınmamalı; geçersiz seçim temizlenmeli. Harita hem
      çizilebilir hem ETKİLEŞİLEBİLİR bırakılır. */
-  try {
+  present('gesture', ()=>{ if (View.resetGesture) View.resetGesture(); });
+  present('caches', ()=>{
     if (typeof View !== 'undefined'){
-      if (View.resetGesture) View.resetGesture();
-      /* Seçim GÜNCEL nesne üzerinden yeniden çözümlenir; eski oyun
-         nesnesine referans TUTULMAZ. Çözülemezse temizli kalır. */
-      if (_selSysId !== null){
-        const _s = G.sys[_selSysId];
-        View.selSys = (_s && _s.id === _selSysId) ? _s : null;
-      }
-      if (_selFleetId !== null){
-        const _f = G.fleets.filter(f => f && f.id === _selFleetId)[0];
-        View.sel = _f || null;
-      }
       View.bcache = null; View.bkey = null;   // çizim önbelleği yenilensin
+      if (View.invalidateRenderCaches) View.invalidateRenderCaches('load');
     }
-  } catch(e){}
-  rebuildDerivedStateAfterLoad();
-  economyTick(true);
+  });
   /* Çizim katmanının önbellekleri de tazelensin */
-  if (typeof View !== 'undefined'){
+  present('frustum', ()=>{ if (typeof View !== 'undefined'){
     View._bolgeAt = -1;
-    if (View.updateFrustum) { try { View.updateFrustum(); } catch(e){} }
-  }
-  return true;
+    if (View.updateFrustum) View.updateFrustum();
+  }});
 }
 /* --- kaydı gerçek dosya olarak indir (her ortamda çalışır) --- */
 function downloadSave(){
@@ -7116,23 +7249,36 @@ function downloadSave(){
 }
 /* --- dosyadan yükle --- */
 function uploadSave(cb){
+  let inp = null, bitti = false;
+  const bitir = (txt, durum) => {
+    if (bitti) return;
+    bitti = true;
+    try { if (inp) inp.remove(); } catch(e){}
+    cb(txt, durum);
+  };
   try {
-    const inp = document.createElement('input');
+    inp = document.createElement('input');
     inp.type = 'file';
     inp.accept = '.sav,.json,.txt,application/json,text/plain';
     inp.style.display = 'none';
     inp.addEventListener('change', ()=>{
       const f = inp.files && inp.files[0];
-      if (!f){ cb(null); return; }
-      const r = new FileReader();
-      r.onload = ()=> cb(String(r.result||''));
-      r.onerror = ()=> cb(null);
-      r.readAsText(f);
-      setTimeout(()=>{ try{ inp.remove(); }catch(e){} }, 2000);
+      if (!f){ bitir(null, 'cancel'); return; }
+      try {
+        const r = new FileReader();
+        r.onload = ()=> bitir(String(r.result === undefined || r.result === null
+          ? '' : r.result), 'ok');
+        r.onerror = ()=> bitir(null, 'read-error');
+        r.onabort = ()=> bitir(null, 'cancel');
+        r.readAsText(f);
+      } catch(e){ bitir(null, 'read-error'); }
     });
+    /* Android Chrome dahil modern tarayıcılar seçim penceresi kapatılıp
+       dosya seçilmediğinde change yerine cancel gönderebilir. */
+    inp.addEventListener('cancel', ()=> bitir(null, 'cancel'));
     document.body.appendChild(inp);
     inp.click();
-  } catch(e){ cb(null); }
+  } catch(e){ bitir(null, 'open-error'); }
 }
 /* --- depolamanın gerçekten çalışıp çalışmadığını sına --- */
 async function storageDiag(){
@@ -7158,12 +7304,15 @@ async function saveGame(){
   try { return await storeSet('yildiz:save', serialize()); }
   catch(e){ return false; }
 }
+let LAST_LOAD_STATUS = 'idle';
 async function loadGame(){
   try {
     const t = await storeGet('yildiz:save');
-    if (!t) return false;
-    return deserialize(t);
-  } catch(e){ return false; }
+    if (!t){ LAST_LOAD_STATUS = 'missing'; return false; }
+    const ok = deserialize(t);
+    LAST_LOAD_STATUS = ok ? 'ok' : 'invalid';
+    return ok;
+  } catch(e){ LAST_LOAD_STATUS = 'invalid'; return false; }
 }
 
 /* ---------- oyunu başlat ---------- */
@@ -7363,7 +7512,7 @@ function forceRedraw(sebep){
    Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
    Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
 /* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */
-const BUILD_ID = '88b';
+const BUILD_ID = '92d';
 const DIAG_MAX = 40;
 const DIAG = [];
 function logDiag(tur, mesaj){
@@ -8179,6 +8328,8 @@ function monthTick(){
   }
   if (G.month % 2 === 0) maybeEvent();
   if (G.month === 1 && G.autoSave !== false && G.year > 2210){
+    warLedgerSync();
+    settlementTick();
     saveGame().then(ok => { if (ok) say('Otomatik kayıt — ' + G.year); });
   }
   /* HOTFIX 23.1 — KORSAN KORUMASI
@@ -8223,6 +8374,9 @@ function monthTick(){
      AI'lar hiçbir zaman kazanamıyordu; oyun 100 yıl boyunca
      sonuçsuz sürüyordu. Artık herkes yarışta. */
   checkVictory(G.p, 'tick');
+  warLedgerSync();
+  settlementTick();
+  settlementAgendaTick();
   if (!G.over) for (const x of G.emps){
     if (x.dead || x.wild || x.crisisSide || x.id === 0) continue;
     checkVictory(x, 'tick');
@@ -8254,6 +8408,7 @@ window.addEventListener('load', ()=>{
   loadAutoEventPref();          // FAZ 47: otomatik olay tercihi
   loadRadarPref();              // FAZ 65: radar katmanı
   loadLogiPref();               // FAZ 86C.4H-R2: lojistik katmanı
+  loadFleetNamesPref();         // 91D.1: görünür filoların devlet adları
   loadTemplates().then(()=>{    // FAZ 61: kurulum şablonları
     try { if (SETUP_STEP && $('menu') && !$('menu').classList.contains('hidden'))
       safeRenderSetup(); } catch(e){}
@@ -8438,24 +8593,26 @@ function upheavalTick(){
 
 /* Kayıt var mı? Ana menü açılırken bir kez sorulur ve sonuç
    saklanır — buton her karede depoyu yoklamaz. */
-async function refreshContinueBtn(){
+async function refreshContinueBtn(forcedStatus){
   const btn = $('tContBtn'), sub = $('tContSub');
   if (!btn) return false;
-  let bilgi = null;
+  let bilgi = null, durum = forcedStatus === 'invalid' ? 'invalid' : 'missing';
   try {
-    const t = await storeGet('yildiz:save');
+    const t = forcedStatus === 'invalid' ? null : await storeGet('yildiz:save');
     if (t){
       /* Kaydı ÇÖZMEDEN başlığını oku — hızlı ve güvenli */
-      const d = JSON.parse(t);
-      bilgi = {yil: d.year, ad: (d.emps && d.emps[0] && d.emps[0].name) || 'Hanedan'};
+      const q = inspectSaveText(t);
+      if (q.ok){ bilgi = {yil:q.year, ad:q.name}; durum = 'ok'; }
+      else durum = 'invalid';
     }
-  } catch(e){ bilgi = null; }
+  } catch(e){ bilgi = null; durum = 'invalid'; }
   if (bilgi){
     btn.disabled = false;
     if (sub) sub.textContent = bilgi.ad + ' · yıl ' + bilgi.yil;
   } else {
     btn.disabled = true;
-    if (sub) sub.textContent = 'Kayıtlı oyun bulunamadı';
+    if (sub) sub.textContent = durum === 'invalid'
+      ? 'Kayıt bozuk veya uyumsuz' : 'Kayıtlı oyun bulunamadı';
   }
   return !!bilgi;
 }

@@ -1,0 +1,58 @@
+STARS — FAZ 90RC.1: BOZUK KAYITTA AÇIK OYUNUN KORUNMASI
+
+Kaynak: stars-faz90rc.zip
+SHA-256: a71982b0299ad48a5b84f85fdf7ced2089993f573b38f73352b7ede35fd9345f
+Build: 90rc-1; SW cache: stars-v90rc-1.
+
+ÖNCE / SONRA
+90RC temel kökleri doğruluyordu; iç kayıtların tümünü doğrulamıyordu.
+Ölçülen örnek: fl[0].ships[0]=null. deserialize açık dünyayı atadıktan sonra
+"Cannot read properties of null (reading 'c')" hatası verdi. loadGame bunu
+false'a çevirse de dünya çoktan değişmişti. Yeni ön kapı false döndürür ve
+hiçbir dünya ataması yapılmaz.
+
+Yinelenen filo kimliği, null/sayı gezegen, eksik gemi sınıfı, metin/null/eksik
+kaynak, eksik/negatif gün, metin yıl, 0/13 ay ve dizi cfg da önceden kabul
+ediliyor veya kısmi yüklemede hata veriyordu. Bu girdiler artık reddediliyor.
+
+UYGULAMA
+validSaveEnvelope içinde nesne/dizi ayrımı, gezegen ve gemi kayıt yapısı,
+sonlu kaynak miktarları, takvim sınırları ve filo kimliği tekilliği denetlenir.
+Yeni bir kayıt biçimi yoktur; v8 ve eski isteğe bağlı world/threats/events/W/H
+alanları korunur. Kesirli gün/kaynak ile boş filo geçerlidir. Ön kapı eski
+negatif stokları otomatik düzeltmez veya silmez.
+
+TEST KANITI
+Yeni tests/faz90rc_1_save_boundary_test.js: 19 senaryo.
+Değişiklik öncesi 90RC: 3 geçen / 16 kalan.
+Çıktı: 19 geçen / 0 kalan.
+Ret sonrası serialize zarfı, RNG, dünya/filo/seçim/tuval nesne kimlikleri,
+kamera, hız, zamanlayıcı ve rAF kayıtları, localStorage aynı kalır.
+Reddedilen kaydın ardından geçerli kayıt aynı oturumda açılır.
+Gerçek eski v8 kaydı üç tekrar yüklemede gün/kaynak/RNG'yi korur.
+
+TAM REGRESYON
+45 paket / 3830 geçen / 0 kalan; atlanan paket 0.
+Önceki 3811'e 19 yeni senaryo eklendi. Eski test dosyalarındaki farklar
+yalnız build/cache beklentisidir; davranış iddiaları silinmedi.
+Sonuç: tests/results-90rc-1.json.
+
+DOSYA SINIRI
+main.js: validSaveEnvelope ve BUILD_ID.
+sw.js: yalnız cache adı.
+AYNI (9/9): map.js, combat.js, ai.js, diplomacy.js, economy.js, audio.js,
+ui.js, index.html, manifest.json. Önceki PWA install/activate düzeltmesi aynı.
+
+DOĞRULAMA SINIRI
+Bu faz Node/sahte DOM ve mevcut yerel Skia regresyonlarını çalıştırdı.
+Gerçek tarayıcı/PWA/Android testi yapılmadı. Bu sonuç belirlenen bozuk
+girdilerin reddini kanıtlar; deserialize için tam transaction, bütün iç
+alanların şema doğrulaması veya keyfi bozuk kayıtta geri alma iddiası değildir.
+Örneğin daha derin koloniler veya türetme fonksiyonlarının beklenmedik
+istisnaları ayrıca denetlenmelidir. Kullanıcı cihaz testlerine ara verdi;
+87T kabulü beklemeye devam eder. Yayınlama yapılmadı.
+
+SONRAKİ FAZ
+90RC.2: kayıt dosyası seçimi/iptali, onay ve başarısızlık geri bildirimi.
+Sol — High. Motorlar arası daha geniş geri alma gerektiren bulgu çıkarsa
+Astra — High. Fiziksel kabul 87T olarak ayrı kalır.

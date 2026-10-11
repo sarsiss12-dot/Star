@@ -1,0 +1,88 @@
+GELİŞTİRİCİ RAPORU — STARS FAZ 86C.5
+KURTARMA TANISI, KAYIT GÜVENLİĞİ VE GERÇEK CANVAS PİKSEL TESTLERİ
+
+1. KAYNAK
+Kullanılan ek: stars-faz86c-4h-r4-24.zip (R4).
+SHA-256: 517e8fa7b08ba597635aaa5352c1ef5029ea5035c92b63bca5e3a199f77e838b
+ZIP bütünlüğü ve SHA doğrulandı. Daha önceki bozuk R4 kopyası kullanılmadı.
+Gerçek oyuncu kaydı:
+fe2df0b6adc09bfe0148f36c5c96869ffef86ceeaa4cf7eb609f3997bc2c1245
+Bu kayıt tests/fixtures altında değişmeden yer alır.
+
+2. SOMUT DÜZELTMELER
+• R4'te storeSet her anahtarı MEM_SAVE'a yazıyordu. Tanı veya tercih
+  kaydı, depolama kullanılamadığında oyun kaydı yerine dönebiliyordu.
+  Oyun kaydı ve anahtar bazlı tercih belleği ayrıldı; tanı ayrı saklanır.
+• Panoya yazma Promise'i beklenmediği için başarısız kopyalama başarılı
+  bildirilebiliyordu. Artık gerçek başarı beklenir; ret durumunda dosya
+  indirme yolu çalışır. Aynı anda yinelenen aktarım engellenir.
+• yh_lastfail yazılıyor ama önceki oturum raporu geri okunmuyordu.
+  Artık önceki rapor yüklenir; mevcut oturumun ilk hatasını ezmez.
+• Ayrı fullscreen/orientation dinleyicilerinin gecikmiş doğrudan resize
+  çağrıları kaldırıldı. Fullscreen de kanonik kurtarma yöneticisindedir.
+• Ardışık gerçek çizim hataları doğrudan View.init/resize yerine aynı
+  kurtarma yoluna girer. Güncel contextlost olayı da bu yolu tetikler.
+
+3. TANI NEYİ KORUYOR?
+Kurtarma yüzeyi değiştirmeden önceki durum, ilk başarısızlık ve anlık
+durum ayrı tutulur. Ham RGBA örnekleri; CSS/tuval koordinatları; DPR;
+tam transform; çizim aşaması ve özgün hata/stack; yüzey eşleşmeleri;
+olay zamanları; görünürlük, fullscreen ve viewport bilgisi dışa aktarılır.
+İç içe rapor alanları artık [object Object] olarak kaybolmaz.
+İlk kayıt sonraki başarılı çizimler veya tekrar denemeleriyle ezilmez.
+Sağlıklı karelerde piksel okuma eklenmedi.
+Başarılı kurtarmada mevcut üst sınır korundu: en fazla 6 piksel okuma
+(önce 1, sonra 4, sınır önbelleği 1). İlk geliştirme denemesi bu sınırı
+aştı; eski test bunu yakaladı. Test gevşetilmeden kod düzeltildi.
+
+4. DOĞRULAMA
+R4 kaynak paketi gerçekte 25 test içeriyor; rapordaki 24 sayısı yanlıştı.
+R3 testinin sabit kayıt yolu taşınabilir hâle getirildiğinde kaynak
+sonucu 2718 geçen / 0 kalan olarak doğrulandı.
+
+86C.5 son sonuç: 27 paket — 2822 geçen / 0 kalan.
+Yeni tanı paketi: 38 / 0. Yeni gerçek Canvas paketi: 66 / 0.
+Tüm testler çalışma kopyasında çalıştırıldı. Teslim ZIP'inin her üyesi
+bu dosyalarla bayt düzeyinde karşılaştırıldı; sonuç JSON'u pakettedir.
+
+Yeni Canvas katmanı @napi-rs/canvas 0.1.100 / Skia kullanır:
+• 12 ana mod/Radar/Lojistik birleşiminde üretim çiziminin gerçek pikselleri.
+• Gerçek kayıtta 6881×6881 dünya, dört zoom seviyesinde tüm sistemlere erişim.
+• Gerçek piksel tamponunun boşalması ve kullanılamayan yüzeyin değiştirilmesi.
+• Manuel kurtarma sonrası gerçek çizim, gerçek filo seçimi, pan ve pinch.
+• 10 karışık yüzey değişimi (6 başarı, 4 hazırlık hatası), kısmi dinleyici
+  bağlama hatası ve mevcut context resize hatasında geri dönüş.
+• Güncel/emekli dinleyiciler, seçim ve kamera; kayıt/RNG korunumu.
+
+Bu katman gerçek Canvas çizimidir; DOM ve olay sırası sentetiktir.
+Gerçek tarayıcı testi YAPILMADI: kullanılabilir Chromium/Chrome/Firefox
+binary bulunmadı. Fiziksel TECNO Spark 50 5G testi YAPILMADI.
+Android GPU/context kaybının tetikleyicisi hâlâ kanıtlanmadı.
+Android beyaz ekranı kesin çözüldü iddiası YOKTUR.
+
+5. DEĞİŞEN/KORUNAN
+Üretim değişiklikleri: main.js, map.js, ui.js, sw.js.
+sw.js değişikliği yalnız cache: stars-v86c-5. Build: 86c-5.
+R4'e karşı birebir korunan 7 dosya:
+economy.js, combat.js, audio.js, manifest.json,
+diplomacy.js, ai.js, index.html.
+Dosya SHA değerleri tests/sha-kayit.json içindedir.
+
+Kayıt v8 ve mevcut depolama anahtarları korundu. Yeni tercih anahtarı
+eklenmedi. R2 dünya sınırı, R1 gerçek tap temizliği, R4 yüzey bağlama
+jetonları, üç ana mod ve iki bağımsız katman korundu.
+Situation karantinası ve diplomasi/AI/ekonomi/savaş davranışları korundu.
+Kurtarma yeni oyun, kayıt geri sarma veya otomatik sayfa yenileme yapmaz.
+
+6. CİHAZDA İLK KABUL
+Yeni paketi aynı yöntemle kur ve Tanılama'da build 86c-5 olduğunu gör.
+Mevcut kaydı yükle; oyunu arka plana alıp geri dön.
+Harita görünümü ve bir gezegene/filoya dokunmayı kontrol et.
+Beyaz ekran olursa önce TANI RAPORUNU AL; sonra Haritayı yenile'ye bir
+kez bas ve sonucu bildir. Alınan metni veya stars-tani.txt dosyasını paylaş.
+Kaydı/saha verisini silmek gerekmez. Bu tur cihaz kabulü bekler.
+
+7. AÇIK BORÇ
+86C.6: transaction kimlik/alias, derinlik, mutasyon kapsamı ve commit
+sonrası UI/audio hatalarının kabul denetimi henüz yapılmadı.
+Elçi sistemi ve diplomasi ekranı sonraki fazlardır. Ayrıntı FAZ-PLANI.md.

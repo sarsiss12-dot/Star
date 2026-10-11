@@ -1,0 +1,120 @@
+GELİŞTİRİCİ RAPORU — STARS FAZ 87A
+CASUSLUK ERİŞİMİ, ONAY GÜVENLİĞİ VE OPERASYON GERİ BİLDİRİMİ
+
+1) KAYNAK / ÇIKTI
+Kaynak: stars-faz86g.zip
+Beklenen / hesaplanan SHA-256:
+73561902eefe436986a7163080bbfb8cc08a0d773492f8854f8a5a7b98d30bb4
+Gerçek kayıt fixture SHA-256:
+fe2df0b6adc09bfe0148f36c5c96869ffef86ceeaa4cf7eb609f3997bc2c1245
+Çıktı: stars-faz87a.zip. Çıktı SHA teslim mesajındadır.
+Build 87a; SW cache stars-v87a. SW değişikliği yalnız cache adı.
+
+2) TAMAMLANAN / GELECEK İŞLER VE KULLANICI TEST PLANI
+GELISTIRME-GECMISI.md: devralınan R4'ten sonra 86C.5, 86C.5.1,
+86C.6, 86D, 86E, 86F, 86G ve bu 87A tesliminin somut dökümü.
+GELECEK-FAZLAR.md: 87B'den 90RC'ye amaç, bitiş ölçütü ve model önerisi.
+BUGTEST-FAZ-PLANI.md: kullanıcı hazır olduğunda kısa 87T0–T4 oturumları;
+hata bildirim şablonu, P0/P1/P2/P3 ve kapanış ölçütleri.
+CIHAZ-TEST-BIRIKIMI.md: önceki kontrol listesi + 87A ilaveleri.
+Şu anda cihaz testi talep edilmiyor; yayınlama yapılmadı.
+
+3) ÖLÇÜLEN KOPUKLUKLAR VE DÜZELTMELER
+A. Casus atama kodu vardı ama UI'da onu çağıran düğme yoktu.
+   Hedefin OPERASYONLAR görünümüne CASUS ATA / CASUSU GERİ ÇEK eklendi.
+   Sahadaki ajan/kapasite görünür. Eylem diplomasi penceresine atmaz.
+   spyAssignQuote ve assignSpy aynı uygunluk/kota kapısını kullanır.
+   Eski hedefe ait bir atama kanonik yoldan geri çekilebilir.
+
+B. opQuote yalnız hedef varlığı/ölümünü denetliyordu. Temassız, korsan,
+   eski nesne ve geçersiz aktör kontrolleri yoktu; null aktör hata atıyordu.
+   Yeni spyTargetCheck, UI ve yürütmenin ortak saf hedef kapısıdır.
+   Katalog dışı/prototip operasyon anahtarları da kesin reddedilir.
+   Ret kaynak, RNG, ilişki veya operasyon dosyası değiştirmez.
+
+C. Düşük ağ seviyesinde opViable önce çalışıyor; kilitli karttan gerçek
+   teknoloji/stok/koloni sayıları okunabiliyordu. Artık seviye kapısı önce.
+   Yeterli seviyedeki gerçek maliyet/risk ve uygulanabilirlik yolu korunur.
+
+D. İptal/başka modal/geçersiz yeni önizleme eski onayı temizlemiyordu.
+   Jeton yalnız hedef+tür olduğundan yeniden açılan aynı operasyon eski
+   düğmeyle çalışabiliyordu. Dünya veya maliyet/risk değişimi de onayı
+   geçersizleştirmiyordu.
+   Her açılışa ayrı jeton verilir; dünya nesneleri ve görülen koşullara
+   bağlanır. openModal/closeModal eski onayı iptal eder. Eski düğme yeni
+   jetonu tüketemez. Tek geçerli onay yine tek runOp üretir; kaynak bir kez
+   kesilir, aktör/mağdur dosyaları birer kez yazılır.
+
+E. Süreli kazanımlar görünmüyordu. opActiveEffects mevcut fakeTo,
+   routeIntel, fleetIntel ve smuggle alanlarını salt okunur özetler.
+   Bitmiş alanlar listelenmez; rakibin gizli alanı gösterilmez.
+   Oyuncunun kendi tersane virüsü süresi DOSYALAR'da görünür; bilinmeyen
+   failin adı açılmaz. Bekleyen operasyon kuyruğu oluşturulmadı: standart
+   12 operasyon anlıktır; özel operasyonlar ayrı grupta kalır.
+
+F. Kısa dosya kaydedilmiş özeti 70 karakterde tekrar kesiyor, tam dosya
+   hiç göstermiyordu. Mevcut actorSummary artık ikisinde de tamamıyla
+   gösterilir. Bu alan motor tarafından hâlâ 120 karakterle saklanır;
+   geçmişte atılmış ayrıntılar geri üretilemez. Eski/özel kayıtta özet
+   yoksa açıkça söylenir. Sonuç ekranındaki "iz bırakılmadı" kaldırıldı:
+   bugün ifşa edilmemek, dosyanın sonra çözülemeyeceği anlamına gelmez.
+
+4) HEDEFLİ TEST
+tests/faz87a_espionage_feedback_test.js: 36 senaryo / 0 kalan.
+Gerçek UI eylemleri, opQuote, assignSpy, runOp ve deserialize kullanılır.
+Tüketici Canvas/DOM host sentetiktir; üretim operasyon motoru stub'lanmaz.
+2400 önizlemede dünya/RNG aynılığı, geçersiz girişler, iptal/çift onay,
+aynı operasyonu yeniden açma, maliyet/risk/hedef/temas/yükleme değişimi,
+süre bitişi, v8 süre korunumu, anonim dosya ve özet görünümü kapsanır.
+
+Aynı test 86G kaynağında: 8 geçen / 28 kalan.
+Bu, 28 ayrı eski bug demek DEĞİLDİR: yeni süre özeti yardımcılarının
+bulunmaması gibi yeni özellik beklentileri de bu sayıya dahildir.
+Kaynak test çıktısı tests/espionage-source-test.log içinde.
+
+5) AI KULLANIMI — SINIRLI LABORATUVAR
+3 seed × 120 aiOpsTick adımı. Yaşayan devletlerde temas ve istihbarat
+hazır; stoklar yüksek; gün ve memAge adım başına bir kez ilerletilir.
+Ekonomi, günlük keşif ve tam kampanya yürütülmez.
+
+seed  standart runOp çağrısı  uygulandı  reddedildi
+11            388               166        222
+99            356               173        183
+404           323               153        170
+TOPLAM       1067               492        575
+
+86G ve 87A'nın aynı seed'deki çağrı, tür, sonuç ve kalıcı durum+RNG
+hash'leri BİREBİR aynı. İki JSON dosyası da birebir aynı çıktı.
+ai.js değişmedi; standart maliyet/risk/kota/sıklık formülleri değişmedi.
+Bu ölçüm bütün galaksi dengesinin kabulü değildir.
+
+AÇIK BULGU: AI en çok uygulanabilir dosya/teknoloji bulunmayan adaylarla
+boşa girişim yapıyor. 575 ret bu senaryoda görülüyor; 87B bunun için.
+Özel stealTech/incite çağrıları runOp sayacının dışında; sayı onları
+kapsıyormuş gibi sunulmuyor.
+
+6) DOSYA SINIRI VE REGRESYON
+Değişen üretim dosyaları: diplomacy.js, ui.js, main.js, sw.js.
+main.js yalnız BUILD_ID; sw.js yalnız CACHE satırı değişti.
+Bayt düzeyinde aynı 7 dosya: map.js, ai.js, economy.js, combat.js,
+audio.js, index.html, manifest.json. Hash'ler tests/sha-87a.json içinde.
+
+34 paket — TOPLAM 3579 GEÇEN / 0 KALAN.
+Önceki toplam 3543 + 36 yeni senaryo. Sonuç tests/results-87a.json'da.
+Eski testlerden yalnız sürüm beklentileri mekanik güncellendi; 86A testi
+onay düğmesinin gerçek data-x jetonunu okur. AI tek-kayıt fixture'ına,
+gerçek AI hedef seçimi gibi iki taraflı temas eklendi. Beklenen tek
+işlem/kesinti/RNG sınırları gevşetilmedi; hiçbir test kaldırılmadı.
+
+Node/sentetik DOM + native Skia piksel regresyonları çalıştı.
+Gerçek Chrome/WebView veya fiziksel Android testi YAPILMADI.
+Yeni UI yerleşimi için tarayıcı ekran görüntüsü üretilmedi.
+
+7) KORUNANLAR / AÇIK SINIRLAR
+Save v8; depolama anahtarları; üç ana mod; bağımsız Radar/Lojistik;
+harita kurtarma/menü/portre; 86C.6 anlaşma transaction'ı; 86D/E/F/G
+bağlantıları ve Situation karantinası regresyonla korundu.
+Operasyonlara yeni genel transaction eklenmedi. Özel operasyon kayıtları,
+karşı istihbarat civic katalog bağlantısı ve uzun günlük kampanya açıktır.
+
+SONRAKİ FAZ: 87B — AI operasyon uygunluğu. Öneri: Astra / High.

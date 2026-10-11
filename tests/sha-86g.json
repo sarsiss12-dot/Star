@@ -1,0 +1,17 @@
+{
+  "sourceZip": "stars-faz86f.zip",
+  "sourceSha256": "bc693ee97b4c0a7dd4b0610c0f2179d6c9f0729099c210cb335808b2967fbc8d",
+  "files": {
+    "main.js": {"source":"8518b65f0b88bb92be30f867ad71ac6f4606427617cc0f7a3f97661b86d062c1","output":"bc3dc2c0e6aa4d20d5e4a2b2c9acab0e5b5783e4f146fde9865118ae6870617d","unchanged":false},
+    "ui.js": {"source":"770126fd4a1515243d1412b118a66d50ae1b9ef170b8d180b5d595359e138eb0","output":"668214e04443ca31074d35b7073b78750ba8ba78d6d8e5599170136405d36260","unchanged":false},
+    "map.js": {"source":"d5be2b3821aede53ea89c7ed4c22ed7814bb1750fc81df8735102f61cfa4c5f8","output":"d5be2b3821aede53ea89c7ed4c22ed7814bb1750fc81df8735102f61cfa4c5f8","unchanged":true},
+    "ai.js": {"source":"c5bfc86d2f31436514ce3812ab27fc0e163cce8d6be1980a37156c49c4ebe0ce","output":"c5bfc86d2f31436514ce3812ab27fc0e163cce8d6be1980a37156c49c4ebe0ce","unchanged":true},
+    "diplomacy.js": {"source":"0265cfd0373f66c08012743fe4f9e1b7fdb3fe10bd6ae9618b29328952334b67","output":"e5b7587743f3854758118705673c34de71fbc0d5de1526b5fb9b6a7ba8a13b47","unchanged":false},
+    "economy.js": {"source":"3daaae63ee7e747d01b56badff0e933309d99274a59ed1f78f436b72afde9936","output":"3daaae63ee7e747d01b56badff0e933309d99274a59ed1f78f436b72afde9936","unchanged":true},
+    "combat.js": {"source":"812ac3e9e7dfd9c994bd0581ac3776ece038e7a10c5d7947cfb4f6ae8a83516b","output":"812ac3e9e7dfd9c994bd0581ac3776ece038e7a10c5d7947cfb4f6ae8a83516b","unchanged":true},
+    "audio.js": {"source":"804226980179698a6b56d292d88c0c7226d1e54f06001aab63b52d6db5685262","output":"804226980179698a6b56d292d88c0c7226d1e54f06001aab63b52d6db5685262","unchanged":true},
+    "index.html": {"source":"f8bb5abd9cbc0dd5a6a949bdaefdb7f1d4a282d22fe5a64c5ebe574773eafc0d","output":"f8bb5abd9cbc0dd5a6a949bdaefdb7f1d4a282d22fe5a64c5ebe574773eafc0d","unchanged":true},
+    "manifest.json": {"source":"6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310","output":"6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310","unchanged":true},
+    "sw.js": {"source":"244e8f1eb102af6ebbab69e09752ee6464ccc5bcb6d5904c638d495a1331511e","output":"b69c85c6f3ec82e6d8625a3cef44fe462711b37d27e3eecffc2c1920be73df16","unchanged":false}
+  }
+}

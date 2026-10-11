@@ -1,0 +1,19 @@
+✗ korsan ilk adayken gerçek pakt sonraki normal devlete ulaşır — Expected values to be strictly equal:
+
+true !== false
+
+✗ korsan ilk adayken gerçek ittifak sonraki normal devlete ulaşır — Expected values to be strictly equal:
+
+false !== true
+
+✗ korsan uygunluk ve fırsat kapısından önce elenir — Expected values to be strictly equal:
+
+true !== false
+
+✗ yalnız korsan varsa sonuçsuz müzakere bile başlatılmaz — Expected values to be strictly equal:
+
+2 !== 0
+
+✓ oyuncuya pakt ve ittifak onaya sunulur, otomatik kurulmaz
+✓ kanonik müzakere kapısı korsanı hâlâ mutasyonsuz reddeder
+GEÇEN: 2 KALAN: 4

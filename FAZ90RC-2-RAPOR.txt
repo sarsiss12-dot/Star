@@ -1,0 +1,68 @@
+GELİŞTİRİCİ RAPORU — STARS FAZ 90RC.2
+KAYIT YÜKLEME KULLANICI AKIŞI
+
+1) KAYNAK
+Kaynak: stars-faz90rc-1.zip
+SHA-256: b89ee2a6999d1f6bd35e68a2887fd002c1f850c150526dcbee06f0a080ad3b97
+Build: 90rc-2; SW cache: stars-v90rc-2.
+
+2) ÖLÇÜLEN HATALAR
+A. Dosya seçici yalnız change dinliyordu. Android Chrome gibi cancel olayı
+   gönderen tarayıcılarda callback tamamlanmıyor ve gizli input DOM'da kalıyordu.
+B. Dosyasız change dalı inputu kaldırmadan dönüyordu.
+C. FileReader oluşturma/readAsText istisnası eşzamansız olayın içinde olduğu
+   için dış try/catch sınırından kaçıyordu.
+D. load ve error gibi birden fazla son olay callback'i iki kez çalıştırabiliyordu.
+E. Geçerli dosya seçimden hemen sonra açık dünyayı onaysız değiştiriyordu.
+F. Yapısal bozuk cihaz kaydı "kayıt bulunamadı" diye raporlanıyor; ana menü
+   JSON sözdizimi doğruysa aynı bozuk kaydı devam edilebilir gösterebiliyordu.
+
+3) DÜZELTME
+uploadSave tek bitiş kapısı kullanıyor. change/cancel/load/error/abort ve
+istisna yolları ok/cancel/read-error/open-error olarak ayrılıyor; input her
+yolda hemen kaldırılıyor ve callback en fazla bir kez çağrılıyor.
+
+inspectSaveText kayıt zarfını dünyaya dokunmadan inceliyor. Geçerli dosya ve
+cihaz kayıtları hanedan/tarih özetiyle YÜKLE/VAZGEÇ ekranına geliyor. YÜKLE
+seçilmeden deserialize çalışmıyor. VAZGEÇ dünya ve hızlı kayıt kopyasını
+değiştirmiyor. Başarılı onaydan sonra aynı metin hızlı kayıt alanına yazılıyor.
+
+loadGame LAST_LOAD_STATUS ile missing/invalid/ok sonucunu ayırıyor.
+refreshContinueBtn validSaveEnvelope kullanıyor; bozuk kayıt ana menüde devre
+dışı ve "Kayıt bozuk veya uyumsuz" olarak görünür.
+
+4) TEST
+Yeni: tests/faz90rc_2_load_feedback_test.js — 14 iddia.
+Kaynak 90RC.1: 0 geçen / 14 kalan.
+Çıktı 90RC.2: 14 geçen / 0 kalan.
+
+Tam regresyon: 46 paket / 3844 geçen / 0 kalan.
+Hiçbir eski test silinmedi veya gevşetilmedi. Build/cache bekleyen eski testler
+yeni dağıtım kimliğine güncellendi.
+
+5) DEĞİŞEN DOSYALAR
+main.js
+  f34926cd178724d1656a80963bc3e0cd285e5bd78fdc263007d296b157eb24e0
+  → 27a4ed458374b83eae738808a4ae883a849cbd967e5102be3b8bf31363937192
+ui.js
+  3872bd41b78400112e9fe52da1cd235e01ad7b1d36b333e1d97ff73fb0778c7a
+  → 79e612a1a14945b2a568918145283852656525782154e7f6bd224e36e4285880
+sw.js
+  d7f9bd9cd94fe57ac6c2a34bb1fd2d863e98547235695471536ba4660472ee76
+  → fbb9f5cc2b9c3ade54667a7a85babcbdf2faaaeee5171066fdf84feb263db948
+
+Byte-for-byte korunan üretim dosyaları: index.html, manifest.json, map.js,
+combat.js, ai.js, diplomacy.js, economy.js, audio.js (8/8).
+
+6) KORUNANLAR VE SINIR
+Save v8, depolama anahtarları, Situation karantinası, harita, ekonomi,
+diplomasi, AI, filo ve savaş davranışları korunur. Fiziksel Android testi bu
+fazda istenmedi ve yapılmadı. Yayınlama yapılmadı.
+
+Bu faz tam deserialize transaction'ı değildir. Ön kapıdan geçen bir kayıt
+göç/türetilmiş durum/ekonomi aşamasında hata verirse eksiksiz geri alma henüz
+garanti değildir. Bu borç 90RC.3 kapsamındadır.
+
+7) SONRAKİ FAZ
+90RC.3 — deserialize tam atomiklik ve derin hata enjeksiyonu.
+Önerilen model: Astra — High.

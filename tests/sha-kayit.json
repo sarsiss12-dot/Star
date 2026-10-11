@@ -1,0 +1,56 @@
+{
+  "faz": "86C.6",
+  "kaynak": {
+    "zip": "stars-faz86c-5-1.zip",
+    "sha256": "9053cbbc27587043d3dc4b9d64a74575b84f866fcd068a6680ff85b412b98cf8",
+    "dogrulandi": true
+  },
+  "gercekKayit": {
+    "path": "tests/fixtures/stars-2210-06.sav.json",
+    "sha256": "fe2df0b6adc09bfe0148f36c5c96869ffef86ceeaa4cf7eb609f3997bc2c1245",
+    "dogrulandi": true
+  },
+  "cache": "stars-v86c-6",
+  "buildId": "86c-6",
+  "kayitSurumu": 8,
+  "kapsam": "Anlaşma nesne grafiği, işlem sınırı ve commit sonrası sunum hataları",
+  "dogrulama": {
+    "node": "24.19.0",
+    "nativeCanvas": "@napi-rs/canvas 0.1.100 (Skia)",
+    "paket": 29,
+    "gecen": 3399,
+    "kalan": 0,
+    "yeniTransactionIddia": 529,
+    "hataSenaryosu": 224,
+    "gercekTarayici": "YAPILMADI",
+    "fizikselAndroid": "YAPILMADI — kullanıcının isteğiyle testler biriktiriliyor"
+  },
+  "degisenUretim": [
+    "diplomacy.js",
+    "main.js",
+    "sw.js"
+  ],
+  "birebirKorunan": [
+    "ai.js",
+    "audio.js",
+    "combat.js",
+    "economy.js",
+    "index.html",
+    "manifest.json",
+    "map.js",
+    "ui.js"
+  ],
+  "uretim_sha256": {
+    "ai.js": "156dcb214bcb69f532274b58fccea0b8dc5986497c8b897e3104d47529735350",
+    "audio.js": "804226980179698a6b56d292d88c0c7226d1e54f06001aab63b52d6db5685262",
+    "combat.js": "812ac3e9e7dfd9c994bd0581ac3776ece038e7a10c5d7947cfb4f6ae8a83516b",
+    "diplomacy.js": "cfc4f2ed0f5e56fc25350826594633076829a6a663cafaa079752bdebb4db517",
+    "economy.js": "3daaae63ee7e747d01b56badff0e933309d99274a59ed1f78f436b72afde9936",
+    "index.html": "95852e0fcd09c0351137e1d84519056d6b8615c2615a9b084506dda7a2374568",
+    "main.js": "e90b6f208a8b025c19866a3d750eb0696c67df36a107fc261afef07e6c73abe2",
+    "manifest.json": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
+    "map.js": "d5be2b3821aede53ea89c7ed4c22ed7814bb1750fc81df8735102f61cfa4c5f8",
+    "sw.js": "6c0b83e349e26d23682408412705807ff315f82b1b990c894a92bcecacf67e66",
+    "ui.js": "da622beafb0f4bf9282d43dff490f8a52c0ef3bba18fad27b6785dec4b56f512"
+  }
+}

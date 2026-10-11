@@ -1,0 +1,61 @@
+{
+  "sourceZip": "stars-faz87a.zip",
+  "sourceSha256": "23a72efd872c097bd8e8f369f4692ffce3bd6829b1d9c4b86ba16a4fad680b73",
+  "files": {
+    "main.js": {
+      "source": "fd30afc6cc48a6939c88a574397241da696233149a1ddff4551609f7f98ed205",
+      "output": "ea702898534e7b5e1005722a824173303c404ed960238c5c2e65b4d4317b6738",
+      "unchanged": false
+    },
+    "ui.js": {
+      "source": "ebda7347fde1d276ab65e50c0db81fa19111b9a955930e2e806bc8af04edc582",
+      "output": "ebda7347fde1d276ab65e50c0db81fa19111b9a955930e2e806bc8af04edc582",
+      "unchanged": true
+    },
+    "map.js": {
+      "source": "d5be2b3821aede53ea89c7ed4c22ed7814bb1750fc81df8735102f61cfa4c5f8",
+      "output": "d5be2b3821aede53ea89c7ed4c22ed7814bb1750fc81df8735102f61cfa4c5f8",
+      "unchanged": true
+    },
+    "ai.js": {
+      "source": "c5bfc86d2f31436514ce3812ab27fc0e163cce8d6be1980a37156c49c4ebe0ce",
+      "output": "f499d22da24e16016f5a18ab495218c2f083f6da20de53c909417af055a919e9",
+      "unchanged": false
+    },
+    "diplomacy.js": {
+      "source": "3fca5b6dab82e0e42caa8dcff18ed33f071ceeb3d5b656b2e5357118b6e46427",
+      "output": "3fca5b6dab82e0e42caa8dcff18ed33f071ceeb3d5b656b2e5357118b6e46427",
+      "unchanged": true
+    },
+    "economy.js": {
+      "source": "3daaae63ee7e747d01b56badff0e933309d99274a59ed1f78f436b72afde9936",
+      "output": "3daaae63ee7e747d01b56badff0e933309d99274a59ed1f78f436b72afde9936",
+      "unchanged": true
+    },
+    "combat.js": {
+      "source": "812ac3e9e7dfd9c994bd0581ac3776ece038e7a10c5d7947cfb4f6ae8a83516b",
+      "output": "812ac3e9e7dfd9c994bd0581ac3776ece038e7a10c5d7947cfb4f6ae8a83516b",
+      "unchanged": true
+    },
+    "audio.js": {
+      "source": "804226980179698a6b56d292d88c0c7226d1e54f06001aab63b52d6db5685262",
+      "output": "804226980179698a6b56d292d88c0c7226d1e54f06001aab63b52d6db5685262",
+      "unchanged": true
+    },
+    "index.html": {
+      "source": "f8bb5abd9cbc0dd5a6a949bdaefdb7f1d4a282d22fe5a64c5ebe574773eafc0d",
+      "output": "f8bb5abd9cbc0dd5a6a949bdaefdb7f1d4a282d22fe5a64c5ebe574773eafc0d",
+      "unchanged": true
+    },
+    "manifest.json": {
+      "source": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
+      "output": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
+      "unchanged": true
+    },
+    "sw.js": {
+      "source": "c143d15f46b027bb1368dadabf0b5e390e81c7c42a2e6ae50e2514c99120af57",
+      "output": "a1a380354f5286fb2613899511a68ede7e5b9ba3a81ce582ee99721d3a15b453",
+      "unchanged": false
+    }
+  }
+}

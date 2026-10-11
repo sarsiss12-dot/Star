@@ -1,0 +1,119 @@
+{
+  "kind": "Operation-only laboratory; contact/intel/resources prepared; no daily exploration/economy; special resolved is not success",
+  "runs": [
+    {
+      "seed": 11,
+      "steps": 120,
+      "calls": 388,
+      "executed": 166,
+      "rejected": 222,
+      "types": {
+        "yalan": 16,
+        "sahteKanit": 87,
+        "sorusturma": 28,
+        "tersaneVir": 19,
+        "isyan": 12,
+        "filoPlan": 4
+      },
+      "reasons": {
+        "Çalınacak yeni teknolojisi yok": 41,
+        "Çözülecek iftira dosyası bulunamadı": 181
+      },
+      "special": {
+        "stealTech": {
+          "calls": 0,
+          "resolved": 0,
+          "rejected": 0
+        },
+        "incite": {
+          "calls": 0,
+          "resolved": 0,
+          "rejected": 0
+        }
+      },
+      "selectedInvalid": 222,
+      "quotaViolations": 0,
+      "maxResolvedPerActorStep": 2,
+      "pickRngChanges": 0,
+      "rng": 2089746703,
+      "stateSha256": "fdab1cf5a983c01f29e1bd3ec981e0a1745b3fbca75e7c4167c8cbfb9bd88d9c"
+    },
+    {
+      "seed": 99,
+      "steps": 120,
+      "calls": 356,
+      "executed": 173,
+      "rejected": 183,
+      "types": {
+        "yalan": 18,
+        "sahteKanit": 91,
+        "sorusturma": 27,
+        "tersaneVir": 17,
+        "isyan": 16,
+        "suikast": 2,
+        "filoPlan": 2
+      },
+      "reasons": {
+        "Çalınacak yeni teknolojisi yok": 32,
+        "Çözülecek iftira dosyası bulunamadı": 150,
+        "Örgütlü bir siyasi yapısı yok": 1
+      },
+      "special": {
+        "stealTech": {
+          "calls": 0,
+          "resolved": 0,
+          "rejected": 0
+        },
+        "incite": {
+          "calls": 0,
+          "resolved": 0,
+          "rejected": 0
+        }
+      },
+      "selectedInvalid": 183,
+      "quotaViolations": 0,
+      "maxResolvedPerActorStep": 2,
+      "pickRngChanges": 0,
+      "rng": -1765208426,
+      "stateSha256": "5d91faee7179134ac27a770cafe773f7b6a52eeaf881b97c6c8a83e37d152071"
+    },
+    {
+      "seed": 404,
+      "steps": 120,
+      "calls": 323,
+      "executed": 153,
+      "rejected": 170,
+      "types": {
+        "yalan": 12,
+        "sahteKanit": 87,
+        "sorusturma": 27,
+        "tersaneVir": 13,
+        "filoPlan": 3,
+        "isyan": 9,
+        "suikast": 2
+      },
+      "reasons": {
+        "Çözülecek iftira dosyası bulunamadı": 146,
+        "Çalınacak yeni teknolojisi yok": 24
+      },
+      "special": {
+        "stealTech": {
+          "calls": 0,
+          "resolved": 0,
+          "rejected": 0
+        },
+        "incite": {
+          "calls": 0,
+          "resolved": 0,
+          "rejected": 0
+        }
+      },
+      "selectedInvalid": 170,
+      "quotaViolations": 0,
+      "maxResolvedPerActorStep": 2,
+      "pickRngChanges": 0,
+      "rng": -2013396609,
+      "stateSha256": "97a19b1aaf10e303b836603627014a09f2b0c90a75b4426b741655ed06592d45"
+    }
+  ]
+}

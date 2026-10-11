@@ -1,0 +1,143 @@
+[
+  {
+    "seed": 11,
+    "months": 120,
+    "steps": 7200,
+    "surveys": 229,
+    "arrivals": 1300,
+    "battles": 41,
+    "negotiations": 49,
+    "ops": 17,
+    "first": {
+      "reportCount": {
+        "day": 3044.5,
+        "sys": 30,
+        "last": {
+          "ships": [
+            19,
+            1
+          ],
+          "ready": [
+            19,
+            2
+          ],
+          "dealt": [
+            355.1424149504491,
+            56.17575963397715
+          ],
+          "supply": [
+            1,
+            1
+          ]
+        }
+      }
+    },
+    "stopped": null,
+    "initialContacts": 0,
+    "contacts": 12,
+    "elapsedDays": 3600,
+    "calendarMonths": 120,
+    "fleets": 54,
+    "alive": 7,
+    "situations": 0,
+    "rng": -376232902,
+    "ms": 3877
+  },
+  {
+    "seed": 99,
+    "months": 120,
+    "steps": 7200,
+    "surveys": 193,
+    "arrivals": 1097,
+    "battles": 32,
+    "negotiations": 25,
+    "ops": 8,
+    "first": {
+      "reportCount": {
+        "day": 3464.5,
+        "sys": 42,
+        "last": {
+          "ships": [
+            2,
+            18
+          ],
+          "ready": [
+            3,
+            16
+          ],
+          "dealt": [
+            55.14616754019787,
+            144.41401674051104
+          ],
+          "supply": [
+            1,
+            0.6999999999999998
+          ]
+        }
+      }
+    },
+    "stopped": null,
+    "initialContacts": 0,
+    "contacts": 21,
+    "elapsedDays": 3600,
+    "calendarMonths": 120,
+    "fleets": 67,
+    "alive": 8,
+    "situations": 0,
+    "rng": -892007893,
+    "ms": 4438
+  },
+  {
+    "seed": 404,
+    "months": 119,
+    "steps": 7140,
+    "surveys": 211,
+    "arrivals": 820,
+    "battles": 85,
+    "negotiations": 31,
+    "ops": 19,
+    "first": {
+      "reportCount": {
+        "day": 2329,
+        "sys": 51,
+        "last": {
+          "ships": [
+            16,
+            4
+          ],
+          "ready": [
+            12,
+            12
+          ],
+          "dealt": [
+            517.6128987212661,
+            229.38617966538575
+          ],
+          "supply": [
+            1,
+            1
+          ]
+        }
+      },
+      "stock": {
+        "day": 3300,
+        "emp": 9,
+        "key": "yiy",
+        "value": -3.4571041426054805
+      }
+    },
+    "stopped": {
+      "win": false,
+      "txt": "Son kolonin de düştü. Hanedanın sona erdi."
+    },
+    "initialContacts": 0,
+    "contacts": 26,
+    "elapsedDays": 3570,
+    "calendarMonths": 119,
+    "fleets": 49,
+    "alive": 8,
+    "situations": 0,
+    "rng": 374666236,
+    "ms": 4536
+  }
+]

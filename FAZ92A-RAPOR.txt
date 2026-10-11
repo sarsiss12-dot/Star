@@ -1,0 +1,87 @@
+STARS FAZ 92A — ORTAK SAVAŞ KATILIMI VE KATKI KAYDI
+
+1. KAYNAK
+stars-faz91e-1.zip
+SHA-256: 458c40d3cac65f3b950d44ae9a81b1de77b654ded8a3957ef246641aa886b4f2
+Doğrulanmış kaynak ZIP ayrı stars-faz92a çalışma dizinine açıldı.
+Çıktı build: 92a. SW cache: stars-v92a; yalnız cache adı değişti.
+
+2. EKLENEN DAVRANIŞ
+Her iki devlet arasındaki savaş dönemi ayrı cephe olarak kaydedilir.
+Açık federasyon savunması, senyör/vasal yardımı ve warOn sözü, varsa
+sponsorun gerçek aktif cephesine bağlanır. Aynı düşmana bağımsız savaş
+ortak sefer sayılmaz. Taraf geçmişi sonradan ittifak kurarak değişmez.
+Barış, vekil savaşın sona ermesi, statüko ve devlet ölümü kapanışa
+yansır. Yeniden savaş yeni dönemdir. Günlük/aylık uzlaştırma doğrudan
+savaş bayrağı yazan eski yolları kısmi kayıt olarak gözlemler.
+
+Gerçek muharebe: gemi kaybı/imha, uygulanmış gövde hasarı, tur sayısı.
+Gerçek çıkarma: kaybedilen ham taarruz dayanımı, kırılan garnizon.
+Başarılı işgalden sonra dağılan taarruz ordusu kayıp sayılmaz.
+Gerçek fetih: sistem ve koloni ayrı, önceki/yeni sahip ve gün.
+Ele geçirilen farklı varlık sayısı tekrarlı geri almayla artmaz;
+devir geçmişi korunur. Anlaşmayla devir fetih olarak yazılmaz.
+Fetih hedefleri, federasyon/senyör katılım geçmişi saklanır.
+
+3. ARAYÜZ
+Diplomasi devlet ilişkisi panelinde Savaş katkı kaydı açılır bölümü.
+Yalnız oyuncunun kendi cephesinin istatistikleri gösterilir. Seferdeki
+tanınan destekçilerin adları görünür; yabancı cephe ayrıntıları veya
+keşfedilmemiş yerler ifşa edilmez. Ele geçirme sayısının mevcut
+mülkiyet ve kesin paylaşım hakkı olmadığı açıkça yazılır.
+
+4. KAYIT / GERİ ALMA
+Kayıt v8 korundu; warLedger isteğe bağlı yeni alan. Eski kayıtta aktif
+savaşlar o andan başlayan kısmi ölçüm alır; geçmiş katkı uydurulmaz.
+Yeni oyun sıfırlar. Yükleme gün/ay ilerletmez, RNG tüketmez.
+Geçersiz defter yüklemesi reddedilir ve eski dünya geri gelir.
+DEAL_TX_ROOTS kapsamına warLedger eklendi: başarısız savaş sözü/barış
+işlemi defteri, sayacı, kapanışı ve nesne kimliklerini geri alır.
+
+5. DOĞRULAMA — GERÇEK ÇALIŞMALAR
+İlk hedefli çalışma 29/0; çıkarma/statüko/yeni oyun senaryolarıyla 33/0.
+Tam regresyon: 57 paket, 4134 geçen, 0 kalan, 0 atlanan.
+Son kaynak incelemesinde geçersiz next=0 kaydını reddeden bir yükleme
+guard'ı ve regresyonu eklendi. Ardından hedefli paket tekrar çalıştı:
+34 geçen, 0 kalan. Bu son dar düzeltme sonrasında diğer 56 paket
+yeniden çalıştırılmadı. Birleşik kanıt: 57 paket, 4135 geçen, 0 kalan.
+tests/results-92a-full.json tam çalışmayı; results-92a-targeted.log
+son hedefli çalışmayı; results-92a.json birleşik kanıtı saklar.
+
+Yeni test gerçek declareWar, fedDefend, overlordDefend, executeDeal,
+makePeace, statusQuoPeace, combatTick, invasionTick, captureSystem,
+serialize/deserialize ve UI yollarını kullanır. Salt helper çağrısı
+ile sonuç çıkarılmadı. Üretim katsayıları bu fazda değiştirilmedi.
+Önceki testlerde yalnız sürüm/cache literal beklentileri güncellendi;
+hiçbir test silinmedi veya davranış beklentisi gevşetilmedi.
+
+Native Canvas testleri tam regresyonda çalıştı. Bu fazda tarayıcı,
+fiziksel Android veya yeni görüntü incelemesi yapılmadı. ZIP açıldıktan
+sonra manifest bütünlüğü ayrıca doğrulanır; bu, oyun testlerinin ZIP
+üzerinden yeniden çalıştırıldığı anlamına gelmez.
+
+6. DOSYALAR
+Değişen üretim: diplomacy.js, main.js, combat.js, economy.js, ui.js.
+sw.js yalnız cache kimliği. Yeni hedefli test, kapsam belgesi ve
+rapor; plan/devir/test birikimi güncellemeleri.
+Kaynakla byte-for-byte aynı: map.js, ai.js, audio.js, index.html,
+manifest.json. Harita kurtarma/girdi ve AI karar katsayılarına dokunulmadı.
+Situation karantinası korundu; yayın/deploy yapılmadı.
+
+7. SINIRLAR
+TOPRAK PAYLAŞIMI HENÜZ UYGULANMIYOR. Katkı ağırlığı, hak yüzdesi,
+paylaşım teklifi, müttefik onayı ve gerçek devir 92B–92C kapsamı.
+Eski doğrudan ayaklanma yollarında sefer sponsoru/başlangıcı tahmin
+edilmez. İkmal yıpranması, idari filo dağıtma, bombardıman nüfus/yapı/
+kalkan kaybı ve korsan/kriz savaşları katkı metriğinde yoktur.
+Uzun kampanya arşiv büyüklüğü ve transaction maliyeti ölçülmedi;
+geçmiş bu fazda otomatik silinmez. Aynı seferin farklı cephelerindeki
+varlıkların tekilleştirilmesi, güncel sahip ve üçüncü taraf kontrolü
+paylaşım taslağında zorunludur. Ayrıntı SAVAS-KATKI-KAYDI.md.
+
+8. SIRA
+92B — gerekçeli paylaşım teklifi: Astra / High.
+92C — onaylanan paylaşımın tersinir uygulanması: Astra / High.
+91F — etkin civic metin/etki denetimi: Sol / High.
+87T sabit cihaz adayı 91C değişmedi. Kullanıcı testlere ara verdiği
+için cihaz testi istenmedi; yeni senaryolar birikim listesine eklendi.

@@ -1,0 +1,120 @@
+✗ 0: kapalı hedef askeri filoya geçiş vermez — Expected values to be strictly equal:
+
+true !== false
+
+✗ 0: ulaşılamayan yeni hedef eski rotayı korur — Expected values to be strictly equal:
+
+false !== true
+
+✓ 0: kapalı ara sistem yerine izinli yol
+✗ 0: iki kapı arasındaki sanal yol gerçekten biter — Expected values to be strictly equal:
+
+0 !== 4
+
+✗ 0: izin hareket başlamadan geri çekilirse sınır aşılmaz — Expected values to be strictly equal:
+
+1 !== 0
+
+✗ 1: kapalı hedef askeri filoya geçiş vermez — Expected values to be strictly equal:
+
+true !== false
+
+✗ 1: ulaşılamayan yeni hedef eski rotayı korur — Expected values to be strictly equal:
+
+false !== true
+
+✓ 1: kapalı ara sistem yerine izinli yol
+✗ 1: iki kapı arasındaki sanal yol gerçekten biter — Expected values to be strictly equal:
+
+0 !== 4
+
+✗ 1: izin hareket başlamadan geri çekilirse sınır aşılmaz — Expected values to be strictly equal:
+
+1 !== 0
+
+✓ reddedilen ek durak mevcut güzergâhı bozmaz
+✗ hareket sırasında yeni rota ilk yeni durağı atlamaz — Expected values to be strictly equal:
+
+'[3]' !== '[2,3]'
+
+✓ ek duraklar gerçek varış sırasını korur
+✗ geçersiz hedef false döner ve filoyu değiştirmez — Expected values to be strictly equal:
+
+true !== false
+
+✓ sivil gemi kapalı sınırdan geçmeye devam eder
+✓ savaş hedefi ve geri çekilme koridoru açık kalır
+✗ kapı izni sahibin yolcuya verdiği yönde okunur — Expected values to be strictly equal:
+
+false !== true
+
+✗ yolcunun karşı tarafa verdiği izin onun kapısını açmaz — Expected values to be strictly equal:
+
+true !== false
+
+✗ kapılar kapalı ayarı lojistik kapı listesini de kapatır — Expected values to be strictly equal:
+
+true !== false
+
+✗ aynı gün iptal edilen izin kapı önbelleğinde kalmaz — Expected values to be strictly equal:
+
+true !== false
+
+✗ savaşta kalan eski geçiş alanı ikmal sağlamaz — Expected values to be strictly equal:
+
+true !== false
+
+✗ kapı inşa edilince eski yapı indeksi yolu saklamaz — Expected values to be strictly equal:
+
+false !== true
+
+✗ kapı kapanırsa komşu olmayan düğüme ışınlanılmaz — Expected values to be strictly equal:
+
+1 !== 0
+
+✗ alternatif yol kapı bağlantılarını korur — Expected values to be strictly equal:
+
+false !== true
+
+✗ hareketli ana filoyu takipte ilk yeni sıçrama tüketilmez — Expected values to be strictly equal:
+
+'[]' !== '[2]'
+
+✗ başka devletin filosuyla birleşme yok — Expected values to be strictly equal:
+
+2 !== 1
+
+✗ ana filo çatışmadayken ikmal hedefini unutmaz — Expected values to be strictly equal:
+
+false !== true
+
+✓ yıkılmış ana filo takibi açık iş bırakmaz
+✗ v8 hareket ortası yükleme rota sırasını korur — Expected values to be strictly equal:
+
+'[3]' !== '[2,3]'
+
+✗ alternatif aramada radyasyon cezası değişmez — Expected values to be strictly equal:
+
+'[1,2]' !== '[3,2]'
+
+✗ izin kalkınca kapalı durağa dolambaçlı yol da giremez — Expected values to be strictly equal:
+
+1 !== 0
+
+✓ planlanmış bağlantı silinirse aynı durağa izinli alternatif bulunur
+✗ başlamış bacak iptal edilmez; sonraki kapalı sınır durdurur — Expected values to be strictly equal:
+
+2 !== 1
+
+✓ saf yol araması oyun verisi ve RNG değiştirmez
+✗ ikmal ana filonun hareket halindeki varışını izler — Expected values to be strictly equal:
+
+undefined !== 2
+
+✗ tek yeni bacakta konum koordinatları varışla eşleşir — Expected values to be strictly equal:
+
+0 !== 100
+
+✓ gerçek AI lojistik tikinde yıpranmış filo ikmale döner
+✓ bilim gemisi ikmal tabanında durur; koloni gemisi muaf kalır
+GEÇEN: 11 KALAN: 27

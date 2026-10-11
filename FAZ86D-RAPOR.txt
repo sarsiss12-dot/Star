@@ -1,0 +1,98 @@
+GELİŞTİRİCİ RAPORU — STARS FAZ 86D
+ELÇİ GÖREVLERİ · KIDEM · SAVAŞTA DURAKLAMA
+
+1) KAYNAK
+stars-faz86c-6.zip
+Beklenen/Hesaplanan:
+fc387d00d9f94bd4724ad46095c15783d8059a6a7a6a4606201a30608258b9ce
+Gerçek kayıt: tests/fixtures/stars-2210-06.sav.json
+fe2df0b6adc09bfe0148f36c5c96869ffef86ceeaa4cf7eb609f3997bc2c1245
+Çıktı: stars-faz86d.zip. Çıktı SHA'sı teslim mesajındadır.
+Build 86d · SW cache stars-v86d (cache satırı dışında SW aynı).
+
+2) EKLENEN DAVRANIŞ
+Üç görev: Yakınlaşma / Ticari heyet / Güvenlik teması.
+Atama kapasite kullanır, Etki harcamaz. Aynı görevi tekrar seçmek kıdemi
+korur; görev değiştirmek ve geri çekmek kıdemi sıfırlar. 12 aktif ayda
+Kıdemli, 36 aktif ayda Uzman. O ay birden çok tick/menü/quote çağrısı
+kıdemi artırmaz. Eski boolean true kaydı Yakınlaşma/kıdem 0'a göç eder.
+Kaydı yüklemek RNG/ilişki/ay ilerletmez; v8 korunur.
+
+Yeni ilişki tabanları: 2.2 / 0.9 / 0.8. Kıdem tabanı ×1.1 / ×1.2 yapar.
+Eski diplomasi/doygunluk ve %60 karşılık oranı korunur. Yakınlaşma ilk
+kademe eski ilişki tabanıyla aynıdır. Ayrıntı: ELCI-GOREVLERI.md.
+
+3) DOĞRULANAN SAVAŞ SIZINTISI — AYNI ÜRETİM PROBU
+86C.6: savaşta ilişki +0, fakat spyTick içinde elçi hâlâ +0.35 veriyordu.
+86D: ilişki/kıdem/elçi gözlemi/elçi anlaşma faktörü ortak kapıda durur.
+Sensör/civic etkisi olmayan, casusları kapalı aynı kayıt fixture'ında:
+  Önce toplam istihbarat ilerlemesi: 0.63 (temas .28 + elçi .35)
+  Sonra toplam istihbarat ilerlemesi: 0.28 (mevcut temas katkısı)
+Elçinin yeri ve kıdemi savaşta korunur; barışta devam eder.
+Geçmiş duraklama ayları topluca verilmez. Ayrı casus/temas kanalları korunur.
+Probu yeniden çalıştırma: node tests/envoy-probe.js /path/to/source
+Ölçümler: tests/envoy-once.json / envoy-sonra.json.
+
+4) AI BAĞLANTISI
+Gerçek evalOffer → dealFactors yolunda görev ve kıdem etkin.
+Yakınlaşma uygun faydaya %2/%3/%4; uzman Ticaret/Güvenlik kendi kapsamına
+%4/%7/%10 verir. İki elçi aynı faydaya toplanmaz. Olumlu madde değerleriyle
+ağırlıklandırılır; tiny-item bonus yayılması yok. Örnek: 1 kaynak + 999
+ittifak, uzman Ticaret ile 1.0001 çarpan alır. Negatif/net sıfır fayda ve
+redundant maddeler katkı almaz. Toplam elçi faktörü en fazla 1.10.
+Geçerlilik/Etki/hardLock kapıları aşılmaz; kabul garantisi yoktur.
+AI görev seçiminde ek RNG tüketmez; eski atama şansını korur, geçerli
+hedefe oyuncuyla aynı setEnvoyTask yolunu kullanır. Mevcut görevi her ay
+değiştirip kıdemi silmez.
+Bu katsayılar yeni tasarım seçimleridir; genel denge çalışması 86F'dedir.
+
+5) UI
+Elçi düğmesi görev seçimini açar; menüyü açmak atama yapmaz.
+Üç görev, kıdem, durum ve uygun fayda desteği görünür. Savaşta açıkça
+Duraklatıldı yazar. Geri çekme ayrı eylemdir; geri çekilince yanlışlıkla
+“gönderildi” bildirimi verilmez. Sistem paneli, diplomasi kartı ve liste
+akordeonu aynı görev yolu ve durum özetine bağlı. Kapanış elçi menüsünden
+önceki hızı, duraklatılmış 0 dahil, geri verir.
+
+6) DEĞİŞEN / KORUNAN ÜRETİM DOSYALARI
+Değişen: diplomacy.js (görev/göç/faktör/gözlem), ai.js (görev seçimi),
+main.js (yüklemede göç + build), ui.js (görev UI), sw.js (cache adı).
+Byte-for-byte aynı: map.js, economy.js, combat.js, audio.js, index.html,
+manifest.json — 6/6. Tam hash karşılaştırmaları: tests/sha-86d.json.
+Transaction motorunun yakalama/geri alma/commit kodu değiştirilmedi;
+elçi kayıtları mevcut emps grafiği içinde korunur.
+
+7) DOĞRULAMA
+30 paket · 3457 geçen kontrol/senaryo · 0 kalan.
+Eski 29 paket: 3399. Yeni elçi paketi: 58 senaryo (her senaryoda birden
+fazla assert bulunabilir; bu nedenle 58 ham assert sayısı değildir).
+Yeni kapsam: gerçek v8 göç/roundtrip, bozuk kayıt alanları, kapasite,
+kendine/ölü/korsan/kriz/temassız/doktrin/savaş kapıları, 12/36 aktif ay,
+aynı ay tekrar çağrı, gerçek monthTick ve spyTick, ağırlıklı AI bonusu,
+mutasyonsuz faktör, gerçek UI atama/değişim/geri çekme, AI planlayıcısı ve
+elçi alias/kıdem içeren gerçek executeDeal rollback.
+
+Tüm test komutu: node tests/run-all.js
+Ayrıntılı toplam: tests/results-86d.json.
+Eski build/cache beklentileri güncellendi. AI bu fazda değiştiğinden,
+eski AI byte-for-byte iddiaları değişmeyen index.html'in kaynak SHA
+karşılaştırmasına taşındı. Elçisiz faktör iddiası aynı nötr davranışı
+sınar; “86D'ye kadar nötr” etiketi düzeltildi. Davranış iddiaları
+silinmedi, toleranslar gevşetilmedi.
+
+8) SINIRLAR / KORUNANLAR
+Node + sahte DOM: yeni görev/AI/kayıt/UI eylemleri sınandı.
+Gerçek Skia Canvas pikselleri: mevcut harita/menü/portre regresyonları geçti.
+Gerçek tarayıcı CSS yerleşimi ve fiziksel Android bu fazda sınanmadı.
+Kullanıcının talebiyle cihaz testleri biriktiriliyor; geliştirme beklemiyor.
+Cihaz maddeleri: CIHAZ-TEST-BIRIKIMI.md.
+
+Kayıt v8, depolama anahtarları, bağımsız Radar/Lojistik, Situation
+karantinası ve 86C.5.1 menü/portre ile 86C.6 transaction kazanımları korundu.
+Harita kurtarma koduna yeni müdahale yapılmadı. Beyaz ekranın bütün cihaz
+koşullarında kapandığına dair yeni iddia yoktur.
+
+9) SONRAKİ FAZ
+86E — Diplomasi komuta merkezi. Model/düşünme önerisi: Sol — High.
+86F — AI teklif/ilişki dengesi. 86G — Bütünleşik kontrol ve devir paketi.
+Güncel devam brief'i ve faz ölçütleri: FAZ-PLANI.md.

@@ -1,0 +1,100 @@
+✗ 0: iki filonun aynı tersanedeki siparişleri karışmaz — Expected values to be strictly equal:
+
+1 !== 2
+
+✗ 1: iki filonun aynı tersanedeki siparişleri karışmaz — Expected values to be strictly equal:
+
+1 !== 2
+
+✗ tamamlama genel toplanma noktasını değiştirmez — Expected values to be strictly equal:
+
+2 !== 5
+
+✗ aynı eksik için tekrar düğmesi ikinci bedeli kesmez — Expected values to be strictly equal:
+
+true !== false
+
+✗ yoldaki ikmal de beklenen gemi sayısına dahildir — Expected values to be strictly equal:
+
+true !== false
+
+✗ başarısız sevk gemiyi tersanede bırakır, sevk ilan etmez — Expected values to be strictly equal:
+
+false !== true
+
+✗ üretimde hareketli hedefin güncel varışı seçilir — Expected values to be strictly equal:
+
+2 !== 3
+
+✗ yok olmuş filo siparişi eski konuma yollanmaz — Expected values to be strictly equal:
+
+2 !== 0
+
+✗ genel rally yabancı filo id içerirse yabancıya gemi verilmez — Expected values to be strictly equal:
+
+2 !== 1
+
+✗ yabancı filoya ikmal siparişi kaynak harcamadan reddedilir — Expected values to be strictly equal:
+
+true !== false
+
+✗ sabotajlı ilk tersane diğer geçerli tersaneyi engellemez — Expected values to be strictly equal:
+
+false !== true
+
+✗ ulaşılamayan tersane sipariş ve bedel yaratmaz — Expected values to be strictly equal:
+
+true !== false
+
+✗ v8 iki ayrı sipariş hedefini yükleme sonrası korur — Expected values to be strictly equal:
+
+1 !== 2
+
+✓ eski hedefsiz kuyruk mevcut genel rally ile çalışır
+✓ sivil üretim askeri rally tarafından yutulmaz
+✗ yabancı tersanenin rally ayarı değiştirilemez — Expected values to be strictly equal:
+
+true !== false
+
+✗ geçersiz rally hedefi eski tercihi silmez — Expected values to be strictly equal:
+
+true !== false
+
+✗ vasal kapı izni gerçek kapı kenarından geçişe yeter — Expected values to be strictly equal:
+
+false !== true
+
+✓ vasal kapı hakkı kapısız sıradan sınıra izin yaratmaz
+✗ oyuncu otomatik keşfi ulaşılamayan en yakın hedefe takılmaz — Expected values to be strictly equal:
+
+undefined !== 2
+
+✗ AI keşfi ulaşılamayan en yakın hedef yerine geçerli hedefi seçer — Expected values to be strictly equal:
+
+undefined !== 2
+
+✗ gerçek AI üretim kapısı bir gemiyi eksik filoya ayırır — Expected values to be strictly equal:
+
+0 !== 1
+
+✗ AI hedef bulamazsa mevcut yerel üretim devam eder — aiQueueMilitaryShip is not defined
+✗ AI dolu veya yoldaki ikmalle tamamlanmış filoya ikinci sipariş vermez — aiQueueMilitaryShip is not defined
+✗ üretim sonrası sınır kapanırsa gemi ve kaynak sonucu tutarlı kalır — Expected values to be strictly equal:
+
+false !== true
+
+✗ tersanede çatışan ana filoya anında gemi eklenmez — Expected values to be strictly equal:
+
+2 !== 1
+
+✓ başarılı sevk gerçek bedeli bir kez keser ve RNG tüketmez
+✗ 0: kendi sistemindeki taranmamış hedefte tarama başlar — Expected values to be strictly equal:
+
+false !== true
+
+✗ 1: kendi sistemindeki taranmamış hedefte tarama başlar — Expected values to be strictly equal:
+
+false !== true
+
+✓ AI sürmekte olan taramayı başa sarmaz
+GEÇEN: 5 KALAN: 25

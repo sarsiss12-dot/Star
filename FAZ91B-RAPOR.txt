@@ -1,0 +1,124 @@
+GELİŞTİRİCİ RAPORU — STARS FAZ 91B
+BÜTÜNLEŞİK GÜNLÜK AI ÖLÇÜMÜ + FRAKSİYON PAYI DÜZELTMESİ
+
+1) KAYNAK / ÇIKTI
+Kaynak: stars-faz91a.zip
+SHA-256: 298da93e0ecc8353b13ddb3f3ac57e5c47400938a8c36de84ecc30d8898bba44
+Kaynak arşiv ve 213 dosyalık manifest doğrulandı.
+Çıktı: stars-faz91b.zip; oyun build 91b; cache stars-v91b.
+
+2) GERÇEK ÖLÇÜMÜN KAPSAMI
+Node + sahte DOM içinde gerçek üretim mekanikleri: yarım günlük dailyTick,
+structTick, colonyBuildTick, autoExploreTick; 30 günde bir monthTick.
+60/100 sistem × seed 11/99/404; hedef koşu başına 240 ay. Normal yenilgi
+zorla kapatılmadı; iki koşu 144 ve 119 ayda bitti. Toplam 1.223 oyun ayı.
+Oyuncu emir/karar vermiyor. Normal zorluk, sarmal, insan/standart oyuncu;
+başlangıç teması 0, temas fixture'ı yok; Konsey/kriz kapalı, Situation pasif.
+AI doktrinleri doğal kurulumdan geliyor ve JSON sonuçta kaydediliyor.
+
+Ölçüm üretim fonksiyonunu kendi this/argümanlarıyla bir kez çağırır.
+Ek quote/supply/RNG çağrısı yapmaz; maliyetleri gerçek sonuçtan okur.
+Kaydı/RNG'yi değiştirmediği 120 ay hedefli aynı koşunun ölçüm açık/kapalı
+karşılaştırmasında sınandı; tekrar koşusu karar/sayaç/kayıt bakımından eş.
+Bu bir tarayıcı/Android çizim testi değildir.
+
+3) YAKALANAN HATA — ÖNCE / SONRA
+Kaynak, büyük/11: gün 4410, devlet 4, paylar [57,22,21]. facCoup sonrası
+[67,22,21] → toplam 110. Ulu/99: gün 3570, devlet 9, aynı hata.
+facCoup +10 güç ağırlığından sonra yüzde dağılımını normalize etmiyordu.
+Kısa ayrı tekrar: facTick bağımsız Math.round ile toplamı 99 bırakıyordu.
+Art arda darbeler kısa testte toplamı 200'e kadar çıkardı.
+
+Düzeltme: normalizeFactionShares, tam sayılı yüzde dağılımını en büyük
+küsurat yöntemiyle 100'e tamamlar. Eşitlikte mevcut sıra kullanılır; RNG
+yoktur, dizi/nesne kimlikleri değişmez. Aylık güç kaymasından ve darbeden
+sonra, recalcMods öncesinde çalışır. Mevcut darbe +10 ağırlığı/tavanı,
+ideoloji/moral etkileri korunur; toplam üzerinden oranlanır.
+Eski kaydı yüklemek zamanı ilerletmez; eski yanlış toplam bir sonraki
+gerçek facTick'te düzelir. Kayıt v8 korunur.
+
+8 kısa senaryo: kaynak 1 geçen / 7 kalan → çıktı 8 geçen / 0 kalan.
+7 ayrı kök neden değildir; iki bozuk güncelleme yolunun örnekleridir.
+Kampanya ihlali: kaynak 2/6 koşu → çıktı 0/6 koşu.
+
+4) AYNI KURULUMLARDA ÇIKTI ÖLÇÜMÜ
+Boyut seed  ay   çağrı  gerçek karar  uygulama  karşı tur  op  filo birleşimi
+60      11  240    193       111         79       32      92       176
+60      99  144     61        29         27        2      22        66
+60     404  119     31        25         25        0      23        93
+100     11  240    192        77         76        4      65       272
+100     99  240    210       119        103       22     133       252
+100    404  240    335       161        151       14     182       291
+
+Bu tablodaki davranış sayaçları kaynak ve çıktıda aynı kaldı; bütün oyun
+dünyası byte-for-byte aynı iddiası YOK (fraksiyon payları değişti).
+Ay sonunda negatif/sonlu olmayan stok, filo referansı/konum ihlali,
+savaş raporu oran ihlali veya üretim istisnası görülmedi. Situation 0.
+Bunlar denetlenen sınırlar; her ara mutasyonun veya oyunun tamamının kanıtı değil.
+
+5) KARARLARIN DÜRÜST AYRIMI
+Diplomasi: toplam 1.022 çağrı. 500'ü wild hedef nedeniyle kapıda
+kararsız dönüyor; bunları alıcı reddi saymıyoruz. 522 gerçek karar:
+443 doğrudan kabul, 5 doğrudan ret, 56 karşı-ret, 18 karşı-kabul.
+461 anlaşma uygulandı; 74 karşı tur, en çok 2 tur.
+Kaynak/çıktı gerçek karar kabulü 461/522, yaklaşık %88,3. Bu stratejik
+denge veya oyuncu deneyimi başarı oranı değildir.
+
+Casusluk: 1.963 aday sorgusu, 1.446 seçim yok; bu tek başına hata değildir.
+517 gerçek operasyon, giriş kapısı reddi 0. 489 standart operasyon için
+resolved-standard sayılır; yakalanma etkiyi otomatik iptal etmediğinden
+"yakalandı = başarısız" denmez. 28 özel deneme: 17 başarı, 4 ifşa,
+7 sonuçsuz. Bedeller gerçek quote/sonuç nesnesinden kaydedildi.
+
+Takviye: 1.545 üretim kararı kuyruğa girdi; 1.325'i filo hedefliydi;
+1.150 geminin ana filoya gerçekten birleşmesi nesne üzerinden ölçüldü.
+Aradaki fark tek başına kayıp değildir: bekleyen üretim, yoldaki/çatışan
+filo, ölen hedef, kapalı rota gibi son durumlar ayrıdır. Metin histogramı
+JSON'da durur. Waypoint append çağrısı 0; doğal AI bunun kabul kanıtı değil.
+88A'nın oyuncu/rota hedefli testi korundu.
+
+İkmal: 52.723 AI filo-ay gözlemi; 3.687 eksik, 912 kritik ikmal.
+432 geri çekilme emri gerçekten rota kurdu; ret 0. Yıpranmada 50 gemi
+kaybedildi. Bu kayıp kuralın işlemesidir, otomatik bug/denge hatası sayılmaz.
+Çalışma süreleri eşzamanlı işler altındaki Node duvar saatidir; cihaz
+performansı veya kontrollü hız kıyası olarak sunulmaz.
+
+6) SONRAKİ SOMUT İŞ
+500/1.022 çağrının (%48,9) wild kapısında boşa düşmesi 91C'nin konusu.
+aiTurn pakt/ittifak aday döngüleri wild hedefi erken elemezken,
+aiNegotiate aynı hedefi kesin dışlıyor. Fırsat seçildikten sonra döngü
+break ediyor. Sonraki fazda aday filtresi ele alınacak; oyuncunun onay
+yolu, kanonik kapı, maliyet ve oranlar korunacak. Bu açık konu bu fazda
+kapatıldı diye raporlanmaz. Model/düşünme: Astra / High.
+
+7) REGRESYON VE DOSYALAR
+50 paket / 3.942 geçen / 0 kalan / 0 atlanan.
+3.929 eski + 8 pay senaryosu + 5 ölçüm doğrulama senaryosu.
+Tam sonuç: tests/results-91b.json. Kampanya ayrıntısı:
+tests/measure-91b-before.json ve tests/measure-91b-after.json.
+Koşum: node tests/measure-91b.js CIKTI.json 240
+Farklı kaynak için STARS_TEST_ROOT verilebilir; yollar teste sabitlenmedi.
+Kaynak koşunun çıkış kodu 1 olması yakalanan iki ihlal nedeniyle beklenir.
+
+Değişen üretim:
+diplomacy.js 180b868a77aec374 → a431efcc1e77f40c (pay normalizasyonu)
+main.js 3e46c6ae57e7252b → a787c8bf168fa22c (yalnız build adı)
+sw.js 5979de3a87f9f298 → 505e0b720f8a95e6 (yalnız cache adı)
+Korunan 8: map.js, ai.js, economy.js, combat.js, audio.js, ui.js,
+index.html, manifest.json. Install/activate/fetch değişmedi.
+25 eski testte yalnız güncel build/cache beklentisi 91a→91b yapıldı;
+test veya davranış beklentisi kaldırılmadı. Yeni iki test paketi, iki ölçüm
+yardımcısı, ham sonuçlar ve plan/devir belgeleri eklendi/güncellendi.
+
+8) TEST HEDEFİ / VERİMLİLİK
+91C sonunda bir cihaz adayı dondurulacak. Kullanıcı hazır olduğunda tek
+paketle yaklaşık 20 dakika: 5 dakika güncelleme/offline; 8 dakika harita,
+menü/portre; 7 dakika kayıt ve normal akış. Şimdi cihaz testi istenmiyor.
+91D geri bildirim/civic metinleri bundan sonraki dar kapsamdır.
+
+Bu faz somut hata ailesini kapattı ve sonraki işi veriden seçti.
+Fiziksel kabul henüz yapılmadı; genel bugsızlık/bitmişlik yüzdesi veya
+ölçülmemiş token/saat verimliliği iddia edilmiyor. Eski yaklaşık %80
+stabilizasyon tahmini öznel olup bu test toplamından türetilmez.
+Android, gerçek Chrome yaşam döngüsü ve oyunculu denge açık kalır.
+Yayın yapılmadı.

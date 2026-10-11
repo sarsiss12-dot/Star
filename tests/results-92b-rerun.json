@@ -1,0 +1,38 @@
+[
+  {
+    "name": "faz86c_4h_r4_diagnosis_test.js",
+    "exit": 0,
+    "pass": 85,
+    "fail": 0
+  },
+  {
+    "name": "faz86c_4h_r4_targeted_diag_test.js",
+    "exit": 0,
+    "pass": 87,
+    "fail": 0
+  },
+  {
+    "name": "faz90rc_release_candidate_test.js",
+    "exit": 0,
+    "pass": 15,
+    "fail": 0
+  },
+  {
+    "name": "faz92b_settlement_proposal_test.js",
+    "exit": 0,
+    "pass": 33,
+    "fail": 0
+  },
+  {
+    "name": "faz85b_load_idempotency_test.js",
+    "exit": 0,
+    "pass": 128,
+    "fail": 0
+  },
+  {
+    "name": "faz85f_spatial_simulation_continuity_test.js",
+    "exit": 0,
+    "pass": 160,
+    "fail": 0
+  }
+]

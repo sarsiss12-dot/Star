@@ -1,0 +1,106 @@
+GELİŞTİRİCİ RAPORU — STARS FAZ 86E
+DİPLOMASİ KOMUTA MERKEZİ · HEDEFE GÖRE TASLAK · BİLGİ KAPILARI
+
+1) KAYNAK VE SÜRÜM
+Kaynak: stars-faz86d.zip
+SHA-256 (hesaplanan, beklenenle aynı):
+573de2e08c3a62bbf342346d006f23a7187a17ea0fbf6f2a7a23637848ddab1f
+Gerçek kayıt: tests/fixtures/stars-2210-06.sav.json
+fe2df0b6adc09bfe0148f36c5c96869ffef86ceeaa4cf7eb609f3997bc2c1245
+Çıktı: stars-faz86e.zip. Çıktı SHA'sı teslim mesajındadır.
+Build 86e · SW stars-v86e. main.js yalnız build, sw.js yalnız cache adı.
+
+2) BULGULAR VE YENİ AKIŞ
+Eski p_diplo, eski renderer'ı da ekliyor; kaynak/eylem bilgileri tekrarlanıyordu.
+Diplomasi liste/kart ve sağ sistem panelinde aynı kararlar ayrı üretiliyordu.
+Sağ sistem paneli ticaret paktını yanlışlıkla saldırmazlık diye sunuyordu.
+Teklif önizlemesi düşük istihbaratta da AI'ın kesin değerlendirmesini,
+kaynak seçicisi rakibin kesin stoklarını gösterebiliyordu.
+
+Yeni akış: DEVLETLER → İLİŞKİ → MÜZAKERE.
+Devlet listesinde Tümü/Savaş/Müttefik/Elçi var filtreleri var. Sağ panel
+kısa, ortak durum özetinden ilişki sayfasına gider. NAP/ticaret/ittifak,
+ikmal geçiş yönleri, sensör paylaşımı ve casus ağı ayrı gösterilir.
+Elçi görevi/kıdem/duraklama ve kendi vasalının tür/öfke/vergi özeti korunur.
+Hafıza alanı oyuncunun olaylarını gösterir; AI'ın gizli gerekçesi veya
+ilişki toplamının eksiksiz hesabı olarak etiketlenmez.
+Savaş/hedef, hediye, pakt feshi, biat/koruma/bağımsızlık, Federasyon,
+Konsey, Fısıltı Ağı ve istihbarat erişimleri mevcut motorlarına bağlıdır.
+
+3) TASLAKLAR VE İŞLEM GÜVENLİĞİ
+Devlet başına teklif, karşı teklif ve mesaj ayrı saklanır. Sekme/hedef
+geçişi veya pencereyi kapatma taslağı silmez. Temizleme yalnız seçili
+hedefi etkiler. İmzalanan taslak silinir; tekrar gönderim transfer yapmaz.
+Taslak UI belleğindedir; v8 kayda/localStorage'a eklenmez. Yükleme yeni
+dünyaya geçince eski taslak/karşı teklif silinir. Açık seçicinin gecikmiş
+callback'i başka hedefe veya yüklenen dünyaya madde yazamaz. Temasını
+kaybeden hedefe eski teklif gönderilmez. Scroll konumları bölüm/hedef
+bazında saklanır; emekli scroll olayı güncel konumu ezmez.
+
+Kanonik yol korunur: dealQuote → aiRespond → executeDeal.
+Genel özet/maliyet/uygulanabilirlik aynı quote'u, born/expires dahil,
+kullanır. Karşı teklif ayrı karttır; oyuncu maddeleri sessizce değişmez.
+
+4) İSTİHBARAT KAPILARI
+Seviye 0: kanonik kaba güç tahmini ve oyuncunun kendi ilişki/antlaşmaları.
+Seviye 1: koloni sayısı. Seviye 2: teknoloji/civic/lüks/mizaç ve kaba tutum.
+Seviye 3: gerçek stoklar, bilinen taraflarla savaş ve karşı yorgunluk.
+Düşük istihbaratta kaynak seçimi stoktan bağımsız miktarlar sunar.
+Teknoloji/lüks isteme seviye 2 ister. Görülmemiş sistem ve temas edilmemiş
+üçüncü devlet adları ilgili listelerde gizlenir. Süzerenlik onayında da
+kesin kabul yüzdesi yerine yeterli istihbaratta kaba eğilim gösterilir.
+
+Sınır: bütün oyuna yönelik eksiksiz gizlilik denetimi yapılmadı. Geçerlilik
+hataları ve gönderim sonrası AI yanıtı oyuncuya gerekçe vermeye devam eder.
+Mevcut AI hesabı türetilmiş _prof önbelleği oluşturabilir; ekonomik veri,
+ilişki veya RNG ilerlemesiyle karıştırılmaz. AI/denge formülleri değişmedi.
+
+5) MOBİL DÜZEN
+Diplomasi başlığı ve üç gezinme düğmesi sabit; içerik kendi içinde kayar.
+Eylemler en az 44 CSS px; dar sütun metinleri kırılır. Yerleşim yalnız
+merkeze kapsamlanır. Harita/sol menü/vali portresi/kurtarma kodu değişmedi.
+Gerçek Chrome CSS yerleşimi ve fiziksel Android bu fazda SINANMADI.
+Cihaz testi ara talebine uyuldu; kontroller CIHAZ-TEST-BIRIKIMI.md'ye eklendi.
+
+6) DOĞRULAMA
+31 paket · 3502 geçen · 0 kalan.
+Yeni faz86e_diplomacy_center_test.js: 45 senaryo (her senaryoda birden çok
+assert olabilir). Eski toplam 3457 + yeni 45 = 3502.
+Kapsam: üretim UI eylemleri, dört filtre, gerçek AI kabul/ret/karşı teklif,
+hedefler arası taslak/karşı teklif, yükleme/temas kaybı, gecikmiş seçim,
+scroll, dört bilgi seviyesi, gizli veriyi değiştirip görünümü karşılaştırma,
+antlaşma/vasal/elçi özeti, kaynak ve RNG korunumu, statik CSS kuralları.
+
+Eski testlerin 86D'deki iki UI beklentisi, yeni yerleşime uygun olarak
+ilişki sayfasını gerçek diploPick eylemiyle açar; görev/kıdem/durum
+beklentileri korunur. Build/cache 86E'ye geçti. index.html değiştiği için
+eski korunan dosya kontrolleri değişmeyen ai.js'in kaynak SHA'sını sınar.
+Test silinmedi, sayı/tolerans gevşetilmedi.
+
+Hata yakalama notu: ilk eski regresyonda vasallık özeti kontrolü ve iki
+eski elçi konumu beklentisi başarısızdı. Vasalın yönetim özeti yeni ortak
+renderera eklendi; elçi testleri yeni gerçek gezinmeyi izliyor. Yeni testin
+ilk kurulumunda bulunmayan teknoloji anahtarı ve yanlış doktrin fixture'ı
+kullanılmıştı; gerçek katalog anahtarlarıyla düzeltildi. Ret örneği zengin
+oyuncuda karşı teklif üretiyordu; ret fixture'ı gerçekten açığı kapatamayan
+oyuncuyla kuruldu. Zengin oyuncunun gerçek karşı teklifi ayrıca sınandı.
+
+Ortam: Node + kontrollü/sahte DOM; eski Skia Canvas piksel testleri tam
+regresyona dahil. Skia, gerçek Chrome compositor veya Android GPU değildir.
+No-op DOM testleri gerçek görsel kabul olarak sunulmaz.
+Komut: STARS_TEST_LOGS=/absolute/logs node tests/run-all.js
+Tam sonuç: tests/results-86e.json. Hash karşılaştırması: tests/sha-86e.json.
+
+7) DEĞİŞEN / KORUNAN
+Üretim: ui.js, index.html; main.js yalnız build; sw.js yalnız cache.
+Byte-for-byte korunan: diplomacy.js, ai.js, map.js, economy.js, combat.js,
+audio.js, manifest.json — 7/7. Save v8, anahtarlar, bağımsız Radar/Lojistik,
+Situation karantinası, transaction ve elçi mekaniği korunur.
+Ayrıntı: DIPLOMASI-MERKEZI.md; cihaz kuyruğu ve FAZ-PLANI.md güncellendi.
+
+8) SONRAKİ FAZ
+86F: AI teklifleri ve ilişki dengesi. Önce temaslı 3 seed × 360 ay taban
+ölçümü, sonra yalnız bulgunun gerektirdiği sınırlı denge değişikliği.
+Önerilen model/düşünme: Astra — High. Hazır çalışma metni FAZ-PLANI.md'de.
+Bu teslim için yeni fiziksel cihaz kabulü veya beyaz ekranın kesin olarak
+kapandığı iddiası yoktur; kullanıcıya cihaz testi talebi gönderilmedi.

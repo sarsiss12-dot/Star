@@ -1,0 +1,102 @@
+GELİŞTİRİCİ RAPORU — STARS FAZ 87D
+DİPLOMASİ TEKLİF TEKRARLARI VE TEK KULLANIMLIK KARAR
+
+1. KAYNAK
+stars-faz87c-1.zip
+SHA-256: 56713737fad826ebd77a326aa6c624f119a9f775142fcdc761be355e0c64fc82
+Doğrulandı. Çıktı stars-faz87d.zip; çıktı SHA teslim mesajında verilir.
+Build 87d / SW stars-v87d. Kaynak ve üretim dosyası hash karşılaştırması:
+tests/sha-87d.json.
+
+2. ÖLÇÜLEN İKİ TEKRAR SORUNU
+Aynı teklifi her oyun ayında zorla UI.aiOffer'a veren testte kaynak sürüm
+12 kez bildirim ve ret üretti; ilişki toplam −60 değişti. Bu, normal AI'ın
+aylık teklif sıklığı değildir; tekrar kapısını sınayan zorlanmış akıştır.
+Kaynakta aynı şartlara ret hafızası yoktu.
+
+Kutu içinde süresi geçmiş aynı teklif bulunduğunda bildirim anahtarı yeni
+teklifi de engelliyordu. Artık canlı aynı teklif korunur/ömrü uzatılmaz;
+süresi geçmiş aynı şart yeni gönderimle yenilenir. Farklı teklif silinmez.
+
+3. SINIRLI POLİTİKA
+Oyuncuya gelen aideal teklifinin aynı şartları, gerçek ret sonrası 810 oyun
+günü (27 ay) bekler. 809. gün engelli, 810. günde serbest. Yeni miktar,
+farklı madde veya farklı devlet serbesttir. Kapatmak veya Masaya oturmak ret
+değildir. Karşı teklif kartındaki Reddet de aynı kayıt yolunu kullanır.
+
+Bu fazda seçilmiş ürün politikasıdır; 27 ayın bütün kampanyalar için en iyi
+denge olduğu kanıtlanmış değildir. Barışın ayrı mevcut teklif/ret yolu ve
+AI–AI fırsat/değerlendirme katsayıları değiştirilmedi. Gerçek kampanya ve
+cihaz kullanışlılığı sonraki kabul hattında izlenecek.
+
+Kimlik encodeOffer maddelerinden gelir: yön, gönderen/alıcı ve şartlar
+korunur; madde sırası ve tarih damgası yok sayılır. Bölünmüş kaynakları
+toplayan genel anlamsal eşdeğerlik algoritması değildir. Kayıt defteri en
+fazla 64 aktif ret tutar; kapasite aşılırsa en eski ret düşebilir.
+
+Zorlanmış test sonucu: 12 gönderim denemesi → 1 bildirim / 1 ret / ilişki −5.
+Ret ve bekleme kontrolü kaynak/Etki/RNG tüketmez. Eski −5 ilişki bedeli
+korundu; yalnız tekrar cezası önlendi. Süresi zaten dolmuş teklifi reddetmek
+yeni bekleme veya ilişki bedeli yaratmaz.
+
+4. KARAR YAŞAM DÖNGÜSÜ
+Teklif penceresi dünya/oyuncu kimliği ve kendi modal jetonuyla korunur.
+Kabul, ret veya karşı teklif seçimi bir kez tüketilir. Aynı callback ikinci
+kez çalıştırılamaz; farklı pencere açma, kapatma ve kayıt yükleme sonrası
+eski callback yeni dünyayı değiştiremez. Gerçek executeDeal transferiyle
+tek kabul/tek transfer doğrulandı. Kanonik quote ve transaction korunur.
+
+5. 3 SEED × 120 AY ÖNCE / SONRA
+Seed   oyuncuya ulaşan teklif   AI–AI yürüyen anlaşma
+11              15 → 14                 37 → 38
+99              21 → 18                 49 → 50
+404             12 →  9                 41 → 40
+TOPLAM          48 → 41                127 → 128
+
+Yöntem: gerçek monthTick, 30 günlük tek adımlar, yaşayan korsan olmayan
+devletler arasında hazırlanmış temas; oyuncu her ulaşan teklifi reddeder.
+G.sandbox=true. Günlük keşif ve muharebe yoktur; tam kampanya sayılmaz.
+Önce ve sonra bu üç tohumda AI–AI ret sayısı 0; dolayısıyla 180 gün içinde
+yinelenen AI–AI reddi de 0. Bu ölçüm AI–AI ret yolunun genel olarak sorunsuz
+olduğunu kanıtlamaz. Somut tekrar görülmediği için ai.js değiştirilmedi.
+Oyuncunun daha az ret vermesi ilişkileri ve sonraki RNG/oyun akışını
+etkileyebilir. Aynı son dünya/RNG iddiası yoktur.
+Ham sonuçlar: tests/repeats-87d-before.json ve repeats-87d-after.json.
+Tekrarlanabilir araç: tests/diplomacy-repeat-probe.js.
+
+6. TESTLER
+Yeni paket: faz87d_offer_repetition_test.js — 24 senaryo / 0 kalan.
+Ret sınırı, tarih/madde sırası, değişmiş şartlar, üç antlaşma türü,
+masaya oturma/iptal, çift kabul/ret, eski modal/dünya, gerçek v8 yükleme,
+bayat kutu, saflık, sınırlı defter ve ilgisiz bildirim korunumu sınandı.
+
+Kabul testi ilk kurulumda diplomasiye kapalı devlet yüzünden başarısızdı.
+Fixture sıradan diplomasiye uygun hale getirildi; kabulden önce quote.ok
+iddiası eklendi. Üretim doktrin kapısı veya test beklentisi gevşetilmedi.
+
+Tam regresyon: 38 paket / 3713 GEÇEN / 0 KALAN.
+Önceki teslim: 37 paket / 3689 GEÇEN; +24 yeni senaryo.
+Sonuç dökümü tests/results-87d.json içinde. Sayılar bazı eski paketlerde
+iddia, yeni pakette birden çok iddialı senaryodur; bug adedi değildir.
+Eski testlerde yalnız build/cache kimliği 87d olarak güncellendi.
+Node/sentetik DOM ve mevcut native Skia Canvas testleri çalıştı.
+Bu fazda gerçek tarayıcı ve fiziksel Android testi yapılmadı.
+Paket açıldıktan sonra yeni hedefli test ayrıca çalıştırılır.
+
+7. DOSYALAR / UYUMLULUK
+Değişen üretim: diplomacy.js (ret anahtarı/defteri), ui.js (gönderim ve
+karar kapıları), main.js (yalnız build), sw.js (yalnız cache).
+Byte-for-byte korunan 7 dosya: map.js, ai.js, economy.js, combat.js,
+audio.js, index.html, manifest.json. SW fetch/activate/kabuk aynı.
+Kayıt v8 kaldı. Ret defteri G.p.offerRefusals olarak mevcut imparatorluk
+serileştirmesinde saklanır; eski kayıtta alan yoksa bekleme yoktur.
+Yeni depolama anahtarı eklenmedi. Kayıt sonrası kalan süre ve RNG korundu.
+Situation karantinası ve önceki harita/menü/portre kazanımları korundu.
+
+8. DEVAM
+Geliştirme geçmişi, devir, gelecek fazlar ve cihaz-test listesi güncellendi.
+Kullanıcı testlere ara verdi; şu anda cihaz denemesi istenmiyor.
+Sıradaki faz: 88A — filo/rota/lojistik incelemesi. Öneri: Astra — High.
+Sonra 88B savaş geri bildirimi, 89A iç siyaset/hafıza, 89B gerçek günlük
+kampanya, 90RC bütünleşik aday. Ayrıntı GELECEK-FAZLAR.md içinde.
+Bu teslim yayınlanmadı; güncelleme ZIP olarak hazırlanmıştır.

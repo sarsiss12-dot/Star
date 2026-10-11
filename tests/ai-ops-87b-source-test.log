@@ -1,0 +1,285 @@
+✗ geçersiz yüksek puanlı soruşturma yerine gerçek filo planı seçilir — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ 'sorusturma'
+- 'filoPlan'
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:8:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:28:27
+    at test (/workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:24:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ çalınacak teknoloji yoksa hiçbir operasyon seçmeyebilir — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+'calTech' !== null
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:8:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:32:3
+    at test (/workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:30:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✓ geçerli teknoloji operasyonu aynı puanla seçilir
+✓ geçerli eski soruşturma elenmez
+✗ gerçek maliyet üzerinden %40 rezerv: taban altında — evalmachine.<anonymous>:1
+A.mods.opCost=0;A.res.etk=55.99;var before=state();var ready=aiStandardOpReady(A,B,'kervan');
+                                                             ^
+
+ReferenceError: aiStandardOpReady is not defined
+    at evalmachine.<anonymous>:1:62
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/scratch/93cb118e686c/stars-faz87b/tests/helpers/runtime.js:111:25)
+    at /workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:47:21
+    at test (/workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:46:3)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+✗ gerçek maliyet üzerinden %40 rezerv: taban sınırında — evalmachine.<anonymous>:1
+A.mods.opCost=0;A.res.etk=56;var before=state();var ready=aiStandardOpReady(A,B,'kervan');
+                                                          ^
+
+ReferenceError: aiStandardOpReady is not defined
+    at evalmachine.<anonymous>:1:59
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/scratch/93cb118e686c/stars-faz87b/tests/helpers/runtime.js:111:25)
+    at /workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:47:21
+    at test (/workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:46:3)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+✗ gerçek maliyet üzerinden %40 rezerv: pahalı sınır altında — evalmachine.<anonymous>:1
+A.mods.opCost=1;A.res.etk=111.99;var before=state();var ready=aiStandardOpReady(A,B,'kervan');
+                                                              ^
+
+ReferenceError: aiStandardOpReady is not defined
+    at evalmachine.<anonymous>:1:63
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/scratch/93cb118e686c/stars-faz87b/tests/helpers/runtime.js:111:25)
+    at /workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:47:21
+    at test (/workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:46:3)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+✗ gerçek maliyet üzerinden %40 rezerv: pahalı sınırında — evalmachine.<anonymous>:1
+A.mods.opCost=1;A.res.etk=112;var before=state();var ready=aiStandardOpReady(A,B,'kervan');
+                                                           ^
+
+ReferenceError: aiStandardOpReady is not defined
+    at evalmachine.<anonymous>:1:60
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/scratch/93cb118e686c/stars-faz87b/tests/helpers/runtime.js:111:25)
+    at /workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:47:21
+    at test (/workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:46:3)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+✗ gerçek maliyet üzerinden %40 rezerv: indirimli sınır altında — evalmachine.<anonymous>:1
+A.mods.opCost=-0.5;A.res.etk=27.99;var before=state();var ready=aiStandardOpReady(A,B,'kervan');
+                                                                ^
+
+ReferenceError: aiStandardOpReady is not defined
+    at evalmachine.<anonymous>:1:65
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/scratch/93cb118e686c/stars-faz87b/tests/helpers/runtime.js:111:25)
+    at /workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:47:21
+    at test (/workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:46:3)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+✗ gerçek maliyet üzerinden %40 rezerv: indirimli sınırında — evalmachine.<anonymous>:1
+A.mods.opCost=-0.5;A.res.etk=28;var before=state();var ready=aiStandardOpReady(A,B,'kervan');
+                                                             ^
+
+ReferenceError: aiStandardOpReady is not defined
+    at evalmachine.<anonymous>:1:62
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/scratch/93cb118e686c/stars-faz87b/tests/helpers/runtime.js:111:25)
+    at /workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:47:21
+    at test (/workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:46:3)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+✗ iki kaynaklı sabotajda alaşım rezervi de gerekir — evalmachine.<anonymous>:2
+    A.mods.opCost=1;A.res.etk=140;A.res.ala=335.99;var low=aiStandardOpReady(A,B,'sabotaj');
+                                                           ^
+
+ReferenceError: aiStandardOpReady is not defined
+    at evalmachine.<anonymous>:2:60
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/scratch/93cb118e686c/stars-faz87b/tests/helpers/runtime.js:111:25)
+    at /workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:51:21
+    at test (/workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:50:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+✗ gerçek seçici pahalı operasyonu rezerv eksikken atlar — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+'calTech' !== null
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:8:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:58:3
+    at test (/workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:56:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ kota dışı yeni RNG tüketimi olmadan 2400 aday kontrolü yapılır — evalmachine.<anonymous>:1
+var before=state();for(let i=0;i<200;i++)for(const k in OPS)aiStandardOpReady(A,B,k);
+                                                            ^
+
+ReferenceError: aiStandardOpReady is not defined
+    at evalmachine.<anonymous>:1:61
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/scratch/93cb118e686c/stars-faz87b/tests/helpers/runtime.js:111:25)
+    at /workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:61:21
+    at test (/workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:60:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+✓ süren etki ve son 24 ay tekrar filtresi korunur
+✗ etikten gelen incite puanı uygunsuz hedefi açamaz — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+'incite' !== null
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:8:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:70:28
+    at test (/workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:68:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ seçici temassız hedefte profil/kilit/RNG değiştirmez — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+'yalan' !== null
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:8:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:77:3
+    at test (/workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:75:3)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ seçici ölü hedefte profil/kilit/RNG değiştirmez — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+'yalan' !== null
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:8:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:77:3
+    at test (/workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:75:3)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✓ seçici kendisi hedefte profil/kilit/RNG değiştirmez
+✗ seçici eski nesne hedefte profil/kilit/RNG değiştirmez — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+'yalan' !== null
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:8:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:77:3
+    at test (/workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:75:3)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ seçici eksik hedefte profil/kilit/RNG değiştirmez — ai.js:2096
+  const lvl = intelOf(e, o.id);
+                           ^
+
+TypeError: Cannot read properties of null (reading 'id')
+    at aiPickOp (ai.js:2096:28)
+    at evalmachine.<anonymous>:1:26
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/scratch/93cb118e686c/stars-faz87b/tests/helpers/runtime.js:111:25)
+    at /workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:76:21
+    at test (/workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:75:3)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+✓ puanı eşik altında kalan geçerli aday zorla yürütülmez
+✓ özel teknoloji verisi yolu standart calTech ile karışmaz
+✓ uygun sınır kolonisi özel incite yolunda kalır; gerçek bedel 120
+✗ AI laboratuvarı seed 11: sıfır geçersiz standart seçim, kota ve deterministik sonuç — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+222 !== 0
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:8:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:95:55
+    at test (/workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:93:31)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ AI laboratuvarı seed 99: sıfır geçersiz standart seçim, kota ve deterministik sonuç — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+183 !== 0
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:8:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:95:55
+    at test (/workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:93:31)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ AI laboratuvarı seed 404: sıfır geçersiz standart seçim, kota ve deterministik sonuç — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+170 !== 0
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:8:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:95:55
+    at test (/workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87b/tests/faz87b_ai_operation_selection_test.js:93:31)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+GEÇEN: 7 KALAN: 19

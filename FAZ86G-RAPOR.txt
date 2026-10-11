@@ -1,0 +1,46 @@
+GELİŞTİRİCİ RAPORU — STARS FAZ 86G
+BÜTÜNLEŞİK KONTROL · SAVAŞ/ANTLAŞMA TUTARLILIĞI · DEVİR PAKETİ
+
+KAYNAK
+  stars-faz86f.zip
+  SHA-256: bc693ee97b4c0a7dd4b0610c0f2179d6c9f0729099c210cb335808b2967fbc8d
+
+KAPATILAN HATALAR
+  1. Savaş başlarken NAP süre alanı iki tarafta kalıyordu. UI savaş ve
+     saldırmazlığı aynı anda gösterebiliyor, barış sonrası eski söz tekrar
+     canlanıyor ve yeni NAP yanlış redundant sayılabiliyordu.
+  2. Oyuncunun Konsey savaş yasağını çiğnediği dal erken dönerek pakt,
+     ittifak, hafıza, fraksiyon ve bildirim aşamalarını atlıyordu.
+
+ÇÖZÜM
+  endTreatiesForWar tek kapanış noktasıdır: NAP silinir, pakt/ittifak iki
+  yönde kapanır. Yalnız başarılı savaşta çalışır. Eski v8 kayıtları
+  normalizeWarTreaties ile gün/RNG/log tüketmeden temizlenir. UI bozuk ara
+  durumda savaşla antlaşma etiketi göstermez. Konsey ihlali ortak savaş
+  yolundan devam eder; AI'ın %75 geri çekilme davranışı korunur.
+
+TRANSACTION
+  warOn after:* hatasında NAP özgün nesne grafiğiyle geri gelir; başarılı
+  commit'te savaş kurulur ve NAP kapanır. Kayıt v8 kaldı.
+
+ÖLÇÜM
+  Gerçek kayıt fixture'ı ile 3 seed × 360 ay: savaş+NAP alanı 0/0/0.
+  Bu aylık diplomasi/simülasyon kontrolüdür; tam günlük kampanya değildir.
+
+DOSYALAR
+  Değişen: diplomacy.js, main.js, ui.js, sw.js.
+  Korunan 7/7: map.js, ai.js, economy.js, combat.js, audio.js,
+  index.html, manifest.json. SHA: tests/sha-86g.json.
+  Build 86g; SW cache stars-v86g; PWA kabuk listesi aynı.
+
+TEST
+  33 paket. 86G hedefli 16 senaryo. Tam sayı ve çıktı SHA teslim
+  mesajında ve tests/results-86g.json içinde.
+  Gerçek tarayıcı ve fiziksel Android testi yapılmadı. Native Canvas
+  testleri Skia kullanır; Chrome/WebView kabulü değildir.
+
+AÇIK BORÇ
+  Cihaz testleri kullanıcı isteğiyle bekliyor. Tekrarlanan reddedilmiş
+  AI ittifak teklifleri ve uzun dönem ilişki eğrisi daha sonra ölçülecek.
+  Sonraki ürün fazı: 87A casusluk UI ve operasyon geri bildirimi.
+  Devir ayrıntısı: DEVIR-NOTLARI.md.

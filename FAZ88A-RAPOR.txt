@@ -1,0 +1,107 @@
+GELİŞTİRİCİ RAPORU — STARS FAZ 88A
+FİLO ROTALARI, YILDIZ KAPILARI VE İKMAL TAKİBİ
+
+1. KAYNAK / ÇIKTI
+Kaynak: stars-faz87d.zip
+SHA-256: 2cbe4f0b7a2d4c894bf4f991e159e8fed43202bd0bfb2f6ee269279530d9fcc1
+Beklenen ile hesaplanan aynı. Çıktı stars-faz88a.zip; SHA teslim mesajında.
+Build 88a / SW cache stars-v88a. Dosya hash karşılaştırması tests/sha-88a.json.
+
+2. ROTA — KAYNAKTA ÜRETİLEN VE DÜZELTİLEN
+- Kapalı sınırdaki hedef askeri filoya açık sayılıyordu: alternatif arama
+  hedefi canEnter kontrolünden muaf tutuyordu. Artık hedef de izin ister.
+- Yeni hedefe yol bulunamayınca önceden geçerli f.path siliniyordu. Yeni
+  rota doğrulanmadan eski rotaya dokunulmuyor. Geçersiz sistem false döner.
+- Hareket sırasında yeniden emir verildiğinde aktif bacağın varışı yeni
+  rotanın ilk durağını tüketiyordu. Örnekte beklenen [2,3] yerine [3]
+  kalıyordu. Aktif bacağın varışı korunur; yeni durak sırası artık [2,3].
+- Yeni bacakta izin tekrar kontrol edilmiyordu. İzin yolda değişse bile
+  filo sonraki kapalı sisteme giriyordu. Artık bacak öncesi güncel sınır,
+  fiziksel bağlantı ve kapı doğrulanır. Alternatif aynı durağa aranır;
+  bulunamazsa filo durur. Başlamış bacak uzayda kesilmez.
+- Alternatif yol ayrı ve eksik Dijkstra kullanıyordu; kapı bağlantısını ve
+  radyasyon maliyetini kaybediyordu. findPathAllowed ortak findPath'e
+  giriş filtresi verir. Bu iki özellik alternatifte de korunur.
+
+3. KAPI / İKMAL — KAYNAKTA ÜRETİLEN VE DÜZELTİLEN
+- Rota kapı kenarını hesaplıyordu; stepFleets yalnız fiziksel lane'de hareket
+  başlattığı için iki kapı arasında aynı rotayı sonsuza kadar yeniden
+  buluyordu. Gerçek hareket artık mv.gate ile yürür; kenar mesafesi yol
+  bulmadaki mevcut 0.1 ağırlıktır. Varış testinde sistem 0 → 4 gerçekleşti.
+- İzin ters yönden okunuyordu. Yolcunun kapı sahibine verdiği izin, kapı
+  sahibinin yolcuya izni gibi sayılıyordu. hasUsableGate artık sahibin
+  passage[yolcu] kaydını okur; yol ve ikmal aynı yardımcıya bağlıdır.
+- Günlük gate listesi aynı gün izin iptalini saklayabiliyordu. Yolun yapı
+  indeksine bağımlılığı yeni/yıkılan kapıları geciktiriyordu. Erişim güncel
+  sistemlerden hesaplanır; cfg.gates=false lojistik kapı listesini de kapatır.
+- Savaşta kalan eski passage/ally kaydı düşman limanını ikmal kaynağı
+  yapabiliyordu. isSupplyNode yabancı savaş limanında bunu reddeder.
+Normal hız, ikmal/güç/yıpranma katsayıları ve bilim gemisinin ikmal sınırında
+durması korundu. Ayrı yakıt deposu veya yeni üretim dengesi eklenmedi.
+
+4. İKMAL FİLOSUNUN VARIŞI
+Kaynakta takip rotası orderMove ile yeniden kuruluyor, ardından koşulsuz
+path.shift yeni rotanın ilk durağını siliyordu. Artık varılan eski bacak
+önce tüketilir; sonra followRallyFleet takip rotasını kurar.
+Birleşmede imparatorluk eşitliği sınanır. Ana filo çatışmadaysa hedef
+unutulmaz, boşta beklenir; çatışma bitince bir kez birleşilir. Ana filo
+hareketliyse güncel varışı izlenir. Yok olmuş/yolu bulunamayan hedefin
+takip alanları temizlenir. Varış koordinatları aynı adımda güncellenir.
+
+5. AI KULLANIMI VE AÇIK KAPSAM
+AI keşif/koloni/savaş emirleri ortak orderMove motorunu çağırıyor. Gerçek
+aiLogisticsTick ile yıpranmış AI filosunun ikmale dönüşü ayrıca test edildi.
+ai.js değiştirilmedi; karar/üretim puanları aynı. Değişen hareket izinleri
+ve çalışan kapılar kampanyanın sonucunu doğal olarak değiştirebilir.
+
+AI queueShip ile üretim yapıyor, küçük savaş filolarını büyük kuvvete
+yönlendiriyor. Ancak ai.js'de reinforceFleet/setRally çağrısı yok. Bu yüzden
+“AI otomatik filo tamamlama sistemini tam kullanıyor” denemez.
+
+88A.1'e ayrılan somut işler:
+- dailyTick'te başarısız orderMove sonrası sevk mesajı ve işaretleri;
+- üretim anında hareketli ana filo yerine eski ral.sys hedefine yönelme;
+- iki filoya siparişin aynı tersanenin genel rally kaydında çakışması;
+- AI üretim/birleşme/keşif emirlerinin tekrarı ve tamamlama kullanımı;
+- vasal kapı erişimi ile genel sınır hakkının farklı kapsamı.
+Bu yollar bu fazda TAMAMLANDI olarak işaretlenmedi. İnceleme tablosu ve
+ayrıntılı sınırlar FILO-ROTA-LOJISTIK.md içinde.
+
+6. TEST SONUÇLARI
+Yeni hedefli paket: 38 senaryo / 0 kalan.
+Aynı nihai test kaynak 87D'de: 11 geçen / 27 kalan.
+Bu sayılar 27 ayrı kök neden değildir; bazı davranışlar oyuncu/AI için
+ayrı sınanır. İlk test taslağındaki undefined karşılaştırma yardımcısı
+düzeltildi; kapı önbelleği fixture'da temizlenerek ısınma/iptal ayrı ölçüldü.
+Burada bildirilen kaynak sonucu bu nihai testle tekrar çalıştırıldı.
+
+Kapsam: kapalı hedef/ara sistem, geçersiz yeni hedefte rota korunumu,
+aktif bacak/ek durak, gerçek kapı varışı, izin yönü/iptali, yıkım/inşa,
+radyasyon alternatifi, iki devletin birleşmemesi, çatışmada bekleme,
+hareketli hedef takibi, gerçek AI lojistik tiki, bilim/koloni muafiyeti,
+saf aramanın oyun/RNG korunumu ve gerçek serialize/deserialize v8 zinciri.
+
+Tam regresyon: 39 paket / 3751 GEÇEN / 0 KALAN.
+Önceki teslim 3713; +38 yeni senaryo. Sonuçlar tests/results-88a.json.
+Eski testlerde yalnız build/cache kimliği güncellendi; test silinmedi.
+Bazı eski paketler iddia, yeni paket çok iddialı senaryo sayar.
+Node/sentetik DOM ve mevcut native Skia Canvas paketleri çalıştı.
+Bu fazda gerçek tarayıcı/Android testi yapılmadı; günlük uzun kampanya
+89B'de. Cihaz testine ara verme isteği korundu, kontroller listeye eklendi.
+
+7. DOSYALAR VE KORUNANLAR
+main.js: rota/kapı/hareket/ikmal takibi ve build kimliği.
+sw.js: yalnız cache satırı. Fetch/activate/kabuk aynı.
+Byte-for-byte aynı 9 üretim dosyası: map.js, ai.js, diplomacy.js,
+economy.js, combat.js, audio.js, ui.js, index.html, manifest.json.
+Kayıt v8 ve depolama anahtarları aynı. mv.gate mevcut filo kaydına eklenen
+isteğe bağlı hareket alanıdır; eski normal hareket kaydı çalışır.
+Harita, sol menü, portre, Radar/Lojistik, transaction, diplomasi/casusluk ve
+Situation karantinası regresyonları korundu. Cihaz kabulü iddiası yoktur.
+
+8. TESLİM VE DEVAM
+Geliştirme geçmişi, faz planları, devir ve cihaz test birikimi güncellendi.
+Yeni ZIP'in içeriği test edilen dosyalarla birebir karşılaştırılır; çıkarılan
+ZIP üzerinden yeni hedefli test yeniden çalıştırılır. Siteye yayın yapılmaz.
+Sıradaki faz: 88A.1 — tersane sevki ve AI ikmal emirleri.
+Önerilen model/düşünme: Astra — High.

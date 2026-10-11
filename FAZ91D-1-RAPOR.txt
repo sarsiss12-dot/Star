@@ -1,0 +1,61 @@
+STARS — FAZ 91D.1: BAĞIMSIZ FİLO SAHİPLERİ KATMANI
+
+Kaynak: stars-faz91d.zip
+SHA-256: 9058ce8db9350712ef8f1a14cfd53102d23dd9b401a07f62f376ca1a63d1bade
+Çıktı: stars-faz91d-1.zip. Build 91d-1; SW cache stars-v91d-1.
+
+KULLANICIYA GÖRÜNEN DEĞİŞİKLİK
+Sol harita akordiyonu → KATMANLAR → Filo sahipleri.
+Varsayılan kapalı. Açılınca görünen filoların devlet adları gemilerin
+altında konumlarını ve kamera hareketini izler. Aynı sistemde gruplanmış
+filoların gerçek taraf satırları yanlarında tek bir sahip etiketi alır.
+Gösterilen metin gemi sınıfı/filo adı değil, aidiyet bildiren devlet adıdır.
+Radar, Lojistik ve Siyasi/Diplomatik/Savaş seçimi bağımsız kalır.
+
+GÖRÜNÜRLÜK / YERLEŞİM
+Görünmeyen filolar açılmaz. Temassız normal devlet Bilinmeyen devlet
+olarak görünür; korsanlar Korsanlar, kriz tarafı Kriz filosu adıyla ayrılır.
+Uzak siyasi görünümde çizilmeyen duran filolara etiket eklenmez.
+Adlar filo satırları, sistem adları ve ana HUD alanlarına bindirilmez;
+alternatif konuma kaydırılan etikete bağlantı çizgisi eklenir. Devlet alan
+etiketleri filo etiketlerini engel olarak dikkate alır. Dar/kalabalık
+görünümde yer kalmayan etiket atlanabilir; uzun adlar kısaltılır.
+Hit-test ve gerçek filo konumları değiştirilmedi.
+
+KALICI TERCİH
+Yeni yh_fleetnames anahtarı mevcut storeGet/storeSet yolu üzerinden
+kaydedilir. Kayıt v8 ve oyun kaydı yükü değişmez. Geciken tercih okuması
+kullanıcının daha sonra yaptığı seçimi geri alamaz. Yüzey yeniden kurma
+ve deserialize sırasında tercih korunur; etiketler güncel filolardan
+her çizimde yeniden üretilir. Varsayılan kapalıyken ek filo taraması yok.
+
+DOĞRULAMA
+Yeni tests/faz91d_1_fleet_names_native_canvas_test.js: 29 geçen / 0 kalan.
+Gerçek üretim UI eylemi ve View.draw; Skia Canvas gerçek piksel çıktısı.
+Hareket +50 dünya birimi → ad +50 CSS piksel; pan, DPR2, görünürlük,
+kimlik kapısı, korsan ayrımı, 12 mod/katman birleşimi, kalıcı tercih,
+gecikmiş okuma yarışı, oyun/RNG korunumu, yüzey yenileme, gerçek yükleme,
+filo grubu ve gerçek pointer dokunuşuyla seçim sınandı.
+tests/artifacts-91d-1/fleet-owners-native.png görsel olarak incelendi.
+
+Tam regresyon: 54 paket / 4039 GEÇEN / 0 KALAN / 0 ATLANAN.
+Sonuç: tests/results-91d-1.json. Önceki 4010 kontrol korundu; yeni 29 eklendi.
+25 eski testte yalnız güncel build/cache literal'i 91d-1'e taşındı.
+Önceki map altyapısı kaynak kilitleri ve 91D etiket testleri de geçti.
+Hiçbir oynanış testi kaldırılmadı veya gevşetilmedi.
+
+DEĞİŞEN / KORUNAN
+main.js: tercih durumu/okuması ve build. ui.js: düğme ve bağımsız eylem.
+map.js: ek aidiyet çizimi. sw.js: yalnız cache adı.
+Byte-for-byte korunan: combat.js, ai.js, diplomacy.js, economy.js,
+audio.js, index.html, manifest.json — 7/7. Savaş/ekonomi/diplomasi dengesi,
+harita kurtarma ve Situation karantinası değişmedi.
+
+SINIR VE SONRAKİ FAZ
+Gerçek tarayıcı ve fiziksel Android çalıştırılmadı. Native Canvas testi
+mobil menü layout'u veya cihaz kare süresi kanıtı değildir. Yeni menü son
+satırına erişim, kalabalık filo adlarının okunabilirliği ve yeniden açış
+tercihi cihaz test birikimine yazıldı; kullanıcıdan şimdi test istenmiyor.
+91C sabit 87T adayı ayrı durur. Yayın/deploy yapılmadı.
+Sıradaki 91E — Astra / High: federasyon iç yasa önerisi, gerçek oyuncu oyu,
+kaydedilen gündem ve yazılı yasa etkilerinin uygulanması.

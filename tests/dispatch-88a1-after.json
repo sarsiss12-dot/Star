@@ -1,0 +1,59 @@
+{
+  "method": "Three independent prepared-world aiTurn production opportunities; civilian needs met, normal military production gate used. No campaign or extra tick. Full-turn resource delta and final RNG compared.",
+  "runs": [
+    {
+      "seed": 11,
+      "queued": 1,
+      "classes": [
+        "kor"
+      ],
+      "targeted": 1,
+      "spent": {
+        "min": 0,
+        "ene": 0,
+        "yiy": 0,
+        "ala": 32,
+        "ara": 0,
+        "tuk": 0,
+        "etk": 0
+      },
+      "rng": 1199730154
+    },
+    {
+      "seed": 99,
+      "queued": 1,
+      "classes": [
+        "kor"
+      ],
+      "targeted": 1,
+      "spent": {
+        "min": 0,
+        "ene": 0,
+        "yiy": 0,
+        "ala": 32,
+        "ara": 0,
+        "tuk": 0,
+        "etk": 0
+      },
+      "rng": 1199730242
+    },
+    {
+      "seed": 404,
+      "queued": 1,
+      "classes": [
+        "kor"
+      ],
+      "targeted": 1,
+      "spent": {
+        "min": 0,
+        "ene": 0,
+        "yiy": 0,
+        "ala": 32,
+        "ara": 0,
+        "tuk": 0,
+        "etk": 0
+      },
+      "rng": 1199730547
+    }
+  ]
+}

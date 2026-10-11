@@ -1,0 +1,85 @@
+GELİŞTİRİCİ RAPORU — STARS FAZ 86C.6
+ANLAŞMA TRANSACTION KABULÜ · ÖZGÜN NESNE GRAFİĞİ
+
+1) KAYNAK / ÇIKTI
+Kaynak: stars-faz86c-5-1.zip
+SHA-256: 9053cbbc27587043d3dc4b9d64a74575b84f866fcd068a6680ff85b412b98cf8
+SHA ve ZIP bütünlüğü doğrulandı.
+Çıktı: stars-faz86c-6.zip — çıktı SHA teslim mesajındadır.
+Gerçek kayıt: tests/fixtures/stars-2210-06.sav.json
+SHA-256: fe2df0b6adc09bfe0148f36c5c96869ffef86ceeaa4cf7eb609f3997bc2c1245
+Build: 86c-6 · SW: stars-v86c-6.
+
+2) AYNI PROBLA ÖNCE / SONRA
+Özgün koloni dizisi / üyesi / mod nesnesi: false → true.
+Eski üyenin kendi değeri de korunuyor: false → true.
+30 seviyeli nesnede değer (başlangıç 1): rollback sonrası 2 → 1.
+Son recalc hatası: dışarı exception + mineral −100 → false + mineral 0 fark.
+İç içe log kaydı (başlangıç 1): rollback sonrası 2 → 1.
+Başta olmayan _sideBuf alanı: sonradan vardı → yine yok.
+İç içe execute: dış işlem red, çocuk kabul, UI.alert 1 → çocuk da red, UI.alert 0.
+Ölçüm dosyaları: tests/transaction-once.json ve transaction-sonra.json.
+Yeniden üretim aracı: tests/transaction-probe.js.
+
+3) YENİ YAPI
+Sınırlı derin kopya yardımcıları txClone/txRestoreInto kaldırıldı.
+txCaptureGraph/txRestoreGraph, özgün nesnelerin eski alan ve referanslarını tutar.
+Tek ziyaret, döngü/alias korunumu; derinlik nedeniyle veri paylaşan kesme yok.
+Dizi yeniden atansa, eleman silinse veya sırası değişse de eski nesneler bağlanır.
+G.p, kök alan varlığı, iç içe log/inbox kayıtları da korunur.
+Rollback sonrası recalc yapılmaz: mods/cache/kapasite zaten eski haline dönmüştür.
+
+4) İŞLEM SINIRI
+quote → günlük → apply/postcondition → maliyet → goodwill → recalc → log → commit.
+Son recalc ve kalıcı log yazımı artık rollback sınırının içindedir.
+Yeni after:recalc ve after:log noktaları eklendi; eski aşamalı noktalar korundu.
+son kancası commit ÖNCESİ son kapıdır. UI yayımlandıktan sonra rollback yapılmaz.
+Commit sonrası ses, alert ve ertelenmiş UI hataları ayrı ayrı yakalanır ve tanıya
+kaydedilir. Başarılı anlaşma red gösterilmez, bedel tekrar kesilmez.
+İç içe execute / başka bir etkin tampon: false, sıfır uygulama ve sıfır yayın.
+Yetki ve _sideBuf alanlarının önceki değer/varlığı başarıda da korunur.
+
+5) ÖLÇÜLEN KAPSAM
+14 tür × give/want × 8 hata noktası = 224 hata senaryosu.
+Her noktaya ulaşıldığı; after:* sırasında gerçek etkinin oluştuğu ölçüldü.
+Her senaryoda tüm G grafiği, özgün nesne bağlantıları ve RNG kontrol edildi.
+Her tür iki yönde enjeksiyonsuz da uygulandı: 28/28.
+Ek yollar: kolonili son sistem devri → devlet ölümü → filo temizliği;
+bağımsızlık barışı + vekil savaş; federasyon/senyör savunması;
+Konsey yaptırım zincirinde gerçek RNG tüketimi ve geri alma.
+Sunum matrisi: hatasız / audio / alert / UI / tümü hatalı — 5/5.
+Tam tablo ve kanıt sınırı: TRANSACTION-KAPSAMI.md.
+
+6) TEST SONUCU
+29 paket · 3399 geçen · 0 kalan. Yeni paket: 529 iddia.
+Önceki 2870 iddia korunuyor. Build/cache ve mimari isim beklentileri güncellendi.
+Değişen diplomacy dosyasının eski korunan-küme kontrolü, bu fazda korunan
+map.js'in kaynak SHA kontrolüne çevrildi. Yedi referans-varlık kontrolü gerçek
+hash karşılaştırmasına güçlendirildi. Atomiklik yorumunu olumlayan bir iddia,
+gerçek mods nesnesinin geri bağlanmasını ölçen iddiaya çevrildi.
+Davranış testleri silinmedi; toleranslar gevşetilmedi.
+
+7) PERFORMANS — AYNI NODE ORTAMI, 100 SİSTEM / 63 FİLO
+5 ısınma + 40 örnek, aynı kaynak transferi:
+86C.5.1 medyan 2.99 ms · p95 6.44 ms.
+86C.6   medyan 8.10 ms · p95 21.93 ms.
+Yeni günlük daha pahalıdır. Bu fark rapordan saklanmadı; Android süre sonucu değildir.
+Bu fazda denge katsayısı veya genel oyun tik sıklığı değiştirilmedi.
+
+8) DOSYALAR / KORUNANLAR
+Değişen üretim: diplomacy.js, main.js, sw.js.
+Byte-for-byte korunan: ai.js, audio.js, combat.js, economy.js, index.html, manifest.json, map.js, ui.js — 8/8.
+SW diff yalnız cache adı. Kayıt v8; yeni depolama anahtarı yok.
+R1–R4/86C.5 harita kazanımları, 86C.5.1 menü/portre düzeltmeleri,
+üç ana mod + bağımsız Radar/Lojistik, Situation karantinası korunuyor.
+
+9) DOĞRULAMA ORTAMI
+Node üretim yolu / kontrollü DOM ve olay testleri: yapıldı.
+Önceki gerçek Skia Canvas piksel regresyonları: yapıldı.
+Gerçek Chrome / compositor / fiziksel Android: yapılmadı.
+Kullanıcı cihaz testlerine ara verdi; CIHAZ-TEST-BIRIKIMI.md oluşturuldu.
+Cihaz testi istenmiyor ve geliştirme buna bağlanmıyor.
+
+10) SIRADAKİ FAZ
+86D — elçi görevleri, kıdem, savaşta duraklama, eski boolean kayıt göçü.
+Önerilen: Astra — High. Faz planı güncellendi.

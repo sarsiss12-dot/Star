@@ -33,7 +33,7 @@ function threatAt(e, sysId){
   const s = G.sys[sysId];
   for (const f of G.fleets){
     if (f.e === e.id || !isArmed(f)) continue;
-    if (!e.war[f.e]) continue;
+    if (!hostile(e.id, f.e)) continue;
     const fs = f.sys >= 0 ? f.sys : (f.mv ? f.mv.to : -1);
     if (fs < 0) continue;
     if (fs === sysId) t += fleetPower(f);
@@ -696,7 +696,7 @@ function aiTurn(e){
   /* --- 6a. ticaret anlaşmaları --- */
   if (e.res.etk > 120 && prof.eco > .35){
     for (const o of G.emps){
-      if (o.dead || o.id === e.id || e.war[o.id]) continue;
+      if (o.dead || o.wild || o.id === e.id || e.war[o.id]) continue;
       if (!e.contact[o.id] || (e.pact && e.pact[o.id])) continue;
       if (typeof diploBlocked === 'function' && diploBlocked(e, o)) continue;
       if (!canPact(e, o)) continue;
@@ -735,7 +735,7 @@ function aiTurn(e){
   /* --- 6b. ittifak arayışı (diplomatik AI'lar) --- */
   if (prof.dip > .55 && e.res.etk > 200){
     for (const o of G.emps){
-      if (o.dead || o.id === e.id || e.ally[o.id] || e.war[o.id]) continue;
+      if (o.dead || o.wild || o.id === e.id || e.ally[o.id] || e.war[o.id]) continue;
       if (!e.contact[o.id] || !canAlly(e, o)) continue;
       if (typeof diploBlocked === 'function' && diploBlocked(e, o)) continue;
       if (RACES[o.race].dip <= .05) continue;
@@ -1330,7 +1330,19 @@ const MEM_KINDS = {
 };
 
 /* Bir olayı hafızaya yaz. subject = HATIRLAYAN, aboutId = HAKKINDA. */
-function remember(subject, aboutId, kind){
+// 89A: Kaynak kimliği yalnız ücretli olay çözümünde üretilir; RNG kullanmaz.
+function memoryEvent(actor){
+  actor.memoryEventSeq = (Number.isSafeInteger(actor.memoryEventSeq) && actor.memoryEventSeq >= 0
+    ? actor.memoryEventSeq : 0) + 1;
+  return actor.id + ':' + actor.memoryEventSeq;
+}
+function forgetMemoryEvent(subject, aboutId, source){
+  // Eski v8 anıları kaynak taşımaz: hangi suçun anısı olduklarını tahmin etme.
+  if (typeof source !== 'string' || !source || !subject || !subject.mem || !subject.mem[aboutId]) return;
+  subject.mem[aboutId] = subject.mem[aboutId].filter(m => m.source !== source);
+  if (!subject.mem[aboutId].length) delete subject.mem[aboutId];
+}
+function remember(subject, aboutId, kind, source){
   if (!subject || subject.dead || subject.wild) return;
   if (aboutId === undefined || aboutId === null || aboutId === subject.id) return;
   const K = MEM_KINDS[kind];
@@ -1345,12 +1357,14 @@ function remember(subject, aboutId, kind){
   /* Aynı türden taze kayıt varsa yenisini açma, mevcudu derinleştir:
      beş kez kervan yağmalamak beş anı değil, tek derin yara olsun. */
   let recent = null;
-  for (const m of list) if (m.k === kind && now - m.t < 12) recent = m;
+  for (const m of list) if (m.k === kind && m.source === source && now - m.t < 12) recent = m;
   if (recent){
     recent.v = clamp(recent.v + w0 * .35, -150, 150);
     recent.t = now;
   } else {
-    list.push({k:kind, v:w0, t:now});
+    // İftira kayıtları ayrı çözülür; tekrarlanan taze suçun %35 ağırlığı korunur.
+    const value = source && list.some(m => m.k === kind && now - m.t < 12) ? w0 * .35 : w0;
+    list.push(Object.assign({k:kind, v:value, t:now}, source ? {source} : {}));
     if (list.length > 14) list.shift();
   }
 }
@@ -1532,7 +1546,7 @@ function whisperCheck(e, a, b, blame){
 }
 /* whisperLog eski karşı istihbarat sözleşmesini korur. opLog yalnız actor
    ekranının özetidir; ikinci bir mağdur/soruşturma kaydı açılmaz. */
-function whisperResult(e, a, b, blame, basari, ifsa){
+function whisperResult(e, a, b, blame, basari, ifsa, source){
   const cost = WHISPER_COST + (blame ? FALSE_FLAG_EXTRA : 0);
   const outcome = basari ? (ifsa ? 'basari-ifsa' : 'basari') : (ifsa ? 'ifsa' : 'sonucsuz');
   const msg = (basari ? a.name + ' ile ' + b.name + ' arası bozuldu' : 'Fısıltı sonuçsuz kaldı') +
@@ -1543,12 +1557,13 @@ function whisperResult(e, a, b, blame, basari, ifsa){
     caught:ifsa, outcome, cost, actorSummary:msg});
   if (e.opLog.length > 20) e.opLog.splice(0,e.opLog.length-20);
   // ok eski runWhisper sözleşmesinde etki başarısıdır; resolved ücretli denemedir.
-  return {ok:basari, resolved:true, basarili:basari, ifsa, caught:ifsa, outcome, cost, msg};
+  return {ok:basari, resolved:true, basarili:basari, ifsa, caught:ifsa, outcome, cost, msg, source};
 }
 function runWhisper(e, a, b, blame){
   const q = whisperCheck(e, a, b, blame);
   if (!q.ok) return Object.assign({resolved:false},q);
   e.res.etk -= WHISPER_COST + (blame ? FALSE_FLAG_EXTRA : 0);
+  const source = memoryEvent(e);
   let ifsaRisk = whisperExposureRisk(e, a, b);
   if (blame) ifsaRisk *= FALSE_FLAG_RISK_MUL;      // iz gizlemek zordur
   ifsaRisk = clamp(ifsaRisk, .02, .75);
@@ -1556,8 +1571,8 @@ function runWhisper(e, a, b, blame){
   /* SAHTE BAYRAK: kurbanlar öfkelerini masum üçüncü tarafa yöneltir */
   if (basari && blame && typeof remember === 'function' &&
       blame.id !== a.id && blame.id !== b.id && blame.id !== e.id){
-    remember(a, blame.id, 'komplo');
-    remember(b, blame.id, 'komplo');
+    remember(a, blame.id, 'komplo', source);
+    remember(b, blame.id, 'komplo', source);
     a.rel[blame.id] = clamp(a.rel[blame.id] - 18, -100, 100);
     b.rel[blame.id] = clamp(b.rel[blame.id] - 18, -100, 100);
     if (blame.id === 0)
@@ -1589,8 +1604,8 @@ function runWhisper(e, a, b, blame){
         remember(blame, e.id, 'sahteBayrak');
         blame.rel[e.id] = clamp(blame.rel[e.id] - 35, -100, 100);
         /* yıkılmak istenen taraf temize çıkar */
-        if (a.mem && a.mem[blame.id]) a.mem[blame.id] = a.mem[blame.id].filter(m => m.k !== 'komplo');
-        if (b.mem && b.mem[blame.id]) b.mem[blame.id] = b.mem[blame.id].filter(m => m.k !== 'komplo');
+        forgetMemoryEvent(a, blame.id, source);
+        forgetMemoryEvent(b, blame.id, source);
         if (blame.id === 0) say('ADIN TEMİZE ÇIKTI — komployu ' + e.name + ' kurmuş', 'win');
       }
     }
@@ -1598,9 +1613,9 @@ function runWhisper(e, a, b, blame){
     b.rel[e.id] = clamp(b.rel[e.id] - 22, -100, 100);
     if (a.id === 0 || b.id === 0)
       say('FISILTI AĞI İFŞA OLDU — ' + e.name + ' arayı bozmaya çalışıyormuş', 'war');
-    return whisperResult(e, a, b, blame, basari, true);
+    return whisperResult(e, a, b, blame, basari, true, source);
   }
-  return whisperResult(e, a, b, blame, basari, false);
+  return whisperResult(e, a, b, blame, basari, false, source);
 }
 
 /* ── OYUNCU FISILTISI ──
@@ -1612,7 +1627,7 @@ function playerWhisper(a, b, blame){
   const r = runWhisper(e, a, b, blame);
   if (!r.resolved) return r;
   e.whisperLog = e.whisperLog || [];
-  e.whisperLog.push({a:a.id, b:b.id, ok:r.ok, ifsa:r.ifsa,
+  e.whisperLog.push({a:a.id, b:b.id, ok:r.ok, ifsa:r.ifsa, source:r.source,
                      blame: blame ? blame.id : undefined,
                      t:(G.memAge || 0), found:r.ifsa});
   if (e.whisperLog.length > 40) e.whisperLog.shift();
@@ -1678,7 +1693,7 @@ function whisperTick(){
     /* found: sonradan çözüldü mü? Faz 4'te karşı istihbarat bu kaydı
        yıllar sonra ortaya çıkarabilir. İfşa olmuş operasyon zaten
        bilindiğinden yeniden çözülmez. */
-    e.whisperLog.push({a:t.a.id, b:t.b.id, ok:r.ok, ifsa:r.ifsa,
+    e.whisperLog.push({a:t.a.id, b:t.b.id, ok:r.ok, ifsa:r.ifsa, source:r.source,
                        blame: blame ? blame.id : undefined,
                        t:(G.memAge||0), found:r.ifsa});
     /* Kayıt defteri ifşa penceresinden (CI_MAX_AGE = 20 yıl) kısa
@@ -1770,8 +1785,8 @@ function counterIntelTick(){
           remember(sahte, casus.id, 'sahteBayrak');
           sahte.rel[casus.id] = clamp(sahte.rel[casus.id] - 35, -100, 100);
           /* iftira temizlenir */
-          if (a.mem && a.mem[sahte.id]) a.mem[sahte.id] = a.mem[sahte.id].filter(m => m.k !== 'komplo');
-          if (b.mem && b.mem[sahte.id]) b.mem[sahte.id] = b.mem[sahte.id].filter(m => m.k !== 'komplo');
+          forgetMemoryEvent(a, sahte.id, w.source);
+          forgetMemoryEvent(b, sahte.id, w.source);
           if (sahte.id === 0)
             say('ADIN TEMİZE ÇIKTI — o komployu ' + casus.name + ' kurmuş', 'win');
           else if (casus.id === 0)
@@ -3491,28 +3506,26 @@ function aiFedLawTick(){
     if ((e.res.etk || 0) < 220) continue;
 
     const f = findFed(e);
-    if (!f || f.lawVote) continue;
+    if (!f || f.vote || f.lawVote) continue;
     if (typeof fedCohesion === 'function' && fedCohesion(f) < 35) continue;
 
     const P = (typeof personaOf === 'function') ? personaOf(e) : null;
     const sira = [];
     if (P){
-      if (P.n === 'Militarist') sira.push('ortakDon', 'serbest');
-      else if (P.n === 'Teknokrasi') sira.push('bilimAgi', 'serbest');
-      else if (P.n === 'Tüccar') sira.push('serbest', 'bilimAgi');
-      else if (P.n === 'Pasifist') sira.push('savasOnay', 'bilimAgi');
-      else sira.push('serbest', 'ortakDon');
+      if (P.n === 'Militarist') sira.push('ortakDon','ortakDoktrin','seriUretim','ikmalStandardi','serbest');
+      else if (P.n === 'Teknokrasi') sira.push('bilimAgi','sivilFon','uyumProgrami','serbest');
+      else if (P.n === 'Tüccar') sira.push('sivilFon','patentOzerk','refah','serbest');
+      else if (P.n === 'Pasifist') sira.push('savasOnay','refah','uyumProgrami','bilimAgi');
+      else sira.push('serbest','uyumProgrami','ortakDon','ikmalStandardi');
     } else sira.push('serbest');
 
     for (const k of sira){
       if (f.laws && f.laws[k]) continue;
-      if (!FED_INNER_LAWS[k]) continue;
+      if (fedLawConflicts(f,k).length) continue; // AI aynı bütçeyi durmadan tersine çevirmesin.
+      if (!FED_INNER_LAWS[k] || !canFedLaw(e, k).ok) continue;
       if ((e.res.etk || 0) < FED_INNER_LAWS[k].c) continue;
       const r = proposeFedLaw(e, k);
-      e._fedLawCd = (G.memAge || 0) + 36;
-      if (r && r.ok && r.gecti && f.members.includes(0))
-        say('🏛 ' + e.name + ' önerisi kabul edildi: ' +
-            FED_INNER_LAWS[k].n, 'sci');
+      if (r && r.ok) e._fedLawCd = (G.memAge || 0) + 36;
       break;
     }
   }

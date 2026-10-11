@@ -1,0 +1,62 @@
+STARS FAZ 89A — OLAY HAFIZASI / İÇ SİYASET
+
+KAYNAK: stars-faz88b.zip
+SHA-256: 26cf2e513bc21f074ad11b05f7ddd173ab428c583733b89d978a7cdc3994c5b1
+BUILD: 89a / SW: stars-v89a
+
+BULGULAR / DÜZELTMELER
+1. İfşa yolları aynı aktör hakkındaki tüm komplo/sabotaj anılarını siliyordu.
+   Anlık/gecikmeli fısıltı, deepInvestigate, hedefli sorusturma ve sahteKanit
+   yakalanması artık yalnız source kimliği eşleşen anıları kaldırır.
+2. Hedefli soruşturmanın üçüncü taraf ön kontrolü framed==hedef ararken,
+   uygulama by==hedef arıyordu. Aynı dosya koşuluna bağlandı.
+3. Fraksiyon logu 98+18=100 için +18 diyordu; şimdi +2. 3-14=0 için -3.
+   Talep UI'si aynı hesapla tavan/taban ve Uzlaşı ×0,6 cezasını gösterir.
+4. 13 civic/23 katalog dışı flag statik denetlendi; counter 7 çağrıda ama
+   kaldırılmış civic listesinde. Yeni civic/bonus eklenmedi.
+
+KAYIT / DAVRANIŞ SINIRI
+memoryEventSeq imparatorlukta, source anı ve hitLog/whisperLog'da saklanır.
+v8 sürümü ve depolama anahtarları değişmedi. Yükleme RNG/gün tüketmez.
+Eski, source taşımayan anılar güvenle bir olaya ayrılamaz; topluca silinmez,
+doğal solmaya bırakılır. Bu yüzden eski iftiranın anısı anında temizlenmeyebilir.
+Yeni aynı ay iftiraları ayrı izdir. Taze tekrarın %35 ağırlığı korunur;
+ancak bağımsız izlerin solma/budanması eski birleştirilmiş kayıttan farklıdır.
+Civic, kaynak ve aylık fraksiyon denge katsayıları değiştirilmedi.
+
+TESTLER
+Hedefli 24 senaryo: aynı test kaynakta 6 geçen / 18 kalan, 89A'da 24 / 0.
+İlk tam regresyon: 42 paket, 3804 geçen / 2 kalan.
+Kalanlar seed 11 için karşı teklif zorunluluğu idi (74 kabul, 0 karşı).
+Seed 99: 2 karşı kabul; seed 404: 3 karşı kabul, 2 karşı ret.
+Bu testler saklanan ilk sonuç dosyasında görülebilir.
+
+BEKLENTİ DEĞİŞİKLİĞİ — AÇIKÇA
+86C.4'ün her seed'de karşı teklif bekleyen iki iddiası (3 seed × 2),
+her seed'de karar sayımı tutarlılığı ve en çok iki tur invariantlarıyla
+DEĞİŞTİRİLDİ. Ayrıca toplam kampanyada karşı teklif >0 VE hem kabul hem ret
+ölçen iki iddia EKLENDİ. Eski 'hem kabul hem ret' ifadesinin kodu OR idi;
+artık toplam örnekte gerçekten AND. Seed değiştirip olumlu örnek aranmadı.
+Bu, test beklentisi revizyonudur; 'eski testler aynen geçti' denmiyor.
+Diğer eski testlerde yalnız build/cache beklentileri 89a'ya güncellendi.
+Test dosyası veya üretim dosyası koruma iddiası silinmedi.
+
+SON TAM REGRESYON: 42 paket / 3808 geçen / 0 kalan.
+24 yeni hedefli + 2 yeni toplam-kampanya iddiası: 3782 → 3808.
+Node/sahte DOM ve yerel Skia piksel testleri çalıştı. Gerçek tarayıcı ve
+fiziksel Android bu fazda sınanmadı. Cihaz listesi biriktirildi.
+
+DOSYALAR
+ai.js: olay kimliği, kaynaklı remember ve fısıltı ifşa temizliği.
+diplomacy.js: soruşturma/iftira temizliği, opViable hedefi, facMoodDelta.
+ui.js: gerçek talep memnuniyet tahmini.
+main.js: yalnız BUILD_ID; sw.js: yalnız cache adı.
+BYTE-FOR-BYTE AYNI (6): map.js, economy.js, combat.js, audio.js,
+manifest.json, index.html. Dosya SHA'ları tests/sha-89a.json'da.
+Kurtarma, kamera, vali portresi, Radar/Lojistik, transaction ve Situation
+kazanımları regresyon kapsamıyla korundu. Yayınlama yapılmadı.
+
+SONRAKİ FAZ
+89B gerçek günlük kampanya — Astra / High. Günlük keşif/temas, savaş,
+fraksiyon pay toplamı ve savaş raporu sayaçları aynı koşuda izlenecek.
+Cihaz testi kullanıcı hazır olana dek bekler; 90RC bundan sonra gelir.

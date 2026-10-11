@@ -11,6 +11,8 @@
    ═══════════════════════════════════════════════════════════════════ */
 
 function battleRound(sys, A, fa, B, fb, def, band){
+  const report = battleReportBegin(sys, A, B);
+  const beforeRetreatA = fa.length, beforeRetreatB = fb.length;
   /* ═══════════════════════════════════════════════════════════
      FAZ 79 — RİCAT ARTIK HASARDAN ÖNCE
      KÖK NEDEN: bu blok tur SONUNDA çalışıyordu. Ölçümde tek
@@ -39,15 +41,23 @@ function battleRound(sys, A, fa, B, fb, def, band){
         f.ord = null;
         orderMove(f, home.id);
         fx({k:'shield', x:f.x, y:f.y, life:18});
-        if (f.e === 0) say(esc(f.name) + ' ricat etti — ' + home.name, 'war');
+        battleReportRetreat(report, f.e);
+        if (f.e === 0){
+          const sup = fleetSupply(me, f);
+          say(esc(f.name) + ' ricat etti — ' + home.name + ' · gövde %' +
+              Math.round(fleetHealth(f)*100) + ' · ikmal %' + Math.round(sup*100), 'war');
+        }
       }
-  /* Ricat edenler bu turun hasar hesabına GİRMEZ — çekilme
-     ateş açmamak demektir, yoksa "son anda kaçış" anlamsız olur. */
-  fa = fa.filter(f => f.ships.length && f.combat);
-  fb = fb.filter(f => f.ships.length && f.combat);
-  if (!fa.length || !fb.length) return;
     }
   }
+
+  // Ricat bütün filolar için çözülür. Muhafız çekilse bile canlı bir
+  // yuva/istasyon savunmaya devam eder; kaçan saldırgan hasar almaz.
+  fa = fa.filter(f => f.ships.length && f.combat);
+  fb = fb.filter(f => f.ships.length && f.combat);
+  const orbitA = orbitDefenseAlive(sys, A), orbitB = orbitDefenseAlive(sys, B);
+  if ((beforeRetreatA && !fa.length && !orbitA) ||
+      (beforeRetreatB && !fb.length && !orbitB)) return;
 
   band = band || 1;
   const ea = G.emps[A], eb = G.emps[B];
@@ -64,11 +74,9 @@ function battleRound(sys, A, fa, B, fb, def, band){
      Artık gezegenin katkısı yalnız YÖRÜNGEDE HÂLÂ savunma yapısı
      varsa geçerli — ve o da azaltılmış oranda.
      ═══════════════════════════════════════════════════════════ */
-  const orbitDef = (typeof orbitDefenseAlive === 'function')
-    ? orbitDefenseAlive(sys, B) : def;
-  if (orbitDef > 0){
-    sb.dmg += orbitDef*.08; sb.hull += orbitDef*.5;
-  }
+  // Filo dizisinin sırası savunmanın hangi tarafa yazılacağını belirlemez.
+  sa.dmg += orbitA*.08; sa.hull += orbitA*.5;
+  sb.dmg += orbitB*.08; sb.hull += orbitB*.5;
 
   /* FAZ 73: PULSAR — iki tarafın da kalkanı çalışmaz.
      Yıldızın manyetik darbesi enerji perdelerini söndürür;
@@ -106,8 +114,11 @@ function battleRound(sys, A, fa, B, fb, def, band){
   let paktA = 1, paktB = 1;
   if (eb.crisisSide && ea.mods && ea.mods.crisisDmg) paktA += ea.mods.crisisDmg;
   if (ea.crisisSide && eb.mods && eb.mods.crisisDmg) paktB += eb.mods.crisisDmg;
-  const kb = applyDamage(eb, fb, toB * ambA * paktA * evB);
-  const ka = applyDamage(ea, fa, toA * ambB * paktB * evA);
+  const hitB = applyDamage(eb, fb, toB * ambA * paktA * evB, ea);
+  const hitA = applyDamage(ea, fa, toA * ambB * paktB * evA, eb);
+  const kb = hitB.killed, ka = hitA.killed;
+  battleReportRound(report, band, sa, sb, fa, fb, hitA, hitB);
+  warLedgerBattle(A,B,hitA,hitB);
 
   /* FAZ 15: KAYIP ORANTILI SAVAŞ YORGUNLUĞU
      Yorgunluk artık yalnız zamana ve kuşatmaya değil, DÖKÜLEN KANA
@@ -140,9 +151,7 @@ function battleRound(sys, A, fa, B, fb, def, band){
 
   // korsan yuvası savunmaya katkı yapar ve saldırı altında yıpranır
   if (sys.nest){
-    // vahşi taraf muharebede yoksa da yuvayı kuşatan taraf hasar verir
-    let wildSide = (G.emps[A] && G.emps[A].wild) ? A : (G.emps[B] && G.emps[B].wild) ? B : -1;
-    if (wildSide < 0 && G.wildId !== undefined) wildSide = G.wildId;
+    const wildSide = wildDefenseAlive(sys, A) > 0 ? A : wildDefenseAlive(sys, B) > 0 ? B : -1;
     if (wildSide >= 0){
       const atkDmg = (wildSide === A) ? sb.dmg : sa.dmg;
       sys.nest.hp -= atkDmg * .35;
@@ -164,8 +173,7 @@ function battleRound(sys, A, fa, B, fb, def, band){
 
   // kalıntı savunması hasar alır ve yıkılırsa ödül verir
   if (sys.ruin && sys.ruin.hp > 0){
-    let wildSide2 = (G.emps[A] && G.emps[A].wild) ? A : (G.emps[B] && G.emps[B].wild) ? B : -1;
-    if (wildSide2 < 0 && G.wildId !== undefined) wildSide2 = G.wildId;
+    const wildSide2 = wildDefenseAlive(sys, A) > 0 ? A : wildDefenseAlive(sys, B) > 0 ? B : -1;
     if (wildSide2 >= 0){
       const atk = (wildSide2 === A) ? sb.dmg : sa.dmg;
       sys.ruin.hp -= atk * .30;
@@ -244,17 +252,22 @@ function battleRound(sys, A, fa, B, fb, def, band){
   }
 
   const liveA = fa.filter(f=>f.ships.length), liveB = fb.filter(f=>f.ships.length);
-  const armA = liveA.some(isArmed), armB = liveB.some(isArmed) || sysDefense(sys) > 0;
+  const armA = liveA.some(isArmed) || wildDefenseAlive(sys, A) > 0 || (sys.owner === A && sysDefense(sys, false) > 0);
+  const armB = liveB.some(isArmed) || wildDefenseAlive(sys, B) > 0 || (sys.owner === B && sysDefense(sys, false) > 0);
 
   if (!armA || !armB){
     // bitiş
     const winner = armA ? A : B;
     const loser  = armA ? B : A;
     const lf = armA ? liveB : liveA;
+    let sonKayip = 0;
     for (const f of lf){
       // silahsız kalanlar imha
+      sonKayip += f.ships.length;
       f.ships = [];
     }
+    battleReportLoss(report, loser, sonKayip);
+    warLedgerBattle(winner,loser,{killed:0,damage:0},{killed:sonKayip,damage:0},false);
     G.fleets = G.fleets.filter(f => f.ships.length);
     [...fa, ...fb].forEach(f => f.combat = 0);
     sys.cr = 0;
@@ -282,8 +295,52 @@ function battleRound(sys, A, fa, B, fb, def, band){
     }
     if (A === 0 || B === 0){
       const we = (winner === 0);
-      say((we?'ZAFER':'YENİLGİ') + ' — ' + sys.name + ' muharebesi', we?'win':'war');
+      battleReportFinish(report, winner);
+      const pv = battleReportForPlayer(sys);
+      say((we?'ZAFER':'YENİLGİ') + ' — ' + sys.name + ' muharebesi · ' +
+          'kayıp ' + pv.mine.loss + ' / düşman ' + pv.enemy.loss,
+          we?'win':'war');
+    } else {
+      battleReportFinish(report, winner);
     }
   }
 }
 
+/* 88B: ekran ve bitiş mesajı doğrudan çözülmüş turun sonucunu okur. */
+function battleReportBegin(sys, A, B){
+  let r = sys.battleReport;
+  if (!r || r.done || r.a!==A || r.b!==B){
+    r = sys.battleReport = {a:A,b:B,at:G.day,rounds:0,band:3,
+      loss:[0,0],retreat:[0,0],done:false,winner:null,last:null};
+  }
+  return r;
+}
+function battleReportSide(r, emp){
+  return emp===r.a ? 0 : emp===r.b ? 1 : -1;
+}
+function battleReportLoss(r, emp, n){
+  const i=battleReportSide(r,emp);
+  if (i>=0 && n>0) r.loss[i]+=n;
+}
+function battleReportRetreat(r, emp){
+  const i=battleReportSide(r,emp);
+  if (i>=0) r.retreat[i]++;
+}
+function battleReportRound(r, band, sa, sb, fa, fb, hitA, hitB){
+  r.rounds++;
+  r.band=band||1;
+  r.loss[0]+=hitA.killed;
+  r.loss[1]+=hitB.killed;
+  r.last={
+    // Pay ve payda aynı ana aittir: hasar uygulanmadan önceki tur katılımı.
+    ships:[sa.n,sb.n],
+    ready:[sa.ready,sb.ready],
+    dealt:[hitB.damage,hitA.damage],
+    supply:[sa.supply,sb.supply]
+  };
+}
+function battleReportFinish(r,winner){
+  r.done=true;
+  r.winner=winner;
+  r.ended=G.day;
+}

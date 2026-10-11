@@ -1,0 +1,67 @@
+STARS FAZ 92B — GEREKÇELİ SAVAŞ SONRASI PAYLAŞIM VE ONAY
+Tarih: 2026-09-27
+
+KAYNAK
+stars-faz92a.zip
+SHA-256: 21ca3ed207f5972db77a75a3e7527e153d151e111174facce6f7cc98e32090fc
+Çıktı build: 92b; SW cache: stars-v92b. Kayıt sürümü: v8.
+
+TAMAMLANAN
+Ortak sefer sona erdiğinde savaş katkısı ekranından paylaşım taslağı
+açılır. Koloniler ayrı varlık, kolonisiz sistem tek varlık sayılır.
+Yalnız aynı taraftaki yaşayan katılımcıların elinde kalan uygun fetihler
+paylaşıma aday olur; üçüncü tarafın malı taslağa alınmaz.
+
+Taslak; gerçek muharebe katkısı, kayıtlı fetih hedefi ve mevcut kontrol
+üzerinden alıcı önerir. Oyuncu alıcıları değiştirebilir. AI teklifin
+kendi payına etkisini gerekçesiyle değerlendirir; oyuncunun oyu otomatik
+verilmez. Tek ret öneriyi reddeder, onay için tüm katılımcılar gerekir.
+Onaylanan öneri açıkça 'henüz uygulanmadı' olarak gösterilir.
+
+Süre dolması, geri çekme, yeniden teklif, yenilenen savaş, katılımcı
+ve sahiplik değişimi, eski UI callback'i ve kayıt yükleme yolları
+korunur. Yeni teklifler yeni kimlik/oy alır. Gizli sistem ve devlet
+isimleri paylaşım ekranından sızdırılmaz.
+
+GERÇEK DEVİR BU FAZDA YOK
+Onay kaynak veya toprak aktarmaz. Güvenli uygulama 92C'de yapılacak.
+AI kendisine sunulan teklifi değerlendirir; otomatik aylık paylaşım
+gündemi üretimi henüz eklenmedi. Eksik eski sefer kaydı ve aynı gün
+birden çok cepheden gelen sırası belirsiz işgaller kapsam dışıdır.
+Katkı ağırlıkları ilk deterministik politikadır; uzun denge ölçümü yok.
+Sahiplik değişimlerinin tamamı için doğrudan yazma denetimi 92C'de
+tamamlanmalı; mevcut devir sayacı tek başına bu kapsama dair iddia değildir.
+
+TEST VE DÜRÜST DÜZELTME
+Yeni paylaşım testi: 33 geçti / 0 kaldı.
+İlk tam koşu: 58 paket, 4163 geçti / 5 kaldı / 0 atlandı.
+İki iddia eski build kimliği bekliyordu; 92b'ye güncellendi.
+Üç kayıt iddiası gerçek bir kusur buldu: yüklemede eksik shareRev
+alanını 0'a çevirmek kayıt döngüsünün çıktısını değiştiriyordu.
+Alan yoksa yokluğunu koruma düzeltmesi yapıldı.
+
+Düzeltme sonrası altı etkilenen paket yeniden çalıştırıldı:
+tanılama 85, hedefli tanılama 87, RC kayıt 15, yükleme saflığı 128,
+uzamsal kayıt sürekliliği 160, yeni paylaşım 33: toplam 508 / 0.
+Birleştirilmiş son kanıt: 58 paket, 4168 geçti / 0 kaldı / 0 atlandı.
+Bu sayı yeni bir tam koşu değildir: ilk tam koşudaki altı paketin
+sonuçları son tekrar koşularıyla değiştirilmiştir. Kalan 52 paket,
+dar kayıt düzeltmesinden sonra yeniden çalıştırılmadı.
+İlk, tekrar ve birleştirilmiş sonuç JSON'ları tests/ altında korunur.
+Hiçbir davranış beklentisi gevşetilmedi veya test silinmedi.
+
+KORUNANLAR
+map.js, combat.js, economy.js, ai.js, audio.js, index.html,
+manifest.json kaynak 92A ile byte-for-byte aynı. SW değişikliği cache
+kimliğiyle sınırlı. Yeni oyun, kayıt, transaction ve paylaşım UI yolları
+main.js/diplomacy.js/ui.js içinde güncellendi.
+
+Fiziksel Android veya gerçek tarayıcı kabulü bu fazda yapılmadı.
+Kullanıcının test molası korunur; senaryolar CIHAZ-TEST-BIRIKIMI.md'ye
+eklendi. 91C, 87T için dondurulmuş cihaz adayı olarak değişmeden kaldı.
+Yayın yapılmadı.
+
+SIRADAKİ: 92C — Astra / High
+Onaylı paylaşımı yeniden doğrulama; karma kolonilerde doğru devir;
+nesne kimliği ve yan etkiler dahil başarısızlıkta tam geri alma;
+aynı onayın iki kez uygulanmasını engelleme ve sonuç raporu.

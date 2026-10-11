@@ -1,0 +1,94 @@
+STARS FAZ 92C — ONAYLI PAYLAŞIMIN GERÇEK DEVRİ
+Tarih: 2026-10-05
+
+KAYNAK
+stars-faz92b1.zip
+SHA-256: f3395cc67458ad60d57c14f8abb49dc1e10952bd11bd517ce515962686ebd1e9
+Kaynak doğrulandı; build 92c, cache stars-v92c. Kayıt v8 korundu.
+
+TAMAMLANAN
+Oybirliğiyle onaylanan teklif, katılımcının Onaylı paylaşımı uygula
+eylemiyle gerçek mülkiyet değişimine dönüşür. Uygulama öncesinde
+sefer/süre/katılımcı/sahiplik/içerik/oybirliği yeniden kontrol edilir.
+Kısmi veya değiştirilmiş onay kullanılamaz. Bir sefer/tarafın paylaşımı
+tek kez uygulanabilir; sonuç makbuzu kayıtta saklanır.
+
+MÜLKİYET POLİTİKASI
+Kolonili sistemde yalnız onaylanan gezegen devredilir. Diğer koloniler,
+yörünge sahibi, uzay yapıları ve filolar el değiştirmez. Karma sahiplik
+korunur. Nüfus/yapı/bina kuyruğu/istikrar korunur; fetih şoku, ganimet,
+asimilasyon veya savaş katkısı oluşmaz. Vali eski devletin havuzunda
+görevsiz kalır; otomatik inşa kapanır. Başkent artık kendi kolonilerinde
+değilse kalan kolonilerden deterministik olarak yeniden seçilir.
+Son kolonisinden olacak ortağın bulunduğu paylaşım uygulanamaz;
+eşzamanlı takasın nihai koloni sayısı dikkate alınır.
+
+Boş sistemde yörünge/uzay yapıları alıcıya geçer. Bekleyen gemi veya
+uzay yapısı inşası varsa devir reddedilir; önce bu işler tamamlanmalıdır.
+Eski ralli ve sürekli üretim ayarları temizlenir. Filolar korunur.
+
+İŞLEM GÜVENLİĞİ
+settlementApplyQuote saf uygulama kapısı; settlementApply ortak derin
+nesne grafiği transaction'ını kullanır. Koloni indeksleri uygulama öncesi
+ve sonrası doğrulanır. Kaynak stokları, RNG ve gün ilerlemez.
+economyTick(true) gelir/kapasite/önbelleği yeniden hesaplar; aylık dünya
+ilerlemez. Uzay yapısı önbelleği transaction köklerine eklendi.
+Log commit öncesi, UI/ses commit sonrası işlenir. Sunum hatası tamamlanmış
+devri reddedilmiş göstermez; yeniden uygulama veya geri alma yaratmaz.
+
+SAHİPLİK VE RIZA
+main/economy/diplomacy içindeki açık owner atamaları territoryOwnerSet
+yoluna taşındı; diğer üretim dosyaları da tarandı. Monoton shareRev,
+başkasına geçip geri gelen mülkte eski onayın kullanılmasını engeller.
+Sayaç fiziksel devir adedi değildir; mevcut planetFlip işaretleri de kalır.
+İlgili sistemin gezegen sahipliği/koloni varlığı onaya bağlanır.
+Teklifin satır, alıcı, ağırlık ve katılımcı içeriği terms ile bağlanır;
+değişmiş taslak mevcut oylarla uygulanamaz. Bu bir kriptografik imza
+veya kullanıcı tarafından düzenlenmiş kayda karşı hile engeli değildir.
+
+KAYIT UYUMLULUĞU
+Eski dünya v8 kayıtları yüklenir. 92B/92B.1'deki eski onaylar yeni
+uygulama protokolüne uymadığından geçersizleşir; yeni teklif/onay gerekir.
+Dünya geri sarılmaz. Applied makbuzu uygulayan ortak, gün ve değişen
+satırları içerir. Yükleme bu devri tekrar çalıştırmaz; daha sonra mülk
+el değiştirse de tarihçe kalır. Bozuk makbuz yüklemesi geri alınır.
+
+DOĞRULAMA
+Yeni hedefli test: 28 senaryo / 28 geçen / 0 kalan.
+İlk hedefli koşuda 27/1: test içindeki iç içe tırnak hatası düzeltildi;
+üretim sonucuna ilişkin başarısız iddia değildi.
+Gerçek sefer/savaş/destek/barış üzerinden boş sistem ve kolonili takas;
+karma üçüncü taraf kolonisi; nüfus/yapı/filo korunumu; vali/başkent;
+son koloni; eski sahipliğe dönüş; yeni savaş/ölüm/süre; değiştirilmiş
+teklif; eksik oy; hatalı koloni indeksi; bekleyen üretim sınandı.
+
+Yedi hata enjeksiyonu: before:apply, ilk varlık sonrası, after:items,
+after:recalc, after:receipt, after:log, son. Her birinde kaynak/RNG/
+log/sahiplik/vali/koloni dizileri ve özgün nesne kimlikleri geri geldi.
+Başarısız işlem UI.alert yayımlamadı; ardından başarılı uygulama çalıştı.
+İç içe uygulama reddi, commit sonrası audio/alert/refresh istisnası,
+gerçek UI callback'i, eski UI callback'i, kayıt devamı ve çift uygulama
+koruması ayrıca sınandı.
+
+SON ÜRETİM KODUYLA TAM REGRESYON
+60 paket · 4215 geçen · 0 kalan · 0 atlanan.
+Native Canvas paketleri dahil. tests/results-92c.json koşu sonucudur.
+Eski testlerde yalnız sürüm/cache beklentileri güncellendi; davranış
+iddiası silinmedi veya gevşetilmedi. 92B.1 gemi kilidi 19/0 korunuyor.
+Fiziksel Android veya gerçek tarayıcı testi bu fazda yapılmadı.
+
+DEĞİŞEN DOSYALAR
+diplomacy.js: içerik bağı, uygulama kapısı/transaction/makbuz, restore,
+sahiplik setter çağrıları, türetilmiş önbellek transaction kapsamı.
+main.js: territoryOwnerSet, mevcut sahiplik atamalarının bağlanması,
+build kimliği. economy.js: mevcut sahiplik atamalarının bağlanması.
+ui.js: gerçek Uygula eylemi, sonuç/engel açıklamaları.
+sw.js: yalnız cache kimliği.
+map.js / ai.js / combat.js / audio.js / index.html / manifest.json aynı.
+
+KALAN VE SIRADAKİ
+92D — Astra / High: barış sonrası doğal konferans/gündem ve AI teklifi;
+oyuncunun açık onayı korunarak uzun kampanya ölçümü. Otomatik AI gündemi
+bu fazda eklenmedi. Dengeler, sınırsız arşiv büyümesi ve mobil görünüm
+ayrı kabul bekler. Cihaz testleri biriktirildi; kullanıcıdan test istenmedi.
+91C/87T dondurulmuş aday aynı. Yayın/deploy yapılmadı.

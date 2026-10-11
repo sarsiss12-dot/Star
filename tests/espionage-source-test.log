@@ -1,0 +1,407 @@
+✗ kendine operasyon reddedilir; dünya/RNG değişmez — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+true !== false
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:8:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:39:3
+    at test (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:37:3)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ temassız hedef reddedilir; dünya/RNG değişmez — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+true !== false
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:8:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:39:3
+    at test (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:37:3)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✓ ölü hedef reddedilir; dünya/RNG değişmez
+✗ korsan hedef reddedilir; dünya/RNG değişmez — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+true !== false
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:8:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:39:3
+    at test (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:37:3)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ eski hedef nesnesi reddedilir; dünya/RNG değişmez — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+true !== false
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:8:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:39:3
+    at test (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:37:3)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✓ olmayan hedef reddedilir; dünya/RNG değişmez
+✗ ölü aktör reddedilir; dünya/RNG değişmez — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+true !== false
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:8:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:39:3
+    at test (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:37:3)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ eski aktör reddedilir; dünya/RNG değişmez — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+true !== false
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:8:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:39:3
+    at test (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:37:3)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ null aktör istisnasız reddedilir — diplomacy.js:1956
+  return clamp((e.intel && e.intel[id]) || 0, 0, 3);
+                  ^
+
+TypeError: Cannot read properties of null (reading 'intel')
+    at intelOf (diplomacy.js:1956:19)
+    at opQuote (diplomacy.js:2162:15)
+    at evalmachine.<anonymous>:1:1
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/scratch/93cb118e686c/stars-faz87a/tests/helpers/runtime.js:111:25)
+    at /workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:41:67
+    at test (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:41:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+✗ katalog dışı/prototip anahtarları ve sayısal olmayan casus hedefi etkisizdir — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+false !== true
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:8:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:46:3
+    at test (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:42:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ kilitli operasyon gerçek stok/koloni sayısı sızdırmaz — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ '4 yağmalanabilir stok'
+- ''
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:8:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:50:27
+    at test (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:48:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✓ 2400 önizleme saf; uygun teklifin gerçek maliyet/risk alanları korunur
+✗ sağ panel CASUS ATA ve GERİ ÇEK üretir; eylem istihbaratta kalır — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+false !== true
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:8:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:60:28
+    at test (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:58:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✓ dolu kapasite yeni casus atamaz, mevcut casusu geri çekebilir
+✗ geçersiz casus ataması A.id sıfır mutasyon — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+true !== false
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:8:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:70:3
+    at test (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:68:32)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ geçersiz casus ataması 999 sıfır mutasyon — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+true !== false
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:8:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:70:3
+    at test (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:68:32)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ eski hedefte kalmış casus geri çekilebilir — evalmachine.<anonymous>:1
+A.spy[999]=true;var q=spyAssignQuote(A,999);var ok=assignSpy(A,999);
+                      ^
+
+ReferenceError: spyAssignQuote is not defined
+    at evalmachine.<anonymous>:1:23
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/scratch/93cb118e686c/stars-faz87a/tests/helpers/runtime.js:111:25)
+    at /workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:73:21
+    at test (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:72:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+✗ iptalden sonra eski onay hiçbir operasyon yürütmez — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+false !== true
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:8:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:77:89
+    at test (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:76:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ başka modal eski onayı iptal eder — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+false !== true
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:8:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:80:117
+    at test (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:79:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ aynı operasyon yeniden açılırsa eski jeton yeni onayı tüketmez — AssertionError [ERR_ASSERTION]: Expected "actual" to be strictly unequal to:
+
+'1:kervan'
+    at /workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:83:52
+    at test (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:82:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+✓ çift onay tek kesinti ve iki tarafta tek kayıt üretir
+✗ onaydan sonra maliyet değişimi kesinti yapmadan durur — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+1 !== 0
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:8:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:95:3
+    at test (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:93:3)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ onaydan sonra risk değişimi kesinti yapmadan durur — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+1 !== 0
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:8:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:95:3
+    at test (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:93:3)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ onaydan sonra temas değişimi kesinti yapmadan durur — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+1 !== 0
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:8:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:95:3
+    at test (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:93:3)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✓ onaydan sonra kaynak değişimi kesinti yapmadan durur
+✓ onaydan sonra hedef ölümü değişimi kesinti yapmadan durur
+✗ deserialize sonrası eski onay yeni dünyada çalışmaz — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+1 !== 0
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:8:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:99:3
+    at test (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:97:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ geçersiz yeni önizleme eski onayı da iptal eder — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+false !== true
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:8:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:102:97
+    at test (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:101:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ dört süreli kazanım gerçek alanlardan okunur; bitiş gününde listeden çıkar — evalmachine.<anonymous>:2
+    A.fleetIntel={[B.id]:G.day+30};A.smuggle={[B.id]:G.day+40};var before=snap();var effects=opActiveEffects(A,B);var html=UI.opEffects(B);
+                                                                                             ^
+
+ReferenceError: opActiveEffects is not defined
+    at evalmachine.<anonymous>:2:94
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/scratch/93cb118e686c/stars-faz87a/tests/helpers/runtime.js:111:25)
+    at /workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:105:21
+    at test (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:104:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+✗ kervan yürütme gerçek süreyi oluşturur; v8 kaydında korunur — evalmachine.<anonymous>:1
+runOp(A,B,'kervan');var first=opActiveEffects(A,B);var txt=serialize();deserialize(txt);A=G.p;B=G.emps[1];var second=opActiveEffects(A,B);
+                              ^
+
+ReferenceError: opActiveEffects is not defined
+    at evalmachine.<anonymous>:1:31
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/scratch/93cb118e686c/stars-faz87a/tests/helpers/runtime.js:111:25)
+    at /workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:112:21
+    at test (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:111:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+✗ düşmanın gizli virüs süresi ve başka devlete ait kazanım gösterilmez — evalmachine.<anonymous>:1
+B.virusUntil=G.day+777;A.routeIntel={[C.id]:G.day+888};var html=UI.opEffects(B);
+                                                                   ^
+
+TypeError: UI.opEffects is not a function
+    at evalmachine.<anonymous>:1:68
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/scratch/93cb118e686c/stars-faz87a/tests/helpers/runtime.js:111:25)
+    at /workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:117:21
+    at test (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:116:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+✗ kendi tersane zararı görünür ama faili bilinmeyen isim sızmaz — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+false !== true
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:8:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:122:3
+    at test (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:120:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ saklanan sonuç özeti iki dosya görünümünde de kesilmeden ve güvenle gösterilir — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+false !== true
+
+    at eq (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:8:30)
+    at /workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:128:3
+    at test (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:124:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ eski kayıtta özet yoksa sonuç uydurulmaz — AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert.ok(h.doc.getElementById('modal').innerHTML.includes('ayrıntılı sonuç saklanmamış'))
+
+    at /workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:132:10
+    at test (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:130:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+✗ ifşa edilmemek hiç iz kalmaması olarak anlatılmaz — AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert.ok(html.includes('sonraki soruşturmalarla çözülebilir'))
+
+    at /workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:138:10
+    at test (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/93cb118e686c/stars-faz87a/tests/faz87a_espionage_feedback_test.js:134:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+✓ gerçek AI aktörü de aynı kanonik kayıt ve maliyet yolunu kullanır
+GEÇEN: 8 KALAN: 28

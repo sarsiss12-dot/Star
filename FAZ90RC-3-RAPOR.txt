@@ -1,0 +1,83 @@
+GELİŞTİRİCİ RAPORU — STARS FAZ 90RC.3
+KAYIT YÜKLEME İŞLEM SINIRI VE DERİN HATA GERİ ALMA
+
+1) KAYNAK
+stars-faz90rc-2.zip
+SHA-256: 98526b8f7a5dcfefbddcfbf7fc4ca343ce312d07e9ac89d1ee763c55fb3da800
+Çıktı: stars-faz90rc-3.zip; build 90rc-3; cache stars-v90rc-3.
+Çıktı ZIP hash'i ZIP'in dışında teslim mesajında verilir.
+
+2) SOMUT SORUN
+90RC.1/2 kayıt ön kapısı bozuk zarfı reddediyordu; fakat kapıdan geçen
+bir kayıtta dünya atamalarından sonra göç/türetilmiş durum/ekonomi hatası
+oluşursa canlı dünya yarım yüklenmiş kalabiliyordu. Hata dışarı sızabiliyor,
+önceki seçimin referansı ve yeni dünya birbirinden ayrılabiliyordu.
+
+3) DÜZELTME
+deserialize = saf kontrol + özgün G nesne grafiği/RNG snapshot + applySaveData
++ commit + finishSaveLoad. Uygulama hatasında eski nesneler yerinde geri
+alınır; nested alias, Map/Set ve 60 seviyeli döngü korunur. Alanın varlığı
+ile değeri ayrı saklanır. RNG=0 dahi aynen geri gelir.
+G.nebula native canvas'ı snapshot dışında; eski referansı/pikselleri korunur.
+View/DOM/aktif pointer/UI seçimi uygulama sırasında değiştirilmez.
+Say/UI tamponu yalnız başarıda yayımlanır. Başarı sonrası sunum hataları
+tanıya yazılır; yüklenen dünya yanlışlıkla reddedilmiş sayılmaz.
+Etkin anlaşma, mevcut sideBuf ve iç içe yükleme girişimleri reddedilir.
+Yükleme kilidi finally ile serbest bırakılır.
+
+4) KARŞILAŞTIRMALI KANIT
+tests/faz90rc_3_load_transaction_test.js: 48 senaryo.
+Kaynak 90RC.2: 3 geçen / 45 kalan. Çıktı 90RC.3: 48 geçen / 0 kalan.
+Bu sayılar 45 bağımsız kök neden iddiası değildir.
+- 12 aşama: before:apply, after:roots/treaties/world/crisis/campaign/
+  simulation/events/mods/derived/economy, before:commit.
+- Ön kapıdan geçen 5 gerçek bozuk kayıt: null koloni, geçersiz koloni
+  sistemi, bilinmeyen ırk, bilinmeyen bina, geçersiz filo sistemi.
+- 9 gerçek üretim fonksiyonu çalışıp sonra hata atar: normalizeEnvoys,
+  restorePoliticalWorld, restoreCrisisWorld, restoreCampaignWorld,
+  restoreSimulationWorld, restoreEventsWorld, recalcMods,
+  rebuildDerivedStateAfterLoad, economyTick.
+- Bağımsız oracle: değer kadar özgün kimlik/descriptor/prototype,
+  LOOP, gesture, seçim, kamera, UI not/teklif, RNG, zamanlayıcı ve depolama.
+- Native Skia ile geç hata sonrası eski çizimin pikselleri ve pointer
+  capture korunumu. Skia gerçek Chrome/Android değildir.
+- Snapshot hatası, nested load, logDiag hatası, başlangıç dünyası,
+  tekrar yükleme, log/UI/audio tamponları ve commit sonrası sunum hataları.
+
+5) TAM REGRESYON
+47 paket / 3892 geçen / 0 kalan / 0 atlanan.
+Makine sonucu: tests/results-90rc-3.json.
+Beş eski statik iddia yeni kod biçimine uyarlandı: dört yükleme sıra testi
+rebuildDerivedStateAfterLoad(true) çağrısını arar; eski seçim kaynak kodu
+kontrolü yeni kimlikle bağlama biçimini arar. Davranış beklentileri korunur.
+Diğer değişen beklentiler build/cache kimliği güncellemesidir. Test silinmedi.
+
+6) ÜRETİM DOSYALARI
+main.js: yükleme işlem sınırı, ertelenen View/UI sunumu, build.
+diplomacy.js: txCaptureGraph(values, opaque) isteğe bağlı opaque nesne kümesi.
+Mevcut anlaşmalar bu argümanı vermez; 529 anlaşma kabul kontrolü geçiyor.
+sw.js: yalnız cache adı. Worker işleyişi değişmedi.
+Byte-for-byte korunan 8 dosya: ui.js, map.js, economy.js, combat.js,
+ai.js, audio.js, index.html, manifest.json.
+
+7) PERFORMANS VE SINIR
+Gerçek eski v8 fixture: 100 sistem / 63 filo. Aynı Node/sahte DOM ortamında
+5 ısınma + 30 yükleme örneği:
+90RC.2 ortanca 82.10 ms, p95 94.47 ms.
+90RC.3 ortanca 100.99 ms, p95 201.00 ms.
+Yeni snapshot ek süre/bellek ister. Bu küçük laboratuvar ölçümü Android veya
+sabit performans garantisi değildir. Cihazda büyük kayıt yükleme akıcılığı
+87T listesine eklendi; şu anda kullanıcıdan test istenmiyor.
+
+8) KORUNANLAR VE AÇIK SINIRLAR
+Save v8, depolama anahtarları, Situation karantinası ve denge aynı.
+Geri alma mevcut senkron üretim yollarının tersinir oyun verisini kapsar;
+process ölümü, Object.freeze/nonconfigurable alan ve keyfî native yan etki
+için evrensel atomiklik iddiası değildir. Ayrıntı LOAD-TRANSACTION-KAPSAMI.md.
+Gerçek tarayıcı / fiziksel Android testi bu fazda yapılmadı. Yayın yapılmadı.
+
+9) DEVAM
+90F hazırlığı: açık risk/devir ve sürüm dondurma koşullarını sabitle.
+Model önerisi: Sol — High. Nihai kabul 87T cihaz sonuçlarını bekler.
+Yeni somut bulgu olmadan aynı alan için yeni RC düzeltmesi açılmaz.
+91A yeni özellik/denge hattı ayrı kapsamla planlanır.

@@ -11,7 +11,7 @@
    önbellekteki tek parça main.js temizlensin. */
 /* FAZ 83: sürüm yükseltildi — eski ve yeni JS dosyalarının
    karışmasını önler; activate'te eskiler siliniyor. */
-const CACHE = 'stars-v88b';
+const CACHE = 'stars-v92d';
 
 /* Oyunun tamamı — hepsi yerel dosya, dış bağımlılık yok */
 const KABUK = [
@@ -29,12 +29,12 @@ const KABUK = [
 ];
 
 self.addEventListener('install', ev => {
-  /* Yeni sürüm hemen devreye girsin — beklemede kalmasın */
-  self.skipWaiting();
+  /* Kabuk TAM kurulmadan yeni worker etkinleşmemeli. Bir dosya eksikse
+     install reddedilir ve çalışan eski sürüm/cache yerinde kalır. */
   ev.waitUntil(
     caches.open(CACHE)
       .then(c => c.addAll(KABUK))
-      .catch(() => {})          // bir dosya eksikse kurulum yine de sürsün
+      .then(() => self.skipWaiting())
   );
 });
 
@@ -42,7 +42,9 @@ self.addEventListener('activate', ev => {
   ev.waitUntil(
     caches.keys()
       .then(adlar => Promise.all(
-        adlar.filter(a => a !== CACHE).map(a => caches.delete(a))
+        /* Aynı origin'deki başka PWA/cache adlarına dokunma. */
+        adlar.filter(a => a.startsWith('stars-v') && a !== CACHE)
+             .map(a => caches.delete(a))
       ))
       .then(() => self.clients.claim())
   );
