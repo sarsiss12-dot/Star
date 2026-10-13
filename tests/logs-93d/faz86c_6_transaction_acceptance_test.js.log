@@ -1,0 +1,531 @@
+✓ Oracle detects identity loss even when serialized values match
+✓ give:res real quote is valid and has a new effect
+✓ give:res before:res reaches the real mutation boundary
+✓ give:res before:res restores the complete G graph/RNG with zero publication
+✓ give:res after:res reaches the real mutation boundary
+✓ give:res after:res restores the complete G graph/RNG with zero publication
+✓ give:res after:items reaches the real mutation boundary
+✓ give:res after:items restores the complete G graph/RNG with zero publication
+✓ give:res after:cost reaches the real mutation boundary
+✓ give:res after:cost restores the complete G graph/RNG with zero publication
+✓ give:res after:goodwill reaches the real mutation boundary
+✓ give:res after:goodwill restores the complete G graph/RNG with zero publication
+✓ give:res after:recalc reaches the real mutation boundary
+✓ give:res after:recalc restores the complete G graph/RNG with zero publication
+✓ give:res after:log reaches the real mutation boundary
+✓ give:res after:log restores the complete G graph/RNG with zero publication
+✓ give:res son reaches the real mutation boundary
+✓ give:res son restores the complete G graph/RNG with zero publication
+✓ give:res succeeds afterwards; canonical fee paid by proposer once
+✓ give:tribute real quote is valid and has a new effect
+✓ give:tribute before:tribute reaches the real mutation boundary
+✓ give:tribute before:tribute restores the complete G graph/RNG with zero publication
+✓ give:tribute after:tribute reaches the real mutation boundary
+✓ give:tribute after:tribute restores the complete G graph/RNG with zero publication
+✓ give:tribute after:items reaches the real mutation boundary
+✓ give:tribute after:items restores the complete G graph/RNG with zero publication
+✓ give:tribute after:cost reaches the real mutation boundary
+✓ give:tribute after:cost restores the complete G graph/RNG with zero publication
+✓ give:tribute after:goodwill reaches the real mutation boundary
+✓ give:tribute after:goodwill restores the complete G graph/RNG with zero publication
+✓ give:tribute after:recalc reaches the real mutation boundary
+✓ give:tribute after:recalc restores the complete G graph/RNG with zero publication
+✓ give:tribute after:log reaches the real mutation boundary
+✓ give:tribute after:log restores the complete G graph/RNG with zero publication
+✓ give:tribute son reaches the real mutation boundary
+✓ give:tribute son restores the complete G graph/RNG with zero publication
+✓ give:tribute succeeds afterwards; canonical fee paid by proposer once
+✓ give:sys real quote is valid and has a new effect
+✓ give:sys before:sys reaches the real mutation boundary
+✓ give:sys before:sys restores the complete G graph/RNG with zero publication
+✓ give:sys after:sys reaches the real mutation boundary
+✓ give:sys after:sys restores the complete G graph/RNG with zero publication
+✓ give:sys after:items reaches the real mutation boundary
+✓ give:sys after:items restores the complete G graph/RNG with zero publication
+✓ give:sys after:cost reaches the real mutation boundary
+✓ give:sys after:cost restores the complete G graph/RNG with zero publication
+✓ give:sys after:goodwill reaches the real mutation boundary
+✓ give:sys after:goodwill restores the complete G graph/RNG with zero publication
+✓ give:sys after:recalc reaches the real mutation boundary
+✓ give:sys after:recalc restores the complete G graph/RNG with zero publication
+✓ give:sys after:log reaches the real mutation boundary
+✓ give:sys after:log restores the complete G graph/RNG with zero publication
+✓ give:sys son reaches the real mutation boundary
+✓ give:sys son restores the complete G graph/RNG with zero publication
+✓ give:sys succeeds afterwards; canonical fee paid by proposer once
+✓ give:tech real quote is valid and has a new effect
+✓ give:tech before:tech reaches the real mutation boundary
+✓ give:tech before:tech restores the complete G graph/RNG with zero publication
+✓ give:tech after:tech reaches the real mutation boundary
+✓ give:tech after:tech restores the complete G graph/RNG with zero publication
+✓ give:tech after:items reaches the real mutation boundary
+✓ give:tech after:items restores the complete G graph/RNG with zero publication
+✓ give:tech after:cost reaches the real mutation boundary
+✓ give:tech after:cost restores the complete G graph/RNG with zero publication
+✓ give:tech after:goodwill reaches the real mutation boundary
+✓ give:tech after:goodwill restores the complete G graph/RNG with zero publication
+✓ give:tech after:recalc reaches the real mutation boundary
+✓ give:tech after:recalc restores the complete G graph/RNG with zero publication
+✓ give:tech after:log reaches the real mutation boundary
+✓ give:tech after:log restores the complete G graph/RNG with zero publication
+✓ give:tech son reaches the real mutation boundary
+✓ give:tech son restores the complete G graph/RNG with zero publication
+✓ give:tech succeeds afterwards; canonical fee paid by proposer once
+✓ give:lux real quote is valid and has a new effect
+✓ give:lux before:lux reaches the real mutation boundary
+✓ give:lux before:lux restores the complete G graph/RNG with zero publication
+✓ give:lux after:lux reaches the real mutation boundary
+✓ give:lux after:lux restores the complete G graph/RNG with zero publication
+✓ give:lux after:items reaches the real mutation boundary
+✓ give:lux after:items restores the complete G graph/RNG with zero publication
+✓ give:lux after:cost reaches the real mutation boundary
+✓ give:lux after:cost restores the complete G graph/RNG with zero publication
+✓ give:lux after:goodwill reaches the real mutation boundary
+✓ give:lux after:goodwill restores the complete G graph/RNG with zero publication
+✓ give:lux after:recalc reaches the real mutation boundary
+✓ give:lux after:recalc restores the complete G graph/RNG with zero publication
+✓ give:lux after:log reaches the real mutation boundary
+✓ give:lux after:log restores the complete G graph/RNG with zero publication
+✓ give:lux son reaches the real mutation boundary
+✓ give:lux son restores the complete G graph/RNG with zero publication
+✓ give:lux succeeds afterwards; canonical fee paid by proposer once
+✓ give:peace real quote is valid and has a new effect
+✓ give:peace before:peace reaches the real mutation boundary
+✓ give:peace before:peace restores the complete G graph/RNG with zero publication
+✓ give:peace after:peace reaches the real mutation boundary
+✓ give:peace after:peace restores the complete G graph/RNG with zero publication
+✓ give:peace after:items reaches the real mutation boundary
+✓ give:peace after:items restores the complete G graph/RNG with zero publication
+✓ give:peace after:cost reaches the real mutation boundary
+✓ give:peace after:cost restores the complete G graph/RNG with zero publication
+✓ give:peace after:goodwill reaches the real mutation boundary
+✓ give:peace after:goodwill restores the complete G graph/RNG with zero publication
+✓ give:peace after:recalc reaches the real mutation boundary
+✓ give:peace after:recalc restores the complete G graph/RNG with zero publication
+✓ give:peace after:log reaches the real mutation boundary
+✓ give:peace after:log restores the complete G graph/RNG with zero publication
+✓ give:peace son reaches the real mutation boundary
+✓ give:peace son restores the complete G graph/RNG with zero publication
+✓ give:peace succeeds afterwards; canonical fee paid by proposer once
+✓ give:nap real quote is valid and has a new effect
+✓ give:nap before:nap reaches the real mutation boundary
+✓ give:nap before:nap restores the complete G graph/RNG with zero publication
+✓ give:nap after:nap reaches the real mutation boundary
+✓ give:nap after:nap restores the complete G graph/RNG with zero publication
+✓ give:nap after:items reaches the real mutation boundary
+✓ give:nap after:items restores the complete G graph/RNG with zero publication
+✓ give:nap after:cost reaches the real mutation boundary
+✓ give:nap after:cost restores the complete G graph/RNG with zero publication
+✓ give:nap after:goodwill reaches the real mutation boundary
+✓ give:nap after:goodwill restores the complete G graph/RNG with zero publication
+✓ give:nap after:recalc reaches the real mutation boundary
+✓ give:nap after:recalc restores the complete G graph/RNG with zero publication
+✓ give:nap after:log reaches the real mutation boundary
+✓ give:nap after:log restores the complete G graph/RNG with zero publication
+✓ give:nap son reaches the real mutation boundary
+✓ give:nap son restores the complete G graph/RNG with zero publication
+✓ give:nap succeeds afterwards; canonical fee paid by proposer once
+✓ give:pact real quote is valid and has a new effect
+✓ give:pact before:pact reaches the real mutation boundary
+✓ give:pact before:pact restores the complete G graph/RNG with zero publication
+✓ give:pact after:pact reaches the real mutation boundary
+✓ give:pact after:pact restores the complete G graph/RNG with zero publication
+✓ give:pact after:items reaches the real mutation boundary
+✓ give:pact after:items restores the complete G graph/RNG with zero publication
+✓ give:pact after:cost reaches the real mutation boundary
+✓ give:pact after:cost restores the complete G graph/RNG with zero publication
+✓ give:pact after:goodwill reaches the real mutation boundary
+✓ give:pact after:goodwill restores the complete G graph/RNG with zero publication
+✓ give:pact after:recalc reaches the real mutation boundary
+✓ give:pact after:recalc restores the complete G graph/RNG with zero publication
+✓ give:pact after:log reaches the real mutation boundary
+✓ give:pact after:log restores the complete G graph/RNG with zero publication
+✓ give:pact son reaches the real mutation boundary
+✓ give:pact son restores the complete G graph/RNG with zero publication
+✓ give:pact succeeds afterwards; canonical fee paid by proposer once
+✓ give:ally real quote is valid and has a new effect
+✓ give:ally before:ally reaches the real mutation boundary
+✓ give:ally before:ally restores the complete G graph/RNG with zero publication
+✓ give:ally after:ally reaches the real mutation boundary
+✓ give:ally after:ally restores the complete G graph/RNG with zero publication
+✓ give:ally after:items reaches the real mutation boundary
+✓ give:ally after:items restores the complete G graph/RNG with zero publication
+✓ give:ally after:cost reaches the real mutation boundary
+✓ give:ally after:cost restores the complete G graph/RNG with zero publication
+✓ give:ally after:goodwill reaches the real mutation boundary
+✓ give:ally after:goodwill restores the complete G graph/RNG with zero publication
+✓ give:ally after:recalc reaches the real mutation boundary
+✓ give:ally after:recalc restores the complete G graph/RNG with zero publication
+✓ give:ally after:log reaches the real mutation boundary
+✓ give:ally after:log restores the complete G graph/RNG with zero publication
+✓ give:ally son reaches the real mutation boundary
+✓ give:ally son restores the complete G graph/RNG with zero publication
+✓ give:ally succeeds afterwards; canonical fee paid by proposer once
+✓ give:warOn real quote is valid and has a new effect
+✓ give:warOn before:warOn reaches the real mutation boundary
+✓ give:warOn before:warOn restores the complete G graph/RNG with zero publication
+✓ give:warOn after:warOn reaches the real mutation boundary
+✓ give:warOn after:warOn restores the complete G graph/RNG with zero publication
+✓ give:warOn after:items reaches the real mutation boundary
+✓ give:warOn after:items restores the complete G graph/RNG with zero publication
+✓ give:warOn after:cost reaches the real mutation boundary
+✓ give:warOn after:cost restores the complete G graph/RNG with zero publication
+✓ give:warOn after:goodwill reaches the real mutation boundary
+✓ give:warOn after:goodwill restores the complete G graph/RNG with zero publication
+✓ give:warOn after:recalc reaches the real mutation boundary
+✓ give:warOn after:recalc restores the complete G graph/RNG with zero publication
+✓ give:warOn after:log reaches the real mutation boundary
+✓ give:warOn after:log restores the complete G graph/RNG with zero publication
+✓ give:warOn son reaches the real mutation boundary
+✓ give:warOn son restores the complete G graph/RNG with zero publication
+✓ give:warOn succeeds afterwards; canonical fee paid by proposer once
+✓ give:peaceWith real quote is valid and has a new effect
+✓ give:peaceWith before:peaceWith reaches the real mutation boundary
+✓ give:peaceWith before:peaceWith restores the complete G graph/RNG with zero publication
+✓ give:peaceWith after:peaceWith reaches the real mutation boundary
+✓ give:peaceWith after:peaceWith restores the complete G graph/RNG with zero publication
+✓ give:peaceWith after:items reaches the real mutation boundary
+✓ give:peaceWith after:items restores the complete G graph/RNG with zero publication
+✓ give:peaceWith after:cost reaches the real mutation boundary
+✓ give:peaceWith after:cost restores the complete G graph/RNG with zero publication
+✓ give:peaceWith after:goodwill reaches the real mutation boundary
+✓ give:peaceWith after:goodwill restores the complete G graph/RNG with zero publication
+✓ give:peaceWith after:recalc reaches the real mutation boundary
+✓ give:peaceWith after:recalc restores the complete G graph/RNG with zero publication
+✓ give:peaceWith after:log reaches the real mutation boundary
+✓ give:peaceWith after:log restores the complete G graph/RNG with zero publication
+✓ give:peaceWith son reaches the real mutation boundary
+✓ give:peaceWith son restores the complete G graph/RNG with zero publication
+✓ give:peaceWith succeeds afterwards; canonical fee paid by proposer once
+✓ give:intel real quote is valid and has a new effect
+✓ give:intel before:intel reaches the real mutation boundary
+✓ give:intel before:intel restores the complete G graph/RNG with zero publication
+✓ give:intel after:intel reaches the real mutation boundary
+✓ give:intel after:intel restores the complete G graph/RNG with zero publication
+✓ give:intel after:items reaches the real mutation boundary
+✓ give:intel after:items restores the complete G graph/RNG with zero publication
+✓ give:intel after:cost reaches the real mutation boundary
+✓ give:intel after:cost restores the complete G graph/RNG with zero publication
+✓ give:intel after:goodwill reaches the real mutation boundary
+✓ give:intel after:goodwill restores the complete G graph/RNG with zero publication
+✓ give:intel after:recalc reaches the real mutation boundary
+✓ give:intel after:recalc restores the complete G graph/RNG with zero publication
+✓ give:intel after:log reaches the real mutation boundary
+✓ give:intel after:log restores the complete G graph/RNG with zero publication
+✓ give:intel son reaches the real mutation boundary
+✓ give:intel son restores the complete G graph/RNG with zero publication
+✓ give:intel succeeds afterwards; canonical fee paid by proposer once
+✓ give:spynet real quote is valid and has a new effect
+✓ give:spynet before:spynet reaches the real mutation boundary
+✓ give:spynet before:spynet restores the complete G graph/RNG with zero publication
+✓ give:spynet after:spynet reaches the real mutation boundary
+✓ give:spynet after:spynet restores the complete G graph/RNG with zero publication
+✓ give:spynet after:items reaches the real mutation boundary
+✓ give:spynet after:items restores the complete G graph/RNG with zero publication
+✓ give:spynet after:cost reaches the real mutation boundary
+✓ give:spynet after:cost restores the complete G graph/RNG with zero publication
+✓ give:spynet after:goodwill reaches the real mutation boundary
+✓ give:spynet after:goodwill restores the complete G graph/RNG with zero publication
+✓ give:spynet after:recalc reaches the real mutation boundary
+✓ give:spynet after:recalc restores the complete G graph/RNG with zero publication
+✓ give:spynet after:log reaches the real mutation boundary
+✓ give:spynet after:log restores the complete G graph/RNG with zero publication
+✓ give:spynet son reaches the real mutation boundary
+✓ give:spynet son restores the complete G graph/RNG with zero publication
+✓ give:spynet succeeds afterwards; canonical fee paid by proposer once
+✓ give:passage real quote is valid and has a new effect
+✓ give:passage before:passage reaches the real mutation boundary
+✓ give:passage before:passage restores the complete G graph/RNG with zero publication
+✓ give:passage after:passage reaches the real mutation boundary
+✓ give:passage after:passage restores the complete G graph/RNG with zero publication
+✓ give:passage after:items reaches the real mutation boundary
+✓ give:passage after:items restores the complete G graph/RNG with zero publication
+✓ give:passage after:cost reaches the real mutation boundary
+✓ give:passage after:cost restores the complete G graph/RNG with zero publication
+✓ give:passage after:goodwill reaches the real mutation boundary
+✓ give:passage after:goodwill restores the complete G graph/RNG with zero publication
+✓ give:passage after:recalc reaches the real mutation boundary
+✓ give:passage after:recalc restores the complete G graph/RNG with zero publication
+✓ give:passage after:log reaches the real mutation boundary
+✓ give:passage after:log restores the complete G graph/RNG with zero publication
+✓ give:passage son reaches the real mutation boundary
+✓ give:passage son restores the complete G graph/RNG with zero publication
+✓ give:passage succeeds afterwards; canonical fee paid by proposer once
+✓ want:res real quote is valid and has a new effect
+✓ want:res before:res reaches the real mutation boundary
+✓ want:res before:res restores the complete G graph/RNG with zero publication
+✓ want:res after:res reaches the real mutation boundary
+✓ want:res after:res restores the complete G graph/RNG with zero publication
+✓ want:res after:items reaches the real mutation boundary
+✓ want:res after:items restores the complete G graph/RNG with zero publication
+✓ want:res after:cost reaches the real mutation boundary
+✓ want:res after:cost restores the complete G graph/RNG with zero publication
+✓ want:res after:goodwill reaches the real mutation boundary
+✓ want:res after:goodwill restores the complete G graph/RNG with zero publication
+✓ want:res after:recalc reaches the real mutation boundary
+✓ want:res after:recalc restores the complete G graph/RNG with zero publication
+✓ want:res after:log reaches the real mutation boundary
+✓ want:res after:log restores the complete G graph/RNG with zero publication
+✓ want:res son reaches the real mutation boundary
+✓ want:res son restores the complete G graph/RNG with zero publication
+✓ want:res succeeds afterwards; canonical fee paid by proposer once
+✓ want:tribute real quote is valid and has a new effect
+✓ want:tribute before:tribute reaches the real mutation boundary
+✓ want:tribute before:tribute restores the complete G graph/RNG with zero publication
+✓ want:tribute after:tribute reaches the real mutation boundary
+✓ want:tribute after:tribute restores the complete G graph/RNG with zero publication
+✓ want:tribute after:items reaches the real mutation boundary
+✓ want:tribute after:items restores the complete G graph/RNG with zero publication
+✓ want:tribute after:cost reaches the real mutation boundary
+✓ want:tribute after:cost restores the complete G graph/RNG with zero publication
+✓ want:tribute after:goodwill reaches the real mutation boundary
+✓ want:tribute after:goodwill restores the complete G graph/RNG with zero publication
+✓ want:tribute after:recalc reaches the real mutation boundary
+✓ want:tribute after:recalc restores the complete G graph/RNG with zero publication
+✓ want:tribute after:log reaches the real mutation boundary
+✓ want:tribute after:log restores the complete G graph/RNG with zero publication
+✓ want:tribute son reaches the real mutation boundary
+✓ want:tribute son restores the complete G graph/RNG with zero publication
+✓ want:tribute succeeds afterwards; canonical fee paid by proposer once
+✓ want:sys real quote is valid and has a new effect
+✓ want:sys before:sys reaches the real mutation boundary
+✓ want:sys before:sys restores the complete G graph/RNG with zero publication
+✓ want:sys after:sys reaches the real mutation boundary
+✓ want:sys after:sys restores the complete G graph/RNG with zero publication
+✓ want:sys after:items reaches the real mutation boundary
+✓ want:sys after:items restores the complete G graph/RNG with zero publication
+✓ want:sys after:cost reaches the real mutation boundary
+✓ want:sys after:cost restores the complete G graph/RNG with zero publication
+✓ want:sys after:goodwill reaches the real mutation boundary
+✓ want:sys after:goodwill restores the complete G graph/RNG with zero publication
+✓ want:sys after:recalc reaches the real mutation boundary
+✓ want:sys after:recalc restores the complete G graph/RNG with zero publication
+✓ want:sys after:log reaches the real mutation boundary
+✓ want:sys after:log restores the complete G graph/RNG with zero publication
+✓ want:sys son reaches the real mutation boundary
+✓ want:sys son restores the complete G graph/RNG with zero publication
+✓ want:sys succeeds afterwards; canonical fee paid by proposer once
+✓ want:tech real quote is valid and has a new effect
+✓ want:tech before:tech reaches the real mutation boundary
+✓ want:tech before:tech restores the complete G graph/RNG with zero publication
+✓ want:tech after:tech reaches the real mutation boundary
+✓ want:tech after:tech restores the complete G graph/RNG with zero publication
+✓ want:tech after:items reaches the real mutation boundary
+✓ want:tech after:items restores the complete G graph/RNG with zero publication
+✓ want:tech after:cost reaches the real mutation boundary
+✓ want:tech after:cost restores the complete G graph/RNG with zero publication
+✓ want:tech after:goodwill reaches the real mutation boundary
+✓ want:tech after:goodwill restores the complete G graph/RNG with zero publication
+✓ want:tech after:recalc reaches the real mutation boundary
+✓ want:tech after:recalc restores the complete G graph/RNG with zero publication
+✓ want:tech after:log reaches the real mutation boundary
+✓ want:tech after:log restores the complete G graph/RNG with zero publication
+✓ want:tech son reaches the real mutation boundary
+✓ want:tech son restores the complete G graph/RNG with zero publication
+✓ want:tech succeeds afterwards; canonical fee paid by proposer once
+✓ want:lux real quote is valid and has a new effect
+✓ want:lux before:lux reaches the real mutation boundary
+✓ want:lux before:lux restores the complete G graph/RNG with zero publication
+✓ want:lux after:lux reaches the real mutation boundary
+✓ want:lux after:lux restores the complete G graph/RNG with zero publication
+✓ want:lux after:items reaches the real mutation boundary
+✓ want:lux after:items restores the complete G graph/RNG with zero publication
+✓ want:lux after:cost reaches the real mutation boundary
+✓ want:lux after:cost restores the complete G graph/RNG with zero publication
+✓ want:lux after:goodwill reaches the real mutation boundary
+✓ want:lux after:goodwill restores the complete G graph/RNG with zero publication
+✓ want:lux after:recalc reaches the real mutation boundary
+✓ want:lux after:recalc restores the complete G graph/RNG with zero publication
+✓ want:lux after:log reaches the real mutation boundary
+✓ want:lux after:log restores the complete G graph/RNG with zero publication
+✓ want:lux son reaches the real mutation boundary
+✓ want:lux son restores the complete G graph/RNG with zero publication
+✓ want:lux succeeds afterwards; canonical fee paid by proposer once
+✓ want:peace real quote is valid and has a new effect
+✓ want:peace before:peace reaches the real mutation boundary
+✓ want:peace before:peace restores the complete G graph/RNG with zero publication
+✓ want:peace after:peace reaches the real mutation boundary
+✓ want:peace after:peace restores the complete G graph/RNG with zero publication
+✓ want:peace after:items reaches the real mutation boundary
+✓ want:peace after:items restores the complete G graph/RNG with zero publication
+✓ want:peace after:cost reaches the real mutation boundary
+✓ want:peace after:cost restores the complete G graph/RNG with zero publication
+✓ want:peace after:goodwill reaches the real mutation boundary
+✓ want:peace after:goodwill restores the complete G graph/RNG with zero publication
+✓ want:peace after:recalc reaches the real mutation boundary
+✓ want:peace after:recalc restores the complete G graph/RNG with zero publication
+✓ want:peace after:log reaches the real mutation boundary
+✓ want:peace after:log restores the complete G graph/RNG with zero publication
+✓ want:peace son reaches the real mutation boundary
+✓ want:peace son restores the complete G graph/RNG with zero publication
+✓ want:peace succeeds afterwards; canonical fee paid by proposer once
+✓ want:nap real quote is valid and has a new effect
+✓ want:nap before:nap reaches the real mutation boundary
+✓ want:nap before:nap restores the complete G graph/RNG with zero publication
+✓ want:nap after:nap reaches the real mutation boundary
+✓ want:nap after:nap restores the complete G graph/RNG with zero publication
+✓ want:nap after:items reaches the real mutation boundary
+✓ want:nap after:items restores the complete G graph/RNG with zero publication
+✓ want:nap after:cost reaches the real mutation boundary
+✓ want:nap after:cost restores the complete G graph/RNG with zero publication
+✓ want:nap after:goodwill reaches the real mutation boundary
+✓ want:nap after:goodwill restores the complete G graph/RNG with zero publication
+✓ want:nap after:recalc reaches the real mutation boundary
+✓ want:nap after:recalc restores the complete G graph/RNG with zero publication
+✓ want:nap after:log reaches the real mutation boundary
+✓ want:nap after:log restores the complete G graph/RNG with zero publication
+✓ want:nap son reaches the real mutation boundary
+✓ want:nap son restores the complete G graph/RNG with zero publication
+✓ want:nap succeeds afterwards; canonical fee paid by proposer once
+✓ want:pact real quote is valid and has a new effect
+✓ want:pact before:pact reaches the real mutation boundary
+✓ want:pact before:pact restores the complete G graph/RNG with zero publication
+✓ want:pact after:pact reaches the real mutation boundary
+✓ want:pact after:pact restores the complete G graph/RNG with zero publication
+✓ want:pact after:items reaches the real mutation boundary
+✓ want:pact after:items restores the complete G graph/RNG with zero publication
+✓ want:pact after:cost reaches the real mutation boundary
+✓ want:pact after:cost restores the complete G graph/RNG with zero publication
+✓ want:pact after:goodwill reaches the real mutation boundary
+✓ want:pact after:goodwill restores the complete G graph/RNG with zero publication
+✓ want:pact after:recalc reaches the real mutation boundary
+✓ want:pact after:recalc restores the complete G graph/RNG with zero publication
+✓ want:pact after:log reaches the real mutation boundary
+✓ want:pact after:log restores the complete G graph/RNG with zero publication
+✓ want:pact son reaches the real mutation boundary
+✓ want:pact son restores the complete G graph/RNG with zero publication
+✓ want:pact succeeds afterwards; canonical fee paid by proposer once
+✓ want:ally real quote is valid and has a new effect
+✓ want:ally before:ally reaches the real mutation boundary
+✓ want:ally before:ally restores the complete G graph/RNG with zero publication
+✓ want:ally after:ally reaches the real mutation boundary
+✓ want:ally after:ally restores the complete G graph/RNG with zero publication
+✓ want:ally after:items reaches the real mutation boundary
+✓ want:ally after:items restores the complete G graph/RNG with zero publication
+✓ want:ally after:cost reaches the real mutation boundary
+✓ want:ally after:cost restores the complete G graph/RNG with zero publication
+✓ want:ally after:goodwill reaches the real mutation boundary
+✓ want:ally after:goodwill restores the complete G graph/RNG with zero publication
+✓ want:ally after:recalc reaches the real mutation boundary
+✓ want:ally after:recalc restores the complete G graph/RNG with zero publication
+✓ want:ally after:log reaches the real mutation boundary
+✓ want:ally after:log restores the complete G graph/RNG with zero publication
+✓ want:ally son reaches the real mutation boundary
+✓ want:ally son restores the complete G graph/RNG with zero publication
+✓ want:ally succeeds afterwards; canonical fee paid by proposer once
+✓ want:warOn real quote is valid and has a new effect
+✓ want:warOn before:warOn reaches the real mutation boundary
+✓ want:warOn before:warOn restores the complete G graph/RNG with zero publication
+✓ want:warOn after:warOn reaches the real mutation boundary
+✓ want:warOn after:warOn restores the complete G graph/RNG with zero publication
+✓ want:warOn after:items reaches the real mutation boundary
+✓ want:warOn after:items restores the complete G graph/RNG with zero publication
+✓ want:warOn after:cost reaches the real mutation boundary
+✓ want:warOn after:cost restores the complete G graph/RNG with zero publication
+✓ want:warOn after:goodwill reaches the real mutation boundary
+✓ want:warOn after:goodwill restores the complete G graph/RNG with zero publication
+✓ want:warOn after:recalc reaches the real mutation boundary
+✓ want:warOn after:recalc restores the complete G graph/RNG with zero publication
+✓ want:warOn after:log reaches the real mutation boundary
+✓ want:warOn after:log restores the complete G graph/RNG with zero publication
+✓ want:warOn son reaches the real mutation boundary
+✓ want:warOn son restores the complete G graph/RNG with zero publication
+✓ want:warOn succeeds afterwards; canonical fee paid by proposer once
+✓ want:peaceWith real quote is valid and has a new effect
+✓ want:peaceWith before:peaceWith reaches the real mutation boundary
+✓ want:peaceWith before:peaceWith restores the complete G graph/RNG with zero publication
+✓ want:peaceWith after:peaceWith reaches the real mutation boundary
+✓ want:peaceWith after:peaceWith restores the complete G graph/RNG with zero publication
+✓ want:peaceWith after:items reaches the real mutation boundary
+✓ want:peaceWith after:items restores the complete G graph/RNG with zero publication
+✓ want:peaceWith after:cost reaches the real mutation boundary
+✓ want:peaceWith after:cost restores the complete G graph/RNG with zero publication
+✓ want:peaceWith after:goodwill reaches the real mutation boundary
+✓ want:peaceWith after:goodwill restores the complete G graph/RNG with zero publication
+✓ want:peaceWith after:recalc reaches the real mutation boundary
+✓ want:peaceWith after:recalc restores the complete G graph/RNG with zero publication
+✓ want:peaceWith after:log reaches the real mutation boundary
+✓ want:peaceWith after:log restores the complete G graph/RNG with zero publication
+✓ want:peaceWith son reaches the real mutation boundary
+✓ want:peaceWith son restores the complete G graph/RNG with zero publication
+✓ want:peaceWith succeeds afterwards; canonical fee paid by proposer once
+✓ want:intel real quote is valid and has a new effect
+✓ want:intel before:intel reaches the real mutation boundary
+✓ want:intel before:intel restores the complete G graph/RNG with zero publication
+✓ want:intel after:intel reaches the real mutation boundary
+✓ want:intel after:intel restores the complete G graph/RNG with zero publication
+✓ want:intel after:items reaches the real mutation boundary
+✓ want:intel after:items restores the complete G graph/RNG with zero publication
+✓ want:intel after:cost reaches the real mutation boundary
+✓ want:intel after:cost restores the complete G graph/RNG with zero publication
+✓ want:intel after:goodwill reaches the real mutation boundary
+✓ want:intel after:goodwill restores the complete G graph/RNG with zero publication
+✓ want:intel after:recalc reaches the real mutation boundary
+✓ want:intel after:recalc restores the complete G graph/RNG with zero publication
+✓ want:intel after:log reaches the real mutation boundary
+✓ want:intel after:log restores the complete G graph/RNG with zero publication
+✓ want:intel son reaches the real mutation boundary
+✓ want:intel son restores the complete G graph/RNG with zero publication
+✓ want:intel succeeds afterwards; canonical fee paid by proposer once
+✓ want:spynet real quote is valid and has a new effect
+✓ want:spynet before:spynet reaches the real mutation boundary
+✓ want:spynet before:spynet restores the complete G graph/RNG with zero publication
+✓ want:spynet after:spynet reaches the real mutation boundary
+✓ want:spynet after:spynet restores the complete G graph/RNG with zero publication
+✓ want:spynet after:items reaches the real mutation boundary
+✓ want:spynet after:items restores the complete G graph/RNG with zero publication
+✓ want:spynet after:cost reaches the real mutation boundary
+✓ want:spynet after:cost restores the complete G graph/RNG with zero publication
+✓ want:spynet after:goodwill reaches the real mutation boundary
+✓ want:spynet after:goodwill restores the complete G graph/RNG with zero publication
+✓ want:spynet after:recalc reaches the real mutation boundary
+✓ want:spynet after:recalc restores the complete G graph/RNG with zero publication
+✓ want:spynet after:log reaches the real mutation boundary
+✓ want:spynet after:log restores the complete G graph/RNG with zero publication
+✓ want:spynet son reaches the real mutation boundary
+✓ want:spynet son restores the complete G graph/RNG with zero publication
+✓ want:spynet succeeds afterwards; canonical fee paid by proposer once
+✓ want:passage real quote is valid and has a new effect
+✓ want:passage before:passage reaches the real mutation boundary
+✓ want:passage before:passage restores the complete G graph/RNG with zero publication
+✓ want:passage after:passage reaches the real mutation boundary
+✓ want:passage after:passage restores the complete G graph/RNG with zero publication
+✓ want:passage after:items reaches the real mutation boundary
+✓ want:passage after:items restores the complete G graph/RNG with zero publication
+✓ want:passage after:cost reaches the real mutation boundary
+✓ want:passage after:cost restores the complete G graph/RNG with zero publication
+✓ want:passage after:goodwill reaches the real mutation boundary
+✓ want:passage after:goodwill restores the complete G graph/RNG with zero publication
+✓ want:passage after:recalc reaches the real mutation boundary
+✓ want:passage after:recalc restores the complete G graph/RNG with zero publication
+✓ want:passage after:log reaches the real mutation boundary
+✓ want:passage after:log restores the complete G graph/RNG with zero publication
+✓ want:passage son reaches the real mutation boundary
+✓ want:passage son restores the complete G graph/RNG with zero publication
+✓ want:passage succeeds afterwards; canonical fee paid by proposer once
+✓ Nested array reorder/replacement restores original arrays, members and aliases
+✓ Deep graph, cycles, Map/Set, sparse arrays, symbols and absent roots restore
+✓ Final recalc failure rolls back real transfer; no exception escapes
+✓ Snapshot preparation failure returns false without mutation and releases guard
+✓ Malformed quote getter cannot escape; next normal deal still works
+✓ Log-write failure rolls back agreement before audio/UI publication
+✓ Authority/buffer own-field presence and values: present=false, failure=false
+✓ Authority/buffer own-field presence and values: present=false, failure=true
+✓ Authority/buffer own-field presence and values: present=true, failure=false
+✓ Authority/buffer own-field presence and values: present=true, failure=true
+✓ Nested execute is rejected without leaking a child event or charge
+✓ A foreign pending buffer is preserved; execute reports busy without applying
+✓ Colonized system, empire purge and fleet removal are all reached, then rolled back
+✓ Independence peace frees vassal and ends proxy war before complete rollback
+✓ warOn triggers federation and overlord defense; all third-party state/RNG returns
+✓ Council enforcement in a defense chain consumes real RNG and rolls it back
+✓ Second final recalc throws after the first has mutated; both original mods return
+✓ Log trimming at 60 entries is undone with original first-entry identity
+✓ Commit presentation matrix: none
+✓ Commit presentation matrix: audio
+✓ Commit presentation matrix: alert
+✓ Commit presentation matrix: ui
+✓ Commit presentation matrix: all
+✓ Player save, menu and recovery preferences survive a transaction rollback
+PERF {"systems":100,"fleets":63,"nodes":1899,"medianMs":6.39471,"p95Ms":8.767917}
+GEÇEN: 529 KALAN: 0

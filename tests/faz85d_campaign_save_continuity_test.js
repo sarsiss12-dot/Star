@@ -126,7 +126,7 @@ for(const f of fs.readdirSync(KOK).filter(x=>x.endsWith('.js'))){
   ['yildiz:save','yh_audio','yh_advisor','yh_autoev','yh_bg','yh_radar',
    'yh_templates','__yh_probe','__yh_diag'].forEach(k=>
     ok('depolama anahtarı korundu: '+k, mainJs.includes(k)));
-  ok("sw cache = 'stars-v92d'", /const CACHE = 'stars-v92d'/.test(oku('sw.js')));
+  ok("sw cache = 'stars-v93d1'", /const CACHE = 'stars-v93d1'/.test(oku('sw.js')));
   const sw=oku('sw.js');
   ok('sw KABUK listesi duruyor', /KABUK/.test(sw));
   ok('sw fetch davranışı duruyor', /addEventListener\('fetch'/.test(sw));
@@ -210,7 +210,7 @@ for(const f of fs.readdirSync(KOK).filter(x=>x.endsWith('.js'))){
     ok(f+' byte-for-byte aynı', h===ref[f], h.slice(0,16));
   });
   /* 91D: etiket/draw değişikliği izinli; giriş/kurtarma/kamera/sprite/filo kaynakları 91C ile aynı. */
-  ok('map giriş/kurtarma/kamera/sprite/filo kaynakları 91C ile aynı',
+  ok('map kaynak kilidi: 91C altyapısı + 93A hedef seçimi',
      require('./helpers/map-preservation').isMapInfrastructurePreserved(oku('map.js')));
 }
 

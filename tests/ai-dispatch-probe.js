@@ -3,6 +3,9 @@ const fs=require('fs'),path=require('path');const {fresh}=require('./helpers/dis
 function probe(root,seed){
  const h=fresh(1,path.resolve(root));h.sb.probeSeed=seed;
  h.run(`for(const c of ['kol','kol','kol','kol','bil','bil','ord','ord','ord','ord','ord','ord'])newFleet(E,0,[{c}]);
+ // The geometry fixture keeps old save income; give this production opportunity
+ // an explicit sustainable economy so it tests dispatch, not the deficit gate.
+ E.inc.ene=1000;E.inc.ala=100;E.crisis=false;
  delete E.techs.m_yildiz;E.ai=true;rndSeed(probeSeed);
  var before=JSON.parse(JSON.stringify(E.res));aiTurn(E);
  var spent={};for(const r in E.res)spent[r]=before[r]-E.res[r];`);

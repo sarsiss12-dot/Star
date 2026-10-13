@@ -1,0 +1,16 @@
+✓ Legacy fleet rally action does not arm global yard rewriting
+✓ Retired map selection cannot rewrite any yard or fleet target
+✓ Yard selection outranks fleet row hits and double tap and affects only chosen yard
+✓ Captured yard cannot be set or cleared through stale map selection or UI action
+✓ Cancelling selection leaves old destination; clear uses canonical owner gate
+✓ Private reinforcement ignores later general target edits and follows moving fleet
+✓ Shared status separates queued and traveling ships without mutating game or RNG
+✓ Real fleet panel shows pending counts and disables redundant order
+✓ Locked class gives actual research reason with no stock or queue mutation
+✓ Unavailable, sabotaged and unreachable yards have distinct reasons
+✓ Partial purchase reports remaining shortage; genuine poverty is not mislabeled
+✓ Legacy mixed target keeps fleet priority across save/load and labels it honestly
+✓ Saved private deliveries retain each fleet and ordinary system destination
+✓ Civilian ships remain at yard despite military system rally
+✓ Foreign and stale fleets cannot order reinforcement or reveal a shared status
+GEÇEN: 15 KALAN: 0

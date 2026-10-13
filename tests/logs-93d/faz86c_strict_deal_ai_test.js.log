@@ -1,0 +1,171 @@
+
+A. DOSYA SINIRI VE KARANTİNA
+  ✓ node --check ai.js
+  ✓ node --check audio.js
+  ✓ node --check combat.js
+  ✓ node --check diplomacy.js
+  ✓ node --check economy.js
+  ✓ node --check main.js
+  ✓ node --check map.js
+  ✓ node --check sw.js
+  ✓ node --check ui.js
+  ✓ sw cache = 'stars-v93d'
+  ✓ sw KABUK/fetch/activate korundu
+  ✓ kayıt sürümü v:8 KALDI
+  ✓ depolama anahtarı: yildiz:save
+  ✓ depolama anahtarı: yh_audio
+  ✓ depolama anahtarı: yh_advisor
+  ✓ depolama anahtarı: yh_autoev
+  ✓ depolama anahtarı: yh_bg
+  ✓ depolama anahtarı: yh_radar
+  ✓ depolama anahtarı: yh_templates
+  ✓ depolama anahtarı: __yh_probe
+  ✓ depolama anahtarı: __yh_diag
+  ✓ kanonik fonksiyon: normalizeDeal
+  ✓ kanonik fonksiyon: dealValidity
+  ✓ kanonik fonksiyon: dealQuote
+  ✓ kanonik fonksiyon: executeDeal
+  ✓ kanonik fonksiyon: dealCost
+  ✓ kanonik fonksiyon: dealGoodwill
+  ✓ kanonik fonksiyon: dealTxBegin
+  ✓ kanonik fonksiyon: dealTxRollback
+  ✓ kanonik fonksiyon: txCaptureGraph
+  ✓ kanonik fonksiyon: txRestoreGraph
+  ✓ kanonik fonksiyon: dealPostcondition
+  ✓ kanonik fonksiyon: dealFactors
+  ✓ kanonik fonksiyon: ethicGap
+  ✓ DEAL_FACTOR_CAPS tanımlı
+  ✓ kabul/ret için RNG YOK (evalOffer saf)
+  ✓ SITUATIONS kataloğu duruyor
+  ✓ situationsTick tanımı duruyor
+  ✓ situationsTick çağrısı PASİF
+  ✓ DURUMLAR sekmesi gizli
+  ✓ audio.js byte-for-byte aynı — 804226980179698a
+  ✓ manifest.json byte-for-byte aynı — 6b8305490e9a55e9
+
+B. FATAL DOĞRULAMA (normalizeDeal üç sınıf)
+  ✓ geçerli fayda + geçersiz yükümlülük BÜTÜNÜYLE reddedildi
+  ✓ sıfır mutasyon — ödül aktarılmadı
+  ✓ fatal gerekçe döndü — Bilinmeyen madde türü: ZEHIR
+  ✓ normalizeDeal üç sınıf döndürüyor — {"norm":2,"red":0,"err":0}
+  ✓ güvenli normalleştirme: aynı kaynak satırları toplandı (10+20=30) — 30
+  ✓ simetrik antlaşma tek maddeye indi — 1
+  ✓ FATAL: self-deal — Bir devlet kendisiyle anlaşma yapamaz
+  ✓ FATAL: ölü taraf — Ölü devletle anlaşma yapılamaz
+  ✓ FATAL: wild taraf — Korsanlarla müzakere edilemez
+  ✓ FATAL: NaN miktar — res: geçersiz miktar (NaN)
+  ✓ FATAL: Infinity miktar — res: geçersiz miktar (Infinity)
+  ✓ FATAL: sıfır miktar — res: geçersiz miktar (0)
+  ✓ FATAL: negatif miktar — res: geçersiz miktar (-5)
+  ✓ FATAL: bilinmeyen kaynak — res: bilinmeyen kaynak "YOK"
+  ✓ FATAL: katalogda olmayan tech — tech: katalogda olmayan teknoloji
+  ✓ FATAL: katalogda olmayan lux — lux: katalogda olmayan lüks mal
+  ✓ FATAL: geçersiz sistem — sys: geçersiz sistem kimliği
+  ✓ FATAL: geçersiz hedef — warOn: geçersiz hedef devlet
+  ✓ FATAL: eksik zorunlu alan — res: eksik kaynak veya miktar
+
+C. PLANLANAN SON DURUM VE REDUNDANT
+  ✓ savaş sürerken YALNIZ nap → geçersiz — Saldırmazlık: savaş sürerken imzalanamaz — pakete barış ekle
+  ✓ peace + nap → geçerli
+  ✓ nap + peace (ters sıra) → AYNI geçerli sonuç
+  ✓ savaş sürerken pact → geçersiz
+  ✓ yürürlükteki antlaşma yeni değer saymaz — Bütün maddeler zaten yürürlükte — yeni etki yok
+  ✓ yeni + redundant pakette yalnız YENİ madde fiyatlanır — 40 = 40
+
+D. TAM TRANSACTION — AŞAMALI HATA ENJEKSİYONU
+  ✓ "before:res" noktasında hata → TAM geri alma — geriAlindi=true
+  ✓ "after:res" noktasında hata → TAM geri alma — geriAlindi=true
+  ✓ "before:pact" noktasında hata → TAM geri alma — geriAlindi=true
+  ✓ "after:pact" noktasında hata → TAM geri alma — geriAlindi=true
+  ✓ "before:sys" noktasında hata → TAM geri alma — geriAlindi=true
+  ✓ "after:sys" noktasında hata → TAM geri alma — geriAlindi=true
+  ✓ "after:items" noktasında hata → TAM geri alma — geriAlindi=true
+  ✓ "after:cost" noktasında hata → TAM geri alma — geriAlindi=true
+  ✓ "son" noktasında hata → TAM geri alma — geriAlindi=true
+  ✓ enjeksiyonsuz teklif gerçekten uygulanıyor
+
+E. ÇOKLU ANTLAŞMA MALİYETİ
+  ✓ ally 90 + pact 40 = 100 — 100
+  ✓ spynet 120 + intel 45 = 131 — 131
+  ✓ spynet + ally + pact = 153 — 153
+  ✓ tavan 160 aşılmıyor — 160
+  ✓ tabanlar korundu (peace30·pact40·ally90·intel45·spynet120)
+  ✓ nap ve passage maliyetsiz
+  ✓ aynı antlaşma iki yönde → TEK ücret — 45
+  ✓ geçersiz teklif maliyet kesmiyor
+
+F. GOODWILL VE COOLDOWN
+  ✓ 1 birimlik hediye ilişki VERMEZ — 0
+  ✓ 100 birim → küçük goodwill — 1
+  ✓ 1000 birim → tavan 4 — 4
+  ✓ dengeli takas goodwill VERMEZ — 0
+  ✓ goodwill 0–4 tam sayı aralığında
+  ✓ 10 küçük hediye ilişki FARM'ı üretmiyor — 0
+  ✓ büyük hediye bir kez ödüllendirildi — 4
+  ✓ cooldown içinde ikinci hediye ilişki VERMEDİ — 4 → 4
+  ✓ cooldown sırasında transfer yine de gerçekleşti
+  ✓ cooldown damgası save/load ile KALICI — {"2":100} / {"2":100}
+  ✓ 12 ay sonra goodwill yeniden kazanılabildi — 4 → 8
+
+G. AÇIKLANABİLİR DEĞERLEME
+  ✓ ilişki faktörü doğru yönde ve [0.80,1.20] cap içinde — [0.8,1.2]
+  ✓ onur faktörü doğru yönde ve [0.92,1.08] içinde — 0.952..1.048
+  ✓ güven/hafıza faktörü doğru yönde ve [0.85,1.15] içinde — 0.85..1.088235294117647
+  ✓ ideoloji faktörü doğru yönde ve [0.90,1.10] içinde — 0.9000000000000001..1.1
+  ✓ ethicGap normalleştirilmiş (0–1) — 1
+  ✓ yeterli tazminat yumuşak ideoloji farkını AŞABİLİYOR
+  ✓ ortak düşman yalnız GÜVENLİK maddelerinde etkili — maddi=1 güvenlik=1
+  ✓ Elçi yoksa anlaşma faktörü nötr
+  ✓ 800 çağrı tamamen SAF (kaynak/RNG/ilişki/hafıza/log)
+  ✓ değerleme DETERMİNİSTİK
+
+H. AI KABUL / RET / KARŞI TEKLİF
+  ✓ cömert teklif → KABUL — kabul
+  ✓ çok kötü teklif → RET — red · ⚡ 2500 Enerji için elindekiler yetersiz.
+  ✓ yakın ama yetersiz → KABUL veya KARŞI TEKLİF — karsi
+  ✓ karşı teklif yalnız teslim edilebilir maddeler içeriyor
+  ✓ AI kararı DETERMİNİSTİK
+  ✓ sert doktrin kilidi tazminatla AŞILAMIYOR — red · Doktrin bu devletle her türlü anlaşmayı yasaklıyor
+
+H2. AI-AI KANONİK BAĞLANTI
+  ✓ ÖLÇÜM: oyun başında AI-AI teması sıfır (sim sınırı) — 0
+  ✓ AI-AI pact kanonik executeDeal'den geçiyor
+  ✓ AI-AI pact maliyeti KANONİK tablodan (40, eskiden 70) — 40
+  ✓ AI-AI ittifak kanonik executeDeal'den geçiyor
+  ✓ AI-AI ittifak maliyeti KANONİK tablodan (90, eskiden 150) — 90
+  ✓ ai.js'de ham Etki kesme (70/150) KALMADI
+  ✓ ai.js'de ham ilişki ataması (rel=55) KALMADI
+  ✓ ai.js AI-AI yolu kanonik müzakereye bağlı (aiNegotiate)
+  ✓ aiNegotiate kanonik executeDeal kullanıyor
+
+I. 86B REGRESYONLARI
+  ✓ kaynak çoğaltma KAPALI (800+800 vs 1000)
+  ✓ boş anlaşma KAPALI (11 deneme, ilişki 0) — 0
+  ✓ yürürlükteki antlaşma farm'ı KAPALI — [true,false,false]
+
+J. DETERMİNİSTİK UZUN SİMÜLASYON (3 seed × 360 ay)
+  ✓ seed 11: 360 ay HATASIZ — ok
+  ✓ seed 11: NaN veya negatif stok YOK
+  ✓ seed 11: galaksi kalıcı savaşa KİLİTLENMEDİ — 0/28 çift savaşta
+  ✓ seed 11: galaksi kalıcı ittifaka KİLİTLENMEDİ — 0/28 çift ittifakta
+  ✓ seed 11: Situation tetiklenmedi — 0
+  ✓ seed 99: 360 ay HATASIZ — ok
+  ✓ seed 99: NaN veya negatif stok YOK
+  ✓ seed 99: galaksi kalıcı savaşa KİLİTLENMEDİ — 0/28 çift savaşta
+  ✓ seed 99: galaksi kalıcı ittifaka KİLİTLENMEDİ — 0/28 çift ittifakta
+  ✓ seed 99: Situation tetiklenmedi — 0
+  ✓ seed 404: 360 ay HATASIZ — ok
+  ✓ seed 404: NaN veya negatif stok YOK
+  ✓ seed 404: galaksi kalıcı savaşa KİLİTLENMEDİ — 0/28 çift savaşta
+  ✓ seed 404: galaksi kalıcı ittifaka KİLİTLENMEDİ — 0/28 çift ittifakta
+  ✓ seed 404: Situation tetiklenmedi — 0
+
+  ── SİMÜLASYON TABLOSU ──
+  seed 11: teklif 224 · kabul 0 · ret 0 · karşı 0 · yanıt 0 | exec ok 0 / red 0 | savaş 0 pact 0 ally 0 nap 0 (çift 28) · ort.ilişki 30.8
+  seed 99: teklif 229 · kabul 0 · ret 0 · karşı 0 · yanıt 0 | exec ok 0 / red 0 | savaş 0 pact 0 ally 0 nap 0 (çift 28) · ort.ilişki 64.4
+  seed 404: teklif 204 · kabul 0 · ret 0 · karşı 0 · yanıt 0 | exec ok 0 / red 0 | savaş 0 pact 0 ally 0 nap 0 (çift 28) · ort.ilişki 48.8
+
+══════════════════════════════════════════
+  GEÇEN: 139   KALAN: 0
+══════════════════════════════════════════
+

@@ -1,0 +1,16 @@
+{
+  "source_sha256": "8883f62090710c6244871be029aeceaa6ad323cda784124f80766897574ea7ac",
+  "no_canonical_file_deleted": true,
+  "byte_identical": {
+    "ui.js": "9b30b92e8ef65334ee6ff8fa5eb75e1f0257997ecfb915627a672c680da9fc4a",
+    "index.html": "1ec0afcac207bfbe22d0305d1407ab9dfacf59fa15d3bd898ca7c1266bc61e73",
+    "economy.js": "d2381a3123d006e845bf857d0dffbe2146f09c28bec8f37752078cb0b4d0eafb",
+    "map.js": "372632c39a2070adc2aa3b1b832d8b426a4a4d3ef9c4c546a73bba996f4fab35",
+    "combat.js": "e58e33540671b039f77d3404e143f03907e3cd2a9b8970ded83444ceb7c1ef0d",
+    "diplomacy.js": "c83e5ab6d7ef6d299f37e4719b104bfb9e397260473076d8f03e2074214f9736",
+    "audio.js": "804226980179698a6b56d292d88c0c7226d1e54f06001aab63b52d6db5685262",
+    "manifest.json": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310"
+  },
+  "save_version": 8,
+  "science_main_diff": "Only build ID, AI science fleet completion, optional reinforcement maxWait, AI template metadata restore; no research code changed."
+}

@@ -180,7 +180,7 @@ ok('ui.js görünür eski marka taşımıyor',
    !/YILDIZ HANEDANI|Yıldız Hanedanı/.test(oku('ui.js')));
 for (const f of Object.keys(REFERANS)){
   // 91D: etiket çizimi bu fazda değişti; altyapı hash'leri kaynak 91C'den.
-  if(f==='map.js'){ok('map altyapısı 91C ile aynı',
+  if(f==='map.js'){ok('map altyapısı sabit; hedef seçimi 93A referansında',
     require('./helpers/map-preservation').isMapInfrastructurePreserved(oku(f)));continue;}
   if (ref && ref[f]) ok(f + ' byte-for-byte aynı', sha(f) === ref[f],
                         sha(f).slice(0,16));

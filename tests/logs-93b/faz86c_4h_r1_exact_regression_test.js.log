@@ -1,0 +1,125 @@
+
+A. SÖZDİZİMİ, DOSYA SINIRI VE KARANTİNA
+  ✓ node --check ai.js
+  ✓ node --check audio.js
+  ✓ node --check combat.js
+  ✓ node --check diplomacy.js
+  ✓ node --check economy.js
+  ✓ node --check main.js
+  ✓ node --check map.js
+  ✓ node --check sw.js
+  ✓ node --check ui.js
+  ✓ sw cache = 'stars-v93b'
+  ✓ sw KABUK/fetch/activate korundu
+  ✓ kayıt sürümü v:8 KALDI
+  ✓ depolama anahtarı: yildiz:save
+  ✓ depolama anahtarı: yh_audio
+  ✓ depolama anahtarı: yh_advisor
+  ✓ depolama anahtarı: yh_autoev
+  ✓ depolama anahtarı: yh_bg
+  ✓ depolama anahtarı: yh_radar
+  ✓ depolama anahtarı: yh_templates
+  ✓ depolama anahtarı: __yh_probe
+  ✓ depolama anahtarı: __yh_diag
+  ✓ SITUATIONS kataloğu duruyor
+  ✓ situationsTick tanımı duruyor
+  ✓ situationsTick çağrısı PASİF
+  ✓ DURUMLAR sekmesi gizli
+  ✓ 86C.4 aiProposeTerms korundu
+  ✓ 86C.4 NAP yolu korundu
+  ✓ audio.js byte-for-byte aynı — 804226980179698a
+  ✓ manifest.json byte-for-byte aynı — 6b8305490e9a55e9
+  ✓ map altyapısı sabit; hedef seçimi 93A referansında
+  ✓ 93A.1 onaylı katman/gezegen stilleri
+
+B. View.tap GÖVDESİ — STATİK DOĞRULAMA
+  ✓ tap parametresi açık adlandırıldı (screenPos)
+  ✓ gövde dengeli parantezle çıkarıldı — 109 satır
+  ✓ gövdede `pos(ev)` YOK
+  ✓ gövdede bağımsız `ev` YOK
+  ✓ parametreyi gölgeleyen `const sp = pos...` YOK
+  ✓ rowHits bloğu hâlâ var (davranış korundu)
+  ✓ filo satırı cycling korundu
+  ✓ çift dokunma davranışı korundu
+  ✓ pointerup: kapat() tap'ten ÖNCE
+  ✓ tap kendi hata sınırında (try/catch)
+  ✓ hata maskelenmiyor — logDiag map-input kaydı
+  ✓ lostpointercapture korundu
+  ✓ pointercancel korundu
+  ✓ resetGesture korundu
+  ✓ bind idempotency korundu
+  ✓ blur/visibility temizliği korundu
+  ✓ setPointerCapture koruması korundu
+  ✓ mapFix View.resetGesture çağırıyor
+  ✓ mapFix resetGesture'ı scheduleRecovery'den ÖNCE çağırıyor
+  ✓ activeWorldState kanonik yardımcısı var
+  ✓ runRecovery aktif dünya kapısı içeriyor
+  ✓ skip tanısı açık biçimde yazılıyor
+  ✓ bozuk dünya `skip` DEĞİL, başarısızlık
+
+C. GERÇEK rowHits ÜRETİM YOLU — View.tap STUB'LANMADAN
+  ✓ gerçek View.tap kullanılıyor (stub değil)
+  ✓ ReferenceError YOK — üretim yolu hatasız — ok
+  ✓ doğru filo seçildi
+  ✓ UI.tab('filo') tam BİR kez — 1
+  ✓ pointer state temiz (pts 0)
+  ✓ hata kaydı üretilmedi (map-input 0) — 0
+  ✓ 10 ardışık üretim turu hatasız — ok
+  ✓ 10 turdan sonra pts hâlâ 0 — 0
+  ✓ 10 turda UI.tab('filo') 11 kez (1+10) — 11
+  ✓ sonraki tek parmak DRAG pan yaptı
+  ✓ drag sırasında zoom DEĞİŞMEDİ (pinch değil)
+  ✓ drag sonrası pts 0 — 0
+
+D. UI HATASI ENJEKSİYONU — pointer state kurtarılıyor
+  ✓ tüketici hatası DIŞARI sızmadı — ok
+  ✓ hata sonrası pointer state SIFIR (asıl kabul kriteri) — 0
+  ✓ hata sonrası pinch temiz
+  ✓ hata MASKELENMEDİ — map-input tanısı yazıldı — map-input · View.tap hatası: enjekte: UI.tab patladı
+  ✓ sonraki tek parmak PAN (pinch DEĞİL)
+  ✓ hata sonrası pts yine 0
+  ✓ hata sonrası normal dokunuş yine çalışıyor — 1
+
+E. AKTİF DÜNYA OLMADAN RECOVERY
+  ✓ null G.p ile 50 recovery: UI.refresh 0 — 0
+  ✓ null G.p ile 50 recovery: View.draw 0 — 0
+  ✓ null G.p ile 50 recovery: refreshReach 0 — 0
+  ✓ null G.p ile "reading 'res'" hatası 0 — 0
+  ✓ null G.p ile hiç istisna sızmadı — ok
+  ✓ açık skip tanısı yazıldı — 40 kayıt
+  ✓ _recCalisiyor erken dönüşte serbest bırakıldı — false
+  ✓ AKTİF oyunda recovery gerçekten çalışıyor — refresh 1 draw 1
+  ✓ aktif oyunda da _recCalisiyor serbest
+  ✓ BOZUK dünya `skip` DEĞİL, başarısızlık olarak kaydedildi — skip 0 başarısız 1
+
+F. mapFix — GERÇEK UI.act YOLU
+  ✓ mapFix öncesi gerçekten takılı pointer + pinch vardı — pts 2
+  ✓ mapFix pts durumunu SIFIRLADI — 0
+  ✓ mapFix pinch durumunu temizledi
+  ✓ mapFix kamerayı GEREKSİZ sıfırlamadı — {"x":250,"y":175,"z":0.62}
+  ✓ TEK recovery planlandı — 1
+  ✓ mapFix sonrası gezegen/filo seçimi çalışıyor — 1
+  ✓ mapFix sonrası pan çalışıyor, zoom sabit
+
+G. YÜKLEME SONRASI TAM ZİNCİR
+  ✓ yükleme öncesi yarım jest vardı — 2
+  ✓ yükleme stale pointer bırakmadı
+  ✓ sistem seçimi güncel nesneye bağlı
+  ✓ filo seçimi güncel nesneye bağlı
+  ✓ yükleme oyun günü/kaynak/sahiplik/RNG değiştirmedi
+  ✓ kamera finite
+  ✓ yükleme sonrası TAP hatasız ve çalışıyor — {"hata":"","tabFilo":1}
+  ✓ yükleme sonrası PAN çalışıyor, zoom sabit
+  ✓ yükleme sonrası PINCH çalışıyor
+  ✓ pinch SONRASI pan çalışıyor, zoom sabit
+  ✓ zincir sonunda pts 0 ve kamera finite
+
+H. LISTENER VE DÖNGÜ ÇOĞALMASI
+  ✓ 5 bind + 3 mapFix sonrası listener sayısı ARTMADI — {"down":1,"move":1,"up":1,"cancel":1,"lost":1,"wheel":1} → {"down":1,"move":1,"up":1,"cancel":1,"lost":1,"wheel":1}
+  ✓ pan TEK katsayıda (çift işleme yok) — 66.67 ≈ 66.67
+  ✓ sonunda pts 0
+
+══════════════════════════════════════════
+  GEÇEN: 104   KALAN: 0
+══════════════════════════════════════════
+

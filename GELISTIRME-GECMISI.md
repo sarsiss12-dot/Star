@@ -1,3 +1,41 @@
+# 93D.1 — 13 Ekim 2026
+
+Kanonik 93D üzerinde sınırlı AI üretim düzeltmesi. Verilen 120 aylık bilim
+sipariş döngüsü üç tohumda aynen yeniden üretildi. Gerçek korsan kayıpları,
+filo yerine gemi sayımı hatası, sivil öncelik ve sabit 500 alaşım engeli ayrıştırıldı.
+Çoklu tersane, bakım/rezerv bütçesi, 93C sınıf bazlı teslim ve sınırlı bilim
+kaybı yenilemesi uygulandı. Önce/sonra ham kampanya verileri pakettedir.
+Save v8 ve 93D araştırması korundu; 93E başlamadı, GitHub yayını yapılmadı.
+
+---
+Aşağıdaki bölümler önceki fazların tarihsel kayıtlarıdır.
+
+# Faz 93D — 13 Ekim 2026
+
+Üç görsel bilim ağacı, küresel hedef kuyruğu, uzak hedefin otomatik ön koşul
+rotası, teknolojiye bağlı ilerleme koruması ve tarihsiz eski kayıtlarla uyumlu
+araştırma geçmişi. Kadim Araştırma gelir kaybı düzeltildi. Save v8 korundu.
+93E içerikleri eklenmedi. Ayrıntı: FAZ93D-RAPOR.txt / BILIM-93D.md.
+
+---
+
+# 93A güncel durum — 11 Ekim 2026
+
+Tersanenin sabit sistem hedefi ile filoya özel takviye ayrıldı. Filo
+panelindeki toplu tersane hedefi yazan seçim kaldırıldı. Takviye bu filoyu
+izler; sabit hedef tersane panelinden seçilir. Eski fleet+sys kayıtlarında
+fleet önceliği korunur ve arayüzde açıkça yazılır; sessiz kayıt dönüşümü yok.
+Üretimde/sırada, yolda/bekliyor ve yeni sipariş sayıları ortak saf hesaptan
+üretilir. Kilitli sınıf, tersane yokluğu, sabotaj ve kapalı rota ayrı gerekçeler.
+
+Sıradaki **93B — Astra / High:** kapanan rotada hedefi saklayan bekleme,
+sınırlı yeniden deneme, yeniden hedefleme/iptal ve ana filo kaybı.
+Ardından 93C sınıf bazlı filo şablonu + üretim/seyahat hesabı.
+Cihaz testi kullanıcı hazır olana kadar istenmez. 91C/87T adayı sabit.
+
+---
+Önceki faz notları aşağıda tarihseldir.
+
 # 92D güncel durum — 11 Ekim 2026
 
 92D barış sonrası aylık AI paylaşım gündemini ekler. Bütün cepheleri kapanan

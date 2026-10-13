@@ -18,7 +18,7 @@ test('yoldaki ikmal de beklenen gemi sayısına dahildir',()=>{
  const h=fresh();h.run('reinforceFleet(E,A);finish();var before=JSON.stringify(E.res),r=reinforceFleet(E,A);');eq(h.run('r.ok'),false);eq(h.run('Y.queue.length'),0);eq(h.run('JSON.stringify(E.res)===before'));
 });
 test('başarısız sevk gemiyi tersanede bırakır, sevk ilan etmez',()=>{
- const h=fresh();h.run('setRally(E,Y,9);queueShip(E,Y,"kor");finish();var N=G.fleets.find(f=>f!==A&&f!==B);');eq(h.run('N.sys'),0);eq(h.run('N.path.length'),0);eq(h.run('N.joinFleet===undefined&&N.rallyTo===undefined'));eq(h.run('G.log.some(x=>x.m.includes("toplanma noktasına sevk"))'),false);
+ const h=fresh();h.run('setRally(E,Y,9);queueShip(E,Y,"kor");finish();var N=G.fleets.find(f=>f!==A&&f!==B);');eq(h.run('N.sys'),0);eq(h.run('N.path.length'),0);eq(h.run('N.joinFleet===undefined&&N.rallyTo===9&&N.shipment.sys===9'));eq(h.run('G.log.some(x=>x.m.includes("toplanma noktasına sevk"))'),false);
 });
 test('üretimde hareketli hedefin güncel varışı seçilir',()=>{
  const h=fresh();h.run('reinforceFleet(E,A);orderMove(A,3);stepFleets(.01);finish();var N=G.fleets.find(f=>f!==A&&f!==B);');eq(h.run('N.path.at(-1)'),3);eq(h.run('N.joinFleet'),h.run('A.id'));
@@ -75,7 +75,7 @@ test('AI dolu veya yoldaki ikmalle tamamlanmış filoya ikinci sipariş vermez',
  const h=fresh(1);h.run('B.capTarget=1;aiQueueMilitaryShip(E,Y,"kor");aiQueueMilitaryShip(E,Y,"kor");');eq(h.run('Y.queue.filter(q=>q.delivery).length'),1);
 });
 test('üretim sonrası sınır kapanırsa gemi ve kaynak sonucu tutarlı kalır',()=>{
- const h=fresh();h.run('reinforceFleet(E,A);var before=JSON.stringify(E.res);G.sys[1].owner=O.id;finish();var N=G.fleets.find(f=>f!==A&&f!==B);');eq(h.run('N.sys'),0);eq(h.run('N.path.length'),0);eq(h.run('N.joinFleet===undefined'));eq(h.run('JSON.stringify(E.res)===before'));
+ const h=fresh();h.run('reinforceFleet(E,A);var before=JSON.stringify(E.res);G.sys[1].owner=O.id;finish();var N=G.fleets.find(f=>f!==A&&f!==B);');eq(h.run('N.sys'),0);eq(h.run('N.path.length'),0);eq(h.run('N.joinFleet===A.id&&N.shipment.state==="blocked"'));eq(h.run('JSON.stringify(E.res)===before'));
 });
 test('tersanede çatışan ana filoya anında gemi eklenmez',()=>{
  const h=fresh();h.run('A.sys=0;A.combat=2;reinforceFleet(E,A);finish();var N=G.fleets.find(f=>f!==A&&f!==B);');eq(h.run('A.ships.length'),1);eq(h.run('N.joinFleet'),h.run('A.id'));h.run('A.combat=0;sail();');eq(h.run('A.ships.length'),2);

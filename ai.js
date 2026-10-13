@@ -183,17 +183,181 @@ function aiEnvoyTurn(e,prof){
   });
   if (rnd()<.4+prof.dip*.4) setEnvoyTask(e,cands[0].id,aiEnvoyTask(e,cands[0]));
 }
-/* 88A.1: mevcut tek gemilik üretim kararına hedef bağlar; ek bütçe/tur yok. */
-function aiQueueMilitaryShip(e,yard,cls){
+/* 93D.1: ücretli askerî siparişleri mevcut 93C sınıf şablonlarına bağlar. */
+function aiFleetTemplate(e,f){
+  const design=['kor','muh','kru','zir'].filter(c=>shipBuildAccess(e,c).ok).join(':')+':'+(aiProfile(e).war>.8);
+  if(f.composition&&(!f.composition.aiDesign||f.composition.aiDesign===design))return;
+  const target=Math.min(FLEET_SOFT_CAP,Math.max(f.ships.length,f.capTarget||FLEET_SOFT_CAP));
+  const counts={};for(const sh of f.ships)counts[sh.c]=(counts[sh.c]||0)+1;
+  const mix=(aiProfile(e).war>.8?['kor','muh','kru','zir','muh','zir']:['kor','muh','kor','kru','muh','zir']).filter(c=>shipBuildAccess(e,c).ok);
+  for(let n=f.ships.length;n<target;n++){const c=mix[n%mix.length];counts[c]=(counts[c]||0)+1;}
+  setFleetTemplate(e,f,counts,true);
+  if(f.composition)f.composition.aiDesign=design;
+}
+function aiQueueMilitaryShip(e,yard,cls,policy){
   const candidates=G.fleets.filter(f=>f.e===e.id && f.ships.length &&
     f.ships.every(sh=>SHIPS[sh.c] && SHIPS[sh.c].rol==='sav' && !SHIPS[sh.c].crisisOnly) &&
-    !f.federal && !f.guardLocked && !f.retreating && f.joinFleet===undefined &&
-    f.ships.length+pendingFleetShips(e,f)<Math.min(FLEET_SOFT_CAP,f.capTarget||FLEET_SOFT_CAP) &&
-    canShipToFleet(e,yard,cls,f));
-  candidates.sort((a,b)=>dist(yard,G.sys[fleetDeliveryTarget(e,a)])-
-    dist(yard,G.sys[fleetDeliveryTarget(e,b)]) || a.id-b.id);
-  return candidates.length ? queueFleetShip(e,yard,cls,candidates[0]) : queueShip(e,yard,cls);
+    !f.federal && !f.guardLocked && !f.retreating && !hasShipment(f));
+  candidates.sort((a,b)=>a.id-b.id);
+  for(const f of candidates){
+    aiFleetTemplate(e,f);
+    if(!f.composition || !f.composition.auto)continue;
+    const status=fleetCompositionStatus(e,f);
+    if(!status.ok || (policy&&!status.rows.some(r=>r.cls===cls&&r.missing>0)))continue;
+    // One order inside the existing monthly military budget; no second AI spending loop.
+    const result=reinforceFleet(e,f,{limit:1,reserve:policy?policy.reserve:(e.megaReserve||0)+(e.colossusReserve||0),...(policy?{cls,maxWait:policy.maxWait}:{})});
+    if(result.ok)return true;
+  }
+  // Legacy calls wait for template completion; the bounded AI policy may expand independently when delivery is blocked.
+  if(!policy && candidates.some(f=>f.composition && fleetCompositionStatus(e,f).missing>0))return false;
+  return queueShip(e,yard,cls);
 }
+
+/* 93D.1: physical hulls, paid pending jobs, upkeep and bounded monthly budget. */
+function aiShipInventory(e){
+ const counts={},pending={},yards=G.sys.filter(s=>s.owner===e.id&&hasYard(s));
+ let queuedUse=0,queuedEnergy=0,queuedAlloy=0;
+ for(const f of G.fleets)if(f.e===e.id&&!f.federal)for(const sh of f.ships)counts[sh.c]=(counts[sh.c]||0)+1;
+ for(const s of G.sys)if(s.owner===e.id)for(const q of s.queue)if(q.e===e.id&&SHIPS[q.cls]){
+  pending[q.cls]=(pending[q.cls]||0)+1;queuedUse+=SHIPS[q.cls].sz;queuedEnergy+=SHIPS[q.cls].up;queuedAlloy+=SHIPS[q.cls].upA||0;
+ }
+ return {counts,pending,yards,usage:fleetUsage(e)+queuedUse,queuedEnergy,queuedAlloy};
+}
+function aiShipProduction(e,my,prof){
+ const month=G.year*12+G.month;
+ if(e.aiShipPlan&&e.aiShipPlan.month===month)return;
+ const old=e.aiShipPlan||{},state=e.aiShipPlan={month,nextScience:Number.isFinite(old.nextScience)?clamp(old.nextScience,0,G.day+360):0,scienceLossStreak:clamp(Math.floor(old.scienceLossStreak||0),0,2),scienceIssued:old.scienceIssued===true,reasons:[]};
+ const note=k=>{if(!state.reasons.includes(k))state.reasons.push(k);};
+ let inv=aiShipInventory(e);
+ const yards=inv.yards.filter(s=>!(s.yardLock>(G.memAge||0)));
+ if(!yards.length){note('no-usable-yard');return;}
+ const war=Object.keys(e.war||{}).some(id=>e.war[id]&&G.emps[id]&&!G.emps[id].dead&&!G.emps[id].wild);
+ const threat=G.emps.some(o=>o!==e&&!o.dead&&!o.wild&&e.contact[o.id]&&!e.ally[o.id]&&(e.rel[o.id]||0)<-40);
+ const reserve=(e.megaReserve||0)+(e.colossusReserve||0)+Math.max(war?12:24,Math.min(120,Math.max(0,e.inc.ala||0)*(war?1:2)));
+ let budget=Math.max(0,Math.min((e.res.ala||0)-reserve,Math.max(0,e.inc.ala||0)*(war?5:3)+(e.res.ala||0)*(war?.25:.15)));
+ const limit=Math.min(war?10:6,Math.max(1,yards.reduce((n,s)=>n+yardCount(s),0)*(war?3:2)));
+ let orders=0;
+ const target=Math.max(0,e.cap*(war?.90:threat?.80:clamp(.50+prof.war*.18,.5,.76)));
+ const upkeep=Math.max(.1,1+(e.mods.upMul||0));
+ const energyUpkeep=upkeep*(hasCivic(e,'mobilize')&&!Object.values(e.war||{}).some(Boolean)?2:1);
+ function can(cls){
+  if(!shipBuildAccess(e,cls).ok)return false;
+  const d=SHIPS[cls],c=shipCost(e,cls);
+  if(inv.usage+d.sz>e.cap*(war?1:.92)){note('projected-capacity');return false;}
+  const net=(e.inc.ene||0)-(inv.queuedEnergy+d.up)*energyUpkeep;
+  if((!war&&d.up>0&&net<2)||e.crisis||(net<0&&(e.res.ene||0)<Math.max(100,-net*(war?12:24)))){note('energy-runway');return false;}
+  const alloyNet=(e.inc.ala||0)-(inv.queuedAlloy+(d.upA||0))*upkeep;
+  if(alloyNet<0&&(e.res.ala||0)-(c.ala||0)<-alloyNet*18){note('alloy-upkeep');return false;}
+  if((c.ala||0)>budget||(e.res.ala||0)-(c.ala||0)<reserve){note('alloy-budget-reserve');return false;}
+  if(!Object.entries(c).every(([r,v])=>e.res[r]>=v)){note('resource-cost');return false;}
+  return true;
+ }
+ function buy(cls,military=false){
+  if(orders>=limit||!can(cls))return false;
+  const yard=yards.map(s=>({s,wait:Math.min(...yardCompletionSlots(e,s))})).filter(x=>x.wait<=45).sort((a,b)=>a.wait-b.wait||a.s.id-b.s.id)[0];
+  if(!yard){note('yard-backlog');return false;}
+  const before=e.res.ala;
+  const ok=military?aiQueueMilitaryShip(e,yard.s,cls,{reserve:Math.max(reserve,e.res.ala-budget),maxWait:45}):queueShip(e,yard.s,cls);
+  if(!ok){note('delivery-or-template');return false;}
+  budget-=Math.max(0,before-e.res.ala);orders++;inv=aiShipInventory(e);return true;
+ }
+ const classes=['zir','kru','muh','kor'].filter(c=>shipBuildAccess(e,c).ok);
+ for(let i=0;i<limit;i++){
+  if(inv.usage>=target){note('deterrence-target');break;}
+  const weights={kor:prof.war>.8?3:4,muh:3,kru:2,zir:prof.war>.8?2:1};
+  const needed=new Set();
+  for(const f of G.fleets)if(f.e===e.id&&f.composition&&f.composition.auto&&!hasShipment(f)){const status=fleetCompositionStatus(e,f);for(const r of status.rows||[])if(r.missing&&r.buildable)needed.add(r.cls);}
+  const ranked=classes.slice().sort((a,b)=>Number(needed.has(b))-Number(needed.has(a))||((inv.counts[a]||0)+(inv.pending[a]||0))/weights[a]-((inv.counts[b]||0)+(inv.pending[b]||0))/weights[b]||SHIPS[b].sz-SHIPS[a].sz);
+  if(!ranked.some(c=>buy(c,true)))break;
+  if(orders>=Math.max(1,limit-1))break;
+ }
+ const count=c=>(inv.counts[c]||0)+(inv.pending[c]||0);
+ const targets=colonizeTargets(e),wantCol=Math.min(e.colonies.length<6?3:2,targets.length);
+ if(count('kol')<wantCol)buy('kol');
+ const unexplored=G.sys.some(s=>!s.surv.includes(e.id));
+ if(count('bil')<2&&unexplored){
+  if(G.day>=state.nextScience){const lostAll=count('bil')===0&&state.scienceIssued;if(buy('bil')){state.scienceLossStreak=lostAll?Math.min(2,state.scienceLossStreak+1):state.scienceLossStreak;state.scienceIssued=true;state.nextScience=G.day+120*(1+state.scienceLossStreak);}}
+  else note('science-renewal-cooldown');
+ }else {if(count('bil')>=2)state.scienceLossStreak=0;note('science-covered');}
+ const wantArmy=war?Math.min(5,2+Math.round(prof.war*2)):Math.min(2,1+Math.floor(e.colonies.length/4));
+ if(count('ord')<wantArmy)buy('ord');
+ if(orders===0&&typeof aiColossusProduction==='function'){
+  const yard=yards.find(s=>s.queue.length<Math.max(2,yardCount(s)));
+  if(yard&&inv.usage+SHIPS.col_s.sz<=e.cap&&(e.inc.ene||0)>SHIPS.col_s.up*energyUpkeep+inv.queuedEnergy*energyUpkeep)aiColossusProduction(e,yard,prof);
+ }
+ if(!orders&&!state.reasons.length)note('no-unmet-need');
+}
+
+function aiColossusProduction(e,yard,prof){
+ if(!SHIPS.col_s || !shipBuildAccess(e,'col_s').ok)return;
+ const canAfford=cls=>canBuildShip(e,cls);
+      const varOlan = G.fleets.filter(f => f.e === e.id && f.ships.length &&
+        typeof isColossus === 'function' && isColossus(f)).length;
+      const kuyrukta = G.sys.reduce((n,s)=>n+s.queue.filter(q=>q.e===e.id&&q.cls==='col_s').length,0);
+      /* ═══ ÖZEL COLOSSUS BÜTÜNÇESİ ═══
+         Şartları sağlayan AI, alaşım 1000'i geçince Colossus
+         tamamlanana kadar biriktirmeye başlar: normal gemi üretimi
+         o payı harcayamaz. */
+      const P0 = (typeof personaOf === 'function') ? personaOf(e) : null;
+      const agresif0 = (P0 && P0.n === 'Militarist') || prof.war > .72;
+      if (!varOlan && agresif0 && (e.res.ala || 0) > 1000){
+        e.colossusReserve = SHIPS.col_s.cost.ala;
+      } else if (varOlan){
+        e.colossusReserve = 0;
+      }
+      /* FAZ 32: yasak varsa AI hiç denemez */
+      const yasakVar = (typeof councilExists === 'function' && councilExists() &&
+        G.council.laws.colYasak && typeof inCouncil === 'function' && inCouncil(e));
+      if (!yasakVar && !varOlan && !kuyrukta && canAfford('col_s') &&
+          /* FAZ 26: eşikler gevşetildi — 3000/4500 hiç tetiklenmiyordu
+             (6 tohumda 0 üretim). Geç oyunda ulaşılabilir seviye. */
+          (e.res.ala || 0) > 2000 && (e.res.min || 0) > 2500 &&
+          (e.inc.ala || 0) > 80){
+        const P = (typeof personaOf === 'function') ? personaOf(e) : null;
+        const agresif = (P && P.n === 'Militarist') || prof.war > .72;
+        /* ═══ FAZ 28: BAŞ DÜŞMAN SEÇİMİ ═══
+           ÖLÇÜM: 60 yıl sonunda Vorrak Klan Birliği yedi koşulun
+           altısını sağlıyordu (tekno ✓ alaşım 65197 ✓ mineral 144239 ✓
+           gelir 133 ✓ savaşta ✓ militarist ✓) ve tek engel kin ≥45'ti.
+           Sorun: grudgeOf yalnız SOMUT ZARAR anılarını (ihanet,
+           sabotaj, sistem kaybı) sayıyor; uzun süren bir savaş tek
+           başına kin üretmiyor ve savaştaki AI'ların kini 0 kalıyor.
+           Çözüm: düşmanlık ölçütü kin YERİNE savaş ağırlığı +
+           tehdit + kin bileşimi. */
+        /* ÖLÇÜM (Faz 28): 60. yılda AI'lar arasında savaş kalmıyor;
+           e.war bayrağı yalnız KORSANLARLA dolu. "Savaşta ol" koşulu
+           bu yüzden hiç sağlanmıyordu. Artık düşman aranırken savaş
+           şartı yerine SOĞUK DÜŞMANLIK da sayılıyor: kin, kötü
+           ilişki, galaktik tehdit. Colossus caydırıcı bir silahtır;
+           savaş çıkmadan da inşa edilebilir. */
+        let basDusman = null, enSkor = 0;
+        for (const o of G.emps){
+          if (o.dead || o.wild || o.id === e.id) continue;
+          if (!e.contact[o.id]) continue;
+          if (e.ally && e.ally[o.id]) continue;
+          const savasVar = !!e.war[o.id];
+          const dusmanlik = savasVar || (e.rel[o.id] || 0) < -25 ||
+                            (typeof grudgeOf === 'function' && grudgeOf(e, o.id) > 20);
+          if (!dusmanlik) continue;
+          const kin = (typeof grudgeOf === 'function') ? grudgeOf(e, o.id) : 0;
+          /* Savaş ne kadar uzun sürdüyse o kadar köklü düşmanlık */
+          const yorgun = (typeof exhOf === 'function') ? exhOf(e, o.id) : 0;
+          /* Güçlü düşman daha çok hak eder */
+          const guc = clamp(totalPower(o) / (totalPower(e) + 1), 0, 2.5);
+          /* Kötü ilişki de düşmanlık ölçüsüdür; savaş varsa ağırlaşır */
+          const soguk = Math.max(0, -(e.rel[o.id] || 0)) * .45;
+          const skor = (kin + yorgun * .8 + guc * 25 +
+                        (o.threat ? o.threat * .3 : 0) + soguk) * (savasVar ? 1.4 : 1);
+          if (skor > enSkor){ enSkor = skor; basDusman = o; }
+        }
+        if (agresif && basDusman && enSkor >= 45 && rnd() < .10){
+          queueShip(e, yard, 'col_s');
+          e.colossusTarget = basDusman.id;
+        }
+      }
+    
+}
+
 function aiTurn(e){
   if (e.dead) return;
   if (e.crisisSide){ crisisFleetTurn(e); return; }
@@ -317,188 +481,8 @@ function aiTurn(e){
     }
   }
 
-  /* --- 2. gemi inşası --- */
-  const yards = my.filter(hasYard);
-  if (yards.length){
-    const yard = yards[Math.floor(rnd()*yards.length)];
-    const usage = fleetUsage(e);
-    const atWar = Object.keys(e.war).some(k => e.war[k]);
-    // AI barışta da ciddi donanma tutar — ama ekonomisini boğmadan.
-    const diffMul = (G.cfg && DIFFS[G.cfg.diff]) ? DIFFS[G.cfg.diff].aiAgr : 1;
-    let milTarget = (atWar ? .82 : .52 + prof.war*.28) * diffMul;
-    // enerji açığı varsa donanma büyütmeyi durdur
-    if ((e.inc.ene || 0) < 0) milTarget = Math.min(milTarget, .28);
-    else if ((e.inc.ene || 0) < 10) milTarget = Math.min(milTarget, .48);
-    if (e.crisis) milTarget = Math.min(milTarget, .30);   // kriz varken donanma büyütme
-    const sci = G.fleets.filter(f=>f.e===e.id && fleetHasRole(f,'bilim')).length;
-    const col = G.fleets.filter(f=>f.e===e.id && fleetHasRole(f,'koloni')).length;
-    const targets = colonizeTargets(e);
-
-    // genişleme fırsatı varken erken oyunda önce yayıl
-    if (targets.length && e.colonies.length < 5) milTarget = Math.min(milTarget, .50);
-    const wantMil = e.cap * clamp(milTarget, .25, 1.05);
-
-    // genişleme her zaman önce gelir: hedef varsa koloni gemisi kuyruğa girer
-    const wantCol = Math.min(e.colonies.length < 6 ? 3 : 2, targets.length);
-    /* Koşullar artık GERÇEK maliyete bakıyor. Eskiden 'min > 200' deniyordu
-       ama koloni gemisi 265 mineral istiyor: AI sürekli deneyip başarısız
-       oluyor ve zincirdeki diğer gemileri hiç sıraya alamıyordu. */
-    /* Harika projesi ilan edilmişse alaşımın bir kısmı rezerve edilir;
-       AI aksi hâlde tüm alaşımı gemiye harcayıp mega yapıyı hiç
-       başlatamıyordu (ölçüm: 380k mineral, 697 alaşım). */
-    /* FAZ 28: Colossus bütçesi de alaşım rezervine eklenir.
-       Süper silah kuyruğa girdiğinde normal gemi üretimi onun
-       payını harcayamaz. */
-    /* ═══ FAZ 47: DONANMA UYKUSU ═══
-       Kasa 500 alaşımın altındaysa ya da kapasite %90'ı aştıysa
-       AI yeni gemi basmaz — ekonomiyi kendi eliyle boğmasın.
-       (Faz 41'de terhis mantığını düzeltmiştim; bu onun önleyici
-        tarafı: önce hiç aşıma girme.) */
-    const kulAI = (typeof fleetUsage === 'function') ? fleetUsage(e) : 0;
-    const kapAI = Math.max(1, Math.round(e.cap || 1));
-    if ((e.res.ala || 0) < 500 || kulAI / kapAI >= .90){
-      e._navySleep = true;
-    } else e._navySleep = false;
-
-    const rez = (e.megaReserve || 0) + (e.colossusReserve || 0);
-    const canAfford = cls => {
-      /* Colossus'un kendisi rezervden muaftır */
-      const muaf = (cls === 'col_s');
-      const c2 = shipCost(e, cls);
-      return Object.keys(c2).every(r => {
-        const stok = (e.res[r]||0) - ((r === 'ala' && !muaf) ? rez : 0);
-        return stok >= c2[r];
-      });
-    };
-    /* ═══ FAZ 22: TAARRUZ ORDUSU ÜRETİMİ ═══
-       AI orduyu iki sebeple ister: savunma yastığı ve fetih aracı.
-       Kaba bombardımanla gezegen almak enkaz bırakır ve itibar
-       yakar; ordu ile temiz işgal daha kârlıdır. */
-    const orduN = G.fleets.filter(f => f.e === e.id &&
-      typeof isTransport === 'function' && isTransport(f)).length;
-    let wantOrdu = 0;
-    if (!SHIPS.ord.tech || e.techs[SHIPS.ord.tech]){
-      /* FAZ 24: taban artırıldı — ordu artık temel askerî araç */
-      /* Taban: her 4 koloni için 1 savunma ordusu */
-      wantOrdu = Math.min(4, 1 + Math.floor(e.colonies.length / 3));
-      if (atWar){
-        /* Savaşta fetih için ek ordu — savaşçı profil daha çok ister */
-        wantOrdu += 1 + Math.round(prof.war * 2);
-        /* Düşman gezegeni yakınlarda mı? Varsa yatırım anlamlı */
-        let hedefVar = false;
-        for (const sy of G.sys){
-          if (sy.owner < 0 || !e.war[sy.owner]) continue;
-          if (sy.planets.some(p2 => p2.col)){ hedefVar = true; break; }
-        }
-        if (!hedefVar) wantOrdu = Math.min(wantOrdu, 1);
-      }
-      if ((e.inc.ene || 0) < 0) wantOrdu = Math.min(wantOrdu, 1);
-      wantOrdu = Math.min(wantOrdu, 5);
-    }
-
-    if (col < wantCol && canAfford('kol') && yard.queue.length < 3) queueShip(e, yard, 'kol');
-    else if (sci < 2 && canAfford('bil') && yard.queue.length < 2) queueShip(e, yard, 'bil');
-    else if (orduN < wantOrdu && canAfford('ord') && yard.queue.length < 3)
-      queueShip(e, yard, 'ord');
-    /* ═══ FAZ 25: AI COLOSSUS ═══
-       Çok nadir olmalı — galaksiyi düşman eden bir silah.
-       Beş koşulun HEPSİ gerekir:
-         1. teknoloji (m_yildiz)
-         2. devasa stok (alaşım 3000+, mineral 4500+) — tavan yapmış
-         3. güçlü ekonomi (alaşım geliri 120+)
-         4. agresif karakter (militarist mizaç ya da savaşçı profil)
-         5. gerçek bir baş düşman (kin 60+) ve zaten savaşta
-       Ve hepsi sağlansa bile ayda %4 şans. Zaten bir tane varsa
-       ikincisi yapılmaz. */
-    else if (SHIPS.col_s && (!SHIPS.col_s.tech || e.techs[SHIPS.col_s.tech])){
-      const varOlan = G.fleets.filter(f => f.e === e.id && f.ships.length &&
-        typeof isColossus === 'function' && isColossus(f)).length;
-      const kuyrukta = yard.queue.filter(q => q.cls === 'col_s').length;
-      /* ═══ ÖZEL COLOSSUS BÜTÜNÇESİ ═══
-         Şartları sağlayan AI, alaşım 1000'i geçince Colossus
-         tamamlanana kadar biriktirmeye başlar: normal gemi üretimi
-         o payı harcayamaz. */
-      const P0 = (typeof personaOf === 'function') ? personaOf(e) : null;
-      const agresif0 = (P0 && P0.n === 'Militarist') || prof.war > .72;
-      if (!varOlan && agresif0 && (e.res.ala || 0) > 1000){
-        e.colossusReserve = SHIPS.col_s.cost.ala;
-      } else if (varOlan){
-        e.colossusReserve = 0;
-      }
-      /* FAZ 32: yasak varsa AI hiç denemez */
-      const yasakVar = (typeof councilExists === 'function' && councilExists() &&
-        G.council.laws.colYasak && typeof inCouncil === 'function' && inCouncil(e));
-      if (!yasakVar && !varOlan && !kuyrukta && canAfford('col_s') &&
-          /* FAZ 26: eşikler gevşetildi — 3000/4500 hiç tetiklenmiyordu
-             (6 tohumda 0 üretim). Geç oyunda ulaşılabilir seviye. */
-          (e.res.ala || 0) > 2000 && (e.res.min || 0) > 2500 &&
-          (e.inc.ala || 0) > 80){
-        const P = (typeof personaOf === 'function') ? personaOf(e) : null;
-        const agresif = (P && P.n === 'Militarist') || prof.war > .72;
-        /* ═══ FAZ 28: BAŞ DÜŞMAN SEÇİMİ ═══
-           ÖLÇÜM: 60 yıl sonunda Vorrak Klan Birliği yedi koşulun
-           altısını sağlıyordu (tekno ✓ alaşım 65197 ✓ mineral 144239 ✓
-           gelir 133 ✓ savaşta ✓ militarist ✓) ve tek engel kin ≥45'ti.
-           Sorun: grudgeOf yalnız SOMUT ZARAR anılarını (ihanet,
-           sabotaj, sistem kaybı) sayıyor; uzun süren bir savaş tek
-           başına kin üretmiyor ve savaştaki AI'ların kini 0 kalıyor.
-           Çözüm: düşmanlık ölçütü kin YERİNE savaş ağırlığı +
-           tehdit + kin bileşimi. */
-        /* ÖLÇÜM (Faz 28): 60. yılda AI'lar arasında savaş kalmıyor;
-           e.war bayrağı yalnız KORSANLARLA dolu. "Savaşta ol" koşulu
-           bu yüzden hiç sağlanmıyordu. Artık düşman aranırken savaş
-           şartı yerine SOĞUK DÜŞMANLIK da sayılıyor: kin, kötü
-           ilişki, galaktik tehdit. Colossus caydırıcı bir silahtır;
-           savaş çıkmadan da inşa edilebilir. */
-        let basDusman = null, enSkor = 0;
-        for (const o of G.emps){
-          if (o.dead || o.wild || o.id === e.id) continue;
-          if (!e.contact[o.id]) continue;
-          if (e.ally && e.ally[o.id]) continue;
-          const savasVar = !!e.war[o.id];
-          const dusmanlik = savasVar || (e.rel[o.id] || 0) < -25 ||
-                            (typeof grudgeOf === 'function' && grudgeOf(e, o.id) > 20);
-          if (!dusmanlik) continue;
-          const kin = (typeof grudgeOf === 'function') ? grudgeOf(e, o.id) : 0;
-          /* Savaş ne kadar uzun sürdüyse o kadar köklü düşmanlık */
-          const yorgun = (typeof exhOf === 'function') ? exhOf(e, o.id) : 0;
-          /* Güçlü düşman daha çok hak eder */
-          const guc = clamp(totalPower(o) / (totalPower(e) + 1), 0, 2.5);
-          /* Kötü ilişki de düşmanlık ölçüsüdür; savaş varsa ağırlaşır */
-          const soguk = Math.max(0, -(e.rel[o.id] || 0)) * .45;
-          const skor = (kin + yorgun * .8 + guc * 25 +
-                        (o.threat ? o.threat * .3 : 0) + soguk) * (savasVar ? 1.4 : 1);
-          if (skor > enSkor){ enSkor = skor; basDusman = o; }
-        }
-        if (agresif && basDusman && enSkor >= 45 && rnd() < .10){
-          queueShip(e, yard, 'col_s');
-          e.colossusTarget = basDusman.id;
-        }
-      }
-    }
-    else if (usage < wantMil && yard.queue.length < 3){
-      const unlocked = ['zir','kru','muh','kor'].filter(c => !SHIPS[c].tech || e.techs[SHIPS[c].tech]);
-      const best = unlocked[0];
-      const mix = fleetRangeMix(e);
-      const tot = (mix[1]||0) + (mix[2]||0) + (mix[3]||0) + 1;
-      // dengeli filo: ~%25 uzak, ~%35 orta, ~%40 yakın
-      let cls = best;
-      const wantLong  = (mix[3]||0) / tot < .25;
-      const wantMid   = (mix[2]||0) / tot < .35;
-      if (wantLong && unlocked.includes('zir') && e.res.ala > SHIPS.zir.cost.ala*1.3) cls = 'zir';
-      else if (wantMid && unlocked.includes('kru') && e.res.ala > SHIPS.kru.cost.ala*1.3) cls = 'kru';
-      else if (unlocked.includes('muh') && e.res.ala > SHIPS.muh.cost.ala*1.6) cls = 'muh';
-      else cls = 'kor';
-      if (!canAfford(cls)) cls = 'kor';
-      /* FAZ 47: donanma uykusu — savaşta değilsek ve kasa/kapasite
-         eşiğe dayandıysa yeni savaş gemisi basma. Savaşta uyku
-         geçersiz: hayatta kalmak öncelikli. */
-      let savasVar = false;
-      for (const w in e.war) if (e.war[w] && G.emps[w] && !G.emps[w].wild) savasVar = true;
-      if (e._navySleep && !savasVar) return;
-      if (canAfford(cls)) aiQueueMilitaryShip(e, yard, cls);
-    }
-  }
+  /* 93D.1 — bounded multi-yard production */
+  aiShipProduction(e,my,prof);
 
   /* --- 3. keşif --- */
   for (const f of G.fleets){
@@ -548,7 +532,7 @@ function aiTurn(e){
   /* --- 4b. aynı sistemdeki boştaki savaş filolarını birleştir --- */
   const byS = {};
   for (const f of G.fleets){
-    if (f.e !== e.id || f.combat || f.mv || f.path.length || f.sys < 0) continue;
+    if (f.e !== e.id || f.combat || f.mv || f.path.length || f.sys < 0 || hasShipment(f) || f.composition || pendingFleetShips(e,f)>0) continue;
     if (!isArmed(f)) continue;
     (byS[f.sys] = byS[f.sys] || []).push(f);
   }
@@ -767,7 +751,7 @@ function aiTurn(e){
 
   /* --- 7. askerî hareket --- */
   const wars = G.emps.filter(o => !o.dead && e.war[o.id]);
-  const armed = G.fleets.filter(f => f.e === e.id && isArmed(f) && !f.combat);
+  const armed = G.fleets.filter(f => f.e === e.id && isArmed(f) && !f.combat && !hasShipment(f));
 
   /* --- duruş seçimi: güç dengesine göre --- */
   for (const f of armed){

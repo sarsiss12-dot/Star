@@ -1197,6 +1197,19 @@ const View = {
   tap(screenPos){
     const sp = screenPos;
     const {f, s} = this.hit(sp);
+    // Hedef seçimi filo satırı / çift dokunuştan önce çözülür.
+    if(this.rallyForSys!==undefined&&s){
+      const source=G.sys[this.rallyForSys];this.rallyForSys=undefined;
+      const result=setRally(G.p,source,s.id);
+      say(result.ok?'📍 '+source.name+' → '+s.name+' · tersane hedefi değişti':result.why,result.ok?'sci':'war');
+      UI.refresh();return;
+    }
+    // Eski UI eylemi açık kaldıysa bütün tersanelere hedef yazma.
+    if(this.rallyFor!==undefined){
+      this.rallyFor=undefined;
+      say('Takviye gemileri hedef filoyu izler. Sabit nokta tersane panelinden seçilir.','sci');
+      UI.refresh();return;
+    }
     const now = performance.now();
     const dbl = (now - (this._lastTap||0) < 320) && this._lastPt &&
                 Math.hypot(sp.x-this._lastPt.x, sp.y-this._lastPt.y) < 26;
@@ -1275,20 +1288,6 @@ const View = {
       return;
     }
 
-    /* ═══ FAZ 67: TERSANE RALLİ HEDEFİ SEÇİMİ ═══ */
-    if (this.rallyForSys !== undefined && s){
-      const kaynak = G.sys[this.rallyForSys];
-      this.rallyForSys = undefined;
-      if (kaynak){
-        kaynak.rally = kaynak.rally || {};
-        kaynak.rally[0] = {sys: s.id};
-        say('📍 ' + kaynak.name + ' → ' + s.name +
-            ' · yeni askeri gemiler oraya gidecek', 'sci');
-      }
-      UI.refresh();
-      return;
-    }
-
     /* FAZ 50: Panoptikon yeniden hedefleme */
     if (this.panoptFor !== undefined && s){
       const kay = this.panoptFor;
@@ -1296,30 +1295,6 @@ const View = {
       const r = (typeof panopticonLock === 'function')
         ? panopticonLock(G.p, kay, s.id) : {ok:false, why:'—'};
       if (!r.ok) say(r.why, 'war');
-      UI.refresh();
-      return;
-    }
-
-    /* ═══ FAZ 48: TOPLANMA NOKTASI SEÇİMİ ═══
-       rallyFor açıkken haritadan seçilen sistem o filonun
-       toplanma noktası olur; üretilen gemiler oraya intikal eder. */
-    if (this.rallyFor !== undefined && s){
-      const fl = G.fleets.find(q => q.id === this.rallyFor);
-      this.rallyFor = undefined;
-      if (fl){
-        fl.rallyAt = s.id;
-        /* Filonun bulunduğu/gittiği sistemin tersanelerine kaydet */
-        const kaynak = fl.sys >= 0 ? G.sys[fl.sys] : (fl.mv ? G.sys[fl.mv.to] : null);
-        if (kaynak && typeof setRally === 'function') setRally(G.p, kaynak, s.id);
-        for (const sy of G.sys){
-          if (sy.owner !== 0) continue;
-          if (typeof hasStructYard === 'function' && !hasStructYard(sy) &&
-              !(sy.built && sy.built.tersane)) continue;
-          sy.rally = sy.rally || {};
-          sy.rally[0] = {fleet: fl.id, sys: s.id};
-        }
-        say('📍 Toplanma noktası: ' + s.name + ' — yeni gemiler oraya gidecek', 'sci');
-      }
       UI.refresh();
       return;
     }

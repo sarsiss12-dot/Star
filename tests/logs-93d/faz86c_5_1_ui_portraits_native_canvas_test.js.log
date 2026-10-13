@@ -1,0 +1,50 @@
+  ✓ Actual governor assignment produces a panel portrait
+  ✓ Governor portrait has real colored pixels immediately
+  ✓ Governor pixels match its own seed/look/rank
+  ✓ Completed governor portrait is not redrawn every frame
+  ✓ Leaders list uses the same leader generator, not a race portrait
+  ✓ Opening leaders cannot overwrite the governor portrait
+  ✓ Native reset really clears the governor pixel buffer
+  ✓ Recovery repaints the governor as well as the leaders list
+  ✓ New panel DOM is painted immediately after refresh
+  ✓ Failed drawing does not mark the portrait complete
+  ✓ Portrait failure is diagnosed without crashing panel painting
+  ✓ Portrait can be retried after a drawing failure
+  ✓ Missing context leaves the portrait eligible for retry
+  ✓ Restored portrait context draws successfully
+  ✓ Rank change refreshes an existing canvas
+  ✓ Portrait drawing does not change the saved world or RNG
+  ✓ Removing a governor removes its portrait slot
+  ✓ Admiral panel also receives a real leader portrait
+  ✓ Menu map stays between bars at 900x420
+  ✓ Only requested menu map is open at 900x420
+  ✓ Menu emp stays between bars at 900x420
+  ✓ Only requested menu emp is open at 900x420
+  ✓ Menu map stays between bars at 900x300
+  ✓ Only requested menu map is open at 900x300
+  ✓ Menu emp stays between bars at 900x300
+  ✓ Only requested menu emp is open at 900x300
+  ✓ Tall menu has a constrained scroll region at height 300
+  ✓ Menu map stays between bars at 740x280
+  ✓ Only requested menu map is open at 740x280
+  ✓ Menu emp stays between bars at 740x280
+  ✓ Only requested menu emp is open at 740x280
+  ✓ Tall menu has a constrained scroll region at height 280
+  ✓ Menu map stays between bars at 640x240
+  ✓ Only requested menu map is open at 640x240
+  ✓ Menu emp stays between bars at 640x240
+  ✓ Only requested menu emp is open at 640x240
+  ✓ Tall menu has a constrained scroll region at height 240
+  ✓ Menu map stays between bars at 320x640
+  ✓ Only requested menu map is open at 320x640
+  ✓ Menu emp stays between bars at 320x640
+  ✓ Only requested menu emp is open at 320x640
+  ✓ Open menu moves when browser viewport height changes
+  ✓ Open menu follows its anchor when toolbar scrolls
+  ✓ Menu layout leaves map camera, save and RNG untouched
+  ✓ Repeated boot does not duplicate menu layout listeners
+  ✓ Logistics toggle keeps menu open, main mode and radar unchanged
+  ✓ Choosing a main mode closes the menu and keeps logistics enabled
+  ✓ Menu CSS allows scrolling without shrinking touch targets
+
+GEÇEN: 48 KALAN: 0

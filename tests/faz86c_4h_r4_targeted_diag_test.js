@@ -145,7 +145,7 @@ for(const f of fs.readdirSync(KOK).filter(x=>x.endsWith('.js'))){
 }
 {
   const mn=oku('main.js'), mp=oku('map.js'), ui=oku('ui.js'), sw=oku('sw.js');
-  ok("sw cache = 'stars-v92d'", /const CACHE = 'stars-v92d'/.test(sw));
+  ok("sw cache = 'stars-v93d1'", /const CACHE = 'stars-v93d1'/.test(sw));
   ok('sw KABUK/fetch/activate korundu', /KABUK/.test(sw) &&
      /addEventListener\('fetch'/.test(sw) && /addEventListener\('activate'/.test(sw));
   ok('kayıt sürümü v:8 KALDI', /v:8, cfg:G\.cfg/.test(mn));
@@ -193,8 +193,10 @@ for(const f of fs.readdirSync(KOK).filter(x=>x.endsWith('.js'))){
   try{ ref=JSON.parse(fs.readFileSync(path.join(KOK,'tests','referans-sha.json'),'utf8')); }catch(e){}
   ['audio.js','manifest.json','map.js',
    'index.html'].forEach(f=>{
+    if(f==='index.html'){ok('93D bilim CSS ve değişmeyen 93C HTML',
+      require('./helpers/ui-preservation').isReviewedUI(oku(f)));return;}
     // 91D: bütün map.js yerine değişmemesi gereken altyapı bölümleri kilitli.
-    if(f==='map.js'){ok('map altyapısı 91C ile aynı',
+    if(f==='map.js'){ok('map altyapısı sabit; hedef seçimi 93A referansında',
       require('./helpers/map-preservation').isMapInfrastructurePreserved(oku(f)));return;}
     if(!ref||!ref[f]){ ok(f+' referansı var', false); return; }
     const h=crypto.createHash('sha256').update(fs.readFileSync(path.join(KOK,f))).digest('hex');
@@ -397,7 +399,7 @@ console.log('\nE. HEDEFLİ TANI');
   ok('çizim tamamlandığında aşama "tamam"', N.stage==='tamam', N.stage);
   ok('yüzey eşleşmeleri raporlanıyor',
      N.cvEsles===true && N.gEsles===true && N.drawCvEsles===true);
-  ok('build kimliği raporda', N.build==='92d', String(N.build));
+  ok('build kimliği raporda', N.build==='93d1', String(N.build));
   ok('rapor yeterince alan içeriyor', N.alanlar>=15, String(N.alanlar));
   ok('çizim SONRASI resize AYIRT EDİLİYOR',
      N.resizeAfterDraw===false && (d.resizeSonra||{}).resizeAfterDraw===true,

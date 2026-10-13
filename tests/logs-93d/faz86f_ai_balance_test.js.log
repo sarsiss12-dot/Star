@@ -1,0 +1,26 @@
+✓ Teknoloji paylaşımı satıcıda sıfır olsa da taviz bütçesinde pozitif
+✓ Kaynak tavizi satıcının kendi ihtiyacından değerlenir
+✓ Hediye kaynak antlaşma bütçesini şişirmez
+✓ Aynı simetrik antlaşma iki yönde bütçeyi ikiye katlamaz
+✓ Redundant NAP yeni taviz bütçesi üretmez
+✓ Simetrik madde want yönünde de gerçek fayda verir
+✓ Olumsuz ittifak değeri pozitif taviz bütçesine dönüşmez
+✓ Saf takasta kendi fazlası yoksa ek taviz kabul bütçesi yok
+✓ Saf takasta kendi fazlası varsa sınırlı bütçe hesaplanır
+✓ Bütçe saf ve deterministik; RNG, kaynak, hafıza veya teklif değişmez
+✓ Gerçek AI küçük açık için en pahalı teknoloji yerine yeterli en küçüğü ister
+✓ Teknoloji sıralaması katalog/nesne ekleme sırasından bağımsız
+✓ Bilinen teknoloji karşı teklife tekrar eklenmez
+✓ Teknoloji yetmiyorsa sonsuz döngü olmadan ret verir
+✓ Kaynak yeterliyse teknoloji paylaşımı istenmez
+✓ Üst bütçeyi aşan teknoloji gerçek aiNegotiate kapısında reddedilir
+✓ Bütçe içindeki teknoloji gerçek transaction ile paylaşılır
+✓ Kabul yolu bozulmaz, oyuncu aiNegotiate tarafından otomatik kabul edilmez
+✓ Reddedilen orijinal teklif için ikinci tur veya Etki kesintisi yok
+✓ Temaslı 360 ay: 11; gerçek saat, bütçe ve durum bütünlüğü
+✓ Temaslı 360 ay: 99; gerçek saat, bütçe ve durum bütünlüğü
+✓ Temaslı 360 ay: 404; gerçek saat, bütçe ve durum bütünlüğü
+✓ Ölçüm sarmalayıcıları RNG ve oyun sonucunu değiştirmez
+✓ Aynı seed ve aynı aylık fixture aynı pazarlık dizisini üretir
+✓ Temas fixture olmadan AI-AI müzakeresi olmadığını açıkça ölçer
+GEÇEN: 25 KALAN: 0

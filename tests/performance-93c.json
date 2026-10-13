@@ -1,0 +1,9 @@
+{
+  "systems": 400,
+  "yards": 30,
+  "planningMs": 21.711978999999985,
+  "idle1000CallsMs": 0.8800589999999886,
+  "graphSearches": 3,
+  "orders": 29,
+  "platform": "Node VM on host; not Android timing"
+}

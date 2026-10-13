@@ -1,0 +1,15 @@
+✓ dosya seçici cancel olayında bir kez tamamlanır ve input kaldırılır
+✓ change olayı dosyasız dönerse iptal sayılır ve input sızmaz
+✓ FileReader başarı, hata ve abort yolları tek callback ve temizlik üretir
+✓ FileReader readAsText istisnası olay dışına sızmaz
+✓ input click istisnası open-error verir ve eklenen inputu kaldırır
+✓ bozuk cihaz kaydı missing değil invalid olarak sınıflanır ve dünya korunur
+✓ eksik cihaz kaydı missing; geçerli kayıt ok olarak sınıflanır
+✓ ana menü yapısal bozuk kaydı devam edilebilir göstermez
+✓ dosya seçiminden vazgeçmek hata mesajı üretmez
+✓ geçersiz dosya açık dünyayı korur ve açık geri bildirim verir
+✓ geçerli dosya onaydan önce uygulanmaz; onayla yüklenip hızlı kopyaya yazılır
+✓ yükleme onayından vazgeçmek açık dünyayı ve hızlı kaydı değiştirmez
+✓ cihazdan yükle bozuk kaydı bulunamadı diye raporlamaz
+✓ build ve cache 90RC.2 kimliği taşır
+GEÇEN: 14 KALAN: 0

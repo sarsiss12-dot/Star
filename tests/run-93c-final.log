@@ -1,0 +1,9 @@
+{"name": "faz88a_1_ship_dispatch_test.js", "exit": 0, "durationMs": 3923, "pass": 30, "fail": 0}
+{"name": "faz89b_daily_campaign_test.js", "exit": 0, "durationMs": 11932, "pass": 11, "fail": 0}
+{"name": "faz91b_campaign_observer_test.js", "exit": 0, "durationMs": 11978, "pass": 5, "fail": 0}
+{"name": "faz92d_settlement_agenda_test.js", "exit": 0, "durationMs": 4012, "pass": 14, "fail": 0}
+{"name": "faz93a_logistics_targets_test.js", "exit": 0, "durationMs": 2963, "pass": 15, "fail": 0}
+{"name": "faz93a1_production_panels_test.js", "exit": 0, "durationMs": 4811, "pass": 21, "fail": 0}
+{"name": "faz93b_pending_shipments_test.js", "exit": 0, "durationMs": 4900, "pass": 31, "fail": 0}
+{"name": "faz93c_fleet_composition_test.js", "exit": 0, "durationMs": 6793, "pass": 47, "fail": 0}
+FINAL 65 4343 0

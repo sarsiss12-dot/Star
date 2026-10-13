@@ -1,0 +1,46 @@
+✓ Devlet listesi yalnız temaslı yaşayan normal devletleri seçtirir
+✓ Temassız dünya açıklama gösterir, ilişki ve müzakere devre dışıdır
+✓ Devlet filtresi: war
+✓ Devlet filtresi: ally
+✓ Devlet filtresi: envoy
+✓ Sağ panel tek ilişki girişi; pakt ve NAP doğru adlarla görünür
+✓ Elçi, ticaret, geçiş, sensör ve casus ağı ayrı doğru durumlar
+✓ Vasal özeti tür, öfke ve oyuncunun aldığı vergiyi korur
+✓ Gizli diplomasi, federasyon, konsey ve istihbarat hâlâ erişilir
+✓ Savaş eylemi boolean izinle çalışır ve önce hedef seçtirir
+✓ Doktrin engeli ilişkiyi açar; elçi/hediye yok, müzakere disabled
+✓ Gezinme dünya, kaynaklar, ilişkiler, hafıza ve RNG değiştirmez
+✓ Taslak aynı hedefe dönünce maddeleri, ömrü ve nesne kimliğini korur
+✓ Devlet başına taslak ve karşı teklif birbirine karışmaz
+✓ Kapatıp açma taslağı korur, temizleme yalnız seçili devleti temizler
+✓ Kayıt yüklemede açık taslak silinir ve eski teklif gönderilmez
+✓ Yükleme sonrası eski karşı teklif kabulü/ret çağrısı dünyayı değiştirmez
+✓ Ölen veya teması kaybolan hedefin taslağı açılmaz
+✓ Liste ve hedeflerin kaydırma konumları ayrı korunur; eski scroll etkisiz
+✓ İstihbarat 0: kaynak, teknoloji ve mizaç kapıları
+✓ İstihbarat 1: kaynak, teknoloji ve mizaç kapıları
+✓ İstihbarat 2: kaynak, teknoloji ve mizaç kapıları
+✓ İstihbarat 3: kaynak, teknoloji ve mizaç kapıları
+✓ Düşük istihbaratta gizli stok/teknoloji değişmesi ilişki HTML değiştirmez
+✓ Yabancı üçüncü devletin adı yüksek istihbaratta da maskelenir
+✓ Düşük istihbaratta kaynak seçicisi stoktan bağımsız aynı seçenekleri sunar
+✓ Yüksek istihbaratta kaynak seçicisi gerçek stokları kullanır
+✓ İstihbaratsız teknoloji/lüks eylemi doğrudan çağrılsa da seçici açılmaz
+✓ Görülmemiş yabancı sistemler düşük istihbarat seçicisinde listelenmez
+✓ Kendi teknoloji seçenekleri düşük istihbaratta rakibin envanterini açığa çıkarmaz
+✓ Düşük istihbaratta teklif önizlemesi evalOffer çağırmaz; üst düzeyde kaba tahmin
+✓ Süresi dolmuş teklif önizlemede ve gönderimde reddedilir; stok/RNG sabit
+✓ Cömert teklif gerçek aiRespond ve executeDeal ile tek kez aktarılır
+✓ Kötü teklif gerçek AI ret verir; kaynaklar ve RNG değişmez
+✓ Karşı teklif hedef değiştirince saklanır; kabul yalnız o devleti etkiler
+✓ Seçici açıkken hedef değişirse gecikmiş seçim yeni taslağa yazılmaz
+✓ Seçici açıkken kayıt yüklenirse gecikmiş callback etkisiz
+✓ Diplomasi taslakları v8 kayda veya tercihlere eklenmez
+✓ Mobil CSS kontrolleri kapsamlıdır; tema değişkenleri tanımlıdır (yerleşim testi değil)
+✓ Gerçek AI karşı teklifi ayrı kalır; hedef değişiminden sonra aynı içerikle açılır
+✓ Temas kaybından sonra eski teklif doğrudan gönderilse de aktarılmaz
+✓ Seçili devletin kendi hafızası gösterilir, karşı tarafın gizli hafızası gösterilmez
+✓ Süzerenlik onay ekranı da istihbarat kapılarını korur: 0
+✓ Süzerenlik onay ekranı da istihbarat kapılarını korur: 2
+✓ Süzerenlik onay ekranı da istihbarat kapılarını korur: 3
+GEÇEN: 45 KALAN: 0

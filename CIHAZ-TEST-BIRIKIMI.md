@@ -1,3 +1,29 @@
+# 93A.1 — kullanıcı hazır olduğunda
+
+Bu bir test talebi değildir.
+- Başlamış ve bekleyen gemiyi tek tek iptal et; yalnız seçilen iş gitmeli.
+- Toplu iptal penceresinde iade ve eski makbuzsuz uyarısını kontrol et.
+  Vazgeç hiçbir siparişi değiştirmemeli; onay yalnız o tersaneyi temizlemeli.
+- Üretim tamamlanırken eski düğmeye basılırsa başka iş iptal edilmemeli.
+- Bir koloni başlığını kapat, diğerinin açık kaldığını ve sayaçların güncel
+  olduğunu kontrol et. Tekrar açınca vali/inşa bilgileri geri gelmeli.
+- Bina kartına yarım saniye bas: bilgi açılmalı, kaynak harcanmamalı.
+  Karttan kaydırmaya başlayınca bilgi açılmamalı; kısa basış hâlâ inşa etmeli.
+- Radar/Lojistik/Filo sahipleri kapalı ve açıkken aynı görsel dili kullanmalı.
+- Takviye siparişinde gösterilen gemi sınıfı üretilen sınıfla aynı olmalı.
+
+---
+# 93A — ileride cihazda denenmek üzere
+
+- İki tersaneye ayrı sistem hedefi ver; birini değiştirirken diğeri sabit kalsın.
+- Filoya takviye sipariş et, tersane noktasını değiştir ve ana filoyu hareket
+  ettir: özel gemiler filoyu, normal üretim tersane noktasını izlemeli.
+- Üretimde/yolda/eksik sayaçlarını ve tekrar sipariş düğmesini kontrol et.
+- Eski karma hedefli kayıtta Filo hedefi etiketi açık olmalı.
+- Android kısa/yatay ekranda yeni lojistik satırları kaydırılarak okunabilmeli.
+Test talebi değildir; kullanıcı hazır olduğunda uygulanır.
+
+---
 # 92D — kullanıcı hazır olduğunda ek test
 
 - AI ortak teklifini diplomasi merkezinde bul; oysuz hiçbir devir olmamalı.

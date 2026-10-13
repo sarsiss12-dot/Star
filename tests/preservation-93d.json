@@ -1,0 +1,30 @@
+{
+  "map.js": {
+    "unchanged": true,
+    "sha256": "372632c39a2070adc2aa3b1b832d8b426a4a4d3ef9c4c546a73bba996f4fab35"
+  },
+  "ai.js": {
+    "unchanged": true,
+    "sha256": "b26dabd1ba86c94fc21eb79f00afee084910358298608a4e64b32fbe23218570"
+  },
+  "combat.js": {
+    "unchanged": true,
+    "sha256": "e58e33540671b039f77d3404e143f03907e3cd2a9b8970ded83444ceb7c1ef0d"
+  },
+  "audio.js": {
+    "unchanged": true,
+    "sha256": "804226980179698a6b56d292d88c0c7226d1e54f06001aab63b52d6db5685262"
+  },
+  "manifest.json": {
+    "unchanged": true,
+    "sha256": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310"
+  },
+  "tests/referans-sha.json": {
+    "unchanged": true,
+    "sha256": "b7d9991badec96387921ec289940ba92a532a863f3b66a455d6e7ff0afd65d35"
+  },
+  "TECHS catalog": {
+    "unchanged": true,
+    "sha256": "9883db4b403d02f264ac7609da3a2862ad27f1f6b14afbdba6e46d08f81d43aa"
+  }
+}

@@ -1,0 +1,112 @@
+GELİŞTİRİCİ RAPORU — STARS FAZ 93C
+FİLO BİLEŞİM ŞABLONLARI / AKILLI TERSANE OPTİMİZASYONU
+13 Ekim 2026
+
+KAYNAK
+stars-faz93b.zip
+SHA-256: 7b7e2cb3cdf8d9dc9fd3f84962c3d2ca2ebeafe79e57057a202cb9d34988c141
+Kaynak arşivin SHA-256 değeri birebir doğrulandı; ayrı faz93c kopyasına açıldı.
+GitHub kaynak alınmadı, GitHub'a veya başka bir siteye yayın yapılmadı.
+Build 93c / SW cache stars-v93c / Save v8.
+
+SONUÇ
+65 test paketi, 4343 başarılı kontrol, 0 hata, 0 atlanan paket,
+0 zaman aşımı. 47 yeni 93C senaryosu ve 31 önceki 93B sevkiyat senaryosu dahil.
+Gerçek Android veya gerçek tarayıcı kabulü değildir.
+
+UYGULANAN
+1. Her bağımsız filo için askerî sınıf hedefleri: korvet, muhrip, kruvazör,
+   zırhlı ve taarruz ordusu. Hedef kaydetme/değiştirme ve otomatik tamamlama.
+   15 korvet + 10 muhrip + 5 kruvazör örneği gerçek üretimde sınandı.
+2. Sınıf bazında mevcut, kuyrukta, sevkiyatta/bekliyor, eksik ve fazla.
+   Bir sınıftaki fazla diğer sınıftaki eksiği gizlemez. Üretimde ve bekleyen
+   93B teslimatındaki gemiler tekrar sipariş edilmez. Kayıplar kendi sınıfıyla
+   yenilenir. Hedef azaltınca ödenmiş işler veya mevcut gemiler silinmez.
+3. Mevcut işlerin kalan süreleri + gerçek paralel tersane slotları + yeni
+   gövde üretim süresi + gerçek hiper-yol/kapı seyahatiyle tersane seçimi.
+   Her satın alma slotu rezerve eder; parti uygun tersanelere dağıtılır.
+   En yakın ama dolu tersane yerine daha erken teslim edebilen tersane seçilir.
+4. Kapalı sınır/sabotaj/ulaşılamayan yol ve bilinen düşman tehdidi filtreleri.
+   Yeni hedefli üretim güvenli rota tercihini taşır. Üretim çıkışında güncel
+   rota bulunur; yeni bacakta bilinen tehdit kontrol edilir. Hedef hareketi,
+   kapanma, sınırlı retry, iptal/yeni hedef ve ana filo kaybı 93B ile birlikte.
+5. Oyuncu otomatik tamamlama: günde en fazla bir filo, filo başına en erken
+   beş günde bir, partide en fazla dört sipariş; kasa/kapasite uyku kapıları.
+   Manuel partide en fazla 30 sipariş; kalan eksik panelde görünür.
+6. AI ilk askerî takviye kararında açılmış sınıflarla kadro oluşturur; aynı
+   muhasebe/optimizasyon motorunda mevcut bütçe içinde bir sipariş verir.
+   Mega/Colossus rezervi korunur. Kadro ve sevkiyat hedefleri olağan AI
+   birleşmesinde kaybedilmez. Colossus araştırması tek başına askerî üretimi
+   durdurmaz; rastgele seçilmiş dolu tersane başka boş tersaneyi veto etmez.
+7. Filo paneli: bileşim düzenleme, sayı girişleri, sınıf sayımları, otomatik
+   aç/kapat ve son manuel siparişin tersane/ETA özeti. Girişler 44px yükseklik
+   ve 16px yazıyla sayısal mobil klavye ister. Modal duraklatılmış oyunu
+   korur; eski modal tokenı/yeni dünya/geçersiz filo işlemi reddedilir.
+8. Save v8: isteğe bağlı composition alanı ve safe teslimat tercihi.
+   Eski kayıtların kadrosu otomatik uydurulmaz. Bozuk adetler reddedilir;
+   yükleme satın alma yapmaz ve kayıtlı otomatik takviye süresini sıfırlamaz.
+9. 93D Görsel Bilim Ağacı/Akıllı Araştırma Kuyruğu ve 93E Bilimsel Uzmanlaşma
+   yalnız plana eklendi. Uzak hedefin eksik ön koşulları, ana sıra numarası,
+   üç paralel dal ve yatay kuyruk şartları tek tek kaydedildi. Kamera 94A,
+   akıllı keşif, Ekonomi, ticaret, AI 95A, diplomasi 95B, civic 91F ve dış
+   assetsiz fiziksel enstrüman modellemeli hafif müzik başlığı korundu.
+
+TEST YÖNTEMİ VE DÜZELTİLEN BULGULAR
+Önce hedefli davranış testleri. İlk yeni 46 senaryoda bir hata: retarget,
+clearShipment sonrasında safe tercihini okumaya çalışıyordu. Eski tercih
+silmeden önce alınarak düzeltildi; hedef değişiminde güvenli yol artık korunur.
+Eski 93B retry ölçümü findPathAllowed'a bağlıydı. Yeni ortak shipmentRoute
+kapısında sorgu sayması sağlandı; sıfır bekleme sorgusu/üç retry/sekiz sorgu
+bütçesi davranış iddiaları değişmedi. 25 eski testin yalnız build/cache
+kimlik beklentileri 93c olarak güncellendi; sabit referans hashleri korunur.
+
+Tam regresyon: 65 paket / 4342 kontrol, iki worker, paket başına 180 saniye,
+dış sınır 900 saniye; tümü geçti. Ardından son incelemede AI'ın rastgele dolu
+tersane kapısı ve büyük kadrodaki tek tıklama sipariş etiketi düzeltildi.
+AI'ın ay içi gerçek üretim yolu için 47. senaryo eklendi. Etkilenen sekiz
+paket yeniden çalıştırıldı (kampanya, AI gözlem, sevkiyat ve UI dahil), hepsi
+geçti. Nihai 4343, paketlerin son sonuçlarının toplamıdır; tekrar çalıştırılan
+kontroller çift sayılmadı. Başarısız tam regresyon veya sonsuz tekrar yok.
+
+Kanıt: tests/results-93c.json, tests/run-93c.log,
+tests/logs-93c/, tests/run-93c-final.log, tests/logs-93c-final/.
+Hedefli komut: node tests/faz93c_fleet_composition_test.js
+Tam komut: STARS_TEST_LOGS=tests/logs-new STARS_TEST_WORKERS=2 node tests/run-all.js
+Native Canvas paketleri runtime'ın @napi-rs/canvas bağımlılığıyla çalıştı.
+
+PERFORMANS GÖZLEMİ
+400 sistem, 30 tersane, üç gemi sınıfı ve 29 sipariş: yalnız üç rota ağı;
+host Node VM planlama 21.71 ms; aynı oyun günündeki 1000
+boş otomatik çağrı 0.88 ms. Makineye bağımlı tek
+kontrollü gözlem; Android performans garantisi veya FPS kabulü değildir.
+Tekrar komutu: node tests/measure-93c.js (kanıt: tests/performance-93c.json).
+
+KORUNANLAR
+map.js, diplomacy.js, combat.js, economy.js, audio.js, index.html,
+manifest.json ve tests/referans-sha.json kaynakla byte-for-byte aynı.
+Bilim araştırması/keşif uygulama blokları değiştirilmedi. Harita/Canvas
+yaşam döngüsü, transaction ve kullanıcı depolama anahtarları korunur.
+Kanıt: tests/preservation-93c.json. 91C/87T sabit adayına dokunulmadı.
+
+ANA DEĞİŞEN DOSYALAR
+main.js: bileşim/muhasebe/planlama, otomatik döngü, güvenli sevkiyat ve v8 göçü.
+ai.js: kadro ve uygun tersane kullanımı; bütçe kapısı ve birleşme koruması.
+ui.js: bileşim modalı, sınıf paneli, otomatik düğme, teslim özeti.
+sw.js: cache adı. Testler, raporlar, plan/risk/devir ve sürüm manifesti.
+Tam liste: DEGISEN-DOSYALAR-93C.md.
+
+AÇIK SINIRLAR
+- Chromium executable bulunamadığı için gerçek tarayıcı geometrisi bu
+  ortamda sınanamadı. Fiziksel Android/PWA kabulü yapılmadı, kullanıcıdan
+  manuel test istenmedi. DOM/native Canvas bunların yerine geçmez.
+- ETA mevcut duruma göre yaklaşık artımlı en-erken-teslim seçimidir;
+  bütün geleceği bilen küresel optimum veya kesin varış süresi değildir.
+- Bilim/koloni/inşaat/Colossus/kriz sınıfları askerî kadro aracı dışındadır.
+- AI'ın çok geç açılan rota veya ölen hedefte paused/lost sevkiyata yeni
+  stratejik hedef ataması hâlâ açık. AI kadrolarını yeni teknolojiyle
+  kendiliğinden yeniden tasarlama ve uzun dönem denge ayrı geliştirmedir.
+- Hedef küçültme var olan ücretli işleri iptal etmez; fazla sayı gösterilir.
+  Manuel birleşmede silinen filo ID'sinin sevkiyatları 93B yönetimine kalır.
+
+SONRAKİ ÖNERİ
+93D, yalnız kullanıcı başlattığında. Bu teslim 93C'de durur.

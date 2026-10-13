@@ -1222,7 +1222,7 @@ const WIN_TYPES = {
     esik:1,
     olc(e, k){
       const total = Object.keys(TECHS).length;
-      const done = Object.keys(e.techs).filter(t=>TECHS[t]).length;
+      const done = Object.keys(e.techs).filter(t=>TECHS[t]&&e.techs[t]).length;
       /* ═══ FAZ 52: BİLİM ZAFERİ DENGELEMESİ ═══
          ÖLÇÜM (Faz 51): zafer 27. yılda tetikleniyordu — teknoloji
          sayısı tavana çok hızlı vuruyor. İki düzeltme:
@@ -1246,10 +1246,10 @@ const WIN_TYPES = {
     },
     txt(e, k){
       const total = Object.keys(TECHS).length;
-      const doneT = Object.keys(e.techs).filter(t=>TECHS[t]).length;
+      const doneT = Object.keys(e.techs).filter(t=>TECHS[t]&&e.techs[t]).length;
       if (doneT >= total)
         return 'Kadim Araştırma ' + (e.ascend || 0) + ' / ' + ASCEND_NEED;
-      const done = Object.keys(e.techs).filter(t=>TECHS[t]).length;
+      const done = Object.keys(e.techs).filter(t=>TECHS[t]&&e.techs[t]).length;
       const peak = ['f_zaman','t_galaktik','m_yildiz'].filter(t=>e.techs[t]).length;
       return done + '/' + total + ' teknoloji · ' + peak + '/3 zirve';
     }
@@ -1693,12 +1693,12 @@ const CHAINS = {
     ch:[
       {t:'Silah araştırmasını tamamla', d:'Bir mühendislik teknolojisi bedava',
        f:g=>{ const av = availTechs(g.p, 'muh');
-              if (av.length){ const id = av[0]; g.p.techs[id] = true; recalcMods(g.p);
+              if (av.length){ const id = av[0]; grantResearchTech(g.p,id,'event'); recalcMods(g.p);
                 return 'Notlar tamamlandı — ' + TECHS[id].n + ' bedava kazanıldı!'; }
               g.p.res.ara += 500; return 'Araştıracak yeni bir şey kalmamış: +500 araştırma.'; }},
       {t:'Fizik verilerini al', d:'Bir fizik teknolojisi bedava',
        f:g=>{ const av = availTechs(g.p, 'fiz');
-              if (av.length){ const id = av[0]; g.p.techs[id] = true; recalcMods(g.p);
+              if (av.length){ const id = av[0]; grantResearchTech(g.p,id,'event'); recalcMods(g.p);
                 return 'Veriler çözüldü — ' + TECHS[id].n + ' bedava kazanıldı!'; }
               g.p.res.ara += 500; return 'Veriler zaten bildiklerimizdi: +500 araştırma.'; }},
       {t:'İstasyonu mühürle', d:'+90 etki — bazı bilgiler tehlikelidir',
@@ -2525,7 +2525,7 @@ function setupGame(cfg){
       hw.col.b = {maden:1, santral:1, ciftlik:1, tersane:1};
       for (const k in e.res) e.res[k] = Math.round(e.res[k] * .45);
       // tüm 1. kademe teknolojiler bedava
-      for (const tid in TECHS) if (TECHS[tid].t === 1) e.techs[tid] = true;
+      for (const tid in TECHS) if (TECHS[tid].t === 1) grantResearchTech(e,tid,'origin');
       recalcMods(e);
     } else if (org === 'altin_cag'){
       hw.col.pop = 18;
@@ -2781,6 +2781,7 @@ function fleetStatus(f){
     const dest = f.path.length ? G.sys[f.path[f.path.length-1]] : (f.mv ? G.sys[f.mv.to] : null);
     return {t:'YOLDA', c:'go', d: dest ? dest.name : ''};
   }
+  if (hasShipment(f)) return {t:'SEVK BEKLİYOR',c:'wk',d:shipmentStatus(f)};
   if (fleetHasRole(f,'bilim'))     return {t:'BOŞTA · TARAMA BEKLİYOR', c:'id'};
   if (fleetHasRole(f,'koloni'))    return {t:'BOŞTA · HEDEF BEKLİYOR', c:'id'};
   return {t:'BEKLİYOR', c:'id'};
@@ -3305,6 +3306,7 @@ function orderMove(f, target, append){
   // ilk düğüm olarak kalır; hareket ortasında yeni rota bir durak atlamaz.
   const base = append ? f.path.slice() : [];
   if (f.mv && base[0] !== f.mv.to) base.unshift(f.mv.to);
+  if(f.shipment)clearShipment(f); // başarılı açık hareket emri teslimatın yerini alır
   f.path = base.concat(p);
   return true;
 }
@@ -3314,26 +3316,106 @@ function findPathAllowed(e, f, from, to){
   return findPath(from, to, e, (id,u)=>pathAllowed(e, f, [id], u));
 }
 
-/* 88A: ikmal varışı yeni rota kurmadan ÖNCE eski bacak tüketilmiş olmalı.
-   Çatışan ana filoda bekle; hareketliyse varış düğümünü takip et. */
-function followRallyFleet(f){
-  if (f.joinFleet === undefined || f.mv || f.path.length || !f.ships.length) return;
-  const ana = G.fleets.find(x=>x.id===f.joinFleet && x!==f && x.e===f.e && x.ships.length);
-  const clear = () => { delete f.joinFleet; delete f.rallyTo; };
-  if (!ana){ clear(); return; }
-  if (!ana.mv && ana.sys===f.sys){
-    if (ana.combat) return;
-    ana.ships.push(...f.ships); f.ships.length=0; clear();
-    if (!empOf(f).ai) say('⚓ İkmal ' + (ana.name || 'filoya') + ' katıldı');
+/* 93B: tamamlanmış geminin teslimatı, üretim siparişinden bağımsızdır.
+   İlk deneme + en çok üç otomatik retry (5/10/20 gün); RNG/bedel yok. */
+const SHIPMENT_MAX_ATTEMPTS = 4;
+function hasShipment(f){
+  return !!f && (!!f.shipment || f.joinFleet!==undefined || f.rallyTo!==undefined);
+}
+function clearShipment(f){
+  delete f.shipment; delete f.joinFleet; delete f.rallyTo;
+}
+function shipmentRecord(f){
+  if (!f.shipment && hasShipment(f)) f.shipment={
+    ...(f.joinFleet!==undefined ? {fleet:f.joinFleet} : {sys:f.rallyTo}),
+    state:'ready',attempts:0,next:0
+  };
+  return f.shipment;
+}
+function holdShipment(f,reason){
+  const d=shipmentRecord(f); if(!d)return;
+  f.path=f.mv?[f.mv.to]:[];
+  d.state=reason;
+  if(reason==='blocked'){
+    d.attempts=Math.min(SHIPMENT_MAX_ATTEMPTS,(d.attempts||0)+1);
+    d.next=G.day+5*Math.pow(2,d.attempts-1);
+    if(d.attempts>=SHIPMENT_MAX_ATTEMPTS)d.state='paused';
+  }
+  if(reason==='lost'){delete f.joinFleet;delete f.rallyTo;}
+}
+function followRallyFleet(f,budget){
+  const d=shipmentRecord(f);
+  if(!d || !f.ships.length)return;
+  if(d.state==='lost')return;
+  const candidate=d.fleet!==undefined ? (budget?budget.fleets.get(d.fleet):G.fleets.find(x=>x.id===d.fleet)) : null;
+  const ana=candidate && candidate!==f && candidate.e===f.e && candidate.ships.length && !hasShipment(candidate)?candidate:null;
+  const target=d.fleet!==undefined ? fleetDeliveryTarget(empOf(f),ana) : d.sys;
+  if(!Number.isInteger(target) || !G.sys[target]){holdShipment(f,'lost');return;}
+  if(d.fleet!==undefined)f.joinFleet=d.fleet;
+  f.rallyTo=target;
+  if(f.mv || f.path.length || f.combat || f.retreating)return;
+  if(target===f.sys){
+    if(ana){
+      d.state='waiting';
+      if(ana.mv || ana.combat || ana.retreating)return;
+      ana.ships.push(...f.ships);f.ships.length=0;
+      clearShipment(f);
+      if(!empOf(f).ai)say('⚓ İkmal ' + (ana.name || 'filoya') + ' katıldı');
+    } else clearShipment(f);
     return;
   }
-  const target = ana.mv ? ana.mv.to : ana.sys;
-  if (target === f.sys) return; // ana filo bu sisteme doğru yolda
-  if (target >= 0 && orderMove(f,target)) f.rallyTo=target;
-  else {
-    clear();
-    if (!empOf(f).ai) say('⚓ ' + (f.name || 'İkmal filosu') + ' ana filoya ulaşamıyor — mevcut sistemde bekliyor', 'war');
+  if(d.state==='paused' || (d.state==='blocked' && G.day<d.next))return;
+  if(budget && budget.left<=0)return;
+  if(budget)budget.left--;
+  const path=shipmentRoute(empOf(f),f,f.sys,target);
+  if(path===null){holdShipment(f,'blocked');return;}
+  f.path=path;d.state='moving';d.attempts=0;d.next=0;
+}
+function shipmentAction(e,f,action,target){
+  if(!e || G.emps[e.id]!==e || e.dead || !f || !G.fleets.includes(f) || f.e!==e.id || !f.ships.length || !hasShipment(f))
+    return {ok:false,why:'Geçerli kendi sevkiyatını seç'};
+  if(action==='cancel'){
+    f.path=f.mv?[f.mv.to]:[];clearShipment(f);return {ok:true};
   }
+  if(action==='retarget'){
+    const fleet=target && target.fleet!==undefined ? G.fleets.find(x=>x.id===target.fleet) : null;
+    if(!target || (target.fleet!==undefined ? (!fleet || fleet===f || hasShipment(fleet) || fleetDeliveryTarget(e,fleet)===null) :
+      (!Number.isInteger(target.sys) || !G.sys[target.sys] || !G.sys[target.sys].seen.includes(e.id))))
+      return {ok:false,why:'Geçerli kendi filonu veya bilinen sistemi seç'};
+    const safe=f.shipment&&f.shipment.safe;
+    clearShipment(f);
+    f.shipment={...(fleet?{fleet:fleet.id}:{sys:target.sys}),...(safe?{safe:true}:{}),state:'ready',attempts:0,next:0};
+    if(fleet)f.joinFleet=fleet.id;
+    f.path=f.mv?[f.mv.to]:[];
+  } else if(action==='retry'){
+    const d=shipmentRecord(f);d.state='ready';d.attempts=0;d.next=0;
+  } else return {ok:false,why:'Geçersiz sevkiyat işlemi'};
+  followRallyFleet(f);return {ok:true};
+}
+function restoreShipments(){
+  for(const f of G.fleets){
+    if(!f.shipment)continue; // eski v8 alanları ilk tikte tembel olarak alınır
+    const raw=f.shipment;
+    const d={...(raw.fleet!==undefined?{fleet:raw.fleet}:{sys:raw.sys}),
+      ...(raw.safe===true?{safe:true}:{}),
+      state:['ready','moving','waiting','blocked','paused','lost'].includes(raw.state)?raw.state:'ready',
+      attempts:Math.max(0,Math.min(SHIPMENT_MAX_ATTEMPTS,Number.isFinite(raw.attempts)?Math.floor(raw.attempts):0)),
+      next:Number.isFinite(raw.next)?Math.max(0,Math.min(G.day+40,raw.next)):G.day};
+    if(!Number.isInteger(d.fleet??d.sys))d.state='lost';
+    if(d.attempts>=SHIPMENT_MAX_ATTEMPTS && d.state==='blocked')d.state='paused';
+    f.shipment=d;
+    if(d.fleet!==undefined && d.state!=='lost')f.joinFleet=d.fleet;
+    else delete f.joinFleet;
+    if(d.state==='lost'){delete f.rallyTo;f.path=f.mv?[f.mv.to]:[];}
+  }
+}
+function shipmentStatus(f){
+  const d=f.shipment;
+  if(!d)return 'Teslimat sürüyor';
+  const labels={lost:'Hedef kayıp — yeni hedef seç',paused:'Otomatik deneme sınırına ulaşıldı',
+    blocked:'Rota kapalı — '+Math.max(0,Math.ceil(d.next-G.day))+' gün sonra yeniden denenecek',
+    waiting:'Ana filo bekleniyor',moving:'Yolda',ready:'Sevk bekliyor'};
+  return labels[d.state] || 'Sevk bekliyor';
 }
 
 /* ---------- görüş ---------- */
@@ -3484,6 +3566,8 @@ function doSurvey(f, sys){
 
 /* ---------- hareket & günlük döngü ---------- */
 function stepFleets(dt){
+  const shipmentBudget={left:8,fleets:new Map(G.fleets.map(f=>[f.id,f]))};
+  const safeThreats=new Map();
   for (let i=G.fleets.length-1;i>=0;i--){
     const f = G.fleets[i];
     if (!f.ships.length){ G.fleets.splice(i,1); continue; }
@@ -3496,18 +3580,23 @@ function stepFleets(dt){
       continue;
     }
 
-    if (!f.mv && !f.path.length && f.sys >= 0) followRallyFleet(f);
+    if (hasShipment(f)) followRallyFleet(f,shipmentBudget);
     if (!f.ships.length) continue;
     if (!f.mv && f.path.length){
       const nxt = f.path[0], eMove = empOf(f), here = G.sys[f.sys];
+      if(f.shipment && f.shipment.safe){
+        if(!safeThreats.has(f.e))safeThreats.set(f.e,reinforcementThreats(eMove));
+        if(safeThreats.get(f.e).has(nxt)){holdShipment(f,'blocked');continue;}
+      }
       // Her yeni bacakta güncel sınır ve gerçek bağlantı doğrulanır.
       const lane = here && here.lanes.includes(nxt);
       const gate = hasUsableGate(eMove,here) && hasUsableGate(eMove,G.sys[nxt]);
       if (!here || !G.sys[nxt] || !pathAllowed(eMove,f,[nxt],f.sys) || (!lane && !gate)){
-        const p = here ? findPathAllowed(eMove,f,f.sys,nxt) : null;
+        const p = here && !hasShipment(f) ? findPathAllowed(eMove,f,f.sys,nxt) : null;
         if (p && p.length) f.path = p.concat(f.path.slice(1));
         else {
-          f.path = []; delete f.rallyTo; delete f.joinFleet;
+          if(hasShipment(f))holdShipment(f,'blocked');
+          else f.path = [];
           if (f.e===0) say('Rota artık geçerli değil — filo mevcut sistemde bekliyor', 'war');
         }
         continue;
@@ -3570,7 +3659,7 @@ function stepFleets(dt){
         f.x = b.x; f.y = b.y;
         f.mv = null;
         if (f.path[0] === f.sys) f.path.shift();
-        followRallyFleet(f);
+        followRallyFleet(f,shipmentBudget);
         if (!f.path.length && f.joinFleet===undefined && f.rallyTo===f.sys) delete f.rallyTo;
         if (!f.ships.length) continue;
         arrive(f, G.sys[f.sys]);
@@ -3686,23 +3775,13 @@ function arrive(f, sys){
 
 /* 88A.1: üretim sonucu yalnız gerçekten başlayan sevki ilan eder. */
 function dispatchBuiltFleet(e,f,delivery){
-  let target;
-  if (delivery.fleet!==undefined){
-    const ana=G.fleets.find(x=>x.id===delivery.fleet && x!==f && x.e===e.id && x.ships.length);
-    target=fleetDeliveryTarget(e,ana);
-    if (target===null) return 'hedef filo yok — tersanede bekliyor';
-    if (target===f.sys){
-      f.joinFleet=ana.id;
-      followRallyFleet(f);
-      return f.ships.length ? 'ana filo bekleniyor' : 'ana filoya katıldı';
-    }
-  } else target=delivery.sys;
-  if (!Number.isInteger(target) || !G.sys[target]) return 'geçersiz hedef — tersanede bekliyor';
-  if (target===f.sys) return 'toplanma noktasında';
-  if (!orderMove(f,target)) return 'rota kapalı — tersanede bekliyor';
-  f.rallyTo=target;
-  if (delivery.fleet!==undefined) f.joinFleet=delivery.fleet;
-  return 'toplanma noktasına sevk';
+  f.shipment={...(delivery.fleet!==undefined?{fleet:delivery.fleet}:{sys:delivery.sys}),...(delivery.safe===true?{safe:true}:{}),state:'ready',attempts:0,next:0};
+  if(delivery.fleet!==undefined)f.joinFleet=delivery.fleet;
+  followRallyFleet(f);
+  if(!f.ships.length)return 'ana filoya katıldı';
+  if(!f.shipment)return 'toplanma noktasında';
+  if(f.path.length)return 'toplanma noktasına sevk';
+  return shipmentStatus(f)+' — tersanede bekliyor';
 }
 
 function dailyTick(dt){
@@ -3726,8 +3805,8 @@ function dailyTick(dt){
       const e = G.emps[q.e];
       if (e && !e.dead && sys.owner === e.id){
         const grp = c => SHIPS[c].rol === 'sav' ? 'sav' : SHIPS[c].rol;
-        let host = G.fleets.find(f => f.e===e.id && f.sys===sys.id && !f.combat && f.ships.length &&
-          grp(f.ships[0].c) === grp(q.cls) && f.ships.length < 24);
+        let host = (e.ai&&SHIPS[q.cls].rol==='bilim')?null:G.fleets.find(f => f.e===e.id && f.sys===sys.id && !f.combat && f.ships.length &&
+          !hasShipment(f) && !f.composition && !f.path.length && grp(f.ships[0].c) === grp(q.cls) && f.ships.length < 24);
         // 88A.1: özel sipariş hedefi genel tersane tercihinden bağımsızdır.
         const ral = Object.prototype.hasOwnProperty.call(q,'delivery')
           ? q.delivery : (sys.rally && sys.rally[e.id]);
@@ -3747,6 +3826,7 @@ function dailyTick(dt){
     }
   }
   combatTick(dt);
+  fleetAutoReinforceTick();
 }
 
 /* ---------- TİCARET SAVAŞI ----------
@@ -4473,14 +4553,18 @@ const FLEET_SOFT_CAP = 30;        // "tam filo" referansı
 
 /* Filonun eksiği: en kalabalık gemi sınıfına göre tamamlanır */
 function pendingFleetShips(e,f){
-  let n=0;
+  const counts=fleetPendingCounts(e,f);
+  return counts.queued+counts.inTransit;
+}
+function fleetPendingCounts(e,f){
+  let queued=0,inTransit=0;
   for (const s of G.sys) for (const q of (s.queue || [])){
     const d=Object.prototype.hasOwnProperty.call(q,'delivery') ? q.delivery : s.rally && s.rally[e.id];
     if (q.e===e.id && d && d.fleet===f.id && SHIPS[q.cls] &&
-        (SHIPS[q.cls].dmg>0 || SHIPS[q.cls].rol==='ordu')) n++;
+        (SHIPS[q.cls].dmg>0 || SHIPS[q.cls].rol==='ordu')) queued++;
   }
-  for (const x of G.fleets) if (x!==f && x.e===e.id && x.joinFleet===f.id) n+=x.ships.length;
-  return n;
+  for (const x of G.fleets) if (x!==f && x.e===e.id && x.joinFleet===f.id) inTransit+=x.ships.length;
+  return {queued,inTransit};
 }
 function fleetDeliveryTarget(e,f){
   if (!e || e.dead || G.emps[e.id]!==e || !f || !G.fleets.includes(f) ||
@@ -4490,7 +4574,7 @@ function fleetDeliveryTarget(e,f){
 }
 function canShipToFleet(e,sys,cls,f){
   const target=fleetDeliveryTarget(e,f);
-  if (target===null || !sys || sys.owner!==e.id || !SHIPS[cls]) return false;
+  if (target===null || hasShipment(f) || !sys || sys.owner!==e.id || !SHIPS[cls]) return false;
   // Ana filonun ricat ayrıcalığı yeni gemiye taşınmaz.
   return findPathAllowed(e,{ships:[{c:cls}],e:e.id},sys.id,target)!==null;
 }
@@ -4499,27 +4583,210 @@ function queueFleetShip(e,sys,cls,f){
   sys.queue[sys.queue.length-1].delivery={fleet:f.id};
   return true;
 }
-function reinforceFleet(e, f){
-  if (fleetDeliveryTarget(e,f)===null) return {ok:false,why:'Geçerli kendi filon yok'};
-  const hedefN=Math.min(FLEET_SOFT_CAP,Math.max(1,f.capTarget || FLEET_SOFT_CAP));
-  const beklenen=pendingFleetShips(e,f), eksik=hedefN-f.ships.length-beklenen;
-  if (eksik<=0) return {ok:false,why:beklenen ? 'Eksik gemiler zaten siparişte veya yolda' : 'Filo zaten dolu'};
+// Saf özet: panel ve sipariş aynı kadro/araştırma hesabını kullanır.
+function fleetReinforcementStatus(e,f){
+  if(fleetDeliveryTarget(e,f)===null)return {ok:false,why:'Geçerli kendi filon yok'};
+  if(hasShipment(f))return {ok:false,why:'Önce bu filonun sevkiyatını tamamla veya iptal et'};
+  if(f.composition)return fleetCompositionStatus(e,f);
+  const target=Math.min(FLEET_SOFT_CAP,Math.max(1,Math.floor(Number.isFinite(f.capTarget)?f.capTarget:FLEET_SOFT_CAP)));
+  const {queued,inTransit}=fleetPendingCounts(e,f),current=f.ships.length;
+  const beklenen=queued+inTransit,missing=Math.max(0,target-current-beklenen);
   const counts={};
-  for (const sh of f.ships) counts[sh.c]=(counts[sh.c]||0)+1;
+  for(const sh of f.ships)counts[sh.c]=(counts[sh.c]||0)+1;
   let cls=null,en=0;
-  for (const k in counts) if (SHIPS[k] && SHIPS[k].rol==='sav' && !SHIPS[k].crisisOnly && counts[k]>en){en=counts[k];cls=k;}
-  if (!cls) return {ok:false,why:'Bu filo savaş gemisi ikmali alamaz'};
-  const hedef=G.sys[fleetDeliveryTarget(e,f)];
-  const yards=G.sys.filter(sy=>sy.owner===e.id && yardCount(sy)>0 &&
-    !(sy.yardLock && sy.yardLock>(G.memAge||0)) && canShipToFleet(e,sy,cls,f));
-  yards.sort((a,b)=>dist(a,hedef)-dist(b,hedef));
-  if (!yards.length) return {ok:false,why:'Filoya ulaşabilen açık tersane yok'};
-  let siparis=0;
-  for (let i=0;i<eksik;i++){
-    if (!queueFleetShip(e,yards[i%yards.length],cls,f)) break;
-    siparis++;
+  for(const k in counts)if(SHIPS[k]&&SHIPS[k].rol==='sav'&&!SHIPS[k].crisisOnly&&counts[k]>en){en=counts[k];cls=k;}
+  const data={target,current,queued,inTransit,beklenen,missing,cls};
+  if(!missing)return {...data,ok:false,why:beklenen?'Eksik gemiler zaten siparişte veya yolda':'Filo zaten dolu'};
+  if(!cls)return {...data,ok:false,why:'Bu filo savaş gemisi ikmali alamaz'};
+  const access=shipBuildAccess(e,cls);
+  return {...data,...access};
+}
+/* 93C: sınıf kadrosu v8 filonun isteğe bağlı composition alanıdır.
+   Eski filolar, oyuncu kaydedene kadar eski baskın-sınıf hesabını korur. */
+const FLEET_TEMPLATE_LIMIT = 300;
+function fleetTemplateClasses(){
+  return Object.keys(SHIPS).filter(c=>!SHIPS[c].crisisOnly && (SHIPS[c].rol==='sav'||SHIPS[c].rol==='ordu'));
+}
+function validFleetTemplate(raw){
+  return !!raw && typeof raw==='object' && !Array.isArray(raw) &&
+    Object.keys(raw).every(c=>fleetTemplateClasses().includes(c) && Number.isInteger(raw[c]) && raw[c]>=0) &&
+    Object.values(raw).reduce((a,b)=>a+b,0)<=FLEET_TEMPLATE_LIMIT;
+}
+function setFleetTemplate(e,f,counts,auto){
+  if(fleetDeliveryTarget(e,f)===null || hasShipment(f) || f.federal || f.guardLocked)
+    return {ok:false,why:'Bağımsız kendi filonu seç'};
+  if(!validFleetTemplate(counts) || typeof auto!=='boolean')
+    return {ok:false,why:'Sayılar tam sayı olmalı; toplam en fazla '+FLEET_TEMPLATE_LIMIT};
+  f.composition={counts:{...counts},auto,next:G.day};
+  return {ok:true};
+}
+function restoreFleetTemplates(){
+  for(const f of G.fleets){
+    const t=f.composition;
+    if(!t)continue;
+    if(!validFleetTemplate(t.counts) || hasShipment(f) || f.federal || f.guardLocked){delete f.composition;continue;}
+    f.composition={counts:{...t.counts},auto:t.auto===true,
+      next:Number.isFinite(t.next)?clamp(t.next,0,G.day+5):G.day,
+      ...(G.emps[f.e]&&G.emps[f.e].ai&&typeof t.aiDesign==='string'&&t.aiDesign.length<100?{aiDesign:t.aiDesign}:{})};
   }
-  return siparis ? {ok:true,siparis,cls,eksik,beklenen} : {ok:false,why:'Kaynak yetersiz'};
+}
+function fleetCompositionStatus(e,f){
+  if(fleetDeliveryTarget(e,f)===null || hasShipment(f))return {ok:false,why:'Geçerli bağımsız filo yok'};
+  const counts=f.composition && f.composition.counts;
+  if(!validFleetTemplate(counts))return {ok:false,why:'Önce bileşimi kaydet'};
+  const rows=fleetTemplateClasses().map(cls=>({cls,target:counts[cls]||0,current:0,queued:0,inTransit:0,waiting:0}));
+  const by=Object.fromEntries(rows.map(r=>[r.cls,r]));
+  for(const sh of f.ships)if(by[sh.c])by[sh.c].current++;
+  for(const sys of G.sys)for(const q of sys.queue||[]){
+    const d=Object.prototype.hasOwnProperty.call(q,'delivery')?q.delivery:sys.rally&&sys.rally[e.id];
+    // Captured yard jobs can no longer produce for this owner.
+    if(sys.owner===e.id && q.e===e.id && d && d.fleet===f.id && by[q.cls])by[q.cls].queued++;
+  }
+  for(const x of G.fleets){
+    if(x===f || x.e!==e.id || x.joinFleet!==f.id)continue;
+    for(const sh of x.ships)if(by[sh.c]){
+      by[sh.c].inTransit++;
+      if(!x.mv && !x.path.length)by[sh.c].waiting++;
+    }
+  }
+  for(const r of rows){
+    r.missing=Math.max(0,r.target-r.current-r.queued-r.inTransit);
+    r.excess=Math.max(0,r.current+r.queued+r.inTransit-r.target);
+    const access=shipBuildAccess(e,r.cls);r.buildable=access.ok;r.why=access.why||'';
+  }
+  const data={rows,auto:f.composition.auto===true};
+  for(const k of ['target','current','queued','inTransit','waiting','missing','excess'])data[k]=rows.reduce((n,r)=>n+r[k],0);
+  data.beklenen=data.queued+data.inTransit;
+  data.ok=rows.some(r=>r.missing && r.buildable);
+  data.why=data.ok?'':data.missing?(rows.find(r=>r.missing)||{}).why:
+    (data.beklenen?'Eksik gemiler zaten siparişte veya yolda':'Bileşim tamam');
+  return data;
+}
+// Known hostiles only: no hidden enemy fleet information for the player.
+function reinforcementThreats(e){
+  const blocked=new Set();
+  const known=s=>e.id===0?pSeen(s):(s.seen||[]).includes(e.id);
+  const visible=new Set();
+  if(e.id!==0){
+    for(const s of G.sys)if(s.owner===e.id)visible.add(s.id);
+    for(const f of G.fleets)if(f.e===e.id && f.sys>=0)visible.add(f.sys);
+    for(const id of [...visible])if(!G.sys[id].nebulaS)for(const n of G.sys[id].lanes)visible.add(n);
+  }
+  for(const s of G.sys){
+    const owner=s.owner>=0?s.owner:claimOf(s);
+    if(known(s) && owner>=0 && owner!==e.id && hostile(e.id,owner))blocked.add(s.id);
+  }
+  for(const x of G.fleets)if(x.e!==e.id && x.sys>=0 && x.ships.length && isArmed(x) &&
+    hostile(e.id,x.e) && (e.id===0?pVis(G.sys[x.sys]):visible.has(x.sys)))blocked.add(x.sys);
+  return blocked;
+}
+/* One reverse, time-weighted graph per class, shared by every candidate yard.
+   No per-ship or per-yard Dijkstra. Gate edges and live border rules included.
+   ETA is a snapshot: target's next arrival, current speed and queue state. */
+function reinforcementRoutes(e,ships,target){
+  const n=G.sys.length,eta=Array(n).fill(Infinity),next=Array(n).fill(-1),done=Array(n).fill(false);
+  const threats=reinforcementThreats(e),gates=G.sys.map(s=>hasUsableGate(e,s));
+  const probe={e:e.id,ships,sys:0,path:[],ord:null};
+  const speeds=G.sys.map(s=>{probe.sys=s.id;return Math.max(.001,fleetSpeed(probe));});
+  const incoming=Array.from({length:n},()=>[]);
+  for(const s of G.sys)for(const to of s.lanes)if(G.sys[to])incoming[to].push(s.id);
+  if(!G.sys[target] || threats.has(target))return {eta,next};
+  eta[target]=0;
+  for(let k=0;k<n;k++){
+    let v=-1,best=Infinity;
+    for(let i=0;i<n;i++)if(!done[i]&&eta[i]<best){v=i;best=eta[i];}
+    if(v<0)break;done[v]=true;
+    const sources=new Set(incoming[v]);
+    if(gates[v])for(let i=0;i<n;i++)if(gates[i])sources.add(i);
+    for(const u of sources){
+      if(u===v || done[u] || threats.has(u) || threats.has(v))continue;
+      if(!pathAllowed(e,probe,[v],u))continue;
+      const len=(gates[u]&&gates[v]) ? .1 :Math.max(.1,dist(G.sys[u],G.sys[v]));
+      // During a leg fleetSpeed uses the arrival nebula once sys becomes -1.
+      const cost=len/Math.min(speeds[u],speeds[v]);
+      if(eta[v]+cost<eta[u]){eta[u]=eta[v]+cost;next[u]=v;}
+    }
+  }
+  return {eta,next};
+}
+function reinforcementRoute(e,f,from,target){
+  const r=reinforcementRoutes(e,f.ships,target);
+  if(!Number.isFinite(r.eta[from]))return null;
+  const path=[];let at=from;
+  while(at!==target && path.length<G.sys.length){at=r.next[at];if(at<0)return null;path.push(at);}
+  return at===target?path:null;
+}
+function shipmentRoute(e,f,from,target){
+  return f.shipment&&f.shipment.safe ? reinforcementRoute(e,f,from,target):findPathAllowed(e,f,from,target);
+}
+function yardCompletionSlots(e,sys){
+  const slots=Array(yardCount(sys)).fill(0);
+  for(const q of sys.queue||[]){
+    if(q.e!==e.id || !shipBuildAccess(e,q.cls).ok)continue;
+    const at=slots.indexOf(Math.min(...slots));
+    if(at>=0)slots[at]+=Math.max(0,Number.isFinite(q.left)?q.left:0);
+  }
+  return slots;
+}
+function reinforceFleet(e,f,options={}){
+  const status=fleetReinforcementStatus(e,f);
+  if(!status.ok)return {ok:false,why:status.why};
+  const owned=G.sys.filter(s=>s.owner===e.id&&yardCount(s)>0);
+  if(!owned.length)return {ok:false,why:'Kullanılabilir kendi tersanen yok'};
+  const yards=owned.filter(s=>!(s.yardLock&&s.yardLock>(G.memAge||0)));
+  if(!yards.length)return {ok:false,why:'Tersanelerin sabotaj nedeniyle kapalı'};
+  const rows=status.rows||[{cls:status.cls,missing:status.missing,buildable:true}];
+  const target=fleetDeliveryTarget(e,f),slots=new Map(yards.map(s=>[s.id,yardCompletionSlots(e,s)]));
+  const limit=Number.isInteger(options.limit)?clamp(options.limit,1,30):30;
+  let siparis=0,reason='',accessible=false;const orders=[];
+  // Large hulls first; subsequent orders see reservations made earlier in this batch.
+  const todo=rows.filter(r=>r.missing&&r.buildable&&(!options.cls||options.cls===r.cls))
+    .sort((a,b)=>SHIPS[b.cls].sz-SHIPS[a.cls].sz||a.cls.localeCompare(b.cls));
+  for(const row of todo){
+    if(siparis>=limit)break;
+    if(!canBuildShip(e,row.cls)){reason='Kaynak yetersiz';continue;}
+    const routes=reinforcementRoutes(e,[{c:row.cls}],target);
+    const days=Math.round((SHIPS[row.cls].sz*14+16)/(1+e.mods.buildMul));
+    for(let i=0;i<row.missing && siparis<limit;i++){
+      let best=null;
+      for(const sys of yards){
+        if(!Number.isFinite(routes.eta[sys.id]))continue;
+        accessible=true;
+        const free=slots.get(sys.id),slot=free.indexOf(Math.min(...free));
+        if(Number.isFinite(options.maxWait)&&free[slot]>options.maxWait)continue;
+        const arrival=free[slot]+days+routes.eta[sys.id];
+        if(!best || arrival<best.arrival || (arrival===best.arrival&&sys.id<best.sys.id))best={sys,slot,arrival,wait:free[slot],travel:routes.eta[sys.id]};
+      }
+      if(!best){reason='Filoya giden rota kapalı veya tehlikeli — ulaşabilen tersane yok';break;}
+      if(options.automatic && navyAsleep(e).uyku){reason='Otomatik takviye kasa / kapasite sınırında bekliyor';break;}
+      // AI keeps its existing strategic resource reserve in addition to class cost.
+      const cost=shipCost(e,row.cls);
+      if(options.reserve && (e.res.ala||0)-(cost.ala||0)<options.reserve){reason='Stratejik alaşım rezervi';break;}
+      if(!queueShip(e,best.sys,row.cls,!!options.automatic)){reason='Kaynak yetersiz';break;}
+      const q=best.sys.queue[best.sys.queue.length-1];
+      q.delivery={fleet:f.id,safe:true};
+      slots.get(best.sys.id)[best.slot]+=days;
+      orders.push({cls:row.cls,sys:best.sys.id,wait:best.wait,build:days,travel:best.travel,eta:best.arrival});siparis++;
+    }
+  }
+  const kalan=Math.max(0,status.missing-siparis);
+  if(!siparis)return {ok:false,why:reason||(!accessible?'Filoya giden rota kapalı — ulaşabilen tersane yok':'Kaynak yetersiz')};
+  return {ok:true,siparis,cls:status.cls,eksik:status.missing,beklenen:status.beklenen,kalan,orders,why:reason};
+}
+// At most one player fleet / whole game day, four purchases / five days per fleet.
+// The cursor is a transient scheduling hint; load does not reset saved fleet deadlines.
+let fleetAutoWorld=null,fleetAutoDay=-Infinity;
+function fleetAutoReinforceTick(){
+  if(fleetAutoWorld!==G.sys){fleetAutoWorld=G.sys;fleetAutoDay=-Infinity;}
+  if(Math.floor(G.day)<=fleetAutoDay)return;
+  fleetAutoDay=Math.floor(G.day);
+  const candidates=G.fleets.filter(f=>f.e===0 && f.composition && f.composition.auto &&
+    f.composition.next<=G.day && f.ships.length && !hasShipment(f) && !f.federal && !f.guardLocked);
+  candidates.sort((a,b)=>a.composition.next-b.composition.next||a.id-b.id);
+  const f=candidates[0];if(!f)return;
+  f.composition.next=G.day+5;
+  if(navyAsleep(G.p).uyku)return;
+  reinforceFleet(G.p,f,{limit:4,automatic:true});
 }
 
 /* Genel toplanma tercihi özel siparişlere geriye dönük uygulanmaz. */
@@ -4668,7 +4935,7 @@ function ruinReward(e, sys){
       let got = [];
       for (const b of ['fiz','top','muh']){
         const av = availTechs(e, b);
-        if (av.length && got.length < 2){ e.techs[av[0]] = true; got.push(TECHS[av[0]].n); }
+        if (av.length && got.length < 2){ grantResearchTech(e,av[0],'ruin'); got.push(TECHS[av[0]].n); }
       }
       recalcMods(e);
       msg = got.length ? 'Kayıp arşiv açıldı: ' + got.join(', ') + ' bedava kazanıldı.'
@@ -5457,12 +5724,19 @@ document.addEventListener('pointerdown', ev => {
    ═══════════════════════════════════════════════════════════════════ */
 const HOLD_MS = 450;
 let _holdTimer = null, _holdFired = false;
+let _holdElement=null,_holdPoint=null;
+function cancelHoldTimer(){
+  if(_holdTimer){clearTimeout(_holdTimer);_holdTimer=null;}
+  _holdPoint=null;
+}
 
 document.addEventListener('pointerdown', ev => {
   /* ═══ FAZ 67: KURULUM EKRANI YALITIMI ═══
      Uzun basış yalnız OYUN İÇİNDE geçerli. Kurulum ekranı
      açıkken (menu görünürken) hiç çalışmaz — orada her seçim
      tek dokunuşla yapılır. */
+  cancelHoldTimer();_holdElement=null;_holdFired=false;
+  if(ev.isPrimary===false)return;
   const menu = document.getElementById('menu');
   if (menu && !menu.classList.contains('hidden')){
     _holdFired = false;
@@ -5473,6 +5747,7 @@ document.addEventListener('pointerdown', ev => {
   _holdFired = false;
   if (_holdTimer){ clearTimeout(_holdTimer); _holdTimer = null; }
   if (!el) return;
+  _holdElement=el;_holdPoint={id:ev.pointerId,x:ev.clientX,y:ev.clientY};
   const key = el.dataset.hold;
   _holdTimer = setTimeout(() => {
     _holdFired = true;
@@ -5484,9 +5759,23 @@ document.addEventListener('pointerdown', ev => {
   }, HOLD_MS);
 }, {passive: true});
 
+document.addEventListener('pointermove',ev=>{
+  const p=_holdPoint;
+  if(p && p.id===ev.pointerId && Math.hypot(ev.clientX-p.x,ev.clientY-p.y)>SCROLL_TOLERANS)
+    cancelHoldTimer();
+},{passive:true});
+// Capture aşamasında yut: body'deki oyun eylemi uzun basışı inşaat sayamaz.
+document.addEventListener('click',ev=>{
+  if(_holdFired && _holdElement && ev.target.closest && ev.target.closest('[data-hold]')===_holdElement){
+    _holdFired=false;ev.preventDefault();ev.stopImmediatePropagation();
+  }
+},true);
+window.addEventListener('blur',cancelHoldTimer);
+document.addEventListener('visibilitychange',()=>{if(document.hidden)cancelHoldTimer();});
+
 ['pointerup','pointercancel','pointerleave'].forEach(t => {
   document.addEventListener(t, () => {
-    if (_holdTimer){ clearTimeout(_holdTimer); _holdTimer = null; }
+    cancelHoldTimer();
     /* Uzun basış tetiklendiyse bu dokunuşun tıklamasını yut */
     if (_holdFired) _tapBas = null;
   }, {passive: true});
@@ -7140,6 +7429,9 @@ function applySaveData(d){
   restoreWorldBounds(d);
   G.emps = d.emps; G.fleets = d.fl; G.nextFleet = d.nf;
   G.p = G.emps[0];
+  restoreShipments();
+  restoreFleetTemplates();
+  restoreResearch();
   loadCheckpoint('after:roots');
   /* 86G: Eski v8 kayıtlarında savaşla birlikte kalmış NAP/pakt/ittifak
      alanlarını deterministik olarak kapat. Kayıt sürümü değişmez. */
@@ -7512,7 +7804,7 @@ function forceRedraw(sebep){
    Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
    Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
 /* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */
-const BUILD_ID = '92d';
+const BUILD_ID = '93d1';
 const DIAG_MAX = 40;
 const DIAG = [];
 function logDiag(tur, mesaj){

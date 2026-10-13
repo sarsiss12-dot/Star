@@ -1320,7 +1320,7 @@ function applyItems(giver, taker, items){
       }
       case 'tech':
         if (giver.techs[it.id]){
-          taker.techs[it.id] = true; recalcMods(taker);
+          grantResearchTech(taker,it.id,'trade'); recalcMods(taker);
           remember(taker, giver.id, 'teknolojiVer');
         }
         break;
@@ -2939,7 +2939,7 @@ function runOp(e, target, key){
       const av = Object.keys(target.techs || {}).filter(t => !e.techs[t] && TECHS[t]);
       if (!av.length){ msg = 'Çalınacak yeni teknoloji bulunamadı.'; break; }
       const id = av[Math.floor(rnd()*av.length)];
-      e.techs[id] = true; recalcMods(e);
+      grantResearchTech(e,id,'espionage'); recalcMods(e);
       msg = TECHS[id].n + ' teknolojisi çalındı!';
       break;
     }

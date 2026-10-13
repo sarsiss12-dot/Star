@@ -106,7 +106,7 @@ for(const f of fs.readdirSync(KOK).filter(x=>x.endsWith('.js'))){
 }
 {
   const ai=oku('ai.js'), mn=oku('main.js');
-  ok("sw cache = 'stars-v92d'", /const CACHE = 'stars-v92d'/.test(oku('sw.js')));
+  ok("sw cache = 'stars-v93d1'", /const CACHE = 'stars-v93d1'/.test(oku('sw.js')));
   const sw=oku('sw.js');
   ok('sw KABUK/fetch/activate korundu', /KABUK/.test(sw) &&
      /addEventListener\('fetch'/.test(sw) && /addEventListener\('activate'/.test(sw));
@@ -151,7 +151,7 @@ for(const f of fs.readdirSync(KOK).filter(x=>x.endsWith('.js'))){
   ['audio.js','manifest.json',
    'map.js'].forEach(f=>{
     // 91D: bütün map.js yerine değişmemesi gereken altyapı bölümleri kilitli.
-    if(f==='map.js'){ok('map altyapısı 91C ile aynı',
+    if(f==='map.js'){ok('map altyapısı sabit; hedef seçimi 93A referansında',
       require('./helpers/map-preservation').isMapInfrastructurePreserved(oku(f)));return;}
     if(!ref||!ref[f]){ ok(f+' referansı var', false); return; }
     const h=crypto.createHash('sha256').update(fs.readFileSync(path.join(KOK,f))).digest('hex');

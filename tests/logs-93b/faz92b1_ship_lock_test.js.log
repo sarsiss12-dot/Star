@@ -1,0 +1,20 @@
+✓ All four technology locks reject direct orders with no state/RNG mutation
+✓ Real UI ship action cannot bypass a locked class
+✓ Research unlock queues once and charges the actual class cost
+✓ Basic military and civilian classes remain available
+✓ Invalid keys, actors and systems cannot throw or charge
+✓ Insufficient funds and foreign yard still reject orders
+✓ AI direct production shares the same technology gate
+✓ Continuous production cannot be configured to locked or foreign yard
+✓ Loaded locked automation pauses with reason then resumes on research
+✓ Fleet reinforcement orders cannot bypass class technology
+✓ Federal fund cannot bypass technology or crisis-only restriction
+✓ Council prohibition is shared by personal and federal production
+✓ Crisis hulls remain restricted to crisis actors
+✓ Existing locked queue pauses without losing paid order or blocking basic hulls
+✓ Even overdue locked orders cannot complete before research
+✓ Sabotaged yard does not progress already queued orders
+✓ Save/load keeps locked orders paused and does not debit again
+✓ Setup physiology step has the same unadorned label format
+✓ Actual ship panel disables locked buttons, filters loops and explains paused order
+GEÇEN: 19 KALAN: 0

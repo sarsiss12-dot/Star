@@ -1,3 +1,20 @@
+# 93A güncel durum — 11 Ekim 2026
+
+Tersanenin sabit sistem hedefi ile filoya özel takviye ayrıldı. Filo
+panelindeki toplu tersane hedefi yazan seçim kaldırıldı. Takviye bu filoyu
+izler; sabit hedef tersane panelinden seçilir. Eski fleet+sys kayıtlarında
+fleet önceliği korunur ve arayüzde açıkça yazılır; sessiz kayıt dönüşümü yok.
+Üretimde/sırada, yolda/bekliyor ve yeni sipariş sayıları ortak saf hesaptan
+üretilir. Kilitli sınıf, tersane yokluğu, sabotaj ve kapalı rota ayrı gerekçeler.
+
+Sıradaki **93B — Astra / High:** kapanan rotada hedefi saklayan bekleme,
+sınırlı yeniden deneme, yeniden hedefleme/iptal ve ana filo kaybı.
+Ardından 93C sınıf bazlı filo şablonu + üretim/seyahat hesabı.
+Cihaz testi kullanıcı hazır olana kadar istenmez. 91C/87T adayı sabit.
+
+---
+Önceki faz notları aşağıda tarihseldir.
+
 # 92D güncel durum — 11 Ekim 2026
 
 92D barış sonrası aylık AI paylaşım gündemini ekler. Bütün cepheleri kapanan

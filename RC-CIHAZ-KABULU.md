@@ -1,3 +1,14 @@
+# 93A — ileride cihazda denenmek üzere
+
+- İki tersaneye ayrı sistem hedefi ver; birini değiştirirken diğeri sabit kalsın.
+- Filoya takviye sipariş et, tersane noktasını değiştir ve ana filoyu hareket
+  ettir: özel gemiler filoyu, normal üretim tersane noktasını izlemeli.
+- Üretimde/yolda/eksik sayaçlarını ve tekrar sipariş düğmesini kontrol et.
+- Eski karma hedefli kayıtta Filo hedefi etiketi açık olmalı.
+- Android kısa/yatay ekranda yeni lojistik satırları kaydırılarak okunabilmeli.
+Test talebi değildir; kullanıcı hazır olduğunda uygulanır.
+
+---
 # 92D — kullanıcı hazır olduğunda ek test
 
 - AI ortak teklifini diplomasi merkezinde bul; oysuz hiçbir devir olmamalı.

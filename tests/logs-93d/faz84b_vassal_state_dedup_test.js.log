@@ -1,0 +1,141 @@
+
+A. SÖZDİZİMİ, DOSYA SINIRI VE KARANTİNA
+  ✓ node --check ai.js
+  ✓ node --check audio.js
+  ✓ node --check combat.js
+  ✓ node --check diplomacy.js
+  ✓ node --check economy.js
+  ✓ node --check main.js
+  ✓ node --check map.js
+  ✓ node --check sw.js
+  ✓ node --check ui.js
+  ✓ manifest.json geçerli
+  ✓ yükleme sırası değişmedi
+  ✓ depolama anahtarı korundu: yildiz:save
+  ✓ depolama anahtarı korundu: yh_audio
+  ✓ depolama anahtarı korundu: yh_advisor
+  ✓ depolama anahtarı korundu: yh_autoev
+  ✓ depolama anahtarı korundu: yh_bg
+  ✓ depolama anahtarı korundu: yh_radar
+  ✓ depolama anahtarı korundu: yh_templates
+  ✓ depolama anahtarı korundu: __yh_probe
+  ✓ depolama anahtarı korundu: __yh_diag
+  ✓ sw cache = 'stars-v93d'
+  ✓ sw KABUK listesi duruyor
+  ✓ sw fetch davranışı duruyor
+  ✓ sw activate davranışı duruyor
+  ✓ SITUATIONS kataloğu duruyor
+  ✓ situationsTick tanımı duruyor
+  ✓ situationsTick çağrısı PASİF (yorumlu)
+  ✓ DURUMLAR sekmesi gizli
+  ✓ 200 ayda situation tetiklenmedi — 0
+  ✓ audio.js byte-for-byte aynı — 804226980179698a
+  ✓ manifest.json byte-for-byte aynı — 6b8305490e9a55e9
+
+B. TEKRAR TESTİ (yalnız p_imp gövdesi)
+  ✓ p_imp() gövdesi güvenilir biçimde çıkarıldı — 407 satır
+  ✓ eski "FAZ 8: hegemonya" bloğu kalmadı — 0
+  ✓ eski "FAZ 8: hegemonya ve vasallık" bloğu kalmadı
+  ✓ eski "FAZ 8: hegemonya durumu" bloğu kalmadı
+  ✓ TEK kanonik FAZ 84B bölümü var — 1
+  ✓ vasal durum başlığı tam bir kez — 1
+  ✓ hegemonya başlığı tam bir kez — 1
+  ✓ isyan düğmesi p_imp içinde tam bir kez — 1
+  ✓ vassalLoyaltyInfo() render başına 1 çağrı — 1
+  ✓ hegemonyWeight() render başına 1 çağrı — 1
+  ✓ vassalCapBonus() render başına 1 çağrı — 1
+  ✓ vassalsOf(e) tek kez çözülüyor — 1
+  ✓ isVassal(e) tek kez çözülüyor — 1
+  ✓ kanonik bölüm perk koşulundan ÖNCE (dışında) — kanon@3839 perkKapı@13893
+  ✓ sağ panel "⛓ SÜZERENLİK" alanı duruyor
+  ✓ Diplomasi panelindeki vasallık özeti duruyor
+  ✓ Süzerenlik müzakere modalı duruyor
+
+C. ÖLÜ UI EYLEMLERİ
+  ✓ case 'vassalDemand' kaldırıldı
+  ✓ case 'vassalSeek' kaldırıldı
+  ✓ proje genelinde vassalDemand referansı sıfır
+  ✓ proje genelinde vassalSeek referansı sıfır
+  ✓ case 'vsOpen' kanonik yol olarak duruyor
+  ✓ case 'vsType' kanonik yol olarak duruyor
+  ✓ case 'vsCancel' kanonik yol olarak duruyor
+  ✓ case 'vsSend' kanonik yol olarak duruyor
+  ✓ vsOpen için gerçek data-a üreticisi var
+  ✓ vsSend çift dokunma koruması duruyor
+  ✓ demandVassal hesabı diplomacy.js'te
+  ✓ seekProtection hesabı diplomacy.js'te
+  ✓ vsOpen→vsType→vsCancel oyun verisini değiştirmedi — AYNI
+  ✓ iptal sonrası müzakere durumu temizlendi — null
+
+D. SENARYO 1 — BAĞIMSIZ + VASALSIZ + PERKSİZ
+  ✓ oyuncunun perki yok (senaryo geçerli) — perk=0
+  ✓ p_imp() hata atmadı — 11257 bayt
+  ✓ vasallık durum kartı ÇIKMADI — 0
+  ✓ hegemonya bölümü ÇIKMADI — 0
+  ✓ isyan düğmesi ÇIKMADI — 0
+  ✓ oyun verisi değişmedi — AYNI
+
+E. SENARYO 2 — PERKSİZ OYUNCU VASAL
+  ✓ oyuncunun perki yok (hata senaryosu geçerli) — perk=0
+  ✓ durum kartı TAM BİR KEZ görünüyor — 1
+  ✓ "...DEVLETİNİN VASALISIN" tam bir kez — 1
+  ✓ SENYÖR ADI görünüyor (eski hata: görünmüyordu) — Vahiy Auren İnancı ×2
+  ✓ vasal TÜRÜ görünüyor — Haraçgüzar
+  ✓ vasal türü AÇIKLAMASI görünüyor
+  ✓ bağımsızlık arzusu 48/100 görünüyor
+  ✓ sadakat DURUMU görünüyor — huzursuz
+  ✓ sadakat YÖNÜ görünüyor
+  ✓ son vergi bilgisi görünüyor — 13.5
+  ✓ bağımsızlık düğmesi görünüyor (eski hata: yoktu) — 1
+
+F. SENARYO 3 — ÖFKE 54 (KİLİTLİ)
+  ✓ düğme KİLİTLİ (dis) sınıfıyla çizildi
+  ✓ düğme aktif (dgr) DEĞİL
+  ✓ öfke 54'te isyan GERÇEKLEŞMEDİ — hâlâ vasal
+  ✓ öfke 54'te savaş ilan EDİLMEDİ
+
+G. SENARYO 4 — ÖFKE 55 VE ÜZERİ (AKTİF)
+  ✓ öfke 55'te düğme AKTİF (dgr)
+  ✓ ekranda TEK isyan düğmesi var (çift handler yok) — 1
+  ✓ tek dokunuş TAM BİR playerRevolt() çağrısı üretti — 1 çağrı
+  ✓ isyan başarılı — vasallık koptu
+  ✓ senyöre TEK savaş ilan edildi
+  ✓ ikinci dokunuş yeni bir isyan BAŞLATMADI — çağrı 1→2
+  ✓ savaş durumu ikinci dokunuşta bozulmadı
+
+H. SENARYO 5 — ÜÇ FARKLI TÜRDE VASAL
+  ✓ oyuncunun perki VAR (eski yolla da görünürdü) — perk=2
+  ✓ üç vasal da kuruldu — haracguzar,bekci,akademik
+  ✓ vasal TAM BİR KEZ listelendi: Sylph Otoritesi — ×1
+  ✓ vasal TAM BİR KEZ listelendi: Özgür Thalor Federasyonu — ×1
+  ✓ vasal TAM BİR KEZ listelendi: Aydınlanmış Sylph Uyum Konseyi — ×1
+  ✓ hegemonya başlığı tam bir kez — 1
+  ✓ başlıkta vasal sayısı (3) doğru
+  ✓ Haraçgüzar türü tam bir kez yazıldı — 1
+  ✓ Sınır Bekçisi türü tam bir kez yazıldı — 1
+  ✓ Akademik Vasal türü tam bir kez yazıldı — 1
+  ✓ haraca bağlı ÖDEME doğru kaynaktan (vassalPaid=9.5)
+  ✓ akademik ARAŞTIRMA doğru kaynaktan (vassalSci=4.4)
+  ✓ bekçi KAPASİTE katkısı doğru kaynaktan (vassalCapBonus) — +12
+  ✓ toplamlar YALNIZ BİR KEZ gösterildi
+  ✓ riskli vasal için uyarı çıktı (öfke 70) — 1
+  ✓ konsey kuruldu ve hegemonya ağırlığı > 0 — hw=15.30
+  ✓ konsey oy ağırlığı katkısı TAM BİR KEZ gösterildi — 1
+  ✓ konsey ağırlığı doğru değerle gösterildi
+  ✓ toplamların hepsi konseyle birlikte de tek satır
+  ✓ PERKSİZ oyuncu da vasallarını görüyor — perk=0 heg=1 ad×1
+
+I. RENDER SAFİYETİ
+  ✓ 40 render sonrası KAYNAKLAR değişmedi
+  ✓ 40 render sonrası VASALLIK İLİŞKİSİ değişmedi
+  ✓ 40 render sonrası ÖFKE değişmedi
+  ✓ 40 render sonrası SENYÖR değişmedi
+  ✓ 40 render sonrası VASAL TÜRÜ değişmedi
+  ✓ 40 render sonrası DİPLOMASİ (rel) değişmedi
+  ✓ 40 render sonrası SAVAŞ durumu değişmedi
+  ✓ 40 render sonrası OYUN VERİSİ değişmedi — oyun verisi aynı · yalnız personaOf() önbelleği 13B (Faz 84A'da belgelendi, kapsam dışı)
+
+══════════════════════════════════════════
+  GEÇEN: 118   KALAN: 0
+══════════════════════════════════════════
+

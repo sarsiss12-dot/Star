@@ -1,0 +1,95 @@
+GELİŞTİRİCİ RAPORU — STARS FAZ 93B
+KAPALI ROTA / KALICI TESLİMAT / SINIRLI RETRY / ANA FİLO KAYBI
+12 Ekim 2026
+
+KAYNAK VE DEVİR
+stars-faz93a1.zip; SHA-256:
+0b4ed6eda8d2a7fc6ce3e543e0553a9f5c7bc73ec7738d9e245ae649b5ad7df0
+Arşiv hash'i doğrulandı. Erişilebilir teslimlerde 93B kodu bulunamadı;
+önceki sohbetin teslim edilmemiş dosyalarına erişim varsayılmadı.
+93A.1 ayrı kopyada korunarak bu kaynak üzerinden çalışıldı.
+Build 93b / SW cache stars-v93b / Save v8.
+
+SONUÇ
+64 test paketi, 4296 başarılı kontrol, 0 hata, 0 atlanan,
+0 zaman aşımı. Yeni 31 hedefli senaryo dahildir.
+Bu sonuç gerçek Android veya tarayıcı kabulü değildir.
+
+UYGULANAN
+1. Üretim çıkışında ve yolculuk sırasında kapanan rota teslimat hedefini
+   silmez. Filo veya sabit sistem hedefi shipment kaydında korunur.
+   joinFleet mevcut sırada/yolda sayacını besler; tekrar siparişin aynı
+   eksiği yeniden ücretlendirmesi önlenir.
+2. İlk başarısız deneme sonrası 5/10/20 oyun gününde üç otomatik deneme.
+   Sonra paused; kullanıcı yeniden dene, iptal veya hedef değiştir seçer.
+   Her stepFleets çağrısında en çok sekiz bekleyen yol araması. Başarılı
+   rota sonrası yeni kapanma ayrı bir bekleme dönemi sayılır.
+3. Filo panelinde ve ana filonun takviye listesinde yönetim düğmesi.
+   Yeni hedef kendi bağımsız filosu veya bilinen sistem olabilir.
+   Kapalı yeni rota beklemeye alınır. Yabancı/kendisi/başka sevkiyat/
+   bilinmeyen/geçersiz hedef eski durumu değiştirmeden reddedilir.
+4. İptal tamamlanmış gemiyi korur; kaynak iadesi veya yeni ücret yoktur.
+   Üretimdeki sipariş iptali 93A.1 makbuz/iade yolunu kullanmaya devam eder.
+   İptal/yeniden hedefleme aktif bacağı ışınlanmadan tamamlatır.
+   DUR ve başarılı açık hareket emri teslimatın yerini alır; başarısız
+   hareket emri hedefi korur.
+5. Ana filo yoksa/sahibi değişmişse veya geçersiz teslimat zinciri varsa
+   eski konuma ya da karma rally.sys hedefine gizli sevk yoktur. Gemiler
+   lost durumunda yeni hedef bekler. Çatışan/hareketli/ricat eden ana
+   filoya erken birleşme yoktur; gerçek gemi aktarımı bir kez yapılır.
+6. Normal üretim bekleyen sevkiyata gemi eklemez. AI bekleyen sevkiyatı
+   normal otomatik birleştirme/savaş grubuna katmaz; aynı retry yolu geçer.
+7. Save v8 isteğe bağlı shipment alanını taşır. Retry sayısı/zamanı
+   yüklemede sıfırlanmaz; bozuk sayısal alanlar sınırlanır. Eski joinFleet/
+   rallyTo alanları tembel alınır, fleet önceliği korunur. RNG tüketilmez.
+8. Modal tokenı, dünya ve canlı filo kimliği eski düğmeyi geçersiz kılar.
+   Vazgeç/işlem sonrası 0 dahil önceki oyun hızı korunur.
+
+TEST VE TAKILMA DEĞERLENDİRMESİ
+Önce 26 hedefli test ve ilgili eski paketler çalıştırıldı. Eski sevkiyat
+paketindeki iki iddia hedefin silinmesini bekliyordu: yalnız bu beklentiler
+93B hedef korumasına uyarlandı. Gemi/konum/ücret/bildirim iddiaları korundu.
+Son hedefli paket hareket sırasında iptal/hedef değişimi, v8 devamlılığı,
+kapalı kısa yola alternatif, modal vazgeç ve takviye zinciriyle 31'e çıktı.
+25 eski test dosyasındaki build/cache beklentileri 93b olarak güncellendi;
+tarihsel hash dosyaları veya korunan davranış iddiaları değiştirilmedi.
+Tam koşu iki worker, paket başına 180 s ve dışarıdan 900 s sınırla çalıştı.
+Tam koşuda hata veya timeout çıkmadı, başarısız tam paket tekrar edilmedi.
+Önceki sohbetin dört timeout'unun nedeni bu çalışmada yeniden üretilmedi;
+o oturuma erişmeden kesin kök neden iddia edilmez.
+Runner artık worker/süre/filter seçimini ve paket süresini kaydediyor.
+STARS_TEST_LOGS=tests/logs-93b STARS_TEST_WORKERS=2 node tests/run-all.js
+Hedefli tekrar: node tests/faz93b_pending_shipments_test.js
+Native Canvas paketleri runtime'daki @napi-rs/canvas ile çalıştı.
+
+KORUNANLAR
+map.js, diplomacy.js, combat.js, economy.js, audio.js, index.html,
+manifest.json ve tests/referans-sha.json kaynakla byte-for-byte aynı.
+Kanıt: tests/preservation-93b.json.
+Save v8, transaction kökleri ve mevcut kullanıcı depolama anahtarları aynı.
+91C/87T sabit cihaz adayı değiştirilmedi. GitHub'a yükleme yapılmadı.
+
+DEĞİŞEN ANA DOSYALAR
+main.js: kalıcı sevkiyat, retry/yönetim, üretim/varış, kayıt normalleştirme.
+ui.js: durum/ilgili sevkiyat satırları, yönetim modalı ve DUR davranışı.
+ai.js: sevkiyatı normal hedef/birleşme/savaş listesinden ayırma.
+sw.js: yalnız cache adı.
+Yeni tests/faz93b_pending_shipments_test.js; tests/run-all.js süre/worker;
+eski iki sevkiyat iddiası ve sürüm beklentileri. Belgeler/kanıt/manifest.
+Tam dosya listesi: DEGISEN-DOSYALAR-93B.md.
+
+AÇIK SINIRLAR
+- Android/PWA gerçek yerleşim, jest ve cihaz performansı kabulü yapılmadı.
+  Native Canvas ve kontrollü DOM, mobil tarayıcı kanıtı sayılmaz.
+- AI, paused/lost sevkiyata yeni stratejik hedef atamıyor. Gemiler güvenle
+  bekler; çok geç açılan sınırdan sonra sınırsız arka plan denemesi yoktur.
+- Bekleyen sorgu bütçesi CPU süresi garantisi değildir; büyük galakside
+  fiziksel cihaz profili alınmadı. Üretim anındaki ilk sorgular tamamlanan
+  sipariş sayısı kadardır. Yol bulma algoritması değiştirilmedi.
+- Uzun dönem doğal AI dengesi ve yeni seçeneklerin mobil okunabilirliği açık.
+- Bilim, ticaret ve ekonomi talepleri yalnız ileri plana kaydedildi.
+
+SONRAKİ FAZ ÖNERİSİ
+93C: sınıf bazlı filo bileşim şablonları, sınıf bazlı takviye sayıları,
+gerçek üretim + hiper-yol seyahat süresine göre tersane optimizasyonu.
+93C bu pakette uygulanmadı. 94A/95A/95B ve 91F ileri planda korunur.

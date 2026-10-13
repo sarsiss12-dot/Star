@@ -1,0 +1,138 @@
+
+A. YAPI, DOSYA SINIRI VE KARANTİNA
+  ✓ node --check ai.js
+  ✓ node --check audio.js
+  ✓ node --check combat.js
+  ✓ node --check diplomacy.js
+  ✓ node --check economy.js
+  ✓ node --check main.js
+  ✓ node --check map.js
+  ✓ node --check sw.js
+  ✓ node --check ui.js
+  ✓ sw cache = 'stars-v93d'
+  ✓ sw KABUK/fetch/activate korundu
+  ✓ kayıt sürümü v:8 KALDI
+  ✓ depolama anahtarı korundu: yildiz:save
+  ✓ depolama anahtarı korundu: yh_audio
+  ✓ depolama anahtarı korundu: yh_advisor
+  ✓ depolama anahtarı korundu: yh_autoev
+  ✓ depolama anahtarı korundu: yh_bg
+  ✓ depolama anahtarı korundu: yh_radar
+  ✓ depolama anahtarı korundu: yh_templates
+  ✓ depolama anahtarı korundu: __yh_probe
+  ✓ depolama anahtarı korundu: __yh_diag
+  ✓ _spyOpenEski case'i KALDIRILDI
+  ✓ _spyOpenEski proje çapında sıfır referans
+  ✓ OPS kataloğunun TEK UI render yolu var — 1
+  ✓ opsMenu kanonik yola yönlendiriyor (ikinci katalog yok)
+  ✓ intelOf artık e.intel YAZMIYOR (saf okuma)
+  ✓ ensureIntel yardımcısı eklendi
+  ✓ kanonik fonksiyon var: opQuote
+  ✓ kanonik fonksiyon var: opViable
+  ✓ kanonik fonksiyon var: opCostOf
+  ✓ kanonik fonksiyon var: opRiskOf
+  ✓ kanonik fonksiyon var: opVictimHint
+  ✓ UI metodu var: opConfirm
+  ✓ UI metodu var: opExecute
+  ✓ UI metodu var: opsCatalog
+  ✓ UI metodu var: intelNetworks
+  ✓ UI metodu var: intelOperations
+  ✓ UI metodu var: intelFiles
+  ✓ UI metodu var: intelNav
+  ✓ SITUATIONS kataloğu duruyor
+  ✓ situationsTick tanımı duruyor
+  ✓ situationsTick çağrısı PASİF
+  ✓ DURUMLAR sekmesi gizli
+  ✓ 200 ayda situation tetiklenmedi — 0
+  ✓ audio.js byte-for-byte aynı — 804226980179698a
+  ✓ manifest.json byte-for-byte aynı — 6b8305490e9a55e9
+
+B. ÜÇ GÖRÜNÜM VE GEZİNTİ
+  ✓ üç görünüm gezinti düğmesi var — 3
+  ✓ AĞLAR görünümü operasyon düğmesi RENDER ETMİYOR
+  ✓ OPERASYONLAR görünümü operasyon düğmesi üretiyor — 8 düğme
+  ✓ DOSYALAR yalnız DOSYALAR görünümünde
+  ✓ özel operasyon grupları yalnız OPERASYONLAR görünümünde
+  ✓ pasif görünüm HTML'i hiç üretilmiyor (CSS ile gizlenmiyor)
+  ✓ hedefsiz OPERASYONLAR boş ekran yerine AĞLAR'a yönlendiriyor
+  ✓ UI.tab hâlâ function
+  ✓ spyOpen → UI.cur === intel — intel
+  ✓ spyOpen → doğru hedef — 2
+  ✓ spyOpen → OPERASYONLAR görünümü — operations
+  ✓ spyOpen sonrası UI.tab hâlâ function
+  ✓ normal girişte son güvenli görünüm korunuyor — files
+  ✓ aynı adlı iki devlet sayısal ID ile karışmıyor
+  ✓ grup akordiyonu tekli çalışıyor (ikinci dokunuş kapatır)
+  ✓ aynı anda en fazla bir grup açık — 0
+
+C. SAF ÖN KONTROL (opQuote)
+  ✓ opQuote alanları tam — afford,cost,desc,ico,key,lvlHave,lvlNeed,name,ok,op,risk,riskPct,viable,viableDesc,why
+  ✓ opQuote SAF: 2400 çağrı kaynak değiştirmedi
+  ✓ opQuote SAF: RNG tüketmedi
+  ✓ opQuote SAF: intel/ilişki değişmedi
+  ✓ opQuote SAF: hitLog/opLog oluşmadı
+  ✓ yetersiz ağ: kilitli ve gerekçesi net — Yetersiz istihbarat seviyesi (SIZILMIŞ gerekli)
+  ✓ yetersiz kaynak: kilitli ve gerekçesi net — Yetersiz kaynak
+  ✓ uygun hedef yok: kilitli ve gerekçesi net — Bu devlet sana ambargo uygulamıyor
+  ✓ uygulanabilir hedef: açık ve açıklamalı — 1 kışkırtılabilir koloni
+  ✓ değiştirilmiş maliyet tabandan farklı (senaryo geçerli) — taban 110 → 165
+  ✓ ekrandaki maliyet = opQuote maliyeti
+  ✓ ekrandaki maliyet = GERÇEK kesinti — 165 = 165
+  ✓ ekrandaki ifşa riski = opQuote riski
+  ✓ önizlenen risk aynı RNG değerinde runOp sonucuyla ÖRTÜŞÜYOR — beklenen true · gerçek true
+
+D. ONAY / TEK ÇALIŞTIRMA / SONUÇ
+  ✓ önizleme modalı açıldı ve onay/iptal içeriyor
+  ✓ önizleme maliyet/risk/etki/diplomatik sonuç gösteriyor
+  ✓ ÖNİZLEME sıfır mutasyon ve sıfır RNG
+  ✓ İPTAL sıfır mutasyon ve sıfır RNG
+  ✓ ÇİFT onay → TAM BİR runOp çağrısı — 1 çağrı
+  ✓ kaynak yalnız BİR kez kesildi — 110
+  ✓ hitLog tam BİR kayıt — 1
+  ✓ opLog tam BİR kayıt (oyuncu operasyonu artık yazılıyor) — 1
+  ✓ yapılandırılmış SONUÇ ekranı gösterildi
+  ✓ sonuç ekranı OPERASYONLAR görünümüne dönüş sunuyor
+  ✓ calTech: uygun hedef yok → ok:false ve açıklayıcı gerekçe — Çalınacak yeni teknolojisi yok
+  ✓ calTech: SIFIR kaynak, SIFIR RNG, SIFIR log
+  ✓ ambargoKir: uygun hedef yok → ok:false ve açıklayıcı gerekçe — Bu devlet sana ambargo uygulamıyor
+  ✓ ambargoKir: SIFIR kaynak, SIFIR RNG, SIFIR log
+  ✓ AI standart runOp operasyonu opLog'a TAM BİR kez yazıldı — 1
+  ✓ 120 aylık AI simülasyonu hatasız — ok
+  ✓ AI çift kayıt oluşturmadı
+  ✓ opLog/hitLog üst sınırları korundu — opLog max 0 · hitLog max 1
+
+E. MAĞDUR GERİ BİLDİRİMİ
+  ✓ yakalanmayan saldırı üretildi
+  ✓ mağdur GÖZLEMLENEBİLİR etkiyi görüyor (fail açıklanmadan) — Şüpheli tersane kesintisi tespit edildi — fail bilinmiyor
+  ✓ eski belirsiz "Bir şeyler ters gidiyor" mesajı kaldırıldı
+  ✓ DOSYALAR görünümünde fail ADI sızmıyor
+  ✓ DOSYALAR görünümünde fail ID sızmıyor
+  ✓ bilinmeyen fail açıkça "FAİL BİLİNMİYOR" gösteriliyor
+  ✓ yakalanan saldırıda FAİL doğru görünüyor
+  ✓ dosya durumu "suçüstü" olarak gösteriliyor
+
+F. ambargoKir HEDEF DOĞRULUĞU
+  ✓ ambargo UYGULAMAYAN hedef için operasyon KİLİTLİ — Bu devlet sana ambargo uygulamıyor
+  ✓ ambargo uygulayan hedef için AÇIK
+  ✓ yanlış hedefte runOp reddedildi, kaçakçılık kurulmadı — {}
+  ✓ yanlış hedefte MAĞDUR kaydı oluşmadı (kimlik tutarsızlığı yok)
+  ✓ doğru hedefte operasyon çalıştı ve AYNI devletin hattı delindi — {"2":1440}
+  ✓ delinen hat ile mağdur kaydı AYNI devlet — B.hitLog=1
+
+G. RENDER SAFİYETİ VE v8 KAYIT
+  ✓ 120 render kaynakları değiştirmedi
+  ✓ 120 render intel seviyesi/ilerlemesini değiştirmedi
+  ✓ 120 render casus atamasını değiştirmedi
+  ✓ 120 render hitLog/opLog değiştirmedi
+  ✓ 120 render ilişkileri ve RNG'yi değiştirmedi
+  ✓ 120 render bildirim üretmedi — 0
+  ✓ kayıt sürümü v:8 KALDI — v=8
+  ✓ hitLog/opLog save→load sonrası korundu
+  ✓ DOSYALAR görünümü yüklemeden sonra aynı sonucu gösteriyor
+  ✓ hedefsiz / tek hedefli / boş loglu / geçersiz hedefli render hatasız — ok
+  ✓ tüm akışlardan sonra UI.tab hâlâ function
+
+══════════════════════════════════════════
+  GEÇEN: 119   KALAN: 0
+══════════════════════════════════════════
+

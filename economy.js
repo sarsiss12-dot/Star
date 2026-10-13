@@ -584,51 +584,181 @@ function economyTick(init){
       }
     }
 
-    // araştırma
-    const active = ['fiz','top','muh'].filter(b=>e.rq[b]);
-    if (active.length){
-      const share = e.res.ara / active.length;
-      e.res.ara = 0;
-      for (const b of active){
-        e.rp[b] += share;
-        const t = TECHS[e.rq[b]];
-        const cost = techCost(e, e.rq[b]);
-        if (e.rp[b] >= cost){
-          e.rp[b] -= cost;
-          e.techs[e.rq[b]] = true;
-          /* FAZ 52: ilk keşfeden kaydı — skor ayrışması için */
-          G._firstTech = G._firstTech || {};
-          if (G._firstTech[e.rq[b]] === undefined) G._firstTech[e.rq[b]] = e.id;
-          const done = e.rq[b];
-          e.rq[b] = null;
-          if (e.streakB === b) e.streakN = (e.streakN||0) + 1;
-          else { e.streakB = b; e.streakN = 1; }
-          const shifted = applySway(e, done);
-          if (hasCivic(e,'noStock')){
-            e.techMul = e.techMul || {};
-            for (const k in TECHS) if (!e.techs[k]) e.techMul[k] = (e.techMul[k]||1) * .92;
-            e.rp[b] = 0;
-          }
-          recalcMods(e);
-          if (typeof facEvent === 'function') facEvent(e,'tech');
-          if (!e.ai && shifted.length){
-            const up = shifted.filter(x=>x.up).map(x=>TECHS[x.id].n);
-            const dn = shifted.filter(x=>!x.up).map(x=>TECHS[x.id].n);
-            if (dn.length) say('Yan kazanım: ' + dn.join(', ') + ' ucuzladı', 'sci');
-            if (up.length) say('Ödünleşim: ' + up.join(', ') + ' pahalandı', 'sci');
-          }
-          if (!e.ai) say('Araştırma tamamlandı — ' + t.n, 'sci');
-          if (t.unlock && !e.ai) say(SHIPS[t.unlock].n + ' inşa edilebilir', 'sci');
-        }
+    researchTick(e);
+
+  }
+}
+
+/* 93D — Shared research state. rq/rp remain the active branch compatibility
+   fields; bank contains ONLY suspended technology progress, never its copy. */
+function researchState(e){
+  if(!e.research)e.research={targets:[],bank:{},history:{}};
+  return e.research;
+}
+function researchValidTech(id){return typeof id==='string' && Object.prototype.hasOwnProperty.call(TECHS,id) && !!BRANCH[TECHS[id].b];}
+function researchRoute(e,id){
+  const order=[],seen=new Set(),stack=new Set();let error='';
+  function visit(k){
+    if(error || seen.has(k))return;
+    if(!researchValidTech(k)){error='Geçersiz teknoloji bağımlılığı: '+String(k);return;}
+    if(e.techs[k]){seen.add(k);return;}
+    if(stack.has(k)){error='Teknoloji bağımlılık döngüsü: '+TECHS[k].n;return;}
+    const deps=TECHS[k].r||[];
+    if(!Array.isArray(deps)){error='Geçersiz ön koşul listesi: '+TECHS[k].n;return;}
+    stack.add(k);for(const parent of deps)visit(parent);stack.delete(k);
+    seen.add(k);order.push(k);
+  }
+  visit(id);return {ok:!error,why:error,order:error?[]:order};
+}
+function researchPlan(e){
+  const targets=(e.research&&e.research.targets||[]).filter(id=>researchValidTech(id)&&!e.techs[id]);
+  const covered=new Set(),order=[],goals=[];
+  for(const id of targets){
+    const route=researchRoute(e,id),extra=route.order.filter(k=>k!==id&&!covered.has(k));
+    goals.push({id,number:goals.length+1,extra:extra.length,route:route.order,ok:route.ok,why:route.why});
+    for(const k of route.order)if(!covered.has(k)){covered.add(k);order.push(k);}
+  }
+  return {goals,order};
+}
+function researchReady(e,id){
+  return researchValidTech(id) && !e.techs[id] && Array.isArray(TECHS[id].r||[]) &&
+    (TECHS[id].r||[]).every(k=>researchValidTech(k)&&e.techs[k]);
+}
+function setResearchCurrent(e,b,id){
+  if(!BRANCH[b] || (id!==null && (!researchReady(e,id)||TECHS[id].b!==b)))return false;
+  if(e.rq[b]===id)return true;
+  const state=researchState(e),old=e.rq[b];
+  let carry=e.rp[b]||0;
+  if(old && researchValidTech(old) && !e.techs[old]){
+    state.bank[old]=(state.bank[old]||0)+carry;carry=0;
+  }
+  e.rq[b]=id;
+  e.rp[b]=carry+(id?(state.bank[id]||0):0);
+  if(id)delete state.bank[id];
+  return true;
+}
+function researchPlannedNext(e,b,plan){
+  return !e.ai && (plan||researchPlan(e)).order.find(id=>TECHS[id].b===b&&researchReady(e,id)) || null;
+}
+function syncResearchPlan(e,force=false){
+  const state=researchState(e);
+  state.targets=state.targets.filter(id=>researchValidTech(id)&&!e.techs[id]);
+  const plan=researchPlan(e);
+  for(const b of Object.keys(BRANCH)){
+    const planned=researchPlannedNext(e,b,plan);
+    if(planned)setResearchCurrent(e,b,planned);
+    else if(force || !researchReady(e,e.rq[b]) || TECHS[e.rq[b]].b!==b)autoResearch(e,b,plan);
+  }
+  return plan;
+}
+function researchTarget(e,id,action='toggle',position){
+  if(!e || G.emps[e.id]!==e || e.dead || e.ai || !researchValidTech(id))return {ok:false,why:'Geçerli oyuncu teknolojisi seç'};
+  if(e.techs[id])return {ok:false,why:'Bu teknoloji tamamlandı'};
+  if(!['toggle','move'].includes(action))return {ok:false,why:'Geçersiz kuyruk işlemi'};
+  const state=researchState(e),at=state.targets.indexOf(id);
+  const route=researchRoute(e,id);if(!route.ok && !(action==='toggle'&&at>=0))return route;
+  if(action==='move'){
+    if(at<0 || !Number.isInteger(position) || position<0 || position>=state.targets.length)return {ok:false,why:'Geçersiz hedef sırası'};
+    state.targets.splice(at,1);state.targets.splice(position,0,id);
+  }else if(at>=0)state.targets.splice(at,1);
+  else state.targets.push(id);
+  syncResearchPlan(e,true);return {ok:true};
+}
+function grantResearchTech(e,id,source='research'){
+  if(!e || !researchValidTech(id) || e.techs[id])return false;
+  const state=researchState(e),b=TECHS[id].b;
+  e.techs[id]=true;
+  state.history[id]={source,year:G.year,month:G.month,day:G.day};
+  // A grant saves the work already invested, but never creates a second copy.
+  if(state.bank[id]){e.rp[b]=(e.rp[b]||0)+state.bank[id];delete state.bank[id];}
+  if(e.rq[b]===id)setResearchCurrent(e,b,null);
+  state.targets=state.targets.filter(k=>k!==id);
+  return true;
+}
+function restoreResearch(){
+  for(const e of G.emps){
+    const raw=e.research;
+    // Old saves retain their active rq/rp, including partial progress.
+    const state={targets:[],bank:{},history:{}};
+    if(raw && typeof raw==='object'){
+      if(Array.isArray(raw.targets))state.targets=[...new Set(raw.targets.filter(id=>researchValidTech(id)&&!e.techs[id]))];
+      if(raw.bank&&typeof raw.bank==='object')for(const [id,v] of Object.entries(raw.bank))
+        if(researchValidTech(id)&&!e.techs[id]&&Number.isFinite(v)&&v>=0 && !Object.values(e.rq||{}).includes(id))state.bank[id]=v;
+      if(raw.history&&typeof raw.history==='object')for(const [id,h] of Object.entries(raw.history)){
+        if(!researchValidTech(id)||!e.techs[id]||!h||typeof h!=='object')continue;
+        const source=['research','trade','espionage','event','ruin','origin','legacy'].includes(h.source)?h.source:'legacy';
+        const dated=source!=='legacy' && Number.isInteger(h.year)&&h.year>0&&Number.isInteger(h.month)&&h.month>=1&&h.month<=12&&Number.isFinite(h.day)&&h.day>=0&&h.day<=G.day;
+        state.history[id]=dated?{source,year:h.year,month:h.month,day:h.day}:{source};
       }
-      for (const b of active) if (!e.rq[b]) autoResearch(e, b);
-      if (typeof ascendTick === 'function') ascendTick(e);   // FAZ 53
-      if (hasCivic(e,'noStock')) for (const b of active) e.rp[b] = Math.min(e.rp[b], 0);
-    } else {
-      ['fiz','top','muh'].forEach(b=>autoResearch(e,b));
-      e.res.ara = 0;
+    }
+    e.research=state;e.rq=e.rq||{};e.rp=e.rp||{};
+    for(const b of Object.keys(BRANCH)){
+      if(!Number.isFinite(e.rp[b])||e.rp[b]<0)e.rp[b]=0;
+      if(!researchValidTech(e.rq[b])||TECHS[e.rq[b]].b!==b||e.techs[e.rq[b]])e.rq[b]=null;
     }
   }
+}
+function researchTick(e){
+  syncResearchPlan(e);
+  const active=Object.keys(BRANCH).filter(b=>researchReady(e,e.rq[b]));
+  const income=Math.max(0,Number.isFinite(e.res.ara)?e.res.ara:0);
+  if(active.length){
+    const share=income/active.length;e.res.ara=0;
+    for(const b of active){
+      e.rp[b]+=share;
+      const id=e.rq[b],t=TECHS[id],cost=techCost(e,id);
+      if(e.rp[b]<cost)continue;
+      e.rp[b]-=cost;
+      grantResearchTech(e,id,'research');
+      G._firstTech=G._firstTech||{};
+      if(G._firstTech[id]===undefined)G._firstTech[id]=e.id;
+      if(e.streakB===b)e.streakN=(e.streakN||0)+1;else{e.streakB=b;e.streakN=1;}
+      const shifted=applySway(e,id);
+      if(hasCivic(e,'noStock')){
+        e.techMul=e.techMul||{};
+        for(const k in TECHS)if(!e.techs[k])e.techMul[k]=(e.techMul[k]||1)*.92;
+        e.rp[b]=0; // Existing civic trade-off: completion surplus is spent on discounts.
+      }
+      recalcMods(e);if(typeof facEvent==='function')facEvent(e,'tech');
+      if(!e.ai){
+        const up=shifted.filter(x=>x.up).map(x=>TECHS[x.id].n),dn=shifted.filter(x=>!x.up).map(x=>TECHS[x.id].n);
+        if(dn.length)say('Yan kazanım: '+dn.join(', ')+' ucuzladı','sci');
+        if(up.length)say('Ödünleşim: '+up.join(', ')+' pahalandı','sci');
+        say('Araştırma tamamlandı — '+t.n,'sci');
+        if(t.unlock&&SHIPS[t.unlock])say(SHIPS[t.unlock].n+' inşa edilebilir','sci');
+      }
+    }
+    syncResearchPlan(e);
+  }else if(Object.keys(TECHS).every(id=>e.techs[id])){
+    // The old idle branch discarded this income instead of funding ascension.
+    e.res.ara=0;e.rp.fiz=(e.rp.fiz||0)+income;
+  }
+  // If the catalog is broken and nothing is ready, retain unspent income.
+  ascendTick(e);
+}
+function techOrigin(id){
+  const origin=TECHS[id]&&TECHS[id].origin;
+  const icons={doctrine:'◆',ethic:'⚖',species:'◈'};
+  if(!origin || !icons[origin.kind])return null;
+  return {kind:origin.kind,icon:icons[origin.kind],label:String(origin.label||origin.kind),condition:String(origin.condition||'')};
+}
+function techBenefits(id){
+  const t=TECHS[id];if(!t)return {effects:[],unlocks:[]};
+  const labels={...TRAIT_LABEL,capFlat:'Filo kapasitesi',shMul:'Kalkan',eShMul:'Düşman kalkanı',eDmgMul:'Düşman hasarı',buildMul:'İnşa hızı',alaMul:'Alaşım',colCost:'Koloni gemisi maliyeti'};
+  const effects=Object.entries(t.e||{}).filter(([,v])=>typeof v==='number'&&v!==0).map(([k,v])=>
+    (labels[k]||k)+' '+(v>0?'+':'−')+(FLAT_KEYS[k]?Math.abs(v):'%'+Math.round(Math.abs(v)*100)));
+  const unlocks=[];
+  for(const [key,ship] of Object.entries(SHIPS))if(ship.tech===id||t.unlock===key)unlocks.push('Gemi: '+ship.n);
+  for(const catalog of [BUILDINGS,STRUCTS])for(const item of Object.values(catalog))if(item.tech===id)unlocks.push('Yapı: '+item.n);
+  if(t.unlockHab)unlocks.push('Habitat kolonisi kurma');
+  if(t.terra===1)unlocks.push('Terraform: 1. kademe (+12 yaşanabilirlik puanı)');
+  if(t.terra===2)unlocks.push('Terraform: 3. kademeye kadar');
+  if(id==='m_gaia')unlocks.push('Parçalanmış dünyaları terraform etme');
+  return {effects,unlocks:[...new Set(unlocks)]};
+}
+function researchHistory(e,branch='all'){
+  return Object.keys(TECHS).filter(id=>e.techs[id]&&(branch==='all'||TECHS[id].b===branch)).map(id=>({id,...(e.research&&e.research.history[id]||{source:'legacy'})}))
+    .sort((a,b)=>(b.day??-1)-(a.day??-1)||TECHS[a.id].b.localeCompare(TECHS[b.id].b)||TECHS[a.id].t-TECHS[b.id].t||a.id.localeCompare(b.id));
 }
 
 /* teknoloji maliyeti: temel × çapraz etki × dal uzmanlık indirimi */
@@ -660,8 +790,7 @@ function availTechs(e, branch){
   const out = [];
   for (const id in TECHS){
     const t = TECHS[id];
-    if (t.b !== branch || e.techs[id]) continue;
-    if ((t.r||[]).some(r => !e.techs[r])) continue;
+    if (t.b !== branch || !researchReady(e,id)) continue;
     out.push(id);
   }
   return out.sort((a,b)=>techCost(e,a)-techCost(e,b));
@@ -672,7 +801,7 @@ function availTechs(e, branch){
 function ascendTick(e){
   if (!e || e.dead) return;
   const total = Object.keys(TECHS).length;
-  const done = Object.keys(e.techs || {}).filter(t => TECHS[t]).length;
+  const done = Object.keys(e.techs || {}).filter(t => TECHS[t]&&e.techs[t]).length;
   if (done < total) return;
   e.ascend = e.ascend || 0;
   e.ascendP = e.ascendP || 0;
@@ -693,9 +822,11 @@ function ascendTick(e){
   }
 }
 
-function autoResearch(e, branch){
+function autoResearch(e, branch, plan){
+  const planned=researchPlannedNext(e,branch,plan);
+  if(planned){setResearchCurrent(e,branch,planned);return;}
   const av = availTechs(e, branch);
-  if (!av.length){ e.rq[branch] = null; return; }
+  if (!av.length){ setResearchCurrent(e,branch,null); return; }
   if (e.ai){
     const race = RACES[e.race];
     const scored = av.map(id => {
@@ -740,9 +871,9 @@ function autoResearch(e, branch){
       }
       return {id, s};
     }).sort((a,b)=>b.s-a.s);
-    e.rq[branch] = scored[0].id;
+    setResearchCurrent(e,branch,scored[0].id);
   } else {
-    e.rq[branch] = av[0];
+    setResearchCurrent(e,branch,av[0]);
   }
 }
 
@@ -823,8 +954,39 @@ function queueShip(e, sys, cls, oto){
   for (const r in c) if (e.res[r] < c[r]) return false;
   for (const r in c) e.res[r] -= c[r];
   const days = Math.round((SHIPS[cls].sz*14 + 16) / (1 + e.mods.buildMul));
-  sys.queue.push({cls, e:e.id, left:days, tot:days});
+  sys.queue.push({cls, e:e.id, left:days, tot:days, paid:{...c}});
   return true;
+}
+// 93A.1: Kimlik üzerinden iptal; kuyruk indeksi üretim bitince başka işe kayabilir.
+// Bina iptaliyle aynı politika: kaydedilmiş gerçek ödeme tamamen geri verilir.
+// Eski v8 işlerinde ödeme makbuzu yoksa bugünkü maliyetten iade uydurulmaz.
+function shipCancellationQuote(e,sys,orders){
+  if(!e || e.dead || G.emps[e.id]!==e || !sys || G.sys[sys.id]!==sys || sys.owner!==e.id)
+    return {ok:false,why:'Kendi tersaneni seç'};
+  if(!Array.isArray(orders) || !orders.length || new Set(orders).size!==orders.length ||
+      orders.some(q=>!q || q.e!==e.id || !sys.queue.includes(q)))
+    return {ok:false,why:'Sipariş listesi değişti; kuyruğu yeniden aç'};
+  const refund={};let legacy=0;
+  for(const q of orders){
+    const paid=q.paid;
+    if(!paid || typeof paid!=='object' || Array.isArray(paid) || !Object.keys(paid).length ||
+      Object.entries(paid).some(([r,v])=>!Object.prototype.hasOwnProperty.call(RES,r) || !Number.isFinite(v) || v<0)){
+      legacy++;continue;
+    }
+    for(const [r,v] of Object.entries(paid))refund[r]=(refund[r]||0)+v;
+  }
+  if(Object.entries(refund).some(([r,v])=>!Number.isFinite(v) || !Number.isFinite(e.res[r]+v)))
+    return {ok:false,why:'Kaynak iadesi hesaplanamadı'};
+  return {ok:true,count:orders.length,refund,legacy};
+}
+function cancelShipOrders(e,sys,orders,stopLoop=false){
+  const quote=shipCancellationQuote(e,sys,orders);
+  if(!quote.ok)return quote;
+  const selected=new Set(orders);
+  sys.queue=sys.queue.filter(q=>!selected.has(q));
+  if(stopLoop)delete sys.loopBuild;
+  for(const [r,v] of Object.entries(quote.refund))e.res[r]+=v;
+  return quote;
 }
 // Eski kayıttaki kilitli işler korunur; açık işler bunların arkasında takılmaz.
 function activeShipQueue(sys){
@@ -3758,7 +3920,7 @@ yarinki_taht:{
         f:(e,s)=>{
           const kilitsiz = Object.keys(TECHS).filter(t => !e.techs[t]);
           let n = 0;
-          for (const t of kilitsiz){ if (n >= 4) break; e.techs[t] = true; n++; }
+          for (const t of kilitsiz){ if (n >= 4) break; grantResearchTech(e,t,'event'); n++; }
           recalcMods(e);
           endSituation(s, 'Elçiler tahtın gölgesinde eridi; bilgileri kaldı. ' +
             n + ' teknoloji anında açıldı. Gelecek artık bizim.', 'veri');

@@ -1,0 +1,26 @@
+'use strict';
+const assert=require('assert/strict'),{fresh}=require('./helpers/dispatch-fixture');
+let pass=0,fail=0;const eq=(a,b=true)=>assert.equal(a,b);
+function test(n,f){try{f();pass++;console.log('✓ '+n);}catch(e){fail++;console.log('✗ '+n+' — '+e.stack);}}
+function setup(){const h=fresh(1);h.run(`E.inc.ene=500;E.inc.ala=50;E.res.ala=250;E.res.ene=5000;E.cap=100;E.crisis=false;E.megaReserve=E.colossusReserve=0;E.mods.upMul=0;delete E.aiShipPlan;for(const k in E.techs)delete E.techs[k];colonizeTargets=()=>[];
+function produce(){aiShipProduction(E,G.sys.filter(s=>s.owner===E.id),aiProfile(E));}
+function yard(id){G.sys[id].planets[0].col=JSON.parse(JSON.stringify(template));G.sys[id].planets[0].col.b.tersane=1;}
+function nextMonth(){G.month++;G.day+=30;}`);return h;}
+test('peace buys below 500 alloy with payment',()=>{const h=setup();h.run('var before=E.res.ala;produce()');eq(h.run("Y.queue.some(q=>q.cls==='kor')"));eq(h.run('E.res.ala<before&&E.res.ala>=24'));});
+test('multiple yards, bounded monthly orders',()=>{const h=setup();h.run('yard(3);yard(5);E.res.ala=4000;produce()');eq(h.run('G.sys.filter(s=>s.queue.length).length>1'));eq(h.run('G.sys.reduce((n,s)=>n+s.queue.length,0)<=6'));});
+test('same month and save gate prevent double spending',()=>{const h=setup();h.run('produce();var before=JSON.stringify([E.res,G.sys.map(s=>s.queue)]);produce()');eq(h.run('before===JSON.stringify([E.res,G.sys.map(s=>s.queue)])'));h.run('var state=JSON.stringify(E.aiShipPlan),save=serialize();deserialize(save);E=G.emps[1]');eq(h.run('JSON.stringify(E.aiShipPlan)===state'));});
+test('pending sizes count toward capacity',()=>{const h=setup();h.run("E.cap=7;queueShip(E,Y,'kor');queueShip(E,Y,'kor');queueShip(E,Y,'kor');produce()");eq(h.run('aiShipInventory(E).usage<=E.cap'));});
+test('grouped science hulls and pending jobs count',()=>{const h=setup();h.run("newFleet(E,0,[{c:'bil'},{c:'bil'}]);queueShip(E,Y,'bil');produce()");eq(h.run("G.sys.reduce((n,s)=>n+s.queue.filter(q=>q.cls==='bil').length,0)"),1);eq(h.run('aiShipInventory(E).counts.bil'),2);});
+test('grouped colony hulls stop unnecessary replacement',()=>{const h=setup();h.run("newFleet(E,0,Array.from({length:3},()=>({c:'kol'})));colonizeTargets=()=>[{},{},{}];produce()");eq(h.run("Y.queue.some(q=>q.cls==='kol')"),false);});
+test('science renewal waits after loss',()=>{const h=setup();h.run('G.fleets=[];E.cap=3;produce();var first=E.aiShipPlan.nextScience;Y.queue=[];G.fleets=[];nextMonth();produce()');eq(h.run("Y.queue.some(q=>q.cls==='bil')"),false);eq(h.run('E.aiShipPlan.nextScience'),h.run('first'));});
+test('completed AI science ships remain independent fleets',()=>{const h=setup();h.run("G.fleets=[];newFleet(E,0,[{c:'bil'}]);queueShip(E,Y,'bil');Y.queue[0].left=0;dailyTick(.001)");eq(h.run("G.fleets.filter(f=>f.e===E.id&&fleetHasRole(f,'bilim')).length"),2);});
+test('peace upkeep deficit blocks new expenses',()=>{const h=setup();h.run('E.inc.ene=0;produce()');eq(h.run('Y.queue.length'),0);eq(h.run('E.aiShipPlan.reasons.includes("energy-runway")'));});
+test('war respects cash runway',()=>{const h=setup();h.run('E.war[O.id]=true;E.res.ene=0;E.inc.ene=-50;produce()');eq(h.run('Y.queue.length'),0);});
+test('funded war replacement exceeds peace rate',()=>{const a=setup(),b=setup();for(const h of [a,b])h.run('yard(3);E.res.ala=4000');b.run('E.war[O.id]=true');a.run('produce()');b.run('produce()');eq(b.run("G.sys.reduce((n,s)=>n+s.queue.filter(q=>q.cls==='kor').length,0)")>a.run("G.sys.reduce((n,s)=>n+s.queue.filter(q=>q.cls==='kor').length,0)"));});
+test('strategic alloy reserve survives',()=>{const h=setup();h.run('E.res.ala=700;E.megaReserve=650;produce()');eq(h.run('E.res.ala>=650'));});
+test('sabotaged yards excluded',()=>{const h=setup();h.run('Y.yardLock=G.memAge+10;produce()');eq(h.run('Y.queue.length'),0);eq(h.run('E.aiShipPlan.reasons.includes("no-usable-yard")'));});
+test('legacy template preserved and reinforced with correct class',()=>{const h=setup();h.run("E.techs.m_muhrip=true;E.res.ala=2000;setFleetTemplate(E,A,{kor:1,muh:2},true);var counts=JSON.stringify(A.composition.counts);produce()");eq(h.run('JSON.stringify(A.composition.counts)===counts'));eq(h.run("Y.queue.some(q=>q.cls==='muh'&&q.delivery&&q.delivery.fleet===A.id)"));});
+test('AI template evolves on research unlock',()=>{const h=setup();h.run('aiFleetTemplate(E,A);var design=A.composition.aiDesign;E.techs.m_muhrip=true;aiFleetTemplate(E,A)');eq(h.run('A.composition.aiDesign!==design'));eq(h.run('A.composition.counts.muh>0'));});
+test('template design survives Save v8',()=>{const h=setup();h.run('aiFleetTemplate(E,A);var before=JSON.stringify(A.composition),id=A.id;var save=serialize();deserialize(save);E=G.emps[1];A=G.fleets.find(f=>f.id===id)');eq(h.run('JSON.stringify(A.composition)===before'));});
+test('paid costs reconcile, locked classes excluded, production uses no RNG',()=>{const h=setup();h.run('var rng=RND_STATE,before={...E.res};produce();var paid={};for(const q of Y.queue)for(const [k,v]of Object.entries(q.paid))paid[k]=(paid[k]||0)+v');eq(h.run('RND_STATE===rng'));eq(h.run('Y.queue.every(q=>shipBuildAccess(E,q.cls).ok)'));eq(h.run('Object.entries(paid).every(([k,v])=>Math.abs(before[k]-E.res[k]-v)<1e-8)'));});
+console.log(`GEÇEN: ${pass} KALAN: ${fail}`);process.exitCode=fail?1:0;

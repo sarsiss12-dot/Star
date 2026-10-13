@@ -1,0 +1,108 @@
+
+A. DOSYA SINIRI VE KARANTİNA
+  ✓ node --check ai.js
+  ✓ node --check audio.js
+  ✓ node --check combat.js
+  ✓ node --check diplomacy.js
+  ✓ node --check economy.js
+  ✓ node --check main.js
+  ✓ node --check map.js
+  ✓ node --check sw.js
+  ✓ node --check ui.js
+  ✓ sw cache = 'stars-v93d'
+  ✓ sw KABUK/fetch/activate korundu
+  ✓ kayıt sürümü v:8 KALDI
+  ✓ depolama anahtarı: yildiz:save
+  ✓ depolama anahtarı: yh_audio
+  ✓ depolama anahtarı: yh_advisor
+  ✓ depolama anahtarı: yh_autoev
+  ✓ depolama anahtarı: yh_bg
+  ✓ depolama anahtarı: yh_radar
+  ✓ depolama anahtarı: yh_templates
+  ✓ depolama anahtarı: __yh_probe
+  ✓ depolama anahtarı: __yh_diag
+  ✓ aiNegotiate kanonik fonksiyonu var
+  ✓ AI-AI pact yolu aiNegotiate + aiProposeTerms kullanıyor
+  ✓ AI-AI ally yolu aiNegotiate + aiProposeTerms kullanıyor
+  ✓ AI-AI yolunda DOĞRUDAN executeDeal KALMADI
+  ✓ aiNegotiate oyuncuyu hedef almıyor (kod güvencesi)
+  ✓ oyuncuya giden teklif yolu UI.aiOffer olarak KORUNDU
+  ✓ 86C.2 transaction mimarisi duruyor
+  ✓ SITUATIONS kataloğu duruyor
+  ✓ situationsTick tanımı duruyor
+  ✓ situationsTick çağrısı PASİF
+  ✓ DURUMLAR sekmesi gizli
+  ✓ audio.js byte-for-byte aynı — 804226980179698a
+  ✓ manifest.json byte-for-byte aynı — 6b8305490e9a55e9
+  ✓ map altyapısı sabit; hedef seçimi 93A referansında
+
+B. KABUL / RET / KARŞI TEKLİF
+  ✓ cömert teklif → KABUL ve uygulandı
+  ✓ kötü teklif → RET (alıcı gerçekten reddedebiliyor) — ⚡ 5000 Enerji için elindekiler yetersiz. Yaklaşık 
+  ✓ ret gerekçesi anlamlı — ⚡ 5000 Enerji için elindekiler yetersiz. Yaklaşık 
+  ✓ reddedilen teklif SIFIR mutasyon bıraktı
+  ✓ yakın teklif → KARŞI TEKLİF turu açıldı — karsi-red · ek: res,res
+  ✓ karşı teklif sonucu net (kabul veya ret) — karsi-red
+  ✓ karşı teklif reddedilirse mutasyon yok
+  ✓ EN FAZLA İKİ TUR — sonsuz döngü yok — maxTur 2
+  ✓ müzakere DETERMİNİSTİK
+  ✓ geçersiz teklif müzakereye girmeden reddedildi — Bilinmeyen madde türü: ZEHIR
+  ✓ oyuncu HEDEF olarak alınmıyor
+  ✓ oyuncu KAYNAK olarak da alınmıyor
+  ✓ oyuncu denemeleri sıfır mutasyon bıraktı
+
+C. TEMAS FIXTURE'I DETERMİNİSTİK Mİ
+  ✓ ÖLÇÜM: oyun başında AI-AI teması sıfıra yakın — 0
+  ✓ fixture tüm yaşayan çiftlerde temas kurdu — 28/28
+  ✓ fixture RNG TÜKETMEDİ (deterministik)
+  ✓ fixture korsan temasını DEĞİŞTİRMEDİ — 8 → 8
+
+D. 3 SEED × 360 AY AI–AI DİPLOMASİ
+  ✓ seed 11: 360 ay HATASIZ — ok
+  ✓ seed 11: AI–AI müzakere GERÇEKTEN çalıştı — 77 müzakere
+  ✓ seed 11: her müzakere kanonik executeDeal'e düşmedi — negot 77 exec 77
+  ✓ seed 11: NaN veya negatif stok YOK
+  ✓ seed 11: galaksi kalıcı savaşa KİLİTLENMEDİ — 9/28
+  ✓ seed 11: galaksi kalıcı ittifaka KİLİTLENMEDİ — 0/28
+  ✓ seed 11: Situation tetiklenmedi — 0
+  ✓ seed 11: imparatorluklar hayatta — 8
+  ✓ seed 99: 360 ay HATASIZ — ok
+  ✓ seed 99: AI–AI müzakere GERÇEKTEN çalıştı — 114 müzakere
+  ✓ seed 99: her müzakere kanonik executeDeal'e düşmedi — negot 114 exec 113
+  ✓ seed 99: NaN veya negatif stok YOK
+  ✓ seed 99: galaksi kalıcı savaşa KİLİTLENMEDİ — 7/28
+  ✓ seed 99: galaksi kalıcı ittifaka KİLİTLENMEDİ — 3/28
+  ✓ seed 99: Situation tetiklenmedi — 0
+  ✓ seed 99: imparatorluklar hayatta — 8
+  ✓ seed 404: 360 ay HATASIZ — ok
+  ✓ seed 404: AI–AI müzakere GERÇEKTEN çalıştı — 86 müzakere
+  ✓ seed 404: her müzakere kanonik executeDeal'e düşmedi — negot 86 exec 86
+  ✓ seed 404: NaN veya negatif stok YOK
+  ✓ seed 404: galaksi kalıcı savaşa KİLİTLENMEDİ — 8/28
+  ✓ seed 404: galaksi kalıcı ittifaka KİLİTLENMEDİ — 4/28
+  ✓ seed 404: Situation tetiklenmedi — 0
+  ✓ seed 404: imparatorluklar hayatta — 8
+
+  ── SİMÜLASYON TABLOSU (temas fixture'ı) ──
+  seed 11: müzakere 77 → kabul 75 · ret 0 · karşı 2 (kabul 2/ret 0) · geçersiz 0
+            exec ok 77 / red 0 | savaş 9 pact 8 ally 0 nap 7 (çift 28) · ort.ilişki -46 · 6.8 ms/ay
+  seed 99: müzakere 114 → kabul 109 · ret 0 · karşı 5 (kabul 4/ret 1) · geçersiz 0
+            exec ok 113 / red 0 | savaş 7 pact 11 ally 3 nap 9 (çift 28) · ort.ilişki -42.4 · 8.4 ms/ay
+  seed 404: müzakere 86 → kabul 83 · ret 0 · karşı 3 (kabul 3/ret 0) · geçersiz 0
+            exec ok 86 / red 0 | savaş 8 pact 11 ally 4 nap 6 (çift 28) · ort.ilişki -30.9 · 7.9 ms/ay
+
+E. TRANSACTION PERFORMANSI
+  ✓ tek transaction makul sürede (< 20 ms) — 3.21 ms
+  ✓ saf quote transaction'dan belirgin ucuz — 0.005 ms vs 3.21 ms
+  ── PERFORMANS: transaction 3.21 ms · quote 0.005 ms · 60 sistem, 28 filo, 9 devlet
+
+F. ÖNCEKİ FAZ REGRESYONLARI
+  ✓ 86B: kaynak çoğaltma KAPALI
+  ✓ 86B: boş anlaşma KAPALI
+  ✓ 86B: yürürlükteki antlaşma farm'ı KAPALI
+  ✓ 86C.2: rollback hâlâ TAM çalışıyor
+
+══════════════════════════════════════════
+  GEÇEN: 82   KALAN: 0
+══════════════════════════════════════════
+

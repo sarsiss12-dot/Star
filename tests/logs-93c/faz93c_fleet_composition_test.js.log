@@ -1,0 +1,47 @@
+✓ mixed 15/10/5 targets buy exact classes, no second charge
+✓ wrong-class surplus cannot mask a missing class
+✓ casualty is replaced in its class after genuine delivery
+✓ queue, moving and blocked counts stay separate per class
+✓ lower target preserves paid jobs and shows surplus
+✓ template save is pure with respect to money, orders and RNG
+✓ status query does not mutate save or RNG
+✓ invalid, fractional, enormous, unknown and civilian targets are rejected
+✓ zero targets disable purchases, without deleting current ships
+✓ foreign, stale, federal and delivery fleets cannot receive templates
+✓ locked classes remain planned but cannot consume money
+✓ captured yard orders do not hide replacement deficit
+✓ unlocked pending legacy rally jobs also count by class
+✓ far empty yard beats nearer overloaded yard
+✓ travel time beats straight line distance
+✓ parallel slots and partially complete orders are accounted
+✓ batch reservations distribute to earliest available yards
+✓ locked legacy queue jobs do not occupy active slots
+✓ build speed and hull size match production duration
+✓ sabotaged yards excluded without charge
+✓ closed route detour is actually dispatched
+✓ enemy territory is avoided even though ordinary war fleets may enter
+✓ visible hostile fleet causes safe detour; hidden one does not leak
+✓ threat entering next leg stops safely and keeps delivery count
+✓ gate shortcut reduces delivery ETA and is followed
+✓ nebula route timing respects slower movement
+✓ planner shares one graph per class across yards and every order
+✓ target movement, blocked retry and death retain 93B behavior
+✓ cancel and retarget free only the proper class deficit
+✓ save v8 preserves composition, auto, deadline and safe delivery
+✓ legacy save does not invent a template or turn auto on
+✓ corrupt template is dropped and deadline bounded without RNG consumption
+✓ auto disabled never buys, on buys once then counts pipeline
+✓ automatic purchase budget and per-day throttle are bounded
+✓ automatic next deadline survives load; no free retry burst
+✓ auto respects low resources and capacity while explicit order stays possible
+✓ auto off preserves already-paid orders
+✓ large manual requests are bounded then continue without duplicates
+✓ AI uses mixed template deficit rather than arbitrary chosen class
+✓ AI chooses empty distant yard and preserves its strategic reserve
+✓ AI does not merge away a template or pending target
+✓ ordinary local production does not silently overfill template fleet
+✓ real UI opens, saves values, preserves pause and rejects stale token
+✓ UI cancel leaves template and paused game unchanged
+✓ UI old world or removed fleet cannot save new template
+✓ panel shows class shortage, surplus, toggle and delivery estimate
+GEÇEN: 46 KALAN: 0

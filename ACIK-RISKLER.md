@@ -1,3 +1,100 @@
+# 93D.1 açık riskler ve kapsam sınırları
+
+- Fiziksel Android veya gerçek tarayıcı cihaz kabulü bu fazda yapılmadı.
+  Arayüz dosyaları değiştirilmedi; mevcut native-canvas, mobil giriş/yüzey ve
+  kayıt regresyonları çalıştırıldı. Bunlar fiziksel cihaz FPS ölçümü değildir.
+- Üç normal/orta haritada 120 aylık kampanya ölçüldü. Diğer zorluklar ve çok
+  uzun geç oyun için genellenmiş denge garantisi verilmez.
+- Bilim gemileri hâlâ korsanlara kaybedilebilir; 120/240/360 günlük yenileme
+  politikası harcamayı sınırlar, güvenli keşfi çözmez. İlgili ileri faz korunur.
+- Bazı devletlerin dönem sonu enerji veya alaşım neti negatiftir. Stok/bakım
+  dayanma koşulları üretimi sınırlar; savaş, ticaret ve sistem kaybının ileride
+  yeni kriz oluşturmasını tümüyle önlemez. Üç kampanyada satın alma/aylık
+  ölçümlerde negatif kaynak gözlenmedi, sıfır enerji stoklu yaşayan AI-ay sıfırdı.
+- Üretim değişikliği RNG tüketim sırasını ve sonraki savaşları 93D'ye göre
+  değiştirir. Aynı yeni kaynak/tohum tekrarı deterministiktir; eski sürümle
+  birebir aynı dünya akışı amaçlanmaz.
+- İnşa gemilerinin mevcut ayrı AI üretim yolu değiştirilmedi; normal donanma
+  planlayıcısının aylık 6/10 sınırı bu bağımsız yolu kapsamıyor.
+- Askerî üretim korunması muharebe başarısı garantisi değildir; seed11'de bir
+  devlet dönem sonunda gemisizdir. Kayıplar raporda gösterilir, bedava takviye yoktur.
+- Ticaret kaynak çoğalması iddiası öncelikli ayrı denetim olarak açık kalır.
+- 93E, 94A ve diğer ileri fazlar bu teslimde uygulanmadı.
+
+---
+Aşağıdaki bölümler önceki fazların tarihsel kayıtlarıdır.
+
+# 93D güncel riskler — 13 Ekim 2026
+
+- Yeni bilim ekranının otomatik davranış ve dokunma olay kontrolleri geçti;
+  fiziksel Android/PWA veya gerçek tarayıcı CSS/pinch/FPS kabulü yapılmadı.
+  Chromium executable ortamda yok. Kullanıcıdan manuel test beklenmedi.
+- Eski kayıtlarda tamamlanma tarihi yoksa bilinmez. 93D sonrasındaki gerçek
+  edinimler tarih/kaynak kaydeder; geçmişe dönük tarih tahmini yapılmaz.
+- Kadim Araştırma'ya yeni gelirin artık ulaşması eski hatalı davranışa göre
+  bilim zaferinin zamanını etkileyebilir. Mevcut maliyetler ve zafer eşikleri
+  değiştirilmedi; uzun kampanya dengelemesi ayrı ileri fazdır.
+- Doktrin/etik/tür simgeleri yalnız genişletme altyapısıdır. 93E gerçek
+  koşullarını ve yeni etkilerini kendi içerikleriyle birlikte uygulamalıdır.
+- Tam manuel araştırma durdurma/mod seçimi 93E kapsamıdır. 93D'de boş kuyruk
+  mevcut otomatik araştırmaya döner; diğer dallar boş yere bekletilmez.
+- 93C teslim süresi tahminleri, AI kayıp hedefi yeniden atama sınırı, ücretli
+  fazla siparişlerin manuel iptali ve geçmiş cihaz riskleri devam eder.
+- Kritik ticaret kaynak çoğalması iddiası henüz bu fazda araştırılmadı;
+  öncelikli bağımsız hata denetimi olarak yol haritasında tutuluyor.
+
+---
+Aşağıdaki faz riskleri tarihseldir; 93D için güncel durum yukarıdadır.
+
+# 93C güncel riskler — 13 Ekim 2026
+
+- Gerçek Android/PWA kabulü yapılmadı. Yerel Chromium yürütülebilir dosyası
+  bulunmadığı için tarayıcı geometrisi ölçülemedi; kontrollü DOM/native Canvas
+  kontrolleri fiziksel telefon kabulü sayılmaz.
+- Teslim süreleri anlık tahmindir; hareketli hedef ve gelecekte değişen savaş,
+  sınır, hız/araştırma, sabotaj koşulları kesin olarak öngörülemez.
+- Güvenli sevkiyat düşman cephesine tek gemi atmaz; hedefin güvenli alana
+  dönmesi gerekebilir. Gizli filolar bilinmez. AI'ın paused/lost sevkiyata
+  yeni stratejik hedef ataması hâlâ açık; gemiler korunur.
+- Kadro değişiminde eski ücretli siparişler otomatik iptal edilmez. Fazla
+  miktar görünür; kullanıcı tersaneden iptal/iade yapabilir. Manuel filo
+  birleşmesinde yok olan ID'nin eski sevkiyatları 93B yönetimine kalır.
+- AI açılmış sınıflarla kadroyu ilk kullanımda kurar; teknoloji sonrası
+  kadro yeniden tasarımı ve uzun kampanya dengesi ayrı geliştirmedir.
+- Rota hesabı sınıf başına paylaşılır; siparişler ve otomatik işlem sıklığı
+  sınırlıdır. Host süre ölçümü Android kare süresi garantisi değildir.
+- Bilim 93D/93E ve diğer ileri planlar bu sürümde uygulanmadı.
+
+---
+Aşağıdaki kayıtlar tarihseldir.
+
+# 93B risk durumu — 12 Ekim 2026
+
+- Kapalı rotada teslimat hedefi kaybı için yeni kalıcı bekleme yolu uygulandı.
+- Gerçek tarayıcı/Android yerleşim ve performans kabulü yapılmadı; sentetik
+  DOM ve native Canvas regresyonu bunun yerine geçmez.
+- Dört başarısız rota denemesinden sonra otomatik retry durur. Oyuncu
+  yeniden deneyebilir/yeniden hedefleyebilir/iptal edebilir. AI'ın sınırın
+  çok geç açılması veya ana filo kaybı sonrası yeni stratejik hedef ataması
+  bu fazda eklenmedi; gemiler güvenle bekler.
+- Retry bütçesi path aramalarını sınırlar; düşük donanımda çok büyük galaksi
+  için gerçek kare süresi ölçümü yapılmadı. Dijkstra algoritması değişmedi.
+- Bilim, ticaret ve geniş AI talepleri ileri plana kaydedildi; somut kaynak
+  çoğaltma hatası yeni kanıtla doğrulanırsa öncelik kazanır.
+- Fiziksel beyaz ekran, PWA güncellemesi ve tarihsel kabul açıkları aynıdır.
+
+---
+Aşağıdaki risk kayıtları tarihseldir; 93B hedef kaybı maddesinin güncel
+karşılığı yukarıdadır.
+
+# 93A risk durumu
+
+92D lojistik hedef/sayaç/ret mesajı bulguları 93A'da düzeltildi.
+93B: kapalı rotada hedef kaybı ve tekrar sevk; 93C: sınıf bazlı kadro.
+Eski karma hedefli kayıt fleet önceliğini korur; kullanıcı isterse tek
+tersanede açıkça Değiştir/Kaldır uygular. Android kabulü yapılmadı.
+
+---
 # 92D ek riskler
 
 - Android ve gerçek tarayıcı kabulü yapılmadı.

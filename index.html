@@ -269,8 +269,8 @@ html.pwa #tools{top:calc(var(--top) + 6px + env(safe-area-inset-top))}
 /* ═══ FAZ 65: BAĞIMSIZ RADAR BUTONU ═══
    Harita modlarından ayrı bir şalter. Kapalıyken soluk,
    açıkken turkuaz çerçeveli ve hafif nabız atar. */
-.tool.radarBtn{opacity:.5}
-.tool.radarBtn.on{opacity:1;color:#6ff2c8;
+.tool.radarBtn,.tool.logiBtn,.tool.fleetNamesBtn{opacity:.65}
+.tool.radarBtn.on,.tool.logiBtn.on,.tool.fleetNamesBtn.on{opacity:1;color:#6ff2c8;
   box-shadow:inset 0 0 0 1px rgba(111,242,200,.6),
              0 0 9px rgba(111,242,200,.28)}
 
@@ -954,6 +954,13 @@ body.fauxFull canvas#map{width:100vw !important;height:100dvh !important}
 }
 /* Dokunmatikte basılı tutma ipucu — .tipOn sınıfı JS ile eklenir */
 .tool{position:relative}
+.planetFoldHeader{display:flex;align-items:center;gap:6px;width:100%;min-height:36px;
+  border:0;background:transparent;color:var(--text,#b8c8dc);text-align:left;cursor:pointer;
+  font:inherit;padding:4px 0}
+.planetFoldName{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.planetFoldStats{font-size:10px;color:#9eacc1;flex-shrink:0}
+.planetFoldHeader[aria-expanded="true"]{margin-bottom:6px;border-bottom:1px solid var(--line)}
+.shipCancelBtn{min-width:32px;min-height:32px;flex-shrink:0}
 .tool.tipOn::after{
   content:attr(title);position:absolute;left:calc(100% + 8px);top:50%;
   transform:translateY(-50%);background:var(--hull);border:1px solid var(--phos);
@@ -1028,6 +1035,34 @@ body.fauxFull canvas#map{width:100vw !important;height:100dvh !important}
 @media(max-width:420px){.dcNav button{font-size:10px}.dcSelect{align-items:flex-start;flex-direction:column;gap:5px}.dcBody{padding-left:8px;padding-right:8px}}
 @media(min-width:1200px){#diploPane .dcBox{max-height:92dvh}}
 
+/* FAZ 93D — scoped science tree, native scroll and 44px touch targets. */
+#diploPane .scienceBox{width:min(980px,100%);height:100%;max-height:100dvh;min-width:0;min-height:0}
+.scienceRoot{display:flex;flex:1;flex-direction:column;min-height:0;overflow:auto;font-size:12px}
+.scienceRoot button{font:inherit;color:var(--text,#d7e3f4);background:#101e30;border:1px solid #304763;border-radius:5px;min-height:44px;cursor:pointer}
+.scienceRoot button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.scienceRoot button:disabled{opacity:.35;cursor:default}
+.scienceRoot button.on{background:#253660;border-color:#a49aff}
+.scTabs{display:flex;flex-shrink:0;gap:4px;padding:4px 8px}
+.scTabs button{flex:1;min-width:0;padding:4px}
+.scSummary{flex-shrink:0;padding:5px 12px;color:#acbdd4;font-size:11px}
+.scSummary summary{cursor:pointer;padding:4px 0}
+.scTools{display:flex;align-items:center;gap:4px;padding:2px 8px;flex-shrink:0}
+.scTools span{flex:1;color:#a8bad2;font-size:11px}
+.scTools button{min-width:44px;padding:0 7px}
+.scViewport{flex:1;min-height:140px;overflow:auto;overscroll-behavior:contain;touch-action:pan-x pan-y;background:#080f1c;border-block:1px solid #23364c}
+.scExtent{position:relative}.scScene{position:absolute;left:0;top:0;transform-origin:0 0}
+.scLinks{position:absolute;inset:0;pointer-events:none}.scLinks path{fill:none;stroke:#4a607d;stroke-width:2}.scLinks path.done{stroke:#59a984}
+.scienceRoot .scNode{position:absolute;width:188px;height:112px;text-align:left;padding:8px;display:flex;flex-direction:column;gap:3px;overflow:hidden;border-left:4px solid #657895;background:#121f30}
+.scNode small{font-size:10px;color:#9eb5d0}.scNode b{font-size:12px;line-height:1.3}.scNode span{font-size:10px}.scNode em{font-size:10px;font-style:normal;color:#9badc7;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.scienceRoot .scNode.done{border-color:#59a984;background:#122b29}.scienceRoot .scNode.active{border-color:#af9eff;background:#292645}.scienceRoot .scNode.planned{border-color:#63aeed}.scienceRoot .scNode.locked{border-style:dashed}.scienceRoot .scNode.focused{outline:2px solid #e4eaff;outline-offset:2px}
+.scDetail{flex-shrink:0;max-height:154px;overflow:auto;padding:6px 12px;background:#101b2a;line-height:1.5}.scDetail summary{cursor:pointer;min-height:28px;font-weight:600}.scDetail button{padding:3px 8px;margin:3px 3px 0 0}.scRoute{padding-left:24px}
+.scQueue{flex-shrink:0;border-top:1px solid #30405b}.scienceRoot .scQueueToggle{width:100%;border:0;border-radius:0;text-align:left;padding:4px 12px;min-height:44px}
+.scQueueTrack{display:flex;gap:6px;overflow-x:auto;overscroll-behavior:contain;padding:0 8px 6px;scroll-snap-type:x proximity}.scGoal{flex:0 0 210px;border:1px solid #385170;border-radius:6px;scroll-snap-align:start;overflow:hidden}.scienceRoot .scGoalFocus{display:block;width:100%;text-align:left;padding:5px 8px;border:0;border-radius:0}.scGoal small{display:block;font-size:10px;color:#aebfda;padding-top:2px}.scReorder{display:flex}.scReorder button{flex:1;border-radius:0;min-width:44px}.scQueueEmpty{margin:5px;padding:4px;color:#9fb1c9}
+.scHistory{flex:1;min-height:140px;overflow:auto;padding:6px 10px}.scFilters{display:flex;gap:4px;flex-wrap:wrap}.scFilters button{padding:4px 9px}.scHistoryItem{padding:12px 4px;border-bottom:1px solid #2a3951}.scHistoryItem small{display:block;color:#9fafc5;margin-top:5px}.scHistoryItem p{margin:7px 0;line-height:1.6}
+@media(min-width:1200px){#diploPane .scienceBox{height:92dvh;max-height:92dvh}}
+@media(max-height:500px){.scDetail{max-height:90px}.scSummary{padding-block:0}.scViewport{min-height:100px}.scQueueTrack{max-height:96px}.scTabs{padding-block:2px}}
+
+/* END FAZ 93D SCIENCE */
 </style>
 </head>
 <body>

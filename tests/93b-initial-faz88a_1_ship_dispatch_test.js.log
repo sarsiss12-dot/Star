@@ -1,0 +1,37 @@
+✓ 0: iki filonun aynı tersanedeki siparişleri karışmaz
+✓ 1: iki filonun aynı tersanedeki siparişleri karışmaz
+✓ tamamlama genel toplanma noktasını değiştirmez
+✓ aynı eksik için tekrar düğmesi ikinci bedeli kesmez
+✓ yoldaki ikmal de beklenen gemi sayısına dahildir
+✗ başarısız sevk gemiyi tersanede bırakır, sevk ilan etmez — Expected values to be strictly equal:
+
+false !== true
+
+✓ üretimde hareketli hedefin güncel varışı seçilir
+✓ yok olmuş filo siparişi eski konuma yollanmaz
+✓ genel rally yabancı filo id içerirse yabancıya gemi verilmez
+✓ yabancı filoya ikmal siparişi kaynak harcamadan reddedilir
+✓ sabotajlı ilk tersane diğer geçerli tersaneyi engellemez
+✓ ulaşılamayan tersane sipariş ve bedel yaratmaz
+✓ v8 iki ayrı sipariş hedefini yükleme sonrası korur
+✓ eski hedefsiz kuyruk mevcut genel rally ile çalışır
+✓ sivil üretim askeri rally tarafından yutulmaz
+✓ yabancı tersanenin rally ayarı değiştirilemez
+✓ geçersiz rally hedefi eski tercihi silmez
+✓ vasal kapı izni gerçek kapı kenarından geçişe yeter
+✓ vasal kapı hakkı kapısız sıradan sınıra izin yaratmaz
+✓ oyuncu otomatik keşfi ulaşılamayan en yakın hedefe takılmaz
+✓ AI keşfi ulaşılamayan en yakın hedef yerine geçerli hedefi seçer
+✓ gerçek AI üretim kapısı bir gemiyi eksik filoya ayırır
+✓ AI hedef bulamazsa mevcut yerel üretim devam eder
+✓ AI dolu veya yoldaki ikmalle tamamlanmış filoya ikinci sipariş vermez
+✗ üretim sonrası sınır kapanırsa gemi ve kaynak sonucu tutarlı kalır — Expected values to be strictly equal:
+
+false !== true
+
+✓ tersanede çatışan ana filoya anında gemi eklenmez
+✓ başarılı sevk gerçek bedeli bir kez keser ve RNG tüketmez
+✓ 0: kendi sistemindeki taranmamış hedefte tarama başlar
+✓ 1: kendi sistemindeki taranmamış hedefte tarama başlar
+✓ AI sürmekte olan taramayı başa sarmaz
+GEÇEN: 28 KALAN: 2

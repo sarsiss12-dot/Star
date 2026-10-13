@@ -1,0 +1,147 @@
+
+A. YAPI VE DOSYA SINIRI
+  ✓ node --check ai.js
+  ✓ node --check audio.js
+  ✓ node --check combat.js
+  ✓ node --check diplomacy.js
+  ✓ node --check economy.js
+  ✓ node --check main.js
+  ✓ node --check map.js
+  ✓ node --check sw.js
+  ✓ node --check ui.js
+  ✓ sw cache = 'stars-v93c'
+  ✓ kayıt sürümü v:8 KALDI
+  ✓ depolama anahtarı korundu: yildiz:save
+  ✓ depolama anahtarı korundu: yh_audio
+  ✓ depolama anahtarı korundu: yh_advisor
+  ✓ depolama anahtarı korundu: yh_autoev
+  ✓ depolama anahtarı korundu: yh_bg
+  ✓ depolama anahtarı korundu: yh_radar
+  ✓ depolama anahtarı korundu: yh_templates
+  ✓ depolama anahtarı korundu: __yh_probe
+  ✓ depolama anahtarı korundu: __yh_diag
+  ✓ kanonik fonksiyon var: normalizeDeal
+  ✓ kanonik fonksiyon var: dealValidity
+  ✓ kanonik fonksiyon var: dealQuote
+  ✓ kanonik fonksiyon var: executeDeal
+  ✓ kanonik fonksiyon var: dealCost
+  ✓ kanonik fonksiyon var: dealExpired
+  ✓ kanonik fonksiyon var: dealTimeLeft
+  ✓ kanonik fonksiyon var: treatyAlreadyActive
+  ✓ canDeliver ince sarmalayıcı (ayrı formül kopyası değil)
+  ✓ TEKNOLOJİ HIRSIZLIĞI kendi metoduna taşındı
+  ✓ tech theft OPERASYONLAR görünümünde render ediliyor
+  ✓ stealTech için İKİNCİ render yolu yok — 1
+  ✓ sabotageChance etiketi düzeltildi (genel "operasyon başarı" değil)
+  ✓ OPS anlatımı korundu (etki kesin, zar yalnız ifşa)
+  ✓ diploAct artık RNG ile antlaşma imzalamıyor
+  ✓ pactOpen kanonik executeDeal kullanıyor
+  ✓ peaceOpen çift pyes hook hatası düzeltildi
+  ✓ spynet müzakere masasında erişilebilir
+  ✓ nap müzakere masasında erişilebilir
+  ✓ fesih onay ekranı var
+  ✓ karşı teklif ayrı kartta (orijinal liste push edilmiyor)
+  ✓ SITUATIONS kataloğu duruyor
+  ✓ situationsTick çağrısı PASİF
+  ✓ DURUMLAR sekmesi gizli
+  ✓ 200 ayda situation tetiklenmedi — 0
+  ✓ audio.js byte-for-byte aynı — 804226980179698a
+  ✓ manifest.json byte-for-byte aynı — 6b8305490e9a55e9
+
+B. ÖN DENETİMDEKİ İSTİSMARLARIN SONRASI
+  ✓ iki 800 satırı TEK 1600 maddesine birleştirildi — 1 satır · 1600
+  ✓ 1000 stok karşısında toplam 1600 REDDEDİLDİ — T → Mineral: toplam 1600 gerekiyor, stok 1000
+  ✓ hiçbir tarafın kaynağı değişmedi (toplam değişimi 0) — değişim 0
+  ✓ reddedilen teklif RNG tüketmedi
+  ✓ boş anlaşma 10 kez REDDEDİLDİ
+  ✓ boş anlaşma ilişki üretmedi (0) — 0
+  ✓ boş anlaşma Etki harcamadı
+  ✓ boş anlaşma RNG tüketmedi ve log üretmedi
+  ✓ nap: yalnız İLK imza geçerli, sonraki ikisi reddedildi — ilk=true ikinci=false
+  ✓ nap: ilişki çiftlenmedi ve ek maliyet kesilmedi — ilişki 0→0 · ek maliyet 0
+  ✓ pact: yalnız İLK imza geçerli, sonraki ikisi reddedildi — ilk=true ikinci=false
+  ✓ pact: ilişki çiftlenmedi ve ek maliyet kesilmedi — ilişki 15→15 · ek maliyet 0
+  ✓ ally: yalnız İLK imza geçerli, sonraki ikisi reddedildi — ilk=true ikinci=false
+  ✓ ally: ilişki çiftlenmedi ve ek maliyet kesilmedi — ilişki 55→55 · ek maliyet 0
+  ✓ intel: yalnız İLK imza geçerli, sonraki ikisi reddedildi — ilk=true ikinci=false
+  ✓ intel: ilişki çiftlenmedi ve ek maliyet kesilmedi — ilişki 0→0 · ek maliyet 0
+  ✓ spynet: yalnız İLK imza geçerli, sonraki ikisi reddedildi — ilk=true ikinci=false
+  ✓ spynet: ilişki çiftlenmedi ve ek maliyet kesilmedi — ilişki 0→0 · ek maliyet 0
+  ✓ passage: yalnız İLK imza geçerli, sonraki ikisi reddedildi — ilk=true ikinci=false
+  ✓ passage: ilişki çiftlenmedi ve ek maliyet kesilmedi — ilişki 0→0 · ek maliyet 0
+
+C. TEKİLLEŞTİRME VE GEÇERSİZ REFERANS
+  ✓ aynı sistem çoğaltılamıyor (2 → 1) — 1
+  ✓ aynı teknoloji çoğaltılamıyor (2 → 1) — 1
+  ✓ simetrik nap tek kanonik maddeye indirildi — {"give":1,"want":0}
+  ✓ bozuk/negatif/sıfır madde düşürüldü, geçerli kaldı — [{"t":"res","r":"min","v":10}] · düşen 4
+  ✓ geçersiz sistem referansı KISMİ uygulama yapmadı — değişim 0
+
+D. 14 DEAL_KINDS HATTI
+  ✓ tür "res": normalize→validate→quote→execute hattı çalıştı — valid=true quote=true exec=true maliyet=0
+  ✓ tür "tribute": normalize→validate→quote→execute hattı çalıştı — valid=true quote=true exec=true maliyet=0
+  ✓ tür "sys": normalize→validate→quote→execute hattı çalıştı — valid=true quote=true exec=true maliyet=0
+  ✓ tür "tech": normalize→validate→quote→execute hattı çalıştı — valid=true quote=true exec=true maliyet=0
+  ✓ tür "lux": normalize→validate→quote→execute hattı çalıştı — valid=true quote=true exec=true maliyet=0
+  ✓ tür "peace": normalize→validate→quote→execute hattı çalıştı — valid=true quote=true exec=true maliyet=30
+  ✓ tür "nap": normalize→validate→quote→execute hattı çalıştı — valid=true quote=true exec=true maliyet=0
+  ✓ tür "pact": normalize→validate→quote→execute hattı çalıştı — valid=true quote=true exec=true maliyet=40
+  ✓ tür "ally": normalize→validate→quote→execute hattı çalıştı — valid=true quote=true exec=true maliyet=90
+  ✓ tür "warOn": normalize→validate→quote→execute hattı çalıştı — valid=true quote=true exec=true maliyet=0
+  ✓ tür "peaceWith": normalize→validate→quote→execute hattı çalıştı — valid=true quote=true exec=true maliyet=0
+  ✓ tür "intel": normalize→validate→quote→execute hattı çalıştı — valid=true quote=true exec=true maliyet=45
+  ✓ tür "spynet": normalize→validate→quote→execute hattı çalıştı — valid=true quote=true exec=true maliyet=120
+  ✓ tür "passage": normalize→validate→quote→execute hattı çalıştı — valid=true quote=true exec=true maliyet=0
+  ✓ 14 türün tamamı sınandı — 14
+
+E. KANONİK MALİYET POLİTİKASI
+  ✓ maliyet tablosu korundu (peace 30 · pact 40 · ally 90) — {"peace":30,"pact":40,"ally":90,"intel":45,"spynet":120,"nap":0,"passage":0}
+  ✓ intel 45 · spynet 120 korundu
+  ✓ nap ve passage maliyetsiz (eski davranış)
+  ✓ çoklu maliyet: en pahalı tam + diğerleri %25 (pact 40 + peace 30 → 48) — 48
+  ✓ aynı tür iki listede de olsa TEK kez ücretlendirilir (45) — 45
+  ✓ maliyet yalnız GÖNDERENDEN ve TAM BİR KEZ kesildi — gönderen 30 · alan 0
+  ✓ geçersiz/boş teklifte SIFIR maliyet — 0
+
+F. HIZLI DÜĞMELER VE FESİH
+  ✓ hızlı peace: kaynak 0, RNG 0, doğru maddeyle müzakere açıldı — etki 0 · [{"t":"peace"}]
+  ✓ hızlı pact: kaynak 0, RNG 0, doğru maddeyle müzakere açıldı — etki 0 · [{"t":"pact"}]
+  ✓ hızlı ally: kaynak 0, RNG 0, doğru maddeyle müzakere açıldı — etki 0 · [{"t":"ally"}]
+  ✓ fesih onay ekranı açıldı ve sonucu önceden gösteriyor
+  ✓ fesih tek dokunuşta YALNIZ BİR kez uygulandı — ilişki −10
+
+G. TEKLİF ÖMRÜ VE KARŞI TEKLİF
+  ✓ süresi dolmamış teklif açılabiliyor — 15 ay kaldı
+  ✓ süresi DOLAN teklif uygulanmıyor ve nedeni söyleniyor — Teklifin süresi doldu
+  ✓ süresi dolan teklif kaynak değiştirmedi
+  ✓ born var expires yok → deterministik born+540 göçü
+  ✓ ikisi de yoksa süresiz sayılıyor (geriye uyum)
+  ✓ aiOffer teklife born + expires damgası ekledi
+  ✓ save/load kalan süreyi DEĞİŞTİRMEDİ — 18 → 18
+  ✓ yükleme oyun zamanını ilerletmedi
+  ✓ teklif ekranı YÖN metni gösteriyor
+  ✓ teklif ekranı kalan süre ve imzalama maliyetini gösteriyor
+  ✓ karşı teklif AYRI kartta; orijinal teklif korundu
+  ✓ oyuncunun düzenleme listesi ayrı nesne
+  ✓ "Düzenlemeye dön" orijinal kartı koruyor
+  ✓ reddetmek kaynak ve Etki değiştirmedi
+  ✓ ret sonrası karşı teklif kartı temizlendi
+
+H. SAFLIK VE GUARD
+  ✓ 200 normalize/validate/quote çağrısı kaynakları değiştirmedi
+  ✓ 200 çağrı ilişki/antlaşma/log değiştirmedi
+  ✓ 200 çağrı RNG tüketmedi
+  ✓ normalizeDeal GİRİŞ nesnesini değiştirmedi
+  ✓ executeDeal dış/bozuk çağrılarda guard'ları uyguladı — false,false,false,false
+  ✓ bozuk çağrılar kaynak değiştirmedi
+
+I. AI SMOKE (240 AY)
+  ✓ 240 aylık simülasyon hatasız — ok
+  ✓ hiçbir kaynakta NaN oluşmadı
+  ✓ log sınırları korundu — opLog 7 · hitLog 26
+  ✓ inbox 6 sınırında — 6
+
+══════════════════════════════════════════
+  GEÇEN: 124   KALAN: 0
+══════════════════════════════════════════
+

@@ -1,0 +1,81 @@
+
+A. KAYNAK VE SÖZDİZİMİ
+  ✓ node --check ai.js
+  ✓ node --check audio.js
+  ✓ node --check combat.js
+  ✓ node --check diplomacy.js
+  ✓ node --check economy.js
+  ✓ node --check main.js
+  ✓ node --check map.js
+  ✓ node --check sw.js
+  ✓ node --check ui.js
+  ✓ manifest.json geçerli JSON
+  ✓ script yükleme sırası değişmedi — main.js → map.js → combat.js → ai.js → diplomacy.js → economy.js → ui.js → audio.js
+  ✓ anahtar korundu: yildiz:save
+  ✓ anahtar korundu: yh_audio
+  ✓ anahtar korundu: yh_advisor
+  ✓ anahtar korundu: yh_autoev
+  ✓ anahtar korundu: yh_bg
+  ✓ anahtar korundu: yh_radar
+  ✓ anahtar korundu: yh_templates
+  ✓ anahtar korundu: __yh_probe
+  ✓ anahtar korundu: __yh_diag
+  ✓ sw cache stars-v ile başlıyor — stars-v93d
+
+B. NORMAL KARE PERFORMANSI
+  ✓ kurulum
+  ✓ 300 normal karede getImageData = 0 — 0 çağrı
+  ✓ buildBorders normal çalışmaya devam ediyor
+  ✓ anahtar değişince doku yeniden üretiliyor — ok
+
+C. KURTARMA SAĞLIK TESTİ
+  ✓ dolu canvas sağlıklı — healthy|true
+  ✓ tamamen şeffaf canvas YAKALANDI — blank-canvas|false
+  ✓ güvenilir nokta doluysa yanlış hata YOK — healthy|true
+  ✓ güvenilir sistem yoksa BELİRSİZ, boş kararı yok — inconclusive|true|belirsiz
+  ✓ getImageData hatası yakalandı — ctx-unreadable|false
+  ✓ tek kurtarmada getImageData ≤ 6 — 6 çağrı
+
+D. RETRY SINIRI
+  ✓ ilk başarısız + ikinci başarılı = 2 çizim — 2 çizim
+  ✓ sonsuz döngü yok — 2 çizim
+  ✓ iki deneme de başarısızsa durur — 2 çizim
+  ✓ DIAG doğru nedeni gösteriyor — cache:invalidate:hep+retry ## render:sebep=hep+retry · t=1791866355583
+
+E. RESIZE FIRTINASI
+  ✓ tek window resize dinleyicisi — 1 adet
+  ✓ 50 resize → tek ağır runRecovery — 1 runRecovery
+  ✓ layout geçişi olay başına 1 — 50 View.resize (50 olay × abone sayısı)
+  ✓ ikinci oyun rAF zinciri yok — 0 rAF
+
+F. DİĞER KURTARMA OLAYLARI
+  ✓ visibilitychange → runRecovery — 1 çağrı
+  ✓ pageshow → runRecovery — 1 çağrı
+  ✓ focus → runRecovery — 1 çağrı
+  ✓ orientationchange → runRecovery — 1 çağrı
+
+G. VERİ BÜTÜNLÜĞÜ
+  ✓ serialize kurtarma öncesi/sonrası anlamsal olarak aynı — AYNI
+  ✓ ralli korundu — rally-ok
+  ✓ loopBuild korundu — loop-ok
+  ✓ UI.tab hâlâ function — function
+  ✓ kayıt mantıksal olarak yüklenebiliyor — yuklendi
+  ✓ _reach yüklemede yeniden üretildi — 11/11 (sahipli/reach)
+
+H. ÖLÇÜM RAPORU
+  ✓ forceRedraw tanımı bulundu — function forceRedraw(sebep){
+  ✓ forceRedraw scheduleRecovery'ye delege ediyor
+  ✓ forceRedraw içinde doğrudan View.draw YOK
+  ✓ forceRedraw içinde ciz() zinciri YOK
+  ✓ forceRedraw içinde requestAnimationFrame YOK
+  1. 300 normal karede getImageData ....... 0
+  2. tek başarılı recovery'de getImageData . 6
+  3. retry gerektiren recovery: çizim ..... 2
+  4. 50 resize → View.resize 50 · View.draw 0 · runRecovery 1
+  5. forceRedraw gövdesi: 0 resize · 0 draw · 0 ciz() — Faz 83.4'te sarmalayıcıya indirildi
+  6. window resize dinleyicisi ............ 1
+
+══════════════════════════════════════════
+  GEÇEN: 54   KALAN: 0
+══════════════════════════════════════════
+

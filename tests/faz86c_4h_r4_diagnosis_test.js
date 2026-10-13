@@ -153,7 +153,7 @@ for(const f of fs.readdirSync(KOK).filter(x=>x.endsWith('.js'))){
 }
 {
   const mn=oku('main.js'), mp=oku('map.js'), ui=oku('ui.js'), sw=oku('sw.js');
-  ok("sw cache = 'stars-v92d'", /const CACHE = 'stars-v92d'/.test(sw));
+  ok("sw cache = 'stars-v93d1'", /const CACHE = 'stars-v93d1'/.test(sw));
   ok('sw KABUK/fetch/activate korundu', /KABUK/.test(sw) &&
      /addEventListener\('fetch'/.test(sw) && /addEventListener\('activate'/.test(sw));
   ok('kayıt sürümü v:8 KALDI', /v:8, cfg:G\.cfg/.test(mn));
@@ -179,7 +179,7 @@ for(const f of fs.readdirSync(KOK).filter(x=>x.endsWith('.js'))){
      /rebuildCanvasSurface\(sebep \+ '\+resize'\)/.test(mn));
   /* Tanı */
   ok('tanı: renderReport var', /function renderReport\(/.test(mn));
-  ok('tanı: BUILD_ID güncel', /const BUILD_ID = '92d';/.test(mn));
+  ok('tanı: BUILD_ID güncel', /const BUILD_ID = '93d1';/.test(mn));
   ok('tanı: olay izi var', /function izOlay\(/.test(mn));
   ok('tanı: ilk başarısızlık korunuyor', /function ilkHataKaydet\(/.test(mn));
   ok('tanı: çizim aşaması izleniyor', /this\._drawStage = 'tamam'/.test(mp));
@@ -199,8 +199,10 @@ for(const f of fs.readdirSync(KOK).filter(x=>x.endsWith('.js'))){
   try{ ref=JSON.parse(fs.readFileSync(path.join(KOK,'tests','referans-sha.json'),'utf8')); }catch(e){}
   ['audio.js','manifest.json','map.js',
    'index.html'].forEach(f=>{
+    if(f==='index.html'){ok('93D bilim CSS ve değişmeyen 93C HTML',
+      require('./helpers/ui-preservation').isReviewedUI(oku(f)));return;}
     // 91D: bütün map.js yerine değişmemesi gereken altyapı bölümleri kilitli.
-    if(f==='map.js'){ok('map altyapısı 91C ile aynı',
+    if(f==='map.js'){ok('map altyapısı sabit; hedef seçimi 93A referansında',
       require('./helpers/map-preservation').isMapInfrastructurePreserved(oku(f)));return;}
     if(!ref||!ref[f]){ ok(f+' referansı var', false); return; }
     const h=crypto.createHash('sha256').update(fs.readFileSync(path.join(KOK,f))).digest('hex');
@@ -443,7 +445,7 @@ console.log('\nF. TANI RAPORU HANGİ DALLARI AYIRIYOR');
      Y.cvEsles===true && Y.gEsles===true);
   const I=d.iz||{};
   ok('rapor build, olay izi, nesil ve jeton içeriyor',
-     I.build==='92d' && /vis>focus/.test(I.olaylar||'') &&
+     I.build==='93d1' && /vis>focus/.test(I.olaylar||'') &&
      I.gen===true && I.tok===true, JSON.stringify(I));
   ok('rapor viewport/canvas/DPR içeriyor',
      I.dpr!==undefined && !!I.cvPx, I.cvPx+' dpr '+I.dpr);

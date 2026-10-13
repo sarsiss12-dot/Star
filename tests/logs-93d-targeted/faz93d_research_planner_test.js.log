@@ -1,0 +1,34 @@
+✓ all 40 canonical routes are valid, complete, unique and topological
+✓ multiple selections get global numbers; repeated tap removes and renumbers
+✓ reordering changes priority without making prerequisite targets
+✓ remote armored hull has exactly four missing prerequisites
+✓ automatic route advances to target and then next planned target
+✓ prerequisite counter updates after each completion
+✓ shared prerequisites are counted once against earlier plans
+✓ already owned prerequisites do not count
+✓ three branches work in parallel regardless of main goal numbers
+✓ cross-branch prerequisites and shared diamonds progress automatically
+✓ cycle is safely rejected without changing queue or research points
+✓ broken dependency and malformed dependency list are reported
+✓ a previously saved broken goal can be removed
+✓ bad IDs, stale empires, completed goals and invalid moves cannot mutate queue
+✓ switching and repeated switching conserve technology-bound progress
+✓ UI.setTech uses the planner and retains outgoing progress
+✓ plan cancellation returns safely to automatic research
+✓ completion spends cost once and carries exact surplus to next technology
+✓ income, suspended work and spent costs balance across a full route
+✓ external tech grant returns suspended work once and records source
+✓ external grant of active target keeps progress and unblocks plan
+✓ new completions retain real game dates and sources
+✓ old researched technologies get no invented dates, filter uses branch
+✓ queue, suspended work and history survive Save v8 round trip
+✓ old v8 without research state preserves active progress and catalog
+✓ research restore is idempotent, sanitizes corrupt fields without duplicating active bank
+✓ all researched income flows into Ancient Research, never vanishes
+✓ last ordinary research surplus joins Ancient Research in same tick
+✓ science victory retains all technologies and Ancient Research gates
+✓ AI cannot accept player goals and continues selecting valid branches
+✓ AI scorer picks the same choices as canonical 93C
+✓ optional origin metadata supports only doctrine, ethic and species; adds no technologies
+✓ benefits reflect real effects and unlocks including superweapon and terraforming
+GEÇEN: 33 KALAN: 0

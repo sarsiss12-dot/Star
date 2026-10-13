@@ -18,6 +18,76 @@
 const UI = {
   cur:'sistem', modalPrevSpeed:1, alerts:[],
 
+  planetFolds(){
+    if(this._planetWorld!==G.sys){this._planetWorld=G.sys;this._planetFolds=new Set();}
+    return this._planetFolds;
+  },
+  fleetCompositionMenu(f){
+    if(!f || fleetDeliveryTarget(G.p,f)===null || hasShipment(f) || f.federal || f.guardLocked)return;
+    const token=this._compositionSeq=(this._compositionSeq||0)+1;
+    const counts=f.composition?{...f.composition.counts}:{};
+    if(!f.composition)for(const sh of f.ships)if(fleetTemplateClasses().includes(sh.c))counts[sh.c]=(counts[sh.c]||0)+1;
+    const speed=G.speed;
+    this.openModal(`<div class="mhd">FİLO BİLEŞİMİ · ${esc(f.name||'Filo')}</div><div class="mbd">
+      <div class="mini">Her sınıfın hedef sayısını yaz. Toplam en fazla ${FLEET_TEMPLATE_LIMIT} gemi.
+      Kaydetmek sipariş vermez. Tek takviye emri en fazla 30 gemi sipariş eder. Mevcut gemiler ve ödenmiş siparişler korunur; fazlalık varken yeni üretim yapılmaz.</div>
+      ${fleetTemplateClasses().map(c=>{const access=shipBuildAccess(G.p,c);return `<div class="box">
+        <label for="fc-${c}" class="row"><span>${esc(SHIPS[c].n)}</span>
+        <input id="fc-${c}" type="number" inputmode="numeric" min="0" max="${FLEET_TEMPLATE_LIMIT}" step="1"
+          value="${counts[c]||0}" style="width:80px;min-height:44px;font-size:16px" aria-label="${esc(SHIPS[c].n)} hedef sayısı"></label>
+        ${access.ok?'':'<div class="mini">'+esc(access.why)+'</div>'}</div>`;}).join('')}
+      <label style="display:flex;gap:10px;align-items:center;min-height:44px"><input id="fc-auto" type="checkbox"
+        ${f.composition&&f.composition.auto?'checked':''}> Otomatik takviye</label>
+      <div class="mini">Açıkken eksikler küçük partilerle tamamlanır. Kasa / donanma kapasitesi sınırında bekler.
+      Kapatmak verilmiş siparişleri iptal etmez.</div>
+      </div><div class="mft"><button class="ch" data-a="closem">VAZGEÇ</button>
+      <button class="ch" style="min-height:44px" data-a="compositionSave" data-x="${token}">BİLEŞİMİ KAYDET</button></div>`);
+    this._compositionPending={token,f,speed,world:G.sys};
+  },
+  compositionPanel(f,r){
+    if(!r.rows)return '';
+    return `<div class="ph">SINIF BAZLI BİLEŞİM</div>`+r.rows.filter(x=>x.target||x.current||x.queued||x.inTransit).map(x=>
+      `<div class="box"><div class="bt"><span>${esc(SHIPS[x.cls].n)}</span><b>${x.current} / ${x.target}</b></div>
+       <div class="mini">Üretimde / sırada: ${x.queued} · Yolda / bekliyor: ${x.inTransit}${x.waiting?' ('+x.waiting+' bekliyor)':''}</div>
+       <div class="mini">Eksik: ${x.missing}${x.excess?' · Fazla: '+x.excess:''}${x.missing&&!x.buildable?' · '+esc(x.why):''}</div></div>`).join('')+
+      `<button class="abtn" style="min-height:44px" data-a="compositionAuto" data-x="${f.id}">OTOMATİK TAKVİYE: ${r.auto?'AÇIK':'KAPALI'}</button>
+       <div class="mini">Otomatik üretim kasa / kapasite sınırında bekler. Siparişler ve bekleyen sevkiyatlar eksikten düşülür.</div>`;
+  },
+  shipmentMenu(f){
+    if(!f || f.e!==0 || !G.fleets.includes(f) || !hasShipment(f))return;
+    const token=this._shipmentSeq=(this._shipmentSeq||0)+1;
+    const choices=[];
+    for(const x of G.fleets)if(x!==f && x.e===0 && x.ships.length && !hasShipment(x))
+      choices.push({target:{fleet:x.id},label:'Filo: '+(x.name||x.id)});
+    for(const x of G.sys)if(x.seen.includes(0))choices.push({target:{sys:x.id},label:'Sistem: '+x.name});
+    const speed=G.speed;
+    this.openModal(`<div class="mhd">SEVKİYATI YÖNET</div><div class="mbd">
+      <div class="lead">${esc(shipmentStatus(f))}</div>
+      <div class="mini">İptal, tamamlanmış gemileri korur; kaynak iadesi yapmaz. Yolculuk başladıysa mevcut bacak tamamlanır. Yeni hedefe giden rota kapalıysa gemiler bekler.</div>
+      <button class="abtn" data-a="shipmentApply" data-x="${token}:retry">YENİDEN DENE</button>
+      <button class="abtn" data-a="shipmentApply" data-x="${token}:cancel">SEVKİYATI İPTAL ET</button>
+      <div class="ph">YENİ HEDEF</div>
+      ${choices.map((c,i)=>`<button class="abtn" data-a="shipmentApply" data-x="${token}:${i}">${esc(c.label)}</button>`).join('')}
+      </div><div class="mft"><button class="ch" data-a="closem">VAZGEÇ</button></div>`);
+    this._shipmentPending={token,f,choices,speed,world:G.sys};
+  },
+  shipCancelDialog(sys,orders,all){
+    const quote=shipCancellationQuote(G.p,sys,orders);
+    if(!quote.ok){say(quote.why,'war');return;}
+    const token=this._shipCancelConfirmSeq=(this._shipCancelConfirmSeq||0)+1;
+    const speed=G.speed;
+    const refund=Object.entries(quote.refund).map(([r,v])=>RES[r].ico+' '+v).join(' · ')||'Yok';
+    this.openModal(`<div class="mhd"><span>GEMİ ÜRETİMİNİ İPTAL ET</span></div>
+      <div class="mbd"><div class="lead">${quote.count} geminin üretimi iptal edilecek.</div>
+      <div class="row"><span>Kaynak iadesi</span><b>${esc(refund)}</b></div>
+      <div class="mini">Yeni siparişlerin ödenmiş bedeli tamamen iade edilir; üretim ilerlemesi kaybolur.</div>
+      ${quote.legacy?'<div class="mini" style="color:#ff9b3d">'+quote.legacy+' eski siparişin ödeme kaydı yok. Bu işler iptal edilirse kaynak iadesi yapılmaz.</div>':''}
+      ${all?'<div class="mini">Bu tersanenin sürekli üretim döngüsü de kapanır. Diğer tersaneler ve yoldaki gemiler etkilenmez.</div>':''}</div>
+      <div class="mft"><button class="ch" data-a="closem"><div class="cht">Vazgeç</div></button>
+      <button class="ch" data-a="shipCancelConfirm" data-x="${token}"><div class="cht">${all?'TÜMÜNÜ':'SİPARİŞİ'} İPTAL ET</div></button></div>`);
+    this._shipCancelPending={token,sys,orders:orders.slice(),all,speed};
+  },
+
   boot(){
     if (this._booted) { this.tab('sistem'); return; }
     this._booted = true;
@@ -328,23 +398,73 @@ const UI = {
         this.keepScroll = true; this.refresh();
         break;
       }
+      case 'compositionEdit': this.fleetCompositionMenu(G.fleets.find(f=>f.id===+x));break;
+      case 'compositionSave': {
+        const p=this._compositionPending;
+        if(!p || String(p.token)!==String(x) || p.world!==G.sys)break;
+        const counts={};for(const c of fleetTemplateClasses())counts[c]=Number($('fc-'+c).value);
+        const r=setFleetTemplate(G.p,p.f,counts,!!$('fc-auto').checked);
+        if(!r.ok){say(r.why,'war');break;}
+        this.closeModal();say('Filo bileşimi kaydedildi');this.keepScroll=true;this.refresh();break;
+      }
+      case 'compositionAuto': {
+        const f=G.fleets.find(f=>f.id===+x);
+        if(f&&f.composition){const r=setFleetTemplate(G.p,f,f.composition.counts,!f.composition.auto);if(!r.ok)say(r.why,'war');}
+        this.keepScroll=true;this.refresh();break;
+      }
       case 'reinf': {
-        const fl = G.fleets.find(q => q.id === +x);
-        const r = (typeof reinforceFleet === 'function')
-          ? reinforceFleet(G.p, fl) : {ok:false, why:'—'};
-        if (!r.ok) say(r.why, 'war');
-        else say('⚓ İkmal siparişi verildi — ' + r.siparis + ' × ' +
-                 SHIPS[r.cls].n + ' (eksik ' + r.eksik + ')', 'sci');
-        this.keepScroll = true; this.refresh();
+        const fl=G.fleets.find(q=>q.id===+x),r=reinforceFleet(G.p,fl);
+        if(!r.ok)say(r.why,'war');
+        else {
+          const summary={};for(const q of r.orders)summary[q.cls]=(summary[q.cls]||0)+1;
+          say('⚓ Takviye siparişi — '+Object.entries(summary).map(([c,n])=>n+' × '+SHIPS[c].n).join(', ')+
+            (r.kalan?' · kalan eksik '+r.kalan:' · tüm eksikler siparişte/yolda'),'sci');
+          this._reinforcementReceipt={f:fl,world:G.sys,orders:r.orders};
+        }
+        this.keepScroll=true;this.refresh();break;
+      }
+      case 'planetFold': {
+        const [sid,pid]=String(x).split(':').map(Number),sys=G.sys[sid];
+        if(!sys || !sys.planets.some(p=>p.i===pid&&p.col))break;
+        const key=sid+':'+pid,folds=this.planetFolds();
+        if(folds.has(key))folds.delete(key);else folds.add(key);
+        this.keepScroll=true;this.refresh();break;
+      }
+      case 'shipmentMenu': this.shipmentMenu(G.fleets.find(f=>f.id===+x)); break;
+      case 'shipmentApply': {
+        const [token,choice]=String(x).split(':'),p=this._shipmentPending;
+        if(!p || String(p.token)!==token || p.world!==G.sys)break;
+        const target=p.choices[+choice];
+        const r=shipmentAction(G.p,p.f,choice==='retry'||choice==='cancel'?choice:'retarget',target&&target.target);
+        this._shipmentPending=null;
+        this.closeModal();this.setSpeed(p.speed);
+        if(!r.ok)say(r.why,'war');
+        this.refresh();break;
+      }
+      case 'shipCancel': {
+        const item=this._shipCancelRefs&&this._shipCancelRefs.get(String(x));
+        if(item)this.shipCancelDialog(item.sys,[item.order],false);
+        else say('Kuyruk değişti; siparişi yeniden seç.','war');
         break;
       }
-      case 'rallySet': {
-        /* Haritadan hedef seç: rota verme kipini kullan */
-        View.rallyFor = +x;
-        View.route = false;
-        say('📍 Toplanma noktası için haritadan bir sistem seç');
-        this.keepScroll = true; this.refresh();
+      case 'shipCancelAll': {
+        const sys=G.sys[+x];
+        if(sys)this.shipCancelDialog(sys,sys.queue.filter(q=>q.e===G.p.id),true);
         break;
+      }
+      case 'shipCancelConfirm': {
+        const pending=this._shipCancelPending;
+        if(!pending || String(pending.token)!==String(x))break;
+        const r=cancelShipOrders(G.p,pending.sys,pending.orders,pending.all);
+        this.closeModal();
+        say(r.ok?r.count+' gemi siparişi iptal edildi.':r.why,r.ok?'sci':'war');
+        this.keepScroll=true;this.refresh();break;
+      }
+      case 'rallySet': {
+        // Eski düğme/kısayol: filoya bağlı siparişin hedefi zaten filodur.
+        View.rallyFor=undefined;
+        say('Takviye bu filoyu izler; sabit toplanma noktası tersane panelinden seçilir.','sci');
+        this.keepScroll=true;this.refresh();break;
       }
       case 'radarTog': {
         RADAR_ON = !RADAR_ON;
@@ -538,6 +658,10 @@ const UI = {
         break;
       }
       case 'rallySysSet': {
+        const source=G.sys[+x];
+        if(!source||source.owner!==G.p.id){say('Kendi tersane sistemini seç','war');break;}
+        View.rallyFor=undefined;View.route=false;View.routed=false;
+        View.aimFleet=undefined;View.panoptFor=undefined;
         View.rallyForSys = +x;
         say('📍 Haritadan bir sistem seç — bu tersanenin ralli noktası olacak');
         this.keepScroll = true; this.refresh();
@@ -550,8 +674,8 @@ const UI = {
       }
       case 'rallySysClear': {
         const sy = G.sys[+x];
-        if (sy && sy.rally) delete sy.rally[0];
-        say('Ralli noktası kaldırıldı');
+        const result=setRally(G.p,sy,null);
+        say(result.ok?'Ralli noktası kaldırıldı':result.why,result.ok?'sci':'war');
         this.keepScroll = true; this.refresh();
         break;
       }
@@ -1417,7 +1541,7 @@ const UI = {
         this.refresh(); break;
       }
       case 'route': View.route = !View.route; View.routed = false; this.refresh(); break;
-      case 'stop': if (View.sel){ View.sel.path=[]; View.sel.ord=null; } this.refresh(); break;
+      case 'stop': if (View.sel && View.sel.e===0){ if(hasShipment(View.sel))shipmentAction(G.p,View.sel,'cancel');else View.sel.path=[]; View.sel.ord=null; } this.refresh(); break;
       case 'stance': if (View.sel) View.sel.stance = View.sel.stance==='agresif'?'savunma':'agresif'; this.refresh(); break;
       case 'merge': this.mergeFleets(); break;
       case 'split': this.splitFleet(); break;
@@ -1462,6 +1586,9 @@ const UI = {
       case 'cancelBuild': this.cancelBuild(x); break;
       case 'demolish': this.demolish(x); break;
       case 'ship': this.buildShip(x); break;
+      case 'scienceTab': case 'scienceNode': case 'scienceFocus': case 'scienceFilter':
+      case 'scienceQueue': case 'scienceRoute': case 'scienceMove': case 'scienceRemove': case 'scienceZoom':
+        this.scienceAction(a,x);break;
       case 'tech': this.setTech(x); break;
       case 'war': this.diploAct('war', +x); break;
       case 'peace': this.diploAct('peace', +x); break;
@@ -1778,6 +1905,7 @@ const UI = {
       fb.classList.toggle('on', !!myFed);
     }
     $('stardate').textContent = G.year + '.' + String(G.month).padStart(2,'0');
+    this.refreshScience();
     this.seltag();
   },
   refresh(){
@@ -1957,12 +2085,22 @@ const UI = {
     }
 
     h += `<div class="ph">GEZEGENLER</div>`;
+    const folds=this.planetFolds();
     for (const pl of s.planets){
       const def = PLANETS[pl.t];
       const hab = habOf(e, pl);
       const dep = pl.dep ? DEPOSITS.find(d=>d.id===pl.dep) : null;
       const mine = pl.owner === 0;
       h += `<div class="box">`;
+      if(pl.col){
+        const folded=folds.has(s.id+':'+pl.i),owner=territoryOwnerInfo(pl.owner);
+        h+=`<button class="planetFoldHeader" data-a="planetFold" data-x="${s.id}:${pl.i}"
+          aria-expanded="${!folded}" aria-label="${esc(pl.name)}: ${folded?'ayrıntıları aç':'ayrıntıları küçült'}">
+          <span>${folded?'▸':'▾'}</span><b class="planetFoldName">${esc(pl.name)}</b>
+          ${folded?`<span class="planetFoldStats">Nüfus ${Math.floor(pl.col.pop)} · Moral ${Math.round(pl.col.stab)}${pl.col.q&&pl.col.q.length?' · İnşa '+pl.col.q.length:''}</span>`:''}
+          ${owner?`<span class="flag" title="${esc(owner.name)}" style="background:${owner.col}"></span>`:''}</button>`;
+        if(folded){h+='</div>';continue;}
+      }
       h += `<div style="display:flex;gap:9px;align-items:flex-start">`;
       h += planetOrb(pl.t, pl.seed, 34);   // FAZ 59: CSS küre
       h += `<div style="flex:1;min-width:0">`;
@@ -1975,7 +2113,7 @@ const UI = {
         else if (freeSlots > 0)
           sym = `<span class="buildSym" style="color:#ff9b3d" title="Yer var ama işgücü yetersiz">🔨 ${freeSlots} ⚠</span>`;
       }
-      h += `<div class="bt"><span>${esc(pl.name)}${sym}</span>${pl.owner>=0?`<span class="flag" style="background:${G.emps[pl.owner].col}"></span>`:''}</div>`;
+      h += `<div class="bt"><span>${pl.col?'':esc(pl.name)}${sym}</span>${!pl.col&&pl.owner>=0?`<span class="flag" style="background:${G.emps[pl.owner].col}"></span>`:''}</div>`;
       h += `<div class="bd">${def.n}${def.k==='hab'?` · yaşanabilirlik <b style="color:${hab>=60?'#65e08a':hab>=35?'#ff9b3d':'#ff5f6d'}">%${hab}</b>`:''}${pl.sz?` · boyut ${pl.sz}`:''}</div>`;
       if(pl.col){
         const colonyOwner=territoryOwnerInfo(pl.owner);
@@ -2340,7 +2478,7 @@ const UI = {
         const ral = s.rally && s.rally[0];
         const hedefSy = ral ? (ral.sys !== undefined ? G.sys[ral.sys] : null) : null;
         const hedefFl = ral && ral.fleet !== undefined
-          ? G.fleets.find(q => q.id === ral.fleet && q.ships.length) : null;
+          ? G.fleets.find(q => q.id === ral.fleet && q.e===G.p.id && q.ships.length) : null;
         const bekliyor = View.rallyForSys === s.id;
         h += `<div class="ph">📍 RALLİ NOKTASI</div>`;
         if (bekliyor){
@@ -2350,10 +2488,10 @@ const UI = {
               ✕ VAZGEÇ</button></div>`;
         } else if (ral){
           h += `<div class="row"><span>Hedef</span>
-            <b style="color:#6ff2c8">${hedefFl ? esc(hedefFl.name || 'Filo')
-              : hedefSy ? esc(hedefSy.name) : '—'}</b></div>
-            <div class="mini">Yeni askeri gemiler otomatik olarak oraya intikal
-              eder${hedefFl ? ' ve filoya katılır' : ''}.</div>
+            <b style="color:#6ff2c8">${ral.fleet!==undefined ? (hedefFl ? 'Filo: '+esc(hedefFl.name||'Filo') : 'Hedef filo artık yok')
+              : hedefSy ? 'Sistem: '+esc(hedefSy.name) : 'Geçersiz sistem'}</b></div>
+            <div class="mini">${ral.fleet!==undefined ? 'Eski filo hedefi korunuyor; Değiştir ile sabit sistem seçebilirsin.' : 'Genel askeri üretim bu sisteme gider.'}
+            Özel takviye siparişleri kendi hedef filosunu izler. Sivil gemiler yerinde kalır.</div>
             <div class="act2">
               <button class="abtn" data-a="rallySysSet" data-x="${s.id}">
                 📍 DEĞİŞTİR</button>
@@ -2407,14 +2545,19 @@ const UI = {
         const totDays = Math.ceil(s.queue.reduce((a,q)=>a+q.left,0));
         h += `<div class="row"><span>Tersane yuvası</span><b style="color:#6ff2c8">${slots} paralel</b></div>`;
         h += `<div class="row"><span>Kuyrukta</span><b>${s.queue.length} gemi</b></div>`;
+        h += `<button class="abtn" data-a="shipCancelAll" data-x="${s.id}">✕ BU TERSANEDEKİ TÜM SİPARİŞLERİ İPTAL ET</button>`;
         h += `<div class="qbox">`;
+        this._shipCancelRefs=new Map();
         const active = activeShipQueue(s);
         s.queue.forEach((q,i)=>{
           const access = shipBuildAccess(G.emps[q.e], q.cls);
           const act = active.includes(i);
+          const cancelToken=String(this._shipCancelSeq=(this._shipCancelSeq||0)+1);
+          this._shipCancelRefs.set(cancelToken,{sys:s,order:q});
           h += `<div class="box" style="${act?'border-color:#ff9b3d':''}">
                 <div class="bt"><span>${act?'▸ ':''}${SHIPS[q.cls].n}</span>
-                <span class="mono" style="color:${act?'#ff9b3d':'#7d90ad'}">${Math.ceil(q.left)}g</span></div>
+                <span class="mono" style="color:${act?'#ff9b3d':'#7d90ad'}">${Math.ceil(q.left)}g</span>
+                ${q.e===G.p.id?`<button class="sBtn shipCancelBtn" data-a="shipCancel" data-x="${cancelToken}" aria-label="${esc(SHIPS[q.cls].n)} siparişini iptal et">✕</button>`:''}</div>
                 <div class="bar em"><i style="width:${(1-q.left/q.tot)*100}%"></i></div>
                 ${!access.ok ? '<div class="mini">BEKLİYOR · '+esc(access.why)+'</div>' : ''}</div>`;
         });
@@ -2759,25 +2902,43 @@ const UI = {
         }
       }
 
-      /* ═══ FAZ 48: LOJİSTİK ═══ */
-      if (typeof reinforceFleet === 'function'){
-        const hedefN = Math.min(
-          typeof FLEET_SOFT_CAP !== 'undefined' ? FLEET_SOFT_CAP : 30,
-          f.capTarget || (typeof FLEET_SOFT_CAP !== 'undefined' ? FLEET_SOFT_CAP : 30));
-        const eksik = hedefN - f.ships.length;
-        const ral = f.rallyAt !== undefined ? G.sys[f.rallyAt] : null;
-        h += `<div class="ph">LOJİSTİK</div>`;
-        h += `<div class="row"><span>Kadro</span>
-          <b style="color:${eksik>0?'#ff9b3d':'#65e08a'}">${f.ships.length} / ${hedefN}</b></div>`;
-        if (eksik > 0)
-          h += `<div class="mini">Eksik <b>${eksik}</b> gemi en yakın tersanelere
-            sipariş edilir ve tamamlanınca filoya katılır.</div>`;
-        h += `<div class="act2">
-          <button class="abtn ${eksik>0?'pri':'dis'}" data-a="reinf" data-x="${f.id}">
-            ⚓ İKMALİ TAMAMLA${eksik>0?'<br><span style="font-size:9px">'+eksik+' gemi</span>':''}</button>
-          <button class="abtn ${ral?'pri':''}" data-a="rallySet" data-x="${f.id}">
-            📍 TOPLANMA NOKTASI${ral?'<br><span style="font-size:9px">'+esc(ral.name)+'</span>':''}</button>
-          </div>`;
+      if(hasShipment(f)){
+        const d=f.shipment || {},ana=G.fleets.find(x=>x.id===(d.fleet??f.joinFleet)&&x.e===0);
+        const sid=d.sys??f.rallyTo;
+        const label=d.fleet!==undefined||f.joinFleet!==undefined ? (ana?ana.name:'Kayıp filo') : (G.sys[sid]?G.sys[sid].name:'Geçersiz hedef');
+        h+=`<div class="ph">SEVKİYAT</div><div class="mini">Hedef: ${esc(label||'Filo')} · ${esc(shipmentStatus(f))}</div>
+          <button class="abtn pri" data-a="shipmentMenu" data-x="${f.id}">SEVKİYATI YÖNET</button>`;
+      }
+      /* 93A: mevcut / üretimde / yolda / yeni sipariş ayrı gösterilir. */
+      const reinforcement=fleetReinforcementStatus(G.p,f);
+      if(reinforcement.current!==undefined){
+        const r=reinforcement;
+        h+=`<div class="ph">FİLO TAKVİYESİ</div>
+          <div class="row"><span>Kadro</span><b>${r.current} / ${r.target}</b></div>
+          <div class="row"><span>Üretimde / sırada</span><b>${r.queued}</b></div>
+          <div class="row"><span>Filoya katılmak üzere yolda / bekliyor</span><b>${r.inTransit}</b></div>
+          <div class="row"><span>Yeni sipariş gereken</span><b>${r.missing}</b></div>
+          <div class="mini">Takviye gemileri bu filonun hareketini izler; tersanenin genel toplanma noktasını değiştirmez.
+          ${r.cls?'Sipariş sınıfı: '+esc(SHIPS[r.cls].n)+' (filodaki baskın savaş sınıfı).':''}
+          Bu işlem yeni gemi üretir; mevcut gemilerin gövdesini veya erzağını doldurmaz.</div>
+          ${r.ok?'':'<div class="mini">'+esc(r.why)+'</div>'}
+          <button class="abtn ${r.ok?'pri':'dis'}" ${r.ok?'':'disabled'} data-a="reinf" data-x="${f.id}">
+          ⚓ TAKVİYE SİPARİŞİ${r.ok?' · '+Math.min(30,r.missing)+' gemi':''}</button>`;
+      }
+      if(!hasShipment(f) && !f.federal && !f.guardLocked){
+        h+=this.compositionPanel(f,reinforcement);
+        h+=`<button class="abtn" style="min-height:44px" data-a="compositionEdit" data-x="${f.id}">BİLEŞİMİ ${f.composition?'DÜZENLE':'OLUŞTUR'}</button>`;
+        const receipt=this._reinforcementReceipt;
+        if(receipt && receipt.f===f && receipt.world===G.sys){
+          const groups={};for(const q of receipt.orders){const k=q.sys+':'+q.cls;
+            if(!groups[k])groups[k]={...q,n:0};groups[k].n++;groups[k].eta=Math.max(groups[k].eta,q.eta);}
+          h+=`<div class="ph">SON TAKVİYE PLANI</div><div class="mini">Sipariş anındaki yaklaşık son teslim süresi. Hedef hareketi, savaş ve yeni sabotaj süreyi değiştirebilir.</div>`;
+          for(const q of Object.values(groups))h+=`<div class="box"><div class="mini">${esc(G.sys[q.sys].name)} · ${q.n} × ${esc(SHIPS[q.cls].n)} · ~${Math.ceil(q.eta)} gün</div></div>`;
+        }
+      }
+      for(const delivery of mine.filter(x=>x!==f && x.joinFleet===f.id && x.ships.length)){
+        h+=`<div class="row"><span>${delivery.ships.length} gemi · ${esc(shipmentStatus(delivery))}</span>
+          <button class="sBtn" data-a="shipmentMenu" data-x="${delivery.id}">YÖNET</button></div>`;
       }
       if (f.combat) h += `<div class="mini" style="color:#ff5f6d;margin-top:6px">⚔ ÇATIŞMA SÜRÜYOR</div>`;
       if (f.surv > 0) h += `<div class="mini" style="color:#8b7bff;margin-top:6px">TARAMA: ${Math.ceil(f.surv)} gün</div>`;
@@ -2833,43 +2994,163 @@ const UI = {
   },
 
   /* =============== BİLİM =============== */
+  scienceState(){
+    if(this._scienceWorld!==G.p){
+      this._scienceWorld=G.p;
+      this._science={tab:'fiz',focus:null,zoom:1,positions:{},queueOpen:true,filter:'all',route:false};
+    }
+    return this._science;
+  },
+  scienceSignature(){
+    const e=G.p;
+    return JSON.stringify([e.techs,e.rq,e.rp,e.research,e.techMul,e.streakB,e.streakN,e.inc.ara,e.ascend,e.ascendP]);
+  },
+  scienceLayout(branch){
+    const ids=Object.keys(TECHS).filter(id=>TECHS[id].b===branch),depth={},visiting=new Set();
+    const layer=id=>{
+      if(depth[id]!==undefined)return depth[id];
+      if(visiting.has(id))return 0;
+      visiting.add(id);
+      const parents=(Array.isArray(TECHS[id].r)?TECHS[id].r:[]).filter(k=>researchValidTech(k)&&TECHS[k].b===branch);
+      const d=Math.max(Math.max(0,TECHS[id].t-1),...parents.map(k=>layer(k)+1));
+      visiting.delete(id);return depth[id]=d;
+    };
+    const rows={},nodes={};
+    for(const id of ids){const d=layer(id);(rows[d]||(rows[d]=[])).push(id);}
+    let y=24,width=224;
+    for(const d of Object.keys(rows).sort((a,b)=>a-b)){
+      rows[d].forEach((id,i)=>{nodes[id]={x:20+(i%3)*216,y:y+Math.floor(i/3)*150};});
+      width=Math.max(width,Math.min(3,rows[d].length)*216+24);
+      y+=Math.ceil(rows[d].length/3)*150;
+    }
+    return {nodes,width,height:y+16};
+  },
+  scienceStatus(id,plan){
+    const e=G.p;
+    if(e.techs[id])return ['done','Tamamlandı'];
+    if(e.rq[TECHS[id].b]===id)return ['active','Araştırılıyor'];
+    if(plan.order.includes(id))return ['planned',plan.goals.some(g=>g.id===id)?'Ana hedef':'Ön koşul planı'];
+    return researchReady(e,id)?['ready','Seçilebilir']:['locked','Kilitli · hedef seçilebilir'];
+  },
+  scienceBenefits(id){
+    const b=techBenefits(id),t=TECHS[id];
+    let text=[...b.effects,...b.unlocks].map(esc).join(' · ')||'Doğrudan sayısal kazanım yok';
+    if(t.sway)text+='<br>↯ '+Object.entries(t.sway).filter(([k])=>TECHS[k]).map(([k,v])=>esc(TECHS[k].n)+' temel maliyeti '+(v<1?'−':'+')+'%'+Math.round(Math.abs(v-1)*100)).join(' · ')+' (uygarlık etkileri uygulanır)';
+    return text;
+  },
   p_bilim(){
-    const e = G.p;
-    let h = `<div class="row"><span>Aylık araştırma</span><b style="color:#8b7bff">${fmt(e.inc.ara)}</b></div>`;
-    for (const b in BRANCH){
-      const B = BRANCH[b];
-      h += `<div class="ph" style="color:${B.c}">${B.n}</div>`;
-      const cur = e.rq[b];
-      if (cur){
-        const t = TECHS[cur];
-        const cc = techCost(e, cur);
-        const pct = clamp(e.rp[b]/cc*100,0,100);
-        const per = e.inc.ara/3;
-        const eta = per>0 ? Math.ceil((cc-e.rp[b])/per) : 99;
-        h += `<div class="box"><div class="bt"><span>${t.n}</span><span class="mono" style="color:${B.c}">${eta} ay</span></div>
-          <div class="bd">${t.d}</div><div class="bar pl"><i style="width:${pct}%;background:${B.c}"></i></div></div>`;
+    const e=G.p,s=this.scienceState(),plan=researchPlan(e);
+    let h='<div class="scienceRoot"><nav class="scTabs" aria-label="Bilim dalları">';
+    for(const [b,B] of Object.entries(BRANCH))h+=`<button data-a="scienceTab" data-x="${b}" aria-pressed="${s.tab===b}" class="${s.tab===b?'on':''}">${B.n}</button>`;
+    h+=`<button data-a="scienceTab" data-x="history" aria-pressed="${s.tab==='history'}" class="${s.tab==='history'?'on':''}">Geçmiş</button></nav>`;
+    h+=`<details class="scSummary"><summary>Aylık ${fmt(e.inc.ara)} ✦ · ${Object.keys(TECHS).filter(id=>e.techs[id]).length}/${Object.keys(TECHS).length} tamamlandı${e.ascend?' · Kadim '+e.ascend:''}</summary>`;
+    for(const [b,B] of Object.entries(BRANCH)){
+      const id=e.rq[b];h+=`<div>${B.n}: ${id?esc(TECHS[id].n)+' · '+fmt(e.rp[b])+'/'+fmt(techCost(e,id))+' ✦':'Tamamlandı / bekliyor'}</div>`;
+    }
+    h+='</details>';
+    if(s.tab==='history'){
+      h+='<div class="scHistory"><div class="scFilters" aria-label="Geçmiş filtresi">';
+      for(const [b,n] of [['all','Tümü'],...Object.entries(BRANCH).map(([k,v])=>[k,v.n])])h+=`<button data-a="scienceFilter" data-x="${b}" aria-pressed="${s.filter===b}" class="${s.filter===b?'on':''}">${n}</button>`;
+      h+='</div>';
+      const rows=researchHistory(e,s.filter),sources={research:'Araştırma',trade:'Teknoloji takası',espionage:'Casusluk',event:'Olay',ruin:'Kadim kalıntı',origin:'Köken',legacy:'Eski kayıt'};
+      for(const row of rows){const t=TECHS[row.id],o=techOrigin(row.id);
+        h+=`<article class="scHistoryItem"><b>${esc(t.n)}</b><small>${BRANCH[t.b].n} · ${row.year?row.year+'.'+String(row.month).padStart(2,'0'):'Tarih bilinmiyor'} · ${sources[row.source]||'Bilinmeyen kaynak'}</small><p>${this.scienceBenefits(row.id)}</p>${o?`<small>${o.icon} ${esc(o.label)}${o.condition?' · '+esc(o.condition):''}</small>`:''}</article>`;
       }
-      const av = availTechs(e,b).filter(id=>id!==cur);
-      if (!av.length) h += `<div class="mini">Bu dalda araştırılacak yeni teknoloji yok.</div>`;
-      av.slice(0,6).forEach(id=>{
-        const t = TECHS[id];
-        const cc = techCost(e, id), base = t.c;
-        const diff = cc/base;
-        const tagc = diff > 1.02 ? '#ff5f6d' : diff < .98 ? '#65e08a' : '#7d90ad';
-        const mark = diff > 1.02 ? ' ▲' : diff < .98 ? ' ▼' : '';
-        h += `<div class="box act" data-a="tech" data-x="${b}:${id}">
-          <div class="bt"><span style="font-weight:600">${t.n}</span><span class="mono" style="color:${tagc}">${fmt(cc)}✦${mark}</span></div>
-          <div class="bd">${t.d}${t.sway?'<br><span style="color:#8b7bff">↯ diğer araştırmaların fiyatını değiştirir</span>':''}</div></div>`;
-      });
+      if(!rows.length)h+='<p class="empty">Bu filtrede tamamlanan araştırma yok.</p>';
+      h+='</div>';
+    }else{
+      const layout=this.scienceLayout(s.tab);
+      h+=`<div class="scTools"><span>Dokun: hedef ekle / çıkar</span><button data-a="scienceZoom" data-x="-0.15" aria-label="Bilim ağacını uzaklaştır">−</button><button data-a="scienceZoom" data-x="reset" aria-label="Yakınlaştırmayı sıfırla">%${Math.round(s.zoom*100)}</button><button data-a="scienceZoom" data-x="0.15" aria-label="Bilim ağacını yakınlaştır">+</button></div>`;
+      h+=`<div class="scViewport" tabindex="0" aria-label="${BRANCH[s.tab].n} teknoloji ağacı; kaydırılabilir"><div class="scExtent" style="width:${layout.width*s.zoom}px;height:${layout.height*s.zoom}px"><div class="scScene" style="width:${layout.width}px;height:${layout.height}px;transform:scale(${s.zoom})"><svg class="scLinks" width="${layout.width}" height="${layout.height}" aria-hidden="true">`;
+      for(const [id,p] of Object.entries(layout.nodes))for(const dep of Array.isArray(TECHS[id].r)?TECHS[id].r:[]){
+        const q=layout.nodes[dep];if(!q)continue;
+        h+=`<path class="${e.techs[dep]?'done':''}" d="M ${q.x+94} ${q.y+112} C ${q.x+94} ${q.y+131}, ${p.x+94} ${p.y-20}, ${p.x+94} ${p.y}"/>`;
+      }
+      h+='</svg>';
+      for(const [id,p] of Object.entries(layout.nodes)){
+        const t=TECHS[id],goal=plan.goals.find(g=>g.id===id),[status,label]=this.scienceStatus(id,plan),o=techOrigin(id),benefit=techBenefits(id);
+        const cross=(Array.isArray(t.r)?t.r:[]).filter(k=>researchValidTech(k)&&TECHS[k].b!==t.b);
+        h+=`<button class="scNode ${status} ${s.focus===id?'focused':''}" data-a="scienceNode" data-x="${id}" data-tech="${id}" aria-pressed="${!!goal}" style="left:${p.x}px;top:${p.y}px" aria-label="${esc(t.n)}; ${label}${goal?'; hedef '+goal.number+'; '+goal.extra+' eksik ön koşul':''}"><small>K${t.t} · ${fmt(techCost(e,id))} ✦ ${o?o.icon:''}</small><b>${goal?goal.number+' · +'+goal.extra+' ':''}${!researchReady(e,id)&&!e.techs[id]?'🔒 ':''}${esc(t.n)}</b><span>${esc(label)}${cross.length?' · ↗ '+cross.map(k=>BRANCH[TECHS[k].b].n).join(', '):''}</span><em>${esc([...benefit.effects,...benefit.unlocks].join(' · ')||t.d)}</em></button>`;
+      }
+      h+='</div></div></div>';
+      if(s.focus&&researchValidTech(s.focus)){
+        const id=s.focus,t=TECHS[id],o=techOrigin(id),route=researchRoute(e,id),goal=plan.goals.find(g=>g.id===id);
+        const progress=e.rq[t.b]===id?e.rp[t.b]:(e.research&&e.research.bank[id]||0);
+        h+=`<details class="scDetail" open><summary>${esc(t.n)} · K${t.t} · ${fmt(progress)}/${fmt(techCost(e,id))} ✦</summary><div>${this.scienceBenefits(id)}</div>`;
+        if(o)h+=`<div>${o.icon} ${esc(o.label)} · ${esc(o.condition)}</div>`;
+        if(Array.isArray(t.r)&&t.r.length)h+='<div>Ön koşullar: '+t.r.map(k=>researchValidTech(k)?`<button data-a="scienceFocus" data-x="${k}">${esc(TECHS[k].n)}</button>`:esc(k)).join(' ')+'</div>';
+        h+=`<button data-a="scienceRoute">${s.route?'Rotayı gizle':'Otomatik rotayı göster'}</button>${goal?' <span>'+goal.number+'. hedef · +'+goal.extra+' yeni ön koşul</span>':''}`;
+        if(s.route)h+=route.ok?'<ol class="scRoute">'+route.order.map(k=>`<li>${esc(TECHS[k].n)} · ${BRANCH[TECHS[k].b].n}${k===id?' · ANA HEDEF':''}</li>`).join('')+'</ol>':`<p role="alert">${esc(route.why)}</p>`;
+        h+='</details>';
+      }
     }
-    const done = Object.keys(e.techs).length;
-    h += `<div class="ph">ARŞİV</div><div class="row"><span>Tamamlanan</span><b>${done} / ${Object.keys(TECHS).length}</b></div>`;
-    if (e.streakB && (e.streakN||0) > 0){
-      const bn = BRANCH[e.streakB] ? BRANCH[e.streakB].n : '';
-      h += `<div class="row"><span>Uzmanlık serisi</span><b style="color:${(e.streakN>=3)?'#65e08a':'#d7e3f4'}">${bn} ×${e.streakN}${e.streakN>=3?' (−%10)':''}</b></div>`;
-      if (e.streakN < 3) h += `<div class="mini">Aynı dalda ${3-e.streakN} araştırma daha → o dal −%10 ucuzlar.</div>`;
+    h+=`<section class="scQueue"><button class="scQueueToggle" data-a="scienceQueue" aria-expanded="${s.queueOpen}">${s.queueOpen?'▾':'▸'} Araştırma kuyruğu · ${plan.goals.length} hedef</button>`;
+    if(s.queueOpen){
+      h+='<div class="scQueueTrack">';
+      for(const g of plan.goals){const t=TECHS[g.id];
+        h+=`<div class="scGoal"><button class="scGoalFocus" data-a="scienceFocus" data-x="${g.id}"><b>${g.number} · +${g.extra} ${esc(t.n)}</b><small>${BRANCH[t.b].n} · ${g.ok?this.scienceStatus(g.id,plan)[1]:esc(g.why)}</small></button><div class="scReorder"><button data-a="scienceMove" data-x="${g.id}:-1" aria-label="${esc(t.n)} hedefini öne al" ${g.number===1?'disabled':''}>←</button><button data-a="scienceMove" data-x="${g.id}:1" aria-label="${esc(t.n)} hedefini sona al" ${g.number===plan.goals.length?'disabled':''}>→</button><button data-a="scienceRemove" data-x="${g.id}" aria-label="${esc(t.n)} hedefini kaldır">✕</button></div></div>`;
+      }
+      if(!plan.goals.length)h+='<p class="scQueueEmpty">Ağaçtan uzak hedefleri de seçebilirsin. Boş kuyrukta mevcut otomatik araştırma sürer.</p>';
+      h+='</div>';
     }
-    return h;
+    return h+'</section></div>';
+  },
+  scienceRemember(){
+    const v=$('diploPane').querySelector('.scViewport'),s=this.scienceState();
+    if(v)s.positions[s.tab]={x:v.scrollLeft,y:v.scrollTop};
+  },
+  openScience(focus=false){
+    const s=this.scienceState(),pane=$('diploPane');this.globalCur='bilim';
+    pane.innerHTML=`<div class="dpBox scienceBox"><div class="dpHd"><span>✦ BİLİM</span><button class="riX" data-a="closeDiplo" aria-label="Bilim ekranını kapat">✕</button></div>${this.p_bilim()}</div>`;
+    pane.classList.add('show');this._scienceSig=this.scienceSignature();
+    const v=pane.querySelector('.scViewport');
+    if(!v)return;
+    const pos=s.positions[s.tab]||{x:0,y:0};v.scrollLeft=pos.x;v.scrollTop=pos.y;
+    if(focus&&s.focus){const p=this.scienceLayout(s.tab).nodes[s.focus];if(p){v.scrollLeft=Math.max(0,p.x*s.zoom-(v.clientWidth-188*s.zoom)/2);v.scrollTop=Math.max(0,p.y*s.zoom-(v.clientHeight-112*s.zoom)/2);}}
+    // Native one-finger scrolling; only two-finger pinch cancels browser handling.
+    let start=null,moved=false,pinch=null;
+    v.addEventListener('touchstart',ev=>{
+      const t=ev.touches;start=t.length?{x:t[0].clientX,y:t[0].clientY}:null;moved=false;
+      if(t.length===2){pinch={distance:Math.hypot(t[0].clientX-t[1].clientX,t[0].clientY-t[1].clientY),zoom:s.zoom};moved=true;}
+    },{passive:true});
+    v.addEventListener('touchmove',ev=>{
+      const t=ev.touches;
+      if(start&&t.length&&Math.hypot(t[0].clientX-start.x,t[0].clientY-start.y)>8)moved=true;
+      if(t.length===2&&pinch&&pinch.distance>0){ev.preventDefault();this.scienceApplyZoom(pinch.zoom*Math.hypot(t[0].clientX-t[1].clientX,t[0].clientY-t[1].clientY)/pinch.distance);}
+    },{passive:false});
+    v.addEventListener('touchend',()=>{pinch=null;},{passive:true});
+    v.addEventListener('click',ev=>{if(moved){ev.preventDefault();ev.stopPropagation();moved=false;}},{capture:true});
+  },
+  scienceApplyZoom(value){
+    const s=this.scienceState(),v=$('diploPane').querySelector('.scViewport');
+    const z=clamp(value,.7,1.6),old=s.zoom;s.zoom=z;
+    if(!v)return;
+    const scene=v.querySelector('.scScene'),extent=v.querySelector('.scExtent'),layout=this.scienceLayout(s.tab);
+    if(scene&&extent){scene.style.transform=`scale(${z})`;extent.style.width=layout.width*z+'px';extent.style.height=layout.height*z+'px';v.scrollLeft=(v.scrollLeft+v.clientWidth/2)*z/old-v.clientWidth/2;v.scrollTop=(v.scrollTop+v.clientHeight/2)*z/old-v.clientHeight/2;}
+    const reset=$('diploPane').querySelector('[data-a="scienceZoom"][data-x="reset"]');if(reset)reset.textContent='%'+Math.round(z*100);
+  },
+  scienceAction(action,x){
+    const s=this.scienceState();this.scienceRemember();let focus=false,result;
+    if(action==='scienceTab'&&(BRANCH[x]||x==='history'))s.tab=x;
+    else if(action==='scienceFilter'&&(BRANCH[x]||x==='all'))s.filter=x;
+    else if(action==='scienceQueue')s.queueOpen=!s.queueOpen;
+    else if(action==='scienceRoute')s.route=!s.route;
+    else if(action==='scienceZoom'){this.scienceApplyZoom(x==='reset'?1:s.zoom+Number(x));return;}
+    else if(action==='scienceMove'){
+      const [id,delta]=x.split(':'),at=(G.p.research&&G.p.research.targets||[]).indexOf(id);
+      result=researchTarget(G.p,id,'move',at+Number(delta));
+    }else if(researchValidTech(x)){
+      s.focus=x;s.tab=TECHS[x].b;
+      if(action==='scienceNode'||action==='scienceRemove'){if(!G.p.techs[x])result=researchTarget(G.p,x);}
+      else if(action==='scienceFocus')focus=true;
+    }
+    if(result&&!result.ok)say(result.why,'war');
+    this.openScience(focus);
+  },
+  refreshScience(){
+    const pane=$('diploPane');
+    if(!pane.classList.contains('show')||!pane.querySelector('.scienceRoot'))return;
+    if(this._scienceSig!==this.scienceSignature()){this.scienceRemember();this.openScience();}
   },
 
   /* =============== 86E DİPLOMASİ KOMUTA MERKEZİ =============== */
@@ -4328,6 +4609,7 @@ const UI = {
      yazılmaz, yalnızca YERİ değişir.
      ═══════════════════════════════════════════════════════════════ */
   openGlobal(key){
+    if(key==='bilim'){this.openScience();return;}
     const P = GLOBAL_PANES[key];
     if (!P) return;
     this.globalCur = key;
@@ -6284,7 +6566,9 @@ const UI = {
   },
   setTech(x){
     const [b,id] = x.split(':');
-    G.p.rq[b] = id; G.p.rp[b] = 0;
+    if(!researchValidTech(id)||TECHS[id].b!==b)return;
+    const result=researchTarget(G.p,id);
+    if(!result.ok)say(result.why,'war');
     this.refresh();
   },
   doColonizeOrder(x0){
@@ -6336,8 +6620,9 @@ const UI = {
   },
   mergeFleets(){
     const f = View.sel; if (!f || f.sys<0) return;
+    if(hasShipment(f)){say('Önce sevkiyatı iptal et');return;}
     const grp = fleetGroup(f);
-    const others = G.fleets.filter(x=>x!==f && x.e===0 && x.sys===f.sys && fleetGroup(x)===grp);
+    const others = G.fleets.filter(x=>x!==f && x.e===0 && x.sys===f.sys && !hasShipment(x) && fleetGroup(x)===grp);
     if (!others.length){
       say(grp === 'sav' ? 'Bu sistemde birleşecek başka savaş filosu yok'
                         : 'Bu sistemde birleşecek başka sivil filo yok');
@@ -6810,6 +7095,8 @@ const UI = {
   },
 
   openModal(html, cls, stashable, art){
+    this._shipCancelPending=null;
+    this._shipmentPending=null;
     this._aiDealToken = null;
     this._opPending = null;
     delete this._envoyMenuSpeed;
@@ -6980,6 +7267,12 @@ const UI = {
   },
 
   closeModal(){
+    const shipCancelSpeed=this._shipCancelPending&&this._shipCancelPending.speed;
+    const shipmentSpeed=this._shipmentPending&&this._shipmentPending.speed;
+    const compositionSpeed=this._compositionPending&&this._compositionPending.speed;
+    this._compositionPending=null;
+    this._shipCancelPending=null;
+    this._shipmentPending=null;
     this._aiDealToken = null;
     this._opPending = null;
     const envoySpeed=this._envoyMenuSpeed;
@@ -6987,7 +7280,10 @@ const UI = {
     $('modal').className = 'hidden';
     $('modal').innerHTML = '';
     if (G.over) return;
-    const back = envoySpeed===undefined ? (this.prePause || this.modalPrevSpeed || 1) : envoySpeed;
+    const back = shipCancelSpeed!==null && shipCancelSpeed!==undefined ? shipCancelSpeed
+      : compositionSpeed!==null && compositionSpeed!==undefined ? compositionSpeed
+      : shipmentSpeed!==null && shipmentSpeed!==undefined ? shipmentSpeed
+      : envoySpeed===undefined ? (this.prePause || this.modalPrevSpeed || 1) : envoySpeed;
     this.prePause = 0;
     this.setSpeed(back);
   },

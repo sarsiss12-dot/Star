@@ -1,0 +1,64 @@
+STARS — FAZ 93D.1 TAMAMLANDI
+13 Ekim 2026 — AI donanma üretimi / tersane verimliliği / askerî ekonomi
+
+KANONİK KAYNAK
+stars-faz93d.zip
+SHA-256: 8883f62090710c6244871be029aeceaa6ad323cda784124f80766897574ea7ac
+ZIP CRC ve SHA-256 doğrulandı; eski GitHub kodu kullanılmadı.
+Build 93d1 / cache stars-v93d1 / Save v8.
+
+SONUÇ
+Seed    Savaş siparişi      Bilim siparişi       Mevcut savaş gemisi (120. ay)
+11      8 -> 311            238 -> 37            11 -> 64
+99      23 -> 302           212 -> 35            10 -> 192
+404     11 -> 272           237 -> 42            1 -> 241
+
+Verilen 93D başlangıç siparişleri üç tohumda birebir yeniden üretildi.
+Yeni tamamlanan savaş gemileri: 305 / 300 / 265; siparişten ayrı sayılır.
+AI bazında sipariş, tamamlanma, kuyruk, kapasite, stok/net gelir, tersane
+kullanımı, savaş/barış, kayıp ve engeller: AI-DONANMA-93D1.md.
+Ham 120 aylık veriler: tests/navy-93d1.
+
+DEĞİŞİKLİKLER
+500 alaşım kapısı yerine gerçek stok/gelir, bakım ve rezerv bütçesi.
+Birden fazla uygun tersane; 93C sınıf şablonu ve teslim/rota seçiminin kullanımı.
+Savaşta daha hızlı ücretli yenileme, barışta sürdürülebilir caydırıcılık hedefi.
+Filo yerine gerçek gemi ve bütün bekleyen siparişlerin sayılması.
+Bilim kayıplarında 120/240/360 günlük yenileme beklemesi; en fazla iki
+mevcut+bekleyen bilim ihtiyacı; yeni AI bilim gemileri bağımsız filo.
+Bedava kaynak/gemi veya yeni güvenli keşif algoritması eklenmedi.
+
+TESTLER
+Nihai benzersiz sonuç: 69 paket / 4.421 başarılı / 0 kalan hata / 0 timeout.
+25 yeni hedefli kontrol: 17 üretim, 8 kampanya/doğruluk/deterministik kontrol.
+Önce bu hedefli kontroller, sonra sınırlı eşzamanlı tam regresyon çalıştırıldı.
+Tam ilk koşu 4.420 başarılı / 1 hata: eski hazırlanmış sevkiyat fixture'ı,
+yüksek stok verdiği halde kayıt dosyasının eski enerji gelirini taşıyordu.
+Yeni bakım koruması siparişi haklı olarak durdurdu. Testte sürdürülebilir gelir
+ve krizsiz durum açıkça tanımlandı; oyun koruması gevşetilmedi. Yalnız ilgili
+30 kontrollü sevkiyat paketi yeniden çalıştırıldı ve 30/0 geçti. İlk başarısız
+log ve ilk özet silinmedi. Nihai özet tekrarı çift saymaz.
+
+Regresyon kapsamı: Save v8/eski kayıtlar, deterministik RNG, kayıt devamlılığı,
+93B sevkiyat güvenliği, 93C bileşim/tersane seçimi, 93D araştırma planı/UI,
+bilim zaferi/Kadim Araştırma, AI araştırması, harita/mobil giriş ve native canvas.
+Aynı seed11 120 ay tekrarı tam kayıt hash'i ve RNG'de aynı sonucu verdi.
+Gözlemcili ve gözlemcisiz koşuların tam kaydı/RNG'si eşit.
+Üç yeni kampanyada sivil gemi muhasebesi sınıf/AI bazında dengeli; kapsanmış
+bilim ihtiyacına gereksiz ek sipariş yok; negatif/geçersiz kaynak gözlemi yok.
+Sıfır enerji stoklu yaşayan AI-ay önce 9/28/43, sonra 0/0/0.
+
+KORUMA VE AÇIK RİSKLER
+Bilim ağacı/kuyruk/geçmiş yeniden geliştirilmedi. UI, ekonomi, harita,
+muharebe, diplomasi ve ses dosyaları kanonik 93D ile bayt olarak aynı.
+Araştırma ilerleme kodu ve teknoloji içeriği korunur. Save v8 değişmedi.
+Fiziksel Android/gerçek tarayıcı cihaz kabulü yapılmadı; arayüz değiştirilmedi.
+Üç seed/120 ay tüm zorluklara ve uzun geç oyuna denge garantisi değildir.
+Korsan kayıpları devam eder; bazı dönem sonu gelirleri negatiftir ve bütçe
+korumasıyla sınırlanır. Yeni üretim politikası bütün muharebeleri kazandırmaz.
+ACIK-RISKLER.md ayrıntılıdır.
+
+SONRAKİ ADIM
+93E — Bilimsel Uzmanlaşma ve Özel Teknolojiler sıradaki ana fazdır, başlamadı.
+94A ve bütün bağımsız ileri işler korundu. Ticaret kaynak çoğalması iddiası
+öncelikli bağımsız denetimdir. GitHub'a yayın yapılmadı.

@@ -1,0 +1,124 @@
+
+A. DOSYA SINIRI VE KARANTİNA
+  ✓ node --check ai.js
+  ✓ node --check audio.js
+  ✓ node --check combat.js
+  ✓ node --check diplomacy.js
+  ✓ node --check economy.js
+  ✓ node --check main.js
+  ✓ node --check map.js
+  ✓ node --check sw.js
+  ✓ node --check ui.js
+  ✓ sw cache = 'stars-v93b'
+  ✓ sw KABUK/fetch/activate korundu
+  ✓ kayıt sürümü v:8 KALDI
+  ✓ depolama anahtarı: yildiz:save
+  ✓ depolama anahtarı: yh_audio
+  ✓ depolama anahtarı: yh_advisor
+  ✓ depolama anahtarı: yh_autoev
+  ✓ depolama anahtarı: yh_bg
+  ✓ depolama anahtarı: yh_radar
+  ✓ depolama anahtarı: yh_templates
+  ✓ depolama anahtarı: __yh_probe
+  ✓ depolama anahtarı: __yh_diag
+  ✓ kanonik fonksiyon: dealTxBegin
+  ✓ kanonik fonksiyon: dealTxRollback
+  ✓ kanonik fonksiyon: dealTxRestoreAuth
+  ✓ kanonik fonksiyon: txCaptureGraph
+  ✓ kanonik fonksiyon: txRestoreGraph
+  ✓ kanonik fonksiyon: dealPostcondition
+  ✓ kanonik fonksiyon: canPromiseWarOn
+  ✓ yan etki tamponu say() içinde
+  ✓ flushSideBuffer commit sonrası yayımlıyor
+  ✓ doğrudan UI etkisi de tamponlanıyor (deferUI)
+  ✓ yüzeysel dealJournal/dealRollback KALDIRILDI
+  ✓ istisna executeDeal dışına SIZMIYOR (catch daima false döner)
+  ✓ SITUATIONS kataloğu duruyor
+  ✓ situationsTick tanımı duruyor
+  ✓ situationsTick çağrısı PASİF
+  ✓ DURUMLAR sekmesi gizli
+  ✓ 200 ayda situation tetiklenmedi — 0
+  ✓ audio.js byte-for-byte aynı — 804226980179698a
+  ✓ manifest.json byte-for-byte aynı — 6b8305490e9a55e9
+
+B. REDUNDANT PEACE VE warOn SÖZÜ
+  ✓ redundant peace + yeni res: quote GEÇERLİ — []
+  ✓ effective plan yalnız res içeriyor — ["res"]
+  ✓ redundant peace yapısal olarak kaydedildi
+  ✓ anlaşma yürüdü ve yalnız res aktarıldı — transfer 10
+  ✓ tek başına redundant peace hâlâ REDDEDİLİYOR
+  ✓ gerçek savaşta peace hâlâ GEÇERLİ
+  ✓ AI warOn sözü quote'ta GEÇERLİ
+  ✓ canPromiseWarOn geçici yetki alanlarına DOKUNMUYOR — true/true → true/true
+  ✓ 50 quote çağrısı RNG tüketmedi
+  ✓ canPromiseWarOn SAF ve deterministik
+  ✓ kendine savaş sözü reddedildi — kendine savaş açamaz
+  ✓ korsana savaş sözü reddedildi — korsanlara savaş sözü verilemez
+  ✓ temassız hedefe savaş sözü reddedildi — hedefle temas yok
+  ✓ zaten savaştaysa redundant sayılıyor
+  ✓ warOn gerçekten uygulanabiliyor
+
+C. KOLONİLİ SİSTEM DEVRİ — 8 AŞAMALI ENJEKSİYON
+  ✓ "before:res": TAM geri alma, sıfır sızıntı — geriAlindi=true sızan=""
+  ✓ "after:res": TAM geri alma, sıfır sızıntı — geriAlindi=true sızan=""
+  ✓ "before:sys": TAM geri alma, sıfır sızıntı — geriAlindi=true sızan=""
+  ✓ "after:sys": TAM geri alma, sıfır sızıntı — geriAlindi=true sızan=""
+  ✓ "after:items": TAM geri alma, sıfır sızıntı — geriAlindi=true sızan=""
+  ✓ "after:cost": TAM geri alma, sıfır sızıntı — geriAlindi=true sızan=""
+  ✓ "after:goodwill": TAM geri alma, sıfır sızıntı — geriAlindi=true sızan=""
+  ✓ "son": TAM geri alma, sıfır sızıntı — geriAlindi=true sızan=""
+  ✓ enjeksiyonsuz teklif gerçekten uygulandı
+
+D. ÜÇÜNCÜ TARAF VE VEKİL SAVAŞ ZİNCİRLERİ
+  ✓ warOn "before:warOn": üçüncü taraf zinciri TAM geri alındı — geri=true
+  ✓ warOn "after:warOn": üçüncü taraf zinciri TAM geri alındı — geri=true
+  ✓ warOn "after:items": üçüncü taraf zinciri TAM geri alındı — geri=true
+  ✓ warOn "after:cost": üçüncü taraf zinciri TAM geri alındı — geri=true
+  ✓ warOn "son": üçüncü taraf zinciri TAM geri alındı — geri=true
+  ✓ warOn enjeksiyonsuz uygulandı ve savaş kuruldu
+  ✓ peace "before:peace": vekil savaş zinciri TAM geri alındı — geri=true
+  ✓ peace "after:peace": vekil savaş zinciri TAM geri alındı — geri=true
+  ✓ peace "after:items": vekil savaş zinciri TAM geri alındı — geri=true
+  ✓ peace "son": vekil savaş zinciri TAM geri alındı — geri=true
+  ✓ peace enjeksiyonsuz: barış kuruldu VE vekil savaş çözüldü
+
+E. 14 TÜR — UYGULAMA VE POSTCONDITION
+  ✓ tür "res": normalize→validate→quote→execute başarılı — true
+  ✓ tür "tribute": normalize→validate→quote→execute başarılı — true
+  ✓ tür "sys": normalize→validate→quote→execute başarılı — true
+  ✓ tür "tech": normalize→validate→quote→execute başarılı — true
+  ✓ tür "lux": normalize→validate→quote→execute başarılı — true
+  ✓ tür "peace": normalize→validate→quote→execute başarılı — true
+  ✓ tür "nap": normalize→validate→quote→execute başarılı — true
+  ✓ tür "pact": normalize→validate→quote→execute başarılı — true
+  ✓ tür "ally": normalize→validate→quote→execute başarılı — true
+  ✓ tür "warOn": normalize→validate→quote→execute başarılı — true
+  ✓ tür "peaceWith": normalize→validate→quote→execute başarılı — true
+  ✓ tür "intel": normalize→validate→quote→execute başarılı — true
+  ✓ tür "spynet": normalize→validate→quote→execute başarılı — true
+  ✓ tür "passage": normalize→validate→quote→execute başarılı — true
+
+F. BİLDİRİM VE YAN ETKİ TAMPONU
+  ✓ BAŞARISIZ işlem HİÇ bildirim bırakmadı — log+0 inbox+0
+  ✓ BAŞARISIZ işlem UI.alert ÇAĞIRMADI — 0
+  ✓ BAŞARILI işlem bildirimleri yayımladı — log+1
+  ✓ bildirimler TAM BİR KEZ (tekrar yok) — Vahiy Auren İnancı gerekçesiz savaş açtı — galaksi tedirgin
+  ✓ başarılı işlemde UI.alert bildirim sayısı kadar çağrıldı — 1 / 1
+
+G. RNG VE GEÇİCİ YETKİ ALANLARI
+  ✓ rollback RNG durumunu BİREBİR geri aldı
+  ✓ yetki alanı YOKSA rollback sonrası yine YOK — false/false → false/false
+  ✓ yetki alanı VARSA önceki DEĞERİ korunur (koşulsuz false değil) — ONCEKI
+  ✓ başarılı işlem yine de yürüdü
+
+H. SAFLIK VE ESKİ REGRESYONLAR
+  ✓ 1000 saf çağrı hiçbir kalıcı kökü değiştirmedi
+  ✓ teklif nesnesi mutasyona uğramadı
+  ✓ 86B: kaynak çoğaltma KAPALI
+  ✓ 86B: boş anlaşma KAPALI
+  ✓ 86B: yürürlükteki antlaşma farm'ı KAPALI
+
+══════════════════════════════════════════
+  GEÇEN: 103   KALAN: 0
+══════════════════════════════════════════
+

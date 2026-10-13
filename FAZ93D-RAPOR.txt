@@ -1,0 +1,128 @@
+GELİŞTİRİCİ RAPORU — STARS FAZ 93D
+GÖRSEL BİLİM AĞACI / AKILLI KUYRUK / OTOMATİK ROTA / GEÇMİŞ
+13 Ekim 2026
+
+KAYNAK VE SONUÇ
+Kanonik kaynak: stars-faz93c.zip
+SHA-256: 88acfa0d4340e4a2db3f0eefc307f352d5367d0120b39a39195c69b9ae47ad55
+Kaynak SHA-256 birebir eşleşti; ZIP üye bütünlüğü doğrulandı.
+FAZ93C-RAPOR.txt, DEVAM-93C.md, FAZ-PLANI.md, ILERI-GELISTIRME-PLANI.md
+ve ilgili kaynaklar incelendi. Eski GitHub kodu kullanılmadı.
+Build 93d / service worker cache stars-v93d / Save v8.
+
+Nihai sonuç: 67 test paketi, 4396 başarılı kontrol, 0 hata,
+0 atlanan paket, 0 zaman aşımı. 53 yeni 93D senaryosu dahil.
+Fiziksel Android veya gerçek tarayıcı kabulü yapıldığı iddia edilmez.
+GitHub'a yayın yapılmadı. 93E'ye geçilmedi.
+
+UYGULANAN DEĞİŞİKLİKLER
+1. Mevcut 40 teknoloji, Fizik/Toplum/Mühendislik ağaçlarında düğümler oldu.
+   Ön koşul bağlantıları, kademe, güncel maliyet, gerçek etkiler ve açılan
+   gemi/yapı/yetenek bilgileri; tamamlandı/aktif/planlı/kilitli ayrımı.
+   Aynı kademede bağımlı teknolojiler topolojik derinlikle ayrı satırda.
+2. Ana hedefler dallar arasında tek numara dizisiyle seçilir. Düğümde tekrar
+   dokunma kaldırır; numaralar düzenlenir. Kuyruk okları sıralamayı değiştirir.
+   Her dal kendi ilk uygun planlı adımını araştırır; üç dal paralel çalışır.
+3. Uzak hedef doğrudan seçilir. Doğrudan/dolaylı bütün eksik ön koşullar
+   bulunur ve geçerli sırada otomatik yürür. Ana hedef bitince sıradaki plan
+   devam eder. +N, önceki hedeflerde karşılanmamış benzersiz eksik ön koşulları
+   sayar; otomatik adımlar ana numaraları değiştirmez. Ortak ve dallar arası
+   bağımlılıklar desteklenir. Döngü/geçersiz bağımlılık güvenli hata üretir.
+4. Alt bölümde küçük yatay, daraltılabilir hedef kuyruğu. Sıra/ad/dal/+N/durum,
+   kaldırma/sıralama düğmeleri; karta dokununca ağaç odağı. Ayrıntı bölümünde
+   otomatik rota ve doğrudan ön koşula geçiş. Tek parmak native kaydırma,
+   iki parmak ağaca özel zoom ve alternatif −/%/+ kontrolleri. Kaydırma
+   sonundaki click hedef seçmez. Dokunma düğmeleri en az 44 CSS px tabanlıdır.
+5. Geçmiş dördüncü sekmedir, dördüncü ağaç değildir. Tamamlanan teknoloji,
+   dal, bilinen oyun tarihi, gerçek etkiler, açtığı imkân, edinim kaynağı ve
+   varsa özel kaynak koşulu gösterilir. Dal filtresi vardır. Eski kayıtlarda
+   tarih uydurulmaz. Doğal araştırma ve mevcut takas/casusluk/olay/kalıntı/
+   köken teknoloji edinim yolları ortak geçmiş kapısını kullanır.
+6. UI.setTech() içindeki doğrudan rp=0 sıfırlaması kaldırıldı. Aktif rq/rp
+   alanları korunur; askıya alınmış iş bank[techId] içinde saklanır. Geri
+   dönünce taşınır, banka kopyası silinir. Tamamlamada maliyet bir kez düşer,
+   fazla puan korunur. Dışarıdan alınan teknolojide daha önce yatırılmış
+   puan da bir kez korunur. Kuyruk boşalınca mevcut otomatik seçime dönülür.
+7. Save v8'de isteğe bağlı research.targets/bank/history alanları kullanılır.
+   Eski aktif ilerleme korunur. Yükleme araştırma tamamlamaz veya puan harcamaz.
+   Bozuk hedef/banka/tarih verileri normalleştirilir. Tamamlanma tarihi yoksa
+   yükleme tarihiyle doldurulmaz. Kayıt geri alma/transaction testleri geçti.
+8. Tüm ağaç bittikten sonra yeni araştırma geliri Kadim Araştırma'ya aktarılır.
+   93C'de aktif dal yokken geliri sıfırlayan yol düzeltilmiştir. Son teknolojinin
+   artan puanı da kaybolmaz. Bilim zaferinin eşikleri ve Kadim maliyetleri
+   değişmedi; false teknoloji anahtarı tamamlandı sayılmıyor.
+9. 93E için isteğe bağlı origin {kind, label, condition} metadata sözleşmesi:
+   doctrine / ethic / species; küçük simge ve koşul bilgisi. Civic teknolojisi,
+   yeni teknoloji içeriği veya kapsamlı otomasyon modu bu fazda eklenmedi.
+10. İleri plan güncellendi: 93E, kamera 94A, akıllı keşif, uzaktan inşa,
+    olay/diplomasi koşulları, pre-game portre/köken, kompakt diplomasi,
+    Ekonomi/ticaret, casuslukla karşı teknoloji, gelişmiş AI/diplomasi ve
+    harici assetsiz fiziksel enstrüman modellemeli müzik. Kritik ticaret kaynak
+    çoğalması iddiası öncelikli bağımsız hata denetimi olarak korundu.
+
+TESTLER VE İZOLE EDİLEN BULGULAR
+Önce yeni davranış testleri: araştırma motorunda 33, arayüzde başlangıçta 19
+senaryo. İlk denemede dört test beklentisi yanlıştı: sensörün gerçek reaktör
+ön koşulu test kurulumunda atlanmıştı; AI varsayılan seçimi tahmin edilmişti.
+Kurulum gerçek kataloğa göre düzeltildi, AI kararı doğrulanmış 93C runtime'ı
+ile aynı koşullarda karşılaştırılıp kaydedildi. Ardından 52/52 geçti.
+
+Tam regresyon bir kez, 67 paketle çalıştırıldı. İki worker, paket başına
+180 saniye sınırı. 4389 başarılı / 6 başarısız: altı başarısızlığın tamamı aynı
+HTML koruma imzasıydı; yeni bilim CSS bloğu tüm index.html hash'ini değiştirmişti.
+Oyun davranışı hatası veya timeout yoktu. Eski HTML'nin bilim CSS bloğu
+çıkarılınca kanonik 93C ile byte-for-byte aynı olduğu doğrulandı. Koruma
+helper'ı artık hem yeni gözden geçirilmiş blok hash'ini hem de değişmeyen
+eski HTML hash'ini ayrı zorunlu doğrular. Tarihsel referans hash değiştirilmedi.
+
+Yalnız etkilenen altı paket yeniden çalıştırıldı: 517/517. Bilim UI paketine
+iki bölüme müdahaleyi de yakalayan bir koruma senaryosu eklenerek 20/20 geçti.
+Nihai toplam 67 paket / 4396 kontrol, her paketin son sonucu alınarak hesaplandı;
+aynı kontrolün tekrarları toplama eklenmedi. Sonsuz veya takılan test yoktu.
+
+Kapsam: çoklu hedef/silme/yeniden sıra, +N sayaçları, gerçek Zırhlı rotası,
+ortak/dallar arası ön koşullar, üç dal, döngüler, puan muhasebesi, dış teknoloji
+edinimi, Save v8/yükleme idempotansı, geçmiş/tarih, Kadim ve bilim zaferi,
+AI tercihleri, mobil olay ayrımı, mevcut 93B/93C sevkiyat ve üretim testleri,
+harita/native Canvas, diplomasi/transaction ve doğal kampanya regresyonları.
+
+Kanıt: tests/results-93d.json, tests/run-93d.log, tests/logs-93d/,
+tests/run-93d-final.log, tests/logs-93d-final/, tests/logs-93d-targeted/.
+Hedefli: STARS_TEST_FILTER=faz93d node tests/run-all.js
+Tam: STARS_TEST_LOGS=tests/logs-new STARS_TEST_WORKERS=2 node tests/run-all.js
+Native Canvas için mevcut runtime @napi-rs/canvas bağımlılığı kullanıldı.
+
+PERFORMANS VE KORUMA
+40 teknolojili planlarla 300 ağaç HTML üretimi: son ölçüm 68 ms (Node VM host).
+Her render yalnız seçili daldaki düğümleri üretir; geçmiş ayrı liste olur.
+Araştırma verisi değişmediyse açık bilim DOM'u yeniden kurulmaz; 100 aynı
+refresh çağrısı yeniden kurulum üretmedi. Cihaz FPS veya CSS paint ölçümü değildir.
+Kanıt: tests/performance-93d.json.
+
+map.js, ai.js, combat.js, audio.js, manifest.json ve tests/referans-sha.json
+kanonik kaynakla byte-for-byte aynıdır. TECHS katalog bloğu da aynıdır.
+Index.html yalnız bilim ekranına özgü CSS ekini içerir. 93B/93C filo motoru
+korunur; ilgili 31 sevkiyat ve 47 bileşim senaryosu geçti.
+Kanıt: tests/preservation-93d.json ve tests/helpers/ui-preservation.js.
+
+AÇIK RİSKLER
+- Chromium executable bulunmadığından gerçek tarayıcı yerleşimi ve pinch
+  kabulü yapılamadı; fiziksel Android/PWA ve cihaz FPS testi yapılmadı.
+  Kontrollü DOM olay/native Canvas testleri bunların yerine geçmez.
+  Kullanıcıdan test beklenerek faz yarım bırakılmadı.
+- Kadim Araştırma gelir kaybının düzelmesi bilim zaferi zamanını etkileyebilir.
+  Eski maliyetler/eşikler korundu; uzun vadeli dengeleme ayrı geliştirmedir.
+- Eski araştırmaların tarihi geriye dönük bilinemez; açıkça bilinmiyor yazılır.
+- Özel kaynak metadata'sı gelecekteki erişim koşulunu tek başına uygulamaz.
+  93E gerçek içerik ve koşul kapılarını birlikte eklemelidir.
+- Kapsamlı araştırma modları 93E'dedir; boş kuyrukta otomatik seçim sürer.
+- Ticaret çoğalması iddiası bu teslimde doğrulanmış veya düzeltilmiş sayılmaz.
+  İleri planda öncelikli bağımsız denetimdir.
+- Önceki filo ETA/AI kayıp hedef/cihaz kabul riskleri ACIK-RISKLER.md'de korunur.
+
+TESLİM
+Tam kaynak: stars-faz93d.zip. ZIP'in kendi SHA-256 değeri teslim mesajındadır.
+Paket içi RELEASE-MANIFEST.json her üyenin SHA-256 değerini taşır (manifest
+kendisi hariç). python3 tools/verify-release.py ile yeniden doğrulanabilir.
+Kullanım/veri sözleşmesi: BILIM-93D.md. Devir: DEVAM-93D.md.
+Sıradaki bilim fazı 93E, yalnız ayrı kullanıcı talebiyle.

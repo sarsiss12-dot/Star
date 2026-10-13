@@ -1,0 +1,55 @@
+GELİŞTİRİCİ RAPORU — STARS FAZ 93A
+TERSANE HEDEFİ / HAREKETLİ FİLO TAKVİYESİ + DOĞRU SAYILAR
+
+KAYNAK: stars-faz92d.zip
+SHA-256: 61ee306db3407779c5bdd483f858547eaceb3bdb8f329262a8a41f9523fc73de
+Kaynak doğrulandı, ayrı kopyada çalışıldı. Build93a / cache stars-v93a.
+
+DÜZELTMELER
+1. Filo panelindeki toplanma noktası eylemi artık bütün tersanelere yazmaz.
+   Eski eylem bilgi verir, harita hedefi açmaz. Tersane hedefi tek sistem
+   panelinden setRally sahiplik/doğrulama kapısıyla ayarlanır/silinir.
+2. Tersane seçiminde çift dokunma veya filo satırı hedefi yutamaz. Kaynak
+   seçimin ardından düşmana geçerse eski callback hedefini değiştiremez.
+3. fleetPendingCounts sırada ve yolda gemileri ayırır. Saf ortak
+   fleetReinforcementStatus panel ve motorun eksik hesabını birleştirir.
+   Sıfır eksikte düğme disabled; motor ikinci ücret/sipariş üretmez.
+4. Baskın sınıf kilitliyse shipBuildAccess araştırma/izin gerekçesi taşınır.
+   Tersane yokluğu, sabotaj ve kapalı rota ayrı mesajdır. Gerçek kaynak
+   yetersizliği kaynak mesajı verir; kısmi sipariş kalan sayısını bildirir.
+5. Eski fleet+sys hedefinin fleet önceliği değiştirilmez. Arayüz eski filo
+   hedefini açık gösterir, ölü/yabancı hedefi geçerli sistemmiş gibi sunmaz.
+   delivery işleri, genel tercihler ve mevcut gemiler silinmez/dönüştürülmez.
+
+HEDEFLİ TEST: 15 senaryo / 15 geçen / 0 kalan.
+Gerçek UI.act → View.tap → setRally, rowHit/double-tap önceliği, üretim
+bitirme → sevk → hareketli filoya birleşme, normal/sivil/özel sipariş,
+kayıt-yükleme, saf sayım/RNG, tekrar masrafı, kilit/sabotaj/rota/yoksulluk.
+UI üretimi gerçek p_filo ve p_sistem; kontrollü DOM, tarayıcı yerleşimi değil.
+
+KAYNAK KORUMA TESTİ
+Eski harita hash kilidinin init/input bölümü View.tap'i de içeriyordu.
+93A'nın incelemeden geçmiş yeni bu bölüm hash'i kaydedildi; prefix ve
+filo-çizim hash'leri 91C referansında aynı kaldı. Pointer bind/kurtarma/
+kamera değişmedi. Yeni hedef davranışını 15 test ayrıca sınar. Tarihsel
+referans-sha.json değiştirilmedi. Başlangıç tam koşusunda önceki hash'i
+okuyan testler için yalnız ilgili başarısız paketler tekrar çalıştırılır;
+sonuçlar final regresyon özetinde birleşir. Davranış iddiası kaldırılmadı.
+
+KORUNANLAR
+AI/diplomasi/ekonomi/savaş/ses/HTML/manifest dosyaları 92D ile aynı.
+Savaş paylaşımı ve oyuncu onayı korunur. Kayıt v8, tercih anahtarları aynı.
+Harita yalnız tap hedefi önceliği ve ralli dalları değişir; normal waypoint,
+pan/pinch/filo cycling ve kurtarma altyapısı bu fazda yeniden tasarlanmaz.
+91C/87T sabit aday. GitHub/publish yok. Android/gerçek tarayıcı testi yok.
+
+SONRAKİ: 93B — Astra / High.
+Kapalı rotada sevkiyat hedefini koruma, sınırlı yeniden deneme, kullanıcı
+iptal/yeniden hedefleme ve ana filo kaybı. 93C'de sınıf bazlı filo şablonu.
+Cihaz testleri kullanıcı isteğine kadar listede birikir.
+
+TAM SONUÇ: 62 paket / 4244 geçen / 0 kalan / 0 atlanan.
+Bir tam koşu + yalnız 11 kaynak-referansı paketinin tekrar koşusu.
+Native Canvas paketleri dahil. İlk koşu 4233/11; 11 referans tekrarı
+geçti. Üretim davranışı testleri gevşetilmedi. Final birleşik özet
+tests/results-93a.json; ilk koşu results-93a-initial.json.

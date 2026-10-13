@@ -1,0 +1,65 @@
+GELİŞTİRİCİ RAPORU — STARS FAZ 93A.1
+GEMİ SİPARİŞİ İPTALİ / GEZEGEN KARTLARI / UZUN BASIŞ
+
+KAYNAK stars-faz93a.zip
+SHA-256 f3807f8a9da947538876e2ba82fe9bda00c87f8529bd22bd8ded31b0f833c1f5
+Ayrı kopyada geliştirildi. Build 93a1; cache stars-v93a1.
+
+UYGULANAN
+1. Aktif/bekleyen gemi siparişi tekil veya aynı tersanedeki tüm kendi işler
+   iptal edilebilir. Onay penceresi adet ve iadeyi gösterir. Vazgeç güvenlidir.
+   Toplu iptal o tersanenin sürekli üretimini kapatır. Diğer tersaneler,
+   yoldaki gemiler ve tamamlanmış gemiler etkilenmez.
+2. queueShip artık o anki gerçek bedeli paid makbuzuyla kaydeder.
+   Bina iptalindeki gibi tam iade uygulanır; indirimler daha sonra değişse de
+   iade değişmez. Eski kayıtta makbuz yoksa 0 iade, açık ön uyarı vardır.
+   İndeks yerine sipariş nesnesi kullanılır: üretim bitince sıradaki yanlış
+   iş iptal olmaz. Sahiplik/yeni dünya/eski onay/tekrar iade korumaları var.
+3. Kolonili gezegenler varsayılan açık. Başlık düğmesi dar yatay özete
+   dönüştürür: ad, nüfus, moral, kuyruk sayısı, sahip rengi. Tekrar basınca
+   normal görünüm. Bağımsız kartlar, canlı özet; UI yenilemede korunur.
+   Kayıt yükleme/yeni dünyada hepsi açık; oyun verisine UI tercihi yazılmaz.
+4. Bina uzun basış bilgisi zaten 450ms ile vardı. Kusur: _holdFired normal
+   body click'ini kesmiyordu. Capture guard aynı uzun basışın inşaat
+   başlatmasını engeller. 12 CSS pikselinden fazla hareket, iptal, arka plan
+   ve ikinci parmak bekleyen zamanlayıcıyı keser. Kısa dokunuş korunur.
+5. Radar/Lojistik/Filo sahipleri aynı kapalı/açık saydamlık ve vurguyu kullanır.
+6. Takviye üretim akışı denetlendi: baskın savaş sınıfı; capTarget yoksa30;
+   mevcut+siparişte+yolda çıkarılır. Kilitli sınıf üretilemez. Yeni metin
+   bunun gövde/erzak doldurmak değil yeni gemi siparişi olduğunu açıklar.
+   Karma sınıf oranı/filo şablonu bu fazda eklenmedi, 93C kapsamıdır.
+7. Yeni iptal modalı 0 dahil önceki oyun hızını onay/vazgeçte korur.
+
+TEST YÖNTEMİ
+Yeni 21 hedefli senaryo: gerçek iptal/ödeme/UI/panel/bInfo yolları;
+üretim bitişi ve eski düğme, başka tersane, özel takviye, tek iade,
+makbuzsuz kayıt, v8 gidiş-dönüş, açık/kapalı kartlar, kaydırma/uzun basış,
+click yutma ve oyun hızı. Kontrollü DOM; tarayıcı yerleşim kanıtı değildir.
+Tam eski paket koşusu, ardından yalnız sürüm/HTML referansından kalan
+paketler ve genişletilen yeni test tekrar çalıştırılır. Onay modalının
+hız geri dönüşü sonradan dar kapsamda düzeltildi ve hedefli sınandı.
+25 test dosyasında sürüm beklentileri güncellendi. 6 testin tarihsel HTML
+hash kilidi yeni incelenmiş 93A.1 HTML helper'ına bağlandı; tarihsel hash
+JSON'u değiştirilmedi, davranış iddiası kaldırılmadı.
+
+KORUNANLAR
+map.js, ai.js, diplomacy.js, combat.js, audio.js, manifest.json kaynakla
+byte-for-byte aynı. SW yalnız cache adı değişti. Kayıt v8; yeni paid alanı
+opsiyoneldir, eski kuyruklar silinmez. Harita çizimi/kamera/jest motoru
+bu fazda değişmedi. Bina bilgi jesti document seviyesindedir.
+
+SINIRLAR
+Gerçek tarayıcı/Android testi yapılmadı. Yeni mobil yerleşim ve uzun basış
+cihaz kabulü bekliyor; kullanıcıya şimdi test görevi verilmez.
+Beyaz ekran için yeni cihaz başarısı iddia edilmiyor.
+
+SONRAKİ
+93B — Astra / High: kapalı rota, hedef saklama, sınırlı retry, ana filo kaybı.
+93C — sınıf şablonu ve tersane süre optimizasyonu.
+94A — isteğe bağlı eğik/dönen kamera. 95A/B — AI amaçları ve iletişim.
+
+SONUÇ: 63 paket / 4265 geçen / 0 kalan / 0 atlanan.
+Native Canvas regresyon paketleri dahil; mobil tarayıcı testi değildir.
+İlk tam koşu 4230/32; 32 eski sürüm/HTML beklentisi düzeltilip yalnız
+başarısız 23 paket tekrar koşuldu. Yeni hedefli test son hali 21/0.
+Kanıt: tests/results-93a1.json ve results-93a1-targeted.log.

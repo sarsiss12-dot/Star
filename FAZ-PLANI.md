@@ -1,3 +1,150 @@
+# 93D.1 güncel durum — 13 Ekim 2026
+
+Sınırlı AI donanma üretimi ve askerî ekonomi düzeltmesi tamamlandı.
+Kanonik kaynak stars-faz93d.zip; SHA-256:
+`8883f62090710c6244871be029aeceaa6ad323cda784124f80766897574ea7ac`.
+Build 93d1, cache stars-v93d1, Save v8.
+
+Ücretli çoklu tersane üretimi; stok/gelir/bakım/tehdit bütçesi; gerçek gemi ve
+bekleyen sipariş sayımı; sınıf bazlı 93C takviyesi; bilim gemisi kaybı sonrası
+artan yenileme beklemesi. Yeni bilim keşif algoritması uygulanmadı.
+
+Üç seed × 120 ay: savaş siparişleri 8/23/11 → 311/302/272;
+bilim siparişleri 238/212/237 → 37/35/42. Ayrıntı AI-DONANMA-93D1.md.
+Bilim ağacı, araştırma ve teknoloji içeriği yeniden geliştirilmedi.
+
+Sıradaki ana faz **93E — Bilimsel Uzmanlaşma ve Özel Teknolojiler**;
+başlanmadı, bu teslim otomatik geçiş yapmaz. 94A kamera ve bütün ileri işler
+korundu. GitHub yayını yapılmadı.
+
+---
+Aşağıdaki bölümler önceki fazların tarihsel kayıtlarıdır.
+
+# 93D güncel durum — 13 Ekim 2026
+
+Kanonik kaynak `stars-faz93c.zip` bütünlüğü ve SHA-256 değeri doğrulandı:
+`88acfa0d4340e4a2db3f0eefc307f352d5367d0120b39a39195c69b9ae47ad55`.
+Build 93d / cache stars-v93d / Save v8.
+
+40 teknoloji üç bağlantılı ağaçta gösterilir. Küresel ana hedef sırası,
+çoklu seçim/kaldırma/sıralama, benzersiz eksik ön koşul sayacı, otomatik uzak
+hedef rotası ve üç paralel dal uygulanmıştır. Küçük yatay kuyruk daraltılır;
+hedef odağı, rota ayrıntıları, tek parmak kaydırma ve ağaca özel zoom vardır.
+Geçmiş dördüncü sekmedir; gerçek kazanımlar ve bilinen tamamlanma tarihleri
+listelenir, eski tarihler uydurulmaz. Araştırma değişiminde ilerleme korunur.
+Kadim Araştırma'ya ulaşmadan silinen yeni bilim geliri yolu düzeltilmiştir.
+
+93E için doktrin/etik/tür kaynak metadata altyapısı hazırdır; yeni teknoloji
+ve kapsamlı otomasyon modu eklenmedi. AI araştırma tercihleri ve 93B/93C
+filo/sevkiyat davranışları korunur. Tam sonuç FAZ93D-RAPOR.txt içindedir.
+
+Sıradaki bilim fazı **93E**, yalnız ayrı kullanıcı talebiyle. Kamera 94A ve
+bütün bağımsız ileri işler ILERI-GELISTIRME-PLANI.md başında korunmuştur.
+Kritik ticaret kaynak çoğalması iddiası öncelikli bağımsız denetimdir.
+GitHub yayını yapılmadı; gerçek Android kabulü bu fazda yapılmadı.
+
+---
+Aşağıdaki notlar tarihsel kayıttır.
+
+# 93C güncel durum — 13 Ekim 2026
+
+Kanonik kaynak: `stars-faz93b.zip`.
+SHA-256: `7b7e2cb3cdf8d9dc9fd3f84962c3d2ca2ebeafe79e57057a202cb9d34988c141`.
+Build 93c, cache stars-v93c; Save v8 korunur.
+
+Filo başına sınıf/miktar bileşimi; mevcut, üretimde/sırada, yolda/bekliyor,
+eksik ve fazla sayıları. Filo panelinden oluştur/düzenle/kaydet ve otomatik
+ takviyeyi aç/kapat. Kayıp sınıfın eksiği yine o sınıftan tamamlanır.
+Tersane kararı: paralel tezgâh, mevcut işlerin kalan süresi, gemi üretimi,
+gerçek hiper-yol/kapı ve hız üzerinden yaklaşık teslim zamanı.
+Bilinen düşman bölgesi ve görülen silahlı düşmanlar elenir; kapalı sınır ve
+sabotaj dikkate alınır. AI aynı motoru mevcut askerî üretim bütçesinde kullanır.
+93B bekleme/retry/iptal/yeni hedef/ana filo kaybı kuralları devam eder.
+
+Bilim uygulaması yapılmadı. Sıradaki onaylanacak faz **93D**, sonra **93E**.
+Kaynakta bu numaralarla önceki teslim bulunmadı. GitHub yayını yapılmadı.
+91C/87T sabit Android adayı değiştirilmedi; kullanıcıdan cihaz testi istenmez.
+Ayrıntı: `FILO-BILESIM-93C.md`, `FAZ93C-RAPOR.txt`.
+
+---
+Aşağıdaki bölümler tarihsel kayıttır; güncel sıra yukarıdaki notlar ve
+ILERI-GELISTIRME-PLANI.md dosyasının başındadır.
+
+# 93B güncel durum — 12 Ekim 2026
+
+Kanonik kaynak: stars-faz93a1.zip; SHA-256
+`0b4ed6eda8d2a7fc6ce3e543e0553a9f5c7bc73ec7738d9e245ae649b5ad7df0`.
+Erişilebilir 93B teslimi bulunamadı; 93A.1 üzerinden ayrı kopyada uygulandı.
+
+- Kapalı rotada teslimat hedefi korunur. İlk başarısız denemeden sonra
+  5, 10, 20 oyun günü aralıkla üç otomatik deneme; sonra manuel karar bekler.
+- Her stepFleets çağrısında en çok sekiz bekleyen sevkiyat rota sorgusu.
+  Süre ve deneme sayısı v8 kaydında saklanır, yükleme bütçeyi sıfırlamaz.
+- Filo paneli ve ana filonun takviye listesi: Sevkiyatı yönet / yeniden dene /
+  iptal / kendi filona veya bilinen sisteme yeniden hedefle.
+- İptal tamamlanmış gemiyi korur; kaynak iadesi veya yeni ücret yoktur.
+  Başlamış hareket bacağı bitirilir; sonrasındaki rota kaldırılır.
+- Ana filo kaybolursa eski konuma veya eski karma rally.sys alanına gizli
+  sevk yapılmaz. Tamamlanan gemi yeni hedef bekler; bitmemiş üretim siparişleri
+  93A.1 iptal/iade yoluyla ayrıca yönetilir.
+- AI aynı retry motorunu kullanır. Bekleyen teslimat normal otomatik
+  birleştirme/savaş planlaması veya yeni takviye hedefi olamaz.
+- map.js, Canvas kurtarma/jest/kamera, diplomasi/transaction, savaş motoru,
+  ekonomi motoru, HTML, manifest.json ve ses kaynakla aynıdır.
+- Save v8 korunur. 91C/87T sabit Android adayı değişmedi. Yeni cihaz kabulü
+  yapılmadı, kullanıcıdan manuel test istenmiyor. GitHub yayını yapılmadı.
+
+Sıradaki öneri **93C**: sınıf bazlı kadro şablonları, miktar ve gerçek
+üretim + seyahat süresine göre tersane seçimi. Bu fazda uygulanmadı.
+Tam doğrulama ve sınırlar: FAZ93B-RAPOR.txt ve LOJISTIK-93B.md.
+
+---
+Aşağıdaki notlar tarihsel kayıttır.
+
+# 93A.1 güncel durum — 11 Ekim 2026
+
+Kullanıcının ek üretim/panel istekleri, planlı 93B'den önce ayrı ara faza alındı.
+- Gemi üretimi: aktif/bekleyen tek sipariş veya o tersanedeki tüm siparişler
+  onay ekranıyla iptal edilir. Toplu işlem o tersanenin loopBuild'ini kapatır.
+- Yeni sipariş paid makbuzu taşır; bina iptalindeki gibi gerçek ödeme tam iade.
+  Eski makbuzsuz işler için iade yoktur; onaydan önce açıkça gösterilir.
+- Kolonili gezegenler varsayılan açık. Başlıkla daralt/aç; dar satır isim,
+  nüfus, moral, inşa sayısı ve sahip rengini gösterir. Oturumluk UI durumu;
+  panel yenilemesinde korunur, yeni dünya/yüklemede açılır. Kayıt v8 aynı.
+- Basılı tutma 450ms: gerçek bina bilgi ekranı. Kaydırma/iptal/arka plan
+  zamanlayıcıyı keser; bilgi açan dokunuşun click'i bina siparişi vermez.
+- Radar/Lojistik/Filo sahipleri kapalı/açık renkleri ortaklaştırıldı.
+- Takviye denetlendi: baskın savaş sınıfı, varsayılan 30 gemi hedefi,
+  sırada/yolda sayılarının düşülmesi. Gövde/erzak doldurmaz; yeni gemi üretir.
+  Karma sınıf şablonu ve tersane süre optimizasyonu henüz eklenmedi.
+
+Sıradaki 93B — Astra / High: kapalı rotada hedefi koruma, sınırlı yeniden
+ deneme, yeniden hedefleme/iptal, ana filo kaybı. 93C: sınıf bazlı şablon,
+üretim+ulaşım süresi. 94A: opsiyonel eğik/dönen kamera, jest ayrımı ve
+başlangıç yönüne oturma. 95A: tutarlı AI amaçları ve karar gerekçeleri.
+95B: diplomasi içinde iletişim/söz/geçmiş. Küçük UI işleri Sol / High.
+91C/87T sabit aday; yeni Android kabulü yapılmadı. Kullanıcıdan test istenmez.
+
+---
+Aşağıdaki faz notları tarihsel kayıttır.
+
+# 93A güncel durum — 11 Ekim 2026
+
+Tersanenin sabit sistem hedefi ile filoya özel takviye ayrıldı. Filo
+panelindeki toplu tersane hedefi yazan seçim kaldırıldı. Takviye bu filoyu
+izler; sabit hedef tersane panelinden seçilir. Eski fleet+sys kayıtlarında
+fleet önceliği korunur ve arayüzde açıkça yazılır; sessiz kayıt dönüşümü yok.
+Üretimde/sırada, yolda/bekliyor ve yeni sipariş sayıları ortak saf hesaptan
+üretilir. Kilitli sınıf, tersane yokluğu, sabotaj ve kapalı rota ayrı gerekçeler.
+
+Sıradaki **93B — Astra / High:** kapanan rotada hedefi saklayan bekleme,
+sınırlı yeniden deneme, yeniden hedefleme/iptal ve ana filo kaybı.
+Ardından 93C sınıf bazlı filo şablonu + üretim/seyahat hesabı.
+Cihaz testi kullanıcı hazır olana kadar istenmez. 91C/87T adayı sabit.
+
+---
+Önceki faz notları aşağıda tarihseldir.
+
 # 92D güncel durum — 11 Ekim 2026
 
 92D barış sonrası aylık AI paylaşım gündemini ekler. Bütün cepheleri kapanan

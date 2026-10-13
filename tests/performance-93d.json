@@ -1,0 +1,7 @@
+{
+  "catalogTechnologies": 40,
+  "renders": 300,
+  "durationMs": 68,
+  "environment": "Node VM controlled host; no browser layout or Android FPS claim",
+  "test": "faz93d_science_ui_test.js"
+}
