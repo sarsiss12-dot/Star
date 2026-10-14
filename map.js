@@ -712,7 +712,7 @@ function territoryColonyOwners(s){
 }
 
 const View = {
-  cam:{x:2100, y:2100, z:.30}, vw:0, vh:0, dpr:1,
+  cam:{x:2100, y:2100, z:.30, a:0}, rotationEnabled:false, vw:0, vh:0, dpr:1,
   sel:null, selSys:null, route:false, routed:false, hl:null, stars:[], flash:[],
   cv:null, g:null,
 
@@ -743,6 +743,7 @@ const View = {
     /* FAZ 86C.4H-R4: son boyutlandırma zamanı — çizimden SONRA
        gelen bir resize tuvali boşaltmış olabilir; tanı bunu ayırır. */
     try { if (typeof markResize === 'function') markResize(); } catch(e){}
+    this.resetGesture();
     this.dpr = Math.min(2, window.devicePixelRatio||1);
     this.vw = window.innerWidth; this.vh = window.innerHeight;
     this.cv.width = this.vw*this.dpr; this.cv.height = this.vh*this.dpr;
@@ -752,13 +753,32 @@ const View = {
     UI.checkOrient();
   },
   fit(){
+    this.resetGesture();this.rowHits=[];
     const pad = 120;
     const z = Math.min((this.vw-320)/(G.W+pad), (this.vh-90)/(G.H+pad));
     this.cam.z = clamp(z, .035, .5);
     const h = G.sys[G.p.home];
     if (h){ this.cam.x = h.x; this.cam.y = h.y; this.cam.z = .40; }
   },
-  w2s(x,y){ return {x:(x-this.cam.x)*this.cam.z + this.vw/2, y:(y-this.cam.y)*this.cam.z + this.vh/2}; },
+  // 94A: same orthographic transform for all drawing, picking and commands.
+  w2s(x,y){
+    const a=this.cam.a||0,c=Math.cos(a),s=Math.sin(a),dx=x-this.cam.x,dy=y-this.cam.y;
+    return {x:(dx*c-dy*s)*this.cam.z+this.vw/2,y:(dx*s+dy*c)*this.cam.z+this.vh/2};
+  },
+  cameraChanged(){ this._pan=null;this.rowHits=[]; },
+  resetAngle(){ this.resetGesture();this.cam.a=0;this.cameraChanged();this.clampCam(); },
+  focusSelection(){
+    const target=this.sel&&G.fleets.includes(this.sel)?this.sel:this.selSys;
+    if(!target)return false;
+    this.resetGesture();this.center(target.x,target.y);return true;
+  },
+  drawWorldImage(g,img){
+    const p=this.w2s(0,0);
+    g.save();
+    try{g.translate(p.x,p.y);g.rotate(this.cam.a||0);
+      g.drawImage(img,0,0,G.W*this.cam.z,G.H*this.cam.z);
+    }finally{g.restore();}
+  },
   /* ═══ FAZ 47: YUMUŞAK KAYDIRMA + PING ═══
      Zoom'a DOKUNULMAZ. Kamera hedefe animasyonla süzülür. */
   panTo(x, y){
@@ -938,7 +958,10 @@ const View = {
     this.bcache = c; this.bkey = key;
     return c;
   },
-  s2w(x,y){ return {x:(x-this.vw/2)/this.cam.z + this.cam.x, y:(y-this.vh/2)/this.cam.z + this.cam.y}; },
+  s2w(x,y){
+    const a=this.cam.a||0,c=Math.cos(a),s=Math.sin(a),dx=(x-this.vw/2)/this.cam.z,dy=(y-this.vh/2)/this.cam.z;
+    return {x:dx*c+dy*s+this.cam.x,y:-dx*s+dy*c+this.cam.y};
+  },
 
   /* ---------- girdi ---------- */
   /* ═══════════════════════════════════════════════════════════════
@@ -959,6 +982,7 @@ const View = {
      korumalı. Kesinti durumları (sekme gizlenmesi, odak kaybı,
      kayıt yükleme, harita tamiri) için merkezî `resetGesture()`. */
   resetGesture(){
+    this._pan=null;
     const s = this._gest;
     if (!s) return;
     if (this.cv && this.cv.releasePointerCapture){
@@ -966,7 +990,7 @@ const View = {
         try { this.cv.releasePointerCapture(id); } catch(e){}
       }
     }
-    s.pts.clear(); s.last = null; s.moved = 0; s.t0 = 0; s.pinch = null;
+    s.pts.clear(); s.last = null; s.moved = 0; s.t0 = 0; s.pinch = null; s.blocked=true; s.start=null;
   },
   /* ═══ FAZ 86C.4H-R4 — A BULGUSU: BAĞLAMA JETONU ═══
      ÖLÇÜLEN HATA: geri alma yolunda `View._boundCv = null` yapılınca
@@ -1004,14 +1028,15 @@ const View = {
     /* Bu yüzeye ait her dinleyici kaydedilir ki sökülebilsin. */
     const _kayit = this._surfListeners = [];
     _kayit._cv = cv;                    // sökme, _boundCv'den bağımsız
-    const _ekle = (tur, fn) => { _kayit.push([tur, fn]); cv.addEventListener(tur, fn); };
+    const _ekle = (tur, fn, opts) => { _kayit.push([tur, fn]); cv.addEventListener(tur, fn, opts); };
     /* Bu BAĞLAMAYA özgü jeton — canvas kimliği YETMEZ (aynı canvas
        yeniden bağlanabilir). Yalnız jetonu güncel olan callback çalışır. */
     const _jeton = this._bindToken = (this._bindToken || 0) + 1;
     const _guncel = () => this._bindToken === _jeton && this._boundCv === cv;
     const s = this._gest = {pts:new Map(), last:null, moved:0, t0:0, pinch:null};
     const pts = s.pts;
-    const pos = ev => ({x:ev.clientX, y:ev.clientY});
+    const pos = ev => {const r=cv.getBoundingClientRect();return {x:ev.clientX-r.left,y:ev.clientY-r.top};};
+    cv.style.touchAction='none';
     /* Bir temasın kaydını kapat; tap kararı ÇAĞIRANA aittir. */
     const kapat = id => {
       pts.delete(id);
@@ -1026,13 +1051,17 @@ const View = {
 
     _ekle('pointerdown', ev => {
       if (!_guncel()) return;          // emekli yüzey müdahale edemez
+      if(ev.pointerType==='mouse' && ev.button!==0)return;
+      this._pan=null;
       try { cv.setPointerCapture(ev.pointerId); } catch(e){}
       pts.set(ev.pointerId, pos(ev));
-      if (pts.size === 1){ s.last = pos(ev); s.moved = 0; s.t0 = performance.now(); }
-      else if (pts.size === 2){
+      if (pts.size === 1){ s.last = s.start = pos(ev); s.moved = 0; s.blocked=false; s.t0 = performance.now(); }
+      else if (pts.size >= 2){
+        s.blocked=true;
         const [a,b] = [...pts.values()];
-        s.pinch = {d: Math.hypot(a.x-b.x, a.y-b.y), z: this.cam.z,
-                   mx:(a.x+b.x)/2, my:(a.y+b.y)/2};
+        s.pinch = {d: Math.max(1,Math.hypot(a.x-b.x, a.y-b.y)), z: this.cam.z,
+                   angle:Math.atan2(b.y-a.y,b.x-a.x),a:this.cam.a||0,
+                   anchor:this.s2w((a.x+b.x)/2,(a.y+b.y)/2)};
       }
     });
     _ekle('pointermove', ev => {
@@ -1045,10 +1074,11 @@ const View = {
         /* FAZ 44: pinch-zoom mobilde asıl kullanılan yol —
            tekerlekle aynı sınıra çekildi (0.07 → 0.035). */
         const nz = clamp(s.pinch.z * (d/s.pinch.d), .035, 1.9);
-        const mid = this.s2w((a.x+b.x)/2, (a.y+b.y)/2);
         this.cam.z = nz;
+        if(this.rotationEnabled)this.cam.a=s.pinch.a+Math.atan2(b.y-a.y,b.x-a.x)-s.pinch.angle;
         const mid2 = this.s2w((a.x+b.x)/2, (a.y+b.y)/2);
-        this.cam.x += mid.x-mid2.x; this.cam.y += mid.y-mid2.y;
+        this.cam.x += s.pinch.anchor.x-mid2.x; this.cam.y += s.pinch.anchor.y-mid2.y;
+        this.rowHits=[];
         this.clampCam();                    // FAZ 78B
         s.moved = 99;
       } else if (pts.size === 1 && s.last){
@@ -1057,7 +1087,9 @@ const View = {
         /* Eşik CSS pikselinde ölçülür — zoom seviyesi tıklama
            eşiğini DEĞİŞTİRMEZ (clientX/Y zaten CSS pikselidir). */
         s.moved += Math.hypot(dx,dy);
-        this.cam.x -= dx/this.cam.z; this.cam.y -= dy/this.cam.z;
+        const before=this.s2w(s.last.x,s.last.y),after=this.s2w(p.x,p.y);
+        this.cam.x += before.x-after.x; this.cam.y += before.y-after.y;
+        this.rowHits=[];
         /* FAZ 78B: sabit panPad yerine zoom'a duyarlı merkezi sınır */
         this.clampCam();
         s.last = p;
@@ -1075,8 +1107,9 @@ const View = {
          pointer state KESİNLİKLE temizlenir, tap en sonda ve kendi
          hata sınırında çalıştırılır. */
       const tapEt = pts.has(ev.pointerId) && pts.size === 1 &&
-                    s.moved < 14 && performance.now() - s.t0 < 420;
-      const nokta = {x: ev.clientX, y: ev.clientY};
+                     !s.blocked && s.moved < 14 &&
+                    Math.hypot(pos(ev).x-s.start.x,pos(ev).y-s.start.y)<14 && performance.now() - s.t0 < 420;
+      const nokta = pos(ev);
       kapat(ev.pointerId);                    // ÖNCE temizle
       if (!tapEt) return;
       try {
@@ -1095,8 +1128,8 @@ const View = {
     /* İptal ve YAKALAMA KAYBI: tap ÜRETMEDEN temizle. Aynı temas için
        birden fazla kapanış olayı gelmesi durumu bozmaz (delete
        idempotenttir). */
-    _ekle('pointercancel', ev => { if (_guncel()) kapat(ev.pointerId); });
-    _ekle('lostpointercapture', ev => { if (_guncel()) kapat(ev.pointerId); });
+    _ekle('pointercancel', ev => { if (_guncel()){s.blocked=true;kapat(ev.pointerId);} });
+    _ekle('lostpointercapture', ev => { if (_guncel()){s.blocked=true;kapat(ev.pointerId);} });
     /* ═══ FAZ 86C.4H-R3: GLOBAL DİNLEYİCİLER TEK SEFER ═══
        ÖLÇÜLEN HATA: bu iki dinleyici bind() içindeydi. bind() her
        YENİ canvas için tekrar çalıştığından window/document
@@ -1140,11 +1173,13 @@ const View = {
     _ekle('wheel', ev => {
       if (!_guncel()) return;
       ev.preventDefault();
-      const before = this.s2w(ev.clientX, ev.clientY);
+      this.cameraChanged();
+      const p=pos(ev);
+      const before = this.s2w(p.x,p.y);
       /* FAZ 44: min zoom 0.07 → 0.035. ULU halka haritada tüm
          galaksiyi tek ekranda görmek 0.061 gerektiriyordu. */
       this.cam.z = clamp(this.cam.z * (ev.deltaY < 0 ? 1.14 : .88), .035, 1.9);
-      const after = this.s2w(ev.clientX, ev.clientY);
+      const after = this.s2w(p.x,p.y);
       this.cam.x += before.x-after.x; this.cam.y += before.y-after.y;
       this.clampCam();                      // FAZ 78B
     }, {passive:false});
@@ -1439,8 +1474,9 @@ const View = {
     if (!c) return;
     const z = Math.max(.02, c.z || .4);
     /* Ekranın yarısı, dünya biriminde */
-    const yariW = (this.vw || 900) / (2 * z);
-    const yariH = (this.vh || 420) / (2 * z);
+    const co=Math.abs(Math.cos(c.a||0)),si=Math.abs(Math.sin(c.a||0));
+    const yariW = ((this.vw||900)*co+(this.vh||420)*si)/(2*z);
+    const yariH = ((this.vw||900)*si+(this.vh||420)*co)/(2*z);
     /* Pay: ekranın yarısı + küçük bir nefes payı.
        Taban 300 birim ki aşırı yakınlaştırmada da kenar okunsun. */
     const padX = Math.max(300, yariW * .95);
@@ -1448,7 +1484,7 @@ const View = {
     c.x = clamp(c.x, -padX, (G.W || 4000) + padX);
     c.y = clamp(c.y, -padY, (G.H || 4000) + padY);
   },
-  center(x,y){ this.cam.x = x; this.cam.y = y; this.clampCam(); },
+  center(x,y){ this.cameraChanged();this.cam.x = x; this.cam.y = y; this.clampCam(); },
 
   /* ---------- çizim ---------- */
   /* ═══ FAZ 21: GÖRÜŞ ALANI (FRUSTUM CULLING) ═══
@@ -1483,8 +1519,9 @@ const View = {
        ölçülebilir bir fark yok (aşağıdaki testte doğrulandı). */
     const RENDER_MARGIN = 300;               // ekran uzayında piksel
     const pay = RENDER_MARGIN / Math.max(.02, z);   // dünya birimine çevir
-    const halfW = this.vw / 2 / Math.max(.02, z);
-    const halfH = this.vh / 2 / Math.max(.02, z);
+    const co=Math.abs(Math.cos(this.cam.a||0)),si=Math.abs(Math.sin(this.cam.a||0));
+    const halfW = (this.vw*co+this.vh*si)/2/Math.max(.02,z);
+    const halfH = (this.vw*si+this.vh*co)/2/Math.max(.02,z);
     this.fx0 = this.cam.x - halfW - pay;
     this.fx1 = this.cam.x + halfW + pay;
     this.fy0 = this.cam.y - halfH - pay;
@@ -1583,7 +1620,7 @@ const View = {
         g.strokeStyle=info.col;g.lineWidth=.75;g.beginPath();
         g.moveTo(j.x,j.y);g.lineTo(clamp(j.x,b.x,b.x+b.w),b.y);g.stroke();
       }
-      g.fillStyle='rgba(5,8,16,.92)';g.fillRect(b.x,b.y,b.w,b.h);
+      g.fillStyle='rgba(5,8,16,.82)';g.fillRect(b.x,b.y,b.w,b.h);
       g.fillStyle=info.col;g.fillRect(b.x,b.y,2,b.h);g.fillText(text,b.x+7,b.y+h/2);
       this._fleetOwnerLabels.push({...b,emp:j.emp,ids:j.ids,text,name});
       blocks.push(b);this._mapLabelBlocks.push(b);
@@ -1657,7 +1694,7 @@ const View = {
       const b=placed;
       g.strokeStyle=job.col;g.lineWidth=1;
       g.beginPath();g.moveTo(b.px,b.py);g.lineTo(clamp(b.px,b.x,b.x+b.w),clamp(b.py,b.y,b.y+b.h));g.stroke();
-      g.fillStyle='rgba(5,8,16,.90)';g.fillRect(b.x,b.y,b.w,b.h);
+      g.fillStyle='rgba(5,8,16,.82)';g.fillRect(b.x,b.y,b.w,b.h);
       g.fillStyle=job.col;g.fillRect(b.x,b.y,3,b.h);
       g.fillText(text,b.x+9,b.y+b.h/2);
       blocks.push(b);this._territoryLabels.push(b);
@@ -1693,14 +1730,15 @@ const View = {
       const a = this.w2s(0,0), b = this.w2s(G.W,G.H);
       g.globalAlpha = .55;
       g.imageSmoothingEnabled = true;
-      g.drawImage(G.nebula, a.x, a.y, b.x-a.x, b.y-a.y);
+      this.drawWorldImage(g,G.nebula);
       g.imageSmoothingEnabled = false;
       g.globalAlpha = 1;
     }
     // yıldız tozu (paralaks)
     if (!BG_OFF) for (const s of this.stars){
-      const px = (s.x-this.cam.x)*z*s.p + this.vw/2;
-      const py = (s.y-this.cam.y)*z*s.p + this.vh/2;
+      const projected=this.w2s(s.x,s.y);
+      const px=(projected.x-this.vw/2)*s.p+this.vw/2;
+      const py=(projected.y-this.vh/2)*s.p+this.vh/2;
       if (px<-4||py<-4||px>this.vw+4||py>this.vh+4) continue;
       g.fillStyle = 'rgba(200,225,255,'+s.a+')';
       g.fillRect(px|0, py|0, s.r, s.r);
@@ -1714,7 +1752,7 @@ const View = {
       g.save();
       g.imageSmoothingEnabled = true;
       g.globalAlpha = .92;
-      g.drawImage(bmap, a0.x, a0.y, b0.x-a0.x, b0.y-a0.y);
+      this.drawWorldImage(g,bmap);
       g.globalAlpha = 1;
       g.imageSmoothingEnabled = false;
       g.restore();
@@ -2897,7 +2935,7 @@ const View = {
     let ang = 0;
     if (f.mv){
       const a = G.sys[f.mv.from], b = G.sys[f.mv.to];
-      ang = Math.atan2(b.y-a.y, b.x-a.x) + Math.PI/2;
+      ang = Math.atan2(b.y-a.y, b.x-a.x) + Math.PI/2 + (this.cam.a||0);
     }
     if (ordu){
       const r = Math.max(3, 5 * z);

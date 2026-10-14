@@ -100,6 +100,9 @@ const UI = {
       `<button class="tool" id="btnFullscreen" onclick="forceFullscreen()" title="Tam ekran">⛶</button>
        <button class="tool" data-a="home" title="Anavatan">⌂</button>
        <button class="tool" data-a="fit" title="Galaksi">✧</button>
+       <button class="tool" style="min-width:44px;min-height:44px" data-a="cameraReset" aria-label="Harita açısını sıfırla" title="Başlangıç açısı">↟</button>
+       <button class="tool" style="min-width:44px;min-height:44px" data-a="cameraFocus" aria-label="Seçili sisteme veya filoya odaklan" title="Seçili hedefe odaklan">◎</button>
+       <button class="tool" style="min-width:44px;min-height:44px" id="cameraRotate" data-a="cameraRotate" aria-pressed="false" aria-label="İki parmakla döndürme" title="İki parmakla döndürme: kapalı">⟳</button>
        <button class="tool" data-a="save" title="Kaydet">▤</button>
        <!-- FAZ 64: 🌌 arka plan ve ⚡ otomatik olay ikonları
             kaldırıldı — ikisi de Faz 62'de "KAYIT VE AYARLAR"
@@ -262,6 +265,12 @@ const UI = {
       case 'tab': this.tab(x); break;
       case 'spd': this.setSpeed(+x); break;
       case 'full': forceFullscreen(); break;   // FAZ 54: senkron yol
+      case 'cameraReset': View.resetAngle(); break;
+      case 'cameraFocus': if(!View.focusSelection())this.alert('Önce bir sistem veya filo seç'); break;
+      case 'cameraRotate': {
+        View.resetGesture();View.rotationEnabled=!View.rotationEnabled;
+        const b=$('cameraRotate');if(b){b.setAttribute('aria-pressed',String(View.rotationEnabled));b.classList.toggle('on',View.rotationEnabled);b.title='İki parmakla döndürme: '+(View.rotationEnabled?'açık':'kapalı');}break;
+      }
       case 'home': { const h=G.sys[G.p.home]; View.center(h.x,h.y); View.cam.z=Math.max(View.cam.z,.4); View.selSys=h; this.tab('sistem'); break; }
       case 'fit': View.fit(); break;
       case 'save': this.saveMenu(); break;
@@ -1587,7 +1596,7 @@ const UI = {
       case 'demolish': this.demolish(x); break;
       case 'ship': this.buildShip(x); break;
       case 'scienceTab': case 'scienceNode': case 'scienceFocus': case 'scienceFilter':
-      case 'scienceQueue': case 'scienceRoute': case 'scienceMove': case 'scienceRemove': case 'scienceZoom':
+      case 'scienceMode': case 'scienceQueue': case 'scienceRoute': case 'scienceMove': case 'scienceRemove': case 'scienceZoom':
         this.scienceAction(a,x);break;
       case 'tech': this.setTech(x); break;
       case 'war': this.diploAct('war', +x); break;
@@ -1753,7 +1762,7 @@ const UI = {
              ${spec ? `<div class="mini" style="color:#6ff2c8;margin-top:6px">${spec}</div>` : ''}
              <div class="ph">İNŞA BEDELİ</div>${cost}
              <div class="ph">AYLIK BAKIM</div>
-             <div class="row"><span>Enerji</span><b style="color:#ff5f6d">−${B.up||0}/ay</b></div>
+             <div class="row"><span>Enerji</span><b style="color:#ff5f6d">−${Math.round((B.up||0)*1.6*100)/100}/ay</b></div>
              <div class="row"><span>İşgücü</span><b style="color:#ff9b3d">1 nüfus</b></div>
              ${gain ? `<div class="ph">KAZANÇ</div>${gain}` : ''}
              ${uses ? uses : ''}
@@ -2363,14 +2372,14 @@ const UI = {
           h += `<div class="act2">`;
           for (const k in BUILDINGS){
             const B = BUILDINGS[k], n = c.b[k]||0;
-            const full = n >= B.max || colonyUsed(c) >= colonySlots(c, e, pl);
+            const full = (B.tech&&!e.techs[B.tech]) || n >= B.max || colonyUsed(c) >= colonySlots(c, e, pl);
             const afford = Object.keys(B.c).every(r => e.res[r] >= B.c[r]);
             /* FAZ 62: 'i' butonu kaldırıldı — bilgi için binaya
                UZUN BAS (data-hold). Mobilde parmak yeri kazandırır
                ve yanlışlıkla bilgi açılması biter. */
             h += `<div class="bWrap" style="flex:1;min-width:66px">
               <button class="abtn ${full||!afford?'dis':''}" data-a="build" data-hold="${k}" data-x="${s.id}:${pl.i}:${k}" style="width:100%">` +
-                 `${B.n.split(' ')[0]} ${n}/${B.max}<br><span style="font-size:9px">` +
+                 `${B.tech&&!e.techs[B.tech]?'🔒 ':''}${B.n.split(' ')[0]} ${n}/${B.max}<br><span style="font-size:9px">` +
                  Object.entries(B.c).map(([r,v])=>`<span style="color:${e.res[r]>=v?RES[r].c:'#ff5f6d'}">${RES[r].ico}${v}</span>`).join(' ') +
                  `</span></button>` +
                  /* FAZ 14: mevcut binayı yıkma tuşu */
@@ -3003,7 +3012,7 @@ const UI = {
   },
   scienceSignature(){
     const e=G.p;
-    return JSON.stringify([e.techs,e.rq,e.rp,e.research,e.techMul,e.streakB,e.streakN,e.inc.ara,e.ascend,e.ascendP]);
+    return JSON.stringify([e.techs,e.rq,e.rp,e.research,e.techMul,e.streakB,e.streakN,e.inc.ara,e.ascend,e.ascendP,e.ethics,e.mizac,e.persLock,e.physio]);
   },
   scienceLayout(branch){
     const ids=Object.keys(TECHS).filter(id=>TECHS[id].b===branch),depth={},visiting=new Set();
@@ -3028,6 +3037,7 @@ const UI = {
   scienceStatus(id,plan){
     const e=G.p;
     if(e.techs[id])return ['done','Tamamlandı'];
+    if(!researchAccess(e,id).ok)return ['locked',researchAccess(e,id).why];
     if(e.rq[TECHS[id].b]===id)return ['active','Araştırılıyor'];
     if(plan.order.includes(id))return ['planned',plan.goals.some(g=>g.id===id)?'Ana hedef':'Ön koşul planı'];
     return researchReady(e,id)?['ready','Seçilebilir']:['locked','Kilitli · hedef seçilebilir'];
@@ -3043,6 +3053,8 @@ const UI = {
     let h='<div class="scienceRoot"><nav class="scTabs" aria-label="Bilim dalları">';
     for(const [b,B] of Object.entries(BRANCH))h+=`<button data-a="scienceTab" data-x="${b}" aria-pressed="${s.tab===b}" class="${s.tab===b?'on':''}">${B.n}</button>`;
     h+=`<button data-a="scienceTab" data-x="history" aria-pressed="${s.tab==='history'}" class="${s.tab==='history'?'on':''}">Geçmiş</button></nav>`;
+    h+='<div class="scFilters" aria-label="Araştırma modu">'+[['manual','Manuel'],['semi','Yarı otomatik'],['auto','Otomatik']].map(([key,label])=>`<button data-a="scienceMode" data-x="${key}" aria-pressed="${researchMode(e)===key}" class="${researchMode(e)===key?'on':''}">${label}</button>`).join('')+'</div>';
+    h+='<p class="mini">'+({manual:'Yalnız hedefler ve zorunlu ön koşullar. Plan bitince puanlar birikir.',semi:'Hedefler öncelikli; boş dallarda uygarlığına uygun otomatik seçim.',auto:'Seçimi otomasyon yönetir. Kayıtlı hedeflerin korunur; bu modda uygulanmaz.'}[researchMode(e)])+'</p>';
     h+=`<details class="scSummary"><summary>Aylık ${fmt(e.inc.ara)} ✦ · ${Object.keys(TECHS).filter(id=>e.techs[id]).length}/${Object.keys(TECHS).length} tamamlandı${e.ascend?' · Kadim '+e.ascend:''}</summary>`;
     for(const [b,B] of Object.entries(BRANCH)){
       const id=e.rq[b];h+=`<div>${B.n}: ${id?esc(TECHS[id].n)+' · '+fmt(e.rp[b])+'/'+fmt(techCost(e,id))+' ✦':'Tamamlandı / bekliyor'}</div>`;
@@ -3077,7 +3089,8 @@ const UI = {
         const id=s.focus,t=TECHS[id],o=techOrigin(id),route=researchRoute(e,id),goal=plan.goals.find(g=>g.id===id);
         const progress=e.rq[t.b]===id?e.rp[t.b]:(e.research&&e.research.bank[id]||0);
         h+=`<details class="scDetail" open><summary>${esc(t.n)} · K${t.t} · ${fmt(progress)}/${fmt(techCost(e,id))} ✦</summary><div>${this.scienceBenefits(id)}</div>`;
-        if(o)h+=`<div>${o.icon} ${esc(o.label)} · ${esc(o.condition)}</div>`;
+        if(o)h+=`<div>${o.icon} ${esc(o.condition)}</div>`;
+        if(!researchAccess(e,id).ok)h+=`<p role="alert">${esc(researchAccess(e,id).why)} · Yatırılan puan korunur.</p>`;
         if(Array.isArray(t.r)&&t.r.length)h+='<div>Ön koşullar: '+t.r.map(k=>researchValidTech(k)?`<button data-a="scienceFocus" data-x="${k}">${esc(TECHS[k].n)}</button>`:esc(k)).join(' ')+'</div>';
         h+=`<button data-a="scienceRoute">${s.route?'Rotayı gizle':'Otomatik rotayı göster'}</button>${goal?' <span>'+goal.number+'. hedef · +'+goal.extra+' yeni ön koşul</span>':''}`;
         if(s.route)h+=route.ok?'<ol class="scRoute">'+route.order.map(k=>`<li>${esc(TECHS[k].n)} · ${BRANCH[TECHS[k].b].n}${k===id?' · ANA HEDEF':''}</li>`).join('')+'</ol>':`<p role="alert">${esc(route.why)}</p>`;
@@ -3090,7 +3103,7 @@ const UI = {
       for(const g of plan.goals){const t=TECHS[g.id];
         h+=`<div class="scGoal"><button class="scGoalFocus" data-a="scienceFocus" data-x="${g.id}"><b>${g.number} · +${g.extra} ${esc(t.n)}</b><small>${BRANCH[t.b].n} · ${g.ok?this.scienceStatus(g.id,plan)[1]:esc(g.why)}</small></button><div class="scReorder"><button data-a="scienceMove" data-x="${g.id}:-1" aria-label="${esc(t.n)} hedefini öne al" ${g.number===1?'disabled':''}>←</button><button data-a="scienceMove" data-x="${g.id}:1" aria-label="${esc(t.n)} hedefini sona al" ${g.number===plan.goals.length?'disabled':''}>→</button><button data-a="scienceRemove" data-x="${g.id}" aria-label="${esc(t.n)} hedefini kaldır">✕</button></div></div>`;
       }
-      if(!plan.goals.length)h+='<p class="scQueueEmpty">Ağaçtan uzak hedefleri de seçebilirsin. Boş kuyrukta mevcut otomatik araştırma sürer.</p>';
+      if(!plan.goals.length)h+='<p class="scQueueEmpty">Ağaçtan uzak hedefleri de seçebilirsin. Boş kuyruk davranışı seçili araştırma moduna bağlıdır.</p>';
       h+='</div>';
     }
     return h+'</section></div>';
@@ -3133,6 +3146,7 @@ const UI = {
     const s=this.scienceState();this.scienceRemember();let focus=false,result;
     if(action==='scienceTab'&&(BRANCH[x]||x==='history'))s.tab=x;
     else if(action==='scienceFilter'&&(BRANCH[x]||x==='all'))s.filter=x;
+    else if(action==='scienceMode'){setResearchMode(G.p,x);}
     else if(action==='scienceQueue')s.queueOpen=!s.queueOpen;
     else if(action==='scienceRoute')s.route=!s.route;
     else if(action==='scienceZoom'){this.scienceApplyZoom(x==='reset'?1:s.zoom+Number(x));return;}

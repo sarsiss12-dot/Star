@@ -1,0 +1,81 @@
+STARS — FAZ 94A: GALAKSİ KAMERASI VE DOKUNMATİK KONTROLLER
+14 Ekim 2026
+
+KANONİK KAYNAK
+stars-faz93e1.zip
+SHA-256: 057a90635dc10a22e2a402d73c19ae02ebad5ca1ce49255d4cf5541bbffe02b8
+ZIP CRC ve SHA-256 doğrulandı. GitHub'dan kaynak alınmadı.
+
+TAMAMLANANLAR
+- Tek parmak/sol fare pan; iki parmakla orta nokta odaklı zoom ve taşıma.
+- Varsayılan kapalı isteğe bağlı iki parmak döndürme.
+- Başlangıç açısı, seçili sistem/filoya odaklanma ve döndürme düğmeleri;
+  mevcut sol araç çubuğunda en az 44×44 CSS piksel dokunma alanı.
+- Ortak w2s/s2w dönüşümü; döndürülmüş haritada sistem/filo/hedef seçimi.
+- Sınır/bulutsu dokusu, paralaks, gemi yönü ve frustum açıya uyumlu.
+- Hareketsiz çoklu temastan sonra yanlış tap/filo emri engellendi.
+- Elle pan/pinch/wheel, devam eden kamera animasyonunu keser.
+- Pointerup/cancel/capture kaybı, üçüncü parmak, resize ve blur güvenliği.
+- Wheel listener seçenekleri iletilir; passive:false artık korunur.
+- Döndürülmüş viewport'u hesaba katan sınırlar; zoom .035–1.9 korunur.
+- Etiket arka planları okunabilirlik için korunur. Devlet/filo sahipliği
+  şeritlerinin opaklığı .90/.92'den .82'ye indirildi; genişlik/çakışma
+  kontrolleri aynı kaldı. Yazılar döndürülmez, dünya konumlarını izler.
+- Eğik/perspektif görünüm eklenmedi. İnertial kayma veya yeni render döngüsü yok.
+
+KORUNANLAR
+Save v8; 58 teknoloji ve sekiz doktrin; 93D.1 AI donanma ekonomisi;
+93B sevkiyatı; filo emirleri; tek resize yöneticisi; kurtarma ve eski
+Canvas listener sökümü. economy.js, ai.js, combat.js, diplomacy.js ve
+index.html 93E.1 kaynağıyla byte-for-byte aynıdır.
+main.js yalnız build94a ve geçersiz kamera açısı kontrolünde değişti.
+Kamera açısı oturumluk görsel durumdur; kayıt şemasına alan eklenmedi.
+PWA cache stars-v94a. GitHub'a yayın yapılmadı.
+
+TESTLER
+72 test paketi; 4.514 başarılı kontrol; 0 kalan hata; 0 zaman aşımı;
+0 atlanan test paketi.
+27 yeni kamera kontrolü. Beş açı × üç zoom düzeyinde ters dönüşüm ve
+sistem hit testi; pan/pinch/rotasyon merkezi; hareketsiz iki parmak;
+üçüncü parmak/cancel/capture; release konumu; mouse ayrımı; canvas offset;
+frustum/sınır; odak/reset; gerçek filo hedef emri; stacked filo satırı;
+resize/yeniden bind; NaN açı; native raster piksel hizası; döndürülmüş
+native tam harita/mod/resize; yanlış rally emri engeli.
+
+Önce hedefli, sonra tek sınırlı tam regresyon çalıştırıldı. Tekrarlar
+başarılı kontrol sayısına eklenmedi. Son kanıt tests/logs-94a/summary.json,
+her testin .log dosyası ve full-run.log içindedir.
+İlk hedefli testte fixture'ın yanlış A.route alanı A.path olarak düzeltildi.
+Eski yüzey testi normal pointerdown sırasında rowHits temizlemenin filo
+satırı seçimini bozduğunu yakaladı; normal dokunmada satır alanı korundu,
+alan temizliği yalnız kamera hareketinde kaldı. 94A için bilinçli değişen
+kamera/gemi yönü koruma hash'leri güncellendi; tarihsel referans-sha.json
+korundu. İlk başarısız hedefli loglar tarihsel kanıt olarak pakettedir.
+
+PERFORMANS
+Native Skia host, 100 sistem, DPR1, 5 ısınma çizimi sonrası 30 kare:
+93E.1 açı0: 105 ms; 94A açı0: 99 ms; 94A açı0,8 radyan: 86 ms.
+Bu kısa ölçümde belirgin ek yük görünmedi. Döndürünce görünür öğe sayısı
+ve host yükü değişebilir; bu sonuç performans artışı veya Android FPS
+garantisi değildir. Veri: tests/logs-94a/render-benchmark.json.
+
+AÇIK RİSKLER
+Fiziksel Android/WebView/PWA cihaz testi yapılmadı. Sentetik pointer ve
+native Canvas testleri gerçek tarayıcı compositor/GPU testinin yerine geçmez.
+Döndürülmüş viewport'un kapsayıcı kutusu bazı açılarda ek çizim yapabilir.
+Eğme yok; kamera açısı kalıcı kayıt alanı değil. Kullanıcıdan cihaz testi
+beklenerek çalışma yarım bırakılmadı. ACIK-RISKLER.md güncellendi.
+
+İLERİ PLAN
+Ticarette kaynak çoğalması/rota bütünlüğü öncelikli bağımsız denetimdir;
+kanıtlanan hata ayrı öncelikli bakım fazında düzeltilmelidir. 94A'da ticaret
+motoruna müdahale edilmedi. Güvenli bilim keşfi, uzaktan inşa, yedi kaynak
+Ekonomi ekranı, gerçek konvoylar, kompakt diplomasi, sığınmacı/olay tutarlılığı,
+pre-game portre ve sekiz köken, teknolojik istihbarat/karşı araştırma,
+stratejik AI, doğal enstrüman modellemeli JavaScript müzik planları korundu.
+Sonraki faz otomatik başlatılmadı.
+
+BELGELER
+KAMERA-94A.md — kullanım, dönüşümler, jest eşikleri ve kapsam.
+DEVAM-94A.md — devam ve regresyon notları.
+FAZ-PLANI.md / ILERI-GELISTIRME-PLANI.md — güncel ve korunmuş tarihsel plan.

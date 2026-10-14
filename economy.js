@@ -325,7 +325,7 @@ function empireIncome(e){
       if (rm !== 1) for (const k in o) o[k] *= rm;
     }
     for (const k in o) inc[k] += o[k];
-    inc.min -= (use.min||0);
+    for(const key in use)if(key in inc)inc[key]-=use[key]||0;
     food += pl.col.pop * 1.15;                    // nüfus başına ağır beslenme yükü
     pops += pl.col.pop;
     for (const k in pl.col.b) upk += (BUILDINGS[k].up||0) * pl.col.b[k];
@@ -591,8 +591,38 @@ function economyTick(init){
 
 /* 93D — Shared research state. rq/rp remain the active branch compatibility
    fields; bank contains ONLY suspended technology progress, never its copy. */
+// All requirements are AND; values within one requirement are OR.
+function researchDoctrine(e){return e.mizac||e.persLock||(RACES[e.race]&&RACES[e.race].pers)||'yayilmaci';}
+function researchSpecies(e){
+ if(e.physio&&PHYSIO[e.physio])return e.physio;
+ if(e.race==='makine')return 'machine';if(e.race==='suru')return 'hive';
+ return Object.keys(PHYSIO).find(k=>PHYSIO[k]===physioOf(e))||'humanoid';
+}
+function researchConditions(id){
+ return (TECHS[id]&&TECHS[id].requirements||[]).map(q=>({kind:q.kind,
+ label:q.kind==='ethic'?(ETHICS[q.key]?(q.sign>0?ETHICS[q.key].a:ETHICS[q.key].b)+' (en az 1)':'Geçersiz etik'):
+ (q.values||[]).map(k=>q.kind==='species'?(PHYSIO[k]||{}).n:(PERSONAS[k]||{}).n).join(' veya ')}));
+}
+function researchAccess(e,id){
+ if(!e||!TECHS[id])return {ok:false,why:'Geçersiz teknoloji'};
+ if(e.techs&&e.techs[id])return {ok:true,why:''};
+ const req=TECHS[id].requirements||[],labels=researchConditions(id);
+ const failed=req.map((q,i)=>{
+  const ok=q.kind==='ethic'?!!ETHICS[q.key]&&(e.ethics&&e.ethics[q.key]||0)*q.sign>=1:
+   q.kind==='species'?(q.values||[]).includes(researchSpecies(e)):
+   q.kind==='doctrine'?(q.values||[]).includes(researchDoctrine(e)):false;
+  return ok?null:labels[i].label;
+ }).filter(Boolean);
+ return {ok:!failed.length,why:failed.length?'Erişim koşulu: '+failed.join(' ve '):''};
+}
+function researchMode(e){return e.ai?'auto':(['manual','semi','auto'].includes(e.research&&e.research.mode)?e.research.mode:'semi');}
+function setResearchMode(e,mode){
+ if(!e||e.ai||!['manual','semi','auto'].includes(mode))return false;
+ researchState(e).mode=mode;syncResearchPlan(e,true);return true;
+}
+function basicScienceComplete(e){return BASE_TECH_IDS.every(id=>e.techs[id]);}
 function researchState(e){
-  if(!e.research)e.research={targets:[],bank:{},history:{}};
+  if(!e.research)e.research={targets:[],bank:{},history:{},mode:'semi'};
   return e.research;
 }
 function researchValidTech(id){return typeof id==='string' && Object.prototype.hasOwnProperty.call(TECHS,id) && !!BRANCH[TECHS[id].b];}
@@ -602,6 +632,7 @@ function researchRoute(e,id){
     if(error || seen.has(k))return;
     if(!researchValidTech(k)){error='Geçersiz teknoloji bağımlılığı: '+String(k);return;}
     if(e.techs[k]){seen.add(k);return;}
+    if(!researchAccess(e,k).ok){error=researchAccess(e,k).why;return;}
     if(stack.has(k)){error='Teknoloji bağımlılık döngüsü: '+TECHS[k].n;return;}
     const deps=TECHS[k].r||[];
     if(!Array.isArray(deps)){error='Geçersiz ön koşul listesi: '+TECHS[k].n;return;}
@@ -621,7 +652,7 @@ function researchPlan(e){
   return {goals,order};
 }
 function researchReady(e,id){
-  return researchValidTech(id) && !e.techs[id] && Array.isArray(TECHS[id].r||[]) &&
+  return researchValidTech(id) && researchAccess(e,id).ok && !e.techs[id] && Array.isArray(TECHS[id].r||[]) &&
     (TECHS[id].r||[]).every(k=>researchValidTech(k)&&e.techs[k]);
 }
 function setResearchCurrent(e,b,id){
@@ -638,7 +669,7 @@ function setResearchCurrent(e,b,id){
   return true;
 }
 function researchPlannedNext(e,b,plan){
-  return !e.ai && (plan||researchPlan(e)).order.find(id=>TECHS[id].b===b&&researchReady(e,id)) || null;
+  return researchMode(e)!=='auto' && (plan||researchPlan(e)).order.find(id=>TECHS[id].b===b&&researchReady(e,id)) || null;
 }
 function syncResearchPlan(e,force=false){
   const state=researchState(e);
@@ -647,6 +678,7 @@ function syncResearchPlan(e,force=false){
   for(const b of Object.keys(BRANCH)){
     const planned=researchPlannedNext(e,b,plan);
     if(planned)setResearchCurrent(e,b,planned);
+    else if(researchMode(e)==='manual')setResearchCurrent(e,b,null);
     else if(force || !researchReady(e,e.rq[b]) || TECHS[e.rq[b]].b!==b)autoResearch(e,b,plan);
   }
   return plan;
@@ -665,10 +697,11 @@ function researchTarget(e,id,action='toggle',position){
   syncResearchPlan(e,true);return {ok:true};
 }
 function grantResearchTech(e,id,source='research'){
-  if(!e || !researchValidTech(id) || e.techs[id])return false;
+  if(!e || !researchValidTech(id) || e.techs[id] || !researchAccess(e,id).ok)return false;
   const state=researchState(e),b=TECHS[id].b;
   e.techs[id]=true;
   state.history[id]={source,year:G.year,month:G.month,day:G.day};
+  if(!e.ai && TECHS[id].origin){const b=techBenefits(id);say('Uzmanlaşma tamamlandı — '+TECHS[id].n+' · '+[...b.unlocks,...b.effects].join(' · '),'sci');}
   // A grant saves the work already invested, but never creates a second copy.
   if(state.bank[id]){e.rp[b]=(e.rp[b]||0)+state.bank[id];delete state.bank[id];}
   if(e.rq[b]===id)setResearchCurrent(e,b,null);
@@ -679,7 +712,7 @@ function restoreResearch(){
   for(const e of G.emps){
     const raw=e.research;
     // Old saves retain their active rq/rp, including partial progress.
-    const state={targets:[],bank:{},history:{}};
+    const state={targets:[],bank:{},history:{},mode:raw&&['manual','semi','auto'].includes(raw.mode)?raw.mode:'semi'};
     if(raw && typeof raw==='object'){
       if(Array.isArray(raw.targets))state.targets=[...new Set(raw.targets.filter(id=>researchValidTech(id)&&!e.techs[id]))];
       if(raw.bank&&typeof raw.bank==='object')for(const [id,v] of Object.entries(raw.bank))
@@ -729,7 +762,7 @@ function researchTick(e){
       }
     }
     syncResearchPlan(e);
-  }else if(Object.keys(TECHS).every(id=>e.techs[id])){
+  }else if(basicScienceComplete(e)){
     // The old idle branch discarded this income instead of funding ascension.
     e.res.ara=0;e.rp.fiz=(e.rp.fiz||0)+income;
   }
@@ -739,14 +772,15 @@ function researchTick(e){
 function techOrigin(id){
   const origin=TECHS[id]&&TECHS[id].origin;
   const icons={doctrine:'◆',ethic:'⚖',species:'◈'};
+  if(origin&&TECHS[id].requirements){const c=researchConditions(id);return {kind:origin.kind,icon:[...new Set(c.map(q=>icons[q.kind]))].join(''),label:c.map(q=>q.label).join(' ve '),condition:'Gerekli: '+c.map(q=>q.label).join(' ve ')};}
   if(!origin || !icons[origin.kind])return null;
   return {kind:origin.kind,icon:icons[origin.kind],label:String(origin.label||origin.kind),condition:String(origin.condition||'')};
 }
 function techBenefits(id){
   const t=TECHS[id];if(!t)return {effects:[],unlocks:[]};
-  const labels={...TRAIT_LABEL,capFlat:'Filo kapasitesi',shMul:'Kalkan',eShMul:'Düşman kalkanı',eDmgMul:'Düşman hasarı',buildMul:'İnşa hızı',alaMul:'Alaşım',colCost:'Koloni gemisi maliyeti'};
+  const labels={...TRAIT_LABEL,militaryBuildMul:'Askerî gemi üretim hızı',opBonus:'Sabotaj başarı bonusu',defFlat:'Sistem savunması',capFlat:'Filo kapasitesi',shMul:'Kalkan',eShMul:'Düşman kalkanı',eDmgMul:'Düşman hasarı',buildMul:'İnşa hızı',alaMul:'Alaşım',colCost:'Koloni gemisi maliyeti'};
   const effects=Object.entries(t.e||{}).filter(([,v])=>typeof v==='number'&&v!==0).map(([k,v])=>
-    (labels[k]||k)+' '+(v>0?'+':'−')+(FLAT_KEYS[k]?Math.abs(v):'%'+Math.round(Math.abs(v)*100)));
+    (labels[k]||k)+' '+(v>0?'+':'−')+((FLAT_KEYS[k]||k==='defFlat')?Math.abs(v):'%'+Math.round(Math.abs(v)*100)));
   const unlocks=[];
   for(const [key,ship] of Object.entries(SHIPS))if(ship.tech===id||t.unlock===key)unlocks.push('Gemi: '+ship.n);
   for(const catalog of [BUILDINGS,STRUCTS])for(const item of Object.values(catalog))if(item.tech===id)unlocks.push('Yapı: '+item.n);
@@ -800,8 +834,8 @@ function availTechs(e, branch){
    pahalılaşan bir döngüye akar. Bilim zaferinin son şartı. */
 function ascendTick(e){
   if (!e || e.dead) return;
-  const total = Object.keys(TECHS).length;
-  const done = Object.keys(e.techs || {}).filter(t => TECHS[t]&&e.techs[t]).length;
+  const total = BASE_TECH_IDS.length;
+  const done = BASE_TECH_IDS.filter(t => e.techs[t]).length;
   if (done < total) return;
   e.ascend = e.ascend || 0;
   e.ascendP = e.ascendP || 0;
@@ -825,12 +859,15 @@ function ascendTick(e){
 function autoResearch(e, branch, plan){
   const planned=researchPlannedNext(e,branch,plan);
   if(planned){setResearchCurrent(e,branch,planned);return;}
+  if(researchMode(e)==='manual'){setResearchCurrent(e,branch,null);return;}
   const av = availTechs(e, branch);
   if (!av.length){ setResearchCurrent(e,branch,null); return; }
-  if (e.ai){
+  if (e.ai || researchMode(e)!=='manual'){
     const race = RACES[e.race];
     const scored = av.map(id => {
       const t = TECHS[id]; let s = 1/Math.sqrt(techCost(e,id));
+      if(t.origin)s*=1.65; // Eligible identity research, without starving cheaper fundamentals.
+      if((e.ethics.mil||0)>0 && t.unlock)s*=1.15;
       const pr = (typeof aiProfile === 'function') ? aiProfile(e) : {war:race.agr, sci:.5, eco:.5};
       if (t.unlock) s *= 1.8 + pr.war * .9;               // gemi sınıfı açan tekno savaşçıya çok değerli
       if (t.e.dmgMul || t.e.hullMul || t.e.shMul) s *= (.6 + pr.war * 1.5);
@@ -933,6 +970,13 @@ function navyAsleep(e){
   return {uyku:false};
 }
 
+// 93E.1: One duration formula for paid orders and reinforcement delivery estimates.
+// Existing jobs retain their paid duration; only new military jobs receive this bonus.
+function shipProductionDays(e,cls){
+  const d=SHIPS[cls], military=d.rol==='sav';
+  const speed=1+(e.mods.buildMul||0)+(military?(e.mods.militaryBuildMul||0):0);
+  return Math.max(1,Math.round((d.sz*14+16)/Math.max(.1,speed)));
+}
 function queueShip(e, sys, cls, oto){
   if (!shipBuildAccess(e, cls).ok || !sys || G.emps[e.id] !== e ||
       G.sys[sys.id] !== sys) return false;
@@ -953,7 +997,7 @@ function queueShip(e, sys, cls, oto){
   const c = shipCost(e, cls);
   for (const r in c) if (e.res[r] < c[r]) return false;
   for (const r in c) e.res[r] -= c[r];
-  const days = Math.round((SHIPS[cls].sz*14 + 16) / (1 + e.mods.buildMul));
+  const days = shipProductionDays(e,cls);
   sys.queue.push({cls, e:e.id, left:days, tot:days, paid:{...c}});
   return true;
 }
@@ -1038,7 +1082,7 @@ function buildDays(e, key){
 
 function queueBuilding(e, sys, pl, key){
   const B = BUILDINGS[key], col = pl.col;
-  if (!col || pl.owner !== e.id) return false;
+  if (!B || !col || pl.owner !== e.id || (B.tech&&!e.techs[B.tech])) return false;
   /* Kuyruktakiler de sayılır: aynı binadan max'ı aşacak sipariş verilemez */
   if ((col.b[key]||0) + colonyQueuedOf(col, key) >= B.max) return false;
   if (colonyUsed(col) + colonyQueued(col) >= colonySlots(col, e, pl)) return false;
@@ -3918,7 +3962,7 @@ yarinki_taht:{
         }},
        {t:'ENTEGRE ET', d:'Teknolojileri devral, elçiler tarihe karışır',
         f:(e,s)=>{
-          const kilitsiz = Object.keys(TECHS).filter(t => !e.techs[t]);
+          const kilitsiz = Object.keys(TECHS).filter(t => !e.techs[t]&&researchAccess(e,t).ok);
           let n = 0;
           for (const t of kilitsiz){ if (n >= 4) break; grantResearchTech(e,t,'event'); n++; }
           recalcMods(e);

@@ -1,3 +1,57 @@
+# 94A güncel açık riskler
+
+- Fiziksel Android/PWA testi yapılmadı. Pointer olayları, native Skia Canvas
+  pikselleri ve yaşam döngüsü regresyonları gerçek Android WebView/GPU/FPS
+  kabulünün yerine geçmez. Kullanıcıdan cihaz testi beklenmedi.
+- Eğik/perspektif kamera yoktur. Döndürme isteğe bağlı ve varsayılan kapalıdır.
+- Döndürülmüş viewport için güvenli kapsayıcı kutu, köşegen açılarda ek çizim
+  yapabilir. Kısa host ölçümü bütün galaksi büyüklükleri/telefonlar için garanti değildir.
+- Kamera açısı oturumluk görsel durumdur; yeni tarayıcı oturumunda sıfırdan başlar.
+- Öncelikli ticaret bütünlük iddiası, güvenli bilim keşfi, uzun dönem denge ve
+  önceki oyun riskleri bu kamera fazında çözülmüş sayılmaz.
+
+Aşağıdaki önceki teslim notları tarihsel bağlamdır.
+
+---
+
+# 93E.1 güncel açık riskler
+
+- Fiziksel Android testi yapılmadı. Mevcut DOM/dokunma/native Canvas/PWA
+  regresyonları ve Node render ölçümü gerçek cihaz FPS/ısı/bellek kabulü değildir.
+- Sekiz doktrinin erişimi ve yeni içeriklerin AI kullanımı hedefli testlidir;
+  her etik/tür/civic kombinasyonu ve çok uzun geç oyun dengesi doğrulanmadı.
+- Ticarette kaynak çoğalması/rota iddiası bağımsız öncelikli denetimde kalır.
+  Kanıtlanan çoğaltma ayrı acil bakım fazında düzeltilmelidir; yeni yerel bina
+  üretimi bu iddiayı düzeltmez, takas muhasebesine yeni yol açmaz.
+- Tarihî shipSpeed alanı üretim süresinde etkisizdir. Bu faz genel eski
+  doktrin cezalarını etkinleştirmedi; yeni bonus ayrı gerçek militaryBuildMul
+  alanından uygulanır. Ayrı denge değerlendirmesi yol haritasındadır.
+- Önceden tamamlanmış özel teknoloji doktrin değişiminden sonra kullanılabilir;
+  bu tasarım gereğidir. Yeni uygunsuz hedefler puan silmeden bekletilir.
+
+Aşağıdaki riskler tarihsel teslim kayıtlarıdır; 93E.1'in altı eksik doktrin
+teknolojisini tamamlaması önceki çeşitlilik açığını kapatır.
+
+---
+
+# 93E açık riskler
+
+- Fiziksel Android ve gerçek tarayıcı cihaz kabulü yapılmadı. DOM olayları,
+  native Canvas ve mevcut mobil/PWA regresyonları cihaz FPS testi değildir.
+- 12 teknoloji ilk içerik setidir. Yedi tür kapsanır; her doktrine ayrı teknoloji
+  henüz yoktur. Genişletme ve uzun geç oyun dengesi 93E.1 adayıdır.
+- AI'ın araştırma kararları ve kampanya RNG akışı 93D.1'e göre doğal olarak
+  değişir; aynı yeni kaynak ve tohum tekrarının deterministik olması aranır.
+- Yeni bina üretim miktarları temel değerlerdir; işgücü, nüfus ve uygarlık
+  çarpanları uygulanır. Uzay yapısının negatif enerji çıktısı gerçek bütçeye girer.
+- Erişimini kaybeden hedefler silinmez. Bekleyen puan başka teknolojiye ücretsiz
+  aktarılmaz; uygunluğu geri gelene kadar bankada kalır.
+- Korsan kayıpları, güvenli keşif, ticaret çoğalması iddiası ve eski diğer riskler
+  bu bilim fazında çözülmüş sayılmaz. 94A veya ileri faz başlatılmadı.
+
+---
+Aşağıdaki bölümler tarihsel kayıttır.
+
 # 93D.1 açık riskler ve kapsam sınırları
 
 - Fiziksel Android veya gerçek tarayıcı cihaz kabulü bu fazda yapılmadı.

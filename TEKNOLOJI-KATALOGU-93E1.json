@@ -1,0 +1,887 @@
+{
+  "x_assault": {
+    "b": "muh",
+    "t": 3,
+    "n": "Taarruz Eskortu",
+    "c": 2600,
+    "r": [
+      "m_muhrip",
+      "t_doktrin"
+    ],
+    "e": {},
+    "unlock": "esk",
+    "d": "Taarruz Eskortu sınıfını açar.",
+    "requirements": [
+      {
+        "kind": "ethic",
+        "key": "mil",
+        "sign": 1
+      }
+    ],
+    "origin": {
+      "kind": "ethic"
+    },
+    "conditions": [
+      {
+        "kind": "ethic",
+        "label": "MİLİTARİST (en az 1)"
+      }
+    ],
+    "benefits": {
+      "effects": [],
+      "unlocks": [
+        "Gemi: Taarruz Eskortu"
+      ]
+    },
+    "ships": {
+      "esk": {
+        "n": "Taarruz Eskortu",
+        "ab": "ESK",
+        "rng": 1,
+        "hull": 120,
+        "sh": 30,
+        "dmg": 32,
+        "spd": 3.3,
+        "cost": {
+          "ala": 64
+        },
+        "up": 13.8,
+        "upA": 1.5,
+        "rol": "sav",
+        "sz": 2,
+        "tech": "x_assault"
+      }
+    },
+    "buildings": {},
+    "structures": {}
+  },
+  "x_shelter": {
+    "b": "fiz",
+    "t": 3,
+    "n": "Sivil Savunma Ağı",
+    "c": 2300,
+    "r": [
+      "f_kalkan1"
+    ],
+    "e": {
+      "defFlat": 80
+    },
+    "d": "Sistem savunması +80.",
+    "requirements": [
+      {
+        "kind": "ethic",
+        "key": "mil",
+        "sign": -1
+      }
+    ],
+    "origin": {
+      "kind": "ethic"
+    },
+    "conditions": [
+      {
+        "kind": "ethic",
+        "label": "PASİFİST (en az 1)"
+      }
+    ],
+    "benefits": {
+      "effects": [
+        "Sistem savunması +80"
+      ],
+      "unlocks": []
+    },
+    "ships": {},
+    "buildings": {},
+    "structures": {}
+  },
+  "x_automation": {
+    "b": "muh",
+    "t": 3,
+    "n": "Deney Otomasyonu",
+    "c": 2500,
+    "r": [
+      "m_robot",
+      "f_sensor"
+    ],
+    "e": {},
+    "d": "Otomasyon Laboratuvarı açılır.",
+    "requirements": [
+      {
+        "kind": "ethic",
+        "key": "mat",
+        "sign": 1
+      }
+    ],
+    "origin": {
+      "kind": "ethic"
+    },
+    "conditions": [
+      {
+        "kind": "ethic",
+        "label": "MATERYALİST (en az 1)"
+      }
+    ],
+    "benefits": {
+      "effects": [],
+      "unlocks": [
+        "Yapı: Otomasyon Laboratuvarı"
+      ]
+    },
+    "ships": {},
+    "buildings": {
+      "oto_lab": {
+        "n": "Otomasyon Laboratuvarı",
+        "c": {
+          "min": 280,
+          "ala": 50
+        },
+        "up": 5,
+        "g": {
+          "ara": 10
+        },
+        "u": {
+          "tuk": 1
+        },
+        "max": 1,
+        "tech": "x_automation",
+        "d": "Temel +10 bilim; 5 enerji ve 1 tüketim malı bakım. Nüfus/işgücü ve üretim çarpanları uygulanır.",
+        "monthlyEnergyUpkeep": 8
+      }
+    },
+    "structures": {}
+  },
+  "x_sanctuary": {
+    "b": "top",
+    "t": 3,
+    "n": "Birlik Külliyesi",
+    "c": 2400,
+    "r": [
+      "t_moral"
+    ],
+    "e": {},
+    "d": "Birlik Külliyesi binası açılır.",
+    "requirements": [
+      {
+        "kind": "ethic",
+        "key": "mat",
+        "sign": -1
+      }
+    ],
+    "origin": {
+      "kind": "ethic"
+    },
+    "conditions": [
+      {
+        "kind": "ethic",
+        "label": "RUHANİ (en az 1)"
+      }
+    ],
+    "benefits": {
+      "effects": [],
+      "unlocks": [
+        "Yapı: Birlik Külliyesi"
+      ]
+    },
+    "ships": {},
+    "buildings": {
+      "birlik_k": {
+        "n": "Birlik Külliyesi",
+        "c": {
+          "min": 270,
+          "ala": 35
+        },
+        "up": 3,
+        "g": {
+          "etk": 1.6,
+          "ara": 3
+        },
+        "max": 1,
+        "tech": "x_sanctuary",
+        "d": "Temel +1,6 etki ve +3 bilim; 3 enerji bakım. Üretim çarpanları uygulanır.",
+        "monthlyEnergyUpkeep": 4.800000000000001
+      }
+    },
+    "structures": {}
+  },
+  "x_observer": {
+    "b": "fiz",
+    "t": 3,
+    "n": "Derin Gözlem Ağı",
+    "c": 2800,
+    "r": [
+      "f_sensor"
+    ],
+    "e": {},
+    "d": "İnşa gemileri Derin Gözlemevi kurabilir.",
+    "requirements": [
+      {
+        "kind": "doctrine",
+        "values": [
+          "teknokrasi"
+        ]
+      },
+      {
+        "kind": "ethic",
+        "key": "mat",
+        "sign": 1
+      }
+    ],
+    "origin": {
+      "kind": "doctrine"
+    },
+    "conditions": [
+      {
+        "kind": "doctrine",
+        "label": "Teknokrasi"
+      },
+      {
+        "kind": "ethic",
+        "label": "MATERYALİST (en az 1)"
+      }
+    ],
+    "benefits": {
+      "effects": [],
+      "unlocks": [
+        "Yapı: Derin Gözlemevi"
+      ]
+    },
+    "ships": {},
+    "buildings": {},
+    "structures": {
+      "derin_goz": {
+        "n": "Derin Gözlemevi",
+        "ico": "🔭",
+        "c": {
+          "min": 360,
+          "ala": 90
+        },
+        "ay": 12,
+        "on": [
+          "sys"
+        ],
+        "g": {
+          "ara": 10,
+          "ene": -3
+        },
+        "tech": "x_observer",
+        "d": "İnşa gemisiyle kurulur; +10 bilim ve −3 enerji/ay. Sistem başına bir adet."
+      }
+    }
+  },
+  "x_frontier": {
+    "b": "top",
+    "t": 3,
+    "n": "Sınır İkmal Protokolü",
+    "c": 2400,
+    "r": [
+      "t_koloni"
+    ],
+    "e": {
+      "colCost": -0.1,
+      "capFlat": 8
+    },
+    "d": "Koloni gemisi maliyet çarpanı −0,10; filo kapasitesi +8.",
+    "requirements": [
+      {
+        "kind": "doctrine",
+        "values": [
+          "yayilmaci"
+        ]
+      }
+    ],
+    "origin": {
+      "kind": "doctrine"
+    },
+    "conditions": [
+      {
+        "kind": "doctrine",
+        "label": "Yayılmacı"
+      }
+    ],
+    "benefits": {
+      "effects": [
+        "Koloni gemisi maliyeti −%10",
+        "Filo kapasitesi +8"
+      ],
+      "unlocks": []
+    },
+    "ships": {},
+    "buildings": {},
+    "structures": {}
+  },
+  "x_machine": {
+    "b": "muh",
+    "t": 3,
+    "n": "Sentetik Üretim Hücresi",
+    "c": 2600,
+    "r": [
+      "m_dokum"
+    ],
+    "e": {},
+    "d": "Sentetik Üretim Hücresi binası açılır.",
+    "requirements": [
+      {
+        "kind": "species",
+        "values": [
+          "machine"
+        ]
+      }
+    ],
+    "origin": {
+      "kind": "species"
+    },
+    "conditions": [
+      {
+        "kind": "species",
+        "label": "Makine Ağı"
+      }
+    ],
+    "benefits": {
+      "effects": [],
+      "unlocks": [
+        "Yapı: Sentetik Üretim Hücresi"
+      ]
+    },
+    "ships": {},
+    "buildings": {
+      "sentetik_h": {
+        "n": "Sentetik Üretim Hücresi",
+        "c": {
+          "min": 320,
+          "ala": 60
+        },
+        "up": 5,
+        "g": {
+          "ala": 7
+        },
+        "u": {
+          "min": 15
+        },
+        "max": 1,
+        "tech": "x_machine",
+        "d": "Temel +7 alaşım; 15 mineral ve 5 enerji bakım. İşgücü/üretim çarpanları uygulanır.",
+        "monthlyEnergyUpkeep": 8
+      }
+    },
+    "structures": {}
+  },
+  "x_hive": {
+    "b": "top",
+    "t": 3,
+    "n": "Ortak Biliş Düğümü",
+    "c": 2400,
+    "r": [
+      "t_yonetim"
+    ],
+    "e": {},
+    "d": "Sinaps Merkezi binası açılır.",
+    "requirements": [
+      {
+        "kind": "species",
+        "values": [
+          "hive"
+        ]
+      }
+    ],
+    "origin": {
+      "kind": "species"
+    },
+    "conditions": [
+      {
+        "kind": "species",
+        "label": "Kovan Zihni"
+      }
+    ],
+    "benefits": {
+      "effects": [],
+      "unlocks": [
+        "Yapı: Sinaps Merkezi"
+      ]
+    },
+    "ships": {},
+    "buildings": {
+      "sinaps_m": {
+        "n": "Sinaps Merkezi",
+        "c": {
+          "min": 270,
+          "ala": 40
+        },
+        "up": 3,
+        "g": {
+          "ara": 8
+        },
+        "u": {
+          "yiy": 3
+        },
+        "max": 1,
+        "tech": "x_hive",
+        "d": "Temel +8 bilim; 3 yiyecek ve 3 enerji bakım. İşgücü/üretim çarpanları uygulanır.",
+        "monthlyEnergyUpkeep": 4.800000000000001
+      }
+    },
+    "structures": {}
+  },
+  "x_lithoid": {
+    "b": "muh",
+    "t": 3,
+    "n": "Derin Kabuk Sondajı",
+    "c": 2400,
+    "r": [
+      "m_robot"
+    ],
+    "e": {},
+    "d": "Derin Sondaj binası açılır.",
+    "requirements": [
+      {
+        "kind": "species",
+        "values": [
+          "lithoid"
+        ]
+      }
+    ],
+    "origin": {
+      "kind": "species"
+    },
+    "conditions": [
+      {
+        "kind": "species",
+        "label": "Kayaç (Litoit)"
+      }
+    ],
+    "benefits": {
+      "effects": [],
+      "unlocks": [
+        "Yapı: Derin Sondaj"
+      ]
+    },
+    "ships": {},
+    "buildings": {
+      "derin_s": {
+        "n": "Derin Sondaj",
+        "c": {
+          "min": 280,
+          "ala": 50
+        },
+        "up": 4,
+        "g": {
+          "min": 12
+        },
+        "max": 1,
+        "tech": "x_lithoid",
+        "d": "Temel +12 mineral; 4 enerji bakım. İşgücü/üretim çarpanları uygulanır.",
+        "monthlyEnergyUpkeep": 6.4
+      }
+    },
+    "structures": {}
+  },
+  "x_biome": {
+    "b": "top",
+    "t": 3,
+    "n": "Kapalı Biyom Döngüsü",
+    "c": 2300,
+    "r": [
+      "t_tarim"
+    ],
+    "e": {},
+    "d": "Biyom Bahçesi binası açılır.",
+    "requirements": [
+      {
+        "kind": "species",
+        "values": [
+          "aquatic",
+          "plantoid"
+        ]
+      }
+    ],
+    "origin": {
+      "kind": "species"
+    },
+    "conditions": [
+      {
+        "kind": "species",
+        "label": "Okyanus Canlısı veya Bitkisel"
+      }
+    ],
+    "benefits": {
+      "effects": [],
+      "unlocks": [
+        "Yapı: Biyom Bahçesi"
+      ]
+    },
+    "ships": {},
+    "buildings": {
+      "biyom_b": {
+        "n": "Biyom Bahçesi",
+        "c": {
+          "min": 260,
+          "ala": 35
+        },
+        "up": 3,
+        "g": {
+          "yiy": 10,
+          "ara": 2
+        },
+        "max": 1,
+        "tech": "x_biome",
+        "d": "Temel +10 yiyecek ve +2 bilim; 3 enerji bakım. İşgücü/üretim çarpanları uygulanır.",
+        "monthlyEnergyUpkeep": 4.800000000000001
+      }
+    },
+    "structures": {}
+  },
+  "x_avian": {
+    "b": "muh",
+    "t": 3,
+    "n": "Hafif Seyir İskeleti",
+    "c": 2500,
+    "r": [
+      "m_warp"
+    ],
+    "e": {
+      "spdMul": 0.12,
+      "upMul": -0.04
+    },
+    "d": "Filo hızı +%12, bakım −%4.",
+    "requirements": [
+      {
+        "kind": "species",
+        "values": [
+          "avian"
+        ]
+      }
+    ],
+    "origin": {
+      "kind": "species"
+    },
+    "conditions": [
+      {
+        "kind": "species",
+        "label": "Kuş Benzeri"
+      }
+    ],
+    "benefits": {
+      "effects": [
+        "Filo hızı +%12",
+        "Bakım gideri −%4"
+      ],
+      "unlocks": []
+    },
+    "ships": {},
+    "buildings": {},
+    "structures": {}
+  },
+  "x_humanoid": {
+    "b": "top",
+    "t": 3,
+    "n": "Uyarlanabilir Kurumlar",
+    "c": 2400,
+    "r": [
+      "t_diplo"
+    ],
+    "e": {
+      "dipMul": 0.12,
+      "stab": 4
+    },
+    "d": "Diplomatik ikna +%12, istikrar +4.",
+    "requirements": [
+      {
+        "kind": "species",
+        "values": [
+          "humanoid"
+        ]
+      }
+    ],
+    "origin": {
+      "kind": "species"
+    },
+    "conditions": [
+      {
+        "kind": "species",
+        "label": "İnsansı / Memeli"
+      }
+    ],
+    "benefits": {
+      "effects": [
+        "Diplomasi +%12",
+        "İstikrar +4"
+      ],
+      "unlocks": []
+    },
+    "ships": {},
+    "buildings": {},
+    "structures": {}
+  },
+  "d_admiralty": {
+    "b": "top",
+    "t": 3,
+    "n": "Amirallik İkmal Standardı",
+    "c": 2800,
+    "r": [
+      "t_doktrin"
+    ],
+    "e": {
+      "capFlat": 12,
+      "upMul": -0.05
+    },
+    "d": "Filo kapasitesi +12; bakım çarpanı −0,05.",
+    "requirements": [
+      {
+        "kind": "doctrine",
+        "values": [
+          "militarist"
+        ]
+      }
+    ],
+    "origin": {
+      "kind": "doctrine"
+    },
+    "conditions": [
+      {
+        "kind": "doctrine",
+        "label": "Militarist"
+      }
+    ],
+    "benefits": {
+      "effects": [
+        "Filo kapasitesi +12",
+        "Bakım gideri −%5"
+      ],
+      "unlocks": []
+    },
+    "ships": {},
+    "buildings": {},
+    "structures": {}
+  },
+  "d_accounts": {
+    "b": "muh",
+    "t": 3,
+    "n": "Dağıtık İktisat Büroları",
+    "c": 2600,
+    "r": [
+      "m_robot",
+      "t_diplo"
+    ],
+    "e": {},
+    "d": "İktisat Bürosu açılır: yerel enerji ve bilim üretimi.",
+    "requirements": [
+      {
+        "kind": "doctrine",
+        "values": [
+          "tuccar"
+        ]
+      }
+    ],
+    "origin": {
+      "kind": "doctrine"
+    },
+    "conditions": [
+      {
+        "kind": "doctrine",
+        "label": "Tüccar"
+      }
+    ],
+    "benefits": {
+      "effects": [],
+      "unlocks": [
+        "Yapı: İktisat Bürosu"
+      ]
+    },
+    "ships": {},
+    "buildings": {
+      "iktisat_b": {
+        "n": "İktisat Bürosu",
+        "c": {
+          "min": 300,
+          "ala": 45
+        },
+        "up": 3,
+        "g": {
+          "ene": 8,
+          "ara": 2
+        },
+        "max": 1,
+        "tech": "d_accounts",
+        "d": "Temel +8 yerel enerji ve +2 bilim; 4,8 enerji/ay bakım (taban 3 × 1,6). Nüfus, işgücü ve uygarlık çarpanları uygulanır. Ticaret stoklarını veya aktarımları değiştirmez.",
+        "monthlyEnergyUpkeep": 4.800000000000001
+      }
+    },
+    "structures": {}
+  },
+  "d_deterrence": {
+    "b": "fiz",
+    "t": 3,
+    "n": "Bölgesel Caydırıcılık",
+    "c": 2900,
+    "r": [
+      "f_kalkan1",
+      "t_diplo"
+    ],
+    "e": {
+      "defFlat": 120
+    },
+    "d": "Sahip olunan sistemlerin savunmasına +120; Kale çarpanı uygulanır.",
+    "requirements": [
+      {
+        "kind": "doctrine",
+        "values": [
+          "pasifist"
+        ]
+      }
+    ],
+    "origin": {
+      "kind": "doctrine"
+    },
+    "conditions": [
+      {
+        "kind": "doctrine",
+        "label": "Pasifist"
+      }
+    ],
+    "benefits": {
+      "effects": [
+        "Sistem savunması +120"
+      ],
+      "unlocks": []
+    },
+    "ships": {},
+    "buildings": {},
+    "structures": {}
+  },
+  "d_mobilization": {
+    "b": "muh",
+    "t": 3,
+    "n": "Kesintisiz Seferberlik",
+    "c": 3100,
+    "r": [
+      "m_zirh2",
+      "t_doktrin"
+    ],
+    "e": {
+      "hullMul": 0.1,
+      "militaryBuildMul": 0.08
+    },
+    "d": "Gemi gövdesi +%10; askerî gemi üretim hızı çarpanı +0,08.",
+    "requirements": [
+      {
+        "kind": "doctrine",
+        "values": [
+          "izolasyonist"
+        ]
+      }
+    ],
+    "origin": {
+      "kind": "doctrine"
+    },
+    "conditions": [
+      {
+        "kind": "doctrine",
+        "label": "Fanatik Arındırıcılar"
+      }
+    ],
+    "benefits": {
+      "effects": [
+        "Gövde +%10",
+        "Askerî gemi üretim hızı +%8"
+      ],
+      "unlocks": []
+    },
+    "ships": {},
+    "buildings": {},
+    "structures": {}
+  },
+  "d_cells": {
+    "b": "fiz",
+    "t": 3,
+    "n": "Bölmeli İstihbarat Hücreleri",
+    "c": 2900,
+    "r": [
+      "f_sensor",
+      "t_yonetim"
+    ],
+    "e": {
+      "opCost": -0.08,
+      "opBonus": 0.03
+    },
+    "d": "Operasyon maliyet çarpanı −0,08; sabotaj başarı bonusu +3 puan.",
+    "requirements": [
+      {
+        "kind": "doctrine",
+        "values": [
+          "kriminal"
+        ]
+      }
+    ],
+    "origin": {
+      "kind": "doctrine"
+    },
+    "conditions": [
+      {
+        "kind": "doctrine",
+        "label": "Kriminal Sendika"
+      }
+    ],
+    "benefits": {
+      "effects": [
+        "Casusluk bedeli −%8",
+        "Sabotaj başarı bonusu +%3"
+      ],
+      "unlocks": []
+    },
+    "ships": {},
+    "buildings": {},
+    "structures": {}
+  },
+  "d_synod": {
+    "b": "top",
+    "t": 3,
+    "n": "Sinod Kurumları",
+    "c": 2700,
+    "r": [
+      "t_moral"
+    ],
+    "e": {},
+    "d": "Sinod Evi açılır: yerel etki ve bilim üretimi.",
+    "requirements": [
+      {
+        "kind": "doctrine",
+        "values": [
+          "teokrasi"
+        ]
+      }
+    ],
+    "origin": {
+      "kind": "doctrine"
+    },
+    "conditions": [
+      {
+        "kind": "doctrine",
+        "label": "Kutsal Meclis"
+      }
+    ],
+    "benefits": {
+      "effects": [],
+      "unlocks": [
+        "Yapı: Sinod Evi"
+      ]
+    },
+    "ships": {},
+    "buildings": {
+      "sinod_e": {
+        "n": "Sinod Evi",
+        "c": {
+          "min": 310,
+          "ala": 50
+        },
+        "up": 4,
+        "g": {
+          "etk": 2,
+          "ara": 3
+        },
+        "max": 1,
+        "tech": "d_synod",
+        "d": "Temel +2 etki ve +3 bilim; 6,4 enerji/ay bakım (taban 4 × 1,6). Nüfus, işgücü ve uygarlık çarpanları uygulanır.",
+        "monthlyEnergyUpkeep": 6.4
+      }
+    },
+    "structures": {}
+  }
+}

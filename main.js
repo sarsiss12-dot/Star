@@ -331,6 +331,45 @@ const TECHS = {
                d:'+%20 büyüme, +%25 yiyecek · parçalanmış dünyalar TERRAFORM edilebilir',
                r:['m_yildiz']}
 };
+// 93E: the original forty remain the science-victory contract.
+const BASE_TECH_IDS = Object.freeze(Object.keys(TECHS));
+Object.assign(TECHS, {
+ x_assault:{b:'muh',t:3,n:'Taarruz Eskortu',c:2600,r:['m_muhrip','t_doktrin'],e:{},unlock:'esk',d:'Taarruz Eskortu sınıfını açar.',requirements:[{kind:'ethic',key:'mil',sign:1}],origin:{kind:'ethic'}},
+ x_shelter:{b:'fiz',t:3,n:'Sivil Savunma Ağı',c:2300,r:['f_kalkan1'],e:{defFlat:80},d:'Sistem savunması +80.',requirements:[{kind:'ethic',key:'mil',sign:-1}],origin:{kind:'ethic'}},
+ x_automation:{b:'muh',t:3,n:'Deney Otomasyonu',c:2500,r:['m_robot','f_sensor'],e:{},d:'Otomasyon Laboratuvarı açılır.',requirements:[{kind:'ethic',key:'mat',sign:1}],origin:{kind:'ethic'}},
+ x_sanctuary:{b:'top',t:3,n:'Birlik Külliyesi',c:2400,r:['t_moral'],e:{},d:'Birlik Külliyesi binası açılır.',requirements:[{kind:'ethic',key:'mat',sign:-1}],origin:{kind:'ethic'}},
+ x_observer:{b:'fiz',t:3,n:'Derin Gözlem Ağı',c:2800,r:['f_sensor'],e:{},d:'İnşa gemileri Derin Gözlemevi kurabilir.',requirements:[{kind:'doctrine',values:['teknokrasi']},{kind:'ethic',key:'mat',sign:1}],origin:{kind:'doctrine'}},
+ x_frontier:{b:'top',t:3,n:'Sınır İkmal Protokolü',c:2400,r:['t_koloni'],e:{colCost:-.10,capFlat:8},d:'Koloni gemisi maliyet çarpanı −0,10; filo kapasitesi +8.',requirements:[{kind:'doctrine',values:['yayilmaci']}],origin:{kind:'doctrine'}},
+ x_machine:{b:'muh',t:3,n:'Sentetik Üretim Hücresi',c:2600,r:['m_dokum'],e:{},d:'Sentetik Üretim Hücresi binası açılır.',requirements:[{kind:'species',values:['machine']}],origin:{kind:'species'}},
+ x_hive:{b:'top',t:3,n:'Ortak Biliş Düğümü',c:2400,r:['t_yonetim'],e:{},d:'Sinaps Merkezi binası açılır.',requirements:[{kind:'species',values:['hive']}],origin:{kind:'species'}},
+ x_lithoid:{b:'muh',t:3,n:'Derin Kabuk Sondajı',c:2400,r:['m_robot'],e:{},d:'Derin Sondaj binası açılır.',requirements:[{kind:'species',values:['lithoid']}],origin:{kind:'species'}},
+ x_biome:{b:'top',t:3,n:'Kapalı Biyom Döngüsü',c:2300,r:['t_tarim'],e:{},d:'Biyom Bahçesi binası açılır.',requirements:[{kind:'species',values:['aquatic','plantoid']}],origin:{kind:'species'}},
+ x_avian:{b:'muh',t:3,n:'Hafif Seyir İskeleti',c:2500,r:['m_warp'],e:{spdMul:.12,upMul:-.04},d:'Filo hızı +%12, bakım −%4.',requirements:[{kind:'species',values:['avian']}],origin:{kind:'species'}},
+ x_humanoid:{b:'top',t:3,n:'Uyarlanabilir Kurumlar',c:2400,r:['t_diplo'],e:{dipMul:.12,stab:4},d:'Diplomatik ikna +%12, istikrar +4.',requirements:[{kind:'species',values:['humanoid']}],origin:{kind:'species'}}
+});
+// 93E.1: permanent doctrine gates; ethics are intentionally independent.
+Object.assign(TECHS, {
+ d_admiralty:{b:'top',t:3,n:'Amirallik İkmal Standardı',c:2800,r:['t_doktrin'],e:{capFlat:12,upMul:-.05},d:'Filo kapasitesi +12; bakım çarpanı −0,05.',requirements:[{kind:'doctrine',values:['militarist']}],origin:{kind:'doctrine'}},
+ d_accounts:{b:'muh',t:3,n:'Dağıtık İktisat Büroları',c:2600,r:['m_robot','t_diplo'],e:{},d:'İktisat Bürosu açılır: yerel enerji ve bilim üretimi.',requirements:[{kind:'doctrine',values:['tuccar']}],origin:{kind:'doctrine'}},
+ d_deterrence:{b:'fiz',t:3,n:'Bölgesel Caydırıcılık',c:2900,r:['f_kalkan1','t_diplo'],e:{defFlat:120},d:'Sahip olunan sistemlerin savunmasına +120; Kale çarpanı uygulanır.',requirements:[{kind:'doctrine',values:['pasifist']}],origin:{kind:'doctrine'}},
+ d_mobilization:{b:'muh',t:3,n:'Kesintisiz Seferberlik',c:3100,r:['m_zirh2','t_doktrin'],e:{hullMul:.10,militaryBuildMul:.08},d:'Gemi gövdesi +%10; askerî gemi üretim hızı çarpanı +0,08.',requirements:[{kind:'doctrine',values:['izolasyonist']}],origin:{kind:'doctrine'}},
+ d_cells:{b:'fiz',t:3,n:'Bölmeli İstihbarat Hücreleri',c:2900,r:['f_sensor','t_yonetim'],e:{opCost:-.08,opBonus:.03},d:'Operasyon maliyet çarpanı −0,08; sabotaj başarı bonusu +3 puan.',requirements:[{kind:'doctrine',values:['kriminal']}],origin:{kind:'doctrine'}},
+ d_synod:{b:'top',t:3,n:'Sinod Kurumları',c:2700,r:['t_moral'],e:{},d:'Sinod Evi açılır: yerel etki ve bilim üretimi.',requirements:[{kind:'doctrine',values:['teokrasi']}],origin:{kind:'doctrine'}}
+});
+Object.assign(BUILDINGS,{
+ iktisat_b:{n:'İktisat Bürosu',c:{min:300,ala:45},up:3,g:{ene:8,ara:2},max:1,tech:'d_accounts',d:'Temel +8 yerel enerji ve +2 bilim; 4,8 enerji/ay bakım (taban 3 × 1,6). Nüfus, işgücü ve uygarlık çarpanları uygulanır. Ticaret stoklarını veya aktarımları değiştirmez.'},
+ sinod_e:{n:'Sinod Evi',c:{min:310,ala:50},up:4,g:{etk:2,ara:3},max:1,tech:'d_synod',d:'Temel +2 etki ve +3 bilim; 6,4 enerji/ay bakım (taban 4 × 1,6). Nüfus, işgücü ve uygarlık çarpanları uygulanır.'}
+});
+SHIPS.esk={n:'Taarruz Eskortu',ab:'ESK',rng:1,hull:120,sh:30,dmg:32,spd:3.3,cost:{ala:64},up:13.8,upA:1.5,rol:'sav',sz:2,tech:'x_assault'};
+Object.assign(BUILDINGS,{
+ oto_lab:{n:'Otomasyon Laboratuvarı',c:{min:280,ala:50},up:5,g:{ara:10},u:{tuk:1},max:1,tech:'x_automation',d:'Temel +10 bilim; 5 enerji ve 1 tüketim malı bakım. Nüfus/işgücü ve üretim çarpanları uygulanır.'},
+ birlik_k:{n:'Birlik Külliyesi',c:{min:270,ala:35},up:3,g:{etk:1.6,ara:3},max:1,tech:'x_sanctuary',d:'Temel +1,6 etki ve +3 bilim; 3 enerji bakım. Üretim çarpanları uygulanır.'},
+ sentetik_h:{n:'Sentetik Üretim Hücresi',c:{min:320,ala:60},up:5,g:{ala:7},u:{min:15},max:1,tech:'x_machine',d:'Temel +7 alaşım; 15 mineral ve 5 enerji bakım. İşgücü/üretim çarpanları uygulanır.'},
+ sinaps_m:{n:'Sinaps Merkezi',c:{min:270,ala:40},up:3,g:{ara:8},u:{yiy:3},max:1,tech:'x_hive',d:'Temel +8 bilim; 3 yiyecek ve 3 enerji bakım. İşgücü/üretim çarpanları uygulanır.'},
+ derin_s:{n:'Derin Sondaj',c:{min:280,ala:50},up:4,g:{min:12},max:1,tech:'x_lithoid',d:'Temel +12 mineral; 4 enerji bakım. İşgücü/üretim çarpanları uygulanır.'},
+ biyom_b:{n:'Biyom Bahçesi',c:{min:260,ala:35},up:3,g:{yiy:10,ara:2},max:1,tech:'x_biome',d:'Temel +10 yiyecek ve +2 bilim; 3 enerji bakım. İşgücü/üretim çarpanları uygulanır.'}
+});
+
 const STANCE = {
   agresif :{n:'AGRESİF', ico:'⚔', dmg:1.15, take:1.10, kac:0,   d:'Hasar +%15, alınan hasar +%10. Asla geri çekilmez.'},
   savunma :{n:'SAVUNMA', ico:'🛡', dmg:0.90, take:0.80, kac:.25, d:'Hasar −%10, alınan hasar −%20. Gövde %25 altına düşerse ricat eder.'}
@@ -1218,11 +1257,11 @@ const WIN_TYPES = {
     }},
   bilim:{
     n:'BİLİM', ico:'✦',
-    d:'Teknoloji ağacının TAMAMINI tüket ve zirve teknolojilere ulaş.',
+    d:'40 temel teknolojiyi tamamla, zirve teknolojilere ve Kadim Araştırma hedefine ulaş.',
     esik:1,
     olc(e, k){
-      const total = Object.keys(TECHS).length;
-      const done = Object.keys(e.techs).filter(t=>TECHS[t]&&e.techs[t]).length;
+      const total = BASE_TECH_IDS.length;
+      const done = BASE_TECH_IDS.filter(t=>e.techs[t]).length;
       /* ═══ FAZ 52: BİLİM ZAFERİ DENGELEMESİ ═══
          ÖLÇÜM (Faz 51): zafer 27. yılda tetikleniyordu — teknoloji
          sayısı tavana çok hızlı vuruyor. İki düzeltme:
@@ -1245,11 +1284,11 @@ const WIN_TYPES = {
       return Math.min(done/total, peak/peakN, kadim);
     },
     txt(e, k){
-      const total = Object.keys(TECHS).length;
-      const doneT = Object.keys(e.techs).filter(t=>TECHS[t]&&e.techs[t]).length;
+      const total = BASE_TECH_IDS.length;
+      const doneT = BASE_TECH_IDS.filter(t=>e.techs[t]).length;
       if (doneT >= total)
         return 'Kadim Araştırma ' + (e.ascend || 0) + ' / ' + ASCEND_NEED;
-      const done = Object.keys(e.techs).filter(t=>TECHS[t]&&e.techs[t]).length;
+      const done = BASE_TECH_IDS.filter(t=>e.techs[t]).length;
       const peak = ['f_zaman','t_galaktik','m_yildiz'].filter(t=>e.techs[t]).length;
       return done + '/' + total + ' teknoloji · ' + peak + '/3 zirve';
     }
@@ -1986,7 +2025,7 @@ function recalcMods(e){
     /* FAZ 48: diplomatik ahlak ekseni */
     trustCap:0, tradeMul:0, opCost:0, opBonus:0, opRisk:0, trustStart:0,
     /* FAZ 72: doktrin anahtarları */
-    etkMul:0, rofMul:0, shipSpeed:0, borderMul:0, newColStab:0,
+    etkMul:0, rofMul:0, shipSpeed:0, militaryBuildMul:0, borderMul:0, newColStab:0,
     /* FAZ 36: Galaktik Savunma Paktı bonusu. recalcMods'taki add()
        yalnız BURADA TANIMLI anahtarları kabul ediyor; listede
        olmadığı için crisisDmg sessizce yok sayılıyordu (ölçümde
@@ -3490,7 +3529,9 @@ function pVis(s){
 }
 function pSurv(s){ return s.surv.includes(0); }
 function sysDefense(sys, includeWild = true){
-  let d = 0;
+  const owner=sys.owner>=0&&G.emps[sys.owner];
+  let d = owner&&owner.techs.x_shelter ? TECHS.x_shelter.e.defFlat : 0;
+  if(owner&&owner.techs.d_deterrence)d+=TECHS.d_deterrence.e.defFlat;
   for (const p of sys.planets) if (p.col){
     d += (p.col.b.kale||0) * 180;
     d += (focusOf(p.col).e.defFlat || 0);
@@ -4337,6 +4378,7 @@ function maybeEvent(){
    UZAY İNŞAATI — inşaat gemisi ve yapılar
    ===================================================================== */
 const STRUCTS = {
+  derin_goz:{n:'Derin Gözlemevi',ico:'🔭',c:{min:360,ala:90},ay:12,on:['sys'],g:{ara:10,ene:-3},tech:'x_observer',d:'İnşa gemisiyle kurulur; +10 bilim ve −3 enerji/ay. Sistem başına bir adet.'},
   maden_ist :{n:'Madencilik İstasyonu', ico:'⛏', c:{min:220, ala:40}, ay:8,
               on:['ast','gaz'], g:{min:7},
               d:'Asteroit kuşağı veya gaz devinde koloni olmadan kaynak çıkarır.'},
@@ -4377,7 +4419,8 @@ const STRUCTS = {
 
 function structAllowed(e, sys, key){
   const S = STRUCTS[key];
-  if (!S) return false;
+  if (!S || (S.tech&&!e.techs[S.tech])) return false;
+  if (S.tech && sys.work && sys.work.some(w=>w.key===key)) return false;
   if (sys.built && sys.built[key] !== undefined) return false;
   // sahiplik: karakol dışındaki yapılar kendi ya da sahipsiz sistemde
   if (sys.owner >= 0 && sys.owner !== e.id) return false;
@@ -4415,6 +4458,7 @@ function structCost(e, key){
 }
 function startStruct(e, sys, key, fleet){
   if (!structAllowed(e, sys, key)) return false;
+  if (STRUCTS[key].tech && (!fleet || !G.fleets.includes(fleet) || fleet.e!==e.id || fleet.sys!==sys.id || fleet.mv || fleet.combat || fleet.building!==undefined || !fleet.ships.some(sh=>sh.c==='ins'&&sh.busy===undefined)))return false;
   const c = structCost(e, key);
   for (const r in c) if ((e.res[r]||0) < c[r]) return false;
   for (const r in c) e.res[r] -= c[r];
@@ -4746,7 +4790,7 @@ function reinforceFleet(e,f,options={}){
     if(siparis>=limit)break;
     if(!canBuildShip(e,row.cls)){reason='Kaynak yetersiz';continue;}
     const routes=reinforcementRoutes(e,[{c:row.cls}],target);
-    const days=Math.round((SHIPS[row.cls].sz*14+16)/(1+e.mods.buildMul));
+    const days=shipProductionDays(e,row.cls);
     for(let i=0;i<row.missing && siparis<limit;i++){
       let best=null;
       for(const sys of yards){
@@ -7804,7 +7848,7 @@ function forceRedraw(sebep){
    Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
    Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
 /* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */
-const BUILD_ID = '93d1';
+const BUILD_ID = '94a';
 const DIAG_MAX = 40;
 const DIAG = [];
 function logDiag(tur, mesaj){
@@ -8506,6 +8550,7 @@ document.addEventListener('pointerdown', ()=>{ LOOP.touch = performance.now(); }
 function camSane(){
   const c = View.cam;
   if (!c) return;
+  if(!Number.isFinite(c.a))c.a=0;
   const iyi = v => typeof v === 'number' && isFinite(v);
   if (!iyi(c.x) || !iyi(c.y) || !iyi(c.z)){
     console.warn('Kamera bozuldu, sıfırlanıyor:', c.x, c.y, c.z);

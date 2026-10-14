@@ -185,11 +185,11 @@ function aiEnvoyTurn(e,prof){
 }
 /* 93D.1: ücretli askerî siparişleri mevcut 93C sınıf şablonlarına bağlar. */
 function aiFleetTemplate(e,f){
-  const design=['kor','muh','kru','zir'].filter(c=>shipBuildAccess(e,c).ok).join(':')+':'+(aiProfile(e).war>.8);
+  const design=['kor','muh','kru','zir','esk'].filter(c=>shipBuildAccess(e,c).ok).join(':')+':'+(aiProfile(e).war>.8);
   if(f.composition&&(!f.composition.aiDesign||f.composition.aiDesign===design))return;
   const target=Math.min(FLEET_SOFT_CAP,Math.max(f.ships.length,f.capTarget||FLEET_SOFT_CAP));
   const counts={};for(const sh of f.ships)counts[sh.c]=(counts[sh.c]||0)+1;
-  const mix=(aiProfile(e).war>.8?['kor','muh','kru','zir','muh','zir']:['kor','muh','kor','kru','muh','zir']).filter(c=>shipBuildAccess(e,c).ok);
+  const mix=(aiProfile(e).war>.8?['kor','muh','kru','zir','muh','zir','esk']:['kor','muh','kor','kru','muh','zir','esk']).filter(c=>shipBuildAccess(e,c).ok);
   for(let n=f.ships.length;n<target;n++){const c=mix[n%mix.length];counts[c]=(counts[c]||0)+1;}
   setFleetTemplate(e,f,counts,true);
   if(f.composition)f.composition.aiDesign=design;
@@ -261,10 +261,10 @@ function aiShipProduction(e,my,prof){
   if(!ok){note('delivery-or-template');return false;}
   budget-=Math.max(0,before-e.res.ala);orders++;inv=aiShipInventory(e);return true;
  }
- const classes=['zir','kru','muh','kor'].filter(c=>shipBuildAccess(e,c).ok);
+ const classes=['zir','kru','muh','kor','esk'].filter(c=>shipBuildAccess(e,c).ok);
  for(let i=0;i<limit;i++){
   if(inv.usage>=target){note('deterrence-target');break;}
-  const weights={kor:prof.war>.8?3:4,muh:3,kru:2,zir:prof.war>.8?2:1};
+  const weights={esk:2,kor:prof.war>.8?3:4,muh:3,kru:2,zir:prof.war>.8?2:1};
   const needed=new Set();
   for(const f of G.fleets)if(f.e===e.id&&f.composition&&f.composition.auto&&!hasShipment(f)){const status=fleetCompositionStatus(e,f);for(const r of status.rows||[])if(r.missing&&r.buildable)needed.add(r.cls);}
   const ranked=classes.slice().sort((a,b)=>Number(needed.has(b))-Number(needed.has(a))||((inv.counts[a]||0)+(inv.pending[a]||0))/weights[a]-((inv.counts[b]||0)+(inv.pending[b]||0))/weights[b]||SHIPS[b].sz-SHIPS[a].sz);
@@ -423,6 +423,9 @@ function aiTurn(e){
     if (e.res.min > 9000 && e.inc.ala < 80) need.unshift('dokum');
     if (e.inc.tuk < 1 || e.shortage) need.unshift('fabrika');
     if ((pl.col.b.liman||0) < (prof.eco > .7 ? 2 : 1)) need.push('liman');
+    if(!e.crisis && e.inc.ene>8 && e.inc.min>15 && !e.shortage){
+      for(const [key,b] of Object.entries(BUILDINGS))if(b.tech&&e.techs[b.tech] && (!b.u||Object.entries(b.u).every(([res,v])=>(e.inc[res]||0)>v)) && !(pl.col.b[key]||0) && !colonyQueuedOf(pl.col,key))need.push(key);
+    }
     // bilimci profiller laboratuvarı ciddiye alır, savaşçılar dökümhaneyi
     if (prof.sci > .7) need.push('lab', 'lab');
     else need.push(rnd() < .35 + prof.sci*.40 ? 'lab' : 'maden');
@@ -1851,6 +1854,7 @@ function aiPickStruct(e, sys){
 
   /* Sıradan altyapı: ihtiyaca göre öncelik */
   const oncelik = [];
+  if(e.techs.x_observer && !e.crisis && (e.inc.ene||0)>8)oncelik.push('derin_goz');
   if ((e.inc && e.inc.min || 0) < 25) oncelik.push('maden_ist');
   if ((e.inc && e.inc.ara || 0) < 30) oncelik.push('bilim_ist');
   if (prof.war > .7) oncelik.push('platform', 'tersane_h');

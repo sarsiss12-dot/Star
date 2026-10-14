@@ -1,0 +1,88 @@
+STARS — FAZ 93E.1 TESLİM RAPORU
+14 Ekim 2026
+
+KANONİK KAYNAK
+stars-faz93e.zip
+SHA-256: 39b8d55e83636de6c83110d954fdcc0f601efa0ba44ae87558a1acfaa6bd3b42
+SHA-256 ve ZIP CRC doğrulandı. GitHub'daki sürüm kullanılmadı.
+
+SONUÇ
+Eksik altı doktrine altı özel teknoloji eklendi. Sekiz doktrinin tümünde
+doğrudan doktrin koşullu teknoloji vardır. Teknokrasi ve Yayılmacı'nın
+93E kayıtları korundu. 40 temel +18 özel =58 teknoloji; üç bilim ağacı.
+Bu faz iki yeni bina getirir; özel içerik toplamı bir gemi, sekiz bina,
+bir uzay yapısıdır. Civic'e özel yeni teknoloji yoktur. Save v8 korunur.
+
+YENİ KAZANIMLAR
+Militarist: Amirallik İkmal Standardı — kapasite +12, filo bakım çarpanı −0,05.
+Tüccar: Dağıtık İktisat Büroları — İktisat Bürosu; yerel enerji ve bilim.
+Pasifist: Bölgesel Caydırıcılık — kendi sistemlerine +120 savunma.
+Fanatik Arındırıcılar: Kesintisiz Seferberlik — gövde +%10 ve yeni savaş
+  gemilerinin üretim hızı paydasına +0,08.
+Kriminal Sendika: Bölmeli İstihbarat Hücreleri — operasyon maliyet çarpanı
+  −0,08, mevcut sabotaj başarı hesabına +3 yüzde puan (tavan korunur).
+Kutsal Meclis: Sinod Kurumları — Sinod Evi; etki ve bilim.
+
+Gerçek maliyet/bakım/üretim tablosu ve sekiz doktrinin erişim tablosu:
+BILIM-93E1.md. Tam çalışma zamanı kataloğu: TEKNOLOJI-KATALOGU-93E1.json.
+Yeni binalar oyuncu ve AI için mevcut ücretli koloni üretimini kullanır.
+İktisat Bürosu takas stoklarını/transfer yollarını değiştirmez.
+
+KOD VE KORUMALAR
+- Kalıcı doktrin, etik ve tür koşulları ayrıdır; geçici AI personası erişim
+  koşulu yapılmaz. Aynı kapı araştırma/takas/casusluk/olay ediniminde korunur.
+- Doktrin değişince tamamlanan teknoloji kalır. Uygunsuz hedef bekler;
+  araştırma puanı bankada, sıra ve tarihçe kayıtta korunur.
+- Askerî üretim süre hesabı shipProductionDays() ile sipariş ve akıllı
+  tersane tahmininde ortaktır; mevcut işler/sivil gemiler etkilenmez.
+- Bina bakım arayüzü gerçek ekonomideki 1,6 katsayısını gösterir.
+- Araştırma modları, üç paralel dal, otomatik ön koşul rotası, bilim zaferi,
+  93B sevkiyatı ve 93D.1 AI donanma bütçesi korunur.
+- Build93e1 ve PWA cache stars-v93e1.
+
+TEST SONUÇLARI
+71 test paketi; 4.487 başarılı kontrol; 0 kalan hata; 0 zaman aşımı;
+0 atlanan paket. 32 yeni doktrin kontrolü. Hedefli testlerden sonra tek
+sınırlı tam regresyon çalıştırıldı. Aynı kontrolün tekrarları toplama eklenmedi.
+Kanıt: tests/logs-93e1/summary.json ve test başına .log dosyaları.
+İlk hedefli testlerde dört test beklentisi düzeltildi: katalog dışa aktarım
+metaverisi, gövde ön koşulunun kendi bonusu ve iki binanın iç içe çıktı alanı.
+Ek bakım kontrolünün beklentisine mevcut 1,6 ekonomi katsayısı dahil edildi;
+bu kontrol gerçek arayüzdeki bakım gösterimi tutarsızlığını da ortaya çıkardı.
+Başlangıç hedefli logları korunmuştur; bunlar son regresyon sonucu değildir.
+
+Kontroller: sekiz doktrin doğru/yanlış erişim matrisi, etik ayrımı,
+çok adımlı rota, duraklatma/puan bankası, modlar, Save8, tarihçe,
+gerçek ücretli bina üretimi ve aylık bakımı, AI bina/araştırma kararları,
+filo kapasitesi/bakımı, üretim süreleri, savunma, operasyon bedeli ve sabotaj.
+Mobil DOM/dokunma/PWA ve native Canvas regresyonları geçti.
+58 düğümlü bilim ekranı: 300 render 123 ms (Node test ortamı; Android FPS değil).
+
+120 AYLIK AI DONANMA REGRESYONU
+Tohum | 93E savaş siparişi / bilim siparişi | 93E.1 savaş / bilim
+11    | 311 /37                            | 311 /37
+99    | 302 /35                            | 302 /35
+404   | 285 /42                            | 285 /42
+Üç kampanyada negatif kaynak ihlali ve gereksiz bilim siparişi yok.
+Tekrarlanan deterministik koşuda kayıt özeti ve RNG eşleşti; gözlemci
+kapalı koşu da eşleşti. AI başına ayrıntılar tests/navy-93e1-after-*.json.
+Bu kampanyalarda üretim toplamlarının aynı olması uzun geç oyun yeni
+teknoloji dengesinin kanıtı değildir; yeni teknolojilerin AI kullanımı
+ayrı, uygun ön koşulların kurulduğu hedefli senaryolarda doğrulandı.
+
+AÇIK RİSKLER
+Fiziksel Android testi yapılmadı. Her etik/tür/civic birleşimi ve uzun
+geç oyun dengesi kapsamlı cihaz/kampanya kabulünden geçmiş sayılmaz.
+Eski shipSpeed doktrin alanı etkisiz üretim yoludur; bu faz eski cezaları
+etkinleştirmedi, yeni bonus ayrı gerçek militaryBuildMul alanını kullanır.
+Ticaret kaynak çoğalması/rota bütünlüğü bağımsız öncelikli denetimde kalır.
+Kanıtlanan çoğaltma ayrı öncelikli bakım fazında düzeltilmelidir.
+Ayrıntı: ACIK-RISKLER.md.
+
+SONRAKİ PLAN
+94A galaksi kamerası sıradaki büyük arayüz fazıdır; başlanmadı.
+Bilim gemisi güvenli keşfi, uzaktan inşa, ekonomi, konvoylar, diplomasi,
+sığınmacı/olay tutarlılığı, portre/köken, teknolojik istihbarat/karşı
+araştırma, stratejik AI ve dış ses dosyasız fiziksel enstrüman müziği
+planları korunur. ILERI-GELISTIRME-PLANI.md ve FAZ-PLANI.md güncellendi.
+GitHub'a yayın yapılmadı.

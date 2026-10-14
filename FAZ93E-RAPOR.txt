@@ -1,0 +1,65 @@
+STARS — FAZ 93E TAMAMLANDI
+14 Ekim 2026
+
+KANONİK KAYNAK
+stars-faz93d1.zip
+SHA-256 e47581b0799e735a8caf086caf4ac1c1cd7b8d5f991076c5f8d7f5f2ef192ff3
+ZIP CRC ve SHA-256 doğrulandı. GitHub kaynağı kullanılmadı.
+Build 93e / stars-v93e / Save v8.
+
+İÇERİK
+40 temel teknoloji ve bütün mevcut ön koşulları korunur. Üç ağaca 12 özel
+teknoloji eklendi. Dördüncü ağaç veya civic'e özel teknoloji eklenmedi.
+Gerçek erişim kapıları: etik/doktrin/tür; birden fazla koşul açıkça gösterilir.
+Bir yeni Taarruz Eskortu, altı gezegen binası, bir Derin Gözlemevi uzay yapısı.
+Hepsi gerçek kilit, ödeme, üretim, bakım/etki ve AI kullanımına bağlıdır.
+Ayrıntılı koşul/kazanım/maliyet tablosu: BILIM-93E.md.
+Makine tarafından okunabilir gerçek katalog: TEKNOLOJI-KATALOGU-93E.json.
+
+Manuel / yarı otomatik / otomatik araştırma; üç paralel bilim dalı korunur.
+Mod değişimi kuyruk, yatırılan puan ve geçmişi silmez. Eski kayıt semi modda.
+Erişimini kaybeden hedef gerekçesiyle bekler; yatırılan puan bankada korunur.
+Tamamlanan teknoloji etik/doktrin değişiminden sonra da kalır.
+Özel teknoloji edinim bildirimi bir kez; gerçek tarih ve koşullar geçmişte.
+Bilim zaferi ve Kadim Araştırma 40 temel teknoloji üzerinden mümkündür.
+
+TESTLER
+70 test paketi; 4.455 başarılı kontrol; 0 kalan hata; 0 zaman aşımı.
+34 yeni uzmanlaşma kontrolü; mevcut 53 bilim kontrolü; AI ekonomi, Save v8,
+sevkiyat, filo bileşimi, diplomasi, native Canvas ve mobil giriş regresyonları.
+Tam ilk regresyon: 4.454 başarılı / 1 hata. Yeni takas testi hazırlığında
+iki devletin teması kurulmamıştı; temas kapısı özel teknoloji kapısından önce
+haklı olarak teklifi reddetti. Teste karşılıklı temas eklendi, oyun kodu
+gevşetilmedi. Yalnız bu kontrol izole çalıştırıldı: 1/0. Bir önceki yanlış
+çalışma diziniyle düzeltme girişiminin değişmemiş test çıktısı da loglarda
+korundu. Tekrarlanan kontroller nihai toplamda çift sayılmaz.
+Nihai özet tests/logs-93e/summary.json; ilk sonuç ve loglar aynı klasörde.
+
+AI kampanyaları: normal/orta, seed 11/99/404, her biri gerçek 120 ay.
+              93D.1 savaş/bilim siparişi       93E savaş/bilim siparişi
+Seed 11       311 / 37                         311 / 37
+Seed 99       302 / 35                         302 / 35
+Seed 404      272 / 42                         285 / 42
+Savaş sınıfları yeni Eskort dahil; bilim gemisi yenileme koruması korunur.
+Negatif/geçersiz kaynak gözlemi 0. Sivil gemi muhasebesi AI/sınıf bazında dengeli.
+Seed11 tam kayıt hash'i ve RNG tekrarı eşit; gözlemci RNG/dünya akışını değiştirmez.
+Ham veriler tests/navy-93e-after-11.json, -99.json, -404.json.
+93D.1 ham verileri ayrıca tarihsel olarak korundu.
+
+KORUNANLAR VE SINIRLAR
+40 temel teknoloji runtime kaydı kanonik fixture ile aynıdır. Save v8 korunur.
+93D kuyruk/otomatik rota/ilerleme/geçmiş ve 93D.1 bütçe/rezerv/kapasite/tersane
+seçimi korunur. Yeni gemi bu ücretli üretim yoluna eklenmiştir.
+Fiziksel Android/gerçek tarayıcı kabulü yapılmadı. Mevcut native Canvas,
+DOM olayları, mobil/PWA testleri fiziksel cihaz FPS iddiası değildir.
+Uzun geç oyun ve her kimlik kombinasyonunun dengesi ayrıca ölçülebilir.
+12 teknoloji ilk içerik setidir; her doktrine ayrı içerik vaat edilmez.
+Diğer doktrinler için çeşitlendirme ve uzun denge 93E.1 takip adayıdır.
+Temel 93E üretim/araştırma zincirlerinden eksik bırakılmış zorunlu iş yoktur.
+
+İLERİ PLAN
+94A kamera, güvenli bilim keşfi, uzaktan inşa, Ekonomi ekranı, gerçek ticaret
+konvoyları, diplomasi UX, olay tutarlılığı, portre/köken, stratejik AI ve
+casuslukla karşı teknoloji, dış ses gerektirmeyen doğal müzik korunur.
+Ticaret kaynak çoğalması ve rota hataları öncelikli bağımsız denetimdir.
+94A veya 93E.1 başlatılmadı. GitHub'a yayın yapılmadı.

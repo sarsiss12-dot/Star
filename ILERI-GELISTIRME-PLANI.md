@@ -1,3 +1,82 @@
+# 94A sonrası güncel ileri plan — 14 Ekim 2026
+
+94A galaksi kamerası: ortak koordinat dönüşümü, güvenli pan/pinch,
+isteğe bağlı döndürme, odak/açı düğmeleri ve Canvas yaşam döngüsü koruması.
+Eğik/perspektif görünüm uygulanmadı; ancak ayrı gereksinimle ve doğru
+seçim/Android performansı kanıtlanarak ileride ele alınabilir.
+
+Bu teslim sonraki fazı otomatik başlatmaz. Korunan bağımsız işler:
+
+- Öncelikli ticaret kaynak çoğalması ve rota bütünlüğü denetimi. Gerçek
+  çoğaltma kanıtlanırsa ayrı öncelikli bakım fazı; 94A kapsamı büyütülmedi.
+- Bilim gemilerinin akıllı/güvenli keşfi, korsandan kaçınma, hedef rezervasyonu.
+- İnşa gemisi panelinden uzaktan inşa emirleri.
+- Yedi kaynak için detaylı Ekonomi ekranı.
+- Gerçek ticaret konvoyları ve stok/kayıp/teslim muhasebesi.
+- Kompakt diplomasi arayüzü, olay tutarlılığı ve sığınmacı olayı koşulları.
+- Pre-game portre hatası ve sekiz kökenin metin/etki denetimi.
+- Casuslukla öğrenilen rakip teknolojisi ve buna dayalı karşı araştırmalar.
+- Stratejik AI, uzun geç oyun doktrin/etik/tür dengesi.
+- Eski etkisiz shipSpeed alanının ayrı denge incelemesi.
+- Harici ses dosyası olmadan JavaScript fiziksel enstrüman modellemeli müzik.
+
+GitHub'a yayın ayrı yetki gerektirir. Aşağıdaki eski faz planları tarihsel
+kayıttır; güncel durum bu bölüm ve FAZ94A-RAPOR.txt'dir.
+
+---
+
+# 93E.1 sonrası güncel yol haritası — 14 Ekim 2026
+
+93E.1 tamamlandı: eksik altı doktrine teknoloji, iki yeni bina, gerçek
+askerî/istihbarat/savunma etkileri. Sekiz kalıcı doktrinin doğrudan teknoloji
+koşulu vardır. Katalog ve erişim tablosu BILIM-93E1.md içindedir.
+
+- **Öncelikli bağımsız denetim:** ticarette kaynak çoğalması ve rota bütünlüğü.
+  Gerçek kaynak çoğaltma kanıtlanırsa ayrı, öncelikli bakım fazında düzeltilmeli.
+  93E.1 bu iddiayı çözülmüş veya yeni bir testle kanıtlanmış saymaz.
+- **94A — Galaksi Kamerası:** sıradaki büyük arayüz fazı; mobil seçim,
+  kaydırma ve yakınlaştırma. Bu teslimde başlanmadı.
+- Bilim gemilerinin güvenli otomatik keşfi, korsanlardan kaçış, hedef rezervasyonu.
+- İnşa gemisinden uzaktan inşa emirleri.
+- Ekonomi ekranı; gerçek ticaret konvoyları ve gerçek kayıp/teslim muhasebesi.
+- Diplomasi arayüzü, olay tutarlılığı ve sığınmacı olayının diplomatik koşulları.
+- Pre-game portre hatası ve köken/metin/gerçek etki denetimi.
+- Casuslukla teknolojik istihbarat ve öğrenilmiş rakip teknolojisine karşı araştırma.
+- Gelişmiş stratejik AI ve uzun geç oyun doktrin/etik/tür dengesi.
+- Harici ses dosyası olmadan JavaScript fiziksel enstrüman modellemeli hafif müzik.
+- Eski shipSpeed doktrin alanının etkisiz üretim cezası için ayrı denge incelemesi;
+  bu faz yalnız yeni militaryBuildMul bonusunu gerçek üretime bağlar.
+
+Yeni bilim ağacı veya civic teknolojisi planlanmadı. GitHub yayını ayrı izin
+olmadan yapılmaz. Aşağıdaki eski faz başlıkları tarihsel kayıttır, güncel
+sıra bu bölümdür; önceki planların ayrıntıları silinmemiştir.
+
+---
+
+# 93E sonrası güncel ileri plan — 14 Ekim 2026
+
+93E'nin ilk 12 özel teknoloji ve üç mod kapsamı BILIM-93E.md'dedir.
+
+- **Öncelikli bağımsız denetim:** ticarette kaynak çoğalması ve rota hataları.
+  Bu teslim söz konusu ticaret iddialarını çözülmüş saymaz.
+- **93E.1 takip adayı:** diğer mevcut doktrinler için ek özel teknoloji çeşitliliği,
+  bütün etik/tür kombinasyonları ve uzun geç oyun dengelemesi. Yeni civic içeriği yok.
+  İlk 93E kapsamından eksik bırakılmış zorunlu bir üretim zinciri değildir.
+- **94A:** galaksi kamerası; mobil kaydırma/yakınlaştırma/seçim güvenliği.
+- Güvenli otomatik bilim gemisi keşfi, korsandan kaçınma ve hedef rezervasyonu.
+- İnşa gemisinden uzaktan inşa emirleri; mevcut yapılar için ortak gerçek maliyet/rota.
+- Yeni Ekonomi ekranı; gerçek ticaret konvoyları ve kayıp/teslim muhasebesi.
+- Diplomasi ekranı UX; sığınmacı olayları ve gerçek diplomatik koşullar.
+- Pre-game portre sorunları ve köken/metin/etki denetimi.
+- Gelişmiş stratejik AI; casuslukla gerçekten öğrenilmiş teknolojiye karşı araştırma.
+- Harici ses dosyası olmadan JavaScript fiziksel enstrüman modellemeli hafif doğal müzik.
+
+Bu takip işleri başlatılmadı. GitHub yayını ayrı kullanıcı yetkisi gerektirir.
+Eski plan ayrıntıları aşağıda korunmuştur.
+
+---
+Aşağıdaki bölümler tarihsel kayıttır.
+
 # 93D.1 sonrası güncel ileri plan
 
 93D.1 sınırlı donanma/üretim ekonomisi düzeltmesidir ve tamamlandı.

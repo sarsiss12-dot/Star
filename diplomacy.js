@@ -1122,7 +1122,7 @@ function itemValue(e, it, other){
     }
     case 'tech': {
       const t = TECHS[it.id];
-      if (!t || e.techs[it.id]) return 0;
+      if (!t || e.techs[it.id] || !researchAccess(e,it.id).ok) return 0;
       const ready = (t.r||[]).every(r => e.techs[r]);
       return (t.c * .07) * (ready ? 1 : .45);
     }
@@ -1728,7 +1728,7 @@ function dealValidity(offer){
           else if (veren.home === it.id)    hata = 'başkent verilemez';
           break;
         }
-        case 'tech': if (!veren.techs[it.id]) hata = 'teknoloji elinde değil'; break;
+        case 'tech': if (!veren.techs[it.id]) hata = 'teknoloji elinde değil'; else if(!researchAccess(alan,it.id).ok)hata=researchAccess(alan,it.id).why; break;
         case 'lux':  if (!(veren.luxOwn && veren.luxOwn[it.k])) hata = 'lüks mal elinde değil'; break;
         case 'peace': if (!veren.war[alan.id]) hata = 'zaten savaşta değilsiniz'; break;
         case 'ally': if (typeof canAlly === 'function' && !canAlly(veren, alan))
@@ -2793,7 +2793,7 @@ function opRiskOf(e, target, OP){
 function opViable(e, target, key){
   switch(key){
     case 'calTech': {
-      const av = Object.keys(target.techs || {}).filter(t => !e.techs[t] && TECHS[t]);
+      const av = Object.keys(target.techs || {}).filter(t => !e.techs[t] && TECHS[t] && researchAccess(e,t).ok);
       return av.length ? {ok:true, n:av.length, d:av.length + ' çalınabilir teknoloji'}
                        : {ok:false, why:'Çalınacak yeni teknolojisi yok'};
     }
@@ -2936,7 +2936,7 @@ function runOp(e, target, key){
   let msg = '';
   switch(key){
     case 'calTech': {
-      const av = Object.keys(target.techs || {}).filter(t => !e.techs[t] && TECHS[t]);
+      const av = Object.keys(target.techs || {}).filter(t => !e.techs[t] && TECHS[t] && researchAccess(e,t).ok);
       if (!av.length){ msg = 'Çalınacak yeni teknoloji bulunamadı.'; break; }
       const id = av[Math.floor(rnd()*av.length)];
       grantResearchTech(e,id,'espionage'); recalcMods(e);
