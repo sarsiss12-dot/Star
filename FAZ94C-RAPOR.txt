@@ -1,0 +1,89 @@
+STARS — FAZ 94C TESLİM RAPORU
+Tarih: 15 Ekim 2026
+
+KANONİK KAYNAK
+stars-faz94b.zip
+SHA-256: ee272e5f50d0a45c7bb2725f354e9481bcbbc5fddbb8c2b867f04693838fa1f1
+Kaynak SHA-256 ve ZIP üye CRC'leri doğrulandı. GitHub kodu kullanılmadı.
+Build 94c; PWA cache stars-v94c; Save v8.
+
+KAMERA DEĞİŞİKLİKLERİ
+Sol çubuktaki üç bağımsız kamera düğmesi kaldırıldı. KAYIT VE AYARLAR içinde
+küçük GÖRÜNÜM / KAMERA bölümü var. Hafif eğik görünüm 0,78 dikey ölçekli
+ortak affine dönüşümle uygulanır; düz 2B seçilebilir. Sıfırlama açı 0 ve eğim 1
+yapar. Yazılar yatay kalır. Ters koordinat, bitmap, gemi yönü, ekranda seçim
+mesafesi, viewport ve sınır hesapları aynı projeksiyona uyar.
+Yeni kütüphane, asset, 3B motor veya paralel resize yöneticisi eklenmedi.
+Ayrıntı: KAMERA-94C.md.
+
+AI İNCELEME SONUÇLARI
+11, 99, 404 tohumlarında 120 ay; 99'da korsansız/düşük stokla 360 ay;
+404'te 100 sistemli büyük galakside 120 ay, 94B ve 94C karşılaştırıldı.
+Her sürümde toplam 840 aylık kampanya örneklemi. Kaynak/gelir, koloniler,
+güç, gemi sınıfları/sipariş/kayıplar, tersaneler, bilim, keşif, diplomasi,
+casusluk, fraksiyonlar, bekleme ve işlem maliyetleri devlet bazında raporlandı.
+Aylık örneklerde negatif/sonlu olmayan kaynak ve gözlenen otomatik keşif
+hedef çakışması yok. Bu ifade bütün ara olaylarda ekonomik optimalite garantisi değildir.
+AI karar motorları yeniden yazılmadı; ücretsiz kaynak/gemi/keşif eklenmedi.
+Ayrıntı: AI-KALITE-DENETIMI-94C.md ve tests/audit-94c/.
+
+TESPİT EDİLEN GERÇEK HATALAR
+1. Aylık takas stoksuz vericiden alıcıya kaynak yazabiliyordu: 0 toplam stoktan
+   20 kaynak üreten bağımsız 94B örneği saklıdır.
+2. Başka ortağın açık rotası ilgili pakt çiftini yetkilendirebiliyordu.
+3. Aynı ay tekrar çağrılan aylık takas yeniden uygulanabiliyordu.
+
+DÜZELTİLEN HATALAR
+Takas miktarı iki tarafın gerçek stoklarıyla orantılı sınırlandı. İlgili iki
+devletin güncel koloni limanları, gerçek rota, savaş ve yağma denetleniyor.
+Ortak sistem limanları geçerli kalır; yıkılmış limanın eski rotası geçersizdir.
+Save v8 uyumlu isteğe bağlı çift/ay damgası yeniden uygulamayı engeller.
+Stoksuz çoğalma örneği 94C'de 0 → 0. Doğrudan anlaşmanın stok/atomiklik
+kontrolleri korunur. Ticaret sistemi/konvoy modeli yeniden tasarlanmadı.
+
+HENÜZ DÜZELTİLMEYEN SORUNLAR
+Tohum 99 güvenli keşif beklemeleri/ikmal dönüşü ve rota maliyeti sürüyor.
+Sefer düzeyinde ortak varış, fraksiyon taleplerinin AI hedeflerine bağlanması,
+kararların istihbarat sınırları ve kapsamlı ekonomik ihtiyaç planı 95A önerisi.
+Ticaretin her olası edinim/istemci tekrar yolu için genel güvenlik garantisi
+verilmez. Fiziksel konvoylar ayrı ileri iş; aylık gelir çarpanı mevcut soyut model.
+Fiziksel Android kabulü yapılmadı. Ayrıntı ACIK-RISKLER.md.
+
+ESKİ SÜRÜMLE PERFORMANS KARŞILAŞTIRMASI
+Orta harita kampanyaları 94B yaklaşık 7,18–8,33 sn, 94C 8,23–8,68 sn.
+Büyük harita 33,28 → 31,14 sn; 360 ay 32,11 → 33,53 sn.
+Host yükü/gözlemci etkisi vardır; genel optimizasyon iddiası yoktur.
+99 ve 404 standart kampanya sonuçları aynı. 11'de güç 24.624 → 16.053,
+koloni 16 → 11; doğru ticaret muhasebesi ücretsiz girdileri kaldırdığı için
+her tohumda daha güçlü AI iddia edilmez. Keşif 127 → 121; uzun 99'da
+172 → 134. Bütün olumsuz farklar karşılaştırma raporunda saklıdır.
+
+TEST SONUÇLARI
+74 paket, 4.583 benzersiz başarılı kontrol, 0 kalan hata, 0 zaman aşımı.
+Bir tam regresyon: 4.581 kontrol. Son liman üyeliği düzeltmesinden sonra
+94C hedefli paket 32/32 (tam çalışmadaki 30 yerine), donanma kampanyası
+ilgili takip kontrolü. Toplam aynı test tekrarları eklenerek şişirilmedi.
+Ham tam sonuç tests/logs-94c/summary.json; nihai birleştirilmiş sonuç
+tests/summary-94c.json; takip logları tests/logs-94c-followup/.
+İlk kamera testinde index/indexOf test yazım hatası düzeltildi; ilk başarısız
+çıktı tests/audit-94c/development/camera-first.log içinde korunur.
+Ara ölçüm betiğindeki müzakere kabul sayacı ve rapor örneklem hataları
+düzeltildi; geliştirme verileri ayrı tutuldu, nihai ölçümler yeniden üretildi.
+60 aylık deterministik tekrar tam hash/RNG eşit. 30. ayda yükleme sonrası
+oyun durumu/RNG eşit; ham JSON hash'i yalnız mevcut üç türetilmiş cache
+alanından farklı. Ayrıntılı fark ve normalize hash kanıtı dosyalarda saklı.
+Kamera, Save v8, 94B keşif, 93D.1 donanma, filo takviyesi, bilim,
+diplomasi, casusluk ve mevcut PWA regresyonları korunmuştur.
+
+ÖNERİLEN FAZ 95A GELİŞTİRMELERİ
+İstihbarat sınırları; ortak sefer/ikmal planı; fraksiyon talepleri; kaynak
+darboğazı ve teknoloji kullanım planı; güvenli keşif rota önbelleği;
+casusluk getiri/teklif kalitesi; açık savaş sonuç kaydı.
+94D veya 95A başlatılmadı. GitHub'a yayın yapılmadı.
+
+TESLİM
+Tam kaynak, bütün testler, eski faz kayıtları, ham/özet karşılaştırmalar,
+güncel risk/planlar stars-faz94c.zip içindedir. ZIP'in SHA-256 değeri teslim
+mesajında ve ZIP dışındaki stars-faz94c.sha256 dosyasında bulunur; kendi
+hash'ini içeren döngüsel paket üretilmez. RELEASE-MANIFEST.json dosya
+hash'lerini içerir; python3 tools/verify-release.py ile doğrulanabilir.

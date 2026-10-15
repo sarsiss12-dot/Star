@@ -37,9 +37,12 @@ function battleRound(sys, A, fa, B, fb, def, band){
         .filter(sy => sy.owner === f.e || sy.owner < 0)
         .sort((a,b)=> (a.owner===f.e?0:1) - (b.owner===f.e?0:1))[0] : null;
       if (home){
+        const wasCombat=f.combat,wasOrder=f.ord;
         f.combat = 0;
         f.ord = null;
-        orderMove(f, home.id);
+        if(!orderMove(f, home.id, false, true)){
+          f.combat=wasCombat;f.ord=wasOrder;continue;
+        }
         fx({k:'shield', x:f.x, y:f.y, life:18});
         battleReportRetreat(report, f.e);
         if (f.e === 0){

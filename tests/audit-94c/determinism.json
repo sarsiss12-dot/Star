@@ -1,0 +1,27 @@
+{
+  "months": 60,
+  "repeat": {
+    "hash": true,
+    "rng": true
+  },
+  "reload": {
+    "hash": false,
+    "rng": true,
+    "gameplayStateEqual": true,
+    "canonicalHashes": [
+      "4833d0d610c68138f78db4d8a4b4a3a8213ed5844cf731e5d4510f4f66aaf98f",
+      "4833d0d610c68138f78db4d8a4b4a3a8213ed5844cf731e5d4510f4f66aaf98f"
+    ],
+    "rawHashExplanation": "Only existing derived empire cache fields _supAt, _gateAt and _prof differ; full differences retained."
+  },
+  "hashes": [
+    "907b86b45fca3243f73c1bca74bf452ba111c575119b37c05ad7d832350df03e",
+    "907b86b45fca3243f73c1bca74bf452ba111c575119b37c05ad7d832350df03e",
+    "7d2141c75853a430a5747ba2917016144d437d31c6291d14fcee432e35bef921"
+  ],
+  "rngs": [
+    -1251096851,
+    -1251096851,
+    -1251096851
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "11": {
+    "94a": {
+      "surveys": 109,
+      "finalDiscovered": 115,
+      "losses": 29,
+      "idleDays": 9938.5,
+      "travelDays": 2191.0,
+      "scanDays": 3209.0,
+      "shipDays": 15338.5,
+      "duplicateShipDays": 655.5,
+      "collisionEpisodes": 28,
+      "ms": 3342,
+      "idlePct": 64.79447142810575,
+      "efficiency": 0.7106301137660136
+    },
+    "94b": {
+      "surveys": 135,
+      "finalDiscovered": 141,
+      "losses": 28,
+      "idleDays": 20475.0,
+      "travelDays": 4566.0,
+      "scanDays": 3569.5,
+      "shipDays": 28610.5,
+      "duplicateShipDays": 0,
+      "collisionEpisodes": 0,
+      "ms": 5814,
+      "idlePct": 71.56463536114363,
+      "efficiency": 0.47185473864490307
+    }
+  },
+  "99": {
+    "94a": {
+      "surveys": 99,
+      "finalDiscovered": 105,
+      "losses": 28,
+      "idleDays": 17548.0,
+      "travelDays": 1745.0,
+      "scanDays": 3086.5,
+      "shipDays": 22379.5,
+      "duplicateShipDays": 485.5,
+      "collisionEpisodes": 21,
+      "ms": 5831,
+      "idlePct": 78.4110458231864,
+      "efficiency": 0.4423691324649791
+    },
+    "94b": {
+      "surveys": 75,
+      "finalDiscovered": 81,
+      "losses": 28,
+      "idleDays": 13933.0,
+      "travelDays": 7111.5,
+      "scanDays": 2109.5,
+      "shipDays": 23154.0,
+      "duplicateShipDays": 0,
+      "collisionEpisodes": 0,
+      "ms": 5428,
+      "idlePct": 60.175347672108494,
+      "efficiency": 0.323918113500907
+    }
+  },
+  "404": {
+    "94a": {
+      "surveys": 115,
+      "finalDiscovered": 121,
+      "losses": 46,
+      "idleDays": 3637.0,
+      "travelDays": 2802.5,
+      "scanDays": 3643.5,
+      "shipDays": 10083.0,
+      "duplicateShipDays": 1221.5,
+      "collisionEpisodes": 38,
+      "ms": 2214,
+      "idlePct": 36.07061390459189,
+      "efficiency": 1.140533571357731
+    },
+    "94b": {
+      "surveys": 125,
+      "finalDiscovered": 131,
+      "losses": 11,
+      "idleDays": 24585.0,
+      "travelDays": 5884.0,
+      "scanDays": 3223.0,
+      "shipDays": 33692.0,
+      "duplicateShipDays": 0,
+      "collisionEpisodes": 0,
+      "ms": 6415,
+      "idlePct": 72.96984447346551,
+      "efficiency": 0.3710079544105426
+    }
+  },
+  "11-no-pirates": {
+    "94a": {
+      "surveys": 141,
+      "finalDiscovered": 147,
+      "losses": 12,
+      "idleDays": 21815.0,
+      "travelDays": 3532.0,
+      "scanDays": 4487,
+      "shipDays": 29834.0,
+      "duplicateShipDays": 1610.0,
+      "collisionEpisodes": 39,
+      "ms": 3397,
+      "idlePct": 73.12127103304954,
+      "efficiency": 0.47261513709190855
+    },
+    "94b": {
+      "surveys": 133,
+      "finalDiscovered": 139,
+      "losses": 2,
+      "idleDays": 31608.5,
+      "travelDays": 2712.0,
+      "scanDays": 3454,
+      "shipDays": 37774.5,
+      "duplicateShipDays": 0,
+      "collisionEpisodes": 0,
+      "ms": 6860,
+      "idlePct": 83.6768190181207,
+      "efficiency": 0.35208937246025757
+    }
+  }
+}

@@ -1,0 +1,152 @@
+{
+  "11": {
+    "before": {
+      "months": 120,
+      "ms": 8235,
+      "colonies": 16,
+      "power": 24624,
+      "discovered": 127,
+      "orders": 316,
+      "losses": 132,
+      "operations": 9,
+      "accepted": 9,
+      "conflicts": 0,
+      "negative": 0,
+      "graphs": 4633
+    },
+    "after": {
+      "months": 120,
+      "ms": 8233,
+      "colonies": 11,
+      "power": 16053,
+      "discovered": 121,
+      "orders": 347,
+      "losses": 222,
+      "operations": 19,
+      "accepted": 11,
+      "conflicts": 0,
+      "negative": 0,
+      "graphs": 4191
+    }
+  },
+  "99": {
+    "before": {
+      "months": 120,
+      "ms": 7178,
+      "colonies": 12,
+      "power": 19105,
+      "discovered": 65,
+      "orders": 269,
+      "losses": 130,
+      "operations": 10,
+      "accepted": 7,
+      "conflicts": 0,
+      "negative": 0,
+      "graphs": 3796
+    },
+    "after": {
+      "months": 120,
+      "ms": 8396,
+      "colonies": 12,
+      "power": 19105,
+      "discovered": 65,
+      "orders": 269,
+      "losses": 130,
+      "operations": 10,
+      "accepted": 7,
+      "conflicts": 0,
+      "negative": 0,
+      "graphs": 3796
+    }
+  },
+  "404": {
+    "before": {
+      "months": 120,
+      "ms": 8334,
+      "colonies": 24,
+      "power": 33953,
+      "discovered": 128,
+      "orders": 302,
+      "losses": 79,
+      "operations": 0,
+      "accepted": 14,
+      "conflicts": 0,
+      "negative": 0,
+      "graphs": 5955
+    },
+    "after": {
+      "months": 120,
+      "ms": 8682,
+      "colonies": 24,
+      "power": 33953,
+      "discovered": 128,
+      "orders": 302,
+      "losses": 79,
+      "operations": 0,
+      "accepted": 14,
+      "conflicts": 0,
+      "negative": 0,
+      "graphs": 5955
+    }
+  },
+  "99-long": {
+    "before": {
+      "months": 360,
+      "ms": 32108,
+      "colonies": 18,
+      "power": 67392,
+      "discovered": 172,
+      "orders": 900,
+      "losses": 476,
+      "operations": 91,
+      "accepted": 87,
+      "conflicts": 0,
+      "negative": 0,
+      "graphs": 18516
+    },
+    "after": {
+      "months": 360,
+      "ms": 33532,
+      "colonies": 17,
+      "power": 68522,
+      "discovered": 134,
+      "orders": 909,
+      "losses": 473,
+      "operations": 93,
+      "accepted": 83,
+      "conflicts": 0,
+      "negative": 0,
+      "graphs": 19030
+    }
+  },
+  "404-large": {
+    "before": {
+      "months": 120,
+      "ms": 33277,
+      "colonies": 34,
+      "power": 37971,
+      "discovered": 284,
+      "orders": 527,
+      "losses": 234,
+      "operations": 42,
+      "accepted": 37,
+      "conflicts": 0,
+      "negative": 0,
+      "graphs": 10090
+    },
+    "after": {
+      "months": 120,
+      "ms": 31145,
+      "colonies": 34,
+      "power": 41155,
+      "discovered": 284,
+      "orders": 545,
+      "losses": 222,
+      "operations": 41,
+      "accepted": 37,
+      "conflicts": 0,
+      "negative": 0,
+      "graphs": 10447
+    }
+  }
+}

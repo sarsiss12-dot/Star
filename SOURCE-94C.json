@@ -1,0 +1,13 @@
+{
+  "source_zip": "stars-faz94b.zip",
+  "sha256": "ee272e5f50d0a45c7bb2725f354e9481bcbbc5fddbb8c2b867f04693838fa1f1",
+  "zip_crc": "pass",
+  "github_used": false,
+  "unchanged_engines": [
+    "ai.js",
+    "combat.js",
+    "diplomacy.js",
+    "index.html"
+  ],
+  "phase": "94C"
+}

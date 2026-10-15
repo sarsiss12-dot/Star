@@ -487,24 +487,8 @@ function aiTurn(e){
   /* 93D.1 — bounded multi-yard production */
   aiShipProduction(e,my,prof);
 
-  /* --- 3. keşif --- */
-  for (const f of G.fleets){
-    if (f.e !== e.id || f.path.length || f.mv || f.combat || f.surv>0) continue;
-    if (fleetHasRole(f,'bilim')){
-      const from = f.sys;
-      let best = null;
-      for (const s of G.sys){
-        if (s.surv.includes(e.id)) continue;
-        if (s.owner >= 0 && s.owner !== e.id && e.war[s.owner]) continue;
-        const d = dist(G.sys[from], s);
-        if ((!best || d < best.d) && explorationRoute(e,f,s)) best = {s, d};
-      }
-      if (best){
-        if (best.s.id===from) arrive(f,best.s);
-        else orderMove(f,best.s.id);
-      }
-    }
-  }
+  /* 94B: oyuncuyla aynı rezervasyon ve güvenli rota kuralları. */
+  autoExploreTick(e.id);
 
   /* --- 4. kolonizasyon --- */
   const targets = colonizeTargets(e);
@@ -2027,7 +2011,7 @@ function aiLogisticsTick(){
     if (!hedef || hedef.id === f.sys) continue;
     /* Koridor hakkı rota hesaplanmadan ÖNCE verilmeli */
     f.retreating = true;
-    if (typeof orderMove === 'function' && orderMove(f, hedef.id)){
+    if (typeof orderMove === 'function' && orderMove(f, hedef.id, false, true)){
       f.ord = null;
     } else {
       f.retreating = false;                  // gerçekten kapana kısılmış

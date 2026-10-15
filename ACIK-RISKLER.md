@@ -1,3 +1,64 @@
+# 94C güncel açık riskler — 15 Ekim 2026
+
+- Fiziksel Android/WebView testi yapılmadı. Native Canvas, pointer ve yaşam
+  döngüsü testleri gerçek GPU/ısı/bellek ve işletim sistemi kabulünün yerine geçmez.
+- Hafif eğim gerçek perspektif değildir. Kamera seçimi oturumluk görsel durumdur;
+  yeni oturum hafif eğik başlar. Eski kamera nesnesinde eksik tilt düz kabul edilir.
+- 94B'deki stoksuz aylık takas kaynak çoğalması kanıtlandı ve 94C'de düzeltildi.
+  İlgili liman/rota ve çift-ay tekrar kapıları testli. Aşağıdaki eski “kanıtlanmadı”
+  notları tarihsel kayıttır. Bütün ticaret yolları için sınırsız güvenlik garantisi
+  yoktur; yeni doğrulanabilir çoğalma ayrı öncelikli bakım işi olarak ele alınmalı.
+- Fiziksel ticaret konvoyu henüz yok; mevcut gelir çarpanı soyut ekonomi modelidir.
+- Kaynak muhasebesinin düzelmesi bazı AI kampanyalarını zayıflatır. Tohum 11'de
+  güç/koloni/keşif düştü; korsansız uzun 99'da keşif 172'den 134'e düştü.
+  Bu sonuçlar gizlenmedi ve bedava kaynakla telafi edilmedi.
+- Tohum 99'daki uzun ikmal/tehdit beklemeleri sürüyor. Hedef çakışması gözlenmedi;
+  bu, keşfin bütün haritalarda verimli olduğu anlamına gelmez. 5 günlük yeniden
+  planlama maliyeti ve ikmal dönüşü 95A'da incelenmeli.
+- AI sefer düzeyinde ortak varış ve fraksiyon taleplerini doğrudan planlama
+  mekanizmasına sahip değil. Bazı eski karar puanları rakibin gerçek durumunu
+  okuyor; bütün AI bilgi sınırları bu sınırlı fazda yeniden yazılmadı.
+- Beş mevcut doktrin değeri kampanyalarda örneklendi. Eski izolasyonist değeri
+  ve güncel doktrin kataloğunun tutarlılığı ileri denetimde; sekiz doktrinin bütün
+  tür/etik kombinasyonlarında uzun kampanya dengesi kanıtlanmadı.
+- Aylık kaynak örneklemesi negatif değer göstermedi; her ara olayın ayrı
+  invariant gözlemcisi değildir. Savaş sonuçları net işgal değişiminden raporlanır;
+  resmî kaydı olmayan bir galip uydurulmadı.
+- Save/load ham JSON hash'i üç mevcut türetilmiş cache alanı nedeniyle farklı;
+  RNG ve cache dışı tam oyun durumu eşit. Bu farkın kanıtı paket içinde saklı.
+- Host süreleri eşzamanlı yük/gözlemciden etkilenir; genel hızlanma veya düşük
+  donanımlı Android FPS garantisi verilmez.
+
+Önceki faz notları aşağıda tarihsel bağlam olarak korunur; üstteki güncel durum
+esas alınmalıdır. 94D veya 95A bu teslimle başlatılmadı.
+
+---
+
+# 94B güncel açık riskler
+
+- Fiziksel Android/WebView cihaz testi yapılmadı. 94A kamera, pointer,
+  native Canvas ve PWA regresyonları gerçek cihaz FPS/ısı/bellek ölçümü değildir.
+- Hareket hâlindeki sıçrama geri alınmaz. Yeni beliren veya daha önce gizli
+  tehditler gemi kaybına yol açabilir; güvenli keşif sıfır kayıp garantisi değildir.
+- Bilinen tehlikeye girilmemesi ve yıpranma önleyici ikmal dönüşü bazı
+  galaksilerde keşfi yavaşlatır. Tohum 99'da tarama sayısı 94A'dan düşüktür.
+  Uzun güvenli bekleme ve gemilerin daha uzun yaşaması gemi-gün başına keşif
+  oranını azaltır; raporda hem mutlak sayılar hem oranlar sunulur.
+- Rota planlama ve güvenlik kontrolleri ek işlem maliyeti getirir. Host kampanya
+  süreleri yaklaşık karşılaştırmadır; eşzamanlı regresyon yükü vardır. Büyük
+  galaksi / çok sayıda bilim filosu / düşük güçlü telefon için FPS garantisi yoktur.
+- Diplomasi, savaş ve ödül seçimleri keşif takviminden etkilendiği için aynı
+  tohumun iki sürümündeki kampanyalar zamanla farklılaşır. Bu ölçüm kontrollü
+  tek-değişken savaş laboratuvarı değildir; sonuçlar bütün oyun döngüsünündür.
+- Güvenli ikmal noktası kalmazsa gemi bekler; mevcut yıpranma devam eder.
+  Bedava ikmal, onarım veya gizli bilgi avantajı eklenmedi.
+- Ticaret kaynak çoğalması iddiası bu fazda çözülmüş/kanıtlanmış sayılmaz.
+  Bağımsız öncelikli denetim ve kanıtlanırsa ayrı bakım fazı korunur.
+
+Önceki notlar aşağıda tarihsel bağlam olarak saklanır.
+
+---
+
 # 94A güncel açık riskler
 
 - Fiziksel Android/PWA testi yapılmadı. Pointer olayları, native Skia Canvas

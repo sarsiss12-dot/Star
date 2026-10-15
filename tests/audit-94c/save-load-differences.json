@@ -1,0 +1,84 @@
+[
+  [
+    ".emps[0]._supAt",
+    "MISSING",
+    -1
+  ],
+  [
+    ".emps[0]._gateAt",
+    "MISSING",
+    -1
+  ],
+  [
+    ".emps[1]._supAt",
+    "MISSING",
+    -1
+  ],
+  [
+    ".emps[1]._gateAt",
+    "MISSING",
+    -1
+  ],
+  [
+    ".emps[2]._supAt",
+    "MISSING",
+    -1
+  ],
+  [
+    ".emps[2]._gateAt",
+    "MISSING",
+    -1
+  ],
+  [
+    ".emps[3]._supAt",
+    "MISSING",
+    -1
+  ],
+  [
+    ".emps[3]._gateAt",
+    "MISSING",
+    -1
+  ],
+  [
+    ".emps[4]._supAt",
+    "MISSING",
+    -1
+  ],
+  [
+    ".emps[4]._gateAt",
+    "MISSING",
+    -1
+  ],
+  [
+    ".emps[5]._supAt",
+    "MISSING",
+    -1
+  ],
+  [
+    ".emps[5]._gateAt",
+    "MISSING",
+    -1
+  ],
+  [
+    ".emps[6]._gateAt",
+    "MISSING",
+    -1
+  ],
+  [
+    ".emps[6]._prof",
+    {
+      "war": 1.4,
+      "exp": 0.8,
+      "sci": 0.5,
+      "eco": 0.5,
+      "dip": 0,
+      "turtle": 0.04999999999999999
+    },
+    null
+  ],
+  [
+    ".emps[6]._supAt",
+    "MISSING",
+    -1
+  ]
+]

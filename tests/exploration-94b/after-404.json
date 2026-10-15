@@ -1,0 +1,129 @@
+{
+  "seed": 404,
+  "requestedMonths": 120,
+  "months": 120,
+  "pirates": true,
+  "stopped": false,
+  "ms": 6415,
+  "rng": -1979922929,
+  "saveHash": "daa9dcd79ed27e27118c1f6ca6c2fbf23350a6a1b4e09124a3fbe15ddf321403",
+  "empires": [
+    {
+      "id": 0,
+      "name": "Exploration audit",
+      "ai": false,
+      "surveys": 2,
+      "shipDays": 99,
+      "idleDays": 0,
+      "travelDays": 13.5,
+      "scanDays": 85.5,
+      "duplicateShipDays": 0,
+      "collisionEpisodes": 0,
+      "losses": 1,
+      "waitReasons": {},
+      "initialDiscovered": 1,
+      "finalDiscovered": 3,
+      "surveysPer100ShipDays": 2.0202020202020203
+    },
+    {
+      "id": 1,
+      "name": "Vantia İmparatorluğu",
+      "ai": true,
+      "surveys": 29,
+      "shipDays": 6373,
+      "idleDays": 3933.5,
+      "travelDays": 1560,
+      "scanDays": 879.5,
+      "duplicateShipDays": 0,
+      "collisionEpisodes": 0,
+      "losses": 4,
+      "waitReasons": {
+        "pirate": 3933.5
+      },
+      "initialDiscovered": 1,
+      "finalDiscovered": 30,
+      "surveysPer100ShipDays": 0.4550447199121293
+    },
+    {
+      "id": 2,
+      "name": "Aethel Sultanlığı",
+      "ai": true,
+      "surveys": 7,
+      "shipDays": 7023.5,
+      "idleDays": 6825.5,
+      "travelDays": 86,
+      "scanDays": 112,
+      "duplicateShipDays": 0,
+      "collisionEpisodes": 0,
+      "losses": 0,
+      "waitReasons": {
+        "pirate": 4919.5,
+        "threat": 1906
+      },
+      "initialDiscovered": 1,
+      "finalDiscovered": 8,
+      "surveysPer100ShipDays": 0.09966540898412472
+    },
+    {
+      "id": 3,
+      "name": "Yüce Zephyr Lejyonu",
+      "ai": true,
+      "surveys": 29,
+      "shipDays": 6962,
+      "idleDays": 3782,
+      "travelDays": 2339,
+      "scanDays": 841,
+      "duplicateShipDays": 0,
+      "collisionEpisodes": 0,
+      "losses": 1,
+      "waitReasons": {
+        "pirate": 3398,
+        "supply": 314,
+        "threat": 70
+      },
+      "initialDiscovered": 1,
+      "finalDiscovered": 30,
+      "surveysPer100ShipDays": 0.4165469692617064
+    },
+    {
+      "id": 4,
+      "name": "Bilge Aethel Zihni",
+      "ai": true,
+      "surveys": 29,
+      "shipDays": 6566,
+      "idleDays": 4943.5,
+      "travelDays": 781.5,
+      "scanDays": 841,
+      "duplicateShipDays": 0,
+      "collisionEpisodes": 0,
+      "losses": 4,
+      "waitReasons": {
+        "threat": 565,
+        "pirate": 4378.5
+      },
+      "initialDiscovered": 1,
+      "finalDiscovered": 30,
+      "surveysPer100ShipDays": 0.441669204995431
+    },
+    {
+      "id": 5,
+      "name": "Vantia Birliği",
+      "ai": true,
+      "surveys": 29,
+      "shipDays": 6668.5,
+      "idleDays": 5100.5,
+      "travelDays": 1104,
+      "scanDays": 464,
+      "duplicateShipDays": 0,
+      "collisionEpisodes": 0,
+      "losses": 1,
+      "waitReasons": {
+        "threat": 1229.5,
+        "pirate": 3871
+      },
+      "initialDiscovered": 1,
+      "finalDiscovered": 30,
+      "surveysPer100ShipDays": 0.43488040788783083
+    }
+  ]
+}

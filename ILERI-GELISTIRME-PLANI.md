@@ -1,3 +1,76 @@
+# 94C sonrası güncel plan — 15 Ekim 2026
+
+94C tamamlandı: sade kamera menüsü, hafif affine eğim ve doğru seçim;
+AI kalite ölçümleri; kanıtlanan aylık ticaret çoğalması, yanlış rota ve aynı
+ay tekrar uygulama düzeltmesi. Güncel raporlar FAZ94C-RAPOR.txt,
+KAMERA-94C.md ve AI-KALITE-DENETIMI-94C.md dosyalarındadır.
+
+**Önerilen sonraki ana faz 95A — Stratejik AI ve Bilgi Sınırları.**
+94D veya 95A bu teslimle başlatılmaz; kapsam kullanıcı tarafından onaylanmalıdır.
+
+- AI kararlarının sensör/istihbarat sınırları; gizli rakip durumunun kullanılmasının denetimi.
+- Sefer düzeyinde birlikte varış, savunma ve ikmal koordinasyonu.
+- Fraksiyon talepleri, ekonomik darboğazlar ve araştırma önceliklerinin ortak planı.
+- 94B güvenli keşif korunarak tohum 99 bekleme/ikmal dönüşü ve rota önbelleği maliyeti.
+- Casusluk operasyonlarının somut faydası, anlaşma kalitesi ve tekrar bütçesi.
+- Eski izolasyonist AI kimliği ile güncel doktrin kataloğu uyumu.
+- Resmî savaş sonuçlarının kaydı ve gözlemci ölçümlerinin standardizasyonu.
+
+Korunan bağımsız ileri işler:
+
+- Ticaret bütünlüğü: 94C'de kanıtlanan aylık stoksuz çoğalma düzeltildi. Yeni
+  kanıtlanan kaynak çoğalması ayrı öncelikli bakım işi olmalı. Tüm ticaret yollarının
+  kapandığı iddia edilmez; gerçek konvoylar ve rota modeli ayrı geliştirmedir.
+- İnşa gemisi panelinden uzaktan inşa emirleri.
+- Yedi kaynak için detaylı Ekonomi ekranı ve gerçek ticaret konvoyları.
+- Kompakt diplomasi arayüzü; sığınmacı ve diğer olayların diplomatik tutarlılığı.
+- Pre-game portre sorunu ve sekiz kökenin metin/etki denetimi.
+- Casuslukla teknolojik istihbarat ve buna dayalı karşı araştırmalar.
+- Uzun geç oyun doktrin/etik/tür dengesi; mevcut üç bilim ağacı korunur.
+- Eski etkisiz shipSpeed alanının bağımsız denge incelemesi.
+- Harici ses dosyası olmadan JavaScript fiziksel enstrüman modellemeli hafif,
+  doğal müzik prototipi ayrı ileri faz olarak korunur.
+- Fiziksel Android kabulü: eğik kamera, arka plan dönüşü, yön değişimi ve düşük
+  donanım performansı. Otomatik testlerden ayrı, bu teslimi durdurmayan kabul işi.
+
+GitHub yayını ayrı talimat gerektirir. Aşağıdaki eski faz planları tarihsel
+kayıttır; güncel durum yukarıdadır. 94A kamera ve 94B güvenli keşif tamamlanmış
+altyapıdır; hafif eğim artık 94C'de uygulanmıştır.
+
+---
+
+# 94B sonrası güncel plan — 15 Ekim 2026
+
+94B tamamlandı: oyuncu/AI ortak güvenli keşif, devlet bazında hedef
+rezervasyonu, gerçek rota/kapı/ikmal puanlaması, bekle/devam et ve manuel
+kontrol önceliği. Ayrıntı FAZ94B-RAPOR.txt ve KESIF-94B.md dosyalarındadır.
+
+**Sıradaki ana faz 94C — Kapsamlı AI Kalite Kontrolü, Ekonomi, Savaş,
+Diplomasi ve Stratejik Karar Denetimi.** Bu teslim 94C'yi başlatmaz.
+Tohum 99'daki keşif gerilemesi, güvenli bekleme süreleri ve büyük harita
+maliyeti bu denetimde izlenmeli; her tohumda iyileşme iddiası yoktur.
+
+Korunan ileri işler:
+
+- Öncelikli bağımsız ticaret kaynak çoğalması ve rota bütünlüğü denetimi.
+  Gerçek çoğalma kanıtlanırsa ayrı, öncelikli bakım fazı açılmalı.
+- İnşa gemisi panelinden uzaktan inşa emirleri.
+- Yedi kaynak için detaylı Ekonomi ekranı; gerçek ticaret konvoyları.
+- Kompakt diplomasi UX; sığınmacı ve diğer olayların diplomatik tutarlılığı.
+- Pre-game portre sorunu ve sekiz kökenin metin/etki denetimi.
+- Casuslukla teknolojik istihbarat ve buna dayalı karşı araştırmalar.
+- Stratejik AI ve uzun geç oyun doktrin/etik/tür dengesi.
+- 94A kamera korunur; perspektif/eğme ayrı ihtiyaç ve koordinat/Android
+  doğrulamasıyla gelecekte ele alınabilir.
+- Eski etkisiz shipSpeed alanının bağımsız denge incelemesi.
+- Harici ses dosyası olmadan JavaScript fiziksel enstrüman modellemeli
+  hafif ve doğal müzik prototipi, ayrı ileri faz.
+
+GitHub yayını ayrı talimat gerektirir. Aşağıdaki geçmiş planlar tarihsel
+kayıttır; tamamlanan güvenli bilim keşfi işi artık 94B kapsamındadır.
+
+---
+
 # 94A sonrası güncel ileri plan — 14 Ekim 2026
 
 94A galaksi kamerası: ortak koordinat dönüşümü, güvenli pan/pinch,

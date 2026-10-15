@@ -1,0 +1,761 @@
+{
+  "from": "94B",
+  "to": "94C",
+  "files": [
+    {
+      "path": "ACIK-RISKLER.md",
+      "change": "modified",
+      "sha256": "4023ec7673dd540afa45d1431dbb2af4f5421d3619daa37aa070f0d9941412ee"
+    },
+    {
+      "path": "AI-KALITE-DENETIMI-94C.md",
+      "change": "added",
+      "sha256": "8ce6a2e781f373124abfa76a0abd4992c62874ff976513253e8df443215b7f7f"
+    },
+    {
+      "path": "DEVAM-94C.md",
+      "change": "added",
+      "sha256": "133b7302dc64b128d3a09bc70e493fbbc623e768347153ad2fbffac3cf0d663e"
+    },
+    {
+      "path": "FAZ-PLANI.md",
+      "change": "modified",
+      "sha256": "8b69798d379039c7dd4646426ce8a0d187e90001d2885e8f79b7caf6493cada8"
+    },
+    {
+      "path": "FAZ94C-RAPOR.txt",
+      "change": "added",
+      "sha256": "7583c5759239f0979396501769a23b7212a3957c91209f218897cfc9aef5aa3d"
+    },
+    {
+      "path": "ILERI-GELISTIRME-PLANI.md",
+      "change": "modified",
+      "sha256": "30c133fb86a0509792ee21ba3189d7f8b3edb8712296bbff16e8ddddf88a0708"
+    },
+    {
+      "path": "KAMERA-94C.md",
+      "change": "added",
+      "sha256": "3adaf1086d31366b59e4dd628f00eceaee4cbdf03f3a5dbb25bbc670ff43aa19"
+    },
+    {
+      "path": "SOURCE-94C.json",
+      "change": "added",
+      "sha256": "0a349ecbbb55e16b4aa67c802836c78ed986325ad623339aa9795da52ce82c2f"
+    },
+    {
+      "path": "economy.js",
+      "change": "modified",
+      "sha256": "cd9586b9824555660389a660f36cbe32d0c2233ddcb2d1813a8899acac88b4e0"
+    },
+    {
+      "path": "main.js",
+      "change": "modified",
+      "sha256": "34bb9b779922f19e197124d359f277146a8f75d1f04e570250c40a421f95f6b8"
+    },
+    {
+      "path": "map.js",
+      "change": "modified",
+      "sha256": "5dd91205965915969ad72816da0c3f1ab7c0a47753e4effc8db0d39c93ba87ea"
+    },
+    {
+      "path": "sw.js",
+      "change": "modified",
+      "sha256": "6ed905d8a7627b09fb9e574ca04fbfa46d6deacf0c63b39628d99a847b5a1e96"
+    },
+    {
+      "path": "tests/audit-94c/after-11.json",
+      "change": "added",
+      "sha256": "6b6413c273bf5ad1569fa38255846b18cd37c91baff38c56c84106cd4c353e49"
+    },
+    {
+      "path": "tests/audit-94c/after-404-large.json",
+      "change": "added",
+      "sha256": "6cb8f2332197c60d661c11a394c7b6db5128f221276e3921e953b4d7ca822fca"
+    },
+    {
+      "path": "tests/audit-94c/after-404.json",
+      "change": "added",
+      "sha256": "d5e20aa2ff8348fd2fd267a8953a67565de58c1ee1ed414568f66101b343326b"
+    },
+    {
+      "path": "tests/audit-94c/after-99-long.json",
+      "change": "added",
+      "sha256": "8b50b1e4ac51ef5670e64ca3b646383cb724052b588754b622c5cae979356653"
+    },
+    {
+      "path": "tests/audit-94c/after-99.json",
+      "change": "added",
+      "sha256": "70bd3f76f4ba85a2d052628093461627b5bdc4cba2d1a72308ad33fd0a1f52bd"
+    },
+    {
+      "path": "tests/audit-94c/before-11.json",
+      "change": "added",
+      "sha256": "59592d87ec82bc3af644d0fa44b492d425a129a4e0cea22e615e9f63706e128b"
+    },
+    {
+      "path": "tests/audit-94c/before-404-large.json",
+      "change": "added",
+      "sha256": "42d7bf55939373d773d5a4e2aa7afb2c8d69bfaca065bced31fba44f38b5b15f"
+    },
+    {
+      "path": "tests/audit-94c/before-404.json",
+      "change": "added",
+      "sha256": "d0688989306abe69968e987dcfc2236f33847b1f1f1168320e6a5a46518286a4"
+    },
+    {
+      "path": "tests/audit-94c/before-99-long.json",
+      "change": "added",
+      "sha256": "59b1739cfee71a6bba0be338a9d44ee96a76205b4166b1ead45479ce33525810"
+    },
+    {
+      "path": "tests/audit-94c/before-99.json",
+      "change": "added",
+      "sha256": "698561179169ff4d821d096af40a144e1c108f9cae95765a3c6bd5c311bcaa58"
+    },
+    {
+      "path": "tests/audit-94c/camera-performance.json",
+      "change": "added",
+      "sha256": "5d3b37973db222cc9ccc26584219cdd3994b04eede18270387e70b9c817449b9"
+    },
+    {
+      "path": "tests/audit-94c/determinism.json",
+      "change": "added",
+      "sha256": "97a650cf27d80421585e2ecc70ea8540c41243f1c79480ad66302918c79f70e7"
+    },
+    {
+      "path": "tests/audit-94c/development/after-11.json",
+      "change": "added",
+      "sha256": "a72f7b6164504e5024571b6aeef3e70e4d387e1760f633e599dff9f3cf668829"
+    },
+    {
+      "path": "tests/audit-94c/development/after-404.json",
+      "change": "added",
+      "sha256": "78571a9eec3ab8e3c1b366d93f6f56fb1921067f4d216713ecb7c97c8186c4af"
+    },
+    {
+      "path": "tests/audit-94c/development/after-99.json",
+      "change": "added",
+      "sha256": "9e9454b8c3b74170435178d1e7bbc9f36a8fe5c63f37884d2c2859b0b95cdc26"
+    },
+    {
+      "path": "tests/audit-94c/development/before-11.json",
+      "change": "added",
+      "sha256": "b9c0e80b7c3ecd9281d58c919d7f5cdd9ebcc5fd5e8f7c471fba6a4bca88478f"
+    },
+    {
+      "path": "tests/audit-94c/development/before-404.json",
+      "change": "added",
+      "sha256": "18367a827999c32508d3bb488072f68a4116c5d2bd0b2fd1f8bc589c8c663dbc"
+    },
+    {
+      "path": "tests/audit-94c/development/before-99.json",
+      "change": "added",
+      "sha256": "3ff073f29a458e54b2928af0589c16122be2ccda554c92fb3863f2651fb78182"
+    },
+    {
+      "path": "tests/audit-94c/development/camera-first.log",
+      "change": "added",
+      "sha256": "7e412884009416a116f8025ae8351d16e8e72db2fd56ba8569f51ac7d14e3623"
+    },
+    {
+      "path": "tests/audit-94c/per-empire-analysis.json",
+      "change": "added",
+      "sha256": "4b6278d712af2d6f6b057c96749ec3c0d49aa9f0ce4de62a9417cd719fa8bacc"
+    },
+    {
+      "path": "tests/audit-94c/save-load-differences.json",
+      "change": "added",
+      "sha256": "22b588aa31ca6114b5a87ab34a0e6d5b8a8545677c2773b3a2bebc72776779a2"
+    },
+    {
+      "path": "tests/audit-94c/summary.json",
+      "change": "added",
+      "sha256": "48a7189c8909d83fd5479c0e8a3c533d99611c65e9d7e1452b05650f744c7cf0"
+    },
+    {
+      "path": "tests/audit-94c/trade-after.json",
+      "change": "added",
+      "sha256": "f54dbb954f8e92cde1d6225dc94c16500d53ade978e8ed466bcd6ef2bd046ecf"
+    },
+    {
+      "path": "tests/audit-94c/trade-before.json",
+      "change": "added",
+      "sha256": "660036c9d3b9b5112a51154a31a4f0d31dee3acd6fc59fba683eb151e32a5f6d"
+    },
+    {
+      "path": "tests/faz84a_intel_dedup_test.js",
+      "change": "modified",
+      "sha256": "f90a623a221d855c1cb87c741d2ecf2c02280115bb576804a2cafb41cd078769"
+    },
+    {
+      "path": "tests/faz84b_vassal_state_dedup_test.js",
+      "change": "modified",
+      "sha256": "8fc74e65b178bf6523b345c3f5abb3b051ff8268ba512a61a36b3e82dd9e6f7c"
+    },
+    {
+      "path": "tests/faz84c_state_visibility_gate_test.js",
+      "change": "modified",
+      "sha256": "a4a83c834833e564c36325a710619e19c33efdc504a6510746b4a3097876196e"
+    },
+    {
+      "path": "tests/faz85a_political_save_integrity_test.js",
+      "change": "modified",
+      "sha256": "6941d9f17034face1c7ed96172ea49e7d877740e717b1185443c7e1876d35611"
+    },
+    {
+      "path": "tests/faz85b_load_idempotency_test.js",
+      "change": "modified",
+      "sha256": "efe55e4bea7cb67ff9cf2a57603e42b0f8033cb21b4f76a21168267a2c5c0195"
+    },
+    {
+      "path": "tests/faz85c_crisis_save_continuity_test.js",
+      "change": "modified",
+      "sha256": "7176ac50548de9eb8f980e9355bb897ab0c1b02d1f5a6fab3a0aa546392c79d2"
+    },
+    {
+      "path": "tests/faz85d_campaign_save_continuity_test.js",
+      "change": "modified",
+      "sha256": "8aa4ecec6e8f166a4a41118a9ddd4005857df9c31e29a52a42be5e6e128cc4db"
+    },
+    {
+      "path": "tests/faz85e_event_inbox_continuity_test.js",
+      "change": "modified",
+      "sha256": "676612852d73e2c6aa918b85684321533f8feb6e80c3d9270170d4a3c4e8a192"
+    },
+    {
+      "path": "tests/faz85f_spatial_simulation_continuity_test.js",
+      "change": "modified",
+      "sha256": "607b4ec146ead4fcf9dd6c338365c4fd1ccc33a3a85cab291dbd2f6d69ffb22a"
+    },
+    {
+      "path": "tests/faz86a_intel_command_center_test.js",
+      "change": "modified",
+      "sha256": "fd57a4b2aa59d2912504787509632ec5647e8af494e790a76699d7f232c766b6"
+    },
+    {
+      "path": "tests/faz86b_deal_engine_test.js",
+      "change": "modified",
+      "sha256": "251370d66c01c74156cf536aa745059c105210dd47c357761072258be3738a4e"
+    },
+    {
+      "path": "tests/faz86c_1_quote_effective_plan_test.js",
+      "change": "modified",
+      "sha256": "915435869dacd7ab438b3a5e31ff72e968bf0554fd24cd3dde15b85a8d17cb08"
+    },
+    {
+      "path": "tests/faz86c_2_transaction_test.js",
+      "change": "modified",
+      "sha256": "5a79d702ac7ba3b500d7552beb968519372ec5f0128f2a88fe167fa8bee82801"
+    },
+    {
+      "path": "tests/faz86c_3_ai_negotiation_test.js",
+      "change": "modified",
+      "sha256": "2ad69094735433fc98da80d8784ab8c5d9db6cda33809dc571f9af4815f621d5"
+    },
+    {
+      "path": "tests/faz86c_4_reciprocal_offers_test.js",
+      "change": "modified",
+      "sha256": "b7d55c9f827fc03fa441f7cbd65070f506710ebd5d29d4a103503f7a4495c1ce"
+    },
+    {
+      "path": "tests/faz86c_4h_map_input_test.js",
+      "change": "modified",
+      "sha256": "5a170f40b4fc8df033667b1724e75e82c20a712b24e703eb8071bd8904324e4d"
+    },
+    {
+      "path": "tests/faz86c_4h_r1_exact_regression_test.js",
+      "change": "modified",
+      "sha256": "2dbbc2e61659e226973116f34ecbdacf149fb8666c50c1e5f8f08ac33d823358"
+    },
+    {
+      "path": "tests/faz86c_4h_r2_surface_camera_layers_test.js",
+      "change": "modified",
+      "sha256": "fa1efcdb24637946734b3b2f3fa12420d5a9ca9d3852c757083d84ae598cbb7e"
+    },
+    {
+      "path": "tests/faz86c_4h_r3_surface_lifecycle_test.js",
+      "change": "modified",
+      "sha256": "4408c8cb379e5e92fb825c9f0d88a986347f68b93e5d9d3155272fefdea39f7a"
+    },
+    {
+      "path": "tests/faz86c_4h_r4_diagnosis_test.js",
+      "change": "modified",
+      "sha256": "264480152e77fed7950cbc0c0833f4564aa2cf85a6cbda15803f01af5f14bbdc"
+    },
+    {
+      "path": "tests/faz86c_4h_r4_targeted_diag_test.js",
+      "change": "modified",
+      "sha256": "059c93f27c4001e78260637e7bb955f1f55d25ac1ee35fecaeced92bb743f9ae"
+    },
+    {
+      "path": "tests/faz86c_strict_deal_ai_test.js",
+      "change": "modified",
+      "sha256": "e487501029051dd8f73badd4ee358fb0eaf74ebdbf82c85fa24c8cf0e4374bab"
+    },
+    {
+      "path": "tests/faz86g_integration_handoff_test.js",
+      "change": "modified",
+      "sha256": "80dd36c9ff08870c6b8b882d02ff16f9d415036d2ba1ec0cedbe63f600add43e"
+    },
+    {
+      "path": "tests/faz90rc_2_load_feedback_test.js",
+      "change": "modified",
+      "sha256": "59c5f99741c876080e935f4e6725c814c0d2961774f1485bdb3a2b3ad2ff18bc"
+    },
+    {
+      "path": "tests/faz90rc_release_candidate_test.js",
+      "change": "modified",
+      "sha256": "fe6892882b90ece90d347c069b7f02771384135bc1a6b86719a829f229c31219"
+    },
+    {
+      "path": "tests/faz93d1_navy_campaign_test.js",
+      "change": "modified",
+      "sha256": "2440194540443e12c8cc96eaa43b986eaaf0669f6b9faf940b40cc110b3b238a"
+    },
+    {
+      "path": "tests/faz94a_camera_test.js",
+      "change": "modified",
+      "sha256": "6cbc00eba505483a3ddb5e1a33aa3ef43af9070e7ba605728593f82e4bcc850d"
+    },
+    {
+      "path": "tests/faz94c_camera_trade_test.js",
+      "change": "added",
+      "sha256": "cf261609ed0a0b30c5f8e43dc525a57191ec974fff37f5165211068f1493341e"
+    },
+    {
+      "path": "tests/helpers/map-preservation.js",
+      "change": "modified",
+      "sha256": "eeab2d434375792871f29ddc881497846bf720dae22a4c1b5652ef8462986c67"
+    },
+    {
+      "path": "tests/logs-94c/faz83_2_brand_test.js.log",
+      "change": "added",
+      "sha256": "7bc865bf8fbe4413583dd264d70e6adf0781ba6e6501ee81ca0169aa76444881"
+    },
+    {
+      "path": "tests/logs-94c/faz83_3_render_recovery_test.js.log",
+      "change": "added",
+      "sha256": "685c0263a2494dcddda724f90e5f5d88e72146c012cfd4b9045e2480e6ddd3ad"
+    },
+    {
+      "path": "tests/logs-94c/faz83_4_redraw_leaders_test.js.log",
+      "change": "added",
+      "sha256": "48fbba68ae33ea143965e86890c9b074009c299f75e748fdfcf52f1fbb4094c2"
+    },
+    {
+      "path": "tests/logs-94c/faz84a_intel_dedup_test.js.log",
+      "change": "added",
+      "sha256": "944673d3aa5a0ef215dadede7926b9a5d17fccf9667fdd778c72110c3a7f6920"
+    },
+    {
+      "path": "tests/logs-94c/faz84b_vassal_state_dedup_test.js.log",
+      "change": "added",
+      "sha256": "3b2cb97e604129c0f9601c3216feee92b3a34dc12cc50cb52a9c3d4966a0d605"
+    },
+    {
+      "path": "tests/logs-94c/faz84c_state_visibility_gate_test.js.log",
+      "change": "added",
+      "sha256": "0e15bf21c640bc3e594930a1b0c60e10455b9677e11722068f30d6fad682db58"
+    },
+    {
+      "path": "tests/logs-94c/faz85a_political_save_integrity_test.js.log",
+      "change": "added",
+      "sha256": "9590d3d1d98dae387a5162f26bb37fb003d424a9bbcfcf0f7e09e3d5cf37bb67"
+    },
+    {
+      "path": "tests/logs-94c/faz85b_load_idempotency_test.js.log",
+      "change": "added",
+      "sha256": "c3a33f667f4451dd0cd45e2b8779923fb99ff4ed9db6a81db430435f4a05b25d"
+    },
+    {
+      "path": "tests/logs-94c/faz85c_crisis_save_continuity_test.js.log",
+      "change": "added",
+      "sha256": "c434a62612891a3741efff924065fe05e57518a387cf52f5f91d8c2e1cff500e"
+    },
+    {
+      "path": "tests/logs-94c/faz85d_campaign_save_continuity_test.js.log",
+      "change": "added",
+      "sha256": "6a0c88fe60329d4a023fa7abc3c26e91758e50d4a5fff26a5c565f2c83e596de"
+    },
+    {
+      "path": "tests/logs-94c/faz85e_event_inbox_continuity_test.js.log",
+      "change": "added",
+      "sha256": "d00efc0714408fb092e385e66870a5dd33fe1f0bba5dd02c064930eb59a0e6d6"
+    },
+    {
+      "path": "tests/logs-94c/faz85f_spatial_simulation_continuity_test.js.log",
+      "change": "added",
+      "sha256": "a009a7fb7735593a44437989bd3609e9d0346b213b6de49b260e884c4878c560"
+    },
+    {
+      "path": "tests/logs-94c/faz86a_intel_command_center_test.js.log",
+      "change": "added",
+      "sha256": "5405db952220d5c5d10153b27af8824e855d33f9a211e17f5792629ce25a0ae8"
+    },
+    {
+      "path": "tests/logs-94c/faz86b_deal_engine_test.js.log",
+      "change": "added",
+      "sha256": "38a2c88111bd2c7d4154620511f2107ca3a7f550ee0569be30d9c96b7e9fc268"
+    },
+    {
+      "path": "tests/logs-94c/faz86c_1_quote_effective_plan_test.js.log",
+      "change": "added",
+      "sha256": "c2400a3c5ba9f96864884f6e29d7d30f4605e5556ba567d3b8f722e4c3f9befb"
+    },
+    {
+      "path": "tests/logs-94c/faz86c_2_transaction_test.js.log",
+      "change": "added",
+      "sha256": "459d9e72a50838953fcb908ab7b64496ef8850325cafaed8d55b4d6a6b128ad8"
+    },
+    {
+      "path": "tests/logs-94c/faz86c_3_ai_negotiation_test.js.log",
+      "change": "added",
+      "sha256": "13a3e7b967f500e8e4a4eaf3569a49f709d7ec19e24890aadfb2d42ed462b345"
+    },
+    {
+      "path": "tests/logs-94c/faz86c_4_reciprocal_offers_test.js.log",
+      "change": "added",
+      "sha256": "77ddc5f68fba6e7e3cb2cace36b0cfdb1174c87af22372a238583c669cfd7030"
+    },
+    {
+      "path": "tests/logs-94c/faz86c_4h_map_input_test.js.log",
+      "change": "added",
+      "sha256": "417ea44b06e61ca2b6d65e30f0983a809d0d03e7e2d2770c5af0c745128f42c5"
+    },
+    {
+      "path": "tests/logs-94c/faz86c_4h_r1_exact_regression_test.js.log",
+      "change": "added",
+      "sha256": "83f31d1aed1e0d001fdf9da3cd5ae15a5f4a7ea798c531fa74b964a96e1d17ff"
+    },
+    {
+      "path": "tests/logs-94c/faz86c_4h_r2_surface_camera_layers_test.js.log",
+      "change": "added",
+      "sha256": "7e3974b4cd8b8cfcd8865265b68fb81b9de0390323d54d706c55d296c07e8a93"
+    },
+    {
+      "path": "tests/logs-94c/faz86c_4h_r3_surface_lifecycle_test.js.log",
+      "change": "added",
+      "sha256": "522c41b010ed7952895f709d3917d87b58819ef492824111f7c34701c6172629"
+    },
+    {
+      "path": "tests/logs-94c/faz86c_4h_r4_diagnosis_test.js.log",
+      "change": "added",
+      "sha256": "8f0d6e0e3462fac6d840760a9e406816c8300c1a8be7af627bcbce543f88a17c"
+    },
+    {
+      "path": "tests/logs-94c/faz86c_4h_r4_targeted_diag_test.js.log",
+      "change": "added",
+      "sha256": "db29d373f675eb0a6a128fd43e0161e9c2188d6eae65910c36620acb9179787e"
+    },
+    {
+      "path": "tests/logs-94c/faz86c_5_1_ui_portraits_native_canvas_test.js.log",
+      "change": "added",
+      "sha256": "5be0c470e54ad942af31786a8fe7aa36264efdd0014822e52607830500d3fe6d"
+    },
+    {
+      "path": "tests/logs-94c/faz86c_5_diagnostics_test.js.log",
+      "change": "added",
+      "sha256": "802faf2b87474d8d7975cb05df6b16b761b0c713f9177bcd9ed4b91517001a21"
+    },
+    {
+      "path": "tests/logs-94c/faz86c_5_native_canvas_test.js.log",
+      "change": "added",
+      "sha256": "f730634893fa367bb247a5509f14791368c754ec83abf68790adee8e26ee7803"
+    },
+    {
+      "path": "tests/logs-94c/faz86c_6_transaction_acceptance_test.js.log",
+      "change": "added",
+      "sha256": "8bf90dae41b360486c471ea7d30dca7d86f5bf1ea5c79144b36cb54ff8c94fc2"
+    },
+    {
+      "path": "tests/logs-94c/faz86c_strict_deal_ai_test.js.log",
+      "change": "added",
+      "sha256": "eaf12cf1eb32642645d4087f33c39c1cf6b3b64157dc0fb3d39746208da5ed6a"
+    },
+    {
+      "path": "tests/logs-94c/faz86d_envoy_missions_test.js.log",
+      "change": "added",
+      "sha256": "a68927c3f471f8a7a1c7a7efbdc5478c7cc20db637fffa79872f9c518937fe87"
+    },
+    {
+      "path": "tests/logs-94c/faz86e_diplomacy_center_test.js.log",
+      "change": "added",
+      "sha256": "cbd4039cd3f1292164dc4c1b9bd69fa44e9e354806a1878aa7db9d7d50e7d120"
+    },
+    {
+      "path": "tests/logs-94c/faz86f_ai_balance_test.js.log",
+      "change": "added",
+      "sha256": "cda218537279b20abe9ef9ee3b95f2f1c1fb8c4658fcee72628728b59f401688"
+    },
+    {
+      "path": "tests/logs-94c/faz86g_integration_handoff_test.js.log",
+      "change": "added",
+      "sha256": "66eee30fb4a7b250fbd55b906c8e2ef0965129f0df49819a5000b08c1e2697ed"
+    },
+    {
+      "path": "tests/logs-94c/faz87a_espionage_feedback_test.js.log",
+      "change": "added",
+      "sha256": "803dffdb88e8da6fc6eb7a5645c1a4f6515bcce76b216d52fe09a452e35fad1a"
+    },
+    {
+      "path": "tests/logs-94c/faz87b_ai_operation_selection_test.js.log",
+      "change": "added",
+      "sha256": "52c2f90006b39ce6a9913c290e0661b13ec0e2a9e811495ef13f77ff5a22d880"
+    },
+    {
+      "path": "tests/logs-94c/faz87c_1_intrigue_outcomes_test.js.log",
+      "change": "added",
+      "sha256": "2fa39b2d039efe4788fe263aae3cd8e588a25d6fa88a706e9b4be8308a021c4c"
+    },
+    {
+      "path": "tests/logs-94c/faz87c_special_operation_outcomes_test.js.log",
+      "change": "added",
+      "sha256": "d41929cf57bc625d860a77c2f6f7b4ff67ec12d5198ee2212fccf800b7e7e0af"
+    },
+    {
+      "path": "tests/logs-94c/faz87d_offer_repetition_test.js.log",
+      "change": "added",
+      "sha256": "0ae65701b4f5cb3ad8e62384926b9e41665eca6f7f5d118818d05c3e4495807e"
+    },
+    {
+      "path": "tests/logs-94c/faz88a_1_ship_dispatch_test.js.log",
+      "change": "added",
+      "sha256": "6c26f33f3b3c1276adb46d66808e1441fe3df50e56643b8097f63ac4bbd567ed"
+    },
+    {
+      "path": "tests/logs-94c/faz88a_fleet_routes_test.js.log",
+      "change": "added",
+      "sha256": "53430b1fa4991d9f98bf98d198b449f69dbc3960d57e8fc60503cb76c9cd65fb"
+    },
+    {
+      "path": "tests/logs-94c/faz88b_combat_feedback_test.js.log",
+      "change": "added",
+      "sha256": "c1e9cfbcba2ec549fd2b6e9b2d283a2dc1d9e27d773a299ba60c364a5fd2edf2"
+    },
+    {
+      "path": "tests/logs-94c/faz89a_memory_factions_test.js.log",
+      "change": "added",
+      "sha256": "fd821133496584759f7a274007f0fec925dbaf87305f977c37980518f2cf7377"
+    },
+    {
+      "path": "tests/logs-94c/faz89b_daily_campaign_test.js.log",
+      "change": "added",
+      "sha256": "ea214101ec6e07e725314ac9e9b886724bcdb37cfd48b695d00251ea00720486"
+    },
+    {
+      "path": "tests/logs-94c/faz90rc_1_save_boundary_test.js.log",
+      "change": "added",
+      "sha256": "900e95a878b6cccde8d64300305f87f5a63ac91a88d992e8e39336e2a351774b"
+    },
+    {
+      "path": "tests/logs-94c/faz90rc_2_load_feedback_test.js.log",
+      "change": "added",
+      "sha256": "e395a656b4430780374f9873299f50a26d3edb9130ba46e4bf5abfa7af7aea98"
+    },
+    {
+      "path": "tests/logs-94c/faz90rc_3_load_transaction_test.js.log",
+      "change": "added",
+      "sha256": "c9ddd68b0edc7a901eab7e44db657496c1f0f01db7064ce93583d504403eafda"
+    },
+    {
+      "path": "tests/logs-94c/faz90rc_release_candidate_test.js.log",
+      "change": "added",
+      "sha256": "741874b49722ac387c16faf126dc2d3ddff86afa71640eac5b91091ac1bf9dbe"
+    },
+    {
+      "path": "tests/logs-94c/faz91a_special_presentation_test.js.log",
+      "change": "added",
+      "sha256": "52cd5ff9e291c9caf0fa276d7ec6888bf0557fb81bdb703864c1bb159ebe34c3"
+    },
+    {
+      "path": "tests/logs-94c/faz91b_campaign_observer_test.js.log",
+      "change": "added",
+      "sha256": "4881b04a6e957cac49015a6fd8d37de1b7d4595f2ba94f3fab72edeaa797668b"
+    },
+    {
+      "path": "tests/logs-94c/faz91b_faction_share_test.js.log",
+      "change": "added",
+      "sha256": "96d26ab4a7b01f46b97fc9793aa44ee5da0c7b280cf7616017b8cfb196ecebe8"
+    },
+    {
+      "path": "tests/logs-94c/faz91c_ai_candidates_test.js.log",
+      "change": "added",
+      "sha256": "6476deac984d2a7e25fcc81669ab7409c1c5a585cda6253dbfc73278ead05095"
+    },
+    {
+      "path": "tests/logs-94c/faz91c_pirate_combat_test.js.log",
+      "change": "added",
+      "sha256": "cdb1c776683fc82085753726a0b00fc0ebf21b9fb58af20104e000d98f068ca3"
+    },
+    {
+      "path": "tests/logs-94c/faz91d_1_fleet_names_native_canvas_test.js.log",
+      "change": "added",
+      "sha256": "03852abca8de7faa645ce36a87f1f276dd2faee0db1487254f897ed94378ace7"
+    },
+    {
+      "path": "tests/logs-94c/faz91d_territory_native_canvas_test.js.log",
+      "change": "added",
+      "sha256": "c766669a04452f27b42784b98db1adaa039a2192bbffee257e59a3e401d2068d"
+    },
+    {
+      "path": "tests/logs-94c/faz91e_1_federation_policy_test.js.log",
+      "change": "added",
+      "sha256": "28cea169b6cd796ec5c14f7147f8d0a44838c5782b2daff0924c09b77acec89c"
+    },
+    {
+      "path": "tests/logs-94c/faz91e_federation_laws_test.js.log",
+      "change": "added",
+      "sha256": "d43bef3654131a81794d9edd4051963e95065a3d53987ba92d415f5e2c56e7ce"
+    },
+    {
+      "path": "tests/logs-94c/faz92a_war_contribution_test.js.log",
+      "change": "added",
+      "sha256": "d9bd846e984e47cf1bac7f61b19ff9865dedafa92cbc843a5d02eff8fa8d2cf0"
+    },
+    {
+      "path": "tests/logs-94c/faz92b1_ship_lock_test.js.log",
+      "change": "added",
+      "sha256": "954f1c791c44d9957184153aa53ae8477d0aae97d63f54729edb9eea7179421d"
+    },
+    {
+      "path": "tests/logs-94c/faz92b_settlement_proposal_test.js.log",
+      "change": "added",
+      "sha256": "4629a72b27a42761c5bf4febe178cd144696ff7d6be65b4a7356df4080d8af77"
+    },
+    {
+      "path": "tests/logs-94c/faz92c_settlement_apply_test.js.log",
+      "change": "added",
+      "sha256": "f083fd88bc732c7201e6f307f7b7b7609112ad25f5a0b9630451a7514dddd2bf"
+    },
+    {
+      "path": "tests/logs-94c/faz92d_settlement_agenda_test.js.log",
+      "change": "added",
+      "sha256": "bc4456b2c3a315d791b700cfbdf6568eab4824ecb4c54f0398bd8fb4b48ce8bb"
+    },
+    {
+      "path": "tests/logs-94c/faz93a1_production_panels_test.js.log",
+      "change": "added",
+      "sha256": "e32a1c185a41462ba87715b6262b6ce6c5fb6f5f197a3e48bf34386de25500f7"
+    },
+    {
+      "path": "tests/logs-94c/faz93a_logistics_targets_test.js.log",
+      "change": "added",
+      "sha256": "b5f649d0abb7d3088fe9097e9ea506652556ef473fc713ad32e86f3969322b68"
+    },
+    {
+      "path": "tests/logs-94c/faz93b_pending_shipments_test.js.log",
+      "change": "added",
+      "sha256": "de9c1ab449704b0ebc0fa93ee89e0de1f18305608e4e0bf914cf3c1450865203"
+    },
+    {
+      "path": "tests/logs-94c/faz93c_fleet_composition_test.js.log",
+      "change": "added",
+      "sha256": "c41980361021dd616461feb6c1dd1876c2d941433a410e3db93e054cfb372173"
+    },
+    {
+      "path": "tests/logs-94c/faz93d1_navy_campaign_test.js.log",
+      "change": "added",
+      "sha256": "b8a9564452c25d4b3042e4abcaef432c6284222227fcc1bfc8d2b0f6c398f55e"
+    },
+    {
+      "path": "tests/logs-94c/faz93d1_navy_production_test.js.log",
+      "change": "added",
+      "sha256": "a029f85543201171055c00cc40bdc0bd19ddc518011602aabb9b7a558ac09cab"
+    },
+    {
+      "path": "tests/logs-94c/faz93d_research_planner_test.js.log",
+      "change": "added",
+      "sha256": "874888047e9a929d278d3030a7345195886bc3a0c0097cdfd2e5e36c103c080c"
+    },
+    {
+      "path": "tests/logs-94c/faz93d_science_ui_test.js.log",
+      "change": "added",
+      "sha256": "c3f8c860d9a4d7457b0f56d9998e338b8a5c572a4aeffa163225217afc5db5ef"
+    },
+    {
+      "path": "tests/logs-94c/faz93e1_doctrine_test.js.log",
+      "change": "added",
+      "sha256": "a39b88b6134cc6f92f2ee48205e24b0c8580417f8bbd20cc2b7ec3a278985757"
+    },
+    {
+      "path": "tests/logs-94c/faz93e_specialization_test.js.log",
+      "change": "added",
+      "sha256": "037e355b5eb1c9a4f9a1a4892a13f68eadfaf6744d88e9801c5cd48b47bb0c52"
+    },
+    {
+      "path": "tests/logs-94c/faz94a_camera_test.js.log",
+      "change": "added",
+      "sha256": "9e3b48f14d0ed4b47aa57485d4e2ce090f0b5e1f7638f71c449ca56c048a0f0b"
+    },
+    {
+      "path": "tests/logs-94c/faz94b_exploration_test.js.log",
+      "change": "added",
+      "sha256": "a8926547249242488610325078e41c0b890c2925eee35718d3bb0d9c394669a4"
+    },
+    {
+      "path": "tests/logs-94c/faz94c_camera_trade_test.js.log",
+      "change": "added",
+      "sha256": "652f9fc181180d27e69b7cf9214b4bef6c897c0e4925e8d12060e31e6ff73863"
+    },
+    {
+      "path": "tests/logs-94c/summary.json",
+      "change": "added",
+      "sha256": "1b965158b596f1654662518f4951d3fa6239fc59e1d7e0ab504034e7f0dcc8e5"
+    },
+    {
+      "path": "tests/logs-94c-followup/faz93d1_navy_campaign_test.js.log",
+      "change": "added",
+      "sha256": "b8a9564452c25d4b3042e4abcaef432c6284222227fcc1bfc8d2b0f6c398f55e"
+    },
+    {
+      "path": "tests/logs-94c-followup/faz94c_camera_trade_test.js.log",
+      "change": "added",
+      "sha256": "ba8416f910d34999d080a3193bc45c3dd59abd0cf93d9c76adf7191b4e261dbf"
+    },
+    {
+      "path": "tests/measure-ai-94c.js",
+      "change": "added",
+      "sha256": "14790380020f5df0c4fba0dc02fecd7b304ecffbf1f89596b83f7cf87e901fcf"
+    },
+    {
+      "path": "tests/measure-camera-94c.js",
+      "change": "added",
+      "sha256": "efa39f695b35a973557eb6c41f374ad6646fbed253c044b812728d6e1947b65d"
+    },
+    {
+      "path": "tests/navy-94c-after-11.json",
+      "change": "added",
+      "sha256": "c59343f03071622e8b9ff420b514e059a83bbf6c9cf4ae1c758f876262e98ecb"
+    },
+    {
+      "path": "tests/navy-94c-after-404.json",
+      "change": "added",
+      "sha256": "b47ce8ea595f38fb1bc2ecce45848362e9ace086ab2db5b82a9f208ab4d1dda3"
+    },
+    {
+      "path": "tests/navy-94c-after-99.json",
+      "change": "added",
+      "sha256": "919b6b63acab31837f2fd6d0551e789872acb3566437fc5d2452816b835f2e26"
+    },
+    {
+      "path": "tests/probe-trade-94c.js",
+      "change": "added",
+      "sha256": "f13b917426d986d04584aed29fb1663edd6f140e2c8f33ddcddc88e06e986c5c"
+    },
+    {
+      "path": "tests/summary-94c.json",
+      "change": "added",
+      "sha256": "68d8e0bf3abcba79056d612bf35a266f06e513ac83d1bf777dfd4a080b40bde3"
+    },
+    {
+      "path": "tools/report-ai-94c.py",
+      "change": "added",
+      "sha256": "e0863c3ddf0f7289678234df9c08666cd10723e58c04ba91d04323bf18b38433"
+    },
+    {
+      "path": "ui.js",
+      "change": "modified",
+      "sha256": "4aee30e59ecee80b3e21bc5be59525a40a1db715eb8c1aaad9d82cdb611850f4"
+    }
+  ]
+}

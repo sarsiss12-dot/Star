@@ -1,0 +1,126 @@
+{
+  "seed": 99,
+  "requestedMonths": 120,
+  "months": 120,
+  "pirates": true,
+  "stopped": false,
+  "ms": 5831,
+  "rng": 1346520681,
+  "saveHash": "4b4c32d7651b6f843be9b5a584e52bc70db97394f74c1b2a54e0e50cb6afc082",
+  "empires": [
+    {
+      "id": 0,
+      "name": "Exploration audit",
+      "ai": false,
+      "surveys": 15,
+      "shipDays": 1349.5,
+      "idleDays": 796,
+      "travelDays": 118.5,
+      "scanDays": 435,
+      "duplicateShipDays": 0,
+      "collisionEpisodes": 0,
+      "losses": 1,
+      "waitReasons": {
+        "legacy-idle": 796
+      },
+      "initialDiscovered": 1,
+      "finalDiscovered": 16,
+      "surveysPer100ShipDays": 1.1115227862171175
+    },
+    {
+      "id": 1,
+      "name": "Kaevar İmparatorluğu",
+      "ai": true,
+      "surveys": 22,
+      "shipDays": 2498,
+      "idleDays": 1529,
+      "travelDays": 331,
+      "scanDays": 638,
+      "duplicateShipDays": 13,
+      "collisionEpisodes": 2,
+      "losses": 8,
+      "waitReasons": {
+        "legacy-idle": 1529
+      },
+      "initialDiscovered": 1,
+      "finalDiscovered": 23,
+      "surveysPer100ShipDays": 0.8807045636509208
+    },
+    {
+      "id": 2,
+      "name": "Kuantum Cyrix Birliği",
+      "ai": true,
+      "surveys": 24,
+      "shipDays": 2793,
+      "idleDays": 1663.5,
+      "travelDays": 375.5,
+      "scanDays": 754,
+      "duplicateShipDays": 103,
+      "collisionEpisodes": 3,
+      "losses": 7,
+      "waitReasons": {
+        "legacy-idle": 1663.5
+      },
+      "initialDiscovered": 1,
+      "finalDiscovered": 25,
+      "surveysPer100ShipDays": 0.8592910848549946
+    },
+    {
+      "id": 3,
+      "name": "Muhteşem Vael Tarikatı",
+      "ai": true,
+      "surveys": 16,
+      "shipDays": 4415,
+      "idleDays": 3350.5,
+      "travelDays": 458,
+      "scanDays": 606.5,
+      "duplicateShipDays": 145,
+      "collisionEpisodes": 6,
+      "losses": 7,
+      "waitReasons": {
+        "legacy-idle": 3350.5
+      },
+      "initialDiscovered": 1,
+      "finalDiscovered": 17,
+      "surveysPer100ShipDays": 0.362400906002265
+    },
+    {
+      "id": 4,
+      "name": "Primordial Thalor Federasyonu",
+      "ai": true,
+      "surveys": 12,
+      "shipDays": 4183.5,
+      "idleDays": 3647,
+      "travelDays": 187.5,
+      "scanDays": 349,
+      "duplicateShipDays": 5,
+      "collisionEpisodes": 1,
+      "losses": 5,
+      "waitReasons": {
+        "legacy-idle": 3647
+      },
+      "initialDiscovered": 1,
+      "finalDiscovered": 13,
+      "surveysPer100ShipDays": 0.28684116170670493
+    },
+    {
+      "id": 5,
+      "name": "Otonom Draven Ağı",
+      "ai": true,
+      "surveys": 10,
+      "shipDays": 7140.5,
+      "idleDays": 6562,
+      "travelDays": 274.5,
+      "scanDays": 304,
+      "duplicateShipDays": 219.5,
+      "collisionEpisodes": 9,
+      "losses": 0,
+      "waitReasons": {
+        "legacy-idle": 6562
+      },
+      "initialDiscovered": 1,
+      "finalDiscovered": 11,
+      "surveysPer100ShipDays": 0.14004621525103284
+    }
+  ]
+}

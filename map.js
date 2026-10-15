@@ -712,7 +712,7 @@ function territoryColonyOwners(s){
 }
 
 const View = {
-  cam:{x:2100, y:2100, z:.30, a:0}, rotationEnabled:false, vw:0, vh:0, dpr:1,
+  cam:{x:2100, y:2100, z:.30, a:0, tilt:.78}, rotationEnabled:false, vw:0, vh:0, dpr:1,
   sel:null, selSys:null, route:false, routed:false, hl:null, stars:[], flash:[],
   cv:null, g:null,
 
@@ -760,13 +760,15 @@ const View = {
     const h = G.sys[G.p.home];
     if (h){ this.cam.x = h.x; this.cam.y = h.y; this.cam.z = .40; }
   },
-  // 94A: same orthographic transform for all drawing, picking and commands.
+  tiltScale(){return Number.isFinite(this.cam.tilt)?clamp(this.cam.tilt,.65,1):1;},
+  setTilt(on){this.resetGesture();this.cam.tilt=on?.78:1;this.cameraChanged();this.clampCam();},
+  // 94C: same affine transform for all drawing, picking and commands.
   w2s(x,y){
     const a=this.cam.a||0,c=Math.cos(a),s=Math.sin(a),dx=x-this.cam.x,dy=y-this.cam.y;
-    return {x:(dx*c-dy*s)*this.cam.z+this.vw/2,y:(dx*s+dy*c)*this.cam.z+this.vh/2};
+    return {x:(dx*c-dy*s)*this.cam.z+this.vw/2,y:(dx*s+dy*c)*this.cam.z*this.tiltScale()+this.vh/2};
   },
   cameraChanged(){ this._pan=null;this.rowHits=[]; },
-  resetAngle(){ this.resetGesture();this.cam.a=0;this.cameraChanged();this.clampCam(); },
+  resetAngle(){ this.resetGesture();this.cam.a=0;this.cam.tilt=1;this.cameraChanged();this.clampCam(); },
   focusSelection(){
     const target=this.sel&&G.fleets.includes(this.sel)?this.sel:this.selSys;
     if(!target)return false;
@@ -775,7 +777,7 @@ const View = {
   drawWorldImage(g,img){
     const p=this.w2s(0,0);
     g.save();
-    try{g.translate(p.x,p.y);g.rotate(this.cam.a||0);
+    try{g.translate(p.x,p.y);g.scale(1,this.tiltScale());g.rotate(this.cam.a||0);
       g.drawImage(img,0,0,G.W*this.cam.z,G.H*this.cam.z);
     }finally{g.restore();}
   },
@@ -959,7 +961,7 @@ const View = {
     return c;
   },
   s2w(x,y){
-    const a=this.cam.a||0,c=Math.cos(a),s=Math.sin(a),dx=(x-this.vw/2)/this.cam.z,dy=(y-this.vh/2)/this.cam.z;
+    const a=this.cam.a||0,c=Math.cos(a),s=Math.sin(a),dx=(x-this.vw/2)/this.cam.z,dy=(y-this.vh/2)/(this.cam.z*this.tiltScale());
     return {x:dx*c+dy*s+this.cam.x,y:-dx*s+dy*c+this.cam.y};
   },
 
@@ -1187,13 +1189,14 @@ const View = {
 
   hit(sp){
     const w = this.s2w(sp.x, sp.y);
-    const R = 34/this.cam.z;
+    const R = 34; // hit radius stays in CSS pixels under tilt
     // dokunma menzilindeki TÜM filolar (üst üste duranlar dahil)
     const near = [];
     for (const f of G.fleets){
       if (!f.ships.length) continue;
       if (f.e !== 0 && !this.fleetVisible(f)) continue;
-      const d = Math.hypot(f.x-w.x, f.y-w.y);
+      const fp=this.w2s(f.x,f.y);
+      const d = Math.hypot(fp.x-sp.x, fp.y-sp.y);
       if (d < R) near.push({f, d});
     }
     near.sort((a,b)=>{
@@ -1210,7 +1213,8 @@ const View = {
     let bs = null, bsd = R;
     for (const s of G.sys){
       if (!pSeen(s)) continue;
-      const d = Math.hypot(s.x-w.x, s.y-w.y);
+      const pp=this.w2s(s.x,s.y);
+      const d = Math.hypot(pp.x-sp.x, pp.y-sp.y);
       if (d < bsd){ bsd = d; bs = s; }
     }
     return {f:bf, s:bs};
@@ -1475,8 +1479,8 @@ const View = {
     const z = Math.max(.02, c.z || .4);
     /* Ekranın yarısı, dünya biriminde */
     const co=Math.abs(Math.cos(c.a||0)),si=Math.abs(Math.sin(c.a||0));
-    const yariW = ((this.vw||900)*co+(this.vh||420)*si)/(2*z);
-    const yariH = ((this.vw||900)*si+(this.vh||420)*co)/(2*z);
+    const yariW = ((this.vw||900)*co+(this.vh||420)/this.tiltScale()*si)/(2*z);
+    const yariH = ((this.vw||900)*si+(this.vh||420)/this.tiltScale()*co)/(2*z);
     /* Pay: ekranın yarısı + küçük bir nefes payı.
        Taban 300 birim ki aşırı yakınlaştırmada da kenar okunsun. */
     const padX = Math.max(300, yariW * .95);
@@ -1518,10 +1522,10 @@ const View = {
        Maliyet: ULU galakside kare başına birkaç ek sistem taranır,
        ölçülebilir bir fark yok (aşağıdaki testte doğrulandı). */
     const RENDER_MARGIN = 300;               // ekran uzayında piksel
-    const pay = RENDER_MARGIN / Math.max(.02, z);   // dünya birimine çevir
+    const pay = RENDER_MARGIN / (Math.max(.02, z)*this.tiltScale());   // dünya birimine çevir
     const co=Math.abs(Math.cos(this.cam.a||0)),si=Math.abs(Math.sin(this.cam.a||0));
-    const halfW = (this.vw*co+this.vh*si)/2/Math.max(.02,z);
-    const halfH = (this.vw*si+this.vh*co)/2/Math.max(.02,z);
+    const halfW = (this.vw*co+this.vh/this.tiltScale()*si)/2/Math.max(.02,z);
+    const halfH = (this.vw*si+this.vh/this.tiltScale()*co)/2/Math.max(.02,z);
     this.fx0 = this.cam.x - halfW - pay;
     this.fx1 = this.cam.x + halfW + pay;
     this.fy0 = this.cam.y - halfH - pay;
@@ -2935,7 +2939,8 @@ const View = {
     let ang = 0;
     if (f.mv){
       const a = G.sys[f.mv.from], b = G.sys[f.mv.to];
-      ang = Math.atan2(b.y-a.y, b.x-a.x) + Math.PI/2 + (this.cam.a||0);
+      const pa=this.w2s(a.x,a.y),pb=this.w2s(b.x,b.y);
+      ang = Math.atan2(pb.y-pa.y, pb.x-pa.x) + Math.PI/2;
     }
     if (ordu){
       const r = Math.max(3, 5 * z);

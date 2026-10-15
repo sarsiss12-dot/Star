@@ -1343,7 +1343,20 @@ function tradeFlowTick(){
       if (typeof tradeBlocked === 'function' && tradeBlocked(a, b)) continue;
       if (+bid < a.id) continue;                 // her çifti bir kez işle
       const tr = a.trade;
-      if (!tr || !tr.links || !tr.links.some(l => l.dis && !l.bl)) continue;
+      // 94C: yalnız bu iki devletin güncel, açık hattı takas yapabilir.
+      const hubsA=new Set(tradeHubs(a)),hubsB=new Set(tradeHubs(b));
+      const routeOK=l=>{
+        if(!l.dis||l.bl||G.raids&&G.raids[l.key]>G.day)return false;
+        const x=G.sys[l.a],y=G.sys[l.b];
+        if(!x||!y||!((hubsA.has(l.a)&&hubsB.has(l.b))||(hubsB.has(l.a)&&hubsA.has(l.b))))return false;
+        const p=l.path||[l.a,l.b];
+        return p.length>1&&p[0]===l.a&&p[p.length-1]===l.b&&p.every((id,i)=>{
+          const s=G.sys[id];return s&&!(s.owner>=0&&(a.war[s.owner]||b.war[s.owner]))&&(!i||G.sys[p[i-1]].lanes.includes(id));
+        });
+      };
+      if (!tr || !tr.links || !tr.links.some(routeOK)) continue;
+      const month=Math.floor(G.day/30);
+      if(a.tradeFlowAt&&a.tradeFlowAt[b.id]===month)continue;
       const vol = clamp((tr.vol || 0) / 90, .4, 3);
       let moved = 0;
       /* GERÇEK TAKAS: her taraf fazlasını verir, eksiğini alır.
@@ -1366,8 +1379,13 @@ function tradeFlowTick(){
         if (pairs.length >= 2) break;
       }
       for (const [sA, sB] of pairs){
-        const give = Math.min(sA.v * .16, 10) * vol;
-        const take = Math.min(sB.v * .16, 10) * vol;
+        let give = Math.min(sA.v * .16, 10) * vol;
+        let take = Math.min(sB.v * .16, 10) * vol;
+        const stockA=a.res[sA.r],stockB=b.res[sB.r];
+        if(!Number.isFinite(stockA)||!Number.isFinite(stockB))continue;
+        const ratio=Math.min(1,Math.max(0,stockA)/give,Math.max(0,stockB)/take);
+        if(!(ratio>0))continue;
+        give*=ratio;take*=ratio;
         a.res[sA.r] = Math.max(0, (a.res[sA.r]||0) - give);
         b.res[sA.r] = (b.res[sA.r]||0) + give;
         b.res[sB.r] = Math.max(0, (b.res[sB.r]||0) - take);
@@ -1382,6 +1400,10 @@ function tradeFlowTick(){
       if (!pairs.length) moved = 0;
       a.tradeFlow = a.tradeFlow || {}; b.tradeFlow = b.tradeFlow || {};
       a.tradeFlow[b.id] = moved; b.tradeFlow[a.id] = moved;
+      if(moved>0){
+        a.tradeFlowAt=a.tradeFlowAt||{};b.tradeFlowAt=b.tradeFlowAt||{};
+        a.tradeFlowAt[b.id]=month;b.tradeFlowAt[a.id]=month;
+      }
     }
   }
 }

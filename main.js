@@ -2592,7 +2592,7 @@ function setupGame(cfg){
       : [{c:'kor'},{c:'kor'},{c:'kor'}];
     newFleet(e, sid, guardShips, e.ai?null:'1. Muhafız Filosu');
     const sci1 = newFleet(e, sid, [{c:'bil'}], e.ai?null:'Kâşif Vela');
-    if (!e.ai) sci1.auto = true;
+    sci1.auto = true;
     /* ═══ FAZ 77B: TAHT GEMİSİ ═══
        Bu doktrinde başkent bir gemidir — oyun başında verilir. */
     if (hasCivic(e, 'throneship')){
@@ -2821,6 +2821,7 @@ function fleetStatus(f){
     return {t:'YOLDA', c:'go', d: dest ? dest.name : ''};
   }
   if (hasShipment(f)) return {t:'SEVK BEKLİYOR',c:'wk',d:shipmentStatus(f)};
+  if (explorationEnabled(f)&&f.explore) return {t:({pirate:'KORSAN TEHDİDİ · BEKLİYOR',threat:'DÜŞMAN TEHDİDİ · BEKLİYOR',supply:'İKMAL YETERSİZ',complete:'KEŞİF TAMAMLANDI',route:'GÜVENLİ ROTA ARANIYOR',travel:'HEDEFE GİDİYOR',resupply:'İKMAL HATTINA DÖNÜYOR'})[f.explore.status]||'GÜVENLİ ROTA ARANIYOR',c:'wk'};
   if (fleetHasRole(f,'bilim'))     return {t:'BOŞTA · TARAMA BEKLİYOR', c:'id'};
   if (fleetHasRole(f,'koloni'))    return {t:'BOŞTA · HEDEF BEKLİYOR', c:'id'};
   return {t:'BEKLİYOR', c:'id'};
@@ -3321,7 +3322,7 @@ function pathAllowed(e, f, path, from){
   }
   return true;
 }
-function orderMove(f, target, append){
+function orderMove(f, target, append, automatic=false){
   if (!f || !Array.isArray(f.path) || !f.ships || !f.ships.length || !empOf(f)) return false;
   const start = f.path.length ? f.path[f.path.length-1] : (f.mv ? f.mv.to : f.sys);
   const from = append ? start : (f.mv ? f.mv.to : f.sys);
@@ -3341,11 +3342,18 @@ function orderMove(f, target, append){
       return false;
     }
   }
+  if(automatic&&explorationEnabled(f)){
+    const safe=explorationRoute(e,f,G.sys[target]);
+    if(!safe)return false;
+    p=safe;
+  }
   // 88A: başarısız emir eskisini silmez. Aktif bacak varışta tüketilecek
   // ilk düğüm olarak kalır; hareket ortasında yeni rota bir durak atlamaz.
   const base = append ? f.path.slice() : [];
   if (f.mv && base[0] !== f.mv.to) base.unshift(f.mv.to);
   if(f.shipment)clearShipment(f); // başarılı açık hareket emri teslimatın yerini alır
+  if(automatic&&explorationEnabled(f))delete f.explore;
+  else cancelExploration(f); // yalnız açık oyuncu emri otomasyonu devralır
   f.path = base.concat(p);
   return true;
 }
@@ -3608,7 +3616,7 @@ function doSurvey(f, sys){
 /* ---------- hareket & günlük döngü ---------- */
 function stepFleets(dt){
   const shipmentBudget={left:8,fleets:new Map(G.fleets.map(f=>[f.id,f]))};
-  const safeThreats=new Map();
+  const safeThreats=new Map(),exploreChecks=new Map();
   for (let i=G.fleets.length-1;i>=0;i--){
     const f = G.fleets[i];
     if (!f.ships.length){ G.fleets.splice(i,1); continue; }
@@ -3629,10 +3637,16 @@ function stepFleets(dt){
         if(!safeThreats.has(f.e))safeThreats.set(f.e,reinforcementThreats(eMove));
         if(safeThreats.get(f.e).has(nxt)){holdShipment(f,'blocked');continue;}
       }
+      if(explorationEnabled(f)){
+        if(!exploreChecks.has(f.e))exploreChecks.set(f.e,explorationContext(eMove));
+        const reason=explorationBlock(eMove,f,nxt,exploreChecks.get(f.e),f.sys);
+        if(reason){holdExploration(f,reason);continue;}
+      }
       // Her yeni bacakta güncel sınır ve gerçek bağlantı doğrulanır.
       const lane = here && here.lanes.includes(nxt);
       const gate = hasUsableGate(eMove,here) && hasUsableGate(eMove,G.sys[nxt]);
       if (!here || !G.sys[nxt] || !pathAllowed(eMove,f,[nxt],f.sys) || (!lane && !gate)){
+        if(explorationEnabled(f)){holdExploration(f,'route');continue;}
         const p = here && !hasShipment(f) ? findPathAllowed(eMove,f,f.sys,nxt) : null;
         if (p && p.length) f.path = p.concat(f.path.slice(1));
         else {
@@ -3714,48 +3728,187 @@ function stepFleets(dt){
   }
 }
 
-/* Otomatik keşif: boşta kalan bilim gemisi en yakın taranmamış
-   güvenli sisteme kendiliğinden gider. */
-function explorationRoute(e,f,sys){
-  const from=f.mv ? f.mv.to : f.sys;
-  const p=findPathAllowed(e,f,from,sys.id);
-  if (!p) return null;
-  const scienceOnly=!isArmed(f) && fleetHasRole(f,'bilim') &&
-    !f.ships.some(s=>s.c==='kol'||s.c==='ins');
-  if (scienceOnly && !e.wild && !e.crisisSide && f.joinFleet===undefined &&
-      p.some(id=>fleetSupply(e,{sys:id,ships:f.ships,e:f.e})<=SUPPLY_FLOOR+.015)) return null;
+/* 94B: ortak keşif planlayıcısı. Rezervasyonlar canlı filolardan türetilir;
+   ayrı bir kayıt tablosu, RNG veya ücretsiz keşif yoktur. */
+function scienceExplorer(f){
+  return f && f.ships.length && fleetHasRole(f,'bilim') &&
+    !f.ships.some(s=>s.c==='kol'||s.c==='ins') && !hasShipment(f);
+}
+function explorationEnabled(f){
+  const e=empOf(f);
+  return scienceExplorer(f) && e && !e.dead && !e.wild && !e.crisisSide &&
+    (f.auto===true || (e.ai && f.auto===undefined));
+}
+function cancelExploration(f){
+  if(!f)return;
+  delete f.explore;
+  if(fleetHasRole(f,'bilim'))f.auto=false;
+}
+function explorationContext(e){
+  const known=new Set(),visible=new Set(),blocked=reinforcementThreats(e),pirates=new Set();
+  // Aynı sensör menzili; görülmeyen düşman filoları veya yuvalar okunmaz.
+  const q=[];
+  for(const s of G.sys)if(s.owner===e.id)q.push([s.id,0]);
+  for(const f of G.fleets)if(f.e===e.id&&f.sys>=0&&f.ships.length)q.push([f.sys,0]);
+  const depth=new Map(),range=1+(e.mods.sensor|0);
+  for(let i=0;i<q.length;i++){
+    const [id,d]=q[i],s=G.sys[id];
+    if(!s || depth.has(id)&&depth.get(id)<=d)continue;
+    depth.set(id,d);visible.add(id);
+    if(d<range&&!s.nebulaS)for(const n of s.lanes)q.push([n,d+1]);
+  }
+  for(const s of G.sys){
+    if((e.id===0?pSeen(s):s.seen.includes(e.id)) || visible.has(s.id) || e.id===0&&pVis(s))known.add(s.id);
+  }
+  for(const id of known){const s=G.sys[id];
+    if(s.nest||s.ruin){blocked.add(id);pirates.add(id);}
+    const owner=s.owner>=0?s.owner:claimOf(s);
+    if(owner>=0&&owner!==e.id&&hostile(e.id,owner))blocked.add(id);
+  }
+  for(const f of G.fleets)if(f.e!==e.id&&f.sys>=0&&visible.has(f.sys)&&f.ships.length&&isArmed(f)&&hostile(e.id,f.e))blocked.add(f.sys);
+  // Bilinen düğümün komşusu keşif sınırıdır; gizli düğümler üzerinden
+  // kestirme veya bilinmeyen yıldız kapısı zinciri kullanılmaz.
+  const frontier=new Set(known);
+  for(const id of known)for(const n of G.sys[id].lanes)frontier.add(n);
+  const gates=[...known].filter(id=>hasUsableGate(e,G.sys[id]));
+  return {known,frontier,blocked,pirates,gates,supply:new Map()};
+}
+function explorationBlock(e,f,id,ctx,from){
+  if(!G.sys[id]||!ctx.frontier.has(id))return 'route';
+  if(ctx.blocked.has(id))return ctx.pirates.has(id)?'pirate':'threat';
+  if(from!==undefined && !pathAllowed(e,f,[id],from))return 'route';
+  if(!isArmed(f)){
+    if(!ctx.supply.has(id))ctx.supply.set(id,fleetSupply(e,{sys:id,ships:f.ships,e:f.e}));
+    if(ctx.supply.get(id)<=SUPPLY_FLOOR+.015)return 'supply';
+  }
+  return '';
+}
+function explorationGraph(e,f,ctx){
+  const from=f.mv?f.mv.to:f.sys,n=G.sys.length;
+  const cost=Array(n).fill(Infinity),prev=Array(n).fill(-1),done=new Set(),reasons=new Set();
+  if(!G.sys[from])return {cost,prev,from,reasons};
+  cost[from]=0;
+  for(let k=0;k<n;k++){
+    let u=-1,best=Infinity;
+    for(const id of ctx.frontier)if(!done.has(id)&&cost[id]<best){u=id;best=cost[id];}
+    if(u<0)break;done.add(u);
+    const s=G.sys[u],gate=ctx.gates.includes(u),edges=gate?[...new Set(s.lanes.concat(ctx.gates))]:s.lanes;
+    // Gizli çevre özellikleri ETA hesabına da sızmaz.
+    const probe={...f,sys:ctx.known.has(u)?u:-1,mv:null};
+    const speed=Math.max(.001,fleetSpeed(probe));
+    for(const v of edges){
+      if(v===u||done.has(v))continue;
+      const reason=explorationBlock(e,f,v,ctx,u);
+      if(reason){reasons.add(reason);continue;}
+      const jump=gate&&ctx.gates.includes(v);
+      const supply=ctx.supply.get(v)||1;
+      const distance=jump?.1:Math.max(.1,dist(s,G.sys[v]));
+      const value=best+distance/speed*(1+(1-supply)*2);
+      if(value<cost[v]){cost[v]=value;prev[v]=u;}
+    }
+  }
+  return {cost,prev,from,reasons};
+}
+function explorationPath(graph,to){
+  if(!Number.isFinite(graph.cost[to]))return null;
+  const p=[];let u=to;
+  while(u!==graph.from){if(u<0||p.length>graph.prev.length)return null;p.unshift(u);u=graph.prev[u];}
   return p;
 }
-function autoExploreTick(){
-  for (const f of G.fleets){
-    if (f.e !== 0 || !f.auto) continue;
-    if (!fleetHasRole(f, 'bilim')) continue;
-    if (f.combat || f.surv > 0 || f.path.length || f.mv || f.sys < 0) continue;
-    const e = G.p;
-    let best = null;
-    for (const sy of G.sys){
-      if (sy.surv.includes(0)) continue;
-      // savaş hâlindeki rakibin bölgesine ve kalıntı/yuvaya girme
-      if (sy.owner >= 0 && sy.owner !== 0 && e.war[sy.owner]) continue;
-      if (sy.ruin || sy.nest) continue;
-      const claim = claimOf(sy);
-      if (claim >= 0 && claim !== 0 && e.war[claim]) continue;
-      /* FAZ 75: ikmalin tamamen kesildiği yere otomatik gitme —
-         orada yıpranıp yok oluyordu. Oyuncu elle yollayabilir. */
-      if (typeof fleetSupply === 'function'){
-        const tb = (typeof SUPPLY_FLOOR !== 'undefined') ? SUPPLY_FLOOR : .40;
-        if (fleetSupply(e, {sys: sy.id, ships: f.ships, e: 0}) <= tb + .015) continue;
+function explorationRoute(e,f,sys){
+  return explorationPath(explorationGraph(e,f,explorationContext(e)),sys.id);
+}
+function explorationReservations(e){
+  const taken=new Map();
+  // Manuel görev önce gelir; eşit otomatik görevlerde düşük filo kimliği kazanır.
+  const fleets=G.fleets.filter(f=>f.e===e.id&&scienceExplorer(f)).sort((a,b)=>Number(explorationEnabled(a))-Number(explorationEnabled(b))||a.id-b.id);
+  for(const f of fleets){
+    const ids=[];
+    if(f.surv>0&&f.sys>=0)ids.push(f.sys);
+    const id=f.explore&&explorationEnabled(f)?f.explore.target:(f.path.length?f.path[f.path.length-1]:f.mv?f.mv.to:-1);
+    if(Number.isInteger(id))ids.push(id);
+    for(const sid of ids)if(G.sys[sid]&&!G.sys[sid].surv.includes(e.id)&&!taken.has(sid))taken.set(sid,f.id);
+  }
+  return taken;
+}
+function holdExploration(f,reason){
+  f.path=f.mv?[f.mv.to]:[];
+  f.explore={target:null,status:reason,next:G.day+5,review:G.day+12};
+}
+function autoExploreTick(onlyEmpire){
+  const contexts=new Map(),reservations=new Map();
+  const fleets=G.fleets.filter(explorationEnabled).sort((a,b)=>a.id-b.id);
+  for(const f of fleets){
+    if(onlyEmpire!==undefined&&f.e!==onlyEmpire)continue;
+    if(f.combat||f.surv>0||f.ord)continue;
+    const state=f.explore;
+    if(state&&Number.isFinite(state.next)&&state.next>G.day&&state.next<=G.day+5)continue;
+    const e=empOf(f);
+    if(!contexts.has(e.id))contexts.set(e.id,explorationContext(e));
+    if(!reservations.has(e.id))reservations.set(e.id,explorationReservations(e));
+    const ctx=contexts.get(e.id),taken=reservations.get(e.id);
+    // Eski kaydın açık manuel rotasını ele geçirme. AI eski otomatik
+    // rotası ilk varıştan sonra ortak planlayıcıya katılır.
+    if(!state&&(f.path.length||f.mv))continue;
+    const from=f.mv?f.mv.to:f.sys;
+    if(!G.sys[from])continue;
+    const returning=state&&Number.isInteger(state.home);
+    const target=state&&(returning?state.home:state.target);
+    let valid=Number.isInteger(target)&&G.sys[target]&&(returning?from!==target:!G.sys[target].surv.includes(e.id)&&taken.get(target)===f.id);
+    let last=from;
+    if(valid){
+      if(explorationBlock(e,f,target,ctx))valid=false;
+      for(const id of f.path){
+        if(f.mv&&id===f.mv.to)continue;
+        const connected=G.sys[last].lanes.includes(id)||ctx.gates.includes(last)&&ctx.gates.includes(id);
+        if(!connected||explorationBlock(e,f,id,ctx,last)){valid=false;break;}last=id;
       }
-      const d = dist(G.sys[f.sys], sy);
-      if ((!best || d < best.d) && explorationRoute(e,f,sy)) best = {sy, d};
+      if(last!==target)valid=false;
     }
-    if (best){
-      orderMove(f, best.sy.id);
-      f.ord = null;
-      if (best.sy.id===f.sys && !f.mv) arrive(f,best.sy);
-    } else {
-      f.auto = false;
-      say(esc(f.name) + ' taranacak yer bulamadı — otomatik keşif kapandı');
+    // Rota güvenliği yarım günde, daha iyi hedef yalnız düğümde/12 günde.
+    if(valid&&(f.mv||G.day<(state.review||0))){state.next=G.day+.5;continue;}
+    if(Number.isInteger(target)&&taken.get(target)===f.id)taken.delete(target);
+    const graph=explorationGraph(e,f,ctx);
+    let best=null;
+    for(const id of ctx.frontier){
+      const s=G.sys[id];
+      if(s.surv.includes(e.id)||taken.has(id)||explorationBlock(e,f,id,ctx)||!Number.isFinite(graph.cost[id]))continue;
+      const nearby=s.lanes.filter(n=>ctx.known.has(n)&&!G.sys[n].surv.includes(e.id)&&!taken.has(n)).length;
+      const score=graph.cost[id]/(1+Math.min(3,nearby)*.06);
+      if(!best||score<best.score||score===best.score&&id<best.id)best={id,score};
+    }
+    if(valid&&best&&best.id!==target&&best.score>=graph.cost[target]*.7)best={id:target,score:graph.cost[target]};
+    if(best){
+      f.path=(f.mv?[f.mv.to]:[]).concat(explorationPath(graph,best.id));
+      f.explore={target:best.id,status:'travel',next:G.day+.5,review:G.day+12};
+      f.auto=true;taken.set(best.id,f.id);delete f.stalled;delete f._stallSaid;
+      if(best.id===f.sys&&!f.mv)arrive(f,G.sys[best.id]);
+    }else{
+      const pending=G.sys.some(s=>!s.surv.includes(e.id));
+      const reason=!pending?'complete':graph.reasons.has('pirate')?'pirate':graph.reasons.has('threat')?'threat':graph.reasons.has('supply')?'supply':'route';
+      // Hattın dışında aylarca boş bekleyip yıpranma: güvenli, bilinen
+      // tam ikmal düğümüne dön. İkmal/onarım kuralları aynen uygulanır.
+      let home=-1;
+      if(fleetSupply(e,{sys:from,ships:f.ships,e:f.e})<.999){
+        for(const id of ctx.known)if(id!==from&&Number.isFinite(graph.cost[id])&&
+          !explorationBlock(e,f,id,ctx)&&fleetSupply(e,{sys:id,ships:f.ships,e:f.e})>=.999&&
+          (home<0||graph.cost[id]<graph.cost[home]))home=id;
+      }
+      if(home>=0){
+        f.path=(f.mv?[f.mv.to]:[]).concat(explorationPath(graph,home));
+        f.explore={target:null,home,status:'resupply',next:G.day+.5,review:G.day+12};
+      }else holdExploration(f,reason);
+    }
+  }
+}
+function restoreExploration(){
+  for(const f of G.fleets){
+    if(!explorationEnabled(f)){delete f.explore;continue;}
+    if(!f.explore)continue;
+    const s=f.explore;
+    if(typeof s!=='object'||!Number.isFinite(s.next)||s.next>G.day+5||!Number.isFinite(s.review)||s.review>G.day+12||
+      s.target!==null&&(!Number.isInteger(s.target)||!G.sys[s.target]||G.sys[s.target].surv.includes(f.e))){
+      holdExploration(f,'route');f.explore.next=G.day;
     }
   }
 }
@@ -3810,6 +3963,10 @@ function arrive(f, sys){
   /* ═══ FAZ 77C: SİNYAL AVCISI TAM BAĞLANTI ═══
      Tarama süresi −%45 (29 → 16 gün). Anomali bulma şansı da
      ayrıca artıyor (anomChance). */
+  if(explorationEnabled(f)){
+    const owner=explorationReservations(e).get(sys.id);
+    if(owner!==undefined&&owner!==f.id || explorationBlock(e,f,sys.id,explorationContext(e)))return;
+  }
   if (fleetHasRole(f,'bilim') && !sys.surv.includes(e.id))
     f.surv = Math.round(SCAN_BASE * (hasCivic(e,'scan') ? (1 - SCAN_HUNTER) : 1));
 }
@@ -3846,7 +4003,7 @@ function dailyTick(dt){
       const e = G.emps[q.e];
       if (e && !e.dead && sys.owner === e.id){
         const grp = c => SHIPS[c].rol === 'sav' ? 'sav' : SHIPS[c].rol;
-        let host = (e.ai&&SHIPS[q.cls].rol==='bilim')?null:G.fleets.find(f => f.e===e.id && f.sys===sys.id && !f.combat && f.ships.length &&
+        let host = (SHIPS[q.cls].rol==='bilim')?null:G.fleets.find(f => f.e===e.id && f.sys===sys.id && !f.combat && f.ships.length &&
           !hasShipment(f) && !f.composition && !f.path.length && grp(f.ships[0].c) === grp(q.cls) && f.ships.length < 24);
         // 88A.1: özel sipariş hedefi genel tersane tercihinden bağımsızdır.
         const ral = Object.prototype.hasOwnProperty.call(q,'delivery')
@@ -3859,7 +4016,7 @@ function dailyTick(dt){
         } else if (host && !host.mv) host.ships.push({c:q.cls,h:1});
         else {
           const nf = newFleet(e,sys.id,[{c:q.cls}]);
-          if (!e.ai && SHIPS[q.cls].rol === 'bilim') nf.auto=true;
+          if (SHIPS[q.cls].rol === 'bilim') nf.auto=true;
         }
         if (!e.ai) say(SHIPS[q.cls].n + ' hazır — ' + sys.name +
           (sonuc ? ' · '+sonuc : ''));
@@ -7475,6 +7632,7 @@ function applySaveData(d){
   G.p = G.emps[0];
   restoreShipments();
   restoreFleetTemplates();
+  restoreExploration();
   restoreResearch();
   loadCheckpoint('after:roots');
   /* 86G: Eski v8 kayıtlarında savaşla birlikte kalmış NAP/pakt/ittifak
@@ -7848,7 +8006,7 @@ function forceRedraw(sebep){
    Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
    Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
 /* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */
-const BUILD_ID = '94a';
+const BUILD_ID = '94c';
 const DIAG_MAX = 40;
 const DIAG = [];
 function logDiag(tur, mesaj){
@@ -8551,6 +8709,8 @@ function camSane(){
   const c = View.cam;
   if (!c) return;
   if(!Number.isFinite(c.a))c.a=0;
+  if(!Number.isFinite(c.tilt))c.tilt=1;
+  c.tilt=clamp(c.tilt,.65,1);
   const iyi = v => typeof v === 'number' && isFinite(v);
   if (!iyi(c.x) || !iyi(c.y) || !iyi(c.z)){
     console.warn('Kamera bozuldu, sıfırlanıyor:', c.x, c.y, c.z);

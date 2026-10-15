@@ -1,0 +1,29 @@
+[
+  {
+    "phase": "94b",
+    "tilt": 1,
+    "systems": 100,
+    "frames": 40,
+    "medianMs": 5.22965099999999,
+    "p95Ms": 8.726440000000025,
+    "rngUnchanged": true
+  },
+  {
+    "phase": "94c",
+    "tilt": 1,
+    "systems": 100,
+    "frames": 40,
+    "medianMs": 6.124174999999923,
+    "p95Ms": 11.239739999999983,
+    "rngUnchanged": true
+  },
+  {
+    "phase": "94c",
+    "tilt": 0.78,
+    "systems": 100,
+    "frames": 40,
+    "medianMs": 5.201397000000043,
+    "p95Ms": 7.2983070000000225,
+    "rngUnchanged": true
+  }
+]

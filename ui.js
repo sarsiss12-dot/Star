@@ -100,9 +100,6 @@ const UI = {
       `<button class="tool" id="btnFullscreen" onclick="forceFullscreen()" title="Tam ekran">⛶</button>
        <button class="tool" data-a="home" title="Anavatan">⌂</button>
        <button class="tool" data-a="fit" title="Galaksi">✧</button>
-       <button class="tool" style="min-width:44px;min-height:44px" data-a="cameraReset" aria-label="Harita açısını sıfırla" title="Başlangıç açısı">↟</button>
-       <button class="tool" style="min-width:44px;min-height:44px" data-a="cameraFocus" aria-label="Seçili sisteme veya filoya odaklan" title="Seçili hedefe odaklan">◎</button>
-       <button class="tool" style="min-width:44px;min-height:44px" id="cameraRotate" data-a="cameraRotate" aria-pressed="false" aria-label="İki parmakla döndürme" title="İki parmakla döndürme: kapalı">⟳</button>
        <button class="tool" data-a="save" title="Kaydet">▤</button>
        <!-- FAZ 64: 🌌 arka plan ve ⚡ otomatik olay ikonları
             kaldırıldı — ikisi de Faz 62'de "KAYIT VE AYARLAR"
@@ -265,12 +262,11 @@ const UI = {
       case 'tab': this.tab(x); break;
       case 'spd': this.setSpeed(+x); break;
       case 'full': forceFullscreen(); break;   // FAZ 54: senkron yol
-      case 'cameraReset': View.resetAngle(); break;
+      case 'cameraReset': View.resetAngle(); this.saveMenu(); break;
       case 'cameraFocus': if(!View.focusSelection())this.alert('Önce bir sistem veya filo seç'); break;
-      case 'cameraRotate': {
-        View.resetGesture();View.rotationEnabled=!View.rotationEnabled;
-        const b=$('cameraRotate');if(b){b.setAttribute('aria-pressed',String(View.rotationEnabled));b.classList.toggle('on',View.rotationEnabled);b.title='İki parmakla döndürme: '+(View.rotationEnabled?'açık':'kapalı');}break;
-      }
+      case 'cameraFlat': View.setTilt(false);this.saveMenu();break;
+      case 'cameraTilt': View.setTilt(true);this.saveMenu();break;
+      case 'cameraRotate': View.rotationEnabled=!View.rotationEnabled;View.resetGesture();this.saveMenu();break;
       case 'home': { const h=G.sys[G.p.home]; View.center(h.x,h.y); View.cam.z=Math.max(View.cam.z,.4); View.selSys=h; this.tab('sistem'); break; }
       case 'fit': View.fit(); break;
       case 'save': this.saveMenu(); break;
@@ -1522,6 +1518,7 @@ const UI = {
         const sci = G.fleets.filter(f=>f.e===0 && fleetHasRole(f,'bilim'));
         const allOn = sci.length && sci.every(f=>f.auto);
         sci.forEach(f => {
+          delete f.explore;
           f.auto = !allOn;
           /* ═══ FAZ 76: MANUELE GEÇİNCE ROTAYI DA DURDUR ═══
              Eskiden yalnız bayrak düşüyordu; gemi mevcut rotasını
@@ -1541,6 +1538,7 @@ const UI = {
       case 'autoex': {
         const f = G.fleets.find(fl => fl.id === +x);
         if (f){
+          delete f.explore;
           f.auto = !f.auto;
           if (!f.auto){ f.path = []; delete f.stalled; delete f._stallSaid; }
           say(f.auto ? esc(f.name) + ' otomatik keşfe geçti'
@@ -1550,7 +1548,7 @@ const UI = {
         this.refresh(); break;
       }
       case 'route': View.route = !View.route; View.routed = false; this.refresh(); break;
-      case 'stop': if (View.sel && View.sel.e===0){ if(hasShipment(View.sel))shipmentAction(G.p,View.sel,'cancel');else View.sel.path=[]; View.sel.ord=null; } this.refresh(); break;
+      case 'stop': if (View.sel && View.sel.e===0){ cancelExploration(View.sel); if(hasShipment(View.sel))shipmentAction(G.p,View.sel,'cancel');else View.sel.path=[]; View.sel.ord=null; } this.refresh(); break;
       case 'stance': if (View.sel) View.sel.stance = View.sel.stance==='agresif'?'savunma':'agresif'; this.refresh(); break;
       case 'merge': this.mergeFleets(); break;
       case 'split': this.splitFleet(); break;
@@ -7770,6 +7768,15 @@ const UI = {
       `<div class="mhd"><span>KAYIT VE AYARLAR</span>
          <button class="riX" data-a="diagShow" title="Tanılama">🩺</button>
          <button class="riX" data-a="closem">✕</button></div>
+       <div class="mbd" id="cameraSettings" style="padding:10px 16px">
+        <div class="mini">GÖRÜNÜM / KAMERA</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px">
+         <button class="abtn" style="min-height:44px" data-a="cameraFlat" aria-pressed="${View.tiltScale()===1}">Düz görünüm (2B)</button>
+         <button class="abtn" style="min-height:44px" data-a="cameraTilt" aria-pressed="${View.tiltScale()<1}">Hafif eğik</button>
+         <button class="abtn" style="min-height:44px" data-a="cameraReset">Kamera açısını sıfırla</button>
+         <button class="abtn" style="min-height:44px" data-a="cameraRotate" aria-pressed="${View.rotationEnabled}">İki parmakla döndürme: ${View.rotationEnabled?'Açık':'Kapalı'}</button>
+        </div>
+       </div>
        <div class="mbd" id="diagBox">Depolama sınanıyor…</div>
        <div class="mft">
         <button class="ch" data-a="mute"><div class="cht">${

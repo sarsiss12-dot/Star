@@ -1,0 +1,126 @@
+{
+  "seed": 11,
+  "requestedMonths": 120,
+  "months": 120,
+  "pirates": true,
+  "stopped": false,
+  "ms": 3342,
+  "rng": -832053635,
+  "saveHash": "e5e113567cdd2389340621c0f47ca553eccbf1f7d1e6fad88b51458d97b95eb4",
+  "empires": [
+    {
+      "id": 0,
+      "name": "Exploration audit",
+      "ai": false,
+      "surveys": 13,
+      "shipDays": 3600,
+      "idleDays": 3128.5,
+      "travelDays": 94.5,
+      "scanDays": 377,
+      "duplicateShipDays": 0,
+      "collisionEpisodes": 0,
+      "losses": 0,
+      "waitReasons": {
+        "legacy-idle": 3128.5
+      },
+      "initialDiscovered": 1,
+      "finalDiscovered": 14,
+      "surveysPer100ShipDays": 0.3611111111111111
+    },
+    {
+      "id": 1,
+      "name": "Veyra Tahtı",
+      "ai": true,
+      "surveys": 30,
+      "shipDays": 1804.5,
+      "idleDays": 465.5,
+      "travelDays": 714.5,
+      "scanDays": 624.5,
+      "duplicateShipDays": 309,
+      "collisionEpisodes": 13,
+      "losses": 10,
+      "waitReasons": {
+        "legacy-idle": 465.5
+      },
+      "initialDiscovered": 1,
+      "finalDiscovered": 31,
+      "surveysPer100ShipDays": 1.6625103906899419
+    },
+    {
+      "id": 2,
+      "name": "Kaevar Mabedi",
+      "ai": true,
+      "surveys": 4,
+      "shipDays": 249,
+      "idleDays": 107.5,
+      "travelDays": 25.5,
+      "scanDays": 116,
+      "duplicateShipDays": 0,
+      "collisionEpisodes": 0,
+      "losses": 1,
+      "waitReasons": {
+        "legacy-idle": 107.5
+      },
+      "initialDiscovered": 1,
+      "finalDiscovered": 5,
+      "surveysPer100ShipDays": 1.606425702811245
+    },
+    {
+      "id": 3,
+      "name": "Analitik Nyx Hanedanlığı",
+      "ai": true,
+      "surveys": 7,
+      "shipDays": 4993.5,
+      "idleDays": 4664,
+      "travelDays": 126.5,
+      "scanDays": 203,
+      "duplicateShipDays": 4.5,
+      "collisionEpisodes": 1,
+      "losses": 3,
+      "waitReasons": {
+        "legacy-idle": 4664
+      },
+      "initialDiscovered": 1,
+      "finalDiscovered": 8,
+      "surveysPer100ShipDays": 0.14018223690798037
+    },
+    {
+      "id": 4,
+      "name": "Primordial Zharn Meclisi",
+      "ai": true,
+      "surveys": 25,
+      "shipDays": 1729,
+      "idleDays": 578.5,
+      "travelDays": 409,
+      "scanDays": 741.5,
+      "duplicateShipDays": 0,
+      "collisionEpisodes": 0,
+      "losses": 6,
+      "waitReasons": {
+        "legacy-idle": 578.5
+      },
+      "initialDiscovered": 1,
+      "finalDiscovered": 26,
+      "surveysPer100ShipDays": 1.4459224985540775
+    },
+    {
+      "id": 5,
+      "name": "Primordial Tarkun Meclisi",
+      "ai": true,
+      "surveys": 30,
+      "shipDays": 2962.5,
+      "idleDays": 994.5,
+      "travelDays": 821,
+      "scanDays": 1147,
+      "duplicateShipDays": 342,
+      "collisionEpisodes": 14,
+      "losses": 9,
+      "waitReasons": {
+        "legacy-idle": 994.5
+      },
+      "initialDiscovered": 1,
+      "finalDiscovered": 31,
+      "surveysPer100ShipDays": 1.0126582278481013
+    }
+  ]
+}

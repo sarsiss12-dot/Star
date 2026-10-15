@@ -1,0 +1,97 @@
+STARS — FAZ 94B TAMAMLAMA RAPORU
+15 Ekim 2026
+
+KANONİK KAYNAK
+stars-faz94a.zip
+SHA-256: 0948267ef48ae5c468a3cda103b8444ba0c44fbb729b79aa24b549bdff820524
+SHA-256 eşleşti; ZIP CRC doğrulaması geçti. GitHub kaynak alınmadı.
+
+TESLİM
+Build 94b; PWA cache stars-v94b; Save v8.
+Tam kaynak, geçmiş teslim belgeleri, ham ölçümler ve test günlükleri dahil.
+94C başlatılmadı. GitHub'a yayın yapılmadı.
+
+DEĞİŞİKLİKLER
+- Oyuncu ve AI için aynı keşif planlayıcısı.
+- Devlet bazında, yaşayan filolardan türetilen hedef rezervasyonu.
+- 2–5 bilim filosu ve iki eşzamanlı tersane için bağımsız hedefler.
+- Oyuncu bilim gemilerinin üretim sonunda otomatik birleştirilmesi kaldırıldı.
+- Yol uzunluğu, hız, bilinen kapı, ikmal ve keşif kümesi ile aday puanlama.
+- Hedef ve bütün ara düğümlerde bilinen korsan/düşman/savaş/ikmal kontrolü.
+- Gizli düşman/yuva bilgisi puanlamaya katılmaz; bilinmeyen kapı kullanılmaz.
+- Güvenli alternatif rota doğrudan korunur; emir sırasında kısa yola dönmez.
+- Kapanan rota, keşfedilen hedef ve çakışmada yeniden planlama.
+- Güvenli hedef yoksa otomasyon açık bekler; şartlar düzelince devam eder.
+- İkmal dışında boş beklemek yerine güvenli bilinen tam ikmal noktasına dönüş.
+- Manuel hareket/durdurma önceliği; otomatik ricat sonrasında keşfe devam.
+- Başarısız ricat çatışmayı silmez/ücretsiz kaçış sağlamaz.
+- Mevcut kompakt filo durum alanında görev/bekleme açıklamaları.
+- Eski Save v8 kayıtlarına isteğe bağlı keşif durumu uyarlaması.
+
+KORUNANLAR
+map.js, index.html, economy.js, diplomacy.js byte düzeyinde 94A ile aynı.
+94A kamera/dokunmatik kontrolleri 27 kontrolde yeniden geçti.
+Bilim ağacı/araştırma otomasyonu, filo şablonları, sevkiyat, waypoint,
+tersane üretim bütçesi, anomali ödülleri ve mevcut PWA mimarisi korunuyor.
+AI dosyasında keşif çağrısı ve ikmal geri çekilmesinin emir türü değişti.
+Muharebe dosyasında yalnız otomatik ricat entegrasyonu/başarısız emir koruması
+bulunuyor. Yeni harici kütüphane veya asset yok.
+
+TESTLER
+Nihai birleştirilmiş sonuç: 73 paket, 4.551 başarılı kontrol,
+0 kalan hata, 0 zaman aşımı, 0 atlanan paket.
+Yeni hedefli keşif paketi: 37/37.
+
+Yöntem: hedefli senaryolar, tek tam regresyon, yalnız gerekli takip testleri.
+İlk tam koşu: 73 paket, 4.548 başarılı, 2 başarısız, 0 zaman aşımı.
+İki hata tanılama raporunda hâlâ 94a bekleyen sürüm assertion'larıydı.
+Beklentiler 94b olarak güncellendi; aynı assertion'lar korunarak 85/85 ve
+87/87 geçti. Son ricat güvenliği için keşif 37/37, muharebe 24/24,
+korsan muharebesi 21/21 ve donanma kampanyası 8/8 tekrar doğrulandı.
+İlk hedefli koşudaki 3 test kurulum hatası da development günlüklerinde
+saklandı (görünürlük fikstürü, undefined karşılaştırması ve ikinci devlet
+ikmal fikstürü). Başarısız kontroller silinmedi veya başarılı gösterilmedi.
+
+Kanıtlar:
+ tests/logs-94b/summary.json                 ilk tam koşu
+ tests/logs-94b/full-run.log                 bütün koşu çıktısı
+ tests/logs-94b-followup/                    gerekli tekrarlar
+ tests/summary-94b-final.json                nihai benzersiz paket sayımı
+ tests/exploration-94b/development/          geliştirme tanı ölçümleri
+
+KAMPANYALAR: 94A → 94B
+Her sürümde 120 ay, normal zorluk, orta sarmal harita, gerçek oyun döngüsü.
+Tohum 11:  tarama 109 → 135; çakışma 28 → 0; bilim gemisi kaybı 29 → 28.
+Tohum 99:  tarama  99 →  75; çakışma 21 → 0; bilim gemisi kaybı 28 → 28.
+Tohum 404: tarama 115 → 125; çakışma 38 → 0; bilim gemisi kaybı 46 → 11.
+Toplam:   tarama 323 → 335; çakışma 87 → 0; bilim gemisi kaybı 103 → 67.
+Korsansız tohum 11: tarama 141 → 133; çakışma 39 → 0; kayıp 12 → 2.
+
+Bu sonuçlar her tohumda tarama/verim artışı anlamına gelmez. 99 geriledi.
+Daha uzun gemi ömrü, güvenli bekleme ve ikmal dönüşleri toplam boş süreyi
+artırdı; 100 gemi-gün başına keşif oranı düşüyor. Rota planlaması ek CPU işi
+yapıyor. Tüm oranlar, boş/yol/tarama süreleri, devlet bazlı ölçümler ve host
+süreleri KESIF-KARSILASTIRMA-94B.md ile ham JSON dosyalarında verilmiştir.
+
+93D.1 donanma regresyonu: üç tohumda 120 ay, negatif kaynak yok, gereksiz
+bilim siparişi yok, sivil gemi sayımları uzlaşıyor. Deterministik tekrar ve
+gözlemci kapalı/açık tam kayıt hash'leri eşleşti. Keşif planı Save v8
+kaydet/yükle sonrası aynı hareket ve RNG ile ilerledi.
+
+AÇIK RİSKLER
+- Fiziksel Android cihaz testi yapılmadı; host/native Canvas/PWA regresyonu
+  cihaz FPS, sıcaklık ve bellek garantisi değildir.
+- Devam eden sıçrama geri alınmaz; gizli veya yeni beliren tehdit öldürebilir.
+- Güvenli ikmal yolu yoksa mevcut yıpranma devam eder.
+- Güvenlik/keşif hızı dengesi, özellikle tohum 99 ve büyük haritalar, 94C'de
+  izlenmeli. Sıfır kayıp veya her galakside üstün verim iddiası yoktur.
+- Host süreleri eşzamanlı test yükünden etkilenebilir; Android ölçümü değildir.
+- Ticaret kaynak çoğalması iddiası bağımsız öncelikli denetim olarak açıktır.
+
+YOL HARİTASI
+Sıradaki ana faz 94C — Kapsamlı AI Kalite Kontrolü, Ekonomi, Savaş,
+Diplomasi ve Stratejik Karar Denetimi. Otomatik başlanmadı.
+Uzaktan inşa, yedi kaynak Ekonomi ekranı, ticaret denetimi/konvoylar,
+diplomasi UX/sığınmacı tutarlılığı, pre-game portre/sekiz köken, casuslukla
+karşı teknoloji, stratejik AI ve harici ses gerektirmeyen JavaScript
+fiziksel enstrüman müziği planları korunmuştur.
