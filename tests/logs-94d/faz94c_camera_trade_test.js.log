@@ -1,0 +1,33 @@
+✓ affine inverse / picking 1:0
+✓ affine inverse / picking 1:0.8
+✓ affine inverse / picking 1:2.4
+✓ affine inverse / picking 0.78:0
+✓ affine inverse / picking 0.78:0.8
+✓ affine inverse / picking 0.78:2.4
+✓ affine inverse / picking 0.65:0
+✓ affine inverse / picking 0.65:0.8
+✓ affine inverse / picking 0.65:2.4
+✓ tilt changes geometry while labels keep screen anchors
+✓ settings controls work without touching save or RNG
+✓ tilted pinch preserves midpoint anchor
+✓ tilted pan follows screen delta and stops on release
+✓ tilted fleet target uses actual selected system with right panel open
+✓ tilted fleet picking retains fixed screen touch radius
+✓ orientation resize keeps affine mode and contains viewport corners
+✓ map edges can be centered under tilt
+✓ invalid tilt is recovered and save v8 load preserves session camera
+✓ native texture uses the same affine projection as markers
+✓ empty-stock monthly trade cannot create resources
+✓ partial stocks scale both sides proportionally and conserve each resource
+✓ duplicate tick is idempotent within a month; following month still works
+✓ save/load cannot replay monthly trade income
+✓ pact cancellation creates no refund or new transfer
+✓ another partner route cannot authorize this pair
+✓ closed lane and freshly raided route block transfer
+✓ multiple pairs cannot overspend shared inventory
+✓ real AI faction events alter mood and resulting modifiers
+✓ direct deal rejects absent stock without crediting recipient
+✓ repeated direct deal cannot spend the same ten resources twice
+✓ shared system hub ownership follows colonies rather than dominant empire
+✓ demolished trade port cannot use its cached old route
+GEÇEN: 32 KALAN: 0

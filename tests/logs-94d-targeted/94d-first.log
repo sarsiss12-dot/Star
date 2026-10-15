@@ -1,0 +1,44 @@
+✓ subjugation removes both old sanctions without forcing positive relations
+✓ automatic retaliation cannot sanction a vassal or overlord
+✓ subject war and paid war promise require independence first
+✓ legacy load repairs sanctions and invalid subject war without random or relation reset
+✓ alliance and federation prohibit voluntary embargo but not global law
+✓ war clears sensor, passage, NAP, trade, alliance and spy network in both directions
+✓ dead overlord cleanup is deterministic and does not revive sanctions
+✓ vassal transfer clears inherited sanctions against new lord
+✓ anger and loyalty remain distinct and UI explains their real drivers
+✓ bombardment state identifies actual planet and attacker; travelling fleet cannot bombard
+✓ invasion requires actual army and lowered shield; no fake progress percent
+✓ start notices deduplicate across ticks and Save v8 load
+✓ withdrawing or losing army produces one stopped notice, not repeated alerts
+✓ hidden AI invasion leaks neither map rows nor notifications
+✓ single planet occupation preserves another defended colony and reconciles owner indexes
+✓ planet inside already controlled system still transfers indexes exactly once
+✓ bombardment capture uses six real siege ticks and persists result
+✓ right panel names multiple target planets and keeps hidden activity out
+✓ horizontal tree retains all nodes and prerequisite ordering
+✓ compact queue preserves remote route, number, progress and editing actions
+✓ landscape 568x320 has bounded fixed chrome and scrollable tree/queue
+✓ landscape 640x360 has bounded fixed chrome and scrollable tree/queue
+✓ landscape 740x320 has bounded fixed chrome and scrollable tree/queue
+✓ landscape 800x360 has bounded fixed chrome and scrollable tree/queue
+✓ landscape 960x540 has bounded fixed chrome and scrollable tree/queue
+✗ legacy view fields cannot rotate or compress 2D coordinates AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- true
+
+    at eq (/workspace/scratch/342b17141b4a/faz94d/tests/faz94d_mobile_diplomacy_war_test.js:4:47)
+    at /workspace/scratch/342b17141b4a/faz94d/tests/faz94d_mobile_diplomacy_war_test.js:34:234
+    at test (/workspace/scratch/342b17141b4a/faz94d/tests/faz94d_mobile_diplomacy_war_test.js:5:25)
+    at Object.<anonymous> (/workspace/scratch/342b17141b4a/faz94d/tests/faz94d_mobile_diplomacy_war_test.js:34:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✓ label allocator prevents overlap and stays inside viewport
+✓ border cache includes noise envelope, world padding and source position identity
+GEÇEN: 27 KALAN: 1

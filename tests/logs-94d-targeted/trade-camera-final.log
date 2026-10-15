@@ -1,0 +1,78 @@
+✓ affine inverse / picking 1:0
+✓ affine inverse / picking 1:0.8
+✓ affine inverse / picking 1:2.4
+✓ affine inverse / picking 0.78:0
+✓ affine inverse / picking 0.78:0.8
+✓ affine inverse / picking 0.78:2.4
+✓ affine inverse / picking 0.65:0
+✓ affine inverse / picking 0.65:0.8
+✓ affine inverse / picking 0.65:2.4
+✓ tilt changes geometry while labels keep screen anchors
+✗ settings controls work without touching save or RNG AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ 1.0000000000000142
+- 1
+
+    at eq (/workspace/scratch/342b17141b4a/faz94d/tests/faz94c_camera_trade_test.js:4:29)
+    at /workspace/scratch/342b17141b4a/faz94d/tests/faz94c_camera_trade_test.js:9:435
+    at test (/workspace/scratch/342b17141b4a/faz94d/tests/faz94c_camera_trade_test.js:5:94)
+    at Object.<anonymous> (/workspace/scratch/342b17141b4a/faz94d/tests/faz94c_camera_trade_test.js:9:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✓ tilted pinch preserves midpoint anchor
+✓ tilted pan follows screen delta and stops on release
+✓ tilted fleet target uses actual selected system with right panel open
+✓ tilted fleet picking retains fixed screen touch radius
+✗ orientation resize keeps affine mode and contains viewport corners AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ 0.9999999999999432
+- 1
+
+    at eq (/workspace/scratch/342b17141b4a/faz94d/tests/faz94c_camera_trade_test.js:4:29)
+    at /workspace/scratch/342b17141b4a/faz94d/tests/faz94c_camera_trade_test.js:14:308
+    at test (/workspace/scratch/342b17141b4a/faz94d/tests/faz94c_camera_trade_test.js:5:94)
+    at Object.<anonymous> (/workspace/scratch/342b17141b4a/faz94d/tests/faz94c_camera_trade_test.js:14:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✓ map edges can be centered under tilt
+✗ invalid tilt is recovered and save v8 load preserves session camera AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ 1.0000000000000142
+- 1
+
+    at eq (/workspace/scratch/342b17141b4a/faz94d/tests/faz94c_camera_trade_test.js:4:29)
+    at /workspace/scratch/342b17141b4a/faz94d/tests/faz94c_camera_trade_test.js:16:255
+    at test (/workspace/scratch/342b17141b4a/faz94d/tests/faz94c_camera_trade_test.js:5:94)
+    at Object.<anonymous> (/workspace/scratch/342b17141b4a/faz94d/tests/faz94c_camera_trade_test.js:16:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✓ native texture uses the same affine projection as markers
+✓ empty-stock monthly trade cannot create resources
+✓ partial stocks scale both sides proportionally and conserve each resource
+✓ duplicate tick is idempotent within a month; following month still works
+✓ save/load cannot replay monthly trade income
+✓ pact cancellation creates no refund or new transfer
+✓ another partner route cannot authorize this pair
+✓ closed lane and freshly raided route block transfer
+✓ multiple pairs cannot overspend shared inventory
+✓ real AI faction events alter mood and resulting modifiers
+✓ direct deal rejects absent stock without crediting recipient
+✓ repeated direct deal cannot spend the same ten resources twice
+✓ shared system hub ownership follows colonies rather than dominant empire
+✓ demolished trade port cannot use its cached old route
+GEÇEN: 29 KALAN: 3

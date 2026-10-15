@@ -1,3 +1,28 @@
+# 94D sonrası güncel plan — 15 Ekim 2026
+
+94D uygulama ve otomatik regresyon teslimi tamamlandı. Mobil bilim düzeni, tek 2B kamera, diplomasi tutarlılığı, gezegen savaş göstergeleri ve sınır örnekleme düzeltmeleri için FAZ94D-RAPOR.txt esas alınır. Önceki eğim/döndürme planları geçersizdir; bu özellik kullanıcı isteğiyle kaldırıldı.
+
+**Önerilen sonraki ana faz: 95A — Stratejik AI ve Bilgi Sınırları. Başlatılmadı.**
+
+- Sefer/ortak varış, savunma/ikmal koordinasyonu; ekonomi/fraksiyon/araştırma ihtiyaçlarının ortak planı.
+- 94B güvenli keşif ve rezervasyonunu koruyarak tohum 99 bekleme/ikmal/rota maliyeti.
+- AI bilgi sınırları, casusluk faydası, teklif tekrar bütçesi ve eski doktrin değerleri.
+- Gerçek tarayıcı ve Android kabulü: kompakt bilim, adres çubuğu, yön değişimi, PWA geri dönüşü, yoğun etiketler. Eğik kamera yeniden eklenmeyecek.
+
+Korunan bağımsız işler:
+
+- Yeni kanıtlanan ticaret kaynak çoğalması/rota bütünlüğü hatası ayrı öncelikli bakım; 94C düzeltmeleri korunur.
+- İnşa gemisi panelinden uzaktan emirler; yedi kaynaklı Ekonomi ekranı; gerçek ticaret konvoyları.
+- Diplomasi UX, sığınmacı ve diğer olayların gerçek siyasi koşullarla tutarlılığı.
+- Pre-game portre ve sekiz köken denetimi.
+- Casuslukla rakip teknolojisi öğrenme ve karşı araştırma; üç ağacı koruyan uzun dönem özel teknoloji dengesi.
+- Etkisiz eski shipSpeed alanının ayrı denge incelemesi.
+- Harici ses dosyası olmadan JavaScript fiziksel enstrüman modellemeli doğal müzik prototipi ayrı ileri faz.
+
+GitHub yayını ayrı talimat gerektirir. Aşağıdaki planlar tarihsel kayıttır; bu bölüm önceliklidir.
+
+---
+
 # 94C sonrası güncel plan — 15 Ekim 2026
 
 94C tamamlandı: sade kamera menüsü, hafif affine eğim ve doğru seçim;

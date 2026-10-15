@@ -610,7 +610,7 @@ function settlementApply(e,id){
 /* ---------- diplomasi ---------- */
 function declareWar(a, b, support = null){
   if (!a || !b || a.dead || b.dead || a.id === b.id) return false;
-  if (a.war[b.id]) return false;
+  if (a.war[b.id] || sovereignPair(a,b)) return false;
   if (!fedWarAllowed(a,b)){
     if (a.id === 0) say('Federasyon savaş izni gerekli — diplomasi veya federasyon panelinden öner.', 'war');
     return false;
@@ -752,6 +752,7 @@ function canAlly(a, b){
    kendisi verir. SAFtır — global yetki alanlarına DOKUNMAZ ve RNG
    TÜKETMEZ; sonuç deterministiktir. */
 function canPromiseWarOn(a, b, skipFed = false){
+  if(sovereignPair(a,b))return {ok:false,why:'Önce bağımsızlık gerekir'};
   if (!a || !b) return {ok:false, why:'hedef devlet yok'};
   if (a.id === b.id)       return {ok:false, why:'kendine savaş açamaz'};
   if (b.dead)              return {ok:false, why:'hedef devlet yok'};
@@ -774,7 +775,7 @@ function canPromiseWarOn(a, b, skipFed = false){
   return {ok:true};
 }
 function canDeclareWarOn(a, b){
-  if (!a || !b || a.dead || b.dead || a.id === b.id || !fedWarAllowed(a,b)) return false;
+  if (!a || !b || a.dead || b.dead || a.id === b.id || sovereignPair(a,b) || !fedWarAllowed(a,b)) return false;
   if (false) return false;          // sürgüne kimse savaş açamaz
   if (!a || !a.ai) return true;                   // oyuncu kendi kararını verir
   if (G._dealAuth) return true;                   // anlaşmada verilmiş söz
@@ -1026,6 +1027,9 @@ function endTreatiesForWar(a, b){
   breakPact(a, b);
   if (a.ally) a.ally[b.id] = false;
   if (b.ally) b.ally[a.id] = false;
+  for(const key of ['visionFrom','spynet','passage']){
+    if(a[key])delete a[key][b.id];if(b[key])delete b[key][a.id];
+  }
 }
 /* Eski v8 kayıtlarındaki savaş+antlaşma çakışmasını ay ilerletmeden,
    bildirim üretmeden ve RNG tüketmeden onarır. Savaş kaydı korunur. */
@@ -1347,6 +1351,7 @@ function applyItems(giver, taker, items){
           if (typeof resolveProxyWars === 'function') resolveProxyWars(giver, taker);
         }
         giver.ally[taker.id] = true; taker.ally[giver.id] = true;
+        clearBilateralEmbargo(giver,taker);
         warLedgerSync('alliance');
         giver.rel[taker.id] = Math.max(giver.rel[taker.id], 55);
         taker.rel[giver.id] = Math.max(taker.rel[giver.id], 55);
@@ -2202,7 +2207,7 @@ function foundFederation(e){
   const members = [e.id].concat(chk.allies.map(o=>o.id));
   for (const a of members) for (const b of members){
     if (a === b) continue;
-    G.emps[a].ally[b] = true;
+    G.emps[a].ally[b] = true;clearBilateralEmbargo(G.emps[a],G.emps[b]);
     G.emps[a].war[b] = false;
     G.emps[a].rel[b] = Math.max(G.emps[a].rel[b], 55);
   }
@@ -2289,7 +2294,7 @@ function updateFederations(){
       // federasyona giren üyeler otomatik olarak birbirine müttefik olur
       for (const a of group) for (const b of group){
         if (a === b) continue;
-        G.emps[a].ally[b] = true;
+        G.emps[a].ally[b] = true;clearBilateralEmbargo(G.emps[a],G.emps[b]);
         G.emps[a].war[b] = false;
         G.emps[a].rel[b] = Math.max(G.emps[a].rel[b], 45);
       }
@@ -5291,11 +5296,42 @@ function embargoThreshold(e){
   return EMBARGO_TRUST;
 }
 
+/* 94D: voluntary sanctions cannot coexist with a direct subject bond,
+   alliance or federation. Council pariah law remains a separate global rule. */
+function sovereignPair(a,b){return !!(a&&b&&(a.overlord===b.id||b.overlord===a.id));}
+function protectedDiplomaticPair(a,b){
+  if(!a||!b)return false;
+  const fa=findFed(a),fb=findFed(b);
+  return sovereignPair(a,b)||!!(a.ally&&a.ally[b.id]||b.ally&&b.ally[a.id])||!!(fa&&fb&&fa.id===fb.id);
+}
+function clearBilateralEmbargo(a,b){
+  let changed=false;
+  for(const [e,o] of [[a,b],[b,a]])if(e.embargo&&e.embargo[o.id]){delete e.embargo[o.id];changed=true;}
+  if(changed){a._trAt=b._trAt=-1;}
+  return changed;
+}
+function normalizeDiplomaticBindings(){
+  let repaired=0;
+  for(const e of G.emps){
+    if(e.overlord!=null&&(!G.emps[e.overlord]||G.emps[e.overlord].dead||e.overlord===e.id)){
+      e.overlord=null;e.vassalType=null;e.vassalAnger=0;e.edicts={};repaired++;
+    }
+  }
+  for(let i=0;i<G.emps.length;i++)for(let j=i+1;j<G.emps.length;j++){
+    const a=G.emps[i],b=G.emps[j];if(!a||!b||a.dead||b.dead)continue;
+    if(sovereignPair(a,b)&&(a.war[b.id]||b.war[a.id])){
+      a.war[b.id]=false;b.war[a.id]=false;repaired++;
+    }
+    if(protectedDiplomaticPair(a,b)&&clearBilateralEmbargo(a,b))repaired++;
+    if(a.war[b.id]||b.war[a.id])endTreatiesForWar(a,b);
+  }
+  return repaired;
+}
 function embargoOn(e, id){
   if (!e) return false;
   if (G.council && (typeof pariahMap === 'function') && pariahMap()[id] &&
       e.id !== id) return true;              // parya ile kimse ticaret yapamaz
-  return !!(e.embargo && e.embargo[id]);
+  return !!(e.embargo && e.embargo[id] && !protectedDiplomaticPair(e,G.emps[id]));
 }
 /* İki taraf arasında ticaret akabiliyor mu? */
 /* FAZ 10: Kaçakçılık ağı — Ambargo Kaçakçılığı operasyonu bir hattı
@@ -5317,6 +5353,7 @@ function setEmbargo(e, target, on, sebep){
   if (!e || !target) return false;
   e.embargo = e.embargo || {};
   if (on){
+    if(e.id===target.id||e.dead||target.dead||protectedDiplomaticPair(e,target))return false;
     if (e.embargo[target.id]) return false;
     e.embargo[target.id] = true;
     if (typeof breakPact === 'function') breakPact(e, target);
@@ -5385,6 +5422,7 @@ function isPariah(e){
    güven onarılınca kendiliğinden geri açılır.
    ───────────────────────────────────────────────────────────── */
 function embargoTick(){
+  normalizeDiplomaticBindings();
   for (const e of G.emps){
     if (e.dead || e.wild) continue;
     for (const o of G.emps){
@@ -5396,7 +5434,7 @@ function embargoTick(){
       const acik = embargoOn(e, o.id);
 
       /* Müttefikler ve federasyon ortakları ambargo uygulamaz */
-      let bagli = e.ally[o.id];
+      let bagli = protectedDiplomaticPair(e,o);
       if (!bagli && typeof findFed === 'function'){
         const fe = findFed(e), fo = findFed(o);
         if (fe && fo && fe === fo) bagli = true;
@@ -5875,16 +5913,17 @@ function subjugate(lord, sub, tur){
   if (sub.freeUntil && sub.freeUntil > (G.memAge || 0)) return false;
   if (isVassal(lord) && lord.overlord === sub.id) return false;   // döngü olmasın
   /* Zincirleme vasallık yok: yeni senyör, eski vasalları devralır */
-  for (const v of vassalsOf(sub)) v.overlord = lord.id;
+  for (const v of vassalsOf(sub)){v.overlord=lord.id;clearBilateralEmbargo(lord,v);lord.war[v.id]=false;v.war[lord.id]=false;}
 
   sub.overlord = lord.id;
   /* FAZ 71: üç tip — çağıran hangisini istediyse */
   sub.vassalType = VASSAL_TYPES[tur] ? tur : 'haracguzar';
   sub.vassalSince = G.memAge || 0;
   sub.vassalAnger = 0;
+  clearBilateralEmbargo(lord,sub);
 
   /* Savaş biter, ittifak benzeri bir bağ kurulur */
-  if (lord.war[sub.id]){
+  if (lord.war[sub.id] || sub.war[lord.id]){
     lord.war[sub.id] = false; sub.war[lord.id] = false;
     lord.peaceAt = lord.peaceAt || {}; sub.peaceAt = sub.peaceAt || {};
     lord.peaceAt[sub.id] = G.day; sub.peaceAt[lord.id] = G.day;
@@ -5916,6 +5955,7 @@ function freeVassal(sub, sebep){
   sub.overlord = null;
   sub.vassalType = null;
   sub.vassalAnger = 0;
+  sub.edicts={};sub._edictRed=0;
   if (lord){
     sub.rel[lord.id] = clamp(sub.rel[lord.id] - 10, -100, 100);
     if (sub.id === 0) say('BAĞIMSIZLIK — ' + lord.name + ' boyunduruğundan çıktın' +

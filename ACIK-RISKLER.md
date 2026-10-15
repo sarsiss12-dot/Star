@@ -1,3 +1,21 @@
+# 94D güncel açık riskler — 15 Ekim 2026
+
+- Fiziksel Android testi ve gerçek tarayıcı DOM/görsel yerleşim testi yapılmadı. Chromium kurulumu eksik indirmeyle başarısız oldu. Beş yatay ekran testi yapısal CSS bütçesidir; taşmasız gerçek cihaz kabulü olarak sunulamaz.
+- Bu ortamda kullanıcının ekran görüntüsü/kaydı yoktu. Vasal ambargosu yeniden üretildi; sınır kesilmesinin genel kökü kanıtlandı. Tam kullanıcı görüntüsünün birebir giderildiği iddia edilmez.
+- Tek 2B görünüm kalıcı tasarımdır. Aşağıdaki eğik/izometrik kamera riskleri yalnız tarihsel nottur ve artık uygulanmaz.
+- İkincil etiketler kalabalıkta atlanabilir. Çok uzun adlar, en küçük görünür alan, OS font ölçeği ve düşük güçlü Android'de dokunma/performans kabulü açık.
+- Dünya sınırına eklenen pay aynı 240×240 bitmap'te piksel başına dünya alanını artırır; sınır yumuşaklığı cihaz/zoom kombinasyonunda izlenmeli.
+- Konsey parya yaptırımı bireysel ambargo yasağının küresel istisnasıdır. Haraçgüzar bağının askerî sınır erişimi mevcut tasarım kurallarını izler. Negatif ilişki ve düşük öfke tek başına hata sayılmaz.
+- İşgal gösterimi mevcut aylık çıkarma/bombardıman/fetih modeline bağlıdır; yeni kara savaşı veya ayrı kalıcı işgal yönetimi yoktur. Durma bildirimi çekilmeyi ve püskürtmeyi kesin ayırmaz.
+- Gezegen düzeyi fetih artık diğer savunulan kolonileri devretmez; bu doğruluk düzeltmesi çok gezegenli sistemlerde savaşın süresini değiştirebilir. Tüm çok taraflı geç oyun dengesi ayrıca ölçülmedi.
+- 94C ticaret bütünlüğü düzeltmeleri regresyonda geçti; bütün olası ticaret senaryolarının kapandığı iddia edilmez. Yeni çoğalma kanıtı ayrı öncelikli bakım gerektirir.
+- 94B/94C tohum 99 bekleme, stratejik AI koordinasyonu, bazı eski AI bilgi sınırları, doktrin/etik/tür uzun kampanya dengesi ve olay/portre/köken denetimleri ileri planda kalır.
+- Host render süreleri Android FPS/ısı/bellek garantisi değildir. Yeni harici üretim bağımlılığı eklenmedi.
+
+Güncel test: 75 paket / 4611 başarılı kontrol / 0 kalan hata / 0 zaman aşımı. 95A başlatılmadı. Önceki notlar tarihsel olarak korunur.
+
+---
+
 # 94C güncel açık riskler — 15 Ekim 2026
 
 - Fiziksel Android/WebView testi yapılmadı. Native Canvas, pointer ve yaşam

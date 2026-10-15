@@ -1,0 +1,228 @@
+✓ Devlet listesi yalnız temaslı yaşayan normal devletleri seçtirir
+✓ Temassız dünya açıklama gösterir, ilişki ve müzakere devre dışıdır
+✓ Devlet filtresi: war
+✓ Devlet filtresi: ally
+✓ Devlet filtresi: envoy
+✓ Sağ panel tek ilişki girişi; pakt ve NAP doğru adlarla görünür
+✗ Elçi, ticaret, geçiş, sensör ve casus ağı ayrı doğru durumlar — ui.js:3437
+      if (!blocked && !protectedDiplomaticPair(e,o) && !(typeof pariahMap==='function'&&pariahMap()[o.id])) h+=`<button class="abtn" data-a="${embargoOn(e,o.id)?'unembargo':'embargo'}" data-x="${o.id}">
+                                                                                                   ^
+
+TypeError: Cannot read properties of null (reading '1')
+    at Object.diploRelationship (ui.js:3437:100)
+    at Object.openDiplo (ui.js:3470:34)
+    at Object.selectDiplo (ui.js:3218:52)
+    at evalmachine.<anonymous>:1:4
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/scratch/342b17141b4a/faz94d/tests/helpers/runtime.js:111:25)
+    at relation (/workspace/scratch/342b17141b4a/faz94d/tests/faz86e_diplomacy_center_test.js:30:29)
+    at /workspace/scratch/342b17141b4a/faz94d/tests/faz86e_diplomacy_center_test.js:59:10
+    at test (/workspace/scratch/342b17141b4a/faz94d/tests/faz86e_diplomacy_center_test.js:6:28)
+✓ Vasal özeti tür, öfke ve oyuncunun aldığı vergiyi korur
+✗ Gizli diplomasi, federasyon, konsey ve istihbarat hâlâ erişilir — ui.js:3437
+      if (!blocked && !protectedDiplomaticPair(e,o) && !(typeof pariahMap==='function'&&pariahMap()[o.id])) h+=`<button class="abtn" data-a="${embargoOn(e,o.id)?'unembargo':'embargo'}" data-x="${o.id}">
+                                                                                                   ^
+
+TypeError: Cannot read properties of null (reading '1')
+    at Object.diploRelationship (ui.js:3437:100)
+    at Object.openDiplo (ui.js:3470:34)
+    at Object.selectDiplo (ui.js:3218:52)
+    at evalmachine.<anonymous>:1:4
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/scratch/342b17141b4a/faz94d/tests/helpers/runtime.js:111:25)
+    at relation (/workspace/scratch/342b17141b4a/faz94d/tests/faz86e_diplomacy_center_test.js:30:29)
+    at /workspace/scratch/342b17141b4a/faz94d/tests/faz86e_diplomacy_center_test.js:70:2
+    at test (/workspace/scratch/342b17141b4a/faz94d/tests/faz86e_diplomacy_center_test.js:6:28)
+✗ Savaş eylemi boolean izinle çalışır ve önce hedef seçtirir — ui.js:3437
+      if (!blocked && !protectedDiplomaticPair(e,o) && !(typeof pariahMap==='function'&&pariahMap()[o.id])) h+=`<button class="abtn" data-a="${embargoOn(e,o.id)?'unembargo':'embargo'}" data-x="${o.id}">
+                                                                                                   ^
+
+TypeError: Cannot read properties of null (reading '1')
+    at Object.diploRelationship (ui.js:3437:100)
+    at Object.openDiplo (ui.js:3470:34)
+    at Object.selectDiplo (ui.js:3218:52)
+    at evalmachine.<anonymous>:1:4
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/scratch/342b17141b4a/faz94d/tests/helpers/runtime.js:111:25)
+    at relation (/workspace/scratch/342b17141b4a/faz94d/tests/faz86e_diplomacy_center_test.js:30:29)
+    at /workspace/scratch/342b17141b4a/faz94d/tests/faz86e_diplomacy_center_test.js:73:65
+    at test (/workspace/scratch/342b17141b4a/faz94d/tests/faz86e_diplomacy_center_test.js:6:28)
+✓ Doktrin engeli ilişkiyi açar; elçi/hediye yok, müzakere disabled
+✗ Gezinme dünya, kaynaklar, ilişkiler, hafıza ve RNG değiştirmez — ui.js:3437
+      if (!blocked && !protectedDiplomaticPair(e,o) && !(typeof pariahMap==='function'&&pariahMap()[o.id])) h+=`<button class="abtn" data-a="${embargoOn(e,o.id)?'unembargo':'embargo'}" data-x="${o.id}">
+                                                                                                   ^
+
+TypeError: Cannot read properties of null (reading '1')
+    at Object.diploRelationship (ui.js:3437:100)
+    at Object.openDiplo (ui.js:3470:34)
+    at Object.selectDiplo (ui.js:3218:52)
+    at Object.act (ui.js:583:34)
+    at evalmachine.<anonymous>:1:4
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/scratch/342b17141b4a/faz94d/tests/helpers/runtime.js:111:25)
+    at /workspace/scratch/342b17141b4a/faz94d/tests/faz86e_diplomacy_center_test.js:85:24
+    at test (/workspace/scratch/342b17141b4a/faz94d/tests/faz86e_diplomacy_center_test.js:6:28)
+✗ Taslak aynı hedefe dönünce maddeleri, ömrü ve nesne kimliğini korur — ui.js:3437
+      if (!blocked && !protectedDiplomaticPair(e,o) && !(typeof pariahMap==='function'&&pariahMap()[o.id])) h+=`<button class="abtn" data-a="${embargoOn(e,o.id)?'unembargo':'embargo'}" data-x="${o.id}">
+                                                                                                   ^
+
+TypeError: Cannot read properties of null (reading '1')
+    at Object.diploRelationship (ui.js:3437:100)
+    at Object.openDiplo (ui.js:3470:34)
+    at Object.act (ui.js:1226:63)
+    at evalmachine.<anonymous>:1:124
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/scratch/342b17141b4a/faz94d/tests/helpers/runtime.js:111:25)
+    at /workspace/scratch/342b17141b4a/faz94d/tests/faz86e_diplomacy_center_test.js:89:20
+    at test (/workspace/scratch/342b17141b4a/faz94d/tests/faz86e_diplomacy_center_test.js:6:28)
+    at Object.<anonymous> (/workspace/scratch/342b17141b4a/faz94d/tests/faz86e_diplomacy_center_test.js:88:1)
+✓ Devlet başına taslak ve karşı teklif birbirine karışmaz
+✓ Kapatıp açma taslağı korur, temizleme yalnız seçili devleti temizler
+✓ Kayıt yüklemede açık taslak silinir ve eski teklif gönderilmez
+✓ Yükleme sonrası eski karşı teklif kabulü/ret çağrısı dünyayı değiştirmez
+✓ Ölen veya teması kaybolan hedefin taslağı açılmaz
+✗ Liste ve hedeflerin kaydırma konumları ayrı korunur; eski scroll etkisiz — ui.js:3437
+      if (!blocked && !protectedDiplomaticPair(e,o) && !(typeof pariahMap==='function'&&pariahMap()[o.id])) h+=`<button class="abtn" data-a="${embargoOn(e,o.id)?'unembargo':'embargo'}" data-x="${o.id}">
+                                                                                                   ^
+
+TypeError: Cannot read properties of null (reading '1')
+    at Object.diploRelationship (ui.js:3437:100)
+    at Object.openDiplo (ui.js:3470:34)
+    at Object.selectDiplo (ui.js:3218:52)
+    at evalmachine.<anonymous>:1:4
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/scratch/342b17141b4a/faz94d/tests/helpers/runtime.js:111:25)
+    at relation (/workspace/scratch/342b17141b4a/faz94d/tests/faz86e_diplomacy_center_test.js:30:29)
+    at /workspace/scratch/342b17141b4a/faz94d/tests/faz86e_diplomacy_center_test.js:121:2
+    at test (/workspace/scratch/342b17141b4a/faz94d/tests/faz86e_diplomacy_center_test.js:6:28)
+✗ İstihbarat 0: kaynak, teknoloji ve mizaç kapıları — ui.js:3437
+      if (!blocked && !protectedDiplomaticPair(e,o) && !(typeof pariahMap==='function'&&pariahMap()[o.id])) h+=`<button class="abtn" data-a="${embargoOn(e,o.id)?'unembargo':'embargo'}" data-x="${o.id}">
+                                                                                                   ^
+
+TypeError: Cannot read properties of null (reading '1')
+    at Object.diploRelationship (ui.js:3437:100)
+    at Object.openDiplo (ui.js:3470:34)
+    at Object.selectDiplo (ui.js:3218:52)
+    at evalmachine.<anonymous>:1:4
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/scratch/342b17141b4a/faz94d/tests/helpers/runtime.js:111:25)
+    at relation (/workspace/scratch/342b17141b4a/faz94d/tests/faz86e_diplomacy_center_test.js:30:29)
+    at /workspace/scratch/342b17141b4a/faz94d/tests/faz86e_diplomacy_center_test.js:126:71
+    at test (/workspace/scratch/342b17141b4a/faz94d/tests/faz86e_diplomacy_center_test.js:6:28)
+✗ İstihbarat 1: kaynak, teknoloji ve mizaç kapıları — ui.js:3437
+      if (!blocked && !protectedDiplomaticPair(e,o) && !(typeof pariahMap==='function'&&pariahMap()[o.id])) h+=`<button class="abtn" data-a="${embargoOn(e,o.id)?'unembargo':'embargo'}" data-x="${o.id}">
+                                                                                                   ^
+
+TypeError: Cannot read properties of null (reading '1')
+    at Object.diploRelationship (ui.js:3437:100)
+    at Object.openDiplo (ui.js:3470:34)
+    at Object.selectDiplo (ui.js:3218:52)
+    at evalmachine.<anonymous>:1:4
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/scratch/342b17141b4a/faz94d/tests/helpers/runtime.js:111:25)
+    at relation (/workspace/scratch/342b17141b4a/faz94d/tests/faz86e_diplomacy_center_test.js:30:29)
+    at /workspace/scratch/342b17141b4a/faz94d/tests/faz86e_diplomacy_center_test.js:126:71
+    at test (/workspace/scratch/342b17141b4a/faz94d/tests/faz86e_diplomacy_center_test.js:6:28)
+✗ İstihbarat 2: kaynak, teknoloji ve mizaç kapıları — ui.js:3437
+      if (!blocked && !protectedDiplomaticPair(e,o) && !(typeof pariahMap==='function'&&pariahMap()[o.id])) h+=`<button class="abtn" data-a="${embargoOn(e,o.id)?'unembargo':'embargo'}" data-x="${o.id}">
+                                                                                                   ^
+
+TypeError: Cannot read properties of null (reading '1')
+    at Object.diploRelationship (ui.js:3437:100)
+    at Object.openDiplo (ui.js:3470:34)
+    at Object.selectDiplo (ui.js:3218:52)
+    at evalmachine.<anonymous>:1:4
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/scratch/342b17141b4a/faz94d/tests/helpers/runtime.js:111:25)
+    at relation (/workspace/scratch/342b17141b4a/faz94d/tests/faz86e_diplomacy_center_test.js:30:29)
+    at /workspace/scratch/342b17141b4a/faz94d/tests/faz86e_diplomacy_center_test.js:126:71
+    at test (/workspace/scratch/342b17141b4a/faz94d/tests/faz86e_diplomacy_center_test.js:6:28)
+✗ İstihbarat 3: kaynak, teknoloji ve mizaç kapıları — ui.js:3437
+      if (!blocked && !protectedDiplomaticPair(e,o) && !(typeof pariahMap==='function'&&pariahMap()[o.id])) h+=`<button class="abtn" data-a="${embargoOn(e,o.id)?'unembargo':'embargo'}" data-x="${o.id}">
+                                                                                                   ^
+
+TypeError: Cannot read properties of null (reading '1')
+    at Object.diploRelationship (ui.js:3437:100)
+    at Object.openDiplo (ui.js:3470:34)
+    at Object.selectDiplo (ui.js:3218:52)
+    at evalmachine.<anonymous>:1:4
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/scratch/342b17141b4a/faz94d/tests/helpers/runtime.js:111:25)
+    at relation (/workspace/scratch/342b17141b4a/faz94d/tests/faz86e_diplomacy_center_test.js:30:29)
+    at /workspace/scratch/342b17141b4a/faz94d/tests/faz86e_diplomacy_center_test.js:126:71
+    at test (/workspace/scratch/342b17141b4a/faz94d/tests/faz86e_diplomacy_center_test.js:6:28)
+✗ Düşük istihbaratta gizli stok/teknoloji değişmesi ilişki HTML değiştirmez — ui.js:3437
+      if (!blocked && !protectedDiplomaticPair(e,o) && !(typeof pariahMap==='function'&&pariahMap()[o.id])) h+=`<button class="abtn" data-a="${embargoOn(e,o.id)?'unembargo':'embargo'}" data-x="${o.id}">
+                                                                                                   ^
+
+TypeError: Cannot read properties of null (reading '1')
+    at Object.diploRelationship (ui.js:3437:100)
+    at Object.openDiplo (ui.js:3470:34)
+    at Object.selectDiplo (ui.js:3218:52)
+    at evalmachine.<anonymous>:1:4
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/scratch/342b17141b4a/faz94d/tests/helpers/runtime.js:111:25)
+    at relation (/workspace/scratch/342b17141b4a/faz94d/tests/faz86e_diplomacy_center_test.js:30:29)
+    at /workspace/scratch/342b17141b4a/faz94d/tests/faz86e_diplomacy_center_test.js:131:30
+    at test (/workspace/scratch/342b17141b4a/faz94d/tests/faz86e_diplomacy_center_test.js:6:28)
+✗ Yabancı üçüncü devletin adı yüksek istihbaratta da maskelenir — ui.js:3437
+      if (!blocked && !protectedDiplomaticPair(e,o) && !(typeof pariahMap==='function'&&pariahMap()[o.id])) h+=`<button class="abtn" data-a="${embargoOn(e,o.id)?'unembargo':'embargo'}" data-x="${o.id}">
+                                                                                                   ^
+
+TypeError: Cannot read properties of null (reading '1')
+    at Object.diploRelationship (ui.js:3437:100)
+    at Object.openDiplo (ui.js:3470:34)
+    at Object.selectDiplo (ui.js:3218:52)
+    at evalmachine.<anonymous>:1:4
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/scratch/342b17141b4a/faz94d/tests/helpers/runtime.js:111:25)
+    at relation (/workspace/scratch/342b17141b4a/faz94d/tests/faz86e_diplomacy_center_test.js:30:29)
+    at /workspace/scratch/342b17141b4a/faz94d/tests/faz86e_diplomacy_center_test.js:136:105
+    at test (/workspace/scratch/342b17141b4a/faz94d/tests/faz86e_diplomacy_center_test.js:6:28)
+✓ Düşük istihbaratta kaynak seçicisi stoktan bağımsız aynı seçenekleri sunar
+✓ Yüksek istihbaratta kaynak seçicisi gerçek stokları kullanır
+✓ İstihbaratsız teknoloji/lüks eylemi doğrudan çağrılsa da seçici açılmaz
+✓ Görülmemiş yabancı sistemler düşük istihbarat seçicisinde listelenmez
+✓ Kendi teknoloji seçenekleri düşük istihbaratta rakibin envanterini açığa çıkarmaz
+✓ Düşük istihbaratta teklif önizlemesi evalOffer çağırmaz; üst düzeyde kaba tahmin
+✓ Süresi dolmuş teklif önizlemede ve gönderimde reddedilir; stok/RNG sabit
+✓ Cömert teklif gerçek aiRespond ve executeDeal ile tek kez aktarılır
+✓ Kötü teklif gerçek AI ret verir; kaynaklar ve RNG değişmez
+✓ Karşı teklif hedef değiştirince saklanır; kabul yalnız o devleti etkiler
+✓ Seçici açıkken hedef değişirse gecikmiş seçim yeni taslağa yazılmaz
+✓ Seçici açıkken kayıt yüklenirse gecikmiş callback etkisiz
+✓ Diplomasi taslakları v8 kayda veya tercihlere eklenmez
+✓ Mobil CSS kontrolleri kapsamlıdır; tema değişkenleri tanımlıdır (yerleşim testi değil)
+✓ Gerçek AI karşı teklifi ayrı kalır; hedef değişiminden sonra aynı içerikle açılır
+✓ Temas kaybından sonra eski teklif doğrudan gönderilse de aktarılmaz
+✗ Seçili devletin kendi hafızası gösterilir, karşı tarafın gizli hafızası gösterilmez — ui.js:3437
+      if (!blocked && !protectedDiplomaticPair(e,o) && !(typeof pariahMap==='function'&&pariahMap()[o.id])) h+=`<button class="abtn" data-a="${embargoOn(e,o.id)?'unembargo':'embargo'}" data-x="${o.id}">
+                                                                                                   ^
+
+TypeError: Cannot read properties of null (reading '1')
+    at Object.diploRelationship (ui.js:3437:100)
+    at Object.openDiplo (ui.js:3470:34)
+    at Object.selectDiplo (ui.js:3218:52)
+    at evalmachine.<anonymous>:1:4
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/scratch/342b17141b4a/faz94d/tests/helpers/runtime.js:111:25)
+    at relation (/workspace/scratch/342b17141b4a/faz94d/tests/faz86e_diplomacy_center_test.js:30:29)
+    at /workspace/scratch/342b17141b4a/faz94d/tests/faz86e_diplomacy_center_test.js:217:10
+    at test (/workspace/scratch/342b17141b4a/faz94d/tests/faz86e_diplomacy_center_test.js:6:28)
+✓ Süzerenlik onay ekranı da istihbarat kapılarını korur: 0
+✓ Süzerenlik onay ekranı da istihbarat kapılarını korur: 2
+✓ Süzerenlik onay ekranı da istihbarat kapılarını korur: 3
+GEÇEN: 32 KALAN: 13

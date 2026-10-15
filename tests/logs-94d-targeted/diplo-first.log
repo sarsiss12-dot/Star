@@ -1,0 +1,222 @@
+✓ Normal savaş başlangıcı NAP, pakt ve ittifakı iki yönde kapatır
+✓ Yalnız NAP ihaneti paktBozdu hafızası üretir ve süreyi siler
+✓ Başarısız savaş ilanı yürürlükteki antlaşmaları değiştirmez
+✓ Konsey yasağını çiğneyen oyuncu ortak savaş kurulumundan geçer
+✓ Savaş sürerken eski NAP alanı aktif veya redundant sayılmaz
+✓ Diplomasi özeti bozuk ara durumda savaş ve antlaşmaları birlikte göstermez
+✓ Eski kayıt göçü savaşla çakışan üç antlaşmayı temizler
+✓ Göç tek yönlü çakışmayı da temizler, savaşsız antlaşmaya dokunmaz
+✓ Göç saf ve tekrar çalıştırılabilir; ikinci geçiş sıfır değişikliktir
+✓ Göç savaşta kalmış süresi dolmuş NAP alanını da kaldırır
+✓ Barıştan sonra yeni NAP teklifi eski süre yüzünden engellenmez
+✓ warOn transaction rollback NAPı geri getirir; commit onu kapatır
+✗ Sürüm, PWA kabuğu ve kayıt sürümü 86G ile tutarlı — AssertionError [ERR_ASSERTION]: The input did not match the regular expression /const BUILD_ID = '94c';/. Input:
+
+"'use strict';\n" +
+  '/* =====================================================================\n' +
+  '   YILDIZ HANEDANI — çekirdek veriler\n' +
+  '   ===================================================================== */\n' +
+  '\n' +
+  '/* ---------- yardımcılar ---------- */\n' +
+  '/* ═══════════════════════════════════════════════════════════════════\n' +
+  '   YILDIZ HANEDANI · main.js — ÇEKİRDEK\n' +
+  '   Sabitler, galaksi üretimi, filolar, muharebe, çizim, arayüz, ana döngü.\n' +
+  '   İLK yüklenmelidir: tüm veri sabitleri burada tanımlanır.\n' +
+  '   ═══════════════════════════════════════════════════════════════════ */\n' +
+  '\n' +
+  'const $  = id => document.getElementById(id);\n' +
+  'const clamp = (v,a,b) => v<a?a:v>b?b:v;\n' +
+  'const lerp  = (a,b,t) => a+(b-a)*t;\n' +
+  'const dist  = (a,b) => Math.hypot(a.x-b.x, a.y-b.y);\n' +
+  'const fmt = n => {\n' +
+  '  n = Math.round(n);\n' +
+  "  if (Math.abs(n) >= 1e6) return (n/1e6).toFixed(1)+'M';\n" +
+  "  if (Math.abs(n) >= 10000) return (n/1000).toFixed(1)+'K';\n" +
+  "  return ''+n;\n" +
+  '};\n' +
+  "const sgn = n => (n>=0?'+':'') + (Math.abs(n)<10 ? n.toFixed(1) : Math.round(n));\n" +
+  `const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));\n` +
+  '\n' +
+  'function mulberry32(a){\n' +
+  '  return function(){\n' +
+  '    a |= 0; a = a + 0x6D2B79F5 | 0;\n' +
+  '    let t = Math.imul(a ^ a>>>15, 1 | a);\n' +
+  '    t = t + Math.imul(t ^ t>>>7, 61 | t) ^ t;\n' +
+  '    return ((t ^ t>>>14) >>> 0) / 4294967296;\n' +
+  '  };\n' +
+  '}\n' +
+  'function hash2(x,y,s){\n' +
+  '  let h = x*374761393 + y*668265263 + s*1274126177;\n' +
+  '  h = (h ^ (h>>>13)) >>> 0;\n' +
+  '  h = Math.imul(h, 1274126177);\n' +
+  '  return ((h ^ (h>>>16)) >>> 0) / 4294967296;\n' +
+  '}\n' +
+  'function vnoise(x,y,s){\n' +
+  '  const xi=Math.floor(x), yi=Math.floor(y), xf=x-xi, yf=y-yi;\n' +
+  '  const u=xf*xf*(3-2*xf), v=yf*yf*(3-2*yf);\n' +
+  '  const a=hash2(xi,yi,s), b=hash2(xi+1,yi,s), c=hash2(xi,yi+1,s), d=hash2(xi+1,yi+1,s);\n' +
+  '  return lerp(lerp(a,b,u), lerp(c,d,u), v);\n' +
+  '}\n' +
+  'function fbm(x,y,s,oct){\n' +
+  '  let v=0, amp=.5, f=1, tot=0;\n' +
+  '  for(let i=0;i<(oct||4);i++){ v+=vnoise(x*f,y*f,s+i*37)*amp; tot+=amp; amp*=.5; f*=2; }\n' +
+  '  return v/tot;\n' +
+  '}\n' +
+  '/* --- tohumlanabilir küresel rastgelelik (deterministik oyun + test) --- */\n' +
+  'let RND_STATE = 1;\n' +
+  'function rndSeed(v){ RND_STATE = (v|0) || 1; }\n' +
+  'function rnd(){\n' +
+  '  RND_STATE = RND_STATE + 0x6D2B79F5 | 0;\n' +
+  '  let t = Math.imul(RND_STATE ^ RND_STATE>>>15, 1 | RND_STATE);\n' +
+  '  t = t + Math.imul(t ^ t>>>7, 61 | t) ^ t;\n' +
+  '  return ((t ^ t>>>14) >>> 0) / 4294967296;\n' +
+  '}\n' +
+  '\n' +
+  'function pick(rnd, arr){ return arr[Math.floor(rnd()*arr.length)|0]; }\n' +
+  'function shuffle(rnd, arr){\n' +
+  '  for(let i=arr.length-1;i>0;i--){ const j=Math.floor(rnd()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]]; }\n' +
+  '  return arr;\n' +
+  '}\n' +
+  '\n' +
+  '/* ---------- kaynaklar ---------- */\n' +
+  'const RES = {\n' +
+  "  min:{n:'Mineral',   k:'MİN', c:'#c98d4a', ico:'◆'},\n" +
+  "  ene:{n:'Enerji',    k:'ENJ', c:'#f2d452', ico:'⚡'},\n" +
+  "  yiy:{n:'Yiyecek',   k:'YİY', c:'#65e08a', ico:'❋'},\n" +
+  "  ala:{n:'Alaşım',    k:'ALŞ', c:'#9fb6cc', ico:'▰'},\n" +
+  "  ara:{n:'Araştırma', k:'ARŞ', c:'#8b7bff', ico:'✦'},\n" +
+  "  tuk:{n:'Tüketim Malı', k:'TÜK', c:'#e0a8ff', ico:'❖'},\n" +
+  "  etk:{n:'Etki',      k:'ETK', c:'#6ff2c8', ico:'◈'}\n" +
+  '};\n' +
+  '/* kaynak rozeti — her yerde aynı görünsün */\n' +
+  'function resTag(r, v){\n' +
+  '  const d = RES[r];\n' +
+  `  return '<span class="rt" style="color:'+d.c+'">'+d.ico+(v!==undefined?' '+v:'')+'</span>';\n` +
+  '}\n' +
+  '\n' +
+  '/* ---------- gezegen türleri ---------- */\n' +
+  '/* ═══════════════════════════════════════════════════════════════════\n' +
+  '   FAZ 59 — CSS GEZEGEN KÜRESİ\n' +
+  "   Eski yol 26–34 px'lik bir sprite'ı büyütüyordu (imageSmoothing\n" +
+  '   kapalı) — pikselli ve bulanık görünüyordu. Artık gezegen saf CSS:\n' +
+  '     · radial-gradient  → küresel gölgelendirme, sol üstten ışık\n' +
+  '     · ikinci gradient  → yüzey lekeleri (kıta/bulut hissi)\n' +
+  '     · box-shadow       → atmosfer ışıması + iç terminatör (gece yüzü)\n' +
+  '   Vektörel olduğu için her ölçekte pürüzsüz; dış dosya yok,\n' +
+  '   canvas yok, çizim maliyeti sıfır.\n' +
+  '   ═══════════════════════════════════════════════════════════════════ */\n' +
+  'function planetOrb(tip, seed, boyut){\n' +
+  '  const P = PLANETS[tip];\n' +
+  '  const d = boyut || 34;\n' +
+  '  if (!P || !P.pal) return `<span style="display:inline-block;width:${d}px;height:${d}px"></span>`;\n' +
+  '  const pal = P.pal;\n' +
+  '  const koyu = pal[0], orta = pal[2] || pal[1], acik = pal[4] || pal[3] || pal[2];\n' +
+  '\n' +
+  '  /* Tohumdan sabit bir "yüzey dönüşü" — aynı gezegen hep aynı görünür */\n' +
+  '  const sd = ((seed || 0) * 2654435761) >>> 0;\n' +
+  '  const ax = 28 + (sd % 22);              // ışık kaynağı x (%)\n' +
+  '  const ay = 24 + ((sd >> 5) % 18);       // ışık kaynağı y (%)\n' +
+  '  const lx = 30 + ((sd >> 9) % 44);       // leke merkezi\n' +
+  '  const ly = 34 + ((sd >> 14) % 38);\n' +
+  '\n' +
+  '  /* Gaz devi ve yıldız türleri için farklı doku */\n' +
+  "  const gaz = P.k === 'gaz' || tip === 'gaz';\n" +
+  '  const leke = gaz\n' +
+  '    ? `radial-gradient(120% 32% at 50% ${ly}%, ${acik}44 0 18%, transparent 19%),\n' +
+  '       radial-gradient(120% 26% at 50% ${(ly+26)%80+10}%, ${koyu}55 0 16%, transparent 17%),`\n' +
+  '    : `radial-gradient(38% 30% at ${lx}% ${ly}%, ${acik}55 0 40%, transparent 62%),\n' +
+  '       radial-gradient(30% 24% at ${(lx+38)%80+8}% ${(ly+30)%70+12}%, ${koyu}66 0 44%, transparent 66%),`;\n' +
+  '\n' +
+  '  return `<span class="pOrb" style="\n' +
+  '    width:${d}px;height:${d}px;\n' +
+  '    background:\n' +
+  '      ${leke}\n' +
+  '      radial-gradient(circle at ${ax}% ${ay}%,\n' +
+  '        ${acik} 0%, ${orta} 38%, ${pal[1]} 62%, ${koyu} 88%, #01030a 100%);\n' +
+  '    box-shadow:\n' +
+  '      inset ${Math.round(-d*0.18)}px ${Math.round(-d*0.10)}px ${Math.round(d*0.34)}px rgba(2,4,10,.86),\n' +
+  '      inset ${Math.round(d*0.08)}px ${Math.round(d*0.06)}px ${Math.round(d*0.18)}px ${acik}22,\n' +
+  '      0 0 ${Math.round(d*0.30)}px ${orta}4d,\n' +
+  '      0 0 ${Math.round(d*0.10)}px ${acik}33;\n' +
+  '  "></span>`;\n' +
+  '}\n' +
+  '\n' +
+  'const PLANETS = {\n' +
+  "  col :{n:'Çöl',        k:'hab', ik:'kuru',  pal:['#3a2a17','#7a5a2c','#c99a4e','#e8c079','#f7e6b4'], f:'land'},\n" +
+  "  kur :{n:'Kurak',      k:'hab', ik:'kuru',  pal:['#3d2b20','#7d5237','#b8794a','#d9a271','#f0cd9f'], f:'land'},\n" +
+  "  sav :{n:'Savan',      k:'hab', ik:'kuru',  pal:['#2b3318','#57682b','#8a9b45','#b6c271','#e3e7ae'], f:'ocean'},\n" +
+  "  oky :{n:'Okyanus',    k:'hab', ik:'islak', pal:['#07243f','#0d4470','#1f74ab','#4aa8d8','#b1e6f7'], f:'ocean'},\n" +
+  "  tro :{n:'Tropik',     k:'hab', ik:'islak', pal:['#0b2a24','#155c3d','#2f8c4a','#63b562','#bde79f'], f:'ocean'},\n" +
+  "  sul :{n:'Sulakalan',  k:'hab', ik:'islak', pal:['#141f18','#2c4a34','#4d7549','#79a06a','#c3d8a6'], f:'ocean'},\n" +
+  "  tun :{n:'Tundra',     k:'hab', ik:'soguk', pal:['#1b2430','#38495a','#5f7285','#93a5b4','#dde8f1'], f:'ice'},\n" +
+  "  kut :{n:'Kutup',      k:'hab', ik:'soguk', pal:['#20303f','#3d5b73','#7297ae','#aac9db','#f2fcff'], f:'ice'},\n" +
+  "  alp :{n:'Alpin',      k:'hab', ik:'soguk', pal:['#1d2a26','#37514a','#5b7b6c','#8fae96','#e0efe3'], f:'ice'},\n" +
+  "  gay :{n:'Gaia',       k:'hab', ik:'gaia',  pal:['#0a2b2a','#12674f','#2fa062','#7ad07a','#dcf6c0'], f:'ocean', rare:1},\n" +
+  "  mak :{n:'Makine Dünyası',k:'hab',ik:'makine',pal:['#12161c','#2b333f','#4c5a6b','#7b8fa3','#d5e8f6'],f:'city', rare:1},\n" +
+  "  cor :{n:'Çorak',      k:'olu', pal:['#231d18','#4a3d31','#786351','#a08872','#d0bba3'], f:'crater'},\n" +
+  "  buz :{n:'Buzul',      k:'olu', pal:['#1a222c','#37485b','#61798f','#9ab3c6','#e6f4fd'], f:'crater'},\n" +
+  "  vol :{n:'Volkanik',   k:'olu', pal:['#1a0d09','#4a1a10','#8c2c12','#d9541a','#ffbf55'], f:'lava'},\n" +
+  "  tok :{n:'Toksik',     k:'olu', pal:['#151f0f','#31491a','#5f7d1f','#96b13a','#d9e588'], f:'lava'},\n" +
+  "  gaz :{n:'Gaz Devi',   k:'gaz', pal:['#2a1c10','#6b4520','#ab7133','#d9a55c','#f6dfab'], f:'bands'},\n" +
+  "  bzd :{n:'Buz Devi',   k:'gaz', pal:['#0e2130','#1d4a63','#2e7d9b','#63b1c9','#caf0f7'], f:'bands'},\n" +
+  "  ast :{n:'Asteroit Kuşağı',k:'ast', pal:['#1a1713','#3a332b','#5e5346','#857763','#b8aa94'], f:'belt'}\n" +
+  '};\n' +
+  "const HAB_TYPES = Object.keys(PLANETS).filter(k=>PLANETS[k].k==='hab' && !PLANETS[k].rare);\n" +
+  "const DEAD_TYPES = ['cor','buz','vol','tok'];\n" +
+  "const CLIMATES = {kuru:'Kuru', islak:'Islak', soguk:'Soğuk', gaia:'Gaia', makine:'Makine'};\n" +
+  '\n' +
+  '/* ---------- LÜKS MALLAR ----------\n' +
+  '   Galakside her mal yalnızca birkaç gezegende bulunur. Koloni kurunca\n' +
+  '   otomatik üretilir (bina gerekmez). Bonus tekel mantığıyla çalışır:\n' +
+  '   aynı maldan 5 tane olması bonusu artırmaz — ÇEŞİT toplarsın.\n' +
+  '   Elinde olmayanı ticaret anlaşmasıyla dışarıdan alırsın.        */\n' +
+  'const LUXURY = {\n' +
+  "  zerrin :{n:'Zerrin Baharatı', ico:'✿', c:'#ff9b3d', e:{stab:9},\n" +
+  "           d:'Halk mutlu: tüm kolonilerde +9 istikrar'},\n" +
+  "  kristal:{n:'Canlı Kristal',   ico:'❈', c:'#8b7bff', e:{araMul:.09},\n" +
+  "           d:'Bilim atılımı: +%9 araştırma'},\n" +
+  "  mercan :{n:'Yankı Mercanı',   ico:'❋', c:'#6ff2c8', e:{dipMul:.16, etkFlat:.7},\n" +
+  "           d:'Diplomatik hediye: +%16 ikna, +0.7 etki'},\n" +
+  "  filiz  :{n:'Yıldız Filizi',   ico:'✤', c:'#65e08a', e:{yiyMul:.14, growMul:.06},\n" +
+  "           d:'Bereket: +%14 yiyecek, +%6 nüfus artışı'},\n" +
+  "  cevher :{n:'Işıyan Cevher',   ico:'◆', c:'#f2d452', e:{eneMul:.13},\n" +
+  "           d:'Enerji yoğun: +%13 enerji'},\n" +
+  "  ipek   :{n:'Vakum İpeği',     ico:'≋', c:'#e0a8ff', e:{minMul:.10, alaMul:.08},\n" +
+  "           d:'Endüstriyel dokuma: +%10 mineral, +%8 alaşım'},\n" +
+  "  ozsu   :{n:'Kadim Özsu',      ico:'❂', c:'#ff5f6d', e:{hullMul:.10, spdMul:.08},\n" +
+  "           d:'Gemi kaplaması: +%10 gövde, +%8 filo hızı'},\n" +
+  "  tuz    :{n:'Boşluk Tuzu',     ico:'✦', c:'#a9d4ff', e:{shMul:.12, upMul:-.10},\n" +
+  "           d:'Kalkan katalizörü: +%12 kalkan, −%10 filo bakımı'}\n" +
+  '};\n' +
+  'const LUX_KEYS = Object.keys(LUXURY);\n' +
+  '\n' +
+  '/* ---------- yeraltı yatakları ---------- */\n' +
+  'const DEPOSITS = [\n' +
+  "  {id:'zengin_maden', n:'Zengin Mineral Damarı', g:{min:5}, w:14, on:['olu','ast','hab']},\n" +
+  "  {id:'kristal',      n:'Kristal Oluşumu',       g:{min:3,ara:2}, w:8,  on:['olu','ast']},\n" +
+  "  {id:'ergi_kaynagi', n:'Ergitilebilir Cevher',  g:{ala:2}, w:7,  on:['olu','ast']},\n" +
+  "  {id:'gaz_kuyusu',   n:'Egzotik Gaz Kuyusu',    g:{ene:6}, w:12, on:['gaz']},\n" +
+  "  {id:'jeotermal',    n:'Jeotermal Yarık',       g:{ene:4}, w:11, on:['olu','hab']},\n" +
+  "  {id:'kalinti',      n:'Antik Kalıntı',         g:{ara:4}, w:6,  on:['olu','hab']},\n" +
+  "  {id:'bereket',      n:'Bereketli Ovalar',      g:{yiy:5}, w:10, on:['hab']},\n" +
+  "  {id:'nadir',        n:'Nadir Element Yatağı',  g:{min:2,ala:2}, w:6, on:['olu','gaz','ast']}\n" +
+  '];\n' +
+  '\n' +
+  '/* ---------- gemi sınıfları ---------- */\n' +
+  'const SHIPS = {\n' +
+  "  kor:{n:'Korvet',      ab:'KRV', rng:1, hull:70,  sh:18,  dmg:16,  spd:"... 405313 more characters
+
+    at /workspace/scratch/342b17141b4a/faz94d/tests/faz86g_integration_handoff_test.js:96:10
+    at test (/workspace/scratch/342b17141b4a/faz94d/tests/faz86g_integration_handoff_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/342b17141b4a/faz94d/tests/faz86g_integration_handoff_test.js:94:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+✓ 86F AI bütçesi ve bağımsız Radar/Lojistik durumu korunur
+✓ Gerçek oyuncu kaydı yüklenir ve temel dünya alanları sonludur
+✓ Kaynak ZIP kimliği paket içi manifestte sabittir
+GEÇEN: 15 KALAN: 1

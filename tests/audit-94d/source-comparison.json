@@ -1,0 +1,62 @@
+[
+  {
+    "file": "ai.js",
+    "changed": false,
+    "before": "8ce880eb35bb5811b72e1b65501e3cf7904599a253479aa222818b1d6c724c15",
+    "after": "8ce880eb35bb5811b72e1b65501e3cf7904599a253479aa222818b1d6c724c15"
+  },
+  {
+    "file": "audio.js",
+    "changed": false,
+    "before": "804226980179698a6b56d292d88c0c7226d1e54f06001aab63b52d6db5685262",
+    "after": "804226980179698a6b56d292d88c0c7226d1e54f06001aab63b52d6db5685262"
+  },
+  {
+    "file": "combat.js",
+    "changed": false,
+    "before": "7df4f0e571b8e89093ec0e7db23ed254feaf383538106ce7631420bd30dbedc2",
+    "after": "7df4f0e571b8e89093ec0e7db23ed254feaf383538106ce7631420bd30dbedc2"
+  },
+  {
+    "file": "diplomacy.js",
+    "changed": true,
+    "before": "2ad03ef68ec9217ad8ba14547d2968f590b6e0cf18d0f22c8feaf2be598615ef",
+    "after": "3d8efe7f548288b95664923738861d462cd26de5bd54cb5465426a6c3645da9f"
+  },
+  {
+    "file": "economy.js",
+    "changed": true,
+    "before": "cd9586b9824555660389a660f36cbe32d0c2233ddcb2d1813a8899acac88b4e0",
+    "after": "d3862471e9e8fb5b762684769930f63ba835e6deb4c302700db6ebeaab36967a"
+  },
+  {
+    "file": "index.html",
+    "changed": true,
+    "before": "1ec0afcac207bfbe22d0305d1407ab9dfacf59fa15d3bd898ca7c1266bc61e73",
+    "after": "0729680cdad6452dd9ed70648c865ece4c87a48eec0878f18d721cc0c13ee38d"
+  },
+  {
+    "file": "main.js",
+    "changed": true,
+    "before": "34bb9b779922f19e197124d359f277146a8f75d1f04e570250c40a421f95f6b8",
+    "after": "6009303bd339876159044fbe7c1b8378bfb32de8e472cd34a10a1a14ef77cd16"
+  },
+  {
+    "file": "map.js",
+    "changed": true,
+    "before": "5dd91205965915969ad72816da0c3f1ab7c0a47753e4effc8db0d39c93ba87ea",
+    "after": "888fb31c1ae3f286cdab535466f1486f580d29f549caec986d0901078ea93239"
+  },
+  {
+    "file": "sw.js",
+    "changed": true,
+    "before": "6ed905d8a7627b09fb9e574ca04fbfa46d6deacf0c63b39628d99a847b5a1e96",
+    "after": "47be49b6fe06e736980f6d90f2a830e0876c9313c12df8d7b3188f9c1a15988b"
+  },
+  {
+    "file": "ui.js",
+    "changed": true,
+    "before": "4aee30e59ecee80b3e21bc5be59525a40a1db715eb8c1aaad9d82cdb611850f4",
+    "after": "1472553d356dd2f3fc4a0ad8a1a7c640696f7d93362af09e0460a3428e6b7ec5"
+  }
+]

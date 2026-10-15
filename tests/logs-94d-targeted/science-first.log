@@ -1,0 +1,48 @@
+✓ all 58 nodes appear exactly once across the three trees
+✗ every same-branch prerequisite is drawn and placed before its child — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+false !== true
+
+    at eq (/workspace/scratch/342b17141b4a/faz94d/tests/faz93d_science_ui_test.js:4:47)
+    at /workspace/scratch/342b17141b4a/faz94d/tests/faz93d_science_ui_test.js:8:97
+    at test (/workspace/scratch/342b17141b4a/faz94d/tests/faz93d_science_ui_test.js:5:25)
+    at Object.<anonymous> (/workspace/scratch/342b17141b4a/faz94d/tests/faz93d_science_ui_test.js:8:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✓ global science action opens dedicated tree screen with history tab
+✓ node click selects remote target, shows detail and toggles it off
+✓ queue focus changes tree without removing target
+✓ queue controls reorder and remove targets and renumber display
+✓ collapsed queue retains goals and reopens
+✓ route panel lists implicit prerequisites without main goal numbers
+✓ completed node opens information without becoming a goal
+✓ history renders unknown dates, real benefits and filters
+✓ locked, planned, active and completed states are distinct
+✓ branch links and special origin condition can be inspected
+✓ bad catalog routes render an error rather than hanging the screen
+✓ tree, history and route rendering do not mutate save or random state
+✓ zoom buttons enforce bounds without touching galaxy camera or research
+✓ touch scroll suppresses selection; pinch changes only tree zoom
+✓ unchanged monthly refresh does not rebuild science DOM
+✓ mobile CSS scopes 44px targets, native scroll and compact landscape layout
+PERF 300 science renders: 603 ms (Node host, not Android FPS)
+✓ 58-node planning and rendering has bounded runtime; no catalog growth
+✗ preservation guard rejects edits to both original UI and new science CSS — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+false !== true
+
+    at eq (/workspace/scratch/342b17141b4a/faz94d/tests/faz93d_science_ui_test.js:4:47)
+    at /workspace/scratch/342b17141b4a/faz94d/tests/faz93d_science_ui_test.js:34:2
+    at test (/workspace/scratch/342b17141b4a/faz94d/tests/faz93d_science_ui_test.js:5:25)
+    at Object.<anonymous> (/workspace/scratch/342b17141b4a/faz94d/tests/faz93d_science_ui_test.js:33:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+GEÇEN: 18 KALAN: 2

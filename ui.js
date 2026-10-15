@@ -262,11 +262,8 @@ const UI = {
       case 'tab': this.tab(x); break;
       case 'spd': this.setSpeed(+x); break;
       case 'full': forceFullscreen(); break;   // FAZ 54: senkron yol
-      case 'cameraReset': View.resetAngle(); this.saveMenu(); break;
+      case 'cameraReset': View.resetCamera(); this.saveMenu(); break;
       case 'cameraFocus': if(!View.focusSelection())this.alert('Önce bir sistem veya filo seç'); break;
-      case 'cameraFlat': View.setTilt(false);this.saveMenu();break;
-      case 'cameraTilt': View.setTilt(true);this.saveMenu();break;
-      case 'cameraRotate': View.rotationEnabled=!View.rotationEnabled;View.resetGesture();this.saveMenu();break;
       case 'home': { const h=G.sys[G.p.home]; View.center(h.x,h.y); View.cam.z=Math.max(View.cam.z,.4); View.selSys=h; this.tab('sistem'); break; }
       case 'fit': View.fit(); break;
       case 'save': this.saveMenu(); break;
@@ -2091,6 +2088,15 @@ const UI = {
       return h;
     }
 
+    const conflicts=planetConflictStates(s);
+    if(conflicts.length){h+='<section class="box warStatus"><div class="bt">⚔ GEZEGEN SAVAŞI</div>';
+      for(const x of conflicts){const pl=s.planets.find(p=>p.i===x.planet);
+        h+=`<div class="bd"><b>${esc(pl.name)} — ${x.kind==='invasion'?'⚑ İşgal sürüyor':'💥 Bombardıman'}</b><br>${esc(G.emps[x.attacker].name)} → ${esc(G.emps[x.defender].name)}<br>Kalkan ${fmt(x.shield)} · Garnizon ${fmt(x.garrison)}${x.siege?' · Kuşatma '+x.siege+'/6 ay':''}</div>`;
+      }h+='</section>';
+    }
+    if(pVis(s)||s.planets.some(p=>p.owner===0))for(const pl of s.planets){const last=pl.col&&pl.col.lastWarResult;
+      if(last&&G.day-last.day<=90)h+=`<div class="mini">⚑ ${esc(pl.name)}: kontrol ${esc(G.emps[last.from]?.name||'Bilinmiyor')} → ${esc(G.emps[last.to]?.name||'Bilinmiyor')}</div>`;
+    }
     h += `<div class="ph">GEZEGENLER</div>`;
     const folds=this.planetFolds();
     for (const pl of s.planets){
@@ -3024,14 +3030,14 @@ const UI = {
     };
     const rows={},nodes={};
     for(const id of ids){const d=layer(id);(rows[d]||(rows[d]=[])).push(id);}
-    let y=24,width=224;
+    let height=128,width=212;
     for(const d of Object.keys(rows).sort((a,b)=>a-b)){
-      rows[d].forEach((id,i)=>{nodes[id]={x:20+(i%3)*216,y:y+Math.floor(i/3)*150};});
-      width=Math.max(width,Math.min(3,rows[d].length)*216+24);
-      y+=Math.ceil(rows[d].length/3)*150;
+      rows[d].forEach((id,i)=>{nodes[id]={x:16+Number(d)*212,y:14+i*120};});
+      height=Math.max(height,rows[d].length*120+24);width=Math.max(width,(Number(d)+1)*212+16);
     }
-    return {nodes,width,height:y+16};
+    return {nodes,width,height};
   },
+
   scienceStatus(id,plan){
     const e=G.p;
     if(e.techs[id])return ['done','Tamamlandı'];
@@ -3048,16 +3054,16 @@ const UI = {
   },
   p_bilim(){
     const e=G.p,s=this.scienceState(),plan=researchPlan(e);
-    let h='<div class="scienceRoot"><nav class="scTabs" aria-label="Bilim dalları">';
+    let h='<div class="scienceRoot"><header class="scHeader"><nav class="scTabs" aria-label="Bilim dalları">';
     for(const [b,B] of Object.entries(BRANCH))h+=`<button data-a="scienceTab" data-x="${b}" aria-pressed="${s.tab===b}" class="${s.tab===b?'on':''}">${B.n}</button>`;
     h+=`<button data-a="scienceTab" data-x="history" aria-pressed="${s.tab==='history'}" class="${s.tab==='history'?'on':''}">Geçmiş</button></nav>`;
     h+='<div class="scFilters" aria-label="Araştırma modu">'+[['manual','Manuel'],['semi','Yarı otomatik'],['auto','Otomatik']].map(([key,label])=>`<button data-a="scienceMode" data-x="${key}" aria-pressed="${researchMode(e)===key}" class="${researchMode(e)===key?'on':''}">${label}</button>`).join('')+'</div>';
-    h+='<p class="mini">'+({manual:'Yalnız hedefler ve zorunlu ön koşullar. Plan bitince puanlar birikir.',semi:'Hedefler öncelikli; boş dallarda uygarlığına uygun otomatik seçim.',auto:'Seçimi otomasyon yönetir. Kayıtlı hedeflerin korunur; bu modda uygulanmaz.'}[researchMode(e)])+'</p>';
+    h+='<p class="scModeHelp">'+({manual:'Yalnız hedefler ve zorunlu ön koşullar. Plan bitince puanlar birikir.',semi:'Hedefler öncelikli; boş dallarda uygarlığına uygun otomatik seçim.',auto:'Seçimi otomasyon yönetir. Kayıtlı hedeflerin korunur; bu modda uygulanmaz.'}[researchMode(e)])+'</p>';
     h+=`<details class="scSummary"><summary>Aylık ${fmt(e.inc.ara)} ✦ · ${Object.keys(TECHS).filter(id=>e.techs[id]).length}/${Object.keys(TECHS).length} tamamlandı${e.ascend?' · Kadim '+e.ascend:''}</summary>`;
     for(const [b,B] of Object.entries(BRANCH)){
       const id=e.rq[b];h+=`<div>${B.n}: ${id?esc(TECHS[id].n)+' · '+fmt(e.rp[b])+'/'+fmt(techCost(e,id))+' ✦':'Tamamlandı / bekliyor'}</div>`;
     }
-    h+='</details>';
+    h+='</details></header>';
     if(s.tab==='history'){
       h+='<div class="scHistory"><div class="scFilters" aria-label="Geçmiş filtresi">';
       for(const [b,n] of [['all','Tümü'],...Object.entries(BRANCH).map(([k,v])=>[k,v.n])])h+=`<button data-a="scienceFilter" data-x="${b}" aria-pressed="${s.filter===b}" class="${s.filter===b?'on':''}">${n}</button>`;
@@ -3074,7 +3080,7 @@ const UI = {
       h+=`<div class="scViewport" tabindex="0" aria-label="${BRANCH[s.tab].n} teknoloji ağacı; kaydırılabilir"><div class="scExtent" style="width:${layout.width*s.zoom}px;height:${layout.height*s.zoom}px"><div class="scScene" style="width:${layout.width}px;height:${layout.height}px;transform:scale(${s.zoom})"><svg class="scLinks" width="${layout.width}" height="${layout.height}" aria-hidden="true">`;
       for(const [id,p] of Object.entries(layout.nodes))for(const dep of Array.isArray(TECHS[id].r)?TECHS[id].r:[]){
         const q=layout.nodes[dep];if(!q)continue;
-        h+=`<path class="${e.techs[dep]?'done':''}" d="M ${q.x+94} ${q.y+112} C ${q.x+94} ${q.y+131}, ${p.x+94} ${p.y-20}, ${p.x+94} ${p.y}"/>`;
+        h+=`<path class="${e.techs[dep]?'done':''}" d="M ${q.x+180} ${q.y+52} C ${q.x+198} ${q.y+52}, ${p.x-18} ${p.y+52}, ${p.x} ${p.y+52}"/>`;
       }
       h+='</svg>';
       for(const [id,p] of Object.entries(layout.nodes)){
@@ -3086,20 +3092,25 @@ const UI = {
       if(s.focus&&researchValidTech(s.focus)){
         const id=s.focus,t=TECHS[id],o=techOrigin(id),route=researchRoute(e,id),goal=plan.goals.find(g=>g.id===id);
         const progress=e.rq[t.b]===id?e.rp[t.b]:(e.research&&e.research.bank[id]||0);
-        h+=`<details class="scDetail" open><summary>${esc(t.n)} · K${t.t} · ${fmt(progress)}/${fmt(techCost(e,id))} ✦</summary><div>${this.scienceBenefits(id)}</div>`;
+        h+=`<details class="scDetail" ${s.detailOpen?'open':''}><summary>${esc(t.n)} · K${t.t} · ${fmt(progress)}/${fmt(techCost(e,id))} ✦ · ${Math.max(0,route.order.length-1)} ön koşul</summary><div>${this.scienceBenefits(id)}</div>`;
         if(o)h+=`<div>${o.icon} ${esc(o.condition)}</div>`;
         if(!researchAccess(e,id).ok)h+=`<p role="alert">${esc(researchAccess(e,id).why)} · Yatırılan puan korunur.</p>`;
         if(Array.isArray(t.r)&&t.r.length)h+='<div>Ön koşullar: '+t.r.map(k=>researchValidTech(k)?`<button data-a="scienceFocus" data-x="${k}">${esc(TECHS[k].n)}</button>`:esc(k)).join(' ')+'</div>';
-        h+=`<button data-a="scienceRoute">${s.route?'Rotayı gizle':'Otomatik rotayı göster'}</button>${goal?' <span>'+goal.number+'. hedef · +'+goal.extra+' yeni ön koşul</span>':''}`;
+        if(goal)h+=`<div class="scTargetEdit"><button data-a="scienceMove" data-x="${id}:-1">← Öne al</button><button data-a="scienceMove" data-x="${id}:1">Sona al →</button><button data-a="scienceRemove" data-x="${id}">Kaldır</button></div>`;
+        h+=`<button data-a="scienceNode" data-x="${id}">${goal?'Hedefi kaldır':'Hedefe ekle'}</button> <button data-a="scienceRoute">${s.route?'Rotayı gizle':'Otomatik rotayı göster'}</button>${goal?' <span>'+goal.number+'. hedef · +'+goal.extra+' yeni ön koşul</span>':''}`;
         if(s.route)h+=route.ok?'<ol class="scRoute">'+route.order.map(k=>`<li>${esc(TECHS[k].n)} · ${BRANCH[TECHS[k].b].n}${k===id?' · ANA HEDEF':''}</li>`).join('')+'</ol>':`<p role="alert">${esc(route.why)}</p>`;
         h+='</details>';
       }
     }
-    h+=`<section class="scQueue"><button class="scQueueToggle" data-a="scienceQueue" aria-expanded="${s.queueOpen}">${s.queueOpen?'▾':'▸'} Araştırma kuyruğu · ${plan.goals.length} hedef</button>`;
+    h+=`<section class="scQueue"><button class="scQueueToggle" data-a="scienceQueue" aria-expanded="${s.queueOpen}">${s.queueOpen?'▾':'▸'} Kuyruk · ${plan.goals.length}</button>`;
     if(s.queueOpen){
       h+='<div class="scQueueTrack">';
       for(const g of plan.goals){const t=TECHS[g.id];
-        h+=`<div class="scGoal"><button class="scGoalFocus" data-a="scienceFocus" data-x="${g.id}"><b>${g.number} · +${g.extra} ${esc(t.n)}</b><small>${BRANCH[t.b].n} · ${g.ok?this.scienceStatus(g.id,plan)[1]:esc(g.why)}</small></button><div class="scReorder"><button data-a="scienceMove" data-x="${g.id}:-1" aria-label="${esc(t.n)} hedefini öne al" ${g.number===1?'disabled':''}>←</button><button data-a="scienceMove" data-x="${g.id}:1" aria-label="${esc(t.n)} hedefini sona al" ${g.number===plan.goals.length?'disabled':''}>→</button><button data-a="scienceRemove" data-x="${g.id}" aria-label="${esc(t.n)} hedefini kaldır">✕</button></div></div>`;
+        const step=researchRoute(e,g.id).order.find(k=>!e.techs[k]&&e.rq[TECHS[k].b]===k),active=step&&TECHS[step],progress=active?e.rp[active.b]:0;
+        const rate=active?Math.max(0,e.inc.ara)/Math.max(1,Object.keys(BRANCH).filter(b=>researchReady(e,e.rq[b])).length):0;
+        const eta=active&&rate>0?Math.ceil(Math.max(0,techCost(e,step)-progress)/rate):null;
+        const first=g.number===1&&active?` · ${fmt(progress)}/${fmt(techCost(e,step))} ✦ · ${eta===null?'bekliyor':'~'+eta+' ay'}${step!==g.id?' (ön koşul)':''}`:'';
+        h+=`<div class="scGoal"><button class="scGoalFocus" data-a="scienceFocus" data-x="${g.id}"><b>${g.number} · +${g.extra} ${esc(t.n)}</b><small>${BRANCH[t.b].n} · ${g.ok?this.scienceStatus(g.id,plan)[1]:esc(g.why)}${first}</small></button></div>`;
       }
       if(!plan.goals.length)h+='<p class="scQueueEmpty">Ağaçtan uzak hedefleri de seçebilirsin. Boş kuyruk davranışı seçili araştırma moduna bağlıdır.</p>';
       h+='</div>';
@@ -3109,19 +3120,22 @@ const UI = {
   scienceRemember(){
     const v=$('diploPane').querySelector('.scViewport'),s=this.scienceState();
     if(v)s.positions[s.tab]={x:v.scrollLeft,y:v.scrollTop};
+    const pane=$('diploPane'),q=pane.querySelector('.scQueueTrack'),d=pane.querySelector('.scDetail');
+    if(q)s.queueX=q.scrollLeft;if(d)s.detailOpen=d.open;
   },
   openScience(focus=false){
     const s=this.scienceState(),pane=$('diploPane');this.globalCur='bilim';
     pane.innerHTML=`<div class="dpBox scienceBox"><div class="dpHd"><span>✦ BİLİM</span><button class="riX" data-a="closeDiplo" aria-label="Bilim ekranını kapat">✕</button></div>${this.p_bilim()}</div>`;
     pane.classList.add('show');this._scienceSig=this.scienceSignature();
+    const q=pane.querySelector('.scQueueTrack');if(q)q.scrollLeft=s.queueX||0;
     const v=pane.querySelector('.scViewport');
     if(!v)return;
     const pos=s.positions[s.tab]||{x:0,y:0};v.scrollLeft=pos.x;v.scrollTop=pos.y;
-    if(focus&&s.focus){const p=this.scienceLayout(s.tab).nodes[s.focus];if(p){v.scrollLeft=Math.max(0,p.x*s.zoom-(v.clientWidth-188*s.zoom)/2);v.scrollTop=Math.max(0,p.y*s.zoom-(v.clientHeight-112*s.zoom)/2);}}
+    if(focus&&s.focus){const p=this.scienceLayout(s.tab).nodes[s.focus];if(p){v.scrollLeft=Math.max(0,p.x*s.zoom-(v.clientWidth-180*s.zoom)/2);v.scrollTop=Math.max(0,p.y*s.zoom-(v.clientHeight-104*s.zoom)/2);}}
     // Native one-finger scrolling; only two-finger pinch cancels browser handling.
     let start=null,moved=false,pinch=null;
     v.addEventListener('touchstart',ev=>{
-      const t=ev.touches;start=t.length?{x:t[0].clientX,y:t[0].clientY}:null;moved=false;
+      const t=ev.touches;start=t.length?{x:t[0].clientX,y:t[0].clientY}:null;if(t.length===1)moved=false;else moved=true;
       if(t.length===2){pinch={distance:Math.hypot(t[0].clientX-t[1].clientX,t[0].clientY-t[1].clientY),zoom:s.zoom};moved=true;}
     },{passive:true});
     v.addEventListener('touchmove',ev=>{
@@ -3130,6 +3144,7 @@ const UI = {
       if(t.length===2&&pinch&&pinch.distance>0){ev.preventDefault();this.scienceApplyZoom(pinch.zoom*Math.hypot(t[0].clientX-t[1].clientX,t[0].clientY-t[1].clientY)/pinch.distance);}
     },{passive:false});
     v.addEventListener('touchend',()=>{pinch=null;},{passive:true});
+    v.addEventListener('touchcancel',()=>{pinch=null;moved=true;},{passive:true});
     v.addEventListener('click',ev=>{if(moved){ev.preventDefault();ev.stopPropagation();moved=false;}},{capture:true});
   },
   scienceApplyZoom(value){
@@ -3152,12 +3167,14 @@ const UI = {
       const [id,delta]=x.split(':'),at=(G.p.research&&G.p.research.targets||[]).indexOf(id);
       result=researchTarget(G.p,id,'move',at+Number(delta));
     }else if(researchValidTech(x)){
-      s.focus=x;s.tab=TECHS[x].b;
+      if(s.focus!==x)s.detailOpen=false;s.focus=x;s.tab=TECHS[x].b;
       if(action==='scienceNode'||action==='scienceRemove'){if(!G.p.techs[x])result=researchTarget(G.p,x);}
       else if(action==='scienceFocus')focus=true;
     }
     if(result&&!result.ok)say(result.why,'war');
+    if(action==='scienceRoute'||action==='scienceFocus')s.detailOpen=true;
     this.openScience(focus);
+    if(action==='scienceRoute'||action==='scienceFocus'){const d=$('diploPane').querySelector('.scDetail');if(d)d.open=true;}
   },
   refreshScience(){
     const pane=$('diploPane');
@@ -3260,8 +3277,14 @@ const UI = {
         (t==='haracguzar'?' · vergi '+Math.round(o.vassalPaid||0)+'/ay':''));
     } else if (isVassal(o)) tags.push('⛓ '+this.diploName(o.overlord)+' vasalı');
     if (isVassal(e)&&e.overlord===o.id) tags.push('⛓ SENYÖRÜN · öfken '+Math.round(e.vassalAnger||0)+'/100');
-    if (embargoOn(e,o.id)) tags.push('🚫 Sen ambargo uyguluyorsun');
-    if (embargoOn(o,e.id)) tags.push('🚫 Sana ambargo uyguluyor');
+    if (embargoOn(e,o.id)) tags.push(isPariah(o)?'⛔ Konsey yaptırımı: ticaret yasak':'🚫 Sen ambargo uyguluyorsun');
+    if (embargoOn(o,e.id)) tags.push(isPariah(e)?'⛔ Konsey sana yaptırım uyguluyor':'🚫 Sana ambargo uyguluyor');
+    const sub=sovereignPair(e,o)?(o.overlord===e.id?o:e):null;
+    if(sub){const lord=overlordOf(sub),info=vassalLoyaltyInfo(sub);
+      tags.push('Sadakat '+vassalLoyalty(sub)+'/100 · bağımsızlık arzusu '+Math.round(sub.vassalAnger||0)+'/100 · '+(info.hiz>=0?'+':'')+info.hiz.toFixed(2)+'/ay');
+      tags.push('Vasalın senyöre ilişkisi '+Math.round(sub.rel[lord.id]||0)+' · emir yükü '+Object.keys(sub.edicts||{}).length);
+      tags.push('İlişki sadakati etkiler; bağımsızlık arzusu ayrıca güç, itibar ve süreye bağlıdır. Vasallık tek başına sınır izni vermez.');
+    }
     if (isPariah(o)) tags.push('⛔ Galaktik parya');
     return `<div class="dcTreaties">${tags.length?tags.map(t=>'<span>'+esc(t)+'</span>').join(''):
       '<span>Yürürlükte ortak antlaşma yok</span>'}</div>`;
@@ -3411,7 +3434,7 @@ const UI = {
         h += `<button class="abtn" data-a="fedWarRequest" data-x="${o.id}" ${gate.ok?'':'disabled'}>⚖ SAVAŞ İZNİ ÖNER</button>
           <div class="mini">${esc(gate.ok ? 'Kabul savaş başlatmaz; hedefi sonra seçersin.' : gate.why)}</div>`;
       }
-      if (!blocked) h+=`<button class="abtn" data-a="${embargoOn(e,o.id)?'unembargo':'embargo'}" data-x="${o.id}">
+      if (!blocked && !protectedDiplomaticPair(e,o) && !(typeof pariahMap==='function'&&(pariahMap()||{})[o.id])) h+=`<button class="abtn" data-a="${embargoOn(e,o.id)?'unembargo':'embargo'}" data-x="${o.id}">
         ${embargoOn(e,o.id)?'AMBARGOYU KALDIR':'AMBARGO UYGULA'}</button>`;
       h+='</details>';
     }
@@ -7768,15 +7791,7 @@ const UI = {
       `<div class="mhd"><span>KAYIT VE AYARLAR</span>
          <button class="riX" data-a="diagShow" title="Tanılama">🩺</button>
          <button class="riX" data-a="closem">✕</button></div>
-       <div class="mbd" id="cameraSettings" style="padding:10px 16px">
-        <div class="mini">GÖRÜNÜM / KAMERA</div>
-        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px">
-         <button class="abtn" style="min-height:44px" data-a="cameraFlat" aria-pressed="${View.tiltScale()===1}">Düz görünüm (2B)</button>
-         <button class="abtn" style="min-height:44px" data-a="cameraTilt" aria-pressed="${View.tiltScale()<1}">Hafif eğik</button>
-         <button class="abtn" style="min-height:44px" data-a="cameraReset">Kamera açısını sıfırla</button>
-         <button class="abtn" style="min-height:44px" data-a="cameraRotate" aria-pressed="${View.rotationEnabled}">İki parmakla döndürme: ${View.rotationEnabled?'Açık':'Kapalı'}</button>
-        </div>
-       </div>
+       <div class="mbd" style="padding:4px 16px"><button class="abtn" data-a="cameraReset">Kamerayı sıfırla</button></div>
        <div class="mbd" id="diagBox">Depolama sınanıyor…</div>
        <div class="mft">
         <button class="ch" data-a="mute"><div class="cht">${

@@ -1622,7 +1622,7 @@ function orbitForces(sys){
   const liste = orbitIndex()[sys.id];
   if (!liste) return out;
   for (const f of liste){
-    if (!f.ships.length) continue;
+    if (!f.ships.length || f.mv) continue;
     let o = out[f.e];
     if (!o) o = out[f.e] = {war:0, ground:0, wf:[], tf:[]};
     if (typeof isTransport === 'function' && isTransport(f)){
@@ -1684,7 +1684,48 @@ function bombardCatastrophe(sys, pl, byId){
   }
 }
 
+/* 94D: presentation reads actual stationary forces, never a synthetic progress timer. */
+function planetConflictStates(sys, viewer=G.p){
+  if(!sys||!viewer)return [];
+  const own=sys.planets.some(p=>p.col&&p.owner===viewer.id);
+  if(viewer.id===0&&!own&&!pVis(sys)&&!G.fleets.some(f=>f.e===0&&f.sys===sys.id&&!f.mv))return [];
+  const forces={};
+  for(const f of G.fleets){
+    if(f.sys!==sys.id||f.mv||!f.ships.length)continue;
+    const k=forces[f.e]||(forces[f.e]={war:0,ground:0});
+    if(isArmed(f))k.war+=fleetPower(f);if(isTransport(f))k.ground+=groundPower(f);
+  }
+  const out=[];
+  for(const pl of sys.planets){
+    if(!pl.col)continue;
+    for(const [id,k] of Object.entries(forces)){
+      const atk=G.emps[id];if(!atk||atk.dead||+id===pl.owner||!atk.wild&&!atk.war[pl.owner])continue;
+      if(own&&!pVis(sys)&&pl.owner!==viewer.id&&+id!==viewer.id)continue;
+      const invasion=k.ground>0&&(pl.col.shield||0)<=5;
+      if(invasion||k.war>0)out.push({planet:pl.i,attacker:+id,defender:pl.owner,kind:invasion?'invasion':'bombardment',shield:pl.col.shield||0,garrison:pl.col.garrison||0,siege:pl.col.siege||0});
+    }
+  }
+  return out;
+}
+function planetConflictNotices(){
+  for(const sys of G.sys){
+    const rows=planetConflictStates(sys);
+    for(const pl of sys.planets){
+      if(!pl.col)continue;
+      const c=pl.col,now=rows.filter(x=>x.planet===pl.i),old=c.conflictNotice;
+      const key=now.map(x=>x.attacker+':'+x.defender+':'+x.kind).sort().join('|');
+      if(key&&(!old||old.key!==key)){
+        if(now.some(x=>x.attacker===0||x.defender===0))say((now.some(x=>x.kind==='invasion')?'İŞGAL BAŞLADI — ':'BOMBARDIMAN BAŞLADI — ')+pl.name+' · '+sys.name,'war');
+        c.conflictNotice={key,owner:pl.owner,player:now.some(x=>x.attacker===0||x.defender===0)};
+      }else if(!key&&old){
+        if(old.player&&old.owner===pl.owner)say('SALDIRI DURDU / PÜSKÜRTÜLDÜ — '+pl.name+' · '+sys.name,'win');
+        delete c.conflictNotice;
+      }
+    }
+  }
+}
 function invasionTick(){
+  planetConflictNotices();
   _orbitIdxAt = -1;                      // FAZ 41: indeksi bu ay için tazele
   for (const sys of G.sys){
     /* Hızlı eleme: koloni yoksa ya da filo yoksa geç */
@@ -1919,12 +1960,7 @@ function invasionTick(){
                saklıyor, sonra geri koyuyoruz. */
             const popKoru = col.pop;
             const binaKoru = JSON.parse(JSON.stringify(col.b));
-            if (typeof captureSystem === 'function' && sys.owner !== +id)
-              captureSystem(sys, +id);
-            else if (typeof planetFlip === 'function'){
-              planetFlip(pl); territoryOwnerSet(pl, +id);
-              warLedgerCapture(sys,pl.i,eskiSahip,+id);
-            }
+            captureSystem(sys,+id,'conquest',pl);
             col.pop = popKoru;
             col.b = binaKoru;
             col.stab = 35;
@@ -1934,11 +1970,6 @@ function invasionTick(){
             pl.recent_conquest = 36;         // FAZ 27: dokunulmazlık
             pl.martial_law = 24;             // FAZ 29: sıkıyönetim
             if (typeof recordFall === 'function') recordFall('temiz');
-            if (+id === 0)
-              say('TEMİZ İŞGAL — ' + (col.name || pl.name) + ' sağlam ele geçirildi · ' +
-                  'garnizon ' + col.garrison, 'win');
-            else if (eskiSahip === 0)
-              say((col.name || pl.name) + ' işgal edildi — ' + atk.name, 'war');
             break;                     // bu gezegen için tur bitti
           }
         }
@@ -1978,12 +2009,7 @@ function invasionTick(){
           }
 
           const eski = pl.owner;
-          if (typeof captureSystem === 'function' && sys.owner !== +id)
-            captureSystem(sys, +id);
-          else if (typeof planetFlip === 'function'){
-            planetFlip(pl); territoryOwnerSet(pl, +id);
-            warLedgerCapture(sys,pl.i,eski,+id);
-          }
+          captureSystem(sys,+id,'conquest',pl);
           /* Sahiplik gerçekten geçmediyse enkaz üretme — döngünün
              ikinci kapısı. */
           if (pl.owner !== +id){ col.siege = 0; break; }
@@ -1994,6 +2020,7 @@ function invasionTick(){
       }
     }
   }
+  planetConflictNotices();
 }
 
 

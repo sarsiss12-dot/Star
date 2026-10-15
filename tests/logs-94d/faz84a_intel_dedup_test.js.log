@@ -1,0 +1,104 @@
+
+A. SÖZDİZİMİ VE BÜTÜNLÜK
+  ✓ node --check ai.js
+  ✓ node --check audio.js
+  ✓ node --check combat.js
+  ✓ node --check diplomacy.js
+  ✓ node --check economy.js
+  ✓ node --check main.js
+  ✓ node --check map.js
+  ✓ node --check sw.js
+  ✓ node --check ui.js
+  ✓ manifest.json geçerli
+  ✓ yükleme sırası değişmedi
+  ✓ anahtar: yildiz:save
+  ✓ anahtar: yh_audio
+  ✓ anahtar: yh_advisor
+  ✓ anahtar: yh_autoev
+  ✓ anahtar: yh_bg
+  ✓ anahtar: yh_radar
+  ✓ anahtar: yh_templates
+  ✓ anahtar: __yh_probe
+  ✓ anahtar: __yh_diag
+  ✓ sw cache = 'stars-v94d'
+  ✓ SITUATIONS kataloğu duruyor
+  ✓ situationsTick tanımı duruyor
+  ✓ situationsTick çağrısı PASİF (yorumlu)
+  ✓ DURUMLAR sekmesi gizli
+  ✓ 200 ayda situation tetiklenmedi — 0
+
+B. STATİK TEKRAR DENETİMİ
+  ✓ GİZLİ DİPLOMATİK GEÇMİŞ: tek render — 1 adet
+  ✓ NET İLİŞKİ TABLOSU: tek render — 1 adet
+  ✓ İSYANI KIŞKIRT: tek render — 1 adet
+  ✓ case 'incite': tam bir adet — 1 adet
+  ✓ INCITE_STAB fallback kaldırıldı
+  ✓ INCITE_HEADSTART kaldırıldı
+  ✓ 100 Etki fallback kaldırıldı
+  ✓ UI kanonik sabitleri kullanıyor
+
+C. İSTİHBARAT SEVİYE MATRİSİ
+  ✓ kurulum
+     seviye | geçmiş | tablo | kışkırt
+       0    |   0    |   0   |    1
+       1    |   0    |   0   |    1
+       2    |   1    |   0   |    1
+       3    |   1    |   1   |    1
+  ✓ seviye 0: gizli geçmiş YOK — 0
+  ✓ seviye 0: net tablo YOK — 0
+  ✓ seviye 1: gizli geçmiş YOK — 0
+  ✓ seviye 1: net tablo YOK — 0
+  ✓ seviye 2: geçmiş TAM BİR kez — 1
+  ✓ seviye 2: sayısal tablo YOK — 0
+  ✓ seviye 3: geçmiş TAM BİR kez — 1
+  ✓ seviye 3: tablo TAM BİR kez — 1
+  ✓ kışkırt BAŞLIĞI tek kez — 1 başlık
+  ✓ seviye 2: kilit açıklaması var — var
+  ✓ boş hafızada hata atmıyor — ok:7716
+  ✓ akordiyon anahtarları benzersiz — 4 grup
+  ✓ anahtar devlet ID (sayısal) — true
+  ✓ akordiyon açılıyor
+  ✓ akordiyon kapanıyor
+
+D. KIŞKIRTMA
+  ✓ INCITE_COST = 120 — 120
+  ✓ INCITE_STAB_HIT = 25 — 25
+  ✓ INCITE_SEED = 10 — 10
+  ✓ INCITE_MONTHS = 12 — 12
+  ✓ ekranda maliyet doğru
+  ✓ ekranda istikrar etkisi doğru
+  ✓ ekranda sayaç doğru
+  ✓ ekranda süre doğru
+  ✓ her hedef için TEK buton — 1 buton / 1 hedef
+  ✓ bir dokunuş → TAM BİR inciteRebellion — 1 çağrı
+  ✓ etki tam 120 azaldı (iki kez değil) — 120 etki
+  ✓ zorlanmış başarı gerçekleşti — basarili=true
+  ✓ istikrar −25 uygulandı — anlık düşüş 0 · unrest.hit 25
+  ✓ sayaç +10 — 10
+  ✓ huzursuzluk 12 ay (unrest.left) — 12
+  ✓ başarı: bildirim tekrarı yok (motor bildiriyor) — say/art = 1/0
+  ✓ ifşa: tek olay görseli — say/art = 1/0
+
+E. RENDER SAFLIĞI
+  ✓ 80 render sonrası OYUN VERİSİ değişmedi — birebir
+  ✓ render kaynak değiştirmedi
+  ✓ render istihbarat seviyesi değiştirmedi
+  ✓ render hafıza değiştirmedi
+  ✓ render ilişki değiştirmedi
+  ✓ render hedef değiştirmedi
+
+F. REGRESYON
+  ✓ 120 ay + kaydet/yükle — ok|function|true|0
+  ✓ UI.tab hâlâ function — function
+  ✓ leaderPool saf kaldı — true
+  ✓ situation pasif kaldı — 0
+  ✓ forceRedraw tek kurtarma hattında
+
+G. DOSYA SINIRI
+  ✓ audio.js byte-for-byte aynı — 804226980179698a
+  ✓ manifest.json byte-for-byte aynı — 6b8305490e9a55e9
+
+══════════════════════════════════════════
+  GEÇEN: 80   KALAN: 0
+══════════════════════════════════════════
+

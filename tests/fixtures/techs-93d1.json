@@ -1,0 +1,544 @@
+{
+  "f_reaktor": {
+    "b": "fiz",
+    "t": 1,
+    "n": "Verimli Reaktörler",
+    "c": 580,
+    "e": {
+      "eneMul": 0.15
+    },
+    "d": "+%15 enerji üretimi"
+  },
+  "f_lazer1": {
+    "b": "fiz",
+    "t": 1,
+    "n": "Lazer Bataryaları",
+    "c": 670,
+    "sway": {
+      "f_kalkan1": 1.2
+    },
+    "e": {
+      "dmgMul": 0.12
+    },
+    "d": "+%12 gemi hasarı"
+  },
+  "f_kalkan1": {
+    "b": "fiz",
+    "t": 2,
+    "n": "Deflektör Kalkanları",
+    "c": 1300,
+    "sway": {
+      "f_lazer2": 1.15
+    },
+    "e": {
+      "shMul": 0.2
+    },
+    "d": "+%20 kalkan",
+    "r": [
+      "f_lazer1"
+    ]
+  },
+  "f_sensor": {
+    "b": "fiz",
+    "t": 2,
+    "n": "Derin Uzay Sensörleri",
+    "c": 1190,
+    "e": {
+      "sensor": 1
+    },
+    "d": "+1 sistem menzil algılama",
+    "r": [
+      "f_reaktor"
+    ]
+  },
+  "f_lazer2": {
+    "b": "fiz",
+    "t": 3,
+    "n": "Parçacık Topları",
+    "c": 2840,
+    "e": {
+      "dmgMul": 0.18
+    },
+    "d": "+%18 gemi hasarı",
+    "r": [
+      "f_lazer1"
+    ]
+  },
+  "f_kalkan2": {
+    "b": "fiz",
+    "t": 3,
+    "n": "Hiperkalkan Matrisi",
+    "c": 3320,
+    "e": {
+      "shMul": 0.25
+    },
+    "d": "+%25 kalkan",
+    "r": [
+      "f_kalkan1"
+    ]
+  },
+  "f_delici": {
+    "b": "fiz",
+    "t": 3,
+    "n": "Kalkan Delici Işınlar",
+    "c": 3520,
+    "sway": {
+      "f_kalkan2": 1.25
+    },
+    "e": {
+      "eShMul": -0.28
+    },
+    "d": "DÜŞMAN kalkanı -%28",
+    "r": [
+      "f_kalkan1"
+    ]
+  },
+  "f_harp": {
+    "b": "fiz",
+    "t": 4,
+    "n": "Elektronik Harp",
+    "c": 6390,
+    "e": {
+      "eDmgMul": -0.2
+    },
+    "d": "DÜŞMAN hasarı -%20",
+    "r": [
+      "f_lazer2",
+      "f_sensor"
+    ]
+  },
+  "f_tunel": {
+    "b": "fiz",
+    "t": 4,
+    "n": "Sıfır Nokta Enerjisi",
+    "c": 7500,
+    "e": {
+      "eneMul": 0.3,
+      "araMul": 0.1
+    },
+    "d": "+%30 enerji, +%10 araştırma",
+    "r": [
+      "f_reaktor",
+      "f_kalkan2"
+    ]
+  },
+  "f_sing": {
+    "b": "fiz",
+    "t": 5,
+    "n": "Tekillik Silahları",
+    "c": 16180,
+    "e": {
+      "dmgMul": 0.3,
+      "eShMul": -0.15
+    },
+    "d": "+%30 hasar, düşman kalkanı -%15",
+    "r": [
+      "f_lazer2",
+      "f_delici"
+    ]
+  },
+  "t_tarim": {
+    "b": "top",
+    "t": 1,
+    "n": "Tarım Devrimi",
+    "c": 520,
+    "e": {
+      "yiyMul": 0.2
+    },
+    "d": "+%20 yiyecek"
+  },
+  "t_yonetim": {
+    "b": "top",
+    "t": 1,
+    "n": "Merkezî Yönetim",
+    "c": 630,
+    "e": {
+      "etkFlat": 1
+    },
+    "d": "+1 etki/ay"
+  },
+  "t_koloni": {
+    "b": "top",
+    "t": 2,
+    "n": "Kolonizasyon Protokolü",
+    "c": 1250,
+    "sway": {
+      "t_doktrin": 1.2,
+      "t_genetik": 0.85
+    },
+    "e": {
+      "colCost": -0.25,
+      "growMul": 0.15
+    },
+    "d": "Koloni gemisi -%25, büyüme +%15",
+    "r": [
+      "t_tarim"
+    ]
+  },
+  "t_diplo": {
+    "b": "top",
+    "t": 2,
+    "n": "Diplomatik Teamüller",
+    "c": 1340,
+    "e": {
+      "dipMul": 0.3
+    },
+    "d": "+%30 diplomatik ikna",
+    "r": [
+      "t_yonetim"
+    ]
+  },
+  "t_doktrin": {
+    "b": "top",
+    "t": 2,
+    "n": "Askerî Doktrin",
+    "c": 1430,
+    "sway": {
+      "t_koloni": 1.2,
+      "m_muhrip": 0.85
+    },
+    "e": {
+      "capFlat": 24
+    },
+    "d": "+24 filo kapasitesi"
+  },
+  "t_habitat": {
+    "b": "top",
+    "t": 2,
+    "n": "Yörünge Habitatları",
+    "c": 1340,
+    "e": {},
+    "unlockHab": 1,
+    "d": "Yaşanamaz dünyalara habitat kurulabilir (küçük, sınırlı koloni)",
+    "r": [
+      "t_koloni"
+    ]
+  },
+  "t_terra1": {
+    "b": "top",
+    "t": 3,
+    "n": "İklim Mühendisliği",
+    "c": 2610,
+    "e": {},
+    "terra": 1,
+    "d": "Gezegenleri terraform etmeye başla (+12 yaşanabilirlik / kademe)",
+    "r": [
+      "t_habitat"
+    ]
+  },
+  "t_terra2": {
+    "b": "top",
+    "t": 4,
+    "n": "Gezegen Şekillendirme",
+    "c": 5950,
+    "e": {},
+    "terra": 2,
+    "d": "Terraform 3. kademeye kadar sürdürülebilir",
+    "r": [
+      "t_terra1"
+    ]
+  },
+  "t_genetik": {
+    "b": "top",
+    "t": 3,
+    "n": "Genetik Uyarlama",
+    "c": 3070,
+    "e": {
+      "habFlat": 15
+    },
+    "d": "+%15 yaşanabilirlik",
+    "r": [
+      "t_koloni"
+    ]
+  },
+  "t_moral": {
+    "b": "top",
+    "t": 3,
+    "n": "Birlik Ritüelleri",
+    "c": 2840,
+    "e": {
+      "etkFlat": 1.5,
+      "stab": 10
+    },
+    "d": "+1.5 etki, +10 istikrar",
+    "r": [
+      "t_yonetim"
+    ]
+  },
+  "t_lojistik": {
+    "b": "top",
+    "t": 4,
+    "n": "Galaktik Lojistik",
+    "c": 5930,
+    "e": {
+      "capFlat": 40,
+      "upMul": -0.15
+    },
+    "d": "+40 kapasite, bakım -%15",
+    "r": [
+      "t_doktrin"
+    ]
+  },
+  "t_yukselis": {
+    "b": "top",
+    "t": 4,
+    "n": "Yükseliş Teorisi",
+    "c": 7040,
+    "e": {
+      "araMul": 0.2,
+      "growMul": 0.2
+    },
+    "d": "+%20 araştırma ve büyüme",
+    "r": [
+      "t_genetik",
+      "t_moral"
+    ]
+  },
+  "t_federasyon": {
+    "b": "top",
+    "t": 5,
+    "n": "Federasyon Anayasası",
+    "c": 15170,
+    "e": {
+      "dipMul": 0.4,
+      "etkFlat": 3
+    },
+    "d": "+%40 ikna, +3 etki",
+    "r": [
+      "t_diplo",
+      "t_lojistik"
+    ]
+  },
+  "m_robot": {
+    "b": "muh",
+    "t": 1,
+    "n": "Robotik İşçiler",
+    "c": 540,
+    "sway": {
+      "t_tarim": 1.18,
+      "m_dokum": 0.88
+    },
+    "e": {
+      "minMul": 0.2
+    },
+    "d": "+%20 mineral"
+  },
+  "m_zirh1": {
+    "b": "muh",
+    "t": 1,
+    "n": "Sıkıştırılmış Zırh",
+    "c": 650,
+    "e": {
+      "hullMul": 0.15
+    },
+    "d": "+%15 gövde"
+  },
+  "m_muhrip": {
+    "b": "muh",
+    "t": 2,
+    "n": "Muhrip Gövdesi",
+    "c": 1250,
+    "sway": {
+      "m_zirh2": 0.88
+    },
+    "e": {},
+    "unlock": "muh",
+    "d": "Muhrip sınıfı açılır",
+    "r": [
+      "m_zirh1"
+    ]
+  },
+  "m_dokum": {
+    "b": "muh",
+    "t": 2,
+    "n": "Gelişmiş Dökümhane",
+    "c": 1210,
+    "sway": {
+      "f_kalkan1": 1.15,
+      "m_tezgah": 0.85
+    },
+    "e": {
+      "alaMul": 0.45
+    },
+    "d": "+%45 alaşım",
+    "r": [
+      "m_robot"
+    ]
+  },
+  "m_warp": {
+    "b": "muh",
+    "t": 2,
+    "n": "Warp Sürücüleri",
+    "c": 1340,
+    "e": {
+      "spdMul": 0.25
+    },
+    "d": "+%25 filo hızı"
+  },
+  "m_zirh2": {
+    "b": "muh",
+    "t": 3,
+    "n": "Neutronyum Plaka",
+    "c": 3000,
+    "e": {
+      "hullMul": 0.22
+    },
+    "d": "+%22 gövde",
+    "r": [
+      "m_zirh1"
+    ]
+  },
+  "m_kruvazor": {
+    "b": "muh",
+    "t": 3,
+    "n": "Kruvazör Gövdesi",
+    "c": 3390,
+    "e": {},
+    "unlock": "kru",
+    "d": "Kruvazör sınıfı açılır",
+    "r": [
+      "m_muhrip"
+    ]
+  },
+  "m_tezgah": {
+    "b": "muh",
+    "t": 3,
+    "n": "Otomatik Tezgâhlar",
+    "c": 3160,
+    "e": {
+      "buildMul": 0.3,
+      "minMul": 0.12
+    },
+    "d": "İnşa +%30 hızlı, +%12 mineral",
+    "r": [
+      "m_dokum"
+    ]
+  },
+  "m_zirhli": {
+    "b": "muh",
+    "t": 4,
+    "n": "Zırhlı Gövdesi",
+    "c": 8380,
+    "e": {},
+    "unlock": "zir",
+    "d": "Zırhlı sınıfı açılır",
+    "r": [
+      "m_kruvazor",
+      "m_zirh2"
+    ]
+  },
+  "m_nanit": {
+    "b": "muh",
+    "t": 5,
+    "n": "Nanit Onarım Sistemleri",
+    "c": 15660,
+    "e": {
+      "hullMul": 0.3,
+      "eDmgMul": -0.1
+    },
+    "d": "+%30 gövde, düşman hasarı -%10",
+    "r": [
+      "m_zirhli"
+    ]
+  },
+  "f_boyut": {
+    "b": "fiz",
+    "t": 6,
+    "n": "Boyutlar Arası Fizik",
+    "c": 36080,
+    "e": {
+      "dmgMul": 0.35,
+      "shMul": 0.25
+    },
+    "d": "+%35 hasar, +%25 kalkan",
+    "r": [
+      "f_sing"
+    ]
+  },
+  "f_zaman": {
+    "b": "fiz",
+    "t": 6,
+    "n": "Zaman Bükücü Alanlar",
+    "c": 50600,
+    "e": {
+      "spdMul": 0.4,
+      "eDmgMul": -0.15
+    },
+    "d": "+%40 filo hızı, düşman hasarı −%15",
+    "r": [
+      "f_boyut"
+    ]
+  },
+  "t_yukselen": {
+    "b": "top",
+    "t": 6,
+    "n": "Yükselen Uygarlık",
+    "c": 37840,
+    "e": {
+      "araMul": 0.25,
+      "growMul": 0.2,
+      "stab": 12
+    },
+    "d": "+%25 araştırma, +%20 nüfus, +12 istikrar",
+    "r": [
+      "t_federasyon"
+    ]
+  },
+  "t_galaktik": {
+    "b": "top",
+    "t": 6,
+    "n": "Galaktik Yönetişim",
+    "c": 52360,
+    "e": {
+      "etkFlat": 5,
+      "dipMul": 0.35,
+      "capFlat": 30
+    },
+    "d": "+5 etki, +%35 ikna, +30 filo kapasitesi",
+    "r": [
+      "t_yukselen"
+    ]
+  },
+  "m_kuantum": {
+    "b": "muh",
+    "t": 6,
+    "n": "Kuantum Tersaneler",
+    "c": 38720,
+    "e": {
+      "buildMul": 0.45,
+      "alaMul": 0.5
+    },
+    "d": "İnşa +%45, alaşım +%50",
+    "r": [
+      "m_nanit"
+    ]
+  },
+  "m_yildiz": {
+    "b": "muh",
+    "t": 6,
+    "n": "Yıldız Mühendisliği",
+    "c": 56320,
+    "e": {
+      "hullMul": 0.35,
+      "eneMul": 0.35
+    },
+    "d": "+%35 gövde, +%35 enerji",
+    "r": [
+      "m_kuantum"
+    ]
+  },
+  "m_gaia": {
+    "b": "muh",
+    "t": 6,
+    "n": "Gaia Mühendisliği",
+    "c": 62400,
+    "e": {
+      "growMul": 0.2,
+      "yiyMul": 0.25
+    },
+    "d": "+%20 büyüme, +%25 yiyecek · parçalanmış dünyalar TERRAFORM edilebilir",
+    "r": [
+      "m_yildiz"
+    ]
+  }
+}

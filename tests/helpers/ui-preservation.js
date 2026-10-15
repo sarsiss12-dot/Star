@@ -9,6 +9,6 @@ exports.isReviewedUI=source=>{
  const marker='/* END FAZ 93D SCIENCE */\n',last=source.indexOf(marker,start);
  if(start<0||last<0)return false;
  const end=last+marker.length;
- return hash(source.slice(start,end))==='d13aa74046e847dec41fbf8b69326be6cbe124530ca65774fc4a01459969ca0c' &&
+ return hash(source.slice(start,end))==='34e939ab23c375214b1adf76c6d892dc2a2c9761cca678c169e7ba7cb7557696' &&
    hash(source.slice(0,start)+source.slice(end))==='d85ef126bdfe642ff9e36e0d2490b271c9e4caf63a903d312082e9abe59a8e41';
 };

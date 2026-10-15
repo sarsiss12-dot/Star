@@ -1,0 +1,40 @@
+✓ stealTech basari oyuncu: gerçek etki, tek bedel ve iki bakış açısı
+✓ stealTech basari AI→oyuncu: gerçek etki, tek bedel ve iki bakış açısı
+✓ stealTech basari AI→AI: gerçek etki, tek bedel ve iki bakış açısı
+✓ stealTech ifsa oyuncu: gerçek etki, tek bedel ve iki bakış açısı
+✓ stealTech ifsa AI→oyuncu: gerçek etki, tek bedel ve iki bakış açısı
+✓ stealTech ifsa AI→AI: gerçek etki, tek bedel ve iki bakış açısı
+✓ stealTech sonucsuz oyuncu: gerçek etki, tek bedel ve iki bakış açısı
+✓ stealTech sonucsuz AI→oyuncu: gerçek etki, tek bedel ve iki bakış açısı
+✓ stealTech sonucsuz AI→AI: gerçek etki, tek bedel ve iki bakış açısı
+✓ incite basari oyuncu: gerçek etki, tek bedel ve iki bakış açısı
+✓ incite basari AI→oyuncu: gerçek etki, tek bedel ve iki bakış açısı
+✓ incite basari AI→AI: gerçek etki, tek bedel ve iki bakış açısı
+✓ incite ifsa oyuncu: gerçek etki, tek bedel ve iki bakış açısı
+✓ incite ifsa AI→oyuncu: gerçek etki, tek bedel ve iki bakış açısı
+✓ incite ifsa AI→AI: gerçek etki, tek bedel ve iki bakış açısı
+✓ incite sonucsuz oyuncu: gerçek etki, tek bedel ve iki bakış açısı
+✓ incite sonucsuz AI→oyuncu: gerçek etki, tek bedel ve iki bakış açısı
+✓ incite sonucsuz AI→AI: gerçek etki, tek bedel ve iki bakış açısı
+✓ stealTech eski hedef: ret; masraf, RNG veya kayıt yok
+✓ stealTech temassız: ret; masraf, RNG veya kayıt yok
+✓ stealTech ölü aktör: ret; masraf, RNG veya kayıt yok
+✓ stealTech kendisi: ret; masraf, RNG veya kayıt yok
+✓ stealTech yetersiz etki: ret; masraf, RNG veya kayıt yok
+✓ incite eski hedef: ret; masraf, RNG veya kayıt yok
+✓ incite temassız: ret; masraf, RNG veya kayıt yok
+✓ incite ölü aktör: ret; masraf, RNG veya kayıt yok
+✓ incite kendisi: ret; masraf, RNG veya kayıt yok
+✓ incite yetersiz etki: ret; masraf, RNG veya kayıt yok
+✓ stealTech AI aylık yolu tek actor kaydı ve tek kota tüketir
+✓ incite AI aylık yolu tek actor kaydı ve tek kota tüketir
+✓ stealTech oyuncu eylemi basari: iki dosyada aynı sonuç ve ücret
+✓ stealTech oyuncu eylemi ifsa: iki dosyada aynı sonuç ve ücret
+✓ stealTech oyuncu eylemi sonucsuz: iki dosyada aynı sonuç ve ücret
+✓ incite oyuncu eylemi basari: iki dosyada aynı sonuç ve ücret
+✓ incite oyuncu eylemi ifsa: iki dosyada aynı sonuç ve ücret
+✓ incite oyuncu eylemi sonucsuz: iki dosyada aynı sonuç ve ücret
+✓ eski özel kayıttan başarı uydurulmaz; ham anahtar veya TEMİZ etiketi yok
+✓ kayıtlar sınırlı ve v8 yükleme sonrası sonuç/ücret/anonimlik aynı
+✓ başarı kaydı, olay görseli hata atsa da gerçek etkiyle birlikte tutulur
+GEÇEN: 39 KALAN: 0

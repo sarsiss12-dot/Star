@@ -1,0 +1,58 @@
+✓ inverse transform and correct hit at angle 0
+✓ inverse transform and correct hit at angle 0.7
+✓ inverse transform and correct hit at angle 1.5707963267948966
+✓ inverse transform and correct hit at angle 3.141592653589793
+✓ inverse transform and correct hit at angle -2.4
+✓ single tap selects once and state is cleared
+✓ drag follows screen delta in rotated world and never taps
+✓ stationary two fingers cannot produce tap on release
+✓ pinch translates midpoint and preserves its world anchor
+✓ two-finger twist only zooms and preserves midpoint anchor
+✓ third finger, cancel and capture loss do not dispatch orders
+✓ release displacement without move event is not a tap
+✓ pointer input cancels animated centering, no post-release drift
+✓ wheel uses rotated cursor anchor; min/max remain finite
+✓ non-left mouse ignored while left drag works
+✓ canvas offset is removed from pointer and wheel positions
+✓ rotated viewport corners remain inside conservative culling box
+✓ rotated map edge can be centered without locking pan
+✗ focus/reset changes camera only and retains route intent AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- true
+
+    at eq (/workspace/scratch/342b17141b4a/faz94d/tests/faz94a_camera_test.js:6:29)
+    at /workspace/scratch/342b17141b4a/faz94d/tests/faz94a_camera_test.js:22:266
+    at test (/workspace/scratch/342b17141b4a/faz94d/tests/faz94a_camera_test.js:5:94)
+    at Object.<anonymous> (/workspace/scratch/342b17141b4a/faz94d/tests/faz94a_camera_test.js:22:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✓ rotated actual system tap and fleet targeting dispatch correct target
+✓ resize cancels gesture and preserves rotation without duplicate binding
+✗ invalid rotation recovers without touching simulation AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- true
+
+    at eq (/workspace/scratch/342b17141b4a/faz94d/tests/faz94a_camera_test.js:6:29)
+    at /workspace/scratch/342b17141b4a/faz94d/tests/faz94a_camera_test.js:25:138
+    at test (/workspace/scratch/342b17141b4a/faz94d/tests/faz94a_camera_test.js:5:94)
+    at Object.<anonymous> (/workspace/scratch/342b17141b4a/faz94d/tests/faz94a_camera_test.js:25:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✓ native raster rotation aligns image with world points
+✓ camera controls live in settings, never the left toolbar
+✓ stationary tap retains stacked fleet row picking
+✓ pinch while rally target armed cannot issue target order
+✓ native complete map draws all modes after rotation and resize
+GEÇEN: 25 KALAN: 2

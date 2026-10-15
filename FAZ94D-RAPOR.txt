@@ -1,0 +1,91 @@
+STARS — FAZ 94D TESLİM RAPORU
+Tarih: 15 Ekim 2026
+Build: 94d | Save: v8 | PWA: stars-v94d
+
+KANONİK KAYNAK
+stars-faz94c.zip
+SHA-256: 64196faf1d06da760a1d7c753506eb320982cdbb1808e14401351ddec3651f15
+SHA-256, ZIP CRC ve kaynak manifesti doğrulandı. GitHub kaynak alınmadı.
+
+TAMAMLANAN GELİŞTİRMELER
+- Bilim: yatay ön koşul ağacı, kompakt sabit üst alan, alt yatay kuyruk,
+  daraltılabilir ayrıntılar, ilk hedefin etkin adımı için ilerleme/ay tahmini.
+- Kamera: eğim, eksen sıkıştırması, açı ve iki parmakla döndürme kaldırıldı.
+  Tek 2B dönüşüm; pan/pinch, odaklama, seçim ve kurtarma korundu.
+- Diplomasi: vasal/hükümdar, müttefik ve federasyon içi bireysel ambargo
+  engeli, ilişki kurulduğunda temizlik ve eski kayıt onarımı; doğrudan
+  vasal savaşına seçim/uygulama engeli. İlişki, sadakat ve öfke ayrıldı.
+- Savaş: gerçek bombardıman/işgal için gezegen adını içeren harita ve
+  sistem paneli göstergeleri; başlangıç, durma ve fetih bildirimleri.
+- Sınır: organik etkinin dünya kenarında ve yarıçap kutusunda kesilmesi
+  düzeltildi. Sistem sahipliği kuralları değiştirilmedi.
+- Etiketler: seçili/oyuncu sistemlerine öncelik, çakışma halinde yer değiştirme
+  veya ikincil etiketi atlama; filo tıklama alanı çizilen etiketle eşleşiyor.
+
+KULLANICI EKRAN GÖRÜNTÜLERİNDEN DOĞRULANAN HATALAR
+Bu çalışma ortamında kullanıcı ekran görüntüsü veya ilgili oyun kaydı yoktu.
+Dolayısıyla görüntüden birebir doğrulama yapılmış gibi raporlanmıyor.
+Kullanıcının yazılı bulguları kod ve tekrarlanabilir senaryolarla incelendi.
+Vasal ambargosu 94C üzerinde yeniden üretildi. Sınır kesilmesi aynı hata
+sınıfıyla kodda ve kenar senaryosunda doğrulandı; kullanıcının sol kenarının
+kesin tohumu/konumu bilinmiyor. Mobil yerleşim kabulü aşağıdaki sınıra tabidir.
+
+KÖK NEDENLER
+1. Biat mevcut iki yönlü ambargo bayraklarını temizlemiyordu; yaptırım
+   kararında kalıcı siyasi bağ kontrolü eksikti.
+2. Gezegen işgali tüm sisteme captureSystem uyguluyordu. Bir hedefin yenilmesi
+   diğer savunulan kolonileri de devredebiliyordu. Karma sahipli bir sistemde
+   koloni indekslerinin güncellenmesi için de gezegen düzeyi yol eksikti.
+3. Yörünge kuvvet hesabına hareket eden filolar katılabiliyordu.
+4. Sınır gürültüsü 1,18 × yarıçapa çıkarken örnekleme kutusu 1 × yarıçapta
+   bitiyordu; bitmap ayrıca yalnız 0..dünya boyutundaydı.
+5. Bilim ekranının büyük dikey bölümleri aynı görünür alanı tüketiyordu.
+
+DÜZELTİLEN SORUNLAR
+Bireysel ambargo oluşum/uygulama/yükleme yolları, savaş sırasında eski sensör
+ve geçiş izinleri, geçersiz vasal savaşları ve ölü hükümdar bağları düzeltildi.
+Negatif ilişki zorla pozitife çevrilmedi. Konsey parya yaptırımı ayrı küresel
+kuraldır; bireysel ambargo kaldırma düğmesi olarak sunulmaz.
+Gezegen fetihleri yalnız hedef koloniyi devreder; diğer gezegenler korunur.
+Yolculuktaki filolar bombardıman kuvveti sayılmaz. Bildirim durumu Save v8'de
+korunur; görünmeyen üçüncü taraf işgalleri yeni işaretlerle ifşa edilmez.
+
+HENÜZ DÜZELTİLMEYEN / DOĞRULANMAYAN KONULAR
+- Fiziksel Android ve gerçek tarayıcı DOM yerleşimi bu ortamda doğrulanmadı.
+  Chromium kurulumu tek sınırlı denemede eksik indirme ile başarısız oldu.
+  Beş ekran ölçüsü testi CSS yapısı/boyut bütçesidir; ekran görüntüsü testi değil.
+- Her olası etik/doktrin/diplomasi birleşimi tüketilmedi. Mevcut federasyon,
+  antlaşma, vasal, savaş ve kayıt paketleri geçti.
+- Yeni kara savaşı, abluka ekonomisi veya bağımsız kalıcı işgal yönetimi yok.
+  Gerçek mevcut aylık bombardıman/çıkarma/fetih akışı gösteriliyor.
+- Çok uzun isimler ve aşırı kalabalık haritalar cihazda ayrıca gözlenmeli.
+- 94C AI strateji ve 94B tohum 99 bekleme riskleri ileri planda korunuyor.
+
+MOBİL PERFORMANS ETKİLERİ
+Yeni dış kütüphane/asset yok. Sınır bitmap'i 240×240 olarak kaldı; genişleyen
+worldRect örnekleme çözünürlüğünü bir miktar azaltabilir. Kamera affine
+hesapları kaldırıldı. Etiket yerleştirme görünür etiket sayısına bağlı iş ekler.
+100 sistem, 900×420 native Canvas, 40 kare/ölçüm, aynı düz görünüm:
+zoom 0,065: 94C medyan 4,03 ms / p95 6,46; 94D 3,52 / 4,15 ms.
+zoom 0,3:   94C medyan 3,64 ms / p95 4,67; 94D 3,11 / 4,16 ms.
+Bunlar host ölçümleridir; Android FPS veya genel hızlanma garantisi değildir.
+Her ölçümde RNG değişmedi. Ham kayıt tests/audit-94d/render-performance.json.
+
+TEST SONUÇLARI
+75 paket, 4.611 benzersiz başarılı kontrol, 0 kalan hata, 0 zaman aşımı.
+Tam regresyon bir kez tamamlandı; son iki diplomasi kapısı değişikliği sonrası
+etkilenen 94D (28/28) ve diplomasi merkezi (45/45) paketleri tekrar geçti.
+Kontroller tekrarlar nedeniyle toplam sayıya ikinci kez eklenmedi.
+Önceki 74 paket ve 4.583 kontrol korundu; 94D 28 yeni senaryo ekledi.
+Yeni yatay/2B beklentiler için eski kamera/bilim testleri güncellendi;
+başarısız kontroller silinmedi. İlk başarısız denemeler de günlüklerde duruyor.
+Son UI kapısı denemesinde null parya haritası 13 kontrolde hata verdi;
+null koruması düzeltildi, aynı 45 kontrolün tamamı geçti.
+Ayrıntı: TEST-SONUCLARI-94D.md ve tests/summary-94d.json.
+
+SONRAKİ FAZ ÖNERİLERİ
+95A stratejik AI/bilgi sınırları, güvenli keşif verimliliği, ekonomik darboğaz
+ve fraksiyon planlaması ayrı iş olarak korunur. Uzaktan inşa, Ekonomi ekranı,
+konvoylar, olay/sığınmacı tutarlılığı, portre/köken denetimi, karşı araştırma
+ve kodla doğal müzik ileri plandadır. Kanıtlanan yeni ticaret çoğalması ayrı
+öncelikli bakım işi olmalıdır. 95A başlatılmadı. GitHub'a yükleme yapılmadı.

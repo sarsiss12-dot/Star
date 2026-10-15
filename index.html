@@ -1062,6 +1062,50 @@ body.fauxFull canvas#map{width:100vw !important;height:100dvh !important}
 @media(min-width:1200px){#diploPane .scienceBox{height:92dvh;max-height:92dvh}}
 @media(max-height:500px){.scDetail{max-height:90px}.scSummary{padding-block:0}.scViewport{min-height:100px}.scQueueTrack{max-height:96px}.scTabs{padding-block:2px}}
 
+/* 94D: fixed header/footer, horizontal tree and bounded disclosures. */
+#diploPane .scienceBox{height:100%;max-height:100%;overflow:hidden;position:relative}
+.scienceBox .dpHd{padding:0 8px;height:36px;min-height:36px;font-size:12px}
+.scienceBox .dpHd .riX{width:44px;height:36px}
+.scienceRoot{overflow:hidden;position:relative}
+.scHeader{display:grid;grid-template-columns:minmax(0,1fr) auto;flex-shrink:0;gap:0 6px;align-items:center;padding:0 6px}
+.scTabs{padding:0;gap:2px}.scTabs button{padding:2px 5px}
+.scHeader>.scFilters{flex-wrap:nowrap;gap:2px}.scHeader>.scFilters button{padding:2px 7px}
+.scModeHelp{display:none}
+.scSummary{grid-column:1/-1;padding:0 4px;font-size:11px;position:relative;z-index:3}
+.scSummary summary{padding:2px 0;min-height:22px}
+.scSummary[open]{position:absolute;top:44px;left:6px;right:6px;background:#101e30;padding:4px 10px;border:1px solid #385170;max-height:130px;overflow:auto}
+.scTools{padding:0 6px;height:32px;min-height:32px}
+.scienceRoot .scTools button{min-height:30px;height:30px;min-width:44px}
+.scViewport,.scHistory{min-height:0;min-width:0;flex:1}
+.scienceRoot .scNode{width:180px;height:104px;padding:5px;gap:2px}
+.scNode b{font-size:12px;line-height:1.2}.scNode em{line-height:1.2}
+.scDetail{padding:0 8px;max-height:30px;min-height:30px;border-top:1px solid #304763}
+.scDetail summary{min-height:30px;line-height:30px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}
+.scDetail[open]{position:absolute;z-index:4;bottom:76px;right:6px;width:min(420px,calc(100% - 12px));max-height:55%;min-height:0;padding:4px 10px;border:1px solid #607b9c;box-shadow:0 4px 18px #0009}
+.scDetail[open] summary{white-space:normal;line-height:1.4;padding:5px 0}
+.scQueue{display:flex;min-width:0;height:72px;flex-shrink:0;overflow:hidden;background:#0c1625}
+.scienceRoot .scQueueToggle{width:72px;flex:0 0 72px;padding:3px;font-size:11px;text-align:center;white-space:normal}
+.scQueue:has(.scQueueToggle[aria-expanded="false"]){height:32px}
+.scQueueTrack{padding:3px;gap:4px;min-width:0;flex:1;max-height:none;touch-action:pan-x}
+.scGoal{flex:0 0 182px;position:relative;display:flex;align-items:stretch}
+.scienceRoot .scGoalFocus{width:100%;padding:3px 5px;font-size:11px;min-width:0}
+.scGoalFocus b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.scGoal small{font-size:10px;line-height:1.15}
+.scReorder{display:none}.scGoal:focus-within .scReorder{display:flex;position:absolute;inset:0;background:#15263e}
+.scGoal:focus-within .scGoalFocus{visibility:hidden}
+.scReorder button{min-width:44px}
+.scQueueEmpty{align-self:center;font-size:11px;margin:0;padding:0 6px}
+#sidebar .bd,#sidebar .mini,.dcTreaties span{overflow-wrap:anywhere}
+.dcTreaties{gap:3px}.dcTreaties span{padding:3px 5px}
+@media(max-width:620px){.scHeader{grid-template-columns:1fr}.scTabs button{min-height:36px}.scHeader>.scFilters button{flex:1;min-height:36px}.scSummary[open]{top:72px}}
+@media(max-height:380px) and (min-width:621px){.scienceBox .dpHd{height:30px;min-height:30px}.scDetail{max-height:26px;min-height:26px}.scDetail summary{line-height:26px;min-height:26px}.scQueue{height:64px}}
+/* Controls share the summary row instead of consuming a fourth row. */
+.scTools{position:absolute;right:6px;top:44px;z-index:3;height:32px}.scTools span{display:none}
+.scSummary summary{min-height:32px;line-height:28px;padding:0;max-width:calc(100% - 145px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.scSummary[open] summary{max-width:100%;white-space:normal}
+.scHeader{grid-template-columns:minmax(0,1fr) auto}
+.scHeader>.scFilters button,.scTabs button{min-height:44px}
+@media(max-width:620px){.scHeader{gap:2px;font-size:11px}.scTabs button{padding:2px;min-height:44px}.scHeader>.scFilters button{padding:2px 4px;min-height:44px}.scSummary[open]{top:44px}}
 /* END FAZ 93D SCIENCE */
 </style>
 </head>

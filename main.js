@@ -4371,12 +4371,12 @@ function territoryOwnerSet(place, owner){
   if (place.owner !== owner) place.shareRev = (place.shareRev || 0) + 1;
   place.owner = owner;
 }
-function captureSystem(sys, byId, cause = 'conquest'){
+function captureSystem(sys, byId, cause = 'conquest', onlyPlanet = null){
   /* FAZ 34: Hiçlik Sürüsü sistem sahiplenmez — yalnız yutar. */
   if (G.emps[byId] && G.emps[byId].crisisSide) return;
   const e = G.emps[byId];
-  const old = sys.owner;
-  const oldPlanets = sys.planets.filter(pl=>pl.col).map(pl=>({i:pl.i,owner:pl.owner}));
+  const oldSystem=sys.owner, old = onlyPlanet?onlyPlanet.owner:sys.owner;
+  const oldPlanets = sys.planets.filter(pl=>pl.col&&(!onlyPlanet||pl===onlyPlanet)).map(pl=>({i:pl.i,owner:pl.owner}));
   if (e && e.wild) return;                  // vahşiler sistem sahiplenmez
   if (old === byId) return;
   sys.shareRev = (sys.shareRev || 0) + 1;
@@ -4385,7 +4385,7 @@ function captureSystem(sys, byId, cause = 'conquest'){
   if (typeof recordFall === 'function' && !sys.planets.some(p2 => p2.col))
     recordFall('uzay');
   for (const pl of sys.planets){
-    if (!pl.col) continue;
+    if (!pl.col || onlyPlanet&&pl!==onlyPlanet) continue;
     const oe = G.emps[pl.owner];
     if (oe){
       oe.colonies = oe.colonies.filter(c => !(c.s===sys.id && c.p===pl.i));
@@ -4393,6 +4393,7 @@ function captureSystem(sys, byId, cause = 'conquest'){
     }
     if (typeof planetFlip === 'function') planetFlip(pl);
     territoryOwnerSet(pl, byId);
+    pl.col.lastWarResult={day:G.day,from:oldPlanets.find(x=>x.i===pl.i).owner,to:byId};
     pl.col.stab = 25;
     pl.recent_conquest = 36;          // FAZ 27: 3 yıl dokunulmazlık
     pl.martial_law = 24;              // FAZ 29: sıkıyönetim
@@ -4428,10 +4429,11 @@ function captureSystem(sys, byId, cause = 'conquest'){
     addExh(G.emps[old], byId, 6, 'sistem kaybı');
     addExh(e, old, 1.5);
   }
-  if (byId === 0) say('Sistem ele geçirildi — ' + sys.name, 'win');
-  else if (old === 0) say('Sistem kaybedildi — ' + sys.name, 'war');
+  const place=onlyPlanet?onlyPlanet.name+' · '+sys.name:sys.name;
+  if (byId === 0) say((onlyPlanet?'GEZEGEN ELE GEÇİRİLDİ — ':'Sistem ele geçirildi — ') + place, 'win');
+  else if (old === 0) say((onlyPlanet?'GEZEGEN KAYBEDİLDİ — ':'Sistem kaybedildi — ') + place, 'war');
   if (cause === 'conquest'){
-    warLedgerCapture(sys,null,old,byId);
+    if(oldSystem!==byId)warLedgerCapture(sys,null,oldSystem,byId);
     for (const pl of oldPlanets) warLedgerCapture(sys,pl.i,pl.owner,byId);
   }
   if (old >= 0 && G.emps[old].colonies.length === 0 &&
@@ -7649,6 +7651,7 @@ function applySaveData(d){
   G._loadWorldInfo = restorePoliticalWorld(d.world, d.v);
   restoreWarLedger(d.warLedger);
   restoreSettlements(d.settlements);
+  normalizeDiplomaticBindings(); // 94D: no RNG, time or relationship score changes
   loadCheckpoint('after:world');
   /* FAZ 85C: kriz dünyası — politik world'den SONRA (kriz konsey/
      federasyon durumuna bakabilsin), rebuildDerivedStateAfterLoad
@@ -8006,7 +8009,7 @@ function forceRedraw(sebep){
    Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
    Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
 /* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */
-const BUILD_ID = '94c';
+const BUILD_ID = '94d';
 const DIAG_MAX = 40;
 const DIAG = [];
 function logDiag(tur, mesaj){
@@ -8708,9 +8711,7 @@ document.addEventListener('pointerdown', ()=>{ LOOP.touch = performance.now(); }
 function camSane(){
   const c = View.cam;
   if (!c) return;
-  if(!Number.isFinite(c.a))c.a=0;
-  if(!Number.isFinite(c.tilt))c.tilt=1;
-  c.tilt=clamp(c.tilt,.65,1);
+  delete c.a; delete c.tilt; // 94D: obsolete view preferences
   const iyi = v => typeof v === 'number' && isFinite(v);
   if (!iyi(c.x) || !iyi(c.y) || !iyi(c.z)){
     console.warn('Kamera bozuldu, sıfırlanıyor:', c.x, c.y, c.z);

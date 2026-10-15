@@ -1,0 +1,38 @@
+[
+  {
+    "phase": "94c",
+    "zoom": 0.065,
+    "systems": 100,
+    "frames": 40,
+    "medianMs": 4.025823999999943,
+    "p95Ms": 6.455845000000068,
+    "rngUnchanged": true
+  },
+  {
+    "phase": "94c",
+    "zoom": 0.3,
+    "systems": 100,
+    "frames": 40,
+    "medianMs": 3.6423059999999623,
+    "p95Ms": 4.6728429999999435,
+    "rngUnchanged": true
+  },
+  {
+    "phase": "94d",
+    "zoom": 0.065,
+    "systems": 100,
+    "frames": 40,
+    "medianMs": 3.5190939999999955,
+    "p95Ms": 4.153534000000036,
+    "rngUnchanged": true
+  },
+  {
+    "phase": "94d",
+    "zoom": 0.3,
+    "systems": 100,
+    "frames": 40,
+    "medianMs": 3.1061620000000403,
+    "p95Ms": 4.162026000000196,
+    "rngUnchanged": true
+  }
+]

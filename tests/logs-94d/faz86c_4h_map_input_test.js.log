@@ -1,0 +1,92 @@
+
+A. DOSYA SINIRI VE KARANTİNA
+  ✓ node --check ai.js
+  ✓ node --check audio.js
+  ✓ node --check combat.js
+  ✓ node --check diplomacy.js
+  ✓ node --check economy.js
+  ✓ node --check main.js
+  ✓ node --check map.js
+  ✓ node --check sw.js
+  ✓ node --check ui.js
+  ✓ sw cache = 'stars-v94d'
+  ✓ sw KABUK/fetch/activate korundu
+  ✓ kayıt sürümü v:8 KALDI
+  ✓ depolama anahtarı: yildiz:save
+  ✓ depolama anahtarı: yh_audio
+  ✓ depolama anahtarı: yh_advisor
+  ✓ depolama anahtarı: yh_autoev
+  ✓ depolama anahtarı: yh_bg
+  ✓ depolama anahtarı: yh_radar
+  ✓ depolama anahtarı: yh_templates
+  ✓ depolama anahtarı: __yh_probe
+  ✓ depolama anahtarı: __yh_diag
+  ✓ lostpointercapture dinleniyor
+  ✓ resetGesture merkezî sıfırlayıcı var
+  ✓ bind() tekrarlı çağrıya karşı korumalı
+  ✓ setPointerCapture try/catch içinde
+  ✓ kesinti olayları bağlı (blur + visibilitychange)
+  ✓ yükleme sonrası jest sıfırlanıyor
+  ✓ yükleme sonrası seçim kimlikle yeniden bağlanıyor
+  ✓ 86C.4 aiProposeTerms korundu
+  ✓ 86C.4 NAP yolu korundu
+  ✓ 86C.4 DELTA karşı teklif korundu
+  ✓ 86C.4 diploBlocked kontrolleri korundu
+  ✓ SITUATIONS kataloğu duruyor
+  ✓ situationsTick tanımı duruyor
+  ✓ situationsTick çağrısı PASİF
+  ✓ DURUMLAR sekmesi gizli
+  ✓ audio.js byte-for-byte aynı — 804226980179698a
+  ✓ manifest.json byte-for-byte aynı — 6b8305490e9a55e9
+  ✓ map altyapısı sabit; hedef seçimi 93A referansında
+  ✓ 93D bilim CSS ve değişmeyen 93C HTML
+
+B. DOKUNMA / SÜRÜKLEME / PINCH AYRIMI
+  ✓ lostpointercapture dinleyicisi KAYITLI — 1
+  ✓ eşik altı tek temas → gezegen SEÇİMİ — 1
+  ✓ tek temasla sürükleme → harita KAYDIRMA
+  ✓ sürüklemede zoom DEĞİŞMEZ
+  ✓ sürükleme sonunda yanlışlıkla SEÇİM YAPILMAZ — 0
+  ✓ sürükleme sonrası bağımsız dokunuş ÇALIŞIR — 1
+  ✓ iki temas → pinch-zoom
+  ✓ pinch sonunda yanlışlıkla SEÇİM YAPILMAZ — 0
+  ✓ pinch'ten tek parmağa düşünce kamera SIÇRAMAZ — 8.3 birim
+  ✓ pinch tamamen bittikten sonra yeni dokunuş ÇALIŞIR — 1
+
+C. YAKALAMA KAYBI VE İPTAL (asıl kök neden)
+  ✓ lostpointercapture temas kaydını TEMİZLER — 0
+  ✓ yakalama kaybı sonrası sonraki dokunuş ÇALIŞIR (asıl hata) — 1
+  ✓ pointercancel temas kaydını temizler
+  ✓ iptal sonrası sonraki dokunuş çalışır
+  ✓ aynı temas için çok kapanış olayı durumu BOZMAZ
+  ✓ resetGesture pts ve pinch durumunu temizler
+  ✓ sıfırlama sonrası dokunuş çalışır
+  ✓ yakalama alındıysa serbest de bırakılıyor — {"cap":9,"rel":12}
+
+D. TEKRARLI BIND LISTENER BİRİKTİRMEZ
+  ✓ 3 kez bind() sonrası listener sayısı ARTMADI — {"down":1,"move":1,"up":1,"lost":1} → {"down":1,"move":1,"up":1,"lost":1}
+  ✓ kaydırma TEK katsayıda (çift işleme yok) — 66.67 ≈ 66.67
+  ✓ tekrarlı bind sonrası seçim çalışıyor — 1
+
+E. KAYIT YÜKLEME SONRASI HARİTA KULLANILABİLİR
+  ✓ yükleme öncesi yarım jest gerçekten vardı — 2
+  ✓ yükleme eski jest durumunu TEMİZLEDİ
+  ✓ seçim GÜNCEL oyun nesnesine yeniden bağlandı
+  ✓ geçerli kamera GEREKSİZ yere sıfırlanmadı
+  ✓ yükleme kalıcı oyun verisini bozmadı
+  ✓ yükleme SONRASI kaydırma çalışıyor
+  ✓ yükleme SONRASI gezegen seçimi çalışıyor — 1
+  ✓ yükleme SONRASI pinch çalışıyor
+  ✓ geçersiz seçim yüklemede temizlendi
+
+F. GEÇERSİZ KAYIT VE YENİDEN BOYUTLANDIRMA
+  ✓ geçersiz kayıt mevcut oyunu BOZMADI
+  ✓ başarısız yükleme sonrası seçim çalışıyor — 1
+  ✓ başarısız yükleme sonrası kaydırma çalışıyor
+  ✓ ekran merkezi dünya koordinatında kamera merkezine denk — {"x":2200,"y":2100,"camX":2200,"camY":2100}
+  ✓ boyut değişimi sonrası seçim çalışıyor — 1
+
+══════════════════════════════════════════
+  GEÇEN: 75   KALAN: 0
+══════════════════════════════════════════
+

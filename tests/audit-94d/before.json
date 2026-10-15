@@ -1,0 +1,58 @@
+{
+  "root": "/workspace/scratch/342b17141b4a/faz94c",
+  "embargoAfter": {
+    "player": true,
+    "vassal": true,
+    "effective": true
+  },
+  "borders": [
+    {
+      "seed": 11,
+      "home": {
+        "x": 2357.5535465538615,
+        "y": 295.57757893543794,
+        "reach": 430.0666419935816,
+        "extendsLeft": false
+      },
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "w": 4912,
+        "h": 4912
+      },
+      "panZoomKeepsGeometry": true
+    },
+    {
+      "seed": 99,
+      "home": {
+        "x": 1833.5788372164202,
+        "y": 1169.727373531367,
+        "reach": 430.0666419935816,
+        "extendsLeft": false
+      },
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "w": 4912,
+        "h": 4912
+      },
+      "panZoomKeepsGeometry": true
+    },
+    {
+      "seed": 404,
+      "home": {
+        "x": 2814.891076656917,
+        "y": 2817.570813029151,
+        "reach": 430.0666419935816,
+        "extendsLeft": false
+      },
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "w": 4912,
+        "h": 4912
+      },
+      "panZoomKeepsGeometry": true
+    }
+  ]
+}

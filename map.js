@@ -712,7 +712,7 @@ function territoryColonyOwners(s){
 }
 
 const View = {
-  cam:{x:2100, y:2100, z:.30, a:0, tilt:.78}, rotationEnabled:false, vw:0, vh:0, dpr:1,
+  cam:{x:2100, y:2100, z:.30}, vw:0, vh:0, dpr:1,
   sel:null, selSys:null, route:false, routed:false, hl:null, stars:[], flash:[],
   cv:null, g:null,
 
@@ -760,25 +760,20 @@ const View = {
     const h = G.sys[G.p.home];
     if (h){ this.cam.x = h.x; this.cam.y = h.y; this.cam.z = .40; }
   },
-  tiltScale(){return Number.isFinite(this.cam.tilt)?clamp(this.cam.tilt,.65,1):1;},
-  setTilt(on){this.resetGesture();this.cam.tilt=on?.78:1;this.cameraChanged();this.clampCam();},
-  // 94C: same affine transform for all drawing, picking and commands.
-  w2s(x,y){
-    const a=this.cam.a||0,c=Math.cos(a),s=Math.sin(a),dx=x-this.cam.x,dy=y-this.cam.y;
-    return {x:(dx*c-dy*s)*this.cam.z+this.vw/2,y:(dx*s+dy*c)*this.cam.z*this.tiltScale()+this.vh/2};
-  },
+  // 94D: one orthographic view; legacy angle/tilt fields never affect input.
+  w2s(x,y){return {x:(x-this.cam.x)*this.cam.z+this.vw/2,y:(y-this.cam.y)*this.cam.z+this.vh/2};},
   cameraChanged(){ this._pan=null;this.rowHits=[]; },
-  resetAngle(){ this.resetGesture();this.cam.a=0;this.cam.tilt=1;this.cameraChanged();this.clampCam(); },
+  resetCamera(){this.resetGesture();delete this.cam.a;delete this.cam.tilt;this.fit();this.cameraChanged();this.clampCam();},
   focusSelection(){
     const target=this.sel&&G.fleets.includes(this.sel)?this.sel:this.selSys;
     if(!target)return false;
     this.resetGesture();this.center(target.x,target.y);return true;
   },
   drawWorldImage(g,img){
-    const p=this.w2s(0,0);
+    const rect=img._worldRect||{x:0,y:0,w:G.W,h:G.H},p=this.w2s(rect.x,rect.y);
     g.save();
-    try{g.translate(p.x,p.y);g.scale(1,this.tiltScale());g.rotate(this.cam.a||0);
-      g.drawImage(img,0,0,G.W*this.cam.z,G.H*this.cam.z);
+    try{g.translate(p.x,p.y);
+      g.drawImage(img,0,0,rect.w*this.cam.z,rect.h*this.cam.z);
     }finally{g.restore();}
   },
   /* ═══ FAZ 47: YUMUŞAK KAYDIRMA + PING ═══
@@ -858,8 +853,8 @@ const View = {
        hesaplanmış rengi katıldı; mod ya da ilişki değişince
        anahtar doğal olarak değişip doku yeniden üretiliyor. */
     /* FAZ 86C.4H-R2: katman durumları da anahtara girer. */
-    let key = MAP_MODE + '|' + (RADAR_ON?'R':'-') + (LOGI_ON?'L':'-') + '|';
-    for (const s of G.sys) key += s.owner + ':' + ((s._reach|0)/10|0) + ':' + (pSeen(s)?1:0) + ',';
+    let key = G.W+','+G.H+'|'+MAP_MODE + '|' + (RADAR_ON?'R':'-') + (LOGI_ON?'L':'-') + '|';
+    for (const s of G.sys) key += s.x+':'+s.y+':'+s.owner + ':' + s._reach + ':' + (pSeen(s)?1:0) + ',';
     key += '|';
     for (const em of G.emps){
       if (em.dead || em.wild) continue;
@@ -889,7 +884,10 @@ const View = {
     const D = img.data;
     const own = new Int16Array(N*N).fill(-1);
     const best = new Float32Array(N*N).fill(2);
-    const cw = G.W/N, chh = G.H/N;
+    const pad=Math.max(40,...G.sys.filter(s=>s.owner>=0&&pSeen(s)).map(s=>(s._reach||0)*1.18+40));
+    const rect={x:-pad,y:-pad,w:G.W+pad*2,h:G.H+pad*2};
+    c._worldRect=rect;
+    const cw = rect.w/N, chh = rect.h/N;
 
     // yalnızca sahipli sistemleri gez (hızlı)
     const list = [];
@@ -898,10 +896,10 @@ const View = {
 
     for (const s of list){
       const r = s._reach;
-      const x0 = Math.max(0, Math.floor((s.x-r)/cw)),  x1 = Math.min(N-1, Math.ceil((s.x+r)/cw));
-      const y0 = Math.max(0, Math.floor((s.y-r)/chh)), y1 = Math.min(N-1, Math.ceil((s.y+r)/chh));
+      const x0 = Math.max(0, Math.floor((s.x-r*1.18-rect.x)/cw)),  x1 = Math.min(N-1, Math.ceil((s.x+r*1.18-rect.x)/cw));
+      const y0 = Math.max(0, Math.floor((s.y-r*1.18-rect.y)/chh)), y1 = Math.min(N-1, Math.ceil((s.y+r*1.18-rect.y)/chh));
       for (let y=y0;y<=y1;y++) for (let x=x0;x<=x1;x++){
-        const wx = (x+.5)*cw, wy = (y+.5)*chh;
+        const wx = rect.x+(x+.5)*cw, wy = rect.y+(y+.5)*chh;
         const dx = s.x-wx, dy = s.y-wy;
         const d = Math.sqrt(dx*dx+dy*dy);
         // organik kenar: yarıçapı gürültüyle dalgalandır (yuvarlak baloncuk hissini kırar)
@@ -960,10 +958,7 @@ const View = {
     this.bcache = c; this.bkey = key;
     return c;
   },
-  s2w(x,y){
-    const a=this.cam.a||0,c=Math.cos(a),s=Math.sin(a),dx=(x-this.vw/2)/this.cam.z,dy=(y-this.vh/2)/(this.cam.z*this.tiltScale());
-    return {x:dx*c+dy*s+this.cam.x,y:-dx*s+dy*c+this.cam.y};
-  },
+  s2w(x,y){return {x:(x-this.vw/2)/this.cam.z+this.cam.x,y:(y-this.vh/2)/this.cam.z+this.cam.y};},
 
   /* ---------- girdi ---------- */
   /* ═══════════════════════════════════════════════════════════════
@@ -1062,7 +1057,6 @@ const View = {
         s.blocked=true;
         const [a,b] = [...pts.values()];
         s.pinch = {d: Math.max(1,Math.hypot(a.x-b.x, a.y-b.y)), z: this.cam.z,
-                   angle:Math.atan2(b.y-a.y,b.x-a.x),a:this.cam.a||0,
                    anchor:this.s2w((a.x+b.x)/2,(a.y+b.y)/2)};
       }
     });
@@ -1077,7 +1071,6 @@ const View = {
            tekerlekle aynı sınıra çekildi (0.07 → 0.035). */
         const nz = clamp(s.pinch.z * (d/s.pinch.d), .035, 1.9);
         this.cam.z = nz;
-        if(this.rotationEnabled)this.cam.a=s.pinch.a+Math.atan2(b.y-a.y,b.x-a.x)-s.pinch.angle;
         const mid2 = this.s2w((a.x+b.x)/2, (a.y+b.y)/2);
         this.cam.x += s.pinch.anchor.x-mid2.x; this.cam.y += s.pinch.anchor.y-mid2.y;
         this.rowHits=[];
@@ -1189,7 +1182,7 @@ const View = {
 
   hit(sp){
     const w = this.s2w(sp.x, sp.y);
-    const R = 34; // hit radius stays in CSS pixels under tilt
+    const R = 34; // hit radius stays in CSS pixels at every zoom
     // dokunma menzilindeki TÜM filolar (üst üste duranlar dahil)
     const near = [];
     for (const f of G.fleets){
@@ -1478,9 +1471,8 @@ const View = {
     if (!c) return;
     const z = Math.max(.02, c.z || .4);
     /* Ekranın yarısı, dünya biriminde */
-    const co=Math.abs(Math.cos(c.a||0)),si=Math.abs(Math.sin(c.a||0));
-    const yariW = ((this.vw||900)*co+(this.vh||420)/this.tiltScale()*si)/(2*z);
-    const yariH = ((this.vw||900)*si+(this.vh||420)/this.tiltScale()*co)/(2*z);
+    const yariW = (this.vw||900)/(2*z);
+    const yariH = (this.vh||420)/(2*z);
     /* Pay: ekranın yarısı + küçük bir nefes payı.
        Taban 300 birim ki aşırı yakınlaştırmada da kenar okunsun. */
     const padX = Math.max(300, yariW * .95);
@@ -1522,10 +1514,9 @@ const View = {
        Maliyet: ULU galakside kare başına birkaç ek sistem taranır,
        ölçülebilir bir fark yok (aşağıdaki testte doğrulandı). */
     const RENDER_MARGIN = 300;               // ekran uzayında piksel
-    const pay = RENDER_MARGIN / (Math.max(.02, z)*this.tiltScale());   // dünya birimine çevir
-    const co=Math.abs(Math.cos(this.cam.a||0)),si=Math.abs(Math.sin(this.cam.a||0));
-    const halfW = (this.vw*co+this.vh/this.tiltScale()*si)/2/Math.max(.02,z);
-    const halfH = (this.vw*si+this.vh/this.tiltScale()*co)/2/Math.max(.02,z);
+    const pay = RENDER_MARGIN / Math.max(.02, z);   // dünya birimine çevir
+    const halfW = this.vw/2/Math.max(.02,z);
+    const halfH = this.vh/2/Math.max(.02,z);
     this.fx0 = this.cam.x - halfW - pay;
     this.fx1 = this.cam.x + halfW + pay;
     this.fy0 = this.cam.y - halfH - pay;
@@ -1573,6 +1564,28 @@ const View = {
     return regions;
   },
   // 91D.1: filoların dünya koordinatına bağlı, salt çizim katmanı.
+  placeMapLabel(x,y,w,h,blocks=this._mapLabelBlocks||[]){
+    for(const dy of [0,18,-18,36,-36,54]){
+      const b={x:clamp(x,4,Math.max(4,this.vw-w-4)),y:y+dy,w,h};
+      if(b.y<4||b.y+h>this.vh-4)continue;
+      if(!blocks.some(r=>b.x<r.x+r.w+2&&b.x+b.w+2>r.x&&b.y<r.y+r.h+2&&b.y+b.h+2>r.y)){blocks.push(b);return b;}
+    }
+    return null;
+  },
+  drawPlanetConflicts(g){
+    this._planetConflictLabels=[];g.save();g.font='600 11px ui-monospace,monospace';g.textAlign='left';g.textBaseline='top';
+    for(const sys of G.sys){
+      if(!this.inView(sys.x,sys.y))continue;
+      const rows=planetConflictStates(sys);if(!rows.length)continue;
+      const p=this.w2s(sys.x,sys.y);g.strokeStyle='#ffb35c';g.lineWidth=2;
+      g.beginPath();g.arc(p.x,p.y,12,0,Math.PI*2);g.stroke();
+      for(const x of rows){const pl=sys.planets.find(q=>q.i===x.planet),text=(x.kind==='invasion'?'⚑ ':'💥 ')+pl.name;
+        const w=Math.min(210,g.measureText(text).width+10),b=this.placeMapLabel(p.x+15,p.y-12,w,18);
+        if(!b)continue;g.fillStyle='#241219';g.fillRect(b.x,b.y,b.w,b.h);g.fillStyle='#ffc478';g.fillText(text,b.x+4,b.y+2,w-8);
+        this._planetConflictLabels.push({...b,...x,system:sys.id});
+      }
+    }g.restore();
+  },
   drawFleetOwnerLabels(g){
     this._fleetOwnerLabels=[];
     if(!FLEET_NAMES_ON||!G.p)return;
@@ -1917,7 +1930,7 @@ const View = {
        yalnız çekirdek nokta + hakimiyet rengi kalır ve harita
        temiz bir siyasi görünüme döner. */
     const politik = z < .05;
-    for (const s of G.sys){
+    for (const s of [...G.sys].sort((a,b)=>Number(b===this.selSys)-Number(a===this.selSys)||Number(b.owner===0)-Number(a.owner===0)||a.id-b.id)){
       /* FAZ 21: dünya-uzayı testi ÖNCE — w2s dönüşümü bile yapılmaz.
          Eskiden her sistem için w2s hesaplanıp sonra eleniyordu. */
       if (!this.inView(s.x, s.y)){ this.culled++; continue; }
@@ -2156,25 +2169,26 @@ const View = {
         g.font = '600 11px ui-monospace,monospace';
         g.textAlign = 'center';
         g.textBaseline = 'top';
-        const ty = p.y + sr + 6;
         const labelWidth=g.measureText(s.name).width;
-        this._mapLabelBlocks.push({x:p.x-labelWidth/2-3,y:ty-2,w:labelWidth+6,h:16});
+        const box=this.placeMapLabel(p.x-labelWidth/2-3,p.y+sr+4,labelWidth+6,16);
+        if(box){
+        const ty=box.y+2,tx=box.x+labelWidth/2+3;
         /* FAZ 75: uzaklaşınca yazının arkasına koyu şerit —
            yıldız kalabalığında okunabilirlik. */
         if (z < .28){
           const w3 = g.measureText(s.name).width;
           g.fillStyle = 'rgba(5,8,16,.62)';
-          g.fillRect(p.x - w3/2 - 3, ty - 1, w3 + 6, 12);
+          g.fillRect(tx - w3/2 - 3, ty - 1, w3 + 6, 12);
         }
         g.lineWidth = 3;
         g.lineJoin = 'round';
         g.strokeStyle = 'rgba(4,7,14,.92)';
-        g.strokeText(s.name, p.x, ty);
+        g.strokeText(s.name, tx, ty);
         g.fillStyle = s.owner>=0
           ? ((MAP_MODE === 'diplomasi' || MAP_MODE === 'savas')
               ? diploColor(G.emps[s.owner]) : G.emps[s.owner].col)
           : 'rgba(214,228,246,.95)';
-        g.fillText(s.name, p.x, ty);
+        g.fillText(s.name, tx, ty);
         g.textBaseline = 'alphabetic';
         if (pSurv(s) && z > .42){
           const hab = s.planets.filter(pl=>PLANETS[pl.t].k==='hab').length;
@@ -2184,6 +2198,7 @@ const View = {
           }
         }
       }
+        } // admitted name label
       // sistem dayanıklılığı: savunma + koloni morali
       const sdef = sysDefense(s);
       if (seen && z > .19 && (sdef > 0 || s.cr > 0)){
@@ -2560,7 +2575,9 @@ const View = {
           const filoN = y.filolar.length;
           const txt = (filoN > 1 ? '▮' + filoN + ' ' : '▮ ') + parca.join(' ');
           const w = g.measureText(txt).width;
-          const x0 = p2.x - w/2 - 5;
+          const box=this.placeMapLabel(p2.x-w/2-5,ty-9,w+10,14);
+          if(!box)continue;
+          const x0=box.x;ty=box.y+9;
 
           /* Seçili filonun grubu vurgulanır */
           const seciliGrup = this.sel && this.sel.e === +eid &&
@@ -2862,6 +2879,7 @@ const View = {
       }
     }
 
+    this.drawPlanetConflicts(g);
     this.drawFleetOwnerLabels(g);      // 91D.1: görünen filoların aidiyeti
     this.drawTerritoryLabels(g);       // 91D: sahiplik adlarının tek çizim yolu
     this.drawPings(g, t);               // FAZ 47: bildirim ping halkası
