@@ -1,0 +1,8 @@
+{
+  "baselineIndexSha256": "fc4c4287894db8b8a54d026bdc78783bf9270ba53f8d07e85ec9ea7f3f0f8b12",
+  "baselineGuardAcceptsBaseline": false,
+  "cause": "95B federation CSS block was not recognized by inherited UI preservation helper",
+  "reviewed95BBlockSha256": "a526565c9c7bcd5ae8c42a816b3fbac4263a623ddaabda4277f5a92939d12a76",
+  "scienceHashStillMatches": true,
+  "originalHashStillMatches": true
+}

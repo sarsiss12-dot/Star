@@ -69,7 +69,7 @@ function aiEstimatedDefense(e,s){
 }
 /* Route geometry is restricted to the observer's learned graph. The existing
    engine still validates legal access and performs all movement/costs. */
-function aiKnownRoute(e,f,from,to,observer=e,warTarget=null){
+function aiKnownRoute(e,f,from,to,observer=e,warTarget=null,nodeAllowed=null){
   const view=aiView(observer),known=view.ctx.known;
   if(!G.sys[from]||!G.sys[to]||!known.has(from)||!known.has(to))return null;
   const n=G.sys.length,cost=Array(n).fill(Infinity),prev=Array(n).fill(-1),done=new Set();
@@ -79,7 +79,7 @@ function aiKnownRoute(e,f,from,to,observer=e,warTarget=null){
     if(u<0)break;if(u===to)break;done.add(u);
     const edges=gates.includes(u)?[...new Set(G.sys[u].lanes.concat(gates))]:G.sys[u].lanes;
     for(const id of edges){
-      if(!known.has(id)||done.has(id)||view.ctx.pirates.has(id)&&id!==to)continue;
+      if(!known.has(id)||done.has(id)||view.ctx.pirates.has(id)&&id!==to||nodeAllowed&&!nodeAllowed(id,u))continue;
       if(!pathAllowed(e,f,[id],u)&&!(warTarget!==null&&view.systems[id]?.owner===warTarget))continue;
       const jump=gates.includes(u)&&gates.includes(id),speed=Math.max(.001,fleetSpeed({...f,e:observer!==e&&intelOf(observer,e.id)<3?observer.id:f.e,sys:u,mv:null}));
       const value=best+(jump?.1:dist(G.sys[u],G.sys[id]))/speed;
@@ -134,7 +134,7 @@ function aiUpdateStrategy(e){
 /* One empire's bounded campaign: defend first, stage reachable forces, commit
    together. No federation commands, free hulls or per-frame planning. */
 function aiMilitaryCampaign(e,armed,my,wars){
-  const free=armed.filter(f=>!f.guardLocked&&!guardLocked(f)&&!f.retreating&&G.sys[f.mv?f.mv.to:f.sys]),used=new Set();
+  const free=armed.filter(f=>!jointReserved(f)&&!f.guardLocked&&!guardLocked(f)&&!f.retreating&&G.sys[f.mv?f.mv.to:f.sys]),used=new Set();
   const threatened=my.map(s=>({s,t:aiObservedThreat(e,s.id,false)})).filter(x=>x.t>0)
     .sort((a,b)=>(b.t+(b.s.id===e.home?600:0))-(a.t+(a.s.id===e.home?600:0))||a.s.id-b.s.id);
   for(const {s,t}of threatened){
@@ -143,6 +143,7 @@ function aiMilitaryCampaign(e,armed,my,wars){
     const candidates=free.filter(f=>!used.has(f.id)&&!f.mv&&!f.path.length).map(f=>({f,r:aiKnownRoute(e,f,f.sys,s.id)})).filter(x=>x.r&&x.r.eta<=180).sort((a,b)=>a.r.eta-b.r.eta||a.f.id-b.f.id);
     for(const {f}of candidates){if(power>=t*1.15)break;if(aiMove(e,f,s.id)){used.add(f.id);power+=fleetPower(f);}}
   }
+  if((G.jointOps?.plans||[]).some(p=>jointActive(p)&&p.members.includes(e.id)))return;
   const force=free.filter(f=>!used.has(f.id)&&!f.combat&&fleetSupply(e,f)>.55);
   if(!force.length)return;
   const known=aiKnownSystems(e).filter(s=>wars.some(o=>aiKnownSystem(e,s).owner===o.id));
@@ -169,6 +170,404 @@ function aiMilitaryCampaign(e,armed,my,wars){
     if(f.mv||f.path.length||f.sys===rally.id||ready.includes(f))continue;
     aiMove(e,f,rally.id);
   }
+}
+
+/* 95C — joint plans reserve existing fleets; all travel remains orderMove /
+   stepFleets. Political authority is an ACTIVE ledger front, never membership
+   alone. Each owner evaluates its own knowledge and voluntarily shares orders. */
+/* Coalition exchanges reuse battleRound per actual owner. Each force has one
+   total fire budget, split across legal opponents; no phantom combined empire,
+   extra defender volleys or duplicate ledger writes. The ordinary duel path is
+   unchanged. Pair-wise reports remain the existing report format. */
+function jointBattlePairs(A,B,list){
+  const front=warLedgerFind(A,B);if(!front)return null;
+  const at=[...new Set(list.filter(f=>f.ships.length).map(f=>f.e))];
+  const role=front.roles[front.sides.indexOf(A)];
+  const side=(leader,r)=>at.filter(id=>id===leader||jointBinding(G.emps[leader],G.emps[id])&&
+    (G.warLedger?.fronts||[]).some(f=>f.campaign===front.campaign&&f.ended===null&&warLedgerPair(...f.sides)&&f.sides.includes(id)&&f.roles[f.sides.indexOf(id)]===r));
+  const aa=side(A,role),bb=side(B,1-role);
+  if(!aa.includes(A))aa.unshift(A);if(!bb.includes(B))bb.unshift(B);
+  if(aa.length===1&&bb.length===1)return null;
+  // Partial co-belligerence is not a license to fire on a neutral third party.
+  const pairs=[];
+  const power=id=>Math.max(1,list.filter(f=>f.e===id).reduce((n,f)=>n+sideStats(G.emps[id],[f],null,1).hull,0)+(G.sys[list[0]?.sys]?.owner===id?sysDefense(G.sys[list[0].sys]):0));
+  const weights=Object.fromEntries([...aa,...bb].map(id=>[id,power(id)]));
+  for(const a of aa)for(const b of bb)if(hostile(a,b)){
+    const targetA=aa.filter(id=>hostile(id,b)).reduce((n,id)=>n+weights[id],0),targetB=bb.filter(id=>hostile(a,id)).reduce((n,id)=>n+weights[id],0);
+    pairs.push({a,b,fireA:weights[b]/targetB,fireB:weights[a]/targetA});
+  }
+  return pairs.length>1?pairs:null;
+}
+
+function jointEmpty(){return {v:1,next:1,nextCheck:0,nextAuto:0,plans:[],cooldowns:{}};}
+function jointActive(p){return p&&!['done','cancelled'].includes(p.state);}
+function jointBinding(a,b){
+  if(!a||!b||a.dead||b.dead||a.war[b.id]||b.war[a.id])return null;
+  if(a===b)return {kind:'self'};
+  const f=findFed(a);
+  if(f&&f===findFed(b))return {kind:'fed',id:f.id};
+  if(a.ally[b.id]&&b.ally[a.id])return {kind:'ally'};
+  if(a.overlord===b.id||b.overlord===a.id||a.overlord!==null&&a.overlord!==undefined&&a.overlord===b.overlord)return {kind:'vassal'};
+  for(const [giver,taker]of [[a,b],[b,a]])for(const [enemy,sponsor]of Object.entries(giver.proxyWar||{})){
+    if(sponsor!==taker.id||!warLedgerPair(giver.id,+enemy)||!warLedgerPair(taker.id,+enemy))continue;
+    const f=warLedgerFind(giver.id,+enemy),root=warLedgerFind(taker.id,+enemy);
+    if(f&&root&&f.campaign===root.campaign)return {kind:'promise',enemy:+enemy,campaign:f.campaign};
+  }
+  return null;
+}
+function jointBound(p,id){
+  const a=G.emps[p.sponsor],b=G.emps[id],old=p.bindings[id],now=jointBinding(a,b);
+  return !!(old&&now&&old.kind===now.kind&&(old.kind!=='fed'||old.id===now.id)&&(old.kind!=='promise'||old.enemy===now.enemy&&old.campaign===now.campaign));
+}
+function jointFront(campaign,role,id,enemy){
+  return (G.warLedger?.fronts||[]).find(f=>f.campaign===campaign&&f.ended===null&&warLedgerPair(...f.sides)&&
+    f.sides.includes(id)&&f.sides.includes(enemy)&&f.roles[f.sides.indexOf(id)]===role);
+}
+function jointContext(campaign,role,sponsor,enemy){
+  const e=G.emps[sponsor];
+  if(!e||e.dead||!jointFront(campaign,role,sponsor,enemy))return null;
+  const members=[...new Set((G.warLedger?.fronts||[]).filter(f=>f.campaign===campaign&&f.ended===null&&warLedgerPair(...f.sides))
+    .flatMap(f=>f.sides.filter((id,i)=>f.roles[i]===role)))].filter(id=>jointFront(campaign,role,id,enemy)&&jointBinding(e,G.emps[id])).sort((a,b)=>a-b);
+  return members.length>1?{campaign,role,sponsor,enemy,members}:null;
+}
+function jointReserved(f){return !!f&&Number.isSafeInteger(f.jointPlan);}
+function jointAt(f){return f.mv?f.mv.to:f.sys;}
+function jointRemainder(f){return f.mv?(1-f.mv.t)*(f.mv.gate?.1:dist(G.sys[f.mv.from],G.sys[f.mv.to]))/Math.max(.001,fleetSpeed(f)):0;}
+function jointRoute(e,f,to,cache){
+  const from=jointAt(f),key=f.id+':'+from+':'+to;
+  if(cache.has(key))return cache.get(key);
+  const r=aiKnownRoute(e,f,from,to,e,null,id=>id===to||!hostile(e.id,aiKnownSystem(e,G.sys[id])?.owner));
+  const value=r?{path:r.path,eta:r.eta+jointRemainder(f)}:null;cache.set(key,value);return value;
+}
+function jointStop(f){
+  f.path=f.mv?[f.mv.to]:[];delete f.jointHoldUntil;delete f.jointPlan;
+}
+function jointRelease(p,id){
+  for(const f of G.fleets)if(f.jointPlan===p.id&&(id===undefined||f.e===id))jointStop(f);
+  if(id!==undefined)p.fleets=p.fleets.filter(x=>x.owner!==id);
+}
+function jointClose(p,state,reason){
+  if(!jointActive(p))return;
+  jointRelease(p);p.state=state;p.reason=reason;p.ended=G.day;
+  const key=p.campaign+':'+p.role;G.jointOps.cooldowns[key]=G.day+(state==='done'?30:180);
+}
+function jointCancel(e,id){
+  const p=G.jointOps?.plans.find(x=>x.id===id);
+  if(!p||e!==G.p||p.requester!==e.id||!jointActive(p))return {ok:false,why:'İptal edilebilir kendi destek talebin yok'};
+  jointClose(p,'cancelled','Oyuncu destek talebini iptal etti');return {ok:true};
+}
+/* Local defence and existing critical orders take priority. No enemy remote
+   fleet enumeration: threats use 95A visible observations only. */
+function jointAvailable(e,replacing=null){
+  const mine=G.fleets.filter(f=>f.e===e.id&&f.ships.length&&isArmed(f));
+  const protectedIds=new Set();
+  const own=G.sys.filter(s=>s.owner===e.id);
+  for(const s of own){
+    const critical=s.id===e.home||s.planets.some(p=>p.col&&p.owner===e.id);
+    const threat=aiObservedThreat(e,s.id,critical),local=mine.filter(f=>!f.mv&&(f.sys===s.id||threat>0)).sort((a,b)=>dist(G.sys[jointAt(a)],s)-dist(G.sys[jointAt(b)],s)||a.id-b.id);
+    let keep=0;const reserve=threat>0?threat*1.25:(s.id===e.home?Math.min(80,local.reduce((n,f)=>n+fleetPower(f),0)*.25):0);
+    for(const f of local){if(keep>=reserve)break;if(protectedIds.has(f.id))continue;protectedIds.add(f.id);keep+=fleetPower(f);}
+  }
+  const usable=mine.filter(f=>!protectedIds.has(f.id)&&(!jointReserved(f)||!!replacing&&f.jointPlan===replacing.id)&&!f.combat&&!f.retreating&&!hasShipment(f)&&
+    !f.guardLocked&&!guardLocked(f)&&!f.building&&!f.ord&&(!f.mv&&!f.path.length||!!replacing&&f.jointPlan===replacing.id));
+  const supplied=usable.filter(f=>fleetSupply(e,f)>.55);
+  return {fleets:supplied.slice(0,12),reason:!mine.length?'Yeterli savaş filosu yok':!usable.length?'Kendi stratejik savunması veya kritik filo görevi öncelikli':!supplied.length?'İkmal yetersiz':'Ulaşılabilir uygun kuvvet yok'};
+}
+function jointTargetOK(e,kind,target,enemy){
+  const s=G.sys[target],r=s&&aiKnownSystem(e,s);if(!r)return false;
+  return kind==='capture'?r.owner===enemy:kind==='follow'&&r.owner===enemy||r.owner>=0&&(r.owner===e.id||!!jointBinding(e,G.emps[r.owner]));
+}
+function jointAnchorPower(anchor,target){
+  const f=G.fleets.find(f=>f.id===anchor&&f.e===0&&f.ships.length&&isArmed(f)&&!f.retreating);
+  if(!f||jointAt(f)!==target&&f.path.at(-1)!==target||fleetSupply(G.p,f)<=.55)return 0;
+  const r=aiKnownRoute(G.p,f,jointAt(f),target);
+  return r&&r.eta+jointRemainder(f)<=180?fleetPower(f):0;
+}
+function jointSelect(ctx,kind,target,anchor,cache,replacing=null){
+  const responses={},pool=[];
+  for(const id of ctx.members){
+    const e=G.emps[id];
+    if(!e.ai){responses[id]='Oyuncu filoları kendi komutasında';continue;}
+    if(!jointTargetOK(e,kind,target,ctx.enemy)){responses[id]='Hedef veya bilinen askerî rota uygun değil';continue;}
+    const av=jointAvailable(e,replacing);responses[id]=av.reason;
+    for(const f of av.fleets)pool.push(f);
+  }
+  pool.sort((a,b)=>a.e-b.e||a.id-b.id);
+  const force=[];
+  for(let slot=0;slot<12&&force.length<24;slot++)for(const id of ctx.members){const f=pool.filter(f=>f.e===id)[slot];if(f&&force.length<24)force.push(f);}
+  if(!force.length)return {ok:false,why:Object.values(responses).find(r=>r!=='Oyuncu filoları kendi komutasında')||'Uygun destek kuvveti yok',responses};
+  const targetSys=G.sys[target],rallies=new Map();
+  if(kind!=='capture')rallies.set(target,targetSys);
+  for(const id of ctx.members){const e=G.emps[id];
+    const near=aiKnownSystems(e).filter(s=>{const r=aiKnownSystem(e,s);return r.owner>=0&&ctx.members.includes(r.owner)&&isSupplyNode(e,s)&&canEnter(e,s)&&!aiObservedThreat(e,s.id);})
+      .sort((a,b)=>dist(a,targetSys)-dist(b,targetSys)||a.id-b.id).slice(0,3);
+    for(const s of near)rallies.set(s.id,s);
+  }
+  const candidates=[...rallies.values()].sort((a,b)=>(a.id===target?-1:b.id===target?1:dist(a,targetSys)-dist(b,targetSys))||a.id-b.id).slice(0,6);
+  let best=null;
+  for(const rally of candidates){
+    const rows=[];let score=0;
+    for(const f of force){const e=G.emps[f.e],known=aiKnownSystem(e,rally);
+      if(!known||known.owner<0||!ctx.members.includes(known.owner)||!isSupplyNode(e,rally)||!canEnter(e,rally)||aiObservedThreat(e,rally.id)>0)continue;
+      const gather=jointRoute(e,f,rally.id,cache),probe={...f,sys:rally.id,mv:null},march=jointRoute(e,probe,target,cache);
+      if(!gather||!march||gather.eta>180||march.eta>180||fleetSupply(e,{...probe,sys:target})<=.4)continue;
+      rows.push({id:f.id,owner:f.e,gatherEta:gather.eta,eta:march.eta});
+      const type=findFed(e)?.type,will=type==='askeri'?1.15:type==='ticaret'?.9:1;
+      score+=fleetPower(f)*will/(1+(gather.eta+march.eta)/60);
+    }
+    const owners=new Set(rows.map(r=>r.owner));
+    if(ctx.members.includes(0)&&anchor)owners.add(0);
+    score*=1+owners.size*.15;
+    if(rows.length&&(!best||score>best.score))best={rally:rally.id,rows,score};
+  }
+  if(!best)return {ok:false,why:'Ulaşılabilir ikmalli toplanma noktası veya açık askerî rota yok',responses};
+  for(const id of ctx.members)if(G.emps[id].ai)responses[id]=best.rows.some(x=>x.owner===id)?'Kabul: gerçek filo ayrıldı':responses[id]==='Ulaşılabilir uygun kuvvet yok'?'Bilinen açık askerî rota veya ikmal yok':responses[id];
+  let need=0;
+  for(const id of ctx.members){const e=G.emps[id];if(!aiKnownSystem(e,targetSys))continue;need=Math.max(need,kind==='capture'||kind==='follow'&&aiKnownSystem(e,targetSys)?.owner===ctx.enemy?Math.max(80,aiEstimatedDefense(e,targetSys)*1.25):aiObservedThreat(e,target)*1.15);}
+  const power=best.rows.reduce((n,r)=>n+fleetPower(G.fleets.find(f=>f.id===r.id)),0)+jointAnchorPower(anchor,target);
+  if(power<need)return {ok:false,why:'Tahmini savunma için ulaşılabilir ortak kuvvet yetersiz',responses};
+  return {ok:true,...best,need,power,responses};
+}
+function jointCreate(ctx,kind,target,options={}){
+  if(!G.jointOps)G.jointOps=jointEmpty();const l=G.jointOps,key=ctx.campaign+':'+ctx.role;
+  if(l.plans.filter(jointActive).length>=8)return {ok:false,why:'Ortak sefer kapasitesi dolu'};
+  const previous=l.plans.find(p=>jointActive(p)&&p.campaign===ctx.campaign&&p.role===ctx.role);
+  if(previous&&!(options.requester===0&&previous.requester===null))return {ok:false,why:'Bu savaşta zaten etkin ortak sefer var; kendi talebini önce iptal edebilirsin'};
+  if(options.requester===undefined&&l.cooldowns[key]>G.day)return {ok:false,why:'Önceki sefer sonrası yeniden değerlendirme bekleniyor'};
+  const q=jointSelect(ctx,kind,target,options.anchor,new Map(),previous);if(!q.ok)return q;
+  if(previous)jointClose(previous,'cancelled','Oyuncunun yeni destek hedefi kabul edildi');
+  const p={id:l.next++,...ctx,kind,target,rally:q.rally,requester:options.requester??null,recipient:options.recipient??null,anchor:options.anchor??null,
+    bindings:Object.fromEntries(ctx.members.map(id=>[id,jointBinding(G.emps[ctx.sponsor],G.emps[id])])),
+    fleets:q.rows.map(r=>({...r,arrived:false})),responses:q.responses,state:'gather',reason:'Ulaşılabilir filolar toplanıyor',
+    created:G.day,deadline:G.day+Math.min(180,Math.max(...q.rows.map(r=>r.gatherEta))+30),expires:G.day+720,replans:0,need:q.need,power:q.power};
+  l.plans=l.plans.filter(jointActive).concat(l.plans.filter(p=>!jointActive(p)).slice(-24));
+  l.plans.push(p);
+  for(const row of p.fleets){const f=G.fleets.find(f=>f.id===row.id);f.jointPlan=p.id;}
+  jointAdvance(p,new Map());return {ok:true,plan:p,why:'Talep kabul edildi; mevcut filolar ortak göreve ayrıldı'};
+}
+function jointRequest(e,recipient,kind,target){
+  const no=why=>({ok:false,why});const other=G.emps[recipient];
+  if(e!==G.p||!other||!other.ai||!['follow','capture','defend'].includes(kind)||!jointBinding(e,other))return no('Siyasi askerî destek yetkisi yok');
+  let anchor=null,sys=target;
+  if(kind==='follow'){const f=G.fleets.find(f=>f.id===target&&f.e===e.id&&f.ships.length&&isArmed(f));if(!f)return no('Desteklenecek kendi savaş filonu seç');anchor=f.id;sys=jointAt(f);}
+  if(!Number.isInteger(sys)||!G.sys[sys]?.seen.includes(e.id))return no('Bilinen bir hedef seç');
+  const fronts=(G.warLedger?.fronts||[]).filter(f=>f.ended===null&&f.sides.includes(e.id)&&warLedgerPair(...f.sides));
+  for(const front of fronts){const enemy=front.sides.find(id=>id!==e.id),role=front.roles[front.sides.indexOf(e.id)];
+    const ctx=jointContext(front.campaign,role,e.id,enemy);
+    if(!ctx?.members.includes(recipient)||!jointTargetOK(e,kind==='follow'?'defend':kind,sys,enemy)&&kind!=='follow')continue;
+    // An explicit follow request shares an anchor ID, not its owner's command.
+    if(kind==='follow'&&!jointTargetOK(other,'capture',sys,enemy)&&!jointTargetOK(other,'defend',sys,enemy))return no('Müttefik hedefi veya rotayı henüz bilmiyor');
+    const selected={...ctx,members:[e.id,recipient].sort((a,b)=>a-b)};
+    return jointCreate(selected,kind==='follow'?'follow':kind,sys,{requester:e.id,recipient,anchor});
+  }
+  return no('Aynı geçerli savaş seferinde kabul edilmiş ortak yükümlülük yok');
+}
+function jointNeed(p){
+  let need=0;for(const id of p.members){const e=G.emps[id];if(!aiKnownSystem(e,G.sys[p.target]))continue;
+    need=Math.max(need,p.kind==='capture'||p.kind==='follow'&&aiKnownSystem(e,G.sys[p.target])?.owner===p.enemy?Math.max(80,aiEstimatedDefense(e,G.sys[p.target])*1.25):aiObservedThreat(e,p.target)*1.15);
+  }return need;
+}
+function jointValid(p){
+  if(!jointContext(p.campaign,p.role,p.sponsor,p.enemy))return 'Savaş sona erdi veya ortak katılım kapandı';
+  for(const id of p.members.slice())if(!jointFront(p.campaign,p.role,id,p.enemy)||!jointBound(p,id)){
+    if(id===p.sponsor||id===p.recipient)return 'Siyasi yetki veya savaş taahhüdü sona erdi';
+    jointRelease(p,id);p.members=p.members.filter(x=>x!==id);delete p.responses[id];
+  }
+  if(p.members.length<2)return 'Ortak savaş katılımcısı kalmadı';
+  if(p.kind==='follow'){
+    const f=G.fleets.find(f=>f.id===p.anchor&&f.e===p.requester&&f.ships.length);
+    if(!f)return 'Desteklenecek filo artık yok';
+  }
+  if(G.day>=p.expires)return 'Görev süresi doldu';
+  if(p.kind==='capture'&&G.sys[p.target]?.owner!==p.enemy&&!G.sys[p.target]?.planets.some(pl=>pl.col&&pl.owner===p.enemy)){
+    const owner=G.sys[p.target]?.owner;return p.members.includes(owner)?'complete':'Hedef artık geçerli değil';
+  }
+  if(p.kind==='defend'&&!p.members.includes(G.sys[p.target]?.owner))return 'Savunma hedefi artık dost değil';
+  return null;
+}
+function jointWithdraw(p,reason){
+  p.state='retreat';p.reason=reason;
+  for(const row of p.fleets){const f=G.fleets.find(f=>f.id===row.id&&f.jointPlan===p.id);if(!f||f.combat)continue;
+    const e=G.emps[f.e];f.path=f.mv?[f.mv.to]:[];delete f.jointHoldUntil;
+    const nodes=aiKnownSystems(e).filter(s=>s.owner===e.id&&isSupplyNode(e,s)).sort((a,b)=>dist(G.sys[jointAt(f)],a)-dist(G.sys[jointAt(f)],b)||a.id-b.id).slice(0,4);
+    for(const s of nodes)if(aiMove(e,f,s.id))break;
+  }
+  // Release order ownership while retaining the legal retreat route.
+  for(const row of p.fleets){const f=G.fleets.find(f=>f.id===row.id&&f.jointPlan===p.id);if(f)delete f.jointPlan;}
+  p.state='cancelled';p.ended=G.day;G.jointOps.cooldowns[p.campaign+':'+p.role]=G.day+180;
+}
+function jointAdvance(p,cache){
+  const bad=jointValid(p);if(bad){jointClose(p,bad==='complete'?'done':'cancelled',bad==='complete'?'Görev tamamlandı':bad);return;}
+  let rows=p.fleets.map(row=>({row,f:G.fleets.find(f=>f.id===row.id&&f.e===row.owner&&f.ships.length&&f.jointPlan===p.id)})).filter(x=>x.f);
+  p.fleets=rows.map(x=>x.row);
+  if(!rows.length){jointClose(p,'cancelled','Destek kuvveti kalmadı');return;}
+  if(p.kind==='follow'){
+    const anchor=G.fleets.find(f=>f.id===p.anchor),to=anchor.path.at(-1)??jointAt(anchor);
+    if(to!==p.target){
+      p.target=to;p.state='gather';p.deadline=G.day+60;
+      for(const {f}of rows){f.path=f.mv?[f.mv.to]:[];delete f.jointHoldUntil;}
+    }
+  }
+  // Defenders can be recalled without waiting for the next monthly AI turn.
+  for(const {row,f}of rows){const e=G.emps[f.e];
+    if(aiObservedThreat(e,e.home)>0&&p.target!==e.home){
+      p.responses[e.id]='Gecikme: kendi stratejik savunması öncelikli';
+      const recalled=rows.filter(x=>x.f.e===e.id).map(x=>x.f);jointRelease(p,e.id);for(const own of recalled)if(!own.combat)aiMove(e,own,e.home);
+    }
+  }
+  rows=rows.filter(({f})=>f.jointPlan===p.id);
+  if(!rows.length){jointClose(p,'cancelled','Kendi stratejik savunması öncelikli');return;}
+  if(rows.some(({f})=>f.retreating||fleetSupply(G.emps[f.e],f)<=.55)){
+    jointWithdraw(p,'İkmal gerekiyor; gerçek filolar güvenli bölgeye dönüyor');return;
+  }
+  if(p.kind==='capture'&&(!p.members.includes(G.sys[p.rally]?.owner)||rows.some(({f})=>!canEnter(G.emps[f.e],G.sys[p.rally])))){
+    if(p.replans>=2){jointWithdraw(p,'Toplanma noktası kaybedildi; yeniden planlama sınırı');return;}
+    const ctx={campaign:p.campaign,role:p.role,sponsor:p.sponsor,enemy:p.enemy,members:p.members};
+    // Release first so the same actual fleets can be reconsidered when idle.
+    jointRelease(p);const q=jointSelect(ctx,p.kind,p.target,p.anchor,cache);p.replans++;
+    if(!q.ok){jointClose(p,'cancelled','Toplanma noktası kaybedildi: '+q.why);return;}
+    p.rally=q.rally;p.fleets=q.rows;p.state='gather';p.deadline=G.day+90;
+    for(const row of p.fleets){const f=G.fleets.find(f=>f.id===row.id);f.jointPlan=p.id;}
+    return;
+  }
+  p.need=jointNeed(p);p.power=rows.reduce((n,{f})=>n+fleetPower(f),0)+jointAnchorPower(p.anchor,p.target);
+  if(p.power<p.need){jointWithdraw(p,'Tahmini savunma için ortak kuvvet yetersiz; taarruz durduruldu');return;}
+  if(p.kind==='capture'&&rows.some(({f})=>!f.mv&&f.sys===p.target&&isArmed(f))){
+    const s=G.sys[p.target];
+    if(s.owner===p.enemy&&!s.planets.some(pl=>pl.col)&&sysDefense(s)<=0&&
+      !G.fleets.some(f=>f.sys===s.id&&f.ships.length&&isArmed(f)&&hostile(p.sponsor,f.e))){
+      const actual=rows.filter(({f})=>!f.mv&&f.sys===s.id&&isArmed(f)).sort((a,b)=>fleetPower(b.f)-fleetPower(a.f)||a.f.e-b.f.e)[0].f;
+      captureSystem(s,actual.e);jointClose(p,'done','Görev tamamlandı');return;
+    }
+  }
+  if(p.state==='march'||p.state==='defend'){
+    let arrived=0;
+    for(const {row,f}of rows){
+      if(!f.mv&&f.sys===p.target){row.arrived=true;row.arrival= row.arrival??G.day;arrived++;continue;}
+      if(f.combat)continue;
+      const remaining=f.path.length?f.path.slice(f.mv?1:0):[];
+      const from=jointAt(f),e=G.emps[f.e];
+      if(remaining.length&&!pathAllowed(e,f,remaining,from)){jointWithdraw(p,'Rota kapandı; görev geri çekiliyor');return;}
+      if(!f.mv&&!f.path.length){
+        const r=jointRoute(e,f,p.target,cache);
+        if(!r||!orderMove(f,p.target,false,true,r.path)){jointWithdraw(p,'Rota kapandı; hedefe ulaşım yok');return;}
+      }
+    }
+    if(arrived===rows.length&&p.kind!=='capture'){p.state='defend';p.reason=p.kind==='follow'?'Seçilen filoyu destekliyor':'Bölgeyi savunuyor';
+      if(p.requester===null&&p.kind==='defend'&&G.day-p.created>=30&&p.members.every(id=>!aiObservedThreat(G.emps[id],p.target))){jointClose(p,'done','Savunma tamamlandı; yeni hedef değerlendirilecek');return;}}
+    else p.reason=rows.some(({f})=>(f.jointHoldUntil||0)>G.day)?'Eşzamanlı varış için müttefik bekleniyor':'Yola çıktı';
+    return;
+  }
+  const destination=p.rally;
+  let ready=[];
+  for(const {row,f}of rows){
+    if(f.combat)continue;
+    if(!f.mv&&!f.path.length&&f.sys===destination){ready.push({row,f});continue;}
+    if(f.path.at(-1)===destination)continue;
+    const r=jointRoute(G.emps[f.e],f,destination,cache);
+    if(!r||!orderMove(f,destination,false,true,r.path)){
+      row.blocked=true;p.responses[f.e]='Gecikme: askerî rota kapandı';
+    }else {row.blocked=false;row.gatherEta=r.eta;}
+  }
+  const complete=ready.length===rows.length;
+  if(!complete&&G.day<p.deadline){p.reason=rows.some(({row})=>row.blocked)?'Rota kapandı; sınırlı süre bekleniyor':'Toplanıyor; müttefik bekleniyor';return;}
+  const power=ready.reduce((n,{f})=>n+fleetPower(f),0)+jointAnchorPower(p.anchor,p.target);
+  if(power<p.need){jointWithdraw(p,'Müttefik bekleme süresi doldu; hazır kuvvet yetersiz');return;}
+  // Late or destroyed fleets never hold the coalition forever.
+  for(const {f}of rows)if(!ready.some(x=>x.f===f))jointStop(f);
+  p.fleets=ready.map(x=>x.row);
+  const march=ready.map(({row,f})=>({row,f,r:jointRoute(G.emps[f.e],f,p.target,cache)}));
+  if(march.some(x=>!x.r)){jointWithdraw(p,'Rota kapandı; ortak taarruz uygulanamadı');return;}
+  if(march.every(x=>x.f.sys===p.target&&!x.f.mv)){p.state='defend';p.reason=p.kind==='follow'?'Seçilen filoyu destekliyor':'Bölgeyi savunuyor';return;}
+  const eta=Math.max(...march.map(x=>x.r.eta));
+  for(const {row,f,r}of march){
+    if(!orderMove(f,p.target,false,true,r.path)){jointWithdraw(p,'Güncel askerî geçiş izni yok');return;}
+    row.eta=r.eta;row.depart=G.day+eta-r.eta;f.jointHoldUntil=row.depart;
+  }
+  p.state='march';p.launched=G.day;p.reason='Saldırıya hazırlanıyor; varışlar eşgüdümlü';
+}
+function jointAuto(){
+  const l=G.jointOps,seen=new Set();let created=0;
+  for(const front of G.warLedger?.fronts||[]){
+    if(front.ended!==null||!warLedgerPair(...front.sides))continue;
+    for(let i=0;i<2;i++){
+      const sponsor=front.sides[i],role=front.roles[i],enemy=front.sides[1-i],key=front.campaign+':'+role;
+      if(seen.has(key)||!G.emps[sponsor].ai)continue;
+      const ctx=jointContext(front.campaign,role,sponsor,enemy);if(!ctx)continue;seen.add(key);
+      if(l.cooldowns[key]>G.day||l.plans.some(p=>jointActive(p)&&p.campaign===front.campaign&&p.role===role))continue;
+      const e=G.emps[sponsor];
+      const defensive=aiKnownSystems(e).filter(s=>ctx.members.includes(aiKnownSystem(e,s).owner)&&aiObservedThreat(e,s.id,s.id===e.home||s.planets.some(p=>p.col&&p.owner===e.id))>0)
+        .sort((a,b)=>(b.id===e.home?1:0)-(a.id===e.home?1:0)||aiObservedThreat(e,b.id)-aiObservedThreat(e,a.id)||a.id-b.id);
+      const target=defensive[0]||aiKnownSystems(e,enemy).sort((a,b)=>
+        ((e.wg?.[enemy]?.targets||[]).includes(b.id)?1:0)-((e.wg?.[enemy]?.targets||[]).includes(a.id)?1:0)||
+        dist(G.sys[e.home]||a,a)-dist(G.sys[e.home]||b,b)||a.id-b.id)[0];
+      if(!target){l.cooldowns[key]=G.day+90;continue;}
+      const r=jointCreate(ctx,defensive.length?'defend':'capture',target.id);
+      if(!r.ok)l.cooldowns[key]=G.day+90;
+      else if(++created>=4)return;
+    }
+  }
+}
+/* Validity is cheap and runs before movement. Route/galaxy work is bounded to
+   five-day checks, new automatic plans to once per month; no frame planner. */
+function jointTick(){
+  const l=G.jointOps;if(!l)return;
+  for(const p of l.plans)if(jointActive(p)){const bad=jointValid(p);if(bad)jointClose(p,bad==='complete'?'done':'cancelled',bad==='complete'?'Görev tamamlandı':bad);}
+  if(G.day<l.nextCheck)return;l.nextCheck=G.day+5;
+  const cache=new Map();for(const p of l.plans)if(jointActive(p))jointAdvance(p,cache);
+  if(G.day>=l.nextAuto){l.nextAuto=G.day+30;jointAuto();}
+  const closed=l.plans.filter(p=>!jointActive(p)).slice(-24);l.plans=l.plans.filter(jointActive).concat(closed);
+  for(const key of Object.keys(l.cooldowns))if(l.cooldowns[key]<G.day-360)delete l.cooldowns[key];
+}
+function restoreJoint(raw){
+  if(raw===undefined||raw===null){G.jointOps=jointEmpty();for(const f of G.fleets){delete f.jointPlan;delete f.jointHoldUntil;}return;}
+  const fail=()=>{throw Error('Geçersiz ortak sefer kaydı');};
+  if(raw.v!==1||!Number.isSafeInteger(raw.next)||raw.next<1||!Number.isFinite(raw.nextCheck)||!Number.isFinite(raw.nextAuto)||
+    !Array.isArray(raw.plans)||raw.plans.length>32||!raw.cooldowns||typeof raw.cooldowns!=='object'||Array.isArray(raw.cooldowns))fail();
+  const ids=new Set(),assigned=new Set();
+  for(const v of Object.values(raw.cooldowns))if(!Number.isFinite(v)||v<0)fail();
+  for(const p of raw.plans){
+    if(!Number.isSafeInteger(p.id)||p.id<1||p.id>=raw.next||ids.has(p.id)||!['capture','defend','follow'].includes(p.kind)||
+      !['gather','march','defend','done','cancelled'].includes(p.state)||!Number.isSafeInteger(p.campaign)||![0,1].includes(p.role)||
+      !G.emps[p.sponsor]||!G.emps[p.enemy]||!G.sys[p.target]||!G.sys[p.rally]||!Array.isArray(p.members)||p.members.length<2||
+      new Set(p.members).size!==p.members.length||p.members.some(id=>!Number.isInteger(id)||!G.emps[id])||!p.members.includes(p.sponsor)||
+      !p.bindings||!p.responses||!Array.isArray(p.fleets)||p.fleets.length>24||!Number.isInteger(p.replans)||p.replans<0||p.replans>3||
+      ![p.created,p.deadline,p.expires,p.need,p.power].every(v=>Number.isFinite(v)&&v>=0)||
+      p.requester!==null&&p.requester!==0||p.kind==='follow'&&!Number.isSafeInteger(p.anchor))fail();
+    ids.add(p.id);
+    for(const id of p.members){const b=p.bindings[id];if(!b||!['self','fed','ally','vassal','promise'].includes(b.kind)||b.kind==='fed'&&!Number.isSafeInteger(b.id)||b.kind==='promise'&&(!Number.isSafeInteger(b.enemy)||!Number.isSafeInteger(b.campaign)))fail();}
+    for(const r of p.fleets){
+      if(!Number.isSafeInteger(r.id)||!p.members.includes(r.owner)||!G.emps[r.owner].ai||
+        ![r.gatherEta,r.eta].every(v=>Number.isFinite(v)&&v>=0)||r.depart!==undefined&&!Number.isFinite(r.depart)||
+        r.arrival!==undefined&&!Number.isFinite(r.arrival))fail();
+      if(jointActive(p)){if(assigned.has(r.id))fail();assigned.add(r.id);}
+    }
+  }
+  G.jointOps=JSON.parse(JSON.stringify(raw));
+  for(const f of G.fleets)if(f.jointPlan!==undefined){
+    const p=G.jointOps.plans.find(p=>p.id===f.jointPlan&&jointActive(p)&&p.fleets.some(r=>r.id===f.id&&r.owner===f.e));
+    if(!p){jointStop(f);continue;}
+    if(f.jointHoldUntil!==undefined&&!Number.isFinite(f.jointHoldUntil))fail();
+  }
+  for(const p of G.jointOps.plans)if(jointActive(p)){
+    for(const r of p.fleets){const f=G.fleets.find(f=>f.id===r.id&&f.e===r.owner);if(f&&f.jointPlan!==p.id)fail();}
+    const bad=jointValid(p);if(bad)jointClose(p,bad==='complete'?'done':'cancelled',bad==='complete'?'Görev tamamlandı':bad);
+  }
+}
+/* Read-only, observer-filtered projection. Hidden fleets contribute neither
+   exact locations, power, names nor ETA to the player panel. */
+function jointView(e){
+  const ctx=aiView(e).ctx;
+  return (G.jointOps?.plans||[]).filter(p=>p.members.includes(e.id)).slice(-8).map(p=>({
+    id:p.id,kind:p.kind,state:p.state,reason:p.reason,requester:p.requester,
+    target:G.sys[p.target]?.seen.includes(e.id)?p.target:null,rally:G.sys[p.rally]?.seen.includes(e.id)?p.rally:null,
+    members:p.members.filter(id=>id===e.id||e.contact[id]),
+    responses:Object.fromEntries(Object.entries(p.responses).filter(([id])=>+id===e.id||e.contact[id])),
+    fleets:p.fleets.flatMap(row=>{const f=G.fleets.find(f=>f.id===row.id&&f.e===row.owner&&f.ships.length);
+      if(!f||f.e!==e.id&&!ctx.visible.has(jointAt(f)))return [];
+      return [{id:f.id,owner:f.e,name:f.name||'Filo',at:jointAt(f),waiting:(f.jointHoldUntil||0)>G.day||p.state==='gather'&&!f.mv&&!f.path.length,
+        eta:f.e===e.id?Math.max(0,(row.depart||G.day)-G.day)+(row.eta||0):null}];})
+  }));
 }
 
 /* ---------------------------------------------------------------
@@ -676,7 +1075,7 @@ function aiTurn(e){
   /* --- 4b. aynı sistemdeki boştaki savaş filolarını birleştir --- */
   const byS = {};
   for (const f of G.fleets){
-    if (f.e !== e.id || f.combat || f.mv || f.path.length || f.sys < 0 || hasShipment(f) || f.composition || pendingFleetShips(e,f)>0) continue;
+    if (f.e !== e.id || jointReserved(f) || f.combat || f.mv || f.path.length || f.sys < 0 || hasShipment(f) || f.composition || pendingFleetShips(e,f)>0) continue;
     if (!isArmed(f)) continue;
     (byS[f.sys] = byS[f.sys] || []).push(f);
   }
@@ -893,7 +1292,7 @@ function aiTurn(e){
 
   /* --- 7. askerî hareket --- */
   const wars = G.emps.filter(o => !o.dead && e.war[o.id]);
-  const armed = G.fleets.filter(f => f.e === e.id && isArmed(f) && !f.combat && !hasShipment(f));
+  const armed = G.fleets.filter(f => f.e === e.id && isArmed(f) && !f.combat && !hasShipment(f) && !jointReserved(f));
 
   /* --- duruş seçimi: güç dengesine göre --- */
   for (const f of armed){

@@ -340,6 +340,14 @@ function settlementContext(e,campaign){
   const stamp=JSON.stringify({protocol:2,campaign,role,fs,rows,shares,state});
   return {ok:true,campaign,role,members,rows,shares,total,stamp};
 }
+/* 95C: geography breaks equal contribution/claim scores in NEW drafts.
+   Existing explicit assignments, offer stamps and unanimous approval survive.
+   This is a known military route assessment, never a new ownership right. */
+function settlementReach(e,row){
+  if(row.from===e.id)return true;
+  const probe={e:e.id,ships:[{c:'kor',h:1}]};
+  return (e.colonies||[]).slice(0,6).some(c=>G.sys[c.s]&&aiKnownRoute(e,probe,c.s,row.sys));
+}
 function settlementPreview(e,campaign,assignments=null){
   const c=settlementContext(e,campaign);if(!c.ok)return c;
   const given=Object.fromEntries(c.members.map(id=>[id,0])),rows=[];
@@ -347,7 +355,8 @@ function settlementPreview(e,campaign,assignments=null){
     Object.keys(assignments).some(k=>!c.rows.some(r=>r.key===k))))return {ok:false,why:'Geçersiz toprak satırı'};
   for(const r of c.rows){
     const score=id=>c.shares.find(s=>s.id===id).target-given[id]+(r.claims.includes(id)?4:0)+(r.from===id?2:0);
-    const ranked=c.members.slice().sort((a,b)=>score(b)-score(a)||a-b);
+    const reach=Object.fromEntries(c.members.map(id=>[id,settlementReach(G.emps[id],r)]));
+    const ranked=c.members.slice().sort((a,b)=>score(b)-score(a)||Number(reach[b])-Number(reach[a])||a-b);
     const to=assignments&&Object.prototype.hasOwnProperty.call(assignments,r.key)?assignments[r.key]:ranked[0];
     if(!c.members.includes(to))return {ok:false,why:'Alıcı bu seferin yaşayan ortağı değil'};
     given[to]+=r.value;
@@ -2017,7 +2026,7 @@ function giftOnCooldown(a, b){
    Kapsam: aşağıdaki kökler ve bunların eriştiği oyun verisi. DOM, UI,
    fonksiyon gövdeleri ve kataloglar işlem verisi değildir. */
 const DEAL_TX_ROOTS = ['emps','p','sys','fleets','feds','council',
-  'fallStats','sabStats','log','inbox','inboxUid','warLedger','settlements','_structAt','_structIdx'];
+  'fallStats','sabStats','log','inbox','inboxUid','warLedger','settlements','jointOps','_structAt','_structIdx'];
 const DEAL_TX_AUTH = ['_dealAuth','_warAuth','_warWhy','_sideBuf'];
 let _dealTxActive = false;
 function txCaptureGraph(values, opaque){

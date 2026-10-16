@@ -117,8 +117,8 @@ test('cihazdan yükle bozuk kaydı bulunamadı diye raporlamaz',async()=>{
  assert.doesNotMatch(h.run('G.log[G.log.length-1].m'),/bulunamadı/i);
 });
 test('build ve cache 90RC.2 kimliği taşır',()=>{
- assert.match(fs.readFileSync(path.join(root,'main.js'),'utf8'),/const BUILD_ID = '95b'/);
- assert.match(fs.readFileSync(path.join(root,'sw.js'),'utf8'),/const CACHE = 'stars-v95b'/);
+ assert.match(fs.readFileSync(path.join(root,'main.js'),'utf8'),/const BUILD_ID = '95c'/);
+ assert.match(fs.readFileSync(path.join(root,'sw.js'),'utf8'),/const CACHE = 'stars-v95c'/);
 });
 (async()=>{for(const [name,fn] of tests){try{await fn();pass++;console.log('✓ '+name);}
  catch(e){fail++;console.log('✗ '+name+' — '+e.stack);}}

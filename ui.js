@@ -18,6 +18,56 @@
 const UI = {
   cur:'sistem', modalPrevSpeed:1, alerts:[],
 
+  jointPanel(recipient=null,surface='fleet'){
+    if(this._jointWorld!==G.sys){this._jointWorld=G.sys;this._jointFeedback='';this._jointExpanded={};}
+    const previous=document.querySelector('.jointOps[data-surface="'+surface+'"]');
+    if(previous)this._jointExpanded[surface]=previous.open;
+    const expanded=!!this._jointExpanded[surface];
+    const e=G.p,plans=jointView(e),names={capture:'Sistemi ele geçir',defend:'Bölgeyi savun',follow:'Filomu izle / destekle'},
+      states={gather:'Toplanıyor',march:'Yola çıktı',defend:'Savunuyor',done:'Görev tamamlandı',cancelled:'Görev iptal edildi'};
+    const allies=G.emps.filter(o=>o.id!==e.id&&o.ai&&e.contact[o.id]&&jointBinding(e,o)&&
+      (recipient===null||recipient===o.id));
+    if(!plans.length&&!allies.length)return '';
+    const fleet=View.sel&&View.sel.e===e.id&&isArmed(View.sel)?View.sel:null;
+    const sys=View.selSys&&View.selSys.seen.includes(e.id)?View.selSys:null;
+    let h=`<details class="dcDetails jointOps" data-surface="${surface}" data-recipient="${recipient??''}" ${expanded?'open':''} style="overflow-wrap:anywhere;max-width:100%"><summary style="min-height:44px;padding:10px 0">⚔ Ortak askerî koordinasyon</summary>
+      <div class="mini">Bu emirler destek talebidir. Müttefik yalnız aynı kabul edilmiş savaş seferinde, kendi savunması, ikmali ve gerçek filoları uygunsa katılır. Filo ve sistem hedefini haritadan seçebilirsin.</div>`;
+    if(this._jointFeedback)h+=`<div class="box" role="status">${esc(this._jointFeedback)}</div>`;
+    for(const o of allies){
+      const shared=(G.warLedger?.fronts||[]).some(f=>f.ended===null&&f.sides.includes(e.id)&&warLedgerPair(...f.sides)&&
+        jointContext(f.campaign,f.roles[f.sides.indexOf(e.id)],e.id,f.sides.find(id=>id!==e.id))?.members.includes(o.id));
+      if(!shared)continue;
+      const known=sys&&aiKnownSystem(e,sys),enemy=known&&e.war[known.owner];
+      h+=`<div class="box"><b>${esc(o.name)}</b><div class="act2">
+        <button class="abtn" style="min-height:44px;white-space:normal" data-a="jointRequest" data-x="${o.id}:follow:${fleet?fleet.id:-1}" ${fleet?'':'disabled'}>FİLOMU DESTEKLE</button>
+        <button class="abtn" style="min-height:44px;white-space:normal" data-a="jointRequest" data-x="${o.id}:capture:${sys?sys.id:-1}" ${enemy?'':'disabled'}>SİSTEMİ ELE GEÇİR</button>
+        <button class="abtn" style="min-height:44px;white-space:normal" data-a="jointRequest" data-x="${o.id}:defend:${sys?sys.id:-1}" ${known&&known.owner>=0&&jointBinding(e,G.emps[known.owner])?'':'disabled'}>BÖLGEYİ SAVUN</button>
+      </div><div class="mini">Filo: ${fleet?esc(fleet.name||'Seçili filo'):'kendi savaş filonu seç'} · Sistem: ${sys?esc(sys.name):'bilinen sistem seç'}</div></div>`;
+    }
+    for(const p of plans){
+      if(recipient!==null&&!p.members.includes(recipient))continue;
+      const where=id=>id===null?'Bilinen konum bildirilmedi':esc(G.sys[id].name);
+      h+=`<div class="box"><b>${names[p.kind]} · ${states[p.state]}</b>
+        <div class="mini">Hedef: ${where(p.target)} · Toplanma: ${where(p.rally)}</div>
+        <div class="mini">${esc(p.reason)}</div><div class="mini">Bilinen ortaklar: ${p.members.map(id=>esc(G.emps[id].name)).join(', ')}</div>
+        ${Object.entries(p.responses).map(([id,r])=>`<div class="mini">${esc(G.emps[id].name)}: ${esc(r)}</div>`).join('')}
+        ${p.fleets.map(f=>`<div class="mini">${esc(G.emps[f.owner].name)} · ${esc(f.name)}${f.waiting?' · Müttefik bekleniyor':''}${f.eta===null?' · ETA bildirilmedi':' · Yaklaşık '+Math.ceil(f.eta)+' oyun günü'}</div>`).join('')}
+        <div class="mini">Yalnız sensörlerinde görülen destek filoları listelenir. Gizli filo konumu, kesin gücü ve ETA gösterilmez.</div>
+        ${p.requester===0&&!['done','cancelled'].includes(p.state)?`<button class="abtn" style="min-height:44px;white-space:normal" data-a="jointCancel" data-x="${p.id}">DESTEK TALEBİNİ İPTAL ET</button>`:''}</div>`;
+    }
+    return h+'</details>';
+  },
+
+  refreshJointPanels(){
+    const pane=$('diploPane');if(!pane.classList.contains('show'))return;
+    const block=pane.querySelector('.jointOps');if(!block)return;
+    const key=[Math.floor(G.day/5),G.jointOps?.next,View.sel?.id,View.selSys?.id,block.dataset.surface,block.dataset.recipient].join(':');
+    if(this._jointRenderKey===key&&this._jointRenderWorld===G.sys)return;
+    this._jointRenderKey=key;this._jointRenderWorld=G.sys;
+    const body=pane.querySelector('.dcBody'),scroll=body?body.scrollTop:0;
+    block.outerHTML=this.jointPanel(block.dataset.recipient===''?null:+block.dataset.recipient,block.dataset.surface);
+    if(body)body.scrollTop=scroll;
+  },
   planetFolds(){
     if(this._planetWorld!==G.sys){this._planetWorld=G.sys;this._planetFolds=new Set();}
     return this._planetFolds;
@@ -1130,6 +1180,21 @@ const UI = {
         this.refresh();
         break;
       }
+      case 'jointRequest': {
+        if(this._jointWorld!==G.sys)break;
+        const fedSurface=!!el?.closest('.fedBox')||$('diploPane').classList.contains('show')&&!!$('diploPane').querySelector('.fedBox .jointOps');
+        const [id,kind,target]=String(x).split(':');
+        const r=jointRequest(G.p,+id,kind,+target);
+        this._jointFeedback=(r.ok?'Kabul: ':'Ret: ')+(r.why||'Destek görevi değerlendirildi');
+        say(this._jointFeedback,r.ok?'sci':'war');this.keepScroll=true;this.refresh();
+        if(fedSurface)this.openFed();break;
+      }
+      case 'jointCancel': {
+        if(this._jointWorld!==G.sys)break;
+        const fedSurface=!!el?.closest('.fedBox')||$('diploPane').classList.contains('show')&&!!$('diploPane').querySelector('.fedBox .jointOps');
+        const r=jointCancel(G.p,+x);this._jointFeedback=r.ok?'Destek talebi iptal edildi; gemiler korunuyor.':r.why;
+        say(this._jointFeedback);this.keepScroll=true;this.refresh();if(fedSurface)this.openFed();break;
+      }
       case 'fedPane': this.openFed(); break;
       case 'shareOpen': this.openSettlement(+x); break;
       case 'cncPane':
@@ -1921,6 +1986,7 @@ const UI = {
     }
     $('stardate').textContent = G.year + '.' + String(G.month).padStart(2,'0');
     this.refreshScience();
+    this.refreshJointPanels();
     this.seltag();
   },
   refresh(){
@@ -2669,8 +2735,9 @@ const UI = {
 
   /* =============== FİLO =============== */
   p_filo(){
+    this._jointSurface='fleet';
     const mine = G.fleets.filter(f=>f.e===0);
-    let h = '';
+    let h = this.jointPanel();
     const f = View.sel && View.sel.e===0 ? View.sel : null;
     if (f && f.ships.length){
       const e = G.p;
@@ -3408,9 +3475,11 @@ const UI = {
       <button class="abtn" data-a="shareOpen" data-x="${v.campaign}">⚖ ${waiting?'PAYLAŞIM · OYUN BEKLENİYOR':'PAYLAŞIM TASLAĞI'}</button></details>`;
   },
   diploRelationship(e,o){
+    this._jointSurface='diplo';
     const lvl=intelOf(e,o.id),blocked=diploBlocked(e,o),war=!!(e.war[o.id]||o.war[e.id]);
     let h=this.diploIdentity(e,o)+this.diploTreaties(e,o);
     h+=this.warContribution(e,o);
+    h+=this.jointPanel(o.id,'diplo');
     if (e.pact&&e.pact[o.id]) h+=`<div class="mini">Ticaret takasın: ${esc((e.lastSwap&&e.lastSwap[o.id])||'—')}
       · ${((e.tradeFlow&&e.tradeFlow[o.id])||0).toFixed(1)} birim/ay</div>`;
     h+='<div class="ph">NEDEN BU İLİŞKİ?</div>';
@@ -3484,6 +3553,7 @@ const UI = {
 
   /* =============== FEDERASYON PANELİ =============== */
   openFed(){
+    this._jointSurface='fed';
     const e = G.p;
     const f = findFed(e);
     let h = `<div class="dpBox dcBox fedBox" style="width:min(640px,100%)">
@@ -3531,6 +3601,7 @@ const UI = {
       }
     } else {
       h+=this.fedGovernance(f);
+      h+=this.jointPanel(null,'fed');
       h += `<div class="envRow"><span>${esc(f.name)}</span>
         <b style="color:#6ff2c8">${f.members.length} üye</b></div>`;
 

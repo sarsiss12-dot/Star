@@ -1,0 +1,470 @@
+{
+  "natural": {
+    "11": {
+      "months": 120,
+      "sameMonthlyState": true,
+      "sameRng": true,
+      "plans": 0,
+      "negativeBefore": 0,
+      "negativeAfter": 0,
+      "msBefore": 7536,
+      "msAfter": 11475,
+      "routeCallsAfter": 2284,
+      "routeMsAfter": 499,
+      "finalCoreShaMatches": true,
+      "uiChangedAfterMeasurement": true
+    },
+    "99": {
+      "months": 120,
+      "sameMonthlyState": true,
+      "sameRng": true,
+      "plans": 0,
+      "negativeBefore": 0,
+      "negativeAfter": 0,
+      "msBefore": 6975,
+      "msAfter": 10334,
+      "routeCallsAfter": 625,
+      "routeMsAfter": 50,
+      "finalCoreShaMatches": true,
+      "uiChangedAfterMeasurement": true
+    },
+    "404": {
+      "months": 120,
+      "sameMonthlyState": true,
+      "sameRng": true,
+      "plans": 0,
+      "negativeBefore": 0,
+      "negativeAfter": 0,
+      "msBefore": 34828,
+      "msAfter": 12635,
+      "routeCallsAfter": 502,
+      "routeMsAfter": 43,
+      "finalCoreShaMatches": true,
+      "uiChangedAfterMeasurement": true
+    }
+  },
+  "controlled": {
+    "11": {
+      "before": {
+        "months": 28,
+        "ms": 1955,
+        "plans": 0,
+        "targetArrivals": 0,
+        "firstArrivalDays": {
+          "77": 154.75,
+          "78": 123.5,
+          "79": 123.25
+        },
+        "firstJointArrivalSpan": null,
+        "firstJointRallyDays": null,
+        "first12Losses": 41,
+        "first12Damage": {
+          "1": 2923.5984663532236,
+          "2": 401.46328404689297,
+          "3": 760.9075665582618
+        },
+        "first12EnergyMaint": 2109.2239999999997,
+        "first12AlloyMaint": 338.3744,
+        "first12ShipCosts": {
+          "ene": 0,
+          "min": 720,
+          "ala": 1784
+        },
+        "owner8": -1,
+        "allLossObservations": 88,
+        "militaryLossObservations": 42,
+        "negative": 0,
+        "stockZeroSamples": 0,
+        "waitFleetDays": 0,
+        "supplyFleetDays": 0,
+        "rejectedAttempts": 0,
+        "unreachableAttempts": 0,
+        "routeCalls": 494,
+        "routeMs": 30,
+        "settlements": {},
+        "endStates": []
+      },
+      "after": {
+        "months": 120,
+        "ms": 17690,
+        "plans": 4,
+        "targetArrivals": 14,
+        "firstArrivalDays": {
+          "77": 116.5,
+          "78": 116.5,
+          "79": 116.5
+        },
+        "firstJointArrivalSpan": 0.0,
+        "firstJointRallyDays": 10.0,
+        "first12Losses": 4,
+        "first12Damage": {
+          "1": 2280.4168900945306,
+          "2": 494.8953263415667,
+          "3": 549.4213848772818
+        },
+        "first12EnergyMaint": 4165.564,
+        "first12AlloyMaint": 624.8423999999998,
+        "first12ShipCosts": {
+          "ene": 0,
+          "min": 3165,
+          "ala": 1531
+        },
+        "owner8": 1,
+        "allLossObservations": 165,
+        "militaryLossObservations": 99,
+        "negative": 0,
+        "stockZeroSamples": 0,
+        "waitFleetDays": 737,
+        "supplyFleetDays": 0,
+        "rejectedAttempts": 0,
+        "unreachableAttempts": 0,
+        "routeCalls": 6952,
+        "routeMs": 1965,
+        "settlements": {},
+        "endStates": [
+          {
+            "id": 4,
+            "kind": "capture",
+            "target": 2,
+            "state": "cancelled",
+            "reason": "Savaş sona erdi veya ortak katılım kapandı",
+            "created": 3130.75,
+            "launched": 3135.75,
+            "ended": 3180.25
+          },
+          {
+            "id": 3,
+            "kind": "capture",
+            "target": 5,
+            "state": "cancelled",
+            "reason": "Savaş sona erdi veya ortak katılım kapandı",
+            "created": 2920.75,
+            "launched": 2925.75,
+            "ended": 2940.25
+          },
+          {
+            "id": 2,
+            "kind": "capture",
+            "target": 4,
+            "state": "cancelled",
+            "reason": "Savaş sona erdi veya ortak katılım kapandı",
+            "created": 160.75,
+            "launched": 165.75,
+            "ended": 270.25
+          },
+          {
+            "id": 1,
+            "kind": "capture",
+            "target": 8,
+            "state": "done",
+            "reason": "Görev tamamlandı",
+            "created": 100.75,
+            "launched": 110.75,
+            "ended": 117.75
+          }
+        ]
+      }
+    },
+    "99": {
+      "before": {
+        "months": 77,
+        "ms": 8029,
+        "plans": 0,
+        "targetArrivals": 0,
+        "firstArrivalDays": {
+          "77": 154.75,
+          "78": 123.5,
+          "79": 123.25
+        },
+        "firstJointArrivalSpan": null,
+        "firstJointRallyDays": null,
+        "first12Losses": 45,
+        "first12Damage": {
+          "1": 2888.469070241161,
+          "2": 377.8702918862106,
+          "3": 794.8406077718992
+        },
+        "first12EnergyMaint": 1816.1519999999998,
+        "first12AlloyMaint": 286.2496,
+        "first12ShipCosts": {
+          "ene": 0,
+          "min": 2145,
+          "ala": 1780
+        },
+        "owner8": 4,
+        "allLossObservations": 169,
+        "militaryLossObservations": 95,
+        "negative": 0,
+        "stockZeroSamples": 0,
+        "waitFleetDays": 0,
+        "supplyFleetDays": 0,
+        "rejectedAttempts": 0,
+        "unreachableAttempts": 0,
+        "routeCalls": 9406,
+        "routeMs": 1312,
+        "settlements": {},
+        "endStates": []
+      },
+      "after": {
+        "months": 120,
+        "ms": 9301,
+        "plans": 2,
+        "targetArrivals": 8,
+        "firstArrivalDays": {
+          "77": 116.5,
+          "78": 116.5,
+          "79": 116.5
+        },
+        "firstJointArrivalSpan": 0.0,
+        "firstJointRallyDays": 10.0,
+        "first12Losses": 7,
+        "first12Damage": {
+          "1": 2231.4859264756524,
+          "2": 506.64126397300447,
+          "3": 586.6228095513432
+        },
+        "first12EnergyMaint": 3957.7200000000003,
+        "first12AlloyMaint": 608.0255999999999,
+        "first12ShipCosts": {
+          "ene": 0,
+          "min": 3070,
+          "ala": 1523
+        },
+        "owner8": 1,
+        "allLossObservations": 71,
+        "militaryLossObservations": 27,
+        "negative": 0,
+        "stockZeroSamples": 0,
+        "waitFleetDays": 564.75,
+        "supplyFleetDays": 0,
+        "rejectedAttempts": 0,
+        "unreachableAttempts": 0,
+        "routeCalls": 8420,
+        "routeMs": 975,
+        "settlements": {},
+        "endStates": [
+          {
+            "id": 2,
+            "kind": "capture",
+            "target": 4,
+            "state": "cancelled",
+            "reason": "Savaş sona erdi veya ortak katılım kapandı",
+            "created": 160.75,
+            "launched": 165.75,
+            "ended": 270.25
+          },
+          {
+            "id": 1,
+            "kind": "capture",
+            "target": 8,
+            "state": "done",
+            "reason": "Görev tamamlandı",
+            "created": 100.75,
+            "launched": 110.75,
+            "ended": 117.75
+          }
+        ]
+      }
+    },
+    "404": {
+      "before": {
+        "months": 73,
+        "ms": 6000,
+        "plans": 0,
+        "targetArrivals": 0,
+        "firstArrivalDays": {
+          "77": 154.75,
+          "78": 123.5,
+          "79": 123.25
+        },
+        "firstJointArrivalSpan": null,
+        "firstJointRallyDays": null,
+        "first12Losses": 47,
+        "first12Damage": {
+          "1": 2876.2507446138866,
+          "2": 472.74121531472144,
+          "3": 733.4751525329801
+        },
+        "first12EnergyMaint": 1787.188,
+        "first12AlloyMaint": 290.108,
+        "first12ShipCosts": {
+          "ene": 0,
+          "min": 1165,
+          "ala": 1758
+        },
+        "owner8": 1,
+        "allLossObservations": 118,
+        "militaryLossObservations": 70,
+        "negative": 0,
+        "stockZeroSamples": 0,
+        "waitFleetDays": 0,
+        "supplyFleetDays": 0,
+        "rejectedAttempts": 0,
+        "unreachableAttempts": 0,
+        "routeCalls": 6525,
+        "routeMs": 758,
+        "settlements": {},
+        "endStates": []
+      },
+      "after": {
+        "months": 120,
+        "ms": 11152,
+        "plans": 7,
+        "targetArrivals": 33,
+        "firstArrivalDays": {
+          "77": 116.5,
+          "78": 116.5,
+          "79": 116.5
+        },
+        "firstJointArrivalSpan": 0.0,
+        "firstJointRallyDays": 10.0,
+        "first12Losses": 3,
+        "first12Damage": {
+          "1": 2157.7929563452544,
+          "2": 486.67220345301394,
+          "3": 599.7848402017318
+        },
+        "first12EnergyMaint": 4271.799999999999,
+        "first12AlloyMaint": 634.1607999999999,
+        "first12ShipCosts": {
+          "ene": 0,
+          "min": 3340,
+          "ala": 1554
+        },
+        "owner8": 1,
+        "allLossObservations": 194,
+        "militaryLossObservations": 125,
+        "negative": 0,
+        "stockZeroSamples": 0,
+        "waitFleetDays": 2514.5,
+        "supplyFleetDays": 0,
+        "rejectedAttempts": 1,
+        "unreachableAttempts": 0,
+        "routeCalls": 8816,
+        "routeMs": 1116,
+        "settlements": {},
+        "endStates": [
+          {
+            "id": 7,
+            "kind": "capture",
+            "target": 5,
+            "state": "cancelled",
+            "reason": "Savaş sona erdi veya ortak katılım kapandı",
+            "created": 3100.75,
+            "launched": 3105.75,
+            "ended": 3150.25
+          },
+          {
+            "id": 6,
+            "kind": "capture",
+            "target": 5,
+            "state": "cancelled",
+            "reason": "Savaş sona erdi veya ortak katılım kapandı",
+            "created": 2800.75,
+            "launched": 2800.75,
+            "ended": 2910.25
+          },
+          {
+            "id": 5,
+            "kind": "capture",
+            "target": 3,
+            "state": "cancelled",
+            "reason": "Savaş sona erdi veya ortak katılım kapandı",
+            "created": 2590.75,
+            "launched": 2600.75,
+            "ended": 2760.25
+          },
+          {
+            "id": 4,
+            "kind": "capture",
+            "target": 5,
+            "state": "cancelled",
+            "reason": "Kendi stratejik savunması öncelikli",
+            "created": 2470.75,
+            "launched": 2480.75,
+            "ended": 2520.75
+          },
+          {
+            "id": 3,
+            "kind": "capture",
+            "target": 6,
+            "state": "cancelled",
+            "reason": "Savaş sona erdi veya ortak katılım kapandı",
+            "created": 2380.75,
+            "launched": 2385.75,
+            "ended": 2400.25
+          },
+          {
+            "id": 2,
+            "kind": "capture",
+            "target": 4,
+            "state": "cancelled",
+            "reason": "Savaş sona erdi veya ortak katılım kapandı",
+            "created": 160.75,
+            "launched": 165.75,
+            "ended": 270.25
+          },
+          {
+            "id": 1,
+            "kind": "capture",
+            "target": 8,
+            "state": "done",
+            "reason": "Görev tamamlandı",
+            "created": 100.75,
+            "launched": 110.75,
+            "ended": 117.75
+          }
+        ]
+      }
+    }
+  },
+  "performance": {
+    "systems": 100,
+    "empires": 13,
+    "runs": [
+      {
+        "ms": 41,
+        "ok": true,
+        "reason": "Talep kabul edildi; mevcut filolar ortak göreve ayrıldı",
+        "fleets": 3
+      },
+      {
+        "ms": 22,
+        "ok": true,
+        "reason": "Talep kabul edildi; mevcut filolar ortak göreve ayrıldı",
+        "fleets": 3
+      },
+      {
+        "ms": 16,
+        "ok": true,
+        "reason": "Talep kabul edildi; mevcut filolar ortak göreve ayrıldı",
+        "fleets": 3
+      },
+      {
+        "ms": 16,
+        "ok": true,
+        "reason": "Talep kabul edildi; mevcut filolar ortak göreve ayrıldı",
+        "fleets": 3
+      },
+      {
+        "ms": 14,
+        "ok": true,
+        "reason": "Talep kabul edildi; mevcut filolar ortak göreve ayrıldı",
+        "fleets": 3
+      }
+    ],
+    "routes": 280,
+    "routeMs": 191,
+    "stable": {
+      "ticks": 1000,
+      "ms": 12,
+      "routeCalls": 0
+    },
+    "stress": {
+      "ms": 100,
+      "ok": true,
+      "fleets": 24,
+      "routeCalls": 160
+    }
+  }
+}

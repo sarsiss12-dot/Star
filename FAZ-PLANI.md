@@ -1,3 +1,20 @@
+# 95C sonrası güncel yol haritası — 17 Ekim 2026
+
+95C tamamlandı: aynı geçerli seferde gerçek filo koordinasyonu, ikmalli toplanma, farklı hızda çıkış, askerî AI desteği, üç oyuncu destek talebi, kompakt bilgi filtreli arayüz, gerçek aktörlerle mevcut muharebe ve katkı bağlantısı; oybirliği paylaşımı korunur. 79 paket / 4823 kontrol / 0 kalan hata. Save v8; tek 2B kamera; PWA `stars-v95c`. GitHub geliştirme notu aynen korunmuştur.
+
+| Planlı iş | Korunan kapsam |
+|---|---|
+| 95D — başlamadı | Benzersiz devlet/federasyon isim ve amblemleri, Rastgele Amblem, harita kimliği ve savaş katılım önizlemesi |
+| 95E — başlamadı | Galaktik Haber Ağı, kalıcı gelen kutusu ve uzaktan inşa emirleri; gerekirse alt fazlar |
+| 96A / bağımsız öncelikli bakım | Kaynak sözleşmeleri, rota/gelir şeffaflığı ve gerçek konvoylar; yeni çoğalma kanıtlanırsa ayrı öncelikli düzeltme |
+| Süren kalite takibi | Doğal ortak savaş sıklığı, uzun dönem federasyon dengesi, muhafazakâr başkent rezervi, yoğun ortak savaş/mobil performansı, geç oyun bilgi sınırları, tohum 99 keşif/ikmal |
+
+Yedi kaynaklı Ekonomi ekranı, sığınmacı/olay tutarlılığı, pre-game portre ve sekiz köken, casuslukta karşı araştırma, bilim/doktrin/tür dengesi ve dış dosyasız doğal generatif müzik talepleri korunur. Eğik/döndürülebilir kamera geri getirilmez. Gerçek Android kabulü açık kalır; mevcut çift bazlı savaş raporunun koalisyon sunumu ayrı kalite adayıdır.
+
+95D'ye başlanmadı. GitHub yayını ayrı kullanıcı talimatıyla. Aşağıdaki önceki faz planları tarihsel kayıttır; güncel durum bu bölümdür.
+
+---
+
 # 95B sonrası güncel yol haritası — 16 Ekim 2026
 
 95B tamamlandı: üç federasyon türü; kaynak karşılıklı avantajlar; anayasa, kabul/ihraç/seçim ve savaş kararları; açık oyuncu onayı; 12 aylık tür geçişi ve kabulden 120 aylık bekleme; AI'nın bağımsız siyasi kuruluş/yönetimi; kompakt mevcut panel. 78 paket / 4764 başarılı kontrol / 0 kalan / 0 zaman aşımı. Save v8 ve tek 2B kamera korunur. `STARS-GELISTIRME-NOTLARI-2026-10-15.md` aynen korunmuştur.

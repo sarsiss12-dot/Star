@@ -1,0 +1,21 @@
+{
+  "repository_full_name": "sarsiss12-dot/Star",
+  "base": "1fc2e86382a6bba965acbaf6d323c7ef79f5747e",
+  "head": "main",
+  "status": "identical",
+  "ahead_by": 0,
+  "behind_by": 0,
+  "total_commits": 0,
+  "too_large": null,
+  "base_commit": {
+    "sha": "1fc2e86382a6bba965acbaf6d323c7ef79f5747e",
+    "url": "https://api.github.com/repos/sarsiss12-dot/Star/commits/1fc2e86382a6bba965acbaf6d323c7ef79f5747e",
+    "html_url": "https://github.com/sarsiss12-dot/Star/commit/1fc2e86382a6bba965acbaf6d323c7ef79f5747e"
+  },
+  "merge_base_commit": {
+    "sha": "1fc2e86382a6bba965acbaf6d323c7ef79f5747e",
+    "url": "https://api.github.com/repos/sarsiss12-dot/Star/commits/1fc2e86382a6bba965acbaf6d323c7ef79f5747e",
+    "html_url": "https://github.com/sarsiss12-dot/Star/commit/1fc2e86382a6bba965acbaf6d323c7ef79f5747e"
+  },
+  "files": []
+}

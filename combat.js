@@ -10,7 +10,7 @@
    BAĞIMLILIK: sideStats, SHIPS, G. main.js'ten SONRA yüklenir.
    ═══════════════════════════════════════════════════════════════════ */
 
-function battleRound(sys, A, fa, B, fb, def, band){
+function battleRound(sys, A, fa, B, fb, def, band, exchange=null){
   const report = battleReportBegin(sys, A, B);
   const beforeRetreatA = fa.length, beforeRetreatB = fb.length;
   /* ═══════════════════════════════════════════════════════════
@@ -88,8 +88,8 @@ function battleRound(sys, A, fa, B, fb, def, band){
   const mitA = clamp(sa.sh/(sa.sh+sa.hull+1), 0, .55);
   const mitB = clamp(sb.sh/(sb.sh+sb.hull+1), 0, .55);
   const takeA = sideTakeMul(fa), takeB = sideTakeMul(fb);
-  const toB = sa.dmg * (1-mitB) * takeB * (.85 + rnd()*.3);
-  const toA = sb.dmg * (1-mitA) * takeA * (.85 + rnd()*.3);
+  const toB = sa.dmg * (exchange?exchange.fireA:1) * (1-mitB) * takeB * (.85 + rnd()*.3);
+  const toA = sb.dmg * (exchange?exchange.fireB:1) * (1-mitA) * takeA * (.85 + rnd()*.3);
 
   /* ═══ FAZ 28: PUSU BONUSU ═══
      Çift taraflı ajan tuzağı: kalkanın düştüğünü sanan saldırgan
@@ -157,7 +157,7 @@ function battleRound(sys, A, fa, B, fb, def, band){
     const wildSide = wildDefenseAlive(sys, A) > 0 ? A : wildDefenseAlive(sys, B) > 0 ? B : -1;
     if (wildSide >= 0){
       const atkDmg = (wildSide === A) ? sb.dmg : sa.dmg;
-      sys.nest.hp -= atkDmg * .35;
+      sys.nest.hp -= atkDmg * (exchange?(wildSide===A?exchange.fireB:exchange.fireA):1) * .35;
       if (sys.nest.hp <= 0){
         const killer = (wildSide === A) ? B : A;
         sys.nest = null;
@@ -179,7 +179,7 @@ function battleRound(sys, A, fa, B, fb, def, band){
     const wildSide2 = wildDefenseAlive(sys, A) > 0 ? A : wildDefenseAlive(sys, B) > 0 ? B : -1;
     if (wildSide2 >= 0){
       const atk = (wildSide2 === A) ? sb.dmg : sa.dmg;
-      sys.ruin.hp -= atk * .30;
+      sys.ruin.hp -= atk * (exchange?(wildSide2===A?exchange.fireB:exchange.fireA):1) * .30;
       if (sys.ruin.hp <= 0){
         const killer = (wildSide2 === A) ? B : A;
         const ke = G.emps[killer];

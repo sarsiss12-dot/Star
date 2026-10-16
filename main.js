@@ -2322,6 +2322,7 @@ function setupGame(cfg){
   G.cfg = cfg;
   G.warLedger = warLedgerEmpty();
   G.settlements = settlementEmpty();
+  G.jointOps = jointEmpty();
   rndSeed(cfg.seed ^ 0x5f3a91);
   const rnd = generateGalaxy(cfg);
   const nAI = SIZES[cfg.size].ai;
@@ -3360,6 +3361,7 @@ function orderMove(f, target, append, automatic=false, knownPath=null){
   // ilk düğüm olarak kalır; hareket ortasında yeni rota bir durak atlamaz.
   const base = append ? f.path.slice() : [];
   if (f.mv && base[0] !== f.mv.to) base.unshift(f.mv.to);
+  if(!automatic&&f.jointPlan!==undefined){delete f.jointPlan;delete f.jointHoldUntil;}
   if(f.shipment)clearShipment(f); // başarılı açık hareket emri teslimatın yerini alır
   if(automatic&&explorationEnabled(f))delete f.explore;
   else cancelExploration(f); // yalnız açık oyuncu emri otomasyonu devralır
@@ -3640,7 +3642,7 @@ function stepFleets(dt){
 
     if (hasShipment(f)) followRallyFleet(f,shipmentBudget);
     if (!f.ships.length) continue;
-    if (!f.mv && f.path.length){
+    if (!f.mv && f.path.length && !(f.jointHoldUntil>G.day)){
       const nxt = f.path[0], eMove = empOf(f), here = G.sys[f.sys];
       if(f.shipment && f.shipment.safe){
         if(!safeThreats.has(f.e))safeThreats.set(f.e,reinforcementThreats(eMove));
@@ -3656,7 +3658,7 @@ function stepFleets(dt){
       const gate = hasUsableGate(eMove,here) && hasUsableGate(eMove,G.sys[nxt]);
       if (!here || !G.sys[nxt] || !pathAllowed(eMove,f,[nxt],f.sys) || (!lane && !gate)){
         if(explorationEnabled(f)){holdExploration(f,'route');continue;}
-        const p = here && !hasShipment(f) ? findPathAllowed(eMove,f,f.sys,nxt) : null;
+        const p = here && !hasShipment(f) && !jointReserved(f) ? findPathAllowed(eMove,f,f.sys,nxt) : null;
         if (p && p.length) f.path = p.concat(f.path.slice(1));
         else {
           if(hasShipment(f))holdShipment(f,'blocked');
@@ -4006,6 +4008,7 @@ function dispatchBuiltFleet(e,f,delivery){
 function dailyTick(dt){
   warLedgerSync();
   settlementTick();
+  jointTick();
   stepFleets(dt);
   // tersane kuyrukları
   for (const sys of G.sys){
@@ -4166,11 +4169,25 @@ function combatTick(dt){
       continue;
     }
 
-    const fa = list.filter(f=>f.e===A), fb = list.filter(f=>f.e===B);
-    fa.concat(fb).forEach(f=>{ f.combat = 2; f.mv = null; });
-    // mesafe: muharebe uzaktan başlar, her turda yakınlaşır
-    if (!sys.cr) sys.cr = 3;
-    battleRound(sys, A, fa, B, fb, def, sys.cr);
+    const exchanges=jointBattlePairs(A,B,list);
+    const band=sys.cr||3;
+    if(exchanges){
+      sys.cr=band;
+      for(const x of exchanges){
+        x.fa=list.filter(f=>f.e===x.a&&f.ships.length);x.fb=list.filter(f=>f.e===x.b&&f.ships.length);
+      }
+      for(const x of exchanges){
+        const fa=x.fa.filter(f=>f.ships.length),fb=x.fb.filter(f=>f.ships.length);
+        if(!fa.length&&!orbitDefenseAlive(sys,x.a)||!fb.length&&!orbitDefenseAlive(sys,x.b))continue;
+        fa.concat(fb).forEach(f=>{f.combat=2;f.mv=null;});
+        battleRound(sys,x.a,fa,x.b,fb,sysDefense(sys),band,x);
+      }
+    }else{
+      if(!sys.cr)sys.cr=3;
+      const fa = list.filter(f=>f.e===A), fb = list.filter(f=>f.e===B);
+      fa.concat(fb).forEach(f=>{ f.combat = 2; f.mv = null; });
+      battleRound(sys, A, fa, B, fb, def, band);
+    }
     if (sys.cr > 1) sys.cr -= 1;
     dirty = true;
   }
@@ -7472,7 +7489,7 @@ function serialize(){
        sınırı 5212'ye düşüp 30 sistemi ERİŞİLEMEZ yapıyordu.
        v8 KALIR — ek alan, okunamadığında deterministik olarak
        yeniden türetilir. */
-    W:G.W, H:G.H, warLedger:G.warLedger, settlements:G.settlements,
+    W:G.W, H:G.H, warLedger:G.warLedger, settlements:G.settlements, jointOps:G.jointOps,
     /* FAZ 85A: politik küresel durum tek alt nesnede */
     world: serializePoliticalWorld(),
     /* FAZ 85C: oyun sonu krizi */
@@ -7694,6 +7711,7 @@ function applySaveData(d){
   G._loadWorldInfo = restorePoliticalWorld(d.world, d.v);
   restoreWarLedger(d.warLedger);
   restoreSettlements(d.settlements);
+  restoreJoint(d.jointOps);
   normalizeDiplomaticBindings(); // 94D: no RNG, time or relationship score changes
   loadCheckpoint('after:world');
   /* FAZ 85C: kriz dünyası — politik world'den SONRA (kriz konsey/
@@ -8052,7 +8070,7 @@ function forceRedraw(sebep){
    Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
    Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
 /* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */
-const BUILD_ID = '95b';
+const BUILD_ID = '95c';
 const DIAG_MAX = 40;
 const DIAG = [];
 function logDiag(tur, mesaj){

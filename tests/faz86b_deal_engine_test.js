@@ -105,7 +105,7 @@ for(const f of fs.readdirSync(KOK).filter(x=>x.endsWith('.js'))){
 }
 {
   const dip=oku('diplomacy.js'), ui=oku('ui.js'), mn=oku('main.js');
-  ok("sw cache = 'stars-v95b'", /const CACHE = 'stars-v95b'/.test(oku('sw.js')));
+  ok("sw cache = 'stars-v95c'", /const CACHE = 'stars-v95c'/.test(oku('sw.js')));
   ok('kayıt sürümü v:8 KALDI', /v:8, cfg:G\.cfg/.test(mn));
   ['yildiz:save','yh_audio','yh_advisor','yh_autoev','yh_bg','yh_radar',
    'yh_templates','__yh_probe','__yh_diag'].forEach(k=>

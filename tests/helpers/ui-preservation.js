@@ -5,6 +5,13 @@ const hash=s=>createHash('sha256').update(s).digest('hex');
 // block must restore the untouched canonical 93A.1/93C HTML hash.
 // Historical referans-sha.json remains intact; neither half is exempted.
 exports.isReviewedUI=source=>{
+ // 95B's canonical federation CSS was shipped without updating this guard.
+ // Pin that exact block separately; original UI and science hashes stay fixed.
+ const fedStart=source.indexOf('/* 95B: reuse the bounded diplomacy panel');
+ if(fedStart>=0){const end=source.indexOf('/* FAZ 93D — scoped science tree',fedStart);
+  if(end<fedStart||hash(source.slice(fedStart,end))!=='a526565c9c7bcd5ae8c42a816b3fbac4263a623ddaabda4277f5a92939d12a76')return false;
+  source=source.slice(0,fedStart)+source.slice(end);
+ }
  const noticeStart=source.indexOf('/* FAZ 94D.1 — compact war notices */'),noticeEnd='/* END FAZ 94D.1 NOTICES */';
  if(noticeStart>=0){const end=source.indexOf(noticeEnd,noticeStart)+noticeEnd.length;
   if(end<noticeStart||hash(source.slice(noticeStart,end))!=='9cba1c96fce1048776124ab24e7d8004d7a8b8597bff742004585d3a878198e2')return false;

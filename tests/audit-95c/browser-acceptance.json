@@ -1,0 +1,6 @@
+{
+  "status": "unavailable",
+  "attempt": "Playwright touch viewport 915x412",
+  "reason": "Chromium/headless shell executable is not installed; no system Chromium was available",
+  "verified": "UI host action tests only; no real DOM or physical Android acceptance"
+}

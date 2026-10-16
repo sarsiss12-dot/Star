@@ -1,0 +1,49 @@
+{
+  "systems": 100,
+  "empires": 13,
+  "runs": [
+    {
+      "ms": 41,
+      "ok": true,
+      "reason": "Talep kabul edildi; mevcut filolar ortak göreve ayrıldı",
+      "fleets": 3
+    },
+    {
+      "ms": 22,
+      "ok": true,
+      "reason": "Talep kabul edildi; mevcut filolar ortak göreve ayrıldı",
+      "fleets": 3
+    },
+    {
+      "ms": 16,
+      "ok": true,
+      "reason": "Talep kabul edildi; mevcut filolar ortak göreve ayrıldı",
+      "fleets": 3
+    },
+    {
+      "ms": 16,
+      "ok": true,
+      "reason": "Talep kabul edildi; mevcut filolar ortak göreve ayrıldı",
+      "fleets": 3
+    },
+    {
+      "ms": 14,
+      "ok": true,
+      "reason": "Talep kabul edildi; mevcut filolar ortak göreve ayrıldı",
+      "fleets": 3
+    }
+  ],
+  "routes": 280,
+  "routeMs": 191,
+  "stable": {
+    "ticks": 1000,
+    "ms": 12,
+    "routeCalls": 0
+  },
+  "stress": {
+    "ms": 100,
+    "ok": true,
+    "fleets": 24,
+    "routeCalls": 160
+  }
+}

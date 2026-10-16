@@ -1,3 +1,21 @@
+# 95C güncel açık riskler — 17 Ekim 2026
+
+- 79 paket / 4823 başarılı kontrol / 0 kalan hata / 0 zaman aşımı; tam koşu + sınırlı etkilenen takip. İlk denemeler ve kanonik 95B koruma tutarsızlığı saklandı. Sayım benzersizdir.
+- Fiziksel Android ve gerçek DOM kabulü yok. Chromium bulunmadığından gerçek tarayıcı girişimi yürütülemedi. Host UI/native Canvas testleri dokunma, taşma, FPS, ısı veya arka plan dönüşü kabulü değildir.
+- Doğal üç 120 aylık örnekte uygun ortak savaş yok; aylık dünya ve RNG eski sürümle aynı. Gerçek koordinasyon üç kontrollü savaş başlangıcında kanıtlandı; doğal savaş sıklığı, uzun dönem tür çeşitliliği ve galaksi dengesi bütünüyle kanıtlanmış değildir.
+- Kontrollü 95B koşuları 28/77/73 ayda bitti; 95C 120 ay sürdü. İlk 12 ay kayıplar azaldı; sonraki bütün süre kayıpları artabilir. Daha çok hayatta kalan gemi daha yüksek gerçek bakım faturası getirir. Negatif stok bulunmaması bütün ekonomi sağlıklı demek değildir; gerçek maliyet ve sıfır-stok örnekleri karşılaştırmada verilmiştir.
+- ETA ortak hedef zamandır; sonradan hız, kapı, rota veya muharebe değişimi kesin aynı anda varışı bozabilir. Bekleme/görev süreleri sınırlıdır. Yasal geri çekilme yolu yoksa filo yerinde kalabilir.
+- Muhafazakâr ana savunma bölünemeyen tek büyük başkent filosunu tutabilir. Bu gerçekçi gecikme/ret üretir; geç oyun ince ayarı izlenmeli.
+- Mevcut kısa muharebe raporu son devlet çiftiyle sınırlıdır. Kanonik katkı defteri koalisyonun bütün gerçek aktörlerini tutar. Çiftler mevcut motorla sırayla çözülür; yeni eşzamanlı muharebe fiziği kurulmadı.
+- Aynı sefer/tarafta bir etkin plan, dünyada sekiz etkin plan, plan başına 24 filo sınırı vardır. Açık oyuncu talebi eski otomatik planı yalnız yeni hedef kabul edildiğinde değiştirir. Birden çok bağımsız destek cephesi için komuta ekranı eklenmedi.
+- Paylaşımın coğrafi değerlendirmesi yeni taslakta eşit puanlı aday tercihidir; açık atamayı veya oybirliğini aşan yeni devir vetosu/hakkı değildir. İlk altı kendi kolonisi çıkışından bilinen askerî erişim değerlendirilir. Mevcut teklifler yeniden yazılmaz.
+- 100 sistem / 24 tahsisli filo ölçümü host maliyetidir. Büyük plan soğuk başlangıç maliyeti mobilde daha yüksek olabilir; rota hesapları beş günlük/aylık bütçede kalır. Süre kıyasları eşzamanlı host yükünden etkilenir.
+- 95A geç oyun bilgi sınırları, tohum 99 keşif/ikmal dengesi ve bağımsız ticaret bütünlüğü takipleri korunur. Yeni dış varlık/kütüphane, kamera değişimi veya 95D içeriği yoktur.
+
+GitHub'a yayın yapılmadı. 95C tamamlandı; aşağıdaki önceki “95C başlamadı” notları tarihsel kayıttır. Güncel sonuç bu bölüm ve FAZ95C-RAPOR.txt'dir.
+
+---
+
 # 95B güncel açık riskler — 16 Ekim 2026
 
 - Gerçek Android ve gerçek tarayıcı DOM testi yapılmadı. Mevcut 44px dokunma alanı, sınırlı panel/scroll, native Canvas ve kaynak testleri cihaz kabulü değildir.

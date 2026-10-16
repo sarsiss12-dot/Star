@@ -1,0 +1,86 @@
+STARS — FAZ 95C
+Koordineli Federasyon Savaşları ve Gerçek Müttefik Desteği
+17 Ekim 2026
+
+SONUÇ
+79 test paketi / 4823 başarılı kontrol / 0 kalan hata / 0 zaman aşımı.
+Tam regresyon + yalnız etkilenen hedefli takip; her kontrol bir kez sayıldı.
+Save v8, build 95c, PWA stars-v95c. GitHub'a yayın yapılmadı; 95D başlamadı.
+
+KANONİK KAYNAK
+stars-faz95b.zip
+SHA-256: b5de2154d3b4cec88850959a63dbfab41a41c1b4c7a782fcfc2f9ea4cfa835c7
+CRC sağlam; 1765 manifest dosyası eşleşti. GitHub main, verilen
+1fc2e86382a6bba965acbaf6d323c7ef79f5747e commit'iyle aynıydı.
+15 Ekim geliştirme notu SHA-256 565ba77766ae8ea30301a26d8b67e80be3210fca1cb493c6f6ddbad759249f21 ile değişmeden korundu.
+Kaynak manifesti tests/audit-95c/source-release-manifest-95b.json içinde saklandı.
+
+KANITLANAN KÖK NEDENLER
+- Devlet seferi yalnız kendi kuvvetini planlıyor; siyasi destek gerçek ortak hedefe bağlanmıyordu.
+- Aynı sistemde çok taraf bulunsa da combatTick ilk düşman çiftini çözüyordu.
+- Tamamen savunmasız boş düşman sisteminde gerçek varış, çatışma olmadığından fetih doğurmuyordu.
+- 95B'nin federasyon CSS'i eski koruma yardımcısında kayıtlı değildi; kanonik 95B de yedi koruma testini reddediyordu. Eski HTML/bilim hashleri korunarak bu blok ayrı sabitlendi.
+Hedefli testlerin yakaladığı bilgi/rota, kritik görev, bekleme ve UI yenileme uçları TEST-SONUCLARI-95C.md içinde açıklandı.
+
+TAMAMLANANLAR
+Aynı geçerli savaş seferi/tarafı için ortak hedef, gerçek filo rezervasyonu,
+dost ikmal düğümünde toplanma, ETA farkına göre hızlı filonun beklemesi,
+ortak taarruz/savunma, ikmal dönüşü, kritik ana savunma ve süreli yeniden
+planlama. Federasyon dışındaki ittifak/vasal/aktif savaş sözleri de gerçek
+siyasi bağ ve rota koşullarıyla çalışır. Yeni savaş veya kuvvet üretilmez.
+
+Oyuncu filomu destekle / sistemi ele geçir / bölgeyi savun talebi verir.
+AI kabul/ret gerekçesini gösterir; uygun talep iptal edilir. Oyuncunun kendi
+filosu kendi emrinde kalır; yabancı filolar birleşmez ve sahip değiştirmez.
+Mevcut filo, diplomasi ve federasyon panellerinde daraltılabilir bölüm;
+gizli filo adı, konumu, kesin gücü ve ETA açıklanmaz.
+
+Gerçek müttefikler mevcut battleRound çözümleyicisinde kendi aktörleriyle
+savaşır; atış bütçesi çoğaltılmaz. Hasar/imha/garnizon/fetih mevcut deftere
+aittir. Paylaşım yeniden yapılmadı; eşit taslak puanında bilinen askerî
+erişim tercih edilir. Oybirliği, açık alıcı seçimi ve koloni bazlı devir korunur.
+
+Barış, savaş/üyelik çıkışı, dağılma, kayıp/kapalı rota ve hedef değişimi
+eski emirleri durdurur. Mevcut hareket bacağı tamamlanır; gemi silinmez,
+üretim geri alınmaz, ışınlanma veya bedava kaynak yoktur. Save v8 ortak
+sefer alanları ve gerçek varış/RNG devamı hedefli testlerden geçti.
+
+ÜRETİM DOSYALARI
+main.js: yaşam döngüsü/kayıt, ortak bekleme, mevcut hareket ve muharebe bağlantıları; build.
+ai.js: ortak sefer ve kendi bilgi sınırlarıyla kuvvet/rota seçimi; mevcut AI planıyla rezervasyon; muharebe çiftlerinin gerçek bütçesi.
+combat.js: mevcut battleRound içinde ortak rakiplere bölünen atış payları.
+diplomacy.js: jointOps rollback kökü; yeni paylaşım taslağında eşit puanlı coğrafi tercih.
+ui.js: üç destek talebi/sonuç/iptal, bilgi filtreli bölüm ve açık bölüm/scroll yenileme.
+sw.js: stars-v95c.
+index.html, map.js, economy.js, audio.js, manifest.json kaynakla aynıdır.
+Test kimliği beklentileri 95c oldu; koruma yardımcısı güçlendirildi.
+Tam değişen dosya/SHA listesi DEGISEN-DOSYALAR-95C.json içindedir.
+
+KAMPANYALAR
+11/99/404 doğal 120 aylık koşularda uygun ortak savaş yok: 0 ortak sefer.
+Aylık dünya ve RNG 95B ile birebir aynı. Bu sonuç doğal savaş koordinasyonunun
+evrensel ispatı değildir; kontrollü savaşlar ayrıca yürütüldü.
+Kontrollü ilk 12 ay gerçek müttefik muharebe kaybı 41→4, 45→7, 47→3.
+İlk üç gerçek destek filosu aynı simülasyon gününde hedefe vardı.
+95B koşuları 28/77/73 ayda oyun sonuyla bitti; 95C üçünde 120 ay sürdü.
+Uzun toplam kayıplar aynı süre olmadığı için doğrudan başarı ölçütü değildir.
+Korunan gemilerin bakım faturası yükselir; gerçek üretim/bakım ve sonraki
+kayıplar AI-KAMPANYA-KARSILASTIRMA-95C.md içinde saklanmadan gösterilir.
+
+PERFORMANS / SINIRLAR
+100 sistemde normal ve 24 tahsisli filolu sınır senaryosu ölçüldü.
+Değişmeyen planın 1000 kontrolünde ek rota hesabı 0. Ağır değerlendirme
+beş oyun günü/ay aralığında; yeni kare başına galaksi taraması yok.
+Host süreleri ve bütün ham sonuçlar ilgili JSON/karşılaştırma belgesindedir.
+Gerçek Android ve gerçek DOM kabulü yapılamadı: Chromium yoktu.
+ETA yaklaşık; yolculuk sırasında hız/erişim/muharebe değişebilir.
+Kısa muharebe raporu çift bazlı kalır; katkı defteri bütün gerçek aktörleri tutar.
+Tek büyük başkent filosunun muhafazakâr tutulması yardım reddine yol açabilir.
+Üç tohum ve sentetik savaşlar bütün uzun dönem dengeyi kanıtlamaz.
+
+TESLİM
+stars-faz95c.zip ve SHA-256 doğrulama değeri.
+FAZ95C-RAPOR.txt; ORTAK-SEFERLER-95C.md; MUTTEFIK-EMIRLERI-95C.md;
+SAVAS-KATKISI-DENETIMI-95C.md; AI-KAMPANYA-KARSILASTIRMA-95C.md;
+TEST-SONUCLARI-95C.md; güncel ACIK-RISKLER.md / FAZ-PLANI.md;
+DEVAM-95C.md; ham test/kampanya/bütünlük kanıtları ve yeni manifest.
