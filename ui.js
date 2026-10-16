@@ -1159,21 +1159,20 @@ const UI = {
         this.closeModal(); this.openCouncil(); break;
       }
       case 'foundFed': {
-        const r = foundFederation(G.p);
+        const r = foundFederation(G.p, x||'askeri');
         if (!r.ok) say(r.why || 'Federasyon kurulamadı', 'war');
         this.openFed();
         break;
       }
-      case 'fedLeave': {
-        const f = findFed(G.p);
-        if (f){
-          f.members.filter(m=>m!==0).forEach(m=>{ G.p.ally[m] = false; G.emps[m].ally[0] = false; });
-          updateFederations();
-          say('Federasyondan ayrıldın', 'war');
-        }
-        this.openFed();
-        break;
+      case 'fedLeave': {const r=leaveFederation(G.p);if(!r.ok)say(r.why,'war');this.openFed();break;}
+      case 'fedMotion': {
+        const [kind,value,extra]=String(x).split(':');
+        const opts=kind==='reform'?{type:value}:kind==='charter'?{field:value,value:extra}:kind==='joinWar'?{target:+value,sponsor:+extra}:{target:+value};
+        const r=proposeFedMotion(G.p,kind,opts);if(!r.ok)say(r.why,'war');this.openFed();break;
       }
+      case 'fedInviteAccept': {const r=acceptFedInvite(G.p,+x);if(!r.ok)say(r.why,'war');this.openFed();break;}
+      case 'fedInviteReject': {rejectFedInvite(G.p,+x);this.openFed();break;}
+      case 'fedExecute': {const [fid,id]=String(x).split(':');const r=executeFedDecision(G.p,+fid,id);if(!r.ok)say(r.why,'war');this.openFed();break;}
       case 'fedVoteYes': {
         const f = findFed(G.p);
         if (f && f.vote) this.fedVoteOpen(f.id);
@@ -3487,28 +3486,28 @@ const UI = {
   openFed(){
     const e = G.p;
     const f = findFed(e);
-    let h = `<div class="dpBox" style="width:min(640px,94%)">
+    let h = `<div class="dpBox dcBox fedBox" style="width:min(640px,100%)">
       <div class="dpHd"><span>🏛 FEDERASYON</span>
         <button class="riX" data-a="closeFed">✕</button></div>
-      <div class="dpBody">`;
+      <div class="dpBody dcBody">`;
 
     if (!f){
       const allies = G.emps.filter(o=>!o.dead && !o.wild && o.id!==0 && e.ally[o.id]);
       h += `<div class="envRow"><span>DURUM</span><b style="color:#ff9b3d">FEDERASYON YOK</b></div>`;
       const chk = canFoundFed(e);
-      h += `<div class="mini">Federasyon iki yolla doğar: müttefiklerin <b>birbirleriyle de</b>
-        ittifaklıysa kendiliğinden kurulur — ya da <b>sen kurarsın</b> ve üyeleri birbirine
-        bağlarsın. İkinci yol etkiye mal olur ama beklemek gerekmez.</div>`;
+      h += `<div class="mini">Federasyonu sen veya AI kurabilir. Kurucu iki uygun AI müttefikinin kabulünü alır. İttifak ağı seni sessizce üye yapmaz; sonraki üyelik oylama ve aday onayı gerektirir.</div>`;
       h += `<div class="box" style="${chk.ok?'border-color:#6ff2c8':''}">
         <div class="bt"><span>🏛 FEDERASYON KUR</span>
           <span class="mono" style="color:${(e.res.etk>=fedFoundCost(e))?'#6ff2c8':'#ff5f6d'}">${fedFoundCost(e)} ◈</span></div>
         <div class="bd">Müttefiklerini tek bir birlik altında topla. Üyeler anında birbirine
-          müttefik olur ve ilk oylama 2 ay içinde başlar.</div>
+          müttefik olur ve ilk oylama 2 ay içinde başlar.</div><div class="mini">${FED_TYPES.askeri.d} ${fedDutyText({type:'askeri',charter:fedDefaultCharter('askeri'),laws:{}})}</div>
         ${chk.ok ? '' : `<div class="mini" style="color:#ff9b3d">${esc(chk.why)}</div>`}
         <div class="act2"><button class="abtn ${chk.ok?'pri':'dis'}" data-a="foundFed">
-          ${chk.ok ? 'ŞİMDİ KUR' : 'KOŞULLAR EKSİK'}</button></div></div>`;
-      h += `<div class="ph">MEVCUT İTTİFAKLARIN — ${allies.length} / 3</div>`;
-      h += `<div class="bar"><i style="width:${clamp(allies.length/3*100,0,100)}%"></i></div>`;
+          ${chk.ok ? 'ASKERÎ KUR' : 'KOŞULLAR EKSİK'}</button></div></div>`;
+      for(const type of ['bilimsel','ticaret']){const gate=canFoundFed(e,type);h+=`<div class="box"><b>${FED_TYPES[type].n}</b><div class="mini">${FED_TYPES[type].d} Otomatik saldırı desteği yok.</div><button class="abtn" data-a="foundFed" data-x="${type}" ${gate.ok?'':'disabled'}>KUR · ${fedFoundCost(e)} ◈</button>${gate.ok?'':`<div class="mini">${esc(gate.why)}</div>`}</div>`;}
+      for(const invitation of G.feds||[]){const inv=invitation.invites?.[e.id];if(!inv||inv.expires<=G.day)continue;h+=`<div class="box"><b>${esc(invitation.name)} · ${fedType(invitation).n}</b><div class="mini">${fedType(invitation).d} ${fedDutyText(invitation)} Mevcut yasalar: ${Object.keys(invitation.laws||{}).map(k=>esc((FED_LAWS[k]||FED_INNER_LAWS[k]||{}).n||k)).join(', ')||'yok'}. ${Math.ceil(inv.expires-G.day)} gün kaldı.</div><button class="abtn" data-a="fedInviteAccept" data-x="${invitation.id}">YÜKÜMLÜLÜKLERİ KABUL ET VE KATIL</button><button class="abtn" data-a="fedInviteReject" data-x="${invitation.id}">REDDET</button></div>`;}
+      h += `<div class="ph">MEVCUT İTTİFAKLARIN — ${allies.length} / 2</div>`;
+      h += `<div class="bar"><i style="width:${clamp(allies.length/2*100,0,100)}%"></i></div>`;
       h += allies.length
         ? allies.map(o=>`<div class="pchip"><span class="flag" style="background:${o.col}"></span>
             <div class="pi"><div class="pn">${esc(o.name)}</div>
@@ -3531,6 +3530,7 @@ const UI = {
         });
       }
     } else {
+      h+=this.fedGovernance(f);
       h += `<div class="envRow"><span>${esc(f.name)}</span>
         <b style="color:#6ff2c8">${f.members.length} üye</b></div>`;
 
@@ -3569,7 +3569,7 @@ const UI = {
             data-lk="${o.look||'humanoid'}" data-col="${o.col}"
             data-pers="${typeof personaKey==='function'?personaKey(o):'yayilmaci'}"></canvas>
           <div class="pi"><div class="pn" style="color:${o.col}">${esc(o.name)}${m===0?' (sen)':''}</div>
-          <div class="pm">${sysCount(o)} sistem · filo ${fmt(totalPower(o))}</div></div></div>`;
+          <div class="pm">${aiKnownSystems(e,o.id).length} bilinen sistem · filo ${powerLabel(e,o)}</div></div></div>`;
       });
 
       h += `<div class="ph">YASALAR</div>`;
@@ -3580,7 +3580,7 @@ const UI = {
         h += `<div class="box" style="${on?'border-color:#6ff2c8':''}">
           <div class="bt"><span>${L.ico} ${L.n}</span>
             <span class="tag ${on?'p':''}">${on?'YÜRÜRLÜKTE':'oylanmadı'}</span></div>
-          <div class="bd">${L.d}</div></div>`;
+          <div class="bd">${L.d}</div><button class="abtn" data-a="${on?'fedLawRepeal':'fedLawPropose'}" data-x="${k}" ${canFedLaw(e,k,on).ok?'':'disabled'}>${on?'Kaldırmayı öner · 30 ◈':'Öner · 60 ◈'}</button></div>`;
       }
 
       h += `<div class="ph">İÇ YASA ÖNERİLERİ · UYUM %${fedCohesion(f)}</div>
@@ -6047,9 +6047,37 @@ const UI = {
   },
 
   /* =============== FEDERASYON OYLAMASI =============== */
+  fedGovernance(f){
+    const e=G.p,T=fedType(f),charter=fedCharter(f);
+    const button=(kind,opts,label)=>{const q=canFedMotion(e,kind,opts);const x=kind==='reform'?kind+':'+opts.type:kind==='charter'?kind+':'+opts.field+':'+opts.value:kind==='joinWar'?kind+':'+opts.target+':'+opts.sponsor:kind+':'+opts.target;
+      return `<button class="abtn" data-a="fedMotion" data-x="${esc(x)}" ${q.ok?'':'disabled'}>${esc(label)}</button>${q.ok?'':`<div class="mini">${esc(q.why)}</div>`}`;};
+    let h=`<div class="box"><b>${T.ico} ${T.n}</b><div class="mini">${T.d}</div><div class="mini">Başkan: ${esc(G.emps[f.leader]?.name||'İlk bakımda belirlenir')}</div><div class="mini">${fedDutyText(f)}</div></div>`;
+    if(f.reform)h+=`<div class="box"><b>Bekleyen reform: ${FED_TYPES[f.reform.type].n}</b><div class="mini">${Math.ceil(Math.max(0,f.reform.at-G.day)/30)} ay kaldı. Yeni avantaj/yükümlülükler geçiş tamamlanınca başlar.</div></div>`;
+    h+=`<details class="dcDetails"><summary>Anayasa ve tür reformu</summary><div class="mini">Reform/anayasa: uygun üyelerin %75’i. Yeni kararlar: mutlak üye çoğunluğu ve ağırlıklı evet üstünlüğü. Oylar 90 gün. Oyuncu kendi önerisinde ayrıca oy verir. Başkan tek başına yasa, üye veya savaş kararı dayatamaz.</div>`;
+    for(const field of ['defense','offense','admission','ballot']){
+      const dict={defense:{auto:'Otomatik savunma',vote:'Savunma oylaması'},offense:{auto:'Açık onaylı saldırı taahhüdü',vote:'Saldırı oylaması'},admission:{allies:'Yalnız ortak müttefik kabulü',contact:'Temaslı bağımsız adaylar'},ballot:{weighted:'Mevcut ağırlıklı oy',equal:'Her üyeye eşit oy'}};
+      const value=Object.keys(dict[field]).find(k=>k!==charter[field]);h+=`<div class="mini">${esc(dict[field][charter[field]])}</div>`+button('charter',{field,value},dict[field][value]+' öner · 100 ◈');
+    }
+    for(const type of Object.keys(FED_TYPES).filter(k=>k!==(f.type||'askeri')))h+=button('reform',{type},FED_TYPES[type].n+' reformu · 150 ◈');
+    h+='<div class="mini">Tür reformu: 12 ay geçiş, kabulden sonra 120 ay yeni reform beklemesi. Eski yasalar korunur; geçmiş savaşlara yeni katılım yükümlülüğü uygulanmaz. Saldırı taahhüdüne hayır/çekimser kalan oyuncu otomatik katılmaz.</div></details>';
+    h+='<details class="dcDetails"><summary>Üyelik ve başkanlık</summary>';
+    for(const id of f.members){if(id!==e.id)h+=`<div class="box"><b>${esc(G.emps[id].name)}</b>`+button('expel',{target:id},'İhraç oylaması · 80 ◈')+button('elect',{target:id},'Başkan öner · 50 ◈')+'</div>';}
+    for(const o of G.emps.filter(o=>o!==e&&e.contact[o.id]&&!o.dead&&!o.wild&&!findFed(o))){const q=fedAdmissionGate(f,o);if(q.ok)h+=`<div class="box"><b>${esc(o.name)}</b>`+button('admit',{target:o.id},'Üyelik öner · 60 ◈')+'</div>';}
+    h+='<button class="abtn" data-a="fedLeave">FEDERASYONDAN AYRIL</button><div class="mini">Ayrılış karşılıklı üye ittifaklarını sonlandırır; yeniden giriş 24 ay bekler.</div><div class="mini">İhraç hedefi oy kullanamaz. En az iki diğer üye ve kalan seçmenlerin mutlak çoğunluğu gerekir. Kabul oylaması adayın kendi yanıtını bekler. Ayrılan devlet için 24 ay yeni üyelik beklemesi vardır.</div></details>';
+    h+='<details class="dcDetails"><summary>Ortak savaş kararları</summary><div class="mini">Onay savaş başlatmaz. Yalnız evet oyu veren üyeler uygulama listesine girer; uygulamada antlaşma, Konsey, vasallık ve hedef yeniden denetlenir.</div>';
+    for(const target of G.emps.filter(o=>e.contact[o.id]&&!o.dead&&!o.wild&&!o.crisisSide&&!f.members.includes(o.id))){
+      h+=`<div class="box"><b>${esc(target.name)}</b>`;
+      if(!e.war[target.id])h+=button('newWar',{target:target.id},'Ortak savaş izni öner');
+      for(const id of f.members)if(G.emps[id].war[target.id]&&(id===e.id||intelOf(e,id)>=3))h+=button('joinWar',{target:target.id,sponsor:id},G.emps[id].name+' savaşına destek öner');h+='</div>';
+    }
+    for(const d of Object.values(f.decisions||{}))if(d.state==='ready')h+=`<div class="box"><b>${d.kind==='newWar'?'Ortak savaş izni':'Mevcut savaşa destek'} · ${esc(e.contact[d.target]?G.emps[d.target]?.name:'Temassız hedef')}</b><div class="mini">${Math.ceil(Math.max(0,d.expires-G.day))} gün geçerli. Katılımcılar kendi evet oylarını verdi.</div><button class="abtn" data-a="fedExecute" data-x="${f.id}:${d.id}" ${e.id===f.leader||e.id===d.by?'':'disabled'}>KARARI UYGULA</button></div>`;
+    h+='</details>';
+    return h;
+  },
   fedAgendaContext(v){
     if (!v) return '';
     if (v.repeal) return '<div class="mini">Öneri: bu yasayı yürürlükten kaldır. Kabulde etkileri sona erer.</div>';
+    if(v.kind==='motion'){const target=G.emps[v.target],name=target&&(G.p.contact[target.id]||findFed(G.p)?.members.includes(target.id))?target.name:'Bilinen hedef yok';return `<div class="mini">Hedef: ${esc(name)} · ${esc(v.field||'')} ${esc(v.value||'')} · Öneren: ${esc(G.emps[v.proposer]?.name||'Ayrılmış üye')}</div>`;}
     if (v.kind !== 'war') return '';
     const who = G.emps[v.proposer], target = G.emps[v.target];
     const name = target && (target.id === G.p.id || G.p.contact[target.id]) ? target.name : 'Temassız devlet';
@@ -6075,7 +6103,7 @@ const UI = {
        <div class="mbd"><div class="lead">${L.ico} ${L.n}</div>${L.d}${this.fedAgendaContext(f.vote)}
        <div class="row" style="margin-top:10px"><span>Mevcut oylar</span>
          <b><span style="color:#65e08a">${yes} evet</span> · <span style="color:#ff5f6d">${no} hayır</span></b></div>
-       <div class="mini">Seçmenler: ${counts.eligible.map(m=>esc(G.emps[m].name)).join(' · ')}</div>
+       <div class="mini">Seçmenler: ${counts.eligible.map(m=>esc(G.emps[m].name)+' ('+(f.vote.yes.includes(m)?'evet':f.vote.no.includes(m)?'hayır':'bekliyor')+')').join(' · ')}</div>
        <div class="mini">${canVote ? 'Oyun bekleniyor.' : 'Oy kullandın veya bu gündemde oy hakkın yok.'}
          ${Number.isFinite(f.vote.expires) ? Math.max(0,f.vote.expires-G.day)+' gün kaldı.' : ''}
          Eşitlikte ret; süre sonunda kullanılmayan oylar çekimser.</div></div>

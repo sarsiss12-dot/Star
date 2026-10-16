@@ -1,0 +1,71 @@
+  ✓ Invalid and unsupported proposals leave state and RNG intact
+  ✓ Pure quotes never initialize cohesion or charge cost
+  ✓ Player proposal pays once and still requires explicit player vote
+  ✓ AI proposal also waits for real player consent
+  ✓ AI-only federation resolves without creating a player vote
+  ✓ Accepted law, last result, and exactly one charge
+  ✓ Tie rejects; cost is not refunded; result survives
+  ✓ Duplicate ballots and stale identifiers cannot charge or vote again
+  ✓ Current electorate filters duplicates, deceased and departed members
+  ✓ Departed player cannot use an old modal vote
+  ✓ Deadline expires with abstention; no automatic player yes
+  ✓ Monthly automatic agenda cannot overwrite an unfinished vote
+  ✓ Legacy basic vote remains usable
+  ✓ Legacy council-flag compatibility counts double weight once (catalog fixture)
+  ✓ Save/load keeps pending agenda, paid cost, and explicit vote
+  ✓ Transaction rollback includes vote, resources, law and RNG on recalc failure
+  ✓ AI vote failure rolls back proposal cost and consumed RNG
+  ✓ Notification failure does not undo accepted law or duplicate payment
+  ✓ Research law raises real monthly income by exactly 12 percent
+  ✗ Naval law adds a flat 15 capacity; repeated recalculation cannot stack — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+52 !== 64
+
+    at /workspace/scratch/342b17141b4a/faz95b/tests/faz91e_federation_laws_test.js:117:90
+    at check (/workspace/scratch/342b17141b4a/faz95b/tests/faz91e_federation_laws_test.js:5:29)
+    at Object.<anonymous> (/workspace/scratch/342b17141b4a/faz95b/tests/faz91e_federation_laws_test.js:114:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+  ✓ Federal fund receives 5 percent normally, 9 percent with naval law
+  ✓ Fund contribution does not overdraw; exact stock can pay
+  ✓ Free passage derives from membership and does not leak permission records
+  ✓ Passing free movement never writes permanent bilateral passage
+  ✓ Load income recalculation cannot deduct fund or replay law voting
+  ✓ Real UI panel exposes proposals, reasons, tally and previous result
+  ✓ Real modal callback captures old agenda identity
+  ✓ Modal opened before loading cannot vote in the restored world
+  ✗ New member receives naval law but cannot vote on an older agenda — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+0 !== 15
+
+    at /workspace/scratch/342b17141b4a/faz95b/tests/faz91e_federation_laws_test.js:166:10
+    at check (/workspace/scratch/342b17141b4a/faz95b/tests/faz91e_federation_laws_test.js:5:29)
+    at Object.<anonymous> (/workspace/scratch/342b17141b4a/faz95b/tests/faz91e_federation_laws_test.js:163:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+  ✗ Cohesion collapse removes naval capacity immediately — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+52 !== 64
+
+    at /workspace/scratch/342b17141b4a/faz95b/tests/faz91e_federation_laws_test.js:171:51
+    at check (/workspace/scratch/342b17141b4a/faz95b/tests/faz91e_federation_laws_test.js:5:29)
+    at Object.<anonymous> (/workspace/scratch/342b17141b4a/faz95b/tests/faz91e_federation_laws_test.js:169:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+  ✓ Real AI tick proposes once and respects player-pending agenda
+GEÇEN: 28 KALAN: 3

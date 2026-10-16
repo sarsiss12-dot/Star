@@ -727,6 +727,7 @@ function declareWar(a, b, support = null){
   }
   if (typeof facEvent === 'function'){ facEvent(a,'war'); facEvent(b,'war'); }
   if (typeof fedDefend === 'function') fedDefend(a, b);
+  if (typeof fedAttack === 'function') fedAttack(a,b,support);
   if (typeof overlordDefend === 'function') overlordDefend(a, b);
   if (typeof judgeCasusBelli === 'function') judgeCasusBelli(a, b);
   warStartNotice(a,b,support);
@@ -2195,6 +2196,176 @@ const FED_LAWS = {
     d:'Üyeler ayda 4 alaşımı ortak filo hazinesinde biriktirir; otomatik gemi üretmez.'}
 };
 
+/* 95B: political federation data. All timings are game days (30 days/month).
+   Existing law effects and production remain in their canonical owners. */
+const FED_TYPES={
+ askeri:{n:'Askerî Federasyon',ico:'🛡',d:'+12 filo kapasitesi; bakım +4 yüzde puan. Varsayılan ortak savunma; saldırı için ayrı karar.',cap:12,up:.04,ara:1,ene:1,tithe:.05},
+ bilimsel:{n:'Bilimsel Federasyon',ico:'🔬',d:'Pozitif araştırma +%8; pozitif enerji −%3. Savaş yardımı varsayılan olarak oylamayla.',cap:0,up:0,ara:1.08,ene:.97,tithe:.05},
+ ticaret:{n:'Ticaret Federasyonu',ico:'🤝',d:'Filo bakım değiştiricisi −5 yüzde puan; taban fon kesintisi %4; araştırma −%3. Teslimatsız ticaret geliri eklemez.',cap:0,up:-.05,ara:.97,ene:1,tithe:.04}
+};
+const FED_MOTIONS={admit:{n:'Üye Kabulü',c:60},expel:{n:'Üye İhracı',c:80},reform:{n:'Tür Reformu',c:150},charter:{n:'Anayasa Değişikliği',c:100},elect:{n:'Başkan Seçimi',c:50},joinWar:{n:'Mevcut Savaşa Katılma',c:0},newWar:{n:'Ortak Savaş İzni',c:0}};
+function fedType(f){return FED_TYPES[f&&f.type]||FED_TYPES.askeri;}
+function fedCharter(f){return f&&f.charter||{defense:f&&f.laws&&f.laws.savunma?'auto':'vote',offense:'vote',admission:'allies',ballot:'weighted'};}
+function fedDefaultCharter(type){return {defense:type==='askeri'?'auto':'vote',offense:'vote',admission:'allies',ballot:'weighted'};}
+function fedDuty(f,kind){return kind==='defense'?!!(f.laws&&f.laws.savunma)||fedCharter(f).defense==='auto':fedCharter(f).offense==='auto';}
+function fedDutyText(f){return (fedDuty(f,'defense')?'Yeni saldırılara ortak savunma yükümlülüğü. ':'Savunma yardımı oylamayla. ')+(fedDuty(f,'offense')?'Yalnız saldırı taahhüdünü açıkça kabul eden üyeler yeni saldırılara katılır.':'Otomatik saldırı desteği yok; ayrı oylama/taahhüt gerekir.');}
+function fedCharterKey(f){return JSON.stringify([f.type||'askeri',fedCharter(f),Object.keys(f.laws||{}).filter(k=>f.laws[k]).sort()]);}
+function fedPoliticalRecord(f,event,data={}){f.history=f.history||[];f.history.push({day:G.day,year:G.year,month:G.month,event,...data});if(f.history.length>32)f.history.splice(0,f.history.length-32);}
+function fedNormalize(f){
+ if(!f||!Array.isArray(f.members))return;
+ if(!Object.hasOwn(FED_TYPES,f.type)){f.type='askeri';f.charter=fedCharter({...f,charter:null});f.legacyCharter=true;}
+ f.charter=f.charter||fedDefaultCharter(f.type);
+ if(!Number.isFinite(f.founded))f.founded=G.day;
+ if(!Number.isFinite(f.typeSince))f.typeSince=G.day;
+ if(!f.dutySince)f.dutySince={defense:0,offense:G.day};
+ if(!f.members.includes(f.leader)||!G.emps[f.leader]||G.emps[f.leader].dead){
+  const previous=f.leader;
+  f.leader=f.members.includes(f.founder)&&!G.emps[f.founder]?.dead?f.founder:f.members.filter(id=>G.emps[id]&&!G.emps[id].dead).sort((a,b)=>a-b)[0];
+  if(G.emps[f.leader]){for(const fl of G.fleets)if(fl.federal&&fl.fedId===f.id)fl.e=f.leader;G.emps[f.leader]._powAt=-1;}
+  if(G.emps[previous])G.emps[previous]._powAt=-1;
+ }
+ f.invites=f.invites||{};f.decisions=f.decisions||{};f.dutyConsent=f.dutyConsent||{};
+ if(f.reform&&(!Object.hasOwn(FED_TYPES,f.reform.type)||!Number.isFinite(f.reform.at)))delete f.reform;
+}
+function fedSyncDuties(f,before){
+ f.dutySince=f.dutySince||{defense:0,offense:0};
+ for(const k of ['defense','offense'])if(!before[k]&&fedDuty(f,k)){f.dutySince[k]=G.day;if(k==='defense')f.defenseFrontCutoff=G.warLedger?.next||1;}
+}
+function fedReformTick(f){
+ if(!f.reform||G.day<f.reform.at)return;
+ const before={defense:fedDuty(f,'defense'),offense:fedDuty(f,'offense')},next=f.reform.type;
+ f.type=next;f.typeSince=G.day;
+ // A reform's new default applies only if members kept the former default;
+ // explicit constitutional choices and all 15 laws remain in force.
+ if(f.reform.defaultDefense)f.charter.defense=fedDefaultCharter(next).defense;
+ f.legacyCharter=false;delete f.reform;fedSyncDuties(f,before);
+ fedPoliticalRecord(f,'reformComplete',{type:next});for(const id of f.members)recalcMods(G.emps[id]);
+ if(f.members.includes(0))say(f.name+' — '+fedType(f).n+' geçişi tamamlandı','sci');
+}
+function fedRemoveMember(f,id,reason){
+ if(!f.members.includes(id))return false;
+ const old=f.members.slice();f.members=f.members.filter(x=>x!==id);
+ for(const peer of old)if(peer!==id&&G.emps[peer]&&G.emps[id]){G.emps[id].ally[peer]=false;G.emps[peer].ally[id]=false;}
+ delete (f.dutyConsent||{})[id];if(G.emps[id])G.emps[id]._fedLeaveUntil=G.day+720;
+ fedPoliticalRecord(f,reason,{target:id});fedNormalize(f);
+ for(const x of old)if(G.emps[x]&&!G.emps[x].dead)recalcMods(G.emps[x]);return true;
+}
+function leaveFederation(e){const f=e&&findFed(e);if(!f)return {ok:false,why:'Federasyon üyesi değilsin'};fedRemoveMember(f,e.id,'leave');updateFederations();return {ok:true};}
+function fedDissolve(f){
+ const ids=f.members.slice();G.feds=G.feds.filter(x=>x!==f);
+ for(const fl of G.fleets)if(fl.federal&&fl.fedId===f.id){delete fl.federal;delete fl.fedId;}
+ for(const id of ids)if(G.emps[id]){G.emps[id]._fedLeaveUntil=G.day+720;recalcMods(G.emps[id]);}
+}
+function fedAdmissionGate(f,o){
+ if(!o||G.emps[o.id]!==o||o.dead||o.wild||o.crisisSide||isPurifier(o)||isVassal(o)||findFed(o))return {ok:false,why:'Aday bağımsız ve uygun değil'};
+ if((o._fedLeaveUntil||0)>G.day)return {ok:false,why:'Son ayrılış sonrası bekleme sürüyor'};
+ if(f.members.some(id=>!G.emps[id]||G.emps[id].dead||o.war[id]||G.emps[id].war[o.id]||diploBlocked(o,G.emps[id])))return {ok:false,why:'Bir üyeyle savaş veya doktrin engeli var'};
+ if(fedCharter(f).admission==='allies'&&!f.members.every(id=>o.ally[id]&&G.emps[id].ally[o.id]))return {ok:false,why:'Anayasa bütün üyelerle karşılıklı ittifak istiyor'};
+ return {ok:true};
+}
+function acceptFedInvite(o,fid){
+ const f=fedOf(fid),inv=f&&f.invites&&f.invites[o.id];
+ if(!inv||inv.expires<=G.day||inv.terms!==fedCharterKey(f))return {ok:false,why:'Davetin süresi veya yükümlülükleri değişti'};
+ const gate=fedAdmissionGate(f,o);if(!gate.ok)return gate;
+ const old=f.members.slice();f.members.push(o.id);delete f.invites[o.id];
+ for(const id of old){const e=G.emps[id];o.ally[id]=e.ally[o.id]=true;o.contact[id]=e.contact[o.id]=true;clearBilateralEmbargo(o,e);}
+ f.dutyConsent[o.id]={offense:fedDuty(f,'offense'),since:G.day};fedPoliticalRecord(f,'join',{target:o.id});
+ for(const id of f.members)recalcMods(G.emps[id]);return {ok:true};
+}
+function rejectFedInvite(o,fid){const f=fedOf(fid);if(!f?.invites?.[o.id])return {ok:false};delete f.invites[o.id];f.requestAfter=f.requestAfter||{};f.requestAfter['admit:'+o.id]=G.day+360;return {ok:true};}
+function fedMotionOptions(kind,o){
+ const out={kind};for(const k of ['target','sponsor','type','field','value'])if(o[k]!==undefined)out[k]=o[k];return out;
+}
+function canFedMotion(e,kind,options={},resolving=false){
+ const M=Object.hasOwn(FED_MOTIONS,kind)&&FED_MOTIONS[kind],f=e&&findFed(e);
+ if(!M||!e||G.emps[e.id]!==e||e.dead||e.wild||!f||fedOf(f.id)!==f||f.members.length<2)return {ok:false,why:'Geçerli federasyon üyesi ve karar gerekli'};
+ if(!resolving&&(f.vote||f.lawVote))return {ok:false,why:'Tek açık gündem tamamlanmalı'};
+ if(!resolving&&(e.res.etk||0)<M.c)return {ok:false,why:M.c+' Etki gerekir'};
+ const key=kind+':'+(options.target??options.type??options.field??'');
+ if(!resolving&&(f.requestAfter?.[key]||0)>G.day)return {ok:false,why:'Aynı öneri için bekleme süresi var'};
+ const target=G.emps[options.target],live=[...new Set(f.members)].filter(id=>G.emps[id]&&!G.emps[id].dead);
+ if(live.length<2)return {ok:false,why:'En az iki yaşayan üye gerekli'};
+ if(kind==='admit'){
+  if(!e.contact[target?.id])return {ok:false,why:'Adayla temas yok'};
+  const gate=fedAdmissionGate(f,target);if(!gate.ok)return gate;
+  if(f.invites?.[target.id]&&f.invites[target.id].expires>G.day)return {ok:false,why:'Adayın yanıtı bekleniyor'};
+ }
+ if(kind==='expel'&&(!target||target.dead||target.id===e.id||!live.includes(target.id)||live.length<3))return {ok:false,why:'İhraç için hedef dışındaki en az iki üye gerekir'};
+ if(kind==='elect'&&(!target||target.dead||!f.members.includes(target.id)||target.id===f.leader))return {ok:false,why:'Başka bir yaşayan üye seç'};
+ if(kind==='reform'){
+  if(!Object.hasOwn(FED_TYPES,options.type)||options.type===(f.type||'askeri'))return {ok:false,why:'Farklı geçerli bir tür seç'};
+  if(f.reform)return {ok:false,why:'Tür geçişi zaten sürüyor'};
+  if(!resolving&&(f.reformAfter||0)>G.day)return {ok:false,why:'Son reformdan sonra 120 ay beklenir'};
+ }
+ if(kind==='charter'){
+  const values={defense:['auto','vote'],offense:['auto','vote'],admission:['allies','contact'],ballot:['weighted','equal']};
+  if(!Object.hasOwn(values,options.field)||!values[options.field].includes(options.value)||fedCharter(f)[options.field]===options.value)return {ok:false,why:'Farklı geçerli anayasa kuralı seç'};
+ }
+ if(kind==='joinWar'||kind==='newWar'){
+  if(!target||target.dead||target.wild||target.crisisSide||f.members.includes(target.id)||!e.contact[target.id])return {ok:false,why:'Bilinen yaşayan dış hedef gerekli'};
+  const sponsor=G.emps[options.sponsor??e.id];
+  if(!sponsor||!f.members.includes(sponsor.id)||kind==='joinWar'&&!sponsor.war[target.id]||kind==='newWar'&&e.war[target.id])return {ok:false,why:'Savaş veya desteklenen üye artık geçerli değil'};
+  if(kind==='newWar'){const gate=canPromiseWarOn(e,target,true);if(!gate.ok)return gate;}
+ }
+ return {ok:true,fed:f,cost:M.c,key};
+}
+function proposeFedMotion(e,kind,options={}){
+ const q=canFedMotion(e,kind,options);if(!q.ok)return q;
+ const result=fedChange(()=>{fedNormalize(q.fed);e.res.etk-=q.cost;q.fed.requestAfter=q.fed.requestAfter||{};q.fed.requestAfter[q.key]=G.day+(kind==='reform'?360:180);return fedOpenVote(q.fed,'motion',e,fedMotionOptions(kind,options));});
+ fedPresentVote(q.fed,result);return result;
+}
+function fedMotionLabel(v){
+ const M=FED_MOTIONS[v.motion];if(!M)return null;
+ const suffix=v.motion==='reform'?' — '+(FED_TYPES[v.type]?.n||'?'):v.motion==='charter'?' — '+v.field+' / '+v.value:'';
+ return {n:M.n+suffix,ico:'🏛',d:v.motion==='reform'?'En az %75 üye onayı; 12 ay geçiş; 120 ay reform beklemesi. Yeni yükümlülükler eski savaşlara uygulanmaz.':v.motion==='charter'?'En az %75 üye onayı. Yeni saldırı yükümlülüğü yalnız açıkça onay veren üyeye uygulanır.':v.motion==='expel'?'Hedef oy kullanamaz. Kalan seçmenlerin mutlak çoğunluğu gerekir.':'Uygun üyelerin mutlak çoğunluğu gerekir. Üyelikte adayın ayrıca kabulü; savaşta ayrıca uygulama gerekir.'};
+}
+function fedApplyMotion(f,v,c){
+ if(v.motion==='admit'){
+  f.invites[v.target]={expires:G.day+180,terms:fedCharterKey(f),by:v.proposer};
+  const o=G.emps[v.target];if(o.ai&&aiFedWilling(o,G.emps[v.proposer],f.type,f).ok)acceptFedInvite(o,f.id);
+ }
+ if(v.motion==='expel')fedRemoveMember(f,v.target,'expel');
+ if(v.motion==='elect'){f.leader=v.target;for(const fl of G.fleets)if(fl.federal&&fl.fedId===f.id)fl.e=v.target;}
+ if(v.motion==='reform'){f.reform={type:v.type,at:G.day+360,defaultDefense:fedCharter(f).defense===fedDefaultCharter(f.type).defense};f.reformAfter=G.day+3600;}
+ if(v.motion==='charter'){
+  const before={defense:fedDuty(f,'defense'),offense:fedDuty(f,'offense')};f.charter={...fedCharter(f),[v.field]:v.value};fedSyncDuties(f,before);
+  if(v.field==='offense')for(const id of f.members)f.dutyConsent[id]={offense:v.value==='auto'&&v.yes.includes(id),since:G.day};
+ }
+ if(v.motion==='joinWar'||v.motion==='newWar')f.decisions[fedVoteToken(v)]={id:fedVoteToken(v),kind:v.motion,sponsor:v.sponsor??v.proposer,target:v.target,by:v.proposer,approved:v.yes.filter(id=>c.eligible.includes(id)),expires:G.day+180,state:'ready'};
+ fedPoliticalRecord(f,'motion',{kind:v.motion,target:v.target,type:v.type});
+}
+function fedSupportGate(e,target,voluntary=true){
+ if(!e||!target||e.dead||target.dead||e===target||e.war[target.id]||e.ally[target.id]||sovereignPair(e,target)||(e.nap?.[target.id]||0)>G.day)return {ok:false,why:'Savaş, müttefiklik, saldırmazlık veya vasallık koşulu değişti'};
+ if(hasCivic(e,'shadow')||hasCivic(e,'universal')||voluntary&&councilBlocksWar(e,target))return {ok:false,why:'Doktrin veya Konsey savaş engeli'};
+ return voluntary?canPromiseWarOn(e,target,true):{ok:true};
+}
+function fedJoinSide(f,e,target,sponsor){
+ if(!fedSupportGate(e,target).ok)return false;
+ f.warPermits=f.warPermits||{};const key=e.id+'>'+target.id,old=f.warPermits[key];f.warPermits[key]={by:e.id,target:target.id,expires:G.day+1,collective:true};
+ const auth=G._warAuth,why=G._warWhy;let ok=false;
+ try{warAuthorize(e,target,{n:'Federasyonun kabul edilmiş savaş kararı'});ok=declareWar(e,target,{sponsor,enemy:target.id,kind:'federation'});}finally{G._warAuth=auth;G._warWhy=why;if(!ok){if(old)f.warPermits[key]=old;else delete f.warPermits[key];}}
+ return ok;
+}
+function executeFedDecision(e,fid,id){
+ const f=fedOf(fid),d=f?.decisions?.[id];
+ if(!f||!e||!f.members.includes(e.id)||!d||d.state!=='ready'||d.expires<=G.day||!(e.id===d.by||e.id===f.leader))return {ok:false,why:'Karar veya uygulama yetkisi geçerli değil'};
+ const target=G.emps[d.target],sponsor=G.emps[d.sponsor];
+ if(!target||target.dead||f.members.includes(target.id)||!sponsor||sponsor.dead||!f.members.includes(sponsor.id)||d.kind==='joinWar'&&!sponsor.war[target.id])return {ok:false,why:'Savaş veya desteklenen üye artık geçerli değil'};
+ const participants=d.approved.filter(id=>f.members.includes(id)&&G.emps[id]&&!G.emps[id].dead);
+ let joined=[];
+ if(d.kind==='newWar'){
+  const actor=G.emps[d.by];if(!participants.includes(actor.id)||!fedSupportGate(actor,target).ok||!aiFedHelp(actor,target,true))return {ok:false,why:'Önerenin savaş koşulları değişti'};
+  if(fedJoinSide(f,actor,target,actor.id))joined.push(actor.id);else return {ok:false,why:'Savaş ilanı uygulanamadı'};
+ }
+ const blocked=[];for(const id2 of participants){const member=G.emps[id2];if(member.war[target.id])continue;if(!aiFedHelp(member,target,true)){blocked.push({id:id2,why:'Bilinen ulaşabilir askerî yardım rotası yok'});continue;}if(fedJoinSide(f,member,target,d.sponsor))joined.push(id2);}
+ d.blocked=blocked;if(!joined.length&&participants.some(id=>!G.emps[id].war[target.id]))return {ok:false,why:'Geçerli ve ulaşabilir katılımcı kalmadı',blocked};
+ d.state='applied';d.applied=G.day;d.joined=joined;fedPoliticalRecord(f,'warDecision',{target:d.target,joined});return {ok:true,joined};
+}
+function fedAttack(a,b,support){
+ if(support)return;const f=findFed(a);if(!f||!fedDuty(f,'offense')||G.day<(f.dutySince?.offense||0))return;
+ for(const id of f.members)if(id!==a.id&&f.dutyConsent?.[id]?.offense)fedJoinSide(f,G.emps[id],b,a.id);
+}
+
 function findFed(e){
   if (!G.feds) return null;
   return G.feds.find(f => f.members.includes(e.id)) || null;
@@ -2214,127 +2385,51 @@ function fedName(rnd2){
 function fedFoundCost(e){
   return hasCivic(e,'council') ? 130 : 220;
 }
-function canFoundFed(e){
+function canFoundFed(e,type='askeri'){
+  if(!e||G.emps[e.id]!==e||e.dead||e.wild||e.crisisSide||isPurifier(e)||isVassal(e)||!Object.hasOwn(FED_TYPES,type))return {ok:false,why:'Kurucu ve tür uygun değil'};
   if (findFed(e)) return {ok:false, why:'Zaten bir federasyonun var.'};
-  if (false) return {ok:false, why:'Sürgün doktrini federasyonu yasaklar.'};
-  const allies = G.emps.filter(o => !o.dead && !o.wild && o.id !== e.id &&
-                                    e.ally[o.id] && !findFed(o));
-  if (allies.length < 2)
-    return {ok:false, why:'En az 2 bağımsız müttefik gerekir (şu an ' + allies.length + ').'};
-  const cost = fedFoundCost(e);
-  if ((e.res.etk||0) < cost) return {ok:false, why:cost + ' etki gerekir.', cost, allies};
-  return {ok:true, allies, cost};
+  if((e._fedLeaveUntil||0)>G.day)return {ok:false,why:'Ayrılış sonrası 24 ay bekleme sürüyor'};
+  const allies=G.emps.filter(o=>o!==e&&!o.dead&&!o.wild&&!o.crisisSide&&!isPurifier(o)&&!isVassal(o)&&!findFed(o)&&
+    e.contact[o.id]&&e.ally[o.id]&&o.ally[e.id]&&!e.war[o.id]&&(o._fedLeaveUntil||0)<=G.day&&
+    (e.id===0||o.id!==0)&&aiFedWilling(o,e,type).ok);
+  if(allies.length<2)return {ok:false,why:'En az 2 bağımsız, kabul eden AI müttefik gerekir (şu an '+allies.length+').',allies};
+  const cost=fedFoundCost(e);if((e.res.etk||0)<cost)return {ok:false,why:cost+' Etki gerekir',cost,allies};
+  // Existing wars may never be erased by creating a political union.
+  if(allies.some(a=>allies.some(b=>a!==b&&(a.war[b.id]||b.war[a.id]))))return {ok:false,why:'Kurucu adayları birbiriyle savaşta'};
+  return {ok:true,allies,cost};
 }
-function foundFederation(e){
-  const chk = canFoundFed(e);
-  if (!chk.ok) return chk;
-  e.res.etk -= chk.cost;
-  const members = [e.id].concat(chk.allies.map(o=>o.id));
-  for (const a of members) for (const b of members){
-    if (a === b) continue;
-    G.emps[a].ally[b] = true;clearBilateralEmbargo(G.emps[a],G.emps[b]);
-    G.emps[a].war[b] = false;
-    G.emps[a].rel[b] = Math.max(G.emps[a].rel[b], 55);
-  }
-  G.feds = G.feds || [];
-  const f = {id:(G.fedUid = (G.fedUid||0)+1), name: fedName(), members,
-             laws:{}, treasury:0, nextVote: G.day + 60, vote:null, founder: e.id};
-  G.feds.push(f);
-  if (e.id === 0) say('FEDERASYON KURULDU — ' + f.name, 'win');
-  if (typeof facEvent === 'function') facEvent(e, 'ally');
-  return {ok:true, fed:f};
+function foundFederation(e,type='askeri'){
+  const q=canFoundFed(e,type);if(!q.ok)return q;
+  const members=[e.id,...q.allies.map(o=>o.id)];e.res.etk-=q.cost;
+  const f={id:(G.fedUid=(G.fedUid||0)+1),name:fedName(),type,charter:fedDefaultCharter(type),leader:e.id,founder:e.id,
+    members,laws:{},treasury:0,fund:{ala:0,ene:0},nextVote:G.day+60,vote:null,founded:G.day,typeSince:G.day,
+    dutySince:{defense:G.day,offense:G.day},defenseFrontCutoff:G.warLedger?.next||1,dutyConsent:{},invites:{},decisions:{},cohesion:70};
+  G.feds=G.feds||[];G.feds.push(f);
+  for(const id of members){f.dutyConsent[id]={offense:false,since:G.day};for(const peer of members)if(id!==peer){
+    const a=G.emps[id],b=G.emps[peer];a.ally[peer]=true;a.contact[peer]=true;clearBilateralEmbargo(a,b);a.rel[peer]=Math.max(a.rel[peer]||0,45);}}
+  fedPoliticalRecord(f,'founded',{type});for(const id of members)recalcMods(G.emps[id]);
+  if(members.includes(0))say('FEDERASYON KURULDU — '+f.name+' · '+fedType(f).n,'win');
+  if(typeof facEvent==='function')facEvent(e,'ally');return {ok:true,fed:f};
 }
-
-/* ittifak ağından federasyon oluştur */
+/* Maintenance only: no silent founding or admission from alliance topology. */
 function updateFederations(){
-  const oldFedIds = G.emps.map(e => (findFed(e) || {}).id);
-  G.feds = G.feds || [];
-  // dağılmış federasyonları temizle
-  for (let i = G.feds.length - 1; i >= 0; i--){
-    const f = G.feds[i];
-    f.members = f.members.filter(id => G.emps[id] && !G.emps[id].dead);
-    // ittifakı kopan veya üyelerle savaşa giren üye federasyondan düşer
-    let changed = true;
-    while (changed && f.members.length){
-      changed = false;
-      for (let k = f.members.length - 1; k >= 0; k--){
-        const id = f.members[k];
-        const me = G.emps[id];
-        const others = f.members.filter(x => x !== id);
-        // en az bir üyeyle ittifakı sürüyorsa ve hiçbir üyeyle savaşta değilse kalır
-        const stillBound = others.length > 0 &&
-          others.some(x => me.ally[x]) &&
-          others.every(x => !me.war[x]);
-        if (!stillBound){
-          f.members.splice(k, 1);
-          changed = true;
-          if (id === 0) say('Federasyondan ayrıldın — ' + f.name, 'war');
-        }
-      }
+  G.feds=G.feds||[];const occupied=new Set();
+  for(const f of [...G.feds]){
+    if(!f||!Array.isArray(f.members)){G.feds=G.feds.filter(x=>x!==f);continue;}
+    const before=f.members.slice();
+    f.members=[...new Set(f.members)].filter(id=>G.emps[id]&&!G.emps[id].dead&&!occupied.has(id));
+    fedNormalize(f);
+    for(const id of f.members.slice()){
+      const e=G.emps[id],others=f.members.filter(x=>x!==id);
+      if(others.some(x=>e.war[x])||others.length&&!others.some(x=>e.ally[x]&&G.emps[x].ally[id]))fedRemoveMember(f,id,'bondLost');
     }
-    if (f.members.length < 3){
-      if (f.members.includes(0)) say('Federasyon dağıldı — ' + f.name, 'war');
-      G.feds.splice(i, 1);
-    }
+    if(f.members.length<2){fedDissolve(f);continue;}
+    f.members.forEach(id=>occupied.add(id));fedNormalize(f);fedReformTick(f);
+    for(const id of before)if(!f.members.includes(id)&&G.emps[id]&&!G.emps[id].dead)recalcMods(G.emps[id]);
+    for(const [id,inv]of Object.entries(f.invites))if(!G.emps[id]||G.emps[id].dead||inv.expires<=G.day||findFed(G.emps[id]))delete f.invites[id];
+    for(const [id,d]of Object.entries(f.decisions))if(d.expires<=G.day){fedPoliticalRecord(f,'decisionExpired',{id});delete f.decisions[id];}
+    fedPruneWarPermits(f);
   }
-  const inFed = new Set();
-  G.feds.forEach(f => f.members.forEach(m => inFed.add(m)));
-
-  /* MEVCUT FEDERASYONA KATILIM: tüm üyelerle karşılıklı ittifakı olan
-     dışarıdaki imparatorluk federasyona dahil olur ve o ana kadar
-     kabul edilmiş TÜM yasalara tabi olur. */
-  for (const f of G.feds){
-    for (const o of G.emps){
-      if (o.dead || o.wild || inFed.has(o.id)) continue;
-      if (false) continue;
-      const bound = f.members.every(m =>
-        G.emps[m] && o.ally[m] && G.emps[m].ally[o.id] && !o.war[m]);
-      if (!bound) continue;
-      f.members.push(o.id);
-      inFed.add(o.id);
-      const lawList = Object.keys(f.laws).filter(k => f.laws[k]);
-      if (o.id === 0){
-        say('FEDERASYONA KATILDIN — ' + f.name +
-            (lawList.length ? ' · yürürlükteki yasalar geçerli' : ''), 'win');
-      } else if (f.members.includes(0)){
-        say(o.name + ' federasyona katıldı' +
-            (lawList.length ? ' ve mevcut yasalara tabi oldu' : ''), 'win');
-      }
-      G.emps.forEach(x=>{ if (!x.dead) recalcMods(x); });
-    }
-  }
-
-  // 3+ karşılıklı ittifaklı küme ara
-  for (const e of G.emps){
-    if (e.dead || e.wild || inFed.has(e.id)) continue;
-    // merkezî topoloji: kurucunun müttefikleri yeterli (birbirlerine
-    // müttefik olmaları şart değil, federasyon onları bir araya getirir)
-    const group = [e.id];
-    for (const o of G.emps){
-      if (o.dead || o.wild || o.id === e.id || inFed.has(o.id)) continue;
-      if (!e.ally[o.id] || e.war[o.id]) continue;
-      group.push(o.id);
-    }
-    if (group.length >= 3){
-      // federasyona giren üyeler otomatik olarak birbirine müttefik olur
-      for (const a of group) for (const b of group){
-        if (a === b) continue;
-        G.emps[a].ally[b] = true;clearBilateralEmbargo(G.emps[a],G.emps[b]);
-        G.emps[a].war[b] = false;
-        G.emps[a].rel[b] = Math.max(G.emps[a].rel[b], 45);
-      }
-      const f = {id: (G.fedUid = (G.fedUid||0)+1), name: fedName(),
-                 members: group, laws: {}, treasury: 0, nextVote: G.day + 90,
-                 vote: null};
-      G.feds.push(f);
-      group.forEach(m => inFed.add(m));
-      if (group.includes(0)) say('FEDERASYON KURULDU — ' + f.name, 'win');
-    }
-  }
-  G.emps.forEach((e, i) => {
-    if (!e.dead && oldFedIds[i] !== (findFed(e) || {}).id) recalcMods(e);
-  });
-  for (const f of G.feds) fedPruneWarPermits(f);
 }
 
 /* GÜVENLİK AĞI: ittifak ve savaş aynı anda var olamaz.
@@ -2365,6 +2460,7 @@ function fixDiploConflicts(){
 function fedTick(){
   fixDiploConflicts();
   updateFederations();
+  if(typeof aiFederationPolitics==='function')aiFederationPolitics();
   if (!G.feds) return;
   for (const f of G.feds){
     // ortak filo bağışı
@@ -2414,7 +2510,8 @@ function fedDefensiveWar(a, b){
     if (!v || v.dead || !v.war[b.id]) return false;
     const d = v.warDefense && v.warDefense[b.id];
     if (!d || !d.defensive || d.since !== (v.warSince && v.warSince[b.id])) return false;
-    const federationDuty = f && f.laws && f.laws.savunma && f.members.includes(v.id);
+    const front=warLedgerFind(v.id,b.id);
+    const federationDuty = f && fedDuty(f,'defense') && f.members.includes(v.id) && (v.warSince?.[b.id]??-Infinity)>=(f.dutySince?.defense||0) && (!f.defenseFrontCutoff||front&&front.id>=f.defenseFrontCutoff);
     const vassalDuty = v.overlord === a.id ||
       (a.vassalType === 'bekci' && a.overlord != null &&
        (a.overlord === v.id || a.overlord === v.overlord));
@@ -2433,7 +2530,7 @@ function fedWarAllowed(a, b){
 function fedPruneWarPermits(f){
   for (const key of Object.keys(f.warPermits || {})){
     const p = f.warPermits[key];
-    if (!f.laws.savasOnay || p.expires <= G.day || !f.members.includes(p.by) ||
+    if ((!f.laws.savasOnay && !p.collective) || p.expires <= G.day || !f.members.includes(p.by) ||
         f.members.includes(p.target) || !G.emps[p.target] || G.emps[p.target].dead ||
         !G.emps[p.by] || G.emps[p.by].dead) delete f.warPermits[key];
   }
@@ -2471,6 +2568,7 @@ function proposeFedWar(a, b){
 }
 function fedVoteLaw(v){
   if (!v) return null;
+  if(v.kind==='motion')return fedMotionLabel(v);
   if (v.kind === 'war') return {n:'Savaş İzni', ico:'⚔', d:'Yalnız öneren üyenin seçilen hedefe bir kez savaş ilan etmesine izin verir. Kabul sonrası 180 gün içinde kullanılmalıdır; savaş kendiliğinden başlamaz.'};
   if (Object.prototype.hasOwnProperty.call(FED_INNER_LAWS, v.law)) return FED_INNER_LAWS[v.law];
   return Object.prototype.hasOwnProperty.call(FED_LAWS, v.law) ? FED_LAWS[v.law] : null;
@@ -2479,13 +2577,13 @@ function fedVoteToken(v){ return v ? String(v.id || ('legacy:' + v.law)) : ''; }
 function fedVoteCounts(f){
   const v = f.vote || {}, seen = new Set();
   const eligible = [...new Set(v.eligible || f.members)].filter(id =>
-    f.members.includes(id) && G.emps[id] && !G.emps[id].dead);
+    f.members.includes(id) && G.emps[id] && !G.emps[id].dead && !(v.kind==='motion'&&v.motion==='expel'&&id===v.target));
   let yes = 0, no = 0;
   for (const [list, positive] of [[v.yes || [], true], [v.no || [], false]]){
     for (const id of list){
       if (!eligible.includes(id) || seen.has(id)) continue;
       seen.add(id);
-      const weight = hasCivic(G.emps[id], 'council') ? 2 : 1;
+      const weight = fedCharter(f).ballot==='equal'?1:hasCivic(G.emps[id], 'council') ? 2 : 1;
       if (positive) yes += weight; else no += weight;
     }
   }
@@ -2506,15 +2604,21 @@ function fedResolveVote(f){
     return {ok:true, pending:true};
   const warGate = v.kind === 'war' ? canFedWarRequest(G.emps[v.proposer], G.emps[v.target], true) : {ok:true};
   if (v.kind === 'war' && warGate.ok && warGate.fed !== f){ warGate.ok = false; warGate.why = 'Öneren üye federasyondan ayrıldı'; }
-  const passed = warGate.ok && c.yes > c.no && c.eligible.length > 0;
+  const motionGate=v.kind==='motion'?canFedMotion(G.emps[v.proposer],v.motion,v,true):{ok:true};
+  if(motionGate.ok&&v.kind==='motion'&&motionGate.fed!==f){motionGate.ok=false;motionGate.why='Öneren üye ayrıldı';}
+  const yesHeads=c.eligible.filter(id=>v.yes.includes(id)).length;
+  const quorum=v.kind==='motion'?(v.motion==='reform'||v.motion==='charter'?Math.ceil(c.eligible.length*.75):Math.floor(c.eligible.length/2)+1):0;
+  const passed = warGate.ok && motionGate.ok && c.yes > c.no && c.eligible.length > 0 && yesHeads>=quorum;
   f.lastVote = {id:fedVoteToken(v), law:v.law, kind:v.kind || 'basic',
-    proposer:v.proposer, target:v.target, repeal:!!v.repeal, invalid:warGate.ok ? '' : warGate.why,
+    proposer:v.proposer, target:v.target, sponsor:v.sponsor, motion:v.motion,type:v.type,field:v.field,value:v.value, repeal:!!v.repeal, invalid:!warGate.ok?warGate.why:!motionGate.ok?motionGate.why:'',yesMembers:v.yes.filter(id=>c.eligible.includes(id)),noMembers:v.no.filter(id=>c.eligible.includes(id)),
     day:G.day, passed, yes:c.yes, no:c.no, abstain:c.waiting.length};
   f.vote = null;
+  fedPoliticalRecord(f,'vote',{kind:v.kind||'basic',law:v.law,passed,yes:c.yes,no:c.no});
   f.nextVote = G.day + 180;
   if (passed){
     f.laws = f.laws || {};
-    if (v.kind === 'war'){
+    if(v.kind==='motion'){fedApplyMotion(f,v,c);}
+    else if (v.kind === 'war'){
       f.warPermits = f.warPermits || {};
       f.warPermits[v.proposer + '>' + v.target] = {by:v.proposer, target:v.target, expires:G.day+180};
     } else if (v.repeal){
@@ -2522,7 +2626,8 @@ function fedResolveVote(f){
       if (v.law === 'savasOnay') f.warPermits = {};
     } else {
       for (const k of fedLawConflicts(f,v.law)) delete f.laws[k];
-      f.laws[v.law] = {since:G.memAge || 0, by:v.proposer};
+      const before={defense:fedDuty(f,'defense'),offense:fedDuty(f,'offense')};
+      f.laws[v.law] = {since:G.memAge || 0, by:v.proposer};fedSyncDuties(f,before);
     }
   }
   if (FED_INNER_LAWS[v.law]) f.cohesion = clamp(fedCohesion(f) +
@@ -2548,17 +2653,19 @@ function fedPresentVote(f, result){
 function fedOpenVote(f, law, proposer, options = {}){
   const inner = !!FED_INNER_LAWS[law];
   f.voteSeq = Math.max(f.voteSeq || 0, Number(f.vote && f.vote.id) || 0) + 1;
-  const v = f.vote = {id:f.voteSeq, law, kind:law === 'warPermit' ? 'war' : inner ? 'inner' : 'basic',
+  const v = f.vote = {id:f.voteSeq, law, kind:law==='motion'?'motion':law === 'warPermit' ? 'war' : inner ? 'inner' : 'basic',
+    ...(law==='motion'?{motion:options.kind,type:options.type,field:options.field,value:options.value,sponsor:options.sponsor}:{}),
     repeal:!!options.repeal, target:options.target,
     proposer:proposer ? proposer.id : null, opened:G.day, expires:G.day + 90,
-    eligible:[...new Set(f.members)].filter(id => G.emps[id] && !G.emps[id].dead), yes:[], no:[]};
+    eligible:[...new Set(f.members)].filter(id => G.emps[id] && !G.emps[id].dead && !(law==='motion'&&options.kind==='expel'&&id===options.target)), yes:[], no:[]};
   f.nextVote = G.day + 180;
   for (const id of v.eligible){
     if (id === 0) continue; // Oyuncunun oyu asla kura veya öneriyle verilmez.
     const e = G.emps[id];
     if (proposer && id === proposer.id){ v.yes.push(id); continue; }
     let want = .4;
-    if (v.kind === 'war'){
+    if(v.kind==='motion'){want=aiFedVoteWant(e,f,v);}
+    else if (v.kind === 'war'){
       const target = G.emps[v.target], prof = aiProfile(e);
       want = e.contact[target.id] ? clamp(.25 + prof.war*.3 - (e.rel[target.id] || 0)/250, .05, .9) : .05;
       if (e.war[target.id]) want = .9;
@@ -2617,13 +2724,18 @@ function castFedVote(e, fid, token, yes){
 /* savunma paktı: bir üyeye savaş açılırsa hepsi girer */
 function fedDefend(attacker, victim){
   const f = findFed(victim);
-  if (!f || !f.laws.savunma) return;
+  if (!f || !fedDuty(f,'defense')) return;
+  // A date can contain multiple decisions: the existing ledger sequence
+  // distinguishes a war declared before a same-day constitutional change.
+  const front=warLedgerFind(attacker.id,victim.id);
+  if(f.defenseFrontCutoff&&(!front||front.id<f.defenseFrontCutoff))return;
   for (const id of f.members){
     if (id === victim.id) continue;
     const m = G.emps[id];
     if (!m || m.dead || m.war[attacker.id]) continue;
     if (m.ally[attacker.id]) continue;          // müttefikine savaş açtırmayız
     if (m.id === attacker.id) continue;
+    if(!fedSupportGate(m,attacker,false).ok)continue;
     m._lastCB = {n:'Savunma Paktı Yükümlülüğü'};
     warAuthorize(m, attacker, m._lastCB);
     declareWar(m, attacker, {sponsor:victim.id, enemy:attacker.id, kind:'federation'});
@@ -8781,7 +8893,7 @@ function fedFundTick(){
     for (const id of f.members){
       const e = G.emps[id];
       if (!e || e.dead) continue;
-      const rate = f.laws && f.laws.ortakDon ? .09 : f.laws && f.laws.sivilFon ? .03 : FED_TITHE;
+      const rate = f.laws && f.laws.ortakDon ? .09 : f.laws && f.laws.sivilFon ? .03 : fedType(f).tithe;
       const ala = Math.max(0, ((e.inc && e.inc.ala) || 0) * rate);
       const ene = Math.max(0, ((e.inc && e.inc.ene) || 0) * rate);
       if (ala > 0 && (e.res.ala || 0) >= ala){ e.res.ala -= ala; f.fund.ala += ala; }
@@ -9205,11 +9317,12 @@ function fedLawConflicts(f, key){
     k !== key && FED_INNER_LAWS[k].group === L.group && f.laws && f.laws[k]) : [];
 }
 function fedLawCost(key, repeal){
-  const L = FED_INNER_LAWS[key];
+  const L = Object.hasOwn(FED_INNER_LAWS,key)?FED_INNER_LAWS[key]:Object.hasOwn(FED_LAWS,key)?{c:60}:null;
   return L ? (repeal ? Math.ceil(L.c / 2) : L.c) : Infinity;
 }
 function fedApplyIncomeLaws(e, inc){
   const positive = (key, factor) => { if (inc[key] > 0) inc[key] *= factor; };
+  const f=findFed(e);if(f){const T=fedType(f);positive('ara',T.ara);positive('ene',T.ene);}
   if (fedHasLaw(e, 'bilimAgi')) inc.ara *= 1.12;
   if (fedHasLaw(e, 'sivilFon')){ positive('ene',1.08); inc.ara *= .96; }
   if (fedHasLaw(e, 'patentOzerk')){ inc.ara *= 1.04; inc.etk += 2; }
@@ -9303,7 +9416,7 @@ function cohesionTick(){
         for (const v of uyeler)
           if (v !== u) u.rel[v.id] = clamp((u.rel[v.id] || 0) - 15, -100, 100);
       }
-      G.feds.splice(i, 1);
+      fedDissolve(f);
       for (const u of uyeler) if (!u.dead) recalcMods(u);
       if (f.members.includes(0) && typeof UI !== 'undefined')
         UI.eventArt('veri', 'FEDERASYON DAĞILDI',
@@ -9317,7 +9430,7 @@ function cohesionTick(){
 /* ═══ FEDERASYON İÇ YASALARI ═══ */
 function canFedLaw(e, key, repeal = false){
   const F = FED_INNER_LAWS[key];
-  if (!Object.prototype.hasOwnProperty.call(FED_INNER_LAWS, key)) return {ok:false, why:'Bilinmeyen yasa'};
+  if (!Object.hasOwn(FED_INNER_LAWS,key)&&!Object.hasOwn(FED_LAWS,key)) return {ok:false, why:'Bilinmeyen yasa'};
   if (!e || G.emps[e.id] !== e || e.dead || e.wild || e.crisisSide)
     return {ok:false, why:'Geçerli üye gerekli'};
   const f = findFed(e);

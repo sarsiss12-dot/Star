@@ -1,0 +1,14 @@
+{
+  "source": "stars-faz95a.zip",
+  "expectedSha256": "fd181312231e23c1ff8998d5db7715a0340b2263b9713e65802ae55b4313e687",
+  "actualSha256": "fd181312231e23c1ff8998d5db7715a0340b2263b9713e65802ae55b4313e687",
+  "badCRC": null,
+  "manifestFiles": 1603,
+  "mismatches": [],
+  "githubCommit": "93ac43141043d48766464976aa04d2d66538efc7",
+  "githubComparedAhead": 0,
+  "githubComparedBehind": 0,
+  "notesFile": "STARS-GELISTIRME-NOTLARI-2026-10-15.md",
+  "notesSameAsPublished": true,
+  "notesSha256": "565ba77766ae8ea30301a26d8b67e80be3210fca1cb493c6f6ddbad759249f21"
+}

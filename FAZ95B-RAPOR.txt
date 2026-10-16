@@ -1,0 +1,79 @@
+STARS — FAZ 95B
+Federasyon Reformu, Üç Tür, Oylamalar ve Siyasi AI
+16 Ekim 2026
+
+SONUÇ
+78 paket / 4764 başarılı kontrol / 0 kalan / 0 zaman aşımı. Save v8; build 95b; PWA stars-v95b.
+Bir tam koşu + etkilenen paketlerde sınırlı takip. Başarısız ilk testler saklandı.
+GitHub'a yayın yapılmadı. 95C/95D/95E başlatılmadı.
+
+KANONİK DOĞRULAMA
+stars-faz95a.zip
+SHA-256: fd181312231e23c1ff8998d5db7715a0340b2263b9713e65802ae55b4313e687
+CRC ve manifestteki 1603 dosyanın SHA-256'sı doğrulandı.
+GitHub 93ac43141043d48766464976aa04d2d66538efc7 kaynağıyla karşılaştırma: 0 ileri/0 geri.
+15 Ekim geliştirme notu aynen korundu; kanonik ZIP esas alındı.
+Kanıt: tests/audit-95b/canonical-verification.json.
+
+TAMAMLANAN GELİŞTİRMELER
+- Askerî/Bilimsel/Ticaret türleri ve gerçek avantaj/karşılıkları.
+- Kuruluşun ücretli, aday kabulüne bağlı açık siyasi işleme dönüşmesi; ittifak ağından sessiz üyelik kaldırıldı.
+- Dört alanlı anayasa ve 4+11 mevcut yasanın korunması.
+- Kabul/ihraç/başkan seçimi; adayın ayrıca kabulü; hedefin ihraç oyundan çıkarılması; baş çoğunluğu ve ölü üyeyle istismarın engellenmesi.
+- %75 tür reformu; 12 ay geçiş, kabulden 120 ay bekleme; eski yasaların ve kayıt saatlerinin korunması.
+- Yeni savunma yükümlülüğünün eski savaşlara geriye yürümemesi; aynı gün sıralamasının mevcut savaş defteriyle ayrılması.
+- Saldırı yükümlülüğünde açık oyuncu onayı; savaş izni ile savaş uygulamasının ayrılması; katılımcı/rota/antlaşma/Konsey koşullarının uygulamada yeniden kontrolü.
+- AI'nın bağımsız kuruluşu, tür tercihi, davet/yanıt, oy, reform, yardım/ihraç girişimleri ve gerekçeli ayrılığı; aylık değerlendirme ve tekrar beklemeleri.
+- Mevcut diplomasi panelinde tür, yükümlülük, başkan, davetler, oylar ve geçiş saati; daraltılabilir bölümler ve 44px mevcut dokunma hedefleri.
+- Federasyon panelindeki kesin uzaktaki filo gücü yerine yetkili istihbarat tahmini.
+- Eski Save v8 federasyonlarına deterministik ek alanlar; başkan ölümü/ayrılışında mevcut federal gemilerin devri; dağılmada yetim federal statünün temizliği.
+
+ÖNCE/SONRA ÖLÇÜMÜ
+11/99/404 üzerinde aynı koşullarla 120 ay tamamlandı.
+95A: 1/0/1 türsüz federasyon. 95B: 1/0/1 Bilimsel federasyon.
+Yeni birlikler oyuncusuz kuruldu; 3 ve 4 üyeyle gözlem sonunda sürdü.
+Negatif aylık stok örneği: 0. Doğal örneklerde federasyon savaş katılımı: 0.
+Askerî/Ticaret bağımsız AI kuruluşu ve savaş/reform/üyelik uçları kontrollü testlerde doğrulandı.
+11/404'te son toplam güç/gemi sayısı geriledi; bazı koloni, keşif ve teknoloji ölçümleri arttı. Gerilemeler saklanmadı.
+Ayrıntılar: AI-KAMPANYA-KARSILASTIRMA-95B.md ve devlet başına 120 aylık JSON'lar.
+
+TESTLER VE DÜZELTMELER
+İlk tam koşu 4760 başarılı/2 hata idi; son birleşik sonuç yukarıdadır.
+Eski dünya testi yeni anayasa geçişini beklemiyordu; eski kayıt dönüşümü ayrı açık testlerle korunarak idempotans fixture'ı güncellendi.
+Yeni ön kapı otomatik savunmada mevcut Konsey RNG/yaptırımını kesiyordu; kanonik savaş akışı geri korundu.
+Yeni testlerin bulduğu aynı gün geriye dönük savunma sorunu savaş defteri eşiğiyle düzeltildi.
+Hedefli fixture'lardaki bilinen geometri/gözlemlenmiş sahiplik ayrımı düzeltildi; bilgi sınırları gevşetilmedi.
+68 yeni kontrol: tür, maliyet, tek etki, üyelik, ihraç, yeter sayı, reform, savaş, onay, rota, eski kayıt, RNG/işlem, AI tercihleri ve gerçek UI eylemleri.
+Tohum 11: 120 aylık tekrar, 60. ay save/load, gözlemci kapalı kontrolünde RNG ve önbellek dışı durum eşit.
+
+DEĞİŞEN ÜRETİM KAYNAKLARI
+main.js: tür modları ve yükleme sonrası ek federasyon alanları; build kimliği.
+diplomacy.js: tür/karar/üyelik/reform ve mevcut hukuk/oy/fon entegrasyonu.
+ai.js: bilgi sınırlarına bağlı aylık siyasi girişim ve oy tercihleri.
+ui.js: mevcut federasyon paneli ve eylem yönlendirmeleri; bilinen güç gösterimi.
+index.html: yalnız federasyon paneline sınırlı küçük okunabilirlik/taşma stilleri.
+sw.js: cache stars-v95b.
+Tam dosya/SHA listesi ve üretim farkı tests/audit-95b içindedir.
+map.js, combat.js, economy.js, audio.js ve manifest.json değiştirilmedi.
+
+AÇIK RİSKLER
+Fiziksel Android veya gerçek tarayıcı DOM testi yapılmadı. Native Canvas ve host testleri cihaz kabulü değildir.
+Üç doğal kampanya tür çeşitliliğini veya uzun dönem dengeyi kanıtlamaz; ortak savaş davranışı kontrollü senaryolarda test edildi.
+Host süreleri eşzamanlı test yükü içerir; mobil performans garantisi değildir.
+95A'nın tohum 99 keşif/ikmal ve geç oyun bilgi sınırı riskleri, ticaret için bağımsız öncelikli denetim korunur.
+Yeni Galaktik Haber Ağı, amblem, konvoy, uzaktan inşa veya ortak filo komutası eklenmedi.
+
+TESLİM DOSYALARI
+stars-faz95b.zip; yanında SHA-256 dosyası.
+FEDERASYON-TURLERI-95B.md
+FEDERASYON-OYLAMALARI-95B.md
+FEDERASYON-AI-95B.md
+AI-KAMPANYA-KARSILASTIRMA-95B.md
+TEST-SONUCLARI-95B.md
+DEVAM-95B.md
+Güncel ACIK-RISKLER.md, FAZ-PLANI.md, ILERI-GELISTIRME-PLANI.md.
+
+SONRAKİ KAPSAM (BAŞLATILMADI)
+95C: gerçek federasyon sefer/kuvvet koordinasyonu ve müttefik destek hedefleri.
+95D/95E: kimlik/amblemler ve Galaktik Haber Ağı/uzaktan inşa.
+96A: sözleşmeler ve gerçek konvoylar. Diğer önceki yol haritası korunur.

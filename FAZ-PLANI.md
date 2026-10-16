@@ -1,3 +1,20 @@
+# 95B sonrası güncel yol haritası — 16 Ekim 2026
+
+95B tamamlandı: üç federasyon türü; kaynak karşılıklı avantajlar; anayasa, kabul/ihraç/seçim ve savaş kararları; açık oyuncu onayı; 12 aylık tür geçişi ve kabulden 120 aylık bekleme; AI'nın bağımsız siyasi kuruluş/yönetimi; kompakt mevcut panel. 78 paket / 4764 başarılı kontrol / 0 kalan / 0 zaman aşımı. Save v8 ve tek 2B kamera korunur. `STARS-GELISTIRME-NOTLARI-2026-10-15.md` aynen korunmuştur.
+
+| Planlı faz / iş | Korunan kapsam |
+|---|---|
+| 95C — başlamadı | Federasyon ortak seferleri, müttefik destek hedefleri, toplanma noktaları, farklı hızlarda kuvvet koordinasyonu, gerçek savaş katkısına göre paylaşım |
+| 95D — başlamadı | Benzersiz devlet/federasyon isimleri, amblemler, Rastgele Amblem, harita kimliği ve savaş katılım önizlemesi |
+| 95E — başlamadı | Galaktik Haber Ağı, kalıcı gelen kutusu ve uzaktan inşa emirleri; gerekirse alt fazlar |
+| 96A / bağımsız erken denetim | Kaynak bazlı sözleşmeler, rota/gelir şeffaflığı ve gerçek konvoylar; yeni kaynak çoğalması kanıtlanırsa ayrı öncelikli bakım |
+| Süren kalite çalışmaları | Federasyon türlerinin uzun dönem dengesi, doğal kampanyada çeşitlilik/istikrar, geç oyun bilgi sınırları ve tohum 99 güvenli keşif/ikmal dengesi |
+
+Yedi kaynaklı Ekonomi ekranı; sığınmacı/diğer olayların diplomatik tutarlılığı; pre-game portre ve sekiz köken; casuslukla rakip teknoloji/karşı araştırmalar; stratejik AI; bilim/doktrin/tür uzun dönem dengesi; harici ses dosyası olmadan JavaScript fiziksel enstrüman modellemeli doğal müzik korunur. Eğik/döndürülebilir kamera geri getirilmeyecek. Fiziksel Android kabulü açık kalır.
+
+95C/95D/95E başlatılmadı. GitHub yayını ayrı talimatla yapılır. Aşağıdaki eski “95B başlamadı” ifadeleri tarihsel kayıttır; güncel durum bu bölümdür.
+
+---
 # 95A sonrası güncel yol haritası — 16 Ekim 2026
 
 95A tamamlandı: ortak AI bilgi gözlemi/tahmini, temel devlet seferi ve savunma, ulaşılabilir hami, diplomatik tekrar beklemesi, casusluk siyasi filtreleri/pasif atama, inşaat meşguliyeti, kararlı iç ihtiyaç ve bekleyen keşfin hesap maliyeti. 77 paket / 4696 kontrol; ölçülen gerilemeler ve geç oyun sınırları açık risklerde. 15 Ekim GitHub geliştirme notu aynen korunur.

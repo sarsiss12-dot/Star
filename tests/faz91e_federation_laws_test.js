@@ -114,7 +114,7 @@ check('Research law raises real monthly income by exactly 12 percent',()=>{
 check('Naval law adds a flat 15 capacity; repeated recalculation cannot stack',()=>{
   const h=fresh();h.run('recalcMods(G.p);var cap=G.p.cap;F.laws.ortakDon=true');
   for(let i=0;i<5;i++)h.run('recalcMods(G.p)');assert.equal(h.run('G.p.cap-cap'),15);
-  h.run('G.p.ally={};for(const e of G.emps)delete e.ally[0];updateFederations()');assert.equal(h.run('G.p.cap'),h.run('cap'));
+  h.run('G.p.ally={};for(const e of G.emps)delete e.ally[0];updateFederations()');assert.equal(h.run('G.p.cap'),h.run('cap-fedType(F).cap'));
 });
 check('Federal fund receives 5 percent normally, 9 percent with naval law',()=>{
   for(const law of [false,true]){
@@ -161,14 +161,16 @@ check('Modal opened before loading cannot vote in the restored world',()=>{
   const before=data(h,'F.vote');hooks.fedYes();assert.deepEqual(data(h,'F.vote'),before);
 });
 check('New member receives naval law but cannot vote on an older agenda',()=>{
-  const h=fresh();h.run('F.laws.ortakDon=true;recalcMods(G.emps[3]);var cap3=G.emps[3].cap');open(h);
-  h.run('for(const id of F.members){G.emps[3].ally[id]=true;G.emps[id].ally[3]=true;}updateFederations()');
-  assert.equal(h.run('G.emps[3].cap-cap3'),15);
+  const h=fresh();h.run(`F.laws.ortakDon=true;fedNormalize(F);F.charter.admission='contact';for(const id of [0,1,2,3]){G.emps[id].mizac='yayilmaci';G.emps[id].persLock='yayilmaci';G.emps[id].overlord=null;G.emps[id].civics=[];}G.emps[3].ai=false;G.p.contact[3]=true;
+    proposeFedMotion(G.p,'admit',{target:3});F.vote.yes=[1,2];F.vote.no=[];castFedVote(G.p,F.id,fedVoteToken(F.vote),true);
+    recalcMods(G.emps[3]);var cap3=G.emps[3].cap`);open(h);
+  h.run('acceptFedInvite(G.emps[3],F.id)');
+  assert.equal(h.run('G.emps[3].cap-cap3'),h.run('15+fedType(F).cap'));
   assert.equal(h.run('castFedVote(G.emps[3],F.id,fedVoteToken(F.vote),true).ok'),false);
 });
 check('Cohesion collapse removes naval capacity immediately',()=>{
   const h=fresh();h.run('recalcMods(G.p);var cap=G.p.cap;F.laws.ortakDon=true;recalcMods(G.p);F.cohesion=-100;cohesionTick()');
-  assert.equal(h.run('findFed(G.p)'),null);assert.equal(h.run('G.p.cap'),h.run('cap'));
+  assert.equal(h.run('findFed(G.p)'),null);assert.equal(h.run('G.p.cap'),h.run('cap-fedType(F).cap'));
 });
 check('Real AI tick proposes once and respects player-pending agenda',()=>{
   const h=fresh();h.run('aiFedLawTick()');assert.equal(h.run('!!F.vote'),true);

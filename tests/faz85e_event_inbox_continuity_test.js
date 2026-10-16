@@ -134,7 +134,7 @@ for(const f of fs.readdirSync(KOK).filter(x=>x.endsWith('.js'))){
   ['yildiz:save','yh_audio','yh_advisor','yh_autoev','yh_bg','yh_radar',
    'yh_templates','__yh_probe','__yh_diag'].forEach(k=>
     ok('depolama anahtarı korundu: '+k, mainJs.includes(k)));
-  ok("sw cache = 'stars-v95a'", /const CACHE = 'stars-v95a'/.test(oku('sw.js')));
+  ok("sw cache = 'stars-v95b'", /const CACHE = 'stars-v95b'/.test(oku('sw.js')));
   const sw=oku('sw.js');
   ok('sw KABUK listesi duruyor', /KABUK/.test(sw));
   ok('sw fetch davranışı duruyor', /addEventListener\('fetch'/.test(sw));

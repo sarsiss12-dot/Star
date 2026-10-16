@@ -1,3 +1,9 @@
+# 95B güncel uygulama notu
+
+Dört temel/on bir iç yasa aşağıdaki tarihsel katalogla korunur. 95B üç siyasi tür ve anayasa/üyelik/reform/savaş kararlarını ekler; güncel kurallar `FEDERASYON-TURLERI-95B.md` ve `FEDERASYON-OYLAMALARI-95B.md` içindedir. Temel yasalar artık elle de önerilir (60 Etki), kaldırılır (30 Etki). İç yasa bedelleri değişmedi. Ticaret türünde yasasız fon tabanı %4, diğerlerinde %5'tir; bütçe yasası bu oranı değiştirir ve ikinci kez uygulanmaz. Yeni siyasi oylamalardaki baş çoğunluğu/%75 eski yasa oylamalarına geriye dönük eklenmez. 95B üyelik ve başkanlığı açık karara bağlar. Aşağıdaki “bu fazda eklenmedi” cümleleri 91E.1 tarihsel durumunu anlatır.
+
+---
+
 # Federasyon yasaları — 91E.1
 
 Federasyonda dört temel yasa ve oyuncunun önerebildiği on bir iç yasa var.

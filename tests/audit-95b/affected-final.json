@@ -1,0 +1,50 @@
+[
+  {
+    "name": "faz85a_political_save_integrity_test.js",
+    "exit": 0,
+    "durationMs": 7689,
+    "pass": 169,
+    "fail": 0,
+    "log": "tests/audit-95b/faz85a_political_save_integrity_test.js.final.log"
+  },
+  {
+    "name": "faz86c_6_transaction_acceptance_test.js",
+    "exit": 0,
+    "durationMs": 17381,
+    "pass": 529,
+    "fail": 0,
+    "log": "tests/audit-95b/faz86c_6_transaction_acceptance_test.js.final.log"
+  },
+  {
+    "name": "faz91e_federation_laws_test.js",
+    "exit": 0,
+    "durationMs": 6002,
+    "pass": 31,
+    "fail": 0,
+    "log": "tests/audit-95b/faz91e_federation_laws_test.js.final.log"
+  },
+  {
+    "name": "faz91e_1_federation_policy_test.js",
+    "exit": 0,
+    "durationMs": 10290,
+    "pass": 31,
+    "fail": 0,
+    "log": "tests/audit-95b/faz91e_1_federation_policy_test.js.final.log"
+  },
+  {
+    "name": "faz94d1_war_visibility_test.js",
+    "exit": 0,
+    "durationMs": 5469,
+    "pass": 34,
+    "fail": 0,
+    "log": "tests/audit-95b/faz94d1_war_visibility_test.js.final.log"
+  },
+  {
+    "name": "faz95a_strategic_ai_test.js",
+    "exit": 0,
+    "durationMs": 7365,
+    "pass": 51,
+    "fail": 0,
+    "log": "tests/audit-95b/faz95a_strategic_ai_test.js.final.log"
+  }
+]

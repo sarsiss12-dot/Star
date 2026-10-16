@@ -2141,12 +2141,14 @@ function recalcMods(e){
     if (fedHasLaw(e, 'ortakDoktrin')){ m.dmgMul += .08; m.upMul += .05; }
     if (fedHasLaw(e, 'ikmalStandardi')){ m.spdMul += .08; m.upMul += .06; }
   }
+  if(typeof fedType==='function'){const f=findFed(e);if(f)m.upMul+=fedType(f).up;}
   e.mods = m;
   /* Sınır bekçisi vasallar senyörün donanma tavanını yükseltir */
   const vasalCap = (typeof vassalCapBonus === 'function') ? vassalCapBonus(e) : 0;
   /* FAZ 77A: Savaş Korosu kapasiteyi ORANSAL artırır */
   e.cap = (40 + m.capFlat + e.colonies.length*6 + vasalCap) * (1 + (m.capMul || 0));
   if (typeof fedHasLaw === 'function' && fedHasLaw(e, 'ortakDon')) e.cap += 15;
+  if(typeof fedType==='function'){const f=findFed(e);if(f)e.cap+=fedType(f).cap;}
   return m;
 }
 
@@ -7509,6 +7511,7 @@ function serialize(){
    sonra, reach ondan sonra, görüş en son.
    ═══════════════════════════════════════════════════════════════════ */
 function rebuildDerivedStateAfterLoad(deferRender){
+  if(typeof fedNormalize==='function')for(const f of G.feds||[])fedNormalize(f);
   /* 1. İmparatorluk geçici önbellekleri */
   for (const x of G.emps){
     x._prof = null;
@@ -8049,7 +8052,7 @@ function forceRedraw(sebep){
    Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
    Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
 /* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */
-const BUILD_ID = '95a';
+const BUILD_ID = '95b';
 const DIAG_MAX = 40;
 const DIAG = [];
 function logDiag(tur, mesaj){

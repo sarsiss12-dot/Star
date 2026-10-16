@@ -1,0 +1,46 @@
+  ✓ Invalid and unsupported proposals leave state and RNG intact
+  ✓ Pure quotes never initialize cohesion or charge cost
+  ✓ Player proposal pays once and still requires explicit player vote
+  ✓ AI proposal also waits for real player consent
+  ✓ AI-only federation resolves without creating a player vote
+  ✓ Accepted law, last result, and exactly one charge
+  ✓ Tie rejects; cost is not refunded; result survives
+  ✓ Duplicate ballots and stale identifiers cannot charge or vote again
+  ✓ Current electorate filters duplicates, deceased and departed members
+  ✓ Departed player cannot use an old modal vote
+  ✓ Deadline expires with abstention; no automatic player yes
+  ✓ Monthly automatic agenda cannot overwrite an unfinished vote
+  ✓ Legacy basic vote remains usable
+  ✓ Legacy council-flag compatibility counts double weight once (catalog fixture)
+  ✓ Save/load keeps pending agenda, paid cost, and explicit vote
+  ✓ Transaction rollback includes vote, resources, law and RNG on recalc failure
+  ✓ AI vote failure rolls back proposal cost and consumed RNG
+  ✓ Notification failure does not undo accepted law or duplicate payment
+  ✓ Research law raises real monthly income by exactly 12 percent
+  ✓ Naval law adds a flat 15 capacity; repeated recalculation cannot stack
+  ✓ Federal fund receives 5 percent normally, 9 percent with naval law
+  ✓ Fund contribution does not overdraw; exact stock can pay
+  ✓ Free passage derives from membership and does not leak permission records
+  ✓ Passing free movement never writes permanent bilateral passage
+  ✓ Load income recalculation cannot deduct fund or replay law voting
+  ✓ Real UI panel exposes proposals, reasons, tally and previous result
+  ✓ Real modal callback captures old agenda identity
+  ✓ Modal opened before loading cannot vote in the restored world
+  ✗ New member receives naval law but cannot vote on an older agenda — evalmachine.<anonymous>:2
+    proposeFedMotion(G.p,'admit',{target:3});F.vote.yes=[1,2];F.vote.no=[];castFedVote(G.p,F.id,fedVoteToken(F.vote),true);
+                                                       ^
+
+TypeError: Cannot set properties of undefined (setting 'yes')
+    at evalmachine.<anonymous>:2:56
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/scratch/342b17141b4a/faz95b/tests/helpers/runtime.js:111:25)
+    at /workspace/scratch/342b17141b4a/faz95b/tests/faz91e_federation_laws_test.js:164:21
+    at check (/workspace/scratch/342b17141b4a/faz95b/tests/faz91e_federation_laws_test.js:5:29)
+    at Object.<anonymous> (/workspace/scratch/342b17141b4a/faz95b/tests/faz91e_federation_laws_test.js:163:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+  ✓ Cohesion collapse removes naval capacity immediately
+  ✓ Real AI tick proposes once and respects player-pending agenda
+GEÇEN: 30 KALAN: 1

@@ -1,0 +1,93 @@
+✓ found askeri charges existing cost, explicit type and default obligations
+✓ found bilimsel charges existing cost, explicit type and default obligations
+✓ found ticaret charges existing cost, explicit type and default obligations
+✓ founding does not erase a war between founder candidates
+✓ alliance topology alone cannot silently found or admit the player
+✓ AI-only founding is real, paid and never includes the human automatically
+✓ type bonuses apply once through real mod/income owners and disappear on leave
+✓ scientific income has an energy tradeoff and preserves existing law multiplier
+✓ merchant maintenance and real fund transfer do not mint stock
+✓ existing budget law overrides type base cut once
+✓ legacy record gets deterministic type, preserved laws and valid leader
+✓ admission quotes are pure and require the constitutional alliance rule
+✓ admission approval waits for candidate acceptance and displays current obligations
+✓ alliance mesh cannot bypass explicit membership vote
+✓ new member receives laws and cannot vote in a prior electorate
+✓ changed constitution invalidates outstanding invitation instead of silently adding duties
+✓ candidate war at acceptance blocks membership without changing the war
+✓ invitation reject and expiry are bounded and cannot be applied twice
+✓ expulsion excludes target from electorate and its hostile vote cannot veto
+✓ expulsion needs a majority of remaining members, not one president vote
+✓ two-member and singleton expulsion abuse is rejected purely
+✓ leave revokes membership effects and enforces 24-month reentry delay
+✓ presidential election transfers existing federal ownership without creating a ship
+✓ dead president has deterministic succession; dissolution clears orphan federal status
+✓ reform requires 75 percent of all eligible members including abstentions
+✓ accepted reform waits 12 months, preserves every law and changes bonuses once
+✓ reform cooldown is 120 months from acceptance and is saved
+✓ reform creates no retroactive participation in existing wars
+✓ reform handles departed proposer and changed president safely
+✓ legacy basic and all eleven internal laws remain available
+✓ one open agenda, insufficient influence and invalid motion do not mutate or consume RNG
+✓ tie and missing quorum reject at 90-day deadline
+✓ target death and proposer departure invalidate motion without executing it
+✓ ballot reform changes weighting only after approval
+✓ bilimsel has no default attack or automatic defense cascade
+✓ ticaret has no default attack or automatic defense cascade
+✓ military default defense joins eligible members once through ordinary war engine
+✓ allied target and NAP block automatic duties without treaty betrayal
+✓ new attack duty requires explicit player yes; a 75-percent reform cannot silently conscript a no vote
+✓ player explicitly consenting to attack duty joins new attacks
+✓ attack duty is not applied to old wars after charter change
+✓ approved new war remains a decision until separately executed
+✓ existing-war support is separate and only affirmative voters join
+✓ peace before applying support invalidates decision without new war
+✓ old War Approval law still blocks unauthorized independent attacks
+✓ collective action revalidates a new NAP and cannot manufacture a breach
+✓ Save v8 preserves active motion, fractional dates and reform clock
+✓ legacy Save v8 gains additive constitution and president without changing laws, stock, RNG or an old vote clock
+✓ closed routes after approval block collective execution without a new war
+✓ motion failure rolls back influence, agenda, history and RNG
+✓ old vote callback cannot affect a restored federation instance
+✓ unknown remote fleet, stock and tech cannot change political vote preference
+✓ hidden unexplored capital cannot provide a protection route to federation founder
+✓ political decisions do not repeat in the same month
+✓ mobile governance is collapsible and exposes pending decisions and reasons
+✓ federation member power UI hides remote reinforcement at low intelligence
+✗ AI independently founds doctrine-matched askeri without human membership — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+0 !== 1
+
+    at eq (/workspace/scratch/342b17141b4a/faz95b/tests/faz95b_federation_reform_test.js:3:47)
+    at /workspace/scratch/342b17141b4a/faz95b/tests/faz95b_federation_reform_test.js:70:472
+    at test (/workspace/scratch/342b17141b4a/faz95b/tests/faz95b_federation_reform_test.js:4:95)
+    at Object.<anonymous> (/workspace/scratch/342b17141b4a/faz95b/tests/faz95b_federation_reform_test.js:70:77)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✓ AI independently founds doctrine-matched ticaret without human membership
+✓ pending invitation survives Save v8 and expires without adding the candidate
+✓ death reduces the live electorate while newly admitted members never join an old ballot
+✓ dissolution during a pending reform removes future bonuses permanently
+✗ accepting the defense law cannot retroactively enlist members in an older war — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+true !== false
+
+    at eq (/workspace/scratch/342b17141b4a/faz95b/tests/faz95b_federation_reform_test.js:3:47)
+    at /workspace/scratch/342b17141b4a/faz95b/tests/faz95b_federation_reform_test.js:74:218
+    at test (/workspace/scratch/342b17141b4a/faz95b/tests/faz95b_federation_reform_test.js:4:95)
+    at Object.<anonymous> (/workspace/scratch/342b17141b4a/faz95b/tests/faz95b_federation_reform_test.js:74:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✓ a council ban introduced after approval blocks application
+✓ war preferences react to deception but hidden ships alone cannot alter estimates
+✓ real UI action proposes and separately casts the human reform vote
+✓ real UI invite acceptance requires the human and preserves existing war states
+GEÇEN: 64 KALAN: 2

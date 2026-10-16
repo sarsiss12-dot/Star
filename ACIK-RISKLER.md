@@ -1,3 +1,20 @@
+# 95B güncel açık riskler — 16 Ekim 2026
+
+- Gerçek Android ve gerçek tarayıcı DOM testi yapılmadı. Mevcut 44px dokunma alanı, sınırlı panel/scroll, native Canvas ve kaynak testleri cihaz kabulü değildir.
+- Doğal 120 aylık üç örnekte yeni federasyonların ikisi de Bilimsel; 99'da birlik yok. Askerî/Ticaret AI kuruluşu kontrollü testlerde çalışır, ancak doğal dağılımın dengeli olduğu kanıtlanmadı.
+- Doğal örneklerde yeni ortak savaş kararıyla katılım 0; reform/savaş/ihraç uçları gerçek üretim işlevlerini çağıran kontrollü senaryolarda doğrulandı. Çok büyük/geç oyun siyasi çeşitlilik için ek örneklem gerekir.
+- 11 ve 404'te toplam AI askerî güç/gemi sayısı geriledi; 404'te kayıplar yükseldi. Buna karşılık bazı koloni/keşif/teknoloji ölçümleri arttı. Ham sonuçlar karşılaştırma belgesinde; kaynak hibesiyle kapatılmadı.
+- Türsüz eski kayıtlar Askerî türün +12 kapasite/+4 puan bakım karşılığını alır; eski otomatik savunma yalnız eski yasaya göre korunur. Eski kayıt ekonomisi ilk yüklemede yeni tür dengesine göre değişir.
+- %75 onay anayasa/reform içindir; eski yasa oylamalarının ağırlıklı üstünlük kuralı korunur. Saldırı taahhüdünü reddeden oyuncu otomatik katılmaz. Yeni savunma varsayılanı eski savaşlara uygulanmaz.
+- İttifak/federasyon siyasi kuruluşu ortak filo koordinasyonu sağlamaz. Mevcut federal fon/gemi üretim modeli genişletilmedi; ortak donanma seferleri ve farklı hızda eşzamanlı varış 95C'de.
+- Üç kampanyada aylık negatif stok yok; bu bütün ara işlemler için evrensel muhasebe ispatı değildir. Ticaret çoğalması yeniden kanıtlanırsa ayrı öncelikli bakım açılmalı.
+- Bilgi sınırı testleri ve tanı sayacı bütün eski kodun biçimsel doğruluğunu kanıtlamaz. 99'da eski toprak/hukuk hesabına ait düşük-istihbarat güç sorgusu hâlâ bir kez gözlenir; yeni siyasi işlevlerden gizli güç sorgusu gözlenmedi. 95A'nın kriz/isyancı/geç oyun riskleri korunur.
+- Ham save hash'i yükleme sonrası türetilmiş önbelleklerden değişebilir. Tekrar/RNG/önbellek dışı oyun durumu ve gözlemci etkisi kontrolü geçti; yeni federasyon alanları eşitlik kontrolünden çıkarılmadı.
+- Host süreleri eşzamanlı test yükü taşır; Android FPS/ısı/bellek veya izole mikro ölçüm değildir. Aynı ay kurulup dağılan birlikler aylık yaşam süresi sayımında kaçabilir; oy sonuçları olay düzeyinde sayılmıştır.
+
+Sonuç: 78 paket / 4764 başarılı kontrol / 0 kalan / 0 zaman aşımı. GitHub'a yüklenmedi; 95C başlatılmadı. Önceki riskler aşağıda korunur; güncel bölüm budur.
+
+---
 # 95A güncel açık riskler — 16 Ekim 2026
 
 - Gerçek Android ve gerçek tarayıcı DOM testi yapılmadı. Önceki mobil/pointer/native Canvas testleri korundu; host süreleri Android FPS/ısı/bellek garantisi değildir.

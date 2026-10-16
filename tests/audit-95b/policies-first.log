@@ -1,0 +1,45 @@
+  ✓ Catalog offers 15 laws with 11 internal proposals in five categories
+  ✓ All internal laws can be repealed, cost once, law really disappears
+  ✓ Each exclusive policy replaces only its family on acceptance
+  ✓ Rejected replacement retains original policy and its capacity
+  ✓ Replacing naval budget removes exactly 15 capacity
+  ✓ Civil budget charges existing fund at 3 percent, no extra treasury
+  ✓ Income effects match all seven economic policy numbers and negative-income rules
+  ✓ Actual empireIncome uses new policy and repeal removes it
+  ✓ Combat and navigation laws reach real modifier and upkeep paths
+  ✓ Cohesion program applies 0.6 plus existing per-law 0.35 only on monthly tick
+  ✓ Membership loss removes all new derived modifiers
+  ✓ War request gate is pure, rejects allies/members/no contact/pirates
+  ✓ War without federation permission is blocked before cost or RNG
+  ✓ Accepted permission does not declare war; one specific member and target only
+  ✓ Permission enables real declaration and is consumed exactly once
+  ✓ Expired permission cannot be used
+  ✓ Rejection never grants permission; immediate duplicate request has cooldown
+  ✓ Invalidated target cancels otherwise unanimous permission vote
+  ✓ Requester leaving for another federation cannot obtain permission from old electorate
+  ✓ Repealing war law clears unused permits
+  ✓ Leaving federation invalidates unused permit before rejoining
+  ✗ Defense pact members defend without a new offensive permit — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+false !== true
+
+    at /workspace/scratch/342b17141b4a/faz95b/tests/faz91e_1_federation_policy_test.js:128:45
+    at check (/workspace/scratch/342b17141b4a/faz95b/tests/faz91e_1_federation_policy_test.js:5:29)
+    at Object.<anonymous> (/workspace/scratch/342b17141b4a/faz95b/tests/faz91e_1_federation_policy_test.js:126:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+  ✓ Offensive coalition war is not mislabeled as defense
+  ✓ Permission cannot bypass civic prohibition or AI authorization
+  ✓ Pending war agenda and granted permission survive save/load without auto-war
+  ✓ Replacement rollback restores old family policy, cost and effects
+  ✓ Real UI exposes five categories, replacement warning and repeal action
+  ✓ Real war proposal action, context and privacy
+  ✓ War promise quote and transaction honor federation permission and rollback it
+  ✓ Real AI war review requests permission then uses its normal declaration path
+  ✓ AI considers expanded policies and respects occupied policy families
+GEÇEN: 30 KALAN: 1

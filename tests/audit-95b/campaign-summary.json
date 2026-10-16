@@ -1,0 +1,62 @@
+[
+  {
+    "seed": 11,
+    "version": "95A",
+    "power": 17516,
+    "ships": 150,
+    "colonies": 9,
+    "techs": 26,
+    "discovered": 113,
+    "ms": 5533
+  },
+  {
+    "seed": 11,
+    "version": "95B",
+    "power": 14423,
+    "ships": 126,
+    "colonies": 10,
+    "techs": 26,
+    "discovered": 118,
+    "ms": 5564
+  },
+  {
+    "seed": 99,
+    "version": "95A",
+    "power": 21120,
+    "ships": 166,
+    "colonies": 15,
+    "techs": 33,
+    "discovered": 69,
+    "ms": 6193
+  },
+  {
+    "seed": 99,
+    "version": "95B",
+    "power": 21120,
+    "ships": 166,
+    "colonies": 15,
+    "techs": 33,
+    "discovered": 69,
+    "ms": 5777
+  },
+  {
+    "seed": 404,
+    "version": "95A",
+    "power": 29451,
+    "ships": 218,
+    "colonies": 22,
+    "techs": 47,
+    "discovered": 128,
+    "ms": 7590
+  },
+  {
+    "seed": 404,
+    "version": "95B",
+    "power": 28623,
+    "ships": 206,
+    "colonies": 23,
+    "techs": 52,
+    "discovered": 128,
+    "ms": 7762
+  }
+]
