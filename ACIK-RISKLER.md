@@ -1,3 +1,18 @@
+# 94D.1 güncel açık riskler — 16 Ekim 2026
+
+- Gerçek Android cihazı ve gerçek tarayıcı DOM/ekran yerleşimi test edilmedi. Pointer, native Canvas, save/load ve kaynak/CSS kontrolleri bunların yerine geçmez.
+- Savaş bağlantıları bilinçli olarak muhafazakâr: iki tarafla temas ve yabancı savaş için taraflardan birinde SIZILMIŞ (3) istihbarat gerekir. Çizgi ucu güncel görüşte yoksa savaş bilinse bile çizgi çizilmez. Yeni istihbarat sistemi eklenmedi.
+- Aynı seferdeki otomatik savunma cepheleri tek kartta toplanır. Gelen kutusunun eski altı kart sınırı korunur; aşırı eşzamanlı olaylar eski kartı düşürebilir. Kalıcı haber arşivi 95E'ye bırakıldı.
+- Savaş duraklatma tercihi yeni savaş kartına uygulanır. Oyuncunun açtığı modal veya başka kritik bağımsızlık/kriz olayı mevcut duraklatma kurallarını kullanır.
+- Eski ilişki ve ortak hafıza değerlerinin gerçek/rastgele geçmiş kaynağı tam ayrıştırılamaz; tarihsel değerler keyfî geri alınmadı. Yeni rastgele sınır etkisi üretimi durduruldu.
+- Rastgele komşuluk RNG çağrıları kaldırıldığı için 94D ile 94D.1 kampanyalarının birebir aynı gelişmesi beklenmez. Aynı sürümde kayıt devamlılığı korunmalıdır.
+- Host render ölçümü eşzamanlı regresyon yükü altında yapıldı. 100 sistemde savaş modunun medyanı 5,97→6,52 ms; tek örnek Android performans garantisi veya genel yavaşlama/hızlanma kanıtı değildir.
+- 94B/94C stratejik AI, tohum 99 bekleme/ikmal, diplomasi/olay/portre/köken ve geç oyun denge riskleri korunur. Yeni doğrulanan ticaret kaynak çoğalması ayrı öncelikli bakım gerektirir.
+
+Save v8 korunur. 2B kamera kalıcı tercihtir. 95A başlamadı; GitHub'a yükleme yapılmadı. Önceki notlar aşağıda tarihsel olarak korunmuştur.
+
+---
+
 # 94D güncel açık riskler — 15 Ekim 2026
 
 - Fiziksel Android testi ve gerçek tarayıcı DOM/görsel yerleşim testi yapılmadı. Chromium kurulumu eksik indirmeyle başarısız oldu. Beş yatay ekran testi yapısal CSS bütçesidir; taşmasız gerçek cihaz kabulü olarak sunulamaz.

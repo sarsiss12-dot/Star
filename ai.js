@@ -1366,12 +1366,7 @@ function memTick(){
     }
     for (const o of G.emps){
       if (o.dead || o.wild || o.id === e.id) continue;
-      /* Uzun sınır teması gerginliğe dönüşür — savaşın tohumu budur */
-      const fm = frictionMonths(e.id, o.id);
-      if (fm > 9 && !e.ally[o.id] && !e.war[o.id] &&
-          !(e.treaty && e.treaty[o.id]) && !(o.treaty && o.treaty[e.id])){
-        if (rnd() < .10 * (P ? P.grudge : 1)) remember(e, o.id, 'sinirGergin');
-      }
+      // 94D.1: adjacency is not evidence of hostile military activity.
       /* Hafıza ilişkiyi kendine çeker */
       const t = trustOf(e, o.id);
       if (t) e.rel[o.id] = clamp(e.rel[o.id] + clamp(t * .012, -.9, .9), -100, 100);

@@ -1,0 +1,166 @@
+
+A. SÖZDİZİMİ, DOSYA SINIRI VE KARANTİNA
+  ✓ node --check ai.js
+  ✓ node --check audio.js
+  ✓ node --check combat.js
+  ✓ node --check diplomacy.js
+  ✓ node --check economy.js
+  ✓ node --check main.js
+  ✓ node --check map.js
+  ✓ node --check sw.js
+  ✓ node --check ui.js
+  ✓ depolama anahtarı korundu: yildiz:save
+  ✓ depolama anahtarı korundu: yh_audio
+  ✓ depolama anahtarı korundu: yh_advisor
+  ✓ depolama anahtarı korundu: yh_autoev
+  ✓ depolama anahtarı korundu: yh_bg
+  ✓ depolama anahtarı korundu: yh_radar
+  ✓ depolama anahtarı korundu: yh_templates
+  ✓ depolama anahtarı korundu: __yh_probe
+  ✓ depolama anahtarı korundu: __yh_diag
+  ✓ sw cache = 'stars-v94d1'
+  ✓ sw KABUK listesi duruyor
+  ✓ sw fetch davranışı duruyor
+  ✓ sw activate davranışı duruyor
+  ✓ kayıt sürümü v:8 (Faz 85F ile yükseldi)
+  ✓ önceki bölüm korundu: world
+  ✓ önceki bölüm korundu: threats
+  ✓ önceki bölüm korundu: campaign
+  ✓ events bölümü eklendi
+  ✓ chainQueue campaign içinde KALDI (events'e kopyalanmadı)
+  ✓ restoreEventsWorld world/threats/campaign SONRASINDA
+  ✓ restoreEventsWorld rebuildDerivedStateAfterLoad ÖNCESİNDE
+  ✓ restoreEventsWorld economyTick(true) ÖNCESİNDE
+  ✓ setupGame merkezî resetEventsRuntimeState kullanıyor
+  ✓ NOTE_FIELDS beyaz listesi tanımlı
+  ✓ reset minNote/minRaw temizliyor
+  ✓ kayıt bloğunda yasaklı alan YOK: G.minRaw
+  ✓ kayıt bloğunda yasaklı alan YOK: G.minNote
+  ✓ kayıt bloğunda yasaklı alan YOK: innerHTML
+  ✓ kayıt bloğunda yasaklı alan YOK: _hook
+  ✓ openNote'ta sqOffer case'i var
+  ✓ sqOfferOpen üretim fonksiyonu var
+  ✓ aiOffer artık teklifin TAMAMINI data'da taşıyor
+  ✓ aiDealOpen tekil pendingOffer'dan OKUMUYOR
+  ✓ pendingOffer artık doğruluğun kaynağı değil (atama kalmadı) — 0 referans
+  ✓ SITUATIONS kataloğu duruyor
+  ✓ situationsTick tanımı duruyor
+  ✓ situationsTick çağrısı PASİF (yorumlu)
+  ✓ DURUMLAR sekmesi gizli
+  ✓ 200 ayda situation tetiklenmedi — 0
+  ✓ audio.js byte-for-byte aynı — 804226980179698a
+  ✓ manifest.json byte-for-byte aynı — 6b8305490e9a55e9
+  ✓ map kaynak kilidi: 91C altyapısı + 93A hedef seçimi
+
+B. ÜRETİCİ/TÜKETİCİ ROTA MATRİSİ
+  ✓ kind "sqOffer": codec var ve tüketici rotası çalışıyor — codec=true tüketici=sqOfferOpen
+  ✓ kind "pact": codec var ve tüketici rotası çalışıyor — codec=true tüketici=pactOpen
+  ✓ kind "submit": codec var ve tüketici rotası çalışıyor — codec=true tüketici=submitOpen
+  ✓ kind "cncnew": codec var ve tüketici rotası çalışıyor — codec=true tüketici=councilNewOpen
+  ✓ kind "cncvote": codec var ve tüketici rotası çalışıyor — codec=true tüketici=councilVoteOpen
+  ✓ kind "aideal": codec var ve tüketici rotası çalışıyor — codec=true tüketici=aiDealOpen
+  ✓ kind "fedvote": codec var ve tüketici rotası çalışıyor — codec=true tüketici=fedVoteOpen
+  ✓ kind "chain": codec var ve tüketici rotası çalışıyor — codec=true tüketici=chainOpen
+  ✓ kind "event": codec var ve tüketici rotası çalışıyor — codec=true tüketici=eventOpen
+  ✓ kind "anomaly": codec var ve tüketici rotası çalışıyor — codec=true tüketici=anomalyOpen
+  ✓ kind "peace": codec var ve tüketici rotası çalışıyor — codec=true tüketici=peaceOpen
+  ✓ kind "facdem": codec var ve tüketici rotası çalışıyor — codec=true tüketici=facDemandOpen
+  ✓ kind "faccoup": codec var ve tüketici rotası çalışıyor — codec=true tüketici=facCoupOpen
+  ✓ kind "criswarn": codec var ve tüketici rotası çalışıyor — codec=true tüketici=crisisWarnOpen
+  ✓ kind "crisis": codec var ve tüketici rotası çalışıyor — codec=true tüketici=crisisOpen
+  ✓ kind "crisend": codec var ve tüketici rotası çalışıyor — codec=true tüketici=crisisEndOpen
+  ✓ kind "wardec": codec var ve tüketici rotası çalışıyor — codec=true tüketici=warDecOpen
+  ✓ kind "border": codec var ve tüketici rotası çalışıyor — codec=true tüketici=borderOpen
+
+C. SERIALIZE → ZEHİRLE → DESERIALIZE
+  ✓ altı bildirim de geri geldi (zehri ezdi) — 6
+  ✓ SIRA korundu — chain,event,anomaly,pact,border,sqOffer
+  ✓ UID'ler korundu — 1,2,3,4,5,6
+  ✓ chain: kararlı zincir kimliği geri geldi — hayalet1
+  ✓ event: EVENTS kataloğundaki GERÇEK nesneye bağlandı
+  ✓ event: seçenek FONKSİYONU yeniden kuruldu — function
+  ✓ anomaly: ANOMALIES ve G.sys üzerinden yeniden kuruldu
+  ✓ pact payload'ı korundu — {"from":1,"tur":"intel"}
+  ✓ border payload'ı korundu — {"id":2,"len":7}
+  ✓ sqOffer payload'ı korundu — 1
+  ✓ pause bayrağı korundu
+  ✓ kayıtta FONKSİYON yok
+  ✓ kayıtta tam EVENT nesnesi yok (yalnız evId)
+  ✓ kayıtta tam SYS nesnesi yok (yalnız sysId)
+  ✓ kayıtta HTML yok
+
+D. YENİDEN KURULAN REFERANSLARLA SEÇENEK ÇALIŞTIRMA
+  ✓ event yüklemeden sonra katalog nesnesine bağlı
+  ✓ seçilen event fonksiyonu TAM BİR KEZ çalıştı — 1 çağrı
+  ✓ anomaly ID + sistem ID üzerinden yeniden kuruldu
+  ✓ seçilen anomaly seçeneği TAM BİR KEZ çalıştı — 1 çağrı
+  ✓ kayıp event / ölü devlet / bilinmeyen kind HATA ATMADI — ok
+  ✓ üç geçersiz payload da güvenle düşürüldü — kutu=0 düşen=3
+  ✓ onarım kaynak/ilişki/savaş durumunu DEĞİŞTİRMEDİ
+
+E. AI TEKLİF KİMLİĞİ
+  ✓ üç FARKLI teklif ayrı ayrı kuyrukta (birebir aynısı tekrarlanmadı) — 3 teklif
+  ✓ aynı devletten şartları farklı iki teklif AYRI kaldı — 1:ene100>min50 · 2:ala9>ara7 · 1:yiy33>etk11
+  ✓ teklifler yüklemeden sonra KENDİ give/want içeriğini koruyor — 1:ene100>min50 · 2:ala9>ara7 · 1:yiy33>etk11
+  ✓ İLK teklif açılabildi (eskiden "geçerliliğini yitirdi" diyordu)
+  ✓ bir teklifi reddetmek DİĞERİNİ değiştirmedi
+  ✓ ikinci teklif KENDİ şartlarıyla açıldı
+  ✓ tekil UI.pendingOffer artık doğruluğun kaynağı değil
+
+F. sqOffer STATÜKO BARIŞI
+  ✓ sqOffer tıklanınca GERÇEK modal açıldı (eskiden hiçbir şey olmuyordu)
+  ✓ modal teklifi yapan devleti gösteriyor
+  ✓ modal statüko sonucunu ve donma uyarısını gösteriyor
+  ✓ Kabul / Reddet / Daha sonra düğmeleri var
+  ✓ kabul statusQuoPeace'i TAM BİR KEZ çağırdı — 1
+  ✓ çift dokunuş İKİNCİ barış üretmedi — ilk 1 → ikinci 1
+  ✓ savaş gerçekten bitti
+  ✓ RET statusQuoPeace çağırmadı — 0
+  ✓ RET sahiplik veya kaynak değiştirmedi
+  ✓ RET yeni ceza uydurmadı (ilişki değişmedi)
+  ✓ RET sonrası savaş sürüyor
+  ✓ mevcut AI cooldown davranışı korundu
+  ✓ eskimiş sqOffer "geçersiz" ekranı gösterdi
+  ✓ eskimiş teklif statusQuoPeace ÇAĞIRMADI — 0
+  ✓ açılınca bildirim kutudan çıktı
+  ✓ DAHA SONRA bildirimi TAM BİR KOPYA olarak geri koydu — kopya=1 toplam=1
+
+G. UID, DEDUPE VE seenChains
+  ✓ 10 ardışık yükleme inbox'ı ÇOĞALTMADI ve sırasını değiştirmedi — 3:1peace|2wardec|3crisis
+  ✓ inboxUid en büyük UID'den küçükse güvenle yükseltildi — 1 → 3
+  ✓ sonraki bildirimin UID'si mevcutlarla ÇAKIŞMIYOR — yeni uid=4
+  ✓ seenChains kaydet/yükle sonrası korundu (zehri ezdi) — {"hayalet1":true}
+  ✓ başlamış zincir 300 denemede YENİDEN SEÇİLMEDİ
+  ✓ setupGame seenChains'i temizledi — {}
+  ✓ setupGame inbox ve inboxUid'i temizledi
+  ✓ setupGame _openNote / pendingOffer temizledi
+  ✓ setupGame minNote / minRaw temizledi
+
+H. AÇIK MODAL VE minRaw
+  ✓ bildirim açılınca kutudan çıktı ve _openNote'a alındı
+  ✓ serialize AÇIK bildirimi runtime state'i DEĞİŞTİRMEDEN yakaladı
+  ✓ yüklemede açık bildirim inbox'a TEK KOPYA döndü — 1
+  ✓ yükleme bildirimi OTOMATİK AÇMADI
+  ✓ ham minRaw modal HTML'i kayda GİRMEDİ
+  ✓ yükleme minRaw'ı güvenle temizledi
+
+I. V6 GÖÇÜ VE YÜKLEME BÜTÜNLÜĞÜ
+  ✓ v6 kaydı HATA ATMADAN açıldı — ok
+  ✓ v6 göçü boş ve deterministik events kurdu — inbox=[] uid=0
+  ✓ zehirli oturum değerleri TAŞINMADI
+  ✓ göç bildirim üretmedi — 0
+  ✓ göç DETERMİNİSTİK (3 tekrar aynı)
+  ✓ göç RNG TÜKETMEDİ
+  ✓ kurtarılamayan bilgi dürüstçe raporlandı — {"migrated":true,"from":6,"dropped":0,"note":"v6 göçü: inbox/inboxUid/
+  ✓ yükleme kaynakları değiştirmedi
+  ✓ yükleme ilişkileri ve savaşları değiştirmedi
+  ✓ yükleme sistem sahipliğini ve filoları değiştirmedi
+  ✓ yükleme RNG tüketmedi
+  ✓ yükleme hiçbir bildirimi OTOMATİK AÇMADI
+  ✓ yükleme hiçbir seçeneği çalıştırmadı (bildirim üretilmedi) — 0
+  ✓ 10 yüklemeden sonra kutu hâlâ 3 bildirim — 3
+
+══════════════════════════════════════════
+  GEÇEN: 143   KALAN: 0
+══════════════════════════════════════════
+

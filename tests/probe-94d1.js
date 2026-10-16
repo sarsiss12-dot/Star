@@ -1,0 +1,13 @@
+'use strict';
+const {fresh}=require('./helpers/dispatch-fixture'),fs=require('fs'),path=require('path');
+const root=path.resolve(process.argv[2]||'.'),h=fresh(0,root);
+h.run(`G.feds=[];G.council=null;G.warLedger=warLedgerEmpty();G.inbox=[];UI._openNote=null;G.speed=2;
+E.war={};O.war={};E.ally={};O.ally={};E.contact[1]=O.contact[0]=true;
+var declared=declareWar(E,O),cards=G.inbox.map(n=>({kind:n.kind,pause:n.pause,title:n.title}));`);
+const declaration=JSON.parse(h.run('JSON.stringify({declared,cards,speed:G.speed})'));
+const f=fresh(0,root);
+f.run(`G.feds=[];G.council=null;G.fleets=[];G.inbox=[];UI._openNote=null;G.friction={'0_1':30};E.war={};O.war={};E.ally={};O.ally={};E.treaty={};O.treaty={};
+refreshReach=()=>{};borderContacts=()=>({'0_1':20});rnd=()=>0;var before=E.rel[1];borderFriction();`);
+const friction=JSON.parse(f.run('JSON.stringify({before,after:E.rel[1],cards:G.inbox.map(n=>n.kind),fleets:G.fleets.length,contactMonths:G.friction["0_1"]})'));
+const map=fs.readFileSync(path.join(root,'map.js'),'utf8');
+console.log(JSON.stringify({root,declaration,friction,oldOneContactWarGate:map.includes('!G.p.contact[a.id] && !G.p.contact[b.id]')},null,2));

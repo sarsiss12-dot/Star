@@ -1,0 +1,93 @@
+STARS — FAZ 94D.1
+16 Ekim 2026 | Build 94d1 | PWA stars-v94d1 | Save v8
+
+KAYNAK VE KORUNAN NOTLAR
+stars-faz94d.zip SHA-256:
+b0211dbb8ff500814c79e2110169594fd6c7676a006f3d46d12c358857771ff3
+ZIP CRC, kaynak manifestindeki 1243 dosya ve kaynak hash'leri doğrulandı.
+Ayrı çalışma kopyası kullanıldı. GitHub main, 94D yayın commit'i
+(e6c3c777da9dc56ee90c6995330754665695c1a4) sonrasında tek ek not içeriyordu.
+STARS-GELISTIRME-NOTLARI-2026-10-15.md değiştirilmeden korundu.
+Git blob: caf85637bbea4012f41d43407f9df2b49035d88b.
+
+ÖNCE KANITLANAN EKSİKLER
+- Oyuncunun kendi savaş ilanı belirgin inbox kartı üretmiyordu; yalnız
+  doğrudan oyuncuya saldırı için eski, duraklatmayan wardec kartı vardı.
+- Savaş haritası yalnız bir tarafla temas varken iki gerçek başkenti bağlayıp
+  gizli rakip konumunu/savaşını sızdırabiliyordu.
+- Sınır olayı gerçek ihlal/filo olmadan temas süresi ve rastgele zarla oluşuyor,
+  salt komşuluk ilişkileri aşındırıyor ve asker yığınağı hafızası üretebiliyordu.
+Ham tekrar ve kaynak kanıtı tests/audit-94d1 dizinindedir.
+
+TAMAMLANAN DÜZELTMELER
+1. Oyuncunun kendi ilanı, saldırıya uğraması ve mevcut geçerli diplomatik
+   yükümlülüklerle katılımı aynı küçük savaş kartına bağlandı. Tarih, gerçek
+   bilinen adlar, taraf, neden, bilinen ortak/düşman ve doğru diplomasi hedefi.
+2. Aynı savaş seferinin otomatik cepheleri tek kartta toplanır. Kapatma ve
+   Save v8 yükleme kartı yeniden üretmez. Barıştan sonraki yeni savaş ayrıdır.
+3. Kayıt/Ayarlar'da savaş kartı için duraklatma aç/kapat; varsayılan açık.
+   Var olan notify/setSpeed/deferUI/inbox ve işlem geri alma altyapısı kullanıldı.
+4. Diplomasi dahil ana modlardan bağımsız Savaşlar katmanı; aynı veriyle
+   mevcut Savaş modu korundu. İnce kırmızı çizgiler renk paletini değiştirmez.
+5. İki kimlik/istihbarat ve görünür-keşfedilmiş konum süzgeci; gizli başkent
+   fallback'i yok. Yabancı savaş renginin bilgi sızdırması da kapatıldı.
+6. Rastgele sınır olayı, salt komşuluk ilişki aşınması/asker yığınağı hafızası
+   ve yalnız temas süresinden savaş nedeni kaldırıldı. Gerçek eylemler korundu.
+7. Eski border notları güvenli açıklama ile açılır; eski etki kazanma/harcama
+   ve ilişki seçenekleri çalışmaz. Geçmiş ilişki ve ortak hafıza türü korunur.
+8. Bildirim alanı max 144 px / ekranın %30'u, kaydırılabilir ve 44 px dokunma
+   hedefli. 94D bilim, kamera, gezegen savaş göstergeleri yeniden yazılmadı.
+
+DEĞİŞEN ÜRETİM KAYNAKLARI
+main.js: bildirim codec'i, tercihler ve build.
+diplomacy.js: ilan/katılım sunumu, bilgi süzgeci ve rastgele sınır etkisinin iptali.
+ai.js: yalnız uzun komşuluktan rastgele düşmanca hafıza üreten blok kaldırıldı.
+economy.js: mevcut kopya-devlet savaş olayına ortak bildirim çağrısı.
+ui.js: küçük kart/ayrıntı, ayarlar ve bağımsız katman düğmesi; eski olay adaptörü.
+map.js: ortak güvenli bağlantı çizimi; eski sızıntılı savaş çizimi kaldırıldı.
+index.html: küçük bildirim alanı CSS'i.
+sw.js: stars-v94d1.
+combat.js ve mevcut kamera/pointer altyapısı değişmedi. Yeni dış asset veya
+üretim kütüphanesi yok. Test ve rapor dosyaları ayrıca eklendi/güncellendi.
+
+TEST SONUÇLARI
+76 test paketi, 4645 başarılı kontrol, 0 kalan hata,
+0 zaman aşımı, 0 atlanan paket.
+94D referansı: 75 paket / 4611 kontrol. Yeni hedefli paket: 34/34.
+İşlem kabulü 529/529 ve inbox 143/143 ayrıca hedefli geçti; tekrarlar tekil
+kontrol toplamına yeniden eklenmedi. Bir tam regresyon tamamlandı; tek teklif-kapatma regresyonu ortak notify
+kapısının 94D davranışına döndürülmesiyle düzeltildi. Savaş/eskimiş sınır
+kartı açık referansı da yalnız açıkça kapatıldığında temizlenir; aksi hâlde
+kapanan kart Save v8 tarafından tekrar açık not olarak saklanabiliyordu. Ardından etkilenen
+teklif/inbox/savaş paketleri tekrar geçti; ham başarısız sonuç gizlenmedi. İlk kısmi koşu kesirli oyun günü eksiği kanıtlanınca
+bilinçli durduruldu. Önceki/başarısız günlükler silinmedi.
+Save v8, deterministik kayıt devamlılığı, ticaret bütünlüğü, filo/tersane/
+takviye, bilim ve keşif, kamera/pointer/Canvas regresyonları geçti.
+
+AÇIK KALAN SINIRLAR
+- Fiziksel Android ve gerçek tarayıcı DOM kabulü yapılmadı.
+- Üçüncü taraf savaş bağlantıları için SIZILMIŞ (3) bilgi ve güncel görünür
+  konum gerekir; savaş bilinse bile görünür uç yoksa çizgi görünmeyebilir.
+- Eski altı bildirim sınırı korunur. Büyük kalıcı haber arşivi eklenmedi.
+- Duraklatma tercihi yeni savaş kartına aittir; açılan modal ve başka kritik
+  olaylar mevcut duraklatma kurallarını kullanır.
+- Tarihsel rastgele/gerçek hafıza kaynakları her zaman ayrıştırılamaz; eski
+  ilişki geçmişi keyfî geri alınmadı. RNG çağrısı kaldırılması fazlar arası
+  kampanyayı değiştirebilir; aynı sürümde devamlılık esastır.
+- Host Canvas süreleri Android FPS veya genel performans garantisi değildir.
+
+PERFORMANS ÖRNEĞİ
+100 sistem, 900x420 native Canvas, dört savaş, 40 kare/ölçüm:
+94D Savaş: medyan 5,97 ms, p95 11,59 ms.
+94D.1 Savaş: medyan 6,52 ms, p95 10,35 ms.
+94D.1 Diplomatik + Savaşlar: medyan 5,39 ms, p95 7,43 ms.
+Eşzamanlı regresyon yükü vardır. Tüm ölçümlerde RNG değişmedi.
+
+95A'YA VE İLERİ FAZLARA DEVİR
+Diplomasi/vasallık/casusluk AI gerekçeleri, AI konsey/inşa/araştırma denetimi,
+stratejik koordinasyon ve 94B tohum 99 beklemeleri 95A'da. Federasyon
+reformları 95B, koordineli seferler 95C, isim/amblem ve savaş önizlemesi 95D,
+Haber Ağı/gelen kutusu/uzaktan inşa 95E, ticaret şeffaflığı 96A önerisi korunur.
+Ekonomi, olay/sığınmacı tutarlılığı, portre/köken, karşı araştırma ve harici
+ses dosyasız doğal müzik planları korunur. Yeni ticaret çoğalması kanıtı
+ayrı öncelikli bakım gerektirir. 95A başlatılmadı. GitHub'a yazılmadı.

@@ -1,3 +1,24 @@
+# 94D.1 sonrası güncel yol haritası — 16 Ekim 2026
+
+94D.1: oyuncu savaşa katılım kartları/isteğe bağlı duraklatma, bağımsız Savaşlar katmanı, bilgi sınırı düzeltmesi ve rastgele sınır olayının kaldırılması. Önceki 94D mobil bilim, tek 2B kamera ve gezegen savaş göstergeleri korunur. Bu not yalnız tamamlanan dar kapsamı günceller.
+
+GitHub'dan alınan **STARS-GELISTIRME-NOTLARI-2026-10-15.md** değiştirilmeden korunmuştur. Oradaki tarihsel 94D durumundan bağımsız olarak güncel teslim 94D.1'dir. Aşağıdaki planlar yeni fazları başlatmaz:
+
+| Önerilen faz | Korunan kapsam |
+|---|---|
+| 95A | Diplomasi/vasallık/casusluk AI gerekçeleri ve bilgi sınırları; AI konsey, inşa gemisi, araştırma ve stratejik karar denetimi; tohum 99 keşif/ikmal beklemeleri |
+| 95B | Üç federasyon türü, yasalar/oylamalar, üyelik ve tür reformu |
+| 95C | Koordineli federasyon seferleri, müttefik destek hedefleri, gerçek katkıya göre toprak paylaşımı |
+| 95D | Benzersiz devlet/federasyon isimleri, amblemler ve Rastgele Amblem, harita kimliği; savaşa katılım önizlemesi |
+| 95E | Kalıcı Galaktik Haber Ağı, diplomatik gelen kutusu ve uzaktan inşa emirleri; gerektiğinde ayrı alt fazlar |
+| 96A | Kaynak bazlı ticaret sözleşmeleri, rota/gelir şeffaflığı ve gerçek konvoylar |
+
+Ayrıca yedi kaynaklı Ekonomi ekranı, sığınmacı/olay diplomatik tutarlılığı, pre-game portre ve sekiz köken denetimi, casuslukla rakip teknolojisi/karşı araştırma, uzun dönem özel teknoloji dengesi ve harici ses dosyası olmadan JavaScript fiziksel enstrüman modellemeli doğal müzik korunur. Yeni kanıtlanan kaynak çoğalması ayrı öncelikli bakım işidir; 94C düzeltmeleri korunur. Fiziksel Android kabulü otomatik testlerden ayrı kalır.
+
+95A başlatılmadı. Yeni federasyon mekanikleri, haber arşivi veya devlet amblemleri bu fazda eklenmedi. GitHub yayını ayrı talimat gerektirir. Aşağıdaki metinler tarihsel plan kaydıdır.
+
+---
+
 # 94D sonrası güncel plan — 15 Ekim 2026
 
 94D uygulama ve otomatik regresyon teslimi tamamlandı. Mobil bilim düzeni, tek 2B kamera, diplomasi tutarlılığı, gezegen savaş göstergeleri ve sınır örnekleme düzeltmeleri için FAZ94D-RAPOR.txt esas alınır. Önceki eğim/döndürme planları geçersizdir; bu özellik kullanıcı isteğiyle kaldırıldı.

@@ -1,0 +1,32 @@
+✓ player declaration produces one structured notice with real names and timestamp
+✓ enemy declaration auto-pauses through existing speed infrastructure
+✓ pause off does not stop the game and retains the notification
+✓ settings exposes an accessible war pause option and persists changes
+✓ duplicate declaration and repeated hook do not repeat after dismissal
+✓ save/load preserves structured notice and ledger dedup flag
+✓ dismissed notification remains dismissed across Save v8 load
+✓ legacy active wars are not synthesized into new notices on load
+✓ new war after peace receives a different front and new notice
+✓ federation defense uses existing law, defensive side and participation reason
+✓ federation without defense law creates no new obligation
+✓ overlord protection announces player entry with real vassal reason
+✓ war promise records its actual sponsor and reason
+✓ independence backer path also produces a notice
+✓ notification opens exact opponent diplomacy target
+✓ unknown campaign participants and hidden power are excluded from detail
+✓ old wardec notes remain readable without fabricated start details
+✓ shared war data deduplicates multiple mutual war pairs
+✓ contact with only one party cannot reveal hidden opponent or line
+✓ diplomatic contact alone cannot reveal third-party wars
+✓ unexplored capitals never provide hidden line endpoints
+✓ stale unobserved foreign ownership is not used as an endpoint
+✓ visible owned alternative replaces a hidden capital safely
+✓ war layer toggles independently without changing mode or political color
+✓ war renderer shares existing mode and preserves Canvas state and game RNG
+✓ pan and zoom transform endpoints without modifying stored locations
+✓ old random incident cannot be generated or acted upon
+✓ border contact no longer damages relations or consumes RNG
+✓ real hostile activity memories survive random-adjacency removal
+✓ mobile notice stack is height bounded and touch sized
+✓ new war codec drops malformed payload without accepting arbitrary object fields
+GEÇEN: 31 KALAN: 0

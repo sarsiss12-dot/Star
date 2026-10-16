@@ -116,22 +116,9 @@ function borderFriction(){
     if (hasCivic(ea,'outpost') || hasCivic(eb,'outpost')) continue;
     if ((ea.treaty && ea.treaty[b]) || (eb.treaty && eb.treaty[a])) continue;
     seen[k] = true;
-    const len = pairs[k];
-    G.friction[k] = (G.friction[k] || 0) + 1;       // kaç aydır temas
-    const wear = -clamp(.15 + len * .045, .15, 1.1);
-    ea.rel[b] = clamp(ea.rel[b] + wear, -100, 100);
-    eb.rel[a] = clamp(eb.rel[a] + wear, -100, 100);
-
-    // uzun süren sürtüşme → olay
-    if (!ea.war[b] && G.friction[k] > 10 && rnd() < .06){
-      if (a === 0 || b === 0){
-        const other = (a === 0) ? eb : ea;
-        UI.borderEvent(other, len);
-      } else if (rnd() < .25){
-        // iki AI arasında: gerginlik savaşa dönebilir
-        if (ea.rel[b] < -55 && totalPower(ea) > totalPower(eb)*1.15) declareWar(ea, eb);
-      }
-    }
+    // 94D.1: geographic contact is metadata, not proof of an intrusion.
+    // Keep old counters/save references; no passive relation damage or random incident.
+    G.friction[k] = (G.friction[k] || 0) + 1;
   }
   // teması kesilen çiftlerin sayacı sıfırlansın
   for (const k in G.friction) if (!seen[k]) G.friction[k] = 0;
@@ -187,6 +174,7 @@ function warLedgerOpen(a,b,support=null,legacy=false){
   const f={id,campaign:parent?parent.campaign:id,parent:parent?parent.id:null,
     reason:parent?String(support.kind):legacy?'observed':'declaration',sides:[a,b],roles,
     opened:G.day,legacy:!!legacy,ended:null,endReason:null,
+    entryKind:support&&support.kind||'declaration',sponsor:support&&Number.isInteger(support.sponsor)?support.sponsor:null,
     membership:[warLedgerMember(a),warLedgerMember(b)],goals:[],metrics:[metric(),metric()],occupation:[]};
   l.fronts.push(f); warLedgerGoal(f,a);warLedgerGoal(f,b);return f;
 }
@@ -607,6 +595,50 @@ function settlementApply(e,id){
   return {ok:true,state:'applied',transfers:q.transfers.length};
 }
 
+/* 94D.1: edge-triggered notices, never synthesized from loaded war flags.
+   Ledger mutations participate in existing deal rollback. UI remains deferred. */
+function warStartNotice(a,b,support=null){
+  if(!a||!b||!G.p||!a.war[b.id]||!b.war[a.id]||!([a.id,b.id].includes(G.p.id)))return false;
+  const f=warLedgerFind(a.id,b.id)||warLedgerOpen(a.id,b.id,support);
+  if(!f)return false;
+  const foe=a.id===G.p.id?b:a;
+  // A declaration is explicit diplomatic contact, not discovery of any location.
+  G.p.contact=G.p.contact||{};foe.contact=foe.contact||{};
+  G.p.contact[foe.id]=true;foe.contact[G.p.id]=true;
+  const root=(G.warLedger.fronts||[]).find(x=>x.id===f.campaign)||f;
+  if(root.playerNotified)return false;
+  root.playerNotified=true;f.playerNotified=true;
+  const entry=root.sides.includes(G.p.id)?root:f;
+  const data={attacker:entry.sides[0],defender:entry.sides[1],rootAttacker:root.sides[0],rootDefender:root.sides[1],
+    front:entry.id,campaign:entry.campaign,reason:entry.entryKind||'declaration',sponsor:entry.sponsor??null,
+    day:G.day,year:G.year,month:G.month};
+  say('SAVAŞ BAŞLADI — '+G.emps[data.attacker].name+' → '+G.emps[data.defender].name,'war');
+  if(typeof UI!=='undefined'&&UI.warDeclared)deferUI(UI.warDeclared.bind(UI),data);
+  return true;
+}
+/* Shared war knowledge for the war mode and the independent overlay.
+   Diplomatic contact alone does not reveal third-party war plans. */
+function knownWarPairs(viewer=G.p){
+  if(!viewer)return [];
+  const known=e=>e&&(e.id===viewer.id||!!(viewer.contact&&viewer.contact[e.id]));
+  const out=[];
+  for(let i=0;i<G.emps.length;i++)for(let j=i+1;j<G.emps.length;j++){
+    const a=G.emps[i],b=G.emps[j];
+    if(!warLedgerPair(i,j)||!known(a)||!known(b))continue;
+    if(i!==viewer.id&&j!==viewer.id&&intelOf(viewer,i)<3&&intelOf(viewer,j)<3)continue;
+    out.push({a:i,b:j,player:i===viewer.id||j===viewer.id});
+  }
+  return out;
+}
+function warMapConnections(){
+  const endpoint=id=>{
+    const e=G.emps[id],visible=s=>s&&s.owner===id&&pSeen(s)&&(id===G.p.id||pVis(s));
+    const home=G.sys[e.home];
+    return visible(home)?home:G.sys.find(visible);
+  };
+  return knownWarPairs().map(p=>({...p,from:endpoint(p.a),to:endpoint(p.b)})).filter(p=>p.from&&p.to);
+}
+
 /* ---------- diplomasi ---------- */
 function declareWar(a, b, support = null){
   if (!a || !b || a.dead || b.dead || a.id === b.id) return false;
@@ -694,17 +726,10 @@ function declareWar(a, b, support = null){
     if (b.id === 0) say('Galaktik Kınama: ' + a.name + ' tüm galakside itibar kaybetti', 'win');
   }
   if (typeof facEvent === 'function'){ facEvent(a,'war'); facEvent(b,'war'); }
-  if (a.id === 0 || b.id === 0){
-    const foe = (a.id === 0) ? b : a;
-    const byThem = (b.id === 0);
-    say('SAVAŞ İLAN EDİLDİ — ' + foe.name, 'war');
-    /* FAZ 86C.2: doğrudan UI etkisi de tamponlanır. */
-    if (byThem && UI && UI.warDeclared)
-      deferUI(UI.warDeclared.bind(UI), foe);
-  }
   if (typeof fedDefend === 'function') fedDefend(a, b);
   if (typeof overlordDefend === 'function') overlordDefend(a, b);
   if (typeof judgeCasusBelli === 'function') judgeCasusBelli(a, b);
+  warStartNotice(a,b,support);
   return true;
 }
 function peaceAlwaysAccepted(a, b){
@@ -4922,7 +4947,7 @@ function casusBelliOf(e, o){
   if (has('konseyIhlal')) return {k:'konsey',    w:.95, n:'Konsey Kararını Uygula'};
   if (has('sabotaj'))     return {k:'sabotaj',   w:.85, n:'Gizli Savaşa Karşılık'};
   if (g >= 35)            return {k:'kin',       w:.80, n:'Kan Davası'};
-  if (fm >= 18 && e.rel[o.id] < -20) return {k:'sinir', w:.70, n:'Sınır Anlaşmazlığı'};
+  // 94D.1: elapsed adjacency alone is not a casus belli.
   if (has('kervanYagma') || has('yaptirim')) return {k:'korsan', w:.60, n:'Ticaret Yollarını Koru'};
   if (g >= 15 && fm >= 8) return {k:'gerginlik', w:.55, n:'Süregelen Gerginlik'};
 
@@ -5855,6 +5880,7 @@ function issueEdict(lord, sub, key){
   lord.war[sub.id] = true;
   sub.warSince = sub.warSince || {}; sub.warSince[lord.id] = G.day;
   lord.warSince = lord.warSince || {}; lord.warSince[sub.id] = G.day;
+  warStartNotice(sub,lord,{kind:'independence'});
   if (typeof recalcMods === 'function'){ recalcMods(sub); recalcMods(lord); }
   if (typeof remember === 'function') remember(sub, lord.id, 'ihanet');
   /* FAZ 72: destek sözü verenler savaşa katılır */
@@ -5973,7 +5999,7 @@ function vassalJoinWars(lord, sub){
     if (typeof warAuthorize === 'function'){
       sub._lastCB = {n:'Senyörün Çağrısı'};
       warAuthorize(sub, o, sub._lastCB);
-      declareWar(sub, o);
+      declareWar(sub, o, {sponsor:lord.id,enemy:o.id,kind:'vassal'});
       warAuthClear();
     }
   }
@@ -6058,7 +6084,7 @@ function vassalTick(){
       if (typeof warAuthorize === 'function'){
         sub._lastCB = {n:'Bağımsızlık Savaşı'};
         warAuthorize(sub, eskiLord, sub._lastCB);
-        declareWar(sub, eskiLord);
+        declareWar(sub, eskiLord, {kind:'independence'});
         warAuthClear();
       }
       if (eskiLord.id === 0) say('VASALIN İSYAN ETTİ — ' + sub.name, 'war');
@@ -6402,7 +6428,7 @@ function playerRevolt(){
   e._lastCB = {n:'Bağımsızlık Savaşı'};
   if (typeof warAuthorize === 'function'){
     warAuthorize(e, lord, e._lastCB);
-    declareWar(e, lord);
+    declareWar(e, lord, {kind:'independence'});
     warAuthClear();
   }
   /* Bağımsızlık savaşı meşrudur: Galaktik Tehdit cezası YOK */
@@ -9366,6 +9392,7 @@ function joinIndepWar(sub, lord){
     b.war[lord.id] = true; lord.war[b.id] = true;
     b.warSince = b.warSince || {}; b.warSince[lord.id] = G.day;
     b.warCause = b.warCause || {}; b.warCause[lord.id] = 'Bağımsızlık Desteği';
+    warStartNotice(b,lord,{sponsor:sub.id,enemy:lord.id,kind:'independenceSupport'});
     if (typeof recalcMods === 'function'){ recalcMods(b); recalcMods(lord); }
     kac++;
     if (b.id === 0)
@@ -9571,6 +9598,8 @@ function separatistTick(){
     sub.war[lord.id] = true; lord.war[sub.id] = true;
     sub.warSince = sub.warSince || {}; sub.warSince[lord.id] = G.day;
     sub.warCause = sub.warCause || {}; sub.warCause[lord.id] = 'Bağımsızlık Savaşı';
+    lord.warSince = lord.warSince || {}; lord.warSince[sub.id] = G.day;
+    warStartNotice(sub,lord,{kind:'independence'});
     sub.rel[lord.id] = -100;
     if (typeof recalcMods === 'function'){ recalcMods(sub); recalcMods(lord); }
     if (typeof remember === 'function') remember(sub, lord.id, 'ihanet');

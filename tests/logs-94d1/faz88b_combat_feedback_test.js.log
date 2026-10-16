@@ -1,0 +1,25 @@
+✓ gerçek tur oyuncu raporu üretir
+✓ rapor taraf kimliklerini gerçek savaştan alır
+✓ son tur verilen hasar gerçek düşman gövde farkıdır
+✓ son tur alınan hasar gerçek oyuncu gövde farkıdır
+✓ ateş açabilen gemi sayısı menzil hesabından gelir
+✓ ikmal oranı turun sideStats sonucuyla aynıdır
+✓ sistem paneli hasar ve kalkanı ayrı anlatır
+✓ sistem paneli gövde dayanımının değişmediğini söyler
+✓ eski yanıltıcı toplam güç cümlesi kaldırıldı
+✓ filo paneli yıpranmayı gövde olarak adlandırır
+✓ ham güç stratejik filo gücü diye etiketlenir
+✓ oyunculu savaşın sistem panelinde tur raporu görünür
+✓ AI-AI raporu oyuncuya ayrıntı sızdırmaz
+✓ tanınmayan rakibin adı panelde gizlenir
+✓ kesin zafer raporu gerçek kayıpları mesajda taşır
+✓ son silahsız gemiler de kesin sonuç kaybına eklenir
+✓ zafer raporunun kayıp sayısı kalan gemi farkıyla tutarlıdır
+✓ savunma duruşu ricadı rapora işler
+✓ ricat mesajı gövde ve ikmali gerçek değerle gösterir
+✓ çatışma barışla kesilirse rapor sonuçsuz kapanır
+✓ enkaz ödülü hasarı veren Enkaz Mühendisine gider
+✓ kurbanın Enkaz Mühendisliği kendi kaybını ödüllendirmez
+✓ muharebe raporu v8 kaydet yüklede korunur
+✓ bozuk kayıt raporu yüklemede temizlenir
+GEÇEN: 24 KALAN: 0

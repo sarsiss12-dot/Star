@@ -1,0 +1,22 @@
+{
+  "root": "/workspace/scratch/342b17141b4a/faz94d1",
+  "declaration": {
+    "declared": true,
+    "cards": [
+      {
+        "kind": "warstart",
+        "pause": true,
+        "title": "SAVAŞA DAHİLSİN"
+      }
+    ],
+    "speed": 0
+  },
+  "friction": {
+    "before": -30,
+    "after": -30,
+    "cards": [],
+    "fleets": 0,
+    "contactMonths": 31
+  },
+  "oldOneContactWarGate": false
+}

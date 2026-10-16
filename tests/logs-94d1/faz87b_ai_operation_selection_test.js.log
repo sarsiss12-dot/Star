@@ -1,0 +1,27 @@
+✓ geçersiz yüksek puanlı soruşturma yerine gerçek filo planı seçilir
+✓ çalınacak teknoloji yoksa hiçbir operasyon seçmeyebilir
+✓ geçerli teknoloji operasyonu aynı puanla seçilir
+✓ geçerli eski soruşturma elenmez
+✓ gerçek maliyet üzerinden %40 rezerv: taban altında
+✓ gerçek maliyet üzerinden %40 rezerv: taban sınırında
+✓ gerçek maliyet üzerinden %40 rezerv: pahalı sınır altında
+✓ gerçek maliyet üzerinden %40 rezerv: pahalı sınırında
+✓ gerçek maliyet üzerinden %40 rezerv: indirimli sınır altında
+✓ gerçek maliyet üzerinden %40 rezerv: indirimli sınırında
+✓ iki kaynaklı sabotajda alaşım rezervi de gerekir
+✓ gerçek seçici pahalı operasyonu rezerv eksikken atlar
+✓ kota dışı yeni RNG tüketimi olmadan 2400 aday kontrolü yapılır
+✓ süren etki ve son 24 ay tekrar filtresi korunur
+✓ etikten gelen incite puanı uygunsuz hedefi açamaz
+✓ seçici temassız hedefte profil/kilit/RNG değiştirmez
+✓ seçici ölü hedefte profil/kilit/RNG değiştirmez
+✓ seçici kendisi hedefte profil/kilit/RNG değiştirmez
+✓ seçici eski nesne hedefte profil/kilit/RNG değiştirmez
+✓ seçici eksik hedefte profil/kilit/RNG değiştirmez
+✓ puanı eşik altında kalan geçerli aday zorla yürütülmez
+✓ özel teknoloji verisi yolu standart calTech ile karışmaz
+✓ uygun sınır kolonisi özel incite yolunda kalır; gerçek bedel 120
+✓ AI laboratuvarı seed 11: sıfır geçersiz standart seçim, kota ve deterministik sonuç
+✓ AI laboratuvarı seed 99: sıfır geçersiz standart seçim, kota ve deterministik sonuç
+✓ AI laboratuvarı seed 404: sıfır geçersiz standart seçim, kota ve deterministik sonuç
+GEÇEN: 26 KALAN: 0

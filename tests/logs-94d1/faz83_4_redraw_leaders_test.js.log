@@ -1,0 +1,104 @@
+
+A. SÖZDİZİMİ VE REGRESYON
+  ✓ node --check ai.js
+  ✓ node --check audio.js
+  ✓ node --check combat.js
+  ✓ node --check diplomacy.js
+  ✓ node --check economy.js
+  ✓ node --check main.js
+  ✓ node --check map.js
+  ✓ node --check sw.js
+  ✓ node --check ui.js
+  ✓ manifest.json geçerli
+  ✓ yükleme sırası korundu
+  ✓ anahtar: yildiz:save
+  ✓ anahtar: yh_audio
+  ✓ anahtar: yh_advisor
+  ✓ anahtar: yh_autoev
+  ✓ anahtar: yh_bg
+  ✓ anahtar: yh_radar
+  ✓ anahtar: yh_templates
+  ✓ anahtar: __yh_probe
+  ✓ anahtar: __yh_diag
+  ✓ sw cache stars-v ile başlıyor — stars-v94d1
+  ✓ forceRedraw içinde View.draw YOK
+  ✓ forceRedraw içinde üçlü ciz() YOK
+  ✓ forceRedraw scheduleRecovery kullanıyor
+
+B. FORCE REDRAW — SAĞLIKLI TEK ÇAĞRI
+  ✓ 1 runRecovery — 1
+  ✓ 1 View.resize — 1
+  ✓ 1 View.draw — 1
+  ✓ 1 UI.refresh — 1
+  ✓ 1 repaintPortraits — 1
+  ✓ 0 yeni oyun rAF döngüsü — 0
+
+C. FORCE REDRAW FIRTINASI (50 çağrı)
+  ✓ 50 çağrı → 1 ağır kurtarma — 1 runRecovery
+  ✓ 50 çağrı → 1 View.draw — 1
+  ✓ oyun döngüsü çoğalmadı — 0 rAF
+  ✓ DIAG sebebi koruyor — ok:force:f0,force:f1,force:f2,force:f3,force:f4,force:f5,f
+
+D. SAĞLIKSIZ ÇİZİM — RETRY SINIRI
+  ✓ sağlıksız durumda sonsuz döngü yok — tamamlandı
+  ✓ DIAG sağlık kodu yazıldı — retry sonrası hâlâ sağlıksız: hep
+
+E. ÇAĞRI NOKTALARI
+  ✓ enterGame etiketli
+  ✓ contextrestored yüzey yaşam döngüsünde
+  ✓ contextrestored kanonik kurtarma tetikliyor
+  ✓ enterGame → 1 ağır çizim — rr 1 draw 1
+  ✓ contextrestored → 1 ağır çizim — rr 1 draw 1
+
+F. LEADERPOOL SAFLIĞI
+  ✓ başlangıçta leaders alanı yok — false
+  ✓ leaderPool boş dizi döndürdü — 0 öğe
+  ✓ okuma sonrası hasOwnProperty false — false
+  ✓ 50 okuma sonrası hâlâ false — false
+  ✓ başarısız atama alan oluşturmadı — false
+  ✓ atama temiz reddetti — Lider bulunamadı
+
+G. LİDER SATIN ALMA
+  ✓ lider satın alındı — true
+  ✓ leaders alanı oluştu — true/true
+  ✓ yalnız 1 lider eklendi — 1
+  ✓ etki yalnız 1 kez düştü (60) — 60
+  ✓ lider hemen listede görünüyor — 1
+  ✓ havuz sınırı 8 korundu — 8 lider
+
+H. LİDER ATAMA
+  ✓ amiral filoya atandı
+  ✓ vali koloniye atandı
+  ✓ görevden alma çalıştı
+
+I. HAM SERIALIZE BÜTÜNLÜĞÜ (normalizasyon YOK)
+  ✓ HAM serialize birebir eşit — BIREBIR
+  ✓ leaders alanı öncesinde yoktu — false
+  ✓ kurtarma leaders alanı OLUŞTURMADI — false
+  ✓ ralli korundu
+  ✓ loopBuild korundu
+  ✓ gün/yıl/ay korundu — 0/2212/1
+  ✓ filolar korundu — 29 filo
+
+J. KAYIT UYUMLULUĞU
+  ✓ leaders alanı OLMAYAN eski kayıt yüklendi — true
+  ✓ yükleme leaders alanı oluşturmadı — true
+  ✓ liderli kayıt yüklendi — true
+  ✓ lider verisi korundu — 1 lider
+  ✓ serialize/deserialize turu OYUN VERİSİ kayıpsız — birebir
+
+K. BÜTÜNLÜK (120 ay)
+  ✓ 120 ay + harita + sekme + kayıt — ok|function|rally|loop
+  ✓ UI.tab hâlâ function — function
+  ✓ ralli/loopBuild korundu
+
+ÖLÇÜM ÖZETİ
+  sağlıklı forceRedraw: rr 1 · resize 1 · draw 1 · refresh 1 · portre 1 · rAF 0
+  50 çağrılık fırtına : rr 1 · draw 1
+  enterGame           : rr 1 · draw 1
+  contextrestored     : rr 1 · draw 1
+
+══════════════════════════════════════════
+  GEÇEN: 71   KALAN: 0
+══════════════════════════════════════════
+

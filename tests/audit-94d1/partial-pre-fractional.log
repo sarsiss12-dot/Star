@@ -1,0 +1,32 @@
+faz83_2_brand_test.js: 55/0 (exit 0)
+faz83_3_render_recovery_test.js: 54/0 (exit 0)
+faz83_4_redraw_leaders_test.js: 71/0 (exit 0)
+faz84a_intel_dedup_test.js: 80/0 (exit 0)
+faz84b_vassal_state_dedup_test.js: 118/0 (exit 0)
+faz84c_state_visibility_gate_test.js: 114/0 (exit 0)
+faz85a_political_save_integrity_test.js: 169/0 (exit 0)
+faz85b_load_idempotency_test.js: 128/0 (exit 0)
+faz85c_crisis_save_continuity_test.js: 136/0 (exit 0)
+faz85e_event_inbox_continuity_test.js: 143/0 (exit 0)
+faz85d_campaign_save_continuity_test.js: 179/0 (exit 0)
+faz86a_intel_command_center_test.js: 119/0 (exit 0)
+faz86b_deal_engine_test.js: 124/0 (exit 0)
+faz86c_1_quote_effective_plan_test.js: 94/0 (exit 0)
+node:fs:2483
+    return binding.writeFileUtf8(
+                   ^
+
+Error: ENOENT: no such file or directory, open 'tests/logs-94d1/faz85f_spatial_simulation_continuity_test.js.log'
+    at Object.writeFileSync (node:fs:2483:20)
+    at finish (/workspace/scratch/342b17141b4a/faz94d1/tests/run-all.js:26:20)
+    at ChildProcess.<anonymous> (/workspace/scratch/342b17141b4a/faz94d1/tests/run-all.js:30:80)
+    at ChildProcess.emit (node:events:509:28)
+    at maybeClose (node:internal/child_process:1141:16)
+    at ChildProcess._handle.onexit (node:internal/child_process:306:5) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'tests/logs-94d1/faz85f_spatial_simulation_continuity_test.js.log'
+}
+
+Node.js v24.19.0

@@ -1,0 +1,1 @@
+First benchmark attempt: fixture omitted G.p.intel initialization; TypeError before frame measurements. Fixture initialized explicitly; production code unchanged.

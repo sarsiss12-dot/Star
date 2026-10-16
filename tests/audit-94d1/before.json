@@ -1,0 +1,18 @@
+{
+  "root": "/workspace/scratch/342b17141b4a/faz94d",
+  "declaration": {
+    "declared": true,
+    "cards": [],
+    "speed": 2
+  },
+  "friction": {
+    "before": -30,
+    "after": -31.05,
+    "cards": [
+      "border"
+    ],
+    "fleets": 0,
+    "contactMonths": 31
+  },
+  "oldOneContactWarGate": true
+}

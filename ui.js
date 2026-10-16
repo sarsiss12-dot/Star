@@ -128,6 +128,8 @@ const UI = {
            <button class="tool mapMode" id="mm_savas" data-a="mapMode" data-x="savas"
              title="Husumet ağı">🔥<span>Savaş</span></button>
            <div class="modeHdr" id="layerHdr">KATMANLAR (bağımsız)</div>
+           <button class="tool warLinksBtn${WAR_LINKS_ON?' on':''}" id="warLinksBtn" data-a="warLinksToggle"
+             aria-pressed="${WAR_LINKS_ON}" title="Bilinen savaş bağlantıları — bağımsız aç/kapat">⚔<span>Savaşlar</span></button>
            <button class="tool logiBtn" id="logiBtn" data-a="logiToggle"
              title="İkmal hatları, menzil ve tedarik — ana moddan bağımsız aç/kapat">⚓<span>Lojistik</span></button>
            <button class="tool radarBtn" id="radarBtn" data-a="radarTog"
@@ -504,6 +506,16 @@ const UI = {
       /* ═══ FAZ 86C.4H-R2: LOJİSTİK AYRI AKSİYON ═══
          Lojistik artık ana modu DEĞİŞTİRMEZ; kendi aç/kapat
          durumunu çevirir ve tercihi kalıcı yazar. */
+      case 'warLinksToggle': {
+        WAR_LINKS_ON=!WAR_LINKS_ON;WAR_LINKS_REV++;
+        const b=$('warLinksBtn');if(b){b.className='tool warLinksBtn'+(WAR_LINKS_ON?' on':'');b.setAttribute('aria-pressed',String(WAR_LINKS_ON));}
+        try{storeSet('yh_warlinks',WAR_LINKS_ON?'on':'off');}catch(e){}
+        this.refresh();break;
+      }
+      case 'warPauseToggle':
+        WAR_PAUSE_ON=!WAR_PAUSE_ON;WAR_PAUSE_REV++;
+        try{storeSet('yh_warpause',WAR_PAUSE_ON?'on':'off');}catch(e){}
+        this.saveMenu();break;
       case 'logiToggle': {
         LOGI_ON = !LOGI_ON;
         const lb0 = $('logiBtn');
@@ -6909,34 +6921,58 @@ const UI = {
           : 'Kimse öne çıkmadı; zafer paylaşıldı.'}</div>
        <div class="mft"><button class="ch" data-a="closem"><div class="cht">Devam et</div></button></div>`, 'win');
   },
-  warDeclared(foe){
-    this.notify({kind:'wardec', data:foe.id, ico:'⚔', cls:'war', pause:false,
-      title:'SAVAŞ İLAN EDİLDİ', sub:foe.name + ' sana savaş açtı', key:'wd:'+foe.id});
+  warNoticeName(id){
+    const e=G.emps[id],p=G.p;
+    return e&&p&&(id===p.id||p.contact&&p.contact[id]||p.war[id])?e.name:'Bilinmeyen devlet';
+  },
+  warDeclared(data){
+    // Legacy callers/queued wardec notes remain readable; new declarations use warstart.
+    if(Number.isInteger(data.id)){
+      this.notify({kind:'wardec',data:data.id,ico:'⚔',cls:'war',pause:WAR_PAUSE_ON,
+        title:'SAVAŞ İLANI',sub:data.name,key:'wd:'+data.id});return;
+    }
+    if(!warNoticeData(data))return;
+    this.notify({kind:'warstart',data,ico:'⚔',cls:'war',pause:WAR_PAUSE_ON,
+      title:'SAVAŞA DAHİLSİN',sub:this.warNoticeName(data.attacker)+' → '+this.warNoticeName(data.defender),
+      key:'war:'+data.front});
+  },
+  warStartOpen(d){
+    if(!warNoticeData(d))return;
+    const front=(G.warLedger&&G.warLedger.fronts||[]).find(f=>f.id===d.front);
+    const side=front?front.roles[front.sides.indexOf(G.p.id)]:(d.attacker===G.p.id?0:1);
+    const names={declaration:d.attacker===G.p.id?'Senin savaş ilanın':'Sana yöneltilen savaş ilanı',
+      federation:'Federasyon savunma paktı',overlord:'Senyörün vasalını koruma yükümlülüğü',
+      vassal:'Senyörün savunma çağrısı',promise:'Müzakerede verilen savaş sözü',
+      independence:'Bağımsızlık savaşı',independenceSupport:'Bağımsızlığa destek sözü',event:'Gerçekleşen olay sonucu savaş'};
+    const allies=new Set(),enemies=new Set();
+    for(const f of G.warLedger&&G.warLedger.fronts||[])if(f.campaign===d.campaign)
+      f.sides.forEach((id,i)=>{
+        if(id!==G.p.id&&G.p.contact&&G.p.contact[id]) (f.roles[i]===side?allies:enemies).add(id);
+      });
+    const list=ids=>[...ids].map(id=>esc(this.warNoticeName(id))).join(' · ')||'Bilinen yok';
+    const foe=d.attacker===G.p.id?d.defender:d.attacker;
+    this.openModal(`<div class="mhd"><span>⚔ SAVAŞA KATILIM</span><button class="riX" data-a="closem">✕</button></div>
+      <div class="mbd warBrief"><b>${esc(this.warNoticeName(d.attacker))} → ${esc(this.warNoticeName(d.defender))}</b>
+      <div class="mini">İlan / katılım tarihi: ${d.year}.${String(d.month).padStart(2,'0')}.${String(Math.floor(d.day%30)+1).padStart(2,'0')}</div>
+      <div class="row"><span>Tarafın</span><b>${side===0?'Saldıran':'Savunan'} taraf</b></div>
+      <div>${esc(names[d.reason])}${d.sponsor!==null?' · '+esc(this.warNoticeName(d.sponsor)):''}</div>
+      ${(d.rootAttacker!==d.attacker||d.rootDefender!==d.defender)?`<div class="mini">Asıl ilan: ${esc(this.warNoticeName(d.rootAttacker))} → ${esc(this.warNoticeName(d.rootDefender))}</div>`:''}
+      <div class="mini"><b>Bilinen savaş ortakların:</b> ${list(allies)}</div>
+      <div class="mini"><b>Bilinen düşmanlar:</b> ${list(enemies)}</div>
+      <div class="mini">${G.p.war[foe]?'Bu cephede savaş sürüyor.':'Bu cephede savaş artık sürmüyor.'}</div></div>
+      <div class="mft"><button class="ch" data-a="wdDiplo"><div class="cht">${esc(this.warNoticeName(foe))} · Diplomasi</div></button>
+      <button class="ch" data-a="closem"><div class="cht">Anlaşıldı</div></button></div>`,'war');
+    this._hook('wdDiplo',()=>{this.closeModal();this.selectDiplo(foe,'relation');});
   },
   warDecOpen(id){
-    const o = G.emps[id];
-    if (!o) return;
-    const mine = totalPower(G.p), theirs = totalPower(o);
-    this.openModal(
-      `<div class="mhd"><span>⚔ SAVAŞ İLANI</span></div>
-       <div class="mbd"><div class="lead">${esc(o.name)} imparatorluğu sana savaş ilan etti.</div>
-       <div class="row"><span>Onun filo gücü</span><b style="color:${theirs>mine?'#ff5f6d':'#65e08a'}">${fmt(theirs)}</b></div>
-       <div class="row"><span>Senin filo gücün</span><b>${fmt(mine)}</b></div>
-       <div class="row"><span>Sınır sistemleri</span><b>${G.sys.filter(sy=>sy.owner===o.id &&
-         sy.lanes.some(l=>G.sys[l].owner===0)).length}</b></div>
-       <div class="mini" style="margin-top:8px">Sınır sistemlerinde garnizon odağına geçmek ve
-       kale kurmak savunmanı hızla güçlendirir.</div></div>
-       <div class="mft">
-        <button class="ch" data-a="wdDiplo"><div class="cht">Diplomasi panelini aç</div>
-          <div class="chd">Müzakere ile savaşı erken bitirmeyi dene</div></button>
-        <button class="ch" data-a="closem"><div class="cht">Anlaşıldı</div></button>
-       </div>`, 'war');
-    this._hook('wdDiplo', ()=>{ this.closeModal(); this.openDiplo(); });
+    const o=G.emps[id];if(!o)return;
+    this.openModal(`<div class="mhd"><span>⚔ ÖNCEKİ SAVAŞ BİLDİRİMİ</span></div>
+      <div class="mbd">${esc(this.warNoticeName(id))}<div class="mini">Bu eski kayıtta ilan ve katılım ayrıntıları bulunmuyor.</div></div>
+      <div class="mft"><button class="ch" data-a="wdDiplo"><div class="cht">Diplomasi</div></button>
+      <button class="ch" data-a="closem"><div class="cht">Kapat</div></button></div>`,'war');
+    this._hook('wdDiplo',()=>{this.closeModal();this.selectDiplo(id,'relation');});
   },
-  borderEvent(other, len){
-    this.notify({kind:'border', data:{id:other.id, len}, ico:'🚧', cls:'war', pause:true,
-      title:'Sınır olayı', sub:other.name + ' devriyeleri sınırda', key:'bd:'+other.id});
-  },
+  borderEvent(){return false;}, // 94D.1: retired random incident; legacy API is harmless.
 
   /* ---------- BİLDİRİM KUTUSU ----------
      Olaylar artık ekrana fırlamıyor. Üstte tıklanabilir bir kart
@@ -6990,6 +7026,7 @@ const UI = {
       case 'border':  this.borderOpen(G.emps[it.data.id], it.data.len); break;
       case 'fedvote': this.fedVoteOpen(it.data); break;
       case 'wardec':  this.warDecOpen(it.data); break;
+      case 'warstart': this.warStartOpen(it.data); break;
       case 'facdem':  this.facDemandOpen(it.data); break;
       case 'faccoup': this.facCoupOpen(it.data); break;
       case 'criswarn': this.crisisWarnOpen(it.data); break;
@@ -7302,6 +7339,8 @@ const UI = {
   },
 
   closeModal(){
+    // 94D.1: acknowledged war/retired incident cards must not be saved as still open.
+    if(this._openNote&&['warstart','wardec','border'].includes(this._openNote.kind))this._openNote=null;
     const shipCancelSpeed=this._shipCancelPending&&this._shipCancelPending.speed;
     const shipmentSpeed=this._shipmentPending&&this._shipmentPending.speed;
     const compositionSpeed=this._compositionPending&&this._compositionPending.speed;
@@ -7429,52 +7468,10 @@ const UI = {
     });
   },
   borderOpen(other, len){
-    const tense = len > 6;
-    this.openModal(
-      `<div class="mhd"><span>SINIR OLAYI</span></div>
-       <div class="mbd"><div class="lead">${esc(other.name)} devriyeleri sınır bölgemizde görüldü.
-       ${tense ? 'İki taraf da bu hattı kendi toprağı sayıyor ve gerginlik tırmanıyor.'
-               : 'Küçük bir ihlal, ama halk huzursuz.'}</div>
-       Sınırlarımız ${len} noktada birbirine değiyor. Bu temas her ay ilişkileri aşındırıyor.</div>
-       <div class="mft">
-         <button class="ch" data-a="bdBack"><div class="cht">Devriyeleri geri çek</div>
-           <div class="chd">İlişki +12, ama halk zayıflık olarak görür: −10 etki</div></button>
-         <button class="ch" data-a="bdStand"><div class="cht">Hattı savun</div>
-           <div class="chd">İlişki −15, +20 etki. Sınır bölgende +1 ay garnizon coşkusu</div></button>
-         <button class="ch" data-a="bdTreaty"><div class="cht">Sınır anlaşması öner</div>
-           <div class="chd">60 etki — kabul edilirse bu komşuyla sürtüşme kalıcı olarak durur</div></button>
-       </div>`, tense ? 'war' : '', true);
-    this._hook('bdBack', ()=>{
-      G.p.rel[other.id] = clamp(G.p.rel[other.id]+12, -100, 100);
-      other.rel[0] = clamp(other.rel[0]+12, -100, 100);
-      G.p.res.etk -= 10;
-      this.closeModal(); this.refresh();
-      say('Devriyeler geri çekildi', 'win');
-    });
-    this._hook('bdStand', ()=>{
-      G.p.rel[other.id] = clamp(G.p.rel[other.id]-15, -100, 100);
-      other.rel[0] = clamp(other.rel[0]-15, -100, 100);
-      G.p.res.etk += 20;
-      this.closeModal(); this.refresh();
-      say('Sınır hattı savunuldu', 'war');
-    });
-    this._hook('bdTreaty', ()=>{
-      if (G.p.res.etk < 60){ say('Yetersiz etki'); return; }
-      G.p.res.etk -= 60;
-      const chance = clamp(.30 + (G.p.rel[other.id]+60)/220 + G.p.mods.dipMul*.4, .1, .92);
-      if (rnd() < chance){
-        G.p.treaty = G.p.treaty || {};
-        G.p.treaty[other.id] = true;
-        other.treaty = other.treaty || {};
-        other.treaty[0] = true;
-        G.p.rel[other.id] = clamp(G.p.rel[other.id]+20, -100, 100);
-        other.rel[0] = clamp(other.rel[0]+20, -100, 100);
-        say('SINIR ANLAŞMASI imzalandı — ' + other.name, 'win');
-      } else {
-        say(other.name + ' anlaşmayı reddetti', 'war');
-      }
-      this.closeModal(); this.refresh();
-    });
+    // Old Save v8 notes can still be opened, but cannot grant/spend resources or alter relations.
+    this.openModal(`<div class="mhd"><span>ESKİ SINIR BİLDİRİMİ</span></div>
+      <div class="mbd">Rastgele sınır olayı kaldırıldı. Bu eski bildirim artık karar veya kaynak etkisi oluşturmaz.</div>
+      <div class="mft"><button class="ch" data-a="closem"><div class="cht">Kapat</div></button></div>`);
   },
   /* ═══ FAZ 68: AI PAKT TEKLİFİ ═══ */
   /* ═══ FAZ 71: SIĞINMA TALEBİ ═══ */
@@ -7792,6 +7789,7 @@ const UI = {
          <button class="riX" data-a="diagShow" title="Tanılama">🩺</button>
          <button class="riX" data-a="closem">✕</button></div>
        <div class="mbd" style="padding:4px 16px"><button class="abtn" data-a="cameraReset">Kamerayı sıfırla</button></div>
+       <div class="mbd" style="padding:4px 16px"><button class="abtn" data-a="warPauseToggle" aria-pressed="${WAR_PAUSE_ON}">Savaşa katılınca duraklat: ${WAR_PAUSE_ON?'AÇIK':'KAPALI'}</button></div>
        <div class="mbd" id="diagBox">Depolama sınanıyor…</div>
        <div class="mft">
         <button class="ch" data-a="mute"><div class="cht">${

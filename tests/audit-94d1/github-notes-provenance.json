@@ -1,0 +1,11 @@
+{
+  "repository": "sarsiss12-dot/Star",
+  "ref": "main",
+  "release_commit": "e6c3c777da9dc56ee90c6995330754665695c1a4",
+  "post_release_changed_files": [
+    "STARS-GELISTIRME-NOTLARI-2026-10-15.md"
+  ],
+  "notes_blob": "caf85637bbea4012f41d43407f9df2b49035d88b",
+  "notes_sha256": "565ba77766ae8ea30301a26d8b67e80be3210fca1cb493c6f6ddbad759249f21",
+  "preserved_verbatim": true
+}

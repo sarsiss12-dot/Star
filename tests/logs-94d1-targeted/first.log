@@ -1,0 +1,58 @@
+✓ player declaration produces one structured notice with real names and timestamp
+✓ enemy declaration auto-pauses through existing speed infrastructure
+✓ pause off does not stop the game and retains the notification
+✓ settings exposes an accessible war pause option and persists changes
+✓ duplicate declaration and repeated hook do not repeat after dismissal
+✓ save/load preserves structured notice and ledger dedup flag
+✓ dismissed notification remains dismissed across Save v8 load
+✓ legacy active wars are not synthesized into new notices on load
+✓ new war after peace receives a different front and new notice
+✓ federation defense uses existing law, defensive side and participation reason
+✓ federation without defense law creates no new obligation
+✓ overlord protection announces player entry with real vassal reason
+✓ war promise records its actual sponsor and reason
+✓ independence backer path also produces a notice
+✗ notification opens exact opponent diplomacy target — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+null !== 1
+
+    at eq (/workspace/scratch/342b17141b4a/faz94d1/tests/faz94d1_war_visibility_test.js:5:29)
+    at /workspace/scratch/342b17141b4a/faz94d1/tests/faz94d1_war_visibility_test.js:27:29
+    at test (/workspace/scratch/342b17141b4a/faz94d1/tests/faz94d1_war_visibility_test.js:6:24)
+    at Object.<anonymous> (/workspace/scratch/342b17141b4a/faz94d1/tests/faz94d1_war_visibility_test.js:26:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✓ unknown campaign participants and hidden power are excluded from detail
+✓ old wardec notes remain readable without fabricated start details
+✓ shared war data deduplicates multiple mutual war pairs
+✓ contact with only one party cannot reveal hidden opponent or line
+✓ diplomatic contact alone cannot reveal third-party wars
+✓ unexplored capitals never provide hidden line endpoints
+✓ stale unobserved foreign ownership is not used as an endpoint
+✓ visible owned alternative replaces a hidden capital safely
+✓ war layer toggles independently without changing mode or political color
+✓ war renderer shares existing mode and preserves Canvas state and game RNG
+✗ pan and zoom transform endpoints without modifying stored locations — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+false !== true
+
+    at eq (/workspace/scratch/342b17141b4a/faz94d1/tests/faz94d1_war_visibility_test.js:5:29)
+    at /workspace/scratch/342b17141b4a/faz94d1/tests/faz94d1_war_visibility_test.js:39:296
+    at test (/workspace/scratch/342b17141b4a/faz94d1/tests/faz94d1_war_visibility_test.js:6:24)
+    at Object.<anonymous> (/workspace/scratch/342b17141b4a/faz94d1/tests/faz94d1_war_visibility_test.js:39:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✓ old random incident cannot be generated or acted upon
+✓ border contact no longer damages relations or consumes RNG
+✓ real hostile activity memories survive random-adjacency removal
+✓ mobile notice stack is height bounded and touch sized
+✓ new war codec drops malformed payload without accepting arbitrary object fields
+GEÇEN: 29 KALAN: 2

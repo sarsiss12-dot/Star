@@ -1572,6 +1572,19 @@ const View = {
     }
     return null;
   },
+  drawWarConnections(g){
+    if(!WAR_LINKS_ON&&MAP_MODE!=='savas')return;
+    const lines=warMapConnections();if(!lines.length)return;
+    g.save();g.strokeStyle='rgba(255,82,99,.48)';
+    for(const p of lines){
+      const a=this.w2s(p.from.x,p.from.y),b=this.w2s(p.to.x,p.to.y);
+      if(Math.max(a.x,b.x)<0||Math.min(a.x,b.x)>this.vw||Math.max(a.y,b.y)<0||Math.min(a.y,b.y)>this.vh)continue;
+      g.lineWidth=p.player?1.7:1;g.setLineDash(p.player?[]:[6,5]);
+      g.beginPath();g.moveTo(a.x,a.y);g.lineTo(b.x,b.y);g.stroke();
+    }
+    g.restore();
+  },
+
   drawPlanetConflicts(g){
     this._planetConflictLabels=[];g.save();g.font='600 11px ui-monospace,monospace';g.textAlign='left';g.textBaseline='top';
     for(const sys of G.sys){
@@ -1775,6 +1788,8 @@ const View = {
       g.restore();
     }
 
+
+    this.drawWarConnections(g); // 94D.1: under map labels and fleet hit areas
 
     /* ═══════════════════════════════════════════════════════════
        FAZ 75 — DİPLOMATİK BÖLGE BOYAMASI
@@ -2676,54 +2691,6 @@ const View = {
       }
       g.setLineDash([]);
       g.restore();
-    }
-
-    /* ═══════════════════════════════════════════════════════════
-       FAZ 63 — SAVAŞ MODU: HUSUMET AĞI
-       Savaşan her devlet çiftinin BAŞKENTLERİ arasına kırmızı,
-       nabız atan bir hat çizilir. Kim kiminle savaşıyor, tek
-       bakışta okunur. Kendi savaşlarımız daha parlak.
-       ═══════════════════════════════════════════════════════════ */
-    if (MAP_MODE === 'savas'){
-      g.save();
-      const nb = .55 + .45 * Math.sin(t / 320);
-      const cizildi = {};
-      for (const a of G.emps){
-        if (a.dead || a.wild || a.crisisSide) continue;
-        for (const wid in a.war){
-          if (!a.war[wid]) continue;
-          const b = G.emps[wid];
-          if (!b || b.dead || b.wild || b.crisisSide) continue;
-          const anahtar = Math.min(a.id, b.id) + '_' + Math.max(a.id, b.id);
-          if (cizildi[anahtar]) continue;
-          cizildi[anahtar] = 1;
-          const sa = G.sys[a.home], sb2 = G.sys[b.home];
-          if (!sa || !sb2) continue;
-          /* Görüş: en az bir tarafı tanımalıyız */
-          if (!G.p.contact[a.id] && !G.p.contact[b.id] && a.id !== 0 && b.id !== 0)
-            continue;
-          if (!this.inView(sa.x, sa.y) && !this.inView(sb2.x, sb2.y)) continue;
-          const bizim = (a.id === 0 || b.id === 0);
-          const pa = this.w2s(sa.x, sa.y), pb = this.w2s(sb2.x, sb2.y);
-          g.strokeStyle = bizim
-            ? 'rgba(255,95,109,' + (nb * .95).toFixed(2) + ')'
-            : 'rgba(255,95,109,' + (nb * .38).toFixed(2) + ')';
-          g.lineWidth = bizim ? 2.4 : 1.3;
-          g.setLineDash(bizim ? [] : [7, 5]);
-          g.beginPath(); g.moveTo(pa.x, pa.y); g.lineTo(pb.x, pb.y); g.stroke();
-          /* Orta noktada çatışma işareti */
-          if (bizim){
-            const mx = (pa.x + pb.x) / 2, my = (pa.y + pb.y) / 2;
-            g.fillStyle = 'rgba(255,95,109,' + nb.toFixed(2) + ')';
-            g.font = 'bold 13px ui-monospace,monospace';
-            g.textAlign = 'center';
-            g.fillText('⚔', mx, my + 4);
-          }
-        }
-      }
-      g.setLineDash([]);
-      g.restore();
-      g.textAlign = 'center';
     }
 
     /* ═══════════════════════════════════════════════════════════

@@ -1,0 +1,38 @@
+✓ 12 zorlanmış aylık tekrar: tek teklif ve tek ilişki bedeli
+✓ ret masraf/RNG tüketmez, 27 ay hatırlanır ve çift dokunuş tek ceza verir
+✓ ret sınırı 809 gün: bildirim false
+✓ ret sınırı 810 gün: bildirim true
+✓ ret sınırı 811 gün: bildirim true
+✓ damga ve madde sırası ret kapısını aşamaz
+✓ farklı miktar ve farklı devlet aynı gün teklif gönderebilir
+✓ nap reddi de aynı şartı bekletir
+✓ pact reddi de aynı şartı bekletir
+✓ ally reddi de aynı şartı bekletir
+✗ kapatmak ret sayılmaz — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+0 !== 1
+
+    at eq (/workspace/scratch/342b17141b4a/faz94d1/tests/faz87d_offer_repetition_test.js:8:29)
+    at /workspace/scratch/342b17141b4a/faz94d1/tests/faz87d_offer_repetition_test.js:53:65
+    at test (/workspace/scratch/342b17141b4a/faz94d1/tests/faz87d_offer_repetition_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/342b17141b4a/faz94d1/tests/faz87d_offer_repetition_test.js:51:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✓ karşı teklif hazırlamak ret sayılmaz, karşı kartın reddi sayılır
+✓ kabul iki kez uygulanamaz ve ret düğmesi sonra ceza veremez
+✓ eski dünyadaki açık ret/kabul düğmeleri yeni kaydı değiştiremez
+✓ başka pencere açılınca eski teklif callbackleri etkisiz
+✓ yeni teklif eski teklif callbackini geçersiz kılar
+✓ v8 ret süresini korur, eski callback kalıcı kayda müdahale edemez
+✓ ret kaydı olmayan eski v8 ilk teklife açıktır
+✓ süresi dolmuş kutu kopyası yeni teklifle yenilenir, farklı teklif korunur
+✓ canlı aynı teklif yeniden eklenmez, ömrü uzatılmaz
+✓ zaten süresi dolmuş teklifi reddetmek yeni bekleme veya ilişki cezası yaratmaz
+✓ bekleme kontrolü saf; bozuk eski kayıt tolere edilir
+✓ ret defteri sınırlı; süresi geçen kayıtlar yeni rette temizlenir
+✓ ret sonrası aynı kutu kopyası silinir, farklı şartlar kalır
+GEÇEN: 23 KALAN: 1

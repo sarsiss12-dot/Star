@@ -1,0 +1,62 @@
+[
+  {
+    "file": "ai.js",
+    "changed": true,
+    "before": "8ce880eb35bb5811b72e1b65501e3cf7904599a253479aa222818b1d6c724c15",
+    "after": "6582e8e765dbe5f6761d07684082e17c98ea7202f18ddbe1e8c450ef1f89e3be"
+  },
+  {
+    "file": "audio.js",
+    "changed": false,
+    "before": "804226980179698a6b56d292d88c0c7226d1e54f06001aab63b52d6db5685262",
+    "after": "804226980179698a6b56d292d88c0c7226d1e54f06001aab63b52d6db5685262"
+  },
+  {
+    "file": "combat.js",
+    "changed": false,
+    "before": "7df4f0e571b8e89093ec0e7db23ed254feaf383538106ce7631420bd30dbedc2",
+    "after": "7df4f0e571b8e89093ec0e7db23ed254feaf383538106ce7631420bd30dbedc2"
+  },
+  {
+    "file": "diplomacy.js",
+    "changed": true,
+    "before": "3d8efe7f548288b95664923738861d462cd26de5bd54cb5465426a6c3645da9f",
+    "after": "6b68dff8bc5827858f1c6abefe32673f2c1ecb1715dda3ce62a4eb9b3ef3447a"
+  },
+  {
+    "file": "economy.js",
+    "changed": true,
+    "before": "d3862471e9e8fb5b762684769930f63ba835e6deb4c302700db6ebeaab36967a",
+    "after": "0a34e8dffc29321caac9909d5b74721bc792124d9092d8313df96f1731d53aaf"
+  },
+  {
+    "file": "index.html",
+    "changed": true,
+    "before": "0729680cdad6452dd9ed70648c865ece4c87a48eec0878f18d721cc0c13ee38d",
+    "after": "dc6754b2317124e8d21fc483a3a11e8fe47fab4d99269a1f7510cdd347837305"
+  },
+  {
+    "file": "main.js",
+    "changed": true,
+    "before": "6009303bd339876159044fbe7c1b8378bfb32de8e472cd34a10a1a14ef77cd16",
+    "after": "bf912e22d4586f08947905dbf79a0feaf150d1109311f0e8a5d27178e5f59a1c"
+  },
+  {
+    "file": "map.js",
+    "changed": true,
+    "before": "888fb31c1ae3f286cdab535466f1486f580d29f549caec986d0901078ea93239",
+    "after": "10c3fc9b5b9dc7a993baa2cf3104612ac12f657e0f8cc2c3408e959513ca67df"
+  },
+  {
+    "file": "sw.js",
+    "changed": true,
+    "before": "47be49b6fe06e736980f6d90f2a830e0876c9313c12df8d7b3188f9c1a15988b",
+    "after": "8e0fcbf3782645cd2209e494313da9c5869efa5797b3c4e379f9260ba26461fc"
+  },
+  {
+    "file": "ui.js",
+    "changed": true,
+    "before": "1472553d356dd2f3fc4a0ad8a1a7c640696f7d93362af09e0460a3428e6b7ec5",
+    "after": "78d02e5699618513d936346a85e33dca621facdaa1be657f831ced3bd3197ce8"
+  }
+]

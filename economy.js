@@ -4047,6 +4047,7 @@ yarinki_taht:{
             ikiz.war[e.id] = true; e.war[ikiz.id] = true;
             ikiz.warSince = {}; ikiz.warSince[e.id] = G.day;
             ikiz.warCause = {}; ikiz.warCause[e.id] = 'Taht İddiası';
+            warStartNotice(ikiz,e,{kind:'event'});
             recalcMods(e);
           } catch(err){ console.warn('ikiz:', err); }
           endSituation(s, 'Zaman çizgisi çatladı. ' +

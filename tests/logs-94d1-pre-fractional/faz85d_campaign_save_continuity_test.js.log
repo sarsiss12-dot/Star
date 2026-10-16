@@ -1,0 +1,204 @@
+
+A. SÖZDİZİMİ, DOSYA SINIRI VE KARANTİNA
+  ✓ node --check ai.js
+  ✓ node --check audio.js
+  ✓ node --check combat.js
+  ✓ node --check diplomacy.js
+  ✓ node --check economy.js
+  ✓ node --check main.js
+  ✓ node --check map.js
+  ✓ node --check sw.js
+  ✓ node --check ui.js
+  ✓ depolama anahtarı korundu: yildiz:save
+  ✓ depolama anahtarı korundu: yh_audio
+  ✓ depolama anahtarı korundu: yh_advisor
+  ✓ depolama anahtarı korundu: yh_autoev
+  ✓ depolama anahtarı korundu: yh_bg
+  ✓ depolama anahtarı korundu: yh_radar
+  ✓ depolama anahtarı korundu: yh_templates
+  ✓ depolama anahtarı korundu: __yh_probe
+  ✓ depolama anahtarı korundu: __yh_diag
+  ✓ sw cache = 'stars-v94d1'
+  ✓ sw KABUK listesi duruyor
+  ✓ sw fetch davranışı duruyor
+  ✓ sw activate davranışı duruyor
+  ✓ kayıt sürümü v:8 (Faz 85F ile yükseldi)
+  ✓ world (85A) şeması korundu
+  ✓ threats (85C) şeması korundu
+  ✓ campaign bölümü eklendi
+  ✓ restoreCampaignWorld, restorePoliticalWorld SONRASINDA
+  ✓ restoreCampaignWorld, restoreCrisisWorld SONRASINDA
+  ✓ restoreCampaignWorld, rebuildDerivedStateAfterLoad ÖNCESİNDE
+  ✓ restoreCampaignWorld, economyTick(true) ÖNCESİNDE
+  ✓ setupGame merkezî resetCampaignRuntimeState kullanıyor
+  ✓ setupGame'deki dağınık elle sıfırlamalar kaldırıldı
+  ✓ fallStatsDefaults() tek kanonik kaynak
+  ✓ sabStatsDefaults() tek kanonik kaynak
+  ✓ recordFall kanonik varsayılanı kullanıyor
+  ✓ recordSabotage kanonik varsayılanı kullanıyor
+  ✓ kapsam dışı alan campaign içinde YOK: G.inbox
+  ✓ kapsam dışı alan campaign içinde YOK: G.inboxUid
+  ✓ kapsam dışı alan campaign içinde YOK: G.minNote
+  ✓ kapsam dışı alan campaign içinde YOK: G.minRaw
+  ✓ kapsam dışı alan campaign içinde YOK: G.wildId
+  ✓ kapsam dışı alan campaign içinde YOK: G.nests
+  ✓ kapsam dışı alan campaign içinde YOK: G.ruins
+  ✓ kapsam dışı alan campaign içinde YOK: G.raids
+  ✓ kapsam dışı alan campaign içinde YOK: G.sits
+  ✓ kapsam dışı alan campaign içinde YOK: G.fx
+  ✓ resetCampaignRuntimeState upLast için delete kullanıyor
+  ✓ G.upLast = null ataması kodda YOK
+  ✓ 85C yanlış "G.emps[null] → 0. indeks" iddiası düzeltildi
+  ✓ düzeltilmiş açıklama gerçek davranışı anlatıyor
+  ✓ 85B: advanceMonthlyWorld duruyor
+  ✓ 85B: aylık dünya yalnız init===false yolunda
+  ✓ SITUATIONS kataloğu duruyor
+  ✓ situationsTick tanımı duruyor
+  ✓ situationsTick çağrısı PASİF (yorumlu)
+  ✓ DURUMLAR sekmesi gizli
+  ✓ 200 ayda situation tetiklenmedi — 0
+  ✓ audio.js byte-for-byte aynı — 804226980179698a
+  ✓ manifest.json byte-for-byte aynı — 6b8305490e9a55e9
+  ✓ map kaynak kilidi: 91C altyapısı + 93A hedef seçimi
+
+B. V6 CAMPAIGN ŞEMASI
+  ✓ kayıt sürümü v:8 (Faz 85F) — v=8
+  ✓ campaign TAM ve YALNIZ yedi alan — chainQueue,fallStats,market,sabStats,upAge,upLast,upheaval
+  ✓ world (85A) bölümü korundu
+  ✓ threats (85C) bölümü korundu
+  ✓ sys/emps/fl bölümleri korundu
+
+C. ÇALKANTI SÜREKLİLİĞİ
+  ✓ 10 yüklemede çalkantı BİREBİR sabit — {"k":"goc","left":19,"total":48,"at":45}|64|20
+  ✓ upheaval.k korundu — goc
+  ✓ upheaval.left korundu (19) — tick çalışmadı — 19
+  ✓ upheaval.total korundu (48) — 48
+  ✓ upheaval.at korundu (45) — 45
+  ✓ upAge korundu (64) — yükleme ayı ilerletmedi — 64
+  ✓ upLast korundu (20) — 20
+  ✓ yükleme RNG TÜKETMEDİ
+  ✓ yükleme BİLDİRİM üretmedi (onStart çalışmadı) — 0
+  ✓ kaynaklar yükleme nedeniyle değişmedi
+  ✓ nüfus yükleme nedeniyle değişmedi
+  ✓ çalkantı modları yükleme sonrası HEMEN doğru — stab=-8
+  ✓ 10 yükleme tek başına sayacı İLERLETMEDİ — {"k":"goc","left":19,"total":48,"at":45}|64|20
+  ✓ taze yükleme + 1 tick = 10 yükleme + 1 tick — {"k":"goc","left":18,"total":48,"at":45}|65|20
+  ✓ tek tik yalnız bir ay ilerletti — {"k":"goc","left":19,"total":48,"at":45}|64|20 → {"k":"goc","left":18,"total":48,"at":45}|65|20
+  ✓ geçersiz upheaval.k uydurulmadı → null — geçersiz upheaval (YOK_BOYLE) → null
+  ✓ bozuk sayaçlı upheaval uydurulmadı → null — geçersiz upheaval (goc) → null
+  ✓ geçersiz çalkantı tanıda raporlandı
+  ✓ upLast null → çalışma zamanında undefined (null DEĞİL) — undefined
+  ✓ upLast = 0 GEÇERLİ değer olarak korundu — 0
+
+D. GALAKTİK PİYASA SÜREKLİLİĞİ
+  ✓ 10 yüklemede piyasa BİREBİR sabit
+  ✓ mul.ene korundu (1.34) — tabana dönmedi — 1.34
+  ✓ mul.min korundu (0.72) — 0.72
+  ✓ mul.ala korundu (1.91) — 1.91
+  ✓ hist uzunluğu ve SIRASI korundu — 1,2,3
+  ✓ acildi korundu (12) — 12
+  ✓ yükleme kaynak stoklarını değiştirmedi (AI takası yok)
+  ✓ marketPrice yüklenen çarpanı kullanıyor
+  ✓ yükleme sayısı piyasayı ETKİLEMİYOR
+  ✓ taze yükleme + 1 marketTick = 10 yükleme + 1 marketTick
+  ✓ borsa açık (marketOpen) — senaryo geçerli
+  ✓ gerçek marketTick hâlâ ilerliyor
+  ✓ bozuk çarpanlar güvenli varsayılana (1) düştü — {"ene":1,"min":1,"ala":1}
+  ✓ bozuk geçmiş girdileri atıldı, geçerliler kaldı — 2
+  ✓ yanlış tipli acildi 0'a çekildi
+  ✓ 50 kayıtlı geçmiş mevcut 40 sınırına kırpıldı — 40
+  ✓ kırpmada EN YENİ kayıtlar tutuldu — t=10..49
+  ✓ hiç açılmamış piyasa null kaldı
+  ✓ marketInit() gerektiğinde normal kuruyor — {"ene":1,"min":1,"ala":1}
+
+E. chainQueue
+  ✓ 10 yüklemede chainQueue BİREBİR sabit — [{"id":"ch_a","at":30},{"id":"ch_b","at":90}]
+  ✓ girdiler ve SIRALARI korundu — ch_a,ch_b
+  ✓ yükleme kuyruğu ÇOĞALTMADI — 2
+  ✓ yükleme girdileri ÇALIŞTIRMADI (UI.chain çağrısı 0) — 0
+  ✓ yükleme RNG tüketmedi
+  ✓ 6 yükleme zamanı gelen girişi çalıştırmadı — 0
+  ✓ tek gerçek aylık ilerleme onu TAM BİR kez çalıştırdı — ch_due
+  ✓ zamanı gelmemiş giriş kuyrukta kaldı — ch_later
+  ✓ geçersiz biçimli girdiler güvenle atıldı — 3 kaldı
+  ✓ atılan sayısı tanıda bildirildi — 6
+  ✓ geçerli AYNI-ID girdileri körlemesine tekilleştirilmedi — a@10,a@40,a@10
+
+F. İSTATİSTİKLER VE KANONİK VARSAYILAN
+  ✓ fallStats korundu (zehri ezdi) — {"uzay":3,"teslim":1,"katastrof":2,"temiz":5,"colossus":1,"yutuldu":0,"ayrilik":4}
+  ✓ sabStats korundu (yardSabo 6, supplyHack 9 dahil) — {"basari":7,"ifsa":2,"sessiz":3,"cift":1,"tech":4,"kiskirt":2,"falseflag":1,"yardSabo":6,"supplyHack":9}
+  ✓ eksik anahtarlar sıfırla tamamlandı, geçerliler korundu — {"basari":5,"ifsa":2,"sessiz":0,"cift":0,"tech":0,"kiskirt":0,"falseflag":0,"yardSabo":0,"supplyHack":0}
+  ✓ negatif/NaN/yanlış tip güvenli sıfıra çekildi, geçerli korundu — {"basari":0,"ifsa":0,"sessiz":0,"cift":3,"tech":0,"kiskirt":0,"falseflag":0,"yardSabo":0,"supplyHack":0}
+  ✓ sabStats kanonik kümesi dokuz anahtar — basari,ifsa,sessiz,cift,tech,kiskirt,falseflag,yardSabo,supplyHack
+  ✓ yardSabo artık GERÇEKTEN artıyor (2 çağrı → 2) — 2
+  ✓ supplyHack artık GERÇEKTEN artıyor (1 çağrı → 1) — 1
+  ✓ bilinmeyen sabotaj türü sayaç uydurmadı
+  ✓ recordFall kanonik varsayılanı kullanıyor
+  ✓ fallReport toplam formülü bu fazda DEĞİŞMEDİ — toplam=12
+
+G. SIZINTI VE YENİ OYUN
+  ✓ YENİ OYUN: eski çalkantı taşınmadı (eskiden SIZIYORDU) — null
+  ✓ YENİ OYUN: upAge sıfırlandı (eskiden SIZIYORDU) — 0
+  ✓ YENİ OYUN: upLast undefined (eskiden SIZIYORDU) — undefined
+  ✓ YENİ OYUN: eski piyasa fiyatı taşınmadı (eskiden SIZIYORDU) — null
+  ✓ YENİ OYUN: chainQueue boş
+  ✓ YENİ OYUN: istatistikler sıfır ve kanonik
+  ✓ OYUN A gerçekten zengin yüklendi
+  ✓ OYUN B: A'nın çalkantısı SIZMADI
+  ✓ OYUN B: A'nın piyasası SIZMADI
+  ✓ OYUN B: A'nın chainQueue'su SIZMADI
+  ✓ OYUN B: A'nın istatistikleri SIZMADI
+
+H. V5 GÖÇÜ
+  ✓ v5 kaydı HATA ATMADAN açıldı — ok
+  ✓ upAge = gün/30 deterministik türetildi (930→31) — 31
+  ✓ upheaval null (uydurulmadı)
+  ✓ upLast çalışma zamanında undefined
+  ✓ market null (fiyat geçmişi uydurulmadı)
+  ✓ chainQueue boş (bekleyen zincir uydurulmadı)
+  ✓ fallStats kanonik sıfır — {"uzay":0,"teslim":0,"katastrof":0,"temiz":0,"colossus":0,"yutuldu":0,"ayrilik":0}
+  ✓ sabStats kanonik sıfır (dokuz anahtar)
+  ✓ zehirli oturum değerleri TAŞINMADI
+  ✓ göç bildirim üretmedi — 0
+  ✓ göç DETERMİNİSTİK (3 tekrar aynı)
+  ✓ göç RNG TÜKETMEDİ
+  ✓ kurtarılamayan bilgi dürüstçe raporlandı — {"migrated":true,"from":5,"repair":null,"droppedChain":0,"note":"v5 göçü: upAge=
+
+I. ensureCrisisEmpire GUARD'I
+  ✓ crisisId=0 (OYUNCU): sıradan devlet DÖNDÜRÜLMEDİ, gerçek kriz devleti üretildi — döndü #9
+  ✓ crisisId=0 (OYUNCU): oyuncunun ad/renk/etik/crisisSide değeri BOZULMADI
+  ✓ crisisId=0 (OYUNCU): AI devletinin kimliği BOZULMADI
+  ✓ crisisId=0 (OYUNCU): savaş haritasında YABANCI anahtar değişmedi — değişen: [-] · yeni kriz id 9
+  ✓ crisisId=normal AI: sıradan devlet DÖNDÜRÜLMEDİ, gerçek kriz devleti üretildi — döndü #9
+  ✓ crisisId=normal AI: oyuncunun ad/renk/etik/crisisSide değeri BOZULMADI
+  ✓ crisisId=normal AI: AI devletinin kimliği BOZULMADI
+  ✓ crisisId=normal AI: savaş haritasında YABANCI anahtar değişmedi — değişen: [-] · yeni kriz id 9
+  ✓ crisisId=aralık dışı: sıradan devlet DÖNDÜRÜLMEDİ, gerçek kriz devleti üretildi — döndü #9
+  ✓ crisisId=aralık dışı: oyuncunun ad/renk/etik/crisisSide değeri BOZULMADI
+  ✓ crisisId=aralık dışı: AI devletinin kimliği BOZULMADI
+  ✓ crisisId=aralık dışı: savaş haritasında YABANCI anahtar değişmedi — değişen: [-] · yeni kriz id 9
+  ✓ crisisId=null: sıradan devlet DÖNDÜRÜLMEDİ, gerçek kriz devleti üretildi — döndü #9
+  ✓ crisisId=null: oyuncunun ad/renk/etik/crisisSide değeri BOZULMADI
+  ✓ crisisId=null: AI devletinin kimliği BOZULMADI
+  ✓ crisisId=null: savaş haritasında YABANCI anahtar değişmedi — değişen: [-] · yeni kriz id 9
+  ✓ crisisId=geçerli crisisSide: MEVCUT devlet aynen döndü — döndü #9
+  ✓ geçerli kimlikte İKİNCİ kriz devleti üretilmedi
+
+J. YÜKLEME SAFİYETİ VE ÖNCEKİ FAZ REGRESYONLARI
+  ✓ yükleme KAYNAKLARI değiştirmedi
+  ✓ yükleme İLİŞKİLERİ değiştirmedi
+  ✓ yükleme FİLO/GEMİ sayısını değiştirmedi
+  ✓ yükleme SİSTEM SAHİPLİĞİNİ değiştirmedi
+  ✓ yükleme NÜFUSU değiştirmedi
+  ✓ yükleme BİLDİRİM/EVENT üretmedi — 0
+  ✓ 85B: 6 yüklemede kalkan TAM 4 kaldı
+  ✓ 85B: economyTick(true) aylık sistem ilerletmedi — 4 → 4
+  ✓ 85B: economyTick(false) hâlâ normal ilerliyor — 4 → 8
+  ✓ 85A: memAge/cncAge/fedUid/sandbox/Konsey korundu
+  ✓ 85C: aktif kriz korundu ve doğru devlete bağlı
+  ✓ 85D: kampanya durumu aynı yüklemelerde korundu
+
+══════════════════════════════════════════
+  GEÇEN: 179   KALAN: 0
+══════════════════════════════════════════
+

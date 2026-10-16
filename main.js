@@ -6243,6 +6243,8 @@ let BG_OFF = false;
    ağını görürken filoları da görmek istiyor. */
 let MAP_MODE = 'siyasi';
 let RADAR_ON = false;
+let WAR_LINKS_ON = false, WAR_LINKS_REV = 0;
+let WAR_PAUSE_ON = true, WAR_PAUSE_REV = 0;
 /* ═══ FAZ 86C.4H-R2: LOJİSTİK BAĞIMSIZ KATMAN ═══
    ÖLÇÜLEN KUSUR: lojistik düğmesi `MAP_MODE='askeri'` yapıyor,
    ikinci basış `MAP_MODE='siyasi'` yapıyordu. Yani lojistik bir
@@ -6265,9 +6267,7 @@ function diploColor(o){
   if (MAP_MODE === 'savas'){
     if (!o) return '#3a4356';
     if (o.wild || o.crisisSide) return '#5a2d8f';
-    let savasta = false;
-    for (const w in o.war)
-      if (o.war[w] && G.emps[w] && !G.emps[w].dead) savasta = true;
+    const savasta=knownWarPairs(e).some(p=>p.a===o.id||p.b===o.id);
     if (!savasta) return '#3a4356';
     if (e.war[o.id] || o.id === e.id) return '#ff5f6d';   // bizimki parlak
     return '#a83a44';                                      // başkalarınınki koyu
@@ -6306,6 +6306,16 @@ async function loadLogiPref(){
     const lb = document.getElementById('logiBtn');
     if (lb) lb.className = 'tool logiBtn' + (LOGI_ON ? ' on' : '');
   } catch(e){}
+}
+async function loadWarViewPrefs(){
+  const lr=WAR_LINKS_REV,pr=WAR_PAUSE_REV;
+  try{
+    const links=await storeGet('yh_warlinks'),pause=await storeGet('yh_warpause');
+    if(lr===WAR_LINKS_REV)WAR_LINKS_ON=links==='on';
+    if(pr===WAR_PAUSE_REV)WAR_PAUSE_ON=pause!=='off';
+    const b=document.getElementById('warLinksBtn');
+    if(b){b.className='tool warLinksBtn'+(WAR_LINKS_ON?' on':'');b.setAttribute('aria-pressed',String(WAR_LINKS_ON));}
+  }catch(e){}
 }
 async function loadBgPref(){
   try {
@@ -6868,7 +6878,18 @@ const _str = v => (typeof v === 'string' && v) ? v : null;
    encode: runtime data → JSON-güvenli kararlı biçim
    decode: kayıt biçimi → runtime data (referanslar yeniden kurulur)
    Her ikisi de çözemezse null döner ve bildirim düşürülür. */
+function warNoticeData(d){
+  if(!d||!['attacker','defender','rootAttacker','rootDefender','front','campaign','year','month'].every(k=>Number.isSafeInteger(d[k])&&d[k]>=0)||
+    !Number.isFinite(d.day)||d.day<0||!G.emps[d.attacker]||!G.emps[d.defender]||!G.emps[d.rootAttacker]||!G.emps[d.rootDefender]||
+    d.attacker===d.defender||!['declaration','federation','overlord','vassal','promise','independence','independenceSupport','event'].includes(d.reason))return null;
+  const out={};for(const k of ['attacker','defender','rootAttacker','rootDefender','front','campaign','day','year','month','reason'])out[k]=d[k];
+  out.sponsor=Number.isInteger(d.sponsor)&&G.emps[d.sponsor]?d.sponsor:null;
+  return out;
+}
 const NOTE_CODEC = {
+  warstart: {
+    enc:d=>warNoticeData(d), dec:d=>warNoticeData(d)
+  },
   /* Tam EVENTS nesnesi yerine kararlı event kimliği */
   event: {
     enc: d => (d && _str(d.id)) ? {evId:d.id} : null,
@@ -8009,7 +8030,7 @@ function forceRedraw(sebep){
    Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
    Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
 /* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */
-const BUILD_ID = '94d';
+const BUILD_ID = '94d1';
 const DIAG_MAX = 40;
 const DIAG = [];
 function logDiag(tur, mesaj){
@@ -8906,6 +8927,7 @@ window.addEventListener('load', ()=>{
   loadAutoEventPref();          // FAZ 47: otomatik olay tercihi
   loadRadarPref();              // FAZ 65: radar katmanı
   loadLogiPref();               // FAZ 86C.4H-R2: lojistik katmanı
+  loadWarViewPrefs();
   loadFleetNamesPref();         // 91D.1: görünür filoların devlet adları
   loadTemplates().then(()=>{    // FAZ 61: kurulum şablonları
     try { if (SETUP_STEP && $('menu') && !$('menu').classList.contains('hidden'))

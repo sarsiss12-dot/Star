@@ -1,0 +1,29 @@
+[
+  {
+    "phase": "94d",
+    "mode": "savas",
+    "systems": 100,
+    "frames": 40,
+    "medianMs": 5.96923199999992,
+    "p95Ms": 11.594792999999981,
+    "rngUnchanged": true
+  },
+  {
+    "phase": "94d1",
+    "mode": "savas",
+    "systems": 100,
+    "frames": 40,
+    "medianMs": 6.515564999999924,
+    "p95Ms": 10.351799000000028,
+    "rngUnchanged": true
+  },
+  {
+    "phase": "94d1",
+    "mode": "diplomasi",
+    "systems": 100,
+    "frames": 40,
+    "medianMs": 5.394667000000027,
+    "p95Ms": 7.432173000000148,
+    "rngUnchanged": true
+  }
+]
