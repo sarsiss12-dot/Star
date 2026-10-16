@@ -15,7 +15,7 @@ function fresh(){
       e._prof={sci:1.2,dip:.8,eco:1,war:.8,exp:1,turtle:.2};
       e.intel={};e.opLog=[];e.hitLog=[];e.mem={};e.war={};e.ally={};
       for(const r in e.res)e.res[r]=10000;
-      for(const o of [A,B,C])if(o!==e){e.contact[o.id]=true;e.intel[o.id]=3;e.rel[o.id]=50;}
+      for(const o of [A,B,C])if(o!==e){e.contact[o.id]=true;e.intel[o.id]=3;e.rel[o.id]=0;}
     }
     function state(){return JSON.stringify([G.emps,G.sys,G.log,G.inbox,RND_STATE]);}
     function only(keys){A.opLog=Object.keys(OPS).concat(['incite','stealTech']).filter(k=>!keys.includes(k)).map(k=>({k,o:B.id,t:G.memAge}));}
@@ -48,7 +48,7 @@ for(const [label,mod,stock,expected] of [
   eq(h.run('ready'),expected);eq(h.run('state()===before'));
 });
 test('iki kaynaklı sabotajda alaşım rezervi de gerekir',()=>{
-  const h=fresh();h.run(`var sy=G.sys.find(s=>s.owner===B.id);sy.queue.push({k:'kor',left:5});
+  const h=fresh();h.run(`A.war[B.id]=true;var sy=G.sys.find(s=>s.owner===B.id);sy.queue.push({k:'kor',left:5});
     A.mods.opCost=1;A.res.etk=140;A.res.ala=335.99;var low=aiStandardOpReady(A,B,'sabotaj');
     A.res.ala=336;var high=aiStandardOpReady(A,B,'sabotaj');`);
   eq(h.run('low'),false);eq(h.run('high'));
@@ -85,7 +85,7 @@ test('özel teknoloji verisi yolu standart calTech ile karışmaz',()=>{
   eq(h.run('k'),'stealTech');eq(h.run('r.ok'));eq(h.run('before-A.res.etk'),90);
 });
 test('uygun sınır kolonisi özel incite yolunda kalır; gerçek bedel 120',()=>{
-  const h=fresh();h.run(`only(['incite']);var col=B.colonies[0],sy=G.sys[col.s],pl=sy.planets[col.p];
+  const h=fresh();h.run(`only(['incite']);A.war[B.id]=true;var col=B.colonies[0],sy=G.sys[col.s],pl=sy.planets[col.p];
     B.home=-1;sy.lanes.push(A.home);pl.martial_law=0;pl.col.stab=20;pl.col.secede=11;
     var k=aiPickOp(A,B);var before=A.res.etk;var r=inciteRebellion(A,B);`);
   eq(h.run('k'),'incite');eq(h.run('r.ok'));eq(h.run('before-A.res.etk'),120);

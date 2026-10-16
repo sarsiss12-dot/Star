@@ -13,9 +13,9 @@ function scenario(root,seed,months=120){
      const notes=(G.inbox||[]).filter(n=>n.kind==='aideal'&&n.uid>uid);
      for(const n of notes){stats.playerDelivered++;playerDays.push({day:G.day,from:off.from});
        this.openNote(n.uid);this._hooks.offNo();stats.playerRejected++;}return r;};
-   aiNegotiate=function(p,t,g,w){const sig=JSON.stringify([p.id,t.id,g,w]);
+   aiNegotiate=function(p,t,g,w,...extra){const sig=JSON.stringify([p.id,t.id,g,w]);
      if(last[sig]!==undefined&&G.day-last[sig]<180)stats.aiRepeatedWithin180++;
-     const r=originalNeg(p,t,g,w);stats.aiNegotiations++;if(r.uygulandi)stats.aiExecuted++;
+     const r=originalNeg(p,t,g,w,...extra);stats.aiNegotiations++;if(r.uygulandi)stats.aiExecuted++;
      if(r.karar==='red'||r.karar==='karsi-red'){stats.aiRejected++;last[sig]=G.day;}return r;};
  `);
  for(let m=0;m<months;m++){

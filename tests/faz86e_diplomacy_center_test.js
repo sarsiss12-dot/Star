@@ -204,7 +204,7 @@ test('Mobil CSS kontrolleri kapsamlıdır; tema değişkenleri tanımlıdır (ye
  assert.ok(section.includes('min-height:44px'));assert.ok(section.includes('overflow:auto'));assert.ok(section.includes('minmax(0,1fr)'));
 });
 test('Gerçek AI karşı teklifi ayrı kalır; hedef değişiminden sonra aynı içerikle açılır',()=>{
- const h=fresh();h.run("UI.openDeal(1);UI.deal.give=[{t:'res',r:'min',v:1}];UI.deal.want=[{t:'res',r:'ene',v:5000}];var draft=JSON.stringify(UI.deal);UI.dealSend();var counter=JSON.stringify(UI.dealCounter);UI.openDeal(3);UI.openDeal(1);");
+ const h=fresh();h.run('B.intel[A.id]=3');h.run("UI.openDeal(1);UI.deal.give=[{t:'res',r:'min',v:1}];UI.deal.want=[{t:'res',r:'ene',v:5000}];var draft=JSON.stringify(UI.deal);UI.dealSend();var counter=JSON.stringify(UI.dealCounter);UI.openDeal(3);UI.openDeal(1);");
  eq(h.run('JSON.stringify(UI.deal)===draft'));eq(h.run('JSON.stringify(UI.dealCounter)===counter'));eq(h.run('UI.dealCounter.from'),1);
  assert.ok(h.run('UI.dealCounter.want.length')>1);assert.ok(html(h).includes('Karşı teklifi kabul et'));
 });

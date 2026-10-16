@@ -1,0 +1,8 @@
+{
+  "faz86c_1_quote_effective_plan_test.js": "tests/ai-95a/quote-followup.log",
+  "faz86c_4_reciprocal_offers_test.js": "tests/logs-95a-followup/faz86c_4_reciprocal_offers_test.js.log",
+  "faz86e_diplomacy_center_test.js": "tests/ai-95a/diplo-ui-followup.log",
+  "faz86f_ai_balance_test.js": "tests/logs-95a-followup/faz86f_ai_balance_test.js.log",
+  "faz91e_1_federation_policy_test.js": "tests/ai-95a/federation-followup.log",
+  "faz95a_strategic_ai_test.js": "tests/ai-95a/targeted-frozen.log"
+}

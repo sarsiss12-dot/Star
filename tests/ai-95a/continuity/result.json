@@ -1,0 +1,102 @@
+{
+  "seed": 99,
+  "months": 120,
+  "reloadAt": 60,
+  "runs": {
+    "one": {
+      "rng": -1910234863,
+      "saveHash": "ad566520a17ef402cfd9b0f55e8b59b508b78c15bd48b342238ca7f2eac21b07",
+      "ms": 5661
+    },
+    "two": {
+      "rng": -1910234863,
+      "saveHash": "ad566520a17ef402cfd9b0f55e8b59b508b78c15bd48b342238ca7f2eac21b07",
+      "ms": 5342
+    },
+    "reload": {
+      "rng": -1910234863,
+      "saveHash": "2d7dd596036085675289c97bc2841aff238d70587d2f9f704b2050ec13d1edbe",
+      "ms": 6114
+    },
+    "bare": {
+      "rng": -1910234863,
+      "saveHash": "ad566520a17ef402cfd9b0f55e8b59b508b78c15bd48b342238ca7f2eac21b07",
+      "ms": 5054
+    }
+  },
+  "repeatEqual": true,
+  "rngEqual": true,
+  "reloadGameplayEqual": true,
+  "observerGameplayEqual": true,
+  "reloadDifferences": [
+    {
+      "path": "/emps/0/_supAt",
+      "b": -1
+    },
+    {
+      "path": "/emps/0/_gateAt",
+      "b": -1
+    },
+    {
+      "path": "/emps/1/_supAt",
+      "b": -1
+    },
+    {
+      "path": "/emps/1/_gateAt",
+      "b": -1
+    },
+    {
+      "path": "/emps/2/_supAt",
+      "b": -1
+    },
+    {
+      "path": "/emps/2/_gateAt",
+      "b": -1
+    },
+    {
+      "path": "/emps/3/_supAt",
+      "b": -1
+    },
+    {
+      "path": "/emps/3/_gateAt",
+      "b": -1
+    },
+    {
+      "path": "/emps/4/_supAt",
+      "b": -1
+    },
+    {
+      "path": "/emps/4/_gateAt",
+      "b": -1
+    },
+    {
+      "path": "/emps/5/_supAt",
+      "b": -1
+    },
+    {
+      "path": "/emps/5/_gateAt",
+      "b": -1
+    },
+    {
+      "path": "/emps/6/_prof",
+      "a": {
+        "war": 1.4,
+        "exp": 0.8,
+        "sci": 0.5,
+        "eco": 0.5,
+        "dip": 0,
+        "turtle": 0.04999999999999999
+      },
+      "b": null
+    },
+    {
+      "path": "/emps/6/_supAt",
+      "b": -1
+    },
+    {
+      "path": "/emps/6/_gateAt",
+      "b": -1
+    }
+  ],
+  "observerDifferences": []
+}

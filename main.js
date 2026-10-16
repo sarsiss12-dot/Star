@@ -891,6 +891,8 @@ function personaOf(e){
   const et = e.ethics || {};
   /* Kurulumda bilinçli seçilmiş mizaç ırk çıkarımını ezer */
   let k = e.persLock || (RACES[e.race] && RACES[e.race].pers) || 'yayilmaci';
+  const chosen=PERSONAS[e.mizac]?e.mizac:PERSONAS[e.persLock]?e.persLock:null;
+  if(chosen)k=chosen;else{
   if (false) k = 'izolasyonist';
   else if (hasCivic(e, 'trade') || hasCivic(e, 'cartel')) k = 'tuccar';
   else if ((et.mil || 0) >= 2) k = 'militarist';
@@ -902,6 +904,7 @@ function personaOf(e){
      iş görür. Militarist/pasifist kilidi bozulmaz — o eksenler
      daha güçlü bir kimlik tanımı. */
   else if ((et.ahl || 0) <= -2) k = 'izolasyonist';
+  }
   e._pers = k; e._persAt = G.memAge;
   return PERSONAS[k];
 }
@@ -3322,19 +3325,23 @@ function pathAllowed(e, f, path, from){
   }
   return true;
 }
-function orderMove(f, target, append, automatic=false){
+function orderMove(f, target, append, automatic=false, knownPath=null){
   if (!f || !Array.isArray(f.path) || !f.ships || !f.ships.length || !empOf(f)) return false;
   const start = f.path.length ? f.path[f.path.length-1] : (f.mv ? f.mv.to : f.sys);
   const from = append ? start : (f.mv ? f.mv.to : f.sys);
   /* FAZ 47: kapı ağı yolcuya göre değişir — kendi/müttefik/açık
      sınır kapıları kısayol, düşman kapıları kapalı. */
-  let p = findPath(from, target, empOf(f));
+  let p = knownPath===null?findPath(from, target, empOf(f)):(Array.isArray(knownPath)?knownPath.slice():null);
+  if(knownPath!==null){
+    if(!p||p.some(id=>!Number.isInteger(id)||!G.sys[id])||(p.length?p[p.length-1]!==target:from!==target))return false;
+    let at=from;for(const id of p){if(!G.sys[at].lanes.includes(id)&&!(hasUsableGate(empOf(f),G.sys[at])&&hasUsableGate(empOf(f),G.sys[id])))return false;at=id;}
+  }
   if (!p) return false;
   const e = empOf(f);
   if (e && !pathAllowed(e, f, p, from)){
     // kısa yol kapalı — yalnızca girebildiğimiz sistemlerden geçen rota ara
     const alt = findPathAllowed(e, f, from, target);
-    if (alt){
+    if (alt && knownPath===null){
       p = alt;
       if (f.e === 0) say('Kapalı sınır aşıldı — filon uzun yoldan gidiyor');
     } else {
@@ -3771,7 +3778,7 @@ function explorationContext(e){
   const frontier=new Set(known);
   for(const id of known)for(const n of G.sys[id].lanes)frontier.add(n);
   const gates=[...known].filter(id=>hasUsableGate(e,G.sys[id]));
-  return {known,frontier,blocked,pirates,gates,supply:new Map()};
+  return {known,visible,frontier,blocked,pirates,gates,supply:new Map()};
 }
 function explorationBlock(e,f,id,ctx,from){
   if(!G.sys[id]||!ctx.frontier.has(id))return 'route';
@@ -3835,6 +3842,10 @@ function holdExploration(f,reason){
   f.path=f.mv?[f.mv.to]:[];
   f.explore={target:null,status:reason,next:G.day+5,review:G.day+12};
 }
+function explorationWaitKey(e,ctx){
+  const owned=G.sys.filter(s=>s.owner===e.id).map(s=>s.id+':'+Object.keys(s.built||{}).join(',')).join('|');
+  return [...ctx.known].join(',')+'/'+[...ctx.blocked].join(',')+'/'+G.sys.filter(s=>s.surv.includes(e.id)).map(s=>s.id).join(',')+'/'+owned+'/'+Object.keys(e.techs||{}).length+'/'+Object.keys(e.ally||{}).filter(k=>e.ally[k]).join(',');
+}
 function autoExploreTick(onlyEmpire){
   const contexts=new Map(),reservations=new Map();
   const fleets=G.fleets.filter(explorationEnabled).sort((a,b)=>a.id-b.id);
@@ -3847,6 +3858,9 @@ function autoExploreTick(onlyEmpire){
     if(!contexts.has(e.id))contexts.set(e.id,explorationContext(e));
     if(!reservations.has(e.id))reservations.set(e.id,explorationReservations(e));
     const ctx=contexts.get(e.id),taken=reservations.get(e.id);
+    const waitKey=state&&state.target===null&&!Number.isInteger(state.home)?explorationWaitKey(e,ctx):null;
+    if(waitKey&&state.waitKey===waitKey&&state.retry>G.day){state.next=G.day+5;continue;}
+
     // Eski kaydın açık manuel rotasını ele geçirme. AI eski otomatik
     // rotası ilk varıştan sonra ortak planlayıcıya katılır.
     if(!state&&(f.path.length||f.mv))continue;
@@ -3897,7 +3911,12 @@ function autoExploreTick(onlyEmpire){
       if(home>=0){
         f.path=(f.mv?[f.mv.to]:[]).concat(explorationPath(graph,home));
         f.explore={target:null,home,status:'resupply',next:G.day+.5,review:G.day+12};
-      }else holdExploration(f,reason);
+      }else{
+        holdExploration(f,reason);
+        const key=explorationWaitKey(e,ctx),same=state&&state.waitKey===key;
+        f.explore.waitKey=key;f.explore.backoff=same?Math.min(30,(state.backoff||5)*2):5;
+        f.explore.retry=G.day+f.explore.backoff;
+      }
     }
   }
 }
@@ -4579,7 +4598,7 @@ const STRUCTS = {
 function structAllowed(e, sys, key){
   const S = STRUCTS[key];
   if (!S || (S.tech&&!e.techs[S.tech])) return false;
-  if (S.tech && sys.work && sys.work.some(w=>w.key===key)) return false;
+  if (sys.work && sys.work.some(w=>w.key===key)) return false;
   if (sys.built && sys.built[key] !== undefined) return false;
   // sahiplik: karakol dışındaki yapılar kendi ya da sahipsiz sistemde
   if (sys.owner >= 0 && sys.owner !== e.id) return false;
@@ -4617,7 +4636,7 @@ function structCost(e, key){
 }
 function startStruct(e, sys, key, fleet){
   if (!structAllowed(e, sys, key)) return false;
-  if (STRUCTS[key].tech && (!fleet || !G.fleets.includes(fleet) || fleet.e!==e.id || fleet.sys!==sys.id || fleet.mv || fleet.combat || fleet.building!==undefined || !fleet.ships.some(sh=>sh.c==='ins'&&sh.busy===undefined)))return false;
+  if ((STRUCTS[key].tech||fleet) && (!fleet || !G.fleets.includes(fleet) || fleet.e!==e.id || fleet.sys!==sys.id || fleet.mv || fleet.combat || fleet.building!==undefined || !fleet.ships.some(sh=>sh.c==='ins'&&sh.busy===undefined)))return false;
   const c = structCost(e, key);
   for (const r in c) if ((e.res[r]||0) < c[r]) return false;
   for (const r in c) e.res[r] -= c[r];
@@ -8030,7 +8049,7 @@ function forceRedraw(sebep){
    Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
    Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
 /* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */
-const BUILD_ID = '94d1';
+const BUILD_ID = '95a';
 const DIAG_MAX = 40;
 const DIAG = [];
 function logDiag(tur, mesaj){

@@ -866,7 +866,16 @@ function autoResearch(e, branch, plan){
     const race = RACES[e.race];
     const scored = av.map(id => {
       const t = TECHS[id]; let s = 1/Math.sqrt(techCost(e,id));
-      if(t.origin)s*=1.65; // Eligible identity research, without starving cheaper fundamentals.
+      if(t.origin)s*=1.65;
+      if(e.ai&&e.aiStrategy){
+        const q=e.aiStrategy;
+        if(['war','defend'].includes(q.goal)&&(t.unlock||t.e.dmgMul||t.e.capFlat||t.e.alaMul))s*=1.25;
+        if(q.needs?.includes('ene')&&t.e.eneMul)s*=1.8;
+        if(q.needs?.includes('min')&&t.e.minMul)s*=1.8;
+        if(q.needs?.includes('yiy')&&t.e.yiyMul)s*=1.8;
+        const demand=(e.factions||[]).find(x=>x.k==='bilim'&&x.mood<35&&x.pow>=20);
+        if(demand&&t.e.araMul)s*=1.2;
+      } // Eligible identity research, without starving cheaper fundamentals.
       if((e.ethics.mil||0)>0 && t.unlock)s*=1.15;
       const pr = (typeof aiProfile === 'function') ? aiProfile(e) : {war:race.agr, sci:.5, eco:.5};
       if (t.unlock) s *= 1.8 + pr.war * .9;               // gemi sınıfı açan tekno savaşçıya çok değerli

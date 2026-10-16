@@ -27,7 +27,7 @@ function fresh(){
 }
 
 const {scenario}=require('./diplomacy-balance-probe');
-function trade(h){h.run(`var P=B,T=C;P.rel[T.id]=T.rel[P.id]=40;P.res.min=1;P.res.ene=P.res.ala=P.res.tuk=0;
+function trade(h){h.run(`var P=B,T=C;P.intel[T.id]=T.intel[P.id]=3;P.rel[T.id]=T.rel[P.id]=40;P.res.min=1;P.res.ene=P.res.ala=P.res.tuk=0;
  P.techs={};T.techs={};P.luxOwn={};T.luxOwn={};
  var techs=Object.keys(TECHS).map(id=>({id,value:itemValue(T,{t:'tech',id},P)})).filter(x=>x.value>0).sort((a,b)=>a.value-b.value||a.id.localeCompare(b.id));
  var offer={from:P.id,to:T.id,give:[{t:'res',r:'min',v:1}],want:[{t:'res',r:'ene',v:10}]};

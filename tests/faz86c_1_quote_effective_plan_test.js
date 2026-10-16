@@ -99,7 +99,7 @@ for(const f of fs.readdirSync(KOK).filter(x=>x.endsWith('.js'))){
   ok('node --check '+f,!h,h||undefined);
 }
 {
-  ok("sw cache = 'stars-v94d1'", /const CACHE = 'stars-v94d1'/.test(oku('sw.js')));
+  ok("sw cache = 'stars-v95a'", /const CACHE = 'stars-v95a'/.test(oku('sw.js')));
   const sw=oku('sw.js');
   ok('sw KABUK/fetch/activate korundu', /KABUK/.test(sw) &&
      /addEventListener\('fetch'/.test(sw) && /addEventListener\('activate'/.test(sw));
@@ -201,7 +201,7 @@ console.log('\nC. aiRespond GEÇERSİZ TEKLİF REGRESYONLARI');
 {
   const H=harness(); H.R(KUR);
   const r=H.R([
-    "var ai=G.emps[1], e=G.p;",
+    "var ai=G.emps[1], e=G.p;ai.intel=ai.intel||{};ai.intel[e.id]=3;",
     "e.res.min=5000; e.res.ene=5000; ai.res.ene=3000;",
     "/* fatal=[] · quote.ok=false · eski hâlde 'kabul' dönüyordu */",
     "e.res.etk=5; e.ally={}; ai.ally={};",

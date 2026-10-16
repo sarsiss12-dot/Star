@@ -99,7 +99,7 @@ for(const f of fs.readdirSync(KOK).filter(x=>x.endsWith('.js'))){
   ok('node --check '+f,!h,h||undefined);
 }
 {
-  ok("sw cache = 'stars-v94d1'", /const CACHE = 'stars-v94d1'/.test(oku('sw.js')));
+  ok("sw cache = 'stars-v95a'", /const CACHE = 'stars-v95a'/.test(oku('sw.js')));
   const sw=oku('sw.js');
   ok('sw KABUK/fetch/activate korundu', /KABUK/.test(sw) &&
      /addEventListener\('fetch'/.test(sw) && /addEventListener\('activate'/.test(sw));
@@ -383,7 +383,7 @@ console.log('\nG. AÇIKLANABİLİR DEĞERLEME');
 {
   const H=harness(); H.R(KUR());
   const r=H.R([
-    "var ai=G.emps[1], e=G.p;",
+    "var ai=G.emps[1], e=G.p;ai.intel=ai.intel||{};ai.intel[e.id]=3;",
     "var of={from:e.id,to:ai.id,give:[{t:'res',r:'min',v:300}],want:[{t:'res',r:'ene',v:100}]};",
     "function ev(){ return evalOffer(ai,of); }",
     "var s={};",
@@ -449,7 +449,7 @@ console.log('\nH. AI KABUL / RET / KARŞI TEKLİF');
 {
   const H=harness(); H.R(KUR());
   const r=H.R([
-    "var ai=G.emps[1], e=G.p;",
+    "var ai=G.emps[1], e=G.p;ai.intel=ai.intel||{};ai.intel[e.id]=3;",
     "/* Oyuncu FAKİR olmalı: aksi hâlde AI açığı kapatan bir karşı",
 "   teklif kurabiliyor ve doğru olarak 'karsi' diyor. */",
 "e.res.min=9000; e.res.ene=9000; ai.res.ene=3000;",
@@ -549,8 +549,8 @@ console.log('\nH2. AI-AI KANONİK BAĞLANTI');
      alıcı AI önce değerlendiriyor. */
   /* FAZ 86C.4: karşılıklı teklif şekli — çağrı tp/ta üzerinden. */
   ok('ai.js AI-AI yolu kanonik müzakereye bağlı (aiNegotiate)',
-     /aiNegotiate\(e, o, tp\.give, tp\.want\)/.test(aiKod) &&
-     /aiNegotiate\(e, o, ta\.give, ta\.want\)/.test(aiKod));
+     /aiNegotiate\(e, o, tp\.give, tp\.want,true\)/.test(aiKod) &&
+     /aiNegotiate\(e, o, ta\.give, ta\.want,true\)/.test(aiKod));
   ok('aiNegotiate kanonik executeDeal kullanıyor',
      /function aiNegotiate[\s\S]{0,2600}executeDeal\(teklif\)/.test(aiKod));
 }

@@ -1,3 +1,20 @@
+# 95A güncel açık riskler — 16 Ekim 2026
+
+- Gerçek Android ve gerçek tarayıcı DOM testi yapılmadı. Önceki mobil/pointer/native Canvas testleri korundu; host süreleri Android FPS/ısı/bellek garantisi değildir.
+- AI her ölçümde iyileşmedi. Tohum 11 ve korsansız 240 aylık 99’da askerî kayıplar yükseldi; 404 ve uzun 99’da son güç düştü. Keşif 11/uzun 99’da azaldı. Ücretsiz kaynakla telafi edilmedi; tam tablolar karşılaştırma raporundadır.
+- Tohum 99 güvenli bekleme sorunu tamamen kapatılmadı. Aynı güvenlik/ikmal sınırları sürer; bekleme grafiği maliyeti azaltıldı, çevre değişimi beş günde kontrol edilir. Hiçbir güvenli hedef yoksa beklemek geçerli davranıştır.
+- Temel sefer toplanma noktası ve ulaşabilir kuvvet kullanır; farklı hızdaki gemilerin kesin aynı anda varması ve federasyon ortak komutası yoktur. İleri koordinasyon 95C’de.
+- Bilgi sınırı ölçümü tüm eski AI yollarının biçimsel ispatı değildir. Kriz, isyancı koalisyonu, hegemonya ve federasyon siyasi sonuç/oylama denklemleri tamamen yenilenmedi. Olağandışı geç oyun kararları için ayrı hedefli denetim korunur. Ham düşük-istihbarat totalPower sayacı kanonik hukuk/sonuç kontrollerini de görebilir; kalan sorgular sınıflandırılmadan “gizli bilgi hatası sıfır” denmez.
+- Düşük istihbaratlı hami yardımı ve güç tahmindir; aldatma/son gözlem/belirsizlik rol oynar. Sadece mevcut bilinen yasal askerî yardım rotası kabul edilir; gelecekte açılacağı varsayılan sınırlar kullanılmaz.
+- Aylık stok örneklemesinde negatif değer yoktur; bu her ara işlem için evrensel muhasebe ispatı değildir. 94C ticaret bütünlüğü testleri geçti. Yeni kanıtlanan kaynak çoğalması ayrı öncelikli bakım olmalıdır.
+- Eski biten yapı işi sayıları aynı fiziksel yapı için tekrar işleri içerebilir. Yeni tek iş/meşguliyet kapısından sonra düşen toplamı doğrudan inşaat gerilemesi saymak yanıltıcıdır.
+- Bir büyük 94D.1 ek kampanya doğal oyun sonuna 109 ayda ulaştı; 95A örneği 120 ay. Eşit süreli üç orta örnekten ayrı raporlanır.
+- Save v8 korunur. Yükleme sonrası eski türetilmiş `_prof`, `_supAt`, `_gateAt` farkları ham JSON hash’ini değiştirebilir; RNG ve cache dışı oyun durumu kontrolü geçti. Yeni strateji/gözlem alanları bu eşitlikten çıkarılmadı.
+
+Son sonuç: 77 paket / 4696 başarılı / 0 kalan / 0 zaman aşımı. 95B başlatılmadı; GitHub’a yüklenmedi. Önceki riskler aşağıda tarihsel kayıt olarak korunur; bu bölüm günceldir.
+
+---
+
 # 94D.1 güncel açık riskler — 16 Ekim 2026
 
 - Gerçek Android cihazı ve gerçek tarayıcı DOM/ekran yerleşimi test edilmedi. Pointer, native Canvas, save/load ve kaynak/CSS kontrolleri bunların yerine geçmez.

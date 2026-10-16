@@ -106,7 +106,7 @@ for(const f of fs.readdirSync(KOK).filter(x=>x.endsWith('.js'))){
 }
 {
   const ai=oku('ai.js'), mn=oku('main.js');
-  ok("sw cache = 'stars-v94d1'", /const CACHE = 'stars-v94d1'/.test(oku('sw.js')));
+  ok("sw cache = 'stars-v95a'", /const CACHE = 'stars-v95a'/.test(oku('sw.js')));
   const sw=oku('sw.js');
   ok('sw KABUK/fetch/activate korundu', /KABUK/.test(sw) &&
      /addEventListener\('fetch'/.test(sw) && /addEventListener\('activate'/.test(sw));
@@ -119,10 +119,10 @@ for(const f of fs.readdirSync(KOK).filter(x=>x.endsWith('.js'))){
      çağrı biçimi tp.give/tp.want oldu. Kanonik müzakere yolu aynı. */
   ok('AI-AI pact yolu aiNegotiate + aiProposeTerms kullanıyor',
      /aiProposeTerms\(e, o, 'pact'\)/.test(ai) &&
-     /aiNegotiate\(e, o, tp\.give, tp\.want\)/.test(ai));
+     /aiNegotiate\(e, o, tp\.give, tp\.want,true\)/.test(ai));
   ok('AI-AI ally yolu aiNegotiate + aiProposeTerms kullanıyor',
      /aiProposeTerms\(e, o, 'ally'\)/.test(ai) &&
-     /aiNegotiate\(e, o, ta\.give, ta\.want\)/.test(ai));
+     /aiNegotiate\(e, o, ta\.give, ta\.want,true\)/.test(ai));
   ok('AI-AI yolunda DOĞRUDAN executeDeal KALMADI',
      !/executeDeal\(\{from:e\.id, to:o\.id, give:\[\{t:'(pact|ally)'\}\]/.test(ai));
   ok('aiNegotiate oyuncuyu hedef almıyor (kod güvencesi)',
@@ -164,7 +164,7 @@ console.log('\nB. KABUL / RET / KARŞI TEKLİF');
 {
   const H=harness(); H.R(KUR(99));
   const r=H.R([
-    "var A=G.emps[1], B=G.emps[2];",
+    "var A=G.emps[1], B=G.emps[2];A.intel=A.intel||{};B.intel=B.intel||{};A.intel[B.id]=B.intel[A.id]=3;",
     "A.res.etk=9999; A.res.min=9000; B.res.min=9000; B.res.ene=9000;",
     "function foto(){ return JSON.stringify({a:A.res,b:B.res,",
     "  pact:JSON.stringify(A.pact||{}), rel:JSON.stringify(A.rel),",
@@ -277,7 +277,7 @@ console.log('\nD. 3 SEED × 360 AY AI–AI DİPLOMASİ');
       "var say={negot:0,kabul:0,red:0,karsi:0,karsiKabul:0,karsiRed:0,",
       "  gecersiz:0,exec:0,execFail:0};",
       "var orgN=aiNegotiate, orgE=executeDeal;",
-      "globalThis.aiNegotiate=function(p,t,g,w){ say.negot++; var x=orgN(p,t,g,w);",
+      "globalThis.aiNegotiate=function(p,t,g,w,...extra){ say.negot++; var x=orgN(p,t,g,w,...extra);",
       "  if(x.karar==='kabul') say.kabul++;",
       "  else if(x.karar==='red') say.red++;",
       "  else if(x.karar==='karsi-kabul'){ say.karsi++; say.karsiKabul++; }",

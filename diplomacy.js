@@ -2767,14 +2767,25 @@ function spyTick(){
 
 /* görünen güç — istihbarat seviyesine ve sahte bilgiye göre bulanık */
 function shownPower(viewer, target){
-  const real = totalPower(target);
+  const lvl = intelOf(viewer,target.id);
+  const plans=viewer.fleetIntel&&viewer.fleetIntel[target.id]>G.day;
+  let real;
+  if(viewer===target||lvl>=3||plans)real=totalPower(target);
+  else{
+    const v=aiView(viewer);let visible=0;
+    for(const f of G.fleets)if(f.e===target.id&&f.ships.length&&v.ctx.visible.has(f.mv?f.mv.to:f.sys))visible+=fleetPower(f);
+    const footprint=Object.values(v.systems).filter(s=>s.owner===target.id).length;
+    const remembered=viewer.aiIntel&&viewer.aiIntel.powers&&viewer.aiIntel.powers[target.id];
+    const recent=remembered&&G.day-remembered.day<=720?remembered.value:0;
+    real=Math.max(visible,recent,120+footprint*160+Math.max(0,G.year-2210)*80);
+  }
   /* FAZ 10: Filo Planlarını Çal — çalınmış planlar sahte istihbaratı
      etkisiz kılar ve gerçek gücü kesin olarak gösterir. */
   if (viewer.fleetIntel && viewer.fleetIntel[target.id] > G.day)
     return {v: Math.round(real), exact: true, band: 0};
-  const lvl = intelOf(viewer, target.id);
   // hedef bize sahte bilgi yediriyorsa çarpıt
-  const fake = target.fakeTo && target.fakeTo[viewer.id];
+  const fake0 = target.fakeTo && target.fakeTo[viewer.id];
+  const fake=fake0&&(!Number.isFinite(fake0.until)||fake0.until>G.day)?fake0:null;
   const bias = fake ? fake.mul : 1;
   if (lvl >= 3) return {v: Math.round(real * bias), exact: !fake, band: 0};
   const band = lvl === 2 ? .12 : lvl === 1 ? .25 : .6;
@@ -4898,7 +4909,7 @@ function casusBelliOf(e, o){
 
   let border = false;
   for (const s of G.sys){
-    if (s.owner !== o.id) continue;
+    if (aiKnownSystem(e,s)?.owner !== o.id) continue;
     for (const l of s.lanes) if (G.sys[l].owner === e.id){ border = true; break; }
     if (border) break;
   }
@@ -4928,7 +4939,7 @@ function casusBelliOf(e, o){
      rakipleri tamamlanmadan durdurmak ister. Militarist ve
      Yayılmacı mizaçlar bu baskıya en açık olanlardır. */
   if (typeof megaBuilds === 'function'){
-    const mb = megaBuilds(o);
+    const mb = megaBuilds(o).filter(w=>aiView(e).ctx.visible.has(w.sys.id));
     if (mb.length){
       const P = (typeof personaOf === 'function') ? personaOf(e) : null;
       const mz = P ? (P.n === 'Militarist' ? 1.00 :
@@ -4961,7 +4972,7 @@ function casusBelliOf(e, o){
     const P = (typeof personaOf === 'function') ? personaOf(e) : null;
     const esik = 0.85 * (P ? P.lifeSpace : 1);
     const tol  = P ? P.roomTol : 0;
-    if (room <= tol && sysCount(o) >= sysCount(e) * esik && e.rel[o.id] < 10)
+    if (room <= tol && aiKnownSystems(e,o.id).length >= sysCount(e) * esik && e.rel[o.id] < 10)
       return {k:'yasamalani', w:.62 + (P && P.warBias > 0 ? .08 : 0), n:'Yaşam Alanı Talebi'};
   }
 
@@ -4977,7 +4988,8 @@ function casusBelliOf(e, o){
 /* Savaş iştahı: fırsat + sebep + kimlik − frenler */
 function warAppetite(e, o){
   const prof = aiProfile(e);
-  const ratio = totalPower(e) / (totalPower(o) + 1);
+  const estimate=shownPower(e,o);
+  const ratio = totalPower(e) / (estimate.v*(1+estimate.band) + 1);
   const opportunity = clamp((ratio - 1.05) * .85, -1, 1.1);
 
   const cb = casusBelliOf(e, o);
@@ -4991,7 +5003,7 @@ function warAppetite(e, o){
     if (f.k === 'tuccar' && f.mood > 60) identity -= .20;
   }
 
-  let brake = 0;
+  let brake = intelOf(e,o.id)<1?.55:0;
   if (typeof exhOf === 'function') brake += (exhOf(e, o.id) / 100) * .85;
   let openWars = 0;
   for (const w in e.war) if (e.war[w]) openWars++;
@@ -5054,8 +5066,8 @@ function pickCasusBelli(e, o){
      edilir. Militarist hegemonya kurmayı, Tüccar vergi almayı sever;
      ihanet gibi affedilmez suçlarda ise yok etme öne geçer. */
   if (!has('ihanet') && !has('sahteBayrak') && (e.res.etk || 0) >= 45){
-    const oran = totalPower(e) / (totalPower(o) + 1);
-    if (oran > 1.6 && sysCount(o) >= 2){
+    const oran = totalPower(e) / (aiKnownPower(e,o) + 1);
+    if (oran > 1.6 && aiKnownSystems(e,o.id).length >= 2){
       const P = (typeof personaOf === 'function') ? personaOf(e) : null;
       let istek = .35;
       if (P){
@@ -5074,7 +5086,7 @@ function pickCasusBelli(e, o){
      Ezici üstünlük varsa yok etmek yerine boyunduruk altına almak
      daha kârlıdır: vergi, kapasite ve konseyde ikinci oy demektir.
      Ama pahalıdır (45 etki) ve yalnızca gerçekten güçlüyken mantıklı. */
-  const oran = totalPower(e) / (totalPower(o) + 1);
+  const oran = totalPower(e) / (aiKnownPower(e,o) + 1);
   if (oran > 1.8 && (e.res.etk || 0) >= 45 && !isVassal(o) && !isVassal(e)){
     const P = (typeof personaOf === 'function') ? personaOf(e) : null;
     let istek = .35;
@@ -5096,7 +5108,7 @@ function pickCasusBelli(e, o){
      yok etmeye tercih eder. */
   if (typeof isVassal === 'function' && !isVassal(o) &&
       !has('ihanet') && !has('sahteBayrak')){
-    const oran = totalPower(e) / (totalPower(o) + 1);
+    const oran = totalPower(e) / (aiKnownPower(e,o) + 1);
     const P = (typeof personaOf === 'function') ? personaOf(e) : null;
     let hevesli = .30;
     if (P){
@@ -5174,6 +5186,7 @@ function aiWarReview(){
       if (!ap.cb) continue;                       // SEBEP YOK → SAVAŞ YOK
       if (ap.score < .92 - ap.grudge * .45) continue;
       if (ap.ratio < .55 && ap.grudge < .80) continue;
+      if(!aiWarAccess(e,o).ok)continue;
 
       if (!best || ap.score > best.ap.score) best = {o, ap};
     }
@@ -5219,7 +5232,7 @@ function aiReviewAlliances(){
           inCouncil(e) && inCouncil(o)) bound += 15;
       for (const x of G.emps)
         if (!x.dead && !x.wild && x.id !== e.id && x.id !== o.id &&
-            e.war[x.id] && o.war[x.id]) bound += 35;
+            e.war[x.id] && aiKnownWar(e,o,x)) bound += 35;
 
       const strain = (-trustOf(e, o.id)) + (-e.rel[o.id] * .4) - bound + (prof.war - .5) * 20;
       if (strain > 45 && rnd() < .05){

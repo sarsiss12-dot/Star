@@ -7480,6 +7480,7 @@ const UI = {
     const o = G.emps[d.from];
     const teh = G.emps[d.tehdit];
     if (!o || o.dead) return;
+    const access=aiProtection(o,G.p);
     const secim = ['haracguzar','bekci','akademik'];
     let h = `<div class="mhd">${this.empChip ? this.empChip(o, 34) : ''}
       <span>⛓ SIĞINMA TALEBİ</span></div>
@@ -7491,6 +7492,7 @@ const UI = {
         <div class="row" style="margin-top:8px"><span>Güçleri</span>
           <b>${fmt(totalPower(o))}</b></div>
         <div class="row"><span>Sistemleri</span><b>${sysCount(o)}</b></div>
+        <div class="mini">${esc(access.why)}${access.ok?' · Tahmini yardım: '+Math.ceil(access.eta)+' gün':''}</div>
         <div class="ph">HANGİ TİP?</div>`;
     secim.forEach(t => {
       const T = VASSAL_TYPES[t];
@@ -7503,7 +7505,10 @@ const UI = {
     this.openModal(h, 'sci');
     secim.forEach(t => {
       this._hook('subYes:' + t, ()=>{
-        if (typeof subjugate === 'function') subjugate(G.p, o, t);
+        const legal=aiProtection(o,G.p);
+        if(!legal.ok||isVassal(o)||!(o.res.etk>=VASSAL_SEEK_COST)){say(legal.why||'Sığınma koşulları değişti','war');this.closeModal();return;}
+        if(typeof subjugate!=='function'||!subjugate(G.p,o,t)){say('Sığınma artık geçerli değil','war');this.closeModal();return;}
+        o.res.etk-=VASSAL_SEEK_COST;
         o.rel[0] = clamp((o.rel[0] || 0) + 30, -100, 100);
         say('⛓ ' + o.name + ' vasalın oldu — ' + VASSAL_TYPES[t].n, 'win');
         this.closeModal(); this.refresh();

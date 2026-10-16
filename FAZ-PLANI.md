@@ -1,3 +1,21 @@
+# 95A sonrası güncel yol haritası — 16 Ekim 2026
+
+95A tamamlandı: ortak AI bilgi gözlemi/tahmini, temel devlet seferi ve savunma, ulaşılabilir hami, diplomatik tekrar beklemesi, casusluk siyasi filtreleri/pasif atama, inşaat meşguliyeti, kararlı iç ihtiyaç ve bekleyen keşfin hesap maliyeti. 77 paket / 4696 kontrol; ölçülen gerilemeler ve geç oyun sınırları açık risklerde. 15 Ekim GitHub geliştirme notu aynen korunur.
+
+| Planlı faz | Korunan kapsam |
+|---|---|
+| 95B — başlamadı | Üç federasyon türü, yasalar/oylamalar, üyelik ve tür reformu; mevcut sonuç/bilgi sınırlarının hedefli denetimi |
+| 95C | Federasyon ortak seferleri, müttefik destek hedefleri, farklı hızlarda kuvvet koordinasyonu, gerçek katkıya göre paylaşım |
+| 95D | Benzersiz devlet/federasyon isimleri, amblemler, Rastgele Amblem, harita kimliği ve savaşa katılım önizlemesi |
+| 95E | Kalıcı Galaktik Haber Ağı, gelen kutusu ve uzaktan inşa emirleri; gerekirse ayrı alt fazlar |
+| 96A | Kaynak bazlı ticaret sözleşmeleri, rota/gelir şeffaflığı, gerçek konvoylar |
+
+Ayrıca yedi kaynaklı Ekonomi ekranı; sığınmacı/olay tutarlılığı; pre-game portre ve sekiz köken; casuslukla rakip teknoloji/karşı araştırma; uzun dönem bilim/doktrin dengesi; kriz/isyancı AI bilgi sınırları; güvenli keşif/ikmal dengesinin kalan tohum sorunları; harici ses dosyası olmadan JavaScript fiziksel enstrüman modellemeli doğal müzik korunur. Yeni kanıtlanan ticaret kaynak çoğalması ayrı öncelikli bakım işidir.
+
+Tek 2B kamera kalıcı tercihtir; eğim/döndürme tekrar eklenmeyecek. Fiziksel Android kabulü açık kalır. 95B’ye otomatik geçilmez, GitHub yayını ayrı talimat gerektirir. Aşağıdaki önceki metinlerdeki “95A başlamadı” ifadeleri tarihsel kayıttır.
+
+---
+
 # 94D.1 sonrası güncel yol haritası — 16 Ekim 2026
 
 94D.1: oyuncu savaşa katılım kartları/isteğe bağlı duraklatma, bağımsız Savaşlar katmanı, bilgi sınırı düzeltmesi ve rastgele sınır olayının kaldırılması. Önceki 94D mobil bilim, tek 2B kamera ve gezegen savaş göstergeleri korunur. Bu not yalnız tamamlanan dar kapsamı günceller.

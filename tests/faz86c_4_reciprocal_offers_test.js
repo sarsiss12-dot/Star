@@ -102,7 +102,7 @@ for(const f of fs.readdirSync(KOK).filter(x=>x.endsWith('.js'))){
 }
 {
   const ai=oku('ai.js'), mn=oku('main.js');
-  ok("sw cache = 'stars-v94d1'", /const CACHE = 'stars-v94d1'/.test(oku('sw.js')));
+  ok("sw cache = 'stars-v95a'", /const CACHE = 'stars-v95a'/.test(oku('sw.js')));
   const sw=oku('sw.js');
   ok('sw KABUK/fetch/activate korundu', /KABUK/.test(sw) &&
      /addEventListener\('fetch'/.test(sw) && /addEventListener\('activate'/.test(sw));
@@ -112,7 +112,7 @@ for(const f of fs.readdirSync(KOK).filter(x=>x.endsWith('.js'))){
     ok('depolama anahtarı: '+k, mn.includes(k)));
   ok('aiProposeTerms kanonik fonksiyonu var', /function aiProposeTerms\(/.test(ai));
   ok('NAP teklif yolu eklendi', /6z\. SALDIRMAZLIK PAKTI/.test(ai) &&
-     /aiNegotiate\(e, o, \[\{t:'nap'\}\], \[\]\)/.test(ai));
+     /aiNegotiate\(e, o, \[\{t:'nap'\}\], \[\],true\)/.test(ai));
   ok('oyuncuya NAP teklifi UI.aiOffer ile gidiyor',
      /UI\.aiOffer\(\{from:e\.id, to:0, give:\[\{t:'nap'\}\]/.test(ai));
   ok('doktrin-kilitli hedef üç yolda da atlanıyor',
@@ -161,7 +161,7 @@ console.log('\nB. TEKLİF ARTIK KARŞILIK İSTİYOR');
 {
   const H=harness(); H.R(KUR(99));
   const r=H.R([
-    "var A=G.emps[1], B=G.emps[2];",
+    "var A=G.emps[1], B=G.emps[2];A.intel=A.intel||{};B.intel=B.intel||{};A.intel[B.id]=B.intel[A.id]=3;",
     "A.res.etk=9999; A.pact={}; B.pact={};",
     "/* ZENGİN alıcı */",
     "B.res.min=6000; B.res.ene=6000; B.rel[A.id]=40; A.rel[B.id]=40;",
@@ -208,7 +208,7 @@ console.log('\nC. KABUL / RET / KARŞI TEKLİF (karşılıklı şekil)');
 {
   const H=harness(); H.R(KUR(99));
   const r=H.R([
-    "var A=G.emps[1], B=G.emps[2];",
+    "var A=G.emps[1], B=G.emps[2];A.intel=A.intel||{};B.intel=B.intel||{};A.intel[B.id]=B.intel[A.id]=3;",
     "A.res.etk=9999; A.res.min=9000; A.pact={}; B.pact={};",
     "function foto(){ return JSON.stringify({a:A.res,b:B.res,",
     "  pact:JSON.stringify(A.pact||{}), rel:JSON.stringify(A.rel),",
@@ -263,7 +263,7 @@ console.log('\nD. SALDIRMAZLIK PAKTI YOLU');
 {
   const H=harness(); H.R(KUR(99));
   const r=H.R([
-    "var A=G.emps[1], B=G.emps[2];",
+    "var A=G.emps[1], B=G.emps[2];A.intel=A.intel||{};B.intel=B.intel||{};A.intel[B.id]=B.intel[A.id]=3;",
     "A.nap={}; B.nap={}; A.war[B.id]=false; B.war[A.id]=false;",
     "A.res.etk=9999;",
     "/* NAP kanonik yoldan kurulabiliyor mu */",
@@ -302,9 +302,9 @@ console.log('\nE. 3 SEED × 360 AY — PAZARLIK VE ANTLAŞMA DAĞILIMI');
   for(const sd of seedler){
     const H=harness(); H.R(KUR(sd));
     const r=H.R([
-      "var say={negot:0,kabul:0,red:0,karsi:0,kk:0,kr:0,gecersiz:0,maxTur:0};",
+      "var say={negot:0,kabul:0,red:0,karsi:0,kk:0,kr:0,gecersiz:0,maxTur:0,bekle:0,napMade:0};",
       "var orgN=aiNegotiate;",
-      "globalThis.aiNegotiate=function(p,t,g,w){ say.negot++; var x=orgN(p,t,g,w); say.maxTur=Math.max(say.maxTur,x.tur||0);",
+      "globalThis.aiNegotiate=function(p,t,g,w,...extra){ say.negot++; var x=orgN(p,t,g,w,...extra); say.maxTur=Math.max(say.maxTur,x.tur||0);if(x.uygulandi&&g.concat(w).some(it=>it.t==='nap'))say.napMade++;if(x.karar==='bekle')say.bekle++;",
       "  if(x.karar==='kabul') say.kabul++; else if(x.karar==='red') say.red++;",
       "  else if(x.karar==='karsi-kabul'){say.karsi++;say.kk++;}",
       "  else if(x.karar==='karsi-red'||x.karar==='karsi-gecersiz'){say.karsi++;say.kr++;}",
@@ -337,9 +337,9 @@ console.log('\nE. 3 SEED × 360 AY — PAZARLIK VE ANTLAŞMA DAĞILIMI');
        burada sayılır; kabul ve ret sözleşmeleri aşağıda gerçek,
        kontrollü teklifler üzerinde ayrı ayrı sınanır. */
     ok('seed '+sd+': her müzakere tek bir sonuçla sayıldı',
-       s.negot>0 && s.negot===s.kabul+s.red+s.kk+s.kr+s.gecersiz);
+       s.negot>0 && s.negot===s.kabul+s.red+s.kk+s.kr+s.gecersiz+s.bekle);
     ok('seed '+sd+': müzakere en çok iki tur', s.maxTur<=2, String(s.maxTur));
-    ok('seed '+sd+': NAP artık oluşuyor', d.nap>0, d.nap+' NAP');
+    ok('seed '+sd+': kampanyada NAP kuruldu (bitişte süresi dolabilir)', s.napMade>0, s.napMade+' yeni NAP');
     ok('seed '+sd+': galaksi kalıcı savaşa KİLİTLENMEDİ',
        d.savas < d.cift, d.savas+'/'+d.cift);
     ok('seed '+sd+': kalıcı ittifak kilidi yok', d.ally < d.cift,
@@ -370,7 +370,7 @@ console.log('\nE. 3 SEED × 360 AY — PAZARLIK VE ANTLAŞMA DAĞILIMI');
 for(const br of [-95,40]){
   const H=harness();H.R(KUR(99));
   const r=H.R(`
-    var A=G.emps[1],B=G.emps[2];
+    var A=G.emps[1],B=G.emps[2];A.intel=A.intel||{};B.intel=B.intel||{};A.intel[B.id]=B.intel[A.id]=3;
     for(const e of [A,B]){
       e.mem={};e.war={};e.ally={};e.pact={};e.nap={};
       for(const k in e.res)e.res[k]=10000;

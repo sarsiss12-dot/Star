@@ -1,0 +1,112 @@
+STARS — FAZ 95A RAPORU
+16 Ekim 2026
+
+KANONİK KAYNAK
+stars-faz94d1.zip
+SHA-256: 0a0ac5e4981dd9308131789fb3882ababe4e1ae103d68a07825182580d74c133
+CRC: bütün arşiv girdileri geçti. Kaynak manifesti: 1370 dosya hash'i geçti.
+GitHub main: c0fd7355beabee251a2629010a7b4b4a69740e42 referansı doğrulandı.
+STARS-GELISTIRME-NOTLARI-2026-10-15.md aynen korundu.
+Kaynak ZIP esas alındı; GitHub'a yazma/yayın yapılmadı.
+
+TAMAMLANAN GELİŞTİRMELER
+- Sensör gözlemleri, tarihli son bilinen sistem ve kuvvet, istihbarat seviyesine
+  uygun tahmin, belirsizlik ve yanıltma/çalınmış plan davranışı.
+- Bilinen hiper-yol/geçit erişimi; hami yardımında görünmeyen yabancı kapı ve
+  motor yükseltmesinin bilgi sızdırmaması.
+- Savunma önceliği, ulaşabilir kuvvet, ikmalli toplanma noktası ve yeterli
+  kuvvetle ortak emir; isteğe bağlı savaşta erişim/kuvvet ön koşulu.
+- Hami seçimine mevcut yasal yardım rotası/ETA/ilişki; yeni bağımsızlık koruması,
+  aynı otomatik teklif için 120 gün bekleme ve ücretsiz olmayan gerçek bedeller.
+- Pasif casus atama; aktif/ağır operasyonların siyasi filtreleri; dost/vasal/
+  müttefik/federasyon bağında ağır operasyonu seçmeme. Ayrı fısıltı/sahte bayrak
+  yolları da filtrelenir. Bilgi kazancı sonraki güç/araştırma kararına girer.
+- Seçili sekiz doktrin kimliği; acil kıtlık/savunma ile kalıcı olağan hedefin
+  ayrılması; kendi gelir/fraksiyon ihtiyaçlarının bina/bilim önceliğine etkisi.
+- İnşaat gemisinde tek iş/tek ödeme/meşguliyet ve kuyruktaki inşaatçı sayımı.
+- Değişmeyen güvenli keşif beklemesinde sınırlı backoff; tehdidin kalkmasında
+  beş günlük yeniden değerlendirme. Rezervasyon, ikmal ve tehlike kuralları aynı.
+
+KANITLANAN KÖK NEDENLER VE DÜZELTMELER
+1. Düşük istihbaratta shownPower/threatAt gerçek gizli filoyu okuyordu.
+   Eski gizli mutasyon oranı 0,367847->0,005842; tehdit 105->23109.
+   Son kaynakta bu uzak mutasyon karar tahminini değiştirmez.
+2. Fanatik Arındırıcıların diplomasi erken dönüşü askerî hareketi de atlıyordu.
+   Yalnız diplomasi bloğu dışarıda bırakıldı; hareket normal kurallarla çalışır.
+3. Saldırılar tekil filoların yerel eşiğine dayanıyordu. Temel devlet seferi
+   görünür tehdit/son gözlem, ikmal, ETA ve toplanan kuvveti birlikte değerlendirir.
+4. Otomatik hami seçiminde ulaşım yoktu, sığınma için mevcut Etki bedeli
+   atlanabiliyordu. Bilinen yardım erişimi ve başarıdan sonra ödeme kapısı eklendi.
+5. Meşgul inşaatçının üstüne yeni iş ve aynı yapıya tekrar iş açılabiliyordu.
+   Ortak startStruct/structAllowed ve AI akışı tek işi korur; bitince gemi bırakılır.
+6. Dosta siyasi zarar yolları sadece standart seçicide kısmen eleniyordu.
+   Fısıltı/sahte bayrak ve standart/özel yollar aynı ilişki/husumet ilkesine bağlandı.
+7. Her beş günde değişmeyen keşif grafiği yeniden kuruluyordu. Çevre imzası
+   sık, pahalı grafik değişmeyen beklemede seyrek değerlendirilir.
+8. Yeni bekleme yanıtında eksik tur bilgisi ölçümü NaN yapıyordu; tur:0 sözleşmesi
+   tamamlandı. Uygulanamayan otomatik öneri ödeme/RNG olmadan bekler.
+
+DEĞİŞEN ÜRETİM DOSYALARI
+ai.js: bilgi/strateji/sefer/hami/casusluk/inşaat kararları.
+main.js: mevcut görüş bağlamı çıktısı, bilinen rota doğrulaması, keşif beklemesi,
+  inşaat meşguliyet/tekrar kapısı, seçili doktrin ve build kimliği.
+diplomacy.js: bilgiye uygun güç/isteğe bağlı savaş değerlendirmesi.
+economy.js: AI araştırma tercihlerine kendi strateji/fraksiyon öncelikleri.
+ui.js: mevcut sığınma kartında yardım gerekçesi/ETA ve yeniden doğrulanan ödeme.
+sw.js: stars-v95a önbelleği.
+map.js, combat.js, audio.js, index.html, manifest.json byte düzeyinde aynı.
+Yeni harici üretim kütüphanesi, asset veya büyük arayüz eklenmedi.
+
+TEST SONUÇLARI
+77 benzersiz paket / 4696 başarılı kontrol / 0 kalan hata / 0 timeout.
+51 yeni hedefli kontrol. Tek tam koşu 4688 başarılı / 6 hata içerir;
+sonuç yalnız gerekli takiplerle tamamlandı, ilk hatalar saklandı. Tekrarlar
+başarı sayısını artırmak için toplanmadı. TEST-SONUCLARI-95A.md ayrıntılıdır.
+Save v8, mevcut bilim/özel teknoloji, takviye/şablon, ticaret, savaş,
+2B kamera, pointer/Canvas kurtarma ve PWA paketleri geçti.
+120 ay aynı seed tekrar: aynı save hash'i ve RNG.
+60. ayda save/load devamı: aynı RNG ve cache dışı tam oyun durumu.
+Gözlemci açık/kapalı: aynı oyun durumu. Yeni strateji alanları karşılaştırmadan
+çıkarılmadı. Fiziksel Android/gerçek tarayıcı DOM kabulü yapılmadı.
+
+KAMPANYA KARŞILAŞTIRMASI — ÖNCE -> SONRA
+11 / 120 ay: savaş siparişi 205->248; güç 16811->17516; askerî kayıp 93->126; tarama 115->113; rota grafiği 4188->1585; host ms 7552->5550.
+99 / 120 ay: savaş siparişi 286->205; güç 15748->21120; askerî kayıp 168->68; tarama 69->69; rota grafiği 5312->1783; host ms 6883->5855.
+404 / 120 ay: savaş siparişi 254->246; güç 31345->29451; askerî kayıp 52->58; tarama 128->128; rota grafiği 5783->2800; host ms 9841->8243.
+99-long / 240 ay: savaş siparişi 534->710; güç 39868->37092; askerî kayıp 321->535; tarama 209->207; rota grafiği 12099->3945; host ms 23491->13847.
+
+Negatif stok ve keşif çakışması ana karşılaştırmalarda gözlenmedi.
+Tohum 99 keşfi korunurken kayıp düştü. Diğer örneklerde gerilemeler var;
+özellikle uzun 99 ve tohum 11 askerî kayıpları yükseliyor. Ücretsiz telafi yok.
+Her AI'nin adı, doktrini, üretimi/kaybı, canlı kuvveti, kolonisi, kaynakları,
+kapasitesi, tersane doluluğu, bilim/operasyon/müzakere ve üretim engelleri
+AI-KAMPANYA-KARSILASTIRMA-95A.md ile ham aylık JSON'dadır.
+Ek düşük stok ve büyük galaksi kontrolleri ayrı etiketlendi. Büyük 94D.1
+örneğinin doğal oyun sonu 109 ay; eşit süre karşılaştırması gibi sunulmadı.
+
+AÇIK SORUNLAR VE SINIRLAR
+- Keşif/ikmal beklemeleri tamamen bitmedi. Güvenli gerçek rota yoksa beklenir.
+- Temel sefer, tüm farklı gemi hızlarını tam eşzamanlı kılmaz; 95C ileri koordinasyon.
+- Olağandışı kriz/isyancı/federasyon kararları tümüyle yeniden yazılmadı.
+  Düşük istihbarat sorgu sayacı bütün AI'nin biçimsel güvenlik kanıtı değildir.
+- Kalan 99 düşük-istihbarat sorgusu trace edildi: borderPressure -> influenceAt
+  -> claimOf -> reinforcementThreats. Bu gerçek hâkimiyet/erişim motoru hesabıdır,
+  düşmanın gizli gücünü savaş puanına doğrudan besleyen eski yol değildir.
+- Eski yapı işi sayısı benzersiz yapı sayısı değildir; tekrarlı işleri sayabilir.
+- Aylık negatif stok kontrolü her ara işlemin evrensel muhasebe ispatı değildir.
+- Resmî galibi olmayan savaşlar için sonuç uydurulmadı.
+- Host süreleri telefon performans garantisi değildir; gerçek Android testi açık.
+
+YOL HARİTASI
+95B federasyon türleri/yasaları sıradadır, başlatılmadı. 95C ortak sefer,
+95D isim/amblem, 95E haber/gelen kutusu/uzaktan inşa, 96A ticaret şeffaflığı
+korunur. Ekonomi, sığınmacı/olay, portre/köken, karşı teknoloji, geç oyun
+AI/bilim dengesi ve dış ses dosyasız doğal müzik planı korunur. Yeni ticaret
+kaynak çoğalması kanıtı ayrı öncelikli bakımdır. 2B kamera kalıcı tercihtir.
+GitHub'a yükleme ve sonraki faz için ayrıca talimat gerekir.
+
+TESLİM
+stars-faz95a.zip: tüm kaynak, geçmiş notlar, raporlar, testler, ilk hata kanıtları,
+önce/sonra ham kampanyalar, kaynak karşılaştırma patch'i ve RELEASE-MANIFEST.json.
+ZIP SHA-256 değeri yanındaki stars-faz95a.sha256 dosyasındadır; CRC ve manifest
+çıktı paketinde tekrar doğrulanır. ZIP kendi hash'ini içermez (döngü oluşturmaz).

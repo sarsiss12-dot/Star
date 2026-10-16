@@ -260,7 +260,7 @@ test('Devlet listesinde görev özeti, ilişki sayfasında görev düğmesi bulu
 for(const [name,setup,want]of [
  ['düşük ilişki','A.rel[1]=-30','yakinlasma'],
  ['ticaret ortağı','A.rel[1]=40;A.pact[1]=true','ticaret'],
- ['ortak düşman','A.rel[1]=-30;A.war[C.id]=B.war[C.id]=true','guvenlik']
+ ['ortak düşman','A.rel[1]=-30;A.contact[C.id]=true;A.intel[B.id]=3;A.war[C.id]=B.war[C.id]=true','guvenlik']
 ])test('AI görev seçimi: '+name+'; deterministik ve RNG tüketmez',()=>{
  const h=fresh();h.run(setup+';var rng=RND_STATE;');eq(h.run('aiEnvoyTask(A,B)'),want);
  eq(h.run('aiEnvoyTask(A,B)'),want);eq(h.run('RND_STATE===rng'));

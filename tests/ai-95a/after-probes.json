@@ -1,0 +1,14 @@
+{
+  "root": "/workspace/scratch/342b17141b4a/faz95a",
+  "hiddenFleetMutation": {
+    "ratioBefore": 1.2476894639556377,
+    "ratioAfter": 1.2476894639556377,
+    "threatBefore": 0,
+    "threatAfter": 0
+  },
+  "sameBuilderSameJob": {
+    "first": true,
+    "again": false,
+    "pending": 1
+  }
+}

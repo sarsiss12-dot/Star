@@ -6,6 +6,171 @@
 /* =====================================================================
    YAPAY ZEKÂ
    ===================================================================== */
+/* 95A — actor knowledge. Persistent observations contain only sensor-visible facts;
+   derived graph/cache state stays outside Save v8 and never consumes gameplay RNG. */
+const AI_VIEW_CACHE = new WeakMap();
+function aiView(e){
+  const old=AI_VIEW_CACHE.get(e);
+  if(old&&old.day===G.day&&old.intel===e.aiIntel&&old.fleets===G.fleets&&old.count===G.fleets.length)return old;
+  const ctx=explorationContext(e),records={};
+  for(const [id,r] of Object.entries(e.aiIntel&&e.aiIntel.systems||{}))
+    if(G.sys[id]&&r&&Number.isFinite(r.day)&&Number.isInteger(r.owner)&&r.owner>=-1&&G.day-r.day<=3600)
+      records[id]={...r};
+  for(const id of ctx.visible){const s=G.sys[id];
+    records[id]={owner:s.owner,defense:sysDefense(s),colonies:s.planets.filter(p=>p.col).length,
+      capital:s.owner>=0&&G.emps[s.owner]&&G.emps[s.owner].home===id,day:G.day};
+  }
+  const view={day:G.day,intel:e.aiIntel,ctx,systems:records,fleets:G.fleets,count:G.fleets.length};AI_VIEW_CACHE.set(e,view);return view;
+}
+function aiObserve(e){
+  if(!e||e.wild||e.crisisSide)return;
+  AI_VIEW_CACHE.delete(e);const v=aiView(e);
+  const powers={...(e.aiIntel&&e.aiIntel.powers||{})};
+  for(const o of G.emps)if(o!==e&&e.contact[o.id]){
+    const observed=G.fleets.filter(f=>f.e===o.id&&v.ctx.visible.has(f.mv?f.mv.to:f.sys)).reduce((n,f)=>n+fleetPower(f),0);
+    if(observed>0)powers[o.id]={value:observed,day:G.day};
+  }
+  e.aiIntel={v:1,systems:v.systems,powers};v.intel=e.aiIntel;
+}
+function aiKnownSystem(e,s){return s&&aiView(e).systems[s.id]||null;}
+function aiKnownSystems(e,owner){
+  const v=aiView(e);return G.sys.filter(s=>v.systems[s.id]&&(owner===undefined||v.systems[s.id].owner===owner));
+}
+function aiKnownPower(e,o){return o===e?totalPower(e):shownPower(e,o).v;}
+function aiKnownTechs(e,o,offered=[]){
+  if(o===e||intelOf(e,o.id)>=2)return o.techs||{};
+  return Object.fromEntries(offered.filter(t=>t.t==='tech'&&TECHS[t.id]).map(t=>[t.id,true]));
+}
+function aiKnownResources(e,o,offered=[]){
+  if(o===e||intelOf(e,o.id)>=3)return o.res||{};
+  const known={};for(const t of offered)if(t.t==='res')known[t.r]=(known[t.r]||0)+t.v;
+  return known;
+}
+function aiKnownWar(e,a,b){
+  if(!a||!b)return false;
+  if(a===e)return !!a.war[b.id];if(b===e)return !!e.war[a.id];
+  return !!(e.contact[a.id]&&e.contact[b.id]&&(intelOf(e,a.id)>=3||intelOf(e,b.id)>=3)&&a.war[b.id]);
+}
+function aiObservedThreat(e,id,near=true){
+  const v=aiView(e),s=G.sys[id];if(!s)return 0;
+  let total=0;
+  for(const f of G.fleets){
+    if(f.e===e.id||!f.ships.length||!isArmed(f)||!hostile(e.id,f.e))continue;
+    const at=f.mv?f.mv.to:f.sys;
+    if(!v.ctx.visible.has(at))continue;
+    if(at===id)total+=fleetPower(f);else if(near&&s.lanes.includes(at))total+=fleetPower(f)*.5;
+  }
+  return total;
+}
+function aiEstimatedDefense(e,s){
+  const r=aiKnownSystem(e,s);if(!r)return Infinity;
+  const age=Math.max(0,G.day-r.day),uncertainty=1+Math.min(.5,age/720);
+  return r.defense*uncertainty+aiObservedThreat(e,s.id,false);
+}
+/* Route geometry is restricted to the observer's learned graph. The existing
+   engine still validates legal access and performs all movement/costs. */
+function aiKnownRoute(e,f,from,to,observer=e,warTarget=null){
+  const view=aiView(observer),known=view.ctx.known;
+  if(!G.sys[from]||!G.sys[to]||!known.has(from)||!known.has(to))return null;
+  const n=G.sys.length,cost=Array(n).fill(Infinity),prev=Array(n).fill(-1),done=new Set();
+  const gates=[...known].filter(id=>(observer===e&&G.sys[id].owner===e.id||view.ctx.visible.has(id))&&hasUsableGate(e,G.sys[id]));cost[from]=0;
+  for(let k=0;k<known.size;k++){
+    let u=-1,best=Infinity;for(const id of known)if(!done.has(id)&&cost[id]<best){u=id;best=cost[id];}
+    if(u<0)break;if(u===to)break;done.add(u);
+    const edges=gates.includes(u)?[...new Set(G.sys[u].lanes.concat(gates))]:G.sys[u].lanes;
+    for(const id of edges){
+      if(!known.has(id)||done.has(id)||view.ctx.pirates.has(id)&&id!==to)continue;
+      if(!pathAllowed(e,f,[id],u)&&!(warTarget!==null&&view.systems[id]?.owner===warTarget))continue;
+      const jump=gates.includes(u)&&gates.includes(id),speed=Math.max(.001,fleetSpeed({...f,e:observer!==e&&intelOf(observer,e.id)<3?observer.id:f.e,sys:u,mv:null}));
+      const value=best+(jump?.1:dist(G.sys[u],G.sys[id]))/speed;
+      if(value<cost[id]){cost[id]=value;prev[id]=u;}
+    }
+  }
+  if(!Number.isFinite(cost[to]))return null;
+  const path=[];let at=to;while(at!==from&&path.length<n){path.unshift(at);at=prev[at];if(at<0)return null;}
+  return at===from?{path,eta:cost[to]}:null;
+}
+function aiWarAccess(e,o){
+  const forces=G.fleets.filter(f=>f.e===e.id&&isArmed(f)&&!f.retreating&&!f.combat&&fleetSupply(e,f)>.55);
+  const targets=aiKnownSystems(e,o.id).sort((a,b)=>a.id-b.id).slice(0,6);
+  const shown=shownPower(e,o),need=Math.max(80,shown.v*(1+shown.band)*1.15);
+  for(const target of targets){
+    let power=0;
+    for(const f of forces){const route=aiKnownRoute(e,f,f.mv?f.mv.to:f.sys,target.id,e,o.id);
+      if(route&&route.eta<=180)power+=fleetPower(f);}
+    if(power>=need)return {ok:true,target:target.id,power,need};
+  }
+  return {ok:false,why:targets.length?'Ulaşabilir kuvvet ve bilgi yetersiz':'Bilinen askerî hedef yok',need};
+}
+function aiMove(e,f,to){
+  const route=aiKnownRoute(e,f,f.mv?f.mv.to:f.sys,to);
+  return !!(route&&orderMove(f,to,false,true,route.path));
+}
+function aiProtection(e,lord){
+  if(!e||!lord||e.dead||lord.dead||isVassal(e)||(e.freeUntil||0)>(G.memAge||0)||vassalsOf(e).length||e===lord||!e.contact[lord.id]||e.war[lord.id]||isVassal(lord)||isPurifier(lord)||isPurifier(e))return {ok:false,why:'Siyasi koşullar uygun değil'};
+  if((e.rel[lord.id]||0)<-10)return {ok:false,why:'Koruma için güven yetersiz'};
+  const to=G.sys[e.home];if(!to)return {ok:false,why:'Korunacak merkez yok'};
+  let best=null;
+  const probe={e:lord.id,ships:[{c:'kor',h:1}],retreating:false};
+  for(const s of aiKnownSystems(e,lord.id)){
+    const route=aiKnownRoute(lord,probe,s.id,to.id,e);
+    if(route&&(!best||route.eta<best.eta))best=route;
+  }
+  if(!best)return {ok:false,why:'Bilinen açık askerî yardım rotası yok'};
+  if(best.eta>180)return {ok:false,why:'Askerî yardım çok geç ulaşır',eta:best.eta};
+  const ratio=aiKnownPower(e,lord)/Math.max(1,totalPower(e));
+  return ratio>=1.3?{ok:true,eta:best.eta,ratio,why:'Açık yardım rotası ve yeterli tahmini güç'}:{ok:false,eta:best.eta,why:'Tahmini koruma gücü yetersiz'};
+}
+function aiUpdateStrategy(e){
+  const needs=['ene','min','yiy','tuk','ala'].filter(k=>(e.inc[k]||0)<(k==='yiy'&&RACES[e.race].bio!=='organik'?-999:0));
+  const danger=G.sys.some(s=>s.owner===e.id&&aiObservedThreat(e,s.id,false)>0);
+  const war=Object.keys(e.war||{}).some(id=>e.war[id]&&G.emps[id]&&!G.emps[id].dead&&!G.emps[id].wild);
+  const goal=needs.length?'recover':danger?'defend':war?'war':aiProfile(e).sci>.75?'science':'economy';
+  const old=e.aiStrategy,urgent=goal==='recover'||goal==='defend';
+  const changing=!old||G.day>=old.until||urgent&&old.goal!==goal;
+  e.aiStrategy={goal:changing?goal:old.goal,since:changing?G.day:old.since,until:changing?G.day+180:old.until,
+    needs,reason:needs.length?'Kaynak darboğazı: '+needs.join(','):danger?'Görülen askerî tehdit':war?'Mevcut savaşa hazırlık':'Doktrin ve iç ihtiyaçlar'};
+}
+/* One empire's bounded campaign: defend first, stage reachable forces, commit
+   together. No federation commands, free hulls or per-frame planning. */
+function aiMilitaryCampaign(e,armed,my,wars){
+  const free=armed.filter(f=>!f.guardLocked&&!guardLocked(f)&&!f.retreating&&G.sys[f.mv?f.mv.to:f.sys]),used=new Set();
+  const threatened=my.map(s=>({s,t:aiObservedThreat(e,s.id,false)})).filter(x=>x.t>0)
+    .sort((a,b)=>(b.t+(b.s.id===e.home?600:0))-(a.t+(a.s.id===e.home?600:0))||a.s.id-b.s.id);
+  for(const {s,t}of threatened){
+    let power=G.fleets.filter(f=>f.e===e.id&&f.sys===s.id&&!f.mv&&isArmed(f)).reduce((n,f)=>n+fleetPower(f),0);
+    for(const f of free.filter(f=>f.sys===s.id&&!f.mv))used.add(f.id);
+    const candidates=free.filter(f=>!used.has(f.id)&&!f.mv&&!f.path.length).map(f=>({f,r:aiKnownRoute(e,f,f.sys,s.id)})).filter(x=>x.r&&x.r.eta<=180).sort((a,b)=>a.r.eta-b.r.eta||a.f.id-b.f.id);
+    for(const {f}of candidates){if(power>=t*1.15)break;if(aiMove(e,f,s.id)){used.add(f.id);power+=fleetPower(f);}}
+  }
+  const force=free.filter(f=>!used.has(f.id)&&!f.combat&&fleetSupply(e,f)>.55);
+  if(!force.length)return;
+  const known=aiKnownSystems(e).filter(s=>wars.some(o=>aiKnownSystem(e,s).owner===o.id));
+  if(!known.length){e.aiCampaign={phase:'recon',reason:'Keşfedilmiş düşman konumu yok',until:G.day+30};return;}
+  const old=e.aiCampaign;
+  let target=old&&old.until>G.day&&known.find(s=>s.id===old.target);
+  if(!target){
+    const origin=G.sys[force[0].mv?force[0].mv.to:force[0].sys];
+    const ranked=known.map(s=>({s,v:(aiKnownSystem(e,s).colonies||0)*400+(aiKnownSystem(e,s).capital?600:0)-dist(origin,s)})).sort((a,b)=>b.v-a.v||a.s.id-b.s.id).slice(0,6);
+    target=ranked.find(({s})=>force.some(f=>{const p=aiKnownRoute(e,f,f.mv?f.mv.to:f.sys,s.id);return p&&p.eta<360&&fleetSupply(e,{sys:s.id,ships:f.ships,e:e.id})>.4;}))?.s;
+  }
+  if(!target){e.aiCampaign={phase:'supply',reason:'Bilinen hedefe ikmalli askerî rota yok',until:G.day+30};return;}
+  const rally=my.filter(s=>isSupplyNode(e,s)).sort((a,b)=>dist(a,target)-dist(b,target)||a.id-b.id)[0]||my[0];
+  if(!rally)return;
+  const need=Math.max(80,aiEstimatedDefense(e,target)*1.25);
+  const ready=force.filter(f=>!f.mv&&!f.path.length&&f.sys===rally.id);
+  let reachable=0;for(const f of force){const p=aiKnownRoute(e,f,f.mv?f.mv.to:f.sys,rally.id);if(p&&p.eta+(f.mv?(1-f.mv.t)*dist(G.sys[f.mv.from],G.sys[f.mv.to])/Math.max(.001,fleetSpeed(f)):0)<=180)reachable+=fleetPower(f);}
+  const gathered=ready.reduce((n,f)=>n+fleetPower(f),0);
+  e.aiCampaign={target:target.id,rally:rally.id,phase:reachable<need?'build':gathered<need?'gather':'attack',
+    since:old&&old.target===target.id?old.since:G.day,until:old&&old.target===target.id&&old.until>G.day?old.until:G.day+180,
+    need,power:reachable,reason:reachable<need?'Tahmini savunma için kuvvet yetersiz':gathered<need?'Ulaşabilir filolar toplanıyor':'Kuvvet birlikte taarruz ediyor'};
+  if(gathered>=need){for(const f of ready)aiMove(e,f,target.id);}
+  for(const f of force){
+    if(f.mv||f.path.length||f.sys===rally.id||ready.includes(f))continue;
+    aiMove(e,f,rally.id);
+  }
+}
+
 /* ---------------------------------------------------------------
    Kişilik profili: ırk + etik + civic'ten türetilir.
    AI artık kendi ideolojisine göre farklı oynar.
@@ -28,19 +193,7 @@ function aiProfile(e){
   return p;
 }
 /* Bir sistemin AI için tehdit skoru: yakındaki düşman filo gücü */
-function threatAt(e, sysId){
-  let t = 0;
-  const s = G.sys[sysId];
-  for (const f of G.fleets){
-    if (f.e === e.id || !isArmed(f)) continue;
-    if (!hostile(e.id, f.e)) continue;
-    const fs = f.sys >= 0 ? f.sys : (f.mv ? f.mv.to : -1);
-    if (fs < 0) continue;
-    if (fs === sysId) t += fleetPower(f);
-    else if (s.lanes.includes(fs)) t += fleetPower(f) * .5;
-  }
-  return t;
-}
+function threatAt(e,sysId){return aiObservedThreat(e,sysId);}
 /* Filonun menzil dengesi — AI dengeli filo kursun diye */
 function fleetRangeMix(e){
   const mix = {1:0, 2:0, 3:0};
@@ -165,9 +318,9 @@ function crisisFleetTurn(e){
 /* 86D: görev seçimi deterministik; mevcut elçiyi her ay yeniden atayıp
    kıdemini silmez. Yerleştirme olasılığı ve hedef sıralaması korunur. */
 function aiEnvoyTask(e,o){
-  if (sharedFoe(e,o)) return 'guvenlik';
+  if (G.emps.some(x=>e.war[x.id]&&aiKnownWar(e,o,x))) return 'guvenlik';
   if ((e.rel[o.id]||0)<20) return 'yakinlasma';
-  const ours=ownLuxury(e), theirs=ownLuxury(o);
+  const ours=ownLuxury(e), theirs=intelOf(e,o.id)>=2?ownLuxury(o):{};
   if ((e.pact&&e.pact[o.id]) || LUX_KEYS.some(k=>theirs[k]&&!ours[k])) return 'ticaret';
   return e.ally[o.id] ? 'guvenlik' : 'yakinlasma';
 }
@@ -177,8 +330,8 @@ function aiEnvoyTurn(e,prof){
   if (!cands.length) return;
   const ours=ownLuxury(e);
   cands.sort((a,b)=>{
-    const la=LUX_KEYS.filter(k=>ownLuxury(a)[k]&&!ours[k]).length;
-    const lb=LUX_KEYS.filter(k=>ownLuxury(b)[k]&&!ours[k]).length;
+    const la=LUX_KEYS.filter(k=>(intelOf(e,a.id)>=2?ownLuxury(a):{})[k]&&!ours[k]).length;
+    const lb=LUX_KEYS.filter(k=>(intelOf(e,b.id)>=2?ownLuxury(b):{})[k]&&!ours[k]).length;
     return (lb*20+(e.rel[b.id]||0))-(la*20+(e.rel[a.id]||0));
   });
   if (rnd()<.4+prof.dip*.4) setEnvoyTask(e,cands[0].id,aiEnvoyTask(e,cands[0]));
@@ -343,7 +496,7 @@ function aiColossusProduction(e,yard,prof){
           /* Savaş ne kadar uzun sürdüyse o kadar köklü düşmanlık */
           const yorgun = (typeof exhOf === 'function') ? exhOf(e, o.id) : 0;
           /* Güçlü düşman daha çok hak eder */
-          const guc = clamp(totalPower(o) / (totalPower(e) + 1), 0, 2.5);
+          const guc = clamp(aiKnownPower(e,o) / (totalPower(e) + 1), 0, 2.5);
           /* Kötü ilişki de düşmanlık ölçüsüdür; savaş varsa ağırlaşır */
           const soguk = Math.max(0, -(e.rel[o.id] || 0)) * .45;
           const skor = (kin + yorgun * .8 + guc * 25 +
@@ -362,6 +515,7 @@ function aiTurn(e){
   if (e.dead) return;
   if (e.crisisSide){ crisisFleetTurn(e); return; }
   if (e.wild){ wildTurn(e); return; }
+  aiObserve(e);aiUpdateStrategy(e);
   const race = RACES[e.race];
   const prof = aiProfile(e);
   const my = G.sys.filter(s => s.owner === e.id);
@@ -406,6 +560,9 @@ function aiTurn(e){
     const doluNow = colonyUsed(pl.col) +
       ((typeof colonyQueued === 'function') ? colonyQueued(pl.col) : 0) >= slotsNow;
     const need = [];
+    if(e.aiStrategy?.goal==='war'&&(e.inc.ala||0)<30)need.push('dokum');
+    const unhappy=(e.factions||[]).filter(x=>x.mood<35&&x.pow>=20).sort((a,b)=>a.mood-b.mood)[0];
+    if(unhappy?.k==='bilim')need.push('lab');else if(unhappy?.k==='tuccar'&&(e.inc.ene||0)>6)need.push('liman');
     // kriz varsa her şeyin önüne geçer
     if (e.crisis === 'enerji') need.push('santral', 'santral');
     if (e.crisis === 'yiyecek') need.push('ciftlik', 'ciftlik');
@@ -505,7 +662,7 @@ function aiTurn(e){
       // ulaşılamayan hedefi atla, sıradakini dene
       let placed = false;
       for (const t of free.slice(0, 5)){
-        if (orderMove(f, t.s)){
+        if (aiMove(e,f,t.s)){
           taken.add(t.s+':'+t.p);
           f.ord = {t:'kol', s:t.s, p:t.p};
           placed = true;
@@ -538,8 +695,8 @@ function aiTurn(e){
   for (const o of G.emps){
     if (o.dead || o.id === e.id || !e.contact[o.id] || e.war[o.id] || e.ally[o.id]) continue;
     if (!canDeclareWarOn(e, o)) continue;              // sürgüne dokunulmaz
-    const oPow = totalPower(o) + 1;
-    const border = G.sys.some(s => s.owner === o.id && s.lanes.some(l => G.sys[l].owner === e.id));
+    const oPow = aiKnownPower(e,o) + 1;
+    const border = aiKnownSystems(e,o.id).some(s=>s.lanes.some(l=>G.sys[l].owner===e.id));
     // kovan/diplomasisiz ırklar sınır komşusuna er ya da geç saldırır
     if (prof.dip <= 0.02 && border && rnd() < .22 + prof.war*.18){ declareWar(e, o); continue; }
     if (!border) continue;
@@ -548,9 +705,9 @@ function aiTurn(e){
     if (G.day - lastPeace < 720) continue;
     const ratio = myPow/oPow;
     // zayıf ve zengin komşu daha çekici
-    const juicy = clamp(sysCount(o) / (sysCount(e)+1), .4, 2.4);
+    const juicy = clamp(aiKnownSystems(e,o.id).length / (sysCount(e)+1), .4, 2.4);
     // zaten savaşta olan komşu ek fırsat: iki cepheye bölünmüş düşman
-    const busy = G.emps.some(x => !x.dead && x.id !== e.id && o.war[x.id]) ? .35 : 0;
+    const busy = G.emps.some(x => !x.dead && x.id !== e.id && aiKnownWar(e,o,x)) ? .35 : 0;
     const want = prof.war * (ratio - 1.02) * juicy + (e.rel[o.id] < -40 ? .35 : 0) + busy;
     if (ratio > 1.14 && rnd() < want*.50){
       // AI kişiliğine göre savaş hedefi seçer
@@ -572,10 +729,10 @@ function aiTurn(e){
     // savaş ilan edip hemen barış istemesin: en az 10 ay savaşsın
     const since = G.day - (e.warStart && e.warStart[o.id] || 0);
     if (since < 300) continue;
-    const oPow = totalPower(o)+1;
+    const oPow = aiKnownPower(e,o)+1;
     const myExh = (typeof exhOf === 'function') ? exhOf(e, o.id) : 0;
     const losing = myPow/oPow < .55 || myExh > 55;
-    const tired  = sysCount(e) < sysCount(o) * .6;
+    const tired  = sysCount(e) < aiKnownSystems(e,o.id).length * .6;
     if (peaceAlwaysAccepted(e, o)){ makePeace(e, o); continue; }
     if (!(losing || tired)) continue;
     if (rnd() > .22 + prof.dip*.15) continue;
@@ -603,11 +760,7 @@ function aiTurn(e){
      Kilit TEK NOKTAYA konuldu — ileride buraya yeni bir diplomasi
      kolu eklendiğinde de kendiliğinden korunur. İstihbarat ve
      casusluk bölümleri bu bloğun DIŞINDA, dolayısıyla açık kalır. */
-  if (typeof isPurifier === 'function' && isPurifier(e)){
-    if (typeof aiSpyTurn === 'function') aiSpyTurn(e);   // casusluk serbest
-    return;
-  }
-
+  if(!isPurifier(e)){
   /* --- 6-öncesi. elçi görevi — oyuncuyla aynı atama kapısı --- */
   aiEnvoyTurn(e,prof);
 
@@ -647,7 +800,7 @@ function aiTurn(e){
          çok dostsa gerek yok, çok düşmansa kabul edilmez. */
       const rel = e.rel[o.id] || 0;
       if (rel < -35 || rel > 65) continue;
-      const gerginlik = G.emps.some(x => !x.dead && x.war[o.id]) ? .10 : 0;
+      const gerginlik = G.emps.some(x => !x.dead && aiKnownWar(e,x,o)) ? .10 : 0;
       if (rnd() < .06 + prof.dip * .10 + gerginlik){
         if (o.id === 0){
           e.lastNapProp = e.lastNapProp || 0;
@@ -657,7 +810,7 @@ function aiTurn(e){
           }
         } else {
           /* NAP maliyetsizdir; karşılık istemek anlamsız olurdu. */
-          aiNegotiate(e, o, [{t:'nap'}], []);
+          aiNegotiate(e, o, [{t:'nap'}], [],true);
         }
         break;
       }
@@ -671,7 +824,7 @@ function aiTurn(e){
       if (!e.contact[o.id] || (e.pact && e.pact[o.id])) continue;
       if (typeof diploBlocked === 'function' && diploBlocked(e, o)) continue;
       if (!canPact(e, o)) continue;
-      const luxWant = LUX_KEYS.filter(k => ownLuxury(o)[k] && !ownLuxury(e)[k]).length;
+      const luxWant = LUX_KEYS.filter(k => intelOf(e,o.id)>=2 && ownLuxury(o)[k] && !ownLuxury(e)[k]).length;
       if (rnd() < .10 + prof.eco*.16 + (e.rel[o.id]+40)/400 + luxWant*.09){
         if (o.id === 0){
           // oyuncuya onay için teklif gönder, tek taraflı kurma
@@ -696,7 +849,7 @@ function aiTurn(e){
              teklif verebilir. Tek taraflı dayatma kaldırıldı. */
           /* FAZ 86C.4: karşılıklı teklif — alıcı da bir bedel öder. */
           const tp = aiProposeTerms(e, o, 'pact');
-          aiNegotiate(e, o, tp.give, tp.want);
+          aiNegotiate(e, o, tp.give, tp.want,true);
         }
         break;
       }
@@ -711,7 +864,7 @@ function aiTurn(e){
       if (typeof diploBlocked === 'function' && diploBlocked(e, o)) continue;
       if (RACES[o.race].dip <= .05) continue;
       // ortak düşman varsa ittifak cazip
-      const commonFoe = G.emps.some(x => !x.dead && e.war[x.id] && o.war[x.id]);
+      const commonFoe = G.emps.some(x => !x.dead && e.war[x.id] && aiKnownWar(e,o,x));
       const chance = clamp((e.rel[o.id]+30)/180 * prof.dip + (commonFoe?.25:0), 0, .7);
       if (rnd() < chance){
         if (o.id === 0){
@@ -729,12 +882,14 @@ function aiTurn(e){
           /* FAZ 86C.3: ittifak da karşılıklı müzakereden geçer. */
           /* FAZ 86C.4: ittifak da karşılıklı. */
           const ta = aiProposeTerms(e, o, 'ally');
-          aiNegotiate(e, o, ta.give, ta.want);
+          aiNegotiate(e, o, ta.give, ta.want,true);
         }
         break;
       }
     }
   }
+
+  } // closed doctrines skip diplomacy, not military command
 
   /* --- 7. askerî hareket --- */
   const wars = G.emps.filter(o => !o.dead && e.war[o.id]);
@@ -762,100 +917,7 @@ function aiTurn(e){
   }
 
   if (wars.length && armed.length){
-    const total = armed.reduce((a,f)=>a+fleetPower(f),0);
-    const enemySys = G.sys.filter(s => wars.some(o => s.owner === o.id));
-    // kriz filolarının bulunduğu sistemler de hedef sayılır
-    if (G.crisisId !== undefined && e.war[G.crisisId]){
-      for (const cf of G.fleets){
-        if (cf.e !== G.crisisId || cf.sys < 0) continue;
-        const sy = G.sys[cf.sys];
-        if (sy && !enemySys.includes(sy)) enemySys.push(sy);
-      }
-    }
-    // savunulması gereken kendi sistemlerimiz (tehdide göre sıralı)
-    const threatened = my.map(s => ({s, t: threatAt(e, s.id)}))
-                         .filter(x => x.t > 0)
-                         .sort((a,b) => b.t - a.t);
-    for (const f of armed){
-      if (f.path.length || f.mv) continue;
-      const from = f.sys;
-      const pow = fleetPower(f);
-
-      // zayıf filo ana orduya katılsın
-      if (pow < total*.35 && armed.length > 1){
-        const big = armed.reduce((a,b)=>fleetPower(a)>fleetPower(b)?a:b);
-        if (big !== f && big.sys >= 0 && big.sys !== from){ orderMove(f, big.sys); continue; }
-      }
-
-      // en çok tehdit altındaki sistemi savun (gücümüz yetiyorsa)
-      if (threatened.length){
-        const tgt = threatened[0];
-        if (pow > tgt.t * .8 || prof.turtle > .5){
-          if (tgt.s.id !== from){ orderMove(f, tgt.s.id); continue; }
-          continue;   // zaten oradaysa bekle
-        }
-      }
-
-      // güçlü ve boşta filo: korsan yuvası veya kalıntı temizle
-      if (!threatened.length && pow > 900){
-        const prizes = [];
-        for (const sy of G.sys){
-          if (!sy.seen.includes(e.id)) continue;
-          if (sy.nest && sy.nest.hp > 0) prizes.push({sy, need: sy.nest.hp * .35, kind:'yuva'});
-          else if (sy.ruin && sy.ruin.hp > 0) prizes.push({sy, need: sy.ruin.hp * .55, kind:'kalinti'});
-        }
-        const doable = prizes.filter(p2 => pow > p2.need)
-          .sort((a,b)=> dist(G.sys[from], a.sy) - dist(G.sys[from], b.sy));
-        if (doable.length && rnd() < .5){
-          if (orderMove(f, doable[0].sy.id)) continue;
-        }
-      }
-
-      // saldırı hedefi: zayıf savunmalı, yakın ve değerli sistem
-      if (enemySys.length){
-        const scored = enemySys.map(sy => {
-          const d = dist(G.sys[from], sy);
-          const def = sysDefense(sy) + threatAt(e, sy.id);
-          let value = sy.planets.filter(pp => pp.col).length * 400 +
-            (G.emps[sy.owner] && G.emps[sy.owner].home === sy.id ? 900 : 0);
-          /* ═══ FAZ 39: İSYANCININ TEK HEDEFİ ═══
-             Özgürlük Savaşı başkentle biter. İsyancı için zalimin
-             başkenti diğer her şeyin önündedir.
-             ÖLÇÜM: isyancılar 45 kat güçlüyken bile başkenti hiç
-             hedeflemiyor, sınır sistemlerinde oyalanıyorlardı. */
-          if (typeof inRebelAlliance === 'function' && inRebelAlliance(e) &&
-              G.rebelAlliance && sy.owner === G.rebelAlliance.target){
-            value += 600;
-            if (G.emps[sy.owner] && G.emps[sy.owner].home === sy.id) value += 4000;
-          }
-          /* ═══ FAZ 55: LOJİSTİK FARKINDALIĞI ═══
-             ÖLÇÜM (Faz 54): tedarik cezası muharebeyi %63→%24
-             etkiliyor ama AI hedef seçerken bunu hiç hesaba
-             katmıyordu — uzaktaki düşmanın peşinden aç bir
-             orduyla gidiyordu. Artık ulaşılacak sistemin tedarik
-             durumu değeri düşürüyor: kendi hattına yakın hedefler
-             öncelikli. */
-          let lojistik = 0;
-          if (typeof fleetSupply === 'function'){
-            const sup = fleetSupply(e, {sys: sy.id, ships: f.ships, e: e.id});
-            if (sup < 1){
-              lojistik = (1 - sup) * 2600;   // %40 tedarik → −1560
-              /* ═══ FAZ 56: İPTAL EDİLEN HEDEFİ HATIRLA ═══
-                 Lojistik yüzünden vazgeçilen hedef unutulmaz; AI o
-                 yöne ileri üs kurmayı dener (aiForwardBaseTick). */
-              if (value > 300 && (!e._blocked || value > e._blocked.value))
-                e._blocked = {sys: sy.id, value, at: G.memAge || 0};
-            }
-          }
-          return {sy, score: value - d*1.2 - def*1.8 - lojistik};
-        }).sort((a,b) => b.score - a.score);
-        const pick2 = scored[0];
-        // gücümüz savunmayı aşmıyorsa saldırma, bekle ve büyü
-        if (pick2 && pow > (sysDefense(pick2.sy) + threatAt(e, pick2.sy.id)) * .75){
-          orderMove(f, pick2.sy.id);
-        }
-      }
-    }
+    aiMilitaryCampaign(e,armed,my,wars);
   } else {
     // barışta: önce ödül avı, sonra devriye
     for (const f of armed){
@@ -870,12 +932,12 @@ function aiTurn(e){
         }
         if (prizes.length){
           prizes.sort((a,b)=>dist(G.sys[f.sys], a) - dist(G.sys[f.sys], b));
-          if (orderMove(f, prizes[0].id)) continue;
+          if (aiMove(e,f,prizes[0].id)) continue;
         }
       }
       if (rnd() > .25) continue;
       const border = my.filter(s => s.lanes.some(l => G.sys[l].owner !== e.id));
-      if (border.length) orderMove(f, border[Math.floor(rnd()*border.length)].id);
+      if (border.length) aiMove(e,f,border[Math.floor(rnd()*border.length)].id);
     }
   }
 
@@ -944,21 +1006,22 @@ function aiProposeTerms(e, o, treaty){
     ? dealCost({from:e.id, to:o.id, give, want:[]}) : 0;
   if (maliyet <= 0) return {give, want};
   /* İlişki iyi → daha az iste; soğuk → daha çok. %20–%80 arası. */
-  const rel = clamp(o.rel[e.id] || 0, -100, 100);
+  const rel = clamp(e.rel[o.id] || 0, -100, 100);
   const pay = clamp(0.55 - rel / 400, 0.20, 0.80);
   /* Etki maliyetini kaynak değerine çevir: itemValue res ≈ v×0.38 */
   const hedefDeger = maliyet * pay / 0.38;
   /* Alıcının EN BOL kaynağı — onu en az zorlayan karşılık. */
+  const resources=aiKnownResources(e,o);
   let r = 'min';
   for (const k of ['min','ene','ala'])
-    if ((o.res[k] || 0) > (o.res[r] || 0)) r = k;
+    if ((resources[k] || 0) > (resources[r] || 0)) r = k;
   /* Stokunun dörtte birinden fazlasını ASLA isteme.
      ⚠ ÖLÇÜLEN HATA: `Math.round(x/10)*10` tavanı AŞIYORDU — stok 20
      iken tavan 5 olmasına rağmen 10 isteniyordu (round(0.5)=1).
      Aşağı yuvarlama tavanı garanti eder; 10'un altına düşen istek
      zaten anlamsız olduğu için hiç istenmez (teklif karşılıksız
      kalır ve alıcı bunu değerlendirir). */
-  const tavan = (o.res[r] || 0) * 0.25;
+  const tavan = intelOf(e,o.id)>=3 ? (resources[r]||0)*.25 : hedefDeger;
   const v = Math.floor(Math.min(hedefDeger, tavan) / 10) * 10;
   if (v >= 10) want.push({t:'res', r, v});
   return {give, want};
@@ -990,7 +1053,15 @@ function aiCounterBudget(proposer,target,offer,extra){
   return {extraValue,benefit,cap:benefit*.60};
 }
 
-function aiNegotiate(proposer, target, give, want){
+function aiNegotiate(proposer, target, give, want, automatic=false){
+  if(!proposer||!target)return {tur:0,karar:null,uygulandi:false,why:'Geçersiz devlet',karsi:null};
+  const talkKey=target.id+':'+(give||[]).concat(want||[]).map(x=>x.t+':'+(x.r||x.id||'')).sort().join('|');
+  if(automatic){
+    proposer.aiTalk=proposer.aiTalk||{};
+    const old=proposer.aiTalk[talkKey];
+    if(old&&old.until>G.day)return {tur:0,karar:'bekle',uygulandi:false,why:'Aynı öneri yeniden değerlendirme bekliyor',karsi:null};
+    proposer.aiTalk[talkKey]={until:G.day+120};
+  }
   const sonuc = {tur:0, karar:null, uygulandi:false, why:'', karsi:null};
   if (!proposer || !target) return sonuc;
   if (proposer.id === 0 || target.id === 0) return sonuc;   // oyuncu hariç
@@ -1001,7 +1072,7 @@ function aiNegotiate(proposer, target, give, want){
   /* 1) Teklif ETMEDEN önce kendi kanonik kapısı */
   const q0 = dealQuote(teklif);
   if (!q0.ok){
-    sonuc.karar = 'gecersiz';
+    sonuc.karar = automatic?'bekle':'gecersiz';
     sonuc.why = (q0.fatal && q0.fatal[0]) || (q0.reasons && q0.reasons[0]) ||
                 'teklif uygulanabilir değil';
     return sonuc;
@@ -1104,10 +1175,11 @@ function aiRespond(ai, offer){
   const already = {};
   for (const it of offer.give) if (it.t === 'res') already[it.r] = (already[it.r]||0) + it.v;
 
+  const knownResources=aiKnownResources(ai,from,offer.give);
   const order = ['ala','min','ene','tuk'];
   for (const r of order){
     if (gap <= 0) break;
-    const have = Math.max(0, (from.res[r]||0) - (already[r]||0));
+    const have = Math.max(0, (knownResources[r]||0) - (already[r]||0));
     if (have < 80) continue;
     const unit = itemValue(ai, {t:'res', r, v:100}, from) / 100 * trustT;   // birim değer
     if (unit <= 0) continue;
@@ -1127,7 +1199,7 @@ function aiRespond(ai, offer){
 
   // hâlâ açık varsa teknolojiyle kapatmayı dene
   if (gap > 0){
-    const av = Object.keys(from.techs || {}).filter(t => !ai.techs[t] && TECHS[t])
+    const av = Object.keys(aiKnownTechs(ai,from,offer.give)).filter(t => !ai.techs[t] && TECHS[t])
       .map(id=>({id,value:itemValue(ai,{t:'tech',id},from)*trustT}))
       .filter(x=>x.value>0)
       .sort((a,b)=>a.value-b.value || (a.id<b.id?-1:a.id>b.id?1:0));
@@ -1170,7 +1242,7 @@ function aiRespond(ai, offer){
 function aiProposeTo(ai, target){
   const give = [], want = [];
   if (ai.war[target.id]){
-    const ratio = totalPower(ai) / (totalPower(target) + 1);
+    const ratio = totalPower(ai) / (aiKnownPower(ai,target) + 1);
     want.push({t:'peace'});
     if (ratio < .6){
       // kaybediyor: tazminat öner
@@ -1182,14 +1254,14 @@ function aiProposeTo(ai, target){
       want.push({t:'tribute', r:'ene', v: 8});
     }
   } else {
-    const theirLux = ownLuxury(target);
+    const theirLux = intelOf(ai,target.id)>=2?ownLuxury(target):{};
     const wantLux = LUX_KEYS.filter(k => theirLux[k] && !(ai.luxOwn && ai.luxOwn[k]));
     if (wantLux.length && !(ai.pact && ai.pact[target.id])){
       want.push({t:'pact'});
       const r = 'min';
       const amt = Math.round(Math.min(ai.res[r] * .2, 400) / 50) * 50;
       if (amt >= 100) give.push({t:'res', r, v: amt});
-    } else if (sharedFoe(ai, target) && !ai.ally[target.id] && canAlly(ai, target)){
+    } else if (G.emps.some(x=>ai.war[x.id]&&aiKnownWar(ai,target,x)) && !ai.ally[target.id] && canAlly(ai, target)){
       want.push({t:'ally'});
       give.push({t:'intel'});
     } else {
@@ -1401,7 +1473,7 @@ function whisperAptitude(e){
   if (P){
     if (P.n === 'Tüccar')       apt *= 1.45;
     else if (P.n === 'Pasifist')apt *= 1.35;
-    else if (P.n === 'İzolasyonist') apt *= 1.10;
+    else if (P.n === 'Fanatik Arındırıcılar') apt *= 1.10;
     else if (P.n === 'Militarist')   apt *= .45;   // "kılıcım varken niye fısıldayayım"
   }
   /* Gölge Konseyi ve Panoptikon doktrinleri entrikayı meslek edinir */
@@ -1414,7 +1486,7 @@ function whisperAptitude(e){
   let ortalama = 0, n = 0;
   for (const o of G.emps){
     if (o.dead || o.wild) continue;
-    ortalama += totalPower(o); n++;
+    ortalama += aiKnownPower(e,o); n++;
   }
   ortalama = n ? ortalama / n : 1;
   const benim = totalPower(e) + 1;
@@ -1426,24 +1498,24 @@ function whisperAptitude(e){
    ne kadar yakınsa fısıltı o kadar değerli. */
 function whisperTarget(e){
   const cands = G.emps.filter(o =>
-    !o.dead && !o.wild && o.id !== e.id && e.contact[o.id] && !e.ally[o.id]);
+    !o.dead && !o.wild && o.id !== e.id && e.contact[o.id] && aiOpPolicy(e,o,'whisper'));
   if (cands.length < 2) return null;
 
   let best = null;
   for (let i = 0; i < cands.length; i++){
     for (let j = i + 1; j < cands.length; j++){
       const a = cands[i], b = cands[j];
-      if (a.war[b.id]) continue;                    // zaten savaştalar
+      if (aiKnownWar(e,a,b)) continue;
 
       /* Tehdit algısı: ikisi de benden güçlüyse ve bana yakınsa tehlike */
       const myPow = totalPower(e) + 1;
-      const tA = clamp(totalPower(a) / myPow, 0, 4);
-      const tB = clamp(totalPower(b) / myPow, 0, 4);
+      const tA = clamp(aiKnownPower(e,a) / myPow, 0, 4);
+      const tB = clamp(aiKnownPower(e,b) / myPow, 0, 4);
       let skor = (tA + tB) * .55;
 
       /* Aralarındaki yakınlık büyükse bozmak daha kıymetli */
-      const aralari = (typeof trustOf === 'function') ? trustOf(a, b.id) : 0;
-      if (a.ally[b.id]) skor += 1.4;                // ittifaklarını bozmak en kârlısı
+      const aralari = intelOf(e,a.id)>=3 ? trustOf(a,b.id) : 0;
+      if (intelOf(e,a.id)>=3&&a.ally[b.id]) skor += 1.4;                // ittifaklarını bozmak en kârlısı
       skor += clamp(aralari / 60, -.5, 1.0);
 
       /* Bana düşmansa onu birine bulaştırmak ekstra değerli */
@@ -1457,8 +1529,7 @@ function whisperTarget(e){
         if (personaOf(b).n === 'Militarist') skor += .45;
       }
       /* Sınır komşusu olmayan ikiliyi kavga ettirmek zordur */
-      const komsu = G.sys.some(sy => sy.owner === a.id &&
-        sy.lanes.some(l => G.sys[l].owner === b.id));
+      const komsu = aiKnownSystems(e,a.id).some(sy=>sy.lanes.some(l=>aiKnownSystem(e,G.sys[l])?.owner===b.id));
       if (!komsu) skor -= .8;
 
       if (!best || skor > best.skor) best = {a, b, skor};
@@ -1611,7 +1682,7 @@ function pickBlameTarget(e, a, b){
   if (typeof hasCivic === 'function' && hasCivic(e, 'shadow')) egilim += .55;
   if (P){
     if (P.n === 'Tüccar')            egilim += .42;
-    else if (P.n === 'İzolasyonist') egilim += .26;
+    else if (P.n === 'Fanatik Arındırıcılar') egilim += .26;
     else if (P.n === 'Pasifist')     egilim += .22;
     else if (P.n === 'Militarist')   egilim -= .10;   // dolambaçlı yolu sevmez
   }
@@ -1619,7 +1690,7 @@ function pickBlameTarget(e, a, b){
 
   const cands = G.emps.filter(o => !o.dead && !o.wild &&
     o.id !== e.id && o.id !== a.id && o.id !== b.id &&
-    a.contact[o.id] && b.contact[o.id] && !e.ally[o.id]);
+    e.contact[o.id] && intelOf(e,a.id)>=3 && intelOf(e,b.id)>=3 && a.contact[o.id] && b.contact[o.id] && aiOpPolicy(e,o,'whisperFrame'));
   if (!cands.length) return null;
 
   let best = null;
@@ -1629,14 +1700,13 @@ function pickBlameTarget(e, a, b){
     /* Kurbanlar ondan zaten hoşlanmıyorsa suç kolay yapışır */
     skor += clamp((-a.rel[o.id] - b.rel[o.id]) / 160, -.25, .90);
     /* Kârlılık: güçlü bir rakibi düşman etmek işimize gelir */
-    skor += clamp(totalPower(o) / (totalPower(e) + 1), 0, 3) * .28;
+    skor += clamp(aiKnownPower(e,o) / (totalPower(e) + 1), 0, 3) * .28;
     if (typeof grudgeOf === 'function') skor += grudgeOf(e, o.id) / 140;
     /* Komşuluk iftirayı inandırıcı kılar */
-    const komsu = G.sys.some(sy => sy.owner === o.id &&
-      sy.lanes.some(l => G.sys[l].owner === a.id || G.sys[l].owner === b.id));
+    const komsu = aiKnownSystems(e,o.id).some(sy=>sy.lanes.some(l=>[a.id,b.id].includes(aiKnownSystem(e,G.sys[l])?.owner)));
     if (komsu) skor += .30;
     /* Harika inşa eden devlet zaten şüphe çeker — günah keçisi olmaya hazır */
-    if (typeof megaBuilds === 'function' && megaBuilds(o).length) skor += .35;
+    if (typeof megaBuilds === 'function' && megaBuilds(o).some(w=>aiView(e).ctx.visible.has(w.sys.id))) skor += .35;
     if (!best || skor > best.skor) best = {o, skor};
   }
   return (best && best.skor > .70) ? best.o : null;
@@ -1818,7 +1888,7 @@ function aiPickStruct(e, sys){
       let hirs = .30 + prof.sci * .35 + prof.eco * .20;
       if (P){
         if (P.n === 'Yayılmacı') hirs += .20;
-        else if (P.n === 'İzolasyonist') hirs -= .15;
+        else if (P.n === 'Fanatik Arındırıcılar') hirs -= .15;
         else if (P.n === 'Militarist') hirs -= .10;
       }
       if (typeof hasCivic === 'function' && hasCivic(e, 'megaeng')) hirs += .35;
@@ -1851,11 +1921,12 @@ function aiPickStruct(e, sys){
 function aiStructTarget(e, f){
   let best = null;
   for (const sy of G.sys){
-    if (sy.nest || sy.ruin) continue;                    // tehlikeli bölge
+    if(!aiView(e).ctx.known.has(sy.id))continue;
+    if (aiView(e).ctx.visible.has(sy.id)&&(sy.nest || sy.ruin)) continue;
     if (sy.work && sy.work.length) continue;             // zaten inşaat var
-    const sahip = sy.owner >= 0 ? sy.owner : (typeof claimOf === 'function' ? claimOf(sy) : -1);
+    const record=aiKnownSystem(e,sy);if(!record)continue;const sahip=record.owner;
     if (sahip >= 0 && sahip !== e.id) continue;          // yabancı toprak
-    if (!aiPickStruct(e, sy)) continue;
+    if (!aiPickStruct(e, sy)||!aiKnownRoute(e,f,f.sys,sy.id)) continue;
     const d = (f.sys >= 0) ? dist(G.sys[f.sys], sy) : 0;
     /* Kendi sistemimiz tercih edilir, uzaklık cezalandırılır */
     const skor = (sy.owner === e.id ? 400 : 0) - d;
@@ -1902,7 +1973,7 @@ function aiStructTick(){
       let hirs0 = .30 + prof0.sci * .35 + prof0.eco * .20;
       if (P0){
         if (P0.n === 'Yayılmacı') hirs0 += .20;
-        else if (P0.n === 'İzolasyonist') hirs0 -= .15;
+        else if (P0.n === 'Fanatik Arındırıcılar') hirs0 -= .15;
         else if (P0.n === 'Militarist') hirs0 -= .10;
       }
       /* Hırs bir kez belirlenir ve kalıcıdır — her ay zar atılmaz */
@@ -1917,7 +1988,7 @@ function aiStructTick(){
 
     /* 1) Yerinde bekleyen inşaatçı varsa yapıyı kur */
     for (const f of builders){
-      if (f.sys < 0 || (f.path && f.path.length) || f.mv || f.combat) continue;
+      if (f.sys < 0 || (f.path && f.path.length) || f.mv || f.combat || f.building!==undefined || f.ships.some(s=>s.busy!==undefined)) continue;
       const sys = G.sys[f.sys];
       const key = aiPickStruct(e, sys);
       if (key && startStruct(e, sys, key, f)) break;      // ayda bir inşaat
@@ -1926,15 +1997,15 @@ function aiStructTick(){
     /* 2) Boştaki inşaatçıya hedef ata */
     for (const f of G.fleets){
       if (f.e !== e.id || !fleetHasRole(f, 'insaat')) continue;
-      if ((f.path && f.path.length) || f.mv || f.combat) continue;
+      if ((f.path && f.path.length) || f.mv || f.combat || f.building!==undefined) continue;
       if (f.sys >= 0 && aiPickStruct(e, G.sys[f.sys])) continue;   // zaten uygun yerde
       const hedef = aiStructTarget(e, f);
       if (hedef && hedef.id !== f.sys && typeof orderMove === 'function')
-        orderMove(f, hedef.id);
+        aiMove(e,f,hedef.id);
     }
 
     /* 3) İnşaatçı yoksa ve ekonomi elveriyorsa üret */
-    if (builders.length < 2 && (e.res.min || 0) > 700 && (e.res.ala || 0) > 260){
+    if (builders.length+G.sys.reduce((n,s)=>n+(s.queue||[]).filter(q=>q.e===e.id&&q.cls==='ins').length,0) < 2 && (e.res.min || 0) > 700 && (e.res.ala || 0) > 260){
       const yard = G.sys.find(sy => sy.owner === e.id &&
         typeof hasYard === 'function' && hasYard(sy) &&
         (!sy.queue || sy.queue.length < 3));
@@ -2109,7 +2180,29 @@ function aiDisbandTick(){
 /* 87B: Standart operasyonların uygunluğu yürütmeyle aynı saf kapıdan.
    Mevcut %40 rezerv politikası GERÇEK (doktrin/etik dahil) maliyet üzerindedir.
    Puan, kota, risk ve fırsat zarını değiştirmez; RNG tüketmez. */
+/* Selection policy only. Player operation execution/quotes remain unchanged. */
+function aiOperationClass(key){
+  return ['filoPlan','kervan','sorusturma','ambargoKir'].includes(key)?'passive':
+    ['calTech','stealTech','yalan'].includes(key)?'active':'hostile';
+}
+function aiOpPolicy(e,o,key){
+  const kind=aiOperationClass(key),war=!!e.war[o.id],rel=e.rel[o.id]||0;
+  const protectedPair=protectedDiplomaticPair(e,o),kin=grudgeOf(e,o.id);
+  if(kind==='passive')return true;
+  if(protectedPair||(!war&&rel>35))return false;
+  if(kind==='active')return war||rel<=20;
+  return war||rel<-25&&kin>=15;
+}
+function aiPassiveIntel(e){
+  if((e._aiSpyNext||0)>G.day||spiesUsed(e)>=spyCap(e))return;
+  const candidates=G.emps.filter(o=>o!==e&&!o.dead&&!o.wild&&!o.crisisSide&&e.contact[o.id]&&
+    intelOf(e,o.id)<3&&!(e.spy&&e.spy[o.id])&&spyAssignQuote(e,o.id).ok);
+  candidates.sort((a,b)=>(Number(!!e.war[b.id])*100+grudgeOf(e,b.id)+3-intelOf(e,b.id))-
+    (Number(!!e.war[a.id])*100+grudgeOf(e,a.id)+3-intelOf(e,a.id))||a.id-b.id);
+  if(candidates[0]&&assignSpy(e,candidates[0].id))e._aiSpyNext=G.day+90;
+}
 function aiStandardOpReady(e, o, key){
+  if(!aiOpPolicy(e,o,key))return false;
   const q = opQuote(e, o, key);
   return q.ok && Object.keys(q.cost).every(r =>
     (e.res[r] || 0) >= q.cost[r] * 1.4);
@@ -2128,18 +2221,20 @@ function aiPickOp(e, o){
 
   const puan = {};
   const ekle = (k, v) => {
+    if(!aiOpPolicy(e,o,k))return;
     if (k === 'stealTech' || k === 'incite'){ puan[k] = (puan[k] || 0) + v; return; }
     if (OPS[k] && lvl >= OPS[k].lvl) puan[k] = (puan[k] || 0) + v;
   };
 
   /* Teknoloji açığı varsa çalmak en kârlısı */
   const benimTek = Object.keys(e.techs || {}).length;
-  const onunTek  = Object.keys(o.techs || {}).length;
+  const onunTek  = Object.keys(aiKnownTechs(e,o)).length;
   if (onunTek > benimTek + 2) ekle('calTech', 1.2 + (onunTek - benimTek) * .05);
   ekle('calTech', prof.sci * .5);
 
   /* Fakirsem hazine baskını */
-  const zenginlik = (o.res.min || 0) + (o.res.ene || 0) + (o.res.ala || 0) * 2;
+  const resources=aiKnownResources(e,o);
+  const zenginlik = (resources.min || 0) + (resources.ene || 0) + (resources.ala || 0) * 2;
   const benimZ = (e.res.min || 0) + (e.res.ene || 0) + (e.res.ala || 0) * 2;
   if (zenginlik > benimZ * 1.4) ekle('hazine', .9 + prof.eco * .5);
 
@@ -2189,7 +2284,7 @@ function aiPickOp(e, o){
   /* ═══ FAZ 42: İSYANI KIŞKIRT ═══
      Sinsi AI'lar düşmanı içeriden bölmeyi sever. Hedefin sınır
      dünyası ne kadar kırılgansa istek o kadar büyür. */
-  if (typeof canIncite === 'function' && lvl >= 2){
+  if (typeof canIncite === 'function' && lvl >= 3 && aiOpPolicy(e,o,'incite')){
     const chk = canIncite(e, o);
     if (chk.ok && chk.hedef){
       const col = chk.hedef.pl.col;
@@ -2212,7 +2307,7 @@ function aiPickOp(e, o){
         else ist -= .60;
       }
       if (typeof hasCivic === 'function' && hasCivic(e, 'shadow')) ist += .40;
-      if (mz === 'İzolasyonist') ist += .25;
+      if (mz === 'Fanatik Arındırıcılar') ist += .25;
       if (prof.dip > .55) ist += .20;
       /* Savaştaysak daha da cazip */
       if (e.war[o.id]) ist += .30;
@@ -2242,12 +2337,12 @@ function aiPickOp(e, o){
   /* FAZ 30: Teknoloji hırsızlığı — bilim açığı varsa en kârlı yol */
   if (typeof stealTech === 'function' && lvl >= 2){
     let acik = 0;
-    for (const id in (o.techs || {}))
+    for (const id in aiKnownTechs(e,o))
       if (!(e.techs && e.techs[id]) && typeof TECHS !== 'undefined' && TECHS[id]) acik++;
     if (acik >= 3){
       let ist = .45 + Math.min(.5, acik * .05);
       if (prof.sci > .6) ist += .25;
-      if (mz === 'İzolasyonist') ist += .15;
+      if (mz === 'Fanatik Arındırıcılar') ist += .15;
       ekle('stealTech', ist);
     }
   }
@@ -2261,7 +2356,7 @@ function aiPickOp(e, o){
     iftira += (e.hitLog || []).filter(w => w.known && w.framed !== undefined).length * 2;
     /* Hedefe atılmış iftira (onu temize çıkarıp dost kazanırım) */
     for (const v of G.emps){
-      if (v.dead || v.wild || v.id === e.id) continue;
+      if (v.dead || v.wild || v.id === e.id || intelOf(e,v.id)<3) continue;
       iftira += (v.hitLog || []).filter(w => w.known && w.by === o.id &&
         w.framed !== undefined).length;
     }
@@ -2280,24 +2375,24 @@ function aiPickOp(e, o){
   if (OPS.sahteKanit && lvl >= 2){
     let acikDosya = 0;
     for (const v of G.emps){
-      if (v.dead || v.wild || v.id === e.id || v.id === o.id) continue;
+      if (v.dead || v.wild || v.id === e.id || v.id === o.id || intelOf(e,v.id)<3) continue;
       if (!v.contact[o.id]) continue;
       acikDosya += (v.hitLog || []).filter(w => !w.known).length;
     }
     if (acikDosya){
       let ist = .55 + Math.min(.5, acikDosya * .08);
       if (mz === 'Tüccar') ist += .25;
-      else if (mz === 'İzolasyonist') ist += .20;
+      else if (mz === 'Fanatik Arındırıcılar') ist += .20;
       else if (mz === 'Militarist') ist -= .15;
       if (typeof hasCivic === 'function' && hasCivic(e, 'shadow')) ist += .40;
       /* Güçlü bir rakibi galaksiye düşman etmek en kârlısı */
-      if (totalPower(o) > totalPower(e)) ist += .25;
+      if (aiKnownPower(e,o) > totalPower(e)) ist += .25;
       ekle('sahteKanit', ist);
     }
   }
 
   /* Zayıfsam sahte istihbarat ve isyan; güçlüysem suikast */
-  const oran = totalPower(e) / (totalPower(o) + 1);
+  const oran = totalPower(e) / (aiKnownPower(e,o) + 1);
   if (oran < .8) ekle('yalan', 1.0);
   if (kin > 50) ekle('isyan', .7 + kin / 150);
   if (kin > 60 && oran > 1.1) ekle('suikast', .6 + kin / 180);
@@ -2305,7 +2400,7 @@ function aiPickOp(e, o){
   /* Mizaç eğilimleri */
   if (mz === 'Tüccar'){ ekle('hazine', .45); ekle('kervan', .5); ekle('ambargoKir', .4); }
   if (mz === 'Militarist'){ ekle('sabotaj', .5); ekle('filoPlan', .4); }
-  if (mz === 'İzolasyonist'){ ekle('yalan', .4); ekle('tersaneVir', .3); }
+  if (mz === 'Fanatik Arındırıcılar'){ ekle('yalan', .4); ekle('tersaneVir', .3); }
   if (mz === 'Pasifist'){ ekle('calTech', .35); ekle('yalan', .3); }
   if (typeof hasCivic === 'function' && hasCivic(e, 'shadow')){
     for (const k in puan) puan[k] *= 1.35;         // Gölge Konseyi her operasyonda usta
@@ -2315,7 +2410,7 @@ function aiPickOp(e, o){
      AI aynı hedefe defalarca aynı operasyonu yapıp etkiyi çöpe
      atıyordu (ölçüm: Tersane Virüsü tüm operasyonların %48'i).
      Süreli etkiler bitmeden yenisi önerilmez. */
-  if (o.virusUntil && o.virusUntil > G.day) delete puan.tersaneVir;
+  if (lvl>=3 && o.virusUntil && o.virusUntil > G.day) delete puan.tersaneVir;
   if (e.fleetIntel && e.fleetIntel[o.id] > G.day) delete puan.filoPlan;
   if (e.routeIntel && e.routeIntel[o.id] > G.day) delete puan.kervan;
   if (e.fakeTo && e.fakeTo[o.id] && e.fakeTo[o.id].until > G.day) delete puan.yalan;
@@ -2357,6 +2452,7 @@ function aiOpsTick(){
     if (e.dead || e.wild || !e.ai) continue;
     /* FAZ 43: süresi dolan hedef kilidini bırak */
     if (e._lockTarget && e._lockTarget.until <= (G.memAge || 0)) delete e._lockTarget;
+    aiPassiveIntel(e);
     if ((e.res.etk || 0) < 40) continue;
 
     /* Operasyon sıklığı: diplomatik beceri ve mizaç belirler */
@@ -2365,7 +2461,7 @@ function aiOpsTick(){
     if (typeof hasCivic === 'function' && hasCivic(e, 'shadow')) sans *= 2.2;
     if (typeof personaOf === 'function'){
       const P = personaOf(e);
-      if (P.n === 'İzolasyonist') sans *= 1.3;
+      if (P.n === 'Fanatik Arındırıcılar') sans *= 1.3;
       else if (P.n === 'Militarist') sans *= .7;
     }
     /* ═══ FAZ 50: AHLAK EKSENİ OPERASYON İŞTAHINA BAĞLANDI ═══
@@ -2388,7 +2484,7 @@ function aiOpsTick(){
 
     /* Hedef: temas kurulmuş, müttefik olmayan devletler */
     const adaylar = G.emps.filter(o => !o.dead && !o.wild && o.id !== e.id &&
-      e.contact[o.id] && !e.ally[o.id]);
+      e.contact[o.id]);
     if (!adaylar.length) continue;
 
     /* En yüksek istihbarata sahip olduğum ve en çok kin duyduğum hedef */
@@ -2401,6 +2497,7 @@ function aiOpsTick(){
     for (const o of adaylar.slice(0, 4)){
       const key = aiPickOp(e, o);
       if (!key) continue;
+      e.aiLastOp={day:G.day,target:o.id,key,kind:aiOperationClass(key),reason:e.war[o.id]?'Mevcut savaş':aiOperationClass(key)==='passive'?'Bilgi açığı':'Düşmanca ilişki ve stratejik ihtiyaç'};
       const r = (key === 'stealTech' && typeof stealTech === 'function')
         ? stealTech(e, o)
         : (key === 'incite' && typeof inciteRebellion === 'function')
@@ -2599,6 +2696,7 @@ function aiArmyTick(){
       if (!hedef && savasta){
         let enIyi = -1, sinir = null;
         for (const sy of G.sys){
+          if(!aiView(e).ctx.visible.has(sy.id)&&sy.owner!==e.id)continue;
           if (sy.owner !== e.id) continue;
           /* Bu sistem düşman bölgesine komşu mu? */
           let komsuDusman = 0;
@@ -2650,7 +2748,7 @@ function aiArmyTick(){
       }
 
       if (hedef && hedef.id !== ordu.sys && typeof orderMove === 'function'){
-        orderMove(ordu, hedef.id);
+        aiMove(e,ordu,hedef.id);
         ordu.ord = null;
       }
     }
@@ -2685,6 +2783,7 @@ function aiColossusTick(){
        Artık hedef ararken de soğuk düşmanlık geçerli. */
     let hedef = null, enIyi = -1;
     for (const sy of G.sys){
+          if(!aiView(e).ctx.visible.has(sy.id)&&sy.owner!==e.id)continue;
       let deger = 0;
       for (const pl of sy.planets){
         if (!pl.col || pl.owner < 0 || pl.owner === e.id || pl.shattered) continue;
@@ -2779,7 +2878,7 @@ function aiColossusTick(){
         continue;                       // Colossus bu ay hareket etmez
       }
 
-      orderMove(f, hedef.id);
+      aiMove(e,f,hedef.id);
       f.ord = null;
       /* SIÇRAMA MOTORU — Colossus hızı 1.1 (en yavaş gemi).
          Ateşleme emri alınca üç kat hızlanır. */
@@ -2850,7 +2949,7 @@ function aiFalseFlagTick(){
     const P = (typeof personaOf === 'function') ? personaOf(e) : null;
     const mz = P ? P.n : '';
     let sans = .03;
-    if (mz === 'İzolasyonist') sans += .03;
+    if (mz === 'Fanatik Arındırıcılar') sans += .03;
     if (typeof hasCivic === 'function' && hasCivic(e, 'shadow')) sans += .05;
     if (prof.dip > .6) sans += .02;
     if (rnd() > sans) continue;
@@ -2859,7 +2958,7 @@ function aiFalseFlagTick(){
     const hedefler = G.emps.filter(o => !o.dead && !o.wild && !o.crisisSide &&
       o.id !== e.id && e.contact[o.id] &&
       (typeof intelOf === 'function' ? intelOf(e, o.id) : 0) >= 2 &&
-      !(e.ally && e.ally[o.id]));
+      aiOpPolicy(e,o,'falseFlag'));
     if (!hedefler.length) continue;
 
     /* Günah keçisi: hedefin ZATEN nefret ettiği üçüncü devlet.
@@ -2870,7 +2969,7 @@ function aiFalseFlagTick(){
         if (p2.dead || p2.wild || p2.crisisSide) continue;
         if (p2.id === e.id || p2.id === t.id) continue;
         if (!e.contact[p2.id]) continue;
-        if (e.ally && e.ally[p2.id]) continue;          // dostumuzu yakmayız
+        if (!aiOpPolicy(e,p2,'falseFlag')||intelOf(e,t.id)<3) continue;
         const husumet = -(t.rel[p2.id] || 0);
         if (husumet < 25) continue;                     // inandırıcı değil
         /* İkisi de bize düşmansa birbirine düşürmek en kârlısı */
@@ -3097,7 +3196,7 @@ function aiStatusQuoTick(){
       istek -= kayip * .35;               // kaybettiğimi kabullenmek zor
 
       /* Kazanan taraf savaşı sürdürmek ister */
-      const gucOran = totalPower(e) / Math.max(1, totalPower(o));
+      const gucOran = totalPower(e) / Math.max(1, aiKnownPower(e,o));
       istek -= clamp((gucOran - 1) * .35, -.4, .5);
 
       /* Mizaç */
@@ -3116,7 +3215,7 @@ function aiStatusQuoTick(){
 
       /* Karşı taraf da kabul etmeli */
       let karsi = clamp((((o.exh && o.exh[e.id]) || 0) - 60) / 60, 0, 1) * .7;
-      karsi -= clamp((totalPower(o) / Math.max(1, totalPower(e)) - 1) * .35, -.4, .5);
+      karsi -= clamp((aiKnownPower(e,o) / Math.max(1, totalPower(e)) - 1) * .35, -.4, .5);
       if (o.id === 0){
         /* Oyuncuya teklif edilir — karar onun */
         if (typeof UI !== 'undefined' && UI.notify){
@@ -3173,6 +3272,7 @@ function aiForwardBaseTick(){
        ya da bizim, üzerinde henüz yapı yok. */
     let aday = null, enIyi = 1e9;
     for (const sy of G.sys){
+          if(!aiView(e).ctx.visible.has(sy.id)&&sy.owner!==e.id)continue;
       if (sy.owner >= 0 && sy.owner !== e.id) continue;
       const mesafe = supplyDistance(e, {sys: sy.id, ships: [1], e: e.id});
       if (mesafe > 3) continue;                    // ulaşamayacağımız yer
@@ -3271,7 +3371,7 @@ function aiIntelPactTick(){
 
     const P = (typeof personaOf === 'function') ? personaOf(e) : null;
     /* İzolasyonist kimseye ağını açmaz */
-    if (P && P.n === 'İzolasyonist') continue;
+    if (P && P.n === 'Fanatik Arındırıcılar') continue;
 
     for (const o of G.emps){
       if (o.dead || o.wild || o.crisisSide || o.id === e.id) continue;
@@ -3332,7 +3432,7 @@ function aiSubmitTick(){
 
   for (const e of G.emps){
     if (e.dead || e.wild || e.crisisSide || !e.ai) continue;
-    if (isVassal(e)) continue;
+    if (isVassal(e)||(e.res.etk||0)<VASSAL_SEEK_COST) continue;
     if (typeof isPurifier === 'function' && isPurifier(e)) continue;  // FAZ 73
     if (e._submitCd && e._submitCd > (G.memAge || 0)) continue;
     if (typeof vassalsOf === 'function' && vassalsOf(e).length) continue;
@@ -3346,7 +3446,7 @@ function aiSubmitTick(){
     for (const o of G.emps){
       if (o.dead || o.wild || o.crisisSide || o.id === e.id) continue;
       if (!e.war[o.id]) continue;
-      const g = totalPower(o);
+      const g = aiKnownPower(e,o);
       if (g > gucum * 1.8 && g > enGuc){ enGuc = g; tehdit = o; }
     }
     if (!tehdit){
@@ -3354,7 +3454,7 @@ function aiSubmitTick(){
         if (o.dead || o.wild || o.crisisSide || o.id === e.id) continue;
         if (!e.contact[o.id]) continue;
         if ((e.rel[o.id] || 0) > -20) continue;
-        const g = totalPower(o);
+        const g = aiKnownPower(e,o);
         if (g > gucum * 2.6 && g > enGuc){ enGuc = g; tehdit = o; }
       }
     }
@@ -3366,17 +3466,20 @@ function aiSubmitTick(){
       if (o.id === tehdit.id || e.war[o.id]) continue;
       if (!e.contact[o.id]) continue;
       if (isVassal(o)) continue;
-      const g = totalPower(o);
+      const access=aiProtection(e,o);if(!access.ok)continue;
+      const g = aiKnownPower(e,o);
       if (g < gucum * 1.6) continue;
       let puan = g / 1000;
       puan += (e.rel[o.id] || 0) * .04;
-      if (o.war[tehdit.id]) puan += 12;
+      if (aiKnownWar(e,o,tehdit)) puan += 12;
+      puan-=access.eta/30;
       if (e.ally && e.ally[o.id]) puan += 8;
       if (puan > enIyi){ enIyi = puan; hami = o; }
     }
     if (!hami) continue;
 
     e._submitCd = (G.memAge || 0) + 60;
+    e.aiProtectionReason=aiProtection(e,hami);
 
     if (hami.id === 0){
       if (typeof UI !== 'undefined' && UI.notify)
@@ -3389,12 +3492,13 @@ function aiSubmitTick(){
     const P = (typeof personaOf === 'function') ? personaOf(hami) : null;
     let kabul = .55;
     if (P && P.n === 'Militarist') kabul += .25;
-    if (P && P.n === 'İzolasyonist') kabul -= .30;
+    if (P && P.n === 'Fanatik Arındırıcılar') kabul -= .30;
     if (P && P.n === 'Pasifist') kabul -= .10;
-    if (hami.war[tehdit.id]) kabul += .25;
+    if (aiKnownWar(e,hami,tehdit)) kabul += .25;
     if (rnd() > clamp(kabul, .1, .9)) continue;
 
-    subjugate(hami, e, 'bekci');
+    if(!subjugate(hami,e,'bekci'))continue;
+    e.res.etk-=VASSAL_SEEK_COST;
     e.rel[hami.id] = clamp((e.rel[hami.id] || 0) + 25, -100, 100);
     e._submitted = true;
     if (G.p && !G.p.dead && G.p.contact && G.p.contact[e.id])

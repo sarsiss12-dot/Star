@@ -5,7 +5,7 @@ let pass=0,fail=0;function test(n,f){try{f();pass++;console.log('✓ '+n);}catch
 const sum=(r,field,classes)=>r.empires.reduce((n,e)=>n+classes.reduce((a,k)=>a+(e[field][k]||0),0),0),mil=['kor','muh','kru','zir','esk'],after={};
 for(const seed of [11,99,404]){
  const before=JSON.parse(fs.readFileSync(path.join(dir,`before-${seed}.json`),'utf8'));
- const r=after[seed]=campaign(root,seed);fs.writeFileSync(path.join(__dirname,`navy-94d1-after-${seed}.json`),JSON.stringify(r,null,2));
+ const r=after[seed]=campaign(root,seed);fs.writeFileSync(path.join(__dirname,`navy-95a-after-${seed}.json`),JSON.stringify(r,null,2));
  test(seed+': real 120 months, bounded science, stronger navy, no negative resources',()=>{
   assert.equal(r.months,120);assert.equal(r.stopped,false);assert.deepEqual(r.negative,[]);assert.ok(sum(r,'orders',mil)>sum(before,'orders',mil)*3);assert.ok(sum(r,'orders',['bil'])<sum(before,'orders',['bil'])*.5);assert.ok(r.empires.every(e=>e.redundantScienceOrders===0));
  });

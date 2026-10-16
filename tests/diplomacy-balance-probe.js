@@ -29,9 +29,9 @@ function scenario({root=path.resolve(__dirname,'..'),seed=11,months=360,contact=
  const originalRespond=aiRespond;
  aiRespond=function(ai,off){const r=originalRespond(ai,off);if(offerContext)offerContext.response={v:r.v,net:r.ev&&r.ev.net,cost:r.ev&&r.ev.cost,gain:r.ev&&r.ev.gain,why:r.why};return r;};
  const originalNeg=aiNegotiate;
- aiNegotiate=function(p,t,g,w){
+ aiNegotiate=function(p,t,g,w,...extra){
   const rec={month,from:p.id,to:t.id,give:JSON.parse(JSON.stringify(g)),want:JSON.parse(JSON.stringify(w)),rel:p.rel[t.id],otherRel:t.rel[p.id]};
-  const previous=offerContext;offerContext=rec;let r;try{r=originalNeg(p,t,g,w);}finally{offerContext=previous;}
+  const previous=offerContext;offerContext=rec;let r;try{r=originalNeg(p,t,g,w,...extra);}finally{offerContext=previous;}
   rec.result=JSON.parse(JSON.stringify(r));records.push(rec);metrics.calls++;metrics.maxTurns=Math.max(metrics.maxTurns,r.tur);
   totals[r.karar]=(totals[r.karar]||0)+1;
   const kind=(g.find(it=>['pact','ally','nap'].includes(it.t))||g[0]||{}).t||'other';

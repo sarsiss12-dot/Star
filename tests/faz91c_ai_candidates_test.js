@@ -14,7 +14,7 @@ function fresh(player=false,onlyWild=false){
  for(const o of G.emps){e.contact[o.id]=true;e.rel[o.id]=100;}for(const k in e.res)e.res[k]=1000;}
  E._prof={war:0,exp:.2,sci:.2,eco:1,dip:1,turtle:0};
  var calls=[],offers=[],gate=[],oldNeg=aiNegotiate,oldOffer=UI.aiOffer,oldPact=canPact,oldAlly=canAlly;
- aiNegotiate=function(a,b,g,w){var r=oldNeg(a,b,g,w);calls.push({to:b.id,type:g.map(x=>x.t),result:r});return r;};
+ aiNegotiate=function(a,b,g,w,...extra){var r=oldNeg(a,b,g,w,...extra);calls.push({to:b.id,type:g.map(x=>x.t),result:r});return r;};
  UI.aiOffer=function(o){offers.push(o);return oldOffer.call(this,o);};
  canPact=function(a,b){gate.push({t:'pact',to:b.id});return oldPact(a,b);};
  canAlly=function(a,b){gate.push({t:'ally',to:b.id});return oldAlly(a,b);};
