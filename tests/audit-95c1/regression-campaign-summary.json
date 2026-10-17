@@ -1,0 +1,38 @@
+{
+  "method": "Fresh faz93d1_navy_campaign_test executions in this phase: dailyTick/structTick/colonyBuildTick/autoExploreTick each 0.5 day + monthly ticks, 120 months. Five observed AI empires. Not a separate 95C versus 95C.1 federation-war comparison.",
+  "runs": [
+    {
+      "seed": 11,
+      "months": 120,
+      "stopped": false,
+      "orders": 269,
+      "completed": 260,
+      "losses": 257,
+      "zeroEnergySamples": 38,
+      "zeroAlloySamples": 0,
+      "negativeResourceSamples": 0
+    },
+    {
+      "seed": 99,
+      "months": 120,
+      "stopped": false,
+      "orders": 360,
+      "completed": 356,
+      "losses": 152,
+      "zeroEnergySamples": 0,
+      "zeroAlloySamples": 0,
+      "negativeResourceSamples": 0
+    },
+    {
+      "seed": 404,
+      "months": 120,
+      "stopped": false,
+      "orders": 331,
+      "completed": 326,
+      "losses": 89,
+      "zeroEnergySamples": 0,
+      "zeroAlloySamples": 0,
+      "negativeResourceSamples": 0
+    }
+  ]
+}

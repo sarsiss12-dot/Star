@@ -27,22 +27,24 @@ const UI = {
       states={gather:'Toplanıyor',march:'Yola çıktı',defend:'Savunuyor',done:'Görev tamamlandı',cancelled:'Görev iptal edildi'};
     const allies=G.emps.filter(o=>o.id!==e.id&&o.ai&&e.contact[o.id]&&jointBinding(e,o)&&
       (recipient===null||recipient===o.id));
-    if(!plans.length&&!allies.length)return '';
     const fleet=View.sel&&View.sel.e===e.id&&isArmed(View.sel)?View.sel:null;
     const sys=View.selSys&&View.selSys.seen.includes(e.id)?View.selSys:null;
     let h=`<details class="dcDetails jointOps" data-surface="${surface}" data-recipient="${recipient??''}" ${expanded?'open':''} style="overflow-wrap:anywhere;max-width:100%"><summary style="min-height:44px;padding:10px 0">⚔ Ortak askerî koordinasyon</summary>
-      <div class="mini">Bu emirler destek talebidir. Müttefik yalnız aynı kabul edilmiş savaş seferinde, kendi savunması, ikmali ve gerçek filoları uygunsa katılır. Filo ve sistem hedefini haritadan seçebilirsin.</div>`;
+      <div class="mini">Bu emirler destek talebidir; yabancı filoların kontrolü müttefikte kalır. 1. Haritadan kendi savaş filonu veya bilinen sistemi seç. 2. Aşağıdan müttefik ve talep türünü seç. 3. Hedefi incele ve talebi gönder. Müttefik yalnız aynı kabul edilmiş savaş seferinde, savunması ve ikmali uygunsa katılır.</div>
+      <button class="abtn" data-a="jointChooseTarget">HARİTADAN FİLO / SİSTEM SEÇ</button>
+      ${allies.length?'':'<div class="mini">Uygun askerî destek bağı bulunan, tanıdığın AI müttefik yok. İttifak / federasyon tek başına aynı savaşa katılım sayılmaz.</div>'}`;
     if(this._jointFeedback)h+=`<div class="box" role="status">${esc(this._jointFeedback)}</div>`;
     for(const o of allies){
       const shared=(G.warLedger?.fronts||[]).some(f=>f.ended===null&&f.sides.includes(e.id)&&warLedgerPair(...f.sides)&&
         jointContext(f.campaign,f.roles[f.sides.indexOf(e.id)],e.id,f.sides.find(id=>id!==e.id))?.members.includes(o.id));
-      if(!shared)continue;
+      if(!shared){h+=`<div class="box"><b>${esc(o.name)}</b><div class="mini">Aynı geçerli savaş seferinde değil; talep gönderilemez.</div></div>`;continue;}
       const known=sys&&aiKnownSystem(e,sys),enemy=known&&e.war[known.owner];
       h+=`<div class="box"><b>${esc(o.name)}</b><div class="act2">
-        <button class="abtn" style="min-height:44px;white-space:normal" data-a="jointRequest" data-x="${o.id}:follow:${fleet?fleet.id:-1}" ${fleet?'':'disabled'}>FİLOMU DESTEKLE</button>
-        <button class="abtn" style="min-height:44px;white-space:normal" data-a="jointRequest" data-x="${o.id}:capture:${sys?sys.id:-1}" ${enemy?'':'disabled'}>SİSTEMİ ELE GEÇİR</button>
-        <button class="abtn" style="min-height:44px;white-space:normal" data-a="jointRequest" data-x="${o.id}:defend:${sys?sys.id:-1}" ${known&&known.owner>=0&&jointBinding(e,G.emps[known.owner])?'':'disabled'}>BÖLGEYİ SAVUN</button>
-      </div><div class="mini">Filo: ${fleet?esc(fleet.name||'Seçili filo'):'kendi savaş filonu seç'} · Sistem: ${sys?esc(sys.name):'bilinen sistem seç'}</div></div>`;
+        <button class="abtn" style="min-height:44px;white-space:normal" data-a="jointPrepare" data-x="${o.id}:follow:${fleet?fleet.id:-1}" ${fleet?'':'disabled'}>FİLOMU DESTEKLE</button>
+        <button class="abtn" style="min-height:44px;white-space:normal" data-a="jointPrepare" data-x="${o.id}:capture:${sys?sys.id:-1}" ${enemy?'':'disabled'}>SİSTEMİ ELE GEÇİR</button>
+        <button class="abtn" style="min-height:44px;white-space:normal" data-a="jointPrepare" data-x="${o.id}:defend:${sys?sys.id:-1}" ${known&&known.owner>=0&&jointBinding(e,G.emps[known.owner])?'':'disabled'}>BÖLGEYİ SAVUN</button>
+      </div><div class="mini">Filo: ${fleet?esc(fleet.name||'Seçili filo'):'kendi savaş filonu seç'} · Sistem: ${sys?esc(sys.name):'bilinen sistem seç'}</div>
+      <div class="mini">${fleet?'':'Filoyu desteklemek için kendi savaş filonu seç. '}${enemy?'':'Ele geçirmek için bilinen düşman sistemi seç. '}${known&&known.owner>=0&&jointBinding(e,G.emps[known.owner])?'':'Savunmak için dost sistemi seç.'}</div></div>`;
     }
     for(const p of plans){
       if(recipient!==null&&!p.members.includes(recipient))continue;
@@ -58,6 +60,22 @@ const UI = {
     return h+'</details>';
   },
 
+  jointPrepare(x){
+    if(this._jointWorld!==G.sys)return;
+    const [id,kind,target]=String(x).split(':'),other=G.emps[+id];
+    if(!other||!['follow','capture','defend'].includes(kind))return;
+    const fleet=kind==='follow'?G.fleets.find(f=>f.id===+target&&f.e===G.p.id&&isArmed(f)):null;
+    const sys=kind==='follow'?null:G.sys[+target];
+    if(kind==='follow'?!fleet:!sys?.seen.includes(G.p.id))return;
+    const world=G.sys,player=G.p,token={};this._jointSendToken=token;
+    this.openModal(`<div class="mhd">MÜTTEFİK DESTEK TALEBİ</div><div class="mbd"><div class="row"><span>Müttefik</span><b>${esc(other.name)}</b></div>
+      <div class="row"><span>Talep</span><b>${{follow:'Filomu destekle',capture:'Sistemi ele geçir',defend:'Bölgeyi savun'}[kind]}</b></div>
+      <div class="row"><span>Hedef</span><b>${esc(fleet?.name||sys?.name||'Filo')}</b></div>
+      <div class="mini">Bu bir koordinasyon talebidir. Gönderildiğinde gerçek güç, rota, ikmal ve savaş yükümlülüğü yeniden değerlendirilir. Ret / hazırlık gerekçesi ortak askerî koordinasyon bölümünde görünür.</div></div>
+      <div class="mft"><button class="ch" data-a="jointSend">TALEBİ GÖNDER</button><button class="ch" data-a="closem">VAZGEÇ</button></div>`);
+    this._jointSendToken=token;
+    this._hook('jointSend',()=>{if(this._jointSendToken!==token||G.sys!==world||G.p!==player)return;this._jointSendToken=null;this.closeModal();this.act('jointRequest',x);});
+  },
   refreshJointPanels(){
     const pane=$('diploPane');if(!pane.classList.contains('show'))return;
     const block=pane.querySelector('.jointOps');if(!block)return;
@@ -81,11 +99,12 @@ const UI = {
     this.openModal(`<div class="mhd">FİLO BİLEŞİMİ · ${esc(f.name||'Filo')}</div><div class="mbd">
       <div class="mini">Her sınıfın hedef sayısını yaz. Toplam en fazla ${FLEET_TEMPLATE_LIMIT} gemi.
       Kaydetmek sipariş vermez. Tek takviye emri en fazla 30 gemi sipariş eder. Mevcut gemiler ve ödenmiş siparişler korunur; fazlalık varken yeni üretim yapılmaz.</div>
+      <div class="mini">Kilitli sınıfı gelecekteki hedef olarak yazabilirsin; araştırması açılmadan yeni üretime alınmaz. Sınıflar otomatik ikame edilmez. Başlangıç / eski kayıttaki mevcut gemiler korunur.</div>
       ${fleetTemplateClasses().map(c=>{const access=shipBuildAccess(G.p,c);return `<div class="box">
         <label for="fc-${c}" class="row"><span>${esc(SHIPS[c].n)}</span>
         <input id="fc-${c}" type="number" inputmode="numeric" min="0" max="${FLEET_TEMPLATE_LIMIT}" step="1"
           value="${counts[c]||0}" style="width:80px;min-height:44px;font-size:16px" aria-label="${esc(SHIPS[c].n)} hedef sayısı"></label>
-        ${access.ok?'':'<div class="mini">'+esc(access.why)+'</div>'}</div>`;}).join('')}
+        ${access.ok?'<div class="mini">Yeni üretime açık</div>':'<div class="mini">🔒 Yeni üretim kapalı · '+esc(access.why)+'</div>'}</div>`;}).join('')}
       <label style="display:flex;gap:10px;align-items:center;min-height:44px"><input id="fc-auto" type="checkbox"
         ${f.composition&&f.composition.auto?'checked':''}> Otomatik takviye</label>
       <div class="mini">Açıkken eksikler küçük partilerle tamamlanır. Kasa / donanma kapasitesi sınırında bekler.
@@ -100,7 +119,7 @@ const UI = {
       `<div class="box"><div class="bt"><span>${esc(SHIPS[x.cls].n)}</span><b>${x.current} / ${x.target}</b></div>
        <div class="mini">Üretimde / sırada: ${x.queued} · Yolda / bekliyor: ${x.inTransit}${x.waiting?' ('+x.waiting+' bekliyor)':''}</div>
        <div class="mini">Eksik: ${x.missing}${x.excess?' · Fazla: '+x.excess:''}${x.missing&&!x.buildable?' · '+esc(x.why):''}</div></div>`).join('')+
-      `<button class="abtn" style="min-height:44px" data-a="compositionAuto" data-x="${f.id}">OTOMATİK TAKVİYE: ${r.auto?'AÇIK':'KAPALI'}</button>
+      `<div class="mini">${esc(r.auto?(f.composition?.reason||'Otomatik takviye hazırlanıyor'):'Otomatik üretim kapalı')}</div><button class="abtn" style="min-height:44px" data-a="compositionAuto" data-x="${f.id}">OTOMATİK TAKVİYE: ${r.auto?'AÇIK':'KAPALI'}</button>
        <div class="mini">Otomatik üretim kasa / kapasite sınırında bekler. Siparişler ve bekleyen sevkiyatlar eksikten düşülür.</div>`;
   },
   shipmentMenu(f){
@@ -112,7 +131,7 @@ const UI = {
     for(const x of G.sys)if(x.seen.includes(0))choices.push({target:{sys:x.id},label:'Sistem: '+x.name});
     const speed=G.speed;
     this.openModal(`<div class="mhd">SEVKİYATI YÖNET</div><div class="mbd">
-      <div class="lead">${esc(shipmentStatus(f))}</div>
+      ${this.shipmentRow(f,false)}
       <div class="mini">İptal, tamamlanmış gemileri korur; kaynak iadesi yapmaz. Yolculuk başladıysa mevcut bacak tamamlanır. Yeni hedefe giden rota kapalıysa gemiler bekler.</div>
       <button class="abtn" data-a="shipmentApply" data-x="${token}:retry">YENİDEN DENE</button>
       <button class="abtn" data-a="shipmentApply" data-x="${token}:cancel">SEVKİYATI İPTAL ET</button>
@@ -120,6 +139,31 @@ const UI = {
       ${choices.map((c,i)=>`<button class="abtn" data-a="shipmentApply" data-x="${token}:${i}">${esc(c.label)}</button>`).join('')}
       </div><div class="mft"><button class="ch" data-a="closem">VAZGEÇ</button></div>`);
     this._shipmentPending={token,f,choices,speed,world:G.sys};
+  },
+  queueDeliveryText(sys,q){
+    const d=Object.hasOwn(q,'delivery')?q.delivery:sys.rally?.[q.e];
+    const target=d?.fleet!==undefined?G.fleets.find(f=>f.id===d.fleet&&f.e===q.e&&f.ships.length):null;
+    const label=d?.fleet!==undefined?(target?.name||'Hedef filo bulunamadı'):d?.sys!==undefined?(G.sys[d.sys]?.name||'Geçersiz sistem'):'Tersanede kalır';
+    const access=shipBuildAccess(G.emps[q.e],q.cls);
+    return 'Kaynak tersane: '+sys.name+' · Hedef: '+label+' · '+(access.ok?'Üretim sürüyor':access.why)+(d?.fleet!==undefined?' · Özel filo hedefi; genel ralli gerekmez':'');
+  },
+  shipmentRow(f,action=true){
+    const d=f.shipment||{},target=d.fleet??f.joinFleet,main=G.fleets.find(x=>x.id===target&&x.e===f.e&&x.ships.length);
+    const label=target!==undefined?(main?.name||'Hedef filo bulunamadı'):(G.sys[d.sys??f.rallyTo]?.name||'Geçersiz sistem');
+    return `<div class="box shipmentInfo"><div class="mini">Kaynak tersane: ${esc(G.sys[d.origin]?.name||'Eski kayıtta kaynak belirtilmemiş')} · Hedef: ${esc(label)}</div>
+      <div class="mini">${f.ships.length} gemi · ${esc(shipmentStatus(f))}</div>${action?`<button class="abtn" data-a="shipmentMenu" data-x="${f.id}">SEVKİYATI YÖNET</button><div class="mini">Yeniden dene · hedef değiştir · iptal et</div>`:''}</div>`;
+  },
+  reinforcementJobs(f){
+    let h='';
+    for(const sys of G.sys){
+      const groups=new Map();
+      for(const q of sys.queue||[]){const d=Object.hasOwn(q,'delivery')?q.delivery:sys.rally?.[f.e];
+        if(q.e!==f.e||d?.fleet!==f.id)continue;
+        const group=groups.get(q.cls)||{q,n:0};group.n++;groups.set(q.cls,group);
+      }
+      for(const {q,n} of groups.values())h+=`<div class="box"><b>${n} × ${esc(SHIPS[q.cls].n)}</b><div class="mini">${esc(this.queueDeliveryText(sys,q))}</div></div>`;
+    }
+    return h;
   },
   shipCancelDialog(sys,orders,all){
     const quote=shipCancellationQuote(G.p,sys,orders);
@@ -179,7 +223,7 @@ const UI = {
              title="Husumet ağı">🔥<span>Savaş</span></button>
            <div class="modeHdr" id="layerHdr">KATMANLAR (bağımsız)</div>
            <button class="tool warLinksBtn${WAR_LINKS_ON?' on':''}" id="warLinksBtn" data-a="warLinksToggle"
-             aria-pressed="${WAR_LINKS_ON}" title="Bilinen savaş bağlantıları — bağımsız aç/kapat">⚔<span>Savaşlar</span></button>
+             aria-pressed="${WAR_LINKS_ON}" title="Savaş bağlantı çizgileri — Savaşlar harita renginden bağımsız aç/kapat">⚔<span>Savaş hatları</span></button>
            <button class="tool logiBtn" id="logiBtn" data-a="logiToggle"
              title="İkmal hatları, menzil ve tedarik — ana moddan bağımsız aç/kapat">⚓<span>Lojistik</span></button>
            <button class="tool radarBtn" id="radarBtn" data-a="radarTog"
@@ -258,6 +302,7 @@ const UI = {
       window.visualViewport.addEventListener('resize', placeMenus, {passive:true});
       window.visualViewport.addEventListener('scroll', placeMenus, {passive:true});
     }
+    this.bindTopbarInput();
     this.tab('sistem');
   },
 
@@ -340,6 +385,7 @@ const UI = {
         this.openMarket();
         break;
       }
+      case 'topStatus': this.openTopStatus();break;
       case 'diploPane':
         if (typeof closeAllGroups === 'function') closeAllGroups();
         this.openDiplo(); break;
@@ -613,7 +659,7 @@ const UI = {
           siyasi   :'Kim nerede — devlet renkleri ve sınırlar',
           diplomasi:'Dost, düşman, tarafsız — bize göre duruş',
           askeri   :'İkmal hatları, menzil ve tedarik durumu',
-          savas    :'Kim kiminle savaşıyor — husumet ağı'
+          savas    :'Savaştaki devletlerin renkleri · bağlantı çizgileri için Savaş hatları düğmesi'
         }[x] || '';
         if (typeof this.mapToast === 'function') this.mapToast(ad, aciklama);
         else say('🗺 ' + ad + ' harita modu');
@@ -1180,6 +1226,13 @@ const UI = {
         this.refresh();
         break;
       }
+      case 'jointPrepare': this.jointPrepare(x);break;
+      case 'jointChooseTarget':
+        $('diploPane').classList.remove('show');this.closeModal();
+        View.route=false;View.routed=false;
+        this._jointExpanded={fleet:true,system:true,fed:true,diplo:true};
+        document.querySelectorAll('.jointOps').forEach(el=>{el.open=true;});
+        say('Haritada kendi filona veya bilinen sisteme dokun; sağ panelde Ortak askerî koordinasyon bölümünü aç.','sci');break;
       case 'jointRequest': {
         if(this._jointWorld!==G.sys)break;
         const fedSurface=!!el?.closest('.fedBox')||$('diploPane').classList.contains('show')&&!!$('diploPane').querySelector('.fedBox .jointOps');
@@ -1896,81 +1949,44 @@ const UI = {
   },
 
   /* ---------- üst bar ---------- */
+  topStatusItems(){
+    const e=G.p,items=[],battles=battleCount(),wars=G.emps.filter(o=>!o.dead&&o.id!==e.id&&e.war[o.id]).length;
+    if(battles)items.push({label:'⚔ '+battles+' çatışma',action:'gobattle'});
+    if(wars)items.push({label:'⚔ '+wars+' savaş · Diplomasi',action:'diploPane'});
+    if(G.minNote)items.push({label:'▣ Küçültülen olay / karar · geri aç',action:'restoreModal'});
+    if(crisisActive())items.push({label:'🌋 Galaktik kriz · aşama '+G.crisis.stage,action:'crisInfo'});
+    if(typeof upheavalActive==='function'&&upheavalActive()){
+      const U=upheavalInfo();items.push({label:U.ico+' '+U.n+' · '+G.upheaval.left+' tur',action:'upInfo'});
+    }
+    if(e.crisis)items.push({label:'⚠ '+e.crisis.toUpperCase()+' KRİZİ'});
+    if(e.shortage)items.push({label:'⚠ Mal kıtlığı · ekonomi / kaynak üretimini kontrol et'});
+    return {items,wars,battles};
+  },
+  openTopStatus(){
+    const {items}=this.topStatusItems();
+    if(!items.length){this.openModal('<div class="mhd">DURUMLAR</div><div class="mbd">Savaş / kriz / küçültülen karar yok.</div><div class="mft"><button class="ch" data-a="closem">KAPAT</button></div>');return;}
+    this.pickList('Savaşlar, olaylar ve durumlar',items.map(x=>esc(x.label)),i=>{const item=items[i];if(item?.action)this.act(item.action);});
+  },
+  bindTopbarInput(){
+    if(this._topInputBound)return;this._topInputBound=true;
+    const bar=$('topbar');
+    bar.addEventListener('pointerdown',ev=>{this._topPointer={id:ev.pointerId,x:ev.clientX,y:ev.clientY};ev.stopPropagation();},{passive:true});
+    bar.addEventListener('pointermove',ev=>{const p=this._topPointer;if(p&&p.id===ev.pointerId&&Math.hypot(ev.clientX-p.x,ev.clientY-p.y)>8){this._topDragUntil=Date.now()+450;}},{passive:true});
+    const end=()=>{this._topPointer=null;};
+    document.addEventListener('pointerup',end,{passive:true});document.addEventListener('pointercancel',end,{passive:true});
+    bar.addEventListener('click',ev=>{if((this._topDragUntil||0)>Date.now()){ev.preventDefault();ev.stopImmediatePropagation();}},true);
+  },
   topbar(){
-    const e = G.p, r = e.res, inc = e.inc;
-    const cell = k => {
-      const d = RES[k];
-      const v = inc[k]||0;
-      return `<div class="res" title="${d.n}"><em style="color:${d.c}">${d.ico}</em>` +
-             `<u style="color:${d.c}">${d.k}</u><b>${fmt(r[k])}</b>` +
-             `<s class="${v>=0?'p':'n'}">${sgn(v)}</s></div>`;
-    };
-    const usage = fleetUsage(e);
-    /* ── FAZ 11: ÇALKANTI ROZETİ ──
-       Aktif galaktik çalkantı üst barda kalan tur sayısıyla durur.
-       Sayaç doğrudan G.upheaval.left'i okur; upheavalTick her ay
-       bunu azalttığı için rozet tik döngüsüyle kendiliğinden
-       senkron kalır — ayrı bir zamanlayıcı YOK. */
-    let rozet = '';
-    if (typeof upheavalActive === 'function' && upheavalActive()){
-      const U = upheavalInfo();
-      const kalan = G.upheaval.left;
-      const oran = kalan / Math.max(1, G.upheaval.total);
-      /* Son çeyrekte sönümlenen renk: bitmek üzere olduğu anlaşılsın */
-      const renk = oran > .5 ? '#ff9b3d' : oran > .25 ? '#e8c46a' : '#7d90ad';
-      const iyi = U.mods && ((U.mods.araMul || 0) > 0 || (U.mods.minMul || 0) > 0 ||
-                             (U.mods.stab || 0) > 0);
-      rozet = `<div class="tsep"></div>` +
-        `<div class="res upBadge" title="${esc(U.n)} — ${esc(U.d)}"` +
-        ` style="border-left:2px solid ${iyi ? '#65e08a' : renk}">` +
-        `<em style="color:${iyi ? '#65e08a' : renk}">${U.ico}</em>` +
-        `<u style="color:${iyi ? '#65e08a' : renk}">ÇALK</u>` +
-        `<b>${kalan}</b><s>tur</s></div>`;
-    }
-    /* FAZ 12: küçültülmüş olay penceresi rozeti — dokununca geri açılır */
-    if (G.minNote){
-      let baslik = 'Bekleyen karar';
-      if (G.minNote !== '_raw' && G.inbox){
-        const it = G.inbox.find(x => x.uid === G.minNote);
-        if (it) baslik = (it.title || 'Olay') + (it.sub ? ' · ' + it.sub : '');
-      }
-      rozet += `<div class="tsep"></div>` +
-        `<div class="res upBadge minBadge" data-a="restoreModal"` +
-        ` title="${esc(baslik)} — geri aç"` +
-        ` style="border-left:2px solid #8b7bff;cursor:pointer">` +
-        `<em style="color:#8b7bff">▣</em><u style="color:#8b7bff">OLAY</u>` +
-        `<b>AÇ</b></div>`;
-    }
-
-    /* Hiçlik Sürüsü aktifse o da rozet alır — tehdit gizlenemez */
-    if (typeof crisisActive === 'function' && crisisActive()){
-      rozet += `<div class="tsep"></div>` +
-        `<div class="res upBadge" title="Hiçlik Sürüsü — galaktik kriz"` +
-        ` style="border-left:2px solid #ff5f6d">` +
-        `<em style="color:#ff5f6d">🌌</em><u style="color:#ff5f6d">KRİZ</u>` +
-        `<b>${G.crisis.stage}</b><s>aşama</s></div>`;
-    }
-
-    $('topbar').innerHTML =
-      ['min','ene','yiy','tuk','ala','etk'].map(cell).join('<div class="tsep"></div>') + rozet +
-      `<div class="tsep"></div><div class="res" title="Araştırma"><em style="color:${RES.ara.c}">${RES.ara.ico}</em><u style="color:${RES.ara.c}">ARŞ</u><b>${fmt(inc.ara)}</b><s>/ay</s></div>` +
-      `<div class="tsep"></div><div class="res" title="Filo kapasitesi"><em style="color:#9fb6cc">⛴</em><u style="color:#9fb6cc">FİLO</u><b>${usage}/${Math.round(e.cap)}</b></div>` +
-      (e.crisis?`<div class="tsep"></div><div class="res" style="color:#ff5f6d"><b>⚠ ${e.crisis.toUpperCase()} KRİZİ</b></div>`:'') +
-      (e.shortage?`<div class="tsep"></div><div class="res" style="color:#e0a8ff"><b>⚠ MAL KITLIĞI</b></div>`:'') +
-      (battleCount()?`<div class="tsep"></div><button class="res warnBtn" data-a="gobattle" style="color:#ff5f6d"><b>⚔ ${battleCount()} ÇATIŞMA</b></button>`:'') +
-      (crisisActive()?`<div class="tsep"></div><button class="res warnBtn" data-a="crisInfo" style="color:#c026d3"><b>🌋 KRİZ A${G.crisis.stage}</b></button>`:'') +
-      /* FAZ 11: aktif galaktik çalkantı rozeti — kalan tur sayısıyla */
-      (()=>{ if (typeof upheavalActive !== 'function' || !upheavalActive()) return '';
-             const U = upheavalInfo();
-             if (!U) return '';
-             const kalan = G.upheaval.left;
-             const iyi = !!(U.mods && ((U.mods.araMul||0) > 0 || (U.mods.minMul||0) > 0 ||
-                                       (U.mods.stab||0) > 0));
-             const col = iyi ? '#65e08a' : '#ff9b3d';
-             return `<div class="tsep"></div><button class="res warnBtn" data-a="upInfo"
-               style="color:${col}" title="${esc(U.n)}"><b>${U.ico} ${kalan} TUR</b></button>`; })() +
-      (()=>{ const w = G.emps.filter(o=>!o.dead && o.id!==0 && e.war[o.id]);
-             return w.length ? `<div class="tsep"></div><button class="res warnBtn" data-a="diploPane" style="color:#ff9b3d"><b>⚔ ${w.length} SAVAŞ</b></button>` : ''; })();
+    if(this._topPointer)return; // Preserve native scrolling and the pressed target until release.
+    const e=G.p,r=e.res,inc=e.inc,{items,wars,battles}=this.topStatusItems();
+    const previous=$('resourceStrip'),left=previous?previous.scrollLeft:0;
+    const cell=k=>{const d=RES[k],v=inc[k]||0;return `<div class="res" title="${d.n}"><em style="color:${d.c}">${d.ico}</em><u style="color:${d.c}">${d.k}</u><b>${fmt(r[k])}</b><s class="${v>=0?'p':'n'}">${sgn(v)}</s></div>`;};
+    $('topbar').innerHTML=`<div id="resourceStrip" aria-label="Kaynaklar; yatay kaydırılabilir" tabindex="0">`+
+      ['min','ene','yiy','tuk','ala','etk'].map(cell).join('<div class="tsep"></div>')+
+      `<div class="tsep"></div><div class="res" title="Aylık araştırma: ${inc.ara}"><em style="color:${RES.ara.c}">${RES.ara.ico}</em><u>ARŞ</u><b>${fmt(inc.ara)}</b><s>/ay</s></div>
+      <div class="tsep"></div><div class="res" title="Filo kapasitesi"><em>⛴</em><u>FİLO</u><b>${fleetUsage(e)}/${Math.round(e.cap)}</b></div></div>
+      <button id="topStatusBtn" class="topStatusBtn ${wars||battles?'hot':''}" data-a="topStatus" aria-label="${items.length} savaş / olay / durum; listeyi aç" title="Savaş, olay ve kriz listesi">${wars||battles?'⚔':'☰'} +${items.length}</button>`;
+    $('resourceStrip').scrollLeft=left;
   },
 
   /* ---------- panel yönlendirme ---------- */
@@ -1986,6 +2002,7 @@ const UI = {
     }
     $('stardate').textContent = G.year + '.' + String(G.month).padStart(2,'0');
     this.refreshScience();
+    this.refreshFedPanel();
     this.refreshJointPanels();
     this.seltag();
   },
@@ -2037,7 +2054,7 @@ const UI = {
     const owner = s.owner>=0 ? G.emps[s.owner] : null;
     const ownerInfo = pSeen(s) ? territoryOwnerInfo(s.owner) : null;
     const surv = pSurv(s);
-    let h = `<div class="ph">${esc(s.name)}</div>`;
+    let h = this.jointPanel(null,'system')+`<div class="ph">${esc(s.name)}</div>`;
     h += `<div class="row"><span>Yıldız</span><b style="color:${s.star.c}">${s.star.n}</b></div>`;
     h += `<div class="row"><span>Sistem hâkimiyeti</span><b style="color:${ownerInfo?ownerInfo.col:'#7d90ad'}">${ownerInfo?esc(ownerInfo.name):pSeen(s)?'Sahipsiz':'Bilinmiyor'}</b></div>`;
     const colonyOwners = territoryColonyOwners(s);
@@ -2453,19 +2470,20 @@ const UI = {
           h += `<div class="act2">`;
           for (const k in BUILDINGS){
             const B = BUILDINGS[k], n = c.b[k]||0;
-            const full = (B.tech&&!e.techs[B.tech]) || n >= B.max || colonyUsed(c) >= colonySlots(c, e, pl);
+            const queued=colonyQueuedOf(c,k);
+            const full = (B.tech&&!e.techs[B.tech]) || n+queued >= B.max || colonyUsed(c)+colonyQueued(c) >= colonySlots(c, e, pl);
             const afford = Object.keys(B.c).every(r => e.res[r] >= B.c[r]);
             /* FAZ 62: 'i' butonu kaldırıldı — bilgi için binaya
                UZUN BAS (data-hold). Mobilde parmak yeri kazandırır
                ve yanlışlıkla bilgi açılması biter. */
             h += `<div class="bWrap" style="flex:1;min-width:66px">
               <button class="abtn ${full||!afford?'dis':''}" data-a="build" data-hold="${k}" data-x="${s.id}:${pl.i}:${k}" style="width:100%">` +
-                 `${B.tech&&!e.techs[B.tech]?'🔒 ':''}${B.n.split(' ')[0]} ${n}/${B.max}<br><span style="font-size:9px">` +
+                 `<span class="buildingName">${B.tech&&!e.techs[B.tech]?'🔒 ':''}${B.n}</span><span class="buildingCount">${n}/${B.max}${queued?' · +'+queued+' sırada':''}</span><span style="font-size:9px">` +
                  Object.entries(B.c).map(([r,v])=>`<span style="color:${e.res[r]>=v?RES[r].c:'#ff5f6d'}">${RES[r].ico}${v}</span>`).join(' ') +
                  `</span></button>` +
                  /* FAZ 14: mevcut binayı yıkma tuşu */
                  (n > 0 ? `<button class="demX" data-a="demolish" data-x="${s.id}:${pl.i}:${k}"
-                    title="${esc(B.n)} yık — slot boşalır, %35 hurda geri döner">⌫</button>` : '') +
+                    aria-label="${esc(B.n)} yık" title="${esc(B.n)} yık — slot boşalır, %35 hurda geri döner">⌫ YIK</button>` : '') +
                  `</div>`;
           }
           h += `</div>`;
@@ -2589,8 +2607,7 @@ const UI = {
                 ✕ KALDIR</button></div>`;
         } else {
           h += `<div class="mini">Bu tersaneden çıkan askeri gemiler şu an
-            yerinde bekliyor. Bir toplanma noktası belirlersen doğrudan
-            cepheye gidebilirler.</div>
+            genel üretimde yerinde kalır. Filo şablonu / takviye siparişleri hedef filosuna otomatik gider; her tersaneye ralli ataman gerekmez.</div>
             <div class="act2"><button class="abtn pri" data-a="rallySysSet"
               data-x="${s.id}">📍 RALLİ NOKTASI SEÇ</button></div>`;
         }
@@ -2649,10 +2666,13 @@ const UI = {
                 <span class="mono" style="color:${act?'#ff9b3d':'#7d90ad'}">${Math.ceil(q.left)}g</span>
                 ${q.e===G.p.id?`<button class="sBtn shipCancelBtn" data-a="shipCancel" data-x="${cancelToken}" aria-label="${esc(SHIPS[q.cls].n)} siparişini iptal et">✕</button>`:''}</div>
                 <div class="bar em"><i style="width:${(1-q.left/q.tot)*100}%"></i></div>
+                <div class="mini">${esc(this.queueDeliveryText(s,q))}</div>
                 ${!access.ok ? '<div class="mini">BEKLİYOR · '+esc(access.why)+'</div>' : ''}</div>`;
         });
         h += `</div>`;
       }
+      const shipments=G.fleets.filter(f=>f.e===0&&f.ships.length&&f.shipment?.origin===s.id);
+      if(shipments.length)h+='<details class="dcDetails"><summary>Bu tersanenin sevkiyatları · '+shipments.length+'</summary>'+shipments.map(f=>this.shipmentRow(f)).join('')+'</details>';
       h += `<div class="act2">`;
       for (const k in SHIPS){
         if (SHIPS[k].crisisOnly) continue;      // FAZ 34: organik sürü gemileri gizli
@@ -2997,8 +3017,7 @@ const UI = {
         const d=f.shipment || {},ana=G.fleets.find(x=>x.id===(d.fleet??f.joinFleet)&&x.e===0);
         const sid=d.sys??f.rallyTo;
         const label=d.fleet!==undefined||f.joinFleet!==undefined ? (ana?ana.name:'Kayıp filo') : (G.sys[sid]?G.sys[sid].name:'Geçersiz hedef');
-        h+=`<div class="ph">SEVKİYAT</div><div class="mini">Hedef: ${esc(label||'Filo')} · ${esc(shipmentStatus(f))}</div>
-          <button class="abtn pri" data-a="shipmentMenu" data-x="${f.id}">SEVKİYATI YÖNET</button>`;
+        h+=`<div class="ph">SEVKİYAT</div>`+this.shipmentRow(f);
       }
       /* 93A: mevcut / üretimde / yolda / yeni sipariş ayrı gösterilir. */
       const reinforcement=fleetReinforcementStatus(G.p,f);
@@ -3015,6 +3034,7 @@ const UI = {
           ${r.ok?'':'<div class="mini">'+esc(r.why)+'</div>'}
           <button class="abtn ${r.ok?'pri':'dis'}" ${r.ok?'':'disabled'} data-a="reinf" data-x="${f.id}">
           ⚓ TAKVİYE SİPARİŞİ${r.ok?' · '+Math.min(30,r.missing)+' gemi':''}</button>`;
+        h+=this.reinforcementJobs(f);
       }
       if(!hasShipment(f) && !f.federal && !f.guardLocked){
         h+=this.compositionPanel(f,reinforcement);
@@ -3028,8 +3048,7 @@ const UI = {
         }
       }
       for(const delivery of mine.filter(x=>x!==f && x.joinFleet===f.id && x.ships.length)){
-        h+=`<div class="row"><span>${delivery.ships.length} gemi · ${esc(shipmentStatus(delivery))}</span>
-          <button class="sBtn" data-a="shipmentMenu" data-x="${delivery.id}">YÖNET</button></div>`;
+        h+=this.shipmentRow(delivery);
       }
       if (f.combat) h += `<div class="mini" style="color:#ff5f6d;margin-top:6px">⚔ ÇATIŞMA SÜRÜYOR</div>`;
       if (f.surv > 0) h += `<div class="mini" style="color:#8b7bff;margin-top:6px">TARAMA: ${Math.ceil(f.surv)} gün</div>`;
@@ -3050,6 +3069,7 @@ const UI = {
               ${docked && many ? `<button class="sBtn" data-a="splitAll" data-x="${c}" title="Bu türün tamamını ayır">⊟${arr.length}</button>` : ''}
             </span></div>
           <div class="bd">gövde ${Math.round(d.hull*(1+G.p.mods.hullMul))} · kalkan ${Math.round(d.sh*(1+G.p.mods.shMul))} · hasar ${Math.round(d.dmg*(1+G.p.mods.dmgMul))}</div>
+          ${shipBuildAccess(G.p,c).ok?'':`<div class="mini">Mevcut gemi korunuyor · yeni üretim: ${esc(shipBuildAccess(G.p,c).why)}. Bu gemi başlangıçtan, önceki üretimden veya eski kayıttan gelebilir.</div>`}
           <div class="mini" style="color:${rgCol}">◎ ${rgTxt}</div>
           <div class="bar hp"><i style="width:${avg*100}%"></i></div></div>`;
       }
@@ -3137,7 +3157,8 @@ const UI = {
     h+=`<button data-a="scienceTab" data-x="history" aria-pressed="${s.tab==='history'}" class="${s.tab==='history'?'on':''}">Geçmiş</button></nav>`;
     h+='<div class="scFilters" aria-label="Araştırma modu">'+[['manual','Manuel'],['semi','Yarı otomatik'],['auto','Otomatik']].map(([key,label])=>`<button data-a="scienceMode" data-x="${key}" aria-pressed="${researchMode(e)===key}" class="${researchMode(e)===key?'on':''}">${label}</button>`).join('')+'</div>';
     h+='<p class="scModeHelp">'+({manual:'Yalnız hedefler ve zorunlu ön koşullar. Plan bitince puanlar birikir.',semi:'Hedefler öncelikli; boş dallarda uygarlığına uygun otomatik seçim.',auto:'Seçimi otomasyon yönetir. Kayıtlı hedeflerin korunur; bu modda uygulanmaz.'}[researchMode(e)])+'</p>';
-    h+=`<details class="scSummary"><summary>Aylık ${fmt(e.inc.ara)} ✦ · ${Object.keys(TECHS).filter(id=>e.techs[id]).length}/${Object.keys(TECHS).length} tamamlandı${e.ascend?' · Kadim '+e.ascend:''}</summary>`;
+    h+=`<div class="scMonthly" data-monthly-research="${e.inc.ara}" title="Ekonominin net aylık araştırması: ${e.inc.ara}">Aylık araştırma: ${e.inc.ara>=0?'+':''}${Number(e.inc.ara||0).toLocaleString('tr-TR',{maximumFractionDigits:2})} ✦</div><div class="scIncomeHelp">Ekonomide hesaplanan net üretim; etkin bilim dalları arasında paylaşılır.</div>`;
+    h+=`<details class="scSummary"><summary>Araştırmalar · ${Object.keys(TECHS).filter(id=>e.techs[id]).length}/${Object.keys(TECHS).length} tamamlandı${e.ascend?' · Kadim '+e.ascend:''}</summary>`;
     for(const [b,B] of Object.entries(BRANCH)){
       const id=e.rq[b];h+=`<div>${B.n}: ${id?esc(TECHS[id].n)+' · '+fmt(e.rp[b])+'/'+fmt(techCost(e,id))+' ✦':'Tamamlandı / bekliyor'}</div>`;
     }
@@ -3551,6 +3572,17 @@ const UI = {
     this.renderDiplo(h+'</div></div>',page==='states'?'states:'+(this.diploFilter||'all'):'relation:'+o.id);
   },
 
+  refreshFedPanel(){
+    const pane=$('diploPane'),box=pane.querySelector('.fedBox');
+    if(!pane.classList.contains('show')||!box)return;
+    const key=[Math.floor(G.day/30),Math.floor(G.p.res.etk||0),G.feds?.length,findFed(G.p)?.id].join(':');
+    if(this._fedRefreshKey===key&&this._fedRefreshWorld===G.sys)return;
+    const body=box.querySelector('.dcBody'),scroll=body?.scrollTop||0;
+    const open=[...box.querySelectorAll('details')].map(el=>el.open);
+    this.openFed();this._fedRefreshKey=key;this._fedRefreshWorld=G.sys;
+    const next=pane.querySelector('.dcBody');if(next)next.scrollTop=scroll;
+    pane.querySelectorAll('details').forEach((el,i)=>{if(open[i]!==undefined)el.open=open[i];});
+  },
   /* =============== FEDERASYON PANELİ =============== */
   openFed(){
     this._jointSurface='fed';
@@ -3564,25 +3596,25 @@ const UI = {
     if (!f){
       const allies = G.emps.filter(o=>!o.dead && !o.wild && o.id!==0 && e.ally[o.id]);
       h += `<div class="envRow"><span>DURUM</span><b style="color:#ff9b3d">FEDERASYON YOK</b></div>`;
-      const chk = canFoundFed(e);
-      h += `<div class="mini">Federasyonu sen veya AI kurabilir. Kurucu iki uygun AI müttefikinin kabulünü alır. İttifak ağı seni sessizce üye yapmaz; sonraki üyelik oylama ve aday onayı gerektirir.</div>`;
-      h += `<div class="box" style="${chk.ok?'border-color:#6ff2c8':''}">
-        <div class="bt"><span>🏛 FEDERASYON KUR</span>
-          <span class="mono" style="color:${(e.res.etk>=fedFoundCost(e))?'#6ff2c8':'#ff5f6d'}">${fedFoundCost(e)} ◈</span></div>
-        <div class="bd">Müttefiklerini tek bir birlik altında topla. Üyeler anında birbirine
-          müttefik olur ve ilk oylama 2 ay içinde başlar.</div><div class="mini">${FED_TYPES.askeri.d} ${fedDutyText({type:'askeri',charter:fedDefaultCharter('askeri'),laws:{}})}</div>
-        ${chk.ok ? '' : `<div class="mini" style="color:#ff9b3d">${esc(chk.why)}</div>`}
-        <div class="act2"><button class="abtn ${chk.ok?'pri':'dis'}" data-a="foundFed">
-          ${chk.ok ? 'ASKERÎ KUR' : 'KOŞULLAR EKSİK'}</button></div></div>`;
-      for(const type of ['bilimsel','ticaret']){const gate=canFoundFed(e,type);h+=`<div class="box"><b>${FED_TYPES[type].n}</b><div class="mini">${FED_TYPES[type].d} Otomatik saldırı desteği yok.</div><button class="abtn" data-a="foundFed" data-x="${type}" ${gate.ok?'':'disabled'}>KUR · ${fedFoundCost(e)} ◈</button>${gate.ok?'':`<div class="mini">${esc(gate.why)}</div>`}</div>`;}
+      const checks=Object.fromEntries(Object.keys(FED_TYPES).map(type=>[type,canFoundFed(e,type)]));
+      h+=`<div class="ph">FEDERASYON KURMA</div><div class="mini">Kurucu dahil en az 3 üye: sen + kabul eden 2 bağımsız AI müttefik. Kuruluş ücreti yalnız başarıda senden kesilir. Aşağıdaki uygunluk, AI'nın mevcut kabul kararını da içerir. Üye daveti kuruluş sonrasında ayrı oylamadır.</div>
+        <div class="row"><span>Toplam müttefik</span><b>${allies.length}</b></div>
+        <div class="row"><span>Gerekli asgari üye / AI ortak</span><b>3 / 2</b></div>
+        <div class="row"><span>Mevcut Etki</span><b>${Math.floor(e.res.etk||0)} ◈</b></div>
+        <button class="abtn" data-a="fedPane">UYGUNLUĞU YENİLE</button>`;
+      for(const [type,T] of Object.entries(FED_TYPES)){
+        const gate=checks[type];
+        h+=`<details class="dcDetails" ${type==='askeri'?'open':''}><summary>${T.ico} ${T.n} · ${gate.allies.length} uygun ortak</summary>
+          <div class="mini">${T.d} ${fedDutyText({type,charter:fedDefaultCharter(type),laws:{}})}</div>
+          <div class="mini">Uygun ve kabul eden AI adaylar: ${gate.allies.map(o=>esc(o.name)).join(', ')||'yok'}.</div>
+          ${gate.reasons.map(reason=>`<div class="mini" role="status">⚠ ${esc(reason)}</div>`).join('')}
+          <button class="abtn ${gate.ok?'pri':''}" data-a="foundFed" data-x="${type}" ${gate.ok?'':'disabled'}>${T.n.toLocaleUpperCase('tr')} KUR · ${gate.cost} ◈</button>
+          <div class="mini">${gate.ok?'AI adaylarının mevcut kabulü uygun; kuruluşta yeniden doğrulanır.':'Eksik koşulları tamamlayıp uygunluğu yenile.'}</div></details>`;
+      }
       for(const invitation of G.feds||[]){const inv=invitation.invites?.[e.id];if(!inv||inv.expires<=G.day)continue;h+=`<div class="box"><b>${esc(invitation.name)} · ${fedType(invitation).n}</b><div class="mini">${fedType(invitation).d} ${fedDutyText(invitation)} Mevcut yasalar: ${Object.keys(invitation.laws||{}).map(k=>esc((FED_LAWS[k]||FED_INNER_LAWS[k]||{}).n||k)).join(', ')||'yok'}. ${Math.ceil(inv.expires-G.day)} gün kaldı.</div><button class="abtn" data-a="fedInviteAccept" data-x="${invitation.id}">YÜKÜMLÜLÜKLERİ KABUL ET VE KATIL</button><button class="abtn" data-a="fedInviteReject" data-x="${invitation.id}">REDDET</button></div>`;}
-      h += `<div class="ph">MEVCUT İTTİFAKLARIN — ${allies.length} / 2</div>`;
-      h += `<div class="bar"><i style="width:${clamp(allies.length/2*100,0,100)}%"></i></div>`;
-      h += allies.length
-        ? allies.map(o=>`<div class="pchip"><span class="flag" style="background:${o.col}"></span>
-            <div class="pi"><div class="pn">${esc(o.name)}</div>
-            <div class="pm">${sysCount(o)} sistem · ilişki ${Math.round(e.rel[o.id])}</div></div></div>`).join('')
-        : `<div class="empty">Henüz müttefikin yok.</div>`;
+      h+=`<details class="dcDetails"><summary>Müttefiklerin uygunluğu · ${allies.length} devlet</summary>`;
+      h+=allies.map(o=>`<div class="box"><b>${esc(o.name)}</b><div class="mini">İlişki ${Math.round(e.rel[o.id]||0)}</div>${Object.entries(FED_TYPES).map(([type,T])=>{const q=checks[type].candidates.find(c=>c.id===o.id);return `<div class="mini">${T.n}: ${q?.ok?'Uygun · AI kabul ediyor':esc(q?.why||'Kuruluşa uygun değil')}</div>`;}).join('')}</div>`).join('')||'<div class="empty">Henüz müttefikin yok.</div>';
+      h+='</details>';
       const cands = G.emps.filter(o=>!o.dead && !o.wild && o.id!==0 && !e.ally[o.id] &&
                                      e.contact[o.id] && !e.war[o.id] && canAlly(e,o));
       if (cands.length){
@@ -3600,6 +3632,7 @@ const UI = {
         });
       }
     } else {
+      h+=`<div class="ph">MEVCUT FEDERASYONUM</div><div class="envRow"><span>${esc(f.name)}</span><b>${f.members.length} üye</b></div>`;
       h+=this.fedGovernance(f);
       h+=this.jointPanel(null,'fed');
       h += `<div class="envRow"><span>${esc(f.name)}</span>
@@ -5367,22 +5400,12 @@ const UI = {
       fn(i);
     });
     if (kind === 'res' || kind === 'tribute'){
-      const opts = ['min','ene','ala','tuk'].map(r=>({
+      const opts = ['min','ene','yiy','ala','tuk','etk'].map(r=>({
         lbl: RES[r].ico + ' ' + RES[r].n + ((own||lvl>=3)?' ('+fmt(src.res[r]||0)+')':' (stok bilinmiyor)'), r}));
       choose('Hangi kaynak?', opts.map(x2=>x2.lbl), i=>{
         const r = opts[i].r;
-        if (kind === 'res'){
-          const max = (own||lvl>=3)?Math.floor((src.res[r]||0)*.8):1000;
-          const amts = [100, 250, 500, 1000].filter(a=>a <= Math.max(100, max));
-          choose('Ne kadar?', amts.map(a=>fmt(a) + ' ' + RES[r].n), j=>{
-            list.push({t:'res', r, v: amts[j]}); this.drawDeal();
-          });
-        } else {
-          const amts = [5, 10, 20];
-          choose('Aylık ne kadar? (10 yıl)', amts.map(a=>a + ' ' + RES[r].n + '/ay'), j=>{
-            list.push({t:'tribute', r, v: amts[j]}); this.drawDeal();
-          });
-        }
+        this.dealAmount(d,side,kind,r);
+
       });
       return;
     }
@@ -5436,6 +5459,35 @@ const UI = {
       });
       return;
     }
+  },
+  dealAmount(d,side,kind,r){
+    const world=G.sys,player=G.p,src=side==='give'?player:G.emps[d.to];
+    if(!src||!RES[r]||!['res','tribute'].includes(kind))return;
+    const known=side==='give'||intelOf(player,d.to)>=3;
+    const limit=known?Math.floor(kind==='res'?Math.min(DEAL_AMOUNT_LIMIT,src.res[r]||0):dealMonthlyCapacity(src,r)):DEAL_AMOUNT_LIMIT;
+    const presets=[10,50,100,250,500,1000,5000].filter(v=>v<=limit);
+    const token={};this._amountToken=token;
+    const alive=()=>this._amountToken===token&&G.sys===world&&G.p===player&&this.deal===d;
+    this.openModal(`<div class="mhd">${kind==='res'?'Tek seferlik teslimat':'Aylık ödeme · 10 yıl'} · ${esc(RES[r].n)}</div>
+      <div class="mbd"><div class="mini">${known?'Mevcut üst sınır: '+limit:'Karşı tarafın stoku / geliri bilinmiyor; uygulanabilirlik teklif sunulurken doğrulanır.'}
+      ${kind==='tribute'?' Mevcut aylık yükümlülükler hesaba katılır; stok biterse yalnız mevcut kaynak ödenir.':' İmzalama Etkisi ve taslaktaki diğer teslimatlar da son kontrolde hesaba katılır.'}</div>
+      <label for="dealAmountInput">${kind==='tribute'?'Her ay':'Bir kez'} verilecek miktar</label>
+      <div class="amountControls"><button class="abtn" data-a="amountDown" aria-label="Miktarı 10 azalt">−10</button>
+      <input id="dealAmountInput" type="number" inputmode="numeric" min="1" max="${Math.max(0,limit)}" step="1" value="${presets[0]||1}" aria-label="Kaynak miktarı">
+      <button class="abtn" data-a="amountUp" aria-label="Miktarı 10 artır">+10</button></div>
+      <div class="act2">${presets.map(v=>`<button class="abtn" data-a="amountPreset" data-x="${v}">${v.toLocaleString('tr-TR')}</button>`).join('')}</div>
+      <div id="dealAmountError" class="mini" role="status"></div></div><div class="mft">
+      <button class="ch" data-a="amountApply" ${limit<1?'disabled':''}>TASLAĞA EKLE</button><button class="ch" data-a="closem">VAZGEÇ</button></div>`);
+    this._amountToken=token;
+    const adjust=delta=>{if(!alive())return;const input=$('dealAmountInput');input.value=String(clamp((Number(input.value)||0)+delta,1,Math.max(1,limit)));};
+    this._hook('amountDown',()=>adjust(-10));this._hook('amountUp',()=>adjust(10));
+    this._hook('amountPreset',v=>{if(alive()&&v>0&&v<=limit)$('dealAmountInput').value=String(v);});
+    this._hook('amountApply',()=>{
+      if(!alive())return;const v=Number($('dealAmountInput').value);
+      const current=known?Math.floor(kind==='res'?Math.min(DEAL_AMOUNT_LIMIT,src.res[r]||0):dealMonthlyCapacity(src,r)):DEAL_AMOUNT_LIMIT;
+      if(!Number.isSafeInteger(v)||v<1||v>current){$('dealAmountError').textContent='Pozitif tam sayı gerekli; güncel üst sınır '+current+'.';return;}
+      d[side].push({t:kind,r,v});this._amountToken=null;this.closeModal();this.drawDeal();
+    });
   },
   dealPact(k){
     this.ensureDiploWorld();
@@ -5493,6 +5545,8 @@ const UI = {
       this.dealCounter = {from:o.id, to:0,
         give:(d.want || []).slice(),
         want:(d.give || []).concat(r.add || [])};
+      const counterGate=dealQuote(this.dealCounter);
+      if(!counterGate.ok){this.dealCounter=null;this.dealMsg='Karşı teklif uygulanamıyor: '+counterGate.reasons.join(' · ');this.drawDeal();return;}
       this.dealMsg = o.name + ': "' + r.why + '" — karşı teklifi ' +
         'ayrı kartta inceleyebilirsin; senin teklifin olduğu gibi duruyor.';
       this.drawDeal(); return;
@@ -5925,7 +5979,7 @@ const UI = {
         ((typeof DEAL_OFFER_LIFE !== 'undefined') ? DEAL_OFFER_LIFE : 540);
     const kendi = (typeof encodeOffer === 'function')
                   ? encodeOffer(damgali) : null;
-    if (!kendi || kendi.to!==0 || dealExpired(kendi)) return false;
+    if (!kendi || kendi.to!==0 || !dealQuote(kendi).ok) return false;
     const termsKey = playerOfferTermsKey(kendi);
     const same = n => n.kind==='aideal' && playerOfferTermsKey(n.data)===termsKey;
     if ((G.inbox || []).some(n=>same(n) && !dealExpired(n.data))) return false;
@@ -5981,7 +6035,7 @@ const UI = {
          <div class="row"><span>İmzalama maliyeti</span>
            <b>${q ? q.cost : 0} ◈ · ${esc(o.name)} öder</b></div>
          ${(q && !q.ok) ? `<div class="mini" style="color:#ff5f6d">🔒 ${
-           esc(q.reasons[0] || 'Uygulanamaz')}</div>` : ''}
+           esc(q.reasons.join(' · ') || 'Uygulanamaz')+' · Teklif gönderildikten sonra kaynaklar, yaptırımlar veya anlaşmalar değişmiş olabilir.'}</div>` : ''}
        </div>
        <div class="mft">
          <button class="ch ${(q && q.ok) ? '' : 'dis'}"
@@ -6548,7 +6602,7 @@ const UI = {
     }
 
     if (e.origin && ORIGINS[e.origin])
-      h += `<div class="row"><span>Köken</span><b>${ORIGINS[e.origin].ico} ${ORIGINS[e.origin].n}</b></div>`;
+      h += `<div class="row"><span>Köken</span><b>${ORIGINS[e.origin].ico} ${ORIGINS[e.origin].n}</b></div><div class="box"><div class="mini">${esc(originEffectText(e))}</div><div class="mini">Bunlar başlangıç koşullarıdır; mevcut nüfus, gemi ve üretim zamanla değişir. Tür, doktrin, sivil politika ve zorluk ayrıca uygulanır.</div></div>`;
     h += `<div class="row"><span>Sistem</span><b>${sysCount(e)} / ${G.sys.length}</b></div>`;
     h += `<div class="row"><span>Koloni</span><b>${e.colonies.length}</b></div>`;
     /* FAZ 46: float birikimi — 22.719999999999999 yerine tam sayı */
@@ -7266,6 +7320,7 @@ const UI = {
   },
 
   openModal(html, cls, stashable, art){
+    this._amountToken=null;this._jointSendToken=null;
     this._shipCancelPending=null;
     this._shipmentPending=null;
     this._aiDealToken = null;
@@ -7438,6 +7493,7 @@ const UI = {
   },
 
   closeModal(){
+    this._amountToken=null;this._jointSendToken=null;
     // 94D.1: acknowledged war/retired incident cards must not be saved as still open.
     if(this._openNote&&['warstart','wardec','border'].includes(this._openNote.kind))this._openNote=null;
     const shipCancelSpeed=this._shipCancelPending&&this._shipCancelPending.speed;
@@ -7877,10 +7933,11 @@ const UI = {
           say('Kayıt uygulanamadı', 'war');
           this.saveMenu(); return;
         }
-        await storeSet('yildiz:save', p.txt);
+        const durable=await storeSet('yildiz:save', p.txt);
         this.closeModal(); this.refresh();
         say(p.kaynak === 'cihaz' ? 'Kayıt cihazdan yüklendi'
           : 'Kayıt dosyadan yüklendi', 'win');
+        if(!durable)say('Yüklendi; kalıcı kopya yazılamadı. Dosya / metin yedeğini koru.','war');
       } finally { this._loadApplying = false; }
     });
     return true;
@@ -7952,7 +8009,7 @@ const UI = {
     });
     this._hook('autotog', ()=>{ G.autoSave = !(G.autoSave !== false); this.saveMenu(); });
     this._hook('dosave', ()=>{ saveGame().then(ok=>{
-      this.openModal(`<div class="mhd"><span>KAYIT</span></div><div class="mbd">${ok?'Oyun kaydedildi.':'Kayıt yapılamadı.'}
+      this.openModal(`<div class="mhd"><span>KAYIT</span></div><div class="mbd">${ok?'Oyun kalıcı depolamaya kaydedildi.':'Kalıcı kayıt başarısız — bu deneme yalnız oturum belleğinde tutuldu. Önceki kalıcı kayıt varsa korunur. Depolama engellenmiş veya kota dolmuş olabilir.'}
         <div class="mini" style="margin-top:8px">Kalıcı olduğundan emin olmak için "Dosyaya kaydet"i kullan.</div></div>
       <div class="mft"><button class="ch" data-a="closem"><div class="cht">Kapat</div></button></div>`);
     }); });
@@ -7986,12 +8043,12 @@ const UI = {
            padding:6px;-webkit-user-select:text;user-select:text"></textarea></div>
          <div class="mft"><button class="ch" data-a="applyimp"><div class="cht">Yükle</div></button>
          <button class="ch" data-a="closem"><div class="cht">Vazgeç</div></button></div>`);
-      this._hook('applyimp', ()=>{
+      this._hook('applyimp', async ()=>{
         const b = $('impBox');
         const txt = b ? b.value.trim() : '';
         let ok = false;
         try { ok = txt && deserialize(txt); } catch(e){ ok = false; }
-        if (ok){ storeSet('yildiz:save', txt); this.closeModal(); this.refresh(); say('Yedek yüklendi', 'win'); }
+        if (ok){ const durable=await storeSet('yildiz:save', txt); this.closeModal(); this.refresh(); say(durable?'Yedek yüklendi ve kalıcı kopyası yazıldı':'Yedek oturuma yüklendi; kalıcı kayıt başarısız. Metin yedeğini koru.', durable?'win':'war'); }
         else say('Metin okunamadı');
       });
     });

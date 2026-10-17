@@ -1117,6 +1117,28 @@ body.fauxFull canvas#map{width:100vw !important;height:100dvh !important}
 .nCard{min-height:44px}
 .warBrief{overflow-wrap:anywhere}
 /* END FAZ 94D.1 NOTICES */
+/* FAZ 95C.1 — bounded mobile controls */
+#topbar{overflow:hidden;touch-action:pan-x}
+#resourceStrip{display:flex;align-items:center;flex:1 1 auto;min-width:0;height:100%;overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;overscroll-behavior-x:contain;touch-action:pan-x;-webkit-overflow-scrolling:touch}
+#resourceStrip .res{min-height:var(--top)}
+.topStatusBtn{flex:0 0 auto;min-width:64px;align-self:stretch;border-left:1px solid var(--line);padding:0 10px;font-family:var(--mono);font-weight:700;background:var(--bulk);touch-action:manipulation}
+.topStatusBtn.hot{color:var(--ember);border-color:var(--ember)}
+.bWrap{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:1fr auto;gap:4px;align-content:start}
+.bWrap>.abtn{min-height:80px;white-space:normal;overflow-wrap:anywhere;padding:7px 5px}
+.buildingName{display:block;line-height:1.3;font-size:11px}
+.buildingCount{display:block;line-height:1.6;font:700 12px/1.6 var(--mono);white-space:normal;overflow-wrap:anywhere}
+.bWrap>.demX{position:static;width:100%;height:44px;min-height:44px;font-size:11px;margin:0;z-index:auto}
+.scHeader>.scMonthly,.scHeader>.scIncomeHelp{grid-column:1/-1}
+.scIncomeHelp{font-size:10px;line-height:1.4;color:var(--dim)}
+.scSummary[open]{top:76px}
+.scMonthly{font-size:14px;line-height:1.5;font-weight:700;color:var(--phos);overflow-wrap:anywhere}
+.amountControls{display:flex;align-items:center;gap:6px;margin:8px 0}
+.amountControls input{width:100%;min-width:0;min-height:44px;font-size:16px;background:var(--void);color:var(--bone);border:1px solid var(--line);padding:6px}
+.amountControls button{flex:0 0 52px;min-height:44px}
+.jointOps .abtn,.shipmentInfo .abtn{min-height:44px;white-space:normal;overflow-wrap:anywhere}
+@media(max-width:900px){#resourceStrip .res{padding:0 6px}.topStatusBtn{min-width:60px;padding:0 7px}}
+@media(max-height:500px){.scIncomeHelp{display:none}.scMonthly{font-size:12px;line-height:1.3}}
+/* END FAZ 95C.1 MOBILE */
 </style>
 </head>
 <body>

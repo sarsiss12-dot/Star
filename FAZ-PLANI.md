@@ -1,3 +1,19 @@
+# 95C.1 sonrası güncel yol haritası — 17 Ekim 2026
+
+95C.1, yeni manuel Android denemesi için kalite adayıdır. Diplomasi/federasyon tutarlılığı, araştırma ve özel üretim kilidi, sevkiyat açıklaması, destek UX'i, mobil temel bilgiler ve kalıcı kayıt düzeltmeleri tamamlandı. 83 paket / 4.923 başarılı kontrol / 0 kalan hata. Save v8, PWA stars-v95c1, tek 2B kamera.
+
+| Sıradaki iş | Durum |
+|---|---|
+| Manuel Android / gerçek tarayıcı kabulü | Açık: dar yatay bar, +N, klavye, sayaç/yıkım, üç destek talebi, sevkiyat, kayıt/arka plan |
+| Oyuncu save'iyle özgün ret/gemi kökeni | Kayıt sağlanırsa aday üyeliği/rota/kabulü ve gövde geçmişi incelenir; mevcut yeniden üretilemeyen iddialar kesin hata diye yazılmaz |
+| Uzun dönem kalite | Doğal ortak savaş ve federasyon dengesi; başkent rezervi; rota teşhis maliyeti; tohum 99 ve geç oyun bilgi sınırları |
+| 95D | Başlamadı; devlet/federasyon isim-amblem ve Rastgele Amblem kapsamı korunur |
+| Sonraki bağımsız işler | Kökenlerin kapsamlı denetimi, portre, Galaktik Haber Ağı, gerçek konvoylar, ekonomi ekranı ve dış dosyasız müzik eski yol haritasında korunur |
+
+GitHub yayını ayrı kullanıcı talimatıyla. 95D'ye geçilmedi. Yeni kamera, federasyon türü veya ekonomi/bilim mimarisi eklenmedi. Aşağıdaki plan ve talepler korunur.
+
+---
+
 # 95C sonrası güncel yol haritası — 17 Ekim 2026
 
 95C tamamlandı: aynı geçerli seferde gerçek filo koordinasyonu, ikmalli toplanma, farklı hızda çıkış, askerî AI desteği, üç oyuncu destek talebi, kompakt bilgi filtreli arayüz, gerçek aktörlerle mevcut muharebe ve katkı bağlantısı; oybirliği paylaşımı korunur. 79 paket / 4823 kontrol / 0 kalan hata. Save v8; tek 2B kamera; PWA `stars-v95c`. GitHub geliştirme notu aynen korunmuştur.

@@ -1033,11 +1033,15 @@ function sharedFoe(a, b){
 
 /* ticaret anlaşması */
 function canPact(a, b){
-  if (diploBlocked(a, b)) return false;
-  if (!a || !b || a.dead || b.dead) return false;
-  if (a.war[b.id]) return false;
-  if (false) return false;
-  return true;
+  return pactAccess(a,b).ok;
+}
+function pactAccess(a,b){
+  if (!a || !b || a===b || a.dead || b.dead) return {ok:false,why:'Geçerli iki devlet gerekli'};
+  if (diploBlocked(a,b) || diploBlocked(b,a)) return {ok:false,why:'Doktrin ticareti yasaklıyor'};
+  if (a.war[b.id] || b.war[a.id]) return {ok:false,why:'Savaş sürüyor'};
+  // tradeBlocked owns Council sanctions, bilateral embargoes and smuggling exceptions.
+  if (tradeBlocked(a,b)) return {ok:false,why:'Ticaret yaptırımı / ambargo yürürlükte'};
+  return {ok:true};
 }
 function makePact(a, b){
   if (!canPact(a,b)) return false;
@@ -1529,6 +1533,14 @@ const DEAL_SYMMETRIC = ['peace','nap','pact','ally','spynet'];
 /* Tek yönlü maddeler: yön metni gerekir. */
 const DEAL_DIRECTED  = ['res','tribute','sys','tech','lux','intel','passage',
                         'warOn','peaceWith'];
+// Numeric safety ceiling; actual offers are additionally bounded by stock / capacity.
+const DEAL_AMOUNT_LIMIT = 1000000000;
+function dealMonthlyCapacity(e,r,stock=e.res[r]||0){
+  const promised=(e.tribute||[]).filter(t=>t.r===r&&t.until>=G.day&&G.emps[t.to]&&!G.emps[t.to].dead)
+    .reduce((n,t)=>n+Math.max(0,t.v||0),0);
+  // Preserve the existing half-income OR 24-month-reserve rule, including live obligations.
+  return Math.max(0,Math.min(DEAL_AMOUNT_LIMIT,Math.max(0,(e.inc?.[r]||0)*2,stock/24)-promised));
+}
 
 /* Bir maddenin kimliği — tekilleştirme anahtarı. */
 function dealItemKey(it){
@@ -1606,7 +1618,7 @@ function normalizeDeal(offer){
       if (raw.target !== undefined) it.target = raw.target;
       if (raw.v !== undefined){
         const v = Number(raw.v);
-        if (!isFinite(v) || v <= 0){
+        if (!isFinite(v) || v <= 0 || v > DEAL_AMOUNT_LIMIT){
           errors.push(raw.t + ': geçersiz miktar (' + String(raw.v) + ')'); continue; }
         it.v = v;
       }
@@ -1614,7 +1626,7 @@ function normalizeDeal(offer){
       if (it.t === 'res' || it.t === 'tribute'){
         if (it.v === undefined || !it.r){
           errors.push(it.t + ': eksik kaynak veya miktar'); continue; }
-        if (!RES[it.r]){
+        if (!Object.hasOwn(RES,it.r)){
           errors.push(it.t + ': bilinmeyen kaynak "' + String(it.r) + '"'); continue; }
       }
       if (it.t === 'sys'){
@@ -1640,6 +1652,7 @@ function normalizeDeal(offer){
         if (it.t === 'res' || it.t === 'tribute'){
           /* GÜVENLİ NORMALLEŞTİRME: aynı kaynağın satırları toplanır. */
           out[idx[key]].v += it.v;
+          if(out[idx[key]].v>DEAL_AMOUNT_LIMIT)errors.push(it.t+': toplam miktar güvenli sınırı aşıyor');
           normalizations.push(it.t + '/' + it.r + ': satırlar toplandı');
         } else {
           normalizations.push((DEAL_KINDS[it.t] ? DEAL_KINDS[it.t].n : it.t) +
@@ -1751,10 +1764,13 @@ function dealValidity(offer){
                   ' gerekiyor, stok ' + Math.round(stok);
         fail.push(m); reasons.push(veren.name + ' → ' + m);
       }
+      if(!Number.isFinite(stok) || Math.abs((alan.res[r]||0)+resTop[r])>Number.MAX_SAFE_INTEGER){
+        const m='Kaynak bakiyesi güvenli sayı sınırını aşıyor';fail.push(m);reasons.push(m);
+      }
     }
     for (const r in tribTop){
-      const inc = (veren.inc && veren.inc[r]) || 0, stok = veren.res[r] || 0;
-      if (inc < tribTop[r] * .5 && stok < tribTop[r] * 24){
+      const stok = Math.max(0,(veren.res[r]||0)-(resTop[r]||0)-(r==='etk'&&veren===a?dealCost(n):0));
+      if (tribTop[r] > dealMonthlyCapacity(veren,r,stok)){
         const m = (RES[r] ? RES[r].n : r) + ' haracı taşınamıyor';
         fail.push(m); reasons.push(veren.name + ' → ' + m);
       }
@@ -1773,8 +1789,7 @@ function dealValidity(offer){
         case 'peace': if (!veren.war[alan.id]) hata = 'zaten savaşta değilsiniz'; break;
         case 'ally': if (typeof canAlly === 'function' && !canAlly(veren, alan))
                        hata = 'ittifak mümkün değil'; break;
-        case 'pact': if (typeof canPact === 'function' && !canPact(veren, alan))
-                       hata = 'ticaret mümkün değil'; break;
+        case 'pact': {const gate=pactAccess(veren,alan);if(!gate.ok)hata=gate.why;break;}
         case 'warOn': {
           /* FAZ 86C.2: saf söz kapısı — geçici yetki aranmaz. */
           const t = G.emps[it.target];
@@ -1894,10 +1909,11 @@ function dealQuote(offer){
   const v = dealValidity(offer);
   const a = G.emps[v.norm.from], b = G.emps[v.norm.to];
   const cost = dealCost(v.norm);
-  const afford = !!a && (a.res.etk || 0) >= cost;
+  const outgoing=(v.norm.effectiveGive||[]).filter(it=>it.t==='res'&&it.r==='etk').reduce((n,it)=>n+it.v,0);
+  const afford = !!a && (a.res.etk || 0) >= cost+outgoing;
   const bayat = dealExpired(offer);
   const reasons = v.reasons.slice();
-  if (!afford) reasons.push('Gönderen tarafta yetersiz Etki (' + cost + ' ◈ gerekir)');
+  if (a && !afford) reasons.push('Gönderen tarafta yetersiz Etki (' + cost + ' ◈ gerekir)');
   if (bayat)   reasons.push('Teklifin süresi doldu');
   return {ok: v.ok && afford && !bayat, norm:v.norm, valid:v.ok,
           reasons, giveFail:v.giveFail, wantFail:v.wantFail,
@@ -2394,18 +2410,34 @@ function fedName(rnd2){
 function fedFoundCost(e){
   return hasCivic(e,'council') ? 130 : 220;
 }
+function fedFounderCandidate(e,o,type){
+  const reasons=[];
+  if(!o||o===e||o.dead||o.wild||o.crisisSide||isPurifier(o)||isVassal(o))reasons.push('Bağımsız ve uygun devlet gerekli');
+  else {
+    if(findFed(o))reasons.push('Başka federasyonun üyesi');
+    if(!e.contact[o.id]||!o.contact[e.id])reasons.push('Karşılıklı diplomatik temas gerekli');
+    if(!e.ally[o.id]||!o.ally[e.id])reasons.push('Karşılıklı ittifak gerekli');
+    if(e.war[o.id]||o.war[e.id])reasons.push('Kurucuyla savaşta');
+    if((o._fedLeaveUntil||0)>G.day)reasons.push('Ayrılış beklemesi: '+Math.ceil((o._fedLeaveUntil-G.day)/30)+' ay');
+    if(e.id!==0&&o.id===0)reasons.push('Oyuncunun açık üyelik onayı gerekli');
+    if(!reasons.length){const consent=aiFedWilling(o,e,type);if(!consent.ok)reasons.push(consent.why);}
+  }
+  return {ok:!reasons.length,reasons,why:reasons.join(' · ')};
+}
 function canFoundFed(e,type='askeri'){
-  if(!e||G.emps[e.id]!==e||e.dead||e.wild||e.crisisSide||isPurifier(e)||isVassal(e)||!Object.hasOwn(FED_TYPES,type))return {ok:false,why:'Kurucu ve tür uygun değil'};
-  if (findFed(e)) return {ok:false, why:'Zaten bir federasyonun var.'};
-  if((e._fedLeaveUntil||0)>G.day)return {ok:false,why:'Ayrılış sonrası 24 ay bekleme sürüyor'};
-  const allies=G.emps.filter(o=>o!==e&&!o.dead&&!o.wild&&!o.crisisSide&&!isPurifier(o)&&!isVassal(o)&&!findFed(o)&&
-    e.contact[o.id]&&e.ally[o.id]&&o.ally[e.id]&&!e.war[o.id]&&(o._fedLeaveUntil||0)<=G.day&&
-    (e.id===0||o.id!==0)&&aiFedWilling(o,e,type).ok);
-  if(allies.length<2)return {ok:false,why:'En az 2 bağımsız, kabul eden AI müttefik gerekir (şu an '+allies.length+').',allies};
-  const cost=fedFoundCost(e);if((e.res.etk||0)<cost)return {ok:false,why:cost+' Etki gerekir',cost,allies};
-  // Existing wars may never be erased by creating a political union.
-  if(allies.some(a=>allies.some(b=>a!==b&&(a.war[b.id]||b.war[a.id]))))return {ok:false,why:'Kurucu adayları birbiriyle savaşta'};
-  return {ok:true,allies,cost};
+  const reasons=[],allies=[],candidates=[],valid=!!e&&G.emps[e.id]===e;
+  const cost=valid?fedFoundCost(e):220;
+  if(!valid||e.dead||e.wild||e.crisisSide||isPurifier(e)||isVassal(e)||!Object.hasOwn(FED_TYPES,type))
+    return {ok:false,why:'Kurucu ve tür uygun değil',reasons:['Kurucu ve tür uygun değil'],allies,candidates,cost};
+  if(findFed(e))reasons.push('Zaten bir federasyonun var.');
+  if((e._fedLeaveUntil||0)>G.day)reasons.push('Ayrılış sonrası 24 ay bekleme sürüyor');
+  for(const o of G.emps)if(o!==e&&!o.dead&&!o.wild&&e.contact[o.id]&&e.ally[o.id]){
+    const q=fedFounderCandidate(e,o,type);candidates.push({id:o.id,...q});if(q.ok)allies.push(o);
+  }
+  if(allies.length<2)reasons.push('En az 2 bağımsız, kabul eden AI müttefik gerekir (şu an '+allies.length+').');
+  if((e.res.etk||0)<cost)reasons.push(cost+' Etki gerekir (mevcut '+Math.floor(e.res.etk||0)+').');
+  if(allies.some(a=>allies.some(b=>a!==b&&(a.war[b.id]||b.war[a.id]))))reasons.push('Kurucu adayları birbiriyle savaşta');
+  return {ok:!reasons.length,why:reasons.join(' · '),reasons,allies,candidates,cost};
 }
 function foundFederation(e,type='askeri'){
   const q=canFoundFed(e,type);if(!q.ok)return q;

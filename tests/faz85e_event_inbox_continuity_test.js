@@ -87,7 +87,8 @@ const KUR=[
  " origin:'standart',ruins:'yok',crisis:'kapali',council:'kapali'});",
  "View.init(); View.vw=900; View.vh=420;",
  "View.cv=document.getElementById('map');",
- "G.emps.forEach(function(x){ if(x.id) G.p.contact[x.id]=true; });",
+ // 95C.1: inbox identity fixtures must be valid offers, including mutual contact.
+ "G.emps.forEach(function(x){ if(x.id){ G.p.contact[x.id]=true; x.contact[0]=true; } });",
  "return 'ok';"].join('\n');
 
 /* Kaydedilebilir HER kind'dan bir örnek üretir. */
@@ -134,7 +135,7 @@ for(const f of fs.readdirSync(KOK).filter(x=>x.endsWith('.js'))){
   ['yildiz:save','yh_audio','yh_advisor','yh_autoev','yh_bg','yh_radar',
    'yh_templates','__yh_probe','__yh_diag'].forEach(k=>
     ok('depolama anahtarı korundu: '+k, mainJs.includes(k)));
-  ok("sw cache = 'stars-v95c'", /const CACHE = 'stars-v95c'/.test(oku('sw.js')));
+  ok("sw cache = 'stars-v95c1'", /const CACHE = 'stars-v95c1'/.test(oku('sw.js')));
   const sw=oku('sw.js');
   ok('sw KABUK listesi duruyor', /KABUK/.test(sw));
   ok('sw fetch davranışı duruyor', /addEventListener\('fetch'/.test(sw));
@@ -401,7 +402,8 @@ console.log('\nE. AI TEKLİF KİMLİĞİ');
     "UI.aiOffer({from:A.id,to:0,give:[{t:'res',r:'ene',v:100}],",
     "  want:[{t:'res',r:'min',v:50}]});",
     "UI.aiOffer({from:B.id,to:0,give:[{t:'res',r:'ala',v:9}],",
-    "  want:[{t:'res',r:'ara',v:7}]});",
+    // Initial player research stock is zero; offer identity is tested with deliverable minerals.
+    "  want:[{t:'res',r:'min',v:7}]});",
     "/* AYNI devletten ŞARTLARI FARKLI ikinci teklif */",
     "UI.aiOffer({from:A.id,to:0,give:[{t:'res',r:'yiy',v:33}],",
     "  want:[{t:'res',r:'etk',v:11}]});",

@@ -1,0 +1,17 @@
+# Federasyon ve diplomasi — 95C.1
+
+Başlangıçta `7 / 2`, toplam müttefik sayısını kuruluş için gereken iki AI ortak eşiğiyle karşılaştırıyordu. AI'nın kabulü ve adayın bağımsızlığı bu sayaçta yoktu. Gerçek kural üç toplam üyedir. Mevcut üyelik sınırı diye yeni bir üst tavan eklenmedi; 95C kuruluş/kabul kodunda ayrı sayısal üye tavanı bulunmuyor.
+
+`fedFounderCandidate` ve `canFoundFed` üyelik, ayrılış beklemesi (24 ay), karşılıklı temas/ittifak, savaş, uygun kurucu ve AI kabul kararını açık sonuçlarla döndürür. AI kabulü 95B'deki doktrin, güven/ilişki ve bilinen yardım rotası hesabıdır; otomatik “evet” yazılmadı. Adaylar arası savaş engeli korunur. UI ve kuruluş işlemi aynı canlı kapıyı kullanır. Tür değişince uygun aday listesi farklı olabilir; her tür kendi sonucunu gösterir.
+
+Standart kuruluş bedeli 220 Etki, mevcut `council` yetenek kuralı varsa 130. Son yetenek eski destek yoludur; bu faz yeni Konsey Mimarı civic'i eklemez. Maliyet yalnız başarılı kuruluşta kurucudan alınır. Üyelik daveti sonraki oylama ve adayın açık kabulüdür. Askerî türün savunması, diğer iki türün savaş oylamaları ve oyuncunun saldırı onayı değiştirilmedi. Etkisi tam yeterli kurucuyla üç türde gerçek kuruluş geçti; özgün oyuncu kaydındaki yanlış ret yeniden üretilemedi.
+
+`pactAccess` mevcut `tradeBlocked` sahibini kullanır: parya, ikili ambargo ve mevcut kaçakçılık istisnası tek kuralda kalır. Yeni teklif girişinde `dealQuote`, açarken quote, kabulde yeniden quote ve `executeDeal` kapısı vardır. Önceden gönderilmiş teklif sonradan geçersiz olabilir; gerekçe gösterilir. Yaptırım kalkınca normal teklif yeniden mümkündür. Hediye, zorunlu tazminat veya bütün ekonomi akışları baştan tasarlanmadı.
+
+AI ittifak + sensör paketinde kanonik bedel 101 Etkidir: 90 + 45'in %25'i, sonda tek yuvarlama. Gönderen öder; alıcının ödeme sorumluluğu kendi teslimat maddeleridir. 100 Etkili AI bildirim üretemez, 101 ile başarılı imzada yalnız bir kez öder. Etki transferi ve imza bedeli birlikte kontrol edilir. Kaynaklar daha sonra azalırsa eski teklif güvenle reddedilir. Başarısız doğrulama para veya RNG tüketmez; AI'nın mevcut rastgele fırsat sırası yeniden yazılmadı. Erken fatal ret planında eksik effectiveGive alanının güvenle ele alınması için yeni negatif test eklendi.
+
+Kaynak seçimi tek seferlik teslimat ve aylık 10 yıllık ödeme olarak ayrı gösterilir. Manuel pozitif tam sayı, ±10 ve hazır tutarlar vardır. UI stok/geliri yalnız kendisi veya yeterli istihbarat varsa gösterir. Bilinmeyen yabancı stok “bilinmiyor” kalır. Son gerçek quote karar verir; büyük teklif otomatik kabul edilmez. AI'nın mevcut değerleme formülü büyük miktarla doğrusal ve sonlu kaldı.
+
+Eski aylık taşıma kuralı korunur: aylık söz, gelirin iki katını VE 24 aylık stok rezervini birlikte aşarsa reddedilir. Mevcut canlı aylık sözler kapasiteden düşülür; aynı teklifin tek seferlik teslimatları ve Etki imza maliyeti rezerv hesabına katılır. Kontrat 3600 oyun günü sürer. Ödeme tikinde yalnız gerçek stok aktarılır; kaynak yaratılmaz. Sayısal mühendislik tavanı madde / birleşen kaynak başına 1.000.000.000'dur; gerçek stok ve taşıma gücü çoğunlukla daha düşük sınırdır. Bu sınırsız bedelsiz ticaret değildir.
+
+83 paket / 4.923 başarılı kontrol / 0 kalan hata. Ayrıntı: `TEST-SONUCLARI-95C1.md`, yeni diplomasi paketi ve yedi teklif takip paketi. Eski 95B anayasa, açık üyelik/savaş onayı ve ticaret muhasebesi regresyonları geçti.

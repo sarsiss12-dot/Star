@@ -4251,6 +4251,10 @@ function canRebuildThrone(e, sys){
   if (e.throneLost > 0)
     return {ok:false, why:'Enkaz hâlâ yanıyor — ' + e.throneLost +
             ' ay sonra inşaya başlanabilir'};
+  for(const cls of ['zir','kru']){
+    const access=shipBuildAccess(e,cls);
+    if(!access.ok)return {ok:false,why:'Yeni Taht Gemisi üretimi: '+access.why};
+  }
   for (const r in THRONE_REBUILD)
     if ((e.res[r] || 0) < THRONE_REBUILD[r])
       return {ok:false, why:'Yetersiz ' + (RES[r] ? RES[r].n : r) +

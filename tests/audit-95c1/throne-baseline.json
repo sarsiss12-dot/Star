@@ -1,0 +1,12 @@
+{
+  "allowed": true,
+  "built": true,
+  "hulls": [
+    "zir",
+    "zir",
+    "kru"
+  ],
+  "researched": false,
+  "shipsBefore": 2,
+  "shipsAfter": 3
+}

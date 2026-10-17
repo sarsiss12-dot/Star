@@ -766,6 +766,19 @@ const ORIGINS = {
   gocebe  :{n:'Göçebe Filosu', ico:'🚀',
     d:'Anavatanın yok edildi. Küçük bir kolonide, fazladan 2 koloni gemisi ve güçlü bir filoyla yeniden başlıyorsun.'}
 };
+function originEffectText(e){
+  const effects={
+    standart:'Standart temel başlangıç: 12 nüfuslu anavatan; 2 maden, 2 santral, 2 çiftlik, 1 laboratuvar, 1 dökümhane, 2 fabrika ve 1 tersane. Üç filoda 3 korvet, 1 bilim gemisi ve 1 koloni gemisi. Kökenin ayrıca sürekli üretim bonusu veya ilişki cezası yok.',
+    kalinti:'Standart temele ek olarak başlangıçta +900 araştırma stoku; anavatanda kalıntı yatağı ve sistemde anomali.',
+    kapali:'Başlangıç kaynakları ×1,25; anavatanda 2 kale. Başlangıç ilişkileri iki yönde −25.',
+    kusatilmis:'Anavatanda 2 kale; başlangıç alaşımı ×1,40; fazladan 2 korvet ve 1 muhrip içeren Kuşatma Kırıcı filosu. Bu başlangıç gemileri muhrip araştırmasını açmaz.',
+    son_umut:'Anavatan 5 nüfus; 1 maden, 1 santral, 1 çiftlik ve 1 tersane. Başlangıç kaynakları ×0,45; erişim koşullarının izin verdiği 1. kademe teknolojiler başlangıçta verilir.',
+    altin_cag:'Anavatan 18 nüfus, geliştirilmiş yapılar ve 2 tersane; başlangıç kaynakları ×1,50. Uygun komşu dünyalarda en çok 2 ek koloni. İlişkiler iki yönde −30; etkin kriz takvimi 10 yıl erkene çekilir (en erken 2216).',
+    golgeden:'Başlangıç diplomatik temasları kaldırılır; diğer devletler için başlangıç istihbaratı 1. Daha sonra kurulan temaslar normal işler.',
+    gocebe:'Başlangıç kolonisi 6 nüfus, 1 maden / santral / çiftlik / tersane. Başlangıç minerali ×1,15, alaşımı ×1,60; muhafız 5 korvet; fazladan 1 koloni gemisi ve 1 bilim gemisi.'
+  };
+  return effects[e.origin||'standart']||'Bu eski kaydın köken etkileri doğrulanamadı.';
+}
 
 /* ---------- TÜR GÖRÜNÜŞLERİ ---------- */
 const LOOKS = {
@@ -3328,6 +3341,7 @@ function pathAllowed(e, f, path, from){
   }
   return true;
 }
+const routeNoticeCache=new WeakMap();
 function orderMove(f, target, append, automatic=false, knownPath=null){
   if (!f || !Array.isArray(f.path) || !f.ships || !f.ships.length || !empOf(f)) return false;
   const start = f.path.length ? f.path[f.path.length-1] : (f.mv ? f.mv.to : f.sys);
@@ -3348,7 +3362,13 @@ function orderMove(f, target, append, automatic=false, knownPath=null){
       p = alt;
       if (f.e === 0) say('Kapalı sınır aşıldı — filon uzun yoldan gidiyor');
     } else {
-      if (f.e === 0) say('Rota kapalı: yabancı bölgeden geçiş izni gerekli', 'war');
+      if (f.e === 0){
+        const old=routeNoticeCache.get(f),now=Date.now(),key=from+':'+target+':passage';
+        if(!old||old.key!==key||G.day-old.day>=1||now-old.at>=4600){
+          routeNoticeCache.set(f,{key,day:G.day,at:now});
+          say((f.name||'Filo '+f.id)+' · Rota kapalı: yabancı bölgeden geçiş izni gerekli','war');
+        }
+      }
       return false;
     }
   }
@@ -3366,6 +3386,7 @@ function orderMove(f, target, append, automatic=false, knownPath=null){
   if(automatic&&explorationEnabled(f))delete f.explore;
   else cancelExploration(f); // yalnız açık oyuncu emri otomasyonu devralır
   f.path = base.concat(p);
+  routeNoticeCache.delete(f);
   return true;
 }
 /* yalnız girilebilir sistemlerden geçen en kısa yol (Dijkstra) */
@@ -3390,10 +3411,11 @@ function shipmentRecord(f){
   };
   return f.shipment;
 }
-function holdShipment(f,reason){
+function holdShipment(f,reason,detail){
   const d=shipmentRecord(f); if(!d)return;
   f.path=f.mv?[f.mv.to]:[];
   d.state=reason;
+  if(detail)d.reason=detail;
   if(reason==='blocked'){
     d.attempts=Math.min(SHIPMENT_MAX_ATTEMPTS,(d.attempts||0)+1);
     d.next=G.day+5*Math.pow(2,d.attempts-1);
@@ -3426,8 +3448,12 @@ function followRallyFleet(f,budget){
   if(budget && budget.left<=0)return;
   if(budget)budget.left--;
   const path=shipmentRoute(empOf(f),f,f.sys,target);
-  if(path===null){holdShipment(f,'blocked');return;}
-  f.path=path;d.state='moving';d.attempts=0;d.next=0;
+  if(path===null){
+    const raw=findPath(f.sys,target,empOf(f));
+    holdShipment(f,'blocked',!raw?'Bilinen hiper-yol bağlantısı yok':!pathAllowed(empOf(f),f,raw,f.sys)?
+      'Askerî geçiş izni yok veya rota kapalı':d.safe?'Bilinen düşman tehdidi — güvenli rota yok':'Rota kapalı');return;
+  }
+  f.path=path;d.state='moving';d.attempts=0;d.next=0;delete d.reason;
 }
 function shipmentAction(e,f,action,target){
   if(!e || G.emps[e.id]!==e || e.dead || !f || !G.fleets.includes(f) || f.e!==e.id || !f.ships.length || !hasShipment(f))
@@ -3440,9 +3466,9 @@ function shipmentAction(e,f,action,target){
     if(!target || (target.fleet!==undefined ? (!fleet || fleet===f || hasShipment(fleet) || fleetDeliveryTarget(e,fleet)===null) :
       (!Number.isInteger(target.sys) || !G.sys[target.sys] || !G.sys[target.sys].seen.includes(e.id))))
       return {ok:false,why:'Geçerli kendi filonu veya bilinen sistemi seç'};
-    const safe=f.shipment&&f.shipment.safe;
+    const safe=f.shipment&&f.shipment.safe,origin=f.shipment?.origin;
     clearShipment(f);
-    f.shipment={...(fleet?{fleet:fleet.id}:{sys:target.sys}),...(safe?{safe:true}:{}),state:'ready',attempts:0,next:0};
+    f.shipment={...(fleet?{fleet:fleet.id}:{sys:target.sys}),...(safe?{safe:true}:{}),...(Number.isInteger(origin)?{origin}:{}),state:'ready',attempts:0,next:0};
     if(fleet)f.joinFleet=fleet.id;
     f.path=f.mv?[f.mv.to]:[];
   } else if(action==='retry'){
@@ -3456,9 +3482,11 @@ function restoreShipments(){
     const raw=f.shipment;
     const d={...(raw.fleet!==undefined?{fleet:raw.fleet}:{sys:raw.sys}),
       ...(raw.safe===true?{safe:true}:{}),
+      ...(Number.isInteger(raw.origin)&&G.sys[raw.origin]?{origin:raw.origin}:{}),
       state:['ready','moving','waiting','blocked','paused','lost'].includes(raw.state)?raw.state:'ready',
       attempts:Math.max(0,Math.min(SHIPMENT_MAX_ATTEMPTS,Number.isFinite(raw.attempts)?Math.floor(raw.attempts):0)),
       next:Number.isFinite(raw.next)?Math.max(0,Math.min(G.day+40,raw.next)):G.day};
+    if(typeof raw.reason==='string')d.reason=raw.reason.slice(0,180);
     if(!Number.isInteger(d.fleet??d.sys))d.state='lost';
     if(d.attempts>=SHIPMENT_MAX_ATTEMPTS && d.state==='blocked')d.state='paused';
     f.shipment=d;
@@ -3470,9 +3498,15 @@ function restoreShipments(){
 function shipmentStatus(f){
   const d=f.shipment;
   if(!d)return 'Teslimat sürüyor';
-  const labels={lost:'Hedef kayıp — yeni hedef seç',paused:'Otomatik deneme sınırına ulaşıldı',
-    blocked:'Rota kapalı — '+Math.max(0,Math.ceil(d.next-G.day))+' gün sonra yeniden denenecek',
-    waiting:'Ana filo bekleniyor',moving:'Yolda',ready:'Sevk bekliyor'};
+  const main=d.fleet!==undefined?G.fleets.find(x=>x.id===d.fleet&&x.e===f.e&&x.ships.length):null;
+  if(d.fleet!==undefined&&!main)return 'Hedef filo bulunamadı — yeni hedef seç';
+  if(f.combat)return 'Destek filosu savaşta — sevkiyat bekliyor';
+  if(f.retreating)return 'Geri çekilme tamamlanınca sevk edilecek';
+  if(d.state==='waiting'&&main)return main.combat?'Hedef filo savaşta — birleşme bekliyor':main.retreating?
+    'Hedef filo geri çekiliyor':main.mv?'Hedef sistem değişiyor — hareketli filo bekleniyor':'Ana filo bekleniyor';
+  const labels={lost:'Hedef kayıp — yeni hedef seç',paused:(d.reason||'Rota kapalı')+' · Otomatik deneme sınırına ulaşıldı; yeniden dene / hedef değiştir',
+    blocked:(d.reason||'Rota kapalı')+' — '+Math.max(0,Math.ceil(d.next-G.day))+' gün sonra yeniden denenecek',
+    waiting:'Ana filo bekleniyor',moving:'Takviye yolda · hareketli hedef izleniyor',ready:'Sevk sırası bekliyor — ralli atamak gerekmez'};
   return labels[d.state] || 'Sevk bekliyor';
 }
 
@@ -3646,7 +3680,7 @@ function stepFleets(dt){
       const nxt = f.path[0], eMove = empOf(f), here = G.sys[f.sys];
       if(f.shipment && f.shipment.safe){
         if(!safeThreats.has(f.e))safeThreats.set(f.e,reinforcementThreats(eMove));
-        if(safeThreats.get(f.e).has(nxt)){holdShipment(f,'blocked');continue;}
+        if(safeThreats.get(f.e).has(nxt)){holdShipment(f,'blocked','Bilinen düşman tehdidi — güvenli rota yok');continue;}
       }
       if(explorationEnabled(f)){
         if(!exploreChecks.has(f.e))exploreChecks.set(f.e,explorationContext(eMove));
@@ -3661,7 +3695,7 @@ function stepFleets(dt){
         const p = here && !hasShipment(f) && !jointReserved(f) ? findPathAllowed(eMove,f,f.sys,nxt) : null;
         if (p && p.length) f.path = p.concat(f.path.slice(1));
         else {
-          if(hasShipment(f))holdShipment(f,'blocked');
+          if(hasShipment(f))holdShipment(f,'blocked',!lane&&!gate?'Hiper-yol / yıldız kapısı bağlantısı değişti':'Askerî geçiş izni kapandı');
           else f.path = [];
           if (f.e===0) say('Rota artık geçerli değil — filo mevcut sistemde bekliyor', 'war');
         }
@@ -3996,7 +4030,7 @@ function arrive(f, sys){
 
 /* 88A.1: üretim sonucu yalnız gerçekten başlayan sevki ilan eder. */
 function dispatchBuiltFleet(e,f,delivery){
-  f.shipment={...(delivery.fleet!==undefined?{fleet:delivery.fleet}:{sys:delivery.sys}),...(delivery.safe===true?{safe:true}:{}),state:'ready',attempts:0,next:0};
+  f.shipment={...(delivery.fleet!==undefined?{fleet:delivery.fleet}:{sys:delivery.sys}),...(delivery.safe===true?{safe:true}:{}),origin:f.sys,state:'ready',attempts:0,next:0};
   if(delivery.fleet!==undefined)f.joinFleet=delivery.fleet;
   followRallyFleet(f);
   if(!f.ships.length)return 'ana filoya katıldı';
@@ -4868,6 +4902,7 @@ function restoreFleetTemplates(){
     if(!validFleetTemplate(t.counts) || hasShipment(f) || f.federal || f.guardLocked){delete f.composition;continue;}
     f.composition={counts:{...t.counts},auto:t.auto===true,
       next:Number.isFinite(t.next)?clamp(t.next,0,G.day+5):G.day,
+      ...(typeof t.reason==='string'?{reason:t.reason.slice(0,180)}:{}),
       ...(G.emps[f.e]&&G.emps[f.e].ai&&typeof t.aiDesign==='string'&&t.aiDesign.length<100?{aiDesign:t.aiDesign}:{})};
   }
 }
@@ -5026,8 +5061,10 @@ function fleetAutoReinforceTick(){
   candidates.sort((a,b)=>a.composition.next-b.composition.next||a.id-b.id);
   const f=candidates[0];if(!f)return;
   f.composition.next=G.day+5;
-  if(navyAsleep(G.p).uyku)return;
-  reinforceFleet(G.p,f,{limit:4,automatic:true});
+  const sleep=navyAsleep(G.p);
+  if(sleep.uyku){f.composition.reason=sleep.why==='kasa'?'Alaşım rezervi yetersiz — otomatik üretim bekliyor':'Donanma kapasitesi dolu — otomatik üretim bekliyor';return;}
+  const result=reinforceFleet(G.p,f,{limit:4,automatic:true});
+  f.composition.reason=result.ok?'Üretim sürüyor; gemiler otomatik bu filoyu izler':result.why;
 }
 
 /* Genel toplanma tercihi özel siparişlere geriye dönük uygulanmaz. */
@@ -6259,6 +6296,7 @@ async function toggleFull(){
    3) bellek          : ikisi de yoksa (en azından oturum içinde çalışır)
    Ayrıca metin olarak dışa/içe aktarma her ortamda çalışır.        */
 let MEM_SAVE = null;
+let LAST_SAVE_RESULT = {persistent:false,session:false,backend:null};
 const MEM_PREFS = new Map();
 /* FAZ 18: danışman tercihi — kalıcı depoda saklanır */
 let ADVISOR_OFF = false;
@@ -6407,13 +6445,15 @@ async function storeSet(k,v){
   if (k === 'yildiz:save') MEM_SAVE = v;
   else MEM_PREFS.set(k, v);
   let ok = false;
+  let backend=null;
   if (hasHostStore()){
-    try { await window.storage.set(k, v); ok = true; } catch(e){}
+    try { const result=await window.storage.set(k, v);ok=result!==false&&result?.ok!==false;if(ok)backend='host'; } catch(e){}
   }
   if (!ok && hasLocalStore()){
-    try { window.localStorage.setItem(k, v); ok = true; } catch(e){}
+    try { window.localStorage.setItem(k, v);ok=window.localStorage.getItem(k)===v;if(ok)backend='localStorage'; } catch(e){}
   }
-  return ok || (k === 'yildiz:save' ? !!MEM_SAVE : MEM_PREFS.has(k));
+  if(k==='yildiz:save')LAST_SAVE_RESULT={persistent:ok,session:true,backend};
+  return ok;
 }
 async function storeGet(k){
   if (hasHostStore()){
@@ -8070,7 +8110,7 @@ function forceRedraw(sebep){
    Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
    Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
 /* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */
-const BUILD_ID = '95c';
+const BUILD_ID = '95c1';
 const DIAG_MAX = 40;
 const DIAG = [];
 function logDiag(tur, mesaj){
@@ -8889,7 +8929,7 @@ function monthTick(){
   if (G.month === 1 && G.autoSave !== false && G.year > 2210){
     warLedgerSync();
     settlementTick();
-    saveGame().then(ok => { if (ok) say('Otomatik kayıt — ' + G.year); });
+    saveGame().then(ok => { if (ok) say('Otomatik kayıt — ' + G.year);else say('Otomatik kalıcı kayıt başarısız; Dosyaya kaydet ile yedek al.','war'); });
   }
   /* HOTFIX 23.1 — KORSAN KORUMASI
      Korsanlar ve Yırtıcılar TANIM GEREĞİ gezegensiz doğar; koloni

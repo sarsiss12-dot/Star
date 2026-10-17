@@ -5,6 +5,13 @@ const hash=s=>createHash('sha256').update(s).digest('hex');
 // block must restore the untouched canonical 93A.1/93C HTML hash.
 // Historical referans-sha.json remains intact; neither half is exempted.
 exports.isReviewedUI=source=>{
+ // 95C.1 mobile layout is an independently pinned additive block.
+ const mobileStart=source.indexOf('/* FAZ 95C.1 — bounded mobile controls */');
+ if(mobileStart>=0){const marker='/* END FAZ 95C.1 MOBILE */\n',end=source.indexOf(marker,mobileStart)+marker.length;
+  if(end<mobileStart||hash(source.slice(mobileStart,end))!=='9a2c98af21d8cf1a66d11fed4959a4e8593b4cba6bd4961523c2fcb79173a3ef')return false;
+  source=source.slice(0,mobileStart)+source.slice(end);
+ }
+
  // 95B's canonical federation CSS was shipped without updating this guard.
  // Pin that exact block separately; original UI and science hashes stay fixed.
  const fedStart=source.indexOf('/* 95B: reuse the bounded diplomacy panel');

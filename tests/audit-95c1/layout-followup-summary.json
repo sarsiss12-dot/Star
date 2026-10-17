@@ -1,0 +1,32 @@
+{
+  "suites": 3,
+  "pass": 70,
+  "fail": 0,
+  "ok": true,
+  "results": [
+    {
+      "name": "faz95c1_ui_test.js",
+      "exit": 0,
+      "pass": 29,
+      "fail": 0,
+      "evidence": "tests/audit-95c1/ui-wrap-followup.log",
+      "validation": "Completed targeted log after counter-wrap CSS correction"
+    },
+    {
+      "name": "faz93d_science_ui_test.js",
+      "exit": 0,
+      "pass": 20,
+      "fail": 0,
+      "evidence": "tests/audit-95c1/science-wrap-followup.log",
+      "validation": "Completed targeted log after counter-wrap CSS correction"
+    },
+    {
+      "name": "faz93a1_production_panels_test.js",
+      "exit": 0,
+      "pass": 21,
+      "fail": 0,
+      "evidence": "tests/audit-95c1/production-wrap-followup.log",
+      "validation": "Completed targeted log after counter-wrap CSS correction"
+    }
+  ]
+}

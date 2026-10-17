@@ -1,3 +1,20 @@
+# 95C.1 güncel açık riskler — 17 Ekim 2026
+
+- 83 paket / 4.923 başarılı kontrol / 0 kalan hata; sıfır atlanan paket/zaman aşımı. Tek tam regresyonun ham başarısızlıkları ve gerekçeli takipler korunur. Ayrıntı `TEST-SONUCLARI-95C1.md`.
+- Gerçek tarayıcı yerleşimi ve fiziksel Android kabulü yapılamadı. Chromium ikilisi bulunamadı. Mock DOM sözleşmesi, kaynak CSS ve native Canvas piksel testi parmak/FPS/ısı/klavye/arka plan dönüşü kabulü değildir.
+- Oyuncunun yeterli Etkide engellendiği özgün karar ve ekrandaki kilitli gövdelerin kökeni save olmadan kesin açıklanamaz. Otomatik üretim ihlali yeniden üretilemedi; doğrulanan özel Taht yeniden inşa açığı düzeltildi.
+- Taht Gemisi başlangıçta araştırmasız bulunabilir; yeni yeniden inşa gövde araştırması ister. Erken taht kaybında bekleme bunun bilinçli sonucudur; mevcut gemiler silinmez.
+- Uzun tam bina adları ve ayrı yıkım satırı daha çok dikey alan kullanır. Dar ekran sayaç sarımı ve +N etkileşimi gerçek cihazda denenmeli.
+- Yeni kaynak seçimi gerçek stok/gelir/sözlere bağlıdır; imzada yeniden doğrulanır. AI kaynakları teklifte rezerve edilmez. Mevcut kaçakçılık ticaret istisnası korunur.
+- Başarısız sevkiyatın nedenini ayırmak için sınırlı ek rota araması yapılır. 100 sistem/50 kapalı sevk stresinde medyan 2,08 → 3,55 ms; tik bütçesi 8, deneme sayısı en çok 4. Bu Android üst sınırı değildir. Değişmeyen ortak sefer tikinde ek arama yok.
+- Eski tamamlanmış sevkiyatta kaynak tersane alanı yoksa bilinmiyor gösterilir; konum uydurulmaz. Rota/tehdit/izin değişince ETA değişebilir; mevcut hareketli hedef motoru korunur.
+- Kalıcı backend yazma onayı, tarayıcının ileride veriyi temizlemeyeceğinin garantisi değildir. Kota/engel başarısı yanlış gösterilmez; dosya yedeği önemini korur.
+- Yeni regresyonun 11/99/404 koşuları 120 ay sürdü; negatif stok 0, ancak 11’de 38 devlet-ay enerji sıfır örneği vardır. Gerçek kayıp/tasfiye 257/152/89; bunlar otomatik başarı sayılmadı. Bağımsız uzun 95C↔95C.1 federasyon savaşı denge karşılaştırması yapılmadı; eski 95C ölçümleri tarihsel kalır. Doğal ortak savaş sıklığı, başkent rezervi, geç oyun bilgi sınırları ve tohum 99 takibi aşağıda korunur.
+
+GitHub'a yayın yapılmadı. 95D'ye başlanmadı. Aşağıdaki 95C ve önceki sonuçlar kendi sürümlerinin tarihsel kayıtlarıdır.
+
+---
+
 # 95C güncel açık riskler — 17 Ekim 2026
 
 - 79 paket / 4823 başarılı kontrol / 0 kalan hata / 0 zaman aşımı; tam koşu + sınırlı etkilenen takip. İlk denemeler ve kanonik 95B koruma tutarsızlığı saklandı. Sayım benzersizdir.

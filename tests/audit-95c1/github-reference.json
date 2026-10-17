@@ -1,0 +1,144 @@
+{
+  "comparison": {
+    "repository_full_name": "sarsiss12-dot/Star",
+    "base": "0626b90a889dc3edb72687d86eea1f50a4702add",
+    "head": "main",
+    "status": "identical",
+    "ahead_by": 0,
+    "behind_by": 0,
+    "total_commits": 0,
+    "too_large": null,
+    "base_commit": {
+      "sha": "0626b90a889dc3edb72687d86eea1f50a4702add",
+      "url": "https://api.github.com/repos/sarsiss12-dot/Star/commits/0626b90a889dc3edb72687d86eea1f50a4702add",
+      "html_url": "https://github.com/sarsiss12-dot/Star/commit/0626b90a889dc3edb72687d86eea1f50a4702add"
+    },
+    "merge_base_commit": {
+      "sha": "0626b90a889dc3edb72687d86eea1f50a4702add",
+      "url": "https://api.github.com/repos/sarsiss12-dot/Star/commits/0626b90a889dc3edb72687d86eea1f50a4702add",
+      "html_url": "https://github.com/sarsiss12-dot/Star/commit/0626b90a889dc3edb72687d86eea1f50a4702add"
+    },
+    "files": []
+  },
+  "blobs": [
+    {
+      "path": "main.js",
+      "sha": "0f9699c0519ddcf094848c2623e481b0a19051f4"
+    },
+    {
+      "path": "map.js",
+      "sha": "159268e321e1fa2840c325a2ebccfbbcd10f5616"
+    },
+    {
+      "path": "combat.js",
+      "sha": "f78609615d5689575aa35edce3be3683bcc5373c"
+    },
+    {
+      "path": "ai.js",
+      "sha": "b52d2d9ef4d4ff6239be613d868f7edf31b891c9"
+    },
+    {
+      "path": "diplomacy.js",
+      "sha": "f5dc8ce290c988c4c11b26afd9e0bf00e7cad3e3"
+    },
+    {
+      "path": "economy.js",
+      "sha": "06cd34939763ea3891e789dc70a05d6824483f01"
+    },
+    {
+      "path": "ui.js",
+      "sha": "4e2335cd10d8aebead83a61636cd33af6f24890e"
+    },
+    {
+      "path": "audio.js",
+      "sha": "9d7c2da2672f05d6f9758832bcc3e2a7f5b7eaa9"
+    },
+    {
+      "path": "index.html",
+      "sha": "36dce69606c3602a3d25939f2860cbbd7847ed20"
+    },
+    {
+      "path": "manifest.json",
+      "sha": "c2ee82b7208856623f05c97fc785c20dbd45edae"
+    },
+    {
+      "path": "sw.js",
+      "sha": "b8443b5f9535d50d78648188fd835be365216f10"
+    }
+  ],
+  "continuation": {
+    "sha": "b60e90167e36457075d0f64b6f02ab0de3f66431",
+    "path": "DEVAM-95C.md",
+    "content": "# Devam noktası — 95C\n\nKanonik kaynak: `stars-faz95b.zip`, SHA-256 `b5de2154d3b4cec88850959a63dbfab41a41c1b4c7a782fcfc2f9ea4cfa835c7`. CRC ve 1765 dosyalı manifest doğrulandı. GitHub main verilen `1fc2e86382a6bba965acbaf6d323c7ef79f5747e` yayın commit'iyle aynıydı. 15 Ekim geliştirme notu değişmeden korunur.\n\n95C'nin üretim değişiklikleri `main.js`, `ai.js`, `combat.js`, `diplomacy.js`, `ui.js`, `sw.js` içindedir. Ana HTML, harita, ekonomi, ses ve manifest kaynakları korunur. Save v8, PWA `stars-v95c`, build `95c`.\n\n- `G.jointOps` ve mevcut savaş defterine bağlı ortak görev/geçerlilik/rezervasyon.\n- 95A bilinen rota aramasında isteğe bağlı ara düğüm filtresi; mevcut hareket motoruyla gerçek toplanma, bekleme ve ETA farkına göre çıkış.\n- Aylık otomatik plan, beş günlük sınırlı değerlendirme; kritik savunma, ikmal, geri çekilme ve bekleme sınırları.\n- Oyuncunun üç destek talebi, kabul/ret ve iptal; mevcut üç panelde kompakt bölüm.\n- Eski yalnız-iki-devlet muharebe seçiminin aynı seferdeki gerçek aktörler için mevcut çözümleyiciye bağlanması; tek toplam atış bütçesi ve gerçek katkı.\n- Savunmasız boş düşman yörüngesinde gerçek varıştan mevcut fetih motoruna geçiş.\n- Paylaşımda eşit puanlı adaylar için bilinen erişim tercihi; oybirliği ve açık atamalar korunur.\n\nSon sayılar `FAZ95C-RAPOR.txt`, `TEST-SONUCLARI-95C.md`, `tests/summary-95c.json` içindedir. İlk başarısız denemeler saklanmıştır; aynı testleri neden olmadan tekrarlamayın. Karşılaştırma: üç doğal 120 aylık kampanya + üç kontrollü savaş başlangıcı; erken biten koşular süreleriyle açık raporlanır. `tests/campaign-95c` ham veriyi, `tests/audit-95c` bütünlük ve performans kanıtını içerir.\n\nDikkat: gerçek Android/DOM kabulü yok; Chromium bulunamadı. Koalisyon raporu hâlâ çift bazlıdır. ETA yaklaşık; rota/hız değişince tam eşzamanlılık garantisi yok. Büyük tek başkent filosunun muhafazakâr tutulması yardım vermemeye neden olabilir. Uzun vadeli dengeyi üç tohum kanıtlamaz; ekonomik zorluk ve kayıpları karşılaştırma belgesinden okuyun.\n\nGitHub'a yayın yapılmadı. 95D'ye başlanmadı. Sonraki faz ancak ayrı kullanıcı talimatıyla; önceki yol haritası ve talepler aynen korunur.\n",
+    "matches_zip": true
+  },
+  "blob_checks": [
+    {
+      "path": "main.js",
+      "git_blob": "0f9699c0519ddcf094848c2623e481b0a19051f4",
+      "github_blob": "0f9699c0519ddcf094848c2623e481b0a19051f4",
+      "match": true
+    },
+    {
+      "path": "map.js",
+      "git_blob": "159268e321e1fa2840c325a2ebccfbbcd10f5616",
+      "github_blob": "159268e321e1fa2840c325a2ebccfbbcd10f5616",
+      "match": true
+    },
+    {
+      "path": "combat.js",
+      "git_blob": "f78609615d5689575aa35edce3be3683bcc5373c",
+      "github_blob": "f78609615d5689575aa35edce3be3683bcc5373c",
+      "match": true
+    },
+    {
+      "path": "ai.js",
+      "git_blob": "b52d2d9ef4d4ff6239be613d868f7edf31b891c9",
+      "github_blob": "b52d2d9ef4d4ff6239be613d868f7edf31b891c9",
+      "match": true
+    },
+    {
+      "path": "diplomacy.js",
+      "git_blob": "f5dc8ce290c988c4c11b26afd9e0bf00e7cad3e3",
+      "github_blob": "f5dc8ce290c988c4c11b26afd9e0bf00e7cad3e3",
+      "match": true
+    },
+    {
+      "path": "economy.js",
+      "git_blob": "06cd34939763ea3891e789dc70a05d6824483f01",
+      "github_blob": "06cd34939763ea3891e789dc70a05d6824483f01",
+      "match": true
+    },
+    {
+      "path": "ui.js",
+      "git_blob": "4e2335cd10d8aebead83a61636cd33af6f24890e",
+      "github_blob": "4e2335cd10d8aebead83a61636cd33af6f24890e",
+      "match": true
+    },
+    {
+      "path": "audio.js",
+      "git_blob": "9d7c2da2672f05d6f9758832bcc3e2a7f5b7eaa9",
+      "github_blob": "9d7c2da2672f05d6f9758832bcc3e2a7f5b7eaa9",
+      "match": true
+    },
+    {
+      "path": "index.html",
+      "git_blob": "36dce69606c3602a3d25939f2860cbbd7847ed20",
+      "github_blob": "36dce69606c3602a3d25939f2860cbbd7847ed20",
+      "match": true
+    },
+    {
+      "path": "manifest.json",
+      "git_blob": "c2ee82b7208856623f05c97fc785c20dbd45edae",
+      "github_blob": "c2ee82b7208856623f05c97fc785c20dbd45edae",
+      "match": true
+    },
+    {
+      "path": "sw.js",
+      "git_blob": "b8443b5f9535d50d78648188fd835be365216f10",
+      "github_blob": "b8443b5f9535d50d78648188fd835be365216f10",
+      "match": true
+    }
+  ],
+  "all_production_matches": true
+}

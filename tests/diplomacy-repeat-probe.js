@@ -26,6 +26,8 @@ function scenario(root,seed,months=120){
 function stress(root){
  const h=runtime({root:path.resolve(root)});h.loadSave(path.join(__dirname,'fixtures/stars-2210-06.sav.json'));
  h.run(`var E=G.emps[1];E.dead=false;E.wild=false;E.contact[0]=G.p.contact[E.id]=true;
+   // Test repeated ordinary offers, not the loaded fixture's closed diplomatic doctrine.
+   for(const e of [E,G.p]){e.civics=[];e.mizac=e._pers='yayilmaci';e.persLock='yayilmaci';delete e._prof;}
    E.res.min=10000;G.p.res.ene=10000;G.inbox=[];
    var offer={from:E.id,to:0,give:[{t:'res',r:'min',v:100}],want:[{t:'res',r:'ene',v:50}]};
    var delivered=0,relBefore=E.rel[0];

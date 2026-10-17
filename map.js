@@ -1573,7 +1573,7 @@ const View = {
     return null;
   },
   drawWarConnections(g){
-    if(!WAR_LINKS_ON&&MAP_MODE!=='savas')return;
+    if(!WAR_LINKS_ON)return;
     const lines=warMapConnections();if(!lines.length)return;
     g.save();g.strokeStyle='rgba(255,82,99,.48)';
     for(const p of lines){

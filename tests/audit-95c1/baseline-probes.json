@@ -1,0 +1,26 @@
+{
+  "root": "/workspace/scratch/55d4d6314421/baseline95c",
+  "pariah": {
+    "blocked": true,
+    "pactAllowed": true,
+    "quote": true
+  },
+  "aiOffer": {
+    "quote": false,
+    "enqueued": true,
+    "inbox": 1
+  },
+  "ships": {
+    "lockedQueue": false,
+    "ordered": 1,
+    "lockedNewHull": false,
+    "legacyLockedJobRetained": true
+  },
+  "routes": [
+    "Rota kapalı: yabancı bölgeden geçiş izni gerekli",
+    "Rota kapalı: yabancı bölgeden geçiş izni gerekli"
+  ],
+  "memoryReportedSuccess": true,
+  "warModeIgnoresOff": true,
+  "templateAllClassesEditable": true
+}

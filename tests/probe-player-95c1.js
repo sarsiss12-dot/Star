@@ -1,0 +1,24 @@
+'use strict';
+const path=require('path'),fs=require('fs'),{fresh}=require('./helpers/dispatch-fixture');
+const root=path.resolve(process.argv[2]||path.join(__dirname,'../..'));
+(async()=>{
+ const h=fresh(0,root),out={root};
+ h.run(`G.council={pariahs:{0:true}};var pm=pariahMap;pariahMap=()=>({0:true});
+ var offer={from:1,to:0,give:[{t:'pact'}],want:[]};
+ O.contact[0]=E.contact[1]=true;E.pact={};O.pact={};`);
+ out.pariah={blocked:h.run('tradeBlocked(E,O)'),pactAllowed:h.run('canPact(E,O)'),quote:h.run('dealQuote(offer).ok')};
+ h.run(`pariahMap=pm;G.council=null;O.res.etk=0;var bad={from:1,to:0,give:[{t:'intel'}],want:[{t:'ally'}]};`);
+ out.aiOffer={quote:h.run('dealQuote(bad).ok'),enqueued:h.run('UI.aiOffer(bad)'),inbox:h.run('(G.inbox||[]).filter(n=>n.kind==="aideal").length')};
+ h.run(`delete E.techs.m_muhrip;delete E.techs.m_kruvazor;delete E.techs.m_zirhli;
+ setFleetTemplate(E,A,{kor:2,muh:2,kru:2,zir:2},true);
+ var locked=queueShip(E,Y,'zir');var rein=reinforceFleet(E,A);var before=Y.queue.length;
+ Y.queue.push({cls:'zir',e:E.id,left:0,tot:1});finish();`);
+ out.ships={lockedQueue:h.run('locked'),ordered:h.run('rein.siparis'),lockedNewHull:h.run('G.fleets.some(f=>f.e===0&&f.ships.some(s=>s.c==="zir"))'),legacyLockedJobRetained:h.run('Y.queue.some(q=>q.cls==="zir")')};
+ h.run(`G.log=[];G.sys[3].owner=O.id;orderMove(A,4,false);orderMove(A,4,false);`);
+ out.routes=h.run('G.log.filter(x=>x.m.includes("Rota kapalı")).map(x=>x.m)');
+ h.run(`window.storage=undefined;_localOK=false;`);
+ out.memoryReportedSuccess=await h.run('storeSet("yildiz:save","temporary")');
+ out.warModeIgnoresOff=fs.readFileSync(path.join(root,'map.js'),'utf8').includes("if(!WAR_LINKS_ON&&MAP_MODE!=='savas')return");
+ out.templateAllClassesEditable=fs.readFileSync(path.join(root,'ui.js'),'utf8').includes('value="${counts[c]||0}"');
+ console.log(JSON.stringify(out,null,2));
+})();

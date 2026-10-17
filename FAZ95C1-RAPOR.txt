@@ -1,0 +1,45 @@
+STARS — FAZ 95C.1
+Oyuncu testi düzeltmeleri; yeni Android denemesi için kalite adayı
+
+KAYNAK
+stars-faz95c.zip
+SHA-256: ba8f588a7b31ec7d0f7b997a5f04f432fa45fa67c190fb07ea21ed25b9a13537
+CRC: geçti. Kaynak manifesti: 2003 dosyanın tamamı eşleşti.
+GitHub main / 0626b90a889dc3edb72687d86eea1f50a4702add: aynı yayın; 11 üretim dosyasının Git blob kimliği ZIP ile aynı. DEVAM-95C.md de aynı.
+95A, 95B, 95C kaynakları, raporları ve 15 Ekim geliştirme notu korunur.
+
+SONUÇ
+83 paket / 4.923 başarılı kontrol / 0 kalan hata; atlanan paket ve zaman aşımı yok.
+Yöntem: tek tam regresyon + gerekçesi kayıtlı hedefli takip. İlk tam koşu 4897 başarılı / 26 başarısızdı. Son benzersiz sayım tests/summary-95c1.json içindedir; ham başarısız kayıtlar silinmedi. Önceki faz sonucu yeni sonuç olarak kopyalanmadı.
+Yeni dört 95C.1 paketi 100 kontrol içerir. Önceden var olan 79 paket de bu fazda çalıştırıldı.
+
+KANITLANAN KÖK NEDENLER
+- 7 / 2 toplam müttefik / gerekli AI ortak sayısıydı; uygun aday sayısı değildi. En az 3 toplam üye, yani kurucu + 2 kabul eden AI ortak kuralı korunur.
+- Federasyon kapısı ilk engeli gösteriyor; adayın üyelik, bekleme, güven/ilişki, rota ve kabul gerekçeleri saklı kalıyordu. Açık kuruluş paneli canlı kaynak değişimini yenilemiyordu. Yeterli Etkide kanonik motorun yanlış reddettiği yeniden üretilemedi.
+- canPact ambargo/parya ticaret kapısına bağlı değildi. UI.aiOffer bütün üreticiler için tam maliyet/teslimat kontrolü yapmıyordu.
+- Sabit kaynak miktarı listeleri; mevcut aylık sözlerin kapasiteye katılmaması; Etki teslimatı ile imza ücretinin birlikte rezerve edilmemesi.
+- Otomatik takviye ve queueShip araştırma kilitleri çalışıyordu. Ayrı Taht Gemisi yeniden inşası ise 2 zırhlı + 1 kruvazörü araştırmasız yeni oluşturabiliyordu; düzeltildi.
+- Filo hedefli çok tersaneli teslimat zaten vardı. Genel ralli açıklaması ve sevkiyat gerekçeleri bunu anlaşılmaz kılıyordu.
+- Savaş modu bağlantı çizgilerini kapalı tercihe rağmen açıyordu. Aynı filo rota reddi iki kez yayımlanabiliyordu.
+- Üst bar durumları kaynaklarla aynı taşan şeritteydi. Sağ üst absolute yıkım düğmesi bina sayısını kapatıyordu.
+- Kalıcı yazma sonucu RAM kopyasıyla birleştiriliyor, gerçek kalıcı hata başarı olabiliyordu.
+
+İYİLEŞTİRMELER
+Ortak doğrulama ve ayrıntılı federasyon adayları; yaptırım/ödeme kapısı; manuel ve hazır ticaret miktarı; gerçek teknoloji kapısı; sevkiyatta kaynak/hedef/neden/işlem; üç destek talebi için hedef ve müttefik önizlemesi; bağımsız Savaş hatları; sabit +N durum erişimi; ayrı bina sayacı/yıkımı; net aylık araştırma; olgusal köken metni; dürüst kayıt mesajları.
+
+DEĞİŞEN ÜRETİM DOSYALARI
+main.js, map.js, diplomacy.js, economy.js, ui.js, index.html, sw.js.
+ai.js, combat.js, audio.js ve manifest.json byte-for-byte aynı. Değişen testler, sürüm kimliği güncellemeleri, yeni kontroller ve kaynak yaması tests/audit-95c1 altında açıklanır.
+
+PERFORMANS
+100 sistem / 50 kapalı sevkiyat: tik bütçesi 8'de kaldı. Ek neden araması başarısız rota denemesinde yapılır. Medyan 2,08 → 3,55 ms, P95 6,04 → 7,18 ms. Bu teşhis maliyeti artıştır; gizlenmedi. Değişmeyen 1000 ortak sefer tikinde yeni rota araması 0. Ölçüm Node host'tur; Android FPS değildir.
+
+UYUMLULUK / SINIRLAR
+Save v8, deterministik RNG, tek 2B kamera, üç federasyon türü, 95B siyasi izinleri, 95C sefer/ETA/ikmal, sınıf şablonu ve mevcut savaş katkısı / oybirliği paylaşımı korunur. Build 95c1; PWA stars-v95c1. Yeni oyun kütüphanesi veya harici asset yok.
+Gerçek Chromium bulunamadı; gerçek tarayıcı DOM/yerleşim kabulü ve fiziksel Android testi yapılamadı. Canvas piksel testi ve mock giriş testleri bunların yerine geçirilmedi.
+Özgün oyuncu save'i olmadan yeterli Etki reddinin ve ekrandaki eski gemilerin kesin kökeni açıklanamaz. Bu iki iddia düzeltilmiş motor hatası gibi gösterilmedi.
+Uzun dönem 120 aylık yeni 95C.1 kampanya karşılaştırması yapılmadı; önceki ölçümler tarihsel kalır. Bu fazdaki yeni kampanya güveni tam regresyonun AI/ekonomi/sefer/savaş senaryolarıyla sınırlıdır. Bu regresyondan alınan yeni 11/99/404 verilerinin her biri 120 aydır; tohum 11’de 38 devlet-ay enerji sıfır örneği ve gerçek kayıp/tasfiye vardır. Negatif stok bulunmaması sağlıklı ekonomi kanıtı sayılmadı; tablo TEST-SONUCLARI-95C1.md içindedir.
+
+TESLİM
+stars-faz95c1.zip. Son ZIP SHA-256 dış teslim mesajındadır; kendi hash'ini ZIP içine yazmak döngü yaratır. RELEASE-MANIFEST.json tüm diğer dosyaların SHA-256'sını içerir. ZIP üretildikten sonra CRC ve manifest doğrulaması ayrıca yapılır.
+GitHub'a yükleme yapılmadı. 95D'ye başlanmadı.
