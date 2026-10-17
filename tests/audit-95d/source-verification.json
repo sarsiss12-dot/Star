@@ -1,0 +1,53 @@
+{
+  "zip_sha256": "e964cd5dd0cfb14abbfcef4be935ec1d2d77e0388cdb8239f8b06fe529e3e6f3",
+  "crc": "OK",
+  "manifest_files": 2167,
+  "github_commit": "3c0fbbb1f10bceba8febf2f7bf684c0c99f425fb",
+  "main_identical": true,
+  "blobs": [
+    {
+      "file": "main.js",
+      "sha": "f3a45d99e8029cd4a0ef115f8630faa38c5694e4"
+    },
+    {
+      "file": "map.js",
+      "sha": "3474f39cb70a72efc18e98c59e3e59968890a40f"
+    },
+    {
+      "file": "combat.js",
+      "sha": "f78609615d5689575aa35edce3be3683bcc5373c"
+    },
+    {
+      "file": "ai.js",
+      "sha": "b52d2d9ef4d4ff6239be613d868f7edf31b891c9"
+    },
+    {
+      "file": "diplomacy.js",
+      "sha": "cef6b77288858e5ed1abe3e3134080678a57051a"
+    },
+    {
+      "file": "economy.js",
+      "sha": "ad526720628a7b8816100fa8e53f974e3d9cb523"
+    },
+    {
+      "file": "ui.js",
+      "sha": "0d0b7ab93b26493c35a7f0db61d0603994d1cd2f"
+    },
+    {
+      "file": "index.html",
+      "sha": "f17ebd848c8b7afdc58a7f71299c54a35d0dc000"
+    },
+    {
+      "file": "sw.js",
+      "sha": "4d7254b18cca9df162de1e43bf50fd6f7aa22bc0"
+    },
+    {
+      "file": "manifest.json",
+      "sha": "c2ee82b7208856623f05c97fc785c20dbd45edae"
+    },
+    {
+      "file": "STARS-GELISTIRME-NOTLARI-2026-10-15.md",
+      "sha": "caf85637bbea4012f41d43407f9df2b49035d88b"
+    }
+  ]
+}

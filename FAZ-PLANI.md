@@ -1,3 +1,19 @@
+# 95D sonrası güncel yol haritası — 17 Ekim 2026
+
+95D tamamlandı: benzersiz yeni devlet/federasyon adları, kaydedilen prosedürel amblemler, GÖRÜNÜŞ düzenleyicisi ve Rastgele Amblem, tıklanabilir harita kimliği, bağımsız Federasyon/İttifak/Savaş hatları, son onaylı savaş katılım önizlemesi. 86 paket / 4.988 başarılı kontrol / 0 kalan hata. Save v8 / stars-v95d / tek 2B kamera.
+
+| Sıradaki iş | Durum |
+|---|---|
+| Manuel Android / gerçek tarayıcı kabulü | Açık: yeni kimlik ve önizleme akışı, önceki 95C.1 mobil/kayıt kabulüyle birlikte |
+| GitHub yayını | Yapılmadı; ayrı kullanıcı talimatı |
+| 95E | Başlamadı; önceki haber ağı/gelen kutusu/uzaktan inşa talepleri korunur |
+| Uzun dönem kalite | Doğal federasyon savaşı, geç oyun bilgi sınırları ve gerçek cihaz çizim maliyeti |
+| Diğer bağımsız işler | Köken/portre, ticaret şeffaflığı/konvoy, ekonomi ekranı ve müzik talepleri önceki planlarda korunur |
+
+Üç federasyon türü, 95B oylama/savaş onayı, 95C gerçek sefer ve katkı/paylaşım motorları, 95C.1 kullanıcı düzeltmeleri korunur. Aşağıdaki “95D başlamadı” ifadeleri tarihsel kayıttır; güncel durum bu bölümdür.
+
+---
+
 # 95C.1 sonrası güncel yol haritası — 17 Ekim 2026
 
 95C.1, yeni manuel Android denemesi için kalite adayıdır. Diplomasi/federasyon tutarlılığı, araştırma ve özel üretim kilidi, sevkiyat açıklaması, destek UX'i, mobil temel bilgiler ve kalıcı kayıt düzeltmeleri tamamlandı. 83 paket / 4.923 başarılı kontrol / 0 kalan hata. Save v8, PWA stars-v95c1, tek 2B kamera.

@@ -1,3 +1,17 @@
+# 95D güncel açık riskler — 17 Ekim 2026
+
+- Gerçek Android, PWA yükseltme ve tarayıcı DOM/dokunma kabulü yapılmadı. Native Skia ve mock giriş testi bunların yerine geçmez; 95C.1’in cihaz riskleri sürer.
+- Yoğun/dağınık galakside sığmayan adlar mevcut yerleşim politikasıyla atlanır. Her bilinen devlet için her kare bir etiket garantisi yoktur. Yeni metin/raster cache sınırları ölçülmüş olsa da Android RAM/ısı/FPS ölçülmedi.
+- Eski kayıttaki yinelenmiş adlar kullanıcı tarihini korumak için değiştirilmez. Benzersizlik yeni üretim içindir. Bazı geometrik arma kombinasyonları 16–22px’de birbirine yakın görünebilir.
+- Yabancı federasyon/ittifak bağlantıları muhafazakâr seviye 3 istihbarat kapısına bağlıdır. Temas tek başına yeterli değildir. Bilgi yokluğu siyasi bağın yokluğu anlamına gelmez.
+- Savaş önizlemesi güncel bilinen yükümlülükleri anlatır; gizli taahhütler, gelecekteki oylar, Konsey’in rastlantısal uygulaması veya gerçek filo erişimi garantisi değildir. Bilinmeyenler sayısız genel açıklamadır. İlan anında yeniden kontrol ve yeniden onay vardır.
+- Reformda federasyon kimlik kökeni korunur; eski askerî amblem bilimsel reformdan sonra kalabilir. Güncel tür ve yükümlülük ayrı gösterilir. Yeni otomatik saldırı onayı oluşturulmaz.
+- Tam regresyon sırasında bulunan isim/RNG ve ilk kayıt renk farkları düzeltildi; ilk ham başarısız sonuçlar saklandı. Son benzersiz test sonucu TEST-SONUCLARI-95D.md’dedir. Ekonomi/AI dengesinde genel iyileşme iddia edilmez.
+
+GitHub'a yüklenmedi. 95E başlamadı. Önceki riskler tarihsel kayıt olarak aşağıda korunur.
+
+---
+
 # 95C.1 güncel açık riskler — 17 Ekim 2026
 
 - 83 paket / 4.923 başarılı kontrol / 0 kalan hata; sıfır atlanan paket/zaman aşımı. Tek tam regresyonun ham başarısızlıkları ve gerekçeli takipler korunur. Ayrıntı `TEST-SONUCLARI-95C1.md`.

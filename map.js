@@ -282,6 +282,39 @@ const ART = (() => {
     return c;
   }
 
+  /* 95D: bounded raster cache; no RNG or parameter generation in draw. */
+  const identityCache=new Map();
+  function identityEmblem(params,size=24){
+    const key=emblemKey(params)+':'+size;if(identityCache.has(key))return identityCache.get(key);
+    const {c,g}=cv(size,size);g.scale(size/64,size/64);g.lineJoin='round';g.lineCap='round';
+    const e=params, polygon=(count,r,cx=32,cy=32,angle=-Math.PI/2)=>{g.beginPath();for(let i=0;i<count;i++){const a=angle+i*Math.PI*2/count;g[i?'lineTo':'moveTo'](cx+Math.cos(a)*r,cy+Math.sin(a)*r);}g.closePath();};
+    g.save();
+    if(e.shape==='circle'||e.shape==='ring'){g.beginPath();g.arc(32,32,27,0,Math.PI*2);}
+    else if(e.shape==='shield'){g.beginPath();g.moveTo(9,7);g.lineTo(55,7);g.lineTo(53,38);g.quadraticCurveTo(48,52,32,59);g.quadraticCurveTo(16,52,11,38);g.closePath();}
+    else if(e.shape==='hex')polygon(6,28);
+    else if(e.shape==='diamond')polygon(4,30);
+    else {g.beginPath();for(let i=0;i<12;i++){const a=i*Math.PI/6-Math.PI/2,rr=i%2?22:29;g[i?'lineTo':'moveTo'](32+Math.cos(a)*rr,32+Math.sin(a)*rr);}g.closePath();}
+    g.fillStyle=e.primary;g.fill();g.strokeStyle=e.secondary;g.lineWidth=4;g.stroke();g.clip();
+    g.fillStyle=e.secondary;g.strokeStyle=e.secondary;g.lineWidth=4;
+    if(e.pattern==='stripe'){g.save();g.translate(32,32);g.rotate(-.55);g.fillRect(-40,-5,80,10);g.restore();}
+    if(e.pattern==='split')g.fillRect(32,0,32,64);
+    if(e.pattern==='ring'||e.shape==='ring'){g.beginPath();g.arc(32,32,21,0,Math.PI*2);g.stroke();}
+    if(e.pattern==='corners')for(const [x,y] of [[13,13],[43,13],[13,43],[43,43]])g.fillRect(x,y,8,8);
+    if(e.pattern==='rays'){g.lineWidth=2;for(let i=0;i<8;i++){const a=i*Math.PI/4;g.beginPath();g.moveTo(32+Math.cos(a)*19,32+Math.sin(a)*19);g.lineTo(32+Math.cos(a)*27,32+Math.sin(a)*27);g.stroke();}}
+    // Dark medallion guarantees contrast even for similar two-color choices.
+    g.fillStyle='#101827';g.beginPath();g.arc(32,32,17,0,Math.PI*2);g.fill();
+    g.strokeStyle='#fff4d4';g.fillStyle='#fff4d4';g.lineWidth=3;
+    if(e.symbol==='star'){g.beginPath();for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,rr=i%2?6:13;g[i?'lineTo':'moveTo'](32+Math.cos(a)*rr,32+Math.sin(a)*rr);}g.closePath();g.fill();}
+    else if(e.symbol==='sun'||e.symbol==='gear'){g.beginPath();g.arc(32,32,8,0,Math.PI*2);g.stroke();for(let i=0;i<8;i++){const a=i*Math.PI/4;g.beginPath();g.moveTo(32+Math.cos(a)*11,32+Math.sin(a)*11);g.lineTo(32+Math.cos(a)*14,32+Math.sin(a)*14);g.stroke();}if(e.symbol==='gear'){g.fillRect(29,29,6,6);}}
+    else if(e.symbol==='planet'||e.symbol==='orbit'){g.beginPath();g.arc(32,32,8,0,Math.PI*2);g.stroke();g.beginPath();g.ellipse(32,32,15,5,-.5,0,Math.PI*2);g.stroke();if(e.symbol==='orbit')g.fillRect(43,23,5,5);}
+    else if(e.symbol==='crystal'){polygon(4,14);g.stroke();g.beginPath();g.moveTo(32,18);g.lineTo(32,46);g.stroke();}
+    else if(e.symbol==='sword'){g.beginPath();g.moveTo(32,18);g.lineTo(27,29);g.lineTo(32,36);g.lineTo(37,29);g.closePath();g.fill();g.fillRect(22,35,20,3);g.fillRect(30,37,4,11);}
+    else {g.beginPath();g.moveTo(18,24);g.lineTo(32,32);g.lineTo(46,24);g.lineTo(40,39);g.lineTo(32,44);g.lineTo(24,39);g.closePath();g.stroke();}
+    g.restore();
+    if(e.federation){g.strokeStyle='#fff4d4';g.lineWidth=2;g.strokeRect(2,2,60,60);for(const x of [23,31,39]){g.fillStyle='#fff4d4';g.fillRect(x,1,3,3);}}
+    if(identityCache.size>=256)identityCache.delete(identityCache.keys().next().value);identityCache.set(key,c);return c;
+  }
+
   /* --------------------------------------------------------------
      PORTRE — tür siluetleri (16-bit)
      -------------------------------------------------------------- */
@@ -689,7 +722,7 @@ const ART = (() => {
     return c;
   }
 
-  return {planet, star, ship, emblem, portrait, portraitFull, leaderPortrait, nebula, cache,
+  return {planet, star, ship, emblem, identityEmblem, identityCache, portrait, portraitFull, leaderPortrait, nebula, cache,
           PORTRAIT, ARMOR, hexOf: hex, drawPixelArt, PIXEL_ART};
 })();
 
@@ -1228,6 +1261,11 @@ const View = {
      ve hit-test doğrudan parametreyi kullanıyor. */
   tap(screenPos){
     const sp = screenPos;
+    // 95D: identity hit boxes share the same collision-resolved screen bounds.
+    if(!this.route&&this.rallyForSys===undefined&&this.rallyFor===undefined&&this.panoptFor===undefined&&this.aimFleet===undefined){
+      const label=(this._territoryLabels||[]).find(b=>b.kind==='region'&&sp.x>=b.x&&sp.x<=b.x+b.w&&sp.y>=b.y&&sp.y<=b.y+b.h);
+      if(label&&territoryOwnerInfo(label.owner)?.known){UI.selectDiploIdentity(label.owner);return;}
+    }
     const {f, s} = this.hit(sp);
     // Hedef seçimi filo satırı / çift dokunuştan önce çözülür.
     if(this.rallyForSys!==undefined&&s){
@@ -1415,6 +1453,7 @@ const View = {
      üretiliyor, her dönüşte silmek boşa CPU demek.
      ═══════════════════════════════════════════════════════════════ */
   invalidateRenderCaches(reason){
+    DIPLO_MAP_CACHE=null;this._territoryLabels=[];
     this.bcache = null;            // sınır dokusu (240×240)
     this.bkey   = '';              // doku anahtarı
     this._bolgeAt = -1;            // bölge rengi önbelleği
@@ -1572,6 +1611,15 @@ const View = {
     }
     return null;
   },
+  drawDiplomacyConnections(g){
+    if(!FED_LINKS_ON&&!ALLY_LINKS_ON)return;
+    const lines=diplomacyMapConnections(this.cam.z),visible=p=>p.x>=0&&p.y>=0&&p.x<=this.vw&&p.y<=this.vh;
+    g.save();for(const line of lines){const a=this.w2s(line.from.x,line.from.y),b=this.w2s(line.to.x,line.to.y);if(!visible(a)||!visible(b))continue;
+      g.strokeStyle=line.kind==='federation'?'rgba(245,194,92,.55)':'rgba(92,245,214,.40)';g.lineWidth=line.kind==='federation'?1.8:1;g.setLineDash(line.kind==='federation'?[3,4]:[7,7]);
+      g.beginPath();g.moveTo(a.x,a.y);g.lineTo(b.x,b.y);g.stroke();
+      if(line.kind==='federation'&&this.cam.z>=.18){g.setLineDash([]);g.drawImage(ART.identityEmblem(line.emblem,16),(a.x+b.x)/2-8,(a.y+b.y)/2-8,16,16);}
+    }g.restore();
+  },
   drawWarConnections(g){
     if(!WAR_LINKS_ON)return;
     const lines=warMapConnections();if(!lines.length)return;
@@ -1689,17 +1737,28 @@ const View = {
     g.save();
     g.textAlign='left';g.textBaseline='middle';g.globalAlpha=1;
     g.letterSpacing='0px';g.setLineDash([]);
+    const emblemOwners=new Set();
+    this._identityTextMetrics=this._identityTextMetrics||new Map();
     for(const job of jobs){
+      const emblem=job.kind==='region'&&!emblemOwners.has(job.owner)&&territoryOwnerInfo(job.owner)?.known&&this.cam.z>=.12;
+      const icon=emblem?22:0;
       const fs=job.kind==='mixed'?10:this.cam.z>.22?12:11;
       g.font='600 '+fs+'px ui-monospace,monospace';
       const maxWidth=Math.min(220,this.vw-24);
-      let text=job.name;
-      if(g.measureText(text).width>maxWidth-16){
-        const chars=Array.from(text);
-        while(chars.length && g.measureText(chars.join('')+'…').width>maxWidth-16)chars.pop();
-        text=chars.join('')+'…';
+      const metricKey=JSON.stringify([job.name,fs,maxWidth,icon]);
+      let metric=this._identityTextMetrics.get(metricKey);
+      if(!metric){
+        let text=job.name;
+        if(g.measureText(text).width>maxWidth-16-icon){
+          const chars=Array.from(text);
+          while(chars.length&&g.measureText(chars.join('')+'…').width>maxWidth-16-icon)chars.pop();
+          text=chars.join('')+'…';
+        }
+        metric={text,w:Math.ceil(g.measureText(text).width)+16+icon,h:Math.max(fs+10,icon+4)};
+        if(this._identityTextMetrics.size>=256)this._identityTextMetrics.delete(this._identityTextMetrics.keys().next().value);
+        this._identityTextMetrics.set(metricKey,metric);
       }
-      const w=Math.ceil(g.measureText(text).width)+16,h=fs+10;
+      const {text,w,h}=metric;
       // Seçili sistem, sonra ekranda gerçekten görülen parçanın merkezi.
       const mx=job.systems.reduce((v,s)=>v+s.x,0)/job.systems.length;
       const my=job.systems.reduce((v,s)=>v+s.y,0)/job.systems.length;
@@ -1726,7 +1785,8 @@ const View = {
       g.beginPath();g.moveTo(b.px,b.py);g.lineTo(clamp(b.px,b.x,b.x+b.w),clamp(b.py,b.y,b.y+b.h));g.stroke();
       g.fillStyle='rgba(5,8,16,.82)';g.fillRect(b.x,b.y,b.w,b.h);
       g.fillStyle=job.col;g.fillRect(b.x,b.y,3,b.h);
-      g.fillText(text,b.x+9,b.y+b.h/2);
+      if(emblem){emblemOwners.add(job.owner);g.drawImage(ART.identityEmblem(stateEmblem(G.emps[job.owner]),22),b.x+6,b.y+(b.h-22)/2,22,22);}
+      g.fillText(text,b.x+9+icon,b.y+b.h/2);
       blocks.push(b);this._territoryLabels.push(b);
     }
     g.restore();
@@ -1789,6 +1849,7 @@ const View = {
     }
 
 
+    this.drawDiplomacyConnections(g);
     this.drawWarConnections(g); // 94D.1: under map labels and fleet hit areas
 
     /* ═══════════════════════════════════════════════════════════

@@ -1,0 +1,272 @@
+[
+  {
+    "path": "ACIK-RISKLER.md",
+    "new": false,
+    "sha256": "3f3a8aa032f0ff9c8143a5cd8d437e988a6297582cfbea05d4fc4b972be979e5"
+  },
+  {
+    "path": "AMBLEM-SISTEMI-95D.md",
+    "new": true,
+    "sha256": "61eb784e6f70f413f20deb9b392c9470955c3bf1f9abcd3b8c81eeabd6872af8"
+  },
+  {
+    "path": "DEVAM-95D.md",
+    "new": true,
+    "sha256": "de3664c9c90a6e249fcc88ba6426872d25520eaec5a8f53c784ccdc9cb612868"
+  },
+  {
+    "path": "DEVLET-KIMLIKLERI-95D.md",
+    "new": true,
+    "sha256": "c8cccf323ceca5f5f13d57aba05e981795d53015ab796a980158dd9446f59ad2"
+  },
+  {
+    "path": "DIPLOMASI-HARITASI-95D.md",
+    "new": true,
+    "sha256": "d31be50f4267458d4d31ad0a9a7a03a125fda7ae3aa8a9c32f15d49e7354957d"
+  },
+  {
+    "path": "FAZ-PLANI.md",
+    "new": false,
+    "sha256": "acfba7760f6a4943f175643f43e618a3a3cbf0489f8780fdf42b57b14dccb97b"
+  },
+  {
+    "path": "FAZ95D-RAPOR.txt",
+    "new": true,
+    "sha256": "3b3b0f4c7fa4f2be22550d01c165c4cb363c30a18c72309f9ca27321f4c4a7e7"
+  },
+  {
+    "path": "SAVAS-ONIZLEME-95D.md",
+    "new": true,
+    "sha256": "3847cc96473133394de407e6b668f7e5b414660ca91f8a1be483dcf28b7ab439"
+  },
+  {
+    "path": "TEST-SONUCLARI-95D.md",
+    "new": true,
+    "sha256": "0e22cdc269906fcb6a664b42ee4e55883de46c79c8ef79d736f09e924fee4aeb"
+  },
+  {
+    "path": "diplomacy.js",
+    "new": false,
+    "sha256": "d35d4c824b4958d95a35a340812c41889f2808e775a5dc9d539844fb2893eb2e"
+  },
+  {
+    "path": "index.html",
+    "new": false,
+    "sha256": "6ab497128df5bb08a9d6a346454dbf623330b607f6a33a99c208d25a7b0759e7"
+  },
+  {
+    "path": "main.js",
+    "new": false,
+    "sha256": "9738317baecabfd3bb194af7092da62a0f8dcecd62991fb03292b6673c076895"
+  },
+  {
+    "path": "map.js",
+    "new": false,
+    "sha256": "c59311110046fb2d86c6a4e8db9187815f150b63b74134c64da92ee5354a6e73"
+  },
+  {
+    "path": "sw.js",
+    "new": false,
+    "sha256": "0d3ed7ab14769b1877cdf08fca007fc711c93edea9825fdb5dd82e7b987b12bb"
+  },
+  {
+    "path": "tests/faz84a_intel_dedup_test.js",
+    "new": false,
+    "sha256": "5b941e8d5a0223f7ef774fbc43f3fe2f1fe8fa60385587a82836bb6c8305d8c1"
+  },
+  {
+    "path": "tests/faz84b_vassal_state_dedup_test.js",
+    "new": false,
+    "sha256": "fe9c7f3940776c4b38898a10d86745363d16102c735e491cd62355cbd765f4e3"
+  },
+  {
+    "path": "tests/faz84c_state_visibility_gate_test.js",
+    "new": false,
+    "sha256": "4384b24e21d6248bc5ad87c5dedb9a84315b5a0798768f680b89421e2fdaa604"
+  },
+  {
+    "path": "tests/faz85a_political_save_integrity_test.js",
+    "new": false,
+    "sha256": "4b7b2d8e6d4c231614060c929446c1190d2176d6ee8609d3848463dff4e66666"
+  },
+  {
+    "path": "tests/faz85b_load_idempotency_test.js",
+    "new": false,
+    "sha256": "d14d84e94cc4452e9c8e011d680ae2543ec75091a502765762d2a8b63a257be9"
+  },
+  {
+    "path": "tests/faz85c_crisis_save_continuity_test.js",
+    "new": false,
+    "sha256": "a82fd062c3728ef67c8c849af67938e03849f701f0816b78a1c037855a50cf45"
+  },
+  {
+    "path": "tests/faz85d_campaign_save_continuity_test.js",
+    "new": false,
+    "sha256": "66c964cc4b79f92820309f3d660865790127f0d681d1855068747b1ffe5841e1"
+  },
+  {
+    "path": "tests/faz85e_event_inbox_continuity_test.js",
+    "new": false,
+    "sha256": "0d699e5767d397491d39350b66031fad52c4979aa11bd4ee1b99ad663d6c954b"
+  },
+  {
+    "path": "tests/faz85f_spatial_simulation_continuity_test.js",
+    "new": false,
+    "sha256": "15ded9f8e36a75d8472931dcecb03fe7e59df8ec337312d1150c9c039cd3ba77"
+  },
+  {
+    "path": "tests/faz86a_intel_command_center_test.js",
+    "new": false,
+    "sha256": "550b5104dec2e4288f1420d2f3736fc80df4d7492db2f43b0a0f11049e0114be"
+  },
+  {
+    "path": "tests/faz86b_deal_engine_test.js",
+    "new": false,
+    "sha256": "204aec7be673ba1ff525d05d92ccaca9d3caab3774c217f98c1b36233931e773"
+  },
+  {
+    "path": "tests/faz86c_1_quote_effective_plan_test.js",
+    "new": false,
+    "sha256": "240db0ae3b47cbe3231209d89a2027448f4475de2418d7321dcee9ec97f658cd"
+  },
+  {
+    "path": "tests/faz86c_2_transaction_test.js",
+    "new": false,
+    "sha256": "2bf8638dc4325e37a3ca204e1cd652e096833c313333813ea9d38d37101fd66f"
+  },
+  {
+    "path": "tests/faz86c_3_ai_negotiation_test.js",
+    "new": false,
+    "sha256": "fc1b136640401b5f65c687d7fb46d898abe15fb411e26b23295e65eed34fc0e7"
+  },
+  {
+    "path": "tests/faz86c_4_reciprocal_offers_test.js",
+    "new": false,
+    "sha256": "d18422b4a04987bb6710110b4770ee143ff2a99e62ff759858a212e6f01cc079"
+  },
+  {
+    "path": "tests/faz86c_4h_map_input_test.js",
+    "new": false,
+    "sha256": "da6629c178d8f9e738e319a0cd1ec2a716b1bc90e9599e1655bd827706aa37c8"
+  },
+  {
+    "path": "tests/faz86c_4h_r1_exact_regression_test.js",
+    "new": false,
+    "sha256": "56c7e598925dee7701061a57c5d69aff8d5530b8ab804d2256290644a489f61c"
+  },
+  {
+    "path": "tests/faz86c_4h_r2_surface_camera_layers_test.js",
+    "new": false,
+    "sha256": "54402e336c187824af4746d4dbbc6d55974d0c4f9d5aa7518907a8231c7ee43d"
+  },
+  {
+    "path": "tests/faz86c_4h_r3_surface_lifecycle_test.js",
+    "new": false,
+    "sha256": "cff6d72f3d1e9235bd68ba3c91dfc2ea10a16228021e0b01a33de13623bd731e"
+  },
+  {
+    "path": "tests/faz86c_4h_r4_diagnosis_test.js",
+    "new": false,
+    "sha256": "c4cdc003d68317f08400a6875779d178205bee910640faf4e542117653220345"
+  },
+  {
+    "path": "tests/faz86c_4h_r4_targeted_diag_test.js",
+    "new": false,
+    "sha256": "701f18bc4655e72b15371ee44de77b545a8ea3806428d004384a8b87d3cb5b0a"
+  },
+  {
+    "path": "tests/faz86c_strict_deal_ai_test.js",
+    "new": false,
+    "sha256": "44a3dc2121797696e35e5abe01982f21ccf15078762462ffa353916b3dcaed71"
+  },
+  {
+    "path": "tests/faz86g_integration_handoff_test.js",
+    "new": false,
+    "sha256": "817ac431f5b8306c6d95feaab17131a4415846f4c2d86999e3c5bfd04e85c2d0"
+  },
+  {
+    "path": "tests/faz90rc_2_load_feedback_test.js",
+    "new": false,
+    "sha256": "c6ae8f71d034e9cd175ecb5f4e17f6eaf162b6b84841e8805523ea1160acb71a"
+  },
+  {
+    "path": "tests/faz90rc_release_candidate_test.js",
+    "new": false,
+    "sha256": "465d8a38c6f2331dbed9bc0ff863d09dc6c8947870dd1ea46678aec8767e58f4"
+  },
+  {
+    "path": "tests/faz95c1_ui_test.js",
+    "new": false,
+    "sha256": "71fd398ed436305d3c870ba3f7b8ab6052fa97941ac84a0f30824038b21367c4"
+  },
+  {
+    "path": "tests/faz95d_identity_test.js",
+    "new": true,
+    "sha256": "0ad13f03a9b9612ffbc178498be4bbbbc8dd7929ba0aee2509d05f31da0e31dc"
+  },
+  {
+    "path": "tests/faz95d_map_test.js",
+    "new": true,
+    "sha256": "4b67a7a5c72ed1d1bd5ce3076174e9c9173ecd77cd9ebed2880aee76e47d6ba3"
+  },
+  {
+    "path": "tests/faz95d_war_preview_test.js",
+    "new": true,
+    "sha256": "050ca9e052b718991ececdf7d0ecf7a4ae9e0282595444d0f4d4f0815b40e625"
+  },
+  {
+    "path": "tests/fixtures/identity-baseline-95c1-11.json",
+    "new": true,
+    "sha256": "e5de102aa2e24632a180d3dbd419d636832f6de6eb21ab61f874ca3047112509"
+  },
+  {
+    "path": "tests/fixtures/identity-baseline-95c1-404.json",
+    "new": true,
+    "sha256": "0ff6afb593c4322cc34f8fbc4558d233b4870235c153bf43b9ed50cbce45c524"
+  },
+  {
+    "path": "tests/fixtures/identity-baseline-95c1-99.json",
+    "new": true,
+    "sha256": "c936222175d89c9a12a5825c430289ffea8d3e7a76ab5f1472b343988955c9a4"
+  },
+  {
+    "path": "tests/followup-95d.js",
+    "new": true,
+    "sha256": "c01e7c4db3df6e4de23b9ad616b5f99752ddc8309587d7f428ce15037c6450b2"
+  },
+  {
+    "path": "tests/helpers/identity-fixture.js",
+    "new": true,
+    "sha256": "aab6618530b7908e34a64a682674b89399282c2c3761a402290d39cc7b1fe138"
+  },
+  {
+    "path": "tests/helpers/map-preservation.js",
+    "new": false,
+    "sha256": "a33ed193b274ec2eb0ce3ffe38d45ed7c49618b45205f0367a1b93e9f473e424"
+  },
+  {
+    "path": "tests/helpers/ui-preservation.js",
+    "new": false,
+    "sha256": "1a8f880c073c21e09e148ac317cf068e893766373aa8063b1b0bec56831639b8"
+  },
+  {
+    "path": "tests/measure-identity-95d.js",
+    "new": true,
+    "sha256": "344391d55eb8176f2e7b52392e5e31d6ab2b2bff8db24566bf9a4341efa134bd"
+  },
+  {
+    "path": "tests/report-95d.py",
+    "new": true,
+    "sha256": "c33494a02f0cd7350c25bf81fc20129dc6dfdb552ee1942ef24517f0e4b98ffa"
+  },
+  {
+    "path": "tests/summary-95d.json",
+    "new": true,
+    "sha256": "27e9b3a8a71ef6e2448b9fc6d124babcd52f94533510b7cde053a839148299be"
+  },
+  {
+    "path": "ui.js",
+    "new": false,
+    "sha256": "5860e444bcbe498dbb11abc0e9244f05f9fab86dfbaf90e0c21ca0d6c509da4b"
+  }
+]

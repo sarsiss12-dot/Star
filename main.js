@@ -2276,40 +2276,29 @@ function assignPalette(rnd){
   return p;
 }
 
-function empireName(rnd, ethics, kullanilan){
-  const et = ethics || {};
-  /* Baskın eksene göre ön/son ek havuzu seç */
-  const havuz = [];
-  if ((et.aut || 0) > 0) havuz.push('aut');
-  if ((et.aut || 0) < 0) havuz.push('lib');
-  if ((et.mil || 0) > 0) havuz.push('mil');
-  if ((et.mil || 0) < 0) havuz.push('pac');
-  if ((et.mat || 0) > 0) havuz.push('mat');
-  if ((et.mat || 0) < 0) havuz.push('spi');
-  if (!havuz.length) havuz.push('none');
-
-  for (let deneme = 0; deneme < 40; deneme++){
-    const k1 = havuz[Math.floor(rnd() * havuz.length)];
-    const k2 = havuz[Math.floor(rnd() * havuz.length)];
-    const on = NAME_PREFIX[k1][Math.floor(rnd() * NAME_PREFIX[k1].length)];
-    const kok = NAME_ROOT[Math.floor(rnd() * NAME_ROOT.length)];
-    const son = NAME_SUFFIX[k2][Math.floor(rnd() * NAME_SUFFIX[k2].length)];
-    /* %25 ihtimalle ön ek atlanır — çeşitlilik */
-    const ad = (rnd() < .25) ? (kok + ' ' + son) : (on + ' ' + kok + ' ' + son);
-    if (!kullanilan || !kullanilan[ad]){
-      if (kullanilan) kullanilan[ad] = 1;
-      return ad;
-    }
+function empireName(random, ethics, used, character={}){
+  const et=ethics||{}, bio=RACES[character.race]?.bio;
+  const roots=NAME_ROOT.concat(['Aster','Veyra','Orion','Talassar','Nerith','Eos','Selen','Kharon','Ilyra','Tessara','Zerun','Othrys']);
+  const forms=bio==='makine'?['Ağı','İşlem Birliği','Çekirdek Kolektifi','Otonom Düğümleri']:
+    character.look==='bocek'?['Kovanı','Sürü Birliği','Ortak Zihni']:
+    (et.aut||0)>0?['Hanedanlığı','İmparatorluğu','Taç Toprakları','Yüksek Hâkimiyeti']:
+    (et.aut||0)<0?['Cumhuriyeti','Özgür Dünyaları','Konfederasyonu','Halk Meclisi']:
+    (et.mat||0)>0?['Kolektifi','Konsorsiyumu','Araştırma Birliği','Sentez Topluluğu']:
+    ['Birliği','Konfederasyonu','Yıldız Devletleri','Ortaklığı','Konsorsiyumu'];
+  const adjectives=(et.mil||0)>0?['Demir','Muhafız','Yüce','Kızıl']:(et.mat||0)<0?['Kutsal','Kadim','Aydınlık','Ebedî']:['Birleşik','Özgür','Uzak','Yükselen','Altın'];
+  const take=xs=>xs[Math.min(xs.length-1,Math.floor(random()*xs.length))];
+  for(let n=0;n<48;n++){
+    const root=take(roots),form=take(forms),adj=take(adjectives),style=Math.floor(random()*4);
+    const name=style===0?root+' '+form:style===1?adj+' '+root+' '+form:style===2?root+' ve Bağlı Dünyalar':adj+' '+form+' — '+root;
+    if(!used||!Object.keys(used).some(k=>identityNameKey(k)===identityNameKey(name))){if(used)used[name]=1;return name;}
   }
-  /* Havuz tükendiyse köke sayı ekle */
-  const kok2 = NAME_ROOT[Math.floor(rnd() * NAME_ROOT.length)];
-  return kok2 + ' ' + NAME_SUFFIX.none[Math.floor(rnd() * NAME_SUFFIX.none.length)];
+  return uniqueIdentityName(take(roots)+' '+take(forms),used||{});
 }
 
 function makeEmpire(id, raceKey, name, ai, rnd, traits){
   const race = RACES[raceKey];
   const e = {
-    id, race:raceKey, name: name || race.n, ai,
+    id, race:raceKey, name: uniqueIdentityName(name || race.n, Object.fromEntries(G.emps.filter(x=>!x.dead&&x.id!==id).map(x=>[x.name,1]))), ai,
     col: race.col, traits: traits || [],
     res:{min:400, ene:300, yiy:180, ala:220, ara:0, tuk:150, etk:70},
     inc:{min:0,ene:0,yiy:0,ala:0,ara:0,tuk:0,etk:0},
@@ -2322,6 +2311,7 @@ function makeEmpire(id, raceKey, name, ai, rnd, traits){
   civics:[], origin:'standart',
     sigil:'simetrik', monoRes:null, furyUntil:0, collapseUntil:0, warPend:{}
   };
+  e.emblem=makeEmblem('state:'+G.seed+':'+id,e.col);
   recalcMods(e);
   return e;
 }
@@ -2390,6 +2380,9 @@ function setupGame(cfg){
   G.emps.push(pe);
   G.p = pe;
 
+  G._adlar[pe.name]=1;G._legacyIdentityNames={};
+  pe.emblem=normalizeEmblem(cfg.emblem,pe.col,'state:'+G.seed+':0');
+
   // rakipler
   const others = shuffle(rnd, Object.keys(RACES).filter(k=>true));
   for (let i=0;i<nAI;i++){
@@ -2443,10 +2436,11 @@ function setupGame(cfg){
       if (PHYSIO[ai.physio] && PHYSIO[ai.physio].e)
         ai.extra = Object.assign(ai.extra || {}, PHYSIO[ai.physio].e);
     }
-    ai.name = empireName(rnd, ai.ethics, G._adlar);
+    ai.name = newEmpireIdentityName(rnd, ai);
     /* FAZ 46: paletten sıradaki ayrık renk */
     if (G._palet && G._paletIx < G._palet.length)
       ai.col = G._palet[G._paletIx++];
+    ai.emblem=uniqueEmblem(ai.emblem,ai.col,G.emps.map(x=>x.emblem),'state:'+G.seed+':'+ai.id);
     recalcMods(ai);
     G.emps.push(ai);
   }
@@ -2708,6 +2702,7 @@ function setupGame(cfg){
     recalcMods(e);
   }
   updateVision();
+  normalizeIdentities();
   economyTick(true);
   return true;
 }
@@ -4440,7 +4435,7 @@ function hasDefendedColony(sys, byId){
 
 // Monoton sayaç: sahip değişip eski sahibine dönse de eski paylaşım onayı geçmez.
 function territoryOwnerSet(place, owner){
-  if (place.owner !== owner) place.shareRev = (place.shareRev || 0) + 1;
+  if (place.owner !== owner){place.shareRev = (place.shareRev || 0) + 1;if(typeof DIPLO_MAP_CACHE!=='undefined')DIPLO_MAP_CACHE=null;}
   place.owner = owner;
 }
 function captureSystem(sys, byId, cause = 'conquest', onlyPlanet = null){
@@ -5679,7 +5674,7 @@ let TEMPLATES = [];
 
 /* Şablona giren alanlar — galaksi/tohum/zorluk hariç */
 const TPL_FIELDS = ['name','race','traits','ethics','civics','origin',
-                    'physio','look','sigil','monoRes','mizac','color'];
+                    'physio','look','sigil','monoRes','mizac','color','emblem'];
 
 function snapshotCFG(){
   const t = {};
@@ -5742,6 +5737,13 @@ async function deleteTemplate(ad){
 
 /* FAZ 74: renderSetup → ui.js taşındı */
 function paintEmblems(){
+  for(const cv of document.querySelectorAll('canvas[data-identity]')){
+    let e;if(cv.dataset.identity==='setup')e=normalizeEmblem(CFG.emblem,CFG.color||RACES[CFG.race].col,'setup');
+    else if(cv.dataset.identity==='federation'){const f=fedOf(+cv.dataset.id);if(!f||!f.members.some(id=>knownFederationBond(G.p,f,id)))continue;federationIdentity(f);e=f.emblem;}
+    else {const state=G.emps[+cv.dataset.id];if(!state||!territoryOwnerInfo(state.id)?.known)continue;e=stateEmblem(state);}
+    cv.getContext('2d').drawImage(ART.identityEmblem(e,cv.width),0,0);
+  }
+
   [...document.querySelectorAll('canvas[data-emb]')].forEach(cv=>{
     const g = cv.getContext('2d');
     g.imageSmoothingEnabled = false;
@@ -6319,6 +6321,7 @@ let BG_OFF = false;
    ağını görürken filoları da görmek istiyor. */
 let MAP_MODE = 'siyasi';
 let RADAR_ON = false;
+let FED_LINKS_ON=false, ALLY_LINKS_ON=false, DIPLO_LINKS_REV=0;
 let WAR_LINKS_ON = false, WAR_LINKS_REV = 0;
 let WAR_PAUSE_ON = true, WAR_PAUSE_REV = 0;
 /* ═══ FAZ 86C.4H-R2: LOJİSTİK BAĞIMSIZ KATMAN ═══
@@ -6384,9 +6387,12 @@ async function loadLogiPref(){
   } catch(e){}
 }
 async function loadWarViewPrefs(){
-  const lr=WAR_LINKS_REV,pr=WAR_PAUSE_REV;
+  const lr=WAR_LINKS_REV,pr=WAR_PAUSE_REV,dr=DIPLO_LINKS_REV;
   try{
     const links=await storeGet('yh_warlinks'),pause=await storeGet('yh_warpause');
+    const layers=await storeGet('yh_diplolayers');
+    if(dr===DIPLO_LINKS_REV&&layers){try{const p=JSON.parse(layers);FED_LINKS_ON=p.federations===true;ALLY_LINKS_ON=p.alliances===true;}catch(ignore){}}
+    refreshIdentityLayerButtons();
     if(lr===WAR_LINKS_REV)WAR_LINKS_ON=links==='on';
     if(pr===WAR_PAUSE_REV)WAR_PAUSE_ON=pause!=='off';
     const b=document.getElementById('warLinksBtn');
@@ -7530,6 +7536,7 @@ function serialize(){
        v8 KALIR — ek alan, okunamadığında deterministik olarak
        yeniden türetilir. */
     W:G.W, H:G.H, warLedger:G.warLedger, settlements:G.settlements, jointOps:G.jointOps,
+    viewPrefs:{federations:FED_LINKS_ON,alliances:ALLY_LINKS_ON,wars:WAR_LINKS_ON},
     /* FAZ 85A: politik küresel durum tek alt nesnede */
     world: serializePoliticalWorld(),
     /* FAZ 85C: oyun sonu krizi */
@@ -7568,6 +7575,7 @@ function serialize(){
    sonra, reach ondan sonra, görüş en son.
    ═══════════════════════════════════════════════════════════════════ */
 function rebuildDerivedStateAfterLoad(deferRender){
+  normalizeIdentities();
   if(typeof fedNormalize==='function')for(const f of G.feds||[])fedNormalize(f);
   /* 1. İmparatorluk geçici önbellekleri */
   for (const x of G.emps){
@@ -7732,6 +7740,7 @@ function applySaveData(d){
   restoreWorldBounds(d);
   G.emps = d.emps; G.fleets = d.fl; G.nextFleet = d.nf;
   G.p = G.emps[0];
+  G._identityViewPrefs=d.viewPrefs;
   restoreShipments();
   restoreFleetTemplates();
   restoreExploration();
@@ -7804,6 +7813,7 @@ function finishSaveLoad(selection){
       try { logDiag('load-view', name + ': ' + String(e && e.message || e)); } catch(ignore){}
     }
   };
+  present('identity-prefs', ()=>{restoreIdentityViewPrefs(G._identityViewPrefs);delete G._identityViewPrefs;});
   present('events', ()=>{ UI._openNote = null; UI.pendingOffer = null; });
   present('selection', ()=>{
     View.selSys = G.sys.find(s=>s.id === _selSysId) || null;
@@ -8110,7 +8120,7 @@ function forceRedraw(sebep){
    Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
    Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
 /* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */
-const BUILD_ID = '95c1';
+const BUILD_ID = '95d';
 const DIAG_MAX = 40;
 const DIAG = [];
 function logDiag(tur, mesaj){
@@ -9239,4 +9249,61 @@ function leaveTitle(hedef){
     safeRenderSetup();
     menuStars();
   }
+}
+
+/* FAZ 95D — identity parameters use a private hash stream, never game RNG. */
+const EMBLEM_SHAPES={shield:'Kalkan',circle:'Daire',hex:'Altıgen',diamond:'Elmas',star:'Yıldız',ring:'Halka'};
+const EMBLEM_SYMBOLS={star:'Yıldız',sun:'Güneş',planet:'Gezegen',wing:'Kanat',sword:'Kılıç',crystal:'Kristal',gear:'Mekanik',orbit:'Yörünge'};
+const EMBLEM_PATTERNS={plain:'Düz',stripe:'Şerit',split:'Bölünmüş',ring:'İç halka',corners:'Köşeler',rays:'Işınlar'};
+const EMBLEM_COLORS=['#f5665c','#f5c25c','#b2f55c','#5cf5d6','#5c9ef5','#d65cf5','#16304d','#492453','#ece9d5','#202537'];
+function identityHash(text){let h=2166136261;for(const c of String(text)){h^=c.charCodeAt(0);h=Math.imul(h,16777619);}return h>>>0;}
+function identityNameKey(name){return String(name).normalize('NFKC').toLocaleLowerCase('tr-TR').trim().replace(/\s+/g,' ');}
+function uniqueIdentityName(base,used){const keys=new Set(Object.keys(used).map(identityNameKey));let name=base,n=2;while(keys.has(identityNameKey(name)))name=base+' · '+n++;used[name]=1;return name;}
+function makeEmblem(seed,primary,federation=false){
+ const rand=mulberry32(identityHash(seed)),take=a=>a[Math.floor(rand()*a.length)];
+ return {v:1,shape:take(Object.keys(EMBLEM_SHAPES)),symbol:take(Object.keys(EMBLEM_SYMBOLS)),pattern:take(Object.keys(EMBLEM_PATTERNS)),primary:/^#[0-9a-f]{6}$/i.test(primary)?primary:'#5c9ef5',secondary:take(EMBLEM_COLORS),federation:!!federation};
+}
+function normalizeEmblem(value,col,seed,fed=false){const d=makeEmblem(seed,col,fed),v=value&&typeof value==='object'?value:{};
+ for(const [k,pool] of [['shape',EMBLEM_SHAPES],['symbol',EMBLEM_SYMBOLS],['pattern',EMBLEM_PATTERNS]])if(Object.hasOwn(pool,v[k]))d[k]=v[k];
+ d.primary=/^#[0-9a-f]{6}$/i.test(col)?col:d.primary;if(/^#[0-9a-f]{6}$/i.test(v.secondary))d.secondary=v.secondary;
+ if(d.secondary.toLowerCase()===d.primary.toLowerCase())d.secondary='#202537'===d.primary.toLowerCase()?'#ece9d5':'#202537';return d;
+}
+function emblemKey(e){return JSON.stringify([e.shape,e.symbol,e.pattern,e.primary,e.secondary,e.federation]);}
+function uniqueEmblem(value,col,others,seed,fed=false){const used=new Set(others.filter(Boolean).map(emblemKey));let e=normalizeEmblem(value,col,seed,fed),n=0;while(used.has(emblemKey(e))&&n<10000)e=normalizeEmblem(makeEmblem(seed+':'+(++n),col,fed),col,seed,fed);return e;}
+const STATE_EMBLEM_CACHE=new WeakMap();
+function stateEmblem(e){const cached=STATE_EMBLEM_CACHE.get(e);if(cached&&cached.source===e.emblem&&cached.col===e.col)return cached.value;const value=normalizeEmblem(e.emblem,e.col,'state:'+G.seed+':'+e.id);STATE_EMBLEM_CACHE.set(e,{source:e.emblem,col:e.col,value});return value;}
+function federationIdentity(f){
+ if(f.emblem&&Object.hasOwn(FED_TYPES,f.identityType)&&f.emblem.federation===true&&Object.hasOwn(EMBLEM_SHAPES,f.emblem.shape)&&Object.hasOwn(EMBLEM_SYMBOLS,f.emblem.symbol)&&Object.hasOwn(EMBLEM_PATTERNS,f.emblem.pattern)&&/^#[0-9a-f]{6}$/i.test(f.emblem.primary)&&/^#[0-9a-f]{6}$/i.test(f.emblem.secondary))return;
+ f.identityType=f.identityType||f.type||'askeri';
+ const colors={askeri:'#f5c25c',bilimsel:'#5cf5d6',ticaret:'#b2f55c'},col=colors[f.identityType]||'#f5c25c';
+ const base=makeEmblem('federation:'+G.seed+':'+f.id,col,true);
+ base.symbol=f.identityType==='bilimsel'?'orbit':f.identityType==='ticaret'?'planet':'sword';
+ f.emblem=uniqueEmblem(f.emblem||base,col,(G.feds||[]).filter(x=>x!==f).map(x=>x.emblem),'federation:'+G.seed+':'+f.id,true);
+}
+function normalizeIdentities(){const seen=[];for(const e of G.emps){e.emblem=uniqueEmblem(e.emblem,e.col,seen,'state:'+G.seed+':'+e.id);seen.push(e.emblem);}for(const f of G.feds||[])federationIdentity(f);}
+let EMBLEM_ROLL=0;
+function randomizeSetupEmblem(){
+ const old=normalizeEmblem(CFG.emblem,CFG.color||RACES[CFG.race].col,'setup');
+ const next=makeEmblem('setup-roll:'+Date.now()+':'+(++EMBLEM_ROLL),old.primary);
+ // A press always changes every requested component, including both colors.
+ for(const [key,pool] of [['shape',Object.keys(EMBLEM_SHAPES)],['symbol',Object.keys(EMBLEM_SYMBOLS)],['pattern',Object.keys(EMBLEM_PATTERNS)],['primary',EMBLEM_COLORS],['secondary',EMBLEM_COLORS]])if(next[key]===old[key])next[key]=pool[(pool.indexOf(old[key])+1)%pool.length];
+ if(next.primary===next.secondary||next.secondary===old.secondary)next.secondary=EMBLEM_COLORS.find(c=>c!==next.primary&&c!==old.secondary);
+ CFG.color=next.primary;CFG.emblem=next;return next;
+}
+function refreshIdentityLayerButtons(){for(const [id,on,cls] of [['fedLinksBtn',FED_LINKS_ON,'tool'],['allyLinksBtn',ALLY_LINKS_ON,'tool'],['warLinksBtn',WAR_LINKS_ON,'tool warLinksBtn']]){const b=$(id);if(b){b.className=cls+(on?' on':'');b.setAttribute('aria-pressed',String(on));}}}
+function restoreIdentityViewPrefs(p){if(!p||typeof p!=='object')return;DIPLO_LINKS_REV++;WAR_LINKS_REV++;if(typeof p.federations==='boolean')FED_LINKS_ON=p.federations;if(typeof p.alliances==='boolean')ALLY_LINKS_ON=p.alliances;if(typeof p.wars==='boolean')WAR_LINKS_ON=p.wars;refreshIdentityLayerButtons();}
+
+/* Preserve the pre-95D structural RNG consumption of AI naming. Expanded
+   identity text has its own stream, so starting homes/luxuries stay stable. */
+function newEmpireIdentityName(random,e){
+ const et=e.ethics||{},axes=[];for(const [key,pos,neg] of [['aut','aut','lib'],['mil','mil','pac'],['mat','mat','spi']]){if((et[key]||0)>0)axes.push(pos);if((et[key]||0)<0)axes.push(neg);}if(!axes.length)axes.push('none');
+ const used=G._legacyIdentityNames||(G._legacyIdentityNames={});let legacy='';
+ for(let i=0;i<40;i++){
+  const k1=axes[Math.floor(random()*axes.length)],k2=axes[Math.floor(random()*axes.length)];
+  const prefix=NAME_PREFIX[k1][Math.floor(random()*NAME_PREFIX[k1].length)],root=NAME_ROOT[Math.floor(random()*NAME_ROOT.length)],suffix=NAME_SUFFIX[k2][Math.floor(random()*NAME_SUFFIX[k2].length)];
+  legacy=random()<.25?root+' '+suffix:prefix+' '+root+' '+suffix;
+  if(!used[legacy]){used[legacy]=1;break;}
+  if(i===39)legacy=NAME_ROOT[Math.floor(random()*NAME_ROOT.length)]+' '+NAME_SUFFIX.none[Math.floor(random()*NAME_SUFFIX.none.length)];
+ }
+ return empireName(mulberry32(identityHash('name:'+G.seed+':'+e.id+':'+legacy)),et,G._adlar,e);
 }

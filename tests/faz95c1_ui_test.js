@@ -30,7 +30,7 @@ test('different target and a successful intervening order allow fresh route feed
 test('war off/on changes actual Canvas pixels even in war map mode, without changing mode / RNG',()=>{
  const h=runtime({native:true,width:740,height:360});h.loadSave(path.join(__dirname,'fixtures/stars-2210-06.sav.json'));
  h.run(`for(const e of G.emps){e.war={};e.contact={};e.intel={};}for(const s of G.sys){s.owner=-1;s.seen=[];}var E=G.p,O=G.emps[1];E.home=0;O.home=1;E.war[1]=O.war[0]=true;E.contact[1]=true;G.sys[0].owner=0;G.sys[1].owner=1;for(let i=0;i<2;i++){G.sys[i].seen=[0];G.sys[i].x=i*180;G.sys[i].y=i*80;}G.vis=new Set([0,1]);View.vw=740;View.vh=360;View.cam={x:90,y:40,z:1};MAP_MODE='savas';var rng=RND_STATE,g=document.getElementById('map').getContext('2d');WAR_LINKS_ON=false;g.clearRect(0,0,740,360);View.drawWarConnections(g);`);
- const canvas=h.doc.getElementById('map'),dir=path.join(__dirname,'audit-95c1');fs.mkdirSync(dir,{recursive:true});
+ const canvas=h.doc.getElementById('map'),dir=path.join(__dirname,'audit-95d/95c1-preservation');fs.mkdirSync(dir,{recursive:true});
  const off=canvas.getContext('2d').getImageData(0,0,740,360).data.filter((v,i)=>i%4===3&&v>0).length;
  fs.writeFileSync(path.join(dir,'war-lines-off.png'),canvas.toBuffer('image/png'));
  h.run('UI.act("warLinksToggle");View.drawWarConnections(g)');

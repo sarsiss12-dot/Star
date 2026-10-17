@@ -1,0 +1,110 @@
+{
+  "environment": "Node VM + native Skia Canvas; 1000x600, no browser DOM/GPU/Android; 80 warm frames, 100 label draws, 300 layer draws; actual Node perf_hooks clock (not mock host clock). Same 100-system canonical save and deterministic controlled geometry per seed. New layers enabled only in 95D.",
+  "rows": [
+    {
+      "seed": 11,
+      "phase": "95c1",
+      "systems": 100,
+      "empires": 13,
+      "frame": {
+        "medianMs": 8.978808999999956,
+        "p95Ms": 12.998593000000028
+      },
+      "labels": {
+        "medianMs": 2.9884770000001026,
+        "p95Ms": 3.623876999999993
+      },
+      "layer": null,
+      "emblemCacheEntries": 0
+    },
+    {
+      "seed": 11,
+      "phase": "95d",
+      "systems": 100,
+      "empires": 13,
+      "frame": {
+        "medianMs": 7.912377000000106,
+        "p95Ms": 11.006292999999914
+      },
+      "labels": {
+        "medianMs": 1.4440220000001318,
+        "p95Ms": 1.9757150000000365
+      },
+      "layer": {
+        "medianMs": 0.052079000000048836,
+        "p95Ms": 0.07312000000001717
+      },
+      "emblemCacheEntries": 12
+    },
+    {
+      "seed": 99,
+      "phase": "95c1",
+      "systems": 100,
+      "empires": 13,
+      "frame": {
+        "medianMs": 8.81282900000042,
+        "p95Ms": 10.545954000000165
+      },
+      "labels": {
+        "medianMs": 3.056029000000308,
+        "p95Ms": 4.684791000000587
+      },
+      "layer": null,
+      "emblemCacheEntries": 0
+    },
+    {
+      "seed": 99,
+      "phase": "95d",
+      "systems": 100,
+      "empires": 13,
+      "frame": {
+        "medianMs": 8.002675000000636,
+        "p95Ms": 10.665288000000146
+      },
+      "labels": {
+        "medianMs": 1.5852560000002995,
+        "p95Ms": 2.688351999999213
+      },
+      "layer": {
+        "medianMs": 0.052610000000640866,
+        "p95Ms": 0.07015599999976985
+      },
+      "emblemCacheEntries": 13
+    },
+    {
+      "seed": 404,
+      "phase": "95c1",
+      "systems": 100,
+      "empires": 13,
+      "frame": {
+        "medianMs": 8.92515800000001,
+        "p95Ms": 14.371719999999186
+      },
+      "labels": {
+        "medianMs": 3.1114120000002004,
+        "p95Ms": 5.393721000000369
+      },
+      "layer": null,
+      "emblemCacheEntries": 0
+    },
+    {
+      "seed": 404,
+      "phase": "95d",
+      "systems": 100,
+      "empires": 13,
+      "frame": {
+        "medianMs": 8.104858999999124,
+        "p95Ms": 11.571277000000919
+      },
+      "labels": {
+        "medianMs": 2.2792850000005274,
+        "p95Ms": 3.1093780000010156
+      },
+      "layer": {
+        "medianMs": 0.05312000000049011,
+        "p95Ms": 0.13203900000007707
+      },
+      "emblemCacheEntries": 12
+    }
+  ]
+}

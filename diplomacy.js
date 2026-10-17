@@ -650,21 +650,9 @@ function warMapConnections(){
 
 /* ---------- diplomasi ---------- */
 function declareWar(a, b, support = null){
-  if (!a || !b || a.dead || b.dead || a.id === b.id) return false;
-  if (a.war[b.id] || sovereignPair(a,b)) return false;
-  if (!fedWarAllowed(a,b)){
-    if (a.id === 0) say('Federasyon savaş izni gerekli — diplomasi veya federasyon panelinden öner.', 'war');
-    return false;
-  }
+  const access=warDeclarationAccess(a,b);
+  if(!access.ok){if(a?.id===0)say(access.why,'war');return false;}
   const fedDefense = fedDefensiveWar(a,b);
-  if (hasCivic(a,'shadow')){
-    if (a.id === 0) say('Gölge Konseyi resmî savaş ilan etmez — operasyonları kullan', 'war');
-    return false;
-  }
-  if (hasCivic(a,'universal')){
-    if (a.id === 0) say('Evrensel Barış doktrini savaş ilanını yasaklar', 'war');
-    return false;
-  }
   // Galaktik Konsey savaş yasağı — çiğnemek ağır bedel
   if (typeof councilBlocksWar === 'function' && councilBlocksWar(a, b)){
     if (a.id === 0){
@@ -2238,6 +2226,7 @@ function fedCharterKey(f){return JSON.stringify([f.type||'askeri',fedCharter(f),
 function fedPoliticalRecord(f,event,data={}){f.history=f.history||[];f.history.push({day:G.day,year:G.year,month:G.month,event,...data});if(f.history.length>32)f.history.splice(0,f.history.length-32);}
 function fedNormalize(f){
  if(!f||!Array.isArray(f.members))return;
+ federationIdentity(f);
  if(!Object.hasOwn(FED_TYPES,f.type)){f.type='askeri';f.charter=fedCharter({...f,charter:null});f.legacyCharter=true;}
  f.charter=f.charter||fedDefaultCharter(f.type);
  if(!Number.isFinite(f.founded))f.founded=G.day;
@@ -2399,10 +2388,12 @@ function fedOf(id){
   if (!G.feds) return null;
   return G.feds.find(f => f.id === id) || null;
 }
-function fedName(rnd2){
-  const a = ['Yıldız','Kuzey','Kadim','Özgür','Birleşik','Altın','Sonsuz'];
-  const b = ['Anlaşması','Birliği','Konseyi','Sözleşmesi','Paktı'];
-  return a[Math.floor((rnd2||rnd)()*a.length)] + ' ' + b[Math.floor((rnd2||rnd)()*b.length)];
+function fedName(random,type='askeri'){
+ const stream=random||mulberry32(identityHash('fed-name:'+G.seed+':'+(G.fedUid||0)));
+ const take=xs=>xs[Math.floor(stream()*xs.length)];
+ const root=take(['Aster','Zenit','Meridyen','Vega','Ufuk','Ekinoks','Kutupyıldızı','Aurora','Orion','Helis','Nova','Eos']);
+ const forms={askeri:['Savunma Paktı','Muhafız Birliği','Yıldız Kalkanı','Ortak Cephe'],bilimsel:['Keşif Birliği','Bilgi Topluluğu','Araştırma Konseyi','Gözlemevleri Ağı'],ticaret:['Ticaret Ligi','Serbest Limanlar','Refah Birliği','Yollar Konsorsiyumu']};
+ return uniqueIdentityName(root+' '+take(forms[type]||forms.askeri),Object.fromEntries((G.feds||[]).map(f=>[f.name,1])));
 }
 
 /* Oyuncu/AI kendi federasyonunu kurabilir: müttefikleri davet eder,
@@ -2442,10 +2433,10 @@ function canFoundFed(e,type='askeri'){
 function foundFederation(e,type='askeri'){
   const q=canFoundFed(e,type);if(!q.ok)return q;
   const members=[e.id,...q.allies.map(o=>o.id)];e.res.etk-=q.cost;
-  const f={id:(G.fedUid=(G.fedUid||0)+1),name:fedName(),type,charter:fedDefaultCharter(type),leader:e.id,founder:e.id,
+  const f={id:(G.fedUid=(G.fedUid||0)+1),name:fedName(null,type),type,charter:fedDefaultCharter(type),leader:e.id,founder:e.id,
     members,laws:{},treasury:0,fund:{ala:0,ene:0},nextVote:G.day+60,vote:null,founded:G.day,typeSince:G.day,
     dutySince:{defense:G.day,offense:G.day},defenseFrontCutoff:G.warLedger?.next||1,dutyConsent:{},invites:{},decisions:{},cohesion:70};
-  G.feds=G.feds||[];G.feds.push(f);
+  G.feds=G.feds||[];G.feds.push(f);federationIdentity(f);
   for(const id of members){f.dutyConsent[id]={offense:false,since:G.day};for(const peer of members)if(id!==peer){
     const a=G.emps[id],b=G.emps[peer];a.ally[peer]=true;a.contact[peer]=true;clearBilateralEmbargo(a,b);a.rel[peer]=Math.max(a.rel[peer]||0,45);}}
   fedPoliticalRecord(f,'founded',{type});for(const id of members)recalcMods(G.emps[id]);
@@ -9785,4 +9776,77 @@ function separatistTick(){
     else if (typeof say === 'function')
       say('⚡ ' + sub.name + ', ' + lord.name + ' senyörlüğüne başkaldırdı', 'war');
   }
+}
+
+/* 95D: relationship knowledge is deliberately narrower than mere contact. */
+function knownFederationBond(viewer,f,id){
+ if(!viewer||!f||!f.members.includes(id))return false;
+ if(f.members.includes(viewer.id))return id===viewer.id||!!viewer.contact[id];
+ // Existing level-3 intelligence reveals a target's relationship table.
+ return !!viewer.contact[id]&&(viewer.intel?.[id]||0)>=3;
+}
+function knownAllianceBond(viewer,a,b){return !!viewer&&(a.id===viewer.id||!!viewer.contact[a.id])&&(b.id===viewer.id||!!viewer.contact[b.id])&&(viewer.id===a.id||viewer.id===b.id||(viewer.intel?.[a.id]||0)>=3||(viewer.intel?.[b.id]||0)>=3);}
+let DIPLO_MAP_CACHE=null;
+function diplomacyMapConnections(zoom=.3){
+ if(!G.p||zoom<.10)return [];
+ const signature=JSON.stringify([Math.floor(G.day),zoom<.18?12:36,FED_LINKS_ON,ALLY_LINKS_ON,G.emps.map(e=>[e.id,e.dead,e.home,G.p.contact[e.id],G.p.intel?.[e.id],Object.entries(e.ally||{}).filter(x=>x[1]).map(x=>x[0])]),(G.feds||[]).map(f=>[f.id,f.leader,f.members,f.emblem])]);
+ if(DIPLO_MAP_CACHE&&DIPLO_MAP_CACHE.world===G.sys&&DIPLO_MAP_CACHE.vis===G.vis&&DIPLO_MAP_CACHE.signature===signature)return DIPLO_MAP_CACHE.lines;
+ const endpoints=new Map();for(const s of G.sys){if(!pSeen(s)||s.owner!==G.p.id&&!pVis(s)||!territoryOwnerInfo(s.owner)?.known)continue;const e=G.emps[s.owner];if(!endpoints.has(e.id)||s.id===e.home)endpoints.set(e.id,s);}
+ const out=[],pairs=new Set(),limit=zoom<.18?12:36;
+ const add=(a,b,kind,emblem)=>{const key=Math.min(a,b)+':'+Math.max(a,b);if(a===b||pairs.has(key)||!endpoints.has(a)||!endpoints.has(b)||out.length>=limit)return;pairs.add(key);out.push({a,b,kind,from:endpoints.get(a),to:endpoints.get(b),emblem});};
+ if(FED_LINKS_ON)for(const f of G.feds||[]){const ids=f.members.filter(id=>!G.emps[id]?.dead&&knownFederationBond(G.p,f,id)&&endpoints.has(id));if(ids.length<2)continue;const hub=ids.includes(f.leader)?f.leader:ids[0];for(const id of ids)if(id!==hub)add(hub,id,'federation',f.emblem||makeEmblem('federation:'+G.seed+':'+f.id,'#f5c25c',true));}
+ if(ALLY_LINKS_ON)for(const a of G.emps){if(a.dead||a.wild)continue;for(const key of Object.keys(a.ally||{})){const b=G.emps[+key];if(!a.ally[key]||!b||b.dead||a.id>=b.id||!b.ally[a.id]||!knownAllianceBond(G.p,a,b))continue;add(a.id,b.id,'alliance');}}
+ DIPLO_MAP_CACHE={world:G.sys,vis:G.vis,signature,lines:out};return out;
+}
+
+/* 95D: pure entry gate, also consumed by the real declaration path. */
+function warDeclarationAccess(a,b,options={}){
+ const no=why=>({ok:false,why});
+ if(!a||!b||a.dead||b.dead||a.id===b.id)return no('Geçerli ve yaşayan iki devlet gerekli');
+ if(a.war[b.id])return no('Savaş zaten sürüyor');
+ if(sovereignPair(a,b))return no('Önce bağımsızlık gerekir');
+ if(!options.defensive&&!fedWarAllowed(a,b))return no('Federasyon savaş izni gerekli — diplomasi veya federasyon panelinden öner.');
+ if(hasCivic(a,'shadow'))return no('Gölge Konseyi resmî savaş ilan etmez — operasyonları kullan');
+ if(hasCivic(a,'universal'))return no('Evrensel Barış doktrini savaş ilanını yasaklar');
+ if(!options.authorized&&!canDeclareWarOn(a,b))return no('Savaş ilanı yetkisi veya hedef koşulları uygun değil');
+ return {ok:true,why:''};
+}
+function warDeclarationPreview(actor,target,key){
+ const access=warDeclarationAccess(actor,target),goal=WAR_GOALS[key],cost=actor&&hasPerk(actor,'freeWar')?0:goal?.etk||0;
+ const p={ok:false,target:target&&actor&&(target.id===actor.id||actor.contact[target.id])?{id:target.id,name:target.name}:null,cost,certain:[],conditional:[],risks:[],blockers:[]};
+ if(!p.target){p.blockers.push('Hedefle temas yok');p.signature=JSON.stringify(p);return p;}
+ if(!access.ok)p.blockers.push(access.why);
+ if(!goal)p.blockers.push('Geçerli savaş hedefi seç');
+ if((actor.res.etk||0)<cost)p.blockers.push('Yetersiz Etki: '+cost+' gerekir');
+ if(councilBlocksWar(actor,target))p.risks.push('Galaktik Konsey yasağını ihlal edersin; mevcut Konsey cezası uygulanır.');
+ if(actor.ally[target.id]&&target.ally[actor.id])p.risks.push('İttifakı bozmak ihanet ve itibar kaybı yaratır.');
+ if((actor.nap?.[target.id]||0)>G.day)p.risks.push('Saldırmazlık anlaşmasını bozmak itibar kaybı yaratır.');
+ const seen=new Set([actor.id,target.id]),queue=[{victim:target,enemy:actor,side:'defense'}];
+ const add=(e,enemy,side,why,automatic,defensive=false)=>{
+  if(!e||e.dead||e.wild||seen.has(e.id)||!actor.contact[e.id]||e.id===actor.id||e.id===target.id)return;
+  const gate=warDeclarationAccess(e,enemy,{authorized:true,defensive}),council=councilBlocksWar(e,enemy);
+  const certainty=automatic&&gate.ok&&!council;
+  const row={id:e.id,name:e.name,side,why:why+(council?' · Konsey engeli: katılım kesin değil':'')};
+  (certainty?p.certain:p.conditional).push(row);seen.add(e.id);
+  if(certainty)queue.push({victim:enemy,enemy:e,side:side==='defense'?'attack':'defense'});
+ };
+ const attackFed=findFed(actor);
+ if(attackFed)for(const id of attackFed.members){if(id===actor.id||!knownFederationBond(actor,attackFed,id))continue;const e=G.emps[id],auto=fedDuty(attackFed,'offense')&&G.day>=(attackFed.dutySince?.offense||0)&&attackFed.dutyConsent?.[id]?.offense&&fedSupportGate(e,target).ok;
+  add(e,target,'attack',auto?'Kabul edilmiş saldırı yükümlülüğü':'Federasyon oylaması veya ayrı yardım taahhüdü gerekli',!!auto);}
+ // Follow only known obligations. A queue item represents the victim of a
+ // future declaration, just like fedDefend / overlordDefend in the motor.
+ for(let i=0;i<queue.length&&i<G.emps.length*2;i++){
+  const {victim,enemy,side}=queue[i],f=findFed(victim);
+  if(f)for(const id of f.members){if(id===victim.id||!knownFederationBond(actor,f,id)||!knownFederationBond(actor,f,victim.id))continue;const e=G.emps[id];
+    const auto=fedDuty(f,'defense')&&(!f.defenseFrontCutoff||(G.warLedger?.next||1)>=f.defenseFrontCutoff)&&fedSupportGate(e,enemy,false).ok;
+    add(e,enemy,side,auto?'Yürürlükteki ortak savunma yükümlülüğü':'Savunma oylaması veya gönüllü yardım gerekli',!!auto,true);
+  }
+  const lord=overlordOf(victim);
+  if(lord&&(actor.id===victim.id||actor.id===lord.id||(actor.intel?.[victim.id]||0)>=3)){
+    add(lord,enemy,side,'Senyörlük koruma yükümlülüğü',true,true);
+    for(const v of vassalsOf(lord))if(v.vassalType==='bekci'&&(actor.id===lord.id||actor.id===v.id||(actor.intel?.[v.id]||0)>=3))add(v,enemy,side,'Sınır bekçisinin koruma yükümlülüğü',true,true);
+  }
+ }
+ for(const base of [{e:actor,enemy:target,side:'attack'},{e:target,enemy:actor,side:'defense'}])for(const id of Object.keys(base.e.ally||{})){const e=G.emps[+id];if(e&&base.e.ally[id]&&e.ally[base.e.id]&&knownAllianceBond(actor,base.e,e))add(e,base.enemy,base.side,'İttifak: ayrı gönüllü yardım veya savaş taahhüdü gerekli',false);}
+ p.certain.sort((a,b)=>a.id-b.id);p.conditional.sort((a,b)=>a.id-b.id);p.ok=!p.blockers.length;p.signature=JSON.stringify(p);return p;
 }

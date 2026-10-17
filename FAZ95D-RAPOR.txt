@@ -1,0 +1,30 @@
+STARS — FAZ 95D
+Devlet/federasyon kimlikleri, prosedürel amblemler, diplomasi katmanları ve savaş önizlemesi
+
+KANONİK KAYNAK
+stars-faz95c1.zip
+SHA-256: e964cd5dd0cfb14abbfcef4be935ec1d2d77e0388cdb8239f8b06fe529e3e6f3
+CRC: geçti; manifest 2167/2167. GitHub main ve 3c0fbbb1f10bceba8febf2f7bf684c0c99f425fb aynı; 11 üretim/not dosyasının Git blob kimliği aynı. Kaynak ZIP değişmedi. Önceki raporlar ve 15 Ekim geliştirme notu korunur.
+
+KISA DENETİM / KÖK NEDEN
+Etik ad üreticisi, önbellekli 11x11 arma ve çakışma çözen bölge etiketleri zaten vardı. Ad fallback’i benzersiz değildi ve oyuncu adı ayrılmıyordu. Arma yalnız dört eski maskeydi; kaydedilen çok bileşenli siyasi kimlik yoktu. Federasyon ad havuzu 35 kombinasyondu, çakışma kapısı ve ayrı amblem yoktu. Savaş çizgisi bağımsızdı; federasyon/ittifak katmanı yoktu. Savaş hedefi düğmesi doğrudan maliyet/savaş uyguluyordu; katılım önizlemesi yoktu.
+
+SONUÇ
+Benzersiz ve karaktere uygun adlar; bağımsız RNG akışında kimlik üretimi; 6 şekil/8 sembol/6 desen ve iki renk; oyuncu düzenleyici ve beş bileşeni değiştiren RASTGELE AMBLEM; kayıtlı ayrı federasyon kimliği; 94D yerleşimli tıklanabilir devlet armaları; üç bağımsız ve bilgi filtreli harita katmanı; kesin/koşullu/bilinmeyen ayrımıyla son onaylı savaş önizlemesi.
+Mevcut federasyon anayasaları, katılım kuralları, savaş ve filo motorları yeniden yazılmadı. Save v8, tek 2B kamera ve deterministik RNG korunur. PWA stars-v95d; build 95d. Yeni oyun dış kütüphanesi veya asset yok.
+
+TEST
+86 paket / 4.988 başarılı kontrol / 0 kalan hata. Tek tam koşu + kayıtlı sınırlı takip; ham ilk 4958/26 sonucu gizlenmedi. Yeni hedefli paketler ve bütün eski paketler bu fazda çalıştırıldı. 11/99/404 başlangıç dünyası, kaynak/araştırma/filo ve RNG projeksiyonu kanonik 95C.1 ile eşit. Eski adlar değişmedi. Savaş katkısı ve oybirliği paylaşım regresyonları geçti.
+
+PERFORMANS
+Yoğun 100 sistem / 13 devlet native Canvas karşılaştırması TEST-SONUCLARI-95D.md ve audit-95d/performance.json içinde. Parametre/raster/metin ölçümü önbellekli; raster cache 256, metin cache 256 girişle sınırlı. Her kare yeni AI/sefer taraması eklenmedi. Ek diplomasi katmanı ölçülen medyanda yaklaşık 0,052–0,053 ms düzeyindeydi; kesin tablo raporda. Host süreleri Android FPS garantisi değildir.
+
+DEĞİŞEN ÜRETİM
+main.js, map.js, diplomacy.js, ui.js, index.html, sw.js.
+ai.js, combat.js, economy.js, audio.js, manifest.json byte-for-byte aynı. Kaynak yaması ve tüm değişen dosyalar tests/audit-95d altında.
+
+SINIRLAR
+Fiziksel Android ve gerçek tarayıcı DOM/yerleşim kabulü yok. Yoğun görünümde sığmayan etiketler atlanabilir. Eski kayıtta var olan aynı adlar geriye dönük değiştirilmez. İstihbaratı yetersiz yabancı siyasi bağlantılar bilinçli olarak gösterilmez. Bilinmeyenler grubu gizli sayı vermez. Önizleme gelecekteki gönüllü karar veya askerî kuvvet garantisi değildir. Yeni uzun denge kampanyası iddiası yoktur.
+
+TESLİM
+stars-faz95d.zip. Kendi SHA-256’sı dış teslim mesajındadır. RELEASE-MANIFEST.json bütün diğer dosyaların SHA-256’sını içerir; son ZIP CRC/manifest ile ayrıca doğrulanır. GitHub'a yükleme yapılmadı. 95E başlamadı.

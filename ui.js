@@ -222,6 +222,8 @@ const UI = {
            <button class="tool mapMode" id="mm_savas" data-a="mapMode" data-x="savas"
              title="Husumet ağı">🔥<span>Savaş</span></button>
            <div class="modeHdr" id="layerHdr">KATMANLAR (bağımsız)</div>
+           <button class="tool${FED_LINKS_ON?' on':''}" id="fedLinksBtn" data-a="fedLinksToggle" aria-pressed="${FED_LINKS_ON}" title="Bilinen federasyon üyelikleri · altın kesik çizgi">⬡<span>Federasyonlar</span></button>
+           <button class="tool${ALLY_LINKS_ON?' on':''}" id="allyLinksBtn" data-a="allyLinksToggle" aria-pressed="${ALLY_LINKS_ON}" title="Bilinen ittifaklar · yeşil kesik çizgi">↔<span>İttifaklar</span></button>
            <button class="tool warLinksBtn${WAR_LINKS_ON?' on':''}" id="warLinksBtn" data-a="warLinksToggle"
              aria-pressed="${WAR_LINKS_ON}" title="Savaş bağlantı çizgileri — Savaşlar harita renginden bağımsız aç/kapat">⚔<span>Savaş hatları</span></button>
            <button class="tool logiBtn" id="logiBtn" data-a="logiToggle"
@@ -602,6 +604,13 @@ const UI = {
       /* ═══ FAZ 86C.4H-R2: LOJİSTİK AYRI AKSİYON ═══
          Lojistik artık ana modu DEĞİŞTİRMEZ; kendi aç/kapat
          durumunu çevirir ve tercihi kalıcı yazar. */
+      case 'fedLinksToggle':
+      case 'allyLinksToggle': {
+        if(a==='fedLinksToggle')FED_LINKS_ON=!FED_LINKS_ON;else ALLY_LINKS_ON=!ALLY_LINKS_ON;
+        DIPLO_LINKS_REV++;refreshIdentityLayerButtons();
+        try{storeSet('yh_diplolayers',JSON.stringify({federations:FED_LINKS_ON,alliances:ALLY_LINKS_ON}));}catch(ignore){}
+        if(typeof forceRedraw==='function')forceRedraw('diplo-layers');break;
+      }
       case 'warLinksToggle': {
         WAR_LINKS_ON=!WAR_LINKS_ON;WAR_LINKS_REV++;
         const b=$('warLinksBtn');if(b){b.className='tool warLinksBtn'+(WAR_LINKS_ON?' on':'');b.setAttribute('aria-pressed',String(WAR_LINKS_ON));}
@@ -1524,18 +1533,7 @@ const UI = {
         break;
       }
       case 'setwg': {
-        const [id, k] = x.split(':');
-        const o = G.emps[+id];
-        if (!o || !fedWarAllowed(G.p,o)){
-          say('Önce federasyon savaş izni al', 'war'); this.closeModal(); this.openFed(); break;
-        }
-        if (setWarGoal(G.p, o, k)){
-          declareWar(G.p, o);
-          say('Savaş hedefi: ' + WAR_GOALS[k].n, 'war');
-        } else say('Yetersiz etki');
-        this.closeModal();
-        this.openDiplo();
-        break;
+        const [id,key]=String(x).split(':');this.warDeclarationPreview(+id,key);break;
       }
       case 'runop': {
         /* FAZ 86A: geriye dönük uyumluluk — doğrudan yürütme yerine
@@ -3317,7 +3315,7 @@ const UI = {
     if (page==='deal') this.openDeal(id);else this.openDiplo();
   },
   diploHeader(page,o){
-    return `<div class="dpBox dcBox"><div class="dpHd"><span>DİPLOMASİ${o?' · '+esc(o.name):''}</span>
+    return `<div class="dpBox dcBox"><div class="dpHd"><span>DİPLOMASİ${o?' · <canvas class="identityBadge" data-identity="state" data-id="'+o.id+'" width="28" height="28"></canvas> '+esc(o.name):''}</span>
       <button class="riX" data-a="closeDiplo" aria-label="Diplomasiyi kapat">✕</button></div>
       <div class="dcNav" role="tablist" aria-label="Diplomasi bölümleri">`+
       [['states','DEVLETLER'],['relation','İLİŞKİ'],['deal','MÜZAKERE']].map(([key,label])=>
@@ -3339,19 +3337,21 @@ const UI = {
     }
     setTimeout(()=>{
       if (this._dcGen!==gen||!pane.classList.contains('show')) return;
-      this.paintLeaderPortraits();this.paintSprites();
+      this.paintLeaderPortraits();this.paintSprites();paintEmblems();
     },0);
   },
   diploIdentity(e,o){
     const lvl=intelOf(e,o.id),rel=Math.round(e.rel[o.id]||0);
     const P=lvl>=2?personaOf(o):null;
+    const f=findFed(o),knownFed=f&&knownFederationBond(e,f,o.id);
+    const federation=knownFed?`<div class="mini"><canvas class="identityBadge" data-identity="federation" data-id="${f.id}" width="28" height="28"></canvas> ${esc(f.name)} · ${esc(fedType(f).n)}</div>`:'';
     return `<div class="dcIdentity">
       <canvas class="dpPort" width="60" height="72" data-lk="${esc(o.look||'humanoid')}"
         data-col="${esc(o.col)}" data-pers="${P?esc(personaKey(o)):'yayilmaci'}"
         data-mood="${rel}"></canvas><div><b>${esc(o.name)}</b>
       <div class="mini">${sysCount(o)} sistem · ${INTEL_LEVELS[lvl].n}</div>
       <div class="mini">Filo gücü: ${powerLabel(e,o)}</div>
-      ${P?'<div class="mini">Mizaç: '+esc(P.n)+'</div>':''}</div></div>
+      ${P?'<div class="mini">Mizaç: '+esc(P.n)+'</div>':''}${federation}</div></div>
       <div class="row"><span>İlişkin</span><b>${rel>0?'+':''}${rel}</b></div>`;
   },
   diploTreaties(e,o){
@@ -3632,8 +3632,9 @@ const UI = {
         });
       }
     } else {
-      h+=`<div class="ph">MEVCUT FEDERASYONUM</div><div class="envRow"><span>${esc(f.name)}</span><b>${f.members.length} üye</b></div>`;
+      h+=`<div class="ph">MEVCUT FEDERASYONUM</div><div class="envRow"><span><canvas class="identityBadge" data-identity="federation" data-id="${f.id}" width="30" height="30"></canvas> ${esc(f.name)}</span><b>${f.members.length} üye</b></div>`;
       h+=this.fedGovernance(f);
+      h+=`<div class="mini">Kimlik kökeni: ${esc(FED_TYPES[f.identityType||f.type]?.n||'Askerî')}. Tür reformunda ad ve amblem korunur; güncel yükümlülükler aşağıdadır.</div>`;
       h+=this.jointPanel(null,'fed');
       h += `<div class="envRow"><span>${esc(f.name)}</span>
         <b style="color:#6ff2c8">${f.members.length} üye</b></div>`;
@@ -3745,6 +3746,7 @@ const UI = {
     }
     h += `</div></div>`;
     $('diploPane').innerHTML = h;
+    paintEmblems();
     $('diploPane').classList.add('show');
   },
 
@@ -5169,6 +5171,7 @@ const UI = {
     }
     h += `</div></div>`;
     $('diploPane').innerHTML = h;
+    paintEmblems();
     $('diploPane').classList.add('show');
     setTimeout(()=>{
       [...document.querySelectorAll('canvas.dpPort')].forEach(cv=>{
@@ -5556,6 +5559,31 @@ const UI = {
     this.drawDeal();
   },
 
+  selectDiploIdentity(id){
+    if(id===G.p.id){this.tab('devlet');this.refresh();return;}
+    this.selectDiplo(id,'relation');
+  },
+  warDeclarationPreview(id,key){
+    const p=warDeclarationPreview(G.p,G.emps[id],key);if(!p.target)return;
+    const group=(title,items)=>`<div class="ph">${title}</div>${items.length?items.map(v=>`<div class="mini">${esc(v.name)} · ${esc(v.side==='defense'?'Hedefin yanında':'Senin yanında')} · ${esc(v.why)}</div>`).join(''):'<div class="mini">Bilinen katılımcı yok.</div>'}`;
+    this.openModal(`<div class="mhd">SAVAŞ İLANI ÖNİZLEMESİ</div><div class="mbd"><div class="lead">Hedef: ${esc(p.target.name)} · ${esc(WAR_GOALS[key]?.n||'Geçersiz hedef')}</div>
+      <div class="mini">Etki bedeli: ${p.cost} ◈. Son onaya kadar savaş başlamaz. İttifak tek başına otomatik savaş katılımı değildir.</div>
+      ${group('KESİN KATILACAKLAR',p.certain)}${group('KOŞULLU KATILABİLECEKLER',p.conditional)}
+      <div class="ph">BİLİNMEYENLER</div><div class="mini">İstihbarat kapsamı dışındaki siyasi bağlantılar ve gizli taahhütler belirlenemez. Bu bölüm gizli devlet sayısını göstermez.</div>
+      ${p.risks.map(v=>`<div class="mini">⚠ ${esc(v)}</div>`).join('')}${p.blockers.map(v=>`<div class="mini">Engel: ${esc(v)}</div>`).join('')}
+      </div><div class="mft"><button id="warFinalConfirm" class="ch" ${p.ok?'':'disabled'}>ONAYLA · SAVAŞ İLAN ET</button><button class="ch" data-a="closem">Vazgeç</button></div>`,'war');
+    const pending={world:G.sys,player:G.p,id,key,signature:p.signature};this._warPreview=pending;
+    this._hook('warFinalConfirm',()=>{
+      if(this._warPreview!==pending||G.sys!==pending.world||G.p!==pending.player)return;
+      this._warPreview=null;const current=warDeclarationPreview(G.p,G.emps[id],key);
+      if(current.signature!==pending.signature||!current.ok){this.warDeclarationPreview(id,key);say('Koşullar değişti; güncel önizlemeyi yeniden onayla.','war');return;}
+      // Synchronous final validation precedes both declaration and goal payment.
+      const actor=G.p,target=G.emps[id];
+      if(!warDeclarationAccess(actor,target).ok||!declareWar(actor,target)){say('Savaş ilanı uygulanamadı; koşullar değişti.','war');return;}
+      if(setWarGoal(actor,target,key))say('Savaş hedefi: '+WAR_GOALS[key].n,'war');
+      this.closeModal();this.openDiplo();
+    });
+  },
   /* savaş hedefi seçim ekranı — savaş artık amaçsız değil */
   warGoalMenu(id){
     const e = G.p, o = G.emps[id];
@@ -7320,6 +7348,7 @@ const UI = {
   },
 
   openModal(html, cls, stashable, art){
+    this._warPreview=null;
     this._amountToken=null;this._jointSendToken=null;
     this._shipCancelPending=null;
     this._shipmentPending=null;
@@ -7493,6 +7522,7 @@ const UI = {
   },
 
   closeModal(){
+    this._warPreview=null;
     this._amountToken=null;this._jointSendToken=null;
     // 94D.1: acknowledged war/retired incident cards must not be saved as still open.
     if(this._openNote&&['warstart','wardec','border'].includes(this._openNote.kind))this._openNote=null;
@@ -8423,13 +8453,15 @@ function renderSetup(){
        KALDIRILDI — ikisi de 2. sekmede (GÖRÜNÜŞ) seçiliyor ve burada
        tekrar edip kafa karıştırıyordu. Arma stili burada kalıyor
        çünkü türle birlikte kimlik oluşturuyor. */
-    h += `<div class="sect"><h2>ARMA STİLİ</h2><div class="grid g4">`;
-    for (const k in SIGILS){
-      h += `<button class="opt ${c.sigil===k?'on':''}" data-a="sigil" data-x="${k}">
-        <canvas class="sigPrev" data-sg="${k}" data-col="${c.color||RACES[c.race].col}" width="26" height="26"></canvas>
-        <small>${SIGILS[k].n}</small></button>`;
-    }
-    h += `</div></div>`;
+    h += `<div class="mini">Devlet amblemini GÖRÜNÜŞ sekmesinde şekil, sembol, desen ve renkleriyle düzenle.</div>`;
+  }
+
+  if(SETUP_STEP==='goruns'){
+    const em=normalizeEmblem(c.emblem,c.color||RACES[c.race].col,'setup');
+    h+=`<div class="sect emblemEditor"><h2>DEVLET AMBLEMİ</h2><div class="emblemPreview"><canvas data-identity="setup" width="80" height="80" aria-label="Amblem önizlemesi"></canvas><button class="btn" data-a="randomEmblem">🎲 RASTGELE AMBLEM</button></div><div class="emblemFields">`;
+    for(const [key,label,pool] of [['shape','Ana şekil',EMBLEM_SHAPES],['symbol','İç sembol',EMBLEM_SYMBOLS],['pattern','Desen',EMBLEM_PATTERNS]])h+=`<label>${label}<select data-emblem-field="${key}">${Object.entries(pool).map(([k,n])=>`<option value="${k}" ${em[key]===k?'selected':''}>${n}</option>`).join('')}</select></label>`;
+    for(const [key,label] of [['primary','Ana renk'],['secondary','İkincil renk']])h+=`<label>${label}<input type="color" data-emblem-field="${key}" value="${em[key]}"></label>`;
+    h+=`</div><div class="mini">Ana renk devletin siyasi rengidir. Rastgele düğmesi şekil, sembol, desen ve iki rengi birlikte değiştirir. Seçimin yeni oyuna ve kayda aktarılır.</div></div>`;
   }
 
   /* ================= 2. ETİK ================= */
@@ -8702,6 +8734,11 @@ function renderSetup(){
         Yatay tut · oyun içinde ⛶ ile tam ekrana geç</div>`;
 
   $('setup').innerHTML = h;
+  for(const input of document.querySelectorAll('[data-emblem-field]'))input.addEventListener('change',()=>{
+    const em=normalizeEmblem(CFG.emblem,CFG.color||RACES[CFG.race].col,'setup'),key=input.dataset.emblemField;
+    if(['shape','symbol','pattern','primary','secondary'].includes(key))em[key]=input.value;
+    if(key==='primary')CFG.color=em.primary;CFG.emblem=em;safeRenderSetup();
+  });
   const inp = $('empName');
   if (inp) inp.addEventListener('input', e => { CFG.name = e.target.value || 'Yeni Hanedan'; });
   paintEmblems();
@@ -8723,6 +8760,7 @@ function setupClickHandler(e){
      KÖK NEDEN: tplSave/tplLoad/tplDel yalnız UI.act() içinde
      tanımlıydı. Kurulum ekranı UI.act'ı HİÇ ÇAĞIRMIYOR — kendi
      if/else zincirini kullanıyor. Butonlar bu yüzden ölüydü. */
+  if(a==='randomEmblem'){randomizeSetupEmblem();safeRenderSetup();return;}
   if (a === 'tplSave'){
     saveTemplate().then(ad => { say('💾 "' + ad + '" şablonu kaydedildi');
       safeRenderSetup(); });

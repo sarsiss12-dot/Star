@@ -1,5 +1,7 @@
 'use strict';
 const {createHash}=require('crypto');
+// 95D: reviewed procedural emblem renderer and identity tap; dedicated identity,
+// map, war-preview tests and existing negative guards cover the extensions.
 // 94C: sprite-prefix hash remains frozen. Authorized affine transform
 // and screen-distance picking are covered by faz94c_camera_trade_test. Camera/input/frustum and fleet
 // heading now use reviewed 94D hashes; dedicated gesture, inverse transform
@@ -14,7 +16,7 @@ function isMapInfrastructurePreserved(source){
   const prefixEnd=helpers<0?source.indexOf('const View ='):helpers;
   if(prefixEnd<0||start<0||end<=start||fleet<=end)return false;
   const parts=[source.slice(0,prefixEnd),source.slice(start,end),source.slice(fleet)];
-  const expected=['c5b7656a33fbdc1b23cc2177fcb50930db51c244ff3c9add34b375e709f37d7a', '44ed69e6dab55266b882c235eab467409956b82e4831a86b7ff28096d56d2a82', '3a9500d3af286a299bc8e783174af8d5a61e63c4bc607b44fd593e1ec64f6c65'];
+  const expected=['0f4a82743c40e2f73515461f112d5eb8106e97b09439157514ef6993ce42520c', '46c321133ccf37c51079522637bc8e839663ac09cfb3ae696ccc14000f03537b', '3a9500d3af286a299bc8e783174af8d5a61e63c4bc607b44fd593e1ec64f6c65'];
   return parts.every((part,i)=>createHash('sha256').update(part.trimEnd()).digest('hex')===expected[i]);
 }
 module.exports={isMapInfrastructurePreserved};

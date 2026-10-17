@@ -5,6 +5,13 @@ const hash=s=>createHash('sha256').update(s).digest('hex');
 // block must restore the untouched canonical 93A.1/93C HTML hash.
 // Historical referans-sha.json remains intact; neither half is exempted.
 exports.isReviewedUI=source=>{
+ // 95D adds only this pinned identity block; all 95C.1 layout pins remain.
+ const identityStart=source.indexOf('/* FAZ 95D — compact identity controls */');
+ if(identityStart>=0){const marker='/* END FAZ 95D IDENTITY */\n',end=source.indexOf(marker,identityStart)+marker.length;
+  if(end<identityStart||hash(source.slice(identityStart,end))!=='afd1d5e1baa89f429acb58d40da1793ce9c13d7c67e6f4d70d2ef4d892ca3aca')return false;
+  source=source.slice(0,identityStart)+source.slice(end);
+ }
+
  // 95C.1 mobile layout is an independently pinned additive block.
  const mobileStart=source.indexOf('/* FAZ 95C.1 — bounded mobile controls */');
  if(mobileStart>=0){const marker='/* END FAZ 95C.1 MOBILE */\n',end=source.indexOf(marker,mobileStart)+marker.length;
