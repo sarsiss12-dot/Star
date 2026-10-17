@@ -4603,6 +4603,7 @@ function checkVictory(e, why){
 
 /* ---------- rastgele imparatorluk olayları ---------- */
 function maybeEvent(){
+  if (G.cfg && G.cfg.randomEvents === false) return; // Sadece pasif rastgele olaylar
   G.seenChains = G.seenChains || {};
   // önce hikâye zinciri şansı — bunlar araştırmaya bağlı değil
   if (rnd() < .11){
@@ -5602,7 +5603,8 @@ const CFG = {
   sigil:'simetrik', monoRes:'min', look:'humanoid', mizac:'yayilmaci',
   crisis:'normal', ruins:'orta', council:'normal',
   physio:'humanoid',                // FAZ 52: tür fizyolojisi
-  pirates:true, gates:true, crisisPower:'normal'   // FAZ 53: galaksi anahtarları
+  pirates:true, gates:true, crisisPower:'normal',  // FAZ 53: galaksi anahtarları
+  randomEvents:true   // FAZ 95E.1: hikâye zinciri/tesadüfi imparatorluk olayları ve galaktik çalkantılar
 };
 /* ═══ FAZ 57: CFG.autoResolveEvents ═══
    Şartnamedeki ad. Tek gerçek kaynak AUTO_EVENT — bu bir takma ad,
@@ -8152,7 +8154,7 @@ function forceRedraw(sebep){
    Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
    Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
 /* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */
-const BUILD_ID = '95e';
+const BUILD_ID = '95e1';
 const DIAG_MAX = 40;
 const DIAG = [];
 function logDiag(tur, mesaj){
@@ -8958,6 +8960,9 @@ function monthTick(){
   // yapay zekâ — her ay bir imparatorluk (yük dağıtımı)
   const ais = G.emps.filter(e=>e.ai && !e.dead);
   for (const e of ais) aiTurn(e);
+  // Kapalı rastgele olaylar daha önceki hikâye bölümlerini de göstermez.
+  if (G.cfg && G.cfg.randomEvents === false && G.chainQueue && G.chainQueue.length)
+    G.chainQueue.length = 0;
   // bekleyen hikâye bölümleri zamanı gelince bildirilir
   if (G.chainQueue && G.chainQueue.length){
     for (let i = G.chainQueue.length - 1; i >= 0; i--){
@@ -9146,6 +9151,7 @@ const UPHEAVAL_GAP   = 48;      // iki çalkantı arasında en az bu kadar tur
 
 function upheavalActive(){ return !!(G.upheaval && G.upheaval.left > 0); }
 function upheavalInfo(){
+  if (G.cfg && G.cfg.randomEvents === false) return null;
   return upheavalActive() ? UPHEAVALS[G.upheaval.k] : null;
 }
 
@@ -9177,6 +9183,7 @@ function upheavalMods(e){
 
 /* Aylık çalkantı tiki — monthTick çağırır */
 function upheavalTick(){
+  if (G.cfg && G.cfg.randomEvents === false) return;
   G.upAge = (G.upAge || 0) + 1;
 
   /* Yürürlükteki çalkantı */

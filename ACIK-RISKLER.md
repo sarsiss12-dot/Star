@@ -1,3 +1,9 @@
+# 95E.1 açık riskler (17 Ekim 2026)
+
+Yeni pre-game rastgele olay anahtarı hedefli testlerle doğrulandı. Tam regresyon ve fiziksel Android kabulü yapılmadı. Geniş olay kataloğundaki diplomasi/casusluk/kriz ve bilim keşfi sonuçları bilinçli olarak kapatılmadı. Eski kayıtta yeni alan yoksa rastgele olaylar açıktır. Önceki 95E riskleri değişmedi.
+
+---
+
 # 95E güncel açık riskler — 17 Ekim 2026
 
 - Fiziksel Android ve gerçek Chromium DOM/yerleşim/PWA yükseltme kabulü yapılamadı. Mock viewport/olay ve native Canvas kanıtı cihaz testi değildir.

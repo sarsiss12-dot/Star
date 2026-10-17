@@ -1,0 +1,16 @@
+STARS — FAZ 95E.1 (17 Ekim 2026)
+Önceki kanonik sürüm: Faz 95E, ZIP SHA-256 ff1b9a4b928ec4dbc4ac45f59903a7fbfff1e23c34e8b552b2e99115f77c79f1; GitHub main a055e173229ffbfeb4e354336ed37d4591ffbf31.
+DAR KAPSAM
+Galaksi kurulum ekranında 🎲 Rastgele Olaylar AÇIK/KAPALI anahtarı eklendi (varsayılan AÇIK).
+Kapalıyken tesadüfi imparatorluk olayları, maden kazası/hastalık hikâye zincirleri, zincir devamları ve galaktik çalkantılar başlatılmaz. Bunların RNG çağrıları tüketilmez.
+Diplomasi, casusluk, savaş, Konsey, kriz (ayrı ayarlanır), bilim gemisinin bizzat keşfettiği anomaliler ve diğer gerçek oyun mekanikleri korunur.
+Oyundaki eski 'Olayları otomatik geç' ayarı olayları engellemez; bundan ayrı kalır.
+Yeni seçenek CFG.randomEvents ve G.cfg.randomEvents içinde Save v8 ile saklanır; eski kayıtlarda alan yoksa AÇIK davranışı devam eder. Oyuncu özelleştirme şablonları galaksi ayarı taşımadığı için anahtar şablonlarla bozulmaz.
+Üretim değişikliği: main.js (event kapıları ve build ID 95e1), ui.js (kurulum anahtarı, gerçek buton eylemi ve özet), sw.js (stars-v95e1).
+TEST
+Yeni hedefli kontrol 8/8 başarılı. 95E modül/yeni UI kontrol paketleri 5 paket / 86 kontrol / 0 hata.
+Eski rastgele olay + kayıt sürekliliği testi 147/147 başarılı.
+Ek kısmi başlangıç regresyonu 14 eski paket geçti. Tam 95E.1 regresyonu bitirilmedi; tam başarı iddia edilmez.
+Native Canvas testinde @napi-rs/canvas modülünün çalışma ortamında bulunmaması nedeniyle cihaz/piksel testi yapılamadı. Testte eski sürüm adı beklentileri yeni build/cache kimliğine güncellendi. Fiziksel Android/gerçek Chromium kabulü yok.
+95E kaynak bütünlüğü 1270/1270 manifest, CRC temiz. Bu ZIP için hash ve manifest teslimde ayrıca doğrulanır.
+GitHub yayını bu raporun yazıldığı anda yapılmadı. 95F veya 96A başlatılmadı.

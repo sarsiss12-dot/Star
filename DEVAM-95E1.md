@@ -1,0 +1,3 @@
+# Devam noktası 95E.1
+
+95E üzerine dar bir pre-game rastgele olay anahtarı eklendi. `CFG.randomEvents` varsayılan true; `false` yalnız pasif rastgele imparatorluk `maybeEvent`, galaktik çalkantı `upheavalTick/upheavalInfo` ve kuyruktaki rastgele hikâye devamını kapatır. Diplomatik, casusluk, savaş, kriz ve keşif anomali mekanikleri korunur. Save v8 geri uyumu korunur. İlgili test `tests/faz95e1_random_event_switch_test.js`. Tam regresyon ve fiziksel Android kabulü açık. Faz 96A ticaret sözleşmesi ve konvoylar; ayrı ekonomi ekranı, doğal generatif müzik, portre/köken, casusluk teknoloji seçenekleri, multiplayer altyapısı sonraki planlardadır.

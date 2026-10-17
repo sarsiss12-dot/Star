@@ -153,7 +153,7 @@ for(const f of fs.readdirSync(KOK).filter(x=>x.endsWith('.js'))){
 }
 {
   const mn=oku('main.js'), mp=oku('map.js'), ui=oku('ui.js'), sw=oku('sw.js');
-  ok("sw cache = 'stars-v95e'", /const CACHE = 'stars-v95e'/.test(sw));
+  ok("sw cache = 'stars-v95e1'", /const CACHE = 'stars-v95e1'/.test(sw));
   ok('sw KABUK/fetch/activate korundu', /KABUK/.test(sw) &&
      /addEventListener\('fetch'/.test(sw) && /addEventListener\('activate'/.test(sw));
   ok('kayıt sürümü v:8 KALDI', /v:8, cfg:G\.cfg/.test(mn));
@@ -179,7 +179,7 @@ for(const f of fs.readdirSync(KOK).filter(x=>x.endsWith('.js'))){
      /rebuildCanvasSurface\(sebep \+ '\+resize'\)/.test(mn));
   /* Tanı */
   ok('tanı: renderReport var', /function renderReport\(/.test(mn));
-  ok('tanı: BUILD_ID güncel', /const BUILD_ID = '95e';/.test(mn));
+  ok('tanı: BUILD_ID güncel', /const BUILD_ID = '95e1';/.test(mn));
   ok('tanı: olay izi var', /function izOlay\(/.test(mn));
   ok('tanı: ilk başarısızlık korunuyor', /function ilkHataKaydet\(/.test(mn));
   ok('tanı: çizim aşaması izleniyor', /this\._drawStage = 'tamam'/.test(mp));
@@ -445,7 +445,7 @@ console.log('\nF. TANI RAPORU HANGİ DALLARI AYIRIYOR');
      Y.cvEsles===true && Y.gEsles===true);
   const I=d.iz||{};
   ok('rapor build, olay izi, nesil ve jeton içeriyor',
-     I.build==='95e' && /vis>focus/.test(I.olaylar||'') &&
+     I.build==='95e1' && /vis>focus/.test(I.olaylar||'') &&
      I.gen===true && I.tok===true, JSON.stringify(I));
   ok('rapor viewport/canvas/DPR içeriyor',
      I.dpr!==undefined && !!I.cvPx, I.cvPx+' dpr '+I.dpr);

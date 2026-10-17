@@ -1,3 +1,9 @@
+# 95E.1 ek bakım (17 Ekim 2026)
+
+Galaksi başlangıcına yalnızca pasif rastgele imparatorluk olaylarını ve galaktik çalkantıları devre dışı bırakan seçenek eklendi. Diplomasi/casusluk/savaş/keşif korunur. Ayrıntı FAZ95E1-RAPOR.txt. 96A ticaret, Ekonomi ekranı, fiziksel Android, generatif enstrüman müziği ve LAN/online multiplayer planları korunur.
+
+---
+
 # 95E sonrası güncel plan — 17 Ekim 2026
 
 95E tamamlandı: kalıcı bilgi filtreli haber arşivi, mevcut motora bağlı diplomatik gelen kutusu, gemi başına uzak inşaat kuyruğu ve AI adaptörü. 90 paket / 5.170 başarılı / 0 kalan hata. Save v8, tek 2B kamera, stars-v95e. Son test ve kapsam sınırları FAZ95E-RAPOR.txt / TEST-SONUCLARI-95E.md içindedir.

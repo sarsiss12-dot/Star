@@ -8657,6 +8657,9 @@ function renderSetup(){
              'togPirate', c.pirates !== false);
     h += tog('🌀 Yıldız Kapıları', 'Uzak sistemler arası kısayol ağı',
              'togGate', c.gates !== false);
+    h += tog('🎲 Rastgele Olaylar',
+      'Maden kazası, salgın, tesadüfi hikâye zincirleri ve galaktik çalkantılar; diplomasi, casusluk, savaş ve keşif devam eder',
+      'togRandomEvents', c.randomEvents !== false);
     h += `</div>`;
     h += `<div class="ph">☣ KRİZ ŞİDDETİ</div><div class="grid g3">`;
     [['kapali','KAPALI','Hiçlik Sürüsü hiç gelmez'],
@@ -8734,6 +8737,7 @@ function renderSetup(){
     gv(SHAPES, c.shape)} · ${gv(DIFFS, c.diff)}</b></div>`;
   h += `<div class="sumRow"><span>Kriz · Kalıntı</span><b>${CRISIS_TIMING[c.crisis].n} · ${RUIN_LEVELS[c.ruins].n}</b></div>`;
   h += `<div class="sumRow"><span>Konsey</span><b>${COUNCIL_PACE[c.council]?COUNCIL_PACE[c.council].n:'NORMAL'}</b></div>`;
+  h += `<div class="sumRow"><span>Rastgele olaylar</span><b>${c.randomEvents===false?'KAPALI':'AÇIK'}</b></div>`;
   h += `</div>`;
 
   const idx = STEPS.findIndex(x=>x.k===SETUP_STEP);
@@ -8841,6 +8845,7 @@ function setupClickHandler(e){
      ═══════════════════════════════════════════════════════════════ */
   else if (a === 'togPirate'){ CFG.pirates = (CFG.pirates === false); safeRenderSetup(); }
   else if (a === 'togGate'){ CFG.gates = (CFG.gates === false); safeRenderSetup(); }
+  else if (a === 'togRandomEvents'){ CFG.randomEvents = (CFG.randomEvents === false); safeRenderSetup(); }
   else if (a === 'crisisPower'){
     CFG.crisisPower = x;
     /* Kapalı seçildiyse kriz zamanlamasını da kapat */
