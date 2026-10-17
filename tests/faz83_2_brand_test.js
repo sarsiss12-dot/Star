@@ -149,8 +149,7 @@ for (const d of kabukDosyalar){
 /* Yükleme sırası korunmuş mu? */
 const sira = (html.match(/<script src="([^"]+\.js)"><\/script>/g) || [])
   .map(x => x.replace(/.*src="/, '').replace(/".*/, ''));
-const beklenenSira = ['main.js','map.js','combat.js','ai.js',
-                      'diplomacy.js','economy.js','ui.js','audio.js'];
+const beklenenSira = ['main.js','map.js','combat.js','ai.js','diplomacy.js','economy.js','news.js','inbox.js','construction.js','ui.js','archive-ui.js','audio.js'];
 ok('script yükleme sırası korundu',
    beklenenSira.every((f, i) => sira[i] === f), sira.join(' → '));
 

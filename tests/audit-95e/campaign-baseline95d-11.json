@@ -1,0 +1,67 @@
+{
+  "sourceSha": {
+    "main.js": "9738317baecabfd3bb194af7092da62a0f8dcecd62991fb03292b6673c076895",
+    "ai.js": "3d8e35c4694d9a29ac35b47532fc932f109557155a0acb27dd465ad02bc43d20",
+    "diplomacy.js": "d35d4c824b4958d95a35a340812c41889f2808e775a5dc9d539844fb2893eb2e",
+    "economy.js": "ab3326c6a1c3daefbf36d93927824e26663d5592305b64ee4a07e69bdff3e1fb",
+    "ui.js": "5860e444bcbe498dbb11abc0e9244f05f9fab86dfbaf90e0c21ca0d6c509da4b"
+  },
+  "root": "/workspace/scratch/50b0250bea79/baseline95d",
+  "seed": 11,
+  "requestedMonths": 120,
+  "elapsedMonths": 120,
+  "systems": 100,
+  "empires": 14,
+  "ms": 42010,
+  "failure": null,
+  "builders": [
+    45
+  ],
+  "started": 1,
+  "completed": 1,
+  "monthly": [
+    {
+      "month": 30,
+      "saveCodeUnits": 171028,
+      "news": null,
+      "hidden": null,
+      "pending": null,
+      "activeBuilders": 0,
+      "fleets": 60
+    },
+    {
+      "month": 60,
+      "saveCodeUnits": 213509,
+      "news": null,
+      "hidden": null,
+      "pending": null,
+      "activeBuilders": 0,
+      "fleets": 69
+    },
+    {
+      "month": 90,
+      "saveCodeUnits": 250840,
+      "news": null,
+      "hidden": null,
+      "pending": null,
+      "activeBuilders": 0,
+      "fleets": 88
+    },
+    {
+      "month": 120,
+      "saveCodeUnits": 298847,
+      "news": null,
+      "hidden": null,
+      "pending": null,
+      "activeBuilders": 0,
+      "fleets": 97
+    }
+  ],
+  "negative": [],
+  "shortages": 0,
+  "lowEnergyEmpireMonths": 0,
+  "reloads": 1,
+  "saveBytes": 300253,
+  "metrics": null,
+  "newsBytes": 0
+}

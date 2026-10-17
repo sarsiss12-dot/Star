@@ -2322,6 +2322,10 @@ function colorFor(i, rnd){
 }
 
 function setupGame(cfg){
+  G._newsSetup=true;G._95eFaults={};
+  if(typeof GalacticNews!=='undefined')G.news=GalacticNews.empty();
+  if(typeof DiplomaticInbox!=='undefined')G.diplomaticInbox=DiplomaticInbox.empty();
+  if(typeof RemoteConstruction!=='undefined')G.construction=RemoteConstruction.empty();
   G.cfg = cfg;
   G.warLedger = warLedgerEmpty();
   G.settlements = settlementEmpty();
@@ -2704,6 +2708,7 @@ function setupGame(cfg){
   updateVision();
   normalizeIdentities();
   economyTick(true);
+  G._newsSetup=false;
   return true;
 }
 /* =====================================================================
@@ -2763,6 +2768,18 @@ function fxCompact(){
    çalışmaz. 86C.6: log son kontrol öncesinde işlem sınırında yazılır;
    ses/UI başarılı commit'ten sonra sırayla yayımlanır. Rollback
    hem logu hem tamponu geri alır. Transaction dışında davranış DEĞİŞMEZ. */
+function runModule95E(key,fn){
+  if(G._95eFaults?.[key])return;
+  try{return fn();}catch(err){
+    G._95eFaults=G._95eFaults||{};G._95eFaults[key]=String(err?.message||err);
+    try{logDiag('95e-'+key,G._95eFaults[key]);}catch(ignore){}
+    try{say('95E '+key+' duraklatıldı; diğer oyun sistemleri devam ediyor. Kaydı yükleyerek yeniden deneyebilirsin.','war');}catch(ignore){}
+  }
+}
+function recordNews(event){
+  if(typeof GalacticNews==='undefined')return;
+  return runModule95E('haber',()=>GalacticNews.emit(event));
+}
 function say(msg, cls){
   if (G._sideBuf){ G._sideBuf.push({tur:'say', msg, cls}); return; }
   /* FAZ 19: bildirim sınıfı sesi belirler (savaş/zafer/keşif) */
@@ -3380,6 +3397,7 @@ function orderMove(f, target, append, automatic=false, knownPath=null){
   if(f.shipment)clearShipment(f); // başarılı açık hareket emri teslimatın yerini alır
   if(automatic&&explorationEnabled(f))delete f.explore;
   else cancelExploration(f); // yalnız açık oyuncu emri otomasyonu devralır
+  if(!automatic&&typeof RemoteConstruction!=='undefined')RemoteConstruction.manual(f);
   f.path = base.concat(p);
   routeNoticeCache.delete(f);
   return true;
@@ -4038,6 +4056,8 @@ function dailyTick(dt){
   warLedgerSync();
   settlementTick();
   jointTick();
+  if(typeof RemoteConstruction!=='undefined')runModule95E('inşaat',()=>RemoteConstruction.tick());
+  if(typeof DiplomaticInbox!=='undefined')runModule95E('gelen kutusu',()=>DiplomaticInbox.sync());
   stepFleets(dt);
   // tersane kuyrukları
   for (const sys of G.sys){
@@ -4366,6 +4386,7 @@ function wildDefenseAlive(sys, defenderId){
    ═══════════════════════════════════════════════════════════════════ */
 function purgeEmpire(e){
   if (!e) return;
+  recordNews({category:'politics',empires:[e.id],key:'empire-end:'+e.id,title:'Devletin sonu',text:e.name+' siyasi varlığını kaybetti',important:true});
   /* Filoları haritadan kaldır */
   G.fleets = G.fleets.filter(f => f.e !== e.id);
   /* Diplomatik bağları sil */
@@ -4435,6 +4456,10 @@ function hasDefendedColony(sys, byId){
 
 // Monoton sayaç: sahip değişip eski sahibine dönse de eski paylaşım onayı geçmez.
 function territoryOwnerSet(place, owner){
+  if(place.owner>=0&&place.owner!==owner&&!G._newsSetup&&typeof GalacticNews!=='undefined'&&!(typeof _loadTxActive!=='undefined'&&_loadTxActive)){
+    const s=G.sys.find(s=>s===place||s.planets.includes(place));
+    if(s)recordNews({category:'territory',empires:[place.owner,owner].filter(id=>id>=0),system:s.id,...(s!==place?{planet:place.i}:{}),key:'territory:'+s.id+':'+(s===place?'sys':place.i)+':'+((place.shareRev||0)+1),title:'Sahiplik değişti',text:(place.name||s.name)+' — '+(G.emps[place.owner]?.name||'Önceki yönetim')+' → '+(G.emps[owner]?.name||'Sahipsiz bölge')});
+  }
   if (place.owner !== owner){place.shareRev = (place.shareRev || 0) + 1;if(typeof DIPLO_MAP_CACHE!=='undefined')DIPLO_MAP_CACHE=null;}
   place.owner = owner;
 }
@@ -4729,6 +4754,7 @@ function structTick(dt){
       if (!e || e.dead) continue;
       sys.built = sys.built || {};
       sys.built[w.key] = e.id;
+      if(Number.isSafeInteger(w.remoteTask)&&typeof RemoteConstruction!=='undefined')RemoteConstruction.completed(sys,w);
       G._structAt = -1;                     // indeks geçersiz
       const S = STRUCTS[w.key];
       if (S.sp === 'claim' && sys.owner < 0) territoryOwnerSet(sys, e.id);
@@ -7547,6 +7573,9 @@ function serialize(){
     simulation: serializeSimulationWorld(),
     /* FAZ 85E: bildirim/karar kuyruğu (JSON-güvenli codec) */
     events: serializeEventsWorld(),
+    news: typeof GalacticNews!=='undefined'?GalacticNews.state():undefined,
+    diplomaticInbox: typeof DiplomaticInbox!=='undefined'?DiplomaticInbox.state():undefined,
+    construction: typeof RemoteConstruction!=='undefined'?RemoteConstruction.state():undefined,
     /* ═══ FAZ 77E: KAYIT KAPSAMI GENİŞLETİLDİ ═══
        KÖK NEDEN: uzay yapıları (built), süren inşaatlar (work),
        ralli noktaları ve coğrafya bayrakları HİÇ kaydedilmiyordu.
@@ -7715,7 +7744,7 @@ function deserialize(txt){
 }
 function applySaveData(d){
   G.cfg = d.cfg; G.day = d.day; G.year = d.year; G.month = d.month;
-  G.seed = d.seed; G.log = d.log || [];
+  G.seed = d.seed; G.log = d.log || [];G._newsSetup=false;G._95eFaults={};
   if (typeof d.rs === 'number') rndSeed(d.rs);
   G.sys = d.sys.map(s=>({
     id:s.i, x:s.x, y:s.y, name:s.n, star:STARS[s.st]||STARS[0], planets:s.p,
@@ -7781,6 +7810,9 @@ function applySaveData(d){
   G._loadSimInfo = restoreSimulationWorld(d.simulation, d.v);
   loadCheckpoint('after:simulation');
   G._loadEventsInfo = restoreEventsWorld(d.events, d.v);
+  if(typeof GalacticNews!=='undefined')GalacticNews.restore(d.news);
+  if(typeof DiplomaticInbox!=='undefined')DiplomaticInbox.restore(d.diplomaticInbox);
+  if(typeof RemoteConstruction!=='undefined')RemoteConstruction.restore(d.construction);
   loadCheckpoint('after:events');
   /* Geçici yetkilendirme alanları kayıttan taşınmaz ve
      önceki oturumdan sarkmamalı. */
@@ -8120,7 +8152,7 @@ function forceRedraw(sebep){
    Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
    Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
 /* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */
-const BUILD_ID = '95d';
+const BUILD_ID = '95e';
 const DIAG_MAX = 40;
 const DIAG = [];
 function logDiag(tur, mesaj){

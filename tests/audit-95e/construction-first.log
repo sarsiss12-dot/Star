@@ -1,0 +1,21 @@
+✓ remote queue quotes known legal target with deferred spending
+✓ arrival starts original builder and charges one exact cost
+✓ completion advances second queued task and preserves permanent construction ship
+✓ save/load while building neither recharges nor reapplies finished work
+✓ two builders cannot reserve same structure or spend twice
+✓ unknown targets are rejected without revealing location
+✓ research and foreign ownership gates are unchanged
+✓ known pirate threat blocks route before departure
+✓ unreachable route is rejected without infinite search
+✓ route loss after queue uses four bounded attempts then fails without charge
+✓ cancellation before spending never credits phantom refund
+✓ travel cancellation stops future legs but keeps current physical leg
+✓ manual order supersedes pending construction and stays in control
+✓ in-progress build cannot be cancelled for a duplicate refund
+✓ ownership change in transit fails cleanly without spending
+✓ resources lost before arrival trigger bounded wait then no build
+✓ destroyed construction fleet cleans all pending tasks without refund
+✓ new threat stops route continuation before next leg
+✓ AI uses same original building payment and measured completed task
+✓ legacy save adds empty task state and ignores malformed jobs
+GEÇEN: 20 KALAN: 0

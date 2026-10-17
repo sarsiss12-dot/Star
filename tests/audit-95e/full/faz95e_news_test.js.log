@@ -1,0 +1,21 @@
+✓ events retain date, stable refs and historical names
+✓ same event id deduplicates across save/load without RNG draw
+✓ unknown empires do not surface via results, search, unread or hidden pressure
+✓ later contact and higher intelligence never backfill secret history
+✓ mere contact does not reveal third party wars; level three does
+✓ undiscovered system coordinates and names cannot reach known archive
+✓ stale discovered terrain is insufficient for third party capture reports
+✓ secret federation bonds require each relevant membership
+✓ real war ledger edge and peace engine generate one readable event each
+✓ actual ownership and colony engines retain planet and system ids
+✓ deal rollback removes speculative news and accepted receipt
+✓ news emitted by failed treaty transaction rolls back with world
+✓ bounded archive preserves pins; hidden arrivals cannot evict known records
+✓ pin limit twenty, mark read, category and search filters work
+✓ safe text rendering rejects HTML from save titles and state names
+✓ location navigation uses existing center and ping without discovery mutation
+✓ malformed archive normalizes bounded records; legacy save starts empty
+✓ new galaxy has no invented historical events or altered starting RNG
+✓ new game clears history and stale UI return state through world identity
+✓ state death retains the existing historical record
+GEÇEN: 20 KALAN: 0

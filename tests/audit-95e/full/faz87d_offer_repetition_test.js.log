@@ -1,0 +1,249 @@
+✗ 12 zorlanmış aylık tekrar: tek teklif ve tek ilişki bedeli — evalmachine.<anonymous>:8
+     if(note){delivered++;UI.openNote(note.uid);UI._hooks.offNo();}G.day+=30;}
+                                                          ^
+
+TypeError: UI._hooks.offNo is not a function
+    at evalmachine.<anonymous>:8:59
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/scratch/50b0250bea79/stars/tests/helpers/runtime.js:112:25)
+    at stress (/workspace/scratch/50b0250bea79/stars/tests/diplomacy-repeat-probe.js:28:4)
+    at /workspace/scratch/50b0250bea79/stars/tests/faz87d_offer_repetition_test.js:23:10
+    at test (/workspace/scratch/50b0250bea79/stars/tests/faz87d_offer_repetition_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/50b0250bea79/stars/tests/faz87d_offer_repetition_test.js:22:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+✗ ret masraf/RNG tüketmez, 27 ay hatırlanır ve çift dokunuş tek ceza verir — evalmachine.<anonymous>:2
+   reject();reject();var wait=playerOfferWait(offer);
+   ^
+
+TypeError: reject is not a function
+    at evalmachine.<anonymous>:2:4
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/scratch/50b0250bea79/stars/tests/helpers/runtime.js:112:25)
+    at /workspace/scratch/50b0250bea79/stars/tests/faz87d_offer_repetition_test.js:26:20
+    at test (/workspace/scratch/50b0250bea79/stars/tests/faz87d_offer_repetition_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/50b0250bea79/stars/tests/faz87d_offer_repetition_test.js:25:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+✗ ret sınırı 809 gün: bildirim false — evalmachine.<anonymous>:1
+open();UI._hooks.offNo();G.day+=809;UI.aiOffer(offer);
+                 ^
+
+TypeError: UI._hooks.offNo is not a function
+    at evalmachine.<anonymous>:1:18
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/scratch/50b0250bea79/stars/tests/helpers/runtime.js:112:25)
+    at /workspace/scratch/50b0250bea79/stars/tests/faz87d_offer_repetition_test.js:33:20
+    at test (/workspace/scratch/50b0250bea79/stars/tests/faz87d_offer_repetition_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/50b0250bea79/stars/tests/faz87d_offer_repetition_test.js:32:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+✗ ret sınırı 810 gün: bildirim true — evalmachine.<anonymous>:1
+open();UI._hooks.offNo();G.day+=810;UI.aiOffer(offer);
+                 ^
+
+TypeError: UI._hooks.offNo is not a function
+    at evalmachine.<anonymous>:1:18
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/scratch/50b0250bea79/stars/tests/helpers/runtime.js:112:25)
+    at /workspace/scratch/50b0250bea79/stars/tests/faz87d_offer_repetition_test.js:33:20
+    at test (/workspace/scratch/50b0250bea79/stars/tests/faz87d_offer_repetition_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/50b0250bea79/stars/tests/faz87d_offer_repetition_test.js:32:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+✗ ret sınırı 811 gün: bildirim true — evalmachine.<anonymous>:1
+open();UI._hooks.offNo();G.day+=811;UI.aiOffer(offer);
+                 ^
+
+TypeError: UI._hooks.offNo is not a function
+    at evalmachine.<anonymous>:1:18
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/scratch/50b0250bea79/stars/tests/helpers/runtime.js:112:25)
+    at /workspace/scratch/50b0250bea79/stars/tests/faz87d_offer_repetition_test.js:33:20
+    at test (/workspace/scratch/50b0250bea79/stars/tests/faz87d_offer_repetition_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/50b0250bea79/stars/tests/faz87d_offer_repetition_test.js:32:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+✗ damga ve madde sırası ret kapısını aşamaz — evalmachine.<anonymous>:1
+offer.give.push({t:'res',r:'yiy',v:80});open();UI._hooks.offNo();
+                                                         ^
+
+TypeError: UI._hooks.offNo is not a function
+    at evalmachine.<anonymous>:1:58
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/scratch/50b0250bea79/stars/tests/helpers/runtime.js:112:25)
+    at /workspace/scratch/50b0250bea79/stars/tests/faz87d_offer_repetition_test.js:37:20
+    at test (/workspace/scratch/50b0250bea79/stars/tests/faz87d_offer_repetition_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/50b0250bea79/stars/tests/faz87d_offer_repetition_test.js:36:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+✗ farklı miktar ve farklı devlet aynı gün teklif gönderebilir — evalmachine.<anonymous>:1
+open();UI._hooks.offNo();
+                 ^
+
+TypeError: UI._hooks.offNo is not a function
+    at evalmachine.<anonymous>:1:18
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/scratch/50b0250bea79/stars/tests/helpers/runtime.js:112:25)
+    at /workspace/scratch/50b0250bea79/stars/tests/faz87d_offer_repetition_test.js:43:20
+    at test (/workspace/scratch/50b0250bea79/stars/tests/faz87d_offer_repetition_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/50b0250bea79/stars/tests/faz87d_offer_repetition_test.js:42:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+✗ nap reddi de aynı şartı bekletir — evalmachine.<anonymous>:1
+offer={from:E.id,to:0,give:[{t:'nap'}],want:[]};open();UI._hooks.offNo();UI.aiOffer(offer);
+                                                                 ^
+
+TypeError: UI._hooks.offNo is not a function
+    at evalmachine.<anonymous>:1:66
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/scratch/50b0250bea79/stars/tests/helpers/runtime.js:112:25)
+    at /workspace/scratch/50b0250bea79/stars/tests/faz87d_offer_repetition_test.js:48:20
+    at test (/workspace/scratch/50b0250bea79/stars/tests/faz87d_offer_repetition_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/50b0250bea79/stars/tests/faz87d_offer_repetition_test.js:47:38)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+✗ pact reddi de aynı şartı bekletir — evalmachine.<anonymous>:1
+offer={from:E.id,to:0,give:[{t:'pact'}],want:[]};open();UI._hooks.offNo();UI.aiOffer(offer);
+                                                                  ^
+
+TypeError: UI._hooks.offNo is not a function
+    at evalmachine.<anonymous>:1:67
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/scratch/50b0250bea79/stars/tests/helpers/runtime.js:112:25)
+    at /workspace/scratch/50b0250bea79/stars/tests/faz87d_offer_repetition_test.js:48:20
+    at test (/workspace/scratch/50b0250bea79/stars/tests/faz87d_offer_repetition_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/50b0250bea79/stars/tests/faz87d_offer_repetition_test.js:47:38)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+✗ ally reddi de aynı şartı bekletir — evalmachine.<anonymous>:1
+offer={from:E.id,to:0,give:[{t:'ally'}],want:[]};open();UI._hooks.offNo();UI.aiOffer(offer);
+                                                                  ^
+
+TypeError: UI._hooks.offNo is not a function
+    at evalmachine.<anonymous>:1:67
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/scratch/50b0250bea79/stars/tests/helpers/runtime.js:112:25)
+    at /workspace/scratch/50b0250bea79/stars/tests/faz87d_offer_repetition_test.js:48:20
+    at test (/workspace/scratch/50b0250bea79/stars/tests/faz87d_offer_repetition_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/50b0250bea79/stars/tests/faz87d_offer_repetition_test.js:47:38)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+✓ kapatmak ret sayılmaz
+✗ karşı teklif hazırlamak ret sayılmaz, karşı kartın reddi sayılır — evalmachine.<anonymous>:1
+open();UI._hooks.offCounter();var before=playerOfferWait(offer);UI.act('ctrNo');UI.act('ctrNo');
+                 ^
+
+TypeError: UI._hooks.offCounter is not a function
+    at evalmachine.<anonymous>:1:18
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/scratch/50b0250bea79/stars/tests/helpers/runtime.js:112:25)
+    at /workspace/scratch/50b0250bea79/stars/tests/faz87d_offer_repetition_test.js:56:20
+    at test (/workspace/scratch/50b0250bea79/stars/tests/faz87d_offer_repetition_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/50b0250bea79/stars/tests/faz87d_offer_repetition_test.js:55:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+✗ kabul iki kez uygulanamaz ve ret düğmesi sonra ceza veremez — evalmachine.<anonymous>:2
+   var min=G.p.res.min,ene=G.p.res.ene;yes();var relation=E.rel[0];yes();no();
+                                       ^
+
+TypeError: yes is not a function
+    at evalmachine.<anonymous>:2:40
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/scratch/50b0250bea79/stars/tests/helpers/runtime.js:112:25)
+    at /workspace/scratch/50b0250bea79/stars/tests/faz87d_offer_repetition_test.js:60:53
+    at test (/workspace/scratch/50b0250bea79/stars/tests/faz87d_offer_repetition_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/50b0250bea79/stars/tests/faz87d_offer_repetition_test.js:59:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+✗ eski dünyadaki açık ret/kabul düğmeleri yeni kaydı değiştiremez — evalmachine.<anonymous>:2
+   var before=state();no();yes();
+                      ^
+
+TypeError: no is not a function
+    at evalmachine.<anonymous>:2:23
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/scratch/50b0250bea79/stars/tests/helpers/runtime.js:112:25)
+    at /workspace/scratch/50b0250bea79/stars/tests/faz87d_offer_repetition_test.js:66:20
+    at test (/workspace/scratch/50b0250bea79/stars/tests/faz87d_offer_repetition_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/50b0250bea79/stars/tests/faz87d_offer_repetition_test.js:65:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+✗ başka pencere açılınca eski teklif callbackleri etkisiz — evalmachine.<anonymous>:2
+   var before=state();no();yes();
+                      ^
+
+TypeError: no is not a function
+    at evalmachine.<anonymous>:2:23
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/scratch/50b0250bea79/stars/tests/helpers/runtime.js:112:25)
+    at /workspace/scratch/50b0250bea79/stars/tests/faz87d_offer_repetition_test.js:70:20
+    at test (/workspace/scratch/50b0250bea79/stars/tests/faz87d_offer_repetition_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/50b0250bea79/stars/tests/faz87d_offer_repetition_test.js:69:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+✗ yeni teklif eski teklif callbackini geçersiz kılar — evalmachine.<anonymous>:2
+   var before=state();no();
+                      ^
+
+TypeError: no is not a function
+    at evalmachine.<anonymous>:2:23
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/scratch/50b0250bea79/stars/tests/helpers/runtime.js:112:25)
+    at /workspace/scratch/50b0250bea79/stars/tests/faz87d_offer_repetition_test.js:74:20
+    at test (/workspace/scratch/50b0250bea79/stars/tests/faz87d_offer_repetition_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/50b0250bea79/stars/tests/faz87d_offer_repetition_test.js:73:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+✗ v8 ret süresini korur, eski callback kalıcı kayda müdahale edemez — evalmachine.<anonymous>:1
+open();UI._hooks.offNo();G.day+=100;var before=playerOfferWait(offer),rng=RND_STATE;
+                 ^
+
+TypeError: UI._hooks.offNo is not a function
+    at evalmachine.<anonymous>:1:18
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/scratch/50b0250bea79/stars/tests/helpers/runtime.js:112:25)
+    at /workspace/scratch/50b0250bea79/stars/tests/faz87d_offer_repetition_test.js:78:20
+    at test (/workspace/scratch/50b0250bea79/stars/tests/faz87d_offer_repetition_test.js:7:28)
+    at Object.<anonymous> (/workspace/scratch/50b0250bea79/stars/tests/faz87d_offer_repetition_test.js:77:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+✓ ret kaydı olmayan eski v8 ilk teklife açıktır
+✓ süresi dolmuş kutu kopyası yeni teklifle yenilenir, farklı teklif korunur
+✓ canlı aynı teklif yeniden eklenmez, ömrü uzatılmaz
+✓ zaten süresi dolmuş teklifi reddetmek yeni bekleme veya ilişki cezası yaratmaz
+✓ bekleme kontrolü saf; bozuk eski kayıt tolere edilir
+✓ ret defteri sınırlı; süresi geçen kayıtlar yeni rette temizlenir
+✓ ret sonrası aynı kutu kopyası silinir, farklı şartlar kalır
+GEÇEN: 8 KALAN: 16

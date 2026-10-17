@@ -1,0 +1,25 @@
+STARS — FAZ 95E
+Galaktik Haber Ağı + kalıcı diplomatik gelen kutusu + uzaktan inşaat
+
+KANONİK KAYNAK
+GitHub sarsiss12-dot/Star main: 62f1b313be9969ebd39206be19bdeac7acdf559e.
+95D ZIP SHA-256: f01d36706897d49972d4250ae655ef40daf1c98d814d6f25d3721686a37b0f21.
+CRC geçti; 2335/2335 manifest dosyası doğrulandı. 11 üretim dosyası GitHub ile aynı. ZIP-only tarihsel test kanıtı değiştirilmemiş kanonik stars-faz95d.zip içinde korunur; önceki GitHub raporları ve dosyaları silinmedi. Eksik identity-fixture.js doğrulanmış ZIP'ten aynen geri alındı.
+
+ÇALIŞAN ÖZELLİKLER
+1) Tarihli, ID/ad anlık görüntülü, bilgi filtreli ve kapasite sınırlı haber arşivi; arama/kategori/okunma/sabitleme; mevcut kamera ile konuma ve diplomasiye erişim.
+2) Altılı bildirimden bağımsız süreli teklif/karar takibi; mevcut siyasi işlem yolları; imza anında doğrulama; tek kabul/ret; dünyaya/modal oturumuna bağlı callback ve kayıtlı sonuç makbuzu; mevcut karşı teklif yolu.
+3) Gemi başına 16 uzak uzay-yapısı görevi; mevcut güvenli rota/maliyet/yapı motoru; varışta doğrulama; sınırlı retry; iptal/manuel öncelik; AI adaptörü ve fiziksel tamamlanma ölçümü.
+
+KORUNAN SİSTEMLER
+95B federasyon kuralları/izinleri, 95C gerçek ortak savaş/katkı, 95C.1 oyuncu düzeltmeleri, 95D kimlik/üç harita katmanı/son savaş onayı. Vanilla JS, tek 2B Canvas kamera, Save v8, mevcut araştırma/inşa/erişim motorları. Harici zorunlu asset/kütüphane yok. Yeni modüller news.js, inbox.js, construction.js; ortak sunum archive-ui.js. PWA stars-v95e / build 95e. Modül arızası diğer simülasyonu kesmez; tek uyarıyla duraklar, yeni oyun/başarılı yüklemede tekrar açılır.
+
+DOĞRULAMA
+90 paket / 5170 başarılı kontrol / 0 kalan hata. İlk 5070/43 ve tüm gerekçeli takipler saklı. Son yeni modüller 78/0. Test sonuçları ve yöntem TEST-SONUCLARI-95E.md içinde.
+100 sistem, 11/99/404 tohumlarında 120 ay + 60. ayda kayıt yükleme. Gerçek AI inşaat filosu 1/3/4; biten yapı 1/10/5. 99/404 enerji/kıtlık bulguları açık. Son boş günlük tik medyanı 0.05420 → 0.05576 ms. Kapasite stresinde tam kayıt 2.370.727 bayt. Host ölçümü Android FPS değildir.
+
+AÇIK SINIRLAR
+Gerçek Chromium ve fiziksel Android kabulü yok. Eski bildirimlerde daha önce kaybolan teklifler geri üretilemez. Gizli geçmiş sonradan otomatik açılmaz. Sınırlı arşiv sonsuz tarih tutmaz. Sıradan federasyon yasa sonuçları ve bazı özel senaryo olayları haber kapsamı için ileride genişletilebilir; bütün olay kataloğunun haberleştirildiği iddia edilmez. Koloni bina kuyruğu değil, mevcut uzay yapıları uzaktan yönetilir. Yeni diplomatik kuruluş teklif motoru icat edilmedi. Kaynakta var olmayan veya yarım modül tamamlandı diye sunulmadı; üç ana modül çalışır.
+
+TESLİM VE YAYIN
+stars-faz95e.zip. ZIP CRC ve dosya-manifest doğrulaması teslim aşamasında yapılır; kendi ZIP SHA-256'sı ve yayın commit'i dış teslim mesajında verilir (öz referans döngüsü oluşturulmaz). GitHub main yeniden doğrulanır, force-push kullanılmaz. 95F/96A başlatılmadı.

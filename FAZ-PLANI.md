@@ -1,3 +1,20 @@
+# 95E sonrası güncel plan — 17 Ekim 2026
+
+95E tamamlandı: kalıcı bilgi filtreli haber arşivi, mevcut motora bağlı diplomatik gelen kutusu, gemi başına uzak inşaat kuyruğu ve AI adaptörü. 90 paket / 5.170 başarılı / 0 kalan hata. Save v8, tek 2B kamera, stars-v95e. Son test ve kapsam sınırları FAZ95E-RAPOR.txt / TEST-SONUCLARI-95E.md içindedir.
+
+| Sıradaki iş | Korunan kapsam |
+|---|---|
+| Manuel Android/Chromium kabulü | Haber/teklif/uzak inşa, yön/arka plan/PWA; önceki 95C.1/95D mobil kontrollerle birlikte |
+| 95F — başlamadı | Kullanıcıyla kapsamı kesinleştirilecek; kalan kalite ve içerik talepleri silinmez |
+| 96A — ayrı, başlamadı | Gerçek kaynak sözleşmeleri, fiziksel ticaret konvoyları, rota ve aylık gelir şeffaflığı |
+| Ekonomi/içerik | Yedi kaynak Ekonomi, sekiz köken, portre, bilim hırsızlığı/karşı araştırma |
+| Uzun dönem kalite | Doğal AI federasyon savaşları, geç oyun ekonomi/ordu, düşük inşaat kullanımı/başarısız görevler |
+| Müzik | Harici müzik dosyası olmadan doğal generatif müzik |
+
+Haber kapsamı sıradan yasa oyları/özel senaryo doğuşları için ileride genişleyebilir. Arşiv ve sonuç geçmişi sınırlıdır; gizli geçmiş otomatik açılmaz. Aşağıdaki “95E başlamadı” ifadeleri tarihsel plan kayıtlarıdır; bu bölüm güncel durumdur.
+
+---
+
 # 95D sonrası güncel yol haritası — 17 Ekim 2026
 
 95D tamamlandı: benzersiz yeni devlet/federasyon adları, kaydedilen prosedürel amblemler, GÖRÜNÜŞ düzenleyicisi ve Rastgele Amblem, tıklanabilir harita kimliği, bağımsız Federasyon/İttifak/Savaş hatları, son onaylı savaş katılım önizlemesi. 86 paket / 4.988 başarılı kontrol / 0 kalan hata. Save v8 / stars-v95d / tek 2B kamera.

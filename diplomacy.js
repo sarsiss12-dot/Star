@@ -176,7 +176,9 @@ function warLedgerOpen(a,b,support=null,legacy=false){
     opened:G.day,legacy:!!legacy,ended:null,endReason:null,
     entryKind:support&&support.kind||'declaration',sponsor:support&&Number.isInteger(support.sponsor)?support.sponsor:null,
     membership:[warLedgerMember(a),warLedgerMember(b)],goals:[],metrics:[metric(),metric()],occupation:[]};
-  l.fronts.push(f); warLedgerGoal(f,a);warLedgerGoal(f,b);return f;
+  l.fronts.push(f); warLedgerGoal(f,a);warLedgerGoal(f,b);
+  if(!legacy)recordNews({category:'war',empires:[a,b],key:'war-front:'+f.id,title:parent?'Savaşa yeni katılım':'Savaş ilanı',text:G.emps[a].name+' → '+G.emps[b].name,important:true});
+  return f;
 }
 function warLedgerSync(reason='observed'){
   if(!G.warLedger) G.warLedger=warLedgerEmpty();
@@ -614,6 +616,7 @@ function warStartNotice(a,b,support=null){
   // A declaration is explicit diplomatic contact, not discovery of any location.
   G.p.contact=G.p.contact||{};foe.contact=foe.contact||{};
   G.p.contact[foe.id]=true;foe.contact[G.p.id]=true;
+  recordNews({category:'war',empires:[a.id,b.id],key:'war-front:'+f.id,title:'Savaş başladı',text:a.name+' → '+b.name,important:true});
   const root=(G.warLedger.fronts||[]).find(x=>x.id===f.campaign)||f;
   if(root.playerNotified)return false;
   root.playerNotified=true;f.playerNotified=true;
@@ -863,6 +866,7 @@ function makePeace(a, b){
   remember(b, a.id, 'barisImzala');
   resolveProxyWars(a, b);
   warLedgerSync('peace');
+  recordNews({category:'peace',empires:[a.id,b.id],key:'peace:'+Math.min(a.id,b.id)+':'+Math.max(a.id,b.id)+':'+G.day,title:'Barış anlaşması',text:a.name+' ile '+b.name+' arasındaki savaş sona erdi',important:true});
   if (typeof facEvent === 'function'){ facEvent(a,'peace'); facEvent(b,'peace'); }
   a.rel[b.id] = Math.max(a.rel[b.id], -10);
   b.rel[a.id] = Math.max(b.rel[a.id], -10);
@@ -1034,6 +1038,7 @@ function pactAccess(a,b){
 function makePact(a, b){
   if (!canPact(a,b)) return false;
   a.pact = a.pact || {}; b.pact = b.pact || {};
+  recordNews({category:'economy',empires:[a.id,b.id],title:'Ticaret anlaşması',text:a.name+' ile '+b.name+' ticaret anlaşması imzaladı'});
   a.pact[b.id] = true; b.pact[a.id] = true;
   a.rel[b.id] = clamp(a.rel[b.id] + 15, -100, 100);
   b.rel[a.id] = clamp(b.rel[a.id] + 15, -100, 100);
@@ -1377,6 +1382,7 @@ function applyItems(giver, taker, items){
           giver.peaceAt[taker.id] = G.day; taker.peaceAt[giver.id] = G.day;
           if (typeof resolveProxyWars === 'function') resolveProxyWars(giver, taker);
         }
+        recordNews({category:'politics',empires:[giver.id,taker.id],title:'İttifak kuruldu',text:giver.name+' ile '+taker.name+' ittifak imzaladı'});
         giver.ally[taker.id] = true; taker.ally[giver.id] = true;
         clearBilateralEmbargo(giver,taker);
         warLedgerSync('alliance');
@@ -1942,6 +1948,7 @@ function recordPlayerOfferRefusal(offer){
   G.p.offerRefusals.push({key,until:G.day+PLAYER_OFFER_REFUSAL_DAYS});
   // Aynı şartların eski kutu kopyalarını kaldır; farklı teklifler korunur.
   G.inbox = (G.inbox || []).filter(n=>n.kind!=='aideal' || playerOfferTermsKey(n.data)!==key);
+  if(typeof DiplomaticInbox!=='undefined')for(const r of DiplomaticInbox.state().records)if(r.status==='pending'&&r.kind==='aideal'&&playerOfferTermsKey(r.note?.data)===key){r.status='rejected';r.finished=G.day;}
   return true;
 }
 function dealExpired(offer){
@@ -2030,7 +2037,7 @@ function giftOnCooldown(a, b){
    Kapsam: aşağıdaki kökler ve bunların eriştiği oyun verisi. DOM, UI,
    fonksiyon gövdeleri ve kataloglar işlem verisi değildir. */
 const DEAL_TX_ROOTS = ['emps','p','sys','fleets','feds','council',
-  'fallStats','sabStats','log','inbox','inboxUid','warLedger','settlements','jointOps','_structAt','_structIdx'];
+  'news','diplomaticInbox','construction','_95eFaults','fallStats','sabStats','log','inbox','inboxUid','warLedger','settlements','jointOps','_structAt','_structIdx'];
 const DEAL_TX_AUTH = ['_dealAuth','_warAuth','_warWhy','_sideBuf'];
 let _dealTxActive = false;
 function txCaptureGraph(values, opaque){
@@ -2148,6 +2155,8 @@ function dealPostcondition(giver, taker, it){
 function executeDeal(offer){
   // İç içe işlem desteklenmiyor; dış işlemin tamponunu yayımlayamaz.
   if (_dealTxActive) return false;
+  const archived=typeof DiplomaticInbox!=='undefined'?DiplomaticInbox.findDeal(offer):null;
+  if(archived&&(archived.status!=='pending'||G.day>=archived.expires))return false;
   _dealTxActive = true;
   let tx = null;
   const buf = [];
@@ -2181,6 +2190,7 @@ function executeDeal(offer){
     if (typeof G._dealFailInject === 'function') G._dealFailInject('after:recalc');
     commitSideBuffer(buf);       // kalıcı log, UI/audio yayımlanmadan önce
     if (typeof G._dealFailInject === 'function') G._dealFailInject('after:log');
+    if(archived){archived.status='accepted';archived.finished=G.day;}
     if (typeof G._dealFailInject === 'function') G._dealFailInject('son');
   } catch(err){
     if (tx) dealTxRollback(tx);
@@ -2223,7 +2233,7 @@ function fedDefaultCharter(type){return {defense:type==='askeri'?'auto':'vote',o
 function fedDuty(f,kind){return kind==='defense'?!!(f.laws&&f.laws.savunma)||fedCharter(f).defense==='auto':fedCharter(f).offense==='auto';}
 function fedDutyText(f){return (fedDuty(f,'defense')?'Yeni saldırılara ortak savunma yükümlülüğü. ':'Savunma yardımı oylamayla. ')+(fedDuty(f,'offense')?'Yalnız saldırı taahhüdünü açıkça kabul eden üyeler yeni saldırılara katılır.':'Otomatik saldırı desteği yok; ayrı oylama/taahhüt gerekir.');}
 function fedCharterKey(f){return JSON.stringify([f.type||'askeri',fedCharter(f),Object.keys(f.laws||{}).filter(k=>f.laws[k]).sort()]);}
-function fedPoliticalRecord(f,event,data={}){f.history=f.history||[];f.history.push({day:G.day,year:G.year,month:G.month,event,...data});if(f.history.length>32)f.history.splice(0,f.history.length-32);}
+function fedPoliticalRecord(f,event,data={}){f.history=f.history||[];f.history.push({day:G.day,year:G.year,month:G.month,event,...data});if(f.history.length>32)f.history.splice(0,f.history.length-32);if(typeof GalacticNews!=='undefined')GalacticNews.political(f,event,data);}
 function fedNormalize(f){
  if(!f||!Array.isArray(f.members))return;
  federationIdentity(f);
@@ -2266,6 +2276,7 @@ function fedRemoveMember(f,id,reason){
 }
 function leaveFederation(e){const f=e&&findFed(e);if(!f)return {ok:false,why:'Federasyon üyesi değilsin'};fedRemoveMember(f,e.id,'leave');updateFederations();return {ok:true};}
 function fedDissolve(f){
+ if(typeof GalacticNews!=='undefined')GalacticNews.political(f,'dissolved');
  const ids=f.members.slice();G.feds=G.feds.filter(x=>x!==f);
  for(const fl of G.fleets)if(fl.federal&&fl.fedId===f.id){delete fl.federal;delete fl.fedId;}
  for(const id of ids)if(G.emps[id]){G.emps[id]._fedLeaveUntil=G.day+720;recalcMods(G.emps[id]);}
@@ -2282,11 +2293,12 @@ function acceptFedInvite(o,fid){
  if(!inv||inv.expires<=G.day||inv.terms!==fedCharterKey(f))return {ok:false,why:'Davetin süresi veya yükümlülükleri değişti'};
  const gate=fedAdmissionGate(f,o);if(!gate.ok)return gate;
  const old=f.members.slice();f.members.push(o.id);delete f.invites[o.id];
+ if(o.id===0&&typeof DiplomaticInbox!=='undefined')DiplomaticInbox.settleSource('invite',fid,String(inv.expires),'accepted');
  for(const id of old){const e=G.emps[id];o.ally[id]=e.ally[o.id]=true;o.contact[id]=e.contact[o.id]=true;clearBilateralEmbargo(o,e);}
  f.dutyConsent[o.id]={offense:fedDuty(f,'offense'),since:G.day};fedPoliticalRecord(f,'join',{target:o.id});
  for(const id of f.members)recalcMods(G.emps[id]);return {ok:true};
 }
-function rejectFedInvite(o,fid){const f=fedOf(fid);if(!f?.invites?.[o.id])return {ok:false};delete f.invites[o.id];f.requestAfter=f.requestAfter||{};f.requestAfter['admit:'+o.id]=G.day+360;return {ok:true};}
+function rejectFedInvite(o,fid){const f=fedOf(fid);if(!f?.invites?.[o.id])return {ok:false};if(o.id===0&&typeof DiplomaticInbox!=='undefined')DiplomaticInbox.settleSource('invite',fid,String(f.invites[o.id].expires),'rejected');delete f.invites[o.id];f.requestAfter=f.requestAfter||{};f.requestAfter['admit:'+o.id]=G.day+360;return {ok:true};}
 function fedMotionOptions(kind,o){
  const out={kind};for(const k of ['target','sponsor','type','field','value'])if(o[k]!==undefined)out[k]=o[k];return out;
 }
@@ -2373,6 +2385,7 @@ function executeFedDecision(e,fid,id){
  }
  const blocked=[];for(const id2 of participants){const member=G.emps[id2];if(member.war[target.id])continue;if(!aiFedHelp(member,target,true)){blocked.push({id:id2,why:'Bilinen ulaşabilir askerî yardım rotası yok'});continue;}if(fedJoinSide(f,member,target,d.sponsor))joined.push(id2);}
  d.blocked=blocked;if(!joined.length&&participants.some(id=>!G.emps[id].war[target.id]))return {ok:false,why:'Geçerli ve ulaşabilir katılımcı kalmadı',blocked};
+ if(e.id===0&&typeof DiplomaticInbox!=='undefined')DiplomaticInbox.settleSource('decision',fid,id,'accepted');
  d.state='applied';d.applied=G.day;d.joined=joined;fedPoliticalRecord(f,'warDecision',{target:d.target,joined});return {ok:true,joined};
 }
 function fedAttack(a,b,support){
@@ -2749,6 +2762,7 @@ function castFedVote(e, fid, token, yes){
     (yes ? v.yes : v.no).push(e.id);
     return fedResolveVote(f);
   });
+  if(result.ok&&e.id===0&&typeof DiplomaticInbox!=='undefined')DiplomaticInbox.settleSource('fedvote',fid,token,yes?'accepted':'rejected');
   fedPresentVote(f, result);
   return result;
 }
@@ -3389,6 +3403,7 @@ function runOp(e, target, key){
   e.opLog.push({t:(G.memAge || 0), k:key, o:target.id, caught:caught,
                 actorSummary:(msg || '').slice(0, 120)});
   if (e.opLog.length > 20) e.opLog.shift();
+  if(e.id===0||target.id===0&&caught)recordNews({category:'espionage',scope:'player',empires:[e.id,target.id],title:'Casusluk — '+OP.n,text:e.id===0?msg:'Yakalanan operasyon: '+OP.n});
   return {ok:true, msg, caught, key, target:target.id, quote:q};
 }
 
@@ -4339,6 +4354,7 @@ function foundCouncil(e){
     president: e.id, termStart: G.day, terms: {},
     voteIn: 12, vote: null, dead: false
   };
+  if(members.includes(0))recordNews({category:'council',scope:'player',empires:[0,...(e.id!==0?[e.id]:[])],title:'Galaktik Konsey kuruldu',text:G.council.name,important:true});
   G.council.terms[e.id] = 1;
   G.council.firstLaw = 'ticaretStd';       // ilk gündem daima ortak ticaret
   say('GALAKTİK KONSEY KURULDU — ' + G.council.name + ' · ' + members.length + ' üye', 'win');
@@ -4794,6 +4810,7 @@ function finishCouncilVote(){
     say('Konsey: ' + spName + R.n + tName + ' — ' + (passed ? 'KABUL' : 'RED') +
         ' (' + Math.round(yw) + '/' + Math.round(yw+nw) + ' ağırlık)', passed?'win':'');
   }
+  if(c.members.includes(0))recordNews({category:'council',scope:'player',empires:[0,...(Number.isInteger(c.vote.target)&&G.emps[c.vote.target]?[c.vote.target]:[])],key:'council:'+c.vote.key+':'+G.day,title:'Konsey kararı — '+R.n,text:passed?'Kabul edildi':'Reddedildi',important:true});
   c.vote = null;
 }
 
@@ -5550,6 +5567,7 @@ function setEmbargo(e, target, on, sebep){
     if (target.id === 0) say(e.name + ' ambargoyu kaldırdı', 'win');
   }
   /* ticaret önbelleklerini geçersiz kıl */
+  recordNews({category:'economy',empires:[e.id,target.id],title:on?'Ticari ambargo':'Ambargo kaldırıldı',text:e.name+' → '+target.name+(sebep?' · '+sebep:'')});
   e._trAt = -1; target._trAt = -1;
   return true;
 }
@@ -6098,6 +6116,7 @@ function subjugate(lord, sub, tur){
   /* Zincirleme vasallık yok: yeni senyör, eski vasalları devralır */
   for (const v of vassalsOf(sub)){v.overlord=lord.id;clearBilateralEmbargo(lord,v);lord.war[v.id]=false;v.war[lord.id]=false;}
 
+  recordNews({category:'politics',empires:[lord.id,sub.id],title:'Vasallık kuruldu',text:sub.name+' — '+lord.name+' himayesi',important:true});
   sub.overlord = lord.id;
   /* FAZ 71: üç tip — çağıran hangisini istediyse */
   sub.vassalType = VASSAL_TYPES[tur] ? tur : 'haracguzar';
@@ -6135,6 +6154,7 @@ function subjugate(lord, sub, tur){
 function freeVassal(sub, sebep){
   if (!isVassal(sub)) return false;
   const lord = overlordOf(sub);
+  recordNews({category:'politics',empires:[sub.id,lord.id],title:'Vasallık sona erdi',text:sub.name+' bağımsızlığını kazandı',important:true});
   sub.overlord = null;
   sub.vassalType = null;
   sub.vassalAnger = 0;
@@ -8198,6 +8218,7 @@ function balkanize(zalim){
   yeni.ethics = {mil: -1, aut: -2, mat: (zalim.ethics && zalim.ethics.mat) || 0};
   yeni.col = shiftColor(zalim.col);
   G.emps.push(yeni);
+  recordNews({category:'politics',empires:[yeni.id],key:'empire-start:'+yeni.id,title:'Yeni devlet',text:yeni.name+' siyasi varlık kazandı',important:true});
 
   /* Gezegen devri */
   for (const c of ayrilan){
@@ -8618,6 +8639,7 @@ function statusQuoPeace(a, b){
   if (a.id === 0 || b.id === 0) say('🕊 ' + mesaj, 'win');
   else say(mesaj);
   warLedgerSync('status-quo');
+  recordNews({category:'peace',empires:[a.id,b.id],key:'status-quo:'+a.id+':'+b.id+':'+G.day,title:'Statüko barışı',text:a.name+' ile '+b.name+' fiili sınırları tanıdı',important:true});
   return {ok:true, devredilen:n};
 }
 

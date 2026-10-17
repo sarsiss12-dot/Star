@@ -1,0 +1,144 @@
+{
+  "suites": 17,
+  "pass": 1182,
+  "fail": 0,
+  "results": [
+    {
+      "name": "faz83_2_brand_test.js",
+      "exit": 0,
+      "pass": 63,
+      "fail": 0,
+      "durationMs": 1016,
+      "details": ""
+    },
+    {
+      "name": "faz83_3_render_recovery_test.js",
+      "exit": 0,
+      "pass": 58,
+      "fail": 0,
+      "durationMs": 3228,
+      "details": ""
+    },
+    {
+      "name": "faz83_4_redraw_leaders_test.js",
+      "exit": 0,
+      "pass": 75,
+      "fail": 0,
+      "durationMs": 8584,
+      "details": ""
+    },
+    {
+      "name": "faz84a_intel_dedup_test.js",
+      "exit": 0,
+      "pass": 84,
+      "fail": 0,
+      "durationMs": 7358,
+      "details": ""
+    },
+    {
+      "name": "faz84b_vassal_state_dedup_test.js",
+      "exit": 0,
+      "pass": 122,
+      "fail": 0,
+      "durationMs": 3958,
+      "details": ""
+    },
+    {
+      "name": "faz84c_state_visibility_gate_test.js",
+      "exit": 0,
+      "pass": 118,
+      "fail": 0,
+      "durationMs": 4102,
+      "details": ""
+    },
+    {
+      "name": "faz86a_intel_command_center_test.js",
+      "exit": 0,
+      "pass": 123,
+      "fail": 0,
+      "durationMs": 4430,
+      "details": ""
+    },
+    {
+      "name": "faz85e_event_inbox_continuity_test.js",
+      "exit": 0,
+      "pass": 147,
+      "fail": 0,
+      "durationMs": 7712,
+      "details": ""
+    },
+    {
+      "name": "faz86b_deal_engine_test.js",
+      "exit": 0,
+      "pass": 128,
+      "fail": 0,
+      "durationMs": 8094,
+      "details": ""
+    },
+    {
+      "name": "faz86c_1_quote_effective_plan_test.js",
+      "exit": 0,
+      "pass": 98,
+      "fail": 0,
+      "durationMs": 6045,
+      "details": ""
+    },
+    {
+      "name": "faz87d_offer_repetition_test.js",
+      "exit": 0,
+      "pass": 24,
+      "fail": 0,
+      "durationMs": 3540,
+      "details": ""
+    },
+    {
+      "name": "faz95c1_diplomacy_test.js",
+      "exit": 0,
+      "pass": 32,
+      "fail": 0,
+      "durationMs": 4204,
+      "details": ""
+    },
+    {
+      "name": "faz95c1_storage_test.js",
+      "exit": 0,
+      "pass": 15,
+      "fail": 0,
+      "durationMs": 2235,
+      "details": ""
+    },
+    {
+      "name": "faz95c1_logistics_test.js",
+      "exit": 0,
+      "pass": 24,
+      "fail": 0,
+      "durationMs": 3412,
+      "details": ""
+    },
+    {
+      "name": "faz95d_map_test.js",
+      "exit": 0,
+      "pass": 23,
+      "fail": 0,
+      "durationMs": 3323,
+      "details": ""
+    },
+    {
+      "name": "faz95c1_ui_test.js",
+      "exit": 0,
+      "pass": 29,
+      "fail": 0,
+      "durationMs": 3827,
+      "details": ""
+    },
+    {
+      "name": "faz95d_war_preview_test.js",
+      "exit": 0,
+      "pass": 19,
+      "fail": 0,
+      "durationMs": 2735,
+      "details": ""
+    }
+  ],
+  "reason": "First-run failures only, plus four required 95C.1 integration canaries and recovered canonical 95D helper. No unchanged successful suite repeated without dependency reason."
+}

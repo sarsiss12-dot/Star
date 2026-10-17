@@ -244,6 +244,8 @@ const UI = {
              title="Devlet">👑<span>Devlet</span></button>
            <button class="tool" id="bilimBtn" data-a="globalPane" data-x="bilim"
              title="Bilim">✦<span>Bilim</span></button>
+           <button class="tool" data-a="news" title="Galaktik Haberler">📰<span>Haberler</span></button>
+           <button class="tool" data-a="diplomaticInbox" title="Kalıcı diplomatik gelen kutusu">✉<span>Gelen kutusu</span></button>
            <button class="tool" data-a="diploPane" title="Diplomasi">🤝<span>Diplomasi</span></button>
            <button class="tool" data-a="tab" data-x="intel"
              title="İstihbarat">🕵<span>İstihbarat</span></button>
@@ -352,6 +354,7 @@ const UI = {
   },
 
   act(a, x, el){
+    if(typeof ArchiveUI!=='undefined'&&ArchiveUI.act(a,x,el))return;
     /* FAZ 19: her arayüz eylemi yumuşak bir dokunuş sesi verir.
        Mute butonu hariç — kendi geri bildirimini kendi veriyor. */
     if (typeof AUDIO !== 'undefined' && a !== 'mute'){
@@ -1951,6 +1954,9 @@ const UI = {
     const e=G.p,items=[],battles=battleCount(),wars=G.emps.filter(o=>!o.dead&&o.id!==e.id&&e.war[o.id]).length;
     if(battles)items.push({label:'⚔ '+battles+' çatışma',action:'gobattle'});
     if(wars)items.push({label:'⚔ '+wars+' savaş · Diplomasi',action:'diploPane'});
+    if(typeof GalacticNews!=='undefined'&&GalacticNews.unread())items.push({label:'📰 '+GalacticNews.unread()+' okunmamış haber',action:'news'});
+    if(typeof DiplomaticInbox!=='undefined'&&DiplomaticInbox.pending())items.push({label:'✉ '+DiplomaticInbox.pending()+' bekleyen diplomatik teklif',action:'diplomaticInbox'});
+    if(typeof ArchiveUI!=='undefined'&&ArchiveUI.returnRecord?.world===G.emps)items.push({label:'✉ İncelenen teklife geri dön',action:'inboxReturn'});
     if(G.minNote)items.push({label:'▣ Küçültülen olay / karar · geri aç',action:'restoreModal'});
     if(crisisActive())items.push({label:'🌋 Galaktik kriz · aşama '+G.crisis.stage,action:'crisInfo'});
     if(typeof upheavalActive==='function'&&upheavalActive()){
@@ -2708,6 +2714,7 @@ const UI = {
             <div class="bar em"><i style="width:${(1-w.left/w.tot)*100}%"></i></div></div>`;
         });
       }
+      if(typeof ArchiveUI!=='undefined'&&View.sel?.e===0&&View.sel.ships.some(sh=>sh.c==='ins'))h+=`<button class="abtn pri" data-a="remoteBuild" data-x="${View.sel.id}">Seçili gemiyle bu sisteme uzaktan inşaat</button>`;
       const builders = G.fleets.filter(f=>f.e===0 && fleetHasRole(f,'insaat') && f.sys===s.id);
       const avail = Object.keys(STRUCTS).filter(k=>structAllowed(e, s, k));
       if (builders.length && avail.length){
@@ -2759,6 +2766,7 @@ const UI = {
     const f = View.sel && View.sel.e===0 ? View.sel : null;
     if (f && f.ships.length){
       const e = G.p;
+      if(f.ships.some(sh=>sh.c==='ins')&&typeof ArchiveUI!=='undefined')h+=ArchiveUI.construction(f);
       /* ═══════════════════════════════════════════════════════════
          FAZ 76 — SİSTEM FİLO LİSTESİ (ROSTER)
          Seçili filonun bulunduğu sistemde başka filolar da varsa
@@ -6011,18 +6019,19 @@ const UI = {
     const termsKey = playerOfferTermsKey(kendi);
     const same = n => n.kind==='aideal' && playerOfferTermsKey(n.data)===termsKey;
     if ((G.inbox || []).some(n=>same(n) && !dealExpired(n.data))) return false;
+    if(typeof DiplomaticInbox!=='undefined'&&DiplomaticInbox.state().records.some(r=>r.kind==='aideal'&&r.status==='pending'&&r.expires>G.day&&playerOfferTermsKey(r.note?.data)===termsKey))return false;
     G.inbox = (G.inbox || []).filter(n=>!same(n) || !dealExpired(n.data));
     /* Anahtar İMZAdır: aynı devletten gelen ŞARTLARI FARKLI iki teklif
        yanlışlıkla tekilleştirilmez, birebir aynısı tekrarlanmaz. */
     const imza = (typeof offerSignature === 'function')
                  ? offerSignature(kendi) : ('aideal:' + kendi.from);
-    this.notify({kind:'aideal', data:kendi, ico:'📜', pause:false,
+    const delivered=this.notify({kind:'aideal', data:kendi, ico:'📜', pause:false,
       title:'Teklif — ' + o.name,
       sub:(kendi.want.map(dealLabel).join(', ') || 'anlaşma') + ' istiyor' +
         ((typeof dealTimeLeft === 'function' && dealTimeLeft(kendi) !== null)
           ? ' · ' + dealTimeLeft(kendi) + ' ay kaldı' : ''),
       key:'aideal:' + imza});
-    return true;
+    return delivered!==false;
   },
   aiDealOpen(payload){
     /* FAZ 85E: teklif SEÇİLEN bildirimin kendi verisinden gelir.
@@ -7055,6 +7064,7 @@ const UI = {
        <div class="mft"><button class="ch" data-a="closem"><div class="cht">Hazırlanmaya başla</div></button></div>`, 'sci');
   },
   crisisPhase(stage){
+    recordNews({category:'crisis',scope:'player',empires:[0],key:'crisis-stage:'+stage+':'+G.crisis?.atMonth,title:'Galaktik kriz — aşama '+stage,text:'Galaktik kriz bildirimi alındı',important:true});
     const t = stage === 1 ? 'HİÇLİK SÜRÜSÜ GÖRÜLDÜ'
             : stage === 2 ? 'İSTİLA BÜYÜYOR' : 'ANA DALGA GELDİ';
     this.notify({kind:'crisis', data:stage, ico:'🌋', cls:'war', pause:true,
@@ -7086,6 +7096,7 @@ const UI = {
     this._hook('crisDiplo', ()=>{ this.closeModal(); this.openDiplo(); });
   },
   crisisEnd(winner){
+    recordNews({category:'crisis',scope:'player',empires:[0],key:'crisis-end:'+G.crisis?.atMonth,title:'Galaktik kriz sona erdi',text:'Ortak tehdit sona erdi',important:true});
     const me = winner && winner.id === 0;
     this.notify({kind:'crisend', data:winner?winner.id:-1, ico:'🏆', cls:'win', pause:true,
       title:'KRİZ SONA ERDİ', sub:winner ? (me?'En büyük katkı senin':winner.name+' öne çıktı') : 'Galaksi hayatta kaldı', key:'ce'});
@@ -7164,6 +7175,7 @@ const UI = {
     if (item.key && G.inbox.some(x => x.key === item.key)) return;
     item.uid = (G.inboxUid = (G.inboxUid || 0) + 1);
     item.born = G.day;
+    if(typeof DiplomaticInbox!=='undefined'&&DiplomaticInbox.supported(item.kind)&&!DiplomaticInbox.capture(item)){say('Gelen kutusu kapasitesi dolu; yeni teklif alınmadı','war');return false;}
     G.inbox.push(item);
     // kutu şişmesin: en eski duraklatmayan bildirimler düşer
     while (G.inbox.length > 6){
@@ -7194,6 +7206,9 @@ const UI = {
     const i = list.findIndex(x => x.uid === +uid);
     if (i < 0) return;
     const it = list[i];
+    if(typeof DiplomaticInbox!=='undefined'&&DiplomaticInbox.supported(it.kind)&&typeof ArchiveUI!=='undefined'){
+      const rec=DiplomaticInbox.capture(it);if(rec&&it.kind!=='aideal'){ArchiveUI.record(rec.id);return;}
+    }
     list.splice(i, 1);
     this._openNote = it;               // geri koyabilmek için sakla
     this.drawInbox();
@@ -7352,7 +7367,7 @@ const UI = {
     this._amountToken=null;this._jointSendToken=null;
     this._shipCancelPending=null;
     this._shipmentPending=null;
-    this._aiDealToken = null;
+    this._aiDealToken = null;this._archiveToken=null;this._constructionToken=null;
     this._opPending = null;
     delete this._envoyMenuSpeed;
     /* FAZ 19: pencere türüne göre giriş sesi */
@@ -7532,7 +7547,7 @@ const UI = {
     this._compositionPending=null;
     this._shipCancelPending=null;
     this._shipmentPending=null;
-    this._aiDealToken = null;
+    this._aiDealToken = null;this._archiveToken=null;this._constructionToken=null;
     this._opPending = null;
     const envoySpeed=this._envoyMenuSpeed;
     delete this._envoyMenuSpeed;

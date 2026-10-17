@@ -1,0 +1,40 @@
+  ✓ Clipboard pending: no success notice before completion
+  ✓ Clipboard pending: no fallback download
+  ✓ Clipboard pending: duplicate tap is coalesced
+  ✓ Clipboard completion is awaited
+  ✓ Clipboard resolved: success and busy flag released
+  ✓ Export includes raw pixel samples and viewport details
+  ✓ Clipboard rejected: actual download fallback starts once
+  ✓ Clipboard absent: download works
+  ✓ Both export routes failed: false and retry remains possible
+  ✓ Diagnostic persistence leaves MEM_SAVE untouched
+  ✓ Diagnostic persistence leaves disk game save untouched
+  ✓ First failure stored under its own key
+  ✓ Retries and log rotation preserve the original first failure
+  ✓ New session loads previous failure
+  ✓ Previous session does not consume current first-failure slot
+  ✓ New session can record a new first failure
+  ✓ Malformed diagnostic record is ignored
+  ✓ No persistent storage: diagnostic does not overwrite/read game fallback
+  ✓ Offline preferences cannot overwrite the game save fallback
+  ✓ Offline preference values are isolated by key
+  ✓ Late previous-session read cannot overwrite live first failure
+  ✓ First report is a value snapshot, not a shared object
+  ✓ Nested error text survives export
+  ✓ Detailed reports preserve serialized world
+  ✓ Detailed reports consume no RNG
+  ✓ DPR 2: samples carry CSS and backing pixel positions
+  ✓ All six transform components are reported
+  ✓ Normal drawing does not read pixels
+  ✓ Resize after drawing is distinguishable
+  ✓ Fullscreen uses scheduled recovery, no immediate canvas reset
+  ✓ Pageshow writes its own event
+  ✓ Orientation does not fabricate a pageshow event
+  ✓ Lifecycle recovery ends with drawing completed
+  ✓ Real draw failure: specific system stage preserved
+  ✓ Real draw failure: original error and stack captured
+  ✓ Failed draw does not reuse old completion time
+  ✓ Four map errors schedule canonical recovery
+  ✓ Recovery preserves original error even after successful redraw
+
+GEÇEN: 38 KALAN: 0

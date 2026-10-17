@@ -1,3 +1,19 @@
+# 95E güncel açık riskler — 17 Ekim 2026
+
+- Fiziksel Android ve gerçek Chromium DOM/yerleşim/PWA yükseltme kabulü yapılamadı. Mock viewport/olay ve native Canvas kanıtı cihaz testi değildir.
+- Eski kayıtlarda daha önce altılı bildirimden düşmüş teklifler yeniden üretilemez. Gizli geçmiş bilinçli olarak sonradan açılmaz. Arşiv 1.000 görünür/256 gizli; teklifler 512 bekleyen/256 sonuç; gemi 16 görev; bitmiş görev geçmişi 128.
+- Dolu stres kaydı 2.370.727 bayt. Gerçek tarayıcı kota/cihaz hızı ayrıca denenmeli. Kapasite dolunca yeni teklif alınmadığı bildirilir; mevcut teklif sessizce silinmez.
+- 120 aylık 99/404 kampanyalarında 54/34 enerji sıfır devlet-ay ve 11/47 mal kıtlığı örneği var. Negatif stok yokluğu denge çözümü değildir. AI inşa filosu kullanımı 1/3/4, gerçek bitiş 1/10/5; düşük kullanım ve 0/8/10 sonuçsuz görev ayrı takip adayıdır.
+- Başlamış yapı, orijinal motorda gemi kaybından sonra ilerleyebilir. Bu faz bunu değiştirmez; gerçek bitiş sayacı doğrudan motor sonucuna bağlıdır. Gizli düşmanlar yüzünden mutlak güvenli yol garantisi yoktur.
+- Modül beklenmeyen hata alırsa yalnız o modül bir kez uyarılıp yeni oyun/başarılı yüklemeye kadar duraklatılır; diğer simülasyon sürer. Böyle bir hata teslim testlerinde kalmadı.
+- Bazı sıradan yasa oyları/özel senaryo olayları haber hook kapsamı dışındadır. Uzaktan emir kapsamı mevcut uzay yapılarıdır; koloni binası kuyruğu ayrı kalır. Kaynakta bulunmayan ayrı kuruluş teklifi icat edilmedi.
+- Özgün oyuncu kaydı gerektiren federasyon reddi ve eski gemi kökeni iddiaları açık. 95C.1 yaptırım/üretim/UI/kayıt ve 95D katman/ikinci onay düzeltmeleri korundu.
+- 95D GitHub ağacında eksik test yardımcısı doğrulanmış ZIP'ten geri alındı. ZIP-only eski test kanıtları kanonik stars-faz95d.zip içinde korunmuştur; önceki faz sonuçları yeni test sayılmadı.
+
+95F/96A otomatik başlatılmaz. Aşağıdaki önceki risk kayıtları tarihsel kanıt olarak korunur.
+
+---
+
 # 95D güncel açık riskler — 17 Ekim 2026
 
 - Gerçek Android, PWA yükseltme ve tarayıcı DOM/dokunma kabulü yapılmadı. Native Skia ve mock giriş testi bunların yerine geçmez; 95C.1’in cihaz riskleri sürer.

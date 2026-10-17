@@ -5,6 +5,12 @@ const hash=s=>createHash('sha256').update(s).digest('hex');
 // block must restore the untouched canonical 93A.1/93C HTML hash.
 // Historical referans-sha.json remains intact; neither half is exempted.
 exports.isReviewedUI=source=>{
+ const archiveStart=source.indexOf('/* FAZ 95E ARCHIVE */');
+ if(archiveStart>=0){const marker='/* END FAZ 95E ARCHIVE */\n',end=source.indexOf(marker,archiveStart)+marker.length;
+  if(end<archiveStart||hash(source.slice(archiveStart,end))!=='96a4e38594d2f946f8b2d858013988683192f4370aac722aac7f849fbbce4d8d')return false;
+  source=source.slice(0,archiveStart)+source.slice(end);
+ }
+ for(const file of ['news.js','inbox.js','construction.js','archive-ui.js'])source=source.replace('<script src="'+file+'"></script>\n','');
  // 95D adds only this pinned identity block; all 95C.1 layout pins remain.
  const identityStart=source.indexOf('/* FAZ 95D — compact identity controls */');
  if(identityStart>=0){const marker='/* END FAZ 95D IDENTITY */\n',end=source.indexOf(marker,identityStart)+marker.length;

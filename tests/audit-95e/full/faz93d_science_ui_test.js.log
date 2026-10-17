@@ -1,0 +1,22 @@
+✓ all 58 nodes appear exactly once across the three trees
+✓ every same-branch prerequisite is drawn and placed before its child
+✓ global science action opens dedicated tree screen with history tab
+✓ node click selects remote target, shows detail and toggles it off
+✓ queue focus changes tree without removing target
+✓ queue controls reorder and remove targets and renumber display
+✓ collapsed queue retains goals and reopens
+✓ route panel lists implicit prerequisites without main goal numbers
+✓ completed node opens information without becoming a goal
+✓ history renders unknown dates, real benefits and filters
+✓ locked, planned, active and completed states are distinct
+✓ branch links and special origin condition can be inspected
+✓ bad catalog routes render an error rather than hanging the screen
+✓ tree, history and route rendering do not mutate save or random state
+✓ zoom buttons enforce bounds without touching galaxy camera or research
+✓ touch scroll suppresses selection; pinch changes only tree zoom
+✓ unchanged monthly refresh does not rebuild science DOM
+✓ mobile CSS scopes 44px targets, native scroll and compact landscape layout
+PERF 300 science renders: 176 ms (Node host, not Android FPS)
+✓ 58-node planning and rendering has bounded runtime; no catalog growth
+✓ preservation guard rejects edits to both original UI and new science CSS
+GEÇEN: 20 KALAN: 0

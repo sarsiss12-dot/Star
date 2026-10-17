@@ -1,0 +1,202 @@
+
+A. SÖZDİZİMİ, DOSYA SINIRI VE KARANTİNA
+  ✓ node --check ai.js
+  ✓ node --check archive-ui.js
+  ✓ node --check audio.js
+  ✓ node --check combat.js
+  ✓ node --check construction.js
+  ✓ node --check diplomacy.js
+  ✓ node --check economy.js
+  ✓ node --check inbox.js
+  ✓ node --check main.js
+  ✓ node --check map.js
+  ✓ node --check news.js
+  ✓ node --check sw.js
+  ✓ node --check ui.js
+  ✓ manifest.json geçerli
+  ✓ depolama anahtarı korundu: yildiz:save
+  ✓ depolama anahtarı korundu: yh_audio
+  ✓ depolama anahtarı korundu: yh_advisor
+  ✓ depolama anahtarı korundu: yh_autoev
+  ✓ depolama anahtarı korundu: yh_bg
+  ✓ depolama anahtarı korundu: yh_radar
+  ✓ depolama anahtarı korundu: yh_templates
+  ✓ depolama anahtarı korundu: __yh_probe
+  ✓ depolama anahtarı korundu: __yh_diag
+  ✓ sw cache = 'stars-v95e'
+  ✓ sw KABUK listesi duruyor
+  ✓ sw fetch davranışı duruyor
+  ✓ sw activate davranışı duruyor
+  ✓ kapsam dışı alan world içinde YOK: G.crisis
+  ✓ kapsam dışı alan world içinde YOK: G.crisisId
+  ✓ kapsam dışı alan world içinde YOK: G.wildId
+  ✓ kapsam dışı alan world içinde YOK: G.nests
+  ✓ kapsam dışı alan world içinde YOK: G.ruins
+  ✓ kapsam dışı alan world içinde YOK: G.raids
+  ✓ kapsam dışı alan world içinde YOK: G.upheaval
+  ✓ kapsam dışı alan world içinde YOK: G.upAge
+  ✓ kapsam dışı alan world içinde YOK: G.upLast
+  ✓ kapsam dışı alan world içinde YOK: G.market
+  ✓ kapsam dışı alan world içinde YOK: G.inbox
+  ✓ kapsam dışı alan world içinde YOK: G.chainQueue
+  ✓ geçici durum world içinde YOK: G.vis
+  ✓ geçici durum world içinde YOK: G.fx
+  ✓ geçici durum world içinde YOK: G.speed
+  ✓ geçici durum world içinde YOK: G.over
+  ✓ geçici durum world içinde YOK: _warAuth
+  ✓ geçici durum world içinde YOK: _warWhy
+  ✓ geçici durum world içinde YOK: _dealAuth
+  ✓ SITUATIONS kataloğu duruyor
+  ✓ situationsTick tanımı duruyor
+  ✓ situationsTick çağrısı PASİF (yorumlu)
+  ✓ DURUMLAR sekmesi gizli
+  ✓ 200 ayda situation tetiklenmedi — 0
+  ✓ audio.js byte-for-byte aynı — 804226980179698a
+  ✓ manifest.json byte-for-byte aynı — 6b8305490e9a55e9
+  ✓ map kaynak kilidi: 91C altyapısı + 93A hedef seçimi
+
+B. SENARYO 1 — V4 TAM ROUND-TRIP
+  ✓ kayıt sürümü v:8 (Faz 85F) — v=8
+  ✓ kayıtta world alt nesnesi var
+  ✓ world tam dokuz alanı içeriyor — cncAge,council,fedUid,feds,friction,megaWatch,memAge,rebelAlliance,sandbox
+  ✓ memAge korundu (137) — 137
+  ✓ cncAge korundu (64) — 64
+  ✓ Konsey zehirli değeri EZDİ — Büyük Konsey
+  ✓ federasyon zehirli değeri EZDİ — Kuzey Birliği
+  ✓ fedUid korundu (7) — 7
+  ✓ friction korundu — {"0:2":14,"1:3":6}
+  ✓ rebelAlliance korundu (hedef 3) — 3
+  ✓ megaWatch korundu
+  ✓ sandbox korundu (true) — true
+  ✓ _warAuth yükleme sonrası temizlendi
+  ✓ _warWhy yükleme sonrası temizlendi
+  ✓ _dealAuth yükleme sonrası temizlendi
+
+C. SENARYO 2 — KONSEY + YASA + YAPTIRIM + OY
+  ✓ Konsey yükleme sonrası MEVCUT — Büyük Konsey
+  ✓ üye listesi birebir aynı
+  ✓ üyeler geçerli imparatorluk ID gösteriyor
+  ✓ oyuncu Konsey üyeliği korundu
+  ✓ yasalar korundu (ticaretStd + sinirGuv)
+  ✓ hedefli yaptırım korundu (parya=2) — 2
+  ✓ hazine korundu (412) — 412
+  ✓ başkan korundu (0) — 0
+  ✓ dönem bilgileri korundu — {"0":2,"1":1}
+  ✓ voteIn süresi korundu (9) — 9
+  ✓ devam eden oy GÜNDEMİ aynı — ambargo
+  ✓ devam eden oy HEDEFİ aynı — 3
+  ✓ evet oyları aynı — [0,1]
+  ✓ hayır oyları aynı — [2]
+  ✓ oy süresi (age) aynı — 4
+  ✓ oy henüz bitmemiş olarak korundu
+  ✓ sinirGuv yasasının ekonomik etkisi yüklemeden HEMEN sonra çalışıyor — garrisonOf 23 → 23
+  ✓ etki gerçekten YASADAN geliyor (yasa kapalıyken düşüyor) — yasasız 19 < yasalı 23
+
+D. SENARYO 3 — FEDERASYON + YASA + HAZİNE + OY
+  ✓ federasyon sayısı korundu (1) — 1
+  ✓ federasyon ID korundu (7) — 7
+  ✓ federasyon adı korundu — Kuzey Birliği
+  ✓ üyeler korundu — [0,1]
+  ✓ üye ID'leri geçerli
+  ✓ lider/kurucu ID korundu ve geçerli
+  ✓ federasyon yasası korundu
+  ✓ federasyon hazinesi korundu (250) — 250
+  ✓ nextVote korundu (970) — 970
+  ✓ devam eden federasyon oyu korundu — ortakPazar
+  ✓ federasyon oy sayıları aynı — [0]/[]
+  ✓ federasyon oyu bitmemiş olarak korundu
+
+E. SENARYO 4 — fedUid ÇAKIŞMA
+  ✓ fedUid ≥ mevcut en yüksek federasyon ID — 8
+  ✓ yeni federasyon ID ÇAKIŞMIYOR — yeni=8 mevcut=7
+  ✓ bozuk fedUid (2) güvenli fallback ile onarıldı — 7
+  ✓ onarım raporlandı — fedUid 2 → 7
+  ✓ onarım sonrası da ID çakışmıyor — yeni=8
+
+F. SENARYO 5-7 — İSYAN, SÜRTÜŞME, MEGA, SANDBOX
+  ✓ rebelAlliance mevcut
+  ✓ isyan hedefi korundu (3) ve geçerli
+  ✓ isyan üyeleri korundu — [0,1]
+  ✓ isyan since korundu (120) — 120
+  ✓ isyan revealed=true korundu
+  ✓ friction tam korundu — {"0:2":14,"1:3":6}
+  ✓ friction sayısal değeri korundu (14)
+  ✓ megaWatch tam korundu — 1
+  ✓ sandbox=false ayrı korundu (true üzerine) — false
+  ✓ sandbox=true ayrı korundu (false üzerine) — true
+  ✓ rebelAlliance=null null olarak korundu
+  ✓ memAge=0 sıfır olarak korundu (|| tuzağı yok) — 0
+  ✓ cncAge=0 sıfır olarak korundu — 0
+  ✓ council=null null olarak korundu
+
+G. SENARYO 8 — SAAT VE COOLDOWN SÜREKLİLİĞİ
+  ✓ memAge süreklilik (137) — 137
+  ✓ cncAge süreklilik (64) — 64
+  ✓ SÜRE-1 vasallık yaşı aynı kaldı — 20 → 20
+  ✓ SÜRE-2 isyan ittifakı yaşı aynı kaldı — 17 → 17
+  ✓ SÜRE-3 konsey sayacına kalan aynı kaldı — -4 → -4
+
+H. SENARYO 9 — AYNI OTURUMDA FARKLI KAYIT
+  ✓ OYUN A gerçekten zengin yüklendi
+  ✓ OYUN B: memAge A'dan sızmadı — 12
+  ✓ OYUN B: cncAge A'dan sızmadı — 3
+  ✓ OYUN B: Konsey A'dan sızmadı
+  ✓ OYUN B: federasyon A'dan sızmadı — 0
+  ✓ OYUN B: fedUid A'dan sızmadı — 0
+  ✓ OYUN B: friction A'dan sızmadı — {}
+  ✓ OYUN B: rebelAlliance A'dan sızmadı
+  ✓ OYUN B: megaWatch A'dan sızmadı
+  ✓ OYUN B: sandbox A'dan sızmadı
+
+I. SENARYO 10 — YENİ OYUN SIFIRLAMA
+  ✓ önceki oyun gerçekten zengindi
+  ✓ yeni oyun: memAge sıfırlandı — 0
+  ✓ yeni oyun: cncAge sıfırlandı — 0
+  ✓ yeni oyun: Konsey temizlendi
+  ✓ yeni oyun: federasyonlar temizlendi — 0
+  ✓ yeni oyun: fedUid sıfırlandı (eskiden SIZIYORDU) — 0
+  ✓ yeni oyun: friction temizlendi — {}
+  ✓ yeni oyun: rebelAlliance temizlendi (eskiden SIZIYORDU)
+  ✓ yeni oyun: megaWatch temizlendi (eskiden SIZIYORDU) — 0
+  ✓ yeni oyun: sandbox kapandı (eskiden SIZIYORDU) — false
+  ✓ yeni oyun: geçici yetki alanları temiz
+
+J. SENARYO 11-12 — ESKİ V3 KAYIT
+  ✓ v3 kaydı HATA ATMADAN açıldı — ok
+  ✓ v3: Konsey null (uydurulmadı)
+  ✓ v3: federasyonlar boş — 0
+  ✓ v3: fedUid 0 — 0
+  ✓ v3: friction boş — {}
+  ✓ v3: rebelAlliance null
+  ✓ v3: megaWatch boş — 0
+  ✓ v3: sandbox false — false
+  ✓ v3: ZEHİRLİ oturum verisi SIZMADI
+  ✓ v3: memAge sıfırlanmadı, gün/30 ile deterministik göç — gün 930 → 31 ay
+  ✓ v3: cncAge deterministik varsayılan aldı — 31
+  ✓ v3: migration bilgisi raporlandı — {"migrated":true,"from":3,"months":31}
+  ✓ v3: migration global RNG TÜKETMEDİ (deterministik)
+  ✓ v3 göçü DETERMİNİSTİK (3 kez aynı memAge) — 31,31,31
+  ✓ v3 göçü DETERMİNİSTİK (3 kez aynı cncAge) — 31,31,31
+  ✓ v3 göçü RNG durumunu her seferinde AYNI bıraktı — 1518100838,1518100838,1518100838
+
+K. SENARYO 13 — TÜRETİLMİŞ DURUM KORUNDU
+  ✓ yükleme sonrası sahipli sistemlerde _reach kuruldu — 60/60
+  ✓ economyTick(true) Konseyi DEĞİŞTİRMEDİ
+  ✓ economyTick(true) federasyonları DEĞİŞTİRMEDİ
+  ✓ economyTick(true) memAge'i DEĞİŞTİRMEDİ
+  ✓ economyTick(true) sandbox'ı DEĞİŞTİRMEDİ
+  ✓ economyTick(true) fedUid'i DEĞİŞTİRMEDİ
+  ✓ rebuildDerivedStateAfterLoad isyan ittifakını DEĞİŞTİRMEDİ
+
+L. SENARYO 14 — SERIALIZE→DESERIALIZE→SERIALIZE
+  ✓ world round-trip 2→3 anlamsal olarak AYNI
+  ✓ world round-trip 3→4 anlamsal olarak AYNI (yakınsadı) — world 1114 bayt
+  ✓ ilk tur farkı YALNIZ tembel council.pariahs önbelleği — pariahs
+  ✓ pariahs korunan targeted.parya'dan türetildi (bilgi kaybı yok)
+  ✓ tembel önbellek dışında world ÇEKİRDEĞİ birebir aynı
+  ✓ sys yükleme boyunca SÜRÜKLENMİYOR (Faz 85B düzeltmesi) — sys sabit · world sabit
+
+══════════════════════════════════════════
+  GEÇEN: 173   KALAN: 0
+══════════════════════════════════════════
+

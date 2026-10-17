@@ -1,0 +1,16 @@
+95E evidence policy
+- 95D ZIP CRC and all 2335 manifest entries verified. GitHub production files identical. ZIP-only historical evidence remains in the unchanged canonical stars-faz95d.zip; it is not duplicated into the 95E source tree.
+- Full regression initial source changed during bounded corrections. Per-suite initial raw logs retained; affected failures rerun separately; final unique counts use each suite's latest result.
+- Initial incorrect embargo news insertion in ambargoKir operation caused ReferenceError on/sebep. Removed only that insertion; real setEmbargo hook retained.
+- Script order checks now assert the exact twelve-script dependency order, including four independent 95E modules. Build/cache literals advanced only. Scoped new CSS is separately hash-pinned, historical CSS pins unchanged.
+- New archive adapter initially replaced aideal's old notification popup, removing legacy counter-offer hook access. Kept original aideal popup and canonical acceptance/refusal hooks, while persistent inbox has its own returnable view and existing counter-offer route.
+- Closing an offer still creates no refusal/cost; the 87D assertion now checks persistent pending count, because an archived active offer is no longer reissued after closing its transient popup.
+- 95D GitHub tree was missing tests/helpers/identity-fixture.js, although ZIP contains its manifest-verified bytes. Recovered verbatim, no production fallback/reconstruction.
+- First 120-month seed11 campaign observed one actual completed AI structure but module counter said zero after builder loss. Canonical structTick completion hook corrects the counter; original campaign JSON retained with before-completion-fix suffix. Seed11 rerun once for this concrete correction.
+- Followup harness syntax error occurred before executing tests; failed harness output retained as followups-harness-error.log and fixed before launching tests.
+- Playwright installed; Chromium/headless shell executable missing. No actual Chromium DOM or physical Android test performed. Mock input/Canvas evidence is labelled separately.
+
+- Final isolation review added per-module once-only fault pause/recovery for news, inbox and construction. Final module run 78/0; daily campaign followup 11/0. Corresponding perf rerun preserved alongside earlier measurement.
+- Document-generation helper had Python reserved keyword syntax error before writing any documents; corrected before generation.
+
+- Publication transport has a 16 MiB request ceiling. Redundant newly-created source95d-evidence archive was omitted from 95E; the verified canonical stars-faz95d.zip remains unchanged and retains all historical bytes. Existing GitHub history/reports and new 95E raw logs are preserved. The originally staged redundant evidence archive was incomplete; it was regenerated and verified against 1250 canonical ZIP entries before omitting the redundant copy. This does not change production code or test results.

@@ -12,7 +12,7 @@ function stable(h){
  return JSON.stringify(d);
 }
 function swHost(missing=false){
- const events={},deleted=[],names=['stars-v89b','stars-v95d','other-app-cache'];let skipped=0,claimed=0,added=null;
+ const events={},deleted=[],names=['stars-v89b','stars-v95e','other-app-cache'];let skipped=0,claimed=0,added=null;
  const caches={open:async()=>({addAll:async list=>{added=[...list];if(missing)throw Error('missing shell');}}),
   keys:async()=>[...names],delete:async n=>{deleted.push(n);return true;},match:async()=>null};
  const self={addEventListener:(k,f)=>events[k]=f,skipWaiting:async()=>{skipped++;},clients:{claim:async()=>{claimed++;}}};
@@ -21,7 +21,7 @@ function swHost(missing=false){
  return {emit,deleted,get skipped(){return skipped;},get claimed(){return claimed;},get added(){return added;}};
 }
 test('dağıtımın ana çalışma dosyaları mevcut ve boş değil',()=>{for(const f of ['index.html','manifest.json','main.js','map.js','combat.js','ai.js','diplomacy.js','economy.js','ui.js','audio.js','sw.js'])assert.ok(fs.statSync(path.join(ROOT,f)).size>0,f);});
-test('index script sırası üretim bağımlılık sırasıyla aynı',()=>{const s=fs.readFileSync(path.join(ROOT,'index.html'),'utf8');const got=[...s.matchAll(/<script src="([^"]+)"/g)].map(m=>m[1]);assert.deepEqual(got,['main.js','map.js','combat.js','ai.js','diplomacy.js','economy.js','ui.js','audio.js']);});
+test('index script sırası üretim bağımlılık sırasıyla aynı',()=>{const s=fs.readFileSync(path.join(ROOT,'index.html'),'utf8');const got=[...s.matchAll(/<script src="([^"]+)"/g)].map(m=>m[1]);assert.deepEqual(got,['main.js','map.js','combat.js','ai.js','diplomacy.js','economy.js','news.js','inbox.js','construction.js','ui.js','archive-ui.js','audio.js']);});
 test('manifest kapsamı, başlangıcı ve landscape modu yerel',()=>{const m=JSON.parse(fs.readFileSync(path.join(ROOT,'manifest.json')));assert.equal(m.start_url,'./index.html');assert.equal(m.scope,'./');assert.equal(m.orientation,'landscape');assert.equal(m.display,'standalone');assert.ok(m.icons.length>=2);});
 test('SW kabuğu gerçek yerel dosyaların tamamına karşılık gelir',async()=>{const h=swHost();await h.emit('install');assert.equal(h.skipped,1);for(const ref of h.added){const f=ref==='./'?'index.html':ref.replace(/^\.\//,'');assert.ok(fs.existsSync(path.join(ROOT,f)),ref);}});
 test('eksik kabukta install reddedilir ve skipWaiting çalışmaz',async()=>{const h=swHost(true);await assert.rejects(h.emit('install'),/missing shell/);assert.equal(h.skipped,0);});
@@ -34,5 +34,5 @@ for(const [name,mutate] of [
  ['sistem gezegenleri eksik',d=>delete d.sys[0].p],['filo sahibi geçersiz',d=>{if(d.fl.length)d.fl[0].e=999;else d.fl.push({id:99,e:999,ships:[]});}]
 ])test('yapısal bozuk kayıt dünyayı değiştirmez: '+name,()=>{const h=fresh(),before=stable(h),d=JSON.parse(h.run('serialize()'));mutate(d);h.sb.__bad=JSON.stringify(d);assert.equal(h.run('deserialize(__bad)'),false);assert.equal(stable(h),before);});
 test('saveGame/loadGame aynı depolama anahtarıyla round-trip yapar',async()=>{const local=new Map(),h=runtime({root:ROOT,local});h.run(`setupGame({name:'RC',race:'insan',traits:[],size:'orta',shape:'sarmal',diff:'normal',seed:90,ethics:{mil:0,aut:0,mat:0,ahl:0},civics:[],origin:'standart',ruins:'yok',crisis:'kapali',council:'kapali'});G.autoSave=false;economyTick(true);`);const before=stable(h);assert.equal(await h.run('saveGame()'),true);assert.ok(local.has('yildiz:save'));h.run('G.day+=999;G.p.res.min+=777');assert.equal(await h.run('loadGame()'),true);assert.equal(stable(h),before);});
-test('BUILD ve cache RC adı taşıyor',()=>{assert.match(fs.readFileSync(path.join(ROOT,'main.js'),'utf8'),/const BUILD_ID = '95d'/);assert.match(fs.readFileSync(path.join(ROOT,'sw.js'),'utf8'),/const CACHE = 'stars-v95d'/);});
+test('BUILD ve cache RC adı taşıyor',()=>{assert.match(fs.readFileSync(path.join(ROOT,'main.js'),'utf8'),/const BUILD_ID = '95e'/);assert.match(fs.readFileSync(path.join(ROOT,'sw.js'),'utf8'),/const CACHE = 'stars-v95e'/);});
 (async()=>{for(const [n,fn] of tests){try{await fn();pass++;console.log('✓ '+n);}catch(e){fail++;console.log('✗ '+n+' — '+e.stack);}}console.log('GEÇEN: '+pass+' KALAN: '+fail);process.exitCode=fail?1:0;})();

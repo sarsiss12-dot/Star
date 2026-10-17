@@ -1,0 +1,69 @@
+{
+  "root": "/workspace/scratch/50b0250bea79/stars",
+  "seed": 11,
+  "requestedMonths": 120,
+  "elapsedMonths": 120,
+  "systems": 100,
+  "empires": 14,
+  "ms": 78277,
+  "failure": null,
+  "builders": [
+    45
+  ],
+  "started": 1,
+  "completed": 1,
+  "monthly": [
+    {
+      "month": 30,
+      "saveBytes": 189051,
+      "news": 0,
+      "hidden": 38,
+      "pending": 7,
+      "activeBuilders": 0,
+      "fleets": 60
+    },
+    {
+      "month": 60,
+      "saveBytes": 250903,
+      "news": 1,
+      "hidden": 79,
+      "pending": 3,
+      "activeBuilders": 0,
+      "fleets": 69
+    },
+    {
+      "month": 90,
+      "saveBytes": 306255,
+      "news": 1,
+      "hidden": 109,
+      "pending": 7,
+      "activeBuilders": 0,
+      "fleets": 88
+    },
+    {
+      "month": 120,
+      "saveBytes": 371152,
+      "news": 3,
+      "hidden": 135,
+      "pending": 6,
+      "activeBuilders": 0,
+      "fleets": 97
+    }
+  ],
+  "negative": [],
+  "shortages": 0,
+  "lowEnergyEmpireMonths": 0,
+  "reloads": 1,
+  "saveBytes": 375357,
+  "metrics": {
+    "ordered": 1,
+    "started": 1,
+    "completed": 0,
+    "failed": 1,
+    "aiOrdered": 1,
+    "aiStarted": 1,
+    "aiCompleted": 0,
+    "routeSearches": 0
+  },
+  "newsBytes": 51048
+}

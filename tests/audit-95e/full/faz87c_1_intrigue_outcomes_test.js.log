@@ -1,0 +1,46 @@
+✓ fısıltı actor=0, iftira=false, başarı=false, ifşa=false
+✓ fısıltı actor=2, iftira=false, başarı=false, ifşa=false
+✓ fısıltı actor=0, iftira=false, başarı=false, ifşa=true
+✓ fısıltı actor=2, iftira=false, başarı=false, ifşa=true
+✓ fısıltı actor=0, iftira=false, başarı=true, ifşa=false
+✓ fısıltı actor=2, iftira=false, başarı=true, ifşa=false
+✓ fısıltı actor=0, iftira=false, başarı=true, ifşa=true
+✓ fısıltı actor=2, iftira=false, başarı=true, ifşa=true
+✓ fısıltı actor=0, iftira=true, başarı=false, ifşa=false
+✓ fısıltı actor=2, iftira=true, başarı=false, ifşa=false
+✓ fısıltı actor=0, iftira=true, başarı=false, ifşa=true
+✓ fısıltı actor=2, iftira=true, başarı=false, ifşa=true
+✓ fısıltı actor=0, iftira=true, başarı=true, ifşa=false
+✓ fısıltı actor=2, iftira=true, başarı=true, ifşa=false
+✓ fısıltı actor=0, iftira=true, başarı=true, ifşa=true
+✓ fısıltı actor=2, iftira=true, başarı=true, ifşa=true
+✓ fısıltı eski hedef: doğrudan motor saf ret
+✓ fısıltı ölü hedef: doğrudan motor saf ret
+✓ fısıltı temassız: doğrudan motor saf ret
+✓ fısıltı ölü aktör: doğrudan motor saf ret
+✓ fısıltı yetersiz kaynak: doğrudan motor saf ret
+✓ fısıltı eski suçlanan: doğrudan motor saf ret
+✓ fısıltı aynı hedef: doğrudan motor saf ret
+✓ fısıltı savaşta: doğrudan motor saf ret
+✓ sahte bayrak tekno basari: tek maliyet ve kayıt
+✓ sahte bayrak tekno ifsa: tek maliyet ve kayıt
+✓ sahte bayrak tekno sonucsuz: tek maliyet ve kayıt
+✓ sahte bayrak sabotaj basari: tek maliyet ve kayıt
+✓ sahte bayrak sabotaj ifsa: tek maliyet ve kayıt
+✓ sahte bayrak sabotaj sonucsuz: tek maliyet ve kayıt
+✓ sahte bayrak bilinmeyen tür: kesinti/zar/kayıt yok
+✓ sahte bayrak eski hedef: kesinti/zar/kayıt yok
+✓ sahte bayrak eski suçlanan: kesinti/zar/kayıt yok
+✓ sahte bayrak korsan: kesinti/zar/kayıt yok
+✓ sahte bayrak temassız: kesinti/zar/kayıt yok
+✓ sahte bayrak ölü aktör: kesinti/zar/kayıt yok
+✓ kritik sahte bayrak: gerçek savaş kuruluyor
+✓ kritik sahte bayrak: gerçek savaş reddediliyor
+✓ başarısız savaşta önceden olmayan yetki alanları tekrar yoktur
+✓ veri yokken iftira başarısı, araştırma kazanımı diye sunulmaz
+✓ kurban dosyası masumu gösterir; gerçek kuklacı yalnız soruşturma sonrası görünür
+✓ fısıltı menüsü iftira seçilince gerçek 80 Etki ve yüzde .88 başarıyı gösterir
+✓ gerçek UI ifşa edilmiş başarılı iftirayı masumun üstünde kaldı diye anlatmaz
+✓ AI fısıltısı actor ve eski karşı istihbarat kaydını birer kez yazar
+✓ v8 ücret/sonuç/geçmişi korur; gecikmeli fısıltı ifşası eski yoldan çalışır
+GEÇEN: 45 KALAN: 0

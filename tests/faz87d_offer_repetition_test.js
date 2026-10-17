@@ -50,7 +50,7 @@ for(const t of ['nap','pact','ally'])test(t+' reddi de aynı şartı bekletir',(
 });
 test('kapatmak ret sayılmaz',()=>{
  const h=fresh();h.run('open();UI.closeModal();UI.aiOffer(offer);');
- eq(h.run('E.rel[0]'),50);eq(h.run('playerOfferWait(offer)'),0);eq(h.run('G.inbox.length'),1);
+ eq(h.run('E.rel[0]'),50);eq(h.run('playerOfferWait(offer)'),0);eq(h.run("typeof DiplomaticInbox!=='undefined'?DiplomaticInbox.pending():G.inbox.length"),1);
 });
 test('karşı teklif hazırlamak ret sayılmaz, karşı kartın reddi sayılır',()=>{
  const h=fresh();h.run(`open();UI._hooks.offCounter();var before=playerOfferWait(offer);UI.act('ctrNo');UI.act('ctrNo');`);

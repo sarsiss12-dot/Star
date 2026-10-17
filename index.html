@@ -1142,6 +1142,11 @@ body.fauxFull canvas#map{width:100vw !important;height:100dvh !important}
 /* FAZ 95D — compact identity controls */
 .emblemPreview{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.emblemPreview canvas{flex:0 0 80px;background:#101827;border-radius:8px}.emblemFields{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin:10px 0}.emblemFields label{display:flex;flex-direction:column;gap:4px;font-size:12px}.emblemFields select,.emblemFields input{min-height:44px;max-width:100%;background:#152035;color:#fff;border:1px solid #51617e;border-radius:6px}.identityBadge{vertical-align:middle;flex-shrink:0}#warFinalConfirm:disabled{opacity:.5}
 /* END FAZ 95D IDENTITY */
+/* FAZ 95E ARCHIVE */
+/* 95E: bounded modal viewport, wrapping text and independent scroll. */
+.archive95e{min-width:0;overflow-wrap:anywhere}.archiveTools{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}.archiveTools>*{min-width:0;flex:1 1 120px;max-width:100%;min-height:36px}.news95e{display:block;overflow-wrap:anywhere}.news95e p{margin:5px 0}.news95e .abtn{white-space:normal;text-align:left;max-width:100%}.unread95e{border-left:3px solid #6ff2c8}
+@media(max-height:420px){.archive95e{max-height:calc(100dvh - 132px);overflow-y:auto}.archive95e .box{margin:5px 0;padding:7px}}
+/* END FAZ 95E ARCHIVE */
 </style>
 </head>
 <body>
@@ -1243,7 +1248,11 @@ body.fauxFull canvas#map{width:100vw !important;height:100dvh !important}
 <script src="ai.js"></script>
 <script src="diplomacy.js"></script>
 <script src="economy.js"></script>
+<script src="news.js"></script>
+<script src="inbox.js"></script>
+<script src="construction.js"></script>
 <script src="ui.js"></script>
+<script src="archive-ui.js"></script>
 <!-- FAZ 19: işlemsel ses. main.js'ten SONRA yüklenir (storeSet/storeGet
      kullanır). Hiçbir ses dosyası yok; her şey Web Audio ile üretilir. -->
 <script src="audio.js"></script>

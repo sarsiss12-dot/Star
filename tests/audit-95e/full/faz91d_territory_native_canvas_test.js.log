@@ -1,0 +1,42 @@
+  ✓ Historical source lock still detects changes to tap, recovery and fleet drawing
+  ✓ Separated same-owner pieces each draw their actual state name
+  ✓ Singleton state uses its own name, even with the same race as its neighbour
+  ✓ No contact: real drawing does not disclose state identity
+  ✓ Unseen states never receive labels
+  ✓ All region anchors are actual visible systems of that owner
+  ✓ Native label boxes avoid stars, system names, one another, and HUD
+  ✓ Native text generates real pixels in the name box
+  ✓ Hidden bridge does not join the two known fragments
+  ✓ Discovering bridge joins components immediately without a day tick
+  ✓ Contact reveals the proper name on the same day
+  ✓ Ownership change and rename invalidate labels on the same day
+  ✓ Loading an equivalent new system graph rebinds cached region references
+  ✓ Offscreen territory centre does not suppress the on-screen piece
+  ✓ Near left and right viewport edges, singleton names stay visible
+  ✓ Sidebar is a real obstruction; selected region label moves into free space
+  ✓ Surveyed colony with different owner draws a mixed-sovereignty marker
+  ✓ System panel distinguishes system control from colony ownership
+  ✓ Unsurveyed colonies do not disclose mixed ownership
+  ✓ Unknown colony owner uses neutral identity and names are HTML-escaped
+  ✓ Repeated label planning/drawing preserves save and RNG
+  ✓ Real pointer tap still opens a system below the new labels
+  ✓ Fleet hit rows keep priority, labels avoid them, real tap selects that fleet
+  ✓ DPR 2 gives the same CSS label positions and still renders native pixels
+  ✓ Owner names persist in siyasi, radar=false, logistics=false
+  ✓ Owner names persist in siyasi, radar=false, logistics=true
+  ✓ Owner names persist in siyasi, radar=true, logistics=false
+  ✓ Owner names persist in siyasi, radar=true, logistics=true
+  ✓ Owner names persist in diplomasi, radar=false, logistics=false
+  ✓ Owner names persist in diplomasi, radar=false, logistics=true
+  ✓ Owner names persist in diplomasi, radar=true, logistics=false
+  ✓ Owner names persist in diplomasi, radar=true, logistics=true
+  ✓ Owner names persist in savas, radar=false, logistics=false
+  ✓ Owner names persist in savas, radar=false, logistics=true
+  ✓ Owner names persist in savas, radar=true, logistics=false
+  ✓ Owner names persist in savas, radar=true, logistics=true
+  ✓ Far zoom never labels entirely unseen empires
+  ✓ Shared discovery shows location without granting third-party diplomatic identity
+  ✓ Crowded viewport gives selected region first choice without label overlaps
+  ✓ Real old player save still draws at far, medium and near zoom without changing data
+
+GEÇEN: 40 KALAN: 0

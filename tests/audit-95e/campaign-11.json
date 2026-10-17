@@ -1,0 +1,80 @@
+{
+  "sourceSha": {
+    "main.js": "02a6b4f5521f185d46a50a38abba82483017abdde52ff79fb13e52bc5b291dfa",
+    "ai.js": "ae741b8abcb6930c50971f2dab8143f2c28ff49dec015d5f92589982f46e9c39",
+    "diplomacy.js": "17193156f05f89810cdfd26522cf642c120554908887ad184087b9ff7f07f79d",
+    "economy.js": "a5e6e7ebb6051d626f670127d711239d31f4b4dfa7df289f5a47555ceaa62553",
+    "ui.js": "371f61c8a8f69e5bf8691315564258848957f788e85ace7143932e5a15cd0048",
+    "news.js": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
+    "inbox.js": "90c0341025f14e4983a517ec60ff94f0598e8d9c83c02ba8a37f21a931a7035c",
+    "construction.js": "d9b544b0328f26576ff90e02fe49c1b7f3798dfd844a8c39ee8dc6c0890debda",
+    "archive-ui.js": "aba318020b04c4e5c2264ddf402da345b11c8763346234d641f38db5a6e4d4fb"
+  },
+  "root": "/workspace/scratch/50b0250bea79/stars",
+  "seed": 11,
+  "requestedMonths": 120,
+  "elapsedMonths": 120,
+  "systems": 100,
+  "empires": 14,
+  "ms": 54106,
+  "failure": null,
+  "builders": [
+    45
+  ],
+  "started": 1,
+  "completed": 1,
+  "monthly": [
+    {
+      "month": 30,
+      "saveCodeUnits": 189047,
+      "news": 0,
+      "hidden": 38,
+      "pending": 7,
+      "activeBuilders": 0,
+      "fleets": 60
+    },
+    {
+      "month": 60,
+      "saveCodeUnits": 250899,
+      "news": 1,
+      "hidden": 79,
+      "pending": 3,
+      "activeBuilders": 0,
+      "fleets": 69
+    },
+    {
+      "month": 90,
+      "saveCodeUnits": 306251,
+      "news": 1,
+      "hidden": 109,
+      "pending": 7,
+      "activeBuilders": 0,
+      "fleets": 88
+    },
+    {
+      "month": 120,
+      "saveCodeUnits": 371148,
+      "news": 3,
+      "hidden": 135,
+      "pending": 6,
+      "activeBuilders": 0,
+      "fleets": 97
+    }
+  ],
+  "negative": [],
+  "shortages": 0,
+  "lowEnergyEmpireMonths": 0,
+  "reloads": 1,
+  "saveBytes": 375352,
+  "metrics": {
+    "ordered": 1,
+    "started": 1,
+    "completed": 1,
+    "failed": 0,
+    "aiOrdered": 1,
+    "aiStarted": 1,
+    "aiCompleted": 1,
+    "routeSearches": 0
+  },
+  "newsBytes": 51048
+}

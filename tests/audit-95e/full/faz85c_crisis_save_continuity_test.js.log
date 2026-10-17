@@ -1,0 +1,167 @@
+
+A. SÖZDİZİMİ, DOSYA SINIRI VE KARANTİNA
+  ✓ node --check ai.js
+  ✓ node --check archive-ui.js
+  ✓ node --check audio.js
+  ✓ node --check combat.js
+  ✓ node --check construction.js
+  ✓ node --check diplomacy.js
+  ✓ node --check economy.js
+  ✓ node --check inbox.js
+  ✓ node --check main.js
+  ✓ node --check map.js
+  ✓ node --check news.js
+  ✓ node --check sw.js
+  ✓ node --check ui.js
+  ✓ depolama anahtarı korundu: yildiz:save
+  ✓ depolama anahtarı korundu: yh_audio
+  ✓ depolama anahtarı korundu: yh_advisor
+  ✓ depolama anahtarı korundu: yh_autoev
+  ✓ depolama anahtarı korundu: yh_bg
+  ✓ depolama anahtarı korundu: yh_radar
+  ✓ depolama anahtarı korundu: yh_templates
+  ✓ depolama anahtarı korundu: __yh_probe
+  ✓ depolama anahtarı korundu: __yh_diag
+  ✓ sw cache = 'stars-v95e'
+  ✓ sw KABUK listesi duruyor
+  ✓ sw fetch davranışı duruyor
+  ✓ sw activate davranışı duruyor
+  ✓ kayıt sürümü v:8 (Faz 85F ile yükseldi)
+  ✓ world (85A) şeması korundu
+  ✓ threats bölümü eklendi
+  ✓ restoreCrisisWorld, restorePoliticalWorld SONRASINDA
+  ✓ restoreCrisisWorld, rebuildDerivedStateAfterLoad ÖNCESİNDE
+  ✓ restoreCrisisWorld, economyTick(true) ÖNCESİNDE
+  ✓ setupGame kriz sıfırlaması initCrisis ÖNCESİNDE
+  ✓ kapsam dışı alan threats içinde YOK: G.upheaval
+  ✓ kapsam dışı alan threats içinde YOK: G.upAge
+  ✓ kapsam dışı alan threats içinde YOK: G.upLast
+  ✓ kapsam dışı alan threats içinde YOK: G.wildId
+  ✓ kapsam dışı alan threats içinde YOK: G.nests
+  ✓ kapsam dışı alan threats içinde YOK: G.ruins
+  ✓ kapsam dışı alan threats içinde YOK: G.raids
+  ✓ kapsam dışı alan threats içinde YOK: G.market
+  ✓ kapsam dışı alan threats içinde YOK: G.inbox
+  ✓ kapsam dışı alan threats içinde YOK: G.chainQueue
+  ✓ resetCrisisRuntimeState delete kullanıyor (null DEĞİL)
+  ✓ G.crisisId = null ataması kodda YOK
+  ✓ 85B: advanceMonthlyWorld duruyor
+  ✓ 85B: aylık dünya yalnız init===false yolunda
+  ✓ SITUATIONS kataloğu duruyor
+  ✓ situationsTick tanımı duruyor
+  ✓ situationsTick çağrısı PASİF (yorumlu)
+  ✓ DURUMLAR sekmesi gizli
+  ✓ 200 ayda situation tetiklenmedi — 0
+  ✓ audio.js byte-for-byte aynı — 804226980179698a
+  ✓ manifest.json byte-for-byte aynı — 6b8305490e9a55e9
+  ✓ map kaynak kilidi: 91C altyapısı + 93A hedef seçimi
+
+B. SENARYO 1 — BEKLEYEN KRİZ
+  ✓ kayıt sürümü v:8 (Faz 85F) — v=8
+  ✓ threats alanları tam (crisis, crisisId) — crisis,crisisId
+  ✓ stage=0 korundu — 0
+  ✓ age korundu — 0 → 0
+  ✓ at korundu — 2224
+  ✓ atMonth korundu — 170
+  ✓ warned korundu (false)
+  ✓ over korundu (false)
+  ✓ 10 ardışık yükleme age değerini ARTIRMADI — 0,0,0,0,0,0,0,0,0,0
+  ✓ yükleme tek başına krizi BAŞLATMADI
+  ✓ kriz tarafı yokken crisisId undefined (null DEĞİL) — undefined
+
+C. SENARYO 2 — AKTİF KRİZ
+  ✓ kriz gerçekten aktifti (kurulum geçerli)
+  ✓ 5 yükleme sonrası crisis nesnesi BİREBİR aynı — {"stage":2,"at":2221,"atMonth":1,"age":1,"kills":5,"need":120,"over":false,"warn
+  ✓ stage korundu (2) — 2
+  ✓ timer korundu (7) — 7
+  ✓ kills korundu (5) — 5
+  ✓ need korundu (120) — 120
+  ✓ contrib korundu — {"0":40,"1":15}
+  ✓ warned korundu (true)
+  ✓ over korundu (false)
+  ✓ crisisActive() yükleme sonrası TRUE
+  ✓ crisisId doğru crisisSide devletine bağlı — id=9 Hiçlik Sürüsü
+  ✓ kriz filoları/gemileri/sistemleri/emirleri korundu — 3 filo · 6 gemi
+
+D. SENARYO 3 — TEK GERÇEK crisisTick()
+  ✓ yükleme sayısı sonucu ETKİLEMİYOR (aynı başlangıç) — {"s":2,"t":7,"a":1,"o":false,"f":3}
+  ✓ 8 yükleme tek başına sayacı İLERLETMEDİ — {"s":2,"t":7,"a":1,"o":false,"f":3}
+  ✓ taze yükleme + tek tik = 8 yükleme + tek tik — {"s":2,"t":8,"a":2,"o":false,"f":3} / {"s":2,"t":8,"a":2,"o":false,"f":3}
+  ✓ tek tik sayacı YALNIZ BİR kez ilerletti — {"s":2,"t":7,"a":1,"o":false,"f":3} → {"s":2,"t":8,"a":2,"o":false,"f":3}
+
+E. SENARYO 4 — ÇÖZÜLMÜŞ KRİZ
+  ✓ over=true korundu
+  ✓ stage=3 korundu — 3
+  ✓ yükleme krizi YENİDEN BAŞLATMADI
+  ✓ yeni kriz filosu DOĞMADI — 0
+  ✓ toplam filo sayısı değişmedi — 28/28
+  ✓ guardian korundu
+  ✓ crisisScore korundu (380) — 380
+  ✓ crisisId hâlâ gerçek crisisSide devletine bağlı — id=9
+
+F. SENARYO 5 — KRİZ KAPALI
+  ✓ kayıtta crisis null
+  ✓ kayıtta crisisId null (kimlik yok işareti)
+  ✓ yükleme sonrası G.crisis null korundu
+  ✓ çalışma zamanında crisisId undefined (null DEĞİL) — undefined
+  ✓ crisisId anahtarı G üzerinden tamamen silindi
+  ✓ G.emps[null] üzerinden OYUNCUYA yanlış bağlanma YOK
+
+G. SENARYO 6 — AYNI OTURUMDA FARKLI KAYIT
+  ✓ OYUN A aktif krizle yüklendi — id=9
+  ✓ OYUN B: G.crisis A'dan SIZMADI
+  ✓ OYUN B: crisisId A'dan SIZMADI (undefined) — undefined
+  ✓ OYUN B: crisisActive false
+  ✓ OYUN B: kriz devleti yok — 0
+
+H. SENARYO 7 — YENİ OYUN (setupGame)
+  ✓ yeni oyunda eski crisisId SİLİNDİ — undefined
+  ✓ yeni oyunda kriz devleti henüz yok — 0
+  ✓ yeni oyunda bekleyen kriz kuruldu (stage 0)
+  ✓ ensureCrisisEmpire GERÇEK yeni devlet oluşturdu — Kadim Açlık #9
+  ✓ mevcut hiçbir devletin adı/rengi/etiği/savaşı kriz devletine dönmedi
+
+I. SENARYO 8 — BOZUK crisisId
+  ✓ normal devleti gösteren crisisId KABUL EDİLMEDİ — id 1 → 9
+  ✓ gerçek crisisSide adayından deterministik onarım yapıldı — crisisId 1 geçersiz → 9
+  ✓ normal devlet kriz tarafına DÖNÜŞTÜRÜLMEDİ
+  ✓ aralık dışı crisisId de onarıldı — crisisId 999 geçersiz → 9
+  ✓ aday YOKKEN normal devlet ELE GEÇİRİLMEDİ — crisisId undefined
+  ✓ taraf bulunamayan aktif kriz güvenle devre dışı bırakıldı — aktif kriz tarafsız kaldı — güvenli biçimde devre dışı
+
+J. SENARYO 9 — V4 GÖÇÜ
+  ✓ v4 (kriz tarafı yok) HATA ATMADAN açıldı — ok
+  ✓ bekleyen zamanlayıcı kuruldu (stage=0) — 0
+  ✓ atMonth CRISIS_WINDOW normal aralığında [150,200] — 156
+  ✓ age kayıt gününden türetildi (930/30=31) — 31
+  ✓ zehirli crisisId temizlendi (undefined) — undefined
+  ✓ yükleme krizi başlatmadı
+  ✓ göç DETERMİNİSTİK (3 tekrar aynı)
+  ✓ göç RNG TÜKETMEDİ — -945300645 → -945300645
+  ✓ göç dürüstçe raporlandı (özgün tarih kurtarılamaz) — {"migrated":true,"from":4,"repair":null,"note":"v4: kriz tarafı yok → bekleyen zamanlayıcı
+  ✓ v4 aktif kriz: crisisId GERÇEK crisisSide devletine bağlandı — id=9
+  ✓ kriz filoları ÖKSÜZ kalmadı — 3 → 3
+  ✓ kriz aktif olarak sürdürüldü — stage=1
+  ✓ kurtarılamayan alanlara dürüst varsayılan verildi
+  ✓ göç DETERMİNİSTİK ve RNG sabit
+  ✓ kurtarılamayan bilgi açıkça raporlandı — {"migrated":true,"from":4,"repair":null,"note":"v4: aktif kriz tarafı+filo bulundu → crisi
+  ✓ crisisSide var + filo yok → ÇÖZÜLMÜŞ kabul edildi — over=true
+  ✓ kriz YENİDEN BAŞLATILMADI (galaksi 2. kez cezalandırılmadı) — kriz filo=0
+  ✓ yükleme sonrası tikler yeni dalga doğurmadı — 28 → 28
+  ✓ crisisId yine de gerçek devlete bağlı (öksüz değil) — id=9
+  ✓ göç DETERMİNİSTİK
+  ✓ çözülmüş varsayımı açıkça raporlandı — {"migrated":true,"from":4,"repair":null,"note":"v4: kriz tarafı var ama yaşayan kriz filos
+
+K. SENARYO 10 — 85A / 85B REGRESYONU
+  ✓ 85B: 6 yüklemede kalkan TAM 4 kaldı — 4→4→4→4→4→4→4
+  ✓ 85B: economyTick(true) hiçbir aylık sistemi ilerletmedi — 4 → 4
+  ✓ 85B: economyTick(false) hâlâ normal ilerliyor — 4 → 8
+  ✓ 85A: memAge/cncAge korundu — 137/64
+  ✓ 85A: Konsey + hazine korundu
+  ✓ 85A: fedUid / sandbox / rebelAlliance korundu
+  ✓ 85C: kriz aynı yüklemelerde de korundu
+
+══════════════════════════════════════════
+  GEÇEN: 140   KALAN: 0
+══════════════════════════════════════════
+

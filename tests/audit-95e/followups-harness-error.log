@@ -1,0 +1,15 @@
+/workspace/scratch/50b0250bea79/stars/tests/run-95e-followups.js:6
+async function worker(){while(next<names.length){const name=names[next++],r=await new Promise(resolve=>{const p=spawn(process.execPath,[path.join(__dirname,name)],{cwd:root,env:process.env});let output='';const start=Date.now(),timer=setTimeout(()=>p.kill('SIGKILL'),180000);p.stdout.on('data',b=>output+=b);p.stderr.on('data',b=>output+=b);p.on('close',exit=>{clearTimeout(timer);fs.writeFileSync(path.join(dir,name+'.log'),output);const m=output.match(/GEÇEN:\s*(\d+)\s+KALAN:\s*(\d+)/);resolve({name,exit,pass:m?+m[1]:0,fail:m?+m[2]:1,durationMs:Date.now()-start,details:exit===0?'':output.split('\n').filter(l=>l.includes('✗')||l.includes('Error')).join('\n')});});results.push(r);console.log(JSON.stringify(r));}}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ^
+
+SyntaxError: missing ) after argument list
+    at wrapSafe (node:internal/modules/cjs/loader:1804:18)
+    at Module._compile (node:internal/modules/cjs/loader:1846:20)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+
+Node.js v24.19.0

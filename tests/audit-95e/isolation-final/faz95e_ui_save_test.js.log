@@ -1,0 +1,18 @@
+✓ 740x360 archive input host preserves one existing camera and bounded markup
+✓ 360x740 archive input host preserves one existing camera and bounded markup
+✓ 900x420 archive input host preserves one existing camera and bounded markup
+✓ news pagination bounds DOM cards to thirty, then loads older known records
+✓ actual input event handlers filter rows while keeping search field mounted
+✓ loading a save makes captured accept closure inert
+✓ same accept closure can never execute resource grant twice
+✓ decision outside inbox updates same source receipt
+✓ active task, pending offer and read news survive one save together
+✓ failed load rolls back all three module roots and object identity
+✓ new PWA shell contains every independent 95E module and upgraded cache
+✓ reviewed mobile CSS is additive and rejects mutations
+✓ archive and construction UI do not mutate gameplay RNG
+✓ orientation and background recovery keep persistent queues and one camera
+✓ closing modal invalidates archive and construction action tokens
+✓ construction fault pauses only its module and does not abort daily simulation
+✓ news fault leaves diplomatic decisions usable and resets on a successful load
+GEÇEN: 17 KALAN: 0

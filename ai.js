@@ -2387,20 +2387,24 @@ function aiStructTick(){
 
     /* 1) Yerinde bekleyen inşaatçı varsa yapıyı kur */
     for (const f of builders){
+      if(typeof RemoteConstruction!=='undefined'&&RemoteConstruction.tasks(f).length)continue;
       if (f.sys < 0 || (f.path && f.path.length) || f.mv || f.combat || f.building!==undefined || f.ships.some(s=>s.busy!==undefined)) continue;
       const sys = G.sys[f.sys];
       const key = aiPickStruct(e, sys);
-      if (key && startStruct(e, sys, key, f)) break;      // ayda bir inşaat
+      if (key && (typeof RemoteConstruction!=='undefined'?RemoteConstruction.enqueue(f,sys.id,key).ok:startStruct(e, sys, key, f))) break;      // ayda bir inşaat
     }
 
     /* 2) Boştaki inşaatçıya hedef ata */
     for (const f of G.fleets){
       if (f.e !== e.id || !fleetHasRole(f, 'insaat')) continue;
+      if(typeof RemoteConstruction!=='undefined'&&RemoteConstruction.tasks(f).length)continue;
       if ((f.path && f.path.length) || f.mv || f.combat || f.building!==undefined) continue;
       if (f.sys >= 0 && aiPickStruct(e, G.sys[f.sys])) continue;   // zaten uygun yerde
       const hedef = aiStructTarget(e, f);
-      if (hedef && hedef.id !== f.sys && typeof orderMove === 'function')
-        aiMove(e,f,hedef.id);
+      if (hedef && hedef.id !== f.sys && typeof orderMove === 'function'){
+        if(typeof RemoteConstruction!=='undefined'){const key=aiPickStruct(e,hedef);if(key)RemoteConstruction.enqueue(f,hedef.id,key);}
+        else aiMove(e,f,hedef.id);
+      }
     }
 
     /* 3) İnşaatçı yoksa ve ekonomi elveriyorsa üret */

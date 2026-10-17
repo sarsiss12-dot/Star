@@ -1,0 +1,20 @@
+✓ more than six concurrent offers persist independently of notification ring
+✓ overflowed offer accepts through canonical engine exactly once
+✓ receipt survives save/load and direct canonical replay is blocked
+✓ expiration boundary rejects accept and preserves balances
+✓ resources revalidate at acceptance; failed execution keeps pending card
+✓ new embargo invalidates trade offer before signature
+✓ reject has no resource side effect and cannot repeat penalty
+✓ loading a different world makes old action closures inert
+✓ save while examining diplomacy retains same offer and return action
+✓ old notification-only save migrates surviving offers without inventing history
+✓ federation invite uses original token, revalidates charter and expires
+✓ federation acceptance joins existing federation once with consent rules
+✓ federation pending ballot archives and records original vote once
+✓ replacement ballot cannot consume old saved callback or token
+✓ accepted ongoing war decision cannot be executed through old archive twice
+✓ same terms are not regenerated when notification was evicted
+✓ new status quo proposal can arrive after former expiration
+✓ history bounded to 256 while pending cards remain
+✓ unknown malformed records are discarded and HTML remains text
+GEÇEN: 19 KALAN: 0

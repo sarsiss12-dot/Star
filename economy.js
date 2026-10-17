@@ -1337,6 +1337,7 @@ function doColonize(e, sys, pl){
   recalcMods(e);
   if (typeof facEvent === 'function') facEvent(e,'colony');
   if (!e.ai) say('Koloni kuruldu — ' + pl.name, 'win');
+  recordNews({category:'colony',empires:[e.id],system:sys.id,planet:pl.i,key:'colony:'+sys.id+':'+pl.i+':'+(pl.shareRev||0),title:'Yeni koloni',text:e.name+' — '+pl.name});
 }
 
 /* ---------- TİCARET AKIŞI ----------
@@ -2733,6 +2734,7 @@ function secede(e, sys, pl){
   yeni.ethics = schismEthics(e);
   if (typeof shiftColor === 'function') yeni.col = shiftColor(e.col);
   G.emps.push(yeni);
+  recordNews({category:'politics',empires:[yeni.id],key:'empire-start:'+yeni.id,title:'Yeni devlet',text:yeni.name+' siyasi varlık kazandı',important:true});
 
   /* Çekirdek gezegen */
   const devret = (sy2, pl2) => {

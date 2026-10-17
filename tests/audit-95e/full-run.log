@@ -1,0 +1,149 @@
+faz83_2_brand_test.js: 62/1 (exit 1)
+  ✗ script yükleme sırası korundu — main.js → map.js → combat.js → ai.js → diplomacy.js → economy.js → news.js → inbox.js → construction.js → ui.js → archive-ui.js → audio.js
+faz83_3_render_recovery_test.js: 57/1 (exit 1)
+  ✗ script yükleme sırası değişmedi — main.js → map.js → combat.js → ai.js → diplomacy.js → economy.js → news.js → inbox.js → construction.js → ui.js → archive-ui.js → audio.js
+faz84a_intel_dedup_test.js: 78/6 (exit 1)
+  ✗ yükleme sırası değişmedi
+  ✗ 200 ayda situation tetiklenmedi — HATA: on is not defined
+  ✗ 120 ay + kaydet/yükle — 120ay:on is not defined
+  ✗ UI.tab hâlâ function
+  ✗ leaderPool saf kaldı
+  ✗ situation pasif kaldı
+faz83_4_redraw_leaders_test.js: 71/4 (exit 1)
+  ✗ yükleme sırası korundu
+  ✗ 120 ay + harita + sekme + kayıt — 120ay:on is not defined
+  ✗ UI.tab hâlâ function
+  ✗ ralli/loopBuild korundu
+faz84b_vassal_state_dedup_test.js: 121/1 (exit 1)
+  ✗ yükleme sırası değişmedi
+faz84c_state_visibility_gate_test.js: 117/1 (exit 1)
+  ✗ yükleme sırası değişmedi
+faz85a_political_save_integrity_test.js: 173/0 (exit 0)
+faz85b_load_idempotency_test.js: 132/0 (exit 0)
+faz85c_crisis_save_continuity_test.js: 140/0 (exit 0)
+faz85e_event_inbox_continuity_test.js: 146/1 (exit 1)
+  ✗ 200 ayda situation tetiklenmedi — HATA: on is not defined
+faz85d_campaign_save_continuity_test.js: 183/0 (exit 0)
+faz86a_intel_command_center_test.js: 116/7 (exit 1)
+  ✗ 200 ayda situation tetiklenmedi — HATA: on is not defined
+  ✗ ambargo UYGULAMAYAN hedef için operasyon KİLİTLİ
+  ✗ ambargo uygulayan hedef için AÇIK
+  ✗ yanlış hedefte runOp reddedildi, kaçakçılık kurulmadı
+  ✗ yanlış hedefte MAĞDUR kaydı oluşmadı (kimlik tutarsızlığı yok)
+  ✗ doğru hedefte operasyon çalıştı ve AYNI devletin hattı delindi
+  ✗ delinen hat ile mağdur kaydı AYNI devlet — B.hitLog=undefined
+faz86b_deal_engine_test.js: 126/2 (exit 1)
+  ✗ 200 ayda situation tetiklenmedi — HATA: on is not defined
+  ✗ 240 aylık simülasyon hatasız — on is not defined
+faz86c_1_quote_effective_plan_test.js: 97/1 (exit 1)
+  ✗ 200 ayda situation tetiklenmedi — HATA: on is not defined
+faz85f_spatial_simulation_continuity_test.js: 164/0 (exit 0)
+faz86c_2_transaction_test.js: 107/0 (exit 0)
+faz86c_3_ai_negotiation_test.js: 86/0 (exit 0)
+faz86c_4h_map_input_test.js: 79/0 (exit 0)
+faz86c_4h_r1_exact_regression_test.js: 108/0 (exit 0)
+faz86c_4_reciprocal_offers_test.js: 94/0 (exit 0)
+faz86c_4h_r2_surface_camera_layers_test.js: 81/0 (exit 0)
+faz86c_4h_r3_surface_lifecycle_test.js: 93/0 (exit 0)
+faz86c_4h_r4_diagnosis_test.js: 89/0 (exit 0)
+faz86c_4h_r4_targeted_diag_test.js: 91/0 (exit 0)
+faz86c_5_1_ui_portraits_native_canvas_test.js: 48/0 (exit 0)
+faz86c_5_diagnostics_test.js: 38/0 (exit 0)
+faz86c_5_native_canvas_test.js: 66/0 (exit 0)
+faz86c_strict_deal_ai_test.js: 143/0 (exit 0)
+faz86c_6_transaction_acceptance_test.js: 529/0 (exit 0)
+faz86e_diplomacy_center_test.js: 45/0 (exit 0)
+faz86d_envoy_missions_test.js: 58/0 (exit 0)
+faz86g_integration_handoff_test.js: 16/0 (exit 0)
+faz87a_espionage_feedback_test.js: 36/0 (exit 0)
+faz87b_ai_operation_selection_test.js: 26/0 (exit 0)
+faz87c_1_intrigue_outcomes_test.js: 45/0 (exit 0)
+faz87c_special_operation_outcomes_test.js: 39/0 (exit 0)
+faz87d_offer_repetition_test.js: 8/16 (exit 1)
+✗ 12 zorlanmış aylık tekrar: tek teklif ve tek ilişki bedeli — evalmachine.<anonymous>:8
+TypeError: UI._hooks.offNo is not a function
+✗ ret masraf/RNG tüketmez, 27 ay hatırlanır ve çift dokunuş tek ceza verir — evalmachine.<anonymous>:2
+TypeError: reject is not a function
+✗ ret sınırı 809 gün: bildirim false — evalmachine.<anonymous>:1
+TypeError: UI._hooks.offNo is not a function
+✗ ret sınırı 810 gün: bildirim true — evalmachine.<anonymous>:1
+TypeError: UI._hooks.offNo is not a function
+✗ ret sınırı 811 gün: bildirim true — evalmachine.<anonymous>:1
+TypeError: UI._hooks.offNo is not a function
+✗ damga ve madde sırası ret kapısını aşamaz — evalmachine.<anonymous>:1
+TypeError: UI._hooks.offNo is not a function
+✗ farklı miktar ve farklı devlet aynı gün teklif gönderebilir — evalmachine.<anonymous>:1
+TypeError: UI._hooks.offNo is not a function
+✗ nap reddi de aynı şartı bekletir — evalmachine.<anonymous>:1
+TypeError: UI._hooks.offNo is not a function
+✗ pact reddi de aynı şartı bekletir — evalmachine.<anonymous>:1
+TypeError: UI._hooks.offNo is not a function
+✗ ally reddi de aynı şartı bekletir — evalmachine.<anonymous>:1
+TypeError: UI._hooks.offNo is not a function
+✗ karşı teklif hazırlamak ret sayılmaz, karşı kartın reddi sayılır — evalmachine.<anonymous>:1
+TypeError: UI._hooks.offCounter is not a function
+✗ kabul iki kez uygulanamaz ve ret düğmesi sonra ceza veremez — evalmachine.<anonymous>:2
+TypeError: yes is not a function
+✗ eski dünyadaki açık ret/kabul düğmeleri yeni kaydı değiştiremez — evalmachine.<anonymous>:2
+TypeError: no is not a function
+✗ başka pencere açılınca eski teklif callbackleri etkisiz — evalmachine.<anonymous>:2
+TypeError: no is not a function
+✗ yeni teklif eski teklif callbackini geçersiz kılar — evalmachine.<anonymous>:2
+TypeError: no is not a function
+✗ v8 ret süresini korur, eski callback kalıcı kayda müdahale edemez — evalmachine.<anonymous>:1
+TypeError: UI._hooks.offNo is not a function
+faz88a_1_ship_dispatch_test.js: 30/0 (exit 0)
+faz88a_fleet_routes_test.js: 38/0 (exit 0)
+faz88b_combat_feedback_test.js: 24/0 (exit 0)
+faz89a_memory_factions_test.js: 24/0 (exit 0)
+faz86f_ai_balance_test.js: 25/0 (exit 0)
+faz90rc_1_save_boundary_test.js: 19/0 (exit 0)
+faz90rc_2_load_feedback_test.js: 14/0 (exit 0)
+faz90rc_3_load_transaction_test.js: 48/0 (exit 0)
+faz90rc_release_candidate_test.js: 15/0 (exit 0)
+faz89b_daily_campaign_test.js: 11/0 (exit 0)
+faz91a_special_presentation_test.js: 37/0 (exit 0)
+faz91b_faction_share_test.js: 8/0 (exit 0)
+faz91c_ai_candidates_test.js: 6/0 (exit 0)
+faz91c_pirate_combat_test.js: 21/0 (exit 0)
+faz91d_1_fleet_names_native_canvas_test.js: 29/0 (exit 0)
+faz91d_territory_native_canvas_test.js: 40/0 (exit 0)
+faz91b_campaign_observer_test.js: 5/0 (exit 0)
+faz91e_1_federation_policy_test.js: 31/0 (exit 0)
+faz91e_federation_laws_test.js: 31/0 (exit 0)
+faz92b1_ship_lock_test.js: 19/0 (exit 0)
+faz92a_war_contribution_test.js: 34/0 (exit 0)
+faz92c_settlement_apply_test.js: 28/0 (exit 0)
+faz92b_settlement_proposal_test.js: 33/0 (exit 0)
+faz92d_settlement_agenda_test.js: 14/0 (exit 0)
+faz93a1_production_panels_test.js: 21/0 (exit 0)
+faz93a_logistics_targets_test.js: 15/0 (exit 0)
+faz93b_pending_shipments_test.js: 31/0 (exit 0)
+faz93c_fleet_composition_test.js: 47/0 (exit 0)
+faz93d1_navy_production_test.js: 17/0 (exit 0)
+faz93d_research_planner_test.js: 33/0 (exit 0)
+faz93d_science_ui_test.js: 20/0 (exit 0)
+faz93e1_doctrine_test.js: 32/0 (exit 0)
+faz93e_specialization_test.js: 34/0 (exit 0)
+faz94a_camera_test.js: 27/0 (exit 0)
+faz94b_exploration_test.js: 37/0 (exit 0)
+faz93d1_navy_campaign_test.js: 8/0 (exit 0)
+faz94d1_war_visibility_test.js: 34/0 (exit 0)
+faz94c_camera_trade_test.js: 32/0 (exit 0)
+faz94d_mobile_diplomacy_war_test.js: 28/0 (exit 0)
+faz95a_strategic_ai_test.js: 51/0 (exit 0)
+faz95c1_diplomacy_test.js: 32/0 (exit 0)
+faz95b_federation_reform_test.js: 68/0 (exit 0)
+faz95c1_storage_test.js: 15/0 (exit 0)
+faz95c1_logistics_test.js: 24/0 (exit 0)
+faz95c1_ui_test.js: 29/0 (exit 0)
+faz95d_identity_test.js: 23/0 (exit 0)
+faz95c_joint_campaign_test.js: 59/0 (exit 0)
+faz95d_map_test.js: 0/1 (exit 1)
+Error: Cannot find module './helpers/identity-fixture'
+faz95d_war_preview_test.js: 0/1 (exit 1)
+Error: Cannot find module './helpers/identity-fixture'
+faz95e_construction_test.js: 21/0 (exit 0)
+faz95e_inbox_test.js: 20/0 (exit 0)
+faz95e_news_test.js: 20/0 (exit 0)
+SUITES: 89 GEÇEN: 5070 KALAN: 43
