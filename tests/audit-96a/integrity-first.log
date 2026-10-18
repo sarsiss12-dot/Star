@@ -1,0 +1,11 @@
+✓ actual 1 edge distance, preparation and arrival timing
+✓ actual 2 edge distance, preparation and arrival timing
+✓ actual 3 edge distance, preparation and arrival timing
+✓ delivery API cannot credit a load before its physical arrival
+✓ aggregate promised and loaded amounts respect shared route capacity
+✓ shared-system port follows owning colony and a seized colony ceases to be a port
+✓ dead partner expires contract and destroys both real outgoing loads
+✓ freight inbox codec and signature retain ports, duration, frequency and amount
+✓ identical seed and operations produce identical convoy ids, amounts, movements and receipts
+✓ total cargo ledger equals delivered plus real loss plus in-transit load after raids and reload
+GEÇEN: 10 KALAN: 0

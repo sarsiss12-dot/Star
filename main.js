@@ -2326,6 +2326,7 @@ function setupGame(cfg){
   if(typeof GalacticNews!=='undefined')G.news=GalacticNews.empty();
   if(typeof DiplomaticInbox!=='undefined')G.diplomaticInbox=DiplomaticInbox.empty();
   if(typeof RemoteConstruction!=='undefined')G.construction=RemoteConstruction.empty();
+  if(typeof Commerce!=='undefined')G.commerce=Commerce.empty();
   G.cfg = cfg;
   G.warLedger = warLedgerEmpty();
   G.settlements = settlementEmpty();
@@ -4070,6 +4071,7 @@ function dailyTick(dt){
   if(typeof RemoteConstruction!=='undefined')runModule95E('inşaat',()=>RemoteConstruction.tick());
   if(typeof DiplomaticInbox!=='undefined')runModule95E('gelen kutusu',()=>DiplomaticInbox.sync());
   stepFleets(dt);
+  if(typeof Commerce!=='undefined')Commerce.tick(dt);
   // tersane kuyrukları
   for (const sys of G.sys){
     if (!sys.queue.length) continue;
@@ -4115,56 +4117,9 @@ function dailyTick(dt){
    Rota üzerindeki düşman veya korsan filoları kervan yağmalar:
    rota bir süre kapanır, yağmalayan ganimet alır. */
 function raidTick(){
-  /* FAZ 53: korsan tehdidi kapalıysa hiç yağma olmaz */
-  if (G.cfg && G.cfg.pirates === false) return;
-  G.raids = G.raids || {};
-  /* ═══ FAZ 28 OPTİMİZASYONU ═══
-     Profil: monthTick 23.7 ms, içinde raidTick 4.2 ms (2. sırada).
-     Üç iç içe döngü vardı: imparatorluk × ticaret hattı × TÜM FİLOLAR,
-     her kombinasyonda isArmed() ve hypot(). 73 filo × ~40 hat = 2900+
-     mesafe hesabı/ay.
-     Çözüm: silahlı filolar bir kez süzülüp önbelleğe alınıyor;
-     hypot yerine kareli mesafe (karekök yok); mesafe testi
-     isArmed'dan ÖNCE yapılıyor. */
-  const armed = [];
-  for (const f of G.fleets){
-    if (f.combat || !f.ships.length) continue;
-    if (!isArmed(f)) continue;
-    armed.push(f);
-  }
-  if (!armed.length) return;
-  const R2 = 320 * 320;
-
-  for (const e of G.emps){
-    if (e.dead || e.wild || !e.trade || !e.trade.links) continue;
-    for (const L of e.trade.links){
-      if (L.bl && !L.raided) continue;                 // zaten kesik
-      const mx = (G.sys[L.a].x + G.sys[L.b].x)/2, my = (G.sys[L.a].y + G.sys[L.b].y)/2;
-      const mid = {x:mx, y:my};
-      for (const f of armed){
-        if (f.e === e.id) continue;
-        const dx = f.x - mx, dy = f.y - my;
-        if (dx*dx + dy*dy > R2) continue;              // karekök yok
-        const hostileF = e.war[f.e] || (G.emps[f.e] && G.emps[f.e].wild);
-        if (!hostileF) continue;
-        if (rnd() > .16) continue;
-        // yağma!
-        G.raids[L.key] = G.day + 90 + Math.floor(rnd()*120);
-        const loot = Math.round(30 + L.vol * 1.6);
-        const raider = G.emps[f.e];
-        if (raider){ raider.res.ene += loot; raider.res.min += Math.round(loot*.4); }
-        e.res.ene = Math.max(0, e.res.ene - loot);
-        fx({k:'boom', x:mid.x, y:mid.y, life:30});
-        if (typeof remember === 'function' && G.emps[f.e] && !G.emps[f.e].wild)
-          remember(e, f.e, 'kervanYagma');
-        if (e.id === 0) say('KERVAN YAĞMALANDI — ' + G.sys[L.a].name + '↔' + G.sys[L.b].name + ' (−' + loot + ' enerji)', 'war');
-        else if (f.e === 0) say('Kervan yağmalandı: +' + loot + ' enerji ganimet', 'win');
-        break;
-      }
-    }
-  }
-  // süresi dolan yağmalar temizlenir
-  for (const k in G.raids) if (G.raids[k] <= G.day) delete G.raids[k];
+  G.raids=G.raids||{};
+  for(const k in G.raids)if(G.raids[k]<=G.day)delete G.raids[k];
+  if(typeof Commerce!=='undefined')Commerce.raidTick();
 }
 
 /* ---------- muharebe ---------- */
@@ -7080,6 +7035,7 @@ function encodeOffer(o){
          target. `v` (miktar) ve `target` beyaz listede olmazsa teklif
          tutarı ve savaş/barış hedefi kayıtta KAYBOLURDU. */
       const e = {t};
+      if(t==='freight')for(const k of ['source','every','months'])if(_num(it[k])!==null)e[k]=it[k];
       if (_str(it.r) !== null) e.r = it.r;
       if (_num(it.v) !== null) e.v = it.v;
       if (_num(it.n) !== null) e.n = it.n;
@@ -7104,8 +7060,8 @@ function encodeOffer(o){
 function offerSignature(o){
   const e = encodeOffer(o);
   if (!e) return null;
-  const p = l => l.map(x => x.t + ':' + (x.r || x.k || x.id || x.target || '') +
-                            ':' + (x.v !== undefined ? x.v : (x.n || 0))).join('+');
+  const p = l => l.map(x => (x.t==='freight'?JSON.stringify(x):x.t + ':' + (x.r || x.k || x.id || x.target || '') +
+                            ':' + (x.v !== undefined ? x.v : (x.n || 0)))).join('+');
   return e.from + '|' + p(e.give) + '>' + p(e.want);
 }
 
@@ -7589,6 +7545,7 @@ function serialize(){
     news: typeof GalacticNews!=='undefined'?GalacticNews.state():undefined,
     diplomaticInbox: typeof DiplomaticInbox!=='undefined'?DiplomaticInbox.state():undefined,
     construction: typeof RemoteConstruction!=='undefined'?RemoteConstruction.state():undefined,
+    commerce: typeof Commerce!=='undefined'?Commerce.state():undefined,
     /* ═══ FAZ 77E: KAYIT KAPSAMI GENİŞLETİLDİ ═══
        KÖK NEDEN: uzay yapıları (built), süren inşaatlar (work),
        ralli noktaları ve coğrafya bayrakları HİÇ kaydedilmiyordu.
@@ -7826,6 +7783,8 @@ function applySaveData(d){
   if(typeof GalacticNews!=='undefined')GalacticNews.restore(d.news);
   if(typeof DiplomaticInbox!=='undefined')DiplomaticInbox.restore(d.diplomaticInbox);
   if(typeof RemoteConstruction!=='undefined')RemoteConstruction.restore(d.construction);
+  if(typeof Commerce!=='undefined')Commerce.restore(d.commerce);
+  if(typeof CommerceUI!=='undefined'){CommerceUI.selected=null;CommerceUI.hits=[];}
   loadCheckpoint('after:events');
   /* Geçici yetkilendirme alanları kayıttan taşınmaz ve
      önceki oturumdan sarkmamalı. */
@@ -8165,7 +8124,7 @@ function forceRedraw(sebep){
    Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
    Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
 /* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */
-const BUILD_ID = '95e3';
+const BUILD_ID = '96a';
 const DIAG_MAX = 40;
 const DIAG = [];
 function logDiag(tur, mesaj){

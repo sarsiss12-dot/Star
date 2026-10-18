@@ -1,0 +1,5 @@
+browserType.launch: Failed to launch chromium because executable doesn't exist at /tmp/chromium
+    at /workspace/scratch/357bc57bab3b/star96a/tests/browser-96a.js:10:534 {
+  log: [],
+  name: 'Error'
+}

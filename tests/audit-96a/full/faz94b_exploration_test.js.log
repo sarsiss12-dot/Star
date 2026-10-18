@@ -1,0 +1,38 @@
+✓ 2–5 ships reserve distinct targets within each empire
+✓ player and AI use the same deterministic target choice
+✓ real hyperlane distance beats nearby coordinate decoy
+✓ known pirate intermediate node yields a longer safe detour
+✓ unknown nest never changes choice; revealed nest does
+✓ hidden enemy fleet does not influence target scoring
+✓ new threat is checked before starting each movement leg
+✓ wait retains automation and resumes after pirate removal
+✓ supply floor blocks intermediate nodes and exposes reason
+✓ supply-safe alternate route remains usable
+✓ closed route cannot fallback through a known pirate node
+✓ loss and cancellation release live reservations
+✓ successful manual order wins; failed manual order preserves auto plan
+✓ already surveyed destination is released and replaced
+✓ active leg is retained when route is replanned
+✓ survey rewards still execute through ordinary movement and scanning
+✓ no available target does not permanently turn automation off
+✓ reservations are empire-local
+✓ duplicate loaded targets converge without duplicate orders
+✓ save v8 preserves plan, status, progress and RNG
+✓ invalid persisted reservation is safely reconstructed
+✓ planner consumes no RNG or free survey points
+✓ same-day repeated planning is bounded and stable
+✓ two simultaneous shipyards produce independent science fleets
+✓ small-screen fleet status uses existing compact status field
+✓ known usable gates participate in travel-time scoring
+✓ lost gate access invalidates route without hidden fallback
+✓ minor ETA improvement does not cause target thrashing
+✓ manual target is reserved ahead of automatic explorers
+✓ completed scan releases reservation and starts next distinct mission
+✓ old v8 science fleet without planner fields remains usable
+✓ save/load continues identical science movements and RNG
+✓ automatic retreat preserves exploration and resumes after arrival
+✓ automatic retreat cannot use a known dangerous shortcut
+✓ automatic arrival cannot steal another explorer survey
+✓ unsafe idle supply returns to known full supply without free repair
+✓ failed safe retreat cannot clear combat or create invulnerability
+GEÇEN: 37 KALAN: 0

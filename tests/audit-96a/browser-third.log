@@ -1,0 +1,15 @@
+✓ actual trade form signs via canonical AI response without immediate resource credit
+✓ invalid amount and same resource explain rejection through actual form click
+✓ real departure movement and actual arrival are the sole stock credit path
+✓ inbox freight accepts once by real nested DOM click and preserves receipts on load
+✓ cancel actual button prevents new loads while in-flight cargo still delivers
+✓ convoy layer DOM toggle leaves other independent flags unchanged and removes Canvas pixels
+✓ actual map tap selects moving convoy and locate button uses same camera
+✓ 740x360 real trade UI fits, scrolls and returns to actual convoy map
+✓ 360x740 real trade UI fits, scrolls and returns to actual convoy map
+✓ 1280x720 real trade UI fits, scrolls and returns to actual convoy map
+✓ save and reload preserves actual moving position and layer choice
+✓ foreign third-party hidden cargo never appears in list, draw or hit targets
+✓ real physical attack updates lost cargo UI without double phantom penalty
+✓ PWA installs freight modules and reopens offline with persistent v8 cargo
+BROWSER GEÇEN: 14 KALAN: 0

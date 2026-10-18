@@ -1,0 +1,7638 @@
+{
+  "root": "/workspace/scratch/357bc57bab3b/star96a",
+  "seed": 99,
+  "months": 120,
+  "systems": 45,
+  "ms": 4360,
+  "failure": null,
+  "monthly": [
+    {
+      "month": 1,
+      "energy": 1449.684426,
+      "consumerGoods": 800.8772751600002,
+      "militaryPower": 1990,
+      "pacts": 0,
+      "ports": 0,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 2,
+      "energy": 1423.148089846154,
+      "consumerGoods": 851.9912942400001,
+      "militaryPower": 1176,
+      "pacts": 0,
+      "ports": 0,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 3,
+      "energy": 1411.9429646030771,
+      "consumerGoods": 890.60797734,
+      "militaryPower": 842,
+      "pacts": 0,
+      "ports": 0,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 4,
+      "energy": 1450.7359992953848,
+      "consumerGoods": 931.6742876700001,
+      "militaryPower": 864,
+      "pacts": 0,
+      "ports": 0,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 5,
+      "energy": 1486.7275045646156,
+      "consumerGoods": 974.69301012,
+      "militaryPower": 1059,
+      "pacts": 0,
+      "ports": 0,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 6,
+      "energy": 1556.7175637276928,
+      "consumerGoods": 1018.3721255400001,
+      "militaryPower": 1225,
+      "pacts": 0,
+      "ports": 0,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 7,
+      "energy": 1644.5875171086445,
+      "consumerGoods": 1061.9412937800003,
+      "militaryPower": 1417,
+      "pacts": 2,
+      "ports": 1,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 8,
+      "energy": 1765.835450087106,
+      "consumerGoods": 1106.9941849800002,
+      "militaryPower": 1644,
+      "pacts": 2,
+      "ports": 1,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 9,
+      "energy": 1882.507150197875,
+      "consumerGoods": 1153.1403594900003,
+      "militaryPower": 2012,
+      "pacts": 2,
+      "ports": 1,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 10,
+      "energy": 2004.9094986655678,
+      "consumerGoods": 1199.62785837,
+      "militaryPower": 2380,
+      "pacts": 2,
+      "ports": 1,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 11,
+      "energy": 2127.7240943394136,
+      "consumerGoods": 1245.5475114900003,
+      "militaryPower": 2616,
+      "pacts": 2,
+      "ports": 1,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 12,
+      "energy": 2249.264780407106,
+      "consumerGoods": 1290.2149176900002,
+      "militaryPower": 2753,
+      "pacts": 2,
+      "ports": 2,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 13,
+      "energy": 2385.4241749265243,
+      "consumerGoods": 1333.7722641300002,
+      "militaryPower": 2350,
+      "pacts": 2,
+      "ports": 2,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 14,
+      "energy": 2544.0975696264527,
+      "consumerGoods": 1377.8103222900002,
+      "militaryPower": 2719,
+      "pacts": 2,
+      "ports": 3,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 15,
+      "energy": 2716.252404787437,
+      "consumerGoods": 1421.3141140500002,
+      "militaryPower": 2804,
+      "pacts": 2,
+      "ports": 3,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 16,
+      "energy": 2891.35984100734,
+      "consumerGoods": 1464.04691013,
+      "militaryPower": 3176,
+      "pacts": 2,
+      "ports": 3,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 17,
+      "energy": 3071.3561538878967,
+      "consumerGoods": 1506.03030477,
+      "militaryPower": 3503,
+      "pacts": 2,
+      "ports": 3,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 18,
+      "energy": 3244.7989798748613,
+      "consumerGoods": 1547.13816237,
+      "militaryPower": 3656,
+      "pacts": 2,
+      "ports": 3,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 19,
+      "energy": 3449.784047492244,
+      "consumerGoods": 1587.6107229299998,
+      "militaryPower": 3992,
+      "pacts": 2,
+      "ports": 4,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 20,
+      "energy": 3642.2045621590187,
+      "consumerGoods": 1627.42607085,
+      "militaryPower": 4135,
+      "pacts": 2,
+      "ports": 4,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 21,
+      "energy": 3858.0211589813744,
+      "consumerGoods": 1666.42139541,
+      "militaryPower": 4343,
+      "pacts": 2,
+      "ports": 4,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 22,
+      "energy": 4092.4018647064267,
+      "consumerGoods": 1704.7173997544546,
+      "militaryPower": 4444,
+      "pacts": 1,
+      "ports": 4,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 23,
+      "energy": 4263.981658991884,
+      "consumerGoods": 1743.0875781179088,
+      "militaryPower": 4934,
+      "pacts": 1,
+      "ports": 4,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 24,
+      "energy": 4476.152059951731,
+      "consumerGoods": 1779.881481256985,
+      "militaryPower": 5334,
+      "pacts": 1,
+      "ports": 4,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 25,
+      "energy": 4753.299326520211,
+      "consumerGoods": 1822.67716890812,
+      "militaryPower": 3293,
+      "pacts": 1,
+      "ports": 5,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 26,
+      "energy": 5032.652467687463,
+      "consumerGoods": 1863.2001203534378,
+      "militaryPower": 3721,
+      "pacts": 1,
+      "ports": 5,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 27,
+      "energy": 5339.293959250534,
+      "consumerGoods": 1903.0813033647864,
+      "militaryPower": 3626,
+      "pacts": 1,
+      "ports": 5,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 28,
+      "energy": 5642.773183379139,
+      "consumerGoods": 1941.4303630743807,
+      "militaryPower": 3735,
+      "pacts": 1,
+      "ports": 5,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 29,
+      "energy": 5942.711474560325,
+      "consumerGoods": 1979.2673058612486,
+      "militaryPower": 4134,
+      "pacts": 1,
+      "ports": 5,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 30,
+      "energy": 6228.031640734947,
+      "consumerGoods": 2015.587247632087,
+      "militaryPower": 4472,
+      "pacts": 1,
+      "ports": 5,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 31,
+      "energy": 6512.570788254861,
+      "consumerGoods": 2050.281499454122,
+      "militaryPower": 4872,
+      "pacts": 1,
+      "ports": 5,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 32,
+      "energy": 6763.209554630164,
+      "consumerGoods": 2082.209421319094,
+      "militaryPower": 4430,
+      "pacts": 1,
+      "ports": 5,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 33,
+      "energy": 7028.438052278282,
+      "consumerGoods": 2113.5563802224287,
+      "militaryPower": 4480,
+      "pacts": 1,
+      "ports": 5,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 34,
+      "energy": 7277.277834099343,
+      "consumerGoods": 2144.3906083573365,
+      "militaryPower": 4959,
+      "pacts": 1,
+      "ports": 5,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 35,
+      "energy": 7579.633294205963,
+      "consumerGoods": 2174.0299362085148,
+      "militaryPower": 5095,
+      "pacts": 1,
+      "ports": 6,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 36,
+      "energy": 7878.450844915965,
+      "consumerGoods": 2219.5893879799833,
+      "militaryPower": 5248,
+      "pacts": 1,
+      "ports": 6,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 37,
+      "energy": 8177.217082263575,
+      "consumerGoods": 2263.912788559225,
+      "militaryPower": 5262,
+      "pacts": 1,
+      "ports": 6,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 38,
+      "energy": 8480.359502095833,
+      "consumerGoods": 2317.0596948670263,
+      "militaryPower": 5664,
+      "pacts": 1,
+      "ports": 6,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 39,
+      "energy": 8788.251740604248,
+      "consumerGoods": 2368.49368362643,
+      "militaryPower": 5964,
+      "pacts": 1,
+      "ports": 7,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 40,
+      "energy": 9101.70606510413,
+      "consumerGoods": 2418.5347786662974,
+      "militaryPower": 6321,
+      "pacts": 1,
+      "ports": 7,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 41,
+      "energy": 9408.38923976256,
+      "consumerGoods": 2459.0841795268752,
+      "militaryPower": 6626,
+      "pacts": 1,
+      "ports": 7,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 42,
+      "energy": 9755.904788873046,
+      "consumerGoods": 2513.7948496247827,
+      "militaryPower": 6861,
+      "pacts": 2,
+      "ports": 7,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 43,
+      "energy": 10125.528578669158,
+      "consumerGoods": 2567.434398121737,
+      "militaryPower": 6974,
+      "pacts": 2,
+      "ports": 8,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 44,
+      "energy": 10501.107441915708,
+      "consumerGoods": 2620.6027960380698,
+      "militaryPower": 7187,
+      "pacts": 2,
+      "ports": 8,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 45,
+      "energy": 10894.539333884768,
+      "consumerGoods": 2673.1345127985874,
+      "militaryPower": 7588,
+      "pacts": 1,
+      "ports": 9,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 46,
+      "energy": 11274.137804601445,
+      "consumerGoods": 2727.28172923677,
+      "militaryPower": 7872,
+      "pacts": 1,
+      "ports": 9,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 47,
+      "energy": 11621.5922399485,
+      "consumerGoods": 2781.013049813029,
+      "militaryPower": 8223,
+      "pacts": 1,
+      "ports": 9,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 48,
+      "energy": 12009.073997416435,
+      "consumerGoods": 2834.1480220827425,
+      "militaryPower": 8721,
+      "pacts": 1,
+      "ports": 9,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 49,
+      "energy": 12354.768086193766,
+      "consumerGoods": 2886.6866169960904,
+      "militaryPower": 8795,
+      "pacts": 1,
+      "ports": 9,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 50,
+      "energy": 12720.813139553651,
+      "consumerGoods": 2937.0179693694045,
+      "militaryPower": 9104,
+      "pacts": 1,
+      "ports": 9,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 51,
+      "energy": 13037.234902475635,
+      "consumerGoods": 2987.35288697428,
+      "militaryPower": 9548,
+      "pacts": 1,
+      "ports": 9,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 52,
+      "energy": 13380.990112407484,
+      "consumerGoods": 3035.7079141466847,
+      "militaryPower": 9814,
+      "pacts": 1,
+      "ports": 9,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 53,
+      "energy": 13668.850620886364,
+      "consumerGoods": 3081.7417762461528,
+      "militaryPower": 10138,
+      "pacts": 1,
+      "ports": 9,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 54,
+      "energy": 13956.24236556729,
+      "consumerGoods": 3128.2687997271796,
+      "militaryPower": 10455,
+      "pacts": 1,
+      "ports": 10,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 55,
+      "energy": 14281.156368224896,
+      "consumerGoods": 3174.1992763160815,
+      "militaryPower": 9821,
+      "pacts": 1,
+      "ports": 10,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 56,
+      "energy": 14593.411543244893,
+      "consumerGoods": 3219.617686180462,
+      "militaryPower": 10180,
+      "pacts": 1,
+      "ports": 10,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 57,
+      "energy": 14979.250633060336,
+      "consumerGoods": 3265.659848213114,
+      "militaryPower": 10722,
+      "pacts": 1,
+      "ports": 11,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 58,
+      "energy": 15382.631527563224,
+      "consumerGoods": 3311.6430215287774,
+      "militaryPower": 11025,
+      "pacts": 1,
+      "ports": 12,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 59,
+      "energy": 15759.083343780923,
+      "consumerGoods": 3358.1653854901415,
+      "militaryPower": 11029,
+      "pacts": 1,
+      "ports": 12,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 60,
+      "energy": 16015.468337089827,
+      "consumerGoods": 3404.712435940409,
+      "militaryPower": 10927,
+      "pacts": 1,
+      "ports": 12,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 61,
+      "energy": 16368.823932516258,
+      "consumerGoods": 3450.789410260409,
+      "militaryPower": 11338,
+      "pacts": 1,
+      "ports": 12,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 62,
+      "energy": 16730.364431472575,
+      "consumerGoods": 3496.866384580409,
+      "militaryPower": 11724,
+      "pacts": 1,
+      "ports": 12,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 63,
+      "energy": 17112.038559708988,
+      "consumerGoods": 3526.220362777359,
+      "militaryPower": 11996,
+      "pacts": 1,
+      "ports": 12,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 64,
+      "energy": 17481.812698819398,
+      "consumerGoods": 3554.9770611558024,
+      "militaryPower": 12500,
+      "pacts": 2,
+      "ports": 12,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 65,
+      "energy": 17891.523439742108,
+      "consumerGoods": 3583.736457954289,
+      "militaryPower": 13005,
+      "pacts": 2,
+      "ports": 12,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 66,
+      "energy": 18281.67647142343,
+      "consumerGoods": 3628.0875179854575,
+      "militaryPower": 13658,
+      "pacts": 2,
+      "ports": 12,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 67,
+      "energy": 18674.433721825644,
+      "consumerGoods": 3671.842204805873,
+      "militaryPower": 13911,
+      "pacts": 2,
+      "ports": 12,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 68,
+      "energy": 19054.999515899835,
+      "consumerGoods": 3715.0010314334268,
+      "militaryPower": 14366,
+      "pacts": 2,
+      "ports": 12,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 69,
+      "energy": 19406.37983845666,
+      "consumerGoods": 3756.3639649666693,
+      "militaryPower": 14811,
+      "pacts": 2,
+      "ports": 12,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 70,
+      "energy": 19839.537926331734,
+      "consumerGoods": 3795.3309727639034,
+      "militaryPower": 14528,
+      "pacts": 2,
+      "ports": 12,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 71,
+      "energy": 20253.397445059705,
+      "consumerGoods": 3834.302022441163,
+      "militaryPower": 15229,
+      "pacts": 2,
+      "ports": 12,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 72,
+      "energy": 20655.86666291867,
+      "consumerGoods": 3873.2770818702043,
+      "militaryPower": 15763,
+      "pacts": 2,
+      "ports": 12,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 73,
+      "energy": 21063.49593857815,
+      "consumerGoods": 3912.191965330359,
+      "militaryPower": 16290,
+      "pacts": 2,
+      "ports": 12,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 74,
+      "energy": 21466.712668216405,
+      "consumerGoods": 3949.9827950450203,
+      "militaryPower": 16982,
+      "pacts": 2,
+      "ports": 12,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 75,
+      "energy": 21852.92052048693,
+      "consumerGoods": 3987.7775396412203,
+      "militaryPower": 17401,
+      "pacts": 2,
+      "ports": 12,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 76,
+      "energy": 22217.35774470112,
+      "consumerGoods": 4024.9761679938324,
+      "militaryPower": 17991,
+      "pacts": 2,
+      "ports": 12,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 77,
+      "energy": 22568.934912485394,
+      "consumerGoods": 4060.4438828857365,
+      "militaryPower": 18400,
+      "pacts": 2,
+      "ports": 12,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 78,
+      "energy": 22916.951962172625,
+      "consumerGoods": 4095.9166694585924,
+      "militaryPower": 18606,
+      "pacts": 2,
+      "ports": 12,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 79,
+      "energy": 23300.611050134,
+      "consumerGoods": 4130.194487323755,
+      "militaryPower": 18949,
+      "pacts": 2,
+      "ports": 13,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 80,
+      "energy": 23695.359199066872,
+      "consumerGoods": 4165.013142566589,
+      "militaryPower": 19498,
+      "pacts": 2,
+      "ports": 13,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 81,
+      "energy": 24071.388138735103,
+      "consumerGoods": 4198.108749282416,
+      "militaryPower": 19825,
+      "pacts": 2,
+      "ports": 13,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 82,
+      "energy": 24456.52238446596,
+      "consumerGoods": 4229.409268035559,
+      "militaryPower": 20115,
+      "pacts": 2,
+      "ports": 13,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 83,
+      "energy": 24828.396174767233,
+      "consumerGoods": 4260.11465970302,
+      "militaryPower": 20407,
+      "pacts": 2,
+      "ports": 13,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 84,
+      "energy": 25185.331446917382,
+      "consumerGoods": 4289.089039318177,
+      "militaryPower": 20730,
+      "pacts": 2,
+      "ports": 13,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 85,
+      "energy": 25545.60713243919,
+      "consumerGoods": 4311.468214529885,
+      "militaryPower": 21107,
+      "pacts": 2,
+      "ports": 13,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 86,
+      "energy": 25884.579507582137,
+      "consumerGoods": 4332.652147138519,
+      "militaryPower": 21340,
+      "pacts": 2,
+      "ports": 13,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 87,
+      "energy": 26225.19576330114,
+      "consumerGoods": 4353.840799247417,
+      "militaryPower": 21563,
+      "pacts": 2,
+      "ports": 13,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 88,
+      "energy": 26568.65861961876,
+      "consumerGoods": 4373.834133260501,
+      "militaryPower": 21786,
+      "pacts": 2,
+      "ports": 13,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 89,
+      "energy": 26903.635910542478,
+      "consumerGoods": 4392.632111879918,
+      "militaryPower": 22298,
+      "pacts": 2,
+      "ports": 13,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 90,
+      "energy": 27203.69772721597,
+      "consumerGoods": 4410.834698103683,
+      "militaryPower": 22660,
+      "pacts": 2,
+      "ports": 13,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 91,
+      "energy": 27523.662139365817,
+      "consumerGoods": 4427.913855223362,
+      "militaryPower": 22833,
+      "pacts": 2,
+      "ports": 13,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 92,
+      "energy": 27834.234845034567,
+      "consumerGoods": 4444.3975468217595,
+      "militaryPower": 23073,
+      "pacts": 3,
+      "ports": 13,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 93,
+      "energy": 28201.647224567576,
+      "consumerGoods": 4459.685736770628,
+      "militaryPower": 23729,
+      "pacts": 3,
+      "ports": 13,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 94,
+      "energy": 28573.626055292436,
+      "consumerGoods": 4484.2115636799945,
+      "militaryPower": 24312,
+      "pacts": 3,
+      "ports": 13,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 95,
+      "energy": 28966.403597440018,
+      "consumerGoods": 4506.353799342803,
+      "militaryPower": 24330,
+      "pacts": 3,
+      "ports": 13,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 96,
+      "energy": 29334.00340124816,
+      "consumerGoods": 4544.101394884076,
+      "militaryPower": 24932,
+      "pacts": 3,
+      "ports": 13,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 97,
+      "energy": 29671.21464177384,
+      "consumerGoods": 4580.990790590146,
+      "militaryPower": 25384,
+      "pacts": 3,
+      "ports": 13,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 98,
+      "energy": 30011.53208840725,
+      "consumerGoods": 4617.832734253363,
+      "militaryPower": 25852,
+      "pacts": 3,
+      "ports": 13,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 99,
+      "energy": 30344.61324201973,
+      "consumerGoods": 4654.163345278187,
+      "militaryPower": 26100,
+      "pacts": 3,
+      "ports": 13,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 100,
+      "energy": 30695.765476156386,
+      "consumerGoods": 4689.637245289014,
+      "militaryPower": 26462,
+      "pacts": 3,
+      "ports": 13,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 101,
+      "energy": 31055.236233268304,
+      "consumerGoods": 4723.928142633213,
+      "militaryPower": 26725,
+      "pacts": 3,
+      "ports": 13,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 102,
+      "energy": 31405.089966429565,
+      "consumerGoods": 4756.500157528995,
+      "militaryPower": 27159,
+      "pacts": 3,
+      "ports": 13,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 103,
+      "energy": 31735.747073709008,
+      "consumerGoods": 4773.227966273289,
+      "militaryPower": 27778,
+      "pacts": 3,
+      "ports": 13,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 104,
+      "energy": 32066.115236490623,
+      "consumerGoods": 4788.173070303101,
+      "militaryPower": 28062,
+      "pacts": 3,
+      "ports": 13,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 105,
+      "energy": 32385.831846135152,
+      "consumerGoods": 4803.2074367851565,
+      "militaryPower": 28384,
+      "pacts": 3,
+      "ports": 13,
+      "cargo": {
+        "contracts": 0,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 106,
+      "energy": 32738.6236238726,
+      "consumerGoods": 4817.3880771622935,
+      "militaryPower": 28516,
+      "pacts": 3,
+      "ports": 14,
+      "cargo": {
+        "contracts": 1,
+        "cycles": 0,
+        "active": 0,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 107,
+      "energy": 33085.82407997638,
+      "consumerGoods": 4830.986313142368,
+      "militaryPower": 28821,
+      "pacts": 3,
+      "ports": 14,
+      "cargo": {
+        "contracts": 1,
+        "cycles": 1,
+        "active": 2,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 10,
+          "min": 10,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 10,
+          "min": 10,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 108,
+      "energy": 33449.86780588233,
+      "consumerGoods": 4844.00211266814,
+      "militaryPower": 29268,
+      "pacts": 3,
+      "ports": 14,
+      "cargo": {
+        "contracts": 1,
+        "cycles": 1,
+        "active": 2,
+        "deliveries": 0,
+        "loaded": {
+          "ene": 10,
+          "min": 10,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 10,
+          "min": 10,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 109,
+      "energy": 33906.394768385886,
+      "consumerGoods": 4856.1656820637045,
+      "militaryPower": 24960,
+      "pacts": 3,
+      "ports": 14,
+      "cargo": {
+        "contracts": 1,
+        "cycles": 1,
+        "active": 0,
+        "deliveries": 1,
+        "loaded": {
+          "ene": 10,
+          "min": 10,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 10,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 10,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 10,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 6,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 4,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 110,
+      "energy": 34354.50983478279,
+      "consumerGoods": 4868.347149689418,
+      "militaryPower": 24756,
+      "pacts": 3,
+      "ports": 14,
+      "cargo": {
+        "contracts": 1,
+        "cycles": 1,
+        "active": 0,
+        "deliveries": 1,
+        "loaded": {
+          "ene": 10,
+          "min": 10,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 10,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 10,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 10,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 6,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 4,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 111,
+      "energy": 34796.803868028466,
+      "consumerGoods": 4879.94648424586,
+      "militaryPower": 25516,
+      "pacts": 3,
+      "ports": 14,
+      "cargo": {
+        "contracts": 1,
+        "cycles": 1,
+        "active": 0,
+        "deliveries": 1,
+        "loaded": {
+          "ene": 10,
+          "min": 10,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 10,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 10,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 10,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 6,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 4,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 0,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 112,
+      "energy": 35249.48027138825,
+      "consumerGoods": 4889.80503854123,
+      "militaryPower": 26140,
+      "pacts": 3,
+      "ports": 14,
+      "cargo": {
+        "contracts": 1,
+        "cycles": 2,
+        "active": 2,
+        "deliveries": 1,
+        "loaded": {
+          "ene": 20,
+          "min": 20,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 10,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 10,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 10,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 6,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 4,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 10,
+          "min": 10,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 113,
+      "energy": 35714.330702058105,
+      "consumerGoods": 4899.11846596198,
+      "militaryPower": 26619,
+      "pacts": 3,
+      "ports": 14,
+      "cargo": {
+        "contracts": 1,
+        "cycles": 2,
+        "active": 2,
+        "deliveries": 1,
+        "loaded": {
+          "ene": 20,
+          "min": 20,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 10,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 10,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 10,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 6,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 4,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 10,
+          "min": 10,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 114,
+      "energy": 36175.16710824445,
+      "consumerGoods": 4935.674696769868,
+      "militaryPower": 27165,
+      "pacts": 3,
+      "ports": 14,
+      "cargo": {
+        "contracts": 1,
+        "cycles": 2,
+        "active": 2,
+        "deliveries": 1,
+        "loaded": {
+          "ene": 20,
+          "min": 20,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 0,
+          "min": 10,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 0,
+          "min": 10,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 10,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 6,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 4,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 10,
+          "min": 10,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 115,
+      "energy": 36628.830508625026,
+      "consumerGoods": 4971.650156376141,
+      "militaryPower": 27556,
+      "pacts": 3,
+      "ports": 14,
+      "cargo": {
+        "contracts": 1,
+        "cycles": 3,
+        "active": 2,
+        "deliveries": 3,
+        "loaded": {
+          "ene": 30,
+          "min": 30,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 10,
+          "min": 20,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 10,
+          "min": 20,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 10,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 6,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 4,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 10,
+          "min": 10,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 116,
+      "energy": 37078.488830197035,
+      "consumerGoods": 5007.044818278433,
+      "militaryPower": 27854,
+      "pacts": 2,
+      "ports": 14,
+      "cargo": {
+        "contracts": 1,
+        "cycles": 3,
+        "active": 2,
+        "deliveries": 3,
+        "loaded": {
+          "ene": 30,
+          "min": 30,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 10,
+          "min": 20,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 10,
+          "min": 20,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 10,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 6,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 4,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 10,
+          "min": 10,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 117,
+      "energy": 37434.66656172096,
+      "consumerGoods": 5040.315300750567,
+      "militaryPower": 27771,
+      "pacts": 3,
+      "ports": 14,
+      "cargo": {
+        "contracts": 1,
+        "cycles": 3,
+        "active": 2,
+        "deliveries": 3,
+        "loaded": {
+          "ene": 30,
+          "min": 30,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 10,
+          "min": 20,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 10,
+          "min": 20,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 10,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 6,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 4,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 10,
+          "min": 10,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 118,
+      "energy": 37844.17731878361,
+      "consumerGoods": 5073.266460481335,
+      "militaryPower": 28245,
+      "pacts": 3,
+      "ports": 14,
+      "cargo": {
+        "contracts": 1,
+        "cycles": 4,
+        "active": 2,
+        "deliveries": 5,
+        "loaded": {
+          "ene": 40,
+          "min": 40,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 20,
+          "min": 30,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 20,
+          "min": 30,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 10,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 6,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 4,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 10,
+          "min": 10,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 119,
+      "energy": 38261.0582794015,
+      "consumerGoods": 5106.206340663151,
+      "militaryPower": 28794,
+      "pacts": 3,
+      "ports": 14,
+      "cargo": {
+        "contracts": 1,
+        "cycles": 4,
+        "active": 2,
+        "deliveries": 5,
+        "loaded": {
+          "ene": 40,
+          "min": 40,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 20,
+          "min": 30,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 20,
+          "min": 30,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 10,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 6,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 4,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 10,
+          "min": 10,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    },
+    {
+      "month": 120,
+      "energy": 38665.426896868135,
+      "consumerGoods": 5136.081578756074,
+      "militaryPower": 29365,
+      "pacts": 3,
+      "ports": 14,
+      "cargo": {
+        "contracts": 1,
+        "cycles": 4,
+        "active": 2,
+        "deliveries": 5,
+        "loaded": {
+          "ene": 40,
+          "min": 40,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "sent": {
+          "ene": 20,
+          "min": 30,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "received": {
+          "ene": 20,
+          "min": 30,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "lost": {
+          "ene": 10,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "destroyed": {
+          "ene": 6,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "plundered": {
+          "ene": 4,
+          "min": 0,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        },
+        "inTransit": {
+          "ene": 10,
+          "min": 10,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": 0
+        }
+      }
+    }
+  ],
+  "negative": [],
+  "ledgerErrors": [],
+  "energyZeroEmpireMonths": 0,
+  "consumerZeroEmpireMonths": 0,
+  "shortages": 0,
+  "final": {
+    "month": 120,
+    "energy": 38665.426896868135,
+    "consumerGoods": 5136.081578756074,
+    "militaryPower": 29365,
+    "pacts": 3,
+    "ports": 14,
+    "cargo": {
+      "contracts": 1,
+      "cycles": 4,
+      "active": 2,
+      "deliveries": 5,
+      "loaded": {
+        "ene": 40,
+        "min": 40,
+        "yiy": 0,
+        "ala": 0,
+        "tuk": 0
+      },
+      "sent": {
+        "ene": 20,
+        "min": 30,
+        "yiy": 0,
+        "ala": 0,
+        "tuk": 0
+      },
+      "received": {
+        "ene": 20,
+        "min": 30,
+        "yiy": 0,
+        "ala": 0,
+        "tuk": 0
+      },
+      "lost": {
+        "ene": 10,
+        "min": 0,
+        "yiy": 0,
+        "ala": 0,
+        "tuk": 0
+      },
+      "destroyed": {
+        "ene": 6,
+        "min": 0,
+        "yiy": 0,
+        "ala": 0,
+        "tuk": 0
+      },
+      "plundered": {
+        "ene": 4,
+        "min": 0,
+        "yiy": 0,
+        "ala": 0,
+        "tuk": 0
+      },
+      "inTransit": {
+        "ene": 10,
+        "min": 10,
+        "yiy": 0,
+        "ala": 0,
+        "tuk": 0
+      }
+    }
+  }
+}

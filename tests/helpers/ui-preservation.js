@@ -5,6 +5,13 @@ const hash=s=>createHash('sha256').update(s).digest('hex');
 // block must restore the untouched canonical 93A.1/93C HTML hash.
 // Historical referans-sha.json remains intact; neither half is exempted.
 exports.isReviewedUI=source=>{
+ // 96A additive freight CSS is independently pinned; all older layout pins remain.
+ const freightStart=source.indexOf('/* 96A: scoped freight workspace');
+ if(freightStart>=0){const marker='/* END 96A FREIGHT UI */\n',end=source.indexOf(marker,freightStart)+marker.length;
+  if(end<freightStart||hash(source.slice(freightStart,end))!=='16649e8d4346ca88fcaba0c9013a0b140fbebda85ab32c12c5ef3607a4ee80c6')return false;
+  source=source.slice(0,freightStart)+source.slice(end);
+ }
+ for(const file of ['commerce.js','commerce-ui.js'])source=source.replace('<script src="'+file+'"></script>\n','');
  const workspaceStart=source.indexOf('/* FAZ 95E.2 — bounded archive workspace */');
  if(workspaceStart>=0){const marker='/* END FAZ 95E.2 ARCHIVE */\n',end=source.indexOf(marker,workspaceStart)+marker.length;
   if(end<workspaceStart||hash(source.slice(workspaceStart,end))!=='fb3ad1acc5d83f164bbda00c1c38cc1218801e38c0416d0d97e21b7e2fb679fb')return false;

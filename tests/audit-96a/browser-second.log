@@ -1,0 +1,75 @@
+✗ actual trade form signs via canonical AI response without immediate resource credit — The expression evaluated to a falsy value:
+
+  assert.ok((await page.locator('#modal').innerText()).includes('12.0 Maden/sefer'))
+
+✓ invalid amount and same resource explain rejection through actual form click
+✗ real departure movement and actual arrival are the sole stock credit path — The expression evaluated to a falsy value:
+
+  assert.ok((await page.locator('#modal').innerText()).includes('12.0 Maden'))
+
+✗ inbox freight accepts once by real nested DOM click and preserves receipts on load — page.evaluate: TypeError: Cannot read properties of undefined (reading 'id')
+    at eval (eval at evaluate (:311:30), <anonymous>:1:163)
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:311:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+✓ cancel actual button prevents new loads while in-flight cargo still delivers
+✓ convoy layer DOM toggle leaves other independent flags unchanged and removes Canvas pixels
+✗ actual map tap selects moving convoy and locate button uses same camera — page.evaluate: TypeError: Cannot read properties of undefined (reading 'x')
+    at Object.draw (http://127.0.0.1:39539/map.js:1969:32)
+    at View.draw (http://127.0.0.1:39539/commerce-ui.js:54:77)
+    at eval (eval at evaluate (:311:30), <anonymous>:1:132)
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:311:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+✗ 740x360 real trade UI fits, scrolls and returns to actual convoy map — page.evaluate: TypeError: Cannot read properties of undefined (reading 'x')
+    at Object.draw (http://127.0.0.1:39539/map.js:1969:32)
+    at View.draw (http://127.0.0.1:39539/commerce-ui.js:54:77)
+    at eval (eval at evaluate (:311:30), <anonymous>:1:6)
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:311:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+✗ 360x740 real trade UI fits, scrolls and returns to actual convoy map — page.click: Timeout 5000ms exceeded.
+Call log:
+[2m  - waiting for locator('[data-a="grpTog"][data-x="map"]')[22m
+[2m    - locator resolved to <button data-x="map" data-a="grpTog" class="tool grpHead" title="Harita ve görünüm modları">…</button>[22m
+[2m  - attempting click action[22m
+[2m    2 × waiting for element to be visible, enabled and stable[22m
+[2m      - element is visible, enabled and stable[22m
+[2m      - scrolling into view if needed[22m
+[2m      - done scrolling[22m
+[2m      - <div id="rotate" class="show">…</div> intercepts pointer events[22m
+[2m    - retrying click action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible, enabled and stable[22m
+[2m      - element is visible, enabled and stable[22m
+[2m      - scrolling into view if needed[22m
+[2m      - done scrolling[22m
+[2m      - <div id="rotate" class="show">…</div> intercepts pointer events[22m
+[2m    - retrying click action[22m
+[2m      - waiting 100ms[22m
+[2m    9 × waiting for element to be visible, enabled and stable[22m
+[2m      - element is visible, enabled and stable[22m
+[2m      - scrolling into view if needed[22m
+[2m      - done scrolling[22m
+[2m      - <div id="rotate" class="show">…</div> intercepts pointer events[22m
+[2m    - retrying click action[22m
+[2m      - waiting 500ms[22m
+
+✗ 1280x720 real trade UI fits, scrolls and returns to actual convoy map — page.evaluate: TypeError: Cannot read properties of undefined (reading 'x')
+    at Object.draw (http://127.0.0.1:39539/map.js:1969:32)
+    at View.draw (http://127.0.0.1:39539/commerce-ui.js:54:77)
+    at eval (eval at evaluate (:311:30), <anonymous>:1:6)
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:311:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+✓ save and reload preserves actual moving position and layer choice
+✗ foreign third-party hidden cargo never appears in list, draw or hit targets — page.evaluate: TypeError: Cannot read properties of undefined (reading 'x')
+    at Object.draw (http://127.0.0.1:39539/map.js:1969:32)
+    at View.draw (http://127.0.0.1:39539/commerce-ui.js:54:77)
+    at eval (eval at evaluate (:311:30), <anonymous>:1:129)
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:311:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+✓ real physical attack updates lost cargo UI without double phantom penalty
+✓ PWA installs freight modules and reopens offline with persistent v8 cargo
+BROWSER GEÇEN: 6 KALAN: 8

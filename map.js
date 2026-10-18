@@ -1951,29 +1951,9 @@ const View = {
           g.moveTo(mx-4,my-4); g.lineTo(mx+4,my+4);
           g.moveTo(mx+4,my-4); g.lineTo(mx-4,my+4);
           g.stroke();
-        } else if (z > .22){
-          // hat üzerinde gidip gelen sivil ticaret konvoyları
-          const seed = (L.a*37 + L.b*11) % 100;
-          const hops = (L.path ? L.path.length - 1 : 1);
-          const per = (3400 + (seed % 7) * 500) * Math.max(1, hops * .8);
-          const cars = (L.vol||0) > 60 ? 3 : (L.vol||0) > 25 ? 2 : 1;
-          for (let k=0;k<cars;k++){
-            let tt = ((t + seed*90 + k*per/cars) % per) / per;
-            const fwd = k === 0;
-            const u = clamp(fwd ? tt : 1 - tt, 0, 1);
-            const segs = Math.max(1, pts.length - 1);
-            const fpos = u * segs;
-            const si = Math.min(segs - 1, Math.floor(fpos));
-            const sf = fpos - si;
-            const q1 = pts[si], q2 = pts[si+1] || pts[si];
-            const px = lerp(q1.x, q2.x, sf), py = lerp(q1.y, q2.y, sf);
-            g.setLineDash([]);
-            g.fillStyle = 'rgba(242,212,82,.95)';
-            g.fillRect(px-1.5, py-1.5, 3, 3);
-            g.fillStyle = 'rgba(242,212,82,.28)';
-            g.fillRect(px-3, py-3, 6, 6);
-          }
         }
+        // 96A: decorative traffic removed; CommerceUI draws actual loaded convoys.
+
         g.restore();
       }
       g.setLineDash([]);

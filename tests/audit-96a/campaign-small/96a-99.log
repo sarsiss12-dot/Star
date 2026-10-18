@@ -1,0 +1,5 @@
+month 30
+month 60
+month 90
+month 120
+{"seed":99,"root":"/workspace/scratch/357bc57bab3b/star96a","months":120,"ms":4360,"failure":null,"negatives":0,"ledgerErrors":0,"cargo":{"contracts":1,"cycles":4,"active":2,"deliveries":5,"loaded":{"ene":40,"min":40,"yiy":0,"ala":0,"tuk":0},"sent":{"ene":20,"min":30,"yiy":0,"ala":0,"tuk":0},"received":{"ene":20,"min":30,"yiy":0,"ala":0,"tuk":0},"lost":{"ene":10,"min":0,"yiy":0,"ala":0,"tuk":0},"destroyed":{"ene":6,"min":0,"yiy":0,"ala":0,"tuk":0},"plundered":{"ene":4,"min":0,"yiy":0,"ala":0,"tuk":0},"inTransit":{"ene":10,"min":10,"yiy":0,"ala":0,"tuk":0}}}

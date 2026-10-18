@@ -74,7 +74,7 @@ function harness(){
   sb.globalThis=sb;
   vm.createContext(sb);
   for(const f of ['main.js','map.js','combat.js','ai.js','diplomacy.js',
-                  'economy.js','ui.js','audio.js'])
+                  'economy.js','commerce.js','ui.js','commerce-ui.js','audio.js'])
     vm.runInContext(fs.readFileSync(path.join(KOK,f),'utf8'),sb,{filename:f});
   const R=c=>{try{return vm.runInContext('(function(){'+c+'})()',sb);}
               catch(e){return 'HATA: '+e.message;}};
@@ -105,7 +105,7 @@ for(const f of fs.readdirSync(KOK).filter(x=>x.endsWith('.js'))){
 }
 {
   const dip=oku('diplomacy.js'), ui=oku('ui.js'), mn=oku('main.js');
-  ok("sw cache = 'stars-v95e3'", /const CACHE = 'stars-v95e3'/.test(oku('sw.js')));
+  ok("sw cache = 'stars-v96a'", /const CACHE = 'stars-v96a'/.test(oku('sw.js')));
   ok('kayıt sürümü v:8 KALDI', /v:8, cfg:G\.cfg/.test(mn));
   ['yildiz:save','yh_audio','yh_advisor','yh_autoev','yh_bg','yh_radar',
    'yh_templates','__yh_probe','__yh_diag'].forEach(k=>
@@ -292,7 +292,7 @@ console.log('\nD. 14 DEAL_KINDS HATTI');
   const H=harness(); H.R(KUR);
   const r=H.R([
     "var e=G.p, sonuc={};",
-    "var kinds=Object.keys(DEAL_KINDS);",
+    "var kinds=Object.keys(DEAL_KINDS).filter(k=>k!=='freight'); /* 96A paired freight is covered by faz96a_cargo_test. */",
     "kinds.forEach(function(k,i){",
     "  var o=G.emps[(i%6)+1]; if(!o) return;",
     "  /* her tür için GERÇEK üretici verisiyle uygulanabilir madde kur */",

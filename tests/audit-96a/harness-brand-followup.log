@@ -1,0 +1,6 @@
+
+1. SÖZDİZİMİ
+  ✓ node --check ai.js
+  ✓ node --check archive-ui.js
+  ✓ node --check audio.js
+  ✓ node --check combat.js

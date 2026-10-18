@@ -1088,6 +1088,7 @@ function normalizeWarTreaties(){
 
 /* Masaya konabilecek öğe türleri. Her biri iki tarafa da konabilir. */
 const DEAL_KINDS = {
+  freight:{n:'Kaynak Kargo Sözleşmesi',ico:'▱'},
   res    :{n:'Kaynak',            ico:'◆'},
   tribute:{n:'Aylık Ödeme (10 yıl)',ico:'⏳'},
   sys    :{n:'Yıldız Sistemi',    ico:'★'},
@@ -1110,6 +1111,7 @@ const DEAL_KINDS = {
 function dealLabel(it){
   switch(it.t){
     case 'res':     return RES[it.r].ico + ' ' + it.v + ' ' + RES[it.r].n;
+    case 'freight': return '▱ '+it.v+' '+RES[it.r].n+'/sefer · '+(G.sys[it.source]?.name||'?')+' → '+(G.sys[it.target]?.name||'?')+' · '+it.every+' günde / '+it.months+' ay';
     case 'tribute': return '⏳ ' + it.v + ' ' + RES[it.r].n + '/ay · 10 yıl';
     case 'sys':     return '★ ' + (G.sys[it.id] ? G.sys[it.id].name : '?') + ' sistemi';
     case 'tech':    return '✦ ' + (TECHS[it.id] ? TECHS[it.id].n : '?');
@@ -1143,6 +1145,7 @@ function itemValue(e, it, other){
   };
   switch(it.t){
     case 'res':     return it.v * .38 * need(it.r);
+    case 'freight': return it.v*.38*need(it.r)*Math.min(24,it.months*30/it.every);
     case 'tribute': return it.v * 16 * need(it.r);         // 10 yıllık akış
     case 'sys': {
       const sy = G.sys[it.id];
@@ -1341,6 +1344,7 @@ function applyItems(giver, taker, items){
     /* FAZ 86C.2: aşamalı kanca — `before:<tür>` mutasyondan ÖNCE. */
     if (typeof G._dealFailInject === 'function') G._dealFailInject('before:' + it.t);
     switch(it.t){
+      case 'freight': break; // Commerce.sign created the paired obligation atomically.
       case 'res':
         giver.res[it.r] = Math.max(0, (giver.res[it.r]||0) - it.v);
         taker.res[it.r] = (taker.res[it.r]||0) + it.v;
@@ -1541,6 +1545,7 @@ function dealMonthlyCapacity(e,r,stock=e.res[r]||0){
 function dealItemKey(it){
   if (!it || !it.t) return null;
   switch(it.t){
+    case 'freight': return it.t+':'+it.r+':'+it.source+':'+it.target;
     case 'res': case 'tribute': return it.t + ':' + it.r;
     case 'sys': case 'tech':    return it.t + ':' + it.id;
     case 'lux':                 return it.t + ':' + it.k;
@@ -1607,6 +1612,7 @@ function normalizeDeal(offer){
       if (!DEAL_KINDS[raw.t]){
         errors.push('Bilinmeyen madde türü: ' + String(raw.t)); continue; }
       const it = {t: raw.t};
+      if(it.t==='freight')for(const k of ['source','target','every','months'])it[k]=raw[k];
       if (raw.r !== undefined) it.r = raw.r;
       if (raw.k !== undefined) it.k = raw.k;
       if (raw.id !== undefined) it.id = raw.id;
@@ -1618,7 +1624,7 @@ function normalizeDeal(offer){
         it.v = v;
       }
       /* ── ZORUNLU ALAN + KATALOG DOĞRULAMASI (gerçek kataloglar) ── */
-      if (it.t === 'res' || it.t === 'tribute'){
+      if (it.t === 'res' || it.t === 'tribute' || it.t==='freight'){
         if (it.v === undefined || !it.r){
           errors.push(it.t + ': eksik kaynak veya miktar'); continue; }
         if (!Object.hasOwn(RES,it.r)){
@@ -1825,6 +1831,7 @@ function dealValidity(offer){
      sırası sonucu değiştirmez: "peace + nap" ile "nap + peace" aynı
      geçerli sonucu verir; savaş sürerken YALNIZ nap geçersizdir. */
   const hepsi = n.effectiveGive.concat(n.effectiveWant);
+  if(hepsi.some(it=>it.t==='freight')){const why=Commerce.quote(n);if(why)reasons.push(why);}
   const plan = {
     savas: !!a.war[b.id],
     pact:  !!(a.pact && a.pact[b.id]),
@@ -2038,7 +2045,7 @@ function giftOnCooldown(a, b){
    Kapsam: aşağıdaki kökler ve bunların eriştiği oyun verisi. DOM, UI,
    fonksiyon gövdeleri ve kataloglar işlem verisi değildir. */
 const DEAL_TX_ROOTS = ['emps','p','sys','fleets','feds','council',
-  'news','diplomaticInbox','construction','_95eFaults','fallStats','sabStats','log','inbox','inboxUid','warLedger','settlements','jointOps','_structAt','_structIdx'];
+  'commerce','news','diplomaticInbox','construction','_95eFaults','fallStats','sabStats','log','inbox','inboxUid','warLedger','settlements','jointOps','_structAt','_structIdx'];
 const DEAL_TX_AUTH = ['_dealAuth','_warAuth','_warWhy','_sideBuf'];
 let _dealTxActive = false;
 function txCaptureGraph(values, opaque){
@@ -2115,6 +2122,7 @@ function dealTxRestoreAuth(tx){
 function dealPostcondition(giver, taker, it){
   const T = (x) => G.emps[x];
   switch(it.t){
+    case 'freight': return Commerce.state().contracts.some(c=>!Commerce.closed(c)&&c.legs.some(l=>l.e===giver.id&&l.to===taker.id&&l.r===it.r&&l.v===it.v&&l.source===it.source&&l.target===it.target));
     case 'res':      return true;   // miktar kontrolü akış içinde
     /* applyItems: VEREN tarafın tribute listesine kayıt eklenir. */
     case 'tribute':  return Array.isArray(giver.tribute) &&
@@ -2170,6 +2178,7 @@ function executeDeal(offer){
     tx = dealTxBegin();
     G._sideBuf = buf;
     G._dealAuth = true;
+    if(n.effectiveGive.concat(n.effectiveWant).some(it=>it.t==='freight'))Commerce.sign(n);
     applyItems(a, b, n.effectiveGive);
     applyItems(b, a, n.effectiveWant);
     if (typeof G._dealFailInject === 'function') G._dealFailInject('after:items');

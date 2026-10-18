@@ -1,3 +1,13 @@
+# Güncel durum — 96A — 18 Ekim 2026
+
+Gerçek kaynak sözleşmeleri ve fiziksel konvoylar tamamlandı: mevcut diplomasi motoru, depo→yük→yol→varış muhasebesi, gerçek yağma/kayıp, hafif Canvas nesneleri, bağımsız katman, AI ve Save v 8 isteğe bağlı kökü. Yeni koşular 96 paket/5303 kontrol/0; Chromium 80/0(14 yeni+66 yeniden koşulan). GitHub'a commit/push yapılmadı; yalnızZIP teslimi. Belgeler: FAZ96A-RAPOR.md,TEST-SONUCLARI-96A.md,DEVAM-96A.md.
+
+100 sistem 120 ay karşılaştırmasında 404 AI3 sözleşme/18 teslimat, 11/99'da 0 sözleşme. Olumsuz enerji/güç farkları ve kıtlık göstergeleri raporda; genel AI dengelemesi yapılmadı. Fiziksel Android kabulü açık. 96B önerisi yedi kaynak Ekonomi Merkezi; 96C önerisiAI ekonomi/askerî üretim dengesi. Casusluk teknoloji,köken/portre,generatif müzik,Android QA,multiplayer planları korunur. Sonraki faz başlatılmadı.
+
+Aşağıdaki eski bölümler kendi tarihlerinin kaydıdır; “96A başlamadı” ifadeleri tarihsel bağlamdır.
+
+---
+
 # Güncel durum — 95E.3 — 18 Ekim 2026
 
 Bakım tamamlandı: gerçek savaş son onayı, tek yönlü canlı sensör paylaşımı, harita katmanlarının kısmi ekran çizimi/okunabilirliği ve amblem alanının etiketlere karşı korunması. Yeni koşu 94 paket / 5203 kontrol / 0; 66 gerçek Chromium / 0. Save v8 ve 95E.2 haber/gelen kutusu/uzaktan inşaat korunur. Ayrıntı: FAZ95E3-RAPOR.md, TEST-SONUCLARI-95E3.md, DEVAM-95E3.md.

@@ -1,0 +1,24 @@
+✓ war click starts actual war and charges exactly once
+✓ war rapid double DOM click has one payment
+✓ changed war gate consumes no resources: G.p.res.etk=0
+✓ changed war gate consumes no resources: G.emps[1].dead=true
+✓ changed war gate consumes no resources: G.p.civics=["testPeace"];CIVICS.testPeace={flag:"universal"};recalcMods(G.p)
+✓ cancel and replacement modal leave detached war DOM inert
+✓ save load invalidates actual stale war button
+✓ federation permission disables real final button
+✓ changed defense obligations require second real confirmation
+✓ military federation obligation survives actual war click
+✓ sensor accepted DOM offer changes discovery, live fleet visibility and real map pixels
+✓ sensor real movement updates view at departure and arrival, v8 load rebuilds it
+✓ Canvas toggles and all three modes 740x360
+✓ Canvas toggles and all three modes 360x740
+✓ Canvas toggles and all three modes 1280x720
+✓ Canvas offscreen endpoint keeps intersecting known connection visible
+✓ Canvas camera pan keeps clipped links and changes actual map pixels
+✓ Canvas zoom .10 line gate and .18 emblem gate are real pixels
+✓ known relation needs discovered endpoint, not current radar; secret bonds stay secret
+✓ same-day alliance and membership changes invalidate cached Canvas links
+✓ federation precedence and repeated on off maintain deterministic pixels and v8 flags
+✓ full map federation badge pixels survive territory labels in portrait
+✓ PWA reload keeps independent layer choices and actual offline modules
+BROWSER GEÇEN: 23 KALAN: 0

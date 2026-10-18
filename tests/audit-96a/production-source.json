@@ -1,0 +1,87 @@
+[
+  {
+    "file": "main.js",
+    "before": "d5a4005809ece4a089b4ab22419dea22632f208eac755e76efc1e136225dde96",
+    "after": "620990ad351552cfb92cb1c97a61872a0ccc96ba3e6837a00b7dbb5a7cb1a84f"
+  },
+  {
+    "file": "economy.js",
+    "before": "a5e6e7ebb6051d626f670127d711239d31f4b4dfa7df289f5a47555ceaa62553",
+    "after": "c36c52831c2bdd63e9a2c5e8a0b89f1bea52ff16ee1d98c808cefbc3b1b2d71e"
+  },
+  {
+    "file": "diplomacy.js",
+    "before": "fb46438e4bdc238cbf52759492f937bd69c5a274fa2a04274f0ebeef99459c96",
+    "after": "a8b15353e6b2ef16bd5af114e3697da2fe0cdfa7fa4875de8dbe594f3a9e2ed9"
+  },
+  {
+    "file": "ai.js",
+    "before": "ae741b8abcb6930c50971f2dab8143f2c28ff49dec015d5f92589982f46e9c39",
+    "after": "ae741b8abcb6930c50971f2dab8143f2c28ff49dec015d5f92589982f46e9c39"
+  },
+  {
+    "file": "map.js",
+    "before": "904b593313ec75bdf1f42f2a72d7dd467143160531aa3b406e5fec79cfa9c2d5",
+    "after": "8d2c858cf69042379e444e4e0da0db6482a36749eb6ce5aa7df0903cd3d28341"
+  },
+  {
+    "file": "combat.js",
+    "before": "b4e21fcdb6fdaaa93da07313131470de3e8a3c28b5650226a9c4a2713bde73a5",
+    "after": "b4e21fcdb6fdaaa93da07313131470de3e8a3c28b5650226a9c4a2713bde73a5"
+  },
+  {
+    "file": "ui.js",
+    "before": "5128c3752e5b6fd7e7e10e92dbc2dacd1229ee833c2881f2915cab96982597f6",
+    "after": "f783e722bc6e0cf274fc7f815efe7e3577087ad2538c5bdf815d50371eaa74f7"
+  },
+  {
+    "file": "commerce.js",
+    "before": null,
+    "after": "a6cd43a72cbcd37251fe7623dd576f5345185caec5e46f74d5c46be94010a028"
+  },
+  {
+    "file": "commerce-ui.js",
+    "before": null,
+    "after": "40aee6d43cac85338351d314c58a14721ec6518e31c4e9c2eb2f63040704768e"
+  },
+  {
+    "file": "archive-ui.js",
+    "before": "6ae0e5c785b4ade1d7203584542d1a758e2134cb33c72dfabb2fc0b8baaf3ad8",
+    "after": "6ae0e5c785b4ade1d7203584542d1a758e2134cb33c72dfabb2fc0b8baaf3ad8"
+  },
+  {
+    "file": "inbox.js",
+    "before": "90c0341025f14e4983a517ec60ff94f0598e8d9c83c02ba8a37f21a931a7035c",
+    "after": "90c0341025f14e4983a517ec60ff94f0598e8d9c83c02ba8a37f21a931a7035c"
+  },
+  {
+    "file": "news.js",
+    "before": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
+    "after": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646"
+  },
+  {
+    "file": "construction.js",
+    "before": "d9b544b0328f26576ff90e02fe49c1b7f3798dfd844a8c39ee8dc6c0890debda",
+    "after": "d9b544b0328f26576ff90e02fe49c1b7f3798dfd844a8c39ee8dc6c0890debda"
+  },
+  {
+    "file": "index.html",
+    "before": "879b7ca2c1f4b45ac3bfece173975671ae8e6e0b0124f79ee37678c0fbe0f42e",
+    "after": "01005be47b9f4435ad3f277b95d6c904ba2560ca399698145d108abf3e19b63b"
+  },
+  {
+    "file": "sw.js",
+    "before": "9c9509a750c6dc697418e7b2bb78094185fbb10328570f9d90ba2ad9c2cc9709",
+    "after": "e98ce39680b5f911d35e70fa6e3d14150c7e301accd59e52c581457fc288558c"
+  },
+  {
+    "file": "manifest.json",
+    "before": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
+    "after": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310"
+  },
+  {
+    "file": "audio.js",
+    "before": "804226980179698a6b56d292d88c0c7226d1e54f06001aab63b52d6db5685262",
+    "after": "804226980179698a6b56d292d88c0c7226d1e54f06001aab63b52d6db5685262"
+  }
+]

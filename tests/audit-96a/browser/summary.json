@@ -1,0 +1,74 @@
+{
+  "browser": "133.0.6943.0",
+  "physicalAndroid": false,
+  "viewportEmulation": true,
+  "pass": 6,
+  "fail": 8,
+  "pageErrors": [],
+  "results": [
+    {
+      "name": "actual trade form signs via canonical AI response without immediate resource credit",
+      "ok": false,
+      "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert.ok((await page.locator('#modal').innerText()).includes('12.0 Maden/sefer'))\n\n    at /workspace/scratch/357bc57bab3b/star96a/tests/browser-96a.js:11:508\n    at async test (/workspace/scratch/357bc57bab3b/star96a/tests/browser-96a.js:6:163)\n    at async /workspace/scratch/357bc57bab3b/star96a/tests/browser-96a.js:11:2"
+    },
+    {
+      "name": "invalid amount and same resource explain rejection through actual form click",
+      "ok": true
+    },
+    {
+      "name": "real departure movement and actual arrival are the sole stock credit path",
+      "ok": false,
+      "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert.ok((await page.locator('#modal').innerText()).includes('12.0 Maden'))\n\n    at /workspace/scratch/357bc57bab3b/star96a/tests/browser-96a.js:13:371\n    at async test (/workspace/scratch/357bc57bab3b/star96a/tests/browser-96a.js:6:163)\n    at async /workspace/scratch/357bc57bab3b/star96a/tests/browser-96a.js:13:2"
+    },
+    {
+      "name": "inbox freight accepts once by real nested DOM click and preserves receipts on load",
+      "ok": false,
+      "error": "page.evaluate: TypeError: Cannot read properties of undefined (reading 'id')\n    at eval (eval at evaluate (:311:30), <anonymous>:1:163)\n    at eval (<anonymous>)\n    at UtilityScript.evaluate (<anonymous>:311:30)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at value (/workspace/scratch/357bc57bab3b/star96a/tests/browser-96a.js:4:150)\n    at /workspace/scratch/357bc57bab3b/star96a/tests/browser-96a.js:14:114\n    at test (/workspace/scratch/357bc57bab3b/star96a/tests/browser-96a.js:6:169)\n    at async /workspace/scratch/357bc57bab3b/star96a/tests/browser-96a.js:14:2"
+    },
+    {
+      "name": "cancel actual button prevents new loads while in-flight cargo still delivers",
+      "ok": true
+    },
+    {
+      "name": "convoy layer DOM toggle leaves other independent flags unchanged and removes Canvas pixels",
+      "ok": true
+    },
+    {
+      "name": "actual map tap selects moving convoy and locate button uses same camera",
+      "ok": false,
+      "error": "page.evaluate: TypeError: Cannot read properties of undefined (reading 'x')\n    at Object.draw (http://127.0.0.1:39539/map.js:1969:32)\n    at View.draw (http://127.0.0.1:39539/commerce-ui.js:54:77)\n    at eval (eval at evaluate (:311:30), <anonymous>:1:132)\n    at eval (<anonymous>)\n    at UtilityScript.evaluate (<anonymous>:311:30)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at value (/workspace/scratch/357bc57bab3b/star96a/tests/browser-96a.js:4:150)\n    at /workspace/scratch/357bc57bab3b/star96a/tests/browser-96a.js:17:103\n    at test (/workspace/scratch/357bc57bab3b/star96a/tests/browser-96a.js:6:169)\n    at async /workspace/scratch/357bc57bab3b/star96a/tests/browser-96a.js:17:2"
+    },
+    {
+      "name": "740x360 real trade UI fits, scrolls and returns to actual convoy map",
+      "ok": false,
+      "error": "page.evaluate: TypeError: Cannot read properties of undefined (reading 'x')\n    at Object.draw (http://127.0.0.1:39539/map.js:1969:32)\n    at View.draw (http://127.0.0.1:39539/commerce-ui.js:54:77)\n    at eval (eval at evaluate (:311:30), <anonymous>:1:6)\n    at eval (<anonymous>)\n    at UtilityScript.evaluate (<anonymous>:311:30)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at value (/workspace/scratch/357bc57bab3b/star96a/tests/browser-96a.js:4:150)\n    at /workspace/scratch/357bc57bab3b/star96a/tests/browser-96a.js:20:604\n    at async test (/workspace/scratch/357bc57bab3b/star96a/tests/browser-96a.js:6:163)\n    at async /workspace/scratch/357bc57bab3b/star96a/tests/browser-96a.js:18:62"
+    },
+    {
+      "name": "360x740 real trade UI fits, scrolls and returns to actual convoy map",
+      "ok": false,
+      "error": "page.click: Timeout 5000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-a=\"grpTog\"][data-x=\"map\"]')\u001b[22m\n\u001b[2m    - locator resolved to <button data-x=\"map\" data-a=\"grpTog\" class=\"tool grpHead\" title=\"Harita ve görünüm modları\">…</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div id=\"rotate\" class=\"show\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div id=\"rotate\" class=\"show\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    9 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div id=\"rotate\" class=\"show\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 500ms\u001b[22m\n\n    at tool (/workspace/scratch/357bc57bab3b/star96a/tests/browser-96a.js:7:110)\n    at async open (/workspace/scratch/357bc57bab3b/star96a/tests/browser-96a.js:8:23)\n    at async /workspace/scratch/357bc57bab3b/star96a/tests/browser-96a.js:19:83\n    at async test (/workspace/scratch/357bc57bab3b/star96a/tests/browser-96a.js:6:163)\n    at async /workspace/scratch/357bc57bab3b/star96a/tests/browser-96a.js:18:62"
+    },
+    {
+      "name": "1280x720 real trade UI fits, scrolls and returns to actual convoy map",
+      "ok": false,
+      "error": "page.evaluate: TypeError: Cannot read properties of undefined (reading 'x')\n    at Object.draw (http://127.0.0.1:39539/map.js:1969:32)\n    at View.draw (http://127.0.0.1:39539/commerce-ui.js:54:77)\n    at eval (eval at evaluate (:311:30), <anonymous>:1:6)\n    at eval (<anonymous>)\n    at UtilityScript.evaluate (<anonymous>:311:30)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at value (/workspace/scratch/357bc57bab3b/star96a/tests/browser-96a.js:4:150)\n    at /workspace/scratch/357bc57bab3b/star96a/tests/browser-96a.js:20:604\n    at async test (/workspace/scratch/357bc57bab3b/star96a/tests/browser-96a.js:6:163)\n    at async /workspace/scratch/357bc57bab3b/star96a/tests/browser-96a.js:18:62"
+    },
+    {
+      "name": "save and reload preserves actual moving position and layer choice",
+      "ok": true
+    },
+    {
+      "name": "foreign third-party hidden cargo never appears in list, draw or hit targets",
+      "ok": false,
+      "error": "page.evaluate: TypeError: Cannot read properties of undefined (reading 'x')\n    at Object.draw (http://127.0.0.1:39539/map.js:1969:32)\n    at View.draw (http://127.0.0.1:39539/commerce-ui.js:54:77)\n    at eval (eval at evaluate (:311:30), <anonymous>:1:129)\n    at eval (<anonymous>)\n    at UtilityScript.evaluate (<anonymous>:311:30)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at value (/workspace/scratch/357bc57bab3b/star96a/tests/browser-96a.js:4:150)\n    at /workspace/scratch/357bc57bab3b/star96a/tests/browser-96a.js:23:107\n    at test (/workspace/scratch/357bc57bab3b/star96a/tests/browser-96a.js:6:169)\n    at async /workspace/scratch/357bc57bab3b/star96a/tests/browser-96a.js:23:2"
+    },
+    {
+      "name": "real physical attack updates lost cargo UI without double phantom penalty",
+      "ok": true
+    },
+    {
+      "name": "PWA installs freight modules and reopens offline with persistent v8 cargo",
+      "ok": true
+    }
+  ]
+}

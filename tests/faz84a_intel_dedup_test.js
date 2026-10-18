@@ -74,7 +74,7 @@ function harness(){
   sb.globalThis=sb;
   vm.createContext(sb);
   for(const f of ['main.js','map.js','combat.js','ai.js','diplomacy.js',
-                  'economy.js','ui.js','audio.js'])
+                  'economy.js','commerce.js','ui.js','commerce-ui.js','audio.js'])
     vm.runInContext(fs.readFileSync(path.join(KOK,f),'utf8'),sb,{filename:f});
   const R=c=>{try{return vm.runInContext('(function(){'+c+'})()',sb);}
               catch(e){return 'HATA: '+e.message;}};
@@ -151,13 +151,13 @@ const html=oku('index.html');
 const sira=(html.match(/<script src="([^"]+\.js)"><\/script>/g)||[])
   .map(x=>x.replace(/.*src="/,'').replace(/".*/,''));
 ok('yükleme sırası değişmedi',
-   ['main.js','map.js','combat.js','ai.js','diplomacy.js','economy.js','news.js','inbox.js','construction.js','ui.js','archive-ui.js','audio.js']
+   ['main.js','map.js','combat.js','ai.js','diplomacy.js','economy.js','commerce.js','news.js','inbox.js','construction.js','ui.js','archive-ui.js','commerce-ui.js','audio.js']
    .every((f,i)=>sira[i]===f));
 const mainJs=oku('main.js');
 ['yildiz:save','yh_audio','yh_advisor','yh_autoev','yh_bg','yh_radar',
  'yh_templates','__yh_probe','__yh_diag'].forEach(k=>
   ok('anahtar: '+k, mainJs.includes(k)));
-ok("sw cache = 'stars-v95e3'", /const CACHE = 'stars-v95e3'/.test(oku('sw.js')));
+ok("sw cache = 'stars-v96a'", /const CACHE = 'stars-v96a'/.test(oku('sw.js')));
 
 /* SITUATION KARANTİNASI */
 {

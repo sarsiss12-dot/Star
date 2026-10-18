@@ -1,0 +1,119 @@
+
+A. DOSYA SINIRI VE KARANTİNA
+  ✓ node --check ai.js
+  ✓ node --check archive-ui.js
+  ✓ node --check audio.js
+  ✓ node --check combat.js
+  ✓ node --check commerce-ui.js
+  ✓ node --check commerce.js
+  ✓ node --check construction.js
+  ✓ node --check diplomacy.js
+  ✓ node --check economy.js
+  ✓ node --check inbox.js
+  ✓ node --check main.js
+  ✓ node --check map.js
+  ✓ node --check news.js
+  ✓ node --check sw.js
+  ✓ node --check ui.js
+  ✓ sw cache = 'stars-v96a'
+  ✓ sw KABUK/fetch/activate korundu
+  ✓ kayıt sürümü v:8 KALDI
+  ✓ depolama anahtarı: yildiz:save
+  ✓ depolama anahtarı: yh_audio
+  ✓ depolama anahtarı: yh_advisor
+  ✓ depolama anahtarı: yh_autoev
+  ✓ depolama anahtarı: yh_bg
+  ✓ depolama anahtarı: yh_radar
+  ✓ depolama anahtarı: yh_templates
+  ✓ depolama anahtarı: __yh_probe
+  ✓ depolama anahtarı: __yh_diag
+  ✓ canDeliver artık dealQuote kullanıyor
+  ✓ canDeliverItems ayrı teslim yardımcısı var
+  ✓ normalizeDeal effectiveGive/effectiveWant üretiyor
+  ✓ executeDeal effective plan uyguluyor
+  ✓ drawDeal kanonik quote kullanıyor (iki boolean uydurmuyor)
+  ✓ after:* aşamalı enjeksiyon noktaları AÇILDI (86C.2)
+  ✓ mods özgün nesnesine geri bağlanıyor
+  ✓ açık kök listesi tüm imparatorluk ve sistem/filoları kapsıyor
+  ✓ döngüleri tekilleştiren nesne grafiği günlüğü var
+  ✓ SITUATIONS kataloğu duruyor
+  ✓ situationsTick tanımı duruyor
+  ✓ situationsTick çağrısı PASİF
+  ✓ DURUMLAR sekmesi gizli
+  ✓ 200 ayda situation tetiklenmedi — 0
+  ✓ audio.js byte-for-byte aynı — 804226980179698a
+  ✓ manifest.json byte-for-byte aynı — 6b8305490e9a55e9
+
+B. canDeliver YANLIŞ POZİTİF MATRİSİ
+  ✓ savaşta yalnız NAP: canDeliver artık FALSE — neden: Saldırmazlık: savaş sürerken imzalanamaz — pakete barış ekle
+  ✓ savaşta yalnız NAP: quote.ok false
+  ✓ savaşta yalnız NAP: aiRespond KESİN RET — red
+  ✓ fatal bilinmeyen madde: canDeliver artık FALSE — neden: Bilinmeyen madde türü: ZEHIR
+  ✓ fatal bilinmeyen madde: quote.ok false
+  ✓ fatal bilinmeyen madde: aiRespond KESİN RET — red
+  ✓ tamamen redundant antlaşma: canDeliver artık FALSE — neden: Bütün maddeler zaten yürürlükte — yeni etki yok
+  ✓ tamamen redundant antlaşma: quote.ok false
+  ✓ tamamen redundant antlaşma: aiRespond KESİN RET — red
+  ✓ Etki yetersiz (ally 90): canDeliver artık FALSE — neden: Gönderen tarafta yetersiz Etki (90 ◈ gerekir)
+  ✓ Etki yetersiz (ally 90): quote.ok false
+  ✓ Etki yetersiz (ally 90): aiRespond KESİN RET — red
+  ✓ süresi dolmuş teklif: canDeliver artık FALSE — neden: Teklifin süresi doldu
+  ✓ süresi dolmuş teklif: quote.ok false
+  ✓ süresi dolmuş teklif: aiRespond KESİN RET — red
+
+C. aiRespond GEÇERSİZ TEKLİF REGRESYONLARI
+  ✓ örnek gerçekten fatal=[] ve quote.ok=false
+  ✓ ÖNCE "kabul" → SONRA kesin RET — Gönderen tarafta yetersiz Etki (90 ◈ gerekir)
+  ✓ ret gerekçesi anlamlı (Etki yetersizliği) — Gönderen tarafta yetersiz Etki (90 ◈ gerekir)
+  ✓ ret sırasında kaynak/ilişki/hafıza/log/RNG DEĞİŞMEDİ
+  ✓ cömert geçerli teklif → kabul edilebiliyor — kabul
+  ✓ yakın geçerli teklif → karşı teklif üretebiliyor — karsi
+  ✓ karşı teklif içeriği yeniden dealQuote'tan geçiyor — true
+  ✓ karar deterministik
+
+D. EFFECTIVE PLAN — REDUNDANT MADDELER
+  ✓ A) mevcut NAP + yeni kaynak: transfer oldu — transfer 200
+  ✓ A) NAP bitiş günü BİREBİR aynı kaldı
+  ✓ A) effective plan yalnız res içeriyor — res
+  ✓ A) redundant yapısal olarak kaydedildi — give:nap
+  ✓ B) mevcut pact + yeni spynet: maliyet YALNIZ spynet (120) — quote 120 kesinti 120
+  ✓ B) spynet kuruldu, pact yeniden uygulanmadı — spynet
+  ✓ B) ilişki yeniden tetiklenmedi
+  ✓ C) karşı yön intel: yalnız yeni yön uygulandı — give[] want[intel]
+  ✓ C) tek doğru ücret (45) — quote 45 kesinti 45
+  ✓ D) bütünü redundant paket REDDEDİLDİ — Bütün maddeler zaten yürürlükte — yeni etki yok
+  ✓ D) sıfır maliyet, sıfır mutasyon — maliyet 0
+  ✓ E) 10× redundant + 1 yeni: NAP süresi uzamadı
+  ✓ E) ilişki/bildirim çiftliği yok — ilişki+0 log+0
+  ✓ E) yalnız yeni madde uygulandı — res transfer 50
+  ✓ E) yinelenenler normalleştirme olarak raporlandı — 9
+
+E. UI DOĞRULUK METİNLERİ
+  ✓ "Karşı teklifi kabul et" etiketi
+  ✓ "Karşı teklifi reddet" etiketi
+  ✓ eski "Orijinali kabul/reddet" KALMADI
+  ✓ eski "maliyeti toplanır" metni KALDIRILDI
+  ✓ gerçek maliyet politikası UI'da yazılı
+  ✓ normalizations / redundant / fatal AYRI gösteriliyor
+  ✓ intel "Sensör Verisi Paylaşımı" olarak adlandırıldı
+  ✓ intel açıklaması ortak casus ağı OLMADIĞINI söylüyor
+  ✓ drawDeal yetersiz Etki'yi uygulanabilirlik sorunu olarak gösteriyor
+  ✓ drawDeal doğru maliyet politikasını yazıyor
+
+F. GERÇEK ORTAK DÜŞMAN FAKTÖRÜ
+  ✓ ortak düşman yokken güvenlik faktörü TAM 1.00 — 1
+  ✓ sharedFoe gerçekten kuruldu — true
+  ✓ ortak düşmanla GÜVENLİK maddesinde faktör TAM 1.15 — 1.15
+  ✓ aynı durumda MADDİ teklifte faktör TAM 1.00 — 1
+  ✓ ortak savaş kaldırılınca güvenlik faktörü 1.00'a döndü — 1
+
+G. SAFLIK VE REGRESYON
+  ✓ 1200 çağrı (normalize/validity/quote/cost/canDeliver/aiRespond) SAF
+  ✓ teklif nesnesi mutasyona uğramadı
+  ✓ 86B: kaynak çoğaltma hâlâ KAPALI
+  ✓ 86B: boş anlaşma hâlâ KAPALI
+
+══════════════════════════════════════════
+  GEÇEN: 100   KALAN: 0
+══════════════════════════════════════════
+

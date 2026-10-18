@@ -1,0 +1,124 @@
+
+A. DOSYA SINIRI VE KARANTİNA
+  ✓ node --check ai.js
+  ✓ node --check archive-ui.js
+  ✓ node --check audio.js
+  ✓ node --check combat.js
+  ✓ node --check commerce-ui.js
+  ✓ node --check commerce.js
+  ✓ node --check construction.js
+  ✓ node --check diplomacy.js
+  ✓ node --check economy.js
+  ✓ node --check inbox.js
+  ✓ node --check main.js
+  ✓ node --check map.js
+  ✓ node --check news.js
+  ✓ node --check sw.js
+  ✓ node --check ui.js
+  ✓ sw cache = 'stars-v96a'
+  ✓ sw KABUK/fetch/activate korundu
+  ✓ kayıt sürümü v:8 KALDI
+  ✓ depolama anahtarı: yildiz:save
+  ✓ depolama anahtarı: yh_audio
+  ✓ depolama anahtarı: yh_advisor
+  ✓ depolama anahtarı: yh_autoev
+  ✓ depolama anahtarı: yh_bg
+  ✓ depolama anahtarı: yh_radar
+  ✓ depolama anahtarı: yh_templates
+  ✓ depolama anahtarı: __yh_probe
+  ✓ depolama anahtarı: __yh_diag
+  ✓ aiProposeTerms kanonik fonksiyonu var
+  ✓ NAP teklif yolu eklendi
+  ✓ oyuncuya NAP teklifi UI.aiOffer ile gidiyor
+  ✓ doktrin-kilitli hedef üç yolda da atlanıyor — 3
+  ✓ karşı teklif DELTA olarak değerlendiriliyor (tersi evalOffer YOK)
+  ✓ pact fırsat kapısı DEĞİŞMEDİ
+  ✓ ally fırsat kapısı DEĞİŞMEDİ
+  ✓ 86C.3 aiNegotiate mimarisi duruyor
+  ✓ 86C.2 transaction duruyor
+  ✓ SITUATIONS kataloğu duruyor
+  ✓ situationsTick tanımı duruyor
+  ✓ situationsTick çağrısı PASİF
+  ✓ DURUMLAR sekmesi gizli
+  ✓ audio.js byte-for-byte aynı — 804226980179698a
+  ✓ manifest.json byte-for-byte aynı — 6b8305490e9a55e9
+  ✓ map altyapısı sabit; hedef seçimi 93A referansında
+
+B. TEKLİF ARTIK KARŞILIK İSTİYOR
+  ✓ teklif artık KARŞILIK içeriyor (want boş değil) — res:min:40
+  ✓ alıcının maliyeti artık SIFIR DEĞİL — 20.9
+  ✓ karşılıklı teklif kanonik quote'tan geçiyor
+  ✓ soğuk ilişkide daha çok karşılık isteniyor — 70 > 30
+  ✓ fakir alıcıdan stok tavanı (%25) AŞILMIYOR — istenen 0 · tavan 5
+  ✓ maliyetsiz NAP için karşılık İSTENMİYOR
+
+C. KABUL / RET / KARŞI TEKLİF (karşılıklı şekil)
+  ✓ zengin + dost alıcı → KABUL — kabul
+  ✓ fakir + soğuk alıcı → ret ya da karşı teklif — karsi-kabul · Şunları da eklersen kabul ederiz: ▰ 20 Alaşım
+  ✓ reddedilen müzakere SIFIR mutasyon bıraktı
+  ✓ müzakere DETERMİNİSTİK
+  ✓ karşı teklif tavanı antlaşma değerinin %60'ı — pact 55 → tavan 33
+
+D. SALDIRMAZLIK PAKTI YOLU
+  ✓ NAP kanonik maliyeti 0 — 0
+  ✓ NAP müzakereyle kuruldu — kabul
+  ✓ NAP Etki kesmedi — 0
+  ✓ savaşta NAP REDDEDİLİYOR — Saldırmazlık: savaş sürerken imzalanamaz — pakete barış ekle
+  ✓ yürürlükteki NAP tekrar kurulmuyor, süre uzamıyor — gecersiz
+
+E. 3 SEED × 360 AY — PAZARLIK VE ANTLAŞMA DAĞILIMI
+  ✓ seed 11: 360 ay HATASIZ — ok
+  ✓ seed 11: NaN veya negatif stok YOK
+  ✓ seed 11: boşa geçersiz müzakere YOK — 0
+  ✓ seed 11: her müzakere tek bir sonuçla sayıldı
+  ✓ seed 11: müzakere en çok iki tur — 1
+  ✓ seed 11: kampanyada NAP kuruldu (bitişte süresi dolabilir) — 15 yeni NAP
+  ✓ seed 11: galaksi kalıcı savaşa KİLİTLENMEDİ — 0/28
+  ✓ seed 11: kalıcı ittifak kilidi yok — 14/28
+  ✓ seed 11: Situation tetiklenmedi — 0
+  ✓ seed 11: imparatorluklar hayatta — 8
+  ✓ seed 99: 360 ay HATASIZ — ok
+  ✓ seed 99: NaN veya negatif stok YOK
+  ✓ seed 99: boşa geçersiz müzakere YOK — 0
+  ✓ seed 99: her müzakere tek bir sonuçla sayıldı
+  ✓ seed 99: müzakere en çok iki tur — 1
+  ✓ seed 99: kampanyada NAP kuruldu (bitişte süresi dolabilir) — 20 yeni NAP
+  ✓ seed 99: galaksi kalıcı savaşa KİLİTLENMEDİ — 1/28
+  ✓ seed 99: kalıcı ittifak kilidi yok — 10/28
+  ✓ seed 99: Situation tetiklenmedi — 0
+  ✓ seed 99: imparatorluklar hayatta — 8
+  ✓ seed 404: 360 ay HATASIZ — ok
+  ✓ seed 404: NaN veya negatif stok YOK
+  ✓ seed 404: boşa geçersiz müzakere YOK — 0
+  ✓ seed 404: her müzakere tek bir sonuçla sayıldı
+  ✓ seed 404: müzakere en çok iki tur — 2
+  ✓ seed 404: kampanyada NAP kuruldu (bitişte süresi dolabilir) — 13 yeni NAP
+  ✓ seed 404: galaksi kalıcı savaşa KİLİTLENMEDİ — 0/28
+  ✓ seed 404: kalıcı ittifak kilidi yok — 10/28
+  ✓ seed 404: Situation tetiklenmedi — 0
+  ✓ seed 404: imparatorluklar hayatta — 8
+  ✓ 3 seed toplamında GERÇEK karşı teklif üretildi
+
+  ── SİMÜLASYON TABLOSU ──
+  seed 11: müzakere 48 → kabul 47 · ret 0 · karşı 0 (kabul 0/ret 0) · geçersiz 0
+            savaş 0 pact 15 ally 14 nap 1 (çift 28)
+            ilişki eğrisi: 0ay=0 → 90ay=45.5 → 180ay=37.3 → 270ay=37.9 → 360ay=37.5
+  seed 99: müzakere 48 → kabul 48 · ret 0 · karşı 0 (kabul 0/ret 0) · geçersiz 0
+            savaş 1 pact 15 ally 10 nap 0 (çift 28)
+            ilişki eğrisi: 0ay=0 → 90ay=35.4 → 180ay=38.5 → 270ay=23.6 → 360ay=31.1
+  seed 404: müzakere 57 → kabul 42 · ret 0 · karşı 7 (kabul 2/ret 5) · geçersiz 0
+            savaş 0 pact 15 ally 10 nap 0 (çift 28)
+            ilişki eğrisi: 0ay=0 → 90ay=37 → 180ay=34.3 → 270ay=36.4 → 360ay=38
+  ✓ gerçek karşı teklif: bütçe aşımı ret, sıfır mutasyon — karsi-red
+  ✓ gerçek karşı teklif: bütçe içi kabul ve iki yönlü pakt — karsi-kabul
+
+F. ÖNCEKİ FAZ REGRESYONLARI
+  ✓ 86B: kaynak çoğaltma KAPALI
+  ✓ 86B: boş anlaşma KAPALI
+  ✓ 86C.2: rollback TAM çalışıyor
+  ✓ 86C.3: oyuncu AI-AI müzakeresine girmiyor
+
+══════════════════════════════════════════
+  GEÇEN: 96   KALAN: 0
+══════════════════════════════════════════
+

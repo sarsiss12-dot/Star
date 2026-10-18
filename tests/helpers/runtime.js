@@ -104,8 +104,8 @@ function runtime({root = path.resolve(__dirname, '../..'), native = false,
   sb.globalThis=sb;
   const context=vm.createContext(sb);
   for(const file of ['main.js','map.js','combat.js','ai.js','diplomacy.js',
-                    'economy.js','news.js','inbox.js','construction.js','ui.js','archive-ui.js','audio.js'])
-    if(!['news.js','inbox.js','construction.js','archive-ui.js'].includes(file)||fs.existsSync(path.join(root,file)))
+                    'economy.js','commerce.js','news.js','inbox.js','construction.js','ui.js','archive-ui.js','commerce-ui.js','audio.js'])
+    if(!['commerce.js','commerce-ui.js','news.js','inbox.js','construction.js','archive-ui.js'].includes(file)||fs.existsSync(path.join(root,file)))
       vm.runInContext(fs.readFileSync(path.join(root,file),'utf8'),context,{filename:file});
   return {sb,doc,win,elements,canvases,timers,raf,downloads,messages,local,
     advance(ms){clock+=ms;},

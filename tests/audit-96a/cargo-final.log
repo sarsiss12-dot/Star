@@ -1,0 +1,37 @@
+✓ existing canonical deal signs paired obligations without instant stock transfer
+✓ both departure loads are debited, recipients wait for physical arrival, ledger conserves mass
+✓ delivery receipt and same-day simulation ticks cannot replay movement or payment
+✓ invalid freight whole deal rejects without stock or contract: o.give[0].r="ara"
+✓ invalid freight whole deal rejects without stock or contract: o.give[0].r="etk"
+✓ invalid freight whole deal rejects without stock or contract: o.give[0].v=0
+✓ invalid freight whole deal rejects without stock or contract: o.give[0].v=-2
+✓ invalid freight whole deal rejects without stock or contract: o.give[0].v=NaN
+✓ invalid freight whole deal rejects without stock or contract: o.give[0].v=10000
+✓ invalid freight whole deal rejects without stock or contract: o.give[0].source=9999
+✓ invalid freight whole deal rejects without stock or contract: o.give[0].every=0
+✓ invalid freight whole deal rejects without stock or contract: o.want[0].months=999
+✓ invalid freight whole deal rejects without stock or contract: o.want[0].target=1
+✓ canonical transaction rollback restores contract ids, obligations and resources
+✓ insufficient current stock signs no false promise and later shortage holds both loads
+✓ cancel stops new cycles and permits loaded independent deliveries without refunds
+✓ expiry stops new cycles but already loaded cargo remains payable on arrival
+✓ loaded cargo holds for real diplomatic/port closure: G.p.war[1]=G.emps[1].war[0]=true
+✓ loaded cargo holds for real diplomatic/port closure: G.p.embargo[1]=true
+✓ loaded cargo holds for real diplomatic/port closure: G.p.pact[1]=G.emps[1].pact[0]=false
+✓ loaded cargo holds for real diplomatic/port closure: G.sys[3].planets[0].col.b.liman=0
+✓ smuggling bypasses embargo only while general permission survives, never war
+✓ three-hop route bound rejects four hops and invalid/unknown destinations
+✓ missing edge waits and finds bounded alternative without teleporting cargo
+✓ actual pirate attack removes only real load; plunder has no duplicate or abstract penalty
+✓ halfway destruction consumes cargo, no refund and other leg can deliver
+✓ Save v8 repeated reload preserves loaded cargo and receipt
+✓ Save v8 repeated reload preserves travel cargo and receipt
+✓ Save v8 repeated reload preserves before cargo and receipt
+✓ Save v8 repeated reload preserves after cargo and receipt
+✓ Save v8 repeated reload preserves loss cargo and receipt
+✓ old 95E.3 save creates empty optional state with no invented voyages or receipts
+✓ duplicate cargo IDs and mass mismatch reject load atomically
+✓ port network production has no theoretical voyage multiplier or delivery mint
+✓ AI uses same canonical contract, loads and delivers with real stock loss
+✓ simulation convoy cap waits without debiting or silently discarding a shipment
+GEÇEN: 36 KALAN: 0

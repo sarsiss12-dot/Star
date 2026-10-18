@@ -1,0 +1,1107 @@
+{
+  "root": "/workspace/scratch/357bc57bab3b/baseline-95e3",
+  "seed": 99,
+  "config": "Same CFG/ulu/council-normal/ruins-none setup as the prior 95E.2 shortage audit; 45-system exploratory runs retained separately.",
+  "months": 120,
+  "systems": 100,
+  "ms": 30509,
+  "failure": null,
+  "monthly": [
+    {
+      "month": 1,
+      "energy": 3022.2090623864005,
+      "consumerGoods": 1768.2728701092,
+      "militaryPower": 8139,
+      "pacts": 0,
+      "ports": 0,
+      "cargo": null
+    },
+    {
+      "month": 2,
+      "energy": 2898.7991863051006,
+      "consumerGoods": 1877.9196671408067,
+      "militaryPower": 1571,
+      "pacts": 0,
+      "ports": 0,
+      "cargo": null
+    },
+    {
+      "month": 3,
+      "energy": 2793.6074595664836,
+      "consumerGoods": 1984.7002461189722,
+      "militaryPower": 1453,
+      "pacts": 0,
+      "ports": 0,
+      "cargo": null
+    },
+    {
+      "month": 4,
+      "energy": 2719.9497957998797,
+      "consumerGoods": 2092.0475505987374,
+      "militaryPower": 1397,
+      "pacts": 1,
+      "ports": 0,
+      "cargo": null
+    },
+    {
+      "month": 5,
+      "energy": 2683.8205385989595,
+      "consumerGoods": 2196.708042792273,
+      "militaryPower": 1347,
+      "pacts": 1,
+      "ports": 0,
+      "cargo": null
+    },
+    {
+      "month": 6,
+      "energy": 2702.6108818625116,
+      "consumerGoods": 2305.7386979609223,
+      "militaryPower": 1235,
+      "pacts": 3,
+      "ports": 0,
+      "cargo": null
+    },
+    {
+      "month": 7,
+      "energy": 2794.6829274914335,
+      "consumerGoods": 2418.621224083199,
+      "militaryPower": 1363,
+      "pacts": 3,
+      "ports": 0,
+      "cargo": null
+    },
+    {
+      "month": 8,
+      "energy": 2929.6126250235593,
+      "consumerGoods": 2535.049130937826,
+      "militaryPower": 1612,
+      "pacts": 4,
+      "ports": 0,
+      "cargo": null
+    },
+    {
+      "month": 9,
+      "energy": 3116.46298278521,
+      "consumerGoods": 2654.4209725101146,
+      "militaryPower": 2277,
+      "pacts": 4,
+      "ports": 0,
+      "cargo": null
+    },
+    {
+      "month": 10,
+      "energy": 3309.1261717268526,
+      "consumerGoods": 2772.6898902802286,
+      "militaryPower": 2901,
+      "pacts": 4,
+      "ports": 0,
+      "cargo": null
+    },
+    {
+      "month": 11,
+      "energy": 3494.556905024414,
+      "consumerGoods": 2891.5896098420544,
+      "militaryPower": 3752,
+      "pacts": 6,
+      "ports": 1,
+      "cargo": null
+    },
+    {
+      "month": 12,
+      "energy": 3678.8792472194873,
+      "consumerGoods": 3010.1243924901532,
+      "militaryPower": 4559,
+      "pacts": 7,
+      "ports": 2,
+      "cargo": null
+    },
+    {
+      "month": 13,
+      "energy": 3883.7282571433057,
+      "consumerGoods": 3129.0783875340185,
+      "militaryPower": 5065,
+      "pacts": 7,
+      "ports": 4,
+      "cargo": null
+    },
+    {
+      "month": 14,
+      "energy": 4093.9988205093127,
+      "consumerGoods": 3259.7539993820737,
+      "militaryPower": 5597,
+      "pacts": 9,
+      "ports": 4,
+      "cargo": null
+    },
+    {
+      "month": 15,
+      "energy": 4306.397989524917,
+      "consumerGoods": 3390.4579957053847,
+      "militaryPower": 5737,
+      "pacts": 10,
+      "ports": 5,
+      "cargo": null
+    },
+    {
+      "month": 16,
+      "energy": 4536.182980272359,
+      "consumerGoods": 3521.789095730401,
+      "militaryPower": 5972,
+      "pacts": 10,
+      "ports": 6,
+      "cargo": null
+    },
+    {
+      "month": 17,
+      "energy": 4795.904567195976,
+      "consumerGoods": 3652.950994975265,
+      "militaryPower": 5508,
+      "pacts": 11,
+      "ports": 7,
+      "cargo": null
+    },
+    {
+      "month": 18,
+      "energy": 5059.275823772455,
+      "consumerGoods": 3785.649095186096,
+      "militaryPower": 6108,
+      "pacts": 11,
+      "ports": 7,
+      "cargo": null
+    },
+    {
+      "month": 19,
+      "energy": 5334.340872700048,
+      "consumerGoods": 3919.3268016416387,
+      "militaryPower": 6221,
+      "pacts": 12,
+      "ports": 7,
+      "cargo": null
+    },
+    {
+      "month": 20,
+      "energy": 5628.261000189501,
+      "consumerGoods": 4050.9440061694695,
+      "militaryPower": 6616,
+      "pacts": 12,
+      "ports": 8,
+      "cargo": null
+    },
+    {
+      "month": 21,
+      "energy": 5922.311235837788,
+      "consumerGoods": 4178.985085357473,
+      "militaryPower": 6723,
+      "pacts": 13,
+      "ports": 8,
+      "cargo": null
+    },
+    {
+      "month": 22,
+      "energy": 6212.849798015212,
+      "consumerGoods": 4291.389951788569,
+      "militaryPower": 6750,
+      "pacts": 13,
+      "ports": 8,
+      "cargo": null
+    },
+    {
+      "month": 23,
+      "energy": 6510.145799903539,
+      "consumerGoods": 4401.457497666863,
+      "militaryPower": 7096,
+      "pacts": 14,
+      "ports": 8,
+      "cargo": null
+    },
+    {
+      "month": 24,
+      "energy": 6798.495374086606,
+      "consumerGoods": 4507.7483319001685,
+      "militaryPower": 7702,
+      "pacts": 14,
+      "ports": 8,
+      "cargo": null
+    },
+    {
+      "month": 25,
+      "energy": 7088.175430135627,
+      "consumerGoods": 4611.194273202484,
+      "militaryPower": 8025,
+      "pacts": 14,
+      "ports": 8,
+      "cargo": null
+    },
+    {
+      "month": 26,
+      "energy": 7364.320140514251,
+      "consumerGoods": 4714.960971428461,
+      "militaryPower": 8446,
+      "pacts": 14,
+      "ports": 8,
+      "cargo": null
+    },
+    {
+      "month": 27,
+      "energy": 7739.614186908509,
+      "consumerGoods": 4818.202654919904,
+      "militaryPower": 8830,
+      "pacts": 14,
+      "ports": 9,
+      "cargo": null
+    },
+    {
+      "month": 28,
+      "energy": 8138.234983452441,
+      "consumerGoods": 4920.7423570718365,
+      "militaryPower": 9466,
+      "pacts": 14,
+      "ports": 9,
+      "cargo": null
+    },
+    {
+      "month": 29,
+      "energy": 8489.008053532641,
+      "consumerGoods": 5024.785678423871,
+      "militaryPower": 9922,
+      "pacts": 14,
+      "ports": 9,
+      "cargo": null
+    },
+    {
+      "month": 30,
+      "energy": 8839.284173470081,
+      "consumerGoods": 5127.681954781421,
+      "militaryPower": 9714,
+      "pacts": 14,
+      "ports": 9,
+      "cargo": null
+    },
+    {
+      "month": 31,
+      "energy": 9208.779563703492,
+      "consumerGoods": 5228.70832721093,
+      "militaryPower": 9146,
+      "pacts": 14,
+      "ports": 10,
+      "cargo": null
+    },
+    {
+      "month": 32,
+      "energy": 9651.0068166281,
+      "consumerGoods": 5329.169638513086,
+      "militaryPower": 8382,
+      "pacts": 14,
+      "ports": 10,
+      "cargo": null
+    },
+    {
+      "month": 33,
+      "energy": 10136.606610948464,
+      "consumerGoods": 5426.613323512845,
+      "militaryPower": 8796,
+      "pacts": 14,
+      "ports": 11,
+      "cargo": null
+    },
+    {
+      "month": 34,
+      "energy": 10594.496964261774,
+      "consumerGoods": 5523.485231164515,
+      "militaryPower": 9797,
+      "pacts": 14,
+      "ports": 12,
+      "cargo": null
+    },
+    {
+      "month": 35,
+      "energy": 11079.614370994188,
+      "consumerGoods": 5617.8175169208625,
+      "militaryPower": 8205,
+      "pacts": 14,
+      "ports": 12,
+      "cargo": null
+    },
+    {
+      "month": 36,
+      "energy": 11526.864699836837,
+      "consumerGoods": 5711.363371606239,
+      "militaryPower": 9095,
+      "pacts": 14,
+      "ports": 13,
+      "cargo": null
+    },
+    {
+      "month": 37,
+      "energy": 11962.967611050199,
+      "consumerGoods": 5805.985770501731,
+      "militaryPower": 7856,
+      "pacts": 14,
+      "ports": 14,
+      "cargo": null
+    },
+    {
+      "month": 38,
+      "energy": 12239.929550657536,
+      "consumerGoods": 5898.691849853541,
+      "militaryPower": 8398,
+      "pacts": 14,
+      "ports": 14,
+      "cargo": null
+    },
+    {
+      "month": 39,
+      "energy": 12367.940065608322,
+      "consumerGoods": 6002.710025160569,
+      "militaryPower": 9156,
+      "pacts": 14,
+      "ports": 14,
+      "cargo": null
+    },
+    {
+      "month": 40,
+      "energy": 12735.777458356994,
+      "consumerGoods": 6106.4033274662015,
+      "militaryPower": 9672,
+      "pacts": 15,
+      "ports": 14,
+      "cargo": null
+    },
+    {
+      "month": 41,
+      "energy": 13139.63698250087,
+      "consumerGoods": 6205.504672519666,
+      "militaryPower": 9623,
+      "pacts": 15,
+      "ports": 15,
+      "cargo": null
+    },
+    {
+      "month": 42,
+      "energy": 13378.563248556475,
+      "consumerGoods": 6304.123527881703,
+      "militaryPower": 10226,
+      "pacts": 15,
+      "ports": 15,
+      "cargo": null
+    },
+    {
+      "month": 43,
+      "energy": 13675.92614326273,
+      "consumerGoods": 6411.038582877395,
+      "militaryPower": 11010,
+      "pacts": 15,
+      "ports": 15,
+      "cargo": null
+    },
+    {
+      "month": 44,
+      "energy": 14085.305609960194,
+      "consumerGoods": 6517.170444186693,
+      "militaryPower": 11413,
+      "pacts": 15,
+      "ports": 15,
+      "cargo": null
+    },
+    {
+      "month": 45,
+      "energy": 14607.865886893456,
+      "consumerGoods": 6624.175492147742,
+      "militaryPower": 11333,
+      "pacts": 14,
+      "ports": 15,
+      "cargo": null
+    },
+    {
+      "month": 46,
+      "energy": 15050.084711521164,
+      "consumerGoods": 6733.508973492957,
+      "militaryPower": 9812,
+      "pacts": 14,
+      "ports": 15,
+      "cargo": null
+    },
+    {
+      "month": 47,
+      "energy": 15490.901745652278,
+      "consumerGoods": 6849.785133334007,
+      "militaryPower": 10355,
+      "pacts": 14,
+      "ports": 15,
+      "cargo": null
+    },
+    {
+      "month": 48,
+      "energy": 15874.8801162808,
+      "consumerGoods": 6963.538824566291,
+      "militaryPower": 10662,
+      "pacts": 14,
+      "ports": 15,
+      "cargo": null
+    },
+    {
+      "month": 49,
+      "energy": 16093.392255002305,
+      "consumerGoods": 7077.664188013183,
+      "militaryPower": 11377,
+      "pacts": 16,
+      "ports": 14,
+      "cargo": null
+    },
+    {
+      "month": 50,
+      "energy": 16427.674781016776,
+      "consumerGoods": 7183.867133192204,
+      "militaryPower": 11867,
+      "pacts": 16,
+      "ports": 14,
+      "cargo": null
+    },
+    {
+      "month": 51,
+      "energy": 16751.467206941335,
+      "consumerGoods": 7290.445949680163,
+      "militaryPower": 13026,
+      "pacts": 16,
+      "ports": 16,
+      "cargo": null
+    },
+    {
+      "month": 52,
+      "energy": 17186.976621561567,
+      "consumerGoods": 7395.819627012579,
+      "militaryPower": 13423,
+      "pacts": 16,
+      "ports": 16,
+      "cargo": null
+    },
+    {
+      "month": 53,
+      "energy": 17881.472994269643,
+      "consumerGoods": 7500.207197778521,
+      "militaryPower": 14107,
+      "pacts": 16,
+      "ports": 16,
+      "cargo": null
+    },
+    {
+      "month": 54,
+      "energy": 18321.050974108202,
+      "consumerGoods": 7602.448056171514,
+      "militaryPower": 13446,
+      "pacts": 16,
+      "ports": 17,
+      "cargo": null
+    },
+    {
+      "month": 55,
+      "energy": 19022.682442417427,
+      "consumerGoods": 7703.843599801307,
+      "militaryPower": 14137,
+      "pacts": 16,
+      "ports": 17,
+      "cargo": null
+    },
+    {
+      "month": 56,
+      "energy": 19619.227472394745,
+      "consumerGoods": 7802.682788438673,
+      "militaryPower": 14267,
+      "pacts": 16,
+      "ports": 17,
+      "cargo": null
+    },
+    {
+      "month": 57,
+      "energy": 20175.224826769834,
+      "consumerGoods": 7894.442104872736,
+      "militaryPower": 14956,
+      "pacts": 16,
+      "ports": 17,
+      "cargo": null
+    },
+    {
+      "month": 58,
+      "energy": 20832.354841319557,
+      "consumerGoods": 7985.702893131402,
+      "militaryPower": 15320,
+      "pacts": 16,
+      "ports": 17,
+      "cargo": null
+    },
+    {
+      "month": 59,
+      "energy": 21383.806117744036,
+      "consumerGoods": 8077.041895379143,
+      "militaryPower": 15639,
+      "pacts": 16,
+      "ports": 17,
+      "cargo": null
+    },
+    {
+      "month": 60,
+      "energy": 22075.53613168084,
+      "consumerGoods": 8167.208206342159,
+      "militaryPower": 13982,
+      "pacts": 16,
+      "ports": 17,
+      "cargo": null
+    },
+    {
+      "month": 61,
+      "energy": 22932.357732148797,
+      "consumerGoods": 8256.066688822979,
+      "militaryPower": 14112,
+      "pacts": 16,
+      "ports": 17,
+      "cargo": null
+    },
+    {
+      "month": 62,
+      "energy": 23668.802327239377,
+      "consumerGoods": 8341.783175469627,
+      "militaryPower": 14418,
+      "pacts": 16,
+      "ports": 17,
+      "cargo": null
+    },
+    {
+      "month": 63,
+      "energy": 24516.341928542795,
+      "consumerGoods": 8427.83567398999,
+      "militaryPower": 14606,
+      "pacts": 16,
+      "ports": 17,
+      "cargo": null
+    },
+    {
+      "month": 64,
+      "energy": 25449.34612114318,
+      "consumerGoods": 8513.53407901564,
+      "militaryPower": 14262,
+      "pacts": 16,
+      "ports": 17,
+      "cargo": null
+    },
+    {
+      "month": 65,
+      "energy": 26341.454437237924,
+      "consumerGoods": 8598.391601193012,
+      "militaryPower": 13605,
+      "pacts": 16,
+      "ports": 17,
+      "cargo": null
+    },
+    {
+      "month": 66,
+      "energy": 27169.277005408192,
+      "consumerGoods": 8674.760707312644,
+      "militaryPower": 14266,
+      "pacts": 16,
+      "ports": 17,
+      "cargo": null
+    },
+    {
+      "month": 67,
+      "energy": 28119.121854107896,
+      "consumerGoods": 8750.37134603014,
+      "militaryPower": 14810,
+      "pacts": 16,
+      "ports": 17,
+      "cargo": null
+    },
+    {
+      "month": 68,
+      "energy": 29121.973065460097,
+      "consumerGoods": 8823.901543330509,
+      "militaryPower": 15736,
+      "pacts": 16,
+      "ports": 18,
+      "cargo": null
+    },
+    {
+      "month": 69,
+      "energy": 30088.846060878524,
+      "consumerGoods": 8893.699330981894,
+      "militaryPower": 16234,
+      "pacts": 16,
+      "ports": 18,
+      "cargo": null
+    },
+    {
+      "month": 70,
+      "energy": 30757.605320216044,
+      "consumerGoods": 8962.68995690393,
+      "militaryPower": 16970,
+      "pacts": 16,
+      "ports": 19,
+      "cargo": null
+    },
+    {
+      "month": 71,
+      "energy": 31641.497100769153,
+      "consumerGoods": 9045.873216611672,
+      "militaryPower": 17205,
+      "pacts": 16,
+      "ports": 19,
+      "cargo": null
+    },
+    {
+      "month": 72,
+      "energy": 32683.807153457565,
+      "consumerGoods": 9136.703668367265,
+      "militaryPower": 17605,
+      "pacts": 16,
+      "ports": 19,
+      "cargo": null
+    },
+    {
+      "month": 73,
+      "energy": 33667.110819332345,
+      "consumerGoods": 9234.485045108502,
+      "militaryPower": 18436,
+      "pacts": 16,
+      "ports": 19,
+      "cargo": null
+    },
+    {
+      "month": 74,
+      "energy": 34799.791934020956,
+      "consumerGoods": 9347.200057456075,
+      "militaryPower": 18748,
+      "pacts": 16,
+      "ports": 19,
+      "cargo": null
+    },
+    {
+      "month": 75,
+      "energy": 35847.901166755175,
+      "consumerGoods": 9468.788925855648,
+      "militaryPower": 19471,
+      "pacts": 16,
+      "ports": 19,
+      "cargo": null
+    },
+    {
+      "month": 76,
+      "energy": 36964.32652123226,
+      "consumerGoods": 9590.397871371859,
+      "militaryPower": 18943,
+      "pacts": 18,
+      "ports": 19,
+      "cargo": null
+    },
+    {
+      "month": 77,
+      "energy": 38087.01651078401,
+      "consumerGoods": 9711.871532386549,
+      "militaryPower": 19189,
+      "pacts": 21,
+      "ports": 20,
+      "cargo": null
+    },
+    {
+      "month": 78,
+      "energy": 39620.60957788581,
+      "consumerGoods": 9832.844860699919,
+      "militaryPower": 19939,
+      "pacts": 21,
+      "ports": 20,
+      "cargo": null
+    },
+    {
+      "month": 79,
+      "energy": 41337.67486018766,
+      "consumerGoods": 9952.62899567314,
+      "militaryPower": 19119,
+      "pacts": 21,
+      "ports": 20,
+      "cargo": null
+    },
+    {
+      "month": 80,
+      "energy": 43097.61687696349,
+      "consumerGoods": 10072.382996628987,
+      "militaryPower": 19708,
+      "pacts": 21,
+      "ports": 20,
+      "cargo": null
+    },
+    {
+      "month": 81,
+      "energy": 44878.69039078562,
+      "consumerGoods": 10190.747817295764,
+      "militaryPower": 19952,
+      "pacts": 21,
+      "ports": 20,
+      "cargo": null
+    },
+    {
+      "month": 82,
+      "energy": 46678.82399512567,
+      "consumerGoods": 10310.75611382412,
+      "militaryPower": 20374,
+      "pacts": 21,
+      "ports": 20,
+      "cargo": null
+    },
+    {
+      "month": 83,
+      "energy": 48494.47516180964,
+      "consumerGoods": 10430.536763194765,
+      "militaryPower": 20839,
+      "pacts": 21,
+      "ports": 20,
+      "cargo": null
+    },
+    {
+      "month": 84,
+      "energy": 50317.529606238495,
+      "consumerGoods": 10551.295779114682,
+      "militaryPower": 21272,
+      "pacts": 21,
+      "ports": 20,
+      "cargo": null
+    },
+    {
+      "month": 85,
+      "energy": 52144.191730926934,
+      "consumerGoods": 10672.45890079118,
+      "militaryPower": 21706,
+      "pacts": 21,
+      "ports": 20,
+      "cargo": null
+    },
+    {
+      "month": 86,
+      "energy": 53943.75021484486,
+      "consumerGoods": 10794.62679206886,
+      "militaryPower": 22453,
+      "pacts": 21,
+      "ports": 20,
+      "cargo": null
+    },
+    {
+      "month": 87,
+      "energy": 55731.902887324395,
+      "consumerGoods": 10917.173765735735,
+      "militaryPower": 22579,
+      "pacts": 22,
+      "ports": 20,
+      "cargo": null
+    },
+    {
+      "month": 88,
+      "energy": 57547.02646689261,
+      "consumerGoods": 11033.749547751548,
+      "militaryPower": 22833,
+      "pacts": 22,
+      "ports": 20,
+      "cargo": null
+    },
+    {
+      "month": 89,
+      "energy": 59350.83085654143,
+      "consumerGoods": 11151.40799586811,
+      "militaryPower": 23375,
+      "pacts": 22,
+      "ports": 20,
+      "cargo": null
+    },
+    {
+      "month": 90,
+      "energy": 61433.272418833236,
+      "consumerGoods": 11270.724004856009,
+      "militaryPower": 23254,
+      "pacts": 22,
+      "ports": 20,
+      "cargo": null
+    },
+    {
+      "month": 91,
+      "energy": 63522.99225906548,
+      "consumerGoods": 11381.988838280085,
+      "militaryPower": 23570,
+      "pacts": 22,
+      "ports": 20,
+      "cargo": null
+    },
+    {
+      "month": 92,
+      "energy": 65446.718005073126,
+      "consumerGoods": 11493.937711303883,
+      "militaryPower": 24314,
+      "pacts": 22,
+      "ports": 20,
+      "cargo": null
+    },
+    {
+      "month": 93,
+      "energy": 67526.55511546248,
+      "consumerGoods": 11606.570580883636,
+      "militaryPower": 24871,
+      "pacts": 22,
+      "ports": 20,
+      "cargo": null
+    },
+    {
+      "month": 94,
+      "energy": 69455.95712826261,
+      "consumerGoods": 11719.5849711111,
+      "militaryPower": 25154,
+      "pacts": 22,
+      "ports": 20,
+      "cargo": null
+    },
+    {
+      "month": 95,
+      "energy": 71613.99023000343,
+      "consumerGoods": 11833.308901824776,
+      "militaryPower": 24287,
+      "pacts": 22,
+      "ports": 20,
+      "cargo": null
+    },
+    {
+      "month": 96,
+      "energy": 73552.43700881086,
+      "consumerGoods": 11947.727258494435,
+      "militaryPower": 24836,
+      "pacts": 22,
+      "ports": 20,
+      "cargo": null
+    },
+    {
+      "month": 97,
+      "energy": 75697.104083845,
+      "consumerGoods": 12074.989444682256,
+      "militaryPower": 24950,
+      "pacts": 22,
+      "ports": 20,
+      "cargo": null
+    },
+    {
+      "month": 98,
+      "energy": 77665.91556012204,
+      "consumerGoods": 12202.811581873253,
+      "militaryPower": 25377,
+      "pacts": 22,
+      "ports": 20,
+      "cargo": null
+    },
+    {
+      "month": 99,
+      "energy": 79794.67517915003,
+      "consumerGoods": 12328.605598171449,
+      "militaryPower": 25777,
+      "pacts": 22,
+      "ports": 20,
+      "cargo": null
+    },
+    {
+      "month": 100,
+      "energy": 81731.17732573499,
+      "consumerGoods": 12454.404463748411,
+      "militaryPower": 26283,
+      "pacts": 22,
+      "ports": 20,
+      "cargo": null
+    },
+    {
+      "month": 101,
+      "energy": 83812.65420543947,
+      "consumerGoods": 12580.205743619435,
+      "militaryPower": 26676,
+      "pacts": 22,
+      "ports": 20,
+      "cargo": null
+    },
+    {
+      "month": 102,
+      "energy": 85725.60952319084,
+      "consumerGoods": 12705.473429902107,
+      "militaryPower": 27115,
+      "pacts": 22,
+      "ports": 20,
+      "cargo": null
+    },
+    {
+      "month": 103,
+      "energy": 87803.40518988179,
+      "consumerGoods": 12830.53241879987,
+      "militaryPower": 26717,
+      "pacts": 22,
+      "ports": 20,
+      "cargo": null
+    },
+    {
+      "month": 104,
+      "energy": 89780.42447867875,
+      "consumerGoods": 12955.574297034393,
+      "militaryPower": 27510,
+      "pacts": 22,
+      "ports": 20,
+      "cargo": null
+    },
+    {
+      "month": 105,
+      "energy": 91860.0206263328,
+      "consumerGoods": 13080.046471884621,
+      "militaryPower": 28065,
+      "pacts": 22,
+      "ports": 20,
+      "cargo": null
+    },
+    {
+      "month": 106,
+      "energy": 93898.9414408667,
+      "consumerGoods": 11928.524150226192,
+      "militaryPower": 28469,
+      "pacts": 22,
+      "ports": 19,
+      "cargo": null
+    },
+    {
+      "month": 107,
+      "energy": 95757.89058282813,
+      "consumerGoods": 12049.64660937349,
+      "militaryPower": 29034,
+      "pacts": 22,
+      "ports": 19,
+      "cargo": null
+    },
+    {
+      "month": 108,
+      "energy": 97486.36313550743,
+      "consumerGoods": 12170.915362924805,
+      "militaryPower": 28545,
+      "pacts": 22,
+      "ports": 19,
+      "cargo": null
+    },
+    {
+      "month": 109,
+      "energy": 99190.25475331122,
+      "consumerGoods": 12308.133361429072,
+      "militaryPower": 28938,
+      "pacts": 22,
+      "ports": 19,
+      "cargo": null
+    },
+    {
+      "month": 110,
+      "energy": 100898.08464533313,
+      "consumerGoods": 12445.351798306718,
+      "militaryPower": 28494,
+      "pacts": 22,
+      "ports": 19,
+      "cargo": null
+    },
+    {
+      "month": 111,
+      "energy": 102635.61607873467,
+      "consumerGoods": 12585.708502216425,
+      "militaryPower": 28911,
+      "pacts": 22,
+      "ports": 19,
+      "cargo": null
+    },
+    {
+      "month": 112,
+      "energy": 104377.92682316693,
+      "consumerGoods": 12714.406656505755,
+      "militaryPower": 29599,
+      "pacts": 22,
+      "ports": 19,
+      "cargo": null
+    },
+    {
+      "month": 113,
+      "energy": 106165.02384435917,
+      "consumerGoods": 12840.297257726825,
+      "militaryPower": 29890,
+      "pacts": 22,
+      "ports": 19,
+      "cargo": null
+    },
+    {
+      "month": 114,
+      "energy": 107953.30142342323,
+      "consumerGoods": 12966.187505803762,
+      "militaryPower": 30216,
+      "pacts": 21,
+      "ports": 19,
+      "cargo": null
+    },
+    {
+      "month": 115,
+      "energy": 109683.22990876471,
+      "consumerGoods": 13074.071659221423,
+      "militaryPower": 30691,
+      "pacts": 22,
+      "ports": 19,
+      "cargo": null
+    },
+    {
+      "month": 116,
+      "energy": 111424.2169029425,
+      "consumerGoods": 13176.263307138357,
+      "militaryPower": 31071,
+      "pacts": 22,
+      "ports": 19,
+      "cargo": null
+    },
+    {
+      "month": 117,
+      "energy": 113222.76220628883,
+      "consumerGoods": 13277.826010359366,
+      "militaryPower": 30618,
+      "pacts": 22,
+      "ports": 19,
+      "cargo": null
+    },
+    {
+      "month": 118,
+      "energy": 115087.68089566412,
+      "consumerGoods": 13386.724261826072,
+      "militaryPower": 29925,
+      "pacts": 22,
+      "ports": 19,
+      "cargo": null
+    },
+    {
+      "month": 119,
+      "energy": 116982.94164580145,
+      "consumerGoods": 13483.21237737148,
+      "militaryPower": 30470,
+      "pacts": 22,
+      "ports": 19,
+      "cargo": null
+    },
+    {
+      "month": 120,
+      "energy": 118822.80490304939,
+      "consumerGoods": 13578.504087860805,
+      "militaryPower": 31056,
+      "pacts": 22,
+      "ports": 19,
+      "cargo": null
+    }
+  ],
+  "negative": [],
+  "ledgerErrors": [],
+  "energyZeroEmpireMonths": 53,
+  "consumerZeroEmpireMonths": 10,
+  "shortages": 10,
+  "allEnergyZeroEmpireMonths": 53,
+  "allShortages": 10,
+  "final": {
+    "month": 120,
+    "energy": 118822.80490304939,
+    "consumerGoods": 13578.504087860805,
+    "militaryPower": 31056,
+    "pacts": 22,
+    "ports": 19,
+    "cargo": null
+  }
+}

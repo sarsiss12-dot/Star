@@ -1,0 +1,66 @@
+{
+  "browser": "133.0.6943.0",
+  "physicalAndroid": false,
+  "viewportEmulation": true,
+  "pass": 14,
+  "fail": 0,
+  "pageErrors": [],
+  "results": [
+    {
+      "name": "actual trade form signs via canonical AI response without immediate resource credit",
+      "ok": true
+    },
+    {
+      "name": "invalid amount and same resource explain rejection through actual form click",
+      "ok": true
+    },
+    {
+      "name": "real departure movement and actual arrival are the sole stock credit path",
+      "ok": true
+    },
+    {
+      "name": "inbox freight accepts once by real nested DOM click and preserves receipts on load",
+      "ok": true
+    },
+    {
+      "name": "cancel actual button prevents new loads while in-flight cargo still delivers",
+      "ok": true
+    },
+    {
+      "name": "convoy layer DOM toggle leaves other independent flags unchanged and removes Canvas pixels",
+      "ok": true
+    },
+    {
+      "name": "actual map tap selects moving convoy and locate button uses same camera",
+      "ok": true
+    },
+    {
+      "name": "740x360 real trade UI fits, scrolls and returns to actual convoy map",
+      "ok": true
+    },
+    {
+      "name": "360x740 real trade UI fits, scrolls and returns to actual convoy map",
+      "ok": true
+    },
+    {
+      "name": "1280x720 real trade UI fits, scrolls and returns to actual convoy map",
+      "ok": true
+    },
+    {
+      "name": "save and reload preserves actual moving position and layer choice",
+      "ok": true
+    },
+    {
+      "name": "foreign third-party hidden cargo never appears in list, draw or hit targets",
+      "ok": true
+    },
+    {
+      "name": "real physical attack updates lost cargo UI without double phantom penalty",
+      "ok": true
+    },
+    {
+      "name": "PWA installs freight modules and reopens offline with persistent v8 cargo",
+      "ok": true
+    }
+  ]
+}

@@ -3509,7 +3509,8 @@ const UI = {
     let h=this.diploIdentity(e,o)+this.diploTreaties(e,o);
     h+=this.warContribution(e,o);
     h+=this.jointPanel(o.id,'diplo');
-    if (e.pact&&e.pact[o.id]) h+=`<div class="mini">Ticaret takasın: ${esc((e.lastSwap&&e.lastSwap[o.id])||'—')}
+    h+=`<button class="abtn" data-a="commerceNew" data-x="${o.id}">▱ Kaynak sözleşmesi</button><button class="abtn" data-a="commerce">Ticaret / konvoylar</button>`;
+    if (e.pact&&e.pact[o.id]) h+=`<div class="mini">Son ay gerçek kargo teslimatın: ${esc((e.lastSwap&&e.lastSwap[o.id])||'—')}
       · ${((e.tradeFlow&&e.tradeFlow[o.id])||0).toFixed(1)} birim/ay</div>`;
     h+='<div class="ph">NEDEN BU İLİŞKİ?</div>';
     const memories=topMemories(e,o.id,4);
@@ -6691,21 +6692,15 @@ const UI = {
     h += `<div class="ph">TİCARET AĞI</div>`;
     h += `<div class="row"><span>Aktif bağlantı</span><b style="color:#6ff2c8">${tr.n} / ${tr.cap}</b></div>`;
     h += `<div class="bar"><i style="width:${clamp(tr.n/tr.cap*100,0,100)}%"></i></div>`;
-    h += `<div class="row"><span>Enerji katkısı</span><b style="color:#65e08a">+%${Math.round(tr.mul*100)}</b></div>`;
-    if (tr.vol) h += `<div class="row"><span>Taşınan hacim</span><b>${Math.round(tr.vol)}</b></div>`;
+    h += `<div class="row"><span>Liman/ağ üretim katkısı</span><b style="color:#65e08a">+%${Math.round(tr.mul*100)}</b></div>`;
+    if (tr.vol) h += `<div class="row"><span>Yol kapasitesi</span><b>${Math.round(tr.vol)}</b></div>`;
     {
       const eneBase = e.inc.ene || 0;
       const gainPct = Math.round((tr.mul||0) * 100);
       const eneGain = eneBase * (tr.mul||0) / Math.max(.0001, 1 + (tr.mul||0));
       h += `<div class="row"><span>Ticaret katkısı</span><b style="color:#65e08a">+%${gainPct} enerji</b></div>`;
-      h += `<div class="mini">Kazanç kervan hedefe <b>vardığında</b> oluşur: kısa hatlar ayda
-        daha çok sefer tamamlar, uzak ortaklar daha seyrek kazandırır.</div>`;
-      if (tr.links && tr.links.length){
-        const best = tr.links.filter(l=>!l.bl).sort((a,b)=>(b.yield||0)-(a.yield||0)).slice(0,3);
-        if (best.length) h += `<div class="mini">En kârlı hatlar: ` + best.map(l=>
-          `${esc(G.sys[l.a].name)}↔${esc(G.sys[l.b].name)} <span style="color:#f2d452">${
-            ((l.trips||0)).toFixed(1)} sefer/ay</span>`).join(' · ') + `</div>`;
-      }
+      h += `<div class="mini">Bu yüzde liman/ağ üretim katkısıdır. Gerçek kargo ve ödeme yalnız konvoy varışında teslim edilir; tahmini sefer geliri eklenmez.</div><button class="abtn" data-a="commerce">▱ Kaynak sözleşmeleri ve konvoylar</button>`;
+
     }
     if (tr.foreign) h += `<div class="row"><span>Dış ticaret</span><b style="color:#f2d452">${tr.foreign} yabancı liman</b></div>`;
     if (tr.raided) h += `<div class="mini" style="color:#ff5f6d">☠ ${tr.raided} rota yağmalandı — bir süre kapalı</div>`;

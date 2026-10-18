@@ -1,0 +1,89 @@
+
+1. SÖZDİZİMİ
+  ✓ node --check ai.js
+  ✓ node --check archive-ui.js
+  ✓ node --check audio.js
+  ✓ node --check combat.js
+  ✓ node --check commerce-ui.js
+  ✓ node --check commerce.js
+  ✓ node --check construction.js
+  ✓ node --check diplomacy.js
+  ✓ node --check economy.js
+  ✓ node --check inbox.js
+  ✓ node --check main.js
+  ✓ node --check map.js
+  ✓ node --check news.js
+  ✓ node --check sw.js
+  ✓ node --check ui.js
+
+2. MANIFEST
+  ✓ manifest.json geçerli JSON
+  ✓ name = "Stars — Galaktik Strateji" — Stars — Galaktik Strateji
+  ✓ short_name = "Stars" — Stars
+  ✓ description yeni metin — 16-bit galaktik 4X strateji oyunu. İmparatorluğunu kur, galaksiyi yönet.
+  ✓ manifest içinde eski marka yok
+
+3. GÖRÜNÜR HTML MARKASI
+  ✓ apple-mobile-web-app-title = Stars
+  ✓ application-name = Stars
+  ✓ title = STARS — Galaktik Strateji
+  ✓ ana menü h1 = STARS — 2 adet
+  ✓ alt başlık korundu
+  ✓ "tek dosya" yanlış bilgisi düzeltildi
+  ✓ index.html görünür eski marka yok
+
+4. KAYIT UYUMLULUĞU
+  ✓ anahtar korundu: yildiz:save
+  ✓ anahtar korundu: yh_audio
+  ✓ anahtar korundu: yh_advisor
+  ✓ anahtar korundu: yh_autoev
+  ✓ anahtar korundu: yh_bg
+  ✓ anahtar korundu: yh_radar
+  ✓ anahtar korundu: yh_templates
+  ✓ anahtar korundu: __yh_probe
+  ✓ anahtar korundu: __yh_diag
+  ✓ depolama anahtarları Stars adına TAŞINMADI
+
+5. KAYIT DOSYASI
+  ✓ yeni indirme adı stars- ile başlıyor
+  ✓ eski yildiz-hanedani- indirme adı kaldırıldı
+  ✓ yükleyici .sav uzantısını kabul ediyor — .sav,.json,.txt,application/json,text/plain
+  ✓ yükleyicide dosya adı kontrolü YOK (eski .sav açılır)
+
+6. SERVICE WORKER
+  ✓ cache adı stars- ile başlıyor — stars-v96a
+  ✓ cache adında eski marka yok
+  ✓ eski cache temizleme davranışı korundu
+  ✓ KABUK listesi okunabildi — 16 dosya
+  ✓ KABUK dosyası mevcut: index.html
+  ✓ KABUK dosyası mevcut: manifest.json
+  ✓ KABUK dosyası mevcut: main.js
+  ✓ KABUK dosyası mevcut: map.js
+  ✓ KABUK dosyası mevcut: combat.js
+  ✓ KABUK dosyası mevcut: ui.js
+  ✓ KABUK dosyası mevcut: ai.js
+  ✓ KABUK dosyası mevcut: diplomacy.js
+  ✓ KABUK dosyası mevcut: economy.js
+  ✓ KABUK dosyası mevcut: commerce.js
+  ✓ KABUK dosyası mevcut: commerce-ui.js
+  ✓ KABUK dosyası mevcut: news.js
+  ✓ KABUK dosyası mevcut: inbox.js
+  ✓ KABUK dosyası mevcut: construction.js
+  ✓ KABUK dosyası mevcut: archive-ui.js
+  ✓ KABUK dosyası mevcut: audio.js
+  ✗ script yükleme sırası korundu — main.js → map.js → combat.js → ai.js → diplomacy.js → economy.js → commerce.js → news.js → inbox.js → construction.js → ui.js → archive-ui.js → commerce-ui.js → audio.js
+
+7. DEĞİŞMEMESİ GEREKEN DOSYALAR
+  ✓ ui.js görünür eski marka taşımıyor
+  ✓ ai.js mevcut ve marka değişikliği içermiyor
+  ✓ audio.js byte-for-byte aynı — 804226980179698a
+  ✓ diplomacy.js mevcut ve marka değişikliği içermiyor
+  ✗ map altyapısı sabit; hedef seçimi 93A referansında
+
+══════════════════════════════════════════
+  GEÇEN: 65   KALAN: 2
+  BAŞARISIZ:
+    · script yükleme sırası korundu
+    · map altyapısı sabit; hedef seçimi 93A referansında
+══════════════════════════════════════════
+

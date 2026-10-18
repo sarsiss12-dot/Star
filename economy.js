@@ -167,8 +167,8 @@ function refreshLuxury(e){
 function tradeHubs(e){
   const out = [];
   for (const c of e.colonies){
-    const pl = G.sys[c.s].planets[c.p];
-    if (pl.col && (pl.col.b.liman || 0) > 0 && out.indexOf(c.s) < 0) out.push(c.s);
+    const pl = G.sys[c.s]?.planets[c.p];
+    if (pl?.col && pl.owner===e.id && (pl.col.b.liman || 0) > 0 && out.indexOf(c.s) < 0) out.push(c.s);
   }
   return out;
 }
@@ -278,17 +278,11 @@ function tradeInfo(e){
   const n = Math.min(open.length, cap);
   const foreignN = open.filter(l => l.dis).length;
   const base = rich ? .07 : .04;
-  /* GERÇEKÇİ TİCARET: kazanç kervanın hedefe VARMASIYLA oluşur.
-     Uzun rotada sefer daha seyrek tamamlanır, dolayısıyla aylık
-     getiri düşer. Kısa ve yoğun hatlar daha kârlıdır. */
-  let vol = 0, tripSum = 0;
-  open.slice(0, cap).forEach(l => {
-    vol += l.vol;
-    const hops = Math.max(1, (l.path ? l.path.length - 1 : 1));
-    l.trips = 3 / hops;                 // ayda tamamlanan sefer sayısı
-    l.yield = l.vol * l.trips * .0016;  // o hattın aylık getirisi
-    tripSum += l.yield;
-  });
+  // Port/network production contribution is separate from freight receipts.
+  // No theoretical 3/hops voyages or yield is allowed to mint energy.
+  let vol=0,tripSum=0;
+  const receipts=typeof Commerce!=='undefined'?Commerce.state().convoys.filter(c=>c.e===e.id&&c.status==='delivered'&&c.finished>G.day-30):[];
+  open.slice(0,cap).forEach(l=>{vol+=l.vol;l.trips=receipts.filter(c=>Commerce.key(c.source,c.target)===l.key).length;l.yield=0;tripSum+=l.trips;});
   const volMul = clamp(vol / 260, 0, 1.4);
   /* ─── TİCARET DOYGUNLUĞU (soft-cap) ───────────────────────────
      Ham formül doğrusaldı: her yeni rota getiriyi aynı oranda
@@ -300,7 +294,7 @@ function tradeInfo(e){
      ve çarpan TRADE_CAP'e asimptotik yaklaşır, asla aşmaz.
      Ağ büyüdükçe kazanç artar ama her yeni rota bir öncekinden
      daha az getirir: gerçek bir ticaret ağı gibi doyar. */
-  const ham = n * base * .5 + foreignN * .03 + volMul * .05 + tripSum;
+  const ham = n * base * .5 + foreignN * .03 + volMul * .05;
   const mul = softCapTrade(ham);
 
   const out = {links, n, cap, cut: links.length - open.length,
@@ -1344,78 +1338,11 @@ function doColonize(e, sys, pl){
    Ticaret anlaşmalı taraflar fazla kaynaklarını takas eder: bolluğu
    olan verir, kıtlığı olan alır ve satan taraf enerji kârı yapar. */
 function tradeFlowTick(){
-  for (const a of G.emps){
-    if (a.dead || a.wild || !a.pact) continue;
-    for (const bid in a.pact){
-      if (!a.pact[bid]) continue;
-      const b = G.emps[bid];
-      if (!b || b.dead || a.war[b.id]) continue;
-      if (typeof tradeBlocked === 'function' && tradeBlocked(a, b)) continue;
-      if (+bid < a.id) continue;                 // her çifti bir kez işle
-      const tr = a.trade;
-      // 94C: yalnız bu iki devletin güncel, açık hattı takas yapabilir.
-      const hubsA=new Set(tradeHubs(a)),hubsB=new Set(tradeHubs(b));
-      const routeOK=l=>{
-        if(!l.dis||l.bl||G.raids&&G.raids[l.key]>G.day)return false;
-        const x=G.sys[l.a],y=G.sys[l.b];
-        if(!x||!y||!((hubsA.has(l.a)&&hubsB.has(l.b))||(hubsB.has(l.a)&&hubsA.has(l.b))))return false;
-        const p=l.path||[l.a,l.b];
-        return p.length>1&&p[0]===l.a&&p[p.length-1]===l.b&&p.every((id,i)=>{
-          const s=G.sys[id];return s&&!(s.owner>=0&&(a.war[s.owner]||b.war[s.owner]))&&(!i||G.sys[p[i-1]].lanes.includes(id));
-        });
-      };
-      if (!tr || !tr.links || !tr.links.some(routeOK)) continue;
-      const month=Math.floor(G.day/30);
-      if(a.tradeFlowAt&&a.tradeFlowAt[b.id]===month)continue;
-      const vol = clamp((tr.vol || 0) / 90, .4, 3);
-      let moved = 0;
-      /* GERÇEK TAKAS: her taraf fazlasını verir, eksiğini alır.
-         Enerji kârı yok — mal karşılığı mal. */
-      const RES_K = ['min','ene','yiy','ala','tuk'];
-      const surplusA = [], surplusB = [], needA = [], needB = [];
-      for (const r of RES_K){
-        const ai = (a.inc && a.inc[r]) || 0, bi = (b.inc && b.inc[r]) || 0;
-        if (ai > 5) surplusA.push({r, v:ai}); else if (ai < 2) needA.push(r);
-        if (bi > 5) surplusB.push({r, v:bi}); else if (bi < 2) needB.push(r);
-      }
-      surplusA.sort((x,y)=>y.v-x.v); surplusB.sort((x,y)=>y.v-x.v);
-      // A'nın fazlası B'nin ihtiyacıysa takas kur; karşılığında B'nin fazlasından al
-      const pairs = [];
-      for (const sA of surplusA){
-        if (!needB.includes(sA.r)) continue;
-        const sB = surplusB.find(x => needA.includes(x.r) && x.r !== sA.r);
-        if (!sB) continue;
-        pairs.push([sA, sB]);
-        if (pairs.length >= 2) break;
-      }
-      for (const [sA, sB] of pairs){
-        let give = Math.min(sA.v * .16, 10) * vol;
-        let take = Math.min(sB.v * .16, 10) * vol;
-        const stockA=a.res[sA.r],stockB=b.res[sB.r];
-        if(!Number.isFinite(stockA)||!Number.isFinite(stockB))continue;
-        const ratio=Math.min(1,Math.max(0,stockA)/give,Math.max(0,stockB)/take);
-        if(!(ratio>0))continue;
-        give*=ratio;take*=ratio;
-        a.res[sA.r] = Math.max(0, (a.res[sA.r]||0) - give);
-        b.res[sA.r] = (b.res[sA.r]||0) + give;
-        b.res[sB.r] = Math.max(0, (b.res[sB.r]||0) - take);
-        a.res[sB.r] = (a.res[sB.r]||0) + take;
-        moved += give + take;
-        a.lastSwap = a.lastSwap || {};
-        a.lastSwap[b.id] = RES[sA.r].ico + '→ ' + RES[sB.r].ico;
-        b.lastSwap = b.lastSwap || {};
-        b.lastSwap[a.id] = RES[sB.r].ico + '→ ' + RES[sA.r].ico;
-      }
-      // fazlası olan hiç yoksa: lüks mal erişimi tek yönlü akar (mevcut sistem)
-      if (!pairs.length) moved = 0;
-      a.tradeFlow = a.tradeFlow || {}; b.tradeFlow = b.tradeFlow || {};
-      a.tradeFlow[b.id] = moved; b.tradeFlow[a.id] = moved;
-      if(moved>0){
-        a.tradeFlowAt=a.tradeFlowAt||{};b.tradeFlowAt=b.tradeFlowAt||{};
-        a.tradeFlowAt[b.id]=month;b.tradeFlowAt[a.id]=month;
-      }
-    }
-  }
+  // 96A: permissions and monthly AI planning create no resource transfer.
+  // Only a physical Commerce.finish arrival credits its recipient.
+  const st=Commerce.state(),month=Math.floor(G.day/30);
+  if(st.flowMonth!==month){st.flowMonth=month;for(const e of G.emps)e.tradeFlow={};}
+  Commerce.aiTick();
 }
 
 /* aylık haraç akışı */

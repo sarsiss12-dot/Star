@@ -1,0 +1,89 @@
+
+A. SÖZDİZİMİ, DOSYA SINIRI VE KARANTİNA
+  ✓ node --check ai.js
+  ✓ node --check archive-ui.js
+  ✓ node --check audio.js
+  ✓ node --check combat.js
+  ✓ node --check commerce-ui.js
+  ✓ node --check commerce.js
+  ✓ node --check construction.js
+  ✓ node --check diplomacy.js
+  ✓ node --check economy.js
+  ✓ node --check inbox.js
+  ✓ node --check main.js
+  ✓ node --check map.js
+  ✓ node --check news.js
+  ✓ node --check sw.js
+  ✓ node --check ui.js
+  ✓ sw cache = 'stars-v96a'
+  ✓ sw KABUK/fetch/activate korundu
+  ✓ kayıt sürümü v:8 KALDI
+  ✓ depolama anahtarı: yildiz:save
+  ✓ depolama anahtarı: yh_audio
+  ✓ depolama anahtarı: yh_advisor
+  ✓ depolama anahtarı: yh_autoev
+  ✓ depolama anahtarı: yh_bg
+  ✓ depolama anahtarı: yh_radar
+  ✓ depolama anahtarı: yh_templates
+  ✓ depolama anahtarı: __yh_probe
+  ✓ depolama anahtarı: __yh_diag
+  ✓ SITUATIONS kataloğu duruyor
+  ✓ situationsTick tanımı duruyor
+  ✓ situationsTick çağrısı PASİF
+  ✓ DURUMLAR sekmesi gizli
+  ✓ 86C.4 aiProposeTerms korundu
+  ✓ 86C.4 NAP yolu korundu
+  ✓ audio.js byte-for-byte aynı — 804226980179698a
+  ✓ manifest.json byte-for-byte aynı — 6b8305490e9a55e9
+  ✓ map altyapısı sabit; hedef seçimi 93A referansında
+  ✓ 93D bilim CSS ve değişmeyen 93C HTML
+
+B. View.tap GÖVDESİ — STATİK DOĞRULAMA
+  ✓ tap parametresi açık adlandırıldı (screenPos)
+  ✓ gövde dengeli parantezle çıkarıldı — 114 satır
+  ✓ gövdede `pos(ev)` YOK
+  ✓ gövdede bağımsız `ev` YOK
+  ✓ parametreyi gölgeleyen `const sp = pos...` YOK
+  ✓ rowHits bloğu hâlâ var (davranış korundu)
+  ✓ filo satırı cycling korundu
+  ✓ çift dokunma davranışı korundu
+  ✓ pointerup: kapat() tap'ten ÖNCE
+  ✓ tap kendi hata sınırında (try/catch)
+  ✓ hata maskelenmiyor — logDiag map-input kaydı
+  ✓ lostpointercapture korundu
+  ✓ pointercancel korundu
+  ✓ resetGesture korundu
+  ✓ bind idempotency korundu
+  ✓ blur/visibility temizliği korundu
+  ✓ setPointerCapture koruması korundu
+  ✓ mapFix View.resetGesture çağırıyor
+  ✓ mapFix resetGesture'ı scheduleRecovery'den ÖNCE çağırıyor
+  ✓ activeWorldState kanonik yardımcısı var
+  ✓ runRecovery aktif dünya kapısı içeriyor
+  ✓ skip tanısı açık biçimde yazılıyor
+  ✓ bozuk dünya `skip` DEĞİL, başarısızlık
+
+C. GERÇEK rowHits ÜRETİM YOLU — View.tap STUB'LANMADAN
+  ✓ gerçek View.tap kullanılıyor (stub değil)
+  ✓ ReferenceError YOK — üretim yolu hatasız — ok
+  ✓ doğru filo seçildi
+  ✓ UI.tab('filo') tam BİR kez — 1
+  ✓ pointer state temiz (pts 0)
+  ✓ hata kaydı üretilmedi (map-input 0) — 0
+  ✓ 10 ardışık üretim turu hatasız — ok
+  ✓ 10 turdan sonra pts hâlâ 0 — 0
+  ✓ 10 turda UI.tab('filo') 11 kez (1+10) — 11
+  ✓ sonraki tek parmak DRAG pan yaptı
+  ✓ drag sırasında zoom DEĞİŞMEDİ (pinch değil)
+  ✓ drag sonrası pts 0 — 0
+
+D. UI HATASI ENJEKSİYONU — pointer state kurtarılıyor
+  ✓ tüketici hatası DIŞARI sızmadı — ok
+  ✓ hata sonrası pointer state SIFIR (asıl kabul kriteri) — 0
+  ✓ hata sonrası pinch temiz
+  ✓ hata MASKELENMEDİ — map-input tanısı yazıldı — map-input · View.tap hatası: enjekte: UI.tab patladı
+  ✓ sonraki tek parmak PAN (pinch DEĞİL)
+  ✓ hata sonrası pts yine 0
+  ✓ hata sonrası normal dokunuş yine çalışıyor — 1
+
+E. AKTİF DÜNYA OLMADAN RECOVERY

@@ -74,7 +74,7 @@ function harness(){
   sb.globalThis=sb;
   vm.createContext(sb);
   for(const f of ['main.js','map.js','combat.js','ai.js','diplomacy.js',
-                  'economy.js','ui.js','audio.js'])
+                  'economy.js','commerce.js','ui.js','commerce-ui.js','audio.js'])
     vm.runInContext(fs.readFileSync(path.join(KOK,f),'utf8'),sb,{filename:f});
   const R=c=>{try{return vm.runInContext('(function(){'+c+'})()',sb);}
               catch(e){return 'HATA: '+e.message;}};
@@ -122,7 +122,7 @@ for(const f of fs.readdirSync(KOK).filter(x=>x.endsWith('.js'))){
 }
 {
   const mn=oku('main.js'), sw=oku('sw.js');
-  ok("sw cache = 'stars-v95e3'", /const CACHE = 'stars-v95e3'/.test(sw));
+  ok("sw cache = 'stars-v96a'", /const CACHE = 'stars-v96a'/.test(sw));
   ok('sw KABUK/fetch/activate korundu', /KABUK/.test(sw) &&
      /addEventListener\('fetch'/.test(sw) && /addEventListener\('activate'/.test(sw));
   ok('kayıt sürümü v:8 KALDI', /v:8, cfg:G\.cfg/.test(mn));

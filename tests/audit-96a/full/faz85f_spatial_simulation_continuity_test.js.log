@@ -1,0 +1,192 @@
+
+A. DOSYA SINIRI, ŞEMA VE KARANTİNA
+  ✓ node --check ai.js
+  ✓ node --check archive-ui.js
+  ✓ node --check audio.js
+  ✓ node --check combat.js
+  ✓ node --check commerce-ui.js
+  ✓ node --check commerce.js
+  ✓ node --check construction.js
+  ✓ node --check diplomacy.js
+  ✓ node --check economy.js
+  ✓ node --check inbox.js
+  ✓ node --check main.js
+  ✓ node --check map.js
+  ✓ node --check news.js
+  ✓ node --check sw.js
+  ✓ node --check ui.js
+  ✓ depolama anahtarı korundu: yildiz:save
+  ✓ depolama anahtarı korundu: yh_audio
+  ✓ depolama anahtarı korundu: yh_advisor
+  ✓ depolama anahtarı korundu: yh_autoev
+  ✓ depolama anahtarı korundu: yh_bg
+  ✓ depolama anahtarı korundu: yh_radar
+  ✓ depolama anahtarı korundu: yh_templates
+  ✓ depolama anahtarı korundu: __yh_probe
+  ✓ depolama anahtarı korundu: __yh_diag
+  ✓ sw cache = 'stars-v96a'
+  ✓ sw KABUK listesi duruyor
+  ✓ sw fetch davranışı duruyor
+  ✓ sw activate davranışı duruyor
+  ✓ kayıt sürümü v:8
+  ✓ önceki bölüm korundu: world
+  ✓ önceki bölüm korundu: threats
+  ✓ önceki bölüm korundu: campaign
+  ✓ önceki bölüm korundu: events
+  ✓ simulation bölümü eklendi
+  ✓ simulation restore sys/emps KURULDUKTAN sonra
+  ✓ simulation restore campaign SONRASINDA
+  ✓ simulation restore events ÖNCESİNDE
+  ✓ simulation restore türetilmiş durumdan ÖNCE
+  ✓ setupGame merkezî resetSimulationRuntimeState kullanıyor
+  ✓ reset, initRuins/korsan üretiminden ÖNCE
+  ✓ türetilmiş/geçici alan simulation içinde YOK: _reach
+  ✓ türetilmiş/geçici alan simulation içinde YOK: _shat
+  ✓ türetilmiş/geçici alan simulation içinde YOK: _shatBio
+  ✓ türetilmiş/geçici alan simulation içinde YOK: _loopWarn
+  ✓ türetilmiş/geçici alan simulation içinde YOK: panopt
+  ✓ türetilmiş/geçici alan simulation içinde YOK: G.fx
+  ✓ türetilmiş/geçici alan simulation içinde YOK: G.vis
+  ✓ türetilmiş/geçici alan simulation içinde YOK: G.speed
+  ✓ türetilmiş/geçici alan simulation içinde YOK: G.over
+  ✓ türetilmiş/geçici alan simulation içinde YOK: minRaw
+  ✓ türetilmiş/geçici alan simulation içinde YOK: G.sits
+  ✓ türetilmiş/geçici alan simulation içinde YOK: sitDone
+  ✓ türetilmiş/geçici alan simulation içinde YOK: chainQueue
+  ✓ wildId için null DEĞİL delete kullanılıyor
+  ✓ SITUATIONS kataloğu duruyor
+  ✓ situationsTick tanımı duruyor
+  ✓ situationsTick çağrısı PASİF (yorumlu)
+  ✓ DURUMLAR sekmesi gizli
+  ✗ 200 ayda situation tetiklenmedi — HATA: Commerce is not defined
+  ✓ audio.js byte-for-byte aynı — 804226980179698a
+  ✓ manifest.json byte-for-byte aynı — 6b8305490e9a55e9
+  ✗ map kaynak kilidi: 91C altyapısı + 93A hedef seçimi
+
+B. V8 SIMULATION ŞEMASI
+  ✓ kayıt sürümü v:8 — v=8
+  ✓ simulation TAM ve YALNIZ yedi anahtar — firstTech,monsterAt,nests,raids,ruins,systems,wildId
+  ✓ world/threats/campaign/events bölümleri korundu
+  ✓ systems SEYREK liste (tüm sistemler değil) — 6/60
+  ✓ yuva kaydı: i + ne + np — i,ne,np
+  ✓ kalıntı kaydı: i + ru — i,ru
+  ✓ savaş kaydı: i + cr + oh — cr,i,oh
+  ✓ sabotaj kaydı: i + sb — i,sb
+  ✓ chainQueue simulation'a KOPYALANMADI
+  ✓ chainQueue campaign'de KALDI
+
+C. KORSAN YUVASI VE KALINTI
+  ✓ yuva#5 hp/timer korundu (10 yükleme) — {"hp":820,"timer":14}
+  ✓ yuva#9 hp/timer korundu — {"hp":410,"timer":3}
+  ✓ nestPow korundu (1.6) — 1.6
+  ✓ nestPow olmayan yuvaya uydurulmadı
+  ✓ kalıntı#12 hp/max/rw/awake korundu — {"hp":900,"max":1200,"rw":"tech","awake":false}
+  ✓ kalıntı#17 awake=true korundu (yükleme uyandırmadı/uyutmadı) — {"hp":300,"max":800,"rw":"mega","awake":true}
+  ✓ G.nests sırası ve üyeliği korundu — [5,9]
+  ✓ G.ruins sırası korundu — [12,17]
+  ✓ tekrarlı/geçersiz nest indeksi deterministik temizlendi — [5,9]
+  ✓ tekrarlı/geçersiz ruin indeksi temizlendi, sıra korundu — [17,12] (kayıt sırası 17 önce)
+  ✓ onarım miktarı raporlandı — nests: 2 geçersiz/tekrar temizlendi, 0 eksik eklendi | ruins: 2 geçersiz/tekrar 
+  ✓ geçersiz ruin ödülü RNG KULLANMADAN reddedildi
+  ✓ reddedilen kalıntı indeksten de düştü — [17]
+  ✓ geçersiz ödül raporlandı — sys#12 geçersiz ruin ödülü -> düşürüldü | ruins: 1 geçersiz/
+
+D. wildId GUARD
+  ✓ wildId=0 (OYUNCU): gerçek korsan devletine onarıldı — wildId=8
+  ✓ wildId=0 (OYUNCU): oyuncu/AI kimliği BOZULMADI
+  ✓ wildId=0 (OYUNCU): yeni devlet veya filo DOĞMADI
+  ✓ wildId=normal AI: gerçek korsan devletine onarıldı — wildId=8
+  ✓ wildId=normal AI: oyuncu/AI kimliği BOZULMADI
+  ✓ wildId=normal AI: yeni devlet veya filo DOĞMADI
+  ✓ wildId=aralık dışı: gerçek korsan devletine onarıldı — wildId=8
+  ✓ wildId=aralık dışı: oyuncu/AI kimliği BOZULMADI
+  ✓ wildId=aralık dışı: yeni devlet veya filo DOĞMADI
+  ✓ wildId=null: gerçek korsan devletine onarıldı — wildId=8
+  ✓ wildId=null: oyuncu/AI kimliği BOZULMADI
+  ✓ wildId=null: yeni devlet veya filo DOĞMADI
+  ✓ geçerli wildId aynen kabul edildi, onarım yapılmadı — wildId=8
+  ✓ wild aday YOKKEN hiçbir normal devlet korsan yapılmadı — wildId undefined
+  ✓ aday yokluğu raporlandı — wildId 1 geçersiz ve wild aday yok — bağlanmadı
+
+E. BASKIN / CANAVAR / İLK TEKNOLOJİ
+  ✓ G.raids ve bitiş günleri korundu (10 yükleme) — {"3_8":120,"4_11":45}
+  ✓ tradeLinks yükleme sonrası aynı rotayı aynı şekilde gösteriyor
+  ✓ G.monsterAt korundu (640) — 640
+  ✓ G._firstTech korundu (gerçek TECHS anahtarları) — {"f_reaktor":0,"f_lazer1":1,"f_kalkan1":2}
+  ✓ scoreCard teknoloji puanı kaydet/yükle ile DEĞİŞMEDİ
+  ✓ geçersiz rota anahtarları düşürüldü, geçerli GERÇEK biçim kaldı — {"3_8":120}
+  ✓ geçersiz raid rotaları raporlandı — raid rotası "999_1000" geçersiz -> düşürüldü|raid rotası "bozuk" geçer
+  ✓ katalogda olmayan tech ve olmayan devlet firstTech'ten düşürüldü — {"f_reaktor":0}
+
+E2. GERÇEK tradeLinks ROTA ANAHTARI (85F.1 hotfix)
+  ✓ gerçek tradeLinks() bir rota üretti — 44_58
+  ✓ gerçek üretim anahtarı "_" biçiminde ( ":" DEĞİL ) — 44_58
+  ✓ yükleme öncesi rota raided görünüyordu — 44_58
+  ✓ GERÇEK anahtar 10 yüklemeden sonra KORUNDU (85F hatası) — {"44_58":120}
+  ✓ bitiş günü birebir korundu — 120 = 120
+  ✓ rota yükleme sonrası hâlâ raided === true (erken açılmadı) — 44_58
+  ✓ 10 ardışık yükleme rotayı çoğaltmadı — 1 anahtar
+  ✓ geçerli gerçek anahtar için onarım raporu üretilmedi
+  ✓ ters sıralı "8_3" kanonik "3_8" biçimine normalize edildi — {"3_8":50}
+  ✓ savunmalı uyumluluk: "3:8" okunup kanonik "3_8" yapıldı — {"3_8":60}
+  ✓ aynı kanonik anahtara düşen iki kayıtta EN GEÇ bitiş korundu — {"3_8":90}
+  ✓ çakışma çözümü sıradan bağımsız (deterministik) — {"3_8":90} / {"3_8":90}
+  ✓ çakışma raporlandı — raid rotası "3_8" -> "3_8" ile birleşti (en geç bitiş 90)
+  ✓ 3_3 / bilinmeyen sistem / metin / NaN düşürüldü, geçerli kaldı — {"3_8":70}
+  ✓ normalleştirme RNG TÜKETMEDİ
+  ✓ yükleme süresi geçmiş rotayı HAYALİ TİKLE silmedi — {"44_58":-1}
+  ✓ tek gerçek raidTick süresi geçen rotayı bir kez temizledi — {}
+  ✓ süresi dolmayan rota raidTick sonrası duruyor
+  ✓ gerçek rotalı yükleme kaynak/ilişki/filo değiştirmedi
+  ✓ gerçek rotalı yükleme RNG tüketmedi ve bildirim üretmedi — log=0
+
+F. sys.cr / orbitHeld / supplyHackBy
+  ✓ sys.cr korundu (2 — menzil aşaması) — 2
+  ✓ sys.orbitHeld korundu (1) — 1
+  ✓ sys.supplyHack korundu (6 — süre azalmadı) — 6
+  ✓ sys.supplyHackBy korundu ve DOĞRU saldırganı gösteriyor (2) — 2
+  ✓ occupationMap sonucu kaydet/yükle öncesiyle AYNI — []
+  ✓ canStatusQuo sonucu aynı
+  ✓ geçersiz orbitHeld normal devlete YÖNLENDİRİLMEDİ — undefined
+  ✓ geçersiz orbitHeld sahiplik aktarımı YAPMADI
+  ✓ geçersiz supplyHackBy atfı temizlendi (rastgele devlete bağlanmadı) — undefined
+  ✓ aktif sabotajın KENDİSİ korundu (supplyHack=6) — 6
+  ✓ her iki onarım da raporlandı — sys#21 geçersiz orbitHeld -> temizlendi|sys#24 geçersiz supplyHackBy -> atıf temizlendi
+
+G. IDEMPOTENCY VE GERÇEK ADIM SÜREKLİLİĞİ
+  ✓ 10 yükleme hiçbir sayaç/hp/timer/menzil/süre İLERLETMEDİ — {"n5":{"hp":820,"timer":14},"n9":{"hp":410,"timer":3},"r12":{"hp":900,"max":1200,"rw":"tec
+  ✓ 10 yüklemede kaynak ve ilişkiler değişmedi
+  ✓ 10 yüklemede filo/gemi/sistem sahipliği değişmedi
+  ✓ 10 yüklemede RNG değişmedi
+  ✓ 10 yükleme BİLDİRİM üretmedi — 0
+  ✓ yükleme sayısı başlangıç durumunu ETKİLEMİYOR
+  ✓ taze yükleme + 1 wildTurn = 10 yükleme + 1 wildTurn
+  ✓ taze yükleme + 1 combatTick = 10 yükleme + 1 combatTick
+
+H. SIZINTI / YENİ OYUN / V7 GÖÇÜ
+  ✓ YENİ OYUN: raids/monsterAt/firstTech sıfırlandı — raids={} mAt=0
+  ✓ YENİ OYUN: eski sistem alanları (cr/orbitHeld/supplyHackBy) temiz
+  ✓ YENİ OYUN: normal üretim bir kez çalıştı (korsan devleti var)
+  ✓ OYUN A zengin yüklendi
+  ✓ OYUN B: A'nın yuva/kalıntısı SIZMADI
+  ✓ OYUN B: A'nın raids/monsterAt/firstTech SIZMADI
+  ✓ OYUN B: A'nın savaş menzili SIZMADI
+  ✓ v7 kaydı HATA ATMADAN açıldı — ok
+  ✓ v7: wildId yaşayan wild devletten deterministik geri bulundu — wildId=8
+  ✓ v7: nests/ruins uydurulmadan boş — [] []
+  ✓ v7: raids {} · monsterAt kanonik 0 · firstTech {}
+  ✓ v7: sistem alanları (nest/cr/orbitHeld/supplyHackBy) uydurulmadı
+  ✓ v7: zehirli oturum değerleri TAŞINMADI
+  ✓ v7: filo doğmadı
+  ✓ v7: bildirim üretilmedi — 0
+  ✓ v7: göç DETERMİNİSTİK (3 tekrar aynı)
+  ✓ v7: göç RNG TÜKETMEDİ
+  ✓ v7: kurtarılan ve kurtarılamayanlar açıkça raporlandı — {"migrated":true,"from":7,"repair":[],"droppedSystems":0,"note":"v7 göçü: wildId yaşayan w
+
+══════════════════════════════════════════
+  GEÇEN: 164   KALAN: 2
+  BAŞARISIZ:
+    · 200 ayda situation tetiklenmedi
+    · map kaynak kilidi: 91C altyapısı + 93A hedef seçimi
+══════════════════════════════════════════
+

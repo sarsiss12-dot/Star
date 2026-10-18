@@ -1,0 +1,769 @@
+{
+  "suites": 95,
+  "skipped": [],
+  "pass": 5207,
+  "fail": 85,
+  "ok": false,
+  "results": [
+    {
+      "name": "faz83_2_brand_test.js",
+      "exit": 1,
+      "durationMs": 949,
+      "pass": 65,
+      "fail": 2,
+      "details": "  ✗ script yükleme sırası korundu — main.js → map.js → combat.js → ai.js → diplomacy.js → economy.js → commerce.js → news.js → inbox.js → construction.js → ui.js → archive-ui.js → commerce-ui.js → audio.js\n  ✗ map altyapısı sabit; hedef seçimi 93A referansında"
+    },
+    {
+      "name": "faz83_3_render_recovery_test.js",
+      "exit": 1,
+      "durationMs": 2421,
+      "pass": 55,
+      "fail": 5,
+      "details": "  ✗ script yükleme sırası değişmedi — main.js → map.js → combat.js → ai.js → diplomacy.js → economy.js → commerce.js → news.js → inbox.js → construction.js → ui.js → archive-ui.js → commerce-ui.js → audio.js\n  ✗ serialize kurtarma öncesi/sonrası anlamsal olarak aynı — HATA: Commerce is not defined\n  ✗ ralli korundu\n  ✗ loopBuild korundu\n  ✗ UI.tab hâlâ function"
+    },
+    {
+      "name": "faz83_4_redraw_leaders_test.js",
+      "exit": 1,
+      "durationMs": 3316,
+      "pass": 66,
+      "fail": 11,
+      "details": "  ✗ yükleme sırası korundu\n  ✗ HAM serialize birebir eşit — HATA: Commerce is not defined\n  ✗ leaders alanı öncesinde yoktu\n  ✗ kurtarma leaders alanı OLUŞTURMADI\n  ✗ ralli korundu\n  ✗ loopBuild korundu\n  ✗ gün/yıl/ay korundu\n  ✗ filolar korundu — undefined filo\n  ✗ 120 ay + harita + sekme + kayıt — 120ay:Commerce is not defined\n  ✗ UI.tab hâlâ function\n  ✗ ralli/loopBuild korundu"
+    },
+    {
+      "name": "faz84a_intel_dedup_test.js",
+      "exit": 1,
+      "durationMs": 1770,
+      "pass": 80,
+      "fail": 6,
+      "details": "  ✗ yükleme sırası değişmedi\n  ✗ 200 ayda situation tetiklenmedi — HATA: Commerce is not defined\n  ✗ 120 ay + kaydet/yükle — 120ay:Commerce is not defined\n  ✗ UI.tab hâlâ function\n  ✗ leaderPool saf kaldı\n  ✗ situation pasif kaldı"
+    },
+    {
+      "name": "faz84b_vassal_state_dedup_test.js",
+      "exit": 1,
+      "durationMs": 2631,
+      "pass": 122,
+      "fail": 2,
+      "details": "  ✗ yükleme sırası değişmedi\n  ✗ 200 ayda situation tetiklenmedi — HATA: Commerce is not defined"
+    },
+    {
+      "name": "faz84c_state_visibility_gate_test.js",
+      "exit": 1,
+      "durationMs": 2619,
+      "pass": 118,
+      "fail": 2,
+      "details": "  ✗ yükleme sırası değişmedi\n  ✗ 200 ayda situation tetiklenmedi — HATA: Commerce is not defined"
+    },
+    {
+      "name": "faz85a_political_save_integrity_test.js",
+      "exit": 1,
+      "durationMs": 5383,
+      "pass": 173,
+      "fail": 2,
+      "details": "  ✗ 200 ayda situation tetiklenmedi — HATA: Commerce is not defined\n  ✗ map kaynak kilidi: 91C altyapısı + 93A hedef seçimi"
+    },
+    {
+      "name": "faz85b_load_idempotency_test.js",
+      "exit": 1,
+      "durationMs": 11685,
+      "pass": 132,
+      "fail": 2,
+      "details": "  ✗ 200 ayda situation tetiklenmedi — HATA: Commerce is not defined\n  ✗ map kaynak kilidi: 91C altyapısı + 93A hedef seçimi"
+    },
+    {
+      "name": "faz85c_crisis_save_continuity_test.js",
+      "exit": 1,
+      "durationMs": 8985,
+      "pass": 140,
+      "fail": 2,
+      "details": "  ✗ 200 ayda situation tetiklenmedi — HATA: Commerce is not defined\n  ✗ map kaynak kilidi: 91C altyapısı + 93A hedef seçimi"
+    },
+    {
+      "name": "faz85d_campaign_save_continuity_test.js",
+      "exit": 1,
+      "durationMs": 12996,
+      "pass": 180,
+      "fail": 5,
+      "details": "  ✗ 200 ayda situation tetiklenmedi — HATA: Commerce is not defined\n  ✗ map kaynak kilidi: 91C altyapısı + 93A hedef seçimi\n  ✗ 6 yükleme zamanı gelen girişi çalıştırmadı — undefined\n  ✗ tek gerçek aylık ilerleme onu TAM BİR kez çalıştırdı\n  ✗ zamanı gelmemiş giriş kuyrukta kaldı"
+    },
+    {
+      "name": "faz85e_event_inbox_continuity_test.js",
+      "exit": 1,
+      "durationMs": 6775,
+      "pass": 147,
+      "fail": 2,
+      "details": "  ✗ 200 ayda situation tetiklenmedi — HATA: Commerce is not defined\n  ✗ map kaynak kilidi: 91C altyapısı + 93A hedef seçimi"
+    },
+    {
+      "name": "faz85f_spatial_simulation_continuity_test.js",
+      "exit": 1,
+      "durationMs": 15469,
+      "pass": 164,
+      "fail": 2,
+      "details": "  ✗ 200 ayda situation tetiklenmedi — HATA: Commerce is not defined\n  ✗ map kaynak kilidi: 91C altyapısı + 93A hedef seçimi"
+    },
+    {
+      "name": "faz86a_intel_command_center_test.js",
+      "exit": 1,
+      "durationMs": 3112,
+      "pass": 124,
+      "fail": 1,
+      "details": "  ✗ 200 ayda situation tetiklenmedi — HATA: Commerce is not defined"
+    },
+    {
+      "name": "faz86b_deal_engine_test.js",
+      "exit": 1,
+      "durationMs": 3093,
+      "pass": 127,
+      "fail": 4,
+      "details": "  ✗ 200 ayda situation tetiklenmedi — HATA: Commerce is not defined\n  ✗ tür \"freight\": normalize→validate→quote→execute hattı çalıştı — valid=false quote=false exec=false maliyet=0 · freight: eksik kaynak veya miktar\n  ✗ 14 türün tamamı sınandı — 15\n  ✗ 240 aylık simülasyon hatasız — Commerce is not defined"
+    },
+    {
+      "name": "faz86c_1_quote_effective_plan_test.js",
+      "exit": 1,
+      "durationMs": 2321,
+      "pass": 99,
+      "fail": 1,
+      "details": "  ✗ 200 ayda situation tetiklenmedi — HATA: Commerce is not defined"
+    },
+    {
+      "name": "faz86c_2_transaction_test.js",
+      "exit": 1,
+      "durationMs": 2814,
+      "pass": 108,
+      "fail": 1,
+      "details": "  ✗ 200 ayda situation tetiklenmedi — HATA: Commerce is not defined"
+    },
+    {
+      "name": "faz86c_3_ai_negotiation_test.js",
+      "exit": 1,
+      "durationMs": 2707,
+      "pass": 81,
+      "fail": 7,
+      "details": "  ✗ map altyapısı sabit; hedef seçimi 93A referansında\n  ✗ seed 11: 360 ay HATASIZ — Commerce is not defined\n  ✗ seed 11: AI–AI müzakere GERÇEKTEN çalıştı — 0 müzakere\n  ✗ seed 99: 360 ay HATASIZ — Commerce is not defined\n  ✗ seed 99: AI–AI müzakere GERÇEKTEN çalıştı — 0 müzakere\n  ✗ seed 404: 360 ay HATASIZ — Commerce is not defined\n  ✗ seed 404: AI–AI müzakere GERÇEKTEN çalıştı — 0 müzakere"
+    },
+    {
+      "name": "faz86c_4_reciprocal_offers_test.js",
+      "exit": 1,
+      "durationMs": 2284,
+      "pass": 85,
+      "fail": 11,
+      "details": "  ✗ map altyapısı sabit; hedef seçimi 93A referansında\n  ✗ seed 11: 360 ay HATASIZ — Commerce is not defined\n  ✗ seed 11: her müzakere tek bir sonuçla sayıldı\n  ✗ seed 11: kampanyada NAP kuruldu (bitişte süresi dolabilir) — 0 yeni NAP\n  ✗ seed 99: 360 ay HATASIZ — Commerce is not defined\n  ✗ seed 99: her müzakere tek bir sonuçla sayıldı\n  ✗ seed 99: kampanyada NAP kuruldu (bitişte süresi dolabilir) — 0 yeni NAP\n  ✗ seed 404: 360 ay HATASIZ — Commerce is not defined\n  ✗ seed 404: her müzakere tek bir sonuçla sayıldı\n  ✗ seed 404: kampanyada NAP kuruldu (bitişte süresi dolabilir) — 0 yeni NAP\n  ✗ 3 seed toplamında GERÇEK karşı teklif üretildi"
+    },
+    {
+      "name": "faz86c_4h_map_input_test.js",
+      "exit": 1,
+      "durationMs": 2123,
+      "pass": 79,
+      "fail": 2,
+      "details": "  ✗ map altyapısı sabit; hedef seçimi 93A referansında\n  ✗ 93D bilim CSS ve değişmeyen 93C HTML"
+    },
+    {
+      "name": "faz86c_4h_r1_exact_regression_test.js",
+      "exit": 1,
+      "durationMs": 2027,
+      "pass": 108,
+      "fail": 2,
+      "details": "  ✗ map altyapısı sabit; hedef seçimi 93A referansında\n  ✗ 93D bilim CSS ve değişmeyen 93C HTML\n  ✓ ReferenceError YOK — üretim yolu hatasız — ok"
+    },
+    {
+      "name": "faz86c_4h_r2_surface_camera_layers_test.js",
+      "exit": 1,
+      "durationMs": 3386,
+      "pass": 81,
+      "fail": 2,
+      "details": "  ✗ map altyapısı sabit; hedef seçimi 93A referansında\n  ✗ 93D bilim CSS ve değişmeyen 93C HTML"
+    },
+    {
+      "name": "faz86c_4h_r3_surface_lifecycle_test.js",
+      "exit": 1,
+      "durationMs": 2326,
+      "pass": 93,
+      "fail": 2,
+      "details": "  ✗ map altyapısı sabit; hedef seçimi 93A referansında\n  ✗ 93D bilim CSS ve değişmeyen 93C HTML"
+    },
+    {
+      "name": "faz86c_4h_r4_diagnosis_test.js",
+      "exit": 1,
+      "durationMs": 2200,
+      "pass": 89,
+      "fail": 2,
+      "details": "  ✗ map altyapısı sabit; hedef seçimi 93A referansında\n  ✗ 93D bilim CSS ve değişmeyen 93C HTML"
+    },
+    {
+      "name": "faz86c_4h_r4_targeted_diag_test.js",
+      "exit": 1,
+      "durationMs": 2184,
+      "pass": 91,
+      "fail": 2,
+      "details": "  ✗ map altyapısı sabit; hedef seçimi 93A referansında\n  ✗ 93D bilim CSS ve değişmeyen 93C HTML"
+    },
+    {
+      "name": "faz86c_5_1_ui_portraits_native_canvas_test.js",
+      "exit": 0,
+      "durationMs": 1284,
+      "pass": 48,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz86c_5_diagnostics_test.js",
+      "exit": 0,
+      "durationMs": 1457,
+      "pass": 38,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz86c_5_native_canvas_test.js",
+      "exit": 0,
+      "durationMs": 2551,
+      "pass": 66,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz86c_6_transaction_acceptance_test.js",
+      "exit": 0,
+      "durationMs": 13220,
+      "pass": 529,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz86c_strict_deal_ai_test.js",
+      "exit": 1,
+      "durationMs": 2925,
+      "pass": 142,
+      "fail": 3,
+      "details": "  ✗ seed 11: 360 ay HATASIZ — Commerce is not defined\n  ✗ seed 99: 360 ay HATASIZ — Commerce is not defined\n  ✗ seed 404: 360 ay HATASIZ — Commerce is not defined"
+    },
+    {
+      "name": "faz86d_envoy_missions_test.js",
+      "exit": 0,
+      "durationMs": 7519,
+      "pass": 58,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz86e_diplomacy_center_test.js",
+      "exit": 0,
+      "durationMs": 5956,
+      "pass": 45,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz86f_ai_balance_test.js",
+      "exit": 0,
+      "durationMs": 26408,
+      "pass": 25,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz86g_integration_handoff_test.js",
+      "exit": 0,
+      "durationMs": 2006,
+      "pass": 16,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz87a_espionage_feedback_test.js",
+      "exit": 0,
+      "durationMs": 4788,
+      "pass": 36,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz87b_ai_operation_selection_test.js",
+      "exit": 0,
+      "durationMs": 3760,
+      "pass": 26,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz87c_1_intrigue_outcomes_test.js",
+      "exit": 0,
+      "durationMs": 5731,
+      "pass": 45,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz87c_special_operation_outcomes_test.js",
+      "exit": 0,
+      "durationMs": 5031,
+      "pass": 39,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz87d_offer_repetition_test.js",
+      "exit": 0,
+      "durationMs": 3428,
+      "pass": 24,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz88a_1_ship_dispatch_test.js",
+      "exit": 0,
+      "durationMs": 4131,
+      "pass": 30,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz88a_fleet_routes_test.js",
+      "exit": 0,
+      "durationMs": 4985,
+      "pass": 38,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz88b_combat_feedback_test.js",
+      "exit": 0,
+      "durationMs": 3222,
+      "pass": 24,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz89a_memory_factions_test.js",
+      "exit": 0,
+      "durationMs": 3254,
+      "pass": 24,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz89b_daily_campaign_test.js",
+      "exit": 0,
+      "durationMs": 28546,
+      "pass": 11,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz90rc_1_save_boundary_test.js",
+      "exit": 0,
+      "durationMs": 4679,
+      "pass": 19,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz90rc_2_load_feedback_test.js",
+      "exit": 0,
+      "durationMs": 2111,
+      "pass": 14,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz90rc_3_load_transaction_test.js",
+      "exit": 0,
+      "durationMs": 13460,
+      "pass": 48,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz90rc_release_candidate_test.js",
+      "exit": 1,
+      "durationMs": 3714,
+      "pass": 14,
+      "fail": 1,
+      "details": "✗ index script sırası üretim bağımlılık sırasıyla aynı — AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:"
+    },
+    {
+      "name": "faz91a_special_presentation_test.js",
+      "exit": 0,
+      "durationMs": 7899,
+      "pass": 37,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz91b_campaign_observer_test.js",
+      "exit": 0,
+      "durationMs": 23910,
+      "pass": 5,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz91b_faction_share_test.js",
+      "exit": 0,
+      "durationMs": 1277,
+      "pass": 8,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz91c_ai_candidates_test.js",
+      "exit": 0,
+      "durationMs": 868,
+      "pass": 6,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz91c_pirate_combat_test.js",
+      "exit": 0,
+      "durationMs": 2725,
+      "pass": 21,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz91d_1_fleet_names_native_canvas_test.js",
+      "exit": 0,
+      "durationMs": 1315,
+      "pass": 29,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz91d_territory_native_canvas_test.js",
+      "exit": 1,
+      "durationMs": 1914,
+      "pass": 39,
+      "fail": 1,
+      "details": "  ✗ Historical source lock still detects changes to tap, recovery and fleet drawing — Expected values to be strictly equal:"
+    },
+    {
+      "name": "faz91e_1_federation_policy_test.js",
+      "exit": 0,
+      "durationMs": 8233,
+      "pass": 31,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz91e_federation_laws_test.js",
+      "exit": 0,
+      "durationMs": 4738,
+      "pass": 31,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz92a_war_contribution_test.js",
+      "exit": 0,
+      "durationMs": 5023,
+      "pass": 34,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz92b_settlement_proposal_test.js",
+      "exit": 0,
+      "durationMs": 6472,
+      "pass": 33,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz92b1_ship_lock_test.js",
+      "exit": 0,
+      "durationMs": 2832,
+      "pass": 19,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz92c_settlement_apply_test.js",
+      "exit": 0,
+      "durationMs": 6241,
+      "pass": 28,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz92d_settlement_agenda_test.js",
+      "exit": 0,
+      "durationMs": 3556,
+      "pass": 14,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz93a_logistics_targets_test.js",
+      "exit": 0,
+      "durationMs": 2401,
+      "pass": 15,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz93a1_production_panels_test.js",
+      "exit": 0,
+      "durationMs": 4141,
+      "pass": 21,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz93b_pending_shipments_test.js",
+      "exit": 0,
+      "durationMs": 4268,
+      "pass": 31,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz93c_fleet_composition_test.js",
+      "exit": 0,
+      "durationMs": 6534,
+      "pass": 47,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz93d_research_planner_test.js",
+      "exit": 0,
+      "durationMs": 4842,
+      "pass": 33,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz93d_science_ui_test.js",
+      "exit": 0,
+      "durationMs": 2702,
+      "pass": 20,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz93d1_navy_campaign_test.js",
+      "exit": 0,
+      "durationMs": 27825,
+      "pass": 8,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz93d1_navy_production_test.js",
+      "exit": 0,
+      "durationMs": 2551,
+      "pass": 17,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz93e_specialization_test.js",
+      "exit": 0,
+      "durationMs": 4314,
+      "pass": 34,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz93e1_doctrine_test.js",
+      "exit": 0,
+      "durationMs": 4280,
+      "pass": 32,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz94a_camera_test.js",
+      "exit": 0,
+      "durationMs": 3646,
+      "pass": 27,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz94b_exploration_test.js",
+      "exit": 0,
+      "durationMs": 5176,
+      "pass": 37,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz94c_camera_trade_test.js",
+      "exit": 0,
+      "durationMs": 4360,
+      "pass": 32,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz94d_mobile_diplomacy_war_test.js",
+      "exit": 0,
+      "durationMs": 3396,
+      "pass": 28,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz94d1_war_visibility_test.js",
+      "exit": 0,
+      "durationMs": 4620,
+      "pass": 34,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz95a_strategic_ai_test.js",
+      "exit": 0,
+      "durationMs": 6359,
+      "pass": 51,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz95b_federation_reform_test.js",
+      "exit": 0,
+      "durationMs": 10163,
+      "pass": 68,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz95c_joint_campaign_test.js",
+      "exit": 0,
+      "durationMs": 9431,
+      "pass": 59,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz95c1_diplomacy_test.js",
+      "exit": 0,
+      "durationMs": 4124,
+      "pass": 32,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz95c1_logistics_test.js",
+      "exit": 0,
+      "durationMs": 3472,
+      "pass": 24,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz95c1_storage_test.js",
+      "exit": 0,
+      "durationMs": 2263,
+      "pass": 15,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz95c1_ui_test.js",
+      "exit": 0,
+      "durationMs": 4257,
+      "pass": 29,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz95d_identity_test.js",
+      "exit": 0,
+      "durationMs": 4771,
+      "pass": 23,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz95d_map_test.js",
+      "exit": 0,
+      "durationMs": 3391,
+      "pass": 23,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz95d_war_preview_test.js",
+      "exit": 0,
+      "durationMs": 2646,
+      "pass": 19,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz95e_construction_test.js",
+      "exit": 0,
+      "durationMs": 3079,
+      "pass": 21,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz95e_inbox_test.js",
+      "exit": 0,
+      "durationMs": 3156,
+      "pass": 20,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz95e_news_test.js",
+      "exit": 0,
+      "durationMs": 3046,
+      "pass": 20,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz95e_ui_save_test.js",
+      "exit": 0,
+      "durationMs": 2314,
+      "pass": 17,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz95e1_random_event_switch_test.js",
+      "exit": 0,
+      "durationMs": 1435,
+      "pass": 8,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz95e2_regression_test.js",
+      "exit": 0,
+      "durationMs": 1616,
+      "pass": 8,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz95e3_layers_test.js",
+      "exit": 0,
+      "durationMs": 1520,
+      "pass": 10,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz95e3_sensor_test.js",
+      "exit": 0,
+      "durationMs": 1255,
+      "pass": 7,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz96a_cargo_test.js",
+      "exit": 0,
+      "durationMs": 6295,
+      "pass": 36,
+      "fail": 0,
+      "details": ""
+    }
+  ]
+}

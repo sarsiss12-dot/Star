@@ -1,3 +1,18 @@
+# 96A güncel açık riskler — 18 Ekim 2026
+
+- 96 paket/5303 kontrol ve 80gerçek Chromium senaryosunun son benzersiz sonuçlarında 0kalan hata. İlk başarısızlıklar tests/audit-96a içinde korunur; tek kesintisiz temiz tam koşu iddiası yoktur.
+- Fiziksel Android/WebView/kurulu PWA, düşük donanım FPS/ısı/bellek veOS klavye kabulü yapılmadı. 360×740 ticaret paneli erişilir; önceki harita döndürme tavsiyesi korunur. Chromium mobil emülasyonu fiziksel cihaz testi değildir.
+- AI doğal benimsemesi sınırlı: 100 sistem 120 ayda 11/99 sözleşme 0, 404 sözleşme 3/teslimat 18. Enerji stokları eski sürümden daha düşük, 404askerîgücü daha düşük. Kıtlık düşüşü kargo etkisi diye yorumlanamaz; genel AI dengelemesi 96C önerisine kalır.
+- Sunucu kampanyasında 11/99 toplam süre arttı; farklı AI yolları nedeniyle sabit iş yüküFPSregresyonu ölçümü değildir. Herpaintte rota araması yok; 256 aktif konvoy, 128görünür simge, 128 aktif sözleşme/12 devlet sınırı vardır. Dolunca yeni yük depoda bekler. Son 256 terminal sefer ve 128 kapalı sözleşme ayrıntısı budanır, toplam muhasebe kalır.
+- Karşılıklı takasta her yön bağımsızdır: tek yön kaybolursa diğeri geri alınmaz. İptal yeni yüklemeyi durdurur; yoldaki yük geçerli pakt/limanda teslim olur. Engel 180 günü aşarsa yük kayıp. Bu kasıtlırisk UI'da açıklanır; sigorta/eskort/escrow yeni sistemi yoktur.
+- Üçüncü taraf ticaret ayrıntıları bu fazda sensör görüşünde bile gösterilmez. Kendi/alıcısı olduğun yük görünür. Bilinmeyen transit üzerinden yeni rota yok; bu durum açık limanlar varken de sözleşmeyi engelleyebilir.
+- Save v 8 geriye uyumluluk 95E.3→96Ayönündedir. Yeni yoldaki kargolu 96Akaydını eski 95E.3uygulamasında kullanmak desteklenmez. Eski kayıt geçmiş kargo uydurulmadan boş kökle açılır.
+- Özgün oyuncu kaydı gerektiren önceki kuruluş/gemi kökeni iddiaları çözülmüş sayılmadı. GitHub yayını yapılmadı; ZIP henüz main'de değildir. Yayın ayrı planlama sohbetine bırakıldı.
+
+Aşağıdaki başlıklar tarihsel kayıttır; eski “96Abaşlatılmadı” ifadeleri güncel durum değildir.
+
+---
+
 # 95E.3 güncel açık riskler — 18 Ekim 2026
 
 - Yeni hedefli ve tam regresyonda 94 paket/5203 kontrol ile 66 gerçek Chromium senaryosu geçti; kalan hata yok. Bu sonuç eski başlıkların fiziksel cihaz veya denge kabulü yerine geçmez.

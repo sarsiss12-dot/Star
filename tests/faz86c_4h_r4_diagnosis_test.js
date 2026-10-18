@@ -74,7 +74,7 @@ function harness(){
   sb.globalThis=sb;
   vm.createContext(sb);
   for(const f of ['main.js','map.js','combat.js','ai.js','diplomacy.js',
-                  'economy.js','ui.js','audio.js'])
+                  'economy.js','commerce.js','ui.js','commerce-ui.js','audio.js'])
     vm.runInContext(fs.readFileSync(path.join(KOK,f),'utf8'),sb,{filename:f});
   const R=c=>{try{return vm.runInContext('(function(){'+c+'})()',sb);}
               catch(e){return 'HATA: '+e.message;}};
@@ -153,7 +153,7 @@ for(const f of fs.readdirSync(KOK).filter(x=>x.endsWith('.js'))){
 }
 {
   const mn=oku('main.js'), mp=oku('map.js'), ui=oku('ui.js'), sw=oku('sw.js');
-  ok("sw cache = 'stars-v95e3'", /const CACHE = 'stars-v95e3'/.test(sw));
+  ok("sw cache = 'stars-v96a'", /const CACHE = 'stars-v96a'/.test(sw));
   ok('sw KABUK/fetch/activate korundu', /KABUK/.test(sw) &&
      /addEventListener\('fetch'/.test(sw) && /addEventListener\('activate'/.test(sw));
   ok('kayıt sürümü v:8 KALDI', /v:8, cfg:G\.cfg/.test(mn));
@@ -179,7 +179,7 @@ for(const f of fs.readdirSync(KOK).filter(x=>x.endsWith('.js'))){
      /rebuildCanvasSurface\(sebep \+ '\+resize'\)/.test(mn));
   /* Tanı */
   ok('tanı: renderReport var', /function renderReport\(/.test(mn));
-  ok('tanı: BUILD_ID güncel', /const BUILD_ID = '95e3';/.test(mn));
+  ok('tanı: BUILD_ID güncel', /const BUILD_ID = '96a';/.test(mn));
   ok('tanı: olay izi var', /function izOlay\(/.test(mn));
   ok('tanı: ilk başarısızlık korunuyor', /function ilkHataKaydet\(/.test(mn));
   ok('tanı: çizim aşaması izleniyor', /this\._drawStage = 'tamam'/.test(mp));
@@ -445,7 +445,7 @@ console.log('\nF. TANI RAPORU HANGİ DALLARI AYIRIYOR');
      Y.cvEsles===true && Y.gEsles===true);
   const I=d.iz||{};
   ok('rapor build, olay izi, nesil ve jeton içeriyor',
-     I.build==='95e3' && /vis>focus/.test(I.olaylar||'') &&
+     I.build==='96a' && /vis>focus/.test(I.olaylar||'') &&
      I.gen===true && I.tok===true, JSON.stringify(I));
   ok('rapor viewport/canvas/DPR içeriyor',
      I.dpr!==undefined && !!I.cvPx, I.cvPx+' dpr '+I.dpr);
