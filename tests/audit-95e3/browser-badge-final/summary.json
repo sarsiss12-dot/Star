@@ -1,0 +1,30 @@
+{
+  "browser": "133.0.6943.0",
+  "physicalAndroid": false,
+  "viewportEmulation": true,
+  "pass": 5,
+  "fail": 0,
+  "pageErrors": [],
+  "results": [
+    {
+      "name": "Canvas toggles and all three modes 740x360",
+      "ok": true
+    },
+    {
+      "name": "Canvas toggles and all three modes 360x740",
+      "ok": true
+    },
+    {
+      "name": "Canvas toggles and all three modes 1280x720",
+      "ok": true
+    },
+    {
+      "name": "Canvas zoom .10 line gate and .18 emblem gate are real pixels",
+      "ok": true
+    },
+    {
+      "name": "full map federation badge pixels survive territory labels in portrait",
+      "ok": true
+    }
+  ]
+}

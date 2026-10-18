@@ -1,0 +1,58 @@
+✓ war click starts actual war and charges exactly once
+✓ war rapid double DOM click has one payment
+✓ changed war gate consumes no resources: G.p.res.etk=0
+✓ changed war gate consumes no resources: G.emps[1].dead=true
+✓ changed war gate consumes no resources: G.p.civics=["testPeace"];CIVICS.testPeace={flag:"universal"};recalcMods(G.p)
+✓ cancel and replacement modal leave detached war DOM inert
+✓ save load invalidates actual stale war button
+✓ federation permission disables real final button
+✓ changed defense obligations require second real confirmation
+✓ military federation obligation survives actual war click
+✓ sensor accepted DOM offer changes discovery, live fleet visibility and real map pixels
+✓ sensor real movement updates view at departure and arrival, v8 load rebuilds it
+✗ Canvas toggles and all three modes 740x360 — {"gold":692,"teal":72,"red":106,"alpha":1072}
+✗ Canvas toggles and all three modes 360x740 — locator.click: Timeout 5000ms exceeded.
+Call log:
+[2m  - waiting for locator('#fedLinksBtn')[22m
+[2m    - locator resolved to <button class="tool" id="fedLinksBtn" aria-pressed="false" data-a="fedLinksToggle" title="Bilinen federasyon üyelikleri · altın kesik çizgi">…</button>[22m
+[2m  - attempting click action[22m
+[2m    2 × waiting for element to be visible, enabled and stable[22m
+[2m      - element is visible, enabled and stable[22m
+[2m      - scrolling into view if needed[22m
+[2m      - done scrolling[22m
+[2m      - <div id="rotate" class="show">…</div> intercepts pointer events[22m
+[2m    - retrying click action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible, enabled and stable[22m
+[2m      - element is visible, enabled and stable[22m
+[2m      - scrolling into view if needed[22m
+[2m      - done scrolling[22m
+[2m      - <div id="rotate" class="show">…</div> intercepts pointer events[22m
+[2m    - retrying click action[22m
+[2m      - waiting 100ms[22m
+[2m    8 × waiting for element to be visible, enabled and stable[22m
+[2m      - element is visible, enabled and stable[22m
+[2m      - scrolling into view if needed[22m
+[2m      - done scrolling[22m
+[2m      - <div id="rotate" class="show">…</div> intercepts pointer events[22m
+[2m    - retrying click action[22m
+[2m      - waiting 500ms[22m
+[2m    - waiting for element to be visible, enabled and stable[22m
+
+✗ Canvas toggles and all three modes 1280x720 — {"gold":1209,"teal":71,"red":101,"alpha":1590}
+✓ Canvas offscreen endpoint keeps intersecting known connection visible
+✓ Canvas zoom .10 line gate and .18 emblem gate are real pixels
+✓ known relation needs discovered endpoint, not current radar; secret bonds stay secret
+✗ same-day alliance and membership changes invalidate cached Canvas links — Expected values to be strictly equal:
+
+72 !== 0
+
+✓ federation precedence and repeated on off maintain deterministic pixels and v8 flags
+✗ PWA reload keeps independent layer choices and actual offline modules — page.evaluate: TypeError: Cannot read properties of null (reading 'home')
+    at Object.fit (http://127.0.0.1:43443/map.js:793:25)
+    at enterGame (http://127.0.0.1:43443/main.js:7981:8)
+    at eval (eval at evaluate (:311:30), <anonymous>:1:36)
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:311:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+BROWSER GEÇEN: 16 KALAN: 5

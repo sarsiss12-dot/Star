@@ -1,0 +1,23 @@
+{
+  "browser": "133.0.6943.0",
+  "physicalAndroid": false,
+  "viewportEmulation": true,
+  "pass": 2,
+  "fail": 1,
+  "pageErrors": [],
+  "results": [
+    {
+      "name": "Canvas toggles and all three modes 740x360",
+      "ok": true
+    },
+    {
+      "name": "Canvas toggles and all three modes 360x740",
+      "ok": false,
+      "error": "page.click: Timeout 5000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#sbToggle')\u001b[22m\n\u001b[2m    - locator resolved to <button class=\"\" id=\"sbToggle\">›</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div id=\"outMap\" class=\"grpOut open\">…</div> from <div id=\"tools\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div id=\"outMap\" class=\"grpOut open\">…</div> from <div id=\"tools\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    8 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div id=\"outMap\" class=\"grpOut open\">…</div> from <div id=\"tools\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 500ms\u001b[22m\n\n    at mapSetup (/workspace/scratch/357bc57bab3b/star/tests/browser-95e3.js:21:909)\n    at async /workspace/scratch/357bc57bab3b/star/tests/browser-95e3.js:40:131\n    at async test (/workspace/scratch/357bc57bab3b/star/tests/browser-95e3.js:16:185)\n    at async /workspace/scratch/357bc57bab3b/star/tests/browser-95e3.js:39:3"
+    },
+    {
+      "name": "Canvas toggles and all three modes 1280x720",
+      "ok": true
+    }
+  ]
+}

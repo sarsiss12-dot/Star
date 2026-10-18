@@ -1,0 +1,25 @@
+{
+  "browser": "133.0.6943.0",
+  "physicalAndroid": false,
+  "viewportEmulation": true,
+  "pass": 0,
+  "fail": 3,
+  "pageErrors": [],
+  "results": [
+    {
+      "name": "war click starts actual war and charges exactly once",
+      "ok": false,
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\nfalse !== true\n\n    at eq (/workspace/scratch/357bc57bab3b/star/tests/browser-95e3.js:8:29)\n    at /workspace/scratch/357bc57bab3b/star/tests/browser-95e3.js:25:332\n    at async test (/workspace/scratch/357bc57bab3b/star/tests/browser-95e3.js:16:185)\n    at async /workspace/scratch/357bc57bab3b/star/tests/browser-95e3.js:25:2"
+    },
+    {
+      "name": "sensor accepted DOM offer changes discovery, live fleet visibility and real map pixels",
+      "ok": false,
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\nfalse !== true\n\n    at eq (/workspace/scratch/357bc57bab3b/star/tests/browser-95e3.js:8:29)\n    at /workspace/scratch/357bc57bab3b/star/tests/browser-95e3.js:35:110\n    at async test (/workspace/scratch/357bc57bab3b/star/tests/browser-95e3.js:16:185)\n    at async /workspace/scratch/357bc57bab3b/star/tests/browser-95e3.js:33:2"
+    },
+    {
+      "name": "Canvas offscreen endpoint keeps intersecting known connection visible",
+      "ok": false,
+      "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert.ok((await value('layerPixels()')).gold>20)\n\n    at /workspace/scratch/357bc57bab3b/star/tests/browser-95e3.js:48:203\n    at async test (/workspace/scratch/357bc57bab3b/star/tests/browser-95e3.js:16:185)\n    at async /workspace/scratch/357bc57bab3b/star/tests/browser-95e3.js:48:2"
+    }
+  ]
+}

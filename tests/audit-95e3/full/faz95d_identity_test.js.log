@@ -1,0 +1,24 @@
+✓ 11 new galaxy has distinct names including player and saved distinct emblems
+✓ 11 generation repeats deterministically from the same configuration
+✓ 99 new galaxy has distinct names including player and saved distinct emblems
+✓ 99 generation repeats deterministically from the same configuration
+✓ 404 new galaxy has distinct names including player and saved distinct emblems
+✓ 404 generation repeats deterministically from the same configuration
+✓ 11 95C.1 starting world, research, stock, fleet and RNG are unchanged apart from identities
+✓ 99 95C.1 starting world, research, stock, fleet and RNG are unchanged apart from identities
+✓ 404 95C.1 starting world, research, stock, fleet and RNG are unchanged apart from identities
+✓ exhaustion with a constant random source still reserves every name
+✓ canonical case and whitespace collision includes player name
+✓ machine and hive character pools are selected rather than generic republics
+✓ repeated random emblem changes every component and never game RNG
+✓ editor lives in appearance, has all five controls and explicit random button
+✓ chosen emblem survives a new game, save v8 and load
+✓ legacy v8 missing emblem migrates deterministically without renaming or RNG
+✓ malformed emblem fields cannot become paths or arbitrary drawing input
+✓ askeri federation name, emblem and reform/presidency continuity
+✓ bilimsel federation name, emblem and reform/presidency continuity
+✓ ticaret federation name, emblem and reform/presidency continuity
+✓ large federation pool is unique despite repeated random input
+✓ state emblem normalization is cached and does not mutate serialized world
+✓ native atlas is cached, bounded, visibly distinct and generated without game RNG
+GEÇEN: 23 KALAN: 0

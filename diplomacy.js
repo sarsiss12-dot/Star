@@ -1059,7 +1059,7 @@ function endTreatiesForWar(a, b){
   breakPact(a, b);
   if (a.ally) a.ally[b.id] = false;
   if (b.ally) b.ally[a.id] = false;
-  for(const key of ['visionFrom','spynet','passage']){
+  for(const key of ['visionFrom','shareVis','spynet','passage']){
     if(a[key])delete a[key][b.id];if(b[key])delete b[key][a.id];
   }
 }
@@ -1075,7 +1075,8 @@ function normalizeWarTreaties(){
                     (b.nap&&Object.prototype.hasOwnProperty.call(b.nap,a.id)));
     const hadPact=!!((a.pact&&a.pact[b.id])||(b.pact&&b.pact[a.id]));
     const hadAlly=!!((a.ally&&a.ally[b.id])||(b.ally&&b.ally[a.id]));
-    if (!(hadNap||hadPact||hadAlly)) continue;
+    const hadSensors=!!(a.visionFrom?.[b.id]||b.visionFrom?.[a.id]||a.shareVis?.[b.id]||b.shareVis?.[a.id]);
+    if (!(hadNap||hadPact||hadAlly||hadSensors)) continue;
     out.pairs++;if(hadNap)out.nap++;if(hadPact)out.pact++;if(hadAlly)out.ally++;
     endTreatiesForWar(a,b);
   }
@@ -8679,6 +8680,7 @@ function offerShareVision(e, o){
   if (rnd() < clamp(p, .05, .95)){
     e.shareVis = e.shareVis || {}; o.shareVis = o.shareVis || {};
     e.shareVis[o.id] = true; o.shareVis[e.id] = true;
+    if(e===G.p||o===G.p)refreshSharedVision();
     if (typeof remember === 'function') remember(o, e.id, 'yardimEtti');
     return {ok:true, kabul:true, msg: o.name + ' istihbarat paylaşımını kabul etti'};
   }
@@ -8810,19 +8812,15 @@ function billRejected(e, key){
    ayda bir çalışır.
    ═══════════════════════════════════════════════════════════════════ */
 function shareVision(giver, taker){
-  if (!giver || !taker || giver.dead || taker.dead) return 0;
+  if (!giver || !taker || giver.dead || taker.dead || giver.war?.[taker.id] || taker.war?.[giver.id]) return 0;
+  const live=nativeSensorVision(giver);
   let yeni = 0;
   for (const sy of G.sys){
-    if (!sy.seen) continue;
-    /* Veren gördüyse alan da görür */
-    if (sy.seen.indexOf(giver.id) >= 0 && sy.seen.indexOf(taker.id) < 0){
-      sy.seen.push(taker.id);
-      yeni++;
+    if ((sy.seen.includes(giver.id)||live.has(sy.id)) && !sy.seen.includes(taker.id)){
+      sy.seen.push(taker.id);yeni++;
     }
-    /* Anlık görüş alanı (fog) — varsa kopyala */
-    if (sy.vis && sy.vis.indexOf(giver.id) >= 0 && sy.vis.indexOf(taker.id) < 0)
-      sy.vis.push(taker.id);
   }
+  if(taker===G.p)refreshSharedVision();
   return yeni;
 }
 
@@ -8833,7 +8831,7 @@ function visionTick(){
       const g = G.emps[gid];
       if (!g || g.dead){ delete e.visionFrom[gid]; continue; }
       /* Savaş çıkarsa paylaşım biter — kimse düşmanına göz vermez */
-      if (e.war[g.id]){ delete e.visionFrom[gid]; continue; }
+      if (!e.visionFrom[gid] || e.war[g.id] || g.war[e.id]){ delete e.visionFrom[gid]; continue; }
       shareVision(g, e);
     }
   }
@@ -9813,7 +9811,7 @@ function diplomacyMapConnections(zoom=.3){
  if(!G.p||zoom<.10)return [];
  const signature=JSON.stringify([Math.floor(G.day),zoom<.18?12:36,FED_LINKS_ON,ALLY_LINKS_ON,G.emps.map(e=>[e.id,e.dead,e.home,G.p.contact[e.id],G.p.intel?.[e.id],Object.entries(e.ally||{}).filter(x=>x[1]).map(x=>x[0])]),(G.feds||[]).map(f=>[f.id,f.leader,f.members,f.emblem])]);
  if(DIPLO_MAP_CACHE&&DIPLO_MAP_CACHE.world===G.sys&&DIPLO_MAP_CACHE.vis===G.vis&&DIPLO_MAP_CACHE.signature===signature)return DIPLO_MAP_CACHE.lines;
- const endpoints=new Map();for(const s of G.sys){if(!pSeen(s)||s.owner!==G.p.id&&!pVis(s)||!territoryOwnerInfo(s.owner)?.known)continue;const e=G.emps[s.owner];if(!endpoints.has(e.id)||s.id===e.home)endpoints.set(e.id,s);}
+ const endpoints=new Map();for(const s of G.sys){if(!pSeen(s)||!territoryOwnerInfo(s.owner)?.known)continue;const e=G.emps[s.owner];if(!endpoints.has(e.id)||s.id===e.home)endpoints.set(e.id,s);}
  const out=[],pairs=new Set(),limit=zoom<.18?12:36;
  const add=(a,b,kind,emblem)=>{const key=Math.min(a,b)+':'+Math.max(a,b);if(a===b||pairs.has(key)||!endpoints.has(a)||!endpoints.has(b)||out.length>=limit)return;pairs.add(key);out.push({a,b,kind,from:endpoints.get(a),to:endpoints.get(b),emblem});};
  if(FED_LINKS_ON)for(const f of G.feds||[]){const ids=f.members.filter(id=>!G.emps[id]?.dead&&knownFederationBond(G.p,f,id)&&endpoints.has(id));if(ids.length<2)continue;const hub=ids.includes(f.leader)?f.leader:ids[0];for(const id of ids)if(id!==hub)add(hub,id,'federation',f.emblem||makeEmblem('federation:'+G.seed+':'+f.id,'#f5c25c',true));}

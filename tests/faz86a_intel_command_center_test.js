@@ -104,7 +104,7 @@ for(const f of fs.readdirSync(KOK).filter(x=>x.endsWith('.js'))){
 }
 {
   const ui=oku('ui.js'), dip=oku('diplomacy.js'), ai=oku('ai.js');
-  ok("sw cache = 'stars-v95e2'", /const CACHE = 'stars-v95e2'/.test(oku('sw.js')));
+  ok("sw cache = 'stars-v95e3'", /const CACHE = 'stars-v95e3'/.test(oku('sw.js')));
   const sw=oku('sw.js');
   ok('sw KABUK/fetch/activate korundu',
      /KABUK/.test(sw) && /addEventListener\('fetch'/.test(sw) &&

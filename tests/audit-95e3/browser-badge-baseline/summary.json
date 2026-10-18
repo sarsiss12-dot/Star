@@ -1,0 +1,15 @@
+{
+  "browser": "133.0.6943.0",
+  "physicalAndroid": false,
+  "viewportEmulation": true,
+  "pass": 0,
+  "fail": 1,
+  "pageErrors": [],
+  "results": [
+    {
+      "name": "full map federation badge pixels survive territory labels in portrait",
+      "ok": false,
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\ntrue !== false\n\n    at eq (/workspace/scratch/357bc57bab3b/star/tests/browser-95e3.js:8:29)\n    at /workspace/scratch/357bc57bab3b/star/tests/browser-95e3.js:58:3\n    at async test (/workspace/scratch/357bc57bab3b/star/tests/browser-95e3.js:16:185)\n    at async /workspace/scratch/357bc57bab3b/star/tests/browser-95e3.js:55:2"
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+
+A. SÖZDİZİMİ, DOSYA SINIRI VE KARANTİNA
+  ✓ node --check ai.js
+  ✓ node --check archive-ui.js
+  ✓ node --check audio.js
+  ✓ node --check combat.js
+  ✓ node --check construction.js
+  ✓ node --check diplomacy.js
+  ✓ node --check economy.js
+  ✓ node --check inbox.js
+  ✓ node --check main.js
+  ✓ node --check map.js
+  ✓ node --check news.js
+  ✓ node --check sw.js
+  ✓ node --check ui.js
+  ✓ sw cache = 'stars-v95e3'
+  ✓ sw KABUK/fetch/activate korundu
+  ✓ kayıt sürümü v:8 KALDI
+  ✓ depolama anahtarı: yildiz:save
+  ✓ depolama anahtarı: yh_audio
+  ✓ depolama anahtarı: yh_advisor
+  ✓ depolama anahtarı: yh_autoev
+  ✓ depolama anahtarı: yh_bg
+  ✓ depolama anahtarı: yh_radar
+  ✓ depolama anahtarı: yh_templates
+  ✓ depolama anahtarı: __yh_probe
+  ✓ depolama anahtarı: __yh_diag
+  ✓ B: başlangıç context IIFE'si KALDIRILDI
+  ✓ B: context olaylarının tek sahibi yüzey yaşam döngüsü
+  ✓ A: bağlama jetonu var (_bindToken)
+  ✓ A: _guncel jetonu karşılaştırıyor
+  ✓ A: unbindSurface kaydı _boundCv'den bağımsız
+  ✓ A: geri alma kısmi yeni bağlamayı söküyor
+  ✓ C: resize hatası yüzey basamağına ulaşıyor
+  ✓ tanı: renderReport var
+  ✓ tanı: BUILD_ID güncel
+  ✓ tanı: olay izi var
+  ✓ tanı: ilk başarısızlık korunuyor
+  ✓ tanı: çizim aşaması izleniyor
+  ✓ tanı: rapor dışa aktarma eylemi var
+  ✓ tanı: pano yoksa dosya indirme var
+  ✓ R2: worldBoundsFrom korundu
+  ✓ R2: LOGI_ON bağımsız katman korundu
+  ✓ R1: tap(screenPos) korundu
+  ✓ SITUATIONS kataloğu duruyor
+  ✓ situationsTick çağrısı PASİF
+  ✓ DURUMLAR sekmesi gizli
+  ✓ audio.js byte-for-byte aynı — 804226980179698a
+  ✓ manifest.json byte-for-byte aynı — 6b8305490e9a55e9
+  ✓ map altyapısı sabit; hedef seçimi 93A referansında
+  ✓ 93D bilim CSS ve değişmeyen 93C HTML
+
+B. BAŞARISIZ HAZIRLIK SONRASI TEK GİRİŞ (A bulgusu)
+  ✓ hazırlık hatasında false döndü
+  ✓ DOM eski elemente geri alındı
+  ✓ View.g eski değerinde ve tutarlı
+  ✓ A: tek dokunuş → TEK filo seçimi (önce 2 idi) — 1 seçim
+  ✓ A: 40 px sürükleme → kamera TAM 40 birim (önce 80 idi) — 40 birim
+  ✓ geri alma sonrası pinch tek katsayıda çalışıyor
+  ✓ zincir sonunda pts 0
+
+C. CONTEXT OLAYLARI TEKİL SAHİPLİKTE (B bulgusu)
+  ✓ B: İLK canvas'ta contextlost TAM 1 (önce 2 idi) — 1
+  ✓ B: İLK canvas'ta contextrestored TAM 1 (önce 2 idi) — 1
+  ✓ B: YENİ canvas aynı korumayı aldı — {"l":1,"r":1}
+  ✓ B: EMEKLİ canvas'ta context dinleyicisi KALMADI (önce 1 idi) — toplam 0
+  ✓ B: emekli contextrestored kurtarma PLANLAMIYOR — 0
+  ✓ B: güncel contextrestored kurtarma PLANLIYOR — 1
+
+D. MEVCUT YÜZEYDE RESIZE HATASI (C bulgusu)
+  ✓ C: resize hatası yüzey yeniden kurmayı TETİKLEDİ (önce 0 idi) — 1 deneme
+  ✓ C: resize hatası açıkça kaydedildi — resize hatası (resize): enjekte: setTransform | resize hatası (resize+surface): enjekte: setTr
+  ✓ C: kurtarma bayrağı serbest kaldı
+
+E. BAŞARILI/BAŞARISIZ 10 DEĞİŞİM
+  ✓ 10 değişim: 7 başarılı + 3 başarısız üretildi — 7/3
+  ✓ global dinleyiciler SABİT kaldı — {"blur":1,"vis":1} → {"blur":1,"vis":1}
+  ✓ emekli yüzeylerde dinleyici KALMADI — 0
+  ✓ güncel yüzeyde her olaydan TAM 1 — {"pointerdown":1,"pointermove":1,"pointerup":1,"pointercancel":1,"lostpointercapture":1,"wheel":1,"contextlost":1,"contextrestored":1,"_toplam":8}
+  ✓ AYNI canvas'a yeniden bağlamada tek dokunuş → TEK seçim — 1
+  ✓ AYNI canvas'a yeniden bağlamada kayma TAM 40 — 40
+
+F. TANI RAPORU HANGİ DALLARI AYIRIYOR
+  ✓ dal 1: çizim hiç başlamadı ayırt ediliyor — hic
+  ✓ dal 2: tamamlanan çizim "tamam" damgası bırakıyor — {"stage":"tamam","drawN":1,"bitti":true}
+  ✓ dal 3: aşamada hata → son aşama görünüyor — zemin
+  ✓ dal 4: çizimden SONRA resize ayırt ediliyor — true
+  ✓ dal 5: yanlış/eski yüzeye çizim ayırt ediliyor — {"once":true,"sonra":false,"cvEsles":true,"gEsles":true}
+  ✓ dal 5: View.cv / View.g eşleşmesi raporlanıyor
+  ✓ rapor build, olay izi, nesil ve jeton içeriyor — {"build":"95e1","olaylar":"resize>resize>vis>focus","gen":true,"tok":true,"dpr":1,"cvPx":"900x420"}
+  ✓ rapor viewport/canvas/DPR içeriyor — 900x420 dpr 1
+  ✓ İLK başarısızlık 50 kayıt sonrası KORUNUYOR
+  ✓ İLK başarısızlık ikinci raporla EZİLMİYOR
+  ✓ rapor metne çevrilebiliyor — sebep=metin · t=1792302853913 · build=95e1 · olaylar=resize>
+
+G. KORUNAN DAVRANIŞLAR
+  ✓ kurtarma seçimi korudu
+  ✓ kurtarma kamerayı korudu
+  ✓ kurtarma ana mod ve katman tercihlerini korudu
+  ✓ oyun verisi ve RNG DEĞİŞMEDİ
+  ✓ 12 birleşimde katmanlar hâlâ bağımsız
+
+H. GERÇEK KAYITLA KAMERA
+  ✓ gerçek kayıt 6881×6881 yükleniyor — 6881x6881
+  ✓ her zoom seviyesinde merkezlenemeyen sistem YOK — {"z19":0,"z10":0,"z03":0}
+
+══════════════════════════════════════════
+  GEÇEN: 89   KALAN: 0
+══════════════════════════════════════════
+

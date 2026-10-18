@@ -5579,7 +5579,7 @@ const UI = {
       ${group('KESİN KATILACAKLAR',p.certain)}${group('KOŞULLU KATILABİLECEKLER',p.conditional)}
       <div class="ph">BİLİNMEYENLER</div><div class="mini">İstihbarat kapsamı dışındaki siyasi bağlantılar ve gizli taahhütler belirlenemez. Bu bölüm gizli devlet sayısını göstermez.</div>
       ${p.risks.map(v=>`<div class="mini">⚠ ${esc(v)}</div>`).join('')}${p.blockers.map(v=>`<div class="mini">Engel: ${esc(v)}</div>`).join('')}
-      </div><div class="mft"><button id="warFinalConfirm" class="ch" ${p.ok?'':'disabled'}>ONAYLA · SAVAŞ İLAN ET</button><button class="ch" data-a="closem">Vazgeç</button></div>`,'war');
+      </div><div class="mft"><button id="warFinalConfirm" data-a="warFinalConfirm" class="ch" ${p.ok?'':'disabled'}>ONAYLA · SAVAŞ İLAN ET</button><button class="ch" data-a="closem">Vazgeç</button></div>`,'war');
     const pending={world:G.sys,player:G.p,id,key,signature:p.signature};this._warPreview=pending;
     this._hook('warFinalConfirm',()=>{
       if(this._warPreview!==pending||G.sys!==pending.world||G.p!==pending.player)return;

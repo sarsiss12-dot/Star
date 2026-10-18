@@ -1,0 +1,92 @@
+[
+  {
+    "path": "main.js",
+    "before": "0f339e8bdccffccf2adbbc9a7e14f246d5c110b70a2349c5fb562f52e58709bf",
+    "after": "d5a4005809ece4a089b4ab22419dea22632f208eac755e76efc1e136225dde96",
+    "unchanged": false
+  },
+  {
+    "path": "ui.js",
+    "before": "4ebbc2a1cedca93e746a6726f6c9760dbce8a71e37fd68c2a9c355a51ef3ff10",
+    "after": "5128c3752e5b6fd7e7e10e92dbc2dacd1229ee833c2881f2915cab96982597f6",
+    "unchanged": false
+  },
+  {
+    "path": "diplomacy.js",
+    "before": "806a0d1f36ca66b52a993fd48b1245d1dfcccc361f12778262624f2ab7075faf",
+    "after": "fb46438e4bdc238cbf52759492f937bd69c5a274fa2a04274f0ebeef99459c96",
+    "unchanged": false
+  },
+  {
+    "path": "map.js",
+    "before": "c59311110046fb2d86c6a4e8db9187815f150b63b74134c64da92ee5354a6e73",
+    "after": "904b593313ec75bdf1f42f2a72d7dd467143160531aa3b406e5fec79cfa9c2d5",
+    "unchanged": false
+  },
+  {
+    "path": "sw.js",
+    "before": "98dc43928b81bda3e793495ae56998f1c7d99502a9c610081bbaeb6fafb38a7f",
+    "after": "9c9509a750c6dc697418e7b2bb78094185fbb10328570f9d90ba2ad9c2cc9709",
+    "unchanged": false
+  },
+  {
+    "path": "index.html",
+    "before": "879b7ca2c1f4b45ac3bfece173975671ae8e6e0b0124f79ee37678c0fbe0f42e",
+    "after": "879b7ca2c1f4b45ac3bfece173975671ae8e6e0b0124f79ee37678c0fbe0f42e",
+    "unchanged": true
+  },
+  {
+    "path": "archive-ui.js",
+    "before": "6ae0e5c785b4ade1d7203584542d1a758e2134cb33c72dfabb2fc0b8baaf3ad8",
+    "after": "6ae0e5c785b4ade1d7203584542d1a758e2134cb33c72dfabb2fc0b8baaf3ad8",
+    "unchanged": true
+  },
+  {
+    "path": "inbox.js",
+    "before": "90c0341025f14e4983a517ec60ff94f0598e8d9c83c02ba8a37f21a931a7035c",
+    "after": "90c0341025f14e4983a517ec60ff94f0598e8d9c83c02ba8a37f21a931a7035c",
+    "unchanged": true
+  },
+  {
+    "path": "news.js",
+    "before": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
+    "after": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
+    "unchanged": true
+  },
+  {
+    "path": "construction.js",
+    "before": "d9b544b0328f26576ff90e02fe49c1b7f3798dfd844a8c39ee8dc6c0890debda",
+    "after": "d9b544b0328f26576ff90e02fe49c1b7f3798dfd844a8c39ee8dc6c0890debda",
+    "unchanged": true
+  },
+  {
+    "path": "economy.js",
+    "before": "a5e6e7ebb6051d626f670127d711239d31f4b4dfa7df289f5a47555ceaa62553",
+    "after": "a5e6e7ebb6051d626f670127d711239d31f4b4dfa7df289f5a47555ceaa62553",
+    "unchanged": true
+  },
+  {
+    "path": "combat.js",
+    "before": "b4e21fcdb6fdaaa93da07313131470de3e8a3c28b5650226a9c4a2713bde73a5",
+    "after": "b4e21fcdb6fdaaa93da07313131470de3e8a3c28b5650226a9c4a2713bde73a5",
+    "unchanged": true
+  },
+  {
+    "path": "ai.js",
+    "before": "ae741b8abcb6930c50971f2dab8143f2c28ff49dec015d5f92589982f46e9c39",
+    "after": "ae741b8abcb6930c50971f2dab8143f2c28ff49dec015d5f92589982f46e9c39",
+    "unchanged": true
+  },
+  {
+    "path": "audio.js",
+    "before": "804226980179698a6b56d292d88c0c7226d1e54f06001aab63b52d6db5685262",
+    "after": "804226980179698a6b56d292d88c0c7226d1e54f06001aab63b52d6db5685262",
+    "unchanged": true
+  },
+  {
+    "path": "manifest.json",
+    "before": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
+    "after": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
+    "unchanged": true
+  }
+]

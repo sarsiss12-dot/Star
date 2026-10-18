@@ -157,7 +157,7 @@ const mainJs=oku('main.js');
 ['yildiz:save','yh_audio','yh_advisor','yh_autoev','yh_bg','yh_radar',
  'yh_templates','__yh_probe','__yh_diag'].forEach(k=>
   ok('anahtar: '+k, mainJs.includes(k)));
-ok("sw cache = 'stars-v95e2'", /const CACHE = 'stars-v95e2'/.test(oku('sw.js')));
+ok("sw cache = 'stars-v95e3'", /const CACHE = 'stars-v95e3'/.test(oku('sw.js')));
 
 /* SITUATION KARANTİNASI */
 {

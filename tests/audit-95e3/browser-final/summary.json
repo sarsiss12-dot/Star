@@ -1,0 +1,98 @@
+{
+  "browser": "133.0.6943.0",
+  "physicalAndroid": false,
+  "viewportEmulation": true,
+  "pass": 22,
+  "fail": 0,
+  "pageErrors": [],
+  "results": [
+    {
+      "name": "war click starts actual war and charges exactly once",
+      "ok": true
+    },
+    {
+      "name": "war rapid double DOM click has one payment",
+      "ok": true
+    },
+    {
+      "name": "changed war gate consumes no resources: G.p.res.etk=0",
+      "ok": true
+    },
+    {
+      "name": "changed war gate consumes no resources: G.emps[1].dead=true",
+      "ok": true
+    },
+    {
+      "name": "changed war gate consumes no resources: G.p.civics=[\"testPeace\"];CIVICS.testPeace={flag:\"universal\"};recalcMods(G.p)",
+      "ok": true
+    },
+    {
+      "name": "cancel and replacement modal leave detached war DOM inert",
+      "ok": true
+    },
+    {
+      "name": "save load invalidates actual stale war button",
+      "ok": true
+    },
+    {
+      "name": "federation permission disables real final button",
+      "ok": true
+    },
+    {
+      "name": "changed defense obligations require second real confirmation",
+      "ok": true
+    },
+    {
+      "name": "military federation obligation survives actual war click",
+      "ok": true
+    },
+    {
+      "name": "sensor accepted DOM offer changes discovery, live fleet visibility and real map pixels",
+      "ok": true
+    },
+    {
+      "name": "sensor real movement updates view at departure and arrival, v8 load rebuilds it",
+      "ok": true
+    },
+    {
+      "name": "Canvas toggles and all three modes 740x360",
+      "ok": true
+    },
+    {
+      "name": "Canvas toggles and all three modes 360x740",
+      "ok": true
+    },
+    {
+      "name": "Canvas toggles and all three modes 1280x720",
+      "ok": true
+    },
+    {
+      "name": "Canvas offscreen endpoint keeps intersecting known connection visible",
+      "ok": true
+    },
+    {
+      "name": "Canvas camera pan keeps clipped links and changes actual map pixels",
+      "ok": true
+    },
+    {
+      "name": "Canvas zoom .10 line gate and .18 emblem gate are real pixels",
+      "ok": true
+    },
+    {
+      "name": "known relation needs discovered endpoint, not current radar; secret bonds stay secret",
+      "ok": true
+    },
+    {
+      "name": "same-day alliance and membership changes invalidate cached Canvas links",
+      "ok": true
+    },
+    {
+      "name": "federation precedence and repeated on off maintain deterministic pixels and v8 flags",
+      "ok": true
+    },
+    {
+      "name": "PWA reload keeps independent layer choices and actual offline modules",
+      "ok": true
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+
+A. SÖZDİZİMİ, DOSYA SINIRI VE KARANTİNA
+  ✓ node --check ai.js
+  ✓ node --check archive-ui.js
+  ✓ node --check audio.js
+  ✓ node --check combat.js
+  ✓ node --check construction.js
+  ✓ node --check diplomacy.js
+  ✓ node --check economy.js
+  ✓ node --check inbox.js
+  ✓ node --check main.js
+  ✓ node --check map.js
+  ✓ node --check news.js
+  ✓ node --check sw.js
+  ✓ node --check ui.js
+  ✓ sw cache = 'stars-v95e3'
+  ✓ sw KABUK/fetch/activate korundu
+  ✓ kayıt sürümü v:8 KALDI
+  ✓ depolama anahtarı: yildiz:save
+  ✓ depolama anahtarı: yh_audio
+  ✓ depolama anahtarı: yh_advisor
+  ✓ depolama anahtarı: yh_autoev
+  ✓ depolama anahtarı: yh_bg
+  ✓ depolama anahtarı: yh_radar
+  ✓ depolama anahtarı: yh_templates
+  ✓ depolama anahtarı: __yh_probe
+  ✓ depolama anahtarı: __yh_diag
+  ✓ A: global dinleyiciler tek sefer bağlanıyor
+  ✓ yüzey dinleyicileri kaydediliyor (_surfListeners)
+  ✓ unbindSurface eski yüzeyi söküyor
+  ✓ bind() önce unbindSurface çağırıyor
+  ✓ B: context olayları yüzey yaşam döngüsünde
+  ✓ C: nesil koruması gerçek karar noktasında
+  ✓ D: context alınamazsa yüzey basamağına geçiliyor
+  ✓ E: context ÖNCE hazırlanıyor, sonra DOM değişiyor
+  ✓ E: hazırlık hatasında geri alma var
+  ✓ F: çizim hatası belirsizlikten öncelikli
+  ✓ R2: worldBoundsFrom korundu
+  ✓ R2: restoreWorldBounds korundu
+  ✓ R2: LOGI_ON bağımsız katman korundu
+  ✓ R1: pointerup kapat() tap'ten önce
+  ✓ R1: tap(screenPos) parametresi korundu
+  ✓ SITUATIONS kataloğu duruyor
+  ✓ situationsTick çağrısı PASİF
+  ✓ DURUMLAR sekmesi gizli
+  ✓ audio.js byte-for-byte aynı — 804226980179698a
+  ✓ manifest.json byte-for-byte aynı — 6b8305490e9a55e9
+  ✓ map altyapısı sabit; hedef seçimi 93A referansında
+  ✓ 93D bilim CSS ve değişmeyen 93C HTML
+
+B. HARNESS DOĞRULAMASI (R2 kör noktası)
+  ✓ aynı canvas → AYNI context nesnesi
+  ✓ farklı canvas → FARKLI context nesnesi
+  ✓ ctx.canvas kendi canvas'ını gösteriyor
+
+C. DİNLEYİCİ YAŞAM DÖNGÜSÜ (A, B, C bulguları)
+  ✓ 10 yüzey değişimi başarılı — 10
+  ✓ A: window blur dinleyicisi ÇOĞALMADI (1→1) — 1 → 1
+  ✓ A: document visibilitychange ÇOĞALMADI — 1 → 1
+  ✓ A: tek blur olayı resetGesture'ı TAM BİR kez çalıştırdı — 1
+  ✓ B: YENİ yüzeyde contextlost dinleyicisi var — 1
+  ✓ B: YENİ yüzeyde contextrestored dinleyicisi var — 1
+  ✓ B: ilk ve yeni yüzey AYNI korumaya sahip — {"pointerdown":1,"pointermove":1,"pointerup":1,"pointercancel":1,"lostpointercapture":1,"wheel":1,"contextlost":1,"contextrestored":1,"_toplam":8}
+  ✓ emekli yüzeylerin dinleyicileri SÖKÜLDÜ — 0 kalıntı
+  ✓ C: emekli yüzey güncel kamerayı DEĞİŞTİREMİYOR
+  ✓ C: emekli yüzeyin contextrestored'ı kurtarma planlamıyor — 0
+
+D. BAŞARISIZLIK YOLLARI
+  ✓ D: context alınamayınca yüzey yeniden kurma DENENDİ — 1 deneme
+  ✓ E: hazırlanamayan yüzey için false döndü
+  ✓ E: DOM eski elemente DOKUNULMADI
+  ✓ E: View.cv ve View.g eski değerlerinde
+  ✓ E: View.g.canvas === View.cv (yarım geçiş YOK)
+  ✓ F: çizim hatası varken "ok(belirsiz)" YAZILMADI — invalidate:resize | belirsiz ama ÇİZİM HATASI var: enjekte: fillRect | sebep=resize · t=1792302847979 · build=95e1 · olay
+  ✓ F: çizim hatası açıkça kaydedildi
+  ✓ F: çizim hatası uygun kurtarma basamağına ulaştı
+  ✓ sağlıklı BOŞ viewport gereksiz yeniden kurma başlatmadı — deneme 0
+
+E. KURTARMA SONRASI GERÇEK GİRDİ ZİNCİRİ
+  ✓ yüzey yeniden kuruldu
+  ✓ View.cv / View.g / g.canvas TUTARLI
+  ✓ oyun verisi ve RNG DEĞİŞMEDİ
+  ✓ seçim korundu
+  ✓ ana mod ve iki katman tercihi korundu
+  ✓ kurtarma sonrası gerçek TAP çalışıyor — {"hata":"","say":1}
+  ✓ kurtarma sonrası PAN çalışıyor, zoom sabit
+  ✓ kurtarma sonrası PINCH çalışıyor
+  ✓ pinch SONRASI pan çalışıyor
+  ✓ zincir sonunda pts 0 — 0
+
+F. MANUEL mapFix
+  ✓ mapFix öncesi takılı pointer vardı
+  ✓ mapFix jest durumunu sıfırladı
+  ✓ mapFix kamerayı GEREKSİZ sıfırlamadı
+  ✓ mapFix TEK recovery planladı — 1
+  ✓ mapFix global dinleyici çoğaltmadı — {"blur":1,"vis":1}
+
+G. GERÇEK KAYITLA KAMERA ERİŞİMİ
+  ✓ gerçek kayıtta W/H alanı YOK (R2 öncesi kayıt) — YOK
+  ✓ yükleme dünya boyutunu doğru kurdu (6881) — 6881x6881
+  ✓ küçük dünyadan gelindiğinde eski boyut TAŞINMADI — 4912 → 6881
+  ✓ sistem koordinatları kapsanıyor — 6520,6378 ≤ 6881
+  ✓ z=1.9 (en yakın) — merkezlenemeyen sistem YOK — 0
+  ✓ z=1.0 ve z=0.3 — merkezlenemeyen sistem YOK — {"z19":0,"z10":0,"z03":0}
+  ✓ tekrarlı yüklemede boyut ve koordinatlar AYNI
+  ✓ yeni kayıt gerçek dünya boyutunu saklıyor — 6881
+  ✓ kaydet/yükle sonrası boyut korunuyor — 6881
+
+══════════════════════════════════════════
+  GEÇEN: 93   KALAN: 0
+══════════════════════════════════════════
+

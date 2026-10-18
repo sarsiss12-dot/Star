@@ -1,0 +1,183 @@
+{
+  "browser": "133.0.6943.0",
+  "physicalAndroid": false,
+  "viewportEmulation": true,
+  "pass": 42,
+  "fail": 1,
+  "pageErrors": [],
+  "results": [
+    {
+      "name": "trade accepts through actual nested DOM click once",
+      "ok": true
+    },
+    {
+      "name": "trade rejection actual click preserves resource balances",
+      "ok": true
+    },
+    {
+      "name": "sensor accepts through actual nested DOM click once",
+      "ok": true
+    },
+    {
+      "name": "sensor rejection actual click preserves resource balances",
+      "ok": true
+    },
+    {
+      "name": "legacySensor accepts through actual nested DOM click once",
+      "ok": true
+    },
+    {
+      "name": "legacySensor rejection actual click preserves resource balances",
+      "ok": true
+    },
+    {
+      "name": "alliance accepts through actual nested DOM click once",
+      "ok": true
+    },
+    {
+      "name": "alliance rejection actual click preserves resource balances",
+      "ok": true
+    },
+    {
+      "name": "peace accepts through actual nested DOM click once",
+      "ok": true
+    },
+    {
+      "name": "peace rejection actual click preserves resource balances",
+      "ok": true
+    },
+    {
+      "name": "invite accepts through actual nested DOM click once",
+      "ok": true
+    },
+    {
+      "name": "invite rejection actual click preserves resource balances",
+      "ok": true
+    },
+    {
+      "name": "fedvote accepts through actual nested DOM click once",
+      "ok": true
+    },
+    {
+      "name": "fedvote rejection actual click preserves resource balances",
+      "ok": true
+    },
+    {
+      "name": "vassal accepts through actual nested DOM click once",
+      "ok": true
+    },
+    {
+      "name": "vassal rejection actual click preserves resource balances",
+      "ok": true
+    },
+    {
+      "name": "counter click opens canonical draft and keeps original pending",
+      "ok": true
+    },
+    {
+      "name": "invalid stock disables accept and counter and explains reason",
+      "ok": true
+    },
+    {
+      "name": "stale close and replacement modal callbacks stay inert",
+      "ok": true
+    },
+    {
+      "name": "load another world invalidates old DOM and action closure",
+      "ok": true
+    },
+    {
+      "name": "expired offer and receipts persist without second payment",
+      "ok": true
+    },
+    {
+      "name": "remote confirmation actual click enqueues once with deferred cost",
+      "ok": true
+    },
+    {
+      "name": "closed and loaded remote confirmation callbacks stay inert",
+      "ok": true
+    },
+    {
+      "name": "dates use news day and proposal born; remain frozen after save/load",
+      "ok": true
+    },
+    {
+      "name": "65 records pagination, filtering, detail return and mode state",
+      "ok": true
+    },
+    {
+      "name": "pin and unread controls update and preserve selection",
+      "ok": true
+    },
+    {
+      "name": "740x360 bounded dense list and fixed header with independent scroll",
+      "ok": true
+    },
+    {
+      "name": "360x740 bounded dense list and fixed header with independent scroll",
+      "ok": true
+    },
+    {
+      "name": "1280x720 bounded dense list and fixed header with independent scroll",
+      "ok": true
+    },
+    {
+      "name": "unknown empire and location do not become navigable",
+      "ok": true
+    },
+    {
+      "name": "known empire and location click reach identity and same map camera",
+      "ok": true
+    },
+    {
+      "name": "supplemental topbar war access does not overlap resource strip",
+      "ok": true
+    },
+    {
+      "name": "supplemental portrait archive remains clickable above rotation advice",
+      "ok": true
+    },
+    {
+      "name": "supplemental read-all refreshes tab count and keeps list position",
+      "ok": true
+    },
+    {
+      "name": "supplemental actual speed and war pause setting buttons work",
+      "ok": false,
+      "error": "page.click: Timeout 5000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#timepod [data-a=\"spd\"][data-x=\"1\"]')\u001b[22m\n\u001b[2m    - locator resolved to <button class=\"sp\" data-x=\"1\" data-a=\"spd\">▸</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <b>Özgür Morrigan Konsorsiyumu</b> from <div class=\"show\" id=\"diploPane\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <b>Özgür Morrigan Konsorsiyumu</b> from <div class=\"show\" id=\"diploPane\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    8 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <b>Özgür Morrigan Konsorsiyumu</b> from <div class=\"show\" id=\"diploPane\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 500ms\u001b[22m\n\n    at /workspace/scratch/357bc57bab3b/star/tests/browser-95e2.js:91:14\n    at test (/workspace/scratch/357bc57bab3b/star/tests/browser-95e2.js:16:174)\n    at async /workspace/scratch/357bc57bab3b/star/tests/browser-95e2.js:90:2"
+    },
+    {
+      "name": "supplemental askeri federation actual founding click with exactly 220 Influence",
+      "ok": true
+    },
+    {
+      "name": "supplemental bilimsel federation actual founding click with exactly 220 Influence",
+      "ok": true
+    },
+    {
+      "name": "supplemental ticaret federation actual founding click with exactly 220 Influence",
+      "ok": true
+    },
+    {
+      "name": "extended inbox 65 proposals list and detail return preserve page and scroll",
+      "ok": true
+    },
+    {
+      "name": "extended existing offer modal accepts through its already routed button",
+      "ok": true
+    },
+    {
+      "name": "touch swipe scrolls the archive without moving the header",
+      "ok": true
+    },
+    {
+      "name": "archive scope clears on ordinary modal and other sizes stay unchanged",
+      "ok": true
+    },
+    {
+      "name": "real service worker installs 95E.3 shell and serves offline modules",
+      "ok": true
+    }
+  ]
+}

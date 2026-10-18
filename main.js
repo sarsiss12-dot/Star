@@ -3528,6 +3528,7 @@ function updateVision(){
   if (hasCivic(G.p,'panopt')){
     G.vis = new Set(G.sys.map(s=>s.id));
     for (const s of G.sys) if (!s.seen.includes(0)) s.seen.push(0);
+    refreshSharedVision();
     return;
   }
   const sensor = 1 + (G.p.mods.sensor|0);
@@ -3553,44 +3554,49 @@ function updateVision(){
       for (const l of G.sys[id].lanes) if (!seen.has(l)) q.push({id:l, d:d+1});
   }
   G.vis = seen;
-  /* FAZ 48: paylaşım paktı olan devletlerin görüşünü de topla.
-     Ayda bir hesaplanır, her karede taranmaz. */
-  const sv = G.p && G.p.shareVis;
-  if (sv){
-    const paylas = new Set();
-    for (const id in sv){
-      if (!sv[id]) continue;
-      const o = G.emps[id];
-      if (!o || o.dead) continue;
-      /* Ortağın kolonileri ve filoları çevresi */
-      for (const c of (o.colonies || [])) paylas.add(c.s);
-      for (const f of G.fleets){
-        if (f.e !== o.id || !f.ships.length) continue;
-        const sid = f.sys >= 0 ? f.sys : (f.mv ? f.mv.to : -1);
-        if (sid >= 0){
-          paylas.add(sid);
-          const sy = G.sys[sid];
-          if (sy) for (const l of sy.lanes) paylas.add(l);
-        }
-      }
-    }
-    G._shareVisSet = paylas;
-  } else G._shareVisSet = null;
+  refreshSharedVision();
   for (const id of seen) if (!G.sys[id].seen.includes(0)) G.sys[id].seen.push(0);
 }
-/* ═══ FAZ 48: İSTİHBARAT PAYLAŞIMI ═══
-   Paylaşım paktı olan devletlerin keşifleri ve görüşü oyuncunun
-   haritasına kopyalanır — savaş sisi ortak açılır. */
+/* 95E.3: treaty directions stay separate; cached native sensors never relay
+   another provider's live view or spy-network intelligence. */
+function sensorShareActive(taker,giver){
+  return !!(taker && giver && taker!==giver && !taker.dead && !giver.dead &&
+    !taker.war?.[giver.id] && !giver.war?.[taker.id] &&
+    (taker.visionFrom?.[giver.id] || taker.shareVis?.[giver.id]));
+}
+function nativeSensorVision(e){
+  const visible=new Set(),depth=new Map(),q=[],range=1+(e.mods.sensor|0);
+  for(const s of G.sys)if(s.owner===e.id)q.push([s.id,0]);
+  for(const f of G.fleets)if(f.e===e.id && f.sys>=0 && f.ships.length)q.push([f.sys,0]);
+  for(let i=0;i<q.length;i++){
+    const [id,d]=q[i],s=G.sys[id];
+    if(!s || depth.has(id)&&depth.get(id)<=d)continue;
+    depth.set(id,d);visible.add(id);
+    if(d<range&&!s.nebulaS)for(const n of s.lanes)q.push([n,d+1]);
+  }
+  return visible;
+}
+function refreshSharedVision(){
+  const p=G.p,providers=new Set([...Object.keys(p?.visionFrom||{}),...Object.keys(p?.shareVis||{})]);
+  const views=new Map();
+  for(const id of providers){
+    const giver=G.emps[id];if(!sensorShareActive(p,giver))continue;
+    const view=nativeSensorVision(giver);views.set(giver.id,view);
+    for(const sid of view)if(!G.sys[sid].seen.includes(p.id))G.sys[sid].seen.push(p.id);
+  }
+  G._sensorVision=views;G._shareVisSet=null;
+  if(typeof DIPLO_MAP_CACHE!=='undefined')DIPLO_MAP_CACHE=null;
+}
 function pSeen(s){
   if (s.seen.includes(0)) return true;
   const sv = G.p && G.p.shareVis;
-  if (sv) for (const id in sv) if (sv[id] && s.seen.includes(+id)) return true;
+  if (sv) for (const id in sv) if (sv[id] && sensorShareActive(G.p,G.emps[id]) && s.seen.includes(+id)) return true;
   return false;
 }
 function pVis(s){
   if (G.vis && G.vis.has(s.id)) return true;
-  const sv = G.p && G.p.shareVis;
-  if (sv && G._shareVisSet) return G._shareVisSet.has(s.id);
+  if(G._sensorVision)for(const [id,view] of G._sensorVision)
+    if(sensorShareActive(G.p,G.emps[id])&&view.has(s.id))return true;
   return false;
 }
 function pSurv(s){ return s.surv.includes(0); }
@@ -3673,11 +3679,12 @@ function doSurvey(f, sys){
 
 /* ---------- hareket & günlük döngü ---------- */
 function stepFleets(dt){
+  let sharedSensorsMoved=false;
   const shipmentBudget={left:8,fleets:new Map(G.fleets.map(f=>[f.id,f]))};
   const safeThreats=new Map(),exploreChecks=new Map();
   for (let i=G.fleets.length-1;i>=0;i--){
     const f = G.fleets[i];
-    if (!f.ships.length){ G.fleets.splice(i,1); continue; }
+    if (!f.ships.length){ if(sensorShareActive(G.p,G.emps[f.e]))sharedSensorsMoved=true;G.fleets.splice(i,1); continue; }
     if (f.combat > 0) continue;
 
     // tarama görevi
@@ -3763,6 +3770,7 @@ function stepFleets(dt){
       if (gate) f.mv.gate = true;
     }
     if (f.mv){
+      const oldSensorSys=f.sys;
       const a = G.sys[f.mv.from], b = G.sys[f.mv.to];
       // Kapı kenarının yol bulmadaki 0.1 maliyeti hareket için de geçerli.
       const len = f.mv.gate ? .1 : Math.max(.1,dist(a,b));
@@ -3771,6 +3779,7 @@ function stepFleets(dt){
         f.sys = f.mv.to;
         f.x = b.x; f.y = b.y;
         f.mv = null;
+        if(sensorShareActive(G.p,G.emps[f.e]))sharedSensorsMoved=true;
         if (f.path[0] === f.sys) f.path.shift();
         followRallyFleet(f,shipmentBudget);
         if (!f.path.length && f.joinFleet===undefined && f.rallyTo===f.sys) delete f.rallyTo;
@@ -3779,11 +3788,13 @@ function stepFleets(dt){
       } else {
         f.x = lerp(a.x,b.x,f.mv.t); f.y = lerp(a.y,b.y,f.mv.t);
         f.sys = -1;
+        if(oldSensorSys>=0&&sensorShareActive(G.p,G.emps[f.e]))sharedSensorsMoved=true;
       }
     } else if (f.sys >= 0){
       f.x = G.sys[f.sys].x; f.y = G.sys[f.sys].y;
     }
   }
+  if(sharedSensorsMoved)refreshSharedVision();
 }
 
 /* 94B: ortak keşif planlayıcısı. Rezervasyonlar canlı filolardan türetilir;
@@ -8154,7 +8165,7 @@ function forceRedraw(sebep){
    Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
    Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
 /* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */
-const BUILD_ID = '95e1';
+const BUILD_ID = '95e3';
 const DIAG_MAX = 40;
 const DIAG = [];
 function logDiag(tur, mesaj){

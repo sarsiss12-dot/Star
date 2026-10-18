@@ -1,0 +1,13 @@
+✗ war click starts actual war and charges exactly once — Expected values to be strictly equal:
+
+false !== true
+
+✗ sensor accepted DOM offer changes discovery, live fleet visibility and real map pixels — Expected values to be strictly equal:
+
+false !== true
+
+✗ Canvas offscreen endpoint keeps intersecting known connection visible — The expression evaluated to a falsy value:
+
+  assert.ok((await value('layerPixels()')).gold>20)
+
+BROWSER GEÇEN: 0 KALAN: 3

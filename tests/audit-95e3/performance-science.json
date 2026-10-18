@@ -1,0 +1,9 @@
+{
+  "systems": 100,
+  "fleets": 2,
+  "nativeRefreshAverageMs": 0.03686711000000059,
+  "cached10000pVisAverageMs": 7.994690799999989,
+  "scienceNoTreatyMatchesBaseline": true,
+  "physicalAndroid": false,
+  "caveat": "Concurrent host load; bounded sensor fixture, not a device FPS or large-galaxy benchmark. pVis scan exclusion is asserted separately."
+}

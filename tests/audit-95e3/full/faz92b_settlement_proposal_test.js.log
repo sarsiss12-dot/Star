@@ -1,0 +1,34 @@
+✓ Real coalition conquest and peace yields one unique row per empty system
+✓ Pure proposal and AI opinion do not mutate state, RNG or resources
+✓ Open campaign and partial legacy records cannot generate share rights
+✓ Independent war participants are not added to eligible recipients
+✓ Living opponent or third-party current land is excluded
+✓ Other campaign later occupation excludes an old campaign asset
+✓ Recipient cannot be an outsider and extra forged asset key is rejected
+✓ Fetih claim is a reason, not a forced ownership right
+✓ Accepted proposal remains a proposal; no land, resource or RNG mutation
+✓ AI explicitly rejects a plan that takes every asset for proposer
+✓ AI proposer never auto-votes for player; explicit player yes is required
+✓ Player rejection ends proposal without resource charge
+✓ Duplicate send and duplicate vote cannot add second decisions
+✓ Ownership changed after preview prevents stale submission
+✓ Ownership changed after submission prevents approval
+✓ Capture away and back invalidates consent even with same final owner
+✓ Renewed war, member death and membership change invalidate terms
+✓ Deadline expires pending and approved proposals
+✓ Proposer can withdraw; changed terms require new offer and fresh player vote
+✓ Save/load preserves pending terms and does not approve player
+✓ Forged unanimous status and foreign recipient in save are rejected
+✓ Submit failure restores sequence/root; vote failure restores same offer object
+✓ UI action opens real preview, changes recipient, submits without transfer
+✓ Player UI consent and stale callbacks follow actual world identity
+✓ Unknown land names are hidden and incomplete preview cannot be submitted
+✓ Old v8 save resets settlement state and new game cannot retain offers
+✓ Colonized system contributes separate colonies, no duplicate orbit or neutral colony
+✓ Identical-day cross-front ownership ambiguity is excluded conservatively
+✓ A recapture in one front does not duplicate distribution rows
+✓ Outsider and stale world actor cannot approve or submit
+✓ Malformed archived numeric shares cannot inject content or bypass load guard
+✓ Save/load retains territory revision and pending decision becomes invalid after transfer
+✓ Expired and withdrawn archives survive reload with no automatic new proposal
+GEÇEN: 33 KALAN: 0

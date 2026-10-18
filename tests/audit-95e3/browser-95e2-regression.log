@@ -1,0 +1,70 @@
+✓ trade accepts through actual nested DOM click once
+✓ trade rejection actual click preserves resource balances
+✓ sensor accepts through actual nested DOM click once
+✓ sensor rejection actual click preserves resource balances
+✓ legacySensor accepts through actual nested DOM click once
+✓ legacySensor rejection actual click preserves resource balances
+✓ alliance accepts through actual nested DOM click once
+✓ alliance rejection actual click preserves resource balances
+✓ peace accepts through actual nested DOM click once
+✓ peace rejection actual click preserves resource balances
+✓ invite accepts through actual nested DOM click once
+✓ invite rejection actual click preserves resource balances
+✓ fedvote accepts through actual nested DOM click once
+✓ fedvote rejection actual click preserves resource balances
+✓ vassal accepts through actual nested DOM click once
+✓ vassal rejection actual click preserves resource balances
+✓ counter click opens canonical draft and keeps original pending
+✓ invalid stock disables accept and counter and explains reason
+✓ stale close and replacement modal callbacks stay inert
+✓ load another world invalidates old DOM and action closure
+✓ expired offer and receipts persist without second payment
+✓ remote confirmation actual click enqueues once with deferred cost
+✓ closed and loaded remote confirmation callbacks stay inert
+✓ dates use news day and proposal born; remain frozen after save/load
+✓ 65 records pagination, filtering, detail return and mode state
+✓ pin and unread controls update and preserve selection
+✓ 740x360 bounded dense list and fixed header with independent scroll
+✓ 360x740 bounded dense list and fixed header with independent scroll
+✓ 1280x720 bounded dense list and fixed header with independent scroll
+✓ unknown empire and location do not become navigable
+✓ known empire and location click reach identity and same map camera
+✓ supplemental topbar war access does not overlap resource strip
+✓ supplemental portrait archive remains clickable above rotation advice
+✓ supplemental read-all refreshes tab count and keeps list position
+✗ supplemental actual speed and war pause setting buttons work — page.click: Timeout 5000ms exceeded.
+Call log:
+[2m  - waiting for locator('#timepod [data-a="spd"][data-x="1"]')[22m
+[2m    - locator resolved to <button class="sp" data-x="1" data-a="spd">▸</button>[22m
+[2m  - attempting click action[22m
+[2m    2 × waiting for element to be visible, enabled and stable[22m
+[2m      - element is visible, enabled and stable[22m
+[2m      - scrolling into view if needed[22m
+[2m      - done scrolling[22m
+[2m      - <b>Özgür Morrigan Konsorsiyumu</b> from <div class="show" id="diploPane">…</div> subtree intercepts pointer events[22m
+[2m    - retrying click action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible, enabled and stable[22m
+[2m      - element is visible, enabled and stable[22m
+[2m      - scrolling into view if needed[22m
+[2m      - done scrolling[22m
+[2m      - <b>Özgür Morrigan Konsorsiyumu</b> from <div class="show" id="diploPane">…</div> subtree intercepts pointer events[22m
+[2m    - retrying click action[22m
+[2m      - waiting 100ms[22m
+[2m    8 × waiting for element to be visible, enabled and stable[22m
+[2m      - element is visible, enabled and stable[22m
+[2m      - scrolling into view if needed[22m
+[2m      - done scrolling[22m
+[2m      - <b>Özgür Morrigan Konsorsiyumu</b> from <div class="show" id="diploPane">…</div> subtree intercepts pointer events[22m
+[2m    - retrying click action[22m
+[2m      - waiting 500ms[22m
+
+✓ supplemental askeri federation actual founding click with exactly 220 Influence
+✓ supplemental bilimsel federation actual founding click with exactly 220 Influence
+✓ supplemental ticaret federation actual founding click with exactly 220 Influence
+✓ extended inbox 65 proposals list and detail return preserve page and scroll
+✓ extended existing offer modal accepts through its already routed button
+✓ touch swipe scrolls the archive without moving the header
+✓ archive scope clears on ordinary modal and other sizes stay unchanged
+✓ real service worker installs 95E.3 shell and serves offline modules
+BROWSER GEÇEN: 42 KALAN: 1

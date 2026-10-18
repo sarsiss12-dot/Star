@@ -1,0 +1,86 @@
+✗ one-way intel transfers historic exploration and current colony/fleet sensors immediately — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+false !== true
+
+    at eq (/workspace/scratch/357bc57bab3b/star/tests/faz95e3_sensor_test.js:3:50)
+    at /workspace/scratch/357bc57bab3b/star/tests/faz95e3_sensor_test.js:4:214
+    at test (/workspace/scratch/357bc57bab3b/star/tests/helpers/95e-fixture.js:13:60)
+    at Object.<anonymous> (/workspace/scratch/357bc57bab3b/star/tests/faz95e3_sensor_test.js:4:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ shared vision follows range and nebula rather than remote target or hidden fleet — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+false !== true
+
+    at eq (/workspace/scratch/357bc57bab3b/star/tests/faz95e3_sensor_test.js:3:50)
+    at /workspace/scratch/357bc57bab3b/star/tests/faz95e3_sensor_test.js:5:212
+    at test (/workspace/scratch/357bc57bab3b/star/tests/helpers/95e-fixture.js:13:60)
+    at Object.<anonymous> (/workspace/scratch/357bc57bab3b/star/tests/faz95e3_sensor_test.js:5:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ monthly refresh and real fleet departures/arrivals update without granting destination early — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+false !== true
+
+    at eq (/workspace/scratch/357bc57bab3b/star/tests/faz95e3_sensor_test.js:3:50)
+    at /workspace/scratch/357bc57bab3b/star/tests/faz95e3_sensor_test.js:6:330
+    at test (/workspace/scratch/357bc57bab3b/star/tests/helpers/95e-fixture.js:13:60)
+    at Object.<anonymous> (/workspace/scratch/357bc57bab3b/star/tests/faz95e3_sensor_test.js:6:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ revoked, dead or wartime providers lose live view immediately but retain discovered stars — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+false !== true
+
+    at eq (/workspace/scratch/357bc57bab3b/star/tests/faz95e3_sensor_test.js:3:50)
+    at /workspace/scratch/357bc57bab3b/star/tests/faz95e3_sensor_test.js:7:322
+    at test (/workspace/scratch/357bc57bab3b/star/tests/helpers/95e-fixture.js:13:60)
+    at Object.<anonymous> (/workspace/scratch/357bc57bab3b/star/tests/faz95e3_sensor_test.js:7:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ mutual pact remains distinct; spynet grants no sensor vision; no third-party relay — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+true !== false
+
+    at eq (/workspace/scratch/357bc57bab3b/star/tests/faz95e3_sensor_test.js:3:50)
+    at /workspace/scratch/357bc57bab3b/star/tests/faz95e3_sensor_test.js:8:432
+    at test (/workspace/scratch/357bc57bab3b/star/tests/helpers/95e-fixture.js:13:60)
+    at Object.<anonymous> (/workspace/scratch/357bc57bab3b/star/tests/faz95e3_sensor_test.js:8:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✗ war ends both sharing models and loading v8 rebuilds derived vision only — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+true !== false
+
+    at eq (/workspace/scratch/357bc57bab3b/star/tests/faz95e3_sensor_test.js:3:50)
+    at /workspace/scratch/357bc57bab3b/star/tests/faz95e3_sensor_test.js:9:391
+    at test (/workspace/scratch/357bc57bab3b/star/tests/helpers/95e-fixture.js:13:60)
+    at Object.<anonymous> (/workspace/scratch/357bc57bab3b/star/tests/faz95e3_sensor_test.js:9:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+✓ cached pVis never rescans galaxy per frame and cannot change routes or RNG
+GEÇEN: 1 KALAN: 6

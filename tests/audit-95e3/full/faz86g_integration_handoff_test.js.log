@@ -1,0 +1,17 @@
+✓ Normal savaş başlangıcı NAP, pakt ve ittifakı iki yönde kapatır
+✓ Yalnız NAP ihaneti paktBozdu hafızası üretir ve süreyi siler
+✓ Başarısız savaş ilanı yürürlükteki antlaşmaları değiştirmez
+✓ Konsey yasağını çiğneyen oyuncu ortak savaş kurulumundan geçer
+✓ Savaş sürerken eski NAP alanı aktif veya redundant sayılmaz
+✓ Diplomasi özeti bozuk ara durumda savaş ve antlaşmaları birlikte göstermez
+✓ Eski kayıt göçü savaşla çakışan üç antlaşmayı temizler
+✓ Göç tek yönlü çakışmayı da temizler, savaşsız antlaşmaya dokunmaz
+✓ Göç saf ve tekrar çalıştırılabilir; ikinci geçiş sıfır değişikliktir
+✓ Göç savaşta kalmış süresi dolmuş NAP alanını da kaldırır
+✓ Barıştan sonra yeni NAP teklifi eski süre yüzünden engellenmez
+✓ warOn transaction rollback NAPı geri getirir; commit onu kapatır
+✓ Sürüm, PWA kabuğu ve kayıt sürümü 86G ile tutarlı
+✓ 86F AI bütçesi ve bağımsız Radar/Lojistik durumu korunur
+✓ Gerçek oyuncu kaydı yüklenir ve temel dünya alanları sonludur
+✓ Kaynak ZIP kimliği paket içi manifestte sabittir
+GEÇEN: 16 KALAN: 0

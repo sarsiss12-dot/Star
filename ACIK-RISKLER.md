@@ -1,3 +1,15 @@
+# 95E.3 güncel açık riskler — 18 Ekim 2026
+
+- Yeni hedefli ve tam regresyonda 94 paket/5203 kontrol ile 66 gerçek Chromium senaryosu geçti; kalan hata yok. Bu sonuç eski başlıkların fiziksel cihaz veya denge kabulü yerine geçmez.
+- Fiziksel Android/WebView/kurulu PWA ve GPU/FPS/ısı/bellek kabulü yapılmadı. 360×740 Canvas testinde mevcut döndürme tavsiyesi maskelendi; portre oynanış desteği eklenmedi.
+- Çok uzak galaksi görünümünde zoom <0.10 ise ilişki çizgileri bilinçli gizli; amblem >=0.18. İstihbarat, keşfedilmiş konum, ekran kesişimi ve 12/36 bağlantı bütçesi hâlâ geçerli. Gizli ilişki ile bilinen ama çizilmeyen konum raporda ayrıldı.
+- Sensör geçmişi paylaşım bittikten sonra kalır; canlı görüntü erişimi kesilir. Kaynaklar sistemdeki yerel sensörlerdir; hiper-yoldaki filonun hedefini önceden açmaz. Önbellek kabul/aylık/yükleme ve sağlayıcı filo çıkış/varışında yenilenir; her karede tarama yapılmaz.
+- Özgün oyuncu kaydı gerektiren tarihsel federasyon kuruluşu ve eski gemi kökeni iddiaları ile önceki uzun AI kampanyalarının enerji/mal kıtlığı dengesi bu bakımda çözülmüş sayılmadı.
+
+96A başlatılmadı. Önceki başlıklar kendi fazlarının tarihsel risk kayıtlarıdır.
+
+---
+
 # 95E.2 güncel açık riskler — 18 Ekim 2026
 
 - Gerçek Chromium 133.0.6943.0 DOM, mobil viewport, dokunma, worker cache yükseltme/offline ve Save v8 testleri geçti. Fiziksel Android/WebView/PWA kurulu uygulama, GPU/FPS/ısı/bellek kabulü yok.

@@ -1,0 +1,31 @@
+  ✓ Default off, real menu exposes an independent toggle
+  ✓ Real UI action turns on state names without changing mode or layers
+  ✓ No-contact fleet has neutral identity; hidden fleet has no label
+  ✓ Fleet moves 50 world units, its actual label moves 50 CSS pixels
+  ✓ Pan transforms both ship and owner text together
+  ✓ Same-day contact immediately reveals fleet owner
+  ✓ Visible pirates are recognisable without a diplomatic contact
+  ✓ Native Canvas name box really contains text pixels
+  ✓ Toggle off removes all owner labels next frame
+  ✓ Independent in siyasi radar=false logistics=false
+  ✓ Independent in siyasi radar=false logistics=true
+  ✓ Independent in siyasi radar=true logistics=false
+  ✓ Independent in siyasi radar=true logistics=true
+  ✓ Independent in diplomasi radar=false logistics=false
+  ✓ Independent in diplomasi radar=false logistics=true
+  ✓ Independent in diplomasi radar=true logistics=false
+  ✓ Independent in diplomasi radar=true logistics=true
+  ✓ Independent in savas radar=false logistics=false
+  ✓ Independent in savas radar=false logistics=true
+  ✓ Independent in savas radar=true logistics=false
+  ✓ Independent in savas radar=true logistics=true
+  ✓ Mode changes keep owner-label preference enabled
+  ✓ Preference survives a fresh session without being put into the game save
+  ✓ Delayed preference read cannot undo a newer click
+  ✓ Layer toggle and repeated drawing preserve save and RNG
+  ✓ Surface rebuild keeps preference and redraws names
+  ✓ Load keeps preference while labels use new fleet objects
+  ✓ Stationary stack shows one owner label for its real fleet row; tap still selects
+  ✓ DPR2 uses the same CSS positions
+
+GEÇEN: 29 KALAN: 0

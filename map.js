@@ -1613,11 +1613,15 @@ const View = {
   },
   drawDiplomacyConnections(g){
     if(!FED_LINKS_ON&&!ALLY_LINKS_ON)return;
-    const lines=diplomacyMapConnections(this.cam.z),visible=p=>p.x>=0&&p.y>=0&&p.x<=this.vw&&p.y<=this.vh;
-    g.save();for(const line of lines){const a=this.w2s(line.from.x,line.from.y),b=this.w2s(line.to.x,line.to.y);if(!visible(a)||!visible(b))continue;
-      g.strokeStyle=line.kind==='federation'?'rgba(245,194,92,.55)':'rgba(92,245,214,.40)';g.lineWidth=line.kind==='federation'?1.8:1;g.setLineDash(line.kind==='federation'?[3,4]:[7,7]);
+    const lines=diplomacyMapConnections(this.cam.z);
+    g.save();for(const line of lines){const a=this.w2s(line.from.x,line.from.y),b=this.w2s(line.to.x,line.to.y);if(Math.max(a.x,b.x)<0||Math.min(a.x,b.x)>this.vw||Math.max(a.y,b.y)<0||Math.min(a.y,b.y)>this.vh)continue;
+      g.strokeStyle=line.kind==='federation'?'rgba(245,194,92,.82)':'rgba(92,245,214,.72)';g.lineWidth=line.kind==='federation'?2:1.6;g.setLineDash(line.kind==='federation'?[3,4]:[7,7]);
       g.beginPath();g.moveTo(a.x,a.y);g.lineTo(b.x,b.y);g.stroke();
-      if(line.kind==='federation'&&this.cam.z>=.18){g.setLineDash([]);g.drawImage(ART.identityEmblem(line.emblem,16),(a.x+b.x)/2-8,(a.y+b.y)/2-8,16,16);}
+      if(line.kind==='federation'&&this.cam.z>=.18){
+        const badge={x:(a.x+b.x)/2-10,y:(a.y+b.y)/2-10,w:20,h:20};
+        if(this._mapLabelBlocks)this._mapLabelBlocks.push(badge);
+        g.setLineDash([]);g.drawImage(ART.identityEmblem(line.emblem,20),badge.x,badge.y,20,20);
+      }
     }g.restore();
   },
   drawWarConnections(g){

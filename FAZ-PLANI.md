@@ -1,3 +1,11 @@
+# Güncel durum — 95E.3 — 18 Ekim 2026
+
+Bakım tamamlandı: gerçek savaş son onayı, tek yönlü canlı sensör paylaşımı, harita katmanlarının kısmi ekran çizimi/okunabilirliği ve amblem alanının etiketlere karşı korunması. Yeni koşu 94 paket / 5203 kontrol / 0; 66 gerçek Chromium / 0. Save v8 ve 95E.2 haber/gelen kutusu/uzaktan inşaat korunur. Ayrıntı: FAZ95E3-RAPOR.md, TEST-SONUCLARI-95E3.md, DEVAM-95E3.md.
+
+96A başlamadı; gerçek ticaret sözleşmeleri ve fiziksel konvoylar planı korunur. Fiziksel Android kabulü ve özgün oyuncu kaydı gerektiren önceki iddialar açık kalır. Ekonomi ekranı, doğal generatif müzik, portre/köken, casusluk teknoloji seçenekleri ve multiplayer gelecek planındadır.
+
+---
+
 # Güncel durum — 95E.2 — 18 Ekim 2026
 
 95E.2: kritik gelen kutusu/inşaat click yönlendirmeleri ve tarih alanı düzeltildi; haber/gelen kutusu sol çalışma alanına geçti. Yeni sonuç 92 paket/5186/0; gerçek Chromium 43/0. Save v8, tek 2B Canvas ve 95E.1 anahtarı korunur. Fiziksel Android ve özgün oyuncu kaydı gerektiren QA açık. Tam matris: FAZ95E2-RAPOR.md; devam: DEVAM-95E2.md.

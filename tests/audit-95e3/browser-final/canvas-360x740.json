@@ -1,0 +1,11 @@
+{
+  "width": 360,
+  "height": 740,
+  "checks": "gold/teal/red/off across actual toolbar and 3 modes",
+  "last": {
+    "gold": 0,
+    "teal": 0,
+    "red": 800,
+    "alpha": 800
+  }
+}

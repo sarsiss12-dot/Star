@@ -1,0 +1,182 @@
+{
+  "browser": "133.0.6943.0",
+  "physicalAndroid": false,
+  "pass": 43,
+  "fail": 0,
+  "pageErrors": [],
+  "results": [
+    {
+      "name": "trade accepts through actual nested DOM click once",
+      "ok": true
+    },
+    {
+      "name": "trade rejection actual click preserves resource balances",
+      "ok": true
+    },
+    {
+      "name": "sensor accepts through actual nested DOM click once",
+      "ok": true
+    },
+    {
+      "name": "sensor rejection actual click preserves resource balances",
+      "ok": true
+    },
+    {
+      "name": "legacySensor accepts through actual nested DOM click once",
+      "ok": true
+    },
+    {
+      "name": "legacySensor rejection actual click preserves resource balances",
+      "ok": true
+    },
+    {
+      "name": "alliance accepts through actual nested DOM click once",
+      "ok": true
+    },
+    {
+      "name": "alliance rejection actual click preserves resource balances",
+      "ok": true
+    },
+    {
+      "name": "peace accepts through actual nested DOM click once",
+      "ok": true
+    },
+    {
+      "name": "peace rejection actual click preserves resource balances",
+      "ok": true
+    },
+    {
+      "name": "invite accepts through actual nested DOM click once",
+      "ok": true
+    },
+    {
+      "name": "invite rejection actual click preserves resource balances",
+      "ok": true
+    },
+    {
+      "name": "fedvote accepts through actual nested DOM click once",
+      "ok": true
+    },
+    {
+      "name": "fedvote rejection actual click preserves resource balances",
+      "ok": true
+    },
+    {
+      "name": "vassal accepts through actual nested DOM click once",
+      "ok": true
+    },
+    {
+      "name": "vassal rejection actual click preserves resource balances",
+      "ok": true
+    },
+    {
+      "name": "counter click opens canonical draft and keeps original pending",
+      "ok": true
+    },
+    {
+      "name": "invalid stock disables accept and counter and explains reason",
+      "ok": true
+    },
+    {
+      "name": "stale close and replacement modal callbacks stay inert",
+      "ok": true
+    },
+    {
+      "name": "load another world invalidates old DOM and action closure",
+      "ok": true
+    },
+    {
+      "name": "expired offer and receipts persist without second payment",
+      "ok": true
+    },
+    {
+      "name": "remote confirmation actual click enqueues once with deferred cost",
+      "ok": true
+    },
+    {
+      "name": "closed and loaded remote confirmation callbacks stay inert",
+      "ok": true
+    },
+    {
+      "name": "dates use news day and proposal born; remain frozen after save/load",
+      "ok": true
+    },
+    {
+      "name": "65 records pagination, filtering, detail return and mode state",
+      "ok": true
+    },
+    {
+      "name": "pin and unread controls update and preserve selection",
+      "ok": true
+    },
+    {
+      "name": "740x360 bounded dense list and fixed header with independent scroll",
+      "ok": true
+    },
+    {
+      "name": "360x740 bounded dense list and fixed header with independent scroll",
+      "ok": true
+    },
+    {
+      "name": "1280x720 bounded dense list and fixed header with independent scroll",
+      "ok": true
+    },
+    {
+      "name": "unknown empire and location do not become navigable",
+      "ok": true
+    },
+    {
+      "name": "known empire and location click reach identity and same map camera",
+      "ok": true
+    },
+    {
+      "name": "supplemental topbar war access does not overlap resource strip",
+      "ok": true
+    },
+    {
+      "name": "supplemental portrait archive remains clickable above rotation advice",
+      "ok": true
+    },
+    {
+      "name": "supplemental read-all refreshes tab count and keeps list position",
+      "ok": true
+    },
+    {
+      "name": "supplemental actual speed and war pause setting buttons work",
+      "ok": true
+    },
+    {
+      "name": "supplemental askeri federation actual founding click with exactly 220 Influence",
+      "ok": true
+    },
+    {
+      "name": "supplemental bilimsel federation actual founding click with exactly 220 Influence",
+      "ok": true
+    },
+    {
+      "name": "supplemental ticaret federation actual founding click with exactly 220 Influence",
+      "ok": true
+    },
+    {
+      "name": "extended inbox 65 proposals list and detail return preserve page and scroll",
+      "ok": true
+    },
+    {
+      "name": "extended existing offer modal accepts through its already routed button",
+      "ok": true
+    },
+    {
+      "name": "touch swipe scrolls the archive without moving the header",
+      "ok": true
+    },
+    {
+      "name": "archive scope clears on ordinary modal and other sizes stay unchanged",
+      "ok": true
+    },
+    {
+      "name": "real service worker installs 95E.3 shell and serves offline modules",
+      "ok": true
+    }
+  ],
+  "initialFailure": "One stale diplomacy panel in reset intercepted speed button; closed in reset and isolated scenario passed."
+}
