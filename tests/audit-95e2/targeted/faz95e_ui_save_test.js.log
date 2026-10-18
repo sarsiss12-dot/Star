@@ -1,0 +1,104 @@
+✓ 740x360 archive input host preserves one existing camera and bounded markup
+✓ 360x740 archive input host preserves one existing camera and bounded markup
+✓ 900x420 archive input host preserves one existing camera and bounded markup
+✓ news pagination bounds DOM cards to thirty, then loads older known records
+✓ actual input event handlers filter rows while keeping search field mounted
+✓ loading a save makes captured accept closure inert
+✓ same accept closure can never execute resource grant twice
+✓ decision outside inbox updates same source receipt
+✓ active task, pending offer and read news survive one save together
+✓ failed load rolls back all three module roots and object identity
+✗ new PWA shell contains every independent 95E module and upgraded cache — AssertionError [ERR_ASSERTION]: The input did not match the regular expression /const CACHE = 'stars-v95e1'/. Input:
+
+'/* ═══════════════════════════════════════════════════════════════════\n' +
+  '   YILDIZ HANEDANI — Service Worker\n' +
+  '   FAZ 57: PWA kurulabilirliği için asgari, hafif bir worker.\n' +
+  '\n' +
+  '   Amaç yalnızca "Ana Ekrana Ekle" istemini tetiklemek ve oyunu\n' +
+  '   çevrimdışı açılabilir kılmak. Agresif önbellekleme YAPMIYOR:\n' +
+  '   geliştirme sırasında eski sürümün takılı kalması en can sıkıcı\n' +
+  '   hata türüdür. Strateji "önce ağ, olmazsa önbellek".\n' +
+  '   ═══════════════════════════════════════════════════════════════════ */\n' +
+  '/* FAZ 74: dosya yapısı değişti — sürüm artırıldı ki eski\n' +
+  '   önbellekteki tek parça main.js temizlensin. */\n' +
+  '/* FAZ 83: sürüm yükseltildi — eski ve yeni JS dosyalarının\n' +
+  "   karışmasını önler; activate'te eskiler siliniyor. */\n" +
+  "const CACHE = 'stars-v95e2';\n" +
+  '\n' +
+  '/* Oyunun tamamı — hepsi yerel dosya, dış bağımlılık yok */\n' +
+  'const KABUK = [\n' +
+  "  './',\n" +
+  "  './index.html',\n" +
+  "  './manifest.json',\n" +
+  "  './main.js',\n" +
+  "  './map.js',           /* FAZ 74: yeni modüller */\n" +
+  "  './combat.js',\n" +
+  "  './ui.js',\n" +
+  "  './ai.js',\n" +
+  "  './diplomacy.js',\n" +
+  "  './economy.js',\n" +
+  "  './news.js',\n" +
+  "  './inbox.js',\n" +
+  "  './construction.js',\n" +
+  "  './archive-ui.js',\n" +
+  "  './audio.js'\n" +
+  '];\n' +
+  '\n' +
+  "self.addEventListener('install', ev => {\n" +
+  '  /* Kabuk TAM kurulmadan yeni worker etkinleşmemeli. Bir dosya eksikse\n' +
+  '     install reddedilir ve çalışan eski sürüm/cache yerinde kalır. */\n' +
+  '  ev.waitUntil(\n' +
+  '    caches.open(CACHE)\n' +
+  '      .then(c => c.addAll(KABUK))\n' +
+  '      .then(() => self.skipWaiting())\n' +
+  '  );\n' +
+  '});\n' +
+  '\n' +
+  "self.addEventListener('activate', ev => {\n" +
+  '  ev.waitUntil(\n' +
+  '    caches.keys()\n' +
+  '      .then(adlar => Promise.all(\n' +
+  "        /* Aynı origin'deki başka PWA/cache adlarına dokunma. */\n" +
+  "        adlar.filter(a => a.startsWith('stars-v') && a !== CACHE)\n" +
+  '             .map(a => caches.delete(a))\n' +
+  '      ))\n' +
+  '      .then(() => self.clients.claim())\n' +
+  '  );\n' +
+  '});\n' +
+  '\n' +
+  "self.addEventListener('fetch', ev => {\n" +
+  '  const istek = ev.request;\n' +
+  "  if (istek.method !== 'GET') return;\n" +
+  '\n' +
+  '  /* ÖNCE AĞ: her zaman en güncel dosya gelir. Ağ yoksa\n' +
+  '     önbellekten servis edilir — oyun çevrimdışı da açılır. */\n' +
+  '  ev.respondWith(\n' +
+  '    fetch(istek)\n' +
+  '      .then(yanit => {\n' +
+  "        if (yanit && yanit.status === 200 && yanit.type === 'basic'){\n" +
+  '          const kopya = yanit.clone();\n' +
+  '          caches.open(CACHE).then(c => c.put(istek, kopya)).catch(() => {});\n' +
+  '        }\n' +
+  '        return yanit;\n' +
+  '      })\n' +
+  "      .catch(() => caches.match(istek).then(v => v || caches.match('./index.html')))\n" +
+  '  );\n' +
+  '});\n'
+
+    at /workspace/scratch/fc6de0d4e720/stars95e2/tests/faz95e_ui_save_test.js:11:436
+    at test (/workspace/scratch/fc6de0d4e720/stars95e2/tests/helpers/95e-fixture.js:13:60)
+    at Object.<anonymous> (/workspace/scratch/fc6de0d4e720/stars95e2/tests/faz95e_ui_save_test.js:11:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+✓ reviewed mobile CSS is additive and rejects mutations
+✓ archive and construction UI do not mutate gameplay RNG
+✓ orientation and background recovery keep persistent queues and one camera
+✓ closing modal invalidates archive and construction action tokens
+✓ construction fault pauses only its module and does not abort daily simulation
+✓ news fault leaves diplomatic decisions usable and resets on a successful load
+GEÇEN: 16 KALAN: 1

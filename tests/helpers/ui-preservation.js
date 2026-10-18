@@ -5,6 +5,11 @@ const hash=s=>createHash('sha256').update(s).digest('hex');
 // block must restore the untouched canonical 93A.1/93C HTML hash.
 // Historical referans-sha.json remains intact; neither half is exempted.
 exports.isReviewedUI=source=>{
+ const workspaceStart=source.indexOf('/* FAZ 95E.2 — bounded archive workspace */');
+ if(workspaceStart>=0){const marker='/* END FAZ 95E.2 ARCHIVE */\n',end=source.indexOf(marker,workspaceStart)+marker.length;
+  if(end<workspaceStart||hash(source.slice(workspaceStart,end))!=='fb3ad1acc5d83f164bbda00c1c38cc1218801e38c0416d0d97e21b7e2fb679fb')return false;
+  source=source.slice(0,workspaceStart)+source.slice(end);
+ }
  const archiveStart=source.indexOf('/* FAZ 95E ARCHIVE */');
  if(archiveStart>=0){const marker='/* END FAZ 95E ARCHIVE */\n',end=source.indexOf(marker,archiveStart)+marker.length;
   if(end<archiveStart||hash(source.slice(archiveStart,end))!=='96a4e38594d2f946f8b2d858013988683192f4370aac722aac7f849fbbce4d8d')return false;

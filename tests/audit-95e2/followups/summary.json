@@ -1,0 +1,47 @@
+{
+  "reason": "Only early stale cache-version assertions, plus new 95E.2 scenarios added during the full run.",
+  "results": [
+    {
+      "name": "faz84b_vassal_state_dedup_test.js",
+      "exit": 0,
+      "pass": 122,
+      "fail": 0,
+      "durationMs": 11793
+    },
+    {
+      "name": "faz84c_state_visibility_gate_test.js",
+      "exit": 0,
+      "pass": 118,
+      "fail": 0,
+      "durationMs": 10814
+    },
+    {
+      "name": "faz84a_intel_dedup_test.js",
+      "exit": 0,
+      "pass": 84,
+      "fail": 0,
+      "durationMs": 23024
+    },
+    {
+      "name": "faz85a_political_save_integrity_test.js",
+      "exit": 0,
+      "pass": 173,
+      "fail": 0,
+      "durationMs": 18560
+    },
+    {
+      "name": "faz95e2_regression_test.js",
+      "exit": 0,
+      "pass": 8,
+      "fail": 0,
+      "durationMs": 4648
+    },
+    {
+      "name": "faz85b_load_idempotency_test.js",
+      "exit": 0,
+      "pass": 132,
+      "fail": 0,
+      "durationMs": 39614
+    }
+  ]
+}

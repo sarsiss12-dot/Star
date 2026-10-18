@@ -1,0 +1,15 @@
+{
+  "browser": "133.0.6943.0",
+  "physicalAndroid": false,
+  "viewportEmulation": true,
+  "pass": 0,
+  "fail": 1,
+  "pageErrors": [],
+  "results": [
+    {
+      "name": "trade accepts through actual nested DOM click once",
+      "ok": false,
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'pending'\n- 'accepted'\n\n    at eq (/workspace/scratch/fc6de0d4e720/stars95e2/tests/browser-95e2.js:8:29)\n    at /workspace/scratch/fc6de0d4e720/stars95e2/tests/browser-95e2.js:40:4\n    at async test (/workspace/scratch/fc6de0d4e720/stars95e2/tests/browser-95e2.js:16:168)\n    at async /workspace/scratch/fc6de0d4e720/stars95e2/tests/browser-95e2.js:37:3"
+    }
+  ]
+}

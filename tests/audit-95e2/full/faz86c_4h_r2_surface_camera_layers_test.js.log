@@ -1,0 +1,96 @@
+
+A. SÖZDİZİMİ, DOSYA SINIRI VE KARANTİNA
+  ✓ node --check ai.js
+  ✓ node --check archive-ui.js
+  ✓ node --check audio.js
+  ✓ node --check combat.js
+  ✓ node --check construction.js
+  ✓ node --check diplomacy.js
+  ✓ node --check economy.js
+  ✓ node --check inbox.js
+  ✓ node --check main.js
+  ✓ node --check map.js
+  ✓ node --check news.js
+  ✓ node --check sw.js
+  ✓ node --check ui.js
+  ✓ sw cache = 'stars-v95e2'
+  ✓ sw KABUK/fetch/activate korundu
+  ✓ kayıt sürümü v:8 KALDI
+  ✓ depolama anahtarı: yildiz:save
+  ✓ depolama anahtarı: yh_audio
+  ✓ depolama anahtarı: yh_advisor
+  ✓ depolama anahtarı: yh_autoev
+  ✓ depolama anahtarı: yh_bg
+  ✓ depolama anahtarı: yh_radar
+  ✓ depolama anahtarı: yh_templates
+  ✓ depolama anahtarı: __yh_probe
+  ✓ depolama anahtarı: __yh_diag
+  ✓ W/H kayda yazılıyor
+  ✓ restoreWorldBounds kanonik yardımcısı var
+  ✓ sağlık örneklemesi DPR dönüşümü kullanıyor
+  ✓ yüzey yeniden kurma basamağı var
+  ✓ yüzey basamağı retry SONRASINDA tetikleniyor
+  ✓ tanı özeti sınırlı bilgi ekliyor
+  ✓ LOGI_ON bağımsız katman değişkeni var
+  ✓ lojistik tercihi kalıcı
+  ✓ logiToggle ayrı aksiyon
+  ✓ lojistik düğmesi yeni aksiyona bağlı
+  ✓ çizim koşulları LOGI_ON kullanıyor
+  ✓ çizim önbelleği anahtarı katmanları içeriyor
+  ✓ R1: tap(screenPos) korundu
+  ✓ R1: lostpointercapture korundu
+  ✓ R1: pointerup önce temizliyor
+  ✓ R1: activeWorldState guard korundu
+  ✓ R1: _recCalisiyor finally korundu
+  ✓ R1: mapFix resetGesture korundu
+  ✓ SITUATIONS kataloğu duruyor
+  ✓ situationsTick çağrısı PASİF
+  ✓ DURUMLAR sekmesi gizli
+  ✓ audio.js byte-for-byte aynı — 804226980179698a
+  ✓ manifest.json byte-for-byte aynı — 6b8305490e9a55e9
+  ✓ map altyapısı sabit; hedef seçimi 93A referansında
+  ✓ 93D bilim CSS ve değişmeyen 93C HTML
+
+B. DÜNYA BOYUTU VE KAMERA ERİŞİMİ
+  ✓ ULU galaksi 100 sistem, W=galaxyScale(100)=6881 — 6881 / 100
+  ✓ küçük dünyalı oturumda ULU kayıt DOĞRU boyutu kuruyor — 4912 → 6881
+  ✓ sistem koordinatları YENİDEN ÜRETİLMEDİ
+  ✓ eski v8 kaydı (W/H yok) deterministik açılıyor — 6881
+  ✓ bozuk boyut girdisi güvenle düzeltiliyor — 6881
+  ✓ küçük dünya → ULU → küçük dünya geçişleri doğru — 4176 → 6881 → 4176
+  ✓ yatay ekranda hiçbir sistem erişilemez değil — {"z019":0,"z05":0,"z19":0}
+  ✓ dikey/dar ekranda hiçbir sistem erişilemez değil — {"z019":0,"z05":0,"z19":0}
+  ✓ dört köşe her zoom ve viewport'ta erişilebilir — {"z019":0,"z19":0,"dar":0}
+  ✓ kaydet/yükle oyun verisini ve RNG'yi korudu
+
+C. SAĞLIK ÖRNEKLEMESİ — DPR DÖNÜŞÜMÜ
+  ✓ sağlık örneklemesi gerçekten piksel okuyor — 3 / 3
+  ✓ DPR=1 ve DPR=2 aynı sayıda nokta örnekliyor
+  ✓ DPR=2 örnekleri tam 2× ölçekleniyor — [450,210] → [900,420]
+  ✓ DPR=2 örnekleri tuval sınırları İÇİNDE
+
+D. ÇİZİM YÜZEYİNİ YENİDEN KURMA
+  ✓ yüzey gerçekten yeniden kuruldu — kuruldu=true yeniEl=true yeniCtx=false · invalidate:surface | yüzey yeniden kuruldu (test) cv:900x420 css:900x420 dpr:1 ctx:var gen:1
+  ✓ kamera korundu
+  ✓ sistem ve filo seçimi korundu
+  ✓ jest durumu temizlendi
+  ✓ oyun verisi, RNG ve dünya boyutu DEĞİŞMEDİ
+  ✓ yeni yüzeyde TAP çalışıyor — {"hata":"","filo":1}
+  ✓ yeni yüzeyde PAN çalışıyor, zoom sabit
+  ✓ yeni yüzeyde PINCH çalışıyor
+  ✓ pinch sonrası PAN çalışıyor, pts 0
+  ✓ 3 kez yeniden kurma + 2 bind: listener sayısı 1'de sabit — {"gen":4,"boundEsit":true,"dinleyici":1,"move":1,"lost":1}
+  ✓ tekrarlı kurmadan sonra TAP yine çalışıyor — 1
+
+E. ÜÇ ANA MOD × RADAR × LOJİSTİK = 12 BİRLEŞİM
+  ✓ 12 birleşimin TAMAMI gerçek UI eylemleriyle doğru — []
+  ✓ Lojistik kapatınca Savaş ve Radar KORUNUYOR — {"m":"savas","r":true,"l":false}
+  ✓ Radar kapatınca ana mod korunuyor
+  ✓ ana mod değişimi katmanları DEĞİŞTİRMİYOR
+  ✓ eski "askeri" girdisi ana modu bozmuyor, katmanı çeviriyor
+  ✓ çizim önbelleği anahtarı katman değişimine duyarlı
+
+══════════════════════════════════════════
+  GEÇEN: 81   KALAN: 0
+══════════════════════════════════════════
+

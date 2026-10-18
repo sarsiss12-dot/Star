@@ -1,0 +1,165 @@
+
+A. SÖZDİZİMİ, DOSYA SINIRI VE KARANTİNA
+  ✓ node --check ai.js
+  ✓ node --check archive-ui.js
+  ✓ node --check audio.js
+  ✓ node --check combat.js
+  ✓ node --check construction.js
+  ✓ node --check diplomacy.js
+  ✓ node --check economy.js
+  ✓ node --check inbox.js
+  ✓ node --check main.js
+  ✓ node --check map.js
+  ✓ node --check news.js
+  ✓ node --check sw.js
+  ✓ node --check ui.js
+  ✓ depolama anahtarı korundu: yildiz:save
+  ✓ depolama anahtarı korundu: yh_audio
+  ✓ depolama anahtarı korundu: yh_advisor
+  ✓ depolama anahtarı korundu: yh_autoev
+  ✓ depolama anahtarı korundu: yh_bg
+  ✓ depolama anahtarı korundu: yh_radar
+  ✓ depolama anahtarı korundu: yh_templates
+  ✓ depolama anahtarı korundu: __yh_probe
+  ✓ depolama anahtarı korundu: __yh_diag
+  ✗ sw cache = 'stars-v95e1'
+  ✓ sw KABUK listesi duruyor
+  ✓ sw fetch davranışı duruyor
+  ✓ sw activate davranışı duruyor
+  ✓ kayıt sürümü v:8 (Faz 85F ile yükseldi)
+  ✓ world şeması değişmedi
+  ✓ advanceMonthlyWorld() yardımcısı var
+  ✓ aylık dünya YALNIZ init===false yolunda çağrılıyor
+  ✓ advanceMonthlyWorld p_imp/economyTick içine gömülmedi (tek çağrı) — 2
+  ✓ groundTick() economyTick gövdesinden çıkarıldı
+  ✓ groundTick() advanceMonthlyWorld içinde duruyor
+  ✓ invasionTick() economyTick gövdesinden çıkarıldı
+  ✓ invasionTick() advanceMonthlyWorld içinde duruyor
+  ✓ repairTick() economyTick gövdesinden çıkarıldı
+  ✓ repairTick() advanceMonthlyWorld içinde duruyor
+  ✓ colossusTick() economyTick gövdesinden çıkarıldı
+  ✓ colossusTick() advanceMonthlyWorld içinde duruyor
+  ✓ terraformTick() economyTick gövdesinden çıkarıldı
+  ✓ terraformTick() advanceMonthlyWorld içinde duruyor
+  ✓ radiationTick() economyTick gövdesinden çıkarıldı
+  ✓ radiationTick() advanceMonthlyWorld içinde duruyor
+  ✓ panopticonTick() economyTick gövdesinden çıkarıldı
+  ✓ panopticonTick() advanceMonthlyWorld içinde duruyor
+  ✓ secessionTick() economyTick gövdesinden çıkarıldı
+  ✓ secessionTick() advanceMonthlyWorld içinde duruyor
+  ✓ recalcMods init yolunda da çalışıyor
+  ✓ empireIncome init yolunda da çalışıyor
+  ✓ refreshLuxury init yolunda da çalışıyor
+  ✓ refreshReach init yolunda da çalışıyor
+  ✓ kaynak ekleme hâlâ init kapısının ARKASINDA
+  ✓ durumu değiştirip serialize kopyasından geri yükleme YOK
+  ✓ SITUATIONS kataloğu duruyor
+  ✓ situationsTick tanımı duruyor
+  ✓ situationsTick çağrısı PASİF (yorumlu)
+  ✓ DURUMLAR sekmesi gizli
+  ✓ 200 ayda situation tetiklenmedi — 0
+  ✓ audio.js byte-for-byte aynı — 804226980179698a
+  ✓ manifest.json byte-for-byte aynı — 6b8305490e9a55e9
+  ✓ map kaynak kilidi: 91C altyapısı + 93A hedef seçimi
+
+B. SENARYO 1 — KALKAN İDEMPOTANSI
+  ✓ 10 ardışık yüklemede kalkan TAM 4 kaldı — 4→4→4→4→4→4→4→4→4→4→4
+  ✓ gerçek economyTick(false) kalkanı BİR ay ilerletti — 4 → 8
+  ✓ ikinci gerçek ay da normal ilerledi (mekanik ölmedi) — 8 → 12
+
+C. SENARYO 2 — AKTİF KUŞATMA
+  ✓ tek yüklemede gerçek oyun durumu HİÇ değişmedi
+  ✓ 6 ardışık yüklemede de değişmedi
+  ✓ shield korundu (4) — 4
+  ✓ garrison korundu (10) — 10
+  ✓ garrisonBase korundu (10) — 10
+  ✓ siege korundu (2) — bombardıman ilerlemedi — 2
+  ✓ stab/pop korundu — 20/12
+  ✓ gezegen sahipliği değişmedi — işgal olmadı — 0
+  ✓ 4 yükleme sonrası tek ay = taze yükleme sonrası tek ay (aynı sonuç) — kalkan 6.6690000000000005/6.6690000000000005 · garnizon 13/13
+  ✓ gerçek ay mekaniği çalışmaya devam ediyor — 4→6.6690000000000005
+
+D. SENARYO 3 — FİLO TAMİRİ
+  ✓ 5 ardışık yüklemede gemi gövdesi ARTMADI — 0.5|0.5|0.5 → 0.5|0.5|0.5 → 0.5|0.5|0.5 → 0.5|0.5|0.5 → 0.5|0.5|0.5 → 0.5|0.5|0.5
+  ✓ economyTick(true) gövdeyi artırmadı — 0.5|0.5|0.5
+  ✓ economyTick(false) tamiri BİR kez çalıştırdı — 0.5|0.5|0.5 → 0.65|0.65|0.65
+
+E. SENARYO 4 — COLOSSUS
+  ✓ 5 ardışık yüklemede charge TAM 3 kaldı — 3→3→3→3→3→3
+  ✓ Colossus filosu yüklemede kaybolmadı
+  ✓ hedef gezegen ATEŞLENMEDİ / yok edilmedi — 12→12→12→12→12→12
+  ✓ gerçek ayda sayaç mevcut kurala göre ilerledi — 3 → 4
+
+F. SENARYO 5 — TERRAFORM
+  ✓ 5 yüklemede terraform (left/woke/sleeper/sabotajAy) AYNI — {"left":5,"woke":false,"sleeper":false,"sabotajAy":0}
+  ✓ yükleme RNG TÜKETMEDİ — 1518100838,1518100838,1518100838,1518100838,1518100838,1518100838
+  ✓ yüklemede Uyuyan Kraliçe DOĞMADI (filo sayısı sabit) — 28/28
+  ✓ gerçek aylık tik yalnız BİR aylık ilerleme sağladı — {"left":5,"woke":false,"sleeper":false,"sabotajAy":0} → {"left":4,"woke":false,"sleeper":false,"sabotajAy":0}
+
+G. SENARYO 6 — RADYASYON / PANOPTICON / AYRILIK
+  ✓ RADYASYON: 5 yüklemede gemi gövdesi değişmedi — 1=0.500|0.500|0.500;2=1.000;3=1.000;9001=1.000;9002=1.000|1.000
+  ✓ RADYASYON: yüklemede filo yok olmadı — 30/30
+  ✓ PANOPTICON: yüklemede sys.panopt yazılmadı — null
+  ✓ PANOPTICON: yüklemede sys.seen değişmedi
+  ✓ PANOPTICON: panoptLock korundu
+  ✓ AYRILIK: secede sayacı yüklemede ilerlemedi — 3
+  ✓ AYRILIK: yüklemede sahiplik değişmedi
+  ✓ AYRILIK: unrest sayacı yüklemede tüketilmedi
+  ✓ yükleme hiçbir alanı değiştirmedi (toplu)
+  ✓ gerçek ayda mekanikler ÇALIŞMAYA DEVAM ediyor (ölmediler) — ilerleyen: huls,panopt,unr
+
+H. SENARYO 7 — RNG
+  ✓ economyTick(true) öncesi/sonrası RND_STATE BİREBİR aynı — 1518100838 / 1518100838
+  ✓ 8 ardışık yüklemede RNG kaymadı — 1518100838,1518100838,1518100838
+  ✓ setupGame sonrası economyTick(true) de RNG tüketmedi
+
+I. SENARYO 8 — BİLDİRİM VE NESNE SAYISI
+  ✓ init YENİ bildirim (say/log) üretmedi — 0 → 0
+  ✓ init inbox girdisi üretmedi
+  ✓ init eventArt/fx üretmedi
+  ✓ init filo sayısını değiştirmedi — 30/30
+  ✓ init imparatorluk sayısını değiştirmedi
+  ✓ init koloni sayısını değiştirmedi — 8/8
+  ✓ 5 yükleme de bildirim üretmedi — 0
+  ✓ 5 yükleme filo/imp/koloni sayısını korudu
+
+J. SENARYO 9 — TÜRETİLMİŞ EKONOMİ
+  ✓ zehirli e.inc doğru gelirle YENİDEN hesaplandı — {"min":3.336590000000001,"ene":-13.476043100000002,"yiy":14.5080050000
+  ✓ bu gelir kaynak STOKLARINA eklenmedi
+  ✓ zehirli e.mods recalcMods ile onarıldı
+  ✓ e.luxury bozulmadan korundu
+  ✓ silinen _reach yeniden kuruldu — 0 → 60/60
+  ✓ zehirli e.luxury refreshLuxury ile onarıldı
+  ✓ gelir bir sonraki türetilmiş hesapta doğru değere yakınsadı — ara turda lüks sırası nedeniyle sapma
+
+K. SENARYO 10 — SHIELD/GARRISON ALANI OLMAYAN KAYIT
+  ✓ kayıtta shield/garrison gerçekten YOK
+  ✓ eksik alanlı kayıt HATA ATMADAN açıldı — ok
+  ✓ yükleme hayali bir ay OYNATMADI (shield doldurulmadı) — shield=undefined
+  ✓ 5 yükleme sonrası da doldurulmadı — {}
+  ✓ ilk gerçek ayda mevcut kurala göre BİR kez başlatıldı — shield=4
+  ✓ kayıtlı her shield değeri (0/1/4/7/13) aynen korundu — beklenen 0,1,4,7,13 · alınan 0,1,4,7,13
+
+L. SENARYO 11 — YENİ OYUN KURULUMU
+  ✓ yeni oyun istenmeden TAMİR üretmedi
+  ✓ yeni oyun istenmeden COLOSSUS ŞARJI üretmedi
+  ✓ yeni oyun istenmeden BOMBARDIMAN/kuşatma üretmedi
+  ✓ yeni oyun istenmeden PROJE ilerlemesi üretmedi
+  ✓ yeni oyun istenmeden KALKAN doldurmadı
+  ✓ başlangıç ekonomisi görünür ve hesaplanmış — 7 alan
+  ✓ mods ve _reach kurulmuş — reach 45
+
+M. SENARYO 12 — FAZ 85A POLİTİK DÜNYA
+  ✓ kayıt sürümü v:8 (Faz 85F) — v=8
+  ✓ world şeması değişmedi (dokuz alan) — cncAge,council,fedUid,feds,friction,megaWatch,memAge,rebelAlliance,sandbox
+  ✓ 5 yükleme sonrası memAge/cncAge korundu — 137/64
+  ✓ Konsey + hazine + oy + yaptırım korundu
+  ✓ federasyon + hazine + fedUid korundu
+  ✓ rebelAlliance / megaWatch / sandbox / friction korundu
+
+══════════════════════════════════════════
+  GEÇEN: 131   KALAN: 1
+  BAŞARISIZ:
+    · sw cache = 'stars-v95e1'
+══════════════════════════════════════════
+

@@ -1,0 +1,25 @@
+{
+  "sameSeed11": true,
+  "comparedFields": [
+    "seed",
+    "requestedMonths",
+    "elapsedMonths",
+    "systems",
+    "empires",
+    "failure",
+    "builders",
+    "started",
+    "completed",
+    "monthly",
+    "negative",
+    "shortages",
+    "lowEnergyEmpireMonths",
+    "reloads",
+    "saveBytes",
+    "metrics",
+    "newsBytes"
+  ],
+  "newCampaignMonths": 360,
+  "baselineCampaignMonths": 120,
+  "negativeStockSamples": 0
+}

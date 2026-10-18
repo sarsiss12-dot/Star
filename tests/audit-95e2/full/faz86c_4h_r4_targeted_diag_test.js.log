@@ -1,0 +1,110 @@
+
+A. SÖZDİZİMİ, DOSYA SINIRI VE KARANTİNA
+  ✓ node --check ai.js
+  ✓ node --check archive-ui.js
+  ✓ node --check audio.js
+  ✓ node --check combat.js
+  ✓ node --check construction.js
+  ✓ node --check diplomacy.js
+  ✓ node --check economy.js
+  ✓ node --check inbox.js
+  ✓ node --check main.js
+  ✓ node --check map.js
+  ✓ node --check news.js
+  ✓ node --check sw.js
+  ✓ node --check ui.js
+  ✓ sw cache = 'stars-v95e2'
+  ✓ sw KABUK/fetch/activate korundu
+  ✓ kayıt sürümü v:8 KALDI
+  ✓ depolama anahtarı: yildiz:save
+  ✓ depolama anahtarı: yh_audio
+  ✓ depolama anahtarı: yh_advisor
+  ✓ depolama anahtarı: yh_autoev
+  ✓ depolama anahtarı: yh_bg
+  ✓ depolama anahtarı: yh_radar
+  ✓ depolama anahtarı: yh_templates
+  ✓ depolama anahtarı: __yh_probe
+  ✓ depolama anahtarı: __yh_diag
+  ✓ B: main.js'te doğrudan contextlost bağlaması KALMADI
+  ✓ B: context olaylarının tek sahibi yüzey yaşam döngüsü
+  ✓ A: bağlama jetonu var (_bindToken)
+  ✓ A: _guncel jetonu karşılaştırıyor
+  ✓ A: sökme _boundCv'den bağımsız (kayıt._cv)
+  ✓ A: geri alma kısmi yeni bağlamayı söküyor
+  ✓ C: resize hatası yüzey basamağına ulaşıyor
+  ✓ renderReport tanı toplayıcısı var
+  ✓ olay izi tutuluyor
+  ✓ ilk başarısızlık korunuyor
+  ✓ build kimliği var
+  ✓ çizim aşaması izleniyor
+  ✓ tanı raporu dışa aktarılabiliyor
+  ✓ pano yoksa dosya indirme var
+  ✓ R2: worldBoundsFrom korundu
+  ✓ R2: LOGI_ON bağımsız katman korundu
+  ✓ R1: tap(screenPos) korundu
+  ✓ R1: pointerup kapat() tap'ten önce
+  ✓ SITUATIONS kataloğu duruyor
+  ✓ situationsTick çağrısı PASİF
+  ✓ DURUMLAR sekmesi gizli
+  ✓ audio.js byte-for-byte aynı — 804226980179698a
+  ✓ manifest.json byte-for-byte aynı — 6b8305490e9a55e9
+  ✓ map altyapısı sabit; hedef seçimi 93A referansında
+  ✓ 93D bilim CSS ve değişmeyen 93C HTML
+
+B. A BULGUSU: BAŞARISIZ HAZIRLIK SONRASI TEK GİRİŞ
+  ✓ hazırlık hatasında yeniden kurma false döndü
+  ✓ DOM eski elemente geri alındı
+  ✓ A: TEK dokunuş → TEK filo seçimi (önce 2 idi) — 1 seçim
+  ✓ A: 40 px sürükleme → 40 birim kamera (önce 80 idi) — 40 birim
+  ✓ emekli/kısmi bağlamalardan kalıntı YOK — 0
+  ✓ View.cv / View.g / g.canvas tutarlı
+  ✓ A: AYNI canvas'a dönüşte ESKİ callback'ler ETKİSİZ
+  ✓ A: güncel bağlama doğru mesafede çalışıyor — 40
+  ✓ jest durumu temiz
+
+C. B BULGUSU: CONTEXT OLAYLARI
+  ✓ 10 yüzey değişimi başarılı — 10
+  ✓ B: İLK canvas'ta contextlost TAM 1 (önce 2 idi) — 1
+  ✓ B: İLK canvas'ta contextrestored TAM 1 (önce 2 idi) — 1
+  ✓ B: yeni canvas ilk canvas ile AYNI profile sahip — {"pointerdown":1,"pointermove":1,"pointerup":1,"pointercancel":1,"lostpointercapture":1,"wheel":1,"contextlost":1,"contextrestored":1,"_toplam":8}
+  ✓ B: emekli canvas'ta hiç dinleyici KALMADI — 0
+  ✓ B: emekli contextrestored kurtarma PLANLAMIYOR — 0
+  ✓ B: GÜNCEL contextrestored kurtarma planlıyor — 1
+  ✓ global dinleyiciler çoğalmadı — {"blur":1,"vis":1}
+
+D. C BULGUSU: MEVCUT YÜZEYDE RESIZE HATASI
+  ✓ C: resize hatası yüzey yeniden kurmayı TETİKLEDİ (önce 0) — 1
+  ✓ C: kurtarma bayrağı serbest bırakıldı
+  ✓ C: resize hatası açıkça kaydedildi — resize hatası (resize): enjekte: setTransf | invalidate:surface | yüzey yeniden kuruldu (resize+resize) cv:9
+  ✓ context null yolu da yüzey basamağına ulaşıyor — 1
+
+E. HEDEFLİ TANI
+  ✓ çizim tamamlandığında aşama "tamam" — tamam
+  ✓ yüzey eşleşmeleri raporlanıyor
+  ✓ build kimliği raporda — 95e1
+  ✓ rapor yeterince alan içeriyor — 37
+  ✓ çizim SONRASI resize AYIRT EDİLİYOR — önce false → sonra true
+  ✓ yanlış/eski yüzeye çizim AYIRT EDİLİYOR
+  ✓ olay izi tutuluyor — resize>vis>focus
+  ✓ İLK başarısızlık korunuyor (retry ezmiyor) — ILK
+  ✓ metin raporu üretilebiliyor — sebep=t · t=1792300724852 · build=95e1 · olaylar=resize>vis>
+
+F. KURTARMA SONRASI GERÇEK GİRDİ
+  ✓ yüzey yeniden kuruldu
+  ✓ referanslar tutarlı
+  ✓ oyun verisi ve RNG DEĞİŞMEDİ
+  ✓ kamera, seçim ve katman tercihleri korundu
+  ✓ kurtarma sonrası TEK tap — {"hata":"","say":1}
+  ✓ kurtarma sonrası pan DOĞRU mesafede (40) — {"kayma":40,"zoomAyni":true}
+  ✓ kurtarma sonrası pinch çalışıyor
+  ✓ pinch sonrası pan çalışıyor
+  ✓ zincir sonunda pts 0
+
+G. GERÇEK KAYITLA KAMERA
+  ✓ gerçek kayıt 6881×6881 yükleniyor (R2 korundu) — 6881x6881
+  ✓ her zoom seviyesinde merkezlenemeyen sistem YOK — {"W":6881,"H":6881,"sys":100,"z19":0,"z10":0,"z03":0}
+
+══════════════════════════════════════════
+  GEÇEN: 91   KALAN: 0
+══════════════════════════════════════════
+

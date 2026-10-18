@@ -1147,6 +1147,44 @@ body.fauxFull canvas#map{width:100vw !important;height:100dvh !important}
 .archive95e{min-width:0;overflow-wrap:anywhere}.archiveTools{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}.archiveTools>*{min-width:0;flex:1 1 120px;max-width:100%;min-height:36px}.news95e{display:block;overflow-wrap:anywhere}.news95e p{margin:5px 0}.news95e .abtn{white-space:normal;text-align:left;max-width:100%}.unread95e{border-left:3px solid #6ff2c8}
 @media(max-height:420px){.archive95e{max-height:calc(100dvh - 132px);overflow-y:auto}.archive95e .box{margin:5px 0;padding:7px}}
 /* END FAZ 95E ARCHIVE */
+/* FAZ 95E.2 — bounded archive workspace */
+#modal.archiveHost{z-index:1001;justify-content:flex-start;align-items:stretch;padding:0}
+#modal.archiveHost .archiveShell{display:flex;flex-direction:column;width:min(980px,calc(100vw - 56px));max-width:none;height:100%;max-height:100%;min-height:0;overflow:hidden;border-radius:0;border-width:0 1px 0 0}
+.archiveShell .mhd{flex:none;padding:0 10px;font-size:12px;letter-spacing:.08em;min-height:36px;gap:8px}
+.archiveShell .mhd .abtn{margin:0;flex:0 0 36px;width:36px;min-width:36px;min-height:36px}
+.archiveTabs,.archiveControls{flex:none;padding:0 10px}
+.archiveTabs{display:flex;gap:6px;border-bottom:1px solid var(--line)}
+.archiveShell .abtn,.archiveShell .ch{font-size:12px;line-height:1.25;min-height:36px;margin:0;padding:6px 8px}
+.archiveTabs>.abtn{flex:1;min-width:0}
+.archiveControls .archiveTools{margin:4px 0;gap:5px;flex-wrap:nowrap}
+.archiveControls .archiveTools>*{min-height:36px;flex:1 1 0}
+.archiveControls input,.archiveControls select{font:12px var(--mono);color:var(--bone);background:var(--hull);border:1px solid var(--line);padding:4px 7px}
+.archiveShell .archiveFlags>.abtn{font-size:11px;padding:4px}
+.archiveColumns,.archiveRow{display:grid;grid-template-columns:130px 108px minmax(80px,.8fr) minmax(140px,2fr) 90px;gap:6px;align-items:center;min-width:0}
+.archiveColumns{font-size:10px;color:var(--dim);padding:3px 8px}
+.archiveRows{flex:1 1 0;min-height:0;max-height:none!important;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;touch-action:pan-y;padding:0 10px;scrollbar-gutter:stable}
+.archiveRow{padding:2px 7px;border-bottom:1px solid var(--line);min-height:40px;font-size:11px}
+.archiveRow.selected{background:rgba(77,171,205,.14);outline:1px solid var(--phos);outline-offset:-1px}
+.archiveRow>*{min-width:0;overflow:hidden;text-overflow:ellipsis}
+.archiveDate{font:10px var(--mono);white-space:nowrap}
+.archiveType,.archiveState{white-space:nowrap}
+.archiveRow button{color:var(--bone);background:transparent;border:0;font:inherit;min-height:36px;text-align:left;padding:2px 0;cursor:pointer}
+.archiveRow button:focus-visible,.archiveShell .abtn:focus-visible{outline:2px solid var(--phos);outline-offset:-2px}
+.archiveRow .archiveEmpire{color:var(--phos);white-space:nowrap}
+.archiveTitle strong,.archiveTitle span{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.archiveTitle strong{font-size:12px;font-weight:500}
+.archiveTitle span{font-size:10px;color:var(--dim)}
+.archiveState{font-size:10px}
+.archiveEmpty{padding:12px}
+.archiveMore{width:100%}
+.archiveShell .archiveDetail{flex:1 1 0;min-height:0;max-height:none;overflow-y:auto;overscroll-behavior:contain;touch-action:pan-y;padding:10px 14px;font-size:12px}
+.archiveDetail h3{font-size:14px;margin:0 0 8px;color:var(--bone)}
+.archiveShell .mft{flex:none;display:flex;flex-direction:row;flex-wrap:wrap;gap:5px;padding:5px 10px;border-top:1px solid var(--line)}
+.archiveShell .mft>.ch{flex:1 1 110px;text-align:center;padding:7px}
+@media(min-width:481px){.archiveNewsControls{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:8px}.archiveColumns{grid-column:1/-1}}
+@media(max-width:800px){.archiveColumns,.archiveRow{grid-template-columns:116px 80px minmax(64px,.7fr) minmax(100px,1.6fr) 78px;gap:4px}}
+@media(max-width:480px){#modal.archiveHost .archiveShell{width:100%}.archiveColumns{display:none}.archiveRow{grid-template-columns:1fr 1fr 1fr;gap:0 6px;padding:4px 7px;min-height:76px}.archiveDate{grid-area:1/1}.archiveType{grid-area:1/2}.archiveState{grid-area:1/3;text-align:right}.archiveRow .archiveEmpire{grid-area:2/1}.archiveTitle{grid-area:2/2/3/4}.archiveShell .mft>.ch{flex-basis:90px}}
+/* END FAZ 95E.2 ARCHIVE */
 </style>
 </head>
 <body>

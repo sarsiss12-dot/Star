@@ -1,0 +1,14 @@
+{
+  "browser": "133.0.6943.0",
+  "physicalAndroid": false,
+  "viewportEmulation": true,
+  "pass": 1,
+  "fail": 0,
+  "pageErrors": [],
+  "results": [
+    {
+      "name": "extended existing offer modal accepts through its already routed button",
+      "ok": true
+    }
+  ]
+}

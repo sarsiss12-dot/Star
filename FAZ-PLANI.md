@@ -1,3 +1,11 @@
+# Güncel durum — 95E.2 — 18 Ekim 2026
+
+95E.2: kritik gelen kutusu/inşaat click yönlendirmeleri ve tarih alanı düzeltildi; haber/gelen kutusu sol çalışma alanına geçti. Yeni sonuç 92 paket/5186/0; gerçek Chromium 43/0. Save v8, tek 2B Canvas ve 95E.1 anahtarı korunur. Fiziksel Android ve özgün oyuncu kaydı gerektiren QA açık. Tam matris: FAZ95E2-RAPOR.md; devam: DEVAM-95E2.md.
+
+95F/96A otomatik başlamaz. 96A gerçek ticaret konvoyları ve sözleşmeleri, ayrı yedi kaynak Ekonomi ekranı, doğal generatif müzik, portre/köken, casusluk teknoloji seçenekleri ve multiplayer planı korunur. Önceki plan bölümleri tarihsel bağlamdır.
+
+---
+
 # 95E.1 ek bakım (17 Ekim 2026)
 
 Galaksi başlangıcına yalnızca pasif rastgele imparatorluk olaylarını ve galaktik çalkantıları devre dışı bırakan seçenek eklendi. Diplomasi/casusluk/savaş/keşif korunur. Ayrıntı FAZ95E1-RAPOR.txt. 96A ticaret, Ekonomi ekranı, fiziksel Android, generatif enstrüman müziği ve LAN/online multiplayer planları korunur.

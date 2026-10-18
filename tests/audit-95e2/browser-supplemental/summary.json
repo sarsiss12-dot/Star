@@ -1,0 +1,36 @@
+{
+  "browser": "133.0.6943.0",
+  "physicalAndroid": false,
+  "viewportEmulation": true,
+  "pass": 4,
+  "fail": 2,
+  "pageErrors": [],
+  "results": [
+    {
+      "name": "supplemental portrait archive remains clickable above rotation advice",
+      "ok": true
+    },
+    {
+      "name": "supplemental read-all refreshes tab count and keeps list position",
+      "ok": true
+    },
+    {
+      "name": "supplemental actual speed and war pause setting buttons work",
+      "ok": true
+    },
+    {
+      "name": "supplemental askeri federation actual founding click with exactly 220 Influence",
+      "ok": true
+    },
+    {
+      "name": "supplemental bilimsel federation actual founding click with exactly 220 Influence",
+      "ok": false,
+      "error": "page.click: Timeout 5000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-a=\"foundFed\"][data-x=\"bilimsel\"]')\u001b[22m\n\u001b[2m    - locator resolved to <button class=\"abtn pri\" data-a=\"foundFed\" data-x=\"bilimsel\">BİLİMSEL FEDERASYON KUR · 220 ◈</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m  - element was detached from the DOM, retrying\u001b[22m\n\u001b[2m    - locator resolved to <button class=\"abtn pri\" data-a=\"foundFed\" data-x=\"bilimsel\">BİLİMSEL FEDERASYON KUR · 220 ◈</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is not stable\u001b[22m\n\u001b[2m  - retrying click action\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is not visible\u001b[22m\n\u001b[2m  - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    8 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 500ms\u001b[22m\n\n    at /workspace/scratch/fc6de0d4e720/stars95e2/tests/browser-95e2.js:92:162\n    at async test (/workspace/scratch/fc6de0d4e720/stars95e2/tests/browser-95e2.js:16:168)\n    at async /workspace/scratch/fc6de0d4e720/stars95e2/tests/browser-95e2.js:90:52"
+    },
+    {
+      "name": "supplemental ticaret federation actual founding click with exactly 220 Influence",
+      "ok": false,
+      "error": "page.click: Timeout 5000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-a=\"foundFed\"][data-x=\"ticaret\"]')\u001b[22m\n\u001b[2m    - locator resolved to <button class=\"abtn pri\" data-x=\"ticaret\" data-a=\"foundFed\">TİCARET FEDERASYONU KUR · 220 ◈</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    8 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 500ms\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\n    at /workspace/scratch/fc6de0d4e720/stars95e2/tests/browser-95e2.js:92:162\n    at async test (/workspace/scratch/fc6de0d4e720/stars95e2/tests/browser-95e2.js:16:168)\n    at async /workspace/scratch/fc6de0d4e720/stars95e2/tests/browser-95e2.js:90:52"
+    }
+  ]
+}

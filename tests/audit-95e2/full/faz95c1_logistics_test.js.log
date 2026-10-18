@@ -1,0 +1,25 @@
+✓ muh locked at queue, automatic build, fleet delivery and production completion
+✓ kru locked at queue, automatic build, fleet delivery and production completion
+✓ zir locked at queue, automatic build, fleet delivery and production completion
+✓ col_s locked at queue, automatic build, fleet delivery and production completion
+✓ esk locked at queue, automatic build, fleet delivery and production completion
+✓ mixed template buys exact unlocked classes and leaves unsupported targets with a reason
+✓ already owned locked hulls survive composition, save/load and daily production
+✓ real research unlock resumes the saved locked job without a second payment
+✓ Throne rebuild cannot manufacture locked hulls, while existing starting throne survives
+✓ researched Throne rebuild retains canonical cost, owner and one throne restriction
+✓ multiple yards without a rally purchase and deliver real template ships once
+✓ explicit fleet orders beat conflicting general rally without changing either preference
+✓ moving target is followed through the existing movement engine
+✓ blocked shipment retains hull, source yard and correct military-passage reason
+✓ no connected hyperlane is distinguished from a closed border
+✓ known hostile threat is distinguished from missing passage
+✓ target combat prevents foreign merge and displays the actual wait
+✓ lost fleet gives a concrete retarget action and does not destroy produced ship
+✓ fleet and yard display the same completed shipment record
+✓ queued fleet and yard information share the same delivery projection
+✓ source, target, retry deadline and explanation survive Save v8
+✓ manual cancellation during travel preserves current leg and does not teleport
+✓ capacity / reserve delay is visible without generating new ships
+✓ class panel explicitly distinguishes existing, queued, transit and unsupported production
+GEÇEN: 24 KALAN: 0

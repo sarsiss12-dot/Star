@@ -118,7 +118,7 @@ test('cihazdan yükle bozuk kaydı bulunamadı diye raporlamaz',async()=>{
 });
 test('build ve cache 90RC.2 kimliği taşır',()=>{
  assert.match(fs.readFileSync(path.join(root,'main.js'),'utf8'),/const BUILD_ID = '95e1'/);
- assert.match(fs.readFileSync(path.join(root,'sw.js'),'utf8'),/const CACHE = 'stars-v95e1'/);
+ assert.match(fs.readFileSync(path.join(root,'sw.js'),'utf8'),/const CACHE = 'stars-v95e2'/);
 });
 (async()=>{for(const [name,fn] of tests){try{await fn();pass++;console.log('✓ '+name);}
  catch(e){fail++;console.log('✗ '+name+' — '+e.stack);}}

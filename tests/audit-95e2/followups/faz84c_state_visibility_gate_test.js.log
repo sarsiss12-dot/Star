@@ -1,0 +1,145 @@
+
+A. SÖZDİZİMİ, DOSYA SINIRI VE KARANTİNA
+  ✓ node --check ai.js
+  ✓ node --check archive-ui.js
+  ✓ node --check audio.js
+  ✓ node --check combat.js
+  ✓ node --check construction.js
+  ✓ node --check diplomacy.js
+  ✓ node --check economy.js
+  ✓ node --check inbox.js
+  ✓ node --check main.js
+  ✓ node --check map.js
+  ✓ node --check news.js
+  ✓ node --check sw.js
+  ✓ node --check ui.js
+  ✓ manifest.json geçerli
+  ✓ yükleme sırası değişmedi
+  ✓ depolama anahtarı korundu: yildiz:save
+  ✓ depolama anahtarı korundu: yh_audio
+  ✓ depolama anahtarı korundu: yh_advisor
+  ✓ depolama anahtarı korundu: yh_autoev
+  ✓ depolama anahtarı korundu: yh_bg
+  ✓ depolama anahtarı korundu: yh_radar
+  ✓ depolama anahtarı korundu: yh_templates
+  ✓ depolama anahtarı korundu: __yh_probe
+  ✓ depolama anahtarı korundu: __yh_diag
+  ✓ sw cache = 'stars-v95e2'
+  ✓ sw KABUK listesi duruyor
+  ✓ sw fetch davranışı duruyor
+  ✓ sw activate davranışı duruyor
+  ✓ SITUATIONS kataloğu duruyor
+  ✓ situationsTick tanımı duruyor
+  ✓ situationsTick çağrısı PASİF (yorumlu)
+  ✓ DURUMLAR sekmesi gizli
+  ✓ 200 ayda situation tetiklenmedi — 0
+  ✓ audio.js byte-for-byte aynı — 804226980179698a
+  ✓ manifest.json byte-for-byte aynı — 6b8305490e9a55e9
+
+B. PERK KAPISI YAPISI
+  ✓ p_imp() gövdesi güvenilir biçimde çıkarıldı — 407 satır
+  ✓ perk kapısı p_imp içinde tam bir kez var — 1
+  ✓ MİZAÇ VE İTİBAR perk kapısının DIŞINDA — @10205 < kapı@13893
+  ✓ galaktik itibar (honorOf) perk kapısının DIŞINDA — @10440 < kapı@13893
+  ✓ diplomatik ağırlık (voteWeightBreakdown) perk kapısının DIŞINDA — @11135 < kapı@13893
+  ✓ ambargo baskısı (embargoPressure) perk kapısının DIŞINDA — @11850 < kapı@13893
+  ✓ Galaktik Parya (isPariah) perk kapısının DIŞINDA — @11914 < kapı@13893
+  ✓ danışman düğmesi (advShow) perk kapısının DIŞINDA — @12657 < kapı@13893
+  ✓ Galaktik Tehdit (threatLabel) perk kapısının DIŞINDA — @13436 < kapı@13893
+  ✓ Parya adayı (PARIAH_THREAT) perk kapısının DIŞINDA — @12991 < kapı@13893
+  ✓ İDEOLOJİ YETENEKLERİ başlığı kapının İÇİNDE — @13940 > kapı@13893
+  ✓ perks.forEach kapının İÇİNDE
+  ✓ perk açma açıklaması else dalında duruyor
+  ✓ MİZAÇ VE İTİBAR başlığı tam bir kez — 1
+  ✓ advShow düğmesi p_imp içinde tam bir kez — 1
+  ✓ İDEOLOJİ YETENEKLERİ başlığı tam bir kez
+  ✓ perk açma açıklaması tam bir kez
+  ✓ FAZ 84B kanonik vasallık bölümü hâlâ TEK
+  ✓ vasallık bölümü hâlâ perk kapısının dışında
+  ✓ isyan düğmesi hâlâ tam bir kez
+
+C. SENARYO 1 — PERKSİZ NORMAL DEVLET
+  ✓ oyuncunun perki yok (senaryo geçerli) — perk=0
+  ✓ MİZAÇ VE İTİBAR başlığı görünür (eski hata: görünmüyordu) — 1
+  ✓ mizaç ADI görünür — ×1
+  ✓ mizaç AÇIKLAMASI görünür
+  ✓ galaktik itibar görünür (tam bir kez) — honor=0
+  ✓ itibar açıklaması görünür
+  ✓ DANIŞMANI AÇ düğmesi tam bir kez görünür — 1
+  ✓ ideoloji açma açıklaması tam bir kez görünür
+  ✓ İDEOLOJİ YETENEKLERİ başlığı görünmez (perk yok)
+  ✓ perk kartı görünmez — 0
+
+D. SENARYO 2 — PERKLİ DEVLET
+  ✓ oyuncunun perki VAR (senaryo geçerli) — perk=2
+  ✓ MİZAÇ VE İTİBAR yine YALNIZ BİR KEZ — 1
+  ✓ mizaç adı yalnız bir kez — ×1
+  ✓ galaktik itibar yalnız bir kez — 1
+  ✓ danışman düğmesi yalnız bir kez — 1
+  ✓ İDEOLOJİ YETENEKLERİ başlığı bir kez — 1
+  ✓ her perk tam bir kez görünür — Savaş Hakkı=1 · Savaş Ekonomisi=1
+  ✓ perk açma açıklaması GÖRÜNMEZ — 0
+
+E. SENARYO 3 — PERKSİZ + KONSEY ÜYESİ
+  ✓ oyuncunun perki yok (senaryo geçerli) — perk=0
+  ✓ KONSEY YOKKEN diplomatik ağırlık GÖRÜNMEZ — 0
+  ✓ KONSEY VARKEN diplomatik ağırlık görünür (tam bir kez) — 1
+  ✓ ağırlık TOPLAMI voteWeightBreakdown değeriyle çizildi — toplam=7.1
+  ✓ ağırlık KIRILIMI (sistem/nüfus/etki) çizildi
+  ✓ ONUR KATKISI kırılımda korundu — onur=0 ×1.00
+
+F. SENARYO 4 — PERKSİZ + AMBARGO
+  ✓ oyuncunun perki yok (senaryo geçerli) — perk=0
+  ✓ ambargo YOKKEN satır çıkmıyor — 0
+  ✓ PERKSİZ oyuncu ambargo baskısını görüyor — ambargo satırı ×1
+  ✓ ambargo yapan devlet SAYISI doğru gösterildi — 3 devlet
+  ✓ ambargo uyarı metni tam bir kez
+  ✓ Parya kartı ambargo ile birlikte ÇIKMADI — 0
+
+G. SENARYO 5 — PERKSİZ + GALAKTİK PARYA
+  ✓ oyuncunun perki yok (senaryo geçerli) — perk=0
+  ✓ oyuncu gerçekten Parya
+  ✓ PERKSİZ oyuncu Parya kartını görüyor — 1
+  ✓ Parya açıklaması tam bir kez
+  ✓ Parya varken ambargo satırı ÜST ÜSTE BİNMİYOR — ambargo satırı ×0
+
+H. SENARYO 6 — PERKSİZ + YÜKSEK TEHDİT
+  ✓ oyuncunun perki yok (senaryo geçerli) — perk=0
+  ✓ tehdit 0: hiçbir tehdit etiketi çıkmaz — 0
+  ✓ tehdit 30: "şaibeli" etiketi görünür (perksiz) — threatLabel(30)=şaibeli
+  ✓ tehdit 30: Parya adayı uyarısı ÇIKMAZ (eşik 70) — 0
+  ✓ tehdit 85: "GALAKTİK TEHDİT" etiketi görünür — threatLabel(85)=GALAKTİK TEHDİT
+  ✓ tehdit 85: PARYA ADAYISIN uyarısı görünür (perksiz) — 1
+  ✓ kriz askıya alma bilgisi perksiz oyuncuda görünür — 1
+
+I. SENARYO 7 — DANIŞMAN
+  ✓ oyuncunun perki yok (senaryo geçerli) — perk=0
+  ✓ data-a="advShow" p_imp içinde TAM BİR KEZ — 1
+  ✓ tek dokunuş danışmanı TAM BİR KEZ açtı — 1 çağrı
+  ✓ çift handler yok (tek düğme + tek çağrı)
+
+J. SENARYO 8 — FAZ 84B VASALLIK REGRESYONU
+  ✓ PERKSİZ vasal oyuncu vasallık kartını görüyor — 1
+  ✓ senyör adı görünüyor — ×2
+  ✓ bağımsızlık düğmesi korundu (öfke 62 → aktif)
+  ✓ 84C bilgileri 84B kartıyla birlikte görünüyor
+  ✓ üç vasal türü PERKSİZ oyuncuda birer kez listelendi — 1,1,1
+  ✓ hegemonya başlığı hâlâ tam bir kez — 1
+  ✓ toplamlar hâlâ birer satır — vergi1 araş1 kap1
+
+K. SENARYO 9 — RENDER SAFİYETİ
+  ✓ 40 render sonrası KAYNAKLAR değişmedi
+  ✓ 40 render sonrası ONUR değişmedi
+  ✓ 40 render sonrası TEHDİT değişmedi
+  ✓ 40 render sonrası AMBARGO değişmedi
+  ✓ 40 render sonrası ETİKLER değişmedi
+  ✓ 40 render sonrası PERKLER değişmedi
+  ✓ 40 render sonrası VASALLIK değişmedi
+  ✓ 40 render sonrası SAVAŞLAR değişmedi
+  ✓ 40 render sonrası İLİŞKİLER değişmedi
+  ✓ 40 render sonrası GERÇEK OYUN VERİSİ değişmedi — oyun verisi aynı · yalnız personaOf() önbelleği 13B (Faz 84A/84B'de belgelendi, kapsam dışı)
+
+══════════════════════════════════════════
+  GEÇEN: 118   KALAN: 0
+══════════════════════════════════════════
+

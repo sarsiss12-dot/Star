@@ -1,6 +1,11 @@
 {
   "name": "stars-validation",
   "private": true,
-  "scripts": {"test": "node run-all.js"},
-  "devDependencies": {"@napi-rs/canvas": "0.1.100"}
+  "scripts": {
+    "test": "node run-all.js"
+  },
+  "devDependencies": {
+    "@napi-rs/canvas": "0.1.100",
+    "playwright": "1.62.1"
+  }
 }

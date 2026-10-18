@@ -260,7 +260,7 @@ const UI = {
 `;
     document.body.addEventListener('click', e=>{
       const el = e.target.closest('[data-a]');
-      if (!el) return;
+      if (!el || el.disabled) return;
       this.act(el.dataset.a, el.dataset.x, el);
     });
     /* ═══════════════════════════════════════════════════════════
@@ -8105,7 +8105,7 @@ const UI = {
       this._hooked = true;
       document.body.addEventListener('click', e=>{
         const el = e.target.closest('[data-a]');
-        if (!el) return;
+        if (!el || el.disabled) return;
         const f = this._hooks && this._hooks[el.dataset.a];
         if (f) f(+el.dataset.x || 0);
       });

@@ -1,0 +1,34 @@
+✓ trade accepts through actual nested DOM click once
+✓ trade rejection actual click preserves resource balances
+✓ sensor accepts through actual nested DOM click once
+✓ sensor rejection actual click preserves resource balances
+✓ legacySensor accepts through actual nested DOM click once
+✓ legacySensor rejection actual click preserves resource balances
+✓ alliance accepts through actual nested DOM click once
+✓ alliance rejection actual click preserves resource balances
+✓ peace accepts through actual nested DOM click once
+✓ peace rejection actual click preserves resource balances
+✓ invite accepts through actual nested DOM click once
+✓ invite rejection actual click preserves resource balances
+✓ fedvote accepts through actual nested DOM click once
+✓ fedvote rejection actual click preserves resource balances
+✓ vassal accepts through actual nested DOM click once
+✓ vassal rejection actual click preserves resource balances
+✓ counter click opens canonical draft and keeps original pending
+✓ invalid stock disables accept and counter and explains reason
+✓ stale close and replacement modal callbacks stay inert
+✓ load another world invalidates old DOM and action closure
+✓ expired offer and receipts persist without second payment
+✓ remote confirmation actual click enqueues once with deferred cost
+✓ closed and loaded remote confirmation callbacks stay inert
+✓ dates use news day and proposal born; remain frozen after save/load
+✓ 65 records pagination, filtering, detail return and mode state
+✓ pin and unread controls update and preserve selection
+✓ 740x360 bounded dense list and fixed header with independent scroll
+✓ 360x740 bounded dense list and fixed header with independent scroll
+✓ 1280x720 bounded dense list and fixed header with independent scroll
+✓ unknown empire and location do not become navigable
+✓ known empire and location click reach identity and same map camera
+✓ archive scope clears on ordinary modal and other sizes stay unchanged
+✓ real service worker installs 95E.2 shell and serves offline modules
+BROWSER GEÇEN: 33 KALAN: 0

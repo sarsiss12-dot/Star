@@ -1,0 +1,59 @@
+✓ trade accepts through actual nested DOM click once
+✓ trade rejection actual click preserves resource balances
+✓ sensor accepts through actual nested DOM click once
+✓ sensor rejection actual click preserves resource balances
+✓ legacySensor accepts through actual nested DOM click once
+✓ legacySensor rejection actual click preserves resource balances
+✓ alliance accepts through actual nested DOM click once
+✓ alliance rejection actual click preserves resource balances
+✓ peace accepts through actual nested DOM click once
+✓ peace rejection actual click preserves resource balances
+✓ invite accepts through actual nested DOM click once
+✓ invite rejection actual click preserves resource balances
+✓ fedvote accepts through actual nested DOM click once
+✓ fedvote rejection actual click preserves resource balances
+✗ vassal accepts through actual nested DOM click once — page.evaluate: TypeError: Cannot read properties of undefined (reading 'id')
+    at eval (eval at evaluate (:311:30), <anonymous>:1:411)
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:311:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+✗ vassal rejection actual click preserves resource balances — page.evaluate: TypeError: Cannot read properties of undefined (reading 'id')
+    at eval (eval at evaluate (:311:30), <anonymous>:1:411)
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:311:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+✓ counter click opens canonical draft and keeps original pending
+✓ invalid stock disables accept and counter and explains reason
+✓ stale close and replacement modal callbacks stay inert
+✓ load another world invalidates old DOM and action closure
+✓ expired offer and receipts persist without second payment
+✓ remote confirmation actual click enqueues once with deferred cost
+✓ closed and loaded remote confirmation callbacks stay inert
+✓ dates use news day and proposal born; remain frozen after save/load
+✗ 65 records pagination, filtering, detail return and mode state — page.click: Timeout 5000ms exceeded.
+Call log:
+[2m  - waiting for locator('[data-a="news"]')[22m
+[2m    - locator resolved to 3 elements. Proceeding with the first one: <button class="tool" data-a="news" title="Galaktik Haberler">…</button>[22m
+[2m  - attempting click action[22m
+[2m    2 × waiting for element to be visible, enabled and stable[22m
+[2m      - element is not visible[22m
+[2m    - retrying click action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible, enabled and stable[22m
+[2m      - element is not visible[22m
+[2m    - retrying click action[22m
+[2m      - waiting 100ms[22m
+[2m    6 × waiting for element to be visible, enabled and stable[22m
+[2m      - element is not visible[22m
+[2m    - retrying click action[22m
+[2m      - waiting 500ms[22m
+
+✓ pin and unread controls update and preserve selection
+✗ 740x360 bounded dense list and fixed header with independent scroll — {"width":684,"height":360,"x":0,"scrollWidth":683,"clientWidth":683,"scrollHeight":1266,"clientHeight":126,"rowHeight":41,"header":0,"visible":3,"docOverflow":false}
+✓ 360x740 bounded dense list and fixed header with independent scroll
+✓ 1280x720 bounded dense list and fixed header with independent scroll
+✓ unknown empire and location do not become navigable
+✓ known empire and location click reach identity and same map camera
+✓ archive scope clears on ordinary modal and other sizes stay unchanged
+✓ real service worker installs 95E.2 shell and serves offline modules
+BROWSER GEÇEN: 29 KALAN: 4

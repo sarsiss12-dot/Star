@@ -1,0 +1,7 @@
+✗ trade accepts through actual nested DOM click once — Expected values to be strictly equal:
++ actual - expected
+
++ 'pending'
+- 'accepted'
+
+BROWSER GEÇEN: 0 KALAN: 1

@@ -1,0 +1,30 @@
+✓ 740×360 markup separates scrollable resources from pinned status access
+✓ 900×420 markup separates scrollable resources from pinned status access
+✓ 1536×702 markup separates scrollable resources from pinned status access
+✓ resource scroll position survives periodic UI refresh
+✓ a resource swipe cannot activate the status button and never moves the galaxy camera
+✓ refresh does not replace the scrolling DOM while a pointer is active
+✓ input listener registration is idempotent across boot / refresh
+✓ status overflow lists the real war and opens the existing diplomacy flow
+✓ topbar CSS uses one row, bounded pinned access and native horizontal scroll
+✓ building count and demolition action occupy separate grid rows, with touch-sized removal
+✓ building pending count uses the actual queue and full limit, never changes costs
+✓ science visibly reads the real net income without abbreviation or a second formula
+✓ science monthly indicator stays present on all three branches and history
+✓ science uses actual economy output including scientific federation modifiers
+✓ standard origin shows actual initial assets and explicitly has no perpetual bonus
+✓ all eight origins have factual effect text and rendering consumes no RNG
+✓ follow support preview shows ally and target before the real one-shot send
+✓ capture support preview shows ally and target before the real one-shot send
+✓ defend support preview shows ally and target before the real one-shot send
+✓ preview cancellation expires callback without issuing a fleet command
+✓ old preview callback cannot act on a loaded world
+✓ ineligible ally displays same-war reason instead of silently disappearing
+✓ system selection exposes support directly and does not order own ships
+✓ military rejection is explained with no invented reinforcements
+✓ support projection continues hiding unobserved ally fleets and exact ETA
+✓ same route failure deduplicates per fleet / target, distinct fleets remain visible
+✓ different target and a successful intervening order allow fresh route feedback
+✓ war off/on changes actual Canvas pixels even in war map mode, without changing mode / RNG
+✓ CSS preservation guard rejects modifications to new mobile rules as well as historical UI
+GEÇEN: 29 KALAN: 0

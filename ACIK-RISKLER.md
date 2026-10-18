@@ -1,3 +1,15 @@
+# 95E.2 güncel açık riskler — 18 Ekim 2026
+
+- Gerçek Chromium 133.0.6943.0 DOM, mobil viewport, dokunma, worker cache yükseltme/offline ve Save v8 testleri geçti. Fiziksel Android/WebView/PWA kurulu uygulama, GPU/FPS/ısı/bellek kabulü yok.
+- Özgün oyuncu kaydı olmadan 7/2 görüntüsünün tam durumu ve yeterli Etkide hatalı kuruluş reddi kesin açıklanamaz. Kontrollü üç tür/tam 220 Etki kuruluşu gerçek tıklamayla geçti. Eski kilitli gemiler korunur; kökenleri uydurulmaz.
+- Üç yeni 120 aylık kampanyada negatif stok yok; 99/404'te 54/34 enerji sıfır devlet-ay ve 11/47 mal kıtlığı örneği sürer. Kaynak/denge mekaniği bu fazda değiştirilmedi. Kontrollü ortak savaş katılımı bütün doğal galaksiler için garanti değildir.
+- Çok uzun devlet adları ve açıklamalar kompakt listede kesilir, ayrıntıda açılır. Mobil OS font büyütmesi, ekran klavyesi ve düşük güçlü cihaz performansı ayrıca kabul ister.
+- Eski bildirim halkasından daha önce düşmüş geçmiş teklifler geri yaratılamaz. Mevcut 95E kayıt/kapasite sınırları ve kaynakta bulunmayan ayrı kuruluş teklifi kısıtı devam eder.
+
+Yeni sonuç 92 paket/5186/0 ve 43 gerçek Chromium/0. 95F/96A başlatılmadı. Önceki bölümler tarihsel kayıttır; eski “Chromium hiç yapılmadı” notları kendi fazlarına aittir.
+
+---
+
 # 95E.1 açık riskler (17 Ekim 2026)
 
 Yeni pre-game rastgele olay anahtarı hedefli testlerle doğrulandı. Tam regresyon ve fiziksel Android kabulü yapılmadı. Geniş olay kataloğundaki diplomasi/casusluk/kriz ve bilim keşfi sonuçları bilinçli olarak kapatılmadı. Eski kayıtta yeni alan yoksa rastgele olaylar açıktır. Önceki 95E riskleri değişmedi.
