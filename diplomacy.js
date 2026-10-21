@@ -204,6 +204,7 @@ function warLedgerBattle(a,b,hitA,hitB,round=true){
     const n=x=>Number.isFinite(x)&&x>0?x:0;
     m.rounds+=round?1:0;m.shipsLost+=n(taken.killed);m.shipsDestroyed+=n(dealt.killed);
     m.damageTaken+=n(taken.damage);m.damageDealt+=n(dealt.damage);
+    if(typeof diplomaticBattleEvidence==='function')diplomaticBattleEvidence(f,G.emps[id],n(dealt.damage));
   }
 }
 function warLedgerGround(a,b,lost,reduced){
@@ -731,6 +732,7 @@ function declareWar(a, b, support = null){
   if (typeof overlordDefend === 'function') overlordDefend(a, b);
   if (typeof judgeCasusBelli === 'function') judgeCasusBelli(a, b);
   warStartNotice(a,b,support);
+  if(typeof aiPlanEvent==='function')aiPlanEvent(a,'war-started',{other:b.id,support:!!support});
   return true;
 }
 function peaceAlwaysAccepted(a, b){
@@ -1277,7 +1279,7 @@ function dealFactors(ai, other, n, gainParts){
   if (hn <= -30) why.push('Karşı tarafın itibarı kötü');
 
   const prof = ai.ai ? aiProfile(ai) : {dip:.5, war:.5};
-  f.persona = _cap(1 + (prof.dip - .5) * 0.20, 'persona');
+  f.persona = _cap(1 + (prof.dip - .5) * 0.20 + (typeof aiStrategicDiplomacyBias==='function'?aiStrategicDiplomacyBias(ai,other,n):0), 'persona');
   f.greed   = _cap(1 + (prof.war - .5) * 0.20, 'costTot');
 
   /* Ortak düşman YALNIZ güvenlik maddelerinde ve en fazla +%15. */
@@ -5027,9 +5029,9 @@ function councilDominance(e){
 
 /* Güven endeksi: −100 (kan davası) … +100 (kardeşlik) */
 function trustOf(e, id){
-  if (!e || !e.mem || !e.mem[id]) return 0;
+  if (!e) return 0;
   let sum = 0;
-  for (const m of e.mem[id]) sum += m.v;
+  for (const m of e.mem?.[id]||[]) sum += m.v;
   /* ═══ FAZ 48: DİPLOMATİK AHLAK ═══
      DÜRÜST devletin güven tavanı yükselir (sözü daha çok değer
      taşır); SAHTEKÂR devlete karşı başlangıç güveni düşüktür. */
@@ -5399,6 +5401,7 @@ function aiWarReview(){
       const lastPeace = (e.peaceAt && e.peaceAt[o.id] !== undefined) ? e.peaceAt[o.id] : -9999;
       if (G.day - lastPeace < 720 - g * 5) continue;
 
+      if(typeof aiStrategicWarReady==='function'&&!aiStrategicWarReady(e,o))continue;
       const ap = warAppetite(e, o);
       if (!ap.cb) continue;                       // SEBEP YOK → SAVAŞ YOK
       if (ap.score < .92 - ap.grudge * .45) continue;
@@ -6374,7 +6377,8 @@ function overlordDefend(attacker, victim){
       /* Korunan vasalın öfkesi diner: koruma boyunduruğu meşrulaştırır */
       victim.vassalAnger = clamp((victim.vassalAnger || 0) - 25, 0, 100);
       victim.rel[lord.id] = clamp(victim.rel[lord.id] + 10, -100, 100);
-      if (typeof remember === 'function') remember(victim, lord.id, 'yardimEtti');
+      // Declaration fulfills the political obligation; actual help is credited
+      // once by diplomaticBattleEvidence / joint arrival after real support.
 
       if (victim.id === 0)
         say('SENYÖRÜN SENİ KORUYOR — ' + lord.name + ', ' + attacker.name + ' devletine savaş açtı', 'win');

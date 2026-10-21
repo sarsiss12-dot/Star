@@ -1,0 +1,1001 @@
+{
+  "method": "Same source ZIP, seed, map and homes; normal difficulty, five AI, idle player, 120 months, real simulation ticks, Save8 reload at month60. Counts are delivered sender voyages. Plans completed are bounded measured milestones, not automatic war wins.",
+  "results": [
+    {
+      "seed": 11,
+      "comparison": {
+        "seed": 11,
+        "matchedGeography": true,
+        "old": {
+          "phase": "96E1",
+          "seed": 11,
+          "alive": 5,
+          "techs": 39,
+          "ships": 183,
+          "power": 25635,
+          "upkeep": 546.1099999999999,
+          "colonies": 10,
+          "deliveries": 72,
+          "pacts": 5,
+          "warsStarted": 8,
+          "peace": 1,
+          "objectiveChanges": 0,
+          "plansCompleted": 0,
+          "plansFailed": 0,
+          "criticalEmpireMonths": 0,
+          "invalidResources": [],
+          "elapsedMs": 11921
+        },
+        "next": {
+          "phase": "96F",
+          "seed": 11,
+          "alive": 5,
+          "techs": 37,
+          "ships": 96,
+          "power": 14082,
+          "upkeep": 239.03750000000002,
+          "colonies": 13,
+          "deliveries": 97,
+          "pacts": 1,
+          "warsStarted": 5,
+          "peace": 2,
+          "objectiveChanges": 30,
+          "plansCompleted": 15,
+          "plansFailed": 3,
+          "criticalEmpireMonths": 11,
+          "invalidResources": [],
+          "elapsedMs": 12375
+        }
+      },
+      "finalNetIncome": {
+        "old": {
+          "ene": 65.40718631262177,
+          "min": 220.2130297762837,
+          "ala": 62.75070989264418,
+          "ara": 593.6600540589744,
+          "tuk": 64.84939702295844
+        },
+        "next": {
+          "ene": 348.8755333686027,
+          "min": 292.8948578802535,
+          "ala": 132.84382059629374,
+          "ara": 504.44135990678114,
+          "tuk": 66.40218145771382
+        }
+      },
+      "objectiveSelections": {
+        "economy": 7,
+        "security": 7,
+        "science": 2,
+        "recovery": 12,
+        "regional": 6,
+        "trade": 1
+      },
+      "changes": [
+        {
+          "actor": 1,
+          "previous": "economy",
+          "next": "recovery",
+          "afterDays": 30,
+          "reason": "Büyük askerî kayıp"
+        },
+        {
+          "actor": 1,
+          "previous": "recovery",
+          "next": "regional",
+          "afterDays": 720,
+          "reason": "Kimlik, bilinen çevre ve kendi ekonomik kapasitesi"
+        },
+        {
+          "actor": 1,
+          "previous": "regional",
+          "next": "recovery",
+          "afterDays": 210,
+          "reason": "Kritik stok ve üretim açığı"
+        },
+        {
+          "actor": 1,
+          "previous": "recovery",
+          "next": "regional",
+          "afterDays": 720,
+          "reason": "Kimlik, bilinen çevre ve kendi ekonomik kapasitesi"
+        },
+        {
+          "actor": 1,
+          "previous": "regional",
+          "next": "recovery",
+          "afterDays": 570,
+          "reason": "Büyük askerî kayıp"
+        },
+        {
+          "actor": 1,
+          "previous": "recovery",
+          "next": "security",
+          "afterDays": 210,
+          "reason": "Büyük askerî kayıp"
+        },
+        {
+          "actor": 1,
+          "previous": "security",
+          "next": "recovery",
+          "afterDays": 180,
+          "reason": "Büyük askerî kayıp"
+        },
+        {
+          "actor": 1,
+          "previous": "recovery",
+          "next": "regional",
+          "afterDays": 720,
+          "reason": "Kimlik, bilinen çevre ve kendi ekonomik kapasitesi"
+        },
+        {
+          "actor": 2,
+          "previous": "security",
+          "next": "recovery",
+          "afterDays": 60,
+          "reason": "Büyük askerî kayıp"
+        },
+        {
+          "actor": 2,
+          "previous": "recovery",
+          "next": "security",
+          "afterDays": 210,
+          "reason": "Kritik stok ve üretim açığı"
+        },
+        {
+          "actor": 2,
+          "previous": "security",
+          "next": "recovery",
+          "afterDays": 510,
+          "reason": "Büyük askerî kayıp"
+        },
+        {
+          "actor": 2,
+          "previous": "recovery",
+          "next": "security",
+          "afterDays": 780,
+          "reason": "Kimlik, bilinen çevre ve kendi ekonomik kapasitesi"
+        },
+        {
+          "actor": 2,
+          "previous": "security",
+          "next": "regional",
+          "afterDays": 900,
+          "reason": "Kimlik, bilinen çevre ve kendi ekonomik kapasitesi"
+        },
+        {
+          "actor": 3,
+          "previous": "economy",
+          "next": "regional",
+          "afterDays": 720,
+          "reason": "Kimlik, bilinen çevre ve kendi ekonomik kapasitesi"
+        },
+        {
+          "actor": 3,
+          "previous": "regional",
+          "next": "economy",
+          "afterDays": 900,
+          "reason": "Kimlik, bilinen çevre ve kendi ekonomik kapasitesi"
+        },
+        {
+          "actor": 3,
+          "previous": "economy",
+          "next": "regional",
+          "afterDays": 720,
+          "reason": "Kimlik, bilinen çevre ve kendi ekonomik kapasitesi"
+        },
+        {
+          "actor": 3,
+          "previous": "regional",
+          "next": "economy",
+          "afterDays": 900,
+          "reason": "Kimlik, bilinen çevre ve kendi ekonomik kapasitesi"
+        },
+        {
+          "actor": 3,
+          "previous": "economy",
+          "next": "recovery",
+          "afterDays": 300,
+          "reason": "Büyük askerî kayıp"
+        },
+        {
+          "actor": 4,
+          "previous": "economy",
+          "next": "recovery",
+          "afterDays": 180,
+          "reason": "Büyük askerî kayıp"
+        },
+        {
+          "actor": 4,
+          "previous": "recovery",
+          "next": "security",
+          "afterDays": 480,
+          "reason": "Merkez güvenliğine ağır tehdit"
+        },
+        {
+          "actor": 4,
+          "previous": "security",
+          "next": "economy",
+          "afterDays": 720,
+          "reason": "Kimlik, bilinen çevre ve kendi ekonomik kapasitesi"
+        },
+        {
+          "actor": 4,
+          "previous": "economy",
+          "next": "security",
+          "afterDays": 30,
+          "reason": "Merkez güvenliğine ağır tehdit"
+        },
+        {
+          "actor": 4,
+          "previous": "security",
+          "next": "recovery",
+          "afterDays": 270,
+          "reason": "Büyük askerî kayıp"
+        },
+        {
+          "actor": 4,
+          "previous": "recovery",
+          "next": "economy",
+          "afterDays": 720,
+          "reason": "Kimlik, bilinen çevre ve kendi ekonomik kapasitesi"
+        },
+        {
+          "actor": 4,
+          "previous": "economy",
+          "next": "recovery",
+          "afterDays": 780,
+          "reason": "Büyük askerî kayıp"
+        },
+        {
+          "actor": 5,
+          "previous": "science",
+          "next": "trade",
+          "afterDays": 900,
+          "reason": "Kimlik, bilinen çevre ve kendi ekonomik kapasitesi"
+        },
+        {
+          "actor": 5,
+          "previous": "trade",
+          "next": "recovery",
+          "afterDays": 120,
+          "reason": "Büyük askerî kayıp"
+        },
+        {
+          "actor": 5,
+          "previous": "recovery",
+          "next": "science",
+          "afterDays": 720,
+          "reason": "Kimlik, bilinen çevre ve kendi ekonomik kapasitesi"
+        },
+        {
+          "actor": 5,
+          "previous": "science",
+          "next": "recovery",
+          "afterDays": 1320,
+          "reason": "Büyük askerî kayıp"
+        },
+        {
+          "actor": 5,
+          "previous": "recovery",
+          "next": "security",
+          "afterDays": 210,
+          "reason": "Merkez güvenliğine ağır tehdit"
+        }
+      ],
+      "earlyNormalChanges": 0,
+      "finalMemoryKinds": {
+        "yaptirim": 19,
+        "casusYakalan": 30,
+        "savasIlan": 3,
+        "barisImzala": 4,
+        "sinirGergin": 6,
+        "komplo": 5,
+        "ticaretActi": 12,
+        "paktBozdu": 8,
+        "yardimEtti": 1,
+        "ticaretGuveni": 16,
+        "sistemAldi": 1,
+        "sahteBayrak": 1
+      },
+      "tradeDiagnosticCounts": {
+        "trade-political": 302,
+        "trade-no-contact": 277,
+        "trade-no-safe-route": 205,
+        "trade-existing": 78,
+        "trade-signed": 8,
+        "trade-agreed": 8,
+        "trade-no-supply-demand": 5,
+        "trade-no-fair-ratio": 2,
+        "trade-cooldown": 3,
+        "trade-review-cancel": 1,
+        "trade-no-port": 9
+      },
+      "initialIdentities": [
+        {
+          "id": 1,
+          "race": "klan",
+          "physio": "lithoid",
+          "civics": [
+            "panoptikon"
+          ],
+          "traits": [
+            "ustun_zeka",
+            "elektrotrof"
+          ],
+          "ethics": {
+            "mil": 2,
+            "aut": 1,
+            "mat": -1,
+            "ahl": 0
+          },
+          "origin": "standart"
+        },
+        {
+          "id": 2,
+          "race": "suru",
+          "physio": "hive",
+          "civics": [
+            "kale_dok",
+            "lojistik_k"
+          ],
+          "traits": [
+            "savas_panigi",
+            "endustriyel",
+            "savascı",
+            "tutumlu"
+          ],
+          "ethics": {
+            "mil": 1,
+            "aut": 2,
+            "mat": 0,
+            "ahl": 1
+          },
+          "origin": "standart"
+        },
+        {
+          "id": 3,
+          "race": "makine",
+          "physio": "machine",
+          "civics": [
+            "burokrasi",
+            "lojistik_k"
+          ],
+          "traits": [
+            "savurgan",
+            "gocebe",
+            "endustriyel",
+            "cevher_sezgi"
+          ],
+          "ethics": {
+            "mil": 1,
+            "aut": 1,
+            "mat": 1,
+            "ahl": 1
+          },
+          "origin": "golgeden"
+        },
+        {
+          "id": 4,
+          "race": "lonca",
+          "physio": "aquatic",
+          "civics": [
+            "sinyal_avci",
+            "burokrasi"
+          ],
+          "traits": [
+            "hizli_ureyen",
+            "cevher_sezgi"
+          ],
+          "ethics": {
+            "mil": -1,
+            "aut": -1,
+            "mat": 2,
+            "ahl": 0
+          },
+          "origin": "standart"
+        },
+        {
+          "id": 5,
+          "race": "teknokrasi",
+          "physio": "humanoid",
+          "civics": [
+            "kan_hukuku"
+          ],
+          "traits": [
+            "savas_panigi",
+            "ustun_zeka",
+            "savascı",
+            "elektrotrof"
+          ],
+          "ethics": {
+            "mil": -2,
+            "aut": 0,
+            "mat": 1,
+            "ahl": 1
+          },
+          "origin": "standart"
+        }
+      ]
+    },
+    {
+      "seed": 99,
+      "comparison": {
+        "seed": 99,
+        "matchedGeography": true,
+        "old": {
+          "phase": "96E1",
+          "seed": 99,
+          "alive": 5,
+          "techs": 43,
+          "ships": 225,
+          "power": 30208,
+          "upkeep": 641.4833704629376,
+          "colonies": 16,
+          "deliveries": 20,
+          "pacts": 4,
+          "warsStarted": 1,
+          "peace": 0,
+          "objectiveChanges": 0,
+          "plansCompleted": 0,
+          "plansFailed": 0,
+          "criticalEmpireMonths": 2,
+          "invalidResources": [],
+          "elapsedMs": 9059
+        },
+        "next": {
+          "phase": "96F",
+          "seed": 99,
+          "alive": 5,
+          "techs": 41,
+          "ships": 167,
+          "power": 22879,
+          "upkeep": 507.6180000000003,
+          "colonies": 15,
+          "deliveries": 8,
+          "pacts": 3,
+          "warsStarted": 0,
+          "peace": 0,
+          "objectiveChanges": 17,
+          "plansCompleted": 9,
+          "plansFailed": 4,
+          "criticalEmpireMonths": 0,
+          "invalidResources": [],
+          "elapsedMs": 9948
+        }
+      },
+      "finalNetIncome": {
+        "old": {
+          "ene": 619.5850959127546,
+          "min": 408.6754655578402,
+          "ala": 111.68466138245255,
+          "ara": 650.9341403097712,
+          "tuk": 114.90767490241379
+        },
+        "next": {
+          "ene": 613.3521439106381,
+          "min": 504.71141512137876,
+          "ala": 118.65761142551884,
+          "ara": 638.7144692057881,
+          "tuk": 52.888300485914684
+        }
+      },
+      "objectiveSelections": {
+        "economy": 5,
+        "science": 2,
+        "trade": 3,
+        "recovery": 3,
+        "security": 5,
+        "regional": 4
+      },
+      "changes": [
+        {
+          "actor": 1,
+          "previous": "economy",
+          "next": "regional",
+          "afterDays": 720,
+          "reason": "Kimlik, bilinen çevre ve kendi ekonomik kapasitesi"
+        },
+        {
+          "actor": 1,
+          "previous": "regional",
+          "next": "security",
+          "afterDays": 900,
+          "reason": "Kimlik, bilinen çevre ve kendi ekonomik kapasitesi"
+        },
+        {
+          "actor": 1,
+          "previous": "security",
+          "next": "regional",
+          "afterDays": 720,
+          "reason": "Kimlik, bilinen çevre ve kendi ekonomik kapasitesi"
+        },
+        {
+          "actor": 1,
+          "previous": "regional",
+          "next": "economy",
+          "afterDays": 720,
+          "reason": "Kimlik, bilinen çevre ve kendi ekonomik kapasitesi"
+        },
+        {
+          "actor": 2,
+          "previous": "science",
+          "next": "recovery",
+          "afterDays": 60,
+          "reason": "Büyük askerî kayıp"
+        },
+        {
+          "actor": 2,
+          "previous": "recovery",
+          "next": "security",
+          "afterDays": 210,
+          "reason": "Büyük askerî kayıp"
+        },
+        {
+          "actor": 2,
+          "previous": "security",
+          "next": "science",
+          "afterDays": 720,
+          "reason": "Kimlik, bilinen çevre ve kendi ekonomik kapasitesi"
+        },
+        {
+          "actor": 3,
+          "previous": "economy",
+          "next": "regional",
+          "afterDays": 720,
+          "reason": "Kimlik, bilinen çevre ve kendi ekonomik kapasitesi"
+        },
+        {
+          "actor": 3,
+          "previous": "regional",
+          "next": "economy",
+          "afterDays": 900,
+          "reason": "Kimlik, bilinen çevre ve kendi ekonomik kapasitesi"
+        },
+        {
+          "actor": 3,
+          "previous": "economy",
+          "next": "regional",
+          "afterDays": 720,
+          "reason": "Kimlik, bilinen çevre ve kendi ekonomik kapasitesi"
+        },
+        {
+          "actor": 3,
+          "previous": "regional",
+          "next": "recovery",
+          "afterDays": 600,
+          "reason": "Büyük askerî kayıp"
+        },
+        {
+          "actor": 3,
+          "previous": "recovery",
+          "next": "security",
+          "afterDays": 180,
+          "reason": "Merkez güvenliğine ağır tehdit"
+        },
+        {
+          "actor": 4,
+          "previous": "trade",
+          "next": "security",
+          "afterDays": 330,
+          "reason": "Merkez güvenliğine ağır tehdit"
+        },
+        {
+          "actor": 4,
+          "previous": "security",
+          "next": "recovery",
+          "afterDays": 330,
+          "reason": "Büyük askerî kayıp"
+        },
+        {
+          "actor": 4,
+          "previous": "recovery",
+          "next": "trade",
+          "afterDays": 720,
+          "reason": "Kimlik, bilinen çevre ve kendi ekonomik kapasitesi"
+        },
+        {
+          "actor": 4,
+          "previous": "trade",
+          "next": "security",
+          "afterDays": 900,
+          "reason": "Kimlik, bilinen çevre ve kendi ekonomik kapasitesi"
+        },
+        {
+          "actor": 4,
+          "previous": "security",
+          "next": "trade",
+          "afterDays": 900,
+          "reason": "Kimlik, bilinen çevre ve kendi ekonomik kapasitesi"
+        }
+      ],
+      "earlyNormalChanges": 0,
+      "finalMemoryKinds": {
+        "komplo": 4,
+        "yaptirim": 6,
+        "casusYakalan": 6,
+        "ticaretActi": 6,
+        "ticaretGuveni": 2
+      },
+      "tradeDiagnosticCounts": {
+        "trade-political": 16,
+        "trade-no-contact": 699,
+        "trade-no-safe-route": 44,
+        "trade-no-port": 60,
+        "trade-no-supply-demand": 20,
+        "trade-no-fair-ratio": 23,
+        "trade-cooldown": 22,
+        "trade-signed": 1,
+        "trade-agreed": 1,
+        "trade-existing": 11
+      },
+      "initialIdentities": [
+        {
+          "id": 1,
+          "race": "klan",
+          "physio": "plantoid",
+          "civics": [
+            "kan_hukuku"
+          ],
+          "traits": [
+            "itici",
+            "uyumlu",
+            "tuccar",
+            "tutumlu"
+          ],
+          "ethics": {
+            "mil": 0,
+            "aut": 2,
+            "mat": -1,
+            "ahl": 1
+          },
+          "origin": "standart"
+        },
+        {
+          "id": 2,
+          "race": "teknokrasi",
+          "physio": "plantoid",
+          "civics": [
+            "panoptikon"
+          ],
+          "traits": [
+            "yavas_cogalan",
+            "cevher_sezgi",
+            "ustun_zeka",
+            "ogrenen_sinaps"
+          ],
+          "ethics": {
+            "mil": -1,
+            "aut": 0,
+            "mat": 1,
+            "ahl": -2
+          },
+          "origin": "standart"
+        },
+        {
+          "id": 3,
+          "race": "suru",
+          "physio": "hive",
+          "civics": [
+            "gen_oncu",
+            "enkaz_muh"
+          ],
+          "traits": [
+            "savurgan",
+            "uzun_omurlu",
+            "tutumlu"
+          ],
+          "ethics": {
+            "mil": 0,
+            "aut": 2,
+            "mat": 0,
+            "ahl": -2
+          },
+          "origin": "standart"
+        },
+        {
+          "id": 4,
+          "race": "insan",
+          "physio": "lithoid",
+          "civics": [
+            "maden_lonca",
+            "lojistik_k"
+          ],
+          "traits": [
+            "doyumsuz",
+            "uzun_omurlu",
+            "endustriyel",
+            "cevher_sezgi"
+          ],
+          "ethics": {
+            "mil": 0,
+            "aut": -2,
+            "mat": 0,
+            "ahl": 2
+          },
+          "origin": "standart"
+        },
+        {
+          "id": 5,
+          "race": "lonca",
+          "physio": "avian",
+          "civics": [
+            "gen_oncu",
+            "golge_kons"
+          ],
+          "traits": [
+            "dayanikli",
+            "gocebe"
+          ],
+          "ethics": {
+            "mil": 0,
+            "aut": -1,
+            "mat": 1,
+            "ahl": 2
+          },
+          "origin": "kusatilmis"
+        }
+      ]
+    },
+    {
+      "seed": 404,
+      "comparison": {
+        "seed": 404,
+        "matchedGeography": true,
+        "old": {
+          "phase": "96E1",
+          "seed": 404,
+          "alive": 5,
+          "techs": 54,
+          "ships": 288,
+          "power": 38463,
+          "upkeep": 978.5397245256396,
+          "colonies": 22,
+          "deliveries": 131,
+          "pacts": 6,
+          "warsStarted": 0,
+          "peace": 0,
+          "objectiveChanges": 0,
+          "plansCompleted": 0,
+          "plansFailed": 0,
+          "criticalEmpireMonths": 0,
+          "invalidResources": [],
+          "elapsedMs": 14125
+        },
+        "next": {
+          "phase": "96F",
+          "seed": 404,
+          "alive": 5,
+          "techs": 56,
+          "ships": 295,
+          "power": 38636,
+          "upkeep": 966.0200000000008,
+          "colonies": 24,
+          "deliveries": 140,
+          "pacts": 6,
+          "warsStarted": 0,
+          "peace": 0,
+          "objectiveChanges": 9,
+          "plansCompleted": 8,
+          "plansFailed": 4,
+          "criticalEmpireMonths": 0,
+          "invalidResources": [],
+          "elapsedMs": 15685
+        }
+      },
+      "finalNetIncome": {
+        "old": {
+          "ene": 899.2654813015314,
+          "min": 1015.5363248525641,
+          "ala": 205.46600446800184,
+          "ara": 1197.7767665209474,
+          "tuk": 184.0654466132575
+        },
+        "next": {
+          "ene": 1464.7243211028863,
+          "min": 1190.9985247477562,
+          "ala": 278.8227711449998,
+          "ara": 1424.0086045139192,
+          "tuk": 112.0182037305518
+        }
+      },
+      "objectiveSelections": {
+        "security": 4,
+        "economy": 3,
+        "science": 1,
+        "trade": 2,
+        "recovery": 2,
+        "influence": 2
+      },
+      "changes": [
+        {
+          "actor": 1,
+          "previous": "security",
+          "next": "influence",
+          "afterDays": 900,
+          "reason": "Kimlik, bilinen çevre ve kendi ekonomik kapasitesi"
+        },
+        {
+          "actor": 1,
+          "previous": "influence",
+          "next": "security",
+          "afterDays": 900,
+          "reason": "Kimlik, bilinen çevre ve kendi ekonomik kapasitesi"
+        },
+        {
+          "actor": 1,
+          "previous": "security",
+          "next": "influence",
+          "afterDays": 1350,
+          "reason": "Kimlik, bilinen çevre ve kendi ekonomik kapasitesi"
+        },
+        {
+          "actor": 2,
+          "previous": "security",
+          "next": "economy",
+          "afterDays": 900,
+          "reason": "Kimlik, bilinen çevre ve kendi ekonomik kapasitesi"
+        },
+        {
+          "actor": 2,
+          "previous": "economy",
+          "next": "security",
+          "afterDays": 900,
+          "reason": "Kimlik, bilinen çevre ve kendi ekonomik kapasitesi"
+        },
+        {
+          "actor": 3,
+          "previous": "economy",
+          "next": "recovery",
+          "afterDays": 30,
+          "reason": "Büyük askerî kayıp"
+        },
+        {
+          "actor": 3,
+          "previous": "recovery",
+          "next": "economy",
+          "afterDays": 720,
+          "reason": "Kimlik, bilinen çevre ve kendi ekonomik kapasitesi"
+        },
+        {
+          "actor": 5,
+          "previous": "trade",
+          "next": "recovery",
+          "afterDays": 2520,
+          "reason": "Büyük askerî kayıp"
+        },
+        {
+          "actor": 5,
+          "previous": "recovery",
+          "next": "trade",
+          "afterDays": 720,
+          "reason": "Kimlik, bilinen çevre ve kendi ekonomik kapasitesi"
+        }
+      ],
+      "earlyNormalChanges": 0,
+      "finalMemoryKinds": {
+        "ticaretActi": 12,
+        "casusYakalan": 10,
+        "ticaretGuveni": 22
+      },
+      "tradeDiagnosticCounts": {
+        "trade-no-contact": 529,
+        "trade-cooldown": 14,
+        "trade-no-safe-route": 164,
+        "trade-existing": 106,
+        "trade-no-fair-ratio": 13,
+        "trade-no-supply-demand": 43,
+        "trade-signed": 11,
+        "trade-agreed": 11
+      },
+      "initialIdentities": [
+        {
+          "id": 1,
+          "race": "meclis",
+          "physio": "avian",
+          "civics": [
+            "kale_dok",
+            "lojistik_k"
+          ],
+          "traits": [
+            "yavas_cogalan",
+            "ogrenen_sinaps",
+            "uzun_omurlu"
+          ],
+          "ethics": {
+            "mil": 0,
+            "aut": 3,
+            "mat": 0,
+            "ahl": -1
+          },
+          "origin": "standart"
+        },
+        {
+          "id": 2,
+          "race": "suru",
+          "physio": "hive",
+          "civics": [
+            "kale_dok",
+            "maden_lonca"
+          ],
+          "traits": [
+            "sinyal_sizinti",
+            "uzun_omurlu",
+            "verimli",
+            "elektrotrof",
+            "gocebe"
+          ],
+          "ethics": {
+            "mil": 0,
+            "aut": 0,
+            "mat": -1,
+            "ahl": 3
+          },
+          "origin": "kusatilmis"
+        },
+        {
+          "id": 3,
+          "race": "klan",
+          "physio": "avian",
+          "civics": [
+            "enkaz_muh",
+            "maden_lonca"
+          ],
+          "traits": [
+            "uzun_omurlu",
+            "uyumlu"
+          ],
+          "ethics": {
+            "mil": 2,
+            "aut": 2,
+            "mat": 0,
+            "ahl": 0
+          },
+          "origin": "standart"
+        },
+        {
+          "id": 4,
+          "race": "teknokrasi",
+          "physio": "aquatic",
+          "civics": [
+            "burokrasi",
+            "golge_kons"
+          ],
+          "traits": [
+            "itici",
+            "tuccar",
+            "ogrenen_sinaps",
+            "uzun_omurlu"
+          ],
+          "ethics": {
+            "mil": -1,
+            "aut": 0,
+            "mat": 1,
+            "ahl": 2
+          },
+          "origin": "golgeden"
+        },
+        {
+          "id": 5,
+          "race": "insan",
+          "physio": "plantoid",
+          "civics": [
+            "lojistik_k",
+            "maden_lonca"
+          ],
+          "traits": [
+            "tuccar",
+            "cevher_sezgi"
+          ],
+          "ethics": {
+            "mil": -2,
+            "aut": 0,
+            "mat": 1,
+            "ahl": 1
+          },
+          "origin": "standart"
+        }
+      ]
+    }
+  ]
+}

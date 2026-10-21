@@ -3633,6 +3633,7 @@ function updateVision(){
     G.vis = new Set(G.sys.map(s=>s.id));
     for (const s of G.sys) if (!s.seen.includes(0)) s.seen.push(0);
     refreshSharedVision();
+    observePlayerHabitats();
     return;
   }
   const sensor = 1 + (G.p.mods.sensor|0);
@@ -3660,6 +3661,7 @@ function updateVision(){
   G.vis = seen;
   refreshSharedVision();
   for (const id of seen) if (!G.sys[id].seen.includes(0)) G.sys[id].seen.push(0);
+  observePlayerHabitats();
 }
 /* 95E.3: treaty directions stay separate; cached native sensors never relay
    another provider's live view or spy-network intelligence. */
@@ -3691,6 +3693,26 @@ function refreshSharedVision(){
   G._sensorVision=views;G._shareVisSet=null;
   if(typeof DIPLO_MAP_CACHE!=='undefined')DIPLO_MAP_CACHE=null;
 }
+/* Last observed suitability. Never inspect hidden current colonies from draw().
+   Legacy saves learn missing entries only when both surveyed and visible. */
+function observePlayerHabitats(){
+ if(!G.p)return;const raw=G.p.mapHabitats||{},known={};
+ for(const [id,x]of Object.entries(raw))if(/^\d+$/.test(id)&&G.sys[id]&&x&&Number.isInteger(x.mask)&&x.mask>=0&&x.mask<=3&&Number.isFinite(x.at)&&x.at>=0)known[id]=x;
+ for(const s of G.sys){if(!pSurv(s)||!pVis(s))continue;
+  let mask=0;for(const pl of s.planets){if(pl.shattered||PLANETS[pl.t]?.k!=='hab'||habOf(G.p,pl)<35)continue;mask|=pl.col&&pl.owner>=0?2:pl.owner<0?1:0;}
+  const old=known[s.id];known[s.id]=old&&old.mask===mask?old:{mask,at:G.day};
+ }
+ G.p.mapHabitats=known;
+}
+function playerHabitatMark(s){
+ if(!G.p||!s||!pSeen(s)||!pSurv(s))return 0;
+ const x=G.p.mapHabitats?.[s.id];return x&&Number.isInteger(x.mask)&&x.mask>=0&&x.mask<=3?x.mask:0;
+}
+function drawHabitatMarker(g,x,y,r,mask){
+ if(mask&1){g.beginPath();g.moveTo(x,y-r);g.lineTo(x+r,y);g.lineTo(x,y+r);g.lineTo(x-r,y);g.closePath();g.strokeStyle='#07121b';g.lineWidth=4;g.stroke();g.strokeStyle='#92f5b2';g.lineWidth=1.6;g.stroke();}
+ if(mask&2){const offset=mask&1?r*2.4:0;g.fillStyle='#6ff2e2';g.fillRect(x-r+offset,y-r,r*2,r*2);g.strokeStyle='#07121b';g.lineWidth=1.6;g.strokeRect(x-r+offset,y-r,r*2,r*2);}
+}
+
 function pSeen(s){
   if (s.seen.includes(0)) return true;
   const sv = G.p && G.p.shareVis;
@@ -7698,6 +7720,7 @@ function serialize(){
    ═══════════════════════════════════════════════════════════════════ */
 function rebuildDerivedStateAfterLoad(deferRender){
   normalizeIdentities();
+  if(typeof restoreAIStrategicPlans==='function')restoreAIStrategicPlans();
   if(typeof fedNormalize==='function')for(const f of G.feds||[])fedNormalize(f);
   /* 1. İmparatorluk geçici önbellekleri */
   for (const x of G.emps){
@@ -8249,7 +8272,7 @@ function forceRedraw(sebep){
    Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
    Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
 /* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */
-const BUILD_ID = '96e1';
+const BUILD_ID = '96f';
 const DIAG_MAX = 40;
 const DIAG = [];
 function logDiag(tur, mesaj){

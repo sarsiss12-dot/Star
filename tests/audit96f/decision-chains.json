@@ -1,0 +1,2698 @@
+{
+  "scope": "Intent records and actual paid/action traces are distinct. Temporal order is evidence of real state changes; it is not a counterfactual proof that every legacy action was caused solely by the new objective.",
+  "chains": [
+    {
+      "name": "Scientific continuity",
+      "seed": 404,
+      "actor": 4,
+      "intent": [
+        {
+          "actor": 4,
+          "day": 30,
+          "kind": "objective-selected",
+          "objective": "science",
+          "stage": null,
+          "reason": "Kimlik, bilinen çevre ve kendi ekonomik kapasitesi",
+          "previous": null
+        },
+        {
+          "actor": 4,
+          "day": 570,
+          "kind": "milestone-complete",
+          "objective": "science",
+          "stage": "research",
+          "progress": 1,
+          "measured": {
+            "systems": 2,
+            "colonies": 2,
+            "techs": 3,
+            "power": 1382,
+            "ports": 2,
+            "fort": 0,
+            "production": 225.09196314678533,
+            "deliveries": 2,
+            "pacts": 2,
+            "allies": 1,
+            "federated": false
+          }
+        }
+      ],
+      "actual": [
+        {
+          "day": 60,
+          "actor": 4,
+          "kind": "building-order",
+          "system": 26,
+          "planet": 1,
+          "key": "maden",
+          "paid": {
+            "min": 120,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 450,
+          "actor": 4,
+          "kind": "research-completed",
+          "tech": "t_tarim",
+          "source": "research"
+        },
+        {
+          "day": 480,
+          "actor": 4,
+          "kind": "research-completed",
+          "tech": "m_robot",
+          "source": "research"
+        },
+        {
+          "day": 570,
+          "actor": 4,
+          "kind": "research-completed",
+          "tech": "f_reaktor",
+          "source": "research"
+        },
+        {
+          "day": 750,
+          "actor": 4,
+          "kind": "building-order",
+          "system": 26,
+          "planet": 1,
+          "key": "lab",
+          "paid": {
+            "min": 190,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 930,
+          "actor": 4,
+          "kind": "building-order",
+          "system": 26,
+          "planet": 1,
+          "key": "lab",
+          "paid": {
+            "min": 190,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 1020,
+          "actor": 4,
+          "kind": "building-order",
+          "system": 26,
+          "planet": 1,
+          "key": "lab",
+          "paid": {
+            "min": 190,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 1080,
+          "actor": 4,
+          "kind": "building-order",
+          "system": 26,
+          "planet": 1,
+          "key": "lab",
+          "paid": {
+            "min": 190,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 1140,
+          "actor": 4,
+          "kind": "research-completed",
+          "tech": "t_yonetim",
+          "source": "research"
+        },
+        {
+          "day": 1170,
+          "actor": 4,
+          "kind": "building-order",
+          "system": 6,
+          "planet": 0,
+          "key": "lab",
+          "paid": {
+            "min": 190,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 1260,
+          "actor": 4,
+          "kind": "building-order",
+          "system": 6,
+          "planet": 0,
+          "key": "lab",
+          "paid": {
+            "min": 190,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 1320,
+          "actor": 4,
+          "kind": "building-order",
+          "system": 6,
+          "planet": 0,
+          "key": "lab",
+          "paid": {
+            "min": 190,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 1380,
+          "actor": 4,
+          "kind": "research-completed",
+          "tech": "m_dokum",
+          "source": "research"
+        },
+        {
+          "day": 1410,
+          "actor": 4,
+          "kind": "building-order",
+          "system": 6,
+          "planet": 0,
+          "key": "lab",
+          "paid": {
+            "min": 190,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 1440,
+          "actor": 4,
+          "kind": "research-completed",
+          "tech": "f_sensor",
+          "source": "research"
+        },
+        {
+          "day": 1470,
+          "actor": 4,
+          "kind": "building-order",
+          "system": 6,
+          "planet": 0,
+          "key": "lab",
+          "paid": {
+            "min": 190,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 1560,
+          "actor": 4,
+          "kind": "building-order",
+          "system": 6,
+          "planet": 0,
+          "key": "lab",
+          "paid": {
+            "min": 190,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 1620,
+          "actor": 4,
+          "kind": "building-order",
+          "system": 26,
+          "planet": 1,
+          "key": "lab",
+          "paid": {
+            "min": 190,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "Economic and diplomatic preparation, war and peace",
+      "seed": 11,
+      "actor": 2,
+      "intent": [
+        {
+          "actor": 2,
+          "day": 1590,
+          "kind": "objective-selected",
+          "objective": "security",
+          "stage": "rearm",
+          "reason": "Kimlik, bilinen çevre ve kendi ekonomik kapasitesi",
+          "previous": "recovery"
+        },
+        {
+          "actor": 2,
+          "day": 1590,
+          "kind": "preparation-stage",
+          "objective": "security",
+          "stage": "defend",
+          "from": "rearm",
+          "to": "defend",
+          "reason": "Güvenli sınırlar için defend"
+        },
+        {
+          "actor": 2,
+          "day": 1680,
+          "kind": "preparation-stage",
+          "objective": "security",
+          "stage": "fortify",
+          "from": "defend",
+          "to": "fortify",
+          "reason": "Güvenli sınırlar için fortify"
+        },
+        {
+          "actor": 2,
+          "day": 1770,
+          "kind": "preparation-stage",
+          "objective": "security",
+          "stage": "defend",
+          "from": "fortify",
+          "to": "defend",
+          "reason": "Güvenli sınırlar için defend"
+        },
+        {
+          "actor": 2,
+          "day": 1860,
+          "kind": "preparation-stage",
+          "objective": "security",
+          "stage": "fortify",
+          "from": "defend",
+          "to": "fortify",
+          "reason": "Güvenli sınırlar için fortify"
+        },
+        {
+          "actor": 2,
+          "day": 2040,
+          "kind": "preparation-stage",
+          "objective": "security",
+          "stage": "defend",
+          "from": "fortify",
+          "to": "defend",
+          "reason": "Güvenli sınırlar için defend"
+        },
+        {
+          "actor": 2,
+          "day": 2130,
+          "kind": "preparation-stage",
+          "objective": "security",
+          "stage": "fortify",
+          "from": "defend",
+          "to": "fortify",
+          "reason": "Güvenli sınırlar için fortify"
+        },
+        {
+          "actor": 2,
+          "day": 2220,
+          "kind": "preparation-stage",
+          "objective": "security",
+          "stage": "defend",
+          "from": "fortify",
+          "to": "defend",
+          "reason": "Güvenli sınırlar için defend"
+        },
+        {
+          "actor": 2,
+          "day": 2310,
+          "kind": "preparation-stage",
+          "objective": "security",
+          "stage": "fortify",
+          "from": "defend",
+          "to": "fortify",
+          "reason": "Güvenli sınırlar için fortify"
+        },
+        {
+          "actor": 2,
+          "day": 2400,
+          "kind": "preparation-stage",
+          "objective": "security",
+          "stage": "defend",
+          "from": "fortify",
+          "to": "defend",
+          "reason": "Güvenli sınırlar için defend"
+        },
+        {
+          "actor": 2,
+          "day": 2490,
+          "kind": "objective-selected",
+          "objective": "regional",
+          "stage": "defend",
+          "reason": "Kimlik, bilinen çevre ve kendi ekonomik kapasitesi",
+          "previous": "security"
+        },
+        {
+          "actor": 2,
+          "day": 2490,
+          "kind": "preparation-stage",
+          "objective": "regional",
+          "stage": "campaign",
+          "from": "defend",
+          "to": "campaign",
+          "reason": "Bölgesel üstünlük için campaign"
+        },
+        {
+          "actor": 2,
+          "day": 2580,
+          "kind": "preparation-stage",
+          "objective": "regional",
+          "stage": "diplomacy",
+          "from": "campaign",
+          "to": "diplomacy",
+          "reason": "Diğer sınırda diplomatik güvence aranıyor"
+        },
+        {
+          "actor": 2,
+          "day": 2580,
+          "kind": "diplomatic-proposal",
+          "objective": "regional",
+          "stage": "diplomacy",
+          "other": 5,
+          "treaty": "nap",
+          "applied": true,
+          "pending": false
+        },
+        {
+          "actor": 2,
+          "day": 2670,
+          "kind": "preparation-stage",
+          "objective": "regional",
+          "stage": "ready",
+          "from": "diplomacy",
+          "to": "ready",
+          "reason": "Bölgesel üstünlük için ready"
+        },
+        {
+          "actor": 2,
+          "day": 2940,
+          "kind": "milestone-complete",
+          "objective": "regional",
+          "stage": "ready",
+          "progress": 1,
+          "measured": {
+            "systems": 6,
+            "colonies": 6,
+            "techs": 8,
+            "power": 6678,
+            "ports": 6,
+            "fort": 3,
+            "production": 443.0491703623162,
+            "deliveries": 3,
+            "pacts": 1,
+            "allies": 0,
+            "federated": false
+          }
+        }
+      ],
+      "actual": [
+        {
+          "day": 1590,
+          "actor": 2,
+          "kind": "ship-order",
+          "system": 0,
+          "cls": "kor",
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 32,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 1620,
+          "actor": 2,
+          "kind": "building-order",
+          "system": 23,
+          "planet": 1,
+          "key": "tersane",
+          "paid": {
+            "min": 260,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 45,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 1620,
+          "actor": 2,
+          "kind": "ship-order",
+          "system": 0,
+          "cls": "kol",
+          "paid": {
+            "min": 212,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 48,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 1620,
+          "actor": 2,
+          "kind": "diplomatic-offer",
+          "other": 5,
+          "give": [
+            {
+              "t": "pact"
+            }
+          ],
+          "want": [
+            {
+              "t": "res",
+              "r": "min",
+              "v": 50
+            }
+          ],
+          "applied": false,
+          "result": "bekle"
+        },
+        {
+          "day": 1650,
+          "actor": 2,
+          "kind": "building-order",
+          "system": 3,
+          "planet": 2,
+          "key": "maden",
+          "paid": {
+            "min": 120,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 1650,
+          "actor": 2,
+          "kind": "diplomatic-offer",
+          "other": 4,
+          "give": [
+            {
+              "t": "pact"
+            }
+          ],
+          "want": [
+            {
+              "t": "res",
+              "r": "min",
+              "v": 50
+            }
+          ],
+          "applied": true,
+          "result": "kabul"
+        },
+        {
+          "day": 1650,
+          "actor": 2,
+          "kind": "fleet-route",
+          "fleet": 96,
+          "to": 23,
+          "path": [
+            28,
+            19,
+            23
+          ]
+        },
+        {
+          "day": 1680,
+          "actor": 2,
+          "kind": "building-order",
+          "system": 0,
+          "planet": 0,
+          "key": "kale",
+          "paid": {
+            "min": 138,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 42,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 1680,
+          "actor": 2,
+          "kind": "ship-order",
+          "system": 0,
+          "cls": "kor",
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 32,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 1710,
+          "actor": 2,
+          "kind": "building-order",
+          "system": 23,
+          "planet": 1,
+          "key": "maden",
+          "paid": {
+            "min": 120,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 1710,
+          "actor": 2,
+          "kind": "ship-order",
+          "system": 0,
+          "cls": "kor",
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 32,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 1710,
+          "actor": 2,
+          "kind": "fleet-route",
+          "fleet": 162,
+          "to": 28,
+          "path": [
+            34,
+            23,
+            19,
+            28
+          ]
+        },
+        {
+          "day": 1710,
+          "actor": 2,
+          "kind": "fleet-route",
+          "fleet": 96,
+          "to": 3,
+          "path": [
+            3
+          ]
+        },
+        {
+          "day": 1740,
+          "actor": 2,
+          "kind": "building-order",
+          "system": 3,
+          "planet": 2,
+          "key": "tersane",
+          "paid": {
+            "min": 260,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 45,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 1740,
+          "actor": 2,
+          "kind": "ship-order",
+          "system": 0,
+          "cls": "kor",
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 32,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 1770,
+          "actor": 2,
+          "kind": "building-order",
+          "system": 28,
+          "planet": 0,
+          "key": "liman",
+          "paid": {
+            "min": 180,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 1770,
+          "actor": 2,
+          "kind": "ship-order",
+          "system": 0,
+          "cls": "kor",
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 32,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 1800,
+          "actor": 2,
+          "kind": "building-order",
+          "system": 28,
+          "planet": 0,
+          "key": "maden",
+          "paid": {
+            "min": 120,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 1800,
+          "actor": 2,
+          "kind": "ship-order",
+          "system": 0,
+          "cls": "kor",
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 32,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 1830,
+          "actor": 2,
+          "kind": "building-order",
+          "system": 3,
+          "planet": 2,
+          "key": "lab",
+          "paid": {
+            "min": 190,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 1830,
+          "actor": 2,
+          "kind": "ship-order",
+          "system": 0,
+          "cls": "kor",
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 32,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 1860,
+          "actor": 2,
+          "kind": "ship-order",
+          "system": 0,
+          "cls": "kor",
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 32,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 1860,
+          "actor": 2,
+          "kind": "fleet-route",
+          "fleet": 176,
+          "to": 28,
+          "path": [
+            34,
+            23,
+            19,
+            28
+          ]
+        },
+        {
+          "day": 1890,
+          "actor": 2,
+          "kind": "building-order",
+          "system": 23,
+          "planet": 1,
+          "key": "maden",
+          "paid": {
+            "min": 120,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 1890,
+          "actor": 2,
+          "kind": "building-order",
+          "system": 28,
+          "planet": 0,
+          "key": "maden",
+          "paid": {
+            "min": 120,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 1890,
+          "actor": 2,
+          "kind": "ship-order",
+          "system": 23,
+          "cls": "kor",
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 32,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 1890,
+          "actor": 2,
+          "kind": "ship-order",
+          "system": 0,
+          "cls": "kor",
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 32,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 1890,
+          "actor": 2,
+          "kind": "ship-order",
+          "system": 23,
+          "cls": "kor",
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 32,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 1890,
+          "actor": 2,
+          "kind": "fleet-route",
+          "fleet": 96,
+          "to": 23,
+          "path": [
+            23
+          ]
+        },
+        {
+          "day": 1920,
+          "actor": 2,
+          "kind": "building-order",
+          "system": 0,
+          "planet": 0,
+          "key": "kale",
+          "paid": {
+            "min": 138,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 42,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 1920,
+          "actor": 2,
+          "kind": "ship-order",
+          "system": 23,
+          "cls": "kor",
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 32,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 1920,
+          "actor": 2,
+          "kind": "ship-order",
+          "system": 0,
+          "cls": "kor",
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 32,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 1950,
+          "actor": 2,
+          "kind": "ship-order",
+          "system": 23,
+          "cls": "kor",
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 32,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 1950,
+          "actor": 2,
+          "kind": "ship-order",
+          "system": 0,
+          "cls": "kor",
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 32,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 1950,
+          "actor": 2,
+          "kind": "fleet-route",
+          "fleet": 96,
+          "to": 28,
+          "path": [
+            19,
+            28
+          ]
+        },
+        {
+          "day": 1980,
+          "actor": 2,
+          "kind": "building-order",
+          "system": 23,
+          "planet": 1,
+          "key": "lab",
+          "paid": {
+            "min": 190,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 1980,
+          "actor": 2,
+          "kind": "building-order",
+          "system": 28,
+          "planet": 0,
+          "key": "lab",
+          "paid": {
+            "min": 190,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 1980,
+          "actor": 2,
+          "kind": "ship-order",
+          "system": 23,
+          "cls": "kor",
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 32,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 1980,
+          "actor": 2,
+          "kind": "ship-order",
+          "system": 0,
+          "cls": "kor",
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 32,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 1980,
+          "actor": 2,
+          "kind": "fleet-route",
+          "fleet": 176,
+          "to": 0,
+          "path": [
+            19,
+            23,
+            34,
+            0
+          ]
+        },
+        {
+          "day": 2010,
+          "actor": 2,
+          "kind": "ship-order",
+          "system": 3,
+          "cls": "kor",
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 32,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 2010,
+          "actor": 2,
+          "kind": "ship-order",
+          "system": 23,
+          "cls": "kor",
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 32,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 2010,
+          "actor": 2,
+          "kind": "ship-order",
+          "system": 0,
+          "cls": "bil",
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 24,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 2040,
+          "actor": 2,
+          "kind": "ship-order",
+          "system": 3,
+          "cls": "ins",
+          "paid": {
+            "min": 90,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 45,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 2040,
+          "actor": 2,
+          "kind": "building-order",
+          "system": 23,
+          "planet": 1,
+          "key": "maden",
+          "paid": {
+            "min": 120,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 2040,
+          "actor": 2,
+          "kind": "building-order",
+          "system": 28,
+          "planet": 0,
+          "key": "lab",
+          "paid": {
+            "min": 190,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 2040,
+          "actor": 2,
+          "kind": "ship-order",
+          "system": 23,
+          "cls": "kor",
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 32,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 2040,
+          "actor": 2,
+          "kind": "ship-order",
+          "system": 3,
+          "cls": "kor",
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 32,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 2040,
+          "actor": 2,
+          "kind": "fleet-route",
+          "fleet": 198,
+          "to": 3,
+          "path": [
+            3
+          ]
+        },
+        {
+          "day": 2070,
+          "actor": 2,
+          "kind": "ship-order",
+          "system": 0,
+          "cls": "kor",
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 32,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 2070,
+          "actor": 2,
+          "kind": "ship-order",
+          "system": 23,
+          "cls": "kor",
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 32,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 2070,
+          "actor": 2,
+          "kind": "ship-order",
+          "system": 3,
+          "cls": "kor",
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 32,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 2100,
+          "actor": 2,
+          "kind": "ship-order",
+          "system": 0,
+          "cls": "kor",
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 32,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 2130,
+          "actor": 2,
+          "kind": "ship-order",
+          "system": 0,
+          "cls": "ins",
+          "paid": {
+            "min": 90,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 45,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 2130,
+          "actor": 2,
+          "kind": "fleet-route",
+          "fleet": 211,
+          "to": 28,
+          "path": [
+            34,
+            23,
+            19,
+            28
+          ]
+        },
+        {
+          "day": 2160,
+          "actor": 2,
+          "kind": "diplomatic-offer",
+          "other": 4,
+          "give": [
+            {
+              "t": "freight",
+              "r": "min",
+              "v": 8.9,
+              "source": 28,
+              "target": 30,
+              "every": 90,
+              "months": 12
+            }
+          ],
+          "want": [
+            {
+              "t": "freight",
+              "r": "ene",
+              "v": 15.9,
+              "source": 30,
+              "target": 28,
+              "every": 90,
+              "months": 12
+            }
+          ],
+          "applied": true,
+          "result": "kabul"
+        },
+        {
+          "day": 2160,
+          "actor": 2,
+          "kind": "building-order",
+          "system": 23,
+          "planet": 1,
+          "key": "dokum",
+          "paid": {
+            "min": 210,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 2160,
+          "actor": 2,
+          "kind": "building-order",
+          "system": 28,
+          "planet": 0,
+          "key": "dokum",
+          "paid": {
+            "min": 210,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 2190,
+          "actor": 2,
+          "kind": "building-order",
+          "system": 3,
+          "planet": 2,
+          "key": "dokum",
+          "paid": {
+            "min": 210,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 2220,
+          "actor": 2,
+          "kind": "war-start",
+          "other": 1
+        },
+        {
+          "day": 2220,
+          "actor": 2,
+          "kind": "building-order",
+          "system": 0,
+          "planet": 0,
+          "key": "dokum",
+          "paid": {
+            "min": 210,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 2220,
+          "actor": 2,
+          "kind": "ship-order",
+          "system": 23,
+          "cls": "kor",
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 32,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 2220,
+          "actor": 2,
+          "kind": "fleet-route",
+          "fleet": 96,
+          "to": 3,
+          "path": [
+            19,
+            23,
+            3
+          ]
+        },
+        {
+          "day": 2250,
+          "actor": 2,
+          "kind": "ship-order",
+          "system": 0,
+          "cls": "ins",
+          "paid": {
+            "min": 90,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 45,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 2250,
+          "actor": 2,
+          "kind": "building-order",
+          "system": 23,
+          "planet": 1,
+          "key": "fabrika",
+          "paid": {
+            "min": 170,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 2250,
+          "actor": 2,
+          "kind": "ship-order",
+          "system": 23,
+          "cls": "kor",
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 32,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 2250,
+          "actor": 2,
+          "kind": "fleet-route",
+          "fleet": 96,
+          "to": 0,
+          "path": [
+            0
+          ]
+        },
+        {
+          "day": 2250,
+          "actor": 2,
+          "kind": "fleet-route",
+          "fleet": 211,
+          "to": 23,
+          "path": [
+            19,
+            23
+          ]
+        },
+        {
+          "day": 2250,
+          "actor": 2,
+          "kind": "fleet-route",
+          "fleet": 211,
+          "to": 0,
+          "path": [
+            19,
+            23,
+            34,
+            0
+          ]
+        },
+        {
+          "day": 2280,
+          "actor": 2,
+          "kind": "building-order",
+          "system": 28,
+          "planet": 0,
+          "key": "kale",
+          "paid": {
+            "min": 138,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 42,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 2280,
+          "actor": 2,
+          "kind": "ship-order",
+          "system": 0,
+          "cls": "kor",
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 32,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 2280,
+          "actor": 2,
+          "kind": "fleet-route",
+          "fleet": 96,
+          "to": 28,
+          "path": [
+            34,
+            23,
+            19,
+            28
+          ]
+        },
+        {
+          "day": 2280,
+          "actor": 2,
+          "kind": "fleet-route",
+          "fleet": 211,
+          "to": 28,
+          "path": [
+            34,
+            23,
+            19,
+            28
+          ]
+        },
+        {
+          "day": 2310,
+          "actor": 2,
+          "kind": "ship-order",
+          "system": 0,
+          "cls": "bil",
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 24,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 2340,
+          "actor": 2,
+          "kind": "ship-order",
+          "system": 23,
+          "cls": "kor",
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 32,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 2340,
+          "actor": 2,
+          "kind": "fleet-route",
+          "fleet": 96,
+          "to": 29,
+          "path": [
+            1,
+            29
+          ]
+        },
+        {
+          "day": 2340,
+          "actor": 2,
+          "kind": "fleet-route",
+          "fleet": 211,
+          "to": 13,
+          "path": [
+            18,
+            44,
+            13
+          ]
+        },
+        {
+          "day": 2370,
+          "actor": 2,
+          "kind": "building-order",
+          "system": 23,
+          "planet": 1,
+          "key": "fabrika",
+          "paid": {
+            "min": 170,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 2370,
+          "actor": 2,
+          "kind": "ship-order",
+          "system": 23,
+          "cls": "kor",
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 32,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 2400,
+          "actor": 2,
+          "kind": "building-order",
+          "system": 28,
+          "planet": 0,
+          "key": "tersane",
+          "paid": {
+            "min": 260,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 45,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 2430,
+          "actor": 2,
+          "kind": "ship-order",
+          "system": 0,
+          "cls": "ins",
+          "paid": {
+            "min": 90,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 45,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 2430,
+          "actor": 2,
+          "kind": "ship-order",
+          "system": 3,
+          "cls": "kor",
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 32,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 2430,
+          "actor": 2,
+          "kind": "ship-order",
+          "system": 23,
+          "cls": "kor",
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 32,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 2430,
+          "actor": 2,
+          "kind": "ship-order",
+          "system": 0,
+          "cls": "kor",
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 32,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 2430,
+          "actor": 2,
+          "kind": "ship-order",
+          "system": 3,
+          "cls": "kor",
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 32,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 2430,
+          "actor": 2,
+          "kind": "ship-order",
+          "system": 23,
+          "cls": "kor",
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 32,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 2430,
+          "actor": 2,
+          "kind": "fleet-route",
+          "fleet": 96,
+          "to": 28,
+          "path": [
+            1,
+            28
+          ]
+        },
+        {
+          "day": 2460,
+          "actor": 2,
+          "kind": "building-order",
+          "system": 0,
+          "planet": 0,
+          "key": "kale",
+          "paid": {
+            "min": 138,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 42,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 2460,
+          "actor": 2,
+          "kind": "fleet-route",
+          "fleet": 96,
+          "to": 13,
+          "path": [
+            18,
+            44,
+            13
+          ]
+        },
+        {
+          "day": 2460,
+          "actor": 2,
+          "kind": "fleet-route",
+          "fleet": 242,
+          "to": 28,
+          "path": [
+            23,
+            19,
+            28
+          ]
+        },
+        {
+          "day": 2460,
+          "actor": 2,
+          "kind": "fleet-route",
+          "fleet": 243,
+          "to": 28,
+          "path": [
+            19,
+            28
+          ]
+        },
+        {
+          "day": 2490,
+          "actor": 2,
+          "kind": "ship-order",
+          "system": 23,
+          "cls": "kor",
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 32,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 2490,
+          "actor": 2,
+          "kind": "fleet-route",
+          "fleet": 242,
+          "to": 13,
+          "path": [
+            18,
+            44,
+            13
+          ]
+        },
+        {
+          "day": 2490,
+          "actor": 2,
+          "kind": "fleet-route",
+          "fleet": 243,
+          "to": 13,
+          "path": [
+            18,
+            44,
+            13
+          ]
+        },
+        {
+          "day": 2490,
+          "actor": 2,
+          "kind": "fleet-route",
+          "fleet": 96,
+          "to": 28,
+          "path": [
+            18,
+            28
+          ]
+        },
+        {
+          "day": 2490,
+          "actor": 2,
+          "kind": "fleet-route",
+          "fleet": 246,
+          "to": 28,
+          "path": [
+            34,
+            23,
+            19,
+            28
+          ]
+        },
+        {
+          "day": 2490,
+          "actor": 2,
+          "kind": "fleet-route",
+          "fleet": 247,
+          "to": 28,
+          "path": [
+            23,
+            19,
+            28
+          ]
+        },
+        {
+          "day": 2490,
+          "actor": 2,
+          "kind": "fleet-route",
+          "fleet": 248,
+          "to": 28,
+          "path": [
+            19,
+            28
+          ]
+        },
+        {
+          "day": 2520,
+          "actor": 2,
+          "kind": "ship-order",
+          "system": 23,
+          "cls": "kor",
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 32,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 2520,
+          "actor": 2,
+          "kind": "fleet-route",
+          "fleet": 96,
+          "to": 13,
+          "path": [
+            18,
+            44,
+            13
+          ]
+        },
+        {
+          "day": 2520,
+          "actor": 2,
+          "kind": "fleet-route",
+          "fleet": 247,
+          "to": 13,
+          "path": [
+            18,
+            44,
+            13
+          ]
+        },
+        {
+          "day": 2520,
+          "actor": 2,
+          "kind": "fleet-route",
+          "fleet": 242,
+          "to": 28,
+          "path": [
+            18,
+            28
+          ]
+        },
+        {
+          "day": 2520,
+          "actor": 2,
+          "kind": "fleet-route",
+          "fleet": 243,
+          "to": 28,
+          "path": [
+            18,
+            28
+          ]
+        },
+        {
+          "day": 2550,
+          "actor": 2,
+          "kind": "ship-order",
+          "system": 23,
+          "cls": "kor",
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 32,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 2550,
+          "actor": 2,
+          "kind": "ship-order",
+          "system": 3,
+          "cls": "kor",
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 32,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 2550,
+          "actor": 2,
+          "kind": "fleet-route",
+          "fleet": 242,
+          "to": 13,
+          "path": [
+            18,
+            44,
+            13
+          ]
+        },
+        {
+          "day": 2550,
+          "actor": 2,
+          "kind": "fleet-route",
+          "fleet": 243,
+          "to": 13,
+          "path": [
+            18,
+            44,
+            13
+          ]
+        },
+        {
+          "day": 2550,
+          "actor": 2,
+          "kind": "fleet-route",
+          "fleet": 96,
+          "to": 28,
+          "path": [
+            18,
+            28
+          ]
+        },
+        {
+          "day": 2550,
+          "actor": 2,
+          "kind": "fleet-route",
+          "fleet": 247,
+          "to": 28,
+          "path": [
+            18,
+            28
+          ]
+        },
+        {
+          "day": 2580,
+          "actor": 2,
+          "kind": "diplomatic-offer",
+          "other": 5,
+          "give": [
+            {
+              "t": "nap"
+            }
+          ],
+          "want": [],
+          "applied": true,
+          "result": "kabul"
+        },
+        {
+          "day": 2580,
+          "actor": 2,
+          "kind": "building-order",
+          "system": 3,
+          "planet": 2,
+          "key": "lab",
+          "paid": {
+            "min": 190,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 2580,
+          "actor": 2,
+          "kind": "building-order",
+          "system": 28,
+          "planet": 0,
+          "key": "maden",
+          "paid": {
+            "min": 120,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 2580,
+          "actor": 2,
+          "kind": "ship-order",
+          "system": 23,
+          "cls": "kor",
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 32,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 2580,
+          "actor": 2,
+          "kind": "fleet-route",
+          "fleet": 96,
+          "to": 13,
+          "path": [
+            18,
+            44,
+            13
+          ]
+        },
+        {
+          "day": 2580,
+          "actor": 2,
+          "kind": "fleet-route",
+          "fleet": 247,
+          "to": 13,
+          "path": [
+            18,
+            44,
+            13
+          ]
+        },
+        {
+          "day": 2580,
+          "actor": 2,
+          "kind": "fleet-route",
+          "fleet": 242,
+          "to": 28,
+          "path": [
+            18,
+            28
+          ]
+        },
+        {
+          "day": 2580,
+          "actor": 2,
+          "kind": "fleet-route",
+          "fleet": 243,
+          "to": 28,
+          "path": [
+            18,
+            28
+          ]
+        },
+        {
+          "day": 2610,
+          "actor": 1,
+          "kind": "peace",
+          "other": 2
+        },
+        {
+          "day": 2610,
+          "actor": 2,
+          "kind": "ship-order",
+          "system": 0,
+          "cls": "kol",
+          "paid": {
+            "min": 212,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 48,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        }
+      ],
+      "front": [
+        {
+          "id": 1,
+          "campaign": 1,
+          "parent": null,
+          "reason": "declaration",
+          "sides": [
+            2,
+            1
+          ],
+          "roles": [
+            0,
+            1
+          ],
+          "opened": 2220,
+          "legacy": false,
+          "ended": 2610,
+          "endReason": "proxy-peace",
+          "entryKind": "declaration",
+          "sponsor": null,
+          "membership": [
+            {
+              "id": 2,
+              "day": 2220,
+              "fed": null,
+              "lord": null
+            },
+            {
+              "id": 1,
+              "day": 2220,
+              "fed": null,
+              "lord": null
+            }
+          ],
+          "goals": [
+            {
+              "by": 2,
+              "day": 2220,
+              "type": "boyun",
+              "targets": []
+            }
+          ],
+          "metrics": [
+            {
+              "rounds": 23,
+              "shipsLost": 12,
+              "shipsDestroyed": 28,
+              "damageDealt": 2703.741672970612,
+              "damageTaken": 1126.1339581735233,
+              "groundLost": 0,
+              "groundDestroyed": 0,
+              "garrisonLost": 0,
+              "garrisonReduced": 0,
+              "systems": [],
+              "planets": []
+            },
+            {
+              "rounds": 23,
+              "shipsLost": 28,
+              "shipsDestroyed": 12,
+              "damageDealt": 1126.1339581735233,
+              "damageTaken": 2703.741672970612,
+              "groundLost": 0,
+              "groundDestroyed": 0,
+              "garrisonLost": 0,
+              "garrisonReduced": 0,
+              "systems": [],
+              "planets": []
+            }
+          ],
+          "occupation": []
+        }
+      ]
+    },
+    {
+      "name": "Real freight and response to losses",
+      "seed": 11,
+      "actor": 4,
+      "actual": [
+        {
+          "day": 630,
+          "actor": 4,
+          "kind": "diplomatic-offer",
+          "other": 5,
+          "give": [
+            {
+              "t": "ally"
+            }
+          ],
+          "want": [
+            {
+              "t": "res",
+              "r": "ene",
+              "v": 100
+            }
+          ],
+          "applied": true,
+          "result": "kabul"
+        },
+        {
+          "day": 780,
+          "actor": 4,
+          "kind": "diplomatic-offer",
+          "other": 5,
+          "give": [
+            {
+              "t": "freight",
+              "r": "ene",
+              "v": 2.1,
+              "source": 37,
+              "target": 25,
+              "every": 60,
+              "months": 12
+            }
+          ],
+          "want": [
+            {
+              "t": "freight",
+              "r": "ala",
+              "v": 1.2,
+              "source": 25,
+              "target": 37,
+              "every": 60,
+              "months": 12
+            }
+          ],
+          "applied": true,
+          "result": "kabul"
+        },
+        {
+          "day": 828.5,
+          "actor": 4,
+          "kind": "freight-delivered",
+          "to": 5,
+          "contract": 1,
+          "delivered": 2.1,
+          "lost": 0
+        },
+        {
+          "day": 888.5,
+          "actor": 4,
+          "kind": "freight-delivered",
+          "to": 5,
+          "contract": 1,
+          "delivered": 2.1,
+          "lost": 0
+        },
+        {
+          "day": 948.5,
+          "actor": 4,
+          "kind": "freight-delivered",
+          "to": 5,
+          "contract": 1,
+          "delivered": 2.1,
+          "lost": 0
+        },
+        {
+          "day": 1690,
+          "actor": 4,
+          "kind": "freight-raided",
+          "to": 5,
+          "contract": 3,
+          "delivered": 0,
+          "lost": 16
+        },
+        {
+          "day": 2162,
+          "actor": 4,
+          "kind": "freight-raided",
+          "to": 2,
+          "contract": 5,
+          "delivered": 0,
+          "lost": 15.899999999999999
+        },
+        {
+          "day": 3089,
+          "actor": 4,
+          "kind": "freight-raided",
+          "to": 5,
+          "contract": 9,
+          "delivered": 0,
+          "lost": 13
+        },
+        {
+          "day": 3090,
+          "actor": 4,
+          "kind": "fleet-route",
+          "fleet": 260,
+          "to": 25,
+          "path": [
+            8,
+            25
+          ]
+        },
+        {
+          "day": 3220,
+          "actor": 4,
+          "kind": "freight-raided",
+          "to": 5,
+          "contract": 9,
+          "delivered": 0,
+          "lost": 13
+        }
+      ],
+      "intent": [
+        {
+          "actor": 4,
+          "day": 3090,
+          "kind": "trade-route-protection",
+          "objective": "economy",
+          "stage": "invest",
+          "fleet": 260,
+          "target": 25,
+          "loss": 85
+        }
+      ]
+    },
+    {
+      "name": "Failed science plan and reassessment",
+      "seed": 11,
+      "actor": 5,
+      "intent": [
+        {
+          "actor": 5,
+          "day": 30,
+          "kind": "objective-selected",
+          "objective": "science",
+          "stage": null,
+          "reason": "Kimlik, bilinen çevre ve kendi ekonomik kapasitesi",
+          "previous": null
+        },
+        {
+          "actor": 5,
+          "day": 210,
+          "kind": "preparation-stage",
+          "objective": "science",
+          "stage": "research",
+          "from": "economy",
+          "to": "research",
+          "reason": "Teknolojik gelişim için research"
+        },
+        {
+          "actor": 5,
+          "day": 930,
+          "kind": "plan-reassessed",
+          "objective": "science",
+          "stage": "research",
+          "reason": "30 ay ölçülebilir ilerleme yok"
+        },
+        {
+          "actor": 5,
+          "day": 930,
+          "kind": "objective-selected",
+          "objective": "trade",
+          "stage": "research",
+          "reason": "Kimlik, bilinen çevre ve kendi ekonomik kapasitesi",
+          "previous": "science"
+        },
+        {
+          "actor": 5,
+          "day": 930,
+          "kind": "preparation-stage",
+          "objective": "trade",
+          "stage": "trade",
+          "from": "research",
+          "to": "trade",
+          "reason": "Ticaret ağı için trade"
+        },
+        {
+          "actor": 5,
+          "day": 1050,
+          "kind": "objective-selected",
+          "objective": "recovery",
+          "stage": "trade",
+          "reason": "Büyük askerî kayıp",
+          "previous": "trade"
+        },
+        {
+          "actor": 5,
+          "day": 1050,
+          "kind": "preparation-stage",
+          "objective": "recovery",
+          "stage": "rearm",
+          "from": "trade",
+          "to": "rearm",
+          "reason": "Yenilgiden toparlanma için rearm"
+        },
+        {
+          "actor": 5,
+          "day": 1230,
+          "kind": "milestone-complete",
+          "objective": "recovery",
+          "stage": "rearm",
+          "progress": 1,
+          "measured": {
+            "systems": 3,
+            "colonies": 2,
+            "techs": 3,
+            "power": 476,
+            "ports": 2,
+            "fort": 0,
+            "production": 258.7205420454157,
+            "deliveries": 7,
+            "pacts": 1,
+            "allies": 1,
+            "federated": false
+          }
+        }
+      ],
+      "actual": [
+        {
+          "day": 30,
+          "actor": 5,
+          "kind": "building-order",
+          "system": 5,
+          "planet": 3,
+          "key": "santral",
+          "paid": {
+            "min": 110,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 120,
+          "actor": 5,
+          "kind": "building-order",
+          "system": 25,
+          "planet": 0,
+          "key": "tersane",
+          "paid": {
+            "min": 260,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 45,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 180,
+          "actor": 5,
+          "kind": "building-order",
+          "system": 5,
+          "planet": 3,
+          "key": "santral",
+          "paid": {
+            "min": 110,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 420,
+          "actor": 5,
+          "kind": "building-order",
+          "system": 5,
+          "planet": 3,
+          "key": "liman",
+          "paid": {
+            "min": 180,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 630,
+          "actor": 5,
+          "kind": "building-order",
+          "system": 25,
+          "planet": 0,
+          "key": "liman",
+          "paid": {
+            "min": 180,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 810,
+          "actor": 5,
+          "kind": "building-order",
+          "system": 5,
+          "planet": 3,
+          "key": "dokum",
+          "paid": {
+            "min": 210,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 960,
+          "actor": 5,
+          "kind": "building-order",
+          "system": 5,
+          "planet": 3,
+          "key": "lab",
+          "paid": {
+            "min": 190,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 1140,
+          "actor": 5,
+          "kind": "research-completed",
+          "tech": "t_tarim",
+          "source": "research"
+        },
+        {
+          "day": 1140,
+          "actor": 5,
+          "kind": "building-order",
+          "system": 5,
+          "planet": 3,
+          "key": "lab",
+          "paid": {
+            "min": 190,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 1170,
+          "actor": 5,
+          "kind": "research-completed",
+          "tech": "m_robot",
+          "source": "research"
+        },
+        {
+          "day": 1200,
+          "actor": 5,
+          "kind": "research-completed",
+          "tech": "f_reaktor",
+          "source": "research"
+        }
+      ]
+    }
+  ]
+}

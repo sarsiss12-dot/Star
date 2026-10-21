@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "seed": 404,
+  "months": 120,
+  "matchedSaveHash": true,
+  "matchedRng": true,
+  "matchedTrace": true,
+  "matchedMonthly": true,
+  "saveHash": "009bcca3d2cb57961840bc8d443e145012689c6292744596ad2888bf51e8f2e9",
+  "exit": 0
+}

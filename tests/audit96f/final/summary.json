@@ -1,0 +1,971 @@
+{
+  "suites": 117,
+  "skipped": [],
+  "pass": 5759,
+  "fail": 0,
+  "ok": true,
+  "results": [
+    {
+      "name": "faz83_2_brand_test.js",
+      "exit": 0,
+      "durationMs": 1273,
+      "pass": 71,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz83_3_render_recovery_test.js",
+      "exit": 0,
+      "durationMs": 4704,
+      "pass": 62,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz83_4_redraw_leaders_test.js",
+      "exit": 0,
+      "durationMs": 15122,
+      "pass": 79,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz84a_intel_dedup_test.js",
+      "exit": 0,
+      "durationMs": 15166,
+      "pass": 88,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz84b_vassal_state_dedup_test.js",
+      "exit": 0,
+      "durationMs": 6581,
+      "pass": 126,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz84c_state_visibility_gate_test.js",
+      "exit": 0,
+      "durationMs": 6278,
+      "pass": 122,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz85a_political_save_integrity_test.js",
+      "exit": 0,
+      "durationMs": 9948,
+      "pass": 177,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz85b_load_idempotency_test.js",
+      "exit": 0,
+      "durationMs": 19097,
+      "pass": 136,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz85c_crisis_save_continuity_test.js",
+      "exit": 0,
+      "durationMs": 15534,
+      "pass": 144,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz85d_campaign_save_continuity_test.js",
+      "exit": 0,
+      "durationMs": 20507,
+      "pass": 187,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz85e_event_inbox_continuity_test.js",
+      "exit": 0,
+      "durationMs": 12480,
+      "pass": 151,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz85f_spatial_simulation_continuity_test.js",
+      "exit": 0,
+      "durationMs": 22407,
+      "pass": 168,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz86a_intel_command_center_test.js",
+      "exit": 0,
+      "durationMs": 7567,
+      "pass": 127,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz86b_deal_engine_test.js",
+      "exit": 0,
+      "durationMs": 11370,
+      "pass": 132,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz86c_1_quote_effective_plan_test.js",
+      "exit": 0,
+      "durationMs": 6999,
+      "pass": 102,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz86c_2_transaction_test.js",
+      "exit": 0,
+      "durationMs": 9164,
+      "pass": 111,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz86c_3_ai_negotiation_test.js",
+      "exit": 0,
+      "durationMs": 30774,
+      "pass": 90,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz86c_4_reciprocal_offers_test.js",
+      "exit": 0,
+      "durationMs": 30462,
+      "pass": 98,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz86c_4h_map_input_test.js",
+      "exit": 0,
+      "durationMs": 2231,
+      "pass": 83,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz86c_4h_r1_exact_regression_test.js",
+      "exit": 0,
+      "durationMs": 2534,
+      "pass": 112,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz86c_4h_r2_surface_camera_layers_test.js",
+      "exit": 0,
+      "durationMs": 4140,
+      "pass": 85,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz86c_4h_r3_surface_lifecycle_test.js",
+      "exit": 0,
+      "durationMs": 3204,
+      "pass": 97,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz86c_4h_r4_diagnosis_test.js",
+      "exit": 0,
+      "durationMs": 2720,
+      "pass": 93,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz86c_4h_r4_targeted_diag_test.js",
+      "exit": 0,
+      "durationMs": 2869,
+      "pass": 95,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz86c_5_1_ui_portraits_native_canvas_test.js",
+      "exit": 0,
+      "durationMs": 1444,
+      "pass": 48,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz86c_5_diagnostics_test.js",
+      "exit": 0,
+      "durationMs": 1805,
+      "pass": 38,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz86c_5_native_canvas_test.js",
+      "exit": 0,
+      "durationMs": 3067,
+      "pass": 66,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz86c_6_transaction_acceptance_test.js",
+      "exit": 0,
+      "durationMs": 19857,
+      "pass": 529,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz86c_strict_deal_ai_test.js",
+      "exit": 0,
+      "durationMs": 21545,
+      "pass": 147,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz86d_envoy_missions_test.js",
+      "exit": 0,
+      "durationMs": 9823,
+      "pass": 58,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz86e_diplomacy_center_test.js",
+      "exit": 0,
+      "durationMs": 6837,
+      "pass": 45,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz86f_ai_balance_test.js",
+      "exit": 0,
+      "durationMs": 46430,
+      "pass": 25,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz86g_integration_handoff_test.js",
+      "exit": 0,
+      "durationMs": 2738,
+      "pass": 16,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz87a_espionage_feedback_test.js",
+      "exit": 0,
+      "durationMs": 6851,
+      "pass": 36,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz87b_ai_operation_selection_test.js",
+      "exit": 0,
+      "durationMs": 5639,
+      "pass": 26,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz87c_1_intrigue_outcomes_test.js",
+      "exit": 0,
+      "durationMs": 7476,
+      "pass": 45,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz87c_special_operation_outcomes_test.js",
+      "exit": 0,
+      "durationMs": 6626,
+      "pass": 39,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz87d_offer_repetition_test.js",
+      "exit": 0,
+      "durationMs": 4314,
+      "pass": 24,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz88a_1_ship_dispatch_test.js",
+      "exit": 0,
+      "durationMs": 5348,
+      "pass": 30,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz88a_fleet_routes_test.js",
+      "exit": 0,
+      "durationMs": 6570,
+      "pass": 38,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz88b_combat_feedback_test.js",
+      "exit": 0,
+      "durationMs": 4488,
+      "pass": 24,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz89a_memory_factions_test.js",
+      "exit": 0,
+      "durationMs": 3759,
+      "pass": 24,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz89b_daily_campaign_test.js",
+      "exit": 0,
+      "durationMs": 54745,
+      "pass": 11,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz90rc_1_save_boundary_test.js",
+      "exit": 0,
+      "durationMs": 5864,
+      "pass": 19,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz90rc_2_load_feedback_test.js",
+      "exit": 0,
+      "durationMs": 2688,
+      "pass": 14,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz90rc_3_load_transaction_test.js",
+      "exit": 0,
+      "durationMs": 17486,
+      "pass": 48,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz90rc_release_candidate_test.js",
+      "exit": 0,
+      "durationMs": 5024,
+      "pass": 15,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz91a_special_presentation_test.js",
+      "exit": 0,
+      "durationMs": 9650,
+      "pass": 37,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz91b_campaign_observer_test.js",
+      "exit": 0,
+      "durationMs": 46400,
+      "pass": 5,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz91b_faction_share_test.js",
+      "exit": 0,
+      "durationMs": 1506,
+      "pass": 8,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz91c_ai_candidates_test.js",
+      "exit": 0,
+      "durationMs": 1307,
+      "pass": 6,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz91c_pirate_combat_test.js",
+      "exit": 0,
+      "durationMs": 3638,
+      "pass": 21,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz91d_1_fleet_names_native_canvas_test.js",
+      "exit": 0,
+      "durationMs": 1754,
+      "pass": 29,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz91d_territory_native_canvas_test.js",
+      "exit": 0,
+      "durationMs": 2405,
+      "pass": 40,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz91e_1_federation_policy_test.js",
+      "exit": 0,
+      "durationMs": 11897,
+      "pass": 31,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz91e_federation_laws_test.js",
+      "exit": 0,
+      "durationMs": 6964,
+      "pass": 31,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz92a_war_contribution_test.js",
+      "exit": 0,
+      "durationMs": 6831,
+      "pass": 34,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz92b_settlement_proposal_test.js",
+      "exit": 0,
+      "durationMs": 9948,
+      "pass": 33,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz92b1_ship_lock_test.js",
+      "exit": 0,
+      "durationMs": 4110,
+      "pass": 19,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz92c_settlement_apply_test.js",
+      "exit": 0,
+      "durationMs": 9267,
+      "pass": 28,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz92d_settlement_agenda_test.js",
+      "exit": 0,
+      "durationMs": 5065,
+      "pass": 14,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz93a_logistics_targets_test.js",
+      "exit": 0,
+      "durationMs": 3340,
+      "pass": 15,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz93a1_production_panels_test.js",
+      "exit": 0,
+      "durationMs": 5124,
+      "pass": 21,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz93b_pending_shipments_test.js",
+      "exit": 0,
+      "durationMs": 5836,
+      "pass": 31,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz93c_fleet_composition_test.js",
+      "exit": 0,
+      "durationMs": 8072,
+      "pass": 47,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz93d_research_planner_test.js",
+      "exit": 0,
+      "durationMs": 6030,
+      "pass": 33,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz93d_science_ui_test.js",
+      "exit": 0,
+      "durationMs": 3209,
+      "pass": 20,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz93d1_navy_campaign_test.js",
+      "exit": 0,
+      "durationMs": 58571,
+      "pass": 8,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz93d1_navy_production_test.js",
+      "exit": 0,
+      "durationMs": 3759,
+      "pass": 17,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz93e_specialization_test.js",
+      "exit": 0,
+      "durationMs": 5836,
+      "pass": 34,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz93e1_doctrine_test.js",
+      "exit": 0,
+      "durationMs": 5956,
+      "pass": 32,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz94a_camera_test.js",
+      "exit": 0,
+      "durationMs": 4766,
+      "pass": 27,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz94b_exploration_test.js",
+      "exit": 0,
+      "durationMs": 7048,
+      "pass": 37,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz94c_camera_trade_test.js",
+      "exit": 0,
+      "durationMs": 5419,
+      "pass": 32,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz94d_mobile_diplomacy_war_test.js",
+      "exit": 0,
+      "durationMs": 4459,
+      "pass": 28,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz94d1_war_visibility_test.js",
+      "exit": 0,
+      "durationMs": 5937,
+      "pass": 34,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz95a_strategic_ai_test.js",
+      "exit": 0,
+      "durationMs": 8558,
+      "pass": 51,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz95b_federation_reform_test.js",
+      "exit": 0,
+      "durationMs": 12989,
+      "pass": 68,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz95c_joint_campaign_test.js",
+      "exit": 0,
+      "durationMs": 12933,
+      "pass": 59,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz95c1_diplomacy_test.js",
+      "exit": 0,
+      "durationMs": 5186,
+      "pass": 32,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz95c1_logistics_test.js",
+      "exit": 0,
+      "durationMs": 4687,
+      "pass": 24,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz95c1_storage_test.js",
+      "exit": 0,
+      "durationMs": 2965,
+      "pass": 15,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz95c1_ui_test.js",
+      "exit": 0,
+      "durationMs": 4954,
+      "pass": 29,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz95d_identity_test.js",
+      "exit": 0,
+      "durationMs": 5826,
+      "pass": 23,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz95d_map_test.js",
+      "exit": 0,
+      "durationMs": 3673,
+      "pass": 23,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz95d_war_preview_test.js",
+      "exit": 0,
+      "durationMs": 3170,
+      "pass": 19,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz95e_construction_test.js",
+      "exit": 0,
+      "durationMs": 4766,
+      "pass": 21,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz95e_inbox_test.js",
+      "exit": 0,
+      "durationMs": 4695,
+      "pass": 20,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz95e_news_test.js",
+      "exit": 0,
+      "durationMs": 4411,
+      "pass": 20,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz95e_ui_save_test.js",
+      "exit": 0,
+      "durationMs": 2999,
+      "pass": 17,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz95e1_random_event_switch_test.js",
+      "exit": 0,
+      "durationMs": 1808,
+      "pass": 8,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz95e2_regression_test.js",
+      "exit": 0,
+      "durationMs": 2670,
+      "pass": 8,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz95e3_layers_test.js",
+      "exit": 0,
+      "durationMs": 2156,
+      "pass": 10,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz95e3_sensor_test.js",
+      "exit": 0,
+      "durationMs": 2299,
+      "pass": 7,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz96a_cargo_test.js",
+      "exit": 0,
+      "durationMs": 8770,
+      "pass": 36,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz96a_integrity_test.js",
+      "exit": 0,
+      "durationMs": 2468,
+      "pass": 12,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz96b_accounting_test.js",
+      "exit": 0,
+      "durationMs": 1787,
+      "pass": 9,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz96b_economy_test.js",
+      "exit": 0,
+      "durationMs": 6128,
+      "pass": 21,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz96c_diagnostics_test.js",
+      "exit": 0,
+      "durationMs": 3426,
+      "pass": 4,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz96c_planning_test.js",
+      "exit": 0,
+      "durationMs": 5089,
+      "pass": 22,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz96c_trade_test.js",
+      "exit": 0,
+      "durationMs": 2490,
+      "pass": 10,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz96c1_cache_test.js",
+      "exit": 0,
+      "durationMs": 2377,
+      "pass": 10,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz96c1_navy_test.js",
+      "exit": 0,
+      "durationMs": 3049,
+      "pass": 12,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz96c1_war_test.js",
+      "exit": 0,
+      "durationMs": 2243,
+      "pass": 11,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz96c2_rebuild_test.js",
+      "exit": 0,
+      "durationMs": 4104,
+      "pass": 24,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz96c3_ui_test.js",
+      "exit": 0,
+      "durationMs": 5194,
+      "pass": 24,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz96d_audio_test.js",
+      "exit": 0,
+      "durationMs": 381,
+      "pass": 6,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz96d_origins_test.js",
+      "exit": 0,
+      "durationMs": 3930,
+      "pass": 15,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz96d_portraits_native_canvas_test.js",
+      "exit": 0,
+      "durationMs": 1378,
+      "pass": 8,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz96e_federation_test.js",
+      "exit": 0,
+      "durationMs": 4799,
+      "pass": 29,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz96e_origins_test.js",
+      "exit": 0,
+      "durationMs": 11343,
+      "pass": 27,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz96e1_actions_test.js",
+      "exit": 0,
+      "durationMs": 2512,
+      "pass": 17,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz96e1_identity_test.js",
+      "exit": 0,
+      "durationMs": 7795,
+      "pass": 22,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz96e1_mechanics_test.js",
+      "exit": 0,
+      "durationMs": 7381,
+      "pass": 64,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz96f_map_panel_native_canvas_test.js",
+      "exit": 0,
+      "durationMs": 3273,
+      "pass": 19,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz96f_memory_test.js",
+      "exit": 0,
+      "durationMs": 3226,
+      "pass": 21,
+      "fail": 0,
+      "details": ""
+    },
+    {
+      "name": "faz96f_strategy_test.js",
+      "exit": 0,
+      "durationMs": 4344,
+      "pass": 29,
+      "fail": 0,
+      "details": ""
+    }
+  ],
+  "execution": {
+    "scope": "Latest completed execution of each unique suite after final runtime edit",
+    "refreshedSuites": 41,
+    "frozenAt": "2026-10-21T21:37:23.776Z",
+    "runtimeSha256": {
+      "ai.js": "3417cd3ffa7dc5da1f56863f9e17699ff6ce063330707578be39c041e23eea0f",
+      "archive-ui.js": "c76aae4cb9b55da7262886dda230f6370c705484286a14516c36ce07fab7830b",
+      "audio.js": "6ddf6e388fa404394fee6220c2bfeeb3d1f9601c51a35ccdfe3181a8781942f7",
+      "combat.js": "b4e21fcdb6fdaaa93da07313131470de3e8a3c28b5650226a9c4a2713bde73a5",
+      "commerce-ui.js": "cc7fef5ab43176093251916aaafbdd873424da0630ec46fe6d3d5106a690b8d4",
+      "commerce.js": "e927e8f5433eaf84d320b2174020b12c979aedcbff91ec143c2da867030fae4d",
+      "construction.js": "d9b544b0328f26576ff90e02fe49c1b7f3798dfd844a8c39ee8dc6c0890debda",
+      "diplomacy.js": "730f7dffe7f20e4e59cf7d46c283f2869e191116852e9ccce9ba25e47d01498a",
+      "economic-ledger.js": "67d07f3ee4777cd7c246c8b37dda7cf1577cf86c19a6edeba68945a5d3063501",
+      "economy-ui.js": "49b9075876fd1017e27d8bd43b4ca17decdddcd7902c6ea4f682974590f1f6b0",
+      "economy.js": "72ad788d66a0e6616b3723476cf0738e406161f679945fc2e21f07b0585cb499",
+      "inbox.js": "e4ab3349b26f4db1addc1952d5a4e19f7a0db0987672b561986e1b974340807c",
+      "index.html": "b7e02c60e032b021e43c51b11efa0adec5202f8db98eb601a70346608b33c46c",
+      "main.js": "66f13381e8369cd1e78aef067930871d624a5841fa5eefcb32644e888a7a4542",
+      "manifest.json": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
+      "map.js": "d8ca27ee07c484b7399f95d8031aa70fb7539bcf89d768c8442200b7cba76ae3",
+      "news.js": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
+      "sw.js": "bc0e496e047dba48bfb189b0f4773be7f63dcefeeedfb3aea4387bc54bcabc41",
+      "ui.js": "11c27fa5bd38a637018f1aef39bfa405a45c383f1f456aebaa3770cd645b58b8"
+    }
+  }
+}

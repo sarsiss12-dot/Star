@@ -727,6 +727,7 @@ function grantResearchTech(e,id,source='research'){
   const state=researchState(e),b=TECHS[id].b;
   e.techs[id]=true;
   state.history[id]={source,year:G.year,month:G.month,day:G.day};
+  if(typeof aiPlanEvent==='function')aiPlanEvent(e,'research-completed',{tech:id,source});
   if(!e.ai && TECHS[id].origin){const b=techBenefits(id);say('Uzmanlaşma tamamlandı — '+TECHS[id].n+' · '+[...b.unlocks,...b.effects].join(' · '),'sci');}
   // A grant saves the work already invested, but never creates a second copy.
   if(state.bank[id]){e.rp[b]=(e.rp[b]||0)+state.bank[id];delete state.bank[id];}
@@ -895,6 +896,9 @@ function autoResearch(e, branch, plan){
       if(t.origin)s*=1.65;
       if(e.ai&&e.aiStrategy){
         const q=e.aiStrategy;
+        if(q.plan?.focus==='science'&&t.e.araMul)s*=1.25;
+        if(q.plan?.focus==='trade'&&(t.e.eneMul||t.e.dipMul))s*=1.20;
+        if(q.plan?.focus==='military'&&(t.e.alaMul||t.e.capFlat||t.e.upMul))s*=1.20;
         if(['war','defend'].includes(q.goal)&&(t.unlock||t.e.dmgMul||t.e.capFlat||t.e.alaMul))s*=1.25;
         if(q.needs?.includes('ene')&&t.e.eneMul)s*=1.8;
         if(q.needs?.includes('min')&&t.e.minMul)s*=1.8;
@@ -1035,6 +1039,7 @@ function queueShip(e, sys, cls, oto){
   for (const r in c) e.res[r] -= c[r];
   const days = shipProductionDays(e,cls);
   sys.queue.push({cls, e:e.id, left:days, tot:days, paid:{...c}});
+  if(typeof aiPlanEvent==='function')aiPlanEvent(e,'ship-paid',{system:sys.id,cls,paid:{...c}});
   return true;
 }
 // 93A.1: Kimlik üzerinden iptal; kuyruk indeksi üretim bitince başka işe kayabilir.
@@ -1133,6 +1138,7 @@ function queueBuilding(e, sys, pl, key){
   const gun = buildDays(e, key);
   col.q = col.q || [];
   col.q.push({key, left: gun, tot: gun, paid: odenen, s: sys.id, p: pl.i});
+  if(typeof aiPlanEvent==='function')aiPlanEvent(e,'building-paid',{system:sys.id,planet:pl.i,key,paid:{...odenen}});
   return true;
 }
 
@@ -1395,6 +1401,10 @@ function tributeTick(){
       const pay = Math.min(t.v, e.res[t.r] || 0);
       e.res[t.r] = (e.res[t.r] || 0) - pay;
       to.res[t.r] = (to.res[t.r] || 0) + pay;
+      if(pay>0&&pay>=t.v&&typeof rememberEvidence==='function'){
+        if(t.reliabilitySince===undefined)t.reliabilitySince=G.memAge||0;
+        if((G.memAge||0)-t.reliabilitySince>=6)rememberEvidence(to,e,'yukumluluk','tribute:'+e.id+':'+to.id+':'+t.r+':'+Math.floor(G.day/180),6);
+      }
     }
   }
 }

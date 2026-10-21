@@ -10,9 +10,10 @@ exports.isReviewedUI=source=>{
   if(end<dStart||hash(source.slice(dStart,end))!=='c2e034e3a4c57a29667a8c481102af88c3850fe2cdd49bc563ff8ec47e5e7d2c')return false;
   source=source.slice(0,dStart)+source.slice(end);
  }
+ // 96F: the reviewed report-close touch area is now 44px; every other byte remains pinned.
  const qaStart=source.indexOf('/* 96C.3: scoped attention and report views */');
  if(qaStart>=0){const marker='/* END 96C.3 UI */\n',end=source.indexOf(marker,qaStart)+marker.length;
-  if(end<qaStart||hash(source.slice(qaStart,end))!=='127959ef27ae7724474b481aaa54b23a5a367abd7343abae0355efaab7cbcc2b')return false;
+  if(end<qaStart||hash(source.slice(qaStart,end))!=='aca95e46f824db37abe88be5620950621db9c28d7e91cbea532771c34b1dbaf6')return false;
   source=source.slice(0,qaStart)+source.slice(end);
  }
  const economyStart=source.indexOf('/* 96B: scoped economy workspace */');

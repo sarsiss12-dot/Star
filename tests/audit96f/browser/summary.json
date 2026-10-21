@@ -1,0 +1,110 @@
+{
+  "browser": "133.0.6943.0",
+  "pass": 25,
+  "fail": 0,
+  "results": [
+    {
+      "name": "360x740 real pregame toggle and all four probability choices",
+      "status": "PASS"
+    },
+    {
+      "name": "740x360 real pregame toggle and all four probability choices",
+      "status": "PASS"
+    },
+    {
+      "name": "1280x720 real pregame toggle and all four probability choices",
+      "status": "PASS"
+    },
+    {
+      "name": "740x360 diplomacy invite actual click, inbox ballot, actual AI membership",
+      "status": "PASS"
+    },
+    {
+      "name": "1280x720 diplomacy invite actual click, inbox ballot, actual AI membership",
+      "status": "PASS"
+    },
+    {
+      "name": "solved federation founding path: enabled button creates real membership and charges once",
+      "status": "PASS"
+    },
+    {
+      "name": "mobile nonfounder application actual button and final inbox accept change membership",
+      "status": "PASS"
+    },
+    {
+      "name": "inbox reject actual click, duplicate prevention, expiry and reload",
+      "status": "PASS"
+    },
+    {
+      "name": "AI application presents player ballot; informational record has no decision bypass",
+      "status": "PASS"
+    },
+    {
+      "name": "founding action opens existing foundation screen with real requirements",
+      "status": "PASS"
+    },
+    {
+      "name": "real Canvas portraits and WebAudio smoke remain available",
+      "status": "PASS"
+    },
+    {
+      "name": "mobile genetic choices use shared budget, conflict and removal gates",
+      "status": "PASS"
+    },
+    {
+      "name": "mobile civic radical consumes both slots through real clicks",
+      "status": "PASS"
+    },
+    {
+      "name": "player devour actual confirmation updates resources and renders wreck without errors",
+      "status": "PASS"
+    },
+    {
+      "name": "stale destructive confirmation cannot act on restored save",
+      "status": "PASS"
+    },
+    {
+      "name": "640x360 actual battle report X touch, reopen, save and new report",
+      "status": "PASS"
+    },
+    {
+      "name": "740x360 actual battle report X touch, reopen, save and new report",
+      "status": "PASS"
+    },
+    {
+      "name": "portrait gameplay retains the existing rotate-to-landscape guidance",
+      "status": "PASS"
+    },
+    {
+      "name": "real Canvas habitat shapes at zoom 0.12 with labels independent",
+      "status": "PASS"
+    },
+    {
+      "name": "real Canvas habitat shapes at zoom 0.18 with labels independent",
+      "status": "PASS"
+    },
+    {
+      "name": "real Canvas habitat shapes at zoom 0.35 with labels independent",
+      "status": "PASS"
+    },
+    {
+      "name": "real Canvas habitat shapes at zoom 0.7 with labels independent",
+      "status": "PASS"
+    },
+    {
+      "name": "habitat observation and draw never expose hidden current colonization",
+      "status": "PASS"
+    },
+    {
+      "name": "existing diplomacy panel respects low and high strategic intelligence",
+      "status": "PASS"
+    },
+    {
+      "name": "96E.1 cached shell upgrades to96F, v8 save survives and new shell loads offline",
+      "status": "PASS"
+    }
+  ],
+  "pageErrors": [],
+  "physicalAndroid": "NOT RUN",
+  "subjectiveListening": "NOT RUN"
+}

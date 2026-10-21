@@ -1903,6 +1903,7 @@ const View = {
     this._drawStage = 'sistemler';
     // sistemler
     const showName = z > .22;
+    const habitatCells=new Set();this._habitatDraws=0;
     /* ═══════════════════════════════════════════════════════════
        FAZ 45 — SİYASİ HARİTA MODU (LOD)
        ÖLÇÜM: kamera 0.035'e açıldığında tüm sistemler kadraja
@@ -2097,6 +2098,10 @@ const View = {
       g.imageSmoothingEnabled = true;
       g.drawImage(spr, p.x-sz/2, p.y-sz/2, sz, sz);
       g.imageSmoothingEnabled = false;
+      if(z>=.12){const mask=playerHabitatMark(s),x=p.x+sr+5,y=p.y-sr-4;
+        const cell=Math.floor(x/18)+':'+Math.floor(y/18);
+        if(mask&&(!habitatCells.has(cell)||s===this.selSys)){habitatCells.add(cell);drawHabitatMarker(g,x,y,clamp(3+z,3,5),mask);this._habitatDraws++;}
+      }
 
       if (s.owner >= 0){
         g.strokeStyle = G.emps[s.owner].col; g.lineWidth = 1.4;
@@ -2171,13 +2176,6 @@ const View = {
           : 'rgba(214,228,246,.95)';
         g.fillText(s.name, tx, ty);
         g.textBaseline = 'alphabetic';
-        if (pSurv(s) && z > .42){
-          const hab = s.planets.filter(pl=>PLANETS[pl.t].k==='hab').length;
-          if (hab){
-            g.fillStyle = 'rgba(101,224,138,.85)'; g.font='8px ui-monospace,monospace';
-            g.fillText('◍'.repeat(Math.min(hab,4)), p.x, p.y + sr + 22);
-          }
-        }
       }
         } // admitted name label
       // sistem dayanıklılığı: savunma + koloni morali

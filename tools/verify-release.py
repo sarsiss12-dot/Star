@@ -21,7 +21,7 @@ def verify(root):
             errors.append('Değişmiş: ' + name)
     actual = {p.relative_to(root).as_posix() for p in root.rglob('*') if p.is_file()}
     extra = actual - set(expected) - {'RELEASE-MANIFEST.json'}
-    subset = manifest.get('scope') == 'github-runtime-and-phase96e1-changes'
+    subset = manifest.get('scope') in {'github-runtime-and-phase96e1-changes', 'github-runtime-and-phase96f-changes'}
     if not subset:
         errors.extend('Manifest dışı: ' + name for name in sorted(extra))
     for msg in errors:

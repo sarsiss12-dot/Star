@@ -73,6 +73,7 @@ const Commerce={
    if(!Number.isFinite(to.res[v.r])||to.res[v.r]+n>Number.MAX_SAFE_INTEGER){v.status='blocked';v.reason='Alıcı depo sayı sınırı';return false;}
    to.res[v.r]+=n;v.delivered+=n;this.add(v.e,'sent',v.r,n);this.add(v.to,'received',v.r,n);const s=this.stats(v.e);s.deliveries++;s.lastDay=G.day;
    if(c){c.delivered[v.r]=(c.delivered[v.r]||0)+n;c.lastDelivery=G.day;}
+   if(c&&n>0&&c.cycle>=2&&G.day-c.born>=180&&typeof rememberEvidence==='function')rememberEvidence(to,G.emps[v.e],'ticaretGuveni','freight:'+v.id,6);
    const e=G.emps[v.e];e.tradeFlow=e.tradeFlow||{};e.tradeFlow[v.to]=(e.tradeFlow[v.to]||0)+n;
   }else{v.lost+=n;this.add(v.e,'lost',v.r,n);this.add(v.e,'destroyed',v.r,n);if(c)c.lost[v.r]=(c.lost[v.r]||0)+n;}
   v.amount=0;v.status=status;v.reason=reason;v.finished=G.day;v.receipt=v.id;this.note(v,status);

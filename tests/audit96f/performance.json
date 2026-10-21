@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "exit": 0,
+  "seed": 404,
+  "scope": "Single child: canonical 96E.1 + 96F, two 120-month runs; peak RSS is combined process, not per-runtime isolated",
+  "elapsedSeconds": 28.611588426999788,
+  "peakRssKiB": 324152,
+  "userSeconds": 87.586909,
+  "systemSeconds": 1.4092289999999998,
+  "hostLoad": "Other regression tests may be running; wall-clock values are observations, not a benchmark"
+}

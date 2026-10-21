@@ -145,7 +145,7 @@ for(const f of fs.readdirSync(KOK).filter(x=>x.endsWith('.js'))){
 }
 {
   const mn=oku('main.js'), mp=oku('map.js'), sw=oku('sw.js');
-  ok("sw cache = 'stars-v96e1'", /const CACHE = 'stars-v96e1'/.test(sw));
+  ok("sw cache = 'stars-v96f'", /const CACHE = 'stars-v96f'/.test(sw));
   ok('sw KABUK/fetch/activate korundu', /KABUK/.test(sw) &&
      /addEventListener\('fetch'/.test(sw) && /addEventListener\('activate'/.test(sw));
   ok('kayıt sürümü v:8 KALDI', /v:8, cfg:G\.cfg/.test(mn));

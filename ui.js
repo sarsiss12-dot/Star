@@ -221,6 +221,7 @@ const UI = {
              title="Dost, düşman, tarafsız">🤝<span>Diplomatik</span></button>
            <button class="tool mapMode" id="mm_savas" data-a="mapMode" data-x="savas"
              title="Husumet ağı">🔥<span>Savaş</span></button>
+           <div class="mini" style="max-width:170px;white-space:normal" title="Yalnız taranmış son gözlem; uygunluk en az %35. Görünmeyen güncel durum bilinmez.">◇ Uygun boş dünya · ■ Yerleşilmiş uygun dünya</div>
            <div class="modeHdr" id="layerHdr">KATMANLAR (bağımsız)</div>
            <button class="tool${FED_LINKS_ON?' on':''}" id="fedLinksBtn" data-a="fedLinksToggle" aria-pressed="${FED_LINKS_ON}" title="Bilinen federasyon üyelikleri · altın kesik çizgi">⬡<span>Federasyonlar</span></button>
            <button class="tool${ALLY_LINKS_ON?' on':''}" id="allyLinksBtn" data-a="allyLinksToggle" aria-pressed="${ALLY_LINKS_ON}" title="Bilinen ittifaklar · yeşil kesik çizgi">↔<span>İttifaklar</span></button>
@@ -2153,6 +2154,7 @@ const UI = {
           Gövde dayanımı değişmez. Yakınına karakol ya da tersane kurmak
           hattı ileri taşır.</div>`;
     }
+    if(playerHabitatMark(s))h+=`<div class="mini">Harita: ◇ uygun boş dünya · ■ yerleşilmiş uygun dünya. Son taranmış gözlem; güncel görünmeyen durum değişebilir.</div>`;
     if (typeof battleReportForPlayer==='function'){
       const br=battleReportForPlayer(s);
       if (br && (br.active || G.dismissedBattleReports?.[s.id]!==battleReportViewKey(s))){
@@ -3369,6 +3371,7 @@ const UI = {
   diploIdentity(e,o){
     const lvl=intelOf(e,o.id),rel=Math.round(e.rel[o.id]||0);
     const P=lvl>=2?personaOf(o):null;
+    const strategic=typeof aiStrategicIntel==='function'?aiStrategicIntel(e,o):null;
     const f=findFed(o),knownFed=f&&knownFederationBond(e,f,o.id);
     const federation=knownFed?`<div class="mini"><canvas class="identityBadge" data-identity="federation" data-id="${f.id}" width="28" height="28"></canvas> ${esc(f.name)} · ${esc(fedType(f).n)}</div>`:'';
     return `<div class="dcIdentity">
@@ -3377,7 +3380,7 @@ const UI = {
         data-mood="${rel}"></canvas><div><b>${esc(o.name)}</b>
       <div class="mini">${sysCount(o)} sistem · ${INTEL_LEVELS[lvl].n}</div>
       <div class="mini">Filo gücü: ${powerLabel(e,o)}</div>
-      ${P?'<div class="mini">Mizaç: '+esc(P.n)+'</div>':''}${federation}</div></div>
+      ${P?'<div class="mini">Mizaç: '+esc(P.n)+'</div>':''}${federation}${strategic?`<div class="mini" title="${esc(strategic.confidence)}">${esc(strategic.text)}</div>`:''}</div></div>
       <div class="row"><span>İlişkin</span><b>${rel>0?'+':''}${rel}</b></div>`;
   },
   diploTreaties(e,o){
