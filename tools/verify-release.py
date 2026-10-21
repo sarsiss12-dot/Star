@@ -21,13 +21,17 @@ def verify(root):
             errors.append('Değişmiş: ' + name)
     actual = {p.relative_to(root).as_posix() for p in root.rglob('*') if p.is_file()}
     extra = actual - set(expected) - {'RELEASE-MANIFEST.json'}
-    errors.extend('Manifest dışı: ' + name for name in sorted(extra))
+    subset = manifest.get('scope') == 'github-runtime-and-phase96e1-changes'
+    if not subset:
+        errors.extend('Manifest dışı: ' + name for name in sorted(extra))
     for msg in errors:
         print(msg)
     if errors:
         print('BAŞARISIZ: paket kimliği eşleşmiyor.')
         return 1
     print(f"DOĞRULANDI: {len(expected)} dosya; oyun build {manifest['game_build']}.")
+    if subset:
+        print('KAPSAM: GitHub çalışma zamanı ve yayımlanan faz dosyaları; tarihsel arşivler kapsam dışıdır. Tam kanonik ZIP doğrulaması değildir.')
     print('Bu bütünlük kontrolüdür; oyun/Android testleri yeniden çalıştırılmadı.')
     return 0
 

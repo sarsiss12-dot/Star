@@ -1413,6 +1413,17 @@ const UI = {
         this.keepScroll = true; this.refresh();
         break;
       }
+      case 'devour': {
+        const [sid,pid]=String(x).split(':').map(Number),sys=G.sys[sid],pl=sys?.planets.find(p=>p.i===pid),q=canDevour(G.p,sys,pl);
+        if(!q.ok){say(q.why,'war');break;}
+        this.openModal(`<div class="mhd">GEZEGENİ TÜKET</div><div class="mbd"><b>${esc(pl.name)}</b><p>Gezegen kalıcı olarak yaşanamaz enkaza dönüşür. ${pl.col?'Koloni, nüfus ve yapılar kaybedilir; diplomatik bedeli vardır.':'Kaynak yatağı ve lüks kaynak kaybedilir.'}</p><p>Açlık 30 azalır; boyuta göre maden, alaşım ve enerji elde edilir.</p></div><div class="mft"><button class="ch" data-a="devourConfirm">Tüketmeyi onayla</button><button class="ch" data-a="closem">Vazgeç</button></div>`,'war');
+        this._devourPending={world:G.sys,actor:G.p,sys,pl};break;
+      }
+      case 'devourConfirm': {
+        const p=this._devourPending;this._devourPending=null;
+        if(!p||p.world!==G.sys||p.actor!==G.p){say('Kayıt veya seçim değişti; gezegeni yeniden aç','war');break;}
+        this.closeModal();const q=devourPlanet(G.p,p.sys,p.pl);if(!q.ok)say(q.why,'war');this.keepScroll=true;this.refresh();break;
+      }
       case 'throneBuild': {
         const sy = G.sys[+x];
         const r = (typeof rebuildThrone === 'function')
@@ -1885,7 +1896,7 @@ const UI = {
           `<div class="row"><span>${RES[r].n}</span><b style="color:#65e08a">+${v}/ay</b></div>`).join('') || '';
         const uses = Object.entries(B.u||{}).map(([r,v])=>
           `<div class="row"><span>${RES[r].n} tüketimi</span><b style="color:#ff5f6d">−${v}/ay</b></div>`).join('') || '';
-        const cost = Object.entries(B.c).map(([r,v])=>
+        const cost = Object.entries(buildingCost(G.p,x)).map(([r,v])=>
           `<div class="row"><span>${RES[r].n}</span><b>${v}</b></div>`).join('');
         const spec = B.sp === 'yard' ? 'Bu sistemde gemi inşasına izin verir. Her tersane bir gemi üzerinde paralel çalışır.'
                    : B.sp === 'def'  ? 'Sisteme +180 savunma gücü ekler (Kale Doktrini ile +%50).'
@@ -2243,6 +2254,7 @@ const UI = {
       const dep = pl.dep ? DEPOSITS.find(d=>d.id===pl.dep) : null;
       const mine = pl.owner === 0;
       h += `<div class="box">`;
+      if(hasCivic(e,'devourer')){const q=canDevour(e,s,pl);h+=`<button class="abtn dgr" data-a="devour" data-x="${s.id}:${pl.i}" ${q.ok?'':'disabled'}>🌟 Gezegeni Tüket</button><div class="mini">${esc(q.ok?'Kalıcı işlem; onay ekranında kayıpları incele.':q.why)}</div>`;}
       if(pl.col){
         const folded=folds.has(s.id+':'+pl.i),owner=territoryOwnerInfo(pl.owner);
         h+=`<button class="planetFoldHeader" data-a="planetFold" data-x="${s.id}:${pl.i}"
@@ -2482,14 +2494,14 @@ const UI = {
             const B = BUILDINGS[k], n = c.b[k]||0;
             const queued=colonyQueuedOf(c,k);
             const full = (B.tech&&!e.techs[B.tech]) || n+queued >= B.max || colonyUsed(c)+colonyQueued(c) >= colonySlots(c, e, pl);
-            const afford = Object.keys(B.c).every(r => e.res[r] >= B.c[r]);
+            const cost=buildingCost(e,k),afford=Object.keys(cost).every(r=>e.res[r]>=cost[r]);
             /* FAZ 62: 'i' butonu kaldırıldı — bilgi için binaya
                UZUN BAS (data-hold). Mobilde parmak yeri kazandırır
                ve yanlışlıkla bilgi açılması biter. */
             h += `<div class="bWrap" style="flex:1;min-width:66px">
               <button class="abtn ${full||!afford?'dis':''}" data-a="build" data-hold="${k}" data-x="${s.id}:${pl.i}:${k}" style="width:100%">` +
                  `<span class="buildingName">${B.tech&&!e.techs[B.tech]?'🔒 ':''}${B.n}</span><span class="buildingCount">${n}/${B.max}${queued?' · +'+queued+' sırada':''}</span><span style="font-size:9px">` +
-                 Object.entries(B.c).map(([r,v])=>`<span style="color:${e.res[r]>=v?RES[r].c:'#ff5f6d'}">${RES[r].ico}${v}</span>`).join(' ') +
+                 Object.entries(cost).map(([r,v])=>`<span style="color:${e.res[r]>=v?RES[r].c:'#ff5f6d'}">${RES[r].ico}${v}</span>`).join(' ') +
                  `</span></button>` +
                  /* FAZ 14: mevcut binayı yıkma tuşu */
                  (n > 0 ? `<button class="demX" data-a="demolish" data-x="${s.id}:${pl.i}:${k}"
@@ -5602,7 +5614,8 @@ const UI = {
     const pending={world:G.sys,player:G.p,id,key,signature:p.signature};this._warPreview=pending;
     this._hook('warFinalConfirm',()=>{
       if(this._warPreview!==pending||G.sys!==pending.world||G.p!==pending.player)return;
-      this._warPreview=null;const current=warDeclarationPreview(G.p,G.emps[id],key);
+      this._devourPending=null;
+    this._warPreview=null;const current=warDeclarationPreview(G.p,G.emps[id],key);
       if(current.signature!==pending.signature||!current.ok){this.warDeclarationPreview(id,key);say('Koşullar değişti; güncel önizlemeyi yeniden onayla.','war');return;}
       // Synchronous final validation precedes both declaration and goal payment.
       const actor=G.p,target=G.emps[id];
@@ -8449,7 +8462,7 @@ function renderSetup(){
     const spent       = traitCost(c.traits);
     const negS        = traitNegCount(c.traits);
     const negP        = traitNegGain(c.traits);
-    const gercekKalan = TRAIT_BUDGET + negP - spent;
+    const gercekKalan = TRAIT_BUDGET - spent;
 
     /* ═══ FAZ 77A: GENETİK ÖZELLİKLER BURAYA TAŞINDI ═══
        KRİTİK BULGU: bu blok SETUP_STEP === 'tur' içindeydi ve o
@@ -8469,7 +8482,7 @@ function renderSetup(){
       <div class="grid g2">`;
     for (const k in TRAITS){
       const t = TRAITS[k], on = c.traits.includes(k);
-      const chk = on ? {ok:true} : canPickTrait(c.traits, k);
+      const chk = on ? {ok:true} : canPickTrait(c.traits, k,c);
       const kilit = !on && !chk.ok;
       /* Etkileri sayıyla dök — hikâye değil, matematik */
       const etki = [];
@@ -8612,7 +8625,7 @@ function renderSetup(){
     h += `<div class="grid g2">`;
     for (const k in CIVICS){
       const cv = CIVICS[k], on = c.civics.includes(k);
-      const chk = on ? {ok:true} : canPickCivic(c.civics, k);
+      const chk = on ? {ok:true} : canPickCivic(c.civics, k,c);
       const kilit = !on && !chk.ok;
       /* Sayısal etkiler — hikâye değil matematik */
       const etki = [];
@@ -8848,13 +8861,8 @@ function setupClickHandler(e){
     safeRenderSetup();
   }
   else if (a === 'trait'){
-    const i = CFG.traits.indexOf(x);
-    if (i >= 0) CFG.traits.splice(i,1);
-    else {
-      if (CFG.traits.length >= 4) return;
-      if (traitCost(CFG.traits) + TRAITS[x].c > TRAIT_BUDGET) return;
-      CFG.traits.push(x);
-    }
+    const check=canPickTrait(CFG.traits,x,CFG);if(!check.ok){say(check.why,'war');return;}
+    const i=CFG.traits.indexOf(x);if(i>=0)CFG.traits.splice(i,1);else CFG.traits.push(x);
     safeRenderSetup();
   }
   else if (a === 'monoRes'){
@@ -8923,7 +8931,7 @@ function setupClickHandler(e){
       const [ax, valRaw] = x.split(':');
       if (!ETHICS[ax]) return;
       const val = parseInt(valRaw, 10);
-      if (!Number.isFinite(val)) return;
+      if (!Number.isInteger(val)||Math.abs(val)>ETHIC_MAX) return;
       if (!CFG.ethics || typeof CFG.ethics !== 'object') CFG.ethics = blankEthics();
       const cur = +CFG.ethics[ax] || 0;
       const other = ethicSpent() - Math.abs(cur);
@@ -8977,7 +8985,7 @@ function setupClickHandler(e){
       CFG.civics.splice(i, 1);
       if (x === 'tek_urun') delete CFG.monoRes;
     } else {
-      const chk = canPickCivic(CFG.civics, x);
+      const chk = canPickCivic(CFG.civics, x,CFG);
       if (!chk.ok){ say(chk.why, 'war'); return; }
       CFG.civics.push(x);
       if (x === 'tek_urun' && !CFG.monoRes) CFG.monoRes = 'min';

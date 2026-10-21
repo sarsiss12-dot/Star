@@ -145,7 +145,8 @@ const PLANETS = {
   tok :{n:'Toksik',     k:'olu', pal:['#151f0f','#31491a','#5f7d1f','#96b13a','#d9e588'], f:'lava'},
   gaz :{n:'Gaz Devi',   k:'gaz', pal:['#2a1c10','#6b4520','#ab7133','#d9a55c','#f6dfab'], f:'bands'},
   bzd :{n:'Buz Devi',   k:'gaz', pal:['#0e2130','#1d4a63','#2e7d9b','#63b1c9','#caf0f7'], f:'bands'},
-  ast :{n:'Asteroit Kuşağı',k:'ast', pal:['#1a1713','#3a332b','#5e5346','#857763','#b8aa94'], f:'belt'}
+  ast :{n:'Asteroit Kuşağı',k:'ast', pal:['#1a1713','#3a332b','#5e5346','#857763','#b8aa94'], f:'belt'},
+  enkaz:{n:'Tüketilmiş Enkaz',k:'olu',pal:['#231d18','#4a3d31','#786351','#a08872','#d0bba3'],f:'crater'}
 };
 const HAB_TYPES = Object.keys(PLANETS).filter(k=>PLANETS[k].k==='hab' && !PLANETS[k].rare);
 const DEAD_TYPES = ['cor','buz','vol','tok'];
@@ -468,14 +469,16 @@ function traitLabelFor(e, key){
   const makine = e && (typeof physioOf === 'function') &&
                  physioOf(e) && physioOf(e).makine;
   if (makine && key === 'growMul') return 'Montaj hızı';
-  if (makine && key === 'yiyMul')  return 'Enerji';
+  if (makine && key === 'yiyMul')  return 'Yiyecek (bu tür kullanmaz)';
   return TRAIT_LABEL[key] || key;
 }
 
 /* Seçilemez zıt çiftler — iki yönlü çalışır */
 function traitConflict(list, key){
-  const T = TRAITS[key];
+  const T = Object.hasOwn(TRAITS,key)&&TRAITS[key];
   if (!T) return null;
+  const opposite={verimli:['obur'],dayanikli:['kirilgan'],karizmatik:['itici'],tuccar:['savurgan'],hizli_ureyen:['yavas_ureyen','yavas_cogalan']};
+  for(const k of list)if(opposite[key]?.includes(k)||opposite[k]?.includes(key))return k;
   for (const k of list){
     if (T.zit && T.zit.includes(k)) return k;
     const O = TRAITS[k];
@@ -497,10 +500,11 @@ function traitNegCount(list){
 }
 
 /* Bir trait seçilebilir mi? Sebebiyle döner. */
-function canPickTrait(list, key){
-  const T = TRAITS[key];
+function canPickTrait(list, key, identity=null){
+  const T = Object.hasOwn(TRAITS,key)&&TRAITS[key];
   if (!T) return {ok:false, why:'Bilinmeyen özellik'};
-  if (list.includes(key)) return {ok:true, kaldir:true};
+  if (list.includes(key)) return traitCost(list.filter(k=>k!==key))<=TRAIT_BUDGET?{ok:true,kaldir:true}:{ok:false,why:'Önce bu olumsuz özellikten kazandığın puanları boşalt'};
+  if(identity&&!traitUseful(identity,key))return {ok:false,why:'Bu özellik türün veya doktrinin kullandığı mekaniklerle uyumlu değil'};
   if (list.length >= TRAIT_MAX)
     return {ok:false, why:'En fazla ' + TRAIT_MAX + ' özellik'};
   const cak = traitConflict(list, key);
@@ -511,7 +515,7 @@ function canPickTrait(list, key){
     if (traitNegGain(list) + (-T.c) > TRAIT_NEG_MAX)
       return {ok:false, why:'Olumsuz özellikler en çok +' + TRAIT_NEG_MAX + ' puan verir'};
   } else {
-    if (traitCost(list) + T.c > TRAIT_BUDGET + traitNegGain(list))
+    if (traitCost(list) + T.c > TRAIT_BUDGET)
       return {ok:false, why:'Puan yetmiyor'};
   }
   return {ok:true};
@@ -678,7 +682,7 @@ const CIVICS = {
 
   golge_kons :{n:'Gölge Konseyi', ico:'🏴', slot:1, flag:'shadow',
                e:{opCost:-.30},
-               d:'Casusluk ve anlaşma etki maliyeti −%30'},
+               d:'Casusluk ve anlaşma etki maliyeti −%30. Resmî savaş ilanı kapalıdır.'},
 
   lojistik_k :{n:'Lojistik Komiserliği', ico:'📦', slot:1, flag:'logistics',
                e:{upMul:-.15, capMul:.15},
@@ -716,7 +720,7 @@ const CIVICS = {
 
   yildiz_yiyen:{n:'Yıldız Yiyen Ekonomi', ico:'🌟', slot:2, sars:1, flag:'devourer',
                e:{},
-               d:'⚡ Gezegenleri tüketebilirsin — haritadan silinir, ' +
+               d:'⚡ Gezegenleri tüketebilirsin — yaşanamaz enkaza dönüşür, ' +
                  'karşılığında devasa kaynak verir.',
                bedel:'Maden istasyonların %40 verimle çalışır. Açlık sayacı ' +
                      'her yıl artar; gezegen yemezsen üretim ve ateş hızın çöker.'}
@@ -724,15 +728,56 @@ const CIVICS = {
 
 /* Yuva hesabı — radikal civic iki yuva birden kaplar */
 const CIVIC_SLOTS = 2;
+function normalizeNewEthics(raw,random=null){
+ const et=Object.fromEntries(Object.keys(ETHICS).map(k=>[k,clamp(Math.round(Number(raw?.[k])||0),-ETHIC_MAX,ETHIC_MAX)]));
+ while(Object.values(et).reduce((n,v)=>n+Math.abs(v),0)>ETHIC_BUDGET){
+  const axes=Object.keys(et).filter(k=>et[k]);const key=random?axes[Math.floor(random()*axes.length)]:axes.sort((a,b)=>Math.abs(et[b])-Math.abs(et[a])||a.localeCompare(b))[0];et[key]-=Math.sign(et[key]);
+ }return et;
+}
+function identityEatsFood(e){const bio=RACES[e?.race]?.bio,ph=physioOf(e);return bio!=='makine'&&bio!=='litoit'&&!['mineral','enerji'].includes(ph?.yiyer);}
+function traitUseful(e,id){if(['verimli','obur'].includes(id)&&!identityEatsFood(e))return false;return id!=='itici'||!isPurifier(e);}
+function normalizeNewTraits(raw,e){
+ const list=[],keys=[...new Set(Array.isArray(raw)?raw:[])].filter(k=>Object.hasOwn(TRAITS,k));
+ keys.sort((a,b)=>Number(TRAITS[a].c>=0)-Number(TRAITS[b].c>=0));
+ for(const key of keys)if(canPickTrait(list,key,e).ok)list.push(key);return list;
+}
+function normalizeNewCivics(raw,identity=null){const list=[];for(const key of Array.isArray(raw)?raw:[])if(!list.includes(key)&&canPickCivic(list,key,identity).ok)list.push(key);return list;}
+function combatIdentityMul(e){
+ return Math.max(.1,1+(e.mods.rofMul||0))*(typeof hungerMul==='function'?hungerMul(e):1)*(hasCivic(e,'blood')&&Object.values(e.war||{}).some(Boolean)?1.15:1);
+}
+function assignAIIdentities(cfg){
+ for(const e of G.emps){
+  if(!e.ai||e.wild||e.crisisSide)continue;
+  const random=mulberry32(identityHash('identity96e1:'+cfg.seed+':'+e.id)),base=RACES[e.race].eth||{};
+  const raw=Object.fromEntries(Object.keys(ETHICS).map(k=>[k,k==='ahl'?Math.floor(random()*7)-3:(base[k]||0)+Math.round((random()-.5)*2)]));
+  e.ethics=normalizeNewEthics(raw,random);delete e._pers;delete e._persAt;e._prof=null;personaOf(e);
+  // Weighted sampling without replacement; every candidate retains a chance.
+  const scores={war:.4+RACES[e.race].agr,sci:.5+Math.max(0,RACES[e.race].e.araMul||0)*2,
+   eco:.5+Math.max(0,RACES[e.race].e.minMul||0)+Math.max(0,RACES[e.race].e.eneMul||0),dip:.3+RACES[e.race].dip,
+   turtle:e.origin==='kapali'||e.origin==='kusatilmis'?1.3:.5,exp:.5+RACES[e.race].exp,spy:e.ethics.ahl<0?1.3:.4};
+  const pickWeighted=(keys,weight)=>{const values=keys.map(k=>Math.max(.05,weight(k))*(.7+random()*.6));let at=random()*values.reduce((a,b)=>a+b,0);for(let i=0;i<keys.length;i++){at-=values[i];if(at<=0)return keys[i];}return keys.at(-1);};
+  const civicFocus={burokrasi:'eco',gen_oncu:'exp',kale_dok:'turtle',sinyal_avci:'sci',maden_lonca:'eco',golge_kons:'spy',lojistik_k:'war',enkaz_muh:'war',panoptikon:'spy',kan_hukuku:'war',taht_gemi:'turtle',tek_urun:'eco',yildiz_yiyen:'eco'};
+  e.civics=[];const radical=random()<.22;
+  const pool=Object.keys(CIVICS).filter(k=>!!CIVICS[k].sars===radical&&!(k==='golge_kons'&&isPurifier(e)));
+  while(civicUsed(e.civics)<CIVIC_SLOTS){const eligible=pool.filter(k=>!e.civics.includes(k)&&canPickCivic(e.civics,k,e).ok);if(!eligible.length)break;e.civics.push(pickWeighted(eligible,k=>scores[civicFocus[k]]));}
+  if(hasCivic(e,'mono'))e.monoRes=pickWeighted(identityEatsFood(e)?['min','ene','yiy']:['min','ene'],k=>k==='min'?scores.eco:k==='ene'?scores.dip:.5);
+  const traitWeight=k=>{const m=TRAITS[k].e;return .5+(m.araMul||0)*scores.sci*4+(m.minMul||0)*scores.eco*4+(m.eneMul||0)*scores.eco*3+(m.dipMul||0)*scores.dip*2+((m.dmgMul||0)+(m.hullMul||0)+(m.rofMul||0))*scores.war*3+(m.growMul||0)*scores.exp*2;};
+  e.traits=[];
+  if(random()<.65){const neg=Object.keys(TRAITS).filter(k=>TRAITS[k].c<0&&traitUseful(e,k));e.traits.push(pickWeighted(neg,k=>1/Math.max(.2,traitWeight(k))));}
+  while(e.traits.length<TRAIT_MAX){const eligible=Object.keys(TRAITS).filter(k=>TRAITS[k].c>0&&!e.traits.includes(k)&&canPickTrait(e.traits,k,e).ok);if(!eligible.length)break;e.traits.push(pickWeighted(eligible,traitWeight));if(e.traits.length>=3&&random()<.25)break;}
+  e._prof=null;recalcMods(e);
+ }
+}
 function civicSlotCost(k){ return (CIVICS[k] && CIVICS[k].slot) || 1; }
 function civicUsed(list){ return list.reduce((a,k)=>a+civicSlotCost(k), 0); }
 function isRadical(k){ return civicSlotCost(k) >= 2; }
 
 /* Bu civic şu an seçilebilir mi? Sebebiyle döner. */
-function canPickCivic(list, key){
-  const C = CIVICS[key];
+function canPickCivic(list, key, identity=null){
+  const C = Object.hasOwn(CIVICS,key)&&CIVICS[key];
   if (!C) return {ok:false, why:'Bilinmeyen politika'};
   if (list.includes(key)) return {ok:true, kaldir:true};
+  if(identity&&key==='golge_kons'&&isPurifier(identity))return {ok:false,why:'Gölge Konseyi savaş ilanını kapatır; Arındırıcı doktriniyle uyumsuz'};
   /* Zaten radikal seçilmişse ikinci yuva kilitli */
   const varRadikal = list.some(k => isRadical(k));
   if (varRadikal)
@@ -954,10 +999,10 @@ function personaOf(e){
   /* ═══ FAZ 49: SAHTEKÂR EKSENİ MİZACA BAĞLANDI ═══
      Faz 48'de eklediğim dördüncü eksen AI davranışını hiç
      etkilemiyordu. Koyu sahtekâr (ahl ≤ −2) bir devlet gölgede
-     çalışmayı seçer: izolasyonist kabuğuna çekilir ve entrikayla
+     çalışmayı seçer: kriminal sendikaya yönelir ve entrikayla
      iş görür. Militarist/pasifist kilidi bozulmaz — o eksenler
      daha güçlü bir kimlik tanımı. */
-  else if ((et.ahl || 0) <= -2) k = 'izolasyonist';
+  else if ((et.ahl || 0) <= -2) k = 'kriminal'; // dishonest is not a purifier doctrine
   }
   e._pers = k; e._persAt = G.memAge;
   return PERSONAS[k];
@@ -994,7 +1039,7 @@ const PHYSIO = {
   aquatic:{
     n:'Okyanus Canlısı', ico:'🌊',
     d:'Suya bağımlı. Okyanus ve tundrada muhteşem, çölde ölümcül.',
-    art:'Okyanus/Tundra +%20 üretim ve moral · Çöl/Kurak −%35',
+    art:'Okyanus/Sulakalan/Tundra: +%20 üretim, +18 yaşanabilirlik · Çöl/Kurak: −35 yaşanabilirlik',
     e:{},
     habBonus:0, growMul:0, yiyer:'yiyecek',
     sever:['oky','sul','tun'], sevmez:['col','kur']
@@ -1002,7 +1047,7 @@ const PHYSIO = {
   avian:{
     n:'Kuş Benzeri', ico:'🪶',
     d:'Hafif kemikli, hızlı. Uzayda çevik, yüzeyde kırılgan.',
-    art:'Filo kaçınma +%10 · koloni kurma hızlı · kara savunması −%15',
+    art:'Filo kaçınma +%10 · koloni gemisi maliyeti −%15 · büyüme +%10 · kara savunması −%15',
     e:{spdMul:.10, colCost:-.15},
     habBonus:0, growMul:.10, yiyer:'yiyecek', evasion:.10, groundFrail:.15
   },
@@ -1071,7 +1116,7 @@ const RACES = {
     d:'Organik hata payını hesaplarlar. Fethettikleri her nüfusu devreye alır, kusurlarını siler.',
     col:'#8b7bff', ik:'makine', bio:'makine',
     e:{minMul:.30, alaMul:.20, stab:25, growMul:-.15, dipMul:-.80},
-    dip:.05, agr:.75, exp:.7, pers:'izolasyonist', eth:{mil:1, aut:2, mat:2}, ozel:'MAKİNE: yiyecek yerine ENERJİ tüketir. Her gezegende %60 yaşanabilirlik. Fethettiği nüfusu asimile eder.',
+    dip:.05, agr:.75, exp:.7, pers:'izolasyonist', eth:{mil:1, aut:2, mat:2}, ozel:'MAKİNE: yiyecek yerine ENERJİ tüketir. Temel yaşanabilirlik %60; fizyoloji ve özellik bonusları ayrıca uygulanır. Fethettiği nüfusu asimile eder.',
     win:'asimilasyon', winD:'40 nüfus birimini asimile et ve sistemlerin %45\'ini ele geçir.'
   },
   meclis:{
@@ -2093,7 +2138,7 @@ function recalcMods(e){
   const modSources=[];
   const add = (src,label='Diğer devlet etkileri') => { for (const k in src) if (k in m){ m[k] += src[k];if(src[k])modSources.push({key:k,value:src[k],label});} };
   add(RACES[e.race].e,'Tür: '+RACES[e.race].n);
-  (e.traits||[]).forEach(t => TRAITS[t] && add(TRAITS[t].e,'Özellik: '+TRAITS[t].n));
+  [...new Set(e.traits||[])].forEach(t => Object.hasOwn(TRAITS,t) && add(TRAITS[t].e,'Özellik: '+TRAITS[t].n));
   // etik eksenleri
   const et = e.ethics || {};
   for (const ax in ETHICS){
@@ -2104,7 +2149,7 @@ function recalcMods(e){
     for (const k in src) if (k in m) m[k] += src[k] * n;
   }
   // civic'ler
-  (e.civics||[]).forEach(c => CIVICS[c] && add(CIVICS[c].e,'Yönetim: '+CIVICS[c].n));
+  [...new Set(e.civics||[])].forEach(c => Object.hasOwn(CIVICS,c) && add(CIVICS[c].e,'Yönetim: '+CIVICS[c].n));
   // lüks mallar — tekel mantığı: her çeşit yalnız bir kez sayılır
   const lux = e.luxury || {};
   const cartel = hasCivic(e,'cartel');
@@ -2419,8 +2464,9 @@ function setupGame(cfg){
   if (cfg.color) pe.col = cfg.color;
   else if (G._palet && G._paletIx < G._palet.length) pe.col = G._palet[G._paletIx++];
   else pe.col = RACES[cfg.race].col;
-  pe.ethics = Object.assign({mil:0, aut:0, mat:0, ahl:0}, cfg.ethics || {});
-  pe.civics = (cfg.civics || []).slice(0, CIVIC_SLOTS);
+  pe.ethics = normalizeNewEthics(cfg.ethics);
+  pe.civics = normalizeNewCivics(cfg.civics,pe);
+  pe.traits = normalizeNewTraits(cfg.traits,pe);
   pe.origin = Object.hasOwn(ORIGINS,cfg.origin) ? cfg.origin : 'standart';
   pe.sigil  = cfg.sigil  || 'simetrik';
   pe.look   = Object.hasOwn(LOOKS,cfg.look) ? cfg.look : 'humanoid';
@@ -2461,10 +2507,13 @@ function setupGame(cfg){
         spent--;
       }
     }
-    const civPool = Object.keys(CIVICS).filter(c => !CIVICS[c].sars || rnd() < .35);
-    shuffle(rnd, civPool);
-    ai.civics = civPool.slice(0, CIVIC_SLOTS);
-    if (hasCivic(ai,'mono')) ai.monoRes = pick(rnd, ['min','ene','yiy']);  // FAZ 77B
+    // Keep the legacy galaxy RNG stream (including its conditional mono draw)
+    // so identity changes can be compared on the same seeded geography.
+    // No legacy combination is assigned: legal choices use a private stream.
+    const legacyCivicPool=Object.keys(CIVICS).filter(k=>!CIVICS[k].sars||rnd()<.35);
+    shuffle(rnd,legacyCivicPool);
+    if([legacyCivicPool[0],legacyCivicPool[1]].some(k=>CIVICS[k]?.flag==='mono'))pick(rnd,['min','ene','yiy']);
+    ai.civics=[];
     ai.sigil = pick(rnd, Object.keys(SIGILS));
     ai.look = R.bio === 'makine' ? 'makine' : R.bio === 'litoit' ? 'kristal'
               : pick(rnd, ['humanoid','bocek','surungen','amorf','kanatli','akuatik']);
@@ -2477,10 +2526,10 @@ function setupGame(cfg){
        biyolojiler karşımıza çıkar. */
     {
       const bio = RACES[ai.race] ? RACES[ai.race].bio : 'organik';
-      const havuz = (bio === 'litoit')
+      const havuz = ai.race==='suru'?['hive']:(bio === 'litoit')
         ? ['lithoid','lithoid','lithoid','humanoid','plantoid']
         : (bio === 'makine')
-        ? ['humanoid','humanoid','lithoid']
+        ? ['machine']
         : ['humanoid','lithoid','aquatic','avian','plantoid'];
       ai.physio = havuz[Math.floor(rnd() * havuz.length)];
       if (PHYSIO[ai.physio] && PHYSIO[ai.physio].e)
@@ -2503,12 +2552,15 @@ function setupGame(cfg){
      zaten bir devlet değil, haritada ayrı bir doku olmalı. */
   wild.col = '#7a8596';
   wild.wild = true;
-  wild.ethics = {mil:3, aut:0, mat:0};
+  wild.ethics = {mil:3, aut:0, mat:0, ahl:0};
   wild.civics = [];
   wild.look = 'amorf';
   recalcMods(wild);
   G.wildId = wild.id;
   G.emps.push(wild);
+
+  assignAIOrigins(cfg);
+  assignAIIdentities(cfg);
 
   // Konsey açıksa galakside en az bir pasifist devlet bulunsun
   if ((cfg.council || 'normal') !== 'kapali'){
@@ -2517,14 +2569,12 @@ function setupGame(cfg){
       const cand = G.emps.filter(x => !x.wild && x.ai && RACES[x.race].dip > .3);
       const pick2 = cand.length ? cand[0] : G.emps.find(x => !x.wild && x.ai);
       if (pick2){
-        pick2.ethics = {mil:-2, aut:-1, mat:0};
+        pick2.ethics = {mil:-2, aut:-1, mat:0,ahl:0};
         pick2.agr *= .5;
         recalcMods(pick2);
       }
     }
   }
-
-  assignAIOrigins(cfg);
 
   // ilişkiler
   for (const a of G.emps) for (const b of G.emps){
@@ -2976,7 +3026,7 @@ function fleetPower(f){
   const ldH = (typeof fleetLeaderMul === 'function') ? fleetLeaderMul(f, 'hullMul') : 0;
   for (const s of f.ships){
     const d = SHIPS[s.c];
-    p += d.dmg*(1+e.mods.dmgMul+ldD)*4 + d.hull*(1+e.mods.hullMul+ldH)*s.h*.5 +
+    p += d.dmg*(1+e.mods.dmgMul+ldD)*combatIdentityMul(e)*4 + d.hull*(1+e.mods.hullMul+ldH)*s.h*.5 +
          d.sh*(1+e.mods.shMul)*.6;
   }
   return Math.round(p);
@@ -3873,6 +3923,7 @@ function explorationContext(e){
   const q=[];
   for(const s of G.sys)if(s.owner===e.id)q.push([s.id,0]);
   for(const f of G.fleets)if(f.e===e.id&&f.sys>=0&&f.ships.length)q.push([f.sys,0]);
+  if(hasCivic(e,'panopt'))for(const s of G.sys)q.push([s.id,0]);
   const depth=new Map(),range=1+(e.mods.sensor|0);
   for(let i=0;i<q.length;i++){
     const [id,d]=q[i],s=G.sys[id];
@@ -4292,6 +4343,7 @@ function sideStats(e, fleets, enemy, band){
       n++;
     }
   }
+  dmg*=combatIdentityMul(e);
   return {dmg:Math.max(0,dmg), hull, sh:Math.max(0,sh), n, ready,
           supply:supShips ? supTotal/supShips : 1};
 }
@@ -5378,7 +5430,7 @@ function ensureCrisisEmpire(){
   c.col = '#c026d3';
   c.wild = true; c.crisisSide = true;
   c.look = 'amorf';
-  c.ethics = {mil:3, aut:3, mat:0};
+  c.ethics = {mil:3, aut:3, mat:0, ahl:0};
   c.civics = [];
   recalcMods(c);
   G.crisisId = c.id;
@@ -5755,8 +5807,8 @@ function applyTemplate(t){
   if (!Array.isArray(CFG.traits)) CFG.traits = [];
   if (!Array.isArray(CFG.civics)) CFG.civics = [];
   /* FAZ 61: eski sürümden kalan geçersiz anahtarları at */
-  CFG.traits = CFG.traits.filter(k => TRAITS[k]);
-  CFG.civics = CFG.civics.filter(k => CIVICS[k]);
+  CFG.traits = normalizeNewTraits(CFG.traits,CFG);
+  CFG.civics = normalizeNewCivics(CFG.civics,CFG);
   if (!RACES[CFG.race])     CFG.race = 'insan';
   if (!Object.hasOwn(LOOKS,CFG.look))     CFG.look = 'humanoid';
   CFG.portraitVariant=normalizePortraitVariant(CFG.portraitVariant);
@@ -7808,7 +7860,8 @@ function applySaveData(d){
      genişletilir — dünya asla kayda uydurulup küçültülmez ve
      koordinatlar yeniden üretilmez. */
   restoreWorldBounds(d);
-  G.emps = d.emps; G.fleets = d.fl; G.nextFleet = d.nf;
+  G.emps = d.emps;
+  for(const e of G.emps){e.ethics=e.ethics||{};if(!Number.isFinite(e.ethics.ahl))e.ethics.ahl=0;} G.fleets = d.fl; G.nextFleet = d.nf;
   G.p = G.emps[0];
   G._identityViewPrefs=d.viewPrefs;
   restoreShipments();
@@ -8196,7 +8249,7 @@ function forceRedraw(sebep){
    Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
    Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
 /* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */
-const BUILD_ID = '96e';
+const BUILD_ID = '96e1';
 const DIAG_MAX = 40;
 const DIAG = [];
 function logDiag(tur, mesaj){

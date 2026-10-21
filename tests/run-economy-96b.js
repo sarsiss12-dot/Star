@@ -1,0 +1,6 @@
+'use strict';
+const {spawn}=require('child_process'),path=require('path'),fs=require('fs');
+const out=path.resolve('tests/audit-96b/campaign');fs.mkdirSync(out,{recursive:true});
+const phases=(process.env.STARS_PHASES||'96a,96b').split(',');const jobs=[];for(const seed of [11,99,404])for(const phase of phases)jobs.push({seed,phase,root:phase==='96a'?(process.env.STARS_BASELINE_ROOT||path.resolve(__dirname,'../../baseline-96a')):path.resolve(__dirname,'..')});
+let index=0;const results=[];async function worker(){while(index<jobs.length){const job=jobs[index++];await new Promise(resolve=>{const file=path.join(out,job.phase+'-'+job.seed+'.json'),log=fs.createWriteStream(file.replace('.json','.log')),p=spawn(process.execPath,[path.join(__dirname,'measure-economy-96b.js'),job.root,String(job.seed),file],{stdio:['ignore','pipe','pipe']});p.stdout.pipe(log);p.stderr.pipe(log);const t=setTimeout(()=>p.kill('SIGKILL'),300000);p.on('close',(exit,signal)=>{clearTimeout(t);results.push({...job,exit,signal});console.log(job.phase+'/'+job.seed+': '+exit);resolve();});});}}
+(async()=>{await Promise.all([worker(),worker()]);fs.writeFileSync(path.join(out,'runs-'+phases.join('-')+'.json'),JSON.stringify(results,null,2));process.exitCode=results.some(r=>r.exit!==0)?1:0})();

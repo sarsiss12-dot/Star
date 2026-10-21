@@ -358,7 +358,7 @@ function empireIncome(e){
   if (typeof structBonus === 'function'){
     const sb = structBonus(e);
     e.structs = sb;
-    inc.min += sb.min; inc.ara += sb.ara;
+    inc.min += sb.min*(hasCivic(e,'minerguild')?1.20:1); inc.ara += sb.ara;
     inc.ene += sb.ene + sb.dyson * 45;
   }
   mark('Uzay yapıları ve Dyson üretimi');
@@ -534,7 +534,7 @@ function economyTick(init){
       const fg = focusMods(col);
       const hab = habOf(e, pl);
       col.cap = pl.hab ? 7 : Math.max(4, Math.round(pl.sz * hab/100 * 1.5) + 3);
-      const hive = RACES[e.race].win === 'kolonizasyon' && RACES[e.race].dip === 0;
+      const hive = !!physioOf(e).kovan || (RACES[e.race].win === 'kolonizasyon' && RACES[e.race].dip === 0);
       let target = 50 + hab*.25 + e.mods.stab + (e.home===sys.id?12:0) - (e.crisis?22:0);
       let pen = 0;
       if (e.shortage && !hasPerk(e,'faith')) pen += 26;   // Kutsal Düzen kıtlığa dayanır
@@ -1009,7 +1009,8 @@ function navyAsleep(e){
 // Existing jobs retain their paid duration; only new military jobs receive this bonus.
 function shipProductionDays(e,cls){
   const d=SHIPS[cls], military=d.rol==='sav';
-  const speed=1+(e.mods.buildMul||0)+(military?(e.mods.militaryBuildMul||0):0);
+  const blood=hasCivic(e,'blood')&&Object.values(e.war||{}).some(Boolean)?.25:0;
+  const speed=1+(e.mods.buildMul||0)+(military?(e.mods.militaryBuildMul||0)+(e.mods.shipSpeed||0)+blood:0);
   return Math.max(1,Math.round((d.sz*14+16)/Math.max(.1,speed)));
 }
 function queueShip(e, sys, cls, oto){
@@ -1115,17 +1116,19 @@ function buildDays(e, key){
   return clamp(Math.round(gun), 20, 360);
 }
 
+function buildingCost(e,key){const B=BUILDINGS[key],factor=key==='kale'&&hasCivic(e,'fortress')?.60:1;return Object.fromEntries(Object.entries(B?.c||{}).map(([k,v])=>[k,Math.round(v*factor)]));}
 function queueBuilding(e, sys, pl, key){
   const B = BUILDINGS[key], col = pl.col;
   if (!B || !col || pl.owner !== e.id || (B.tech&&!e.techs[B.tech])) return false;
   /* Kuyruktakiler de sayılır: aynı binadan max'ı aşacak sipariş verilemez */
   if ((col.b[key]||0) + colonyQueuedOf(col, key) >= B.max) return false;
   if (colonyUsed(col) + colonyQueued(col) >= colonySlots(col, e, pl)) return false;
-  for (const r in B.c) if (e.res[r] < B.c[r]) return false;
+  const cost=buildingCost(e,key);
+  for (const r in cost) if (e.res[r] < cost[r]) return false;
 
   /* Kaynak PEŞİN alınır — iptal edilirse birebir iade edilir */
   const odenen = {};
-  for (const r in B.c){ e.res[r] -= B.c[r]; odenen[r] = B.c[r]; }
+  for (const r in cost){ e.res[r] -= cost[r]; odenen[r] = cost[r]; }
 
   const gun = buildDays(e, key);
   col.q = col.q || [];
@@ -1358,6 +1361,9 @@ function doColonize(e, sys, pl){
   pl.col = {pop: (hasCivic(e,'seedPop') ? 7 : 3) + (hasPerk(e,'migration') ? 3 : 0), stab:50, grow:0,
             b:{maden:1, santral:1, ciftlik:1}, cap:8, name:pl.name, f:'sanayi', fcd:0,
             shield:0, garrison:0};
+  // Shared ordinary-colony acclimatization, including Learning Synapses.
+  const shockMonths=Math.max(0,Math.round(COL_SHOCK_MONTHS*(1+(e.mods.colShock||0))));
+  if(shockMonths>0){pl.col.shock=(G.memAge||0)+shockMonths;pl.col.shockTot=shockMonths;}
   if (sys.owner < 0) territoryOwnerSet(sys, e.id);
   e.colonies.push({s:sys.id, p:pl.i});
   recalcMods(e);
@@ -1449,20 +1455,8 @@ function garrisonOf(col, e, pl){
         G.council.laws.sinirGuv && typeof inCouncil === 'function' && inCouncil(e))
       g *= 1.20;
     if (e.mods && e.mods.dmgMul) g *= (1 + e.mods.dmgMul * .5);
-    /* ═══ FAZ 53: KARA SAVUNMASI FİZYOLOJİSİ ═══
-       ÖLÇÜM: bonuslar yalnız groundPower()'a (istila gücü)
-       bağlanmıştı; garnizon SAVUNMASI üç fizyolojide de aynı
-       19 çıkıyordu. Görev "istila/savunma" diyordu — savunma
-       yarısı eksikti.
-         Kayaç  → taş etli, +%20 zırh
-         Kuş    → hafif kemikli, −%15 kırılgan */
-    if (typeof physioOf === 'function'){
-      const ph = physioOf(e);
-      if (ph){
-        if (ph.groundArmor) g *= (1 + ph.groundArmor);
-        if (ph.groundFrail) g *= (1 - ph.groundFrail);
-      }
-    }
+    // Physiology is applied once above; do not square armor/frailty.
+
   }
   return Math.max(0, Math.round(g));
 }
@@ -3305,18 +3299,16 @@ const DEVOUR_MINE_EFF = .40;    // maden istasyonu verimi
 const HUNGER_PER_YEAR = 8;      // yıllık açlık artışı
 const HUNGER_MAX      = 100;
 
-function canDevour(e, sys, pl){
-  if (!hasCivic(e, 'devourer')) return {ok:false, why:'Bu doktrin sende yok'};
-  if (!pl) return {ok:false, why:'Gezegen yok'};
-  if (pl.devoured) return {ok:false, why:'Bu gezegen zaten tüketilmiş'};
-  if (pl.col && pl.owner !== e.id)
-    return {ok:false, why:'Başkasının kolonisi — önce işgal et'};
-  if (sys.owner >= 0 && sys.owner !== e.id && !e.war[sys.owner])
-    return {ok:false, why:'Yabancı toprakta tüketim savaş gerektirir'};
-  /* Yörüngede filo şart — yutacak bir şey lazım */
-  const filo = G.fleets.some(f => f.e === e.id && f.sys === sys.id && f.ships.length);
-  if (!filo) return {ok:false, why:'Sistemde filon yok'};
-  return {ok:true};
+function canDevour(e,sys,pl){
+ if(!e||G.emps[e.id]!==e||e.dead||!hasCivic(e,'devourer'))return {ok:false,why:'Yaşayan Yıldız Yiyen devleti gerekli'};
+ if(!sys||G.sys[sys.id]!==sys||!pl||!sys.planets.includes(pl))return {ok:false,why:'Geçerli sistem ve gezegen gerekli'};
+ if(pl.devoured!==undefined||pl.shattered||pl.t==='enkaz')return {ok:false,why:'Gezegen zaten yok edilmiş'};
+ if(pl.col&&pl.owner!==e.id)return {ok:false,why:'Başkasının kolonisi — önce işgal et'};
+ if(pl.col&&(sys.id===e.home||e.colonies.filter(c=>G.sys[c.s]?.planets[c.p]?.col&&G.sys[c.s].planets[c.p].owner===e.id).length<=1))return {ok:false,why:'Anavatan veya son koloni tüketilemez'};
+ if(sys.owner>=0&&sys.owner!==e.id&&!e.war[sys.owner])return {ok:false,why:'Yabancı toprakta tüketim savaş gerektirir'};
+ if(sys.ruin||sys.nest||G.fleets.some(f=>f.sys===sys.id&&!f.mv&&f.e!==e.id&&f.ships.length&&isArmed(f)&&hostile(e.id,f.e)))return {ok:false,why:'Önce sistemdeki askerî tehdidi temizle'};
+ if(!G.fleets.some(f=>f.e===e.id&&f.sys===sys.id&&!f.mv&&!f.combat&&!f.retreating&&f.ships.length))return {ok:false,why:'Yörüngede hazır filo gerekli'};
+ return {ok:true};
 }
 
 function devourPlanet(e, sys, pl){
@@ -3324,7 +3316,7 @@ function devourPlanet(e, sys, pl){
   if (!chk.ok) return chk;
 
   /* Verim: gezegen boyutu ve türü belirler */
-  const boy = pl.size || 10;
+  const boy = Math.max(1,Number(pl.sz)||Number(pl.size)||10);
   const kazanc = {
     min: Math.round(boy * 140 + rnd() * 400),
     ala: Math.round(boy * 55  + rnd() * 160),
@@ -3353,7 +3345,8 @@ function devourPlanet(e, sys, pl){
 
   for (const r in kazanc) e.res[r] = (e.res[r] || 0) + kazanc[r];
   pl.devoured = true;
-  pl.t = 'enkaz';
+  pl.t = 'enkaz';delete pl.dep;delete pl.lux;delete pl.hab;
+  e._trAt=-1;e._prof=null;recalcMods(e);
   e.hunger = Math.max(0, (e.hunger || 0) - 30);   // açlık diner
 
   if (!e.ai && typeof UI !== 'undefined')

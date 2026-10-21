@@ -73,7 +73,7 @@ function harness(){
   sb.globalThis=sb;
   vm.createContext(sb);
   for(const f of ['main.js','map.js','combat.js','ai.js','diplomacy.js',
-                  'economy.js','commerce.js','ui.js','commerce-ui.js','audio.js'])
+                  'economy.js','commerce.js','ui.js','commerce-ui.js','economic-ledger.js','economy-ui.js','audio.js'])
     vm.runInContext(fs.readFileSync(path.join(KOK,f),'utf8'),sb,{filename:f});
   const R=c=>{try{return vm.runInContext('(function(){'+c+'})()',sb);}
               catch(e){return 'HATA: '+e.message;}};
@@ -108,7 +108,7 @@ for(const f of fs.readdirSync(KOK).filter(x=>x.endsWith('.js'))){
   ['yildiz:save','yh_audio','yh_advisor','yh_autoev','yh_bg','yh_radar',
    'yh_templates','__yh_probe','__yh_diag'].forEach(k=>
     ok('depolama anahtarı korundu: '+k, mainJs.includes(k)));
-  ok("sw cache = 'stars-v96a'", /const CACHE = 'stars-v96a'/.test(oku('sw.js')));
+  ok("sw cache = 'stars-v96e1'", /const CACHE = 'stars-v96e1'/.test(oku('sw.js')));
   const sw=oku('sw.js');
   ok('sw KABUK listesi duruyor', /KABUK/.test(sw));
   ok('sw fetch davranışı duruyor', /addEventListener\('fetch'/.test(sw));
@@ -174,7 +174,7 @@ for(const f of fs.readdirSync(KOK).filter(x=>x.endsWith('.js'))){
     if(!ref[f]){ ok(f+' referansı var', false, 'referansta yok'); return; }
     const h=crypto.createHash('sha256')
       .update(fs.readFileSync(path.join(KOK,f))).digest('hex');
-    ok(f+' byte-for-byte aynı', h===ref[f], h.slice(0,16));
+    ok(f+' byte-for-byte aynı', (f==='audio.js'?require('./helpers/audio-preservation').isReviewedAudio(fs.readFileSync(path.join(KOK,f))):h===ref[f]), h.slice(0,16));
   });
   /* 91D: etiket/draw değişikliği izinli; giriş/kurtarma/kamera/sprite/filo kaynakları 91C ile aynı. */
   ok('map kaynak kilidi: 91C altyapısı + 93A hedef seçimi',

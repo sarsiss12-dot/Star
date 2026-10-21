@@ -1,0 +1,43 @@
+{
+  "phase": "96E.1",
+  "unitSuites": 114,
+  "unitNamedChecksPass": 5690,
+  "unitFail": 0,
+  "unitSkipped": [],
+  "browserChecksPass": 16,
+  "browserFail": 0,
+  "browserVersion": "133.0.6943.0",
+  "browserPageErrors": [],
+  "currentNamedChecksTotal": 5706,
+  "campaignSeeds": [
+    11,
+    99,
+    404
+  ],
+  "campaignMonthsPerRun": 120,
+  "comparisonPairs": 3,
+  "extraPerformancePairSeed": 404,
+  "physicalAndroid": "BLOCKED: real device unavailable; raw browser runner marks NOT RUN",
+  "subjectiveMusicListening": "NOT RUN",
+  "isolatedMemoryLeakProfile": "NOT RUN",
+  "runtimeSha256": {
+    "ui.js": "4e145c060f4b4df8486ad2c6820a1df3c6f08c7af822fe246e62c1b1ff4dea9e",
+    "main.js": "af3b6b7220536b4a0742697b0f37c771362aa2037f693916f65041c8915e47b2",
+    "economy.js": "1136c9b63b48904444657ff1642422c485944f53907ee7eda23f66405ce679b9",
+    "commerce-ui.js": "cc7fef5ab43176093251916aaafbdd873424da0630ec46fe6d3d5106a690b8d4",
+    "combat.js": "b4e21fcdb6fdaaa93da07313131470de3e8a3c28b5650226a9c4a2713bde73a5",
+    "ai.js": "17f4ae5f3e2a7c7eee15dd96ee89d88bf918f81105cd8ae8d4c98aee7cf9a29a",
+    "economy-ui.js": "49b9075876fd1017e27d8bd43b4ca17decdddcd7902c6ea4f682974590f1f6b0",
+    "construction.js": "d9b544b0328f26576ff90e02fe49c1b7f3798dfd844a8c39ee8dc6c0890debda",
+    "diplomacy.js": "d18a482915643310fb3ca3baf3a38c0d8b628010251749c800fbe95c6f4a39b9",
+    "sw.js": "2b37e63530e5d88a6e43fec12aeaab3fdc38cc87451c3dea049373b815a159c6",
+    "news.js": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
+    "audio.js": "6ddf6e388fa404394fee6220c2bfeeb3d1f9601c51a35ccdfe3181a8781942f7",
+    "map.js": "65b4d4e74c22418d1f7443c4a44e846017ffdfa625f0a95b712cc070db203ef0",
+    "economic-ledger.js": "67d07f3ee4777cd7c246c8b37dda7cf1577cf86c19a6edeba68945a5d3063501",
+    "commerce.js": "48602d277b1eb70eb0c0ef0509159421ffbd5da65f1e2e2e2ad32ba1275cf800",
+    "archive-ui.js": "c76aae4cb9b55da7262886dda230f6370c705484286a14516c36ce07fab7830b",
+    "inbox.js": "e4ab3349b26f4db1addc1952d5a4e19f7a0db0987672b561986e1b974340807c"
+  },
+  "verifiedAtUtc": "2026-10-21T17:43:40.100836+00:00"
+}

@@ -1,0 +1,4 @@
+'use strict';
+const {spawnSync}=require('child_process'),fs=require('fs'),path=require('path');const root=path.resolve(__dirname,'..'),out=path.join(__dirname,'audit-rebuild96c2'),results=[];
+for(const phase of ['95e2','95e3','96a','96b','96c','96c1','96c2']){const folder=path.join(out,'browser-final-'+phase);const r=spawnSync(process.execPath,[path.join(__dirname,'browser-'+phase+'.js')],{cwd:root,env:{...process.env,STARS_BROWSER_OUTPUT:folder},encoding:'utf8',timeout:180000,maxBuffer:8e6});fs.writeFileSync(folder+'.log',(r.stdout||'')+(r.stderr||''));const summary=fs.existsSync(path.join(folder,'summary.json'))?JSON.parse(fs.readFileSync(path.join(folder,'summary.json'))):null;results.push({phase,exit:r.status,summary});console.log(phase+': '+r.status);}
+fs.writeFileSync(path.join(out,'browser-summary.json'),JSON.stringify({physicalAndroid:false,results},null,2));process.exitCode=results.some(r=>r.exit!==0)?1:0;

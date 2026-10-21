@@ -74,7 +74,7 @@ function harness(){
   sb.globalThis=sb;
   vm.createContext(sb);
   for(const f of ['main.js','map.js','combat.js','ai.js','diplomacy.js',
-                  'economy.js','commerce.js','ui.js','commerce-ui.js','audio.js'])
+                  'economy.js','commerce.js','ui.js','commerce-ui.js','economic-ledger.js','economy-ui.js','audio.js'])
     vm.runInContext(fs.readFileSync(path.join(KOK,f),'utf8'),sb,{filename:f});
   const R=c=>{try{return vm.runInContext('(function(){'+c+'})()',sb);}
               catch(e){return 'HATA: '+e.message;}};
@@ -102,7 +102,7 @@ for(const f of fs.readdirSync(KOK).filter(x=>x.endsWith('.js'))){
 }
 {
   const ai=oku('ai.js'), mn=oku('main.js');
-  ok("sw cache = 'stars-v96a'", /const CACHE = 'stars-v96a'/.test(oku('sw.js')));
+  ok("sw cache = 'stars-v96e1'", /const CACHE = 'stars-v96e1'/.test(oku('sw.js')));
   const sw=oku('sw.js');
   ok('sw KABUK/fetch/activate korundu', /KABUK/.test(sw) &&
      /addEventListener\('fetch'/.test(sw) && /addEventListener\('activate'/.test(sw));
@@ -152,7 +152,7 @@ for(const f of fs.readdirSync(KOK).filter(x=>x.endsWith('.js'))){
       require('./helpers/map-preservation').isMapInfrastructurePreserved(oku(f)));return;}
     if(!ref||!ref[f]){ ok(f+' referansı var', false); return; }
     const h=crypto.createHash('sha256').update(fs.readFileSync(path.join(KOK,f))).digest('hex');
-    ok(f+' byte-for-byte aynı', h===ref[f], h.slice(0,16));
+    ok(f+' byte-for-byte aynı', (f==='audio.js'?require('./helpers/audio-preservation').isReviewedAudio(fs.readFileSync(path.join(KOK,f))):h===ref[f]), h.slice(0,16));
   });
 }
 

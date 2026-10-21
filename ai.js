@@ -724,6 +724,14 @@ function aiProfile(e){
    altin_cag:{sci:.10,turtle:.12,eco:.10},golgeden:{dip:-.08,sci:.10},
    gocebe:{exp:.25,eco:.15,sci:.08}}[e.origin];
   if(bias)for(const [key,value]of Object.entries(bias))p[key]=clamp(p[key]+value,0,key==='turtle'?1:1.4);
+  // Identity changes planner preferences, never the paid production multipliers.
+  const mods=e.mods||{},ph=physioOf(e);
+  p.war=clamp(p.war+(mods.dmgMul||0)*.18+(mods.rofMul||0)*.15-(mods.warTuk||0)*.25,0,1.4);
+  p.sci=clamp(p.sci+(mods.araMul||0)*.35,0,1.4);
+  p.eco=clamp(p.eco+((mods.minMul||0)+(mods.eneMul||0))*.20+(hasCivic(e,'logistics')?.08:0),0,1.4);
+  p.dip=clamp(p.dip+(mods.dipMul||0)*.18+(et.ahl||0)*.025,0,1.4);
+  p.turtle=clamp(p.turtle+(mods.hullMul||0)*.18+(ph.groundArmor||0)*.3+(mods.warTuk||0)*.2,0,1);
+  p.spy=clamp(.25+(hasCivic(e,'shadow')?.5:0)+Math.max(0,-(et.ahl||0))*.12-Math.max(0,mods.opCost||0)*.3,0,1.4);
   e._prof = p;
   return p;
 }
@@ -1054,11 +1062,36 @@ function aiColossusProduction(e,yard,prof){
     
 }
 
+function aiCivicActions(e){
+ if(!e||!e.ai||e.dead||e.wild||e.crisisSide)return false;
+ if(hasCivic(e,'throneship')){
+  const throne=throneShipOf(e);
+  if(!throne){const yard=G.sys.find(s=>canRebuildThrone(e,s).ok);if(yard){const q=rebuildThrone(e,yard);if(q.ok){e.aiCivicAction={kind:'throne-rebuild',day:G.day,system:yard.id};return true;}}}
+ }
+ if(!hasCivic(e,'devourer')||(e.hunger||0)<8||(e._devourAfter||0)>G.day)return false;
+ e._devourAfter=G.day+180;
+ const targets=[];
+ for(const s of G.sys){if(s.owner!==e.id||!aiKnownSystem(e,s)||aiObservedThreat(e,s.id)>0)continue;
+  for(const pl of s.planets){if(pl.col||pl.owner>=0||pl.devoured!==undefined||pl.shattered||pl.t==='enkaz'||pl.lux)continue;
+   // Keep future colonies and assigned colony targets; consume barren worlds.
+   if(PLANETS[pl.t]?.k==='hab'&&habOf(e,pl)>=35)continue;
+   if(G.fleets.some(f=>f.e===e.id&&f.ord?.t==='kol'&&f.ord.s===s.id&&f.ord.p===pl.i))continue;
+   targets.push({s,pl,ready:canDevour(e,s,pl).ok});
+  }
+ }
+ targets.sort((a,b)=>Number(b.ready)-Number(a.ready)||(b.pl.sz||10)-(a.pl.sz||10)||a.s.id-b.s.id||a.pl.i-b.pl.i);
+ const target=targets.find(t=>t.ready);
+ if(target){const q=devourPlanet(e,target.s,target.pl);if(q.ok){e.aiCivicAction={kind:'devour',day:G.day,system:target.s.id,planet:target.pl.i,gain:q.kazanc};return true;}}
+ if((e.hunger||0)>=20){const fleet=G.fleets.find(f=>f.e===e.id&&isArmed(f)&&!f.mv&&!f.combat&&!f.path.length&&!f.guardLocked&&!jointReserved(f)&&!hasShipment(f)&&!f.ships.some(s=>s.throne));
+  if(fleet)for(const t of targets.slice(0,3))if(aiMove(e,fleet,t.s.id)){e.aiCivicAction={kind:'devour-route',day:G.day,system:t.s.id};return true;}
+ }
+ return false;
+}
 function aiTurn(e){
   if (e.dead) return;
   if (e.crisisSide){ crisisFleetTurn(e); return; }
   if (e.wild){ wildTurn(e); return; }
-  aiObserve(e);aiUpdateStrategy(e);
+  aiObserve(e);aiCivicActions(e);aiUpdateStrategy(e);
   const race = RACES[e.race];
   const prof = aiProfile(e);
   const my = G.sys.filter(s => s.owner === e.id);
@@ -1133,7 +1166,7 @@ function aiTurn(e){
     else need.push(rnd() < .35 + prof.sci*.40 ? 'lab' : 'maden');
     if (prof.war > .8 && e.inc.ala < 12) need.push('dokum');
     if (!hasYard(sys) && e.colonies.length > 1 && rnd()<.35) need.unshift('tersane');
-    if (atWarNow && threatAt(e, sys.id) > 0 && rnd() < .5 + prof.turtle*.4) need.unshift('kale');
+    if ((atWarNow||prof.turtle>.55) && threatAt(e, sys.id) > 0 && rnd() < .5 + prof.turtle*.4) need.unshift('kale');
     /* FAZ 13: kuyruk dolu değilse sipariş ver.
        Kontrol artık KUYRUKTAKİLERİ de sayıyor — aksi hâlde AI aynı
        binayı defalarca sıraya alıp kaynağını kilitliyordu. Ayrıca
@@ -2454,7 +2487,8 @@ function aiPickStruct(e, sys, plan=aiEconomyPlan(e)){
   if(plan.rows.min.urgency>2)oncelik.push('maden_ist');
   if((e.inc.ara||0)<30)oncelik.push('bilim_ist');
   const border=sys.lanes.some(id=>{const r=aiKnownSystem(e,G.sys[id]);return r&&r.owner>=0&&r.owner!==e.id&&(e.war[r.owner]||(e.rel[r.owner]||0)<-40);});
-  if(prof.war>.7&&border)oncelik.push('platform');
+  if((prof.war>.7||prof.turtle>.55)&&border)oncelik.push('platform');
+  if(prof.turtle>.55&&aiObservedThreat(e,sys.id)>0&&!plan.critical)oncelik.unshift('platform','kale_u');
   if(!G.sys.some(s=>s.owner===e.id&&hasYard(s)))oncelik.push('tersane_h');
   if((e.trade?.links||[]).some(l=>!l.bl&&l.path?.includes(sys.id)))oncelik.push('tic_ist');
   oncelik.push('maden_ist','bilim_ist');
@@ -2769,7 +2803,7 @@ function aiPickOp(e, o){
   const benimTek = Object.keys(e.techs || {}).length;
   const onunTek  = Object.keys(aiKnownTechs(e,o)).length;
   if (onunTek > benimTek + 2) ekle('calTech', 1.2 + (onunTek - benimTek) * .05);
-  ekle('calTech', prof.sci * .5);
+  ekle('calTech', prof.sci * .5+(prof.spy||0)*.20);
 
   /* Fakirsem hazine baskını */
   const resources=aiKnownResources(e,o);

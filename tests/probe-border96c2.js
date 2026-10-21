@@ -1,0 +1,1 @@
+const {strategyWorld}=require('./helpers/96c2-fixture');const h=strategyWorld();h.run('a.war[b.id]=b.war[a.id]=true;foe.sys=1;foe.x=G.sys[1].x;aiObserve(a);var visible=aiView(a).ctx.visible.has(1);aiMilitaryCampaign(a,[f],[G.sys[0]],[b]);');console.log(JSON.stringify({visible:h.run('visible'),capital:h.run('a.home'),path:h.run('f.path'),campaign:h.run('a.aiCampaign')}));

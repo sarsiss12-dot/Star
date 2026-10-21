@@ -149,7 +149,7 @@ for (const d of kabukDosyalar){
 /* Yükleme sırası korunmuş mu? */
 const sira = (html.match(/<script src="([^"]+\.js)"><\/script>/g) || [])
   .map(x => x.replace(/.*src="/, '').replace(/".*/, ''));
-const beklenenSira = ['main.js','map.js','combat.js','ai.js','diplomacy.js','economy.js','commerce.js','news.js','inbox.js','construction.js','ui.js','archive-ui.js','commerce-ui.js','audio.js'];
+const beklenenSira = ['main.js','map.js','combat.js','ai.js','diplomacy.js','economy.js','commerce.js','news.js','inbox.js','construction.js','ui.js','archive-ui.js','commerce-ui.js','economic-ledger.js','economy-ui.js','audio.js'];
 ok('script yükleme sırası korundu',
    beklenenSira.every((f, i) => sira[i] === f), sira.join(' → '));
 
@@ -181,7 +181,7 @@ for (const f of Object.keys(REFERANS)){
   // 91D: etiket çizimi bu fazda değişti; altyapı hash'leri kaynak 91C'den.
   if(f==='map.js'){ok('map altyapısı sabit; hedef seçimi 93A referansında',
     require('./helpers/map-preservation').isMapInfrastructurePreserved(oku(f)));continue;}
-  if (ref && ref[f]) ok(f + ' byte-for-byte aynı', sha(f) === ref[f],
+  if (ref && ref[f]) ok(f + ' byte-for-byte aynı', (f==='audio.js'?require('./helpers/audio-preservation').isReviewedAudio(fs.readFileSync(path.join(KOK,f))):sha(f) === ref[f]),
                         sha(f).slice(0,16));
   else ok(f + ' mevcut ve marka değişikliği içermiyor',
           varMi(f) && !/download\s*=\s*'stars-/.test(oku(f)));

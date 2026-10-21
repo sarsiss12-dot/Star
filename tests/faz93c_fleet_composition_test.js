@@ -63,7 +63,7 @@ test('locked legacy queue jobs do not occupy active slots',()=>{
  const h=setup();h.run('queueShip(E,Y,"muh");delete E.techs.m_muhrip;tpl({kor:2});var r=reinforceFleet(E,A)');eq(h.run('r.orders[0].wait'),0);
 });
 test('build speed and hull size match production duration',()=>{
- const h=setup();h.run('E.mods.buildMul=.5;tpl({kor:1,kru:1});var r=reinforceFleet(E,A)');eq(h.run('r.orders[0].build'),h.run('Y.queue[0].tot'));eq(h.run('r.orders[0].build'),39);
+ const h=setup();h.run('E.mods.buildMul=.5;E.mods.shipSpeed=0;E.mods.militaryBuildMul=0;tpl({kor:1,kru:1});var r=reinforceFleet(E,A)');eq(h.run('r.orders[0].build'),h.run('Y.queue[0].tot'));eq(h.run('r.orders[0].build'),39);
 });
 test('sabotaged yards excluded without charge',()=>{
  const h=setup();h.run('Y.yardLock=99999;tpl({kor:2});var res=JSON.stringify(E.res),r=reinforceFleet(E,A)');eq(h.run('r.ok'),false);eq(h.run('JSON.stringify(E.res)===res'));

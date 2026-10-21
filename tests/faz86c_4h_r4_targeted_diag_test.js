@@ -74,7 +74,7 @@ function harness(){
   sb.globalThis=sb;
   vm.createContext(sb);
   for(const f of ['main.js','map.js','combat.js','ai.js','diplomacy.js',
-                  'economy.js','commerce.js','ui.js','commerce-ui.js','audio.js'])
+                  'economy.js','commerce.js','ui.js','commerce-ui.js','economic-ledger.js','economy-ui.js','audio.js'])
     vm.runInContext(fs.readFileSync(path.join(KOK,f),'utf8'),sb,{filename:f});
   const R=c=>{try{return vm.runInContext('(function(){'+c+'})()',sb);}
               catch(e){return 'HATA: '+e.message;}};
@@ -145,7 +145,7 @@ for(const f of fs.readdirSync(KOK).filter(x=>x.endsWith('.js'))){
 }
 {
   const mn=oku('main.js'), mp=oku('map.js'), ui=oku('ui.js'), sw=oku('sw.js');
-  ok("sw cache = 'stars-v96a'", /const CACHE = 'stars-v96a'/.test(sw));
+  ok("sw cache = 'stars-v96e1'", /const CACHE = 'stars-v96e1'/.test(sw));
   ok('sw KABUK/fetch/activate korundu', /KABUK/.test(sw) &&
      /addEventListener\('fetch'/.test(sw) && /addEventListener\('activate'/.test(sw));
   ok('kayıt sürümü v:8 KALDI', /v:8, cfg:G\.cfg/.test(mn));
@@ -200,7 +200,7 @@ for(const f of fs.readdirSync(KOK).filter(x=>x.endsWith('.js'))){
       require('./helpers/map-preservation').isMapInfrastructurePreserved(oku(f)));return;}
     if(!ref||!ref[f]){ ok(f+' referansı var', false); return; }
     const h=crypto.createHash('sha256').update(fs.readFileSync(path.join(KOK,f))).digest('hex');
-    ok(f+' byte-for-byte aynı', h===ref[f], h.slice(0,16));
+    ok(f+' byte-for-byte aynı', (f==='audio.js'?require('./helpers/audio-preservation').isReviewedAudio(fs.readFileSync(path.join(KOK,f))):h===ref[f]), h.slice(0,16));
   });
 }
 
@@ -399,7 +399,7 @@ console.log('\nE. HEDEFLİ TANI');
   ok('çizim tamamlandığında aşama "tamam"', N.stage==='tamam', N.stage);
   ok('yüzey eşleşmeleri raporlanıyor',
      N.cvEsles===true && N.gEsles===true && N.drawCvEsles===true);
-  ok('build kimliği raporda', N.build==='96a', String(N.build));
+  ok('build kimliği raporda', N.build==='96e1', String(N.build));
   ok('rapor yeterince alan içeriyor', N.alanlar>=15, String(N.alanlar));
   ok('çizim SONRASI resize AYIRT EDİLİYOR',
      N.resizeAfterDraw===false && (d.resizeSonra||{}).resizeAfterDraw===true,

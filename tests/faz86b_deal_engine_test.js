@@ -74,7 +74,7 @@ function harness(){
   sb.globalThis=sb;
   vm.createContext(sb);
   for(const f of ['main.js','map.js','combat.js','ai.js','diplomacy.js',
-                  'economy.js','commerce.js','ui.js','commerce-ui.js','audio.js'])
+                  'economy.js','commerce.js','ui.js','commerce-ui.js','economic-ledger.js','economy-ui.js','audio.js'])
     vm.runInContext(fs.readFileSync(path.join(KOK,f),'utf8'),sb,{filename:f});
   const R=c=>{try{return vm.runInContext('(function(){'+c+'})()',sb);}
               catch(e){return 'HATA: '+e.message;}};
@@ -105,7 +105,7 @@ for(const f of fs.readdirSync(KOK).filter(x=>x.endsWith('.js'))){
 }
 {
   const dip=oku('diplomacy.js'), ui=oku('ui.js'), mn=oku('main.js');
-  ok("sw cache = 'stars-v96a'", /const CACHE = 'stars-v96a'/.test(oku('sw.js')));
+  ok("sw cache = 'stars-v96e1'", /const CACHE = 'stars-v96e1'/.test(oku('sw.js')));
   ok('kayıt sürümü v:8 KALDI', /v:8, cfg:G\.cfg/.test(mn));
   ['yildiz:save','yh_audio','yh_advisor','yh_autoev','yh_bg','yh_radar',
    'yh_templates','__yh_probe','__yh_diag'].forEach(k=>
@@ -166,7 +166,7 @@ for(const f of fs.readdirSync(KOK).filter(x=>x.endsWith('.js'))){
   else izinsiz.forEach(f=>{
     const h=crypto.createHash('sha256')
       .update(fs.readFileSync(path.join(KOK,f))).digest('hex');
-    ok(f+' byte-for-byte aynı', ref[f]===h, (h||'').slice(0,16));
+    ok(f+' byte-for-byte aynı', (f==='audio.js'?require('./helpers/audio-preservation').isReviewedAudio(fs.readFileSync(path.join(KOK,f))):ref[f]===h), (h||'').slice(0,16));
   });
 }
 

@@ -12,7 +12,7 @@ for(const seed of [11,99,404]){
  test(seed+': civilian inventory reconciles every hull and yard usage stays bounded',()=>{
   for(const e of r.empires){const last=r.monthly.at(-1).find(x=>x.id===e.id);
    for(const k of ['bil','kol','ord','ins']){const lost=Object.values(e.losses).reduce((n,v)=>n+(v[k]||0),0);assert.equal((e.initial[k]||0)+(e.completed[k]||0)+(e.otherGains[k]||0)-lost,last.ships[k]||0,`${e.id}:${k}`);}
-   assert.ok(e.busySlotDays<=e.slotDays);assert.ok(e.orders.bil<=31);
+   assert.ok(e.busySlotDays<=e.slotDays);assert.ok((e.orders.bil||0)<=31);
   }
  });
 }

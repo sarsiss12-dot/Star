@@ -74,7 +74,7 @@ function harness(){
   sb.globalThis=sb;
   vm.createContext(sb);
   for(const f of ['main.js','map.js','combat.js','ai.js','diplomacy.js',
-                  'economy.js','commerce.js','ui.js','commerce-ui.js','audio.js'])
+                  'economy.js','commerce.js','ui.js','commerce-ui.js','economic-ledger.js','economy-ui.js','audio.js'])
     vm.runInContext(fs.readFileSync(path.join(KOK,f),'utf8'),sb,{filename:f});
   const R=c=>{try{return vm.runInContext('(function(){'+c+'})()',sb);}
               catch(e){return 'HATA: '+e.message;}};
@@ -104,7 +104,7 @@ for(const f of fs.readdirSync(KOK).filter(x=>x.endsWith('.js'))){
 }
 {
   const ui=oku('ui.js'), dip=oku('diplomacy.js'), ai=oku('ai.js');
-  ok("sw cache = 'stars-v96a'", /const CACHE = 'stars-v96a'/.test(oku('sw.js')));
+  ok("sw cache = 'stars-v96e1'", /const CACHE = 'stars-v96e1'/.test(oku('sw.js')));
   const sw=oku('sw.js');
   ok('sw KABUK/fetch/activate korundu',
      /KABUK/.test(sw) && /addEventListener\('fetch'/.test(sw) &&
@@ -162,7 +162,7 @@ for(const f of fs.readdirSync(KOK).filter(x=>x.endsWith('.js'))){
     if(!ref[f]){ ok(f+' referansı var', false, 'referansta yok'); return; }
     const h=crypto.createHash('sha256')
       .update(fs.readFileSync(path.join(KOK,f))).digest('hex');
-    ok(f+' byte-for-byte aynı', h===ref[f], h.slice(0,16));
+    ok(f+' byte-for-byte aynı', (f==='audio.js'?require('./helpers/audio-preservation').isReviewedAudio(fs.readFileSync(path.join(KOK,f))):h===ref[f]), h.slice(0,16));
   });
 }
 
@@ -322,6 +322,8 @@ console.log('\nC. SAF ÖN KONTROL (opQuote)');
     "var r1=runOp(e,o,'isyan');",
     "var gercekKesinti=oncEtk-e.res.etk;",
     "/* risk eşleşmesi: aynı RND_STATE'te aynı caught sonucu */",
+    "/* Independent risk experiment: restore network after first possible exposure. */",
+    "e.intel[o.id]=3; G.sys[o.home].planets.find(p=>p.col).col.b.kale=1;",
     "var st=RND_STATE;",
     "var q2=opQuote(e,o,'sabotaj');",
     "rndSeed(st); var beklenenCaught = rnd() < q2.risk;",
@@ -329,7 +331,7 @@ console.log('\nC. SAF ÖN KONTROL (opQuote)');
     "return JSON.stringify({tabanMaliyet:OPS.isyan.cost.etk,",
     "  quoteMaliyet:q.cost.etk, gercekKesinti:gercekKesinti,",
     "  ekranMaliyet:ekranMaliyet, ekranRisk:ekranRisk,",
-    "  quoteRisk:q2.risk, beklenenCaught:beklenenCaught,",
+    "  quoteOk:q2.ok, quoteWhy:q2.why, quoteRisk:q2.risk, beklenenCaught:beklenenCaught,",
     "  gercekCaught:r2.caught});"].join('\n'));
   let d={}; try{d=JSON.parse(r);}catch(e){}
   ok('değiştirilmiş maliyet tabandan farklı (senaryo geçerli)',
@@ -341,7 +343,7 @@ console.log('\nC. SAF ÖN KONTROL (opQuote)');
      d.quoteMaliyet+' = '+d.gercekKesinti);
   ok('ekrandaki ifşa riski = opQuote riski', d.ekranRisk===true);
   ok('önizlenen risk aynı RNG değerinde runOp sonucuyla ÖRTÜŞÜYOR',
-     d.beklenenCaught===d.gercekCaught,
+     d.quoteOk===true && d.beklenenCaught===d.gercekCaught,
      'beklenen '+d.beklenenCaught+' · gerçek '+d.gercekCaught);
 }
 

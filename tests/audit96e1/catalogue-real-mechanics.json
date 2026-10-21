@@ -1,0 +1,523 @@
+{
+  "civics": [
+    {
+      "id": "burokrasi",
+      "status": "PASS"
+    },
+    {
+      "id": "gen_oncu",
+      "status": "PASS"
+    },
+    {
+      "id": "kale_dok",
+      "status": "PASS"
+    },
+    {
+      "id": "sinyal_avci",
+      "status": "PASS"
+    },
+    {
+      "id": "maden_lonca",
+      "status": "PASS"
+    },
+    {
+      "id": "golge_kons",
+      "status": "PASS"
+    },
+    {
+      "id": "lojistik_k",
+      "status": "PASS"
+    },
+    {
+      "id": "enkaz_muh",
+      "status": "PASS"
+    },
+    {
+      "id": "panoptikon",
+      "status": "PASS"
+    },
+    {
+      "id": "kan_hukuku",
+      "status": "PASS"
+    },
+    {
+      "id": "taht_gemi",
+      "status": "PASS"
+    },
+    {
+      "id": "tek_urun",
+      "status": "PASS"
+    },
+    {
+      "id": "yildiz_yiyen",
+      "status": "PASS"
+    }
+  ],
+  "races": [
+    {
+      "id": "insan",
+      "effects": {
+        "araMul": 0.1,
+        "dipMul": 0.35,
+        "etkFlat": 1,
+        "dmgMul": -0.05
+      },
+      "income": {
+        "min": 3.336590000000001,
+        "ene": -16.26287,
+        "yiy": 14.508005000000002,
+        "ala": 3.817571249999999,
+        "ara": 13.934134500000003,
+        "etk": 8.9725,
+        "tuk": 9.484194000000006
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "klan",
+      "effects": {
+        "dmgMul": 0.18,
+        "hullMul": 0.1,
+        "buildMul": 0.25,
+        "dipMul": -0.35,
+        "araMul": -0.08
+      },
+      "income": {
+        "min": 3.336590000000001,
+        "ene": -16.26287,
+        "yiy": 14.508005000000002,
+        "ala": 3.817571249999999,
+        "ara": 11.6540034,
+        "etk": 7.9725,
+        "tuk": 9.484194000000006
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "suru",
+      "effects": {
+        "growMul": 0.35,
+        "yiyMul": 0.25,
+        "minMul": 0.1,
+        "colCost": -0.2,
+        "dipMul": -1
+      },
+      "income": {
+        "min": 3.6702490000000014,
+        "ene": -16.26287,
+        "yiy": 21.585006250000006,
+        "ala": 3.817571249999999,
+        "ara": 12.667395,
+        "etk": 7.9725,
+        "tuk": 10.318403700000008
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "makine",
+      "effects": {
+        "minMul": 0.3,
+        "alaMul": 0.2,
+        "stab": 25,
+        "growMul": -0.15,
+        "dipMul": -0.8
+      },
+      "income": {
+        "min": 4.337567000000002,
+        "ene": -23.85287,
+        "yiy": 0,
+        "ala": 5.043085499999998,
+        "ara": 12.667395,
+        "etk": 7.9725,
+        "tuk": 15.586823100000005
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "meclis",
+      "effects": {
+        "etkFlat": 2.5,
+        "araMul": 0.08,
+        "dipMul": 0.2,
+        "growMul": 0.1,
+        "alaMul": -0.1
+      },
+      "income": {
+        "min": 3.336590000000001,
+        "ene": -16.26287,
+        "yiy": 14.508005000000002,
+        "ala": 3.204814124999999,
+        "ara": 13.680786600000001,
+        "etk": 10.4725,
+        "tuk": 9.484194000000006
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "lonca",
+      "effects": {
+        "eneMul": 0.4,
+        "minMul": 0.12,
+        "dipMul": 0.15,
+        "upMul": -0.15,
+        "dmgMul": -0.08
+      },
+      "income": {
+        "min": 3.7369808000000013,
+        "ene": -5.963017999999998,
+        "yiy": 14.508005000000002,
+        "ala": 4.164071249999999,
+        "ara": 12.667395,
+        "etk": 7.9725,
+        "tuk": 10.485245640000006
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "teknokrasi",
+      "effects": {
+        "araMul": 0.3,
+        "buildMul": 0.12,
+        "etkFlat": -1,
+        "dmgMul": -0.08
+      },
+      "income": {
+        "min": 3.336590000000001,
+        "ene": -16.26287,
+        "yiy": 14.508005000000002,
+        "ala": 3.817571249999999,
+        "ara": 16.467613500000002,
+        "etk": 6.9725,
+        "tuk": 9.484194000000006
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "kasif",
+      "effects": {
+        "araMul": 0.35,
+        "spdMul": 0.2,
+        "sensor": 1,
+        "dmgMul": -0.1,
+        "minMul": -0.08
+      },
+      "income": {
+        "min": 3.069662800000001,
+        "ene": -16.26287,
+        "yiy": 14.508005000000002,
+        "ala": 3.817571249999999,
+        "ara": 17.100983250000002,
+        "etk": 7.9725,
+        "tuk": 8.816826240000005
+      },
+      "status": "PASS"
+    }
+  ],
+  "physiology": [
+    {
+      "id": "humanoid",
+      "effects": {
+        "n": "İnsansı / Memeli",
+        "ico": "🧬",
+        "d": "Dengeli temel tür. Gezegen tercihi esnek, diplomatik güven tavanı yüksek.",
+        "art": "Her dünyada idare eder, hiçbirinde zirve yapmaz.",
+        "e": {
+          "trustCap": 10
+        },
+        "habBonus": 0,
+        "growMul": 0,
+        "yiyer": "yiyecek"
+      },
+      "income": {
+        "min": 3.336590000000001,
+        "ene": -16.26287,
+        "yiy": 14.508005000000002,
+        "ala": 3.817571249999999,
+        "ara": 13.934134500000003,
+        "etk": 8.9725,
+        "tuk": 9.484194000000006
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "lithoid",
+      "effects": {
+        "n": "Kayaç (Litoit)",
+        "ico": "💎",
+        "d": "Taştan doğdu, taş yer. Yiyecek tüketmez — mineral tüketir.",
+        "art": "Her gezegende +%50 yaşanabilirlik · büyüme −%25 · kara zırhı +%20",
+        "e": {
+          "minMul": -0.1
+        },
+        "habBonus": 0.5,
+        "growMul": -0.25,
+        "yiyer": "mineral",
+        "groundArmor": 0.2
+      },
+      "income": {
+        "min": -5.277068999999998,
+        "ene": -16.26287,
+        "yiy": 0,
+        "ala": 3.817571249999999,
+        "ara": 13.934134500000003,
+        "etk": 8.9725,
+        "tuk": 8.649984300000005
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "aquatic",
+      "effects": {
+        "n": "Okyanus Canlısı",
+        "ico": "🌊",
+        "d": "Suya bağımlı. Okyanus ve tundrada muhteşem, çölde ölümcül.",
+        "art": "Okyanus/Sulakalan/Tundra: +%20 üretim, +18 yaşanabilirlik · Çöl/Kurak: −35 yaşanabilirlik",
+        "e": {},
+        "habBonus": 0,
+        "growMul": 0,
+        "yiyer": "yiyecek",
+        "sever": [
+          "oky",
+          "sul",
+          "tun"
+        ],
+        "sevmez": [
+          "col",
+          "kur"
+        ]
+      },
+      "income": {
+        "min": 7.803908,
+        "ene": -11.975444000000003,
+        "yiy": 20.169606,
+        "ala": 5.043085499999998,
+        "ara": 16.720961400000004,
+        "etk": 8.9725,
+        "tuk": 12.821032800000001
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "avian",
+      "effects": {
+        "n": "Kuş Benzeri",
+        "ico": "🪶",
+        "d": "Hafif kemikli, hızlı. Uzayda çevik, yüzeyde kırılgan.",
+        "art": "Filo kaçınma +%10 · koloni gemisi maliyeti −%15 · büyüme +%10 · kara savunması −%15",
+        "e": {
+          "spdMul": 0.1,
+          "colCost": -0.15
+        },
+        "habBonus": 0,
+        "growMul": 0.1,
+        "yiyer": "yiyecek",
+        "evasion": 0.1,
+        "groundFrail": 0.15
+      },
+      "income": {
+        "min": 3.336590000000001,
+        "ene": -16.26287,
+        "yiy": 14.508005000000002,
+        "ala": 3.817571249999999,
+        "ara": 13.934134500000003,
+        "etk": 8.9725,
+        "tuk": 9.484194000000006
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "hive",
+      "effects": {
+        "n": "Kovan Zihni",
+        "ico": "🐝",
+        "d": "Tek bir irade, milyonlarca beden. Bireysel moral sorunu yoktur.",
+        "art": "İstikrar daima yüksek · nüfus büyümesi +%15 · diplomasi −%25",
+        "e": {
+          "stab": 20,
+          "dipMul": -0.25
+        },
+        "habBonus": 0,
+        "growMul": 0.15,
+        "yiyer": "yiyecek",
+        "kovan": true
+      },
+      "income": {
+        "min": 3.336590000000001,
+        "ene": -16.26287,
+        "yiy": 14.508005000000002,
+        "ala": 3.817571249999999,
+        "ara": 13.934134500000003,
+        "etk": 8.9725,
+        "tuk": 9.484194000000006
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "machine",
+      "effects": {
+        "n": "Makine Ağı",
+        "ico": "⚙",
+        "d": "Organik değil. Yiyecek yerine enerji tüketir, her dünyada çalışır.",
+        "art": "Enerji tüketir · her gezegende yaşar · büyüme −%20",
+        "e": {
+          "eneMul": -0.15,
+          "hullMul": 0.15
+        },
+        "habBonus": 0.35,
+        "growMul": -0.2,
+        "yiyer": "enerji",
+        "makine": true
+      },
+      "income": {
+        "min": 3.336590000000001,
+        "ene": -27.0684395,
+        "yiy": 0,
+        "ala": 3.817571249999999,
+        "ara": 13.934134500000003,
+        "etk": 8.9725,
+        "tuk": 9.484194000000006
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "plantoid",
+      "effects": {
+        "n": "Bitkisel",
+        "ico": "🌱",
+        "d": "Fotosentezle beslenir. Işık bol olduğunda kendi kendine yeter.",
+        "art": "Enerjiden pasif yiyecek üretir · soğuk dünyalarda enerji ×2",
+        "e": {
+          "yiyMul": 0.15
+        },
+        "habBonus": 0.1,
+        "growMul": -0.1,
+        "yiyer": "yiyecek",
+        "photo": true
+      },
+      "income": {
+        "min": 3.336590000000001,
+        "ene": -19.36787,
+        "yiy": 24.96420575,
+        "ala": 3.817571249999999,
+        "ara": 13.934134500000003,
+        "etk": 8.9725,
+        "tuk": 9.484194000000006
+      },
+      "status": "PASS"
+    }
+  ],
+  "traits": [
+    {
+      "id": "ustun_zeka",
+      "status": "PASS"
+    },
+    {
+      "id": "endustriyel",
+      "status": "PASS"
+    },
+    {
+      "id": "verimli",
+      "status": "PASS"
+    },
+    {
+      "id": "savascı",
+      "status": "PASS"
+    },
+    {
+      "id": "dayanikli",
+      "status": "PASS"
+    },
+    {
+      "id": "hizli_ureyen",
+      "status": "PASS"
+    },
+    {
+      "id": "uyumlu",
+      "status": "PASS"
+    },
+    {
+      "id": "karizmatik",
+      "status": "PASS"
+    },
+    {
+      "id": "tuccar",
+      "status": "PASS"
+    },
+    {
+      "id": "gocebe",
+      "status": "PASS"
+    },
+    {
+      "id": "kirilgan",
+      "status": "PASS"
+    },
+    {
+      "id": "yavas_ureyen",
+      "status": "PASS"
+    },
+    {
+      "id": "obur",
+      "status": "PASS"
+    },
+    {
+      "id": "itici",
+      "status": "PASS"
+    },
+    {
+      "id": "savurgan",
+      "status": "PASS"
+    },
+    {
+      "id": "tutumlu",
+      "status": "PASS"
+    },
+    {
+      "id": "cevher_sezgi",
+      "status": "PASS"
+    },
+    {
+      "id": "elektrotrof",
+      "status": "PASS"
+    },
+    {
+      "id": "bereketli",
+      "status": "PASS"
+    },
+    {
+      "id": "ogrenen_sinaps",
+      "status": "PASS"
+    },
+    {
+      "id": "uzun_omurlu",
+      "status": "PASS"
+    },
+    {
+      "id": "savas_korosu",
+      "status": "PASS"
+    },
+    {
+      "id": "doyumsuz",
+      "status": "PASS"
+    },
+    {
+      "id": "cevher_kor",
+      "status": "PASS"
+    },
+    {
+      "id": "kisa_omurlu",
+      "status": "PASS"
+    },
+    {
+      "id": "yavas_cogalan",
+      "status": "PASS"
+    },
+    {
+      "id": "sinyal_sizinti",
+      "status": "PASS"
+    },
+    {
+      "id": "savas_panigi",
+      "status": "PASS"
+    }
+  ]
+}

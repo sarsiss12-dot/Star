@@ -5,6 +5,22 @@ const hash=s=>createHash('sha256').update(s).digest('hex');
 // block must restore the untouched canonical 93A.1/93C HTML hash.
 // Historical referans-sha.json remains intact; neither half is exempted.
 exports.isReviewedUI=source=>{
+ const dStart=source.indexOf('/* 96D: scoped origin identity and audio controls */');
+ if(dStart>=0){const marker='/* END 96D UI */\n',end=source.indexOf(marker,dStart)+marker.length;
+  if(end<dStart||hash(source.slice(dStart,end))!=='c2e034e3a4c57a29667a8c481102af88c3850fe2cdd49bc563ff8ec47e5e7d2c')return false;
+  source=source.slice(0,dStart)+source.slice(end);
+ }
+ const qaStart=source.indexOf('/* 96C.3: scoped attention and report views */');
+ if(qaStart>=0){const marker='/* END 96C.3 UI */\n',end=source.indexOf(marker,qaStart)+marker.length;
+  if(end<qaStart||hash(source.slice(qaStart,end))!=='127959ef27ae7724474b481aaa54b23a5a367abd7343abae0355efaab7cbcc2b')return false;
+  source=source.slice(0,qaStart)+source.slice(end);
+ }
+ const economyStart=source.indexOf('/* 96B: scoped economy workspace */');
+ if(economyStart>=0){const marker='/* END 96B ECONOMY UI */\n',end=source.indexOf(marker,economyStart)+marker.length;
+  if(end<economyStart||hash(source.slice(economyStart,end))!=='44fbe9415713675c3f2e69cd09fc30d7d24354618a7f38bb8c247f051344120e')return false;
+  source=source.slice(0,economyStart)+source.slice(end);
+ }
+ for(const file of ['economic-ledger.js','economy-ui.js'])source=source.replace('<script src="'+file+'"></script>\n','');
  // 96A additive freight CSS is independently pinned; all older layout pins remain.
  const freightStart=source.indexOf('/* 96A: scoped freight workspace');
  if(freightStart>=0){const marker='/* END 96A FREIGHT UI */\n',end=source.indexOf(marker,freightStart)+marker.length;

@@ -1,0 +1,63 @@
+{
+  "seed": 11,
+  "matchedGeography": true,
+  "old": {
+    "phase": "96E",
+    "seed": 11,
+    "alive": 5,
+    "techs": 30,
+    "ships": 92,
+    "power": 10830,
+    "upkeep": 513.1972800000003,
+    "colonies": 9,
+    "receivedDeliveries": 61,
+    "income": {
+      "ene": 23.338423847413377,
+      "min": 121.49934037067685,
+      "yiy": 53.492464287608634,
+      "ala": 91.77659537100362,
+      "ara": 387.7914074072037,
+      "tuk": 70.64169627419517
+    },
+    "criticalMonths": 2,
+    "powerRange": [
+      0,
+      6884
+    ],
+    "invalidResources": [],
+    "elapsedMs": 12372,
+    "saveHash": "7a33ba71da9fefed9439b184f1b8836b326324f2c6882fb12a9fdd4ad9ac5671"
+  },
+  "next": {
+    "phase": "96E1",
+    "seed": 11,
+    "alive": 5,
+    "techs": 39,
+    "ships": 183,
+    "power": 25635,
+    "upkeep": 546.1099999999999,
+    "colonies": 10,
+    "receivedDeliveries": 72,
+    "income": {
+      "ene": 65.40718631262177,
+      "min": 220.21302977628372,
+      "yiy": 101.82454528333598,
+      "ala": 62.75070989264419,
+      "ara": 593.6600540589744,
+      "tuk": 64.84939702295846
+    },
+    "criticalMonths": 0,
+    "powerRange": [
+      2169,
+      13110
+    ],
+    "invalidResources": [],
+    "elapsedMs": 12797,
+    "saveHash": "d67bded1cee14b92d70e9d775403ec96057a29bf806c3476a6cb5114bf9e0dd3"
+  },
+  "statuses": {
+    "geography": "PASS",
+    "resourceFinite": "PASS",
+    "nonnegativeResources": "PASS"
+  }
+}

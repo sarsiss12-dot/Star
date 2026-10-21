@@ -1,5 +1,6 @@
 'use strict';
 const {createHash}=require('crypto');
+// 96D: shared Canvas character portrait prefix is reviewed; camera/input/fleet pins unchanged.
 // 95D: reviewed procedural emblem renderer and identity tap; dedicated identity,
 // map, war-preview tests and existing negative guards cover the extensions.
 // 94C: sprite-prefix hash remains frozen. Authorized affine transform
@@ -16,7 +17,7 @@ function isMapInfrastructurePreserved(source){
   const prefixEnd=helpers<0?source.indexOf('const View ='):helpers;
   if(prefixEnd<0||start<0||end<=start||fleet<=end)return false;
   const parts=[source.slice(0,prefixEnd),source.slice(start,end),source.slice(fleet)];
-  const expected=['0f4a82743c40e2f73515461f112d5eb8106e97b09439157514ef6993ce42520c', '46c321133ccf37c51079522637bc8e839663ac09cfb3ae696ccc14000f03537b', '3a9500d3af286a299bc8e783174af8d5a61e63c4bc607b44fd593e1ec64f6c65'];
+  const expected=['d828073fbddcaedcb411f1a853b20fcfe1e7b63fb9a4872daf8da02403c0ca06', '46c321133ccf37c51079522637bc8e839663ac09cfb3ae696ccc14000f03537b', '3a9500d3af286a299bc8e783174af8d5a61e63c4bc607b44fd593e1ec64f6c65'];
   return parts.every((part,i)=>createHash('sha256').update(part.trimEnd()).digest('hex')===expected[i]);
 }
 module.exports={isMapInfrastructurePreserved};

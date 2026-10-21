@@ -1522,7 +1522,7 @@ function dealCost(offer){
   ucretler.sort((x, y) => y - x);
   let t = ucretler[0];
   for (let k = 1; k < ucretler.length; k++) t += ucretler[k] * 0.25;
-  return Math.min(160, Math.round(t));
+  return Math.min(160, Math.round(t*(hasCivic(a,'shadow')?.70:1)));
 }
 
 /* Simetrik antlaşmalar: iki tarafı da bağlar, teklifte TEK madde olur. */

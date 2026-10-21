@@ -1,0 +1,10 @@
+'use strict';
+const fs=require('fs'),path=require('path'),{performance}=require('perf_hooks'),{runtime}=require('./helpers/runtime');
+const results=[];
+for(const phase of ['96c','96c1']){
+ const root=phase==='96c'?path.resolve(__dirname,'../../baseline-96c'):path.resolve(__dirname,'..'),h=runtime({root});
+ h.run(`setupGame({...CFG,size:'ulu',seed:11,crisis:'kapali',ruins:'yok'});G.autoSave=false;var e=G.emps[1];e.res={ene:5000,min:5000,ala:300,tuk:500,yiy:500,etk:500,ara:0};e.inc={ene:100,min:10,ala:20,tuk:10,yiy:10,etk:5,ara:20};e.megaWill=false;for(const s of G.sys){s.nest=false;s.ruin=false;s.work=[];s.seen=G.emps.map(x=>x.id);s.surv=s.seen.slice();}aiObserve(e);e.aiIntel.systems=Object.fromEntries(G.sys.map(s=>[s.id,{owner:s.owner,defense:0,colonies:0,capital:false,day:G.day}]));AI_VIEW_CACHE.delete(e);var f=G.fleets.find(f=>f.e===e.id&&fleetHasRole(f,'insaat'))||newFleet(e,e.home,[{c:'ins'}]);aiProfile(e);var permitted=0,originalPermission=structAllowed;structAllowed=function(...args){permitted++;return originalPermission(...args)};aiConstructionCandidate(e,f);var before=serialize(),rng=RND_STATE;permitted=0;`);
+ const times=[],targets=[];for(let i=0;i<20;i++){const t=performance.now();targets.push(h.run('var c=aiConstructionCandidate(e,f);c?JSON.stringify([c.sy.id,c.key,c.route]):null'));times.push(performance.now()-t);}times.sort((a,b)=>a-b);
+ results.push({phase,systems:h.run('G.sys.length'),iterations:20,permissionCalls:h.run('permitted'),medianMs:times[10],p95Ms:times[18],maxMs:times[19],pure:h.run('serialize()===before&&RND_STATE===rng'),targets,heap:process.memoryUsage().heapUsed});
+}
+const r={method:'Identical 100-system fully known test snapshot, repeated read-only candidate queries. 1 warm-up and 20 measured requests; host-only, no Android FPS claim.',results,equalChoices:JSON.stringify(results[0].targets)===JSON.stringify(results[1].targets)};fs.writeFileSync('tests/audit-96c1/benchmark.json',JSON.stringify(r,null,2));console.log(JSON.stringify(r));if(!r.equalChoices||results.some(x=>!x.pure))process.exitCode=1;
