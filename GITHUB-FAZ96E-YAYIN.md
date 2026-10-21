@@ -20,7 +20,7 @@ Bu GitHub güncellemesi oynanabilir **Faz 96E tarayıcı/PWA kaynak kodunu** yay
 
 ## Yayın kapsamı ve doğrulama sınırı
 
-Depoda oynanabilir **16 ana oyun JS/HTML dosyasının Faz 96E ZIP'i ile aynı sürümü** yayımlanmıştır. Önceki tarihsel dosyalar korunmuştur. Bu aktarım yeni Faz 96E test kayıtları, ekran görüntüleri ve tüm ZIP içeriğinin eksiksiz GitHub eşlemesi değildir; eksik olan test kanıtları daha sonra ayrıca aktarılabilir.
+Depoda oynanabilir **19 ana çalışma zamanı dosyasının (17 JS, 1 HTML, 1 PWA manifesti) Faz 96E ZIP'i ile aynı içeriği** yayımlanmıştır. Önceki tarihsel dosyalar korunmuştur. Bu aktarım yeni Faz 96E test kayıtları, ekran görüntüleri ve tüm ZIP içeriğinin eksiksiz GitHub eşlemesi değildir; eksik olan test kanıtları daha sonra ayrıca aktarılabilir.
 
 **Önemli:** Depoda kökten devralınan `RELEASE-MANIFEST.json` Faz 96D teslim manifestidir, Faz 96E'nin eksiksiz dosya envanteri değildir. Faz 96E'nin tam manifesti yalnızca doğrulanmış kanonik `stars-faz96e.zip` arşivindedir. Bu ayrım yanlış SHA doğrulaması oluşmaması için açıkça yazılmıştır.
 
