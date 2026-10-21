@@ -6,6 +6,20 @@
 /* =====================================================================
    YAPAY ZEKÂ
    ===================================================================== */
+/* 96C diagnostics are opt-in, bounded, non-persistent and never read by AI.
+   One reason per actor/partner/month; no hidden information is exposed in UI. */
+const AIDiagnostics=(()=>{let world=null,month=-1,seen=new Set(),counts={},samples=[];return {
+ enabled:false,
+ reset(){world=null;month=-1;seen.clear();counts={};samples=[];},
+ note(code,e,other,detail){if(!this.enabled)return;if(world!==G.sys){this.reset();world=G.sys;}
+  const now=Math.floor(G.day/30);if(now!==month){month=now;seen.clear();}
+  const key=[e?.id,other?.id,code].join(':');if(seen.has(key)||seen.size>=1024)return;seen.add(key);
+  if(Object.hasOwn(counts,code)||Object.keys(counts).length<128)counts[code]=(counts[code]||0)+1;
+  if(samples.length<128)samples.push({day:G.day,actor:e?.id,partner:other?.id,code,detail:String(detail||'').slice(0,240)});
+ },
+ report(){return JSON.parse(JSON.stringify({counts,samples}));}
+};})();
+
 /* 95A — actor knowledge. Persistent observations contain only sensor-visible facts;
    derived graph/cache state stays outside Save v8 and never consumes gameplay RNG. */
 const AI_VIEW_CACHE = new WeakMap();
@@ -90,6 +104,33 @@ function aiKnownRoute(e,f,from,to,observer=e,warTarget=null,nodeAllowed=null){
   const path=[];let at=to;while(at!==from&&path.length<n){path.unshift(at);at=prev[at];if(at<0)return null;}
   return at===from?{path,eta:cost[to]}:null;
 }
+/* 96C.2: voluntary-war lower-bound expedition budget. Own stocks, paid queues
+   and known partner links only; no receipts, RNG or persistent planning fields. */
+function aiWarBudget(e,o){
+ const keys=['_powAt','_powC','_pressAt','_press'],saved=G.emps.map(x=>[x,keys.map(k=>Object.getOwnPropertyDescriptor(x,k))]);
+ try{
+  const plan=aiEconomyPlan(e),known=aiView(e),hops=new Map(),queue=[];
+  for(const s of G.sys)if(s.owner===e.id){hops.set(s.id,0);queue.push(s.id);}
+  for(let i=0;i<queue.length&&i<512;i++){const id=queue[i],depth=hops.get(id);if(depth>=6)continue;for(const n of G.sys[id].lanes)if(known.ctx.known.has(n)&&!hops.has(n)){hops.set(n,depth+1);queue.push(n);}}
+  const targets=Object.entries(known.systems).filter(([,s])=>s.owner===o.id).map(([id])=>+id);
+  const distance=Math.min(8,...targets.map(id=>hops.get(id)??8));
+  const supply=clamp(1-Math.max(0,distance-SUPPLY_FREE)*SUPPLY_STEP,SUPPLY_FLOOR,1),up=Math.max(.1,1+(e.mods.upMul||0));
+  const peaceful=!Object.values(e.war||{}).some(Boolean),mobilize=hasCivic(e,'mobilize')&&peaceful?2:1;
+  let extraEnergy=0,extraAlloy=0;
+  for(const f of G.fleets){if(f.e!==e.id||!isArmed(f)||f.federal||jointReserved(f)||f.guardLocked||guardLocked({...f})||hasShipment(f))continue;
+   const current=fleetSupply(e,f),base=f.ships.reduce((n,s)=>n+(SHIPS[s.c]?.up||0),0)*up,alloy=f.ships.reduce((n,s)=>n+(SHIPS[s.c]?.upA||0),0)*up;
+   extraEnergy+=Math.max(0,base*(1+(1-supply)*2.2)-base*(fleetInHome(e,f)?.5:1)*mobilize*(1+(1-current)*2.2));
+   extraAlloy+=Math.max(0,alloy*(1+(1-supply)*1.4)-alloy*(1+(1-current)*1.4));
+  }
+  const partner=new Set(targets),links=(e.trade?.links||[]).filter(l=>!l.bl),lost=links.filter(l=>partner.has(l.a)||partner.has(l.b)).length;
+  const network=(e._incomeDetail?.rows||[]).filter(r=>r.r==='ene'&&r.name==='Ticaret ağı üretim katkısı').reduce((n,r)=>n+r.n,0)*lost/Math.max(1,links.length);
+  const released={};for(const c of G.commerce?.contracts||[])if(!Commerce.closed(c)&&[c.a,c.b].includes(e.id)&&[c.a,c.b].includes(o.id))for(const l of c.legs)if(l.e===e.id)released[l.r]=(released[l.r]||0)+l.v*30/l.every;
+  const energyNet=plan.rows.ene.net+(released.ene||0)-extraEnergy-network,alloyNet=plan.rows.ala.net+(released.ala||0)-extraAlloy;
+  const energyMonths=energyNet<0?plan.rows.ene.stock/-energyNet:null,alloyMonths=alloyNet<0?plan.rows.ala.stock/-alloyNet:null;
+  const reason=energyMonths!==null&&energyMonths<1?'expedition-energy':alloyMonths!==null&&alloyMonths<1?'expedition-alloy':'sustainable';
+  return {ok:reason==='sustainable',reason,energyNet,alloyNet,energyMonths,alloyMonths,extraEnergy,extraAlloy,lostNetworkEstimate:network,supplyEstimate:supply};
+ }finally{for(const [x,values]of saved)keys.forEach((k,i)=>{if(values[i])Object.defineProperty(x,k,values[i]);else delete x[k];});}
+}
 function aiWarAccess(e,o){
   const forces=G.fleets.filter(f=>f.e===e.id&&isArmed(f)&&!f.retreating&&!f.combat&&fleetSupply(e,f)>.55);
   const targets=aiKnownSystems(e,o.id).sort((a,b)=>a.id-b.id).slice(0,6);
@@ -121,6 +162,86 @@ function aiProtection(e,lord){
   const ratio=aiKnownPower(e,lord)/Math.max(1,totalPower(e));
   return ratio>=1.3?{ok:true,eta:best.eta,ratio,why:'Açık yardım rotası ve yeterli tahmini güç'}:{ok:false,eta:best.eta,why:'Tahmini koruma gücü yetersiz'};
 }
+/* 96C: six-month planning uses actual stocks/rates and already paid queues.
+   Pending gains are estimates, never written to inc/res or promised as delivery. */
+function aiConstructionCommitment(e){
+ const out={};if(typeof RemoteConstruction==='undefined'||!G.construction)return out;
+ for(const tasks of Object.values(G.construction.queues))for(const t of tasks)
+  if(t.empire===e.id&&t.state!=='building')for(const [r,v]of Object.entries(structCost(e,t.key)))out[r]=(out[r]||0)+v;
+ return out;
+}
+function aiBuildingDelta(e,sys,pl,key,queued=false,direction=1){
+ const b={...pl.col.b};if(queued)for(const q of pl.col.q||[])if(BUILDINGS[q.key])b[q.key]=Math.max(0,(b[q.key]||0)+(q.dem?-1:1));
+ if(key)b[key]=Math.max(0,(b[key]||0)+direction);
+ const old=colonyOutput(e,sys,pl),next=colonyOutput(e,sys,{...pl,col:{...pl.col,b}}),delta={};
+ const oldUp=Object.entries(pl.col.b).reduce((n,[k,v])=>n+(BUILDINGS[k]?.up||0)*v,0),newUp=Object.entries(b).reduce((n,[k,v])=>n+(BUILDINGS[k]?.up||0)*v,0);
+ for(const r of ['ene','min','yiy','ala','tuk','ara','etk']){
+  const mod=r==='tuk'?(e.mods.minMul||0)*.5:e.mods[r+'Mul']||0;
+  delta[r]=((next.o[r]||0)-(old.o[r]||0)-(next.use[r]||0)+(old.use[r]||0))*(1+mod);
+ }
+ delta.ene=delta.ene*(1+(e.trade?.mul||0)+(e.mods.tradeMul||0))-(newUp-oldUp)*1.6;
+ return delta;
+}
+function aiEconomyPlan(e){
+ const projected={...e.inc},committed=aiConstructionCommitment(e),queued={};
+ for(const c of e.colonies){const sys=G.sys[c.s],pl=sys?.planets[c.p];if(!pl?.col||pl.owner!==e.id||!pl.col.q?.length)continue;
+  const d=aiBuildingDelta(e,sys,pl,null,true);for(const r in d)projected[r]=(projected[r]||0)+d[r];
+ }
+ const upkeep=Math.max(.1,1+(e.mods.upMul||0)),peace=!Object.values(e.war||{}).some(Boolean);
+ for(const sys of G.sys)for(const q of sys.queue||[])if(q.e===e.id&&SHIPS[q.cls]){
+  projected.ene=(projected.ene||0)-SHIPS[q.cls].up*upkeep*(hasCivic(e,'mobilize')&&peace?2:1);
+  projected.ala=(projected.ala||0)-(SHIPS[q.cls].upA||0)*upkeep;queued[q.cls]=(queued[q.cls]||0)+1;
+ }
+ if(typeof Commerce!=='undefined'&&G.commerce)for(const c of G.commerce.contracts)if(!Commerce.closed(c))for(const l of c.legs)if(l.e===e.id)projected[l.r]=(projected[l.r]||0)-l.v*30/l.every;
+ const bio=RACES[e.race].bio,phys=typeof physioOf==='function'?physioOf(e):null,eatsFood=bio!=='makine'&&bio!=='litoit'&&!['enerji','mineral'].includes(phys?.yiyer);
+ const target={ene:12,min:16,yiy:eatsFood?4:0,ala:8,tuk:4,ara:0,etk:0},floor={ene:120,min:120,yiy:eatsFood?60:0,ala:100,tuk:60,ara:0,etk:0},rows={};
+ for(const r of Object.keys(target)){
+  const stock=Math.max(0,(e.res[r]||0)-(committed[r]||0)),net=Number.isFinite(projected[r])?projected[r]:0,months=net<0?stock/-net:null;
+  const urgency=(net<0?30+Math.min(30,-net*6/Math.max(30,stock)*20):target[r]>0?Math.max(0,1-net/target[r])*12:0)+(stock<floor[r]?8*(1-stock/Math.max(1,floor[r])):0);
+  rows[r]={stock,net,months,urgency,reserve:floor[r]+Math.max(0,-net)*6};
+ }
+ const atWar=Object.keys(e.war||{}).some(id=>e.war[id]&&G.emps[id]&&!G.emps[id].dead&&!G.emps[id].wild);
+ const critical=['ene','min','yiy','tuk'].some(r=>rows[r].net<0&&rows[r].months<6);
+ return {horizon:6,rows,committed,queued,policy:critical?'recover':atWar?'war':e.aiCampaign?.phase==='build'?'rebuild':'growth',critical};
+}
+/* A stock-zero input deficit cannot fund even the cheapest producer. Recover
+   through the player's existing paid demolition/refund path, never a grant. */
+function aiRecoverEconomy(e){
+ if(!e.ai||e.id===0||e.dead||e.aiTalk?.['economy-recovery']?.until>G.day)return false;
+ const min=e.res.min||0,stuck=min<BUILDINGS.maden.c.min&&((e.inc.min||0)<0||e.crisis==='enerji'&&(e.res.ene||0)<=0);
+ if(!stuck)return false;
+ const candidates=[];
+ for(const c of e.colonies){const sys=G.sys[c.s],pl=sys?.planets[c.p];if(!pl?.col||pl.owner!==e.id||colonyJobs(pl.col)>0)continue;
+  for(const [key,n]of Object.entries(pl.col.b)){
+   if(!n||['santral','maden','ciftlik','liman','tersane'].includes(key))continue;
+   const d=aiBuildingDelta(e,sys,pl,key,false,-1);
+   const benefit=((e.inc.min||0)<0?Math.max(0,d.min)*3:0)+(e.crisis==='enerji'?Math.max(0,d.ene)*3:0);
+   if(benefit<=0||d.yiy<0&&(e.inc.yiy||0)<0||d.tuk<0&&(e.inc.tuk||0)<0)continue;
+   candidates.push({sys,pl,key,score:benefit-Math.max(0,-d.ala)*.4-Math.max(0,-d.ara)*.15});
+  }
+ }
+ candidates.sort((a,b)=>b.score-a.score||a.sys.id-b.sys.id||a.key.localeCompare(b.key));
+ const pick=candidates[0];if(!pick||pick.score<=0||!queueDemolish(e,pick.sys,pick.pl,pick.key))return false;
+ (e.aiTalk||(e.aiTalk={}))['economy-recovery']={until:G.day+120,reason:'Paid demolition: '+pick.key};
+ AIDiagnostics.note('recovery:demolish',e,null,pick.key+'; inputs/upkeep stop only on completion; actual refund only');return true;
+}
+function aiBuildingSustainable(e,sys,pl,key,plan=aiEconomyPlan(e)){
+ const B=BUILDINGS[key];if(!B)return false;
+ const delta=aiBuildingDelta(e,sys,pl,key);
+ for(const r of ['ene','min','yiy','tuk']){
+  if(delta[r]>=0)continue;const row=plan.rows[r],net=row.net+delta[r],cash=row.stock-(B.c[r]||0);
+  if(net<0&&cash<-net*6)return false;
+ }
+ return Object.entries(B.c).every(([r,v])=>(e.res[r]||0)-(plan.committed[r]||0)>=v);
+}
+function aiEconomicOrder(e,sys,pl,legacy){
+ const plan=aiEconomyPlan(e),resourceBuilding={ene:'santral',min:'maden',yiy:'ciftlik',ala:'dokum',tuk:'fabrika'};
+ const ranked=Object.keys(resourceBuilding).filter(r=>{const row=plan.rows[r];return row.net<0&&row.months<12||row.stock<Math.max(120,row.reserve)&&row.urgency>12;}).sort((a,b)=>plan.rows[b].urgency-plan.rows[a].urgency||a.localeCompare(b));
+ const urgent=ranked.map(r=>resourceBuilding[r]);
+ // A first port supplies energy/Etki and enables paid freight without extra upkeep.
+ if(!(pl.col.b.liman||0)&&!colonyQueuedOf(pl.col,'liman')&&plan.rows.ene.urgency<30)urgent.splice(Math.min(1,urgent.length),0,'liman');
+ return [...new Set(urgent.concat(legacy))].filter(k=>BUILDINGS[k]&&aiBuildingSustainable(e,sys,pl,k,plan));
+}
 function aiUpdateStrategy(e){
   const needs=['ene','min','yiy','tuk','ala'].filter(k=>(e.inc[k]||0)<(k==='yiy'&&RACES[e.race].bio!=='organik'?-999:0));
   const danger=G.sys.some(s=>s.owner===e.id&&aiObservedThreat(e,s.id,false)>0);
@@ -133,9 +254,18 @@ function aiUpdateStrategy(e){
 }
 /* One empire's bounded campaign: defend first, stage reachable forces, commit
    together. No federation commands, free hulls or per-frame planning. */
+/* Only sensor-visible normal enemy forces threaten the adjacent colonial border.
+   Pirate exploration/economy behaviour retains the canonical local-only rule. */
+function aiDefenseThreat(e,s){
+ const local=aiObservedThreat(e,s.id,false);
+ if(!(s.id===e.home||s.planets.some(p=>p.col&&p.owner===e.id))||!G.emps.some(o=>!o.dead&&!o.wild&&!o.crisisSide&&e.war[o.id]))return local;
+ const view=aiView(e);let adjacent=0;
+ for(const f of G.fleets){const o=G.emps[f.e],at=f.mv?f.mv.to:f.sys;if(o&&!o.dead&&!o.wild&&!o.crisisSide&&e.war[o.id]&&isArmed(f)&&view.ctx.visible.has(at)&&s.lanes.includes(at))adjacent+=fleetPower(f)*.5;}
+ return local+adjacent;
+}
 function aiMilitaryCampaign(e,armed,my,wars){
   const free=armed.filter(f=>!jointReserved(f)&&!f.guardLocked&&!guardLocked(f)&&!f.retreating&&G.sys[f.mv?f.mv.to:f.sys]),used=new Set();
-  const threatened=my.map(s=>({s,t:aiObservedThreat(e,s.id,false)})).filter(x=>x.t>0)
+  const threatened=my.map(s=>({s,t:aiDefenseThreat(e,s)})).filter(x=>x.t>0)
     .sort((a,b)=>(b.t+(b.s.id===e.home?600:0))-(a.t+(a.s.id===e.home?600:0))||a.s.id-b.s.id);
   for(const {s,t}of threatened){
     let power=G.fleets.filter(f=>f.e===e.id&&f.sys===s.id&&!f.mv&&isArmed(f)).reduce((n,f)=>n+fleetPower(f),0);
@@ -145,7 +275,7 @@ function aiMilitaryCampaign(e,armed,my,wars){
   }
   if((G.jointOps?.plans||[]).some(p=>jointActive(p)&&p.members.includes(e.id)))return;
   const force=free.filter(f=>!used.has(f.id)&&!f.combat&&fleetSupply(e,f)>.55);
-  if(!force.length)return;
+  if(!force.length){if(used.size&&threatened.some(({s,t})=>t>aiObservedThreat(e,s.id,false)))e.aiCampaign={phase:"defend",reason:"Görülen tehdide yerel savunma ayrıldı",until:G.day+30};return;}
   const known=aiKnownSystems(e).filter(s=>wars.some(o=>aiKnownSystem(e,s).owner===o.id));
   if(!known.length){e.aiCampaign={phase:'recon',reason:'Keşfedilmiş düşman konumu yok',until:G.day+30};return;}
   const old=e.aiCampaign;
@@ -588,6 +718,12 @@ function aiProfile(e){
     dip:  clamp(r.dip - pw*.5 - (et.mil||0)*.08 + (hasCivic(e,'allyCheap')?.25:0) - (false?1:0), 0, 1.2),
     turtle: clamp((hasCivic(e,'fortress')?.6:.2) - (et.mil||0)*.05, 0, 1)
   };
+  // 96E: use existing planner weights; no free ongoing production bonuses.
+  const bias={kalinti:{sci:.18},kapali:{turtle:.25,dip:-.18,exp:-.10},
+   kusatilmis:{turtle:.22,war:.10},son_umut:{eco:.25,war:-.15,turtle:.12},
+   altin_cag:{sci:.10,turtle:.12,eco:.10},golgeden:{dip:-.08,sci:.10},
+   gocebe:{exp:.25,eco:.15,sci:.08}}[e.origin];
+  if(bias)for(const [key,value]of Object.entries(bias))p[key]=clamp(p[key]+value,0,key==='turtle'?1:1.4);
   e._prof = p;
   return p;
 }
@@ -768,12 +904,12 @@ function aiQueueMilitaryShip(e,yard,cls,policy){
 /* 93D.1: physical hulls, paid pending jobs, upkeep and bounded monthly budget. */
 function aiShipInventory(e){
  const counts={},pending={},yards=G.sys.filter(s=>s.owner===e.id&&hasYard(s));
- let queuedUse=0,queuedEnergy=0,queuedAlloy=0;
- for(const f of G.fleets)if(f.e===e.id&&!f.federal)for(const sh of f.ships)counts[sh.c]=(counts[sh.c]||0)+1;
+ let queuedUse=0,queuedEnergy=0,queuedAlloy=0,combatUsage=0;
+ for(const f of G.fleets)if(f.e===e.id&&!f.federal)for(const sh of f.ships){counts[sh.c]=(counts[sh.c]||0)+1;if(SHIPS[sh.c]?.rol==='sav')combatUsage+=SHIPS[sh.c].sz;}
  for(const s of G.sys)if(s.owner===e.id)for(const q of s.queue)if(q.e===e.id&&SHIPS[q.cls]){
-  pending[q.cls]=(pending[q.cls]||0)+1;queuedUse+=SHIPS[q.cls].sz;queuedEnergy+=SHIPS[q.cls].up;queuedAlloy+=SHIPS[q.cls].upA||0;
+  pending[q.cls]=(pending[q.cls]||0)+1;if(SHIPS[q.cls].rol==='sav')combatUsage+=SHIPS[q.cls].sz;queuedUse+=SHIPS[q.cls].sz;queuedEnergy+=SHIPS[q.cls].up;queuedAlloy+=SHIPS[q.cls].upA||0;
  }
- return {counts,pending,yards,usage:fleetUsage(e)+queuedUse,queuedEnergy,queuedAlloy};
+ return {counts,pending,yards,combatUsage,usage:fleetUsage(e)+queuedUse,queuedEnergy,queuedAlloy};
 }
 function aiShipProduction(e,my,prof){
  const month=G.year*12+G.month;
@@ -783,10 +919,16 @@ function aiShipProduction(e,my,prof){
  let inv=aiShipInventory(e);
  const yards=inv.yards.filter(s=>!(s.yardLock>(G.memAge||0)));
  if(!yards.length){note('no-usable-yard');return;}
- const war=Object.keys(e.war||{}).some(id=>e.war[id]&&G.emps[id]&&!G.emps[id].dead&&!G.emps[id].wild);
+ const visibleDanger=my.some(s=>aiObservedThreat(e,s.id,false)>0);
+ const war=visibleDanger||Object.keys(e.war||{}).some(id=>e.war[id]&&G.emps[id]&&!G.emps[id].dead&&!G.emps[id].wild);
+ const plan=aiEconomyPlan(e),commitment=plan.committed;
  const threat=G.emps.some(o=>o!==e&&!o.dead&&!o.wild&&e.contact[o.id]&&!e.ally[o.id]&&(e.rel[o.id]||0)<-40);
- const reserve=(e.megaReserve||0)+(e.colossusReserve||0)+Math.max(war?12:24,Math.min(120,Math.max(0,e.inc.ala||0)*(war?1:2)));
+ const underDefended=inv.combatUsage<e.cap*.35&&!plan.critical;
+ const reserve=(e.megaReserve||0)+(e.colossusReserve||0)+(commitment.ala||0)+Math.max(war?12:24,Math.min(120,Math.max(0,e.inc.ala||0)*(war?1:underDefended?.75:2)));
  let budget=Math.max(0,Math.min((e.res.ala||0)-reserve,Math.max(0,e.inc.ala||0)*(war?5:3)+(e.res.ala||0)*(war?.25:.15)));
+ // 96C.1: low income must not permanently strand one affordable basic hull.
+ // Payment, reserve, projected upkeep, research and capacity still gate buy().
+ if(underDefended&&!plan.critical&&inv.combatUsage===0&&(e.inc.ala||0)<=0&&old.reasons?.includes('alloy-budget-reserve'))budget=Math.max(budget,Math.min(Math.max(0,(e.res.ala||0)-reserve),shipCost(e,'kor').ala||0));
  const limit=Math.min(war?10:6,Math.max(1,yards.reduce((n,s)=>n+yardCount(s),0)*(war?3:2)));
  let orders=0;
  const target=Math.max(0,e.cap*(war?.90:threat?.80:clamp(.50+prof.war*.18,.5,.76)));
@@ -796,12 +938,13 @@ function aiShipProduction(e,my,prof){
   if(!shipBuildAccess(e,cls).ok)return false;
   const d=SHIPS[cls],c=shipCost(e,cls);
   if(inv.usage+d.sz>e.cap*(war?1:.92)){note('projected-capacity');return false;}
-  const net=(e.inc.ene||0)-(inv.queuedEnergy+d.up)*energyUpkeep;
+  const net=Math.min((e.inc.ene||0)-(inv.queuedEnergy+d.up)*energyUpkeep,plan.rows.ene.net-d.up*energyUpkeep);
   if((!war&&d.up>0&&net<2)||e.crisis||(net<0&&(e.res.ene||0)<Math.max(100,-net*(war?12:24)))){note('energy-runway');return false;}
   const alloyNet=(e.inc.ala||0)-(inv.queuedAlloy+(d.upA||0))*upkeep;
   if(alloyNet<0&&(e.res.ala||0)-(c.ala||0)<-alloyNet*18){note('alloy-upkeep');return false;}
   if((c.ala||0)>budget||(e.res.ala||0)-(c.ala||0)<reserve){note('alloy-budget-reserve');return false;}
-  if(!Object.entries(c).every(([r,v])=>e.res[r]>=v)){note('resource-cost');return false;}
+  if(!war&&plan.rows.tuk.net<0&&plan.rows.tuk.months<6){note('consumer-runway');return false;}
+  if(!Object.entries(c).every(([r,v])=>e.res[r]-(r==='ala'?0:commitment[r]||0)>=v)){note('resource-cost');return false;}
   return true;
  }
  function buy(cls,military=false){
@@ -815,7 +958,7 @@ function aiShipProduction(e,my,prof){
  }
  const classes=['zir','kru','muh','kor','esk'].filter(c=>shipBuildAccess(e,c).ok);
  for(let i=0;i<limit;i++){
-  if(inv.usage>=target){note('deterrence-target');break;}
+  if(inv.combatUsage>=target){note('deterrence-target');break;}
   const weights={esk:2,kor:prof.war>.8?3:4,muh:3,kru:2,zir:prof.war>.8?2:1};
   const needed=new Set();
   for(const f of G.fleets)if(f.e===e.id&&f.composition&&f.composition.auto&&!hasShipment(f)){const status=fleetCompositionStatus(e,f);for(const r of status.rows||[])if(r.missing&&r.buildable)needed.add(r.cls);}
@@ -838,6 +981,7 @@ function aiShipProduction(e,my,prof){
   if(yard&&inv.usage+SHIPS.col_s.sz<=e.cap&&(e.inc.ene||0)>SHIPS.col_s.up*energyUpkeep+inv.queuedEnergy*energyUpkeep)aiColossusProduction(e,yard,prof);
  }
  if(!orders&&!state.reasons.length)note('no-unmet-need');
+ for(const reason of state.reasons)AIDiagnostics.note('navy:'+reason,e,null,plan.policy);
 }
 
 function aiColossusProduction(e,yard,prof){
@@ -931,6 +1075,8 @@ function aiTurn(e){
     return;
   }
 
+  aiRecoverEconomy(e);
+
   /* --- 0. koloni odakları --- */
   const atWarNow = Object.keys(e.war).some(k => e.war[k]);
   for (const c of e.colonies){
@@ -992,6 +1138,7 @@ function aiTurn(e){
        Kontrol artık KUYRUKTAKİLERİ de sayıyor — aksi hâlde AI aynı
        binayı defalarca sıraya alıp kaynağını kilitliyordu. Ayrıca
        kuyruk 2'yi geçmesin: uzun sıra ekonomiyi dondurur. */
+    const economicNeeds=aiEconomicOrder(e,sys,pl,need);need.splice(0,need.length,...economicNeeds);
     const kuyruk = (typeof colonyQueued === 'function') ? colonyQueued(pl.col) : 0;
 
     /* ── FAZ 14: AI YIKIM KARARI ──
@@ -1034,7 +1181,7 @@ function aiTurn(e){
         const kuyruktaki = (typeof colonyQueuedOf === 'function')
           ? colonyQueuedOf(pl.col, k) : 0;
         if ((pl.col.b[k]||0) + kuyruktaki < BUILDINGS[k].max){
-          if (queueBuilding(e, sys, pl, k)) break;
+          if (queueBuilding(e, sys, pl, k)){AIDiagnostics.note('invest:'+k,e,null,aiEconomyPlan(e).policy);break;}
         }
       }
     }
@@ -2262,10 +2409,11 @@ function counterIntelTick(){
 
 /* Bu sistemde hangi yapı mantıklı? Mega yapı yalnız zengin ve
    gelişmiş imparatorlukların hırsıdır. */
-function aiPickStruct(e, sys){
+function aiPickStruct(e, sys, plan=aiEconomyPlan(e)){
   if (typeof STRUCTS === 'undefined' || typeof structAllowed !== 'function') return null;
-  const izinli = Object.keys(STRUCTS).filter(k => structAllowed(e, sys, k));
-  if (!izinli.length) return null;
+  // Permission is pure; test candidates lazily, once per key in this search.
+  const eligibility=new Map(),allowed=k=>{if(!eligibility.has(k))eligibility.set(k,structAllowed(e,sys,k));return eligibility.get(k);};
+  if (!Object.keys(STRUCTS).some(allowed)) return null;
 
   const karsilar = k => {
     const c = structCost(e, k);
@@ -2294,45 +2442,68 @@ function aiPickStruct(e, sys){
       /* Karar aiStructTick'te bir kez verilir (e.megaWill); burada
          zar atmak hedef seçimi ile inşaat anını çelişkiye düşürüyordu. */
       if (e.megaWill){
-        const megalar = izinli.filter(k => STRUCTS[k].mega && karsilar(k));
-        if (megalar.length) return megalar[Math.floor(rnd() * megalar.length)];
+        const megalar = Object.keys(STRUCTS).filter(k => STRUCTS[k].mega && allowed(k) && karsilar(k));
+        if (megalar.length) return megalar.sort((a,b)=>Number(b==='dyson')-Number(a==='dyson')||a.localeCompare(b))[0];
       }
     }
   }
 
-  /* Sıradan altyapı: ihtiyaca göre öncelik */
-  const oncelik = [];
-  if(e.techs.x_observer && !e.crisis && (e.inc.ene||0)>8)oncelik.push('derin_goz');
-  if ((e.inc && e.inc.min || 0) < 25) oncelik.push('maden_ist');
-  if ((e.inc && e.inc.ara || 0) < 30) oncelik.push('bilim_ist');
-  if (prof.war > .7) oncelik.push('platform', 'tersane_h');
-  if (prof.eco > .6) oncelik.push('tic_ist');
-  if (prof.sci > .7) oncelik.push('sensor', 'bilim_ist');
-  oncelik.push('role', 'karakol', 'maden_ist', 'bilim_ist');
+  /* Productive infrastructure precedes idle relays/defences. No hidden threat read. */
+  const oncelik=[];
+  if(e.techs.x_observer&&!e.crisis&&(e.inc.ene||0)>8)oncelik.push('derin_goz');
+  if(plan.rows.min.urgency>2)oncelik.push('maden_ist');
+  if((e.inc.ara||0)<30)oncelik.push('bilim_ist');
+  const border=sys.lanes.some(id=>{const r=aiKnownSystem(e,G.sys[id]);return r&&r.owner>=0&&r.owner!==e.id&&(e.war[r.owner]||(e.rel[r.owner]||0)<-40);});
+  if(prof.war>.7&&border)oncelik.push('platform');
+  if(!G.sys.some(s=>s.owner===e.id&&hasYard(s)))oncelik.push('tersane_h');
+  if((e.trade?.links||[]).some(l=>!l.bl&&l.path?.includes(sys.id)))oncelik.push('tic_ist');
+  oncelik.push('maden_ist','bilim_ist');
+  if(G.fleets.some(f=>f.e===e.id&&(f.path||[]).includes(sys.id)))oncelik.push('role');
+  oncelik.push('karakol','sensor');
 
   for (const k of oncelik)
-    if (izinli.includes(k) && !STRUCTS[k].mega && karsilar(k)) return k;
+    if (allowed(k) && !STRUCTS[k].mega && karsilar(k)) return k;
   return null;
 }
 
 /* İnşaatçı için hedef sistem seç: kendi bölgemizde, güvenli ve
    henüz yapısı olmayan bir yer. */
-function aiStructTarget(e, f){
-  let best = null;
-  for (const sy of G.sys){
-    if(!aiView(e).ctx.known.has(sy.id))continue;
-    if (aiView(e).ctx.visible.has(sy.id)&&(sy.nest || sy.ruin)) continue;
-    if (sy.work && sy.work.length) continue;             // zaten inşaat var
-    const record=aiKnownSystem(e,sy);if(!record)continue;const sahip=record.owner;
-    if (sahip >= 0 && sahip !== e.id) continue;          // yabancı toprak
-    if (!aiPickStruct(e, sy)||!aiKnownRoute(e,f,f.sys,sy.id)) continue;
-    const d = (f.sys >= 0) ? dist(G.sys[f.sys], sy) : 0;
-    /* Kendi sistemimiz tercih edilir, uzaklık cezalandırılır */
-    const skor = (sy.owner === e.id ? 400 : 0) - d;
-    if (!best || skor > best.skor) best = {sy, skor};
-  }
-  return best ? best.sy : null;
+/* Candidate search is bounded after inexpensive economic/safety ranking.
+   RemoteConstruction still owns legal routes, payments, movement and completion. */
+function aiConstructionCandidate(e,f,budget={routes:6}){
+ const plan=aiEconomyPlan(e),view=aiView(e),assigned=new Set(Object.values(G.construction?.queues||{}).flat().map(t=>t.system));
+ // Snapshot only inside this synchronous search: no cache survives movement/war/load.
+ const danger=new Map();for(const hostileFleet of G.fleets){
+  if(hostileFleet.e===e.id||!hostileFleet.ships.length||!isArmed(hostileFleet)||!hostile(e.id,hostileFleet.e))continue;
+  const at=hostileFleet.mv?hostileFleet.mv.to:hostileFleet.sys;if(view.ctx.visible.has(at))danger.set(at,(danger.get(at)||0)+fleetPower(hostileFleet));
+ }
+ const threatAtKnown=sy=>(danger.get(sy.id)||0)+sy.lanes.reduce((n,id)=>n+(danger.get(id)||0)*.5,0);
+ const candidates=[],inventory=aiShipInventory(e),navalReserve=inventory.combatUsage<e.cap*.35?(shipCost(e,'kor').ala||0)*2:0;
+ for(const sy of G.sys){
+  const record=aiKnownSystem(e,sy);if(!record||!view.ctx.known.has(sy.id)||record.owner>=0&&record.owner!==e.id||assigned.has(sy.id)||sy.work?.length)continue;
+  if(view.ctx.visible.has(sy.id)&&(sy.nest||sy.ruin)||view.ctx.pirates.has(sy.id)||threatAtKnown(sy)>0)continue;
+  const key=aiPickStruct(e,sy,plan);if(!key)continue;
+  if((G.construction?.history||[]).some(t=>t.empire===e.id&&t.system===sy.id&&t.key===key&&['failed','lost'].includes(t.state)&&G.day-(t.finished||0)<120))continue;
+  const cost=structCost(e,key);if(Object.entries(cost).some(([r,v])=>(e.res[r]||0)-(plan.committed[r]||0)<v*1.1+(r==='ala'?navalReserve:0)))continue;
+  const S=STRUCTS[key];if((S.g?.ene||0)<0&&plan.rows.ene.net<0)continue;
+  if(plan.critical&&!Object.entries(S.g||{}).some(([r,v])=>v>0&&plan.rows[r]?.net<0&&plan.rows[r]?.months<6))continue;
+  let benefit=0;for(const [r,v]of Object.entries(S.g||{}))benefit+=v*(1+(plan.rows[r]?.urgency||0)/8);
+  if(key==='dyson')benefit+=45*(1+plan.rows.ene.urgency/8);
+  if(key==='platform')benefit+=threatAtKnown(sy)*.05;
+  if(key==='tersane_h'&&!inventory.yards.length)benefit+=25;
+  if(key==='karakol')benefit+=5; // claim has a real access benefit, no fabricated income
+  const distance=dist(G.sys[f.sys],sy),score=benefit*20+(record.owner===e.id?40:0)-distance*.2-(cost.min||0)*.03-(cost.ala||0)*.08;
+  candidates.push({sy,key,score,cost});
+ }
+ candidates.sort((a,b)=>b.score-a.score||a.sy.id-b.sy.id);
+ for(const c of candidates.slice(0,6)){
+  if(budget.routes<=0)break;budget.routes--;
+  const route=typeof RemoteConstruction!=='undefined'?RemoteConstruction.route(e,f,c.sy,f.sys):aiKnownRoute(e,f,f.sys,c.sy.id)?.path;
+  if(route)return {...c,route};
+ }
+ return null;
 }
+function aiStructTarget(e,f){return aiConstructionCandidate(e,f)?.sy||null;}
 
 /* Aylık uzay inşaatı turu */
 /* ═══ FAZ 62: AI GEZEGEN OTOMASYONU ═══
@@ -2355,69 +2526,34 @@ function aiDirectiveTick(){
 }
 
 function aiStructTick(){
-  if (typeof startStruct !== 'function') return;
-  for (const e of G.emps){
-    if (e.dead || e.wild || !e.ai) continue;
-
-    /* ── HARİKA PROJESİ ──
-       Zengin ve teknolojik bir AI hedefini ilan eder ve o andan
-       itibaren alaşımını gemiye değil harikaya ayırır. */
-    const tekno = Object.keys(e.techs || {}).length;
-    const insaEdiyor = (typeof megaBuilds === 'function') ? megaBuilds(e).length : 0;
-    if (insaEdiyor){
-      e.megaReserve = 0;                       // proje başladı, rezerve gerek yok
-    } else if (tekno >= 11 && (e.res.min || 0) > 1900){
-      const prof0 = aiProfile(e);
-      const P0 = (typeof personaOf === 'function') ? personaOf(e) : null;
-      let hirs0 = .30 + prof0.sci * .35 + prof0.eco * .20;
-      if (P0){
-        if (P0.n === 'Yayılmacı') hirs0 += .20;
-        else if (P0.n === 'Fanatik Arındırıcılar') hirs0 -= .15;
-        else if (P0.n === 'Militarist') hirs0 -= .10;
-      }
-      /* Hırs bir kez belirlenir ve kalıcıdır — her ay zar atılmaz */
-      if (e.megaWill === undefined) e.megaWill = rnd() < clamp(hirs0, 0, .85);
-      e.megaReserve = e.megaWill ? 780 : 0;   // 700 maliyet + küçük pay
-    } else {
-      e.megaReserve = 0;
-    }
-
-    const builders = G.fleets.filter(f => f.e === e.id &&
-      typeof fleetHasRole === 'function' && fleetHasRole(f, 'insaat'));
-
-    /* 1) Yerinde bekleyen inşaatçı varsa yapıyı kur */
-    for (const f of builders){
-      if(typeof RemoteConstruction!=='undefined'&&RemoteConstruction.tasks(f).length)continue;
-      if (f.sys < 0 || (f.path && f.path.length) || f.mv || f.combat || f.building!==undefined || f.ships.some(s=>s.busy!==undefined)) continue;
-      const sys = G.sys[f.sys];
-      const key = aiPickStruct(e, sys);
-      if (key && (typeof RemoteConstruction!=='undefined'?RemoteConstruction.enqueue(f,sys.id,key).ok:startStruct(e, sys, key, f))) break;      // ayda bir inşaat
-    }
-
-    /* 2) Boştaki inşaatçıya hedef ata */
-    for (const f of G.fleets){
-      if (f.e !== e.id || !fleetHasRole(f, 'insaat')) continue;
-      if(typeof RemoteConstruction!=='undefined'&&RemoteConstruction.tasks(f).length)continue;
-      if ((f.path && f.path.length) || f.mv || f.combat || f.building!==undefined) continue;
-      if (f.sys >= 0 && aiPickStruct(e, G.sys[f.sys])) continue;   // zaten uygun yerde
-      const hedef = aiStructTarget(e, f);
-      if (hedef && hedef.id !== f.sys && typeof orderMove === 'function'){
-        if(typeof RemoteConstruction!=='undefined'){const key=aiPickStruct(e,hedef);if(key)RemoteConstruction.enqueue(f,hedef.id,key);}
-        else aiMove(e,f,hedef.id);
-      }
-    }
-
-    /* 3) İnşaatçı yoksa ve ekonomi elveriyorsa üret */
-    if (builders.length+G.sys.reduce((n,s)=>n+(s.queue||[]).filter(q=>q.e===e.id&&q.cls==='ins').length,0) < 2 && (e.res.min || 0) > 700 && (e.res.ala || 0) > 260){
-      const yard = G.sys.find(sy => sy.owner === e.id &&
-        typeof hasYard === 'function' && hasYard(sy) &&
-        (!sy.queue || sy.queue.length < 3));
-      if (yard && typeof queueShip === 'function' && rnd() < .30)
-        queueShip(e, yard, 'ins');
-    }
+ if(typeof startStruct!=='function')return;
+ const remote=typeof RemoteConstruction==='undefined'?null:RemoteConstruction,searchBudget={routes:32};
+ const actors=G.emps.filter(e=>!e.dead&&!e.wild&&!e.crisisSide&&e.ai&&e.id!==0),offset=Math.floor(G.day/30)%Math.max(1,actors.length);
+ for(const e of actors.slice(offset).concat(actors.slice(0,offset))){
+  const plan=aiEconomyPlan(e),tech=Object.keys(e.techs||{}).length;
+  if(tech>=11&&(e.res.min||0)>1900&&e.megaWill===undefined){const prof=aiProfile(e),P=personaOf(e);let chance=.30+prof.sci*.35+prof.eco*.20+(P?.n==='Yayılmacı'?.20:P?.n==='Fanatik Arındırıcılar'?-.15:P?.n==='Militarist'?-.10:0);e.megaWill=rnd()<clamp(chance,0,.85);}
+  e.megaReserve=!megaBuilds(e).length&&e.megaWill&&!plan.critical&&plan.policy==='growth'&&(e.res.min||0)>1900&&(e.res.ala||0)>500?780:0;
+  const builders=G.fleets.filter(f=>f.e===e.id&&fleetHasRole(f,'insaat'));
+  for(const f of builders){
+   if(remote&&remote.tasks(f).length||f.sys<0||f.path?.length||f.mv||f.combat||f.building!==undefined||f.ships.some(sh=>sh.busy!==undefined))continue;
+   const candidate=aiConstructionCandidate(e,f,searchBudget);
+   if(!candidate){AIDiagnostics.note('builder:no-safe-funded-target',e);continue;}
+   const result=remote?remote.enqueue(f,candidate.sy.id,candidate.key):{ok:f.sys===candidate.sy.id?startStruct(e,candidate.sy,candidate.key,f):aiMove(e,f,candidate.sy.id)};
+   AIDiagnostics.note(result.ok?'builder:assigned':'builder:rejected',e,null,result.ok?candidate.key:result.why);
   }
+  const inv=aiShipInventory(e),count=(inv.counts.ins||0)+(inv.pending.ins||0);
+  if(count>=2){AIDiagnostics.note('builder:covered',e);continue;}
+  const yard=inv.yards.filter(s=>!(s.yardLock>(G.memAge||0))&&s.queue.length<Math.max(2,yardCount(s))).sort((a,b)=>a.queue.length-b.queue.length||a.id-b.id)[0];
+  if(!yard||!shipBuildAccess(e,'ins').ok){AIDiagnostics.note('builder:no-usable-yard',e);continue;}
+  const probe={e:e.id,id:-1,sys:yard.id,mv:null,path:[],ships:[{c:'ins'}]},candidate=aiConstructionCandidate(e,probe,searchBudget);
+  if(!candidate){AIDiagnostics.note('builder:no-pending-work',e);continue;}
+  const cost=shipCost(e,'ins'),commit=aiConstructionCommitment(e),up=SHIPS.ins.up*Math.max(.1,1+(e.mods.upMul||0));
+  const funded=Object.entries(cost).every(([r,v])=>(e.res[r]||0)-v-(commit[r]||0)-(candidate.cost[r]||0)>=(r==='ala'?40:r==='min'?80:0));
+  const net=(e.inc.ene||0)-inv.queuedEnergy-up;
+  if(!funded||inv.usage+SHIPS.ins.sz>e.cap*.92||net<0&&(e.res.ene||0)<-net*12){AIDiagnostics.note('builder:budget-or-maintenance',e);continue;}
+  if(queueShip(e,yard,'ins'))AIDiagnostics.note('builder:paid-replacement',e,null,candidate.key);
+ }
 }
-
 
 /* ═══════════════════════════════════════════════════════════════════
    FAZ 7 — LOJİSTİK FARKINDALIĞI
@@ -4023,6 +4159,23 @@ function aiFedHelp(e,other,warTarget=false){
  for(const target of targets)for(const f of forces){const r=aiKnownRoute(e,f,f.mv?f.mv.to:f.sys,target.id,e,warTarget?other.id:null);if(r&&r.eta<=180)return {ok:true,eta:r.eta};}
  return null;
 }
+function aiFedAdmissionScore(e,other,type){
+ if(!other||other.dead||!e.contact[other.id]||e.war[other.id]||other.war[e.id]||diploBlocked(e,other))return {ok:false,score:-10,why:'Temas, savaş veya doktrin engeli'};
+ const factors=[],add=(n,v)=>{factors.push({n,v});return v;};
+ const profile=aiProfile(e),et=e.ethics||{},ot=other.ethics||{};
+ const distance=['mil','aut','mat','ahl'].reduce((sum,k)=>sum+Math.abs((et[k]||0)-(ot[k]||0)),0);
+ const common=G.emps.filter(o=>o!==e&&o!==other&&!o.dead&&!o.wild&&e.contact[o.id]&&e.war[o.id]&&other.war[o.id]).length;
+ const doctrine=researchDoctrine(e),same=doctrine===researchDoctrine(other);
+ const wars=Object.keys(e.war||{}).filter(id=>e.war[id]&&e.contact[id]&&!G.emps[id]?.wild);
+ let score=.34+add('İlişki',clamp((e.rel[other.id]||0)/150,-.6,.6))+add('Güven',clamp(trustOf(e,other.id)/300,-.3,.3))+
+  add('Etik uyumu',.10-distance*.025)+add('Doktrin',same?.10:0)+add('Ortak düşman',Math.min(.24,common*.12))+
+  add('Askerî tehdit',wars.length?Math.min(.15,wars.length*.05):0)+
+  add('Ekonomik / bilimsel çıkar',type==='ticaret'?profile.eco*.12:type==='bilimsel'?profile.sci*.12:profile.war*.08)+
+  add('Antlaşmalar',(e.ally[other.id]?.12:0)+(e.pact?.[other.id]?.08:0)+((e.nap?.[other.id]||0)>G.day?.03:0))+
+  add('Bağımsızlık eğilimi',-clamp(.6-profile.dip,0,.6)*.15+(e.origin==='kapali'?-.18:e.origin==='golgeden'?-.08:e.origin==='gocebe'?-.05:0));
+ const ok=score>=.5,sorted=factors.slice().sort((a,b)=>ok?b.v-a.v:a.v-b.v).slice(0,3);
+ return {ok,score,factors,why:(ok?'Olumlu':'Olumsuz')+': '+sorted.map(x=>x.n+' '+(x.v>=0?'+':'')+x.v.toFixed(2)).join(' · ')};
+}
 function aiFedWilling(e,founder,type,f=null){
  if(!e||!founder||e.dead||e.wild||e.crisisSide||isPurifier(e)||isVassal(e)||!e.contact[founder.id]||e.war[founder.id]||(e._fedLeaveUntil||0)>G.day)return {ok:false,why:'Siyasi koşullar uygun değil'};
  const rel=e.rel[founder.id]||0;if(rel<15||trustOf(e,founder.id)<-35)return {ok:false,why:'Güven veya ilişki yetersiz'};
@@ -4032,14 +4185,18 @@ function aiFedWilling(e,founder,type,f=null){
  for(const s of targets){const route=aiKnownRoute(e,probe,e.home,s.id);if(route)eta=Math.min(eta,route.eta);}
  if(eta>(type==='askeri'?180:360))return {ok:false,why:'Bilinen yardım/iş birliği rotası yetersiz'};
  // Protection uses 95A's observation/uncertainty estimate, never a private force total.
- const protection=type==='askeri'?clamp(aiKnownPower(e,founder)/(totalPower(e)+100),0,2)*.08:0;
- const score=aiFedAffinity(e,type)+rel/160+trustOf(e,founder.id)/300+protection-(f&&fedCohesion(f)<35?.4:0);
- return {ok:score>=.65,score,eta,why:score>=.65?'Doktrin, güven ve bilinen erişim uygun':'Birliğin öncelikleri uygun değil'};
+ const partners=f?f.members.filter(id=>e.contact[id]).map(id=>G.emps[id]):[founder];
+ const protection=type==='askeri'?clamp(partners.reduce((sum,o)=>sum+aiKnownPower(e,o),0)/(totalPower(e)+100),0,2)*.08:0;
+ const assessment=aiFedAdmissionScore(e,founder,type);
+ const peers=f?f.members.filter(id=>id!==founder.id&&e.contact[id]):[];
+ const peerBias=peers.length?peers.reduce((sum,id)=>sum+clamp((e.rel[id]||0)/500,-.15,.15),0)/peers.length:0;
+ const score=assessment.score+(aiFedAffinity(e,type)-.5)*.3+protection+peerBias-(f&&fedCohesion(f)<35?.4:0);
+ return {ok:score>=.5,score,eta,why:score>=.5?'İlişki, çıkar ve bilinen erişim uygun · '+assessment.why:assessment.why+' · birlik uyumu / bilinen koruma '+(score-assessment.score).toFixed(2)};
 }
 function aiFedVoteWant(e,f,v){
  const proposer=G.emps[v.proposer],rel=proposer?(e.rel[proposer.id]||0):0;
  let want=.4+rel/300+(fedCohesion(f)-50)/250;
- if(v.motion==='admit'){const target=G.emps[v.target];return target&&e.contact[target.id]&&!e.war[target.id]?clamp(.4+(e.rel[target.id]||0)/130+trustOf(e,target.id)/250,.02,.95):.02;}
+ if(v.motion==='admit')return aiFedAdmissionScore(e,G.emps[v.target],f.type).score;
  if(v.motion==='expel')return clamp(.3-(e.rel[v.target]||0)/120-trustOf(e,v.target)/200,.02,.95);
  if(v.motion==='elect')return clamp(.35+(e.rel[v.target]||0)/160+(v.target===e.id?.2:0),.02,.95);
  if(v.motion==='reform')want+=aiFedAffinity(e,v.type)-aiFedAffinity(e,f.type);
@@ -4066,6 +4223,8 @@ function aiFederationPolitics(){
    let invited=false;
    for(const other of G.feds||[])if(other.invites?.[e.id]){const inv=other.invites[e.id],founder=G.emps[inv.by];if(aiFedWilling(e,founder,other.type,other).ok)acceptFedInvite(e,other.id);else rejectFedInvite(e,other.id);invited=true;break;}
    if(invited)continue;
+   const partner=G.emps.filter(o=>o!==e&&e.contact[o.id]&&findFed(o)&&canRequestFederation(e,o).ok&&aiFedWilling(e,o,findFed(o).type,findFed(o)).ok).sort((a,b)=>(e.rel[b.id]||0)-(e.rel[a.id]||0)||a.id-b.id)[0];
+   if(partner){const result=requestFederation(e,partner);if(result.ok){e._fedPoliticsAfter=G.day+360;e.aiFedReason={day:G.day,kind:'apply',why:'Bilinen erişim, ilişki ve ortak çıkar'};}continue;}
    const type=aiFedType(e),gate=canFoundFed(e,type);
    if(gate.ok){const result=foundFederation(e,type);e.aiFedReason={day:G.day,kind:'found',type,why:'Kabul eden müttefikler, bilinen rota ve doktrin uyumu'};if(result.ok)e._fedPoliticsAfter=G.day+360;}
    continue;

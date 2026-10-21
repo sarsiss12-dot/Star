@@ -135,21 +135,113 @@ const Commerce={
   const terminal=st.convoys.filter(v=>this.terminal(v));if(terminal.length>this.historyLimit){const remove=new Set(terminal.slice(0,terminal.length-this.historyLimit).map(v=>v.id));st.convoys=st.convoys.filter(v=>!remove.has(v.id));}
   const closed=st.contracts.filter(c=>this.closed(c)&&!st.convoys.some(v=>v.contract===c.id&&!this.terminal(v)));if(closed.length>128){const ids=new Set(closed.slice(0,closed.length-128).map(c=>c.id));st.contracts=st.contracts.filter(c=>!ids.has(c.id));st.convoys=st.convoys.filter(v=>!ids.has(v.contract));}
  },
+ /* Self-assessed supply/demand, not access to another empire's hidden treasury.
+    Stocks committed to export remain distinct from recurring production. */
+ aiBalance(e){
+  const out={},incoming={},st=this.state();
+  for(const c of st.contracts)if(!this.closed(c))for(const l of c.legs){if(l.e===e.id)out[l.r]=(out[l.r]||0)+l.v*30/l.every;if(l.to===e.id)incoming[l.r]=(incoming[l.r]||0)+l.v*30/l.every;}
+  const base={ene:80,min:60,yiy:40,ala:60,tuk:40},rows={};
+  for(const r of this.resources){const stock=Math.max(0,e.res[r]||0),net=(e.inc?.[r]||0)-(out[r]||0),reserve=base[r]+Math.max(0,-net)*6;
+   rows[r]={stock,net,reserve,incoming:incoming[r]||0,export:Math.max(0,Math.min(stock-reserve,Math.max(0,net)*.45+Math.max(0,stock-reserve)/12)),need:Math.max(0,-net)+Math.max(0,base[r]*2-stock)/6};
+  }return rows;
+ },
+ /* 96C.1: bounded derived topology memo, used only during an AI opportunity pass.
+    Exact signature includes world identity, lanes/owners/knowledge, all wars and
+    raid deadlines. Ports/pacts/embargo/stock gates are always evaluated live. */
+ aiRouteSignature(){return JSON.stringify([G.sys.map(s=>[s.id,s.owner,s.lanes,s.seen,s.cr]),G.emps.map(e=>[e.id,e.dead,e.war]),G.p?G.sys.map(s=>this.known(G.p,s)):[],Object.entries(G.raids||{}).map(([k,until])=>[k,until>G.day])]);},
+ aiPortRoute(a,b,source,target){
+  const scope=this._aiRouteScope;if(!scope)return this.route(a,b,source,target);
+  const key=[a.id,b.id,source,target].join(':');
+  if(scope.paths.has(key))return scope.paths.get(key)?.slice()||null;
+  const path=this.route(a,b,source,target);if(scope.paths.size>=2048)scope.paths.clear();scope.paths.set(key,path?.slice()||null);return path;
+ },
+ aiPorts(a,b,budget){
+  let best=null;
+  const pairs=tradeHubs(a).flatMap(source=>tradeHubs(b).map(target=>({source,target,d:dist(G.sys[source],G.sys[target])}))).sort((x,y)=>x.d-y.d||x.source-y.source||x.target-y.target);
+  const start=(Math.floor(G.day/30)+a.id+b.id)%Math.max(1,pairs.length);
+  for(let i=0;i<Math.min(3,pairs.length);i++){const {source,target}=pairs[(start+i)%pairs.length];
+   if(budget.routes<=0)return best;budget.routes--;
+   const path=this.aiPortRoute(a,b,source,target);if(!path)continue;
+   // Only the actor's observed pirate/hostile locations can inform risk selection.
+   const view=aiView(a);if(path.some(id=>view.ctx.pirates.has(id)||aiObservedThreat(a,id,false)>0))continue;
+   const distance=path.slice(1).reduce((n,id,i)=>n+dist(G.sys[path[i]],G.sys[id]),0);
+   if(!best||distance<best.distance)best={source,target,distance};
+  }return best;
+ },
+ aiValue(e,n){return evalOffer({...e},n);},
+ aiTerms(a,b,A,B,ports){
+  let best=null;
+  const exports=this.resources.filter(r=>A[r].export>=1).sort((x,y)=>A[y].export-A[x].export).slice(0,3);
+  const imports=this.resources.filter(r=>B[r].export>=1).sort((x,y)=>A[y].need-A[x].need).slice(0,3);
+  for(const r of exports)for(const q of imports){
+   if(r===q||A[q].need<=0&&B[r].need<=0)continue;
+   const travel=ports.distance??dist(G.sys[ports.source],G.sys[ports.target]),period=Math.min(180,Math.max(30,Math.ceil((travel/this.speed+this.prepareDays*2)/30)*30));
+   for(const every of [...new Set([period,Math.min(180,period*2)])]){
+    const cap=Math.min(routeVolume(a,ports.source,ports.target),routeVolume(b,ports.target,ports.source));
+    const make=(v,w)=>({from:a.id,to:b.id,give:[{t:'freight',r,v,source:ports.source,target:ports.target,every,months:12}],want:[{t:'freight',r:q,v:w,source:ports.target,target:ports.source,every,months:12}]});
+    const unit=make(1,1),buyer=this.aiValue(b,unit),seller=this.aiValue(a,{from:b.id,to:a.id,give:unit.want,want:unit.give});
+    if(buyer.hardLock||seller.hardLock||buyer.cost<=0||seller.gain<=0)continue;
+    const low=seller.cost/seller.gain*1.04,high=buyer.gain/buyer.cost*.96;if(low>=high)continue;
+    const ratio=Math.sqrt(low*high),maxA=Math.min(16,cap,A[r].export*every/30,A[r].stock-A[r].reserve),maxB=Math.min(16,cap,B[q].export*every/30,B[q].stock-B[q].reserve);
+    const amount=Math.floor(Math.min(maxA,maxB/ratio)*10)/10,payment=Math.floor(amount*ratio*10)/10;if(amount<1||payment<1)continue;
+    const n=make(amount,payment),receiver=this.aiValue(b,n),owner=this.aiValue(a,{from:b.id,to:a.id,give:n.want,want:n.give});
+    if(receiver.net<=0||owner.net<=0)continue;
+    const score=(Math.min(amount,B[r].need*every/30)+Math.min(payment,A[q].need*every/30))*30/every;
+    if(!best||score>best.score)best={n,score};
+   }
+  }return best?.n||null;
+ },
+ aiPlayerTerms(a,A,ports){
+  // No reading player stocks/net to infer a hidden need. The player alone decides.
+  const r=this.resources.filter(r=>A[r].export>=2).sort((x,y)=>A[y].export-A[x].export)[0];
+  const q=this.resources.filter(q=>q!==r&&A[q].need>0).sort((x,y)=>A[y].need-A[x].need)[0];if(!r||!q)return null;
+  const cap=Math.min(routeVolume(a,ports.source,ports.target),routeVolume(G.p,ports.target,ports.source)),v=Math.floor(Math.min(8,cap,A[r].export)),w=Math.min(6,cap,v);
+  if(v<1||w<1)return null;const n={from:a.id,to:0,give:[{t:'freight',r,v,source:ports.source,target:ports.target,every:30,months:12}],want:[{t:'freight',r:q,v:w,source:ports.target,target:ports.source,every:30,months:12}]};
+  return this.aiValue(a,{from:0,to:a.id,give:n.want,want:n.give}).net>0?n:null;
+ },
  aiTick(){
-  const st=this.state(),month=Math.floor(G.day/30);let created=0;
-  for(const a of G.emps){if(a.dead||!a.ai||a.wild||a.crisisSide||st.aiAt[a.id]===month)continue;st.aiAt[a.id]=month;
-   for(const c of st.contracts)if(c.a===a.id&&!this.closed(c)&&c.cycle>0&&Object.values(c.lost).reduce((x,y)=>x+y,0)>Object.values(c.delivered).reduce((x,y)=>x+y,0)+20)this.cancel(c.id,a);
+  const signature=this.aiRouteSignature(),old=this._aiRouteMemo;
+  if(!old||old.world!==G.sys||old.signature!==signature)this._aiRouteMemo={world:G.sys,signature,paths:new Map()};
+  this._aiRouteScope=this._aiRouteMemo;
+  try{return this.aiOpportunityTick();}finally{this._aiRouteScope=null;}
+ },
+ aiOpportunityTick(){
+  const st=this.state(),month=Math.floor(G.day/30),budget={routes:96};let created=0;
+  const normal=e=>e&&!e.dead&&!e.wild&&!e.crisisSide;
+  const balances=new Map(G.emps.filter(e=>normal(e)&&e.ai&&e.id!==0).map(e=>[e.id,this.aiBalance(e)]));
+  for(const a of G.emps){if(!normal(a)||!a.ai||a.id===0||st.aiAt[a.id]===month)continue;st.aiAt[a.id]=month;
+   for(const c of st.contracts)if([c.a,c.b].includes(a.id)&&!this.closed(c)){
+    const leg=c.legs.find(l=>l.e===a.id),row=balances.get(a.id)[leg.r];
+    if(c.cycle>0&&(Object.values(c.lost).reduce((x,y)=>x+y,0)>Object.values(c.delivered).reduce((x,y)=>x+y,0)+20||row.net<0&&row.stock<row.reserve)){
+     this.cancel(c.id,a);AIDiagnostics.note('trade-review-cancel',a,null,'Loss or outgoing reserve pressure; existing cargo remains physical');
+    }
+   }
    if(created>=4)break;
-   for(const b of G.emps){if(b===a||!b.ai||a.id>b.id||this.pairGate(a,b)||!a.contact[b.id]||!b.contact[a.id]||st.contracts.some(c=>!this.closed(c)&&(c.a===a.id&&c.b===b.id||c.a===b.id&&c.b===a.id)))continue;
-    const give=this.resources.filter(r=>(a.inc?.[r]||0)>5&&(b.inc?.[r]||0)<2&&a.res[r]>15).sort((x,y)=>(a.inc[y]||0)-(a.inc[x]||0));
-    const want=this.resources.filter(r=>(b.inc?.[r]||0)>5&&(a.inc?.[r]||0)<2&&b.res[r]>15).sort((x,y)=>(b.inc[y]||0)-(b.inc[x]||0));
-    if(!give.length||!want.length)continue;let ports=null;
-    for(const source of tradeHubs(a))for(const target of tradeHubs(b))if(!ports&&this.route(a,b,source,target))ports={source,target};if(!ports)continue;
-    const r=give[0],s=want.find(k=>k!==r);if(!s)continue;const cap=Math.max(1,routeVolume(a,ports.source,ports.target));
-    const x={t:'freight',r,v:Math.max(1,Math.min(10,cap,Math.floor(a.res[r]*.1),(a.inc[r]||0)*.16)),...ports,every:30,months:12};
-    const y={t:'freight',r:s,v:Math.max(1,Math.min(10,cap,Math.floor(b.res[s]*.1),(b.inc[s]||0)*.16)),source:ports.target,target:ports.source,every:30,months:12};
-    // Existing canonical quote/negotiation owns agreement and atomic commit.
-    const n={from:a.id,to:b.id,give:[x],want:[y]};if(dealQuote(n).ok&&aiNegotiate(a,b,n.give,n.want,true).uygulandi){created++;break;}
+   for(const b of G.emps.slice().sort((x,y)=>Number(x.id===0)-Number(y.id===0)||x.id-y.id)){
+    if(!normal(b)||b===a||b.id!==0&&(!b.ai||a.id>b.id))continue;
+    const note=(code,why)=>AIDiagnostics.note(code,a,b,why);
+    if(!a.contact[b.id]||!b.contact[a.id]){note('trade-no-contact');continue;}
+    if(st.contracts.some(c=>!this.closed(c)&&[c.a,c.b].includes(a.id)&&[c.a,c.b].includes(b.id))){note('trade-existing');continue;}
+    const political=this.pairGate(a,b);if(political&&political!=='Genel ticaret anlaşması yok'){note('trade-political',political);continue;}
+    const wait=a.aiTalk?.['commerce:'+b.id];if(wait?.until>G.day){note('trade-cooldown',wait.reason);continue;}
+    if(!tradeHubs(a).length||!tradeHubs(b).length){note('trade-no-port');continue;}
+    const A=balances.get(a.id),B=balances.get(b.id);
+    if(b.id!==0&&!this.resources.some(r=>A[r].export>=1&&B[r].need>0||B[r].export>=1&&A[r].need>0)){note('trade-no-supply-demand');continue;}
+    const ports=this.aiPorts(a,b,budget);if(!ports){note(budget.routes<=0?'trade-route-budget':'trade-no-safe-route');continue;}
+    const n=b.id===0?this.aiPlayerTerms(a,A,ports):this.aiTerms(a,b,A,B,ports);
+    const cool=(reason,days=120)=>{(a.aiTalk||(a.aiTalk={}))['commerce:'+b.id]={until:G.day+days,reason};note(reason);};
+    if(!n){cool('trade-no-fair-ratio',60);continue;}
+    if(political){
+     if(!canPact(a,b)){cool('trade-pact-unavailable');continue;}
+     const terms=aiProposeTerms(a,b,'pact');
+     if(b.id===0){if(UI.aiOffer({from:a.id,to:0,...terms}))created++;cool('trade-pact-player-pending',180);}
+     else{const result=aiNegotiate(a,b,terms.give,terms.want,true);if(result.uygulandi)created++;cool(result.uygulandi?'trade-pact-agreed':'trade-pact-rejected');}
+     break;
+    }
+    const quote=dealQuote(n);if(!quote.ok){cool('trade-quote-rejected');note('trade-quote-reason',quote.reasons[0]);continue;}
+    if(b.id===0){if(UI.aiOffer(n)){created++;cool('trade-player-pending',180);break;}cool('trade-player-wait',180);continue;}
+    const result=aiNegotiate(a,b,n.give,n.want,true);note(result.uygulandi?'trade-signed':'trade-negotiation-rejected',result.why);
+    cool(result.uygulandi?'trade-agreed':'trade-retry-wait');if(result.uygulandi){balances.set(a.id,this.aiBalance(a));balances.set(b.id,this.aiBalance(b));created++;break;}
    }
   }
  },

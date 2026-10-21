@@ -11,7 +11,7 @@
    önbellekteki tek parça main.js temizlensin. */
 /* FAZ 83: sürüm yükseltildi — eski ve yeni JS dosyalarının
    karışmasını önler; activate'te eskiler siliniyor. */
-const CACHE = 'stars-v96a';
+const CACHE = 'stars-v96e';
 
 /* Oyunun tamamı — hepsi yerel dosya, dış bağımlılık yok */
 const KABUK = [
@@ -24,7 +24,7 @@ const KABUK = [
   './ui.js',
   './ai.js',
   './diplomacy.js',
-  './economy.js', './commerce.js', './commerce-ui.js',
+  './economy.js', './commerce.js', './commerce-ui.js', './economic-ledger.js', './economy-ui.js',
   './news.js',
   './inbox.js',
   './construction.js',

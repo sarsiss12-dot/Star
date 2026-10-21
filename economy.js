@@ -44,7 +44,7 @@ function colonyStaffing(col){
   if (jobs <= 0) return 1;
   return clamp(col.pop / jobs, 0, 1);
 }
-function colonyOutput(e, sys, pl){
+function colonyOutput(e, sys, pl, report=null){
   /* ═══ FAZ 77B: RADİKAL CIVIC ÇARPANLARI ═══
      Taht Gemisi (bulunduğu sistemde +%15 / kayıpsa −%50) ve
      Yıldız Yiyen açlığı (tam açlıkta −%55) üretime burada
@@ -68,23 +68,29 @@ function colonyOutput(e, sys, pl){
   const scale = clamp(.55 + col.pop*.045, .55, 1.7);
   const staff = colonyStaffing(col);
   const sleepMul = hasCivic(e,'sleep') ? 1.45 : 1;
+  const trace=report?report.colony(sys,pl,o):null;
   o.min += col.pop*.40*sleepMul; o.ene += col.pop*.34*sleepMul; o.ara += col.pop*.30*sleepMul; o.yiy += col.pop*.20*sleepMul;
+  if(trace)trace('Nüfus taban üretimi');
   for (const k in col.b){
     const n = col.b[k]; if (!n) continue;
     const B = BUILDINGS[k];
     for (const r in (B.g||{})) o[r] += B.g[r]*n*scale*staff;
     for (const r in (B.u||{})) use[r] = (use[r]||0) + B.u[r]*n*staff;
+    if(trace)trace('Bina üretimi: '+B.n);
   }
   if (pl.dep){
     const d = DEPOSITS.find(x=>x.id===pl.dep);
     if (d) for (const r in d.g) o[r] += d.g[r];
   }
+  if(trace)trace('Gezegen kaynak yatağı');
   // özel bina etkileri
   if (col.b.kuyu){
     const hot = (pl.t === 'vol' || pl.t === 'tok' || PLANETS[pl.t].k === 'olu');
     o.ene += col.b.kuyu * (hot ? 4 : 0) * staff;      // sıcak dünyalarda ek verim
   }
+  if(trace)trace('Jeotermal özel bina üretimi');
   if (col.b.asansor) for (const k in o) o[k] *= 1.18;
+  if(trace)trace('Yörünge asansörü çarpanı');
   /* ═══ FAZ 77A: KOLONİ ŞOKU ═══
      Yeni koloni ilk yıllarda %45 verimle başlar, üç yılda
      (Öğrenen Sinapslar varsa 1.5 yılda) tam kapasiteye çıkar. */
@@ -92,12 +98,14 @@ function colonyOutput(e, sys, pl){
     const sm = colonyShockMul(e, col);
     if (sm < 1) for (const k in o) o[k] *= sm;
   }
+  if(trace)trace('Yeni koloni şoku');
   // gezegen karakteri
   if (typeof planetTrait === 'function'){
     const pt = planetTrait(col);
     if (pt && pt.prod) for (const k in o) o[k] *= (1 + pt.prod);
   }
 
+  if(trace)trace('Gezegen karakteri çarpanı');
   const fm = focusMods(col);
   /* FAZ 52: fizyoloji üretim çarpanı — okyanus türü sevdiği
      dünyalarda +%20, sevmediğinde zaten habOf cezası alıyor. */
@@ -105,6 +113,7 @@ function colonyOutput(e, sys, pl){
   if (phO && phO.sever && phO.sever.indexOf(pl.t) >= 0){
     for (const k in o) o[k] *= 1.20;
   }
+  if(trace)trace('Tür fizyolojisi çarpanı');
   /* FAZ 78B: vali çarpanı odak çarpanıyla TOPLAMSAL birleşir */
   o.min *= (1 + (fm.minMul||0) + _vMin);
   o.ene *= (1 + (fm.eneMul||0) + _vEne);
@@ -113,14 +122,18 @@ function colonyOutput(e, sys, pl){
   o.ara *= (1 + (fm.araMul||0) + _vAra);
   o.tuk *= (1 + (fm.minMul||0)*.6);
   o.etk += (fm.etkFlat||0);
+  if(trace)trace('Koloni odağı ve vali (toplamsal)');
   if (e.home === sys.id) { for (const k in o) o[k] *= 1.30; }
+  if(trace)trace('Anavatan çarpanı');
   const stabMul = clamp(.55 + col.stab/130, .55, 1.2);
   for (const k in o) o[k] *= stabMul;
+  if(trace)trace('İstikrar çarpanı');
   /* ═══ FAZ 30: SIKIYÖNETİM VERİM CEZASI ═══
      İşgal altındaki bir dünya normal üretemez: halk direnir,
      lojistik askerîdir, uzmanlar kaçmıştır. Tek çarpan, tek satır —
      formül karmaşıklaşmıyor. */
   if (pl.martial_law > 0) for (const k in o) o[k] *= .50;
+  if(trace)trace('İşgal / sıkıyönetim üretim kaybı');
   return {o, use};
 }
 
@@ -306,50 +319,61 @@ function tradeInfo(e){
 }
 
 function empireIncome(e){
+  const report=typeof EconomyLedger!=='undefined'?EconomyLedger.incomeReport(e):null;
   const inc = {min:0,ene:0,yiy:0,ala:0,ara:0,etk:0,tuk:0};
   let food = 0, upk = 0, pops = 0;
   for (const c of e.colonies){
     const sys = G.sys[c.s], pl = sys.planets[c.p];
     if (!pl.col || pl.owner !== e.id) continue;
-    const {o, use} = colonyOutput(e, sys, pl);
+    const {o, use} = colonyOutput(e, sys, pl,report);
+    const original=report?{...o}:null;
     /* FAZ 77B: radikal civic çarpanı */
     if (typeof throneMul === 'function' || typeof hungerMul === 'function'){
       const rm = (typeof throneMul === 'function' ? throneMul(e, sys.id) : 1) *
                  (typeof hungerMul === 'function' ? hungerMul(e) : 1);
       if (rm !== 1) for (const k in o) o[k] *= rm;
     }
+    if(report){for(const k in o)report.add('Taht gemisi / açlık çarpanı',k,o[k]-original[k],sys.id);for(const [key,n] of Object.entries(pl.col.b)){const B=BUILDINGS[key];for(const k in B.u||{})report.add('Bina girdisi: '+B.n,k,-B.u[k]*n*colonyStaffing(pl.col),sys.id);report.add('Bina enerji bakımı: '+B.n,'ene',-(B.up||0)*n*1.6,sys.id);}}
     for (const k in o) inc[k] += o[k];
     for(const key in use)if(key in inc)inc[key]-=use[key]||0;
     food += pl.col.pop * 1.15;                    // nüfus başına ağır beslenme yükü
     pops += pl.col.pop;
     for (const k in pl.col.b) upk += (BUILDINGS[k].up||0) * pl.col.b[k];
   }
+  const mark=report?report.empire(inc,upk*1.6):()=>{};
   inc.min *= (1+e.mods.minMul);
   inc.ene *= (1+e.mods.eneMul);
   inc.yiy *= (1+e.mods.yiyMul);
   inc.ala *= (1+e.mods.alaMul);
+  mark('Teknoloji, etik, doktrin ve devlet üretim çarpanları');
   /* FAZ 8: donanma sürekli alaşım tüketir — filo şişmesini frenler */
   if (typeof fleetAlloyUpkeep === 'function'){
     const aBak = fleetAlloyUpkeep(e);
     e.fleetAlloyUp = aBak;
     inc.ala -= aBak;
   }
+  mark('Filo alaşım bakımı');
   inc.ara *= (1+e.mods.araMul);
+  mark('Devlet bilim çarpanı');
   if (typeof structBonus === 'function'){
     const sb = structBonus(e);
     e.structs = sb;
     inc.min += sb.min; inc.ara += sb.ara;
     inc.ene += sb.ene + sb.dyson * 45;
   }
+  mark('Uzay yapıları ve Dyson üretimi');
   const tr = tradeInfo(e);
   e.trade = tr;
   /* FAZ 48: DÜRÜST ekseni ticaret gelirini artırır — güvenilir
      ortakla iş yapmak herkes için ucuzdur. */
+  if(report){report.add('Ticaret ağı üretim katkısı','ene',inc.ene*tr.mul);report.add('Etik / devlet ticaret çarpanı','ene',inc.ene*((e.mods&&e.mods.tradeMul)||0));}
   inc.ene *= (1 + tr.mul + ((e.mods && e.mods.tradeMul) || 0));
+  if(report)report.reset(inc);
   inc.tuk *= (1+e.mods.minMul*.5);
   inc.ene += e.mods.eneFlat;
   inc.etk += 6 + e.mods.etkFlat;      // diplomasi erişilebilir olsun
 
+  mark('Devlet tüketim üretim çarpanı ve sabit enerji / Etki');
   // tüketim malı talebi: nüfusun yaşam standardı
   const cgRate = hasCivic(e,'zerowaste') ? .40 : .60;
   let cgNeed = pops * cgRate * (RACES[e.race].bio === 'makine' ? .5 : 1);
@@ -363,6 +387,7 @@ function empireIncome(e){
     if (savasta){ cgNeed *= (1 + e.mods.warTuk); e.cgNeed = cgNeed; }
   }
   inc.tuk -= cgNeed;
+  mark(e.mods.warTuk&&Object.keys(e.war).some(k=>e.war[k])?'Nüfus tüketim malı ve savaş paniği':'Nüfus tüketim malı tüketimi');
   const bio = RACES[e.race].bio;
   /* ═══ FAZ 52: FİZYOLOJİ BESLENMESİ ═══
      Litoit mineral yer, makine enerji, bitkisel fotosentezle
@@ -395,6 +420,7 @@ function empireIncome(e){
     }
     inc.yiy -= ihtiyac;
   }
+  mark('Nüfus beslenmesi / tür fizyolojisi');
   const fleetE = fleetUpkeep(e);
   e.fleetUp = fleetE;
   // yönetim maliyeti: imparatorluk büyüdükçe artan bürokrasi yükü
@@ -403,9 +429,13 @@ function empireIncome(e){
   if (hasCivic(e,'slots')) admin *= .85;          // Bürokratik Verimlilik
   if (hasPerk(e,'ironWill')) admin *= .90;        // Demir İrade
   e.adminCost = admin;
+  if(report){report.add('Filo enerji bakımı','ene',-fleetE);report.add('Yönetim maliyeti','ene',-admin);}
   inc.ene -= upk * 1.6 + fleetE + admin;
+  if(report)report.reset(inc);
   e.foodNeed = food;
   if (typeof fedApplyIncomeLaws === 'function') fedApplyIncomeLaws(e, inc);
+  mark('Federasyon türü ve yasaları');
+  if(report)Object.defineProperty(e,'_incomeDetail',{value:report.finish(inc),writable:true,configurable:true,enumerable:false});
   return inc;
 }
 
@@ -461,6 +491,7 @@ function economyTick(init){
     refreshLuxury(e);
     if (init) continue;
     for (const k in inc) e.res[k] += inc[k];
+    if(typeof EconomyLedger!=='undefined')EconomyLedger.sync('Aylık tekrarlanan net üretim','production');
     if (inc.etk > 0) e.etkTotal = (e.etkTotal||0) + inc.etk;
 
     // negatif kaynak cezaları
@@ -485,6 +516,7 @@ function economyTick(init){
     if (e.res.ala < 0) e.res.ala = 0;
     if (e.res.etk < 0) e.res.etk = 0;
 
+    if(typeof EconomyLedger!=='undefined')EconomyLedger.sync('Stok sıfır sınırı / karşılanamayan tüketim','clamp');
     // nüfus & istikrar
     for (const c of e.colonies){
       const sys = G.sys[c.s], pl = sys.planets[c.p];
@@ -2980,10 +3012,12 @@ function directiveTick(){
         continue;
       }
       if (typeof queueBuilding === 'function'){
-        const r = queueBuilding(e, sys, pl, st.bina);
-        if (r !== false && e.id === 0)
-          say('🏗 ' + (pl.col.name || pl.name) + ' · ' +
-              BUILDINGS[st.bina].n + ' otomatik sıraya alındı', 'sci');
+        const candidates=e.ai&&e.id!==0?aiEconomicOrder(e,sys,pl,[st.bina]):[st.bina];
+        for(const key of candidates)if(queueBuilding(e,sys,pl,key)){
+          if(e.id===0)say('🏗 '+(pl.col.name||pl.name)+' · '+BUILDINGS[key].n+' otomatik sıraya alındı','sci');
+          else if(typeof AIDiagnostics!=='undefined')AIDiagnostics.note('directive:'+key,e,null,aiEconomyPlan(e).policy);
+          break;
+        }
       }
     }
   }

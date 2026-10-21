@@ -319,36 +319,16 @@ const ART = (() => {
      PORTRE — tür siluetleri (16-bit)
      -------------------------------------------------------------- */
   const PORTRAIT = {
-    humanoid:['....####....','...######...','..##WW##W#..','..########..','...##..##...','....####....','..###..###..','.##..##..##.','.#...##...#.','.....##.....','....#..#....','...##..##...'],
-    bocek   :['..#......#..','...#....#...','..W#....#W..','..###..###..','.##########.','##..####..##','#.##....##.#','..##....##..','.#..####..#.','#..######..#','..#..##..#..','.#.#....#.#.'],
-    surungen:['...######...','..##WWWW##..','.###....###.','.##..##..##.','.##########.','..########..','...######...','..##....##..','.#..####..#.','#..######..#','..##....##..','.#........#.'],
+    humanoid:['...######...','..########..','..########..','.##########.','.##W####W##.','.##########.','..########..','..########..','...######...','....####....','....####....','.....##.....'],
+    bocek   :['..#......#..','...#....#...','..###..###..','..W######W..','.##########.','##W######W##','.##########.','..########..','...######...','...######...','....####....','.....##.....'],
+    surungen:['...######...','..########..','.##########.','.#W######W#.','.##########.','.##########.','..########..','..########..','...######...','...######...','....####....','.....##.....'],
     kristal :['.....##.....','....####....','...##WW##...','..##W..W##..','.####..####.','##...##...##','.####..####.','..##....##..','...######...','....####....','.....##.....','......#.....'],
     makine  :['.##########.','.#WW####WW#.','.##########.','.#.######.#.','.##########.','..#.####.#..','.##########.','.#..####..#.','.##########.','.#.#....#.#.','.#.#....#.#.','.###....###.'],
     amorf   :['...######...','..########..','.##W####W##.','.##########.','##########.#','.##########.','..########..','.#########..','..#######...','...######...','....####....','.....##.....'],
-    kanatli :['#..######..#','##.##WW##.##','.####..####.','..########..','#.########.#','##..####..##','.#..####..#.','....####....','...##..##...','..##....##..','.##......##.','.#........#.'],
-    akuatik :['....####....','...##WW##...','..########..','.##..##..##.','.##########.','..##..##..#.','.####..####.','#..######..#','.#.######.#.','..##....##..','.#..#..#..#.','#...#..#...#']
+    kanatli :['#..######..#','##.######.##','.##########.','..#W####W#..','...######...','...######...','....####....','.....##.....','....####....','....####....','.....##.....','.....##.....'],
+    akuatik :['....####....','...######...','..########..','..#W####W#..','.##########.','.##########.','.##########.','..########..','..########..','...######...','....####....','.....##.....']
   };
-  function portrait(type, colr, scale){
-    scale = scale || 3;
-    const key = 'q'+type+'_'+colr+'_'+scale;
-    if (cache.has(key)) return cache.get(key);
-    const art = PORTRAIT[type] || PORTRAIT.humanoid;
-    const w = art[0].length, h = art.length;
-    const {c,g} = cv(w*scale, h*scale);
-    const base = hex(colr);
-    for (let y=0;y<h;y++) for (let x=0;x<w;x++){
-      const ch = art[y][x];
-      if (ch === '.') continue;
-      if (ch === 'W'){ g.fillStyle = '#bfeaff'; }
-      else {
-        const m = .55 + (1 - y/h) * .75;
-        g.fillStyle = 'rgb('+shade(base,m).join(',')+')';
-      }
-      g.fillRect(x*scale, y*scale, scale, scale);
-    }
-    cache.set(key,c);
-    return c;
-  }
+  function portrait(type,colr,scale){return characterPortrait({look:type,col:colr,scale,seed:1});}
 
   /* ═══════════════════════════════════════════════════════════════
      FAZ 31 — PİKSEL SANAT MOTORU
@@ -578,116 +558,57 @@ const ART = (() => {
     return '#' + to(kan(h+1/3)) + to(kan(h)) + to(kan(h-1/3));
   }
 
-  function leaderPortrait(opts){
-    opts = opts || {};
-    const seed  = (opts.seed | 0) || 1;
-    const look  = opts.look || 'humanoid';
-    const taban = opts.col || '#6ff2c8';
-    const rank  = Math.min(4, opts.rank | 0);
-    const scale = opts.scale || 3;
-    const key = 'ldr|' + seed + '|' + look + '|' + taban + '|' + rank + '|' + scale;
-    if (cache.has(key)) return cache.get(key);
-
-    /* Seed'den üç eksen türet */
-    let sd = (seed * 2654435761) >>> 0;
-    const nxt = () => { sd = (sd * 1664525 + 1013904223) >>> 0; return sd / 4294967296; };
-    const hueOfs = (nxt() * 44) - 22;          // ±22°
-    const satMul = .78 + nxt() * .5;
-    const ligMul = .82 + nxt() * .40;
-    const renk = shiftHue(taban, hueOfs, satMul, ligMul);
-
-    const head = PORTRAIT[look] || PORTRAIT.humanoid;
-    const cols = 12, pad = 1;
-    const W = (cols + pad*2) * scale, H = (head.length + pad*2) * scale;
-    const { c, g } = cv(W, H);
-    g.imageSmoothingEnabled = false;
-
-    /* Arka plan — rütbeye göre koyulaşan düz alan (gradyan yok) */
-    g.fillStyle = '#070c16';
-    g.fillRect(0, 0, W, H);
-
-    /* Kafa */
-    paintGrid(g, head, pad*scale, pad*scale, scale, hex(renk), 0, 1);
-
-    /* Aksesuarlar — 0-2 adet, seed'e göre */
-    const kacAcc = nxt() < .28 ? 0 : nxt() < .72 ? 1 : 2;
-    const secilen = [];
-    for (let i = 0; i < kacAcc; i++){
-      const k = ACC_KEYS[Math.floor(nxt() * ACC_KEYS.length)];
-      if (secilen.indexOf(k) >= 0) continue;
-      secilen.push(k);
-      const A = LEADER_ACC[k];
-      if (A.r >= head.length) continue;
-      const accRenk = shiftHue(renk, 150 + nxt()*60, 1.2, 1.25);
-      paintGrid(g, A.m, pad*scale, (pad + A.r)*scale, scale, hex(accRenk), 0, .92);
+  // 96D: one character painter for state, setup and leader portraits.
+  const portraitCache=new Map(),PORTRAIT_LIMIT=96;
+  function characterPortrait(opts={}){
+    const look=Object.hasOwn(PORTRAIT,opts.look)?opts.look:'humanoid',col=/^#[0-9a-f]{6}$/i.test(opts.col||'')?opts.col:'#6ff2c8';
+    const seed=(Number(opts.seed)>>>0)||1,rank=Math.max(0,Math.min(4,opts.rank|0)),scale=Math.max(1,Math.min(4,opts.scale|0||3));
+    const mood=opts.mood<=-30?-1:opts.mood>=30?1:0,key=[look,col,seed,rank,scale,mood].join('|');
+    if(portraitCache.has(key)){const c=portraitCache.get(key);portraitCache.delete(key);portraitCache.set(key,c);return c;}
+    const {c,g}=cv(32*scale,38*scale),S=scale;g.scale(S,S);g.imageSmoothingEnabled=false;
+    const rng=mulberry32(seed),rnd=()=>rng(),head=PORTRAIT[look],accent=hex(col);
+    const palettes={humanoid:['#b8a58e','#725d62','#829a9e','#ba8b71'],bocek:['#789f83','#b79b61','#729ca9','#9f7bba'],surungen:['#879c66','#b89863','#6e9d94','#8b81a2'],kristal:['#8cc7dc','#ac9bde','#7fcbb9','#c7a2c5'],makine:['#a0afb9','#a0a29a','#809da9','#aca0b4'],amorf:['#789ec4','#9f80bc','#71b4a0','#bf88ac'],kanatli:['#c6b896','#9baeb5','#9d858a','#af9bc2'],akuatik:['#70adb4','#8b93bb','#6dac9b','#b394bf']};
+    const skin=hex(palettes[look][Math.floor(rnd()*4)]),width=.88+rnd()*.22,unit=1.65,top=4.1+rnd()*.7,jaw=(rnd()-.5)*.8,eyes=.85+rnd()*.3;
+    const bg=g.createLinearGradient(0,0,32,38);bg.addColorStop(0,'#182538');bg.addColorStop(.6,'#090f1b');bg.addColorStop(1,'#050913');g.fillStyle=bg;g.fillRect(0,0,32,38);
+    g.strokeStyle='rgba(128,168,187,.12)';g.lineWidth=.2;for(let i=0;i<3;i++){g.beginPath();g.arc(16,14,10+i*2,0,Math.PI*2);g.stroke();}
+    // Connected shoulders/collar, never the old rectangular pedestal.
+    g.fillStyle='#172537';g.beginPath();g.moveTo(1,38);g.bezierCurveTo(2,30,7,28,13,26);g.lineTo(19,26);g.bezierCurveTo(27,29,30,31,31,38);g.closePath();g.fill();
+    g.fillStyle='rgb('+shade(accent,.36).join(',')+')';g.beginPath();g.moveTo(4,38);g.lineTo(9,30);g.lineTo(13,28);g.lineTo(16,33);g.lineTo(19,28);g.lineTo(24,30);g.lineTo(28,38);g.closePath();g.fill();
+    g.strokeStyle='rgb('+shade(accent,.75).join(',')+')';g.lineWidth=.7;g.beginPath();g.moveTo(9,30);g.lineTo(15,36);g.lineTo(17,36);g.lineTo(23,30);g.stroke();
+    const uniform=Math.floor(rnd()*3);
+    if(uniform===1){g.fillStyle='rgb('+shade(accent,.57).join(',')+')';g.fillRect(5,32,4,2);g.fillRect(23,32,4,2);g.fillStyle='#27364b';g.fillRect(12,28,8,2);}
+    if(uniform===2){g.strokeStyle='rgb('+shade(accent,.9).join(',')+')';g.lineWidth=1.2;g.beginPath();g.moveTo(8,30);g.lineTo(24,38);g.stroke();g.fillStyle='#243348';g.fillRect(12,25,8,4);}
+    g.fillStyle='rgb('+shade(skin,.42).join(',')+')';g.fillRect(13,23,6,4);
+    for(let y=0;y<head.length;y++)for(let x=0;x<head[y].length;x++){
+      const ch=head[y][x];if(ch==='.')continue;
+      const rowShift=jaw*Math.sin(y/head.length*Math.PI),xx=16+(x-6)*unit*width+(x<6?-rowShift:rowShift),yy=top+y*unit;
+      if(ch==='W'){
+        g.fillStyle='#233342';g.fillRect(xx-.18,yy-.12,unit*width+.3,unit+.1);
+        g.fillStyle=look==='makine'?'#a9eef0':'#dcebe2';g.fillRect(16+(xx-16)*eyes,yy+.2,Math.max(.6,unit*width*.75),.65+rnd()*.35);
+        g.fillStyle='#182735';g.fillRect(16+(xx-16)*eyes+.4,yy+.2,.4,.8);
+      }else{
+        const light=.54+(1-y/head.length)*.43+(1-x/12)*.23+(rnd()-.5)*.13;
+        g.fillStyle='rgb('+shade(skin,light).join(',')+')';g.fillRect(xx,yy,unit*width+.15,unit+.12);
+        if(rnd()<.22){g.fillStyle='rgba(230,241,233,.13)';g.fillRect(xx+.2,yy+.18,.5,.35);}
+      }
     }
-
-    /* Rütbe çerçevesi — deneyim yükseldikçe parlar */
-    if (rank > 0){
-      const rc = ['#6a7285','#9fb6cc','#6ff2c8','#f2d452','#ff9b3d'][rank];
-      g.strokeStyle = rc;
-      g.lineWidth = Math.max(1, scale * .6);
-      g.strokeRect(g.lineWidth/2, g.lineWidth/2, W-g.lineWidth, H-g.lineWidth);
-    }
-    cache.set(key, c);
-    return c;
+    g.lineWidth=.5;
+    if(look==='humanoid'){g.strokeStyle='rgba(40,40,46,.65)';g.beginPath();g.moveTo(16,12);g.lineTo(15.3+jaw,16);g.lineTo(16.8,16.4);g.moveTo(13.8+jaw,19);g.lineTo(18-jaw,19.2);g.stroke();}
+    if(look==='bocek'){g.strokeStyle='rgb('+shade(skin,.95).join(',')+')';for(const side of [-1,1]){g.beginPath();g.moveTo(16+side*5,7);g.lineTo(16+side*9,2+rnd());g.stroke();g.fillStyle=col;g.fillRect(16+side*9,1.8,.8,.8);}for(let y=12;y<22;y+=3){g.strokeStyle='rgba(15,23,25,.5)';g.beginPath();g.moveTo(9,y);g.lineTo(23,y+.5);g.stroke();}}
+    if(look==='surungen'){g.fillStyle='rgb('+shade(skin,.72).join(',')+')';for(const side of [-1,1])for(let i=0;i<4;i++){g.beginPath();g.moveTo(16+side*8,9+i*3);g.lineTo(16+side*(10+rnd()),10+i*3);g.lineTo(16+side*8,12+i*3);g.fill();}}
+    if(look==='kristal'){for(let i=0;i<5;i++){g.fillStyle=i%2?'rgba(222,239,255,.24)':'rgba(32,58,107,.26)';g.beginPath();g.moveTo(16,5);g.lineTo(9+i*3,19);g.lineTo(11+i*2,22);g.closePath();g.fill();}}
+    if(look==='makine'){g.strokeStyle='#314559';g.beginPath();g.moveTo(16,6);g.lineTo(16,20);g.moveTo(9,15);g.lineTo(23,15);g.stroke();g.fillStyle=col;for(let i=0;i<3;i++)g.fillRect(20,17+i*1.4,2,.6);}
+    if(look==='amorf'){for(let i=0;i<5;i++){g.fillStyle='rgba(175,232,232,.2)';g.beginPath();g.arc(11+rnd()*10,10+rnd()*12,.6+rnd(),0,Math.PI*2);g.fill();}}
+    if(look==='kanatli'){g.fillStyle='rgb('+shade(skin,.9).join(',')+')';for(const side of [-1,1])for(let i=0;i<3;i++){g.beginPath();g.moveTo(16+side*6,9+i*2);g.lineTo(16+side*(11-i),4+i*2);g.lineTo(16+side*8,15+i*2);g.closePath();g.fill();}}
+    if(look==='akuatik'){g.strokeStyle='rgba(207,240,235,.5)';for(const side of [-1,1])for(let i=0;i<3;i++){g.beginPath();g.moveTo(16+side*6,13+i*2);g.lineTo(16+side*9,14+i*2);g.stroke();}}
+    // Seed-controlled collar pin and clothing seams are rank-independent.
+    g.fillStyle=col;const pin=rnd()<.5?10:22;g.fillRect(pin,32,1.5,2);g.strokeStyle='#111c2c';g.beginPath();g.moveTo(16,34);g.lineTo(16,38);g.stroke();
+    if(rank>0){g.fillStyle=['','#a3b8cc','#79ceb7','#e9d68c','#e0a970'][rank];for(let i=0;i<rank;i++)g.fillRect(20+i*1.4,35,1,1);g.strokeStyle=g.fillStyle;g.lineWidth=.45;g.strokeRect(.35,.35,31.3,37.3);}
+    if(mood){g.strokeStyle=mood<0?'#e08088':'#8fcbb0';g.lineWidth=.6;g.strokeRect(.65,.65,30.7,36.7);}
+    portraitCache.set(key,c);while(portraitCache.size>PORTRAIT_LIMIT)portraitCache.delete(portraitCache.keys().next().value);return c;
   }
-
-  function portraitFull(opts){
-    opts = opts || {};
-    const look    = opts.look || 'humanoid';
-    const colr    = opts.col || '#6ff2c8';
-    const persona = PERSONA_KEYS.indexOf(opts.persona) >= 0 ? opts.persona : 'yayilmaci';
-    const scale   = opts.scale || 3;
-    /* Ruh hâlini üç kovaya indir: önbellek patlamasın */
-    const raw  = (opts.mood === undefined) ? 0 : opts.mood;
-    const mood = raw <= -30 ? -1 : raw >= 30 ? 1 : 0;
-
-    const key = 'pf_' + look + '_' + colr + '_' + persona + '_' + mood + '_' + scale;
-    if (cache.has(key)) return cache.get(key);
-
-    const head = PORTRAIT[look] || PORTRAIT.humanoid;
-    const arm  = ARMOR[persona] || ARMOR.yayilmaci;
-    /* FAZ 70: armArt artık çizilmiyor (kaide kaldırıldı) */
-
-    const cols = 12;
-    const pad  = 1;                                   // hücre cinsinden kenar payı
-    /* ═══ FAZ 70: KAİDE KATMANI TAMAMEN KALDIRILDI ═══
-       Faz 67'de yalnız kopuk pikselleri temizlemiştim; sorun
-       pikseller değil KATMANIN KENDİSİYDİ. `armArt` (zırh/gövde
-       bloğu) kafanın altına biniyor ve %62 opaklıkla çizilerek
-       portrenin altında bir kaide/zemin izlenimi veriyordu.
-       Artık yalnız KAFA siluetı var, doğrudan arka planın üstünde.
-       ARMOR verisi ileride gerekirse diye duruyor ama ÇİZİLMİYOR. */
-    const rows = head.length;                        // yalnız kafa
-    const W = (cols + pad * 2) * scale;
-    const H = (rows + pad * 2) * scale;
-    const { c, g } = cv(W, H);
-    g.imageSmoothingEnabled = false;
-
-    const base = hex(colr);
-    /* 1. KATMAN — arka plan */
-    let sd = 0;
-    for (let i = 0; i < look.length; i++) sd = (sd * 31 + look.charCodeAt(i)) >>> 0;
-    for (let i = 0; i < colr.length; i++) sd = (sd * 31 + colr.charCodeAt(i)) >>> 0;
-    drawBackdrop(g, W, H, base, mood, sd);
-
-    /* 2. KATMAN — kafa (tek silüet, kaide yok) */
-    paintGrid(g, head, pad * scale, pad * scale, scale, base, mood, 1);
-
-    /* Düşmanlıkta ince kızıl çerçeve — durum bir bakışta okunsun */
-    if (mood < 0){
-      g.strokeStyle = 'rgba(255,95,109,.85)';
-      g.lineWidth = Math.max(1, scale / 3);
-      g.strokeRect(g.lineWidth / 2, g.lineWidth / 2, W - g.lineWidth, H - g.lineWidth);
-    } else if (mood > 0){
-      g.strokeStyle = 'rgba(101,224,138,.55)';
-      g.lineWidth = Math.max(1, scale / 3);
-      g.strokeRect(g.lineWidth / 2, g.lineWidth / 2, W - g.lineWidth, H - g.lineWidth);
-    }
-    cache.set(key, c);
-    return c;
-  }
+  function leaderPortrait(opts){return characterPortrait(opts);}
+  function portraitFull(opts){return characterPortrait(opts);}
 
   /* --------------------------------------------------------------
      BULUTSU — galaksi arka planı
@@ -722,7 +643,7 @@ const ART = (() => {
     return c;
   }
 
-  return {planet, star, ship, emblem, identityEmblem, identityCache, portrait, portraitFull, leaderPortrait, nebula, cache,
+  return {planet, star, ship, emblem, identityEmblem, identityCache, portrait, portraitFull, leaderPortrait, portraitCache, nebula, cache,
           PORTRAIT, ARMOR, hexOf: hex, drawPixelArt, PIXEL_ART};
 })();
 
@@ -1627,11 +1548,11 @@ const View = {
   drawWarConnections(g){
     if(!WAR_LINKS_ON)return;
     const lines=warMapConnections();if(!lines.length)return;
-    g.save();g.strokeStyle='rgba(255,82,99,.48)';
+    g.save();g.strokeStyle='rgba(255,82,99,.88)';
     for(const p of lines){
       const a=this.w2s(p.from.x,p.from.y),b=this.w2s(p.to.x,p.to.y);
       if(Math.max(a.x,b.x)<0||Math.min(a.x,b.x)>this.vw||Math.max(a.y,b.y)<0||Math.min(a.y,b.y)>this.vh)continue;
-      g.lineWidth=p.player?1.7:1;g.setLineDash(p.player?[]:[6,5]);
+      g.lineWidth=p.player?2.5:2;g.setLineDash(p.player?[]:[6,5]);
       g.beginPath();g.moveTo(a.x,a.y);g.lineTo(b.x,b.y);g.stroke();
     }
     g.restore();

@@ -1,3 +1,91 @@
+# 96D güncel riskler — 21 Ekim 2026
+
+- Köken/portre/ses teknik doğrulaması109 paket5531 kontrol,145 Chromium UI senaryosu ve6 Chromium ses deneyinden geçti. Bunlar müziğin estetik veya fiziksel Android kabulü değildir.
+- Gerçek dinleme yapılmadı. Armonik/nefes-yay benzeri sentez kaydedilmiş çalgının birebir kopyası değildir. Nihai dinleme değerlendirmesi açık.
+- Fiziksel Android/WebView/OS PWA/FPS/ısı/RAM testi yok. Visibility deneyi gerçek handler'ın kontrollü document.hidden tetiklemesidir; gerçek OS arka plan testi değildir.
+- Portre LRU96; azami ölçek ham piksel belleği yaklaşık7,13MiB + tarayıcı ek yükü. Host sınır testi cihaz belleği garantisi değildir. Eski save görsel seed'i stabildir; yeni çizimin eski sürümle aynı piksel resmi olması beklenmez.
+- Altın Çağ'ın açık kriz takvimi gerçekten erkene çekildi; bu kökende sonraki kampanya sonuçları değişebilir. Standart köken36/36 aylık karşılaştırma eşittir; yeni120 aylık denge kampanyası yapılmadı.
+- Tarihsel AI ekonomi/ticaret/askerî denge, bilim gemisi hedef yığılması/korsan beklemesi ve özgün federasyon oyuncu kaydı isteyen ret QA'sı kapatılmadı.
+- Save v8, bildirim önceliği, savaş katmanları, rapor kapatma ve gerçek kargo korunur. GitHub'a commit/push/yayın yok. Yeni faza otomatik geçilmez.
+
+---
+Aşağıdaki riskler kanonik ebeveynin tarihsel kaydıdır; yeni96D ölçümü sayılmaz.
+
+# 96C.3 güncel riskler — 21 Ekim2026
+
+- Bu bir UI bakım teslimidir. Genel AI enerji/bilim/ticaret/askerî denge riskleri çözülmüş ilan edilmez; önceki fazın olumsuz kampanya verileri aşağıda korunur. Yeni12aylık kontrollü karşılaştırma36/36 simülasyon eşitliği verdi;120aylık yeni denge kampanyası yapılmadı.
+- Fiziksel Android/WebView/kurulu OS PWA, cihaz FPS/ısı/bellek testi yok. Gerçek Chromium touch/viewport ve service-worker/offline testleri cihaz kabulü değildir.
+- Dikey harita uyarısı korunur ve düğme içermez. Ekonomi ve ticaret mevcut menüden açılır; açık panelin dar yerleşimi kontrol edildi. Bu faz tam dikey harita oynanışı eklemez.
+- Savaş çizgisi keşfedilmiş, siyasi haritada aidiyeti gösterilen uç kullanır; gizli başkent/sistem veya yetersiz üçüncü taraf istihbaratını açmaz. Ayrı tarihsel sahiplik belleği eklenmemiştir. Hiç uygun iki uç yoksa ya da çizgi bütünüyle ekran dışında ise görünmez.
+- Ham bildirimsiz karar HTML'i güvenli bir codec olmadan save'e taşınmaz. Güvensiz ham karar küçültülmez, açık kalır. Typed gerçek karar UID'si korunur. Altılı eski kuyruk politikası tüm diğer sıradan olaylar için büyütülmemiştir; küçültülen olay korunur.
+- Rapor kapatma tercihi yalnız mevcut tamamlanmış oyuncu muharebesine bağlıdır; geçmiş muharebe motoru silinmez. Tarihsel özgün federasyon kuruluş reddi ve bilim gemilerinin ortak hedef/korsan beklemesi açık QA'dır.
+- GitHub'a commit/push/yayın yapılmadı. Gerçek ve doğrulanmış ZIP teslimi ayrı zorunluluktur; dosya erişimi olmadan tamamlandı denmez.
+
+---
+Kanonik ebeveynin tarihsel risk kaydı aşağıda korunur.
+
+# Yeniden 96C.2 — güncel açık riskler
+
+- Teknik doğrulama ile genel denge kabulü ayrı tutulur. Doğal ticaret/enerji/bilim ve hayatta kalma sorunlarının bütünü kapatılmadı; her tohumun son verisi FAZ96C2-RAPOR ve kampanya tablosundadır. Ticaret/ambargo kuralları sayı artırmak için aşılmadı.
+- Savunma ve bütçe mikro hataları düzeltildi. Bir aylık sefer hesabı sınırlı bilinen grafikten tahmindir; her uzak operasyonu veya üçüncü taraf müdahalesini garanti edemez. Farklı RNG kampanya farkları tek başına nedensellik değildir.
+- Fiziksel Android/PWA cihaz/FPS/ısı/RAM kabulü yoktur. Host duvar saati paralel test yükünden etkilenir; ara <20ms test aşımı korunur, kaynak kuralı gevşetilmez.
+- Özgün federasyon oyuncu kaydı olmadan eski kuruluş reddi kapatılmaz. Bilim gemilerinin aynı hedef/korsan bekleme QA’sı korunur. 96D’ye otomatik geçilmez.
+- Ek üç sağlamlık tohumu çalıştırılmadı. Ücretsiz kaynak/gemi veya araştırma/kapasite/istihbarat hilesi yok. Save v8 korunur.
+- GitHub’a kod/commit/push/yayın yapılmadı. ZIP’in gerçek ve kalıcı indirme kaydı teslim şartıdır; bu adım başarısızsa faz tamamlandı denmez.
+
+---
+
+Aşağıda kanonik ebeveynin tarihsel riskleri korunur.
+
+# 96C.1 güncel riskler — 19 Ekim 2026
+
+- Teknik bakım/test/ZIP doğrulaması tamamlandı; genel denge kabulü kısmi. Tohum 11'de son güç arttı; teslimat 70→32, enerji sıfır devlet-ay 0→7 ve hayatta AI 11→9 oldu. Bu ciddi ticaret düşüşü kapatılmış sayılmaz. Politik engeller 390→811 çift-ay; güvenli rota bulunamama 1.741→1.181. İşleyen ticaret motoru ile değişen savaş/ekonomi koşulları ayrı değerlendirilir. Yalnız güç artışıyla evrensel başarı ilan edilmez.
+- 99/404'ün nihai sonuçları kampanya raporundadır; her tohum ayrı gösterilir. 96B güç düzeyine dönme veya her tohumda daha iyi donanma garantisi verilmez.
+- Gerçek ekonomik yaptırımlar büyük enerji depolarıyla uzun süre taşınabilir; tek kontrollü örnek tüm galaksi dengesi değildir. Genel Yaptırım / Ticaret Ambargosu hat kesmek yerine mevcut üretim çarpanlarını değiştirir. Bunların isim/tasarım etkisi ayrıca planlanmalıdır. Yeni bonus/ceza veya soyut sefer geliri eklenmedi.
+- Donanma bütçe düzeltmesi yalnız önceki bütçe reddi + savaş gemisi yokluğu + pozitif olmayan alaşım neti + sağlıklı ekonomi durumundadır. Rezerv, maliyet ve bakım kapıları kalır. Önceki geniş adaylar ticareti daha çok bozduğu için teslim edilmedi.
+- 404 ana karar host süresi yaklaşık %2,2 ve ticaret rota çağrısı arttı; izole son benchmark örnek p95 gecikmesi de yükseldi. Her metrikte performans iyileşmesi iddia edilmez.
+- Optimize edilmiş aynı-durum araması daha az izin kontrolü ve daha düşük host medyanı verdi. Kampanya süreleri farklı savaş/filo yükleri ve paylaşılan hosttan etkilenir; fiziksel Android FPS/ısı/bellek kabulü değildir. Doğal artan nesneler/save boyutu sınanmıştır; ayrıntılar raporda.
+- Fiziksel Android/WebView ve kurulu işletim sistemi PWA testi yok. Chromium mobil emülasyonu ve gerçek service-worker cache yükseltmesi var. Dikey görünümde mevcut yönlendirme ekranı harita/tersaneyi yataya yönlendirir; ekonomi dikeyde erişilir.
+- Tarihsel özgün oyuncu kaydı federasyon reddi, bilim gemisi hedef yığılması/korsan beklemesi ve eski askerî denge riskleri korunur; çözülmüş ilan edilmedi.
+- Save v8 ve gerçek kargo muhasebesi korundu. İlk test hataları ve başarısız adaylar saklanır. GitHub'a commit/push/yayın yapılmadı. Sonraki faz başlatılmadı.
+
+Aşağıdakiler tarihsel kayıttır.
+
+---
+
+# 96C güncel açık riskler — 18 Ekim 2026
+
+- İşlev testleri 101/5421/0 ve gerçek Chromium 102/0 geçti. Bu, tüm tohumlarda daha iyi askerî denge kabulü değildir.
+- 11 son askerî gücü −%23,8; 99 −%7,6. 11 dönem ortalama gücü de düşük kaldı; 99 ortalaması yükselse de son değer düşüşü gizlenmez. İnşaat/ticaret artışı tek başına stratejik başarı diye sunulmaz.
+- Enerji sıfır devlet-ay 0/10/0; 99'da kalan 10 olay tamamen çözülmüş değildir. Tüketim malı sıfır/kıtlık bu üç koşuda 0; kontrollü açık testleri ayrıca vardır.
+- AI karar host süresi yaklaşık 1,7–2,1 kat arttı; 99 toplam simülasyon süresi ve tüm save boyutları arttı. Her karede yeni tarama yok, rota/nesne sınırları vardır; fiziksel Android ve büyük galaksi CPU/FPS/ısı/bellek kabulü yapılmadı.
+- Altı aylık plan ve bekleyen bina katkısı tahmindir; kesin gelir veya garanti ithalat değildir. Yıkım gerçek üretim kaybı ve gecikmiş gerçek iade taşır. Varsayımsal iade/ithalat depoya yazılmaz.
+- İnşa görevi taahhüdü gerçek escrow değildir; diğer eski harcamalar varış bütçesini değiştirebilir. 99'da 1 başarısız/kayıp görev kaldı. Varış kapısı maliyeti yeniden doğrular, ikinci ödeme veya sahte iade yoktur.
+- Doğal üç kampanyada kargo kaybı 0. Gerçek yağma/imha kontrollü testte doğrulandı; tüm doğal yolların risksiz olduğu sonucu çıkarılmaz.
+- Özgün oyuncu kaydı gerektiren federasyon kuruluş reddi; bilim gemilerinin ortak hedef/korsan beklemesi ve eski donanma/kolonileşme riskleri bütünüyle kapatılmadı. Çalışan ortak savaş, sensör, harita, takviye, waypoint, haber/gelen kutusu ve uzaktan inşa regresyonları korundu.
+- Save v8 geriye uyumluluk ve yeni isteğe bağlı aiTalk kararları sınandı. Eski 96B motorunda yeni kararların aynı davranışı sürdürmesi garanti değildir.
+- GitHub'a yerel/uzak commit veya push yok. Bu ZIP yayımlanmamış 96C'dir; uzak main hâlâ 96A commit'indedir. Sonraki büyük sistemlere geçilmedi.
+
+Aşağıdakiler tarihsel risk kaydıdır.
+
+---
+
+# 96B güncel açık riskler — 18 Ekim 2026
+
+- Son benzersiz sonuçlarda 98 paket/5.385 kontrol ve 93 Chromium senaryosu geçti; 0 kalan otomatik hata. İlk tam koşu ve takipler birleştirildi; tek kesintisiz temiz run-all iddiası yoktur.
+- Fiziksel Android/WebView/kurulu OS PWA, gerçek cihaz FPS/bellek/ısı/klavye kabulü yapılmadı. Mobil Chromium emülasyonu fiziksel test değildir. Portre ekonomi paneli açıktır; genel harita döndürme tavsiyesi korunur.
+- Aylık oran mevcut simülasyonun son hesabıdır. Yeni bina, nüfus, koloni veya anlaşma değişimi sonraki ekonomik hesapta orana yansır; panel AI'nin e.inc değerini değiştirmez. Gerçek depo her zaman güncel kaynaktan okunur.
+- Eski kayıtlarda hayali geçmiş yoktur. İlk kayıtlı dönem kısmi olabilir. Her devletin son 12 dönemi ve 192 olay detayı tutulur; eski ayrıntı budanır, dönem toplamları kalır. Bazı eski işlemler ayrıntılı alt neden yerine genel doğrulanmış işlem kategorisindedir; bilinmeyen farklar ayrı kalır.
+- Stok sıfır sınırı ayrı düzeltme olayıdır, yeni üretim/teslimat değildir. Dönem stok artışı/azalışı toplamı bu sınır yazımlarını da içerir. Tam duyarlılıklı eşitlik test edilir; ekrandaki bir ondalık yuvarlama küçük görünür toplama farkı yaratabilir.
+- 96A/96B eş koşullu kampanyalarında 11/99 sözleşme 0; 404 sözleşme 3/teslimat 18. 99'da 33 enerji-sıfır devlet-ay sürer. AI donanma, inşaat gemileri ve enerji/tüketim malı dengesi bu fazda çözülmedi; 96C'ye kalır.
+- Bilim gemilerinin hedef paylaşımı/korsan tehdidi ve özgün oyuncu kaydı gerektiren eski federasyon kuruluş reddi/eskiden kalan gemi kökeni iddiaları korunur. Mevcut otomasyon/diplomasi regresyonları geçti; bu eski gözlemler zorla çözülmüş sayılmadı.
+- Save v8 geriye uyumluluk 96A→96B yönünde doğrulandı. Yeni geçmişin eski uygulamada korunması garanti edilmez; yoldaki gerçek 96A kargosu mevcut alanlarında korunur. Türetilmiş gelir önbellekleri kaydedilmez.
+- GitHub yayını yapılmadı. ZIP henüz main'de değildir; yayın ayrı planlama sohbetine bırakıldı. 96C ve sonraki büyük sistemler başlatılmadı.
+
+Aşağıdaki başlıklar kendi fazlarının tarihsel risk kaydıdır.
+
+---
+
 # 96A güncel açık riskler — 18 Ekim 2026
 
 - 96 paket/5303 kontrol ve 80gerçek Chromium senaryosunun son benzersiz sonuçlarında 0kalan hata. İlk başarısızlıklar tests/audit-96a içinde korunur; tek kesintisiz temiz tam koşu iddiası yoktur.

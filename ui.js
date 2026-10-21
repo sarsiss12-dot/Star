@@ -391,6 +391,11 @@ const UI = {
         break;
       }
       case 'topStatus': this.openTopStatus();break;
+      case 'dismissBattleReport': {
+        const s=G.sys[+x],key=battleReportViewKey(s);
+        if(key&&pSeen(s)&&el?.dataset.report===key){G.dismissedBattleReports=cleanBattleDismissals({...G.dismissedBattleReports,[s.id]:key});this.refresh();}
+        break;
+      }
       case 'diploPane':
         if (typeof closeAllGroups === 'function') closeAllGroups();
         this.openDiplo(); break;
@@ -618,6 +623,8 @@ const UI = {
         WAR_LINKS_ON=!WAR_LINKS_ON;WAR_LINKS_REV++;
         const b=$('warLinksBtn');if(b){b.className='tool warLinksBtn'+(WAR_LINKS_ON?' on':'');b.setAttribute('aria-pressed',String(WAR_LINKS_ON));}
         try{storeSet('yh_warlinks',WAR_LINKS_ON?'on':'off');}catch(e){}
+        if(WAR_LINKS_ON&&!warMapConnections().length)say('Bilinen savaşlar için keşfedilmiş iki taraf bağlantı noktası gerekiyor.');
+        if(typeof forceRedraw==='function')forceRedraw('war-links');
         this.refresh();break;
       }
       case 'warPauseToggle':
@@ -1294,6 +1301,12 @@ const UI = {
         this.openFed();
         break;
       }
+      case 'fedDipInvite':
+      case 'fedDipRequest': {
+        const out=a==='fedDipInvite'?proposeFedMotion(G.p,'admit',{target:+x}):requestFederation(G.p,G.emps[+x]);
+        say(out.ok?'Federasyon işlemi kaydedildi; sonucu gelen kutusundan izle.':out.why,out.ok?'sci':'war');
+        if(typeof DiplomaticInbox!=='undefined')DiplomaticInbox.sync();this.openDiplo();break;
+      }
       case 'fedLeave': {const r=leaveFederation(G.p);if(!r.ok)say(r.why,'war');this.openFed();break;}
       case 'fedMotion': {
         const [kind,value,extra]=String(x).split(':');
@@ -1950,26 +1963,53 @@ const UI = {
   },
 
   /* ---------- üst bar ---------- */
+  minimizedEvent(){
+    if(!G.minNote)return null;
+    if(G.minNote==='_raw')return G.minRaw&&this._minRawWorld===G.emps?{raw:true}:null;
+    const note=(G.inbox||[]).find(n=>n.uid===G.minNote);if(!note)return null;
+    if(typeof DiplomaticInbox!=='undefined'&&DiplomaticInbox.supported(note.kind)){
+      const r=DiplomaticInbox.state().records.find(r=>r.note?.uid===note.uid);
+      if(!r||r.status!=='pending'||r.expires<=G.day)return null;
+    }
+    return note;
+  },
   topStatusItems(){
     const e=G.p,items=[],battles=battleCount(),wars=G.emps.filter(o=>!o.dead&&o.id!==e.id&&e.war[o.id]).length;
-    if(battles)items.push({label:'⚔ '+battles+' çatışma',action:'gobattle'});
-    if(wars)items.push({label:'⚔ '+wars+' savaş · Diplomasi',action:'diploPane'});
-    if(typeof GalacticNews!=='undefined'&&GalacticNews.unread())items.push({label:'📰 '+GalacticNews.unread()+' okunmamış haber',action:'news'});
-    if(typeof DiplomaticInbox!=='undefined'&&DiplomaticInbox.pending())items.push({label:'✉ '+DiplomaticInbox.pending()+' bekleyen diplomatik teklif',action:'diplomaticInbox'});
-    if(typeof ArchiveUI!=='undefined'&&ArchiveUI.returnRecord?.world===G.emps)items.push({label:'✉ İncelenen teklife geri dön',action:'inboxReturn'});
-    if(G.minNote)items.push({label:'▣ Küçültülen olay / karar · geri aç',action:'restoreModal'});
-    if(crisisActive())items.push({label:'🌋 Galaktik kriz · aşama '+G.crisis.stage,action:'crisInfo'});
-    if(typeof upheavalActive==='function'&&upheavalActive()){
-      const U=upheavalInfo();items.push({label:U.ico+' '+U.n+' · '+G.upheaval.left+' tur',action:'upInfo'});
+    const add=(label,action,count=1,x)=>items.push({label,action,count,x});
+    if(battles)add('⚔ '+battles+' çatışma','gobattle');
+    if(wars)add('⚔ '+wars+' savaş · Diplomasi','diploPane');
+    const pending=typeof DiplomaticInbox!=='undefined'?DiplomaticInbox.pending():0;
+    if(pending)add('✉ '+pending+' bekleyen diplomatik teklif','diplomaticInbox',pending);
+    if(typeof ArchiveUI!=='undefined'&&ArchiveUI.returnRecord?.world===G.emps)add('✉ İncelenen teklife geri dön','inboxReturn',0);
+    const minimized=this.minimizedEvent(),keys=new Set();
+    for(const n of G.inbox||[]){
+      if(typeof DiplomaticInbox!=='undefined'&&DiplomaticInbox.supported(n.kind))continue;
+      if(!n.pause&&!['warstart','wardec','criswarn','crisis','facdem','faccoup','cncvote'].includes(n.kind)&&n.uid!==minimized?.uid)continue;
+      const key=n.key||n.uid;if(keys.has(key))continue;keys.add(key);
+      add('▣ '+n.title,n.uid===minimized?.uid?'restoreModal':'openNote',1,String(n.uid));
     }
-    if(e.crisis)items.push({label:'⚠ '+e.crisis.toUpperCase()+' KRİZİ'});
-    if(e.shortage)items.push({label:'⚠ Mal kıtlığı · ekonomi / kaynak üretimini kontrol et'});
-    return {items,wars,battles};
+    if(minimized&&(minimized.raw||typeof DiplomaticInbox!=='undefined'&&DiplomaticInbox.supported(minimized.kind)))add('▣ Küçültülen olay / karar · geri aç','restoreModal',minimized.raw?1:0);
+    if(crisisActive())add('🌋 Galaktik kriz · aşama '+G.crisis.stage,'crisInfo');
+    if(typeof upheavalActive==='function'&&upheavalActive()){
+      const U=upheavalInfo();add(U.ico+' '+U.n+' · '+G.upheaval.left+' tur','upInfo');
+    }
+    const colonies=new Set();
+    for(const c of e.colonies||[]){
+      const s=G.sys[c.s],p=s?.planets[c.p],key=c.s+':'+c.p;
+      if(!p?.col||p.owner!==e.id||!(p.col.secede>0)||colonies.has(key))continue;
+      colonies.add(key);const frozen=p.martial_law>0||p.recent_conquest>0;
+      add('⚠ '+p.name+' · ayrılıkçı isyan · '+(frozen?'sayaç donduruldu':Math.max(0,SECESSION_LIMIT-p.col.secede)+' ay'),'selsys',1,String(s.id));
+    }
+    if(e.crisis)add('⚠ '+e.crisis.toUpperCase()+' KRİZİ');
+    if(e.shortage)add('⚠ Mal kıtlığı · ekonomi / kaynak üretimini kontrol et');
+    // Navigation survives, ordinary galactic news is never an urgent count.
+    add('📰 Galaktik Haber Ağı','news',0);
+    return {items,wars,battles,count:items.reduce((n,i)=>n+i.count,0),minimized:!!minimized};
   },
   openTopStatus(){
-    const {items}=this.topStatusItems();
-    if(!items.length){this.openModal('<div class="mhd">DURUMLAR</div><div class="mbd">Savaş / kriz / küçültülen karar yok.</div><div class="mft"><button class="ch" data-a="closem">KAPAT</button></div>');return;}
-    this.pickList('Savaşlar, olaylar ve durumlar',items.map(x=>esc(x.label)),i=>{const item=items[i];if(item?.action)this.act(item.action);});
+    const {items,minimized}=this.topStatusItems();
+    if(minimized){this.restoreModal();return;}
+    this.pickList('Savaşlar, olaylar ve durumlar',items.map(x=>esc(x.label)),i=>{const item=items[i];if(item?.action)this.act(item.action,item.x);});
   },
   bindTopbarInput(){
     if(this._topInputBound)return;this._topInputBound=true;
@@ -1982,14 +2022,14 @@ const UI = {
   },
   topbar(){
     if(this._topPointer)return; // Preserve native scrolling and the pressed target until release.
-    const e=G.p,r=e.res,inc=e.inc,{items,wars,battles}=this.topStatusItems();
+    const e=G.p,r=e.res,inc=e.inc,{count,minimized,wars,battles}=this.topStatusItems();
     const previous=$('resourceStrip'),left=previous?previous.scrollLeft:0;
     const cell=k=>{const d=RES[k],v=inc[k]||0;return `<div class="res" title="${d.n}"><em style="color:${d.c}">${d.ico}</em><u style="color:${d.c}">${d.k}</u><b>${fmt(r[k])}</b><s class="${v>=0?'p':'n'}">${sgn(v)}</s></div>`;};
     $('topbar').innerHTML=`<div id="resourceStrip" aria-label="Kaynaklar; yatay kaydırılabilir" tabindex="0">`+
       ['min','ene','yiy','tuk','ala','etk'].map(cell).join('<div class="tsep"></div>')+
       `<div class="tsep"></div><div class="res" title="Aylık araştırma: ${inc.ara}"><em style="color:${RES.ara.c}">${RES.ara.ico}</em><u>ARŞ</u><b>${fmt(inc.ara)}</b><s>/ay</s></div>
       <div class="tsep"></div><div class="res" title="Filo kapasitesi"><em>⛴</em><u>FİLO</u><b>${fleetUsage(e)}/${Math.round(e.cap)}</b></div></div>
-      <button id="topStatusBtn" class="topStatusBtn ${wars||battles?'hot':''}" data-a="topStatus" aria-label="${items.length} savaş / olay / durum; listeyi aç" title="Savaş, olay ve kriz listesi">${wars||battles?'⚔':'☰'} +${items.length}</button>`;
+      <button id="topStatusBtn" class="topStatusBtn ${wars||battles?'hot':''} ${minimized?'hasMinimized':''}" data-a="topStatus" aria-label="${count} önemli durum${minimized?'; küçültülen olayı geri aç':'; listeyi aç'}" title="Savaş, olay ve kriz listesi">${wars||battles?'⚔':'☰'} +${count}</button>`;
     $('resourceStrip').scrollLeft=left;
   },
 
@@ -2104,14 +2144,14 @@ const UI = {
     }
     if (typeof battleReportForPlayer==='function'){
       const br=battleReportForPlayer(s);
-      if (br){
+      if (br && (br.active || G.dismissedBattleReports?.[s.id]!==battleReportViewKey(s))){
         const foe=G.emps[br.enemy.id];
         const foeName=foe && this.diploKnown(foe.id) ? esc(foe.name) : 'Tanımlanamayan düşman';
         const durum=br.active ? 'SÜRÜYOR' : br.winner===0 ? 'ZAFER' :
           br.winner===null ? 'SONUÇSUZ' : 'YENİLGİ';
         const col=br.active?'#ff9b3d':br.winner===0?'#65e08a':'#ff5f6d';
         h += `<div class="box" style="border-color:${col}"><div class="bt">
-          <span>⚔ MUHAREBE RAPORU</span><b style="color:${col}">${durum}</b></div>
+          <span>⚔ MUHAREBE RAPORU</span><span class="battleReportActions"><b style="color:${col}">${durum}</b>${!br.active?`<button class="battleReportClose" data-a="dismissBattleReport" data-x="${s.id}" data-report="${esc(battleReportViewKey(s))}" aria-label="Bu tamamlanmış muharebe raporunu gizle" title="Yalnız bu raporu gizle">✕</button>`:''}</span></div>
           <div class="row"><span>Rakip</span><b>${foeName}</b></div>
           <div class="row"><span>Kayıplar</span><b>Biz ${br.mine.loss} · Düşman ${br.enemy.loss}</b></div>
           <div class="row"><span>Ricat eden filo</span><b>Biz ${br.mine.retreat} · Düşman ${br.enemy.retreat}</b></div>`;
@@ -2331,8 +2371,9 @@ const UI = {
                   ? 'sıkıyönetim sayacı donduruyor'
                   : lim - sc + ' ay içinde kopabilir'}</div>
               <div class="mini" style="grid-column:1/-1;margin:1px 0 0">
-                İstikrarı ${typeof SECESSION_STAB !== 'undefined' ? SECESSION_STAB : 25}
-                üstüne çıkar ya da sıkıyönetim ilan et — hareket söner.</div>
+                ${(e.hitLog||[]).some(w=>w.k==='kiskirt'&&!w.known&&w.sys===s.id&&w.pi===pl.i)?'🔍 DIŞ MÜDAHALE ŞÜPHESİ — İstihbarattan Derin Soruşturma yap.<br>':''}
+                İstikrarı ${typeof SECESSION_STAB !== 'undefined' ? SECESSION_STAB : 40}
+                üstüne çıkar ya da sıkıyönetim ilan et — istikrar düzelirse sayaç ayda −3 geriler.</div>
             </div>`;
           }
 
@@ -2397,41 +2438,6 @@ const UI = {
               data-a="dirTog" data-x="${s.id}:${pl.i}">${
                 pl.col.auto ? '⏹ OTOMASYONU KAPAT' : '🏗 OTOMATİK İNŞAYI AÇ'}
               </button></div>`;
-          }
-
-          /* ═══ FAZ 42: AYRILIKÇI HAREKET GÖSTERGESİ ═══
-             Sayaç işlemeye başlayınca beliriyor, istikrar düzelip
-             sayaç sıfırlanınca kendiliğinden kayboluyor. */
-          if ((pl.col.secede || 0) > 0 && typeof SECESSION_LIMIT !== 'undefined'){
-            const sc = pl.col.secede;
-            const yuzde = Math.min(100, Math.round(sc / SECESSION_LIMIT * 100));
-            /* Sarıdan kızıla: %60 üstü tehlike bölgesi */
-            const renk = yuzde >= 80 ? '#ff5f6d' : yuzde >= 50 ? '#ff9b3d' : '#d6c04a';
-            const kalan = Math.max(0, SECESSION_LIMIT - sc);
-            h += `<div class="gDef" style="border-color:${renk}">
-              <div class="gRow">
-                <span class="gIco" style="color:${renk}">⚠</span>
-                <div class="gBarW"><div class="gBar" style="width:${yuzde}%;
-                  background:${renk}"></div></div>
-                <b style="color:${renk}">${sc}/${SECESSION_LIMIT}</b></div>
-              <div class="mini" style="grid-column:1/-1;margin:2px 0 0;color:${renk}">
-                ${(() => {
-                  /* FAZ 43: bu gezegende çözülmemiş kışkırtma var mı? */
-                  const supheli = (e.hitLog || []).some(w =>
-                    w.k === 'kiskirt' && !w.known &&
-                    w.sys === s.id && w.pi === pl.i);
-                  return supheli
-                    ? '<span style="color:#8b7bff">🔍 DIŞ MÜDAHALE ŞÜPHESİ</span> — ' +
-                      'bu isyan doğal olmayabilir. İstihbarat sekmesinden ' +
-                      '<b>Derin Soruşturma</b> yap.<br>' : '';
-                })()}
-                AYRILIKÇI İSYAN — ${kalan} ay içinde istikrarı
-                ${typeof SECESSION_STAB !== 'undefined' ? SECESSION_STAB : 40}
-                üstüne çıkarmazsan bu dünya kopacak.</div>
-              <div class="mini" style="grid-column:1/-1">
-                Sıkıyönetim sayacı dondurur · istikrar düzelirse ayda −3 geriler
-                ${pl.martial_law > 0 ? '<br><b style="color:#65e08a">⚖ Sıkıyönetim aktif — sayaç donduruldu</b>' : ''}
-              </div></div>`;
           }
 
           /* ═══ FAZ 21: GEZEGEN SAVUNMASI ═══
@@ -3354,7 +3360,7 @@ const UI = {
     const f=findFed(o),knownFed=f&&knownFederationBond(e,f,o.id);
     const federation=knownFed?`<div class="mini"><canvas class="identityBadge" data-identity="federation" data-id="${f.id}" width="28" height="28"></canvas> ${esc(f.name)} · ${esc(fedType(f).n)}</div>`:'';
     return `<div class="dcIdentity">
-      <canvas class="dpPort" width="60" height="72" data-lk="${esc(o.look||'humanoid')}"
+      <canvas class="dpPort" width="60" height="72" data-ps="${statePortraitSeed(o)}" data-lk="${esc(o.look||'humanoid')}"
         data-col="${esc(o.col)}" data-pers="${P?esc(personaKey(o)):'yayilmaci'}"
         data-mood="${rel}"></canvas><div><b>${esc(o.name)}</b>
       <div class="mini">${sysCount(o)} sistem · ${INTEL_LEVELS[lvl].n}</div>
@@ -3503,10 +3509,22 @@ const UI = {
       <div class="mini">Ele geçirme sayısı bugünkü sahiplik veya paylaşım hakkı değildir. Paylaşım bütün ortakların onayını gerektirir.</div>
       <button class="abtn" data-a="shareOpen" data-x="${v.campaign}">⚖ ${waiting?'PAYLAŞIM · OYUN BEKLENİYOR':'PAYLAŞIM TASLAĞI'}</button></details>`;
   },
+  federationDiplomacy(e,o){
+    const own=findFed(e),other=findFed(o);
+    let h='<div class="ph">FEDERASYON DİPLOMASİSİ</div>';
+    const button=(action,label,q)=>`<button class="abtn" data-a="${action}" data-x="${o.id}" ${q.ok?'':'disabled'}>${label}</button><div class="mini">${esc(q.why||(action==='fedDipInvite'?'Üyeler oy verir; aday ayrıca daveti kabul eder. 60 ◈.':'Üyeler oy verir; onaydan sonra yükümlülükleri kabul ederek katıl. 60 ◈.'))}</div>`;
+    if(own&&other===own)return h+'<div class="mini">Aynı federasyonun üyesisiniz.</div><button class="abtn" data-a="fedPane">Federasyonu Yönet</button>';
+    if(own&&!other){const q=canFedMotion(e,'admit',{target:o.id});h+=button('fedDipInvite','Federasyonuma Davet Et',q);if(q.ok){const a=aiFedWilling(o,e,own.type,own);h+=`<div class="mini">Adayın eğilimi: ${a.ok?'Olumlu':'Olumsuz'} · ${esc(a.why)}</div>`;}}
+    else if(!own&&other)h+=button('fedDipRequest','Federasyonuna Katılma Talebi Gönder',canRequestFederation(e,o));
+    else if(!own&&!other)h+='<button class="abtn" data-a="fedPane">Federasyon Kurma Teklifi</button><div class="mini">Mevcut kuruluş ekranında türü seç. En az iki uygun ve kabul eden AI müttefik ile kuruluş Etkisi gerekir.</div>';
+    else h+='<div class="mini">Farklı federasyonlara üyesiniz. Yeni üyelik için önce bağımsız olmak gerekir.</div>';
+    return h;
+  },
   diploRelationship(e,o){
     this._jointSurface='diplo';
     const lvl=intelOf(e,o.id),blocked=diploBlocked(e,o),war=!!(e.war[o.id]||o.war[e.id]);
     let h=this.diploIdentity(e,o)+this.diploTreaties(e,o);
+    h+=this.federationDiplomacy(e,o);
     h+=this.warContribution(e,o);
     h+=this.jointPanel(o.id,'diplo');
     h+=`<button class="abtn" data-a="commerceNew" data-x="${o.id}">▱ Kaynak sözleşmesi</button><button class="abtn" data-a="commerce">Ticaret / konvoylar</button>`;
@@ -3680,7 +3698,7 @@ const UI = {
         if (!o) return;
         /* FAZ 66: renk noktası yerine ırk portresi */
         h += `<div class="pchip"><canvas class="dpPort chipPort" width="64" height="64"
-            data-lk="${o.look||'humanoid'}" data-col="${o.col}"
+            data-ps="${statePortraitSeed(o)}" data-lk="${o.look||'humanoid'}" data-col="${o.col}"
             data-pers="${typeof personaKey==='function'?personaKey(o):'yayilmaci'}"></canvas>
           <div class="pi"><div class="pn" style="color:${o.col}">${esc(o.name)}${m===0?' (sen)':''}</div>
           <div class="pm">${aiKnownSystems(e,o.id).length} bilinen sistem · filo ${powerLabel(e,o)}</div></div></div>`;
@@ -5163,7 +5181,7 @@ const UI = {
         const o = G.emps[m];
         if (!o) return;
         h += `<div class="dpCard"><div class="dpTop">
-          <canvas class="dpPort" data-lk="${o.look||'humanoid'}" data-col="${o.col}"
+          <canvas class="dpPort" data-ps="${statePortraitSeed(o)}" data-lk="${o.look||'humanoid'}" data-col="${o.col}"
             data-pers="${typeof personaKey==='function'?personaKey(o):'yayilmaci'}"
             data-mood="${Math.round(e.rel[o.id]||0)}" width="34" height="46"></canvas>
           <div class="dpName"><b style="color:${o.col}">${esc(o.name)}${m===0?' (sen)':''}</b>
@@ -5187,7 +5205,7 @@ const UI = {
         const g = cv.getContext('2d');
         g.imageSmoothingEnabled = false;
         const spr = ART.portraitFull({
-          look: cv.dataset.lk, col: cv.dataset.col,
+          look: cv.dataset.lk, seed:+cv.dataset.ps||0, col: cv.dataset.col,
           persona: cv.dataset.pers, mood: +(cv.dataset.mood || 0), scale: 3
         });
         const sc = Math.min(cv.width/spr.width, cv.height/spr.height) * .9;
@@ -6640,7 +6658,7 @@ const UI = {
     }
 
     if (e.origin && ORIGINS[e.origin])
-      h += `<div class="row"><span>Köken</span><b>${ORIGINS[e.origin].ico} ${ORIGINS[e.origin].n}</b></div><div class="box"><div class="mini">${esc(originEffectText(e))}</div><div class="mini">Bunlar başlangıç koşullarıdır; mevcut nüfus, gemi ve üretim zamanla değişir. Tür, doktrin, sivil politika ve zorluk ayrıca uygulanır.</div></div>`;
+      h += `<div class="row"><span>Köken</span><b>${ORIGINS[e.origin].ico} ${ORIGINS[e.origin].n}</b></div><div class="box"><div class="mini">${esc(ORIGINS[e.origin].story||'')}</div><div class="mini">${esc(originEffectText(e))}</div><div class="mini">Bunlar başlangıç koşullarıdır; mevcut nüfus, gemi ve üretim zamanla değişir. Tür, doktrin, sivil politika ve zorluk ayrıca uygulanır.</div></div>`;
     h += `<div class="row"><span>Sistem</span><b>${sysCount(e)} / ${G.sys.length}</b></div>`;
     h += `<div class="row"><span>Koloni</span><b>${e.colonies.length}</b></div>`;
     /* FAZ 46: float birikimi — 22.719999999999999 yerine tam sayı */
@@ -7174,8 +7192,9 @@ const UI = {
     G.inbox.push(item);
     // kutu şişmesin: en eski duraklatmayan bildirimler düşer
     while (G.inbox.length > 6){
-      const i = G.inbox.findIndex(x => !x.pause);
-      G.inbox.splice(i >= 0 ? i : 0, 1);
+      const i = G.inbox.findIndex(x => !x.pause&&x.uid!==G.minNote);
+      const fallback=G.inbox.findIndex(x=>x.uid!==G.minNote);
+      G.inbox.splice(i >= 0 ? i : fallback, 1);
     }
     if (item.pause && G.speed > 0){
       this.prePause = G.speed;
@@ -7187,20 +7206,23 @@ const UI = {
     const box = $('inbox');
     if (!box) return;
     const list = G.inbox || [];
-    if (!list.length){ box.innerHTML = ''; box.classList.add('hidden'); return; }
+    if (!list.length){ if(box.innerHTML)box.innerHTML='';box._inboxMarkup96d=null;box.classList.add('hidden');return; }
     box.classList.remove('hidden');
-    box.innerHTML = list.map(it =>
+    const markup = list.map(it =>
       `<button class="nCard ${it.cls||''}" data-a="openNote" data-x="${it.uid}">
          <span class="nIco">${it.ico||'✉'}</span>
          <span class="nTxt"><b>${esc(it.title)}</b><i>${esc(it.sub||'')}</i></span>
          <span class="nGo">›</span>
        </button>`).join('');
+    // Keep an unchanged decision's DOM node and entrance animation stable during refresh.
+    if(box._inboxMarkup96d!==markup){box.innerHTML=markup;box._inboxMarkup96d=markup;}
   },
   openNote(uid){
     const list = G.inbox || [];
     const i = list.findIndex(x => x.uid === +uid);
     if (i < 0) return;
     const it = list[i];
+    if(G.minNote===it.uid){G.minNote=null;this.topbar();}
     if(typeof DiplomaticInbox!=='undefined'&&DiplomaticInbox.supported(it.kind)&&typeof ArchiveUI!=='undefined'){
       const rec=DiplomaticInbox.capture(it);if(rec&&it.kind!=='aideal'){ArchiveUI.record(rec.id);return;}
     }
@@ -7253,6 +7275,7 @@ const UI = {
      ═══════════════════════════════════════════════════════════════ */
   minimizeModal(){
     const it = this._openNote;
+    if(this.minimizedEvent()&&G.minNote!==it?.uid){say('Önce üst bardaki küçültülmüş olaya dön; mevcut karar açık tutuldu.');return false;}
     /* Bildirim kaynaklı olay: kuyruğa geri koy ve rozet olarak işaretle */
     if (it){
       this._openNote = null;
@@ -7263,6 +7286,9 @@ const UI = {
       /* Bildirimsiz modal (ör. doğrudan açılan bir karar penceresi):
          ham HTML saklanır, rozetten aynen geri getirilir. */
       const box = $('modal').firstElementChild;
+      // Only informational HTML can be restored without rebuilding a typed decision.
+      if(!box||box.querySelector('input,select,textarea,canvas')||Array.from(box.querySelectorAll('[data-a]')).some(b=>!['closem','minModal'].includes(b.dataset.a))){say('Bu karar güvenle küçültülemiyor; açık pencereyi kullan.');return false;}
+      this._minRawWorld=G.emps;
       G.minRaw = box ? {html: box.innerHTML, cls: box.className.replace('mbox','').trim()} : null;
       if (!G.minRaw) return false;
       G.minNote = '_raw';
@@ -7275,11 +7301,11 @@ const UI = {
   },
 
   restoreModal(){
-    if (!G.minNote) return false;
+    if (!this.minimizedEvent()){G.minNote=null;G.minRaw=null;this.topbar();return false;}
     if (G.minNote === '_raw' && G.minRaw){
       const r = G.minRaw;
       G.minNote = null; G.minRaw = null;
-      this.openModal(r.html, r.cls, true);
+      this.openModal(r.html.replace(/<button[^>]*data-a="minModal"[^>]*>.*?<\/button>/g,''), r.cls, true);
       this.topbar();
       return true;
     }
@@ -7413,7 +7439,7 @@ const UI = {
     const d = boy || 40;
     return `<canvas class="dpPort notifPort" width="${d*2}" height="${d*2}"
       style="width:${d}px;height:${d}px"
-      data-lk="${o.look||'humanoid'}" data-col="${o.col}"
+      data-ps="${statePortraitSeed(o)}" data-lk="${o.look||'humanoid'}" data-col="${o.col}"
       data-pers="${typeof personaKey==='function'?personaKey(o):'yayilmaci'}"></canvas>`;
   },
   eventArt(art, baslik, metin, cls, kat, emp){
@@ -7535,7 +7561,7 @@ const UI = {
     this._warPreview=null;
     this._amountToken=null;this._jointSendToken=null;
     // 94D.1: acknowledged war/retired incident cards must not be saved as still open.
-    if(this._openNote&&['warstart','wardec','border'].includes(this._openNote.kind))this._openNote=null;
+    if(this._openNote&&['warstart','wardec','border','criswarn','crisis','crisend','cncnew'].includes(this._openNote.kind))this._openNote=null;
     const shipCancelSpeed=this._shipCancelPending&&this._shipCancelPending.speed;
     const shipmentSpeed=this._shipmentPending&&this._shipmentPending.speed;
     const compositionSpeed=this._compositionPending&&this._compositionPending.speed;
@@ -7552,11 +7578,12 @@ const UI = {
     const back = shipCancelSpeed!==null && shipCancelSpeed!==undefined ? shipCancelSpeed
       : compositionSpeed!==null && compositionSpeed!==undefined ? compositionSpeed
       : shipmentSpeed!==null && shipmentSpeed!==undefined ? shipmentSpeed
-      : envoySpeed===undefined ? (this.prePause || this.modalPrevSpeed || 1) : envoySpeed;
+      : envoySpeed===undefined ? (this.prePause || (Number.isFinite(this.modalPrevSpeed)?this.modalPrevSpeed:1)) : envoySpeed;
     this.prePause = 0;
     this.setSpeed(back);
   },
   anomalyOpen(a, sys){
+    const note=this._openNote,world=G.emps;let resolved=false;
     this._an = {a, sys};
     this.openModal(
       `<div class="mhd"><span>ANOMALİ · ${esc(sys.name)}</span></div>
@@ -7565,6 +7592,9 @@ const UI = {
          `<button class="ch" data-a="anomch" data-x="${i}"><div class="cht">${c.t}</div><div class="chd">${c.d}</div></button>`
        ).join('')}</div>`, 'sci', true);
     this._hook('anomch', i=>{
+      if(resolved||world!==G.emps||note&&this._openNote!==note)return;
+      if(!a.ch[i])return;
+      resolved=true;if(this._openNote===note)this._openNote=null;
       const res = a.ch[i].f(G, Math.random);
       this.openModal(`<div class="mhd"><span>SONUÇ</span></div><div class="mbd">${res}</div>
         <div class="mft"><button class="ch" data-a="closem"><div class="cht">Kapat</div></button></div>`,'sci');
@@ -7610,6 +7640,7 @@ const UI = {
 
   /* zincirleme hikâye olayı — seçim sonraki bölümü açabilir */
   chainOpen(id){
+    const note=this._openNote,world=G.emps;let resolved=false;
     const ev = CHAINS[id];
     if (!ev) return;
     const body = this.fillEventText(ev.t);
@@ -7624,8 +7655,11 @@ const UI = {
           <div class="chd">${c.d||''}</div></button>`
        ).join('')}</div>`, 'sci', true);
     this._hook('chch', i=>{
+      if(resolved||world!==G.emps||note&&this._openNote!==note)return;
+
       const opt = ev.ch[i];
       if (!opt) return;
+      resolved=true;if(this._openNote===note)this._openNote=null;
       let res = '';
       if (opt.f){ try { res = opt.f(G, rnd) || ''; } catch(err){ res = ''; } }
       if (opt.next && CHAINS[opt.next]){
@@ -7645,6 +7679,7 @@ const UI = {
     });
   },
   eventOpen(ev){
+    const note=this._openNote,world=G.emps;let resolved=false;
     const body = this.fillEventText(ev.t);
     const tgt = this.evTarget;
     this.openModal(
@@ -7656,6 +7691,9 @@ const UI = {
          `<button class="ch" data-a="evch" data-x="${i}"><div class="cht">${c.t}</div><div class="chd">${c.d}</div></button>`
        ).join('')}</div>`, '', true);
     this._hook('evch', i=>{
+      if(resolved||world!==G.emps||note&&this._openNote!==note)return;
+      if(!ev.ch[i])return;
+      resolved=true;if(this._openNote===note)this._openNote=null;
       const res = ev.ch[i].f(G, Math.random);
       this.openModal(`<div class="mhd"><span>SONUÇ</span></div><div class="mbd">${res}</div>
         <div class="mft"><button class="ch" data-a="closem"><div class="cht">Kapat</div></button></div>`);
@@ -7991,12 +8029,12 @@ const UI = {
          <button class="riX" data-a="closem">✕</button></div>
        <div class="mbd" style="padding:4px 16px"><button class="abtn" data-a="cameraReset">Kamerayı sıfırla</button></div>
        <div class="mbd" style="padding:4px 16px"><button class="abtn" data-a="warPauseToggle" aria-pressed="${WAR_PAUSE_ON}">Savaşa katılınca duraklat: ${WAR_PAUSE_ON?'AÇIK':'KAPALI'}</button></div>
+       <div class="mbd">${typeof AUDIO!=='undefined'?AUDIO.controls():''}</div>
        <div class="mbd" id="diagBox">Depolama sınanıyor…</div>
        <div class="mft">
         <button class="ch" data-a="mute"><div class="cht">${
           AUDIO_OFF ? '🔇 Ses kapalı' : '🔊 Ses açık'}</div>
-          <div class="chd">FAZ 62: müzik anahtarı araç çubuğundan buraya taşındı —
-            sol menüde yer açıldı</div></button>
+          <div class="chd">Ana sesi kapatır; müzik ve efekt tercihleri yukarıda ayrı ayarlanır.</div></button>
         <button class="ch" data-a="bgTog"><div class="cht">${
           BG_OFF ? '🌌 Arka plan kapalı' : '🌌 Arka plan açık'}</div>
           <div class="chd">Yıldız alanı ve bulutsu çizimi</div></button>
@@ -8169,7 +8207,7 @@ const UI = {
       pc.dataset.done = 1;
       const g = pc.getContext('2d');
       g.imageSmoothingEnabled = false;
-      const spr = ART.portrait(G.p.look || 'humanoid', G.p.col, 3);
+      const spr = ART.portraitFull({look:G.p.look||'humanoid',col:G.p.col,seed:statePortraitSeed(G.p),scale:3});
       const sc = Math.min(pc.width/spr.width, pc.height/spr.height) * .92;
       g.clearRect(0,0,pc.width,pc.height);
       g.drawImage(spr, (pc.width-spr.width*sc)/2, (pc.height-spr.height*sc)/2, spr.width*sc, spr.height*sc);
@@ -8189,7 +8227,7 @@ const UI = {
         const g2 = cv.getContext('2d');
         g2.imageSmoothingEnabled = false;
         const spr2 = ART.portraitFull({
-          look: cv.dataset.lk || 'humanoid',
+          look: cv.dataset.lk || 'humanoid', seed:+cv.dataset.ps||0,
           col:  cv.dataset.col || '#4aa8d8',
           persona: cv.dataset.pers,
           mood: +(cv.dataset.mood || 0),
@@ -8325,20 +8363,20 @@ function renderSetup(){
   else if (SETUP_STEP === 'goruns'){
     const pk = c.mizac || 'yayilmaci';
     h += `<div class="sect"><h2>HALKININ YÜZÜ</h2>
-      <div class="mini" style="margin-bottom:8px">Portre üç katmandan çizilir:
-      arka plan, zırh/kıyafet ve tür siluetı. Zırh mizacına göre şekillenir;
-      diplomaside ilişkin bozulunca duruş sertleşir ve fon kızıla döner.</div>`;
+      <div class="mini" style="margin-bottom:8px">Tür silueti, yüz ve kıyafet varyasyonu devletinin kimliğini oluşturur.
+      Dostane, nötr ve düşman çerçeveleri aynı kimliği korur.</div>`;
 
     /* önizleme: dost · nötr · düşman */
     h += `<div class="grid g3" style="margin-bottom:10px">`;
     [[60,'DOSTANE'],[0,'NÖTR'],[-60,'DÜŞMAN']].forEach(pair=>{
       h += `<div style="text-align:center">
-        <canvas class="setPort" data-lk="${c.look||'humanoid'}" data-pers="${pk}"
+        <canvas class="setPort" data-ps="${statePortraitSeed({id:0,look:c.look,portraitVariant:normalizePortraitVariant(c.portraitVariant)})}" data-lk="${c.look||'humanoid'}" data-pers="${pk}"
           data-mood="${pair[0]}" width="72" height="98"></canvas>
         <div class="mini">${pair[1]}</div></div>`;
     });
     h += `</div>`;
 
+    h += `<div class="portraitVariation96d"><span>Portre varyasyonu <b id="portraitVariantValue">${normalizePortraitVariant(c.portraitVariant)+1}</b>/256</span><button class="abtn" data-a="portraitVariant" data-x="-1" aria-label="Önceki portre varyasyonu">◂</button><button class="abtn" data-a="portraitVariant" data-x="1" aria-label="Sonraki portre varyasyonu">▸</button></div><div class="mini">Yalnız görünüş değişir; devletin mekaniği ve oyun tohumu değişmez.</div>`;
     h += `<div class="ph">TÜR SİLUETİ</div><div class="grid g3">`;
     for (const k in LOOKS){
       const on = (c.look === k);
@@ -8633,9 +8671,10 @@ function renderSetup(){
       const o = ORIGINS[k];
       h += `<button class="card ${c.origin===k?'on':''}" data-a="origin" data-x="${k}">
         <div class="cn"><span class="civIco">${o.ico}</span><span>${o.n}</span></div>
-        <div class="cd">${o.d}</div></button>`;
+        <div class="cd">${esc(o.d)}</div><small>${esc(o.difficulty)}</small></button>`;
     }
-    h += `</div></div>`;
+    const detail=ORIGINS[c.origin]||ORIGINS.standart;
+    h += `</div><article class="originDetails96d" id="originDetails"><h3>${detail.ico} ${esc(detail.n)}</h3><p>${esc(detail.story)}</p><div class="mini">${esc(detail.style)} · <b>${esc(detail.difficulty)}</b></div><div class="originColumns"><div><b>Avantajlar</b><ul>${detail.pros.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div><div><b>Dezavantajlar</b><ul>${detail.cons.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div></div><p class="mini">${esc(detail.special)}</p><details><summary>Gerçek başlangıç dökümü</summary><p class="mini">${esc(originEffectText({origin:c.origin}))}</p></details></article></div>`;
   }
 
   /* ================= 5. GALAKSİ ================= */
@@ -8648,6 +8687,7 @@ function renderSetup(){
       <button class="opt ${acikMi?'on':''}" data-a="${alan}">
         ${etiket}<small>${aciklama} — <b>${acikMi?'AÇIK':'KAPALI'}</b></small></button>`;
     h += `<div class="grid g2">`;
+    h += tog('AI Devletlerine Rastgele Köken', 'Her AI için ayrı özel köken ihtimali', 'togAIOrigins', c.aiOrigins !== false);
     h += tog('☠ Korsan Tehdidi', 'Yağmacı filolar ve korsan yuvaları',
              'togPirate', c.pirates !== false);
     h += tog('🌀 Yıldız Kapıları', 'Uzak sistemler arası kısayol ağı',
@@ -8655,6 +8695,8 @@ function renderSetup(){
     h += tog('🎲 Rastgele Olaylar',
       'Maden kazası, salgın, tesadüfi hikâye zincirleri ve galaktik çalkantılar; diplomasi, casusluk, savaş ve keşif devam eder',
       'togRandomEvents', c.randomEvents !== false);
+    h+='</div><div class="mini">AI özel köken ihtimali · '+(c.aiOrigins===false?'Kapalı':aiOriginChance(c)+'%')+'</div><div class="grid g2">';
+    for(const [chance,label]of [[20,'Düşük'],[35,'Normal'],[60,'Yüksek'],[100,'Her devlet']])h+=`<button class="opt ${aiOriginChance(c)===chance?'on':''}" data-a="aiOriginChance" data-x="${chance}" ${c.aiOrigins===false?'disabled':''}>${label} · %${chance}</button>`;
     h += `</div>`;
     h += `<div class="ph">☣ KRİZ ŞİDDETİ</div><div class="grid g3">`;
     [['kapali','KAPALI','Hiçlik Sürüsü hiç gelmez'],
@@ -8732,6 +8774,7 @@ function renderSetup(){
     gv(SHAPES, c.shape)} · ${gv(DIFFS, c.diff)}</b></div>`;
   h += `<div class="sumRow"><span>Kriz · Kalıntı</span><b>${CRISIS_TIMING[c.crisis].n} · ${RUIN_LEVELS[c.ruins].n}</b></div>`;
   h += `<div class="sumRow"><span>Konsey</span><b>${COUNCIL_PACE[c.council]?COUNCIL_PACE[c.council].n:'NORMAL'}</b></div>`;
+  h += `<div class="sumRow"><span>AI kökenleri</span><b>${c.aiOrigins===false?'KAPALI':'AÇIK · %'+aiOriginChance(c)}</b></div>`;
   h += `<div class="sumRow"><span>Rastgele olaylar</span><b>${c.randomEvents===false?'KAPALI':'AÇIK'}</b></div>`;
   h += `</div>`;
 
@@ -8821,6 +8864,7 @@ function setupClickHandler(e){
   else if (a === 'step'){ SETUP_STEP = x; $('menu').scrollTop = 0; safeRenderSetup(); }
   else if (a === 'sigil'){ CFG.sigil = x; safeRenderSetup(); }
   else if (a === 'look'){ CFG.look = x; safeRenderSetup(); }
+  else if (a === 'portraitVariant'){ CFG.portraitVariant=(normalizePortraitVariant(CFG.portraitVariant)+(+x||1)+256)%256;safeRenderSetup(); }
   else if (a === 'mizacSet'){
     CFG.mizac = x;
     /* FAZ 72: doktrin ırkı da belirler (TÜR sekmesi kaldırıldı) */
@@ -8838,6 +8882,8 @@ function setupClickHandler(e){
      el ile tıklama yolunu hiç denememişti. Ders: arayüz testi
      DOM yolundan geçmeli.
      ═══════════════════════════════════════════════════════════════ */
+  else if (a === 'togAIOrigins'){ CFG.aiOrigins=CFG.aiOrigins===false;safeRenderSetup(); }
+  else if (a === 'aiOriginChance'){ if([20,35,60,100].includes(+x))CFG.aiOriginChance=+x;safeRenderSetup(); }
   else if (a === 'togPirate'){ CFG.pirates = (CFG.pirates === false); safeRenderSetup(); }
   else if (a === 'togGate'){ CFG.gates = (CFG.gates === false); safeRenderSetup(); }
   else if (a === 'togRandomEvents'){ CFG.randomEvents = (CFG.randomEvents === false); safeRenderSetup(); }
@@ -8939,7 +8985,7 @@ function setupClickHandler(e){
     safeRenderSetup();
   }
   else if (a === 'mono'){ CFG.monoRes = x; safeRenderSetup(); }
-  else if (a === 'origin'){ CFG.origin = x; safeRenderSetup(); }
+  else if (a === 'origin'){ CFG.origin = Object.hasOwn(ORIGINS,x)?x:'standart'; safeRenderSetup();requestAnimationFrame(()=>document.getElementById('originDetails')?.scrollIntoView?.({block:'nearest'})); }
   else if (a === 'councilSet'){ CFG.council = x; safeRenderSetup(); }
   else if (a === 'crisisSet'){ CFG.crisis = x; safeRenderSetup(); }
   else if (a === 'ruinSet'){ CFG.ruins = x; safeRenderSetup(); }

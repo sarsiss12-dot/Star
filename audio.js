@@ -19,16 +19,6 @@ const AUDIO = (function(){
   let muted = false;
   let musicTimer = null;
 
-  /* ── AYARLAR ── */
-  /* FAZ 24: seviyeler 3 katına çıkarıldı. Tavan 1.0'ı aşmamalı
-     (kırpılma/distorsiyon olur), bu yüzden master 0.95'te
-     sınırlandı ve kanallar orantılı yükseltildi. */
-  const VOL_MASTER = 0.95;      // 0.55 → ×1.73 (1.0 tavanı)
-  const VOL_MUSIC  = 0.90;      // 0.30 → ×3.0
-  const VOL_SFX    = 1.00;      // 0.42 → ×2.4
-  /* Efektif kazanç master × kanal: müzik 0.86 (önce 0.165, ×5.2),
-     efekt 0.95 (önce 0.231, ×4.1). Kulakta net yükselme. */
-
   /* ── MÜZİKAL ÖLÇEK ──
      C Dorian: uzay teması için melankolik ama umutsuz olmayan bir
      kip. Minör üçlü + majör altılı; ne fazla neşeli ne matem.
@@ -39,7 +29,7 @@ const AUDIO = (function(){
     523.25, 587.33, 622.25                                     // C5 (üst uç)
   ];
   /* Pedal (dem) notaları — arka planda duran kök sesler */
-  const DRONE = [65.41, 98.00];    // C2, G2
+
 
   /* ── YARDIMCILAR ── */
   function now(){ return ctx ? ctx.currentTime : 0; }
@@ -54,108 +44,62 @@ const AUDIO = (function(){
       const d = buf.getChannelData(ch);
       for (let i = 0; i < len; i++){
         /* Erken yansımalar seyrek, kuyruk yoğun — salon hissi */
-        d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, decay);
+        d[i] = (audioRand() * 2 - 1) * Math.pow(1 - i / len, decay);
       }
     }
     return buf;
   }
 
-  function init(){
-    if (ctx) return true;
-    const AC = window.AudioContext || window.webkitAudioContext;
-    if (!AC) return false;
-    try { ctx = new AC(); } catch(e){ return false; }
-
-    master = ctx.createGain();
-    master.gain.value = muted ? 0 : VOL_MASTER;
-    master.connect(ctx.destination);
-
-    /* Yankı yolu — sesler hem kuru hem ıslak olarak karışır */
-    convolver = ctx.createConvolver();
-    convolver.buffer = makeImpulse(2.6, 2.4);
-    const wet = ctx.createGain();
-    wet.gain.value = 0.40;
-    convolver.connect(wet);
-    wet.connect(master);
-
-    musicBus = ctx.createGain();
-    musicBus.gain.value = VOL_MUSIC;
-    musicBus.connect(master);
-    musicBus.connect(convolver);
-
-    sfxBus = ctx.createGain();
-    sfxBus.gain.value = VOL_SFX;
-    sfxBus.connect(master);
-    sfxBus.connect(convolver);
+  // 96D: independent musical randomness and bounded, disconnectable voice groups.
+  let randomState=0x96d151,offline=false,compressor=null,noise=null;
+  let prefs={master:.65,music:.60,effects:.70,musicOn:true,effectsOn:true},prefsRevision=0;
+  const groups=new Set(),waves=new Map(),limits={music:12,sfx:10};
+  const stats={createdNodes:0,releasedNodes:0,peakMusic:0,peakSfx:0,bars:0};
+  function audioRand(){randomState=(Math.imul(randomState,1664525)+1013904223)>>>0;return randomState/4294967296;}
+  function active(kind,t=now()){return [...groups].filter(g=>g.kind===kind&&!g.closed&&g.start<=t+.001&&g.end>t).length;}
+  function scheduledPeak(kind,start=-Infinity,end=Infinity){
+    const pending=[...groups].filter(g=>g.kind===kind&&!g.closed&&g.end>start&&g.start<end);
+    const points=pending.map(g=>Math.max(start,g.start));
+    return Math.max(0,...points.map(t=>pending.filter(g=>g.start<=t&&g.end>t).length));
+  }
+  function room(kind,start,end){return scheduledPeak(kind,start,end)<limits[kind];}
+  function track(nodes,sources,output,start,end,kind){
+    const group={nodes,sources,output,start,end,kind,closed:false};groups.add(group);stats.createdNodes+=nodes.length;
+    const close=()=>{if(group.closed)return;group.closed=true;groups.delete(group);for(const n of nodes)try{n.disconnect();}catch(e){}stats.releasedNodes+=nodes.length;};group.close=close;
+    let left=sources.length;for(const s of sources)s.onended=()=>{if(--left===0)close();};
+    if(kind==='music')stats.peakMusic=Math.max(stats.peakMusic,scheduledPeak(kind,start,end));else stats.peakSfx=Math.max(stats.peakSfx,scheduledPeak(kind,start,end));return group;
+  }
+  function stopVoices(kind,fade=.12){if(!ctx)return;const t=now();for(const g of [...groups]){
+    if(kind&&g.kind!==kind)continue;
+    try{g.output.gain.cancelScheduledValues(t);g.output.gain.setValueAtTime(Math.max(.0001,g.output.gain.value),t);g.output.gain.linearRampToValueAtTime(.0001,t+fade);}catch(e){}
+    for(const s of g.sources)try{s.stop(t+fade+.01);}catch(e){}if(!fade)g.close();
+  }}
+  function ramp(param,target,seconds=.18){if(!ctx)return;const t=now();param.cancelScheduledValues(t);param.setValueAtTime(param.value,t);param.linearRampToValueAtTime(target,t+seconds);}
+  function applyGains(){if(!ctx)return;ramp(master.gain,muted?0:prefs.master,.25);ramp(musicBus.gain,prefs.musicOn?prefs.music:0);ramp(sfxBus.gain,prefs.effectsOn?prefs.effects:0);}
+  function sanitizePrefs(raw){const p={...prefs};for(const k of ['master','music','effects'])if(Number.isFinite(raw?.[k]))p[k]=Math.max(0,Math.min(1,raw[k]));for(const k of ['musicOn','effectsOn'])if(typeof raw?.[k]==='boolean')p[k]=raw[k];return p;}
+  function configure(patch,persist=true){prefs=sanitizePrefs(patch);prefsRevision++;applyGains();if(!prefs.musicOn){cancelMusic();stopVoices('music');}else ensureMusic();if(!prefs.effectsOn)stopVoices('sfx');if(persist&&typeof storeSet==='function')try{storeSet('yh_audio_mix',JSON.stringify(prefs));}catch(e){}return {...prefs};}
+  function controls(){return `<div class="audioControls96d" aria-label="Ses ayarları">${[['master','Ana ses'],['music','Müzik'],['effects','Efekt']].map(([key,label])=>`<label>${label}<input type="range" data-audio="${key}" aria-label="${label}" min="0" max="100" value="${Math.round(prefs[key]*100)}"></label>`).join('')}<div class="audioChecks96d"><label><input type="checkbox" data-audio="musicOn" ${prefs.musicOn?'checked':''}>Müzik açık</label><label><input type="checkbox" data-audio="effectsOn" ${prefs.effectsOn?'checked':''}>Efektler açık</label></div></div>`;}
+  function init(context){
+    if(ctx)return true;const AC=window.AudioContext||window.webkitAudioContext;if(!context&&!AC)return false;
+    try{ctx=context||new AC();}catch(e){return false;}
+    master=ctx.createGain();master.gain.value=muted?0:prefs.master;
+    compressor=ctx.createDynamicsCompressor();compressor.threshold.value=-18;compressor.knee.value=18;compressor.ratio.value=4;compressor.attack.value=.015;compressor.release.value=.25;master.connect(compressor);compressor.connect(ctx.destination);
+    convolver=ctx.createConvolver();convolver.buffer=makeImpulse(1.8,3);const wet=ctx.createGain();wet.gain.value=.16;convolver.connect(wet);wet.connect(master);
+    musicBus=ctx.createGain();musicBus.gain.value=prefs.musicOn?prefs.music:0;musicBus.connect(master);musicBus.connect(convolver);
+    sfxBus=ctx.createGain();sfxBus.gain.value=prefs.effectsOn?prefs.effects:0;sfxBus.connect(master);sfxBus.connect(convolver);
+    noise=ctx.createBuffer(1,Math.round(ctx.sampleRate*2),ctx.sampleRate);const d=noise.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=audioRand()*2-1;
     return true;
   }
-
-  /* ═══════════════════════════════════════════════════════════════
-     ÇEKİRDEK SENTEZLEYİCİ — ADSR + alçak geçiren filtre
-     Her ses burada doğar. Sert başlangıç (click) olmaması için
-     attack asla 0 değil; bitişte kuyruk bırakılır.
-     ═══════════════════════════════════════════════════════════════ */
   function voice(o){
-    if (!ctx || muted) return;
-    const t0 = now() + (o.delay || 0);
-    const wave = o.wave || 'sine';
-    const freq = o.freq || 220;
-    const A = o.a !== undefined ? o.a : 0.02;
-    const D = o.d !== undefined ? o.d : 0.18;
-    const S = o.s !== undefined ? o.s : 0.0;
-    const R = o.r !== undefined ? o.r : 0.35;
-    const hold = o.hold !== undefined ? o.hold : 0.05;
-    /* FAZ 46: ses güçlendirmesi. VOL_MASTER zaten 0.95 tavanındaydı;
-       asıl kısıtlama NOTA seviyesindeydi (varsayılan tepe .25 ve
-       gain değerleri .05–.22). Tepe .34'e, tüm gain'ler ×1.55'e
-       çıkarıldı (tavan .40 — kırpılma olmasın). */
-    const peak = o.gain !== undefined ? o.gain : 0.34;
-    const bus = o.bus || sfxBus;
-
-    const osc = ctx.createOscillator();
-    osc.type = wave;
-    osc.frequency.setValueAtTime(freq, t0);
-    if (o.glide) osc.frequency.exponentialRampToValueAtTime(
-      Math.max(20, o.glide), t0 + A + D + hold);
-
-    /* Alçak geçiren filtre: yüksek harmonikleri keser, ses yumuşar.
-       Filtre de zarflanır — nota açılırken "nefes alır". */
-    const lp = ctx.createBiquadFilter();
-    lp.type = 'lowpass';
-    const fc = o.cut || (freq * 4 + 400);
-    lp.frequency.setValueAtTime(Math.max(180, fc * 0.55), t0);
-    lp.frequency.linearRampToValueAtTime(Math.min(12000, fc), t0 + A + D * 0.6);
-    lp.frequency.exponentialRampToValueAtTime(
-      Math.max(180, fc * 0.35), t0 + A + D + hold + R);
-    lp.Q.value = o.q !== undefined ? o.q : 0.7;
-
-    /* ADSR kazanç zarfı */
-    const g = ctx.createGain();
-    g.gain.setValueAtTime(0.0001, t0);
-    g.gain.exponentialRampToValueAtTime(Math.max(0.0002, peak), t0 + A);
-    g.gain.exponentialRampToValueAtTime(Math.max(0.0002, peak * (S || 0.28)),
-                                        t0 + A + D);
-    const relStart = t0 + A + D + hold;
-    g.gain.setValueAtTime(Math.max(0.0002, peak * (S || 0.28)), relStart);
-    g.gain.exponentialRampToValueAtTime(0.0001, relStart + R);
-
-    osc.connect(lp); lp.connect(g); g.connect(bus);
-    osc.start(t0);
-    osc.stop(relStart + R + 0.05);
-
-    /* Hafif detune ikinci osilatör — tek sinüs "ince" durur,
-       ikilisi enstrüman gibi doluluk verir. */
-    if (o.thick){
-      const o2 = ctx.createOscillator();
-      o2.type = wave;
-      o2.frequency.setValueAtTime(freq * 1.0035, t0);
-      const g2 = ctx.createGain();
-      g2.gain.setValueAtTime(0.0001, t0);
-      g2.gain.exponentialRampToValueAtTime(Math.max(0.0002, peak * 0.55), t0 + A * 1.4);
-      g2.gain.exponentialRampToValueAtTime(0.0001, relStart + R * 1.1);
-      o2.connect(lp); g2.connect(bus); o2.connect(g2);
-      o2.start(t0); o2.stop(relStart + R * 1.1 + 0.05);
-    }
+    if(!ctx||muted||!prefs.effectsOn)return;const t0=now()+(o.delay||0);
+    const freq=Math.max(20,o.freq||220),A=Math.max(.004,o.a??.02),D=o.d??.18,S=o.s??.28,R=o.r??.35,hold=o.hold??.05,peak=Math.min(.4,o.gain??.25),end=t0+A+D+hold+R+.05;
+    if(!room('sfx',t0,end))return;
+    const osc=ctx.createOscillator(),lp=ctx.createBiquadFilter(),g=ctx.createGain(),nodes=[osc,lp,g],sources=[osc];osc.type=o.wave||'sine';osc.frequency.setValueAtTime(freq,t0);if(o.glide)osc.frequency.exponentialRampToValueAtTime(Math.max(20,o.glide),t0+A+D+hold);
+    lp.type='lowpass';const fc=o.cut||freq*4+400;lp.frequency.setValueAtTime(Math.max(180,fc*.55),t0);lp.frequency.linearRampToValueAtTime(Math.min(7000,fc),t0+A+D*.6);lp.frequency.exponentialRampToValueAtTime(Math.max(180,fc*.35),end);lp.Q.value=o.q??.7;
+    g.gain.setValueAtTime(.0001,t0);g.gain.exponentialRampToValueAtTime(Math.max(.0002,peak),t0+A);g.gain.exponentialRampToValueAtTime(Math.max(.0002,peak*(S||.28)),t0+A+D);g.gain.setValueAtTime(Math.max(.0002,peak*(S||.28)),t0+A+D+hold);g.gain.exponentialRampToValueAtTime(.0001,end-.05);
+    osc.connect(lp);lp.connect(g);g.connect(sfxBus);
+    if(o.thick){const second=ctx.createOscillator(),gain=ctx.createGain();second.type=o.wave||'sine';second.frequency.setValueAtTime(freq*1.0035,t0);gain.gain.value=.28;second.connect(gain);gain.connect(lp);nodes.push(second,gain);sources.push(second);}
+    track(nodes,sources,g,t0,end,'sfx');for(const s of sources){s.start(t0);s.stop(end);}
   }
 
   /* ═══════════════════════════════════════════════════════════════
@@ -166,7 +110,7 @@ const AUDIO = (function(){
   const SFX = {
     /* Genel dokunuş — hafif ksilofon/çan */
     tap(){
-      const f = SCALE[7 + Math.floor(Math.random() * 4)];
+      const f = SCALE[7 + Math.floor(audioRand() * 4)];
       voice({freq:f, wave:'sine', a:.006, d:.16, s:.0, r:.30, hold:0,
              gain:0.248, cut:f*5+900});
       voice({freq:f*2, wave:'sine', a:.004, d:.09, s:.0, r:.18, hold:0,
@@ -217,143 +161,86 @@ const AUDIO = (function(){
     }
   };
 
-  /* ═══════════════════════════════════════════════════════════════
-     ÜRETKEN AMBİYANS
-     Brian Eno tarzı: sabit bir döngü YOK. Her nota rastgele
-     seçiliyor ama üç kural kulağı koruyor:
-       1. ARALIK KİLİDİ — ardışık notalar birbirinden en fazla
-          4 derece uzak; melodi zıplamıyor, akıyor.
-       2. SESLİLİK TAVANI — aynı anda en fazla 3 nota duyuluyor.
-          Sayaç dolduysa yeni nota atlanıyor (üst üste binme yok).
-       3. NEFES ARALIĞI — notalar arası 2.6–7.4 sn rastgele.
-          Bazen tam sessizlik geliyor; kulak dinleniyor.
-     ═══════════════════════════════════════════════════════════════ */
-  let lastIdx = 7;
-  const MAX_VOICES = 3;
-  /* Aktif nota takibi ZAMANA dayalı, sayaca değil.
-     Sayaç setTimeout ile azaltılıyordu; sekme arka plana alınıp
-     zamanlayıcı kısıldığında sayaç takılı kalıyor ve müzik
-     tamamen susuyordu. Artık bitiş anları saklanıyor ve geçmiş
-     olanlar kendiliğinden ayıklanıyor — kendi kendini onarır. */
-  let noteEnds = [];
-  function activeVoices(){
-    const t = now();
-    noteEnds = noteEnds.filter(x => x > t);
-    return noteEnds.length;
+  // Tonal score: C Dorian, eight-bar phrases, chord-linked motif and a final breath.
+  const DEGREES=[0,2,3,5,7,9,10],PROGRESSIONS=[[0,3,1,4],[0,1,3,0],[0,4,3,0],[0,5,3,1]],MOTIFS=[[0,1,2],[2,1,0],[0,2,1],[1,0,2]];
+  function degreeMidi(degree,octave){const oct=Math.floor(degree/7);return 12*(octave+1)+DEGREES[(degree%7+7)%7]+oct*12;}
+  function scoreBar(bar,scene='normal',seed=719){
+    const phrase=Math.floor(bar/8),part=bar%8,variation=(Math.imul(phrase+seed,1664525)>>>0),progression=PROGRESSIONS[(variation>>>8)%PROGRESSIONS.length],root=progression[Math.floor(part/2)],chord=[root,root+2,root+4],events=[];
+    const add=(beat,duration,instrument,degree,octave,gain)=>events.push({bar,phrase,beat,duration,instrument,degree,midi:degreeMidi(degree,octave),gain,scene,chord:chord.slice()});
+    for(let i=0;i<3;i++)add(0,part===7?2.6:3.55,'strings',chord[i],scene==='crisis'?2:3,i===0?.027:.019);
+    add(0,part===7?2.6:3.1,'bass',root,2,.047);
+    const motif=MOTIFS[(variation>>>16)%MOTIFS.length],open=scene==='explore'?5:4;
+    if(part%2===0)for(let i=0;i<3;i++)add(.5+i,.62+(i===2?.2:0),'wind',chord[motif[i]],open,scene==='crisis'?.024:.037);
+    if((part===3||part===5)&&scene!=='crisis')add(1.5,.95,'wind',chord[(variation+part)%3],open,.029);
+    if(part===7)add(.35,.95,'wind',root,4,.026); // phrase ending leaves room to breathe
+    if(scene==='war'&&part<7)add(2,1.0,'bass',root,2,.026);
+    if(scene==='war'||scene==='crisis'){add(0,.45,'percussion',root,1,scene==='crisis'?.025:.018);if(part%2===0)add(2,.35,'percussion',root,1,.013);}
+    return events.sort((a,b)=>a.beat-b.beat);
   }
-
-  /* Pedal (dem) sesi de ses bütçesine dahildir. Eskiden sayıma
-     girmiyordu ve nota + pedal üst üste binebiliyordu; uzun ömrü
-     (19 sn) yüzünden bulanıklık yapabilirdi. */
-  function droneOnce(){
-    if (!ctx || muted) return;
-    if (activeVoices() >= MAX_VOICES) return;
-    const f = DRONE[Math.floor(Math.random() * DRONE.length)];
-    const omur = 3.2 + 2.0 + 7.0 + 6.5;
-    noteEnds.push(now() + omur);
-    voice({freq:f, wave:'sine', a:3.2, d:2.0, s:.55, r:6.5, hold:7.0,
-           gain:0.132, cut:340, bus:musicBus, thick:true});
-  }
-
-  function noteOnce(){
-    if (!ctx || muted) return;
-    if (activeVoices() >= MAX_VOICES) return;   // seslilik tavanı
-
-    /* Aralık kilidi: son notadan en fazla ±4 derece */
-    let step = Math.floor(Math.random() * 9) - 4;
-    let idx = lastIdx + step;
-    if (idx < 0) idx = Math.abs(idx);
-    if (idx >= SCALE.length) idx = SCALE.length - 1 - (idx - SCALE.length + 1);
-    idx = Math.max(0, Math.min(SCALE.length - 1, idx));
-    lastIdx = idx;
-
-    const f = SCALE[idx];
-    /* Uzun attack + çok uzun release = notalar birbirine yumuşakça
-       karışır, kesik kesik durmaz. */
-    /* Ömür, ortalama nota aralığına (≈5 sn) yakın tutulur: notalar
-       birbirine karışsın ama yığılmasın. Toplam ömür 4.6–9.4 sn. */
-    const A = 0.7 + Math.random() * 1.3;
-    const R = 2.4 + Math.random() * 3.4;
-    const hold = 0.4 + Math.random() * 1.0;
-
-    const omur = A + 1.2 + hold + R;
-    noteEnds.push(now() + omur);
-    voice({freq:f, wave:'sine', a:A, d:1.2, s:.42, r:R, hold:hold,
-           gain:0.155 + Math.random() * .05, cut:f * 3 + 700,
-           bus:musicBus, thick:Math.random() < .45});
-
-    /* Ara sıra bir beşli eşlik — armoni hissi, ama %30 ihtimalle.
-       Beşli uyumlu bir aralık; üst üste binse bile tırmalamaz. */
-    if (Math.random() < .30 && activeVoices() < MAX_VOICES){
-      const j = Math.min(SCALE.length - 1, idx + 4);
-      const omur2 = A * 1.3 + 1.4 + hold + R * 1.1;
-      noteEnds.push(now() + omur2);
-      voice({freq:SCALE[j], wave:'sine', a:A * 1.3, d:1.4, s:.30, r:R * 1.1,
-             hold:hold, gain:0.093, cut:SCALE[j] * 3 + 600,
-             bus:musicBus, delay:.35 + Math.random() * .8});
+  function instrumentWave(kind){if(waves.has(kind))return waves.get(kind);const real=new Float32Array(13),imag=new Float32Array(13);for(let i=1;i<13;i++)imag[i]=kind==='wind'?(i===1?1:i===2?.22:i===3?.09:.02/i):kind==='bass'?1/Math.pow(i,2.3):1/Math.pow(i,1.55);const w=ctx.createPeriodicWave(real,imag);waves.set(kind,w);return w;}
+  function musicVoice(event,start,beatSeconds){
+    if(!ctx||muted||!prefs.musicOn)return;
+    const kind=event.instrument,freq=440*Math.pow(2,(event.midi-69)/12),duration=event.duration*beatSeconds,attack=kind==='strings'?.55:kind==='wind'?.18:.035,release=kind==='percussion'?.20:.48,end=start+duration+release;
+    if(!room('music',start,end+.02))return;
+    const osc=ctx.createOscillator(),lp=ctx.createBiquadFilter(),gain=ctx.createGain(),pan=ctx.createStereoPanner(),nodes=[osc,lp,gain,pan],sources=[osc];
+    if(kind==='percussion'){osc.type='sine';osc.frequency.setValueAtTime(78,start);osc.frequency.exponentialRampToValueAtTime(39,start+.16);}else{osc.setPeriodicWave(instrumentWave(kind));osc.frequency.setValueAtTime(freq,start);osc.detune.setValueAtTime(Math.sin(event.bar*.81+event.degree)*2,start);osc.detune.linearRampToValueAtTime(Math.sin(event.bar*.81+event.degree+1)*2,start+duration);}
+    lp.type='lowpass';lp.frequency.setValueAtTime(kind==='strings'?1700:kind==='wind'?2200:kind==='bass'?420:210,start);lp.frequency.linearRampToValueAtTime(kind==='strings'?950:kind==='wind'?1400:kind==='bass'?270:130,end);lp.Q.value=.55;
+    const peak=event.gain;gain.gain.setValueAtTime(.0001,start);gain.gain.linearRampToValueAtTime(peak,start+Math.min(attack,duration*.35));gain.gain.linearRampToValueAtTime(peak*.72,start+duration*.75);gain.gain.linearRampToValueAtTime(.0001,end);
+    pan.pan.value=kind==='bass'?0:kind==='strings'?[-.28,.08,.28][event.degree%3]:kind==='wind'?.14:0;osc.connect(lp);lp.connect(gain);gain.connect(pan);pan.connect(musicBus);
+    // Separate filtered bow/breath transient envelope, not another detuned sine.
+    if(kind==='strings'||kind==='wind'||kind==='percussion'){
+      const breath=ctx.createBufferSource(),filter=ctx.createBiquadFilter(),air=ctx.createGain();breath.buffer=noise;breath.loop=true;filter.type='bandpass';filter.frequency.value=kind==='wind'?1450:kind==='strings'?850:180;filter.Q.value=kind==='percussion'?.6:1.1;
+      air.gain.setValueAtTime(.0001,start);air.gain.linearRampToValueAtTime((kind==='wind'?.11:kind==='strings'?.065:.7),start+.045);air.gain.exponentialRampToValueAtTime(.0001,Math.min(end,start+(kind==='percussion'?.2:duration*.85)));
+      breath.connect(filter);filter.connect(air);air.connect(gain);nodes.push(breath,filter,air);sources.push(breath);
     }
+    track(nodes,sources,gain,start,end+.02,'music');for(const s of sources){s.start(start);s.stop(end+.02);}
+  }
+  function scene(){
+    if(typeof G==='undefined'||!G.p)return 'normal';
+    if(typeof crisisActive==='function'&&crisisActive())return 'crisis';
+    const own=(G.fleets||[]).filter(f=>f.e===G.p.id),wars=Object.values(G.p.war||{}).filter(Boolean).length;
+    const armed=own.reduce((n,f)=>n+(f.ships||[]).filter(s=>typeof SHIPS!=='undefined'&&SHIPS[s.c]?.dmg>0).length,0);
+    if(wars>=2||wars&&armed>=8||wars&&own.some(f=>f.combat>0))return 'war';
+    if(own.some(f=>(f.mv||f.surv>0)&&(f.ships||[]).some(s=>s.c==='bil')))return 'explore';return 'normal';
+  }
+  let transportBar=0,nextBar=0,currentScene='normal',lastSceneBar=-8;const BEAT=60/52;
+  function cancelMusic(){if(musicTimer!==null)clearTimeout(musicTimer);musicTimer=null;nextBar=0;}
+  function pump(){
+    musicTimer=null;if(!started||muted||!prefs.musicOn||!ctx||ctx.state!=='running'||offline)return;
+    const t=now();if(!nextBar||nextBar<t-.5)nextBar=t+.08;
+    if(nextBar<t+.65){const wanted=scene();if(wanted!==currentScene&&transportBar-lastSceneBar>=2&&transportBar%2===0){currentScene=wanted;lastSceneBar=transportBar;}
+      for(const event of scoreBar(transportBar,currentScene))musicVoice(event,nextBar+event.beat*BEAT,BEAT);stats.bars++;transportBar++;nextBar+=4*BEAT;}
+    musicTimer=setTimeout(pump,250);
+  }
+  function ensureMusic(){if(!offline&&started&&!muted&&prefs.musicOn&&ctx?.state==='running'&&musicTimer===null)musicTimer=setTimeout(pump,0);}
+  const lastSfx=new Map();
+  async function preview(context,{scene:which='normal',seconds=30,seed=719,sfx=false}={}){
+    if(ctx||typeof context?.startRendering!=='function')throw Error('Preview requires a fresh engine and an OfflineAudioContext');
+    offline=true;init(context);started=true;
+    for(let bar=0;bar*4*BEAT<seconds-1;bar++)for(const event of scoreBar(bar,which,seed)){const start=.08+(bar*4+event.beat)*BEAT;if(start+event.duration*BEAT+.5<seconds)musicVoice(event,start,BEAT);}
+    if(sfx){SFX.alarm();SFX.discover();SFX.win();}
+    const rendered=await context.startRendering();return rendered;
   }
 
-  function scheduleNext(){
-    if (musicTimer) clearTimeout(musicTimer);
-    /* Nefes aralığı — bazen uzun sessizlik */
-    const bekle = 2600 + Math.random() * 4800;
-    musicTimer = setTimeout(() => {
-      if (!muted && ctx && ctx.state === 'running'){
-        noteOnce();
-        if (Math.random() < .16) droneOnce();   // ara sıra pedal ses
-      }
-      scheduleNext();
-    }, bekle);
-  }
-
-  /* ═══════════════════════════════════════════════════════════════
-     DIŞ ARAYÜZ
-     ═══════════════════════════════════════════════════════════════ */
   return {
-    /* Tarayıcı politikası: yalnızca kullanıcı etkileşiminde çağrılır */
-    start(){
-      if (started) { this.resume(); return; }
-      if (!init()) return;
-      started = true;
-      if (ctx.state === 'suspended') ctx.resume().catch(()=>{});
-      droneOnce();
-      scheduleNext();
-    },
-    resume(){
-      if (ctx && ctx.state === 'suspended') ctx.resume().catch(()=>{});
-    },
-    suspend(){
-      if (ctx && ctx.state === 'running') ctx.suspend().catch(()=>{});
-      noteEnds = [];        // askıya alınca aktif nota kaydı sıfırlanır
-    },
-    isOn(){ return started && !muted; },
-    isMuted(){ return muted; },
-    setMuted(v){
-      muted = !!v;
-      if (master && ctx){
-        const t = now();
-        master.gain.cancelScheduledValues(t);
-        master.gain.setValueAtTime(master.gain.value, t);
-        master.gain.linearRampToValueAtTime(muted ? 0.0001 : VOL_MASTER, t + 0.25);
-      }
-      return muted;
-    },
-    toggle(){ return this.setMuted(!muted); },
-
-    /* Efekt oynatıcı — bilinmeyen ad sessizce yutulur */
-    play(name){
-      if (!started || muted || !ctx) return;
-      const f = SFX[name];
-      if (f) { try { f(); } catch(e){} }
-    },
-
-    /* main.js say() içinden çağrılır: log sınıfına göre ses seçer */
-    forLog(cls){
-      if (cls === 'war') this.play('alarm');
-      else if (cls === 'win') this.play('win');
-      else if (cls === 'sci') this.play('discover');
-    },
-    SCALE, SFX
+    start(){if(started){this.resume();return;}if(!init())return;started=true;this.resume();},
+    resume(){if(!ctx||muted)return;if(ctx.state==='suspended')ctx.resume().then(()=>ensureMusic()).catch(()=>{});else ensureMusic();},
+    suspend(){cancelMusic();stopVoices(null,0);if(ctx?.state==='running')ctx.suspend().catch(()=>{});},
+    isOn(){return started&&!muted;},isMuted(){return muted;},
+    setMuted(v){muted=!!v;applyGains();if(muted){cancelMusic();stopVoices(null,.18);}else this.resume();return muted;},
+    toggle(){return this.setMuted(!muted);},
+    play(name){if(!started||muted||!prefs.effectsOn||!ctx||ctx.state!=='running')return;if(!Object.hasOwn(SFX,name))return;const t=now();if(t-(lastSfx.get(name)??-100)<.08)return;lastSfx.set(name,t);if(SFX[name])try{SFX[name]();}catch(e){}},
+    forLog(cls){if(cls==='war')this.play('alarm');else if(cls==='win')this.play('win');else if(cls==='sci')this.play('discover');},
+    settings(){return {...prefs};},configure,controls,
+    async loadSettings(){const rev=prefsRevision;if(typeof storeGet!=='function')return;try{const raw=await storeGet('yh_audio_mix');if(rev===prefsRevision&&raw){configure(JSON.parse(raw),false);}}catch(e){}},
+    diagnostics(){return {started,muted,state:ctx?.state||'uncreated',scene:currentScene,musicTimer:musicTimer===null?0:1,activeMusic:active('music'),activeSfx:active('sfx'),liveNodes:[...groups].reduce((n,g)=>n+g.nodes.length,0),groups:groups.size,...stats,limits:{...limits},waveTables:waves.size};},
+    dispose(){cancelMusic();stopVoices(null,0);const old=ctx;ctx=null;master=null;musicBus=null;sfxBus=null;convolver=null;compressor=null;noise=null;waves.clear();lastSfx.clear();started=false;if(old&&typeof old.close==='function'&&old.state!=='closed')old.close().catch(()=>{});},
+    scene,scoreBar,preview,SCALE,SFX
   };
 })();
+// Stable delegation: opening settings never adds another input listener.
+for(const type of ['input','change'])document.addEventListener(type,event=>{
+  const el=event.target,key=el?.dataset?.audio;if(!['master','music','effects','musicOn','effectsOn'].includes(key))return;
+  const value=key.endsWith('On')?el.checked:Number(el.value)/100;
+  AUDIO.configure({[key]:value},type==='change');
+});

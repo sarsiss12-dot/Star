@@ -2,7 +2,7 @@
 /* 95E — references to existing diplomatic actions, never a second engine. */
 const DiplomaticInbox = {
   historyLimit:256, pendingLimit:512,
-  types:{aideal:'Diplomatik teklif',pact:'İstihbarat anlaşması',submit:'Vasallık / himaye talebi',peace:'Barış teklifi',sqOffer:'Statüko barışı',fedvote:'Federasyon oylaması',invite:'Federasyona katılım daveti',decision:'Ortak savaş kararı'},
+  types:{fedrequest:'Federasyon üyelik sonucu',aideal:'Diplomatik teklif',pact:'İstihbarat anlaşması',submit:'Vasallık / himaye talebi',peace:'Barış teklifi',sqOffer:'Statüko barışı',fedvote:'Federasyon oylaması',invite:'Federasyona katılım daveti',decision:'Ortak savaş kararı'},
   states:{pending:'Bekliyor',accepted:'Kabul edildi',rejected:'Reddedildi',expired:'Süresi doldu',invalid:'Geçersizleşti'},
   empty(){return {v:1,next:1,records:[]};},
   state(){return G.diplomaticInbox||(G.diplomaticInbox=this.empty());},
@@ -31,12 +31,13 @@ const DiplomaticInbox = {
     if(!G.p)return;
     for(const f of G.feds||[]){
       const inv=f.invites?.[G.p.id];
-      if(inv&&inv.expires>G.day)this.source('invite','invite:'+f.id+':'+inv.expires,inv.by,f.id,String(inv.expires),inv.expires,'Federasyona katılım — '+f.name,fedType(f).n+' · '+fedDutyText(f));
+      if(inv&&inv.expires>G.day)this.source('invite','invite:'+f.id+':'+inv.expires,inv.by,f.id,String(inv.expires),inv.expires,'Federasyona katılım — '+f.name,fedType(f).n+' · '+fedType(f).d+' '+fedDutyText(f)+' Yasalar: '+(Object.keys(f.laws||{}).filter(k=>f.laws[k]).map(k=>(FED_LAWS[k]||FED_INNER_LAWS[k]||{}).n||k).join(', ')||'yok'));
       if(f.vote&&fedVoteCounts(f).waiting.includes(G.p.id))this.capture({kind:'fedvote',data:f.id,born:f.vote.opened,title:'Federasyon oylaması — '+f.name,sub:fedVoteLaw(f.vote)?.n||'Karar'});
       for(const d of Object.values(f.decisions||{}))if(d.state==='ready'&&d.expires>G.day&&f.members.includes(G.p.id)&&(d.by===G.p.id||f.leader===G.p.id))this.source('decision','decision:'+f.id+':'+d.id,d.by,f.id,String(d.id),d.expires,'Ortak savaş kararı — '+f.name,'Hedef: '+(G.p.contact?.[d.target]?G.emps[d.target]?.name:'Bilinmeyen hedef')+' · '+d.kind);
     }
     for(const r of this.state().records)if(r.status==='pending'){
       if(G.day>=r.expires){r.status='expired';r.finished=G.day;continue;}
+      if(r.kind==='fedrequest'){const row=fedOf(r.fid)?.admissionResults?.[r.token];if(row)r.sub=row.why;}
       if(this.deal(r))continue; // quote only on inspection/commit, not every daily tick
       const gate=this.gate(r);if(gate.terminal){r.status=gate.status||'invalid';r.why=gate.why;r.finished=G.day;}
     }
@@ -60,6 +61,10 @@ const DiplomaticInbox = {
     }
     if(r.kind==='sqOffer')return G.p.war[o.id]?canStatusQuo(G.p,o):no('Savaş sona erdi',true);
     const f=fedOf(r.fid);if(!f)return no('Federasyon artık mevcut değil',true);
+    if(r.kind==='fedrequest'){
+      const row=f.admissionResults?.[r.token];
+      return row?no(row.why,row.status!=='pending',row.status):no('Üyelik gündemi artık mevcut değil',true);
+    }
     if(r.kind==='invite'){
       const inv=f.invites?.[G.p.id];if(!inv||String(inv.expires)!==r.token)return no('Davet geri çekildi veya sonuçlandı',true,f.members.includes(G.p.id)?'accepted':'invalid');
       if(inv.terms!==fedCharterKey(f))return no('Davetin yükümlülükleri değişti',true);
@@ -79,7 +84,7 @@ const DiplomaticInbox = {
   },
   resolve(id,yes,option='haracguzar',world=G.emps){
     if(world!==G.emps)return {ok:false,why:'Oyun kaydı değişti; teklifi yeniden aç'};
-    const r=this.get(id),gate=this.gate(r);if(!r||r.status!=='pending'||G.day>=r.expires||yes&&!gate.ok)return {ok:false,why:gate.why||'Teklif geçersiz'};
+    const r=this.get(id),gate=this.gate(r);if(!r||r.kind==='fedrequest'||gate.terminal||r.status!=='pending'||G.day>=r.expires||yes&&!gate.ok)return {ok:false,why:gate.why||'Teklif geçersiz'};
     let result={ok:true};const o=G.emps[r.from];
     if(yes){
       const offer=this.deal(r);
@@ -108,7 +113,7 @@ const DiplomaticInbox = {
       if(!r||!Number.isSafeInteger(r.id)||r.id<1||ids.has(r.id)||typeof r.key!=='string'||keys.has(r.key)||!this.supported(r.kind)||!Object.hasOwn(this.states,r.status)||![r.born,r.expires,r.year,r.month].every(Number.isFinite)||!Number.isInteger(r.from))continue;
       const x={id:r.id,key:r.key.slice(0,400),kind:r.kind,status:r.status,from:r.from,name:String(r.name||'Tarihsel devlet').slice(0,120),title:String(r.title||'').slice(0,180),sub:String(r.sub||'').slice(0,600),born:r.born,expires:r.expires,year:r.year,month:r.month};
       if(r.note){const n=decodeNote(r.note);if(!n&&r.status==='pending')continue;x.note=n?encodeNote(n):null;}
-      if(Number.isInteger(r.fid))x.fid=r.fid;if(typeof r.token==='string')x.token=r.token.slice(0,120);if(Number.isFinite(r.finished))x.finished=r.finished;
+      if(Number.isInteger(r.fid))x.fid=r.fid;if(typeof r.token==='string')x.token=r.token.slice(0,120);if(Number.isFinite(r.finished))x.finished=r.finished;if(typeof r.why==='string')x.why=r.why.slice(0,600);
       ids.add(x.id);keys.add(x.key);st.records.push(x);
     }
     st.next=Math.max(1,Number.isSafeInteger(raw?.next)?raw.next:1,...st.records.map(r=>r.id+1));G.diplomaticInbox=st;

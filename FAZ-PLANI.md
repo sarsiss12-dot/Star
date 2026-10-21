@@ -1,3 +1,73 @@
+# 96D güncel plan — 21 Ekim 2026
+
+Bu fazın kullanıcı tarafından güncellenen kapsamı Kökenler + Prosedürel Portre + Doğal Generatif Müzik'tir. Önceki tarihsel planlarda96D için geçen bilim gemisi önerisi bu fazda uygulanmadı.
+
+A: gerçek96C.3 ZIP SHA/CRC/1397 manifest kaynağı ve raporlar doğrulandı. B: sekiz kökenin gerçek etkileri/açıklamaları, Altın Çağ ay takvimi ve ayrıntı ekranı. C: ortak deterministik Canvas portresi, lider çeşitliliği/rütbe, görsel varyasyon ve sınırlı LRU. D/E: mevcut Web Audio üzerinde tonal cümle, ayrı harmonik/gürültü zarfları, dört atmosfer, ses kontrolleri, gerçek ses bütçesi. F:109 paket5531 kontrol,130 eski+15 yeni Chromium UI ve6 ses deneyi. G: temiz yayın dizini, manifest, gerçek ZIP ve bağımsız doğrulama.
+
+Ses stresindeki gecikmeli-nota sınırı ve değişmeyen bildirim DOM'u kök nedenli küçük düzeltildi. AI/economy/commerce/combat/diplomacy üretimi değiştirilmedi. Standart köken36/36 aylık simülasyon eşitliği var. Gerçek dinleme/fiziksel Android kabulü ve tarihsel AI/keşif/federasyon QA riskleri açık.
+
+GitHub yayını bu çalışmaya dahil değildir. Sonraki bilim gemileri/akıllı keşif, diğer içerik, cihaz veya multiplayer işleri ayrı planlama gerektirir; başlanmadı. Bu dosyanın altındaki eski faz adları tarihsel plan kaydıdır.
+
+---
+Kanonik ebeveynin tarihsel planı aşağıda korunur.
+
+# 96C.3 güncel plan — 21 Ekim2026
+
+A: kanonik96C.2 SHA/CRC/1301 dosya hash'i ve sekiz QA görseli doğrulandı. B–F: gerçek96C.2 üzerinde hata üretildi; menü/rotate, bağımsız kırmızı savaş çizgisi, acil sayaç/küçültme, tamamlanmış muharebe X'i ve çift isyan kartı hedefli düzeltildi. G: gerçek DOM/Canvas ve save/PWA testleri. H: kilitli kaynak tam regresyonu, raporlar, temiz ZIP ve bağımsız teslim doğrulaması.
+
+AI strateji/ticaret motoru yeniden yazılmadı;12aylık üç tohumda36/36 simülasyon eşitliği korundu. Genel AI denge kabulü önceki risklerle birlikte değerlendirilir. Fiziksel Android kabulü açık. GitHub yayını ayrı planlama sohbetine bırakılır; otomatik commit/push/yayın yoktur.
+
+Sonraki ayrı öneri96D: bilim gemileri ve akıllı keşif; hedef çakışması, yakın keşfedilmemiş hedefler, korsan/düşman riski ve görev sonrası yeni rota. Bu fazda başlanmadı. Sonraki casus teknoloji, özel bilim, köken/portre, federasyon QA, müzik, cihaz optimizasyonu ve multiplayer planları korunur.
+
+---
+Kanonik ebeveynin önceki planı aşağıda korunur.
+
+# Yeniden 96C.2 — güncel plan
+
+A: 96C.1 SHA/CRC/2622 manifest girdisi ve belgeler yeniden doğrulandı; temiz kaynak çıkarıldı. B/C: gönüllü savaşta açık bir aylık çöküş kontrolü, yalnız görülen normal düşmanın koloni sınırına yerel savunma önceliği. D: gerçek ücretli üretim, savaş/barış/ambargo/müzakere, kargo ve v8 mikro kontrolleri. E: 11/99/404 eş koşullu kampanyalar, referans ve tekrar. F: tam regresyon/Chromium, temiz yayın dizini, bağımsız manifest/CRC ve kalıcı gerçek ZIP.
+
+96D bilim gemileri/akıllı keşif ayrı sonraki fazdır; burada geliştirilmedi. Casus teknoloji, özel bilim seçenekleri, köken/portre, müzik, cihaz optimizasyonu ve multiplayer planları da kapsam dışıdır. Genel AI dengesi yalnız son kampanya sonuçlarına göre değerlendirilir; otomatik yeni aşama yoktur.
+
+---
+
+Kanonik ebeveynin önceki plan kaydı aşağıda korunur.
+
+# Güncel durum — 96C.1 — 19 Ekim 2026
+
+96C ZIP kanonik kaynak; SHA/CRC/2.371 kaynak hash'i doğrulandı. Donanma bütçe kilidi hedefli düzeltildi; yapı izinleri yerel tembel sorguya, arama tehditleri aynı çağrıda görünür anlık görüntüye bağlandı. Ticaret rota geometrisi bounded içerik imzasıyla yeniden kullanılır; canlı politik/ödeme/teslim kapıları değişmedi. Gerçek Konsey oylamasındaki Savaş Yasağı etkinliği ve vekâlet hedef kapsamı düzeltildi. Üç yanıltıcı yasa açıklaması gerçek koda uyarlandı.
+
+104 benzersiz paket / 5.454 başarılı kontrol / 0 kalan otomatik hata; 106 gerçek Chromium senaryosu / 0 hata. İlk tam koşu dört eski build beklentisinde hata verdi; düzeltme koşuları ayrı saklanır. Sonuçlar tekrarların toplamı değildir. Save v8 ve gerçek kaynak teslimatı korundu.
+
+Donanma/ticaret dengesi kısmi kabul: 11 askerî güç artışına karşı ticaret gerilemesi ve yeni enerji-sıfır ayları açık. Kök neden, 30/60/90/120 AI kesitleri, performans ve yaptırım deneyleri ayrı raporlarda. Genel dengeyi tamamlanmış sayıp yeni büyük sisteme geçilmedi. GitHub 96A salt okunur kontrol edildi; 96B/96C/96C.1 yayımlanmadı. Yayın ve sonraki denge kararları ayrı planlamaya bırakılır.
+
+Sonraki öneriler aynı: casuslukla bilim/özel teknolojiler, kalan keşif otomasyonu, köken/portre, dış dosyasız doğal müzik, fiziksel Android/PWA, gelişmiş savaş/diplomasi AI ve multiplayer. Başlatılmadı.
+
+Tarihsel plan:
+
+---
+
+# Güncel durum — 96C — 18 Ekim 2026
+
+96C geliştirme/test/ZIP teslimi: kök neden tanısı, gerçek ücretli ticaret fırsatı, altı aylık ekonomik plan, gerçek yıkımla borç kilidi toparlanması, bakım/teknoloji korumalı tersane kararı ve güvenli finanse inşa hedefi. 101 paket/5421/0, Chromium 102/0. Kaynak kanonik 96B ZIP'idir; main'e yükleme yok.
+
+Genel uzun dönem askerî denge kabulü karışıktır. 11/99 son güç düşüşleri, 99'daki kalan enerji-sıfır olayları ve artan karar/save maliyeti açık risk olarak korunur. Ayrıntılar FAZ96C-RAPOR.md, AI-KARAR-TANILAMA-96C.md, AI-KAMPANYA-KARSILASTIRMA-96C.md, TEST-SONUCLARI-96C.md.
+
+Ayrı planlama görüşmesinde bu riskler ve GitHub yayını değerlendirilmelidir. Bu teslim otomatik yeni faz/yayın başlatmaz. Sonraki öneriler korunur: casuslukla bilimsel teknoloji, doktrin/etik/tür özel bilimleri, kalan keşif otomasyonu, köken/portre, dış dosyasız doğal generatif müzik, fiziksel Android/PWA optimizasyonu, gelişmiş savaş/diplomasi AI ve multiplayer.
+
+Aşağıdaki fazlar tarihsel kayıttır.
+
+---
+
+# Güncel durum — 96B — 18 Ekim 2026
+
+Sol Ekonomi Merkezi tamamlandı: yedi kaynak, son hesaplanan aylık net, gerçek stok olayları, gelir/gider izi, 12 dönem geçmiş, fiziksel ticaret ayrımı ve Save v8 isteğe bağlı geçmişi. Yeni koşular 98 paket/5.385 kontrol/0 ve 93 Chromium/0; yeni bölüm 30 kontrol ve 13 tarayıcı senaryosudur. Üç 100 sistem/120 ay kampanyasında 96A ile 360/360 tam simülasyon hash'i eşleşti. Formül/AI dengesi değiştirilmedi.
+
+GitHub'a commit/push yapılmadı; yalnız doğrulanmış 96B ZIP teslimidir. Ana raporlar: FAZ96B-RAPOR.md, TEST-SONUCLARI-96B.md, DEVAM-96B.md. Fiziksel Android kabulü açıktır. Sonraki 96C ekonomi/donanma dengesi; sonraki casusluk/teknoloji, köken/portre, generatif müzik, Android QA ve multiplayer planları korunur, başlatılmadı.
+
+Aşağıdaki faz başlıkları tarihsel kayıttır; eski “96B başlamadı” ifadeleri güncel durum değildir.
+
+---
+
 # Güncel durum — 96A — 18 Ekim 2026
 
 Gerçek kaynak sözleşmeleri ve fiziksel konvoylar tamamlandı: mevcut diplomasi motoru, depo→yük→yol→varış muhasebesi, gerçek yağma/kayıp, hafif Canvas nesneleri, bağımsız katman, AI ve Save v 8 isteğe bağlı kökü. Yeni koşular 96 paket/5303 kontrol/0; Chromium 80/0(14 yeni+66 yeniden koşulan). GitHub'a commit/push yapılmadı; yalnızZIP teslimi. Belgeler: FAZ96A-RAPOR.md,TEST-SONUCLARI-96A.md,DEVAM-96A.md.

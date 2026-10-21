@@ -2,10 +2,9 @@
 // 96A presentation follows the existing UI action delegation and 2D camera.
 const CommerceUI={selected:null,hits:[],token:null,
  boot(){
-  if($('convoyToggle'))return;const host=$('outMap');if(!host)return;
-  const b=document.createElement('button');b.id='convoyToggle';b.className='tool';b.dataset.a='convoyToggle';b.innerHTML='▱<span>Ticaret Konvoyları</span>';host.appendChild(b);
-  const open=document.createElement('button');open.className='tool';open.dataset.a='commerce';open.innerHTML='▱<span>Ticaret sözleşmeleri</span>';host.appendChild(open);
-  const rotate=$('rotate');if(rotate&&!$('portraitCommerce')){const entry=document.createElement('button');entry.id='portraitCommerce';entry.className='abtn';entry.dataset.a='commerce';entry.textContent='▱ Ticaret sözleşmeleri';rotate.appendChild(entry);}
+  const host=$('outMap'),emp=$('outEmp');if(!host||!emp)return;
+  if(!$('convoyToggle')){const b=document.createElement('button');b.id='convoyToggle';b.className='tool';b.dataset.a='convoyToggle';b.innerHTML='▱<span>Ticaret Konvoyları</span>';host.appendChild(b);}
+  if(!$('commerceBtn')){const open=document.createElement('button');open.id='commerceBtn';open.className='tool';open.dataset.a='commerce';open.innerHTML='▱<span>Ticaret sözleşmeleri</span>';emp.appendChild(open);}
   this.buttons();
  },
  modal(html){UI.openModal(html);$('modal').classList.add('commerceHost');},

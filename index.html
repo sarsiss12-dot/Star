@@ -1192,6 +1192,45 @@ body.fauxFull canvas#map{width:100vw !important;height:100dvh !important}
 .commerceHost .mbd{min-height:0;overflow-y:auto;overscroll-behavior:contain;max-height:calc(100dvh - 110px)}
 .commerceHost .box{overflow-wrap:anywhere}.commerceHost .row{gap:6px;flex-wrap:wrap}.commerceHost select{max-width:65%}
 /* END 96A FREIGHT UI */
+/* 96B: scoped economy workspace */
+#diploPane:has(.economyBox){z-index:2100;align-items:stretch;justify-content:flex-start;padding:0}
+#diploPane .economyBox{width:min(960px,100%);max-width:100%;height:100dvh;max-height:100dvh;margin:0;display:flex;flex-direction:column;min-height:0;min-width:0;border-radius:0;animation:none;transform:none}
+.economyBox .dpHd{flex:0 0 auto;padding:7px 10px;font-size:13px}.economyBox .gpTabs{flex:0 0 auto;display:flex;flex-wrap:wrap;gap:3px;padding:3px}
+.economyBox .gpTab{padding:4px 9px;min-height:27px;font-size:11px}
+#economyScroll{flex:1;min-height:0;min-width:0;overflow:auto;overscroll-behavior:contain;padding:0 10px 18px}
+.economyBox .p{color:#6ff2a8}.economyBox .n{color:#ff7884}.economyBox h3{font-size:13px;margin:14px 0 7px;color:#e4c774}
+.ecoSticky{position:sticky;top:0;z-index:2;background:#111b2c;padding:6px 0;display:flex;flex-wrap:wrap;align-items:center;gap:5px;border-bottom:1px solid #36445b;font-size:12px}
+.ecoActions{display:flex;flex-wrap:wrap;gap:4px}.ecoChip{min-width:32px;min-height:32px;border:1px solid #33435c;background:#152238;color:#c7d5ed;cursor:pointer}.ecoChip.on{border-color:#f2d452;background:#354630}
+.ecoTable{width:100%;table-layout:fixed;border-collapse:collapse;font-size:12px;font-variant-numeric:tabular-nums;margin:4px 0 8px}.ecoTable th:first-child{width:34%;text-align:left}.ecoTable th,.ecoTable td{padding:2px 2px;border-bottom:1px solid #27364e;text-align:right;overflow-wrap:anywhere}.ecoTable thead{font-size:10px;color:#97abc8}.ecoTable button{font:inherit;font-size:11px;background:transparent;border:0;color:#ccd9ec;min-height:24px;cursor:pointer;text-align:left;width:100%;padding:0}.ecoTable tr.selected{background:#26384a}
+.ecoSummary{display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:12px}.ecoSummary span{display:flex;justify-content:space-between;gap:5px;flex-wrap:wrap;padding:5px;background:#17243a}
+.ecoLine{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;font-size:12px;border-bottom:1px solid #233149;padding:5px 0}.ecoLine span{min-width:0;overflow-wrap:anywhere}.ecoLine b{white-space:nowrap;font-variant-numeric:tabular-nums}.ecoLink{border:0;background:transparent;color:#78d7e1;font:inherit;min-height:30px;cursor:pointer}
+.ecoChart{margin:8px 0;border:1px solid #2c3d57;padding:6px}.ecoChart figcaption{font-size:11px;color:#cbd6e5}.ecoChart svg{display:block;width:100%;height:90px}.ecoEvents article{padding:8px 0;border-bottom:1px solid #2d3b50}.ecoEvents article>div:first-child{display:flex;justify-content:space-between;gap:7px;font-size:12px}.ecoEvents article b{overflow-wrap:anywhere}.ecoEvents article span{white-space:nowrap}.ecoEventFilter .abtn{min-height:32px;padding:4px 8px}.economyBox .mini{line-height:1.5;overflow-wrap:anywhere}.economyBox .abtn{max-width:100%;white-space:normal}
+@media(max-width:440px){#economyScroll{padding-left:7px;padding-right:7px}.ecoTable{font-size:11px}.ecoTable th:first-child{width:35%}.ecoTable button{font-size:10px}.economyBox .dpHd{font-size:13px;padding:8px}.economyBox .gpTab{padding:4px 6px}}
+/* END 96B ECONOMY UI */
+/* 96C.3: scoped attention and report views */
+.topStatusBtn.hasMinimized{color:#ffe299;outline:2px solid #e4bb68;outline-offset:-3px;animation:minimizedReminder 2.4s ease-in-out infinite}
+@keyframes minimizedReminder{0%,100%{background:var(--bulk)}50%{background:#60502c}}
+@media(prefers-reduced-motion:reduce){.topStatusBtn.hasMinimized{animation:none}}
+.battleReportActions{display:flex;align-items:center;gap:4px;min-width:0}.battleReportClose{min-width:36px;min-height:36px;color:var(--bone);border:1px solid var(--line);background:var(--bulk)}
+#inbox{left:calc((100% - var(--sb) - 44px)/2 + 44px);max-width:max(140px,calc(100vw - var(--sb) - 70px))}
+/* END 96C.3 UI */
+/* 96D: scoped origin identity and audio controls */
+.originDetails96d {margin:10px 0;padding:12px;border:1px solid #354e63;border-radius:8px;background:#0c1927;color:#bcd0df;line-height:1.5;overflow-wrap:anywhere;}
+.originDetails96d h3 {margin:0 0 6px;color:#f4cf85;font-size:14px;}
+.originDetails96d p {margin:6px 0;}
+.originColumns {display:grid;grid-template-columns:1fr 1fr;gap:14px;font-size:12px;}
+.originColumns ul {padding-left:17px;margin:5px 0;}
+.originDetails96d summary {cursor:pointer;min-height:32px;padding-top:5px;}
+.portraitVariation96d {display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;margin:7px 0;}
+.portraitVariation96d .abtn {flex:0 0 44px;width:44px;min-width:40px;min-height:36px;}
+.audioControls96d {width:100%;max-width:440px;margin:6px auto;padding:9px 12px;box-sizing:border-box;border:1px solid #354e63;border-radius:7px;background:#0c1927;color:#bcd0df;font-size:12px;}
+.audioControls96d>label {display:grid;grid-template-columns:66px minmax(90px,1fr);align-items:center;gap:10px;min-height:34px;}
+.audioControls96d input[type=range] {width:100%;min-width:0;accent-color:#d4b478;touch-action:pan-y;}
+.audioChecks96d {display:flex;gap:14px;flex-wrap:wrap;}
+.audioChecks96d label {display:flex;align-items:center;gap:5px;min-height:36px;cursor:pointer;}
+.audioChecks96d input {width:18px;height:18px;accent-color:#d4b478;}
+@media(max-width:500px){.originColumns {grid-template-columns:1fr;gap:5px;}.originDetails96d {padding:9px;}}
+/* END 96D UI */
 </style>
 </head>
 <body>
@@ -1300,6 +1339,8 @@ body.fauxFull canvas#map{width:100vw !important;height:100dvh !important}
 <script src="ui.js"></script>
 <script src="archive-ui.js"></script>
 <script src="commerce-ui.js"></script>
+<script src="economic-ledger.js"></script>
+<script src="economy-ui.js"></script>
 <!-- FAZ 19: işlemsel ses. main.js'ten SONRA yüklenir (storeSet/storeGet
      kullanır). Hiçbir ses dosyası yok; her şey Web Audio ile üretilir. -->
 <script src="audio.js"></script>

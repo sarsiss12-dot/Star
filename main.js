@@ -756,16 +756,57 @@ const ORIGINS = {
   kapali  :{n:'Sıkı Sınırlar', ico:'🚧',
     d:'Kapalı toplum: +%25 başlangıç kaynağı ve anavatanda 2 kale. Ama tüm komşular sana −25 ilişkiyle başlar.'},
   kusatilmis:{n:'Kuşatılmış', ico:'🎯',
-    d:'Üç rakip seni çevrelemiş halde başlarsın — ama 2 kale, +%40 filo ve savaş deneyimi vardır.'},
+    d:'Savunmaya hazırlanmış anavatan: 2 kale, +%40 başlangıç alaşımı ve ek Kuşatma Kırıcı filosu. Üç komşu veya savaş deneyimi garanti edilmez.'},
   son_umut:{n:'Son Umut', ico:'💀',
-    d:'Yıkılmış bir medeniyetin kalıntısısın: tek koloni, çok az kaynak — ama tüm 1. kademe teknolojiler bedava.'},
+    d:'5 nüfuslu zayıf ekonomi ve kaynakların %45’i; erişim şartlarının izin verdiği 1. kademe teknolojilerle yeniden yüksel.'},
   altin_cag:{n:'Altın Çağ', ico:'👑',
-    d:'Üç kolonili güçlü bir imparatorlukla başlarsın. Ama herkes seni kıskanır (−30 ilişki) ve kriz erken gelir.'},
+    d:'Gelişmiş anavatan ve uygun komşu dünyalarda en çok 2 ek koloni; iki yönlü −30 ilişki ve açıksa daha erken kriz.'},
   golgeden:{n:'Gölgeden', ico:'🌑',
-    d:'Kimse seni bilmiyor: hiç temas yok, sınırların görünmez. Karşılığında istihbarat toplamada bir basamak öndesin.'},
+    d:'Başlangıç temasları kaldırılır; diğer devletlerde istihbarat 1. Keşif sonrası normal temas ve görünürlük kuralları işler.'},
   gocebe  :{n:'Göçebe Filosu', ico:'🚀',
-    d:'Anavatanın yok edildi. Küçük bir kolonide, fazladan 2 koloni gemisi ve güçlü bir filoyla yeniden başlıyorsun.'}
+    d:'Eski yurdunu geride bıraktın. 6 nüfuslu yeni koloni, 5 korvet, toplam 2 koloni ve 2 bilim gemisiyle başla.'}
 };
+
+// 96D: presentation describes existing origin mechanics; no second start engine.
+const ORIGIN_DETAILS={
+ standart:{story:'Yıldızlararası çağ, hazırlanmış bir anavatandan başlıyor.',style:'Dengeli büyüme ve serbest uzmanlaşma',difficulty:'Dengeli',pros:['12 nüfuslu anavatan ve dengeli yapı temeli','3 korvet, bilim ve koloni filosu'],cons:['Kökene özel ek kaynak veya teknoloji yok'],special:'Tür, doktrin, etik, sivil politika ve zorluk ayrıca uygulanır.'},
+ kalinti:{story:'Yaşadığın dünya, unutulmuş bir uygarlığın bilimsel izlerini taşıyor.',style:'Erken araştırma ve anomali keşfi',difficulty:'Avantajlı bilim başlangıcı',pros:['+900 araştırma stoku','Anavatanda kalıntı yatağı; sistemde anomali'],cons:['Ek nüfus, koloni veya savaş gemisi yok'],special:'İlk bilim gemisi anavatandaki kalıntı anomalisini araştırarak başlar.'},
+ kapali:{story:'Sınır kapıları dar; toplum güvenliğini kendi surlarında arıyor.',style:'Tahkimat ve kontrollü diplomasi',difficulty:'Diplomatik açıdan zor',pros:['Başlangıç kaynakları ×1,25','Anavatanda 2 kale'],cons:['Diğer devletlerle başlangıç ilişkileri iki yönde −25'],special:'Kale gezegen savunmasıdır; sürekli genel üretim bonusu verilmez.'},
+ kusatilmis:{story:'Kuşatma tehlikesine hazırlanmış bir halk, kaleler ve bir yarma filosu kurdu.',style:'Savunma ve askerî hazırlık',difficulty:'Askerî avantaj; normal harita koşulları',pros:['Anavatanda 2 kale; başlangıç alaşımı ×1,40','Ek 2 korvet ve 1 muhripli Kuşatma Kırıcı'],cons:['Ek koloni veya sivil altyapı yok; daha büyük filonun gerçek bakımı ödenir'],special:'Üç rakibin çevrelemesi, başlangıç savaşı ve deneyim bonusu yoktur. Başlangıç muhribi teknoloji kilidini açmaz.'},
+ son_umut:{story:'Kaybedilen çağın bilgisini sakladınız; şimdi az sayıdaki yurttaşla yeniden başlayacaksınız.',style:'Bilgiyle ekonomik toparlanma',difficulty:'Zor ekonomi',pros:['Erişilebilir 1. kademe teknolojiler başlangıçta verilir'],cons:['5 nüfus; kaynaklar ×0,45','Yalnız 1 maden, santral, çiftlik ve tersane'],special:'Tür/etik/doktrin araştırma erişim kilitleri korunur; bütün özel teknolojiler verilmez.'},
+ altin_cag:{story:'Zengin bir merkez ve yayılmaya hazır koloniler, gergin bir galaksiyi karşılıyor.',style:'Geniş ekonomi ve erken kriz hazırlığı',difficulty:'Avantajlı ekonomi; diplomasi ve kriz baskısı',pros:['18 nüfuslu gelişmiş anavatan, 2 tersane ve liman','Kaynaklar ×1,50; uygun komşularda en çok 2 ek koloni'],cons:['İki yönlü −30 başlangıç ilişkisi','Kriz açıksa gerçek takvim 120 ay erkene çekilir; en erken 72. ay'],special:'Uygun sahipsiz yaşanabilir komşu yoksa ek koloniler daha az olabilir. Kriz kapalıysa açılmaz.'},
+ golgeden:{story:'Sessiz gözlemciler yıldızlararası siyasete henüz kendilerini tanıtmadı.',style:'İlk temasları dikkatli yönetme',difficulty:'Gizlilik odaklı başlangıç',pros:['Başlangıç diplomatik temasları iki yönde kaldırılır','Diğer devletlerde başlangıç istihbaratı 1'],cons:['İlk anda diplomatik ortaklar yoktur'],special:'Sistem, filo veya sınır görünmezliği verilmez. Sonraki keşif ve temaslar normal işler.'},
+ gocebe:{story:'Eski yurdunu geride bırakan filolar, küçük bir yeni dünyada hayat kuruyor.',style:'Filo destekli yerleşim ve keşif',difficulty:'Zayıf ekonomi; hareketli başlangıç',pros:['5 korvet; toplam 2 koloni ve 2 bilim gemisi','Maden ×1,15; alaşım ×1,60','İkmalsiz filo yıpranması %50 daha az'],cons:['6 nüfus; yalnız 1 maden, santral, çiftlik ve tersane','Ek gemilerin gerçek bakım yükü vardır'],special:'Filon yeni yurduna ulaşmıştır; 6 nüfuslu küçük yerleşimi destekleyerek galaksiye yeniden yayıl.'}
+};
+for(const [id,details] of Object.entries(ORIGIN_DETAILS))Object.assign(ORIGINS[id],details);
+// 96E: independent seed streams do not perturb galaxy layout or player selection.
+function aiOriginChance(cfg){return [20,35,60,100].includes(+cfg.aiOriginChance)?+cfg.aiOriginChance:35;}
+function originCompatible(e,id){
+ // The eight existing origins have no species/ethic restrictions. Honor any
+ // declarative restrictions added to the same catalogue in a later phase.
+ if(!e||!Object.hasOwn(ORIGINS,id)||e.wild||e.crisisSide)return false;
+ const o=ORIGINS[id];
+ return (!o.species||o.species.includes(e.physio))&&(!o.doctrines||o.doctrines.includes(researchDoctrine(e)))&&
+  (!o.ethics||Object.entries(o.ethics).every(([k,v])=>(e.ethics?.[k]||0)===v));
+}
+function assignAIOrigins(cfg){
+ for(const e of G.emps){
+  if(!e.ai||e.wild||e.crisisSide)continue;
+  e.origin='standart';
+  if(cfg.aiOrigins===false)continue;
+  const random=mulberry32(identityHash('ai-origin96e:'+cfg.seed+':'+e.id));
+  if(random()*100>=aiOriginChance(cfg))continue;
+  const pool=Object.keys(ORIGINS).filter(id=>id!=='standart'&&originCompatible(e,id));
+  if(pool.length)e.origin=pool[Math.floor(random()*pool.length)];
+ }
+}
+function normalizePortraitVariant(v){return Number.isFinite(Number(v))?Math.max(0,Math.min(255,Math.floor(Number(v)))):0;}
+function statePortraitSeed(e){
+  if(!e)return 1;
+  const variant=e.portraitVariant===undefined?identityHash('legacy-portrait:'+G.seed+':'+e.id):normalizePortraitVariant(e.portraitVariant);
+  return identityHash('state-portrait:'+e.id+':'+(e.look||'humanoid')+':'+variant);
+}
+
 function originEffectText(e){
   const effects={
     standart:'Standart temel başlangıç: 12 nüfuslu anavatan; 2 maden, 2 santral, 2 çiftlik, 1 laboratuvar, 1 dökümhane, 2 fabrika ve 1 tersane. Üç filoda 3 korvet, 1 bilim gemisi ve 1 koloni gemisi. Kökenin ayrıca sürekli üretim bonusu veya ilişki cezası yok.',
@@ -775,7 +816,7 @@ function originEffectText(e){
     son_umut:'Anavatan 5 nüfus; 1 maden, 1 santral, 1 çiftlik ve 1 tersane. Başlangıç kaynakları ×0,45; erişim koşullarının izin verdiği 1. kademe teknolojiler başlangıçta verilir.',
     altin_cag:'Anavatan 18 nüfus, geliştirilmiş yapılar ve 2 tersane; başlangıç kaynakları ×1,50. Uygun komşu dünyalarda en çok 2 ek koloni. İlişkiler iki yönde −30; etkin kriz takvimi 10 yıl erkene çekilir (en erken 2216).',
     golgeden:'Başlangıç diplomatik temasları kaldırılır; diğer devletler için başlangıç istihbaratı 1. Daha sonra kurulan temaslar normal işler.',
-    gocebe:'Başlangıç kolonisi 6 nüfus, 1 maden / santral / çiftlik / tersane. Başlangıç minerali ×1,15, alaşımı ×1,60; muhafız 5 korvet; fazladan 1 koloni gemisi ve 1 bilim gemisi.'
+    gocebe:'Başlangıç kolonisi 6 nüfus, 1 maden / santral / çiftlik / tersane. Başlangıç minerali ×1,15, alaşımı ×1,60; muhafız 5 korvet; fazladan 1 koloni gemisi ve 1 bilim gemisi. İkmalsiz filo yıpranması %50 daha azdır.'
   };
   return effects[e.origin||'standart']||'Bu eski kaydın köken etkileri doğrulanamadı.';
 }
@@ -2049,9 +2090,10 @@ function recalcMods(e){
     crisisDmg:0,
     shipCost:0            // FAZ 54: Kriz Hazırlığı tasarısı
   };
-  const add = src => { for (const k in src) if (k in m) m[k] += src[k]; };
-  add(RACES[e.race].e);
-  (e.traits||[]).forEach(t => TRAITS[t] && add(TRAITS[t].e));
+  const modSources=[];
+  const add = (src,label='Diğer devlet etkileri') => { for (const k in src) if (k in m){ m[k] += src[k];if(src[k])modSources.push({key:k,value:src[k],label});} };
+  add(RACES[e.race].e,'Tür: '+RACES[e.race].n);
+  (e.traits||[]).forEach(t => TRAITS[t] && add(TRAITS[t].e,'Özellik: '+TRAITS[t].n));
   // etik eksenleri
   const et = e.ethics || {};
   for (const ax in ETHICS){
@@ -2062,13 +2104,13 @@ function recalcMods(e){
     for (const k in src) if (k in m) m[k] += src[k] * n;
   }
   // civic'ler
-  (e.civics||[]).forEach(c => CIVICS[c] && add(CIVICS[c].e));
+  (e.civics||[]).forEach(c => CIVICS[c] && add(CIVICS[c].e,'Yönetim: '+CIVICS[c].n));
   // lüks mallar — tekel mantığı: her çeşit yalnız bir kez sayılır
   const lux = e.luxury || {};
   const cartel = hasCivic(e,'cartel');
   for (const k in lux){
     if (!lux[k] || !LUXURY[k]) continue;
-    add(LUXURY[k].e);
+    add(LUXURY[k].e,'Lüks: '+LUXURY[k].n);
     // Kartel: galakside o malın tek üreticisiysen bonus iki katı
     if (cartel && e.luxOwn && e.luxOwn[k]){
       let others = 0;
@@ -2080,17 +2122,17 @@ function recalcMods(e){
         }
         if (others) break;
       }
-      if (!others) add(LUXURY[k].e);
+      if (!others) add(LUXURY[k].e,'Lüks: '+LUXURY[k].n);
     }
   }
-  for (const t in e.techs) if (e.techs[t] && TECHS[t]) add(TECHS[t].e);
+  for (const t in e.techs) if (e.techs[t] && TECHS[t]) add(TECHS[t].e,'Teknoloji: '+TECHS[t].n);
   /* FAZ 72: doktrin bonusları — PERSONAS[x].e bloğu */
   if (typeof PERSONAS !== 'undefined'){
     const dk = PERSONAS[e.mizac] || PERSONAS[e._pers];
-    if (dk && dk.e) add(dk.e);
+    if (dk && dk.e) add(dk.e,'Doktrin: '+dk.n);
   }
   if (e.extra){
-    add(e.extra);
+    add(e.extra,'Etkin olay / kıtlık / geçici etki');
     if (e.extra.shortMin) m.minMul += e.extra.shortMin;
     if (e.extra.shortAra) m.araMul += e.extra.shortAra;
   }
@@ -2155,6 +2197,8 @@ function recalcMods(e){
     if (fedHasLaw(e, 'ikmalStandardi')){ m.spdMul += .08; m.upMul += .06; }
   }
   if(typeof fedType==='function'){const f=findFed(e);if(f)m.upMul+=fedType(f).up;}
+  const sum={};for(const row of modSources)sum[row.key]=(sum[row.key]||0)+row.value;for(const k in m)if(Math.abs(m[k]-(sum[k]||0))>1e-10)modSources.push({key:k,value:m[k]-(sum[k]||0),label:'Etik eşikleri / dinamik galaksi / federasyon etkileri'});
+  Object.defineProperty(e,'_modSources',{value:modSources,writable:true,configurable:true,enumerable:false});
   e.mods = m;
   /* Sınır bekçisi vasallar senyörün donanma tavanını yükseltir */
   const vasalCap = (typeof vassalCapBonus === 'function') ? vassalCapBonus(e) : 0;
@@ -2377,9 +2421,10 @@ function setupGame(cfg){
   else pe.col = RACES[cfg.race].col;
   pe.ethics = Object.assign({mil:0, aut:0, mat:0, ahl:0}, cfg.ethics || {});
   pe.civics = (cfg.civics || []).slice(0, CIVIC_SLOTS);
-  pe.origin = cfg.origin || 'standart';
+  pe.origin = Object.hasOwn(ORIGINS,cfg.origin) ? cfg.origin : 'standart';
   pe.sigil  = cfg.sigil  || 'simetrik';
-  pe.look   = cfg.look   || 'humanoid';
+  pe.look   = Object.hasOwn(LOOKS,cfg.look) ? cfg.look : 'humanoid';
+  pe.portraitVariant=normalizePortraitVariant(cfg.portraitVariant);
   pe.monoRes = cfg.monoRes || 'min';
   recalcMods(pe);
   G.emps.push(pe);
@@ -2479,6 +2524,8 @@ function setupGame(cfg){
     }
   }
 
+  assignAIOrigins(cfg);
+
   // ilişkiler
   for (const a of G.emps) for (const b of G.emps){
     if (a!==b){ a.rel[b.id] = 0; a.war[b.id] = false; a.ally[b.id] = false; a.contact[b.id] = false; }
@@ -2561,6 +2608,7 @@ function setupGame(cfg){
       e.res.ara += 900;
       hw.dep = 'kalinti';
       s.anom = true;
+      s.anomK = 'kalinti';
     } else if (org === 'kapali'){
       for (const k in e.res) e.res[k] = Math.round(e.res[k] * 1.25);
       hw.col.b.kale = 2;
@@ -2611,6 +2659,9 @@ function setupGame(cfg){
     newFleet(e, sid, guardShips, e.ai?null:'1. Muhafız Filosu');
     const sci1 = newFleet(e, sid, [{c:'bil'}], e.ai?null:'Kâşif Vela');
     sci1.auto = true;
+    // The capital is already surveyed; normal exploration would skip its
+    // origin anomaly forever. Use the existing timed survey and reward path.
+    if(org==='kalinti')sci1.surv=Math.round(SCAN_BASE*(hasCivic(e,'scan')?(1-SCAN_HUNTER):1));
     /* ═══ FAZ 77B: TAHT GEMİSİ ═══
        Bu doktrinde başkent bir gemidir — oyun başında verilir. */
     if (hasCivic(e, 'throneship')){
@@ -2625,7 +2676,8 @@ function setupGame(cfg){
     newFleet(e, sid, [{c:'kol'}], e.ai?null:'Yerleşim Konvoyu');
     if (e.origin === 'gocebe'){
       newFleet(e, sid, [{c:'kol'}], e.ai?null:'2. Yerleşim Konvoyu');
-      newFleet(e, sid, [{c:'bil'}], e.ai?null:'Kâşif Nova');
+      const sci2=newFleet(e, sid, [{c:'bil'}], e.ai?null:'Kâşif Nova');
+      sci2.auto=true;
     }
     if (e.origin === 'kusatilmis'){
       newFleet(e, sid, [{c:'kor'},{c:'kor'},{c:'muh'}], e.ai?null:'Kuşatma Kırıcı');
@@ -2636,8 +2688,8 @@ function setupGame(cfg){
       for (const l of s.lanes){
         if (planted >= 2) break;
         const sy2 = G.sys[l];
-        if (sy2.owner >= 0) continue;
-        const pl2 = sy2.planets.find(pp => PLANETS[pp.t].k === 'hab' && pp.owner < 0);
+        if (sy2.owner >= 0 || homes.includes(l)) continue; // another reserved capital is never a bonus colony
+        const pl2 = sy2.planets.find(pp => PLANETS[pp.t].k === 'hab' && pp.owner < 0 && habOf(e,pp)>=35);
         if (!pl2) continue;
         territoryOwnerSet(pl2, e.id);
         pl2.col = {pop:9, stab:60, grow:0, b:{maden:2, santral:2, ciftlik:1, fabrika:1},
@@ -2687,8 +2739,9 @@ function setupGame(cfg){
     }
   }
   // Altın Çağ: kriz erken gelir
-  for (const e of G.emps){
-    if (e.goldenAge && G.crisis) G.crisis.at = Math.max(2216, G.crisis.at - 10);
+  if (G.crisis && G.emps.some(e=>e.goldenAge)){
+    G.crisis.atMonth=Math.max(72,G.crisis.atMonth-120);
+    G.crisis.at=2210+Math.round(G.crisis.atMonth/12);
   }
 
   // köken kaynaklı ilişki cezaları
@@ -4089,7 +4142,7 @@ function dailyTick(dt){
       const e = G.emps[q.e];
       if (e && !e.dead && sys.owner === e.id){
         const grp = c => SHIPS[c].rol === 'sav' ? 'sav' : SHIPS[c].rol;
-        let host = (SHIPS[q.cls].rol==='bilim')?null:G.fleets.find(f => f.e===e.id && f.sys===sys.id && !f.combat && f.ships.length &&
+        let host = (SHIPS[q.cls].rol==='bilim'||q.cls==='ins'&&e.ai)?null:G.fleets.find(f => f.e===e.id && f.sys===sys.id && !f.combat && f.ships.length &&
           !hasShipment(f) && !f.composition && !f.path.length && grp(f.ships[0].c) === grp(q.cls) && f.ships.length < 24);
         // 88A.1: özel sipariş hedefi genel tersane tercihinden bağımsızdır.
         const ral = Object.prototype.hasOwnProperty.call(q,'delivery')
@@ -4299,6 +4352,15 @@ function applyDamage(victim, fleets, amount, attacker){
 }
 
 /* Oyuncuya ait savaş görünümü. AI-AI raporunu ayrıntılandırmaz. */
+function battleReportViewKey(sys){
+  const r=sys?.battleReport;
+  return r&&r.done&&(r.a===0||r.b===0)&&Number.isFinite(r.at)?JSON.stringify([r.a,r.b,r.at,r.ended??null]):null;
+}
+function cleanBattleDismissals(raw){
+  const out={};if(!raw||typeof raw!=='object')return out;
+  for(const s of G.sys){const key=battleReportViewKey(s);if(key&&raw[s.id]===key)out[s.id]=key;}
+  return out;
+}
 function battleReportForPlayer(sys){
   const r=sys && sys.battleReport;
   if (!r || (r.a!==0 && r.b!==0)) return null;
@@ -5566,10 +5628,11 @@ const CFG = {
   name:'Yeni Hanedan', race:'insan', traits:[], size:'orta',
   shape:'sarmal', diff:'normal', seed:(Math.random()*1e9)|0, color:null,
   ethics:{mil:0, aut:0, mat:0, ahl:0}, civics:[], origin:'standart',
-  sigil:'simetrik', monoRes:'min', look:'humanoid', mizac:'yayilmaci',
+  sigil:'simetrik', monoRes:'min', look:'humanoid', portraitVariant:0, mizac:'yayilmaci',
   crisis:'normal', ruins:'orta', council:'normal',
   physio:'humanoid',                // FAZ 52: tür fizyolojisi
   pirates:true, gates:true, crisisPower:'normal',  // FAZ 53: galaksi anahtarları
+  aiOrigins:true, aiOriginChance:35, // 96E: each AI rolls independently during setup only
   randomEvents:true   // FAZ 95E.1: hikâye zinciri/tesadüfi imparatorluk olayları ve galaktik çalkantılar
 };
 /* ═══ FAZ 57: CFG.autoResolveEvents ═══
@@ -5668,7 +5731,7 @@ let TEMPLATES = [];
 
 /* Şablona giren alanlar — galaksi/tohum/zorluk hariç */
 const TPL_FIELDS = ['name','race','traits','ethics','civics','origin',
-                    'physio','look','sigil','monoRes','mizac','color','emblem'];
+                    'physio','look','portraitVariant','sigil','monoRes','mizac','color','emblem'];
 
 function snapshotCFG(){
   const t = {};
@@ -5695,8 +5758,9 @@ function applyTemplate(t){
   CFG.traits = CFG.traits.filter(k => TRAITS[k]);
   CFG.civics = CFG.civics.filter(k => CIVICS[k]);
   if (!RACES[CFG.race])     CFG.race = 'insan';
-  if (!LOOKS[CFG.look])     CFG.look = 'humanoid';
-  if (!ORIGINS[CFG.origin]) CFG.origin = 'standart';
+  if (!Object.hasOwn(LOOKS,CFG.look))     CFG.look = 'humanoid';
+  CFG.portraitVariant=normalizePortraitVariant(CFG.portraitVariant);
+  if (!Object.hasOwn(ORIGINS,CFG.origin)) CFG.origin = 'standart';
   if (!PHYSIO[CFG.physio])  CFG.physio = 'humanoid';
   return true;
 }
@@ -5755,6 +5819,7 @@ function paintEmblems(){
        bu sayede dost/nötr/düşman olarak farklı çizilir. */
     const spr = ART.portraitFull({
       look: cv.dataset.lk,
+      seed: cv.dataset.ps!==undefined?+cv.dataset.ps:statePortraitSeed({id:0,look:CFG.look,portraitVariant:CFG.portraitVariant}),
       col:  cv.dataset.col || CFG.color || (RACES[CFG.race] ? RACES[CFG.race].col : '#6ff2c8'),
       persona: cv.dataset.pers || CFG.mizac,
       mood: cv.dataset.mood !== undefined ? +cv.dataset.mood : 0,
@@ -5823,6 +5888,7 @@ document.addEventListener('click', e=>{
     box.innerHTML =
       `<button class="tBtn" data-a="tMute">SES: ${AUDIO_OFF ? 'KAPALI' : 'AÇIK'}
          <small>Uzay ambiyansı ve arayüz sesleri</small></button>
+       ${typeof AUDIO!=='undefined'?AUDIO.controls():''}
        <button class="tBtn" data-a="tAdvReset">REHBER: ${ADVISOR_OFF ? 'KAPALI' : 'AÇIK'}
          <small>Yeni oyunda danışman penceresi</small></button>
        <button class="tBtn" data-a="tBack">◂ GERİ</button>`;
@@ -6414,7 +6480,7 @@ async function loadAudioPref(){
   try {
     const v = await storeGet('yh_audio');
     AUDIO_OFF = (v === 'off');
-    if (typeof AUDIO !== 'undefined') AUDIO.setMuted(AUDIO_OFF);
+    if (typeof AUDIO !== 'undefined'){ AUDIO.setMuted(AUDIO_OFF); await AUDIO.loadSettings(); }
   } catch(err){ AUDIO_OFF = false; }
 }
 async function loadAdvisorPref(){
@@ -7134,6 +7200,7 @@ function serializeEventsWorld(){
   if (G.seenChains && typeof G.seenChains === 'object')
     for (const k in G.seenChains) if (G.seenChains[k]) seen[k] = true;
   return {inbox:kutu,
+          minimized:kutu.some(n=>n.uid===G.minNote)?G.minNote:null,
           inboxUid: Math.max(uid === null ? 0 : uid, enBuyuk),
           seenChains: seen};
 }
@@ -7142,6 +7209,7 @@ function serializeEventsWorld(){
 function resetEventsRuntimeState(){
   const d = eventsWorldDefaults();
   G.inbox = d.inbox; G.inboxUid = d.inboxUid; G.seenChains = d.seenChains;
+  G.dismissedBattleReports={};
   delete G.minNote; delete G.minRaw;          // ham modal HTML asla taşınmaz
   if (!_loadTxActive && typeof UI !== 'undefined' && UI){
     UI._openNote = null;
@@ -7183,10 +7251,12 @@ function restoreEventsWorld(data, sv){
     }
     /* Mevcut azami 6 bildirim politikası korunur. */
     while (kutu.length > 6){
-      const i = kutu.findIndex(x => !x.pause);
-      kutu.splice(i >= 0 ? i : 0, 1);
+      const i = kutu.findIndex(x => !x.pause&&x.uid!==data.minimized);
+      const fallback=kutu.findIndex(x=>x.uid!==data.minimized);
+      kutu.splice(i >= 0 ? i : fallback, 1);
     }
     G.inbox = kutu;
+    if(Number.isSafeInteger(data.minimized)&&kutu.some(n=>n.uid===data.minimized))G.minNote=data.minimized;
   }
   /* UID en büyük yüklenen kimlikten küçük kalırsa yeni bildirim
      mevcut biriyle ÇAKIŞIRDI — güvenle yükseltilir. */
@@ -7531,7 +7601,7 @@ function serialize(){
        v8 KALIR — ek alan, okunamadığında deterministik olarak
        yeniden türetilir. */
     W:G.W, H:G.H, warLedger:G.warLedger, settlements:G.settlements, jointOps:G.jointOps,
-    viewPrefs:{federations:FED_LINKS_ON,alliances:ALLY_LINKS_ON,wars:WAR_LINKS_ON},
+    viewPrefs:{federations:FED_LINKS_ON,alliances:ALLY_LINKS_ON,wars:WAR_LINKS_ON,dismissedBattles:cleanBattleDismissals(G.dismissedBattleReports)},
     /* FAZ 85A: politik küresel durum tek alt nesnede */
     world: serializePoliticalWorld(),
     /* FAZ 85C: oyun sonu krizi */
@@ -7546,6 +7616,7 @@ function serialize(){
     diplomaticInbox: typeof DiplomaticInbox!=='undefined'?DiplomaticInbox.state():undefined,
     construction: typeof RemoteConstruction!=='undefined'?RemoteConstruction.state():undefined,
     commerce: typeof Commerce!=='undefined'?Commerce.state():undefined,
+    economyHistory: typeof EconomyLedger!=='undefined'?EconomyLedger.state():undefined,
     /* ═══ FAZ 77E: KAYIT KAPSAMI GENİŞLETİLDİ ═══
        KÖK NEDEN: uzay yapıları (built), süren inşaatlar (work),
        ralli noktaları ve coğrafya bayrakları HİÇ kaydedilmiyordu.
@@ -7784,6 +7855,7 @@ function applySaveData(d){
   if(typeof DiplomaticInbox!=='undefined')DiplomaticInbox.restore(d.diplomaticInbox);
   if(typeof RemoteConstruction!=='undefined')RemoteConstruction.restore(d.construction);
   if(typeof Commerce!=='undefined')Commerce.restore(d.commerce);
+  if(typeof EconomyLedger!=='undefined')EconomyLedger.restore(d.economyHistory);
   if(typeof CommerceUI!=='undefined'){CommerceUI.selected=null;CommerceUI.hits=[];}
   loadCheckpoint('after:events');
   /* Geçici yetkilendirme alanları kayıttan taşınmaz ve
@@ -8124,7 +8196,7 @@ function forceRedraw(sebep){
    Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
    Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
 /* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */
-const BUILD_ID = '96a';
+const BUILD_ID = '96e';
 const DIAG_MAX = 40;
 const DIAG = [];
 function logDiag(tur, mesaj){
@@ -8943,6 +9015,7 @@ function monthTick(){
     }
   }
   if (G.month % 2 === 0) maybeEvent();
+  if(typeof EconomyLedger!=='undefined')EconomyLedger.closeMonth();
   if (G.month === 1 && G.autoSave !== false && G.year > 2210){
     warLedgerSync();
     settlementTick();
@@ -9300,7 +9373,7 @@ function randomizeSetupEmblem(){
  CFG.color=next.primary;CFG.emblem=next;return next;
 }
 function refreshIdentityLayerButtons(){for(const [id,on,cls] of [['fedLinksBtn',FED_LINKS_ON,'tool'],['allyLinksBtn',ALLY_LINKS_ON,'tool'],['warLinksBtn',WAR_LINKS_ON,'tool warLinksBtn']]){const b=$(id);if(b){b.className=cls+(on?' on':'');b.setAttribute('aria-pressed',String(on));}}}
-function restoreIdentityViewPrefs(p){if(!p||typeof p!=='object')return;DIPLO_LINKS_REV++;WAR_LINKS_REV++;if(typeof p.federations==='boolean')FED_LINKS_ON=p.federations;if(typeof p.alliances==='boolean')ALLY_LINKS_ON=p.alliances;if(typeof p.wars==='boolean')WAR_LINKS_ON=p.wars;refreshIdentityLayerButtons();}
+function restoreIdentityViewPrefs(p){G.dismissedBattleReports=cleanBattleDismissals(p?.dismissedBattles);if(!p||typeof p!=='object')return;DIPLO_LINKS_REV++;WAR_LINKS_REV++;if(typeof p.federations==='boolean')FED_LINKS_ON=p.federations;if(typeof p.alliances==='boolean')ALLY_LINKS_ON=p.alliances;if(typeof p.wars==='boolean')WAR_LINKS_ON=p.wars;refreshIdentityLayerButtons();}
 
 /* Preserve the pre-95D structural RNG consumption of AI naming. Expanded
    identity text has its own stream, so starting homes/luxuries stay stable. */
