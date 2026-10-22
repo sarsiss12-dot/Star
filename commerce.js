@@ -14,13 +14,21 @@ const Commerce={
  port(e,id){return !!e&&!e.dead&&tradeHubs(e).includes(id);},
  pairGate(a,b){if(!a||!b||a===b||a.dead||b.dead||a.wild||b.wild||a.crisisSide||b.crisisSide)return 'Taraflardan biri geçerli değil';if(a.war[b.id]||b.war[a.id])return 'Savaş nedeniyle ticaret kapalı';if(tradeBlocked(a,b))return 'Ambargo / ticari yaptırım';if(!a.pact?.[b.id]||!b.pact?.[a.id])return 'Genel ticaret anlaşması yok';return null;},
  key(a,b){return a<b?a+'_'+b:b+'_'+a;},
- route(a,b,source,target,{inFlight=false}={}){
+ // Each autonomous sender assesses its own known hazards. No partner's
+ // private fleets/treasury are consulted and unknown pirates remain a risk.
+ aiHazards(e){
+  const view=aiView(e),risk=new Set(view.ctx.pirates);
+  for(const f of G.fleets){const at=f.mv?f.mv.to:f.sys;if(f.e!==e.id&&f.ships.length&&isArmed(f)&&hostile(e.id,f.e)&&view.ctx.visible.has(at))risk.add(at);}
+  return risk;
+ },
+ route(a,b,source,target,{inFlight=false,avoidObserved=false}={}){
   if(!G.sys[source]||!G.sys[target]||source===target)return null;
+  const risk=avoidObserved?this.aiHazards(a):null;if(risk?.has(source))return null;
   if(!inFlight&&G.raids?.[this.key(source,target)]>G.day)return null;
   const q=[[source]],seen=new Set([source]);let budget=512;
   for(let i=0;i<q.length&&budget-->0;i++){
    const path=q[i],s=G.sys[path.at(-1)];if(path.length>3)continue;
-   for(const id of s.lanes){const n=G.sys[id];if(!n||seen.has(id)||!this.known(a,n)||!this.known(b,n))continue;
+   for(const id of s.lanes){const n=G.sys[id];if(!n||seen.has(id)||risk?.has(id)||!this.known(a,n)||!this.known(b,n))continue;
     const owner=G.emps[n.owner];if(owner&&(a.war[owner.id]||b.war[owner.id]))continue;
     const next=path.concat(id);if(id===target)return next;seen.add(id);q.push(next);
    }
@@ -57,7 +65,9 @@ const Commerce={
   if(st.convoys.some(v=>v.contract===c.id&&!this.terminal(v))){c.status='waiting';c.reason='Önceki karşılıklı sefer tamamlanıyor';return false;}
   if(st.convoys.filter(v=>!this.terminal(v)).length+2>this.maxConvoys){c.status='waiting';c.reason='256 aktif konvoy sınırı; yük depoda, sevkiyat bekliyor';return false;}
   const legs=[];
-  for(const l of c.legs){const a=G.emps[l.e],b=G.emps[l.to],why=this.legGate(a,b,l,{stock:true});if(why){c.status='blocked';c.reason=why;return false;}const used=st.convoys.filter(v=>v.e===l.e&&v.source===l.source&&v.target===l.target&&v.started>G.day-30).reduce((n,v)=>n+v.loaded,0);if(used+l.v>routeVolume(a,l.source,l.target)+1e-7){c.status='waiting';c.reason='Son 30 günlük rota kapasitesi dolu; yük depoda bekliyor';return false;}legs.push({...l,route:this.route(a,b,l.source,l.target)});}
+  for(const l of c.legs){const a=G.emps[l.e],b=G.emps[l.to],why=this.legGate(a,b,l,{stock:true});if(why){c.status='blocked';c.reason=why;return false;}const used=st.convoys.filter(v=>v.e===l.e&&v.source===l.source&&v.target===l.target&&v.started>G.day-30).reduce((n,v)=>n+v.loaded,0);if(used+l.v>routeVolume(a,l.source,l.target)+1e-7){c.status='waiting';c.reason='Son 30 günlük rota kapasitesi dolu; yük depoda bekliyor';return false;}// Prefer the AI sender's observed safe alternate. An already agreed
+  // contract keeps the existing legal/risky fallback; this adds no launch ban.
+  const path=(a.ai&&a.id!==0?this.route(a,b,l.source,l.target,{avoidObserved:true}):null)||this.route(a,b,l.source,l.target);legs.push({...l,route:path});}
   // Validate both outgoing loads before touching either stock. No partial cycle debt.
   for(const l of legs)G.emps[l.e].res[l.r]-=l.v;
   c.cycle++;c.next=G.day+c.legs[0].every;c.status='active';c.reason='İki yön ayrı teslim edilir; kayıp karşı seferi geri almaz';
@@ -151,10 +161,10 @@ const Commerce={
     raid deadlines. Ports/pacts/embargo/stock gates are always evaluated live. */
  aiRouteSignature(){return JSON.stringify([G.sys.map(s=>[s.id,s.owner,s.lanes,s.seen,s.cr]),G.emps.map(e=>[e.id,e.dead,e.war]),G.p?G.sys.map(s=>this.known(G.p,s)):[],Object.entries(G.raids||{}).map(([k,until])=>[k,until>G.day])]);},
  aiPortRoute(a,b,source,target){
-  const scope=this._aiRouteScope;if(!scope)return this.route(a,b,source,target);
-  const key=[a.id,b.id,source,target].join(':');
+  const scope=this._aiRouteScope;if(!scope)return this.route(a,b,source,target,{avoidObserved:true});
+  const key=[a.id,b.id,source,target,...[...this.aiHazards(a)].sort((x,y)=>x-y)].join(':');
   if(scope.paths.has(key))return scope.paths.get(key)?.slice()||null;
-  const path=this.route(a,b,source,target);if(scope.paths.size>=2048)scope.paths.clear();scope.paths.set(key,path?.slice()||null);return path;
+  const path=this.route(a,b,source,target,{avoidObserved:true});if(scope.paths.size>=2048)scope.paths.clear();scope.paths.set(key,path?.slice()||null);return path;
  },
  aiPorts(a,b,budget){
   let best=null;

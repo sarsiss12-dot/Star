@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "exit": 0,
+  "seed": 404,
+  "months": 120,
+  "determinism": {
+    "saveHash": true,
+    "rng": true,
+    "trace": true,
+    "monthly": true
+  },
+  "saveHash": "8a51ef76bb2e9772894f6ef44d2318babdafe72be33546d1a2d2eb1bd156fd5c",
+  "elapsedSeconds": 11.03249421800001,
+  "peakRssKiB": 370692,
+  "userSeconds": 15.513499,
+  "systemSeconds": 0.42275999999999997,
+  "scope": "One Node process: final120-month runtime plus loaded canonical JSON and full forensic trace. Concurrent regression load; not Android or an isolated comparative benchmark."
+}

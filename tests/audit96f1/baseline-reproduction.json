@@ -1,0 +1,30 @@
+{
+  "source": "96F",
+  "officialSeeds": [
+    {
+      "seed": 11,
+      "saveHashMatch": true,
+      "rngMatch": true,
+      "saveHash": "3090c52108dbc05024d59d9cb567bf60ab7ebabcd562078af0ce495b45c6a82b"
+    },
+    {
+      "seed": 99,
+      "saveHashMatch": true,
+      "rngMatch": true,
+      "saveHash": "d6d3d6abdf4734d7dac6bba4f85d7c741ff935a9b6e6cfd79984a301becf8342"
+    },
+    {
+      "seed": 404,
+      "saveHashMatch": true,
+      "rngMatch": true,
+      "saveHash": "009bcca3d2cb57961840bc8d443e145012689c6292744596ad2888bf51e8f2e9"
+    }
+  ],
+  "additionalSeeds": [
+    7,
+    23,
+    42,
+    123,
+    2026
+  ]
+}

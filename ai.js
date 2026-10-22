@@ -145,6 +145,12 @@ function aiWarAccess(e,o){
 }
 function aiMove(e,f,to){
   const route=aiKnownRoute(e,f,f.mv?f.mv.to:f.sys,to);
+  // An already valid armed-fleet order is not another action. Preserve its
+  // active leg and avoid flooding the bounded history with no-op orders.
+  if(route&&isArmed(f)&&!hasShipment(f)){
+   const desired=(f.mv?[f.mv.to]:[]).concat(route.path);
+   if(f.path.length===desired.length&&f.path.every((id,i)=>id===desired[i]))return true;
+  }
   const accepted=!!(route&&orderMove(f,to,false,true,route.path));
   if(accepted&&route.path.length)aiPlanEvent(e,'fleet-order',{fleet:f.id,to});return accepted;
 }
@@ -202,7 +208,7 @@ function aiEconomyPlan(e){
   rows[r]={stock,net,months,urgency,reserve:floor[r]+Math.max(0,-net)*6};
  }
  const atWar=Object.keys(e.war||{}).some(id=>e.war[id]&&G.emps[id]&&!G.emps[id].dead&&!G.emps[id].wild);
- const critical=['ene','min','yiy','tuk'].some(r=>rows[r].net<0&&rows[r].months<6);
+ const critical=['ene','min','yiy','tuk','ala'].some(r=>rows[r].net<0&&rows[r].months<6);
  return {horizon:6,rows,committed,queued,policy:critical?'recover':atWar?'war':e.aiCampaign?.phase==='build'?'rebuild':'growth',critical};
 }
 /* A stock-zero input deficit cannot fund even the cheapest producer. Recover
@@ -229,16 +235,41 @@ function aiRecoverEconomy(e){
 function aiBuildingSustainable(e,sys,pl,key,plan=aiEconomyPlan(e)){
  const B=BUILDINGS[key];if(!B)return false;
  const delta=aiBuildingDelta(e,sys,pl,key);
- for(const r of ['ene','min','yiy','tuk']){
-  if(delta[r]>=0)continue;const row=plan.rows[r],net=row.net+delta[r],cash=row.stock-(B.c[r]||0);
+ for(const r of ['ene','min','yiy','tuk','ala']){
+  // Price can destroy a deficit's runway even when this building has no
+  // recurring input in that currency. Producers improving that deficit keep
+  // the existing recovery exception; a grant is never used to bridge it.
+  if(delta[r]>0||delta[r]===0&&!(B.c[r]||0))continue;
+  const row=plan.rows[r],net=row.net+delta[r],cash=row.stock-(B.c[r]||0);
   if(net<0&&cash<-net*6)return false;
  }
  return Object.entries(B.c).every(([r,v])=>(e.res[r]||0)-(plan.committed[r]||0)>=v);
+}
+/* A critical producer must not be perpetually undercut by cheaper growth
+   purchases. This is a derived reservation, not money or a persistent plan.
+   Only current positive income may fund a short (at most three month) wait. */
+function aiRecoveryInvestment(e,plan){
+ const keys={ene:'santral',min:'maden',yiy:'ciftlik',ala:'dokum',tuk:'fabrika'};
+ const resource=Object.keys(keys).filter(r=>plan.rows[r].net<0&&plan.rows[r].months<6).sort((a,b)=>plan.rows[b].urgency-plan.rows[a].urgency||a.localeCompare(b))[0];
+ if(!resource)return null;const key=keys[resource],B=BUILDINGS[key];let months=0;
+ for(const [r,cost]of Object.entries(B.c)){
+  const short=cost-plan.rows[r].stock;if(short<=0)continue;
+  const rate=Math.min(e.inc[r]||0,plan.rows[r].net);if(rate<=0)return null;
+  months=Math.max(months,short/rate);
+ }
+ if(!(months>0&&months<=3))return null;
+ const viable=e.colonies.some(c=>{const sys=G.sys[c.s],pl=sys?.planets[c.p];if(!pl?.col||pl.owner!==e.id||(pl.col.b[key]||0)+colonyQueuedOf(pl.col,key)>=B.max)return false;
+  const delta=aiBuildingDelta(e,sys,pl,key);
+  return ['ene','min','yiy','tuk','ala'].every(r=>{if(delta[r]>=0)return true;const row=plan.rows[r],net=row.net+delta[r],cash=row.stock+Math.max(0,Math.min(e.inc[r]||0,row.net))*months-(B.c[r]||0);return net>=0||cash>=-net*6;});
+ });
+ return viable?{key,resource,months,cost:{...B.c}}:null;
 }
 function aiEconomicOrder(e,sys,pl,legacy){
  const plan=aiEconomyPlan(e),resourceBuilding={ene:'santral',min:'maden',yiy:'ciftlik',ala:'dokum',tuk:'fabrika'};
  const ranked=Object.keys(resourceBuilding).filter(r=>{const row=plan.rows[r];return row.net<0&&row.months<12||row.stock<Math.max(120,row.reserve)&&row.urgency>12;}).sort((a,b)=>plan.rows[b].urgency-plan.rows[a].urgency||a.localeCompare(b));
  const urgent=ranked.map(r=>resourceBuilding[r]);
+ const saving=aiRecoveryInvestment(e,plan);
+ if(saving){AIDiagnostics.note('recovery:save-for-producer',e,null,saving.key+'; '+saving.months.toFixed(2)+' months from own income');return [saving.key];}
  // A first port supplies energy/Etki and enables paid freight without extra upkeep.
  if(!(pl.col.b.liman||0)&&!colonyQueuedOf(pl.col,'liman')&&plan.rows.ene.urgency<30)urgent.splice(Math.min(1,urgent.length),0,'liman');
  return [...new Set(urgent.concat(legacy))].filter(k=>BUILDINGS[k]&&aiBuildingSustainable(e,sys,pl,k,plan));
@@ -1136,7 +1167,8 @@ function aiShipProduction(e,my,prof){
  if(!yards.length){note('no-usable-yard');return;}
  const visibleDanger=my.some(s=>aiObservedThreat(e,s.id,false)>0);
  const war=visibleDanger||Object.keys(e.war||{}).some(id=>e.war[id]&&G.emps[id]&&!G.emps[id].dead&&!G.emps[id].wild);
- const plan=aiEconomyPlan(e),commitment=plan.committed;
+ const plan=aiEconomyPlan(e),commitment={...plan.committed},recovery=aiRecoveryInvestment(e,plan);
+ if(recovery)for(const [r,v]of Object.entries(recovery.cost))commitment[r]=(commitment[r]||0)+v;
  const threat=G.emps.some(o=>o!==e&&!o.dead&&!o.wild&&e.contact[o.id]&&!e.ally[o.id]&&(e.rel[o.id]||0)<-40);
  const underDefended=inv.combatUsage<e.cap*.35&&!plan.critical;
  const reserve=(e.megaReserve||0)+(e.colossusReserve||0)+(commitment.ala||0)+Math.max(war?12:24,Math.min(120,Math.max(0,e.inc.ala||0)*(war?1:underDefended?.75:2)));
@@ -1154,12 +1186,15 @@ function aiShipProduction(e,my,prof){
   if(!shipBuildAccess(e,cls).ok)return false;
   const d=SHIPS[cls],c=shipCost(e,cls);
   if(inv.usage+d.sz>e.cap*(war?1:.92)){note('projected-capacity');return false;}
-  const net=Math.min((e.inc.ene||0)-(inv.queuedEnergy+d.up)*energyUpkeep,plan.rows.ene.net-d.up*energyUpkeep);
+  // Every accepted hull is already paid and queued. Re-read that common
+  // forecast so new hull upkeep cannot be combined with a stale building plan.
+  const current=aiEconomyPlan(e);
+  const net=Math.min((e.inc.ene||0)-(inv.queuedEnergy+d.up)*energyUpkeep,current.rows.ene.net-d.up*energyUpkeep);
   if((!war&&d.up>0&&net<2)||e.crisis||(net<0&&(e.res.ene||0)<Math.max(100,-net*(war?12:24)))){note('energy-runway');return false;}
-  const alloyNet=(e.inc.ala||0)-(inv.queuedAlloy+(d.upA||0))*upkeep;
+  const alloyNet=Math.min((e.inc.ala||0)-(inv.queuedAlloy+(d.upA||0))*upkeep,current.rows.ala.net-(d.upA||0)*upkeep);
   if(alloyNet<0&&(e.res.ala||0)-(c.ala||0)<-alloyNet*18){note('alloy-upkeep');return false;}
   if((c.ala||0)>budget||(e.res.ala||0)-(c.ala||0)<reserve){note('alloy-budget-reserve');return false;}
-  if(!war&&plan.rows.tuk.net<0&&plan.rows.tuk.months<6){note('consumer-runway');return false;}
+  if(!war&&current.rows.tuk.net<0&&current.rows.tuk.months<6){note('consumer-runway');return false;}
   if(!Object.entries(c).every(([r,v])=>e.res[r]-(r==='ala'?0:commitment[r]||0)>=v)){note('resource-cost');return false;}
   return true;
  }

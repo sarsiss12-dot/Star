@@ -1,0 +1,2083 @@
+{
+  "method": "Eight preselected seeds, medium normal, five AI, idle player, crisis/council off, 120 months, real half-day ticks, reload month60. Official 96F 11/99/404 hash/RNG replayed. Candidate shares geography, homes and identities. Changes to later RNG are not independent causal proof. Gate counts dedupe actor/partner/code/month over the complete external trace; final AIDiagnostics.report alone covers only post-reload world.",
+  "results": [
+    {
+      "seed": 11,
+      "comparison": {
+        "seed": 11,
+        "matchedGeography": true,
+        "old": {
+          "phase": "96F",
+          "seed": 11,
+          "contracts": 11,
+          "cancelled": 1,
+          "freightLost": 7,
+          "alive": 5,
+          "techs": 37,
+          "ships": 96,
+          "power": 14082,
+          "upkeep": 239.03750000000002,
+          "colonies": 13,
+          "deliveries": 97,
+          "pacts": 1,
+          "warsStarted": 5,
+          "peace": 2,
+          "objectiveChanges": 30,
+          "plansCompleted": 15,
+          "plansFailed": 3,
+          "criticalEmpireMonths": 11,
+          "invalidResources": [],
+          "elapsedMs": 10284
+        },
+        "next": {
+          "phase": "96F1",
+          "seed": 11,
+          "contracts": 9,
+          "cancelled": 0,
+          "freightLost": 1,
+          "alive": 5,
+          "techs": 37,
+          "ships": 124,
+          "power": 15793,
+          "upkeep": 352.2751774761392,
+          "colonies": 12,
+          "deliveries": 101,
+          "pacts": 5,
+          "warsStarted": 1,
+          "peace": 1,
+          "objectiveChanges": 25,
+          "plansCompleted": 16,
+          "plansFailed": 3,
+          "criticalEmpireMonths": 11,
+          "invalidResources": [],
+          "elapsedMs": 13402
+        }
+      },
+      "old": {
+        "whole120GateCounts": {
+          "trade-no-contact": 876,
+          "navy:energy-runway": 159,
+          "navy:alloy-budget-reserve": 422,
+          "trade-no-port": 42,
+          "trade-political": 417,
+          "navy:science-covered": 332,
+          "navy:science-renewal-cooldown": 53,
+          "recovery:demolish": 4,
+          "navy:resource-cost": 126,
+          "navy:yard-backlog": 60,
+          "navy:alloy-upkeep": 29,
+          "trade-no-safe-route": 316,
+          "trade-no-supply-demand": 9,
+          "trade-signed": 11,
+          "trade-agreed": 11,
+          "trade-existing": 110,
+          "trade-no-fair-ratio": 2,
+          "trade-cooldown": 3,
+          "trade-review-cancel": 1
+        },
+        "criticalPeriods": [
+          {
+            "month": 10,
+            "actor": 2,
+            "shortage": {
+              "min": {
+                "stock": 27.39143552227508,
+                "net": -9.7370005119923
+              }
+            },
+            "upkeep": 0,
+            "ships": 0,
+            "objective": "security",
+            "stage": "stabilize"
+          },
+          {
+            "month": 12,
+            "actor": 2,
+            "shortage": {
+              "min": {
+                "stock": 13.916792888884714,
+                "net": -6.632066960982684
+              }
+            },
+            "upkeep": 2.38,
+            "ships": 1,
+            "objective": "security",
+            "stage": "stabilize"
+          },
+          {
+            "month": 13,
+            "actor": 2,
+            "shortage": {
+              "min": {
+                "stock": 9.595540077600111,
+                "net": -4.321252811284603
+              }
+            },
+            "upkeep": 2.38,
+            "ships": 1,
+            "objective": "security",
+            "stage": "stabilize"
+          },
+          {
+            "month": 14,
+            "actor": 2,
+            "shortage": {
+              "min": {
+                "stock": 7.115623451850144,
+                "net": -2.4799166257499663
+              }
+            },
+            "upkeep": 2.38,
+            "ships": 1,
+            "objective": "security",
+            "stage": "stabilize"
+          },
+          {
+            "month": 33,
+            "actor": 1,
+            "shortage": {
+              "ala": {
+                "stock": 6.053051249999987,
+                "net": -2.31
+              }
+            },
+            "upkeep": 11.6,
+            "ships": 5,
+            "objective": "recovery",
+            "stage": "rearm"
+          },
+          {
+            "month": 34,
+            "actor": 1,
+            "shortage": {
+              "ala": {
+                "stock": 3.743051249999987,
+                "net": -2.31
+              }
+            },
+            "upkeep": 11.6,
+            "ships": 5,
+            "objective": "recovery",
+            "stage": "rearm"
+          },
+          {
+            "month": 35,
+            "actor": 1,
+            "shortage": {
+              "ala": {
+                "stock": 1.4330512499999868,
+                "net": -2.31
+              }
+            },
+            "upkeep": 11.6,
+            "ships": 5,
+            "objective": "recovery",
+            "stage": "rearm"
+          },
+          {
+            "month": 36,
+            "actor": 1,
+            "shortage": {
+              "ala": {
+                "stock": 0,
+                "net": -2.31
+              }
+            },
+            "upkeep": 11.6,
+            "ships": 5,
+            "objective": "recovery",
+            "stage": "rearm"
+          },
+          {
+            "month": 37,
+            "actor": 1,
+            "shortage": {
+              "ala": {
+                "stock": 0,
+                "net": -2.31
+              }
+            },
+            "upkeep": 11.6,
+            "ships": 5,
+            "objective": "recovery",
+            "stage": "rearm"
+          },
+          {
+            "month": 38,
+            "actor": 1,
+            "shortage": {
+              "ala": {
+                "stock": 0,
+                "net": -2.31
+              }
+            },
+            "upkeep": 11.6,
+            "ships": 5,
+            "objective": "recovery",
+            "stage": "rearm"
+          },
+          {
+            "month": 39,
+            "actor": 1,
+            "shortage": {
+              "ala": {
+                "stock": 0,
+                "net": -2.31
+              }
+            },
+            "upkeep": 11.6,
+            "ships": 5,
+            "objective": "recovery",
+            "stage": "rearm"
+          }
+        ],
+        "investmentPayments": {
+          "queueBuilding": {
+            "min": 24602,
+            "ene": 0,
+            "ala": 643,
+            "tuk": 0
+          },
+          "queueShip": {
+            "min": 3219,
+            "ene": 0,
+            "ala": 10933,
+            "tuk": 0
+          }
+        },
+        "monthlyNetIncomeSum": {
+          "ene": 25874.66042774326,
+          "min": 28227.992183482707,
+          "ala": 9339.263559682475,
+          "tuk": 7786.531020015458,
+          "ara": 40428.11617916495
+        },
+        "lastNetIncome": {
+          "ene": 348.8755333686027,
+          "min": 292.8948578802535,
+          "ala": 132.84382059629374,
+          "tuk": 66.40218145771382,
+          "ara": 504.44135990678114
+        },
+        "objectiveSelections": {
+          "economy": 7,
+          "security": 7,
+          "science": 2,
+          "recovery": 12,
+          "regional": 6,
+          "trade": 1
+        },
+        "earlyNormalChanges": [],
+        "freightOffers": 11,
+        "freightNegotiationRejected": 0,
+        "traceCapReached": false
+      },
+      "next": {
+        "whole120GateCounts": {
+          "trade-no-contact": 920,
+          "navy:energy-runway": 196,
+          "navy:alloy-budget-reserve": 392,
+          "trade-no-port": 33,
+          "trade-political": 300,
+          "navy:science-covered": 329,
+          "navy:science-renewal-cooldown": 91,
+          "recovery:demolish": 3,
+          "navy:alloy-upkeep": 29,
+          "navy:resource-cost": 152,
+          "navy:yard-backlog": 33,
+          "trade-no-safe-route": 400,
+          "trade-no-supply-demand": 15,
+          "trade-signed": 9,
+          "trade-agreed": 9,
+          "trade-existing": 98,
+          "recovery:save-for-producer": 3,
+          "trade-no-fair-ratio": 8,
+          "trade-cooldown": 7,
+          "navy:projected-capacity": 11,
+          "navy:deterrence-target": 14
+        },
+        "criticalPeriods": [
+          {
+            "month": 10,
+            "actor": 2,
+            "shortage": {
+              "min": {
+                "stock": 17.391435522275074,
+                "net": -9.7370005119923
+              }
+            },
+            "upkeep": 0,
+            "ships": 0,
+            "objective": "security",
+            "stage": "stabilize"
+          },
+          {
+            "month": 11,
+            "actor": 2,
+            "shortage": {
+              "min": {
+                "stock": 10.548859849867391,
+                "net": -6.842575672407683
+              }
+            },
+            "upkeep": 2.38,
+            "ships": 1,
+            "objective": "security",
+            "stage": "stabilize"
+          },
+          {
+            "month": 12,
+            "actor": 2,
+            "shortage": {
+              "min": {
+                "stock": 3.9167928888847072,
+                "net": -6.632066960982684
+              }
+            },
+            "upkeep": 2.38,
+            "ships": 1,
+            "objective": "security",
+            "stage": "stabilize"
+          },
+          {
+            "month": 33,
+            "actor": 1,
+            "shortage": {
+              "ala": {
+                "stock": 6.053051249999987,
+                "net": -2.31
+              }
+            },
+            "upkeep": 11.6,
+            "ships": 5,
+            "objective": "recovery",
+            "stage": "stabilize"
+          },
+          {
+            "month": 34,
+            "actor": 1,
+            "shortage": {
+              "ala": {
+                "stock": 3.743051249999987,
+                "net": -2.31
+              }
+            },
+            "upkeep": 11.6,
+            "ships": 5,
+            "objective": "recovery",
+            "stage": "stabilize"
+          },
+          {
+            "month": 35,
+            "actor": 1,
+            "shortage": {
+              "ala": {
+                "stock": 1.4330512499999868,
+                "net": -2.31
+              }
+            },
+            "upkeep": 11.6,
+            "ships": 5,
+            "objective": "recovery",
+            "stage": "stabilize"
+          },
+          {
+            "month": 36,
+            "actor": 1,
+            "shortage": {
+              "ala": {
+                "stock": 0,
+                "net": -2.31
+              }
+            },
+            "upkeep": 11.6,
+            "ships": 5,
+            "objective": "recovery",
+            "stage": "rearm"
+          },
+          {
+            "month": 37,
+            "actor": 1,
+            "shortage": {
+              "ala": {
+                "stock": 0,
+                "net": -2.31
+              }
+            },
+            "upkeep": 11.6,
+            "ships": 5,
+            "objective": "recovery",
+            "stage": "rearm"
+          },
+          {
+            "month": 85,
+            "actor": 1,
+            "shortage": {
+              "min": {
+                "stock": 15.917706864384797,
+                "net": -7.588700556239962
+              }
+            },
+            "upkeep": 62.11374482866656,
+            "ships": 20,
+            "objective": "regional",
+            "stage": "diplomacy"
+          },
+          {
+            "month": 86,
+            "actor": 1,
+            "shortage": {
+              "min": {
+                "stock": 9.12367312572381,
+                "net": -6.794033738660987
+              }
+            },
+            "upkeep": 62.12712629860867,
+            "ships": 20,
+            "objective": "recovery",
+            "stage": "stabilize"
+          },
+          {
+            "month": 87,
+            "actor": 1,
+            "shortage": {
+              "min": {
+                "stock": 3.1241886032867434,
+                "net": -5.999484522437067
+              }
+            },
+            "upkeep": 64.44857142857141,
+            "ships": 21,
+            "objective": "recovery",
+            "stage": "stabilize"
+          }
+        ],
+        "investmentPayments": {
+          "queueBuilding": {
+            "min": 19062,
+            "ene": 0,
+            "ala": 348,
+            "tuk": 0
+          },
+          "queueShip": {
+            "min": 3005,
+            "ene": 0,
+            "ala": 10176,
+            "tuk": 0
+          }
+        },
+        "monthlyNetIncomeSum": {
+          "ene": 22647.185770153166,
+          "min": 22366.558743981426,
+          "ala": 9330.24446216651,
+          "tuk": 7676.094584165179,
+          "ara": 36273.80471311328
+        },
+        "lastNetIncome": {
+          "ene": 480.64523543661943,
+          "min": 288.0597227887729,
+          "ala": 110.5317017509135,
+          "tuk": 82.84101605186461,
+          "ara": 600.5764008455385
+        },
+        "objectiveSelections": {
+          "economy": 6,
+          "security": 6,
+          "science": 2,
+          "recovery": 10,
+          "regional": 5,
+          "trade": 1
+        },
+        "earlyNormalChanges": [],
+        "freightOffers": 9,
+        "freightNegotiationRejected": 0,
+        "traceCapReached": false
+      },
+      "realMonthlySame": false,
+      "rngSame": false,
+      "actualTraceSame": false
+    },
+    {
+      "seed": 99,
+      "comparison": {
+        "seed": 99,
+        "matchedGeography": true,
+        "old": {
+          "phase": "96F",
+          "seed": 99,
+          "contracts": 2,
+          "cancelled": 1,
+          "freightLost": 2,
+          "alive": 5,
+          "techs": 41,
+          "ships": 167,
+          "power": 22879,
+          "upkeep": 507.6180000000003,
+          "colonies": 15,
+          "deliveries": 8,
+          "pacts": 3,
+          "warsStarted": 0,
+          "peace": 0,
+          "objectiveChanges": 17,
+          "plansCompleted": 9,
+          "plansFailed": 4,
+          "criticalEmpireMonths": 0,
+          "invalidResources": [],
+          "elapsedMs": 9410
+        },
+        "next": {
+          "phase": "96F1",
+          "seed": 99,
+          "contracts": 2,
+          "cancelled": 1,
+          "freightLost": 2,
+          "alive": 5,
+          "techs": 41,
+          "ships": 167,
+          "power": 22879,
+          "upkeep": 507.6180000000003,
+          "colonies": 15,
+          "deliveries": 8,
+          "pacts": 3,
+          "warsStarted": 0,
+          "peace": 0,
+          "objectiveChanges": 17,
+          "plansCompleted": 9,
+          "plansFailed": 4,
+          "criticalEmpireMonths": 0,
+          "invalidResources": [],
+          "elapsedMs": 12297
+        }
+      },
+      "old": {
+        "whole120GateCounts": {
+          "trade-no-contact": 1427,
+          "navy:energy-runway": 88,
+          "navy:alloy-budget-reserve": 434,
+          "trade-political": 25,
+          "trade-no-port": 141,
+          "navy:resource-cost": 115,
+          "navy:science-covered": 270,
+          "navy:yard-backlog": 36,
+          "trade-no-safe-route": 109,
+          "navy:science-renewal-cooldown": 178,
+          "trade-no-supply-demand": 25,
+          "trade-signed": 2,
+          "trade-agreed": 2,
+          "trade-existing": 13,
+          "trade-review-cancel": 1,
+          "trade-cooldown": 25,
+          "trade-no-fair-ratio": 25,
+          "navy:deterrence-target": 102,
+          "navy:projected-capacity": 10
+        },
+        "criticalPeriods": [],
+        "investmentPayments": {
+          "queueBuilding": {
+            "min": 27300,
+            "ene": 0,
+            "ala": 360,
+            "tuk": 0
+          },
+          "queueShip": {
+            "min": 3034,
+            "ene": 0,
+            "ala": 11228,
+            "tuk": 0
+          }
+        },
+        "monthlyNetIncomeSum": {
+          "ene": 36550.57856342919,
+          "min": 40629.96445335781,
+          "ala": 10530.335496558913,
+          "tuk": 5436.375863676595,
+          "ara": 41969.975835978104
+        },
+        "lastNetIncome": {
+          "ene": 613.3521439106381,
+          "min": 504.71141512137876,
+          "ala": 118.65761142551884,
+          "tuk": 52.888300485914684,
+          "ara": 638.7144692057881
+        },
+        "objectiveSelections": {
+          "economy": 5,
+          "science": 2,
+          "trade": 3,
+          "recovery": 3,
+          "security": 5,
+          "regional": 4
+        },
+        "earlyNormalChanges": [],
+        "freightOffers": 2,
+        "freightNegotiationRejected": 0,
+        "traceCapReached": false
+      },
+      "next": {
+        "whole120GateCounts": {
+          "trade-no-contact": 1427,
+          "navy:energy-runway": 91,
+          "navy:alloy-budget-reserve": 433,
+          "trade-political": 25,
+          "trade-no-port": 141,
+          "navy:resource-cost": 115,
+          "navy:science-covered": 270,
+          "navy:yard-backlog": 36,
+          "trade-no-safe-route": 109,
+          "navy:science-renewal-cooldown": 178,
+          "trade-no-supply-demand": 25,
+          "trade-signed": 2,
+          "trade-agreed": 2,
+          "trade-existing": 13,
+          "trade-review-cancel": 1,
+          "trade-cooldown": 25,
+          "trade-no-fair-ratio": 25,
+          "navy:deterrence-target": 102,
+          "navy:projected-capacity": 10
+        },
+        "criticalPeriods": [],
+        "investmentPayments": {
+          "queueBuilding": {
+            "min": 27300,
+            "ene": 0,
+            "ala": 360,
+            "tuk": 0
+          },
+          "queueShip": {
+            "min": 3034,
+            "ene": 0,
+            "ala": 11228,
+            "tuk": 0
+          }
+        },
+        "monthlyNetIncomeSum": {
+          "ene": 36550.57856342919,
+          "min": 40629.96445335781,
+          "ala": 10530.335496558913,
+          "tuk": 5436.375863676595,
+          "ara": 41969.975835978104
+        },
+        "lastNetIncome": {
+          "ene": 613.3521439106381,
+          "min": 504.71141512137876,
+          "ala": 118.65761142551884,
+          "tuk": 52.888300485914684,
+          "ara": 638.7144692057881
+        },
+        "objectiveSelections": {
+          "economy": 5,
+          "science": 2,
+          "trade": 3,
+          "recovery": 3,
+          "security": 5,
+          "regional": 4
+        },
+        "earlyNormalChanges": [],
+        "freightOffers": 2,
+        "freightNegotiationRejected": 0,
+        "traceCapReached": false
+      },
+      "realMonthlySame": true,
+      "rngSame": true,
+      "actualTraceSame": true
+    },
+    {
+      "seed": 404,
+      "comparison": {
+        "seed": 404,
+        "matchedGeography": true,
+        "old": {
+          "phase": "96F",
+          "seed": 404,
+          "contracts": 16,
+          "cancelled": 0,
+          "freightLost": 0,
+          "alive": 5,
+          "techs": 56,
+          "ships": 295,
+          "power": 38636,
+          "upkeep": 966.0200000000008,
+          "colonies": 24,
+          "deliveries": 140,
+          "pacts": 6,
+          "warsStarted": 0,
+          "peace": 0,
+          "objectiveChanges": 9,
+          "plansCompleted": 8,
+          "plansFailed": 4,
+          "criticalEmpireMonths": 0,
+          "invalidResources": [],
+          "elapsedMs": 12083
+        },
+        "next": {
+          "phase": "96F1",
+          "seed": 404,
+          "contracts": 12,
+          "cancelled": 0,
+          "freightLost": 0,
+          "alive": 5,
+          "techs": 58,
+          "ships": 280,
+          "power": 36293,
+          "upkeep": 912.0535391827043,
+          "colonies": 23,
+          "deliveries": 96,
+          "pacts": 6,
+          "warsStarted": 0,
+          "peace": 0,
+          "objectiveChanges": 8,
+          "plansCompleted": 7,
+          "plansFailed": 4,
+          "criticalEmpireMonths": 0,
+          "invalidResources": [],
+          "elapsedMs": 13773
+        }
+      },
+      "old": {
+        "whole120GateCounts": {
+          "trade-no-contact": 1140,
+          "navy:energy-runway": 95,
+          "trade-no-port": 81,
+          "navy:alloy-budget-reserve": 384,
+          "navy:science-covered": 511,
+          "trade-no-safe-route": 285,
+          "navy:resource-cost": 120,
+          "trade-no-fair-ratio": 24,
+          "trade-cooldown": 24,
+          "navy:science-renewal-cooldown": 32,
+          "trade-no-supply-demand": 46,
+          "trade-signed": 16,
+          "trade-agreed": 16,
+          "trade-existing": 157,
+          "navy:yard-backlog": 6,
+          "navy:deterrence-target": 137,
+          "navy:alloy-upkeep": 8
+        },
+        "criticalPeriods": [],
+        "investmentPayments": {
+          "queueBuilding": {
+            "min": 53020,
+            "ene": 0,
+            "ala": 1375,
+            "tuk": 0
+          },
+          "queueShip": {
+            "min": 5712,
+            "ene": 0,
+            "ala": 12184,
+            "tuk": 0
+          }
+        },
+        "monthlyNetIncomeSum": {
+          "ene": 60745.70087607347,
+          "min": 70510.1386346195,
+          "ala": 17562.4960158625,
+          "tuk": 9603.34423215736,
+          "ara": 72524.98842724472
+        },
+        "lastNetIncome": {
+          "ene": 1464.7243211028863,
+          "min": 1190.9985247477562,
+          "ala": 278.8227711449998,
+          "tuk": 112.0182037305518,
+          "ara": 1424.0086045139192
+        },
+        "objectiveSelections": {
+          "security": 4,
+          "economy": 3,
+          "science": 1,
+          "trade": 2,
+          "recovery": 2,
+          "influence": 2
+        },
+        "earlyNormalChanges": [],
+        "freightOffers": 16,
+        "freightNegotiationRejected": 0,
+        "traceCapReached": false
+      },
+      "next": {
+        "whole120GateCounts": {
+          "trade-no-contact": 1144,
+          "navy:energy-runway": 116,
+          "trade-no-port": 81,
+          "navy:alloy-budget-reserve": 401,
+          "navy:science-covered": 400,
+          "trade-no-safe-route": 294,
+          "navy:resource-cost": 135,
+          "trade-no-fair-ratio": 39,
+          "trade-cooldown": 38,
+          "navy:science-renewal-cooldown": 79,
+          "trade-no-supply-demand": 56,
+          "trade-signed": 12,
+          "trade-agreed": 12,
+          "trade-existing": 117,
+          "navy:yard-backlog": 16,
+          "navy:deterrence-target": 118
+        },
+        "criticalPeriods": [],
+        "investmentPayments": {
+          "queueBuilding": {
+            "min": 47522,
+            "ene": 0,
+            "ala": 1283,
+            "tuk": 0
+          },
+          "queueShip": {
+            "min": 5079,
+            "ene": 0,
+            "ala": 12360,
+            "tuk": 0
+          }
+        },
+        "monthlyNetIncomeSum": {
+          "ene": 51147.09857809097,
+          "min": 66472.1470567165,
+          "ala": 16551.968239830057,
+          "tuk": 8583.755275444255,
+          "ara": 75495.20861525931
+        },
+        "lastNetIncome": {
+          "ene": 1072.4881047033005,
+          "min": 966.0710017166359,
+          "ala": 190.62314541038472,
+          "tuk": 80.23831083686602,
+          "ara": 1465.8987785256238
+        },
+        "objectiveSelections": {
+          "security": 4,
+          "economy": 3,
+          "science": 1,
+          "trade": 1,
+          "recovery": 2,
+          "influence": 2
+        },
+        "earlyNormalChanges": [],
+        "freightOffers": 12,
+        "freightNegotiationRejected": 0,
+        "traceCapReached": false
+      },
+      "realMonthlySame": false,
+      "rngSame": false,
+      "actualTraceSame": false
+    },
+    {
+      "seed": 7,
+      "comparison": {
+        "seed": 7,
+        "matchedGeography": true,
+        "old": {
+          "phase": "96F",
+          "seed": 7,
+          "contracts": 3,
+          "cancelled": 1,
+          "freightLost": 3,
+          "alive": 5,
+          "techs": 48,
+          "ships": 132,
+          "power": 14952,
+          "upkeep": 376.39000000000016,
+          "colonies": 11,
+          "deliveries": 21,
+          "pacts": 7,
+          "warsStarted": 0,
+          "peace": 0,
+          "objectiveChanges": 13,
+          "plansCompleted": 9,
+          "plansFailed": 1,
+          "criticalEmpireMonths": 3,
+          "invalidResources": [],
+          "elapsedMs": 10153
+        },
+        "next": {
+          "phase": "96F1",
+          "seed": 7,
+          "contracts": 3,
+          "cancelled": 1,
+          "freightLost": 3,
+          "alive": 5,
+          "techs": 48,
+          "ships": 132,
+          "power": 14952,
+          "upkeep": 376.39000000000016,
+          "colonies": 11,
+          "deliveries": 21,
+          "pacts": 7,
+          "warsStarted": 0,
+          "peace": 0,
+          "objectiveChanges": 13,
+          "plansCompleted": 9,
+          "plansFailed": 1,
+          "criticalEmpireMonths": 3,
+          "invalidResources": [],
+          "elapsedMs": 12214
+        }
+      },
+      "old": {
+        "whole120GateCounts": {
+          "trade-no-contact": 391,
+          "navy:energy-runway": 142,
+          "navy:science-covered": 566,
+          "navy:resource-cost": 59,
+          "trade-no-port": 509,
+          "navy:alloy-budget-reserve": 436,
+          "trade-no-safe-route": 760,
+          "navy:alloy-upkeep": 87,
+          "trade-no-supply-demand": 41,
+          "navy:science-renewal-cooldown": 5,
+          "navy:deterrence-target": 86,
+          "trade-signed": 3,
+          "trade-agreed": 3,
+          "trade-existing": 23,
+          "trade-political": 46,
+          "trade-review-cancel": 1,
+          "trade-cooldown": 11,
+          "trade-no-fair-ratio": 10,
+          "navy:yard-backlog": 4
+        },
+        "criticalPeriods": [
+          {
+            "month": 28,
+            "actor": 3,
+            "shortage": {
+              "tuk": {
+                "stock": 20.44208200665515,
+                "net": -6.83397504
+              }
+            },
+            "upkeep": 5.2,
+            "ships": 2,
+            "objective": "recovery",
+            "stage": "rearm"
+          },
+          {
+            "month": 29,
+            "actor": 3,
+            "shortage": {
+              "tuk": {
+                "stock": 13.608106966655148,
+                "net": -6.83397504
+              }
+            },
+            "upkeep": 5.2,
+            "ships": 2,
+            "objective": "recovery",
+            "stage": "rearm"
+          },
+          {
+            "month": 95,
+            "actor": 4,
+            "shortage": {
+              "min": {
+                "stock": 0.014145758792097451,
+                "net": -1.0697639366002847
+              }
+            },
+            "upkeep": 2.145,
+            "ships": 2,
+            "objective": "recovery",
+            "stage": "rearm"
+          }
+        ],
+        "investmentPayments": {
+          "queueBuilding": {
+            "min": 23430,
+            "ene": 0,
+            "ala": 180,
+            "tuk": 0
+          },
+          "queueShip": {
+            "min": 2184,
+            "ene": 0,
+            "ala": 7291,
+            "tuk": 0
+          }
+        },
+        "monthlyNetIncomeSum": {
+          "ene": 26269.61189438128,
+          "min": 30002.953902967893,
+          "ala": 8489.436641250397,
+          "tuk": 9889.59155863325,
+          "ara": 52294.901535715966
+        },
+        "lastNetIncome": {
+          "ene": 157.91693057067826,
+          "min": 279.26518577801085,
+          "ala": 125.22221061976356,
+          "tuk": 117.69374384416714,
+          "ara": 842.9127163138176
+        },
+        "objectiveSelections": {
+          "economy": 6,
+          "science": 3,
+          "recovery": 5,
+          "security": 1,
+          "regional": 3
+        },
+        "earlyNormalChanges": [],
+        "freightOffers": 3,
+        "freightNegotiationRejected": 0,
+        "traceCapReached": false
+      },
+      "next": {
+        "whole120GateCounts": {
+          "trade-no-contact": 391,
+          "navy:energy-runway": 146,
+          "navy:science-covered": 566,
+          "navy:resource-cost": 59,
+          "trade-no-port": 509,
+          "navy:alloy-budget-reserve": 436,
+          "trade-no-safe-route": 760,
+          "navy:alloy-upkeep": 87,
+          "trade-no-supply-demand": 41,
+          "navy:science-renewal-cooldown": 5,
+          "navy:deterrence-target": 86,
+          "trade-signed": 3,
+          "trade-agreed": 3,
+          "trade-existing": 23,
+          "trade-political": 46,
+          "trade-review-cancel": 1,
+          "trade-cooldown": 11,
+          "trade-no-fair-ratio": 10,
+          "navy:yard-backlog": 4
+        },
+        "criticalPeriods": [
+          {
+            "month": 28,
+            "actor": 3,
+            "shortage": {
+              "tuk": {
+                "stock": 20.44208200665515,
+                "net": -6.83397504
+              }
+            },
+            "upkeep": 5.2,
+            "ships": 2,
+            "objective": "recovery",
+            "stage": "rearm"
+          },
+          {
+            "month": 29,
+            "actor": 3,
+            "shortage": {
+              "tuk": {
+                "stock": 13.608106966655148,
+                "net": -6.83397504
+              }
+            },
+            "upkeep": 5.2,
+            "ships": 2,
+            "objective": "recovery",
+            "stage": "rearm"
+          },
+          {
+            "month": 95,
+            "actor": 4,
+            "shortage": {
+              "min": {
+                "stock": 0.014145758792097451,
+                "net": -1.0697639366002847
+              }
+            },
+            "upkeep": 2.145,
+            "ships": 2,
+            "objective": "recovery",
+            "stage": "rearm"
+          }
+        ],
+        "investmentPayments": {
+          "queueBuilding": {
+            "min": 23430,
+            "ene": 0,
+            "ala": 180,
+            "tuk": 0
+          },
+          "queueShip": {
+            "min": 2184,
+            "ene": 0,
+            "ala": 7291,
+            "tuk": 0
+          }
+        },
+        "monthlyNetIncomeSum": {
+          "ene": 26269.61189438128,
+          "min": 30002.953902967893,
+          "ala": 8489.436641250397,
+          "tuk": 9889.59155863325,
+          "ara": 52294.901535715966
+        },
+        "lastNetIncome": {
+          "ene": 157.91693057067826,
+          "min": 279.26518577801085,
+          "ala": 125.22221061976356,
+          "tuk": 117.69374384416714,
+          "ara": 842.9127163138176
+        },
+        "objectiveSelections": {
+          "economy": 6,
+          "science": 3,
+          "recovery": 5,
+          "security": 1,
+          "regional": 3
+        },
+        "earlyNormalChanges": [],
+        "freightOffers": 3,
+        "freightNegotiationRejected": 0,
+        "traceCapReached": false
+      },
+      "realMonthlySame": true,
+      "rngSame": true,
+      "actualTraceSame": true
+    },
+    {
+      "seed": 23,
+      "comparison": {
+        "seed": 23,
+        "matchedGeography": true,
+        "old": {
+          "phase": "96F",
+          "seed": 23,
+          "contracts": 0,
+          "cancelled": 0,
+          "freightLost": 0,
+          "alive": 4,
+          "techs": 26,
+          "ships": 147,
+          "power": 22796,
+          "upkeep": 488.8004620477937,
+          "colonies": 11,
+          "deliveries": 0,
+          "pacts": 4.5,
+          "warsStarted": 4,
+          "peace": 0,
+          "objectiveChanges": 22,
+          "plansCompleted": 12,
+          "plansFailed": 1,
+          "criticalEmpireMonths": 3,
+          "invalidResources": [],
+          "elapsedMs": 8803
+        },
+        "next": {
+          "phase": "96F1",
+          "seed": 23,
+          "contracts": 0,
+          "cancelled": 0,
+          "freightLost": 0,
+          "alive": 4,
+          "techs": 26,
+          "ships": 147,
+          "power": 22796,
+          "upkeep": 488.8004620477937,
+          "colonies": 11,
+          "deliveries": 0,
+          "pacts": 4.5,
+          "warsStarted": 4,
+          "peace": 0,
+          "objectiveChanges": 22,
+          "plansCompleted": 12,
+          "plansFailed": 1,
+          "criticalEmpireMonths": 3,
+          "invalidResources": [],
+          "elapsedMs": 10188
+        }
+      },
+      "old": {
+        "whole120GateCounts": {
+          "trade-no-contact": 873,
+          "navy:energy-runway": 48,
+          "navy:science-covered": 316,
+          "navy:alloy-budget-reserve": 427,
+          "navy:yard-backlog": 70,
+          "trade-no-port": 256,
+          "navy:resource-cost": 65,
+          "trade-political": 120,
+          "recovery:demolish": 3,
+          "navy:science-renewal-cooldown": 93,
+          "navy:alloy-upkeep": 3,
+          "trade-no-safe-route": 300,
+          "trade-no-supply-demand": 15,
+          "trade-no-fair-ratio": 1,
+          "navy:deterrence-target": 34,
+          "navy:projected-capacity": 15
+        },
+        "criticalPeriods": [
+          {
+            "month": 1,
+            "actor": 2,
+            "shortage": {
+              "ene": {
+                "stock": 186.5676995,
+                "net": -113.4323005
+              }
+            },
+            "upkeep": 2.6,
+            "ships": 2,
+            "objective": "recovery",
+            "stage": "stabilize"
+          },
+          {
+            "month": 25,
+            "actor": 1,
+            "shortage": {
+              "min": {
+                "stock": 0,
+                "net": -5.5740336
+              }
+            },
+            "upkeep": 0.7,
+            "ships": 1,
+            "objective": "recovery",
+            "stage": "rearm"
+          },
+          {
+            "month": 74,
+            "actor": 5,
+            "shortage": {
+              "min": {
+                "stock": 0,
+                "net": -7.398465877500002
+              }
+            },
+            "upkeep": 53.12499999999998,
+            "ships": 19,
+            "objective": "recovery",
+            "stage": "rearm"
+          }
+        ],
+        "investmentPayments": {
+          "queueBuilding": {
+            "min": 23550,
+            "ene": 0,
+            "ala": 340,
+            "tuk": 0
+          },
+          "queueShip": {
+            "min": 1370,
+            "ene": 0,
+            "ala": 9822,
+            "tuk": 0
+          }
+        },
+        "monthlyNetIncomeSum": {
+          "ene": 34483.224932085104,
+          "min": 25412.34013241015,
+          "ala": 10672.034782607368,
+          "tuk": 7394.616722532349,
+          "ara": 30354.37191735276
+        },
+        "lastNetIncome": {
+          "ene": 389.40073742013595,
+          "min": 332.1892180587131,
+          "ala": 117.20959623981582,
+          "tuk": 95.80146911012999,
+          "ara": 584.0919201095991
+        },
+        "objectiveSelections": {
+          "science": 5,
+          "recovery": 8,
+          "economy": 3,
+          "security": 8,
+          "regional": 3
+        },
+        "earlyNormalChanges": [],
+        "freightOffers": 0,
+        "freightNegotiationRejected": 0,
+        "traceCapReached": false
+      },
+      "next": {
+        "whole120GateCounts": {
+          "trade-no-contact": 873,
+          "navy:energy-runway": 48,
+          "navy:science-covered": 316,
+          "navy:alloy-budget-reserve": 427,
+          "navy:yard-backlog": 70,
+          "trade-no-port": 256,
+          "navy:resource-cost": 65,
+          "trade-political": 120,
+          "recovery:demolish": 3,
+          "navy:science-renewal-cooldown": 93,
+          "navy:alloy-upkeep": 3,
+          "trade-no-safe-route": 300,
+          "trade-no-supply-demand": 15,
+          "trade-no-fair-ratio": 1,
+          "navy:deterrence-target": 34,
+          "navy:projected-capacity": 15
+        },
+        "criticalPeriods": [
+          {
+            "month": 1,
+            "actor": 2,
+            "shortage": {
+              "ene": {
+                "stock": 186.5676995,
+                "net": -113.4323005
+              }
+            },
+            "upkeep": 2.6,
+            "ships": 2,
+            "objective": "recovery",
+            "stage": "stabilize"
+          },
+          {
+            "month": 25,
+            "actor": 1,
+            "shortage": {
+              "min": {
+                "stock": 0,
+                "net": -5.5740336
+              }
+            },
+            "upkeep": 0.7,
+            "ships": 1,
+            "objective": "recovery",
+            "stage": "rearm"
+          },
+          {
+            "month": 74,
+            "actor": 5,
+            "shortage": {
+              "min": {
+                "stock": 0,
+                "net": -7.398465877500002
+              }
+            },
+            "upkeep": 53.12499999999998,
+            "ships": 19,
+            "objective": "recovery",
+            "stage": "rearm"
+          }
+        ],
+        "investmentPayments": {
+          "queueBuilding": {
+            "min": 23550,
+            "ene": 0,
+            "ala": 340,
+            "tuk": 0
+          },
+          "queueShip": {
+            "min": 1370,
+            "ene": 0,
+            "ala": 9822,
+            "tuk": 0
+          }
+        },
+        "monthlyNetIncomeSum": {
+          "ene": 34483.224932085104,
+          "min": 25412.34013241015,
+          "ala": 10672.034782607368,
+          "tuk": 7394.616722532349,
+          "ara": 30354.37191735276
+        },
+        "lastNetIncome": {
+          "ene": 389.40073742013595,
+          "min": 332.1892180587131,
+          "ala": 117.20959623981582,
+          "tuk": 95.80146911012999,
+          "ara": 584.0919201095991
+        },
+        "objectiveSelections": {
+          "science": 5,
+          "recovery": 8,
+          "economy": 3,
+          "security": 8,
+          "regional": 3
+        },
+        "earlyNormalChanges": [],
+        "freightOffers": 0,
+        "freightNegotiationRejected": 0,
+        "traceCapReached": false
+      },
+      "realMonthlySame": true,
+      "rngSame": true,
+      "actualTraceSame": true
+    },
+    {
+      "seed": 42,
+      "comparison": {
+        "seed": 42,
+        "matchedGeography": true,
+        "old": {
+          "phase": "96F",
+          "seed": 42,
+          "contracts": 2,
+          "cancelled": 0,
+          "freightLost": 2,
+          "alive": 5,
+          "techs": 50,
+          "ships": 104,
+          "power": 15223,
+          "upkeep": 370.320517843113,
+          "colonies": 11,
+          "deliveries": 20,
+          "pacts": 3,
+          "warsStarted": 1,
+          "peace": 1,
+          "objectiveChanges": 17,
+          "plansCompleted": 8,
+          "plansFailed": 5,
+          "criticalEmpireMonths": 0,
+          "invalidResources": [],
+          "elapsedMs": 8344
+        },
+        "next": {
+          "phase": "96F1",
+          "seed": 42,
+          "contracts": 2,
+          "cancelled": 0,
+          "freightLost": 2,
+          "alive": 5,
+          "techs": 50,
+          "ships": 104,
+          "power": 15223,
+          "upkeep": 370.320517843113,
+          "colonies": 11,
+          "deliveries": 20,
+          "pacts": 3,
+          "warsStarted": 1,
+          "peace": 1,
+          "objectiveChanges": 17,
+          "plansCompleted": 8,
+          "plansFailed": 5,
+          "criticalEmpireMonths": 0,
+          "invalidResources": [],
+          "elapsedMs": 10076
+        }
+      },
+      "old": {
+        "whole120GateCounts": {
+          "trade-no-contact": 866,
+          "navy:energy-runway": 288,
+          "navy:alloy-budget-reserve": 363,
+          "navy:resource-cost": 197,
+          "trade-no-port": 252,
+          "navy:yard-backlog": 48,
+          "trade-political": 308,
+          "navy:science-covered": 283,
+          "trade-no-safe-route": 301,
+          "navy:science-renewal-cooldown": 150,
+          "trade-no-supply-demand": 12,
+          "trade-pact-agreed": 1,
+          "trade-cooldown": 18,
+          "trade-no-fair-ratio": 15,
+          "trade-signed": 2,
+          "trade-agreed": 2,
+          "trade-existing": 22,
+          "recovery:demolish": 1,
+          "navy:deterrence-target": 21
+        },
+        "criticalPeriods": [],
+        "investmentPayments": {
+          "queueBuilding": {
+            "min": 17800,
+            "ene": 0,
+            "ala": 45,
+            "tuk": 0
+          },
+          "queueShip": {
+            "min": 1960,
+            "ene": 0,
+            "ala": 10176,
+            "tuk": 0
+          }
+        },
+        "monthlyNetIncomeSum": {
+          "ene": 10897.659784420655,
+          "min": 19005.62197388138,
+          "ala": 9406.406782338658,
+          "tuk": 8268.858480298868,
+          "ara": 57950.080487744366
+        },
+        "lastNetIncome": {
+          "ene": 183.90871347253227,
+          "min": 190.6869466343572,
+          "ala": 99.9078204858021,
+          "tuk": 60.876794781713414,
+          "ara": 691.6402325820995
+        },
+        "objectiveSelections": {
+          "influence": 2,
+          "economy": 1,
+          "science": 4,
+          "security": 3,
+          "regional": 4,
+          "federation": 2,
+          "recovery": 4,
+          "contain": 2
+        },
+        "earlyNormalChanges": [],
+        "freightOffers": 2,
+        "freightNegotiationRejected": 0,
+        "traceCapReached": false
+      },
+      "next": {
+        "whole120GateCounts": {
+          "trade-no-contact": 866,
+          "navy:energy-runway": 295,
+          "navy:alloy-budget-reserve": 361,
+          "navy:resource-cost": 197,
+          "trade-no-port": 252,
+          "navy:yard-backlog": 48,
+          "trade-political": 308,
+          "navy:science-covered": 282,
+          "trade-no-safe-route": 301,
+          "navy:science-renewal-cooldown": 150,
+          "trade-no-supply-demand": 12,
+          "trade-pact-agreed": 1,
+          "trade-cooldown": 18,
+          "trade-no-fair-ratio": 15,
+          "trade-signed": 2,
+          "trade-agreed": 2,
+          "trade-existing": 22,
+          "recovery:demolish": 1,
+          "navy:deterrence-target": 21
+        },
+        "criticalPeriods": [],
+        "investmentPayments": {
+          "queueBuilding": {
+            "min": 17800,
+            "ene": 0,
+            "ala": 45,
+            "tuk": 0
+          },
+          "queueShip": {
+            "min": 1960,
+            "ene": 0,
+            "ala": 10112,
+            "tuk": 0
+          }
+        },
+        "monthlyNetIncomeSum": {
+          "ene": 10890.859784420656,
+          "min": 19005.62197388138,
+          "ala": 9404.866782338657,
+          "tuk": 8268.858480298868,
+          "ara": 57950.080487744366
+        },
+        "lastNetIncome": {
+          "ene": 183.90871347253227,
+          "min": 190.6869466343572,
+          "ala": 99.9078204858021,
+          "tuk": 60.876794781713414,
+          "ara": 691.6402325820995
+        },
+        "objectiveSelections": {
+          "influence": 2,
+          "economy": 1,
+          "science": 4,
+          "security": 3,
+          "regional": 4,
+          "federation": 2,
+          "recovery": 4,
+          "contain": 2
+        },
+        "earlyNormalChanges": [],
+        "freightOffers": 2,
+        "freightNegotiationRejected": 0,
+        "traceCapReached": false
+      },
+      "realMonthlySame": false,
+      "rngSame": true,
+      "actualTraceSame": false
+    },
+    {
+      "seed": 123,
+      "comparison": {
+        "seed": 123,
+        "matchedGeography": true,
+        "old": {
+          "phase": "96F",
+          "seed": 123,
+          "contracts": 3,
+          "cancelled": 0,
+          "freightLost": 3,
+          "alive": 5,
+          "techs": 42,
+          "ships": 160,
+          "power": 23112,
+          "upkeep": 522.2394117231232,
+          "colonies": 15,
+          "deliveries": 17,
+          "pacts": 10,
+          "warsStarted": 0,
+          "peace": 0,
+          "objectiveChanges": 18,
+          "plansCompleted": 10,
+          "plansFailed": 3,
+          "criticalEmpireMonths": 2,
+          "invalidResources": [],
+          "elapsedMs": 12179
+        },
+        "next": {
+          "phase": "96F1",
+          "seed": 123,
+          "contracts": 3,
+          "cancelled": 0,
+          "freightLost": 0,
+          "alive": 5,
+          "techs": 40,
+          "ships": 185,
+          "power": 26072,
+          "upkeep": 557.2399489007399,
+          "colonies": 17,
+          "deliveries": 22,
+          "pacts": 10,
+          "warsStarted": 0,
+          "peace": 0,
+          "objectiveChanges": 18,
+          "plansCompleted": 10,
+          "plansFailed": 3,
+          "criticalEmpireMonths": 2,
+          "invalidResources": [],
+          "elapsedMs": 16704
+        }
+      },
+      "old": {
+        "whole120GateCounts": {
+          "trade-no-contact": 542,
+          "navy:energy-runway": 81,
+          "navy:science-covered": 416,
+          "trade-no-port": 537,
+          "navy:alloy-budget-reserve": 481,
+          "navy:yard-backlog": 6,
+          "navy:alloy-upkeep": 124,
+          "trade-political": 129,
+          "recovery:demolish": 2,
+          "trade-no-safe-route": 523,
+          "navy:resource-cost": 67,
+          "navy:science-renewal-cooldown": 8,
+          "trade-no-supply-demand": 37,
+          "navy:deterrence-target": 55,
+          "trade-signed": 3,
+          "trade-agreed": 3,
+          "trade-existing": 22,
+          "trade-no-fair-ratio": 2,
+          "trade-cooldown": 2
+        },
+        "criticalPeriods": [
+          {
+            "month": 12,
+            "actor": 5,
+            "shortage": {
+              "min": {
+                "stock": 22.947474852634954,
+                "net": -8.66070278948205
+              }
+            },
+            "upkeep": 6.6000000000000005,
+            "ships": 4,
+            "objective": "recovery",
+            "stage": "stabilize"
+          },
+          {
+            "month": 19,
+            "actor": 5,
+            "shortage": {
+              "min": {
+                "stock": 0.9606707356380575,
+                "net": -0.34287120256409764
+              }
+            },
+            "upkeep": 10,
+            "ships": 5,
+            "objective": "recovery",
+            "stage": "rearm"
+          }
+        ],
+        "investmentPayments": {
+          "queueBuilding": {
+            "min": 31150,
+            "ene": 0,
+            "ala": 320,
+            "tuk": 0
+          },
+          "queueShip": {
+            "min": 2970,
+            "ene": 0,
+            "ala": 8978,
+            "tuk": 0
+          }
+        },
+        "monthlyNetIncomeSum": {
+          "ene": 41717.079926151026,
+          "min": 38511.8337875153,
+          "ala": 9878.896455454918,
+          "tuk": 4691.878271737999,
+          "ara": 44360.33581190157
+        },
+        "lastNetIncome": {
+          "ene": 654.0837857884617,
+          "min": 415.06620019703496,
+          "ala": 141.3559306590848,
+          "tuk": 74.70238001642844,
+          "ara": 779.7542563548318
+        },
+        "objectiveSelections": {
+          "economy": 2,
+          "influence": 3,
+          "science": 5,
+          "recovery": 5,
+          "regional": 2,
+          "trade": 2,
+          "security": 4
+        },
+        "earlyNormalChanges": [],
+        "freightOffers": 3,
+        "freightNegotiationRejected": 0,
+        "traceCapReached": false
+      },
+      "next": {
+        "whole120GateCounts": {
+          "trade-no-contact": 556,
+          "navy:energy-runway": 136,
+          "navy:science-covered": 409,
+          "trade-no-port": 520,
+          "navy:alloy-budget-reserve": 521,
+          "navy:yard-backlog": 9,
+          "navy:alloy-upkeep": 130,
+          "trade-political": 159,
+          "recovery:demolish": 1,
+          "trade-no-safe-route": 493,
+          "trade-no-supply-demand": 36,
+          "navy:resource-cost": 34,
+          "navy:science-renewal-cooldown": 49,
+          "trade-signed": 3,
+          "trade-agreed": 3,
+          "trade-existing": 26,
+          "navy:deterrence-target": 11,
+          "trade-no-fair-ratio": 2,
+          "trade-cooldown": 1
+        },
+        "criticalPeriods": [
+          {
+            "month": 11,
+            "actor": 5,
+            "shortage": {
+              "min": {
+                "stock": 21.608177642117006,
+                "net": -9.329133621251282
+              }
+            },
+            "upkeep": 6.6000000000000005,
+            "ships": 4,
+            "objective": "recovery",
+            "stage": "rearm"
+          },
+          {
+            "month": 12,
+            "actor": 5,
+            "shortage": {
+              "min": {
+                "stock": 12.947474852634956,
+                "net": -8.66070278948205
+              }
+            },
+            "upkeep": 6.6000000000000005,
+            "ships": 4,
+            "objective": "recovery",
+            "stage": "rearm"
+          }
+        ],
+        "investmentPayments": {
+          "queueBuilding": {
+            "min": 31400,
+            "ene": 0,
+            "ala": 360,
+            "tuk": 0
+          },
+          "queueShip": {
+            "min": 2725,
+            "ene": 0,
+            "ala": 8443,
+            "tuk": 0
+          }
+        },
+        "monthlyNetIncomeSum": {
+          "ene": 34836.56439664754,
+          "min": 37371.772743234455,
+          "ala": 10446.668636229733,
+          "tuk": 7835.056692224445,
+          "ara": 44673.48451796645
+        },
+        "lastNetIncome": {
+          "ene": 533.1339447064947,
+          "min": 345.17057107672497,
+          "ala": 134.38199448697992,
+          "tuk": 145.49426119741412,
+          "ara": 661.365825979943
+        },
+        "objectiveSelections": {
+          "economy": 4,
+          "influence": 2,
+          "science": 5,
+          "recovery": 5,
+          "regional": 2,
+          "security": 3,
+          "trade": 2
+        },
+        "earlyNormalChanges": [],
+        "freightOffers": 3,
+        "freightNegotiationRejected": 0,
+        "traceCapReached": false
+      },
+      "realMonthlySame": false,
+      "rngSame": false,
+      "actualTraceSame": false
+    },
+    {
+      "seed": 2026,
+      "comparison": {
+        "seed": 2026,
+        "matchedGeography": true,
+        "old": {
+          "phase": "96F",
+          "seed": 2026,
+          "contracts": 2,
+          "cancelled": 0,
+          "freightLost": 0,
+          "alive": 5,
+          "techs": 35,
+          "ships": 177,
+          "power": 23296,
+          "upkeep": 614.0829540040788,
+          "colonies": 18,
+          "deliveries": 12,
+          "pacts": 2,
+          "warsStarted": 3,
+          "peace": 3,
+          "objectiveChanges": 21,
+          "plansCompleted": 10,
+          "plansFailed": 3,
+          "criticalEmpireMonths": 4,
+          "invalidResources": [],
+          "elapsedMs": 7106
+        },
+        "next": {
+          "phase": "96F1",
+          "seed": 2026,
+          "contracts": 0,
+          "cancelled": 0,
+          "freightLost": 0,
+          "alive": 5,
+          "techs": 35,
+          "ships": 143,
+          "power": 16533,
+          "upkeep": 453.9131445275483,
+          "colonies": 13,
+          "deliveries": 0,
+          "pacts": 2,
+          "warsStarted": 2,
+          "peace": 2,
+          "objectiveChanges": 27,
+          "plansCompleted": 11,
+          "plansFailed": 3,
+          "criticalEmpireMonths": 1,
+          "invalidResources": [],
+          "elapsedMs": 8243
+        }
+      },
+      "old": {
+        "whole120GateCounts": {
+          "trade-no-contact": 1447,
+          "navy:energy-runway": 155,
+          "navy:resource-cost": 120,
+          "trade-political": 81,
+          "trade-no-port": 108,
+          "navy:alloy-budget-reserve": 389,
+          "navy:science-covered": 473,
+          "navy:science-renewal-cooldown": 24,
+          "navy:yard-backlog": 28,
+          "recovery:demolish": 2,
+          "trade-no-safe-route": 105,
+          "navy:alloy-upkeep": 24,
+          "trade-no-supply-demand": 12,
+          "navy:deterrence-target": 99,
+          "trade-no-fair-ratio": 11,
+          "trade-cooldown": 11,
+          "trade-signed": 2,
+          "trade-agreed": 2,
+          "trade-existing": 21,
+          "navy:projected-capacity": 5
+        },
+        "criticalPeriods": [
+          {
+            "month": 1,
+            "actor": 2,
+            "shortage": {
+              "ene": {
+                "stock": 193.95755043500003,
+                "net": -106.04244956499998
+              }
+            },
+            "upkeep": 40.449999999999996,
+            "ships": 3,
+            "objective": "recovery",
+            "stage": "stabilize"
+          },
+          {
+            "month": 112,
+            "actor": 3,
+            "shortage": {
+              "min": {
+                "stock": 34.12652412838483,
+                "net": -13.486230945998523
+              }
+            },
+            "upkeep": 83.25264702706362,
+            "ships": 26,
+            "objective": "regional",
+            "stage": "ready"
+          },
+          {
+            "month": 113,
+            "actor": 3,
+            "shortage": {
+              "min": {
+                "stock": 35.83190761166885,
+                "net": -14.194616516715978
+              }
+            },
+            "upkeep": 86.67916760756582,
+            "ships": 27,
+            "objective": "recovery",
+            "stage": "rearm"
+          },
+          {
+            "month": 114,
+            "actor": 3,
+            "shortage": {
+              "min": {
+                "stock": 21.857536745100802,
+                "net": -13.97437086656805
+              }
+            },
+            "upkeep": 86.68703776384815,
+            "ships": 27,
+            "objective": "recovery",
+            "stage": "rearm"
+          }
+        ],
+        "investmentPayments": {
+          "queueBuilding": {
+            "min": 32140,
+            "ene": 0,
+            "ala": 405,
+            "tuk": 0
+          },
+          "queueShip": {
+            "min": 4484,
+            "ene": 0,
+            "ala": 9955,
+            "tuk": 0
+          }
+        },
+        "monthlyNetIncomeSum": {
+          "ene": 24462.697698704073,
+          "min": 36775.898947995905,
+          "ala": 8788.748893867172,
+          "tuk": 7637.145496838347,
+          "ara": 33269.3304347693
+        },
+        "lastNetIncome": {
+          "ene": 422.9934847146772,
+          "min": 584.9585435479735,
+          "ala": 97.66007681798814,
+          "tuk": 52.08072889973509,
+          "ara": 652.9996324067595
+        },
+        "objectiveSelections": {
+          "influence": 3,
+          "recovery": 7,
+          "economy": 3,
+          "security": 6,
+          "regional": 5,
+          "contain": 1,
+          "federation": 1
+        },
+        "earlyNormalChanges": [],
+        "freightOffers": 2,
+        "freightNegotiationRejected": 0,
+        "traceCapReached": false
+      },
+      "next": {
+        "whole120GateCounts": {
+          "trade-no-contact": 1449,
+          "navy:energy-runway": 164,
+          "navy:resource-cost": 89,
+          "trade-political": 67,
+          "trade-no-port": 113,
+          "navy:alloy-budget-reserve": 431,
+          "navy:science-covered": 409,
+          "navy:science-renewal-cooldown": 67,
+          "navy:yard-backlog": 23,
+          "recovery:demolish": 2,
+          "trade-no-safe-route": 137,
+          "navy:alloy-upkeep": 25,
+          "trade-no-supply-demand": 5,
+          "navy:deterrence-target": 66,
+          "trade-no-fair-ratio": 15,
+          "trade-cooldown": 14,
+          "navy:projected-capacity": 24
+        },
+        "criticalPeriods": [
+          {
+            "month": 1,
+            "actor": 2,
+            "shortage": {
+              "ene": {
+                "stock": 193.95755043500003,
+                "net": -106.04244956499998
+              }
+            },
+            "upkeep": 40.449999999999996,
+            "ships": 3,
+            "objective": "recovery",
+            "stage": "stabilize"
+          }
+        ],
+        "investmentPayments": {
+          "queueBuilding": {
+            "min": 28500,
+            "ene": 0,
+            "ala": 355,
+            "tuk": 0
+          },
+          "queueShip": {
+            "min": 3624,
+            "ene": 0,
+            "ala": 10874,
+            "tuk": 0
+          }
+        },
+        "monthlyNetIncomeSum": {
+          "ene": 28332.87650422305,
+          "min": 34996.832687111404,
+          "ala": 9000.434603717462,
+          "tuk": 6531.84227160913,
+          "ara": 31313.383381294498
+        },
+        "lastNetIncome": {
+          "ene": 565.5856043832375,
+          "min": 541.8507499474197,
+          "ala": 126.80257334921394,
+          "tuk": 51.708447328990744,
+          "ara": 551.0872631883199
+        },
+        "objectiveSelections": {
+          "influence": 3,
+          "recovery": 9,
+          "economy": 3,
+          "security": 8,
+          "regional": 6,
+          "contain": 1,
+          "federation": 2
+        },
+        "earlyNormalChanges": [],
+        "freightOffers": 0,
+        "freightNegotiationRejected": 0,
+        "traceCapReached": false
+      },
+      "realMonthlySame": false,
+      "rngSame": false,
+      "actualTraceSame": false
+    }
+  ]
+}
