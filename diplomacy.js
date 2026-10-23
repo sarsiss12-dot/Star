@@ -2791,7 +2791,15 @@ function fedResolveVote(f){
   }
   if (FED_INNER_LAWS[v.law]) f.cohesion = clamp(fedCohesion(f) +
     (passed ? (v.repeal ? 0 : (v.law === 'serbest' ? 8 : 4)) : -3), 0, 100);
-  if (passed) for (const id of f.members) if (G.emps[id] && !G.emps[id].dead) recalcMods(G.emps[id]);
+  if (passed) for (const id of f.members) if (G.emps[id] && !G.emps[id].dead){
+    const e=G.emps[id];recalcMods(e);
+    if(e.ai){
+      e.aiFedReview={day:G.day,law:v.law,motion:v.motion||null,opposed:v.no.includes(id)};
+      // Reassess preparation inside the existing objective engine. Losing a
+      // vote never cancels dues, consent records or legal war obligations.
+      if(e.aiStrategy?.objective&&aiEconomyPlan(e).critical)e.aiStrategy.objective.nextReview=Math.min(e.aiStrategy.objective.nextReview||G.day,G.day);
+    }
+  }
   return {ok:true, pending:false, gecti:passed, evet:c.yes, hayir:c.no};
 }
 function fedPresentVote(f, result){

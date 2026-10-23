@@ -200,8 +200,23 @@ function aiBuildingDelta(e,sys,pl,key,queued=false,direction=1){
  delta.ene=delta.ene*(1+(e.trade?.mul||0)+(e.mods.tradeMul||0))-(newUp-oldUp)*1.6;
  return delta;
 }
+/* 96G-D1: these payments are outside empireIncome, but remain real monthly
+   liabilities. Derive them once in the budget; never spend or waive them. */
+function aiFedBudget(e,income,f=findFed(e)){
+ const net={...income},dues={ene:0,ala:0};
+ if(f){
+  const rate=f.laws?.ortakDon?.09:f.laws?.sivilFon?.03:fedType(f).tithe;
+  for(const r of ['ene','ala']){dues[r]=Math.max(0,net[r]||0)*rate;net[r]=(net[r]||0)-dues[r];}
+  if(f.laws?.filo){dues.ala+=4;net.ala=(net.ala||0)-4;}
+ }
+ return {net,dues};
+}
 function aiEconomyPlan(e){
- const projected={...e.inc},committed=aiConstructionCommitment(e),queued={};
+ // A vote resolves after this month's production. Recompute a pure forecast
+ // until the next production month, without crediting income. This also
+ // keeps a mid-month Save8 reload from changing the budget's income basis.
+ const income=Math.floor(e.aiFedReview?.day/30)===Math.floor(G.day/30)?empireIncome({...e},false):e.inc;
+ const projected={...income},committed=aiConstructionCommitment(e),queued={};
  for(const c of e.colonies){const sys=G.sys[c.s],pl=sys?.planets[c.p];if(!pl?.col||pl.owner!==e.id||!pl.col.q?.length)continue;
   const d=aiBuildingDelta(e,sys,pl,null,true);for(const r in d)projected[r]=(projected[r]||0)+d[r];
  }
@@ -210,6 +225,9 @@ function aiEconomyPlan(e){
   projected.ene=(projected.ene||0)-SHIPS[q.cls].up*upkeep*(hasCivic(e,'mobilize')&&peace?2:1);
   projected.ala=(projected.ala||0)-(SHIPS[q.cls].upA||0)*upkeep;queued[q.cls]=(queued[q.cls]||0)+1;
  }
+ // Tithe applies to production before freight outflows; paid queues above
+ // change future production/upkeep, and each liability is counted once.
+ const budget=aiFedBudget(e,projected);Object.assign(projected,budget.net);
  if(typeof Commerce!=='undefined'&&G.commerce)for(const c of G.commerce.contracts)if(!Commerce.closed(c))for(const l of c.legs)if(l.e===e.id)projected[l.r]=(projected[l.r]||0)-l.v*30/l.every;
  const eatsFood=identityEatsFood(e);
  const target={ene:12,min:16,yiy:eatsFood?4:0,ala:8,tuk:4,ara:0,etk:0},floor={ene:120,min:120,yiy:eatsFood?60:0,ala:100,tuk:60,ara:0,etk:0},rows={};
@@ -220,7 +238,7 @@ function aiEconomyPlan(e){
  }
  const atWar=Object.keys(e.war||{}).some(id=>e.war[id]&&G.emps[id]&&!G.emps[id].dead&&!G.emps[id].wild);
  const critical=['ene','min','yiy','tuk','ala'].some(r=>rows[r].net<0&&rows[r].months<6);
- return {horizon:6,rows,committed,queued,policy:critical?'recover':atWar?'war':e.aiCampaign?.phase==='build'?'rebuild':'growth',critical};
+ return {horizon:6,rows,committed,queued,federation:budget.dues,policy:critical?'recover':atWar?'war':e.aiCampaign?.phase==='build'?'rebuild':'growth',critical};
 }
 /* A stock-zero input deficit cannot fund even the cheapest producer. Recover
    through the player's existing paid demolition/refund path, never a grant. */
@@ -285,13 +303,13 @@ function aiColonyForecast(e,sys,pl,{purchase=false,excludeFleet=null}={}){
  }
  if(!pl||!sys?.surv.includes(e.id)||pl.owner>=0)return {ok:false,reason:'unknown-or-occupied',rows:{}};
  targets.set(sys.id+':'+pl.i,{s:sys,p:pl});
- const shadow={...e,colonies:e.colonies.slice(),_trCache:null,_trAt:-1},old=empireIncome({...e},false),restore=[];
+ const shadow={...e,colonies:e.colonies.slice(),_trCache:null,_trAt:-1},old=aiFedBudget(e,empireIncome({...e},false)).net,restore=[];
  let next;
  try{
   for(const {s,p}of targets.values()){
    restore.push({s,index:p.i,planet:s.planets[p.i]});s.planets[p.i]={...p,col:initialColony(e,p),owner:e.id};shadow.colonies.push({s:s.id,p:p.i});
   }
-  recalcMods(shadow);next=empireIncome(shadow,false);
+  recalcMods(shadow);next=aiFedBudget(e,empireIncome(shadow,false)).net;
  }finally{for(const {s,index,planet}of restore)s.planets[index]=planet;}
  const strategic=e.aiStrategy?.plan?.target===sys.id&&aiObservedThreat(e,sys.id)>0;
  const horizon=strategic?3:6+Math.ceil(buildDays(e,'santral')/30),cost=purchase?shipCost(e,'kol'):{},rows={};let reason=null;
@@ -412,7 +430,7 @@ function aiStrategicFacts(e){
  const measure={systems:own.length,colonies:e.colonies.length,techs:Object.keys(e.techs||{}).length,power,ports:buildings.liman||0,fort,
   production:['ene','min','ala','ara','tuk'].reduce((n,k)=>n+Math.max(0,e.inc[k]||0),0),deliveries:G.commerce?.stats?.[e.id]?.deliveries||0,
   pacts:Object.keys(e.pact||{}).filter(id=>e.pact?.[id]).length,allies:Object.keys(e.ally||{}).filter(id=>e.ally[id]).length,federated:!!findFed(e)};
- const severe=['ene','min','tuk','ala'].filter(k=>(e.inc[k]||0)<0&&(e.res[k]||0)/-(e.inc[k]||0)<3);
+ const severe=['ene','min','tuk','ala'].filter(k=>findFed(e)?economy.rows[k].net<0&&economy.rows[k].stock/-economy.rows[k].net<3:(e.inc[k]||0)<0&&(e.res[k]||0)/-(e.inc[k]||0)<3);
  // Only this empire's own recorded war outcome is consulted. A declaration
  // or an unfinished front cannot manufacture a defeat or expose foreign data.
  const lastDefeat=(G.warLedger?.fronts||[]).reduce((latest,front)=>{
@@ -496,7 +514,8 @@ function aiUpdateLongPlan(e){
  if(previous&&previous.stage!==stage)aiPlanEvent(e,'preparation-stage',{from:previous.stage,to:stage,reason:s.plan.reason});
 }
 function aiUpdateStrategy(e){
- const needs=['ene','min','yiy','tuk','ala'].filter(k=>(e.inc[k]||0)<(k==='yiy'&&RACES[e.race].bio!=='organik'?-999:0));
+ const budget=findFed(e)?aiEconomyPlan(e):null;
+ const needs=['ene','min','yiy','tuk','ala'].filter(k=>(budget?budget.rows[k].net:e.inc[k]||0)<(k==='yiy'&&RACES[e.race].bio!=='organik'?-999:0));
  const danger=G.sys.some(s=>s.owner===e.id&&aiObservedThreat(e,s.id,false)>0);
  const war=Object.keys(e.war||{}).some(id=>e.war[id]&&G.emps[id]&&!G.emps[id].dead&&!G.emps[id].wild);
  const goal=needs.length?'recover':danger?'defend':war?'war':aiProfile(e).sci>.75?'science':'economy';
@@ -4556,6 +4575,9 @@ function aiFedLawTick(){
       if (fedLawConflicts(f,k).length) continue; // AI aynı bütçeyi durmadan tersine çevirmesin.
       if (!FED_INNER_LAWS[k] || !canFedLaw(e, k).ok) continue;
       if ((e.res.etk || 0) < FED_INNER_LAWS[k].c) continue;
+      // The proposer must pass its own assessment before paying and committing
+      // its explicit YES. This is not a prediction or veto of other members.
+      if(aiFedVoteAssessment(e,f,{kind:'inner',law:k,proposer:e.id}).score<.5)continue;
       const r = proposeFedLaw(e, k);
       if (r && r.ok) e._fedLawCd = (G.memAge || 0) + 36;
       break;
@@ -4603,6 +4625,38 @@ function aiFedRegimeScore(e,mode,ids,f=null){
  return {score:clamp(.55+interest+personality+strategy,.05,.95),share,why:FED_BALLOTS[mode].n+' · tahmini oy payı %'+(share*100).toFixed(1)+' · çıkar '+interest.toFixed(2)+' · kişilik '+personality.toFixed(2)+' · hedef '+strategy.toFixed(2)};
 }
 function aiFedBallot(e,ids){return ['equal','hegemonic','economic','mixed'].sort((a,b)=>aiFedRegimeScore(e,b,ids).score-aiFedRegimeScore(e,a,ids).score||a.localeCompare(b))[0];}
+/* Compare only this member's real production and payment rules. Synchronous
+   shadow calculation mirrors aiBuildingDelta; no stock, RNG or foreign
+   intelligence is changed. There is no forecast credit for unbuilt ships. */
+function aiFedLawForecast(e,f,v){
+ const laws=f.laws,shadow={...e,_trAt:-1,_trCache:null};
+ const before=aiFedBudget(e,empireIncome({...e},false),f).net;
+ let after;
+ try{
+  f.laws={...laws};
+  if(v.repeal)delete f.laws[v.law];
+  else{for(const k of fedLawConflicts(f,v.law))delete f.laws[k];f.laws[v.law]={since:G.memAge||0};}
+  recalcMods(shadow);after=aiFedBudget(e,empireIncome(shadow,false),f).net;
+ }finally{f.laws=laws;}
+ const delta=Object.fromEntries(Object.keys(before).map(r=>[r,after[r]-before[r]]));
+ const committed=aiConstructionCommitment(e),risks=[];let pressure=0,benefit=0;
+ for(const r of ['ene','min','yiy','tuk','ala','ara','etk']){
+  const d=delta[r]||0,scale=Math.max(r==='ala'?4:r==='ara'?10:4,Math.abs(before[r]||0));
+  if(d<0){pressure+=Math.min(.4,-d/scale*.4);if(['ene','min','yiy','tuk','ala'].includes(r)&&after[r]<0&&Math.max(0,(e.res[r]||0)-(committed[r]||0))<-after[r]*6)risks.push(r);}
+  else benefit+=Math.min(.15,d/scale*.12);
+ }
+ // This law locks alloy in a separate treasury: it has no automatic ship,
+ // maintenance or combat benefit. Do not value it as a military upgrade.
+ const lockedReserve=v.law==='filo'&&!v.repeal?.18:0;
+ return {before,after,delta,risks,pressure:Math.min(.65,pressure),benefit:Math.min(.2,benefit),lockedReserve};
+}
+function aiFedWarBurden(e){
+ const budget=aiEconomyPlan(e),goal=e.aiStrategy?.objective?.kind;
+ const deployment=fleetUpkeep(e)*.5; // conservative field/supply contingency
+ const ene=budget.rows.ene,ala=budget.rows.ala;
+ const short=ene.stock<Math.max(0,deployment-ene.net)*6||ala.stock<Math.max(0,-ala.net)*6;
+ return {budget,goal,deployment,short};
+}
 function aiFedVoteAssessment(e,f,v){
  const factors=[],add=(n,value)=>{factors.push({n,v:value});return value;};let score;
  if(v.kind==='motion'){
@@ -4622,6 +4676,16 @@ function aiFedVoteAssessment(e,f,v){
   if(v.law==='savunma'&&!fedDuty(f,'defense')&&goal==='recovery')score+=add('Toparlanma planı: yeni otomatik savaş yükümlülüğü',-.35);
   if(v.law==='savasOnay')score+=add('Saldırı özerkliği',.12-p.war*.18);
   if(v.repeal)score=1-score;
+  if(v.law!=='savunma'&&v.law!=='savasOnay'&&v.law!=='serbest'&&v.law!=='ticaret'&&v.law!=='arastirma'){
+   const q=aiFedLawForecast(e,f,v);
+   score+=add('Gerçek aylık maliyet ve üretim farkı',q.benefit-q.pressure-q.lockedReserve);
+   if(q.risks.length)score=Math.min(score,.15);
+   factors.push({n:'Altı aylık bütçe '+(q.risks.length?'yetersiz: '+q.risks.join(','):'karşılanabilir')+' · Δenerji '+q.delta.ene.toFixed(2)+' · Δalaşım '+q.delta.ala.toFixed(2)+' · Δbilim '+q.delta.ara.toFixed(2),v:0});
+  }
+  if(v.law==='savunma'&&!fedDuty(f,'defense')&&!v.repeal){
+   const q=aiFedWarBurden(e);
+   if(q.short||q.budget.critical)score+=add('Yeni savunma görevi için altı aylık sefer bütçesi yetersiz',-.4);
+  }
  }
  const yes=score>=.5;return {score:clamp(score,0,1),factors,why:(yes?'Destek':'Ret')+' · '+factors.map(x=>x.n+(x.v?' '+(x.v>0?'+':'')+x.v.toFixed(2):'')).join(' · ')};
 }
@@ -4687,6 +4751,11 @@ function aiFedVoteWant(e,f,v){
   if(!e.war[target.id]&&(!fedSupportGate(e,target).ok||!aiFedHelp(e,target,true)))return .01;
   const ratio=totalPower({...e})/(aiKnownPower(e,target)+1);
   want=.3+aiProfile({...e}).war*.35-(e.rel[target.id]||0)/250+((e.war[target.id]||aiObservedThreat(e,e.home)>0)?.25:0)-clamp(.8-ratio,0,.8)*.35;
+  if(!e.war[target.id]){
+   const burden=aiFedWarBurden(e),defending=aiObservedThreat(e,e.home)>0;
+   if(burden.budget.critical||burden.short)want-=defending?.15:.45;
+   if(burden.goal==='recovery'&&!defending)want-=.25;
+  }
  }
  return clamp(want,.02,.95);
 }

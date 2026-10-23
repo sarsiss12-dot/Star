@@ -1,26 +1,24 @@
 {
-  "phase": "96G",
-  "build": "96g",
+  "phase": "96G-D1",
+  "build": "96gd1",
   "save_version": 8,
-  "scope": "GitHub runtime delta only; NOT the full delivery ZIP manifest",
-  "parent_commit": "d1eca1402d1c07940d0214a32fc29e8c4ade8ef0",
-  "canonical_zip_sha256": "6a96d4bdfad976d7dc6ff62fb4395f4ff1e9d1c5bef24f8112c8efd0779a17f8",
+  "scope": "GitHub runtime delta only; NOT full ZIP manifest",
+  "parent_commit": "42d52f155799706bef42505719e1c440e3a13c2d",
+  "parent_zip_sha256": "d8450069dd8925ef04d7a1aaeb6fe812ffe180402e83142b7ef3b945d534b558",
   "files": {
-    "ai.js": "510ca0c17a6409b4515c0820bda0da1623cfeb96c4bec049fcaf1da039f51303",
-    "diplomacy.js": "dbb7c8650c2c466b0cc99e6a2f4c4599ad347831a28d927952602018d00c786f",
-    "ui.js": "0bf048e8a9d3cc754cdfc913dd14a20d6b5fb5084259f93ac60df46871a3a792",
-    "inbox.js": "b2ba562b238ef5a22f879a37f6665378154ac18fe49de3ec47c6b84404368e3a",
-    "index.html": "b635eb9dad3f1edeae19644a3d09fd2fd148b9752ccd459642763f076c2731fe",
-    "main.js": "50d200eafea029f3b1f01cea81fb63d50bf852848c0beacfa6f6a791e6af5c4d",
-    "sw.js": "7e77586612574533fca1a05e8bec4bebf0c5c0571ab9bda545ccc03b2d81f861"
+    "ai.js": "7d4b127a4452624ea47a72575c3a857ad6c9f2d1e47dd995569106cd5f5746a4",
+    "diplomacy.js": "55559a9b5e5951f4ac86527a8e3a56e53a49dc9f05e5e811f2321779ba37382c",
+    "main.js": "2a5711d26f249f630661aea09a9d40e563127ca36951405d74d3a6756826c0a4",
+    "sw.js": "939a1296c634eeca5467b37c684d69a61c292c310cb3c880c22aa9e0889bf2f4"
   },
   "tests": {
-    "suites": 125,
-    "pass": 5870,
+    "suites": 126,
+    "pass": 5889,
     "fail": 0,
-    "chromium_pass": 37,
-    "scenarios_pass": 52
+    "chromium_pass": 38,
+    "political_scenarios_pass": 52,
+    "local_isolations_pass": 4
   },
-  "balance_status": "Known significant seed23/404 growth and trade regressions; see full delivery report",
-  "full_manifest_location": "stars-faz96g.zip / RELEASE-MANIFEST.json"
+  "balance": "Mixed: deliveries495→513; tech326→333; colonies133→132; critical4 and cohort39 unchanged. Seed23 long military/growth losses remain.",
+  "full_manifest": "stars-faz96gd1.zip / RELEASE-MANIFEST.json"
 }
