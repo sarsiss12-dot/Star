@@ -7,10 +7,11 @@
   "scope_note": "Only the five changed runtime files are covered. Historical remote files are preserved. Full tests, reports and evidence are in the delivery ZIP. This is not the full ZIP manifest.",
   "canonical_parent_zip": "stars-faz96f3.zip",
   "canonical_parent_zip_sha256": "70988876671e01e6879a725589de16afe9291701d6cd9ec47cdb5398fc17a4ea",
-  "parent_head": "592d806ca90c6ed93f06b5e259cc9efc2bec7a6b",
+  "parent_head": "fb7454acb48620a0c79c31bfc1ce3b1639504b10",
+  "canonical_parent_commit": "592d806ca90c6ed93f06b5e259cc9efc2bec7a6b",
   "tests": {
     "unitSuites": 123,
-    "unitPass": 5833,
+    "unitPass": 5834,
     "unitFail": 0,
     "browserPass": 25,
     "browserFail": 0,
@@ -33,21 +34,21 @@
   "balance": {
     "deliveries": [
       433,
-      574
+      537
     ],
     "criticalEmpireMonths": [
       22,
-      11
+      4
     ],
     "knownRegressions": [
-      "seed11 critical 3 to 5, alive AI 5 to 4, technologies 34 to 29",
+      "seed11 deliveries 94 to 83 and technologies 34 to 29; critical 3 to 0 and alive AI 5 to 5",
       "seed99 deliveries 36 to 34",
-      "seed404 colonies 25 to 21",
-      "heavy 4x CPU mobile Chromium commerce pass median 117.7ms, p95 153.0ms"
+      "seed2026 deliveries 34 to 0; all known port pairs searched, changed world and diplomatic conditions",
+      "heavy 4x CPU mobile Chromium commerce pass median 121.6ms; real atomic contract transaction cost remains high"
     ]
   },
   "files": {
-    "ai.js": "760563026597cde42b422cac59f70971a8a6c71783cf52487f31039d80f5c923",
+    "ai.js": "cc84720363b1df9c4525ee97c23df29d876fcd60ec3a263655734caa2a86b83f",
     "commerce.js": "978e4f6b01faed1babeade20070447cbcfaa4e2ea70793a78e50f20fbe66be01",
     "economy.js": "ed2eb108b3c094444f49700e61ab48dfbb968c9bc7f135dcf11a7335c62fd095",
     "main.js": "6ec06166933f4e2103bf72c342094d2875c597ca82c05e07543ad09b3a808455",

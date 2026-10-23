@@ -1563,6 +1563,11 @@ function aiTurn(e){
   autoExploreTick(e.id);
 
   /* --- 4. kolonizasyon --- */
+  // A settlement held at arrival keeps its real hull/order. Reassess once
+  // per AI month, including after Save v8 reload; no permanent idle order.
+  for(const f of G.fleets.slice()){
+    if(f.e===e.id&&!f.combat&&!f.mv&&!f.path.length&&f.sys>=0&&f.ord?.t==='kol'&&f.ord.s===f.sys&&fleetHasRole(f,'koloni'))arrive(f,G.sys[f.sys]);
+  }
   const targets = colonizeTargets(e);
   if (targets.length){
     const taken = new Set(G.fleets.filter(f=>f.e===e.id && f.ord && f.ord.t==='kol')
