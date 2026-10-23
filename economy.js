@@ -1362,14 +1362,20 @@ function colonyShockMul(e, col){
   return clamp(1 - (kalan / toplam) * .55, .45, 1);
 }
 
-function doColonize(e, sys, pl){
-  territoryOwnerSet(pl, e.id);
-  pl.col = {pop: (hasCivic(e,'seedPop') ? 7 : 3) + (hasPerk(e,'migration') ? 3 : 0), stab:50, grow:0,
+/* Shared, side-effect-free ordinary colony state for settlement and AI forecasts. */
+function initialColony(e, pl){
+  const col = {pop: (hasCivic(e,'seedPop') ? 7 : 3) + (hasPerk(e,'migration') ? 3 : 0), stab:50, grow:0,
             b:{maden:1, santral:1, ciftlik:1}, cap:8, name:pl.name, f:'sanayi', fcd:0,
             shield:0, garrison:0};
   // Shared ordinary-colony acclimatization, including Learning Synapses.
   const shockMonths=Math.max(0,Math.round(COL_SHOCK_MONTHS*(1+(e.mods.colShock||0))));
-  if(shockMonths>0){pl.col.shock=(G.memAge||0)+shockMonths;pl.col.shockTot=shockMonths;}
+  if(shockMonths>0){col.shock=(G.memAge||0)+shockMonths;col.shockTot=shockMonths;}
+  return col;
+}
+
+function doColonize(e, sys, pl){
+  territoryOwnerSet(pl, e.id);
+  pl.col = initialColony(e, pl);
   if (sys.owner < 0) territoryOwnerSet(sys, e.id);
   e.colonies.push({s:sys.id, p:pl.i});
   recalcMods(e);

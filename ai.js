@@ -273,6 +273,53 @@ function aiShipPurchaseSustainable(e,cls,plan=aiEconomyPlan(e),reserved={},defen
  }
  return true;
 }
+/* 96F.4: settlement is a new economy, not just a paid hull. Evaluate the
+   actual starter colony and administration/physiology on restored shadow
+   state. No future buildings, trade receipts or shock recovery are credited.
+   Already assigned settlers are included once; hull prices only at purchase. */
+function aiColonyForecast(e,sys,pl,{purchase=false,excludeFleet=null}={}){
+ const plan=aiEconomyPlan(e),targets=new Map();
+ for(const f of G.fleets)if(f.e===e.id&&f!==excludeFleet&&f.ships.some(sh=>sh.c==='kol')&&f.ord?.t==='kol'){
+  const s=G.sys[f.ord.s],p=s?.planets[f.ord.p];
+  if(p&&p.owner<0&&s.surv.includes(e.id))targets.set(s.id+':'+p.i,{s,p});
+ }
+ if(!pl||!sys?.surv.includes(e.id)||pl.owner>=0)return {ok:false,reason:'unknown-or-occupied',rows:{}};
+ targets.set(sys.id+':'+pl.i,{s:sys,p:pl});
+ const shadow={...e,colonies:e.colonies.slice(),_trCache:null,_trAt:-1},old=empireIncome({...e},false),restore=[];
+ let next;
+ try{
+  for(const {s,p}of targets.values()){
+   restore.push({s,index:p.i,planet:s.planets[p.i]});s.planets[p.i]={...p,col:initialColony(e,p),owner:e.id};shadow.colonies.push({s:s.id,p:p.i});
+  }
+  recalcMods(shadow);next=empireIncome(shadow,false);
+ }finally{for(const {s,index,planet}of restore)s.planets[index]=planet;}
+ const strategic=e.aiStrategy?.plan?.target===sys.id&&aiObservedThreat(e,sys.id)>0;
+ const horizon=strategic?3:6+Math.ceil(buildDays(e,'santral')/30),cost=purchase?shipCost(e,'kol'):{},rows={};let reason=null;
+ for(const r of ['ene','min','yiy','tuk','ala']){
+  const row=plan.rows[r],delta=next[r]-old[r],net=Math.min(e.inc[r]||0,row.net)+delta;
+  // Fund the ordinary six-month runway plus the real power plant build
+  // delay. Existing commitments were already removed by aiEconomyPlan.
+  const cash=row.stock-(cost[r]||0),reserve=net<0?-net*horizon:0;
+  rows[r]={delta,net,cash,reserve};
+  if(net<0&&cash<reserve&&!reason)reason=r;
+ }
+ return {ok:!reason,reason:reason||'sustainable',rows,horizon,strategic,colonies:targets.size};
+}
+function aiColonyReady(e,sys,pl,options){
+ const forecast=aiColonyForecast(e,sys,pl,options);
+ if(!forecast.ok)AIDiagnostics.note('colony:wait-'+forecast.reason,e,null,JSON.stringify(forecast.rows[forecast.reason]||{}));
+ else if(forecast.strategic)AIDiagnostics.note('colony:strategic-risk',e,null,'Observed strategic target; three-month funded bridge');
+ return forecast.ok;
+}
+/* Preparation is derived again from today's cash and queues. It creates
+   only an ordinary paid producer order and expires naturally as net improves. */
+function aiColonyPreparation(e,sys,pl){
+ const target=colonizeTargets(e)[0];if(!target)return null;
+ const forecast=aiColonyForecast(e,G.sys[target.s],G.sys[target.s].planets[target.p],{purchase:true});
+ if(forecast.ok||forecast.reason!=='ene'||!forecast.rows.ene||forecast.rows.ene.net>=0)return null;
+ return ['santral','liman','kuyu'].find(key=>BUILDINGS[key]&&(pl.col.b[key]||0)+colonyQueuedOf(pl.col,key)<BUILDINGS[key].max&&aiBuildingDelta(e,sys,pl,key).ene>0&&aiBuildingSustainable(e,sys,pl,key))||null;
+}
+
 /* A critical producer must not be perpetually undercut by cheaper growth
    purchases. This is a derived reservation, not money or a persistent plan.
    Only current positive income may fund a short (at most three month) wait. */
@@ -296,6 +343,7 @@ function aiEconomicOrder(e,sys,pl,legacy){
  const plan=aiEconomyPlan(e),resourceBuilding={ene:'santral',min:'maden',yiy:'ciftlik',ala:'dokum',tuk:'fabrika'};
  const ranked=Object.keys(resourceBuilding).filter(r=>{const row=plan.rows[r];return row.net<0&&row.months<12||row.stock<Math.max(120,row.reserve)&&row.urgency>12;}).sort((a,b)=>plan.rows[b].urgency-plan.rows[a].urgency||a.localeCompare(b));
  const urgent=ranked.map(r=>resourceBuilding[r]);
+ const preparation=!plan.critical&&aiColonyPreparation(e,sys,pl);if(preparation)urgent.push(preparation);
  const saving=aiRecoveryInvestment(e,plan);
  if(saving){AIDiagnostics.note('recovery:save-for-producer',e,null,saving.key+'; '+saving.months.toFixed(2)+' months from own income');return [saving.key];}
  // A first port supplies energy/Etki and enables paid freight without extra upkeep.
@@ -1283,7 +1331,7 @@ function aiShipProduction(e,my,prof){
  }
  const count=c=>(inv.counts[c]||0)+(inv.pending[c]||0);
  const targets=colonizeTargets(e),wantCol=Math.min(e.colonies.length<6?3:2,targets.length);
- if(count('kol')<wantCol)buy('kol');
+ if(count('kol')<wantCol&&targets.slice(0,5).some(t=>aiColonyReady(e,G.sys[t.s],G.sys[t.s].planets[t.p],{purchase:true})))buy('kol');
  const unexplored=G.sys.some(s=>!s.surv.includes(e.id));
  if(count('bil')<2&&unexplored){
   if(G.day>=state.nextScience){const lostAll=count('bil')===0&&state.scienceIssued;if(buy('bil')){state.scienceLossStreak=lostAll?Math.min(2,state.scienceLossStreak+1):state.scienceLossStreak;state.scienceIssued=true;state.nextScience=G.day+120*(1+state.scienceLossStreak);}}
@@ -1529,6 +1577,7 @@ function aiTurn(e){
       // ulaşılamayan hedefi atla, sıradakini dene
       let placed = false;
       for (const t of free.slice(0, 5)){
+        if(!aiColonyReady(e,G.sys[t.s],G.sys[t.s].planets[t.p],{excludeFleet:f}))continue;
         if (aiMove(e,f,t.s)){
           taken.add(t.s+':'+t.p);
           f.ord = {t:'kol', s:t.s, p:t.p};

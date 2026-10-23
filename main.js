@@ -4150,6 +4150,7 @@ function arrive(f, sys){
   if (f.ord && f.ord.t === 'kol' && f.ord.s === sys.id){
     const pl = sys.planets[f.ord.p];
     if (pl && canColonize(e, sys, pl)){
+      if(e.ai&&!aiColonyReady(e,sys,pl,{excludeFleet:f}))return;
       doColonize(e, sys, pl);
       delete pl.colonyClaim;                    // FAZ 76: kilit çözüldü
       /* FAZ 77E: yalnız BİR koloni gemisi harcanır (bkz. ui.js) */
@@ -8272,7 +8273,7 @@ function forceRedraw(sebep){
    Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
    Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
 /* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */
-const BUILD_ID = '96f3';
+const BUILD_ID = '96f4';
 const DIAG_MAX = 40;
 const DIAG = [];
 function logDiag(tur, mesaj){

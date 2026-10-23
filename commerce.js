@@ -17,9 +17,10 @@ const Commerce={
  // Each autonomous sender assesses its own known hazards. No partner's
  // private fleets/treasury are consulted and unknown pirates remain a risk.
  aiHazards(e){
+  const cached=this._aiHazardScope?.get(e.id);if(cached)return cached;
   const view=aiView(e),risk=new Set(view.ctx.pirates);
   for(const f of G.fleets){const at=f.mv?f.mv.to:f.sys;if(f.e!==e.id&&f.ships.length&&isArmed(f)&&hostile(e.id,f.e)&&view.ctx.visible.has(at))risk.add(at);}
-  return risk;
+  this._aiHazardScope?.set(e.id,risk);return risk;
  },
  route(a,b,source,target,{inFlight=false,avoidObserved=false}={}){
   if(!G.sys[source]||!G.sys[target]||source===target)return null;
@@ -41,7 +42,7 @@ const Commerce={
   if(G.sys[it.source].cr>0||G.sys[it.target].cr>0)return 'Ticaret limanı aktif çatışma / abluka altında';
   if(!Number.isInteger(it.every)||it.every<30||it.every>180||!Number.isInteger(it.months)||it.months<3||it.months>120)return 'Sıklık 30–180 gün, süre 3–120 ay olmalı';
   if(it.v>routeVolume(a,it.source,it.target))return 'Sefer miktarı yol kapasitesini aşıyor';
-  if(!this.route(a,b,it.source,it.target))return 'En çok 3 sıçramalık bilinen açık rota yok / rota yağmalandı';
+  if(!this.aiQuoteRoute(a,b,it.source,it.target))return 'En çok 3 sıçramalık bilinen açık rota yok / rota yağmalandı';
   if(stock&&(!Number.isFinite(a.res[it.r])||a.res[it.r]<it.v))return 'İlk sefer için depoda yeterli '+RES[it.r].n+' yok';return null;
  },
  signature(n){return JSON.stringify([n.from,n.to,n.give,n.want]);},
@@ -160,6 +161,12 @@ const Commerce={
     Exact signature includes world identity, lanes/owners/knowledge, all wars and
     raid deadlines. Ports/pacts/embargo/stock gates are always evaluated live. */
  aiRouteSignature(){return JSON.stringify([G.sys.map(s=>[s.id,s.owner,s.lanes,s.seen,s.cr]),G.emps.map(e=>[e.id,e.dead,e.war]),G.p?G.sys.map(s=>this.known(G.p,s)):[],Object.entries(G.raids||{}).map(([k,until])=>[k,until>G.day])]);},
+ aiQuoteRoute(a,b,source,target){
+  const scope=this._aiRouteScope;if(!scope)return this.route(a,b,source,target);
+  const key=['quote',a.id,b.id,source,target].join(':');
+  if(scope.paths.has(key))return scope.paths.get(key)?.slice()||null;
+  const path=this.route(a,b,source,target);if(scope.paths.size>=2048)scope.paths.clear();scope.paths.set(key,path?.slice()||null);return path;
+ },
  aiPortRoute(a,b,source,target){
   const scope=this._aiRouteScope;if(!scope)return this.route(a,b,source,target,{avoidObserved:true});
   const key=[a.id,b.id,source,target,...[...this.aiHazards(a)].sort((x,y)=>x-y)].join(':');
@@ -169,38 +176,64 @@ const Commerce={
  aiPorts(a,b,budget){
   let best=null;
   const pairs=tradeHubs(a).flatMap(source=>tradeHubs(b).map(target=>({source,target,d:dist(G.sys[source],G.sys[target])}))).sort((x,y)=>x.d-y.d||x.source-y.source||x.target-y.target);
-  const start=(Math.floor(G.day/30)+a.id+b.id)%Math.max(1,pairs.length);
-  for(let i=0;i<Math.min(3,pairs.length);i++){const {source,target}=pairs[(start+i)%pairs.length];
-   if(budget.routes<=0)return best;budget.routes--;
+  // Inspect every pair for ordinary small networks. For large networks keep
+  // the closest half and rotate the rest; never claim an untested path failed.
+  const limit=Math.min(12,pairs.length),near=Math.min(6,limit),tail=pairs.slice(near),offset=(Math.floor(G.day/30)+a.id+b.id)%Math.max(1,tail.length);
+  const candidates=pairs.slice(0,near).concat(Array.from({length:limit-near},(_,i)=>tail[(offset+i)%tail.length]));
+  const scan={total:pairs.length,tried:0,exhausted:false,limited:false};budget.lastScan=scan;
+  const hazards=this.aiHazards(a);
+  for(const {source,target} of candidates){
+   if(budget.routes<=0){scan.exhausted=true;break;}budget.routes--;scan.tried++;
+   if(G.sys[source].cr>0||G.sys[target].cr>0)continue;
    const path=this.aiPortRoute(a,b,source,target);if(!path)continue;
-   // Only the actor's observed pirate/hostile locations can inform risk selection.
-   const view=aiView(a);if(path.some(id=>view.ctx.pirates.has(id)||aiObservedThreat(a,id,false)>0))continue;
+   if(path.some(id=>hazards.has(id)))continue;
    const distance=path.slice(1).reduce((n,id,i)=>n+dist(G.sys[path[i]],G.sys[id]),0);
    if(!best||distance<best.distance)best={source,target,distance};
-  }return best;
+  }
+  scan.limited=scan.tried<scan.total;
+  return best;
  },
  aiValue(e,n){return evalOffer({...e},n);},
  aiTerms(a,b,A,B,ports){
-  let best=null;
-  const exports=this.resources.filter(r=>A[r].export>=1).sort((x,y)=>A[y].export-A[x].export).slice(0,3);
-  const imports=this.resources.filter(r=>B[r].export>=1).sort((x,y)=>A[y].need-A[x].need).slice(0,3);
+  let best=null;const scan={pairs:0,ratios:0,amounts:0};this._aiTermsScan=scan;
+  const exports=this.resources.filter(r=>A[r].export>=1).sort((x,y)=>B[y].need-B[x].need||A[y].export-A[x].export);
+  const imports=this.resources.filter(r=>B[r].export>=1).sort((x,y)=>A[y].need-A[x].need||B[y].export-B[x].export);
+  const valuation=new Map(),cap=Math.min(routeVolume(a,ports.source,ports.target),routeVolume(b,ports.target,ports.source));
+  // Freight value is linear in quantity. Reuse canonical one-unit evaluations
+  // for each resource/direction/period inside this one decision only. All
+  // politics, memory, envoy and strategic multipliers still come from aiValue.
+  const units=every=>{
+   if(valuation.has(every))return valuation.get(every);
+   const buyer={},seller={};let hardLock=false;
+   for(let i=0;i<this.resources.length;i++){
+    const r=this.resources[i],q=this.resources[(i+1)%this.resources.length];
+    const n={from:a.id,to:b.id,give:[{t:'freight',r,v:1,source:ports.source,target:ports.target,every,months:12}],want:[{t:'freight',r:q,v:1,source:ports.target,target:ports.source,every,months:12}]};
+    const B=this.aiValue(b,n),A=this.aiValue(a,{from:b.id,to:a.id,give:n.want,want:n.give});hardLock=hardLock||B.hardLock||A.hardLock;
+    (buyer[r]||(buyer[r]={})).gain=B.gain;(buyer[q]||(buyer[q]={})).cost=B.cost;
+    (seller[q]||(seller[q]={})).gain=A.gain;(seller[r]||(seller[r]={})).cost=A.cost;
+   }
+   const row={buyer,seller,hardLock};valuation.set(every,row);return row;
+  };
   for(const r of exports)for(const q of imports){
    if(r===q||A[q].need<=0&&B[r].need<=0)continue;
+   scan.pairs++;
    const travel=ports.distance??dist(G.sys[ports.source],G.sys[ports.target]),period=Math.min(180,Math.max(30,Math.ceil((travel/this.speed+this.prepareDays*2)/30)*30));
    for(const every of [...new Set([period,Math.min(180,period*2)])]){
-    const cap=Math.min(routeVolume(a,ports.source,ports.target),routeVolume(b,ports.target,ports.source));
     const make=(v,w)=>({from:a.id,to:b.id,give:[{t:'freight',r,v,source:ports.source,target:ports.target,every,months:12}],want:[{t:'freight',r:q,v:w,source:ports.target,target:ports.source,every,months:12}]});
-    const unit=make(1,1),buyer=this.aiValue(b,unit),seller=this.aiValue(a,{from:b.id,to:a.id,give:unit.want,want:unit.give});
+    const values=units(every),buyer={gain:values.buyer[r].gain,cost:values.buyer[q].cost,hardLock:values.hardLock},seller={gain:values.seller[q].gain,cost:values.seller[r].cost,hardLock:values.hardLock};
     if(buyer.hardLock||seller.hardLock||buyer.cost<=0||seller.gain<=0)continue;
-    const low=seller.cost/seller.gain*1.04,high=buyer.gain/buyer.cost*.96;if(low>=high)continue;
+    const low=seller.cost/seller.gain*1.04,high=buyer.gain/buyer.cost*.96;if(low>=high)continue;scan.ratios++;
     const ratio=Math.sqrt(low*high),maxA=Math.min(16,cap,A[r].export*every/30,A[r].stock-A[r].reserve),maxB=Math.min(16,cap,B[q].export*every/30,B[q].stock-B[q].reserve);
-    const amount=Math.floor(Math.min(maxA,maxB/ratio)*10)/10,payment=Math.floor(amount*ratio*10)/10;if(amount<1||payment<1)continue;
-    const n=make(amount,payment),receiver=this.aiValue(b,n),owner=this.aiValue(a,{from:b.id,to:a.id,give:n.want,want:n.give});
-    if(receiver.net<=0||owner.net<=0)continue;
+    const amount=Math.floor(Math.min(maxA,maxB/ratio)*10)/10,payment=Math.floor(amount*ratio*10)/10;if(amount<1||payment<1)continue;scan.amounts++;
+    const n=make(amount,payment);
+    if(buyer.gain*amount-buyer.cost*payment<=0||seller.gain*payment-seller.cost*amount<=0)continue;
     const score=(Math.min(amount,B[r].need*every/30)+Math.min(payment,A[q].need*every/30))*30/every;
     if(!best||score>best.score)best={n,score};
    }
-  }return best?.n||null;
+  }
+  if(!best)return null;
+  const n=best.n,receiver=this.aiValue(b,n),owner=this.aiValue(a,{from:b.id,to:a.id,give:n.want,want:n.give});
+  return receiver.net>0&&owner.net>0?n:null;
  },
  aiPlayerTerms(a,A,ports){
   // No reading player stocks/net to infer a hidden need. The player alone decides.
@@ -213,8 +246,8 @@ const Commerce={
  aiTick(){
   const signature=this.aiRouteSignature(),old=this._aiRouteMemo;
   if(!old||old.world!==G.sys||old.signature!==signature)this._aiRouteMemo={world:G.sys,signature,paths:new Map()};
-  this._aiRouteScope=this._aiRouteMemo;
-  try{return this.aiOpportunityTick();}finally{this._aiRouteScope=null;}
+  this._aiRouteScope=this._aiRouteMemo;this._aiHazardScope=new Map();
+  try{return this.aiOpportunityTick();}finally{this._aiRouteScope=null;this._aiHazardScope=null;}
  },
  aiOpportunityTick(){
   const st=this.state(),month=Math.floor(G.day/30),budget={routes:96};let created=0;
@@ -238,10 +271,10 @@ const Commerce={
     if(!tradeHubs(a).length||!tradeHubs(b).length){note('trade-no-port');continue;}
     const A=balances.get(a.id),B=balances.get(b.id);
     if(b.id!==0&&!this.resources.some(r=>A[r].export>=1&&B[r].need>0||B[r].export>=1&&A[r].need>0)){note('trade-no-supply-demand');continue;}
-    const ports=this.aiPorts(a,b,budget);if(!ports){note(budget.routes<=0?'trade-route-budget':'trade-no-safe-route');continue;}
+    const ports=this.aiPorts(a,b,budget);if(!ports){note(budget.lastScan?.exhausted?'trade-route-budget':budget.lastScan?.limited?'trade-route-not-exhausted':'trade-no-safe-route',JSON.stringify(budget.lastScan));continue;}
     const n=b.id===0?this.aiPlayerTerms(a,A,ports):this.aiTerms(a,b,A,B,ports);
     const cool=(reason,days=120)=>{(a.aiTalk||(a.aiTalk={}))['commerce:'+b.id]={until:G.day+days,reason};note(reason);};
-    if(!n){cool('trade-no-fair-ratio',60);continue;}
+    if(!n){const scan=b.id===0?null:this._aiTermsScan;cool(b.id===0?'trade-player-no-supply':!scan?.pairs?'trade-no-barter-candidates':!scan.ratios?'trade-no-fair-ratio':!scan.amounts?'trade-volume-below-minimum':'trade-no-positive-value',60);continue;}
     if(political){
      if(!canPact(a,b)){cool('trade-pact-unavailable');continue;}
      const terms=aiProposeTerms(a,b,'pact');
