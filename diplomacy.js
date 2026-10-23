@@ -2048,27 +2048,33 @@ const DEAL_TX_ROOTS = ['emps','p','sys','fleets','feds','council',
   'commerce','news','diplomaticInbox','construction','_95eFaults','fallStats','sabStats','log','inbox','inboxUid','warLedger','settlements','jointOps','_structAt','_structIdx'];
 const DEAL_TX_AUTH = ['_dealAuth','_warAuth','_warWhy','_sideBuf'];
 let _dealTxActive = false;
+/* 96F.5: keep the complete reversible graph, but enumerate each object's
+   keys once. Store descriptors in parallel arrays instead of allocating a
+   second keyed object and enumerating it again. Only objects enter the work
+   list; primitive values are already retained in their descriptors. No
+   cross-transaction cache, getter execution or narrower rollback boundary. */
 function txCaptureGraph(values, opaque){
   const seen = new Set(), records = [], pending = values.slice();
+  const enqueue = value => { if (value && typeof value === 'object') pending.push(value); };
   while (pending.length){
     const obj = pending.pop();
     if (!obj || typeof obj !== 'object' || seen.has(obj) || (opaque && opaque.has(obj))) continue;
     seen.add(obj);
-    const props = Object.getOwnPropertyDescriptors(obj);
-    const rec = {obj, props, proto:Object.getPrototypeOf(obj)};
+    const keys = Reflect.ownKeys(obj), props = [];
+    const rec = {obj, keys, props, proto:Object.getPrototypeOf(obj)};
     if (obj instanceof Map){
       rec.map = Array.from(obj.entries());
-      for (const [k,v] of rec.map) pending.push(k,v);
+      for (const [k,v] of rec.map){ enqueue(k); enqueue(v); }
     } else if (obj instanceof Set){
-      rec.set = Array.from(obj.values()); pending.push(...rec.set);
+      rec.set = Array.from(obj.values()); for (const v of rec.set) enqueue(v);
     } else if (obj instanceof Date) rec.date = obj.getTime();
     else if (obj instanceof ArrayBuffer) rec.bytes = new Uint8Array(obj).slice();
-    else if (ArrayBuffer.isView(obj)) pending.push(obj.buffer);
+    else if (ArrayBuffer.isView(obj)) enqueue(obj.buffer);
     else if (obj instanceof WeakMap || obj instanceof WeakSet)
       throw new Error('İşlem kökünde desteklenmeyen zayıf koleksiyon');
-    for (const k of Reflect.ownKeys(props)){
-      const d = props[k];
-      if ('value' in d) pending.push(d.value); // getter çalıştırılmaz
+    for (const k of keys){
+      const d = Object.getOwnPropertyDescriptor(obj,k); props.push(d);
+      if ('value' in d) enqueue(d.value); // getter çalıştırılmaz
     }
     records.push(rec);
   }
@@ -2076,21 +2082,21 @@ function txCaptureGraph(values, opaque){
 }
 function txRestoreGraph(records){
   for (const rec of records){
-    const obj = rec.obj, props = rec.props;
+    const obj = rec.obj, keys = rec.keys, props = rec.props;
     if (rec.map){ obj.clear(); for (const [k,v] of rec.map) obj.set(k,v); }
     if (rec.set){ obj.clear(); for (const v of rec.set) obj.add(v); }
     if ('date' in rec) obj.setTime(rec.date);
     if (rec.bytes) new Uint8Array(obj).set(rec.bytes);
     if (Object.getPrototypeOf(obj) !== rec.proto) Object.setPrototypeOf(obj,rec.proto);
-    for (const k of Reflect.ownKeys(obj)){
-      if (!Object.prototype.hasOwnProperty.call(props,k)) delete obj[k];
-    }
+    const oldKeys = new Set(keys);
+    for (const k of Reflect.ownKeys(obj)) if (!oldKeys.has(k)) delete obj[k];
     // Dizi uzunluğu en son: eski üyeler aynı nesnelerle ve sırayla bağlanır.
-    for (const k of Reflect.ownKeys(props)){
-      if (Array.isArray(obj) && k === 'length') continue;
-      Object.defineProperty(obj,k,props[k]);
+    let length = null;
+    for (let i=0;i<keys.length;i++){
+      if (Array.isArray(obj) && keys[i] === 'length'){ length=props[i]; continue; }
+      Object.defineProperty(obj,keys[i],props[i]);
     }
-    if (Array.isArray(obj)) Object.defineProperty(obj,'length',props.length);
+    if (length) Object.defineProperty(obj,'length',length);
   }
 }
 function dealTxBegin(){

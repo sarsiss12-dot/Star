@@ -1,22 +1,30 @@
 {
-  "phase": "96F.4",
-  "game_build": "96f4",
+  "phase": "96F.5",
+  "game_build": "96f5",
   "save_version": 8,
-  "pwa_cache": "stars-v96f4",
-  "scope": "github-runtime-and-phase96f4-changes",
-  "scope_note": "Only the five changed runtime files are covered. Historical remote files are preserved. Full tests, reports and evidence are in the delivery ZIP. This is not the full ZIP manifest.",
-  "canonical_parent_zip": "stars-faz96f3.zip",
-  "canonical_parent_zip_sha256": "70988876671e01e6879a725589de16afe9291701d6cd9ec47cdb5398fc17a4ea",
-  "parent_head": "fb7454acb48620a0c79c31bfc1ce3b1639504b10",
-  "canonical_parent_commit": "592d806ca90c6ed93f06b5e259cc9efc2bec7a6b",
-  "tests": {
-    "unitSuites": 123,
-    "unitPass": 5834,
-    "unitFail": 0,
-    "browserPass": 25,
-    "browserFail": 0,
-    "browserPageErrors": [],
-    "campaignSeeds": [
+  "pwa_cache": "stars-v96f5",
+  "parent_commit": "4f280b3bf548501f8c7ea8c159ac6449e8b09f05",
+  "canonical_parent_zip": "stars-faz96f4.zip",
+  "canonical_parent_zip_sha256": "30cff5cbe451c6e9a2e687a2ee17cc52e837c8140eba3bd0247821e83297fe0d",
+  "scope": "github-runtime-delta",
+  "scope_note": "This manifest covers only changed runtime files in this commit; it is NOT the complete delivery ZIP manifest. Historical repository files are preserved. Full tests, campaign evidence and full manifest are delivered in stars-faz96f5.zip.",
+  "files": {
+    "diplomacy.js": "5bfdeca41b807189c29e645cc6099bb067079e6c9170ca9fd49a7727c7fcafa2",
+    "main.js": "9771a8242fecad354360be97778fa23411d6330cc5584fa6aea961a0f5b24b10",
+    "sw.js": "5edd9bac9f4015e0dbdcc8062c186159b83439378cb8af44c249f3d585f4bdc9"
+  },
+  "preserved_runtime": {
+    "ai.js": "cc84720363b1df9c4525ee97c23df29d876fcd60ec3a263655734caa2a86b83f",
+    "commerce.js": "978e4f6b01faed1babeade20070447cbcfaa4e2ea70793a78e50f20fbe66be01",
+    "economy.js": "ed2eb108b3c094444f49700e61ab48dfbb968c9bc7f135dcf11a7335c62fd095"
+  },
+  "validation": {
+    "automatic_suites": 124,
+    "automatic_pass": 5836,
+    "automatic_fail": 0,
+    "chromium_pass": 25,
+    "chromium_fail": 0,
+    "matched_120_month_seeds": [
       11,
       99,
       404,
@@ -26,32 +34,12 @@
       123,
       2026
     ],
-    "campaignMonths": 120,
-    "reloadMonth": 60,
-    "finalSourceDeterministicRepeats": 8,
-    "physicalAndroid": "NOT RUN"
-  },
-  "balance": {
-    "deliveries": [
-      433,
-      537
+    "exact_campaign_equality_to_96f4": true,
+    "matched_240_month_seeds": [
+      11,
+      2026
     ],
-    "criticalEmpireMonths": [
-      22,
-      4
-    ],
-    "knownRegressions": [
-      "seed11 deliveries 94 to 83 and technologies 34 to 29; critical 3 to 0 and alive AI 5 to 5",
-      "seed99 deliveries 36 to 34",
-      "seed2026 deliveries 34 to 0; all known port pairs searched, changed world and diplomatic conditions",
-      "heavy 4x CPU mobile Chromium commerce pass median 121.6ms; real atomic contract transaction cost remains high"
-    ]
-  },
-  "files": {
-    "ai.js": "cc84720363b1df9c4525ee97c23df29d876fcd60ec3a263655734caa2a86b83f",
-    "commerce.js": "978e4f6b01faed1babeade20070447cbcfaa4e2ea70793a78e50f20fbe66be01",
-    "economy.js": "ed2eb108b3c094444f49700e61ab48dfbb968c9bc7f135dcf11a7335c62fd095",
-    "main.js": "6ec06166933f4e2103bf72c342094d2875c597ca82c05e07543ad09b3a808455",
-    "sw.js": "3f0ba457fe0089564822e743c1ca0b57b8ff128ffccd8fb03952551549678ac0"
+    "save_version": 8,
+    "physical_android": "NOT RUN"
   }
 }
