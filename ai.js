@@ -4581,10 +4581,54 @@ function aiFedHelp(e,other,warTarget=false){
  for(const target of targets)for(const f of forces){const r=aiKnownRoute(e,f,f.mv?f.mv.to:f.sys,target.id,e,warTarget?other.id:null);if(r&&r.eta<=180)return {ok:true,eta:r.eta};}
  return null;
 }
-function aiFedAdmissionScore(e,other,type){
+/* 96G: candidate estimates use only the actor's observed/remembered map
+   and bilateral contracts. Member mandates are explicitly shared political
+   data, not a grant of hidden fleet, treasury or planetary intelligence. */
+function aiFedKnownMandate(e,o,f=null){
+ if(e===o)return fedSelfMandate(e);
+ if(f?.members.includes(e.id)&&f.members.includes(o.id)&&f.representation?.by[o.id])return f.representation.by[o.id];
+ const view=aiView(e),footprint=Object.values(view.systems).filter(r=>r.owner===o.id);
+ const visible=G.fleets.filter(fl=>fl.e===o.id&&isArmed(fl)&&view.ctx.visible.has(fl.mv?fl.mv.to:fl.sys)).reduce((n,fl)=>n+fleetPower(fl),0);
+ const memory=e.aiIntel?.powers?.[o.id],remembered=memory&&G.day-memory.day<=720?memory.value:0;
+ const bilateral=Commerce.state().contracts.filter(c=>!Commerce.closed(c)&&[c.a,c.b].includes(e.id)&&[c.a,c.b].includes(o.id)).length;
+ return {military:Math.sqrt(Math.max(visible,remembered,100+footprint.length*120)+25),economic:Math.sqrt(1+footprint.reduce((n,r)=>n+Math.max(1,r.colonies||0)*12,0)+bilateral*10)};
+}
+function aiFedRegimeScore(e,mode,ids,f=null){
+ const members=[...new Set(ids)].filter(id=>G.emps[id]&&!G.emps[id].dead),ratings=Object.fromEntries(members.map(id=>[id,aiFedKnownMandate(e,G.emps[id],f)]));
+ const weights=fedWeightsFrom(members,mode,ratings),total=Object.values(weights).reduce((a,b)=>a+b,0)||1;
+ const share=(weights[e.id]||1)/total,equal=1/Math.max(1,members.length),p=aiProfile({...e}),goal=e.aiStrategy?.objective?.kind;
+ const interest=clamp((share/equal-1)*.7,-.28,.28);
+ const personality=mode==='hegemonic'?(p.war-.5)*.14+(e.ethics?.aut||0)*.02:mode==='economic'?(p.eco-.5)*.14:mode==='mixed'?(p.dip-.4)*.08:-(e.ethics?.aut||0)*.015;
+ const strategy=mode==='hegemonic'&&['regional','contain'].includes(goal)?.05:mode==='economic'&&['economy','trade'].includes(goal)?.05:mode==='mixed'&&['science','federation'].includes(goal)?.05:0;
+ return {score:clamp(.55+interest+personality+strategy,.05,.95),share,why:FED_BALLOTS[mode].n+' · tahmini oy payı %'+(share*100).toFixed(1)+' · çıkar '+interest.toFixed(2)+' · kişilik '+personality.toFixed(2)+' · hedef '+strategy.toFixed(2)};
+}
+function aiFedBallot(e,ids){return ['equal','hegemonic','economic','mixed'].sort((a,b)=>aiFedRegimeScore(e,b,ids).score-aiFedRegimeScore(e,a,ids).score||a.localeCompare(b))[0];}
+function aiFedVoteAssessment(e,f,v){
+ const factors=[],add=(n,value)=>{factors.push({n,v:value});return value;};let score;
+ if(v.kind==='motion'){
+  score=aiFedVoteWant(e,f,v);add('Gündem çıkarı',score-.5);
+  if(v.motion==='admit'){const q=aiFedAdmissionScore(e,G.emps[v.target],f.type,f);return {...q,score,why:q.why};}
+  if(v.motion==='charter'&&v.field==='ballot')factors.push({n:aiFedRegimeScore(e,v.value,f.members,f).why,v:0});
+ }else if(v.kind==='war'){
+  const target=G.emps[v.target];if(!target||!e.contact[target.id]||e.ally[target.id])return {score:0,factors:[],why:'Bilinen yasal dış hedef yok veya müttefik'};
+  score=aiFedVoteWant(e,f,{...v,motion:'newWar'});add('Bilinen tehdit, erişim ve savaş bütçesi',score-.5);
+ }else{
+  const p=aiProfile({...e}),proposer=G.emps[v.proposer],rel=proposer?(e.rel[proposer.id]||0):0,goal=e.aiStrategy?.objective?.kind;
+  const bias=FED_INNER_LAWS[v.law]?.ai||({savunma:'war',arastirma:'sci',ticaret:'eco',filo:'war'})[v.law]||'dip';
+  score=.45+add('Kişilik ve yasa yararı',(p[bias]||.5)*.3)+add('Önerene güven',proposer?clamp(trustOf(e,proposer.id)/500,-.15,.15)+clamp(rel/600,-.15,.15):0)+add('Birlik uyumu',(fedCohesion(f)-50)/500);
+  const costly=['ortakDon','ortakDoktrin','ikmalStandardi','filo','uyumProgrami'].includes(v.law);
+  score+=add('Gerçek ekonomik hazırlık',costly&&aiEconomyPlan(e).critical?-.3:0);
+  score+=add('Uzun vadeli hedef',bias==='sci'&&goal==='science'||bias==='eco'&&['economy','trade','recovery'].includes(goal)||bias==='war'&&['regional','security','contain'].includes(goal)||bias==='dip'&&['federation','influence'].includes(goal)?.08:0);
+  if(v.law==='savunma'&&!fedDuty(f,'defense')&&goal==='recovery')score+=add('Toparlanma planı: yeni otomatik savaş yükümlülüğü',-.35);
+  if(v.law==='savasOnay')score+=add('Saldırı özerkliği',.12-p.war*.18);
+  if(v.repeal)score=1-score;
+ }
+ const yes=score>=.5;return {score:clamp(score,0,1),factors,why:(yes?'Destek':'Ret')+' · '+factors.map(x=>x.n+(x.v?' '+(x.v>0?'+':'')+x.v.toFixed(2):'')).join(' · ')};
+}
+function aiFedAdmissionScore(e,other,type,f=null){
  if(!other||other.dead||!e.contact[other.id]||e.war[other.id]||other.war[e.id]||diploBlocked(e,other))return {ok:false,score:-10,why:'Temas, savaş veya doktrin engeli'};
  const factors=[],add=(n,v)=>{factors.push({n,v});return v;};
- const profile=aiProfile(e),et=e.ethics||{},ot=other.ethics||{};
+ const profile=aiProfile({...e}),et=e.ethics||{},ot=other.ethics||{};
  const distance=['mil','aut','mat','ahl'].reduce((sum,k)=>sum+Math.abs((et[k]||0)-(ot[k]||0)),0);
  const common=G.emps.filter(o=>o!==e&&o!==other&&!o.dead&&!o.wild&&e.contact[o.id]&&e.war[o.id]&&other.war[o.id]).length;
  const doctrine=researchDoctrine(e),same=doctrine===researchDoctrine(other);
@@ -4596,10 +4640,18 @@ function aiFedAdmissionScore(e,other,type){
   add('Ekonomik / bilimsel çıkar',type==='ticaret'?profile.eco*.12:type==='bilimsel'?profile.sci*.12:profile.war*.08)+
   add('Antlaşmalar',(e.ally[other.id]?.12:0)+(e.pact?.[other.id]?.08:0)+((e.nap?.[other.id]||0)>G.day?.03:0))+
   add('Bağımsızlık eğilimi',-clamp(.6-profile.dip,0,.6)*.15+(e.origin==='kapali'?-.18:e.origin==='golgeden'?-.08:e.origin==='gocebe'?-.05:0));
+ const known=aiFedKnownMandate(e,other),own=aiFedKnownMandate(e,e),goal=e.aiStrategy?.objective?.kind;
+ score+=add('Gözlenen askerî katkı',clamp((known.military/Math.max(1,own.military)-1)*.035,-.07,.09));
+ score+=add('Bilinen ekonomik bağlantı',clamp(known.economic/Math.max(1,own.economic)*.025,0,.07));
+ score+=add('Ticaret ve güvenilirlik',e.pact?.[other.id]?clamp(trustOf(e,other.id)/500,-.05,.06):0);
+ if(f&&f.members.includes(e.id)){
+  const mode=fedBallot(f),before=aiFedRegimeScore(e,mode,f.members,f).share,after=aiFedRegimeScore(e,mode,f.members.concat(other.id),f).share;
+  score+=add('Oy dengesi ve stratejik genişleme',clamp((after-before)*.15,-.06,0)+(['federation','influence','trade'].includes(goal)?.04:0));
+ }
  const ok=score>=.5,sorted=factors.slice().sort((a,b)=>ok?b.v-a.v:a.v-b.v).slice(0,3);
  return {ok,score,factors,why:(ok?'Olumlu':'Olumsuz')+': '+sorted.map(x=>x.n+' '+(x.v>=0?'+':'')+x.v.toFixed(2)).join(' · ')};
 }
-function aiFedWilling(e,founder,type,f=null){
+function aiFedWilling(e,founder,type,f=null,ballot=null,founders=null){
  if(!e||!founder||e.dead||e.wild||e.crisisSide||isPurifier(e)||isVassal(e)||!e.contact[founder.id]||e.war[founder.id]||(e._fedLeaveUntil||0)>G.day)return {ok:false,why:'Siyasi koşullar uygun değil'};
  const rel=e.rel[founder.id]||0;if(rel<15||trustOf(e,founder.id)<-35)return {ok:false,why:'Güven veya ilişki yetersiz'};
  let eta=Infinity;const home=G.sys[e.home];
@@ -4609,30 +4661,32 @@ function aiFedWilling(e,founder,type,f=null){
  if(eta>(type==='askeri'?180:360))return {ok:false,why:'Bilinen yardım/iş birliği rotası yetersiz'};
  // Protection uses 95A's observation/uncertainty estimate, never a private force total.
  const partners=f?f.members.filter(id=>e.contact[id]).map(id=>G.emps[id]):[founder];
- const protection=type==='askeri'?clamp(partners.reduce((sum,o)=>sum+aiKnownPower(e,o),0)/(totalPower(e)+100),0,2)*.08:0;
+ const protection=type==='askeri'?clamp(partners.reduce((sum,o)=>sum+aiKnownPower(e,o),0)/(totalPower({...e})+100),0,2)*.08:0;
  const assessment=aiFedAdmissionScore(e,founder,type);
  const peers=f?f.members.filter(id=>id!==founder.id&&e.contact[id]):[];
  const peerBias=peers.length?peers.reduce((sum,id)=>sum+clamp((e.rel[id]||0)/500,-.15,.15),0)/peers.length:0;
- const score=assessment.score+(aiFedAffinity(e,type)-.5)*.3+protection+peerBias-(f&&fedCohesion(f)<35?.4:0);
+ const regime=ballot||f&&fedBallot(f),regimeVote=regime?aiFedRegimeScore(e,regime,founders||[...(f?.members||[founder.id]),e.id],f):null;
+ const score=assessment.score+(regimeVote?(regimeVote.score-.55)*.7:0)+(aiFedAffinity(e,type)-.5)*.3+protection+peerBias-(f&&fedCohesion(f)<35?.4:0);
  return {ok:score>=.5,score,eta,why:score>=.5?'İlişki, çıkar ve bilinen erişim uygun · '+assessment.why:assessment.why+' · birlik uyumu / bilinen koruma '+(score-assessment.score).toFixed(2)};
 }
 function aiFedVoteWant(e,f,v){
  const proposer=G.emps[v.proposer],rel=proposer?(e.rel[proposer.id]||0):0;
  let want=.4+rel/300+(fedCohesion(f)-50)/250;
- if(v.motion==='admit')return aiFedAdmissionScore(e,G.emps[v.target],f.type).score;
+ if(v.motion==='admit')return aiFedAdmissionScore(e,G.emps[v.target],f.type,f).score;
  if(v.motion==='expel')return clamp(.3-(e.rel[v.target]||0)/120-trustOf(e,v.target)/200,.02,.95);
- if(v.motion==='elect')return clamp(.35+(e.rel[v.target]||0)/160+(v.target===e.id?.2:0),.02,.95);
+ if(v.motion==='elect'){const target=G.emps[v.target];return clamp(.35+(e.rel[v.target]||0)/160+trustOf(e,v.target)/500+(v.target===e.id?.2:0)+(target?clamp(aiFedKnownMandate(e,target,f).military/Math.max(1,aiFedKnownMandate(e,e,f).military)*.04,0,.12):0),.02,.95);}
  if(v.motion==='reform')want+=aiFedAffinity(e,v.type)-aiFedAffinity(e,f.type);
  if(v.motion==='charter'){
-  if(v.field==='offense'&&v.value==='auto')want+=aiProfile(e).war*.5-.5;
-  if(v.field==='defense'&&v.value==='auto')want+=aiProfile(e).war*.2+aiProfile(e).dip*.1;
-  if(v.field==='admission'&&v.value==='contact')want+=aiProfile(e).dip*.25;
+  if(v.field==='ballot')want+=(aiFedRegimeScore(e,v.value,f.members,f).score-aiFedRegimeScore(e,fedBallot(f),f.members,f).score)*1.5;
+  if(v.field==='offense'&&v.value==='auto')want+=aiProfile({...e}).war*.5-.5;
+  if(v.field==='defense'&&v.value==='auto')want+=aiProfile({...e}).war*.2+aiProfile({...e}).dip*.1;
+  if(v.field==='admission'&&v.value==='contact')want+=aiProfile({...e}).dip*.25;
  }
  if(v.motion==='joinWar'||v.motion==='newWar'){
   const target=G.emps[v.target];if(!target||!e.contact[target.id]||e.ally[target.id]||(e.nap?.[target.id]||0)>G.day)return .01;
   if(!e.war[target.id]&&(!fedSupportGate(e,target).ok||!aiFedHelp(e,target,true)))return .01;
-  const ratio=totalPower(e)/(aiKnownPower(e,target)+1);
-  want=.3+aiProfile(e).war*.35-(e.rel[target.id]||0)/250+((e.war[target.id]||aiObservedThreat(e,e.home)>0)?.25:0)-clamp(.8-ratio,0,.8)*.35;
+  const ratio=totalPower({...e})/(aiKnownPower(e,target)+1);
+  want=.3+aiProfile({...e}).war*.35-(e.rel[target.id]||0)/250+((e.war[target.id]||aiObservedThreat(e,e.home)>0)?.25:0)-clamp(.8-ratio,0,.8)*.35;
  }
  return clamp(want,.02,.95);
 }
@@ -4648,8 +4702,8 @@ function aiFederationPolitics(){
    if(invited)continue;
    const partner=G.emps.filter(o=>o!==e&&e.contact[o.id]&&findFed(o)&&canRequestFederation(e,o).ok&&aiFedWilling(e,o,findFed(o).type,findFed(o)).ok).sort((a,b)=>(e.rel[b.id]||0)-(e.rel[a.id]||0)||a.id-b.id)[0];
    if(partner){const result=requestFederation(e,partner);if(result.ok){e._fedPoliticsAfter=G.day+360;e.aiFedReason={day:G.day,kind:'apply',why:'Bilinen erişim, ilişki ve ortak çıkar'};}continue;}
-   const type=aiFedType(e),gate=canFoundFed(e,type);
-   if(gate.ok){const result=foundFederation(e,type);e.aiFedReason={day:G.day,kind:'found',type,why:'Kabul eden müttefikler, bilinen rota ve doktrin uyumu'};if(result.ok)e._fedPoliticsAfter=G.day+360;}
+   const type=aiFedType(e),ids=[e.id,...G.emps.filter(o=>o!==e&&e.contact[o.id]&&e.ally[o.id]&&!o.dead&&!o.wild&&!findFed(o)).map(o=>o.id)],ballot=aiFedBallot(e,ids),gate=canFoundFed(e,type,ballot);
+   if(gate.ok){const result=foundFederation(e,type,ballot);e.aiFedReason={day:G.day,kind:'found',type,ballot,why:'Kabul eden müttefikler, bilinen rota ve doktrin uyumu'};if(result.ok)e._fedPoliticsAfter=G.day+360;}
    continue;
   }
   for(const d of Object.values(f.decisions||{}))if(d.state==='ready'&&(d.by===e.id||f.leader===e.id))executeFedDecision(e,f.id,d.id);

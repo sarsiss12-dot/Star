@@ -31,7 +31,7 @@ const DiplomaticInbox = {
     if(!G.p)return;
     for(const f of G.feds||[]){
       const inv=f.invites?.[G.p.id];
-      if(inv&&inv.expires>G.day)this.source('invite','invite:'+f.id+':'+inv.expires,inv.by,f.id,String(inv.expires),inv.expires,'Federasyona katılım — '+f.name,fedType(f).n+' · '+fedType(f).d+' '+fedDutyText(f)+' Yasalar: '+(Object.keys(f.laws||{}).filter(k=>f.laws[k]).map(k=>(FED_LAWS[k]||FED_INNER_LAWS[k]||{}).n||k).join(', ')||'yok'));
+      if(inv&&inv.expires>G.day)this.source('invite','invite:'+f.id+':'+inv.expires,inv.by,f.id,String(inv.expires),inv.expires,'Federasyona katılım — '+f.name,fedType(f).n+' · '+fedType(f).d+' Oy rejimi: '+(FED_BALLOTS[fedBallot(f)]?.n||fedBallot(f))+'. '+fedDutyText(f)+' Yasalar: '+(Object.keys(f.laws||{}).filter(k=>f.laws[k]).map(k=>(FED_LAWS[k]||FED_INNER_LAWS[k]||{}).n||k).join(', ')||'yok'));
       if(f.vote&&fedVoteCounts(f).waiting.includes(G.p.id))this.capture({kind:'fedvote',data:f.id,born:f.vote.opened,title:'Federasyon oylaması — '+f.name,sub:fedVoteLaw(f.vote)?.n||'Karar'});
       for(const d of Object.values(f.decisions||{}))if(d.state==='ready'&&d.expires>G.day&&f.members.includes(G.p.id)&&(d.by===G.p.id||f.leader===G.p.id))this.source('decision','decision:'+f.id+':'+d.id,d.by,f.id,String(d.id),d.expires,'Ortak savaş kararı — '+f.name,'Hedef: '+(G.p.contact?.[d.target]?G.emps[d.target]?.name:'Bilinmeyen hedef')+' · '+d.kind);
     }
