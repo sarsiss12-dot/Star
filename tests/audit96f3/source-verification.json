@@ -1,0 +1,17 @@
+{
+  "canonical": {
+    "file": "stars-faz96f1.zip",
+    "sha256": "85f808ba8e87a1735285f867dba2a8cc88190b9325a7480492e2eb1d069266a1",
+    "crc": "PASS",
+    "manifestFiles": 3427,
+    "manifestHashes": "PASS"
+  },
+  "research": {
+    "file": "stars-faz96f2-arastirma.zip",
+    "sha256": "e18b05defcc5fea29b37769769cc5fa75b231ad8019e4adc09ec51ad98dd7d56",
+    "crc": "PASS",
+    "manifestFiles": 150,
+    "manifestHashes": "PASS"
+  },
+  "githubStart": "a26fed34f4366da419f1db6970a050472da19d68"
+}

@@ -1,0 +1,3260 @@
+[
+  {
+    "seed": 11,
+    "old": {
+      "phase": "96F1",
+      "seed": 11,
+      "contracts": 9,
+      "cancelled": 0,
+      "freightLost": 1,
+      "alive": 5,
+      "techs": 37,
+      "ships": 124,
+      "power": 15793,
+      "upkeep": 352.2751774761392,
+      "colonies": 12,
+      "deliveries": 101,
+      "pacts": 5,
+      "warsStarted": 1,
+      "peace": 1,
+      "objectiveChanges": 25,
+      "plansCompleted": 16,
+      "plansFailed": 3,
+      "criticalEmpireMonths": 11,
+      "invalidResources": [],
+      "elapsedMs": 13402
+    },
+    "next": {
+      "phase": "96F3",
+      "seed": 11,
+      "contracts": 8,
+      "cancelled": 0,
+      "freightLost": 0,
+      "alive": 5,
+      "techs": 34,
+      "ships": 75,
+      "power": 8299,
+      "upkeep": 186.49152071997224,
+      "colonies": 10,
+      "deliveries": 94,
+      "pacts": 5,
+      "warsStarted": 4,
+      "peace": 1,
+      "objectiveChanges": 30,
+      "plansCompleted": 17,
+      "plansFailed": 4,
+      "criticalEmpireMonths": 3,
+      "invalidResources": [],
+      "elapsedMs": 12879
+    },
+    "firstMonthlyResourceDifference": {
+      "month": 11,
+      "day": 330,
+      "actor": 1,
+      "before": {
+        "min": 62.60036345499998,
+        "ene": 357.3353201800001,
+        "yiy": 180,
+        "ala": 56.87305125,
+        "ara": 0,
+        "tuk": 267.79610440650004,
+        "etk": 198.52250000000004
+      },
+      "after": {
+        "min": 52.60036345499998,
+        "ene": 357.3353201800001,
+        "yiy": 180,
+        "ala": 56.87305125,
+        "ara": 0,
+        "tuk": 267.79610440650004,
+        "etk": 198.52250000000004
+      }
+    },
+    "critical": {
+      "old": {
+        "2:min": [
+          10,
+          11,
+          12
+        ],
+        "1:ala": [
+          33,
+          34,
+          35,
+          36,
+          37
+        ],
+        "1:min": [
+          85,
+          86,
+          87
+        ]
+      },
+      "next": {
+        "2:min": [
+          10,
+          11,
+          12
+        ]
+      }
+    },
+    "spending": {
+      "old": {
+        "queueShip": {
+          "orders": 295,
+          "paid": {
+            "min": 3005,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 10176,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        "queueBuilding": {
+          "orders": 116,
+          "paid": {
+            "min": 19062,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 348,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        }
+      },
+      "next": {
+        "queueShip": {
+          "orders": 292,
+          "paid": {
+            "min": 3303,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 9709,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        "queueBuilding": {
+          "orders": 123,
+          "paid": {
+            "min": 20578,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 917,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        }
+      }
+    },
+    "trade": [
+      {
+        "phase": "96F1",
+        "deliveriesByPair": {
+          "4-5": 93,
+          "2-4": 8
+        },
+        "losses": [
+          {
+            "day": 1210,
+            "kind": "freight-end",
+            "id": 15,
+            "e": 4,
+            "to": 5,
+            "contract": 2,
+            "status": "raided",
+            "reason": "Gerçek kargonun %40’ı ele geçirildi; kalanı imha edildi",
+            "loaded": 16,
+            "delivered": 0,
+            "lost": 16,
+            "route": [
+              37,
+              8,
+              25
+            ]
+          }
+        ],
+        "contractTimeline": [
+          {
+            "day": 780,
+            "pair": [
+              4,
+              5
+            ],
+            "every": 60,
+            "status": "expired"
+          },
+          {
+            "day": 1140,
+            "pair": [
+              4,
+              5
+            ],
+            "every": 60,
+            "status": "expired"
+          },
+          {
+            "day": 1500,
+            "pair": [
+              4,
+              5
+            ],
+            "every": 60,
+            "status": "expired"
+          },
+          {
+            "day": 1860,
+            "pair": [
+              4,
+              5
+            ],
+            "every": 60,
+            "status": "expired"
+          },
+          {
+            "day": 2220,
+            "pair": [
+              4,
+              5
+            ],
+            "every": 60,
+            "status": "expired"
+          },
+          {
+            "day": 2580,
+            "pair": [
+              4,
+              5
+            ],
+            "every": 60,
+            "status": "expired"
+          },
+          {
+            "day": 2940,
+            "pair": [
+              4,
+              5
+            ],
+            "every": 60,
+            "status": "expired"
+          },
+          {
+            "day": 3120,
+            "pair": [
+              2,
+              4
+            ],
+            "every": 90,
+            "status": "expired"
+          },
+          {
+            "day": 3300,
+            "pair": [
+              4,
+              5
+            ],
+            "every": 60,
+            "status": "active"
+          }
+        ]
+      },
+      {
+        "phase": "96F3",
+        "deliveriesByPair": {
+          "4-5": 94
+        },
+        "losses": [],
+        "contractTimeline": [
+          {
+            "day": 780,
+            "pair": [
+              4,
+              5
+            ],
+            "every": 60,
+            "status": "expired"
+          },
+          {
+            "day": 1140,
+            "pair": [
+              4,
+              5
+            ],
+            "every": 60,
+            "status": "expired"
+          },
+          {
+            "day": 1500,
+            "pair": [
+              4,
+              5
+            ],
+            "every": 60,
+            "status": "expired"
+          },
+          {
+            "day": 1860,
+            "pair": [
+              4,
+              5
+            ],
+            "every": 60,
+            "status": "expired"
+          },
+          {
+            "day": 2220,
+            "pair": [
+              4,
+              5
+            ],
+            "every": 60,
+            "status": "expired"
+          },
+          {
+            "day": 2580,
+            "pair": [
+              4,
+              5
+            ],
+            "every": 60,
+            "status": "expired"
+          },
+          {
+            "day": 2940,
+            "pair": [
+              4,
+              5
+            ],
+            "every": 60,
+            "status": "expired"
+          },
+          {
+            "day": 3300,
+            "pair": [
+              4,
+              5
+            ],
+            "every": 60,
+            "status": "active"
+          }
+        ]
+      }
+    ],
+    "researchNetSum": {
+      "old": 36273.80471311328,
+      "next": 35576.125215735294
+    },
+    "finalStocksAndRates": [
+      {
+        "actor": 1,
+        "dead": false,
+        "stock": {
+          "min": 1233.1778977807403,
+          "ene": 679.8013780867772,
+          "yiy": 180,
+          "ala": 52.245232250000214,
+          "ara": 0,
+          "tuk": 1512.5031054189537,
+          "etk": 752.1100795130355
+        },
+        "net": {
+          "min": -1.2684570461538485,
+          "ene": 54.72284417115381,
+          "yiy": 0,
+          "ala": 29.391899999999996,
+          "ara": 73.07596439999999,
+          "etk": 14.65862394302664,
+          "tuk": 9.382238639999994
+        }
+      },
+      {
+        "actor": 2,
+        "dead": false,
+        "stock": {
+          "min": 2907.080051780763,
+          "ene": 3515.0514859368222,
+          "yiy": 3649.008476019956,
+          "ala": 60.306347427885754,
+          "ara": 0,
+          "tuk": 1379.647976714884,
+          "etk": 1281.7383135803725
+        },
+        "net": {
+          "min": 156.71219147325178,
+          "ene": 20.587819405005604,
+          "yiy": 40.9838177939436,
+          "ala": 40.9687514,
+          "ara": 67.22841074966338,
+          "etk": 11.011670003418804,
+          "tuk": -0.6722959967999955
+        }
+      },
+      {
+        "actor": 3,
+        "dead": false,
+        "stock": {
+          "min": 54.1161919626054,
+          "ene": 129.57166161694403,
+          "yiy": 180,
+          "ala": 211.8970542374999,
+          "ara": 0,
+          "tuk": 3525.902465230845,
+          "etk": 429.6981200000003
+        },
+        "net": {
+          "min": 27.45280143076923,
+          "ene": -2.4214576730769437,
+          "yiy": 0,
+          "ala": 21.9857515,
+          "ara": 62.95288973076922,
+          "etk": 11.1553,
+          "tuk": 25.494951521538454
+        }
+      },
+      {
+        "actor": 4,
+        "dead": false,
+        "stock": {
+          "min": 39.097591145040894,
+          "ene": 6326.060346849524,
+          "yiy": 1349.7644935346914,
+          "ala": 38.96999789972884,
+          "ara": 0,
+          "tuk": 1134.5677529553493,
+          "etk": 156.33848492316295
+        },
+        "net": {
+          "min": 8.932782918799013,
+          "ene": 81.58199114971835,
+          "yiy": 6.459540579234414,
+          "ala": 16.309906996194197,
+          "ara": 40.59265849481511,
+          "etk": 11.185186202820924,
+          "tuk": 6.4622340894448165
+        }
+      },
+      {
+        "actor": 5,
+        "dead": false,
+        "stock": {
+          "min": 65.27041345707455,
+          "ene": 6736.454460871476,
+          "yiy": 2862.4915811939372,
+          "ala": 208.2192137204002,
+          "ara": 0,
+          "tuk": 1483.859486765356,
+          "etk": 280.49293843200064
+        },
+        "net": {
+          "min": 24.358708989223874,
+          "ene": 32.279413656479576,
+          "yiy": 32.44172831810624,
+          "ala": 31.91732039159999,
+          "ara": 237.58542822453495,
+          "etk": 10.10253888,
+          "tuk": 18.387816704383813
+        }
+      }
+    ]
+  },
+  {
+    "seed": 99,
+    "old": {
+      "phase": "96F1",
+      "seed": 99,
+      "contracts": 2,
+      "cancelled": 1,
+      "freightLost": 2,
+      "alive": 5,
+      "techs": 41,
+      "ships": 167,
+      "power": 22879,
+      "upkeep": 507.6180000000003,
+      "colonies": 15,
+      "deliveries": 8,
+      "pacts": 3,
+      "warsStarted": 0,
+      "peace": 0,
+      "objectiveChanges": 17,
+      "plansCompleted": 9,
+      "plansFailed": 4,
+      "criticalEmpireMonths": 0,
+      "invalidResources": [],
+      "elapsedMs": 12297
+    },
+    "next": {
+      "phase": "96F3",
+      "seed": 99,
+      "contracts": 6,
+      "cancelled": 0,
+      "freightLost": 4,
+      "alive": 5,
+      "techs": 37,
+      "ships": 172,
+      "power": 23064,
+      "upkeep": 480.32297417144474,
+      "colonies": 18,
+      "deliveries": 36,
+      "pacts": 6,
+      "warsStarted": 0,
+      "peace": 0,
+      "objectiveChanges": 17,
+      "plansCompleted": 9,
+      "plansFailed": 5,
+      "criticalEmpireMonths": 0,
+      "invalidResources": [],
+      "elapsedMs": 12125
+    },
+    "firstMonthlyResourceDifference": {
+      "month": 4,
+      "day": 120,
+      "actor": 4,
+      "before": {
+        "min": 18.87150915384619,
+        "ene": 246.76950153846155,
+        "yiy": 180,
+        "ala": 191.18184249999996,
+        "ara": 0,
+        "tuk": 195.6101319,
+        "etk": 106.16
+      },
+      "after": {
+        "min": 18.130398961538496,
+        "ene": 246.76950153846155,
+        "yiy": 180,
+        "ala": 191.18184249999996,
+        "ara": 0,
+        "tuk": 195.6101319,
+        "etk": 106.16
+      }
+    },
+    "critical": {
+      "old": {},
+      "next": {}
+    },
+    "spending": {
+      "old": {
+        "queueShip": {
+          "orders": 330,
+          "paid": {
+            "min": 3034,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 11228,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        "queueBuilding": {
+          "orders": 169,
+          "paid": {
+            "min": 27300,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 360,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        }
+      },
+      "next": {
+        "queueShip": {
+          "orders": 353,
+          "paid": {
+            "min": 3883,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 12105,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        "queueBuilding": {
+          "orders": 191,
+          "paid": {
+            "min": 32640,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 510,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        }
+      }
+    },
+    "trade": [
+      {
+        "phase": "96F1",
+        "deliveriesByPair": {
+          "1-2": 8
+        },
+        "losses": [
+          {
+            "day": 1532,
+            "kind": "freight-end",
+            "id": 2,
+            "e": 2,
+            "to": 1,
+            "contract": 1,
+            "status": "raided",
+            "reason": "Gerçek kargonun %40’ı ele geçirildi; kalanı imha edildi",
+            "loaded": 15.9,
+            "delivered": 0,
+            "lost": 15.899999999999999,
+            "route": [
+              44,
+              0,
+              1,
+              2
+            ]
+          },
+          {
+            "day": 1600,
+            "kind": "freight-end",
+            "id": 1,
+            "e": 1,
+            "to": 2,
+            "contract": 1,
+            "status": "raided",
+            "reason": "Gerçek kargonun %40’ı ele geçirildi; kalanı imha edildi",
+            "loaded": 13.3,
+            "delivered": 0,
+            "lost": 13.3,
+            "route": [
+              2,
+              1,
+              0,
+              44
+            ]
+          }
+        ],
+        "contractTimeline": [
+          {
+            "day": 1530,
+            "pair": [
+              1,
+              2
+            ],
+            "every": 90,
+            "status": "cancelled"
+          },
+          {
+            "day": 3150,
+            "pair": [
+              1,
+              2
+            ],
+            "every": 90,
+            "status": "expired"
+          }
+        ]
+      },
+      {
+        "phase": "96F3",
+        "deliveriesByPair": {
+          "1-2": 36
+        },
+        "losses": [
+          {
+            "day": 1982,
+            "kind": "freight-end",
+            "id": 14,
+            "e": 2,
+            "to": 1,
+            "contract": 2,
+            "status": "raided",
+            "reason": "Gerçek kargonun %40’ı ele geçirildi; kalanı imha edildi",
+            "loaded": 15.9,
+            "delivered": 0,
+            "lost": 15.899999999999999,
+            "route": [
+              44,
+              0,
+              1,
+              2
+            ]
+          },
+          {
+            "day": 2060,
+            "kind": "freight-end",
+            "id": 13,
+            "e": 1,
+            "to": 2,
+            "contract": 2,
+            "status": "raided",
+            "reason": "Gerçek kargonun %40’ı ele geçirildi; kalanı imha edildi",
+            "loaded": 15.2,
+            "delivered": 0,
+            "lost": 15.2,
+            "route": [
+              0,
+              44
+            ]
+          },
+          {
+            "day": 2410,
+            "kind": "freight-end",
+            "id": 21,
+            "e": 1,
+            "to": 2,
+            "contract": 3,
+            "status": "raided",
+            "reason": "Gerçek kargonun %40’ı ele geçirildi; kalanı imha edildi",
+            "loaded": 11.9,
+            "delivered": 0,
+            "lost": 11.9,
+            "route": [
+              2,
+              1,
+              0,
+              44
+            ]
+          },
+          {
+            "day": 2502,
+            "kind": "freight-end",
+            "id": 24,
+            "e": 2,
+            "to": 1,
+            "contract": 3,
+            "status": "raided",
+            "reason": "Gerçek kargonun %40’ı ele geçirildi; kalanı imha edildi",
+            "loaded": 15.9,
+            "delivered": 0,
+            "lost": 15.899999999999999,
+            "route": [
+              44,
+              0,
+              1,
+              2
+            ]
+          }
+        ],
+        "contractTimeline": [
+          {
+            "day": 1380,
+            "pair": [
+              1,
+              2
+            ],
+            "every": 90,
+            "status": "expired"
+          },
+          {
+            "day": 1800,
+            "pair": [
+              1,
+              2
+            ],
+            "every": 90,
+            "status": "expired"
+          },
+          {
+            "day": 2160,
+            "pair": [
+              1,
+              2
+            ],
+            "every": 90,
+            "status": "expired"
+          },
+          {
+            "day": 2640,
+            "pair": [
+              1,
+              2
+            ],
+            "every": 90,
+            "status": "expired"
+          },
+          {
+            "day": 3000,
+            "pair": [
+              1,
+              2
+            ],
+            "every": 90,
+            "status": "expired"
+          },
+          {
+            "day": 3600,
+            "pair": [
+              1,
+              2
+            ],
+            "every": 90,
+            "status": "active"
+          }
+        ]
+      }
+    ],
+    "researchNetSum": {
+      "old": 41969.975835978104,
+      "next": 36713.80884879929
+    },
+    "finalStocksAndRates": [
+      {
+        "actor": 1,
+        "dead": false,
+        "stock": {
+          "min": 245.10598284906655,
+          "ene": 6477.212153086274,
+          "yiy": 5531.981489168133,
+          "ala": 20.873686754368276,
+          "ara": 0,
+          "tuk": 1379.4553524315452,
+          "etk": 1031.274184206944
+        },
+        "net": {
+          "min": 289.8157228364255,
+          "ene": 224.24143401953398,
+          "yiy": 56.641739421274366,
+          "ala": 10.536809467015456,
+          "ara": 148.7313430710769,
+          "etk": 14.472812655431039,
+          "tuk": 16.45964912123305
+        }
+      },
+      {
+        "actor": 2,
+        "dead": false,
+        "stock": {
+          "min": 29.867604749739144,
+          "ene": 4065.0529703158522,
+          "yiy": 6285.365596136048,
+          "ala": 2337.8928015064653,
+          "ara": 0,
+          "tuk": 974.7401703836649,
+          "etk": 223.73782302243387
+        },
+        "net": {
+          "min": 32.60153837198798,
+          "ene": 147.23044319691252,
+          "yiy": 76.1888573366904,
+          "ala": 29.360492999999998,
+          "ara": 145.1215568088159,
+          "etk": 10.67998320639041,
+          "tuk": 8.28001106194121
+        }
+      },
+      {
+        "actor": 3,
+        "dead": false,
+        "stock": {
+          "min": 6978.371985019421,
+          "ene": 2780.3241025088546,
+          "yiy": 5055.632656409138,
+          "ala": 303.07124125000064,
+          "ara": 0,
+          "tuk": 887.2749680964938,
+          "etk": 1257.3289500000024
+        },
+        "net": {
+          "min": 99.58910566400004,
+          "ene": 85.25022329534175,
+          "yiy": 48.59705960000001,
+          "ala": 50.09837999999999,
+          "ara": 77.50647456000002,
+          "etk": 13.318240000000001,
+          "tuk": 3.5833060194461552
+        }
+      },
+      {
+        "actor": 4,
+        "dead": false,
+        "stock": {
+          "min": 1196.1326324153142,
+          "ene": 7576.013268986128,
+          "yiy": 180,
+          "ala": 68.82078278846154,
+          "ara": 0,
+          "tuk": 1948.0479628500002,
+          "etk": 1216.7416409437617
+        },
+        "net": {
+          "min": 71.80813272115387,
+          "ene": 70.80970838049035,
+          "yiy": 0,
+          "ala": 19.401222115384613,
+          "ara": 32.40612425782722,
+          "etk": 11.675061538461538,
+          "tuk": 25.09885733653846
+        }
+      },
+      {
+        "actor": 5,
+        "dead": false,
+        "stock": {
+          "min": 308.09699705005556,
+          "ene": 20981.59873767407,
+          "yiy": 1757.9112990440767,
+          "ala": 306.80988419434334,
+          "ara": 0,
+          "tuk": 1708.9050640905577,
+          "etk": 1408.5127457668043
+        },
+        "net": {
+          "min": 242.25786206772392,
+          "ene": 650.027269759437,
+          "yiy": 36.92219000005397,
+          "ala": 51.40917569980228,
+          "ara": 205.58952863358616,
+          "etk": 17.35852487467504,
+          "tuk": -1.4539516841330737
+        }
+      }
+    ]
+  },
+  {
+    "seed": 404,
+    "old": {
+      "phase": "96F1",
+      "seed": 404,
+      "contracts": 12,
+      "cancelled": 0,
+      "freightLost": 0,
+      "alive": 5,
+      "techs": 58,
+      "ships": 280,
+      "power": 36293,
+      "upkeep": 912.0535391827043,
+      "colonies": 23,
+      "deliveries": 96,
+      "pacts": 6,
+      "warsStarted": 0,
+      "peace": 0,
+      "objectiveChanges": 8,
+      "plansCompleted": 7,
+      "plansFailed": 4,
+      "criticalEmpireMonths": 0,
+      "invalidResources": [],
+      "elapsedMs": 10649
+    },
+    "next": {
+      "phase": "96F3",
+      "seed": 404,
+      "contracts": 11,
+      "cancelled": 0,
+      "freightLost": 1,
+      "alive": 5,
+      "techs": 55,
+      "ships": 270,
+      "power": 36930,
+      "upkeep": 850.1858443395823,
+      "colonies": 25,
+      "deliveries": 77,
+      "pacts": 6,
+      "warsStarted": 0,
+      "peace": 0,
+      "objectiveChanges": 9,
+      "plansCompleted": 7,
+      "plansFailed": 4,
+      "criticalEmpireMonths": 0,
+      "invalidResources": [],
+      "elapsedMs": 20949
+    },
+    "firstMonthlyResourceDifference": {
+      "month": 3,
+      "day": 90,
+      "actor": 1,
+      "before": {
+        "min": 28.134447186538466,
+        "ene": 261.7547635576923,
+        "yiy": 224.00817600000002,
+        "ala": 167.958382125,
+        "ara": 0,
+        "tuk": 179.33029998000004,
+        "etk": 103.53249999999998
+      },
+      "after": {
+        "min": 58.42989468653846,
+        "ene": 263.3547635576923,
+        "yiy": 224.00817600000002,
+        "ala": 167.958382125,
+        "ara": 0,
+        "tuk": 170.34589323000003,
+        "etk": 103.53249999999998
+      }
+    },
+    "critical": {
+      "old": {},
+      "next": {}
+    },
+    "spending": {
+      "old": {
+        "queueShip": {
+          "orders": 366,
+          "paid": {
+            "min": 5079,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 12360,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        "queueBuilding": {
+          "orders": 272,
+          "paid": {
+            "min": 47522,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 1283,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        }
+      },
+      "next": {
+        "queueShip": {
+          "orders": 350,
+          "paid": {
+            "min": 5418,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 12301,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        "queueBuilding": {
+          "orders": 271,
+          "paid": {
+            "min": 49962,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 1398,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        }
+      }
+    },
+    "trade": [
+      {
+        "phase": "96F1",
+        "deliveriesByPair": {
+          "4-5": 56,
+          "1-3": 34,
+          "3-4": 2,
+          "3-5": 4
+        },
+        "losses": [],
+        "contractTimeline": [
+          {
+            "day": 390,
+            "pair": [
+              4,
+              5
+            ],
+            "every": 90,
+            "status": "expired"
+          },
+          {
+            "day": 810,
+            "pair": [
+              4,
+              5
+            ],
+            "every": 90,
+            "status": "expired"
+          },
+          {
+            "day": 1200,
+            "pair": [
+              1,
+              3
+            ],
+            "every": 90,
+            "status": "expired"
+          },
+          {
+            "day": 1200,
+            "pair": [
+              4,
+              5
+            ],
+            "every": 90,
+            "status": "expired"
+          },
+          {
+            "day": 1590,
+            "pair": [
+              4,
+              5
+            ],
+            "every": 90,
+            "status": "expired"
+          },
+          {
+            "day": 1950,
+            "pair": [
+              4,
+              5
+            ],
+            "every": 90,
+            "status": "expired"
+          },
+          {
+            "day": 2310,
+            "pair": [
+              4,
+              5
+            ],
+            "every": 90,
+            "status": "expired"
+          },
+          {
+            "day": 2700,
+            "pair": [
+              4,
+              5
+            ],
+            "every": 90,
+            "status": "expired"
+          },
+          {
+            "day": 2820,
+            "pair": [
+              1,
+              3
+            ],
+            "every": 60,
+            "status": "expired"
+          },
+          {
+            "day": 3390,
+            "pair": [
+              1,
+              3
+            ],
+            "every": 30,
+            "status": "active"
+          },
+          {
+            "day": 3390,
+            "pair": [
+              3,
+              4
+            ],
+            "every": 120,
+            "status": "active"
+          },
+          {
+            "day": 3480,
+            "pair": [
+              3,
+              5
+            ],
+            "every": 60,
+            "status": "active"
+          }
+        ]
+      },
+      {
+        "phase": "96F3",
+        "deliveriesByPair": {
+          "4-5": 37,
+          "1-3": 30,
+          "1-5": 8,
+          "1-4": 2
+        },
+        "losses": [
+          {
+            "day": 850,
+            "kind": "freight-end",
+            "id": 9,
+            "e": 4,
+            "to": 5,
+            "contract": 2,
+            "status": "raided",
+            "reason": "Gerçek kargonun %40’ı ele geçirildi; kalanı imha edildi",
+            "loaded": 16,
+            "delivered": 0,
+            "lost": 16,
+            "route": [
+              26,
+              6,
+              43,
+              36
+            ]
+          }
+        ],
+        "contractTimeline": [
+          {
+            "day": 390,
+            "pair": [
+              4,
+              5
+            ],
+            "every": 90,
+            "status": "expired"
+          },
+          {
+            "day": 810,
+            "pair": [
+              4,
+              5
+            ],
+            "every": 90,
+            "status": "expired"
+          },
+          {
+            "day": 870,
+            "pair": [
+              1,
+              3
+            ],
+            "every": 90,
+            "status": "expired"
+          },
+          {
+            "day": 1350,
+            "pair": [
+              1,
+              3
+            ],
+            "every": 90,
+            "status": "expired"
+          },
+          {
+            "day": 1350,
+            "pair": [
+              4,
+              5
+            ],
+            "every": 90,
+            "status": "expired"
+          },
+          {
+            "day": 2130,
+            "pair": [
+              4,
+              5
+            ],
+            "every": 90,
+            "status": "expired"
+          },
+          {
+            "day": 2790,
+            "pair": [
+              4,
+              5
+            ],
+            "every": 120,
+            "status": "expired"
+          },
+          {
+            "day": 3150,
+            "pair": [
+              1,
+              3
+            ],
+            "every": 60,
+            "status": "expired"
+          },
+          {
+            "day": 3360,
+            "pair": [
+              1,
+              5
+            ],
+            "every": 60,
+            "status": "active"
+          },
+          {
+            "day": 3480,
+            "pair": [
+              1,
+              4
+            ],
+            "every": 120,
+            "status": "active"
+          },
+          {
+            "day": 3510,
+            "pair": [
+              1,
+              3
+            ],
+            "every": 60,
+            "status": "active"
+          }
+        ]
+      }
+    ],
+    "researchNetSum": {
+      "old": 75495.20861525931,
+      "next": 78317.90885602564
+    },
+    "finalStocksAndRates": [
+      {
+        "actor": 1,
+        "dead": false,
+        "stock": {
+          "min": 675.3600024989684,
+          "ene": 9042.098611994184,
+          "yiy": 2998.869413142309,
+          "ala": 87.80019852249384,
+          "ara": 34.610546241840275,
+          "tuk": 1275.0094589616824,
+          "etk": 1232.9711395512816
+        },
+        "net": {
+          "min": 227.04468153242829,
+          "ene": 255.9383162519324,
+          "yiy": 28.293988799999983,
+          "ala": 12.425585894999964,
+          "ara": 153.77673176107658,
+          "etk": 19.802186666666667,
+          "tuk": 42.39826779241349
+        }
+      },
+      {
+        "actor": 2,
+        "dead": false,
+        "stock": {
+          "min": 5668.141082280847,
+          "ene": 6051.5455928317515,
+          "yiy": 5682.902281696476,
+          "ala": 107.71174358378771,
+          "ara": 0,
+          "tuk": 1745.2803749828572,
+          "etk": 1561.2391649982028
+        },
+        "net": {
+          "min": 289.306752,
+          "ene": 21.712649072984505,
+          "yiy": 47.772812160000015,
+          "ala": 27.380016939999976,
+          "ara": 253.83098640000003,
+          "etk": 14.748144000000002,
+          "tuk": 17.88173280000001
+        }
+      },
+      {
+        "actor": 3,
+        "dead": false,
+        "stock": {
+          "min": 3398.5182427450322,
+          "ene": 6558.7116774195165,
+          "yiy": 2305.244489035257,
+          "ala": 64.49014117308153,
+          "ara": 34.610546241840275,
+          "tuk": 1780.5736240799986,
+          "etk": 849.3784911675662
+        },
+        "net": {
+          "min": 82.73364133333332,
+          "ene": 85.25007029564603,
+          "yiy": 18.02737200000001,
+          "ala": 26.939544516647533,
+          "ara": 84.19225025892011,
+          "etk": 13.166080902635667,
+          "tuk": 14.648763359999988
+        }
+      },
+      {
+        "actor": 4,
+        "dead": false,
+        "stock": {
+          "min": 315.6099529364609,
+          "ene": 23126.527530612806,
+          "yiy": 5721.270472635413,
+          "ala": 614.9003913219997,
+          "ara": 34.610546241840275,
+          "tuk": 2094.242835849306,
+          "etk": 912.5390757717813
+        },
+        "net": {
+          "min": 151.79132928532235,
+          "ene": 673.8650467220368,
+          "yiy": 66.8091486473865,
+          "ala": 14.371655099999968,
+          "ara": 799.0983852923946,
+          "etk": 14.558896677903785,
+          "tuk": 49.193971842661874
+        }
+      },
+      {
+        "actor": 5,
+        "dead": false,
+        "stock": {
+          "min": 2363.5834760220123,
+          "ene": 17733.298735004504,
+          "yiy": 5598.010538934508,
+          "ala": 62.39760704543687,
+          "ara": 34.610546241840275,
+          "tuk": 2473.6546076077916,
+          "etk": 1163.4058438526056
+        },
+        "net": {
+          "min": 373.64548860535484,
+          "ene": 590.0639400221432,
+          "yiy": 72.12004491917418,
+          "ala": 27.881934749999957,
+          "ara": 347.35448236121977,
+          "etk": 23.909741952214453,
+          "tuk": 21.9966340298321
+        }
+      }
+    ]
+  },
+  {
+    "seed": 7,
+    "old": {
+      "phase": "96F1",
+      "seed": 7,
+      "contracts": 3,
+      "cancelled": 1,
+      "freightLost": 3,
+      "alive": 5,
+      "techs": 48,
+      "ships": 132,
+      "power": 14952,
+      "upkeep": 376.39000000000016,
+      "colonies": 11,
+      "deliveries": 21,
+      "pacts": 7,
+      "warsStarted": 0,
+      "peace": 0,
+      "objectiveChanges": 13,
+      "plansCompleted": 9,
+      "plansFailed": 1,
+      "criticalEmpireMonths": 3,
+      "invalidResources": [],
+      "elapsedMs": 12214
+    },
+    "next": {
+      "phase": "96F3",
+      "seed": 7,
+      "contracts": 3,
+      "cancelled": 0,
+      "freightLost": 0,
+      "alive": 5,
+      "techs": 48,
+      "ships": 173,
+      "power": 19413,
+      "upkeep": 485.62500000000017,
+      "colonies": 11,
+      "deliveries": 30,
+      "pacts": 9,
+      "warsStarted": 0,
+      "peace": 0,
+      "objectiveChanges": 9,
+      "plansCompleted": 8,
+      "plansFailed": 1,
+      "criticalEmpireMonths": 2,
+      "invalidResources": [],
+      "elapsedMs": 12317
+    },
+    "firstMonthlyResourceDifference": {
+      "month": 34,
+      "day": 1020,
+      "actor": 1,
+      "before": {
+        "min": 1104.485013884616,
+        "ene": 1491.9953073127724,
+        "yiy": 1016.7669650560902,
+        "ala": 25.21236375000005,
+        "ara": 0,
+        "tuk": 380.95899330000026,
+        "etk": 303.40889000000004
+      },
+      "after": {
+        "min": 1146.0081282846159,
+        "ene": 1495.1953073127722,
+        "yiy": 1016.7669650560902,
+        "ala": 25.21236375000005,
+        "ara": 0,
+        "tuk": 380.95899330000026,
+        "etk": 303.40889000000004
+      }
+    },
+    "critical": {
+      "old": {
+        "3:tuk": [
+          28,
+          29
+        ],
+        "4:min": [
+          95
+        ]
+      },
+      "next": {
+        "3:tuk": [
+          28,
+          29
+        ]
+      }
+    },
+    "spending": {
+      "old": {
+        "queueShip": {
+          "orders": 213,
+          "paid": {
+            "min": 2184,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 7291,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        "queueBuilding": {
+          "orders": 137,
+          "paid": {
+            "min": 23430,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 180,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        }
+      },
+      "next": {
+        "queueShip": {
+          "orders": 180,
+          "paid": {
+            "min": 2034,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 6170,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        "queueBuilding": {
+          "orders": 132,
+          "paid": {
+            "min": 22570,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 135,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        }
+      }
+    },
+    "trade": [
+      {
+        "phase": "96F1",
+        "deliveriesByPair": {
+          "1-4": 21
+        },
+        "losses": [
+          {
+            "day": 2850,
+            "kind": "freight-end",
+            "id": 21,
+            "e": 1,
+            "to": 4,
+            "contract": 2,
+            "status": "raided",
+            "reason": "Gerçek kargonun %40’ı ele geçirildi; kalanı imha edildi",
+            "loaded": 9.4,
+            "delivered": 0,
+            "lost": 9.4,
+            "route": [
+              18,
+              28,
+              16
+            ]
+          },
+          {
+            "day": 2950,
+            "kind": "freight-end",
+            "id": 23,
+            "e": 1,
+            "to": 4,
+            "contract": 3,
+            "status": "raided",
+            "reason": "Gerçek kargonun %40’ı ele geçirildi; kalanı imha edildi",
+            "loaded": 15.2,
+            "delivered": 0,
+            "lost": 15.2,
+            "route": [
+              18,
+              28,
+              16
+            ]
+          },
+          {
+            "day": 2980,
+            "kind": "freight-end",
+            "id": 24,
+            "e": 4,
+            "to": 1,
+            "contract": 3,
+            "status": "raided",
+            "reason": "Gerçek kargonun %40’ı ele geçirildi; kalanı imha edildi",
+            "loaded": 15.9,
+            "delivered": 0,
+            "lost": 15.899999999999999,
+            "route": [
+              16,
+              28,
+              18
+            ]
+          }
+        ],
+        "contractTimeline": [
+          {
+            "day": 2190,
+            "pair": [
+              1,
+              4
+            ],
+            "every": 60,
+            "status": "expired"
+          },
+          {
+            "day": 2550,
+            "pair": [
+              1,
+              4
+            ],
+            "every": 60,
+            "status": "expired"
+          },
+          {
+            "day": 2940,
+            "pair": [
+              1,
+              4
+            ],
+            "every": 60,
+            "status": "cancelled"
+          }
+        ]
+      },
+      {
+        "phase": "96F3",
+        "deliveriesByPair": {
+          "1-4": 30
+        },
+        "losses": [],
+        "contractTimeline": [
+          {
+            "day": 2610,
+            "pair": [
+              1,
+              4
+            ],
+            "every": 60,
+            "status": "expired"
+          },
+          {
+            "day": 3030,
+            "pair": [
+              1,
+              4
+            ],
+            "every": 60,
+            "status": "expired"
+          },
+          {
+            "day": 3390,
+            "pair": [
+              1,
+              4
+            ],
+            "every": 60,
+            "status": "active"
+          }
+        ]
+      }
+    ],
+    "researchNetSum": {
+      "old": 52294.901535715966,
+      "next": 49913.62748307199
+    },
+    "finalStocksAndRates": [
+      {
+        "actor": 1,
+        "dead": false,
+        "stock": {
+          "min": 5286.0905099509655,
+          "ene": 4392.813068922447,
+          "yiy": 4162.764694274677,
+          "ala": 189.24901831730807,
+          "ara": 0,
+          "tuk": 1180.4747615950319,
+          "etk": 1082.4586444230779
+        },
+        "net": {
+          "min": 286.3182360615384,
+          "ene": -2.7283454286770166,
+          "yiy": 37.412261999999984,
+          "ala": 28.578969999999984,
+          "ara": 151.0261838030769,
+          "etk": 13.649920000000002,
+          "tuk": 34.189431458953855
+        }
+      },
+      {
+        "actor": 2,
+        "dead": false,
+        "stock": {
+          "min": 37.93027368532851,
+          "ene": 6495.402335544649,
+          "yiy": 3190.725542371369,
+          "ala": 240.8008952818808,
+          "ara": 17.44624614849946,
+          "tuk": 1627.8139470323526,
+          "etk": 892.2523768623267
+        },
+        "net": {
+          "min": 24.434004032382862,
+          "ene": 14.945423521654165,
+          "yiy": 29.586212258248956,
+          "ala": 20.40411791528257,
+          "ara": 192.466448289074,
+          "etk": 12.914574457169854,
+          "tuk": 12.931684567898184
+        }
+      },
+      {
+        "actor": 3,
+        "dead": false,
+        "stock": {
+          "min": 59.81541155544679,
+          "ene": 7121.453965419496,
+          "yiy": 3603.4532087142547,
+          "ala": 86.02028491249992,
+          "ara": 17.44624614849946,
+          "tuk": 463.1415433204961,
+          "etk": 814.9903802116069
+        },
+        "net": {
+          "min": 19.975199515540716,
+          "ene": -1.99237728279914,
+          "yiy": 33.383783506168506,
+          "ala": 28.093823699999994,
+          "ara": 214.07672477439354,
+          "etk": 13.316901080992302,
+          "tuk": 0.9209636528469095
+        }
+      },
+      {
+        "actor": 4,
+        "dead": false,
+        "stock": {
+          "min": 233.32813311735637,
+          "ene": 6604.705655951368,
+          "yiy": 1812.4018580212928,
+          "ala": 66.87777483719967,
+          "ara": 17.44624614849946,
+          "tuk": 3302.548023560893,
+          "etk": 986.5338964672414
+        },
+        "net": {
+          "min": 27.47994896586678,
+          "ene": 27.76693513801252,
+          "yiy": 17.419911146184525,
+          "ala": 18.773865864382184,
+          "ara": 116.84421139151623,
+          "etk": 13.071512896799621,
+          "tuk": 30.211378834497904
+        }
+      },
+      {
+        "actor": 5,
+        "dead": false,
+        "stock": {
+          "min": 915.3441364075409,
+          "ene": 2937.936243327961,
+          "yiy": 180,
+          "ala": 19.79294245000014,
+          "ara": 0,
+          "tuk": 3336.319742879998,
+          "etk": 699.2915400000002
+        },
+        "net": {
+          "min": 99.2828371076923,
+          "ene": -38.25945758846166,
+          "yiy": 0,
+          "ala": 11.086582000000003,
+          "ara": 62.582983199999994,
+          "etk": 11.5016,
+          "tuk": 27.20776579199999
+        }
+      }
+    ]
+  },
+  {
+    "seed": 23,
+    "old": {
+      "phase": "96F1",
+      "seed": 23,
+      "contracts": 0,
+      "cancelled": 0,
+      "freightLost": 0,
+      "alive": 4,
+      "techs": 26,
+      "ships": 147,
+      "power": 22796,
+      "upkeep": 488.8004620477937,
+      "colonies": 11,
+      "deliveries": 0,
+      "pacts": 4.5,
+      "warsStarted": 4,
+      "peace": 0,
+      "objectiveChanges": 22,
+      "plansCompleted": 12,
+      "plansFailed": 1,
+      "criticalEmpireMonths": 3,
+      "invalidResources": [],
+      "elapsedMs": 10188
+    },
+    "next": {
+      "phase": "96F3",
+      "seed": 23,
+      "contracts": 0,
+      "cancelled": 0,
+      "freightLost": 0,
+      "alive": 4,
+      "techs": 28,
+      "ships": 111,
+      "power": 19555,
+      "upkeep": 363.4585812991477,
+      "colonies": 10,
+      "deliveries": 0,
+      "pacts": 2,
+      "warsStarted": 2,
+      "peace": 0,
+      "objectiveChanges": 24,
+      "plansCompleted": 11,
+      "plansFailed": 4,
+      "criticalEmpireMonths": 2,
+      "invalidResources": [],
+      "elapsedMs": 11020
+    },
+    "firstMonthlyResourceDifference": {
+      "month": 5,
+      "day": 150,
+      "actor": 5,
+      "before": {
+        "min": 108.00671943749998,
+        "ene": 239.12777449230774,
+        "yiy": 180,
+        "ala": 275.786694025,
+        "ara": 0,
+        "tuk": 231.6220683,
+        "etk": 109.41250000000001
+      },
+      "after": {
+        "min": 37.00671943749995,
+        "ene": 240.72777449230773,
+        "yiy": 180,
+        "ala": 275.786694025,
+        "ara": 0,
+        "tuk": 231.6220683,
+        "etk": 109.41250000000001
+      }
+    },
+    "critical": {
+      "old": {
+        "2:ene": [
+          1
+        ],
+        "1:min": [
+          25
+        ],
+        "5:min": [
+          74
+        ]
+      },
+      "next": {
+        "2:ene": [
+          1
+        ],
+        "1:min": [
+          25
+        ]
+      }
+    },
+    "spending": {
+      "old": {
+        "queueShip": {
+          "orders": 301,
+          "paid": {
+            "min": 1370,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 9822,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        "queueBuilding": {
+          "orders": 146,
+          "paid": {
+            "min": 23550,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 340,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        }
+      },
+      "next": {
+        "queueShip": {
+          "orders": 341,
+          "paid": {
+            "min": 1635,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 11242,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        "queueBuilding": {
+          "orders": 142,
+          "paid": {
+            "min": 23380,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 290,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        }
+      }
+    },
+    "trade": [
+      {
+        "phase": "96F1",
+        "deliveriesByPair": {},
+        "losses": [],
+        "contractTimeline": []
+      },
+      {
+        "phase": "96F3",
+        "deliveriesByPair": {},
+        "losses": [],
+        "contractTimeline": []
+      }
+    ],
+    "researchNetSum": {
+      "old": 30354.37191735276,
+      "next": 34507.19381695665
+    },
+    "finalStocksAndRates": [
+      {
+        "actor": 1,
+        "dead": false,
+        "stock": {
+          "min": 197.46176864382198,
+          "ene": 2033.3493463765503,
+          "yiy": 1349.857055182402,
+          "ala": 21.108012944000563,
+          "ara": 0,
+          "tuk": 751.6470424304268,
+          "etk": 1109.7130591999994
+        },
+        "net": {
+          "min": 6.866715206100859,
+          "ene": 12.862019723511438,
+          "yiy": 7.4239328880000315,
+          "ala": 20.203068600000005,
+          "ara": 56.111214564019186,
+          "etk": 8.77594,
+          "tuk": 3.541439058280151
+        }
+      },
+      {
+        "actor": 2,
+        "dead": false,
+        "stock": {
+          "min": 5565.40535513851,
+          "ene": 10157.430122210139,
+          "yiy": 5907.084858349653,
+          "ala": 47.45193256570148,
+          "ara": 0,
+          "tuk": 1417.726118296052,
+          "etk": 627.2328879897433
+        },
+        "net": {
+          "min": 188.6010914658461,
+          "ene": 127.0467061234724,
+          "yiy": 60.386321248000016,
+          "ala": 28.70502573025559,
+          "ara": 44.55409002751902,
+          "etk": 12.6568,
+          "tuk": 21.05427910892306
+        }
+      },
+      {
+        "actor": 3,
+        "dead": false,
+        "stock": {
+          "min": 6084.128924329331,
+          "ene": 16856.88192304006,
+          "yiy": 3721.0667658737502,
+          "ala": 18.770296275795793,
+          "ara": 0,
+          "tuk": 1031.1638244714893,
+          "etk": 1215.7965603380483
+        },
+        "net": {
+          "min": 182.77264699070207,
+          "ene": 181.66072449681937,
+          "yiy": 37.05126576033833,
+          "ala": 16.149842945525613,
+          "ara": 123.46776842689475,
+          "etk": 18.846609842797697,
+          "tuk": 10.278053286433831
+        }
+      },
+      {
+        "actor": 4,
+        "dead": true,
+        "stock": {
+          "min": 248.06867628504972,
+          "ene": 3994.859753225055,
+          "yiy": 901.7286852555349,
+          "ala": 12.182349127295069,
+          "ara": 0,
+          "tuk": 447.32706182161814,
+          "etk": 402.16087380113504
+        },
+        "net": {
+          "min": -5.761820576923077,
+          "ene": 1.867266476923092,
+          "yiy": -8.830732499999996,
+          "ala": 10.633528125000002,
+          "ara": 10.495627950000001,
+          "etk": 13.947000000000001,
+          "tuk": -2.4503810076923074
+        }
+      },
+      {
+        "actor": 5,
+        "dead": false,
+        "stock": {
+          "min": 942.4321871535111,
+          "ene": 3375.835616150482,
+          "yiy": 180,
+          "ala": 114.1569056124983,
+          "ara": 0,
+          "tuk": 3864.5701078027714,
+          "etk": 901.2336073305648
+        },
+        "net": {
+          "min": 180.3481327515777,
+          "ene": 44.091790163918915,
+          "yiy": 0,
+          "ala": 51.370722999999934,
+          "ara": 254.17413498613166,
+          "etk": 13.435023870192309,
+          "tuk": 53.14464261046153
+        }
+      }
+    ]
+  },
+  {
+    "seed": 42,
+    "old": {
+      "phase": "96F1",
+      "seed": 42,
+      "contracts": 2,
+      "cancelled": 0,
+      "freightLost": 2,
+      "alive": 5,
+      "techs": 50,
+      "ships": 104,
+      "power": 15223,
+      "upkeep": 370.320517843113,
+      "colonies": 11,
+      "deliveries": 20,
+      "pacts": 3,
+      "warsStarted": 1,
+      "peace": 1,
+      "objectiveChanges": 17,
+      "plansCompleted": 8,
+      "plansFailed": 5,
+      "criticalEmpireMonths": 0,
+      "invalidResources": [],
+      "elapsedMs": 10076
+    },
+    "next": {
+      "phase": "96F3",
+      "seed": 42,
+      "contracts": 10,
+      "cancelled": 0,
+      "freightLost": 0,
+      "alive": 5,
+      "techs": 61,
+      "ships": 145,
+      "power": 22369,
+      "upkeep": 567.467006265272,
+      "colonies": 12,
+      "deliveries": 94,
+      "pacts": 3,
+      "warsStarted": 2,
+      "peace": 0,
+      "objectiveChanges": 18,
+      "plansCompleted": 8,
+      "plansFailed": 4,
+      "criticalEmpireMonths": 12,
+      "invalidResources": [],
+      "elapsedMs": 14393
+    },
+    "firstMonthlyResourceDifference": {
+      "month": 2,
+      "day": 60,
+      "actor": 4,
+      "before": {
+        "min": 247.28751838461537,
+        "ene": 447.83117203076927,
+        "yiy": 270,
+        "ala": 311.9290896,
+        "ara": 0,
+        "tuk": 250.7790372346154,
+        "etk": 120.67704
+      },
+      "after": {
+        "min": 255.4677049230769,
+        "ene": 452.04501564615384,
+        "yiy": 270,
+        "ala": 311.9290896,
+        "ara": 0,
+        "tuk": 252.6020036769231,
+        "etk": 120.67704
+      }
+    },
+    "critical": {
+      "old": {},
+      "next": {
+        "3:ene": [
+          82,
+          83,
+          84,
+          85,
+          86,
+          87,
+          88,
+          89,
+          90,
+          91,
+          92,
+          93
+        ]
+      }
+    },
+    "spending": {
+      "old": {
+        "queueShip": {
+          "orders": 302,
+          "paid": {
+            "min": 1960,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 10112,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        "queueBuilding": {
+          "orders": 117,
+          "paid": {
+            "min": 17800,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 45,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        }
+      },
+      "next": {
+        "queueShip": {
+          "orders": 305,
+          "paid": {
+            "min": 3363,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 11291,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        "queueBuilding": {
+          "orders": 130,
+          "paid": {
+            "min": 21940,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 205,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        }
+      }
+    },
+    "trade": [
+      {
+        "phase": "96F1",
+        "deliveriesByPair": {
+          "2-5": 20
+        },
+        "losses": [
+          {
+            "day": 3190,
+            "kind": "freight-end",
+            "id": 15,
+            "e": 2,
+            "to": 5,
+            "contract": 2,
+            "status": "raided",
+            "reason": "Gerçek kargonun %40’ı ele geçirildi; kalanı imha edildi",
+            "loaded": 9.6,
+            "delivered": 0,
+            "lost": 9.6,
+            "route": [
+              0,
+              38,
+              24
+            ]
+          },
+          {
+            "day": 3210,
+            "kind": "freight-end",
+            "id": 16,
+            "e": 5,
+            "to": 2,
+            "contract": 2,
+            "status": "raided",
+            "reason": "Gerçek kargonun %40’ı ele geçirildi; kalanı imha edildi",
+            "loaded": 15.9,
+            "delivered": 0,
+            "lost": 15.899999999999999,
+            "route": [
+              24,
+              38,
+              0
+            ]
+          }
+        ],
+        "contractTimeline": [
+          {
+            "day": 2130,
+            "pair": [
+              2,
+              5
+            ],
+            "every": 60,
+            "status": "expired"
+          },
+          {
+            "day": 3120,
+            "pair": [
+              2,
+              5
+            ],
+            "every": 60,
+            "status": "expired"
+          }
+        ]
+      },
+      {
+        "phase": "96F3",
+        "deliveriesByPair": {
+          "2-5": 86,
+          "2-4": 8
+        },
+        "losses": [],
+        "contractTimeline": [
+          {
+            "day": 960,
+            "pair": [
+              2,
+              5
+            ],
+            "every": 60,
+            "status": "expired"
+          },
+          {
+            "day": 1380,
+            "pair": [
+              2,
+              5
+            ],
+            "every": 60,
+            "status": "expired"
+          },
+          {
+            "day": 1740,
+            "pair": [
+              2,
+              5
+            ],
+            "every": 60,
+            "status": "expired"
+          },
+          {
+            "day": 2100,
+            "pair": [
+              2,
+              5
+            ],
+            "every": 60,
+            "status": "expired"
+          },
+          {
+            "day": 2460,
+            "pair": [
+              2,
+              5
+            ],
+            "every": 60,
+            "status": "expired"
+          },
+          {
+            "day": 2820,
+            "pair": [
+              2,
+              5
+            ],
+            "every": 60,
+            "status": "expired"
+          },
+          {
+            "day": 3090,
+            "pair": [
+              2,
+              4
+            ],
+            "every": 120,
+            "status": "expired"
+          },
+          {
+            "day": 3180,
+            "pair": [
+              2,
+              5
+            ],
+            "every": 60,
+            "status": "expired"
+          },
+          {
+            "day": 3450,
+            "pair": [
+              2,
+              4
+            ],
+            "every": 120,
+            "status": "active"
+          },
+          {
+            "day": 3540,
+            "pair": [
+              2,
+              5
+            ],
+            "every": 60,
+            "status": "active"
+          }
+        ]
+      }
+    ],
+    "researchNetSum": {
+      "old": 57950.080487744366,
+      "next": 81919.48630694376
+    },
+    "finalStocksAndRates": [
+      {
+        "actor": 1,
+        "dead": false,
+        "stock": {
+          "min": 1409.405316800001,
+          "ene": 1245.1597610183428,
+          "yiy": 2069.0775299999996,
+          "ala": 349.0313069986486,
+          "ara": 0,
+          "tuk": 448.2871065600004,
+          "etk": 2147.385148724286
+        },
+        "net": {
+          "min": 67.98801280000002,
+          "ene": 12.972277946874698,
+          "yiy": 10.119863999999996,
+          "ala": 12.35401823259722,
+          "ara": 49.667647200000005,
+          "etk": 19.039591448978783,
+          "tuk": 2.7669513600000037
+        }
+      },
+      {
+        "actor": 2,
+        "dead": false,
+        "stock": {
+          "min": 1872.2385322787766,
+          "ene": 1609.7392799227673,
+          "yiy": 3156.2077389566807,
+          "ala": 29.637038224933804,
+          "ara": 29.919786829555125,
+          "tuk": 1545.6820808586845,
+          "etk": 327.5451480213802
+        },
+        "net": {
+          "min": 29.963491196719183,
+          "ene": -52.723580551905656,
+          "yiy": 29.35563831305144,
+          "ala": 12.652771334917537,
+          "ara": 30.413651908760563,
+          "etk": 8.298598099724355,
+          "tuk": 1.4786476259493049
+        }
+      },
+      {
+        "actor": 3,
+        "dead": false,
+        "stock": {
+          "min": 163.39994496024937,
+          "ene": 465.2120355663382,
+          "yiy": 180,
+          "ala": 443.21845911272044,
+          "ara": 0,
+          "tuk": 3423.7336055850683,
+          "etk": 797.5075518240003
+        },
+        "net": {
+          "min": 62.315807209230776,
+          "ene": 31.079011003550292,
+          "yiy": 0,
+          "ala": 26.743104000000002,
+          "ara": 156.3962228307692,
+          "etk": 11.245600000000001,
+          "tuk": 26.747572511999984
+        }
+      },
+      {
+        "actor": 4,
+        "dead": false,
+        "stock": {
+          "min": 32.69289826855629,
+          "ene": 3787.5325699432333,
+          "yiy": 304.19999999999993,
+          "ala": 712.4996783074978,
+          "ara": 29.919786829555125,
+          "tuk": 1951.0183479949164,
+          "etk": 209.14892765412668
+        },
+        "net": {
+          "min": 80.48020050616442,
+          "ene": -10.263750671260595,
+          "yiy": 0,
+          "ala": 30.77548844999998,
+          "ara": 552.6671082455689,
+          "etk": 11.296191743589745,
+          "tuk": 5.179740850965148
+        }
+      },
+      {
+        "actor": 5,
+        "dead": false,
+        "stock": {
+          "min": 76.89693611684437,
+          "ene": 2709.8545629617374,
+          "yiy": 6503.780886836149,
+          "ala": 94.52165573058866,
+          "ara": 29.919786829555125,
+          "tuk": 1012.7708415141012,
+          "etk": 572.7520091619263
+        },
+        "net": {
+          "min": 18.339838653168332,
+          "ene": 37.32233017612077,
+          "yiy": 61.87638372210838,
+          "ala": 31.121054178488457,
+          "ara": 314.5128447323242,
+          "etk": 9.860927844857972,
+          "tuk": 6.143941528787904
+        }
+      }
+    ]
+  },
+  {
+    "seed": 123,
+    "old": {
+      "phase": "96F1",
+      "seed": 123,
+      "contracts": 3,
+      "cancelled": 0,
+      "freightLost": 0,
+      "alive": 5,
+      "techs": 40,
+      "ships": 185,
+      "power": 26072,
+      "upkeep": 557.2399489007399,
+      "colonies": 17,
+      "deliveries": 22,
+      "pacts": 10,
+      "warsStarted": 0,
+      "peace": 0,
+      "objectiveChanges": 18,
+      "plansCompleted": 10,
+      "plansFailed": 3,
+      "criticalEmpireMonths": 2,
+      "invalidResources": [],
+      "elapsedMs": 16704
+    },
+    "next": {
+      "phase": "96F3",
+      "seed": 123,
+      "contracts": 6,
+      "cancelled": 0,
+      "freightLost": 2,
+      "alive": 5,
+      "techs": 39,
+      "ships": 180,
+      "power": 25112,
+      "upkeep": 556.9125351628504,
+      "colonies": 12,
+      "deliveries": 68,
+      "pacts": 10,
+      "warsStarted": 0,
+      "peace": 0,
+      "objectiveChanges": 19,
+      "plansCompleted": 14,
+      "plansFailed": 2,
+      "criticalEmpireMonths": 2,
+      "invalidResources": [],
+      "elapsedMs": 16513
+    },
+    "firstMonthlyResourceDifference": {
+      "month": 3,
+      "day": 90,
+      "actor": 5,
+      "before": {
+        "min": 792.5299033374562,
+        "ene": 258.45092197780303,
+        "yiy": 180,
+        "ala": 187.60999999999999,
+        "ara": 0,
+        "tuk": 133.8,
+        "etk": 92.4925
+      },
+      "after": {
+        "min": 792.3330551242561,
+        "ene": 258.45092197780303,
+        "yiy": 180,
+        "ala": 187.60999999999999,
+        "ara": 0,
+        "tuk": 133.8,
+        "etk": 92.4925
+      }
+    },
+    "critical": {
+      "old": {
+        "5:min": [
+          11,
+          12
+        ]
+      },
+      "next": {
+        "5:min": [
+          11,
+          12
+        ]
+      }
+    },
+    "spending": {
+      "old": {
+        "queueShip": {
+          "orders": 254,
+          "paid": {
+            "min": 2725,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 8443,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        "queueBuilding": {
+          "orders": 199,
+          "paid": {
+            "min": 31400,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 360,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        }
+      },
+      "next": {
+        "queueShip": {
+          "orders": 303,
+          "paid": {
+            "min": 1400,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 9943,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        "queueBuilding": {
+          "orders": 159,
+          "paid": {
+            "min": 26800,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 250,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        }
+      }
+    },
+    "trade": [
+      {
+        "phase": "96F1",
+        "deliveriesByPair": {
+          "1-5": 16,
+          "3-4": 6
+        },
+        "losses": [],
+        "contractTimeline": [
+          {
+            "day": 3060,
+            "pair": [
+              1,
+              5
+            ],
+            "every": 60,
+            "status": "expired"
+          },
+          {
+            "day": 3240,
+            "pair": [
+              3,
+              4
+            ],
+            "every": 120,
+            "status": "expired"
+          },
+          {
+            "day": 3480,
+            "pair": [
+              1,
+              5
+            ],
+            "every": 60,
+            "status": "active"
+          }
+        ]
+      },
+      {
+        "phase": "96F3",
+        "deliveriesByPair": {
+          "1-5": 68
+        },
+        "losses": [
+          {
+            "day": 2840,
+            "kind": "freight-end",
+            "id": 48,
+            "e": 5,
+            "to": 1,
+            "contract": 4,
+            "status": "raided",
+            "reason": "Gerçek kargonun %40’ı ele geçirildi; kalanı imha edildi",
+            "loaded": 12.4,
+            "delivered": 0,
+            "lost": 12.4,
+            "route": [
+              24,
+              42,
+              18
+            ]
+          },
+          {
+            "day": 3362,
+            "kind": "freight-end",
+            "id": 65,
+            "e": 1,
+            "to": 5,
+            "contract": 6,
+            "status": "raided",
+            "reason": "Gerçek kargonun %40’ı ele geçirildi; kalanı imha edildi",
+            "loaded": 16,
+            "delivered": 0,
+            "lost": 16,
+            "route": [
+              18,
+              42
+            ]
+          }
+        ],
+        "contractTimeline": [
+          {
+            "day": 1380,
+            "pair": [
+              1,
+              5
+            ],
+            "every": 60,
+            "status": "expired"
+          },
+          {
+            "day": 1770,
+            "pair": [
+              1,
+              5
+            ],
+            "every": 60,
+            "status": "expired"
+          },
+          {
+            "day": 2130,
+            "pair": [
+              1,
+              5
+            ],
+            "every": 60,
+            "status": "expired"
+          },
+          {
+            "day": 2490,
+            "pair": [
+              1,
+              5
+            ],
+            "every": 60,
+            "status": "expired"
+          },
+          {
+            "day": 2880,
+            "pair": [
+              1,
+              5
+            ],
+            "every": 60,
+            "status": "expired"
+          },
+          {
+            "day": 3240,
+            "pair": [
+              1,
+              5
+            ],
+            "every": 60,
+            "status": "expired"
+          }
+        ]
+      }
+    ],
+    "researchNetSum": {
+      "old": 44673.48451796645,
+      "next": 36758.78620114127
+    },
+    "finalStocksAndRates": [
+      {
+        "actor": 1,
+        "dead": false,
+        "stock": {
+          "min": 6000.249553311154,
+          "ene": 17684.624395585575,
+          "yiy": 3808.5852738182493,
+          "ala": 40.310148551194374,
+          "ara": 12.055610452011399,
+          "tuk": 1329.766563018705,
+          "etk": 965.1106937439997
+        },
+        "net": {
+          "min": 80.09030234602578,
+          "ene": 209.69006824649264,
+          "yiy": 15.91236509415386,
+          "ala": 25.71076395198042,
+          "ara": 29.71743080480699,
+          "etk": 13.645822153846154,
+          "tuk": 6.47468287078024
+        }
+      },
+      {
+        "actor": 2,
+        "dead": false,
+        "stock": {
+          "min": 3992.6373171965643,
+          "ene": 4450.438063078772,
+          "yiy": 2909.9826351578854,
+          "ala": 48.731896907231814,
+          "ara": 12.055610452011399,
+          "tuk": 1102.9458055051305,
+          "etk": 1168.3417176804942
+        },
+        "net": {
+          "min": 121.29428312258344,
+          "ene": 58.893642627869326,
+          "yiy": 13.405178654999991,
+          "ala": 23.089692180625004,
+          "ara": 92.17689604286281,
+          "etk": 16.40756487414899,
+          "tuk": 8.319053510590097
+        }
+      },
+      {
+        "actor": 3,
+        "dead": false,
+        "stock": {
+          "min": 128.37476133055796,
+          "ene": 7246.700829612237,
+          "yiy": 3373.822526766741,
+          "ala": 66.83524431382865,
+          "ara": 12.055610452011399,
+          "tuk": 1287.432016348741,
+          "etk": 798.4799634311951
+        },
+        "net": {
+          "min": 14.424401906153994,
+          "ene": 42.392902385760266,
+          "yiy": 10.720995407692323,
+          "ala": 31.703637487368784,
+          "ara": 214.93401471550627,
+          "etk": 12.058363076923078,
+          "tuk": 13.571989372685286
+        }
+      },
+      {
+        "actor": 4,
+        "dead": false,
+        "stock": {
+          "min": 6122.851808699531,
+          "ene": 6662.097722641039,
+          "yiy": 5471.341946644244,
+          "ala": 46.22849621284199,
+          "ara": 12.055610452011399,
+          "tuk": 1027.568239157921,
+          "etk": 894.6792179673901
+        },
+        "net": {
+          "min": 173.79722070948512,
+          "ene": 130.43818663038775,
+          "yiy": 27.065837480377617,
+          "ala": 14.995741707713062,
+          "ara": 145.39607651727985,
+          "etk": 13.189260689607593,
+          "tuk": 11.960959016627216
+        }
+      },
+      {
+        "actor": 5,
+        "dead": false,
+        "stock": {
+          "min": 16.252772362306587,
+          "ene": 12202.462612268844,
+          "yiy": 88.80000000000003,
+          "ala": 47.17020593893002,
+          "ara": 0,
+          "tuk": 1975.678774178628,
+          "etk": 782.4900998461529
+        },
+        "net": {
+          "min": 22.295981327678817,
+          "ene": 163.55877717566207,
+          "yiy": 0,
+          "ala": 22.347628992857423,
+          "ara": 92.77138552084752,
+          "etk": 13.222053461538462,
+          "tuk": 15.0700543879518
+        }
+      }
+    ]
+  },
+  {
+    "seed": 2026,
+    "old": {
+      "phase": "96F1",
+      "seed": 2026,
+      "contracts": 0,
+      "cancelled": 0,
+      "freightLost": 0,
+      "alive": 5,
+      "techs": 35,
+      "ships": 143,
+      "power": 16533,
+      "upkeep": 453.9131445275483,
+      "colonies": 13,
+      "deliveries": 0,
+      "pacts": 2,
+      "warsStarted": 2,
+      "peace": 2,
+      "objectiveChanges": 27,
+      "plansCompleted": 11,
+      "plansFailed": 3,
+      "criticalEmpireMonths": 1,
+      "invalidResources": [],
+      "elapsedMs": 8243
+    },
+    "next": {
+      "phase": "96F3",
+      "seed": 2026,
+      "contracts": 3,
+      "cancelled": 0,
+      "freightLost": 2,
+      "alive": 6,
+      "techs": 36,
+      "ships": 224,
+      "power": 27985,
+      "upkeep": 886.2848062558734,
+      "colonies": 15,
+      "deliveries": 34,
+      "pacts": 6,
+      "warsStarted": 3,
+      "peace": 2,
+      "objectiveChanges": 26,
+      "plansCompleted": 12,
+      "plansFailed": 5,
+      "criticalEmpireMonths": 1,
+      "invalidResources": [],
+      "elapsedMs": 8874
+    },
+    "firstMonthlyResourceDifference": {
+      "month": 12,
+      "day": 360,
+      "actor": 3,
+      "before": {
+        "min": 38.042759691200075,
+        "ene": 389.99970664200015,
+        "yiy": 180,
+        "ala": 128.68574925000001,
+        "ara": 0,
+        "tuk": 279.94778084496005,
+        "etk": 206.450922
+      },
+      "after": {
+        "min": 28.042759691200075,
+        "ene": 389.99970664200015,
+        "yiy": 180,
+        "ala": 128.68574925000001,
+        "ara": 0,
+        "tuk": 279.94778084496005,
+        "etk": 206.450922
+      }
+    },
+    "critical": {
+      "old": {
+        "2:ene": [
+          1
+        ]
+      },
+      "next": {
+        "2:ene": [
+          1
+        ]
+      }
+    },
+    "spending": {
+      "old": {
+        "queueShip": {
+          "orders": 323,
+          "paid": {
+            "min": 3624,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 10874,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        "queueBuilding": {
+          "orders": 181,
+          "paid": {
+            "min": 28500,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 355,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        }
+      },
+      "next": {
+        "queueShip": {
+          "orders": 380,
+          "paid": {
+            "min": 4284,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 12790,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        "queueBuilding": {
+          "orders": 191,
+          "paid": {
+            "min": 31700,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 495,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        }
+      }
+    },
+    "trade": [
+      {
+        "phase": "96F1",
+        "deliveriesByPair": {},
+        "losses": [],
+        "contractTimeline": []
+      },
+      {
+        "phase": "96F3",
+        "deliveriesByPair": {
+          "2-4": 10,
+          "1-7": 24
+        },
+        "losses": [
+          {
+            "day": 3350,
+            "kind": "freight-end",
+            "id": 11,
+            "e": 2,
+            "to": 4,
+            "contract": 1,
+            "status": "raided",
+            "reason": "Gerçek kargonun %40’ı ele geçirildi; kalanı imha edildi",
+            "loaded": 16,
+            "delivered": 0,
+            "lost": 16,
+            "route": [
+              18,
+              16,
+              9
+            ]
+          },
+          {
+            "day": 3450.5,
+            "kind": "freight-end",
+            "id": 12,
+            "e": 4,
+            "to": 2,
+            "contract": 1,
+            "status": "destroyed",
+            "reason": "Savaş nedeniyle ticaret kapalı · 180 gün sonra kargo kaybedildi",
+            "loaded": 10.7,
+            "delivered": 0,
+            "lost": 10.7,
+            "route": [
+              9,
+              16,
+              18
+            ]
+          }
+        ],
+        "contractTimeline": [
+          {
+            "day": 2940,
+            "pair": [
+              2,
+              4
+            ],
+            "every": 60,
+            "status": "expired"
+          },
+          {
+            "day": 3240,
+            "pair": [
+              1,
+              7
+            ],
+            "every": 30,
+            "status": "expired"
+          },
+          {
+            "day": 3600,
+            "pair": [
+              1,
+              7
+            ],
+            "every": 30,
+            "status": "active"
+          }
+        ]
+      }
+    ],
+    "researchNetSum": {
+      "old": 31313.383381294498,
+      "next": 34505.89490938899
+    },
+    "finalStocksAndRates": [
+      {
+        "actor": 1,
+        "dead": false,
+        "stock": {
+          "min": 2094.2273500522497,
+          "ene": 2582.9222313696973,
+          "yiy": 6220.112187021765,
+          "ala": 380.1294096526932,
+          "ara": 0,
+          "tuk": 1827.6129752662225,
+          "etk": 1354.0558741927343
+        },
+        "net": {
+          "min": 167.33004728929976,
+          "ene": -42.6633577402734,
+          "yiy": 60.42885543911345,
+          "ala": 60.54075342500002,
+          "ara": 132.2434336984182,
+          "etk": 13.908158111111112,
+          "tuk": 23.886673505704685
+        }
+      },
+      {
+        "actor": 2,
+        "dead": false,
+        "stock": {
+          "min": 67.99514642749062,
+          "ene": 9359.111103219504,
+          "yiy": 1982.9447653213952,
+          "ala": 446.23554229730064,
+          "ara": 0,
+          "tuk": 804.0035456696147,
+          "etk": 411.9882461943322
+        },
+        "net": {
+          "min": 2.8642550196751757,
+          "ene": 50.619180195620174,
+          "yiy": 10.75549597763915,
+          "ala": 35.9249438407722,
+          "ara": 94.61364446170853,
+          "etk": 9.471932051105297,
+          "tuk": -4.2751524013192
+        }
+      },
+      {
+        "actor": 3,
+        "dead": false,
+        "stock": {
+          "min": 787.9384841755653,
+          "ene": 4026.6394259887456,
+          "yiy": 180,
+          "ala": 138.52398794641198,
+          "ara": 0,
+          "tuk": 1384.90036133472,
+          "etk": 946.4249716111128
+        },
+        "net": {
+          "min": 129.93753600000002,
+          "ene": 177.51943895610017,
+          "yiy": 0,
+          "ala": 32.77370961209993,
+          "ara": 55.25020797749557,
+          "etk": 10.98135611403034,
+          "tuk": 3.8887895999999955
+        }
+      },
+      {
+        "actor": 4,
+        "dead": false,
+        "stock": {
+          "min": 2813.122920459571,
+          "ene": 1885.6579568490579,
+          "yiy": 2580.7901586027533,
+          "ala": 734.3217856250005,
+          "ara": 0,
+          "tuk": 1425.136374154808,
+          "etk": 688.0720465233336
+        },
+        "net": {
+          "min": 35.54745806166003,
+          "ene": -33.301358496895006,
+          "yiy": 22.36030558500004,
+          "ala": 11.085611564375021,
+          "ara": 39.665230940587506,
+          "etk": 11.136465700000002,
+          "tuk": -1.0450111083489926
+        }
+      },
+      {
+        "actor": 5,
+        "dead": false,
+        "stock": {
+          "min": 2830.0190057995264,
+          "ene": 7457.382143967159,
+          "yiy": 180,
+          "ala": 45.25297240089432,
+          "ara": 0,
+          "tuk": 2353.5899115324,
+          "etk": 1209.3250639306045
+        },
+        "net": {
+          "min": 355.2929852307902,
+          "ene": 255.8047480403498,
+          "yiy": 0,
+          "ala": 22.16059299999992,
+          "ara": 161.98114580908282,
+          "etk": 15.708891397435899,
+          "tuk": 14.064937103999991
+        }
+      },
+      {
+        "actor": 7,
+        "dead": false,
+        "stock": {
+          "min": 401.28272869969226,
+          "ene": 1907.8847346752834,
+          "yiy": 392.9402274,
+          "ala": 225.81301087500003,
+          "ara": 0,
+          "tuk": 450.3803565023074,
+          "etk": 202.3663
+        },
+        "net": {
+          "min": 76.17795615999998,
+          "ene": 69.41326209205684,
+          "yiy": 7.819824000000004,
+          "ala": 29.514636999999997,
+          "ara": 31.47376752,
+          "etk": 12.0908,
+          "tuk": 18.055828799999997
+        }
+      }
+    ]
+  }
+]

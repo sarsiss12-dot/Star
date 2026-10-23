@@ -180,12 +180,23 @@ function aiConstructionCommitment(e){
 function aiBuildingDelta(e,sys,pl,key,queued=false,direction=1){
  const b={...pl.col.b};if(queued)for(const q of pl.col.q||[])if(BUILDINGS[q.key])b[q.key]=Math.max(0,(b[q.key]||0)+(q.dem?-1:1));
  if(key)b[key]=Math.max(0,(b[key]||0)+direction);
+ // Ports change the whole trade multiplier; federation laws can depend on
+ // the sign of total income. Use the real calculator for these nonlinear
+ // cases, on a shadow empire and a synchronously restored colony only.
+ if((b.liman||0)!==(pl.col.b.liman||0)||findFed(e)){
+  const original=pl.col,old=empireIncome({...e},false);let next;
+  try{pl.col={...original,b};next=empireIncome({...e,_trAt:-1,_trCache:null},false);}
+  finally{pl.col=original;}
+  return Object.fromEntries(Object.keys(old).map(r=>[r,next[r]-old[r]]));
+ }
  const old=colonyOutput(e,sys,pl),next=colonyOutput(e,sys,{...pl,col:{...pl.col,b}}),delta={};
  const oldUp=Object.entries(pl.col.b).reduce((n,[k,v])=>n+(BUILDINGS[k]?.up||0)*v,0),newUp=Object.entries(b).reduce((n,[k,v])=>n+(BUILDINGS[k]?.up||0)*v,0);
+ const radical=(typeof throneMul==='function'?throneMul(e,sys.id):1)*(typeof hungerMul==='function'?hungerMul(e):1);
  for(const r of ['ene','min','yiy','ala','tuk','ara','etk']){
-  const mod=r==='tuk'?(e.mods.minMul||0)*.5:e.mods[r+'Mul']||0;
-  delta[r]=((next.o[r]||0)-(old.o[r]||0)-(next.use[r]||0)+(old.use[r]||0))*(1+mod);
+  const mod=r==='etk'?0:r==='tuk'?(e.mods.minMul||0)*.5:e.mods[r+'Mul']||0;
+  delta[r]=(((next.o[r]||0)-(old.o[r]||0))*radical-(next.use[r]||0)+(old.use[r]||0))*(1+mod);
  }
+ if(!identityEatsFood(e))delta.yiy=0;
  delta.ene=delta.ene*(1+(e.trade?.mul||0)+(e.mods.tradeMul||0))-(newUp-oldUp)*1.6;
  return delta;
 }
@@ -200,7 +211,7 @@ function aiEconomyPlan(e){
   projected.ala=(projected.ala||0)-(SHIPS[q.cls].upA||0)*upkeep;queued[q.cls]=(queued[q.cls]||0)+1;
  }
  if(typeof Commerce!=='undefined'&&G.commerce)for(const c of G.commerce.contracts)if(!Commerce.closed(c))for(const l of c.legs)if(l.e===e.id)projected[l.r]=(projected[l.r]||0)-l.v*30/l.every;
- const bio=RACES[e.race].bio,phys=typeof physioOf==='function'?physioOf(e):null,eatsFood=bio!=='makine'&&bio!=='litoit'&&!['enerji','mineral'].includes(phys?.yiyer);
+ const eatsFood=identityEatsFood(e);
  const target={ene:12,min:16,yiy:eatsFood?4:0,ala:8,tuk:4,ara:0,etk:0},floor={ene:120,min:120,yiy:eatsFood?60:0,ala:100,tuk:60,ara:0,etk:0},rows={};
  for(const r of Object.keys(target)){
   const stock=Math.max(0,(e.res[r]||0)-(committed[r]||0)),net=Number.isFinite(projected[r])?projected[r]:0,months=net<0?stock/-net:null;
@@ -234,16 +245,33 @@ function aiRecoverEconomy(e){
 }
 function aiBuildingSustainable(e,sys,pl,key,plan=aiEconomyPlan(e)){
  const B=BUILDINGS[key];if(!B)return false;
+ const cost=buildingCost(e,key);
  const delta=aiBuildingDelta(e,sys,pl,key);
  for(const r of ['ene','min','yiy','tuk','ala']){
   // Price can destroy a deficit's runway even when this building has no
   // recurring input in that currency. Producers improving that deficit keep
   // the existing recovery exception; a grant is never used to bridge it.
-  if(delta[r]>0||delta[r]===0&&!(B.c[r]||0))continue;
-  const row=plan.rows[r],net=row.net+delta[r],cash=row.stock-(B.c[r]||0);
+  if(delta[r]>0||delta[r]===0&&!(cost[r]||0))continue;
+  const row=plan.rows[r],net=row.net+delta[r],cash=row.stock-(cost[r]||0);
   if(net<0&&cash<-net*6)return false;
  }
- return Object.entries(B.c).every(([r,v])=>(e.res[r]||0)-(plan.committed[r]||0)>=v);
+ return Object.entries(cost).every(([r,v])=>(e.res[r]||0)-(plan.committed[r]||0)>=v);
+}
+/* 96F.3: affordability is not solvency after payment. This derived gate
+   includes paid queues and reserved recovery/building funds; it never spends.
+   Immediate observed defence may use three months, ordinary orders six.
+   Resource producers retain their existing improvement exception above. */
+function aiShipPurchaseSustainable(e,cls,plan=aiEconomyPlan(e),reserved={},defense=false){
+ const cost=shipCost(e,cls),d=SHIPS[cls];if(!d)return false;
+ const up=Math.max(.1,1+(e.mods.upMul||0)),energyUp=up*(hasCivic(e,'mobilize')&&!Object.values(e.war||{}).some(Boolean)?2:1);
+ const horizon=defense&&d.rol==='sav'?3:6;
+ for(const r of ['ene','min','yiy','ala','tuk']){
+  const row=plan.rows[r],baseline=Math.min(e.inc[r]||0,row.net);
+  const maintenance=r==='ene'?d.up*energyUp:r==='ala'?(d.upA||0)*up:0,net=baseline-maintenance;
+  const price=cost[r]||0,cash=row.stock-price-(reserved[r]||0);
+  if(net<0&&(price>0||maintenance>0)&&cash<-net*horizon){AIDiagnostics.note('navy:post-purchase-'+r,e,null,horizon+' month runway after actual price');return false;}
+ }
+ return true;
 }
 /* A critical producer must not be perpetually undercut by cheaper growth
    purchases. This is a derived reservation, not money or a persistent plan.
@@ -272,7 +300,41 @@ function aiEconomicOrder(e,sys,pl,legacy){
  if(saving){AIDiagnostics.note('recovery:save-for-producer',e,null,saving.key+'; '+saving.months.toFixed(2)+' months from own income');return [saving.key];}
  // A first port supplies energy/Etki and enables paid freight without extra upkeep.
  if(!(pl.col.b.liman||0)&&!colonyQueuedOf(pl.col,'liman')&&plan.rows.ene.urgency<30)urgent.splice(Math.min(1,urgent.length),0,'liman');
- return [...new Set(urgent.concat(legacy))].filter(k=>BUILDINGS[k]&&aiBuildingSustainable(e,sys,pl,k,plan));
+ return [...new Set(urgent.concat(legacy))].filter(k=>BUILDINGS[k]&&(k!=='ciftlik'||aiBuildingDelta(e,sys,pl,k).yiy>0)&&aiBuildingSustainable(e,sys,pl,k,plan));
+}
+/* A replacement uses the same marginal income as construction planning.
+   Queued losses/gains are included, refunds are not counted before completion.
+   Try the next real need if the first has no safe replacement. */
+function aiDemolitionChoice(e,sys,pl,needs,plan=aiEconomyPlan(e)){
+ const queued=aiBuildingDelta(e,sys,pl,null,true),pending={...pl.col.b};
+ for(const q of pl.col.q||[])if(BUILDINGS[q.key])pending[q.key]=Math.max(0,(pending[q.key]||0)+(q.dem?-1:1));
+ for(const wanted of [...new Set(needs)]){
+  if(!BUILDINGS[wanted]||(pending[wanted]||0)>=BUILDINGS[wanted].max)continue;
+  let best=null;
+  for(const key of Object.keys(pl.col.b)){
+   const removing=(pl.col.q||[]).filter(q=>q.dem&&q.key===key).length,available=pl.col.b[key]-removing;
+   if(key===wanted||available<=0||['santral','tersane','liman','kale'].includes(key)&&available<=1)continue;
+   const whole=aiBuildingDelta(e,sys,pl,key,true,-1),delta=Object.fromEntries(Object.keys(whole).map(r=>[r,whole[r]-queued[r]]));
+   // Keep the legacy protection of a last useful producer/capability. A last
+   // ineffective farm may still go: it loses no production and saves upkeep.
+   if(available<=1&&Object.values(delta).some(v=>v<-.0000001))continue;
+   const safe=['ene','min','yiy','tuk','ala'].every(r=>{
+    if(delta[r]>=-.0000001)return true;
+    // A cash buffer cannot justify removing a producer while its resource
+    // already runs a deficit. Recovery demolition remains a separate path.
+    return plan.rows[r].net+delta[r]>=-.0000001;
+   });
+   if(!safe)continue;
+   let score=0;
+   for(const r of ['ene','min','yiy','tuk','ala','ara','etk']){
+    const weight=r==='ara'?1:r==='etk'?2:2+(plan.rows[r]?.urgency||0)/12;
+    score+=delta[r]*weight;
+   }
+   if(!best||score>best.score||score===best.score&&key<best.key)best={key,wanted,score,delta};
+  }
+  if(best)return best;
+ }
+ return null;
 }
 /* 96F extends the existing aiStrategy record; goal remains the tactical
    compatibility field. The objective and its preparation never grant resources. */
@@ -1129,6 +1191,7 @@ function aiFleetTemplate(e,f){
   if(f.composition)f.composition.aiDesign=design;
 }
 function aiQueueMilitaryShip(e,yard,cls,policy){
+  if(!policy&&!aiShipPurchaseSustainable(e,cls))return false;
   const candidates=G.fleets.filter(f=>f.e===e.id && f.ships.length &&
     f.ships.every(sh=>SHIPS[sh.c] && SHIPS[sh.c].rol==='sav' && !SHIPS[sh.c].crisisOnly) &&
     !f.federal && !f.guardLocked && !f.retreating && !hasShipment(f));
@@ -1196,6 +1259,7 @@ function aiShipProduction(e,my,prof){
   if((c.ala||0)>budget||(e.res.ala||0)-(c.ala||0)<reserve){note('alloy-budget-reserve');return false;}
   if(!war&&current.rows.tuk.net<0&&current.rows.tuk.months<6){note('consumer-runway');return false;}
   if(!Object.entries(c).every(([r,v])=>e.res[r]-(r==='ala'?0:commitment[r]||0)>=v)){note('resource-cost');return false;}
+  if(!aiShipPurchaseSustainable(e,cls,current,recovery?.cost||{},visibleDanger)){note('post-purchase-runway');return false;}
   return true;
  }
  function buy(cls,military=false){
@@ -1298,8 +1362,7 @@ function aiColossusProduction(e,yard,prof){
           if (skor > enSkor){ enSkor = skor; basDusman = o; }
         }
         if (agresif && basDusman && enSkor >= 45 && rnd() < .10){
-          queueShip(e, yard, 'col_s');
-          e.colossusTarget = basDusman.id;
+          if(aiShipPurchaseSustainable(e,'col_s')&&queueShip(e, yard, 'col_s'))e.colossusTarget = basDusman.id;
         }
       }
     
@@ -1362,7 +1425,7 @@ function aiTurn(e){
     let want;
     if (e.home === sys.id) want = 'yonetim';
     else if ((atWarNow && border) || (prof.turtle > .5 && border && threatAt(e, sys.id) > 0)) want = 'garnizon';
-    else if (e.crisis === 'yiyecek' || (e.inc.yiy < 3 && RACES[e.race].bio === 'organik')) want = 'tarim';
+    else if (identityEatsFood(e) && (e.crisis === 'yiyecek' || e.inc.yiy < 3)) want = 'tarim';
     else if (e.crisis === 'mineral') want = 'sanayi';
     else if (e.inc.ara < 18 + prof.sci*22) want = 'arastir';
     else want = 'sanayi';
@@ -1386,8 +1449,8 @@ function aiTurn(e){
     if(unhappy?.k==='bilim')need.push('lab');else if(unhappy?.k==='tuccar'&&(e.inc.ene||0)>6)need.push('liman');
     // kriz varsa her şeyin önüne geçer
     if (e.crisis === 'enerji') need.push('santral', 'santral');
-    if (e.crisis === 'yiyecek') need.push('ciftlik', 'ciftlik');
-    if (e.inc.yiy < 4 && RACES[e.race].bio === 'organik') need.push('ciftlik');
+    if (identityEatsFood(e) && e.crisis === 'yiyecek') need.push('ciftlik', 'ciftlik');
+    if (identityEatsFood(e) && e.inc.yiy < 4) need.push('ciftlik');
     if (e.inc.ene < 6) need.push('santral');
     if (e.inc.min < 10) need.push('maden');
     // alaşım darboğazı: mineral yığılıyorsa mutlaka dökümhane kur
@@ -1423,32 +1486,14 @@ function aiTurn(e){
        kuyrukta yıkım varsa yenisi verilmez ve her ay en fazla bir emir. */
     const jobs = (typeof colonyJobs === 'function') ? colonyJobs(pl.col) : kuyruk;
     const slotDolu = colonyUsed(pl.col) + kuyruk >= colonySlots(pl.col, e, pl);
-    if (slotDolu && jobs === 0 && need.length && typeof queueDemolish === 'function'){
-      /* İhtiyaç listesindeki hiçbir bina kurulamıyorsa yer açalım */
-      /* Slot dolu olduğu için kurulamayan İLK ihtiyacı bul.
-         Eskiden yalnızca need[0]'a bakılıyordu; o bina zaten max'ta
-         olduğunda yıkım hiç tetiklenmiyordu. */
-      let istenen = null;
-      for (const k of need){
-        if (!BUILDINGS[k]) continue;
-        const kq = (typeof colonyQueuedOf === 'function') ? colonyQueuedOf(pl.col, k) : 0;
-        if ((pl.col.b[k] || 0) + kq < BUILDINGS[k].max){ istenen = k; break; }
-      }
-      if (istenen){
-        /* En düşük öncelikli mevcut binayı seç: ihtiyaç listesinde
-           olmayan ve birden fazla kopyası bulunan */
-        /* Yalnızca EN ÖNCELİKLİ ihtiyaç korunur. Eskiden `need`
-           listesindeki her bina muaf tutuluyordu; ama AI'nın çok
-           kopyası olan binalar zaten o listede olduğu için hiçbir
-           aday kalmıyor ve yıkım hiç tetiklenmiyordu (ölçüm: 6
-           tohumda 0 emir). */
-        let hedef = null, enCok = 1;
-        for (const k in pl.col.b){
-          if (k === istenen) continue;                       // asıl istediğimiz
-          if (k === 'santral' || k === 'ciftlik') continue;  // hayati altyapı
-          if (pl.col.b[k] > enCok){ enCok = pl.col.b[k]; hedef = k; }
-        }
-        if (hedef && rnd() < .18) queueDemolish(e, sys, pl, hedef);
+    const slotRetry='economy-slot:'+sys.id+':'+pl.i;
+    if (slotDolu && jobs === 0 && need.length && !(e.aiTalk?.[slotRetry]?.until>G.day) && typeof queueDemolish === 'function'){
+      const pick=aiDemolitionChoice(e,sys,pl,need);
+      if(!pick){
+        (e.aiTalk||(e.aiTalk={}))[slotRetry]={until:G.day+90,reason:'No safe productive replacement'};
+        AIDiagnostics.note('recovery:no-safe-slot',e,null,sys.id+':'+pl.i+'; retry in 90 days');
+      }else if(rnd()<.18&&queueDemolish(e,sys,pl,pick.key)){
+        aiPlanEvent(e,'building-replacement',{system:sys.id,planet:pl.i,removed:pick.key,wanted:pick.wanted});
       }
     }
 
@@ -2874,7 +2919,7 @@ function aiStructTick(){
   const funded=Object.entries(cost).every(([r,v])=>(e.res[r]||0)-v-(commit[r]||0)-(candidate.cost[r]||0)>=(r==='ala'?40:r==='min'?80:0));
   const net=(e.inc.ene||0)-inv.queuedEnergy-up;
   if(!funded||inv.usage+SHIPS.ins.sz>e.cap*.92||net<0&&(e.res.ene||0)<-net*12){AIDiagnostics.note('builder:budget-or-maintenance',e);continue;}
-  if(queueShip(e,yard,'ins'))AIDiagnostics.note('builder:paid-replacement',e,null,candidate.key);
+  if(aiShipPurchaseSustainable(e,'ins',aiEconomyPlan(e),candidate.cost)&&queueShip(e,yard,'ins'))AIDiagnostics.note('builder:paid-replacement',e,null,candidate.key);
  }
 }
 

@@ -318,8 +318,8 @@ function tradeInfo(e){
   return out;
 }
 
-function empireIncome(e){
-  const report=typeof EconomyLedger!=='undefined'?EconomyLedger.incomeReport(e):null;
+function empireIncome(e, detail=true){
+  const report=detail&&typeof EconomyLedger!=='undefined'?EconomyLedger.incomeReport(e):null;
   const inc = {min:0,ene:0,yiy:0,ala:0,ara:0,etk:0,tuk:0};
   let food = 0, upk = 0, pops = 0;
   for (const c of e.colonies){

@@ -1,0 +1,1943 @@
+[
+  {
+    "phase": "96F1",
+    "day": 330,
+    "before": {
+      "stock": {
+        "min": 172.60036345499998,
+        "ene": 357.3353201800001,
+        "yiy": 180,
+        "ala": 56.87305125,
+        "ara": 0,
+        "tuk": 267.79610440650004,
+        "etk": 198.52250000000004
+      },
+      "income": {
+        "min": 10.397169488,
+        "ene": 14.312345439999994,
+        "yiy": 0,
+        "ala": -2.31,
+        "ara": 16.85109582,
+        "etk": 9.11,
+        "tuk": 12.199722110399998
+      },
+      "buildings": {
+        "maden": 2,
+        "santral": 4,
+        "ciftlik": 2,
+        "lab": 1,
+        "fabrika": 2,
+        "tersane": 1,
+        "kale": 0,
+        "liman": 0
+      },
+      "plan": {
+        "horizon": 6,
+        "rows": {
+          "ene": {
+            "stock": 357.3353201800001,
+            "net": 14.312345439999994,
+            "months": null,
+            "urgency": 0,
+            "reserve": 120
+          },
+          "min": {
+            "stock": 172.60036345499998,
+            "net": 10.397169488,
+            "months": null,
+            "urgency": 4.2021228840000004,
+            "reserve": 120
+          },
+          "yiy": {
+            "stock": 180,
+            "net": 0,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          },
+          "ala": {
+            "stock": 56.87305125,
+            "net": -2.31,
+            "months": 24.620368506493506,
+            "urgency": 38.32416905574747,
+            "reserve": 113.86
+          },
+          "tuk": {
+            "stock": 267.79610440650004,
+            "net": 12.199722110399998,
+            "months": null,
+            "urgency": 0,
+            "reserve": 60
+          },
+          "ara": {
+            "stock": 0,
+            "net": 16.85109582,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          },
+          "etk": {
+            "stock": 198.52250000000004,
+            "net": 9.11,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          }
+        },
+        "committed": {},
+        "queued": {},
+        "policy": "growth",
+        "critical": false
+      }
+    },
+    "orders": [
+      {
+        "kind": "queueBuilding",
+        "key": "ciftlik",
+        "paid": {
+          "min": 110,
+          "ene": 0,
+          "yiy": 0,
+          "ala": 0,
+          "ara": 0,
+          "tuk": 0,
+          "etk": 0
+        }
+      }
+    ],
+    "after": {
+      "stock": {
+        "min": 62.60036345499998,
+        "ene": 357.3353201800001,
+        "yiy": 180,
+        "ala": 56.87305125,
+        "ara": 0,
+        "tuk": 267.79610440650004,
+        "etk": 198.52250000000004
+      },
+      "plan": {
+        "horizon": 6,
+        "rows": {
+          "ene": {
+            "stock": 357.3353201800001,
+            "net": 12.712345439999995,
+            "months": null,
+            "urgency": 0,
+            "reserve": 120
+          },
+          "min": {
+            "stock": 62.60036345499998,
+            "net": 10.397169488,
+            "months": null,
+            "urgency": 8.028765320333335,
+            "reserve": 120
+          },
+          "yiy": {
+            "stock": 180,
+            "net": 13.174979999999998,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          },
+          "ala": {
+            "stock": 56.87305125,
+            "net": -2.31,
+            "months": 24.620368506493506,
+            "urgency": 38.32416905574747,
+            "reserve": 113.86
+          },
+          "tuk": {
+            "stock": 267.79610440650004,
+            "net": 12.199722110399998,
+            "months": null,
+            "urgency": 0,
+            "reserve": 60
+          },
+          "ara": {
+            "stock": 0,
+            "net": 16.85109582,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          },
+          "etk": {
+            "stock": 198.52250000000004,
+            "net": 9.11,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          }
+        },
+        "committed": {},
+        "queued": {},
+        "policy": "growth",
+        "critical": false
+      },
+      "queue": [
+        {
+          "key": "ciftlik",
+          "left": 61,
+          "tot": 61,
+          "paid": {
+            "min": 110
+          },
+          "s": 13,
+          "p": 0
+        }
+      ]
+    },
+    "physio": "lithoid",
+    "feeding": "mineral"
+  },
+  {
+    "phase": "96F1",
+    "day": 450,
+    "before": {
+      "stock": {
+        "min": 127.39174959899998,
+        "ene": 428.01976770000005,
+        "yiy": 180,
+        "ala": 47.633051249999994,
+        "ara": 0,
+        "tuk": 317.28471724170004,
+        "etk": 234.9625000000001
+      },
+      "income": {
+        "min": 25.498523583999997,
+        "ene": 20.171878319999983,
+        "yiy": 0,
+        "ala": -2.31,
+        "ara": 18.397814759999996,
+        "etk": 9.11,
+        "tuk": 12.544584307200003
+      },
+      "buildings": {
+        "maden": 2,
+        "santral": 4,
+        "ciftlik": 3,
+        "lab": 1,
+        "fabrika": 2,
+        "tersane": 1,
+        "kale": 0,
+        "liman": 0
+      },
+      "plan": {
+        "horizon": 6,
+        "rows": {
+          "ene": {
+            "stock": 428.01976770000005,
+            "net": 20.171878319999983,
+            "months": null,
+            "urgency": 0,
+            "reserve": 120
+          },
+          "min": {
+            "stock": 127.39174959899998,
+            "net": 25.498523583999997,
+            "months": null,
+            "urgency": 0,
+            "reserve": 120
+          },
+          "yiy": {
+            "stock": 180,
+            "net": 0,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          },
+          "ala": {
+            "stock": 47.633051249999994,
+            "net": -2.31,
+            "months": 20.620368506493502,
+            "urgency": 40.008844526607774,
+            "reserve": 113.86
+          },
+          "tuk": {
+            "stock": 317.28471724170004,
+            "net": 12.544584307200003,
+            "months": null,
+            "urgency": 0,
+            "reserve": 60
+          },
+          "ara": {
+            "stock": 0,
+            "net": 18.397814759999996,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          },
+          "etk": {
+            "stock": 234.9625000000001,
+            "net": 9.11,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          }
+        },
+        "committed": {},
+        "queued": {},
+        "policy": "growth",
+        "critical": false
+      }
+    },
+    "orders": [
+      {
+        "kind": "queueBuilding",
+        "key": "ciftlik",
+        "paid": {
+          "min": 110,
+          "ene": 0,
+          "yiy": 0,
+          "ala": 0,
+          "ara": 0,
+          "tuk": 0,
+          "etk": 0
+        }
+      }
+    ],
+    "after": {
+      "stock": {
+        "min": 17.39174959899998,
+        "ene": 428.01976770000005,
+        "yiy": 180,
+        "ala": 47.633051249999994,
+        "ara": 0,
+        "tuk": 317.28471724170004,
+        "etk": 234.9625000000001
+      },
+      "plan": {
+        "horizon": 6,
+        "rows": {
+          "ene": {
+            "stock": 428.01976770000005,
+            "net": 18.571878319999982,
+            "months": null,
+            "urgency": 0,
+            "reserve": 120
+          },
+          "min": {
+            "stock": 17.39174959899998,
+            "net": 25.498523583999997,
+            "months": null,
+            "urgency": 6.840550026733335,
+            "reserve": 120
+          },
+          "yiy": {
+            "stock": 180,
+            "net": 14.108640000000008,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          },
+          "ala": {
+            "stock": 47.633051249999994,
+            "net": -2.31,
+            "months": 20.620368506493502,
+            "urgency": 40.008844526607774,
+            "reserve": 113.86
+          },
+          "tuk": {
+            "stock": 317.28471724170004,
+            "net": 12.544584307200003,
+            "months": null,
+            "urgency": 0,
+            "reserve": 60
+          },
+          "ara": {
+            "stock": 0,
+            "net": 18.397814759999996,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          },
+          "etk": {
+            "stock": 234.9625000000001,
+            "net": 9.11,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          }
+        },
+        "committed": {},
+        "queued": {},
+        "policy": "growth",
+        "critical": false
+      },
+      "queue": [
+        {
+          "key": "ciftlik",
+          "left": 61,
+          "tot": 61,
+          "paid": {
+            "min": 110
+          },
+          "s": 13,
+          "p": 0
+        }
+      ]
+    },
+    "physio": "lithoid",
+    "feeding": "mineral"
+  },
+  {
+    "phase": "96F1",
+    "day": 570,
+    "before": {
+      "stock": {
+        "min": 121.03787507899996,
+        "ene": 520.1425803,
+        "yiy": 180,
+        "ala": 38.393051249999985,
+        "ara": 0,
+        "tuk": 367.9803477657001,
+        "etk": 271.40250000000015
+      },
+      "income": {
+        "min": 26.049200631999994,
+        "ene": 24.783644759999994,
+        "yiy": 0,
+        "ala": -2.31,
+        "ara": 19.17117423,
+        "etk": 9.11,
+        "tuk": 12.717015405599996
+      },
+      "buildings": {
+        "maden": 2,
+        "santral": 4,
+        "ciftlik": 4,
+        "lab": 1,
+        "fabrika": 2,
+        "tersane": 1,
+        "kale": 0,
+        "liman": 0
+      },
+      "plan": {
+        "horizon": 6,
+        "rows": {
+          "ene": {
+            "stock": 520.1425803,
+            "net": 24.783644759999994,
+            "months": null,
+            "urgency": 0,
+            "reserve": 120
+          },
+          "min": {
+            "stock": 121.03787507899996,
+            "net": 26.049200631999994,
+            "months": null,
+            "urgency": 0,
+            "reserve": 120
+          },
+          "yiy": {
+            "stock": 180,
+            "net": 0,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          },
+          "ala": {
+            "stock": 38.393051249999985,
+            "net": -2.31,
+            "months": 16.6203685064935,
+            "urgency": 42.14861241999332,
+            "reserve": 113.86
+          },
+          "tuk": {
+            "stock": 367.9803477657001,
+            "net": 12.717015405599996,
+            "months": null,
+            "urgency": 0,
+            "reserve": 60
+          },
+          "ara": {
+            "stock": 0,
+            "net": 19.17117423,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          },
+          "etk": {
+            "stock": 271.40250000000015,
+            "net": 9.11,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          }
+        },
+        "committed": {},
+        "queued": {},
+        "policy": "growth",
+        "critical": false
+      }
+    },
+    "orders": [
+      {
+        "kind": "queueBuilding",
+        "key": "ciftlik",
+        "paid": {
+          "min": 110,
+          "ene": 0,
+          "yiy": 0,
+          "ala": 0,
+          "ara": 0,
+          "tuk": 0,
+          "etk": 0
+        }
+      }
+    ],
+    "after": {
+      "stock": {
+        "min": 11.03787507899996,
+        "ene": 520.1425803,
+        "yiy": 180,
+        "ala": 38.393051249999985,
+        "ara": 0,
+        "tuk": 367.9803477657001,
+        "etk": 271.40250000000015
+      },
+      "plan": {
+        "horizon": 6,
+        "rows": {
+          "ene": {
+            "stock": 520.1425803,
+            "net": 23.183644759999993,
+            "months": null,
+            "urgency": 0,
+            "reserve": 120
+          },
+          "min": {
+            "stock": 11.03787507899996,
+            "net": 26.049200631999994,
+            "months": null,
+            "urgency": 7.264141661400003,
+            "reserve": 120
+          },
+          "yiy": {
+            "stock": 180,
+            "net": 15.042299999999983,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          },
+          "ala": {
+            "stock": 38.393051249999985,
+            "net": -2.31,
+            "months": 16.6203685064935,
+            "urgency": 42.14861241999332,
+            "reserve": 113.86
+          },
+          "tuk": {
+            "stock": 367.9803477657001,
+            "net": 12.717015405599996,
+            "months": null,
+            "urgency": 0,
+            "reserve": 60
+          },
+          "ara": {
+            "stock": 0,
+            "net": 19.17117423,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          },
+          "etk": {
+            "stock": 271.40250000000015,
+            "net": 9.11,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          }
+        },
+        "committed": {},
+        "queued": {},
+        "policy": "growth",
+        "critical": false
+      },
+      "queue": [
+        {
+          "key": "ciftlik",
+          "left": 61,
+          "tot": 61,
+          "paid": {
+            "min": 110
+          },
+          "s": 13,
+          "p": 0
+        }
+      ]
+    },
+    "physio": "lithoid",
+    "feeding": "mineral"
+  },
+  {
+    "phase": "96F1",
+    "day": 2370,
+    "before": {
+      "stock": {
+        "min": 616.1961947166454,
+        "ene": 2334.0985158194926,
+        "yiy": 180,
+        "ala": 62.793506927996454,
+        "ara": 0,
+        "tuk": 1040.0592441554736,
+        "etk": 606.33592123419
+      },
+      "income": {
+        "min": 12.872634018423145,
+        "ene": 6.558883217796335,
+        "yiy": 0,
+        "ala": 20.875935950542775,
+        "ara": 25.868332799999997,
+        "etk": 10.292271308013692,
+        "tuk": 11.083663183548456
+      },
+      "buildings": {
+        "maden": 3,
+        "santral": 4,
+        "ciftlik": 5,
+        "lab": 1,
+        "fabrika": 2,
+        "tersane": 1,
+        "kale": 0,
+        "liman": 1,
+        "dokum": 3
+      },
+      "plan": {
+        "horizon": 6,
+        "rows": {
+          "ene": {
+            "stock": 2334.0985158194926,
+            "net": 6.558883217796335,
+            "months": null,
+            "urgency": 5.441116782203665,
+            "reserve": 120
+          },
+          "min": {
+            "stock": 385.19619471664544,
+            "net": 12.872634018423145,
+            "months": null,
+            "urgency": 2.345524486182641,
+            "reserve": 120
+          },
+          "yiy": {
+            "stock": 180,
+            "net": 0,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          },
+          "ala": {
+            "stock": 16.793506927996454,
+            "net": 20.875935950542775,
+            "months": null,
+            "urgency": 6.656519445760283,
+            "reserve": 100
+          },
+          "tuk": {
+            "stock": 1040.0592441554736,
+            "net": 11.083663183548456,
+            "months": null,
+            "urgency": 0,
+            "reserve": 60
+          },
+          "ara": {
+            "stock": 0,
+            "net": 25.868332799999997,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          },
+          "etk": {
+            "stock": 606.33592123419,
+            "net": 10.292271308013692,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          }
+        },
+        "committed": {
+          "min": 231,
+          "ala": 46
+        },
+        "queued": {},
+        "policy": "growth",
+        "critical": false
+      }
+    },
+    "orders": [
+      {
+        "kind": "queueDemolish",
+        "key": "maden",
+        "paid": {
+          "min": 0,
+          "ene": 0,
+          "yiy": 0,
+          "ala": 0,
+          "ara": 0,
+          "tuk": 0,
+          "etk": 0
+        }
+      }
+    ],
+    "after": {
+      "stock": {
+        "min": 616.1961947166454,
+        "ene": 2334.0985158194926,
+        "yiy": 180,
+        "ala": 62.793506927996454,
+        "ara": 0,
+        "tuk": 1040.0592441554736,
+        "etk": 606.33592123419
+      },
+      "plan": {
+        "horizon": 6,
+        "rows": {
+          "ene": {
+            "stock": 2334.0985158194926,
+            "net": 8.158883217796335,
+            "months": null,
+            "urgency": 3.8411167822036654,
+            "reserve": 120
+          },
+          "min": {
+            "stock": 385.19619471664544,
+            "net": -0.49396558890063247,
+            "months": 779.803701658523,
+            "urgency": 30.15388488121405,
+            "reserve": 122.96379353340379
+          },
+          "yiy": {
+            "stock": 180,
+            "net": 0,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          },
+          "ala": {
+            "stock": 16.793506927996454,
+            "net": 20.875935950542775,
+            "months": null,
+            "urgency": 6.656519445760283,
+            "reserve": 100
+          },
+          "tuk": {
+            "stock": 1040.0592441554736,
+            "net": 11.083663183548456,
+            "months": null,
+            "urgency": 0,
+            "reserve": 60
+          },
+          "ara": {
+            "stock": 0,
+            "net": 25.868332799999997,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          },
+          "etk": {
+            "stock": 606.33592123419,
+            "net": 10.292271308013692,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          }
+        },
+        "committed": {
+          "min": 231,
+          "ala": 46
+        },
+        "queued": {},
+        "policy": "growth",
+        "critical": false
+      },
+      "queue": [
+        {
+          "key": "maden",
+          "left": 26,
+          "tot": 26,
+          "dem": true,
+          "paid": {},
+          "refund": {
+            "min": 42
+          },
+          "s": 13,
+          "p": 0
+        }
+      ]
+    },
+    "physio": "lithoid",
+    "feeding": "mineral",
+    "completed": {
+      "before": {
+        "min": 12.871169222091144,
+        "ene": 6.528128232652975,
+        "yiy": 0,
+        "ala": 20.872937662938433,
+        "ara": 25.868332799999997,
+        "etk": 10.295413537549583,
+        "tuk": 11.082641704320068
+      },
+      "after": {
+        "min": -0.49543038523262695,
+        "ene": 8.12812823265297,
+        "yiy": 0,
+        "ala": 20.872937662938433,
+        "ara": 25.868332799999997,
+        "etk": 10.295413537549583,
+        "tuk": 11.082641704320068
+      },
+      "stock": {
+        "min": 658.1961947166454,
+        "ene": 2334.0985158194926,
+        "yiy": 180,
+        "ala": 62.793506927996454,
+        "ara": 0,
+        "tuk": 1040.0592441554736,
+        "etk": 606.33592123419
+      },
+      "buildings": {
+        "maden": 2,
+        "santral": 4,
+        "ciftlik": 5,
+        "lab": 1,
+        "fabrika": 2,
+        "tersane": 1,
+        "kale": 0,
+        "liman": 1,
+        "dokum": 3
+      }
+    }
+  },
+  {
+    "phase": "96F1",
+    "day": 2550,
+    "before": {
+      "stock": {
+        "min": 280.9177068643848,
+        "ene": 2362.169794362525,
+        "yiy": 180,
+        "ala": 115.25569292381013,
+        "ara": 0,
+        "tuk": 1082.172494557915,
+        "etk": 580.4041040045099
+      },
+      "income": {
+        "min": -7.588700556239962,
+        "ene": -5.87812375006331,
+        "yiy": 0,
+        "ala": 15.156590078507243,
+        "ara": 21.069042464311906,
+        "etk": 9.718651715610605,
+        "tuk": 5.903240270508618
+      },
+      "buildings": {
+        "maden": 2,
+        "santral": 5,
+        "ciftlik": 5,
+        "lab": 1,
+        "fabrika": 2,
+        "tersane": 1,
+        "kale": 0,
+        "liman": 1,
+        "dokum": 3
+      },
+      "plan": {
+        "horizon": 6,
+        "rows": {
+          "ene": {
+            "stock": 2362.169794362525,
+            "net": -5.87812375006331,
+            "months": 401.8577857155667,
+            "urgency": 30.29861310211104,
+            "reserve": 155.26874250037986
+          },
+          "min": {
+            "stock": 280.9177068643848,
+            "net": -7.588700556239962,
+            "months": 37.017893219333125,
+            "urgency": 33.241675567245096,
+            "reserve": 165.53220333743977
+          },
+          "yiy": {
+            "stock": 180,
+            "net": 0,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          },
+          "ala": {
+            "stock": 115.25569292381013,
+            "net": 15.156590078507243,
+            "months": null,
+            "urgency": 0,
+            "reserve": 100
+          },
+          "tuk": {
+            "stock": 1082.172494557915,
+            "net": 5.903240270508618,
+            "months": null,
+            "urgency": 0,
+            "reserve": 60
+          },
+          "ara": {
+            "stock": 0,
+            "net": 21.069042464311906,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          },
+          "etk": {
+            "stock": 580.4041040045099,
+            "net": 9.718651715610605,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          }
+        },
+        "committed": {},
+        "queued": {},
+        "policy": "growth",
+        "critical": false
+      }
+    },
+    "orders": [
+      {
+        "kind": "queueShip",
+        "key": "kol",
+        "paid": {
+          "min": 265,
+          "ene": 0,
+          "yiy": 0,
+          "ala": 60,
+          "ara": 0,
+          "tuk": 0,
+          "etk": 0
+        }
+      }
+    ],
+    "after": {
+      "stock": {
+        "min": 15.917706864384797,
+        "ene": 2362.169794362525,
+        "yiy": 180,
+        "ala": 55.25569292381013,
+        "ara": 0,
+        "tuk": 1082.172494557915,
+        "etk": 580.4041040045099
+      },
+      "plan": {
+        "horizon": 6,
+        "rows": {
+          "ene": {
+            "stock": 2362.169794362525,
+            "net": -5.87812375006331,
+            "months": 401.8577857155667,
+            "urgency": 30.29861310211104,
+            "reserve": 155.26874250037986
+          },
+          "min": {
+            "stock": 15.917706864384797,
+            "net": -7.588700556239962,
+            "months": 2.097553691362369,
+            "urgency": 66.93881954237435,
+            "reserve": 165.53220333743977
+          },
+          "yiy": {
+            "stock": 180,
+            "net": 0,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          },
+          "ala": {
+            "stock": 55.25569292381013,
+            "net": 15.156590078507243,
+            "months": null,
+            "urgency": 3.5795445660951897,
+            "reserve": 100
+          },
+          "tuk": {
+            "stock": 1082.172494557915,
+            "net": 5.903240270508618,
+            "months": null,
+            "urgency": 0,
+            "reserve": 60
+          },
+          "ara": {
+            "stock": 0,
+            "net": 21.069042464311906,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          },
+          "etk": {
+            "stock": 580.4041040045099,
+            "net": 9.718651715610605,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          }
+        },
+        "committed": {},
+        "queued": {
+          "kol": 1
+        },
+        "policy": "recover",
+        "critical": true
+      },
+      "queue": []
+    },
+    "physio": "lithoid",
+    "feeding": "mineral"
+  },
+  {
+    "phase": "96F3",
+    "day": 330,
+    "before": {
+      "stock": {
+        "min": 172.60036345499998,
+        "ene": 357.3353201800001,
+        "yiy": 180,
+        "ala": 56.87305125,
+        "ara": 0,
+        "tuk": 267.79610440650004,
+        "etk": 198.52250000000004
+      },
+      "income": {
+        "min": 10.397169488,
+        "ene": 14.312345439999994,
+        "yiy": 0,
+        "ala": -2.31,
+        "ara": 16.85109582,
+        "etk": 9.11,
+        "tuk": 12.199722110399998
+      },
+      "buildings": {
+        "maden": 2,
+        "santral": 4,
+        "ciftlik": 2,
+        "lab": 1,
+        "fabrika": 2,
+        "tersane": 1,
+        "kale": 0,
+        "liman": 0
+      },
+      "plan": {
+        "horizon": 6,
+        "rows": {
+          "ene": {
+            "stock": 357.3353201800001,
+            "net": 14.312345439999994,
+            "months": null,
+            "urgency": 0,
+            "reserve": 120
+          },
+          "min": {
+            "stock": 172.60036345499998,
+            "net": 10.397169488,
+            "months": null,
+            "urgency": 4.2021228840000004,
+            "reserve": 120
+          },
+          "yiy": {
+            "stock": 180,
+            "net": 0,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          },
+          "ala": {
+            "stock": 56.87305125,
+            "net": -2.31,
+            "months": 24.620368506493506,
+            "urgency": 38.32416905574747,
+            "reserve": 113.86
+          },
+          "tuk": {
+            "stock": 267.79610440650004,
+            "net": 12.199722110399998,
+            "months": null,
+            "urgency": 0,
+            "reserve": 60
+          },
+          "ara": {
+            "stock": 0,
+            "net": 16.85109582,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          },
+          "etk": {
+            "stock": 198.52250000000004,
+            "net": 9.11,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          }
+        },
+        "committed": {},
+        "queued": {},
+        "policy": "growth",
+        "critical": false
+      }
+    },
+    "orders": [
+      {
+        "kind": "queueBuilding",
+        "key": "maden",
+        "paid": {
+          "min": 120,
+          "ene": 0,
+          "yiy": 0,
+          "ala": 0,
+          "ara": 0,
+          "tuk": 0,
+          "etk": 0
+        }
+      }
+    ],
+    "after": {
+      "stock": {
+        "min": 52.60036345499998,
+        "ene": 357.3353201800001,
+        "yiy": 180,
+        "ala": 56.87305125,
+        "ara": 0,
+        "tuk": 267.79610440650004,
+        "etk": 198.52250000000004
+      },
+      "plan": {
+        "horizon": 6,
+        "rows": {
+          "ene": {
+            "stock": 357.3353201800001,
+            "net": 12.712345439999995,
+            "months": null,
+            "urgency": 0,
+            "reserve": 120
+          },
+          "min": {
+            "stock": 52.60036345499998,
+            "net": 20.454572792,
+            "months": null,
+            "urgency": 4.493309103000001,
+            "reserve": 120
+          },
+          "yiy": {
+            "stock": 180,
+            "net": 0,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          },
+          "ala": {
+            "stock": 56.87305125,
+            "net": -2.31,
+            "months": 24.620368506493506,
+            "urgency": 38.32416905574747,
+            "reserve": 113.86
+          },
+          "tuk": {
+            "stock": 267.79610440650004,
+            "net": 12.199722110399998,
+            "months": null,
+            "urgency": 0,
+            "reserve": 60
+          },
+          "ara": {
+            "stock": 0,
+            "net": 16.85109582,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          },
+          "etk": {
+            "stock": 198.52250000000004,
+            "net": 9.11,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          }
+        },
+        "committed": {},
+        "queued": {},
+        "policy": "growth",
+        "critical": false
+      },
+      "queue": [
+        {
+          "key": "maden",
+          "left": 64,
+          "tot": 64,
+          "paid": {
+            "min": 120
+          },
+          "s": 13,
+          "p": 0
+        }
+      ]
+    },
+    "physio": "lithoid",
+    "feeding": "mineral"
+  },
+  {
+    "phase": "96F3",
+    "day": 450,
+    "before": {
+      "stock": {
+        "min": 127.39174959899998,
+        "ene": 428.01976770000005,
+        "yiy": 180,
+        "ala": 47.633051249999994,
+        "ara": 0,
+        "tuk": 317.28471724170004,
+        "etk": 234.9625000000001
+      },
+      "income": {
+        "min": 25.498523583999997,
+        "ene": 20.171878319999983,
+        "yiy": 0,
+        "ala": -2.31,
+        "ara": 18.397814759999996,
+        "etk": 9.11,
+        "tuk": 12.544584307200003
+      },
+      "buildings": {
+        "maden": 2,
+        "santral": 4,
+        "ciftlik": 3,
+        "lab": 1,
+        "fabrika": 2,
+        "tersane": 1,
+        "kale": 0,
+        "liman": 0
+      },
+      "plan": {
+        "horizon": 6,
+        "rows": {
+          "ene": {
+            "stock": 428.01976770000005,
+            "net": 20.171878319999983,
+            "months": null,
+            "urgency": 0,
+            "reserve": 120
+          },
+          "min": {
+            "stock": 127.39174959899998,
+            "net": 25.498523583999997,
+            "months": null,
+            "urgency": 0,
+            "reserve": 120
+          },
+          "yiy": {
+            "stock": 180,
+            "net": 0,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          },
+          "ala": {
+            "stock": 47.633051249999994,
+            "net": -2.31,
+            "months": 20.620368506493502,
+            "urgency": 40.008844526607774,
+            "reserve": 113.86
+          },
+          "tuk": {
+            "stock": 317.28471724170004,
+            "net": 12.544584307200003,
+            "months": null,
+            "urgency": 0,
+            "reserve": 60
+          },
+          "ara": {
+            "stock": 0,
+            "net": 18.397814759999996,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          },
+          "etk": {
+            "stock": 234.9625000000001,
+            "net": 9.11,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          }
+        },
+        "committed": {},
+        "queued": {},
+        "policy": "growth",
+        "critical": false
+      }
+    },
+    "orders": [],
+    "after": {
+      "stock": {
+        "min": 127.39174959899998,
+        "ene": 428.01976770000005,
+        "yiy": 180,
+        "ala": 47.633051249999994,
+        "ara": 0,
+        "tuk": 317.28471724170004,
+        "etk": 234.9625000000001
+      },
+      "plan": {
+        "horizon": 6,
+        "rows": {
+          "ene": {
+            "stock": 428.01976770000005,
+            "net": 20.171878319999983,
+            "months": null,
+            "urgency": 0,
+            "reserve": 120
+          },
+          "min": {
+            "stock": 127.39174959899998,
+            "net": 25.498523583999997,
+            "months": null,
+            "urgency": 0,
+            "reserve": 120
+          },
+          "yiy": {
+            "stock": 180,
+            "net": 0,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          },
+          "ala": {
+            "stock": 47.633051249999994,
+            "net": -2.31,
+            "months": 20.620368506493502,
+            "urgency": 40.008844526607774,
+            "reserve": 113.86
+          },
+          "tuk": {
+            "stock": 317.28471724170004,
+            "net": 12.544584307200003,
+            "months": null,
+            "urgency": 0,
+            "reserve": 60
+          },
+          "ara": {
+            "stock": 0,
+            "net": 18.397814759999996,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          },
+          "etk": {
+            "stock": 234.9625000000001,
+            "net": 9.11,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          }
+        },
+        "committed": {},
+        "queued": {},
+        "policy": "growth",
+        "critical": false
+      },
+      "queue": []
+    },
+    "physio": "lithoid",
+    "feeding": "mineral"
+  },
+  {
+    "phase": "96F3",
+    "day": 570,
+    "before": {
+      "stock": {
+        "min": 121.03787507899996,
+        "ene": 520.1425803,
+        "yiy": 180,
+        "ala": 38.393051249999985,
+        "ara": 0,
+        "tuk": 367.9803477657001,
+        "etk": 271.40250000000015
+      },
+      "income": {
+        "min": 26.049200631999994,
+        "ene": 24.783644759999994,
+        "yiy": 0,
+        "ala": -2.31,
+        "ara": 19.17117423,
+        "etk": 9.11,
+        "tuk": 12.717015405599996
+      },
+      "buildings": {
+        "maden": 2,
+        "santral": 4,
+        "ciftlik": 4,
+        "lab": 1,
+        "fabrika": 2,
+        "tersane": 1,
+        "kale": 0,
+        "liman": 0
+      },
+      "plan": {
+        "horizon": 6,
+        "rows": {
+          "ene": {
+            "stock": 520.1425803,
+            "net": 24.783644759999994,
+            "months": null,
+            "urgency": 0,
+            "reserve": 120
+          },
+          "min": {
+            "stock": 121.03787507899996,
+            "net": 26.049200631999994,
+            "months": null,
+            "urgency": 0,
+            "reserve": 120
+          },
+          "yiy": {
+            "stock": 180,
+            "net": 0,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          },
+          "ala": {
+            "stock": 38.393051249999985,
+            "net": -2.31,
+            "months": 16.6203685064935,
+            "urgency": 42.14861241999332,
+            "reserve": 113.86
+          },
+          "tuk": {
+            "stock": 367.9803477657001,
+            "net": 12.717015405599996,
+            "months": null,
+            "urgency": 0,
+            "reserve": 60
+          },
+          "ara": {
+            "stock": 0,
+            "net": 19.17117423,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          },
+          "etk": {
+            "stock": 271.40250000000015,
+            "net": 9.11,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          }
+        },
+        "committed": {},
+        "queued": {},
+        "policy": "growth",
+        "critical": false
+      }
+    },
+    "orders": [
+      {
+        "kind": "queueBuilding",
+        "key": "maden",
+        "paid": {
+          "min": 120,
+          "ene": 0,
+          "yiy": 0,
+          "ala": 0,
+          "ara": 0,
+          "tuk": 0,
+          "etk": 0
+        }
+      }
+    ],
+    "after": {
+      "stock": {
+        "min": 1.03787507899996,
+        "ene": 520.1425803,
+        "yiy": 180,
+        "ala": 38.393051249999985,
+        "ara": 0,
+        "tuk": 367.9803477657001,
+        "etk": 271.40250000000015
+      },
+      "plan": {
+        "horizon": 6,
+        "rows": {
+          "ene": {
+            "stock": 520.1425803,
+            "net": 23.183644759999993,
+            "months": null,
+            "urgency": 0,
+            "reserve": 120
+          },
+          "min": {
+            "stock": 1.03787507899996,
+            "net": 37.53206267199999,
+            "months": null,
+            "urgency": 7.93080832806667,
+            "reserve": 120
+          },
+          "yiy": {
+            "stock": 180,
+            "net": 0,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          },
+          "ala": {
+            "stock": 38.393051249999985,
+            "net": -2.31,
+            "months": 16.6203685064935,
+            "urgency": 42.14861241999332,
+            "reserve": 113.86
+          },
+          "tuk": {
+            "stock": 367.9803477657001,
+            "net": 12.717015405599996,
+            "months": null,
+            "urgency": 0,
+            "reserve": 60
+          },
+          "ara": {
+            "stock": 0,
+            "net": 19.17117423,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          },
+          "etk": {
+            "stock": 271.40250000000015,
+            "net": 9.11,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          }
+        },
+        "committed": {},
+        "queued": {},
+        "policy": "growth",
+        "critical": false
+      },
+      "queue": [
+        {
+          "key": "maden",
+          "left": 64,
+          "tot": 64,
+          "paid": {
+            "min": 120
+          },
+          "s": 13,
+          "p": 0
+        }
+      ]
+    },
+    "physio": "lithoid",
+    "feeding": "mineral"
+  },
+  {
+    "phase": "96F3",
+    "day": 2370,
+    "before": {
+      "stock": {
+        "min": 616.1961947166454,
+        "ene": 2334.0985158194926,
+        "yiy": 180,
+        "ala": 62.793506927996454,
+        "ara": 0,
+        "tuk": 1040.0592441554736,
+        "etk": 606.33592123419
+      },
+      "income": {
+        "min": 12.872634018423145,
+        "ene": 6.558883217796335,
+        "yiy": 0,
+        "ala": 20.875935950542775,
+        "ara": 25.868332799999997,
+        "etk": 10.292271308013692,
+        "tuk": 11.083663183548456
+      },
+      "buildings": {
+        "maden": 3,
+        "santral": 4,
+        "ciftlik": 5,
+        "lab": 1,
+        "fabrika": 2,
+        "tersane": 1,
+        "kale": 0,
+        "liman": 1,
+        "dokum": 3
+      },
+      "plan": {
+        "horizon": 6,
+        "rows": {
+          "ene": {
+            "stock": 2334.0985158194926,
+            "net": 6.558883217796335,
+            "months": null,
+            "urgency": 5.441116782203665,
+            "reserve": 120
+          },
+          "min": {
+            "stock": 385.19619471664544,
+            "net": 12.872634018423145,
+            "months": null,
+            "urgency": 2.345524486182641,
+            "reserve": 120
+          },
+          "yiy": {
+            "stock": 180,
+            "net": 0,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          },
+          "ala": {
+            "stock": 16.793506927996454,
+            "net": 20.875935950542775,
+            "months": null,
+            "urgency": 6.656519445760283,
+            "reserve": 100
+          },
+          "tuk": {
+            "stock": 1040.0592441554736,
+            "net": 11.083663183548456,
+            "months": null,
+            "urgency": 0,
+            "reserve": 60
+          },
+          "ara": {
+            "stock": 0,
+            "net": 25.868332799999997,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          },
+          "etk": {
+            "stock": 606.33592123419,
+            "net": 10.292271308013692,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          }
+        },
+        "committed": {
+          "min": 231,
+          "ala": 46
+        },
+        "queued": {},
+        "policy": "growth",
+        "critical": false
+      }
+    },
+    "orders": [
+      {
+        "kind": "queueDemolish",
+        "key": "ciftlik",
+        "paid": {
+          "min": 0,
+          "ene": 0,
+          "yiy": 0,
+          "ala": 0,
+          "ara": 0,
+          "tuk": 0,
+          "etk": 0
+        }
+      }
+    ],
+    "after": {
+      "stock": {
+        "min": 616.1961947166454,
+        "ene": 2334.0985158194926,
+        "yiy": 180,
+        "ala": 62.793506927996454,
+        "ara": 0,
+        "tuk": 1040.0592441554736,
+        "etk": 606.33592123419
+      },
+      "plan": {
+        "horizon": 6,
+        "rows": {
+          "ene": {
+            "stock": 2334.0985158194926,
+            "net": 8.158883217796335,
+            "months": null,
+            "urgency": 3.8411167822036654,
+            "reserve": 120
+          },
+          "min": {
+            "stock": 385.19619471664544,
+            "net": 12.872634018423145,
+            "months": null,
+            "urgency": 2.345524486182641,
+            "reserve": 120
+          },
+          "yiy": {
+            "stock": 180,
+            "net": 0,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          },
+          "ala": {
+            "stock": 16.793506927996454,
+            "net": 20.875935950542775,
+            "months": null,
+            "urgency": 6.656519445760283,
+            "reserve": 100
+          },
+          "tuk": {
+            "stock": 1040.0592441554736,
+            "net": 11.083663183548456,
+            "months": null,
+            "urgency": 0,
+            "reserve": 60
+          },
+          "ara": {
+            "stock": 0,
+            "net": 25.868332799999997,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          },
+          "etk": {
+            "stock": 606.33592123419,
+            "net": 10.292271308013692,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          }
+        },
+        "committed": {
+          "min": 231,
+          "ala": 46
+        },
+        "queued": {},
+        "policy": "growth",
+        "critical": false
+      },
+      "queue": [
+        {
+          "key": "ciftlik",
+          "left": 24,
+          "tot": 24,
+          "dem": true,
+          "paid": {},
+          "refund": {
+            "min": 39
+          },
+          "s": 13,
+          "p": 0
+        }
+      ]
+    },
+    "physio": "lithoid",
+    "feeding": "mineral",
+    "completed": {
+      "before": {
+        "min": 12.871169222091144,
+        "ene": 6.528128232652975,
+        "yiy": 0,
+        "ala": 20.872937662938433,
+        "ara": 25.868332799999997,
+        "etk": 10.295413537549583,
+        "tuk": 11.082641704320068
+      },
+      "after": {
+        "min": 12.871169222091144,
+        "ene": 8.12812823265297,
+        "yiy": 0,
+        "ala": 20.872937662938433,
+        "ara": 25.868332799999997,
+        "etk": 10.295413537549583,
+        "tuk": 11.082641704320068
+      },
+      "stock": {
+        "min": 655.1961947166454,
+        "ene": 2334.0985158194926,
+        "yiy": 180,
+        "ala": 62.793506927996454,
+        "ara": 0,
+        "tuk": 1040.0592441554736,
+        "etk": 606.33592123419
+      },
+      "buildings": {
+        "maden": 3,
+        "santral": 4,
+        "ciftlik": 4,
+        "lab": 1,
+        "fabrika": 2,
+        "tersane": 1,
+        "kale": 0,
+        "liman": 1,
+        "dokum": 3
+      }
+    }
+  },
+  {
+    "phase": "96F3",
+    "day": 2550,
+    "before": {
+      "stock": {
+        "min": 280.9177068643848,
+        "ene": 2362.169794362525,
+        "yiy": 180,
+        "ala": 115.25569292381013,
+        "ara": 0,
+        "tuk": 1082.172494557915,
+        "etk": 580.4041040045099
+      },
+      "income": {
+        "min": -7.588700556239962,
+        "ene": -5.87812375006331,
+        "yiy": 0,
+        "ala": 15.156590078507243,
+        "ara": 21.069042464311906,
+        "etk": 9.718651715610605,
+        "tuk": 5.903240270508618
+      },
+      "buildings": {
+        "maden": 2,
+        "santral": 5,
+        "ciftlik": 5,
+        "lab": 1,
+        "fabrika": 2,
+        "tersane": 1,
+        "kale": 0,
+        "liman": 1,
+        "dokum": 3
+      },
+      "plan": {
+        "horizon": 6,
+        "rows": {
+          "ene": {
+            "stock": 2362.169794362525,
+            "net": -5.87812375006331,
+            "months": 401.8577857155667,
+            "urgency": 30.29861310211104,
+            "reserve": 155.26874250037986
+          },
+          "min": {
+            "stock": 280.9177068643848,
+            "net": -7.588700556239962,
+            "months": 37.017893219333125,
+            "urgency": 33.241675567245096,
+            "reserve": 165.53220333743977
+          },
+          "yiy": {
+            "stock": 180,
+            "net": 0,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          },
+          "ala": {
+            "stock": 115.25569292381013,
+            "net": 15.156590078507243,
+            "months": null,
+            "urgency": 0,
+            "reserve": 100
+          },
+          "tuk": {
+            "stock": 1082.172494557915,
+            "net": 5.903240270508618,
+            "months": null,
+            "urgency": 0,
+            "reserve": 60
+          },
+          "ara": {
+            "stock": 0,
+            "net": 21.069042464311906,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          },
+          "etk": {
+            "stock": 580.4041040045099,
+            "net": 9.718651715610605,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          }
+        },
+        "committed": {},
+        "queued": {},
+        "policy": "growth",
+        "critical": false
+      }
+    },
+    "orders": [],
+    "after": {
+      "stock": {
+        "min": 280.9177068643848,
+        "ene": 2362.169794362525,
+        "yiy": 180,
+        "ala": 115.25569292381013,
+        "ara": 0,
+        "tuk": 1082.172494557915,
+        "etk": 580.4041040045099
+      },
+      "plan": {
+        "horizon": 6,
+        "rows": {
+          "ene": {
+            "stock": 2362.169794362525,
+            "net": -5.87812375006331,
+            "months": 401.8577857155667,
+            "urgency": 30.29861310211104,
+            "reserve": 155.26874250037986
+          },
+          "min": {
+            "stock": 280.9177068643848,
+            "net": -7.588700556239962,
+            "months": 37.017893219333125,
+            "urgency": 33.241675567245096,
+            "reserve": 165.53220333743977
+          },
+          "yiy": {
+            "stock": 180,
+            "net": 0,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          },
+          "ala": {
+            "stock": 115.25569292381013,
+            "net": 15.156590078507243,
+            "months": null,
+            "urgency": 0,
+            "reserve": 100
+          },
+          "tuk": {
+            "stock": 1082.172494557915,
+            "net": 5.903240270508618,
+            "months": null,
+            "urgency": 0,
+            "reserve": 60
+          },
+          "ara": {
+            "stock": 0,
+            "net": 21.069042464311906,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          },
+          "etk": {
+            "stock": 580.4041040045099,
+            "net": 9.718651715610605,
+            "months": null,
+            "urgency": 0,
+            "reserve": 0
+          }
+        },
+        "committed": {},
+        "queued": {},
+        "policy": "growth",
+        "critical": false
+      },
+      "queue": []
+    },
+    "physio": "lithoid",
+    "feeding": "mineral"
+  }
+]

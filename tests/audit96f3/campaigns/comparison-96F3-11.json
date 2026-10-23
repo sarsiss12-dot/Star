@@ -1,0 +1,84 @@
+{
+  "seed": 11,
+  "variant": "ABC",
+  "sourceHashes": {
+    "ai.js": "2647ab691e159d64cf40daa0a8d091570ce5933176b2f79441e83e978abb54e0",
+    "economy.js": "54df00e09602f581a40c3d782131261df4319096f0bd9760bd9c4f068199e955",
+    "main.js": "80ab326a1bc9feb59cea94036aa327f225f19f5b4277d36df211c28631865496",
+    "sw.js": "0caf87f3e3db576ab5eb9d022eae180f09ca76f9b456b9f213dc25db2f11bd06"
+  },
+  "sameInitial": true,
+  "old": {
+    "phase": "96F1",
+    "seed": 11,
+    "contracts": 9,
+    "cancelled": 0,
+    "freightLost": 1,
+    "alive": 5,
+    "techs": 37,
+    "ships": 124,
+    "power": 15793,
+    "upkeep": 352.2751774761392,
+    "colonies": 12,
+    "deliveries": 101,
+    "pacts": 5,
+    "warsStarted": 1,
+    "peace": 1,
+    "objectiveChanges": 25,
+    "plansCompleted": 16,
+    "plansFailed": 3,
+    "criticalEmpireMonths": 11,
+    "invalidResources": [],
+    "elapsedMs": 13402
+  },
+  "next": {
+    "phase": "96F3",
+    "seed": 11,
+    "contracts": 8,
+    "cancelled": 0,
+    "freightLost": 0,
+    "alive": 5,
+    "techs": 34,
+    "ships": 75,
+    "power": 8299,
+    "upkeep": 186.49152071997224,
+    "colonies": 10,
+    "deliveries": 94,
+    "pacts": 5,
+    "warsStarted": 4,
+    "peace": 1,
+    "objectiveChanges": 30,
+    "plansCompleted": 17,
+    "plansFailed": 4,
+    "criticalEmpireMonths": 3,
+    "invalidResources": [],
+    "elapsedMs": 12879
+  },
+  "realSpending": {
+    "queueShip": {
+      "orders": 292,
+      "paid": {
+        "min": 3303,
+        "ene": 0,
+        "yiy": 0,
+        "ala": 9709,
+        "ara": 0,
+        "tuk": 0,
+        "etk": 0
+      }
+    },
+    "queueBuilding": {
+      "orders": 123,
+      "paid": {
+        "min": 20578,
+        "ene": 0,
+        "yiy": 0,
+        "ala": 917,
+        "ara": 0,
+        "tuk": 0,
+        "etk": 0
+      }
+    }
+  },
+  "logsComplete": true
+}
