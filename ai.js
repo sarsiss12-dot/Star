@@ -4471,28 +4471,21 @@ function aiSubmitTick(){
     e._submitCd = (G.memAge || 0) + 60;
     e.aiProtectionReason=aiProtection(e,hami);
 
-    if (hami.id === 0){
-      if (typeof UI !== 'undefined' && UI.notify)
-        UI.notify({kind:'submit', data:{from: e.id, tehdit: tehdit.id},
-          ico:'⛓', cls:'sci', pause:false, title:'Sığınma Talebi',
-          sub: e.name + ' vasalın olmak istiyor', key:'sub:' + e.id});
-      continue;
+    // Keep the established willingness to open an AI refuge negotiation.
+    // Passing this gate is not a signature: the actual clauses can still be
+    // accepted, rejected or countered by the existing recipient below.
+    if(hami.ai){
+      const P=personaOf(hami);let willingness=.55;
+      if(P.n==='Militarist')willingness+=.25;
+      if(P.n==='Fanatik Arındırıcılar')willingness-=.30;
+      if(P.n==='Pasifist')willingness-=.10;
+      if(hami.war[tehdit.id])willingness+=.25; // recipient's own war knowledge
+      if(rnd()>clamp(willingness,.1,.9))continue;
     }
-
-    const P = (typeof personaOf === 'function') ? personaOf(hami) : null;
-    let kabul = .55;
-    if (P && P.n === 'Militarist') kabul += .25;
-    if (P && P.n === 'Fanatik Arındırıcılar') kabul -= .30;
-    if (P && P.n === 'Pasifist') kabul -= .10;
-    if (aiKnownWar(e,hami,tehdit)) kabul += .25;
-    if (rnd() > clamp(kabul, .1, .9)) continue;
-
-    if(!subjugate(hami,e,'bekci'))continue;
-    e.res.etk-=VASSAL_SEEK_COST;
-    e.rel[hami.id] = clamp((e.rel[hami.id] || 0) + 25, -100, 100);
-    e._submitted = true;
-    if (G.p && !G.p.dead && G.p.contact && G.p.contact[e.id])
-      say('⛓ ' + e.name + ', ' + hami.name + ' himayesine sığındı', 'sci');
+    const terms=vassalDefaultTerms('bekci');
+    if(e.aiStrategy?.objective?.kind==='recovery')terms.war='defense';
+    const r=seekProtection(e,hami,'bekci',terms);
+    if(r.ok&&r.kabul)e._submitted=true;
   }
 }
 

@@ -59,6 +59,7 @@ const ArchiveUI = {
   },
   record(id){
     this.ensureWorld();DiplomaticInbox.sync();const r=DiplomaticInbox.get(id);if(!r)return;this.remember();if(this.mode!=='inbox'){this.mode='inbox';Object.assign(this,{filter:'',query:'',page:30,unreadOnly:false,pinnedOnly:false,selected:null,scroll:0},this.views.inbox||{});}this.selected=r.id;
+    if(r.kind==='vassal'){UI.vsRecord(r.fid,r.id);return;}
     const gate=DiplomaticInbox.gate(r),offer=DiplomaticInbox.deal(r),f=r.fid!==undefined?fedOf(r.fid):null;
     const terms=offer?'<div class="ph">SANA VERİYOR</div>'+offer.give.map(i=>'<p>'+esc(dealLabel(i))+'</p>').join('')+'<div class="ph">SENDEN İSTİYOR</div>'+offer.want.map(i=>'<p>'+esc(dealLabel(i))+'</p>').join('')+`<div class="mini">İmza maliyeti: ${gate.quote?.cost??0} Etki · gönderen öder</div>`:r.kind==='fedvote'&&f?.vote?UI.fedAgendaContext(f.vote):'';
     const counterOK=gate.ok&&r.kind==='aideal';

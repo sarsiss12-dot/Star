@@ -802,6 +802,7 @@ function canPromiseWarOn(a, b, skipFed = false){
 }
 function canDeclareWarOn(a, b){
   if (!a || !b || a.dead || b.dead || a.id === b.id || sovereignPair(a,b) || !fedWarAllowed(a,b)) return false;
+  if(isVassal(a)&&a.vassalContract&&vassalContractOf(a)?.terms.autonomy==='consent'&&!overlordOf(a).war[b.id]&&!fedDefensiveWar(a,b))return false;
   if (false) return false;          // sürgüne kimse savaş açamaz
   if (!a || !a.ai) return true;                   // oyuncu kendi kararını verir
   if (G._dealAuth) return true;                   // anlaşmada verilmiş söz
@@ -2682,10 +2683,9 @@ function fedDefensiveWar(a, b){
     if (!d || !d.defensive || d.since !== (v.warSince && v.warSince[b.id])) return false;
     const front=warLedgerFind(v.id,b.id);
     const federationDuty = f && fedDuty(f,'defense') && f.members.includes(v.id) && (v.warSince?.[b.id]??-Infinity)>=(f.dutySince?.defense||0) && (!f.defenseFrontCutoff||front&&front.id>=f.defenseFrontCutoff);
-    const vassalDuty = v.overlord === a.id ||
-      (a.vassalType === 'bekci' && a.overlord != null &&
-       (a.overlord === v.id || a.overlord === v.overlord));
-    return !!(federationDuty || vassalDuty);
+    const subjectDuty = v.overlord === a.id && vassalDuty(v,'protect') ||
+      (a.overlord != null && vassalDuty(a,'join',b) && (a.overlord===v.id||a.overlord===v.overlord));
+    return !!(federationDuty || subjectDuty);
   });
 }
 function fedWarAllowed(a, b){
@@ -6143,6 +6143,7 @@ function vassalLoyalty(sub){
 
 function canEdict(lord, sub, key){
   const E = EDICTS[key];
+  const contract=vassalContractOf(sub);if(contract&&!contract.legacy&&contract.source!=='forced'&&key==='savasCagri'&&contract.terms.war==='none')return {ok:false,why:'Sözleşme zorunlu savaşı kapsamıyor'};
   if (!E) return {ok:false, why:'Bilinmeyen emir'};
   if (!isVassal(sub) || sub.overlord !== lord.id)
     return {ok:false, why:'Bu devlet senin vasalın değil'};
@@ -6227,7 +6228,9 @@ function edictTick(){
         if ((G.memAge || 0) - e2.since > 12){ delete sub.edicts[k]; continue; }
       }
       if (k === 'bilimPayi'){
-        const pay = (sub.inc && sub.inc.ara ? sub.inc.ara : 0) * .18;
+        const month=Math.floor(G.day/30);if(sub.vassalEdictPaidMonth===month)continue;
+        const pay = Math.min(Math.max(0,sub.inc?.ara||0)*.18,Math.max(0,sub.res.ara||0));
+        sub.vassalEdictPaidMonth=month;
         if (pay > 0){ sub.res.ara = Math.max(0, (sub.res.ara||0) - pay);
                       lord.res.ara = (lord.res.ara||0) + pay; }
       }
@@ -6245,19 +6248,21 @@ function vassalsOf(e){
 function vassalType(e){ return isVassal(e) ? (e.vassalType || 'haracguzar') : null; }
 
 /* Boyun eğdirme: savaş hedefi tamamlandığında uygulanır */
-function subjugate(lord, sub, tur){
+function subjugate(lord, sub, tur, custom=null, source='forced'){
+  const terms=vassalTerms(VASSAL_TYPES[tur]?tur:"haracguzar",custom||vassalDefaultTerms(VASSAL_TYPES[tur]?tur:"haracguzar",true));if(!terms)return false;
   if (!lord || !sub || lord.id === sub.id) return false;
   if (sub.dead || sub.wild || lord.dead || lord.wild) return false;
   /* Yeni kazanılmış bağımsızlık 5 yıl korunur */
   if (sub.freeUntil && sub.freeUntil > (G.memAge || 0)) return false;
   if (isVassal(lord) && lord.overlord === sub.id) return false;   // döngü olmasın
   /* Zincirleme vasallık yok: yeni senyör, eski vasalları devralır */
-  for (const v of vassalsOf(sub)){v.overlord=lord.id;clearBilateralEmbargo(lord,v);lord.war[v.id]=false;v.war[lord.id]=false;}
+  for (const v of vassalsOf(sub)){if(v.vassalContract?.status==='active')v.vassalContract.lord=lord.id;v.overlord=lord.id;clearBilateralEmbargo(lord,v);lord.war[v.id]=false;v.war[lord.id]=false;}
 
   recordNews({category:'politics',empires:[lord.id,sub.id],title:'Vasallık kuruldu',text:sub.name+' — '+lord.name+' himayesi',important:true});
   sub.overlord = lord.id;
   /* FAZ 71: üç tip — çağıran hangisini istediyse */
   sub.vassalType = VASSAL_TYPES[tur] ? tur : 'haracguzar';
+  vassalInstall(lord,sub,sub.vassalType,terms,source);
   sub.vassalSince = G.memAge || 0;
   sub.vassalAnger = 0;
   clearBilateralEmbargo(lord,sub);
@@ -6270,7 +6275,7 @@ function subjugate(lord, sub, tur){
     if (typeof resolveProxyWars === 'function') resolveProxyWars(lord, sub);
   }
   /* Sınır bekçisi senyörünün savaşlarına katılır */
-  if (sub.vassalType === 'bekci') vassalJoinWars(lord, sub);
+  if (vassalContractOf(sub)?.terms.war!=='none') vassalJoinWars(lord, sub);
 
   /* Hafıza: boyunduruk unutulmaz, ama ihanet kadar ağır değildir */
   if (typeof remember === 'function') remember(sub, lord.id, 'sistemAldi');
@@ -6293,6 +6298,7 @@ function freeVassal(sub, sebep){
   if (!isVassal(sub)) return false;
   const lord = overlordOf(sub);
   recordNews({category:'politics',empires:[sub.id,lord.id],title:'Vasallık sona erdi',text:sub.name+' bağımsızlığını kazandı',important:true});
+  if(sub.vassalContract){if(sub.vassalContract.status!=='expired')sub.vassalContract.status='ended';sub.vassalContract.ended=G.day;sub.vassalContract.reason=sebep||'';}
   sub.overlord = null;
   sub.vassalType = null;
   sub.vassalAnger = 0;
@@ -6311,6 +6317,7 @@ function vassalJoinWars(lord, sub){
   for (const o of G.emps){
     if (o.dead || o.wild || o.id === sub.id || o.id === lord.id) continue;
     if (!lord.war[o.id] || sub.war[o.id]) continue;
+    if(!vassalDuty(sub,'join',o)&&!((vassalContractOf(sub)?.legacy||vassalContractOf(sub)?.source==='forced')&&sub.edicts?.savasCagri))continue;
     if (typeof warAuthorize === 'function'){
       sub._lastCB = {n:'Senyörün Çağrısı'};
       warAuthorize(sub, o, sub._lastCB);
@@ -6326,6 +6333,7 @@ function vassalJoinWars(lord, sub){
 const VASSAL_TAX = {min:.20, ene:.20, ala:.20};   // gelirin oranı
 
 function vassalTick(){
+  vassalTalkTick();
   for (const sub of G.emps){
     if (sub.dead || sub.wild || !isVassal(sub)) continue;
     const lord = overlordOf(sub);
@@ -6343,37 +6351,18 @@ function vassalTick(){
       if (typeof overlordDefend === 'function') overlordDefend(o, sub);
     }
 
-    /* ═══ FAZ 71: ÜÇ VASAL TİPİ ═══ */
-    const vt = vassalType(sub);
-    if (vt === 'haracguzar'){
-      /* Haraçgüzar vergi öder — Ek Vergi emri varsa 1.5 katı */
-      const carpan = (sub.edicts && sub.edicts.ekVergi) ? 1.5 : 1;
-      let toplam = 0;
-      for (const r in VASSAL_TAX){
-        const gelir = Math.max(0, (sub.inc && sub.inc[r]) || 0);
-        const vergi = Math.min(gelir * VASSAL_TAX[r] * carpan, (sub.res[r] || 0));
-        if (vergi <= 0) continue;
-        sub.res[r] = (sub.res[r] || 0) - vergi;
-        lord.res[r] = (lord.res[r] || 0) + vergi;
-        toplam += vergi;
+    const c=vassalContractOf(sub),month=Math.floor(G.day/30);
+    if(sub.vassalPaidMonth!==month){
+      const paid={};sub.vassalPaid=0;sub.vassalSci=0;
+      for(const r of [...VASSAL_RESOURCES,'ara']){
+        const rate=r==='ara'?c.terms.science:c.terms.tax[r]*(sub.edicts?.ekVergi?1.5:1);
+        const value=Math.min(Math.max(0,sub.inc?.[r]||0)*rate,Math.max(0,sub.res[r]||0));
+        if(value>0){sub.res[r]-=value;lord.res[r]=(lord.res[r]||0)+value;}
+        paid[r]=value;sub.vassalPaid+=value;if(r==='ara')sub.vassalSci=value;
       }
-      sub.vassalPaid = toplam;
-    } else if (vt === 'akademik'){
-      /* Akademik vasal: araştırmasının bir kısmı senyöre akar.
-         Vergi vermez, savaşa zorlanmaz — bilgi ortaktır. */
-      const gelir = Math.max(0, (sub.inc && sub.inc.ara) || 0);
-      const pay = Math.min(gelir * VASSAL_SCI_CUT, (sub.res.ara || 0));
-      if (pay > 0){
-        sub.res.ara = (sub.res.ara || 0) - pay;
-        lord.res.ara = (lord.res.ara || 0) + pay;
-      }
-      sub.vassalPaid = pay;
-      sub.vassalSci = pay;
-    } else {
-      sub.vassalPaid = 0;
-      /* Sınır bekçisi senyörünün yeni savaşlarına da katılır */
-      vassalJoinWars(lord, sub);
+      sub.vassalPaidMonth=month;sub.vassalTransfer={day:G.day,lord:lord.id,paid};
     }
+    if(c.terms.war!=='none')vassalJoinWars(lord,sub);
     /* Savaş Çağrısı emri her tipte savaşa sokar */
     if (sub.edicts && sub.edicts.savasCagri) vassalJoinWars(lord, sub);
 
@@ -6438,7 +6427,7 @@ function overlordDefend(attacker, victim){
   if (typeof isVassal !== 'function' || !isVassal(victim)) return;
 
   const lord = overlordOf(victim);
-  if (!lord || lord.dead || lord.wild) return;
+  if (!lord || lord.dead || lord.wild || !vassalDuty(victim,'protect')) return;
   if (lord.id === attacker.id) return;          // senyörün kendisi saldırıyorsa geçersiz
   if (lord.war[attacker.id]) return;            // zaten savaşta
   if (isVassal(attacker) && attacker.overlord === lord.id) return;  // iki vasalı arasında
@@ -6466,7 +6455,7 @@ function overlordDefend(attacker, victim){
   }
   /* Senyörün diğer sınır bekçileri de seferber olur */
   for (const v of vassalsOf(lord)){
-    if (v.id === victim.id || v.vassalType !== 'bekci') continue;
+    if (v.id === victim.id || !vassalDuty(v,'join',attacker)) continue;
     if (v.war[attacker.id] || v.dead) continue;
     v._lastCB = {n:'Senyörün Çağrısı'};
     if (typeof warAuthorize === 'function'){
@@ -8925,6 +8914,7 @@ function shareVision(giver, taker){
 }
 
 function visionTick(){
+  for(const sub of G.emps){const c=vassalContractOf(sub);if(c?.terms.sensors){const lord=overlordOf(sub);shareVision(lord,sub);shareVision(sub,lord);}}
   for (const e of G.emps){
     if (e.dead || e.wild || e.crisisSide || !e.visionFrom) continue;
     for (const gid in e.visionFrom){
@@ -9704,7 +9694,7 @@ function canDemandVassal(e, o){
     return {ok:false, why:'Doktrinin diplomasiye kapalı'};
   if ((e.res.etk || 0) < VASSAL_DEMAND_COST)
     return {ok:false, why:VASSAL_DEMAND_COST + ' etki gerekir'};
-  const oran = totalPower(e) / Math.max(1, totalPower(o));
+  const oran = totalPower(e) / Math.max(1, e.ai?aiKnownPower(e,o):totalPower(o));
   if (oran < 1.6)
     return {ok:false, why:'Yeterince güçlü değilsin (' + oran.toFixed(1) +
             '× — en az 1.6× gerekir)'};
@@ -9731,22 +9721,7 @@ function vassalAcceptChance(lord, sub){
   return clamp(p, 0, .88);
 }
 
-function demandVassal(e, o, tur){
-  const chk = canDemandVassal(e, o);
-  if (!chk.ok) return chk;
-  e.res.etk -= VASSAL_DEMAND_COST;
-  const sans = vassalAcceptChance(e, o);
-  if (rnd() < sans){
-    subjugate(e, o, VASSAL_TYPES[tur] ? tur : 'haracguzar');
-    o.rel[e.id] = clamp((o.rel[e.id] || 0) - 15, -100, 100);
-    return {ok:true, kabul:true, sans};
-  }
-  /* Ret: gurur kırılır, ilişki bozulur */
-  o.rel[e.id] = clamp((o.rel[e.id] || 0) - 25, -100, 100);
-  if (typeof remember === 'function') remember(o, e.id, 'sinirGergin');
-  o._vassalRefuse = (G.memAge || 0) + 60;     // 5 yıl bir daha sorma
-  return {ok:true, kabul:false, sans};
-}
+function demandVassal(e,o,tur,terms=null){return vassalOffer(e,o,'demand',VASSAL_TYPES[tur]?tur:'haracguzar',terms);}
 
 function canSeekProtection(e, o){
   if (!e || !o || o.dead) return {ok:false, why:'Hedef yok'};
@@ -9760,34 +9735,13 @@ function canSeekProtection(e, o){
     return {ok:false, why:'Kendi vasalların varken boyun eğemezsin'};
   if ((e.res.etk || 0) < VASSAL_SEEK_COST)
     return {ok:false, why:VASSAL_SEEK_COST + ' etki gerekir'};
-  const oran = totalPower(o) / Math.max(1, totalPower(e));
+  const oran = (e.ai?aiKnownPower(e,o):totalPower(o)) / Math.max(1, totalPower(e));
   if (oran < 1.3)
     return {ok:false, why:'Yeterince güçlü değil — seni koruyamaz'};
   return {ok:true, oran};
 }
 
-function seekProtection(e, o, tur){
-  const chk = canSeekProtection(e, o);
-  if (!chk.ok) return chk;
-  e.res.etk -= VASSAL_SEEK_COST;
-  /* Hami kabul eder mi? Zayıf vasal yük değil, kazançtır. */
-  const P = (typeof personaOf === 'function') ? personaOf(o) : null;
-  let p = .55 + clamp((e.rel[o.id] || 0) / 300, -.2, .25);
-  if (P){
-    if (P.n === 'Militarist') p += .20;
-    if (P.n === 'Fanatik Arındırıcılar') p = 0;
-    if (P.n === 'İzolasyonist') p -= .30;
-  }
-  /* Ortak düşman varsa çok cazip */
-  for (const w in e.war) if (e.war[w] && o.war[w]) p += .20;
-  if (rnd() < clamp(p, .05, .92)){
-    subjugate(o, e, VASSAL_TYPES[tur] ? tur : 'bekci');
-    e.rel[o.id] = clamp((e.rel[o.id] || 0) + 20, -100, 100);
-    return {ok:true, kabul:true};
-  }
-  e.rel[o.id] = clamp((e.rel[o.id] || 0) - 10, -100, 100);
-  return {ok:true, kabul:false};
-}
+function seekProtection(e,o,tur,terms=null){return vassalOffer(e,o,'seek',VASSAL_TYPES[tur]?tur:'bekci',terms);}
 
 /* ═══════════════════════════════════════════════════════════════════
    FAZ 78 — AYRILIKÇILARI FONLA (vasal sadakati sabotajı)
@@ -9964,9 +9918,193 @@ function warDeclarationPreview(actor,target,key){
   const lord=overlordOf(victim);
   if(lord&&(actor.id===victim.id||actor.id===lord.id||(actor.intel?.[victim.id]||0)>=3)){
     add(lord,enemy,side,'Senyörlük koruma yükümlülüğü',true,true);
-    for(const v of vassalsOf(lord))if(v.vassalType==='bekci'&&(actor.id===lord.id||actor.id===v.id||(actor.intel?.[v.id]||0)>=3))add(v,enemy,side,'Sınır bekçisinin koruma yükümlülüğü',true,true);
+    for(const v of vassalsOf(lord))if(vassalDuty(v,'join',enemy)&&(actor.id===lord.id||actor.id===v.id||(actor.intel?.[v.id]||0)>=3))add(v,enemy,side,'Sınır bekçisinin koruma yükümlülüğü',true,true);
   }
  }
  for(const base of [{e:actor,enemy:target,side:'attack'},{e:target,enemy:actor,side:'defense'}])for(const id of Object.keys(base.e.ally||{})){const e=G.emps[+id];if(e&&base.e.ally[id]&&e.ally[base.e.id]&&knownAllianceBond(actor,base.e,e))add(e,base.enemy,base.side,'İttifak: ayrı gönüllü yardım veya savaş taahhüdü gerekli',false);}
  p.certain.sort((a,b)=>a.id-b.id);p.conditional.sort((a,b)=>a.id-b.id);p.ok=!p.blockers.length;p.signature=JSON.stringify(p);return p;
+}
+
+/* 96G.1: clauses belong to the existing subject relationship. Talks refer to
+   these same clauses; they do not transfer anything until mutual agreement. */
+const VASSAL_RESOURCES=['ene','min','ala','yiy','tuk'];
+function vassalDefaultTerms(type,legacy=false){
+ return {tax:type==='haracguzar'?{ene:.20,min:.20,ala:.20,yiy:0,tuk:0}:{ene:0,min:0,ala:0,yiy:0,tuk:0},science:type==='akademik'?.22:0,defense:true,war:type==='bekci'?'all':'none',autonomy:legacy||type==='akademik'?'free':'consent',duration:0,renegotiate:24,sensors:false};
+}
+function vassalTerms(type,raw){
+ if(!Object.hasOwn(VASSAL_TYPES,type)||!raw||typeof raw!=='object'||Array.isArray(raw))return null;
+ const t={...vassalDefaultTerms(type),...raw,tax:{...vassalDefaultTerms(type).tax,...raw.tax}};
+ if(Object.keys(t).some(k=>!['tax','science','defense','war','autonomy','duration','renegotiate','sensors'].includes(k))||Object.keys(t.tax).some(k=>!VASSAL_RESOURCES.includes(k)))return null;
+ const max=type==='haracguzar'?.30:.10,maxSci=type==='akademik'?.30:.10;
+ if(VASSAL_RESOURCES.some(k=>!Number.isFinite(t.tax[k])||t.tax[k]<0||t.tax[k]>max)||!Number.isFinite(t.science)||t.science<0||t.science>maxSci||type==='akademik'&&t.science<.05)return null;
+ if(!['none','defense','all'].includes(t.war)||type==='bekci'&&t.war==='none'||type==='akademik'&&t.war==='all'||!['free','consent'].includes(t.autonomy)||typeof t.defense!=='boolean'||typeof t.sensors!=='boolean')return null;
+ if(!Number.isSafeInteger(t.duration)||t.duration!==0&&(t.duration<12||t.duration>240)||![12,24,60].includes(t.renegotiate))return null;
+ return t;
+}
+function vassalContractOf(sub){
+ if(!isVassal(sub))return null;
+ const c=sub.vassalContract;
+ if(c&&c.status==='active'&&c.lord===sub.overlord&&c.sub===sub.id)return c;
+ return {v:1,lord:sub.overlord,sub:sub.id,type:vassalType(sub),terms:vassalDefaultTerms(vassalType(sub),true),started:Math.max(0,G.day-((G.memAge||0)-(sub.vassalSince||0))*30),expires:null,status:'active',source:'legacy',legacy:true};
+}
+function vassalInstall(lord,sub,type,terms,source='voluntary'){
+ const previous=sub.vassalContract,now=G.day;
+ sub.vassalContract={v:1,lord:lord.id,sub:sub.id,type,terms:JSON.parse(JSON.stringify(terms)),started:now,expires:terms.duration?now+terms.duration*30:null,status:'active',source,revision:(previous?.revision||0)+1};
+ sub.vassalType=type;
+}
+function vassalDuty(sub,kind,enemy){
+ const c=vassalContractOf(sub);if(!c)return false;
+ if(kind==='protect')return c.terms.defense;
+ if(c.terms.war==='all')return true;
+ if(c.terms.war!=='defense')return false;
+ const lord=G.emps[c.lord],d=lord?.warDefense?.[enemy?.id];
+ return !!(enemy&&d?.defensive&&d.since===lord.warSince?.[enemy.id]);
+}
+function vassalSensorActive(taker,giver){
+ const sub=taker?.overlord===giver?.id?taker:giver?.overlord===taker?.id?giver:null;
+ return !!(sub&&vassalContractOf(sub)?.terms.sensors);
+}
+function vassalEstimate(sub,terms){
+ const c=terms||vassalContractOf(sub)?.terms,out={};if(!c)return out;
+ for(const r of VASSAL_RESOURCES)out[r]=Math.min(Math.max(0,sub.inc?.[r]||0)*c.tax[r]*(sub.edicts?.ekVergi?1.5:1),Math.max(0,sub.res?.[r]||0));
+ out.ara=Math.min(Math.max(0,sub.inc?.ara||0)*(c.science+(sub.edicts?.bilimPayi?.since!==undefined?.18:0)),Math.max(0,sub.res?.ara||0));return out;
+}
+function vassalTransaction(fn){
+ if(_dealTxActive||G._sideBuf)return {ok:false,why:'Başka bir diplomatik işlem sürüyor'};
+ let tx=null,result;const buf=[];_dealTxActive=true;
+ try{tx=dealTxBegin();G._sideBuf=buf;result=fn();if(!result?.ok){dealTxRollback(tx);return result;}if(typeof G._vassalFailInject==='function')G._vassalFailInject();commitSideBuffer(buf);}
+ catch(err){if(tx)dealTxRollback(tx);return {ok:false,why:'İşlem uygulanamadı; önceki durum korundu'};}
+ finally{if(tx)dealTxRestoreAuth(tx);_dealTxActive=false;}
+ flushSideBuffer(buf);return result;
+}
+function vassalDeclaredWars(e){return G.emps.filter(o=>o!==e&&!o.dead&&!o.wild&&!o.crisisSide&&e.war?.[o.id]).map(o=>o.id);}
+function vassalTalkValid(q){
+ const lord=G.emps[q?.lord],sub=G.emps[q?.sub];
+ if(!q||q.status!=='pending'||!lord||!sub||lord===sub||![lord.id,sub.id].includes(q.from)||![lord.id,sub.id].includes(q.to)||q.from===q.to||lord.dead||sub.dead||lord.wild||sub.wild||lord.crisisSide||sub.crisisSide||lord.war[sub.id]||sub.war[lord.id]||!lord.contact?.[sub.id]&&!sub.contact?.[lord.id]||isPurifier(lord)||isPurifier(sub))return {ok:false,why:'Taraflar veya diplomatik koşullar değişti'};
+ if(G.day>=q.expires)return {ok:false,why:'Teklifin süresi doldu'};
+ if(q.kind==='new'?(isVassal(sub)||isVassal(lord)||vassalsOf(sub).length):(sub.overlord!==lord.id||!isVassal(sub)))return {ok:false,why:'Egemenlik bağı değişti'};
+ if(q.kind!=='release'&&!vassalTerms(q.type,q.terms))return {ok:false,why:'Geçersiz sözleşme hükümleri'};
+ return {ok:true};
+}
+function vassalTalkFinish(sub,status,why){
+ const q=sub.vassalTalk;if(!q||q.status!=='pending')return;
+ q.status=status;q.finished=G.day;q.why=why;sub._vassalTalkAfter=G.day+360;
+ if(status==='rejected'&&typeof remember==='function')remember(G.emps[q.from],q.to,'sinirGergin');
+}
+function vassalOffer(e,o,mode,type='haracguzar',raw=null){
+ const existing=mode==='renew'||mode==='release',sub=existing?(isVassal(e)&&e.overlord===o.id?e:o.overlord===e.id?o:null):mode==='demand'?o:e,lord=existing?(sub&&overlordOf(sub)):mode==='demand'?e:o;
+ if(!sub||!lord||!e||!o||e===o||G.emps[e.id]!==e||G.emps[o.id]!==o)return {ok:false,why:'Geçerli bir senyör ve vasal gerekir'};
+ if(!existing&&(sub.freeUntil||0)>(G.memAge||0))return {ok:false,why:'Yeni bağımsızlığın koruma süresi devam ediyor'};
+ const recent=[e,o].flatMap(x=>[x.vassalTalk,...(x.vassalTalkHistory||[])]).some(q=>q&&q.finished>G.day-360&&[q.lord,q.sub].includes(e.id)&&[q.lord,q.sub].includes(o.id));if(recent)return {ok:false,why:'Bu iki devlet arasında 12 aylık müzakere soğuma süresi sürüyor'};
+ const old=sub.vassalTalk;if(old?.status==='pending'&&G.day<old.expires)return {ok:false,why:'Bu vasal için zaten bekleyen müzakere var'};
+ if((sub._vassalTalkAfter||0)>G.day)return {ok:false,why:'Müzakere soğuma süresi devam ediyor'};
+ const c=existing?vassalContractOf(sub):null;
+ if(existing&&(!c||c.lord!==lord.id))return {ok:false,why:'Geçerli sözleşme yok'};
+ if(mode==='release'&&e!==sub)return {ok:false,why:'Barışçıl bağımsızlığı vasal talep eder'};
+ if(mode==='renew'&&G.day<(c.started+c.terms.renegotiate*30))return {ok:false,why:'Yeniden müzakere tarihi gelmedi'};
+ const terms=vassalTerms(type,raw||vassalDefaultTerms(type));if(!terms)return {ok:false,why:'Bu vasal türü için hükümler geçersiz'};
+ const cost=mode==='demand'?VASSAL_DEMAND_COST:mode==='seek'?VASSAL_SEEK_COST:mode==='release'?40:60;
+ const gate=existing?{ok:!e.war[o.id]&&!e.dead&&!o.dead&&!isPurifier(e)&&!isPurifier(o),why:'Savaş veya doktrin müzakereye engel'}:mode==='demand'?canDemandVassal(e,o):canSeekProtection(e,o);
+ if(!gate.ok)return gate;if((e.res.etk||0)<cost)return {ok:false,why:cost+' Etki gerekir'};
+ const result=vassalTransaction(()=>{
+  if(old){sub.vassalTalkHistory=(sub.vassalTalkHistory||[]).concat(JSON.parse(JSON.stringify(old))).slice(-12);}
+  e.res.etk-=cost;sub.vassalTalkSeq=(sub.vassalTalkSeq||0)+1;
+  sub.vassalTalk={v:1,id:sub.id+':'+sub.vassalTalkSeq,lord:lord.id,sub:sub.id,kind:existing?mode==='release'?'release':'renew':'new',mode,type,terms,from:e.id,to:o.id,born:G.day,expires:G.day+180,round:1,status:'pending',disclosedWars:{[e.id]:vassalDeclaredWars(e)},paid:{[e.id]:cost},history:[{day:G.day,by:e.id,action:'offer',why:'Açık sözleşme teklifi',terms:JSON.parse(JSON.stringify(terms))}]};
+  return {ok:true,pending:true};
+ });
+ if(result.ok){vassalDriveAI(sub);vassalInboxSync();return {...result,kabul:sub.vassalTalk.status==='accepted',karar:sub.vassalTalk.status,round:sub.vassalTalk.round};}return result;
+}
+function aiVassalAssessment(e,q){
+ const lord=G.emps[q.lord],sub=G.emps[q.sub],other=e===sub?lord:sub,t=q.terms,own=e===sub,profile=aiProfile(e),goal=e.aiStrategy?.objective?.kind||'development',known=aiKnownPower(e,other),power=Math.max(1,totalPower(e)),rel=e.rel[other.id]||0,trust=clamp(rel/100,-1,1),grudge=typeof grudgeOf==='function'?grudgeOf(e,other.id):0;
+ const wars=G.emps.filter(o=>o!==e&&!o.dead&&!o.wild&&e.war[o.id]),threat=wars.reduce((n,o)=>Math.max(n,aiKnownPower(e,o)/power),0),recovery=goal==='recovery'||['ene','min','ala','tuk'].some(r=>(e.inc?.[r]||0)<0&&(e.res[r]||0)<-(e.inc[r]||0)*6);
+ let score=0;const reasons=[];
+ const add=(n,why)=>{score+=n;reasons.push({value:Math.round(n*100)/100,why});};
+ if(q.kind==='release'){
+  if(own)return {decision:'accept',score:1,reasons:[{value:1,why:'Bağımsızlık isteği'}]};
+  add((known/power-1)*.35,'Bilinen güç dengesi');add((sub.vassalAnger||0)/180,'Kendi vasalının açık bağımsızlık arzusu');add(recovery?.25:0,'Kendi toparlanma ihtiyacı');add(trust*.15,'Güven');add(-.55,'Sözleşme ve stratejik bağlılığı koruma');
+ }else if(own){
+  const ratio=known/power;add(clamp((ratio-1)*.18,0,.65),'Bilinen koruyucu güç');add(clamp(threat*.18,0,.5),'Kendi mevcut tehdidi');add(trust*.25-grudge/250,'Diplomatik hafıza ve güven');
+  const burden=VASSAL_RESOURCES.reduce((n,r)=>n+t.tax[r],0)/3+t.science*.65;add(-burden*1.5,'Gerçek gelirden istenen vergi ve bilim payı');
+  const projected=vassalEstimate(e,t);if(VASSAL_RESOURCES.some(r=>(e.inc?.[r]||0)-(projected[r]||0)<0&&(e.res[r]||0)<Math.abs((e.inc?.[r]||0)-(projected[r]||0))*6))add(-.5,'Altı aylık kendi rezervi yükü karşılamıyor');
+  add(t.defense?.2:-.4,'Senyörün koruma yükümlülüğü');add(t.war==='all'?(recovery?-.5:-.22):t.war==='defense'?-.08:.08,'Askerî yükümlülük ve hazırlık');add(t.autonomy==='free'?.12:-.15,'Diplomatik özerklik');add(profile.war>.8?-.15:0,'Askerî kişilik');add(goal==='regional'||goal==='hegemony'?-.12:0,'Uzun vadeli bağımsız güç hedefi');add(-.15,'Bağımsızlığın siyasi değeri');
+ }else{
+  add(trust*.3-grudge/250,'Güven ve diplomatik hafıza');add(.25,'Himayenin stratejik değeri');add(t.war==='all'?.28:t.war==='defense'?.1:0,'Müttefik askerî yükümlülük');add(VASSAL_RESOURCES.reduce((n,r)=>n+t.tax[r],0)*.3+t.science*.7,'Sözleşmenin gelir ve bilim faydası');
+  add(t.defense?(recovery?-.5:-.12):.12,'Kendi koruma hazırlığı ve toparlanma ihtiyacı');
+  const knownFronts=new Set([...(q.disclosedWars?.[sub.id]||[]),...G.emps.filter(o=>o!==e&&e.contact?.[o.id]&&aiKnownWar(e,sub,o)).map(o=>o.id)]);let unknown=0;const knownThreat=[...knownFronts].reduce((n,id)=>{const o=G.emps[id];if(!e.contact?.[id]){unknown++;return n;}return Math.max(n,aiKnownPower(e,o)/power);},0);if(t.defense)add(-clamp(knownThreat*.22+unknown*.2,0,.7),'Bilinen / teklifte bildirilen koruma cephesi yükü');add(profile.war>.8?.1:profile.war<.3?-.1:0,'Kişilik ve askerî amaç');
+ }
+ if(own&&q.kind==='new'&&t.defense&&!aiProtection(e,lord).ok)add(-.65,'Bilinen ulaşılabilir koruma rotası yok');
+ const decision=score>=.18?'accept':score>-.65&&q.round<3?'counter':'reject';
+ return {decision,score:Math.round(score*1000)/1000,goal,recovery,reasons};
+}
+function aiVassalCounter(e,q){
+ const terms=JSON.parse(JSON.stringify(q.terms));
+ if(q.kind==='release'){
+  const c=vassalContractOf(G.emps[q.sub]);if(!c)return null;
+  for(const r of VASSAL_RESOURCES)terms.tax[r]=Math.max(0,terms.tax[r]-.05);
+  terms.science=Math.max(q.type==='akademik'?.05:0,terms.science-.05);terms.autonomy='free';terms.duration=60;return terms;
+ }
+ if(e.id===q.sub){for(const r of VASSAL_RESOURCES)terms.tax[r]=Math.max(0,terms.tax[r]-.05);terms.science=Math.max(q.type==='akademik'?.05:0,terms.science-.05);terms.defense=true;terms.autonomy='free';if(terms.war==='all')terms.war='defense';}
+ else {if(q.type==='akademik')terms.science=Math.min(.30,terms.science+.05);else for(const r of ['ene','min','ala'])terms.tax[r]=Math.min(q.type==='haracguzar'?.30:.10,terms.tax[r]+.05);if(q.type!=='akademik')terms.war='defense';terms.autonomy='consent';}
+ return vassalTerms(q.type,terms);
+}
+function vassalReply(actor,subId,id,round,action,terms=null,world=G.emps){
+ const sub=G.emps[subId],q=sub?.vassalTalk,valid=vassalTalkValid(q);
+ if(world!==G.emps||G.emps[actor?.id]!==actor||!valid.ok||!q||q.id!==id||q.round!==+round||q.to!==actor?.id||!['accept','reject','counter'].includes(action))return {ok:false,why:valid.why||'Bu tur artık geçerli değil'};
+ const assessment=actor.ai?aiVassalAssessment(actor,q):null,why=assessment?assessment.reasons.map(r=>r.why+': '+r.value).join(' · '):'Oyuncunun açık kararı';
+ if(action==='counter'&&(q.round>=3||(actor.res.etk||0)<20))return {ok:false,why:'En çok üç tur; karşı teklif 20 Etki ister'};
+ const normalized=action==='counter'?vassalTerms(q.type,terms):null;if(action==='counter'&&!normalized)return {ok:false,why:'Geçersiz karşı teklif'};
+ const result=vassalTransaction(()=>{
+  if(action==='reject'){q.history.push({day:G.day,by:actor.id,action,why});vassalTalkFinish(sub,'rejected',why);return {ok:true};}
+  if(action==='counter'){
+   if(JSON.stringify(normalized)===JSON.stringify(q.terms)&&q.kind!=='release')return {ok:false,why:'Karşı teklif en az bir hükmü değiştirmeli'};
+   actor.res.etk-=20;q.disclosedWars=q.disclosedWars||{};q.disclosedWars[actor.id]=vassalDeclaredWars(actor);q.paid[actor.id]=(q.paid[actor.id]||0)+20;q.history.push({day:G.day,by:actor.id,action,why,terms:normalized});q.terms=normalized;
+   if(q.kind==='release')q.kind='renew';[q.from,q.to]=[q.to,q.from];q.round++;q.expires=G.day+180;return {ok:true};
+  }
+  const lord=G.emps[q.lord];
+  if(q.kind==='release'){if(!freeVassal(sub,'barışçıl bağımsızlık anlaşması'))throw Error('release failed');}
+  else if(q.kind==='new'){if(!subjugate(lord,sub,q.type,q.terms,'voluntary'))throw Error('subjugation failed');sub.rel[lord.id]=clamp((sub.rel[lord.id]||0)+(q.mode==='seek'?(sub.ai?25:20):-15),-100,100);}
+  else {vassalInstall(lord,sub,q.type,q.terms,'renegotiated');if(vassalContractOf(sub)?.terms.war!=='none')vassalJoinWars(lord,sub);}
+  q.history.push({day:G.day,by:actor.id,action,why});vassalTalkFinish(sub,'accepted',why);recalcMods(lord);recalcMods(sub);return {ok:true};
+ });
+ if(result.ok){vassalDriveAI(sub);vassalInboxSync();}return result;
+}
+function vassalDriveAI(sub){
+ if(sub._vassalDriving)return;sub._vassalDriving=true;
+ try{for(let i=0;i<3;i++){
+  const q=sub.vassalTalk;if(!q||q.status!=='pending')break;
+  const e=G.emps[q.to];if(!e?.ai)break;
+  const a=aiVassalAssessment(e,q);let action=a.decision,terms=action==='counter'?aiVassalCounter(e,q):null;
+  if(action==='counter'&&(!terms||e.res.etk<20))action='reject';
+  const r=vassalReply(e,sub.id,q.id,q.round,action,terms);if(!r.ok)break;
+ }}finally{delete sub._vassalDriving;}
+}
+function vassalInboxSync(){
+ if(typeof DiplomaticInbox==='undefined'||!G.p)return;
+ for(const sub of G.emps){const q=sub.vassalTalk;if(!q||![q.lord,q.sub].includes(G.p.id))continue;
+  const other=q.lord===G.p.id?q.sub:q.lord;
+  DiplomaticInbox.source('vassal','vassal:'+q.id+':'+q.round,other,sub.id,q.id+':'+q.round,q.expires,'Vasallık sözleşmesi · '+(q.kind==='release'?'Bağımsızlık talebi':VASSAL_TYPES[q.type].n),q.history.at(-1)?.why||'Sözleşme teklifi');
+ }
+}
+function vassalTalkTick(){
+ for(const sub of G.emps){
+  const q=sub.vassalTalk;
+  if(q?.status==='pending'){const valid=vassalTalkValid(q);if(!valid.ok)vassalTalkFinish(sub,G.day>=q.expires?'expired':'invalid',valid.why);else vassalDriveAI(sub);}
+  const c=vassalContractOf(sub);if(!c)continue;
+  if(c.expires!==null&&G.day>=c.expires){if(sub.vassalContract)sub.vassalContract.status='expired';freeVassal(sub,'sözleşme süresi doldu');continue;}
+  if(!sub.ai||sub.dead||(sub._vassalTalkAfter||0)>G.day||sub.vassalTalk?.status==='pending'||G.day<c.started+c.terms.renegotiate*30)continue;
+  const lord=overlordOf(sub),recovery=sub.aiStrategy?.objective?.kind==='recovery';
+  if((sub.vassalAnger||0)>=65&&totalPower(sub)>=aiKnownPower(sub,lord)*.65&&sub.res.etk>=40)vassalOffer(sub,lord,'release',c.type,c.terms);
+  else if(recovery&&sub.res.etk>=60&&(Object.values(c.terms.tax).some(v=>v>.1)||c.terms.science>.15)){
+   const next=aiVassalCounter(sub,{...q,type:c.type,terms:c.terms,sub:sub.id,kind:'renew'});if(next)vassalOffer(sub,lord,'renew',c.type,next);
+  }
+ }
+ vassalInboxSync();
+}
+function restoreVassalContracts(){
+ for(const sub of G.emps){const c=sub.vassalContract,q=sub.vassalTalk;
+  if(sub.vassalPaidMonth!==undefined&&(!Number.isSafeInteger(sub.vassalPaidMonth)||sub.vassalPaidMonth<0))throw Error('Bozuk vasallık ödeme dönemi');
+  if(c&&(c.v!==1||c.sub!==sub.id||!Number.isSafeInteger(c.lord)||!G.emps[c.lord]||!vassalTerms(c.type,c.terms)||!Number.isFinite(c.started)||c.expires!==null&&!Number.isFinite(c.expires)||!['active','ended','expired'].includes(c.status)))throw Error('Bozuk vasallık sözleşmesi');
+  if(q&&(q.v!==1||q.sub!==sub.id||!G.emps[q.lord]||!G.emps[q.from]||!G.emps[q.to]||!['new','renew','release'].includes(q.kind)||!['pending','accepted','rejected','expired','invalid'].includes(q.status)||!Number.isSafeInteger(q.round)||q.round<1||q.round>3||typeof q.id!=='string'||q.id.length>64||!Number.isFinite(q.born)||!Number.isFinite(q.expires)||!vassalTerms(q.type,q.terms)||q.disclosedWars!==undefined&&(!q.disclosedWars||typeof q.disclosedWars!=='object'||Object.entries(q.disclosedWars).some(([id,fronts])=>![String(q.lord),String(q.sub)].includes(id)||!Array.isArray(fronts)||fronts.length>G.emps.length||fronts.some(id=>!Number.isSafeInteger(id)||!G.emps[id])))||!q.paid||typeof q.paid!=='object'||Object.values(q.paid).some(n=>!Number.isFinite(n)||n<0)||!Array.isArray(q.history)||q.history.length>8||q.history.some(r=>!r||!Number.isFinite(r.day)||!G.emps[r.by]||typeof r.why!=='string'||r.why.length>2000)))throw Error('Bozuk vasallık müzakeresi');
+  delete sub._vassalDriving;
+ }
 }

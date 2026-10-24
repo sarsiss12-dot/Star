@@ -54,9 +54,9 @@ const EconomyUI={resource:'ene',filter:'selected',world:null,scroll:0,charts:new
   h+=this.trade(e)+'<h3>Üretim / bakım konumları</h3><div class="ecoActions">'+e.colonies.slice(0,24).map(c=>`<button class="abtn" data-a="ecoSystem" data-x="${c.s}">${esc(G.sys[c.s].name)} · koloni / tersane</button>`).join('')+G.fleets.filter(f=>f.e===e.id).slice(0,12).map(f=>`<button class="abtn" data-a="ecoFleet" data-x="${f.id}">${esc(f.name)} · filo</button>`).join('')+'</div>';
   return h;
  },
- open(reset=false){
+ open(reset=false,automatic=false){
   this.state();const old=$('economyScroll'),scroll=reset?0:old?.scrollTop??this.scroll;UI.globalCur='ekonomi';const nav=Object.entries(GLOBAL_PANES).map(([k,p])=>`<button class="gpTab ${k==='ekonomi'?'on':''}" data-a="globalPane" data-x="${k}">${p.ico} ${p.n}</button>`).join('');
-  $('diploPane').innerHTML=`<section class="dpBox economyBox"><header class="dpHd"><span>📊 EKONOMİ MERKEZİ</span><button class="riX" data-a="closeDiplo" aria-label="Ekonomiyi kapat">✕</button></header><nav class="gpTabs">${nav}</nav><div class="dpBody" id="economyScroll">${this.render()}</div></section>`;$('diploPane').classList.add('show');$('economyScroll').scrollTop=scroll;this.scroll=scroll;this.lastDay=Math.floor(G.day);
+  UI.surfaceRender($('diploPane'),`<section class="dpBox economyBox"><header class="dpHd"><span>📊 EKONOMİ MERKEZİ</span><button class="riX" data-a="closeDiplo" aria-label="Ekonomiyi kapat">✕</button></header><nav class="gpTabs">${nav}</nav><div class="dpBody" id="economyScroll">${this.render()}</div></section>`,'economy',automatic);$('diploPane').classList.add('show');if(!automatic&&(!old||reset))$('economyScroll').scrollTop=scroll;this.scroll=scroll;this.lastDay=Math.floor(G.day);
  },
  boot(){if($('economyBtn'))return;const host=$('outEmp');if(host){const b=document.createElement('button');b.id='economyBtn';b.className='tool';b.dataset.a='globalPane';b.dataset.x='ekonomi';b.innerHTML='📊<span>Ekonomi</span>';host.appendChild(b);}},
 };
@@ -72,7 +72,7 @@ const economyAct96=UI.act;UI.act=function(action,x,el){
  return economyAct96.apply(this,arguments);
 };
 const economyImp96=UI.p_imp;UI.p_imp=function(){return '<button class="abtn" data-a="globalPane" data-x="ekonomi">📊 Ekonomi Merkezi · yedi kaynak ve gerçek stok değişimleri</button>'+economyImp96.apply(this,arguments);};
-const economyTickUI96=UI.tick;UI.tick=function(){const result=economyTickUI96.apply(this,arguments);if(this.globalCur==='ekonomi'&&$('diploPane').classList.contains('show')&&$('economyScroll')&&EconomyUI.lastDay!==Math.floor(G.day))EconomyUI.open();return result;};
+const economyTickUI96=UI.tick;UI.tick=function(){const result=economyTickUI96.apply(this,arguments);if(this.globalCur==='ekonomi'&&$('diploPane').classList.contains('show')&&$('economyScroll')&&EconomyUI.lastDay!==Math.floor(G.day))EconomyUI.open(false,true);return result;};
 // 96C regression: the economy workspace has a higher layer than ordinary
 // modals. Yield its surface before an inbox/trade confirmation is opened.
 const economyModal96C=UI.openModal;UI.openModal=function(){

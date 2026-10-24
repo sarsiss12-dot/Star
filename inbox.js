@@ -2,8 +2,8 @@
 /* 95E — references to existing diplomatic actions, never a second engine. */
 const DiplomaticInbox = {
   historyLimit:256, pendingLimit:512,
-  types:{fedrequest:'Federasyon üyelik sonucu',aideal:'Diplomatik teklif',pact:'İstihbarat anlaşması',submit:'Vasallık / himaye talebi',peace:'Barış teklifi',sqOffer:'Statüko barışı',fedvote:'Federasyon oylaması',invite:'Federasyona katılım daveti',decision:'Ortak savaş kararı'},
-  states:{pending:'Bekliyor',accepted:'Kabul edildi',rejected:'Reddedildi',expired:'Süresi doldu',invalid:'Geçersizleşti'},
+  types:{vassal:'Vasallık sözleşmesi / bağımsızlık',fedrequest:'Federasyon üyelik sonucu',aideal:'Diplomatik teklif',pact:'İstihbarat anlaşması',submit:'Vasallık / himaye talebi',peace:'Barış teklifi',sqOffer:'Statüko barışı',fedvote:'Federasyon oylaması',invite:'Federasyona katılım daveti',decision:'Ortak savaş kararı'},
+  states:{countered:'Karşı teklif gönderildi',pending:'Bekliyor',accepted:'Kabul edildi',rejected:'Reddedildi',expired:'Süresi doldu',invalid:'Geçersizleşti'},
   empty(){return {v:1,next:1,records:[]};},
   state(){return G.diplomaticInbox||(G.diplomaticInbox=this.empty());},
   supported(kind){return Object.hasOwn(this.types,kind);},
@@ -29,6 +29,7 @@ const DiplomaticInbox = {
   },
   sync(){
     if(!G.p)return;
+    if(typeof vassalInboxSync==='function')vassalInboxSync();
     for(const f of G.feds||[]){
       const inv=f.invites?.[G.p.id];
       if(inv&&inv.expires>G.day)this.source('invite','invite:'+f.id+':'+inv.expires,inv.by,f.id,String(inv.expires),inv.expires,'Federasyona katılım — '+f.name,fedType(f).n+' · '+fedType(f).d+' Oy rejimi: '+(FED_BALLOTS[fedBallot(f)]?.n||fedBallot(f))+'. '+fedDutyText(f)+' Yasalar: '+(Object.keys(f.laws||{}).filter(k=>f.laws[k]).map(k=>(FED_LAWS[k]||FED_INNER_LAWS[k]||{}).n||k).join(', ')||'yok'));
@@ -60,6 +61,7 @@ const DiplomaticInbox = {
       const q=aiProtection(o,G.p);return q.ok&&o.res.etk>=VASSAL_SEEK_COST?{ok:true}:no(q.why||'Gönderenin Etkisi yetersiz');
     }
     if(r.kind==='sqOffer')return G.p.war[o.id]?canStatusQuo(G.p,o):no('Savaş sona erdi',true);
+    if(r.kind==='vassal'){const q=G.emps[r.fid]?.vassalTalk;if(!q||r.token!==q.id+':'+q.round)return no('Bu müzakere turu tamamlandı; güncel tur veya geçmişi incele',true,q&&r.token?.startsWith(q.id+':')?'countered':'invalid');if(q.status!=='pending')return no(q.why||'Müzakere tamamlandı',true,q.status);const g=vassalTalkValid(q);return g.ok?{ok:q.to===G.p.id,why:q.to===G.p.id?'':'Karşı tarafın yanıtı bekleniyor'}:no(g.why,true,G.day>=q.expires?'expired':'invalid');}
     const f=fedOf(r.fid);if(!f)return no('Federasyon artık mevcut değil',true);
     if(r.kind==='fedrequest'){
       const row=f.admissionResults?.[r.token];
@@ -85,6 +87,7 @@ const DiplomaticInbox = {
   resolve(id,yes,option='haracguzar',world=G.emps){
     if(world!==G.emps)return {ok:false,why:'Oyun kaydı değişti; teklifi yeniden aç'};
     const r=this.get(id),gate=this.gate(r);if(!r||r.kind==='fedrequest'||gate.terminal||r.status!=='pending'||G.day>=r.expires||yes&&!gate.ok)return {ok:false,why:gate.why||'Teklif geçersiz'};
+    if(r.kind==='vassal'){const q=G.emps[r.fid]?.vassalTalk;return vassalReply(G.p,r.fid,q.id,q.round,yes?'accept':'reject',null,world);}
     let result={ok:true};const o=G.emps[r.from];
     if(yes){
       const offer=this.deal(r);

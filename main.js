@@ -3668,7 +3668,7 @@ function updateVision(){
 function sensorShareActive(taker,giver){
   return !!(taker && giver && taker!==giver && !taker.dead && !giver.dead &&
     !taker.war?.[giver.id] && !giver.war?.[taker.id] &&
-    (taker.visionFrom?.[giver.id] || taker.shareVis?.[giver.id]));
+    (taker.visionFrom?.[giver.id] || taker.shareVis?.[giver.id] || (typeof vassalSensorActive==='function'&&vassalSensorActive(taker,giver))));
 }
 function nativeSensorVision(e){
   const visible=new Set(),depth=new Map(),q=[],range=1+(e.mods.sensor|0);
@@ -7908,6 +7908,7 @@ function applySaveData(d){
   restoreWarLedger(d.warLedger);
   restoreSettlements(d.settlements);
   restoreJoint(d.jointOps);
+  if(typeof restoreVassalContracts==='function')restoreVassalContracts();
   normalizeDiplomaticBindings(); // 94D: no RNG, time or relationship score changes
   loadCheckpoint('after:world');
   /* FAZ 85C: kriz dünyası — politik world'den SONRA (kriz konsey/
@@ -8273,7 +8274,7 @@ function forceRedraw(sebep){
    Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
    Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
 /* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */
-const BUILD_ID = '96gd2';
+const BUILD_ID = '96g1';
 const DIAG_MAX = 40;
 const DIAG = [];
 function logDiag(tur, mesaj){

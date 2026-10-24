@@ -1021,15 +1021,22 @@ const UI = {
         break;
       }
       case 'vsOpen': {
-        /* FAZ 83: müzakereyi AÇ — hiçbir veri değişmez, zar atılmaz */
-        const [oid, yon] = x.split(':');
-        this.vs = {id: +oid, yon, tur: 'haracguzar', gonderildi: false};
-        this.vsDraw();
-        break;
+        const [oid,yon]=String(x).split(':'),o=G.emps[+oid];if(!o)break;
+        const sub=isVassal(G.p)&&G.p.overlord===o.id?G.p:o.overlord===G.p.id?o:null,c=sub&&vassalContractOf(sub);
+        this.vs={id:o.id,yon,tur:c?.type||'haracguzar',world:G.emps,gonderildi:false,drafts:Object.fromEntries(Object.keys(VASSAL_TYPES).map(t=>[t,c?.type===t?JSON.parse(JSON.stringify(c.terms)):vassalDefaultTerms(t)])),edit:yon==='renew'};this.vsDraw();break;
       }
-      case 'vsType': {
-        if (this.vs){ this.vs.tur = x; this.vsDraw(); }
-        break;
+      case 'vsCurrent': if(isVassal(G.p))this.openModal('<div class="mhd">YÜRÜRLÜKTEKİ SÖZLEŞMEN</div><div class="mbd">'+this.vsContract(G.p)+'</div><div class="mft"><button class="ch" data-a="closem">KAPAT</button></div>','sci',false);break;
+      case 'vsInspect': this.vsRecord(+x);break;
+      case 'vsType': if(this.vs){this.vsRead();this.vs.tur=x;this.vsDraw();}break;
+      case 'vsEdit': if(this.vs){this.vsRead();this.vs.tur=x;this.vs.edit=true;this.vsDraw();}break;
+      case 'vsBack': if(this.vs){this.vsRead();this.vs.edit=false;this.vsDraw();}break;
+      case 'vsReply': {
+        const t=this._vsRecord;if(!t||t.world!==G.emps)break;
+        const r=vassalReply(G.p,t.sub,t.id,t.round,x,null,t.world);if(!r.ok)say(r.why,'war');this.vsRecord(t.sub);break;
+      }
+      case 'vsCounter': {
+        const t=this._vsRecord,q=t&&G.emps[t.sub]?.vassalTalk;if(!q||t.world!==G.emps||q.id!==t.id||q.round!==t.round||q.to!==G.p.id)break;
+        this.vs={id:q.from,yon:'counter',tur:q.type,world:G.emps,gonderildi:false,edit:true,drafts:{[q.type]:JSON.parse(JSON.stringify(q.terms))},record:t};this.vsDraw();break;
       }
       case 'vsCancel': {
         /* İPTAL: hiçbir kaynak, hiçbir diplomatik durum değişmez */
@@ -1038,39 +1045,17 @@ const UI = {
         break;
       }
       case 'vsSend': {
-        if (!this.vs || this.vs.gonderildi) break;   // çift dokunma koruması
-        this.vs.gonderildi = true;
-        const o = G.emps[this.vs.id];
-        const tur = this.vs.tur;
-        const yon = this.vs.yon;
-        this.vs = null;
-        this.closeModal();
-        let r;
-        if (yon === 'demand'){
-          r = demandVassal(G.p, o, tur);
-          if (!r.ok) say(r.why, 'war');
-          else if (r.kabul)
-            this.eventArt('veri', 'BİAT KABUL EDİLDİ',
-              o.name + ' boyun eğdi ve ' + VASSAL_TYPES[tur].n +
-              ' oldu. Gelirinin %20\'si artık bize akıyor.', 'win', 'kritik', o);
-          else
-            this.eventArt('infaz', 'BİAT REDDEDİLDİ',
-              o.name + ' teklifimizi geri çevirdi. Gurur kırıldı, ilişki ' +
-              'bozuldu ve beş yıl boyunca bir daha soramayız.', 'war', 'kritik', o);
-        } else {
-          r = seekProtection(G.p, o, tur);
-          if (!r.ok) say(r.why, 'war');
-          else if (r.kabul)
-            this.eventArt('veri', 'HİMAYE KABUL EDİLDİ',
-              o.name + ' bizi kanatları altına aldı. Artık savunmakla ' +
-              'yükümlü — ama gelirimizin bir kısmı ona akacak.', 'win', 'kritik', o);
-          else
-            this.eventArt('infaz', 'HİMAYE REDDEDİLDİ',
-              o.name + ' talebimizi geri çevirdi. Bize harcanacak bir ' +
-              'kalkan görmüyorlar.', 'war', 'kritik', o);
-        }
-        this.keepScroll = true; this.refresh();
-        break;
+        if (!this.vs || this.vs.gonderildi) break;
+        const v=this.vs;if(v.world&&v.world!==G.emps){say('Oyun kaydı değişti; müzakereyi yeniden aç','war');break;}
+        this.vsRead();const terms=v.drafts[v.tur];if(!vassalTerms(v.tur,terms)){if($('vsError'))$('vsError').textContent='Oranlar ve hükümler bu vasal türünün sınırları içinde olmalı.';break;}
+        v.gonderildi=true;let r;const o=G.emps[v.id];
+        if(v.yon==='counter'){const t=v.record;r=vassalReply(G.p,t.sub,t.id,t.round,'counter',terms,t.world);}
+        else if(v.yon==='demand')r=demandVassal(G.p,o,v.tur,terms);
+        else if(v.yon==='seek')r=seekProtection(G.p,o,v.tur,terms);
+        else r=vassalOffer(G.p,o,v.yon,v.tur,terms);
+        if(!r.ok){v.gonderildi=false;if($('vsError'))$('vsError').textContent=r.why;break;}
+        const sub=v.yon==='counter'?G.emps[v.record.sub]:v.yon==='demand'?o:v.yon==='seek'?G.p:isVassal(G.p)?G.p:o;
+        this.vs=null;this.closeModal();if(sub?.vassalTalk)this.vsRecord(sub.id);break;
       }
       case 'supIndep': {
         const o = G.emps[+x];
@@ -1241,10 +1226,12 @@ const UI = {
         break;
       }
       case 'revolt': {
-        const r = (typeof playerRevolt === 'function') ? playerRevolt() : {ok:false, why:'—'};
-        if (!r.ok) say(r.why, 'war');
-        this.refresh();
-        break;
+        if(!isVassal(G.p))break;
+        this.openModal('<div class="mhd">BAĞIMSIZLIK SAVAŞI</div><div class="mbd">Bu karar mevcut vasallık bağını koparıp senyörüne savaş açar. Barışçıl talep ve yeniden müzakere seçeneklerini önce diplomasi ekranında inceleyebilirsin.</div><div class="mft"><button class="ch" data-a="revoltConfirm">SAVAŞI AÇIKÇA ONAYLA</button><button class="ch" data-a="closem">VAZGEÇ</button></div>','war',false);this._revoltConsent={world:G.emps,lord:G.p.overlord};break;
+      }
+      case 'revoltConfirm': {
+        const t=this._revoltConsent;this._revoltConsent=null;if(!t||t.world!==G.emps||G.p.overlord!==t.lord)break;
+        const r=playerRevolt();if(!r.ok)say(r.why,'war');this.closeModal();this.refresh();break;
       }
       case 'jointPrepare': this.jointPrepare(x);break;
       case 'jointChooseTarget':
@@ -2050,6 +2037,81 @@ const UI = {
     $('resourceStrip').scrollLeft=left;
   },
 
+  /* Stable live surfaces: reconcile changed nodes, never replace a scroller
+     merely because a game day elapsed. Pause DOM writes during native touch,
+     momentum scrolling and typing; simulation and data collection continue. */
+  surfaceInput(){
+    if(this._surfaceBound)return;this._surfaceBound=true;this._surfaceDirty=new WeakSet();
+    this._surfacePointers=new Set();
+    const relevant=t=>t?.closest?.('#diploPane,#panel,#modal');
+    document.addEventListener('pointerdown',e=>{if(relevant(e.target))this._surfacePointers.add(e.pointerId);},{passive:true});
+    const end=e=>{this._surfacePointers.delete(e.pointerId);this._surfaceUntil=Date.now()+220;};
+    document.addEventListener('pointerup',end,{passive:true});document.addEventListener('pointercancel',end,{passive:true});
+    document.addEventListener('scroll',e=>{if(relevant(e.target))this._surfaceUntil=Date.now()+220;},{capture:true,passive:true});
+    for(const type of ['input','change'])document.addEventListener(type,e=>{if(relevant(e.target)){this._surfaceDirty.add(e.target);this._surfaceUntil=Date.now()+500;}},{passive:true});
+    window.addEventListener('blur',()=>this._surfacePointers.clear());
+  },
+  surfaceRender(el,html,key,automatic=false){
+    if(!el)return false;
+    // Non-browser regression hosts do not implement a native DOM parser.
+    if(!document.createElement('template').content){el.innerHTML=html;return true;}
+    this.surfaceInput();
+    const same=el._surfaceKey===key&&el._surfaceWorld===G.emps;
+    if(same&&el._surfaceHTML===html)return false;
+    if(same&&automatic&&(this._surfacePointers.size||Date.now()<(this._surfaceUntil||0)||el.contains(document.activeElement)&&document.activeElement.matches('select'))){
+      el._surfacePending={html,key,world:G.emps};
+      if(!el._surfaceTimer)el._surfaceTimer=setTimeout(()=>{el._surfaceTimer=null;const p=el._surfacePending;el._surfacePending=null;if(p&&p.world===G.emps&&p.key===el._surfaceKey)this.surfaceRender(el,p.html,p.key,true);},250);
+      return false;
+    }
+    el._surfacePending=null;
+    const positions=this._surfacePositions||(this._surfacePositions=new Map());
+    const scrollers=()=>[el,...el.querySelectorAll('.dpBody,.mbd,[id],details')].filter(n=>n.scrollTop||n.scrollLeft);
+    if(!same&&el._surfaceKey)positions.set(el._surfaceKey,scrollers().map(n=>({id:n.id,cls:n.className,y:n.scrollTop,x:n.scrollLeft})));
+    if(!same){el.innerHTML=html;el._surfaceKey=key;el._surfaceWorld=G.emps;for(const p of positions.get(key)||[]){const n=p.id?el.querySelector('#'+p.id):el.querySelector('.'+String(p.cls).trim().split(/\s+/).join('.'));if(n){n.scrollTop=p.y;n.scrollLeft=p.x;}}}
+    else {
+      const template=document.createElement('template');template.innerHTML=html;
+      const token=n=>n.nodeType!==1?'#'+n.nodeType:n.id?'id:'+n.id:n.hasAttribute('data-a')?n.tagName+':'+n.dataset.a+':'+(n.dataset.x||''):n.tagName==='DETAILS'?'details:'+n.querySelector('summary')?.textContent:n.matches('h3,.ph')?n.tagName+':heading:'+n.textContent:n.matches('tr,.row,.ecoLine')?n.tagName+':row:'+(n.querySelector('th,span')?.textContent||'').replace(/⚠/g,''):n.tagName;
+      const saved=scrollers().map(n=>{
+        const rect=n.getBoundingClientRect(),anchors=[...n.querySelectorAll('h3,.ph,summary,tr,.row,.ecoLine,article')];
+        const anchor=anchors.find(a=>{const r=a.getBoundingClientRect();return r.height>0&&r.bottom>rect.top&&r.top<rect.bottom;});
+        return {n,y:n.scrollTop,x:n.scrollLeft,anchor,offset:anchor?anchor.getBoundingClientRect().top-rect.top:null};
+      });
+      const patch=(a,b)=>{
+        if(a.nodeType!==1){if(a.nodeValue!==b.nodeValue)a.nodeValue=b.nodeValue;return;}
+        const form=a.matches('input,textarea,select'),dirty=this._surfaceDirty.has(a)||a===document.activeElement;
+        for(const attr of [...a.attributes])if(!b.hasAttribute(attr.name)&&!(a.tagName==='DETAILS'&&attr.name==='open')&&!(form&&dirty&&['value','checked','selected'].includes(attr.name)))a.removeAttribute(attr.name);
+        for(const attr of [...b.attributes])if(!(a.tagName==='DETAILS'&&attr.name==='open')&&!(form&&dirty&&['value','checked','selected'].includes(attr.name))&&a.getAttribute(attr.name)!==attr.value)a.setAttribute(attr.name,attr.value);
+        if(a.tagName==='CANVAS')return; // keep already painted pixels and context
+        const value=form?a.value:null,checked=form?a.checked:null;
+        children(a,b);
+        if(form&&dirty){a.value=value;if(a.tagName==='INPUT')a.checked=checked;}
+      };
+      const children=(a,b)=>{
+        let cursor=a.firstChild;
+        for(const next of [...b.childNodes]){
+          const id=token(next);let current=cursor;
+          if(!current||token(current)!==id){current=[...a.childNodes].slice(cursor?[...a.childNodes].indexOf(cursor):a.childNodes.length).find(n=>token(n)===id&&n.nodeType===next.nodeType&&n.nodeName===next.nodeName);if(current)a.insertBefore(current,cursor);else{current=next.cloneNode(true);a.insertBefore(current,cursor);}}
+          if(current.nodeType===next.nodeType&&current.nodeName===next.nodeName)patch(current,next);
+          cursor=current.nextSibling;
+        }
+        while(cursor){const next=cursor.nextSibling;cursor.remove();cursor=next;}
+      };
+      children(el,template.content);
+      for(const p of saved)if(p.n.isConnected){
+        let y=p.y;
+        if(p.anchor?.isConnected&&p.n.contains(p.anchor))y=p.n.scrollTop+p.anchor.getBoundingClientRect().top-p.n.getBoundingClientRect().top-p.offset;
+        if(Math.abs(p.n.scrollTop-y)>.5)p.n.scrollTop=y;
+        if(p.n.scrollLeft!==p.x)p.n.scrollLeft=p.x;
+      }
+    }
+    el._surfaceHTML=html;return true;
+  },
+  refreshCouncilPanel(){
+    const pane=$('diploPane');if(!pane.classList.contains('show')||pane._surfaceKey!=='council')return;
+    const key=JSON.stringify([Math.floor(G.day),G.council,G.p.res.etk,G.p.inc?.etk,G.p.ethics]);
+    if(this._councilKey!==key){this.openCouncil(true);this._councilKey=key;}
+  },
+
   /* ---------- panel yönlendirme ---------- */
 
   tick(){
@@ -2064,6 +2126,7 @@ const UI = {
     $('stardate').textContent = G.year + '.' + String(G.month).padStart(2,'0');
     this.refreshScience();
     this.refreshFedPanel();
+    this.refreshCouncilPanel();
     this.refreshJointPanels();
     this.seltag();
   },
@@ -2084,7 +2147,7 @@ const UI = {
     if (!TABS.some(t => t.k === this.cur)) this.cur = 'sistem';
     const el = $('panel');
     const y = el.scrollTop;
-    el.innerHTML = this['p_'+this.cur] ? this['p_'+this.cur]() : '';
+    this.surfaceRender(el,this['p_'+this.cur] ? this['p_'+this.cur]() : '', 'sidebar:'+this.cur, this.keepScroll);
     if (this.keepScroll) el.scrollTop = y;
     this.keepScroll = false;
     /* FAZ 82: panel her yenilendiğinde YENİ canvas'lar doğuyor;
@@ -3460,7 +3523,8 @@ const UI = {
     return h+'</div></details>';
   },
   diploSovereignty(e,owner){
-    let h='';
+    let h=sovereignPair(e,owner)?this.vsContract(e.overlord===owner.id?e:owner):'';
+    const talkSub=G.emps.find(s=>s.vassalTalk&&[s.vassalTalk.lord,s.vassalTalk.sub].includes(e.id)&&[s.vassalTalk.lord,s.vassalTalk.sub].includes(owner.id));if(talkSub)h+=`<button class="abtn" data-a="vsInspect" data-x="${talkSub.id}">VASALLIK MÜZAKERESİNİ / YANITI İNCELE</button>`;
       /* ═══ FAZ 78: BİAT VE HİMAYE ═══ */
       /* FAZ 83: bölüm artık koşul tutmasa da görünür — kilidin
          SEBEBİ öğretici bilgidir, gizlemek değil. */
@@ -3622,16 +3686,12 @@ const UI = {
   refreshFedPanel(){
     const pane=$('diploPane'),box=pane.querySelector('.fedBox');
     if(!pane.classList.contains('show')||!box)return;
-    const key=[Math.floor(G.day/30),Math.floor(G.p.res.etk||0),G.feds?.length,findFed(G.p)?.id].join(':');
+    const key=JSON.stringify([Math.floor(G.day),G.p.res.etk,findFed(G.p),G.feds?.map(f=>[f.id,f.members,f.invites?.[G.p.id]])]);
     if(this._fedRefreshKey===key&&this._fedRefreshWorld===G.sys)return;
-    const body=box.querySelector('.dcBody'),scroll=body?.scrollTop||0;
-    const open=[...box.querySelectorAll('details')].map(el=>el.open);
-    this.openFed();this._fedRefreshKey=key;this._fedRefreshWorld=G.sys;
-    const next=pane.querySelector('.dcBody');if(next)next.scrollTop=scroll;
-    pane.querySelectorAll('details').forEach((el,i)=>{if(open[i]!==undefined)el.open=open[i];});
+    this.openFed(true);this._fedRefreshKey=key;this._fedRefreshWorld=G.sys;
   },
   /* =============== FEDERASYON PANELİ =============== */
-  openFed(){
+  openFed(automatic=false){
     this._jointSurface='fed';
     const e = G.p;
     const f = findFed(e);
@@ -3796,7 +3856,7 @@ const UI = {
         h += `<div class="mini" style="color:#6ff2c8">✧ Konsey Mimarı: oyun iki kat ağırlıkta sayılıyor</div>`;
     }
     h += `</div></div>`;
-    $('diploPane').innerHTML = h;
+    this.surfaceRender($('diploPane'),h,'federation',automatic);
     paintEmblems();
     $('diploPane').classList.add('show');
   },
@@ -4842,7 +4902,7 @@ const UI = {
   },
 
   /* =============== GALAKTİK KONSEY =============== */
-  openCouncil(){
+  openCouncil(automatic=false){
     const e = G.p;
     let h = `<div class="dpBox">
       <div class="dpHd"><span>🌐 GALAKTİK KONSEY</span>
@@ -5221,7 +5281,7 @@ const UI = {
         h += `<div class="row"><span>Konsey Muhafız hazinesi</span><b>${Math.round(c.treasury)} ▰</b></div>`;
     }
     h += `</div></div>`;
-    $('diploPane').innerHTML = h;
+    this.surfaceRender($('diploPane'),h,'council',automatic);
     paintEmblems();
     $('diploPane').classList.add('show');
     setTimeout(()=>{
@@ -6480,7 +6540,7 @@ const UI = {
         h += `<div class="box" style="border-color:#ff5f6d">
           <div class="bt"><span>${T.ico} ${esc(lord ? lord.name : '?')} DEVLETİNİN VASALISIN</span>
           <span class="tag b">${T.n}</span></div>
-          <div class="bd">${T.d}</div>
+          <div class="bd">${e.vassalContract?this.vsTermsText(vt,e.vassalContract.terms,e):esc(T.d)}</div><button class="abtn" data-a="vsCurrent">SÖZLEŞMEM · BAĞIMSIZLIK / YENİDEN MÜZAKERE</button>
           <div class="row"><span>Senyörün</span>
             <b style="color:${lord ? lord.col : '#7d90ad'}">${esc(lord ? lord.name : '?')}</b></div>
           <div class="row"><span>Bağımsızlık arzusu</span>
@@ -6500,7 +6560,7 @@ const UI = {
               : e.vassalPaid) || 0).toFixed(1)}</b></div>`;
         else
           h += `<div class="row"><span>Yükümlülük</span>
-            <b>Vergi yok · senyörünün savaşlarına katılırsın</b></div>`;
+            <b>${e.vassalContract?({none:"Zorunlu savaş yok",defense:"Senyörün savunma savaşları",all:"Senyörün bütün savaşları"}[e.vassalContract.terms.war]):"Vergi yok · senyörünün savaşlarına katılırsın"}</b></div>`;
         h += `<div class="mini">Bağımsızlık savaşı ilan etmek için arzu en az <b>55</b>
           olmalı; <b>70</b> üstünde halk isyan eşiğindedir ve senyörün zayıfladığı anda
           bağı koparmak en kolayıdır.</div>
@@ -7528,67 +7588,56 @@ const UI = {
      kanonik kabul hesabından kaba eğilim gösterilir; gizli yüzde
      verilmez. Zar yalnız TEKLİFİ GÖNDER'de atılır.
      ═══════════════════════════════════════════════════════════════ */
+  vsTermsText(type,t,sub=null){
+    const tax=VASSAL_RESOURCES.filter(k=>t.tax[k]>0).map(k=>RES[k].n+' %'+Math.round(t.tax[k]*100)).join(' · ')||'Yok';
+    const own=sub&&(sub===G.p||intelOf(G.p,sub.id)>=3),estimate=own?vassalEstimate(sub,t):null;
+    return `<div class="mini"><b>Vergi:</b> ${esc(tax)}<br><b>Araştırma:</b> %${Math.round(t.science*100)}<br><b>Koruma:</b> ${t.defense?'Senyör vasalı savunur':'Senyörün otomatik savunma yükümlülüğü yok'}<br><b>Vasalın savaşa katılımı:</b> ${{none:'Zorunlu katılım yok',defense:'Senyöre saldırıldığında savunma',all:'Senyörün bütün savaşları'}[t.war]}<br><b>Diplomasi:</b> ${t.autonomy==='free'?'Bağımsız dış savaş kararı':'Yeni saldırı savaşı için senyörün mevcut cephesi veya federasyon savunma yetkisi gerekir'}<br><b>Süre:</b> ${t.duration?t.duration+' ay; bitişte barışçıl bağımsızlık':'Süresiz'} · <b>Yeniden müzakere:</b> ${t.renegotiate} ay sonra<br><b>Sensörler:</b> ${t.sensors?'Karşılıklı keşif ve yerel sensörler; casus ağı yok':'Paylaşılmaz'}</div>${estimate?'<div class="mini">Mevcut üretim ve stokla aylık aktarım tahmini: '+Object.entries(estimate).filter(([k,n])=>n>0).map(([k,n])=>RES[k].n+' '+fmt(n)).join(' · ')+'. Sabit gelir garantisi değildir; yalnız gerçek stoktan ödenir.</div>':'<div class="mini">Karşı tarafın özel geliri bilinmiyor; aylık tutar gösterilmez.</div>'}`;
+  },
+  vsContract(sub){
+    const c=vassalContractOf(sub);if(!c)return '';
+    const lord=overlordOf(sub),other=sub===G.p?lord:sub,ready=G.day>=c.started+c.terms.renegotiate*30;
+    return `<section class="box"><div class="bt">YÜRÜRLÜKTEKİ VASALLIK SÖZLEŞMESİ · ${esc(VASSAL_TYPES[c.type].n)}</div><div class="mini">${esc(sub.name)} → ${esc(lord.name)} · başlangıç gün ${Math.floor(c.started)} · ${c.expires===null?'süresiz':'bitiş gün '+Math.floor(c.expires)}${c.legacy?' · eski kaydın fiilî hükümleri':''}</div>${this.vsTermsText(c.type,c.terms,sub)}<div class="act2"><button class="abtn" data-a="vsOpen" data-x="${other.id}:renew" ${ready?'':'disabled'}>SÖZLEŞMEYİ YENİDEN MÜZAKERE ET</button>${sub===G.p?`<button class="abtn" data-a="vsOpen" data-x="${lord.id}:release">BARIŞÇIL BAĞIMSIZLIK TALEBİ</button><button class="abtn dgr" data-a="revolt">BAĞIMSIZLIK SAVAŞI…</button>`:''}</div><div class="mini">Yeniden müzakere 60 ◈ · bağımsızlık talebi 40 ◈ · teklif gönderimi aktarımı başlatmaz.</div></section>`;
+  },
+  vsRead(){
+    const v=this.vs;if(!v?.edit||!$('vsClauses'))return;
+    const t={tax:{},science:+$('vsScience').value/100,defense:$('vsDefense').value==='yes',war:$('vsWar').value,autonomy:$('vsAutonomy').value,duration:+$('vsDuration').value,renegotiate:+$('vsRenegotiate').value,sensors:$('vsSensors').checked};
+    for(const r of VASSAL_RESOURCES)t.tax[r]=+$('vsTax_'+r).value/100;
+    v.drafts[v.tur]=t;
+  },
   vsDraw(){
-    const v = this.vs;
-    if (!v) return;
-    const e = G.p, o = G.emps[v.id];
-    if (!o){ this.vs = null; return; }
-    const demand = v.yon === 'demand';
-    const chk = demand ? canDemandVassal(e, o) : canSeekProtection(e, o);
-    const bedel = demand ? VASSAL_DEMAND_COST : VASSAL_SEEK_COST;
-    const lvl=intelOf(e,o.id);
-    /* Aynı kanonik hesaptan yalnız istihbaratın izin verdiği eğilim. */
-    const sans = demand&&lvl>=2 ? Math.round(vassalAcceptChance(e, o) * 100) : null;
-    const oran = lvl>=3&&chk.oran ? chk.oran.toFixed(1)+'×' : 'Bilinmiyor';
-
-    let h = `<div class="mhd"><span>⛓ SÜZERENLİK MÜZAKERESİ</span>
-      <button class="riX" data-a="vsCancel">✕</button></div>
-      <div class="mbd">
-      <div class="lead">${demand
-        ? '<b>' + esc(o.name) + '</b> devletini <b>vasalın yapmak</b> istiyorsun.'
-        : '<b>' + esc(o.name) + '</b> devletinin <b>vasalı olmak</b> istiyorsun.'}</div>
-      <div class="row"><span>Güç oranı</span><b>${oran}</b></div>
-      <div class="row"><span>Etki bedeli</span><b>${bedel} ◈</b></div>`;
-    if (demand)
-      h += `<div class="row"><span>Kabul eğilimi</span><b>${sans===null?'İstihbarat yetersiz':
-        sans>50?'Yüksek':sans>25?'Orta':'Düşük'}</b></div>`;
-    h += `<div class="ph">ŞART PAKETİ</div><div class="grid g2">`;
-    for (const k in VASSAL_TYPES){
-      const T = VASSAL_TYPES[k];
-      const on = v.tur === k;
-      h += `<button class="opt ${on?'on':''}" data-a="vsType" data-x="${k}">
-        ${T.ico} ${esc(T.n)}<small>${esc(T.d || '')}</small></button>`;
+    const v=this.vs;if(!v||v.world&&v.world!==G.emps)return;
+    const e=G.p,o=G.emps[v.id];if(!o)return;
+    v.drafts=v.drafts||Object.fromEntries(Object.keys(VASSAL_TYPES).map(type=>[type,vassalDefaultTerms(type)]));
+    const sub=v.yon==='demand'?o:v.yon==='seek'?e:isVassal(e)?e:o,type=v.tur,t=v.drafts[type]||vassalDefaultTerms(type),existing=v.yon==='renew'||v.yon==='release',counter=v.yon==='counter';
+    const gate=counter?{ok:true}:existing?{ok:!!vassalContractOf(sub)}:v.yon==='demand'?canDemandVassal(e,o):canSeekProtection(e,o);
+    let h=`<div class="mhd"><span>⛓ VASALLIK SÖZLEŞMESİ · ${esc(o.name)}</span><button class="riX" data-a="vsCancel">✕</button></div><div class="mbd" id="vsScroll"><div class="lead">${v.yon==='release'?'Barışçıl bağımsızlık talebi. Kabul edilene kadar mevcut sözleşme sürer.':counter?'Karşı teklif · son sözü karşı taraf söyler.':existing?'Yürürlükteki sözleşmeyi değiştir. Yeni hükümler yalnız karşılıklı kabulde yürürlüğe girer.':v.yon==='demand'?'Bu devletin senyörü olmayı teklif et.':'Bu devletin himayesine girmeyi teklif et.'}</div>`;
+    if(!v.edit&&!counter&&v.yon!=='release'){
+      for(const [k,T]of Object.entries(VASSAL_TYPES))h+=`<section class="box"><div class="bt">${T.ico} ${esc(T.n)}</div><div class="mini">${esc(T.d)}</div>${this.vsTermsText(k,v.drafts[k],sub)}<button class="abtn ${type===k?'pri':''}" data-a="vsEdit" data-x="${k}">ŞARTLARI DÜZENLE</button><button class="abtn" data-a="vsType" data-x="${k}" aria-pressed="${type===k}">${type===k?'✓ SEÇİLİ':'BU TÜRÜ SEÇ'}</button></section>`;
+    }else if(v.yon!=='release'){
+      const max=type==='haracguzar'?30:10,maxSci=type==='akademik'?30:10;
+      const select=(id,label,options,value)=>`<label class="vsField">${label}<select id="${id}">${options.map(([k,n])=>`<option value="${k}" ${String(value)===String(k)?'selected':''}>${n}</option>`).join('')}</select></label>`;
+      h+=`<h3>${esc(VASSAL_TYPES[type].n)} · şartlar</h3><div id="vsClauses">`;
+      for(const r of VASSAL_RESOURCES)h+=`<label class="vsField">${RES[r].n} vergisi (%)<input id="vsTax_${r}" type="number" inputmode="decimal" min="0" max="${max}" step="1" value="${Math.round(t.tax[r]*100)}"></label>`;
+      h+=`<label class="vsField">Araştırma payı (%)<input id="vsScience" type="number" min="${type==='akademik'?5:0}" max="${maxSci}" step="1" value="${Math.round(t.science*100)}"></label>`;
+      h+=select('vsDefense','Senyörün savunma yükümlülüğü',[['yes','Vasala saldırılırsa savunur'],['no','Otomatik savunma yok']],t.defense?'yes':'no');
+      h+=select('vsWar','Vasalın savaş yükümlülüğü',[...(type==='bekci'?[]:[['none','Zorunlu katılım yok']]),['defense','Senyörün savunma savaşları'],...(type==='akademik'?[]:[['all','Senyörün bütün savaşları']])],t.war);
+      h+=select('vsAutonomy','Diplomatik özerklik',[['free','Bağımsız dış savaş kararı'],['consent','Yeni saldırı savaşları kısıtlı']],t.autonomy);
+      h+=select('vsDuration','Sözleşme süresi',[[0,'Süresiz'],[12,'12 ay'],[60,'60 ay'],[120,'120 ay'],[240,'240 ay']],t.duration);
+      h+=select('vsRenegotiate','Yeniden müzakere',[[12,'12 ay sonra'],[24,'24 ay sonra'],[60,'60 ay sonra']],t.renegotiate);
+      h+=`<label class="vsField">Karşılıklı yerel sensör paylaşımı<input id="vsSensors" type="checkbox" ${t.sensors?'checked':''}></label></div><details><summary>Seçilen hükümler ve aylık tahmin</summary>${this.vsTermsText(type,t,sub)}</details><button class="abtn" data-a="vsBack">TÜRLERE DÖN · TASLAĞI SAKLA</button>`;
     }
-    h += `</div>`;
-    /* Seçilen paketin somut sonuçları */
-    const T2 = VASSAL_TYPES[v.tur] || {};
-    const odeyen = demand ? esc(o.name) : 'Sen';
-    const alan   = demand ? 'sen' : esc(o.name);
-    h += `<div class="box"><div class="bt"><span>${T2.ico} ${esc(T2.n||'')} — sonuçlar</span></div>
-      <div class="bd">
-        · <b>Vergi:</b> ${odeyen} enerji, mineral ve alaşım gelirinin
-          <b>%${Math.round((VASSAL_TAX.ene||0)*100)}</b>'sini ${alan}e öder.<br>
-        · <b>Savaş:</b> ${v.tur === 'bekci'
-            ? 'Süzeren savaşa girince vasal <b>otomatik katılır</b>.'
-            : 'Vasal savaşa çağrılabilir (⚔ emri), zorunlu değildir.'}<br>
-        · <b>Bilim:</b> ${v.tur === 'akademik'
-            ? 'Araştırmanın <b>%' + Math.round(VASSAL_SCI_CUT*100) + '</b>\'i süzerene akar.'
-            : 'Bilim paylaşımı yok.'}<br>
-        · <b>Sadakat riski:</b> Vergi ve emir yükü arttıkça sadakat düşer;
-          sıfırlanırsa <b>bağımsızlık savaşı</b> çıkar. Rakipler
-          ayrılıkçıları gizlice fonlayabilir.
-      </div></div>`;
-    if (!chk.ok)
-      h += `<div class="box" style="border-color:#ff5f6d">
-        <div class="bd" style="color:#ff9b3d">🔒 ${esc(lvl<3&&chk.why.startsWith('Yeterince güçlü değilsin (')?'Güç üstünlüğü koşulu sağlanmıyor; en az 1.6× gerekir.':chk.why)}</div></div>`;
-    h += `</div><div class="mft">
-      <button class="ch" data-a="vsCancel"><div class="cht">İPTAL</div>
-        <div class="chd">Hiçbir şey değişmez</div></button>
-      <button class="ch ${chk.ok?'':'dis'}" ${chk.ok?'data-a="vsSend"':''}>
-        <div class="cht">TEKLİFİ GÖNDER</div>
-        <div class="chd">${chk.ok ? bedel + ' etki harcanır' : 'Şartlar tutmuyor'}</div>
-      </button></div>`;
-    this.openModal(h, 'war', true);
+    if(v.yon==='release')h+=this.vsContract(sub);
+    const cost=counter?20:v.yon==='demand'?160:v.yon==='seek'?90:v.yon==='release'?40:60;
+    h+=`<p class="mini">${cost} ◈ görüşme bedeli · en fazla 3 tur · her tur 180 gün · kapanıştan sonra 12 ay soğuma. Ret ve süre sonunda görüşme bedeli geri verilmez; uygulanamayan işlem geri alınır. Mevcut savaşlar sözleşme değişince kendiliğinden sona ermez.</p>${!gate.ok?'<p class="mini n">'+esc(intelOf(e,o.id)<3&&gate.why?.startsWith('Yeterince güçlü değilsin (')?'Güç üstünlüğü koşulu sağlanmıyor':gate.why||'Sözleşme bağı yok')+'</p>':''}<div id="vsError" role="status"></div></div><div class="mft"><button class="ch" data-a="vsCancel">VAZGEÇ</button><button class="ch" data-a="vsSend" ${gate.ok?'':'disabled'}>${counter?'KARŞI TEKLİFİ GÖNDER':'TEKLİFİ GÖNDER'} · ${cost} ◈</button></div>`;
+    this.openModal(h,'sci',false);
+  },
+  vsRecord(subId,recordId=null){
+    const sub=G.emps[subId],record=recordId&&DiplomaticInbox.get(recordId),ref=record?.token?.split(':').slice(0,-1).join(':'),q=ref&&sub?.vassalTalk?.id!==ref?sub?.vassalTalkHistory?.find(q=>q.id===ref):sub?.vassalTalk;if(!q||![q.lord,q.sub].includes(G.p.id))return;
+    const token={world:G.emps,id:q.id,round:q.round,sub:subId};this._vsRecord=token;
+    const archived=!!record&&(record.token!==q.id+':'+q.round||q!==sub.vassalTalk);
+    const gate=vassalTalkValid(q),can=!archived&&q.status==='pending'&&q.to===G.p.id&&gate.ok;
+    let h=`<div class="mhd"><span>VASALLIK MÜZAKERESİ · ${esc(DiplomaticInbox.states[q.status]||q.status)}</span><button class="riX" data-a="closem">✕</button></div><div class="mbd">${archived?'<p class="mini">Tamamlanan tur / tarihsel müzakere. Aşağıdaki hükümler son kayıtlı turu gösterir; bu ekrandan karar verilmez.</p>':''}<h3>${q.kind==='release'?'Barışçıl bağımsızlık':esc(VASSAL_TYPES[q.type].n)}</h3><div class="mini">Teklifte tarafların bildirdiği mevcut cepheler: ${Object.entries(q.disclosedWars||{}).map(([id,fronts])=>esc(this.diploName(+id))+': '+(fronts.map(id=>esc(this.diploName(id))).join(', ')||'yok')).join(' · ')}. Yeni savaşlar mevcut yetkilendirmeden geçer.</div><div class="mini">Tur ${q.round}/3 · son gün ${Math.floor(q.expires)} · ${q.from===G.p.id?'Karşı tarafın yanıtı bekleniyor':'Sana gönderildi'}</div>${q.kind==='release'?'<p>Yalnız kabul edilirse vasallık barışçıl sona erer; savaş başlatılmaz.</p>':this.vsTermsText(q.type,q.terms,sub)}<details><summary>Müzakere kararları ve gerçek bedeller</summary>${q.history.map(r=>'<p class="mini">Gün '+Math.floor(r.day)+' · '+esc(G.emps[r.by]?.name||'Tarihsel taraf')+' · '+esc(r.action)+' · '+esc(r.why)+'</p>').join('')}<p class="mini">Ödenen görüşme bedelleri: ${Object.entries(q.paid).map(([id,n])=>esc(G.emps[id]?.name||id)+' '+n+' ◈').join(' · ')}</p></details><p>${esc(q.why||gate.why||'Şartlar karşılıklı onay bekliyor')}</p>${q.status==='accepted'&&isVassal(sub)?this.vsContract(sub):''}</div><div class="mft">${can?`<button class="ch" data-a="vsReply" data-x="accept">KABUL ET</button><button class="ch" data-a="vsReply" data-x="reject">REDDET</button><button class="ch" data-a="vsCounter" ${q.round<3?'':'disabled'}>KARŞI TEKLİF HAZIRLA</button>`:''}<button class="ch" data-a="diplomaticInbox">GELEN KUTUSU</button></div>`;
+    this.openModal(h,'sci',false);this._vsRecord=token;
   },
 
   closeModal(){

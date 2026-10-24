@@ -1,0 +1,21 @@
+{
+  "phase": "96G.1",
+  "build": "96g1",
+  "scope": "GitHub runtime manifest only; excludes evidence and full delivery inventory",
+  "save_version": 8,
+  "pwa_cache": "stars-v96g1",
+  "parent_zip_sha256": "303297e6ba91a83887ffc7dc6daf5cbf16fec511a28b8f536b02bc4c7bfde8c9",
+  "parent_commit": "1349aa32fdd0a092b0e51141062207e88df54c18",
+  "file_count": 9,
+  "files": {
+    "ai.js": "f19fa4aae727d8cf2a0c90b0bd8826e5d7730c975a3d8d3d0ca06b548adb2532",
+    "archive-ui.js": "7f96276402dbb88fc93b4cf72bc7b4922887751eb6aede714e0316750f7f92ab",
+    "diplomacy.js": "b46fd1bf2552a256fe6ad724ec72859f8edbc8c37eb0fd1c9b6e721582e6b3f3",
+    "economy-ui.js": "61f6e2dcef7f37143821edccf67552718a210ec555f7b8f9074c68191fd5cbcc",
+    "inbox.js": "5f53ac2ca9c3ca8d5f1a12a9e1ba2b2a247ab7e350df0ec9169a13cfe3285204",
+    "index.html": "a98fa84883c96143c1a14aeb6420af0e9ee11b269f51fc3207acd496b4d89bef",
+    "main.js": "131b0521ac3fd8cd06e7b2ee72b09ec36c1cd8b6127a79e891bd75e92e740fd2",
+    "sw.js": "5fa29bbb194306f39c61ee093c3f7f50e4a127a530acd41492e348698458d487",
+    "ui.js": "a3db9c1a72e41ec7edb8879da2e86d87229e0f9a631a3b113117bcd2c84e3b5b"
+  }
+}
