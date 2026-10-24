@@ -2559,7 +2559,7 @@ const UI = {
             h += `<div class="mini" style="color:#ff5f6d">⚠ Yapı slotu dolu — nüfus arttıkça açılır (her 2.2 nüfus = 1 slot)</div>`;
           else if (staff < 1)
             h += `<div class="mini" style="color:#ff9b3d">⚠ Yeni yapı kurabilirsin ama işgücü yetmiyor — önce nüfus büyümeli</div>`;
-          h += `<div class="act2">`;
+          h += `<div class="act2 buildingGrid">`;
           for (const k in BUILDINGS){
             const B = BUILDINGS[k], n = c.b[k]||0;
             const queued=colonyQueuedOf(c,k);
@@ -2568,14 +2568,15 @@ const UI = {
             /* FAZ 62: 'i' butonu kaldırıldı — bilgi için binaya
                UZUN BAS (data-hold). Mobilde parmak yeri kazandırır
                ve yanlışlıkla bilgi açılması biter. */
-            h += `<div class="bWrap" style="flex:1;min-width:66px">
-              <button class="abtn ${full||!afford?'dis':''}" data-a="build" data-hold="${k}" data-x="${s.id}:${pl.i}:${k}" style="width:100%">` +
-                 `<span class="buildingName">${B.tech&&!e.techs[B.tech]?'🔒 ':''}${B.n}</span><span class="buildingCount">${n}/${B.max}${queued?' · +'+queued+' sırada':''}</span><span style="font-size:9px">` +
+            const label={maden:'Maden',santral:'Santral',ciftlik:'Çiftlik',lab:'Laboratuvar',dokum:'Dökümhane',tersane:'Tersane',kale:'Savunma',arsiv:'Arşiv',klinik:'Klinik',kuyu:'Termal Kuyu',asansor:'Uzay Asansörü',habitat:'Habitat',fabrika:'Tüketim',liman:'Ticaret Limanı',iktisat_b:'İktisat',sinod_e:'Sinod Evi',oto_lab:'Otomasyon',birlik_k:'Birlik',sentetik_h:'Üretim Hücresi',sinaps_m:'Sinaps',derin_s:'Derin Sondaj',biyom_b:'Biyom'}[k]||B.n;
+            h += `<div class="bWrap ${n>0?'has-dem':''}" data-building="${k}">
+              <button class="abtn ${full||!afford?'dis':''}" data-a="build" data-hold="${k}" data-x="${s.id}:${pl.i}:${k}" title="${esc(B.n+' — '+B.d)}" aria-label="${esc(B.n)} inşa et · ${n}/${B.max}">` +
+                 `<span class="buildingName">${B.tech&&!e.techs[B.tech]?'🔒 ':''}${esc(label)}</span><span class="buildingCount">${n}/${B.max}${queued?' · +'+queued:''}</span><span class="buildingCost">` +
                  Object.entries(cost).map(([r,v])=>`<span style="color:${e.res[r]>=v?RES[r].c:'#ff5f6d'}">${RES[r].ico}${v}</span>`).join(' ') +
                  `</span></button>` +
                  /* FAZ 14: mevcut binayı yıkma tuşu */
                  (n > 0 ? `<button class="demX" data-a="demolish" data-x="${s.id}:${pl.i}:${k}"
-                    aria-label="${esc(B.n)} yık" title="${esc(B.n)} yık — slot boşalır, %35 hurda geri döner">⌫ YIK</button>` : '') +
+                    aria-label="${esc(B.n)} yık" title="${esc(B.n)} yık — onay gerekir"><span aria-hidden="true">⌫</span></button>` : '') +
                  `</div>`;
           }
           h += `</div>`;
@@ -6874,14 +6875,24 @@ const UI = {
   },
   demolish(x){
     const [sid, pi, k] = x.split(':');
-    const sys = G.sys[+sid], pl = sys.planets[+pi];
-    if (typeof queueDemolish === 'function' && queueDemolish(G.p, sys, pl, k)){
-      const gun = demolishDays(G.p, k);
-      say(BUILDINGS[k].n + ' yıkım emri verildi — ~' + Math.ceil(gun / 30) + ' ay');
-    } else {
-      say('Bu bina yıkılamıyor', 'war');
-    }
-    this.keepScroll = true; this.refresh();
+    const sys=G.sys[+sid],pl=sys?.planets[+pi],B=BUILDINGS[k],col=pl?.col,player=G.p,world=G.sys;
+    const available=(col?.b[k]||0)-(col?.q||[]).filter(w=>w.dem&&w.key===k).length;
+    if(!B||!col||pl.owner!==player.id||available<=0||k==='santral'&&available<=1){say('Bu bina yıkılamıyor','war');return;}
+    const token={};
+    const refund=Object.entries(demolishRefund(k)).map(([r,v])=>RES[r].ico+' '+v).join(' · ');
+    this.openModal(`<div class="mhd">BİNA YIKIMINI ONAYLA</div><div class="mbd"><div class="lead">${esc(B.n)} · ${esc(pl.name)}</div>
+      <div class="mini">Bir bina yıkım sırasına alınacak. Yapı ve üretimi yıkım tamamlanana kadar korunur. Emri inşaat kuyruğundan iptal edebilirsin.</div>
+      <div class="row"><span>Tamamlanınca hurda</span><b>${esc(refund)}</b></div>
+      <div class="row"><span>Süre</span><b>~${Math.ceil(demolishDays(player,k)/30)} ay</b></div></div>
+      <div class="mft"><button class="ch" data-a="closem">VAZGEÇ</button><button class="ch" data-a="demolishConfirm">YIKIM EMRİ VER</button></div>`);
+    this._demolitionToken=token;
+    this._hook('demolishConfirm',()=>{
+      if(this._demolitionToken!==token||G.sys!==world||G.p!==player||sys.planets[+pi]!==pl||pl.col!==col)return;
+      this._demolitionToken=null;this.closeModal();
+      if(queueDemolish(player,sys,pl,k))say(B.n+' yıkım emri verildi — ~'+Math.ceil(demolishDays(player,k)/30)+' ay');
+      else say('Bu bina yıkılamıyor','war');
+      this.keepScroll=true;this.refresh();
+    });
   },
   cancelBuild(x){
     const [sid, pi, qi] = x.split(':');
@@ -7478,6 +7489,7 @@ const UI = {
   },
 
   openModal(html, cls, stashable, art){
+    this._demolitionToken=null;
     this._warPreview=null;
     this._amountToken=null;this._jointSendToken=null;
     this._shipCancelPending=null;
@@ -7641,6 +7653,7 @@ const UI = {
   },
 
   closeModal(){
+    this._demolitionToken=null;
     this._warPreview=null;
     this._amountToken=null;this._jointSendToken=null;
     // 94D.1: acknowledged war/retired incident cards must not be saved as still open.

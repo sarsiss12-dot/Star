@@ -1,0 +1,11 @@
+'use strict';
+const fs=require('fs'),path=require('path'),assert=require('assert/strict'),crypto=require('crypto');
+const seed=+(process.argv[2]||11),months=+(process.argv[3]||120),size=process.argv[4]||'orta',count=process.argv[5]===undefined?null:+process.argv[5];
+const root=path.resolve(process.env.STARS_CAMPAIGN_ROOT||path.join(__dirname,'..')),out=path.join(__dirname,'audit96h0/final/campaigns');fs.mkdirSync(out,{recursive:true});
+const phase='96H0-final-'+size+'-'+(count===null?'default':count)+'-'+months;
+let source=fs.readFileSync(path.join(__dirname,'campaign-96f1.js'),'utf8').split("const old=mode==='candidate'?")[0];
+source=source.replace("path.join(__dirname,'audit96f1/campaigns')",JSON.stringify(out)).replace('m<120','m<'+months).replace('months:120','months:'+months).replace('traceF.length<4000','traceF.length<16000').replace('size:"orta"',`size:${JSON.stringify(size)}${count===null?'':',aiCount:'+count}`);
+source=source.replace('monthly.push(',`if((m+1)%30===0)console.log('PROGRESS '+seed+' '+${JSON.stringify(size)}+' '+(m+1)+'/${months}');monthly.push(`);
+source=source.replace('const result={forensics:',`fs.writeFileSync(path.join(out,phase+'-'+seed+'-final.save'),h.run('serialize()'));const result={protocol:'96G2 half-day monthly protocol; Save8 reload at month60',sourceHashes:Object.fromEntries(Object.keys(JSON.parse(fs.readFileSync(path.join(root,'RELEASE-MANIFEST.json'),'utf8')).files).map(n=>[n,crypto.createHash('sha256').update(fs.readFileSync(path.join(root,n))).digest('hex')])),forensics:`);
+source+=`\nconst r=run(${JSON.stringify(root)},${JSON.stringify(phase)});const s=summary(r);assert.equal(s.invalidResources.length,0);fs.writeFileSync(path.join(out,'summary-'+r.phase+'-'+seed+'.json'),JSON.stringify(s,null,2));console.log(JSON.stringify(s));`;
+new Function('require','__dirname',source)(require('module').createRequire(__filename),__dirname);

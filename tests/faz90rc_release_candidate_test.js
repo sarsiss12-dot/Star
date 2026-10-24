@@ -12,7 +12,7 @@ function stable(h){
  return JSON.stringify(d);
 }
 function swHost(missing=false){
- const events={},deleted=[],names=['stars-v89b','stars-v96f3','other-app-cache'];let skipped=0,claimed=0,added=null;
+ const events={},deleted=[],names=['stars-v89b','stars-v96h0','other-app-cache'];let skipped=0,claimed=0,added=null;
  const caches={open:async()=>({addAll:async list=>{added=[...list];if(missing)throw Error('missing shell');}}),
   keys:async()=>[...names],delete:async n=>{deleted.push(n);return true;},match:async()=>null};
  const self={addEventListener:(k,f)=>events[k]=f,skipWaiting:async()=>{skipped++;},clients:{claim:async()=>{claimed++;}}};
@@ -34,5 +34,5 @@ for(const [name,mutate] of [
  ['sistem gezegenleri eksik',d=>delete d.sys[0].p],['filo sahibi geçersiz',d=>{if(d.fl.length)d.fl[0].e=999;else d.fl.push({id:99,e:999,ships:[]});}]
 ])test('yapısal bozuk kayıt dünyayı değiştirmez: '+name,()=>{const h=fresh(),before=stable(h),d=JSON.parse(h.run('serialize()'));mutate(d);h.sb.__bad=JSON.stringify(d);assert.equal(h.run('deserialize(__bad)'),false);assert.equal(stable(h),before);});
 test('saveGame/loadGame aynı depolama anahtarıyla round-trip yapar',async()=>{const local=new Map(),h=runtime({root:ROOT,local});h.run(`setupGame({name:'RC',race:'insan',traits:[],size:'orta',shape:'sarmal',diff:'normal',seed:90,ethics:{mil:0,aut:0,mat:0,ahl:0},civics:[],origin:'standart',ruins:'yok',crisis:'kapali',council:'kapali'});G.autoSave=false;economyTick(true);`);const before=stable(h);assert.equal(await h.run('saveGame()'),true);assert.ok(local.has('yildiz:save'));h.run('G.day+=999;G.p.res.min+=777');assert.equal(await h.run('loadGame()'),true);assert.equal(stable(h),before);});
-test('BUILD ve cache RC adı taşıyor',()=>{assert.match(fs.readFileSync(path.join(ROOT,'main.js'),'utf8'),/const BUILD_ID = '96f3'/);assert.match(fs.readFileSync(path.join(ROOT,'sw.js'),'utf8'),/const CACHE = 'stars-v96f3'/);});
+test('BUILD ve cache RC adı taşıyor',()=>{assert.match(fs.readFileSync(path.join(ROOT,'main.js'),'utf8'),/const BUILD_ID = '96h0'/);assert.match(fs.readFileSync(path.join(ROOT,'sw.js'),'utf8'),/const CACHE = 'stars-v96h0'/);});
 (async()=>{for(const [n,fn] of tests){try{await fn();pass++;console.log('✓ '+n);}catch(e){fail++;console.log('✗ '+n+' — '+e.stack);}}console.log('GEÇEN: '+pass+' KALAN: '+fail);process.exitCode=fail?1:0;})();

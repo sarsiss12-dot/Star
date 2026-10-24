@@ -157,7 +157,7 @@ for(const f of fs.readdirSync(KOK).filter(x=>x.endsWith('.js'))){
   ['yildiz:save','yh_audio','yh_advisor','yh_autoev','yh_bg','yh_radar',
    'yh_templates','__yh_probe','__yh_diag'].forEach(k=>
     ok('depolama anahtarı korundu: '+k, mainJs.includes(k)));
-  ok("sw cache = 'stars-v96f3'", /const CACHE = 'stars-v96f3'/.test(oku('sw.js')));
+  ok("sw cache = 'stars-v96h0'", /const CACHE = 'stars-v96h0'/.test(oku('sw.js')));
   const sw=oku('sw.js');
   ok('sw KABUK listesi duruyor', /KABUK/.test(sw));
   ok('sw fetch davranışı duruyor', /addEventListener\('fetch'/.test(sw));
@@ -249,7 +249,7 @@ console.log('\nB. TEKRAR TESTİ (yalnız p_imp gövdesi)');
      (ui.match(/<div class="ph">⛓ SÜZERENL[İI]K<\/div>/g)||[]).length===1);
   ok('Diplomasi panelindeki vasallık özeti duruyor',
      /FAZ 8: vasall[ıi]k ili[şs]kisi/.test(ui));
-  ok('Süzerenlik müzakere modalı duruyor', /SÜZERENLİK MÜZAKERESİ/.test(ui));
+  ok('Süzerenlik müzakere modalı duruyor', /VASALLIK SÖZLEŞMESİ/.test(ui));
 }
 
 /* ═══ C. ÖLÜ EYLEM TESTİ ═══ */
@@ -397,7 +397,7 @@ console.log('\nF. SENARYO 3 — ÖFKE 54 (KİLİTLİ)');
     "var sayac=0, org=playerRevolt;",
     "globalThis.playerRevolt=function(){ sayac++; return org.apply(null,arguments); };",
     "var vasalOnce=isVassal(e), savasOnce=!!(e.war&&e.war[lord.id]);",
-    "UI.act('revolt');",
+    "UI.act('revolt'); UI.act('revoltConfirm');",
     "var vasalSonra=isVassal(e), savasSonra=!!(e.war&&e.war[lord.id]);",
     "globalThis.playerRevolt=org;",
     "return JSON.stringify({kilitli:kilitli, aktif:aktif, cagri:sayac,",
@@ -425,7 +425,7 @@ console.log('\nG. SENARYO 4 — ÖFKE 55 VE ÜZERİ (AKTİF)');
     "var dugmeSayisi=(html.match(/data-a=\"revolt\"/g)||[]).length;",
     "var sayac=0, org=playerRevolt;",
     "globalThis.playerRevolt=function(){ sayac++; return org.apply(null,arguments); };",
-    "UI.act('revolt');",
+    "UI.act('revolt'); UI.act('revoltConfirm');",
     "var cagri1=sayac;",
     "var vasalSonra=isVassal(e), savasSonra=!!(e.war&&e.war[lord.id]);",
     "globalThis.playerRevolt=org;",
@@ -435,7 +435,7 @@ console.log('\nG. SENARYO 4 — ÖFKE 55 VE ÜZERİ (AKTİF)');
   ok('öfke 55\'te düğme AKTİF (dgr)', d.aktif===true);
   ok('ekranda TEK isyan düğmesi var (çift handler yok)',
      d.dugmeSayisi===1, String(d.dugmeSayisi));
-  ok('tek dokunuş TAM BİR playerRevolt() çağrısı üretti',
+  ok('açık onay TAM BİR playerRevolt() çağrısı üretti',
      d.cagri===1, String(d.cagri)+' çağrı');
   ok('isyan başarılı — vasallık koptu', d.vasalSonra===false);
   ok('senyöre TEK savaş ilan edildi', d.savasSonra===true);
@@ -449,17 +449,17 @@ console.log('\nG. SENARYO 4 — ÖFKE 55 VE ÜZERİ (AKTİF)');
     "e.contact[lord.id]=true;",
     "var sayac=0, org=playerRevolt;",
     "globalThis.playerRevolt=function(){ sayac++; return org.apply(null,arguments); };",
-    "UI.act('revolt');",
+    "UI.act('revolt'); UI.act('revoltConfirm');",
     "var ilk=sayac, savas1=!!(e.war&&e.war[lord.id]);",
     "/* ikinci dokunuş: artık vasal değil → yeni savaş açılmamalı */",
-    "UI.act('revolt');",
+    "UI.act('revolt'); UI.act('revoltConfirm');",
     "var ikinci=sayac, savas2=!!(e.war&&e.war[lord.id]);",
     "globalThis.playerRevolt=org;",
     "return JSON.stringify({ilk:ilk, ikinci:ikinci, savas1:savas1, savas2:savas2,",
     "  hala:isVassal(e)});"].join('\n'));
   let d={}; try{d=JSON.parse(r);}catch(e){}
   ok('ikinci dokunuş yeni bir isyan BAŞLATMADI',
-     d.ilk===1 && d.ikinci===2 && d.hala===false,
+     d.ilk===1 && d.ikinci===1 && d.hala===false,
      'çağrı '+d.ilk+'→'+d.ikinci);
   ok('savaş durumu ikinci dokunuşta bozulmadı',
      d.savas1===true && d.savas2===true);

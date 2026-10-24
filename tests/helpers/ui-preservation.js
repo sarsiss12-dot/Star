@@ -5,6 +5,16 @@ const hash=s=>createHash('sha256').update(s).digest('hex');
 // block must restore the untouched canonical 93A.1/93C HTML hash.
 // Historical referans-sha.json remains intact; neither half is exempted.
 exports.isReviewedUI=source=>{
+ const contractStart=source.indexOf('/* 96G.1: scoped subject contract inputs */');
+ if(contractStart>=0){const marker='/* END 96G.1 CONTRACT UI */\n',end=source.indexOf(marker,contractStart)+marker.length;
+  if(end<contractStart||hash(source.slice(contractStart,end))!=='a3ca3772e61423b8a2d721db131c35b24fc5e354cf6df6c2ad533903244cba1b')return false;
+  source=source.slice(0,contractStart)+source.slice(end);
+ }
+ const politicsStart=source.indexOf('/* 96G: bounded federation politics */');
+ if(politicsStart>=0){const marker='/* END 96G POLITICS */\n',end=source.indexOf(marker,politicsStart)+marker.length;
+  if(end<politicsStart||hash(source.slice(politicsStart,end))!=='154904e4f5e6c7751d00a04a37e667175da8d23a4663c721bb6b47eabf3df8cf')return false;
+  source=source.slice(0,politicsStart)+source.slice(end);
+ }
  const dStart=source.indexOf('/* 96D: scoped origin identity and audio controls */');
  if(dStart>=0){const marker='/* END 96D UI */\n',end=source.indexOf(marker,dStart)+marker.length;
   if(end<dStart||hash(source.slice(dStart,end))!=='c2e034e3a4c57a29667a8c481102af88c3850fe2cdd49bc563ff8ec47e5e7d2c')return false;
@@ -47,10 +57,11 @@ exports.isReviewedUI=source=>{
   source=source.slice(0,identityStart)+source.slice(end);
  }
 
- // 95C.1 mobile layout is an independently pinned additive block.
+ // 96H.0 reviews only the building-card rules inside the 95C.1 mobile block.
+ // The complete reviewed block is pinned; all other layout/science pins stay fixed.
  const mobileStart=source.indexOf('/* FAZ 95C.1 — bounded mobile controls */');
  if(mobileStart>=0){const marker='/* END FAZ 95C.1 MOBILE */\n',end=source.indexOf(marker,mobileStart)+marker.length;
-  if(end<mobileStart||hash(source.slice(mobileStart,end))!=='9a2c98af21d8cf1a66d11fed4959a4e8593b4cba6bd4961523c2fcb79173a3ef')return false;
+  if(end<mobileStart||hash(source.slice(mobileStart,end))!=='75bba4da37ca0cf9afc3980090b130fb1659dfacde3bf5fb1f143a44aa1458fe')return false;
   source=source.slice(0,mobileStart)+source.slice(end);
  }
 
