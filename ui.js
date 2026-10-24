@@ -8770,7 +8770,7 @@ function renderSetup(){
       <button class="opt ${acikMi?'on':''}" data-a="${alan}">
         ${etiket}<small>${aciklama} — <b>${acikMi?'AÇIK':'KAPALI'}</b></small></button>`;
     h += `<div class="grid g2">`;
-    h += tog('AI Devletlerine Rastgele Köken', 'Her AI için ayrı özel köken ihtimali', 'togAIOrigins', c.aiOrigins !== false);
+    h += tog('AI Devletlerine Rastgele Köken', 'AI kökenleri dengeli havuzdan seçilir. Altın Çağ gibi aşırı güçlü başlangıçlar rastgele dağıtılmaz.', 'togAIOrigins', c.aiOrigins !== false);
     h += tog('☠ Korsan Tehdidi', 'Yağmacı filolar ve korsan yuvaları',
              'togPirate', c.pirates !== false);
     h += tog('🌀 Yıldız Kapıları', 'Uzak sistemler arası kısayol ağı',
@@ -8791,8 +8791,8 @@ function renderSetup(){
     });
     h += `</div></div>`;
     h += `<div class="sect"><h2>GALAKSİ</h2><div class="grid g4">`;
-    for (const k in SIZES) h += `<button class="opt ${c.size===k?'on':''}" data-a="size" data-x="${k}">${SIZES[k].n}<small>${SIZES[k].d}</small></button>`;
-    h += `</div><div class="grid g3" style="margin-top:8px">`;
+    for (const k in SIZES) h += `<button class="opt ${c.size===k?'on':''}" data-a="size" data-x="${k}">${SIZES[k].n}<small>${SIZES[k].sys} sistem</small></button>`;
+    h += `</div><h2>AI DEVLET SAYISI</h2><div class="btnrow"><button class="btn" data-a="aiCount" data-x="-1" ${aiCountFor(c)<=1?'disabled':''} aria-label="AI sayısını azalt">−</button><b id="aiCountValue">${aiCountFor(c)} AI</b><button class="btn" data-a="aiCount" data-x="1" ${aiCountFor(c)>=11?'disabled':''} aria-label="AI sayısını artır">+</button></div><div class="mini" id="aiCountHelp">Oyuncu dahil ${aiCountFor(c)+1} normal devlet. Korsanlar ve sonradan doğan devletler hariç. 1–11 AI.</div>${aiCountFor(c)+1>SIZES[c.size].sys/4?'<div class="mini">Yoğun galaksi: başkent mesafeleri daralabilir; komşu başlangıçlar oluşabilir.</div>':''}<div class="grid g3" style="margin-top:8px">`;
     for (const k in SHAPES) h += `<button class="opt ${c.shape===k?'on':''}" data-a="shape" data-x="${k}">${SHAPES[k].n}<small>${SHAPES[k].d}</small></button>`;
     h += `</div></div>`;
 
@@ -8857,10 +8857,12 @@ function renderSetup(){
     gv(SHAPES, c.shape)} · ${gv(DIFFS, c.diff)}</b></div>`;
   h += `<div class="sumRow"><span>Kriz · Kalıntı</span><b>${CRISIS_TIMING[c.crisis].n} · ${RUIN_LEVELS[c.ruins].n}</b></div>`;
   h += `<div class="sumRow"><span>Konsey</span><b>${COUNCIL_PACE[c.council]?COUNCIL_PACE[c.council].n:'NORMAL'}</b></div>`;
+  h += `<div class="sumRow"><span>AI devlet sayısı</span><b>${aiCountFor(c)} AI · oyuncuyla ${aiCountFor(c)+1} normal devlet</b></div>`;
   h += `<div class="sumRow"><span>AI kökenleri</span><b>${c.aiOrigins===false?'KAPALI':'AÇIK · %'+aiOriginChance(c)}</b></div>`;
   h += `<div class="sumRow"><span>Rastgele olaylar</span><b>${c.randomEvents===false?'KAPALI':'AÇIK'}</b></div>`;
   h += `</div>`;
 
+  if(UI.setupError)h+=`<div class="mini" role="alert">${esc(UI.setupError)}</div>`;
   const idx = STEPS.findIndex(x=>x.k===SETUP_STEP);
   h += `<div class="btnrow" style="margin-top:10px">`;
   if (idx > 0) h += `<button class="btn ghost" data-a="step" data-x="${STEPS[idx-1].k}">‹ GERİ</button>`;
@@ -8887,14 +8889,13 @@ function renderSetup(){
 function setupClickHandler(e){
   const el = e.target.closest('[data-a]');
   if (!el || $('menu').classList.contains('hidden')) return;
-  /* Aynı dokunuşun click+pointerdown ikilisini bir kez işle */
-  const stamp = (e.type === 'pointerdown') ? 'p' : 'c';
-  const now = Date.now();
-  if (setupClickHandler._at && now - setupClickHandler._at < 320 &&
-      setupClickHandler._el === el && setupClickHandler._t !== stamp) return;
-  setupClickHandler._at = now;
-  setupClickHandler._el = el;
-  setupClickHandler._t = stamp;
+  // Pointerup can redraw the button before its synthesized click arrives.
+  // Match the action, not the replaced DOM node; genuine next taps still act.
+  const now=Date.now(),key=el.dataset.a+':'+(el.dataset.x||'');
+  if(e.type==='click'&&e.detail!==0&&setupClickHandler._pointerKey===key&&now-setupClickHandler._pointerAt<700)return;
+  if(e.type==='pointerup'||e.type==='pointerdown'){
+    setupClickHandler._pointerKey=key;setupClickHandler._pointerAt=now;
+  }
   const a = el.dataset.a, x = el.dataset.x;
   /* ═══ FAZ 67: ŞABLON BUTONLARI ═══
      KÖK NEDEN: tplSave/tplLoad/tplDel yalnız UI.act() içinde
@@ -9067,7 +9068,8 @@ function setupClickHandler(e){
   else if (a === 'councilSet'){ CFG.council = x; safeRenderSetup(); }
   else if (a === 'crisisSet'){ CFG.crisis = x; safeRenderSetup(); }
   else if (a === 'ruinSet'){ CFG.ruins = x; safeRenderSetup(); }
-  else if (a === 'size'){ CFG.size = x; safeRenderSetup(); }
+  else if (a === 'aiCount'){ CFG.aiCount=Math.max(1,Math.min(11,aiCountFor(CFG)+Number(x)));safeRenderSetup(); }
+  else if (a === 'size'){ CFG.aiCount=aiCountFor(CFG);CFG.size = x; safeRenderSetup(); }
   else if (a === 'shape'){ CFG.shape = x; safeRenderSetup(); }
   else if (a === 'diff'){ CFG.diff = x; safeRenderSetup(); }
   else if (a === 'seed'){ CFG.seed = (Math.random()*1e9)|0; safeRenderSetup(); }

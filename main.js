@@ -834,6 +834,8 @@ function originCompatible(e,id){
  return (!o.species||o.species.includes(e.physio))&&(!o.doctrines||o.doctrines.includes(researchDoctrine(e)))&&
   (!o.ethics||Object.entries(o.ethics).every(([k,v])=>(e.ethics?.[k]||0)===v));
 }
+// Explicit random-AI pool. Player choices and loaded Save v8 origins are untouched.
+const AI_RANDOM_ORIGINS=Object.freeze(['kalinti','kapali','golgeden','gocebe']);
 function assignAIOrigins(cfg){
  for(const e of G.emps){
   if(!e.ai||e.wild||e.crisisSide)continue;
@@ -841,7 +843,7 @@ function assignAIOrigins(cfg){
   if(cfg.aiOrigins===false)continue;
   const random=mulberry32(identityHash('ai-origin96e:'+cfg.seed+':'+e.id));
   if(random()*100>=aiOriginChance(cfg))continue;
-  const pool=Object.keys(ORIGINS).filter(id=>id!=='standart'&&originCompatible(e,id));
+  const pool=AI_RANDOM_ORIGINS.filter(id=>id!=='standart'&&originCompatible(e,id));
   if(pool.length)e.origin=pool[Math.floor(random()*pool.length)];
  }
 }
@@ -1424,6 +1426,12 @@ const SIZES = {
   devasa:{n:'DEVASA', sys:80,  ai:9,  d:'80 sistem · 10 imparatorluk'},
   ulu   :{n:'ULU',    sys:100, ai:11, d:'100 sistem · 12 imparatorluk · ağır'}
 };
+// Missing field retains each historical size default; explicit values never clamp.
+function aiCountFor(cfg){return cfg.aiCount===undefined?SIZES[cfg.size]?.ai:cfg.aiCount;}
+function setupConfigError(cfg){
+ if(!SIZES[cfg.size]||(cfg.shape!==undefined&&!SHAPES[cfg.shape]))return 'Geçersiz galaksi boyutu veya şekli.';
+ const n=aiCountFor(cfg);return Number.isInteger(n)&&n>=1&&n<=11?'':'AI devlet sayısı 1–11 arasında bir tam sayı olmalı.';
+}
 /* Harita kenarı: 30 sistem → 4200, 100 sistem → ~7670.
    Yıldız yoğunluğu (px/sistem) tüm boyutlarda benzer kalır. */
 function galaxyScale(sysN){
@@ -2016,6 +2024,15 @@ function generateGalaxy(cfg){
     if (ok) pts.push({x,y});
   }
 
+  // Only repair exhausted rejection sampling; successful legacy maps keep
+  // their exact points and random stream. Add locally around existing arms.
+  const anchors=pts.slice();
+  for(let i=0;pts.length<N&&i<N*2000;i++){
+    const base=anchors[i%anchors.length],angle=i*2.399963229728653;
+    const radius=minD*(1+(i%7)/7),x=clamp(base.x+Math.cos(angle)*radius,140,G.W-140),y=clamp(base.y+Math.sin(angle)*radius,140,G.H-140);
+    if(pts.every(p=>Math.hypot(p.x-x,p.y-y)>=minD*.75))pts.push({x,y});
+  }
+  if(pts.length!==N)throw new RangeError('İstenen sistem sayısı güvenle yerleştirilemedi.');
   const used = new Set();
   G.sys = pts.map((p,i) => {
     const sd = pickStar(rnd);
@@ -2411,6 +2428,7 @@ function colorFor(i, rnd){
 }
 
 function setupGame(cfg){
+  const invalid=setupConfigError(cfg);if(invalid)throw new RangeError(invalid);
   G._newsSetup=true;G._95eFaults={};
   if(typeof GalacticNews!=='undefined')G.news=GalacticNews.empty();
   if(typeof DiplomaticInbox!=='undefined')G.diplomaticInbox=DiplomaticInbox.empty();
@@ -2422,7 +2440,7 @@ function setupGame(cfg){
   G.jointOps = jointEmpty();
   rndSeed(cfg.seed ^ 0x5f3a91);
   const rnd = generateGalaxy(cfg);
-  const nAI = SIZES[cfg.size].ai;
+  const nAI = aiCountFor(cfg);
   G.emps = [];
   G.fleets = []; G.nextFleet = 1;
   G.day = 0; G.year = 2210; G.month = 1; G.log = []; G.over = null;
@@ -2584,7 +2602,9 @@ function setupGame(cfg){
   // anavatanlar — hem uzak hem de hiper yolla ayrık olmalı
   // (iki başkent asla komşu olmasın: aralarında en az 2 sistem)
   const cands = G.sys.slice().sort(()=>rnd()-.5);
-  const need = G.emps.length;
+  const normalNeed = G.emps.filter(e=>!e.wild&&!e.crisisSide).length;
+  // Preserve historical spacing search for equivalent default configurations.
+  const need = normalNeed + (nAI===SIZES[cfg.size].ai?1:0);
   let homes = [];
   for (let minHop = 3; minHop >= 2 && homes.length < need; minHop--){
     let minSep = G.W*.42;
@@ -2611,7 +2631,20 @@ function setupGame(cfg){
       }
     }
   }
-  while (homes.length < need) homes.push(cands[homes.length % cands.length].id);
+  // Never recycle a capital. Dense layouts retain existing picks and fill the
+  // most separated unused systems, relaxing distance only when required.
+  homes=[...new Set(homes)].slice(0,normalNeed);
+  while(homes.length<normalNeed){
+    const unused=cands.filter(s=>!homes.includes(s.id));
+    unused.sort((a,b)=>{
+      const score=s=>Math.min(...homes.map(h=>dist(G.sys[h],s)));
+      const nonAdjacent=s=>homes.every(h=>!G.sys[h].lanes.includes(s.id));
+      return Number(nonAdjacent(b))-Number(nonAdjacent(a))||score(b)-score(a)||a.id-b.id;
+    });
+    if(!unused.length)throw new RangeError('Başkentler için yeterli benzersiz sistem yok.');
+    homes.push(unused[0].id);
+  }
+  G.startLayout={normalStates:normalNeed,adjacentPairs:homes.flatMap((a,i)=>homes.slice(i+1).filter(b=>G.sys[a].lanes.includes(b)).map(b=>[a,b]))};
 
   /* HOTFIX 23.1 — KORSANLAR TARAFSIZ BAŞLAR
      Eskiden oyunun ilk karesinde herkese savaş ilan edilmiş
@@ -8079,6 +8112,7 @@ async function loadGame(){
 
 /* ---------- oyunu başlat ---------- */
 function startGame(){
+  const error=setupConfigError(CFG);if(error){UI.setupError=error;safeRenderSetup();return;}UI.setupError='';
   setupGame({...CFG});
   if (CFG.mizac) applyChosenPersona(G.p, CFG.mizac);   // seçilen mizacı sabitle
   enterGame();
@@ -8274,7 +8308,7 @@ function forceRedraw(sebep){
    Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
    Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
 /* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */
-const BUILD_ID = '96g1';
+const BUILD_ID = '96g2';
 const DIAG_MAX = 40;
 const DIAG = [];
 function logDiag(tur, mesaj){

@@ -1,0 +1,15 @@
+{
+  "phase": "96G.2",
+  "build": "96g2",
+  "scope": "Changed GitHub runtime only; not the complete ZIP manifest",
+  "save_version": 8,
+  "pwa_cache": "stars-v96g2",
+  "parent_zip_sha256": "cfa17c3c4e1d5b5a6fcf29ee16c3096a9fa0e148661352079044ddcdabb240cf",
+  "parent_commit": "b2bdab32c330e8519d9a334a2e6bae8efd3f5bc2",
+  "file_count": 3,
+  "files": {
+    "main.js": "ed25c388ce8d965175cf276ec161e06285d283cf984149ae0922c45ce6a35bf9",
+    "ui.js": "765db92f7630d23376f97a3de70153c9ffa8f55398d4d5849e0f022fdc7be159",
+    "sw.js": "ad0558c61d9728c2f229f95506213fb61fe416698cce2bce3cd2fdba1156caf1"
+  }
+}
