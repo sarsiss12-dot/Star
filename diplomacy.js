@@ -2293,6 +2293,21 @@ function fedDuty(f,kind){return kind==='defense'?!!(f.laws&&f.laws.savunma)||fed
 function fedDutyText(f){return (fedDuty(f,'defense')?'Yeni saldırılara ortak savunma yükümlülüğü. ':'Savunma yardımı oylamayla. ')+(fedDuty(f,'offense')?'Yalnız saldırı taahhüdünü açıkça kabul eden üyeler yeni saldırılara katılır.':'Otomatik saldırı desteği yok; ayrı oylama/taahhüt gerekir.');}
 function fedCharterKey(f){return JSON.stringify([f.type||'askeri',fedCharter(f),Object.keys(f.laws||{}).filter(k=>f.laws[k]).sort()]);}
 function fedPoliticalRecord(f,event,data={}){f.history=f.history||[];f.history.push({day:G.day,year:G.year,month:G.month,event,...data});if(f.history.length>32)f.history.splice(0,f.history.length-32);if(typeof GalacticNews!=='undefined')GalacticNews.political(f,event,data);}
+/* 96G-D2: reuse the bounded political history, not a second memory table.
+   Store public context and declared opposition. Each AI reconsiders only
+   its own position; no foreign treasury or hidden forces are inspected. */
+function fedRetryContext(f){
+ return JSON.stringify([f.members.filter(id=>G.emps[id]&&!G.emps[id].dead).slice().sort((a,b)=>a-b),f.type,fedCharterKey(f),Object.keys(f.laws||{}).sort()]);
+}
+function fedLawRetryAllowed(f,law,proposer=null){
+ const row=(f.history||[]).slice().reverse().find(x=>x?.event==='vote'&&x.law===law&&!x.passed&&typeof x.retry?.context==='string'&&['eligible','yes','no'].every(k=>Array.isArray(x.retry[k])));
+ if(!row||row.retry.context!==fedRetryContext(f))return true;
+ const r=row.retry,eligible=r.eligible.filter(id=>f.members.includes(id)&&G.emps[id]&&!G.emps[id].dead);
+ const weights=fedLiveWeights(f,eligible),total=eligible.reduce((n,id)=>n+(weights[id]||1),0),yes=eligible.filter(id=>r.yes.includes(id));
+ if((!r.modern||yes.length>eligible.length/2)&&yes.reduce((n,id)=>n+(weights[id]||1),0)>total/2)return true;
+ for(const id of r.no){const e=G.emps[id];if(e?.ai&&!e.dead&&f.members.includes(id)&&aiFedVoteAssessment(e,f,{kind:FED_INNER_LAWS[law]?'inner':'basic',law,proposer:proposer?.id??null}).score>=.5)return true;}
+ return false;
+}
 function fedNormalize(f){
  if(!f||!Array.isArray(f.members))return;
  federationIdentity(f);
@@ -2772,7 +2787,8 @@ function fedResolveVote(f){
     day:G.day,passed,yes:c.yes,no:c.no,abstain:c.waiting.length,why:passed?'Gerekli üye ve oy çoğunluğu sağlandı':!warGate.ok?warGate.why:!motionGate.ok?motionGate.why:fedVoteRule(f,c)};
   f.vote = null;
   if(v.kind==='motion'&&v.motion==='admit'&&!passed)fedAdmissionResult(f,v.id,!motionGate.ok?'invalid':c.waiting.length&&G.day>=v.expires?'expired':'rejected',motionGate.why||(c.waiting.length&&G.day>=v.expires?'Oylama süresi doldu; gereken çoğunluk yok. ':'')+'Üye oylaması reddetti: '+c.yes+' evet / '+c.no+' hayır; mutlak üye çoğunluğu gerekli. '+(v.no||[]).slice(0,3).map(id=>v.reasons?.[id]||'Üye ret oyu').join(' / '));
-  fedPoliticalRecord(f,'vote',{kind:v.kind||'basic',law:v.law,passed,yes:c.yes,no:c.no});
+  fedPoliticalRecord(f,'vote',{kind:v.kind||'basic',law:v.law,passed,yes:c.yes,no:c.no,
+    ...(!passed&&!v.repeal&&['basic','inner'].includes(v.kind)?{retry:{context:fedRetryContext(f),modern:!!v.ballotSnapshot?.modern,eligible:c.eligible.slice(),yes:v.yes.filter(id=>c.eligible.includes(id)),no:v.no.filter(id=>c.eligible.includes(id)),reasons:v.reasons}}:{})});
   f.nextVote = G.day + 180;
   if (passed){
     f.laws = f.laws || {};
@@ -2845,7 +2861,16 @@ function startFedVote(f){
   if (!f || fedOf(f.id) !== f || f.vote) return {ok:false, why:'Gündem dolu veya federasyon yok'};
   const open = Object.keys(FED_LAWS).filter(k => !(f.laws && f.laws[k]));
   if (!open.length) return {ok:false, why:'Tüm temel yasalar yürürlükte'};
-  const result = fedChange(() => fedOpenVote(f, open[Math.floor(rnd()*open.length)], null));
+  const result = fedChange(() => {
+    const law=open[Math.floor(rnd()*open.length)];
+    if(!fedLawRetryAllowed(f,law)){
+      // Keep the existing shared RNG schedule for the redundant basic ballot.
+      // Reserved samples never choose a vote or grant approval.
+      for(const id of [...new Set(f.members)])if(id!==0&&G.emps[id]&&!G.emps[id].dead)rnd();
+      f.nextVote=G.day+180;return {ok:false,deferred:true,why:'Yakın ret gerekçeleri ve oy dengesi değişmedi; aynı gündem bekliyor'};
+    }
+    return fedOpenVote(f,law,null);
+  });
   fedPresentVote(f, result);
   return result;
 }

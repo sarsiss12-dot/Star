@@ -1,24 +1,23 @@
 {
-  "phase": "96G-D1",
-  "build": "96gd1",
+  "phase": "96G-D2",
+  "build": "96gd2",
   "save_version": 8,
-  "scope": "GitHub runtime delta only; NOT full ZIP manifest",
-  "parent_commit": "42d52f155799706bef42505719e1c440e3a13c2d",
-  "parent_zip_sha256": "d8450069dd8925ef04d7a1aaeb6fe812ffe180402e83142b7ef3b945d534b558",
+  "scope": "GitHub runtime delta only, not either ZIP full manifest",
+  "parent_commit": "e2babd97d4e7e50e5587b9efe568e44c6ceb4a43",
+  "parent_zip_sha256": "7daa678b84c875d94d92b668000b6d0fe1afab5d7f18f01305bb87d64d58cdcc",
   "files": {
-    "ai.js": "7d4b127a4452624ea47a72575c3a857ad6c9f2d1e47dd995569106cd5f5746a4",
-    "diplomacy.js": "55559a9b5e5951f4ac86527a8e3a56e53a49dc9f05e5e811f2321779ba37382c",
-    "main.js": "2a5711d26f249f630661aea09a9d40e563127ca36951405d74d3a6756826c0a4",
-    "sw.js": "939a1296c634eeca5467b37c684d69a61c292c310cb3c880c22aa9e0889bf2f4"
+    "ai.js": "a3a02622ee1949d53bb6a1dcae7ce3ba468d3eda844e364e8a6e38cac5780999",
+    "diplomacy.js": "77d065a0b294bd4fce4ed40a8db50ebb9eb1013e6ae2bdca019f92d0eef1d9cd",
+    "main.js": "853c181292e78c3fcfa0cca7bd6a72ee88b9fa6b0e586d293f39793f9c5612c1",
+    "sw.js": "9739ab1aa52278317b99419bf2cb140f11e3e0b36e66d9d26f1e1baef25fc9b3"
   },
   "tests": {
-    "suites": 126,
-    "pass": 5889,
+    "suites": 127,
+    "pass": 5907,
     "fail": 0,
     "chromium_pass": 38,
-    "political_scenarios_pass": 52,
-    "local_isolations_pass": 4
+    "political_scenarios_pass": 52
   },
-  "balance": "Mixed: deliveries495→513; tech326→333; colonies133→132; critical4 and cohort39 unchanged. Seed23 long military/growth losses remain.",
-  "full_manifest": "stars-faz96gd1.zip / RELEASE-MANIFEST.json"
+  "balance": "Seed23 long power47617→73030/colonies16→28;404 long712deliveries/37colonies retained. Extra11 long critical0→10,1cohort+9new state; open risk.",
+  "delivery": "Separate playable game and detailed evidence ZIPs"
 }

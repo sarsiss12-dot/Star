@@ -632,8 +632,18 @@ function aiMilitaryCampaign(e,armed,my,wars){
   if(!known.length){e.aiCampaign={phase:'recon',reason:'Keşfedilmiş düşman konumu yok',until:G.day+30};return;}
   const old=e.aiCampaign;
   const long=e.aiStrategy?.plan;
-  if(long?.stage==='stabilize'||e.aiStrategy?.objective?.kind==='recovery'&&old?.phase==='attack'){
-   for(const f of force.filter(f=>!f.combat&&!f.mv&&!f.path.length)){const node=my.filter(s=>isSupplyNode(e,s)).sort((a,b)=>dist(G.sys[f.sys],a)-dist(G.sys[f.sys],b)||a.id-b.id)[0];if(node&&node.id!==f.sys)aiMove(e,f,node.id);}
+  // 96G-D2: recovery is an objective, not a one-turn attack-phase toggle.
+  // A defeated gather/supply campaign and already travelling reinforcements
+  // must obey it too. Local defence above and joint authority remain intact.
+  if(long?.stage==='stabilize'||e.aiStrategy?.objective?.kind==='recovery'){
+   for(const f of force){
+    const from=f.mv?f.mv.to:f.sys;
+    const nodes=my.filter(s=>isSupplyNode(e,s)&&!aiObservedThreat(e,s.id,false)).sort((a,b)=>dist(G.sys[from],a)-dist(G.sys[from],b)||a.id-b.id);
+    for(const node of nodes){
+     if(node.id===from&&!f.path.slice(f.mv?1:0).length)break;
+     if(aiMove(e,f,node.id))break;
+    }
+   }
    e.aiCampaign={...old,phase:'recover',reason:'Ekonomi veya savaş kaybı nedeniyle yeniden hazırlık',until:G.day+90};return;
   }
   const failed={...(old?.failedTargets||{})};
@@ -4574,6 +4584,7 @@ function aiFedLawTick(){
       if (f.laws && f.laws[k]) continue;
       if (fedLawConflicts(f,k).length) continue; // AI aynı bütçeyi durmadan tersine çevirmesin.
       if (!FED_INNER_LAWS[k] || !canFedLaw(e, k).ok) continue;
+      if(!fedLawRetryAllowed(f,k,e))continue;
       if ((e.res.etk || 0) < FED_INNER_LAWS[k].c) continue;
       // The proposer must pass its own assessment before paying and committing
       // its explicit YES. This is not a prediction or veto of other members.
