@@ -1,0 +1,11 @@
+# STARS96H.3.1
+Gezegen inşa kartları84px yerine62px;22 bina türünün aynı koloni ve kaydırma çıpasında görünürlüğü1536×702:18→22,1280×720:14→18,740×360:6→8,360×300:4→6.
+Adet,limit,kuyruk ve maliyet bina adının altında birlikte yer alır. Yıkma rozeti18×18px;44×44px bağımsız dokunma hedefi korunur. İnşa hedefi bu köşeyi dışlayan L biçimindedir. Uzun basma,açıklamalar,onay ve eski onayın geçersizliği korunur.
+Dar yatay ekranda açık panelin altındaki zaman çubuğu harita alanına sığar ve yatay kaydırılabilir. Panel açma/kapama ve üç sekme gerçek dokunmalarla sınandı.
+Üretimde yalnız index.html,ui.js ve build/cache kimlikleri değişti.15 çalışma dosyası96H.3 ile birebir aynı; main.js ve sw.js kimlik değişiklikleri dışında aynı. Savev8 ve96H.3 vassallık bütçe düzeltmesi korunur.
+132 regresyon paketi5981PASS/0FAIL. Yeni deterministik11 kontrol; inşa paneli102 gerçek Chromium kontrolü ve21156 iç dokunma noktası. Genel25,kurulum36,siyasi13,sözleşme16 kontrolü geçti. Altı uzun canlı panel kontrolü geçti; toplam198 gerçek Chromium kontrolü,0 hata. Fiziksel Android NOT RUN.
+İlk tam koşu5980PASS/1FAIL idi: yeni test,ilk renderın mevcut türetilmiş önbelleğini Save değişikliği sayıyordu. Eski ve yeni sürüm aynı şekilde ısıtılarak test düzeltildi; motor değiştirilmedi. Dar yatayda zaman çubuğu kartların üstüne geliyordu; UI düzeltmesiyle giderildi. Tarayıcı testinin görünür kart filtresi,ertelenen sayaç güncellemesini beklemesi,alt piksel ortak kenarı ve canlı anomalinin haber örtüşmesi ayrı kayıtlarda tutulur. Bunlar nihai PASS toplamına eklenmez.
+Testlerin build/cache kimlik sabitlemeleri güncellendi; eski CSS korumaları kaldırılmadı. Yeni CSS bloğu tam SHA korumasıyla doğrulanır; geometri ve tüm22 kartın semantiği ayrı test edilir.
+Aynı Save/RNG ile seed11/99/404 için12 ay,ay başına60 yarım günlük adım ve6.ay Save8 yüklemesi: her ay Save ve RNG eşit.120/240 aylık yeni kampanya iddiası yoktur.
+Oyun ZIP dosyası19 çalışma dosyası ve RELEASE-MANIFEST.json içerir;20 üyenin CRC ve19 kaynağın SHA-256 doğrulaması yapılmıştır. SHA-256: 6970242f23fc9cced927de33d297be2cf93ec08f92349f8683559b0b1d434da6.
+Sonraki faz: fiziksel Android'de44px hedef ve dar zaman çubuğu kaydırmasını doğrulamak;AI geliştirmelerini ayrı96H.4 deneyleriyle ele almak.

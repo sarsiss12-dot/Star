@@ -2571,12 +2571,12 @@ const UI = {
             const label={maden:'Maden',santral:'Santral',ciftlik:'Çiftlik',lab:'Laboratuvar',dokum:'Dökümhane',tersane:'Tersane',kale:'Savunma',arsiv:'Arşiv',klinik:'Klinik',kuyu:'Termal Kuyu',asansor:'Uzay Asansörü',habitat:'Habitat',fabrika:'Tüketim',liman:'Ticaret Limanı',iktisat_b:'İktisat',sinod_e:'Sinod Evi',oto_lab:'Otomasyon',birlik_k:'Birlik',sentetik_h:'Üretim Hücresi',sinaps_m:'Sinaps',derin_s:'Derin Sondaj',biyom_b:'Biyom'}[k]||B.n;
             h += `<div class="bWrap ${n>0?'has-dem':''}" data-building="${k}">
               <button class="abtn ${full||!afford?'dis':''}" data-a="build" data-hold="${k}" data-x="${s.id}:${pl.i}:${k}" title="${esc(B.n+' — '+B.d)}" aria-label="${esc(B.n)} inşa et · ${n}/${B.max}">` +
-                 `<span class="buildingName">${B.tech&&!e.techs[B.tech]?'🔒 ':''}${esc(label)}</span><span class="buildingCount">${n}/${B.max}${queued?' · +'+queued:''}</span><span class="buildingCost">` +
+                 `<span class="buildingName">${B.tech&&!e.techs[B.tech]?'🔒 ':''}${esc(label)}</span><span class="buildingMeta"><span class="buildingCount">${n}/${B.max}${queued?' +'+queued:''}</span><span class="buildingCost">` +
                  Object.entries(cost).map(([r,v])=>`<span style="color:${e.res[r]>=v?RES[r].c:'#ff5f6d'}">${RES[r].ico}${v}</span>`).join(' ') +
-                 `</span></button>` +
+                 `</span></span></button>` +
                  /* FAZ 14: mevcut binayı yıkma tuşu */
                  (n > 0 ? `<button class="demX" data-a="demolish" data-x="${s.id}:${pl.i}:${k}"
-                    aria-label="${esc(B.n)} yık" title="${esc(B.n)} yık — onay gerekir"><span aria-hidden="true">⌫</span></button>` : '') +
+                    aria-label="${esc(B.n)} yık" title="${esc(B.n)} yık — onay gerekir"><span class="demIcon" aria-hidden="true">⌫</span></button>` : '') +
                  `</div>`;
           }
           h += `</div>`;

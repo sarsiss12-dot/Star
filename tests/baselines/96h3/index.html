@@ -1,0 +1,1383 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#05070f">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Stars">
+<meta name="application-name" content="Stars">
+<meta name="format-detection" content="telephone=no">
+<!-- ═══ FAZ 57: PWA ═══
+     manifest + standalone. "Ana Ekrana Ekle" ile kurulunca
+     adres çubuğu tamamen kalkar — gerçek tam ekran. -->
+<link rel="manifest" href="./manifest.json">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%2305070f'/%3E%3Ccircle cx='32' cy='32' r='19' fill='none' stroke='%236ff2c8' stroke-width='2.5'/%3E%3Ccircle cx='32' cy='32' r='7' fill='%23f2d452'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' fill='%2305070f'/%3E%3Ccircle cx='90' cy='90' r='54' fill='none' stroke='%236ff2c8' stroke-width='6'/%3E%3Ccircle cx='90' cy='90' r='20' fill='%23f2d452'/%3E%3C/svg%3E">
+<title>STARS — Galaktik Strateji</title>
+<style>
+/* ============================================================
+   STARS  ·  16-bit galaktik strateji
+   Palet: void #05070f · hull #101828 · bulkhead #1b2740
+          phosphor #6ff2c8 · ember #ff9b3d · plasma #8b7bff · bone #d7e3f4
+   ============================================================ */
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;
+  -webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+:root{
+  --void:#05070f; --hull:#0e1524; --bulk:#182338; --line:#2b3c5c;
+  --phos:#6ff2c8; --ember:#ff9b3d; --plasma:#8b7bff; --bone:#d7e3f4;
+  --dim:#7d90ad; --bad:#ff5f6d; --good:#65e08a;
+  --mono:ui-monospace,"SF Mono","Cascadia Mono",Menlo,Consolas,"Roboto Mono",monospace;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --sb:302px; --top:34px;
+}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--void);
+  color:var(--bone);font-family:var(--sans);font-size:13px;
+  overscroll-behavior:none;touch-action:none}
+button{font-family:inherit;color:inherit;background:none;border:none;cursor:pointer}
+canvas{display:block}
+.mono{font-family:var(--mono)}
+.hidden{display:none!important}
+
+/* ---------- ORTAK KABUK ---------- */
+#app{position:fixed;inset:0}
+.scan{position:fixed;inset:0;pointer-events:none;z-index:900;
+  background:repeating-linear-gradient(180deg,rgba(0,0,0,.16) 0 1px,transparent 1px 3px);
+  opacity:.5;mix-blend-mode:multiply}
+.vig{position:fixed;inset:0;pointer-events:none;z-index:899;
+  background:radial-gradient(ellipse at 50% 50%,transparent 45%,rgba(0,0,0,.55) 100%)}
+
+/* ---------- MENÜ ---------- */
+#menu{position:fixed;inset:0;z-index:500;display:flex;flex-direction:column;
+  background:var(--void);overflow-y:auto;overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch}
+#menuStars{position:absolute;inset:0;z-index:0}
+.mwrap{position:relative;z-index:2;padding:18px 16px 40px;max-width:860px;margin:0 auto;width:100%}
+.brand{text-align:center;margin:8px 0 4px}
+.brand h1{font-family:var(--mono);font-size:30px;font-weight:800;letter-spacing:.34em;
+  color:var(--phos);text-shadow:0 0 18px rgba(111,242,200,.45);text-indent:.34em}
+.brand p{font-family:var(--mono);font-size:10px;letter-spacing:.32em;color:var(--dim);
+  margin-top:7px;text-indent:.32em}
+.rule{height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent);margin:16px 0}
+
+.sect{margin-bottom:18px}
+.sect>h2{font-family:var(--mono);font-size:10px;letter-spacing:.26em;color:var(--ember);
+  margin-bottom:9px;display:flex;align-items:center;gap:8px}
+.sect>h2:after{content:"";flex:1;height:1px;background:var(--line)}
+
+.grid{display:grid;gap:8px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+
+.card{background:linear-gradient(180deg,var(--bulk),var(--hull));border:1px solid var(--line);
+  padding:10px;text-align:left;position:relative;transition:border-color .12s,transform .08s}
+.card:active{transform:scale(.985)}
+.card.on{border-color:var(--phos);box-shadow:inset 0 0 0 1px rgba(111,242,200,.25),0 0 14px rgba(111,242,200,.14)}
+.card .cn{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.06em;display:flex;gap:7px;align-items:center}
+.card .cd{font-size:10.5px;color:var(--dim);line-height:1.45;margin-top:5px}
+.card .ct{font-family:var(--mono);font-size:9.5px;color:var(--phos);margin-top:6px;letter-spacing:.04em}
+.card .cw{font-family:var(--mono);font-size:9.5px;color:var(--ember);margin-top:2px;letter-spacing:.04em}
+.sig{width:22px;height:22px;flex:0 0 22px;image-rendering:pixelated}
+
+.opt{background:var(--hull);border:1px solid var(--line);padding:9px 6px;text-align:center;
+  font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--dim)}
+.opt.on{background:var(--bulk);border-color:var(--phos);color:var(--phos)}
+.opt small{display:block;font-size:8.5px;color:var(--dim);margin-top:3px;letter-spacing:0}
+.opt.on small{color:#8fb3a9}
+
+input[type=text]{width:100%;background:var(--void);border:1px solid var(--line);color:var(--bone);
+  font-family:var(--mono);font-size:14px;padding:9px 11px;letter-spacing:.06em;-webkit-user-select:text;user-select:text}
+input[type=text]:focus{outline:none;border-color:var(--phos)}
+
+.btn{display:block;width:100%;padding:14px;background:var(--phos);color:#04120d;
+  font-family:var(--mono);font-size:14px;font-weight:800;letter-spacing:.22em;
+  border:1px solid var(--phos);text-indent:.22em}
+.btn:active{background:#4dd0a6}
+.btn.ghost{background:transparent;color:var(--dim);border-color:var(--line);font-weight:600;font-size:11px;padding:11px}
+.btn.ghost:active{color:var(--bone);border-color:var(--dim)}
+.btnrow{display:flex;gap:8px;margin-top:6px}
+.btnrow>*{flex:1}
+
+.traitbar{display:flex;justify-content:space-between;align-items:center;
+  font-family:var(--mono);font-size:10px;color:var(--dim);letter-spacing:.1em;margin-bottom:8px}
+.traitbar b{color:var(--phos)}
+.tchip{background:var(--hull);border:1px solid var(--line);padding:8px 7px;text-align:left}
+.tchip.on{border-color:var(--plasma);background:#1a1a33}
+.tchip .tn{font-family:var(--mono);font-size:10.5px;font-weight:700}
+.tchip .tc{font-family:var(--mono);font-size:9px;color:var(--ember);float:right}
+.tchip.on .tc{color:var(--plasma)}
+.tchip .td{font-size:9.5px;color:var(--dim);margin-top:3px;line-height:1.4}
+
+/* ---------- KURULUM ADIMLARI ---------- */
+.steps{display:flex;gap:4px;margin-bottom:16px;position:sticky;top:0;z-index:5;
+  background:linear-gradient(180deg,var(--void) 72%,transparent);padding:6px 0 9px}
+.stp{flex:1;padding:7px 2px;border:1px solid var(--line);background:var(--hull);
+  display:flex;flex-direction:column;align-items:center;gap:3px}
+.stp b{font-family:var(--mono);font-size:11px;color:var(--dim);font-weight:700}
+.stp span{font-family:var(--mono);font-size:8px;letter-spacing:.1em;color:var(--dim)}
+.stp.on{border-color:var(--phos);background:var(--bulk)}
+.stp.on b,.stp.on span{color:var(--phos)}
+
+/* --- etik eksenleri --- */
+.axis{background:var(--hull);border:1px solid var(--line);padding:11px;margin-bottom:9px}
+.axHd{display:flex;justify-content:space-between;align-items:center;
+  font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--dim)}
+.axHd b{font-size:11px;letter-spacing:.06em}
+.axLbl{display:flex;justify-content:space-between;margin:9px 0 5px}
+.axLbl i{font-style:normal;font-family:var(--mono);font-size:8.5px;color:var(--dim);letter-spacing:.06em}
+.axRow{display:flex;gap:3px}
+.axDot{flex:1;height:30px;border:1px solid var(--line);background:var(--void);
+  font-family:var(--mono);font-size:10px;color:var(--dim)}
+.axDot.mid{color:#4a5a72}
+.axDot.on{border-color:var(--phos);background:var(--bulk);color:var(--phos);font-weight:700}
+.axDesc{font-size:10.5px;line-height:1.5;color:var(--dim);margin-top:8px;
+  border-left:2px solid var(--line);padding-left:8px}
+
+/* --- civic kartları --- */
+.card.civ{padding:9px}
+.civIco{font-size:15px;line-height:1}
+.card.civ.sars{border-color:#6b4a20}
+.card.civ.sars.on{border-color:var(--ember);box-shadow:inset 0 0 0 1px rgba(255,155,61,.28),0 0 14px rgba(255,155,61,.14)}
+.sarsTag{margin-left:auto;font-size:11px}
+.sigPrev{image-rendering:pixelated;display:block;margin:0 auto 3px}
+
+/* --- görünüş & renk --- */
+.opt.look{padding:6px 4px}
+.lookPrev{image-rendering:pixelated;display:block;margin:0 auto 3px}
+.colRow{display:flex;flex-wrap:wrap;gap:7px}
+.colDot{width:34px;height:34px;border:2px solid var(--line);border-radius:50%;flex:0 0 auto}
+.colDot.on{border-color:var(--bone);box-shadow:0 0 0 2px var(--void),0 0 12px currentColor}
+
+/* --- özet --- */
+.summary{background:var(--hull);border:1px solid var(--line);padding:10px;margin-top:14px}
+.sumRow{display:flex;justify-content:space-between;gap:10px;font-family:var(--mono);
+  font-size:10.5px;padding:4px 0;border-bottom:1px solid rgba(43,60,92,.4)}
+.sumRow:last-child{border-bottom:none}
+.sumRow span{color:var(--dim);flex:0 0 auto}
+.sumRow b{text-align:right;font-weight:600}
+
+/* ---------- GENİŞ DİPLOMASİ PANELİ ---------- */
+#diploPane{position:fixed;inset:0;z-index:640;display:none;background:rgba(3,5,10,.8)}
+#diploPane.show{display:flex;animation:fadeIn .15s ease}
+.dpBox{width:min(720px,94%);height:100%;background:linear-gradient(160deg,var(--bulk),var(--hull));
+  border-right:1px solid var(--phos);display:flex;flex-direction:column;
+  animation:slideR .2s cubic-bezier(.2,.8,.3,1)}
+@keyframes slideR{from{transform:translateX(-100%)}to{transform:none}}
+.dpHd{flex:0 0 auto;padding:12px 14px;border-bottom:1px solid var(--line);
+  display:flex;justify-content:space-between;align-items:center;
+  font-family:var(--mono);font-size:13px;letter-spacing:.16em;color:var(--phos)}
+.dpBody{flex:1;overflow-y:auto;overscroll-behavior:contain;padding:12px 14px 24px}
+.dpBody::-webkit-scrollbar{width:3px}
+.dpBody::-webkit-scrollbar-thumb{background:var(--line)}
+.dpGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:9px}
+/* FAZ 14: diplomasi listesi kompaktlaştırıldı — daha çok devlet
+   aynı anda ekrana sığsın. Kart 10px → 6px iç boşluk, portre
+   38px → 30px, satır aralıkları daraltıldı. */
+.dpCard{background:var(--hull);border:1px solid var(--line);padding:6px 8px;margin-bottom:4px}
+.dpCard .mini{margin:1px 0;line-height:1.25}
+.dpCard .row{padding:2px 0;font-size:10.5px}
+.dpCard.war{border-color:var(--bad)}
+.dpCard.ally{border-color:var(--phos)}
+.dpTop{display:flex;align-items:center;gap:6px;margin-bottom:3px}
+.dpTop canvas{image-rendering:pixelated;flex:0 0 auto;border:1px solid var(--line);background:var(--void)}
+.dpName{flex:1;min-width:0}
+.dpName b{font-family:var(--mono);font-size:12px;display:block;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dpName i{font-style:normal;font-size:9.5px;color:var(--dim)}
+.envRow{display:flex;align-items:center;justify-content:space-between;
+  background:var(--void);border:1px solid var(--line);padding:6px 9px;margin-bottom:9px;
+  font-family:var(--mono);font-size:11px}
+.envRow b{color:var(--phos)}
+/* ═══ FAZ 46: UZUN UYARI METNİ ═══
+   .envRow yatay flex; "Uygulanabilirlik" gibi uzun açıklamalar
+   kırmızı çerçevenin dışına taşıyordu. Bu varyant dikey sarar. */
+/* ═══ FAZ 46: CSS FAUX-FULLSCREEN ═══
+   Native API reddedilirse devreye girer. */
+html.fauxFull, body.fauxFull{
+  position:fixed;inset:0;width:100vw;height:100vh;
+  margin:0;padding:0;overflow:hidden;z-index:99999;background:#000}
+body.fauxFull #app{width:100vw;height:100vh}
+/* FAZ 53: fallback tuvali de zorunlu olarak tüm ekrana yayar —
+   native API reddedildiğinde bile oyun tam ekran görünür. */
+/* ═══ FAZ 57: PWA STANDALONE ═══
+   Kurulu uygulamada adres çubuğu yok; çentikli ekranlarda
+   güvenli alan payı bırakılır. */
+html.pwa body{
+  padding-top:env(safe-area-inset-top);
+  padding-bottom:env(safe-area-inset-bottom);
+  padding-left:env(safe-area-inset-left);
+  padding-right:env(safe-area-inset-right)}
+html.pwa #tools{top:calc(var(--top) + 6px + env(safe-area-inset-top))}
+
+/* FAZ 54: .faux-fullscreen — doğrudan oyun konteynerini hedefler */
+/* ═══════════════════════════════════════════════════════════════
+   FAZ 64 — SOL MENÜ ALT MENÜLERİ
+   13 bağımsız ikon iki kategoriye toplandı. Alt menü YANA doğru
+   açılır (haritayı dikey olarak kapatmaz), zarif bir kayma
+   animasyonuyla. Açık menü dışına dokununca kapanır.
+   ═══════════════════════════════════════════════════════════════ */
+.toolGrp{position:relative;flex:0 0 auto}
+.grpHead{position:relative}
+.grpDot{position:absolute;right:-3px;bottom:-3px;font-size:9px;
+  font-style:normal;line-height:1;pointer-events:none;
+  text-shadow:0 0 3px #05070f,0 0 3px #05070f}
+/* ═══ FAZ 67: KIRPILMA ONARIMI ═══
+   KÖK NEDEN: #tools konteynerinde overflow-y:auto + overflow-x:hidden
+   var (Faz 53'te sol panel taşmasını çözmek için eklenmişti).
+   Pop-out left:calc(100% + 6px) ile konteynerin DIŞINA açıldığı
+   için kırpılıyor ve hiç görünmüyordu — menü teknik olarak
+   açılıyor ama ekranda yoktu.
+   ÇÖZÜM: position:fixed. Sabit konumlu öğe atalarının overflow
+   kırpmasından etkilenmez. Konum JS'te butonun gerçek ekran
+   koordinatından hesaplanıyor (grpTog içinde). */
+.grpOut{
+  position:fixed;left:0;top:0;
+  width:160px;max-width:calc(100vw - 56px);
+  display:flex;flex-direction:column;gap:3px;
+  padding:5px;border-radius:9px;
+  background:rgba(11,16,28,.96);border:1px solid #35507a;
+  box-shadow:0 6px 22px rgba(0,0,0,.55);
+  opacity:0;visibility:hidden;
+  transform:translateX(-8px) scale(.96);transform-origin:left center;
+  transition:opacity .16s ease, transform .16s ease, visibility .16s;
+  /* 86C.5.1: JS measures actual top/bottom controls on opening and resize.
+     Fixed-size touch targets scroll within the remaining visible height. */
+  z-index:99999;
+  max-height:calc(100dvh - var(--top) - 96px);
+  overflow-y:auto;overflow-x:hidden;
+  overscroll-behavior:contain;touch-action:pan-y;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:thin;scrollbar-color:#35507a transparent}
+.grpOut::-webkit-scrollbar{width:3px}
+.grpOut::-webkit-scrollbar-thumb{background:#35507a;border-radius:3px}
+.grpOut.open{opacity:1;visibility:visible;transform:translateX(0) scale(1)}
+/* Alt menüdeki butonlar etiketli ve geniş — mobilde rahat hedef */
+.grpOut .tool{width:auto;min-width:0;height:34px;flex:0 0 auto;
+  display:flex;align-items:center;gap:8px;padding:0 11px;
+  justify-content:flex-start;font-size:14px}
+.grpOut .tool span{font-family:var(--mono);font-size:10.5px;
+  letter-spacing:.04em;color:#9fb6cc;white-space:nowrap}
+.grpOut .tool.on span{color:#6ff2c8}
+@media (max-width:430px){
+  .grpOut .tool{height:34px}
+  .grpOut .tool span{font-size:10px}
+}
+
+/* ═══ FAZ 65: BAĞIMSIZ RADAR BUTONU ═══
+   Harita modlarından ayrı bir şalter. Kapalıyken soluk,
+   açıkken turkuaz çerçeveli ve hafif nabız atar. */
+.tool.radarBtn,.tool.logiBtn,.tool.fleetNamesBtn{opacity:.65}
+.tool.radarBtn.on,.tool.logiBtn.on,.tool.fleetNamesBtn.on{opacity:1;color:#6ff2c8;
+  box-shadow:inset 0 0 0 1px rgba(111,242,200,.6),
+             0 0 9px rgba(111,242,200,.28)}
+
+/* ═══ FAZ 65: İMPARATORLUK MENÜSÜ — 2 SÜTUN ═══
+   6 sekme tek sütunda dikeyde çok yer kaplıyordu; 2×3 ızgara
+   yüksekliği yarıya indiriyor. */
+#outEmp{display:grid;grid-template-columns:repeat(2, minmax(0,1fr));
+  gap:4px;width:max-content;max-width:82vw}
+#outEmp .tool{width:auto;min-width:92px;justify-content:flex-start}
+@media (max-width:420px){
+  #outEmp .tool{min-width:78px;font-size:11px}
+  #outEmp .tool span{font-size:9px}
+}
+
+/* ═══ FAZ 81: LOJİSTİK BUTONU ═══ */
+.logiBtn.on{border-color:var(--phos);color:var(--phos);
+  box-shadow:0 0 0 1px var(--phos) inset}
+
+/* ═══ FAZ 80: HARİTA MODU TOAST'I ═══ */
+#mapToast{position:fixed;left:50%;top:calc(var(--top) + 14px);
+  transform:translate(-50%,-14px);z-index:1600;pointer-events:none;
+  background:rgba(11,16,28,.94);border:1px solid #35507a;border-radius:8px;
+  padding:7px 16px;display:flex;flex-direction:column;align-items:center;gap:2px;
+  font-family:var(--mono);opacity:0;visibility:hidden;
+  transition:opacity .22s ease, transform .22s ease, visibility .22s;
+  box-shadow:0 6px 22px rgba(0,0,0,.5);max-width:82vw;text-align:center}
+#mapToast.show{opacity:1;visibility:visible;transform:translate(-50%,0)}
+#mapToast b{font-size:11px;letter-spacing:.10em;color:var(--phos)}
+#mapToast span{font-size:9.5px;color:#9fb6cc;letter-spacing:.02em}
+
+/* ═══ FAZ 78B: LİDER SATIRI ═══ */
+.ldrRow{display:flex;gap:9px;align-items:center;padding:7px;margin:4px 0;
+  background:#0b1220;border:1px solid #24354f;border-radius:8px}
+.ldrPort{width:56px;height:56px;flex:0 0 56px;border-radius:7px;
+  background:#070c16;image-rendering:pixelated}
+.ldrInfo{display:flex;flex-direction:column;gap:2px;min-width:0;
+  font-family:var(--mono);font-size:10px;line-height:1.4}
+.ldrInfo b{font-size:11px;color:var(--bone)}
+.ldrInfo span{color:#9fb6cc}
+
+/* ═══ FAZ 78: HANEDAN ADI SATIRI ═══ */
+.nameRow{display:flex;gap:6px;align-items:stretch}
+.nameInp{flex:1;min-width:0;background:#0b1220;border:1px solid #35507a;
+  border-radius:6px;color:var(--bone);font-family:var(--mono);font-size:13px;
+  padding:9px 11px;letter-spacing:.04em}
+.nameInp:focus{outline:none;border-color:var(--phos)}
+.diceBtn{flex:0 0 46px;background:#1b2436;border:1px solid #35507a;
+  border-radius:6px;font-size:19px;cursor:pointer;line-height:1}
+.diceBtn:active{background:#26344d;transform:scale(.94)}
+
+/* ═══ FAZ 66: KARŞILIKLI PORTRELER ═══ */
+.faceOff{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+  gap:6px;padding:8px;margin:4px 0 6px;background:#0b1220;
+  border:1px solid var(--fo,#24354f);border-radius:8px}
+.faceOff canvas{width:100%;max-width:78px;aspect-ratio:1;border-radius:8px;
+  background:#070c16;border:2px solid var(--fo,#24354f);image-rendering:pixelated}
+.faceOff .foThem{justify-self:end}
+.foMid{display:flex;flex-direction:column;align-items:center;gap:2px;
+  font-family:var(--mono);font-size:9px;letter-spacing:.05em;white-space:nowrap}
+.foRel{font-size:14px;font-weight:700}
+.chipPort{width:34px;height:34px;border-radius:6px;background:#070c16;
+  image-rendering:pixelated;flex:0 0 34px}
+.notifPort{border-radius:6px;background:#070c16;image-rendering:pixelated;
+  vertical-align:middle;margin-right:7px}
+
+/* ═══ FAZ 61: KURULUM ŞABLON ŞERİDİ ═══ */
+.tplBar{display:flex;flex-wrap:wrap;gap:5px;margin:0 0 12px;
+  padding:7px;background:#0d1524;border:1px solid #24354f;border-radius:8px}
+.tplBtn{background:#1b2436;border:1px solid #35507a;border-radius:6px;
+  color:#9fb6cc;font-family:var(--mono);font-size:10px;padding:5px 9px;
+  letter-spacing:.03em;cursor:pointer;white-space:nowrap;
+  display:inline-flex;align-items:center;gap:5px}
+.tplBtn:active{background:#26344d}
+.tplBtn.load{border-color:#6ff2c8;color:#6ff2c8}
+.tplBtn i{font-style:normal;opacity:.55;padding:0 2px;font-size:11px}
+.tplBtn i:active{opacity:1;color:#ff5f6d}
+
+/* ═══ FAZ 59: CSS GEZEGEN KÜRESİ ═══ */
+.pOrb{display:inline-block;flex:0 0 auto;border-radius:50%;
+  position:relative;vertical-align:middle}
+.pOrb::after{content:'';position:absolute;inset:0;border-radius:50%;
+  background:radial-gradient(circle at 30% 26%,
+    rgba(255,255,255,.30) 0%, rgba(255,255,255,.06) 22%, transparent 46%);
+  pointer-events:none}
+
+/* ═══ FAZ 59: Z-INDEX ONARIMI ═══
+   SORUN: .faux-fullscreen z-index 999999 ile KÖK öğeye
+   uygulanıyordu; içindeki sol menü (#tools, z-index 20) ve
+   paneller yeni yığma bağlamının altında kalıp görünmez oluyordu.
+
+   ÇÖZÜM: tam ekran katmanı yalnız KAPSAYICIYI konumlandırır,
+   kendi z-index'ini KULLANMAZ (auto). Böylece içerideki katman
+   sırası (tuval → menü → paneller → modal) bozulmadan korunur.
+   Kök öğede yığma bağlamı yaratmamak için isolation:auto. */
+html.fauxFull, body.fauxFull, .faux-fullscreen{
+  position:fixed !important;inset:0 !important;
+  width:100vw !important;height:100dvh !important;
+  margin:0 !important;padding:0 !important;
+  overflow:hidden !important;
+  z-index:auto !important;isolation:auto !important}
+
+/* Tam ekranda iç katmanlar açıkça yeniden sıralanır —
+   sol menü ve paneller her zaman tuvalin üstünde kalır. */
+body.fauxFull canvas#map{z-index:1 !important}
+body.fauxFull #tools{z-index:1200 !important}
+body.fauxFull #topbar{z-index:1200 !important}
+/* FAZ 82: tam ekranda da timepod akordiyonun altında kalsın */
+body.fauxFull #timepod{z-index:900 !important}
+body.fauxFull #side,
+body.fauxFull #panel{z-index:1300 !important}
+body.fauxFull #diploPane{z-index:1400 !important}
+body.fauxFull #modal{z-index:1500 !important}
+body.fauxFull .scan{z-index:1100 !important}
+body.fauxFull .vig{z-index:1099 !important}
+body.fauxFull #game{width:100vw !important;height:100dvh !important;
+  position:fixed;inset:0;margin:0}
+body.fauxFull canvas#map{width:100vw !important;height:100dvh !important}
+
+.envRow.wrapRow{flex-direction:column;align-items:flex-start;gap:3px}
+.envRow.wrapRow b{white-space:normal;line-height:1.45;text-align:left;
+  word-break:break-word;max-width:100%}
+/* ═══ FAZ 47: HARİTA MODU BUTONLARI ═══ */
+.tool.mapMode{opacity:.55}
+.tool.mapMode.on{opacity:1;color:#6ff2c8;
+  box-shadow:inset 0 0 0 1px rgba(111,242,200,.55)}
+
+/* ═══ FAZ 46: DİPLOMASİ LİSTE MODU ═══
+   Tek satırlık kompakt barlar. Grid: renk noktası | ad (esner) |
+   rozetler | ilişki. Mobilde taşmaz, ad uzunsa kırpılır. */
+.viewTog{background:#1b2436;border:1px solid #35507a;border-radius:6px;
+  color:#9fb6cc;font-family:var(--mono);font-size:10px;padding:3px 8px;
+  letter-spacing:.04em;cursor:pointer}
+.viewTog:active{background:#26344d}
+.dpList{display:flex;flex-direction:column;gap:3px;margin:4px 0 6px}
+.dpRow{display:grid;grid-template-columns:10px 1fr auto auto;gap:7px;
+  align-items:center;padding:7px 9px;background:#111a2a;
+  border:1px solid #24354f;border-left-width:3px;border-radius:6px;
+  cursor:pointer;font-family:var(--mono);font-size:11px}
+.dpRow:active{background:#182337}
+.dpRow.war{border-left-color:#ff5f6d}
+.dpRow.ally{border-left-color:#65e08a}
+.dpDot{width:9px;height:9px;border-radius:50%}
+.dpNm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#e8f0ff}
+.dpTags{font-size:12px;letter-spacing:1px;opacity:.9}
+/* ═══ FAZ 52: ETİK BONUS MATRİSİ ═══ */
+.ethMx{margin:5px 0 2px;display:flex;flex-direction:column;gap:3px}
+.ethMxRow{display:flex;flex-direction:column;gap:1px;padding:5px 7px;
+  background:#0d1524;border:1px solid #24354f;border-radius:5px;
+  font-family:var(--mono);font-size:10px;line-height:1.45}
+.ethMxRow b{font-size:10px;letter-spacing:.05em}
+.ethMxRow span{color:#9fb6cc;word-break:break-word}
+.ethMxRow i{color:#7d90ad}
+
+/* ═══ FAZ 50: AKORDEON GÖVDESİ ═══ */
+.dpRow.open{border-color:#6ff2c8;border-bottom-left-radius:0;border-bottom-right-radius:0}
+.dpAcc{background:#0d1524;border:1px solid #6ff2c8;border-top:none;
+  border-radius:0 0 6px 6px;padding:7px 9px 9px;margin:-3px 0 3px}
+.dpAcc .act2{margin-top:5px}
+
+.envBtn{border:1px solid var(--line);padding:5px 9px;font-family:var(--mono);
+  font-size:10px;color:var(--dim);letter-spacing:.04em}
+.envBtn.on{border-color:var(--phos);color:var(--phos);background:rgba(111,242,200,.10)}
+.sBtn{border:1px solid var(--line);background:var(--void);color:var(--ember);
+  font-family:var(--mono);font-size:9px;padding:2px 5px;letter-spacing:0}
+.sBtn:active{border-color:var(--ember);background:#241a10}
+.bWrap{position:relative}
+.bInfo{position:absolute;top:2px;right:2px;width:16px;height:16px;z-index:2;
+  border:1px solid var(--line);background:var(--void);color:var(--dim);
+  font-family:var(--mono);font-size:9px;font-style:italic;
+  display:flex;align-items:center;justify-content:center;border-radius:50%}
+.bInfo:active{border-color:var(--phos);color:var(--phos)}
+.buildSym{display:inline-flex;align-items:center;gap:3px;font-family:var(--mono);
+  font-size:9px;color:var(--phos);margin-left:5px}
+.dealCols{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:620px){.dealCols{grid-template-columns:1fr}}
+.dealCol{background:var(--void);border:1px solid var(--line);padding:9px}
+.dealItem{display:flex;justify-content:space-between;align-items:center;gap:8px;
+  background:var(--hull);border:1px solid var(--line);padding:6px 8px;margin-bottom:5px;
+  font-family:var(--mono);font-size:10.5px}
+.dealItem button{color:var(--bad);font-size:12px;padding:0 4px}
+.luxRow{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.luxChip{font-family:var(--mono);font-size:9.5px;padding:2px 6px;
+  border:1px solid var(--line);display:flex;align-items:center;gap:3px}
+.luxChip.have{border-color:var(--good)}
+.luxChip.imp{border-color:var(--ember)}
+.luxChip.miss{opacity:.35}
+#fedBtn.hot{border-color:var(--ember);color:var(--ember);animation:pulseWarn 1.2s ease-in-out infinite}
+#diploBtn{position:absolute;left:6px;top:calc(var(--top) + 128px);z-index:21;
+  width:32px;height:32px;background:rgba(11,16,28,.9);border:1px solid var(--line);
+  color:var(--dim);font-size:14px;display:flex;align-items:center;justify-content:center}
+#diploBtn.hot{border-color:var(--ember);color:var(--ember)}
+
+/* ---------- IRK AYRINTI PANELİ ---------- */
+.card{position:relative}
+.infoBtn{position:absolute;top:6px;right:6px;width:22px;height:22px;z-index:3;
+  border:1px solid var(--line);background:var(--void);color:var(--dim);
+  font-family:var(--mono);font-size:11px;font-weight:700;font-style:italic;
+  display:flex;align-items:center;justify-content:center;border-radius:50%}
+.infoBtn:active{border-color:var(--phos);color:var(--phos)}
+.card.on .infoBtn{border-color:var(--phos);color:var(--phos)}
+
+#raceInfo{position:fixed;inset:0;z-index:700;display:none;justify-content:flex-end;
+  background:rgba(3,5,10,.72)}
+#raceInfo.show{display:flex;animation:fadeIn .16s ease}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.riBox{width:min(420px,92%);height:100%;background:linear-gradient(200deg,var(--bulk),var(--hull));
+  border-left:1px solid var(--phos);display:flex;flex-direction:column;
+  animation:slideL .22s cubic-bezier(.2,.8,.3,1)}
+@keyframes slideL{from{transform:translateX(100%)}to{transform:none}}
+.riHd{flex:0 0 auto;padding:13px 14px;border-bottom:1px solid var(--line);
+  display:flex;justify-content:space-between;align-items:center;
+  font-family:var(--mono);font-size:14px;font-weight:700;letter-spacing:.08em}
+.riX{width:30px;height:30px;border:1px solid var(--line);color:var(--dim);
+  font-size:13px;display:flex;align-items:center;justify-content:center}
+.riX:active{border-color:var(--bad);color:var(--bad)}
+.riBody{flex:1;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:12px 14px 20px}
+.riBody::-webkit-scrollbar{width:3px}
+.riBody::-webkit-scrollbar-thumb{background:var(--line)}
+.riTag{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--ember)}
+.riQuote{font-size:12px;line-height:1.65;color:#c4d3e8;font-style:italic;
+  border-left:2px solid var(--line);padding-left:10px;margin:9px 0 4px}
+.riSec{font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;color:var(--phos);
+  margin:15px 0 7px;display:flex;align-items:center;gap:7px}
+.riSec:after{content:"";flex:1;height:1px;background:var(--line)}
+.riSpec{font-size:11.5px;line-height:1.6;color:var(--bone);background:var(--void);
+  border:1px solid var(--line);padding:9px 10px}
+.riRow{display:flex;justify-content:space-between;font-family:var(--mono);
+  font-size:11px;padding:4px 0;border-bottom:1px solid rgba(43,60,92,.45)}
+.riRow span{color:var(--dim)}
+.riLi{font-family:var(--mono);font-size:11px;padding:3px 0;color:var(--dim)}
+.riLi.ok{color:var(--good)}
+.riLi.bad{color:var(--bad)}
+.riFt{flex:0 0 auto;padding:11px 14px;border-top:1px solid var(--line)}
+
+/* ---------- OYUN ---------- */
+#game{position:fixed;inset:0;z-index:100}
+#map{position:absolute;inset:0;z-index:1}
+
+#topbar{position:absolute;top:0;left:0;right:0;height:var(--top);z-index:20;
+  background:linear-gradient(180deg,rgba(9,13,24,.97),rgba(9,13,24,.82));
+  border-bottom:1px solid var(--line);display:flex;align-items:center;
+  padding:0 6px;gap:2px;overflow-x:auto;overscroll-behavior:contain;scrollbar-width:none}
+#topbar::-webkit-scrollbar{display:none}
+.res{display:flex;align-items:center;gap:3px;padding:0 7px;flex:0 0 auto;
+  font-family:var(--mono);font-size:11px;line-height:1}
+.res i{width:9px;height:9px;display:block;border-radius:1px}
+.res em{font-style:normal;font-size:12px;line-height:1}
+.res u{text-decoration:none;font-size:8.5px;letter-spacing:.08em;opacity:.85}
+.res b{font-weight:700;letter-spacing:.02em}
+.res s{text-decoration:none;font-size:9px;color:var(--dim)}
+.rt{font-family:var(--mono);font-size:10px;letter-spacing:.02em}
+.warnBtn{border:1px solid var(--bad)!important;padding:2px 8px!important;
+  animation:pulseWarn 1.1s ease-in-out infinite}
+@keyframes pulseWarn{0%,100%{opacity:.75}50%{opacity:1}}
+.qbox{max-height:158px;overflow-y:auto;overscroll-behavior:contain;padding-right:3px}
+.qbox::-webkit-scrollbar{width:3px}
+.qbox::-webkit-scrollbar-thumb{background:var(--line)}
+.stt{font-family:var(--mono);font-size:8.5px;padding:1px 5px;border:1px solid var(--line);
+  letter-spacing:.05em;white-space:nowrap}
+.stt.go{border-color:var(--phos);color:var(--phos)}
+.stt.wk{border-color:var(--plasma);color:var(--plasma)}
+.stt.ft{border-color:var(--bad);color:var(--bad)}
+.stt.id{border-color:var(--line);color:var(--dim)}
+.res s.p{color:var(--good)}
+.res s.n{color:var(--bad)}
+/* FAZ 14: diplomasi eylem sekmeleri */
+.dTabs{display:flex;gap:3px;margin:5px 0 4px}
+.dTab{flex:1;padding:4px 2px;font-size:9px;letter-spacing:.3px;
+  border:1px solid var(--line);background:var(--void);color:var(--dim);white-space:nowrap}
+.dTab.on{border-color:var(--phos);color:var(--phos);background:rgba(111,242,200,.08)}
+.dTab:active{border-color:var(--phos)}
+
+/* FAZ 14: yıkım tuşu ve yıkım kuyruğu satırı */
+.bq.dem{border-color:#ff5f6d}
+.bq.dem .bqBar{background:rgba(255,95,109,.16)}
+.demX{position:absolute;right:2px;top:2px;width:18px;height:18px;padding:0;
+  border:1px solid var(--line);background:var(--bulk);color:var(--dim);
+  font-size:10px;line-height:1;display:flex;align-items:center;justify-content:center;z-index:2}
+.demX:active{border-color:#ff5f6d;color:#ff5f6d}
+
+/* ═══ FAZ 31: OLAY PENCERESİ PİKSEL GÖRSELİ ═══ */
+/* FAZ 77E: canvas yoksa kutu hiç yer kaplamasın — bazı
+   bildirimlerde boş siyah dikdörtgen görünüyordu. */
+.evArt{display:flex;justify-content:center;margin:2px 0 10px}
+.evArt:empty{display:none;margin:0}
+.evArt canvas{background:transparent}
+.evArt canvas{image-rendering:pixelated;image-rendering:crisp-edges;
+  width:112px;height:112px;border:1px solid var(--line);background:var(--void);
+  animation:evPop .28s ease both}
+@keyframes evPop{from{opacity:0;transform:scale(.82)}to{opacity:1;transform:scale(1)}}
+@media (max-width:480px){.evArt canvas{width:92px;height:92px}}
+
+/* ═══ FAZ 45: KURULUM İSİM SATIRI ═══ */
+.nameRow{display:flex;gap:6px;align-items:stretch}
+.nameRow input{flex:1;min-width:0}
+.diceBtn{flex:0 0 auto;width:46px;font-size:18px;background:#1b2436;
+  border:1px solid #35507a;border-radius:8px;color:#e8f0ff;cursor:pointer}
+.diceBtn:active{background:#26344d}
+
+/* ═══ /* ═══ FAZ 31: OLAY PİKSEL SANATI ═══ */
+.evArt{display:flex;justify-content:center;padding:12px 0 4px;flex:0 0 auto;
+  background:linear-gradient(180deg,rgba(111,242,200,.05),transparent)}
+#eventCanvas{image-rendering:pixelated;image-rendering:crisp-edges;
+  width:96px;height:96px;filter:drop-shadow(0 0 10px rgba(0,0,0,.6))}
+@media (max-height:420px){ .evArt{padding:6px 0 2px} #eventCanvas{width:64px;height:64px} }
+
+/* ═══ FAZ 21: GEZEGEN SAVUNMASI (kalkan / garnizon) ═══
+   Grid tabanlı: ikon sabit, bar esner, sayı sabit. Dar ekranda
+   bar büzülür ama sayı ve ikon asla taşmaz. */
+.gDef{display:grid;grid-template-columns:1fr;gap:3px;margin:6px 0 2px;
+  padding:5px 6px;border:1px solid var(--line);background:var(--void)}
+.gRow{display:flex;align-items:center;gap:6px;min-width:0}
+.gIco{flex:0 0 auto;width:12px;text-align:center;font-size:11px;line-height:1}
+.gBarW{flex:1 1 auto;min-width:0;height:5px;background:#141b2b;
+  border:1px solid var(--line);overflow:hidden}
+.gBar{height:100%;transition:width .4s ease}
+.gRow b{flex:0 0 auto;font-size:10px;font-variant-numeric:tabular-nums;
+  min-width:34px;text-align:right}
+
+/* ═══ FAZ 20: SİNEMATİK ANA MENÜ ═══ */
+#title{position:fixed;inset:0;z-index:900;background:#04060d;
+  display:flex;align-items:center;justify-content:center;overflow:hidden}
+#title.hidden{display:none}
+#titleSky{position:absolute;inset:0;width:100%;height:100%;display:block}
+/* Kenarları karartan degrade — metin her zaman okunur kalsın */
+.tGrad{position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse at center,rgba(4,6,13,0) 30%,rgba(4,6,13,.72) 78%,rgba(4,6,13,.93) 100%)}
+.tWrap{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;
+  gap:clamp(14px,4vh,34px);padding:5vh 20px;width:100%;max-width:520px}
+.tLogo{text-align:center;animation:tIn .9s ease both}
+.tMark{font-size:clamp(26px,6vw,40px);color:var(--phos);line-height:1;
+  text-shadow:0 0 18px rgba(111,242,200,.55);animation:tSpin 26s linear infinite}
+.tLogo h1{margin:6px 0 0;font-family:var(--mono);font-weight:400;
+  font-size:clamp(26px,8.4vw,54px);letter-spacing:.16em;color:var(--bone);
+  text-shadow:0 0 26px rgba(111,242,200,.28);line-height:1.06}
+.tLogo h1 span{display:block;color:var(--phos);letter-spacing:.24em;
+  font-size:.82em;margin-top:2px}
+.tSub{margin-top:9px;font-size:clamp(8px,2.4vw,10.5px);letter-spacing:.34em;
+  color:var(--dim);font-family:var(--mono)}
+.tBtns{display:flex;flex-direction:column;gap:9px;width:100%;
+  animation:tIn 1.1s .18s ease both}
+.tBtn{width:100%;padding:13px 16px;text-align:left;background:rgba(14,21,36,.80);
+  border:1px solid var(--line);color:var(--bone);font-family:var(--mono);
+  font-size:clamp(11px,3.2vw,13px);letter-spacing:.13em;
+  transition:border-color .18s,background .18s,transform .12s;
+  -webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+.tBtn small{display:block;margin-top:3px;font-family:var(--sans);
+  font-size:10px;letter-spacing:.02em;color:var(--dim);text-transform:none}
+.tBtn.pri{border-color:var(--phos);color:var(--phos)}
+.tBtn.pri small{color:rgba(111,242,200,.62)}
+.tBtn:active:not([disabled]){transform:scale(.985);background:rgba(24,35,56,.9)}
+.tBtn[disabled]{opacity:.36;pointer-events:none}
+.tFoot{font-size:9.5px;letter-spacing:.16em;color:var(--dim);
+  font-family:var(--mono);animation:tIn 1.4s .4s ease both}
+@keyframes tIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes tSpin{to{transform:rotate(360deg)}}
+@media (hover:hover) and (pointer:fine){
+  .tBtn:hover:not([disabled]){border-color:var(--phos);background:rgba(24,35,56,.92)}
+}
+@media (max-height:420px){
+  .tWrap{max-width:640px;padding:3vh 18px;gap:10px}
+  .tLogo h1{font-size:clamp(20px,5.4vh,34px)}
+  .tBtn{padding:9px 13px}
+  .tBtn small{display:none}
+  .tFoot{display:none}
+}
+
+/* FAZ 13: gezegen inşaat kuyruğu satırları */
+.bq{position:relative;display:flex;align-items:center;gap:6px;margin-top:4px;
+  padding:5px 6px;border:1px solid var(--line);background:var(--void);overflow:hidden}
+.bq.on{border-color:#ff9b3d}
+.bqBar{position:absolute;left:0;top:0;bottom:0;background:rgba(255,155,61,.16);
+  transition:width .35s linear;pointer-events:none}
+.bqTxt{position:relative;flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.25}
+.bqTxt b{font-size:11px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bqTxt i{font-size:9px;color:var(--dim);font-style:normal}
+.bqX{position:relative;flex:0 0 auto;width:22px;height:22px;border:1px solid var(--line);
+  background:var(--bulk);color:var(--dim);font-size:11px;display:flex;
+  align-items:center;justify-content:center}
+.bqX:active{border-color:#ff5f6d;color:#ff5f6d}
+
+/* FAZ 12: sol çubuk ayracı + genel ekran sekmeleri + küçültme rozeti */
+.toolSep{height:1px;margin:4px 6px;background:var(--line);flex:0 0 auto}
+.gpTabs{display:flex;gap:4px;padding:8px 10px 0;flex:0 0 auto;overflow-x:auto}
+.gpTab{flex:0 0 auto;padding:6px 11px;font-size:11px;letter-spacing:.5px;
+  border:1px solid var(--line);background:var(--void);color:var(--dim);white-space:nowrap}
+.gpTab.on{border-color:var(--phos);color:var(--phos);background:rgba(111,242,200,.07)}
+.gpTab:active{border-color:var(--phos)}
+.minBadge{animation:minPulse 1.6s ease-in-out infinite}
+@keyframes minPulse{0%,100%{opacity:1}50%{opacity:.6}}
+/* Küçültme tuşu: kapatma değil, indirme hissi versin */
+.mClose{font-size:15px;line-height:1;padding-bottom:4px}
+
+/* FAZ 11: üst bar çalkantı/kriz rozeti */
+.upBadge{padding-left:6px !important;animation:upPulse 2.4s ease-in-out infinite}
+.upBadge b{font-variant-numeric:tabular-nums}
+@keyframes upPulse{0%,100%{opacity:1}50%{opacity:.72}}
+.tsep{width:1px;height:16px;background:var(--line);flex:0 0 auto;margin:0 2px}
+
+#sidebar{position:absolute;top:var(--top);right:0;bottom:0;width:var(--sb);z-index:18;
+  background:linear-gradient(270deg,rgba(11,16,28,.985),rgba(11,16,28,.93));
+  border-left:1px solid var(--line);display:flex;flex-direction:column;
+  transform:translateX(0);transition:transform .18s ease}
+#sidebar.off{transform:translateX(100%)}
+#tabs{display:flex;border-bottom:1px solid var(--line);flex:0 0 auto}
+.tab{flex:1;padding:8px 2px;font-family:var(--mono);font-size:9px;letter-spacing:.08em;
+  color:var(--dim);border-right:1px solid var(--line);text-align:center}
+.tab:last-child{border-right:none}
+.tab.on{color:var(--phos);background:rgba(111,242,200,.09);box-shadow:inset 0 -2px 0 var(--phos)}
+#panel{flex:1;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;
+  padding:9px 9px 26px}
+#panel::-webkit-scrollbar{width:3px}
+#panel::-webkit-scrollbar-thumb{background:var(--line)}
+
+#sbToggle{position:absolute;top:calc(var(--top) + 8px);right:var(--sb);z-index:19;
+  width:22px;height:44px;background:var(--bulk);border:1px solid var(--line);border-right:none;
+  color:var(--phos);font-size:13px;display:flex;align-items:center;justify-content:center;
+  transition:right .18s ease}
+#sbToggle.off{right:0}
+
+/* FAZ 82: zaman çubuğu akordiyonun ALTINDA kalmalı (99999 vs 20) */
+#timepod{position:absolute;left:6px;bottom:6px;z-index:20;display:flex;align-items:center;gap:5px;
+  background:rgba(11,16,28,.94);border:1px solid var(--line);padding:5px 7px}
+#stardate{font-family:var(--mono);font-size:12px;color:var(--phos);letter-spacing:.06em;min-width:74px}
+.sp{width:26px;height:26px;border:1px solid var(--line);background:var(--hull);
+  font-family:var(--mono);font-size:10px;color:var(--dim);display:flex;align-items:center;justify-content:center}
+.sp.on{border-color:var(--ember);color:var(--ember);background:#241a10}
+
+/* ═══ FAZ 53: SOL PANEL TAŞMA ONARIMI ═══
+   Yeni butonlar eklendikçe alt kısım ekranın altına taşıyordu.
+   Panel artık her ekranda görünür alan yüksekliğine sığar,
+   sığmazsa dikey kaydırılır ve scrollbar gizlenir. */
+#tools{position:absolute;left:6px;top:calc(var(--top) + 6px);z-index:27;
+  display:flex;flex-direction:column;gap:4px;
+  max-height:calc(100dvh - var(--top) - 14px);
+  overflow-y:auto;overflow-x:hidden;
+  scrollbar-width:none;-ms-overflow-style:none;
+  overscroll-behavior:contain;-webkit-overflow-scrolling:touch;
+  padding-bottom:4px}
+#tools::-webkit-scrollbar{display:none}
+#tools .tool{flex:0 0 auto}
+.tool{width:32px;height:32px;background:rgba(11,16,28,.9);border:1px solid var(--line);
+  color:var(--dim);font-size:14px;display:flex;align-items:center;justify-content:center}
+.tool.on{color:var(--phos);border-color:var(--phos)}
+
+#inbox{position:absolute;left:50%;transform:translateX(-50%);top:calc(var(--top) + 6px);z-index:26;
+  display:flex;flex-direction:column;gap:4px;width:min(420px,72%)}
+.nCard{display:flex;align-items:center;gap:9px;width:100%;text-align:left;
+  background:rgba(14,21,36,.97);border:1px solid var(--phos);padding:7px 10px;
+  box-shadow:0 3px 16px rgba(0,0,0,.55);animation:noteIn .22s cubic-bezier(.2,.8,.3,1)}
+.nCard.war{border-color:var(--bad)}
+.nCard.sci{border-color:var(--plasma)}
+.nCard:active{background:var(--bulk)}
+.nIco{font-size:16px;flex:0 0 auto}
+.nTxt{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.nTxt b{font-family:var(--mono);font-size:11px;letter-spacing:.04em;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nTxt i{font-style:normal;font-size:9.5px;color:var(--dim);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nGo{color:var(--phos);font-size:15px;flex:0 0 auto}
+.nCard.war .nGo{color:var(--bad)}
+.nCard.sci .nGo{color:var(--plasma)}
+@keyframes noteIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+
+/* FAZ 14 DÜZELTMESİ: bildirim katmanı diploPane(640) ve modal(760)
+   ALTINDA kalıyordu (z-index 20). Fısıltı gibi kaplama içinden
+   tetiklenen işlemlerin sonucu yazılıyor ama görünmüyordu.
+   Artık en üstte; pointer-events:none olduğu için tıklamayı engellemez. */
+#alerts{position:fixed;left:44px;top:calc(var(--top) + 6px);z-index:900;pointer-events:none;
+  display:flex;flex-direction:column;gap:2px;pointer-events:none;max-width:38%}
+/* ═══ FAZ 70: BİLDİRİMLER KÜÇÜLDÜ ═══
+   10px/5-8px padding ekranda çok yer kaplıyordu. Font 8.5px'e,
+   iç boşluk 3px/6px'e indi; satır aralığı sıkıldı ve uzun
+   metinler iki satırla sınırlandı. */
+.alert{background:rgba(11,16,28,.93);border-left:2px solid var(--phos);
+  padding:3px 6px;border-radius:3px;
+  font-family:var(--mono);font-size:8.5px;color:var(--bone);letter-spacing:.01em;
+  animation:slideIn .18s ease;line-height:1.28;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
+  overflow:hidden;text-overflow:ellipsis}
+.alert.war{border-left-color:var(--bad);color:#ffc6ca}
+.alert.win{border-left-color:var(--good);color:#c3f5d3}
+.alert.sci{border-left-color:var(--plasma);color:#d3ccff}
+@keyframes slideIn{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:none}}
+
+#seltag{position:absolute;bottom:6px;left:50%;transform:translateX(-50%);z-index:20;
+  background:rgba(11,16,28,.95);border:1px solid var(--phos);padding:6px 12px;
+  font-family:var(--mono);font-size:11px;color:var(--phos);letter-spacing:.06em;
+  display:flex;gap:10px;align-items:center;white-space:nowrap}
+#seltag button{color:var(--ember);font-family:var(--mono);font-size:10px;
+  border:1px solid var(--line);padding:3px 7px}
+#seltag button.on{border-color:var(--ember);background:#241a10}
+
+/* ---------- PANEL İÇERİĞİ ---------- */
+.ph{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--ember);
+  margin:12px 0 7px;display:flex;align-items:center;gap:7px}
+.ph:first-child{margin-top:2px}
+.ph:after{content:"";flex:1;height:1px;background:var(--line)}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px;
+  font-family:var(--mono);font-size:11px;padding:4px 0}
+.row span{color:var(--dim)}
+.row b{font-weight:700}
+.box{background:var(--hull);border:1px solid var(--line);padding:8px;margin-bottom:6px}
+.box.act:active{border-color:var(--phos)}
+.bt{font-family:var(--mono);font-size:11.5px;font-weight:700;display:flex;
+  justify-content:space-between;align-items:center;gap:6px}
+.bd{font-size:10px;color:var(--dim);line-height:1.45;margin-top:4px}
+.bar{height:4px;background:var(--void);border:1px solid var(--line);margin-top:6px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--phos)}
+.bar.pl i{background:var(--plasma)}
+.bar.em i{background:var(--ember)}
+.bar.hp i{background:var(--bad)}
+.mini{font-family:var(--mono);font-size:9px;color:var(--dim);letter-spacing:.06em;margin-top:4px}
+.act2{display:flex;gap:5px;margin-top:7px;flex-wrap:wrap}
+.abtn{flex:1;min-width:66px;background:var(--bulk);border:1px solid var(--line);
+  padding:7px 4px;font-family:var(--mono);font-size:10px;letter-spacing:.04em;text-align:center;color:var(--bone)}
+.abtn:active{border-color:var(--phos);color:var(--phos)}
+.abtn.dis{opacity:.34}
+/* FAZ 86C.4H-R2: ana mod / bağımsız katman ayrımı başlığı */
+.modeHdr{font-size:8px;letter-spacing:.6px;color:#5d6f88;
+  flex:0 0 auto;
+  padding:4px 2px 2px;text-align:center;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis}
+/* ═══ FAZ 86A: İSTİHBARAT KOMUTA MERKEZİ (mobil) ═══
+   Geniş dokunmatik hedefler; yatay taşma yok. */
+.ivNav{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin:0 0 6px}
+.ivNav .ivTab{display:flex;flex-direction:column;align-items:center;gap:2px;
+  min-height:46px;padding:6px 2px;border:1px solid #24405e;border-radius:8px;
+  background:#0d1724;color:#7d90ad;font-size:15px;line-height:1;
+  max-width:100%;overflow:hidden}
+.ivNav .ivTab span{font-size:9px;letter-spacing:.4px;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.ivNav .ivTab.on{border-color:var(--phos);color:var(--phos);background:#10202f}
+.ivRow{display:block;width:100%;text-align:left;min-height:46px;
+  padding:7px 9px;margin:0 0 4px;border:1px solid #1d3350;border-radius:8px;
+  background:#0c1521;color:#c8d6e5;overflow:hidden}
+.ivRow.on{border-color:var(--phos);background:#10202f}
+.ivTop{display:flex;justify-content:space-between;align-items:center;gap:6px}
+.ivTop span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ivSub{font-size:10px;color:#7d90ad;margin-top:2px;
+  overflow:hidden;text-overflow:ellipsis}
+.ivGroup{display:flex;justify-content:space-between;align-items:center;
+  width:100%;min-height:44px;padding:8px 10px;margin:4px 0 0;
+  border:1px solid #24405e;border-radius:8px;background:#0d1724;
+  color:#c8d6e5;font-size:12px;letter-spacing:.4px}
+.ivGroup.on{border-color:var(--phos);color:var(--phos)}
+.ivBody{padding:2px 0 4px}
+.abtn.pri{border-color:var(--phos);color:var(--phos)}
+.abtn.dgr{border-color:var(--bad);color:var(--bad)}
+.pchip{display:flex;gap:8px;align-items:center;padding:7px;background:var(--hull);
+  border:1px solid var(--line);margin-bottom:5px}
+.pchip canvas{image-rendering:pixelated;flex:0 0 auto}
+.pchip .pi{flex:1;min-width:0}
+.pchip .pn{font-family:var(--mono);font-size:11px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pchip .pm{font-family:var(--mono);font-size:9px;color:var(--dim);margin-top:2px}
+.flag{width:8px;height:8px;flex:0 0 8px;border-radius:1px;display:inline-block}
+.tag{font-family:var(--mono);font-size:8.5px;padding:1px 4px;border:1px solid var(--line);
+  color:var(--dim);letter-spacing:.04em}
+.tag.p{border-color:var(--phos);color:var(--phos)}
+.tag.e{border-color:var(--ember);color:var(--ember)}
+.tag.b{border-color:var(--bad);color:var(--bad)}
+.empty{font-family:var(--mono);font-size:10px;color:var(--dim);text-align:center;
+  padding:20px 10px;line-height:1.6;border:1px dashed var(--line)}
+
+/* ---------- MODAL ---------- */
+#modal{position:fixed;inset:0;z-index:760;background:rgba(3,5,10,.86);
+  display:flex;align-items:center;justify-content:center;padding:14px}
+.mbox{background:linear-gradient(180deg,var(--bulk),var(--hull));border:1px solid var(--phos);
+  max-width:520px;width:100%;max-height:88%;overflow-y:auto;overscroll-behavior:contain;
+  box-shadow:0 0 40px rgba(0,0,0,.8)}
+.mbox.war{border-color:var(--bad)}
+.mbox.sci{border-color:var(--plasma)}
+.mClose{position:absolute;top:8px;right:8px;z-index:3;width:28px;height:28px;
+  border:1px solid var(--line);background:var(--void);color:var(--dim);
+  font-size:13px;display:flex;align-items:center;justify-content:center}
+.mClose:active{border-color:var(--phos);color:var(--phos)}
+.mbox{position:relative}
+.mhd{padding:11px 40px 11px 13px;border-bottom:1px solid var(--line);
+  font-family:var(--mono);font-size:12px;letter-spacing:.16em;color:var(--phos);
+  display:flex;justify-content:space-between;align-items:center}
+.mbox.war .mhd{color:var(--bad)}
+.mbox.sci .mhd{color:var(--plasma)}
+.mbd{padding:13px;font-size:12px;line-height:1.62;color:#c4d3e8}
+.mbd .lead{color:var(--bone);font-style:italic;border-left:2px solid var(--line);padding-left:10px;margin-bottom:11px}
+.mft{padding:0 13px 13px;display:flex;flex-direction:column;gap:6px}
+.ch{background:var(--hull);border:1px solid var(--line);padding:10px;text-align:left}
+.ch:active{border-color:var(--phos)}
+.ch .cht{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--bone)}
+.ch .chd{font-size:10px;color:var(--dim);margin-top:4px;line-height:1.45}
+
+/* ---------- SAVAŞ RAPORU ---------- */
+.warlog{font-family:var(--mono);font-size:10px;line-height:1.7;background:var(--void);
+  border:1px solid var(--line);padding:9px;max-height:190px;overflow-y:auto}
+.warlog .a{color:var(--phos)}.warlog .b{color:var(--bad)}.warlog .n{color:var(--dim)}
+
+/* ---------- YÖNLENDİRME ---------- */
+#rotate{position:fixed;inset:0;z-index:1000;background:var(--void);display:none;
+  flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:30px;text-align:center}
+#rotate.show{display:flex}
+#rotate .ico{font-size:46px;animation:tilt 1.8s ease-in-out infinite}
+@keyframes tilt{0%,100%{transform:rotate(0)}50%{transform:rotate(-88deg)}}
+#rotate p{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--phos)}
+#rotate small{font-size:11px;color:var(--dim);line-height:1.6}
+
+/* ═══════════════════════════════════════════════════════════════════
+   FAZ 17 — EVRENSEL ARAYÜZ ESNEKLİĞİ
+   Tek bir cihaza değil, orana göre uyum. Üç kademe:
+     DAR   (<760px)  telefon — paneller ekranı kaplar, dokunma büyür
+     ORTA  (761-1200) tablet — dengeli
+     GENİŞ (>1200px) PC — panel genişler ama harita ferah kalır,
+                          kaplamalar ortada kutu hâlinde açılır
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ---------- DAR: telefon ---------- */
+@media (max-width:760px){
+  :root{--sb:270px}
+  /* Dokunmatik hedefler büyür (Apple/Google önerisi ~44px) */
+  .tab{padding:11px 2px;font-size:9.5px}
+  .abtn{min-height:38px}
+  .ch{min-height:44px}
+  .bqX,.demX{width:26px;height:26px}
+  /* Genel ekran kaplamaları ekranı efektif kaplasın */
+  #diploPane .dpBox{width:100%;max-width:none;height:100%;border-radius:0;border:0}
+  #modal .mbox{width:100%;max-width:none;max-height:100%;border-radius:0}
+}
+/* Çok dar telefon: yan panel ekranın çoğunu alsın ama haritayı boğmasın */
+@media (max-width:480px){
+  /* Çok dar ekranda panel haritayı tamamen yutmasın — kapatma
+     tuşuyla gizlenebiliyor ama açıkken de harita görünsün. */
+  :root{--sb:min(72vw,282px)}
+  .dTab{font-size:8.5px;padding:5px 1px}
+  .gpTab{font-size:9px;padding:5px 7px}
+}
+
+/* ---------- GENİŞ: PC ve tablet ---------- */
+@media (min-width:1200px){
+  /* Panel biraz genişler ama harita payı korunur */
+  :root{--sb:clamp(310px, 22vw, 420px); --top:38px}
+  .tab{font-size:10px;padding:9px 2px}
+  .res{font-size:12px}
+  /* Kaplamalar tam ekran yerine ORTADA ferah bir kutu olsun */
+  #diploPane{padding:4vh 0;align-items:center;justify-content:center}
+  #diploPane .dpBox{width:min(880px,72vw);max-height:92vh;height:auto;
+    border:1px solid var(--line);box-shadow:0 24px 80px rgba(0,0,0,.6)}
+  #modal .mbox{width:min(720px,62vw);max-height:88vh}
+  /* Bildirimler haritanın üstünü kapatmasın */
+  #alerts{max-width:min(360px,24vw)}
+  /* Diplomasi kartları iki sütuna yayılsın — dikey kaydırma azalsın */
+  .dpBody{column-gap:10px}
+}
+@media (min-width:1600px){
+  :root{--sb:clamp(340px, 20vw, 460px)}
+  #diploPane .dpBox{width:min(1040px,64vw)}
+  .dpCard{padding:8px 10px}
+  /* FAZ 17: çok geniş ekranda kaplama ortada dursun, kenara yapışmasın */
+  #modal .mbox{width:min(760px,52vw)}
+  /* Harita alanı korunur: kenar çubukları sabit tavana takılı */
+  #tools{left:12px}
+}
+
+/* ---------- ŞIK KAYDIRMA ÇUBUĞU ---------- */
+/* Varsayılan tarayıcı barı temayı bozuyordu; ince ve fosforlu. */
+*{scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+::-webkit-scrollbar{width:7px;height:7px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--line);border-radius:4px}
+::-webkit-scrollbar-thumb:hover{background:var(--phos)}
+::-webkit-scrollbar-corner{background:transparent}
+
+/* ---------- DOKUNMATİK vs FARE ---------- */
+/* Fare varsa hover ipuçları; yoksa hover kuralları hiç uygulanmaz
+   (mobilde "yapışkan hover" sorununu tamamen ortadan kaldırır). */
+@media (hover:hover) and (pointer:fine){
+  .tool:hover,.abtn:hover:not(.dis),.ch:hover,.opt:hover{border-color:var(--phos)}
+  .tool[title]:hover::after{
+    content:attr(title);position:absolute;left:calc(100% + 8px);top:50%;
+    transform:translateY(-50%);background:var(--hull);border:1px solid var(--line);
+    color:var(--bone);font-size:10px;padding:4px 8px;white-space:nowrap;
+    z-index:950;pointer-events:none;animation:fadeIn .12s ease}
+  .bqX:hover,.demX:hover{border-color:var(--bad);color:var(--bad)}
+}
+/* Dokunmatikte basılı tutma ipucu — .tipOn sınıfı JS ile eklenir */
+.tool{position:relative}
+.planetFoldHeader{display:flex;align-items:center;gap:6px;width:100%;min-height:36px;
+  border:0;background:transparent;color:var(--text,#b8c8dc);text-align:left;cursor:pointer;
+  font:inherit;padding:4px 0}
+.planetFoldName{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.planetFoldStats{font-size:10px;color:#9eacc1;flex-shrink:0}
+.planetFoldHeader[aria-expanded="true"]{margin-bottom:6px;border-bottom:1px solid var(--line)}
+.shipCancelBtn{min-width:32px;min-height:32px;flex-shrink:0}
+.tool.tipOn::after{
+  content:attr(title);position:absolute;left:calc(100% + 8px);top:50%;
+  transform:translateY(-50%);background:var(--hull);border:1px solid var(--phos);
+  color:var(--bone);font-size:10px;padding:4px 8px;white-space:nowrap;
+  z-index:950;pointer-events:none}
+/* Dokunmatikte metin seçimi ve çift dokunma yakınlaştırması kapalı */
+@media (hover:none){
+  body{-webkit-user-select:none;user-select:none;touch-action:manipulation}
+  /* ═══ FAZ 83: HARİTA touch-action İSTİSNASI ═══
+     Mobil medya sorgusundaki body{touch-action:manipulation}
+     kuralı canvas'a da miras kalıyordu; bazı Android WebView'lar
+     bunu görünce pointer akışını devralıp tek parmak kaydırmayı
+     iptal ediyordu. Harita canvas'ı açıkça none'a sabitlendi —
+     yüksek özgüllük ve !important ile miras kesildi. */
+  #map{touch-action:none !important;overscroll-behavior:none;
+    -webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+  /* FAZ 17: Dokunmatikte hover yok — ipucu BASILI TUTMA ile gelir.
+     JS .hint sınıfını ekliyor, CSS onu balon olarak gösteriyor. */
+  .tool.hint::after,[title].hint::after{
+    content:attr(title);position:absolute;left:calc(100% + 8px);top:50%;
+    transform:translateY(-50%);background:var(--hull);border:1px solid var(--phos);
+    color:var(--bone);font-size:10px;font-family:var(--sans);white-space:nowrap;
+    padding:5px 8px;z-index:950;pointer-events:none;
+    animation:hintIn .12s ease}
+  /* Sağ kenara yakın öğelerde balon sola açılır */
+  .hintL::after{left:auto !important;right:calc(100% + 8px) !important}
+  @keyframes hintIn{from{opacity:0;transform:translateY(-50%) scale(.94)}
+                    to{opacity:1;transform:translateY(-50%) scale(1)}}
+}
+@media (max-height:400px){:root{--top:30px}.res{font-size:10px}
+  /* FAZ 12: sol çubuk 9 butona çıktı (7 → 9). 32px'lik butonlarla
+     369px ediyor ve 360px'lik yatay telefon ekranında taşıyordu.
+     Kısa ekranda butonlar küçülür, çubuk gerekirse kaydırılabilir. */
+  .tool{width:27px;height:27px;font-size:12px}
+  #tools{gap:3px;max-height:calc(100vh - var(--top) - 10px);
+    overflow-y:auto;scrollbar-width:none}
+  #tools::-webkit-scrollbar{display:none}
+  .toolSep{margin:2px 5px}
+  .gpTab{padding:5px 9px;font-size:10px}}
+@media (max-height:340px){.tool{width:24px;height:24px;font-size:11px}#tools{gap:2px}}
+/* 86E: yalnız diplomasi merkezi; başlık ve gezinme sabit, içerik kayar. */
+#diploPane .dcBox{width:min(920px,100%);height:100%;max-height:100dvh;min-height:0;min-width:0}
+.dcBox .dpHd{gap:8px;padding:8px 12px;min-width:0}
+.dcBox .dpHd>span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;letter-spacing:.06em}
+.dcBox .riX{flex:0 0 44px;width:44px;height:44px}
+.dcNav{flex:0 0 auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-bottom:1px solid var(--line)}
+.dcNav button{min-height:44px;padding:8px 3px;font:11px var(--mono);color:var(--dim);border-bottom:2px solid transparent}
+.dcNav button.on{color:var(--phos);border-bottom-color:var(--phos);background:rgba(111,242,200,.06)}
+.dcNav button:disabled{opacity:.45}
+.dcBody{min-height:0;min-width:0;flex:1 1 auto;overflow:auto;padding:10px 12px max(16px,env(safe-area-inset-bottom));overflow-wrap:anywhere}
+.dcBody .act2,.dcFilters{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.dcBody .abtn{min-height:44px;white-space:normal;overflow-wrap:anywhere}
+.dcBody .dealItem button{min-width:44px;min-height:44px}
+.dcBody button:disabled{opacity:.45;cursor:default}
+.dcBody .dealCol{min-width:0}
+.dcOverview{display:flex;flex-wrap:wrap;gap:8px 18px;margin-bottom:10px;font:12px var(--mono);color:var(--phos)}
+.dcFilters{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:10px}
+.dcState{border:1px solid var(--line);background:var(--hull);min-width:0}
+.dcState.war{border-left:3px solid var(--bad)}
+.dcSelect{display:flex;justify-content:space-between;align-items:center;gap:12px;width:100%;min-height:52px;padding:10px;text-align:left;color:var(--bone)}
+.dcSelect b{min-width:0;overflow-wrap:anywhere;font-size:13px}
+.dcSelect>span{flex-shrink:0;font:11px var(--mono);color:var(--phos)}
+.dcState>.mini{padding:0 10px 8px}
+.dcIdentity{display:flex;gap:12px;align-items:center;margin-bottom:8px;min-width:0}
+.dcIdentity>div{min-width:0}
+.dcIdentity canvas{flex:0 0 60px;image-rendering:pixelated}
+.dcTreaties{display:flex;flex-wrap:wrap;gap:5px;margin:8px 0}
+.dcTreaties>span{padding:5px 7px;border:1px solid var(--line);font-size:11px;color:var(--phos)}
+.dcDetails{border:1px solid var(--line);margin:10px 0;padding:0 10px 8px}
+.dcDetails>summary{cursor:pointer;min-height:44px;padding:12px 0;color:var(--phos);font:12px var(--mono)}
+.dcDetails[open]>summary{border-bottom:1px solid var(--line);margin-bottom:8px}
+@media(max-width:420px){.dcNav button{font-size:10px}.dcSelect{align-items:flex-start;flex-direction:column;gap:5px}.dcBody{padding-left:8px;padding-right:8px}}
+@media(min-width:1200px){#diploPane .dcBox{max-height:92dvh}}
+
+/* 95B: reuse the bounded diplomacy panel and touch targets for federation politics. */
+.fedBox .mini{font-size:11px;letter-spacing:.02em;line-height:1.4}
+.fedBox .dcBody{min-height:0;overflow-x:hidden}
+.fedBox .abtn{max-width:100%}
+
+/* FAZ 93D — scoped science tree, native scroll and 44px touch targets. */
+#diploPane .scienceBox{width:min(980px,100%);height:100%;max-height:100dvh;min-width:0;min-height:0}
+.scienceRoot{display:flex;flex:1;flex-direction:column;min-height:0;overflow:auto;font-size:12px}
+.scienceRoot button{font:inherit;color:var(--text,#d7e3f4);background:#101e30;border:1px solid #304763;border-radius:5px;min-height:44px;cursor:pointer}
+.scienceRoot button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.scienceRoot button:disabled{opacity:.35;cursor:default}
+.scienceRoot button.on{background:#253660;border-color:#a49aff}
+.scTabs{display:flex;flex-shrink:0;gap:4px;padding:4px 8px}
+.scTabs button{flex:1;min-width:0;padding:4px}
+.scSummary{flex-shrink:0;padding:5px 12px;color:#acbdd4;font-size:11px}
+.scSummary summary{cursor:pointer;padding:4px 0}
+.scTools{display:flex;align-items:center;gap:4px;padding:2px 8px;flex-shrink:0}
+.scTools span{flex:1;color:#a8bad2;font-size:11px}
+.scTools button{min-width:44px;padding:0 7px}
+.scViewport{flex:1;min-height:140px;overflow:auto;overscroll-behavior:contain;touch-action:pan-x pan-y;background:#080f1c;border-block:1px solid #23364c}
+.scExtent{position:relative}.scScene{position:absolute;left:0;top:0;transform-origin:0 0}
+.scLinks{position:absolute;inset:0;pointer-events:none}.scLinks path{fill:none;stroke:#4a607d;stroke-width:2}.scLinks path.done{stroke:#59a984}
+.scienceRoot .scNode{position:absolute;width:188px;height:112px;text-align:left;padding:8px;display:flex;flex-direction:column;gap:3px;overflow:hidden;border-left:4px solid #657895;background:#121f30}
+.scNode small{font-size:10px;color:#9eb5d0}.scNode b{font-size:12px;line-height:1.3}.scNode span{font-size:10px}.scNode em{font-size:10px;font-style:normal;color:#9badc7;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.scienceRoot .scNode.done{border-color:#59a984;background:#122b29}.scienceRoot .scNode.active{border-color:#af9eff;background:#292645}.scienceRoot .scNode.planned{border-color:#63aeed}.scienceRoot .scNode.locked{border-style:dashed}.scienceRoot .scNode.focused{outline:2px solid #e4eaff;outline-offset:2px}
+.scDetail{flex-shrink:0;max-height:154px;overflow:auto;padding:6px 12px;background:#101b2a;line-height:1.5}.scDetail summary{cursor:pointer;min-height:28px;font-weight:600}.scDetail button{padding:3px 8px;margin:3px 3px 0 0}.scRoute{padding-left:24px}
+.scQueue{flex-shrink:0;border-top:1px solid #30405b}.scienceRoot .scQueueToggle{width:100%;border:0;border-radius:0;text-align:left;padding:4px 12px;min-height:44px}
+.scQueueTrack{display:flex;gap:6px;overflow-x:auto;overscroll-behavior:contain;padding:0 8px 6px;scroll-snap-type:x proximity}.scGoal{flex:0 0 210px;border:1px solid #385170;border-radius:6px;scroll-snap-align:start;overflow:hidden}.scienceRoot .scGoalFocus{display:block;width:100%;text-align:left;padding:5px 8px;border:0;border-radius:0}.scGoal small{display:block;font-size:10px;color:#aebfda;padding-top:2px}.scReorder{display:flex}.scReorder button{flex:1;border-radius:0;min-width:44px}.scQueueEmpty{margin:5px;padding:4px;color:#9fb1c9}
+.scHistory{flex:1;min-height:140px;overflow:auto;padding:6px 10px}.scFilters{display:flex;gap:4px;flex-wrap:wrap}.scFilters button{padding:4px 9px}.scHistoryItem{padding:12px 4px;border-bottom:1px solid #2a3951}.scHistoryItem small{display:block;color:#9fafc5;margin-top:5px}.scHistoryItem p{margin:7px 0;line-height:1.6}
+@media(min-width:1200px){#diploPane .scienceBox{height:92dvh;max-height:92dvh}}
+@media(max-height:500px){.scDetail{max-height:90px}.scSummary{padding-block:0}.scViewport{min-height:100px}.scQueueTrack{max-height:96px}.scTabs{padding-block:2px}}
+
+/* 94D: fixed header/footer, horizontal tree and bounded disclosures. */
+#diploPane .scienceBox{height:100%;max-height:100%;overflow:hidden;position:relative}
+.scienceBox .dpHd{padding:0 8px;height:36px;min-height:36px;font-size:12px}
+.scienceBox .dpHd .riX{width:44px;height:36px}
+.scienceRoot{overflow:hidden;position:relative}
+.scHeader{display:grid;grid-template-columns:minmax(0,1fr) auto;flex-shrink:0;gap:0 6px;align-items:center;padding:0 6px}
+.scTabs{padding:0;gap:2px}.scTabs button{padding:2px 5px}
+.scHeader>.scFilters{flex-wrap:nowrap;gap:2px}.scHeader>.scFilters button{padding:2px 7px}
+.scModeHelp{display:none}
+.scSummary{grid-column:1/-1;padding:0 4px;font-size:11px;position:relative;z-index:3}
+.scSummary summary{padding:2px 0;min-height:22px}
+.scSummary[open]{position:absolute;top:44px;left:6px;right:6px;background:#101e30;padding:4px 10px;border:1px solid #385170;max-height:130px;overflow:auto}
+.scTools{padding:0 6px;height:32px;min-height:32px}
+.scienceRoot .scTools button{min-height:30px;height:30px;min-width:44px}
+.scViewport,.scHistory{min-height:0;min-width:0;flex:1}
+.scienceRoot .scNode{width:180px;height:104px;padding:5px;gap:2px}
+.scNode b{font-size:12px;line-height:1.2}.scNode em{line-height:1.2}
+.scDetail{padding:0 8px;max-height:30px;min-height:30px;border-top:1px solid #304763}
+.scDetail summary{min-height:30px;line-height:30px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}
+.scDetail[open]{position:absolute;z-index:4;bottom:76px;right:6px;width:min(420px,calc(100% - 12px));max-height:55%;min-height:0;padding:4px 10px;border:1px solid #607b9c;box-shadow:0 4px 18px #0009}
+.scDetail[open] summary{white-space:normal;line-height:1.4;padding:5px 0}
+.scQueue{display:flex;min-width:0;height:72px;flex-shrink:0;overflow:hidden;background:#0c1625}
+.scienceRoot .scQueueToggle{width:72px;flex:0 0 72px;padding:3px;font-size:11px;text-align:center;white-space:normal}
+.scQueue:has(.scQueueToggle[aria-expanded="false"]){height:32px}
+.scQueueTrack{padding:3px;gap:4px;min-width:0;flex:1;max-height:none;touch-action:pan-x}
+.scGoal{flex:0 0 182px;position:relative;display:flex;align-items:stretch}
+.scienceRoot .scGoalFocus{width:100%;padding:3px 5px;font-size:11px;min-width:0}
+.scGoalFocus b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.scGoal small{font-size:10px;line-height:1.15}
+.scReorder{display:none}.scGoal:focus-within .scReorder{display:flex;position:absolute;inset:0;background:#15263e}
+.scGoal:focus-within .scGoalFocus{visibility:hidden}
+.scReorder button{min-width:44px}
+.scQueueEmpty{align-self:center;font-size:11px;margin:0;padding:0 6px}
+#sidebar .bd,#sidebar .mini,.dcTreaties span{overflow-wrap:anywhere}
+.dcTreaties{gap:3px}.dcTreaties span{padding:3px 5px}
+@media(max-width:620px){.scHeader{grid-template-columns:1fr}.scTabs button{min-height:36px}.scHeader>.scFilters button{flex:1;min-height:36px}.scSummary[open]{top:72px}}
+@media(max-height:380px) and (min-width:621px){.scienceBox .dpHd{height:30px;min-height:30px}.scDetail{max-height:26px;min-height:26px}.scDetail summary{line-height:26px;min-height:26px}.scQueue{height:64px}}
+/* Controls share the summary row instead of consuming a fourth row. */
+.scTools{position:absolute;right:6px;top:44px;z-index:3;height:32px}.scTools span{display:none}
+.scSummary summary{min-height:32px;line-height:28px;padding:0;max-width:calc(100% - 145px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.scSummary[open] summary{max-width:100%;white-space:normal}
+.scHeader{grid-template-columns:minmax(0,1fr) auto}
+.scHeader>.scFilters button,.scTabs button{min-height:44px}
+@media(max-width:620px){.scHeader{gap:2px;font-size:11px}.scTabs button{padding:2px;min-height:44px}.scHeader>.scFilters button{padding:2px 4px;min-height:44px}.scSummary[open]{top:44px}}
+/* END FAZ 93D SCIENCE */
+/* FAZ 94D.1 — compact war notices */
+#inbox{max-height:min(144px,30vh);overflow-y:auto;overscroll-behavior:contain}
+.nCard{min-height:44px}
+.warBrief{overflow-wrap:anywhere}
+/* END FAZ 94D.1 NOTICES */
+/* FAZ 95C.1 — bounded mobile controls */
+#topbar{overflow:hidden;touch-action:pan-x}
+#resourceStrip{display:flex;align-items:center;flex:1 1 auto;min-width:0;height:100%;overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;overscroll-behavior-x:contain;touch-action:pan-x;-webkit-overflow-scrolling:touch}
+#resourceStrip .res{min-height:var(--top)}
+.topStatusBtn{flex:0 0 auto;min-width:64px;align-self:stretch;border-left:1px solid var(--line);padding:0 10px;font-family:var(--mono);font-weight:700;background:var(--bulk);touch-action:manipulation}
+.topStatusBtn.hot{color:var(--ember);border-color:var(--ember)}
+/* 96H.0: one card per building; its independent 44px demolition target
+   occupies a reserved footer corner rather than another grid row. */
+.buildingGrid.act2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(92px,100%),1fr));gap:4px;margin-top:5px}
+.bWrap{display:block;min-width:0;position:relative}
+.bWrap>.abtn{display:flex;flex-direction:column;align-items:stretch;width:100%;height:100%;min-width:0;min-height:84px;white-space:normal;overflow-wrap:anywhere;padding:6px;text-align:left;letter-spacing:0}
+.buildingName{display:block;line-height:1.2;font-size:11px;color:var(--bone)}
+.buildingCount{display:block;margin-top:auto;padding-top:4px;font:700 11px/1.25 var(--mono);white-space:normal;overflow-wrap:normal}
+.buildingCost{display:block;font:10px/1.25 var(--mono);white-space:normal;overflow-wrap:normal}
+.has-dem .buildingCount,.has-dem .buildingCost{padding-right:40px}
+.bWrap>.demX{position:absolute;right:1px;bottom:1px;top:auto;width:44px;height:44px;min-height:44px;padding:0;font-size:16px;margin:0;z-index:1;border:0;border-left:1px solid var(--line);background:transparent}
+.bWrap>.demX:focus-visible{outline:2px solid var(--bad);outline-offset:-3px}
+.scHeader>.scMonthly,.scHeader>.scIncomeHelp{grid-column:1/-1}
+.scIncomeHelp{font-size:10px;line-height:1.4;color:var(--dim)}
+.scSummary[open]{top:76px}
+.scMonthly{font-size:14px;line-height:1.5;font-weight:700;color:var(--phos);overflow-wrap:anywhere}
+.amountControls{display:flex;align-items:center;gap:6px;margin:8px 0}
+.amountControls input{width:100%;min-width:0;min-height:44px;font-size:16px;background:var(--void);color:var(--bone);border:1px solid var(--line);padding:6px}
+.amountControls button{flex:0 0 52px;min-height:44px}
+.jointOps .abtn,.shipmentInfo .abtn{min-height:44px;white-space:normal;overflow-wrap:anywhere}
+@media(max-width:900px){#resourceStrip .res{padding:0 6px}.topStatusBtn{min-width:60px;padding:0 7px}}
+@media(max-height:500px){.scIncomeHelp{display:none}.scMonthly{font-size:12px;line-height:1.3}}
+/* END FAZ 95C.1 MOBILE */
+/* FAZ 95D — compact identity controls */
+.emblemPreview{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.emblemPreview canvas{flex:0 0 80px;background:#101827;border-radius:8px}.emblemFields{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin:10px 0}.emblemFields label{display:flex;flex-direction:column;gap:4px;font-size:12px}.emblemFields select,.emblemFields input{min-height:44px;max-width:100%;background:#152035;color:#fff;border:1px solid #51617e;border-radius:6px}.identityBadge{vertical-align:middle;flex-shrink:0}#warFinalConfirm:disabled{opacity:.5}
+/* END FAZ 95D IDENTITY */
+/* FAZ 95E ARCHIVE */
+/* 95E: bounded modal viewport, wrapping text and independent scroll. */
+.archive95e{min-width:0;overflow-wrap:anywhere}.archiveTools{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}.archiveTools>*{min-width:0;flex:1 1 120px;max-width:100%;min-height:36px}.news95e{display:block;overflow-wrap:anywhere}.news95e p{margin:5px 0}.news95e .abtn{white-space:normal;text-align:left;max-width:100%}.unread95e{border-left:3px solid #6ff2c8}
+@media(max-height:420px){.archive95e{max-height:calc(100dvh - 132px);overflow-y:auto}.archive95e .box{margin:5px 0;padding:7px}}
+/* END FAZ 95E ARCHIVE */
+/* FAZ 95E.2 — bounded archive workspace */
+#modal.archiveHost{z-index:1001;justify-content:flex-start;align-items:stretch;padding:0}
+#modal.archiveHost .archiveShell{display:flex;flex-direction:column;width:min(980px,calc(100vw - 56px));max-width:none;height:100%;max-height:100%;min-height:0;overflow:hidden;border-radius:0;border-width:0 1px 0 0}
+.archiveShell .mhd{flex:none;padding:0 10px;font-size:12px;letter-spacing:.08em;min-height:36px;gap:8px}
+.archiveShell .mhd .abtn{margin:0;flex:0 0 36px;width:36px;min-width:36px;min-height:36px}
+.archiveTabs,.archiveControls{flex:none;padding:0 10px}
+.archiveTabs{display:flex;gap:6px;border-bottom:1px solid var(--line)}
+.archiveShell .abtn,.archiveShell .ch{font-size:12px;line-height:1.25;min-height:36px;margin:0;padding:6px 8px}
+.archiveTabs>.abtn{flex:1;min-width:0}
+.archiveControls .archiveTools{margin:4px 0;gap:5px;flex-wrap:nowrap}
+.archiveControls .archiveTools>*{min-height:36px;flex:1 1 0}
+.archiveControls input,.archiveControls select{font:12px var(--mono);color:var(--bone);background:var(--hull);border:1px solid var(--line);padding:4px 7px}
+.archiveShell .archiveFlags>.abtn{font-size:11px;padding:4px}
+.archiveColumns,.archiveRow{display:grid;grid-template-columns:130px 108px minmax(80px,.8fr) minmax(140px,2fr) 90px;gap:6px;align-items:center;min-width:0}
+.archiveColumns{font-size:10px;color:var(--dim);padding:3px 8px}
+.archiveRows{flex:1 1 0;min-height:0;max-height:none!important;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;touch-action:pan-y;padding:0 10px;scrollbar-gutter:stable}
+.archiveRow{padding:2px 7px;border-bottom:1px solid var(--line);min-height:40px;font-size:11px}
+.archiveRow.selected{background:rgba(77,171,205,.14);outline:1px solid var(--phos);outline-offset:-1px}
+.archiveRow>*{min-width:0;overflow:hidden;text-overflow:ellipsis}
+.archiveDate{font:10px var(--mono);white-space:nowrap}
+.archiveType,.archiveState{white-space:nowrap}
+.archiveRow button{color:var(--bone);background:transparent;border:0;font:inherit;min-height:36px;text-align:left;padding:2px 0;cursor:pointer}
+.archiveRow button:focus-visible,.archiveShell .abtn:focus-visible{outline:2px solid var(--phos);outline-offset:-2px}
+.archiveRow .archiveEmpire{color:var(--phos);white-space:nowrap}
+.archiveTitle strong,.archiveTitle span{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.archiveTitle strong{font-size:12px;font-weight:500}
+.archiveTitle span{font-size:10px;color:var(--dim)}
+.archiveState{font-size:10px}
+.archiveEmpty{padding:12px}
+.archiveMore{width:100%}
+.archiveShell .archiveDetail{flex:1 1 0;min-height:0;max-height:none;overflow-y:auto;overscroll-behavior:contain;touch-action:pan-y;padding:10px 14px;font-size:12px}
+.archiveDetail h3{font-size:14px;margin:0 0 8px;color:var(--bone)}
+.archiveShell .mft{flex:none;display:flex;flex-direction:row;flex-wrap:wrap;gap:5px;padding:5px 10px;border-top:1px solid var(--line)}
+.archiveShell .mft>.ch{flex:1 1 110px;text-align:center;padding:7px}
+@media(min-width:481px){.archiveNewsControls{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:8px}.archiveColumns{grid-column:1/-1}}
+@media(max-width:800px){.archiveColumns,.archiveRow{grid-template-columns:116px 80px minmax(64px,.7fr) minmax(100px,1.6fr) 78px;gap:4px}}
+@media(max-width:480px){#modal.archiveHost .archiveShell{width:100%}.archiveColumns{display:none}.archiveRow{grid-template-columns:1fr 1fr 1fr;gap:0 6px;padding:4px 7px;min-height:76px}.archiveDate{grid-area:1/1}.archiveType{grid-area:1/2}.archiveState{grid-area:1/3;text-align:right}.archiveRow .archiveEmpire{grid-area:2/1}.archiveTitle{grid-area:2/2/3/4}.archiveShell .mft>.ch{flex-basis:90px}}
+/* END FAZ 95E.2 ARCHIVE */
+/* 96A: scoped freight workspace, usable above portrait rotation advice. */
+#modal.commerceHost{z-index:2100}
+.commerceHost .mbox{max-height:100dvh;display:flex;flex-direction:column;width:min(680px,100vw)}
+.commerceHost .mhd,.commerceHost .mft{flex:0 0 auto}
+.commerceHost .mbd{min-height:0;overflow-y:auto;overscroll-behavior:contain;max-height:calc(100dvh - 110px)}
+.commerceHost .box{overflow-wrap:anywhere}.commerceHost .row{gap:6px;flex-wrap:wrap}.commerceHost select{max-width:65%}
+/* END 96A FREIGHT UI */
+/* 96B: scoped economy workspace */
+#diploPane:has(.economyBox){z-index:2100;align-items:stretch;justify-content:flex-start;padding:0}
+#diploPane .economyBox{width:min(960px,100%);max-width:100%;height:100dvh;max-height:100dvh;margin:0;display:flex;flex-direction:column;min-height:0;min-width:0;border-radius:0;animation:none;transform:none}
+.economyBox .dpHd{flex:0 0 auto;padding:7px 10px;font-size:13px}.economyBox .gpTabs{flex:0 0 auto;display:flex;flex-wrap:wrap;gap:3px;padding:3px}
+.economyBox .gpTab{padding:4px 9px;min-height:27px;font-size:11px}
+#economyScroll{flex:1;min-height:0;min-width:0;overflow:auto;overscroll-behavior:contain;padding:0 10px 18px}
+.economyBox .p{color:#6ff2a8}.economyBox .n{color:#ff7884}.economyBox h3{font-size:13px;margin:14px 0 7px;color:#e4c774}
+.ecoSticky{position:sticky;top:0;z-index:2;background:#111b2c;padding:6px 0;display:flex;flex-wrap:wrap;align-items:center;gap:5px;border-bottom:1px solid #36445b;font-size:12px}
+.ecoActions{display:flex;flex-wrap:wrap;gap:4px}.ecoChip{min-width:32px;min-height:32px;border:1px solid #33435c;background:#152238;color:#c7d5ed;cursor:pointer}.ecoChip.on{border-color:#f2d452;background:#354630}
+.ecoTable{width:100%;table-layout:fixed;border-collapse:collapse;font-size:12px;font-variant-numeric:tabular-nums;margin:4px 0 8px}.ecoTable th:first-child{width:34%;text-align:left}.ecoTable th,.ecoTable td{padding:2px 2px;border-bottom:1px solid #27364e;text-align:right;overflow-wrap:anywhere}.ecoTable thead{font-size:10px;color:#97abc8}.ecoTable button{font:inherit;font-size:11px;background:transparent;border:0;color:#ccd9ec;min-height:24px;cursor:pointer;text-align:left;width:100%;padding:0}.ecoTable tr.selected{background:#26384a}
+.ecoSummary{display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:12px}.ecoSummary span{display:flex;justify-content:space-between;gap:5px;flex-wrap:wrap;padding:5px;background:#17243a}
+.ecoLine{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;font-size:12px;border-bottom:1px solid #233149;padding:5px 0}.ecoLine span{min-width:0;overflow-wrap:anywhere}.ecoLine b{white-space:nowrap;font-variant-numeric:tabular-nums}.ecoLink{border:0;background:transparent;color:#78d7e1;font:inherit;min-height:30px;cursor:pointer}
+.ecoChart{margin:8px 0;border:1px solid #2c3d57;padding:6px}.ecoChart figcaption{font-size:11px;color:#cbd6e5}.ecoChart svg{display:block;width:100%;height:90px}.ecoEvents article{padding:8px 0;border-bottom:1px solid #2d3b50}.ecoEvents article>div:first-child{display:flex;justify-content:space-between;gap:7px;font-size:12px}.ecoEvents article b{overflow-wrap:anywhere}.ecoEvents article span{white-space:nowrap}.ecoEventFilter .abtn{min-height:32px;padding:4px 8px}.economyBox .mini{line-height:1.5;overflow-wrap:anywhere}.economyBox .abtn{max-width:100%;white-space:normal}
+@media(max-width:440px){#economyScroll{padding-left:7px;padding-right:7px}.ecoTable{font-size:11px}.ecoTable th:first-child{width:35%}.ecoTable button{font-size:10px}.economyBox .dpHd{font-size:13px;padding:8px}.economyBox .gpTab{padding:4px 6px}}
+/* END 96B ECONOMY UI */
+/* 96C.3: scoped attention and report views */
+.topStatusBtn.hasMinimized{color:#ffe299;outline:2px solid #e4bb68;outline-offset:-3px;animation:minimizedReminder 2.4s ease-in-out infinite}
+@keyframes minimizedReminder{0%,100%{background:var(--bulk)}50%{background:#60502c}}
+@media(prefers-reduced-motion:reduce){.topStatusBtn.hasMinimized{animation:none}}
+.battleReportActions{display:flex;align-items:center;gap:4px;min-width:0}.battleReportClose{min-width:44px;min-height:44px;color:var(--bone);border:1px solid var(--line);background:var(--bulk)}
+#inbox{left:calc((100% - var(--sb) - 44px)/2 + 44px);max-width:max(140px,calc(100vw - var(--sb) - 70px))}
+/* END 96C.3 UI */
+/* 96D: scoped origin identity and audio controls */
+.originDetails96d {margin:10px 0;padding:12px;border:1px solid #354e63;border-radius:8px;background:#0c1927;color:#bcd0df;line-height:1.5;overflow-wrap:anywhere;}
+.originDetails96d h3 {margin:0 0 6px;color:#f4cf85;font-size:14px;}
+.originDetails96d p {margin:6px 0;}
+.originColumns {display:grid;grid-template-columns:1fr 1fr;gap:14px;font-size:12px;}
+.originColumns ul {padding-left:17px;margin:5px 0;}
+.originDetails96d summary {cursor:pointer;min-height:32px;padding-top:5px;}
+.portraitVariation96d {display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;margin:7px 0;}
+.portraitVariation96d .abtn {flex:0 0 44px;width:44px;min-width:40px;min-height:36px;}
+.audioControls96d {width:100%;max-width:440px;margin:6px auto;padding:9px 12px;box-sizing:border-box;border:1px solid #354e63;border-radius:7px;background:#0c1927;color:#bcd0df;font-size:12px;}
+.audioControls96d>label {display:grid;grid-template-columns:66px minmax(90px,1fr);align-items:center;gap:10px;min-height:34px;}
+.audioControls96d input[type=range] {width:100%;min-width:0;accent-color:#d4b478;touch-action:pan-y;}
+.audioChecks96d {display:flex;gap:14px;flex-wrap:wrap;}
+.audioChecks96d label {display:flex;align-items:center;gap:5px;min-height:36px;cursor:pointer;}
+.audioChecks96d input {width:18px;height:18px;accent-color:#d4b478;}
+@media(max-width:500px){.originColumns {grid-template-columns:1fr;gap:5px;}.originDetails96d {padding:9px;}}
+/* END 96D UI */
+/* 96G: bounded federation politics */
+.fedPolitics{min-width:0;overflow-wrap:anywhere}.fedPolitics .row{flex-wrap:wrap;gap:4px}.fedPolitics .row span{min-width:0;overflow-wrap:anywhere}.fedPolitics .row b{white-space:normal}.fedBox .abtn{white-space:normal;overflow-wrap:anywhere}
+/* END 96G POLITICS */
+/* 96G.1: scoped subject contract inputs */
+.vsField{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:10px 0;min-width:0;flex-wrap:wrap}.vsField input,.vsField select{max-width:100%;min-width:0;width:180px;box-sizing:border-box}.vsField input[type=checkbox]{width:24px;height:24px}#vsScroll,#vsClauses{min-width:0;overflow-wrap:anywhere}
+/* END 96G.1 CONTRACT UI */
+</style>
+</head>
+<body>
+<div id="app">
+
+  <!-- ===== FAZ 20: SİNEMATİK ANA MENÜ =====
+       #menu (kurulum) ve #game'in üstünde ayrı bir katman.
+       Mevcut ekranlara dokunulmadı; bu katman kapanınca
+       eskisi gibi kurulum ya da oyun görünür. -->
+  <div id="title">
+    <canvas id="titleSky"></canvas>
+    <div class="tGrad"></div>
+    <div class="tWrap">
+      <div class="tLogo">
+        <div class="tMark">✦</div>
+        <h1>STARS</h1>
+        <div class="tSub">GALAKTİK STRATEJİ SİMÜLASYONU</div>
+      </div>
+      <div class="tBtns">
+        <button class="tBtn pri" data-a="tNew">YENİ OYUN
+          <small>Hanedanını kur ve yıldızlara açıl</small></button>
+        <button class="tBtn" id="tContBtn" data-a="tCont" disabled>OYUNA DEVAM ET
+          <small id="tContSub">Kayıt aranıyor…</small></button>
+        <button class="tBtn" data-a="tOpt">AYARLAR
+          <small>Ses ve rehber tercihleri</small></button>
+      </div>
+      <div class="tFoot">v1.0 · çevrimdışı çalışır</div>
+    </div>
+  </div>
+
+
+  <!-- ===== KURULUM ===== -->
+  <div id="menu">
+    <canvas id="menuStars"></canvas>
+    <div class="mwrap">
+      <div class="brand">
+        <h1>STARS</h1>
+        <p>GALAKTİK EGEMENLİK SİMÜLASYONU</p>
+      </div>
+      <div class="rule"></div>
+      <div id="setup"></div>
+    </div>
+  </div>
+
+  <!-- ===== OYUN ===== -->
+  <div id="game" class="hidden">
+    <canvas id="map"></canvas>
+    <div id="topbar"></div>
+    <div id="tools"></div>
+<!-- FAZ 80: harita modu bildirimi -->
+<div id="mapToast"></div>
+      <div id="inbox" class="hidden"></div>
+    <div id="alerts"></div>
+    <div id="timepod"></div>
+    <div id="seltag" class="hidden"></div>
+    <button id="sbToggle">‹</button>
+    <div id="sidebar">
+      <div id="tabs"></div>
+      <div id="panel"></div>
+    </div>
+  </div>
+
+  <div id="diploPane"></div>
+  <div id="raceInfo"></div>
+  <div id="modal" class="hidden"></div>
+  <div class="scan"></div>
+  <div class="vig"></div>
+  <div id="rotate">
+    <div class="ico">📱</div>
+    <p>CİHAZI YATAY ÇEVİR</p>
+    <small>Yıldız haritası geniş ekran için tasarlandı.<br>Telefonunu yan çevir ve tam ekran tuşuna bas.</small>
+  </div>
+</div>
+<!-- ═══ YÜKLEME SIRASI KRİTİK ═══
+     main.js      : tüm veri sabitleri (RACES, SHIPS, TECHS...) burada
+                    tanımlanır, MUTLAKA ilk yüklenmelidir.
+     ai.js        : karar ağacı + hafıza mekanizması
+     diplomacy.js : onur/güven endeksi, casus belli, konsey
+     economy.js   : üretim, ticaret, ambargo
+     type="module" KULLANILMAZ — modül kapsamı global fonksiyonları
+     gizler ve yerel dosyada (file://) CORS hatası verir. -->
+<!-- ═══ FAZ 74: MODÜL YÜKLEME SIRASI ═══
+     Dosyalar ES modülü değil, klasik script — hepsi aynı global
+     kapsamı paylaşıyor. Fonksiyon bildirimleri hoisting sayesinde
+     sıra bağımsız, AMA const/let bildirimleri değil (TDZ).
+     Bu yüzden veri tablolarını taşıyan main.js MUTLAKA ilk sırada.
+
+     1. main.js     — veri tabloları (RACES, SHIPS, PLANETS…),
+                      G durumu, oyun döngüsü, galaksi üretimi
+     2. map.js      — View (kamera/çizim) + ART (sprite üreteci)
+     3. combat.js   — battleRound
+     4. ai.js       — yapay zeka kararları
+     5. diplomacy.js— diplomasi, konsey, federasyon, vasallık
+     6. economy.js  — ekonomi, koloni, kuşatma, piyasa
+     7. ui.js       — arayüz (en son: hepsini çağırır)          -->
+<script src="main.js"></script>
+<script src="map.js"></script>
+<script src="combat.js"></script>
+<script src="ai.js"></script>
+<script src="diplomacy.js"></script>
+<script src="economy.js"></script>
+<script src="commerce.js"></script>
+<script src="news.js"></script>
+<script src="inbox.js"></script>
+<script src="construction.js"></script>
+<script src="ui.js"></script>
+<script src="archive-ui.js"></script>
+<script src="commerce-ui.js"></script>
+<script src="economic-ledger.js"></script>
+<script src="economy-ui.js"></script>
+<!-- FAZ 19: işlemsel ses. main.js'ten SONRA yüklenir (storeSet/storeGet
+     kullanır). Hiçbir ses dosyası yok; her şey Web Audio ile üretilir. -->
+<script src="audio.js"></script>
+<script>
+/* ═══ FAZ 57: SERVICE WORKER KAYDI ═══
+   PWA kurulabilirliğinin şartı. Kayıt başarısız olursa oyun
+   normal çalışır — sessizce yutulur. file:// protokolünde
+   worker desteklenmediği için protokol kontrolü var. */
+if ('serviceWorker' in navigator && location.protocol.startsWith('http')){
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js')
+      .catch(err => console.warn('SW kaydı yapılamadı:', err));
+  });
+}
+/* Standalone modda mıyız? Gövdeye sınıf ekle. */
+(function(){
+  try{
+    const stand = (window.matchMedia &&
+        (window.matchMedia('(display-mode: standalone)').matches ||
+         window.matchMedia('(display-mode: fullscreen)').matches)) ||
+      navigator.standalone === true;
+    if (stand) document.documentElement.classList.add('pwa');
+    window.__PWA_STANDALONE = !!stand;
+  }catch(e){ window.__PWA_STANDALONE = false; }
+})();
+</script>
+</body>
+</html>
