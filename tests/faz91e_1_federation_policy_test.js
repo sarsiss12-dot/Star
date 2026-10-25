@@ -172,7 +172,8 @@ check('Real AI war review requests permission then uses its normal declaration p
    for(const e of G.emps)e.ai=false;E.ai=true;E.contact={3:true};E.rel[3]=-100;
    E.sundered=3;E.pact={};E.nap={};E.inc.ene=100;E.factions=[];
    G.fleets=G.fleets.filter(f=>f.e!==3);E._powAt=-1;T._powAt=-1;
-   E.intel=E.intel||{};E.intel[3]=3;G.sys[T.home].owner=3;G.sys[E.home].owner=E.id;G.sys[E.home].lanes.push(T.home);G.sys[T.home].lanes.push(E.home);G.sys[T.home].x=G.sys[E.home].x+100;G.sys[T.home].y=G.sys[E.home].y;newFleet(E,E.home,Array.from({length:30},()=>({c:'kor'})));E._powAt=-1;remember(E,3,'ihanet');rndSeed(1234);aiWarReview()`);
+   E.intel=E.intel||{};E.intel[3]=3;G.sys[T.home].owner=3;G.sys[E.home].owner=E.id;G.sys[E.home].lanes.push(T.home);G.sys[T.home].lanes.push(E.home);G.sys[T.home].x=G.sys[E.home].x+100;G.sys[T.home].y=G.sys[E.home].y;newFleet(E,E.home,Array.from({length:30},()=>({c:'kor'})));E._powAt=-1;remember(E,3,'ihanet');E.res.ene=10000;E.res.ala=10000;E.inc=empireIncome(E,false);rndSeed(1234);aiWarReview()`);
+ assert.equal(h.run('aiEconomyPlan(E).critical'),false);
  assert.equal(h.run('F.vote && F.vote.kind'),'war');assert.equal(h.run('F.vote.proposer'),1);
  assert.equal(h.run('!!E.war[3]'),false);accept(h);
  h.run('for(let i=0;i<50&&!E.war[3];i++)aiWarReview()');assert.equal(h.run('!!E.war[3]'),true);

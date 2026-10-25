@@ -1,0 +1,31 @@
+{
+  "phase": "96G.2",
+  "build": "96g2",
+  "scope": "Complete playable runtime; evidence is separate",
+  "save_version": 8,
+  "pwa_cache": "stars-v96g2",
+  "parent_zip_sha256": "cfa17c3c4e1d5b5a6fcf29ee16c3096a9fa0e148661352079044ddcdabb240cf",
+  "parent_commit": "b2bdab32c330e8519d9a334a2e6bae8efd3f5bc2",
+  "file_count": 19,
+  "files": {
+    "ai.js": "f19fa4aae727d8cf2a0c90b0bd8826e5d7730c975a3d8d3d0ca06b548adb2532",
+    "archive-ui.js": "7f96276402dbb88fc93b4cf72bc7b4922887751eb6aede714e0316750f7f92ab",
+    "audio.js": "6ddf6e388fa404394fee6220c2bfeeb3d1f9601c51a35ccdfe3181a8781942f7",
+    "combat.js": "b4e21fcdb6fdaaa93da07313131470de3e8a3c28b5650226a9c4a2713bde73a5",
+    "commerce-ui.js": "cc7fef5ab43176093251916aaafbdd873424da0630ec46fe6d3d5106a690b8d4",
+    "commerce.js": "978e4f6b01faed1babeade20070447cbcfaa4e2ea70793a78e50f20fbe66be01",
+    "construction.js": "d9b544b0328f26576ff90e02fe49c1b7f3798dfd844a8c39ee8dc6c0890debda",
+    "diplomacy.js": "b46fd1bf2552a256fe6ad724ec72859f8edbc8c37eb0fd1c9b6e721582e6b3f3",
+    "economic-ledger.js": "67d07f3ee4777cd7c246c8b37dda7cf1577cf86c19a6edeba68945a5d3063501",
+    "economy-ui.js": "61f6e2dcef7f37143821edccf67552718a210ec555f7b8f9074c68191fd5cbcc",
+    "economy.js": "ed2eb108b3c094444f49700e61ab48dfbb968c9bc7f135dcf11a7335c62fd095",
+    "inbox.js": "5f53ac2ca9c3ca8d5f1a12a9e1ba2b2a247ab7e350df0ec9169a13cfe3285204",
+    "index.html": "a98fa84883c96143c1a14aeb6420af0e9ee11b269f51fc3207acd496b4d89bef",
+    "main.js": "ed25c388ce8d965175cf276ec161e06285d283cf984149ae0922c45ce6a35bf9",
+    "manifest.json": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
+    "map.js": "d8ca27ee07c484b7399f95d8031aa70fb7539bcf89d768c8442200b7cba76ae3",
+    "news.js": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
+    "sw.js": "ad0558c61d9728c2f229f95506213fb61fe416698cce2bce3cd2fdba1156caf1",
+    "ui.js": "765db92f7630d23376f97a3de70153c9ffa8f55398d4d5849e0f022fdc7be159"
+  }
+}

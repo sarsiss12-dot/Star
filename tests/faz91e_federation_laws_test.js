@@ -57,7 +57,7 @@ check('Duplicate ballots and stale identifiers cannot charge or vote again',()=>
 });
 check('Current electorate filters duplicates, deceased and departed members',()=>{
   const h=fresh();open(h);h.run('F.vote.yes=[1,1,2,5];F.vote.no=[1];G.emps[2].dead=true;F.members=[0,1,4]');
-  assert.deepEqual(data(h,'fedVoteCounts(F)'),{yes:1,no:0,eligible:[0,1],voted:[1],waiting:[0]});
+  assert.deepEqual(data(h,'fedVoteCounts(F)'),{yes:1,no:0,weights:{0:1,1:1},total:2,eligible:[0,1],voted:[1],waiting:[0]});
   assert.equal(h.run('castFedVote(G.emps[4],F.id,fedVoteToken(F.vote),true).ok'),false);
 });
 check('Departed player cannot use an old modal vote',()=>{
@@ -77,10 +77,10 @@ check('Legacy basic vote remains usable',()=>{
   assert.equal(vote(h).gecti,true);assert.equal(h.run('!!F.laws.savunma'),true);
 });
 check('Legacy council-flag compatibility counts double weight once (catalog fixture)',()=>{
-  const h=fresh();open(h);
+  const h=fresh();
   // This flag is absent from the active catalog. Exercise compatibility without
   // claiming that the player can currently select such a civic.
-  h.run("CIVICS.__legacyCouncil={flag:'council'};G.p.civics=['__legacyCouncil'];F.vote.yes=[0,0];F.vote.no=[1,2]");
+  h.run("CIVICS.__legacyCouncil={flag:'council'};G.p.civics=['__legacyCouncil']");open(h);h.run('F.vote.yes=[0,0];F.vote.no=[1,2]');
   assert.equal(h.run('fedVoteCounts(F).yes'),2);assert.equal(h.run('finishFedVote(F).gecti'),false);
 });
 check('Save/load keeps pending agenda, paid cost, and explicit vote',()=>{

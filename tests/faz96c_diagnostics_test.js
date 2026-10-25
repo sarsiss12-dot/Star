@@ -1,7 +1,7 @@
 'use strict';
 const assert=require('assert/strict'),fs=require('fs'),path=require('path'),{runtime}=require('./helpers/runtime');let pass=0,fail=0;
 function test(n,f){try{f();pass++;console.log('✓ '+n)}catch(e){fail++;console.log('✗ '+n+' — '+e.stack)}}
-const baseline=process.env.STARS_96B_ROOT||path.resolve(__dirname,'../../baseline-96b');
+const baseline=process.env.STARS_96B_ROOT||path.resolve(__dirname,'baselines/96b');
 function game(audit){const h=runtime({root:baseline});h.run("setupGame({...CFG,name:'96C observer',race:'insan',size:'ulu',seed:99,crisis:'kapali',council:'normal',ruins:'yok'});G.autoSave=false;");if(audit){h.sb.auditClock=()=>0;h.run(fs.readFileSync(path.join(__dirname,'helpers/96c-audit.js'),'utf8'))}return h;}
 test('96B diagnostic census leaves full save, stocks and RNG unchanged',()=>{const h=game(true);h.run('var before=serialize(),rng=RND_STATE;Audit96C.census()');assert.equal(h.run('serialize()===before&&RND_STATE===rng'),true)});
 test('diagnostic counters deduplicate the same world/month and bound details',()=>{const h=game(true);h.run('Audit96C.census();var counts=JSON.stringify(Audit96C.counts);for(let i=0;i<100;i++)Audit96C.census()');assert.equal(h.run('counts===JSON.stringify(Audit96C.counts)'),true);assert.ok(h.run('Audit96C.samples.length')<=120)});

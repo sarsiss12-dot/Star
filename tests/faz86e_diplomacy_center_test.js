@@ -221,6 +221,6 @@ test('Seçili devletin kendi hafızası gösterilir, karşı tarafın gizli haf�
 for(const lvl of [0,2,3])test('Süzerenlik onay ekranı da istihbarat kapılarını korur: '+lvl,()=>{
  const h=fresh();h.run(`A.intel[1]=${lvl};UI.vs={id:1,yon:'demand',tur:'haracguzar'};UI.vsDraw();`);
  const s=modal(h);assert.ok(!s.includes('Tahmini kabul şansı'));assert.ok(!s.includes('Yeterince güçlü değilsin ('));
- eq(s.includes('İstihbarat yetersiz'),lvl<2);assert.ok(s.includes('Etki bedeli'));assert.ok(s.includes('ŞART PAKETİ'));
+ assert.equal(s.includes('Karşı tarafın özel geliri bilinmiyor'),lvl<3);assert.ok(s.includes('görüşme bedeli'));assert.ok(s.includes('ŞARTLARI DÜZENLE'));
 });
 console.log('GEÇEN: '+pass+' KALAN: '+fail);process.exitCode=fail?1:0;

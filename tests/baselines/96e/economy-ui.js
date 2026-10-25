@@ -1,0 +1,84 @@
+'use strict';
+/* Left workspace, using the existing global-pane navigation and action delegate. */
+const EconomyUI={resource:'ene',filter:'selected',world:null,scroll:0,charts:new Map(),lastDay:null,
+ eventLabel(event){
+  if(event.kind==='unexplained')return 'Açıklanamayan stok farkı';
+  const names={aiDisbandTick:'Filo dağıtma / geri kazanım',aiIntelPactTick:'İstihbarat anlaşması',aiSubmitTick:'Himaye başvurusu',aiTurn:'Diğer devlet işlemleri',applyDamage:'Savaş ganimeti',battleRound:'Muharebe sonucu',blackmailLeader:'Lider şantajı',blackmailVote:'Konsey oyu şantajı',bribeVote:'Konsey oyuna rüşvet',buildHabitat:'Habitat inşası',captureSystem:'Sistem ele geçirme sonucu',claimPermanent:'Kalıcı konsey koltuğu',councilTick:'Konsey fon işlemleri',counterPanopticon:'Gözlemevine karşı istihbarat',crisisResolved:'Kriz sonu ödülü',deepInvestigate:'Derin soruşturma',demandVassal:'Vasallık talebi',devourPlanet:'Gezegen tüketimi',doReform:'Devlet reformu',doSabotage:'Sabotaj operasyonu',doSurvey:'Araştırma / keşif ödülü',edictTick:'Ferman sürdürme maliyeti',falseFlagOp:'Sahte bayrak operasyonu',fedFundTick:'Federasyon ortak fonu',fedTick:'Federasyon katkıları',foundCouncil:'Konsey kuruluşu',foundFederation:'Federasyon kuruluşu',fundSeparatists:'Ayrılıkçı finansmanı',grantFed:'Federasyon hibesi',inciteRebellion:'İsyan kışkırtma',issueEdict:'Ferman ilanı',offerPatronage:'Hamilik teklifi',offerShareVision:'Sensör paylaşımı teklifi',proposeBill:'Konsey tasarısı',proposeFedLaw:'Federasyon yasası teklifi',proposeFedMotion:'Federasyon önergesi',rebuildThrone:'Taht gemisi yeniden inşası',recruitLeader:'Lider alımı',runOp:'Casusluk operasyonu',runWhisper:'Gizli diplomasi operasyonu',seekProtection:'Koruma başvurusu',sendUltimatum:'Ültimatom bedeli',setWarGoal:'Savaş hedefi / ilan bedeli',situationsTick:'Devam eden özel durum',starName:'Sistem adlandırma',startTerraform:'Terraform projesi',stealTech:'Teknoloji casusluğu',supportIndep:'Bağımsızlık desteği',trySabotage:'Sabotaj girişimi',warSubsidyTick:'Savaş yardımı'};
+  if(event.label.startsWith('Doğrulanmış işlem: '))return names[event.label.slice(19)]||'Diğer doğrulanmış kaynak işlemi';
+  if(event.label.startsWith('Onay işlemi: '))return 'Onaylanan kaynak işlemi';
+  if(event.label.startsWith('Arayüz işlemi: '))return 'Oyuncu kaynak işlemi';
+  return event.label;
+ },
+ number(n){return Number.isFinite(n)?n.toLocaleString('tr-TR',{maximumFractionDigits:1}):'—';},
+ signed(n){return Number.isFinite(n)?(n>0?'+':'')+this.number(n):'—';},
+ color(n){return n<0?'n':n>0?'p':'';},
+ state(){if(this.world!==G.p){this.world=G.p;this.resource='ene';this.filter='selected';this.scroll=0;this.charts.clear();}return EconomyLedger.view(G.p);},
+ eta(stock,net){return stock>=0&&net<0?stock/-net:null;},
+ warning(e,r){const stock=EconomyLedger.clean(e.res[r]),net=EconomyLedger.clean(e.inc?.[r]),months=this.eta(stock,net);if(r!=='ara'&&stock<=0)return net<0?'⚠ Stok yok; üretim tüketimi karşılamıyor':'⚠ Depo boş; sonraki üretim henüz stoka gelmedi';if(months!==null&&months<=6)return '⚠ Mevcut oranla yaklaşık '+this.number(months)+' ay';return net<0?'Aylık açık var':'';},
+ chart(months,r,key,title){
+  if(!months.length)return '<div class="mini">Henüz tamamlanmış dönem yok.</div>';
+  const values=months.map(m=>m[key][r]),id=JSON.stringify([r,key,values]);if(this.charts.has(id))return this.charts.get(id);
+  const min=Math.min(0,...values),max=Math.max(1,...values),pts=values.map((v,i)=>[(i+0.5)*300/values.length,66-(v-min)/(max-min)*55]),svg=`<figure class="ecoChart"><figcaption>${esc(title)} · ${values.length} dönem · ${this.number(values.at(-1))}</figcaption><svg viewBox="0 0 300 74" role="img" aria-label="${esc(title)}"><path d="M0 ${66-(0-min)/(max-min)*55}H300" stroke="#53647a"/><polyline points="${pts.map(p=>p.join(',')).join(' ')}" fill="none" stroke="#6ff2c8" stroke-width="2"/>${pts.map((p,i)=>`<circle cx="${p[0]}" cy="${p[1]}" r="2.5" fill="#f2d452"><title>${this.number(values[i])} · gün ${months[i].end}</title></circle>`).join('')}</svg><div class="mini">Gün ${months[0].end} → ${months.at(-1).end}</div></figure>`;
+  if(this.charts.size>=28)this.charts.clear();this.charts.set(id,svg);return svg;
+ },
+ trade(e){const st=G.commerce;if(!st)return '<div class="mini">Ticaret verisi yok.</div>';const contracts=st.contracts.filter(c=>c.a===e.id||c.b===e.id),live=st.convoys.filter(v=>(v.e===e.id||v.to===e.id)&&!Commerce.terminal(v)),stats=st.stats[e.id]||{};
+  const amount=o=>CommerceUI.amounts(o),moving=EconomyLedger.zero();for(const c of live)moving[c.r]+=c.amount;
+  return `<section><h3>Gerçek ticaret</h3><div class="mini">Aktif sözleşme: ${contracts.filter(c=>!Commerce.closed(c)).length} · Yoldaki konvoy: ${live.length} · Bekleyen / engelli sözleşme: ${contracts.filter(c=>['waiting','blocked'].includes(c.status)).length}</div><div class="mini">Yolda: ${amount(moving)}<br>Yüklenen (depodan ayrılmış): ${amount(stats.loaded)}<br>Gerçek teslim alınan: ${amount(stats.received)}<br>Teslim gönderilen: ${amount(stats.sent)}<br>Kayıp: ${amount(stats.lost)} · Yağmalanan: ${amount(stats.plundered)}</div><div class="mini">Ağ üretim katkısı: %${this.number((e.trade?.mul||0)*100)}. Bu yüzde üretime dahildir; kargo teslimatları üretime eklenmez.</div><div class="ecoActions"><button class="abtn" data-a="commerce">Sözleşmelere git</button><button class="abtn" data-a="commerceConvoys">Aktif konvoylar</button></div>${contracts.filter(c=>c.reason&&['blocked','waiting'].includes(c.status)).slice(0,4).map(c=>`<p class="mini">#${c.id}: ${esc(c.reason)}</p>`).join('')}</section>`;
+ },
+ pending(e,r){let paid=0,pending=0;for(const sy of G.sys){for(const q of sy.queue||[])if(q.e===e.id)paid+=q.paid?.[r]||0;for(const pl of sy.planets)if(pl.owner===e.id)for(const q of pl.col?.q||[])paid+=q.paid?.[r]||0;}
+  for(const c of G.commerce?.contracts||[])if(!Commerce.closed(c))for(const leg of c.legs)if(leg.e===e.id&&leg.r===r)pending+=leg.v;
+  return `<p class="mini">Devam eden gemi/bina işlerine ödenmiş: ${this.number(paid)} (stokta ikinci kez ayrılmaz). Sözleşmelerin sonraki yük talebi: ${this.number(pending)} (rezerv değildir; yüklemede stok/kota tekrar denetlenir).</p>`;
+ },
+ advice(e,r,detail){const tips=[];if((e.inc?.[r]||0)<0){if(r==='ene'&&(e.fleetUp||0)>0)tips.push('Filo enerji bakımını ve yönetim giderini incele.');if(r==='ala'&&(e.fleetAlloyUp||0)>0)tips.push('Alaşım tüketen donanma bakımını incele.');const candidates=Object.entries(BUILDINGS).filter(([k,b])=>(b.g?.[r]||0)>0&&(!b.tech||e.techs[b.tech]));if(candidates.length)tips.push(candidates.slice(0,2).map(([k,b])=>b.n).join(' / ')+' üretim seçeneklerini kolonilerde incele; kaynak, işgücü ve yer gerekir.');if(e.trade?.cut)tips.push('Kesilen ticaret yollarını / ambargoyu incele.');}if(r==='ara')tips.push('Bilim deposu, etkin dalların ilerlemesi ve askıdaki teknoloji bankası ayrı hesaplardır.');return tips.map(t=>`<p class="mini">${esc(t)}</p>`).join('');},
+ render(){
+  const v=this.state(),e=G.p,r=this.resource,inc=e.inc||{},detail=e._incomeDetail,last=v.last,rows=detail?.rows.filter(x=>x.r===r)||[],sum=detail?.sum[r];
+  let h=`<div class="ecoSticky"><span>${RES[r].ico} ${RES[r].n}</span><div class="ecoActions">${EconomyLedger.keys.map(k=>`<button class="ecoChip ${k===r?'on':''}" data-a="ecoPick" data-x="${k}" aria-label="${RES[k].n}" aria-pressed="${k===r}">${RES[k].ico}</button>`).join('')}</div></div><table class="ecoTable"><thead><tr><th>Kaynak</th><th>Depo</th><th>Aylık net</th><th>Son ay Δ</th></tr></thead><tbody>`;
+  for(const k of EconomyLedger.keys)h+=`<tr class="${k===r?'selected':''}"><th><button data-a="ecoPick" data-x="${k}" title="${esc(this.warning(e,k))}">${RES[k].ico} ${RES[k].n}${this.warning(e,k)?' ⚠':''}</button></th><td data-stock="${k}">${this.number(e.res[k])}</td><td class="${this.color(inc[k])}" data-net="${k}">${this.signed(inc[k])}</td><td class="${this.color(last?.delta[k])}" data-delta="${k}">${last?this.signed(last.delta[k]):'—'}</td></tr>`;
+  h+=`</tbody></table><p class="mini">Aylık net, son simülasyon hesabıdır. Son ay Δ gerçek stok farkıdır; peşin harcama, teslimat ve bilim aktarımı içerir. ${last&&!last.full?'İlk dönem kısmi aydır.':''} Yeni yapılar ve değişen koşullar bir sonraki ekonomik hesapta orana yansır.</p><h3>${RES[r].n} ayrıntısı</h3><div class="ecoSummary"><span>Stok <b>${this.number(e.res[r])}</b></span><span>Üretim / pozitif katkı <b class="p">${sum?this.signed(sum.production):'—'}</b></span><span>Tüketim / üretim azalması <b class="n">${sum?this.signed(-sum.consumption):'—'}</b></span><span>Net <b class="${this.color(inc[r])}">${this.signed(inc[r])}/ay</b></span></div>`;
+  if(sum&&Math.abs(sum.difference)>1e-6)h+='<p class="mini n">Döküm farkı: '+this.signed(sum.difference)+'; açıklanamayan üretim farkı.</p>';
+  const warn=this.warning(e,r);if(warn)h+=`<p class="mini n">${esc(warn)}. Tahmin sabit aylık nete dayanır; inşaat, teslimat, savaş ve kriz bunu değiştirebilir.</p>`;
+  const previousNet=v.months.at(-2)?.net[r];if(Number.isFinite(previousNet)&&previousNet>0&&(inc[r]||0)<previousNet*.7&&previousNet-(inc[r]||0)>5)h+='<p class="mini n">⚠ Aylık net önceki dönem kaydına göre düştü: '+this.signed(previousNet)+' → '+this.signed(inc[r])+'. Aşağıdaki üretim çarpanlarını ve bakımı incele.</p>';
+  h+=this.advice(e,r,detail)+this.pending(e,r);
+  const modifierKeys=r==='tuk'?['minMul']:r==='etk'?['etkFlat']:[r+'Mul'];
+  const sources=(e._modSources||[]).filter(x=>modifierKeys.includes(x.key));
+  if(sources.length)h+='<details><summary>Devlet çarpanının gerçek bileşenleri</summary><div class="mini">Aşağıdaki katsayılar yukarıdaki çarpan satırına dahildir; ikinci kez gelire eklenmez.</div>'+sources.map(x=>'<div class="ecoLine"><span>'+esc(this.eventLabel(x))+'</span><b>'+this.signed(x.value* (x.key.endsWith('Mul')?100:1))+(x.key.endsWith('Mul')?'%':'')+'</b></div>').join('')+'</details>';
+  h+='<details class="ecoBreakdown" open><summary>Gerçek gelir / gider kaynakları</summary>'+(rows.length?rows.map(x=>`<div class="ecoLine"><span>${esc(x.name)}${x.system!==null?` <button class="ecoLink" data-a="ecoSystem" data-x="${x.system}">${esc(G.sys[x.system]?.name||'?')} ›</button>`:''}</span><b class="${this.color(x.n)}">${this.signed(x.n)}</b></div>`).join(''):'<p class="mini">Ayrıntı bir sonraki ekonomik hesapta kullanılabilir.</p>')+'</details>';
+  if(r==='ara'){h+='<h3>Araştırmaya kullanım</h3><div class="mini">Bilim deposu: '+this.number(e.res.ara)+' · aylık net bilim: '+this.signed(inc.ara)+'. Etkin dallara aktarım stoktan çıkıştır; teknoloji tamamlanması yeni stok geliri değildir.</div>';for(const [b,B]of Object.entries(BRANCH))h+=`<div class="ecoLine"><span>${B.n}: ${esc(TECHS[e.rq[b]]?.n||'Boş / tamamlandı')}</span><b>${this.number(e.rp[b])}</b></div>`;const bank=Object.entries(e.research?.bank||{});h+='<div class="mini">Askıdaki teknoloji bankası: '+(bank.map(([id,n])=>esc(TECHS[id]?.n||id)+' '+this.number(n)).join(' · ')||'—')+'</div><button class="abtn" data-a="globalPane" data-x="bilim">Bilim ekranı</button>';}
+  if(last)h+=`<h3>Son tamamlanan dönem muhasebesi</h3><div class="mini">Gün ${last.start} → ${last.end}: ${this.number(last.opening[r])} + stok artışı ${this.number(last.in[r])} − stok azalışı ${this.number(last.out[r])} = ${this.number(last.closing[r])}. Gerçek fark ${this.signed(last.delta[r])}. Sıfır stok sınırı düzeltmesi varsa ayrı olaydır; üretim veya yeni mal değildir.</div>`;
+  if(Math.abs(v.unexplained[r])>1e-8)h+=`<p class="mini n">Henüz ayrıştırılmamış gerçek stok farkı: ${this.signed(v.unexplained[r])}. Sebep uydurulmaz; sonraki simülasyon kontrolünde ayrı kayıt edilir.</p>`;
+  h+='<h3>Son 12 dönem</h3><p class="mini">Ekonomi geçmişi bu sürümden itibaren kaydediliyor. Eski aylara ait sayı oluşturulmaz.</p>'+this.chart(v.months,r,'closing','Dönem sonu stok')+this.chart(v.months,r,'net','Aylık net üretim');
+  h+=`<div class="ecoSticky ecoEventFilter"><span>Olaylar</span>${[['selected','Bu kaynak'],['all','Tümü'],['loss','Çıkış / kayıp']].map(([k,n])=>`<button class="abtn ${this.filter===k?'pri':''}" data-a="ecoFilter" data-x="${k}" aria-pressed="${this.filter===k}">${n}</button>`).join('')}</div>`;
+  const events=v.events.filter(x=>this.filter==='all'||this.filter==='loss'?(this.filter==='all'||Object.values(x.changes).some(n=>n<0)||x.cargo?.lost>0):(x.changes[r]!==undefined||x.cargo?.r===r));
+  h+='<div class="ecoEvents">'+events.slice(-48).reverse().map(x=>`<article><div><b>${esc(this.eventLabel(x))}</b><span>gün ${this.number(x.day)}</span></div><div class="mini">${Object.entries(x.changes).map(([k,n])=>`<span class="${this.color(n)}">${RES[k].n} ${this.signed(n)}</span>`).join(' · ')}${x.cargo?`Kargo ${RES[x.cargo.r].n}: kayıp ${this.number(x.cargo.lost)}, yağma ${this.number(x.cargo.plundered)}`:''}${x.note?' · '+esc(x.note):''}</div>${x.link?.convoy?`<button class="ecoLink" data-a="commerceLocate" data-x="${x.link.convoy}">Konvoy ›</button>`:''}</article>`).join('')+'</div>';
+  const greatest=v.events.filter(x=>(x.changes[r]||0)<0).sort((a,b)=>a.changes[r]-b.changes[r]).slice(0,3);h+='<h3>En büyük kayıtlı stok çıkışları</h3>'+greatest.map(x=>`<p class="mini">${esc(this.eventLabel(x))}: ${this.signed(x.changes[r])}</p>`).join('');
+  h+=this.trade(e)+'<h3>Üretim / bakım konumları</h3><div class="ecoActions">'+e.colonies.slice(0,24).map(c=>`<button class="abtn" data-a="ecoSystem" data-x="${c.s}">${esc(G.sys[c.s].name)} · koloni / tersane</button>`).join('')+G.fleets.filter(f=>f.e===e.id).slice(0,12).map(f=>`<button class="abtn" data-a="ecoFleet" data-x="${f.id}">${esc(f.name)} · filo</button>`).join('')+'</div>';
+  return h;
+ },
+ open(reset=false){
+  this.state();const old=$('economyScroll'),scroll=reset?0:old?.scrollTop??this.scroll;UI.globalCur='ekonomi';const nav=Object.entries(GLOBAL_PANES).map(([k,p])=>`<button class="gpTab ${k==='ekonomi'?'on':''}" data-a="globalPane" data-x="${k}">${p.ico} ${p.n}</button>`).join('');
+  $('diploPane').innerHTML=`<section class="dpBox economyBox"><header class="dpHd"><span>📊 EKONOMİ MERKEZİ</span><button class="riX" data-a="closeDiplo" aria-label="Ekonomiyi kapat">✕</button></header><nav class="gpTabs">${nav}</nav><div class="dpBody" id="economyScroll">${this.render()}</div></section>`;$('diploPane').classList.add('show');$('economyScroll').scrollTop=scroll;this.scroll=scroll;this.lastDay=Math.floor(G.day);
+ },
+ boot(){if($('economyBtn'))return;const host=$('outEmp');if(host){const b=document.createElement('button');b.id='economyBtn';b.className='tool';b.dataset.a='globalPane';b.dataset.x='ekonomi';b.innerHTML='📊<span>Ekonomi</span>';host.appendChild(b);}},
+};
+GLOBAL_PANES.ekonomi={ico:'📊',n:'EKONOMİ',fn:'p_ekonomi'};
+const economyBoot96=UI.boot;UI.boot=function(){const r=economyBoot96.apply(this,arguments);EconomyUI.boot();return r;};
+const economyGlobal96=UI.openGlobal;UI.openGlobal=function(key){if(key==='ekonomi'){EconomyUI.open();return;}return economyGlobal96.apply(this,arguments);};
+const economyAct96=UI.act;UI.act=function(action,x,el){
+ if(action==='ecoPick'&&EconomyLedger.keys.includes(x)){EconomyUI.resource=x;EconomyUI.open();return;}
+ if(action==='ecoFilter'&&['all','selected','loss'].includes(x)){const y=$('economyScroll')?.scrollTop||0;EconomyUI.filter=x;EconomyUI.open();$('economyScroll').scrollTop=y;return;}
+ if(action==='ecoSystem'){const sy=G.sys[+x];if(sy&&G.p.colonies.some(c=>c.s===sy.id)){this.act('closeDiplo');View.selSys=sy;View.panTo(sy.x,sy.y);this.tab('sistem');}return;}
+ if(action==='ecoFleet'){const f=G.fleets.find(f=>f.id===+x&&f.e===G.p.id);if(f){this.act('closeDiplo');View.sel=f;View.panTo(f.x,f.y);this.tab('filo');}return;}
+ if(action==='closeDiplo'&&$('economyScroll'))EconomyUI.scroll=$('economyScroll').scrollTop;
+ return economyAct96.apply(this,arguments);
+};
+const economyImp96=UI.p_imp;UI.p_imp=function(){return '<button class="abtn" data-a="globalPane" data-x="ekonomi">📊 Ekonomi Merkezi · yedi kaynak ve gerçek stok değişimleri</button>'+economyImp96.apply(this,arguments);};
+const economyTickUI96=UI.tick;UI.tick=function(){const result=economyTickUI96.apply(this,arguments);if(this.globalCur==='ekonomi'&&$('diploPane').classList.contains('show')&&$('economyScroll')&&EconomyUI.lastDay!==Math.floor(G.day))EconomyUI.open();return result;};
+// 96C regression: the economy workspace has a higher layer than ordinary
+// modals. Yield its surface before an inbox/trade confirmation is opened.
+const economyModal96C=UI.openModal;UI.openModal=function(){
+ if(this.globalCur==='ekonomi'&&$('diploPane').classList.contains('show')&&$('economyScroll')){
+  EconomyUI.scroll=$('economyScroll').scrollTop;this.act('closeDiplo');
+ }
+ return economyModal96C.apply(this,arguments);
+};
+EconomyLedger.install();

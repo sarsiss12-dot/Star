@@ -1,5 +1,6 @@
 'use strict';
 const assert=require('assert/strict'),fs=require('fs'),path=require('path'),{fresh}=require('./helpers/dispatch-fixture'),{runtime}=require('./helpers/runtime');
+fs.mkdirSync(path.join(__dirname,'audit-95d'),{recursive:true}); // Standalone clean-checkout output.
 let pass=0,fail=0;const eq=(a,b=true)=>assert.equal(a,b);function test(n,f){try{f();pass++;console.log('✓ '+n)}catch(e){fail++;console.log('✗ '+n+' — '+e.stack)}}
 for(const seed of [11,99,404]){
  test(seed+' new galaxy has distinct names including player and saved distinct emblems',()=>{const h=runtime();h.sb.seed=seed;h.run(`setupGame({...CFG,seed,name:'Birleşik Aster Cumhuriyeti'});var names=G.emps.filter(e=>!e.dead).map(e=>identityNameKey(e.name));var ids=G.emps.map(e=>emblemKey(stateEmblem(e)))`);eq(h.run('new Set(names).size===names.length'));eq(h.run('new Set(ids).size===ids.length'));eq(h.run('G.emps.every(e=>e.emblem&&stateEmblem(e).primary===e.col)'));});
