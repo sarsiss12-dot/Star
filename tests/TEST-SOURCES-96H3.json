@@ -669,108 +669,108 @@
       "provenance": "Pinned canonical input or reviewed96H.3.1 UI test"
     },
     "tests/faz84a_intel_dedup_test.js": {
-      "bytes": 30458,
-      "sha256": "6cc8f13cbf1fea0dce8982ac81572a9d74fdd2f054402c359f44abe272d11ae3",
+      "bytes": 30462,
+      "sha256": "d20c8ac162d28d3616093271cacd91a2d7ee8ef6b1232a23e8dd225bba122156",
       "provenance": "Pinned canonical input or reviewed96H.3.1 UI test"
     },
     "tests/faz84b_vassal_state_dedup_test.js": {
-      "bytes": 33317,
-      "sha256": "4b1bd4d998d40b1013764055b6adcca071cf29d9a267d96a7fbeb14110e533e5",
+      "bytes": 33321,
+      "sha256": "fe553b473a7b1415dc84c3061790387e6f2f982e46bddd6363c55b1edced7b85",
       "provenance": "Pinned canonical input or reviewed96H.3.1 UI test"
     },
     "tests/faz84c_state_visibility_gate_test.js": {
-      "bytes": 29674,
-      "sha256": "de132909d1a03b0df19a5ea8d2858831867cfde66fc81ee0765324762eb99fb8",
+      "bytes": 29678,
+      "sha256": "3cbc48b40f13e50e066f5f9849a912b1e3ce85b2c7f0ac8fea508ebf0c56fd79",
       "provenance": "Pinned canonical input or reviewed96H.3.1 UI test"
     },
     "tests/faz85a_political_save_integrity_test.js": {
-      "bytes": 35324,
-      "sha256": "d05468f6b939c3def1121a5fd545d89ff1dd27edab13daa28832e0280b955b5c",
+      "bytes": 35328,
+      "sha256": "9b1763d9ae94ac1834ef6486e0e74ed730bf87341b7d8b96d35ab890ba9d301f",
       "provenance": "Pinned canonical input or reviewed96H.3.1 UI test"
     },
     "tests/faz85b_load_idempotency_test.js": {
-      "bytes": 38510,
-      "sha256": "fc1a9038f71ee9e4437e642b75f5dbfca32d8f860c4e3719b5017417bcab0c1a",
+      "bytes": 38514,
+      "sha256": "3759553abccdb6354d69039ec5ad99fb4b6edd011c48bbd1e0c0b5a9689b81ba",
       "provenance": "Pinned canonical input or reviewed96H.3.1 UI test"
     },
     "tests/faz85c_crisis_save_continuity_test.js": {
-      "bytes": 33488,
-      "sha256": "af03d36217676970a6d08ee390482479db87628c0f6023dabeb0d2192409fae6",
+      "bytes": 33492,
+      "sha256": "f7603b45163026bb2d21ad7b0e309aaddbfc8b6646a149056055967268f87fbb",
       "provenance": "Pinned canonical input or reviewed96H.3.1 UI test"
     },
     "tests/faz85d_campaign_save_continuity_test.js": {
-      "bytes": 42854,
-      "sha256": "82fa784bd7ede0f90e4703b5bfe8025b227ce83bb6365057785c8844d137a92e",
+      "bytes": 42858,
+      "sha256": "f2e8be32fabbf3c72e5192397e98032b455e4b3668ec1130880a259c93ae7a5c",
       "provenance": "Pinned canonical input or reviewed96H.3.1 UI test"
     },
     "tests/faz85e_event_inbox_continuity_test.js": {
-      "bytes": 39858,
-      "sha256": "55d326fdd50fd81a0f89e5d8b20a32719ce64247797edc8ee7ac7a5fad827494",
+      "bytes": 39862,
+      "sha256": "94ab313c146e60f32d68e1df1ba3bae7c8807855a79c4046a03970695f9ee684",
       "provenance": "Pinned canonical input or reviewed96H.3.1 UI test"
     },
     "tests/faz85f_spatial_simulation_continuity_test.js": {
-      "bytes": 40973,
-      "sha256": "49d43e73b40ec80b2a76f4a247ea855731a05f33b80f59ef8d5762ebda589fe5",
+      "bytes": 40977,
+      "sha256": "862669ee3994baa57655a8acc271c1fbce49a5a7c533b23d19525ac6fbee9bca",
       "provenance": "Pinned canonical input or reviewed96H.3.1 UI test"
     },
     "tests/faz86a_intel_command_center_test.js": {
-      "bytes": 33758,
-      "sha256": "ec36b9bfc8d53d89273b4d0352691e1d952cb343d1ef0b13b22b245213153618",
+      "bytes": 33762,
+      "sha256": "c73c66a0767b207307c9e83118f674941103ead97543be86122c62352726b632",
       "provenance": "Pinned canonical input or reviewed96H.3.1 UI test"
     },
     "tests/faz86b_deal_engine_test.js": {
-      "bytes": 30433,
-      "sha256": "c76834b2b289506d03441deb77ece2cf33cbb15986a1f7ccc86388472bb9fec9",
+      "bytes": 30437,
+      "sha256": "c4a54fb6010669825ebd3369feb9450f99501e5e0ffd1620ff5221e9347220ab",
       "provenance": "Pinned canonical input or reviewed96H.3.1 UI test"
     },
     "tests/faz86c_1_quote_effective_plan_test.js": {
-      "bytes": 25277,
-      "sha256": "df6ff026e7766324fe9a9a1af8f3521b296e5ce3cef50e3bd872807c22cc0fcb",
+      "bytes": 25281,
+      "sha256": "ef6ffd7fc477cfa4cfd3c83eaa52c131f3f655cee8ab9b1d7179b3b8526d0d0a",
       "provenance": "Pinned canonical input or reviewed96H.3.1 UI test"
     },
     "tests/faz86c_2_transaction_test.js": {
-      "bytes": 28044,
-      "sha256": "e4b15271c2687dfb7c70612ec9c24eaef88c6ec2d1553e7853993aed588d9c79",
+      "bytes": 28048,
+      "sha256": "f1b0d284e42ca479e1d726c761c01548d0ed904b2e4dec7bff6ee3c8e7d1f215",
       "provenance": "Pinned canonical input or reviewed96H.3.1 UI test"
     },
     "tests/faz86c_3_ai_negotiation_test.js": {
-      "bytes": 21561,
-      "sha256": "181d793406626f3d95c184511c3f5d0efd177bd72b3a6ea9e4c978e61746314e",
+      "bytes": 21565,
+      "sha256": "be9eadce2a0ff8b2e4e736a7fbb2cddff31d52d4b8a5b9bc215d1ddd59efe91d",
       "provenance": "Pinned canonical input or reviewed96H.3.1 UI test"
     },
     "tests/faz86c_4_reciprocal_offers_test.js": {
-      "bytes": 23593,
-      "sha256": "d48757a35d5178e026d27e4bb697b057c4fbcd8f662adec4c4ce17887a9c3175",
+      "bytes": 23597,
+      "sha256": "06b7af5b62baf626da21324fd56c76eb1e95b8b0a68a6c5d745f8aae4919f595",
       "provenance": "Pinned canonical input or reviewed96H.3.1 UI test"
     },
     "tests/faz86c_4h_map_input_test.js": {
-      "bytes": 22681,
-      "sha256": "7dff7ac8d42f54d363f7e353cd0e2573478f86c935d090d698e12521448a74b4",
+      "bytes": 22685,
+      "sha256": "a4ba10a139262841c32eb1f7613bc33e68636f7f99e3731ff6308e81caa3efb1",
       "provenance": "Pinned canonical input or reviewed96H.3.1 UI test"
     },
     "tests/faz86c_4h_r1_exact_regression_test.js": {
-      "bytes": 29116,
-      "sha256": "21e772692082a767692f99fe4ccb574c082d10191b7f4d1af522ccc5cc4ace25",
+      "bytes": 29120,
+      "sha256": "ba84fba04af6f4d4f8644300aebf490e14778b3bdeb45a22f25cd6e88defc7c4",
       "provenance": "Pinned canonical input or reviewed96H.3.1 UI test"
     },
     "tests/faz86c_4h_r2_surface_camera_layers_test.js": {
-      "bytes": 25411,
-      "sha256": "7ed00c4798075c96feeb2a98c7f1cdef729ea3bbbd7ba5d3e933927ca1e01504",
+      "bytes": 25415,
+      "sha256": "109e0d3871137c30d4bc8fedcd1e8af7b6887a68d88dbdb81c22e8e8422aecfe",
       "provenance": "Pinned canonical input or reviewed96H.3.1 UI test"
     },
     "tests/faz86c_4h_r3_surface_lifecycle_test.js": {
-      "bytes": 28467,
-      "sha256": "dd5ccc5ee0a61907310dde05f9c0963fdf7e5e1463a125aed461250b014cd63b",
+      "bytes": 28471,
+      "sha256": "0543bc0fa1280aacbd9de9f757fb7fc69b4d43c02d7d12136ddcfc7fc7f14b51",
       "provenance": "Pinned canonical input or reviewed96H.3.1 UI test"
     },
     "tests/faz86c_4h_r4_diagnosis_test.js": {
-      "bytes": 28105,
-      "sha256": "d301de81d4267eb0d1e0a01d26790a96955c407960e96b9c02ecdf6f21e57371",
+      "bytes": 28113,
+      "sha256": "e2320b4c8eabb17ce70188ca7fb7d2d3c38fdb5f27a7bd32377d77c977ae1f4e",
       "provenance": "Pinned canonical input or reviewed96H.3.1 UI test"
     },
     "tests/faz86c_4h_r4_targeted_diag_test.js": {
-      "bytes": 27652,
-      "sha256": "c5f7dbefa65e937f2cd7f1c169093045d5b46cef08e2f17538530a4aa6c906aa",
+      "bytes": 27658,
+      "sha256": "59c2dc28c866642403fd6a62926df0163e2c7a202f2e79e68a7c9e6e2207c2ff",
       "provenance": "Pinned canonical input or reviewed96H.3.1 UI test"
     },
     "tests/faz86c_5_1_ui_portraits_native_canvas_test.js": {
@@ -794,8 +794,8 @@
       "provenance": "Pinned canonical input or reviewed96H.3.1 UI test"
     },
     "tests/faz86c_strict_deal_ai_test.js": {
-      "bytes": 37214,
-      "sha256": "ef7cc95faab361ffddfe398c1f2c959fcc12a62cb803ec50d7e6d6d57600e05c",
+      "bytes": 37218,
+      "sha256": "c520420d6842c097ff2197ea19777e594f38af1c2b5713574cf306fd155f7fab",
       "provenance": "Pinned canonical input or reviewed96H.3.1 UI test"
     },
     "tests/faz86d_envoy_missions_test.js": {
@@ -814,8 +814,8 @@
       "provenance": "Pinned canonical input or reviewed96H.3.1 UI test"
     },
     "tests/faz86g_integration_handoff_test.js": {
-      "bytes": 8391,
-      "sha256": "aa1fd5151cde936deb2a425e2c0dde3c166437c7cab2321431c2604ef2cf225e",
+      "bytes": 8395,
+      "sha256": "b0cdc27c0aaf31c68762e4208d26fdf76c36dce647a3c300ca8065d4a79fd434",
       "provenance": "Pinned canonical input or reviewed96H.3.1 UI test"
     },
     "tests/faz87a_espionage_feedback_test.js": {
@@ -874,8 +874,8 @@
       "provenance": "Pinned canonical input or reviewed96H.3.1 UI test"
     },
     "tests/faz90rc_2_load_feedback_test.js": {
-      "bytes": 7170,
-      "sha256": "b406f746c54fc52cc26e8f866d39e5ec073e5ed3b43d47d3f0ed6e70d54b0f6e",
+      "bytes": 7174,
+      "sha256": "86e792cb20e23d63f3778302fd9beef73e91b97032703a8f319be49f24850500",
       "provenance": "Pinned canonical input or reviewed96H.3.1 UI test"
     },
     "tests/faz90rc_3_load_transaction_test.js": {
@@ -884,8 +884,8 @@
       "provenance": "Pinned canonical input or reviewed96H.3.1 UI test"
     },
     "tests/faz90rc_release_candidate_test.js": {
-      "bytes": 5984,
-      "sha256": "e3f919bbfb680b5370f0f26b259cafef1d40186b430361eab10883bb09132604",
+      "bytes": 5990,
+      "sha256": "33ba91726bfebc4d6d7b359d0c046237e986e7831ebb9754a200022bc4c8c5d7",
       "provenance": "Pinned canonical input or reviewed96H.3.1 UI test"
     },
     "tests/faz91a_special_presentation_test.js": {
@@ -1119,8 +1119,8 @@
       "provenance": "Pinned canonical input or reviewed96H.3.1 UI test"
     },
     "tests/faz95e_ui_save_test.js": {
-      "bytes": 6851,
-      "sha256": "a85a2f7ad0ea4d52b6abc6d33b2c42f3f7cd79cac5ef1011437b1c311b954043",
+      "bytes": 6853,
+      "sha256": "d915f75650088a5538a9be0bc1ab67d25e6bdb9be5113b8f50dae4055ee21f99",
       "provenance": "Pinned canonical input or reviewed96H.3.1 UI test"
     },
     "tests/faz96a_cargo_test.js": {
@@ -1164,8 +1164,8 @@
       "provenance": "Pinned canonical input or reviewed96H.3.1 UI test"
     },
     "tests/faz96c3_ui_test.js": {
-      "bytes": 7685,
-      "sha256": "fd6e1cdeae3e592f3667d22c8ab8d5c0c8068872c2f2f74bf3bfbbb95239b713",
+      "bytes": 7689,
+      "sha256": "e794d4b727cc5a42834527976eaddee7c52b2445ba9f165d4b0ab3df343719ff",
       "provenance": "Pinned canonical input or reviewed96H.3.1 UI test"
     },
     "tests/faz96c_diagnostics_test.js": {
@@ -1659,8 +1659,8 @@
       "provenance": "Pinned canonical input or reviewed96H.3.1 UI test"
     },
     "tests/faz96h31_compact_construction_test.js": {
-      "bytes": 3352,
-      "sha256": "ea982fb8fa0b81115b82a8ef56e591a0c3fa49094158db3c22fd06c8b8cd6ab8",
+      "bytes": 4925,
+      "sha256": "2273b7a812a56606cfcdee44a0aff30d256cecad8a9dbc330008131370677879",
       "provenance": "Pinned canonical input or reviewed96H.3.1 UI test"
     },
     "tests/baselines/96h3/economy.js": {
@@ -1714,13 +1714,13 @@
       "provenance": "Pinned canonical input or reviewed96H.3.1 UI test"
     },
     "tests/browser-96h31-buildings.js": {
-      "bytes": 18180,
-      "sha256": "e2a7281b62c76991b84ce73547e173538c79c2053df2aece4cfe4d5a30dfb1df",
+      "bytes": 18359,
+      "sha256": "d7741bf012fdee8fdce729314605251fdde69fee4d47f823676964709b0a7142",
       "provenance": "Pinned canonical input or reviewed96H.3.1 UI test"
     },
     "tests/browser-96h31-regression.js": {
-      "bytes": 16465,
-      "sha256": "b6fc3c1316d101511d9436e79b7d89ae49ea4ce03682d3820fa72d02cd24856b",
+      "bytes": 17278,
+      "sha256": "fec49614ca50dc61f380eaa9955f53730670e3ca4975913d4d64db8e4193cbc1",
       "provenance": "Pinned canonical input or reviewed96H.3.1 UI test"
     },
     "tests/baselines/96h3/economic-ledger.js": {
@@ -1811,5 +1811,6 @@
     "ui.js": "6b6c479a12ca7dfa9314e93b846088dd8f0ff012482bbd51dc04edc2c072e45e"
   },
   "releaseBuild": "96h31",
-  "originalInventoryCommit": "9db83f69a1f68d4eb1331d443a986b8ec0898042"
+  "originalInventoryCommit": "9db83f69a1f68d4eb1331d443a986b8ec0898042",
+  "build": "96h31r1"
 }

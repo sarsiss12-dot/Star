@@ -87,8 +87,8 @@ async function actions(p,row){
  await p.locator('#modal [data-a="closem"]').tap();await p.evaluate(()=>oldCancelled96());
  check('cancelled confirmation stays invalid even if its former callback repeats',await p.evaluate(()=>G.sys[buildingTarget.s].planets[buildingTarget.p].col.q.length===jobsBefore96&&G.p.res.min===cashBefore96));
  await p.locator('[data-a="demolish"][data-x="'+key+'"]').tap();await p.evaluate(()=>window.doubleConfirm96=UI._hooks.demolishConfirm);
- await p.locator('[data-a="demolishConfirm"]').tap();await p.evaluate(()=>doubleConfirm96());
- check('confirmed demolition targets the right building once and retains it until completion',await p.evaluate(()=>{const q=G.sys[buildingTarget.s].planets[buildingTarget.p].col.q;return q.length===1&&q[0].dem&&q[0].key==='maden'&&q[0].s===buildingTarget.s&&q[0].p===buildingTarget.p&&G.sys[buildingTarget.s].planets[buildingTarget.p].col.b.maden===2&&G.p.res.min===cashBefore96}));
+ const confirmBox31=await p.locator('[data-a="demolishConfirm"]').boundingBox();await p.locator('[data-a="demolishConfirm"]').tap();await p.touchscreen.tap(confirmBox31.x+confirmBox31.width/2,confirmBox31.y+confirmBox31.height/2);await p.evaluate(()=>doubleConfirm96());
+ check('real double touch confirms only one demolition without falling through to a paid order',await p.evaluate(()=>{const q=G.sys[buildingTarget.s].planets[buildingTarget.p].col.q;return q.length===1&&q[0].dem&&q[0].key==='maden'&&q[0].s===buildingTarget.s&&q[0].p===buildingTarget.p&&G.sys[buildingTarget.s].planets[buildingTarget.p].col.b.maden===2&&G.p.res.min===cashBefore96}));
  await p.evaluate(()=>{colonyBuildTick(demolishDays(G.p,'maden')+.1);UI.keepScroll=true;UI.refresh()});
  check('real completion removes one mine and grants only the existing scrap refund',await p.evaluate(()=>G.sys[buildingTarget.s].planets[buildingTarget.p].col.b.maden===1&&G.p.res.min===cashBefore96+demolishRefund('maden').min));
  await p.evaluate(()=>{G.sys[buildingTarget.s].planets[buildingTarget.p].col.b.santral=1;UI.keepScroll=true;UI.refresh()});

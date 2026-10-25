@@ -1,33 +1,45 @@
 {
   "phase": "96H.3.1",
-  "build": "96h31",
+  "build": "96h31r1",
   "save_version": 8,
-  "pwa_cache": "stars-v96h31",
-  "parent_commit": "8209afb7f7522ba38d613df1be06b19733978d6d",
-  "parent_zip_sha256": "adab7cdf2f065dad21b60f1b8e56ba63fde28772c0836be2d89ffa7dacea797b",
-  "scope": "UI only:62px construction cards,18px demolition badge,independent44px touch target,narrow-landscape toolbar containment. No AI or simulation changes.",
+  "pwa_cache": "stars-v96h31r1",
+  "parent_commit": "6aa987a9499dd058d674773280138fd9405f4207",
+  "parent_zip_sha256": "6970242f23fc9cced927de33d297be2cf93ec08f92349f8683559b0b1d434da6",
+  "scope": "UI only:62px cards,18px demolition badge,44px touch target,narrow landscape toolbar,and450ms/24px same-point release protection after actual demolition confirmation/cancellation. Engine actions and Save unchanged.",
   "file_count": 4,
   "files": {
     "index.html": "127f72e12e67a7d4c2ea05713fb202e21b470ad053c20411650a0bdbb78bac9d",
-    "ui.js": "49170b17d93f2650e6d32d52d939469f48209faa4652aaaf02750d871b05a608",
-    "main.js": "3521962b1378c8d861ca3e656764733f3b6c10221e95a967b5660b4f5a64b93e",
-    "sw.js": "2a39270279980b26ef0ddecf75e1c5a72ffb178a3ed190c54561978cd5afea61"
+    "ui.js": "d60ec4997195c6ee82fa6fa86164666394cf9773d774c66d591b7f2e481eca24",
+    "main.js": "28d79dc17a3edf30264a15474d35bed648e661043c3a4b03cfab9b6aab8575e5",
+    "sw.js": "9823fb8be2bc52a32d8a052e10d975379a35fbb0cd920c532756989be4a82671"
   },
   "runtime_files": 19,
-  "game_zip_sha256": "6970242f23fc9cced927de33d297be2cf93ec08f92349f8683559b0b1d434da6",
-  "game_zip_bytes": 755425,
+  "game_zip_sha256": "41d80f6eb493f97c7b43cda0c37221fe445fe451915e9811bcf5c0ee158ed7d1",
+  "game_zip_bytes": 755890,
   "ai_changes_published": false,
   "preserved_ai_sha256": "27ae25e44d66f5fdbfb04ea7db69aa75769a3165759b6feb0250b5b753e8c739",
   "tests": {
     "suites": 132,
-    "pass": 5981,
+    "pass": 5985,
     "fail": 0,
     "skipped": 0,
     "chromium_construction_checks": 102,
     "chromium_general_setup_politics_contract_checks": 90,
     "chromium_live_panel_checks": 6,
     "physical_android": "NOT RUN",
-    "chromium_total": 198
+    "chromium_total": 202,
+    "chromium_published_zip_double_input": 3,
+    "chromium_first_h31_cache_upgrade": 1,
+    "new_deterministic_checks": 15,
+    "execution": "Unique132-suite aggregate:successful parallel results plus isolated full reruns of six180-second execution timeouts;assertions unchanged",
+    "initial_parallel_run": {
+      "suites": 132,
+      "pass": 5748,
+      "runner_fail": 6,
+      "classification": "Six180-second SIGKILL execution timeouts;no observed assertion failures before termination"
+    },
+    "isolated_timeout_ms": 300000,
+    "isolated_workers": 1
   },
   "measurements": [
     {
@@ -43,7 +55,10 @@
       "beforeDemTouchWidth": 44,
       "afterDemTouchWidth": 44,
       "beforeIconFont": 16,
-      "afterIconFont": 14
+      "afterIconFont": 14,
+      "actualCardAreaSavingPercent": 25.68250411560271,
+      "beforeUnobscuredByTimebar": 18,
+      "afterUnobscuredByTimebar": 22
     },
     {
       "viewport": "1280x720",
@@ -58,7 +73,10 @@
       "beforeDemTouchWidth": 44,
       "afterDemTouchWidth": 44,
       "beforeIconFont": 16,
-      "afterIconFont": 14
+      "afterIconFont": 14,
+      "actualCardAreaSavingPercent": 25.916091343600634,
+      "beforeUnobscuredByTimebar": 14,
+      "afterUnobscuredByTimebar": 18
     },
     {
       "viewport": "740x360",
@@ -73,7 +91,10 @@
       "beforeDemTouchWidth": 44,
       "afterDemTouchWidth": 44,
       "beforeIconFont": 16,
-      "afterIconFont": 14
+      "afterIconFont": 14,
+      "actualCardAreaSavingPercent": 25.868163859430236,
+      "beforeUnobscuredByTimebar": 6,
+      "afterUnobscuredByTimebar": 8
     },
     {
       "viewport": "360x300",
@@ -88,7 +109,10 @@
       "beforeDemTouchWidth": 44,
       "afterDemTouchWidth": 44,
       "beforeIconFont": 16,
-      "afterIconFont": 14
+      "afterIconFont": 14,
+      "actualCardAreaSavingPercent": 25.852191349183617,
+      "beforeUnobscuredByTimebar": 2,
+      "afterUnobscuredByTimebar": 6
     }
   ],
   "determinism": {
@@ -102,5 +126,15 @@
     "save_reload_month": 6,
     "monthly_save_and_rng_equal": true,
     "full_120_240_campaigns": "NOT RUN;UI-only phase uses hash preservation and short paired probes"
-  }
+  },
+  "runtime_parent_commit": "8209afb7f7522ba38d613df1be06b19733978d6d",
+  "control_zip_sha256": "adab7cdf2f065dad21b60f1b8e56ba63fde28772c0836be2d89ffa7dacea797b",
+  "first_publication_followup": {
+    "commit": "6aa987a9499dd058d674773280138fd9405f4207",
+    "finding": "360x300 second physical confirmation tap reached an underlying foundry build and spent210 minerals;callback idempotence alone did not detect it.",
+    "fix": "Transient450ms guard within24px of actual confirmation/cancellation clicks;keyboard and other positions remain available.",
+    "new_cache_reason": "Ensure firstH31 installations receive corrected UI;directH3 and firstH31 upgrade tested separately.",
+    "gameplay_changes": false
+  },
+  "visibility_definition": "Primary counts matchH3 panel-box containment. At360x300 the old timebar covers5px of two cards:only2unobscured,versus6new. Other viewports have no timebar overlap."
 }

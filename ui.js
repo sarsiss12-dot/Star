@@ -262,6 +262,7 @@ const UI = {
     document.body.addEventListener('click', e=>{
       const el = e.target.closest('[data-a]');
       if (!el || el.disabled) return;
+      if(this.constructionClickBlocked(el,e)){e.preventDefault();e.stopImmediatePropagation();return;}
       this.act(el.dataset.a, el.dataset.x, el);
     });
     /* ═══════════════════════════════════════════════════════════
@@ -6862,6 +6863,17 @@ const UI = {
     if (setFocus(G.p, sys, pl, k)) say(esc(pl.name) + ' odağı: ' + FOCUS[k].n);
     else if ((pl.col && pl.col.fcd) > 0) say('Odak henüz değiştirilemez');
     this.keepScroll = true; this.refresh();
+  },
+  // A second real tap must not fall through a closing demolition dialog.
+  // Keep this transient and local to the release point; keyboard and engine
+  // actions, and deliberate taps elsewhere, retain their existing behavior.
+  constructionClickBlocked(el,event){
+    if(!event.detail)return false;
+    const now=Date.now(),last=this._constructionRelease;
+    if(last&&now<last.until&&Math.hypot(event.clientX-last.x,event.clientY-last.y)<24)return true;
+    if(el.dataset.a==='demolishConfirm'||el.dataset.a==='closem'&&this._demolitionToken)
+      this._constructionRelease={x:event.clientX,y:event.clientY,until:now+450};
+    return false;
   },
   build(x){
     const [sid,pi,k] = x.split(':');
