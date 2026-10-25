@@ -1,0 +1,43 @@
+{
+  "phase": "96H.3",
+  "build": "96h3",
+  "save_version": 8,
+  "pwa_cache": "stars-v96h3",
+  "parent_commit": "51c280196a43b6b42958a214c41ae82a76c89b30",
+  "runtime_parent_commit": "9db83f69a1f68d4eb1331d443a986b8ec0898042",
+  "parent_zip_sha256": "ba40ebb259254cf0ca6a727421c68d9b97c00db98689c26e4659d585a5774c03",
+  "scope": "A1 vassal budget correction only; B1 rejected and C1 not built. Actual transfer rules and player behavior unchanged.",
+  "file_count": 3,
+  "files": {
+    "ai.js": "27ae25e44d66f5fdbfb04ea7db69aa75769a3165759b6feb0250b5b753e8c739",
+    "main.js": "1364258ecda220c970bc396ecb430d02b8b8772e3ff31631b3899495343efc4b",
+    "sw.js": "c675bc1cb44d70fdc03202e80f7f7b20919a9b54ac971b4adf862be3e1a01da0"
+  },
+  "ai_changes_published": true,
+  "candidateAIHash": "27ae25e44d66f5fdbfb04ea7db69aa75769a3165759b6feb0250b5b753e8c739",
+  "campaignOutcomeClaim": "A1 equals H0 across16 matched campaigns; no measured broad crisis-recovery improvement.",
+  "game_zip_sha256": "adab7cdf2f065dad21b60f1b8e56ba63fde28772c0836be2d89ffa7dacea797b",
+  "game_zip_bytes": 754896,
+  "tests": {
+    "suites": 131,
+    "pass": 5970,
+    "fail": 0,
+    "skipped": 0,
+    "chromium": 138,
+    "physical_android": "NOT RUN"
+  },
+  "campaigns": {
+    "finalSourceRuns": 16,
+    "independentRuns": 48,
+    "sameSaveRNG": true,
+    "finalEqualsH0": true,
+    "critical120": 14,
+    "critical240": 62,
+    "criticalDensity": 31
+  },
+  "accepted": "A1: verified recurring vassal liability accounting; corrects a demonstrated six-month purchase decision fixture and preserves funded purchases.",
+  "rejected": {
+    "B1": "Seed11/240 critical10 to67; density critical31 to40; seed404 zero crisis removes new state birth rather than proving recovery.",
+    "C1": "Not built; observer stock calibration failed."
+  }
+}

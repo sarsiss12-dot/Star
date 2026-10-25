@@ -211,6 +211,21 @@ function aiFedBudget(e,income,f=findFed(e)){
  }
  return {net,dues};
 }
+/* 96H.3 A1: recurring vassal liabilities use the same positive production
+   basis as vassalTick / edictTick. Current cash already includes past payments;
+   never subtract dues from stock, and never pre-credit uncertain lord receipts. */
+function aiVassalBudget(e,income){
+ const dues={ene:0,min:0,ala:0,yiy:0,tuk:0,ara:0};
+ const c=vassalContractOf(e);
+ if(!c||e.dead||e.wild||c.expires!==null&&G.day>=c.expires)return dues;
+ for(const r of VASSAL_RESOURCES){
+  const rate=c.terms.tax[r]*(e.edicts?.ekVergi?1.5:1);
+  dues[r]=Math.max(0,income[r]||0)*rate;
+ }
+ dues.ara=Math.max(0,income.ara||0)*c.terms.science;
+ if(!e.crisisSide&&e.edicts?.bilimPayi)dues.ara+=Math.max(0,income.ara||0)*.18;
+ return dues;
+}
 function aiEconomyPlan(e){
  // A vote resolves after this month's production. Recompute a pure forecast
  // until the next production month, without crediting income. This also
@@ -227,7 +242,8 @@ function aiEconomyPlan(e){
  }
  // Tithe applies to production before freight outflows; paid queues above
  // change future production/upkeep, and each liability is counted once.
- const budget=aiFedBudget(e,projected);Object.assign(projected,budget.net);
+ const budget=aiFedBudget(e,projected),vassal=aiVassalBudget(e,income);Object.assign(projected,budget.net);
+ for(const r in vassal)projected[r]=(projected[r]||0)-vassal[r];
  if(typeof Commerce!=='undefined'&&G.commerce)for(const c of G.commerce.contracts)if(!Commerce.closed(c))for(const l of c.legs)if(l.e===e.id)projected[l.r]=(projected[l.r]||0)-l.v*30/l.every;
  const eatsFood=identityEatsFood(e);
  const target={ene:12,min:16,yiy:eatsFood?4:0,ala:8,tuk:4,ara:0,etk:0},floor={ene:120,min:120,yiy:eatsFood?60:0,ala:100,tuk:60,ara:0,etk:0},rows={};
@@ -238,7 +254,7 @@ function aiEconomyPlan(e){
  }
  const atWar=Object.keys(e.war||{}).some(id=>e.war[id]&&G.emps[id]&&!G.emps[id].dead&&!G.emps[id].wild);
  const critical=['ene','min','yiy','tuk','ala'].some(r=>rows[r].net<0&&rows[r].months<6);
- return {horizon:6,rows,committed,queued,federation:budget.dues,policy:critical?'recover':atWar?'war':e.aiCampaign?.phase==='build'?'rebuild':'growth',critical};
+ return {horizon:6,rows,committed,queued,federation:budget.dues,vassal,policy:critical?'recover':atWar?'war':e.aiCampaign?.phase==='build'?'rebuild':'growth',critical};
 }
 /* A stock-zero input deficit cannot fund even the cheapest producer. Recover
    through the player's existing paid demolition/refund path, never a grant. */

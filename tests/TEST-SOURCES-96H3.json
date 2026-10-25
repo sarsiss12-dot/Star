@@ -1,6 +1,6 @@
 {
   "canonicalRuntimeCommit": "9db83f69a1f68d4eb1331d443a986b8ec0898042",
-  "suiteCount": 130,
+  "suiteCount": 131,
   "sourceArchives": {
     "stars-faz96h2-arastirma-kanit.zip": "616d13c82986280b344fc906f8086c4d70131b6ac5f6060d802553331ad4b1b6",
     "stars-faz96h0.zip": "ba40ebb259254cf0ca6a727421c68d9b97c00db98689c26e4659d585a5774c03",
@@ -11,2116 +11,1647 @@
     "tests/audit96gd1/campaigns/96G-120-23-before-ortakDon-1080.save": {
       "bytes": 330054,
       "sha256": "a30687e3ff1064b4f7c416eaa8fc512548a86cc8a65099c0fe5605fa6f7aa659",
-      "gitBlob": "43a41c772c005e1509fe8d7821185a16c69ca029",
-      "inGitHistory": false,
       "provenance": "H0/H2 hash-verified evidence or explicit output-directory harness adjustment"
     },
     "tests/audit96gd1/campaigns/96G-120-404-before-filo-1440.save": {
       "bytes": 454373,
       "sha256": "3c0889fc1f9eea8b0740ce5564fd6bb24ce20375ad09cca0b56b6038d2b7fb48",
-      "gitBlob": "8d84ea45c360d966948550bf42ddc817e45e5816",
-      "inGitHistory": false,
       "provenance": "H0/H2 hash-verified evidence or explicit output-directory harness adjustment"
     },
     "tests/audit96gd1/campaigns/96G-120-404-before-ortakDoktrin-1230.save": {
       "bytes": 412692,
       "sha256": "b546c8efd5a4b28819160f41155ee5fba5a89b7fdb0a940484b328c3334999c9",
-      "gitBlob": "b1a0b0585370d1ad34a1b38278cde5881f74b612",
-      "inGitHistory": false,
       "provenance": "H0/H2 hash-verified evidence or explicit output-directory harness adjustment"
     },
     "tests/audit96gd1/campaigns/96G-120-404-before-sivilFon-1140.save": {
       "bytes": 390802,
       "sha256": "323717d03391e2d35c15678ede7d61eed21cb3a3a762eb9ca809b810baf62d0e",
-      "gitBlob": "2d9a09cc332d2f88c04379d840b25c53183089df",
-      "inGitHistory": false,
       "provenance": "H0/H2 hash-verified evidence or explicit output-directory harness adjustment"
     },
     "tests/audit96gd2/campaigns/96GD1-240-23-military-3-2100.save": {
       "bytes": 460645,
       "sha256": "6809f5bfcc2104fc32e8d9620be16d04ab8764224d4fe23d0542a968201019f6",
-      "gitBlob": "940faa2f55e11deeda7819eb59ca9e69457132ca",
-      "inGitHistory": false,
       "provenance": "H0/H2 hash-verified evidence or explicit output-directory harness adjustment"
     },
     "tests/baselines/96a/ai.js": {
       "bytes": 211269,
       "sha256": "ae741b8abcb6930c50971f2dab8143f2c28ff49dec015d5f92589982f46e9c39",
-      "gitBlob": "2f9a107b0ae827a0b1dc2cf89861aebf50a57488",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96a/archive-ui.js": {
       "bytes": 14649,
       "sha256": "6ae0e5c785b4ade1d7203584542d1a758e2134cb33c72dfabb2fc0b8baaf3ad8",
-      "gitBlob": "89a3b05c814782ff0b887faaa3595a1e0f99d965",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96a/audio.js": {
       "bytes": 16043,
       "sha256": "804226980179698a6b56d292d88c0c7226d1e54f06001aab63b52d6db5685262",
-      "gitBlob": "9d7c2da2672f05d6f9758832bcc3e2a7f5b7eaa9",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96a/combat.js": {
       "bytes": 16353,
       "sha256": "b4e21fcdb6fdaaa93da07313131470de3e8a3c28b5650226a9c4a2713bde73a5",
-      "gitBlob": "f78609615d5689575aa35edce3be3683bcc5373c",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96a/commerce-ui.js": {
       "bytes": 11303,
       "sha256": "40aee6d43cac85338351d314c58a14721ec6518e31c4e9c2eb2f63040704768e",
-      "gitBlob": "4f99864af5f49a25b1eabe6010121b66b96cacc7",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96a/commerce.js": {
       "bytes": 19035,
       "sha256": "a6cd43a72cbcd37251fe7623dd576f5345185caec5e46f74d5c46be94010a028",
-      "gitBlob": "c36e40b78352dcb53c7e9d00694cc77d459bf402",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96a/construction.js": {
       "bytes": 8838,
       "sha256": "d9b544b0328f26576ff90e02fe49c1b7f3798dfd844a8c39ee8dc6c0890debda",
-      "gitBlob": "5763c9bb94e6e2cee3480d7e2610afa15d3876d4",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96a/diplomacy.js": {
       "bytes": 475690,
       "sha256": "a8b15353e6b2ef16bd5af114e3697da2fe0cdfa7fa4875de8dbe594f3a9e2ed9",
-      "gitBlob": "8b28a8c226b1a92f213f4534938d153da7537599",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96a/economy.js": {
       "bytes": 207498,
       "sha256": "c36c52831c2bdd63e9a2c5e8a0b89f1bea52ff16ee1d98c808cefbc3b1b2d71e",
-      "gitBlob": "149165611238b02bf203ecf55be6a2d18bf8c87c",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96a/inbox.js": {
       "bytes": 9978,
       "sha256": "90c0341025f14e4983a517ec60ff94f0598e8d9c83c02ba8a37f21a931a7035c",
-      "gitBlob": "dc9e4010d26f01219cc942537d16de1282e0969f",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96a/main.js": {
       "bytes": 461303,
       "sha256": "620990ad351552cfb92cb1c97a61872a0ccc96ba3e6837a00b7dbb5a7cb1a84f",
-      "gitBlob": "39608726a41244ff9faf650db536d66154e524d1",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96a/map.js": {
       "bytes": 145630,
       "sha256": "8d2c858cf69042379e444e4e0da0db6482a36749eb6ce5aa7df0903cd3d28341",
-      "gitBlob": "5b2dbc7149b59a61379ef6f28ee789b9d915c700",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96a/news.js": {
       "bytes": 6039,
       "sha256": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
-      "gitBlob": "9b0a32120a05d24c014c1acf22a5a4835a6b37c6",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96a/ui.js": {
       "bytes": 505787,
       "sha256": "f783e722bc6e0cf274fc7f815efe7e3577087ad2538c5bdf815d50371eaa74f7",
-      "gitBlob": "2d323cbb94527fdcfe6093a8d8e6b7dbbdf62e65",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96b/ai.js": {
       "bytes": 211269,
       "sha256": "ae741b8abcb6930c50971f2dab8143f2c28ff49dec015d5f92589982f46e9c39",
-      "gitBlob": "2f9a107b0ae827a0b1dc2cf89861aebf50a57488",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96b/archive-ui.js": {
       "bytes": 14649,
       "sha256": "6ae0e5c785b4ade1d7203584542d1a758e2134cb33c72dfabb2fc0b8baaf3ad8",
-      "gitBlob": "89a3b05c814782ff0b887faaa3595a1e0f99d965",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96b/audio.js": {
       "bytes": 16043,
       "sha256": "804226980179698a6b56d292d88c0c7226d1e54f06001aab63b52d6db5685262",
-      "gitBlob": "9d7c2da2672f05d6f9758832bcc3e2a7f5b7eaa9",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96b/combat.js": {
       "bytes": 16353,
       "sha256": "b4e21fcdb6fdaaa93da07313131470de3e8a3c28b5650226a9c4a2713bde73a5",
-      "gitBlob": "f78609615d5689575aa35edce3be3683bcc5373c",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96b/commerce-ui.js": {
       "bytes": 11303,
       "sha256": "40aee6d43cac85338351d314c58a14721ec6518e31c4e9c2eb2f63040704768e",
-      "gitBlob": "4f99864af5f49a25b1eabe6010121b66b96cacc7",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96b/commerce.js": {
       "bytes": 19035,
       "sha256": "a6cd43a72cbcd37251fe7623dd576f5345185caec5e46f74d5c46be94010a028",
-      "gitBlob": "c36e40b78352dcb53c7e9d00694cc77d459bf402",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96b/construction.js": {
       "bytes": 8838,
       "sha256": "d9b544b0328f26576ff90e02fe49c1b7f3798dfd844a8c39ee8dc6c0890debda",
-      "gitBlob": "5763c9bb94e6e2cee3480d7e2610afa15d3876d4",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96b/diplomacy.js": {
       "bytes": 475690,
       "sha256": "a8b15353e6b2ef16bd5af114e3697da2fe0cdfa7fa4875de8dbe594f3a9e2ed9",
-      "gitBlob": "8b28a8c226b1a92f213f4534938d153da7537599",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96b/economic-ledger.js": {
       "bytes": 17672,
       "sha256": "67d07f3ee4777cd7c246c8b37dda7cf1577cf86c19a6edeba68945a5d3063501",
-      "gitBlob": "fa7ee6720386869015b650cfac0927ba15bc9ba0",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96b/economy-ui.js": {
       "bytes": 16885,
       "sha256": "b19944279ce90170f18e2c6b0a0f503c2875f994aaf7451e72718e75262ff8f5",
-      "gitBlob": "4b7be64fd9e28874b7b4d7b3e4fdb642cd8ea16c",
-      "inGitHistory": false,
       "provenance": "H0/H2 hash-verified evidence or explicit output-directory harness adjustment"
     },
     "tests/baselines/96b/economy.js": {
       "bytes": 209845,
       "sha256": "7ff479aabdfd49423a9189df28e006fa3509a9cde6047b1ede05f42d9110d105",
-      "gitBlob": "eea73329cd0851f4bb874f5b08e6e156c57811b5",
-      "inGitHistory": false,
       "provenance": "H0/H2 hash-verified evidence or explicit output-directory harness adjustment"
     },
     "tests/baselines/96b/inbox.js": {
       "bytes": 9978,
       "sha256": "90c0341025f14e4983a517ec60ff94f0598e8d9c83c02ba8a37f21a931a7035c",
-      "gitBlob": "dc9e4010d26f01219cc942537d16de1282e0969f",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96b/main.js": {
       "bytes": 462211,
       "sha256": "f48776f647b6b222cc33d28c6279517c37134c0cc88c9639b43043f4afd74c33",
-      "gitBlob": "9a78e7a14a5ff0f25206d5b9b34e1ee0fc084c1d",
-      "inGitHistory": false,
       "provenance": "H0/H2 hash-verified evidence or explicit output-directory harness adjustment"
     },
     "tests/baselines/96b/map.js": {
       "bytes": 145630,
       "sha256": "8d2c858cf69042379e444e4e0da0db6482a36749eb6ce5aa7df0903cd3d28341",
-      "gitBlob": "5b2dbc7149b59a61379ef6f28ee789b9d915c700",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96b/news.js": {
       "bytes": 6039,
       "sha256": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
-      "gitBlob": "9b0a32120a05d24c014c1acf22a5a4835a6b37c6",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96b/ui.js": {
       "bytes": 505787,
       "sha256": "f783e722bc6e0cf274fc7f815efe7e3577087ad2538c5bdf815d50371eaa74f7",
-      "gitBlob": "2d323cbb94527fdcfe6093a8d8e6b7dbbdf62e65",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96c/ai.js": {
       "bytes": 220402,
       "sha256": "c11ebece0761113e6a04c057f33c4fda9e72b2d7abc4a29b74e06e76ee76610a",
-      "gitBlob": "ca5988f7eb34ccb59a73dd7804888e7cefe57fc6",
-      "inGitHistory": false,
       "provenance": "H0/H2 hash-verified evidence or explicit output-directory harness adjustment"
     },
     "tests/baselines/96c1/ai.js": {
       "bytes": 221452,
       "sha256": "e41fc5e0a075db81ed5e3996f96e4d8cfaaeb60873f86df5c6cf84bac00c314d",
-      "gitBlob": "aabd26c126557be730a1779d5565840b639fc5a6",
-      "inGitHistory": false,
       "provenance": "H0/H2 hash-verified evidence or explicit output-directory harness adjustment"
     },
     "tests/baselines/96c1/archive-ui.js": {
       "bytes": 14649,
       "sha256": "6ae0e5c785b4ade1d7203584542d1a758e2134cb33c72dfabb2fc0b8baaf3ad8",
-      "gitBlob": "89a3b05c814782ff0b887faaa3595a1e0f99d965",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96c1/audio.js": {
       "bytes": 16043,
       "sha256": "804226980179698a6b56d292d88c0c7226d1e54f06001aab63b52d6db5685262",
-      "gitBlob": "9d7c2da2672f05d6f9758832bcc3e2a7f5b7eaa9",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96c1/combat.js": {
       "bytes": 16353,
       "sha256": "b4e21fcdb6fdaaa93da07313131470de3e8a3c28b5650226a9c4a2713bde73a5",
-      "gitBlob": "f78609615d5689575aa35edce3be3683bcc5373c",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96c1/commerce-ui.js": {
       "bytes": 11303,
       "sha256": "40aee6d43cac85338351d314c58a14721ec6518e31c4e9c2eb2f63040704768e",
-      "gitBlob": "4f99864af5f49a25b1eabe6010121b66b96cacc7",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96c1/commerce.js": {
       "bytes": 26074,
       "sha256": "48602d277b1eb70eb0c0ef0509159421ffbd5da65f1e2e2e2ad32ba1275cf800",
-      "gitBlob": "626ea01f609973fd69a87237eee05e90183d6a25",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96c1/construction.js": {
       "bytes": 8838,
       "sha256": "d9b544b0328f26576ff90e02fe49c1b7f3798dfd844a8c39ee8dc6c0890debda",
-      "gitBlob": "5763c9bb94e6e2cee3480d7e2610afa15d3876d4",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96c1/diplomacy.js": {
       "bytes": 475904,
       "sha256": "e4c5ac7a73b1ee70b27761abcc2f6dd2f1252401e57bc831645a19ed1198fcd3",
-      "gitBlob": "9ff05fab4bc8a888013165332bad780ea97801d9",
-      "inGitHistory": false,
       "provenance": "H0/H2 hash-verified evidence or explicit output-directory harness adjustment"
     },
     "tests/baselines/96c1/economic-ledger.js": {
       "bytes": 17672,
       "sha256": "67d07f3ee4777cd7c246c8b37dda7cf1577cf86c19a6edeba68945a5d3063501",
-      "gitBlob": "fa7ee6720386869015b650cfac0927ba15bc9ba0",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96c1/economy-ui.js": {
       "bytes": 17315,
       "sha256": "5ef0840529bb034bbc91f9e7a835860632ef40a00eff51cc0122f68bd52bf264",
-      "gitBlob": "deaa1326836e9fd790f3ef4cb242a5ee6b1e1a43",
-      "inGitHistory": false,
       "provenance": "H0/H2 hash-verified evidence or explicit output-directory harness adjustment"
     },
     "tests/baselines/96c1/economy.js": {
       "bytes": 210040,
       "sha256": "380582582b812387ef067029bf01200ed949069d1d54f52e8ed8b36df905db1c",
-      "gitBlob": "92eaa7f6685178baff08973916ccc4b302dc5aec",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96c1/inbox.js": {
       "bytes": 9978,
       "sha256": "90c0341025f14e4983a517ec60ff94f0598e8d9c83c02ba8a37f21a931a7035c",
-      "gitBlob": "dc9e4010d26f01219cc942537d16de1282e0969f",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96c1/main.js": {
       "bytes": 462233,
       "sha256": "7d35ac90d5804ede181f7d7df3829373a8ed9018a4803d220d342bf0a8be1323",
-      "gitBlob": "7214d5bddb4a39a31bebd3742a9f6c9eb296c334",
-      "inGitHistory": false,
       "provenance": "H0/H2 hash-verified evidence or explicit output-directory harness adjustment"
     },
     "tests/baselines/96c1/map.js": {
       "bytes": 145630,
       "sha256": "8d2c858cf69042379e444e4e0da0db6482a36749eb6ce5aa7df0903cd3d28341",
-      "gitBlob": "5b2dbc7149b59a61379ef6f28ee789b9d915c700",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96c1/news.js": {
       "bytes": 6039,
       "sha256": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
-      "gitBlob": "9b0a32120a05d24c014c1acf22a5a4835a6b37c6",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96c1/ui.js": {
       "bytes": 505823,
       "sha256": "6301d0439f4630bddfc10c7a6e80f76306a482892d4d89fe9b4cb826677e86f3",
-      "gitBlob": "6882b9ef9def18196f437b0279f346dfe92d3950",
-      "inGitHistory": false,
       "provenance": "H0/H2 hash-verified evidence or explicit output-directory harness adjustment"
     },
     "tests/baselines/96e/ai.js": {
       "bytes": 227881,
       "sha256": "e3bad5c5b7e7858ce5c854c183aec1d897f9f9b1d211542f95d611bc7480627d",
-      "gitBlob": "eb11c454fd5b759c3657d8979a240aa6e6dc6697",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96e/archive-ui.js": {
       "bytes": 14695,
       "sha256": "c76aae4cb9b55da7262886dda230f6370c705484286a14516c36ce07fab7830b",
-      "gitBlob": "5ee4ae07c23be4bedab3972ef378b8f9f54976c4",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96e/audio.js": {
       "bytes": 20197,
       "sha256": "6ddf6e388fa404394fee6220c2bfeeb3d1f9601c51a35ccdfe3181a8781942f7",
-      "gitBlob": "b9bf644e388ae65cc09da36bc2bec9c2c2ade9dc",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96e/combat.js": {
       "bytes": 16353,
       "sha256": "b4e21fcdb6fdaaa93da07313131470de3e8a3c28b5650226a9c4a2713bde73a5",
-      "gitBlob": "f78609615d5689575aa35edce3be3683bcc5373c",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96e/commerce-ui.js": {
       "bytes": 11105,
       "sha256": "cc7fef5ab43176093251916aaafbdd873424da0630ec46fe6d3d5106a690b8d4",
-      "gitBlob": "112d486bfa9028abf3f3d6dc1e4518a6cc33e568",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96e/commerce.js": {
       "bytes": 26074,
       "sha256": "48602d277b1eb70eb0c0ef0509159421ffbd5da65f1e2e2e2ad32ba1275cf800",
-      "gitBlob": "626ea01f609973fd69a87237eee05e90183d6a25",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96e/construction.js": {
       "bytes": 8838,
       "sha256": "d9b544b0328f26576ff90e02fe49c1b7f3798dfd844a8c39ee8dc6c0890debda",
-      "gitBlob": "5763c9bb94e6e2cee3480d7e2610afa15d3876d4",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96e/diplomacy.js": {
       "bytes": 478017,
       "sha256": "82f4cef4e8baca0f790c1529f9df3f838887dd88d1d4b5078c7b9b4862c9ff81",
-      "gitBlob": "7148fed741b70df490825f88db5ffa771060a3e2",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96e/economic-ledger.js": {
       "bytes": 17672,
       "sha256": "67d07f3ee4777cd7c246c8b37dda7cf1577cf86c19a6edeba68945a5d3063501",
-      "gitBlob": "fa7ee6720386869015b650cfac0927ba15bc9ba0",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96e/economy-ui.js": {
       "bytes": 17074,
       "sha256": "49b9075876fd1017e27d8bd43b4ca17decdddcd7902c6ea4f682974590f1f6b0",
-      "gitBlob": "6c36c102cc57c6b323a149b50a89f6d69f2210e1",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96e/economy.js": {
       "bytes": 210040,
       "sha256": "380582582b812387ef067029bf01200ed949069d1d54f52e8ed8b36df905db1c",
-      "gitBlob": "92eaa7f6685178baff08973916ccc4b302dc5aec",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96e/inbox.js": {
       "bytes": 10556,
       "sha256": "e4ab3349b26f4db1addc1952d5a4e19f7a0db0987672b561986e1b974340807c",
-      "gitBlob": "db5052fc3e0068ea572b1cf237443a570897ace3",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96e/main.js": {
       "bytes": 469627,
       "sha256": "ba07bf07f3aef7dbf3717eaa23cc01961158e940fc8e27e67fc92a8a77c2fe18",
-      "gitBlob": "0ed0450b2ab905646571f80673283e7569914b54",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96e/map.js": {
       "bytes": 146627,
       "sha256": "65b4d4e74c22418d1f7443c4a44e846017ffdfa625f0a95b712cc070db203ef0",
-      "gitBlob": "035176bbb1480a89673668cf7d60ffb1a8f58d64",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96e/news.js": {
       "bytes": 6039,
       "sha256": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
-      "gitBlob": "9b0a32120a05d24c014c1acf22a5a4835a6b37c6",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96e/ui.js": {
       "bytes": 512321,
       "sha256": "98e19e1242be63047ca3e5879891e6c55630d5cfb1d2f33405b44ff334be403a",
-      "gitBlob": "2de067159f7a174cb28820d8b0e8293d17edec86",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96f3/commerce.js": {
       "bytes": 27068,
       "sha256": "47b20ce925103547713bc675675072f00db14439e7427be5b8766bdd0b20f3ff",
-      "gitBlob": "db4804ffa42a37f08a253bf92cf179c020059b2d",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96g1/RELEASE-MANIFEST.json": {
       "bytes": 1979,
       "sha256": "661ea70b09ccecb7a2cc95a55f9c33185403733ce8109f9505f03f2a0592068f",
-      "gitBlob": "c80e9ef59af6784ca51ee9b610a8f427477b755d",
-      "inGitHistory": false,
       "provenance": "H0/H2 hash-verified evidence or explicit output-directory harness adjustment"
     },
     "tests/baselines/96g1/ai.js": {
       "bytes": 273279,
       "sha256": "f19fa4aae727d8cf2a0c90b0bd8826e5d7730c975a3d8d3d0ca06b548adb2532",
-      "gitBlob": "d0249787ef91abc7d76cd8b6b99c53932371f071",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96g1/archive-ui.js": {
       "bytes": 14754,
       "sha256": "7f96276402dbb88fc93b4cf72bc7b4922887751eb6aede714e0316750f7f92ab",
-      "gitBlob": "8e3c37d43d396d2ec9bb8003b15baad06c50bdaa",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96g1/audio.js": {
       "bytes": 20197,
       "sha256": "6ddf6e388fa404394fee6220c2bfeeb3d1f9601c51a35ccdfe3181a8781942f7",
-      "gitBlob": "b9bf644e388ae65cc09da36bc2bec9c2c2ade9dc",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96g1/combat.js": {
       "bytes": 16353,
       "sha256": "b4e21fcdb6fdaaa93da07313131470de3e8a3c28b5650226a9c4a2713bde73a5",
-      "gitBlob": "f78609615d5689575aa35edce3be3683bcc5373c",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96g1/commerce-ui.js": {
       "bytes": 11105,
       "sha256": "cc7fef5ab43176093251916aaafbdd873424da0630ec46fe6d3d5106a690b8d4",
-      "gitBlob": "112d486bfa9028abf3f3d6dc1e4518a6cc33e568",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96g1/commerce.js": {
       "bytes": 29743,
       "sha256": "978e4f6b01faed1babeade20070447cbcfaa4e2ea70793a78e50f20fbe66be01",
-      "gitBlob": "1c7c67d0b4977bd1a1c5b90d198ecf0e657d6986",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96g1/construction.js": {
       "bytes": 8838,
       "sha256": "d9b544b0328f26576ff90e02fe49c1b7f3798dfd844a8c39ee8dc6c0890debda",
-      "gitBlob": "5763c9bb94e6e2cee3480d7e2610afa15d3876d4",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96g1/diplomacy.js": {
       "bytes": 503489,
       "sha256": "b46fd1bf2552a256fe6ad724ec72859f8edbc8c37eb0fd1c9b6e721582e6b3f3",
-      "gitBlob": "381ca7dad13c609c089c962a68cec0cc4885cbd1",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96g1/economic-ledger.js": {
       "bytes": 17672,
       "sha256": "67d07f3ee4777cd7c246c8b37dda7cf1577cf86c19a6edeba68945a5d3063501",
-      "gitBlob": "fa7ee6720386869015b650cfac0927ba15bc9ba0",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96g1/economy-ui.js": {
       "bytes": 17157,
       "sha256": "61f6e2dcef7f37143821edccf67552718a210ec555f7b8f9074c68191fd5cbcc",
-      "gitBlob": "df2cf5a227fb2b7cf9ffdaf0ef61bded44129681",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96g1/economy.js": {
       "bytes": 211729,
       "sha256": "ed2eb108b3c094444f49700e61ab48dfbb968c9bc7f135dcf11a7335c62fd095",
-      "gitBlob": "e59c9fb028f0a2a919de90b78235d86d61859595",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96g1/inbox.js": {
       "bytes": 11390,
       "sha256": "5f53ac2ca9c3ca8d5f1a12a9e1ba2b2a247ab7e350df0ec9169a13cfe3285204",
-      "gitBlob": "db51fe47f8ce9c4fcbaaa2843757b5462cc11add",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96g1/index.html": {
       "bytes": 86771,
       "sha256": "a98fa84883c96143c1a14aeb6420af0e9ee11b269f51fc3207acd496b4d89bef",
-      "gitBlob": "719abd0d29454c9351b6f261ba0bd38904cfa338",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96g1/main.js": {
       "bytes": 476939,
       "sha256": "131b0521ac3fd8cd06e7b2ee72b09ec36c1cd8b6127a79e891bd75e92e740fd2",
-      "gitBlob": "8d811c04a358432e1ef9e479b718efaaf44f9e98",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96g1/manifest.json": {
       "bytes": 1922,
       "sha256": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
-      "gitBlob": "c2ee82b7208856623f05c97fc785c20dbd45edae",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96g1/map.js": {
       "bytes": 146657,
       "sha256": "d8ca27ee07c484b7399f95d8031aa70fb7539bcf89d768c8442200b7cba76ae3",
-      "gitBlob": "05500f9881754c2be923eb83a5deb2d99543d353",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96g1/news.js": {
       "bytes": 6039,
       "sha256": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
-      "gitBlob": "9b0a32120a05d24c014c1acf22a5a4835a6b37c6",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96g1/sw.js": {
       "bytes": 2800,
       "sha256": "5fa29bbb194306f39c61ee093c3f7f50e4a127a530acd41492e348698458d487",
-      "gitBlob": "cf9aa630710a8affc307894d8110c5a10db2156a",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96g1/ui.js": {
       "bytes": 532077,
       "sha256": "a3db9c1a72e41ec7edb8879da2e86d87229e0f9a631a3b113117bcd2c84e3b5b",
-      "gitBlob": "e173aec4df80470e9eb8cac94dc1fbb37c7746fe",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96g2/RELEASE-MANIFEST.json": {
       "bytes": 1979,
       "sha256": "da96a493332d4f05209499cad0d759b5b5fcab68e3cbc2a344582a7e6361dcc4",
-      "gitBlob": "1598cdb5a7aeb2fdcadc99e0659c8e79941e9700",
-      "inGitHistory": false,
       "provenance": "H0/H2 hash-verified evidence or explicit output-directory harness adjustment"
     },
     "tests/baselines/96g2/ai.js": {
       "bytes": 273279,
       "sha256": "f19fa4aae727d8cf2a0c90b0bd8826e5d7730c975a3d8d3d0ca06b548adb2532",
-      "gitBlob": "d0249787ef91abc7d76cd8b6b99c53932371f071",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96g2/archive-ui.js": {
       "bytes": 14754,
       "sha256": "7f96276402dbb88fc93b4cf72bc7b4922887751eb6aede714e0316750f7f92ab",
-      "gitBlob": "8e3c37d43d396d2ec9bb8003b15baad06c50bdaa",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96g2/audio.js": {
       "bytes": 20197,
       "sha256": "6ddf6e388fa404394fee6220c2bfeeb3d1f9601c51a35ccdfe3181a8781942f7",
-      "gitBlob": "b9bf644e388ae65cc09da36bc2bec9c2c2ade9dc",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96g2/combat.js": {
       "bytes": 16353,
       "sha256": "b4e21fcdb6fdaaa93da07313131470de3e8a3c28b5650226a9c4a2713bde73a5",
-      "gitBlob": "f78609615d5689575aa35edce3be3683bcc5373c",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96g2/commerce-ui.js": {
       "bytes": 11105,
       "sha256": "cc7fef5ab43176093251916aaafbdd873424da0630ec46fe6d3d5106a690b8d4",
-      "gitBlob": "112d486bfa9028abf3f3d6dc1e4518a6cc33e568",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96g2/commerce.js": {
       "bytes": 29743,
       "sha256": "978e4f6b01faed1babeade20070447cbcfaa4e2ea70793a78e50f20fbe66be01",
-      "gitBlob": "1c7c67d0b4977bd1a1c5b90d198ecf0e657d6986",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96g2/construction.js": {
       "bytes": 8838,
       "sha256": "d9b544b0328f26576ff90e02fe49c1b7f3798dfd844a8c39ee8dc6c0890debda",
-      "gitBlob": "5763c9bb94e6e2cee3480d7e2610afa15d3876d4",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96g2/diplomacy.js": {
       "bytes": 503489,
       "sha256": "b46fd1bf2552a256fe6ad724ec72859f8edbc8c37eb0fd1c9b6e721582e6b3f3",
-      "gitBlob": "381ca7dad13c609c089c962a68cec0cc4885cbd1",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96g2/economic-ledger.js": {
       "bytes": 17672,
       "sha256": "67d07f3ee4777cd7c246c8b37dda7cf1577cf86c19a6edeba68945a5d3063501",
-      "gitBlob": "fa7ee6720386869015b650cfac0927ba15bc9ba0",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96g2/economy-ui.js": {
       "bytes": 17157,
       "sha256": "61f6e2dcef7f37143821edccf67552718a210ec555f7b8f9074c68191fd5cbcc",
-      "gitBlob": "df2cf5a227fb2b7cf9ffdaf0ef61bded44129681",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96g2/economy.js": {
       "bytes": 211729,
       "sha256": "ed2eb108b3c094444f49700e61ab48dfbb968c9bc7f135dcf11a7335c62fd095",
-      "gitBlob": "e59c9fb028f0a2a919de90b78235d86d61859595",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96g2/inbox.js": {
       "bytes": 11390,
       "sha256": "5f53ac2ca9c3ca8d5f1a12a9e1ba2b2a247ab7e350df0ec9169a13cfe3285204",
-      "gitBlob": "db51fe47f8ce9c4fcbaaa2843757b5462cc11add",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96g2/index.html": {
       "bytes": 86771,
       "sha256": "a98fa84883c96143c1a14aeb6420af0e9ee11b269f51fc3207acd496b4d89bef",
-      "gitBlob": "719abd0d29454c9351b6f261ba0bd38904cfa338",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96g2/main.js": {
       "bytes": 479276,
       "sha256": "ed25c388ce8d965175cf276ec161e06285d283cf984149ae0922c45ce6a35bf9",
-      "gitBlob": "ec199b5ed01fd350943f4d2f91e2a66a66f5403c",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96g2/manifest.json": {
       "bytes": 1922,
       "sha256": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
-      "gitBlob": "c2ee82b7208856623f05c97fc785c20dbd45edae",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96g2/map.js": {
       "bytes": 146657,
       "sha256": "d8ca27ee07c484b7399f95d8031aa70fb7539bcf89d768c8442200b7cba76ae3",
-      "gitBlob": "05500f9881754c2be923eb83a5deb2d99543d353",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96g2/news.js": {
       "bytes": 6039,
       "sha256": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
-      "gitBlob": "9b0a32120a05d24c014c1acf22a5a4835a6b37c6",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96g2/sw.js": {
       "bytes": 2800,
       "sha256": "ad0558c61d9728c2f229f95506213fb61fe416698cce2bce3cd2fdba1156caf1",
-      "gitBlob": "5f366816617a675dff95605e99515843ddf51516",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96g2/ui.js": {
       "bytes": 533253,
       "sha256": "765db92f7630d23376f97a3de70153c9ffa8f55398d4d5849e0f022fdc7be159",
-      "gitBlob": "79ed70d9dfe3b3f13b9fb36e50c308a386f4086d",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96gd1/ai.js": {
       "bytes": 273104,
       "sha256": "7d4b127a4452624ea47a72575c3a857ad6c9f2d1e47dd995569106cd5f5746a4",
-      "gitBlob": "3bb3c2b5e3afa15b7edc37f1275d4de4c5f8cc83",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96gd1/archive-ui.js": {
       "bytes": 14695,
       "sha256": "c76aae4cb9b55da7262886dda230f6370c705484286a14516c36ce07fab7830b",
-      "gitBlob": "5ee4ae07c23be4bedab3972ef378b8f9f54976c4",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96gd1/audio.js": {
       "bytes": 20197,
       "sha256": "6ddf6e388fa404394fee6220c2bfeeb3d1f9601c51a35ccdfe3181a8781942f7",
-      "gitBlob": "b9bf644e388ae65cc09da36bc2bec9c2c2ade9dc",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96gd1/combat.js": {
       "bytes": 16353,
       "sha256": "b4e21fcdb6fdaaa93da07313131470de3e8a3c28b5650226a9c4a2713bde73a5",
-      "gitBlob": "f78609615d5689575aa35edce3be3683bcc5373c",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96gd1/commerce-ui.js": {
       "bytes": 11105,
       "sha256": "cc7fef5ab43176093251916aaafbdd873424da0630ec46fe6d3d5106a690b8d4",
-      "gitBlob": "112d486bfa9028abf3f3d6dc1e4518a6cc33e568",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96gd1/commerce.js": {
       "bytes": 29743,
       "sha256": "978e4f6b01faed1babeade20070447cbcfaa4e2ea70793a78e50f20fbe66be01",
-      "gitBlob": "1c7c67d0b4977bd1a1c5b90d198ecf0e657d6986",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96gd1/construction.js": {
       "bytes": 8838,
       "sha256": "d9b544b0328f26576ff90e02fe49c1b7f3798dfd844a8c39ee8dc6c0890debda",
-      "gitBlob": "5763c9bb94e6e2cee3480d7e2610afa15d3876d4",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96gd1/diplomacy.js": {
       "bytes": 484081,
       "sha256": "55559a9b5e5951f4ac86527a8e3a56e53a49dc9f05e5e811f2321779ba37382c",
-      "gitBlob": "4a6ceb69f7f64d846b42f82ba8cf2767fd65c6de",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96gd1/economic-ledger.js": {
       "bytes": 17672,
       "sha256": "67d07f3ee4777cd7c246c8b37dda7cf1577cf86c19a6edeba68945a5d3063501",
-      "gitBlob": "fa7ee6720386869015b650cfac0927ba15bc9ba0",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96gd1/economy-ui.js": {
       "bytes": 17074,
       "sha256": "49b9075876fd1017e27d8bd43b4ca17decdddcd7902c6ea4f682974590f1f6b0",
-      "gitBlob": "6c36c102cc57c6b323a149b50a89f6d69f2210e1",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96gd1/economy.js": {
       "bytes": 211729,
       "sha256": "ed2eb108b3c094444f49700e61ab48dfbb968c9bc7f135dcf11a7335c62fd095",
-      "gitBlob": "e59c9fb028f0a2a919de90b78235d86d61859595",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96gd1/inbox.js": {
       "bytes": 10617,
       "sha256": "b2ba562b238ef5a22f879a37f6665378154ac18fe49de3ec47c6b84404368e3a",
-      "gitBlob": "2e79092508215e08e2584fb3315be50d1bdd2776",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96gd1/main.js": {
       "bytes": 476789,
       "sha256": "2a5711d26f249f630661aea09a9d40e563127ca36951405d74d3a6756826c0a4",
-      "gitBlob": "2e5c2ad15ceb67cc3b510242a597d49375b39eeb",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96gd1/map.js": {
       "bytes": 146657,
       "sha256": "d8ca27ee07c484b7399f95d8031aa70fb7539bcf89d768c8442200b7cba76ae3",
-      "gitBlob": "05500f9881754c2be923eb83a5deb2d99543d353",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96gd1/news.js": {
       "bytes": 6039,
       "sha256": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
-      "gitBlob": "9b0a32120a05d24c014c1acf22a5a4835a6b37c6",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/baselines/96gd1/ui.js": {
       "bytes": 517645,
       "sha256": "0bf048e8a9d3cc754cdfc913dd14a20d6b5fb5084259f93ac60df46871a3a792",
-      "gitBlob": "710abf9ffc21754fb3a8485e97a6aa7458a271d8",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/browser-96h0-regression.js": {
       "bytes": 16459,
       "sha256": "99707e7e9e34e1a6f087fba543278ee259e06e99253c3ee8055a7ba19be89d01",
-      "gitBlob": "c6dce1b78ed56368836eb3ce230b9a30152596af",
-      "inGitHistory": false,
       "provenance": "H0/H2 hash-verified evidence or explicit output-directory harness adjustment"
     },
     "tests/browser-96h0-setup.js": {
       "bytes": 4113,
       "sha256": "767156f611230f3f13d7ea4d7370c4c7d60018c880604e382cccca6ebcabb5d2",
-      "gitBlob": "253c867ea4f9bc0ae3c116d3c11aa6e327d50868",
-      "inGitHistory": false,
       "provenance": "H0/H2 hash-verified evidence or explicit output-directory harness adjustment"
     },
     "tests/browser-politics-96h0.js": {
       "bytes": 7990,
       "sha256": "fc4a1509d6d3acbd0624fa453fe6f828c5cffad160a7d98ba8c474ac2cd7578f",
-      "gitBlob": "2d85499817cbb35f636e9ab66dcbb043f961868a",
-      "inGitHistory": false,
       "provenance": "H0/H2 hash-verified evidence or explicit output-directory harness adjustment"
     },
     "tests/contracts-browser-96h0.js": {
       "bytes": 5862,
       "sha256": "0ae158790b7f8742d4e5d3ad9362e9d236113eedb7d0f78ca1ac1b0d6a0eae02",
-      "gitBlob": "01aab211a3cb893612e93e2d8fb0236c30915d68",
-      "inGitHistory": false,
       "provenance": "H0/H2 hash-verified evidence or explicit output-directory harness adjustment"
     },
     "tests/faz83_2_brand_test.js": {
       "bytes": 12143,
       "sha256": "d894b1aa0712305b10ec98bc15ea4420280af58d912c39fb060cc166533ad882",
-      "gitBlob": "a558b270f870f2104ab9d82da0acf7025cf8d865",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz83_3_render_recovery_test.js": {
       "bytes": 21355,
       "sha256": "b452be0f77e1e8bca4a71c9b3a378bd696fdb81fef1d8e1e0ddd119434ebbcc4",
-      "gitBlob": "95d17a548384fe2f4b8894ffe823d69bd73b9c73",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz83_4_redraw_leaders_test.js": {
       "bytes": 25549,
       "sha256": "787ce930142dbe53f9c0c6359e3968495f69534ed797971a30511a68985f752d",
-      "gitBlob": "8b836cbcf65b4dd97c45f5fc8c60838277b544a0",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz84a_intel_dedup_test.js": {
       "bytes": 30456,
-      "sha256": "3b5606820c243e952bde46363e1229233acbf558a3375b55bdafde4369271b79",
-      "gitBlob": "1f7694ab729be2c25b84f3317ebe331e4d8a7414",
-      "inGitHistory": true,
+      "sha256": "5b8e55e6698383b66f13732a7460742e2702cb06ea2f0f44a4cd728fd14eb17c",
       "provenance": "Git blob"
     },
     "tests/faz84b_vassal_state_dedup_test.js": {
       "bytes": 33315,
-      "sha256": "6a5685a1537dc57cfc149481bf19cc955b4b8004a2e843d29571f36698a769eb",
-      "gitBlob": "476914fff516a42c72f0ea1010287d1ae8d5f7ee",
-      "inGitHistory": true,
+      "sha256": "ff9c27029913069bc4c4094cab69bf5daa936365266eb939e6d3ed4deb0a5b33",
       "provenance": "Git blob"
     },
     "tests/faz84c_state_visibility_gate_test.js": {
       "bytes": 29672,
-      "sha256": "269a51b5e0b7c864763e92a34383bc2701c288034896db4f00446c293cd253b4",
-      "gitBlob": "3dabeb7854ee9925753e1c262c2d9188c4858223",
-      "inGitHistory": true,
+      "sha256": "43a3c1d6891db95a40eda9e12263465eeb9f806a0c1b3ac1f95cffc35ef61cf4",
       "provenance": "Git blob"
     },
     "tests/faz85a_political_save_integrity_test.js": {
       "bytes": 35322,
-      "sha256": "9983081f28e95dfda1717cf5a1396c935193267799f974dfb275e1b9774c64c4",
-      "gitBlob": "ec445d6936bec7de458aa79eb419a9926b2c330a",
-      "inGitHistory": true,
+      "sha256": "54e11437ad741bd5c0130b67d56f109602a32a8eebdb4186b7fdedc1c01a4a98",
       "provenance": "Git blob"
     },
     "tests/faz85b_load_idempotency_test.js": {
       "bytes": 38508,
-      "sha256": "d3840c5cc1ee407bf01648f2ec87769f4f56da56e23fac6091ccae62a22c52ed",
-      "gitBlob": "46e750a841fc7ecddec612e44442d4219bd4f1a5",
-      "inGitHistory": true,
+      "sha256": "59a157e032e048c6e24dd9fba0ffa595a16b1de8430b99eef9cf06984546591f",
       "provenance": "Git blob"
     },
     "tests/faz85c_crisis_save_continuity_test.js": {
       "bytes": 33486,
-      "sha256": "a8f6d5042189b786f72549116276ca63f00f5684b55edad49a48f8aea6208d95",
-      "gitBlob": "27dc16239c5a5c7756777205f48121c8353294c5",
-      "inGitHistory": true,
+      "sha256": "407a1b11330f6e4aebacaa0e60b396bc4f80d7382f3f5ecdd81975659e826356",
       "provenance": "Git blob"
     },
     "tests/faz85d_campaign_save_continuity_test.js": {
       "bytes": 42852,
-      "sha256": "2b0f3de58e36ff263939bd4777ed54c2f23632094b3d283666b3e53895532845",
-      "gitBlob": "5fbd545f7d1003bd3a0e9e3b4993b172338c3b0c",
-      "inGitHistory": true,
+      "sha256": "9019a216fcd12fd392ae617eb41c10f8ece5146b668b00b4fd6e9dd6020ca0fb",
       "provenance": "Git blob"
     },
     "tests/faz85e_event_inbox_continuity_test.js": {
       "bytes": 39856,
-      "sha256": "126c458b993f9561eb9c94fc46717b610b0b1432bb933c35fbf6ce049869feab",
-      "gitBlob": "5580a6dc3ada1b8a3384bc3e883bbad03d0b1a55",
-      "inGitHistory": true,
+      "sha256": "b0224364f98629dd5520eb070e4473d2a08b38db1b434db7b3f666d7cd35edf9",
       "provenance": "Git blob"
     },
     "tests/faz85f_spatial_simulation_continuity_test.js": {
       "bytes": 40971,
-      "sha256": "fe5f9740f89a78b92e9e770c27ae43e912ac6865bd8d35a5ad650c67710fc049",
-      "gitBlob": "80101d72ddff4ce352345f8075fe5a928333457b",
-      "inGitHistory": true,
+      "sha256": "e2e2186af427bdaa6a4b6fa3c6729ef5979b606e6264be3c2e6a92e74a665908",
       "provenance": "Git blob"
     },
     "tests/faz86a_intel_command_center_test.js": {
       "bytes": 33756,
-      "sha256": "b5adf076379a5edc68621cff8762bdc3979f326c0d580232ed21562f503370ca",
-      "gitBlob": "4f8c9c8f53ff948b5e8c2cd44a93d4059b484542",
-      "inGitHistory": true,
+      "sha256": "c88e8063a97c7d0b3e8450cd5664528416ac5d7908875ce03193d84a5dd6126a",
       "provenance": "Git blob"
     },
     "tests/faz86b_deal_engine_test.js": {
       "bytes": 30431,
-      "sha256": "e1c4ee20ade157b22bf777102ff4d62319302d75a9bcd28f98d726a8602e19b8",
-      "gitBlob": "aa041d146a78860e0aab9beeae7bede3efa22582",
-      "inGitHistory": true,
+      "sha256": "81f5aac7626999ef6c82dfe8ad3aba2e30be7c47c55ff3161aefc1d1badeb1cb",
       "provenance": "Git blob"
     },
     "tests/faz86c_1_quote_effective_plan_test.js": {
       "bytes": 25275,
-      "sha256": "0f8f00e2159032552edc10004bef283ba65a4f75e748acfc5149bd195109ff83",
-      "gitBlob": "b3de7e2b5a1545ad9fe3e4e3655fc7c12eccaddf",
-      "inGitHistory": true,
+      "sha256": "04b401026daffac758764a31ead0b598abc15c89dd61a1d7863025c52298ed1d",
       "provenance": "Git blob"
     },
     "tests/faz86c_2_transaction_test.js": {
       "bytes": 28042,
-      "sha256": "0317f9a411d9fab0a2a2387150017e7989754bd104d169ae07e4a12de05d4888",
-      "gitBlob": "35f257607b3c73360336faaf82f6b3075629278a",
-      "inGitHistory": true,
+      "sha256": "f88c3c7325f537a7fa2335ee6c61341d2b0fb2ee922772a6843a0d4fcbbd2a32",
       "provenance": "Git blob"
     },
     "tests/faz86c_3_ai_negotiation_test.js": {
       "bytes": 21559,
-      "sha256": "0e270d053e199d2bd565fe8cefcfe8fbcc621af752ce0ecabf5617f889b13f05",
-      "gitBlob": "e874f173d29870e064baafe9acaede04a7d7a2c7",
-      "inGitHistory": true,
+      "sha256": "9a53771effb36ea465582cb4490812cc9323efcfc7f8161748755c6e0d4bc591",
       "provenance": "Git blob"
     },
     "tests/faz86c_4_reciprocal_offers_test.js": {
       "bytes": 23591,
-      "sha256": "fde5c42b775cbb0b4aa05cdec734a588543521dcc718791746ca3e29b4acff0f",
-      "gitBlob": "34b2d244e34c2f784ac0e1bf03510cec41b75553",
-      "inGitHistory": true,
+      "sha256": "6a34dc139cf341c09efc903ca6032ad23e6355c0b2bc6995b05799a37cd91f0e",
       "provenance": "Git blob"
     },
     "tests/faz86c_4h_map_input_test.js": {
       "bytes": 22679,
-      "sha256": "a26da3c630fbb3831bf0c5973c027edeec0ef88fa39ba7834a9d5012d27024f1",
-      "gitBlob": "8a657565560098432694e93ed4b01c06699f8f01",
-      "inGitHistory": true,
+      "sha256": "c38349b91d31fad93372188c24fb540be174923b6ca6fe5dabcb8a3d83b60f93",
       "provenance": "Git blob"
     },
     "tests/faz86c_4h_r1_exact_regression_test.js": {
       "bytes": 29114,
-      "sha256": "9a2847fb6935038e549d7dfcc9e9d74f16f2a386ec80664c3c76d6b48542e5f1",
-      "gitBlob": "09a7fce258241789bfcd1922266ecf5aa5096913",
-      "inGitHistory": true,
+      "sha256": "365c5142b5ab2d4ecafc076ce960fffa243d6acbbc02e8f6f7a1f56640930f68",
       "provenance": "Git blob"
     },
     "tests/faz86c_4h_r2_surface_camera_layers_test.js": {
       "bytes": 25409,
-      "sha256": "f36621f4f73fda3bae496d0e6ab130800d6e21af9512fef96b87540c3994e3f4",
-      "gitBlob": "b8489b85652d624b7bc5296cd74575676daf8ece",
-      "inGitHistory": true,
+      "sha256": "eb3ab180300d7ce9aff6f5ca9d17f38b1945b74d0794c1591fac05baba9a84a4",
       "provenance": "Git blob"
     },
     "tests/faz86c_4h_r3_surface_lifecycle_test.js": {
       "bytes": 28465,
-      "sha256": "7e70386a0fb1d4af30f8fe57a2c8cea97c289e2390cde86fc6845425aea6103c",
-      "gitBlob": "e2b086c081ea99717496bbf1f3e9846a70ccd0a3",
-      "inGitHistory": true,
+      "sha256": "869e57716c7088390da696a6a360bbdf2b7e1bb6e814d2ec82eb9f6b3cd67379",
       "provenance": "Git blob"
     },
     "tests/faz86c_4h_r4_diagnosis_test.js": {
       "bytes": 28101,
-      "sha256": "b168698bff5267b3d43c83b493e7253ba25c86ab1406530552fa250820774d74",
-      "gitBlob": "269a18899193cbc2445a3a4b998683c9f6240933",
-      "inGitHistory": true,
+      "sha256": "76e1161da6451158e81e8a693af9c3551907b851b0efe853726f441d5b3b48e1",
       "provenance": "Git blob"
     },
     "tests/faz86c_4h_r4_targeted_diag_test.js": {
       "bytes": 27649,
-      "sha256": "2ec49be650884b81624e848f55dc65eeadf367fe0efe73a8faf4fbc87a8b8b57",
-      "gitBlob": "5c7133cdebeb5167ed647b85a5d605671e545418",
-      "inGitHistory": true,
+      "sha256": "2d4aa562ee741f6adfe779a3ea74052658951d2446587ede0d04a952861bd91b",
       "provenance": "Git blob"
     },
     "tests/faz86c_5_1_ui_portraits_native_canvas_test.js": {
       "bytes": 11282,
       "sha256": "2f497936727f89db63084c23d01fe95bf44d539b1cc353d38b492852843b5025",
-      "gitBlob": "98738617e558ff80d230459785af0a1aa1fd8292",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz86c_5_diagnostics_test.js": {
       "bytes": 8839,
       "sha256": "11ce049d7664188bed428a500556cb646554228c48715604f0a24473807e2873",
-      "gitBlob": "a10a09a41653e2f1e960a93087ade84431412cce",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz86c_5_native_canvas_test.js": {
       "bytes": 9522,
       "sha256": "15dba434f87b5feb0fb1da61e6f7b5944991dae9f64cb62f169b93aa25cf0452",
-      "gitBlob": "528f8c16e212cae189e46ba9eb9626c775ee54ab",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz86c_6_transaction_acceptance_test.js": {
       "bytes": 17704,
       "sha256": "4f1663ddf3f5176f1943c9465bcfaaf241666ad5e94922b77220295d7904a418",
-      "gitBlob": "70b39ac71933db62e2ffa3bc897ef2ad51438317",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz86c_strict_deal_ai_test.js": {
       "bytes": 37212,
-      "sha256": "67120c685dab6a7fbabdfb1cf0c5d2ac408c82531827df9e65bceedc139a3c3b",
-      "gitBlob": "dcd81c22c9307a9142edbe8040b34f006fbc3278",
-      "inGitHistory": true,
+      "sha256": "1df5fa7f3611e370f1c7da4c7e397def8534bc99aab019cc4fd121e41f5f56c9",
       "provenance": "Git blob"
     },
     "tests/faz86d_envoy_missions_test.js": {
       "bytes": 17882,
       "sha256": "8d0301113a6ad13bdcb99149621061228cac06be3d2dbef05d59be855a093cbc",
-      "gitBlob": "ce22493957006c583ea44ace380a841648a76b9a",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz86e_diplomacy_center_test.js": {
       "bytes": 17243,
       "sha256": "1e19868dcc797865bb1f572f571a0392323b1275da9820fddfac97a0b4491048",
-      "gitBlob": "69a5ad50cab33395f86010fd641ad40239e12db8",
-      "inGitHistory": false,
       "provenance": "H0/H2 hash-verified evidence or explicit output-directory harness adjustment"
     },
     "tests/faz86f_ai_balance_test.js": {
       "bytes": 9636,
       "sha256": "f55292eb4ab8e36d2a607838f47bf0033ea4d1a4a346ca4e4590c73674bd8182",
-      "gitBlob": "4c2133b7d88acc663ab877f31b7ac21782b57d4a",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz86g_integration_handoff_test.js": {
       "bytes": 8389,
-      "sha256": "18e35d60870353450cb7ee7591cdcc03f4c6287292ab54a09d525b08d68cae2a",
-      "gitBlob": "531c15dec22b94f2adea293edb1dfd5e79ec501f",
-      "inGitHistory": true,
+      "sha256": "2ad6b43d848d0cfbc6b61098b4eb30447997075cbd1843691b4363f9c4ef3f3f",
       "provenance": "Git blob"
     },
     "tests/faz87a_espionage_feedback_test.js": {
       "bytes": 9608,
       "sha256": "12c9e25a11035ef6abcebcf4692cf52a411ea71cc68de2e7e7e06cb61f03fbd9",
-      "gitBlob": "2263f82a4e5251c45433762b968cc0da03075f26",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz87b_ai_operation_selection_test.js": {
       "bytes": 6497,
       "sha256": "58953f0b4cb0a18b39200d0e038cfc470899b3d342d7cfd258295b9daef0a865",
-      "gitBlob": "43683504c227372e05f555f7011162b11a304f0a",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz87c_1_intrigue_outcomes_test.js": {
       "bytes": 8109,
       "sha256": "398e444c6709e0cd034de83ca7438ebafdef60678b27d8d05765cf1a60659b6e",
-      "gitBlob": "9bf96628553212de78ac7d366a0c320771105e96",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz87c_special_operation_outcomes_test.js": {
       "bytes": 6736,
       "sha256": "440468d4a0230a3e558f940df8963c980f62d460e8323f9c23846e9df3d37644",
-      "gitBlob": "50930a9a556eb6666338fe6647109dca5cd74b40",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz87d_offer_repetition_test.js": {
       "bytes": 7125,
       "sha256": "acd4f1e57a8ddbcc00681f28e1cfa9c80418d5b572939a975b061214389a22d0",
-      "gitBlob": "5b8edd6b84c2fd375fc73b02c2e61c26eae7f45e",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz88a_1_ship_dispatch_test.js": {
       "bytes": 8354,
       "sha256": "e9758a4fefe885830db4d5a925c2e428d6f20e3f94e367fdc0455deed2314d1d",
-      "gitBlob": "cb5c017b7ed52dab53d3ba697d6e3d4c143a05ef",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz88a_fleet_routes_test.js": {
       "bytes": 10566,
       "sha256": "6331bdc1b96e7924b25e239af733c28a4ac8f437f9dfbe2c25778d897875d816",
-      "gitBlob": "df5d1e5c2eeb890abea1292778ecd5afce93741b",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz88b_combat_feedback_test.js": {
       "bytes": 6388,
       "sha256": "25856e8038b4d3cb445a641c9939daff02ed1ad882d9b13e1cfaa0e07a5106b1",
-      "gitBlob": "de6fb7d6965c02ecb8765bcace7f0876f3f76393",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz89a_memory_factions_test.js": {
       "bytes": 8101,
       "sha256": "3e38077fc9eacfe1abbde8072d5635f3dfcd2cb4ca32eef91164f561e2df6fc4",
-      "gitBlob": "24a80304442651dd2498795fad33f95574f6d8c9",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz89b_daily_campaign_test.js": {
       "bytes": 3408,
       "sha256": "0287cd9ab36eb8ad945d40d7bb6a4a9c039c59a2c8ba640f7ad04189dc04f3b8",
-      "gitBlob": "51062aeab726f454220d54004d55253af2f44d05",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz90rc_1_save_boundary_test.js": {
       "bytes": 4644,
       "sha256": "db139f467ca3ce8362fe049f3b414866ff02899c2073907f7c82c915ae6f6d65",
-      "gitBlob": "62156f773e44ce72ec329c975b571bc4d2fdc6d1",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz90rc_2_load_feedback_test.js": {
       "bytes": 7168,
-      "sha256": "4d2b17d0ed2b9f977c66177abda7178c9026f4cd17a0cf225c320a63f2d21794",
-      "gitBlob": "e9dedb1ab928733f58803e986822db3c14a2b7c2",
-      "inGitHistory": true,
+      "sha256": "59cc5410b6a63e7ada317276903fcb186e83caec2d81ff7d565f5752f42dd014",
       "provenance": "Git blob"
     },
     "tests/faz90rc_3_load_transaction_test.js": {
       "bytes": 12587,
       "sha256": "2e7c41abdd437c4ed6536faf381a5b6856f8dd2cd0d26d99288fc344f9004e4a",
-      "gitBlob": "8446bd86ed267000fc92c997de2bb86fa3211c92",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz90rc_release_candidate_test.js": {
       "bytes": 5981,
-      "sha256": "c236454410a375841424afa0e6eaa2ed17434d1e4f70da855af8e7b2837c87f3",
-      "gitBlob": "596f960c17af5ba9d154d7c44a23666f19386e7b",
-      "inGitHistory": true,
+      "sha256": "2cfdee6cc2459c3f41411b7c74649e6116508952ff393abfc9cd9c88bb64cd3e",
       "provenance": "Git blob"
     },
     "tests/faz91a_special_presentation_test.js": {
       "bytes": 5929,
       "sha256": "ed5b35425b6ff2e559f9be544b592f1d8a761de0048dfbac0e157079ff8ec65c",
-      "gitBlob": "63204629c8cd08c28d3f0bf07798a58d96ac6a91",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz91b_campaign_observer_test.js": {
       "bytes": 2542,
       "sha256": "d71f78f297c2808700076878f2ada2aba44401f3cf56df95dee844eb5534f0c7",
-      "gitBlob": "3fa703e398d514ec802c4984ae231c8de457a003",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz91b_faction_share_test.js": {
       "bytes": 2404,
       "sha256": "c072a79eea985eccfbb86b1c040df77a08e4ec886020743684c3888efde3f33a",
-      "gitBlob": "c09fd6aaae751f19f33ece060c2f7cb38543f813",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz91c_ai_candidates_test.js": {
       "bytes": 3412,
       "sha256": "2f87fdd9be05d8b83df041f463fd8adda0ad96577efcfbd331139153280052c3",
-      "gitBlob": "ae74be8882386610968ada97079db44c7754f3c1",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz91c_pirate_combat_test.js": {
       "bytes": 7524,
       "sha256": "a3e986c0a5db3d385c3c00daf54534fde759b03855e01e3dadca7389b541a995",
-      "gitBlob": "4b144bb5df36b8a843383f153a54086c5ee46022",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz91d_1_fleet_names_native_canvas_test.js": {
       "bytes": 7705,
       "sha256": "475071e35f6a8d59333429b66ee4f57969ab60ec133e7beeca0d3d82f3b2fad9",
-      "gitBlob": "94a317e2a94609c7c3be2ef345c12bc6b3e4daba",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz91d_territory_native_canvas_test.js": {
       "bytes": 13099,
       "sha256": "2d6f92e64761026f27ef9d7bbe113973a3746aa2e158b225a1a5ee4f492a8567",
-      "gitBlob": "820b7204cb3865b67de1c72054cdd607c4351f01",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz91e_1_federation_policy_test.js": {
       "bytes": 14806,
       "sha256": "21f2a345f4a7b3b8abeacc408219f430cfb7a157fe17ffc6b49ffe7ad053e759",
-      "gitBlob": "6a1df39d56cb74b6896c70e88a845183020d853f",
-      "inGitHistory": false,
       "provenance": "H0/H2 hash-verified evidence or explicit output-directory harness adjustment"
     },
     "tests/faz91e_federation_laws_test.js": {
       "bytes": 12753,
       "sha256": "bcf1a436747c7697d14269e7d310936d5ecba62190f01432cb7e06f1939b9cae",
-      "gitBlob": "90b5da70945d73c89ed4b1e4422cbee7346a4319",
-      "inGitHistory": false,
       "provenance": "H0/H2 hash-verified evidence or explicit output-directory harness adjustment"
     },
     "tests/faz92a_war_contribution_test.js": {
       "bytes": 12082,
       "sha256": "fd361958593c10e54ba7ea5072c52ac9b85b4ca6d752e734f1a8b9af8f111e21",
-      "gitBlob": "1f233e99d589b45de00a20772d27988f24dd2f39",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz92b1_ship_lock_test.js": {
       "bytes": 7313,
       "sha256": "f00919d4dc14ba99a215b157920e0c8ac4b0db861b709cb66ab81113be29daa2",
-      "gitBlob": "a21d4d375578e0d2cc4ecdc36b2f9adff046a8b2",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz92b_settlement_proposal_test.js": {
       "bytes": 12465,
       "sha256": "3015d81ad076b3e96225e31c601d09099f2ea019db0a6b64d0ac51db9a31c31b",
-      "gitBlob": "a80883f6d25b61decd5b8e4f8b4aaf748ec9237c",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz92c_settlement_apply_test.js": {
       "bytes": 12327,
       "sha256": "ddc79ff441a974d4b3f1e1ad2e5908e975241d09c6703fe79f496897474aa098",
-      "gitBlob": "2af981868a5da7f9e386b121d61509ca703d7779",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz92d_settlement_agenda_test.js": {
       "bytes": 6974,
       "sha256": "ca5929e4d4985403bfeca5bbbe8973675a3465e37ba1926fadc5356450b9678d",
-      "gitBlob": "53496381cf842a6e1a67279976506ce51ee9f56f",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz93a1_production_panels_test.js": {
       "bytes": 11254,
       "sha256": "ca26bcfd681e569bebbc0b7110002d5d1f6863397d2c6dc9fc7a189315d63e84",
-      "gitBlob": "64e131438d722f2bf250c81cd97f19a6f6a70483",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz93a_logistics_targets_test.js": {
       "bytes": 6950,
       "sha256": "9a7196df69bf95989fabaea2962732362477c672563ce2983913279e101e0e8a",
-      "gitBlob": "ba290bc129a1a6f450967578cb7c849d5d7456fe",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz93b_pending_shipments_test.js": {
       "bytes": 10029,
       "sha256": "2b8b7d9d88b4f27be0cf891188f1ea8ca7172fe6faf75e31ece1bbedc24918be",
-      "gitBlob": "632b7ea8a1eb9d705e39c042b3b237651e23a488",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz93c_fleet_composition_test.js": {
       "bytes": 15404,
       "sha256": "6d27a1cd44b8cbce9ab219547ba96c674525f550fdc4f71aa485a46cd1d904e4",
-      "gitBlob": "bd19ed86a1597b028b27d84dd5ac2415439f72b7",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz93d1_navy_campaign_test.js": {
       "bytes": 2034,
       "sha256": "fb802ddc72a356e823d41e3204dcd2974af94cece4d31fe5a2c68ee1fd1ef1ec",
-      "gitBlob": "4a9acb52ec0bd42053736e84f701a02f823182f1",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz93d1_navy_production_test.js": {
       "bytes": 5318,
       "sha256": "bfbbc8b33e509ca2951a8be14813e8a093c5cec610110a3882729a0c5f7666e1",
-      "gitBlob": "51dbd47293bedf61b8a895ac7b18cb859b11ecb5",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz93d_research_planner_test.js": {
       "bytes": 12715,
       "sha256": "eb61774c4c452218970af685596eb02ebdb4fac1b5dc846e594e4aecefba91ea",
-      "gitBlob": "6f060b2143ae052e533d01bfba36e43ac0781147",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz93d_science_ui_test.js": {
       "bytes": 8517,
       "sha256": "cc5aa32899a4762f0f01ffc8bbc39b84a4ac96b69f5e76a0f1e34a3c4d20e286",
-      "gitBlob": "a8243a755f4cbddaba7cf3f4ec02a01ed6ed0150",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz93e1_doctrine_test.js": {
       "bytes": 9966,
       "sha256": "fe39d4226f610b58299f3882dbed9eecd5118f39b1a9ced0e1bd2ba46f72181a",
-      "gitBlob": "6072564ac01a630928beceae3a6489830f67d271",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz93e_specialization_test.js": {
       "bytes": 11345,
       "sha256": "7f4ff64ea9f1ab40efe99ff610142e9e4c12047e61174b64b160f69b474b1429",
-      "gitBlob": "e4691232b29c89dd1f0daa0fdf439df52746deb9",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz94a_camera_test.js": {
       "bytes": 8612,
       "sha256": "42219f5bf8283a1563461aed0f9b4b3f88431b04e03230a79c6ab6b0170291eb",
-      "gitBlob": "3cc94908d7f92a2bd4905ab9563de4c50ba5a838",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz94b_exploration_test.js": {
       "bytes": 11500,
       "sha256": "c6372785e803ee855f3c17821dded867ebc608e301e22ca61806a502d9d9668a",
-      "gitBlob": "0624a2d9ae52b57496f291741d9feb611018cf20",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz94c_camera_trade_test.js": {
       "bytes": 8881,
       "sha256": "73d19cf4ac7a0a0047f673b148fa8e9631f172ee217a45865baf80e3745fa48b",
-      "gitBlob": "b0208631ae5c607bd4ed507876644b03b1d0b81e",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz94d1_war_visibility_test.js": {
       "bytes": 11539,
       "sha256": "f9f0332dd1653d43a9b12d949ba8c3eb640a449ed671498fd3ba16fc6b0b7241",
-      "gitBlob": "50d2e236ca1f357e82311a388f85c4ef718fe717",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz94d_mobile_diplomacy_war_test.js": {
       "bytes": 9850,
       "sha256": "fa5ad33d458c52f042dfa2f6b91c61b3262b03e50c29ff916d4d085961b18dbb",
-      "gitBlob": "2e77a3f054757837e252d74bbcf3be6c1131f819",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz95a_strategic_ai_test.js": {
       "bytes": 14500,
       "sha256": "9f89971941352896c2fe90655d30bd3997d36243a9a9c597965efc2fcfc5a1c2",
-      "gitBlob": "cc7a8c23cdca4bafdadc2508c26d90ee8ca1748b",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz95b_federation_reform_test.js": {
       "bytes": 25004,
       "sha256": "42d8b2f9058aa92526f440ac9c3246a4e3ef3472b3d276101e29c2e2efbf3432",
-      "gitBlob": "f882375ccf5fe222595612e9cb8a202b49d5d12a",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz95c1_diplomacy_test.js": {
       "bytes": 9621,
       "sha256": "07f3fad5793c270096a2afcfb42fb0304307358ea206af27af32a4b609737fd1",
-      "gitBlob": "9321c7d24b33bb76ccc496d02a014b7ae07ce532",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz95c1_logistics_test.js": {
       "bytes": 8293,
       "sha256": "4f6a6182d5f7a7345501c58542f5b523a63613729a35d5c6d951420436f53692",
-      "gitBlob": "4c3502d1cf2d3ff08162a8e0d2af6fa00f2ba89d",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz95c1_storage_test.js": {
       "bytes": 5503,
       "sha256": "ce768ff7313bcf84b70b1255d481a79601ed9d0163329eb4edf4e1ce2b317d1c",
-      "gitBlob": "95bb5fc79f79d992a3a55cd6dc21f315e6ad3463",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz95c1_ui_test.js": {
       "bytes": 11868,
       "sha256": "db9cb451a73d39a4052e6e43f27ab2875005e3901c0581cd4fa0ad61e0939ed9",
-      "gitBlob": "6c757affc586cb1b7506f98b218e9024060e293f",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz95c_joint_campaign_test.js": {
       "bytes": 15748,
       "sha256": "960d1c0471f3104d57c378b377e0f03869860c2a944f001e693cebc91ee7159a",
-      "gitBlob": "d44955173c6960ec6efdb5cf4797b823c8cdc255",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz95d_identity_test.js": {
       "bytes": 7551,
       "sha256": "78867eb0ed076e7e4e655c7c833b5ec5b6a9b5be6450df7052e4507ebdee87da",
-      "gitBlob": "c58bde40c32b229d3a4c7bc778f558dd203aede5",
-      "inGitHistory": false,
       "provenance": "H0/H2 hash-verified evidence or explicit output-directory harness adjustment"
     },
     "tests/faz95d_map_test.js": {
       "bytes": 6736,
       "sha256": "4b67a7a5c72ed1d1bd5ce3076174e9c9173ecd77cd9ebed2880aee76e47d6ba3",
-      "gitBlob": "3459392dd314085a12879e0f5e55f4bc7b5c909d",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz95d_war_preview_test.js": {
       "bytes": 6582,
       "sha256": "050ca9e052b718991ececdf7d0ecf7a4ae9e0282595444d0f4d4f0815b40e625",
-      "gitBlob": "11f401d640eeffc40fd80ed45186d7489203b6bd",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz95e1_random_event_switch_test.js": {
       "bytes": 2869,
       "sha256": "458e4c6a316d679d29b4ab5fd831f0fac982f566b6c5ef860475d0fa0c9ab6ff",
-      "gitBlob": "b395ed3fb5920d58d625a9072cfefe1ceb902721",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz95e2_regression_test.js": {
       "bytes": 3912,
       "sha256": "7cc7910a9685ec604b662e6fd98bf563b6700fd26e0529379cf4d1a305b4e972",
-      "gitBlob": "c84db14c8d470b60e062a17a27d752d761d14b2a",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz95e3_layers_test.js": {
       "bytes": 4165,
       "sha256": "51174918151d7336b58f4e9c95c591fb331cfb296113154892f6917683de934b",
-      "gitBlob": "72152b4ddbf558c9baee855d2772ca9e97c10ed5",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz95e3_sensor_test.js": {
       "bytes": 3164,
       "sha256": "0ae2f4ffd03fb940cde0bd25e9ae4f714e6b6d9ccc1b735becaae18d8074b6d1",
-      "gitBlob": "89e3c961d9ad0fa8f5c0c867a3029c343cde2724",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz95e_construction_test.js": {
       "bytes": 8013,
       "sha256": "92d31177da0ee2385916d2d0da5c8633441ecaa1c9bd952ad342fece7591db36",
-      "gitBlob": "92ecd9fd5d3bb4cc700bafb32792198a0369817d",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz95e_inbox_test.js": {
       "bytes": 7492,
       "sha256": "467f52537ec5bc7318ff289d102c8073f14bb70c0a0ee5ddc21e45d6f4f9a2f7",
-      "gitBlob": "d64242ff96f6cf68bf6ce68c096c745da71996c4",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz95e_news_test.js": {
       "bytes": 7488,
       "sha256": "ba6cc6051f20f49f074515748c87f448feb2a836e816922d41be4dcad7f7b161",
-      "gitBlob": "eb6114a87eab75f1328f07798c551fe01b065db5",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz95e_ui_save_test.js": {
       "bytes": 6850,
-      "sha256": "b47b8cdebcabc38fd426afbd2cb9ab49ed0d91c4f793bd42ea6c9bb80a9c45aa",
-      "gitBlob": "b06e0d742a874e799c7f2b9a9f38973955c03bd5",
-      "inGitHistory": true,
+      "sha256": "ca136f2227cfb62573da3cb61b85e887e66220edf73ccfb6bf76bff01b5e6239",
       "provenance": "Git blob"
     },
     "tests/faz96a_cargo_test.js": {
       "bytes": 8704,
       "sha256": "aa645d8cf8c61d416a3317f80395ece83d34bca5886c8915bd9b51cd8a69da84",
-      "gitBlob": "232c2baca068a3fae104000ad834e52623b8e2ae",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz96a_integrity_test.js": {
       "bytes": 5039,
       "sha256": "ecb7748ce2207aec1ffa347153f3370f8a86aeda7784dcb12a9a507ea57803a2",
-      "gitBlob": "9a93877b9f6d175dc00e9ade3140c45cd1a29a9a",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz96b_accounting_test.js": {
       "bytes": 4099,
       "sha256": "8a5c8724be07f9dd79375cbfbf96f942b55e860b55f33198df0af5a131114e9f",
-      "gitBlob": "71a87df37e7f5b25d5cdca75a1934f010a33fce3",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz96b_economy_test.js": {
       "bytes": 7392,
       "sha256": "a0d8a880ed6b5de463602641379b48341ac2e973f8ee66c70ba21af75c0f9452",
-      "gitBlob": "1393bbb9e01becdf2803f5e28da2628e37771544",
-      "inGitHistory": false,
       "provenance": "H0/H2 hash-verified evidence or explicit output-directory harness adjustment"
     },
     "tests/faz96c1_cache_test.js": {
       "bytes": 3278,
       "sha256": "952ee30f1e9299708be2797f448b6738b16628ac370bbd97412f590e581f7fad",
-      "gitBlob": "2b75d4385c39d92350b633c61e07a14c22c5e2de",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz96c1_navy_test.js": {
       "bytes": 5066,
       "sha256": "d7418c23bdc30c2a8f86ba96b262f13ca94b368ffe5133581fe4325e7a68b6ff",
-      "gitBlob": "d4ca45fce113972bb7a29883f4a5fff24e283195",
-      "inGitHistory": false,
       "provenance": "H0/H2 hash-verified evidence or explicit output-directory harness adjustment"
     },
     "tests/faz96c1_war_test.js": {
       "bytes": 3848,
       "sha256": "d66ec036acec1c78bd35e50826e0fa86a505202080e0e8038b3d3dfa7d22d40d",
-      "gitBlob": "d336828b8dcef106e5b921b7328f7987d999778b",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz96c2_rebuild_test.js": {
       "bytes": 8518,
       "sha256": "6278167c27309dc776929dfe4ce0200ceb2d8eae284dfc35d55e10b8eeaff7bf",
-      "gitBlob": "156edcc29b1c08df0fd976db3f2833eb42eb8a22",
-      "inGitHistory": false,
       "provenance": "H0/H2 hash-verified evidence or explicit output-directory harness adjustment"
     },
     "tests/faz96c3_ui_test.js": {
       "bytes": 7683,
-      "sha256": "8efdb38dde2d89e3a180ee3d8e0c1f326bdda3b6991fa2f007db15c5f9d401bc",
-      "gitBlob": "02eb627210ff22f0a08487b334101815f3fb5e5f",
-      "inGitHistory": true,
+      "sha256": "eef1d070f651e67151802e85130ee264c144c80e2f0c9c074c663d6b25df3030",
       "provenance": "Git blob"
     },
     "tests/faz96c_diagnostics_test.js": {
       "bytes": 2254,
       "sha256": "a423f3f7eef898d57223ef6a55801b67404c27ac02b85c8f2fe69be6f840461f",
-      "gitBlob": "3c2784bb95d46ad56cde69ea577bee13b6eaa76e",
-      "inGitHistory": false,
       "provenance": "H0/H2 hash-verified evidence or explicit output-directory harness adjustment"
     },
     "tests/faz96c_planning_test.js": {
       "bytes": 9113,
       "sha256": "b8c790926dadbe343b5c000b1392578fe803ac746824048608185d8fec7ffbd4",
-      "gitBlob": "7052d803292c16b554435418773f960a8cd630bc",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz96c_trade_test.js": {
       "bytes": 5097,
       "sha256": "d92a378cb45e038f7268caa3dec05054d6da8e2b2acf2a7111540b957ef569b7",
-      "gitBlob": "21d71e3ef0127426e8690de91953d6ccbaa5ad9d",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz96d_audio_test.js": {
       "bytes": 2712,
       "sha256": "38ea6c0da9a2afa854532b6ee3d8aaf247fd7176991fa2b96b2347a9d7486cc9",
-      "gitBlob": "69ee824df1e3391326c2aaab11637cfc7037a838",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz96d_origins_test.js": {
       "bytes": 5068,
       "sha256": "2f87df51a9f2b87da29d39dc4a1d7fa96c400d23b161c5178a4c1f736ad1b566",
-      "gitBlob": "fd48e7808351bda5b53d37706149224bf63462fd",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz96d_portraits_native_canvas_test.js": {
       "bytes": 2780,
       "sha256": "4f046ef95ebf91e6c065e010408ef0e05dd3efea9423665186f13f0bf205b609",
-      "gitBlob": "911f9b393901bed8cb51483a5f0f9f89f405a0ff",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz96e1_actions_test.js": {
       "bytes": 5520,
       "sha256": "9458b2c79e263f6a335fc9d876eeed0d300d166c88142e19393c5cb6fe5c83ae",
-      "gitBlob": "811ae2a7a51f8aba5f53e4b3b9e20fbd6af327d3",
-      "inGitHistory": false,
       "provenance": "H0/H2 hash-verified evidence or explicit output-directory harness adjustment"
     },
     "tests/faz96e1_identity_test.js": {
       "bytes": 7822,
       "sha256": "4adc111a395241681441fe869a3de30d6df61ff260f0f4abd093db95b36534cb",
-      "gitBlob": "6da0ca80a04f9619f45fbdbd9f20600ef3524d10",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz96e1_mechanics_test.js": {
       "bytes": 10054,
       "sha256": "cb36a511632dcc3549002f674123103d9552b9e2a7d0937843594c727f72c3de",
-      "gitBlob": "33a76a515fb7072e12dec41295fb325e75500dd1",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz96e_federation_test.js": {
       "bytes": 9376,
       "sha256": "a1cfa67fff49eec56b72dfdee0f460fed62aabf1b6c3ad89828d2a6f9dbdc4ac",
-      "gitBlob": "4af67fbcb3d9f04b55036f8d2fc0c4abca1813de",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz96e_origins_test.js": {
       "bytes": 9352,
       "sha256": "2e28f8d28a22dc7d893311199b050242dc2a3d333bb254d2be70905f77d866d9",
-      "gitBlob": "5de33240e58fa2a539547d3a08a71cb1b9913194",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz96f1_budget_trade_test.js": {
       "bytes": 7299,
       "sha256": "0bd4e94d311d9957a4e604a2c11ea31d3c7a562d342f8f2e59836d48b8b03b73",
-      "gitBlob": "6c164ab3bfdd9d928bb43a06343cfdffe35885bb",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz96f3_demolition_test.js": {
       "bytes": 4335,
       "sha256": "d426c24e72062099b6547e48aa3246dcf97074f347a0da54cc874fe8ad4e2b6f",
-      "gitBlob": "89867b50e202f0056b211abba7d839da92c133b7",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz96f3_physiology_test.js": {
       "bytes": 3626,
       "sha256": "d1f36abcbbd7ad129a5bbf8ba0d6d0496779bdc951810e61980554d16e71be63",
-      "gitBlob": "4c465df98734eac614ae0fdd55d7cb17034f91de",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz96f3_purchase_test.js": {
       "bytes": 3936,
       "sha256": "628e5ef69b9ca1811f5019a7b9c077271f8a9020367d5217b7286723c6c549f4",
-      "gitBlob": "ea71d5b0b39ff22db696026297fe05af343818a9",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz96f4_colony_test.js": {
       "bytes": 4640,
       "sha256": "d579c9d1f3a296a69be58ab7935dc321c1be482129ad91fd02037b579ea63c9a",
-      "gitBlob": "ed0c1d4c5e1dbdf7c3fc87ca304a3a00c22377e3",
-      "inGitHistory": false,
       "provenance": "H0/H2 hash-verified evidence or explicit output-directory harness adjustment"
     },
     "tests/faz96f4_trade_test.js": {
       "bytes": 4450,
       "sha256": "2e0576a3f6c04a39125a27a05dc0e54427092a45e9382c97cb7a4f8ee90743e3",
-      "gitBlob": "3256fca6043e27969f9762bfa7cf52388ec9a85f",
-      "inGitHistory": false,
       "provenance": "H0/H2 hash-verified evidence or explicit output-directory harness adjustment"
     },
     "tests/faz96f5_robustness_test.js": {
       "bytes": 2751,
       "sha256": "0ebfdca7aef05f3d662b65f8110db301abdc77acea20f8ddf91cd79d52be377e",
-      "gitBlob": "26519ded8f109b34e768ae53f30330ec610c3d7d",
-      "inGitHistory": false,
       "provenance": "H0/H2 hash-verified evidence or explicit output-directory harness adjustment"
     },
     "tests/faz96f_map_panel_native_canvas_test.js": {
       "bytes": 6211,
       "sha256": "9c12119244aa3b9903152eaa9b98cee03227a58e897f40ed41579aefc641b977",
-      "gitBlob": "aeb359599285f2f1dd06c695724db84985413e25",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz96f_memory_test.js": {
       "bytes": 8171,
       "sha256": "4fce2caa07d76ca1387780e52f9f733db42234699f36a1b35bb49ca101bc3a68",
-      "gitBlob": "04b5c095ae74e04dcb06a1c23f00fce6455d5806",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz96f_strategy_test.js": {
       "bytes": 13086,
       "sha256": "fc4f25f929c20ca1ebdd72073a237acb29294b7e0991ef5f49057fe37bbb7cbc",
-      "gitBlob": "b1d1b11f9d6e377ff05a5b7e77527f2410a13acf",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/faz96g1_contract_test.js": {
       "bytes": 10253,
       "sha256": "b8d7efe1426d0e0b5b5a3c9cbac4f8e01cdc7b0716c02f4a67a766643b75553f",
-      "gitBlob": "143ca0c2d8c80084bd9bc59bafb9a0e561ce47b4",
-      "inGitHistory": false,
       "provenance": "H0/H2 hash-verified evidence or explicit output-directory harness adjustment"
     },
     "tests/faz96g2_setup_test.js": {
       "bytes": 5153,
       "sha256": "cf39f0893d1997c2a3884faebd1dcb3a8ee9db0043ec1a1a3c6a0885dbf6a87e",
-      "gitBlob": "8cca3a5576a635fdde8736bb8c3ce62e0c54f7df",
-      "inGitHistory": false,
       "provenance": "H0/H2 hash-verified evidence or explicit output-directory harness adjustment"
     },
     "tests/faz96g_politics_test.js": {
       "bytes": 10067,
       "sha256": "5af07c42299ca63abd1e3a15b46915806afe6aca64ce8de9e59d1edf02eb4fd1",
-      "gitBlob": "494dc38daeb9f921e92514494b473c4f5c904319",
-      "inGitHistory": false,
       "provenance": "H0/H2 hash-verified evidence or explicit output-directory harness adjustment"
     },
     "tests/faz96gd1_federation_budget_test.js": {
       "bytes": 7033,
       "sha256": "447af2334de045ce6c4eac52c01f474fded961aac66354fc6e7939fa802959e5",
-      "gitBlob": "2dbc4138ec414f4b0597374a6b914cbfe7e53918",
-      "inGitHistory": false,
       "provenance": "H0/H2 hash-verified evidence or explicit output-directory harness adjustment"
     },
     "tests/faz96gd2_war_memory_test.js": {
       "bytes": 6486,
       "sha256": "f6556068a8a2ea90aa476bb8166459b0afd5f7678e8bd0ed36b89abf1c43acee",
-      "gitBlob": "58b559b0499127d0e8da37b37dab4bac5d2de07b",
-      "inGitHistory": false,
       "provenance": "H0/H2 hash-verified evidence or explicit output-directory harness adjustment"
     },
     "tests/faz96h0_building_safety_test.js": {
       "bytes": 3340,
       "sha256": "72e740c68a3744c69f50bb2a3f485205f265e7c350cde917ac55207d8faa9b6d",
-      "gitBlob": "31b0fb231de233f42f2b24f01d7302d72994040b",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/fixtures/96f3/96F1-11-ship-2550-1.save": {
       "bytes": 507184,
       "sha256": "10bb1bbc5473c67eba106766a30a58fb7cded015055bcd98a4a145a747c010df",
-      "gitBlob": "767029c88ea6fd2b80dc3b4147eabe4a8b7d7a5e",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/fixtures/96f3/96F1-11-turn-2370-1.save": {
       "bytes": 492934,
       "sha256": "96c6112f27f2b1dfc4bfc54ded046e4534bcdc265e59dd7599c03771e2e8e602",
-      "gitBlob": "63c0e62fc81e5e531e60cab9ed54ba2843f414b9",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/fixtures/96f3/96F1-11-turn-330-1.save": {
       "bytes": 200667,
       "sha256": "3c21d3cf2c63c0617d64c42ea38ccacb84c08e60883f13dde9acf7c41ca68f1e",
-      "gitBlob": "7a39d48f1d2d9992ca8f3936691fea82b3c89e74",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/fixtures/96f3/96F1-11-turn-450-1.save": {
       "bytes": 233911,
       "sha256": "326242270219fbd4997e67723941a079d1bc9b1c549d762fefbe33ded59d6973",
-      "gitBlob": "a513bbf49312bfbd7fd45a4bec30a672e4278e6f",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/fixtures/96f3/96F1-11-turn-570-1.save": {
       "bytes": 249686,
       "sha256": "401cc95c82cc4f5bb62551c550bfb5c28404786f7c04b605805e0d1891aeb595",
-      "gitBlob": "66b44bd240fae8c92c200ccfe697502ce8550ab9",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/fixtures/96f3/96F1-11-turn-900-1.save": {
       "bytes": 303449,
       "sha256": "608169953c9ac0514deb073ced3219abc84f7f01ccbfe3a6d3562fd612614c26",
-      "gitBlob": "914323187acb829008b19cd6daa48629921f2b4d",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/fixtures/96f4/42-day-2340.save": {
       "bytes": 520964,
       "sha256": "c8c61b0a982b07d5ec4022472a7c9c8a67d50f7bf35e9df2297b53e4dbbee932",
-      "gitBlob": "d83cecf0eb5a6a3dd2ed43f7960f919123000450",
-      "inGitHistory": false,
       "provenance": "H0/H2 hash-verified evidence or explicit output-directory harness adjustment"
     },
     "tests/fixtures/96f4/96F1-2026-trade-2460.save": {
       "bytes": 464517,
       "sha256": "74d98be2a43fd284d66148b07030491311e0a3d5f54c7a8bf31c5763a1a2f762",
-      "gitBlob": "95359503a61d40b1c041f86a8ba075efff2d4e34",
-      "inGitHistory": false,
       "provenance": "H0/H2 hash-verified evidence or explicit output-directory harness adjustment"
     },
     "tests/fixtures/96f4/96F1-2026-trade-3300.save": {
       "bytes": 483179,
       "sha256": "4f9ebff24c89b9b0ea6219240687ac22bf952fbe8501344a09f7321f3446cf4c",
-      "gitBlob": "863572470c9c13fcc128afee1188e9c66f90a398",
-      "inGitHistory": false,
       "provenance": "H0/H2 hash-verified evidence or explicit output-directory harness adjustment"
     },
     "tests/fixtures/96f4/96F1-404-trade-2760.save": {
       "bytes": 535652,
       "sha256": "ce79a5864a9c28ce67b06c969c800c8b88baf13612239bd453201aa3b38de7b6",
-      "gitBlob": "8799353aaae460e32d7b7eb9f4e485847de2a2c6",
-      "inGitHistory": false,
       "provenance": "H0/H2 hash-verified evidence or explicit output-directory harness adjustment"
     },
     "tests/fixtures/96f4/96F1-404-trade-3330.save": {
       "bytes": 567334,
       "sha256": "66bca5b9d3cb853892fb06d7cf889d4d8ce91cc518ff41d8bfab038f9e1d5047",
-      "gitBlob": "3cef3a63ebe25829caa7baf6f741eef7d70de6b0",
-      "inGitHistory": false,
       "provenance": "H0/H2 hash-verified evidence or explicit output-directory harness adjustment"
     },
     "tests/fixtures/identity-baseline-95c1-11.json": {
       "bytes": 48643,
       "sha256": "e5de102aa2e24632a180d3dbd419d636832f6de6eb21ab61f874ca3047112509",
-      "gitBlob": "5982f84574e1adbaa4ed3acce5fb56e518e40bac",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/fixtures/identity-baseline-95c1-404.json": {
       "bytes": 46925,
       "sha256": "0ff6afb593c4322cc34f8fbc4558d233b4870235c153bf43b9ed50cbce45c524",
-      "gitBlob": "709a9c40ca9e20e7587b7ec4e2233aedfe0abe68",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/fixtures/identity-baseline-95c1-99.json": {
       "bytes": 46834,
       "sha256": "c936222175d89c9a12a5825c430289ffea8d3e7a76ab5f1472b343988955c9a4",
-      "gitBlob": "d4f7fc26ebfecd599b31538045160185e4e7fa4e",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/fixtures/inbox96c3-renderer.js": {
       "bytes": 620,
       "sha256": "d2e2ae943909527e7221e9675f0a087794bad97786be6fa294d7de7a20b61330",
-      "gitBlob": "de34d6b0eff3ba2f8b58c55f017ffbbd9c56757e",
-      "inGitHistory": false,
       "provenance": "H0/H2 hash-verified evidence or explicit output-directory harness adjustment"
     },
     "tests/fixtures/stars-2210-06.sav.json": {
       "bytes": 111540,
       "sha256": "fe2df0b6adc09bfe0148f36c5c96869ffef86ceeaa4cf7eb609f3997bc2c1245",
-      "gitBlob": "769203881d5d2d91e6ca72ea0995759e30361fef",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/fixtures/stars-96b-cargo.sav.json": {
       "bytes": 96980,
       "sha256": "9f7922485c857a77865e9347d0e00d69a28dedb7fb7fc594ec3d59198339d30b",
-      "gitBlob": "8f1254728892948f36c452d67671863817dce6cb",
-      "inGitHistory": false,
       "provenance": "H0/H2 hash-verified evidence or explicit output-directory harness adjustment"
     },
     "tests/fixtures/stars-96c-cargo.sav.json": {
       "bytes": 102055,
       "sha256": "a7eb7e2eefd61fcc02e6d948989feae193c14a12030f570b911890d64ceb3e1e",
-      "gitBlob": "f3b1968eb3e6ff8b9bfa6d1536bd1e971a9d5856",
-      "inGitHistory": false,
       "provenance": "H0/H2 hash-verified evidence or explicit output-directory harness adjustment"
     },
     "tests/fixtures/techs-93d1.json": {
       "bytes": 9011,
       "sha256": "bf0b400ab54e596ab07c3852b635ba84feb9b7b860503c6d7882be1ea7f52f5c",
-      "gitBlob": "3997455845728b299cec9d79ac091fd45302f59c",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/helpers/95e-fixture.js": {
       "bytes": 1866,
       "sha256": "8379672d383b3a760af747855c22a8bd5830a3059c1a3dac9939bda6ed687c86",
-      "gitBlob": "b1cfd483defc717c37c477931d89fd36565bec9d",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/helpers/95e3-fixture.js": {
       "bytes": 906,
       "sha256": "e4cc000a6c4e4fc20aeeebc1e4786a524d26a1076fe998b90f11c2c48436a9e6",
-      "gitBlob": "9bf1d61f28cb923be0d54f26b468cfd9917c1379",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/helpers/96a-fixture.js": {
       "bytes": 1678,
       "sha256": "22d22dc8f71e7c82c3ed29aed8e670a80a8f8f9843c694e6216a8b9951874d08",
-      "gitBlob": "8f5945c8d2860b52b64411523997127f2d8ecbad",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/helpers/96c-audit.js": {
       "bytes": 5478,
       "sha256": "3a65fc12be591e54d79e7aa7c14bd0cb0c8550fd47b16af6886b2518c98c1c84",
-      "gitBlob": "263846bfad51394e65f3391467b9f3fdad52ff8a",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/helpers/96c1-audit.js": {
       "bytes": 4905,
       "sha256": "5e6fad92859803caf5a07ac41548a6405345236c7f4f6432fa03cb9a5847d4a7",
-      "gitBlob": "e662a9ca38f35f60819c107a0e2b6fa1a49e8072",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/helpers/96c1-war-fixture.js": {
       "bytes": 2742,
       "sha256": "2145ec161eb102e661e354a131d9e67164d1c8f0092cfda4cfa8c3a018f53656",
-      "gitBlob": "cd5380387de0e918073b0878305c0de4c711cc47",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/helpers/96c2-audit.js": {
       "bytes": 7258,
       "sha256": "046153cc806df8d02fa9618fc7c9dbdfcaf9fb4a31c2e6ce751f0ca75bf95fe6",
-      "gitBlob": "a38d068fa973d4fd7ca66611488024346b8ca76e",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/helpers/96c2-fixture.js": {
       "bytes": 1879,
       "sha256": "9c7159f06d2a6666d64c93e88f29f8d478a482d92f215f23ccfa7f220373ed23",
-      "gitBlob": "4f801462017cf2fd7d48112abe75ad411b714ac6",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/helpers/96e-fixture.js": {
       "bytes": 2215,
       "sha256": "1a4ac6992a5e6d2c153810be83f355d226c87cf23b2685ce7964150aadcb91e9",
-      "gitBlob": "be2c09f47488258062da15707f59352f37e12065",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/helpers/96f3-fixture.js": {
       "bytes": 948,
       "sha256": "87106064389db3b5aa5ce195de44d7fdca1567a0a678c03cd1b1c34a53f88e7d",
-      "gitBlob": "a6d83761f1a8b26db4234355f5cb56ac40002e75",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/helpers/audio-preservation.js": {
       "bytes": 304,
       "sha256": "c57dcc9c5a00488da0768ea8d5f0c933ef73813b0c08731ebf54428a928fc613",
-      "gitBlob": "e9fa2eab37b3d7ca0c6c32ea3036cbfb219d04f8",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/helpers/combat-feedback-fixture.js": {
       "bytes": 1015,
       "sha256": "cbb72f25f9291675cd57847322fb79f4b2110c993238f8980c658eeab2603f31",
-      "gitBlob": "1037a05b05ee44bd6c64683391b07385f6f67be6",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/helpers/daily-campaign.js": {
       "bytes": 3280,
       "sha256": "7b50e0f54d863a3f7eaad0909e7a2b154ef3f0fcc9037f1c8b4120fe12b087e7",
-      "gitBlob": "8a7df139c900eed4e6bbd5fa5d3db384b4efa59c",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/helpers/dispatch-fixture.js": {
       "bytes": 1483,
       "sha256": "c02fdd11d0e6d088ff34745746360e8982b7cc5690c2aa6f1cc6cb012ce25ecc",
-      "gitBlob": "0c416702233519c541f01e157c6f54107880af80",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/helpers/identity-fixture.js": {
       "bytes": 1025,
       "sha256": "aab6618530b7908e34a64a682674b89399282c2c3761a402290d39cc7b1fe138",
-      "gitBlob": "1e23c23aabe2649561cbabc6621b73b90591648c",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/helpers/integrated-campaign.js": {
       "bytes": 8957,
       "sha256": "fa3e34e33aad56bbc561a2e1f6772bd5cdd6f1870f7e7efd13af8b194cc4d7cb",
-      "gitBlob": "36c696312914a6d8876db5119750491de8c8635e",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/helpers/joint-fixture.js": {
       "bytes": 2985,
       "sha256": "b118b3b26a95443ce5a92a0eb85c4e7be30eca9c07bd3f240886a2bf575e8d7b",
-      "gitBlob": "3852d1ededf24fb09862c67f453e6176ae3f7d52",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/helpers/map-preservation.js": {
       "bytes": 1639,
       "sha256": "5d2093696c80ed063d4428bc708ca056a6dbc03d91212a001ca7455bcac8e6dd",
-      "gitBlob": "d528aa19d736bc4036aa2889a109518dd28fc74d",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/helpers/runtime.js": {
       "bytes": 7225,
       "sha256": "fac12631ea8fab28a28abd470f7f4bda75a4d6bd6e24519d0bb0791f1529bc3b",
-      "gitBlob": "0fd8af9ce3fd82b940bd80a4c4e5164e7cc84796",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/helpers/ui-preservation.js": {
       "bytes": 6478,
       "sha256": "a9f221ace77c752c9f720a1d088f970b3e2cd315941db26ad95f976d44514062",
-      "gitBlob": "d543872edbc1f5b4e6dadacf26387f960a360fa2",
-      "inGitHistory": true,
       "provenance": "Git blob"
     },
     "tests/ui-live-96h0.js": {
       "bytes": 9390,
       "sha256": "0fc7ba4c3d83003acf2f411f82ff5a17d1e67fcbc9d967a64569600ce68b6af4",
-      "gitBlob": "1910e432386a2e01cd7a3d6485b44d9b4e21ad7a",
-      "inGitHistory": false,
       "provenance": "H0/H2 hash-verified evidence or explicit output-directory harness adjustment"
     },
     "tests/navy-93d1/before-11.json": {
       "bytes": 267569,
       "sha256": "850a9bbb7cdd6074a27cddb5e6592253f1ba2a7abc4bba653adbd8ee0b4d23ca",
-      "gitBlob": "390f7d37ca6eebc266b9a1ffb036b6afa4a617eb",
-      "inGitHistory": true,
       "provenance": "Original H0/H2 hash-verified navy baseline fixture"
     },
     "tests/navy-93d1/before-99.json": {
       "bytes": 268792,
       "sha256": "7213f8db5df7e4ec14f68e3fc5dea20313ae3ae247e378a61d36ad548d8b3f1d",
-      "gitBlob": "46642a07901c8f8ce36ba9b47af49f6146371a05",
-      "inGitHistory": true,
       "provenance": "Original H0/H2 hash-verified navy baseline fixture"
     },
     "tests/navy-93d1/before-404.json": {
       "bytes": 281657,
       "sha256": "da73679a173ad206aca3935918ce6fd4dfa4e12c4a68be9ebc993b43313af65c",
-      "gitBlob": "1c4bb3513b8bc2ccf7c7066d8dd5d64f02a6c13a",
-      "inGitHistory": true,
       "provenance": "Original H0/H2 hash-verified navy baseline fixture"
+    },
+    "tests/baselines/96h0/RELEASE-MANIFEST.json": {
+      "bytes": 1979,
+      "sha256": "4991cd529f96ee3cd6ce0533a09a572e20b8dc716b07c1fbe9e35f4ddc04d069",
+      "provenance": "96H.3 reviewed A1 test or release identity fixture"
+    },
+    "tests/baselines/96h0/ai.js": {
+      "bytes": 273279,
+      "sha256": "f19fa4aae727d8cf2a0c90b0bd8826e5d7730c975a3d8d3d0ca06b548adb2532",
+      "provenance": "96H.3 reviewed A1 test or release identity fixture"
+    },
+    "tests/baselines/96h0/archive-ui.js": {
+      "bytes": 14754,
+      "sha256": "7f96276402dbb88fc93b4cf72bc7b4922887751eb6aede714e0316750f7f92ab",
+      "provenance": "96H.3 reviewed A1 test or release identity fixture"
+    },
+    "tests/baselines/96h0/audio.js": {
+      "bytes": 20197,
+      "sha256": "6ddf6e388fa404394fee6220c2bfeeb3d1f9601c51a35ccdfe3181a8781942f7",
+      "provenance": "96H.3 reviewed A1 test or release identity fixture"
+    },
+    "tests/baselines/96h0/combat.js": {
+      "bytes": 16353,
+      "sha256": "b4e21fcdb6fdaaa93da07313131470de3e8a3c28b5650226a9c4a2713bde73a5",
+      "provenance": "96H.3 reviewed A1 test or release identity fixture"
+    },
+    "tests/baselines/96h0/commerce-ui.js": {
+      "bytes": 11105,
+      "sha256": "cc7fef5ab43176093251916aaafbdd873424da0630ec46fe6d3d5106a690b8d4",
+      "provenance": "96H.3 reviewed A1 test or release identity fixture"
+    },
+    "tests/baselines/96h0/commerce.js": {
+      "bytes": 29743,
+      "sha256": "978e4f6b01faed1babeade20070447cbcfaa4e2ea70793a78e50f20fbe66be01",
+      "provenance": "96H.3 reviewed A1 test or release identity fixture"
+    },
+    "tests/baselines/96h0/construction.js": {
+      "bytes": 8838,
+      "sha256": "d9b544b0328f26576ff90e02fe49c1b7f3798dfd844a8c39ee8dc6c0890debda",
+      "provenance": "96H.3 reviewed A1 test or release identity fixture"
+    },
+    "tests/baselines/96h0/diplomacy.js": {
+      "bytes": 503489,
+      "sha256": "b46fd1bf2552a256fe6ad724ec72859f8edbc8c37eb0fd1c9b6e721582e6b3f3",
+      "provenance": "96H.3 reviewed A1 test or release identity fixture"
+    },
+    "tests/baselines/96h0/economic-ledger.js": {
+      "bytes": 17672,
+      "sha256": "67d07f3ee4777cd7c246c8b37dda7cf1577cf86c19a6edeba68945a5d3063501",
+      "provenance": "96H.3 reviewed A1 test or release identity fixture"
+    },
+    "tests/baselines/96h0/economy-ui.js": {
+      "bytes": 17157,
+      "sha256": "61f6e2dcef7f37143821edccf67552718a210ec555f7b8f9074c68191fd5cbcc",
+      "provenance": "96H.3 reviewed A1 test or release identity fixture"
+    },
+    "tests/baselines/96h0/economy.js": {
+      "bytes": 211729,
+      "sha256": "ed2eb108b3c094444f49700e61ab48dfbb968c9bc7f135dcf11a7335c62fd095",
+      "provenance": "96H.3 reviewed A1 test or release identity fixture"
+    },
+    "tests/baselines/96h0/inbox.js": {
+      "bytes": 11390,
+      "sha256": "5f53ac2ca9c3ca8d5f1a12a9e1ba2b2a247ab7e350df0ec9169a13cfe3285204",
+      "provenance": "96H.3 reviewed A1 test or release identity fixture"
+    },
+    "tests/baselines/96h0/index.html": {
+      "bytes": 87471,
+      "sha256": "5c1bb16b915f04f24719323807a65879b4cf99fca09e74c6d0363c405929ccc3",
+      "provenance": "96H.3 reviewed A1 test or release identity fixture"
+    },
+    "tests/baselines/96h0/main.js": {
+      "bytes": 479276,
+      "sha256": "e7761913fb92f50163357f48e7ab93743ce1474ebfa065f23784cafbd92d129c",
+      "provenance": "96H.3 reviewed A1 test or release identity fixture"
+    },
+    "tests/baselines/96h0/manifest.json": {
+      "bytes": 1922,
+      "sha256": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
+      "provenance": "96H.3 reviewed A1 test or release identity fixture"
+    },
+    "tests/baselines/96h0/map.js": {
+      "bytes": 146657,
+      "sha256": "d8ca27ee07c484b7399f95d8031aa70fb7539bcf89d768c8442200b7cba76ae3",
+      "provenance": "96H.3 reviewed A1 test or release identity fixture"
+    },
+    "tests/baselines/96h0/news.js": {
+      "bytes": 6039,
+      "sha256": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
+      "provenance": "96H.3 reviewed A1 test or release identity fixture"
+    },
+    "tests/baselines/96h0/sw.js": {
+      "bytes": 2800,
+      "sha256": "b0f8f9d33c32bb5466ab74085ea3bdfa65bca0fab0d1d6b0fc1eac709545e516",
+      "provenance": "96H.3 reviewed A1 test or release identity fixture"
+    },
+    "tests/baselines/96h0/ui.js": {
+      "bytes": 535021,
+      "sha256": "6b6c479a12ca7dfa9314e93b846088dd8f0ff012482bbd51dc04edc2c072e45e",
+      "provenance": "96H.3 reviewed A1 test or release identity fixture"
+    },
+    "tests/browser-96h3-buildings.js": {
+      "bytes": 10431,
+      "sha256": "f3d627442fd2584286418b1b9ff058dd31b2a17bd8413eac88fc1fb44abcf6e5",
+      "provenance": "96H.3 reviewed A1 test or release identity fixture"
+    },
+    "tests/browser-96h3-regression.js": {
+      "bytes": 16459,
+      "sha256": "e52a25cca40e4ab435983da695708fa546a68002e24b9832dc5aa7008843fa5f",
+      "provenance": "96H.3 reviewed A1 test or release identity fixture"
+    },
+    "tests/browser-96h3-setup.js": {
+      "bytes": 4113,
+      "sha256": "7e9e9789e67ea8e3f8a9c8fed98dd5c4a3eac61085f031133120402e463225a0",
+      "provenance": "96H.3 reviewed A1 test or release identity fixture"
+    },
+    "tests/browser-politics-96h3.js": {
+      "bytes": 7990,
+      "sha256": "cf1946b8855f7df718f5f395e10e5003672cdff126dcacfd48d96fa9feabb365",
+      "provenance": "96H.3 reviewed A1 test or release identity fixture"
+    },
+    "tests/contracts-browser-96h3.js": {
+      "bytes": 5862,
+      "sha256": "ae65e3f121500f0ec5fbdecbd29f2657aefa7cd5186e1a9ee177b449c9a2b4b5",
+      "provenance": "96H.3 reviewed A1 test or release identity fixture"
+    },
+    "tests/faz96h3_vassal_budget_test.js": {
+      "bytes": 8392,
+      "sha256": "980c8472ca5b59e46b812bda239fbeb37c36fcb64e29d22ef75a4e609a829d26",
+      "provenance": "96H.3 reviewed A1 test or release identity fixture"
+    },
+    "tests/ui-live-96h3.js": {
+      "bytes": 9390,
+      "sha256": "058dc4be6e0f89525946570261dce011eb3706817d50e023524d1e0e5677c9a9",
+      "provenance": "96H.3 reviewed A1 test or release identity fixture"
     }
   },
   "controlRuntimeHashes": {
@@ -2143,5 +1674,6 @@
     "news.js": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
     "sw.js": "b0f8f9d33c32bb5466ab74085ea3bdfa65bca0fab0d1d6b0fc1eac709545e516",
     "ui.js": "6b6c479a12ca7dfa9314e93b846088dd8f0ff012482bbd51dc04edc2c072e45e"
-  }
+  },
+  "releaseBuild": "96h3"
 }

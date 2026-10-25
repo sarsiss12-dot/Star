@@ -1,14 +1,14 @@
 {
-  "phase": "96H.0",
-  "build": "96h0",
+  "phase": "96H.3",
+  "build": "96h3",
   "scope": "Complete playable runtime; evidence is separate",
   "save_version": 8,
-  "pwa_cache": "stars-v96h0",
-  "parent_zip_sha256": "dab9117c504858a3669b458c738ebcc2a33986cae1ec82780843dc25b799dd4f",
-  "parent_commit": "228c2add77a9ea52beb4ac05cf57594bd788d8e5",
+  "pwa_cache": "stars-v96h3",
+  "parent_zip_sha256": "ba40ebb259254cf0ca6a727421c68d9b97c00db98689c26e4659d585a5774c03",
+  "parent_commit": "51c280196a43b6b42958a214c41ae82a76c89b30",
   "file_count": 19,
   "files": {
-    "ai.js": "f19fa4aae727d8cf2a0c90b0bd8826e5d7730c975a3d8d3d0ca06b548adb2532",
+    "ai.js": "27ae25e44d66f5fdbfb04ea7db69aa75769a3165759b6feb0250b5b753e8c739",
     "archive-ui.js": "7f96276402dbb88fc93b4cf72bc7b4922887751eb6aede714e0316750f7f92ab",
     "audio.js": "6ddf6e388fa404394fee6220c2bfeeb3d1f9601c51a35ccdfe3181a8781942f7",
     "combat.js": "b4e21fcdb6fdaaa93da07313131470de3e8a3c28b5650226a9c4a2713bde73a5",
@@ -21,11 +21,11 @@
     "economy.js": "ed2eb108b3c094444f49700e61ab48dfbb968c9bc7f135dcf11a7335c62fd095",
     "inbox.js": "5f53ac2ca9c3ca8d5f1a12a9e1ba2b2a247ab7e350df0ec9169a13cfe3285204",
     "index.html": "5c1bb16b915f04f24719323807a65879b4cf99fca09e74c6d0363c405929ccc3",
-    "main.js": "e7761913fb92f50163357f48e7ab93743ce1474ebfa065f23784cafbd92d129c",
+    "main.js": "1364258ecda220c970bc396ecb430d02b8b8772e3ff31631b3899495343efc4b",
     "manifest.json": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
     "map.js": "d8ca27ee07c484b7399f95d8031aa70fb7539bcf89d768c8442200b7cba76ae3",
     "news.js": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
-    "sw.js": "b0f8f9d33c32bb5466ab74085ea3bdfa65bca0fab0d1d6b0fc1eac709545e516",
+    "sw.js": "c675bc1cb44d70fdc03202e80f7f7b20919a9b54ac971b4adf862be3e1a01da0",
     "ui.js": "6b6c479a12ca7dfa9314e93b846088dd8f0ff012482bbd51dc04edc2c072e45e"
   }
 }
