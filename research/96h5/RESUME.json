@@ -1,6 +1,5 @@
 {
   "phase": "96H.5",
-  "status": "RESUME_REQUIRED",
   "runtime_release_commit": "82cec8632e2076002755e8ee5fb44b91e1895892",
   "test_metadata_commit": "2d4d8021a90d62808bb55548e89129922a0fa30c",
   "runtime_files": 19,
@@ -10,17 +9,9 @@
     "bytes": 756007,
     "sha256": "fa50f80f7f214d56e779e63a5a8a2382574e381b78ea5c63da4a76d24b4c7cf9"
   },
-  "completed": {
-    "identity_census": "256seeds/2816AI",
-    "V1campaigns": "16control+114families/ablations+6E1+16L1;V1rawdatahasmonthlycachewarming",
-    "policy_isolation": "48PASS",
-    "E1": "No realSave effect;rejected",
-    "L1": "Existingpurifiermarketgateaccepted;control34/9test,candidate43/0",
-    "regression": "133unique/6028PASS/0FAIL",
-    "chromium": "252PASS/0FAIL",
-    "postpublication": "HEAD/release/manifest/19runtimeSHA256/gameZIPCRC,SHA256,filelistPASS"
-  },
-  "pure_replay_issue": {
+  "status": "COMPLETE-V2",
+  "previous_incomplete_record_commit": "d17229c74e6fb6ff303914453742f30917823346",
+  "v1_cache_failure": {
     "exact_completed": 14,
     "strict_failed": 2,
     "failed_cases": [
@@ -36,35 +27,42 @@
     "observed_save_sha256": "e273c9301cc93e61d4bd1fcc90e6cc7ba66fc11cb6edd33f5b5fed2f2c9c193f",
     "cause": "Monthly totalPower reporting mutates serialized cache;not a runtime patch"
   },
-  "checkpoint": {
-    "final_zip": "NOT RUN:environment unavailable",
-    "checkpoint_library_file_id": "libfile_1b98ce42d0b881918a5ae817d657aa4a",
-    "checkpoint_version": 1,
-    "checkpoint_bytes": 274548142,
-    "checkpoint_sha256": "a505617fd0f6811c649ca5d058297271f16377c2b211325263236d79e78b92bd",
-    "checkpoint_scope": "V1 natural16,doctrine114,fixtures,source andthen-currentanalysis;notfinalL1rawlogs/screenshots"
+  "completed_v2": {
+    "strict_purity": "16/16allmonthlyfullSaveRngexact",
+    "published_matches": "16/16",
+    "doctrine_runs": 114,
+    "E1R2_rejected_six_runs": true,
+    "regression_unique": "133/6028/0",
+    "evidence_library_file_id": "libfile_40b06af4d6148191bdfed7a9b6362211",
+    "evidence_sha256": "269126a13b1db22b4294491c7d0f658110bbc688c7d8da69a6f5d3dee561099c",
+    "browser_resume": "NOT RUN",
+    "previous_raw_screenshots": "unrecoverable",
+    "next": "No pending phase96H.5runtimework;followreportphase96H.6researchpriorities"
   },
-  "local_progress_if_environment_returns": {
-    "cwd": "/workspace/scratch/6ab388d2ca94",
-    "audit": "audit96h5",
-    "worktree": "Star96h5",
-    "legacy": "audit96h5/legacy-metric-cache-v1",
-    "pure_driver_edits": "campaign.js,campaign-family.js,campaign-target.js changed only monthly power:totalPower(e) to readOnlyPowerH5(e);sourcegameuntouched",
-    "bare_references": "14copied;two seed23 bare-reference replays not verified complete",
-    "last_running": "bare-reference.js H5-M120-23 and H5-M240-23;environmentlost"
+  "final_evidence_zip": "COMPLETE",
+  "final_pure_research": "COMPLETE",
+  "runtime_changes_pending": false,
+  "physical_android": "NOT RUN",
+  "browser_resume": "NOT RUN",
+  "previous_same_phase_chromium": 252,
+  "previous_raw_browser_evidence": "notrecovered",
+  "evidence": {
+    "path": "/workspace/scratch/6ab388d2ca94/deliverables/stars-faz96h5-kanit-v2.zip",
+    "bytes": 327836454,
+    "sha256": "269126a13b1db22b4294491c7d0f658110bbc688c7d8da69a6f5d3dee561099c",
+    "members": 3174,
+    "CRC": "PASS",
+    "allMemberSHA256": "PASS",
+    "manifest": "EVIDENCE-MANIFEST.json",
+    "legacyV1Separate": true,
+    "missingPreviousChromiumRaw": true,
+    "library_file_id": "libfile_40b06af4d6148191bdfed7a9b6362211",
+    "file_id": "file_000000002ed882309001aa158ff4fc5f",
+    "current_version_number": 0,
+    "url": "https://chatgpt.com/library?file_id=libfile_40b06af4d6148191bdfed7a9b6362211&account_id=personal"
   },
   "next": [
-    "VerifyGitHub main before changes;preserve new work",
-    "Restore V1 checkpoint or use returning scratch;do not labelV1pure",
-    "Integrate read-only-metrics helper only into monthly reporting,not AI totalPower",
-    "Finish16bare-engine reference Saves/RNG including fullseed23runs",
-    "Rerun16purecontrols;114B1/B2/ablations;6E1targets;16publishedsourceL1comparisons withstrictunmaskedSave/RNGequality",
-    "Recomputeallbehavior metrics andprovisionalgrades;recordanydifferences honestly",
-    "Production19hashunchanged:retainactual6028/252results;rerunonlyifsourcechangesorconcernrequires",
-    "Collectpostpublicationproof andfirstfailures;createfinalevidenceZIPwithCRC/SHA/fileinventory",
-    "Savefinalreportandartifacts;updateRESEARCHstatususingexpectedSHA/nonforce"
-  ],
-  "physical_android": "NOT RUN",
-  "final_evidence_zip": "NOT RUN",
-  "final_pure_research": "NOT RUN"
+    "No pending phase96H.5runtimework",
+    "See report for96H.6identityassignment,colonyfinance,tradepriority research;no automaticapprovalofnewAI"
+  ]
 }

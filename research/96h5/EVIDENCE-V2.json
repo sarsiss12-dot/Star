@@ -1,0 +1,15 @@
+{
+  "path": "/workspace/scratch/6ab388d2ca94/deliverables/stars-faz96h5-kanit-v2.zip",
+  "bytes": 327836454,
+  "sha256": "269126a13b1db22b4294491c7d0f658110bbc688c7d8da69a6f5d3dee561099c",
+  "members": 3174,
+  "CRC": "PASS",
+  "allMemberSHA256": "PASS",
+  "manifest": "EVIDENCE-MANIFEST.json",
+  "legacyV1Separate": true,
+  "missingPreviousChromiumRaw": true,
+  "library_file_id": "libfile_40b06af4d6148191bdfed7a9b6362211",
+  "file_id": "file_000000002ed882309001aa158ff4fc5f",
+  "current_version_number": 0,
+  "url": "https://chatgpt.com/library?file_id=libfile_40b06af4d6148191bdfed7a9b6362211&account_id=personal"
+}

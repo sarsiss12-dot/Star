@@ -1,0 +1,1711 @@
+{
+  "protocol": "V2 strict full monthly serialized Save/RNG equality;no masked fields",
+  "canonical": {
+    "ai.js": "27ae25e44d66f5fdbfb04ea7db69aa75769a3165759b6feb0250b5b753e8c739",
+    "archive-ui.js": "7f96276402dbb88fc93b4cf72bc7b4922887751eb6aede714e0316750f7f92ab",
+    "audio.js": "6ddf6e388fa404394fee6220c2bfeeb3d1f9601c51a35ccdfe3181a8781942f7",
+    "combat.js": "b4e21fcdb6fdaaa93da07313131470de3e8a3c28b5650226a9c4a2713bde73a5",
+    "commerce-ui.js": "cc7fef5ab43176093251916aaafbdd873424da0630ec46fe6d3d5106a690b8d4",
+    "commerce.js": "978e4f6b01faed1babeade20070447cbcfaa4e2ea70793a78e50f20fbe66be01",
+    "construction.js": "d9b544b0328f26576ff90e02fe49c1b7f3798dfd844a8c39ee8dc6c0890debda",
+    "diplomacy.js": "b46fd1bf2552a256fe6ad724ec72859f8edbc8c37eb0fd1c9b6e721582e6b3f3",
+    "economic-ledger.js": "67d07f3ee4777cd7c246c8b37dda7cf1577cf86c19a6edeba68945a5d3063501",
+    "economy-ui.js": "61f6e2dcef7f37143821edccf67552718a210ec555f7b8f9074c68191fd5cbcc",
+    "economy.js": "ed2eb108b3c094444f49700e61ab48dfbb968c9bc7f135dcf11a7335c62fd095",
+    "inbox.js": "5f53ac2ca9c3ca8d5f1a12a9e1ba2b2a247ab7e350df0ec9169a13cfe3285204",
+    "index.html": "127f72e12e67a7d4c2ea05713fb202e21b470ad053c20411650a0bdbb78bac9d",
+    "main.js": "28d79dc17a3edf30264a15474d35bed648e661043c3a4b03cfab9b6aab8575e5",
+    "manifest.json": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
+    "map.js": "d8ca27ee07c484b7399f95d8031aa70fb7539bcf89d768c8442200b7cba76ae3",
+    "news.js": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
+    "sw.js": "9823fb8be2bc52a32d8a052e10d975379a35fbb0cd920c532756989be4a82671",
+    "ui.js": "d60ec4997195c6ee82fa6fa86164666394cf9773d774c66d591b7f2e481eca24"
+  },
+  "release": {
+    "ai.js": "27ae25e44d66f5fdbfb04ea7db69aa75769a3165759b6feb0250b5b753e8c739",
+    "archive-ui.js": "7f96276402dbb88fc93b4cf72bc7b4922887751eb6aede714e0316750f7f92ab",
+    "audio.js": "6ddf6e388fa404394fee6220c2bfeeb3d1f9601c51a35ccdfe3181a8781942f7",
+    "combat.js": "b4e21fcdb6fdaaa93da07313131470de3e8a3c28b5650226a9c4a2713bde73a5",
+    "commerce-ui.js": "cc7fef5ab43176093251916aaafbdd873424da0630ec46fe6d3d5106a690b8d4",
+    "commerce.js": "978e4f6b01faed1babeade20070447cbcfaa4e2ea70793a78e50f20fbe66be01",
+    "construction.js": "d9b544b0328f26576ff90e02fe49c1b7f3798dfd844a8c39ee8dc6c0890debda",
+    "diplomacy.js": "b46fd1bf2552a256fe6ad724ec72859f8edbc8c37eb0fd1c9b6e721582e6b3f3",
+    "economic-ledger.js": "67d07f3ee4777cd7c246c8b37dda7cf1577cf86c19a6edeba68945a5d3063501",
+    "economy-ui.js": "61f6e2dcef7f37143821edccf67552718a210ec555f7b8f9074c68191fd5cbcc",
+    "economy.js": "5d412d488760ae2b7193b13822b747788130b63ed782e62bfbd3223154b69d22",
+    "inbox.js": "5f53ac2ca9c3ca8d5f1a12a9e1ba2b2a247ab7e350df0ec9169a13cfe3285204",
+    "index.html": "127f72e12e67a7d4c2ea05713fb202e21b470ad053c20411650a0bdbb78bac9d",
+    "main.js": "251de9cd6725a1ed5db3739ac07d7b40bb794e2fc110a4a0526faa155732841e",
+    "manifest.json": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
+    "map.js": "d8ca27ee07c484b7399f95d8031aa70fb7539bcf89d768c8442200b7cba76ae3",
+    "news.js": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
+    "sw.js": "5dc5ef10fbd3cc7499289fc9a7d2e73869312482795e897e70fcfc38a12d3908",
+    "ui.js": "d60ec4997195c6ee82fa6fa86164666394cf9773d774c66d591b7f2e481eca24"
+  },
+  "natural": [
+    {
+      "phase": "H5-M120-11",
+      "seed": 11,
+      "contracts": 11,
+      "cancelled": 4,
+      "freightLost": 2,
+      "alive": 5,
+      "techs": 29,
+      "ships": 104,
+      "power": 14356,
+      "upkeep": 439.2133546796693,
+      "colonies": 12,
+      "deliveries": 84,
+      "pacts": 2,
+      "warsStarted": 8,
+      "peace": 0,
+      "objectiveChanges": 23,
+      "plansCompleted": 11,
+      "plansFailed": 4,
+      "criticalEmpireMonths": 0,
+      "invalidResources": [],
+      "elapsedMs": 37610,
+      "months": 120,
+      "strictBarePurity": true,
+      "publishedSaveRngSame": true,
+      "initialSaveHash": "788b18cff56afd52595cf374ddc94b61c5b99382aa537ec652f67c1ac2f2636f",
+      "initialRng": 1014147474,
+      "split": {
+        "initial": 0,
+        "new": 0
+      }
+    },
+    {
+      "phase": "H5-M120-7",
+      "seed": 7,
+      "contracts": 4,
+      "cancelled": 0,
+      "freightLost": 0,
+      "alive": 5,
+      "techs": 51,
+      "ships": 188,
+      "power": 23537,
+      "upkeep": 566.4480000000003,
+      "colonies": 16,
+      "deliveries": 46,
+      "pacts": 8,
+      "warsStarted": 0,
+      "peace": 0,
+      "objectiveChanges": 14,
+      "plansCompleted": 11,
+      "plansFailed": 2,
+      "criticalEmpireMonths": 5,
+      "invalidResources": [],
+      "elapsedMs": 43977,
+      "months": 120,
+      "strictBarePurity": true,
+      "publishedSaveRngSame": true,
+      "initialSaveHash": "b9513e9d34c85b97ab8cc07ef116c8d40cd9b0bc71fcaeef5cea229bb9ccd636",
+      "initialRng": 1014147470,
+      "split": {
+        "initial": 5,
+        "new": 0
+      }
+    },
+    {
+      "phase": "H5-M120-23",
+      "seed": 23,
+      "contracts": 0,
+      "cancelled": 0,
+      "freightLost": 0,
+      "alive": 4,
+      "techs": 29,
+      "ships": 135,
+      "power": 21514,
+      "upkeep": 453.47666680647166,
+      "colonies": 10,
+      "deliveries": 0,
+      "pacts": 4,
+      "warsStarted": 2,
+      "peace": 0,
+      "objectiveChanges": 18,
+      "plansCompleted": 10,
+      "plansFailed": 2,
+      "criticalEmpireMonths": 1,
+      "invalidResources": [],
+      "elapsedMs": 47745,
+      "months": 120,
+      "strictBarePurity": true,
+      "publishedSaveRngSame": true,
+      "initialSaveHash": "510932ad2d4ff4319b48c45826270a9fa7f3d6bd2cb8ac3019f52d994b6f7ab9",
+      "initialRng": -881359556,
+      "split": {
+        "initial": 1,
+        "new": 0
+      }
+    },
+    {
+      "phase": "H5-M120-42",
+      "seed": 42,
+      "contracts": 5,
+      "cancelled": 0,
+      "freightLost": 0,
+      "alive": 5,
+      "techs": 42,
+      "ships": 142,
+      "power": 20026,
+      "upkeep": 384.0737016930421,
+      "colonies": 15,
+      "deliveries": 58,
+      "pacts": 1,
+      "warsStarted": 0,
+      "peace": 0,
+      "objectiveChanges": 16,
+      "plansCompleted": 5,
+      "plansFailed": 4,
+      "criticalEmpireMonths": 2,
+      "invalidResources": [],
+      "elapsedMs": 56929,
+      "months": 120,
+      "strictBarePurity": true,
+      "publishedSaveRngSame": true,
+      "initialSaveHash": "add9719fe195a4b5affc172fadee0af13647b46d67ce34d1bb1cc6f0589b03af",
+      "initialRng": -881359503,
+      "split": {
+        "initial": 2,
+        "new": 0
+      }
+    },
+    {
+      "phase": "H5-M120-123",
+      "seed": 123,
+      "contracts": 5,
+      "cancelled": 0,
+      "freightLost": 0,
+      "alive": 5,
+      "techs": 44,
+      "ships": 166,
+      "power": 24080,
+      "upkeep": 447.32555137477345,
+      "colonies": 16,
+      "deliveries": 56,
+      "pacts": 10,
+      "warsStarted": 0,
+      "peace": 0,
+      "objectiveChanges": 16,
+      "plansCompleted": 17,
+      "plansFailed": 0,
+      "criticalEmpireMonths": 3,
+      "invalidResources": [],
+      "elapsedMs": 77613,
+      "months": 120,
+      "strictBarePurity": true,
+      "publishedSaveRngSame": true,
+      "initialSaveHash": "a415ed133cead3e3762b9573e61476a599a21ab77e45c904bc55c21761b819b0",
+      "initialRng": 1518100830,
+      "split": {
+        "initial": 3,
+        "new": 0
+      }
+    },
+    {
+      "phase": "H5-M120-99",
+      "seed": 99,
+      "contracts": 11,
+      "cancelled": 0,
+      "freightLost": 3,
+      "alive": 5,
+      "techs": 47,
+      "ships": 187,
+      "power": 26197,
+      "upkeep": 479.13193710951657,
+      "colonies": 20,
+      "deliveries": 57,
+      "pacts": 7,
+      "warsStarted": 1,
+      "peace": 0,
+      "objectiveChanges": 14,
+      "plansCompleted": 12,
+      "plansFailed": 3,
+      "criticalEmpireMonths": 0,
+      "invalidResources": [],
+      "elapsedMs": 86271,
+      "months": 120,
+      "strictBarePurity": true,
+      "publishedSaveRngSame": true,
+      "initialSaveHash": "a7af126addf55d638567cf70984828faaccfd8b6d41675d7e8e82cdd4b284e13",
+      "initialRng": -881359448,
+      "split": {
+        "initial": 0,
+        "new": 0
+      }
+    },
+    {
+      "phase": "H5-M120-404",
+      "seed": 404,
+      "contracts": 14,
+      "cancelled": 1,
+      "freightLost": 0,
+      "alive": 6,
+      "techs": 49,
+      "ships": 251,
+      "power": 31433,
+      "upkeep": 751.0340000000004,
+      "colonies": 19,
+      "deliveries": 154,
+      "pacts": 11,
+      "warsStarted": 0,
+      "peace": 0,
+      "objectiveChanges": 12,
+      "plansCompleted": 7,
+      "plansFailed": 5,
+      "criticalEmpireMonths": 2,
+      "invalidResources": [],
+      "elapsedMs": 91355,
+      "months": 120,
+      "strictBarePurity": true,
+      "publishedSaveRngSame": true,
+      "initialSaveHash": "7fee88d90f31d5650fda4718a9ce4dc61e6e9089af68725310effcd291e70b72",
+      "initialRng": -881359429,
+      "split": {
+        "initial": 0,
+        "new": 2
+      }
+    },
+    {
+      "phase": "H5-M120-2026",
+      "seed": 2026,
+      "contracts": 0,
+      "cancelled": 0,
+      "freightLost": 0,
+      "alive": 5,
+      "techs": 40,
+      "ships": 213,
+      "power": 26652,
+      "upkeep": 694.0900000000004,
+      "colonies": 21,
+      "deliveries": 0,
+      "pacts": 2,
+      "warsStarted": 0,
+      "peace": 0,
+      "objectiveChanges": 23,
+      "plansCompleted": 8,
+      "plansFailed": 6,
+      "criticalEmpireMonths": 1,
+      "invalidResources": [],
+      "elapsedMs": 77965,
+      "months": 120,
+      "strictBarePurity": true,
+      "publishedSaveRngSame": true,
+      "initialSaveHash": "f9b818871586a35a62ceb7cc1939a4b10b77a7a68ea709d82ade8ee4525ea381",
+      "initialRng": 1014148211,
+      "split": {
+        "initial": 1,
+        "new": 0
+      }
+    },
+    {
+      "phase": "H5-M240-11",
+      "seed": 11,
+      "contracts": 23,
+      "cancelled": 6,
+      "freightLost": 2,
+      "alive": 6,
+      "techs": 64,
+      "ships": 203,
+      "power": 37262,
+      "upkeep": 735.282966453797,
+      "colonies": 17,
+      "deliveries": 204,
+      "pacts": 8,
+      "warsStarted": 17,
+      "peace": 0,
+      "objectiveChanges": 41,
+      "plansCompleted": 20,
+      "plansFailed": 7,
+      "criticalEmpireMonths": 10,
+      "invalidResources": [],
+      "elapsedMs": 140502,
+      "months": 240,
+      "strictBarePurity": true,
+      "publishedSaveRngSame": true,
+      "initialSaveHash": "788b18cff56afd52595cf374ddc94b61c5b99382aa537ec652f67c1ac2f2636f",
+      "initialRng": 1014147474,
+      "split": {
+        "initial": 1,
+        "new": 9
+      }
+    },
+    {
+      "phase": "H5-M240-42",
+      "seed": 42,
+      "contracts": 11,
+      "cancelled": 0,
+      "freightLost": 0,
+      "alive": 5,
+      "techs": 93,
+      "ships": 261,
+      "power": 63537,
+      "upkeep": 912.1988633809459,
+      "colonies": 25,
+      "deliveries": 132,
+      "pacts": 1,
+      "warsStarted": 0,
+      "peace": 0,
+      "objectiveChanges": 26,
+      "plansCompleted": 10,
+      "plansFailed": 5,
+      "criticalEmpireMonths": 2,
+      "invalidResources": [],
+      "elapsedMs": 155541,
+      "months": 240,
+      "strictBarePurity": true,
+      "publishedSaveRngSame": true,
+      "initialSaveHash": "add9719fe195a4b5affc172fadee0af13647b46d67ce34d1bb1cc6f0589b03af",
+      "initialRng": -881359503,
+      "split": {
+        "initial": 2,
+        "new": 0
+      }
+    },
+    {
+      "phase": "H5-D120-1-11",
+      "seed": 11,
+      "contracts": 0,
+      "cancelled": 0,
+      "freightLost": 0,
+      "alive": 1,
+      "techs": 4,
+      "ships": 7,
+      "power": 859,
+      "upkeep": 23.799999999999997,
+      "colonies": 2,
+      "deliveries": 0,
+      "pacts": 0,
+      "warsStarted": 0,
+      "peace": 0,
+      "objectiveChanges": 6,
+      "plansCompleted": 2,
+      "plansFailed": 2,
+      "criticalEmpireMonths": 0,
+      "invalidResources": [],
+      "elapsedMs": 33218,
+      "months": 120,
+      "strictBarePurity": true,
+      "publishedSaveRngSame": true,
+      "initialSaveHash": "71f3fadec31e022e5f3efd092e017aacb9f5af08f5d99494f466f2f3061a9518",
+      "initialRng": -1889266088,
+      "split": {
+        "initial": 0,
+        "new": 0
+      }
+    },
+    {
+      "phase": "H5-M240-23",
+      "seed": 23,
+      "contracts": 2,
+      "cancelled": 0,
+      "freightLost": 0,
+      "alive": 5,
+      "techs": 72,
+      "ships": 148,
+      "power": 73030,
+      "upkeep": 968.2526599793598,
+      "colonies": 28,
+      "deliveries": 20,
+      "pacts": 7,
+      "warsStarted": 6,
+      "peace": 0,
+      "objectiveChanges": 33,
+      "plansCompleted": 18,
+      "plansFailed": 3,
+      "criticalEmpireMonths": 1,
+      "invalidResources": [],
+      "elapsedMs": 272034,
+      "months": 240,
+      "strictBarePurity": true,
+      "publishedSaveRngSame": true,
+      "initialSaveHash": "510932ad2d4ff4319b48c45826270a9fa7f3d6bd2cb8ac3019f52d994b6f7ab9",
+      "initialRng": -881359556,
+      "split": {
+        "initial": 1,
+        "new": 0
+      }
+    },
+    {
+      "phase": "H5-D120-11-42",
+      "seed": 42,
+      "contracts": 15,
+      "cancelled": 0,
+      "freightLost": 0,
+      "alive": 11,
+      "techs": 109,
+      "ships": 445,
+      "power": 55500,
+      "upkeep": 1329.2768092518138,
+      "colonies": 42,
+      "deliveries": 122,
+      "pacts": 15,
+      "warsStarted": 0,
+      "peace": 0,
+      "objectiveChanges": 28,
+      "plansCompleted": 23,
+      "plansFailed": 4,
+      "criticalEmpireMonths": 0,
+      "invalidResources": [],
+      "elapsedMs": 222184,
+      "months": 120,
+      "strictBarePurity": true,
+      "publishedSaveRngSame": true,
+      "initialSaveHash": "9bda24ead395a7ca7f0c364ca3577a15dbc15e432acd359125b11e669bc8d285",
+      "initialRng": 126547049,
+      "split": {
+        "initial": 0,
+        "new": 0
+      }
+    },
+    {
+      "phase": "H5-D120-11-23",
+      "seed": 23,
+      "contracts": 103,
+      "cancelled": 8,
+      "freightLost": 7,
+      "alive": 12,
+      "techs": 94,
+      "ships": 474,
+      "power": 59175,
+      "upkeep": 1254.759126626867,
+      "colonies": 27,
+      "deliveries": 887,
+      "pacts": 38,
+      "warsStarted": 1,
+      "peace": 0,
+      "objectiveChanges": 27,
+      "plansCompleted": 14,
+      "plansFailed": 7,
+      "criticalEmpireMonths": 28,
+      "invalidResources": [],
+      "elapsedMs": 203455,
+      "months": 120,
+      "strictBarePurity": true,
+      "publishedSaveRngSame": true,
+      "initialSaveHash": "c5b7c96ee7d9e022d9f1c13e756f8ae872ae6fa6029b957379a53729557db9b0",
+      "initialRng": 126546996,
+      "split": {
+        "initial": 28,
+        "new": 0
+      }
+    },
+    {
+      "phase": "H5-M240-404",
+      "seed": 404,
+      "contracts": 54,
+      "cancelled": 1,
+      "freightLost": 1,
+      "alive": 7,
+      "techs": 121,
+      "ships": 395,
+      "power": 75500,
+      "upkeep": 1469.4414999999995,
+      "colonies": 29,
+      "deliveries": 717,
+      "pacts": 21,
+      "warsStarted": 1,
+      "peace": 0,
+      "objectiveChanges": 28,
+      "plansCompleted": 17,
+      "plansFailed": 9,
+      "criticalEmpireMonths": 49,
+      "invalidResources": [],
+      "elapsedMs": 417442,
+      "months": 240,
+      "strictBarePurity": true,
+      "publishedSaveRngSame": true,
+      "initialSaveHash": "7fee88d90f31d5650fda4718a9ce4dc61e6e9089af68725310effcd291e70b72",
+      "initialRng": -881359429,
+      "split": {
+        "initial": 0,
+        "new": 49
+      }
+    },
+    {
+      "phase": "H5-D120-5-404",
+      "seed": 404,
+      "contracts": 10,
+      "cancelled": 1,
+      "freightLost": 0,
+      "alive": 5,
+      "techs": 40,
+      "ships": 174,
+      "power": 23790,
+      "upkeep": 450.89750000000015,
+      "colonies": 16,
+      "deliveries": 66,
+      "pacts": 6,
+      "warsStarted": 3,
+      "peace": 1,
+      "objectiveChanges": 24,
+      "plansCompleted": 13,
+      "plansFailed": 1,
+      "criticalEmpireMonths": 3,
+      "invalidResources": [],
+      "elapsedMs": 65009,
+      "months": 120,
+      "strictBarePurity": true,
+      "publishedSaveRngSame": true,
+      "initialSaveHash": "9cc31b9810990d7db28eded4494a47a34b1e95775fc531827ea43156bca7fcdc",
+      "initialRng": -881359429,
+      "split": {
+        "initial": 3,
+        "new": 0
+      }
+    }
+  ],
+  "candidates": [
+    {
+      "id": "E1R2-11-3",
+      "family": "E1-R2-actor-only",
+      "seed": 11,
+      "actor": 3,
+      "doc": "yayilmaci",
+      "end": 60,
+      "exit": 0,
+      "signal": null,
+      "durationMs": 24831,
+      "initialSaveHash": "5bf7f78341027320afc3e5e5dcf6b6bb9006f962fbab69843064cd66a8ccdb79",
+      "initialRng": 1014147474,
+      "allMonthlySaveRngSame": true,
+      "allActionsSame": true,
+      "extraColonies": 0
+    },
+    {
+      "id": "E1R2-11-1",
+      "family": "E1-R2-actor-only",
+      "seed": 11,
+      "actor": 1,
+      "doc": "yayilmaci",
+      "end": 60,
+      "exit": 0,
+      "signal": null,
+      "durationMs": 34991,
+      "initialSaveHash": "a898961845f23963529a26ba27209a337e89890a801186119fe5c2500a71d885",
+      "initialRng": 1014147474,
+      "allMonthlySaveRngSame": true,
+      "allActionsSame": true,
+      "extraColonies": 0
+    },
+    {
+      "id": "E1R2-42-3",
+      "family": "E1-R2-actor-only",
+      "seed": 42,
+      "actor": 3,
+      "doc": "yayilmaci",
+      "end": 60,
+      "exit": 0,
+      "signal": null,
+      "durationMs": 20005,
+      "initialSaveHash": "5872bc0e5b737a95c1b91c8b7e39a0f8a844cd31bf3b35b4f8ac45139c247c23",
+      "initialRng": -881359503,
+      "allMonthlySaveRngSame": true,
+      "allActionsSame": true,
+      "extraColonies": 0
+    },
+    {
+      "id": "E1R2-404-1",
+      "family": "E1-R2-actor-only",
+      "seed": 404,
+      "actor": 1,
+      "doc": "yayilmaci",
+      "end": 60,
+      "exit": 0,
+      "signal": null,
+      "durationMs": 47305,
+      "initialSaveHash": "2840a09705e0f1245466531bf1188fa44aaaa74f7f3e223617e460ca4e4085df",
+      "initialRng": -881359429,
+      "allMonthlySaveRngSame": true,
+      "allActionsSame": true,
+      "extraColonies": 0
+    },
+    {
+      "id": "E1R2-42-1",
+      "family": "E1-R2-actor-only",
+      "seed": 42,
+      "actor": 1,
+      "doc": "yayilmaci",
+      "end": 120,
+      "exit": 0,
+      "signal": null,
+      "durationMs": 98188,
+      "initialSaveHash": "3dec9707d3ecf1de2906c222180320f5855d9c03993171c1d85933fab94913dd",
+      "initialRng": -881359503,
+      "allMonthlySaveRngSame": true,
+      "allActionsSame": true,
+      "extraColonies": 0
+    },
+    {
+      "id": "E1R2-404-3",
+      "family": "E1-R2-actor-only",
+      "seed": 404,
+      "actor": 3,
+      "doc": "yayilmaci",
+      "end": 60,
+      "exit": 0,
+      "signal": null,
+      "durationMs": 44703,
+      "initialSaveHash": "14986a04ab9b7b4f7081e90331997c1d49cf47bbbcf7c1a3b43dcc6cd87aa69f",
+      "initialRng": -881359429,
+      "allMonthlySaveRngSame": true,
+      "allActionsSame": true,
+      "extraColonies": 0
+    }
+  ],
+  "legacyComparisons": [
+    {
+      "id": "H5-M120-11",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true,
+      "contractsSame": true,
+      "legacyBareExact": true,
+      "legacyBareRngSame": true
+    },
+    {
+      "id": "H5-M120-7",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true,
+      "contractsSame": true,
+      "legacyBareExact": true,
+      "legacyBareRngSame": true
+    },
+    {
+      "id": "H5-M120-23",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true,
+      "contractsSame": true,
+      "legacyBareExact": false,
+      "legacyBareRngSame": true
+    },
+    {
+      "id": "H5-M120-42",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true,
+      "contractsSame": true,
+      "legacyBareExact": true,
+      "legacyBareRngSame": true
+    },
+    {
+      "id": "H5-M120-123",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true,
+      "contractsSame": true,
+      "legacyBareExact": true,
+      "legacyBareRngSame": true
+    },
+    {
+      "id": "H5-M120-99",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true,
+      "contractsSame": true,
+      "legacyBareExact": true,
+      "legacyBareRngSame": true
+    },
+    {
+      "id": "H5-M120-404",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true,
+      "contractsSame": true,
+      "legacyBareExact": true,
+      "legacyBareRngSame": true
+    },
+    {
+      "id": "H5-M120-2026",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true,
+      "contractsSame": true,
+      "legacyBareExact": true,
+      "legacyBareRngSame": true
+    },
+    {
+      "id": "H5-M240-11",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true,
+      "contractsSame": true,
+      "legacyBareExact": true,
+      "legacyBareRngSame": true
+    },
+    {
+      "id": "H5-M240-42",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true,
+      "contractsSame": true,
+      "legacyBareExact": true,
+      "legacyBareRngSame": true
+    },
+    {
+      "id": "H5-D120-1-11",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true,
+      "contractsSame": true,
+      "legacyBareExact": true,
+      "legacyBareRngSame": true
+    },
+    {
+      "id": "H5-M240-23",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true,
+      "contractsSame": true,
+      "legacyBareExact": false,
+      "legacyBareRngSame": true
+    },
+    {
+      "id": "H5-D120-11-42",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true,
+      "contractsSame": true,
+      "legacyBareExact": true,
+      "legacyBareRngSame": true
+    },
+    {
+      "id": "H5-D120-11-23",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true,
+      "contractsSame": true,
+      "legacyBareExact": true,
+      "legacyBareRngSame": true
+    },
+    {
+      "id": "H5-M240-404",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true,
+      "contractsSame": true,
+      "legacyBareExact": true,
+      "legacyBareRngSame": true
+    },
+    {
+      "id": "H5-D120-5-404",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true,
+      "contractsSame": true,
+      "legacyBareExact": true,
+      "legacyBareRngSame": true
+    },
+    {
+      "id": "B1-11-1-militarist",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B1-11-1-tuccar",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B1-11-1-pasifist",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B1-11-1-yayilmaci",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B1-11-1-izolasyonist",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B1-11-1-teknokrasi",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B1-11-1-kriminal",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B1-11-1-teokrasi",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B1-11-3-militarist",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B1-11-3-tuccar",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B1-11-3-pasifist",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B1-11-3-yayilmaci",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B1-11-3-izolasyonist",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B1-11-3-teknokrasi",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B1-11-3-kriminal",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B1-11-3-teokrasi",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B1-42-1-militarist",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B1-42-1-tuccar",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B1-42-1-pasifist",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B1-42-1-yayilmaci",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B1-42-1-izolasyonist",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B1-42-1-teknokrasi",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B1-42-1-kriminal",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B1-42-1-teokrasi",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B1-42-3-militarist",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B1-42-3-tuccar",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B1-42-3-pasifist",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B1-42-3-yayilmaci",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B1-42-3-izolasyonist",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B1-42-3-teknokrasi",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B1-42-3-kriminal",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B1-42-3-teokrasi",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B1-404-1-militarist",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B1-404-1-tuccar",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B1-404-1-pasifist",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B1-404-1-yayilmaci",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B1-404-1-izolasyonist",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B1-404-1-teknokrasi",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B1-404-1-kriminal",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B1-404-1-teokrasi",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B1-404-3-militarist",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B1-404-3-tuccar",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B1-404-3-pasifist",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B1-404-3-yayilmaci",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B1-404-3-izolasyonist",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B1-404-3-teknokrasi",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B1-404-3-kriminal",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B1-404-3-teokrasi",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B2-11-1-militarist",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B2-11-1-tuccar",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B2-11-1-pasifist",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B2-11-1-yayilmaci",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B2-11-1-izolasyonist",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B2-11-1-teknokrasi",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B2-11-1-kriminal",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B2-11-1-teokrasi",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B2-11-3-militarist",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B2-11-3-tuccar",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B2-11-3-pasifist",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B2-11-3-yayilmaci",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B2-11-3-izolasyonist",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B2-11-3-teknokrasi",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B2-11-3-kriminal",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B2-11-3-teokrasi",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B2-42-1-militarist",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B2-42-1-tuccar",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B2-42-1-pasifist",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B2-42-1-yayilmaci",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B2-42-1-izolasyonist",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B2-42-1-teknokrasi",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B2-42-1-kriminal",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B2-42-1-teokrasi",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B2-42-3-militarist",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B2-42-3-tuccar",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B2-42-3-pasifist",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B2-42-3-yayilmaci",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B2-42-3-izolasyonist",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B2-42-3-teknokrasi",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B2-42-3-kriminal",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B2-42-3-teokrasi",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B2-404-1-militarist",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B2-404-1-tuccar",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B2-404-1-pasifist",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B2-404-1-yayilmaci",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B2-404-1-izolasyonist",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B2-404-1-teknokrasi",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B2-404-1-kriminal",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B2-404-1-teokrasi",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B2-404-3-militarist",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B2-404-3-tuccar",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B2-404-3-pasifist",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B2-404-3-yayilmaci",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B2-404-3-izolasyonist",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B2-404-3-teknokrasi",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B2-404-3-kriminal",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "B2-404-3-teokrasi",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "EXP-11-1-0.2",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "EXP-11-1-0.75",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "EXP-11-1-1.3",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "EXP-11-3-0.2",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "EXP-11-3-0.75",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "EXP-11-3-1.3",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "EXP-42-1-0.2",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "EXP-42-1-0.75",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "EXP-42-1-1.3",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "EXP-42-3-0.2",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "EXP-42-3-0.75",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "EXP-42-3-1.3",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "VOTE-11-1--99",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "VOTE-11-1-0",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "VOTE-11-1-99",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "VOTE-42-1--99",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "VOTE-42-1-0",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    },
+    {
+      "id": "VOTE-42-1-99",
+      "fullActionsSame": true,
+      "monthlyMetricsSame": true
+    }
+  ],
+  "states": [
+    {
+      "id": "H5-M120-404",
+      "empire": 7,
+      "bornMonth": 107,
+      "aliveAtEnd": true,
+      "criticalMonths": [
+        119,
+        120
+      ],
+      "resourceCritical": {
+        "ene": [],
+        "min": [],
+        "tuk": [
+          119,
+          120
+        ],
+        "ala": []
+      }
+    },
+    {
+      "id": "H5-M240-11",
+      "empire": 7,
+      "bornMonth": 218,
+      "aliveAtEnd": true,
+      "criticalMonths": [
+        219,
+        220,
+        221,
+        222,
+        223,
+        224,
+        226,
+        227,
+        228
+      ],
+      "resourceCritical": {
+        "ene": [],
+        "min": [
+          219,
+          220,
+          221,
+          222,
+          223,
+          224,
+          226,
+          227,
+          228
+        ],
+        "tuk": [],
+        "ala": []
+      }
+    },
+    {
+      "id": "H5-M240-23",
+      "empire": 7,
+      "bornMonth": 207,
+      "aliveAtEnd": true,
+      "criticalMonths": [],
+      "resourceCritical": {
+        "ene": [],
+        "min": [],
+        "tuk": [],
+        "ala": []
+      }
+    },
+    {
+      "id": "H5-D120-11-23",
+      "empire": 13,
+      "bornMonth": 114,
+      "aliveAtEnd": true,
+      "criticalMonths": [],
+      "resourceCritical": {
+        "ene": [],
+        "min": [],
+        "tuk": [],
+        "ala": []
+      }
+    },
+    {
+      "id": "H5-M240-404",
+      "empire": 7,
+      "bornMonth": 107,
+      "aliveAtEnd": true,
+      "criticalMonths": [
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137,
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144,
+        145,
+        146,
+        147,
+        148,
+        149,
+        150,
+        151,
+        152,
+        153,
+        154,
+        155,
+        156,
+        157,
+        158,
+        159,
+        160,
+        161,
+        162,
+        163,
+        164,
+        165,
+        166,
+        167
+      ],
+      "resourceCritical": {
+        "ene": [],
+        "min": [],
+        "tuk": [
+          119,
+          120,
+          121,
+          122,
+          123,
+          124,
+          125,
+          126,
+          127,
+          128,
+          129,
+          130,
+          131,
+          132,
+          133,
+          134,
+          135,
+          136,
+          137,
+          138,
+          139,
+          140,
+          141,
+          142,
+          143,
+          144,
+          145,
+          146,
+          147,
+          148,
+          149,
+          150,
+          151,
+          152,
+          153,
+          154,
+          155,
+          156,
+          157,
+          158,
+          159,
+          160,
+          161,
+          162,
+          163,
+          164,
+          165,
+          166,
+          167
+        ],
+        "ala": []
+      }
+    },
+    {
+      "id": "H5-M240-404",
+      "empire": 8,
+      "bornMonth": 155,
+      "aliveAtEnd": true,
+      "criticalMonths": [],
+      "resourceCritical": {
+        "ene": [],
+        "min": [],
+        "tuk": [],
+        "ala": []
+      }
+    }
+  ],
+  "totals": {
+    "M120": {
+      "runs": 8,
+      "criticalEmpireMonths": 14,
+      "deliveries": 455,
+      "contracts": 50,
+      "techs": 331,
+      "colonies": 129,
+      "ships": 1386,
+      "power": 187795,
+      "plansCompleted": 81,
+      "plansFailed": 26,
+      "split": {
+        "initial": 12,
+        "new": 2
+      }
+    },
+    "M240": {
+      "runs": 4,
+      "criticalEmpireMonths": 62,
+      "deliveries": 1073,
+      "contracts": 90,
+      "techs": 350,
+      "colonies": 99,
+      "ships": 1007,
+      "power": 249329,
+      "plansCompleted": 65,
+      "plansFailed": 24,
+      "split": {
+        "initial": 4,
+        "new": 58
+      }
+    },
+    "D120": {
+      "runs": 4,
+      "criticalEmpireMonths": 31,
+      "deliveries": 1075,
+      "contracts": 128,
+      "techs": 247,
+      "colonies": 87,
+      "ships": 1100,
+      "power": 139324,
+      "plansCompleted": 52,
+      "plansFailed": 14,
+      "split": {
+        "initial": 31,
+        "new": 0
+      }
+    }
+  },
+  "sourceChecks": [
+    {
+      "id": "H5-M120-11",
+      "control19": true,
+      "release19": true,
+      "strictMonthlySaveRng": true
+    },
+    {
+      "id": "H5-M120-7",
+      "control19": true,
+      "release19": true,
+      "strictMonthlySaveRng": true
+    },
+    {
+      "id": "H5-M120-23",
+      "control19": true,
+      "release19": true,
+      "strictMonthlySaveRng": true
+    },
+    {
+      "id": "H5-M120-42",
+      "control19": true,
+      "release19": true,
+      "strictMonthlySaveRng": true
+    },
+    {
+      "id": "H5-M120-123",
+      "control19": true,
+      "release19": true,
+      "strictMonthlySaveRng": true
+    },
+    {
+      "id": "H5-M120-99",
+      "control19": true,
+      "release19": true,
+      "strictMonthlySaveRng": true
+    },
+    {
+      "id": "H5-M120-404",
+      "control19": true,
+      "release19": true,
+      "strictMonthlySaveRng": true
+    },
+    {
+      "id": "H5-M120-2026",
+      "control19": true,
+      "release19": true,
+      "strictMonthlySaveRng": true
+    },
+    {
+      "id": "H5-M240-11",
+      "control19": true,
+      "release19": true,
+      "strictMonthlySaveRng": true
+    },
+    {
+      "id": "H5-M240-42",
+      "control19": true,
+      "release19": true,
+      "strictMonthlySaveRng": true
+    },
+    {
+      "id": "H5-D120-1-11",
+      "control19": true,
+      "release19": true,
+      "strictMonthlySaveRng": true
+    },
+    {
+      "id": "H5-M240-23",
+      "control19": true,
+      "release19": true,
+      "strictMonthlySaveRng": true
+    },
+    {
+      "id": "H5-D120-11-42",
+      "control19": true,
+      "release19": true,
+      "strictMonthlySaveRng": true
+    },
+    {
+      "id": "H5-D120-11-23",
+      "control19": true,
+      "release19": true,
+      "strictMonthlySaveRng": true
+    },
+    {
+      "id": "H5-M240-404",
+      "control19": true,
+      "release19": true,
+      "strictMonthlySaveRng": true
+    },
+    {
+      "id": "H5-D120-5-404",
+      "control19": true,
+      "release19": true,
+      "strictMonthlySaveRng": true
+    }
+  ]
+}

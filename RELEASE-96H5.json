@@ -64,7 +64,31 @@
     "h31_preservation_scope_updates": 1,
     "chromium_total": 252,
     "chromium_fail": 0,
-    "physical_android": "NOT RUN"
+    "physical_android": "NOT RUN",
+    "resume_full_first": {
+      "suites": 133,
+      "pass": 6027,
+      "fail": 1,
+      "reason": "27.71msperformanceassertionexceeded20msunderexternalresearchload"
+    },
+    "resume_unique_final": {
+      "suites": 133,
+      "pass": 6028,
+      "fail": 0,
+      "skipped": 0,
+      "counting": "isolated90/0replaces89/1;notadded",
+      "isolated_timing_ms": 11.63,
+      "threshold_ms": 20,
+      "threshold_changed": false
+    },
+    "tracked_test_inputs": 1967,
+    "resume_chromium": {
+      "status": "NOT RUN",
+      "new_checks": 0,
+      "reason": "missingbrowser;officialinstallerreturnedSiteUnavailableHTML",
+      "prior_same_phase_checks": 252,
+      "prior_raw_screenshots_recovered": false
+    }
   },
   "campaigns": {
     "control_runs": 16,
@@ -75,23 +99,47 @@
     "normal240_critical": 62,
     "density_critical": 31,
     "seed404_240_critical": 49,
-    "interpretation": "General quality neutrality;market is closed in this matrix and positive legality proof is separate"
+    "interpretation": "General quality neutrality;market is closed in this matrix and positive legality proof is separate",
+    "v2_strict_bare_observer_matches": 16,
+    "v2_published_vs_control_matches": 16,
+    "v2_doctrine_runs": 114,
+    "v2_main_runs": 168,
+    "v2_main_months": 15420
   },
-  "evidence_library_file_id": "libfile_1b98ce42d0b881918a5ae817d657aa4a",
-  "evidence_scope": "Only the preserved V1 checkpoint is available. Final evidence ZIP and strict read-only V2 research are incomplete;see research_status,evidence_status and research/96h5/RESUME.json.",
-  "research_status": "INCOMPLETE:V1 findings preserved;strict read-only V2 replay interrupted when execution environment became unavailable",
+  "evidence_library_file_id": "libfile_40b06af4d6148191bdfed7a9b6362211",
+  "evidence_scope": "Final V2 research raw data,sources,testinputs,regression and initial failures;prior252Chromium raw screenshots/logs are unrecoverable and not included",
+  "research_status": "COMPLETE:strict read-only V2 replay and doctrine analysis completed;no new strategic AI accepted",
   "observer_purity": {
-    "v1_vs_inherited_harness": "16/16 all monthly Save/RNG equal",
-    "bare_engine": "14/16 complete exact;seed23 M120/M240 first mismatch month71:deadstate4._powC53vs0,RNGsame",
-    "cause": "Inherited monthly totalPower metric warms a serialized derived cache",
-    "v2": "NOT RUN to completion;do not treat V1 as strict bare-engine purity PASS"
+    "v1_vs_inherited_harness": "16/16monthlySaveRngsame;notstrictpurityproof",
+    "v1_bare_failure": "seed23M120/M240firstmonth71deadstate4._powC53vs0;allRNGsame;50/170monthlySavedifferences",
+    "v2": "16/16fullmonthlyserializedSaveSHA256andRNGexactagainstcompletelybareengine;2400months;nomaskedfields",
+    "metric_fix": "researchreportingonly;restorescachepropertydescriptors;actualAItotalPowerunchanged",
+    "v2_vs_v1": "all130actionsandmonthlymetricsunchanged;16naturalcontractsunchanged",
+    "unit_pass": 6,
+    "unit_fail": 0
   },
   "evidence_status": {
-    "final_zip": "NOT RUN:environment unavailable",
+    "final_zip": "COMPLETE",
     "checkpoint_library_file_id": "libfile_1b98ce42d0b881918a5ae817d657aa4a",
     "checkpoint_version": 1,
     "checkpoint_bytes": 274548142,
     "checkpoint_sha256": "a505617fd0f6811c649ca5d058297271f16377c2b211325263236d79e78b92bd",
-    "checkpoint_scope": "V1 natural16,doctrine114,fixtures,source andthen-currentanalysis;notfinalL1rawlogs/screenshots"
+    "checkpoint_scope": "V1 natural16,doctrine114,fixtures,source andthen-currentanalysis;notfinalL1rawlogs/screenshots",
+    "final_bytes": 327836454,
+    "final_sha256": "269126a13b1db22b4294491c7d0f658110bbc688c7d8da69a6f5d3dee561099c",
+    "final_members": 3174,
+    "final_library_file_id": "libfile_40b06af4d6148191bdfed7a9b6362211",
+    "final_url": "https://chatgpt.com/library?file_id=libfile_40b06af4d6148191bdfed7a9b6362211&account_id=personal",
+    "final_crc": "PASS",
+    "all_member_sha256": "PASS"
+  },
+  "rejected_candidate_reproduction": {
+    "id": "H5-E1-funded-expansion-first-R2",
+    "ai_sha256": "65fbce974353b332420d68fe9b367846a9266d8e894709af1e03203f3bfa31f0",
+    "six_same_save_rng_contexts": true,
+    "all_monthly_save_rng_and_actions_same": true,
+    "extra_colonies": 0,
+    "accepted": false,
+    "original01rawsource": "unavailable;byteidentitynotclaimed"
   }
 }

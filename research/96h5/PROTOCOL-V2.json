@@ -1,0 +1,75 @@
+{
+  "phase": "96H.5",
+  "canonicalCommit": "2b4f9e647f151a6b514b6ba7ef9da5ec353c709d",
+  "declaredBeforeExperiments": true,
+  "families": {
+    "A": "V2 unmodified canonical campaigns;all full monthly serialized Save/RNG hashes must equal a completely bare engine replay with no observer or metric hooks. No masked fields.",
+    "B1": "Valid explicit doctrine packages built from actual setupGame player identity blueprints,remapped to a real AI actor in a fixed baseline world. Racial government and production bonuses remain real and are reported. Neutral ethics,empty civics,humanoid physiology,standard origin selected legally.",
+    "B2": "Technical policy-only personaOf return substitution for one AI;original personaOf still executes once,underlying actual persona cache,race,production modifiers,research doctrine and hard rules remain fixed. Not a real doctrine package or purifier legal-rule test."
+  },
+  "matrix": {
+    "normal120": [
+      11,
+      7,
+      23,
+      42,
+      99,
+      123,
+      404,
+      2026
+    ],
+    "normal240": [
+      11,
+      23,
+      42,
+      404
+    ],
+    "density": [
+      {
+        "systems": 100,
+        "ai": 1,
+        "seed": 11
+      },
+      {
+        "systems": 100,
+        "ai": 11,
+        "seed": 42
+      },
+      {
+        "systems": 30,
+        "ai": 11,
+        "seed": 23
+      },
+      {
+        "systems": 60,
+        "ai": 5,
+        "seed": 404
+      }
+    ],
+    "stepDays": 0.5,
+    "stepsPerMonth": 60,
+    "reloadMonth": 60,
+    "difficulty": "normal",
+    "shape": "sarmal",
+    "council": "kapali",
+    "crisis": "kapali",
+    "origins": "default35% in canonical campaigns;standard controlled identity tests"
+  },
+  "expectations": {
+    "tuccar": "More funded mutually positive trade opportunities evaluated/signed per eligible opportunity;reliable partner preference;no loss-forcing.",
+    "pasifist": "Fewer aggressive declarations per lawful actionable attack opportunity than militarist;preserved defence and survival.",
+    "yayilmaci": "More funded reachable settlement opportunities acted on;no unsustainable colony spam.",
+    "militarist": "Higher sustainable military investment and force readiness for observed threats/opportunities;no suicide wars.",
+    "teknokrasi": "More science investment when finance permits;research completion separate from passive production bonus.",
+    "kriminal": "More useful lawful-to-execute covert operations per known eligible target;actual gain,cost and detection measured.",
+    "teokrasi": "Observable influence/ideological choices and holy-war/peace constraints;science cost accounted.",
+    "izolasyonist": "Hard diplomacy,physical-trade and market prohibitions hold on real explicit-doctrine paths;military action remains funded."
+  },
+  "rates": {
+    "denominators": "Only observed evaluated opportunities for natural campaigns;explicit controlled opportunity fixtures provide complete denominators. No opportunity=N/A,not failure.",
+    "uncertainty": "Report counts and seed/actor diversity;Wilson95% for binary independent one-decision fixtures;campaign months clustered,not independent trials."
+  },
+  "candidateGate": "Observer purity and both experimental families completed before creation;maximum3 independent small candidates. One link per candidate. No new free production multipliers,forced deals or skipped legal/cost gates. Full campaign matrix and regression only for target-successful candidate before publication.",
+  "publication": "No accepted candidate => preserve96H.3.1R1. No observer/test code in runtime.",
+  "observerMetricProtocol": "V2 read-only totalPower reporting restores exact cache property descriptors;original AI totalPower unchanged. V1 records retained as legacy;not strict purity evidence."
+}

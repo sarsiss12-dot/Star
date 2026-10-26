@@ -10,6 +10,6 @@ function readOnlyPowerH5(e) {
     if (cached) Object.defineProperty(e, '_powC', cached); else delete e._powC;
   }
 }
-// This proposal was locally integrated before environment interruption.
-// Strict bare-engine V2 validation is still NOT RUN to completion.
+// Validation status belongs to the recorded V2 bare-engine comparisons.
+// This helper alone does not claim a completed purity result.
 // Do not mask _powC in final Save comparison; restore state around the read.

@@ -1,0 +1,67 @@
+{
+  "scope": "B2isolationboundary",
+  "primaryResultsMonth": 60,
+  "UPHEAVAL_FIRST": 90,
+  "source": "main.js:upheavalMods also reads personaOf;not an exclusively AI-decision API",
+  "claim": "Actual underlying doctrine,initialproductionbonuses,stocks,researchandhardpurifieridentityfixed;main60monthframes precede first possible upheaval.120monthB2extensionisnotclaimedasuniversallyisolatedproductioncounterfactual",
+  "final120Events": [
+    {
+      "id": "B2-42-1-militarist",
+      "upheaval": {
+        "k": "korsanCagi",
+        "left": 27,
+        "total": 56,
+        "at": 91
+      },
+      "upAge": 120,
+      "upLast": null
+    },
+    {
+      "id": "B2-42-1-izolasyonist",
+      "upheaval": null,
+      "upAge": 120,
+      "upLast": null
+    },
+    {
+      "id": "B2-42-1-kriminal",
+      "upheaval": null,
+      "upAge": 120,
+      "upLast": null
+    },
+    {
+      "id": "B2-42-1-tuccar",
+      "upheaval": null,
+      "upAge": 120,
+      "upLast": null
+    },
+    {
+      "id": "B2-42-1-teknokrasi",
+      "upheaval": null,
+      "upAge": 120,
+      "upLast": null
+    },
+    {
+      "id": "B2-42-1-teokrasi",
+      "upheaval": null,
+      "upAge": 120,
+      "upLast": null
+    },
+    {
+      "id": "B2-42-1-pasifist",
+      "upheaval": {
+        "k": "dinicoskus",
+        "left": 41,
+        "total": 41,
+        "at": 120
+      },
+      "upAge": 120,
+      "upLast": null
+    },
+    {
+      "id": "B2-42-1-yayilmaci",
+      "upheaval": null,
+      "upAge": 120,
+      "upLast": null
+    }
+  ]
+}

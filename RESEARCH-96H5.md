@@ -1,21 +1,23 @@
-ARAŞTIRMA DURUMU GÜNCELLEMESİ — ÇALIŞMA KESİLDİ
-Oyun düzeltmesi yayımlandı ve doğrulandı; doktrin araştırmasının nihai salt-okunur V2 tekrarları tamamlanmadı.
-H5 ek kayıt katmanı eski ölçüm düzeneğiyle16/16eşleşti. Sonradan yapılan tamamen kancasız motor kontrolünde14/16koşu bütün aylarda aynı Save/RNG'yi verdi. Aynı seed23'ün120/240aylık iki koşusu71.ayda ayrıştı: ölmüş devlet4._powC önbelleği kancasız motorda53, eski aylık güç ölçümünde0; o ana kadarki RNG aynıydı(-44705134). Aylık totalPower ölçümü türetilmiş önbelleği yeniliyordu. Bu fark araştırma altyapısına aittir; yayımlanan motor yaması değildir.
-Salt-okunur ölçüm tasarımı ve yeniden koşu planı research/96h5/RESUME.json ile read-only-metrics.js içinde korundu. Çalıştırma ortamı erişilemez olduğundan V2 tamamlanmış/PASS sayılmadı. Aşağıdaki doktrin tabloları ve sınıfları V1 ön bulgularıdır; nihai saflık kapısını geçmiş yeni AI üstünlüğü olarak kullanılamaz.
-Yalnız mevcut Arındırıcı pazar yasağı motor kapısı yayımlandı. AI algoritması değişmedi. Gerçek133paket/6028PASS/0FAIL,252Chromium ve yayın sonrası19runtime/oyunZIPdoğrulaması tamamlanmıştır.
-Nihai kanıt ZIP'i oluşturulamadı. Erişilebilir V1 ara ZIP:274548142bayt;SHA-256 a505617fd0f6811c649ca5d058297271f16377c2b211325263236d79e78b92bd. L1'in son ham log/ekran görüntülerinin bu ara ZIP içinde olduğu iddia edilmez.
-
 STARS — FAZ 96H.5 SONUÇ RAPORU
-Doktrin kimliği denetimi + mevcut Arındırıcı pazar yasağı düzeltmesi
+Doktrin kimliği denetimi + mevcut Arındırıcı pazar yasağı düzeltmesi — tamamlanmış salt-okunur V2
 1. KANONİK KAYNAK, GITHUB HEAD VE HASH DOĞRULAMASI
 Başlangıç: sarsiss12-dot/Star main, 2b4f9e647f151a6b514b6ba7ef9da5ec353c709d; 96H.3.1 R1 / 96h31r1 / stars-v96h31r1 / Save8. GitHub HEAD, RELEASE-96H31.json, RELEASE-MANIFEST.json ve 19 runtime dosyası doğrulandı. Kanonik oyun ZIP'i 755890 bayt, SHA-256 41d80f6eb493f97c7b43cda0c37221fe445fe451915e9811bcf5c0ee158ed7d1; 20 üye/19 runtime, CRC temiz. Başlangıç AI SHA-256 27ae25e44d66f5fdbfb04ea7db69aa75769a3165759b6feb0250b5b753e8c739.
-H4 raporu ve yerel kanıtları erişilebilirdi; araştırma sonucu/başarısız adaylar incelendi. Eski 5954/5970/5985/202 sayıları yeni sonuç yerine kullanılmadı. H5'te kontrol kampanyaları gerçekten yeniden çalıştırıldı. Önceki kirli Star çalışma alanı ve H4 korunarak ayrı Star96h5 çalışma ağacı kullanıldı. Kaynağı beklenen hash ile eşleşmeyen bir koşu sonuç tablolarına alınmadı.
-
+96H.4'ün reddedilmiş adayları başlangıç bilgisi olarak korundu. Önceki kanıtların tamamı bu devam turunda erişilebilir değildi; yeniden incelenmiş sayılmadı. Korunmuş H5 V1 paketi SHA-256/CRC ile açıldı ve R1'in 19 kaynak dosyası yeniden doğrulandı. Devam başlangıcındaki GitHub HEAD d17229c74e6fb6ff303914453742f30917823346 idi; yeni çalışma ezilmedi. Eski 5954/5970/5985/202 sayıları yeni sonuç yerine kullanılmadı. H5'te kontrol kampanyaları gerçekten yeniden çalıştırıldı. Önceki kirli Star çalışma alanı ve H4 korunarak ayrı Star96h5 çalışma ağacı kullanıldı. Kaynağı beklenen hash ile eşleşmeyen bir koşu sonuç tablolarına alınmadı.
 2. DOKTRİN, ETİK, CIVIC, TÜR VE KÖKENİN YAPISI
 DOCTRINE_RACE fizyoloji değil, hükümet/ırk şablonu eşler: Militarist→klan; Tüccar/Kriminal→lonca; Pasifist/Kutsal→meclis; Yayılmacı→kasif; Teknokrasi→teknokrasi; Arındırıcı→klan. Bu nedenle tam paket karşılaştırması üretim, askerî çarpan ve hükümet etkilerini de içerir.
 personaOf önceliği: geçerli mizac → persLock → hükümet varsayılanı; bilinçli seçim yoksa trade/cartel civic'i, güçlü militarist/pasifist etik, ardından sahtekârlık çıkarımı devreye girer. Etik, civic, köken, fizyoloji, tehdit ve ekonomi ayrı etkiler olarak kaydedildi. Geçerli ters kombinasyonlara yeni yasak eklenmedi.
 researchDoctrine kalıcı seçilmiş/hükümet doktrinini kullanır; çıkarımla değişen mizacı aynen izlemez. 2816 başlangıç AI'sının 611'inde bu iki kimlik ayrıdır. Bu tek başına hata değildir. Seçilmiş doktrin etik reformuyla otomatik değişmez; Pasifist+Kan Hukuku geçerlidir fakat mevcut civic barışı engeller.
-
+Korunmuş ve kaynak hash'i doğrulanmış başlangıç sayımı:256seed,30sistem/11AI,Normal/sarmal/konsey-kriz kapalı. Bu sayım sekiz doktrin eşit atanmış turnuva değildir.
+| Kimlik | Çıkarımlı persona | Kalıcı araştırma doktrini |
+| --- | --- | --- |
+| Militarist | 376 | 347 |
+| Tüccar | 503 | 692 |
+| Pasifist | 778 | 698 |
+| Yayılmacı | 503 | 725 |
+| Arındırıcı | 272 | 354 |
+| Teknokrasi | 0 | 0 |
+| Kriminal | 384 | 0 |
+| Kutsal Meclis | 0 | 0 |
 3. AI DEVLETLERİ DOKTRİNLERİNE GERÇEKTEN UYGUN DAVRANIYOR MU?
 | Doktrin | Sınıf | Ana dayanak/sınır |
 | --- | --- | --- |
@@ -39,15 +41,13 @@ Karar bağlantıları (M=üretim/mekanik, S=stratejik puan, H=sert kural, E=ger�
 | Kriminal opCost, dipMul; spy/ahl | aiOpsTick; aiPickOp; aiStandardOpReady; runOp | M/S/E | Hazine/sabotaj/bilgi operasyonu; maliyet ve yakalanma birlikte kaydedildi. |
 | Kutsal etkMul, warBias; kutsal | recalcMods; aiProfile/warAppetite; researchAccess; sitOptionOpen | M/S/H; kutsal kullanılmıyor | Etki ve kilitli araştırma/durum seçenekleri var; genel ücretsiz kutsal savaş bağlantısı yok. |
 | Arındırıcı kilitli/warBias | isPurifier; diploBlocked; dealQuote/Commerce; aiMarketTick; marketTrade(L1) | H/S/E | Diplomasi/ticaret yasağı, saldırgan duruş; motor pazarı da artık reddediyor. |
-
 4. TÜCCAR DAVRANIŞ ANALİZİ
 Gerçek B1 paketlerinde altı aktörün 60. ay toplamı: 64 teslimat, 23 liman emri, 9/25 değerlendirilen terimde uygun sözleşme, 9/9 uygulanmış yük teklifi, 15447 güç, 19 teknoloji; kritik ay 0. Yayılmacı 28, Pasifist 31 teslimattadır. Bu fark hükümet, kaynak ve üretim avantajlarını içerir.
 Üretim/hukuki kimlik sabit B2'de Tüccar 48, Pasifist 50 teslimat verdi; Tüccar için genel politika üstünlüğü kanıtlanmadı. Hazır kârlı takas fırsatında yedi yasal doktrinin hepsi gerçek sözleşme ve iki fiziksel teslimat oluşturdu. İhtiyaç yokken, savaşta veya bilinmeyen hatta hiçbiri anlaşma yapmadı.
 Commerce.aiOpportunityTick ortak 4 yeni işlem/96 rota bütçesi kullanıyor. AI-AI çiftinin düşük ID'si başlatıyor; ortaklar oyuncu sona bırakılarak ID sırasıyla taranıyor. Bu kimlikten bağımsız fırsat/konum etkisidir. tradeVote ticaret arama katsayısı değil, konsey ticaret standardı oyudur; konsey kapalıyken etkisiz kalması doğrudur. Yol koruması mevcut fakat gerçek kayıp/boş filo/tehdit koşullarına bağlıdır.
 Sonuç: Tüccar ekonomik avantajını kullanıyor ve ticaret yapıyor; aynı fırsat başına daha çok ve daha akıllı arama yaptığı henüz kanıtlanmadı. Fırsatsız devlete başarısızlık yazılmadı.
-
 5. PASİFİST DAVRANIŞ ANALİZİ
-B1 altı çerçevede Pasifist 0, Militarist 1 saldırı savaşı başlattı. Doğal gözlem havuzunda Pasifistte 1, Militaristte 8 aiWarReview saldırısı görüldü; savunma/yükümlülük girişleri saldırı diye sayılmadı. Havuzun ilk 120 ayları bazı 240 aylık koşularda tekrarlandığı için bu sayılar bağımsız örneklem oranı değildir.
+B1 altı çerçevede Pasifist 0, Militarist 1 saldırı savaşı başlattı. Doğal gözlem havuzunda Pasifistte 1, Militaristte 8 aiWarReview saldırısı görüldü; Bu saldırı metriği yalnız aiWarReview kapsamındaki gerçek ilanları içerir. Diğer bütün savaş girişlerinin savunma olduğu iddia edilmez; tüm vekâlet/yükümlülük yollarının eksiksiz sınıflaması bu ölçümde yoktur. Havuzun ilk 120 ayları bazı 240 aylık koşularda tekrarlandığı için bu sayılar bağımsız örneklem oranı değildir.
 Hazırlanmış aynı kuvvet/fırsat ve ortak 96 RNG durumunda, yalnız politika değiştiğinde:
 | Politika | Gerçek saldırı/fırsat | Oran | Wilson %95, koşullu |
 | --- | --- | --- | --- |
@@ -60,26 +60,23 @@ Hazırlanmış aynı kuvvet/fırsat ve ortak 96 RNG durumunda, yalnız politika 
 | Kriminal Sendika | 18/96 | 18.8% | 12.2–27.7% |
 | Kutsal Meclis | 19/96 | 19.8% | 13.1–28.9% |
 Aralıklar örtüşüyor; tek başına istatistiksel üstünlük kanıtı değildir. Eşit ve daha güçlü rakip çerçevelerinde erişim/hazırlık kapıları bütün politikaları durdurdu: uygun saldırı fırsatı 0, oran N/A. Sıfır fırsata sıfır başarı puanı verilmedi.
-Pasifist+Kan Hukuku barışı kapatır; Gölge Konseyi resmî savaşı engeller. Bunlar doktrine eklenen yeni yasaklar değildir. Pasifist filoları savunmacı duruşu koruyor; saldırıya karşı savunma ve ittifak yükümlülükleri sürüyor. Doğal gözlemler savunmayı gösterse de ayrı çoklu-seed baskın/sağkalım turnuvası yapılmadı.
-
+Pasifist+Kan Hukuku barışı kapatır; Gölge Konseyi resmî savaşı engeller. Bunlar doktrine eklenen yeni yasaklar değildir. Pasifist için savunmacı duruş, savunma ve ittifak yolları kodda korunuyor; bu fazın sayımları bütün savunma savaşlarının karşılaştırması değildir. Doğal gözlemler savunmayı gösterse de ayrı çoklu-seed baskın/sağkalım turnuvası yapılmadı.
 6. YAYILMACI DAVRANIŞ ANALİZİ
 prof.exp hesaplanıyor fakat kanonik runtime'da aktif tüketicisi bulunmadı. Dört seed-konum çerçevesinde exp=0,2/0,75/1,3 değiştirildi: gerçek eylemler, aylık RNG ve ekonomik sonuçlar aynı kaldı; final Save karşılaştırmasında yalnız açıkça değiştirilen türetilmiş _prof.exp alanı ayrıldı. Bu alan dışında maskeleme yapılmadı.
 B1 Yayılmacı altı aktörde 6 yeni koloni kurdu, yeni koloni gemisi siparişi 0; hepsi başlangıç gemilerinden geldi. 285 pozitif bilinen-hedef ayı, hemen ödenebilir gemi fırsatı demek değildir: peşin 265 maden/60 alaşım, mevcut yatırım taahhüdü, gemi bütçesi, bakım ve tehdit kapıları ayrıca uygulanır. Koloni finansman tahmininin geçmesi tek başına satın alma yetkisi sayılmadı.
 Hazırlanmış bilinen Gaia/hedef ve mevcut gerçek koloni gemisiyle sekiz B2 politika da sürdürülebilir kolonileştirme emri verdi; gizli hedef açılmadı. Bu uygulama çalışıyor fakat doktrine göre yatırım ayrımı göstermiyor. Yayılmacı'nın yaşam alanı savaş gerekçesi ve koloni şok/istikrar avantajları çalışır; bunlar exp tüketimiyle karıştırılmadı.
-E1, barışta/tehditsiz/yeterli savunmayla mevcut satın alma kapılarından geçen bir gemiyi öne aldı. Sentetik dar bütçede kontrol korvet, aday ücretli koloni gemisi aldı; savaş/tehdit/kriz/başka doktrinde tam Save/RNG korundu. Altı gerçek başlangıç ve 42/1'in 120 ayı ise bütünüyle aynı kaldı. Ölçülen kampanya kazanımı 0: E1 yayıma reddedildi, güvenlik kapıları kör biçimde gevşetilmedi.
-
+E1-R2, aynı amaç için kayıtlı metinden yeniden kurulan ve ayrı hash alan adaydır: AI SHA-256 65fbce974353b332420d68fe9b367846a9266d8e894709af1e03203f3bfa31f0. İlk E1-01'in son ham kaynak/logları ara pakette bulunmadı; R2 ile byte düzeyinde aynı olduğu iddia edilmez. R2 yalnız Yayılmacı aktörde, barış/tehditsizlik/krizsizlik/yeterli savunma koşuluyla mevcut ücretli koloni gemisi satın alma kapılarını öne alır. Altı gerçek aynı Save/RNG'de bütün aylık Save/RNG ve eylemler aynı, ek koloni 0; 42/1 ayrıca 120 ay aynı. Fayda kapısını geçmedi ve üretime alınmadı.
 7. DİĞER BEŞ DOKTRİNİN AYRI SONUÇLARI
 Militarist — Güçlü: B1'de 162 ücretli korvet emri ve 18450 toplam güç; Yayılmacı 135/9376. Hasar/hükümet bonusu bu güç farkının içindedir. B2'de güç 9249'a karşı 9376: “aynı avantajla her zaman daha iyi ordu” sonucu çıkarılamaz. Hazırlık, erişim, ekonomi ve savaş yetkisi gerçek kapılardır; eski aiTurn ilan denemeleri yetkisizse gerçek savaş sayılmadı. İntihar saldırısı eklenmedi.
 Teknokrasi — Kısmen tutarlı: B1 32 teknoloji, 24 laboratuvar emri, 245 bilim-hedefi aktör-ayı; Yayılmacı 30 teknoloji/30 laboratuvar/207 bilim-hedefi ayı. 42/1'in ek 120 ayında 12 teknoloji, 860 güç; Yayılmacı 8/1472. Bilime stratejik yatırım ve askerî bedel görüldü; yalnız başlangıç bonusu denmedi. B2 31'e karşı 30 teknoloji farkı küçüktür. Otomatik doğal atamada sıfır örnek önemli bir erişim açığıdır.
 Kriminal — Kısmen tutarlı: B1 kampanyalarında yalnız 3 operasyon; Yayılmacı 5. Bilinen zengin düşman ve somut sabotaj hafızası bulunan 128 gerçek tek-karar denemesinde Kriminal 16, Tüccar/Pasifist/Yayılmacı da 16 girişim yaptı. Kriminalin gerçek hazine bedeli 28 etki, diğerlerinin 55; aynı 16 operasyonda toplam 448'e karşı 880 etki ödedi. 5 yakalanma her iki grupta da gerçekleşti. Ganimet gerçek hedef stoklarından aktarıldı. B2'de bütün bu maliyetler 55, Kriminal yine 16 girişim: özgün sıklık üstünlüğü yok. Doğal Kriminal yoğunluğu yüksek görünse de sahtekâr etik, ucuz maliyet ve uygun düşmanlar ayrıştırılmadan doktrine yazılamaz.
-Kutsal Meclis — Zayıf: B1 11 teknoloji/10296 güç; etki/istikrar ve genel savaş eğilimi mevcut. d_synod/Sinod Evi erişimi ve doktrin kilitli durum seçenekleri gerçektir. Ancak PERSONAS.kutsal okunmuyor; genel ücretsiz kutsal savaş veya uzun barış huzursuzluğu için çalışan bağlantı bulunmadı. sitOptionOpen içindeki doktrinli hikâye seçenekleri bu genel AI mekanizmasının uygulandığını kanıtlamaz; ayrı olay-seçim turnuvası NOT RUN. Yeni ücretsiz savaş/etki bonusu eklenmedi.
+Kutsal Meclis — Zayıf: B1 11 teknoloji/10296 güç; etki/istikrar ve genel savaş eğilimi mevcut. d_synod/Sinod Evi erişimi ve doktrin kilitli durum seçenekleri gerçektir. Ancak PERSONAS.kutsal okunmuyor; genel ücretsiz kutsal savaş veya uzun barış huzursuzluğu için çalışan bağlantı bulunmadı. sitOptionOpen içindeki doktrinli hikâye seçenekleri bu genel AI mekanizmasının uygulandığını kanıtlamaz; situationsTick yeni hikâyeleri varsayılan olarak yalnız oyuncu için başlatır; ayrı olay-seçim turnuvası NOT RUN. Yeni ücretsiz savaş/etki bonusu eklenmedi.
 Fanatik Arındırıcı — L1 sonrasında güçlü sert kimlik: B1'de 0 ticaret teslimatı, 0 uygun ticaret terimi; 3 saldırı savaşı ve 25975 güç. Diplomasi/gerçek kargo anlaşması engelleri korundu. UI ve aiMarketTick pazarı kapatıyordu; marketTrade kapısı eksikti. L1 bu mevcut yasağı maliyet/kur oluşturulmadan önce uygular. Gerçek Save8 sonrası eski dokunmatik düğmede kontrol −200 maden/+80,5 alaşım, yayın adayı 0/0. B2'de “Arındırıcı politika” etiketi taşıyan Yayılmacı'nın ticareti gerçek Arındırıcı ihlali değildir: B2 hukuki kimliği değiştirmez.
-
 8. KARAR DEĞİŞTİRMEYEN GÖZLEM KAYITLARI
-16 kanonik kontrol gerçekten yeniden oynatıldı: 2400 kampanya-ayı/144000 yarım günlük adım. Her ayın gerçek Save hash'i ve RNG'si önceki doğrulanmış kanonik koşuyla eşleşti. H5 ek kayıt katmanı devralınan ölçüm düzeneğiyle aynı Save/RNG'yi verdi; bu karşılaştırma tamamen kancasız motor saflığı olarak kabul edilmemelidir. Kayıt taşması 0.
+V2 saflık kapısı tamamlandı: 16 tamamen kancasız R1 motor tekrarı, 16 salt-okunur H5 gözlemcili R1 koşusu ve 16 yayımlanmış 96h5 koşusu; her sürümde 2400 kampanya-ayı. Kancasız→gözlemci ve kontrol→yayın karşılaştırmalarında bütün aylık serialize(Save8) SHA-256 ve RNG birebir aynı. Save alanı maskelenmedi. Kaynakları doğrulanan 16+114=130 gözlem/doktrin koşusunda kayıt taşması 0. Altı E1-R2 ile ana V2 envanteri 168 koşu/15420 kampanya-ayıdır; pilot, eski V1, regresyon içi kampanyalar ve bileşen denemeleri bu sayıya eklenmedi.
+İlk V1 düzeneğindeki hata açıkça korundu: seed23/120 ve /240, ay71'de ölmüş devlet4._powC 53→0 farkı verdi; eski aylık totalPower raporu önbelleği yazıyordu. RNG bütün aylarda aynı kaldı; 120 aylık koşuda50,240 aylık koşuda170 Save farkı vardı. V2 yalnız raporlama çağrısında gerçek totalPower sonucunu alıp iki önbellek alanının özgün property descriptor'larını geri yükler; AI'nın gerçek fonksiyonu değiştirilmez. Altı ayrı saflık testi PASS; bunlar 133 paket/6028 toplamına katılmaz. 130 koşunun V1 ile eylem ve aylık metrik karşılaştırması aynı çıktı;16 genel koşunun sözleşmeleri de aynı; V1'in kusurlu saflık iddiası kullanılmadan bulgular V2 ile yeniden desteklendi.
 Kimlik, profil, hedef, inşa sırası, bilinen koloni hedefi, finansman, savaş iştahı/hazırlığı/bütçesi, müzakere, operasyon uygunluğu/seçimi/gerçek bedeli, araştırma ve gerçek yük sonuçları dış kayda alındı. dealQuote içindeki geri alınan denemeler quote=true olarak ayrıldı ve gerçek eylem sayılmadı. Eylem verileri anında kopyalandı; ilk pilotun referans-alias kaydı saklandı ve nihai metriklere katılmadı.
 Gözlemci AI'ya ek harita/filo/karşı taraf bilgisi vermedi. Yeni deterministik test, temas/istihbarat yokken karşı tarafın gizli stoğunu değiştirmenin aiKnownResources sonucunu değiştirmediğini doğruladı. Doğal fırsat paydaları yalnız gerçekten değerlendirilen fırsatlardır; haritadaki bütün teorik fırsatları kapsadığı iddia edilmedi.
-
 9. AYNI ŞARTLARDA DOKTRİN KARŞILAŞTIRMA TABLOLARI
 B1: üç seed (11/42/404), iki gerçek AI başlangıç konumu (1/3), sekiz yasal açık seçimli doktrin; 48 koşu. Aşağıdaki değerler her doktrin için altı aktörün 60. ay toplamıdır; başlangıç koloni sayısı toplam 6'dır. Kritik ay bütün B1/B2 60 aylık aktör örneklerinde 0. Bunlar varsayılan sekiz-seed referansıyla eş koşullu değildir.
 | Doktrin | Koloni | Yeni koloni | Ödenen koloni gemisi | Teknoloji | Güç | Teslimat | Saldırı savaşı | Operasyon | Plan T/B |
@@ -103,23 +100,30 @@ B2: aynı altı gerçek başlangıç Save/RNG'sinde yalnız personaOf karar dön
 | Teknokrasi | 12 | 6 | 0 | 31 | 10112 | 50 | 0 | 5 | 7/2 |
 | Kriminal Sendika | 12 | 6 | 0 | 28 | 8957 | 27 | 0 | 4 | 8/2 |
 | Kutsal Meclis | 12 | 6 | 0 | 30 | 9191 | 32 | 1 | 4 | 7/2 |
-
+B1 ek120ay:yalnızseed42/aktör1;tek konumdan genel üstünlük çıkarılmaz.
+| Doktrin | Kritik ay | Teknoloji | Güç | Yeni koloni |
+| --- | --- | --- | --- | --- |
+| Militarist | 2 | 6 | 3052 | 0 |
+| Tüccar | 0 | 6 | 3563 | 0 |
+| Pasifist | 0 | 6 | 1401 | 0 |
+| Yayılmacı | 0 | 8 | 1472 | 1 |
+| Arındırıcı | 0 | 7 | 4473 | 0 |
+| Teknokrasi | 0 | 12 | 860 | 1 |
+| Kriminal | 0 | 7 | 4007 | 0 |
+| Kutsal Meclis | 0 | 6 | 2091 | 0 |
 10. GERÇEK KİMLİK PAKETİ VE İZOLE KARAR EĞİLİMİNİN AYRIMI
 B1 kimlikleri gerçek setupGame oyuncu başlangıcıyla üretildi ve sabit dünyadaki gerçek AI ID/konumuna taşındı. Tarafsız etik, boş civic/özellik, humanoid fizyoloji, standart köken geçerli seçimlerdir. Hükümet üretim bonusu, yaşanabilirlik ve meşru ana gezegen farkı korundu; yalnız doktrin kararı diye sunulmadı. Başlangıç stokları gerçek Normal değerlerdi; deney sonucu için ücretsiz kaynak eklenmedi.
-B2 özgün personaOf'u bir kez çalıştırıp yalnız hedef aktörün dönen politika nesnesini değiştirir. Gerçek _pers/mizac, recalcMods üretimi, researchDoctrine ve isPurifier kuralları değişmez. 48 çerçevede başlangıç Save hash'i, RNG, stok/gelir/kapasite/yaşanabilirlik/araştırma erişimi eşitliği doğrulandı. Bu teknik karşı-olgusal deney, oyuncuya sunulan geçerli bir doktrin paketi değildir.
-Her iki ailede 42/aktör1 sekiz doktrin için 120 aya da uzatıldı; diğer çerçeveler 60 aydır. B1/B2 96 koşu + exp 12 + tradeVote 6 = 114 tamamlanmış koşu. Exp 8 ve konsey-kapalı tradeVote 4 eşlenmiş karşılaştırma değişiklik göstermedi. İlk gerçek karar ve ilk aylık RNG ayrışması analysis.json/paired içinde saklandı; uzak sonuçlar tek bir ilk kararın doğrudan etkisi diye sunulmadı.
-
+B2 özgün personaOf'u bir kez çalıştırıp yalnız hedef aktörün dönen politika nesnesini değiştirir. Gerçek _pers/mizac, recalcMods üretimi, researchDoctrine ve isPurifier kuralları değişmez. 48 çerçevede başlangıç Save hash'i, RNG, stok/gelir/kapasite/yaşanabilirlik/araştırma erişimi eşitliği doğrulandı. Bu teknik karşı-olgusal deney, oyuncuya sunulan geçerli bir doktrin paketi değildir. Sınır:personaOf yalnız AI kararlarında okunmaz;upheavalMods galaktik olay tepkisinde de okur. Ana B2 tabloları60aylık olduğundan en erken90.ayda açılan bu yol devreye girmedi. Ek120aylık B2 koşuları tüm üretim etkileri her durumda yalıtılmış evrensel karşılaştırma diye kullanılmadı. İlk48başlangıç/üretim kontrolü bütün gelecek durumların ispatı değildir.
+Her iki ailede 42/aktör1 sekiz doktrin için 120 aya da uzatıldı; diğer çerçeveler 60 aydır. B1/B2 96 koşu + exp 12 + tradeVote 6 = 114 yeni V2 koşu. 48 B2 başlangıç/varlık izolasyonu da bu devamda yeniden geçti. Exp 8 ve konsey-kapalı tradeVote 4 eşlenmiş karşılaştırma değişiklik göstermedi. İlk kaydedilmiş eylem farkı ve ilk aylık RNG ayrışması analysis.json/paired içinde saklandı; iç kararların tamamının izlendiği veya RNG'nin ilk yarım günlük ayrışma adımının bilindiği iddia edilmez; uzak sonuçlar tek bir ilk kararın doğrudan etkisi diye sunulmadı. Örnek B2-11-1: Tüccar/Pasifist politikada ilk kayıt farkı gün300/ay10 saldırmazlık teklifi, ilk aylık RNG farkı ay11. B2-42-1 Militaristte ilk RNG farkı ay9, ilk rota farkı gün300/ay10 ve ilk sipariş farkı gün330/ay11 (santral/korvet). Bu sıralama, görünür ilk işlemin bütün uzak farkların nedeni sayılmaması gerektiğini gösterir. B2-404-3 Kutsal'da ilk yük-terimi farkı gün810/ay27, bütün60 ay boyunca RNG aynı; miktar15,4→15,5 maden. Bu örnek 60 aylıktır.
 11. TİCARET, SAVAŞ, KOLONİLEŞME, ARAŞTIRMA, DİPLOMASİ VE CASUSLUK
 Hazır ticaret fırsatı: B1 yedi yasal doktrin 1/1 sözleşme ve iki gerçek yük teslimatı; Arındırıcı 0, uygun fırsat N/A. Kayıp yaratmayan tamamlayıcı stok/üretim çerçevesi kullanıldı. İhtiyaçsız, savaşlı ve bilinmeyen hatların tamamında sözleşme 0. İmza anında mallar ışınlanmadı; gerçek çıkış/varış ve ücretli yük akışı izlendi. evalOffer iki tarafta da pozitifti; bu öznel motor değeridir, evrensel parasal kâr değildir.
-Örnek gerçek B1-11-3-Tüccar/60: 17 teslimat; gelen 54 alaşım/131,3 maden, yüklenen 226,6 enerji/32 maden/12,2 alaşım; 16 enerji kaybı. Gelen-kargoya-yüklenen kaynak vektörü ekonomik değerlendirmede tutuldu; farklı kaynaklar keyfî tek para puanına çevrilmedi. Final-analysis.json bütün doktrinlerin vektörlerini içerir.
+Örnek gerçek B1-11-3-Tüccar/60: 17 teslimat; gelen 54 alaşım/131,3 maden, yüklenen 226,6 enerji/32 maden/12,2 alaşım; 16 enerji kaybı. Gelen-kargoya-yüklenen kaynak vektörü ekonomik değerlendirmede tutuldu; farklı kaynaklar keyfî tek para puanına çevrilmedi. final-analysis-v2.json bütün doktrinlerin gelen/yüklenen/kayıp ve kaynak bazlı net vektörlerini içerir.
 Savaş sayısı yalnız gerçekten kurulan savaş bağlantısından, koloni yalnız sahiplik değişiminden, teknoloji yalnız gerçek grantResearchTech kaydından sayıldı. Araştırma seçimleri ihtiyaç, profil, strateji ve gerçek erişimden etkileniyor. Üç dalın otomatik araştırması ve ücretli laboratuvar emri korunuyor.
-Casuslukta ilişki tek başına düşmanca operasyon yetkisi sağlamaz. Somut kin yokken 128 denemelik ilk çerçevede uygun düşmanca fırsat 0, oran N/A; sıfır girişim kimlik başarısızlığı sayılmadı. Sabotaj hafızalı pozitif çerçevede bütün doktrinler için 128 uygun deneme vardı. Risk, yakalanma, gerçek etki bedeli ve karşı taraftan alınan kaynaklar birlikte kaydedildi.
-
+Casuslukta ilişki tek başına düşmanca operasyon yetkisi sağlamaz. Somut kin yokken 128 denemelik ilk çerçevede uygun düşmanca fırsat 0, oran N/A; sıfır girişim kimlik başarısızlığı sayılmadı. Sabotaj hafızalı pozitif çerçevede bütün doktrinler için 128 uygun deneme vardı. Risk, yakalanma, gerçek etki bedeli ve karşı taraftan alınan kaynaklar birlikte kaydedildi. Kayıtlardaki result.ok operasyonun motor tarafından çözümlendiğini anlatır; yakalanmadan stratejik başarıyla aynı sayılmadı. Pozitif fırsat/civic çalışması20çerçeve×128ortakRNGdenemesi; negatif kin çerçevesi8×128. Savaş24çerçeve×96RNG, toplam122bileşen satırı. Bunlar hazırlanmış sınırlı stoklu karar senaryolarıdır, doğal kampanya veya ek regresyon PASS toplamı değildir.
 12. UZUN VADELİ HEDEFLERLE UYUM
 aiUpdateLongPlan war/sci/eco/dip/turtle, kaynak ihtiyacı, bilinen çevre, ticaret kapasitesi ve tehlikeyi kullanır; aylık plan ve inşa sırası bu hedefe bağlanır. Ekonomik toparlanmanın kimliği geçici bastırması doğru olabilir. aiStrategicWarReady toparlanma/açık cephe/yanlış hedef/hazırlıksız planı durdurur; savaş iştahının her ay savaşa dönüşmemesi hata değildir.
 B1 Tüccar ve Kriminal 336/360 aktör-ayı ekonomi hedefindeydi. Teknokrasi 245, Yayılmacı 207 aktör-ayı bilim hedefindeydi. Yayılmacı'nın bilim şablonu güçlü, exp'nin koloni yatırım bağlantısı eksik; bunlar farklı katmanlardır. Kutsal Meclis yalnız 48 aktör-ayı influence hedefi gördü; genel dinî diplomasi kimliği çıkarılamaz. Ticaret stratejisindeki partner seçimi Commerce'in ID sıralı taramasını doğrudan değiştirmiyor.
 Genel yayın matrisinde tamamlanan/başarısız planlar 120 ay 81/26, 240 ay 65/24, yoğunluk 52/14; kontrolle birebir aynıdır.
-
 13. KULLANILMAYAN, ZAYIF VE ÇELİŞKİLİ BAĞLANTILAR
 | Bulgu | Sınıf | Kanıt/yorum |
 | --- | --- | --- |
@@ -133,23 +137,19 @@ Genel yayın matrisinde tamamlanan/başarısız planlar 120 ay 81/26, 240 ay 65/
 | Reformdan hemen sonra profil/persona önbelleği | 2: sınırlı gecikme | 1→2 militarist etik reformunda aynı anda eski profil; sonraki gerçek memTick yeni Militarist profil. Anlık yenileme eklenmedi. |
 | Arındırıcı doğrudan marketTrade | 5: UI/AI yasağı ile motor çelişkisi | Gerçek Save8/eski butonla ücretli takas üretildi; L1 giderdi. |
 Gölge Konseyi aynı 128 uygun hazine fırsatında 16→29 girişim ve spy 0,25→0,75 verdi; sıklık/ücret mekanizması gerçekten çalışıyor. Kale Doktrini turtle 0,2→0,6, Madencilik Loncaları eco 0,484→0,524 verdi. Bu son iki profil ölçümü tek başına daha çok savunma/maden yatırımı ispatı değildir; ayrı tehditli yatırım karşılaştırmaları NOT RUN.
-
 14. KİMLİĞİN EKONOMİK VE ASKERÎ MALİYETİ
 Doktrine sadakat otomatik başarı sayılmadı. B1 Militarist/Arındırıcı güç avantajı üretim/hasar çarpanıyla birlikte gelir; Teknokrasi'nin 42/1/120 bilim kazanımına daha düşük güç eşlik eder. Kriminalin ucuz casusluğu diplomatik güven kaybını ortadan kaldırmaz; yakalanmalar ölçüldü. Yayılmacı gemisinin maden finansmanı laboratuvar, temel üretici ve savaş hazırlığıyla yarışır.
 H5 genel zekâ üstünlüğü veya bütün göstergelerin arttığı iddia edilmez. Yayına alınan L1 bir kaynak/üretim veya savaş eğilimi bonusu değildir. AI algoritması, genel kampanya ticaret/bilim/filo sonuçları değişmedi; mevcut doktrin yasağının gerçek ekonomik işlemde uygulanması düzeldi.
-
 15. BAĞIMSIZ İYİLEŞTİRME ADAYLARI
 | Aday | Kontrol | Sonuç | Karar |
 | --- | --- | --- | --- |
-| H5-E1-funded-expansion-first-01 | Altı aynı gerçek Save/RNG; 42/1 ayrıca 120 ay; tek aktör uygulaması | Bütün aylık/final Save/RNG ve gerçek eylemler aynı; +0 koloni. Sentetik olumlu dal çalışıyor, dört güvenlik durumu tam korunuyor. | Yayıma RED: gerçek örneklemde fayda yok. |
+| H5-E1-funded-expansion-first-R2 | Altı aynı gerçek Save/RNG; 42/1 ayrıca120ay; tek aktör; açık yeni kaynak hash'i | Bütün aylık Save/RNG ve gerçek eylemler aynı; +0 koloni. İlk01 kaynaklarıyla byte özdeşliği iddia edilmez. | RED: ölçülen kampanya faydası yok. |
 | H5-L1-purifier-market-engine-01 | Aynı yeni test: kanonik 34 PASS/9 FAIL → aday 43 PASS/0 FAIL; gerçek eski dokunmatik düğme | Pazar kur başlatmadan/ücret kesmeden mevcut isPurifier yasağını uyguluyor; normal doktrin takasları değişmiyor. 16 genel koşu tam Save/RNG eşit. | KABUL: yalnız motor kural tutarlılığı. |
 İki aday bağımsız kaynak kopyalarında geliştirildi. E1 üzerine L1 eklenerek başarısızlık gizlenmedi. Tüccar/Pasifist/Kriminal için zorlama yeni davranış adayı üretilmedi. Birleşik E1+L1 koşusu NOT RUN; reddedilmiş adayı birleştirmek için gerekçe yok.
-
 16. KABUL, RED VE TEST EDİLMEYEN DEĞİŞİKLİKLER
 Kabul: marketTrade içinde mevcut Arındırıcı pazar yasağı, marketOpen kontrolünden sonra ve marketQuote/ödeme öncesinde tek motor kapısı. Değişmeyenler: gerçek vergi/transfer, kur/komisyon, sözleşme kabulü, inşaat/gemi bedeli, koloni gereksinimi, savaş yetkisi, oyuncu doktrin bonusu.
 Red: E1; gerçek kampanya faydası kanıtlanmadı. E1'in büyük savaş/ekonomi gerilemesi saklanmadı: bu aday gerçek çerçevelerde etkisiz kaldı. H4'ün başarısız bina belleği veya öngörü adayları üretime geri alınmadı.
 NOT RUN/uygulanmadı: yeni otomatik sekiz-doktrin ataması; kutsal savaş/uzun barış mekaniği; kaynak rezervasyonu üzerinden yeni koloni finansmanı; doktrine göre ticaret tarama sırası; özel baskın sağkalım turnuvası; ideolojik olay-seçim turnuvası. Bunlara PASS verilmedi.
-
 17. SEKİZ SEED / 120 AY VE DÖRT SEED / 240 AY
 Aşağıdaki değerler son 96h5 kaynaklarıyla gerçekten yeniden ölçüldü; her biri taze H5/R1 kontrolünün bütün aylık Save/RNG'siyle aynı. Normal zorluk, sarmal, orta/default 45 sistem/5 AI, konsey/kriz kapalı, rastgele AI kökeni varsayılan %35; ayda 60×0,5 gün; 60. ay gerçek serialize/deserialize Save8.
 120 ay:
@@ -172,7 +172,6 @@ Toplam: 14 kritik devlet-ay; 455 teslimat; 50 sözleşme; 331 teknoloji; 129 kol
 | M240-42 | 2 | 132 | 11 | 93 | 25 | 261 | 63537 | 10/5 | 2/0 |
 | M240-404 | 49 | 717 | 54 | 121 | 29 | 395 | 75500 | 17/9 | 0/49 |
 Toplam: 62 kritik devlet-ay; 1073 teslimat; 90 sözleşme; 350 teknoloji; 99 koloni; 1007 gemi; 249329 güç; 65/24 plan. Seed404'ün 49 ayı değişmedi. Konsey kapalı bu matris pazar kullanım kazanımı deneyi değil, genel kalite ve yan etki kapısıdır.
-
 18. YOĞUNLUK VE FARKLI GALAKSİ KOŞULLARI
 | Seed/senaryo | Kritik ay | Teslimat | Sözleşme | Teknoloji | Koloni | Gemi | Güç | Plan T/B | İlk/yeni kriz |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -182,22 +181,20 @@ Toplam: 62 kritik devlet-ay; 1073 teslimat; 90 sözleşme; 350 teknoloji; 99 kol
 | D120-5-404 | 3 | 66 | 10 | 40 | 16 | 174 | 23790 | 13/1 | 3/0 |
 100/1 seed11 kritik 0/güç859; 100/11 seed42 kritik0; 30/11 seed23 kritik28; 60/5 seed404 kritik3. Toplam31; kontrol farkı0. 60/5 gerçekten buyuk=60 sistemdir, orta=45 ile karıştırılmadı. Her yoğunluk tek seed olduğundan evrensel yoğunluk sonucu çıkarılmadı.
 Başlangıç/yeni devlet ayrımı: 120 ay 12/2 kritik ay; 240 ay 4/58; yoğunluk 31/0. Seed404 yeni devlet7 ay107'de doğdu, tüketim krizi119–167 arasında49 ay, hayatta. Seed11 yeni devlet7 ay218'de doğdu,9 maden-kritik ayı219–228 aralığında; toplamseed11krizi10. Yeni devletin doğmamasıyla elde edilmiş yapay toparlanma yok; doğumlar ve sağkalım kontrolle aynı.
-
 19. REGRESYON, CHROMIUM, PWA VE ANDROID
 Kanonik kaynağın taze ilk tam regresyonu:132 paket/5985 PASS/0 FAIL. Yeni motor kimlik testi kontrol üzerinde34 PASS/9 FAIL vererek mevcut açığı yakaladı; L1'de aynı test43 PASS/0 FAIL.
-Nihai kaynak:133 paket/6028 PASS/0 FAIL/0 SKIP. İlk tamamlanmış yeni sürüm koşusu6027/1 idi: eski UI-only fazın “economy.js de H3 ile tamamen aynı” hash beklentisi onaylanmış motor kapısına takıldı. Koruma testi yalnız o gözden geçirilmiş tam metin bloğunu ayırıp kalan bütün baytları H3 hash'iyle doğrular; yeni43 test kapının davranışını bağımsız sınar. Tek paket tam ve izole yeniden çalıştı:15/0; özgün14/1 yerine kondu, toplam iki kez sayılmadı.
-27 tarihsel testte yalnız sabit96h31r1 build/cache beklentileri ortak release-contract manifest kontrolüne taşındı. Tam build/cache eşleşmesi ve Save8 zorunluluğu korundu; oyun davranışı eşikleri değiştirilmedi. Ayrıca H31 kaynak koruma kapsamı yukarıdaki tek onaylı blok için açıkça güncellendi. İlk loglar ve eski test hash'leri initial-failures içinde saklıdır. Test envanteri133 paket/324 kaynak-bağımlılık dosyasının hash'ini içerir.
-Nihai gerçek Chromium:252 PASS/0 FAIL;102 inşa,25 genel,36 pregame,13 siyasi panel,16 sözleşme,6 uzun canlı panel,1 ek R1→H5 PWA,3 gerçek çift tıklama/çift dokunma,49 doktrin seçimi/Save8/devlet paneli,1 eski pazar düğmesi. Eski sürüm canlı-panel karşılaştırmaları ve başlangıç kontrolündeki251 kontrol nihai252'ye eklenmedi.
-Fiziksel Android:NOT RUN. Chromium mobil emülasyonu Android cihaz testi diye sunulmadı. Öznel ses dinleme, bağımsız GPU/gerçek Android süreç öldürme testi NOT RUN.
-
+Nihai kaynak:133 paket/6028 PASS/0 FAIL/0 SKIP. Bu toplam devam turunun yeni tam koşusu ve aşağıdaki tek izole paket sonucu üzerinden benzersiz paketler sayılarak yeniden doğrulandı. Devamın ilk tam koşusu6027PASS/1FAIL:tek işlem süre kontrolü27,71ms>20ms. Dış kampanya yükü bittikten sonra aynı kaynak ve aynı eşikle izole tekrar90/0,11,63ms verdi. İlk89/1 yerine90/0 kondu;iki koşu toplanmadı. Başka başarısız paket veya SKIP yok. Beş izlenen üretilmiş çıktı ve iki yeni96G2çıktısı ayrıca saklandı;1967özgün girdinin hash'i tekrar doğrulandı. Fazın kesinti öncesindeki ilk yeni sürüm koşusu6027/1 idi: eski UI-only fazın “economy.js de H3 ile tamamen aynı” hash beklentisi onaylanmış motor kapısına takıldı. Koruma testi yalnız o gözden geçirilmiş tam metin bloğunu ayırıp kalan bütün baytları H3 hash'iyle doğrular; yeni43 test kapının davranışını bağımsız sınar. Tek paket tam ve izole yeniden çalıştı:15/0; özgün14/1 yerine kondu, toplam iki kez sayılmadı.
+27 tarihsel testte yalnız sabit96h31r1 build/cache beklentileri ortak release-contract manifest kontrolüne taşındı. Tam build/cache eşleşmesi ve Save8 zorunluluğu korundu; oyun davranışı eşikleri değiştirilmedi. Ayrıca H31 kaynak koruma kapsamı yukarıdaki tek onaylı blok için açıkça güncellendi. İlk loglar ve eski test hash'leri initial-failures içinde saklıdır. Bu devamda Git'te izlenen1967 test/fixture/yardımcı/tarihsel baseline dosyasının tamamı SHA-256 ve Git blob kimliğiyle doğrulandı;133 paket aynı kaynak kümesinden yeniden çalıştırıldı. Çıktı dizinleri ilk çalıştırmadan önce hazırlandı.
+Kesinti öncesi aynı96h5 runtime kaynaklarında gerçekten çalıştırılmış Chromium:252 PASS/0 FAIL;102 inşa,25 genel,36 pregame,13 siyasi panel,16 sözleşme,6 uzun canlı panel,1 ek R1→H5 PWA,3 gerçek çift tıklama/çift dokunma,49 doktrin seçimi/Save8/devlet paneli,1 eski pazar düğmesi. Eski sürüm canlı-panel karşılaştırmaları ve başlangıç kontrolündeki251 kontrol nihai252'ye eklenmedi.
+Bu devamda Chromium/PWA yeniden koşumu NOT RUN: Chromium yürütülebilir dosyası yoktu; resmî kurucu ZIP yerine195bayt SiteUnavailable HTML döndürdü. Aynı252 kontrol yeni yapılmış gibi sayılmadı. Önceki ham ekran görüntüleri/logları V1 ara pakette bulunmadı ve kurtarılamadı; korunmuş Git doğrulama kaydı ile19 aynı runtime hash'i kanıtta yer alır. Yeni ekran görüntüsü üretildiği iddia edilmez. Fiziksel Android:NOT RUN. Chromium mobil emülasyonu Android cihaz testi diye sunulmadı. Öznel ses dinleme, bağımsız GPU/gerçek Android süreç öldürme testi NOT RUN.
 20. SAVE UYUMLULUĞU VE KORUNAN MEKANİKLER
 Save v8 korunuyor; yeni kalıcı Save alanı yok. PWA stars-v96h31r1→stars-v96h5 gerçek yükseltme, eski cache temizliği, çevrimdışı yeni kabuk ve gerçek Save8 yüklemesi geçti. 96H.3 vassallık muhasebesi, mevcut stratejik AI, diplomatik hafıza, ticaret/konvoy/korsanlık, bilim/araştırma, filo/savaş yetkisi, federasyon/vassallık, köken/başkent kısıtları ve bağımsız AI sayısı korundu.
 UI/index.html aynı hash;62px kart,18px görünür yıkma rozeti,44px dokunma hedefi,450ms/24px koruma ve portre yönlendirme katmanı gerçek tarayıcıda korundu. Son runtime değişiklikleri yalnız economy.js'deki kapı, main.js BUILD_ID ve sw.js CACHE. ai.js aynen27ae25e44d66f5fdbfb04ea7db69aa75769a3165759b6feb0250b5b753e8c739. Üretime gözlemci, E1, seed'e özel çözüm, ücretsiz kaynak veya yeni bonus taşınmadı.
-
 21. OYUN/KANIT ZIP BAĞLANTILARI VE MANİFESTLER
-Oyun: stars-faz96h5.zip; 756007 bayt; SHA-256 fa50f80f7f214d56e779e63a5a8a2382574e381b78ea5c63da4a76d24b4c7cf9; CRC PASS; kökte19runtime+RELEASE-MANIFEST.json=20üye. İndirme: https://github.com/sarsiss12-dot/Star/raw/refs/heads/main/releases/stars-faz96h5.zip
-Nihai kanıt ZIP'i: NOT RUN — çalışma ortamı kesildi. Mevcut V1 ara ZIP274548142bayt, SHA-256 a505617fd0f6811c649ca5d058297271f16377c2b211325263236d79e78b92bd;16kontrol/114doktrin koşusu ve o tarihteki kaynak/fixture/analizleri içerir. Son yayın logları/ekranları nihai ZIP'e aktarılamadı.
-Kanıt bağlantısı: https://chatgpt.com/library?file_id=libfile_1b98ce42d0b881918a5ae817d657aa4a&account_id=personal
+Oyun: stars-faz96h5.zip; 756007 bayt; SHA-256 fa50f80f7f214d56e779e63a5a8a2382574e381b78ea5c63da4a76d24b4c7cf9; CRC PASS; kökte19runtime+RELEASE-MANIFEST.json=20üye. İndirme: https://github.com/sarsiss12-dot/Star/raw/82cec8632e2076002755e8ee5fb44b91e1895892/releases/stars-faz96h5.zip
+Nihai kanıt:stars-faz96h5-kanit-v2.zip;327836454bayt;SHA-256 269126a13b1db22b4294491c7d0f658110bbc688c7d8da69a6f5d3dee561099c;3174üye;CRC ve bütün üye SHA-256 kontrolleri PASS. Link:https://chatgpt.com/library?file_id=libfile_40b06af4d6148191bdfed7a9b6362211&account_id=personal
+İçerik:V2hamSave/karar/aylıkhash kayıtları,168ana koşunun sonuçları,114doktrin deneyi,6E1-R2,122bileşen satırı,20pozitifcasusluk/civicçerçevesi,1967testgirdisi,ilkbaşarısızlıklar,nihai133paketlogları ve üretilmiş çıktıların ayrı kopyaları. Önceki252Chromium kontrolünün kayıp ham ekranları/logları içinde değildir. ZIP'in kendi hash döngüsü oluşmaması için son teslim metadata/raporu ayrıca yayımlanır.
+Korunan V1 ara ZIP:274548142bayt;SHA-256 a505617fd0f6811c649ca5d058297271f16377c2b211325263236d79e78b92bd;V2ZIPtekrarı değildir ve nihai saflık PASS kaynağı sayılmadı. Link:https://chatgpt.com/library?file_id=libfile_1b98ce42d0b881918a5ae817d657aa4a&account_id=personal
 RELEASE-MANIFEST.json bütün19runtime SHA-256'sını, Save8'i,96h5 build ve stars-v96h5 cache'i bildirir. RELEASE-96H5.json oyun ZIP hash/byte ve gerçek doğrulama sayılarını taşır. Kaynak bütünlüğü yayın öncesi ve sonrası tekrar kontrol edilir. Tam kaynak listesi:
 | Runtime dosyası | SHA-256 |
 | --- | --- |
@@ -220,10 +217,8 @@ RELEASE-MANIFEST.json bütün19runtime SHA-256'sını, Save8'i,96h5 build ve sta
 | news.js | a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646 |
 | sw.js | 5dc5ef10fbd3cc7499289fc9a7d2e73869312482795e897e70fcfc38a12d3908 |
 | ui.js | d60ec4997195c6ee82fa6fa86164666394cf9773d774c66d591b7f2e481eca24 |
-
 22. GITHUB COMMIT VE YAYIN DURUMU
-Test metadata commit'i2d4d8021a90d62808bb55548e89129922a0fa30c; oyun yayın commit'i82cec8632e2076002755e8ee5fb44b91e1895892. Expected-SHA2b4f9e647f151a6b514b6ba7ef9da5ec353c709d ve force=false ile main güncellendi. Yayın sonrası HEAD, release, manifest,19runtime SHA-256 ve gerçek756007bayt oyun ZIP'i SHA-256/CRC/dosya listesi doğrulandı. Bu ek durum düzeltmesi yalnız araştırma belgeleri ve release araştırma durumunu günceller; runtime/oyun ZIP'i değişmez.
-
+Test metadata commit'i2d4d8021a90d62808bb55548e89129922a0fa30c; oyun yayın commit'i82cec8632e2076002755e8ee5fb44b91e1895892. İlkR1HEAD ve sonraki güncellemelerde öncekiHEAD için expected-SHA/force=false korumasıyla main ilerletildi. Yayın sonrası HEAD, release, manifest,19runtime SHA-256 ve gerçek756007bayt oyun ZIP'i SHA-256/CRC/dosya listesi doğrulandı. V2 tamamlama commit'i yalnız araştırma/kanıt özeti, tekrar üretim betikleri ve release araştırma durumunu günceller;19runtime ve756007bayt oyun ZIP'i değişmez. Güncellemeden hemen önce HEAD yeniden okunur; expected-SHA/force=false korunur ve yayın sonrası kaynaklar tekrar doğrulanır. Son belge commit kimliği teslim mesajında verilir.
 23. AÇIK SORUNLAR, SONRAKİ FAZ VE AÇIK CEVAPLAR
 Öncelik1: otomatik AI kimliği atamasında sekiz doktrinin görünürlüğü. Teknokrasi/Kutsal Meclis'i doğal havuza eklemek hükümet/bonus/etik dengesini de etkiler; ayrı geçerli başlangıç ve kampanya deneyleri gerekir. Araştırma kapılarıyla çıkarımlı mizaç ayrımını kullanıcıya açık anlatmak gerekir.
 Öncelik2: Yayılmacı için yalnız tercih sırası yerine gerçek koloni gemisi maden/alaşım finansmanını gözlemlemek. Hangi aylarda hedef biliniyor, koloni sürdürülebilir ama peşin gemi/üretici yatırımı çatışıyor, bunu ölçmeden rezerv politikası eklenmemeli. E1'in sıfır gerçek etkisi güvenlik eşiklerini rastgele düşürmeye gerekçe değildir.

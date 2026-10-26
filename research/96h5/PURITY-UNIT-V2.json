@@ -1,0 +1,31 @@
+{
+  "pass": 6,
+  "fail": 0,
+  "rows": [
+    {
+      "name": "canonical monthly-power read reproduces dead-state cache mutation",
+      "status": "PASS"
+    },
+    {
+      "name": "V2 dead-state measurement returns actual value and preserves full Save/RNG",
+      "status": "PASS"
+    },
+    {
+      "name": "V2 uncached live measurement restores absent cache fields",
+      "status": "PASS"
+    },
+    {
+      "name": "V2 preserves current-day canonical cached result and state",
+      "status": "PASS"
+    },
+    {
+      "name": "V2 restores exact cache property descriptors",
+      "status": "PASS"
+    },
+    {
+      "name": "V2 restores cached fields on exception without swallowing error",
+      "status": "PASS"
+    }
+  ],
+  "scope": "Research helper only;not included in production133package total"
+}

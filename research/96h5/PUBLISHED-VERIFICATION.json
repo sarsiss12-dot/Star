@@ -49,9 +49,69 @@
     "physical_android": "NOT RUN"
   },
   "limits": {
-    "strict_bare_observer_purity": "14completeexact;2seed23firstmismatchmonth71._powC;V2notcomplete",
-    "final_evidence_ZIP": "NOT RUN",
-    "V1_checkpoint": "nativefile/version1/274548142bytes;sha256a505617fd0f6811c649ca5d058297271f16377c2b211325263236d79e78b92bd"
+    "V1_original_cache_impurity": "retained;strictV2passedwithnomasking",
+    "resume_Chromium_PWA": "NOT RUN",
+    "physical_Android": "NOT RUN",
+    "prior_Chromium_raw": "unrecoverable;historicalreceiptandsame19sourcehashesonly",
+    "B2": "Main60monthcounterfactualbeforeearliest90monthupheaval;120monthextensionnotuniversalproductionisolation"
   },
-  "source_note": "Documentation-only commits after the runtime release do not change19runtimefiles or gameZIP."
+  "source_note": "Documentation-only commits after the runtime release do not change19runtimefiles or gameZIP.",
+  "v2_completion": {
+    "documentation_parent_checked": "d17229c74e6fb6ff303914453742f30917823346",
+    "runtime_delta_during_resume": false,
+    "strict_bare_observer_matches": 16,
+    "published_vs_control_matches": 16,
+    "regression_unique": {
+      "suites": 133,
+      "pass": 6028,
+      "fail": 0
+    },
+    "new_chromium_checks": 0,
+    "prior_same_phase_chromium": 252,
+    "prior_raw_screenshots_in_final_evidence": false,
+    "game_zip_reverified": {
+      "bytes": 756007,
+      "sha256": "fa50f80f7f214d56e779e63a5a8a2382574e381b78ea5c63da4a76d24b4c7cf9",
+      "members": [
+        "RELEASE-MANIFEST.json",
+        "ai.js",
+        "archive-ui.js",
+        "audio.js",
+        "combat.js",
+        "commerce-ui.js",
+        "commerce.js",
+        "construction.js",
+        "diplomacy.js",
+        "economic-ledger.js",
+        "economy-ui.js",
+        "economy.js",
+        "inbox.js",
+        "index.html",
+        "main.js",
+        "manifest.json",
+        "map.js",
+        "news.js",
+        "sw.js",
+        "ui.js"
+      ],
+      "CRC": "PASS",
+      "all19RuntimeSHA256": true,
+      "embeddedManifestExact": true
+    },
+    "evidence": {
+      "path": "/workspace/scratch/6ab388d2ca94/deliverables/stars-faz96h5-kanit-v2.zip",
+      "bytes": 327836454,
+      "sha256": "269126a13b1db22b4294491c7d0f658110bbc688c7d8da69a6f5d3dee561099c",
+      "members": 3174,
+      "CRC": "PASS",
+      "allMemberSHA256": "PASS",
+      "manifest": "EVIDENCE-MANIFEST.json",
+      "legacyV1Separate": true,
+      "missingPreviousChromiumRaw": true,
+      "library_file_id": "libfile_40b06af4d6148191bdfed7a9b6362211",
+      "file_id": "file_000000002ed882309001aa158ff4fc5f",
+      "current_version_number": 0,
+      "url": "https://chatgpt.com/library?file_id=libfile_40b06af4d6148191bdfed7a9b6362211&account_id=personal"
+    }
+  }
 }

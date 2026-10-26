@@ -1,0 +1,146 @@
+{
+  "status": "PASS",
+  "runtime": 19,
+  "byteIdentical": 16,
+  "changedOnly": [
+    "economy.js:existingpurifierguard",
+    "main.js:buildidentity",
+    "sw.js:cacheidentity"
+  ],
+  "noNewSaveFields": true,
+  "rows": [
+    {
+      "file": "ai.js",
+      "oldSHA256": "27ae25e44d66f5fdbfb04ea7db69aa75769a3165759b6feb0250b5b753e8c739",
+      "newSHA256": "27ae25e44d66f5fdbfb04ea7db69aa75769a3165759b6feb0250b5b753e8c739",
+      "unchanged": true,
+      "onlyReviewedDelta": true
+    },
+    {
+      "file": "archive-ui.js",
+      "oldSHA256": "7f96276402dbb88fc93b4cf72bc7b4922887751eb6aede714e0316750f7f92ab",
+      "newSHA256": "7f96276402dbb88fc93b4cf72bc7b4922887751eb6aede714e0316750f7f92ab",
+      "unchanged": true,
+      "onlyReviewedDelta": true
+    },
+    {
+      "file": "audio.js",
+      "oldSHA256": "6ddf6e388fa404394fee6220c2bfeeb3d1f9601c51a35ccdfe3181a8781942f7",
+      "newSHA256": "6ddf6e388fa404394fee6220c2bfeeb3d1f9601c51a35ccdfe3181a8781942f7",
+      "unchanged": true,
+      "onlyReviewedDelta": true
+    },
+    {
+      "file": "combat.js",
+      "oldSHA256": "b4e21fcdb6fdaaa93da07313131470de3e8a3c28b5650226a9c4a2713bde73a5",
+      "newSHA256": "b4e21fcdb6fdaaa93da07313131470de3e8a3c28b5650226a9c4a2713bde73a5",
+      "unchanged": true,
+      "onlyReviewedDelta": true
+    },
+    {
+      "file": "commerce-ui.js",
+      "oldSHA256": "cc7fef5ab43176093251916aaafbdd873424da0630ec46fe6d3d5106a690b8d4",
+      "newSHA256": "cc7fef5ab43176093251916aaafbdd873424da0630ec46fe6d3d5106a690b8d4",
+      "unchanged": true,
+      "onlyReviewedDelta": true
+    },
+    {
+      "file": "commerce.js",
+      "oldSHA256": "978e4f6b01faed1babeade20070447cbcfaa4e2ea70793a78e50f20fbe66be01",
+      "newSHA256": "978e4f6b01faed1babeade20070447cbcfaa4e2ea70793a78e50f20fbe66be01",
+      "unchanged": true,
+      "onlyReviewedDelta": true
+    },
+    {
+      "file": "construction.js",
+      "oldSHA256": "d9b544b0328f26576ff90e02fe49c1b7f3798dfd844a8c39ee8dc6c0890debda",
+      "newSHA256": "d9b544b0328f26576ff90e02fe49c1b7f3798dfd844a8c39ee8dc6c0890debda",
+      "unchanged": true,
+      "onlyReviewedDelta": true
+    },
+    {
+      "file": "diplomacy.js",
+      "oldSHA256": "b46fd1bf2552a256fe6ad724ec72859f8edbc8c37eb0fd1c9b6e721582e6b3f3",
+      "newSHA256": "b46fd1bf2552a256fe6ad724ec72859f8edbc8c37eb0fd1c9b6e721582e6b3f3",
+      "unchanged": true,
+      "onlyReviewedDelta": true
+    },
+    {
+      "file": "economic-ledger.js",
+      "oldSHA256": "67d07f3ee4777cd7c246c8b37dda7cf1577cf86c19a6edeba68945a5d3063501",
+      "newSHA256": "67d07f3ee4777cd7c246c8b37dda7cf1577cf86c19a6edeba68945a5d3063501",
+      "unchanged": true,
+      "onlyReviewedDelta": true
+    },
+    {
+      "file": "economy-ui.js",
+      "oldSHA256": "61f6e2dcef7f37143821edccf67552718a210ec555f7b8f9074c68191fd5cbcc",
+      "newSHA256": "61f6e2dcef7f37143821edccf67552718a210ec555f7b8f9074c68191fd5cbcc",
+      "unchanged": true,
+      "onlyReviewedDelta": true
+    },
+    {
+      "file": "economy.js",
+      "oldSHA256": "ed2eb108b3c094444f49700e61ab48dfbb968c9bc7f135dcf11a7335c62fd095",
+      "newSHA256": "5d412d488760ae2b7193b13822b747788130b63ed782e62bfbd3223154b69d22",
+      "unchanged": false,
+      "onlyReviewedDelta": true
+    },
+    {
+      "file": "inbox.js",
+      "oldSHA256": "5f53ac2ca9c3ca8d5f1a12a9e1ba2b2a247ab7e350df0ec9169a13cfe3285204",
+      "newSHA256": "5f53ac2ca9c3ca8d5f1a12a9e1ba2b2a247ab7e350df0ec9169a13cfe3285204",
+      "unchanged": true,
+      "onlyReviewedDelta": true
+    },
+    {
+      "file": "index.html",
+      "oldSHA256": "127f72e12e67a7d4c2ea05713fb202e21b470ad053c20411650a0bdbb78bac9d",
+      "newSHA256": "127f72e12e67a7d4c2ea05713fb202e21b470ad053c20411650a0bdbb78bac9d",
+      "unchanged": true,
+      "onlyReviewedDelta": true
+    },
+    {
+      "file": "main.js",
+      "oldSHA256": "28d79dc17a3edf30264a15474d35bed648e661043c3a4b03cfab9b6aab8575e5",
+      "newSHA256": "251de9cd6725a1ed5db3739ac07d7b40bb794e2fc110a4a0526faa155732841e",
+      "unchanged": false,
+      "onlyReviewedDelta": true
+    },
+    {
+      "file": "manifest.json",
+      "oldSHA256": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
+      "newSHA256": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
+      "unchanged": true,
+      "onlyReviewedDelta": true
+    },
+    {
+      "file": "map.js",
+      "oldSHA256": "d8ca27ee07c484b7399f95d8031aa70fb7539bcf89d768c8442200b7cba76ae3",
+      "newSHA256": "d8ca27ee07c484b7399f95d8031aa70fb7539bcf89d768c8442200b7cba76ae3",
+      "unchanged": true,
+      "onlyReviewedDelta": true
+    },
+    {
+      "file": "news.js",
+      "oldSHA256": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
+      "newSHA256": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
+      "unchanged": true,
+      "onlyReviewedDelta": true
+    },
+    {
+      "file": "sw.js",
+      "oldSHA256": "9823fb8be2bc52a32d8a052e10d975379a35fbb0cd920c532756989be4a82671",
+      "newSHA256": "5dc5ef10fbd3cc7499289fc9a7d2e73869312482795e897e70fcfc38a12d3908",
+      "unchanged": false,
+      "onlyReviewedDelta": true
+    },
+    {
+      "file": "ui.js",
+      "oldSHA256": "d60ec4997195c6ee82fa6fa86164666394cf9773d774c66d591b7f2e481eca24",
+      "newSHA256": "d60ec4997195c6ee82fa6fa86164666394cf9773d774c66d591b7f2e481eca24",
+      "unchanged": true,
+      "onlyReviewedDelta": true
+    }
+  ]
+}
