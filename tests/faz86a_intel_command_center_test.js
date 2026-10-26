@@ -5,6 +5,7 @@
    Çalıştırma: node tests/faz86a_intel_command_center_test.js
    ═══════════════════════════════════════════════════════════════════ */
 'use strict';
+const release5=require('./helpers/release-contract');
 const fs=require('fs'), path=require('path'), cp=require('child_process'),
       vm=require('vm'), crypto=require('crypto');
 const KOK=path.resolve(__dirname,'..');
@@ -104,7 +105,7 @@ for(const f of fs.readdirSync(KOK).filter(x=>x.endsWith('.js'))){
 }
 {
   const ui=oku('ui.js'), dip=oku('diplomacy.js'), ai=oku('ai.js');
-  ok("sw cache = 'stars-v96h31r1'", /const CACHE = 'stars-v96h31r1'/.test(oku('sw.js')));
+  ok("sw cache = '"+release5.cache+"'", release5.cachePattern.test(oku('sw.js')));
   const sw=oku('sw.js');
   ok('sw KABUK/fetch/activate korundu',
      /KABUK/.test(sw) && /addEventListener\('fetch'/.test(sw) &&

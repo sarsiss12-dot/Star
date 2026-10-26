@@ -4,6 +4,7 @@
    Çalıştırma: node tests/faz85c_crisis_save_continuity_test.js
    ═══════════════════════════════════════════════════════════════════ */
 'use strict';
+const release5=require('./helpers/release-contract');
 const fs=require('fs'), path=require('path'), cp=require('child_process'),
       vm=require('vm'), crypto=require('crypto');
 const KOK=path.resolve(__dirname,'..');
@@ -108,7 +109,7 @@ for(const f of fs.readdirSync(KOK).filter(x=>x.endsWith('.js'))){
   ['yildiz:save','yh_audio','yh_advisor','yh_autoev','yh_bg','yh_radar',
    'yh_templates','__yh_probe','__yh_diag'].forEach(k=>
     ok('depolama anahtarı korundu: '+k, mainJs.includes(k)));
-  ok("sw cache = 'stars-v96h31r1'", /const CACHE = 'stars-v96h31r1'/.test(oku('sw.js')));
+  ok("sw cache = '"+release5.cache+"'", release5.cachePattern.test(oku('sw.js')));
   const sw=oku('sw.js');
   ok('sw KABUK listesi duruyor', /KABUK/.test(sw));
   ok('sw fetch davranışı duruyor', /addEventListener\('fetch'/.test(sw));

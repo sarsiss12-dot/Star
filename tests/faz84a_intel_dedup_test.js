@@ -5,6 +5,7 @@
    Çalıştırma: node tests/faz84a_intel_dedup_test.js
    ═══════════════════════════════════════════════════════════════════ */
 'use strict';
+const release5=require('./helpers/release-contract');
 const fs=require('fs'), path=require('path'), cp=require('child_process'),
       vm=require('vm'), crypto=require('crypto');
 const KOK=path.resolve(__dirname,'..');
@@ -157,7 +158,7 @@ const mainJs=oku('main.js');
 ['yildiz:save','yh_audio','yh_advisor','yh_autoev','yh_bg','yh_radar',
  'yh_templates','__yh_probe','__yh_diag'].forEach(k=>
   ok('anahtar: '+k, mainJs.includes(k)));
-ok("sw cache = 'stars-v96h31r1'", /const CACHE = 'stars-v96h31r1'/.test(oku('sw.js')));
+ok("sw cache = '"+release5.cache+"'", release5.cachePattern.test(oku('sw.js')));
 
 /* SITUATION KARANTİNASI */
 {

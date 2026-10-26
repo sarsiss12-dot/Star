@@ -1,4 +1,5 @@
 'use strict';
+const release5=require('./helpers/release-contract');
 const assert=require('assert/strict'),fs=require('fs'),path=require('path');
 const {runtime}=require('./helpers/runtime');
 const root=path.resolve(process.env.STARS_TEST_ROOT||path.join(__dirname,'..'));
@@ -117,8 +118,8 @@ test('cihazdan yükle bozuk kaydı bulunamadı diye raporlamaz',async()=>{
  assert.doesNotMatch(h.run('G.log[G.log.length-1].m'),/bulunamadı/i);
 });
 test('build ve cache 90RC.2 kimliği taşır',()=>{
- assert.match(fs.readFileSync(path.join(root,'main.js'),'utf8'),/const BUILD_ID = '96h31r1'/);
- assert.match(fs.readFileSync(path.join(root,'sw.js'),'utf8'),/const CACHE = 'stars-v96h31r1'/);
+ assert.match(fs.readFileSync(path.join(root,'main.js'),'utf8'),release5.buildPattern);
+ assert.match(fs.readFileSync(path.join(root,'sw.js'),'utf8'),release5.cachePattern);
 });
 (async()=>{for(const [name,fn] of tests){try{await fn();pass++;console.log('✓ '+name);}
  catch(e){fail++;console.log('✗ '+name+' — '+e.stack);}}

@@ -5,6 +5,7 @@
    Çalıştırma: node tests/faz86b_deal_engine_test.js
    ═══════════════════════════════════════════════════════════════════ */
 'use strict';
+const release5=require('./helpers/release-contract');
 const fs=require('fs'), path=require('path'), cp=require('child_process'),
       vm=require('vm'), crypto=require('crypto');
 const KOK=path.resolve(__dirname,'..');
@@ -145,7 +146,7 @@ for(const f of fs.readdirSync(KOK).filter(x=>x.endsWith('.js'))){
 }
 {
   const mn=oku('main.js'), mp=oku('map.js'), ui=oku('ui.js'), sw=oku('sw.js');
-  ok("sw cache = 'stars-v96h31r1'", /const CACHE = 'stars-v96h31r1'/.test(sw));
+  ok("sw cache = '"+release5.cache+"'", release5.cachePattern.test(sw));
   ok('sw KABUK/fetch/activate korundu', /KABUK/.test(sw) &&
      /addEventListener\('fetch'/.test(sw) && /addEventListener\('activate'/.test(sw));
   ok('kayıt sürümü v:8 KALDI', /v:8, cfg:G\.cfg/.test(mn));
@@ -399,7 +400,7 @@ console.log('\nE. HEDEFLİ TANI');
   ok('çizim tamamlandığında aşama "tamam"', N.stage==='tamam', N.stage);
   ok('yüzey eşleşmeleri raporlanıyor',
      N.cvEsles===true && N.gEsles===true && N.drawCvEsles===true);
-  ok('build kimliği raporda', N.build==='96h31r1', String(N.build));
+  ok('build kimliği raporda', N.build===release5.build, String(N.build));
   ok('rapor yeterince alan içeriyor', N.alanlar>=15, String(N.alanlar));
   ok('çizim SONRASI resize AYIRT EDİLİYOR',
      N.resizeAfterDraw===false && (d.resizeSonra||{}).resizeAfterDraw===true,

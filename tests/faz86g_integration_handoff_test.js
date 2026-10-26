@@ -1,4 +1,5 @@
 'use strict';
+const release5=require('./helpers/release-contract');
 const assert=require('assert/strict'),fs=require('fs'),path=require('path');
 const {runtime}=require('./helpers/runtime');
 const ROOT=path.resolve(__dirname,'..');
@@ -93,7 +94,7 @@ test('warOn transaction rollback NAPı geri getirir; commit onu kapatır',()=>{
 });
 test('Sürüm, PWA kabuğu ve kayıt sürümü 86G ile tutarlı',()=>{
   const main=fs.readFileSync(path.join(ROOT,'main.js'),'utf8'),sw=fs.readFileSync(path.join(ROOT,'sw.js'),'utf8');
-  assert.match(main,/const BUILD_ID = '96h31r1';/);assert.match(sw,/const CACHE = 'stars-v96h31r1';/);
+  assert.match(main,release5.buildPattern);assert.match(sw,release5.cachePattern);
   for(const file of ['index.html','main.js','ui.js','map.js','ai.js','diplomacy.js','economy.js','combat.js','audio.js','manifest.json']){
     assert.ok(fs.existsSync(path.join(ROOT,file)),file);assert.ok(sw.includes(`'./${file}'`),file+' kabukta yok');
   }
