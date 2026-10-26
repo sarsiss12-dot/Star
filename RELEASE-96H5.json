@@ -78,7 +78,7 @@
     "interpretation": "General quality neutrality;market is closed in this matrix and positive legality proof is separate"
   },
   "evidence_library_file_id": "libfile_1b98ce42d0b881918a5ae817d657aa4a",
-  "evidence_scope": "Separate research/evidence ZIP includes exact sources,fixtures,decision traces,initial failures,and postpublication verification. Artifact hash is in the delivery report.",
+  "evidence_scope": "Only the preserved V1 checkpoint is available. Final evidence ZIP and strict read-only V2 research are incomplete;see research_status,evidence_status and research/96h5/RESUME.json.",
   "research_status": "INCOMPLETE:V1 findings preserved;strict read-only V2 replay interrupted when execution environment became unavailable",
   "observer_purity": {
     "v1_vs_inherited_harness": "16/16 all monthly Save/RNG equal",
