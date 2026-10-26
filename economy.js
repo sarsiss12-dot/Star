@@ -3191,6 +3191,10 @@ function marketTrade(e, sat, al, miktar){
   if (!marketOpen())
     return {ok:false, why:'Galaktik Borsa henüz kurulmadı — konseyin ' +
             'karar vermesi gerekiyor'};
+  /* The engine shares the existing doctrine ban with UI and AI callers.
+     Reject before quoting: a forbidden request cannot initialize prices. */
+  if (typeof isPurifier === 'function' && isPurifier(e))
+    return {ok:false, why:'Fanatik Arındırıcılar Galaktik Borsayı kullanamaz'};
   const q = marketQuote(sat, al, miktar);
   if (!q.ok) return q;
   if ((e.res[sat] || 0) < miktar)

@@ -1,11 +1,11 @@
 {
-  "phase": "96H.3.1",
-  "build": "96h31r1",
-  "scope": "Complete playable runtime; evidence is separate",
+  "phase": "96H.5",
+  "build": "96h5",
+  "scope": "Complete playable runtime; existing purifier market prohibition enforced at engine boundary. AI algorithms unchanged. Doctrine research evidence is separate.",
   "save_version": 8,
-  "pwa_cache": "stars-v96h31r1",
-  "parent_zip_sha256": "6970242f23fc9cced927de33d297be2cf93ec08f92349f8683559b0b1d434da6",
-  "parent_commit": "6aa987a9499dd058d674773280138fd9405f4207",
+  "pwa_cache": "stars-v96h5",
+  "parent_commit": "2b4f9e647f151a6b514b6ba7ef9da5ec353c709d",
+  "parent_zip_sha256": "41d80f6eb493f97c7b43cda0c37221fe445fe451915e9811bcf5c0ee158ed7d1",
   "file_count": 19,
   "files": {
     "ai.js": "27ae25e44d66f5fdbfb04ea7db69aa75769a3165759b6feb0250b5b753e8c739",
@@ -18,16 +18,14 @@
     "diplomacy.js": "b46fd1bf2552a256fe6ad724ec72859f8edbc8c37eb0fd1c9b6e721582e6b3f3",
     "economic-ledger.js": "67d07f3ee4777cd7c246c8b37dda7cf1577cf86c19a6edeba68945a5d3063501",
     "economy-ui.js": "61f6e2dcef7f37143821edccf67552718a210ec555f7b8f9074c68191fd5cbcc",
-    "economy.js": "ed2eb108b3c094444f49700e61ab48dfbb968c9bc7f135dcf11a7335c62fd095",
+    "economy.js": "5d412d488760ae2b7193b13822b747788130b63ed782e62bfbd3223154b69d22",
     "inbox.js": "5f53ac2ca9c3ca8d5f1a12a9e1ba2b2a247ab7e350df0ec9169a13cfe3285204",
     "index.html": "127f72e12e67a7d4c2ea05713fb202e21b470ad053c20411650a0bdbb78bac9d",
-    "main.js": "28d79dc17a3edf30264a15474d35bed648e661043c3a4b03cfab9b6aab8575e5",
+    "main.js": "251de9cd6725a1ed5db3739ac07d7b40bb794e2fc110a4a0526faa155732841e",
     "manifest.json": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
     "map.js": "d8ca27ee07c484b7399f95d8031aa70fb7539bcf89d768c8442200b7cba76ae3",
     "news.js": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
-    "sw.js": "9823fb8be2bc52a32d8a052e10d975379a35fbb0cd920c532756989be4a82671",
+    "sw.js": "5dc5ef10fbd3cc7499289fc9a7d2e73869312482795e897e70fcfc38a12d3908",
     "ui.js": "d60ec4997195c6ee82fa6fa86164666394cf9773d774c66d591b7f2e481eca24"
-  },
-  "control_commit": "8209afb7f7522ba38d613df1be06b19733978d6d",
-  "control_zip_sha256": "adab7cdf2f065dad21b60f1b8e56ba63fde28772c0836be2d89ffa7dacea797b"
+  }
 }
