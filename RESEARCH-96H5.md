@@ -1,3 +1,10 @@
+ARAŞTIRMA DURUMU GÜNCELLEMESİ — ÇALIŞMA KESİLDİ
+Oyun düzeltmesi yayımlandı ve doğrulandı; doktrin araştırmasının nihai salt-okunur V2 tekrarları tamamlanmadı.
+H5 ek kayıt katmanı eski ölçüm düzeneğiyle16/16eşleşti. Sonradan yapılan tamamen kancasız motor kontrolünde14/16koşu bütün aylarda aynı Save/RNG'yi verdi. Aynı seed23'ün120/240aylık iki koşusu71.ayda ayrıştı: ölmüş devlet4._powC önbelleği kancasız motorda53, eski aylık güç ölçümünde0; o ana kadarki RNG aynıydı(-44705134). Aylık totalPower ölçümü türetilmiş önbelleği yeniliyordu. Bu fark araştırma altyapısına aittir; yayımlanan motor yaması değildir.
+Salt-okunur ölçüm tasarımı ve yeniden koşu planı research/96h5/RESUME.json ile read-only-metrics.js içinde korundu. Çalıştırma ortamı erişilemez olduğundan V2 tamamlanmış/PASS sayılmadı. Aşağıdaki doktrin tabloları ve sınıfları V1 ön bulgularıdır; nihai saflık kapısını geçmiş yeni AI üstünlüğü olarak kullanılamaz.
+Yalnız mevcut Arındırıcı pazar yasağı motor kapısı yayımlandı. AI algoritması değişmedi. Gerçek133paket/6028PASS/0FAIL,252Chromium ve yayın sonrası19runtime/oyunZIPdoğrulaması tamamlanmıştır.
+Nihai kanıt ZIP'i oluşturulamadı. Erişilebilir V1 ara ZIP:274548142bayt;SHA-256 a505617fd0f6811c649ca5d058297271f16377c2b211325263236d79e78b92bd. L1'in son ham log/ekran görüntülerinin bu ara ZIP içinde olduğu iddia edilmez.
+
 STARS — FAZ 96H.5 SONUÇ RAPORU
 Doktrin kimliği denetimi + mevcut Arındırıcı pazar yasağı düzeltmesi
 1. KANONİK KAYNAK, GITHUB HEAD VE HASH DOĞRULAMASI
@@ -69,7 +76,7 @@ Kutsal Meclis — Zayıf: B1 11 teknoloji/10296 güç; etki/istikrar ve genel sa
 Fanatik Arındırıcı — L1 sonrasında güçlü sert kimlik: B1'de 0 ticaret teslimatı, 0 uygun ticaret terimi; 3 saldırı savaşı ve 25975 güç. Diplomasi/gerçek kargo anlaşması engelleri korundu. UI ve aiMarketTick pazarı kapatıyordu; marketTrade kapısı eksikti. L1 bu mevcut yasağı maliyet/kur oluşturulmadan önce uygular. Gerçek Save8 sonrası eski dokunmatik düğmede kontrol −200 maden/+80,5 alaşım, yayın adayı 0/0. B2'de “Arındırıcı politika” etiketi taşıyan Yayılmacı'nın ticareti gerçek Arındırıcı ihlali değildir: B2 hukuki kimliği değiştirmez.
 
 8. KARAR DEĞİŞTİRMEYEN GÖZLEM KAYITLARI
-16 kanonik kontrol gerçekten yeniden oynatıldı: 2400 kampanya-ayı/144000 yarım günlük adım. Her ayın gerçek Save hash'i ve RNG'si önceki doğrulanmış kanonik koşuyla eşleşti. Gözlemci kararları, Save'i ve RNG'yi değiştirmedi; kayıt taşması 0.
+16 kanonik kontrol gerçekten yeniden oynatıldı: 2400 kampanya-ayı/144000 yarım günlük adım. Her ayın gerçek Save hash'i ve RNG'si önceki doğrulanmış kanonik koşuyla eşleşti. H5 ek kayıt katmanı devralınan ölçüm düzeneğiyle aynı Save/RNG'yi verdi; bu karşılaştırma tamamen kancasız motor saflığı olarak kabul edilmemelidir. Kayıt taşması 0.
 Kimlik, profil, hedef, inşa sırası, bilinen koloni hedefi, finansman, savaş iştahı/hazırlığı/bütçesi, müzakere, operasyon uygunluğu/seçimi/gerçek bedeli, araştırma ve gerçek yük sonuçları dış kayda alındı. dealQuote içindeki geri alınan denemeler quote=true olarak ayrıldı ve gerçek eylem sayılmadı. Eylem verileri anında kopyalandı; ilk pilotun referans-alias kaydı saklandı ve nihai metriklere katılmadı.
 Gözlemci AI'ya ek harita/filo/karşı taraf bilgisi vermedi. Yeni deterministik test, temas/istihbarat yokken karşı tarafın gizli stoğunu değiştirmenin aiKnownResources sonucunu değiştirmediğini doğruladı. Doğal fırsat paydaları yalnız gerçekten değerlendirilen fırsatlardır; haritadaki bütün teorik fırsatları kapsadığı iddia edilmedi.
 
@@ -189,7 +196,7 @@ UI/index.html aynı hash;62px kart,18px görünür yıkma rozeti,44px dokunma he
 
 21. OYUN/KANIT ZIP BAĞLANTILARI VE MANİFESTLER
 Oyun: stars-faz96h5.zip; 756007 bayt; SHA-256 fa50f80f7f214d56e779e63a5a8a2382574e381b78ea5c63da4a76d24b4c7cf9; CRC PASS; kökte19runtime+RELEASE-MANIFEST.json=20üye. İndirme: https://github.com/sarsiss12-dot/Star/raw/refs/heads/main/releases/stars-faz96h5.zip
-Kanıt paketi, bu araştırma raporunu, beklenen kaynakları, gerçek Save/RNG izlerini, ilk başarısızlıkları ve yayın sonrası doğrulamayı ayrı taşır. Kendi ZIP hash/byte bilgisi nihai teslim raporunda verilir; paket kendisini içermez.
+Nihai kanıt ZIP'i: NOT RUN — çalışma ortamı kesildi. Mevcut V1 ara ZIP274548142bayt, SHA-256 a505617fd0f6811c649ca5d058297271f16377c2b211325263236d79e78b92bd;16kontrol/114doktrin koşusu ve o tarihteki kaynak/fixture/analizleri içerir. Son yayın logları/ekranları nihai ZIP'e aktarılamadı.
 Kanıt bağlantısı: https://chatgpt.com/library?file_id=libfile_1b98ce42d0b881918a5ae817d657aa4a&account_id=personal
 RELEASE-MANIFEST.json bütün19runtime SHA-256'sını, Save8'i,96h5 build ve stars-v96h5 cache'i bildirir. RELEASE-96H5.json oyun ZIP hash/byte ve gerçek doğrulama sayılarını taşır. Kaynak bütünlüğü yayın öncesi ve sonrası tekrar kontrol edilir. Tam kaynak listesi:
 | Runtime dosyası | SHA-256 |
@@ -215,7 +222,7 @@ RELEASE-MANIFEST.json bütün19runtime SHA-256'sını, Save8'i,96h5 build ve sta
 | ui.js | d60ec4997195c6ee82fa6fa86164666394cf9773d774c66d591b7f2e481eca24 |
 
 22. GITHUB COMMIT VE YAYIN DURUMU
-Yayın adayı bütün hedef/genel kapıları geçti. Bu dosya doğrulanmış kaynaklarla birlikte arşivlenir; expected-SHA/non-force güncellemenin gerçek commit ve yayın sonrası HEAD/ZIP doğrulaması nihai teslim raporuna eklenir. Bu aşamada yayımlanmış gibi bir commit uydurulmadı.
+Test metadata commit'i2d4d8021a90d62808bb55548e89129922a0fa30c; oyun yayın commit'i82cec8632e2076002755e8ee5fb44b91e1895892. Expected-SHA2b4f9e647f151a6b514b6ba7ef9da5ec353c709d ve force=false ile main güncellendi. Yayın sonrası HEAD, release, manifest,19runtime SHA-256 ve gerçek756007bayt oyun ZIP'i SHA-256/CRC/dosya listesi doğrulandı. Bu ek durum düzeltmesi yalnız araştırma belgeleri ve release araştırma durumunu günceller; runtime/oyun ZIP'i değişmez.
 
 23. AÇIK SORUNLAR, SONRAKİ FAZ VE AÇIK CEVAPLAR
 Öncelik1: otomatik AI kimliği atamasında sekiz doktrinin görünürlüğü. Teknokrasi/Kutsal Meclis'i doğal havuza eklemek hükümet/bonus/etik dengesini de etkiler; ayrı geçerli başlangıç ve kampanya deneyleri gerekir. Araştırma kapılarıyla çıkarımlı mizaç ayrımını kullanıcıya açık anlatmak gerekir.

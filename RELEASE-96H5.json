@@ -78,5 +78,20 @@
     "interpretation": "General quality neutrality;market is closed in this matrix and positive legality proof is separate"
   },
   "evidence_library_file_id": "libfile_1b98ce42d0b881918a5ae817d657aa4a",
-  "evidence_scope": "Separate research/evidence ZIP includes exact sources,fixtures,decision traces,initial failures,and postpublication verification. Artifact hash is in the delivery report."
+  "evidence_scope": "Separate research/evidence ZIP includes exact sources,fixtures,decision traces,initial failures,and postpublication verification. Artifact hash is in the delivery report.",
+  "research_status": "INCOMPLETE:V1 findings preserved;strict read-only V2 replay interrupted when execution environment became unavailable",
+  "observer_purity": {
+    "v1_vs_inherited_harness": "16/16 all monthly Save/RNG equal",
+    "bare_engine": "14/16 complete exact;seed23 M120/M240 first mismatch month71:deadstate4._powC53vs0,RNGsame",
+    "cause": "Inherited monthly totalPower metric warms a serialized derived cache",
+    "v2": "NOT RUN to completion;do not treat V1 as strict bare-engine purity PASS"
+  },
+  "evidence_status": {
+    "final_zip": "NOT RUN:environment unavailable",
+    "checkpoint_library_file_id": "libfile_1b98ce42d0b881918a5ae817d657aa4a",
+    "checkpoint_version": 1,
+    "checkpoint_bytes": 274548142,
+    "checkpoint_sha256": "a505617fd0f6811c649ca5d058297271f16377c2b211325263236d79e78b92bd",
+    "checkpoint_scope": "V1 natural16,doctrine114,fixtures,source andthen-currentanalysis;notfinalL1rawlogs/screenshots"
+  }
 }
