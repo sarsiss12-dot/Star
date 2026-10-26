@@ -1,0 +1,131 @@
+{
+  "candidate": "D2",
+  "before": {
+    "militarist": 376,
+    "tuccar": 503,
+    "pasifist": 778,
+    "yayilmaci": 503,
+    "izolasyonist": 272,
+    "teknokrasi": 0,
+    "kriminal": 384,
+    "teokrasi": 0
+  },
+  "after": {
+    "militarist": 376,
+    "tuccar": 346,
+    "pasifist": 664,
+    "yayilmaci": 503,
+    "izolasyonist": 272,
+    "teknokrasi": 99,
+    "kriminal": 442,
+    "teokrasi": 114
+  },
+  "beforeResearch": {
+    "militarist": 347,
+    "tuccar": 692,
+    "pasifist": 698,
+    "yayilmaci": 725,
+    "izolasyonist": 354,
+    "teknokrasi": 0,
+    "kriminal": 0,
+    "teokrasi": 0
+  },
+  "afterResearch": {
+    "militarist": 347,
+    "tuccar": 485,
+    "pasifist": 584,
+    "yayilmaci": 725,
+    "izolasyonist": 354,
+    "teknokrasi": 99,
+    "kriminal": 108,
+    "teokrasi": 114
+  },
+  "beforeSelected": {
+    "militarist": 0,
+    "tuccar": 0,
+    "pasifist": 0,
+    "yayilmaci": 0,
+    "izolasyonist": 0,
+    "teknokrasi": 0,
+    "kriminal": 0,
+    "teokrasi": 0
+  },
+  "afterSelected": {
+    "militarist": 0,
+    "tuccar": 0,
+    "pasifist": 0,
+    "yayilmaci": 0,
+    "izolasyonist": 0,
+    "teknokrasi": 99,
+    "kriminal": 108,
+    "teokrasi": 114
+  },
+  "rates": {
+    "militarist": {
+      "old": 13.352272727272727,
+      "new": 13.352272727272727
+    },
+    "tuccar": {
+      "old": 17.86221590909091,
+      "new": 12.286931818181818
+    },
+    "pasifist": {
+      "old": 27.62784090909091,
+      "new": 23.579545454545457
+    },
+    "yayilmaci": {
+      "old": 17.86221590909091,
+      "new": 17.86221590909091
+    },
+    "izolasyonist": {
+      "old": 9.659090909090908,
+      "new": 9.659090909090908
+    },
+    "teknokrasi": {
+      "old": 0.0,
+      "new": 3.515625
+    },
+    "kriminal": {
+      "old": 13.636363636363635,
+      "new": 15.696022727272727
+    },
+    "teokrasi": {
+      "old": 0.0,
+      "new": 4.048295454545454
+    }
+  },
+  "entropyBitsBeforeAfter": [
+    2.5060142624329558,
+    2.7970161047333897
+  ],
+  "untouchedFields": {
+    "seed": 0,
+    "id": 0,
+    "race": 0,
+    "physio": 0,
+    "ethics": 0,
+    "civics": 0,
+    "traits": 0,
+    "origin": 0,
+    "resources": 0,
+    "home": 0
+  },
+  "initialMapHomePlayerRNG": 256,
+  "fullSaveRepeat": 256,
+  "invalidNewExplicitPairs": 0,
+  "invalidCivicTraitsEthics": 0,
+  "mismatchBeforeAfter": [
+    611,
+    545
+  ],
+  "cacheDifferences": 0,
+  "explicitDoctrineViolationsBeforeAfter": [
+    0,
+    0
+  ],
+  "legacyResearchPurifierOpenPolicyCasesBeforeAfter": [
+    82,
+    82
+  ],
+  "interpretation": "Selected doctrine,government fallback research and inferred behavior are separate. All611oldcases lacked selecteddoctrine;noneviolatedtheexistingresearchfallbackcontract.82Machinecaseshavesemanticpurifierresearch/openpolicytension;notclaimedfixedandnotautomaticallymigrated.0newexplicitdoctrineaccessmismatch."
+}

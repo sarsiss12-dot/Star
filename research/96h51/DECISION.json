@@ -1,0 +1,47 @@
+{
+  "decision": "NO RELEASE",
+  "acceptedCandidates": [],
+  "rejected": [
+    "D1",
+    "D2"
+  ],
+  "runtime19RestoredAndEqualCanonical": true,
+  "restoredOnly": [
+    "main.js",
+    "sw.js"
+  ],
+  "manifestExact": true,
+  "build": "96h5",
+  "pwa": "stars-v96h5",
+  "Save": 8,
+  "aiSHA256": "27ae25e44d66f5fdbfb04ea7db69aa75769a3165759b6feb0250b5b753e8c739",
+  "targetPackages": [
+    {
+      "id": "newidentity43",
+      "candidate": "D2",
+      "pass": 43,
+      "fail": 0,
+      "log": "fast-D2-tests.log"
+    },
+    {
+      "id": "existingH5engine43",
+      "candidate": "D2",
+      "pass": 43,
+      "fail": 0,
+      "log": "target-H5-engine-D2.log"
+    },
+    {
+      "id": "existingE1identity22",
+      "candidate": "D2",
+      "pass": 22,
+      "fail": 0,
+      "log": "target-E1-identity-D2.log"
+    }
+  ],
+  "fullRegression": "NOT RUN:failedcampaignacceptancegate;noacceptedproductionchange",
+  "long240": "NOT RUN:gatefailed",
+  "density": "NOT RUN:gatefailed",
+  "Chromium": "NOT RUN:browserexecutablemissing;officialinstallerfailed",
+  "physicalAndroid": "NOT RUN",
+  "targetPass": 108
+}

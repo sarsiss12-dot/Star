@@ -1,0 +1,50 @@
+[
+  {
+    "seed": 11,
+    "initialSaveSame": true,
+    "monthlyFullSaveRngSame": true,
+    "allActionTraceSame": true
+  },
+  {
+    "seed": 7,
+    "initialSaveSame": false,
+    "monthlyFullSaveRngSame": false,
+    "allActionTraceSame": false
+  },
+  {
+    "seed": 23,
+    "initialSaveSame": true,
+    "monthlyFullSaveRngSame": true,
+    "allActionTraceSame": true
+  },
+  {
+    "seed": 42,
+    "initialSaveSame": true,
+    "monthlyFullSaveRngSame": true,
+    "allActionTraceSame": true
+  },
+  {
+    "seed": 99,
+    "initialSaveSame": true,
+    "monthlyFullSaveRngSame": true,
+    "allActionTraceSame": true
+  },
+  {
+    "seed": 123,
+    "initialSaveSame": true,
+    "monthlyFullSaveRngSame": true,
+    "allActionTraceSame": true
+  },
+  {
+    "seed": 404,
+    "initialSaveSame": false,
+    "monthlyFullSaveRngSame": false,
+    "allActionTraceSame": false
+  },
+  {
+    "seed": 2026,
+    "initialSaveSame": true,
+    "monthlyFullSaveRngSame": true,
+    "allActionTraceSame": true
+  }
+]

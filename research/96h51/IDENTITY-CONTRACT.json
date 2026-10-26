@@ -1,0 +1,1466 @@
+{
+  "rules": {
+    "x_observer": [
+      {
+        "kind": "doctrine",
+        "values": [
+          "teknokrasi"
+        ]
+      },
+      {
+        "kind": "ethic",
+        "key": "mat",
+        "sign": 1
+      }
+    ],
+    "x_frontier": [
+      {
+        "kind": "doctrine",
+        "values": [
+          "yayilmaci"
+        ]
+      }
+    ],
+    "d_admiralty": [
+      {
+        "kind": "doctrine",
+        "values": [
+          "militarist"
+        ]
+      }
+    ],
+    "d_accounts": [
+      {
+        "kind": "doctrine",
+        "values": [
+          "tuccar"
+        ]
+      }
+    ],
+    "d_deterrence": [
+      {
+        "kind": "doctrine",
+        "values": [
+          "pasifist"
+        ]
+      }
+    ],
+    "d_mobilization": [
+      {
+        "kind": "doctrine",
+        "values": [
+          "izolasyonist"
+        ]
+      }
+    ],
+    "d_cells": [
+      {
+        "kind": "doctrine",
+        "values": [
+          "kriminal"
+        ]
+      }
+    ],
+    "d_synod": [
+      {
+        "kind": "doctrine",
+        "values": [
+          "teokrasi"
+        ]
+      }
+    ]
+  },
+  "interpretation": "Classify by the existing explicit researchDoctrine contract,not by assuming inferred persona is the chosen doctrine. No author-intent inference.",
+  "versions": {
+    "control": {
+      "states": 2816,
+      "identitySplits": 611,
+      "noChosenDoctrineInAllSplits": true,
+      "byExistingContract": {
+        "validStableGovernmentVsInferredPersona": 611,
+        "cacheOnly": 0,
+        "provenSelectedDoctrineMechanicViolation": 0,
+        "provenWrongResearchAccess": 0
+      },
+      "splitByGovernment": {
+        "kasif": 150,
+        "meclis": 45,
+        "makine": 82,
+        "lonca": 75,
+        "suru": 72,
+        "teknokrasi": 114,
+        "insan": 45,
+        "klan": 28
+      },
+      "splitPairs": {
+        "yayilmaci->pasifist": 111,
+        "pasifist->kriminal": 90,
+        "izolasyonist->kriminal": 52,
+        "tuccar->pasifist": 59,
+        "yayilmaci->kriminal": 84,
+        "tuccar->kriminal": 130,
+        "militarist->kriminal": 28,
+        "yayilmaci->militarist": 27,
+        "izolasyonist->militarist": 30
+      },
+      "actualAccessDiffersFromPersonaHypothesis": {
+        "distinctStates": 611,
+        "techChecks": 1222
+      },
+      "legacyPurifierResearchOpenPolicy": [
+        {
+          "seed": 1,
+          "id": 11,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 7,
+          "id": 5,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 10,
+          "id": 8,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 11,
+          "id": 7,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 13,
+          "id": 3,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 15,
+          "id": 5,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 17,
+          "id": 11,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 21,
+          "id": 1,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 22,
+          "id": 9,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 25,
+          "id": 8,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 26,
+          "id": 9,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 32,
+          "id": 11,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 34,
+          "id": 6,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 36,
+          "id": 7,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 38,
+          "id": 3,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 44,
+          "id": 9,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 57,
+          "id": 1,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 63,
+          "id": 7,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 64,
+          "id": 3,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 67,
+          "id": 1,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 69,
+          "id": 3,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 71,
+          "id": 4,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 77,
+          "id": 7,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 80,
+          "id": 10,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 82,
+          "id": 11,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 93,
+          "id": 7,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 96,
+          "id": 2,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 99,
+          "id": 2,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 100,
+          "id": 4,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 101,
+          "id": 2,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 109,
+          "id": 1,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 109,
+          "id": 9,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 111,
+          "id": 5,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 116,
+          "id": 5,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 117,
+          "id": 11,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 119,
+          "id": 3,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 119,
+          "id": 11,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 129,
+          "id": 11,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 130,
+          "id": 1,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 132,
+          "id": 1,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 132,
+          "id": 9,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 133,
+          "id": 1,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 133,
+          "id": 9,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 134,
+          "id": 10,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 137,
+          "id": 1,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 138,
+          "id": 4,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 140,
+          "id": 5,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 147,
+          "id": 8,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 150,
+          "id": 1,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 151,
+          "id": 8,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 153,
+          "id": 10,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 155,
+          "id": 8,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 162,
+          "id": 6,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 165,
+          "id": 7,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 170,
+          "id": 11,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 176,
+          "id": 9,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 177,
+          "id": 8,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 184,
+          "id": 10,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 187,
+          "id": 4,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 188,
+          "id": 4,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 191,
+          "id": 2,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 195,
+          "id": 7,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 197,
+          "id": 1,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 205,
+          "id": 3,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 205,
+          "id": 11,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 208,
+          "id": 2,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 209,
+          "id": 2,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 209,
+          "id": 10,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 210,
+          "id": 8,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 211,
+          "id": 8,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 212,
+          "id": 1,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 213,
+          "id": 5,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 218,
+          "id": 8,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 223,
+          "id": 5,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 225,
+          "id": 4,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 227,
+          "id": 10,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 228,
+          "id": 9,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 233,
+          "id": 2,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 234,
+          "id": 9,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 235,
+          "id": 2,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 238,
+          "id": 11,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 247,
+          "id": 5,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        }
+      ],
+      "notes": "82legacyMachinecases expose a real semantic tension:purifierresearchbutnonpurifierinferredpolicy. With no selected doctrine,this does not violate current declared research access. Do not relabel these82as fixed or automatically force them into Purifier;that wouldraiseitscount272to354andchangeSave/rulebehavior."
+    },
+    "D2": {
+      "states": 2816,
+      "identitySplits": 545,
+      "noChosenDoctrineInAllSplits": true,
+      "byExistingContract": {
+        "validStableGovernmentVsInferredPersona": 545,
+        "cacheOnly": 0,
+        "provenSelectedDoctrineMechanicViolation": 0,
+        "provenWrongResearchAccess": 0
+      },
+      "splitByGovernment": {
+        "kasif": 150,
+        "meclis": 29,
+        "makine": 82,
+        "lonca": 54,
+        "suru": 72,
+        "teknokrasi": 85,
+        "insan": 45,
+        "klan": 28
+      },
+      "splitPairs": {
+        "yayilmaci->pasifist": 111,
+        "pasifist->kriminal": 74,
+        "izolasyonist->kriminal": 52,
+        "tuccar->pasifist": 43,
+        "yayilmaci->kriminal": 84,
+        "tuccar->kriminal": 96,
+        "militarist->kriminal": 28,
+        "yayilmaci->militarist": 27,
+        "izolasyonist->militarist": 30
+      },
+      "actualAccessDiffersFromPersonaHypothesis": {
+        "distinctStates": 545,
+        "techChecks": 1090
+      },
+      "legacyPurifierResearchOpenPolicy": [
+        {
+          "seed": 1,
+          "id": 11,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 7,
+          "id": 5,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 10,
+          "id": 8,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 11,
+          "id": 7,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 13,
+          "id": 3,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 15,
+          "id": 5,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 17,
+          "id": 11,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 21,
+          "id": 1,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 22,
+          "id": 9,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 25,
+          "id": 8,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 26,
+          "id": 9,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 32,
+          "id": 11,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 34,
+          "id": 6,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 36,
+          "id": 7,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 38,
+          "id": 3,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 44,
+          "id": 9,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 57,
+          "id": 1,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 63,
+          "id": 7,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 64,
+          "id": 3,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 67,
+          "id": 1,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 69,
+          "id": 3,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 71,
+          "id": 4,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 77,
+          "id": 7,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 80,
+          "id": 10,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 82,
+          "id": 11,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 93,
+          "id": 7,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 96,
+          "id": 2,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 99,
+          "id": 2,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 100,
+          "id": 4,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 101,
+          "id": 2,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 109,
+          "id": 1,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 109,
+          "id": 9,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 111,
+          "id": 5,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 116,
+          "id": 5,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 117,
+          "id": 11,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 119,
+          "id": 3,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 119,
+          "id": 11,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 129,
+          "id": 11,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 130,
+          "id": 1,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 132,
+          "id": 1,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 132,
+          "id": 9,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 133,
+          "id": 1,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 133,
+          "id": 9,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 134,
+          "id": 10,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 137,
+          "id": 1,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 138,
+          "id": 4,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 140,
+          "id": 5,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 147,
+          "id": 8,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 150,
+          "id": 1,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 151,
+          "id": 8,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 153,
+          "id": 10,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 155,
+          "id": 8,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 162,
+          "id": 6,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 165,
+          "id": 7,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 170,
+          "id": 11,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 176,
+          "id": 9,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 177,
+          "id": 8,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 184,
+          "id": 10,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 187,
+          "id": 4,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 188,
+          "id": 4,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 191,
+          "id": 2,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 195,
+          "id": 7,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 197,
+          "id": 1,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 205,
+          "id": 3,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 205,
+          "id": 11,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 208,
+          "id": 2,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 209,
+          "id": 2,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 209,
+          "id": 10,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 210,
+          "id": 8,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 211,
+          "id": 8,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 212,
+          "id": 1,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 213,
+          "id": 5,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 218,
+          "id": 8,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 223,
+          "id": 5,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 225,
+          "id": 4,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 227,
+          "id": 10,
+          "race": "makine",
+          "persona": "militarist",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 228,
+          "id": 9,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 233,
+          "id": 2,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 234,
+          "id": 9,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 235,
+          "id": 2,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 238,
+          "id": 11,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        },
+        {
+          "seed": 247,
+          "id": 5,
+          "race": "makine",
+          "persona": "kriminal",
+          "chosen": null,
+          "stableResearch": "izolasyonist"
+        }
+      ],
+      "notes": "82legacyMachinecases expose a real semantic tension:purifierresearchbutnonpurifierinferredpolicy. With no selected doctrine,this does not violate current declared research access. Do not relabel these82as fixed or automatically force them into Purifier;that wouldraiseitscount272to354andchangeSave/rulebehavior."
+    }
+  }
+}

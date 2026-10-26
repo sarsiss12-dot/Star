@@ -1,0 +1,3526 @@
+{
+  "scope": "8seed120monthdistributioncomparison;notanAIalgorithmcausalexperiment",
+  "candidates": {
+    "D1": {
+      "cases": [
+        {
+          "seed": 11,
+          "control": {
+            "phase": "L1-M120-11",
+            "seed": 11,
+            "contracts": 11,
+            "cancelled": 4,
+            "freightLost": 2,
+            "alive": 5,
+            "techs": 29,
+            "ships": 104,
+            "power": 14356,
+            "upkeep": 439.2133546796693,
+            "colonies": 12,
+            "deliveries": 84,
+            "pacts": 2,
+            "warsStarted": 8,
+            "peace": 0,
+            "objectiveChanges": 23,
+            "plansCompleted": 11,
+            "plansFailed": 4,
+            "criticalEmpireMonths": 0,
+            "invalidResources": [],
+            "elapsedMs": 54297
+          },
+          "candidate": {
+            "phase": "D1-M120-11",
+            "seed": 11,
+            "contracts": 4,
+            "cancelled": 1,
+            "freightLost": 14,
+            "alive": 5,
+            "techs": 35,
+            "ships": 99,
+            "power": 16143,
+            "upkeep": 310.15250000000015,
+            "colonies": 15,
+            "deliveries": 14,
+            "pacts": 2,
+            "warsStarted": 2,
+            "peace": 0,
+            "objectiveChanges": 23,
+            "plansCompleted": 11,
+            "plansFailed": 5,
+            "criticalEmpireMonths": 7,
+            "invalidResources": [],
+            "elapsedMs": 17814
+          },
+          "initialMapHomesBaseIdentityRngSame": true,
+          "initialSaveEqual": false,
+          "initialRng": 1014147474,
+          "initialSaveHashes": {
+            "control": "788b18cff56afd52595cf374ddc94b61c5b99382aa537ec652f67c1ac2f2636f",
+            "candidate": "ffd381849bfba3c0a928810ad392c48eb8eaee640ae3c51954c4be5589bb686e"
+          },
+          "firstRecordedActionDifference": {
+            "index": 35,
+            "candidate": {
+              "day": 210,
+              "actor": 1,
+              "kind": "ship-order",
+              "system": 13,
+              "cls": "kor",
+              "paid": {
+                "min": 0,
+                "ene": 0,
+                "yiy": 0,
+                "ala": 32,
+                "ara": 0,
+                "tuk": 0,
+                "etk": 0
+              }
+            },
+            "control": {
+              "day": 180,
+              "actor": 5,
+              "kind": "fleet-route",
+              "fleet": 16,
+              "to": 25,
+              "path": [
+                10,
+                25
+              ]
+            }
+          },
+          "firstMonthlyRngDifference": 7,
+          "firstMonthlySaveDifference": 1,
+          "controlDetail": {
+            "split": {
+              "initial": 0,
+              "new": 0
+            },
+            "births": [],
+            "states": [
+              {
+                "id": 1,
+                "initial": true,
+                "race": "klan",
+                "chosen": null,
+                "persona": "militarist",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 6,
+                "power": 7198,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 2,
+                "initial": true,
+                "race": "suru",
+                "chosen": null,
+                "persona": "yayilmaci",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 4,
+                "power": 135,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 3,
+                "initial": true,
+                "race": "makine",
+                "chosen": null,
+                "persona": "izolasyonist",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 3,
+                "power": 427,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 4,
+                "initial": true,
+                "race": "lonca",
+                "chosen": null,
+                "persona": "tuccar",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 6,
+                "power": 1251,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 5,
+                "initial": true,
+                "race": "teknokrasi",
+                "chosen": null,
+                "persona": "pasifist",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 10,
+                "power": 5345,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              }
+            ],
+            "initialSurvivors": 5,
+            "newSurvivors": 0
+          },
+          "candidateDetail": {
+            "split": {
+              "initial": 7,
+              "new": 0
+            },
+            "births": [],
+            "states": [
+              {
+                "id": 1,
+                "initial": true,
+                "race": "klan",
+                "chosen": null,
+                "persona": "militarist",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 5,
+                "power": 6820,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 2,
+                "initial": true,
+                "race": "suru",
+                "chosen": null,
+                "persona": "yayilmaci",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 4,
+                "power": 135,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 3,
+                "initial": true,
+                "race": "makine",
+                "chosen": null,
+                "persona": "izolasyonist",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 8,
+                "power": 7622,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 4,
+                "initial": true,
+                "race": "lonca",
+                "chosen": "tuccar",
+                "persona": "tuccar",
+                "critical": [
+                  111,
+                  112,
+                  113,
+                  114,
+                  115,
+                  116,
+                  117
+                ],
+                "byResource": {
+                  "ene": [],
+                  "min": [
+                    111,
+                    112,
+                    113,
+                    114,
+                    115,
+                    116,
+                    117
+                  ],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 6,
+                "power": 41,
+                "longestConsecutive": 7,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 5,
+                "initial": true,
+                "race": "teknokrasi",
+                "chosen": "teknokrasi",
+                "persona": "teknokrasi",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 12,
+                "power": 1525,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              }
+            ],
+            "initialSurvivors": 5,
+            "newSurvivors": 0
+          }
+        },
+        {
+          "seed": 404,
+          "control": {
+            "phase": "L1-M120-404",
+            "seed": 404,
+            "contracts": 14,
+            "cancelled": 1,
+            "freightLost": 0,
+            "alive": 6,
+            "techs": 49,
+            "ships": 251,
+            "power": 31433,
+            "upkeep": 751.0340000000004,
+            "colonies": 19,
+            "deliveries": 154,
+            "pacts": 11,
+            "warsStarted": 0,
+            "peace": 0,
+            "objectiveChanges": 12,
+            "plansCompleted": 7,
+            "plansFailed": 5,
+            "criticalEmpireMonths": 2,
+            "invalidResources": [],
+            "elapsedMs": 91561
+          },
+          "candidate": {
+            "phase": "D1-M120-404",
+            "seed": 404,
+            "contracts": 16,
+            "cancelled": 2,
+            "freightLost": 5,
+            "alive": 5,
+            "techs": 51,
+            "ships": 246,
+            "power": 33355,
+            "upkeep": 831.466736818521,
+            "colonies": 21,
+            "deliveries": 127,
+            "pacts": 6,
+            "warsStarted": 0,
+            "peace": 0,
+            "objectiveChanges": 18,
+            "plansCompleted": 9,
+            "plansFailed": 6,
+            "criticalEmpireMonths": 0,
+            "invalidResources": [],
+            "elapsedMs": 46798
+          },
+          "initialMapHomesBaseIdentityRngSame": true,
+          "initialSaveEqual": false,
+          "initialRng": -881359429,
+          "initialSaveHashes": {
+            "control": "7fee88d90f31d5650fda4718a9ce4dc61e6e9089af68725310effcd291e70b72",
+            "candidate": "33d3451221d912f9c3eb46122bb2c7ba030129c8765de793be2ebd66289fa343"
+          },
+          "firstRecordedActionDifference": {
+            "index": 8,
+            "candidate": {
+              "day": 60,
+              "actor": 3,
+              "kind": "fleet-route",
+              "fleet": 12,
+              "to": 1,
+              "path": [
+                1
+              ]
+            },
+            "control": {
+              "day": 60,
+              "actor": 1,
+              "kind": "diplomatic-offer",
+              "other": 3,
+              "give": [
+                {
+                  "t": "nap"
+                }
+              ],
+              "want": [],
+              "applied": true,
+              "result": "kabul"
+            }
+          },
+          "firstMonthlyRngDifference": 2,
+          "firstMonthlySaveDifference": 1,
+          "controlDetail": {
+            "split": {
+              "initial": 0,
+              "new": 2
+            },
+            "births": [
+              {
+                "id": 7,
+                "month": 107,
+                "race": "suru",
+                "chosen": null
+              }
+            ],
+            "states": [
+              {
+                "id": 1,
+                "initial": true,
+                "race": "meclis",
+                "chosen": null,
+                "persona": "pasifist",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 9,
+                "power": 6591,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 2,
+                "initial": true,
+                "race": "suru",
+                "chosen": null,
+                "persona": "yayilmaci",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 9,
+                "power": 5810,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 3,
+                "initial": true,
+                "race": "klan",
+                "chosen": null,
+                "persona": "militarist",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 6,
+                "power": 7878,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 4,
+                "initial": true,
+                "race": "teknokrasi",
+                "chosen": null,
+                "persona": "tuccar",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 15,
+                "power": 4630,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 5,
+                "initial": true,
+                "race": "insan",
+                "chosen": null,
+                "persona": "pasifist",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 10,
+                "power": 6524,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 7,
+                "initial": false,
+                "race": "suru",
+                "chosen": null,
+                "persona": "kriminal",
+                "critical": [
+                  119,
+                  120
+                ],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [
+                    119,
+                    120
+                  ],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 0,
+                "power": 0,
+                "longestConsecutive": 2,
+                "stillCriticalAtEnd": true
+              }
+            ],
+            "initialSurvivors": 5,
+            "newSurvivors": 1
+          },
+          "candidateDetail": {
+            "split": {
+              "initial": 0,
+              "new": 0
+            },
+            "births": [],
+            "states": [
+              {
+                "id": 1,
+                "initial": true,
+                "race": "meclis",
+                "chosen": "teokrasi",
+                "persona": "teokrasi",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 9,
+                "power": 7289,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 2,
+                "initial": true,
+                "race": "suru",
+                "chosen": null,
+                "persona": "yayilmaci",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 9,
+                "power": 7710,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 3,
+                "initial": true,
+                "race": "klan",
+                "chosen": null,
+                "persona": "militarist",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 6,
+                "power": 7475,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 4,
+                "initial": true,
+                "race": "teknokrasi",
+                "chosen": "teknokrasi",
+                "persona": "teknokrasi",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 19,
+                "power": 3776,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 5,
+                "initial": true,
+                "race": "insan",
+                "chosen": null,
+                "persona": "pasifist",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 8,
+                "power": 7105,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              }
+            ],
+            "initialSurvivors": 5,
+            "newSurvivors": 0
+          }
+        },
+        {
+          "seed": 42,
+          "control": {
+            "phase": "L1-M120-42",
+            "seed": 42,
+            "contracts": 5,
+            "cancelled": 0,
+            "freightLost": 0,
+            "alive": 5,
+            "techs": 42,
+            "ships": 142,
+            "power": 20026,
+            "upkeep": 384.0737016930421,
+            "colonies": 15,
+            "deliveries": 58,
+            "pacts": 1,
+            "warsStarted": 0,
+            "peace": 0,
+            "objectiveChanges": 16,
+            "plansCompleted": 5,
+            "plansFailed": 4,
+            "criticalEmpireMonths": 2,
+            "invalidResources": [],
+            "elapsedMs": 61910
+          },
+          "candidate": {
+            "phase": "D1-M120-42",
+            "seed": 42,
+            "contracts": 8,
+            "cancelled": 0,
+            "freightLost": 0,
+            "alive": 5,
+            "techs": 42,
+            "ships": 120,
+            "power": 19306,
+            "upkeep": 356.96699474363584,
+            "colonies": 14,
+            "deliveries": 94,
+            "pacts": 2,
+            "warsStarted": 0,
+            "peace": 0,
+            "objectiveChanges": 13,
+            "plansCompleted": 5,
+            "plansFailed": 3,
+            "criticalEmpireMonths": 0,
+            "invalidResources": [],
+            "elapsedMs": 27065
+          },
+          "initialMapHomesBaseIdentityRngSame": true,
+          "initialSaveEqual": false,
+          "initialRng": -881359503,
+          "initialSaveHashes": {
+            "control": "add9719fe195a4b5affc172fadee0af13647b46d67ce34d1bb1cc6f0589b03af",
+            "candidate": "1daf0a4cba061ca1f71597ad89f7176e3942a0cbb632bf1d67f69e419f5fd891"
+          },
+          "firstRecordedActionDifference": {
+            "index": 1,
+            "candidate": {
+              "day": 30,
+              "actor": 4,
+              "kind": "ship-order",
+              "system": 27,
+              "cls": "ins",
+              "paid": {
+                "min": 90,
+                "ene": 0,
+                "yiy": 0,
+                "ala": 45,
+                "ara": 0,
+                "tuk": 0,
+                "etk": 0
+              }
+            },
+            "control": {
+              "day": 30,
+              "actor": 1,
+              "kind": "ship-order",
+              "system": 9,
+              "cls": "ins",
+              "paid": {
+                "min": 90,
+                "ene": 0,
+                "yiy": 0,
+                "ala": 45,
+                "ara": 0,
+                "tuk": 0,
+                "etk": 0
+              }
+            }
+          },
+          "firstMonthlyRngDifference": 4,
+          "firstMonthlySaveDifference": 1,
+          "controlDetail": {
+            "split": {
+              "initial": 2,
+              "new": 0
+            },
+            "births": [],
+            "states": [
+              {
+                "id": 1,
+                "initial": true,
+                "race": "meclis",
+                "chosen": null,
+                "persona": "pasifist",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 6,
+                "power": 3802,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 2,
+                "initial": true,
+                "race": "klan",
+                "chosen": null,
+                "persona": "militarist",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 6,
+                "power": 10967,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 3,
+                "initial": true,
+                "race": "makine",
+                "chosen": null,
+                "persona": "izolasyonist",
+                "critical": [
+                  116
+                ],
+                "byResource": {
+                  "ene": [
+                    116
+                  ],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 10,
+                "power": 1107,
+                "longestConsecutive": 1,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 4,
+                "initial": true,
+                "race": "teknokrasi",
+                "chosen": null,
+                "persona": "pasifist",
+                "critical": [
+                  12
+                ],
+                "byResource": {
+                  "ene": [],
+                  "min": [
+                    12
+                  ],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 5,
+                "power": 0,
+                "longestConsecutive": 1,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 5,
+                "initial": true,
+                "race": "kasif",
+                "chosen": null,
+                "persona": "yayilmaci",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 15,
+                "power": 4150,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              }
+            ],
+            "initialSurvivors": 5,
+            "newSurvivors": 0
+          },
+          "candidateDetail": {
+            "split": {
+              "initial": 0,
+              "new": 0
+            },
+            "births": [],
+            "states": [
+              {
+                "id": 1,
+                "initial": true,
+                "race": "meclis",
+                "chosen": "pasifist",
+                "persona": "pasifist",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 6,
+                "power": 656,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 2,
+                "initial": true,
+                "race": "klan",
+                "chosen": null,
+                "persona": "militarist",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 6,
+                "power": 11234,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 3,
+                "initial": true,
+                "race": "makine",
+                "chosen": null,
+                "persona": "izolasyonist",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 10,
+                "power": 3201,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 4,
+                "initial": true,
+                "race": "teknokrasi",
+                "chosen": "teknokrasi",
+                "persona": "teknokrasi",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 7,
+                "power": 0,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 5,
+                "initial": true,
+                "race": "kasif",
+                "chosen": null,
+                "persona": "yayilmaci",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 13,
+                "power": 4215,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              }
+            ],
+            "initialSurvivors": 5,
+            "newSurvivors": 0
+          }
+        }
+      ],
+      "control": {
+        "criticalEmpireMonths": 4,
+        "deliveries": 296,
+        "contracts": 30,
+        "techs": 120,
+        "colonies": 46,
+        "ships": 497,
+        "power": 65815,
+        "plansCompleted": 23,
+        "plansFailed": 13,
+        "upkeep": 1574.3210563727118,
+        "alive": 16,
+        "initialCritical": 2,
+        "newCritical": 2
+      },
+      "candidate": {
+        "criticalEmpireMonths": 7,
+        "deliveries": 235,
+        "contracts": 28,
+        "techs": 128,
+        "colonies": 50,
+        "ships": 465,
+        "power": 68804,
+        "plansCompleted": 25,
+        "plansFailed": 14,
+        "upkeep": 1498.586231562157,
+        "alive": 15,
+        "initialCritical": 7,
+        "newCritical": 0
+      },
+      "ratios": {
+        "deliveries": 0.793918918918919,
+        "techs": 1.0666666666666667,
+        "power": 1.0454151789105828,
+        "plansCompleted": 1.0869565217391304
+      },
+      "decision": "REJECT",
+      "reason": "Pilotdeliveryratio235/296belowpredeclared.85;nostartofremainingmatrix",
+      "firstStage": "3representative120pilots",
+      "full120": false
+    },
+    "D2": {
+      "cases": [
+        {
+          "seed": 11,
+          "control": {
+            "phase": "L1-M120-11",
+            "seed": 11,
+            "contracts": 11,
+            "cancelled": 4,
+            "freightLost": 2,
+            "alive": 5,
+            "techs": 29,
+            "ships": 104,
+            "power": 14356,
+            "upkeep": 439.2133546796693,
+            "colonies": 12,
+            "deliveries": 84,
+            "pacts": 2,
+            "warsStarted": 8,
+            "peace": 0,
+            "objectiveChanges": 23,
+            "plansCompleted": 11,
+            "plansFailed": 4,
+            "criticalEmpireMonths": 0,
+            "invalidResources": [],
+            "elapsedMs": 54297
+          },
+          "candidate": {
+            "phase": "D2-M120-11",
+            "seed": 11,
+            "contracts": 11,
+            "cancelled": 4,
+            "freightLost": 2,
+            "alive": 5,
+            "techs": 29,
+            "ships": 104,
+            "power": 14356,
+            "upkeep": 439.2133546796693,
+            "colonies": 12,
+            "deliveries": 84,
+            "pacts": 2,
+            "warsStarted": 8,
+            "peace": 0,
+            "objectiveChanges": 23,
+            "plansCompleted": 11,
+            "plansFailed": 4,
+            "criticalEmpireMonths": 0,
+            "invalidResources": [],
+            "elapsedMs": 26831
+          },
+          "initialMapHomesBaseIdentityRngSame": true,
+          "initialSaveEqual": true,
+          "initialRng": 1014147474,
+          "initialSaveHashes": {
+            "control": "788b18cff56afd52595cf374ddc94b61c5b99382aa537ec652f67c1ac2f2636f",
+            "candidate": "788b18cff56afd52595cf374ddc94b61c5b99382aa537ec652f67c1ac2f2636f"
+          },
+          "firstRecordedActionDifference": null,
+          "firstMonthlyRngDifference": null,
+          "firstMonthlySaveDifference": null,
+          "controlDetail": {
+            "split": {
+              "initial": 0,
+              "new": 0
+            },
+            "births": [],
+            "states": [
+              {
+                "id": 1,
+                "initial": true,
+                "race": "klan",
+                "chosen": null,
+                "persona": "militarist",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 6,
+                "power": 7198,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 2,
+                "initial": true,
+                "race": "suru",
+                "chosen": null,
+                "persona": "yayilmaci",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 4,
+                "power": 135,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 3,
+                "initial": true,
+                "race": "makine",
+                "chosen": null,
+                "persona": "izolasyonist",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 3,
+                "power": 427,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 4,
+                "initial": true,
+                "race": "lonca",
+                "chosen": null,
+                "persona": "tuccar",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 6,
+                "power": 1251,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 5,
+                "initial": true,
+                "race": "teknokrasi",
+                "chosen": null,
+                "persona": "pasifist",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 10,
+                "power": 5345,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              }
+            ],
+            "initialSurvivors": 5,
+            "newSurvivors": 0
+          },
+          "candidateDetail": {
+            "split": {
+              "initial": 0,
+              "new": 0
+            },
+            "births": [],
+            "states": [
+              {
+                "id": 1,
+                "initial": true,
+                "race": "klan",
+                "chosen": null,
+                "persona": "militarist",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 6,
+                "power": 7198,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 2,
+                "initial": true,
+                "race": "suru",
+                "chosen": null,
+                "persona": "yayilmaci",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 4,
+                "power": 135,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 3,
+                "initial": true,
+                "race": "makine",
+                "chosen": null,
+                "persona": "izolasyonist",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 3,
+                "power": 427,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 4,
+                "initial": true,
+                "race": "lonca",
+                "chosen": null,
+                "persona": "tuccar",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 6,
+                "power": 1251,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 5,
+                "initial": true,
+                "race": "teknokrasi",
+                "chosen": null,
+                "persona": "pasifist",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 10,
+                "power": 5345,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              }
+            ],
+            "initialSurvivors": 5,
+            "newSurvivors": 0
+          }
+        },
+        {
+          "seed": 7,
+          "control": {
+            "phase": "L1-M120-7",
+            "seed": 7,
+            "contracts": 4,
+            "cancelled": 0,
+            "freightLost": 0,
+            "alive": 5,
+            "techs": 51,
+            "ships": 188,
+            "power": 23537,
+            "upkeep": 566.4480000000003,
+            "colonies": 16,
+            "deliveries": 46,
+            "pacts": 8,
+            "warsStarted": 0,
+            "peace": 0,
+            "objectiveChanges": 14,
+            "plansCompleted": 11,
+            "plansFailed": 2,
+            "criticalEmpireMonths": 5,
+            "invalidResources": [],
+            "elapsedMs": 58921
+          },
+          "candidate": {
+            "phase": "D2-M120-7",
+            "seed": 7,
+            "contracts": 11,
+            "cancelled": 0,
+            "freightLost": 0,
+            "alive": 5,
+            "techs": 54,
+            "ships": 229,
+            "power": 28680,
+            "upkeep": 624.8280000000004,
+            "colonies": 20,
+            "deliveries": 114,
+            "pacts": 8,
+            "warsStarted": 0,
+            "peace": 0,
+            "objectiveChanges": 12,
+            "plansCompleted": 11,
+            "plansFailed": 0,
+            "criticalEmpireMonths": 14,
+            "invalidResources": [],
+            "elapsedMs": 50918
+          },
+          "initialMapHomesBaseIdentityRngSame": true,
+          "initialSaveEqual": false,
+          "initialRng": 1014147470,
+          "initialSaveHashes": {
+            "control": "b9513e9d34c85b97ab8cc07ef116c8d40cd9b0bc71fcaeef5cea229bb9ccd636",
+            "candidate": "e92469784b3ab1038b68008a269ac7d1c318e20dbcdf8e23d6e8019c03dc4928"
+          },
+          "firstRecordedActionDifference": {
+            "index": 10,
+            "candidate": {
+              "day": 60,
+              "actor": 3,
+              "kind": "ship-order",
+              "system": 30,
+              "cls": "ins",
+              "paid": {
+                "min": 90,
+                "ene": 0,
+                "yiy": 0,
+                "ala": 45,
+                "ara": 0,
+                "tuk": 0,
+                "etk": 0
+              }
+            },
+            "control": {
+              "day": 60,
+              "actor": 1,
+              "kind": "building-order",
+              "system": 34,
+              "planet": 4,
+              "key": "santral",
+              "paid": {
+                "min": 110,
+                "ene": 0,
+                "yiy": 0,
+                "ala": 0,
+                "ara": 0,
+                "tuk": 0,
+                "etk": 0
+              }
+            }
+          },
+          "firstMonthlyRngDifference": 1,
+          "firstMonthlySaveDifference": 1,
+          "controlDetail": {
+            "split": {
+              "initial": 5,
+              "new": 0
+            },
+            "births": [],
+            "states": [
+              {
+                "id": 1,
+                "initial": true,
+                "race": "suru",
+                "chosen": null,
+                "persona": "yayilmaci",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 6,
+                "power": 8310,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 2,
+                "initial": true,
+                "race": "teknokrasi",
+                "chosen": null,
+                "persona": "tuccar",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 10,
+                "power": 3584,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 3,
+                "initial": true,
+                "race": "kasif",
+                "chosen": null,
+                "persona": "yayilmaci",
+                "critical": [
+                  28,
+                  38,
+                  39,
+                  40,
+                  41
+                ],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [
+                    28
+                  ],
+                  "ala": [
+                    38,
+                    39,
+                    40,
+                    41
+                  ]
+                },
+                "alive": true,
+                "techs": 10,
+                "power": 48,
+                "longestConsecutive": 4,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 4,
+                "initial": true,
+                "race": "lonca",
+                "chosen": null,
+                "persona": "tuccar",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 11,
+                "power": 3469,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 5,
+                "initial": true,
+                "race": "makine",
+                "chosen": null,
+                "persona": "kriminal",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 14,
+                "power": 8126,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              }
+            ],
+            "initialSurvivors": 5,
+            "newSurvivors": 0
+          },
+          "candidateDetail": {
+            "split": {
+              "initial": 14,
+              "new": 0
+            },
+            "births": [],
+            "states": [
+              {
+                "id": 1,
+                "initial": true,
+                "race": "suru",
+                "chosen": null,
+                "persona": "yayilmaci",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 9,
+                "power": 9175,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 2,
+                "initial": true,
+                "race": "teknokrasi",
+                "chosen": "teknokrasi",
+                "persona": "teknokrasi",
+                "critical": [
+                  24,
+                  25,
+                  26,
+                  27,
+                  28,
+                  29,
+                  30,
+                  31,
+                  32,
+                  33
+                ],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [
+                    24,
+                    25,
+                    26,
+                    27,
+                    28,
+                    29,
+                    30,
+                    31,
+                    32,
+                    33
+                  ],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 10,
+                "power": 5432,
+                "longestConsecutive": 10,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 3,
+                "initial": true,
+                "race": "kasif",
+                "chosen": null,
+                "persona": "yayilmaci",
+                "critical": [
+                  23,
+                  24,
+                  25,
+                  26
+                ],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [
+                    23,
+                    24,
+                    25,
+                    26
+                  ],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 10,
+                "power": 1191,
+                "longestConsecutive": 4,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 4,
+                "initial": true,
+                "race": "lonca",
+                "chosen": null,
+                "persona": "tuccar",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 12,
+                "power": 3511,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 5,
+                "initial": true,
+                "race": "makine",
+                "chosen": null,
+                "persona": "kriminal",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 13,
+                "power": 9371,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              }
+            ],
+            "initialSurvivors": 5,
+            "newSurvivors": 0
+          }
+        },
+        {
+          "seed": 23,
+          "control": {
+            "phase": "L1-M120-23",
+            "seed": 23,
+            "contracts": 0,
+            "cancelled": 0,
+            "freightLost": 0,
+            "alive": 4,
+            "techs": 29,
+            "ships": 135,
+            "power": 21514,
+            "upkeep": 453.47666680647166,
+            "colonies": 10,
+            "deliveries": 0,
+            "pacts": 4,
+            "warsStarted": 2,
+            "peace": 0,
+            "objectiveChanges": 18,
+            "plansCompleted": 10,
+            "plansFailed": 2,
+            "criticalEmpireMonths": 1,
+            "invalidResources": [],
+            "elapsedMs": 63701
+          },
+          "candidate": {
+            "phase": "D2-M120-23",
+            "seed": 23,
+            "contracts": 0,
+            "cancelled": 0,
+            "freightLost": 0,
+            "alive": 4,
+            "techs": 29,
+            "ships": 135,
+            "power": 21514,
+            "upkeep": 453.47666680647166,
+            "colonies": 10,
+            "deliveries": 0,
+            "pacts": 4,
+            "warsStarted": 2,
+            "peace": 0,
+            "objectiveChanges": 18,
+            "plansCompleted": 10,
+            "plansFailed": 2,
+            "criticalEmpireMonths": 1,
+            "invalidResources": [],
+            "elapsedMs": 27265
+          },
+          "initialMapHomesBaseIdentityRngSame": true,
+          "initialSaveEqual": true,
+          "initialRng": -881359556,
+          "initialSaveHashes": {
+            "control": "510932ad2d4ff4319b48c45826270a9fa7f3d6bd2cb8ac3019f52d994b6f7ab9",
+            "candidate": "510932ad2d4ff4319b48c45826270a9fa7f3d6bd2cb8ac3019f52d994b6f7ab9"
+          },
+          "firstRecordedActionDifference": null,
+          "firstMonthlyRngDifference": null,
+          "firstMonthlySaveDifference": null,
+          "controlDetail": {
+            "split": {
+              "initial": 1,
+              "new": 0
+            },
+            "births": [],
+            "states": [
+              {
+                "id": 1,
+                "initial": true,
+                "race": "kasif",
+                "chosen": null,
+                "persona": "pasifist",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 6,
+                "power": 87,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 2,
+                "initial": true,
+                "race": "klan",
+                "chosen": null,
+                "persona": "militarist",
+                "critical": [
+                  1
+                ],
+                "byResource": {
+                  "ene": [
+                    1
+                  ],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 3,
+                "power": 1236,
+                "longestConsecutive": 1,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 3,
+                "initial": true,
+                "race": "lonca",
+                "chosen": null,
+                "persona": "tuccar",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 9,
+                "power": 6929,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 4,
+                "initial": true,
+                "race": "meclis",
+                "chosen": null,
+                "persona": "pasifist",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": false,
+                "techs": 5,
+                "power": 0,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 5,
+                "initial": true,
+                "race": "makine",
+                "chosen": null,
+                "persona": "izolasyonist",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 11,
+                "power": 13262,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              }
+            ],
+            "initialSurvivors": 4,
+            "newSurvivors": 0
+          },
+          "candidateDetail": {
+            "split": {
+              "initial": 1,
+              "new": 0
+            },
+            "births": [],
+            "states": [
+              {
+                "id": 1,
+                "initial": true,
+                "race": "kasif",
+                "chosen": null,
+                "persona": "pasifist",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 6,
+                "power": 87,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 2,
+                "initial": true,
+                "race": "klan",
+                "chosen": null,
+                "persona": "militarist",
+                "critical": [
+                  1
+                ],
+                "byResource": {
+                  "ene": [
+                    1
+                  ],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 3,
+                "power": 1236,
+                "longestConsecutive": 1,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 3,
+                "initial": true,
+                "race": "lonca",
+                "chosen": null,
+                "persona": "tuccar",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 9,
+                "power": 6929,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 4,
+                "initial": true,
+                "race": "meclis",
+                "chosen": null,
+                "persona": "pasifist",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": false,
+                "techs": 5,
+                "power": 0,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 5,
+                "initial": true,
+                "race": "makine",
+                "chosen": null,
+                "persona": "izolasyonist",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 11,
+                "power": 13262,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              }
+            ],
+            "initialSurvivors": 4,
+            "newSurvivors": 0
+          }
+        },
+        {
+          "seed": 42,
+          "control": {
+            "phase": "L1-M120-42",
+            "seed": 42,
+            "contracts": 5,
+            "cancelled": 0,
+            "freightLost": 0,
+            "alive": 5,
+            "techs": 42,
+            "ships": 142,
+            "power": 20026,
+            "upkeep": 384.0737016930421,
+            "colonies": 15,
+            "deliveries": 58,
+            "pacts": 1,
+            "warsStarted": 0,
+            "peace": 0,
+            "objectiveChanges": 16,
+            "plansCompleted": 5,
+            "plansFailed": 4,
+            "criticalEmpireMonths": 2,
+            "invalidResources": [],
+            "elapsedMs": 61910
+          },
+          "candidate": {
+            "phase": "D2-M120-42",
+            "seed": 42,
+            "contracts": 5,
+            "cancelled": 0,
+            "freightLost": 0,
+            "alive": 5,
+            "techs": 42,
+            "ships": 142,
+            "power": 20026,
+            "upkeep": 384.0737016930421,
+            "colonies": 15,
+            "deliveries": 58,
+            "pacts": 1,
+            "warsStarted": 0,
+            "peace": 0,
+            "objectiveChanges": 16,
+            "plansCompleted": 5,
+            "plansFailed": 4,
+            "criticalEmpireMonths": 2,
+            "invalidResources": [],
+            "elapsedMs": 18300
+          },
+          "initialMapHomesBaseIdentityRngSame": true,
+          "initialSaveEqual": true,
+          "initialRng": -881359503,
+          "initialSaveHashes": {
+            "control": "add9719fe195a4b5affc172fadee0af13647b46d67ce34d1bb1cc6f0589b03af",
+            "candidate": "add9719fe195a4b5affc172fadee0af13647b46d67ce34d1bb1cc6f0589b03af"
+          },
+          "firstRecordedActionDifference": null,
+          "firstMonthlyRngDifference": null,
+          "firstMonthlySaveDifference": null,
+          "controlDetail": {
+            "split": {
+              "initial": 2,
+              "new": 0
+            },
+            "births": [],
+            "states": [
+              {
+                "id": 1,
+                "initial": true,
+                "race": "meclis",
+                "chosen": null,
+                "persona": "pasifist",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 6,
+                "power": 3802,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 2,
+                "initial": true,
+                "race": "klan",
+                "chosen": null,
+                "persona": "militarist",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 6,
+                "power": 10967,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 3,
+                "initial": true,
+                "race": "makine",
+                "chosen": null,
+                "persona": "izolasyonist",
+                "critical": [
+                  116
+                ],
+                "byResource": {
+                  "ene": [
+                    116
+                  ],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 10,
+                "power": 1107,
+                "longestConsecutive": 1,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 4,
+                "initial": true,
+                "race": "teknokrasi",
+                "chosen": null,
+                "persona": "pasifist",
+                "critical": [
+                  12
+                ],
+                "byResource": {
+                  "ene": [],
+                  "min": [
+                    12
+                  ],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 5,
+                "power": 0,
+                "longestConsecutive": 1,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 5,
+                "initial": true,
+                "race": "kasif",
+                "chosen": null,
+                "persona": "yayilmaci",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 15,
+                "power": 4150,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              }
+            ],
+            "initialSurvivors": 5,
+            "newSurvivors": 0
+          },
+          "candidateDetail": {
+            "split": {
+              "initial": 2,
+              "new": 0
+            },
+            "births": [],
+            "states": [
+              {
+                "id": 1,
+                "initial": true,
+                "race": "meclis",
+                "chosen": null,
+                "persona": "pasifist",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 6,
+                "power": 3802,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 2,
+                "initial": true,
+                "race": "klan",
+                "chosen": null,
+                "persona": "militarist",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 6,
+                "power": 10967,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 3,
+                "initial": true,
+                "race": "makine",
+                "chosen": null,
+                "persona": "izolasyonist",
+                "critical": [
+                  116
+                ],
+                "byResource": {
+                  "ene": [
+                    116
+                  ],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 10,
+                "power": 1107,
+                "longestConsecutive": 1,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 4,
+                "initial": true,
+                "race": "teknokrasi",
+                "chosen": null,
+                "persona": "pasifist",
+                "critical": [
+                  12
+                ],
+                "byResource": {
+                  "ene": [],
+                  "min": [
+                    12
+                  ],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 5,
+                "power": 0,
+                "longestConsecutive": 1,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 5,
+                "initial": true,
+                "race": "kasif",
+                "chosen": null,
+                "persona": "yayilmaci",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 15,
+                "power": 4150,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              }
+            ],
+            "initialSurvivors": 5,
+            "newSurvivors": 0
+          }
+        },
+        {
+          "seed": 99,
+          "control": {
+            "phase": "L1-M120-99",
+            "seed": 99,
+            "contracts": 11,
+            "cancelled": 0,
+            "freightLost": 3,
+            "alive": 5,
+            "techs": 47,
+            "ships": 187,
+            "power": 26197,
+            "upkeep": 479.13193710951657,
+            "colonies": 20,
+            "deliveries": 57,
+            "pacts": 7,
+            "warsStarted": 1,
+            "peace": 0,
+            "objectiveChanges": 14,
+            "plansCompleted": 12,
+            "plansFailed": 3,
+            "criticalEmpireMonths": 0,
+            "invalidResources": [],
+            "elapsedMs": 94805
+          },
+          "candidate": {
+            "phase": "D2-M120-99",
+            "seed": 99,
+            "contracts": 11,
+            "cancelled": 0,
+            "freightLost": 3,
+            "alive": 5,
+            "techs": 47,
+            "ships": 187,
+            "power": 26197,
+            "upkeep": 479.13193710951657,
+            "colonies": 20,
+            "deliveries": 57,
+            "pacts": 7,
+            "warsStarted": 1,
+            "peace": 0,
+            "objectiveChanges": 14,
+            "plansCompleted": 12,
+            "plansFailed": 3,
+            "criticalEmpireMonths": 0,
+            "invalidResources": [],
+            "elapsedMs": 42220
+          },
+          "initialMapHomesBaseIdentityRngSame": true,
+          "initialSaveEqual": true,
+          "initialRng": -881359448,
+          "initialSaveHashes": {
+            "control": "a7af126addf55d638567cf70984828faaccfd8b6d41675d7e8e82cdd4b284e13",
+            "candidate": "a7af126addf55d638567cf70984828faaccfd8b6d41675d7e8e82cdd4b284e13"
+          },
+          "firstRecordedActionDifference": null,
+          "firstMonthlyRngDifference": null,
+          "firstMonthlySaveDifference": null,
+          "controlDetail": {
+            "split": {
+              "initial": 0,
+              "new": 0
+            },
+            "births": [],
+            "states": [
+              {
+                "id": 1,
+                "initial": true,
+                "race": "klan",
+                "chosen": null,
+                "persona": "militarist",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 6,
+                "power": 11828,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 2,
+                "initial": true,
+                "race": "teknokrasi",
+                "chosen": null,
+                "persona": "kriminal",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 14,
+                "power": 1012,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 3,
+                "initial": true,
+                "race": "suru",
+                "chosen": null,
+                "persona": "kriminal",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 10,
+                "power": 7208,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 4,
+                "initial": true,
+                "race": "insan",
+                "chosen": null,
+                "persona": "pasifist",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 8,
+                "power": 500,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 5,
+                "initial": true,
+                "race": "lonca",
+                "chosen": null,
+                "persona": "tuccar",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 9,
+                "power": 5649,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              }
+            ],
+            "initialSurvivors": 5,
+            "newSurvivors": 0
+          },
+          "candidateDetail": {
+            "split": {
+              "initial": 0,
+              "new": 0
+            },
+            "births": [],
+            "states": [
+              {
+                "id": 1,
+                "initial": true,
+                "race": "klan",
+                "chosen": null,
+                "persona": "militarist",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 6,
+                "power": 11828,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 2,
+                "initial": true,
+                "race": "teknokrasi",
+                "chosen": null,
+                "persona": "kriminal",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 14,
+                "power": 1012,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 3,
+                "initial": true,
+                "race": "suru",
+                "chosen": null,
+                "persona": "kriminal",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 10,
+                "power": 7208,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 4,
+                "initial": true,
+                "race": "insan",
+                "chosen": null,
+                "persona": "pasifist",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 8,
+                "power": 500,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 5,
+                "initial": true,
+                "race": "lonca",
+                "chosen": null,
+                "persona": "tuccar",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 9,
+                "power": 5649,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              }
+            ],
+            "initialSurvivors": 5,
+            "newSurvivors": 0
+          }
+        },
+        {
+          "seed": 123,
+          "control": {
+            "phase": "L1-M120-123",
+            "seed": 123,
+            "contracts": 5,
+            "cancelled": 0,
+            "freightLost": 0,
+            "alive": 5,
+            "techs": 44,
+            "ships": 166,
+            "power": 24080,
+            "upkeep": 447.32555137477345,
+            "colonies": 16,
+            "deliveries": 56,
+            "pacts": 10,
+            "warsStarted": 0,
+            "peace": 0,
+            "objectiveChanges": 16,
+            "plansCompleted": 17,
+            "plansFailed": 0,
+            "criticalEmpireMonths": 3,
+            "invalidResources": [],
+            "elapsedMs": 140022
+          },
+          "candidate": {
+            "phase": "D2-M120-123",
+            "seed": 123,
+            "contracts": 5,
+            "cancelled": 0,
+            "freightLost": 0,
+            "alive": 5,
+            "techs": 44,
+            "ships": 166,
+            "power": 24080,
+            "upkeep": 447.32555137477345,
+            "colonies": 16,
+            "deliveries": 56,
+            "pacts": 10,
+            "warsStarted": 0,
+            "peace": 0,
+            "objectiveChanges": 16,
+            "plansCompleted": 17,
+            "plansFailed": 0,
+            "criticalEmpireMonths": 3,
+            "invalidResources": [],
+            "elapsedMs": 38253
+          },
+          "initialMapHomesBaseIdentityRngSame": true,
+          "initialSaveEqual": true,
+          "initialRng": 1518100830,
+          "initialSaveHashes": {
+            "control": "a415ed133cead3e3762b9573e61476a599a21ab77e45c904bc55c21761b819b0",
+            "candidate": "a415ed133cead3e3762b9573e61476a599a21ab77e45c904bc55c21761b819b0"
+          },
+          "firstRecordedActionDifference": null,
+          "firstMonthlyRngDifference": null,
+          "firstMonthlySaveDifference": null,
+          "controlDetail": {
+            "split": {
+              "initial": 3,
+              "new": 0
+            },
+            "births": [],
+            "states": [
+              {
+                "id": 1,
+                "initial": true,
+                "race": "lonca",
+                "chosen": null,
+                "persona": "tuccar",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 8,
+                "power": 1775,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 2,
+                "initial": true,
+                "race": "meclis",
+                "chosen": null,
+                "persona": "pasifist",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 8,
+                "power": 6056,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 3,
+                "initial": true,
+                "race": "kasif",
+                "chosen": null,
+                "persona": "yayilmaci",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 12,
+                "power": 4058,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 4,
+                "initial": true,
+                "race": "klan",
+                "chosen": null,
+                "persona": "militarist",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 9,
+                "power": 12166,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 5,
+                "initial": true,
+                "race": "teknokrasi",
+                "chosen": null,
+                "persona": "kriminal",
+                "critical": [
+                  6,
+                  7,
+                  8
+                ],
+                "byResource": {
+                  "ene": [],
+                  "min": [
+                    6,
+                    7,
+                    8
+                  ],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 7,
+                "power": 25,
+                "longestConsecutive": 3,
+                "stillCriticalAtEnd": false
+              }
+            ],
+            "initialSurvivors": 5,
+            "newSurvivors": 0
+          },
+          "candidateDetail": {
+            "split": {
+              "initial": 3,
+              "new": 0
+            },
+            "births": [],
+            "states": [
+              {
+                "id": 1,
+                "initial": true,
+                "race": "lonca",
+                "chosen": null,
+                "persona": "tuccar",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 8,
+                "power": 1775,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 2,
+                "initial": true,
+                "race": "meclis",
+                "chosen": null,
+                "persona": "pasifist",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 8,
+                "power": 6056,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 3,
+                "initial": true,
+                "race": "kasif",
+                "chosen": null,
+                "persona": "yayilmaci",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 12,
+                "power": 4058,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 4,
+                "initial": true,
+                "race": "klan",
+                "chosen": null,
+                "persona": "militarist",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 9,
+                "power": 12166,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 5,
+                "initial": true,
+                "race": "teknokrasi",
+                "chosen": null,
+                "persona": "kriminal",
+                "critical": [
+                  6,
+                  7,
+                  8
+                ],
+                "byResource": {
+                  "ene": [],
+                  "min": [
+                    6,
+                    7,
+                    8
+                  ],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 7,
+                "power": 25,
+                "longestConsecutive": 3,
+                "stillCriticalAtEnd": false
+              }
+            ],
+            "initialSurvivors": 5,
+            "newSurvivors": 0
+          }
+        },
+        {
+          "seed": 404,
+          "control": {
+            "phase": "L1-M120-404",
+            "seed": 404,
+            "contracts": 14,
+            "cancelled": 1,
+            "freightLost": 0,
+            "alive": 6,
+            "techs": 49,
+            "ships": 251,
+            "power": 31433,
+            "upkeep": 751.0340000000004,
+            "colonies": 19,
+            "deliveries": 154,
+            "pacts": 11,
+            "warsStarted": 0,
+            "peace": 0,
+            "objectiveChanges": 12,
+            "plansCompleted": 7,
+            "plansFailed": 5,
+            "criticalEmpireMonths": 2,
+            "invalidResources": [],
+            "elapsedMs": 91561
+          },
+          "candidate": {
+            "phase": "D2-M120-404",
+            "seed": 404,
+            "contracts": 17,
+            "cancelled": 1,
+            "freightLost": 0,
+            "alive": 6,
+            "techs": 43,
+            "ships": 242,
+            "power": 31265,
+            "upkeep": 798.3657808047507,
+            "colonies": 22,
+            "deliveries": 170,
+            "pacts": 11,
+            "warsStarted": 0,
+            "peace": 0,
+            "objectiveChanges": 16,
+            "plansCompleted": 6,
+            "plansFailed": 4,
+            "criticalEmpireMonths": 9,
+            "invalidResources": [],
+            "elapsedMs": 43763
+          },
+          "initialMapHomesBaseIdentityRngSame": true,
+          "initialSaveEqual": false,
+          "initialRng": -881359429,
+          "initialSaveHashes": {
+            "control": "7fee88d90f31d5650fda4718a9ce4dc61e6e9089af68725310effcd291e70b72",
+            "candidate": "e8194027d3ba47a6c5ef98c4c18fd9526c0a2a47beaddbc1973285e3e1391e70"
+          },
+          "firstRecordedActionDifference": {
+            "index": 8,
+            "candidate": {
+              "day": 60,
+              "actor": 3,
+              "kind": "fleet-route",
+              "fleet": 12,
+              "to": 1,
+              "path": [
+                1
+              ]
+            },
+            "control": {
+              "day": 60,
+              "actor": 1,
+              "kind": "diplomatic-offer",
+              "other": 3,
+              "give": [
+                {
+                  "t": "nap"
+                }
+              ],
+              "want": [],
+              "applied": true,
+              "result": "kabul"
+            }
+          },
+          "firstMonthlyRngDifference": 3,
+          "firstMonthlySaveDifference": 1,
+          "controlDetail": {
+            "split": {
+              "initial": 0,
+              "new": 2
+            },
+            "births": [
+              {
+                "id": 7,
+                "month": 107,
+                "race": "suru",
+                "chosen": null
+              }
+            ],
+            "states": [
+              {
+                "id": 1,
+                "initial": true,
+                "race": "meclis",
+                "chosen": null,
+                "persona": "pasifist",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 9,
+                "power": 6591,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 2,
+                "initial": true,
+                "race": "suru",
+                "chosen": null,
+                "persona": "yayilmaci",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 9,
+                "power": 5810,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 3,
+                "initial": true,
+                "race": "klan",
+                "chosen": null,
+                "persona": "militarist",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 6,
+                "power": 7878,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 4,
+                "initial": true,
+                "race": "teknokrasi",
+                "chosen": null,
+                "persona": "tuccar",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 15,
+                "power": 4630,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 5,
+                "initial": true,
+                "race": "insan",
+                "chosen": null,
+                "persona": "pasifist",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 10,
+                "power": 6524,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 7,
+                "initial": false,
+                "race": "suru",
+                "chosen": null,
+                "persona": "kriminal",
+                "critical": [
+                  119,
+                  120
+                ],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [
+                    119,
+                    120
+                  ],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 0,
+                "power": 0,
+                "longestConsecutive": 2,
+                "stillCriticalAtEnd": true
+              }
+            ],
+            "initialSurvivors": 5,
+            "newSurvivors": 1
+          },
+          "candidateDetail": {
+            "split": {
+              "initial": 0,
+              "new": 9
+            },
+            "births": [
+              {
+                "id": 7,
+                "month": 97,
+                "race": "suru",
+                "chosen": null
+              }
+            ],
+            "states": [
+              {
+                "id": 1,
+                "initial": true,
+                "race": "meclis",
+                "chosen": "teokrasi",
+                "persona": "teokrasi",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 9,
+                "power": 6294,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 2,
+                "initial": true,
+                "race": "suru",
+                "chosen": null,
+                "persona": "yayilmaci",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 9,
+                "power": 6279,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 3,
+                "initial": true,
+                "race": "klan",
+                "chosen": null,
+                "persona": "militarist",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 5,
+                "power": 7521,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 4,
+                "initial": true,
+                "race": "teknokrasi",
+                "chosen": null,
+                "persona": "tuccar",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 12,
+                "power": 4515,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 5,
+                "initial": true,
+                "race": "insan",
+                "chosen": null,
+                "persona": "pasifist",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 8,
+                "power": 6656,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 7,
+                "initial": false,
+                "race": "suru",
+                "chosen": null,
+                "persona": "kriminal",
+                "critical": [
+                  112,
+                  113,
+                  114,
+                  115,
+                  116,
+                  117,
+                  118,
+                  119,
+                  120
+                ],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [
+                    112,
+                    113,
+                    114,
+                    115,
+                    116,
+                    117,
+                    118,
+                    119,
+                    120
+                  ],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 0,
+                "power": 0,
+                "longestConsecutive": 9,
+                "stillCriticalAtEnd": true
+              }
+            ],
+            "initialSurvivors": 5,
+            "newSurvivors": 1
+          }
+        },
+        {
+          "seed": 2026,
+          "control": {
+            "phase": "L1-M120-2026",
+            "seed": 2026,
+            "contracts": 0,
+            "cancelled": 0,
+            "freightLost": 0,
+            "alive": 5,
+            "techs": 40,
+            "ships": 213,
+            "power": 26652,
+            "upkeep": 694.0900000000004,
+            "colonies": 21,
+            "deliveries": 0,
+            "pacts": 2,
+            "warsStarted": 0,
+            "peace": 0,
+            "objectiveChanges": 23,
+            "plansCompleted": 8,
+            "plansFailed": 6,
+            "criticalEmpireMonths": 1,
+            "invalidResources": [],
+            "elapsedMs": 58920
+          },
+          "candidate": {
+            "phase": "D2-M120-2026",
+            "seed": 2026,
+            "contracts": 0,
+            "cancelled": 0,
+            "freightLost": 0,
+            "alive": 5,
+            "techs": 40,
+            "ships": 213,
+            "power": 26652,
+            "upkeep": 694.0900000000004,
+            "colonies": 21,
+            "deliveries": 0,
+            "pacts": 2,
+            "warsStarted": 0,
+            "peace": 0,
+            "objectiveChanges": 23,
+            "plansCompleted": 8,
+            "plansFailed": 6,
+            "criticalEmpireMonths": 1,
+            "invalidResources": [],
+            "elapsedMs": 35076
+          },
+          "initialMapHomesBaseIdentityRngSame": true,
+          "initialSaveEqual": true,
+          "initialRng": 1014148211,
+          "initialSaveHashes": {
+            "control": "f9b818871586a35a62ceb7cc1939a4b10b77a7a68ea709d82ade8ee4525ea381",
+            "candidate": "f9b818871586a35a62ceb7cc1939a4b10b77a7a68ea709d82ade8ee4525ea381"
+          },
+          "firstRecordedActionDifference": null,
+          "firstMonthlyRngDifference": null,
+          "firstMonthlySaveDifference": null,
+          "controlDetail": {
+            "split": {
+              "initial": 1,
+              "new": 0
+            },
+            "births": [],
+            "states": [
+              {
+                "id": 1,
+                "initial": true,
+                "race": "insan",
+                "chosen": null,
+                "persona": "pasifist",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 8,
+                "power": 5642,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 2,
+                "initial": true,
+                "race": "kasif",
+                "chosen": null,
+                "persona": "yayilmaci",
+                "critical": [
+                  1
+                ],
+                "byResource": {
+                  "ene": [
+                    1
+                  ],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 9,
+                "power": 26,
+                "longestConsecutive": 1,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 3,
+                "initial": true,
+                "race": "klan",
+                "chosen": null,
+                "persona": "militarist",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 7,
+                "power": 4867,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 4,
+                "initial": true,
+                "race": "suru",
+                "chosen": null,
+                "persona": "yayilmaci",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 7,
+                "power": 6874,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 5,
+                "initial": true,
+                "race": "makine",
+                "chosen": null,
+                "persona": "kriminal",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 9,
+                "power": 9243,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              }
+            ],
+            "initialSurvivors": 5,
+            "newSurvivors": 0
+          },
+          "candidateDetail": {
+            "split": {
+              "initial": 1,
+              "new": 0
+            },
+            "births": [],
+            "states": [
+              {
+                "id": 1,
+                "initial": true,
+                "race": "insan",
+                "chosen": null,
+                "persona": "pasifist",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 8,
+                "power": 5642,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 2,
+                "initial": true,
+                "race": "kasif",
+                "chosen": null,
+                "persona": "yayilmaci",
+                "critical": [
+                  1
+                ],
+                "byResource": {
+                  "ene": [
+                    1
+                  ],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 9,
+                "power": 26,
+                "longestConsecutive": 1,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 3,
+                "initial": true,
+                "race": "klan",
+                "chosen": null,
+                "persona": "militarist",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 7,
+                "power": 4867,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 4,
+                "initial": true,
+                "race": "suru",
+                "chosen": null,
+                "persona": "yayilmaci",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 7,
+                "power": 6874,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              },
+              {
+                "id": 5,
+                "initial": true,
+                "race": "makine",
+                "chosen": null,
+                "persona": "kriminal",
+                "critical": [],
+                "byResource": {
+                  "ene": [],
+                  "min": [],
+                  "tuk": [],
+                  "ala": []
+                },
+                "alive": true,
+                "techs": 9,
+                "power": 9243,
+                "longestConsecutive": 0,
+                "stillCriticalAtEnd": false
+              }
+            ],
+            "initialSurvivors": 5,
+            "newSurvivors": 0
+          }
+        }
+      ],
+      "control": {
+        "criticalEmpireMonths": 14,
+        "deliveries": 455,
+        "contracts": 50,
+        "techs": 331,
+        "colonies": 129,
+        "ships": 1386,
+        "power": 187795,
+        "plansCompleted": 81,
+        "plansFailed": 26,
+        "upkeep": 4214.793211663475,
+        "alive": 40,
+        "initialCritical": 12,
+        "newCritical": 2
+      },
+      "candidate": {
+        "criticalEmpireMonths": 30,
+        "deliveries": 539,
+        "contracts": 60,
+        "techs": 328,
+        "colonies": 136,
+        "ships": 1418,
+        "power": 192770,
+        "plansCompleted": 80,
+        "plansFailed": 23,
+        "upkeep": 4320.504992468224,
+        "alive": 40,
+        "initialCritical": 21,
+        "newCritical": 9
+      },
+      "ratios": {
+        "deliveries": 1.1846153846153846,
+        "techs": 0.9909365558912386,
+        "power": 1.026491653132405,
+        "plansCompleted": 0.9876543209876543
+      },
+      "decision": "REJECT",
+      "reason": "Critical30exceedspredeclared22;9extraInitialcriticalmonthsand7extraNewstatecriticalmonths",
+      "firstStage": "3representative120pilots",
+      "full120": true
+    }
+  },
+  "sourceValidation": [
+    {
+      "id": "D1-M120-11",
+      "source19": true,
+      "canonicalBaselineSource19": true,
+      "dropped": 0
+    },
+    {
+      "id": "D1-M120-404",
+      "source19": true,
+      "canonicalBaselineSource19": true,
+      "dropped": 0
+    },
+    {
+      "id": "D1-M120-42",
+      "source19": true,
+      "canonicalBaselineSource19": true,
+      "dropped": 0
+    },
+    {
+      "id": "D2-M120-11",
+      "source19": true,
+      "canonicalBaselineSource19": true,
+      "dropped": 0
+    },
+    {
+      "id": "D2-M120-7",
+      "source19": true,
+      "canonicalBaselineSource19": true,
+      "dropped": 0
+    },
+    {
+      "id": "D2-M120-23",
+      "source19": true,
+      "canonicalBaselineSource19": true,
+      "dropped": 0
+    },
+    {
+      "id": "D2-M120-42",
+      "source19": true,
+      "canonicalBaselineSource19": true,
+      "dropped": 0
+    },
+    {
+      "id": "D2-M120-99",
+      "source19": true,
+      "canonicalBaselineSource19": true,
+      "dropped": 0
+    },
+    {
+      "id": "D2-M120-123",
+      "source19": true,
+      "canonicalBaselineSource19": true,
+      "dropped": 0
+    },
+    {
+      "id": "D2-M120-404",
+      "source19": true,
+      "canonicalBaselineSource19": true,
+      "dropped": 0
+    },
+    {
+      "id": "D2-M120-2026",
+      "source19": true,
+      "canonicalBaselineSource19": true,
+      "dropped": 0
+    }
+  ],
+  "notRun": {
+    "candidate240": "NOT RUN:bothcandidatesfailedpredeclared120gate",
+    "density": "NOT RUN:gatefailed",
+    "fullRegression": "NOT RUN:noacceptedrelease",
+    "Chromium": "NOT RUN:officialbrowserinstallfailed",
+    "Android": "NOT RUN"
+  }
+}

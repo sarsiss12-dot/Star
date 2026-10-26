@@ -1,0 +1,70 @@
+{
+  "phase": "96H.5.1",
+  "status": "NO GAME RELEASE",
+  "canonicalHead": "47a4fb7b9c5387c6fc21e3a03cd96d776ed023c8",
+  "game": "96H.5",
+  "source19Unchanged": true,
+  "accepted": [],
+  "rejected": {
+    "D1": "3pilotsdeliveries235/296below.85guard;remaining5notrun",
+    "D2": "8seed120critical30abovepredeclared22;240/density/fullregressionnotrun"
+  },
+  "newTargetTests": {
+    "packages": 3,
+    "pass": 108,
+    "fail": 0,
+    "candidate": "D2",
+    "host": "DeterministicVMwithmockDOM;notChromium"
+  },
+  "newRegression": "NOT RUN:noacceptedrelease",
+  "newChromium": "NOT RUN:executableabsent/officialinstallfailed",
+  "physicalAndroid": "NOT RUN",
+  "canonicalReferencesOnly": {
+    "regression": "133/6028/0",
+    "Chromium": 252,
+    "normal120Critical": 14,
+    "normal240Critical": 62,
+    "densityCritical": 31
+  },
+  "technicalDistributionGate": "PASS in D2;6to8personas;0invalidnewpairs;256repeatSaveRNG;all256map/home/RNGand2816physicalidentities/stocksunchanged",
+  "legacyMismatchContract": {
+    "old": 611,
+    "D2": 545,
+    "explicitChoiceViolations": 0,
+    "startupCacheMismatch": 0,
+    "legacyPurifierResearchOpenPolicy": 82,
+    "meaning": "Existingstablegovernmentresearchdiffersfrominferredpersona;doNOTclaim82fixedorall611bugs"
+  },
+  "eight120Totals": {
+    "control": {
+      "criticalEmpireMonths": 14,
+      "deliveries": 455,
+      "contracts": 50,
+      "techs": 331,
+      "colonies": 129,
+      "ships": 1386,
+      "power": 187795,
+      "plansCompleted": 81,
+      "plansFailed": 26,
+      "upkeep": 4214.793211663475,
+      "alive": 40,
+      "initialCritical": 12,
+      "newCritical": 2
+    },
+    "D2": {
+      "criticalEmpireMonths": 30,
+      "deliveries": 539,
+      "contracts": 60,
+      "techs": 328,
+      "colonies": 136,
+      "ships": 1418,
+      "power": 192770,
+      "plansCompleted": 80,
+      "plansFailed": 23,
+      "upkeep": 4320.504992468224,
+      "alive": 40,
+      "initialCritical": 21,
+      "newCritical": 9
+    }
+  }
+}

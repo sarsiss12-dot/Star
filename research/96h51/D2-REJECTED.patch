@@ -1,0 +1,52 @@
+--- canonical96H5/main.js
++++ REJECTED-D2/main.js
+@@ -976,6 +976,32 @@
+   izolasyonist: 'klan'
+ };
+ 
++/* 96H.5.1: complete the missing automatic doctrine choices without
++   replacing government/species or drawing from either live RNG stream.
++   Legacy archetypes keep their inferred behavior and research identity.
++   Keep the existing inferred identity twice as often as the new explicit
++   sibling; an unselected default must not become a permanent persona lock. */
++const AI_DOCTRINE_CHOICES = Object.freeze({
++  teknokrasi: Object.freeze([[null,2],['teknokrasi',1]]),
++  meclis: Object.freeze([[null,2],['teokrasi',1]]),
++  lonca: Object.freeze([[null,2],['kriminal',1]])
++});
++function assignNewAIDoctrine(e){
++  if (!e || !e.ai || e.wild || e.crisisSide || e.mizac || e.persLock) return;
++  const choices=(AI_DOCTRINE_CHOICES[e.race]||[])
++    .filter(([key,weight])=>weight>0&&(!key||PERSONAS[key]&&DOCTRINE_RACE[key]===e.race));
++  if (!choices.length) return;
++  const random=mulberry32(identityHash('ai-doctrine96h51:'+G.seed+':'+e.id));
++  let at=random()*choices.reduce((sum,[,weight])=>sum+weight,0);
++  let key=choices[choices.length-1][0];
++  for (const [candidate,weight] of choices){at-=weight;if(at<0){key=candidate;break;}}
++  if (!key) return;
++  e.mizac=key;
++  e._pers=key;
++  delete e._persAt;
++  e._prof=null;
++}
++
+ /* ═══ FAZ 73: FANATİK ARINDIRICI KİLİDİ ═══
+    Diplomasi ve pazar bu doktrine tamamen kapalıdır — hem
+    oyuncu arayüzünde hem AI kararlarında. Tek kaynak burası. */
+@@ -2417,6 +2443,7 @@
+   civics:[], origin:'standart',
+     sigil:'simetrik', monoRes:null, furyUntil:0, collapseUntil:0, warPend:{}
+   };
++  assignNewAIDoctrine(e);
+   e.emblem=makeEmblem('state:'+G.seed+':'+id,e.col);
+   recalcMods(e);
+   return e;
+@@ -8308,7 +8335,7 @@
+    Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
+    Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
+ /* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */
+-const BUILD_ID = '96h5';
++const BUILD_ID = '96h51';
+ const DIAG_MAX = 40;
+ const DIAG = [];
+ function logDiag(tur, mesaj){

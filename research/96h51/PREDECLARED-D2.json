@@ -1,0 +1,36 @@
+{
+  "phase": "96H.5.1",
+  "canonicalHead": "47a4fb7b9c5387c6fc21e3a03cd96d776ed023c8",
+  "scope": "One identity allocator in main.js;no ai.js,economy.js,diplomacy.js,commerce.js changes",
+  "candidate": "D2-preserve-inference-with-rare-explicit-doctrines",
+  "strategy": "For each of3affectedgovernmenttemplates:retainexistinginferenceweight2,newexplicitappropriatedoctrineweight1. Same private hashstream;no salt/seed-specific tuning. No forced default-persona locks. Other5templatesunchanged.",
+  "whyNotGlobalPersonaMigration": "An inferred behavior persona is not a selected doctrine. Do not rewrite611legacyidentitysplits,playerchoicesorloadedSaves. DOCTRINE_RACE remains unchanged;new explicit choices must match it.",
+  "rng": "Private identityHash stream by galaxyseed andempireid;no calls to livegameRNG or structuralgalaxyRNG",
+  "newStates": "Apply only at creation of eligible normal AI;reuse existing mizac/_pers fields. No load migration.",
+  "distributionGate": "All8doctrinesreachable;allnewexplicitpairsvalid;Fanaticcountandorigins/physio/government/ethics/civics/traits/map/home/stock/RNGunchangedfromsame256controlseeds;fullrepeatdeterministic",
+  "campaignGateDeclaredBeforeRun": {
+    "pilotSeeds": [
+      11,
+      404,
+      42
+    ],
+    "120Seeds": [
+      11,
+      7,
+      23,
+      42,
+      99,
+      123,
+      404,
+      2026
+    ],
+    "criticalTotalMax": 22,
+    "singleInitialStateNewLongCrisisMax": 12,
+    "aggregatePowerMinRatio": 0.85,
+    "aggregateTechTradePlansMinRatio": 0.85,
+    "survival": "No systematic loss of initial AI;new births reported separately",
+    "long": "After120gate,seed404and11to240and100/1seed11;otherlong/densityonlyifneeded"
+  },
+  "noGeneralSuperiorityClaim": "Changed initial identities alter laterRNG andcampaignoutcomes;notanAIalgorithmcomparison",
+  "D1_rejected": "Pilottradedeliveries235vs296below.85;fullmatrixnotrun"
+}
