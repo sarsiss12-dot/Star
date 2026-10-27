@@ -1,0 +1,9 @@
+{
+  "declaredBeforeRun": true,
+  "combines": [
+    "A2",
+    "C2"
+  ],
+  "conditions": "Each has paired target improvement;combined full120 then240 if gate passes",
+  "gate": "unchanged original criteria"
+}

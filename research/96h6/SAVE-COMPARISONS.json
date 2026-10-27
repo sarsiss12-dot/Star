@@ -1,0 +1,118 @@
+{
+  "A2": [
+    {
+      "seed": 11,
+      "initialEqual": true,
+      "initialRngEqual": true,
+      "firstDifferentMonth": null,
+      "differentMonths": 0
+    },
+    {
+      "seed": 7,
+      "initialEqual": true,
+      "initialRngEqual": true,
+      "firstDifferentMonth": null,
+      "differentMonths": 0
+    },
+    {
+      "seed": 23,
+      "initialEqual": true,
+      "initialRngEqual": true,
+      "firstDifferentMonth": null,
+      "differentMonths": 0
+    },
+    {
+      "seed": 42,
+      "initialEqual": true,
+      "initialRngEqual": true,
+      "firstDifferentMonth": null,
+      "differentMonths": 0
+    },
+    {
+      "seed": 99,
+      "initialEqual": true,
+      "initialRngEqual": true,
+      "firstDifferentMonth": null,
+      "differentMonths": 0
+    },
+    {
+      "seed": 123,
+      "initialEqual": true,
+      "initialRngEqual": true,
+      "firstDifferentMonth": null,
+      "differentMonths": 0
+    },
+    {
+      "seed": 404,
+      "initialEqual": true,
+      "initialRngEqual": true,
+      "firstDifferentMonth": 119,
+      "differentMonths": 2
+    },
+    {
+      "seed": 2026,
+      "initialEqual": true,
+      "initialRngEqual": true,
+      "firstDifferentMonth": null,
+      "differentMonths": 0
+    }
+  ],
+  "AC": [
+    {
+      "seed": 11,
+      "initialEqual": true,
+      "initialRngEqual": true,
+      "firstDifferentMonth": 42,
+      "differentMonths": 79
+    },
+    {
+      "seed": 7,
+      "initialEqual": true,
+      "initialRngEqual": true,
+      "firstDifferentMonth": 35,
+      "differentMonths": 86
+    },
+    {
+      "seed": 23,
+      "initialEqual": true,
+      "initialRngEqual": true,
+      "firstDifferentMonth": 22,
+      "differentMonths": 99
+    },
+    {
+      "seed": 42,
+      "initialEqual": true,
+      "initialRngEqual": true,
+      "firstDifferentMonth": 37,
+      "differentMonths": 84
+    },
+    {
+      "seed": 99,
+      "initialEqual": true,
+      "initialRngEqual": true,
+      "firstDifferentMonth": 32,
+      "differentMonths": 89
+    },
+    {
+      "seed": 123,
+      "initialEqual": true,
+      "initialRngEqual": true,
+      "firstDifferentMonth": 42,
+      "differentMonths": 79
+    },
+    {
+      "seed": 404,
+      "initialEqual": true,
+      "initialRngEqual": true,
+      "firstDifferentMonth": 40,
+      "differentMonths": 81
+    },
+    {
+      "seed": 2026,
+      "initialEqual": true,
+      "initialRngEqual": true,
+      "firstDifferentMonth": 62,
+      "differentMonths": 59
+    }
+  ]
+}

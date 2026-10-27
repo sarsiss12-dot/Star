@@ -1,0 +1,366 @@
+{
+  "C-local100": {
+    "demolitions": 11,
+    "cycles12": [
+      {
+        "month": 79.0,
+        "key": "dokum",
+        "s": 17,
+        "p": 3,
+        "reorderMonth": 91.0,
+        "paid": {
+          "min": 210,
+          "ene": 0,
+          "yiy": 0,
+          "ala": 0,
+          "ara": 0,
+          "tuk": 0,
+          "etk": 0
+        },
+        "refund": {
+          "min": 74
+        },
+        "interruptionDays": 431
+      },
+      {
+        "month": 89.0,
+        "key": "dokum",
+        "s": 46,
+        "p": 0,
+        "reorderMonth": 91.0,
+        "paid": {
+          "min": 210,
+          "ene": 0,
+          "yiy": 0,
+          "ala": 0,
+          "ara": 0,
+          "tuk": 0,
+          "etk": 0
+        },
+        "refund": {
+          "min": 74
+        },
+        "interruptionDays": 131
+      },
+      {
+        "month": 89.0,
+        "key": "dokum",
+        "s": 17,
+        "p": 3,
+        "reorderMonth": 91.0,
+        "paid": {
+          "min": 210,
+          "ene": 0,
+          "yiy": 0,
+          "ala": 0,
+          "ara": 0,
+          "tuk": 0,
+          "etk": 0
+        },
+        "refund": {
+          "min": 74
+        },
+        "interruptionDays": 131
+      },
+      {
+        "month": 98.0,
+        "key": "dokum",
+        "s": 46,
+        "p": 0,
+        "reorderMonth": 100.0,
+        "paid": {
+          "min": 210,
+          "ene": 0,
+          "yiy": 0,
+          "ala": 0,
+          "ara": 0,
+          "tuk": 0,
+          "etk": 0
+        },
+        "refund": {
+          "min": 74
+        },
+        "interruptionDays": 131
+      },
+      {
+        "month": 105.0,
+        "key": "dokum",
+        "s": 17,
+        "p": 3,
+        "reorderMonth": 107.0,
+        "paid": {
+          "min": 210,
+          "ene": 0,
+          "yiy": 0,
+          "ala": 0,
+          "ara": 0,
+          "tuk": 0,
+          "etk": 0
+        },
+        "refund": {
+          "min": 74
+        },
+        "interruptionDays": 131
+      },
+      {
+        "month": 111.0,
+        "key": "dokum",
+        "s": 46,
+        "p": 0,
+        "reorderMonth": 113.0,
+        "paid": {
+          "min": 210,
+          "ene": 0,
+          "yiy": 0,
+          "ala": 0,
+          "ara": 0,
+          "tuk": 0,
+          "etk": 0
+        },
+        "refund": {
+          "min": 74
+        },
+        "interruptionDays": 131
+      },
+      {
+        "month": 117.0,
+        "key": "dokum",
+        "s": 46,
+        "p": 0,
+        "reorderMonth": 119.0,
+        "paid": {
+          "min": 210,
+          "ene": 0,
+          "yiy": 0,
+          "ala": 0,
+          "ara": 0,
+          "tuk": 0,
+          "etk": 0
+        },
+        "refund": {
+          "min": 74
+        },
+        "interruptionDays": null
+      }
+    ],
+    "cycleNetMineral": 952,
+    "completedCycleInterruptionDays": 1086,
+    "incompleteCycles": 1,
+    "oneToOneCycles12": [
+      {
+        "month": 79.0,
+        "key": "dokum",
+        "s": 17,
+        "p": 3,
+        "reorderMonth": 91.0,
+        "paid": {
+          "min": 210,
+          "ene": 0,
+          "yiy": 0,
+          "ala": 0,
+          "ara": 0,
+          "tuk": 0,
+          "etk": 0
+        },
+        "refund": {
+          "min": 74
+        },
+        "interruptionDays": 431
+      },
+      {
+        "month": 89.0,
+        "key": "dokum",
+        "s": 46,
+        "p": 0,
+        "reorderMonth": 91.0,
+        "paid": {
+          "min": 210,
+          "ene": 0,
+          "yiy": 0,
+          "ala": 0,
+          "ara": 0,
+          "tuk": 0,
+          "etk": 0
+        },
+        "refund": {
+          "min": 74
+        },
+        "interruptionDays": 131
+      },
+      {
+        "month": 98.0,
+        "key": "dokum",
+        "s": 46,
+        "p": 0,
+        "reorderMonth": 100.0,
+        "paid": {
+          "min": 210,
+          "ene": 0,
+          "yiy": 0,
+          "ala": 0,
+          "ara": 0,
+          "tuk": 0,
+          "etk": 0
+        },
+        "refund": {
+          "min": 74
+        },
+        "interruptionDays": 131
+      },
+      {
+        "month": 105.0,
+        "key": "dokum",
+        "s": 17,
+        "p": 3,
+        "reorderMonth": 107.0,
+        "paid": {
+          "min": 210,
+          "ene": 0,
+          "yiy": 0,
+          "ala": 0,
+          "ara": 0,
+          "tuk": 0,
+          "etk": 0
+        },
+        "refund": {
+          "min": 74
+        },
+        "interruptionDays": 131
+      },
+      {
+        "month": 111.0,
+        "key": "dokum",
+        "s": 46,
+        "p": 0,
+        "reorderMonth": 113.0,
+        "paid": {
+          "min": 210,
+          "ene": 0,
+          "yiy": 0,
+          "ala": 0,
+          "ara": 0,
+          "tuk": 0,
+          "etk": 0
+        },
+        "refund": {
+          "min": 74
+        },
+        "interruptionDays": 131
+      },
+      {
+        "month": 117.0,
+        "key": "dokum",
+        "s": 46,
+        "p": 0,
+        "reorderMonth": 119.0,
+        "paid": {
+          "min": 210,
+          "ene": 0,
+          "yiy": 0,
+          "ala": 0,
+          "ara": 0,
+          "tuk": 0,
+          "etk": 0
+        },
+        "refund": {
+          "min": 74
+        },
+        "interruptionDays": null
+      }
+    ],
+    "oneToOneNetMineral": 816,
+    "oneToOneCompletedInterruptionDays": 955
+  },
+  "C2-local100": {
+    "demolitions": 13,
+    "cycles12": [
+      {
+        "month": 70.0,
+        "key": "maden",
+        "s": 17,
+        "p": 3,
+        "reorderMonth": 80.0,
+        "paid": {
+          "min": 120,
+          "ene": 0,
+          "yiy": 0,
+          "ala": 0,
+          "ara": 0,
+          "tuk": 0,
+          "etk": 0
+        },
+        "refund": {
+          "min": 42
+        },
+        "interruptionDays": 348
+      },
+      {
+        "month": 83.0,
+        "key": "santral",
+        "s": 46,
+        "p": 0,
+        "reorderMonth": 84.0,
+        "paid": {
+          "min": 110,
+          "ene": 0,
+          "yiy": 0,
+          "ala": 0,
+          "ara": 0,
+          "tuk": 0,
+          "etk": 0
+        },
+        "refund": {
+          "min": 39
+        },
+        "interruptionDays": 76
+      }
+    ],
+    "cycleNetMineral": 149,
+    "completedCycleInterruptionDays": 424,
+    "incompleteCycles": 0,
+    "oneToOneCycles12": [
+      {
+        "month": 70.0,
+        "key": "maden",
+        "s": 17,
+        "p": 3,
+        "reorderMonth": 80.0,
+        "paid": {
+          "min": 120,
+          "ene": 0,
+          "yiy": 0,
+          "ala": 0,
+          "ara": 0,
+          "tuk": 0,
+          "etk": 0
+        },
+        "refund": {
+          "min": 42
+        },
+        "interruptionDays": 348
+      },
+      {
+        "month": 83.0,
+        "key": "santral",
+        "s": 46,
+        "p": 0,
+        "reorderMonth": 84.0,
+        "paid": {
+          "min": 110,
+          "ene": 0,
+          "yiy": 0,
+          "ala": 0,
+          "ara": 0,
+          "tuk": 0,
+          "etk": 0
+        },
+        "refund": {
+          "min": 39
+        },
+        "interruptionDays": 76
+      }
+    ],
+    "oneToOneNetMineral": 149,
+    "oneToOneCompletedInterruptionDays": 424
+  }
+}

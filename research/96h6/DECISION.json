@@ -1,0 +1,15 @@
+{
+  "phase": "96H.6",
+  "decision": "NO_GAME_RELEASE",
+  "production": "96H.5",
+  "start_head": "c7700b787ffbd355d7e4e8fb8808537218d463c4",
+  "accepted": [],
+  "A1": "REJECTED:no target benefit",
+  "C1": "REJECTED:no target benefit",
+  "A2": "REJECTED:long trade82.29% and new-state mineral critical9to11",
+  "C2": "NOT_APPROVED:target/120 success;standalone240 NOT RUN",
+  "AC": "REJECTED:long trade84.62% below85%",
+  "full_regression": "INTERRUPTED:46 completed suites4090PASS0FAIL",
+  "chromium": "NOT RUN:missing executable",
+  "android": "NOT RUN"
+}

@@ -1,0 +1,7 @@
+{
+  "declaredBeforeRun": true,
+  "revisionOf": "C1",
+  "hypothesis": "Filtered economicNeeds omits an unaffordable foundry. Demolition frees a slot while stock is below existing alloy reserve; refund makes foundry the next purchase. Protect productive output below existing reserve, no time memory.",
+  "scope": "aiDemolitionChoice only;recovery demolition remains independent",
+  "gate": "same original protocol"
+}

@@ -1,0 +1,16 @@
+{
+  "declaredBeforeCandidates": true,
+  "canonical": "c7700b787ffbd355d7e4e8fb8808537218d463c4",
+  "gates": {
+    "main120CriticalMax": 14,
+    "deliveriesMinRatio": 0.85,
+    "targetMustImprove": true,
+    "noNewLongCrisis": true,
+    "noUnexplainedMajorSciencePowerRegression": true
+  },
+  "candidates": {
+    "A1": "aiRecoveryInvestment: use existing six-month economic planning horizon instead of hardcoded three-month financing cutoff; no other gate change",
+    "C1": "aiDemolitionChoice: do not remove a producer requested earlier than replacement in current ordered needs; no cooldown or persistent memory"
+  },
+  "order": "independent targeted tests;then combine only successful changes;120 gate before new full240"
+}

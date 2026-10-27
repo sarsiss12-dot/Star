@@ -1,0 +1,130 @@
+[
+  {
+    "seed": 11,
+    "runtime_match": true,
+    "protocol": {
+      "stepDays": 0.5,
+      "stepsPerMonth": 60,
+      "reloadMonth": 60,
+      "council": "kapali",
+      "crisis": "kapali",
+      "difficulty": "normal",
+      "shape": "sarmal",
+      "size": "orta",
+      "aiCount": null,
+      "origins": "production default35%"
+    }
+  },
+  {
+    "seed": 7,
+    "runtime_match": true,
+    "protocol": {
+      "stepDays": 0.5,
+      "stepsPerMonth": 60,
+      "reloadMonth": 60,
+      "council": "kapali",
+      "crisis": "kapali",
+      "difficulty": "normal",
+      "shape": "sarmal",
+      "size": "orta",
+      "aiCount": null,
+      "origins": "production default35%"
+    }
+  },
+  {
+    "seed": 23,
+    "runtime_match": true,
+    "protocol": {
+      "stepDays": 0.5,
+      "stepsPerMonth": 60,
+      "reloadMonth": 60,
+      "council": "kapali",
+      "crisis": "kapali",
+      "difficulty": "normal",
+      "shape": "sarmal",
+      "size": "orta",
+      "aiCount": null,
+      "origins": "production default35%"
+    }
+  },
+  {
+    "seed": 42,
+    "runtime_match": true,
+    "protocol": {
+      "stepDays": 0.5,
+      "stepsPerMonth": 60,
+      "reloadMonth": 60,
+      "council": "kapali",
+      "crisis": "kapali",
+      "difficulty": "normal",
+      "shape": "sarmal",
+      "size": "orta",
+      "aiCount": null,
+      "origins": "production default35%"
+    }
+  },
+  {
+    "seed": 99,
+    "runtime_match": true,
+    "protocol": {
+      "stepDays": 0.5,
+      "stepsPerMonth": 60,
+      "reloadMonth": 60,
+      "council": "kapali",
+      "crisis": "kapali",
+      "difficulty": "normal",
+      "shape": "sarmal",
+      "size": "orta",
+      "aiCount": null,
+      "origins": "production default35%"
+    }
+  },
+  {
+    "seed": 123,
+    "runtime_match": true,
+    "protocol": {
+      "stepDays": 0.5,
+      "stepsPerMonth": 60,
+      "reloadMonth": 60,
+      "council": "kapali",
+      "crisis": "kapali",
+      "difficulty": "normal",
+      "shape": "sarmal",
+      "size": "orta",
+      "aiCount": null,
+      "origins": "production default35%"
+    }
+  },
+  {
+    "seed": 404,
+    "runtime_match": true,
+    "protocol": {
+      "stepDays": 0.5,
+      "stepsPerMonth": 60,
+      "reloadMonth": 60,
+      "council": "kapali",
+      "crisis": "kapali",
+      "difficulty": "normal",
+      "shape": "sarmal",
+      "size": "orta",
+      "aiCount": null,
+      "origins": "production default35%"
+    }
+  },
+  {
+    "seed": 2026,
+    "runtime_match": true,
+    "protocol": {
+      "stepDays": 0.5,
+      "stepsPerMonth": 60,
+      "reloadMonth": 60,
+      "council": "kapali",
+      "crisis": "kapali",
+      "difficulty": "normal",
+      "shape": "sarmal",
+      "size": "orta",
+      "aiCount": null,
+      "origins": "production default35%"
+    }
+  }
+]

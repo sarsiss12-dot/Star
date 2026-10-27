@@ -1,0 +1,11 @@
+--- a/ai.js
++++ b/ai.js
+@@ -396,6 +396,8 @@
+   for(const key of Object.keys(pl.col.b)){
+    const removing=(pl.col.q||[]).filter(q=>q.dem&&q.key===key).length,available=pl.col.b[key]-removing;
+    if(key===wanted||available<=0||['santral','tersane','liman','kale'].includes(key)&&available<=1)continue;
++   // Preserve a higher-priority need; otherwise the freed slot immediately rebuilds it.
++   if(needs.indexOf(key)>=0&&needs.indexOf(key)<needs.indexOf(wanted))continue;
+    const whole=aiBuildingDelta(e,sys,pl,key,true,-1),delta=Object.fromEntries(Object.keys(whole).map(r=>[r,whole[r]-queued[r]]));
+    // Keep the legacy protection of a last useful producer/capability. A last
+    // ineffective farm may still go: it loses no production and saves upkeep.

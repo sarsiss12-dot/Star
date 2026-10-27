@@ -1,0 +1,7 @@
+{
+  "declaredBeforeRun": true,
+  "revisionOf": "A1",
+  "hypothesis": "Six-month cutoff still misses existing low-production state; finite producer funding is abandoned even when cheap investments delay it. Remove maximum wait, retain positive own financing and full viability gates, recompute each turn, no persistent reservation.",
+  "gate": "same original protocol",
+  "A1": "targeted no economic improvement"
+}

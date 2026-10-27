@@ -1,0 +1,1237 @@
+{
+  "A2": {
+    "120": [
+      {
+        "seed": 11,
+        "techs": 29,
+        "colonies": 12,
+        "ships": 104,
+        "power": 14356,
+        "deliveries": 84,
+        "contracts": 11,
+        "plansCompleted": 11,
+        "plansFailed": 4,
+        "critical": 0,
+        "initialCritical": 0,
+        "newCritical": 0,
+        "alive": 5,
+        "initialAlive": 5,
+        "births": [],
+        "windows": [],
+        "demolitions": 33,
+        "rebuild12": 0,
+        "maxRun": 0
+      },
+      {
+        "seed": 7,
+        "techs": 51,
+        "colonies": 16,
+        "ships": 188,
+        "power": 23537,
+        "deliveries": 46,
+        "contracts": 4,
+        "plansCompleted": 11,
+        "plansFailed": 2,
+        "critical": 5,
+        "initialCritical": 5,
+        "newCritical": 0,
+        "alive": 5,
+        "initialAlive": 5,
+        "births": [],
+        "windows": [
+          {
+            "actor": 3,
+            "resource": "tuk",
+            "start": 28,
+            "end": 28,
+            "length": 1
+          },
+          {
+            "actor": 3,
+            "resource": "ala",
+            "start": 38,
+            "end": 41,
+            "length": 4
+          }
+        ],
+        "demolitions": 37,
+        "rebuild12": 0,
+        "maxRun": 4
+      },
+      {
+        "seed": 23,
+        "techs": 29,
+        "colonies": 10,
+        "ships": 135,
+        "power": 21514,
+        "deliveries": 0,
+        "contracts": 0,
+        "plansCompleted": 10,
+        "plansFailed": 2,
+        "critical": 1,
+        "initialCritical": 1,
+        "newCritical": 0,
+        "alive": 4,
+        "initialAlive": 4,
+        "births": [],
+        "windows": [
+          {
+            "actor": 2,
+            "resource": "ene",
+            "start": 1,
+            "end": 1,
+            "length": 1
+          }
+        ],
+        "demolitions": 45,
+        "rebuild12": 0,
+        "maxRun": 1
+      },
+      {
+        "seed": 42,
+        "techs": 42,
+        "colonies": 15,
+        "ships": 142,
+        "power": 20026,
+        "deliveries": 58,
+        "contracts": 5,
+        "plansCompleted": 5,
+        "plansFailed": 4,
+        "critical": 2,
+        "initialCritical": 2,
+        "newCritical": 0,
+        "alive": 5,
+        "initialAlive": 5,
+        "births": [],
+        "windows": [
+          {
+            "actor": 4,
+            "resource": "min",
+            "start": 12,
+            "end": 12,
+            "length": 1
+          },
+          {
+            "actor": 3,
+            "resource": "ene",
+            "start": 116,
+            "end": 116,
+            "length": 1
+          }
+        ],
+        "demolitions": 32,
+        "rebuild12": 0,
+        "maxRun": 1
+      },
+      {
+        "seed": 99,
+        "techs": 47,
+        "colonies": 20,
+        "ships": 187,
+        "power": 26197,
+        "deliveries": 57,
+        "contracts": 11,
+        "plansCompleted": 12,
+        "plansFailed": 3,
+        "critical": 0,
+        "initialCritical": 0,
+        "newCritical": 0,
+        "alive": 5,
+        "initialAlive": 5,
+        "births": [],
+        "windows": [],
+        "demolitions": 50,
+        "rebuild12": 0,
+        "maxRun": 0
+      },
+      {
+        "seed": 123,
+        "techs": 44,
+        "colonies": 16,
+        "ships": 166,
+        "power": 24080,
+        "deliveries": 56,
+        "contracts": 5,
+        "plansCompleted": 17,
+        "plansFailed": 0,
+        "critical": 3,
+        "initialCritical": 3,
+        "newCritical": 0,
+        "alive": 5,
+        "initialAlive": 5,
+        "births": [],
+        "windows": [
+          {
+            "actor": 5,
+            "resource": "min",
+            "start": 6,
+            "end": 8,
+            "length": 3
+          }
+        ],
+        "demolitions": 53,
+        "rebuild12": 0,
+        "maxRun": 3
+      },
+      {
+        "seed": 404,
+        "techs": 49,
+        "colonies": 19,
+        "ships": 251,
+        "power": 31433,
+        "deliveries": 154,
+        "contracts": 14,
+        "plansCompleted": 7,
+        "plansFailed": 5,
+        "critical": 2,
+        "initialCritical": 0,
+        "newCritical": 2,
+        "alive": 6,
+        "initialAlive": 5,
+        "births": [
+          {
+            "day": 3210,
+            "step": 6420,
+            "kind": "birth",
+            "rng": -2012644220,
+            "actor": 7,
+            "race": "suru",
+            "colonies": [
+              {
+                "s": 24,
+                "p": 1
+              }
+            ],
+            "resources": {
+              "min": 400,
+              "ene": 300,
+              "yiy": 180,
+              "ala": 220,
+              "ara": 0,
+              "tuk": 150,
+              "etk": 70
+            },
+            "queues": [
+              {
+                "s": 24,
+                "p": 1,
+                "q": [
+                  {
+                    "key": "fabrika",
+                    "left": 55,
+                    "tot": 101,
+                    "paid": {
+                      "min": 170
+                    },
+                    "s": 24,
+                    "p": 1
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "windows": [
+          {
+            "actor": 7,
+            "resource": "tuk",
+            "start": 119,
+            "end": 120,
+            "length": 2
+          }
+        ],
+        "demolitions": 57,
+        "rebuild12": 0,
+        "maxRun": 2
+      },
+      {
+        "seed": 2026,
+        "techs": 40,
+        "colonies": 21,
+        "ships": 213,
+        "power": 26652,
+        "deliveries": 0,
+        "contracts": 0,
+        "plansCompleted": 8,
+        "plansFailed": 6,
+        "critical": 1,
+        "initialCritical": 1,
+        "newCritical": 0,
+        "alive": 5,
+        "initialAlive": 5,
+        "births": [],
+        "windows": [
+          {
+            "actor": 2,
+            "resource": "ene",
+            "start": 1,
+            "end": 1,
+            "length": 1
+          }
+        ],
+        "demolitions": 42,
+        "rebuild12": 0,
+        "maxRun": 1
+      }
+    ],
+    "240": [
+      {
+        "seed": 11,
+        "techs": 61,
+        "colonies": 18,
+        "ships": 214,
+        "power": 39451,
+        "deliveries": 206,
+        "contracts": 23,
+        "plansCompleted": 21,
+        "plansFailed": 7,
+        "critical": 13,
+        "initialCritical": 2,
+        "newCritical": 11,
+        "alive": 6,
+        "initialAlive": 5,
+        "births": [
+          {
+            "day": 6540,
+            "step": 13080,
+            "kind": "birth",
+            "rng": 1845174910,
+            "actor": 7,
+            "race": "teknokrasi",
+            "colonies": [
+              {
+                "s": 41,
+                "p": 3
+              }
+            ],
+            "resources": {
+              "min": 400,
+              "ene": 300,
+              "yiy": 180,
+              "ala": 220,
+              "ara": 0,
+              "tuk": 150,
+              "etk": 70
+            },
+            "queues": [
+              {
+                "s": 41,
+                "p": 3,
+                "q": []
+              }
+            ]
+          }
+        ],
+        "windows": [
+          {
+            "actor": 4,
+            "resource": "min",
+            "start": 178,
+            "end": 178,
+            "length": 1
+          },
+          {
+            "actor": 5,
+            "resource": "ala",
+            "start": 222,
+            "end": 222,
+            "length": 1
+          },
+          {
+            "actor": 7,
+            "resource": "min",
+            "start": 220,
+            "end": 226,
+            "length": 7
+          },
+          {
+            "actor": 7,
+            "resource": "min",
+            "start": 230,
+            "end": 230,
+            "length": 1
+          },
+          {
+            "actor": 7,
+            "resource": "min",
+            "start": 232,
+            "end": 234,
+            "length": 3
+          }
+        ],
+        "demolitions": 104,
+        "rebuild12": 0,
+        "maxRun": 7
+      },
+      {
+        "seed": 23,
+        "techs": 72,
+        "colonies": 28,
+        "ships": 148,
+        "power": 73030,
+        "deliveries": 20,
+        "contracts": 2,
+        "plansCompleted": 18,
+        "plansFailed": 3,
+        "critical": 1,
+        "initialCritical": 1,
+        "newCritical": 0,
+        "alive": 5,
+        "initialAlive": 4,
+        "births": [
+          {
+            "day": 6210,
+            "step": 12420,
+            "kind": "birth",
+            "rng": -1444232570,
+            "actor": 7,
+            "race": "lonca",
+            "colonies": [
+              {
+                "s": 4,
+                "p": 2
+              }
+            ],
+            "resources": {
+              "min": 400,
+              "ene": 300,
+              "yiy": 180,
+              "ala": 220,
+              "ara": 0,
+              "tuk": 150,
+              "etk": 70
+            },
+            "queues": [
+              {
+                "s": 4,
+                "p": 2,
+                "q": [
+                  {
+                    "key": "lab",
+                    "left": 28,
+                    "tot": 110,
+                    "paid": {
+                      "min": 190
+                    },
+                    "s": 4,
+                    "p": 2
+                  },
+                  {
+                    "key": "maden",
+                    "left": 80,
+                    "tot": 80,
+                    "paid": {
+                      "min": 120
+                    },
+                    "s": 4,
+                    "p": 2
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "windows": [
+          {
+            "actor": 2,
+            "resource": "ene",
+            "start": 1,
+            "end": 1,
+            "length": 1
+          }
+        ],
+        "demolitions": 141,
+        "rebuild12": 0,
+        "maxRun": 1
+      },
+      {
+        "seed": 42,
+        "techs": 93,
+        "colonies": 25,
+        "ships": 261,
+        "power": 63537,
+        "deliveries": 132,
+        "contracts": 11,
+        "plansCompleted": 10,
+        "plansFailed": 5,
+        "critical": 2,
+        "initialCritical": 2,
+        "newCritical": 0,
+        "alive": 5,
+        "initialAlive": 5,
+        "births": [],
+        "windows": [
+          {
+            "actor": 4,
+            "resource": "min",
+            "start": 12,
+            "end": 12,
+            "length": 1
+          },
+          {
+            "actor": 3,
+            "resource": "ene",
+            "start": 116,
+            "end": 116,
+            "length": 1
+          }
+        ],
+        "demolitions": 134,
+        "rebuild12": 0,
+        "maxRun": 1
+      },
+      {
+        "seed": 404,
+        "techs": 117,
+        "colonies": 28,
+        "ships": 400,
+        "power": 71158,
+        "deliveries": 525,
+        "contracts": 38,
+        "plansCompleted": 15,
+        "plansFailed": 9,
+        "critical": 32,
+        "initialCritical": 0,
+        "newCritical": 32,
+        "alive": 7,
+        "initialAlive": 5,
+        "births": [
+          {
+            "day": 3210,
+            "step": 6420,
+            "kind": "birth",
+            "rng": -2012644220,
+            "actor": 7,
+            "race": "suru",
+            "colonies": [
+              {
+                "s": 24,
+                "p": 1
+              }
+            ],
+            "resources": {
+              "min": 400,
+              "ene": 300,
+              "yiy": 180,
+              "ala": 220,
+              "ara": 0,
+              "tuk": 150,
+              "etk": 70
+            },
+            "queues": [
+              {
+                "s": 24,
+                "p": 1,
+                "q": [
+                  {
+                    "key": "fabrika",
+                    "left": 40,
+                    "tot": 40,
+                    "dem": true,
+                    "paid": {},
+                    "refund": {
+                      "min": 59
+                    },
+                    "s": 24,
+                    "p": 1
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "day": 4650,
+            "step": 9300,
+            "kind": "birth",
+            "rng": -124454858,
+            "actor": 8,
+            "race": "meclis",
+            "colonies": [
+              {
+                "s": 39,
+                "p": 2
+              }
+            ],
+            "resources": {
+              "min": 400,
+              "ene": 300,
+              "yiy": 180,
+              "ala": 220,
+              "ara": 0,
+              "tuk": 150,
+              "etk": 70
+            },
+            "queues": [
+              {
+                "s": 39,
+                "p": 2,
+                "q": []
+              }
+            ]
+          }
+        ],
+        "windows": [
+          {
+            "actor": 7,
+            "resource": "tuk",
+            "start": 119,
+            "end": 145,
+            "length": 27
+          },
+          {
+            "actor": 7,
+            "resource": "min",
+            "start": 179,
+            "end": 183,
+            "length": 5
+          }
+        ],
+        "demolitions": 231,
+        "rebuild12": 0,
+        "maxRun": 27
+      }
+    ]
+  },
+  "C2": {
+    "120": [
+      {
+        "seed": 11,
+        "techs": 32,
+        "colonies": 13,
+        "ships": 111,
+        "power": 16113,
+        "deliveries": 82,
+        "contracts": 10,
+        "plansCompleted": 12,
+        "plansFailed": 4,
+        "critical": 1,
+        "initialCritical": 1,
+        "newCritical": 0,
+        "alive": 5,
+        "initialAlive": 5,
+        "births": [],
+        "windows": [
+          {
+            "actor": 3,
+            "resource": "ene",
+            "start": 109,
+            "end": 109,
+            "length": 1
+          }
+        ],
+        "demolitions": 31,
+        "rebuild12": 0,
+        "maxRun": 1
+      },
+      {
+        "seed": 7,
+        "techs": 54,
+        "colonies": 19,
+        "ships": 219,
+        "power": 27940,
+        "deliveries": 96,
+        "contracts": 11,
+        "plansCompleted": 10,
+        "plansFailed": 1,
+        "critical": 5,
+        "initialCritical": 5,
+        "newCritical": 0,
+        "alive": 5,
+        "initialAlive": 5,
+        "births": [],
+        "windows": [
+          {
+            "actor": 3,
+            "resource": "tuk",
+            "start": 28,
+            "end": 28,
+            "length": 1
+          },
+          {
+            "actor": 3,
+            "resource": "ala",
+            "start": 38,
+            "end": 41,
+            "length": 4
+          }
+        ],
+        "demolitions": 29,
+        "rebuild12": 0,
+        "maxRun": 4
+      },
+      {
+        "seed": 23,
+        "techs": 29,
+        "colonies": 14,
+        "ships": 156,
+        "power": 26676,
+        "deliveries": 0,
+        "contracts": 0,
+        "plansCompleted": 10,
+        "plansFailed": 2,
+        "critical": 1,
+        "initialCritical": 1,
+        "newCritical": 0,
+        "alive": 4,
+        "initialAlive": 4,
+        "births": [],
+        "windows": [
+          {
+            "actor": 2,
+            "resource": "ene",
+            "start": 1,
+            "end": 1,
+            "length": 1
+          }
+        ],
+        "demolitions": 34,
+        "rebuild12": 0,
+        "maxRun": 1
+      },
+      {
+        "seed": 42,
+        "techs": 38,
+        "colonies": 13,
+        "ships": 155,
+        "power": 22894,
+        "deliveries": 72,
+        "contracts": 7,
+        "plansCompleted": 4,
+        "plansFailed": 5,
+        "critical": 1,
+        "initialCritical": 1,
+        "newCritical": 0,
+        "alive": 5,
+        "initialAlive": 5,
+        "births": [],
+        "windows": [
+          {
+            "actor": 4,
+            "resource": "min",
+            "start": 12,
+            "end": 12,
+            "length": 1
+          }
+        ],
+        "demolitions": 30,
+        "rebuild12": 0,
+        "maxRun": 1
+      },
+      {
+        "seed": 99,
+        "techs": 45,
+        "colonies": 20,
+        "ships": 209,
+        "power": 27258,
+        "deliveries": 55,
+        "contracts": 9,
+        "plansCompleted": 10,
+        "plansFailed": 3,
+        "critical": 0,
+        "initialCritical": 0,
+        "newCritical": 0,
+        "alive": 5,
+        "initialAlive": 5,
+        "births": [],
+        "windows": [],
+        "demolitions": 49,
+        "rebuild12": 0,
+        "maxRun": 0
+      },
+      {
+        "seed": 123,
+        "techs": 41,
+        "colonies": 17,
+        "ships": 170,
+        "power": 25066,
+        "deliveries": 50,
+        "contracts": 5,
+        "plansCompleted": 16,
+        "plansFailed": 0,
+        "critical": 3,
+        "initialCritical": 3,
+        "newCritical": 0,
+        "alive": 5,
+        "initialAlive": 5,
+        "births": [],
+        "windows": [
+          {
+            "actor": 5,
+            "resource": "min",
+            "start": 6,
+            "end": 8,
+            "length": 3
+          }
+        ],
+        "demolitions": 48,
+        "rebuild12": 0,
+        "maxRun": 3
+      },
+      {
+        "seed": 404,
+        "techs": 47,
+        "colonies": 21,
+        "ships": 230,
+        "power": 30080,
+        "deliveries": 169,
+        "contracts": 17,
+        "plansCompleted": 7,
+        "plansFailed": 4,
+        "critical": 0,
+        "initialCritical": 0,
+        "newCritical": 0,
+        "alive": 5,
+        "initialAlive": 5,
+        "births": [],
+        "windows": [],
+        "demolitions": 56,
+        "rebuild12": 0,
+        "maxRun": 0
+      },
+      {
+        "seed": 2026,
+        "techs": 42,
+        "colonies": 24,
+        "ships": 232,
+        "power": 29444,
+        "deliveries": 0,
+        "contracts": 0,
+        "plansCompleted": 7,
+        "plansFailed": 6,
+        "critical": 1,
+        "initialCritical": 1,
+        "newCritical": 0,
+        "alive": 5,
+        "initialAlive": 5,
+        "births": [],
+        "windows": [
+          {
+            "actor": 2,
+            "resource": "ene",
+            "start": 1,
+            "end": 1,
+            "length": 1
+          }
+        ],
+        "demolitions": 47,
+        "rebuild12": 0,
+        "maxRun": 1
+      }
+    ],
+    "240": []
+  },
+  "AC": {
+    "120": [
+      {
+        "seed": 11,
+        "techs": 32,
+        "colonies": 13,
+        "ships": 111,
+        "power": 16113,
+        "deliveries": 82,
+        "contracts": 10,
+        "plansCompleted": 12,
+        "plansFailed": 4,
+        "critical": 1,
+        "initialCritical": 1,
+        "newCritical": 0,
+        "alive": 5,
+        "initialAlive": 5,
+        "births": [],
+        "windows": [
+          {
+            "actor": 3,
+            "resource": "ene",
+            "start": 109,
+            "end": 109,
+            "length": 1
+          }
+        ],
+        "demolitions": 31,
+        "rebuild12": 0,
+        "maxRun": 1
+      },
+      {
+        "seed": 7,
+        "techs": 54,
+        "colonies": 19,
+        "ships": 219,
+        "power": 27940,
+        "deliveries": 96,
+        "contracts": 11,
+        "plansCompleted": 10,
+        "plansFailed": 1,
+        "critical": 5,
+        "initialCritical": 5,
+        "newCritical": 0,
+        "alive": 5,
+        "initialAlive": 5,
+        "births": [],
+        "windows": [
+          {
+            "actor": 3,
+            "resource": "tuk",
+            "start": 28,
+            "end": 28,
+            "length": 1
+          },
+          {
+            "actor": 3,
+            "resource": "ala",
+            "start": 38,
+            "end": 41,
+            "length": 4
+          }
+        ],
+        "demolitions": 29,
+        "rebuild12": 0,
+        "maxRun": 4
+      },
+      {
+        "seed": 23,
+        "techs": 29,
+        "colonies": 14,
+        "ships": 156,
+        "power": 26676,
+        "deliveries": 0,
+        "contracts": 0,
+        "plansCompleted": 10,
+        "plansFailed": 2,
+        "critical": 1,
+        "initialCritical": 1,
+        "newCritical": 0,
+        "alive": 4,
+        "initialAlive": 4,
+        "births": [],
+        "windows": [
+          {
+            "actor": 2,
+            "resource": "ene",
+            "start": 1,
+            "end": 1,
+            "length": 1
+          }
+        ],
+        "demolitions": 34,
+        "rebuild12": 0,
+        "maxRun": 1
+      },
+      {
+        "seed": 42,
+        "techs": 38,
+        "colonies": 13,
+        "ships": 155,
+        "power": 22894,
+        "deliveries": 72,
+        "contracts": 7,
+        "plansCompleted": 4,
+        "plansFailed": 5,
+        "critical": 1,
+        "initialCritical": 1,
+        "newCritical": 0,
+        "alive": 5,
+        "initialAlive": 5,
+        "births": [],
+        "windows": [
+          {
+            "actor": 4,
+            "resource": "min",
+            "start": 12,
+            "end": 12,
+            "length": 1
+          }
+        ],
+        "demolitions": 30,
+        "rebuild12": 0,
+        "maxRun": 1
+      },
+      {
+        "seed": 99,
+        "techs": 45,
+        "colonies": 20,
+        "ships": 209,
+        "power": 27258,
+        "deliveries": 55,
+        "contracts": 9,
+        "plansCompleted": 10,
+        "plansFailed": 3,
+        "critical": 0,
+        "initialCritical": 0,
+        "newCritical": 0,
+        "alive": 5,
+        "initialAlive": 5,
+        "births": [],
+        "windows": [],
+        "demolitions": 49,
+        "rebuild12": 0,
+        "maxRun": 0
+      },
+      {
+        "seed": 123,
+        "techs": 41,
+        "colonies": 17,
+        "ships": 170,
+        "power": 25066,
+        "deliveries": 50,
+        "contracts": 5,
+        "plansCompleted": 16,
+        "plansFailed": 0,
+        "critical": 3,
+        "initialCritical": 3,
+        "newCritical": 0,
+        "alive": 5,
+        "initialAlive": 5,
+        "births": [],
+        "windows": [
+          {
+            "actor": 5,
+            "resource": "min",
+            "start": 6,
+            "end": 8,
+            "length": 3
+          }
+        ],
+        "demolitions": 48,
+        "rebuild12": 0,
+        "maxRun": 3
+      },
+      {
+        "seed": 404,
+        "techs": 47,
+        "colonies": 21,
+        "ships": 230,
+        "power": 30080,
+        "deliveries": 169,
+        "contracts": 17,
+        "plansCompleted": 7,
+        "plansFailed": 4,
+        "critical": 0,
+        "initialCritical": 0,
+        "newCritical": 0,
+        "alive": 5,
+        "initialAlive": 5,
+        "births": [],
+        "windows": [],
+        "demolitions": 56,
+        "rebuild12": 0,
+        "maxRun": 0
+      },
+      {
+        "seed": 2026,
+        "techs": 42,
+        "colonies": 24,
+        "ships": 232,
+        "power": 29444,
+        "deliveries": 0,
+        "contracts": 0,
+        "plansCompleted": 7,
+        "plansFailed": 6,
+        "critical": 1,
+        "initialCritical": 1,
+        "newCritical": 0,
+        "alive": 5,
+        "initialAlive": 5,
+        "births": [],
+        "windows": [
+          {
+            "actor": 2,
+            "resource": "ene",
+            "start": 1,
+            "end": 1,
+            "length": 1
+          }
+        ],
+        "demolitions": 47,
+        "rebuild12": 0,
+        "maxRun": 1
+      }
+    ],
+    "240": [
+      {
+        "seed": 11,
+        "techs": 67,
+        "colonies": 16,
+        "ships": 189,
+        "power": 41400,
+        "deliveries": 155,
+        "contracts": 18,
+        "plansCompleted": 23,
+        "plansFailed": 6,
+        "critical": 9,
+        "initialCritical": 9,
+        "newCritical": 0,
+        "alive": 5,
+        "initialAlive": 5,
+        "births": [],
+        "windows": [
+          {
+            "actor": 3,
+            "resource": "ene",
+            "start": 109,
+            "end": 109,
+            "length": 1
+          },
+          {
+            "actor": 3,
+            "resource": "ene",
+            "start": 187,
+            "end": 192,
+            "length": 6
+          },
+          {
+            "actor": 3,
+            "resource": "ene",
+            "start": 200,
+            "end": 200,
+            "length": 1
+          },
+          {
+            "actor": 3,
+            "resource": "ene",
+            "start": 202,
+            "end": 202,
+            "length": 1
+          }
+        ],
+        "demolitions": 115,
+        "rebuild12": 0,
+        "maxRun": 6
+      },
+      {
+        "seed": 23,
+        "techs": 84,
+        "colonies": 32,
+        "ships": 314,
+        "power": 80270,
+        "deliveries": 0,
+        "contracts": 0,
+        "plansCompleted": 13,
+        "plansFailed": 2,
+        "critical": 2,
+        "initialCritical": 2,
+        "newCritical": 0,
+        "alive": 4,
+        "initialAlive": 4,
+        "births": [],
+        "windows": [
+          {
+            "actor": 2,
+            "resource": "ene",
+            "start": 1,
+            "end": 1,
+            "length": 1
+          },
+          {
+            "actor": 1,
+            "resource": "min",
+            "start": 214,
+            "end": 214,
+            "length": 1
+          }
+        ],
+        "demolitions": 173,
+        "rebuild12": 0,
+        "maxRun": 1
+      },
+      {
+        "seed": 42,
+        "techs": 87,
+        "colonies": 21,
+        "ships": 282,
+        "power": 71291,
+        "deliveries": 250,
+        "contracts": 16,
+        "plansCompleted": 10,
+        "plansFailed": 7,
+        "critical": 3,
+        "initialCritical": 3,
+        "newCritical": 0,
+        "alive": 6,
+        "initialAlive": 5,
+        "births": [
+          {
+            "day": 6570,
+            "step": 13140,
+            "kind": "birth",
+            "rng": -148426565,
+            "actor": 7,
+            "race": "makine",
+            "colonies": [
+              {
+                "s": 7,
+                "p": 0
+              }
+            ],
+            "resources": {
+              "min": 400,
+              "ene": 300,
+              "yiy": 180,
+              "ala": 220,
+              "ara": 0,
+              "tuk": 150,
+              "etk": 70
+            },
+            "queues": [
+              {
+                "s": 7,
+                "p": 0,
+                "q": [
+                  {
+                    "key": "dokum",
+                    "left": 118,
+                    "tot": 118,
+                    "paid": {
+                      "min": 210
+                    },
+                    "s": 7,
+                    "p": 0
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "windows": [
+          {
+            "actor": 4,
+            "resource": "min",
+            "start": 12,
+            "end": 12,
+            "length": 1
+          },
+          {
+            "actor": 3,
+            "resource": "ene",
+            "start": 128,
+            "end": 129,
+            "length": 2
+          }
+        ],
+        "demolitions": 129,
+        "rebuild12": 0,
+        "maxRun": 2
+      },
+      {
+        "seed": 404,
+        "techs": 117,
+        "colonies": 25,
+        "ships": 355,
+        "power": 67252,
+        "deliveries": 503,
+        "contracts": 33,
+        "plansCompleted": 8,
+        "plansFailed": 5,
+        "critical": 0,
+        "initialCritical": 0,
+        "newCritical": 0,
+        "alive": 5,
+        "initialAlive": 5,
+        "births": [],
+        "windows": [],
+        "demolitions": 235,
+        "rebuild12": 0,
+        "maxRun": 0
+      }
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+--- a/ai.js
++++ b/ai.js
+@@ -366,7 +366,7 @@
+   const rate=Math.min(e.inc[r]||0,plan.rows[r].net);if(rate<=0)return null;
+   months=Math.max(months,short/rate);
+  }
+- if(!(months>0&&months<=3))return null;
++ if(!(months>0&&months<=plan.horizon))return null;
+  const viable=e.colonies.some(c=>{const sys=G.sys[c.s],pl=sys?.planets[c.p];if(!pl?.col||pl.owner!==e.id||(pl.col.b[key]||0)+colonyQueuedOf(pl.col,key)>=B.max)return false;
+   const delta=aiBuildingDelta(e,sys,pl,key);
+   return ['ene','min','yiy','tuk','ala'].every(r=>{if(delta[r]>=0)return true;const row=plan.rows[r],net=row.net+delta[r],cash=row.stock+Math.max(0,Math.min(e.inc[r]||0,row.net))*months-(B.c[r]||0);return net>=0||cash>=-net*6;});
