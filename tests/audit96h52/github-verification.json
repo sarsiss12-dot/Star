@@ -1,0 +1,114 @@
+{
+  "release_commit": "941b7f532736da443647b8436bb15d9f053a0b3e",
+  "release_tree": "6d75cd43494dfeb7ddc35bbeb5de2dc6cd9373fb",
+  "parent": "1f5b43915781e6fcd934cd93609c0360f7b8ea7c",
+  "runtime_files": [
+    {
+      "file": "ai.js",
+      "sha256": "27ae25e44d66f5fdbfb04ea7db69aa75769a3165759b6feb0250b5b753e8c739",
+      "match": true
+    },
+    {
+      "file": "archive-ui.js",
+      "sha256": "f3b43957f97f2a32add1f40fc22f493eeca89bc5e1db05e5a5de92eef0e9fc03",
+      "match": true
+    },
+    {
+      "file": "audio.js",
+      "sha256": "6ddf6e388fa404394fee6220c2bfeeb3d1f9601c51a35ccdfe3181a8781942f7",
+      "match": true
+    },
+    {
+      "file": "combat.js",
+      "sha256": "b4e21fcdb6fdaaa93da07313131470de3e8a3c28b5650226a9c4a2713bde73a5",
+      "match": true
+    },
+    {
+      "file": "commerce-ui.js",
+      "sha256": "cc7fef5ab43176093251916aaafbdd873424da0630ec46fe6d3d5106a690b8d4",
+      "match": true
+    },
+    {
+      "file": "commerce.js",
+      "sha256": "978e4f6b01faed1babeade20070447cbcfaa4e2ea70793a78e50f20fbe66be01",
+      "match": true
+    },
+    {
+      "file": "construction.js",
+      "sha256": "d9b544b0328f26576ff90e02fe49c1b7f3798dfd844a8c39ee8dc6c0890debda",
+      "match": true
+    },
+    {
+      "file": "diplomacy.js",
+      "sha256": "83c3c4d33eaece8cd82677291480670abcf474ee6526ada79e9961e0d73afc4a",
+      "match": true
+    },
+    {
+      "file": "economic-ledger.js",
+      "sha256": "67d07f3ee4777cd7c246c8b37dda7cf1577cf86c19a6edeba68945a5d3063501",
+      "match": true
+    },
+    {
+      "file": "economy-ui.js",
+      "sha256": "61f6e2dcef7f37143821edccf67552718a210ec555f7b8f9074c68191fd5cbcc",
+      "match": true
+    },
+    {
+      "file": "economy.js",
+      "sha256": "5d412d488760ae2b7193b13822b747788130b63ed782e62bfbd3223154b69d22",
+      "match": true
+    },
+    {
+      "file": "inbox.js",
+      "sha256": "5f53ac2ca9c3ca8d5f1a12a9e1ba2b2a247ab7e350df0ec9169a13cfe3285204",
+      "match": true
+    },
+    {
+      "file": "index.html",
+      "sha256": "984d2c51e33637a0b3312a072e3348b5e943f4c2c7156530affeb7d6ceb83259",
+      "match": true
+    },
+    {
+      "file": "main.js",
+      "sha256": "0171280d808eef33ece3846e7d8e035766f5be8a203964caf821ec9309961957",
+      "match": true
+    },
+    {
+      "file": "manifest.json",
+      "sha256": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
+      "match": true
+    },
+    {
+      "file": "map.js",
+      "sha256": "d8ca27ee07c484b7399f95d8031aa70fb7539bcf89d768c8442200b7cba76ae3",
+      "match": true
+    },
+    {
+      "file": "news.js",
+      "sha256": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
+      "match": true
+    },
+    {
+      "file": "sw.js",
+      "sha256": "8cdc474575e927637c1e4c50fd475093c34ecccfab30c5395d072fe14acfafdf",
+      "match": true
+    },
+    {
+      "file": "ui.js",
+      "sha256": "f66b6a6561156c8e2abf06b4dd321e0e081ef39dacd537f0ff91e7ea38266d0e",
+      "match": true
+    }
+  ],
+  "remote_runtime": "PASS",
+  "remote_manifest": "PASS",
+  "remote_game_zip": "PASS",
+  "preserved_old_game_zip": "PASS",
+  "force_used": false,
+  "tests": {
+    "suites": 134,
+    "pass": 6055,
+    "fail": 0,
+    "browser": 12
+  },
+  "url": "https://github.com/sarsiss12-dot/Star/commit/941b7f532736da443647b8436bb15d9f053a0b3e"
+}

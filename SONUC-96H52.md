@@ -1,6 +1,6 @@
 # STARS — FAZ 96H.5.2 SONUÇ RAPORU
 
-**Karar:** Yeni oyun 96H.5.2; build `96h52`, PWA `stars-v96h52`, Save8 korunur. GitHub yayın doğrulaması ayrı teslim kaydında yer alır.
+**Karar:** Yeni oyun 96H.5.2; build `96h52`, PWA `stars-v96h52`, Save8 korunur. GitHub’da yeni oyun yayımlandı. Yayın sonrası doğrulama tamamlandı.
 
 ## 1. Kanonik kaynak
 `sarsiss12-dot/Star`, `main`; başlangıç ve yayın öncesi doğrulanan HEAD: `1f5b43915781e6fcd934cd93609c0360f7b8ea7c`.
@@ -58,7 +58,7 @@ ZIP CRC32: `5d758998`
 CRC ve 19 runtime manifest/hash karşılaştırması: **PASS**. `RELEASE-96H52.json` ve `RELEASE-MANIFEST.json` hazırlanmıştır. Kanıt paketi boyutu/hash’i ve son GitHub HEAD, yayın sonrası teslim raporuna eklenir.
 
 ## 18. Yayın doğrulaması
-Force kullanılmadan `main` dalına tek ileri commit hedeflenir. Paket ile GitHub’daki 19 runtime hash’i, manifest ve ZIP yeniden karşılaştırılmadan başarı ilan edilmez. Son doğrulama `github-verification.json` dosyasında bulunur.
+Yeni oyun `main` dalına force kullanılmadan yayımlandı. Oyun release commit: `941b7f532736da443647b8436bb15d9f053a0b3e`. Uzak depodan 19 runtime hash’i, manifest, yeni ZIP ve korunmuş H5 ZIP yeniden doğrulandı: PASS. Sonraki belge commit’i runtime’ı değiştirmez. `tests/audit96h52/github-verification.json` kanıtı içerir.
 
 ## 19. Açık sınırlamalar
 Kullanıcı Save’i ve fiziksel Android yoktur. Legacy kaynağı belirsiz veya ayrı bağımsız savaşlar güvenlik için topluca temizlenmez; önceden bozulmuş kayıtların rastgele onarımı yapılmadı. Ayrı savaşlar sözleşmenin koruma yükümlülüğünü tetikleyebilir; ilgili savaşlar Vassal Yönetimi’nde görünür. Dar ekranda iki sütun ve mevcut yatay oynama yönlendirmesi devam eder. Her federasyon sekmesinin sınırsız içeriksiz tek ekrana sığdığı iddia edilmez.

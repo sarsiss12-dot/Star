@@ -62,7 +62,7 @@
     "new_240_month_economic_campaign": "NOT RUN; untouched economy and AI bytes; focused politics/war regression used"
   },
   "p0": "Proven same-campaign federation fronts close on capitulation; independent/legacy-unproven fronts remain; original contract protection stays active.",
-  "publication": "main fast-forward commit; see tests/audit96h52/github-verification.json in evidence for final commit",
+  "publication": "SUCCESS: main fast-forward, no force; release commit and verification below",
   "next_phase": [
     "96H.6.1 economic timing",
     "Seed404 consumer goods crisis",
@@ -72,5 +72,7 @@
     "Technocracy/HolyCouncil allocator and eight doctrines",
     "82 Machine purifier/persona conflict",
     "Doctrine strategic behavior"
-  ]
+  ],
+  "release_commit": "941b7f532736da443647b8436bb15d9f053a0b3e",
+  "release_tree": "6d75cd43494dfeb7ddc35bbeb5de2dc6cd9373fb"
 }
