@@ -151,7 +151,7 @@ check('Replacement rollback restores old family policy, cost and effects',()=>{
  assert.equal(h.run('serialize()'),before);
 });
 check('Real UI exposes five categories, replacement warning and repeal action',()=>{
- const h=fresh();h.run('F.laws.ortakDon=true;UI.openFed()');const html=h.doc.getElementById('diploPane').innerHTML;
+ const h=fresh();h.run('F.laws.ortakDon=true;UI.openFed();UI.fedTab="laws";UI.openFed()');const html=h.doc.getElementById('diploPane').innerHTML;
  assert.match(html,/Üretim ve refah/);assert.match(html,/Savunma ve lojistik/);assert.match(html,/yerine geçer/);assert.match(html,/fedLawRepeal/);
  h.run("UI.act('fedLawRepeal','ortakDon')");assert.equal(h.run('F.vote.repeal'),true);
 });

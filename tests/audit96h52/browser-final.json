@@ -1,0 +1,56 @@
+{
+  "results": [
+    {
+      "name": "844x390 six tabs, independent scroll and visible leave/expulsion",
+      "status": "PASS"
+    },
+    {
+      "name": "740x360 six tabs, independent scroll and visible leave/expulsion",
+      "status": "PASS"
+    },
+    {
+      "name": "390x844 six tabs, independent scroll and visible leave/expulsion",
+      "status": "PASS"
+    },
+    {
+      "name": "leave cancel and confirm are distinct real clicks",
+      "status": "PASS"
+    },
+    {
+      "name": "expulsion actual proposal and unified vote resolution",
+      "status": "PASS"
+    },
+    {
+      "name": "trade notification retains inbox item and accepts exactly once",
+      "status": "PASS"
+    },
+    {
+      "name": "vassal contract visible without opening sovereignty details",
+      "status": "PASS"
+    },
+    {
+      "name": "fleet groups expand without merging and filters work",
+      "status": "PASS"
+    },
+    {
+      "name": "844x390 construction 3 columns with independent 44px demolition and confirmation",
+      "status": "PASS"
+    },
+    {
+      "name": "390x844 construction 2 columns with independent 44px demolition and confirmation",
+      "status": "PASS"
+    },
+    {
+      "name": "PWA shell offline reload and old Save8 load",
+      "status": "PASS"
+    },
+    {
+      "name": "no uncaught page errors",
+      "status": "PASS"
+    }
+  ],
+  "errors": [],
+  "pass": 12,
+  "fail": 0,
+  "counting": "Unique scenarios: portrait scroll-clamp expectation fixed; 1/0 replaces original 0/1. Portrait layout tested with existing rotate overlay suppressed only by test CSS."
+}

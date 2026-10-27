@@ -57,17 +57,29 @@ const ArchiveUI = {
       ${r.federation?`<p>Federasyon: ${esc(r.federation.name)}</p>`:''}${GalacticNews.location(r)?`<button class="abtn" data-a="newsLocation" data-x="${r.id}">${esc(r.system.name)}${r.planet?' · '+esc(r.planet.name):''} · Konuma git</button>`:''}</div>`,
       `<button class="ch" data-a="newsPin" data-x="${r.id}">${r.pinned?'Sabitlemeyi kaldır':'Sabitle'}</button><button class="ch" data-a="news">Listeye dön</button>`);
   },
+  decisionContext(r,f){
+    let text='Kabul mevcut teklifi uygular; ret bu kaydı sonuçlandırır.';
+    if(r.kind==='invite')text='Kabul: '+(f?.name||'Federasyon')+' üyeliği, anayasa yükümlülükleri ve yürürlükteki yasalar. Ret: bu davet kapanır; üyelik kurulmaz. Katılımın ek Etki bedeli yoktur.';
+    if(r.kind==='pact'||r.kind==='peace'||r.kind==='aideal')text='Kabul: aşağıdaki anlaşma hükümleri mevcut işlem motoruyla uygulanır. Ret: kaynak aktarımı veya yeni anlaşma gerçekleşmez. İmza Etkisini gönderen öder; senden istenen kaynaklar kabulde kendi stokundan alınır.';
+    if(r.kind==='aideal')text+=' İlk geçerli ret, aynı şartlar için 27 ay bekleme ve gönderenin sana ilişkisinde −5 değişim yaratır; aynı karar ikinci kez ceza vermez.';
+    if(r.kind==='submit')text='Kabul: seçtiğin türün mevcut vasallık sözleşmesi kurulur; gönderen 90 Etki öder. Ret: sözleşme kurulmaz; gönderenin sana ilişkisi −15 değişir.';
+    if(r.kind==='sqOffer')text='Kabul: mevcut statüko barışı uygulanır. Ret: savaş sürer.';
+    if(r.kind==='decision'){const d=f?.decisions?.[r.token];text='Kabul: onaylı ortak savaş kararı şimdi uygulanır. Hedef: '+UI.diploName(d?.target)+'. Evet diyen üyeler: '+(d?.approved||[]).map(id=>UI.diploName(id)).join(', ')+'. Her üyenin güncel savaş/antlaşma yetkisi yeniden denetlenir. Ret: bu oyuncunun gelen kutusu kaydı kapanır; federasyon kararı geçerliliğini korur.';}
+    if(r.kind==='fedvote')return '';
+    return '<div class="box"><b>KARARIN ETKİSİ</b><p class="mini">'+esc(text)+'</p></div>';
+  },
   record(id){
     this.ensureWorld();DiplomaticInbox.sync();const r=DiplomaticInbox.get(id);if(!r)return;this.remember();if(this.mode!=='inbox'){this.mode='inbox';Object.assign(this,{filter:'',query:'',page:30,unreadOnly:false,pinnedOnly:false,selected:null,scroll:0},this.views.inbox||{});}this.selected=r.id;
     if(r.kind==='vassal'){UI.vsRecord(r.fid,r.id);return;}
     const gate=DiplomaticInbox.gate(r),offer=DiplomaticInbox.deal(r),f=r.fid!==undefined?fedOf(r.fid):null;
-    const terms=offer?'<div class="ph">SANA VERİYOR</div>'+offer.give.map(i=>'<p>'+esc(dealLabel(i))+'</p>').join('')+'<div class="ph">SENDEN İSTİYOR</div>'+offer.want.map(i=>'<p>'+esc(dealLabel(i))+'</p>').join('')+`<div class="mini">İmza maliyeti: ${gate.quote?.cost??0} Etki · gönderen öder</div>`:r.kind==='fedvote'&&f?.vote?UI.fedAgendaContext(f.vote):'';
+    const terms=offer?'<div class="ph">SANA VERİYOR</div>'+offer.give.map(i=>'<p>'+esc(dealLabel(i))+'</p>').join('')+'<div class="ph">SENDEN İSTİYOR</div>'+offer.want.map(i=>'<p>'+esc(dealLabel(i))+'</p>').join('')+`<div class="mini">İmza maliyeti: ${gate.quote?.cost??0} Etki · gönderen öder</div>`:r.kind==='fedvote'&&f?.vote&&fedVoteToken(f.vote)===r.token?UI.fedAgendaContext(f.vote):'';
     const counterOK=gate.ok&&r.kind==='aideal';
-    this.shell(`<div class="mbd archiveDetail archive95e"><h3>${esc(r.title)}</h3><div class="mini">${esc(this.date(r))} · ${esc(GalacticNews.known(r.from)?r.name:'Bilinmeyen devlet')} · ${esc(DiplomaticInbox.types[r.kind])} · ${esc(DiplomaticInbox.states[r.status])}</div><p>${esc(r.sub)}</p>${terms}
+    this.shell(`<div class="mbd archiveDetail archive95e"><h3>KARAR · ${esc(r.title)}</h3><div class="mini">${esc(this.date(r))} · ${esc(GalacticNews.known(r.from)?r.name:'Bilinmeyen devlet')} · ${esc(DiplomaticInbox.types[r.kind])} · ${esc(DiplomaticInbox.states[r.status])}</div><p>${esc(r.sub)}</p>${this.decisionContext(r,f)}${terms}
       <div class="mini">${Math.max(0,Math.ceil(r.expires-G.day))} gün · son gün ${Math.floor(r.expires)}</div>${gate.why?'<p id="inboxReason" role="status">'+esc(gate.why)+'</p>':''}
       ${GalacticNews.known(r.from)?`<button class="abtn" data-a="inboxEmpire" data-x="${r.id}">Devleti incele · teklif saklanır</button>`:''}
+      ${f?`<button class="abtn" data-a="inboxFederation" data-x="${r.id}">Federasyon bölümünü aç · karar saklanır</button>`:''}
       ${r.kind==='submit'?'<div class="mini">Himaye, seçilen vasallık türünün mevcut yükümlülüklerini getirir.</div><select id="inboxVassalType" aria-label="Vasallık türü">'+Object.entries(VASSAL_TYPES).map(([k,v])=>`<option value="${k}">${esc(v.n)} — ${esc(v.d)}</option>`).join('')+'</select>':''}</div>`,
-      `${r.status==='pending'&&r.kind!=='fedrequest'?`<button id="inboxYes" data-a="inboxYes" class="ch" ${gate.ok?'':'disabled aria-describedby="inboxReason"'}>Kabul et</button><button id="inboxNo" data-a="inboxNo" class="ch">Reddet</button>${r.kind==='aideal'?`<button id="inboxCounter" data-a="inboxCounter" class="ch" ${counterOK?'':'disabled aria-describedby="inboxReason"'}>Karşı teklif hazırla</button>`:''}`:''}<button class="ch" data-a="diplomaticInbox">Listeye dön</button>`);
+      `${r.status==='pending'&&r.kind!=='fedrequest'?`<button id="inboxYes" data-a="inboxYes" class="ch" ${gate.ok?'':'disabled aria-describedby="inboxReason"'}>${r.kind==='fedvote'?'EVET OYU VER':r.kind==='decision'?'KARARI UYGULA':'KABUL ET'}</button><button id="inboxNo" data-a="inboxNo" class="ch">${r.kind==='fedvote'?'HAYIR OYU VER':'REDDET'}</button>${r.kind==='aideal'?`<button id="inboxCounter" data-a="inboxCounter" class="ch" ${counterOK?'':'disabled aria-describedby="inboxReason"'}>Karşı teklif hazırla</button>`:''}`:''}<button class="ch" data-a="diplomaticInbox">Listeye dön</button>`);
     const token={};UI._archiveToken=token;const world=G.emps,record=r,resolve=yes=>{if(UI._archiveToken!==token||world!==G.emps||DiplomaticInbox.get(id)!==record)return;const out=DiplomaticInbox.resolve(id,yes,$('inboxVassalType')?.value||'haracguzar',world);say(out.ok?'Diplomatik karar kaydedildi':out.why,out.ok?'win':'war');this.record(id);UI.topbar();};
     if(r.status==='pending'&&r.kind!=='fedrequest'){UI._hook('inboxYes',()=>resolve(true));UI._hook('inboxNo',()=>resolve(false));if(r.kind==='aideal')UI._hook('inboxCounter',()=>{if(UI._archiveToken!==token||world!==G.emps||DiplomaticInbox.get(id)!==record||!DiplomaticInbox.gate(record).ok)return;UI.aiDealOpen(r.note.data);UI._hooks.offCounter();});}
   },
@@ -85,7 +97,7 @@ const ArchiveUI = {
     const world=G.emps,token={};UI._constructionToken=token;UI._hook('remoteConfirm',()=>{if(UI._constructionToken!==token||world!==G.emps)return;const q=RemoteConstruction.enqueue(f,+$('remoteTarget').value,$('remoteStructure').value);say(q.ok?'İnşaat görevi kuyruğa eklendi':q.why,q.ok?'win':'war');if(q.ok){UI.closeModal();UI.refresh();}else quote();});
   },
   act(a,x){
-    if(!['news','diplomaticInbox','newsDetail','newsEmpire','newsLocation','newsPin','newsUnread','newsPinned','newsReadAll','archiveMore','diplomaticRecord','inboxEmpire','remoteBuild','remoteCancel','inboxReturn'].includes(a))return false;
+    if(!['news','diplomaticInbox','newsDetail','newsEmpire','newsLocation','newsPin','newsUnread','newsPinned','newsReadAll','archiveMore','diplomaticRecord','inboxEmpire','remoteBuild','remoteCancel','inboxReturn','inboxFederation'].includes(a))return false;
     if(a==='news'||a==='diplomaticInbox')this.open(a==='news'?'news':'inbox');
     if(a==='newsDetail')this.detail(+x);
     if(a==='newsPin'){if(!GalacticNews.pin(x))say('En çok 20 haber sabitlenebilir');this.detail(+x);}
@@ -97,6 +109,7 @@ const ArchiveUI = {
     if(a==='newsEmpire'){const [id,index]=x.split(':').map(Number),e=GalacticNews.get(id)?.empires[index],live=e&&G.emps[e.id];if(e&&live&&!live.dead&&GalacticNews.known(e.id)){UI.closeModal();UI.openDiplo();UI.selectDiploIdentity(e.id);}else if(e&&GalacticNews.known(e.id))say(e.name+' · tarihsel devlet; güncel diplomatik temsil yok');}
     if(a==='diplomaticRecord')this.record(+x);
     if(a==='inboxEmpire'){const r=DiplomaticInbox.get(x);if(r&&GalacticNews.known(r.from)&&!G.emps[r.from]?.dead){this.remember();this.returnRecord={id:r.id,world:G.emps};UI.closeModal();UI.openDiplo();UI.selectDiploIdentity(r.from);say('Teklife dönmek için durum listesindeki Gelen kutusuna dön seçeneğini kullan');}}
+    if(a==='inboxFederation'){this.remember();this.returnRecord={id:+x,world:G.emps};UI.closeModal();UI.openFed();UI.fedTab='votes';UI.openFed();}
     if(a==='inboxReturn'&&this.returnRecord?.world===G.emps)this.record(this.returnRecord.id);
     if(a==='remoteBuild')this.build(x);
     if(a==='remoteCancel'){const [fid,id]=x.split(':').map(Number),f=G.fleets.find(f=>f.id===fid&&f.e===0);if(f){const q=RemoteConstruction.cancel(f,id);if(!q.ok)say(q.why);UI.refresh();}}

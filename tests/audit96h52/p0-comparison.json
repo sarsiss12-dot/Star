@@ -1,0 +1,82 @@
+[
+  {
+    "root": "/workspace/scratch/8c63e04c27e8/baseline96h5",
+    "afterCapitulation": [
+      {
+        "3": false
+      },
+      {
+        "3": true
+      },
+      {
+        "3": true
+      },
+      {
+        "0": false,
+        "1": true,
+        "2": true
+      },
+      {}
+    ],
+    "afterProtection": [
+      {
+        "1": true,
+        "2": true,
+        "3": false
+      },
+      {
+        "0": true,
+        "3": true
+      },
+      {
+        "0": true,
+        "3": true
+      },
+      {
+        "0": false,
+        "1": true,
+        "2": true
+      },
+      {}
+    ],
+    "rng": -951432214
+  },
+  {
+    "root": "/workspace/scratch/8c63e04c27e8/Star",
+    "afterCapitulation": [
+      {
+        "3": false
+      },
+      {
+        "3": false
+      },
+      {
+        "3": false
+      },
+      {
+        "0": false,
+        "1": false,
+        "2": false
+      },
+      {}
+    ],
+    "afterProtection": [
+      {
+        "3": false
+      },
+      {
+        "3": false
+      },
+      {
+        "3": false
+      },
+      {
+        "0": false,
+        "1": false,
+        "2": false
+      },
+      {}
+    ],
+    "rng": -951432214
+  }
+]

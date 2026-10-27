@@ -1301,7 +1301,10 @@ const UI = {
         say(out.ok?'Federasyon işlemi kaydedildi; sonucu gelen kutusundan izle.':out.why,out.ok?'sci':'war');
         if(typeof DiplomaticInbox!=='undefined')DiplomaticInbox.sync();this.openDiplo();break;
       }
-      case 'fedLeave': {const r=leaveFederation(G.p);if(!r.ok)say(r.why,'war');this.openFed();break;}
+      case 'fleetFilter': this.fleetFilter=String(x);this.keepScroll=true;this.refresh();break;
+      case 'fedTab': this.fedTab=String(x);this.openFed();break;
+      case 'fedMember': this.closeModal();this.openDiplo();this.selectDiploIdentity(+x);break;
+      case 'fedLeave': this.confirmFedLeave();break;
       case 'fedMotion': {
         const [kind,value,extra]=String(x).split(':');
         const opts=kind==='reform'?{type:value}:kind==='charter'?{field:value,value:extra}:kind==='joinWar'?{target:+value,sponsor:+extra}:{target:+value};
@@ -2868,6 +2871,7 @@ const UI = {
         const ayni = mine.filter(q => q.sys === f.sys && q.ships.length);
         if (ayni.length > 1){
           const sav = ayni.filter(q => isArmed(q));
+          if(ayni.length>5)h+=`<details class="dcDetails"><summary>${esc(G.sys[f.sys].name)} · ${ayni.length} filo · sistem listesini aç</summary>`;
           h += `<div class="ph">📋 ${esc(G.sys[f.sys].name)} · ${ayni.length} FİLO</div>`;
           h += `<div class="dpList">`;
           ayni.forEach(q => {
@@ -2890,6 +2894,7 @@ const UI = {
               data-x="${f.sys}">⚑ ${sav.length} SAVAŞ FİLOSUNU BİRLEŞTİR</button></div>
               <div class="mini">Sivil gemiler (koloni, bilim, inşaat) birleşmez —
                 kendi görevlerinde kalırlar.</div>`;
+          if(ayni.length>5)h+='</details>';
         }
       }
       h += `<div class="ph">${esc(f.name)}</div>`;
@@ -3186,7 +3191,16 @@ const UI = {
       }
     }
     if (!mine.length) return h + `<div class="empty">Filon yok.</div>`;
-    mine.forEach(fl=>{
+    const filters={all:'Tümü',war:'Savaş',science:'Bilim',colony:'Koloni',build:'İnşaat',idle:'Bekleyen'};
+    const waiting=fl=>fl.sys>=0&&!fl.path.length&&!fl.combat&&!fl.auto&&!fl.surv&&!hasShipment(fl);
+    const fits=(fl,k)=>k==='all'||k==='war'&&isArmed(fl)||k==='science'&&fleetHasRole(fl,'bilim')||k==='colony'&&fleetHasRole(fl,'koloni')||k==='build'&&fleetHasRole(fl,'insaat')||k==='idle'&&waiting(fl);
+    const filter=Object.hasOwn(filters,this.fleetFilter)?this.fleetFilter:'all';
+    h+='<nav class="fleetFilters" aria-label="Filo filtreleri">'+Object.entries(filters).map(([k,n])=>`<button class="abtn ${filter===k?'pri':''}" data-a="fleetFilter" data-x="${k}" aria-pressed="${filter===k}">${n} (${mine.filter(fl=>fl.ships.length&&fits(fl,k)).length})</button>`).join('')+'</nav>';
+    const groups=new Map();
+    for(const fl of mine.filter(fl=>fl.ships.length&&fits(fl,filter))){const key=waiting(fl)?fl.sys+':'+(isArmed(fl)?'war':fleetGroup(fl)):'single:'+fl.id;if(!groups.has(key))groups.set(key,[]);groups.get(key).push(fl);}
+    for(const group of groups.values()){
+    if(group.length>1)h+=`<details class="dcDetails fleetGroup" ${group.includes(f)?'open':''}><summary>${esc(G.sys[group[0].sys].name)} · ${isArmed(group[0])?'savaş':'sivil'} · ${group.length} bekleyen filo / ${group.reduce((n,fl)=>n+fl.ships.length,0)} gemi</summary><div class="mini">Yalnız görsel grup; filolar ve emirleri ayrıdır.</div>`;
+    group.forEach(fl=>{
       if (!fl.ships.length) return;
       const sel = fl===f;
       const fst = fleetStatus(fl);
@@ -3197,6 +3211,8 @@ const UI = {
         <div style="margin-top:3px"><span class="stt ${fst.c}">${fst.t}</span>${fl.auto?'<span class="stt wk">🔄 OTO</span>':''}</div></div>
         <span class="tag ${isArmed(fl)?'p':''}">${isArmed(fl)?fmt(fleetPower(fl)):SHIPS[fl.ships[0].c].ab}</span></div>`;
     });
+    if(group.length>1)h+='</details>';
+    }
     return h;
   },
 
@@ -3610,6 +3626,7 @@ const UI = {
     this._jointSurface='diplo';
     const lvl=intelOf(e,o.id),blocked=diploBlocked(e,o),war=!!(e.war[o.id]||o.war[e.id]);
     let h=this.diploIdentity(e,o)+this.diploTreaties(e,o);
+    if(isVassal(o)&&o.overlord===e.id)h+='<div class="ph">VASSAL YÖNETİMİ</div>'+this.vsContract(o);
     h+=this.federationDiplomacy(e,o);
     h+=this.warContribution(e,o);
     h+=this.jointPanel(o.id,'diplo');
@@ -3693,14 +3710,40 @@ const UI = {
     this.openFed(true);this._fedRefreshKey=key;this._fedRefreshWorld=G.sys;
   },
   /* =============== FEDERASYON PANELİ =============== */
+  confirmFedLeave(){
+    const f=findFed(G.p);if(!f)return;
+    const world=G.emps,player=G.p,token={};
+    const laws=Object.keys(f.laws||{}).filter(k=>f.laws[k]).map(k=>(FED_LAWS[k]||FED_INNER_LAWS[k])?.n||k);
+    this.openModal(`<div class="mhd"><span>FEDERASYONDAN AYRIL · ${esc(f.name)}</span></div><div class="mbd"><p>${esc(fedType(f).n)} üyeliğin ve üyeliğe bağlı bonuslar sona erer.</p><p>Yürürlükteki yasalar: ${esc(laws.join(', ')||'yok')}. Kalan üyelerle karşılıklı ittifakların sonlanır.</p><p>Yeniden federasyon üyeliği için 24 ay beklenir. Devam eden savaşların ve mevcut bağımsız sözleşmelerin bu işlemle sona ermez.</p><p>Yeni federasyon savunma/saldırı yükümlülüklerin biter. Federal gemiler federasyonda kalır; başkansan mevcut ardıllık kuralı uygulanır. Federasyon iki üyeden az kalırsa dağılır; federal gemilerin özel statüsü kaldırılır.</p></div><div class="mft"><button class="ch" data-a="closem">VAZGEÇ</button><button id="fedLeaveConfirm" data-a="fedLeaveConfirm" class="ch">AYRILMAYI ONAYLA</button></div>`);
+    this._archiveToken=token;
+    this._hook('fedLeaveConfirm',()=>{if(this._archiveToken!==token||world!==G.emps||player!==G.p||findFed(player)!==f)return;const q=leaveFederation(player);if(!q.ok)say(q.why,'war');this.closeModal();this.openFed();});
+  },
+  fedMotionButton(kind,opts,label){
+    const q=canFedMotion(G.p,kind,opts),x=kind==='reform'?kind+':'+opts.type:kind==='charter'?kind+':'+opts.field+':'+opts.value:kind==='joinWar'?kind+':'+opts.target+':'+opts.sponsor:kind+':'+opts.target;
+    return `<button class="abtn" data-a="fedMotion" data-x="${esc(x)}" ${q.ok?'':'disabled'}>${esc(label)}</button>${q.ok?'':`<div class="mini">${esc(q.why)}</div>`}`;
+  },
+  fedMembers(f){
+    const counts=f.vote?fedVoteCounts(f):null,w=counts?counts.weights:fedLiveWeights(f);
+    let h='<div class="mini">İhraç hedefi kendi ihracında oy kullanamaz; hedef dışında en az iki üye gerekir. Öneri 80 ◈; ret halinde bedel iade edilmez.</div><table class="fedTable"><thead><tr><th>Devlet</th><th>Durum</th><th>Oy ağırlığı</th><th>İşlem</th></tr></thead><tbody>';
+    for(const id of f.members){const o=G.emps[id];if(!o)continue;h+=`<tr><td><button class="abtn" data-a="fedMember" data-x="${id}" ${id===G.p.id?'disabled':''}>${esc(o.name)}${id===G.p.id?' (sen)':''}</button></td><td>${id===f.leader?'Başkan':'Üye'}</td><td>${counts&&!counts.eligible.includes(id)?'Bu gündemde oy yok':w[id]||1}</td><td>${id!==G.p.id?this.fedMotionButton('expel',{target:id},'İHRAÇ ÖNER · 80 ◈')+this.fedMotionButton('elect',{target:id},'Başkan öner · 50 ◈'):''}</td></tr>`;}
+    h+='</tbody></table><details class="dcDetails"><summary>Üyelik önerisi gönder</summary>';
+    for(const o of G.emps.filter(o=>o!==G.p&&G.p.contact[o.id]&&!o.dead&&!o.wild&&!findFed(o)))h+=`<div class="box"><b>${esc(o.name)}</b>${this.fedMotionButton('admit',{target:o.id},'Üyelik öner · 60 ◈')}</div>`;
+    return h+'</details>';
+  },
   openFed(automatic=false){
+    const old=$('diploPane').querySelector('.fedTabBody');
+    if(this._fedTabsWorld!==G.emps){this._fedTabsWorld=G.emps;this._fedOpen={};this._fedScroll={};this.fedTab='general';this._fedRenderedTab=null;}
+    if(old&&this._fedRenderedTab){this._fedScroll[this._fedRenderedTab]=old.scrollTop;this._fedOpen[this._fedRenderedTab]=[...old.querySelectorAll('details[open]')].map(d=>d.querySelector('summary')?.textContent);}
+    const tabs={general:'GENEL',members:'ÜYELER',votes:'OYLAMALAR',laws:'YASALAR',military:'ASKERÎ',manage:'YÖNETİM'};
+    const tab=Object.hasOwn(tabs,this.fedTab)?this.fedTab:'general';
     this._jointSurface='fed';
     const e = G.p;
     const f = findFed(e);
-    let h = `<div class="dpBox dcBox fedBox" style="width:min(640px,100%)">
+    let h = `<div class="dpBox dcBox fedBox">
       <div class="dpHd"><span>🏛 FEDERASYON</span>
         <button class="riX" data-a="closeFed">✕</button></div>
-      <div class="dpBody dcBody">`;
+      ${f?`<nav class="fedTabs" aria-label="Federasyon bölümleri">${Object.entries(tabs).map(([k,n])=>`<button class="abtn ${tab===k?'pri':''}" data-a="fedTab" data-x="${k}" aria-pressed="${tab===k}">${n}</button>`).join('')}</nav>`:''}
+      <div class="dpBody dcBody ${f?'fedTabBody':''}" data-fed-tab="${tab}">`;
 
     if (!f){
       const allies = G.emps.filter(o=>!o.dead && !o.wild && o.id!==0 && e.ally[o.id]);
@@ -3745,13 +3788,10 @@ const UI = {
         });
       }
     } else {
-      h+=`<div class="ph">MEVCUT FEDERASYONUM</div><div class="envRow"><span><canvas class="identityBadge" data-identity="federation" data-id="${f.id}" width="30" height="30"></canvas> ${esc(f.name)}</span><b>${f.members.length} üye</b></div>`;
-      h+=this.fedGovernance(f);
-      h+=`<div class="mini">Kimlik kökeni: ${esc(FED_TYPES[f.identityType||f.type]?.n||'Askerî')}. Tür reformunda ad ve amblem korunur; güncel yükümlülükler aşağıdadır.</div>`;
-      h+=this.jointPanel(null,'fed');
-      h += `<div class="envRow"><span>${esc(f.name)}</span>
-        <b style="color:#6ff2c8">${f.members.length} üye</b></div>`;
-
+      if(tab==='general'){
+      h+=`<div class="envRow"><span>${esc(f.name)} · ${esc(fedType(f).n)}</span><b>${f.members.length} üye</b></div><div class="mini">Başkan: ${esc(G.emps[f.leader]?.name||'—')} · Oy rejimi: ${esc(FED_BALLOTS[fedBallot(f)]?.n||'—')}</div><p class="mini">${esc(fedDutyText(f))}</p><div class="mini">Anayasa: üyelik ${fedCharter(f).admission==='allies'?'ortak müttefikler':'temaslı bağımsız adaylar'} · savunma ${fedCharter(f).defense==='auto'?'otomatik':'oylama'} · saldırı ${fedCharter(f).offense==='auto'?'onaylı taahhüt':'oylama'}.</div><button class="abtn" data-a="fedTab" data-x="votes">${f.vote?'BEKLEYEN OYLAMAYI İNCELE':'Oylamalar ve son karar'}</button>`;
+      const enemies=G.emps.filter(o=>!o.dead&&!o.wild&&f.members.some(id=>G.emps[id]?.war[o.id]));
+      h+=`<div class="ph">AKTİF SAVAŞLAR</div><div class="mini">${enemies.map(o=>esc(this.diploName(o.id))).join(', ')||'Yok'}</div>`;
       /* ═══ FAZ 50: FEDERAL FON PANELİ ═══ */
       if (typeof fedFundStatus === 'function'){
         const fs2 = fedFundStatus(f);
@@ -3778,28 +3818,23 @@ const UI = {
         }
       }
 
-      h += `<div class="ph">ÜYELER</div>`;
-      f.members.forEach(m=>{
-        const o = G.emps[m];
-        if (!o) return;
-        /* FAZ 66: renk noktası yerine ırk portresi */
-        h += `<div class="pchip"><canvas class="dpPort chipPort" width="64" height="64"
-            data-ps="${statePortraitSeed(o)}" data-lk="${o.look||'humanoid'}" data-col="${o.col}"
-            data-pers="${typeof personaKey==='function'?personaKey(o):'yayilmaci'}"></canvas>
-          <div class="pi"><div class="pn" style="color:${o.col}">${esc(o.name)}${m===0?' (sen)':''}</div>
-          <div class="pm">${aiKnownSystems(e,o.id).length} bilinen sistem · filo ${powerLabel(e,o)}</div></div></div>`;
-      });
-
+      }
+      if(tab==='members')h+=this.fedMembers(f);
+      if(tab==='manage')h+=this.fedGovernance(f,'manage')+`<button class="abtn dgr" data-a="fedLeave">FEDERASYONDAN AYRIL…</button>`;
+      if(tab==='military'){
+        const navy=G.fleets.filter(fl=>fl.federal&&fl.fedId===f.id);
+        h+=`<p class="mini">${esc(fedDutyText(f))}</p><div class="row"><span>Federal donanma</span><b>${navy.length} filo · ${navy.reduce((n,fl)=>n+fl.ships.length,0)} gemi</b></div><div class="mini">Yönetim: ${esc(G.emps[f.leader]?.name||'—')}. Savaş sonrası yeni vassalların bağımsız cepheleri ve sözleşmeleri ilgili devletin Vassal Yönetimi bölümünde görünür.</div>`+this.fedGovernance(f,'military')+this.jointPanel(null,'fed');
+        if(f.laws.filo)h+=`<div class="row"><span>Ortak filo hazinesi</span><b>${Math.round(f.treasury)} ▰</b></div>`;
+      }
+      if(tab==='laws'){
       h += `<div class="ph">YASALAR</div>`;
       h += `<div class="mini">Federasyona sonradan katılan üyeler de yürürlükteki
         tüm yasalara tabi olur — geçmiş oylamaları yeniden yapmaya gerek yoktur.</div>`;
-      for (const k in FED_LAWS){
-        const L = FED_LAWS[k], on = !!f.laws[k];
-        h += `<div class="box" style="${on?'border-color:#6ff2c8':''}">
-          <div class="bt"><span>${L.ico} ${L.n}</span>
-            <span class="tag ${on?'p':''}">${on?'YÜRÜRLÜKTE':'oylanmadı'}</span></div>
-          <div class="bd">${L.d}</div><button class="abtn" data-a="${on?'fedLawRepeal':'fedLawPropose'}" data-x="${k}" ${canFedLaw(e,k,on).ok?'':'disabled'}>${on?'Kaldırmayı öner · 30 ◈':'Öner · 60 ◈'}</button></div>`;
+      h+='<table class="fedTable fedLawTable"><thead><tr><th>Yasa / ayrıntı</th><th>Durum</th><th>İşlem</th></tr></thead><tbody>';
+      for(const k in FED_LAWS){const L=FED_LAWS[k],on=!!f.laws[k],q=canFedLaw(e,k,on);
+        h+=`<tr><td><details><summary>${L.ico} ${esc(L.n)}</summary><p class="mini">${esc(L.d)}</p></details></td><td>${on?'Yürürlükte':'Oylanmadı'}</td><td><button class="abtn" data-a="${on?'fedLawRepeal':'fedLawPropose'}" data-x="${k}" ${q.ok?'':'disabled'}>${on?'Kaldırmayı öner · 30 ◈':'Öner · 60 ◈'}</button>${q.ok?'':`<div class="mini">${esc(q.why)}</div>`}</td></tr>`;
       }
+      h+='</tbody></table>';
 
       h += `<div class="ph">İÇ YASA ÖNERİLERİ · UYUM %${fedCohesion(f)}</div>
         <div class="mini">Öneri bedeli bir kez ödenir, ret halinde iade edilmez. Oyunu ayrıca kullanırsın.
@@ -3819,7 +3854,8 @@ const UI = {
         }
         h += '</details>';
       }
-      if (f.laws.savasOnay){
+      }
+      if (tab==='military'&&f.laws.savasOnay){
         h += '<details class="dcDetails"><summary>⚔ Savaş izni önerileri</summary><div class="mini">İzin önerisi ücretsizdir. Aynı hedef için 90 gün beklenir. Kabul savaşı başlatmaz.</div>';
         for (const target of G.emps.filter(o=>!o.dead && !o.wild && !o.crisisSide && !f.members.includes(o.id) && e.contact[o.id])){
           const gate = canFedWarRequest(e,target), p = f.warPermits && f.warPermits[e.id+'>'+target.id];
@@ -3828,6 +3864,9 @@ const UI = {
         }
         h += '</details>';
       }
+      if(tab==='votes'){
+      if(typeof ArchiveUI!=='undefined'&&ArchiveUI.returnRecord?.world===G.emps)h+='<button class="abtn" data-a="inboxReturn">KARARA GERİ DÖN</button>';
+      h+=this.fedRepresentation(f);
       if (f.lastVote){
         const L = fedVoteLaw(f.lastVote);
         h += `<div class="mini">Son sonuç: ${esc(L ? L.n : f.lastVote.law)} ${f.lastVote.repeal?'(kaldırma)':''} —
@@ -3854,11 +3893,14 @@ const UI = {
         h += `<div class="row"><span>Sonraki oylama</span><b>${ay} ay sonra</b></div>`;
         h += `<div class="mini">Oylama açıldığında bildirim gelir; buradan da oy kullanabilirsin.</div>`;
       }
-      if (hasCivic(e,'council')&&fedBallot(f)==='weighted')
+      }
+      if (tab==='votes'&&hasCivic(e,'council')&&fedBallot(f)==='weighted')
         h += `<div class="mini" style="color:#6ff2c8">✧ Konsey Mimarı: oyun iki kat ağırlıkta sayılıyor</div>`;
     }
     h += `</div></div>`;
-    this.surfaceRender($('diploPane'),h,'federation',automatic);
+    this.surfaceRender($('diploPane'),h,'federation:'+tab,automatic);
+    const body=$('diploPane').querySelector('.fedTabBody');if(body){for(const d of body.querySelectorAll('details'))d.open=(this._fedOpen[tab]||[]).includes(d.querySelector('summary')?.textContent);body.scrollTop=this._fedScroll[tab]||0;}
+    this._fedRenderedTab=tab;
     paintEmblems();
     $('diploPane').classList.add('show');
   },
@@ -6315,11 +6357,12 @@ const UI = {
   },
 
   /* =============== FEDERASYON OYLAMASI =============== */
-  fedGovernance(f){
+  fedGovernance(f,section='all'){
     const e=G.p,T=fedType(f),charter=fedCharter(f);
     const button=(kind,opts,label)=>{const q=canFedMotion(e,kind,opts);const x=kind==='reform'?kind+':'+opts.type:kind==='charter'?kind+':'+opts.field+':'+opts.value:kind==='joinWar'?kind+':'+opts.target+':'+opts.sponsor:kind+':'+opts.target;
       return `<button class="abtn" data-a="fedMotion" data-x="${esc(x)}" ${q.ok?'':'disabled'}>${esc(label)}</button>${q.ok?'':`<div class="mini">${esc(q.why)}</div>`}`;};
-    let h=`<div class="box"><b>${T.ico} ${T.n}</b><div class="mini">${T.d}</div><div class="mini">Başkan: ${esc(G.emps[f.leader]?.name||'İlk bakımda belirlenir')}</div><div class="mini">${fedDutyText(f)}</div></div>`;
+    let h='';if(section!=='military'){
+    h+=`<div class="box"><b>${T.ico} ${T.n}</b><div class="mini">${T.d}</div><div class="mini">Başkan: ${esc(G.emps[f.leader]?.name||'İlk bakımda belirlenir')}</div><div class="mini">${fedDutyText(f)}</div></div>`;
     h+=this.fedRepresentation(f);
     if(f.reform)h+=`<div class="box"><b>Bekleyen reform: ${FED_TYPES[f.reform.type].n}</b><div class="mini">${Math.ceil(Math.max(0,f.reform.at-G.day)/30)} ay kaldı. Yeni avantaj/yükümlülükler geçiş tamamlanınca başlar.</div></div>`;
     h+=`<details class="dcDetails"><summary>Anayasa ve tür reformu</summary><div class="mini">Reform/anayasa: uygun üyelerin %75’i. Yeni kararlar: mutlak üye çoğunluğu ve ağırlıklı evet üstünlüğü. Oylar 90 gün. Oyuncu kendi önerisinde ayrıca oy verir. Başkan tek başına yasa, üye veya savaş kararı dayatamaz.</div>`;
@@ -6329,10 +6372,8 @@ const UI = {
     }
     for(const type of Object.keys(FED_TYPES).filter(k=>k!==(f.type||'askeri')))h+=button('reform',{type},FED_TYPES[type].n+' reformu · 150 ◈');
     h+='<div class="mini">Tür reformu: 12 ay geçiş, kabulden sonra 120 ay yeni reform beklemesi. Eski yasalar korunur; geçmiş savaşlara yeni katılım yükümlülüğü uygulanmaz. Saldırı taahhüdüne hayır/çekimser kalan oyuncu otomatik katılmaz.</div></details>';
-    h+='<details class="dcDetails"><summary>Üyelik ve başkanlık</summary>';
-    for(const id of f.members){if(id!==e.id)h+=`<div class="box"><b>${esc(G.emps[id].name)}</b>`+button('expel',{target:id},'İhraç oylaması · 80 ◈')+button('elect',{target:id},'Başkan öner · 50 ◈')+'</div>';}
-    for(const o of G.emps.filter(o=>o!==e&&e.contact[o.id]&&!o.dead&&!o.wild&&!findFed(o))){const q=fedAdmissionGate(f,o);if(q.ok)h+=`<div class="box"><b>${esc(o.name)}</b>`+button('admit',{target:o.id},'Üyelik öner · 60 ◈')+'</div>';}
-    h+='<button class="abtn" data-a="fedLeave">FEDERASYONDAN AYRIL</button><div class="mini">Ayrılış karşılıklı üye ittifaklarını sonlandırır; yeniden giriş 24 ay bekler.</div><div class="mini">İhraç hedefi oy kullanamaz. En az iki diğer üye ve kalan seçmenlerin mutlak çoğunluğu gerekir. Kabul oylaması adayın kendi yanıtını bekler. Ayrılan devlet için 24 ay yeni üyelik beklemesi vardır.</div></details>';
+    }
+    if(section!=='manage'){
     h+='<details class="dcDetails"><summary>Ortak savaş kararları</summary><div class="mini">Onay savaş başlatmaz. Yalnız evet oyu veren üyeler uygulama listesine girer; uygulamada antlaşma, Konsey, vasallık ve hedef yeniden denetlenir.</div>';
     for(const target of G.emps.filter(o=>e.contact[o.id]&&!o.dead&&!o.wild&&!o.crisisSide&&!f.members.includes(o.id))){
       h+=`<div class="box"><b>${esc(target.name)}</b>`;
@@ -6341,6 +6382,7 @@ const UI = {
     }
     for(const d of Object.values(f.decisions||{}))if(d.state==='ready')h+=`<div class="box"><b>${d.kind==='newWar'?'Ortak savaş izni':'Mevcut savaşa destek'} · ${esc(e.contact[d.target]?G.emps[d.target]?.name:'Temassız hedef')}</b><div class="mini">${Math.ceil(Math.max(0,d.expires-G.day))} gün geçerli. Katılımcılar kendi evet oylarını verdi.</div><button class="abtn" data-a="fedExecute" data-x="${f.id}:${d.id}" ${e.id===f.leader||e.id===d.by?'':'disabled'}>KARARI UYGULA</button></div>`;
     h+='</details>';
+    }
     return h;
   },
   fedRepresentation(f){
@@ -6352,13 +6394,20 @@ const UI = {
     return h+'</div>';
   },
   fedAgendaContext(v){
-    if (!v) return '';
-    if (v.repeal) return '<div class="mini">Öneri: bu yasayı yürürlükten kaldır. Kabulde etkileri sona erer.</div>';
-    if(v.kind==='motion'){const target=G.emps[v.target],name=target&&(G.p.contact[target.id]||findFed(G.p)?.members.includes(target.id))?target.name:'Bilinen hedef yok';return `<div class="mini">Hedef: ${esc(name)} · ${esc(v.field||'')} ${esc(v.value||'')} · Öneren: ${esc(G.emps[v.proposer]?.name||'Ayrılmış üye')}</div>`;}
-    if (v.kind !== 'war') return '';
-    const who = G.emps[v.proposer], target = G.emps[v.target];
-    const name = target && (target.id === G.p.id || G.p.contact[target.id]) ? target.name : 'Temassız devlet';
-    return `<div class="mini">Öneren: ${esc(who ? who.name : 'Ayrılmış üye')} · Hedef: ${esc(name)}</div>`;
+    if(!v)return '';
+    const f=findFed(G.p),label=fedVoteLaw(v),name=id=>esc(id===G.p.id||G.p.contact[id]||f?.members.includes(id)?G.emps[id]?.name||'Ayrılmış üye':'Temassız devlet');
+    let effect=v.repeal?'Yasa kaldırılır; etkileri sona erer.':label?.d||'';
+    if(v.kind==='motion')effect=({admit:'Üyelik daveti açılır; adayın ayrıca yükümlülükleri kabul etmesi gerekir.',expel:'Hedefin üyeliği ve üye ittifakları sonlanır; mevcut savaşları sürer. Yeniden üyelik 24 ay bekler.',elect:'Başkanlık ve mevcut federal gemilerin yönetimi seçilen üyeye geçer.',newWar:'Onay tek başına savaş başlatmaz. Ayrı uygulamada yalnız evet oyu veren uygun üyeler katılır.',joinWar:'Mevcut savaşa destek kararı hazırlanır. Ayrı uygulamada yalnız evet oyu veren uygun üyeler katılır.'})[v.motion]||effect;
+    if(v.motion==='charter'){
+      const choices={defense:{auto:'Yeni saldırılarda otomatik federasyon savunması',vote:'Savunma için oylama'},offense:{auto:'Açık onay veren üyelerin yeni saldırı savaşlarına katılım taahhüdü',vote:'Saldırıya katılım için oylama'},admission:{allies:'Yalnız bütün üyelerle karşılıklı müttefik adayların kabulü',contact:'Temaslı bağımsız adayların oylamayla kabulü'},ballot:Object.fromEntries(Object.entries(FED_BALLOTS).map(([k,b])=>[k,b.n]))};
+      effect='Anayasa değişikliği: '+(choices[v.field]?.[v.value]||v.value)+'. '+effect;
+    }
+    if(v.motion==='reform')effect=(FED_TYPES[v.type]?.n||'Federasyon türü')+' türüne reform. '+effect;
+    if(v.kind==='war')effect='Öneren devletin bu hedefe savaş açmasına geçici izin verilir. Onay savaşı başlatmaz; üyelerin katılımı mevcut anayasa ve yükümlülüklere bağlıdır.';
+    let h=`<div class="box"><b>KABUL EDİLİRSE</b><p class="mini">${esc(effect)}</p><div class="mini">Öneren: ${name(v.proposer)}${Number.isInteger(v.target)?' · Hedef: '+name(v.target):''}${f?' · Federasyon: '+esc(f.name):''}</div><div class="mini">Hayır oyu öneriye karşıdır; sonuç mevcut çoğunluk hesabıyla belirlenir. Oy kullanmak için ek kaynak bedeli yoktur; öneri bedeli önerenden alınmıştır.</div>`;
+    if(f&&f.vote===v){const c=fedVoteCounts(f);h+=`<div class="mini">${esc(fedVoteRule(f,c))}</div><div class="mini">Destekleyenler: ${(Array.isArray(v.yes)?v.yes:[]).map(name).join(', ')||'yok'} · Karşı çıkanlar: ${(Array.isArray(v.no)?v.no:[]).map(name).join(', ')||'yok'} · Beklenen: ${c.waiting.map(name).join(', ')||'yok'}</div>`;}
+    if(f&&(v.kind==='war'||['newWar','joinWar'].includes(v.motion)))h+=`<div class="mini">${esc(fedDutyText(f))} Üyeler: ${f.members.map(name).join(', ')}</div>`;
+    return h+'</div>';
   },
   fedVote(f){
     const L = fedVoteLaw(f.vote);
@@ -6369,6 +6418,10 @@ const UI = {
   fedVoteOpen(fid){
     const f = fedOf(fid);
     if (!f || !f.vote || !f.members.includes(G.p.id)){ return; }
+    if(typeof ArchiveUI!=='undefined'&&typeof DiplomaticInbox!=='undefined'){
+      DiplomaticInbox.sync();const rec=DiplomaticInbox.state().records.find(r=>r.kind==='fedvote'&&r.fid===fid&&r.token===fedVoteToken(f.vote));
+      if(rec){ArchiveUI.record(rec.id);return;}
+    }
     const L = fedVoteLaw(f.vote);
     if (!L) return;
     const token = fedVoteToken(f.vote), counts = fedVoteCounts(f);
@@ -7341,7 +7394,7 @@ const UI = {
     const it = list[i];
     if(G.minNote===it.uid){G.minNote=null;this.topbar();}
     if(typeof DiplomaticInbox!=='undefined'&&DiplomaticInbox.supported(it.kind)&&typeof ArchiveUI!=='undefined'){
-      const rec=DiplomaticInbox.capture(it);if(rec&&it.kind!=='aideal'){ArchiveUI.record(rec.id);return;}
+      const rec=DiplomaticInbox.capture(it);if(rec){ArchiveUI.record(rec.id);return;}
     }
     list.splice(i, 1);
     this._openNote = it;               // geri koyabilmek için sakla
@@ -7620,7 +7673,7 @@ const UI = {
   vsContract(sub){
     const c=vassalContractOf(sub);if(!c)return '';
     const lord=overlordOf(sub),other=sub===G.p?lord:sub,ready=G.day>=c.started+c.terms.renegotiate*30;
-    return `<section class="box"><div class="bt">YÜRÜRLÜKTEKİ VASALLIK SÖZLEŞMESİ · ${esc(VASSAL_TYPES[c.type].n)}</div><div class="mini">${esc(sub.name)} → ${esc(lord.name)} · başlangıç gün ${Math.floor(c.started)} · ${c.expires===null?'süresiz':'bitiş gün '+Math.floor(c.expires)}${c.legacy?' · eski kaydın fiilî hükümleri':''}</div>${this.vsTermsText(c.type,c.terms,sub)}<div class="act2"><button class="abtn" data-a="vsOpen" data-x="${other.id}:renew" ${ready?'':'disabled'}>SÖZLEŞMEYİ YENİDEN MÜZAKERE ET</button>${sub===G.p?`<button class="abtn" data-a="vsOpen" data-x="${lord.id}:release">BARIŞÇIL BAĞIMSIZLIK TALEBİ</button><button class="abtn dgr" data-a="revolt">BAĞIMSIZLIK SAVAŞI…</button>`:''}</div><div class="mini">Yeniden müzakere 60 ◈ · bağımsızlık talebi 40 ◈ · teklif gönderimi aktarımı başlatmaz.</div></section>`;
+    return `<section class="box"><div class="bt">YÜRÜRLÜKTEKİ VASALLIK SÖZLEŞMESİ · ${esc(VASSAL_TYPES[c.type].n)}</div><div class="mini">${c.source==='forced'?'Savaşla kazanılmış vasallık: ilişki düşebilir; düşük sadakat tek başına sözleşmeyi sona erdirmez.':'Karşılıklı sözleşme / eski kayıt hükümleri.'} Sadakat ${Math.round(vassalLoyalty(sub))} · bağımsızlık arzusu ${Math.round(sub.vassalAnger||0)}. İlişki ${Math.round(sub.rel[lord.id]||0)}; sadakat güç dengesi, süre ve emirlerden de etkilenir.</div><div class="mini">${esc(sub.name)} → ${esc(lord.name)} · başlangıç gün ${Math.floor(c.started)} · ${c.expires===null?'süresiz':'bitiş gün '+Math.floor(c.expires)}${c.legacy?' · eski kaydın fiilî hükümleri':''}</div>${this.vsTermsText(c.type,c.terms,sub)}<div class="mini">Devam eden savaşlar: ${G.emps.filter(o=>!o.dead&&sub.war[o.id]).map(o=>esc(this.diploName(o.id))).join(', ')||'yok'}. Bağımsız cepheler sözleşmeyle kendiliğinden kapanmaz. ${c.terms.defense?'Koruma yükümlülüğü yeni senyördedir.':'Sözleşmede otomatik koruma yoktur.'}</div><div class="act2"><button class="abtn" data-a="vsOpen" data-x="${other.id}:renew" ${ready?'':'disabled'}>SÖZLEŞMEYİ YENİDEN MÜZAKERE ET</button>${sub===G.p?`<button class="abtn" data-a="vsOpen" data-x="${lord.id}:release">BARIŞÇIL BAĞIMSIZLIK TALEBİ</button><button class="abtn dgr" data-a="revolt">BAĞIMSIZLIK SAVAŞI…</button>`:''}</div><div class="mini">${ready?'Yeniden müzakere hakkı açık':'Yeniden müzakere için '+Math.ceil((c.started+c.terms.renegotiate*30-G.day)/30)+' ay kaldı'}. Yeniden müzakere 60 ◈ · bağımsızlık talebi 40 ◈ · teklif gönderimi aktarımı başlatmaz.</div></section>`;
   },
   vsRead(){
     const v=this.vs;if(!v?.edit||!$('vsClauses'))return;

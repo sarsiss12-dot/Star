@@ -12,7 +12,7 @@ function scenario(root,seed,months=120){
    UI.aiOffer=function(off){stats.playerAttempts++;const uid=G.inboxUid||0;const r=originalOffer.call(this,off);
      const notes=(G.inbox||[]).filter(n=>n.kind==='aideal'&&n.uid>uid);
      for(const n of notes){stats.playerDelivered++;playerDays.push({day:G.day,from:off.from});
-       this.openNote(n.uid);this._hooks.offNo();stats.playerRejected++;}return r;};
+       this.openNote(n.uid);(this._hooks.inboxNo||this._hooks.offNo)();stats.playerRejected++;}return r;};
    aiNegotiate=function(p,t,g,w,...extra){const sig=JSON.stringify([p.id,t.id,g,w]);
      if(last[sig]!==undefined&&G.day-last[sig]<180)stats.aiRepeatedWithin180++;
      const r=originalNeg(p,t,g,w,...extra);stats.aiNegotiations++;if(r.uygulandi)stats.aiExecuted++;
@@ -32,7 +32,7 @@ function stress(root){
    var offer={from:E.id,to:0,give:[{t:'res',r:'min',v:100}],want:[{t:'res',r:'ene',v:50}]};
    var delivered=0,relBefore=E.rel[0];
    for(let i=0;i<12;i++){UI.aiOffer(offer);const note=G.inbox.find(n=>n.kind==='aideal');
-     if(note){delivered++;UI.openNote(note.uid);UI._hooks.offNo();}G.day+=30;}
+     if(note){delivered++;UI.openNote(note.uid);(UI._hooks.inboxNo||UI._hooks.offNo)();}G.day+=30;}
    var declineDelta=E.rel[0]-relBefore;
    G.inbox=[];G.day+=900;UI.aiOffer(offer);var old=G.inbox[0];
    G.day=old.data.expires+1;UI.aiOffer(offer);var renewed=G.inbox.some(n=>n.kind==='aideal'&&!dealExpired(n.data));

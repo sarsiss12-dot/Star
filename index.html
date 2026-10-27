@@ -1264,6 +1264,24 @@ body.fauxFull canvas#map{width:100vw !important;height:100dvh !important}
 /* 96G.1: scoped subject contract inputs */
 .vsField{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:10px 0;min-width:0;flex-wrap:wrap}.vsField input,.vsField select{max-width:100%;min-width:0;width:180px;box-sizing:border-box}.vsField input[type=checkbox]{width:24px;height:24px}#vsScroll,#vsClauses{min-width:0;overflow-wrap:anywhere}
 /* END 96G.1 CONTRACT UI */
+/* 96H.5.2: bounded federation tabs, fleet groups and safe three-column cards */
+#diploPane:has(.fedBox){align-items:stretch;justify-content:flex-start;padding:0}
+#diploPane .fedBox{width:min(1040px,100%);height:100dvh;max-height:100dvh;overflow:hidden;animation:none}
+.fedTabs{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:3px;padding:4px 6px;flex:0 0 auto;border-bottom:1px solid var(--line)}
+.fedTabs .abtn{min-width:0;min-height:44px;margin:0;padding:3px;font-size:11px;letter-spacing:0}
+.fedTabBody{flex:1 1 0;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:8px 12px}
+.fedTable{width:100%;border-collapse:collapse;table-layout:fixed;font-size:12px}
+.fedTable th,.fedTable td{padding:4px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;overflow-wrap:anywhere}
+.fedTable th:first-child{width:26%}.fedTable th:nth-child(2){width:14%}.fedTable th:nth-child(3){width:14%}
+.fedLawTable th:first-child{width:40%}.fedLawTable th:nth-child(2){width:20%}.fedLawTable th:nth-child(3){width:40%}
+.fedTable .abtn{min-height:44px;font-size:11px;padding:4px;margin:2px 0}
+.fleetFilters{display:flex;flex-wrap:wrap;gap:3px}.fleetFilters .abtn{flex:1 0 70px;min-height:44px;padding:4px;font-size:11px}
+@media(min-width:700px){#game:has(.buildingGrid){--sb:clamp(350px,22vw,460px)}}
+#panel{container-type:inline-size}
+.buildingGrid.act2{grid-template-columns:repeat(2,minmax(0,1fr))}
+@container(min-width:318px){.buildingGrid.act2{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:480px){.fedTabs{grid-template-columns:repeat(3,minmax(0,1fr))}.fedTable th,.fedTable td{padding:2px}.fedTable th:nth-child(3){width:16%}.fedTabBody{padding:6px}}
+/* END 96H.5.2 UI */
 </style>
 </head>
 <body>

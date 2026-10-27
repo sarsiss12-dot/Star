@@ -23,29 +23,29 @@ test('12 zorlanmış aylık tekrar: tek teklif ve tek ilişki bedeli',()=>{
  const s=stress(ROOT);eq(s.delivered,1);eq(s.declineDelta,-5);eq(s.expiredOfferRenewed);
 });
 test('ret masraf/RNG tüketmez, 27 ay hatırlanır ve çift dokunuş tek ceza verir',()=>{
- const h=fresh();h.run(`open();var reject=UI._hooks.offNo;var res=JSON.stringify([E.res,G.p.res]),rng=RND_STATE;
+ const h=fresh();h.run(`open();var reject=UI._hooks.inboxNo;var res=JSON.stringify([E.res,G.p.res]),rng=RND_STATE;
    reject();reject();var wait=playerOfferWait(offer);`);
  eq(h.run('wait'),810);eq(h.run('E.rel[0]'),45);eq(h.run('G.p.offerRefusals.length'),1);
  eq(h.run('JSON.stringify([E.res,G.p.res])===res&&RND_STATE===rng'));
 });
 for(const [delta,expected] of [[809,false],[810,true],[811,true]])
 test('ret sınırı '+delta+' gün: bildirim '+expected,()=>{
- const h=fresh();h.run(`open();UI._hooks.offNo();G.day+=${delta};UI.aiOffer(offer);`);
+ const h=fresh();h.run(`open();UI._hooks.inboxNo();G.day+=${delta};UI.aiOffer(offer);`);
  eq(h.run('G.inbox.length>0'),expected);
 });
 test('damga ve madde sırası ret kapısını aşamaz',()=>{
- const h=fresh();h.run(`offer.give.push({t:'res',r:'yiy',v:80});open();UI._hooks.offNo();
+ const h=fresh();h.run(`offer.give.push({t:'res',r:'yiy',v:80});open();UI._hooks.inboxNo();
    var reverse={...offer,give:offer.give.slice().reverse(),born:G.day+1,expires:G.day+700};
    var old=state();UI.aiOffer(reverse);`);
  eq(h.run('G.inbox.length'),0);eq(h.run('state()===old'));
 });
 test('farklı miktar ve farklı devlet aynı gün teklif gönderebilir',()=>{
- const h=fresh();h.run(`open();UI._hooks.offNo();
+ const h=fresh();h.run(`open();UI._hooks.inboxNo();
    UI.aiOffer({...offer,give:[{t:'res',r:'min',v:150}]});UI.aiOffer({...offer,from:B.id});`);
  eq(h.run('G.inbox.length'),2);
 });
 for(const t of ['nap','pact','ally'])test(t+' reddi de aynı şartı bekletir',()=>{
- const h=fresh();h.run(`offer={from:E.id,to:0,give:[{t:'${t}'}],want:[]};open();UI._hooks.offNo();UI.aiOffer(offer);`);
+ const h=fresh();h.run(`offer={from:E.id,to:0,give:[{t:'${t}'}],want:[]};open();UI._hooks.inboxNo();UI.aiOffer(offer);`);
  eq(h.run('G.inbox.length'),0);eq(h.run('playerOfferWait(offer)'),810);
 });
 test('kapatmak ret sayılmaz',()=>{
@@ -53,29 +53,29 @@ test('kapatmak ret sayılmaz',()=>{
  eq(h.run('E.rel[0]'),50);eq(h.run('playerOfferWait(offer)'),0);eq(h.run("typeof DiplomaticInbox!=='undefined'?DiplomaticInbox.pending():G.inbox.length"),1);
 });
 test('karşı teklif hazırlamak ret sayılmaz, karşı kartın reddi sayılır',()=>{
- const h=fresh();h.run(`open();UI._hooks.offCounter();var before=playerOfferWait(offer);UI.act('ctrNo');UI.act('ctrNo');`);
+ const h=fresh();h.run(`open();UI._hooks.inboxCounter();var before=playerOfferWait(offer);UI.act('ctrNo');UI.act('ctrNo');`);
  eq(h.run('before'),0);eq(h.run('playerOfferWait(offer)'),810);eq(h.run('E.rel[0]'),45);
 });
 test('kabul iki kez uygulanamaz ve ret düğmesi sonra ceza veremez',()=>{
- const h=fresh();eq(h.run('dealQuote(offer).ok'));h.run(`open();var yes=UI._hooks.offYes,no=UI._hooks.offNo;
+ const h=fresh();eq(h.run('dealQuote(offer).ok'));h.run(`open();var yes=UI._hooks.inboxYes,no=UI._hooks.inboxNo;
    var min=G.p.res.min,ene=G.p.res.ene;yes();var relation=E.rel[0];yes();no();`);
  eq(h.run('G.p.res.min-min'),100);eq(h.run('G.p.res.ene-ene'),-50);
  eq(h.run('playerOfferWait(offer)'),0);eq(h.run('E.rel[0]===relation'));
 });
 test('eski dünyadaki açık ret/kabul düğmeleri yeni kaydı değiştiremez',()=>{
- const h=fresh();h.run(`open();var no=UI._hooks.offNo,yes=UI._hooks.offYes;var txt=serialize();deserialize(txt);
+ const h=fresh();h.run(`open();var no=UI._hooks.inboxNo,yes=UI._hooks.inboxYes;var txt=serialize();deserialize(txt);
    var before=state();no();yes();`);eq(h.run('state()===before'));
 });
 test('başka pencere açılınca eski teklif callbackleri etkisiz',()=>{
- const h=fresh();h.run(`open();var no=UI._hooks.offNo,yes=UI._hooks.offYes;UI.opLogMenu();
+ const h=fresh();h.run(`open();var no=UI._hooks.inboxNo,yes=UI._hooks.inboxYes;UI.opLogMenu();
    var before=state();no();yes();`);eq(h.run('state()===before'));
 });
 test('yeni teklif eski teklif callbackini geçersiz kılar',()=>{
- const h=fresh();h.run(`open();var no=UI._hooks.offNo;UI.aiDealOpen({...offer,from:B.id});
+ const h=fresh();h.run(`open();var no=UI._hooks.inboxNo;UI.aiDealOpen({...offer,from:B.id});
    var before=state();no();`);eq(h.run('state()===before'));
 });
 test('v8 ret süresini korur, eski callback kalıcı kayda müdahale edemez',()=>{
- const h=fresh();h.run(`open();UI._hooks.offNo();G.day+=100;var before=playerOfferWait(offer),rng=RND_STATE;
+ const h=fresh();h.run(`open();UI._hooks.inboxNo();G.day+=100;var before=playerOfferWait(offer),rng=RND_STATE;
    var txt=serialize();deserialize(txt);UI.aiOffer(offer);`);
  eq(h.run('playerOfferWait(offer)'),710);eq(h.run('RND_STATE===rng'));eq(h.run('G.inbox.length'),0);eq(h.run('JSON.parse(txt).v'),8);
 });

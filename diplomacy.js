@@ -6247,6 +6247,23 @@ function vassalsOf(e){
 }
 function vassalType(e){ return isVassal(e) ? (e.vassalType || 'haracguzar') : null; }
 
+/* 96H.5.2: capitulation ends only the federation's proven common front.
+   An independent declaration has its own campaign and must survive. */
+function subjugationFedPeace(lord,sub){
+ const f=findFed(lord),front=warLedgerFind(lord.id,sub.id);
+ if(!f||!front||front.legacy||front.ended!==null)return;
+ const role=front.roles[front.sides.indexOf(lord.id)];
+ const peers=G.warLedger.fronts.filter(x=>x.ended===null&&!x.legacy&&x.campaign===front.campaign&&x.sides.includes(sub.id)&&x.roles[x.sides.indexOf(sub.id)]!==role)
+  .map(x=>x.sides.find(id=>id!==sub.id)).filter(id=>id!==lord.id&&f.members.includes(id));
+ for(const id of peers){const peer=G.emps[id];if(!peer||peer.dead)continue;
+  peer.war[sub.id]=false;sub.war[id]=false;
+  peer.peaceAt=peer.peaceAt||{};sub.peaceAt=sub.peaceAt||{};peer.peaceAt[sub.id]=sub.peaceAt[id]=G.day;
+  for(const [a,b]of [[peer,sub],[sub,peer]])for(const key of ['warDefense','warCause','proxyWar'])if(a[key])delete a[key][b.id];
+  resolveProxyWars(peer,sub);
+ }
+ warLedgerSync('subjugation-federation');
+}
+
 /* Boyun eğdirme: savaş hedefi tamamlandığında uygulanır */
 function subjugate(lord, sub, tur, custom=null, source='forced'){
   const terms=vassalTerms(VASSAL_TYPES[tur]?tur:"haracguzar",custom||vassalDefaultTerms(VASSAL_TYPES[tur]?tur:"haracguzar",true));if(!terms)return false;
@@ -6267,13 +6284,16 @@ function subjugate(lord, sub, tur, custom=null, source='forced'){
   sub.vassalAnger = 0;
   clearBilateralEmbargo(lord,sub);
 
+  subjugationFedPeace(lord,sub);
   /* Savaş biter, ittifak benzeri bir bağ kurulur */
   if (lord.war[sub.id] || sub.war[lord.id]){
     lord.war[sub.id] = false; sub.war[lord.id] = false;
     lord.peaceAt = lord.peaceAt || {}; sub.peaceAt = sub.peaceAt || {};
     lord.peaceAt[sub.id] = G.day; sub.peaceAt[lord.id] = G.day;
+    for(const [a,b]of [[lord,sub],[sub,lord]])for(const key of ['warDefense','warCause','proxyWar'])if(a[key])delete a[key][b.id];
     if (typeof resolveProxyWars === 'function') resolveProxyWars(lord, sub);
   }
+  warLedgerSync('subjugation');
   /* Sınır bekçisi senyörünün savaşlarına katılır */
   if (vassalContractOf(sub)?.terms.war!=='none') vassalJoinWars(lord, sub);
 

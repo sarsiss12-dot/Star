@@ -144,21 +144,21 @@ check('Load income recalculation cannot deduct fund or replay law voting',()=>{
   assert.deepEqual(data(h,'F.fund'),{ala:5,ene:6});assert.equal(h.run('RND_STATE'),h.run('rng'));
 });
 check('Real UI panel exposes proposals, reasons, tally and previous result',()=>{
-  const h=fresh();h.run('UI.openFed()');let html=h.doc.getElementById('diploPane').innerHTML;
-  assert.match(html,/fedLawPropose/);assert.match(html,/90 gün/);assert.match(html,/Üyelik ve yönetim/);assert.match(html,/Savaş Onayı/);
+  const h=fresh();h.run('UI.openFed();UI.fedTab="laws";UI.openFed()');let html=h.doc.getElementById('diploPane').innerHTML;
+  assert.match(html,/fedLawPropose/);assert.match(html,/90 gün/);assert.match(html,/YASALAR/);assert.match(html,/Savaş Onayı/);
   h.run("UI.act('fedLawPropose','bilimAgi')");assert.equal(h.run('G.p.res.etk'),890);
-  assert.match(h.doc.getElementById('diploPane').innerHTML,/Ağırlıklı oylar/);
+  h.run('UI.fedTab="votes";UI.openFed()');assert.match(h.doc.getElementById('diploPane').innerHTML,/Ağırlıklı oylar/);
 });
 check('Real modal callback captures old agenda identity',()=>{
   const h=fresh();open(h);const hooks={};h.sb.captureHook=(a,fn)=>hooks[a]=fn;
-  h.run('UI._hook=captureHook;UI.fedVoteOpen(F.id)');assert.equal(typeof hooks.fedYes,'function');
-  const stale=hooks.fedYes;h.run('F.vote.yes=[1,2];F.vote.no=[]');vote(h);open(h,'serbest');
+  h.run('UI._hook=captureHook;UI.fedVoteOpen(F.id)');assert.equal(typeof hooks.inboxYes,'function');
+  const stale=hooks.inboxYes;h.run('F.vote.yes=[1,2];F.vote.no=[]');vote(h);open(h,'serbest');
   const before=data(h,'F.vote');stale();assert.deepEqual(data(h,'F.vote'),before);
 });
 check('Modal opened before loading cannot vote in the restored world',()=>{
   const h=fresh();open(h);const hooks={};h.sb.captureHook=(a,fn)=>hooks[a]=fn;
   h.run('UI._hook=captureHook;UI.fedVoteOpen(F.id);var saved=serialize();deserialize(saved);F=fedOf(801)');
-  const before=data(h,'F.vote');hooks.fedYes();assert.deepEqual(data(h,'F.vote'),before);
+  const before=data(h,'F.vote');hooks.inboxYes();assert.deepEqual(data(h,'F.vote'),before);
 });
 check('New member receives naval law but cannot vote on an older agenda',()=>{
   const h=fresh();h.run(`F.laws.ortakDon=true;fedNormalize(F);F.charter.admission='contact';for(const id of [0,1,2,3]){G.emps[id].mizac='yayilmaci';G.emps[id].persLock='yayilmaci';G.emps[id].overlord=null;G.emps[id].civics=[];}G.emps[3].ai=false;G.p.contact[3]=true;

@@ -1,0 +1,76 @@
+{
+  "phase": "96H.5.2",
+  "build": "96h52",
+  "save_version": 8,
+  "pwa_cache": "stars-v96h52",
+  "parent_commit": "1f5b43915781e6fcd934cd93609c0360f7b8ea7c",
+  "parent_zip_sha256": "fa50f80f7f214d56e779e63a5a8a2382574e381b78ea5c63da4a76d24b4c7cf9",
+  "files": {
+    "ai.js": "27ae25e44d66f5fdbfb04ea7db69aa75769a3165759b6feb0250b5b753e8c739",
+    "archive-ui.js": "f3b43957f97f2a32add1f40fc22f493eeca89bc5e1db05e5a5de92eef0e9fc03",
+    "audio.js": "6ddf6e388fa404394fee6220c2bfeeb3d1f9601c51a35ccdfe3181a8781942f7",
+    "combat.js": "b4e21fcdb6fdaaa93da07313131470de3e8a3c28b5650226a9c4a2713bde73a5",
+    "commerce-ui.js": "cc7fef5ab43176093251916aaafbdd873424da0630ec46fe6d3d5106a690b8d4",
+    "commerce.js": "978e4f6b01faed1babeade20070447cbcfaa4e2ea70793a78e50f20fbe66be01",
+    "construction.js": "d9b544b0328f26576ff90e02fe49c1b7f3798dfd844a8c39ee8dc6c0890debda",
+    "diplomacy.js": "83c3c4d33eaece8cd82677291480670abcf474ee6526ada79e9961e0d73afc4a",
+    "economic-ledger.js": "67d07f3ee4777cd7c246c8b37dda7cf1577cf86c19a6edeba68945a5d3063501",
+    "economy-ui.js": "61f6e2dcef7f37143821edccf67552718a210ec555f7b8f9074c68191fd5cbcc",
+    "economy.js": "5d412d488760ae2b7193b13822b747788130b63ed782e62bfbd3223154b69d22",
+    "inbox.js": "5f53ac2ca9c3ca8d5f1a12a9e1ba2b2a247ab7e350df0ec9169a13cfe3285204",
+    "index.html": "984d2c51e33637a0b3312a072e3348b5e943f4c2c7156530affeb7d6ceb83259",
+    "main.js": "0171280d808eef33ece3846e7d8e035766f5be8a203964caf821ec9309961957",
+    "manifest.json": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
+    "map.js": "d8ca27ee07c484b7399f95d8031aa70fb7539bcf89d768c8442200b7cba76ae3",
+    "news.js": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
+    "sw.js": "8cdc474575e927637c1e4c50fd475093c34ecccfab30c5395d072fe14acfafdf",
+    "ui.js": "f66b6a6561156c8e2abf06b4dd321e0e081ef39dacd537f0ff91e7ea38266d0e"
+  },
+  "game_zip": "releases/stars-faz96h52.zip",
+  "game_zip_bytes": 763345,
+  "game_zip_sha256": "c5c2debffd2cd6b17c158ae7150a74a3eed774cd00840b4222707fe4b845993c",
+  "game_zip_crc32": "5d758998",
+  "game_zip_members": 20,
+  "crc": "PASS",
+  "runtime_manifest": "PASS",
+  "changed_runtime": [
+    "archive-ui.js",
+    "diplomacy.js",
+    "index.html",
+    "main.js",
+    "sw.js",
+    "ui.js"
+  ],
+  "preserved_ai_sha256": "27ae25e44d66f5fdbfb04ea7db69aa75769a3165759b6feb0250b5b753e8c739",
+  "ai_changes_published": false,
+  "tests": {
+    "suites": 134,
+    "pass": 6055,
+    "fail": 0,
+    "targeted_politics": {
+      "pass": 27,
+      "fail": 0,
+      "included_in_full_total": true
+    },
+    "browser_packaged": {
+      "pass": 12,
+      "fail": 0,
+      "portrait": "layout with rotate overlay suppressed in test only"
+    },
+    "physical_android": "NOT RUN",
+    "user_save_reproduction": "NOT RUN; controlled equivalent fixtures only",
+    "new_240_month_economic_campaign": "NOT RUN; untouched economy and AI bytes; focused politics/war regression used"
+  },
+  "p0": "Proven same-campaign federation fronts close on capitulation; independent/legacy-unproven fronts remain; original contract protection stays active.",
+  "publication": "main fast-forward commit; see tests/audit96h52/github-verification.json in evidence for final commit",
+  "next_phase": [
+    "96H.6.1 economic timing",
+    "Seed404 consumer goods crisis",
+    "Seed11 new-state recovery",
+    "C2 standalone240",
+    "Expansionist funding",
+    "Technocracy/HolyCouncil allocator and eight doctrines",
+    "82 Machine purifier/persona conflict",
+    "Doctrine strategic behavior"
+  ]
+}

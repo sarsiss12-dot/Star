@@ -1,0 +1,111 @@
+{
+  "file": "releases/stars-faz96h52.zip",
+  "bytes": 763345,
+  "sha256": "c5c2debffd2cd6b17c158ae7150a74a3eed774cd00840b4222707fe4b845993c",
+  "crc32": "5d758998",
+  "members": 20,
+  "crc": "PASS",
+  "runtime_manifest": "PASS",
+  "files": {
+    "RELEASE-MANIFEST.json": {
+      "bytes": 2091,
+      "sha256": "317770781c1d037109af34e0f07d279c2612f2f3f109e873c76bb27043e0f5af",
+      "crc32": "56abb72c"
+    },
+    "ai.js": {
+      "bytes": 274094,
+      "sha256": "27ae25e44d66f5fdbfb04ea7db69aa75769a3165759b6feb0250b5b753e8c739",
+      "crc32": "b2a0f0d6"
+    },
+    "archive-ui.js": {
+      "bytes": 16852,
+      "sha256": "f3b43957f97f2a32add1f40fc22f493eeca89bc5e1db05e5a5de92eef0e9fc03",
+      "crc32": "4574c084"
+    },
+    "audio.js": {
+      "bytes": 20197,
+      "sha256": "6ddf6e388fa404394fee6220c2bfeeb3d1f9601c51a35ccdfe3181a8781942f7",
+      "crc32": "8e4ebbb4"
+    },
+    "combat.js": {
+      "bytes": 16353,
+      "sha256": "b4e21fcdb6fdaaa93da07313131470de3e8a3c28b5650226a9c4a2713bde73a5",
+      "crc32": "60f044a8"
+    },
+    "commerce-ui.js": {
+      "bytes": 11105,
+      "sha256": "cc7fef5ab43176093251916aaafbdd873424da0630ec46fe6d3d5106a690b8d4",
+      "crc32": "1d6711a6"
+    },
+    "commerce.js": {
+      "bytes": 29743,
+      "sha256": "978e4f6b01faed1babeade20070447cbcfaa4e2ea70793a78e50f20fbe66be01",
+      "crc32": "8c20977c"
+    },
+    "construction.js": {
+      "bytes": 8838,
+      "sha256": "d9b544b0328f26576ff90e02fe49c1b7f3798dfd844a8c39ee8dc6c0890debda",
+      "crc32": "d9a9cbdd"
+    },
+    "diplomacy.js": {
+      "bytes": 504729,
+      "sha256": "83c3c4d33eaece8cd82677291480670abcf474ee6526ada79e9961e0d73afc4a",
+      "crc32": "fb7d2b02"
+    },
+    "economic-ledger.js": {
+      "bytes": 17672,
+      "sha256": "67d07f3ee4777cd7c246c8b37dda7cf1577cf86c19a6edeba68945a5d3063501",
+      "crc32": "bae504b9"
+    },
+    "economy-ui.js": {
+      "bytes": 17157,
+      "sha256": "61f6e2dcef7f37143821edccf67552718a210ec555f7b8f9074c68191fd5cbcc",
+      "crc32": "5e1d2442"
+    },
+    "economy.js": {
+      "bytes": 212021,
+      "sha256": "5d412d488760ae2b7193b13822b747788130b63ed782e62bfbd3223154b69d22",
+      "crc32": "6d309ad2"
+    },
+    "inbox.js": {
+      "bytes": 11390,
+      "sha256": "5f53ac2ca9c3ca8d5f1a12a9e1ba2b2a247ab7e350df0ec9169a13cfe3285204",
+      "crc32": "73468a8e"
+    },
+    "index.html": {
+      "bytes": 91402,
+      "sha256": "984d2c51e33637a0b3312a072e3348b5e943f4c2c7156530affeb7d6ceb83259",
+      "crc32": "8142cd6c"
+    },
+    "main.js": {
+      "bytes": 479277,
+      "sha256": "0171280d808eef33ece3846e7d8e035766f5be8a203964caf821ec9309961957",
+      "crc32": "b42ca502"
+    },
+    "manifest.json": {
+      "bytes": 1922,
+      "sha256": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
+      "crc32": "641ae79b"
+    },
+    "map.js": {
+      "bytes": 146657,
+      "sha256": "d8ca27ee07c484b7399f95d8031aa70fb7539bcf89d768c8442200b7cba76ae3",
+      "crc32": "b4dcdb97"
+    },
+    "news.js": {
+      "bytes": 6039,
+      "sha256": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
+      "crc32": "a13ff379"
+    },
+    "sw.js": {
+      "bytes": 2801,
+      "sha256": "8cdc474575e927637c1e4c50fd475093c34ecccfab30c5395d072fe14acfafdf",
+      "crc32": "b740dd92"
+    },
+    "ui.js": {
+      "bytes": 545001,
+      "sha256": "f66b6a6561156c8e2abf06b4dd321e0e081ef39dacd537f0ff91e7ea38266d0e",
+      "crc32": "76e86774"
+    }
+  }
+}

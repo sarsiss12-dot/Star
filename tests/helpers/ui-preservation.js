@@ -5,6 +5,12 @@ const hash=s=>createHash('sha256').update(s).digest('hex');
 // block must restore the untouched canonical 93A.1/93C HTML hash.
 // Historical referans-sha.json remains intact; neither half is exempted.
 exports.isReviewedUI=source=>{
+ const phaseStart=source.indexOf('/* 96H.5.2: bounded');
+ if(phaseStart>=0){const marker='/* END 96H.5.2 UI */\n',end=source.indexOf(marker,phaseStart)+marker.length;
+  if(end<phaseStart||hash(source.slice(phaseStart,end))!=='e63c518ea51df1aca92f91854fecdb401292daacc2e88d46a625711221cd2513')return false;
+  source=source.slice(0,phaseStart)+source.slice(end);
+ }
+
  const compactStart=source.indexOf('/* 96H.3.1: compact construction cards */');
  if(compactStart>=0){const marker='/* END 96H.3.1 CONSTRUCTION */\n',end=source.indexOf(marker,compactStart)+marker.length;
   if(end<compactStart||hash(source.slice(compactStart,end))!=='1d547f8e8b1ee8829f2abb62f488018512a6c3b175c7bdadde0457547db16163')return false;
