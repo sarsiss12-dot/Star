@@ -1,0 +1,335 @@
+[
+  {
+    "start": 218,
+    "label": "control",
+    "targetCriticalMonths": 9,
+    "resources": {
+      "min": {
+        "criticalMonths": [
+          219,
+          220,
+          221,
+          222,
+          223,
+          224,
+          226,
+          227,
+          228
+        ],
+        "maxRun": 6,
+        "stockZeroMonths": [
+          221,
+          222
+        ],
+        "minStock": 0,
+        "lastStock": 8.6330977384,
+        "lastNet": 0.23991278039999886
+      },
+      "yiy": {
+        "criticalMonths": [],
+        "maxRun": 0,
+        "stockZeroMonths": [],
+        "minStock": 80.09788524,
+        "lastStock": 110.62888928000002,
+        "lastNet": -0.36724898999999667
+      },
+      "tuk": {
+        "criticalMonths": [],
+        "maxRun": 0,
+        "stockZeroMonths": [],
+        "minStock": 78.53003891736003,
+        "lastStock": 78.53003891736003,
+        "lastNet": -4.471440030839998
+      },
+      "ene": {
+        "criticalMonths": [],
+        "maxRun": 0,
+        "stockZeroMonths": [],
+        "minStock": 341.3286356846154,
+        "lastStock": 449.9182580048924,
+        "lastNet": 4.625254452284516
+      },
+      "ala": {
+        "criticalMonths": [],
+        "maxRun": 0,
+        "stockZeroMonths": [],
+        "minStock": 164.19889799999999,
+        "lastStock": 231.73276306999995,
+        "lastNet": 0.6994661849999986
+      }
+    },
+    "actor7Alive": true,
+    "actor7Tech": 0,
+    "actor7Ships": 8,
+    "actor7Power": 816,
+    "actor7Colonies": 1,
+    "worldTotals": {
+      "critical": 9,
+      "deliveries": 204,
+      "techs": 64,
+      "colonies": 17,
+      "ships": 203,
+      "power": 37262
+    },
+    "actor7Cycles": 0,
+    "births": []
+  },
+  {
+    "start": 218,
+    "label": "I1",
+    "targetCriticalMonths": 4,
+    "resources": {
+      "min": {
+        "criticalMonths": [
+          220,
+          221,
+          224,
+          232
+        ],
+        "maxRun": 2,
+        "stockZeroMonths": [],
+        "minStock": 8.153526361599997,
+        "lastStock": 21.187555158799988,
+        "lastNet": 0.19243336439999909
+      },
+      "yiy": {
+        "criticalMonths": [],
+        "maxRun": 0,
+        "stockZeroMonths": [],
+        "minStock": 63.47987361999995,
+        "lastStock": 63.47987361999995,
+        "lastNet": -7.370425170000001
+      },
+      "tuk": {
+        "criticalMonths": [],
+        "maxRun": 0,
+        "stockZeroMonths": [],
+        "minStock": 63.706098350040016,
+        "lastStock": 63.706098350040016,
+        "lastNet": -5.19187757724
+      },
+      "ene": {
+        "criticalMonths": [],
+        "maxRun": 0,
+        "stockZeroMonths": [],
+        "minStock": 341.3286356846154,
+        "lastStock": 392.8368713818684,
+        "lastNet": 1.0668966685179058
+      },
+      "ala": {
+        "criticalMonths": [],
+        "maxRun": 0,
+        "stockZeroMonths": [],
+        "minStock": 48.95753853999996,
+        "lastStock": 48.95753853999996,
+        "lastNet": -1.278907740000001
+      }
+    },
+    "actor7Alive": true,
+    "actor7Tech": 1,
+    "actor7Ships": 10,
+    "actor7Power": 1136,
+    "actor7Colonies": 1,
+    "worldTotals": {
+      "critical": 5,
+      "deliveries": 206,
+      "techs": 65,
+      "colonies": 17,
+      "ships": 208,
+      "power": 38406
+    },
+    "actor7Cycles": 0,
+    "births": []
+  },
+  {
+    "start": 217,
+    "label": "control",
+    "targetCriticalMonths": 9,
+    "resources": {
+      "min": {
+        "criticalMonths": [
+          219,
+          220,
+          221,
+          222,
+          223,
+          224,
+          226,
+          227,
+          228
+        ],
+        "maxRun": 6,
+        "stockZeroMonths": [
+          221,
+          222
+        ],
+        "minStock": 0,
+        "lastStock": 8.6330977384,
+        "lastNet": 0.23991278039999886
+      },
+      "yiy": {
+        "criticalMonths": [],
+        "maxRun": 0,
+        "stockZeroMonths": [],
+        "minStock": 80.09788524,
+        "lastStock": 110.62888928000002,
+        "lastNet": -0.36724898999999667
+      },
+      "tuk": {
+        "criticalMonths": [],
+        "maxRun": 0,
+        "stockZeroMonths": [],
+        "minStock": 78.53003891736003,
+        "lastStock": 78.53003891736003,
+        "lastNet": -4.471440030839998
+      },
+      "ene": {
+        "criticalMonths": [],
+        "maxRun": 0,
+        "stockZeroMonths": [],
+        "minStock": 325.6600335,
+        "lastStock": 449.9182580048924,
+        "lastNet": 4.625254452284516
+      },
+      "ala": {
+        "criticalMonths": [],
+        "maxRun": 0,
+        "stockZeroMonths": [],
+        "minStock": 163.55845599999998,
+        "lastStock": 231.73276306999995,
+        "lastNet": 0.6994661849999986
+      }
+    },
+    "actor7Alive": true,
+    "actor7Tech": 0,
+    "actor7Ships": 8,
+    "actor7Power": 816,
+    "actor7Colonies": 1,
+    "worldTotals": {
+      "critical": 9,
+      "deliveries": 204,
+      "techs": 64,
+      "colonies": 17,
+      "ships": 203,
+      "power": 37262
+    },
+    "actor7Cycles": 0,
+    "births": [
+      {
+        "day": 6540,
+        "actor": 7,
+        "race": "teknokrasi",
+        "resources": {
+          "min": 400,
+          "ene": 300,
+          "yiy": 180,
+          "ala": 220,
+          "ara": 0,
+          "tuk": 150,
+          "etk": 70
+        }
+      }
+    ]
+  },
+  {
+    "start": 217,
+    "label": "I1",
+    "targetCriticalMonths": 4,
+    "resources": {
+      "min": {
+        "criticalMonths": [
+          220,
+          221,
+          223,
+          225
+        ],
+        "maxRun": 2,
+        "stockZeroMonths": [],
+        "minStock": 21.84202942440004,
+        "lastStock": 23.274908105850024,
+        "lastNet": -0.5815046521500022
+      },
+      "yiy": {
+        "criticalMonths": [
+          230,
+          231,
+          232,
+          233,
+          234,
+          235,
+          236,
+          237,
+          238,
+          239,
+          240
+        ],
+        "maxRun": 11,
+        "stockZeroMonths": [
+          234,
+          235,
+          236,
+          237,
+          239,
+          240
+        ],
+        "minStock": 0,
+        "lastStock": 0,
+        "lastNet": -6.599273461249995
+      },
+      "tuk": {
+        "criticalMonths": [],
+        "maxRun": 0,
+        "stockZeroMonths": [],
+        "minStock": 79.3097690560275,
+        "lastStock": 79.3097690560275,
+        "lastNet": -4.0808409121725004
+      },
+      "ene": {
+        "criticalMonths": [],
+        "maxRun": 0,
+        "stockZeroMonths": [],
+        "minStock": 325.6600335,
+        "lastStock": 328.39118447594785,
+        "lastNet": -4.857362091180988
+      },
+      "ala": {
+        "criticalMonths": [],
+        "maxRun": 0,
+        "stockZeroMonths": [],
+        "minStock": 33.89668919499999,
+        "lastStock": 68.92656671593748,
+        "lastNet": -1.5402587990625012
+      }
+    },
+    "actor7Alive": true,
+    "actor7Tech": 0,
+    "actor7Ships": 11,
+    "actor7Power": 1202,
+    "actor7Colonies": 1,
+    "worldTotals": {
+      "critical": 5,
+      "deliveries": 208,
+      "techs": 62,
+      "colonies": 18,
+      "ships": 218,
+      "power": 38083
+    },
+    "actor7Cycles": 0,
+    "births": [
+      {
+        "day": 6540,
+        "actor": 7,
+        "race": "teknokrasi",
+        "resources": {
+          "min": 400,
+          "ene": 300,
+          "yiy": 180,
+          "ala": 220,
+          "ara": 0,
+          "tuk": 150,
+          "etk": 70
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,32 @@
+[
+  {
+    "file": "phase96h61/evidence/control/M240-11/control-M240-11-11.json",
+    "bytes": 31911123,
+    "sha256": "ca233ca5999ca73dd78e84c063457eb8163ca79c847746c0a259fb12082c834c"
+  },
+  {
+    "file": "phase96h61/evidence/control/M240-404/control-M240-404-404.json",
+    "bytes": 41509128,
+    "sha256": "063ef0d05070ce5ca1c932c47538fb7a3480111e2f884f64a876c35c6ca7d406"
+  },
+  {
+    "file": "phase96h61/evidence/C2/M240-11/C2-M240-11-11.json",
+    "bytes": 31848306,
+    "sha256": "b63ddcef359854a76565fd16ef12611ea448ce219803831388f4ba395b96d111"
+  },
+  {
+    "file": "phase96h61/evidence/T1-local.json",
+    "bytes": 17679,
+    "sha256": "b1e4e304ad6b7a1e2fea2765fe72603c7a468d185d98b5b2b72e53141c0af602"
+  },
+  {
+    "file": "phase96h61/evidence/control/M240-11/control-M240-11-11-checkpoint-218.save",
+    "bytes": 681594,
+    "sha256": "8bae58e7ce486980e9f0aed02698e5beb6035950ebd2bca41e0149643d8259ae"
+  },
+  {
+    "file": "phase96h61/evidence/control/M240-404/control-M240-404-404-checkpoint-107.save",
+    "bytes": 584497,
+    "sha256": "1c272fcf88f822b33461266e4e57a05ee3bacfe0dd669e443cbc7a63c08bddc8"
+  }
+]

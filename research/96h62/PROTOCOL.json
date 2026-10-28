@@ -1,0 +1,39 @@
+{
+  "phase": "96H.6.2",
+  "canonicalHead": "a1cc40ddbe902372f0f35416d4a09864018bc99e",
+  "candidateLimit": 1,
+  "researchFirst": true,
+  "gates": [
+    "pure correct time-indexed committed stock and candidate prepayment",
+    "same seed11 actor7 Save218 no critical/food/min/cycles regression",
+    "same seed404 actor7 Save107 positive target recovery; other resource sustainable",
+    "healthy/trade/military/colony no unnecessary stalls",
+    "120matrix",
+    "240long"
+  ],
+  "firstSignificantFailureStops": true,
+  "tradeFloor": 0.85,
+  "critical120Max": 14,
+  "matrixSeeds": [
+    11,
+    7,
+    23,
+    42,
+    99,
+    123,
+    404,
+    2026
+  ],
+  "longSeeds": [
+    11,
+    23,
+    42,
+    404
+  ],
+  "noNewReleaseOnRejection": true,
+  "candidate": {
+    "name": "I1",
+    "scope": "Shared paid queue and upfront-cost trajectory for colony solvency and mineral/energy recovery. Ordinary strategic/naval plan mode preserved. No thresholds, bonuses, C2, A2, cancellation or seed exceptions.",
+    "codeChange": "Only isolated I1/ai.js; production remains canonical until all gates pass."
+  }
+}

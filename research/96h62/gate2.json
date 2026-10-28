@@ -1,0 +1,7034 @@
+{
+  "gate": 2,
+  "status": "FAIL",
+  "reasons": [
+    "217: yiy bottleneck worsened"
+  ],
+  "sameSaveAndRng": true,
+  "rows": [
+    {
+      "seed": 11,
+      "start": 218,
+      "label": "control",
+      "inputSHA256": "8bae58e7ce486980e9f0aed02698e5beb6035950ebd2bca41e0149643d8259ae",
+      "initialSaveHash": "1a844c5f0c3886b8c5c1fad2492e8b60e4b7ab347cf5268e995352a425f622b2",
+      "initialRng": -121849597,
+      "stats": {
+        "techs": 64,
+        "colonies": 17,
+        "ships": 203,
+        "power": 37262,
+        "deliveries": 204,
+        "critical": 9,
+        "criticalByActor": {
+          "7": 9
+        },
+        "alive": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          7
+        ],
+        "newSurvivors": [
+          7
+        ],
+        "demolitions": 30,
+        "rebuild12": 13,
+        "cycleNetMinerals": 1634,
+        "finishedCycleBuildingDays": 1070,
+        "cycles": [
+          {
+            "actor": 1,
+            "s": 13,
+            "p": 2,
+            "key": "dokum",
+            "demDay": 6638,
+            "orderDay": 6660,
+            "netMinerals": 136,
+            "interruptionDays": 117
+          },
+          {
+            "actor": 3,
+            "s": 41,
+            "p": 2,
+            "key": "liman",
+            "demDay": 6668,
+            "orderDay": 6690,
+            "netMinerals": 117,
+            "interruptionDays": 97
+          },
+          {
+            "actor": 1,
+            "s": 13,
+            "p": 0,
+            "key": "lab",
+            "demDay": 6755,
+            "orderDay": 6810,
+            "netMinerals": 123,
+            "interruptionDays": 143
+          },
+          {
+            "actor": 3,
+            "s": 41,
+            "p": 2,
+            "key": "liman",
+            "demDay": 6840,
+            "orderDay": 6840,
+            "netMinerals": 117,
+            "interruptionDays": 75
+          },
+          {
+            "actor": 3,
+            "s": 41,
+            "p": 4,
+            "key": "liman",
+            "demDay": 6990,
+            "orderDay": 6990,
+            "netMinerals": 117,
+            "interruptionDays": 75
+          },
+          {
+            "actor": 2,
+            "s": 3,
+            "p": 2,
+            "key": "dokum",
+            "demDay": 7007,
+            "orderDay": 7020,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 3,
+            "s": 41,
+            "p": 2,
+            "key": "liman",
+            "demDay": 7050,
+            "orderDay": 7050,
+            "netMinerals": 117,
+            "interruptionDays": 75
+          },
+          {
+            "actor": 1,
+            "s": 13,
+            "p": 2,
+            "key": "dokum",
+            "demDay": 6818,
+            "orderDay": 7080,
+            "netMinerals": 136,
+            "interruptionDays": 357
+          },
+          {
+            "actor": 3,
+            "s": 41,
+            "p": 4,
+            "key": "dokum",
+            "demDay": 7114,
+            "orderDay": 7140,
+            "netMinerals": 136,
+            "interruptionDays": null
+          },
+          {
+            "actor": 3,
+            "s": 41,
+            "p": 2,
+            "key": "liman",
+            "demDay": 7170,
+            "orderDay": 7170,
+            "netMinerals": 117,
+            "interruptionDays": null
+          },
+          {
+            "actor": 1,
+            "s": 13,
+            "p": 0,
+            "key": "lab",
+            "demDay": 6965,
+            "orderDay": 7170,
+            "netMinerals": 123,
+            "interruptionDays": null
+          },
+          {
+            "actor": 1,
+            "s": 44,
+            "p": 0,
+            "key": "lab",
+            "demDay": 6875,
+            "orderDay": 7200,
+            "netMinerals": 123,
+            "interruptionDays": null
+          },
+          {
+            "actor": 4,
+            "s": 30,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 7174,
+            "orderDay": 7200,
+            "netMinerals": 136,
+            "interruptionDays": null
+          }
+        ]
+      },
+      "resources": {
+        "min": {
+          "criticalMonths": [
+            219,
+            220,
+            221,
+            222,
+            223,
+            224,
+            226,
+            227,
+            228
+          ],
+          "maxRun": 6,
+          "stockZeroMonths": [
+            221,
+            222
+          ],
+          "minStock": 0,
+          "lastStock": 8.6330977384,
+          "lastNet": 0.23991278039999886
+        },
+        "yiy": {
+          "criticalMonths": [],
+          "maxRun": 0,
+          "stockZeroMonths": [],
+          "minStock": 80.09788524,
+          "lastStock": 110.62888928000002,
+          "lastNet": -0.36724898999999667
+        },
+        "tuk": {
+          "criticalMonths": [],
+          "maxRun": 0,
+          "stockZeroMonths": [],
+          "minStock": 78.53003891736003,
+          "lastStock": 78.53003891736003,
+          "lastNet": -4.471440030839998
+        },
+        "ene": {
+          "criticalMonths": [],
+          "maxRun": 0,
+          "stockZeroMonths": [],
+          "minStock": 341.3286356846154,
+          "lastStock": 449.9182580048924,
+          "lastNet": 4.625254452284516
+        },
+        "ala": {
+          "criticalMonths": [],
+          "maxRun": 0,
+          "stockZeroMonths": [],
+          "minStock": 164.19889799999999,
+          "lastStock": 231.73276306999995,
+          "lastNet": 0.6994661849999986
+        }
+      },
+      "targetAlive": true,
+      "actor7Actions": [
+        {
+          "day": 6570,
+          "step": 60,
+          "kind": "queueBuilding",
+          "rng": 1055151646,
+          "actor": 7,
+          "s": 41,
+          "p": 3,
+          "key": "maden",
+          "before": {
+            "min": 182.588544,
+            "ene": 341.3286356846154,
+            "yiy": 156.53274150000001,
+            "ala": 188.19889799999999,
+            "ara": 0,
+            "tuk": 148.1420184,
+            "etk": 87.83878000000001
+          },
+          "after": {
+            "min": 62.58854400000001,
+            "ene": 341.3286356846154,
+            "yiy": 156.53274150000001,
+            "ala": 188.19889799999999,
+            "ara": 0,
+            "tuk": 148.1420184,
+            "etk": 87.83878000000001
+          },
+          "rngBefore": 1055151646,
+          "paid": {
+            "min": 120,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          },
+          "intent": null
+        },
+        {
+          "day": 6608,
+          "step": 136,
+          "kind": "job-finished",
+          "rng": 1882141704,
+          "actor": 7,
+          "previousOwner": 7,
+          "s": 41,
+          "p": 3,
+          "key": "ciftlik",
+          "dem": false,
+          "paid": {
+            "min": 110
+          },
+          "before": {
+            "maden": 1,
+            "santral": 3,
+            "liman": 2,
+            "dokum": 4,
+            "arsiv": 1,
+            "lab": 1,
+            "fabrika": 1
+          },
+          "after": {
+            "maden": 1,
+            "santral": 3,
+            "liman": 2,
+            "dokum": 4,
+            "arsiv": 1,
+            "lab": 1,
+            "fabrika": 1,
+            "ciftlik": 1
+          },
+          "success": true
+        },
+        {
+          "day": 6680,
+          "step": 280,
+          "kind": "job-finished",
+          "rng": -570352682,
+          "actor": 7,
+          "previousOwner": 7,
+          "s": 41,
+          "p": 3,
+          "key": "maden",
+          "dem": false,
+          "paid": {
+            "min": 120
+          },
+          "before": {
+            "maden": 1,
+            "santral": 3,
+            "liman": 2,
+            "dokum": 4,
+            "arsiv": 1,
+            "lab": 1,
+            "fabrika": 1,
+            "ciftlik": 1
+          },
+          "after": {
+            "maden": 2,
+            "santral": 3,
+            "liman": 2,
+            "dokum": 4,
+            "arsiv": 1,
+            "lab": 1,
+            "fabrika": 1,
+            "ciftlik": 1
+          },
+          "success": true
+        },
+        {
+          "day": 6690,
+          "step": 300,
+          "kind": "queueDemolish",
+          "rng": 557859964,
+          "actor": 7,
+          "s": 41,
+          "p": 3,
+          "key": "dokum",
+          "before": {
+            "min": 0,
+            "ene": 361.99291132769224,
+            "yiy": 136.4178645,
+            "ala": 253.052706,
+            "ara": 0,
+            "tuk": 138.32833200000002,
+            "etk": 125.87714800000003
+          },
+          "after": {
+            "min": 0,
+            "ene": 361.99291132769224,
+            "yiy": 136.4178645,
+            "ala": 253.052706,
+            "ara": 0,
+            "tuk": 138.32833200000002,
+            "etk": 125.87714800000003
+          },
+          "rngBefore": 557859964,
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          },
+          "intent": null
+        },
+        {
+          "day": 6732,
+          "step": 384,
+          "kind": "job-finished",
+          "rng": -1473105740,
+          "actor": 7,
+          "previousOwner": 7,
+          "s": 41,
+          "p": 3,
+          "key": "dokum",
+          "dem": true,
+          "paid": {},
+          "refund": {
+            "min": 74
+          },
+          "before": {
+            "maden": 2,
+            "santral": 3,
+            "liman": 2,
+            "dokum": 4,
+            "arsiv": 1,
+            "lab": 1,
+            "fabrika": 1,
+            "ciftlik": 1
+          },
+          "after": {
+            "maden": 2,
+            "santral": 3,
+            "liman": 2,
+            "dokum": 3,
+            "arsiv": 1,
+            "lab": 1,
+            "fabrika": 1,
+            "ciftlik": 1
+          },
+          "success": true
+        },
+        {
+          "day": 6810,
+          "step": 540,
+          "kind": "queueDemolish",
+          "rng": 75720882,
+          "actor": 7,
+          "s": 41,
+          "p": 3,
+          "key": "dokum",
+          "before": {
+            "min": 24.757525521999987,
+            "ene": 394.3902035342922,
+            "yiy": 125.07360885,
+            "ala": 237.873495025,
+            "ara": 0,
+            "tuk": 129.84338704380002,
+            "etk": 122.20326000000003
+          },
+          "after": {
+            "min": 24.757525521999987,
+            "ene": 394.3902035342922,
+            "yiy": 125.07360885,
+            "ala": 237.873495025,
+            "ara": 0,
+            "tuk": 129.84338704380002,
+            "etk": 122.20326000000003
+          },
+          "rngBefore": 75720882,
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          },
+          "intent": null
+        },
+        {
+          "day": 6852,
+          "step": 624,
+          "kind": "job-finished",
+          "rng": 1997287589,
+          "actor": 7,
+          "previousOwner": 7,
+          "s": 41,
+          "p": 3,
+          "key": "dokum",
+          "dem": true,
+          "paid": {},
+          "refund": {
+            "min": 74
+          },
+          "before": {
+            "maden": 2,
+            "santral": 3,
+            "liman": 2,
+            "dokum": 3,
+            "arsiv": 1,
+            "lab": 1,
+            "fabrika": 1,
+            "ciftlik": 1
+          },
+          "after": {
+            "maden": 2,
+            "santral": 3,
+            "liman": 2,
+            "dokum": 2,
+            "arsiv": 1,
+            "lab": 1,
+            "fabrika": 1,
+            "ciftlik": 1
+          },
+          "success": true
+        },
+        {
+          "day": 6930,
+          "step": 780,
+          "kind": "queueDemolish",
+          "rng": -1861913131,
+          "actor": 7,
+          "s": 41,
+          "p": 3,
+          "key": "dokum",
+          "before": {
+            "min": 93.05828283079998,
+            "ene": 415.28112949063785,
+            "yiy": 107.15042061,
+            "ala": 275.97355965,
+            "ara": 0,
+            "tuk": 117.44532927132002,
+            "etk": 116.81711600000003
+          },
+          "after": {
+            "min": 93.05828283079998,
+            "ene": 415.28112949063785,
+            "yiy": 107.15042061,
+            "ala": 275.97355965,
+            "ara": 0,
+            "tuk": 117.44532927132002,
+            "etk": 116.81711600000003
+          },
+          "rngBefore": -1861913131,
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          },
+          "intent": null
+        },
+        {
+          "day": 6972,
+          "step": 864,
+          "kind": "job-finished",
+          "rng": 2019101783,
+          "actor": 7,
+          "previousOwner": 7,
+          "s": 41,
+          "p": 3,
+          "key": "dokum",
+          "dem": true,
+          "paid": {},
+          "refund": {
+            "min": 74
+          },
+          "before": {
+            "maden": 2,
+            "santral": 3,
+            "liman": 2,
+            "dokum": 2,
+            "arsiv": 1,
+            "lab": 1,
+            "fabrika": 1,
+            "ciftlik": 1
+          },
+          "after": {
+            "maden": 2,
+            "santral": 3,
+            "liman": 2,
+            "dokum": 1,
+            "arsiv": 1,
+            "lab": 1,
+            "fabrika": 1,
+            "ciftlik": 1
+          },
+          "success": true
+        },
+        {
+          "day": 6990,
+          "step": 900,
+          "kind": "queueBuilding",
+          "rng": -1610393846,
+          "actor": 7,
+          "s": 41,
+          "p": 3,
+          "key": "ciftlik",
+          "before": {
+            "min": 216.37880162439998,
+            "ene": 429.95551167939624,
+            "yiy": 94.83312932999999,
+            "ala": 284.272626595,
+            "ara": 0,
+            "tuk": 109.65309647676003,
+            "etk": 93.48194800000003
+          },
+          "after": {
+            "min": 106.37880162439998,
+            "ene": 429.95551167939624,
+            "yiy": 94.83312932999999,
+            "ala": 284.272626595,
+            "ara": 0,
+            "tuk": 109.65309647676003,
+            "etk": 93.48194800000003
+          },
+          "rngBefore": -1610393846,
+          "paid": {
+            "min": 110,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          },
+          "intent": null
+        },
+        {
+          "day": 7058,
+          "step": 1036,
+          "kind": "job-finished",
+          "rng": 935432231,
+          "actor": 7,
+          "previousOwner": 7,
+          "s": 41,
+          "p": 3,
+          "key": "ciftlik",
+          "dem": false,
+          "paid": {
+            "min": 110
+          },
+          "before": {
+            "maden": 2,
+            "santral": 3,
+            "liman": 2,
+            "dokum": 1,
+            "arsiv": 1,
+            "lab": 1,
+            "fabrika": 1,
+            "ciftlik": 1
+          },
+          "after": {
+            "maden": 2,
+            "santral": 3,
+            "liman": 2,
+            "dokum": 1,
+            "arsiv": 1,
+            "lab": 1,
+            "fabrika": 1,
+            "ciftlik": 2
+          },
+          "success": true
+        }
+      ],
+      "targetMonthly": [
+        {
+          "month": 219,
+          "dead": false,
+          "resources": {
+            "min": 62.58854400000001,
+            "ene": 341.3286356846154,
+            "yiy": 156.53274150000001,
+            "ala": 164.19889799999999,
+            "ara": 0,
+            "tuk": 148.1420184,
+            "etk": 87.83878000000001
+          },
+          "income": {
+            "min": -31.573056,
+            "ene": 15.66860218461538,
+            "yiy": -11.502622499999998,
+            "ala": 24.640441999999997,
+            "ara": 23.774151375000002,
+            "etk": 9.777132000000002,
+            "tuk": -1.8894635999999991
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 44,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 1,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 4,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1
+              },
+              "q": [
+                {
+                  "key": "ciftlik",
+                  "left": 38,
+                  "tot": 68,
+                  "paid": {
+                    "min": 110
+                  },
+                  "s": 41,
+                  "p": 3
+                },
+                {
+                  "key": "maden",
+                  "left": 72,
+                  "tot": 72,
+                  "paid": {
+                    "min": 120
+                  },
+                  "s": 41,
+                  "p": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "month": 220,
+          "dead": false,
+          "resources": {
+            "min": 30.59961600000001,
+            "ene": 350.9924237449038,
+            "yiy": 144.79727400000002,
+            "ala": 187.406544,
+            "ara": 0,
+            "tuk": 146.02697160000002,
+            "etk": 97.50889600000002
+          },
+          "income": {
+            "min": -31.988928,
+            "ene": 9.663788060288447,
+            "yiy": -11.735467499999999,
+            "ala": 23.207645999999997,
+            "ara": 23.172274125,
+            "etk": 9.670116,
+            "tuk": -2.1150467999999982
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 41,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 1,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 4,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1
+              },
+              "q": [
+                {
+                  "key": "ciftlik",
+                  "left": 8,
+                  "tot": 68,
+                  "paid": {
+                    "min": 110
+                  },
+                  "s": 41,
+                  "p": 3
+                },
+                {
+                  "key": "maden",
+                  "left": 72,
+                  "tot": 72,
+                  "paid": {
+                    "min": 120
+                  },
+                  "s": 41,
+                  "p": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "month": 221,
+          "dead": false,
+          "resources": {
+            "min": 0,
+            "ene": 356.5076592184615,
+            "yiy": 142.49473650000002,
+            "ala": 209.951394,
+            "ara": 0,
+            "tuk": 143.68634160000002,
+            "etk": 107.07199600000003
+          },
+          "income": {
+            "min": -32.4048,
+            "ene": 5.515235473557681,
+            "yiy": -2.3025375000000032,
+            "ala": 22.544849999999997,
+            "ara": 22.570396875,
+            "etk": 9.5631,
+            "tuk": -2.340629999999999
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 38,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 1,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 4,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": [
+                {
+                  "key": "maden",
+                  "left": 50,
+                  "tot": 72,
+                  "paid": {
+                    "min": 120
+                  },
+                  "s": 41,
+                  "p": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "month": 222,
+          "dead": false,
+          "resources": {
+            "min": 0,
+            "ene": 360.7078217460577,
+            "yiy": 139.7016,
+            "ala": 231.833448,
+            "ara": 0,
+            "tuk": 141.12012840000003,
+            "etk": 116.52808000000003
+          },
+          "income": {
+            "min": -32.820672,
+            "ene": 4.200162527596149,
+            "yiy": -2.793136500000003,
+            "ala": 21.882054,
+            "ara": 21.968519625000003,
+            "etk": 9.456084,
+            "tuk": -2.566213199999998
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 35,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 1,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 4,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": [
+                {
+                  "key": "maden",
+                  "left": 20,
+                  "tot": 72,
+                  "paid": {
+                    "min": 120
+                  },
+                  "s": 41,
+                  "p": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "month": 223,
+          "dead": false,
+          "resources": {
+            "min": 50,
+            "ene": 361.99291132769224,
+            "yiy": 136.4178645,
+            "ala": 253.052706,
+            "ara": 0,
+            "tuk": 138.32833200000002,
+            "etk": 85.87714800000003
+          },
+          "income": {
+            "min": -25.393458000000003,
+            "ene": 1.285089581634594,
+            "yiy": -3.283735500000006,
+            "ala": 21.219257999999996,
+            "ara": 21.366642374999998,
+            "etk": 9.349067999999999,
+            "tuk": -2.791796399999999
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 32,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 4,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": [
+                {
+                  "key": "dokum",
+                  "left": 42,
+                  "tot": 42,
+                  "dem": true,
+                  "paid": {},
+                  "refund": {
+                    "min": 74
+                  },
+                  "s": 41,
+                  "p": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "month": 224,
+          "dead": false,
+          "resources": {
+            "min": 16.993627783999997,
+            "ene": 373.4508777028922,
+            "yiy": 132.64353,
+            "ala": 221.0391373,
+            "ara": 0,
+            "tuk": 136.3538235336,
+            "etk": 95.11920000000003
+          },
+          "income": {
+            "min": -33.006372216,
+            "ene": 11.457966375199987,
+            "yiy": -3.774334500000002,
+            "ala": 23.986431299999996,
+            "ara": 20.5872885,
+            "etk": 9.242052000000001,
+            "tuk": -1.9745084663999997
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 29,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 4,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": [
+                {
+                  "key": "dokum",
+                  "left": 12,
+                  "tot": 42,
+                  "dem": true,
+                  "paid": {},
+                  "refund": {
+                    "min": 74
+                  },
+                  "s": 41,
+                  "p": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "month": 225,
+          "dead": false,
+          "resources": {
+            "min": 69.7772870068,
+            "ene": 387.4129024757322,
+            "yiy": 130.67950581,
+            "ala": 206.442019185,
+            "ara": 0,
+            "tuk": 134.44921202172,
+            "etk": 104.25423600000003
+          },
+          "income": {
+            "min": -21.216340777200003,
+            "ene": 13.962024772839982,
+            "yiy": -1.9640241900000035,
+            "ala": 17.402881885,
+            "ara": 21.34336464375,
+            "etk": 9.135036,
+            "tuk": -1.9046115118799989
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 26,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 3,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": []
+            }
+          ]
+        },
+        {
+          "month": 226,
+          "dead": false,
+          "resources": {
+            "min": 47.698586252799984,
+            "ene": 392.6873444195322,
+            "yiy": 128.15619876,
+            "ala": 222.46347176,
+            "ara": 0,
+            "tuk": 132.27906652512002,
+            "etk": 113.28225600000003
+          },
+          "income": {
+            "min": -22.078700754000007,
+            "ene": 5.274441943799985,
+            "yiy": -2.523307050000003,
+            "ala": 16.021452575,
+            "ara": 20.706249281249995,
+            "etk": 9.02802,
+            "tuk": -2.1701454966
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 23,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 3,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": []
+            }
+          ]
+        },
+        {
+          "month": 227,
+          "dead": false,
+          "resources": {
+            "min": 24.757525521999987,
+            "ene": 394.3902035342922,
+            "yiy": 125.07360885,
+            "ala": 237.873495025,
+            "ara": 0,
+            "tuk": 129.84338704380002,
+            "etk": 122.20326000000003
+          },
+          "income": {
+            "min": -22.941060730799997,
+            "ene": 1.7028591147599883,
+            "yiy": -3.0825899099999994,
+            "ala": 15.410023265000005,
+            "ara": 20.06913391875,
+            "etk": 8.921004,
+            "tuk": -2.4356794813199993
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 20,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 3,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": [
+                {
+                  "key": "dokum",
+                  "left": 42,
+                  "tot": 42,
+                  "dem": true,
+                  "paid": {},
+                  "refund": {
+                    "min": 74
+                  },
+                  "s": 41,
+                  "p": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "month": 228,
+          "dead": false,
+          "resources": {
+            "min": 0.9541048143999866,
+            "ene": 398.5274798200122,
+            "yiy": 121.43173608,
+            "ala": 252.67208898,
+            "ara": 0,
+            "tuk": 127.14217357776002,
+            "etk": 131.01724800000002
+          },
+          "income": {
+            "min": -23.8034207076,
+            "ene": 4.137276285719992,
+            "yiy": -3.6418727700000026,
+            "ala": 14.798593955000003,
+            "ara": 19.43201855625,
+            "etk": 8.813988,
+            "tuk": -2.7012134660399987
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 17,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 3,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": [
+                {
+                  "key": "dokum",
+                  "left": 12,
+                  "tot": 42,
+                  "dem": true,
+                  "paid": {},
+                  "refund": {
+                    "min": 74
+                  },
+                  "s": 41,
+                  "p": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "month": 229,
+          "dead": false,
+          "resources": {
+            "min": 65.18452412999999,
+            "ene": 404.8671732766922,
+            "yiy": 117.23058044999999,
+            "ala": 260.84686541,
+            "ara": 0,
+            "tuk": 124.17542612700002,
+            "etk": 139.72422000000003
+          },
+          "income": {
+            "min": -9.769580684400001,
+            "ene": 6.339693456679981,
+            "yiy": -4.201155630000002,
+            "ala": 8.17477643,
+            "ara": 18.79490319375,
+            "etk": 8.706972,
+            "tuk": -2.966747450759999
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 14,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 2,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": []
+            }
+          ]
+        },
+        {
+          "month": 230,
+          "dead": false,
+          "resources": {
+            "min": 104.55258346879998,
+            "ene": 409.3512839043322,
+            "yiy": 112.47014195999999,
+            "ala": 268.61402230000004,
+            "ara": 0,
+            "tuk": 120.94314469152002,
+            "etk": 108.32417600000002
+          },
+          "income": {
+            "min": -10.631940661199998,
+            "ene": 4.484110627639993,
+            "yiy": -4.76043849,
+            "ala": 7.767156889999999,
+            "ara": 18.157787831250005,
+            "etk": 8.599956,
+            "tuk": -3.2322814354799974
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 11,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 2,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": []
+            }
+          ]
+        },
+        {
+          "month": 231,
+          "dead": false,
+          "resources": {
+            "min": 93.05828283079998,
+            "ene": 415.28112949063785,
+            "yiy": 107.15042061,
+            "ala": 275.97355965,
+            "ara": 0,
+            "tuk": 117.44532927132002,
+            "etk": 116.81711600000003
+          },
+          "income": {
+            "min": -11.494300638,
+            "ene": 5.929845586305639,
+            "yiy": -5.319721350000002,
+            "ala": 7.359537349999998,
+            "ara": 17.520672468750004,
+            "etk": 8.49294,
+            "tuk": -3.4978154201999985
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 8,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 2,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": [
+                {
+                  "key": "dokum",
+                  "left": 42,
+                  "tot": 42,
+                  "dem": true,
+                  "paid": {},
+                  "refund": {
+                    "min": 74
+                  },
+                  "s": 41,
+                  "p": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "month": 232,
+          "dead": false,
+          "resources": {
+            "min": 140.70162221599998,
+            "ene": 419.23534432835055,
+            "yiy": 101.27141639999999,
+            "ala": 282.92547746,
+            "ara": 0,
+            "tuk": 113.68197986640003,
+            "etk": 85.20304000000003
+          },
+          "income": {
+            "min": -12.356660614800003,
+            "ene": 3.954214837712705,
+            "yiy": -5.8790042100000015,
+            "ala": 6.951917809999998,
+            "ara": 16.883557106250002,
+            "etk": 8.385924,
+            "tuk": -3.7633494049199987
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 5,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 2,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": [
+                {
+                  "key": "dokum",
+                  "left": 12,
+                  "tot": 42,
+                  "dem": true,
+                  "paid": {},
+                  "refund": {
+                    "min": 74
+                  },
+                  "s": 41,
+                  "p": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "month": 233,
+          "dead": false,
+          "resources": {
+            "min": 106.37880162439998,
+            "ene": 429.95551167939624,
+            "yiy": 94.83312932999999,
+            "ala": 252.27262659500002,
+            "ara": 0,
+            "tuk": 109.65309647676003,
+            "etk": 93.48194800000003
+          },
+          "income": {
+            "min": 1.6771794084000007,
+            "ene": 10.720167351045674,
+            "yiy": -6.438287070000003,
+            "ala": 1.347149134999999,
+            "ara": 16.24644174375,
+            "etk": 8.278908,
+            "tuk": -4.028883389639999
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 2,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 1,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": [
+                {
+                  "key": "ciftlik",
+                  "left": 68,
+                  "tot": 68,
+                  "paid": {
+                    "min": 110
+                  },
+                  "s": 41,
+                  "p": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "month": 234,
+          "dead": false,
+          "resources": {
+            "min": 107.19362105599998,
+            "ene": 435.0827312911852,
+            "yiy": 87.8355594,
+            "ala": 252.64596596,
+            "ara": 0,
+            "tuk": 105.35867910240003,
+            "etk": 101.65384000000003
+          },
+          "income": {
+            "min": 0.8148194315999986,
+            "ene": 5.1272196117889735,
+            "yiy": -6.997569930000003,
+            "ala": 0.37333936499999876,
+            "ara": 15.609326381249998,
+            "etk": 8.171892,
+            "tuk": -4.29441737436
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 0,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 1,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": [
+                {
+                  "key": "ciftlik",
+                  "left": 38,
+                  "tot": 68,
+                  "paid": {
+                    "min": 110
+                  },
+                  "s": 41,
+                  "p": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "month": 235,
+          "dead": false,
+          "resources": {
+            "min": 107.43353383639999,
+            "ene": 438.7479857434697,
+            "yiy": 80.46513422999999,
+            "ala": 241.483432145,
+            "ara": 0,
+            "tuk": 100.88723907156003,
+            "etk": 109.75438800000003
+          },
+          "income": {
+            "min": 0.23991278039999886,
+            "ene": 3.6652544522845147,
+            "yiy": -7.370425170000001,
+            "ala": 0.23746618499999883,
+            "ara": 15.18458280625,
+            "etk": 8.100548,
+            "tuk": -4.471440030839998
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 0,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 1,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": [
+                {
+                  "key": "ciftlik",
+                  "left": 8,
+                  "tot": 68,
+                  "paid": {
+                    "min": 110
+                  },
+                  "s": 41,
+                  "p": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "month": 236,
+          "dead": false,
+          "resources": {
+            "min": 107.67344661679999,
+            "ene": 440.81324019575425,
+            "yiy": 80.09788524,
+            "ala": 241.72089832999998,
+            "ara": 0,
+            "tuk": 96.41579904072003,
+            "etk": 117.85493600000004
+          },
+          "income": {
+            "min": 0.23991278039999886,
+            "ene": 2.0652544522845204,
+            "yiy": -0.36724898999999667,
+            "ala": 0.23746618499999883,
+            "ara": 15.18458280625,
+            "etk": 8.100548,
+            "tuk": -4.471440030839998
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 0,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 1,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 2
+              },
+              "q": []
+            }
+          ]
+        },
+        {
+          "month": 237,
+          "dead": false,
+          "resources": {
+            "min": 107.9133593972,
+            "ene": 442.8784946480388,
+            "yiy": 95.73063625,
+            "ala": 241.95836451499997,
+            "ara": 0,
+            "tuk": 91.94435900988003,
+            "etk": 125.95548400000004
+          },
+          "income": {
+            "min": 0.23991278039999886,
+            "ene": 2.0652544522845204,
+            "yiy": -0.36724898999999667,
+            "ala": 0.23746618499999883,
+            "ara": 15.18458280625,
+            "etk": 8.100548,
+            "tuk": -4.471440030839998
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 0,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 1,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 2
+              },
+              "q": []
+            }
+          ]
+        },
+        {
+          "month": 238,
+          "dead": false,
+          "resources": {
+            "min": 8.153272177600002,
+            "ene": 444.9437491003233,
+            "yiy": 95.36338726000001,
+            "ala": 230.79583069999995,
+            "ara": 0,
+            "tuk": 87.47291897904003,
+            "etk": 134.05603200000004
+          },
+          "income": {
+            "min": 0.23991278039999886,
+            "ene": 2.0652544522845204,
+            "yiy": -0.36724898999999667,
+            "ala": 0.23746618499999883,
+            "ara": 15.18458280625,
+            "etk": 8.100548,
+            "tuk": -4.471440030839998
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 0,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 1,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 2
+              },
+              "q": []
+            }
+          ]
+        },
+        {
+          "month": 239,
+          "dead": false,
+          "resources": {
+            "min": 8.393184958,
+            "ene": 445.29300355260784,
+            "yiy": 94.99613827000002,
+            "ala": 231.03329688499994,
+            "ara": 0,
+            "tuk": 83.00147894820003,
+            "etk": 97.15658000000005
+          },
+          "income": {
+            "min": 0.23991278039999886,
+            "ene": 0.34925445228451224,
+            "yiy": -0.36724898999999667,
+            "ala": 0.23746618499999883,
+            "ara": 15.18458280625,
+            "etk": 8.100548,
+            "tuk": -4.471440030839998
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 0,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 1,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 2
+              },
+              "q": []
+            }
+          ]
+        },
+        {
+          "month": 240,
+          "dead": false,
+          "resources": {
+            "min": 8.6330977384,
+            "ene": 449.9182580048924,
+            "yiy": 110.62888928000002,
+            "ala": 231.73276306999995,
+            "ara": 0,
+            "tuk": 78.53003891736003,
+            "etk": 105.25712800000005
+          },
+          "income": {
+            "min": 0.23991278039999886,
+            "ene": 4.625254452284516,
+            "yiy": -0.36724898999999667,
+            "ala": 0.6994661849999986,
+            "ara": 15.18458280625,
+            "etk": 8.100548,
+            "tuk": -4.471440030839998
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 0,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 1,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 2
+              },
+              "q": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 11,
+      "start": 218,
+      "label": "I1",
+      "inputSHA256": "8bae58e7ce486980e9f0aed02698e5beb6035950ebd2bca41e0149643d8259ae",
+      "initialSaveHash": "1a844c5f0c3886b8c5c1fad2492e8b60e4b7ab347cf5268e995352a425f622b2",
+      "initialRng": -121849597,
+      "stats": {
+        "techs": 65,
+        "colonies": 17,
+        "ships": 208,
+        "power": 38406,
+        "deliveries": 206,
+        "critical": 5,
+        "criticalByActor": {
+          "7": 4,
+          "5": 1
+        },
+        "alive": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          7
+        ],
+        "newSurvivors": [
+          7
+        ],
+        "demolitions": 22,
+        "rebuild12": 8,
+        "cycleNetMinerals": 1012,
+        "finishedCycleBuildingDays": 942,
+        "cycles": [
+          {
+            "actor": 1,
+            "s": 13,
+            "p": 2,
+            "key": "dokum",
+            "demDay": 6638,
+            "orderDay": 6660,
+            "netMinerals": 136,
+            "interruptionDays": 98
+          },
+          {
+            "actor": 3,
+            "s": 41,
+            "p": 2,
+            "key": "liman",
+            "demDay": 6668,
+            "orderDay": 6690,
+            "netMinerals": 117,
+            "interruptionDays": 118
+          },
+          {
+            "actor": 1,
+            "s": 13,
+            "p": 2,
+            "key": "dokum",
+            "demDay": 6810,
+            "orderDay": 6810,
+            "netMinerals": 136,
+            "interruptionDays": 76
+          },
+          {
+            "actor": 3,
+            "s": 41,
+            "p": 2,
+            "key": "liman",
+            "demDay": 6908,
+            "orderDay": 6930,
+            "netMinerals": 117,
+            "interruptionDays": 118
+          },
+          {
+            "actor": 2,
+            "s": 0,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 6917,
+            "orderDay": 6930,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 2,
+            "s": 3,
+            "p": 2,
+            "key": "dokum",
+            "demDay": 6737,
+            "orderDay": 7020,
+            "netMinerals": 136,
+            "interruptionDays": 401
+          },
+          {
+            "actor": 3,
+            "s": 41,
+            "p": 2,
+            "key": "liman",
+            "demDay": 7088,
+            "orderDay": 7110,
+            "netMinerals": 117,
+            "interruptionDays": null
+          },
+          {
+            "actor": 3,
+            "s": 41,
+            "p": 4,
+            "key": "liman",
+            "demDay": 7118,
+            "orderDay": 7140,
+            "netMinerals": 117,
+            "interruptionDays": null
+          }
+        ]
+      },
+      "resources": {
+        "min": {
+          "criticalMonths": [
+            220,
+            221,
+            224,
+            232
+          ],
+          "maxRun": 2,
+          "stockZeroMonths": [],
+          "minStock": 8.153526361599997,
+          "lastStock": 21.187555158799988,
+          "lastNet": 0.19243336439999909
+        },
+        "yiy": {
+          "criticalMonths": [],
+          "maxRun": 0,
+          "stockZeroMonths": [],
+          "minStock": 63.47987361999995,
+          "lastStock": 63.47987361999995,
+          "lastNet": -7.370425170000001
+        },
+        "tuk": {
+          "criticalMonths": [],
+          "maxRun": 0,
+          "stockZeroMonths": [],
+          "minStock": 63.706098350040016,
+          "lastStock": 63.706098350040016,
+          "lastNet": -5.19187757724
+        },
+        "ene": {
+          "criticalMonths": [],
+          "maxRun": 0,
+          "stockZeroMonths": [],
+          "minStock": 341.3286356846154,
+          "lastStock": 392.8368713818684,
+          "lastNet": 1.0668966685179058
+        },
+        "ala": {
+          "criticalMonths": [],
+          "maxRun": 0,
+          "stockZeroMonths": [],
+          "minStock": 48.95753853999996,
+          "lastStock": 48.95753853999996,
+          "lastNet": -1.278907740000001
+        }
+      },
+      "targetAlive": true,
+      "actor7Actions": [
+        {
+          "day": 6570,
+          "step": 60,
+          "kind": "queueDemolish",
+          "rng": 1055151646,
+          "actor": 7,
+          "s": 41,
+          "p": 3,
+          "key": "dokum",
+          "before": {
+            "min": 182.588544,
+            "ene": 341.3286356846154,
+            "yiy": 156.53274150000001,
+            "ala": 188.19889799999999,
+            "ara": 0,
+            "tuk": 148.1420184,
+            "etk": 87.83878000000001
+          },
+          "after": {
+            "min": 182.588544,
+            "ene": 341.3286356846154,
+            "yiy": 156.53274150000001,
+            "ala": 188.19889799999999,
+            "ara": 0,
+            "tuk": 148.1420184,
+            "etk": 87.83878000000001
+          },
+          "rngBefore": 1055151646,
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          },
+          "intent": null
+        },
+        {
+          "day": 6608,
+          "step": 136,
+          "kind": "job-finished",
+          "rng": 682411561,
+          "actor": 7,
+          "previousOwner": 7,
+          "s": 41,
+          "p": 3,
+          "key": "ciftlik",
+          "dem": false,
+          "paid": {
+            "min": 110
+          },
+          "before": {
+            "maden": 1,
+            "santral": 3,
+            "liman": 2,
+            "dokum": 4,
+            "arsiv": 1,
+            "lab": 1,
+            "fabrika": 1
+          },
+          "after": {
+            "maden": 1,
+            "santral": 3,
+            "liman": 2,
+            "dokum": 4,
+            "arsiv": 1,
+            "lab": 1,
+            "fabrika": 1,
+            "ciftlik": 1
+          },
+          "success": true
+        },
+        {
+          "day": 6650,
+          "step": 220,
+          "kind": "job-finished",
+          "rng": 1099694740,
+          "actor": 7,
+          "previousOwner": 7,
+          "s": 41,
+          "p": 3,
+          "key": "dokum",
+          "dem": true,
+          "paid": {},
+          "refund": {
+            "min": 74
+          },
+          "before": {
+            "maden": 1,
+            "santral": 3,
+            "liman": 2,
+            "dokum": 4,
+            "arsiv": 1,
+            "lab": 1,
+            "fabrika": 1,
+            "ciftlik": 1
+          },
+          "after": {
+            "maden": 1,
+            "santral": 3,
+            "liman": 2,
+            "dokum": 3,
+            "arsiv": 1,
+            "lab": 1,
+            "fabrika": 1,
+            "ciftlik": 1
+          },
+          "success": true
+        },
+        {
+          "day": 6690,
+          "step": 300,
+          "kind": "queueDemolish",
+          "rng": 245730279,
+          "actor": 7,
+          "s": 41,
+          "p": 3,
+          "key": "dokum",
+          "before": {
+            "min": 78.13760000000002,
+            "ene": 384.8620432240384,
+            "yiy": 136.4178645,
+            "ala": 106.19237799999998,
+            "ara": 0,
+            "tuk": 138.32833200000002,
+            "etk": 125.87714800000003
+          },
+          "after": {
+            "min": 78.13760000000002,
+            "ene": 384.8620432240384,
+            "yiy": 136.4178645,
+            "ala": 106.19237799999998,
+            "ara": 0,
+            "tuk": 138.32833200000002,
+            "etk": 125.87714800000003
+          },
+          "rngBefore": 245730279,
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          },
+          "intent": null
+        },
+        {
+          "day": 6732,
+          "step": 384,
+          "kind": "job-finished",
+          "rng": 1877896201,
+          "actor": 7,
+          "previousOwner": 7,
+          "s": 41,
+          "p": 3,
+          "key": "dokum",
+          "dem": true,
+          "paid": {},
+          "refund": {
+            "min": 74
+          },
+          "before": {
+            "maden": 1,
+            "santral": 3,
+            "liman": 2,
+            "dokum": 3,
+            "arsiv": 1,
+            "lab": 1,
+            "fabrika": 1,
+            "ciftlik": 1
+          },
+          "after": {
+            "maden": 1,
+            "santral": 3,
+            "liman": 2,
+            "dokum": 2,
+            "arsiv": 1,
+            "lab": 1,
+            "fabrika": 1,
+            "ciftlik": 1
+          },
+          "success": true
+        },
+        {
+          "day": 6870,
+          "step": 660,
+          "kind": "queueDemolish",
+          "rng": -371867497,
+          "actor": 7,
+          "s": 41,
+          "p": 3,
+          "key": "dokum",
+          "before": {
+            "min": 61.7138126336,
+            "ene": 424.9837231786508,
+            "yiy": 112.69744568999998,
+            "ala": 74.58324285999997,
+            "ara": 0,
+            "tuk": 117.67934055408004,
+            "etk": 94.72422000000006
+          },
+          "after": {
+            "min": 61.7138126336,
+            "ene": 424.9837231786508,
+            "yiy": 112.69744568999998,
+            "ala": 74.58324285999997,
+            "ara": 0,
+            "tuk": 117.67934055408004,
+            "etk": 94.72422000000006
+          },
+          "rngBefore": -371867497,
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          },
+          "intent": null
+        },
+        {
+          "day": 6912,
+          "step": 744,
+          "kind": "job-finished",
+          "rng": -834608476,
+          "actor": 7,
+          "previousOwner": 7,
+          "s": 41,
+          "p": 3,
+          "key": "dokum",
+          "dem": true,
+          "paid": {},
+          "refund": {
+            "min": 74
+          },
+          "before": {
+            "maden": 1,
+            "santral": 3,
+            "liman": 2,
+            "dokum": 2,
+            "arsiv": 1,
+            "lab": 1,
+            "fabrika": 1,
+            "ciftlik": 1
+          },
+          "after": {
+            "maden": 1,
+            "santral": 3,
+            "liman": 2,
+            "dokum": 1,
+            "arsiv": 1,
+            "lab": 1,
+            "fabrika": 1,
+            "ciftlik": 1
+          },
+          "success": true
+        },
+        {
+          "day": 6930,
+          "step": 780,
+          "kind": "queueBuilding",
+          "rng": 1335146719,
+          "actor": 7,
+          "s": 41,
+          "p": 3,
+          "key": "maden",
+          "before": {
+            "min": 132.475941952,
+            "ene": 439.24831954663694,
+            "yiy": 102.61728584999997,
+            "ala": 63.88493359999996,
+            "ara": 0,
+            "tuk": 109.25646736560005,
+            "etk": 111.81711600000007
+          },
+          "after": {
+            "min": 12.475941952,
+            "ene": 439.24831954663694,
+            "yiy": 102.61728584999997,
+            "ala": 63.88493359999996,
+            "ara": 0,
+            "tuk": 109.25646736560005,
+            "etk": 111.81711600000007
+          },
+          "rngBefore": 1335146719,
+          "paid": {
+            "min": 120,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          },
+          "intent": null
+        },
+        {
+          "day": 7002,
+          "step": 924,
+          "kind": "job-finished",
+          "rng": 1537877407,
+          "actor": 7,
+          "previousOwner": 7,
+          "s": 41,
+          "p": 3,
+          "key": "maden",
+          "dem": false,
+          "paid": {
+            "min": 120
+          },
+          "before": {
+            "maden": 1,
+            "santral": 3,
+            "liman": 2,
+            "dokum": 1,
+            "arsiv": 1,
+            "lab": 1,
+            "fabrika": 1,
+            "ciftlik": 1
+          },
+          "after": {
+            "maden": 2,
+            "santral": 3,
+            "liman": 2,
+            "dokum": 1,
+            "arsiv": 1,
+            "lab": 1,
+            "fabrika": 1,
+            "ciftlik": 1
+          },
+          "success": true
+        }
+      ],
+      "targetMonthly": [
+        {
+          "month": 219,
+          "dead": false,
+          "resources": {
+            "min": 182.588544,
+            "ene": 341.3286356846154,
+            "yiy": 156.53274150000001,
+            "ala": 156.19889799999999,
+            "ara": 0,
+            "tuk": 148.1420184,
+            "etk": 87.83878000000001
+          },
+          "income": {
+            "min": -31.573056,
+            "ene": 15.66860218461538,
+            "yiy": -11.502622499999998,
+            "ala": 24.640441999999997,
+            "ara": 23.774151375000002,
+            "etk": 9.777132000000002,
+            "tuk": -1.8894635999999991
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 44,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 1,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 4,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1
+              },
+              "q": [
+                {
+                  "key": "ciftlik",
+                  "left": 38,
+                  "tot": 68,
+                  "paid": {
+                    "min": 110
+                  },
+                  "s": 41,
+                  "p": 3
+                },
+                {
+                  "key": "dokum",
+                  "left": 42,
+                  "tot": 42,
+                  "dem": true,
+                  "paid": {},
+                  "refund": {
+                    "min": 74
+                  },
+                  "s": 41,
+                  "p": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "month": 220,
+          "dead": false,
+          "resources": {
+            "min": 80.59961600000003,
+            "ene": 348.89242374490385,
+            "yiy": 144.79727400000002,
+            "ala": 154.636544,
+            "ara": 0,
+            "tuk": 146.02697160000002,
+            "etk": 97.50889600000002
+          },
+          "income": {
+            "min": -31.988928,
+            "ene": 7.563788060288445,
+            "yiy": -11.735467499999999,
+            "ala": 22.437645999999994,
+            "ara": 23.172274125,
+            "etk": 9.670116,
+            "tuk": -2.1150467999999982
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 41,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 1,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 4,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1
+              },
+              "q": [
+                {
+                  "key": "ciftlik",
+                  "left": 8,
+                  "tot": 68,
+                  "paid": {
+                    "min": 110
+                  },
+                  "s": 41,
+                  "p": 3
+                },
+                {
+                  "key": "dokum",
+                  "left": 42,
+                  "tot": 42,
+                  "dem": true,
+                  "paid": {},
+                  "refund": {
+                    "min": 74
+                  },
+                  "s": 41,
+                  "p": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "month": 221,
+          "dead": false,
+          "resources": {
+            "min": 48.194816000000024,
+            "ene": 366.99937167519226,
+            "yiy": 142.49473650000002,
+            "ala": 112.41139399999997,
+            "ara": 0,
+            "tuk": 143.68634160000002,
+            "etk": 107.07199600000003
+          },
+          "income": {
+            "min": -32.4048,
+            "ene": 18.10694793028844,
+            "yiy": -2.3025375000000032,
+            "ala": 21.774849999999994,
+            "ara": 22.570396875,
+            "etk": 9.5631,
+            "tuk": -2.340629999999999
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 38,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 1,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 4,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": [
+                {
+                  "key": "dokum",
+                  "left": 20,
+                  "tot": 42,
+                  "dem": true,
+                  "paid": {},
+                  "refund": {
+                    "min": 74
+                  },
+                  "s": 41,
+                  "p": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "month": 222,
+          "dead": false,
+          "resources": {
+            "min": 100.37414400000003,
+            "ene": 378.499467660673,
+            "yiy": 139.7016,
+            "ala": 93.93543449999997,
+            "ara": 0,
+            "tuk": 141.12012840000003,
+            "etk": 116.52808000000003
+          },
+          "income": {
+            "min": -21.820672000000002,
+            "ene": 11.500095985480762,
+            "yiy": -2.793136500000003,
+            "ala": 13.524040500000002,
+            "ara": 21.968519625000003,
+            "etk": 9.456084,
+            "tuk": -2.566213199999998
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 35,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 1,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 3,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": []
+            }
+          ]
+        },
+        {
+          "month": 223,
+          "dead": false,
+          "resources": {
+            "min": 78.13760000000002,
+            "ene": 384.8620432240384,
+            "yiy": 136.4178645,
+            "ala": 106.19237799999998,
+            "ara": 0,
+            "tuk": 138.32833200000002,
+            "etk": 125.87714800000003
+          },
+          "income": {
+            "min": -22.236544000000002,
+            "ene": 6.362575563365368,
+            "yiy": -3.283735500000006,
+            "ala": 12.256943500000002,
+            "ara": 21.366642374999998,
+            "etk": 9.349067999999999,
+            "tuk": -2.791796399999999
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 32,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 1,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 3,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": [
+                {
+                  "key": "dokum",
+                  "left": 42,
+                  "tot": 42,
+                  "dem": true,
+                  "paid": {},
+                  "refund": {
+                    "min": 74
+                  },
+                  "s": 41,
+                  "p": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "month": 224,
+          "dead": false,
+          "resources": {
+            "min": 55.48518400000002,
+            "ene": 389.53353303163453,
+            "yiy": 132.64353,
+            "ala": 93.95222449999997,
+            "ara": 0,
+            "tuk": 135.31095240000002,
+            "etk": 135.11920000000003
+          },
+          "income": {
+            "min": -22.652416000000002,
+            "ene": 4.671489807596146,
+            "yiy": -3.774334500000002,
+            "ala": 11.759846500000002,
+            "ara": 20.764765125,
+            "etk": 9.242052000000001,
+            "tuk": -3.017379599999999
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 29,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 1,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 3,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": [
+                {
+                  "key": "dokum",
+                  "left": 12,
+                  "tot": 42,
+                  "dem": true,
+                  "paid": {},
+                  "refund": {
+                    "min": 74
+                  },
+                  "s": 41,
+                  "p": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "month": 225,
+          "dead": false,
+          "resources": {
+            "min": 167.416896,
+            "ene": 392.2406028448076,
+            "yiy": 128.3785965,
+            "ala": 99.66405749999997,
+            "ara": 0,
+            "tuk": 132.06798960000003,
+            "etk": 104.25423600000005
+          },
+          "income": {
+            "min": -12.068288000000003,
+            "ene": 2.707069813173071,
+            "yiy": -4.264933500000005,
+            "ala": 5.711832999999997,
+            "ara": 20.162887875,
+            "etk": 9.135036,
+            "tuk": -3.242962799999999
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 26,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 1,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 2,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": []
+            }
+          ]
+        },
+        {
+          "month": 226,
+          "dead": false,
+          "resources": {
+            "min": 155.105017408,
+            "ene": 399.16972726623794,
+            "yiy": 123.62306399999999,
+            "ala": 105.04449249999996,
+            "ara": 0,
+            "tuk": 128.54885656740004,
+            "etk": 113.28225600000005
+          },
+          "income": {
+            "min": -12.311878592000003,
+            "ene": 6.9291244214303305,
+            "yiy": -4.755532500000005,
+            "ala": 5.380434999999997,
+            "ara": 19.36874428125,
+            "etk": 9.02802,
+            "tuk": -3.5191330326
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 23,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 1,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 2,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": []
+            }
+          ]
+        },
+        {
+          "month": 227,
+          "dead": false,
+          "resources": {
+            "min": 141.0930026496,
+            "ene": 408.7791356951014,
+            "yiy": 120.54047408999999,
+            "ala": 78.92865245999997,
+            "ara": 0,
+            "tuk": 125.16099039888003,
+            "etk": 122.20326000000004
+          },
+          "income": {
+            "min": -14.012014758400001,
+            "ene": 9.609408428863432,
+            "yiy": -3.0825899099999994,
+            "ala": 5.88415996,
+            "ara": 20.231177793750003,
+            "etk": 8.921004,
+            "tuk": -3.3878661685199996
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 20,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 1,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 2,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": []
+            }
+          ]
+        },
+        {
+          "month": 228,
+          "dead": false,
+          "resources": {
+            "min": 126.6292677248,
+            "ene": 417.96646766590567,
+            "yiy": 116.89860131999998,
+            "ala": 70.18490257999997,
+            "ara": 0,
+            "tuk": 121.53781839444004,
+            "etk": 131.01724800000005
+          },
+          "income": {
+            "min": -14.463734924800002,
+            "ene": 9.18733197080428,
+            "yiy": -3.6418727700000026,
+            "ala": 4.756250119999999,
+            "ara": 19.58891818125,
+            "etk": 8.813988,
+            "tuk": -3.6231720044399998
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 17,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 1,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 2,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": []
+            }
+          ]
+        },
+        {
+          "month": 229,
+          "dead": false,
+          "resources": {
+            "min": 61.7138126336,
+            "ene": 424.9837231786508,
+            "yiy": 112.69744568999998,
+            "ala": 74.58324285999997,
+            "ara": 0,
+            "tuk": 117.67934055408004,
+            "etk": 94.72422000000006
+          },
+          "income": {
+            "min": -14.915455091200002,
+            "ene": 7.017255512745123,
+            "yiy": -4.201155630000002,
+            "ala": 4.398340279999999,
+            "ara": 18.94665856875,
+            "etk": 8.706972,
+            "tuk": -3.85847784036
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 14,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 1,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 2,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": [
+                {
+                  "key": "dokum",
+                  "left": 42,
+                  "tot": 42,
+                  "dem": true,
+                  "paid": {},
+                  "refund": {
+                    "min": 74
+                  },
+                  "s": 41,
+                  "p": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "month": 230,
+          "dead": false,
+          "resources": {
+            "min": 62.346637376,
+            "ene": 431.6326695445009,
+            "yiy": 107.93700719999998,
+            "ala": 78.62367329999996,
+            "ara": 0,
+            "tuk": 113.58555687780004,
+            "etk": 103.32417600000007
+          },
+          "income": {
+            "min": -15.367175257600001,
+            "ene": 6.648946365850094,
+            "yiy": -4.76043849,
+            "ala": 4.04043044,
+            "ara": 18.304398956250004,
+            "etk": 8.599956,
+            "tuk": -4.093783676279998
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 11,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 1,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 2,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": [
+                {
+                  "key": "dokum",
+                  "left": 12,
+                  "tot": 42,
+                  "dem": true,
+                  "paid": {},
+                  "refund": {
+                    "min": 74
+                  },
+                  "s": 41,
+                  "p": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "month": 231,
+          "dead": false,
+          "resources": {
+            "min": 12.475941952,
+            "ene": 439.24831954663694,
+            "yiy": 102.61728584999997,
+            "ala": 63.88493359999996,
+            "ara": 0,
+            "tuk": 109.25646736560005,
+            "etk": 111.81711600000007
+          },
+          "income": {
+            "min": -3.870695424000001,
+            "ene": 7.615650002136043,
+            "yiy": -5.319721350000002,
+            "ala": -1.2387397000000009,
+            "ara": 17.662139343750002,
+            "etk": 8.49294,
+            "tuk": -4.3290895121999995
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 8,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 1,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 1,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": [
+                {
+                  "key": "maden",
+                  "left": 72,
+                  "tot": 72,
+                  "paid": {
+                    "min": 120
+                  },
+                  "s": 41,
+                  "p": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "month": 232,
+          "dead": false,
+          "resources": {
+            "min": 8.153526361599997,
+            "ene": 444.6306731850589,
+            "yiy": 96.73828163999997,
+            "ala": 62.46723897999996,
+            "ara": 0,
+            "tuk": 104.69207201748004,
+            "etk": 120.20304000000007
+          },
+          "income": {
+            "min": -4.322415590400001,
+            "ene": 5.382353638422003,
+            "yiy": -5.8790042100000015,
+            "ala": -1.4176946200000007,
+            "ara": 17.01987973125,
+            "etk": 8.385924,
+            "tuk": -4.56439534812
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 5,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 1,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 1,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": [
+                {
+                  "key": "maden",
+                  "left": 42,
+                  "tot": 72,
+                  "paid": {
+                    "min": 120
+                  },
+                  "s": 41,
+                  "p": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "month": 233,
+          "dead": false,
+          "resources": {
+            "min": 19.379390604799994,
+            "ene": 431.8797304597669,
+            "yiy": 90.29999456999997,
+            "ala": 60.87058943999996,
+            "ara": 0,
+            "tuk": 99.89237083344004,
+            "etk": 128.48194800000007
+          },
+          "income": {
+            "min": -4.774135756800003,
+            "ene": 3.149057274707971,
+            "yiy": -6.438287070000003,
+            "ala": -1.5966495400000005,
+            "ara": 16.37762011875,
+            "etk": 8.278908,
+            "tuk": -4.799701184039999
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 2,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 1,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 1,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": [
+                {
+                  "key": "maden",
+                  "left": 12,
+                  "tot": 72,
+                  "paid": {
+                    "min": 120
+                  },
+                  "s": 41,
+                  "p": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "month": 234,
+          "dead": false,
+          "resources": {
+            "min": 20.032954972399992,
+            "ene": 431.1954913707608,
+            "yiy": 83.30242463999997,
+            "ala": 59.094984979999964,
+            "ara": 0,
+            "tuk": 94.85736381348003,
+            "etk": 136.65384000000006
+          },
+          "income": {
+            "min": 0.6535643675999989,
+            "ene": -0.684239089006077,
+            "yiy": -6.997569930000003,
+            "ala": -1.7756044600000003,
+            "ara": 15.735360506249998,
+            "etk": 8.171892,
+            "tuk": -5.03500701996
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 0,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 1,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": []
+            }
+          ]
+        },
+        {
+          "month": 235,
+          "dead": false,
+          "resources": {
+            "min": 20.22538833679999,
+            "ene": 429.0223880392787,
+            "yiy": 88.13199946999997,
+            "ala": 57.20007723999996,
+            "ara": 0,
+            "tuk": 89.66548623624004,
+            "etk": 145.75438800000006
+          },
+          "income": {
+            "min": 0.19243336439999909,
+            "ene": -2.1731033314820962,
+            "yiy": -7.370425170000001,
+            "ala": -1.8949077400000007,
+            "ara": 18.985326181250002,
+            "etk": 9.100548,
+            "tuk": -5.19187757724
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 0,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 1,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": []
+            }
+          ]
+        },
+        {
+          "month": 236,
+          "dead": false,
+          "resources": {
+            "min": 20.41782170119999,
+            "ene": 410.94928470779666,
+            "yiy": 80.76157429999996,
+            "ala": 55.30516949999996,
+            "ara": 0,
+            "tuk": 84.47360865900004,
+            "etk": 154.85493600000007
+          },
+          "income": {
+            "min": 0.19243336439999909,
+            "ene": -2.1731033314820962,
+            "yiy": -7.370425170000001,
+            "ala": -1.8949077400000007,
+            "ara": 18.985326181250002,
+            "etk": 9.100548,
+            "tuk": -5.19187757724
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 0,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 1,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": []
+            }
+          ]
+        },
+        {
+          "month": 237,
+          "dead": false,
+          "resources": {
+            "min": 20.61025506559999,
+            "ene": 408.7761813763146,
+            "yiy": 73.39114912999996,
+            "ala": 53.41026175999996,
+            "ara": 0,
+            "tuk": 79.28173108176003,
+            "etk": 103.95548400000007
+          },
+          "income": {
+            "min": 0.19243336439999909,
+            "ene": -2.1731033314820962,
+            "yiy": -7.370425170000001,
+            "ala": -1.8949077400000007,
+            "ara": 18.985326181250002,
+            "etk": 9.100548,
+            "tuk": -5.19187757724
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 0,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 1,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": []
+            }
+          ]
+        },
+        {
+          "month": 238,
+          "dead": false,
+          "resources": {
+            "min": 20.80268842999999,
+            "ene": 406.6030780448325,
+            "yiy": 78.22072395999996,
+            "ala": 51.51535401999996,
+            "ara": 0,
+            "tuk": 74.08985350452002,
+            "etk": 113.05603200000007
+          },
+          "income": {
+            "min": 0.19243336439999909,
+            "ene": -2.1731033314820962,
+            "yiy": -7.370425170000001,
+            "ala": -1.8949077400000007,
+            "ara": 18.985326181250002,
+            "etk": 9.100548,
+            "tuk": -5.19187757724
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 0,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 1,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": []
+            }
+          ]
+        },
+        {
+          "month": 239,
+          "dead": false,
+          "resources": {
+            "min": 20.99512179439999,
+            "ene": 391.76997471335045,
+            "yiy": 70.85029878999995,
+            "ala": 50.23644627999996,
+            "ara": 0,
+            "tuk": 68.89797592728002,
+            "etk": 122.15658000000008
+          },
+          "income": {
+            "min": 0.19243336439999909,
+            "ene": 1.0668966685179058,
+            "yiy": -7.370425170000001,
+            "ala": -1.278907740000001,
+            "ara": 18.985326181250002,
+            "etk": 9.100548,
+            "tuk": -5.19187757724
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 0,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 1,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": []
+            }
+          ]
+        },
+        {
+          "month": 240,
+          "dead": false,
+          "resources": {
+            "min": 21.187555158799988,
+            "ene": 392.8368713818684,
+            "yiy": 63.47987361999995,
+            "ala": 48.95753853999996,
+            "ara": 290,
+            "tuk": 63.706098350040016,
+            "etk": 41.25712800000008
+          },
+          "income": {
+            "min": 0.19243336439999909,
+            "ene": 1.0668966685179058,
+            "yiy": -7.370425170000001,
+            "ala": -1.278907740000001,
+            "ara": 18.985326181250002,
+            "etk": 9.100548,
+            "tuk": -5.19187757724
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 0,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 1,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 11,
+      "start": 217,
+      "label": "control",
+      "inputSHA256": "3c583ba4a78bf1bec561f1699ccc3793a674db0c96c129c71892ea09c3f9eebf",
+      "initialSaveHash": "6fe7312a8e075df75d7e74a9b74d09fc56a5f60b765748bffc858bc6a95c80e3",
+      "initialRng": 1029091949,
+      "stats": {
+        "techs": 64,
+        "colonies": 17,
+        "ships": 203,
+        "power": 37262,
+        "deliveries": 204,
+        "critical": 9,
+        "criticalByActor": {
+          "7": 9
+        },
+        "alive": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          7
+        ],
+        "newSurvivors": [
+          7
+        ],
+        "demolitions": 30,
+        "rebuild12": 13,
+        "cycleNetMinerals": 1634,
+        "finishedCycleBuildingDays": 1070,
+        "cycles": [
+          {
+            "actor": 1,
+            "s": 13,
+            "p": 2,
+            "key": "dokum",
+            "demDay": 6638,
+            "orderDay": 6660,
+            "netMinerals": 136,
+            "interruptionDays": 117
+          },
+          {
+            "actor": 3,
+            "s": 41,
+            "p": 2,
+            "key": "liman",
+            "demDay": 6668,
+            "orderDay": 6690,
+            "netMinerals": 117,
+            "interruptionDays": 97
+          },
+          {
+            "actor": 1,
+            "s": 13,
+            "p": 0,
+            "key": "lab",
+            "demDay": 6755,
+            "orderDay": 6810,
+            "netMinerals": 123,
+            "interruptionDays": 143
+          },
+          {
+            "actor": 3,
+            "s": 41,
+            "p": 2,
+            "key": "liman",
+            "demDay": 6840,
+            "orderDay": 6840,
+            "netMinerals": 117,
+            "interruptionDays": 75
+          },
+          {
+            "actor": 3,
+            "s": 41,
+            "p": 4,
+            "key": "liman",
+            "demDay": 6990,
+            "orderDay": 6990,
+            "netMinerals": 117,
+            "interruptionDays": 75
+          },
+          {
+            "actor": 2,
+            "s": 3,
+            "p": 2,
+            "key": "dokum",
+            "demDay": 7007,
+            "orderDay": 7020,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 3,
+            "s": 41,
+            "p": 2,
+            "key": "liman",
+            "demDay": 7050,
+            "orderDay": 7050,
+            "netMinerals": 117,
+            "interruptionDays": 75
+          },
+          {
+            "actor": 1,
+            "s": 13,
+            "p": 2,
+            "key": "dokum",
+            "demDay": 6818,
+            "orderDay": 7080,
+            "netMinerals": 136,
+            "interruptionDays": 357
+          },
+          {
+            "actor": 3,
+            "s": 41,
+            "p": 4,
+            "key": "dokum",
+            "demDay": 7114,
+            "orderDay": 7140,
+            "netMinerals": 136,
+            "interruptionDays": null
+          },
+          {
+            "actor": 3,
+            "s": 41,
+            "p": 2,
+            "key": "liman",
+            "demDay": 7170,
+            "orderDay": 7170,
+            "netMinerals": 117,
+            "interruptionDays": null
+          },
+          {
+            "actor": 1,
+            "s": 13,
+            "p": 0,
+            "key": "lab",
+            "demDay": 6965,
+            "orderDay": 7170,
+            "netMinerals": 123,
+            "interruptionDays": null
+          },
+          {
+            "actor": 1,
+            "s": 44,
+            "p": 0,
+            "key": "lab",
+            "demDay": 6875,
+            "orderDay": 7200,
+            "netMinerals": 123,
+            "interruptionDays": null
+          },
+          {
+            "actor": 4,
+            "s": 30,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 7174,
+            "orderDay": 7200,
+            "netMinerals": 136,
+            "interruptionDays": null
+          }
+        ]
+      },
+      "resources": {
+        "min": {
+          "criticalMonths": [
+            219,
+            220,
+            221,
+            222,
+            223,
+            224,
+            226,
+            227,
+            228
+          ],
+          "maxRun": 6,
+          "stockZeroMonths": [
+            221,
+            222
+          ],
+          "minStock": 0,
+          "lastStock": 8.6330977384,
+          "lastNet": 0.23991278039999886
+        },
+        "yiy": {
+          "criticalMonths": [],
+          "maxRun": 0,
+          "stockZeroMonths": [],
+          "minStock": 80.09788524,
+          "lastStock": 110.62888928000002,
+          "lastNet": -0.36724898999999667
+        },
+        "tuk": {
+          "criticalMonths": [],
+          "maxRun": 0,
+          "stockZeroMonths": [],
+          "minStock": 78.53003891736003,
+          "lastStock": 78.53003891736003,
+          "lastNet": -4.471440030839998
+        },
+        "ene": {
+          "criticalMonths": [],
+          "maxRun": 0,
+          "stockZeroMonths": [],
+          "minStock": 325.6600335,
+          "lastStock": 449.9182580048924,
+          "lastNet": 4.625254452284516
+        },
+        "ala": {
+          "criticalMonths": [],
+          "maxRun": 0,
+          "stockZeroMonths": [],
+          "minStock": 163.55845599999998,
+          "lastStock": 231.73276306999995,
+          "lastNet": 0.6994661849999986
+        }
+      },
+      "targetAlive": true,
+      "actor7Actions": [
+        {
+          "day": 6540,
+          "step": 60,
+          "kind": "queueBuilding",
+          "rng": -689744070,
+          "actor": 7,
+          "s": 41,
+          "p": 3,
+          "key": "ciftlik",
+          "before": {
+            "min": 324.1616,
+            "ene": 325.6600335,
+            "yiy": 168.03536400000002,
+            "ala": 259.558456,
+            "ara": 0,
+            "tuk": 150.031482,
+            "etk": 78.061648
+          },
+          "after": {
+            "min": 214.16160000000002,
+            "ene": 325.6600335,
+            "yiy": 168.03536400000002,
+            "ala": 259.558456,
+            "ara": 0,
+            "tuk": 150.031482,
+            "etk": 78.061648
+          },
+          "rngBefore": -689744070,
+          "paid": {
+            "min": 110,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          },
+          "intent": null
+        },
+        {
+          "day": 6570,
+          "step": 120,
+          "kind": "queueBuilding",
+          "rng": 1055151646,
+          "actor": 7,
+          "s": 41,
+          "p": 3,
+          "key": "maden",
+          "before": {
+            "min": 182.588544,
+            "ene": 341.3286356846154,
+            "yiy": 156.53274150000001,
+            "ala": 188.19889799999999,
+            "ara": 0,
+            "tuk": 148.1420184,
+            "etk": 87.83878000000001
+          },
+          "after": {
+            "min": 62.58854400000001,
+            "ene": 341.3286356846154,
+            "yiy": 156.53274150000001,
+            "ala": 188.19889799999999,
+            "ara": 0,
+            "tuk": 148.1420184,
+            "etk": 87.83878000000001
+          },
+          "rngBefore": 1055151646,
+          "paid": {
+            "min": 120,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          },
+          "intent": null
+        },
+        {
+          "day": 6608,
+          "step": 196,
+          "kind": "job-finished",
+          "rng": 1882141704,
+          "actor": 7,
+          "previousOwner": 7,
+          "s": 41,
+          "p": 3,
+          "key": "ciftlik",
+          "dem": false,
+          "paid": {
+            "min": 110
+          },
+          "before": {
+            "maden": 1,
+            "santral": 3,
+            "liman": 2,
+            "dokum": 4,
+            "arsiv": 1,
+            "lab": 1,
+            "fabrika": 1
+          },
+          "after": {
+            "maden": 1,
+            "santral": 3,
+            "liman": 2,
+            "dokum": 4,
+            "arsiv": 1,
+            "lab": 1,
+            "fabrika": 1,
+            "ciftlik": 1
+          },
+          "success": true
+        },
+        {
+          "day": 6680,
+          "step": 340,
+          "kind": "job-finished",
+          "rng": -570352682,
+          "actor": 7,
+          "previousOwner": 7,
+          "s": 41,
+          "p": 3,
+          "key": "maden",
+          "dem": false,
+          "paid": {
+            "min": 120
+          },
+          "before": {
+            "maden": 1,
+            "santral": 3,
+            "liman": 2,
+            "dokum": 4,
+            "arsiv": 1,
+            "lab": 1,
+            "fabrika": 1,
+            "ciftlik": 1
+          },
+          "after": {
+            "maden": 2,
+            "santral": 3,
+            "liman": 2,
+            "dokum": 4,
+            "arsiv": 1,
+            "lab": 1,
+            "fabrika": 1,
+            "ciftlik": 1
+          },
+          "success": true
+        },
+        {
+          "day": 6690,
+          "step": 360,
+          "kind": "queueDemolish",
+          "rng": 557859964,
+          "actor": 7,
+          "s": 41,
+          "p": 3,
+          "key": "dokum",
+          "before": {
+            "min": 0,
+            "ene": 361.99291132769224,
+            "yiy": 136.4178645,
+            "ala": 253.052706,
+            "ara": 0,
+            "tuk": 138.32833200000002,
+            "etk": 125.87714800000003
+          },
+          "after": {
+            "min": 0,
+            "ene": 361.99291132769224,
+            "yiy": 136.4178645,
+            "ala": 253.052706,
+            "ara": 0,
+            "tuk": 138.32833200000002,
+            "etk": 125.87714800000003
+          },
+          "rngBefore": 557859964,
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          },
+          "intent": null
+        },
+        {
+          "day": 6732,
+          "step": 444,
+          "kind": "job-finished",
+          "rng": -1473105740,
+          "actor": 7,
+          "previousOwner": 7,
+          "s": 41,
+          "p": 3,
+          "key": "dokum",
+          "dem": true,
+          "paid": {},
+          "refund": {
+            "min": 74
+          },
+          "before": {
+            "maden": 2,
+            "santral": 3,
+            "liman": 2,
+            "dokum": 4,
+            "arsiv": 1,
+            "lab": 1,
+            "fabrika": 1,
+            "ciftlik": 1
+          },
+          "after": {
+            "maden": 2,
+            "santral": 3,
+            "liman": 2,
+            "dokum": 3,
+            "arsiv": 1,
+            "lab": 1,
+            "fabrika": 1,
+            "ciftlik": 1
+          },
+          "success": true
+        },
+        {
+          "day": 6810,
+          "step": 600,
+          "kind": "queueDemolish",
+          "rng": 75720882,
+          "actor": 7,
+          "s": 41,
+          "p": 3,
+          "key": "dokum",
+          "before": {
+            "min": 24.757525521999987,
+            "ene": 394.3902035342922,
+            "yiy": 125.07360885,
+            "ala": 237.873495025,
+            "ara": 0,
+            "tuk": 129.84338704380002,
+            "etk": 122.20326000000003
+          },
+          "after": {
+            "min": 24.757525521999987,
+            "ene": 394.3902035342922,
+            "yiy": 125.07360885,
+            "ala": 237.873495025,
+            "ara": 0,
+            "tuk": 129.84338704380002,
+            "etk": 122.20326000000003
+          },
+          "rngBefore": 75720882,
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          },
+          "intent": null
+        },
+        {
+          "day": 6852,
+          "step": 684,
+          "kind": "job-finished",
+          "rng": 1997287589,
+          "actor": 7,
+          "previousOwner": 7,
+          "s": 41,
+          "p": 3,
+          "key": "dokum",
+          "dem": true,
+          "paid": {},
+          "refund": {
+            "min": 74
+          },
+          "before": {
+            "maden": 2,
+            "santral": 3,
+            "liman": 2,
+            "dokum": 3,
+            "arsiv": 1,
+            "lab": 1,
+            "fabrika": 1,
+            "ciftlik": 1
+          },
+          "after": {
+            "maden": 2,
+            "santral": 3,
+            "liman": 2,
+            "dokum": 2,
+            "arsiv": 1,
+            "lab": 1,
+            "fabrika": 1,
+            "ciftlik": 1
+          },
+          "success": true
+        },
+        {
+          "day": 6930,
+          "step": 840,
+          "kind": "queueDemolish",
+          "rng": -1861913131,
+          "actor": 7,
+          "s": 41,
+          "p": 3,
+          "key": "dokum",
+          "before": {
+            "min": 93.05828283079998,
+            "ene": 415.28112949063785,
+            "yiy": 107.15042061,
+            "ala": 275.97355965,
+            "ara": 0,
+            "tuk": 117.44532927132002,
+            "etk": 116.81711600000003
+          },
+          "after": {
+            "min": 93.05828283079998,
+            "ene": 415.28112949063785,
+            "yiy": 107.15042061,
+            "ala": 275.97355965,
+            "ara": 0,
+            "tuk": 117.44532927132002,
+            "etk": 116.81711600000003
+          },
+          "rngBefore": -1861913131,
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          },
+          "intent": null
+        },
+        {
+          "day": 6972,
+          "step": 924,
+          "kind": "job-finished",
+          "rng": 2019101783,
+          "actor": 7,
+          "previousOwner": 7,
+          "s": 41,
+          "p": 3,
+          "key": "dokum",
+          "dem": true,
+          "paid": {},
+          "refund": {
+            "min": 74
+          },
+          "before": {
+            "maden": 2,
+            "santral": 3,
+            "liman": 2,
+            "dokum": 2,
+            "arsiv": 1,
+            "lab": 1,
+            "fabrika": 1,
+            "ciftlik": 1
+          },
+          "after": {
+            "maden": 2,
+            "santral": 3,
+            "liman": 2,
+            "dokum": 1,
+            "arsiv": 1,
+            "lab": 1,
+            "fabrika": 1,
+            "ciftlik": 1
+          },
+          "success": true
+        },
+        {
+          "day": 6990,
+          "step": 960,
+          "kind": "queueBuilding",
+          "rng": -1610393846,
+          "actor": 7,
+          "s": 41,
+          "p": 3,
+          "key": "ciftlik",
+          "before": {
+            "min": 216.37880162439998,
+            "ene": 429.95551167939624,
+            "yiy": 94.83312932999999,
+            "ala": 284.272626595,
+            "ara": 0,
+            "tuk": 109.65309647676003,
+            "etk": 93.48194800000003
+          },
+          "after": {
+            "min": 106.37880162439998,
+            "ene": 429.95551167939624,
+            "yiy": 94.83312932999999,
+            "ala": 284.272626595,
+            "ara": 0,
+            "tuk": 109.65309647676003,
+            "etk": 93.48194800000003
+          },
+          "rngBefore": -1610393846,
+          "paid": {
+            "min": 110,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          },
+          "intent": null
+        },
+        {
+          "day": 7058,
+          "step": 1096,
+          "kind": "job-finished",
+          "rng": 935432231,
+          "actor": 7,
+          "previousOwner": 7,
+          "s": 41,
+          "p": 3,
+          "key": "ciftlik",
+          "dem": false,
+          "paid": {
+            "min": 110
+          },
+          "before": {
+            "maden": 2,
+            "santral": 3,
+            "liman": 2,
+            "dokum": 1,
+            "arsiv": 1,
+            "lab": 1,
+            "fabrika": 1,
+            "ciftlik": 1
+          },
+          "after": {
+            "maden": 2,
+            "santral": 3,
+            "liman": 2,
+            "dokum": 1,
+            "arsiv": 1,
+            "lab": 1,
+            "fabrika": 1,
+            "ciftlik": 2
+          },
+          "success": true
+        }
+      ],
+      "targetMonthly": [
+        {
+          "month": 218,
+          "dead": false,
+          "resources": {
+            "min": 214.16160000000002,
+            "ene": 325.6600335,
+            "yiy": 168.03536400000002,
+            "ala": 163.55845599999998,
+            "ara": 0,
+            "tuk": 150.031482,
+            "etk": 78.061648
+          },
+          "income": {
+            "min": -25.8384,
+            "ene": 25.660033499999987,
+            "yiy": -11.964635999999999,
+            "ala": 39.55845599999999,
+            "ara": 27.852052500000006,
+            "etk": 8.061648,
+            "tuk": 0.03148200000000223
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 47,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 1,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 4,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1
+              },
+              "q": [
+                {
+                  "key": "ciftlik",
+                  "left": 68,
+                  "tot": 68,
+                  "paid": {
+                    "min": 110
+                  },
+                  "s": 41,
+                  "p": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "month": 219,
+          "dead": false,
+          "resources": {
+            "min": 62.58854400000001,
+            "ene": 341.3286356846154,
+            "yiy": 156.53274150000001,
+            "ala": 164.19889799999999,
+            "ara": 0,
+            "tuk": 148.1420184,
+            "etk": 87.83878000000001
+          },
+          "income": {
+            "min": -31.573056,
+            "ene": 15.66860218461538,
+            "yiy": -11.502622499999998,
+            "ala": 24.640441999999997,
+            "ara": 23.774151375000002,
+            "etk": 9.777132000000002,
+            "tuk": -1.8894635999999991
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 44,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 1,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 4,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1
+              },
+              "q": [
+                {
+                  "key": "ciftlik",
+                  "left": 38,
+                  "tot": 68,
+                  "paid": {
+                    "min": 110
+                  },
+                  "s": 41,
+                  "p": 3
+                },
+                {
+                  "key": "maden",
+                  "left": 72,
+                  "tot": 72,
+                  "paid": {
+                    "min": 120
+                  },
+                  "s": 41,
+                  "p": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "month": 220,
+          "dead": false,
+          "resources": {
+            "min": 30.59961600000001,
+            "ene": 350.9924237449038,
+            "yiy": 144.79727400000002,
+            "ala": 187.406544,
+            "ara": 0,
+            "tuk": 146.02697160000002,
+            "etk": 97.50889600000002
+          },
+          "income": {
+            "min": -31.988928,
+            "ene": 9.663788060288447,
+            "yiy": -11.735467499999999,
+            "ala": 23.207645999999997,
+            "ara": 23.172274125,
+            "etk": 9.670116,
+            "tuk": -2.1150467999999982
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 41,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 1,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 4,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1
+              },
+              "q": [
+                {
+                  "key": "ciftlik",
+                  "left": 8,
+                  "tot": 68,
+                  "paid": {
+                    "min": 110
+                  },
+                  "s": 41,
+                  "p": 3
+                },
+                {
+                  "key": "maden",
+                  "left": 72,
+                  "tot": 72,
+                  "paid": {
+                    "min": 120
+                  },
+                  "s": 41,
+                  "p": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "month": 221,
+          "dead": false,
+          "resources": {
+            "min": 0,
+            "ene": 356.5076592184615,
+            "yiy": 142.49473650000002,
+            "ala": 209.951394,
+            "ara": 0,
+            "tuk": 143.68634160000002,
+            "etk": 107.07199600000003
+          },
+          "income": {
+            "min": -32.4048,
+            "ene": 5.515235473557681,
+            "yiy": -2.3025375000000032,
+            "ala": 22.544849999999997,
+            "ara": 22.570396875,
+            "etk": 9.5631,
+            "tuk": -2.340629999999999
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 38,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 1,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 4,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": [
+                {
+                  "key": "maden",
+                  "left": 50,
+                  "tot": 72,
+                  "paid": {
+                    "min": 120
+                  },
+                  "s": 41,
+                  "p": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "month": 222,
+          "dead": false,
+          "resources": {
+            "min": 0,
+            "ene": 360.7078217460577,
+            "yiy": 139.7016,
+            "ala": 231.833448,
+            "ara": 0,
+            "tuk": 141.12012840000003,
+            "etk": 116.52808000000003
+          },
+          "income": {
+            "min": -32.820672,
+            "ene": 4.200162527596149,
+            "yiy": -2.793136500000003,
+            "ala": 21.882054,
+            "ara": 21.968519625000003,
+            "etk": 9.456084,
+            "tuk": -2.566213199999998
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 35,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 1,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 4,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": [
+                {
+                  "key": "maden",
+                  "left": 20,
+                  "tot": 72,
+                  "paid": {
+                    "min": 120
+                  },
+                  "s": 41,
+                  "p": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "month": 223,
+          "dead": false,
+          "resources": {
+            "min": 50,
+            "ene": 361.99291132769224,
+            "yiy": 136.4178645,
+            "ala": 253.052706,
+            "ara": 0,
+            "tuk": 138.32833200000002,
+            "etk": 85.87714800000003
+          },
+          "income": {
+            "min": -25.393458000000003,
+            "ene": 1.285089581634594,
+            "yiy": -3.283735500000006,
+            "ala": 21.219257999999996,
+            "ara": 21.366642374999998,
+            "etk": 9.349067999999999,
+            "tuk": -2.791796399999999
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 32,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 4,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": [
+                {
+                  "key": "dokum",
+                  "left": 42,
+                  "tot": 42,
+                  "dem": true,
+                  "paid": {},
+                  "refund": {
+                    "min": 74
+                  },
+                  "s": 41,
+                  "p": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "month": 224,
+          "dead": false,
+          "resources": {
+            "min": 16.993627783999997,
+            "ene": 373.4508777028922,
+            "yiy": 132.64353,
+            "ala": 221.0391373,
+            "ara": 0,
+            "tuk": 136.3538235336,
+            "etk": 95.11920000000003
+          },
+          "income": {
+            "min": -33.006372216,
+            "ene": 11.457966375199987,
+            "yiy": -3.774334500000002,
+            "ala": 23.986431299999996,
+            "ara": 20.5872885,
+            "etk": 9.242052000000001,
+            "tuk": -1.9745084663999997
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 29,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 4,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": [
+                {
+                  "key": "dokum",
+                  "left": 12,
+                  "tot": 42,
+                  "dem": true,
+                  "paid": {},
+                  "refund": {
+                    "min": 74
+                  },
+                  "s": 41,
+                  "p": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "month": 225,
+          "dead": false,
+          "resources": {
+            "min": 69.7772870068,
+            "ene": 387.4129024757322,
+            "yiy": 130.67950581,
+            "ala": 206.442019185,
+            "ara": 0,
+            "tuk": 134.44921202172,
+            "etk": 104.25423600000003
+          },
+          "income": {
+            "min": -21.216340777200003,
+            "ene": 13.962024772839982,
+            "yiy": -1.9640241900000035,
+            "ala": 17.402881885,
+            "ara": 21.34336464375,
+            "etk": 9.135036,
+            "tuk": -1.9046115118799989
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 26,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 3,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": []
+            }
+          ]
+        },
+        {
+          "month": 226,
+          "dead": false,
+          "resources": {
+            "min": 47.698586252799984,
+            "ene": 392.6873444195322,
+            "yiy": 128.15619876,
+            "ala": 222.46347176,
+            "ara": 0,
+            "tuk": 132.27906652512002,
+            "etk": 113.28225600000003
+          },
+          "income": {
+            "min": -22.078700754000007,
+            "ene": 5.274441943799985,
+            "yiy": -2.523307050000003,
+            "ala": 16.021452575,
+            "ara": 20.706249281249995,
+            "etk": 9.02802,
+            "tuk": -2.1701454966
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 23,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 3,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": []
+            }
+          ]
+        },
+        {
+          "month": 227,
+          "dead": false,
+          "resources": {
+            "min": 24.757525521999987,
+            "ene": 394.3902035342922,
+            "yiy": 125.07360885,
+            "ala": 237.873495025,
+            "ara": 0,
+            "tuk": 129.84338704380002,
+            "etk": 122.20326000000003
+          },
+          "income": {
+            "min": -22.941060730799997,
+            "ene": 1.7028591147599883,
+            "yiy": -3.0825899099999994,
+            "ala": 15.410023265000005,
+            "ara": 20.06913391875,
+            "etk": 8.921004,
+            "tuk": -2.4356794813199993
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 20,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 3,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": [
+                {
+                  "key": "dokum",
+                  "left": 42,
+                  "tot": 42,
+                  "dem": true,
+                  "paid": {},
+                  "refund": {
+                    "min": 74
+                  },
+                  "s": 41,
+                  "p": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "month": 228,
+          "dead": false,
+          "resources": {
+            "min": 0.9541048143999866,
+            "ene": 398.5274798200122,
+            "yiy": 121.43173608,
+            "ala": 252.67208898,
+            "ara": 0,
+            "tuk": 127.14217357776002,
+            "etk": 131.01724800000002
+          },
+          "income": {
+            "min": -23.8034207076,
+            "ene": 4.137276285719992,
+            "yiy": -3.6418727700000026,
+            "ala": 14.798593955000003,
+            "ara": 19.43201855625,
+            "etk": 8.813988,
+            "tuk": -2.7012134660399987
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 17,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 3,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": [
+                {
+                  "key": "dokum",
+                  "left": 12,
+                  "tot": 42,
+                  "dem": true,
+                  "paid": {},
+                  "refund": {
+                    "min": 74
+                  },
+                  "s": 41,
+                  "p": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "month": 229,
+          "dead": false,
+          "resources": {
+            "min": 65.18452412999999,
+            "ene": 404.8671732766922,
+            "yiy": 117.23058044999999,
+            "ala": 260.84686541,
+            "ara": 0,
+            "tuk": 124.17542612700002,
+            "etk": 139.72422000000003
+          },
+          "income": {
+            "min": -9.769580684400001,
+            "ene": 6.339693456679981,
+            "yiy": -4.201155630000002,
+            "ala": 8.17477643,
+            "ara": 18.79490319375,
+            "etk": 8.706972,
+            "tuk": -2.966747450759999
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 14,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 2,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": []
+            }
+          ]
+        },
+        {
+          "month": 230,
+          "dead": false,
+          "resources": {
+            "min": 104.55258346879998,
+            "ene": 409.3512839043322,
+            "yiy": 112.47014195999999,
+            "ala": 268.61402230000004,
+            "ara": 0,
+            "tuk": 120.94314469152002,
+            "etk": 108.32417600000002
+          },
+          "income": {
+            "min": -10.631940661199998,
+            "ene": 4.484110627639993,
+            "yiy": -4.76043849,
+            "ala": 7.767156889999999,
+            "ara": 18.157787831250005,
+            "etk": 8.599956,
+            "tuk": -3.2322814354799974
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 11,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 2,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": []
+            }
+          ]
+        },
+        {
+          "month": 231,
+          "dead": false,
+          "resources": {
+            "min": 93.05828283079998,
+            "ene": 415.28112949063785,
+            "yiy": 107.15042061,
+            "ala": 275.97355965,
+            "ara": 0,
+            "tuk": 117.44532927132002,
+            "etk": 116.81711600000003
+          },
+          "income": {
+            "min": -11.494300638,
+            "ene": 5.929845586305639,
+            "yiy": -5.319721350000002,
+            "ala": 7.359537349999998,
+            "ara": 17.520672468750004,
+            "etk": 8.49294,
+            "tuk": -3.4978154201999985
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 8,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 2,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": [
+                {
+                  "key": "dokum",
+                  "left": 42,
+                  "tot": 42,
+                  "dem": true,
+                  "paid": {},
+                  "refund": {
+                    "min": 74
+                  },
+                  "s": 41,
+                  "p": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "month": 232,
+          "dead": false,
+          "resources": {
+            "min": 140.70162221599998,
+            "ene": 419.23534432835055,
+            "yiy": 101.27141639999999,
+            "ala": 282.92547746,
+            "ara": 0,
+            "tuk": 113.68197986640003,
+            "etk": 85.20304000000003
+          },
+          "income": {
+            "min": -12.356660614800003,
+            "ene": 3.954214837712705,
+            "yiy": -5.8790042100000015,
+            "ala": 6.951917809999998,
+            "ara": 16.883557106250002,
+            "etk": 8.385924,
+            "tuk": -3.7633494049199987
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 5,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 2,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": [
+                {
+                  "key": "dokum",
+                  "left": 12,
+                  "tot": 42,
+                  "dem": true,
+                  "paid": {},
+                  "refund": {
+                    "min": 74
+                  },
+                  "s": 41,
+                  "p": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "month": 233,
+          "dead": false,
+          "resources": {
+            "min": 106.37880162439998,
+            "ene": 429.95551167939624,
+            "yiy": 94.83312932999999,
+            "ala": 252.27262659500002,
+            "ara": 0,
+            "tuk": 109.65309647676003,
+            "etk": 93.48194800000003
+          },
+          "income": {
+            "min": 1.6771794084000007,
+            "ene": 10.720167351045674,
+            "yiy": -6.438287070000003,
+            "ala": 1.347149134999999,
+            "ara": 16.24644174375,
+            "etk": 8.278908,
+            "tuk": -4.028883389639999
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 2,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 1,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": [
+                {
+                  "key": "ciftlik",
+                  "left": 68,
+                  "tot": 68,
+                  "paid": {
+                    "min": 110
+                  },
+                  "s": 41,
+                  "p": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "month": 234,
+          "dead": false,
+          "resources": {
+            "min": 107.19362105599998,
+            "ene": 435.0827312911852,
+            "yiy": 87.8355594,
+            "ala": 252.64596596,
+            "ara": 0,
+            "tuk": 105.35867910240003,
+            "etk": 101.65384000000003
+          },
+          "income": {
+            "min": 0.8148194315999986,
+            "ene": 5.1272196117889735,
+            "yiy": -6.997569930000003,
+            "ala": 0.37333936499999876,
+            "ara": 15.609326381249998,
+            "etk": 8.171892,
+            "tuk": -4.29441737436
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 0,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 1,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": [
+                {
+                  "key": "ciftlik",
+                  "left": 38,
+                  "tot": 68,
+                  "paid": {
+                    "min": 110
+                  },
+                  "s": 41,
+                  "p": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "month": 235,
+          "dead": false,
+          "resources": {
+            "min": 107.43353383639999,
+            "ene": 438.7479857434697,
+            "yiy": 80.46513422999999,
+            "ala": 241.483432145,
+            "ara": 0,
+            "tuk": 100.88723907156003,
+            "etk": 109.75438800000003
+          },
+          "income": {
+            "min": 0.23991278039999886,
+            "ene": 3.6652544522845147,
+            "yiy": -7.370425170000001,
+            "ala": 0.23746618499999883,
+            "ara": 15.18458280625,
+            "etk": 8.100548,
+            "tuk": -4.471440030839998
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 0,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 1,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": [
+                {
+                  "key": "ciftlik",
+                  "left": 8,
+                  "tot": 68,
+                  "paid": {
+                    "min": 110
+                  },
+                  "s": 41,
+                  "p": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "month": 236,
+          "dead": false,
+          "resources": {
+            "min": 107.67344661679999,
+            "ene": 440.81324019575425,
+            "yiy": 80.09788524,
+            "ala": 241.72089832999998,
+            "ara": 0,
+            "tuk": 96.41579904072003,
+            "etk": 117.85493600000004
+          },
+          "income": {
+            "min": 0.23991278039999886,
+            "ene": 2.0652544522845204,
+            "yiy": -0.36724898999999667,
+            "ala": 0.23746618499999883,
+            "ara": 15.18458280625,
+            "etk": 8.100548,
+            "tuk": -4.471440030839998
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 0,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 1,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 2
+              },
+              "q": []
+            }
+          ]
+        },
+        {
+          "month": 237,
+          "dead": false,
+          "resources": {
+            "min": 107.9133593972,
+            "ene": 442.8784946480388,
+            "yiy": 95.73063625,
+            "ala": 241.95836451499997,
+            "ara": 0,
+            "tuk": 91.94435900988003,
+            "etk": 125.95548400000004
+          },
+          "income": {
+            "min": 0.23991278039999886,
+            "ene": 2.0652544522845204,
+            "yiy": -0.36724898999999667,
+            "ala": 0.23746618499999883,
+            "ara": 15.18458280625,
+            "etk": 8.100548,
+            "tuk": -4.471440030839998
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 0,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 1,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 2
+              },
+              "q": []
+            }
+          ]
+        },
+        {
+          "month": 238,
+          "dead": false,
+          "resources": {
+            "min": 8.153272177600002,
+            "ene": 444.9437491003233,
+            "yiy": 95.36338726000001,
+            "ala": 230.79583069999995,
+            "ara": 0,
+            "tuk": 87.47291897904003,
+            "etk": 134.05603200000004
+          },
+          "income": {
+            "min": 0.23991278039999886,
+            "ene": 2.0652544522845204,
+            "yiy": -0.36724898999999667,
+            "ala": 0.23746618499999883,
+            "ara": 15.18458280625,
+            "etk": 8.100548,
+            "tuk": -4.471440030839998
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 0,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 1,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 2
+              },
+              "q": []
+            }
+          ]
+        },
+        {
+          "month": 239,
+          "dead": false,
+          "resources": {
+            "min": 8.393184958,
+            "ene": 445.29300355260784,
+            "yiy": 94.99613827000002,
+            "ala": 231.03329688499994,
+            "ara": 0,
+            "tuk": 83.00147894820003,
+            "etk": 97.15658000000005
+          },
+          "income": {
+            "min": 0.23991278039999886,
+            "ene": 0.34925445228451224,
+            "yiy": -0.36724898999999667,
+            "ala": 0.23746618499999883,
+            "ara": 15.18458280625,
+            "etk": 8.100548,
+            "tuk": -4.471440030839998
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 0,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 1,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 2
+              },
+              "q": []
+            }
+          ]
+        },
+        {
+          "month": 240,
+          "dead": false,
+          "resources": {
+            "min": 8.6330977384,
+            "ene": 449.9182580048924,
+            "yiy": 110.62888928000002,
+            "ala": 231.73276306999995,
+            "ara": 0,
+            "tuk": 78.53003891736003,
+            "etk": 105.25712800000005
+          },
+          "income": {
+            "min": 0.23991278039999886,
+            "ene": 4.625254452284516,
+            "yiy": -0.36724898999999667,
+            "ala": 0.6994661849999986,
+            "ara": 15.18458280625,
+            "etk": 8.100548,
+            "tuk": -4.471440030839998
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 0,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 1,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 2
+              },
+              "q": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 11,
+      "start": 217,
+      "label": "I1",
+      "inputSHA256": "3c583ba4a78bf1bec561f1699ccc3793a674db0c96c129c71892ea09c3f9eebf",
+      "initialSaveHash": "6fe7312a8e075df75d7e74a9b74d09fc56a5f60b765748bffc858bc6a95c80e3",
+      "initialRng": 1029091949,
+      "stats": {
+        "techs": 62,
+        "colonies": 18,
+        "ships": 218,
+        "power": 38083,
+        "deliveries": 208,
+        "critical": 5,
+        "criticalByActor": {
+          "7": 4,
+          "5": 1
+        },
+        "alive": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          7
+        ],
+        "newSurvivors": [
+          7
+        ],
+        "demolitions": 18,
+        "rebuild12": 5,
+        "cycleNetMinerals": 642,
+        "finishedCycleBuildingDays": 420,
+        "cycles": [
+          {
+            "actor": 1,
+            "s": 13,
+            "p": 2,
+            "key": "dokum",
+            "demDay": 6638,
+            "orderDay": 6660,
+            "netMinerals": 136,
+            "interruptionDays": 117
+          },
+          {
+            "actor": 3,
+            "s": 41,
+            "p": 2,
+            "key": "liman",
+            "demDay": 6668,
+            "orderDay": 6690,
+            "netMinerals": 117,
+            "interruptionDays": 97
+          },
+          {
+            "actor": 2,
+            "s": 3,
+            "p": 2,
+            "key": "dokum",
+            "demDay": 6887,
+            "orderDay": 6900,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 3,
+            "s": 41,
+            "p": 4,
+            "key": "liman",
+            "demDay": 6960,
+            "orderDay": 6960,
+            "netMinerals": 117,
+            "interruptionDays": 75
+          },
+          {
+            "actor": 3,
+            "s": 41,
+            "p": 4,
+            "key": "dokum",
+            "demDay": 7174,
+            "orderDay": 7200,
+            "netMinerals": 136,
+            "interruptionDays": null
+          }
+        ]
+      },
+      "resources": {
+        "min": {
+          "criticalMonths": [
+            220,
+            221,
+            223,
+            225
+          ],
+          "maxRun": 2,
+          "stockZeroMonths": [],
+          "minStock": 21.84202942440004,
+          "lastStock": 23.274908105850024,
+          "lastNet": -0.5815046521500022
+        },
+        "yiy": {
+          "criticalMonths": [
+            230,
+            231,
+            232,
+            233,
+            234,
+            235,
+            236,
+            237,
+            238,
+            239,
+            240
+          ],
+          "maxRun": 11,
+          "stockZeroMonths": [
+            234,
+            235,
+            236,
+            237,
+            239,
+            240
+          ],
+          "minStock": 0,
+          "lastStock": 0,
+          "lastNet": -6.599273461249995
+        },
+        "tuk": {
+          "criticalMonths": [],
+          "maxRun": 0,
+          "stockZeroMonths": [],
+          "minStock": 79.3097690560275,
+          "lastStock": 79.3097690560275,
+          "lastNet": -4.0808409121725004
+        },
+        "ene": {
+          "criticalMonths": [],
+          "maxRun": 0,
+          "stockZeroMonths": [],
+          "minStock": 325.6600335,
+          "lastStock": 328.39118447594785,
+          "lastNet": -4.857362091180988
+        },
+        "ala": {
+          "criticalMonths": [],
+          "maxRun": 0,
+          "stockZeroMonths": [],
+          "minStock": 33.89668919499999,
+          "lastStock": 68.92656671593748,
+          "lastNet": -1.5402587990625012
+        }
+      },
+      "targetAlive": true,
+      "actor7Actions": [
+        {
+          "day": 6540,
+          "step": 60,
+          "kind": "queueBuilding",
+          "rng": -689744070,
+          "actor": 7,
+          "s": 41,
+          "p": 3,
+          "key": "maden",
+          "before": {
+            "min": 324.1616,
+            "ene": 325.6600335,
+            "yiy": 168.03536400000002,
+            "ala": 259.558456,
+            "ara": 0,
+            "tuk": 150.031482,
+            "etk": 78.061648
+          },
+          "after": {
+            "min": 204.16160000000002,
+            "ene": 325.6600335,
+            "yiy": 168.03536400000002,
+            "ala": 259.558456,
+            "ara": 0,
+            "tuk": 150.031482,
+            "etk": 78.061648
+          },
+          "rngBefore": -689744070,
+          "paid": {
+            "min": 120,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          },
+          "intent": null
+        },
+        {
+          "day": 6600,
+          "step": 180,
+          "kind": "queueDemolish",
+          "rng": 945752649,
+          "actor": 7,
+          "s": 41,
+          "p": 3,
+          "key": "dokum",
+          "before": {
+            "min": 70.59961600000003,
+            "ene": 350.9924237449038,
+            "yiy": 144.79727400000002,
+            "ala": 187.406544,
+            "ara": 0,
+            "tuk": 146.02697160000002,
+            "etk": 97.50889600000002
+          },
+          "after": {
+            "min": 70.59961600000003,
+            "ene": 350.9924237449038,
+            "yiy": 144.79727400000002,
+            "ala": 187.406544,
+            "ara": 0,
+            "tuk": 146.02697160000002,
+            "etk": 97.50889600000002
+          },
+          "rngBefore": 945752649,
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          },
+          "intent": null
+        },
+        {
+          "day": 6612,
+          "step": 204,
+          "kind": "job-finished",
+          "rng": 1882141704,
+          "actor": 7,
+          "previousOwner": 7,
+          "s": 41,
+          "p": 3,
+          "key": "maden",
+          "dem": false,
+          "paid": {
+            "min": 120
+          },
+          "before": {
+            "maden": 1,
+            "santral": 3,
+            "liman": 2,
+            "dokum": 4,
+            "arsiv": 1,
+            "lab": 1,
+            "fabrika": 1
+          },
+          "after": {
+            "maden": 2,
+            "santral": 3,
+            "liman": 2,
+            "dokum": 4,
+            "arsiv": 1,
+            "lab": 1,
+            "fabrika": 1
+          },
+          "success": true
+        },
+        {
+          "day": 6654,
+          "step": 288,
+          "kind": "job-finished",
+          "rng": -483682585,
+          "actor": 7,
+          "previousOwner": 7,
+          "s": 41,
+          "p": 3,
+          "key": "dokum",
+          "dem": true,
+          "paid": {},
+          "refund": {
+            "min": 74
+          },
+          "before": {
+            "maden": 2,
+            "santral": 3,
+            "liman": 2,
+            "dokum": 4,
+            "arsiv": 1,
+            "lab": 1,
+            "fabrika": 1
+          },
+          "after": {
+            "maden": 2,
+            "santral": 3,
+            "liman": 2,
+            "dokum": 3,
+            "arsiv": 1,
+            "lab": 1,
+            "fabrika": 1
+          },
+          "success": true
+        },
+        {
+          "day": 6720,
+          "step": 420,
+          "kind": "queueDemolish",
+          "rng": -2041000213,
+          "actor": 7,
+          "s": 41,
+          "p": 3,
+          "key": "dokum",
+          "before": {
+            "min": 21.768255584000027,
+            "ene": 411.30342992126515,
+            "yiy": 96.65159535000002,
+            "ala": 89.896689195,
+            "ara": 0,
+            "tuk": 136.74295455360001,
+            "etk": 135.11920000000003
+          },
+          "after": {
+            "min": 21.768255584000027,
+            "ene": 411.30342992126515,
+            "yiy": 96.65159535000002,
+            "ala": 89.896689195,
+            "ara": 0,
+            "tuk": 136.74295455360001,
+            "etk": 135.11920000000003
+          },
+          "rngBefore": -2041000213,
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          },
+          "intent": null
+        },
+        {
+          "day": 6762,
+          "step": 504,
+          "kind": "job-finished",
+          "rng": 1313332525,
+          "actor": 7,
+          "previousOwner": 7,
+          "s": 41,
+          "p": 3,
+          "key": "dokum",
+          "dem": true,
+          "paid": {},
+          "refund": {
+            "min": 74
+          },
+          "before": {
+            "maden": 2,
+            "santral": 3,
+            "liman": 2,
+            "dokum": 3,
+            "arsiv": 1,
+            "lab": 1,
+            "fabrika": 1
+          },
+          "after": {
+            "maden": 2,
+            "santral": 3,
+            "liman": 2,
+            "dokum": 2,
+            "arsiv": 1,
+            "lab": 1,
+            "fabrika": 1
+          },
+          "success": true
+        },
+        {
+          "day": 6930,
+          "step": 840,
+          "kind": "queueDemolish",
+          "rng": 1737277298,
+          "actor": 7,
+          "s": 41,
+          "p": 3,
+          "key": "dokum",
+          "before": {
+            "min": 68.52151063080004,
+            "ene": 411.4017722525691,
+            "yiy": 20.12373990000004,
+            "ala": 79.24108827999999,
+            "ara": 0,
+            "tuk": 117.83446029132,
+            "etk": 156.81711600000003
+          },
+          "after": {
+            "min": 68.52151063080004,
+            "ene": 411.4017722525691,
+            "yiy": 20.12373990000004,
+            "ala": 79.24108827999999,
+            "ara": 0,
+            "tuk": 117.83446029132,
+            "etk": 156.81711600000003
+          },
+          "rngBefore": 1737277298,
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          },
+          "intent": null
+        },
+        {
+          "day": 6972,
+          "step": 924,
+          "kind": "job-finished",
+          "rng": 1180289922,
+          "actor": 7,
+          "previousOwner": 7,
+          "s": 41,
+          "p": 3,
+          "key": "dokum",
+          "dem": true,
+          "paid": {},
+          "refund": {
+            "min": 74
+          },
+          "before": {
+            "maden": 2,
+            "santral": 3,
+            "liman": 2,
+            "dokum": 2,
+            "arsiv": 1,
+            "lab": 1,
+            "fabrika": 1
+          },
+          "after": {
+            "maden": 2,
+            "santral": 3,
+            "liman": 2,
+            "dokum": 1,
+            "arsiv": 1,
+            "lab": 1,
+            "fabrika": 1
+          },
+          "success": true
+        },
+        {
+          "day": 6990,
+          "step": 960,
+          "kind": "queueBuilding",
+          "rng": 1349384613,
+          "actor": 7,
+          "s": 41,
+          "p": 3,
+          "key": "ciftlik",
+          "before": {
+            "min": 131.84202942440004,
+            "ene": 391.9350546939172,
+            "yiy": 4.2267915000000436,
+            "ala": 81.38015522499998,
+            "ara": 0,
+            "tuk": 110.04222749676,
+            "etk": 173.48194800000002
+          },
+          "after": {
+            "min": 21.84202942440004,
+            "ene": 391.9350546939172,
+            "yiy": 4.2267915000000436,
+            "ala": 81.38015522499998,
+            "ara": 0,
+            "tuk": 110.04222749676,
+            "etk": 173.48194800000002
+          },
+          "rngBefore": 1349384613,
+          "paid": {
+            "min": 110,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          },
+          "intent": null
+        },
+        {
+          "day": 7058,
+          "step": 1096,
+          "kind": "job-finished",
+          "rng": -1404332361,
+          "actor": 7,
+          "previousOwner": 7,
+          "s": 41,
+          "p": 3,
+          "key": "ciftlik",
+          "dem": false,
+          "paid": {
+            "min": 110
+          },
+          "before": {
+            "maden": 2,
+            "santral": 3,
+            "liman": 2,
+            "dokum": 1,
+            "arsiv": 1,
+            "lab": 1,
+            "fabrika": 1
+          },
+          "after": {
+            "maden": 2,
+            "santral": 3,
+            "liman": 2,
+            "dokum": 1,
+            "arsiv": 1,
+            "lab": 1,
+            "fabrika": 1,
+            "ciftlik": 1
+          },
+          "success": true
+        }
+      ],
+      "targetMonthly": [
+        {
+          "month": 218,
+          "dead": false,
+          "resources": {
+            "min": 204.16160000000002,
+            "ene": 325.6600335,
+            "yiy": 168.03536400000002,
+            "ala": 163.55845599999998,
+            "ara": 0,
+            "tuk": 150.031482,
+            "etk": 78.061648
+          },
+          "income": {
+            "min": -25.8384,
+            "ene": 25.660033499999987,
+            "yiy": -11.964635999999999,
+            "ala": 39.55845599999999,
+            "ara": 27.852052500000006,
+            "etk": 8.061648,
+            "tuk": 0.03148200000000223
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 47,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 1,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 4,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1
+              },
+              "q": [
+                {
+                  "key": "maden",
+                  "left": 72,
+                  "tot": 72,
+                  "paid": {
+                    "min": 120
+                  },
+                  "s": 41,
+                  "p": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "month": 219,
+          "dead": false,
+          "resources": {
+            "min": 172.588544,
+            "ene": 341.3286356846154,
+            "yiy": 156.53274150000001,
+            "ala": 164.19889799999999,
+            "ara": 0,
+            "tuk": 148.1420184,
+            "etk": 87.83878000000001
+          },
+          "income": {
+            "min": -31.573056,
+            "ene": 15.66860218461538,
+            "yiy": -11.502622499999998,
+            "ala": 24.640441999999997,
+            "ara": 23.774151375000002,
+            "etk": 9.777132000000002,
+            "tuk": -1.8894635999999991
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 44,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 1,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 4,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1
+              },
+              "q": [
+                {
+                  "key": "maden",
+                  "left": 42,
+                  "tot": 72,
+                  "paid": {
+                    "min": 120
+                  },
+                  "s": 41,
+                  "p": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "month": 220,
+          "dead": false,
+          "resources": {
+            "min": 70.59961600000003,
+            "ene": 350.9924237449038,
+            "yiy": 144.79727400000002,
+            "ala": 155.406544,
+            "ara": 0,
+            "tuk": 146.02697160000002,
+            "etk": 97.50889600000002
+          },
+          "income": {
+            "min": -31.988928,
+            "ene": 9.663788060288447,
+            "yiy": -11.735467499999999,
+            "ala": 23.207645999999997,
+            "ara": 23.172274125,
+            "etk": 9.670116,
+            "tuk": -2.1150467999999982
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 41,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 1,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 4,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1
+              },
+              "q": [
+                {
+                  "key": "maden",
+                  "left": 12,
+                  "tot": 72,
+                  "paid": {
+                    "min": 120
+                  },
+                  "s": 41,
+                  "p": 3
+                },
+                {
+                  "key": "dokum",
+                  "left": 42,
+                  "tot": 42,
+                  "dem": true,
+                  "paid": {},
+                  "refund": {
+                    "min": 74
+                  },
+                  "s": 41,
+                  "p": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "month": 221,
+          "dead": false,
+          "resources": {
+            "min": 46.479766000000026,
+            "ene": 367.7993716751923,
+            "yiy": 132.82896150000002,
+            "ala": 113.18139399999998,
+            "ara": 0,
+            "tuk": 143.68634160000002,
+            "etk": 107.07199600000003
+          },
+          "income": {
+            "min": -24.11985,
+            "ene": 16.806947930288445,
+            "yiy": -11.9683125,
+            "ala": 21.774849999999994,
+            "ara": 22.570396875,
+            "etk": 9.5631,
+            "tuk": -2.340629999999999
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 38,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 4,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1
+              },
+              "q": [
+                {
+                  "key": "dokum",
+                  "left": 24,
+                  "tot": 42,
+                  "dem": true,
+                  "paid": {},
+                  "refund": {
+                    "min": 74
+                  },
+                  "s": 41,
+                  "p": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "month": 222,
+          "dead": false,
+          "resources": {
+            "min": 56.72311200000003,
+            "ene": 379.29946766067303,
+            "yiy": 120.62780400000003,
+            "ala": 94.70543449999998,
+            "ara": 0,
+            "tuk": 141.12012840000003,
+            "etk": 116.52808000000003
+          },
+          "income": {
+            "min": -13.756653999999997,
+            "ene": 11.500095985480762,
+            "yiy": -12.201157499999999,
+            "ala": 13.524040500000002,
+            "ara": 21.968519625000003,
+            "etk": 9.456084,
+            "tuk": -2.566213199999998
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 35,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 3,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1
+              },
+              "q": []
+            }
+          ]
+        },
+        {
+          "month": 223,
+          "dead": false,
+          "resources": {
+            "min": 42.329654000000026,
+            "ene": 394.6908987908447,
+            "yiy": 108.19380150000002,
+            "ala": 74.96237799999999,
+            "ara": 0,
+            "tuk": 138.32833200000002,
+            "etk": 125.87714800000003
+          },
+          "income": {
+            "min": -14.393458000000003,
+            "ene": 15.391431130171682,
+            "yiy": -12.4340025,
+            "ala": 12.256943500000002,
+            "ara": 21.366642374999998,
+            "etk": 9.349067999999999,
+            "tuk": -2.791796399999999
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 32,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 3,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1
+              },
+              "q": []
+            }
+          ]
+        },
+        {
+          "month": 224,
+          "dead": false,
+          "resources": {
+            "min": 71.76825558400003,
+            "ene": 411.30342992126515,
+            "yiy": 96.65159535000002,
+            "ala": 33.89668919499999,
+            "ara": 0,
+            "tuk": 136.74295455360001,
+            "etk": 95.11920000000003
+          },
+          "income": {
+            "min": -20.561398416,
+            "ene": 16.612531130420436,
+            "yiy": -11.542206149999998,
+            "ala": 14.934311195000003,
+            "ara": 22.184578125,
+            "etk": 9.242052000000001,
+            "tuk": -1.585377446399999
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 29,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 3,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1
+              },
+              "q": [
+                {
+                  "key": "dokum",
+                  "left": 42,
+                  "tot": 42,
+                  "dem": true,
+                  "paid": {},
+                  "refund": {
+                    "min": 74
+                  },
+                  "s": 41,
+                  "p": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "month": 225,
+          "dead": false,
+          "resources": {
+            "min": 50.55191480680003,
+            "ene": 421.16717918636436,
+            "yiy": 84.84394590000002,
+            "ala": 47.44957108,
+            "ara": 0,
+            "tuk": 134.83834304172,
+            "etk": 104.25423600000003
+          },
+          "income": {
+            "min": -21.216340777200003,
+            "ene": 9.863749265099209,
+            "yiy": -11.807649449999998,
+            "ala": 13.552881885000001,
+            "ara": 21.34336464375,
+            "etk": 9.135036,
+            "tuk": -1.9046115118799989
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 26,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 3,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1
+              },
+              "q": [
+                {
+                  "key": "dokum",
+                  "left": 12,
+                  "tot": 42,
+                  "dem": true,
+                  "paid": {},
+                  "refund": {
+                    "min": 74
+                  },
+                  "s": 41,
+                  "p": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "month": 226,
+          "dead": false,
+          "resources": {
+            "min": 117.36941405280002,
+            "ene": 427.74798071220687,
+            "yiy": 72.77085315000002,
+            "ala": 53.76720612999999,
+            "ara": 0,
+            "tuk": 132.66819754512,
+            "etk": 113.28225600000003
+          },
+          "income": {
+            "min": -7.182500754000005,
+            "ene": 6.580801525842531,
+            "yiy": -12.073092749999999,
+            "ala": 6.317635049999996,
+            "ara": 20.706249281249995,
+            "etk": 9.02802,
+            "tuk": -2.1701454966
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 23,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 2,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1
+              },
+              "q": []
+            }
+          ]
+        },
+        {
+          "month": 227,
+          "dead": false,
+          "resources": {
+            "min": 109.32455332200003,
+            "ene": 415.3778344987927,
+            "yiy": 60.43231710000003,
+            "ala": 59.67722163999999,
+            "ara": 0,
+            "tuk": 130.2325180638,
+            "etk": 122.20326000000003
+          },
+          "income": {
+            "min": -8.044860730799998,
+            "ene": 3.5298537865858464,
+            "yiy": -12.338536049999997,
+            "ala": 5.910015509999999,
+            "ara": 20.06913391875,
+            "etk": 8.921004,
+            "tuk": -2.4356794813199993
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 20,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 2,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1
+              },
+              "q": []
+            }
+          ]
+        },
+        {
+          "month": 228,
+          "dead": false,
+          "resources": {
+            "min": 100.41733261440002,
+            "ene": 421.00474054612187,
+            "yiy": 47.82833775000003,
+            "ala": 65.17961761,
+            "ara": 0,
+            "tuk": 127.53130459776,
+            "etk": 131.01724800000002
+          },
+          "income": {
+            "min": -8.907220707599999,
+            "ene": 5.6269060473291574,
+            "yiy": -12.603979349999998,
+            "ala": 5.5023959699999985,
+            "ara": 19.43201855625,
+            "etk": 8.813988,
+            "tuk": -2.7012134660399987
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 17,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 2,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1
+              },
+              "q": []
+            }
+          ]
+        },
+        {
+          "month": 229,
+          "dead": false,
+          "resources": {
+            "min": 90.64775193000003,
+            "ene": 425.2966988541943,
+            "yiy": 46.65891510000004,
+            "ala": 70.27439403999999,
+            "ara": 0,
+            "tuk": 124.564557147,
+            "etk": 139.72422000000003
+          },
+          "income": {
+            "min": -9.769580684400001,
+            "ene": 4.291958308072438,
+            "yiy": -12.869422649999999,
+            "ala": 5.09477643,
+            "ara": 18.79490319375,
+            "etk": 8.706972,
+            "tuk": -2.966747450759999
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 14,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 2,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1
+              },
+              "q": []
+            }
+          ]
+        },
+        {
+          "month": 230,
+          "dead": false,
+          "resources": {
+            "min": 80.01581126880004,
+            "ene": 411.49570942301006,
+            "yiy": 33.52404915000004,
+            "ala": 74.96155092999999,
+            "ara": 0,
+            "tuk": 121.33227571152,
+            "etk": 148.32417600000002
+          },
+          "income": {
+            "min": -10.631940661199998,
+            "ene": 2.099010568815757,
+            "yiy": -13.134865949999996,
+            "ala": 4.687156889999999,
+            "ara": 18.157787831250005,
+            "etk": 8.599956,
+            "tuk": -3.2322814354799974
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 11,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 2,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1
+              },
+              "q": []
+            }
+          ]
+        },
+        {
+          "month": 231,
+          "dead": false,
+          "resources": {
+            "min": 68.52151063080004,
+            "ene": 411.4017722525691,
+            "yiy": 20.12373990000004,
+            "ala": 79.24108827999999,
+            "ara": 0,
+            "tuk": 117.83446029132,
+            "etk": 156.81711600000003
+          },
+          "income": {
+            "min": -11.494300638,
+            "ene": -0.09393717044093819,
+            "yiy": -13.40030925,
+            "ala": 4.279537349999998,
+            "ara": 17.520672468750004,
+            "etk": 8.49294,
+            "tuk": -3.4978154201999985
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 8,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 2,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1
+              },
+              "q": [
+                {
+                  "key": "dokum",
+                  "left": 42,
+                  "tot": 42,
+                  "dem": true,
+                  "paid": {},
+                  "refund": {
+                    "min": 74
+                  },
+                  "s": 41,
+                  "p": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "month": 232,
+          "dead": false,
+          "resources": {
+            "min": 56.16485001600003,
+            "ene": 409.1148873428715,
+            "yiy": 18.15798735000004,
+            "ala": 83.11300608999998,
+            "ara": 0,
+            "tuk": 114.0711108864,
+            "etk": 165.20304000000002
+          },
+          "income": {
+            "min": -12.356660614800003,
+            "ene": -2.2868849096976263,
+            "yiy": -13.665752549999997,
+            "ala": 3.8719178099999976,
+            "ara": 16.883557106250002,
+            "etk": 8.385924,
+            "tuk": -3.7633494049199987
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 5,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 2,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1
+              },
+              "q": [
+                {
+                  "key": "dokum",
+                  "left": 12,
+                  "tot": 42,
+                  "dem": true,
+                  "paid": {},
+                  "refund": {
+                    "min": 74
+                  },
+                  "s": 41,
+                  "p": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "month": 233,
+          "dead": false,
+          "resources": {
+            "min": 21.84202942440004,
+            "ene": 391.9350546939172,
+            "yiy": 4.2267915000000436,
+            "ala": 81.38015522499998,
+            "ara": 0,
+            "tuk": 110.04222749676,
+            "etk": 173.48194800000002
+          },
+          "income": {
+            "min": 1.6771794084000007,
+            "ene": -1.2798326489543257,
+            "yiy": -13.931195849999998,
+            "ala": -1.7328508650000005,
+            "ara": 16.24644174375,
+            "etk": 8.278908,
+            "tuk": -4.028883389639999
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 2,
+                "grow": 0.0920244003590256,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 1,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1
+              },
+              "q": [
+                {
+                  "key": "ciftlik",
+                  "left": 68,
+                  "tot": 68,
+                  "paid": {
+                    "min": 110
+                  },
+                  "s": 41,
+                  "p": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "month": 234,
+          "dead": false,
+          "resources": {
+            "min": 22.65684885600004,
+            "ene": 388.46227430570616,
+            "yiy": 0,
+            "ala": 79.44349458999999,
+            "ara": 0,
+            "tuk": 105.74781012240001,
+            "etk": 136.65384
+          },
+          "income": {
+            "min": 0.8148194315999986,
+            "ene": -3.472780388211021,
+            "yiy": -14.19663915,
+            "ala": -1.9366606350000009,
+            "ara": 15.609326381249998,
+            "etk": 8.171892,
+            "tuk": -4.29441737436
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 0,
+                "grow": -0.1579755996409744,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 1,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1
+              },
+              "q": [
+                {
+                  "key": "ciftlik",
+                  "left": 38,
+                  "tot": 68,
+                  "paid": {
+                    "min": 110
+                  },
+                  "s": 41,
+                  "p": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "month": 235,
+          "dead": false,
+          "resources": {
+            "min": 22.896761636400036,
+            "ene": 383.5275287579907,
+            "yiy": 0,
+            "ala": 77.37096077499999,
+            "ara": 0,
+            "tuk": 101.27637009156001,
+            "etk": 144.754388
+          },
+          "income": {
+            "min": 0.23991278039999886,
+            "ene": -4.93474554771548,
+            "yiy": -14.373601349999998,
+            "ala": -2.072533815000001,
+            "ara": 15.18458280625,
+            "etk": 8.100548,
+            "tuk": -4.471440030839998
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 0,
+                "grow": -0.4079755996409744,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 1,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1
+              },
+              "q": [
+                {
+                  "key": "ciftlik",
+                  "left": 8,
+                  "tot": 68,
+                  "paid": {
+                    "min": 110
+                  },
+                  "s": 41,
+                  "p": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "month": 236,
+          "dead": false,
+          "resources": {
+            "min": 23.136674416800034,
+            "ene": 361.09278321027523,
+            "yiy": 0,
+            "ala": 75.29842695999999,
+            "ara": 0,
+            "tuk": 96.80493006072001,
+            "etk": 152.854936
+          },
+          "income": {
+            "min": 0.23991278039999886,
+            "ene": -6.534745547715474,
+            "yiy": -7.370425170000001,
+            "ala": -2.072533815000001,
+            "ara": 15.18458280625,
+            "etk": 8.100548,
+            "tuk": -4.471440030839998
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 0,
+                "grow": -0.6579755996409744,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 1,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": []
+            }
+          ]
+        },
+        {
+          "month": 237,
+          "dead": false,
+          "resources": {
+            "min": 23.37658719720003,
+            "ene": 354.55803766255974,
+            "yiy": 0,
+            "ala": 73.22589314499999,
+            "ara": 0,
+            "tuk": 92.33349002988001,
+            "etk": 160.955484
+          },
+          "income": {
+            "min": 0.23991278039999886,
+            "ene": -6.534745547715474,
+            "yiy": -7.370425170000001,
+            "ala": -2.072533815000001,
+            "ara": 15.18458280625,
+            "etk": 8.100548,
+            "tuk": -4.471440030839998
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 0,
+                "grow": -0.9079755996409744,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 1,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": []
+            }
+          ]
+        },
+        {
+          "month": 238,
+          "dead": false,
+          "resources": {
+            "min": 23.61649997760003,
+            "ene": 351.6032921148443,
+            "yiy": 4.3295748299999985,
+            "ala": 71.84635932999998,
+            "ara": 0,
+            "tuk": 87.86204999904001,
+            "etk": 124.05603200000002
+          },
+          "income": {
+            "min": 0.23991278039999886,
+            "ene": -2.9547455477154756,
+            "yiy": -7.370425170000001,
+            "ala": -1.3795338150000012,
+            "ara": 15.18458280625,
+            "etk": 8.100548,
+            "tuk": -4.471440030839998
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 18,
+                "stab": 0,
+                "grow": -0.9079755996409744,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 1,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": []
+            }
+          ]
+        },
+        {
+          "month": 239,
+          "dead": false,
+          "resources": {
+            "min": 23.856412758000026,
+            "ene": 333.24854656712887,
+            "yiy": 0,
+            "ala": 70.46682551499998,
+            "ara": 0,
+            "tuk": 83.39060996820001,
+            "etk": 132.15658000000002
+          },
+          "income": {
+            "min": 0.23991278039999886,
+            "ene": -2.9547455477154756,
+            "yiy": -7.370425170000001,
+            "ala": -1.3795338150000012,
+            "ara": 15.18458280625,
+            "etk": 8.100548,
+            "tuk": -4.471440030839998
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 17,
+                "stab": 0,
+                "grow": 0,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 1,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": []
+            }
+          ]
+        },
+        {
+          "month": 240,
+          "dead": false,
+          "resources": {
+            "min": 23.274908105850024,
+            "ene": 328.39118447594785,
+            "yiy": 0,
+            "ala": 68.92656671593748,
+            "ara": 0,
+            "tuk": 79.3097690560275,
+            "etk": 140.20822200000003
+          },
+          "income": {
+            "min": -0.5815046521500022,
+            "ene": -4.857362091180988,
+            "yiy": -6.599273461249995,
+            "ala": -1.5402587990625012,
+            "ara": 14.585191379687501,
+            "etk": 8.051642000000001,
+            "tuk": -4.0808409121725004
+          },
+          "buildings": [
+            {
+              "s": 41,
+              "p": 3,
+              "col": {
+                "pop": 17,
+                "stab": 0,
+                "grow": -0.25,
+                "focus": "yonetim"
+              },
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "liman": 2,
+                "dokum": 1,
+                "arsiv": 1,
+                "lab": 1,
+                "fabrika": 1,
+                "ciftlik": 1
+              },
+              "q": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

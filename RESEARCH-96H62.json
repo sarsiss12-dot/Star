@@ -1,0 +1,48 @@
+{
+  "phase": "96H.6.2",
+  "status": "REJECTED — RESEARCH ONLY",
+  "newGamePublished": false,
+  "canonicalGame": "96H.6.1",
+  "build": "96h61",
+  "PWA": "stars-v96h61",
+  "Save": 8,
+  "startingHead": "a1cc40ddbe902372f0f35416d4a09864018bc99e",
+  "aiSHA256": "27ae25e44d66f5fdbfb04ea7db69aa75769a3165759b6feb0250b5b753e8c739",
+  "runtime19Unchanged": true,
+  "candidate": "I1",
+  "rejection": "Seed11 initial-decision fixture: food zero months0→6, consecutive food critical0→11. Mineral improvement9→4 does not satisfy multi-resource safety.",
+  "tests": {
+    "forecastMechanics": {
+      "pass": 11,
+      "fail": 0
+    },
+    "localGate2": "FAIL",
+    "gate3": "NOT RUN",
+    "gate4": "NOT RUN",
+    "matrix120": "NOT RUN",
+    "long240": "NOT RUN",
+    "canonicalPreservation": {
+      "pass": 40,
+      "fail": 0
+    },
+    "canonicalChromiumPWA": {
+      "pass": 1,
+      "fail": 0
+    },
+    "full135SuiteRegression": "NOT RUN",
+    "full17Chromium": "NOT RUN",
+    "physicalAndroid": "NOT RUN"
+  },
+  "evidence": {
+    "file": "stars-faz96h62-kanit.zip",
+    "kind": "research evidence, not game",
+    "bytes": 11298908,
+    "sha256": "d50128ec2ca9276da1361f679024e1ccfa10fe9e980b561fa5152bc60842f57e",
+    "crc": "PASS",
+    "manifestFiles": 183,
+    "zipEntries": 184,
+    "allFilesVerified": true
+  },
+  "report": "STARS-96H62-SONUC-RAPORU.md",
+  "note": "This is research metadata, not RELEASE-96H62.json. No96h62build or game ZIP exists. Research commit and final remote verification reported separately."
+}

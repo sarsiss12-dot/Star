@@ -1,0 +1,49 @@
+{
+  "rows": [
+    {
+      "seed": 11,
+      "initialSaveRngEqual": true,
+      "sourceOfReusedResults": "Sealed 96H.6.1 evidence; H52 full controls, unchanged AI and reviewed equivalent alliance review. These are reused controls, not rerun campaigns."
+    },
+    {
+      "seed": 7,
+      "initialSaveRngEqual": true,
+      "sourceOfReusedResults": "Sealed 96H.6.1 evidence; H52 full controls, unchanged AI and reviewed equivalent alliance review. These are reused controls, not rerun campaigns."
+    },
+    {
+      "seed": 23,
+      "initialSaveRngEqual": true,
+      "sourceOfReusedResults": "Sealed 96H.6.1 evidence; H52 full controls, unchanged AI and reviewed equivalent alliance review. These are reused controls, not rerun campaigns."
+    },
+    {
+      "seed": 42,
+      "initialSaveRngEqual": true,
+      "sourceOfReusedResults": "Sealed 96H.6.1 evidence; H52 full controls, unchanged AI and reviewed equivalent alliance review. These are reused controls, not rerun campaigns."
+    },
+    {
+      "seed": 99,
+      "initialSaveRngEqual": true,
+      "sourceOfReusedResults": "Sealed 96H.6.1 evidence; H52 full controls, unchanged AI and reviewed equivalent alliance review. These are reused controls, not rerun campaigns."
+    },
+    {
+      "seed": 123,
+      "initialSaveRngEqual": true,
+      "sourceOfReusedResults": "Sealed 96H.6.1 evidence; H52 full controls, unchanged AI and reviewed equivalent alliance review. These are reused controls, not rerun campaigns."
+    },
+    {
+      "seed": 404,
+      "initialSaveRngEqual": true,
+      "sourceOfReusedResults": "Sealed 96H.6.1 evidence; H52 full controls, unchanged AI and reviewed equivalent alliance review. These are reused controls, not rerun campaigns."
+    },
+    {
+      "seed": 2026,
+      "initialSaveRngEqual": true,
+      "sourceOfReusedResults": "Sealed 96H.6.1 evidence; H52 full controls, unchanged AI and reviewed equivalent alliance review. These are reused controls, not rerun campaigns."
+    }
+  ],
+  "reviewedDiplomacyNormalizationEqual": true,
+  "mainOnlyBuildIDChanged": true,
+  "newH61Local218to240FullSaveRngMatchesReusedControl": true,
+  "previousH61Release120FullSaveRng": "Previously verified, not rerun this phase",
+  "status": "PASS"
+}

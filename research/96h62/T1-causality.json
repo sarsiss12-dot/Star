@@ -1,0 +1,149 @@
+{
+  "purpose": "Diagnostic only of rejected T1, not a second new candidate",
+  "startSameSave": true,
+  "critical": [
+    {
+      "label": "control",
+      "actor7": 9
+    },
+    {
+      "label": "T1-owner-only",
+      "actor7": 9
+    }
+  ],
+  "comparisons": [
+    {
+      "month": 219,
+      "wholeSaveEqual": true,
+      "rngEqual": true,
+      "actor7Equal": true
+    },
+    {
+      "month": 220,
+      "wholeSaveEqual": true,
+      "rngEqual": true,
+      "actor7Equal": true
+    },
+    {
+      "month": 221,
+      "wholeSaveEqual": true,
+      "rngEqual": true,
+      "actor7Equal": true
+    },
+    {
+      "month": 222,
+      "wholeSaveEqual": true,
+      "rngEqual": true,
+      "actor7Equal": true
+    },
+    {
+      "month": 223,
+      "wholeSaveEqual": true,
+      "rngEqual": true,
+      "actor7Equal": true
+    },
+    {
+      "month": 224,
+      "wholeSaveEqual": true,
+      "rngEqual": true,
+      "actor7Equal": true
+    },
+    {
+      "month": 225,
+      "wholeSaveEqual": true,
+      "rngEqual": true,
+      "actor7Equal": true
+    },
+    {
+      "month": 226,
+      "wholeSaveEqual": true,
+      "rngEqual": true,
+      "actor7Equal": true
+    },
+    {
+      "month": 227,
+      "wholeSaveEqual": true,
+      "rngEqual": true,
+      "actor7Equal": true
+    },
+    {
+      "month": 228,
+      "wholeSaveEqual": true,
+      "rngEqual": true,
+      "actor7Equal": true
+    },
+    {
+      "month": 229,
+      "wholeSaveEqual": true,
+      "rngEqual": true,
+      "actor7Equal": true
+    },
+    {
+      "month": 230,
+      "wholeSaveEqual": true,
+      "rngEqual": true,
+      "actor7Equal": true
+    },
+    {
+      "month": 231,
+      "wholeSaveEqual": true,
+      "rngEqual": true,
+      "actor7Equal": true
+    },
+    {
+      "month": 232,
+      "wholeSaveEqual": true,
+      "rngEqual": true,
+      "actor7Equal": true
+    },
+    {
+      "month": 233,
+      "wholeSaveEqual": true,
+      "rngEqual": true,
+      "actor7Equal": true
+    },
+    {
+      "month": 234,
+      "wholeSaveEqual": true,
+      "rngEqual": true,
+      "actor7Equal": true
+    },
+    {
+      "month": 235,
+      "wholeSaveEqual": true,
+      "rngEqual": true,
+      "actor7Equal": true
+    },
+    {
+      "month": 236,
+      "wholeSaveEqual": true,
+      "rngEqual": true,
+      "actor7Equal": true
+    },
+    {
+      "month": 237,
+      "wholeSaveEqual": true,
+      "rngEqual": true,
+      "actor7Equal": true
+    },
+    {
+      "month": 238,
+      "wholeSaveEqual": true,
+      "rngEqual": true,
+      "actor7Equal": true
+    },
+    {
+      "month": 239,
+      "wholeSaveEqual": true,
+      "rngEqual": true,
+      "actor7Equal": true
+    },
+    {
+      "month": 240,
+      "wholeSaveEqual": true,
+      "rngEqual": true,
+      "actor7Equal": true
+    }
+  ],
+  "fullGlobalT1HistoricalActor7Critical": 10
+}

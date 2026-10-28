@@ -1,0 +1,11 @@
+PASS frame, forecasts and timed plan preserve exact Save8 and RNG
+PASS paid serial job clock uses real completion and first production month
+PASS factory beyond six months supplies no early production credit
+PASS already paid queue is not charged twice
+PASS new purchase charges exact real upfront price and waits until actual completion
+PASS income-improving mine cannot spend the bridge stock into a worse mineral outage
+PASS recovery can append real paid demolition to a nonempty queue when it improves all crisis paths
+PASS queued demolition refund and input relief appear only at real completion
+PASS invalid completed job has no phantom output and refunds its paid cost once
+PASS freight obligations use actual due dates and expiry without precrediting receipts
+PASS original three-month financing cutoff remains and no A2/C2 patch is included

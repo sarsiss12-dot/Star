@@ -1,0 +1,82 @@
+{
+  "environment": "Host Node.js v24.22.1; physical mobile and browser performance NOT RUN. Save deserialization and snapshot preparation excluded from timing. Retained heap after GC is host-level diagnostic, not Android memory acceptance.",
+  "fullGameClonesPerProductionForecast": 0,
+  "rows": [
+    {
+      "actor": 1,
+      "label": "control",
+      "samples": 30,
+      "warmup": 5,
+      "medianMs": 7.051378000000113,
+      "p95Ms": 13.243908000000374,
+      "meanMs": 8.012727100000014,
+      "minMs": 5.468654000000242,
+      "maxMs": 25.996458000000075,
+      "calls": {
+        "aiEconomyPlan": 24,
+        "aiBuildingDelta": 77
+      },
+      "countsStable": true,
+      "retainedHeapDeltaBytes": 5947728,
+      "sameSaveRepeatedOutputsEqual": true
+    },
+    {
+      "actor": 1,
+      "label": "I1",
+      "samples": 30,
+      "warmup": 5,
+      "medianMs": 8.827391999999236,
+      "p95Ms": 11.784168000000136,
+      "meanMs": 9.323873533333122,
+      "minMs": 7.5373469999994995,
+      "maxMs": 12.052725999999893,
+      "calls": {
+        "aiEconomyPlan": 25,
+        "aiBuildingDelta": 109,
+        "aiStockFrame": 6,
+        "aiStockPath": 11
+      },
+      "countsStable": true,
+      "retainedHeapDeltaBytes": 5039320,
+      "sameSaveRepeatedOutputsEqual": true
+    },
+    {
+      "actor": 7,
+      "label": "control",
+      "samples": 30,
+      "warmup": 5,
+      "medianMs": 18.503897999999026,
+      "p95Ms": 21.925006000001304,
+      "meanMs": 18.754539166666593,
+      "minMs": 16.222265000000334,
+      "maxMs": 23.449846999999863,
+      "calls": {
+        "aiEconomyPlan": 9,
+        "aiBuildingDelta": 11
+      },
+      "countsStable": true,
+      "retainedHeapDeltaBytes": 4186896,
+      "sameSaveRepeatedOutputsEqual": true
+    },
+    {
+      "actor": 7,
+      "label": "I1",
+      "samples": 30,
+      "warmup": 5,
+      "medianMs": 18.98678199999995,
+      "p95Ms": 26.68579099999988,
+      "meanMs": 19.506347599999813,
+      "minMs": 16.82372700000269,
+      "maxMs": 26.81778900000063,
+      "calls": {
+        "aiEconomyPlan": 10,
+        "aiStockFrame": 2,
+        "aiStockPath": 6,
+        "aiBuildingDelta": 15
+      },
+      "countsStable": true,
+      "retainedHeapDeltaBytes": 4190136,
+      "sameSaveRepeatedOutputsEqual": true
+    }
+  ]
+}

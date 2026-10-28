@@ -1,0 +1,188 @@
+{
+  "purpose": "New analysis of sealed prior evidence, not new C2 campaign",
+  "firstDivergenceMonth": 42,
+  "sameRngAtFirstDivergence": true,
+  "firstDifferentReplacement": {
+    "control": [
+      {
+        "day": 1260,
+        "step": 2520,
+        "kind": "demolition-choice",
+        "rng": -1972018709,
+        "actor": 2,
+        "s": 0,
+        "p": 0,
+        "needs": [
+          "kale",
+          "lab"
+        ],
+        "pick": {
+          "key": "dokum",
+          "wanted": "kale",
+          "score": 11.287965031477139,
+          "delta": {
+            "ene": 3.2,
+            "min": 14.020430769230769,
+            "yiy": 0,
+            "ala": -10.870470000000001,
+            "tuk": 0,
+            "ara": 0,
+            "etk": 0
+          }
+        }
+      }
+    ],
+    "C2": [
+      {
+        "day": 1260,
+        "step": 2520,
+        "kind": "demolition-choice",
+        "rng": -1972018709,
+        "actor": 2,
+        "s": 0,
+        "p": 0,
+        "needs": [
+          "kale",
+          "lab"
+        ],
+        "pick": {
+          "key": "lab",
+          "wanted": "kale",
+          "score": -4.707768359999992,
+          "delta": {
+            "ene": 4.800000000000001,
+            "min": 0,
+            "yiy": 0,
+            "ala": 0,
+            "tuk": 0,
+            "ara": -14.307768359999994,
+            "etk": 0
+          }
+        }
+      }
+    ]
+  },
+  "tradeTimeline": [
+    {
+      "month": 30,
+      "control": 2,
+      "C2": 2
+    },
+    {
+      "month": 60,
+      "control": 29,
+      "C2": 29
+    },
+    {
+      "month": 90,
+      "control": 61,
+      "C2": 59
+    },
+    {
+      "month": 120,
+      "control": 84,
+      "C2": 82
+    },
+    {
+      "month": 180,
+      "control": 140,
+      "C2": 137
+    },
+    {
+      "month": 240,
+      "control": 204,
+      "C2": 155
+    }
+  ],
+  "finalTradeByActor": {
+    "control": [
+      {
+        "id": 1,
+        "deliveries": 0,
+        "partners": [
+          "2",
+          "5",
+          "7"
+        ]
+      },
+      {
+        "id": 2,
+        "deliveries": 0,
+        "partners": [
+          "1",
+          "5",
+          "7"
+        ]
+      },
+      {
+        "id": 3,
+        "deliveries": 0,
+        "partners": []
+      },
+      {
+        "id": 4,
+        "deliveries": 99,
+        "partners": [
+          "5",
+          "7"
+        ]
+      },
+      {
+        "id": 5,
+        "deliveries": 103,
+        "partners": [
+          "1",
+          "2",
+          "4",
+          "7"
+        ]
+      },
+      {
+        "id": 7,
+        "deliveries": 2,
+        "partners": [
+          "1",
+          "2",
+          "4",
+          "5"
+        ]
+      }
+    ],
+    "C2": [
+      {
+        "id": 1,
+        "deliveries": 0,
+        "partners": [
+          "2"
+        ]
+      },
+      {
+        "id": 2,
+        "deliveries": 0,
+        "partners": [
+          "1"
+        ]
+      },
+      {
+        "id": 3,
+        "deliveries": 0,
+        "partners": []
+      },
+      {
+        "id": 4,
+        "deliveries": 76,
+        "partners": [
+          "5"
+        ]
+      },
+      {
+        "id": 5,
+        "deliveries": 79,
+        "partners": [
+          "4"
+        ]
+      }
+    ]
+  },
+  "limitation": "First replacement difference is direct evidence. It does not prove that one lost laboratory caused the entire 240-month trade decline; later diplomacy, births, needs and routes differ."
+}

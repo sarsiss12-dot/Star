@@ -1,0 +1,14 @@
+{
+  "head": "a1cc40ddbe902372f0f35416d4a09864018bc99e",
+  "zipBytes": 764471,
+  "zipSHA256": "68b64e6cb918a106733568761b0a1a30b16e4550c96d2e26ebde56822ebcb6a0",
+  "zipCRC": "PASS",
+  "runtime19": "PASS",
+  "build": "96h61",
+  "saveVersion": 8,
+  "AI": "27ae25e44d66f5fdbfb04ea7db69aa75769a3165759b6feb0250b5b753e8c739",
+  "previousEvidenceSHA256": "a2aa257f9092e70769b7d43beaea15f5a93222f9ec0c0e9a3c087656587e3003",
+  "previousEvidenceCRC": "PASS",
+  "previousEvidenceManifestFiles": 521,
+  "usedLocalEvidenceFilesVerified": 211
+}

@@ -1,0 +1,50 @@
+{
+  "results": [
+    {
+      "name": "frame, forecasts and timed plan preserve exact Save8 and RNG",
+      "status": "PASS"
+    },
+    {
+      "name": "paid serial job clock uses real completion and first production month",
+      "status": "PASS"
+    },
+    {
+      "name": "factory beyond six months supplies no early production credit",
+      "status": "PASS"
+    },
+    {
+      "name": "already paid queue is not charged twice",
+      "status": "PASS"
+    },
+    {
+      "name": "new purchase charges exact real upfront price and waits until actual completion",
+      "status": "PASS"
+    },
+    {
+      "name": "income-improving mine cannot spend the bridge stock into a worse mineral outage",
+      "status": "PASS"
+    },
+    {
+      "name": "recovery can append real paid demolition to a nonempty queue when it improves all crisis paths",
+      "status": "PASS"
+    },
+    {
+      "name": "queued demolition refund and input relief appear only at real completion",
+      "status": "PASS"
+    },
+    {
+      "name": "invalid completed job has no phantom output and refunds its paid cost once",
+      "status": "PASS"
+    },
+    {
+      "name": "freight obligations use actual due dates and expiry without precrediting receipts",
+      "status": "PASS"
+    },
+    {
+      "name": "original three-month financing cutoff remains and no A2/C2 patch is included",
+      "status": "PASS"
+    }
+  ],
+  "pass": 11,
+  "fail": 0
+}
