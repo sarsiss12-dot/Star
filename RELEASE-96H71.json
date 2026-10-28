@@ -1,0 +1,99 @@
+{
+  "phase": "96H.7.1",
+  "build": "96h71",
+  "pwa_cache": "stars-v96h71",
+  "save_version": 8,
+  "parent_commit": "73c0f2e8d58024c0350e108f68e1dcf708ce8a51",
+  "parent_game": "96H.6.1",
+  "parent_zip_sha256": "68b64e6cb918a106733568761b0a1a30b16e4550c96d2e26ebde56822ebcb6a0",
+  "scope": "Save8 load hotfix only. AI decisions, economy, military strategy, galaxy limits and RNG order unchanged.",
+  "accepted": [
+    "restoreJoint accepts closed joint-plan history with only its sponsor (members>=1); active plans still require >=2 members (identical to research/96h63/SAVE8-GUARD-PROPOSED.patch)"
+  ],
+  "root_cause": "jointValid removes members whose political binding changed and closes the plan when only the sponsor remains; the closed plan is kept in Save history with members.length===1, but restoreJoint required >=2 members for every plan, so the game's own Save8 failed with 'Geçersiz ortak sefer kaydı'. Natural reproduction: federation dissolves while members stay allied (binding fed->ally).",
+  "not_applied": [
+    "A1",
+    "A2",
+    "AC",
+    "C1",
+    "C2",
+    "D1",
+    "D2",
+    "T1",
+    "I1",
+    "F1",
+    "CAPACITY",
+    "campaign_deadline"
+  ],
+  "ai_sha256": "f48608cc82ca46b5028c637dcabbfb1b3e2ae09f1e3c1eb24bd2c4c1b326d8d0",
+  "runtime_changed": [
+    "ai.js",
+    "main.js",
+    "sw.js"
+  ],
+  "game": {
+    "file": "stars-faz96h71.zip",
+    "bytes": 764492,
+    "sha256": "2c85cc5e714b69d357c6fad1b7389fab13d082a9f48bf733f279992d3bc9ae3b",
+    "crc": "PASS",
+    "members": 20,
+    "manifest_runtime_files": 19,
+    "byte_reproducible": "tools/package-release.py reproduces stars-faz96h61.zip byte-identically from its commit"
+  },
+  "tests": {
+    "node": "Node v22.22.0",
+    "baseline_before_change": {
+      "suites": 135,
+      "pass": 6065,
+      "fail": 3
+    },
+    "after_change": {
+      "suites": 136,
+      "pass": 6075,
+      "fail": 3
+    },
+    "new_suite": {
+      "file": "tests/faz96h71_closed_joint_save_test.js",
+      "pass": 10,
+      "fail": 0
+    },
+    "existing_suites_identical_counts": 135,
+    "known_preexisting_fail": "faz95d_identity_test.js x3 'historical seeded geography preserved': last-digit floating point differences in generated system coordinates vs 95C1 fixtures under this Node/V8; fails identically before the change; ai.js not involved",
+    "chromium": {
+      "script": "tests/browser-96h71.cjs",
+      "pass": 19,
+      "fail": 0,
+      "page_errors": 0,
+      "negative_control_on_96h61": "new 2 scenarios FAIL as expected"
+    },
+    "verify_release_extracted_zip": "PASS",
+    "campaign_120_240": "NOT RUN (no AI decision change)",
+    "physical_android": "NOT RUN"
+  },
+  "runtime_files": {
+    "ai.js": "f48608cc82ca46b5028c637dcabbfb1b3e2ae09f1e3c1eb24bd2c4c1b326d8d0",
+    "archive-ui.js": "f3b43957f97f2a32add1f40fc22f493eeca89bc5e1db05e5a5de92eef0e9fc03",
+    "audio.js": "6ddf6e388fa404394fee6220c2bfeeb3d1f9601c51a35ccdfe3181a8781942f7",
+    "combat.js": "b4e21fcdb6fdaaa93da07313131470de3e8a3c28b5650226a9c4a2713bde73a5",
+    "commerce-ui.js": "cc7fef5ab43176093251916aaafbdd873424da0630ec46fe6d3d5106a690b8d4",
+    "commerce.js": "978e4f6b01faed1babeade20070447cbcfaa4e2ea70793a78e50f20fbe66be01",
+    "construction.js": "d9b544b0328f26576ff90e02fe49c1b7f3798dfd844a8c39ee8dc6c0890debda",
+    "diplomacy.js": "ca589f8d2581e7189f6ace471db9bf2e9e1e504117eb2249b7ce9f04e206eaf4",
+    "economic-ledger.js": "67d07f3ee4777cd7c246c8b37dda7cf1577cf86c19a6edeba68945a5d3063501",
+    "economy-ui.js": "61f6e2dcef7f37143821edccf67552718a210ec555f7b8f9074c68191fd5cbcc",
+    "economy.js": "5d412d488760ae2b7193b13822b747788130b63ed782e62bfbd3223154b69d22",
+    "inbox.js": "5f53ac2ca9c3ca8d5f1a12a9e1ba2b2a247ab7e350df0ec9169a13cfe3285204",
+    "index.html": "984d2c51e33637a0b3312a072e3348b5e943f4c2c7156530affeb7d6ceb83259",
+    "main.js": "961a4091d329890cb15c42f16c941b4955bd277f846e0042f484c32b5a8a71c3",
+    "manifest.json": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
+    "map.js": "d8ca27ee07c484b7399f95d8031aa70fb7539bcf89d768c8442200b7cba76ae3",
+    "news.js": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
+    "sw.js": "713e0c4d6ea50cacf752e1294e38c6f4752a9728c466fe71b47a68a523da36f5",
+    "ui.js": "4b2139007f7d4f100afddefeb2769523c03cbd862b0e27678e0d5868c18e3283"
+  },
+  "publication": {
+    "status": "PULL REQUEST — not merged to main",
+    "branch": "claude/stars-project-takeover-y9x8m9",
+    "tagged_github_release_created": false
+  }
+}

@@ -1052,7 +1052,7 @@ function restoreJoint(raw){
   for(const p of raw.plans){
     if(!Number.isSafeInteger(p.id)||p.id<1||p.id>=raw.next||ids.has(p.id)||!['capture','defend','follow'].includes(p.kind)||
       !['gather','march','defend','done','cancelled'].includes(p.state)||!Number.isSafeInteger(p.campaign)||![0,1].includes(p.role)||
-      !G.emps[p.sponsor]||!G.emps[p.enemy]||!G.sys[p.target]||!G.sys[p.rally]||!Array.isArray(p.members)||p.members.length<2||
+      !G.emps[p.sponsor]||!G.emps[p.enemy]||!G.sys[p.target]||!G.sys[p.rally]||!Array.isArray(p.members)||p.members.length<(jointActive(p)?2:1)||
       new Set(p.members).size!==p.members.length||p.members.some(id=>!Number.isInteger(id)||!G.emps[id])||!p.members.includes(p.sponsor)||
       !p.bindings||!p.responses||!Array.isArray(p.fleets)||p.fleets.length>24||!Number.isInteger(p.replans)||p.replans<0||p.replans>3||
       ![p.created,p.deadline,p.expires,p.need,p.power].every(v=>Number.isFinite(v)&&v>=0)||

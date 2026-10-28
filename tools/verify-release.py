@@ -29,7 +29,7 @@ def verify(root):
     if errors:
         print('BAŞARISIZ: paket kimliği eşleşmiyor.')
         return 1
-    print(f"DOĞRULANDI: {len(expected)} dosya; oyun build {manifest['game_build']}.")
+    print(f"DOĞRULANDI: {len(expected)} dosya; oyun build {manifest.get('game_build', manifest.get('build'))}.")
     if subset:
         print('KAPSAM: GitHub çalışma zamanı ve yayımlanan faz dosyaları; tarihsel arşivler kapsam dışıdır. Tam kanonik ZIP doğrulaması değildir.')
     print('Bu bütünlük kontrolüdür; oyun/Android testleri yeniden çalıştırılmadı.')
