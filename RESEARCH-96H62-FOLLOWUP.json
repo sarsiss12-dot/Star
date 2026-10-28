@@ -1,0 +1,19 @@
+{
+  "kind": "96H.6.2 follow-up diagnosis",
+  "newAICandidate": false,
+  "newGamePublished": false,
+  "productionBuild": "96h61",
+  "Save": 8,
+  "startingHead": "d11b0e236792f012d9dcaae401462ee2deb5832b",
+  "sourceRuntime19Unchanged": true,
+  "evidence": {
+    "file": "stars-faz96h62-takip-kanit.zip",
+    "bytes": 1207334,
+    "sha256": "946313f1050ec6219798a067e5f54ea67555379ab551bcdd831391a9d42634c1",
+    "crc": "PASS",
+    "manifestFiles": 30,
+    "zipEntries": 31
+  },
+  "protocol": "research/96h62/followup/PROTOCOL.json",
+  "publication": "Research-only commit and remote verification in final report"
+}

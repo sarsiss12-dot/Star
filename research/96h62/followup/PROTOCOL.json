@@ -1,0 +1,15 @@
+{
+  "kind": "96H.6.2 follow-up diagnosis; not an AI candidate",
+  "canonicalResearchHead": "d11b0e236792f012d9dcaae401462ee2deb5832b",
+  "productionBuild": "96h61",
+  "input": "seed11 real Save217, actor7 born218",
+  "arms": ["canonical", "wait", "farm_then_demolish", "mine_then_farm"],
+  "manualActions": {"farm_then_demolish": [[218,"build","ciftlik"],[219,"demolish","dokum"]],"mine_then_farm": [[218,"build","maden"],[219,"build","ciftlik"]]},
+  "isolation": "In three diagnostic arms, only the two scripted colony orders are allowed for actor7 during months218 through224. Other actor7 strategy/navy/diplomacy and other empires use canonical engine. Normal colony decisions resume225. Canonical arm has no blocks or interventions.",
+  "stockBridgeWindow": [219,224],
+  "boundedFollowupWindow": [225,240],
+  "stepsPerMonth": 60,
+  "stepDays": 0.5,
+  "rules": ["No RNG draw/seed alteration", "No resource grants", "Real queue/payment/refund paths", "No queue cancellation", "Not a generalized AI policy", "No120/240campaign", "No production change or game release"],
+  "causalityLimits": "Only initial Save/RNG are matched. Different actions can change later strategy/RNG branches. Actor7 resource, population, foundries, food and military loss must be shown, not only critical total."
+}

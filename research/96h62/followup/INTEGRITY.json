@@ -1,0 +1,8 @@
+{
+  "sameInputAndRng": true,
+  "canonical23MonthFullSaveRngMatch": true,
+  "manualActionsUsedNativeCostsAndQueues": true,
+  "repeatFarmArmFullSaveRngEqual": true,
+  "metricsPure": true,
+  "runtimeUnchanged": true
+}

@@ -1,0 +1,42 @@
+[
+  {
+    "arm": "farm_then_demolish",
+    "key": "dokum",
+    "day": 7200,
+    "resource": "ala",
+    "stock": 34.303118979999994,
+    "net": -5.5440000000000005,
+    "mineralStock": 94.63251847680002,
+    "mineralNet": 6.421197299199999,
+    "cost": {
+      "min": 210
+    },
+    "buildDays": 106,
+    "shortfall": 115.36748152319998,
+    "staticStockRunway": 6.187431273448772,
+    "staticFinanceMonths": 17.966662002049574,
+    "staticFinancePlusBuildMonths": 21.499995335382906,
+    "pure": true,
+    "assumptions": "Static current stocks/nets; no gifts, trades, new tech/population, upkeep changes or further orders. Diagnostic estimate, not an actual future simulation or proof of impossible recovery."
+  },
+  {
+    "arm": "mine_then_farm",
+    "key": "ciftlik",
+    "day": 7200,
+    "resource": "yiy",
+    "stock": 24.539212379999988,
+    "net": -7.370425170000001,
+    "mineralStock": 75.43947668240003,
+    "mineralNet": 0.23991278039999886,
+    "cost": {
+      "min": 110
+    },
+    "buildDays": 68,
+    "shortfall": 34.56052331759997,
+    "staticStockRunway": 3.3294161210512616,
+    "staticFinanceMonths": 144.054532067772,
+    "staticFinancePlusBuildMonths": 146.32119873443867,
+    "pure": true,
+    "assumptions": "Static current stocks/nets; no gifts, trades, new tech/population, upkeep changes or further orders. Diagnostic estimate, not an actual future simulation or proof of impossible recovery."
+  }
+]
