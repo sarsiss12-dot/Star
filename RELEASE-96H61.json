@@ -55,5 +55,25 @@
     "sw.js": "71d27bdcb07477b55573a78d384fbc7afc199b2f5a6379542b57ee6d56d02999",
     "ui.js": "4b2139007f7d4f100afddefeb2769523c03cbd862b0e27678e0d5868c18e3283"
   },
-  "publication": "Pending guarded fast-forward; actual receipt will be recorded after remote verification."
+  "publication": {
+    "status": "PUBLISHED",
+    "repository": "sarsiss12-dot/Star",
+    "branch": "main",
+    "runtime_commit": "2b915771295462dd0bc22f8c6fd5615ea2da5801",
+    "runtime_tree": "fb82125cd756a313890ac6a9e4dec8229fd336ef",
+    "force": false,
+    "post_upload_runtime19_sha256": "PASS",
+    "post_upload_game_zip_sha256": "PASS",
+    "proof": "research/96h61/github-runtime-verification.json",
+    "tagged_github_release_created": false
+  },
+  "evidence": {
+    "file": "stars-faz96h61-kanit.zip",
+    "bytes": 46356936,
+    "sha256": "a2aa257f9092e70769b7d43beaea15f5a93222f9ec0c0e9a3c087656587e3003",
+    "crc": "PASS",
+    "manifestFiles": 521,
+    "zipEntries": 522,
+    "allEntriesVerified": true
+  }
 }
