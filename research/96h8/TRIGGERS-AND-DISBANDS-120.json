@@ -1,0 +1,1977 @@
+{
+ "11-control": {
+  "triggers": {},
+  "deadlineReassessments": 37,
+  "recalls": [],
+  "disbands": [
+   {
+    "actor": 3,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.2,
+    "homeUpkeep": 8.7,
+    "energyNet": -27.8,
+    "energy": 272
+   },
+   {
+    "actor": 1,
+    "month": 2,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.6,
+    "homeUpkeep": 10.9,
+    "energyNet": -15.6,
+    "energy": 270
+   },
+   {
+    "actor": 2,
+    "month": 3,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 1.8,
+    "homeUpkeep": 7.6,
+    "energyNet": -15.2,
+    "energy": 257
+   },
+   {
+    "actor": 3,
+    "month": 49,
+    "ships": 12,
+    "atWar": true,
+    "awayUpkeep": 143.9,
+    "homeUpkeep": 4.0,
+    "energyNet": -71.8,
+    "energy": 343
+   }
+  ]
+ },
+ "11-cand2": {
+  "triggers": {
+   "3": {
+    "detachment": {
+     "months": 14,
+     "first": 42,
+     "last": 85
+    },
+    "committed": {
+     "months": 1,
+     "first": 82,
+     "last": 82
+    }
+   },
+   "1": {
+    "detachment": {
+     "months": 1,
+     "first": 65,
+     "last": 65
+    },
+    "committed": {
+     "months": 2,
+     "first": 69,
+     "last": 70
+    }
+   }
+  },
+  "deadlineReassessments": 3,
+  "recalls": [],
+  "disbands": [
+   {
+    "actor": 3,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.2,
+    "homeUpkeep": 8.7,
+    "energyNet": -27.8,
+    "energy": 272
+   },
+   {
+    "actor": 1,
+    "month": 2,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.6,
+    "homeUpkeep": 10.9,
+    "energyNet": -15.6,
+    "energy": 270
+   },
+   {
+    "actor": 2,
+    "month": 3,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 1.8,
+    "homeUpkeep": 7.6,
+    "energyNet": -15.2,
+    "energy": 257
+   },
+   {
+    "actor": 1,
+    "month": 78,
+    "ships": 15,
+    "atWar": true,
+    "awayUpkeep": 261.7,
+    "homeUpkeep": 7.4,
+    "energyNet": -118.3,
+    "energy": 625
+   },
+   {
+    "actor": 3,
+    "month": 98,
+    "ships": 9,
+    "atWar": true,
+    "awayUpkeep": 0,
+    "homeUpkeep": 112.0,
+    "energyNet": -38.3,
+    "energy": 218
+   }
+  ]
+ },
+ "11-cand2b": {
+  "triggers": {
+   "3": {
+    "detachment": {
+     "months": 12,
+     "first": 42,
+     "last": 87
+    },
+    "fund": {
+     "months": 2,
+     "first": 88,
+     "last": 89
+    }
+   },
+   "1": {
+    "detachment": {
+     "months": 2,
+     "first": 65,
+     "last": 77
+    },
+    "committed": {
+     "months": 45,
+     "first": 69,
+     "last": 120
+    }
+   }
+  },
+  "deadlineReassessments": 1,
+  "recalls": [
+   [
+    1,
+    2250
+   ]
+  ],
+  "disbands": [
+   {
+    "actor": 3,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.2,
+    "homeUpkeep": 8.7,
+    "energyNet": -27.8,
+    "energy": 272
+   },
+   {
+    "actor": 1,
+    "month": 2,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.6,
+    "homeUpkeep": 10.9,
+    "energyNet": -15.6,
+    "energy": 270
+   },
+   {
+    "actor": 2,
+    "month": 3,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 1.8,
+    "homeUpkeep": 7.6,
+    "energyNet": -15.2,
+    "energy": 257
+   },
+   {
+    "actor": 3,
+    "month": 100,
+    "ships": 7,
+    "atWar": true,
+    "awayUpkeep": 0,
+    "homeUpkeep": 112.0,
+    "energyNet": -30.6,
+    "energy": 168
+   },
+   {
+    "actor": 3,
+    "month": 109,
+    "ships": 4,
+    "atWar": true,
+    "awayUpkeep": 0,
+    "homeUpkeep": 94.7,
+    "energyNet": -14.1,
+    "energy": 84
+   }
+  ]
+ },
+ "11-rejected": {
+  "triggers": {},
+  "deadlineReassessments": 1,
+  "recalls": [],
+  "disbands": [
+   {
+    "actor": 3,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.2,
+    "homeUpkeep": 8.7,
+    "energyNet": -27.8,
+    "energy": 272
+   },
+   {
+    "actor": 1,
+    "month": 2,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.6,
+    "homeUpkeep": 10.9,
+    "energyNet": -15.6,
+    "energy": 270
+   },
+   {
+    "actor": 2,
+    "month": 3,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 1.8,
+    "homeUpkeep": 7.6,
+    "energyNet": -15.2,
+    "energy": 257
+   },
+   {
+    "actor": 3,
+    "month": 49,
+    "ships": 12,
+    "atWar": true,
+    "awayUpkeep": 143.9,
+    "homeUpkeep": 4.0,
+    "energyNet": -71.8,
+    "energy": 343
+   },
+   {
+    "actor": 1,
+    "month": 76,
+    "ships": 15,
+    "atWar": true,
+    "awayUpkeep": 248.1,
+    "homeUpkeep": 14.2,
+    "energyNet": -112.1,
+    "energy": 600
+   }
+  ]
+ },
+ "99-control": {
+  "triggers": {},
+  "deadlineReassessments": 0,
+  "recalls": [],
+  "disbands": [
+   {
+    "actor": 1,
+    "month": 16,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.9,
+    "homeUpkeep": 23.1,
+    "energyNet": -12.2,
+    "energy": 198
+   }
+  ]
+ },
+ "99-cand2": {
+  "triggers": {},
+  "deadlineReassessments": 0,
+  "recalls": [],
+  "disbands": [
+   {
+    "actor": 1,
+    "month": 16,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.9,
+    "homeUpkeep": 23.1,
+    "energyNet": -12.2,
+    "energy": 198
+   }
+  ]
+ },
+ "99-cand2b": {
+  "triggers": {},
+  "deadlineReassessments": 0,
+  "recalls": [],
+  "disbands": [
+   {
+    "actor": 1,
+    "month": 16,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.9,
+    "homeUpkeep": 23.1,
+    "energyNet": -12.2,
+    "energy": 198
+   }
+  ]
+ },
+ "99-rejected": {
+  "triggers": {},
+  "deadlineReassessments": 0,
+  "recalls": [],
+  "disbands": [
+   {
+    "actor": 1,
+    "month": 16,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.9,
+    "homeUpkeep": 23.1,
+    "energyNet": -12.2,
+    "energy": 198
+   }
+  ]
+ },
+ "404-control": {
+  "triggers": {},
+  "deadlineReassessments": 0,
+  "recalls": [],
+  "disbands": [
+   {
+    "actor": 1,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 0,
+    "homeUpkeep": 9.8,
+    "energyNet": -17.5,
+    "energy": 282
+   },
+   {
+    "actor": 2,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 0,
+    "homeUpkeep": 11.5,
+    "energyNet": -20.0,
+    "energy": 355
+   },
+   {
+    "actor": 3,
+    "month": 2,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.3,
+    "homeUpkeep": 9.8,
+    "energyNet": -16.2,
+    "energy": 269
+   }
+  ]
+ },
+ "404-cand2": {
+  "triggers": {},
+  "deadlineReassessments": 0,
+  "recalls": [],
+  "disbands": [
+   {
+    "actor": 1,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 0,
+    "homeUpkeep": 9.8,
+    "energyNet": -17.5,
+    "energy": 282
+   },
+   {
+    "actor": 2,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 0,
+    "homeUpkeep": 11.5,
+    "energyNet": -20.0,
+    "energy": 355
+   },
+   {
+    "actor": 3,
+    "month": 2,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.3,
+    "homeUpkeep": 9.8,
+    "energyNet": -16.2,
+    "energy": 269
+   }
+  ]
+ },
+ "404-cand2b": {
+  "triggers": {},
+  "deadlineReassessments": 0,
+  "recalls": [],
+  "disbands": [
+   {
+    "actor": 1,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 0,
+    "homeUpkeep": 9.8,
+    "energyNet": -17.5,
+    "energy": 282
+   },
+   {
+    "actor": 2,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 0,
+    "homeUpkeep": 11.5,
+    "energyNet": -20.0,
+    "energy": 355
+   },
+   {
+    "actor": 3,
+    "month": 2,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.3,
+    "homeUpkeep": 9.8,
+    "energyNet": -16.2,
+    "energy": 269
+   }
+  ]
+ },
+ "404-rejected": {
+  "triggers": {},
+  "deadlineReassessments": 0,
+  "recalls": [],
+  "disbands": [
+   {
+    "actor": 1,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 0,
+    "homeUpkeep": 9.8,
+    "energyNet": -17.5,
+    "energy": 282
+   },
+   {
+    "actor": 2,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 0,
+    "homeUpkeep": 11.5,
+    "energyNet": -20.0,
+    "energy": 355
+   },
+   {
+    "actor": 3,
+    "month": 2,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.3,
+    "homeUpkeep": 9.8,
+    "energyNet": -16.2,
+    "energy": 269
+   }
+  ]
+ },
+ "7-control": {
+  "triggers": {},
+  "deadlineReassessments": 0,
+  "recalls": [],
+  "disbands": [
+   {
+    "actor": 2,
+    "month": 1,
+    "ships": 4,
+    "atWar": false,
+    "awayUpkeep": 0,
+    "homeUpkeep": 16.7,
+    "energyNet": -15.9,
+    "energy": 284
+   },
+   {
+    "actor": 3,
+    "month": 1,
+    "ships": 5,
+    "atWar": false,
+    "awayUpkeep": 2.6,
+    "homeUpkeep": 18.3,
+    "energyNet": -22.3,
+    "energy": 278
+   },
+   {
+    "actor": 5,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 0,
+    "homeUpkeep": 11.5,
+    "energyNet": -19.4,
+    "energy": 281
+   },
+   {
+    "actor": 1,
+    "month": 2,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.2,
+    "homeUpkeep": 9.3,
+    "energyNet": -15.8,
+    "energy": 271
+   },
+   {
+    "actor": 4,
+    "month": 4,
+    "ships": 4,
+    "atWar": false,
+    "awayUpkeep": 3.6,
+    "homeUpkeep": 12.9,
+    "energyNet": -14.0,
+    "energy": 251
+   },
+   {
+    "actor": 3,
+    "month": 11,
+    "ships": 2,
+    "atWar": false,
+    "awayUpkeep": 5.2,
+    "homeUpkeep": 6.8,
+    "energyNet": -11.2,
+    "energy": 173
+   }
+  ]
+ },
+ "7-cand2": {
+  "triggers": {},
+  "deadlineReassessments": 0,
+  "recalls": [],
+  "disbands": [
+   {
+    "actor": 2,
+    "month": 1,
+    "ships": 4,
+    "atWar": false,
+    "awayUpkeep": 0,
+    "homeUpkeep": 16.7,
+    "energyNet": -15.9,
+    "energy": 284
+   },
+   {
+    "actor": 3,
+    "month": 1,
+    "ships": 5,
+    "atWar": false,
+    "awayUpkeep": 2.6,
+    "homeUpkeep": 18.3,
+    "energyNet": -22.3,
+    "energy": 278
+   },
+   {
+    "actor": 5,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 0,
+    "homeUpkeep": 11.5,
+    "energyNet": -19.4,
+    "energy": 281
+   },
+   {
+    "actor": 1,
+    "month": 2,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.2,
+    "homeUpkeep": 9.3,
+    "energyNet": -15.8,
+    "energy": 271
+   },
+   {
+    "actor": 4,
+    "month": 4,
+    "ships": 4,
+    "atWar": false,
+    "awayUpkeep": 3.6,
+    "homeUpkeep": 12.9,
+    "energyNet": -14.0,
+    "energy": 251
+   },
+   {
+    "actor": 3,
+    "month": 11,
+    "ships": 2,
+    "atWar": false,
+    "awayUpkeep": 5.2,
+    "homeUpkeep": 6.8,
+    "energyNet": -11.2,
+    "energy": 173
+   }
+  ]
+ },
+ "7-cand2b": {
+  "triggers": {},
+  "deadlineReassessments": 0,
+  "recalls": [],
+  "disbands": [
+   {
+    "actor": 2,
+    "month": 1,
+    "ships": 4,
+    "atWar": false,
+    "awayUpkeep": 0,
+    "homeUpkeep": 16.7,
+    "energyNet": -15.9,
+    "energy": 284
+   },
+   {
+    "actor": 3,
+    "month": 1,
+    "ships": 5,
+    "atWar": false,
+    "awayUpkeep": 2.6,
+    "homeUpkeep": 18.3,
+    "energyNet": -22.3,
+    "energy": 278
+   },
+   {
+    "actor": 5,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 0,
+    "homeUpkeep": 11.5,
+    "energyNet": -19.4,
+    "energy": 281
+   },
+   {
+    "actor": 1,
+    "month": 2,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.2,
+    "homeUpkeep": 9.3,
+    "energyNet": -15.8,
+    "energy": 271
+   },
+   {
+    "actor": 4,
+    "month": 4,
+    "ships": 4,
+    "atWar": false,
+    "awayUpkeep": 3.6,
+    "homeUpkeep": 12.9,
+    "energyNet": -14.0,
+    "energy": 251
+   },
+   {
+    "actor": 3,
+    "month": 11,
+    "ships": 2,
+    "atWar": false,
+    "awayUpkeep": 5.2,
+    "homeUpkeep": 6.8,
+    "energyNet": -11.2,
+    "energy": 173
+   }
+  ]
+ },
+ "7-rejected": {
+  "triggers": {},
+  "deadlineReassessments": 0,
+  "recalls": [],
+  "disbands": [
+   {
+    "actor": 2,
+    "month": 1,
+    "ships": 4,
+    "atWar": false,
+    "awayUpkeep": 0,
+    "homeUpkeep": 16.7,
+    "energyNet": -15.9,
+    "energy": 284
+   },
+   {
+    "actor": 3,
+    "month": 1,
+    "ships": 5,
+    "atWar": false,
+    "awayUpkeep": 2.6,
+    "homeUpkeep": 18.3,
+    "energyNet": -22.3,
+    "energy": 278
+   },
+   {
+    "actor": 5,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 0,
+    "homeUpkeep": 11.5,
+    "energyNet": -19.4,
+    "energy": 281
+   },
+   {
+    "actor": 1,
+    "month": 2,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.2,
+    "homeUpkeep": 9.3,
+    "energyNet": -15.8,
+    "energy": 271
+   },
+   {
+    "actor": 4,
+    "month": 4,
+    "ships": 4,
+    "atWar": false,
+    "awayUpkeep": 3.6,
+    "homeUpkeep": 12.9,
+    "energyNet": -14.0,
+    "energy": 251
+   },
+   {
+    "actor": 3,
+    "month": 11,
+    "ships": 2,
+    "atWar": false,
+    "awayUpkeep": 5.2,
+    "homeUpkeep": 6.8,
+    "energyNet": -11.2,
+    "energy": 173
+   }
+  ]
+ },
+ "23-control": {
+  "triggers": {},
+  "deadlineReassessments": 1,
+  "recalls": [],
+  "disbands": [
+   {
+    "actor": 1,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 0,
+    "homeUpkeep": 11.5,
+    "energyNet": -15.8,
+    "energy": 284
+   },
+   {
+    "actor": 2,
+    "month": 1,
+    "ships": 6,
+    "atWar": false,
+    "awayUpkeep": 2.6,
+    "homeUpkeep": 106.4,
+    "energyNet": -113.4,
+    "energy": 187
+   },
+   {
+    "actor": 5,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 0,
+    "homeUpkeep": 9.8,
+    "energyNet": -21.7,
+    "energy": 278
+   }
+  ]
+ },
+ "23-cand2": {
+  "triggers": {
+   "5": {
+    "detachment": {
+     "months": 3,
+     "first": 16,
+     "last": 18
+    },
+    "committed": {
+     "months": 2,
+     "first": 19,
+     "last": 20
+    }
+   }
+  },
+  "deadlineReassessments": 1,
+  "recalls": [],
+  "disbands": [
+   {
+    "actor": 1,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 0,
+    "homeUpkeep": 11.5,
+    "energyNet": -15.8,
+    "energy": 284
+   },
+   {
+    "actor": 2,
+    "month": 1,
+    "ships": 6,
+    "atWar": false,
+    "awayUpkeep": 2.6,
+    "homeUpkeep": 106.4,
+    "energyNet": -113.4,
+    "energy": 187
+   },
+   {
+    "actor": 5,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 0,
+    "homeUpkeep": 9.8,
+    "energyNet": -21.7,
+    "energy": 278
+   }
+  ]
+ },
+ "23-cand2b": {
+  "triggers": {
+   "5": {
+    "detachment": {
+     "months": 3,
+     "first": 16,
+     "last": 18
+    },
+    "committed": {
+     "months": 2,
+     "first": 19,
+     "last": 20
+    }
+   }
+  },
+  "deadlineReassessments": 1,
+  "recalls": [],
+  "disbands": [
+   {
+    "actor": 1,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 0,
+    "homeUpkeep": 11.5,
+    "energyNet": -15.8,
+    "energy": 284
+   },
+   {
+    "actor": 2,
+    "month": 1,
+    "ships": 6,
+    "atWar": false,
+    "awayUpkeep": 2.6,
+    "homeUpkeep": 106.4,
+    "energyNet": -113.4,
+    "energy": 187
+   },
+   {
+    "actor": 5,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 0,
+    "homeUpkeep": 9.8,
+    "energyNet": -21.7,
+    "energy": 278
+   }
+  ]
+ },
+ "23-rejected": {
+  "triggers": {},
+  "deadlineReassessments": 1,
+  "recalls": [],
+  "disbands": [
+   {
+    "actor": 1,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 0,
+    "homeUpkeep": 11.5,
+    "energyNet": -15.8,
+    "energy": 284
+   },
+   {
+    "actor": 2,
+    "month": 1,
+    "ships": 6,
+    "atWar": false,
+    "awayUpkeep": 2.6,
+    "homeUpkeep": 106.4,
+    "energyNet": -113.4,
+    "energy": 187
+   },
+   {
+    "actor": 5,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 0,
+    "homeUpkeep": 9.8,
+    "energyNet": -21.7,
+    "energy": 278
+   }
+  ]
+ },
+ "42-control": {
+  "triggers": {},
+  "deadlineReassessments": 0,
+  "recalls": [],
+  "disbands": [
+   {
+    "actor": 2,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.2,
+    "homeUpkeep": 8.7,
+    "energyNet": -18.9,
+    "energy": 281
+   },
+   {
+    "actor": 3,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.6,
+    "homeUpkeep": 10.2,
+    "energyNet": -31.1,
+    "energy": 269
+   },
+   {
+    "actor": 4,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 0,
+    "homeUpkeep": 11.5,
+    "energyNet": -17.7,
+    "energy": 282
+   },
+   {
+    "actor": 5,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 0,
+    "homeUpkeep": 11.5,
+    "energyNet": -23.2,
+    "energy": 277
+   },
+   {
+    "actor": 3,
+    "month": 54,
+    "ships": 2,
+    "atWar": false,
+    "awayUpkeep": 2.6,
+    "homeUpkeep": 36.6,
+    "energyNet": -8.6,
+    "energy": 103
+   },
+   {
+    "actor": 3,
+    "month": 68,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.6,
+    "homeUpkeep": 58.3,
+    "energyNet": -15.4,
+    "energy": 239
+   },
+   {
+    "actor": 3,
+    "month": 70,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 6.1,
+    "homeUpkeep": 46.8,
+    "energyNet": -15.7,
+    "energy": 213
+   },
+   {
+    "actor": 3,
+    "month": 73,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.3,
+    "homeUpkeep": 36,
+    "energyNet": -12.1,
+    "energy": 189
+   },
+   {
+    "actor": 3,
+    "month": 95,
+    "ships": 2,
+    "atWar": false,
+    "awayUpkeep": 4.7,
+    "homeUpkeep": 52.6,
+    "energyNet": -9.2,
+    "energy": 148
+   },
+   {
+    "actor": 3,
+    "month": 96,
+    "ships": 2,
+    "atWar": false,
+    "awayUpkeep": 2.3,
+    "homeUpkeep": 46.5,
+    "energyNet": -8.5,
+    "energy": 136
+   },
+   {
+    "actor": 3,
+    "month": 98,
+    "ships": 2,
+    "atWar": false,
+    "awayUpkeep": 4.7,
+    "homeUpkeep": 40.4,
+    "energyNet": -7.5,
+    "energy": 126
+   },
+   {
+    "actor": 3,
+    "month": 112,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.3,
+    "homeUpkeep": 64.2,
+    "energyNet": -10.6,
+    "energy": 149
+   },
+   {
+    "actor": 3,
+    "month": 116,
+    "ships": 7,
+    "atWar": false,
+    "awayUpkeep": 2.3,
+    "homeUpkeep": 50.9,
+    "energyNet": -29.7,
+    "energy": 74
+   },
+   {
+    "actor": 3,
+    "month": 117,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.3,
+    "homeUpkeep": 29.5,
+    "energyNet": -11.7,
+    "energy": 43
+   }
+  ]
+ },
+ "42-cand2": {
+  "triggers": {},
+  "deadlineReassessments": 0,
+  "recalls": [],
+  "disbands": [
+   {
+    "actor": 2,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.2,
+    "homeUpkeep": 8.7,
+    "energyNet": -18.9,
+    "energy": 281
+   },
+   {
+    "actor": 3,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.6,
+    "homeUpkeep": 10.2,
+    "energyNet": -31.1,
+    "energy": 269
+   },
+   {
+    "actor": 4,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 0,
+    "homeUpkeep": 11.5,
+    "energyNet": -17.7,
+    "energy": 282
+   },
+   {
+    "actor": 5,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 0,
+    "homeUpkeep": 11.5,
+    "energyNet": -23.2,
+    "energy": 277
+   },
+   {
+    "actor": 3,
+    "month": 54,
+    "ships": 2,
+    "atWar": false,
+    "awayUpkeep": 2.6,
+    "homeUpkeep": 36.6,
+    "energyNet": -8.6,
+    "energy": 103
+   },
+   {
+    "actor": 3,
+    "month": 68,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.6,
+    "homeUpkeep": 58.3,
+    "energyNet": -15.4,
+    "energy": 239
+   },
+   {
+    "actor": 3,
+    "month": 70,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 6.1,
+    "homeUpkeep": 46.8,
+    "energyNet": -15.7,
+    "energy": 213
+   },
+   {
+    "actor": 3,
+    "month": 73,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.3,
+    "homeUpkeep": 36,
+    "energyNet": -12.1,
+    "energy": 189
+   },
+   {
+    "actor": 3,
+    "month": 95,
+    "ships": 2,
+    "atWar": false,
+    "awayUpkeep": 4.7,
+    "homeUpkeep": 52.6,
+    "energyNet": -9.2,
+    "energy": 148
+   },
+   {
+    "actor": 3,
+    "month": 96,
+    "ships": 2,
+    "atWar": false,
+    "awayUpkeep": 2.3,
+    "homeUpkeep": 46.5,
+    "energyNet": -8.5,
+    "energy": 136
+   },
+   {
+    "actor": 3,
+    "month": 98,
+    "ships": 2,
+    "atWar": false,
+    "awayUpkeep": 4.7,
+    "homeUpkeep": 40.4,
+    "energyNet": -7.5,
+    "energy": 126
+   },
+   {
+    "actor": 3,
+    "month": 112,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.3,
+    "homeUpkeep": 64.2,
+    "energyNet": -10.6,
+    "energy": 149
+   },
+   {
+    "actor": 3,
+    "month": 116,
+    "ships": 7,
+    "atWar": false,
+    "awayUpkeep": 2.3,
+    "homeUpkeep": 50.9,
+    "energyNet": -29.7,
+    "energy": 74
+   },
+   {
+    "actor": 3,
+    "month": 117,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.3,
+    "homeUpkeep": 29.5,
+    "energyNet": -11.7,
+    "energy": 43
+   }
+  ]
+ },
+ "42-cand2b": {
+  "triggers": {},
+  "deadlineReassessments": 0,
+  "recalls": [],
+  "disbands": [
+   {
+    "actor": 2,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.2,
+    "homeUpkeep": 8.7,
+    "energyNet": -18.9,
+    "energy": 281
+   },
+   {
+    "actor": 3,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.6,
+    "homeUpkeep": 10.2,
+    "energyNet": -31.1,
+    "energy": 269
+   },
+   {
+    "actor": 4,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 0,
+    "homeUpkeep": 11.5,
+    "energyNet": -17.7,
+    "energy": 282
+   },
+   {
+    "actor": 5,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 0,
+    "homeUpkeep": 11.5,
+    "energyNet": -23.2,
+    "energy": 277
+   },
+   {
+    "actor": 3,
+    "month": 54,
+    "ships": 2,
+    "atWar": false,
+    "awayUpkeep": 2.6,
+    "homeUpkeep": 36.6,
+    "energyNet": -8.6,
+    "energy": 103
+   },
+   {
+    "actor": 3,
+    "month": 68,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.6,
+    "homeUpkeep": 58.3,
+    "energyNet": -15.4,
+    "energy": 239
+   },
+   {
+    "actor": 3,
+    "month": 70,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 6.1,
+    "homeUpkeep": 46.8,
+    "energyNet": -15.7,
+    "energy": 213
+   },
+   {
+    "actor": 3,
+    "month": 73,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.3,
+    "homeUpkeep": 36,
+    "energyNet": -12.1,
+    "energy": 189
+   },
+   {
+    "actor": 3,
+    "month": 95,
+    "ships": 2,
+    "atWar": false,
+    "awayUpkeep": 4.7,
+    "homeUpkeep": 52.6,
+    "energyNet": -9.2,
+    "energy": 148
+   },
+   {
+    "actor": 3,
+    "month": 96,
+    "ships": 2,
+    "atWar": false,
+    "awayUpkeep": 2.3,
+    "homeUpkeep": 46.5,
+    "energyNet": -8.5,
+    "energy": 136
+   },
+   {
+    "actor": 3,
+    "month": 98,
+    "ships": 2,
+    "atWar": false,
+    "awayUpkeep": 4.7,
+    "homeUpkeep": 40.4,
+    "energyNet": -7.5,
+    "energy": 126
+   },
+   {
+    "actor": 3,
+    "month": 112,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.3,
+    "homeUpkeep": 64.2,
+    "energyNet": -10.6,
+    "energy": 149
+   },
+   {
+    "actor": 3,
+    "month": 116,
+    "ships": 7,
+    "atWar": false,
+    "awayUpkeep": 2.3,
+    "homeUpkeep": 50.9,
+    "energyNet": -29.7,
+    "energy": 74
+   },
+   {
+    "actor": 3,
+    "month": 117,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.3,
+    "homeUpkeep": 29.5,
+    "energyNet": -11.7,
+    "energy": 43
+   }
+  ]
+ },
+ "42-rejected": {
+  "triggers": {},
+  "deadlineReassessments": 0,
+  "recalls": [],
+  "disbands": [
+   {
+    "actor": 2,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.2,
+    "homeUpkeep": 8.7,
+    "energyNet": -18.9,
+    "energy": 281
+   },
+   {
+    "actor": 3,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.6,
+    "homeUpkeep": 10.2,
+    "energyNet": -31.1,
+    "energy": 269
+   },
+   {
+    "actor": 4,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 0,
+    "homeUpkeep": 11.5,
+    "energyNet": -17.7,
+    "energy": 282
+   },
+   {
+    "actor": 5,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 0,
+    "homeUpkeep": 11.5,
+    "energyNet": -23.2,
+    "energy": 277
+   },
+   {
+    "actor": 3,
+    "month": 54,
+    "ships": 2,
+    "atWar": false,
+    "awayUpkeep": 2.6,
+    "homeUpkeep": 36.6,
+    "energyNet": -8.6,
+    "energy": 103
+   },
+   {
+    "actor": 3,
+    "month": 68,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.6,
+    "homeUpkeep": 58.3,
+    "energyNet": -15.4,
+    "energy": 239
+   },
+   {
+    "actor": 3,
+    "month": 70,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 6.1,
+    "homeUpkeep": 46.8,
+    "energyNet": -15.7,
+    "energy": 213
+   },
+   {
+    "actor": 3,
+    "month": 73,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.3,
+    "homeUpkeep": 36,
+    "energyNet": -12.1,
+    "energy": 189
+   },
+   {
+    "actor": 3,
+    "month": 95,
+    "ships": 2,
+    "atWar": false,
+    "awayUpkeep": 4.7,
+    "homeUpkeep": 52.6,
+    "energyNet": -9.2,
+    "energy": 148
+   },
+   {
+    "actor": 3,
+    "month": 96,
+    "ships": 2,
+    "atWar": false,
+    "awayUpkeep": 2.3,
+    "homeUpkeep": 46.5,
+    "energyNet": -8.5,
+    "energy": 136
+   },
+   {
+    "actor": 3,
+    "month": 98,
+    "ships": 2,
+    "atWar": false,
+    "awayUpkeep": 4.7,
+    "homeUpkeep": 40.4,
+    "energyNet": -7.5,
+    "energy": 126
+   },
+   {
+    "actor": 3,
+    "month": 112,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.3,
+    "homeUpkeep": 64.2,
+    "energyNet": -10.6,
+    "energy": 149
+   },
+   {
+    "actor": 3,
+    "month": 116,
+    "ships": 7,
+    "atWar": false,
+    "awayUpkeep": 2.3,
+    "homeUpkeep": 50.9,
+    "energyNet": -29.7,
+    "energy": 74
+   },
+   {
+    "actor": 3,
+    "month": 117,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.3,
+    "homeUpkeep": 29.5,
+    "energyNet": -11.7,
+    "energy": 43
+   }
+  ]
+ },
+ "123-control": {
+  "triggers": {},
+  "deadlineReassessments": 0,
+  "recalls": [],
+  "disbands": [
+   {
+    "actor": 4,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 0,
+    "homeUpkeep": 9.8,
+    "energyNet": -16.0,
+    "energy": 284
+   },
+   {
+    "actor": 5,
+    "month": 1,
+    "ships": 4,
+    "atWar": false,
+    "awayUpkeep": 5.2,
+    "homeUpkeep": 17,
+    "energyNet": -19.5,
+    "energy": 281
+   },
+   {
+    "actor": 3,
+    "month": 2,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.6,
+    "homeUpkeep": 10.9,
+    "energyNet": -17.3,
+    "energy": 269
+   },
+   {
+    "actor": 5,
+    "month": 5,
+    "ships": 1,
+    "atWar": false,
+    "awayUpkeep": 5.2,
+    "homeUpkeep": 4.8,
+    "energyNet": -14.1,
+    "energy": 231
+   }
+  ]
+ },
+ "123-cand2": {
+  "triggers": {},
+  "deadlineReassessments": 0,
+  "recalls": [],
+  "disbands": [
+   {
+    "actor": 4,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 0,
+    "homeUpkeep": 9.8,
+    "energyNet": -16.0,
+    "energy": 284
+   },
+   {
+    "actor": 5,
+    "month": 1,
+    "ships": 4,
+    "atWar": false,
+    "awayUpkeep": 5.2,
+    "homeUpkeep": 17,
+    "energyNet": -19.5,
+    "energy": 281
+   },
+   {
+    "actor": 3,
+    "month": 2,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.6,
+    "homeUpkeep": 10.9,
+    "energyNet": -17.3,
+    "energy": 269
+   },
+   {
+    "actor": 5,
+    "month": 5,
+    "ships": 1,
+    "atWar": false,
+    "awayUpkeep": 5.2,
+    "homeUpkeep": 4.8,
+    "energyNet": -14.1,
+    "energy": 231
+   }
+  ]
+ },
+ "123-cand2b": {
+  "triggers": {},
+  "deadlineReassessments": 0,
+  "recalls": [],
+  "disbands": [
+   {
+    "actor": 4,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 0,
+    "homeUpkeep": 9.8,
+    "energyNet": -16.0,
+    "energy": 284
+   },
+   {
+    "actor": 5,
+    "month": 1,
+    "ships": 4,
+    "atWar": false,
+    "awayUpkeep": 5.2,
+    "homeUpkeep": 17,
+    "energyNet": -19.5,
+    "energy": 281
+   },
+   {
+    "actor": 3,
+    "month": 2,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.6,
+    "homeUpkeep": 10.9,
+    "energyNet": -17.3,
+    "energy": 269
+   },
+   {
+    "actor": 5,
+    "month": 5,
+    "ships": 1,
+    "atWar": false,
+    "awayUpkeep": 5.2,
+    "homeUpkeep": 4.8,
+    "energyNet": -14.1,
+    "energy": 231
+   }
+  ]
+ },
+ "123-rejected": {
+  "triggers": {},
+  "deadlineReassessments": 0,
+  "recalls": [],
+  "disbands": [
+   {
+    "actor": 4,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 0,
+    "homeUpkeep": 9.8,
+    "energyNet": -16.0,
+    "energy": 284
+   },
+   {
+    "actor": 5,
+    "month": 1,
+    "ships": 4,
+    "atWar": false,
+    "awayUpkeep": 5.2,
+    "homeUpkeep": 17,
+    "energyNet": -19.5,
+    "energy": 281
+   },
+   {
+    "actor": 3,
+    "month": 2,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.6,
+    "homeUpkeep": 10.9,
+    "energyNet": -17.3,
+    "energy": 269
+   },
+   {
+    "actor": 5,
+    "month": 5,
+    "ships": 1,
+    "atWar": false,
+    "awayUpkeep": 5.2,
+    "homeUpkeep": 4.8,
+    "energyNet": -14.1,
+    "energy": 231
+   }
+  ]
+ },
+ "2026-control": {
+  "triggers": {},
+  "deadlineReassessments": 0,
+  "recalls": [],
+  "disbands": [
+   {
+    "actor": 1,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 0,
+    "homeUpkeep": 11.5,
+    "energyNet": -19.0,
+    "energy": 281
+   },
+   {
+    "actor": 2,
+    "month": 1,
+    "ships": 5,
+    "atWar": false,
+    "awayUpkeep": 0,
+    "homeUpkeep": 107.7,
+    "energyNet": -106.0,
+    "energy": 194
+   },
+   {
+    "actor": 4,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 0,
+    "homeUpkeep": 11.5,
+    "energyNet": -16.0,
+    "energy": 284
+   },
+   {
+    "actor": 5,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.6,
+    "homeUpkeep": 10.2,
+    "energyNet": -15.9,
+    "energy": 284
+   },
+   {
+    "actor": 2,
+    "month": 2,
+    "ships": 1,
+    "atWar": false,
+    "awayUpkeep": 0,
+    "homeUpkeep": 40.4,
+    "energyNet": -38.2,
+    "energy": 156
+   },
+   {
+    "actor": 3,
+    "month": 3,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.6,
+    "homeUpkeep": 10.2,
+    "energyNet": -17.1,
+    "energy": 253
+   }
+  ]
+ },
+ "2026-cand2": {
+  "triggers": {},
+  "deadlineReassessments": 0,
+  "recalls": [],
+  "disbands": [
+   {
+    "actor": 1,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 0,
+    "homeUpkeep": 11.5,
+    "energyNet": -19.0,
+    "energy": 281
+   },
+   {
+    "actor": 2,
+    "month": 1,
+    "ships": 5,
+    "atWar": false,
+    "awayUpkeep": 0,
+    "homeUpkeep": 107.7,
+    "energyNet": -106.0,
+    "energy": 194
+   },
+   {
+    "actor": 4,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 0,
+    "homeUpkeep": 11.5,
+    "energyNet": -16.0,
+    "energy": 284
+   },
+   {
+    "actor": 5,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.6,
+    "homeUpkeep": 10.2,
+    "energyNet": -15.9,
+    "energy": 284
+   },
+   {
+    "actor": 2,
+    "month": 2,
+    "ships": 1,
+    "atWar": false,
+    "awayUpkeep": 0,
+    "homeUpkeep": 40.4,
+    "energyNet": -38.2,
+    "energy": 156
+   },
+   {
+    "actor": 3,
+    "month": 3,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.6,
+    "homeUpkeep": 10.2,
+    "energyNet": -17.1,
+    "energy": 253
+   }
+  ]
+ },
+ "2026-cand2b": {
+  "triggers": {},
+  "deadlineReassessments": 0,
+  "recalls": [],
+  "disbands": [
+   {
+    "actor": 1,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 0,
+    "homeUpkeep": 11.5,
+    "energyNet": -19.0,
+    "energy": 281
+   },
+   {
+    "actor": 2,
+    "month": 1,
+    "ships": 5,
+    "atWar": false,
+    "awayUpkeep": 0,
+    "homeUpkeep": 107.7,
+    "energyNet": -106.0,
+    "energy": 194
+   },
+   {
+    "actor": 4,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 0,
+    "homeUpkeep": 11.5,
+    "energyNet": -16.0,
+    "energy": 284
+   },
+   {
+    "actor": 5,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.6,
+    "homeUpkeep": 10.2,
+    "energyNet": -15.9,
+    "energy": 284
+   },
+   {
+    "actor": 2,
+    "month": 2,
+    "ships": 1,
+    "atWar": false,
+    "awayUpkeep": 0,
+    "homeUpkeep": 40.4,
+    "energyNet": -38.2,
+    "energy": 156
+   },
+   {
+    "actor": 3,
+    "month": 3,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.6,
+    "homeUpkeep": 10.2,
+    "energyNet": -17.1,
+    "energy": 253
+   }
+  ]
+ },
+ "2026-rejected": {
+  "triggers": {},
+  "deadlineReassessments": 0,
+  "recalls": [],
+  "disbands": [
+   {
+    "actor": 1,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 0,
+    "homeUpkeep": 11.5,
+    "energyNet": -19.0,
+    "energy": 281
+   },
+   {
+    "actor": 2,
+    "month": 1,
+    "ships": 5,
+    "atWar": false,
+    "awayUpkeep": 0,
+    "homeUpkeep": 107.7,
+    "energyNet": -106.0,
+    "energy": 194
+   },
+   {
+    "actor": 4,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 0,
+    "homeUpkeep": 11.5,
+    "energyNet": -16.0,
+    "energy": 284
+   },
+   {
+    "actor": 5,
+    "month": 1,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.6,
+    "homeUpkeep": 10.2,
+    "energyNet": -15.9,
+    "energy": 284
+   },
+   {
+    "actor": 2,
+    "month": 2,
+    "ships": 1,
+    "atWar": false,
+    "awayUpkeep": 0,
+    "homeUpkeep": 40.4,
+    "energyNet": -38.2,
+    "energy": 156
+   },
+   {
+    "actor": 3,
+    "month": 3,
+    "ships": 3,
+    "atWar": false,
+    "awayUpkeep": 2.6,
+    "homeUpkeep": 10.2,
+    "energyNet": -17.1,
+    "energy": 253
+   }
+  ]
+ }
+}

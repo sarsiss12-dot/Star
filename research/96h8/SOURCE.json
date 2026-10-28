@@ -1,0 +1,45 @@
+{
+ "baseHEAD": "698874ce2d25c7bddbc17021f2cd825c48b87712",
+ "aiSHA256": {
+  "96h71": "f48608cc82ca46b5028c637dcabbfb1b3e2ae09f1e3c1eb24bd2c4c1b326d8d0",
+  "cand1": "bd2e15995fdcc87e2c81e2a8628102605d4087902b3c56a9fcecc55836beeaef",
+  "cand2a": "1314db1c8ed424b1b0d8e09547bfc73b0697abc45f3bddcb536890eaa36e3cd9",
+  "cand2b_accepted": "8141a3fb691db340e66f267a9a94f942d3cb7e2cd542829bbb7493545bff16b0",
+  "rejected96h7_on_96h71": "06eb09107504b59a2abeb2d30d4077ec12224b7949f7f0150c7740facb9f0e69"
+ },
+ "fixtures": {
+  "seed11-month60.save": "d4f9f2f9c63a5257ce02011fd838ce35e0baa5e78c8c74a82185728fd7ce359d",
+  "seed11-month40.save": "77a353f81d1027db56c24575f7e4b022be8947b1b8eb08131b5627b555f695cd"
+ },
+ "canonicalReproduction": {
+  "control120_totals_equal_H61": {
+   "criticalEmpireMonths": 14,
+   "deliveries": 455,
+   "techs": 331,
+   "colonies": 129,
+   "ships": 1386,
+   "power": 187795,
+   "alive": 40,
+   "warsStarted": 11,
+   "upkeep": 4214.8,
+   "contracts": 50,
+   "plansCompleted": 81,
+   "plansFailed": 26
+  },
+  "control240_totals": {
+   "criticalEmpireMonths": 62,
+   "deliveries": 1073,
+   "techs": 350,
+   "colonies": 99,
+   "ships": 1007,
+   "power": 249329,
+   "alive": 23,
+   "warsStarted": 24,
+   "upkeep": 4085.2,
+   "contracts": 90,
+   "plansCompleted": 65,
+   "plansFailed": 24
+  },
+  "seed11_month84_control_save": "652da1c9934ef6c46b4e09caee24a1d34a390d172413df2a463f80c27435c7d2 (observer harness and unobserved replay identical)"
+ }
+}

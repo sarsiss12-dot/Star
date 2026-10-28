@@ -1,0 +1,6 @@
+{
+ "protocol": "seed11 month40 fixture, 60 months, Node v22.22.0 vm runtime, real hrtime wrappers around aiMilitaryCampaign and aiTurn; two repetitions each, sequential",
+ "control_96h71": [{"campaignCalls":138,"campaignMs":49.7,"perCallMs":0.36,"aiTurns":360,"perTurnMs":3.51},{"campaignCalls":138,"campaignMs":46.5,"perCallMs":0.337,"aiTurns":360,"perTurnMs":3.35}],
+ "accepted_96h8": [{"campaignCalls":187,"campaignMs":75.0,"perCallMs":0.401,"aiTurns":360,"perTurnMs":3.40},{"campaignCalls":187,"campaignMs":71.1,"perCallMs":0.38,"aiTurns":360,"perTurnMs":3.29}],
+ "note": "More campaign calls because actor3 keeps a navy and stays at war; total AI turn time unchanged within noise. Not a mobile/Android benchmark."
+}

@@ -18,10 +18,12 @@ Ortak ders: yerel bir göstergede kazanç (tek seed, tek kaynak, tek devlet) gen
 | F1 | 96H.6.3 | Dizi sonundaki zorunlu üreticinin finansman riskini iki eylemle hesaplama | Aynı Save217 aktör7: maden kritik/sıfır 9/2→17/5, gıda 0/0→12/8 | `research/96h63/F1-rejected.patch` |
 | Kapasite (120/160/200 sistem, 13–20 AI) | 96H.6.3 | Büyük galaksi sınırları | 4× CPU stres kapıları aşıldı (aylık karar karesi > 1500 ms, P95 > 33,3 ms); 120/13 son kademe de RET | `research/96h63/CAPACITY-REJECTED.patch` |
 | Sefer bekleme (campaign deadline) | 96H.7 | `aiMilitaryCampaign` başarısız-hedef beklemesini dolmadan uzatmama | Kilit gerçekten açıldı, fakat seed11 ay60→84 güç 10323→4990, gemi 81→44, bilim 22→21; gün 2310'da 22 gemi terhis (`aiDisbandTick`) | `research/96h7/campaign-deadline-rejected.patch` |
+| 96H.8 aday 1 (yalnız maliyet kapısı) | 96H.8 | Bekleme düzeltmesi + gerçek sevk bakım kapısı, yalnız tam filolarla | `aiTurn` rally yığınını birleştirdiği için seed11 devlet1'in tek sevk adayı 24 gemilik bölünmez filo; AI hiç saldırmıyor (yapay pasiflik) | `research/96h8/candidate-1-gate-only-REJECTED.patch` |
+| 96H.8 aday 2a (müfreze, geri çağırma yok) | 96H.8 | Aday 1 + karşılanabilir müfreze | Yerine 2b geldi: 120 ayda sınırda geçen tam sevk açık uçlu kaldı, seed11 devlet1 ay 78'de 15 gemi terhis | `research/96h8/candidate-2a-detachment-SUPERSEDED.patch` |
 
 ## Açık kalan gerçek sorunlar (çözülmedi)
 
-- **Sefer bekleme kilidi** (96H.7 §11): `failedTargets` son tarihi her değerlendirmede kayıyor; kilit kendiliğinden bitmiyor. Tek başına açmak sevk bakımı → terhis zincirine yol açıyor. Sonraki dar araştırma önerisi: aynı seed11/ay60 kaydında sefer sevkinin enerji bakımını mevcut `fleetUpkeep` ve `aiDisbandTick` kurallarıyla birlikte değerlendirmek. Bekleme yamasını tek başına yayımlamayın.
+- ~~Sefer bekleme kilidi~~ → **96H.8'de çözüldü**: bekleme düzeltmesi, sevk bakımı kapısı, müfreze ve geri çağırma ile birlikte (`AI-SEFER-VERIMLILIGI-96H8.md`). 96H.7 yaması tek başına hâlâ reddedilmiş durumda.
 - Hedef → eylem → başarı bağı: `contain` kendi toprak artışını, `security` kale sayısını, `recovery` bütçeyi ölçüyor; `prof.exp` / `e.agr` karara bağlı değil.
 - Ekonomide kuyruk zamanı ve takip eden üreticinin finansmanı (A2/C2/T1/I1/F1 hattı).
 - Seed11/404 geç dönem yeni devlet ekonomisi, seed2026 ticaret kaybı.
@@ -29,4 +31,5 @@ Ortak ders: yerel bir göstergede kazanç (tek seed, tek kaynak, tek devlet) gen
 ## Kabul edilen (red değil)
 
 - 96H.6.1: oyuncu ikili ittifak feshi + ortak AI fesih etkileri (yayımlandı).
+- 96H.8: askerî sefer verimliliği (aday 2b): sabit bekleme, gerçek sevk bakımı, karşılanabilir müfreze, terhis öncesi geri çağırma. `research/96h8/candidate-2b-ACCEPTED.patch`.
 - 96H.7.1: kapanmış tek üyeli ortak sefer geçmişinin Save8 yüklemesi (`research/96h63/SAVE8-GUARD-PROPOSED.patch` ile aynı satır). AI karar davranışı değil, yükleme doğrulaması düzeltmesidir; ayrıntı `PROJE-DURUMU.md`.

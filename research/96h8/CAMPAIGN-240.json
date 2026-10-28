@@ -1,0 +1,989 @@
+{
+ "protocol": "same as 120, 4 seeds x 240 months",
+ "totals": {
+  "control": {
+   "criticalEmpireMonths": 62,
+   "deliveries": 1073,
+   "techs": 350,
+   "colonies": 99,
+   "ships": 1007,
+   "power": 249329,
+   "alive": 23,
+   "warsStarted": 24,
+   "upkeep": 4085.2,
+   "contracts": 90,
+   "plansCompleted": 65,
+   "plansFailed": 24
+  },
+  "cand2b": {
+   "criticalEmpireMonths": 53,
+   "deliveries": 1006,
+   "techs": 348,
+   "colonies": 92,
+   "ships": 1001,
+   "power": 259018,
+   "alive": 21,
+   "warsStarted": 25,
+   "upkeep": 4222.8,
+   "contracts": 84,
+   "plansCompleted": 66,
+   "plansFailed": 23
+  }
+ },
+ "seeds": {
+  "11": {
+   "control": {
+    "phase": "control",
+    "seed": 11,
+    "contracts": 23,
+    "cancelled": 6,
+    "freightLost": 2,
+    "alive": 6,
+    "techs": 64,
+    "ships": 203,
+    "power": 37262,
+    "upkeep": 735.282966453797,
+    "colonies": 17,
+    "deliveries": 204,
+    "pacts": 8,
+    "warsStarted": 17,
+    "peace": 0,
+    "objectiveChanges": 41,
+    "plansCompleted": 20,
+    "plansFailed": 7,
+    "criticalEmpireMonths": 10,
+    "invalidResources": [],
+    "elapsedMs": 39534
+   },
+   "cand2b": {
+    "phase": "cand2b",
+    "seed": 11,
+    "contracts": 19,
+    "cancelled": 3,
+    "freightLost": 19,
+    "alive": 5,
+    "techs": 60,
+    "ships": 142,
+    "power": 34339,
+    "upkeep": 616.0279384708584,
+    "colonies": 12,
+    "deliveries": 157,
+    "pacts": 2,
+    "warsStarted": 17,
+    "peace": 1,
+    "objectiveChanges": 50,
+    "plansCompleted": 26,
+    "plansFailed": 7,
+    "criticalEmpireMonths": 1,
+    "invalidResources": [],
+    "elapsedMs": 34656
+   },
+   "cand2b_vs_control_monthly_save_rng": {
+    "equalMonths": 41,
+    "firstDifferentMonth": 42
+   }
+  },
+  "23": {
+   "control": {
+    "phase": "control",
+    "seed": 23,
+    "contracts": 2,
+    "cancelled": 0,
+    "freightLost": 0,
+    "alive": 5,
+    "techs": 72,
+    "ships": 148,
+    "power": 73030,
+    "upkeep": 968.2526599793598,
+    "colonies": 28,
+    "deliveries": 20,
+    "pacts": 7,
+    "warsStarted": 6,
+    "peace": 0,
+    "objectiveChanges": 33,
+    "plansCompleted": 18,
+    "plansFailed": 3,
+    "criticalEmpireMonths": 1,
+    "invalidResources": [],
+    "elapsedMs": 67032
+   },
+   "cand2b": {
+    "phase": "cand2b",
+    "seed": 23,
+    "contracts": 0,
+    "cancelled": 0,
+    "freightLost": 0,
+    "alive": 4,
+    "techs": 74,
+    "ships": 203,
+    "power": 85642,
+    "upkeep": 1225.164999999999,
+    "colonies": 26,
+    "deliveries": 0,
+    "pacts": 4.5,
+    "warsStarted": 7,
+    "peace": 0,
+    "objectiveChanges": 21,
+    "plansCompleted": 13,
+    "plansFailed": 2,
+    "criticalEmpireMonths": 1,
+    "invalidResources": [],
+    "elapsedMs": 62225
+   },
+   "cand2b_vs_control_monthly_save_rng": {
+    "equalMonths": 15,
+    "firstDifferentMonth": 16
+   }
+  },
+  "42": {
+   "control": {
+    "phase": "control",
+    "seed": 42,
+    "contracts": 11,
+    "cancelled": 0,
+    "freightLost": 0,
+    "alive": 5,
+    "techs": 93,
+    "ships": 261,
+    "power": 63537,
+    "upkeep": 912.1988633809459,
+    "colonies": 25,
+    "deliveries": 132,
+    "pacts": 1,
+    "warsStarted": 0,
+    "peace": 0,
+    "objectiveChanges": 26,
+    "plansCompleted": 10,
+    "plansFailed": 5,
+    "criticalEmpireMonths": 2,
+    "invalidResources": [],
+    "elapsedMs": 36209
+   },
+   "cand2b": {
+    "phase": "cand2b",
+    "seed": 42,
+    "contracts": 11,
+    "cancelled": 0,
+    "freightLost": 0,
+    "alive": 5,
+    "techs": 93,
+    "ships": 261,
+    "power": 63537,
+    "upkeep": 912.1988633809459,
+    "colonies": 25,
+    "deliveries": 132,
+    "pacts": 1,
+    "warsStarted": 0,
+    "peace": 0,
+    "objectiveChanges": 26,
+    "plansCompleted": 10,
+    "plansFailed": 5,
+    "criticalEmpireMonths": 2,
+    "invalidResources": [],
+    "elapsedMs": 34619
+   },
+   "cand2b_vs_control_monthly_save_rng": {
+    "equalMonths": 240,
+    "firstDifferentMonth": null
+   }
+  },
+  "404": {
+   "control": {
+    "phase": "control",
+    "seed": 404,
+    "contracts": 54,
+    "cancelled": 1,
+    "freightLost": 1,
+    "alive": 7,
+    "techs": 121,
+    "ships": 395,
+    "power": 75500,
+    "upkeep": 1469.4414999999995,
+    "colonies": 29,
+    "deliveries": 717,
+    "pacts": 21,
+    "warsStarted": 1,
+    "peace": 0,
+    "objectiveChanges": 28,
+    "plansCompleted": 17,
+    "plansFailed": 9,
+    "criticalEmpireMonths": 49,
+    "invalidResources": [],
+    "elapsedMs": 87142
+   },
+   "cand2b": {
+    "phase": "cand2b",
+    "seed": 404,
+    "contracts": 54,
+    "cancelled": 1,
+    "freightLost": 1,
+    "alive": 7,
+    "techs": 121,
+    "ships": 395,
+    "power": 75500,
+    "upkeep": 1469.4414999999995,
+    "colonies": 29,
+    "deliveries": 717,
+    "pacts": 21,
+    "warsStarted": 1,
+    "peace": 0,
+    "objectiveChanges": 28,
+    "plansCompleted": 17,
+    "plansFailed": 9,
+    "criticalEmpireMonths": 49,
+    "invalidResources": [],
+    "elapsedMs": 85790
+   },
+   "cand2b_vs_control_monthly_save_rng": {
+    "equalMonths": 240,
+    "firstDifferentMonth": null
+   }
+  }
+ },
+ "noiseDistribution": {
+  "11-120-control": {
+   "arms": [
+    "control",
+    "pl11k1",
+    "pl11k2",
+    "pl11k3",
+    "pl11k4"
+   ],
+   "rows": [
+    {
+     "crit": 0,
+     "deliv": 84,
+     "techs": 29,
+     "cols": 12,
+     "ships": 104,
+     "power": 14356,
+     "alive": 5
+    },
+    {
+     "crit": 0,
+     "deliv": 88,
+     "techs": 32,
+     "cols": 11,
+     "ships": 117,
+     "power": 16277,
+     "alive": 5
+    },
+    {
+     "crit": 0,
+     "deliv": 81,
+     "techs": 35,
+     "cols": 11,
+     "ships": 121,
+     "power": 17202,
+     "alive": 5
+    },
+    {
+     "crit": 0,
+     "deliv": 77,
+     "techs": 32,
+     "cols": 12,
+     "ships": 80,
+     "power": 12489,
+     "alive": 5
+    },
+    {
+     "crit": 0,
+     "deliv": 83,
+     "techs": 35,
+     "cols": 12,
+     "ships": 117,
+     "power": 18461,
+     "alive": 5
+    }
+   ],
+   "mean_min_max": {
+    "crit": [
+     0,
+     0,
+     0
+    ],
+    "deliv": [
+     82.6,
+     77,
+     88
+    ],
+    "techs": [
+     32.6,
+     29,
+     35
+    ],
+    "cols": [
+     11.6,
+     11,
+     12
+    ],
+    "ships": [
+     107.8,
+     80,
+     121
+    ],
+    "power": [
+     15757,
+     12489,
+     18461
+    ],
+    "alive": [
+     5,
+     5,
+     5
+    ]
+   }
+  },
+  "11-120-cand2b": {
+   "arms": [
+    "cand2b",
+    "cb11k1",
+    "cb11k2",
+    "cb11k3",
+    "cb11k4"
+   ],
+   "rows": [
+    {
+     "crit": 0,
+     "deliv": 72,
+     "techs": 34,
+     "cols": 11,
+     "ships": 106,
+     "power": 16146,
+     "alive": 5
+    },
+    {
+     "crit": 0,
+     "deliv": 82,
+     "techs": 34,
+     "cols": 13,
+     "ships": 110,
+     "power": 17767,
+     "alive": 5
+    },
+    {
+     "crit": 0,
+     "deliv": 85,
+     "techs": 34,
+     "cols": 13,
+     "ships": 121,
+     "power": 18677,
+     "alive": 5
+    },
+    {
+     "crit": 5,
+     "deliv": 89,
+     "techs": 35,
+     "cols": 14,
+     "ships": 92,
+     "power": 13998,
+     "alive": 5
+    },
+    {
+     "crit": 0,
+     "deliv": 58,
+     "techs": 34,
+     "cols": 12,
+     "ships": 107,
+     "power": 18061,
+     "alive": 5
+    }
+   ],
+   "mean_min_max": {
+    "crit": [
+     1,
+     0,
+     5
+    ],
+    "deliv": [
+     77.2,
+     58,
+     89
+    ],
+    "techs": [
+     34.2,
+     34,
+     35
+    ],
+    "cols": [
+     12.6,
+     11,
+     14
+    ],
+    "ships": [
+     107.2,
+     92,
+     121
+    ],
+    "power": [
+     16929.8,
+     13998,
+     18677
+    ],
+    "alive": [
+     5,
+     5,
+     5
+    ]
+   }
+  },
+  "11-240-control": {
+   "arms": [
+    "control",
+    "pl11k1",
+    "pl11k2",
+    "pl11k3",
+    "pl11k4"
+   ],
+   "rows": [
+    {
+     "crit": 10,
+     "deliv": 204,
+     "techs": 64,
+     "cols": 17,
+     "ships": 203,
+     "power": 37262,
+     "alive": 6
+    },
+    {
+     "crit": 55,
+     "deliv": 204,
+     "techs": 68,
+     "cols": 14,
+     "ships": 205,
+     "power": 33974,
+     "alive": 6
+    },
+    {
+     "crit": 37,
+     "deliv": 181,
+     "techs": 68,
+     "cols": 17,
+     "ships": 117,
+     "power": 22198,
+     "alive": 5
+    },
+    {
+     "crit": 14,
+     "deliv": 207,
+     "techs": 72,
+     "cols": 22,
+     "ships": 214,
+     "power": 48644,
+     "alive": 5
+    },
+    {
+     "crit": 0,
+     "deliv": 201,
+     "techs": 72,
+     "cols": 20,
+     "ships": 198,
+     "power": 46633,
+     "alive": 5
+    }
+   ],
+   "mean_min_max": {
+    "crit": [
+     23.2,
+     0,
+     55
+    ],
+    "deliv": [
+     199.4,
+     181,
+     207
+    ],
+    "techs": [
+     68.8,
+     64,
+     72
+    ],
+    "cols": [
+     18,
+     14,
+     22
+    ],
+    "ships": [
+     187.4,
+     117,
+     214
+    ],
+    "power": [
+     37742.2,
+     22198,
+     48644
+    ],
+    "alive": [
+     5.4,
+     5,
+     6
+    ]
+   }
+  },
+  "11-240-cand2b": {
+   "arms": [
+    "cand2b",
+    "cb11k1",
+    "cb11k2",
+    "cb11k3",
+    "cb11k4"
+   ],
+   "rows": [
+    {
+     "crit": 1,
+     "deliv": 157,
+     "techs": 60,
+     "cols": 12,
+     "ships": 142,
+     "power": 34339,
+     "alive": 5
+    },
+    {
+     "crit": 41,
+     "deliv": 207,
+     "techs": 69,
+     "cols": 18,
+     "ships": 184,
+     "power": 43554,
+     "alive": 5
+    },
+    {
+     "crit": 10,
+     "deliv": 200,
+     "techs": 67,
+     "cols": 21,
+     "ships": 158,
+     "power": 39095,
+     "alive": 6
+    },
+    {
+     "crit": 15,
+     "deliv": 293,
+     "techs": 72,
+     "cols": 23,
+     "ships": 261,
+     "power": 54108,
+     "alive": 6
+    },
+    {
+     "crit": 10,
+     "deliv": 151,
+     "techs": 66,
+     "cols": 22,
+     "ships": 207,
+     "power": 45050,
+     "alive": 6
+    }
+   ],
+   "mean_min_max": {
+    "crit": [
+     15.4,
+     1,
+     41
+    ],
+    "deliv": [
+     201.6,
+     151,
+     293
+    ],
+    "techs": [
+     66.8,
+     60,
+     72
+    ],
+    "cols": [
+     19.2,
+     12,
+     23
+    ],
+    "ships": [
+     190.4,
+     142,
+     261
+    ],
+    "power": [
+     43229.2,
+     34339,
+     54108
+    ],
+    "alive": [
+     5.6,
+     5,
+     6
+    ]
+   }
+  },
+  "23-120-control": {
+   "arms": [
+    "control",
+    "pl23k1",
+    "pl23k2",
+    "pl23k3",
+    "pl23k4"
+   ],
+   "rows": [
+    {
+     "crit": 1,
+     "deliv": 0,
+     "techs": 29,
+     "cols": 10,
+     "ships": 135,
+     "power": 21514,
+     "alive": 4
+    },
+    {
+     "crit": 1,
+     "deliv": 0,
+     "techs": 35,
+     "cols": 12,
+     "ships": 129,
+     "power": 22512,
+     "alive": 5
+    },
+    {
+     "crit": 1,
+     "deliv": 0,
+     "techs": 35,
+     "cols": 8,
+     "ships": 39,
+     "power": 4739,
+     "alive": 5
+    },
+    {
+     "crit": 1,
+     "deliv": 0,
+     "techs": 30,
+     "cols": 13,
+     "ships": 107,
+     "power": 19284,
+     "alive": 4
+    },
+    {
+     "crit": 1,
+     "deliv": 0,
+     "techs": 39,
+     "cols": 14,
+     "ships": 159,
+     "power": 24380,
+     "alive": 5
+    }
+   ],
+   "mean_min_max": {
+    "crit": [
+     1,
+     1,
+     1
+    ],
+    "deliv": [
+     0,
+     0,
+     0
+    ],
+    "techs": [
+     33.6,
+     29,
+     39
+    ],
+    "cols": [
+     11.4,
+     8,
+     14
+    ],
+    "ships": [
+     113.8,
+     39,
+     159
+    ],
+    "power": [
+     18485.8,
+     4739,
+     24380
+    ],
+    "alive": [
+     4.6,
+     4,
+     5
+    ]
+   }
+  },
+  "23-120-cand2b": {
+   "arms": [
+    "cand2b",
+    "cb23k1",
+    "cb23k2",
+    "cb23k3",
+    "cb23k4"
+   ],
+   "rows": [
+    {
+     "crit": 1,
+     "deliv": 0,
+     "techs": 28,
+     "cols": 13,
+     "ships": 152,
+     "power": 25989,
+     "alive": 4
+    },
+    {
+     "crit": 1,
+     "deliv": 30,
+     "techs": 36,
+     "cols": 15,
+     "ships": 161,
+     "power": 26251,
+     "alive": 5
+    },
+    {
+     "crit": 1,
+     "deliv": 0,
+     "techs": 25,
+     "cols": 11,
+     "ships": 124,
+     "power": 17605,
+     "alive": 4
+    },
+    {
+     "crit": 1,
+     "deliv": 0,
+     "techs": 31,
+     "cols": 8,
+     "ships": 91,
+     "power": 12527,
+     "alive": 5
+    },
+    {
+     "crit": 1,
+     "deliv": 0,
+     "techs": 26,
+     "cols": 12,
+     "ships": 116,
+     "power": 19500,
+     "alive": 4
+    }
+   ],
+   "mean_min_max": {
+    "crit": [
+     1,
+     1,
+     1
+    ],
+    "deliv": [
+     6,
+     0,
+     30
+    ],
+    "techs": [
+     29.2,
+     25,
+     36
+    ],
+    "cols": [
+     11.8,
+     8,
+     15
+    ],
+    "ships": [
+     128.8,
+     91,
+     161
+    ],
+    "power": [
+     20374.4,
+     12527,
+     26251
+    ],
+    "alive": [
+     4.4,
+     4,
+     5
+    ]
+   }
+  },
+  "23-240-control": {
+   "arms": [
+    "control",
+    "pl23k1",
+    "pl23k2",
+    "pl23k3",
+    "pl23k4"
+   ],
+   "rows": [
+    {
+     "crit": 1,
+     "deliv": 20,
+     "techs": 72,
+     "cols": 28,
+     "ships": 148,
+     "power": 73030,
+     "alive": 5
+    },
+    {
+     "crit": 1,
+     "deliv": 0,
+     "techs": 73,
+     "cols": 19,
+     "ships": 309,
+     "power": 66911,
+     "alive": 5
+    },
+    {
+     "crit": 1,
+     "deliv": 0,
+     "techs": 73,
+     "cols": 18,
+     "ships": 191,
+     "power": 37681,
+     "alive": 5
+    },
+    {
+     "crit": 1,
+     "deliv": 73,
+     "techs": 69,
+     "cols": 36,
+     "ships": 322,
+     "power": 88300,
+     "alive": 4
+    },
+    {
+     "crit": 1,
+     "deliv": 129,
+     "techs": 88,
+     "cols": 34,
+     "ships": 332,
+     "power": 78497,
+     "alive": 5
+    }
+   ],
+   "mean_min_max": {
+    "crit": [
+     1,
+     1,
+     1
+    ],
+    "deliv": [
+     44.4,
+     0,
+     129
+    ],
+    "techs": [
+     75,
+     69,
+     88
+    ],
+    "cols": [
+     27,
+     18,
+     36
+    ],
+    "ships": [
+     260.4,
+     148,
+     332
+    ],
+    "power": [
+     68883.8,
+     37681,
+     88300
+    ],
+    "alive": [
+     4.8,
+     4,
+     5
+    ]
+   }
+  },
+  "23-240-cand2b": {
+   "arms": [
+    "cand2b",
+    "cb23k1",
+    "cb23k2",
+    "cb23k3",
+    "cb23k4"
+   ],
+   "rows": [
+    {
+     "crit": 1,
+     "deliv": 0,
+     "techs": 74,
+     "cols": 26,
+     "ships": 203,
+     "power": 85642,
+     "alive": 4
+    },
+    {
+     "crit": 1,
+     "deliv": 330,
+     "techs": 83,
+     "cols": 26,
+     "ships": 310,
+     "power": 63552,
+     "alive": 7
+    },
+    {
+     "crit": 1,
+     "deliv": 0,
+     "techs": 65,
+     "cols": 25,
+     "ships": 255,
+     "power": 73382,
+     "alive": 4
+    },
+    {
+     "crit": 20,
+     "deliv": 121,
+     "techs": 47,
+     "cols": 15,
+     "ships": 134,
+     "power": 18329,
+     "alive": 6
+    },
+    {
+     "crit": 1,
+     "deliv": 4,
+     "techs": 75,
+     "cols": 36,
+     "ships": 286,
+     "power": 84935,
+     "alive": 4
+    }
+   ],
+   "mean_min_max": {
+    "crit": [
+     4.8,
+     1,
+     20
+    ],
+    "deliv": [
+     91,
+     0,
+     330
+    ],
+    "techs": [
+     68.8,
+     47,
+     83
+    ],
+    "cols": [
+     25.6,
+     15,
+     36
+    ],
+    "ships": [
+     237.6,
+     134,
+     310
+    ],
+    "power": [
+     65168,
+     18329,
+     85642
+    ],
+    "alive": [
+     5,
+     4,
+     7
+    ]
+   }
+  }
+ }
+}
