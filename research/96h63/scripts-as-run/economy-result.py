@@ -1,0 +1,11 @@
+from pathlib import Path
+import json,hashlib
+P=Path(__file__).resolve().parents[1];a=json.loads((P.parent/'phase96h62/evidence/local-11-217/control/L62-11-217-control-11.json').read_text());b=json.loads((P/'evidence/local11/F1-11.json').read_text());tr=json.loads((P/'evidence/local11trace/F1trace-11.json').read_text());assert a['initialSaveHash']==b['initialSaveHash'] and a['initialRng']==b['initialRng'];assert b['monthlyIntegrity']==tr['monthlyIntegrity']
+def metrics(d):
+ target=[(d['startMonth']+i+1,next(x for x in rows if x['id']==7))for i,rows in enumerate(d['monthly'])];out={}
+ for k in ['min','yiy','ene','tuk','ala']:
+  ms=[m for m,e in target if not e['dead'] and e['income'][k]<0 and e['resources'][k]<-e['income'][k]*3];zero=[m for m,e in target if e['income'][k]<0 and e['resources'][k]<=0];longest=run=0;prev=None
+  for m in ms:run=run+1 if prev==m-1 else 1;prev=m;longest=max(run,longest)
+  out[k]={'criticalMonths':len(ms),'critical':ms,'longest':longest,'zeroMonths':len(zero),'zero':zero,'lastStock':target[-1][1]['resources'][k],'lastNet':target[-1][1]['income'][k]}
+ last=target[-1][1];return {'resources':out,'alive':not last['dead'],'colonies':last['colonies'],'techs':last['techs'],'ships':last['ships'],'power':last['power'],'orders':[{k:v for k,v in r.items() if k in ['day','actor','kind','key','before','after','paid','refund']}for r in d['auditTrace']if r.get('actor')==7 and r['kind']in ['queueBuilding','queueDemolish']]}
+x={'candidate':'F1','decision':'REJECTED','gate1':json.loads((P/'evidence/economy-gate1.json').read_text()),'gate2':'FAIL','sameInputSHA256':b['resumeInputHash'],'sameNormalizedSave':b['initialSaveHash'],'sameInitialRNG':b['initialRng'],'diagnosticReplayFullSaveRngMatch23Months':True,'control':metrics(a),'candidateResult':metrics(b),'gate3Seed404':'NOT RUN: first mandatory local gate failed','gate4':'NOT RUN','campaign120':'NOT RUN','campaign240':'NOT RUN','runtimePublished':False,'reasons':['seed11 mineral critical9->17, zero2->5','seed11 food critical0->12, zero0->8','terminal risk count and per-turn recomputation did not preserve affordable essential sequence; new thresholds/variants forbidden']};(P/'evidence/ECONOMY-DECISION.json').write_text(json.dumps(x,indent=2));print(json.dumps({k:v for k,v in x.items()if k not in ['control','candidateResult','gate1']},indent=2))

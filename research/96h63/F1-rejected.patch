@@ -1,0 +1,157 @@
+diff --git a/ai.js b/ai.js
+index 057e926..50bb906 100644
+--- a/ai.js
++++ b/ai.js
+@@ -226,6 +226,115 @@ function aiVassalBudget(e,income){
+  if(!e.crisisSide&&e.edicts?.bilimPayi)dues.ara+=Math.max(0,income.ara||0)*.18;
+  return dues;
+ }
++/* Read-only 96H.6.2 prototype. Frozen current production factors; real paid
++   serial completion, current contracts and purchase wallets. No game cloning. */
++function ecoPrefix62(e,s,p,valid){
++ const q=p.col.q;try{p.col.q=valid;return aiBuildingDelta(e,s,p,null,true);}finally{p.col.q=q;}
++}
++function ecoFrame62(e){
++ const keys=['ene','min','yiy','tuk','ala','ara','etk'],horizon=6+Math.ceil(Math.max(0,...e.colonies.map(c=>(G.sys[c.s]?.planets[c.p]?.col?.q||[]).reduce((n,q)=>n+q.left,0)))/30)+2*Math.ceil(Math.max(...['santral','maden','ciftlik','fabrika','dokum'].map(k=>buildDays(e,k)))/30),day=G.day,first=(Math.floor(day/30)+1)*30;
++ const income=empireIncome({...e,_trAt:-1,_trCache:null},false),raw=Array.from({length:horizon},()=>({...income})),refunds=Array.from({length:horizon},()=>({})),jobs=[],colonies=[];
++ for(const c of e.colonies){const s=G.sys[c.s],p=s?.planets[c.p];if(!p?.col||p.owner!==e.id)continue;let delay=0,prev={},valid=[],b={...p.col.b};
++  for(let i=0;i<(p.col.q||[]).length;i++){
++   const q=p.col.q[i];delay+=Math.max(.5,Math.ceil(q.left/.5)*.5);const finish=day+delay,index=Math.max(0,Math.ceil((finish-first)/30));
++   const possible=q.dem?(b[q.key]||0)>0:BUILDINGS[q.key]&&(b[q.key]||0)<BUILDINGS[q.key].max&&colonyUsed({b})<colonySlots(p.col,e,p);
++   jobs.push({s:s.id,p:p.i,index:i,key:q.key,dem:!!q.dem,finish,productionMonth:Math.ceil(finish/30),possible:!!possible});
++   if(possible){valid.push(q);b[q.key]=Math.max(0,(b[q.key]||0)+(q.dem?-1:1));}
++   if(index>=horizon)continue;
++   const next=ecoPrefix62(e,s,p,valid);
++   for(let m=index;m<horizon;m++)for(const r of keys)raw[m][r]=(raw[m][r]||0)+(next[r]||0)-(prev[r]||0);
++   const refund=possible&&q.dem?q.refund:!possible&&!q.dem?q.paid:null;
++   for(const r in refund||{})refunds[index][r]=(refunds[index][r]||0)+refund[r];prev=next;
++  }
++  colonies.push({s:s.id,p:p.i,delay,valid,b});
++ }
++ const up=Math.max(.1,1+(e.mods.upMul||0)),peace=!Object.values(e.war||{}).some(Boolean);
++ for(const s of G.sys)for(const q of s.queue||[])if(q.e===e.id&&SHIPS[q.cls])for(const row of raw){row.ene-=SHIPS[q.cls].up*up*(hasCivic(e,'mobilize')&&peace?2:1);row.ala-=(SHIPS[q.cls].upA||0)*up;}
++ const freight=Array.from({length:horizon},()=>({}));
++ for(const c of G.commerce?.contracts||[])if(!Commerce.closed(c)){
++  let due=Math.max(day+.5,c.next),every=c.legs[0]?.every||30;
++  for(;due<Math.min(c.until,first+(horizon-1)*30+.00001);due+=every){const index=Math.max(0,Math.ceil((due-first)/30));if(index>=horizon)break;for(const l of c.legs)if(l.e===e.id)freight[index][l.r]=(freight[index][l.r]||0)+l.v;}
++ }
++ return {keys,horizon,day,first,income,raw,refunds,freight,jobs,colonies,committed:aiConstructionCommitment(e)};
++}
++function ecoRate62(e,raw,at){
++ const net=aiFedBudget(e,raw).net,c=vassalContractOf(e),tax=c&&c.expires!==null&&at>=c.expires?{}:aiVassalBudget(e,raw);
++ for(const r in tax)net[r]=(net[r]||0)-tax[r];return net;
++}
++function ecoPath62(e,frame,action=null){
++ const {keys,horizon,first}=frame,stocks=Object.fromEntries(keys.map(r=>[r,(e.res[r]||0)-(frame.committed[r]||0)-(action?.cost?.[r]||0)])),rows=[],min={...stocks},empty={};
++ let finish=null,index=horizon,delta={};
++ if(action){const s=G.sys[action.s],p=s.planets[action.p],key=action.key,delay=(p.col.q||[]).reduce((n,q)=>n+Math.max(.5,Math.ceil(q.left/.5)*.5),0);finish=frame.day+delay+(action.dem?demolishDays(e,key):buildDays(e,key));index=Math.max(0,Math.ceil((finish-first)/30));
++  const q=p.col.q,valid=frame.colonies.find(c=>c.s===s.id&&c.p===p.i).valid;try{p.col.q=valid;const base=aiBuildingDelta(e,s,p,null,true),whole=aiBuildingDelta(e,s,p,key,true,action.dem?-1:1);for(const r of keys)delta[r]=(whole[r]||0)-(base[r]||0);}finally{p.col.q=q;}
++ }
++ for(let m=0;m<horizon;m++){
++  const at=first+m*30,raw={...frame.raw[m]};if(m>=index)for(const r of keys)raw[r]=(raw[r]||0)+(delta[r]||0);
++  const net=ecoRate62(e,raw,at),start={...stocks};for(const r of keys){stocks[r]+=(net[r]||0)+(frame.refunds[m][r]||0)-(frame.freight[m][r]||0);if(action?.dem&&m===index)stocks[r]+=demolishRefund(action.key)[r]||0;min[r]=Math.min(min[r],stocks[r]);if(stocks[r]<0&&empty[r]===undefined)empty[r]=m+1;}
++  rows.push({month:Math.round(at/30),start,net,freight:frame.freight[m],refund:frame.refunds[m],end:{...stocks}});
++ }
++ return {action,finish,firstProductionMonth:finish===null?null:Math.ceil(finish/30),rows,min,empty,last:{...stocks},terminal:rows.at(-1).net,shortage:Object.fromEntries(keys.map(r=>[r,rows.filter(x=>x.end[r]<0).length]))};
++}
++
++/* 96H.6.3 research F1. Bounded two-action financing; frozen current factors.
++   All prices, durations and queues come from the existing engine. */
++function ecoActions63(e,frame){
++ const out=[null];
++ for(const c of frame.colonies){const s=G.sys[c.s],p=s.planets[c.p];
++  for(const key of ['santral','maden','ciftlik','fabrika','dokum'])if((!BUILDINGS[key].tech||e.techs[BUILDINGS[key].tech])&&(c.b[key]||0)<BUILDINGS[key].max&&colonyUsed({b:c.b})<colonySlots(p.col,e,p)&&colonyQueued(p.col)<2){
++   const d=aiBuildingDelta(e,s,p,key,true);if(key!=='ciftlik'||d.yiy>0)out.push({s:s.id,p:p.i,key,dem:false,cost:buildingCost(e,key)});
++  }
++  for(const [key,n]of Object.entries(c.b))if(n&&!['santral','maden','ciftlik','liman','tersane'].includes(key)&&!(p.col.q||[]).some(q=>q.dem&&q.key===key))out.push({s:s.id,p:p.i,key,dem:true,cost:{}});
++ }
++ return out;
++}
++function ecoSeries63(e,f,sequence){
++ const K=f.keys,stocks=Object.fromEntries(K.map(r=>[r,(e.res[r]||0)-(f.committed[r]||0)])),raw=f.raw.map(x=>({...x})),refund=f.refunds.map(x=>({...x})),paid=[],complete=[],deltas={},ends=[],nets=[],zero={};let legal=true;
++ const local=Object.fromEntries(f.colonies.map(c=>[c.s+':'+c.p,{...c,b:{...c.b},valid:c.valid.slice(),end:f.day+c.delay,queued:colonyQueued(G.sys[c.s].planets[c.p].col)}]));
++ function append(a,m){if(!a)return true;const c=local[a.s+':'+a.p],s=G.sys[a.s],p=s.planets[a.p],token=a.s+':'+a.p+':'+a.key+':'+a.dem;
++  if(!c||(a.dem?(c.b[a.key]||0)<=0:c.queued>=2||(c.b[a.key]||0)>=BUILDINGS[a.key].max||colonyUsed({b:c.b})>=colonySlots(p.col,e,p)))return false;
++  if(!Object.entries(a.cost).every(([r,v])=>stocks[r]>=v))return false;
++  for(const [r,v]of Object.entries(a.cost))stocks[r]-=v;
++  const at=m===0?f.day:f.first+(m-1)*30,cost=a.dem?demolishDays(e,a.key):buildDays(e,a.key),finish=Math.max(at,c.end)+cost,idx=Math.max(0,Math.ceil((finish-f.first)/30));
++  const old=ecoPrefix62(e,s,p,c.valid);c.valid.push({key:a.key,dem:a.dem});const next=ecoPrefix62(e,s,p,c.valid),d=Object.fromEntries(K.map(r=>[r,(next[r]||0)-(old[r]||0)]));deltas[token]=d;
++  for(let i=idx;i<f.horizon;i++)for(const r of K)raw[i][r]=(raw[i][r]||0)+d[r];
++  if(a.dem&&idx<f.horizon)for(const [r,v]of Object.entries(demolishRefund(a.key)))refund[idx][r]=(refund[idx][r]||0)+v;
++  c.b[a.key]=Math.max(0,(c.b[a.key]||0)+(a.dem?-1:1));c.end=finish;if(!a.dem)c.queued++;
++  paid.push({...a,orderMonth:m,cost:a.cost,finish,firstProductionMonth:Math.ceil(finish/30)});return true;
++ }
++ if(sequence[0]&&!append(sequence[0],0))legal=false;
++ let second=!sequence[1],debt=0;
++ for(let m=0;m<f.horizon;m++){
++  if(m>=1&&!second&&append(sequence[1],m))second=true;
++  const net=ecoRate62(e,raw[m],f.first+m*30);for(const r of K){stocks[r]+=(net[r]||0)+(refund[m][r]||0)-(f.freight[m][r]||0);if(stocks[r]<0){debt+=-stocks[r];zero[r]=(zero[r]||0)+1;}}ends.push({...stocks});nets.push(net);
++ }
++ if(!second)legal=false;
++ const terminal=nets.at(-1),producer={ene:'santral',min:'maden',yiy:'ciftlik',tuk:'fabrika',ala:'dokum'},risks=[];
++ for(const [r,key]of Object.entries(producer))if(terminal[r]<0){
++  let best=Infinity;
++  for(const c of Object.values(local)){const p=G.sys[c.s].planets[c.p];if((c.b[key]||0)>=BUILDINGS[key].max||colonyUsed({b:c.b})>=colonySlots(p.col,e,p))continue;
++   let finance=0;for(const [currency,v]of Object.entries(buildingCost(e,key))){const short=v-stocks[currency];if(short>0)finance=Math.max(finance,terminal[currency]>0?short/terminal[currency]:Infinity);}
++   best=Math.min(best,finance+Math.max(0,(c.end-(f.first+(f.horizon-1)*30))/30)+buildDays(e,key)/30);
++  }
++  const runway=Math.max(0,stocks[r])/-terminal[r];if(best>runway)risks.push({resource:r,runway,repairMonths:best});
++ }
++ return {legal,paid,ends,nets,zero,debt,terminal,last:{...stocks},risks,score:[risks.length,Object.values(zero).reduce((a,b)=>a+b,0),debt]};
++}
++function ecoCompare63(a,b){for(let i=0;i<a.score.length;i++){const d=a.score[i]-b.score[i];if(Math.abs(d)>1e-7)return d;}return 0;}
++function ecoFinance63(e){
++ const f=ecoFrame62(e),base=ecoSeries63(e,f,[]),critical=Object.keys(base.zero).some(r=>['min','ene','yiy','tuk','ala'].includes(r));
++ if(!critical)return {active:false,frame:f,base};
++ const actions=ecoActions63(e,f),rows=[];
++ for(const first of actions){const one=ecoSeries63(e,f,[first]);if(!one.legal)continue;let best=one;
++  // The second action repairs the earliest resource to exhaust. No branching
++  // beyond one further ordinary producer; terminal risks expose a third need.
++  const r=Object.keys(one.terminal).filter(r=>['min','ene','yiy','tuk','ala'].includes(r)&&one.terminal[r]<0).sort((a,b)=>Math.max(0,one.last[a])/-one.terminal[a]-Math.max(0,one.last[b])/-one.terminal[b]||a.localeCompare(b))[0];
++  const needed={ene:'santral',min:'maden',yiy:'ciftlik',tuk:'fabrika',ala:'dokum'}[r];
++  if(needed)for(const second of actions)if(second&&!second.dem&&second.key===needed){const two=ecoSeries63(e,f,[first,second]);if(two.legal&&ecoCompare63(two,best)<0)best=two;}
++  rows.push({first,path:best});
++ }
++ rows.sort((a,b)=>ecoCompare63(a.path,b.path));const selected=rows[0];return {active:true,frame:f,base,rows,selected:selected&&ecoCompare63(selected.path,base)<0?selected:null};
++}
++
+ function aiEconomyPlan(e){
+  // A vote resolves after this month's production. Recompute a pure forecast
+  // until the next production month, without crediting income. This also
+@@ -260,22 +369,10 @@ function aiEconomyPlan(e){
+    through the player's existing paid demolition/refund path, never a grant. */
+ function aiRecoverEconomy(e){
+  if(!e.ai||e.id===0||e.dead||e.aiTalk?.['economy-recovery']?.until>G.day)return false;
+- const min=e.res.min||0,stuck=min<BUILDINGS.maden.c.min&&((e.inc.min||0)<0||e.crisis==='enerji'&&(e.res.ene||0)<=0);
+- if(!stuck)return false;
+- const candidates=[];
+- for(const c of e.colonies){const sys=G.sys[c.s],pl=sys?.planets[c.p];if(!pl?.col||pl.owner!==e.id||colonyJobs(pl.col)>0)continue;
+-  for(const [key,n]of Object.entries(pl.col.b)){
+-   if(!n||['santral','maden','ciftlik','liman','tersane'].includes(key))continue;
+-   const d=aiBuildingDelta(e,sys,pl,key,false,-1);
+-   const benefit=((e.inc.min||0)<0?Math.max(0,d.min)*3:0)+(e.crisis==='enerji'?Math.max(0,d.ene)*3:0);
+-   if(benefit<=0||d.yiy<0&&(e.inc.yiy||0)<0||d.tuk<0&&(e.inc.tuk||0)<0)continue;
+-   candidates.push({sys,pl,key,score:benefit-Math.max(0,-d.ala)*.4-Math.max(0,-d.ara)*.15});
+-  }
+- }
+- candidates.sort((a,b)=>b.score-a.score||a.sys.id-b.sys.id||a.key.localeCompare(b.key));
+- const pick=candidates[0];if(!pick||pick.score<=0||!queueDemolish(e,pick.sys,pick.pl,pick.key))return false;
+- (e.aiTalk||(e.aiTalk={}))['economy-recovery']={until:G.day+120,reason:'Paid demolition: '+pick.key};
+- AIDiagnostics.note('recovery:demolish',e,null,pick.key+'; inputs/upkeep stop only on completion; actual refund only');return true;
++ const f=ecoFinance63(e),a=f.selected?.first;
++ if(!f.active||!a?.dem)return false;
++ const ok=queueDemolish(e,G.sys[a.s],G.sys[a.s].planets[a.p],a.key);
++ if(ok){(e.aiTalk||(e.aiTalk={}))['economy-recovery']={until:G.day+120,reason:'Two-action financing: '+a.key};AIDiagnostics.note('recovery:demolish',e,null,a.key+'; terminal repair finance checked');}return ok;
+ }
+ function aiBuildingSustainable(e,sys,pl,key,plan=aiEconomyPlan(e)){
+  const B=BUILDINGS[key];if(!B)return false;
+@@ -374,6 +471,9 @@ function aiRecoveryInvestment(e,plan){
+  return viable?{key,resource,months,cost:{...B.c}}:null;
+ }
+ function aiEconomicOrder(e,sys,pl,legacy){
++ const f63=ecoFinance63(e);
++ if(f63.active){const a=f63.selected?.first;return a&&!a.dem&&a.s===sys.id&&a.p===pl.i?[a.key]:[];}
++
+  const plan=aiEconomyPlan(e),resourceBuilding={ene:'santral',min:'maden',yiy:'ciftlik',ala:'dokum',tuk:'fabrika'};
+  const ranked=Object.keys(resourceBuilding).filter(r=>{const row=plan.rows[r];return row.net<0&&row.months<12||row.stock<Math.max(120,row.reserve)&&row.urgency>12;}).sort((a,b)=>plan.rows[b].urgency-plan.rows[a].urgency||a.localeCompare(b));
+  const urgent=ranked.map(r=>resourceBuilding[r]);

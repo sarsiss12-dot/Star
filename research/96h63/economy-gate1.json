@@ -1,0 +1,38 @@
+{
+  "pass": 8,
+  "fail": 0,
+  "rows": [
+    {
+      "name": "pure two-action budget preserves exact Save/RNG",
+      "status": "PASS"
+    },
+    {
+      "name": "paid fortress/factory serial finish uses native half-day queue",
+      "status": "PASS"
+    },
+    {
+      "name": "future factory supplies no consumer income before actual first production month",
+      "status": "PASS"
+    },
+    {
+      "name": "first price is charged once; paid inherited queue not recharged",
+      "status": "PASS"
+    },
+    {
+      "name": "second producer funded from first-action wallet at real decision boundary",
+      "status": "PASS"
+    },
+    {
+      "name": "demolition gives neither refund nor capacity relief before completion",
+      "status": "PASS"
+    },
+    {
+      "name": "terminal capacity check exposes unfunded next essential producer",
+      "status": "PASS"
+    },
+    {
+      "name": "unauthorized second purchase is rejected instead of creating a resource grant",
+      "status": "PASS"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+[
+  {
+    "file": "stars-faz96h62-kanit.zip",
+    "bytes": 11298908,
+    "sha256": "d50128ec2ca9276da1361f679024e1ccfa10fe9e980b561fa5152bc60842f57e",
+    "manifestFiles": 183,
+    "CRC": "PASS",
+    "allSHA256": "PASS"
+  },
+  {
+    "file": "stars-faz96h62-takip-kanit.zip",
+    "bytes": 1207334,
+    "sha256": "946313f1050ec6219798a067e5f54ea67555379ab551bcdd831391a9d42634c1",
+    "manifestFiles": 30,
+    "CRC": "PASS",
+    "allSHA256": "PASS"
+  }
+]

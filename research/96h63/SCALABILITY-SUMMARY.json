@@ -1,0 +1,954 @@
+[
+  {
+    "label": "kozmik-16-11-sarmal",
+    "config": {
+      "name": "Scale63",
+      "race": "insan",
+      "traits": [],
+      "size": "kozmik",
+      "aiCount": 16,
+      "shape": "sarmal",
+      "diff": "normal",
+      "seed": 11,
+      "ethics": {
+        "mil": 0,
+        "aut": 0,
+        "mat": 0,
+        "ahl": 0
+      },
+      "civics": [],
+      "origin": "standart",
+      "ruins": "yok",
+      "crisis": "kapali",
+      "council": "kapali"
+    },
+    "months": 60,
+    "setupMs": 252.59218799999996,
+    "medianMonthMs": 986.4083360000004,
+    "p95MonthMs": 1452.6254919999992,
+    "maxMonthMs": 1545.1988039999997,
+    "maxHeapBytes": 131811888,
+    "turn": [
+      {
+        "id": 1,
+        "ms": 17.75109599999996
+      },
+      {
+        "id": 2,
+        "ms": 4.996598999998241
+      },
+      {
+        "id": 3,
+        "ms": 7.091012999997474
+      },
+      {
+        "id": 4,
+        "ms": 12.929258000003756
+      },
+      {
+        "id": 5,
+        "ms": 12.361234999996668
+      }
+    ],
+    "last": {
+      "month": 60,
+      "simulationMs": 1199.2429310000007,
+      "heapUsed": 111345880,
+      "systems": 160,
+      "states": 17,
+      "allStates": 18,
+      "colonies": 37,
+      "fleets": 98,
+      "ships": 328,
+      "contracts": 3,
+      "feds": 2,
+      "wars": 2,
+      "loadMs": 225.07047799999418,
+      "saveBytes": 1398786
+    }
+  },
+  {
+    "label": "kozmik-16-23-halka",
+    "config": {
+      "name": "Scale63",
+      "race": "insan",
+      "traits": [],
+      "size": "kozmik",
+      "aiCount": 16,
+      "shape": "halka",
+      "diff": "normal",
+      "seed": 23,
+      "ethics": {
+        "mil": 0,
+        "aut": 0,
+        "mat": 0,
+        "ahl": 0
+      },
+      "civics": [],
+      "origin": "standart",
+      "ruins": "yok",
+      "crisis": "kapali",
+      "council": "kapali"
+    },
+    "months": 60,
+    "setupMs": 225.49177899999998,
+    "medianMonthMs": 1947.7360640000115,
+    "p95MonthMs": 2589.5779059999986,
+    "maxMonthMs": 2624.5711379999993,
+    "maxHeapBytes": 238355048,
+    "turn": [
+      {
+        "id": 1,
+        "ms": 26.760118999998667
+      },
+      {
+        "id": 2,
+        "ms": 20.129002000001492
+      },
+      {
+        "id": 3,
+        "ms": 29.778183000002173
+      },
+      {
+        "id": 4,
+        "ms": 20.77463600000192
+      },
+      {
+        "id": 5,
+        "ms": 4.735203999996884
+      }
+    ],
+    "last": {
+      "month": 60,
+      "simulationMs": 2374.1106010000076,
+      "heapUsed": 151348456,
+      "systems": 160,
+      "states": 17,
+      "allStates": 18,
+      "colonies": 37,
+      "fleets": 113,
+      "ships": 366,
+      "contracts": 4,
+      "feds": 3,
+      "wars": 1,
+      "loadMs": 274.9900059999927,
+      "saveBytes": 1498668
+    }
+  },
+  {
+    "label": "kozmik-16-404-kume",
+    "config": {
+      "name": "Scale63",
+      "race": "insan",
+      "traits": [],
+      "size": "kozmik",
+      "aiCount": 16,
+      "shape": "kume",
+      "diff": "normal",
+      "seed": 404,
+      "ethics": {
+        "mil": 0,
+        "aut": 0,
+        "mat": 0,
+        "ahl": 0
+      },
+      "civics": [],
+      "origin": "standart",
+      "ruins": "yok",
+      "crisis": "kapali",
+      "council": "kapali"
+    },
+    "months": 60,
+    "setupMs": 221.26475299999998,
+    "medianMonthMs": 1163.8659850000004,
+    "p95MonthMs": 1767.2659849999982,
+    "maxMonthMs": 1831.2132490000004,
+    "maxHeapBytes": 144952760,
+    "turn": [
+      {
+        "id": 1,
+        "ms": 16.63999499999045
+      },
+      {
+        "id": 2,
+        "ms": 10.051902999999584
+      },
+      {
+        "id": 3,
+        "ms": 16.791001999998116
+      },
+      {
+        "id": 4,
+        "ms": 13.803525999988778
+      },
+      {
+        "id": 5,
+        "ms": 3.7333360000047833
+      }
+    ],
+    "last": {
+      "month": 60,
+      "simulationMs": 1362.0901499999964,
+      "heapUsed": 101440072,
+      "systems": 160,
+      "states": 17,
+      "allStates": 18,
+      "colonies": 36,
+      "fleets": 96,
+      "ships": 355,
+      "contracts": 4,
+      "feds": 2,
+      "wars": 0,
+      "loadMs": 257.55060799999046,
+      "saveBytes": 1474286
+    }
+  },
+  {
+    "label": "kozmik-20-11-sarmal",
+    "config": {
+      "name": "Scale63",
+      "race": "insan",
+      "traits": [],
+      "size": "kozmik",
+      "aiCount": 20,
+      "shape": "sarmal",
+      "diff": "normal",
+      "seed": 11,
+      "ethics": {
+        "mil": 0,
+        "aut": 0,
+        "mat": 0,
+        "ahl": 0
+      },
+      "civics": [],
+      "origin": "standart",
+      "ruins": "yok",
+      "crisis": "kapali",
+      "council": "kapali"
+    },
+    "months": 60,
+    "setupMs": 325.661756,
+    "medianMonthMs": 1436.3703640000022,
+    "p95MonthMs": 2389.8223160000052,
+    "maxMonthMs": 2507.9640380000055,
+    "maxHeapBytes": 145451448,
+    "turn": [
+      {
+        "id": 1,
+        "ms": 11.696931999991648
+      },
+      {
+        "id": 2,
+        "ms": 22.538007999988622
+      },
+      {
+        "id": 3,
+        "ms": 6.002742999990005
+      },
+      {
+        "id": 4,
+        "ms": 23.79283600000781
+      },
+      {
+        "id": 5,
+        "ms": 8.538509999998496
+      }
+    ],
+    "last": {
+      "month": 60,
+      "simulationMs": 2507.9640380000055,
+      "heapUsed": 35775400,
+      "systems": 160,
+      "states": 21,
+      "allStates": 22,
+      "colonies": 44,
+      "fleets": 132,
+      "ships": 458,
+      "contracts": 7,
+      "feds": 1,
+      "wars": 2,
+      "loadMs": 374.7691979999945,
+      "saveBytes": 1808789
+    }
+  },
+  {
+    "label": "kozmik-20-23-halka",
+    "config": {
+      "name": "Scale63",
+      "race": "insan",
+      "traits": [],
+      "size": "kozmik",
+      "aiCount": 20,
+      "shape": "halka",
+      "diff": "normal",
+      "seed": 23,
+      "ethics": {
+        "mil": 0,
+        "aut": 0,
+        "mat": 0,
+        "ahl": 0
+      },
+      "civics": [],
+      "origin": "standart",
+      "ruins": "yok",
+      "crisis": "kapali",
+      "council": "kapali"
+    },
+    "months": 60,
+    "setupMs": 352.16013999999996,
+    "medianMonthMs": 1684.114150999998,
+    "p95MonthMs": 3238.1978850000014,
+    "maxMonthMs": 3900.3516269999964,
+    "maxHeapBytes": 186831624,
+    "turn": [
+      {
+        "id": 1,
+        "ms": 66.40855900000315
+      },
+      {
+        "id": 2,
+        "ms": 22.50559699999576
+      },
+      {
+        "id": 3,
+        "ms": 26.32205299999623
+      },
+      {
+        "id": 4,
+        "ms": 52.883356999998796
+      },
+      {
+        "id": 5,
+        "ms": 4.541425999996136
+      }
+    ],
+    "last": {
+      "month": 60,
+      "simulationMs": 2688.628872999994,
+      "heapUsed": 72884160,
+      "systems": 160,
+      "states": 21,
+      "allStates": 22,
+      "colonies": 46,
+      "fleets": 116,
+      "ships": 472,
+      "contracts": 4,
+      "feds": 3,
+      "wars": 5,
+      "loadMs": 330.03243200000725,
+      "saveBytes": 1947246
+    }
+  },
+  {
+    "label": "kozmik-20-404-kume",
+    "config": {
+      "name": "Scale63",
+      "race": "insan",
+      "traits": [],
+      "size": "kozmik",
+      "aiCount": 20,
+      "shape": "kume",
+      "diff": "normal",
+      "seed": 404,
+      "ethics": {
+        "mil": 0,
+        "aut": 0,
+        "mat": 0,
+        "ahl": 0
+      },
+      "civics": [],
+      "origin": "standart",
+      "ruins": "yok",
+      "crisis": "kapali",
+      "council": "kapali"
+    },
+    "months": 60,
+    "setupMs": 333.82036800000003,
+    "medianMonthMs": 1794.5003319999996,
+    "p95MonthMs": 2715.550820000004,
+    "maxMonthMs": 2976.6362519999966,
+    "maxHeapBytes": 244329696,
+    "turn": [
+      {
+        "id": 1,
+        "ms": 10.94481299999461
+      },
+      {
+        "id": 2,
+        "ms": 33.92708500000299
+      },
+      {
+        "id": 3,
+        "ms": 49.09991400000581
+      },
+      {
+        "id": 4,
+        "ms": 12.82661599999119
+      },
+      {
+        "id": 5,
+        "ms": 19.657157000008738
+      }
+    ],
+    "last": {
+      "month": 60,
+      "simulationMs": 2715.550820000004,
+      "heapUsed": 244329696,
+      "systems": 160,
+      "states": 21,
+      "allStates": 22,
+      "colonies": 46,
+      "fleets": 122,
+      "ships": 481,
+      "contracts": 2,
+      "feds": 3,
+      "wars": 1,
+      "loadMs": 322.5412879999931,
+      "saveBytes": 1803116
+    }
+  },
+  {
+    "label": "muazzam-13-11-sarmal",
+    "config": {
+      "name": "Scale63",
+      "race": "insan",
+      "traits": [],
+      "size": "muazzam",
+      "aiCount": 13,
+      "shape": "sarmal",
+      "diff": "normal",
+      "seed": 11,
+      "ethics": {
+        "mil": 0,
+        "aut": 0,
+        "mat": 0,
+        "ahl": 0
+      },
+      "civics": [],
+      "origin": "standart",
+      "ruins": "yok",
+      "crisis": "kapali",
+      "council": "kapali"
+    },
+    "months": 60,
+    "setupMs": 300.141572,
+    "medianMonthMs": 482.90735199999835,
+    "p95MonthMs": 1065.7509619999983,
+    "maxMonthMs": 1187.515760000002,
+    "maxHeapBytes": 126799480,
+    "turn": [
+      {
+        "id": 1,
+        "ms": 37.27326200000243
+      },
+      {
+        "id": 2,
+        "ms": 10.105546999999206
+      },
+      {
+        "id": 3,
+        "ms": 7.357571000000462
+      },
+      {
+        "id": 4,
+        "ms": 11.722639999999956
+      },
+      {
+        "id": 5,
+        "ms": 4.901836999997613
+      }
+    ],
+    "last": {
+      "month": 60,
+      "simulationMs": 1135.7873990000007,
+      "heapUsed": 70199408,
+      "systems": 120,
+      "states": 14,
+      "allStates": 15,
+      "colonies": 29,
+      "fleets": 82,
+      "ships": 288,
+      "contracts": 2,
+      "feds": 2,
+      "wars": 0,
+      "loadMs": 322.79762299999857,
+      "saveBytes": 1111817
+    }
+  },
+  {
+    "label": "muazzam-13-23-halka",
+    "config": {
+      "name": "Scale63",
+      "race": "insan",
+      "traits": [],
+      "size": "muazzam",
+      "aiCount": 13,
+      "shape": "halka",
+      "diff": "normal",
+      "seed": 23,
+      "ethics": {
+        "mil": 0,
+        "aut": 0,
+        "mat": 0,
+        "ahl": 0
+      },
+      "civics": [],
+      "origin": "standart",
+      "ruins": "yok",
+      "crisis": "kapali",
+      "council": "kapali"
+    },
+    "months": 60,
+    "setupMs": 160.906282,
+    "medianMonthMs": 606.5014820000015,
+    "p95MonthMs": 979.1111369999999,
+    "maxMonthMs": 1142.723399999999,
+    "maxHeapBytes": 235503264,
+    "turn": [
+      {
+        "id": 1,
+        "ms": 26.299918999997317
+      },
+      {
+        "id": 2,
+        "ms": 7.055706999999529
+      },
+      {
+        "id": 3,
+        "ms": 41.99857999999949
+      },
+      {
+        "id": 4,
+        "ms": 14.13586199999554
+      },
+      {
+        "id": 5,
+        "ms": 14.22021799999493
+      }
+    ],
+    "last": {
+      "month": 60,
+      "simulationMs": 896.2358250000034,
+      "heapUsed": 153449800,
+      "systems": 120,
+      "states": 14,
+      "allStates": 15,
+      "colonies": 26,
+      "fleets": 86,
+      "ships": 343,
+      "contracts": 2,
+      "feds": 2,
+      "wars": 0,
+      "loadMs": 311.19469299999764,
+      "saveBytes": 1168603
+    }
+  },
+  {
+    "label": "muazzam-13-404-kume",
+    "config": {
+      "name": "Scale63",
+      "race": "insan",
+      "traits": [],
+      "size": "muazzam",
+      "aiCount": 13,
+      "shape": "kume",
+      "diff": "normal",
+      "seed": 404,
+      "ethics": {
+        "mil": 0,
+        "aut": 0,
+        "mat": 0,
+        "ahl": 0
+      },
+      "civics": [],
+      "origin": "standart",
+      "ruins": "yok",
+      "crisis": "kapali",
+      "council": "kapali"
+    },
+    "months": 60,
+    "setupMs": 168.66559600000002,
+    "medianMonthMs": 653.495293,
+    "p95MonthMs": 1077.1951859999972,
+    "maxMonthMs": 1111.7799460000024,
+    "maxHeapBytes": 148845240,
+    "turn": [
+      {
+        "id": 1,
+        "ms": 6.155158000001393
+      },
+      {
+        "id": 2,
+        "ms": 21.430005999995046
+      },
+      {
+        "id": 3,
+        "ms": 2.587695000001986
+      },
+      {
+        "id": 4,
+        "ms": 20.897499999999127
+      },
+      {
+        "id": 5,
+        "ms": 4.492313999995531
+      }
+    ],
+    "last": {
+      "month": 60,
+      "simulationMs": 979.7655569999988,
+      "heapUsed": 104713664,
+      "systems": 120,
+      "states": 14,
+      "allStates": 15,
+      "colonies": 29,
+      "fleets": 90,
+      "ships": 338,
+      "contracts": 3,
+      "feds": 2,
+      "wars": 0,
+      "loadMs": 200.1048660000015,
+      "saveBytes": 1160661
+    }
+  },
+  {
+    "label": "orta-5-11-sarmal",
+    "config": {
+      "name": "Scale63",
+      "race": "insan",
+      "traits": [],
+      "size": "orta",
+      "aiCount": 5,
+      "shape": "sarmal",
+      "diff": "normal",
+      "seed": 11,
+      "ethics": {
+        "mil": 0,
+        "aut": 0,
+        "mat": 0,
+        "ahl": 0
+      },
+      "civics": [],
+      "origin": "standart",
+      "ruins": "yok",
+      "crisis": "kapali",
+      "council": "kapali"
+    },
+    "months": 60,
+    "setupMs": 192.70442899999998,
+    "medianMonthMs": 96.73505499999999,
+    "p95MonthMs": 123.85527200000001,
+    "maxMonthMs": 132.14982600000002,
+    "maxHeapBytes": 66931160,
+    "turn": [
+      {
+        "id": 1,
+        "ms": 10.490883000000395
+      },
+      {
+        "id": 2,
+        "ms": 2.953645999999935
+      },
+      {
+        "id": 3,
+        "ms": 3.2984660000001895
+      },
+      {
+        "id": 4,
+        "ms": 5.7339120000006005
+      },
+      {
+        "id": 5,
+        "ms": 6.813962999999603
+      }
+    ],
+    "last": {
+      "month": 60,
+      "simulationMs": 112.31876999999986,
+      "heapUsed": 66931160,
+      "systems": 45,
+      "states": 6,
+      "allStates": 7,
+      "colonies": 11,
+      "fleets": 46,
+      "ships": 79,
+      "contracts": 1,
+      "feds": 0,
+      "wars": 3,
+      "loadMs": 238.83008999999947,
+      "saveBytes": 464104
+    }
+  },
+  {
+    "label": "sinirsiz-20-11-sarmal",
+    "config": {
+      "name": "Scale63",
+      "race": "insan",
+      "traits": [],
+      "size": "sinirsiz",
+      "aiCount": 20,
+      "shape": "sarmal",
+      "diff": "normal",
+      "seed": 11,
+      "ethics": {
+        "mil": 0,
+        "aut": 0,
+        "mat": 0,
+        "ahl": 0
+      },
+      "civics": [],
+      "origin": "standart",
+      "ruins": "yok",
+      "crisis": "kapali",
+      "council": "kapali"
+    },
+    "months": 120,
+    "setupMs": 341.88776800000005,
+    "medianMonthMs": 2350.4373620000115,
+    "p95MonthMs": 4663.311144999985,
+    "maxMonthMs": 5117.656695999991,
+    "maxHeapBytes": 251576840,
+    "turn": [
+      {
+        "id": 1,
+        "ms": 40.13475000002654
+      },
+      {
+        "id": 2,
+        "ms": 16.27716999995755
+      },
+      {
+        "id": 3,
+        "ms": 123.60736000002362
+      },
+      {
+        "id": 4,
+        "ms": 19.074869000003673
+      },
+      {
+        "id": 5,
+        "ms": 20.84322500001872
+      }
+    ],
+    "last": {
+      "month": 120,
+      "simulationMs": 4171.089840999979,
+      "heapUsed": 124171648,
+      "systems": 200,
+      "states": 20,
+      "allStates": 22,
+      "colonies": 64,
+      "fleets": 177,
+      "ships": 792,
+      "contracts": 5,
+      "feds": 3,
+      "wars": 2.5,
+      "loadMs": 447.0424560000538,
+      "saveBytes": 2181825
+    }
+  },
+  {
+    "label": "sinirsiz-20-404-kume",
+    "config": {
+      "name": "Scale63",
+      "race": "insan",
+      "traits": [],
+      "size": "sinirsiz",
+      "aiCount": 20,
+      "shape": "kume",
+      "diff": "normal",
+      "seed": 404,
+      "ethics": {
+        "mil": 0,
+        "aut": 0,
+        "mat": 0,
+        "ahl": 0
+      },
+      "civics": [],
+      "origin": "standart",
+      "ruins": "yok",
+      "crisis": "kapali",
+      "council": "kapali"
+    },
+    "months": 120,
+    "setupMs": 326.085539,
+    "medianMonthMs": 4739.59964,
+    "p95MonthMs": 8524.757715000014,
+    "maxMonthMs": 9216.035071999999,
+    "maxHeapBytes": 292650312,
+    "turn": [
+      {
+        "id": 1,
+        "ms": 13.615292000002228
+      },
+      {
+        "id": 2,
+        "ms": 956.1654689999996
+      },
+      {
+        "id": 3,
+        "ms": 249.72650099999737
+      },
+      {
+        "id": 4,
+        "ms": 381.4501969999401
+      },
+      {
+        "id": 5,
+        "ms": 36.3511919999728
+      }
+    ],
+    "last": {
+      "month": 120,
+      "simulationMs": 8006.868172000046,
+      "heapUsed": 292650312,
+      "systems": 200,
+      "states": 20,
+      "allStates": 22,
+      "colonies": 77,
+      "fleets": 196,
+      "ships": 695,
+      "contracts": 0,
+      "feds": 4,
+      "wars": 4.5,
+      "loadMs": 313.98155599995516,
+      "saveBytes": 2281102
+    }
+  },
+  {
+    "label": "sinirsiz-8-11-sarmal",
+    "config": {
+      "name": "Scale63",
+      "race": "insan",
+      "traits": [],
+      "size": "sinirsiz",
+      "aiCount": 8,
+      "shape": "sarmal",
+      "diff": "normal",
+      "seed": 11,
+      "ethics": {
+        "mil": 0,
+        "aut": 0,
+        "mat": 0,
+        "ahl": 0
+      },
+      "civics": [],
+      "origin": "standart",
+      "ruins": "yok",
+      "crisis": "kapali",
+      "council": "kapali"
+    },
+    "months": 60,
+    "setupMs": 264.824346,
+    "medianMonthMs": 481.1294689999995,
+    "p95MonthMs": 760.1437879999994,
+    "maxMonthMs": 786.8420939999996,
+    "maxHeapBytes": 94816688,
+    "turn": [
+      {
+        "id": 1,
+        "ms": 9.043222000000242
+      },
+      {
+        "id": 2,
+        "ms": 12.808798999998544
+      },
+      {
+        "id": 3,
+        "ms": 8.517470999999205
+      },
+      {
+        "id": 4,
+        "ms": 16.625975000002654
+      },
+      {
+        "id": 5,
+        "ms": 5.245555000001332
+      }
+    ],
+    "last": {
+      "month": 60,
+      "simulationMs": 786.8420939999996,
+      "heapUsed": 94816688,
+      "systems": 200,
+      "states": 9,
+      "allStates": 10,
+      "colonies": 24,
+      "fleets": 63,
+      "ships": 207,
+      "contracts": 0,
+      "feds": 0,
+      "wars": 0,
+      "loadMs": 276.0594349999992,
+      "saveBytes": 730624
+    }
+  },
+  {
+    "label": "ulu-11-11-sarmal",
+    "config": {
+      "name": "Scale63",
+      "race": "insan",
+      "traits": [],
+      "size": "ulu",
+      "aiCount": 11,
+      "shape": "sarmal",
+      "diff": "normal",
+      "seed": 11,
+      "ethics": {
+        "mil": 0,
+        "aut": 0,
+        "mat": 0,
+        "ahl": 0
+      },
+      "civics": [],
+      "origin": "standart",
+      "ruins": "yok",
+      "crisis": "kapali",
+      "council": "kapali"
+    },
+    "months": 60,
+    "setupMs": 262.702027,
+    "medianMonthMs": 371.81024400000024,
+    "p95MonthMs": 570.3167429999994,
+    "maxMonthMs": 669.9668850000016,
+    "maxHeapBytes": 121033544,
+    "turn": [
+      {
+        "id": 1,
+        "ms": 5.18747699999949
+      },
+      {
+        "id": 2,
+        "ms": 25.648558000000776
+      },
+      {
+        "id": 3,
+        "ms": 5.6773229999998875
+      },
+      {
+        "id": 4,
+        "ms": 7.383492000000842
+      },
+      {
+        "id": 5,
+        "ms": 10.318888000001607
+      }
+    ],
+    "last": {
+      "month": 60,
+      "simulationMs": 432.2518420000015,
+      "heapUsed": 77543592,
+      "systems": 100,
+      "states": 12,
+      "allStates": 13,
+      "colonies": 30,
+      "fleets": 90,
+      "ships": 274,
+      "contracts": 1,
+      "feds": 1,
+      "wars": 1,
+      "loadMs": 191.1573219999991,
+      "saveBytes": 926714
+    }
+  }
+]

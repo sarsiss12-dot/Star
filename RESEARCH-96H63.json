@@ -1,0 +1,1083 @@
+{
+  "phase": "96H.6.3",
+  "kind": "RESEARCH ONLY — NO NEW GAME",
+  "canonical_head_before": "569287d3ff00be2881b568d395210c4eb70b1bb9",
+  "canonical_game": {
+    "version": "96H.6.1",
+    "build": "96h61",
+    "pwa": "stars-v96h61",
+    "save": 8,
+    "zip": "stars-faz96h61.zip",
+    "bytes": 764471,
+    "sha256": "68b64e6cb918a106733568761b0a1a30b16e4550c96d2e26ebde56822ebcb6a0",
+    "ai_sha256": "27ae25e44d66f5fdbfb04ea7db69aa75769a3165759b6feb0250b5b753e8c739"
+  },
+  "runtime_changes_published": [],
+  "economy": {
+    "candidate": "F1",
+    "decision": "REJECTED",
+    "gate1": {
+      "pass": 8,
+      "fail": 0,
+      "rows": [
+        {
+          "name": "pure two-action budget preserves exact Save/RNG",
+          "status": "PASS"
+        },
+        {
+          "name": "paid fortress/factory serial finish uses native half-day queue",
+          "status": "PASS"
+        },
+        {
+          "name": "future factory supplies no consumer income before actual first production month",
+          "status": "PASS"
+        },
+        {
+          "name": "first price is charged once; paid inherited queue not recharged",
+          "status": "PASS"
+        },
+        {
+          "name": "second producer funded from first-action wallet at real decision boundary",
+          "status": "PASS"
+        },
+        {
+          "name": "demolition gives neither refund nor capacity relief before completion",
+          "status": "PASS"
+        },
+        {
+          "name": "terminal capacity check exposes unfunded next essential producer",
+          "status": "PASS"
+        },
+        {
+          "name": "unauthorized second purchase is rejected instead of creating a resource grant",
+          "status": "PASS"
+        }
+      ]
+    },
+    "gate2": "FAIL",
+    "sameInputSHA256": "3c583ba4a78bf1bec561f1699ccc3793a674db0c96c129c71892ea09c3f9eebf",
+    "sameNormalizedSave": "6fe7312a8e075df75d7e74a9b74d09fc56a5f60b765748bffc858bc6a95c80e3",
+    "sameInitialRNG": 1029091949,
+    "diagnosticReplayFullSaveRngMatch23Months": true,
+    "control": {
+      "resources": {
+        "min": {
+          "criticalMonths": 9,
+          "critical": [
+            219,
+            220,
+            221,
+            222,
+            223,
+            224,
+            226,
+            227,
+            228
+          ],
+          "longest": 6,
+          "zeroMonths": 2,
+          "zero": [
+            221,
+            222
+          ],
+          "lastStock": 8.6330977384,
+          "lastNet": 0.23991278039999886
+        },
+        "yiy": {
+          "criticalMonths": 0,
+          "critical": [],
+          "longest": 0,
+          "zeroMonths": 0,
+          "zero": [],
+          "lastStock": 110.62888928000002,
+          "lastNet": -0.36724898999999667
+        },
+        "ene": {
+          "criticalMonths": 0,
+          "critical": [],
+          "longest": 0,
+          "zeroMonths": 0,
+          "zero": [],
+          "lastStock": 449.9182580048924,
+          "lastNet": 4.625254452284516
+        },
+        "tuk": {
+          "criticalMonths": 0,
+          "critical": [],
+          "longest": 0,
+          "zeroMonths": 0,
+          "zero": [],
+          "lastStock": 78.53003891736003,
+          "lastNet": -4.471440030839998
+        },
+        "ala": {
+          "criticalMonths": 0,
+          "critical": [],
+          "longest": 0,
+          "zeroMonths": 0,
+          "zero": [],
+          "lastStock": 231.73276306999995,
+          "lastNet": 0.6994661849999986
+        }
+      },
+      "alive": true,
+      "colonies": 1,
+      "techs": 0,
+      "ships": 8,
+      "power": 816,
+      "orders": [
+        {
+          "day": 6540,
+          "kind": "queueBuilding",
+          "actor": 7,
+          "key": "ciftlik",
+          "before": {
+            "min": 324.1616,
+            "ene": 325.6600335,
+            "yiy": 168.03536400000002,
+            "ala": 259.558456,
+            "ara": 0,
+            "tuk": 150.031482,
+            "etk": 78.061648
+          },
+          "after": {
+            "min": 214.16160000000002,
+            "ene": 325.6600335,
+            "yiy": 168.03536400000002,
+            "ala": 259.558456,
+            "ara": 0,
+            "tuk": 150.031482,
+            "etk": 78.061648
+          },
+          "paid": {
+            "min": 110,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 6570,
+          "kind": "queueBuilding",
+          "actor": 7,
+          "key": "maden",
+          "before": {
+            "min": 182.588544,
+            "ene": 341.3286356846154,
+            "yiy": 156.53274150000001,
+            "ala": 188.19889799999999,
+            "ara": 0,
+            "tuk": 148.1420184,
+            "etk": 87.83878000000001
+          },
+          "after": {
+            "min": 62.58854400000001,
+            "ene": 341.3286356846154,
+            "yiy": 156.53274150000001,
+            "ala": 188.19889799999999,
+            "ara": 0,
+            "tuk": 148.1420184,
+            "etk": 87.83878000000001
+          },
+          "paid": {
+            "min": 120,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 6690,
+          "kind": "queueDemolish",
+          "actor": 7,
+          "key": "dokum",
+          "before": {
+            "min": 0,
+            "ene": 361.99291132769224,
+            "yiy": 136.4178645,
+            "ala": 253.052706,
+            "ara": 0,
+            "tuk": 138.32833200000002,
+            "etk": 125.87714800000003
+          },
+          "after": {
+            "min": 0,
+            "ene": 361.99291132769224,
+            "yiy": 136.4178645,
+            "ala": 253.052706,
+            "ara": 0,
+            "tuk": 138.32833200000002,
+            "etk": 125.87714800000003
+          },
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 6810,
+          "kind": "queueDemolish",
+          "actor": 7,
+          "key": "dokum",
+          "before": {
+            "min": 24.757525521999987,
+            "ene": 394.3902035342922,
+            "yiy": 125.07360885,
+            "ala": 237.873495025,
+            "ara": 0,
+            "tuk": 129.84338704380002,
+            "etk": 122.20326000000003
+          },
+          "after": {
+            "min": 24.757525521999987,
+            "ene": 394.3902035342922,
+            "yiy": 125.07360885,
+            "ala": 237.873495025,
+            "ara": 0,
+            "tuk": 129.84338704380002,
+            "etk": 122.20326000000003
+          },
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 6930,
+          "kind": "queueDemolish",
+          "actor": 7,
+          "key": "dokum",
+          "before": {
+            "min": 93.05828283079998,
+            "ene": 415.28112949063785,
+            "yiy": 107.15042061,
+            "ala": 275.97355965,
+            "ara": 0,
+            "tuk": 117.44532927132002,
+            "etk": 116.81711600000003
+          },
+          "after": {
+            "min": 93.05828283079998,
+            "ene": 415.28112949063785,
+            "yiy": 107.15042061,
+            "ala": 275.97355965,
+            "ara": 0,
+            "tuk": 117.44532927132002,
+            "etk": 116.81711600000003
+          },
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 6990,
+          "kind": "queueBuilding",
+          "actor": 7,
+          "key": "ciftlik",
+          "before": {
+            "min": 216.37880162439998,
+            "ene": 429.95551167939624,
+            "yiy": 94.83312932999999,
+            "ala": 284.272626595,
+            "ara": 0,
+            "tuk": 109.65309647676003,
+            "etk": 93.48194800000003
+          },
+          "after": {
+            "min": 106.37880162439998,
+            "ene": 429.95551167939624,
+            "yiy": 94.83312932999999,
+            "ala": 284.272626595,
+            "ara": 0,
+            "tuk": 109.65309647676003,
+            "etk": 93.48194800000003
+          },
+          "paid": {
+            "min": 110,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        }
+      ]
+    },
+    "candidateResult": {
+      "resources": {
+        "min": {
+          "criticalMonths": 17,
+          "critical": [
+            219,
+            220,
+            221,
+            222,
+            223,
+            226,
+            227,
+            228,
+            231,
+            233,
+            234,
+            235,
+            236,
+            237,
+            238,
+            239,
+            240
+          ],
+          "longest": 8,
+          "zeroMonths": 5,
+          "zero": [
+            223,
+            237,
+            238,
+            239,
+            240
+          ],
+          "lastStock": 0,
+          "lastNet": -28.035416715074998
+        },
+        "yiy": {
+          "criticalMonths": 12,
+          "critical": [
+            229,
+            230,
+            231,
+            232,
+            233,
+            234,
+            235,
+            236,
+            237,
+            238,
+            239,
+            240
+          ],
+          "longest": 12,
+          "zeroMonths": 8,
+          "zero": [
+            232,
+            233,
+            234,
+            235,
+            236,
+            237,
+            238,
+            239
+          ],
+          "lastStock": 1.9292731000000032,
+          "lastNet": -13.370726899999998
+        },
+        "ene": {
+          "criticalMonths": 0,
+          "critical": [],
+          "longest": 0,
+          "zeroMonths": 0,
+          "zero": [],
+          "lastStock": 538.6043163022771,
+          "lastNet": 5.198884403732144
+        },
+        "tuk": {
+          "criticalMonths": 0,
+          "critical": [],
+          "longest": 0,
+          "zeroMonths": 0,
+          "zero": [],
+          "lastStock": 152.6800673963399,
+          "lastNet": 2.100700223955
+        },
+        "ala": {
+          "criticalMonths": 0,
+          "critical": [],
+          "longest": 0,
+          "zeroMonths": 0,
+          "zero": [],
+          "lastStock": 86.50790932249994,
+          "lastNet": 3.1564824018749977
+        }
+      },
+      "alive": true,
+      "colonies": 1,
+      "techs": 0,
+      "ships": 11,
+      "power": 1203,
+      "orders": [
+        {
+          "day": 6540,
+          "kind": "queueDemolish",
+          "actor": 7,
+          "key": "dokum",
+          "before": {
+            "min": 324.1616,
+            "ene": 325.6600335,
+            "yiy": 168.03536400000002,
+            "ala": 259.558456,
+            "ara": 0,
+            "tuk": 150.031482,
+            "etk": 78.061648
+          },
+          "after": {
+            "min": 324.1616,
+            "ene": 325.6600335,
+            "yiy": 168.03536400000002,
+            "ala": 259.558456,
+            "ara": 0,
+            "tuk": 150.031482,
+            "etk": 78.061648
+          },
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 6570,
+          "kind": "queueBuilding",
+          "actor": 7,
+          "key": "fabrika",
+          "before": {
+            "min": 222.588544,
+            "ene": 341.3286356846154,
+            "yiy": 156.53274150000001,
+            "ala": 164.19889799999999,
+            "ara": 0,
+            "tuk": 148.1420184,
+            "etk": 87.83878000000001
+          },
+          "after": {
+            "min": 52.58854400000001,
+            "ene": 341.3286356846154,
+            "yiy": 156.53274150000001,
+            "ala": 164.19889799999999,
+            "ara": 0,
+            "tuk": 148.1420184,
+            "etk": 87.83878000000001
+          },
+          "paid": {
+            "min": 170,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 6660,
+          "kind": "queueDemolish",
+          "actor": 7,
+          "key": "dokum",
+          "before": {
+            "min": 10.493202073600006,
+            "ene": 423.56252087753,
+            "yiy": 121.81764195000002,
+            "ala": 82.02383373999999,
+            "ara": 0,
+            "tuk": 141.47500461108,
+            "etk": 116.52808000000003
+          },
+          "after": {
+            "min": 10.493202073600006,
+            "ene": 423.56252087753,
+            "yiy": 121.81764195000002,
+            "ala": 82.02383373999999,
+            "ara": 0,
+            "tuk": 141.47500461108,
+            "etk": 116.52808000000003
+          },
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 6780,
+          "kind": "queueDemolish",
+          "actor": 7,
+          "key": "arsiv",
+          "before": {
+            "min": 58.14251480319998,
+            "ene": 482.8914329467975,
+            "yiy": 75.11793075000003,
+            "ala": 53.74533801499997,
+            "ara": 0,
+            "tuk": 154.96840023731997,
+            "etk": 68.28225600000003
+          },
+          "after": {
+            "min": 58.14251480319998,
+            "ene": 482.8914329467975,
+            "yiy": 75.11793075000003,
+            "ala": 53.74533801499997,
+            "ara": 0,
+            "tuk": 154.96840023731997,
+            "etk": 68.28225600000003
+          },
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        },
+        {
+          "day": 6900,
+          "kind": "queueDemolish",
+          "actor": 7,
+          "key": "lab",
+          "before": {
+            "min": 75.17823397119996,
+            "ene": 506.4809965924821,
+            "yiy": 24.17112675000004,
+            "ala": 64.93968281499997,
+            "ara": 0,
+            "tuk": 159.92139637812,
+            "etk": 101.52571200000003
+          },
+          "after": {
+            "min": 75.17823397119996,
+            "ene": 506.4809965924821,
+            "yiy": 24.17112675000004,
+            "ala": 64.93968281499997,
+            "ara": 0,
+            "tuk": 159.92139637812,
+            "etk": 101.52571200000003
+          },
+          "paid": {
+            "min": 0,
+            "ene": 0,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 0
+          }
+        }
+      ]
+    },
+    "gate3Seed404": "NOT RUN: first mandatory local gate failed",
+    "gate4": "NOT RUN",
+    "campaign120": "NOT RUN",
+    "campaign240": "NOT RUN",
+    "runtimePublished": false,
+    "reasons": [
+      "seed11 mineral critical9->17, zero2->5",
+      "seed11 food critical0->12, zero0->8",
+      "terminal risk count and per-turn recomputation did not preserve affordable essential sequence; new thresholds/variants forbidden"
+    ]
+  },
+  "galaxy": {
+    "decision": "REJECTED FOR MOBILE RELEASE",
+    "technicalGeneration": "117cases PASS,45old fullSave/RNG exact,72extended cases",
+    "maxExperimentalSystems": 200,
+    "maxExperimentalAI": 20,
+    "publishedMaxSystems": 100,
+    "publishedMaxAI": 11,
+    "performance": [
+      {
+        "phase": "experimental4x",
+        "scenario": "evolved map orta/5/11/sarmal",
+        "normalGate": false,
+        "nativeBudget": null,
+        "medianFPS": 18.58736059485989,
+        "p95DrawMs": 15.900000000372529,
+        "heap": 10000000,
+        "monthlyAIBurstFrameMs": 466.1000000005588,
+        "medianLiveFrameMs": 7.5,
+        "p95LiveFrameMs": 15.5,
+        "liveDrawBudgetFPS": 59.998800023999515
+      },
+      {
+        "phase": "experimental4x",
+        "scenario": "evolved map ulu/11/11/sarmal",
+        "normalGate": false,
+        "nativeBudget": null,
+        "medianFPS": 20.449897750744935,
+        "p95DrawMs": 13.799999999813735,
+        "heap": 10000000,
+        "monthlyAIBurstFrameMs": 873.7999999998137,
+        "medianLiveFrameMs": 10.700000000186265,
+        "p95LiveFrameMs": 19.200000000186265,
+        "liveDrawBudgetFPS": 59.998800023999515
+      },
+      {
+        "phase": "experimental4x",
+        "scenario": "evolved map muazzam/13/11/sarmal",
+        "normalGate": false,
+        "nativeBudget": null,
+        "medianFPS": 21.551724137758004,
+        "p95DrawMs": 11.799999999813735,
+        "heap": 10000000,
+        "monthlyAIBurstFrameMs": 1045.5999999996275,
+        "medianLiveFrameMs": 8.700000000186265,
+        "p95LiveFrameMs": 22.59999999962747,
+        "liveDrawBudgetFPS": 59.998800023999515
+      },
+      {
+        "phase": "experimental4x",
+        "scenario": "evolved map kozmik/16/11/sarmal",
+        "normalGate": false,
+        "nativeBudget": null,
+        "medianFPS": 20.53388090341222,
+        "p95DrawMs": 16.200000000186265,
+        "heap": 10000000,
+        "monthlyAIBurstFrameMs": 1112.9000000003725,
+        "medianLiveFrameMs": 10.099999999627471,
+        "p95LiveFrameMs": 30.59999999962747,
+        "liveDrawBudgetFPS": 59.998800023999515
+      },
+      {
+        "phase": "experimental4x",
+        "scenario": "evolved map kozmik/20/11/sarmal",
+        "normalGate": false,
+        "nativeBudget": null,
+        "medianFPS": 19.607843137254903,
+        "p95DrawMs": 18.5,
+        "heap": 10000000,
+        "monthlyAIBurstFrameMs": 1800.7000000001863,
+        "medianLiveFrameMs": 20,
+        "p95LiveFrameMs": 69.29999999981374,
+        "liveDrawBudgetFPS": 50
+      },
+      {
+        "phase": "experimental4x",
+        "scenario": "evolved map kozmik/20/23/halka",
+        "normalGate": false,
+        "nativeBudget": null,
+        "medianFPS": 19.23076923076923,
+        "p95DrawMs": 19,
+        "heap": 10000000,
+        "monthlyAIBurstFrameMs": 3697.100000000559,
+        "medianLiveFrameMs": 23.59999999962747,
+        "p95LiveFrameMs": 76,
+        "liveDrawBudgetFPS": 42.37288135660106
+      },
+      {
+        "phase": "experimental4x",
+        "scenario": "evolved map kozmik/20/404/kume",
+        "normalGate": false,
+        "nativeBudget": null,
+        "medianFPS": 18.552875695604612,
+        "p95DrawMs": 16.800000000745058,
+        "heap": 10000000,
+        "monthlyAIBurstFrameMs": 2828,
+        "medianLiveFrameMs": 7,
+        "p95LiveFrameMs": 14.599999999627471,
+        "liveDrawBudgetFPS": 59.998800023999515
+      },
+      {
+        "phase": "experimental4x",
+        "scenario": "evolved map sinirsiz/8/11/sarmal",
+        "normalGate": false,
+        "nativeBudget": null,
+        "medianFPS": 18.14882032680147,
+        "p95DrawMs": 13.900000000372529,
+        "heap": 10000000,
+        "monthlyAIBurstFrameMs": 645.5,
+        "medianLiveFrameMs": 11.400000000372529,
+        "p95LiveFrameMs": 22.40000000037253,
+        "liveDrawBudgetFPS": 59.998800023999515
+      },
+      {
+        "phase": "experimental4x",
+        "scenario": "evolved map sinirsiz/20/11/sarmal",
+        "normalGate": false,
+        "nativeBudget": null,
+        "medianFPS": 17.793594305990847,
+        "p95DrawMs": 18.700000000186265,
+        "heap": 10000000,
+        "monthlyAIBurstFrameMs": 3054.5,
+        "medianLiveFrameMs": 17,
+        "p95LiveFrameMs": 36.90000000037253,
+        "liveDrawBudgetFPS": 58.8235294117647
+      },
+      {
+        "phase": "experimental4x",
+        "scenario": "evolved map sinirsiz/20/23/halka",
+        "normalGate": false,
+        "nativeBudget": null,
+        "medianFPS": 18.4162062615733,
+        "p95DrawMs": 18.5,
+        "heap": 10000000,
+        "monthlyAIBurstFrameMs": 12613.400000000373,
+        "medianLiveFrameMs": 19.699999999254942,
+        "p95LiveFrameMs": 54.799999999813735,
+        "liveDrawBudgetFPS": 50.76142132171676
+      },
+      {
+        "phase": "experimental4x",
+        "scenario": "evolved map sinirsiz/20/404/kume",
+        "normalGate": false,
+        "nativeBudget": null,
+        "medianFPS": 17.793594306285716,
+        "p95DrawMs": 19.700000000186265,
+        "heap": 10000000,
+        "monthlyAIBurstFrameMs": 8454.299999999814,
+        "medianLiveFrameMs": 8.299999999813735,
+        "p95LiveFrameMs": 17.299999999813735,
+        "liveDrawBudgetFPS": 59.998800023999515
+      },
+      {
+        "phase": "160qualification1x",
+        "scenario": "evolved map orta/5/11/sarmal",
+        "normalGate": true,
+        "nativeBudget": true,
+        "medianFPS": 59.8802395202902,
+        "p95DrawMs": 2.7999999998137355,
+        "heap": 13863668,
+        "monthlyAIBurstFrameMs": 74.1000000005588,
+        "medianLiveFrameMs": 1.3999999994412065,
+        "p95LiveFrameMs": 2.900000000372529,
+        "liveDrawBudgetFPS": 59.998800023999515
+      },
+      {
+        "phase": "160qualification1x",
+        "scenario": "evolved map ulu/11/11/sarmal",
+        "normalGate": true,
+        "nativeBudget": true,
+        "medianFPS": 59.8802395236296,
+        "p95DrawMs": 2.7000000001862645,
+        "heap": 31259444,
+        "monthlyAIBurstFrameMs": 202.5,
+        "medianLiveFrameMs": 1.8999999994412065,
+        "p95LiveFrameMs": 3.5,
+        "liveDrawBudgetFPS": 59.998800023999515
+      },
+      {
+        "phase": "160qualification1x",
+        "scenario": "evolved map kozmik/16/11/sarmal",
+        "normalGate": true,
+        "nativeBudget": true,
+        "medianFPS": 59.8802395236296,
+        "p95DrawMs": 3,
+        "heap": 39364696,
+        "monthlyAIBurstFrameMs": 238.19999999925494,
+        "medianLiveFrameMs": 2,
+        "p95LiveFrameMs": 4.1000000005587935,
+        "liveDrawBudgetFPS": 59.998800023999515
+      },
+      {
+        "phase": "160qualification1x",
+        "scenario": "evolved map kozmik/16/23/halka",
+        "normalGate": true,
+        "nativeBudget": true,
+        "medianFPS": 59.8802395236296,
+        "p95DrawMs": 2.6000000005587935,
+        "heap": 66675716,
+        "monthlyAIBurstFrameMs": 506.20000000018626,
+        "medianLiveFrameMs": 4.2999999998137355,
+        "p95LiveFrameMs": 7.7999999998137355,
+        "liveDrawBudgetFPS": 59.998800023999515
+      },
+      {
+        "phase": "160qualification1x",
+        "scenario": "evolved map kozmik/16/404/kume",
+        "normalGate": true,
+        "nativeBudget": true,
+        "medianFPS": 59.8802395202902,
+        "p95DrawMs": 3,
+        "heap": 62904152,
+        "monthlyAIBurstFrameMs": 326.3999999994412,
+        "medianLiveFrameMs": 1.099999999627471,
+        "p95LiveFrameMs": 2.2999999998137355,
+        "liveDrawBudgetFPS": 59.998800023999515
+      },
+      {
+        "phase": "160qualification4x",
+        "scenario": "evolved map orta/5/11/sarmal",
+        "normalGate": false,
+        "nativeBudget": true,
+        "medianFPS": 21.50537634408602,
+        "p95DrawMs": 9.900000000372529,
+        "heap": 15545480,
+        "monthlyAIBurstFrameMs": 421.90000000037253,
+        "medianLiveFrameMs": 8.100000000558794,
+        "p95LiveFrameMs": 17.299999999813735,
+        "liveDrawBudgetFPS": 59.998800023999515
+      },
+      {
+        "phase": "160qualification4x",
+        "scenario": "evolved map ulu/11/11/sarmal",
+        "normalGate": false,
+        "nativeBudget": true,
+        "medianFPS": 20.449897750744935,
+        "p95DrawMs": 12.599999999627471,
+        "heap": 33953456,
+        "monthlyAIBurstFrameMs": 849.7999999998137,
+        "medianLiveFrameMs": 11.900000000372529,
+        "p95LiveFrameMs": 27.100000000558794,
+        "liveDrawBudgetFPS": 59.998800023999515
+      },
+      {
+        "phase": "160qualification4x",
+        "scenario": "evolved map kozmik/16/11/sarmal",
+        "normalGate": false,
+        "nativeBudget": true,
+        "medianFPS": 18.4162062615733,
+        "p95DrawMs": 16.899999999441206,
+        "heap": 34803412,
+        "monthlyAIBurstFrameMs": 1312.7000000001863,
+        "medianLiveFrameMs": 9.5,
+        "p95LiveFrameMs": 29.5,
+        "liveDrawBudgetFPS": 59.998800023999515
+      },
+      {
+        "phase": "160qualification4x",
+        "scenario": "evolved map kozmik/16/23/halka",
+        "normalGate": false,
+        "nativeBudget": false,
+        "medianFPS": 21.413276231177974,
+        "p95DrawMs": 14.100000000558794,
+        "heap": 65451232,
+        "monthlyAIBurstFrameMs": 2160.9000000003725,
+        "medianLiveFrameMs": 17.5,
+        "p95LiveFrameMs": 47.5,
+        "liveDrawBudgetFPS": 57.142857142857146
+      },
+      {
+        "phase": "160qualification4x",
+        "scenario": "evolved map kozmik/16/404/kume",
+        "normalGate": false,
+        "nativeBudget": true,
+        "medianFPS": 22.026431717880936,
+        "p95DrawMs": 13.099999999627471,
+        "heap": 50255264,
+        "monthlyAIBurstFrameMs": 1398.9000000003725,
+        "medianLiveFrameMs": 5.6000000005587935,
+        "p95LiveFrameMs": 11.599999999627471,
+        "liveDrawBudgetFPS": 59.998800023999515
+      },
+      {
+        "phase": "120final1x",
+        "scenario": "evolved map orta/5/11/sarmal",
+        "normalGate": true,
+        "nativeBudget": true,
+        "medianFPS": 59.8802395236296,
+        "p95DrawMs": 3.7999999998137355,
+        "heap": 18391296,
+        "monthlyAIBurstFrameMs": 72,
+        "medianLiveFrameMs": 1.400000000372529,
+        "p95LiveFrameMs": 2.7000000001862645,
+        "liveDrawBudgetFPS": 59.998800023999515
+      },
+      {
+        "phase": "120final1x",
+        "scenario": "evolved map ulu/11/11/sarmal",
+        "normalGate": true,
+        "nativeBudget": true,
+        "medianFPS": 59.8802395236296,
+        "p95DrawMs": 4.7999999998137355,
+        "heap": 32654480,
+        "monthlyAIBurstFrameMs": 195.19999999925494,
+        "medianLiveFrameMs": 2.2999999998137355,
+        "p95LiveFrameMs": 4.1000000005587935,
+        "liveDrawBudgetFPS": 59.998800023999515
+      },
+      {
+        "phase": "120final1x",
+        "scenario": "evolved map muazzam/13/11/sarmal",
+        "normalGate": true,
+        "nativeBudget": true,
+        "medianFPS": 59.8802395202902,
+        "p95DrawMs": 3.3999999994412065,
+        "heap": 24039624,
+        "monthlyAIBurstFrameMs": 212.30000000074506,
+        "medianLiveFrameMs": 1.800000000745058,
+        "p95LiveFrameMs": 3.8999999994412065,
+        "liveDrawBudgetFPS": 59.998800023999515
+      },
+      {
+        "phase": "120final1x",
+        "scenario": "evolved map muazzam/13/23/halka",
+        "normalGate": true,
+        "nativeBudget": true,
+        "medianFPS": 59.8802395202902,
+        "p95DrawMs": 3.1000000005587935,
+        "heap": 54708856,
+        "monthlyAIBurstFrameMs": 218.79999999981374,
+        "medianLiveFrameMs": 3.3999999994412065,
+        "p95LiveFrameMs": 4.5,
+        "liveDrawBudgetFPS": 59.998800023999515
+      },
+      {
+        "phase": "120final1x",
+        "scenario": "evolved map muazzam/13/404/kume",
+        "normalGate": true,
+        "nativeBudget": true,
+        "medianFPS": 59.8802395202902,
+        "p95DrawMs": 4,
+        "heap": 53325488,
+        "monthlyAIBurstFrameMs": 230.6000000005588,
+        "medianLiveFrameMs": 2.6000000005587935,
+        "p95LiveFrameMs": 5.7999999998137355,
+        "liveDrawBudgetFPS": 59.998800023999515
+      },
+      {
+        "phase": "120final4x",
+        "scenario": "evolved map orta/5/11/sarmal",
+        "normalGate": false,
+        "nativeBudget": true,
+        "medianFPS": 23.640661938638377,
+        "p95DrawMs": 10.900000000372529,
+        "heap": 19952440,
+        "monthlyAIBurstFrameMs": 302,
+        "medianLiveFrameMs": 1.5,
+        "p95LiveFrameMs": 9.399999999441206,
+        "liveDrawBudgetFPS": 59.998800023999515
+      },
+      {
+        "phase": "120final4x",
+        "scenario": "evolved map ulu/11/11/sarmal",
+        "normalGate": false,
+        "nativeBudget": true,
+        "medianFPS": 19.23076923076923,
+        "p95DrawMs": 15,
+        "heap": 33277788,
+        "monthlyAIBurstFrameMs": 1006.2999999998137,
+        "medianLiveFrameMs": 12.200000000186265,
+        "p95LiveFrameMs": 25.90000000037253,
+        "liveDrawBudgetFPS": 59.998800023999515
+      },
+      {
+        "phase": "120final4x",
+        "scenario": "evolved map muazzam/13/11/sarmal",
+        "normalGate": false,
+        "nativeBudget": true,
+        "medianFPS": 17.035775127714256,
+        "p95DrawMs": 32.10000000055879,
+        "heap": 33189840,
+        "monthlyAIBurstFrameMs": 1016.4000000003725,
+        "medianLiveFrameMs": 11.099999999627471,
+        "p95LiveFrameMs": 22.799999999813735,
+        "liveDrawBudgetFPS": 59.998800023999515
+      },
+      {
+        "phase": "120final4x",
+        "scenario": "evolved map muazzam/13/23/halka",
+        "normalGate": false,
+        "nativeBudget": false,
+        "medianFPS": 16.36661211114328,
+        "p95DrawMs": 18.09999999962747,
+        "heap": 26829060,
+        "monthlyAIBurstFrameMs": 1221.4000000003725,
+        "medianLiveFrameMs": 15.700000000186265,
+        "p95LiveFrameMs": 38.700000000186265,
+        "liveDrawBudgetFPS": 59.998800023999515
+      },
+      {
+        "phase": "120final4x",
+        "scenario": "evolved map muazzam/13/404/kume",
+        "normalGate": false,
+        "nativeBudget": true,
+        "medianFPS": 21.459227467553834,
+        "p95DrawMs": 11.900000000372529,
+        "heap": 61274604,
+        "monthlyAIBurstFrameMs": 867,
+        "medianLiveFrameMs": 11.700000000186265,
+        "p95LiveFrameMs": 25.699999999254942,
+        "liveDrawBudgetFPS": 59.998800023999515
+      }
+    ],
+    "note": "Final requested120/13 tier failed4x seed23 p95live38.7ms>33.3333ms. No more variants."
+  },
+  "proposed_save8_fix": {
+    "scope": "Closed joint-plan history may have one surviving member; active plans still require2",
+    "realFailedSaveTests": 9,
+    "nativeFixtureTests": 4,
+    "published": false,
+    "reason": "Both phase acceptance goals failed; preserve96h61 per phaseD"
+  },
+  "tests": {
+    "fullExperimentalRegressionSuites": 135,
+    "fullPass": 6068,
+    "fullFail": 0,
+    "fullRunBeforeProposedLoadGuard": true,
+    "newProductionStyleTests": 9,
+    "mechanicalEconomicTests": 8,
+    "engineScaleTests": 9,
+    "realLoadGuardTests": 9,
+    "jointPostfixTests": 59,
+    "sourcePreservationPostfixTests": 15,
+    "legacyExactWorldMonths": 36,
+    "sameF1DiagnosticWorldMonths": 23,
+    "newBrowserFunctionalScenarios": 54,
+    "canonicalPwaSmoke": 1,
+    "economicSeed404": "NOT RUN: seed11 failed",
+    "economic120": "NOT RUN",
+    "economic240": "NOT RUN",
+    "physicalAndroid": "NOT RUN"
+  },
+  "knownLimits": [
+    "4xFPS around16–24 even canonicalcontrols; normalCPU cases around60FPS. StressFPS not claimed30. All initial raw failures retained.",
+    "Performance.memory was quantized10000000; qualification usedCDP real heap. Graphics/native memory not measured.",
+    "Scalability host timings include concurrentworkers; not physicalAndroid estimates.",
+    "Far route computed and nativecolonization fixture passed; end-to-end player longvoyage touch order not separately run."
+  ],
+  "runtime19": {
+    "ai.js": "27ae25e44d66f5fdbfb04ea7db69aa75769a3165759b6feb0250b5b753e8c739",
+    "archive-ui.js": "f3b43957f97f2a32add1f40fc22f493eeca89bc5e1db05e5a5de92eef0e9fc03",
+    "audio.js": "6ddf6e388fa404394fee6220c2bfeeb3d1f9601c51a35ccdfe3181a8781942f7",
+    "combat.js": "b4e21fcdb6fdaaa93da07313131470de3e8a3c28b5650226a9c4a2713bde73a5",
+    "commerce-ui.js": "cc7fef5ab43176093251916aaafbdd873424da0630ec46fe6d3d5106a690b8d4",
+    "commerce.js": "978e4f6b01faed1babeade20070447cbcfaa4e2ea70793a78e50f20fbe66be01",
+    "construction.js": "d9b544b0328f26576ff90e02fe49c1b7f3798dfd844a8c39ee8dc6c0890debda",
+    "diplomacy.js": "ca589f8d2581e7189f6ace471db9bf2e9e1e504117eb2249b7ce9f04e206eaf4",
+    "economic-ledger.js": "67d07f3ee4777cd7c246c8b37dda7cf1577cf86c19a6edeba68945a5d3063501",
+    "economy-ui.js": "61f6e2dcef7f37143821edccf67552718a210ec555f7b8f9074c68191fd5cbcc",
+    "economy.js": "5d412d488760ae2b7193b13822b747788130b63ed782e62bfbd3223154b69d22",
+    "inbox.js": "5f53ac2ca9c3ca8d5f1a12a9e1ba2b2a247ab7e350df0ec9169a13cfe3285204",
+    "index.html": "984d2c51e33637a0b3312a072e3348b5e943f4c2c7156530affeb7d6ceb83259",
+    "main.js": "19ab0f2927a9c8fa924e066f5787dcb2b0d24a6e72768f906527538a1b569c6e",
+    "manifest.json": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
+    "map.js": "d8ca27ee07c484b7399f95d8031aa70fb7539bcf89d768c8442200b7cba76ae3",
+    "news.js": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
+    "sw.js": "71d27bdcb07477b55573a78d384fbc7afc199b2f5a6379542b57ee6d56d02999",
+    "ui.js": "4b2139007f7d4f100afddefeb2769523c03cbd862b0e27678e0d5868c18e3283"
+  },
+  "evidence": {
+    "file": "stars-faz96h63-kanit.zip",
+    "bytes": 7968959,
+    "sha256": "10407a8600c0838392fb898aaf2be30588a58c032d6ad662951ca35fc59c8fbb",
+    "crc": "PASS",
+    "manifestFiles": 290,
+    "members": 291
+  }
+}

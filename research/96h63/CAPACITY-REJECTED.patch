@@ -1,0 +1,54 @@
+diff --git a/main.js b/main.js
+index c6a7bf1..557a750 100644
+--- a/main.js
++++ b/main.js
+@@ -1424,13 +1424,16 @@ const SIZES = {
+   orta  :{n:'ORTA',   sys:45,  ai:5,  d:'45 sistem · 6 imparatorluk'},
+   buyuk :{n:'BÜYÜK',  sys:60,  ai:7,  d:'60 sistem · 8 imparatorluk'},
+   devasa:{n:'DEVASA', sys:80,  ai:9,  d:'80 sistem · 10 imparatorluk'},
+-  ulu   :{n:'ULU',    sys:100, ai:11, d:'100 sistem · 12 imparatorluk · ağır'}
++  ulu   :{n:'ULU',    sys:100, ai:11, d:'100 sistem · 12 imparatorluk · ağır'},
++  muazzam:{n:'MUAZZAM',sys:120, ai:13, d:'120 sistem · 14 imparatorluk'},
++  kozmik:{n:'KOZMİK',sys:160, ai:16, d:'160 sistem · 17 imparatorluk'},
++  sinirsiz:{n:'SINIRSIZ',sys:200, ai:20, d:'200 sistem · 21 imparatorluk'}
+ };
+ // Missing field retains each historical size default; explicit values never clamp.
+ function aiCountFor(cfg){return cfg.aiCount===undefined?SIZES[cfg.size]?.ai:cfg.aiCount;}
+ function setupConfigError(cfg){
+  if(!SIZES[cfg.size]||(cfg.shape!==undefined&&!SHAPES[cfg.shape]))return 'Geçersiz galaksi boyutu veya şekli.';
+- const n=aiCountFor(cfg);return Number.isInteger(n)&&n>=1&&n<=11?'':'AI devlet sayısı 1–11 arasında bir tam sayı olmalı.';
++ const n=aiCountFor(cfg);if(Number.isInteger(n)&&n+1>SIZES[cfg.size].sys)return 'Her başlangıç devleti için benzersiz başkent sistemi gerekli.';return Number.isInteger(n)&&n>=1&&n<=20?'':'AI devlet sayısı 1–20 arasında bir tam sayı olmalı.';
+ }
+ /* Harita kenarı: 30 sistem → 4200, 100 sistem → ~7670.
+    Yıldız yoğunluğu (px/sistem) tüm boyutlarda benzer kalır. */
+@@ -2441,6 +2444,8 @@ function setupGame(cfg){
+   rndSeed(cfg.seed ^ 0x5f3a91);
+   const rnd = generateGalaxy(cfg);
+   const nAI = aiCountFor(cfg);
++  // Append without shuffling: legacy <=11-AI maps keep their exact RNG stream.
++  if(nAI>11)G._palet=G._palet.concat(['#e8a1b0','#e4e0a0','#a8d9b8','#9ccdda','#b7a5d8','#cfa176','#36734e','#b54b61','#5880b5','#ad7cbd']).filter(c=>c!==cfg.color);
+   G.emps = [];
+   G.fleets = []; G.nextFleet = 1;
+   G.day = 0; G.year = 2210; G.month = 1; G.log = []; G.over = null;
+diff --git a/ui.js b/ui.js
+index 31e5a66..723a964 100644
+--- a/ui.js
++++ b/ui.js
+@@ -8895,7 +8895,7 @@ function renderSetup(){
+     h += `</div></div>`;
+     h += `<div class="sect"><h2>GALAKSİ</h2><div class="grid g4">`;
+     for (const k in SIZES) h += `<button class="opt ${c.size===k?'on':''}" data-a="size" data-x="${k}">${SIZES[k].n}<small>${SIZES[k].sys} sistem</small></button>`;
+-    h += `</div><h2>AI DEVLET SAYISI</h2><div class="btnrow"><button class="btn" data-a="aiCount" data-x="-1" ${aiCountFor(c)<=1?'disabled':''} aria-label="AI sayısını azalt">−</button><b id="aiCountValue">${aiCountFor(c)} AI</b><button class="btn" data-a="aiCount" data-x="1" ${aiCountFor(c)>=11?'disabled':''} aria-label="AI sayısını artır">+</button></div><div class="mini" id="aiCountHelp">Oyuncu dahil ${aiCountFor(c)+1} normal devlet. Korsanlar ve sonradan doğan devletler hariç. 1–11 AI.</div>${aiCountFor(c)+1>SIZES[c.size].sys/4?'<div class="mini">Yoğun galaksi: başkent mesafeleri daralabilir; komşu başlangıçlar oluşabilir.</div>':''}<div class="grid g3" style="margin-top:8px">`;
++    h += `</div><h2>AI DEVLET SAYISI</h2><div class="btnrow"><button class="btn" data-a="aiCount" data-x="-1" ${aiCountFor(c)<=1?'disabled':''} aria-label="AI sayısını azalt">−</button><b id="aiCountValue">${aiCountFor(c)} AI</b><button class="btn" data-a="aiCount" data-x="1" ${aiCountFor(c)>=20?'disabled':''} aria-label="AI sayısını artır">+</button></div><div class="mini" id="aiCountHelp">Oyuncu dahil ${aiCountFor(c)+1} normal devlet. Korsanlar ve sonradan doğan devletler hariç. 1–20 AI.</div><div class="mini">${SIZES[c.size].sys} sistem · Yoğunluk: ${(SIZES[c.size].sys/(aiCountFor(c)+1)).toFixed(1)} sistem/devlet · Tahmini yük: ${SIZES[c.size].sys>=160||aiCountFor(c)>=16?'Çok Ağır':SIZES[c.size].sys>=100||aiCountFor(c)>=11?'Ağır':'Normal'}. ${SIZES[c.size].sys>=120?'Büyük galaksi: cihazınıza göre yavaşlama ve daha uzun kayıt süreleri olabilir.':''}</div>${aiCountFor(c)+1>SIZES[c.size].sys/4?'<div class="mini">Yoğun galaksi: başkent mesafeleri daralabilir; komşu başlangıçlar oluşabilir.</div>':''}<div class="grid g3" style="margin-top:8px">`;
+     for (const k in SHAPES) h += `<button class="opt ${c.shape===k?'on':''}" data-a="shape" data-x="${k}">${SHAPES[k].n}<small>${SHAPES[k].d}</small></button>`;
+     h += `</div></div>`;
+ 
+@@ -9171,7 +9171,7 @@ function setupClickHandler(e){
+   else if (a === 'councilSet'){ CFG.council = x; safeRenderSetup(); }
+   else if (a === 'crisisSet'){ CFG.crisis = x; safeRenderSetup(); }
+   else if (a === 'ruinSet'){ CFG.ruins = x; safeRenderSetup(); }
+-  else if (a === 'aiCount'){ CFG.aiCount=Math.max(1,Math.min(11,aiCountFor(CFG)+Number(x)));safeRenderSetup(); }
++  else if (a === 'aiCount'){ CFG.aiCount=Math.max(1,Math.min(20,aiCountFor(CFG)+Number(x)));safeRenderSetup(); }
+   else if (a === 'size'){ CFG.aiCount=aiCountFor(CFG);CFG.size = x; safeRenderSetup(); }
+   else if (a === 'shape'){ CFG.shape = x; safeRenderSetup(); }
+   else if (a === 'diff'){ CFG.diff = x; safeRenderSetup(); }

@@ -1,0 +1,63 @@
+{
+  "sameBirthEntireAuditRow": true,
+  "control": {
+    "day": 6540,
+    "step": 60,
+    "kind": "birth",
+    "rng": 1845174910,
+    "actor": 7,
+    "race": "teknokrasi",
+    "colonies": [
+      {
+        "s": 41,
+        "p": 3
+      }
+    ],
+    "resources": {
+      "min": 400,
+      "ene": 300,
+      "yiy": 180,
+      "ala": 220,
+      "ara": 0,
+      "tuk": 150,
+      "etk": 70
+    },
+    "queues": [
+      {
+        "s": 41,
+        "p": 3,
+        "q": []
+      }
+    ]
+  },
+  "candidate": {
+    "day": 6540,
+    "step": 60,
+    "kind": "birth",
+    "rng": 1845174910,
+    "actor": 7,
+    "race": "teknokrasi",
+    "colonies": [
+      {
+        "s": 41,
+        "p": 3
+      }
+    ],
+    "resources": {
+      "min": 400,
+      "ene": 300,
+      "yiy": 180,
+      "ala": 220,
+      "ara": 0,
+      "tuk": 150,
+      "etk": 70
+    },
+    "queues": [
+      {
+        "s": 41,
+        "p": 3,
+        "q": []
+      }
+    ]
+  }
+}

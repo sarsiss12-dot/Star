@@ -1,0 +1,17 @@
+{
+  "basis": "Initial4x entire-game FPS<30 even canonical45/5; blank RAF60 confirms renderer/UI cost rather than clock cap. Initial failures retained. Do not claim 4x30FPS. Separate normal-speed playability from stress diagnostic before running new qualification.",
+  "candidate": "single fallback capacity160systems/16AI; no economic change",
+  "normalCPU": {
+    "medianFPS": 30,
+    "p95WarmDrawMs": 33.3333,
+    "monthlyBurstMs": 1500,
+    "p95LiveFrameMs": 33.3333,
+    "JSHeapBytes": 268435456
+  },
+  "fourfoldStress": {
+    "nativeFrameBudgetMs": 33.3333,
+    "monthlyBurstMs": 1500,
+    "actualFPS": "measured and reported against canonical control; not advertised as30FPS"
+  },
+  "stop": "If fallback fails normal or native stress budgets, do not silently relabel failed config safe. No200/20 release."
+}

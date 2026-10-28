@@ -1,0 +1,16 @@
+{
+  "browser": "Real Chromium headless; touch viewport844x390, DPR2; 4x CDP CPU slowdown; software Canvas/GPU environment",
+  "thresholdsBeforeMeasurements": {
+    "p95WarmDrawMs": 33.3333,
+    "medianAnimationFPS": 30,
+    "setupMs": 5000,
+    "saveLoadMs": 5000,
+    "jsHeapBytes": 268435456,
+    "monthlyAIBurstFrameMs": 1500,
+    "p95LiveFrameMs": 33.3333
+  },
+  "scenarios": "initial 7-scale matrix; end60/120 evolved maps; fog and fully revealed graph; zoom/pan/strategic layers; live native game UI",
+  "limits": "Host/browser emulation is not a physical Android benchmark. Support is conditional on these measured configurations; actual devices can be slower.",
+  "economicCandidate": "F1 rejected at seed11; no further variants or general economic campaigns",
+  "measurementClarification": "Before first browser run: total60-step simulated month is a throughput statistic, not one game frame. Gate the actual native frame monthly burst and p95 live frames; tracked RAF cancellation avoids multiple test-created animation loops."
+}

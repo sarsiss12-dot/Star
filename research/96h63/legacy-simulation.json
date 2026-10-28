@@ -1,0 +1,223 @@
+{
+  "status": "PASS",
+  "sameFullSaveRng36WorldMonths": true,
+  "meaning": "36 world-months, three seeds12months; preservation regression, not F1 campaign acceptance",
+  "rows": [
+    {
+      "seed": 11,
+      "month": 1,
+      "rng": -1009241930,
+      "saveSHA256": "ff40a5d86ac5d7f7927905442b557b93437cbcd80a272f5bf0376779c3577fc0"
+    },
+    {
+      "seed": 11,
+      "month": 2,
+      "rng": 1262335962,
+      "saveSHA256": "b8cf240705d749e79d711fd7ea195ed559fefcb7d4ddc33502de581852e6b3ac"
+    },
+    {
+      "seed": 11,
+      "month": 3,
+      "rng": 374735504,
+      "saveSHA256": "8ecc395235521b5439793f40946cb1c422b134079cd8a8dd35260d1eb9880eb2"
+    },
+    {
+      "seed": 11,
+      "month": 4,
+      "rng": -512864954,
+      "saveSHA256": "579fec5064746d3f4fb47a8466146aaa2e206105e1ff279d2d60a9eb5ac6074c"
+    },
+    {
+      "seed": 11,
+      "month": 5,
+      "rng": 303218007,
+      "saveSHA256": "9b61f8869b151dea61d966850f7273abe00948cdbd79e88059c2dc011444c414"
+    },
+    {
+      "seed": 11,
+      "month": 6,
+      "rng": -2039877382,
+      "saveSHA256": "f087a85574b1c666b22a1d6240c7f14738e61c83e290b0cc1b2d88a9ec01908d"
+    },
+    {
+      "seed": 11,
+      "month": 7,
+      "rng": -591958751,
+      "saveSHA256": "5df24981cafa9cb09696e79b92d00e2a446459b08a7363129c478dd6ed90d9d3"
+    },
+    {
+      "seed": 11,
+      "month": 8,
+      "rng": -1678959100,
+      "saveSHA256": "d698a81470828d5f30cf1c0d6a5dc3cb57961fee448f03fab18e7a904fae7d1d"
+    },
+    {
+      "seed": 11,
+      "month": 9,
+      "rng": -325286866,
+      "saveSHA256": "785a6e5e5ee4820f8a7fb41cc781fee0fe7351e916e59415fbc4ed3b8ff0d1ff"
+    },
+    {
+      "seed": 11,
+      "month": 10,
+      "rng": -1220463624,
+      "saveSHA256": "4c3e33d4b0a912035a8b7e74d532239661a60bfc78e97a0a5c634ea932b0ee7b"
+    },
+    {
+      "seed": 11,
+      "month": 11,
+      "rng": -2051699185,
+      "saveSHA256": "6844f2c0415a5ecc3ca861635b11f1ab2db6fa6c2ae19c7e841fe11d58f7903c"
+    },
+    {
+      "seed": 11,
+      "month": 12,
+      "rng": -746815548,
+      "saveSHA256": "b6ea3ae9bc4743acd01e73044d8388e1cb804af3ab2765bcde6bd622c575d7f1"
+    },
+    {
+      "seed": 23,
+      "month": 1,
+      "rng": -1705018817,
+      "saveSHA256": "292b3c5536390121188c5065436882fc830d0477ed5f7c09b6d35590c1973ba8"
+    },
+    {
+      "seed": 23,
+      "month": 2,
+      "rng": 1198394745,
+      "saveSHA256": "6c6d6ccbb1b2204a3c5dfd8089612ecf685cf91570c2438ac568835c363b12f0"
+    },
+    {
+      "seed": 23,
+      "month": 3,
+      "rng": 1638406824,
+      "saveSHA256": "45625ece1a96b536cdb1a707daca683688f1f675f8de631e288ca9dc6b9d3e35"
+    },
+    {
+      "seed": 23,
+      "month": 4,
+      "rng": 558982775,
+      "saveSHA256": "53454130a7d4f0d194b188e8cb72d1e9bd0287508638f9c6fbea189addd1d8b6"
+    },
+    {
+      "seed": 23,
+      "month": 5,
+      "rng": 1566889327,
+      "saveSHA256": "ed622c4a1fca1c518e1091e944dee1da7cb31a92b0e347f898d4093b81e0f7e2"
+    },
+    {
+      "seed": 23,
+      "month": 6,
+      "rng": 863536160,
+      "saveSHA256": "b4a122055e8c194546c8381d931cba4e32a350074fb4b5497add8c1394dfd8b0"
+    },
+    {
+      "seed": 23,
+      "month": 7,
+      "rng": -1750476617,
+      "saveSHA256": "a4083eb7fd343579eee3f513cd3ef24f6c54a55c61cb3214d92dda8ad3af6c5d"
+    },
+    {
+      "seed": 23,
+      "month": 8,
+      "rng": -1758052917,
+      "saveSHA256": "296c5684ae01e16bef5f920ea5eaefad1f9686b5be56ac5cf95a12e133e921b3"
+    },
+    {
+      "seed": 23,
+      "month": 9,
+      "rng": 1649313921,
+      "saveSHA256": "975b16cc43d589fd509c23830bcd51dd96afdb15dd7b3969390e7b9c5adfaa32"
+    },
+    {
+      "seed": 23,
+      "month": 10,
+      "rng": -253769389,
+      "saveSHA256": "a15024b6621011c30973913bf053281473da64e3a86ec9f035f0b0dc75f47c26"
+    },
+    {
+      "seed": 23,
+      "month": 11,
+      "rng": 1818408612,
+      "saveSHA256": "76543f32ae136b8c1e7d62816a9dc6ab8c56cf9b44523b68c70b7128ca4e3256"
+    },
+    {
+      "seed": 23,
+      "month": 12,
+      "rng": -340439486,
+      "saveSHA256": "b085a544c29793425665c1b9699ecdc3c1340b67700fcf9288b211b1e7a0a516"
+    },
+    {
+      "seed": 404,
+      "month": 1,
+      "rng": -1073183020,
+      "saveSHA256": "506cbc04a83d28d8a259b51569df4d6a21ab69410ec55b2ea5bfc1afb0da8a14"
+    },
+    {
+      "seed": 404,
+      "month": 2,
+      "rng": -697112138,
+      "saveSHA256": "42e580a9808ec47fbab5d75348dd904a9fc70d9ac7e86bce894679a010646c3a"
+    },
+    {
+      "seed": 404,
+      "month": 3,
+      "rng": 2078419030,
+      "saveSHA256": "d0ad0baa8eb537a40353ae7eea9bcbfda6d42e1e694ed26205109d15cdd579a9"
+    },
+    {
+      "seed": 404,
+      "month": 4,
+      "rng": 1423854460,
+      "saveSHA256": "83fd7fbbac784499054d8769759583b08fc6757cea610034b92250e3219b810e"
+    },
+    {
+      "seed": 404,
+      "month": 5,
+      "rng": 400795308,
+      "saveSHA256": "93cccb838ee0e1d3f53b07430e4348f9b93ba86364e7cb051328459b2895e130"
+    },
+    {
+      "seed": 404,
+      "month": 6,
+      "rng": 1265666866,
+      "saveSHA256": "0553675f7f820101ced608378ca75dbb926ea4b8f551437dbe936caf0b461a6e"
+    },
+    {
+      "seed": 404,
+      "month": 7,
+      "rng": 2145691024,
+      "saveSHA256": "13c7f60b5c99b57d48eb62e0fb42df9161cbe02143f14bfb31aa2a4cb72e94d7"
+    },
+    {
+      "seed": 404,
+      "month": 8,
+      "rng": -5580774,
+      "saveSHA256": "5705aa5f429f299c04ff799c1584a67795e1c38367fa8fed76f003bbbe7da405"
+    },
+    {
+      "seed": 404,
+      "month": 9,
+      "rng": -325286759,
+      "saveSHA256": "ade3dd3e5feedf485851bba344613c07ab9c5fdd333f3e4bac745bc756bf32f3"
+    },
+    {
+      "seed": 404,
+      "month": 10,
+      "rng": 1186573069,
+      "saveSHA256": "9baf0a8586320c0249dc6b86fbf1f01c33cd2e3fd259537e70eb3c824ae3f99c"
+    },
+    {
+      "seed": 404,
+      "month": 11,
+      "rng": -396804256,
+      "saveSHA256": "2831fcdcb314cacd62fd389eea84d3ad4e93f3b3b5aeda56079c6a4a88c3a062"
+    },
+    {
+      "seed": 404,
+      "month": 12,
+      "rng": 1491126454,
+      "saveSHA256": "eb4c9ddcfd0cccbc8acf3a50ad9d1e23c4ab06fafeecde2d439ea5b8bc4b9f88"
+    }
+  ]
+}

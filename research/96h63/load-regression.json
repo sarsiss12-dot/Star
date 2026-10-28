@@ -1,0 +1,44 @@
+{
+  "pass": 9,
+  "fail": 0,
+  "rows": [
+    {
+      "name": "canonical rejects real closed singleton plan",
+      "status": "PASS"
+    },
+    {
+      "name": "narrow guard loads actual200/20 save; closed history retained",
+      "status": "PASS"
+    },
+    {
+      "name": "second actual Save8 load idempotent, RNG preserved",
+      "status": "PASS"
+    },
+    {
+      "name": "activeSingleton rejected transactionally",
+      "status": "PASS"
+    },
+    {
+      "name": "closedEmpty rejected transactionally",
+      "status": "PASS"
+    },
+    {
+      "name": "duplicateMember rejected transactionally",
+      "status": "PASS"
+    },
+    {
+      "name": "badSponsor rejected transactionally",
+      "status": "PASS"
+    },
+    {
+      "name": "badFleetOwner rejected transactionally",
+      "status": "PASS"
+    },
+    {
+      "name": "wars, alliances, sovereignty unchanged by load fix",
+      "status": "PASS"
+    }
+  ],
+  "source": "/workspace/scratch/8c63e04c27e8/phase96h63/evidence/failed200-save120.save",
+  "newAIHash": "f48608cc82ca46b5028c637dcabbfb1b3e2ae09f1e3c1eb24bd2c4c1b326d8d0"
+}

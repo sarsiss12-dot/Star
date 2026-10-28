@@ -1,0 +1,17 @@
+{
+  "economicCandidate": "F1",
+  "economy": "REJECTED: seed11 mineral9->17critical, food0->12",
+  "capacity": "REJECTED:200/20,160/16,120/13 essential stress gate failed",
+  "proposedSave8Fix": "Mechanically verified; research-only under phaseD preserve canonical rule",
+  "productionBuild": "96h61",
+  "productionPWA": "stars-v96h61",
+  "save": 8,
+  "newGamePublished": false,
+  "newGameZip": null,
+  "release96H63": null,
+  "economic120and240": "NOT RUN: local gate failed",
+  "seed404CandidateLocal": "NOT RUN: seed11 gate failed",
+  "physicalAndroid": "NOT RUN",
+  "browserFunctionalCases": 54,
+  "candidateChangesOnlyInResearchWorktrees": true
+}

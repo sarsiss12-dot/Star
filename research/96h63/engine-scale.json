@@ -1,0 +1,42 @@
+{
+  "pass": 9,
+  "fail": 0,
+  "rows": [
+    {
+      "name": "far graph route and camera can reach all four map corners",
+      "status": "PASS"
+    },
+    {
+      "name": "native sensor BFS equals independent reference at expanded graph size",
+      "status": "PASS"
+    },
+    {
+      "name": "native colonization accepts a distant eligible system and survives Save8",
+      "status": "PASS"
+    },
+    {
+      "name": "new crisis identity appends after player+20AI+wild without collision",
+      "status": "PASS"
+    },
+    {
+      "name": "successor state appended after dense initial AI list",
+      "status": "PASS"
+    },
+    {
+      "name": "20AI origin distribution retains balanced forbidden-origin rules and pure independent RNG",
+      "status": "PASS"
+    },
+    {
+      "name": "explicit player color stays distinct with20AI",
+      "status": "PASS"
+    },
+    {
+      "name": "old Save8 normalizes identically to canonical H61, RNG unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "expanded Save8 without optional W/H derives actual160-system world dimensions",
+      "status": "PASS"
+    }
+  ]
+}

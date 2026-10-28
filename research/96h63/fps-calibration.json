@@ -1,0 +1,48 @@
+{
+  "browser": "151.0.7922.34",
+  "rows": [
+    {
+      "rate": 1,
+      "draw": false,
+      "medianFPS": 59.8802395236296,
+      "p95FrameMs": 19.40000000037253
+    },
+    {
+      "rate": 1,
+      "draw": true,
+      "medianFPS": 59.8802395236296,
+      "p95FrameMs": 18.299999999813735
+    },
+    {
+      "rate": 4,
+      "draw": false,
+      "medianFPS": 59.8802395202902,
+      "p95FrameMs": 20.09999999962747
+    },
+    {
+      "rate": 4,
+      "draw": true,
+      "medianFPS": 60.24096385677358,
+      "p95FrameMs": 20.5
+    }
+  ],
+  "metrics": [
+    {
+      "name": "Documents",
+      "value": 2
+    },
+    {
+      "name": "Nodes",
+      "value": 16
+    },
+    {
+      "name": "JSHeapUsedSize",
+      "value": 930472
+    },
+    {
+      "name": "JSHeapTotalSize",
+      "value": 2359296
+    }
+  ],
+  "purpose": "Independent scheduler/canvas baseline; no game source or acceptance thresholds changed"
+}
