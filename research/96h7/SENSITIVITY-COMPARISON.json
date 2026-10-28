@@ -1,0 +1,1619 @@
+[
+  {
+    "seed": 11,
+    "variant": "holdLow",
+    "allMonthlyRNGEqual": true,
+    "allPhysicalEqual": true,
+    "actualActionTraceEqual": true,
+    "reviews": [
+      21,
+      21
+    ],
+    "switches": [
+      2,
+      3
+    ],
+    "check": [
+      {
+        "month": 61.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 62.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 63.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 64.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 65.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 66.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 67.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 68.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 69.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 70.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 71.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 72.0,
+        "sameRNG": true,
+        "samePhysical": true
+      }
+    ]
+  },
+  {
+    "seed": 11,
+    "variant": "holdHigh",
+    "allMonthlyRNGEqual": true,
+    "allPhysicalEqual": false,
+    "actualActionTraceEqual": false,
+    "reviews": [
+      21,
+      21
+    ],
+    "switches": [
+      2,
+      0
+    ],
+    "check": [
+      {
+        "month": 61.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 62.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 63.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 64.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 65.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 66.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 67.0,
+        "sameRNG": true,
+        "samePhysical": false
+      },
+      {
+        "month": 68.0,
+        "sameRNG": true,
+        "samePhysical": false
+      },
+      {
+        "month": 69.0,
+        "sameRNG": true,
+        "samePhysical": false
+      },
+      {
+        "month": 70.0,
+        "sameRNG": true,
+        "samePhysical": false
+      },
+      {
+        "month": 71.0,
+        "sameRNG": true,
+        "samePhysical": false
+      },
+      {
+        "month": 72.0,
+        "sameRNG": true,
+        "samePhysical": false
+      }
+    ]
+  },
+  {
+    "seed": 11,
+    "variant": "reviewLow",
+    "allMonthlyRNGEqual": true,
+    "allPhysicalEqual": true,
+    "actualActionTraceEqual": true,
+    "reviews": [
+      21,
+      55
+    ],
+    "switches": [
+      2,
+      3
+    ],
+    "check": [
+      {
+        "month": 61.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 62.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 63.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 64.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 65.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 66.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 67.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 68.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 69.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 70.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 71.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 72.0,
+        "sameRNG": true,
+        "samePhysical": true
+      }
+    ]
+  },
+  {
+    "seed": 11,
+    "variant": "reviewHigh",
+    "allMonthlyRNGEqual": true,
+    "allPhysicalEqual": true,
+    "actualActionTraceEqual": true,
+    "reviews": [
+      21,
+      12
+    ],
+    "switches": [
+      2,
+      2
+    ],
+    "check": [
+      {
+        "month": 61.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 62.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 63.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 64.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 65.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 66.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 67.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 68.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 69.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 70.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 71.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 72.0,
+        "sameRNG": true,
+        "samePhysical": true
+      }
+    ]
+  },
+  {
+    "seed": 11,
+    "variant": "forceLow",
+    "allMonthlyRNGEqual": true,
+    "allPhysicalEqual": true,
+    "actualActionTraceEqual": true,
+    "reviews": [
+      21,
+      21
+    ],
+    "switches": [
+      2,
+      2
+    ],
+    "check": [
+      {
+        "month": 61.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 62.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 63.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 64.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 65.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 66.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 67.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 68.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 69.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 70.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 71.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 72.0,
+        "sameRNG": true,
+        "samePhysical": true
+      }
+    ]
+  },
+  {
+    "seed": 11,
+    "variant": "forceHigh",
+    "allMonthlyRNGEqual": true,
+    "allPhysicalEqual": true,
+    "actualActionTraceEqual": true,
+    "reviews": [
+      21,
+      21
+    ],
+    "switches": [
+      2,
+      2
+    ],
+    "check": [
+      {
+        "month": 61.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 62.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 63.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 64.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 65.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 66.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 67.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 68.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 69.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 70.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 71.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 72.0,
+        "sameRNG": true,
+        "samePhysical": true
+      }
+    ]
+  },
+  {
+    "seed": 11,
+    "variant": "civilianFirst",
+    "allMonthlyRNGEqual": true,
+    "allPhysicalEqual": true,
+    "actualActionTraceEqual": true,
+    "reviews": [
+      21,
+      21
+    ],
+    "switches": [
+      2,
+      2
+    ],
+    "check": [
+      {
+        "month": 61.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 62.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 63.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 64.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 65.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 66.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 67.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 68.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 69.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 70.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 71.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 72.0,
+        "sameRNG": true,
+        "samePhysical": true
+      }
+    ]
+  },
+  {
+    "seed": 42,
+    "variant": "holdLow",
+    "allMonthlyRNGEqual": true,
+    "allPhysicalEqual": true,
+    "actualActionTraceEqual": true,
+    "reviews": [
+      20,
+      20
+    ],
+    "switches": [
+      1,
+      1
+    ],
+    "check": [
+      {
+        "month": 61.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 62.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 63.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 64.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 65.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 66.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 67.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 68.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 69.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 70.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 71.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 72.0,
+        "sameRNG": true,
+        "samePhysical": true
+      }
+    ]
+  },
+  {
+    "seed": 42,
+    "variant": "holdHigh",
+    "allMonthlyRNGEqual": true,
+    "allPhysicalEqual": true,
+    "actualActionTraceEqual": true,
+    "reviews": [
+      20,
+      20
+    ],
+    "switches": [
+      1,
+      1
+    ],
+    "check": [
+      {
+        "month": 61.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 62.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 63.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 64.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 65.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 66.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 67.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 68.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 69.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 70.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 71.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 72.0,
+        "sameRNG": true,
+        "samePhysical": true
+      }
+    ]
+  },
+  {
+    "seed": 42,
+    "variant": "reviewLow",
+    "allMonthlyRNGEqual": true,
+    "allPhysicalEqual": true,
+    "actualActionTraceEqual": true,
+    "reviews": [
+      20,
+      58
+    ],
+    "switches": [
+      1,
+      1
+    ],
+    "check": [
+      {
+        "month": 61.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 62.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 63.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 64.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 65.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 66.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 67.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 68.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 69.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 70.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 71.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 72.0,
+        "sameRNG": true,
+        "samePhysical": true
+      }
+    ]
+  },
+  {
+    "seed": 42,
+    "variant": "reviewHigh",
+    "allMonthlyRNGEqual": true,
+    "allPhysicalEqual": true,
+    "actualActionTraceEqual": true,
+    "reviews": [
+      20,
+      10
+    ],
+    "switches": [
+      1,
+      1
+    ],
+    "check": [
+      {
+        "month": 61.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 62.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 63.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 64.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 65.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 66.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 67.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 68.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 69.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 70.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 71.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 72.0,
+        "sameRNG": true,
+        "samePhysical": true
+      }
+    ]
+  },
+  {
+    "seed": 42,
+    "variant": "forceLow",
+    "allMonthlyRNGEqual": true,
+    "allPhysicalEqual": true,
+    "actualActionTraceEqual": true,
+    "reviews": [
+      20,
+      20
+    ],
+    "switches": [
+      1,
+      1
+    ],
+    "check": [
+      {
+        "month": 61.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 62.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 63.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 64.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 65.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 66.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 67.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 68.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 69.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 70.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 71.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 72.0,
+        "sameRNG": true,
+        "samePhysical": true
+      }
+    ]
+  },
+  {
+    "seed": 42,
+    "variant": "forceHigh",
+    "allMonthlyRNGEqual": true,
+    "allPhysicalEqual": true,
+    "actualActionTraceEqual": true,
+    "reviews": [
+      20,
+      20
+    ],
+    "switches": [
+      1,
+      1
+    ],
+    "check": [
+      {
+        "month": 61.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 62.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 63.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 64.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 65.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 66.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 67.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 68.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 69.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 70.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 71.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 72.0,
+        "sameRNG": true,
+        "samePhysical": true
+      }
+    ]
+  },
+  {
+    "seed": 42,
+    "variant": "civilianFirst",
+    "allMonthlyRNGEqual": true,
+    "allPhysicalEqual": true,
+    "actualActionTraceEqual": true,
+    "reviews": [
+      20,
+      20
+    ],
+    "switches": [
+      1,
+      1
+    ],
+    "check": [
+      {
+        "month": 61.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 62.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 63.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 64.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 65.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 66.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 67.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 68.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 69.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 70.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 71.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 72.0,
+        "sameRNG": true,
+        "samePhysical": true
+      }
+    ]
+  },
+  {
+    "seed": 404,
+    "variant": "holdLow",
+    "allMonthlyRNGEqual": true,
+    "allPhysicalEqual": true,
+    "actualActionTraceEqual": true,
+    "reviews": [
+      20,
+      20
+    ],
+    "switches": [
+      0,
+      0
+    ],
+    "check": [
+      {
+        "month": 61.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 62.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 63.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 64.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 65.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 66.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 67.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 68.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 69.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 70.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 71.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 72.0,
+        "sameRNG": true,
+        "samePhysical": true
+      }
+    ]
+  },
+  {
+    "seed": 404,
+    "variant": "holdHigh",
+    "allMonthlyRNGEqual": true,
+    "allPhysicalEqual": true,
+    "actualActionTraceEqual": true,
+    "reviews": [
+      20,
+      20
+    ],
+    "switches": [
+      0,
+      0
+    ],
+    "check": [
+      {
+        "month": 61.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 62.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 63.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 64.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 65.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 66.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 67.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 68.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 69.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 70.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 71.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 72.0,
+        "sameRNG": true,
+        "samePhysical": true
+      }
+    ]
+  },
+  {
+    "seed": 404,
+    "variant": "reviewLow",
+    "allMonthlyRNGEqual": true,
+    "allPhysicalEqual": true,
+    "actualActionTraceEqual": true,
+    "reviews": [
+      20,
+      57
+    ],
+    "switches": [
+      0,
+      0
+    ],
+    "check": [
+      {
+        "month": 61.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 62.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 63.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 64.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 65.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 66.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 67.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 68.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 69.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 70.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 71.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 72.0,
+        "sameRNG": true,
+        "samePhysical": true
+      }
+    ]
+  },
+  {
+    "seed": 404,
+    "variant": "reviewHigh",
+    "allMonthlyRNGEqual": true,
+    "allPhysicalEqual": true,
+    "actualActionTraceEqual": true,
+    "reviews": [
+      20,
+      10
+    ],
+    "switches": [
+      0,
+      0
+    ],
+    "check": [
+      {
+        "month": 61.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 62.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 63.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 64.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 65.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 66.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 67.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 68.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 69.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 70.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 71.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 72.0,
+        "sameRNG": true,
+        "samePhysical": true
+      }
+    ]
+  },
+  {
+    "seed": 404,
+    "variant": "forceLow",
+    "allMonthlyRNGEqual": true,
+    "allPhysicalEqual": true,
+    "actualActionTraceEqual": true,
+    "reviews": [
+      20,
+      20
+    ],
+    "switches": [
+      0,
+      0
+    ],
+    "check": [
+      {
+        "month": 61.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 62.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 63.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 64.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 65.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 66.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 67.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 68.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 69.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 70.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 71.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 72.0,
+        "sameRNG": true,
+        "samePhysical": true
+      }
+    ]
+  },
+  {
+    "seed": 404,
+    "variant": "forceHigh",
+    "allMonthlyRNGEqual": true,
+    "allPhysicalEqual": true,
+    "actualActionTraceEqual": true,
+    "reviews": [
+      20,
+      20
+    ],
+    "switches": [
+      0,
+      0
+    ],
+    "check": [
+      {
+        "month": 61.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 62.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 63.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 64.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 65.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 66.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 67.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 68.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 69.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 70.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 71.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 72.0,
+        "sameRNG": true,
+        "samePhysical": true
+      }
+    ]
+  },
+  {
+    "seed": 404,
+    "variant": "civilianFirst",
+    "allMonthlyRNGEqual": true,
+    "allPhysicalEqual": true,
+    "actualActionTraceEqual": true,
+    "reviews": [
+      20,
+      20
+    ],
+    "switches": [
+      0,
+      0
+    ],
+    "check": [
+      {
+        "month": 61.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 62.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 63.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 64.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 65.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 66.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 67.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 68.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 69.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 70.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 71.0,
+        "sameRNG": true,
+        "samePhysical": true
+      },
+      {
+        "month": 72.0,
+        "sameRNG": true,
+        "samePhysical": true
+      }
+    ]
+  }
+]

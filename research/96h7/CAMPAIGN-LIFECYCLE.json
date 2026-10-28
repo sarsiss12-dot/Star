@@ -1,0 +1,732 @@
+[
+  {
+    "version": "control",
+    "rows": [
+      {
+        "day": 1800,
+        "campaign": {
+          "failedTargets": {
+            "6": 2160
+          },
+          "lastProgress": 840,
+          "bestPower": 574,
+          "bestDistance": 596.2322082483522,
+          "target": 6,
+          "rally": 13,
+          "phase": "supply",
+          "since": 810,
+          "until": 1830,
+          "need": 400,
+          "power": 570,
+          "reason": "Bilinen hedefe ikmalli askerî rota yok veya başarısız hedef beklemede"
+        },
+        "rng": 1823827493,
+        "orders": [
+          {
+            "id": 22,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 44,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 76,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 90,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 99,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 101,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 109,
+            "mv": null,
+            "path": []
+          }
+        ]
+      },
+      {
+        "day": 1830,
+        "campaign": {
+          "failedTargets": {
+            "6": 2190
+          },
+          "lastProgress": 840,
+          "bestPower": 574,
+          "bestDistance": 596.2322082483522,
+          "target": 6,
+          "rally": 13,
+          "phase": "supply",
+          "since": 810,
+          "until": 1860,
+          "need": 400,
+          "power": 570,
+          "reason": "Bilinen hedefe ikmalli askerî rota yok veya başarısız hedef beklemede"
+        },
+        "rng": 1823827493,
+        "orders": [
+          {
+            "id": 22,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 44,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 76,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 90,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 99,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 101,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 109,
+            "mv": null,
+            "path": []
+          }
+        ]
+      },
+      {
+        "day": 2100,
+        "campaign": {
+          "failedTargets": {
+            "6": 2460
+          },
+          "lastProgress": 840,
+          "bestPower": 574,
+          "bestDistance": 596.2322082483522,
+          "target": 6,
+          "rally": 13,
+          "phase": "supply",
+          "since": 810,
+          "until": 2130,
+          "need": 400,
+          "power": 570,
+          "reason": "Bilinen hedefe ikmalli askerî rota yok veya başarısız hedef beklemede"
+        },
+        "rng": 1823827493,
+        "orders": [
+          {
+            "id": 22,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 44,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 76,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 90,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 99,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 101,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 109,
+            "mv": null,
+            "path": []
+          }
+        ]
+      },
+      {
+        "day": 2159,
+        "campaign": {
+          "failedTargets": {
+            "6": 2519
+          },
+          "lastProgress": 840,
+          "bestPower": 574,
+          "bestDistance": 596.2322082483522,
+          "target": 6,
+          "rally": 13,
+          "phase": "supply",
+          "since": 810,
+          "until": 2189,
+          "need": 400,
+          "power": 570,
+          "reason": "Bilinen hedefe ikmalli askerî rota yok veya başarısız hedef beklemede"
+        },
+        "rng": 1823827493,
+        "orders": [
+          {
+            "id": 22,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 44,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 76,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 90,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 99,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 101,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 109,
+            "mv": null,
+            "path": []
+          }
+        ]
+      },
+      {
+        "day": 2160,
+        "campaign": {
+          "failedTargets": {
+            "6": 2520
+          },
+          "lastProgress": 840,
+          "bestPower": 574,
+          "bestDistance": 596.2322082483522,
+          "target": 6,
+          "rally": 13,
+          "phase": "supply",
+          "since": 810,
+          "until": 2190,
+          "need": 400,
+          "power": 570,
+          "reason": "Bilinen hedefe ikmalli askerî rota yok veya başarısız hedef beklemede"
+        },
+        "rng": 1823827493,
+        "orders": [
+          {
+            "id": 22,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 44,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 76,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 90,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 99,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 101,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 109,
+            "mv": null,
+            "path": []
+          }
+        ]
+      },
+      {
+        "day": 2190,
+        "campaign": {
+          "failedTargets": {
+            "6": 2550
+          },
+          "lastProgress": 840,
+          "bestPower": 574,
+          "bestDistance": 596.2322082483522,
+          "target": 6,
+          "rally": 13,
+          "phase": "supply",
+          "since": 810,
+          "until": 2220,
+          "need": 400,
+          "power": 570,
+          "reason": "Bilinen hedefe ikmalli askerî rota yok veya başarısız hedef beklemede"
+        },
+        "rng": 1823827493,
+        "orders": [
+          {
+            "id": 22,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 44,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 76,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 90,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 99,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 101,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 109,
+            "mv": null,
+            "path": []
+          }
+        ]
+      }
+    ],
+    "rngPreserved": true
+  },
+  {
+    "version": "candidate",
+    "rows": [
+      {
+        "day": 1800,
+        "campaign": {
+          "failedTargets": {
+            "6": 2160
+          },
+          "lastProgress": 840,
+          "bestPower": 574,
+          "bestDistance": 596.2322082483522,
+          "target": 6,
+          "rally": 13,
+          "phase": "supply",
+          "since": 810,
+          "until": 1830,
+          "need": 400,
+          "power": 570,
+          "reason": "Bilinen hedefe ikmalli askerî rota yok veya başarısız hedef beklemede"
+        },
+        "rng": 1823827493,
+        "orders": [
+          {
+            "id": 22,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 44,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 76,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 90,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 99,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 101,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 109,
+            "mv": null,
+            "path": []
+          }
+        ]
+      },
+      {
+        "day": 1830,
+        "campaign": {
+          "failedTargets": {
+            "6": 2160
+          },
+          "lastProgress": 840,
+          "bestPower": 574,
+          "bestDistance": 596.2322082483522,
+          "target": 6,
+          "rally": 13,
+          "phase": "supply",
+          "since": 810,
+          "until": 1860,
+          "need": 400,
+          "power": 570,
+          "reason": "Bilinen hedefe ikmalli askerî rota yok veya başarısız hedef beklemede"
+        },
+        "rng": 1823827493,
+        "orders": [
+          {
+            "id": 22,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 44,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 76,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 90,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 99,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 101,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 109,
+            "mv": null,
+            "path": []
+          }
+        ]
+      },
+      {
+        "day": 2100,
+        "campaign": {
+          "failedTargets": {
+            "6": 2160
+          },
+          "lastProgress": 840,
+          "bestPower": 574,
+          "bestDistance": 596.2322082483522,
+          "target": 6,
+          "rally": 13,
+          "phase": "supply",
+          "since": 810,
+          "until": 2130,
+          "need": 400,
+          "power": 570,
+          "reason": "Bilinen hedefe ikmalli askerî rota yok veya başarısız hedef beklemede"
+        },
+        "rng": 1823827493,
+        "orders": [
+          {
+            "id": 22,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 44,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 76,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 90,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 99,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 101,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 109,
+            "mv": null,
+            "path": []
+          }
+        ]
+      },
+      {
+        "day": 2159,
+        "campaign": {
+          "failedTargets": {
+            "6": 2160
+          },
+          "lastProgress": 840,
+          "bestPower": 574,
+          "bestDistance": 596.2322082483522,
+          "target": 6,
+          "rally": 13,
+          "phase": "supply",
+          "since": 810,
+          "until": 2189,
+          "need": 400,
+          "power": 570,
+          "reason": "Bilinen hedefe ikmalli askerî rota yok veya başarısız hedef beklemede"
+        },
+        "rng": 1823827493,
+        "orders": [
+          {
+            "id": 22,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 44,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 76,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 90,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 99,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 101,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 109,
+            "mv": null,
+            "path": []
+          }
+        ]
+      },
+      {
+        "day": 2160,
+        "campaign": {
+          "failedTargets": {},
+          "lastProgress": 2160,
+          "bestPower": 2332,
+          "bestDistance": 1205.4440203787426,
+          "target": 6,
+          "rally": 13,
+          "phase": "attack",
+          "since": 2160,
+          "until": 2340,
+          "need": 133.75,
+          "power": 2332,
+          "reason": "Kuvvet birlikte taarruz ediyor"
+        },
+        "rng": 1823827493,
+        "orders": [
+          {
+            "id": 22,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 44,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 76,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 90,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 99,
+            "mv": null,
+            "path": [
+              9,
+              16,
+              11,
+              13
+            ]
+          },
+          {
+            "id": 101,
+            "mv": null,
+            "path": [
+              11,
+              16,
+              9,
+              2,
+              7,
+              6
+            ]
+          },
+          {
+            "id": 109,
+            "mv": null,
+            "path": [
+              11,
+              16,
+              9,
+              2,
+              7,
+              6
+            ]
+          }
+        ]
+      },
+      {
+        "day": 2190,
+        "campaign": {
+          "failedTargets": {},
+          "lastProgress": 2160,
+          "bestPower": 2332,
+          "bestDistance": 1205.4440203787426,
+          "target": 6,
+          "rally": 13,
+          "phase": "gather",
+          "since": 2160,
+          "until": 2340,
+          "need": 133.75,
+          "power": 2332,
+          "reason": "Ulaşabilir filolar toplanıyor"
+        },
+        "rng": 1823827493,
+        "orders": [
+          {
+            "id": 22,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 44,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 76,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 90,
+            "mv": null,
+            "path": []
+          },
+          {
+            "id": 99,
+            "mv": null,
+            "path": [
+              9,
+              16,
+              11,
+              13
+            ]
+          },
+          {
+            "id": 101,
+            "mv": null,
+            "path": [
+              11,
+              16,
+              9,
+              2,
+              7,
+              6
+            ]
+          },
+          {
+            "id": 109,
+            "mv": null,
+            "path": [
+              11,
+              16,
+              9,
+              2,
+              7,
+              6
+            ]
+          }
+        ]
+      }
+    ],
+    "rngPreserved": true
+  }
+]

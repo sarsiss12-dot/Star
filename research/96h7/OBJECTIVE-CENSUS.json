@@ -1,0 +1,56 @@
+{
+  "economy": {
+    "months": 1120,
+    "episodesSeen": 35,
+    "completedMarkersSeen": 22,
+    "victoryOrPlanSuccessNotClaimed": true
+  },
+  "security": {
+    "months": 687,
+    "episodesSeen": 37,
+    "completedMarkersSeen": 0,
+    "victoryOrPlanSuccessNotClaimed": true
+  },
+  "science": {
+    "months": 916,
+    "episodesSeen": 24,
+    "completedMarkersSeen": 10,
+    "victoryOrPlanSuccessNotClaimed": true
+  },
+  "recovery": {
+    "months": 755,
+    "episodesSeen": 41,
+    "completedMarkersSeen": 37,
+    "victoryOrPlanSuccessNotClaimed": true
+  },
+  "regional": {
+    "months": 708,
+    "episodesSeen": 21,
+    "completedMarkersSeen": 6,
+    "victoryOrPlanSuccessNotClaimed": true
+  },
+  "trade": {
+    "months": 169,
+    "episodesSeen": 4,
+    "completedMarkersSeen": 2,
+    "victoryOrPlanSuccessNotClaimed": true
+  },
+  "federation": {
+    "months": 86,
+    "episodesSeen": 4,
+    "completedMarkersSeen": 0,
+    "victoryOrPlanSuccessNotClaimed": true
+  },
+  "influence": {
+    "months": 274,
+    "episodesSeen": 9,
+    "completedMarkersSeen": 2,
+    "victoryOrPlanSuccessNotClaimed": true
+  },
+  "contain": {
+    "months": 48,
+    "episodesSeen": 2,
+    "completedMarkersSeen": 0,
+    "victoryOrPlanSuccessNotClaimed": true
+  }
+}

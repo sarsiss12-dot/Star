@@ -1,0 +1,14 @@
+✓ bilateral ending clears both flags, relation -15, memory and three month cold war exactly once
+✓ same federation blocks bilateral ending and exposes management route
+✓ outside federation ally can leave without changing own federation
+✓ trade, sensors, passage, nonaggression and existing common war remain independent
+✓ native armed passage reevaluates alliance, independent permit and open border
+✓ vassal link cannot be ended with bilateral withdrawal
+✓ dead empire and replaced world objects rejected
+✓ open and cancel confirmation changes neither Save8 nor RNG; cancelled closure inert
+✓ confirmation applies once and stale closure cannot apply after a new alliance
+✓ old confirmation invalid after real Save8 reload
+✓ confirmation revalidates newly changed federation membership
+✓ Save8 reload before same action gives identical outcome and deterministic RNG
+✓ AI alliance review decision, witnesses and RNG match canonical implementation across 64 seeds
+GEÇEN: 13 KALAN: 0

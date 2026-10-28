@@ -1,0 +1,66 @@
+[
+  {
+    "tag": "base",
+    "exit": 0
+  },
+  {
+    "tag": "systems30",
+    "exit": 0
+  },
+  {
+    "tag": "systems60",
+    "exit": 0
+  },
+  {
+    "tag": "systems80",
+    "exit": 0
+  },
+  {
+    "tag": "systems100",
+    "exit": 0
+  },
+  {
+    "tag": "AI1",
+    "exit": 0
+  },
+  {
+    "tag": "AI7",
+    "exit": 0
+  },
+  {
+    "tag": "AI11",
+    "exit": 0
+  },
+  {
+    "tag": "ring",
+    "exit": 0
+  },
+  {
+    "tag": "cluster",
+    "exit": 0
+  },
+  {
+    "tag": "hard",
+    "exit": 0
+  },
+  {
+    "tag": "originsOff",
+    "exit": 0
+  },
+  {
+    "tag": "origins100",
+    "exit": 0
+  },
+  {
+    "tag": "council",
+    "exit": 0
+  },
+  {
+    "tag": "noPirates",
+    "exit": 0
+  },
+  {
+    "tag": "largeSparse",
+    "exit": 0
+  }
+]

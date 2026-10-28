@@ -1,0 +1,37 @@
+[
+  {
+    "variant": "runwayLow",
+    "fixtures": 15,
+    "changedSave": 0,
+    "changedOrders": 0,
+    "changedRNG": 0
+  },
+  {
+    "variant": "runwayHigh",
+    "fixtures": 15,
+    "changedSave": 0,
+    "changedOrders": 0,
+    "changedRNG": 0
+  },
+  {
+    "variant": "civilianFirst",
+    "fixtures": 15,
+    "changedSave": 0,
+    "changedOrders": 0,
+    "changedRNG": 0
+  },
+  {
+    "variant": "expLow",
+    "fixtures": 15,
+    "changedSave": 0,
+    "changedOrders": 0,
+    "changedRNG": 0
+  },
+  {
+    "variant": "expHigh",
+    "fixtures": 15,
+    "changedSave": 0,
+    "changedOrders": 0,
+    "changedRNG": 0
+  }
+]

@@ -1,0 +1,120 @@
+{
+  "runtime": [
+    {
+      "file": "ai.js",
+      "zipSHA": "cc84720363b1df9c4525ee97c23df29d876fcd60ec3a263655734caa2a86b83f",
+      "commitSHA": "760563026597cde42b422cac59f70971a8a6c71783cf52487f31039d80f5c923",
+      "equal": false
+    },
+    {
+      "file": "archive-ui.js",
+      "zipSHA": "c76aae4cb9b55da7262886dda230f6370c705484286a14516c36ce07fab7830b",
+      "commitSHA": "c76aae4cb9b55da7262886dda230f6370c705484286a14516c36ce07fab7830b",
+      "equal": true
+    },
+    {
+      "file": "audio.js",
+      "zipSHA": "6ddf6e388fa404394fee6220c2bfeeb3d1f9601c51a35ccdfe3181a8781942f7",
+      "commitSHA": "6ddf6e388fa404394fee6220c2bfeeb3d1f9601c51a35ccdfe3181a8781942f7",
+      "equal": true
+    },
+    {
+      "file": "combat.js",
+      "zipSHA": "b4e21fcdb6fdaaa93da07313131470de3e8a3c28b5650226a9c4a2713bde73a5",
+      "commitSHA": "b4e21fcdb6fdaaa93da07313131470de3e8a3c28b5650226a9c4a2713bde73a5",
+      "equal": true
+    },
+    {
+      "file": "commerce-ui.js",
+      "zipSHA": "cc7fef5ab43176093251916aaafbdd873424da0630ec46fe6d3d5106a690b8d4",
+      "commitSHA": "cc7fef5ab43176093251916aaafbdd873424da0630ec46fe6d3d5106a690b8d4",
+      "equal": true
+    },
+    {
+      "file": "commerce.js",
+      "zipSHA": "978e4f6b01faed1babeade20070447cbcfaa4e2ea70793a78e50f20fbe66be01",
+      "commitSHA": "978e4f6b01faed1babeade20070447cbcfaa4e2ea70793a78e50f20fbe66be01",
+      "equal": true
+    },
+    {
+      "file": "construction.js",
+      "zipSHA": "d9b544b0328f26576ff90e02fe49c1b7f3798dfd844a8c39ee8dc6c0890debda",
+      "commitSHA": "d9b544b0328f26576ff90e02fe49c1b7f3798dfd844a8c39ee8dc6c0890debda",
+      "equal": true
+    },
+    {
+      "file": "diplomacy.js",
+      "zipSHA": "730f7dffe7f20e4e59cf7d46c283f2869e191116852e9ccce9ba25e47d01498a",
+      "commitSHA": "730f7dffe7f20e4e59cf7d46c283f2869e191116852e9ccce9ba25e47d01498a",
+      "equal": true
+    },
+    {
+      "file": "economic-ledger.js",
+      "zipSHA": "67d07f3ee4777cd7c246c8b37dda7cf1577cf86c19a6edeba68945a5d3063501",
+      "commitSHA": "67d07f3ee4777cd7c246c8b37dda7cf1577cf86c19a6edeba68945a5d3063501",
+      "equal": true
+    },
+    {
+      "file": "economy-ui.js",
+      "zipSHA": "49b9075876fd1017e27d8bd43b4ca17decdddcd7902c6ea4f682974590f1f6b0",
+      "commitSHA": "49b9075876fd1017e27d8bd43b4ca17decdddcd7902c6ea4f682974590f1f6b0",
+      "equal": true
+    },
+    {
+      "file": "economy.js",
+      "zipSHA": "ed2eb108b3c094444f49700e61ab48dfbb968c9bc7f135dcf11a7335c62fd095",
+      "commitSHA": "ed2eb108b3c094444f49700e61ab48dfbb968c9bc7f135dcf11a7335c62fd095",
+      "equal": true
+    },
+    {
+      "file": "inbox.js",
+      "zipSHA": "e4ab3349b26f4db1addc1952d5a4e19f7a0db0987672b561986e1b974340807c",
+      "commitSHA": "e4ab3349b26f4db1addc1952d5a4e19f7a0db0987672b561986e1b974340807c",
+      "equal": true
+    },
+    {
+      "file": "index.html",
+      "zipSHA": "b7e02c60e032b021e43c51b11efa0adec5202f8db98eb601a70346608b33c46c",
+      "commitSHA": "b7e02c60e032b021e43c51b11efa0adec5202f8db98eb601a70346608b33c46c",
+      "equal": true
+    },
+    {
+      "file": "main.js",
+      "zipSHA": "6ec06166933f4e2103bf72c342094d2875c597ca82c05e07543ad09b3a808455",
+      "commitSHA": "6ec06166933f4e2103bf72c342094d2875c597ca82c05e07543ad09b3a808455",
+      "equal": true
+    },
+    {
+      "file": "manifest.json",
+      "zipSHA": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
+      "commitSHA": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
+      "equal": true
+    },
+    {
+      "file": "map.js",
+      "zipSHA": "d8ca27ee07c484b7399f95d8031aa70fb7539bcf89d768c8442200b7cba76ae3",
+      "commitSHA": "d8ca27ee07c484b7399f95d8031aa70fb7539bcf89d768c8442200b7cba76ae3",
+      "equal": true
+    },
+    {
+      "file": "news.js",
+      "zipSHA": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
+      "commitSHA": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
+      "equal": true
+    },
+    {
+      "file": "sw.js",
+      "zipSHA": "3f0ba457fe0089564822e743c1ca0b57b8ff128ffccd8fb03952551549678ac0",
+      "commitSHA": "3f0ba457fe0089564822e743c1ca0b57b8ff128ffccd8fb03952551549678ac0",
+      "equal": true
+    },
+    {
+      "file": "ui.js",
+      "zipSHA": "11c27fa5bd38a637018f1aef39bfa405a45c383f1f456aebaa3770cd645b58b8",
+      "commitSHA": "11c27fa5bd38a637018f1aef39bfa405a45c383f1f456aebaa3770cd645b58b8",
+      "equal": true
+    }
+  ],
+  "crc": "PASS",
+  "zipSHA": "30cff5cbe451c6e9a2e687a2ee17cc52e837c8140eba3bd0247821e83297fe0d"
+}

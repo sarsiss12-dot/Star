@@ -1,0 +1,26 @@
+[
+  {
+    "seed": 11,
+    "months": 24,
+    "allMeasuredStocksIncomeTechColoniesShipsPowerAndRNGEqual": true,
+    "differences": [],
+    "fullSerializedHashEqual": false,
+    "qualification": "Native caches/_prof/absent cache timestamps and observer paths differ; original failed hash assertion retained in CANONICAL-REUSE-CHECK.json. Not a full-Save equality claim."
+  },
+  {
+    "seed": 42,
+    "months": 24,
+    "allMeasuredStocksIncomeTechColoniesShipsPowerAndRNGEqual": true,
+    "differences": [],
+    "fullSerializedHashEqual": false,
+    "qualification": "Native caches/_prof/absent cache timestamps and observer paths differ; original failed hash assertion retained in CANONICAL-REUSE-CHECK.json. Not a full-Save equality claim."
+  },
+  {
+    "seed": 404,
+    "months": 24,
+    "allMeasuredStocksIncomeTechColoniesShipsPowerAndRNGEqual": true,
+    "differences": [],
+    "fullSerializedHashEqual": false,
+    "qualification": "Native caches/_prof/absent cache timestamps and observer paths differ; original failed hash assertion retained in CANONICAL-REUSE-CHECK.json. Not a full-Save equality claim."
+  }
+]

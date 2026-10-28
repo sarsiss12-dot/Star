@@ -1,0 +1,834 @@
+[
+  {
+    "tag": "pregame-AI1",
+    "criticalEmpireMonths": 0,
+    "foodCritical": 0,
+    "techs": 2,
+    "colonies": 2,
+    "ships": 14,
+    "power": 1771,
+    "deliveries": 0,
+    "warDeclarations": 0,
+    "negotiations": 0,
+    "acceptedNegotiations": 0,
+    "contactsDirected": 1,
+    "alliesDirected": 0,
+    "config": {
+      "name": "Matched 96F",
+      "race": "insan",
+      "traits": [],
+      "size": "orta",
+      "aiCount": 1,
+      "shape": "sarmal",
+      "diff": "normal",
+      "seed": 11,
+      "ethics": {
+        "mil": 0,
+        "aut": 0,
+        "mat": 0,
+        "ahl": 0
+      },
+      "civics": [],
+      "origin": "standart",
+      "ruins": "yok",
+      "crisis": "kapali",
+      "council": "kapali"
+    },
+    "paid": {
+      "ala": 1387,
+      "min": 2140,
+      "ene": 0,
+      "yiy": 0,
+      "ara": 0,
+      "tuk": 0,
+      "etk": 0
+    },
+    "cargo": {
+      "received": {},
+      "loaded": {},
+      "lost": {}
+    }
+  },
+  {
+    "tag": "pregame-AI11",
+    "criticalEmpireMonths": 0,
+    "foodCritical": 0,
+    "techs": 3,
+    "colonies": 22,
+    "ships": 82,
+    "power": 7700,
+    "deliveries": 24,
+    "warDeclarations": 1,
+    "negotiations": 49,
+    "acceptedNegotiations": 31,
+    "contactsDirected": 47,
+    "alliesDirected": 4,
+    "config": {
+      "name": "Matched 96F",
+      "race": "insan",
+      "traits": [],
+      "size": "orta",
+      "aiCount": 11,
+      "shape": "sarmal",
+      "diff": "normal",
+      "seed": 11,
+      "ethics": {
+        "mil": 0,
+        "aut": 0,
+        "mat": 0,
+        "ahl": 0
+      },
+      "civics": [],
+      "origin": "standart",
+      "ruins": "yok",
+      "crisis": "kapali",
+      "council": "kapali"
+    },
+    "paid": {
+      "ala": 6148,
+      "min": 11920,
+      "ene": 0,
+      "yiy": 0,
+      "ara": 0,
+      "tuk": 0,
+      "etk": 0
+    },
+    "cargo": {
+      "received": {
+        "ala": 152.8,
+        "min": 178.60000000000002,
+        "yiy": 32
+      },
+      "loaded": {
+        "min": 193.29999999999998,
+        "ala": 168.7,
+        "yiy": 32
+      },
+      "lost": {}
+    }
+  },
+  {
+    "tag": "pregame-AI7",
+    "criticalEmpireMonths": 0,
+    "foodCritical": 0,
+    "techs": 2,
+    "colonies": 15,
+    "ships": 44,
+    "power": 3679,
+    "deliveries": 2,
+    "warDeclarations": 1,
+    "negotiations": 19,
+    "acceptedNegotiations": 12,
+    "contactsDirected": 16,
+    "alliesDirected": 2,
+    "config": {
+      "name": "Matched 96F",
+      "race": "insan",
+      "traits": [],
+      "size": "orta",
+      "aiCount": 7,
+      "shape": "sarmal",
+      "diff": "normal",
+      "seed": 11,
+      "ethics": {
+        "mil": 0,
+        "aut": 0,
+        "mat": 0,
+        "ahl": 0
+      },
+      "civics": [],
+      "origin": "standart",
+      "ruins": "yok",
+      "crisis": "kapali",
+      "council": "kapali"
+    },
+    "paid": {
+      "ala": 3984,
+      "min": 7620,
+      "ene": 0,
+      "yiy": 0,
+      "ara": 0,
+      "tuk": 0,
+      "etk": 0
+    },
+    "cargo": {
+      "received": {
+        "yiy": 15.9,
+        "min": 11.5
+      },
+      "loaded": {
+        "min": 11.5,
+        "yiy": 15.9
+      },
+      "lost": {}
+    }
+  },
+  {
+    "tag": "pregame-base",
+    "criticalEmpireMonths": 0,
+    "foodCritical": 0,
+    "techs": 0,
+    "colonies": 10,
+    "ships": 33,
+    "power": 3315,
+    "deliveries": 0,
+    "warDeclarations": 0,
+    "negotiations": 7,
+    "acceptedNegotiations": 5,
+    "contactsDirected": 13,
+    "alliesDirected": 2,
+    "config": {
+      "name": "Matched 96F",
+      "race": "insan",
+      "traits": [],
+      "size": "orta",
+      "aiCount": 5,
+      "shape": "sarmal",
+      "diff": "normal",
+      "seed": 11,
+      "ethics": {
+        "mil": 0,
+        "aut": 0,
+        "mat": 0,
+        "ahl": 0
+      },
+      "civics": [],
+      "origin": "standart",
+      "ruins": "yok",
+      "crisis": "kapali",
+      "council": "kapali"
+    },
+    "paid": {
+      "ala": 4048,
+      "min": 6490,
+      "ene": 0,
+      "yiy": 0,
+      "ara": 0,
+      "tuk": 0,
+      "etk": 0
+    },
+    "cargo": {
+      "received": {},
+      "loaded": {},
+      "lost": {}
+    }
+  },
+  {
+    "tag": "pregame-cluster",
+    "criticalEmpireMonths": 0,
+    "foodCritical": 0,
+    "techs": 3,
+    "colonies": 10,
+    "ships": 45,
+    "power": 4045,
+    "deliveries": 0,
+    "warDeclarations": 0,
+    "negotiations": 19,
+    "acceptedNegotiations": 11,
+    "contactsDirected": 25,
+    "alliesDirected": 2,
+    "config": {
+      "name": "Matched 96F",
+      "race": "insan",
+      "traits": [],
+      "size": "orta",
+      "aiCount": 5,
+      "shape": "kume",
+      "diff": "normal",
+      "seed": 11,
+      "ethics": {
+        "mil": 0,
+        "aut": 0,
+        "mat": 0,
+        "ahl": 0
+      },
+      "civics": [],
+      "origin": "standart",
+      "ruins": "yok",
+      "crisis": "kapali",
+      "council": "kapali"
+    },
+    "paid": {
+      "ala": 4163,
+      "min": 6240,
+      "ene": 0,
+      "yiy": 0,
+      "ara": 0,
+      "tuk": 0,
+      "etk": 0
+    },
+    "cargo": {
+      "received": {},
+      "loaded": {},
+      "lost": {}
+    }
+  },
+  {
+    "tag": "pregame-council",
+    "criticalEmpireMonths": 0,
+    "foodCritical": 0,
+    "techs": 0,
+    "colonies": 10,
+    "ships": 33,
+    "power": 3315,
+    "deliveries": 0,
+    "warDeclarations": 0,
+    "negotiations": 7,
+    "acceptedNegotiations": 5,
+    "contactsDirected": 13,
+    "alliesDirected": 2,
+    "config": {
+      "name": "Matched 96F",
+      "race": "insan",
+      "traits": [],
+      "size": "orta",
+      "aiCount": 5,
+      "shape": "sarmal",
+      "diff": "normal",
+      "seed": 11,
+      "ethics": {
+        "mil": 0,
+        "aut": 0,
+        "mat": 0,
+        "ahl": 0
+      },
+      "civics": [],
+      "origin": "standart",
+      "ruins": "yok",
+      "crisis": "kapali",
+      "council": "normal"
+    },
+    "paid": {
+      "ala": 4048,
+      "min": 6490,
+      "ene": 0,
+      "yiy": 0,
+      "ara": 0,
+      "tuk": 0,
+      "etk": 0
+    },
+    "cargo": {
+      "received": {},
+      "loaded": {},
+      "lost": {}
+    }
+  },
+  {
+    "tag": "pregame-hard",
+    "criticalEmpireMonths": 0,
+    "foodCritical": 0,
+    "techs": 0,
+    "colonies": 10,
+    "ships": 48,
+    "power": 4921,
+    "deliveries": 0,
+    "warDeclarations": 0,
+    "negotiations": 4,
+    "acceptedNegotiations": 3,
+    "contactsDirected": 13,
+    "alliesDirected": 0,
+    "config": {
+      "name": "Matched 96F",
+      "race": "insan",
+      "traits": [],
+      "size": "orta",
+      "aiCount": 5,
+      "shape": "sarmal",
+      "diff": "zor",
+      "seed": 11,
+      "ethics": {
+        "mil": 0,
+        "aut": 0,
+        "mat": 0,
+        "ahl": 0
+      },
+      "civics": [],
+      "origin": "standart",
+      "ruins": "yok",
+      "crisis": "kapali",
+      "council": "kapali"
+    },
+    "paid": {
+      "ala": 4298,
+      "min": 6678,
+      "ene": 0,
+      "yiy": 0,
+      "ara": 0,
+      "tuk": 0,
+      "etk": 0
+    },
+    "cargo": {
+      "received": {},
+      "loaded": {},
+      "lost": {}
+    }
+  },
+  {
+    "tag": "pregame-largeSparse",
+    "criticalEmpireMonths": 0,
+    "foodCritical": 0,
+    "techs": 2,
+    "colonies": 2,
+    "ships": 0,
+    "power": 0,
+    "deliveries": 0,
+    "warDeclarations": 0,
+    "negotiations": 0,
+    "acceptedNegotiations": 0,
+    "contactsDirected": 1,
+    "alliesDirected": 0,
+    "config": {
+      "name": "Matched 96F",
+      "race": "insan",
+      "traits": [],
+      "size": "ulu",
+      "aiCount": 1,
+      "shape": "sarmal",
+      "diff": "normal",
+      "seed": 11,
+      "ethics": {
+        "mil": 0,
+        "aut": 0,
+        "mat": 0,
+        "ahl": 0
+      },
+      "civics": [],
+      "origin": "standart",
+      "ruins": "yok",
+      "crisis": "kapali",
+      "council": "kapali"
+    },
+    "paid": {
+      "ala": 1034,
+      "min": 990,
+      "ene": 0,
+      "yiy": 0,
+      "ara": 0,
+      "tuk": 0,
+      "etk": 0
+    },
+    "cargo": {
+      "received": {},
+      "loaded": {},
+      "lost": {}
+    }
+  },
+  {
+    "tag": "pregame-noPirates",
+    "criticalEmpireMonths": 0,
+    "foodCritical": 0,
+    "techs": 0,
+    "colonies": 10,
+    "ships": 33,
+    "power": 3315,
+    "deliveries": 0,
+    "warDeclarations": 0,
+    "negotiations": 7,
+    "acceptedNegotiations": 5,
+    "contactsDirected": 13,
+    "alliesDirected": 2,
+    "config": {
+      "name": "Matched 96F",
+      "race": "insan",
+      "traits": [],
+      "size": "orta",
+      "aiCount": 5,
+      "shape": "sarmal",
+      "diff": "normal",
+      "seed": 11,
+      "ethics": {
+        "mil": 0,
+        "aut": 0,
+        "mat": 0,
+        "ahl": 0
+      },
+      "civics": [],
+      "origin": "standart",
+      "ruins": "yok",
+      "crisis": "kapali",
+      "council": "kapali",
+      "pirates": false
+    },
+    "paid": {
+      "ala": 4048,
+      "min": 6490,
+      "ene": 0,
+      "yiy": 0,
+      "ara": 0,
+      "tuk": 0,
+      "etk": 0
+    },
+    "cargo": {
+      "received": {},
+      "loaded": {},
+      "lost": {}
+    }
+  },
+  {
+    "tag": "pregame-origins100",
+    "criticalEmpireMonths": 0,
+    "foodCritical": 0,
+    "techs": 2,
+    "colonies": 11,
+    "ships": 19,
+    "power": 2246,
+    "deliveries": 0,
+    "warDeclarations": 2,
+    "negotiations": 4,
+    "acceptedNegotiations": 4,
+    "contactsDirected": 13,
+    "alliesDirected": 2,
+    "config": {
+      "name": "Matched 96F",
+      "race": "insan",
+      "traits": [],
+      "size": "orta",
+      "aiCount": 5,
+      "shape": "sarmal",
+      "diff": "normal",
+      "seed": 11,
+      "ethics": {
+        "mil": 0,
+        "aut": 0,
+        "mat": 0,
+        "ahl": 0
+      },
+      "civics": [],
+      "origin": "standart",
+      "ruins": "yok",
+      "crisis": "kapali",
+      "council": "kapali",
+      "aiOriginChance": 100
+    },
+    "paid": {
+      "ala": 3828,
+      "min": 6658,
+      "ene": 0,
+      "yiy": 0,
+      "ara": 0,
+      "tuk": 0,
+      "etk": 0
+    },
+    "cargo": {
+      "received": {},
+      "loaded": {},
+      "lost": {}
+    }
+  },
+  {
+    "tag": "pregame-originsOff",
+    "criticalEmpireMonths": 0,
+    "foodCritical": 0,
+    "techs": 0,
+    "colonies": 10,
+    "ships": 46,
+    "power": 4559,
+    "deliveries": 0,
+    "warDeclarations": 0,
+    "negotiations": 5,
+    "acceptedNegotiations": 4,
+    "contactsDirected": 17,
+    "alliesDirected": 2,
+    "config": {
+      "name": "Matched 96F",
+      "race": "insan",
+      "traits": [],
+      "size": "orta",
+      "aiCount": 5,
+      "shape": "sarmal",
+      "diff": "normal",
+      "seed": 11,
+      "ethics": {
+        "mil": 0,
+        "aut": 0,
+        "mat": 0,
+        "ahl": 0
+      },
+      "civics": [],
+      "origin": "standart",
+      "ruins": "yok",
+      "crisis": "kapali",
+      "council": "kapali",
+      "aiOrigins": false
+    },
+    "paid": {
+      "ala": 4304,
+      "min": 5798,
+      "ene": 0,
+      "yiy": 0,
+      "ara": 0,
+      "tuk": 0,
+      "etk": 0
+    },
+    "cargo": {
+      "received": {},
+      "loaded": {},
+      "lost": {}
+    }
+  },
+  {
+    "tag": "pregame-ring",
+    "criticalEmpireMonths": 0,
+    "foodCritical": 0,
+    "techs": 2,
+    "colonies": 10,
+    "ships": 44,
+    "power": 3967,
+    "deliveries": 6,
+    "warDeclarations": 0,
+    "negotiations": 20,
+    "acceptedNegotiations": 14,
+    "contactsDirected": 19,
+    "alliesDirected": 4,
+    "config": {
+      "name": "Matched 96F",
+      "race": "insan",
+      "traits": [],
+      "size": "orta",
+      "aiCount": 5,
+      "shape": "halka",
+      "diff": "normal",
+      "seed": 11,
+      "ethics": {
+        "mil": 0,
+        "aut": 0,
+        "mat": 0,
+        "ahl": 0
+      },
+      "civics": [],
+      "origin": "standart",
+      "ruins": "yok",
+      "crisis": "kapali",
+      "council": "kapali"
+    },
+    "paid": {
+      "ala": 3746,
+      "min": 5300,
+      "ene": 0,
+      "yiy": 0,
+      "ara": 0,
+      "tuk": 0,
+      "etk": 0
+    },
+    "cargo": {
+      "received": {
+        "min": 44.400000000000006,
+        "ala": 38.7
+      },
+      "loaded": {
+        "ala": 51.6,
+        "min": 72.7,
+        "tuk": 15.9
+      },
+      "lost": {}
+    }
+  },
+  {
+    "tag": "pregame-systems100",
+    "criticalEmpireMonths": 0,
+    "foodCritical": 0,
+    "techs": 3,
+    "colonies": 11,
+    "ships": 40,
+    "power": 3863,
+    "deliveries": 0,
+    "warDeclarations": 0,
+    "negotiations": 2,
+    "acceptedNegotiations": 2,
+    "contactsDirected": 13,
+    "alliesDirected": 0,
+    "config": {
+      "name": "Matched 96F",
+      "race": "insan",
+      "traits": [],
+      "size": "ulu",
+      "aiCount": 5,
+      "shape": "sarmal",
+      "diff": "normal",
+      "seed": 11,
+      "ethics": {
+        "mil": 0,
+        "aut": 0,
+        "mat": 0,
+        "ahl": 0
+      },
+      "civics": [],
+      "origin": "standart",
+      "ruins": "yok",
+      "crisis": "kapali",
+      "council": "kapali"
+    },
+    "paid": {
+      "ala": 4959,
+      "min": 7230,
+      "ene": 0,
+      "yiy": 0,
+      "ara": 0,
+      "tuk": 0,
+      "etk": 0
+    },
+    "cargo": {
+      "received": {},
+      "loaded": {},
+      "lost": {}
+    }
+  },
+  {
+    "tag": "pregame-systems30",
+    "criticalEmpireMonths": 0,
+    "foodCritical": 0,
+    "techs": 4,
+    "colonies": 10,
+    "ships": 68,
+    "power": 6481,
+    "deliveries": 28,
+    "warDeclarations": 0,
+    "negotiations": 37,
+    "acceptedNegotiations": 26,
+    "contactsDirected": 24,
+    "alliesDirected": 2,
+    "config": {
+      "name": "Matched 96F",
+      "race": "insan",
+      "traits": [],
+      "size": "kucuk",
+      "aiCount": 5,
+      "shape": "sarmal",
+      "diff": "normal",
+      "seed": 11,
+      "ethics": {
+        "mil": 0,
+        "aut": 0,
+        "mat": 0,
+        "ahl": 0
+      },
+      "civics": [],
+      "origin": "standart",
+      "ruins": "yok",
+      "crisis": "kapali",
+      "council": "kapali"
+    },
+    "paid": {
+      "ala": 3634,
+      "min": 6460,
+      "ene": 0,
+      "yiy": 0,
+      "ara": 0,
+      "tuk": 0,
+      "etk": 0
+    },
+    "cargo": {
+      "received": {
+        "tuk": 185.7,
+        "min": 174.6,
+        "ala": 65.7
+      },
+      "loaded": {
+        "min": 203.3,
+        "ala": 95.7,
+        "tuk": 185.7
+      },
+      "lost": {}
+    }
+  },
+  {
+    "tag": "pregame-systems60",
+    "criticalEmpireMonths": 4,
+    "foodCritical": 0,
+    "techs": 5,
+    "colonies": 10,
+    "ships": 55,
+    "power": 5014,
+    "deliveries": 0,
+    "warDeclarations": 0,
+    "negotiations": 3,
+    "acceptedNegotiations": 3,
+    "contactsDirected": 7,
+    "alliesDirected": 2,
+    "config": {
+      "name": "Matched 96F",
+      "race": "insan",
+      "traits": [],
+      "size": "buyuk",
+      "aiCount": 5,
+      "shape": "sarmal",
+      "diff": "normal",
+      "seed": 11,
+      "ethics": {
+        "mil": 0,
+        "aut": 0,
+        "mat": 0,
+        "ahl": 0
+      },
+      "civics": [],
+      "origin": "standart",
+      "ruins": "yok",
+      "crisis": "kapali",
+      "council": "kapali"
+    },
+    "paid": {
+      "ala": 3376,
+      "min": 5880,
+      "ene": 0,
+      "yiy": 0,
+      "ara": 0,
+      "tuk": 0,
+      "etk": 0
+    },
+    "cargo": {
+      "received": {},
+      "loaded": {},
+      "lost": {}
+    }
+  },
+  {
+    "tag": "pregame-systems80",
+    "criticalEmpireMonths": 0,
+    "foodCritical": 0,
+    "techs": 2,
+    "colonies": 10,
+    "ships": 48,
+    "power": 4433,
+    "deliveries": 0,
+    "warDeclarations": 0,
+    "negotiations": 2,
+    "acceptedNegotiations": 2,
+    "contactsDirected": 8,
+    "alliesDirected": 0,
+    "config": {
+      "name": "Matched 96F",
+      "race": "insan",
+      "traits": [],
+      "size": "devasa",
+      "aiCount": 5,
+      "shape": "sarmal",
+      "diff": "normal",
+      "seed": 11,
+      "ethics": {
+        "mil": 0,
+        "aut": 0,
+        "mat": 0,
+        "ahl": 0
+      },
+      "civics": [],
+      "origin": "standart",
+      "ruins": "yok",
+      "crisis": "kapali",
+      "council": "kapali"
+    },
+    "paid": {
+      "ala": 3898,
+      "min": 7640,
+      "ene": 0,
+      "yiy": 0,
+      "ara": 0,
+      "tuk": 0,
+      "etk": 0
+    },
+    "cargo": {
+      "received": {},
+      "loaded": {},
+      "lost": {}
+    }
+  }
+]

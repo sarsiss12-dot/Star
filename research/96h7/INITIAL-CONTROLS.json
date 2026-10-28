@@ -1,0 +1,1649 @@
+[
+  {
+    "seed": 11,
+    "family": "old-natural",
+    "input": "/workspace/scratch/8c63e04c27e8/phase96h7/evidence/START-old-natural-11.save",
+    "sha256": "7776fe7efee9ea97a274ed47684c60f99361b076b2e69c5df2c2432fcaa4127f",
+    "sameCoreAfterBothNativeLoads": true,
+    "identities": [
+      {
+        "id": 1,
+        "race": "klan",
+        "origin": "standart",
+        "physio": "lithoid",
+        "ethics": {
+          "mil": 2,
+          "aut": 1,
+          "mat": -1,
+          "ahl": 0
+        },
+        "civics": [
+          "panoptikon"
+        ],
+        "colonies": 1,
+        "res": {
+          "min": 400,
+          "ene": 300,
+          "yiy": 180,
+          "ala": 220,
+          "ara": 0,
+          "tuk": 150,
+          "etk": 70
+        },
+        "inc": {
+          "min": -5.210337199999998,
+          "ene": -14.119156999999998,
+          "yiy": 0,
+          "ala": 3.817571249999999,
+          "ara": 11.9073513,
+          "etk": 8.7425,
+          "tuk": 8.816826240000005
+        }
+      },
+      {
+        "id": 2,
+        "race": "suru",
+        "origin": "standart",
+        "physio": "hive",
+        "ethics": {
+          "mil": 1,
+          "aut": 2,
+          "mat": 0,
+          "ahl": 1
+        },
+        "civics": [
+          "kale_dok",
+          "lojistik_k"
+        ],
+        "colonies": 1,
+        "res": {
+          "min": 400,
+          "ene": 300,
+          "yiy": 180,
+          "ala": 220,
+          "ara": 0,
+          "tuk": 150,
+          "etk": 70
+        },
+        "inc": {
+          "min": 4.304201100000001,
+          "ene": -13.649156999999992,
+          "yiy": 21.585006250000006,
+          "ala": 4.510571249999999,
+          "ara": 12.667395,
+          "etk": 8.412500000000001,
+          "tuk": 11.903402130000007
+        }
+      },
+      {
+        "id": 3,
+        "race": "makine",
+        "origin": "golgeden",
+        "physio": "machine",
+        "ethics": {
+          "mil": 1,
+          "aut": 1,
+          "mat": 1,
+          "ahl": 1
+        },
+        "civics": [
+          "burokrasi",
+          "lojistik_k"
+        ],
+        "colonies": 1,
+        "res": {
+          "min": 400,
+          "ene": 300,
+          "yiy": 180,
+          "ala": 220,
+          "ara": 0,
+          "tuk": 150,
+          "etk": 70
+        },
+        "inc": {
+          "min": 5.238446300000001,
+          "ene": -26.728409899999992,
+          "yiy": 0,
+          "ala": 5.512136924999999,
+          "ara": 13.490775675,
+          "etk": 8.0125,
+          "tuk": 17.839189290000007
+        }
+      },
+      {
+        "id": 4,
+        "race": "lonca",
+        "origin": "standart",
+        "physio": "aquatic",
+        "ethics": {
+          "mil": -1,
+          "aut": -1,
+          "mat": 2,
+          "ahl": 0
+        },
+        "civics": [
+          "sinyal_avci",
+          "burokrasi"
+        ],
+        "colonies": 1,
+        "res": {
+          "min": 400,
+          "ene": 300,
+          "yiy": 180,
+          "ala": 220,
+          "ara": 0,
+          "tuk": 150,
+          "etk": 70
+        },
+        "inc": {
+          "min": 4.070639800000001,
+          "ene": 5.514289600000012,
+          "yiy": 15.074165100000004,
+          "ala": 4.4091740999999995,
+          "ara": 15.4542219,
+          "etk": 7.7625,
+          "tuk": 11.319455340000008
+        }
+      },
+      {
+        "id": 5,
+        "race": "teknokrasi",
+        "origin": "standart",
+        "physio": "humanoid",
+        "ethics": {
+          "mil": -2,
+          "aut": 0,
+          "mat": 1,
+          "ahl": 1
+        },
+        "civics": [
+          "kan_hukuku"
+        ],
+        "colonies": 1,
+        "res": {
+          "min": 400,
+          "ene": 300,
+          "yiy": 180,
+          "ala": 220,
+          "ara": 0,
+          "tuk": 150,
+          "etk": 70
+        },
+        "inc": {
+          "min": 3.336590000000001,
+          "ene": -11.761072699999996,
+          "yiy": 14.508005000000002,
+          "ala": 3.940122674999999,
+          "ara": 19.191103425,
+          "etk": 7.0925,
+          "tuk": 9.484194000000006
+        }
+      }
+    ]
+  },
+  {
+    "seed": 11,
+    "family": "balanced",
+    "input": "/workspace/scratch/8c63e04c27e8/phase96h7/evidence/START-balanced-11.save",
+    "sha256": "7776fe7efee9ea97a274ed47684c60f99361b076b2e69c5df2c2432fcaa4127f",
+    "sameCoreAfterBothNativeLoads": true,
+    "identities": [
+      {
+        "id": 1,
+        "race": "klan",
+        "origin": "standart",
+        "physio": "lithoid",
+        "ethics": {
+          "mil": 2,
+          "aut": 1,
+          "mat": -1,
+          "ahl": 0
+        },
+        "civics": [
+          "panoptikon"
+        ],
+        "colonies": 1,
+        "res": {
+          "min": 400,
+          "ene": 300,
+          "yiy": 180,
+          "ala": 220,
+          "ara": 0,
+          "tuk": 150,
+          "etk": 70
+        },
+        "inc": {
+          "min": -5.210337199999998,
+          "ene": -14.119156999999998,
+          "yiy": 0,
+          "ala": 3.817571249999999,
+          "ara": 11.9073513,
+          "etk": 8.7425,
+          "tuk": 8.816826240000005
+        }
+      },
+      {
+        "id": 2,
+        "race": "suru",
+        "origin": "standart",
+        "physio": "hive",
+        "ethics": {
+          "mil": 1,
+          "aut": 2,
+          "mat": 0,
+          "ahl": 1
+        },
+        "civics": [
+          "kale_dok",
+          "lojistik_k"
+        ],
+        "colonies": 1,
+        "res": {
+          "min": 400,
+          "ene": 300,
+          "yiy": 180,
+          "ala": 220,
+          "ara": 0,
+          "tuk": 150,
+          "etk": 70
+        },
+        "inc": {
+          "min": 4.304201100000001,
+          "ene": -13.649156999999992,
+          "yiy": 21.585006250000006,
+          "ala": 4.510571249999999,
+          "ara": 12.667395,
+          "etk": 8.412500000000001,
+          "tuk": 11.903402130000007
+        }
+      },
+      {
+        "id": 3,
+        "race": "makine",
+        "origin": "golgeden",
+        "physio": "machine",
+        "ethics": {
+          "mil": 1,
+          "aut": 1,
+          "mat": 1,
+          "ahl": 1
+        },
+        "civics": [
+          "burokrasi",
+          "lojistik_k"
+        ],
+        "colonies": 1,
+        "res": {
+          "min": 400,
+          "ene": 300,
+          "yiy": 180,
+          "ala": 220,
+          "ara": 0,
+          "tuk": 150,
+          "etk": 70
+        },
+        "inc": {
+          "min": 5.238446300000001,
+          "ene": -26.728409899999992,
+          "yiy": 0,
+          "ala": 5.512136924999999,
+          "ara": 13.490775675,
+          "etk": 8.0125,
+          "tuk": 17.839189290000007
+        }
+      },
+      {
+        "id": 4,
+        "race": "lonca",
+        "origin": "standart",
+        "physio": "aquatic",
+        "ethics": {
+          "mil": -1,
+          "aut": -1,
+          "mat": 2,
+          "ahl": 0
+        },
+        "civics": [
+          "sinyal_avci",
+          "burokrasi"
+        ],
+        "colonies": 1,
+        "res": {
+          "min": 400,
+          "ene": 300,
+          "yiy": 180,
+          "ala": 220,
+          "ara": 0,
+          "tuk": 150,
+          "etk": 70
+        },
+        "inc": {
+          "min": 4.070639800000001,
+          "ene": 5.514289600000012,
+          "yiy": 15.074165100000004,
+          "ala": 4.4091740999999995,
+          "ara": 15.4542219,
+          "etk": 7.7625,
+          "tuk": 11.319455340000008
+        }
+      },
+      {
+        "id": 5,
+        "race": "teknokrasi",
+        "origin": "standart",
+        "physio": "humanoid",
+        "ethics": {
+          "mil": -2,
+          "aut": 0,
+          "mat": 1,
+          "ahl": 1
+        },
+        "civics": [
+          "kan_hukuku"
+        ],
+        "colonies": 1,
+        "res": {
+          "min": 400,
+          "ene": 300,
+          "yiy": 180,
+          "ala": 220,
+          "ara": 0,
+          "tuk": 150,
+          "etk": 70
+        },
+        "inc": {
+          "min": 3.336590000000001,
+          "ene": -11.761072699999996,
+          "yiy": 14.508005000000002,
+          "ala": 3.940122674999999,
+          "ara": 19.191103425,
+          "etk": 7.0925,
+          "tuk": 9.484194000000006
+        }
+      }
+    ]
+  },
+  {
+    "seed": 11,
+    "family": "standard",
+    "input": "/workspace/scratch/8c63e04c27e8/phase96h7/evidence/START-standard-11.save",
+    "sha256": "243905a37763ec7bb8910c27baf81e80e28138899a102de8affb48d2c2abc0e5",
+    "sameCoreAfterBothNativeLoads": true,
+    "identities": [
+      {
+        "id": 1,
+        "race": "klan",
+        "origin": "standart",
+        "physio": "lithoid",
+        "ethics": {
+          "mil": 2,
+          "aut": 1,
+          "mat": -1,
+          "ahl": 0
+        },
+        "civics": [
+          "panoptikon"
+        ],
+        "colonies": 1,
+        "res": {
+          "min": 400,
+          "ene": 300,
+          "yiy": 180,
+          "ala": 220,
+          "ara": 0,
+          "tuk": 150,
+          "etk": 70
+        },
+        "inc": {
+          "min": -5.210337199999998,
+          "ene": -14.119156999999998,
+          "yiy": 0,
+          "ala": 3.817571249999999,
+          "ara": 11.9073513,
+          "etk": 8.7425,
+          "tuk": 8.816826240000005
+        }
+      },
+      {
+        "id": 2,
+        "race": "suru",
+        "origin": "standart",
+        "physio": "hive",
+        "ethics": {
+          "mil": 1,
+          "aut": 2,
+          "mat": 0,
+          "ahl": 1
+        },
+        "civics": [
+          "kale_dok",
+          "lojistik_k"
+        ],
+        "colonies": 1,
+        "res": {
+          "min": 400,
+          "ene": 300,
+          "yiy": 180,
+          "ala": 220,
+          "ara": 0,
+          "tuk": 150,
+          "etk": 70
+        },
+        "inc": {
+          "min": 4.304201100000001,
+          "ene": -13.649156999999992,
+          "yiy": 21.585006250000006,
+          "ala": 4.510571249999999,
+          "ara": 12.667395,
+          "etk": 8.412500000000001,
+          "tuk": 11.903402130000007
+        }
+      },
+      {
+        "id": 3,
+        "race": "makine",
+        "origin": "standart",
+        "physio": "machine",
+        "ethics": {
+          "mil": 1,
+          "aut": 1,
+          "mat": 1,
+          "ahl": 1
+        },
+        "civics": [
+          "burokrasi",
+          "lojistik_k"
+        ],
+        "colonies": 1,
+        "res": {
+          "min": 400,
+          "ene": 300,
+          "yiy": 180,
+          "ala": 220,
+          "ara": 0,
+          "tuk": 150,
+          "etk": 70
+        },
+        "inc": {
+          "min": 5.238446300000001,
+          "ene": -26.728409899999992,
+          "yiy": 0,
+          "ala": 5.512136924999999,
+          "ara": 13.490775675,
+          "etk": 8.0125,
+          "tuk": 17.839189290000007
+        }
+      },
+      {
+        "id": 4,
+        "race": "lonca",
+        "origin": "standart",
+        "physio": "aquatic",
+        "ethics": {
+          "mil": -1,
+          "aut": -1,
+          "mat": 2,
+          "ahl": 0
+        },
+        "civics": [
+          "sinyal_avci",
+          "burokrasi"
+        ],
+        "colonies": 1,
+        "res": {
+          "min": 400,
+          "ene": 300,
+          "yiy": 180,
+          "ala": 220,
+          "ara": 0,
+          "tuk": 150,
+          "etk": 70
+        },
+        "inc": {
+          "min": 4.070639800000001,
+          "ene": 5.514289600000012,
+          "yiy": 15.074165100000004,
+          "ala": 4.4091740999999995,
+          "ara": 15.4542219,
+          "etk": 7.7625,
+          "tuk": 11.319455340000008
+        }
+      },
+      {
+        "id": 5,
+        "race": "teknokrasi",
+        "origin": "standart",
+        "physio": "humanoid",
+        "ethics": {
+          "mil": -2,
+          "aut": 0,
+          "mat": 1,
+          "ahl": 1
+        },
+        "civics": [
+          "kan_hukuku"
+        ],
+        "colonies": 1,
+        "res": {
+          "min": 400,
+          "ene": 300,
+          "yiy": 180,
+          "ala": 220,
+          "ara": 0,
+          "tuk": 150,
+          "etk": 70
+        },
+        "inc": {
+          "min": 3.336590000000001,
+          "ene": -11.761072699999996,
+          "yiy": 14.508005000000002,
+          "ala": 3.940122674999999,
+          "ara": 19.191103425,
+          "etk": 7.0925,
+          "tuk": 9.484194000000006
+        }
+      }
+    ]
+  },
+  {
+    "seed": 42,
+    "family": "old-natural",
+    "input": "/workspace/scratch/8c63e04c27e8/phase96h7/evidence/START-old-natural-42.save",
+    "sha256": "a33ee8a8025d3ffc12238a0a248129f258a8416fd55b099a366677599c717dd3",
+    "sameCoreAfterBothNativeLoads": true,
+    "identities": [
+      {
+        "id": 1,
+        "race": "meclis",
+        "origin": "standart",
+        "physio": "humanoid",
+        "ethics": {
+          "mil": 0,
+          "aut": 1,
+          "mat": -2,
+          "ahl": 1
+        },
+        "civics": [
+          "enkaz_muh",
+          "kale_dok"
+        ],
+        "colonies": 1,
+        "res": {
+          "min": 400,
+          "ene": 300,
+          "yiy": 180,
+          "ala": 220,
+          "ara": 0,
+          "tuk": 150,
+          "etk": 70
+        },
+        "inc": {
+          "min": 3.7369808000000013,
+          "ene": -13.236072699999998,
+          "yiy": 14.508005000000002,
+          "ala": 3.5513141249999993,
+          "ara": 12.9207429,
+          "etk": 15.2925,
+          "tuk": 10.485245640000006
+        }
+      },
+      {
+        "id": 2,
+        "race": "klan",
+        "origin": "standart",
+        "physio": "humanoid",
+        "ethics": {
+          "mil": 3,
+          "aut": 0,
+          "mat": 0,
+          "ahl": -1
+        },
+        "civics": [
+          "lojistik_k",
+          "sinyal_avci"
+        ],
+        "colonies": 1,
+        "res": {
+          "min": 400,
+          "ene": 300,
+          "yiy": 180,
+          "ala": 220,
+          "ara": 0,
+          "tuk": 150,
+          "etk": 70
+        },
+        "inc": {
+          "min": 3.336590000000001,
+          "ene": -17.7534395,
+          "yiy": 14.508005000000002,
+          "ala": 4.164071249999999,
+          "ara": 11.527329450000002,
+          "etk": 7.9725,
+          "tuk": 9.484194000000006
+        }
+      },
+      {
+        "id": 3,
+        "race": "makine",
+        "origin": "standart",
+        "physio": "machine",
+        "ethics": {
+          "mil": 0,
+          "aut": 2,
+          "mat": 2,
+          "ahl": 0
+        },
+        "civics": [
+          "maden_lonca",
+          "gen_oncu"
+        ],
+        "colonies": 1,
+        "res": {
+          "min": 400,
+          "ene": 300,
+          "yiy": 180,
+          "ala": 220,
+          "ara": 0,
+          "tuk": 150,
+          "etk": 70
+        },
+        "inc": {
+          "min": 9.323695200000005,
+          "ene": -29.789932999999998,
+          "yiy": 0,
+          "ala": 5.9155617,
+          "ara": 20.291817599999998,
+          "etk": 8.0525,
+          "tuk": 19.64156016
+        }
+      },
+      {
+        "id": 4,
+        "race": "teknokrasi",
+        "origin": "altin_cag",
+        "physio": "lithoid",
+        "ethics": {
+          "mil": -2,
+          "aut": 0,
+          "mat": 1,
+          "ahl": 1
+        },
+        "civics": [
+          "kan_hukuku"
+        ],
+        "colonies": 3,
+        "res": {
+          "min": 600,
+          "ene": 450,
+          "yiy": 270,
+          "ala": 330,
+          "ara": 0,
+          "tuk": 225,
+          "etk": 105
+        },
+        "inc": {
+          "min": 16.803696230769223,
+          "ene": 1.182028411538468,
+          "yiy": 0,
+          "ala": 13.286636399999997,
+          "ara": 49.382966803846145,
+          "etk": 7.80786,
+          "tuk": 13.401742419230768
+        }
+      },
+      {
+        "id": 5,
+        "race": "kasif",
+        "origin": "kalinti",
+        "physio": "plantoid",
+        "ethics": {
+          "mil": -1,
+          "aut": 0,
+          "mat": 2,
+          "ahl": 1
+        },
+        "civics": [
+          "burokrasi",
+          "kale_dok"
+        ],
+        "colonies": 1,
+        "res": {
+          "min": 400,
+          "ene": 300,
+          "yiy": 180,
+          "ala": 220,
+          "ara": 900,
+          "tuk": 150,
+          "etk": 70
+        },
+        "inc": {
+          "min": 3.403321800000001,
+          "ene": -23.199156999999996,
+          "yiy": 17.78101825,
+          "ala": 4.062674099999999,
+          "ara": 27.203168299999998,
+          "etk": 7.7625,
+          "tuk": 9.651035940000007
+        }
+      }
+    ]
+  },
+  {
+    "seed": 42,
+    "family": "balanced",
+    "input": "/workspace/scratch/8c63e04c27e8/phase96h7/evidence/START-balanced-42.save",
+    "sha256": "8e6d5a8afb41a6cc8d33c373560ad87c11f7ad851e255ea85022e1747aecc7d5",
+    "sameCoreAfterBothNativeLoads": true,
+    "identities": [
+      {
+        "id": 1,
+        "race": "meclis",
+        "origin": "standart",
+        "physio": "humanoid",
+        "ethics": {
+          "mil": 0,
+          "aut": 1,
+          "mat": -2,
+          "ahl": 1
+        },
+        "civics": [
+          "enkaz_muh",
+          "kale_dok"
+        ],
+        "colonies": 1,
+        "res": {
+          "min": 400,
+          "ene": 300,
+          "yiy": 180,
+          "ala": 220,
+          "ara": 0,
+          "tuk": 150,
+          "etk": 70
+        },
+        "inc": {
+          "min": 3.7369808000000013,
+          "ene": -13.236072699999998,
+          "yiy": 14.508005000000002,
+          "ala": 3.5513141249999993,
+          "ara": 12.9207429,
+          "etk": 15.2925,
+          "tuk": 10.485245640000006
+        }
+      },
+      {
+        "id": 2,
+        "race": "klan",
+        "origin": "standart",
+        "physio": "humanoid",
+        "ethics": {
+          "mil": 3,
+          "aut": 0,
+          "mat": 0,
+          "ahl": -1
+        },
+        "civics": [
+          "lojistik_k",
+          "sinyal_avci"
+        ],
+        "colonies": 1,
+        "res": {
+          "min": 400,
+          "ene": 300,
+          "yiy": 180,
+          "ala": 220,
+          "ara": 0,
+          "tuk": 150,
+          "etk": 70
+        },
+        "inc": {
+          "min": 3.336590000000001,
+          "ene": -17.7534395,
+          "yiy": 14.508005000000002,
+          "ala": 4.164071249999999,
+          "ara": 11.527329450000002,
+          "etk": 7.9725,
+          "tuk": 9.484194000000006
+        }
+      },
+      {
+        "id": 3,
+        "race": "makine",
+        "origin": "standart",
+        "physio": "machine",
+        "ethics": {
+          "mil": 0,
+          "aut": 2,
+          "mat": 2,
+          "ahl": 0
+        },
+        "civics": [
+          "maden_lonca",
+          "gen_oncu"
+        ],
+        "colonies": 1,
+        "res": {
+          "min": 400,
+          "ene": 300,
+          "yiy": 180,
+          "ala": 220,
+          "ara": 0,
+          "tuk": 150,
+          "etk": 70
+        },
+        "inc": {
+          "min": 9.323695200000005,
+          "ene": -29.789932999999998,
+          "yiy": 0,
+          "ala": 5.9155617,
+          "ara": 20.291817599999998,
+          "etk": 8.0525,
+          "tuk": 19.64156016
+        }
+      },
+      {
+        "id": 4,
+        "race": "teknokrasi",
+        "origin": "golgeden",
+        "physio": "lithoid",
+        "ethics": {
+          "mil": -2,
+          "aut": 0,
+          "mat": 1,
+          "ahl": 1
+        },
+        "civics": [
+          "kan_hukuku"
+        ],
+        "colonies": 1,
+        "res": {
+          "min": 400,
+          "ene": 300,
+          "yiy": 180,
+          "ala": 220,
+          "ara": 0,
+          "tuk": 150,
+          "etk": 70
+        },
+        "inc": {
+          "min": -4.776580499999998,
+          "ene": -17.65628345,
+          "yiy": 0,
+          "ala": 3.940122674999999,
+          "ara": 19.191103425,
+          "etk": 7.0925,
+          "tuk": 9.901298850000003
+        }
+      },
+      {
+        "id": 5,
+        "race": "kasif",
+        "origin": "kalinti",
+        "physio": "plantoid",
+        "ethics": {
+          "mil": -1,
+          "aut": 0,
+          "mat": 2,
+          "ahl": 1
+        },
+        "civics": [
+          "burokrasi",
+          "kale_dok"
+        ],
+        "colonies": 1,
+        "res": {
+          "min": 400,
+          "ene": 300,
+          "yiy": 180,
+          "ala": 220,
+          "ara": 900,
+          "tuk": 150,
+          "etk": 70
+        },
+        "inc": {
+          "min": 3.403321800000001,
+          "ene": -23.199156999999996,
+          "yiy": 17.78101825,
+          "ala": 4.062674099999999,
+          "ara": 27.203168299999998,
+          "etk": 7.7625,
+          "tuk": 9.651035940000007
+        }
+      }
+    ]
+  },
+  {
+    "seed": 42,
+    "family": "standard",
+    "input": "/workspace/scratch/8c63e04c27e8/phase96h7/evidence/START-standard-42.save",
+    "sha256": "6a2c1e560031c241b7da6bcdb81e9f657ff416186c8357ed1da466944a61015f",
+    "sameCoreAfterBothNativeLoads": true,
+    "identities": [
+      {
+        "id": 1,
+        "race": "meclis",
+        "origin": "standart",
+        "physio": "humanoid",
+        "ethics": {
+          "mil": 0,
+          "aut": 1,
+          "mat": -2,
+          "ahl": 1
+        },
+        "civics": [
+          "enkaz_muh",
+          "kale_dok"
+        ],
+        "colonies": 1,
+        "res": {
+          "min": 400,
+          "ene": 300,
+          "yiy": 180,
+          "ala": 220,
+          "ara": 0,
+          "tuk": 150,
+          "etk": 70
+        },
+        "inc": {
+          "min": 3.7369808000000013,
+          "ene": -13.236072699999998,
+          "yiy": 14.508005000000002,
+          "ala": 3.5513141249999993,
+          "ara": 12.9207429,
+          "etk": 15.2925,
+          "tuk": 10.485245640000006
+        }
+      },
+      {
+        "id": 2,
+        "race": "klan",
+        "origin": "standart",
+        "physio": "humanoid",
+        "ethics": {
+          "mil": 3,
+          "aut": 0,
+          "mat": 0,
+          "ahl": -1
+        },
+        "civics": [
+          "lojistik_k",
+          "sinyal_avci"
+        ],
+        "colonies": 1,
+        "res": {
+          "min": 400,
+          "ene": 300,
+          "yiy": 180,
+          "ala": 220,
+          "ara": 0,
+          "tuk": 150,
+          "etk": 70
+        },
+        "inc": {
+          "min": 3.336590000000001,
+          "ene": -17.7534395,
+          "yiy": 14.508005000000002,
+          "ala": 4.164071249999999,
+          "ara": 11.527329450000002,
+          "etk": 7.9725,
+          "tuk": 9.484194000000006
+        }
+      },
+      {
+        "id": 3,
+        "race": "makine",
+        "origin": "standart",
+        "physio": "machine",
+        "ethics": {
+          "mil": 0,
+          "aut": 2,
+          "mat": 2,
+          "ahl": 0
+        },
+        "civics": [
+          "maden_lonca",
+          "gen_oncu"
+        ],
+        "colonies": 1,
+        "res": {
+          "min": 400,
+          "ene": 300,
+          "yiy": 180,
+          "ala": 220,
+          "ara": 0,
+          "tuk": 150,
+          "etk": 70
+        },
+        "inc": {
+          "min": 9.323695200000005,
+          "ene": -29.789932999999998,
+          "yiy": 0,
+          "ala": 5.9155617,
+          "ara": 20.291817599999998,
+          "etk": 8.0525,
+          "tuk": 19.64156016
+        }
+      },
+      {
+        "id": 4,
+        "race": "teknokrasi",
+        "origin": "standart",
+        "physio": "lithoid",
+        "ethics": {
+          "mil": -2,
+          "aut": 0,
+          "mat": 1,
+          "ahl": 1
+        },
+        "civics": [
+          "kan_hukuku"
+        ],
+        "colonies": 1,
+        "res": {
+          "min": 400,
+          "ene": 300,
+          "yiy": 180,
+          "ala": 220,
+          "ara": 0,
+          "tuk": 150,
+          "etk": 70
+        },
+        "inc": {
+          "min": -4.776580499999998,
+          "ene": -17.65628345,
+          "yiy": 0,
+          "ala": 3.940122674999999,
+          "ara": 19.191103425,
+          "etk": 7.0925,
+          "tuk": 9.901298850000003
+        }
+      },
+      {
+        "id": 5,
+        "race": "kasif",
+        "origin": "standart",
+        "physio": "plantoid",
+        "ethics": {
+          "mil": -1,
+          "aut": 0,
+          "mat": 2,
+          "ahl": 1
+        },
+        "civics": [
+          "burokrasi",
+          "kale_dok"
+        ],
+        "colonies": 1,
+        "res": {
+          "min": 400,
+          "ene": 300,
+          "yiy": 180,
+          "ala": 220,
+          "ara": 0,
+          "tuk": 150,
+          "etk": 70
+        },
+        "inc": {
+          "min": 3.403321800000001,
+          "ene": -23.199156999999996,
+          "yiy": 24.96420575,
+          "ala": 4.062674099999999,
+          "ara": 19.5077883,
+          "etk": 7.7625,
+          "tuk": 9.651035940000007
+        }
+      }
+    ]
+  },
+  {
+    "seed": 404,
+    "family": "old-natural",
+    "input": "/workspace/scratch/8c63e04c27e8/phase96h7/evidence/START-old-natural-404.save",
+    "sha256": "4d56540f3c32705c3a4f030b7c4f9b052d2cb0301a79fbc8350ee91ba221eb56",
+    "sameCoreAfterBothNativeLoads": true,
+    "identities": [
+      {
+        "id": 1,
+        "race": "meclis",
+        "origin": "standart",
+        "physio": "avian",
+        "ethics": {
+          "mil": 0,
+          "aut": 3,
+          "mat": 0,
+          "ahl": -1
+        },
+        "civics": [
+          "kale_dok",
+          "lojistik_k"
+        ],
+        "colonies": 1,
+        "res": {
+          "min": 400,
+          "ene": 300,
+          "yiy": 180,
+          "ala": 220,
+          "ara": 0,
+          "tuk": 150,
+          "etk": 70
+        },
+        "inc": {
+          "min": 3.536785400000001,
+          "ene": -17.517869999999995,
+          "yiy": 14.508005000000002,
+          "ala": 3.5513141249999993,
+          "ara": 14.947526100000001,
+          "etk": 11.1325,
+          "tuk": 9.984719820000006
+        }
+      },
+      {
+        "id": 2,
+        "race": "suru",
+        "origin": "kusatilmis",
+        "physio": "hive",
+        "ethics": {
+          "mil": 0,
+          "aut": 0,
+          "mat": -1,
+          "ahl": 3
+        },
+        "civics": [
+          "kale_dok",
+          "maden_lonca"
+        ],
+        "colonies": 1,
+        "res": {
+          "min": 400,
+          "ene": 300,
+          "yiy": 180,
+          "ala": 308,
+          "ara": 0,
+          "tuk": 150,
+          "etk": 70
+        },
+        "inc": {
+          "min": 4.8315317142857195,
+          "ene": -34.73297148571429,
+          "yiy": 22.018496,
+          "ala": -0.2777960714285719,
+          "ara": 12.305255271428575,
+          "etk": 8.5225,
+          "tuk": 9.245848371428568
+        }
+      },
+      {
+        "id": 3,
+        "race": "klan",
+        "origin": "standart",
+        "physio": "avian",
+        "ethics": {
+          "mil": 2,
+          "aut": 2,
+          "mat": 0,
+          "ahl": 0
+        },
+        "civics": [
+          "enkaz_muh",
+          "maden_lonca"
+        ],
+        "colonies": 1,
+        "res": {
+          "min": 400,
+          "ene": 300,
+          "yiy": 180,
+          "ala": 220,
+          "ara": 0,
+          "tuk": 150,
+          "etk": 70
+        },
+        "inc": {
+          "min": 4.137371600000002,
+          "ene": -14.892869999999995,
+          "yiy": 14.508005000000002,
+          "ala": 4.048571249999998,
+          "ara": 11.6540034,
+          "etk": 8.412500000000001,
+          "tuk": 11.48629728000001
+        }
+      },
+      {
+        "id": 4,
+        "race": "teknokrasi",
+        "origin": "golgeden",
+        "physio": "aquatic",
+        "ethics": {
+          "mil": -1,
+          "aut": 0,
+          "mat": 1,
+          "ahl": 2
+        },
+        "civics": [
+          "burokrasi",
+          "golge_kons"
+        ],
+        "colonies": 1,
+        "res": {
+          "min": 400,
+          "ene": 300,
+          "yiy": 180,
+          "ala": 220,
+          "ara": 0,
+          "tuk": 150,
+          "etk": 70
+        },
+        "inc": {
+          "min": 7.803908,
+          "ene": 12.329842191999994,
+          "yiy": 20.169606,
+          "ala": 5.190147209999999,
+          "ara": 22.269280410000004,
+          "etk": 6.9425,
+          "tuk": 12.821032800000001
+        }
+      },
+      {
+        "id": 5,
+        "race": "insan",
+        "origin": "standart",
+        "physio": "plantoid",
+        "ethics": {
+          "mil": -2,
+          "aut": 0,
+          "mat": 1,
+          "ahl": 1
+        },
+        "civics": [
+          "lojistik_k",
+          "maden_lonca"
+        ],
+        "colonies": 1,
+        "res": {
+          "min": 400,
+          "ene": 300,
+          "yiy": 180,
+          "ala": 220,
+          "ara": 0,
+          "tuk": 150,
+          "etk": 70
+        },
+        "inc": {
+          "min": 4.337567000000002,
+          "ene": -11.254605259999995,
+          "yiy": 24.96420575,
+          "ala": 4.286622674999999,
+          "ara": 14.757515175000002,
+          "etk": 9.092500000000001,
+          "tuk": 11.986823100000006
+        }
+      }
+    ]
+  },
+  {
+    "seed": 404,
+    "family": "balanced",
+    "input": "/workspace/scratch/8c63e04c27e8/phase96h7/evidence/START-balanced-404.save",
+    "sha256": "3e3057f1359cb7a0cc9119cf5088c4b2a3df46cd7e925caab5df53d772ba83d2",
+    "sameCoreAfterBothNativeLoads": true,
+    "identities": [
+      {
+        "id": 1,
+        "race": "meclis",
+        "origin": "standart",
+        "physio": "avian",
+        "ethics": {
+          "mil": 0,
+          "aut": 3,
+          "mat": 0,
+          "ahl": -1
+        },
+        "civics": [
+          "kale_dok",
+          "lojistik_k"
+        ],
+        "colonies": 1,
+        "res": {
+          "min": 400,
+          "ene": 300,
+          "yiy": 180,
+          "ala": 220,
+          "ara": 0,
+          "tuk": 150,
+          "etk": 70
+        },
+        "inc": {
+          "min": 3.536785400000001,
+          "ene": -17.517869999999995,
+          "yiy": 14.508005000000002,
+          "ala": 3.5513141249999993,
+          "ara": 14.947526100000001,
+          "etk": 11.1325,
+          "tuk": 9.984719820000006
+        }
+      },
+      {
+        "id": 2,
+        "race": "suru",
+        "origin": "kapali",
+        "physio": "hive",
+        "ethics": {
+          "mil": 0,
+          "aut": 0,
+          "mat": -1,
+          "ahl": 3
+        },
+        "civics": [
+          "kale_dok",
+          "maden_lonca"
+        ],
+        "colonies": 1,
+        "res": {
+          "min": 500,
+          "ene": 375,
+          "yiy": 225,
+          "ala": 275,
+          "ara": 0,
+          "tuk": 188,
+          "etk": 88
+        },
+        "inc": {
+          "min": 4.8315317142857195,
+          "ene": -19.982971485714287,
+          "yiy": 22.018496,
+          "ala": 2.9422039285714283,
+          "ara": 12.305255271428575,
+          "etk": 8.5225,
+          "tuk": 9.245848371428568
+        }
+      },
+      {
+        "id": 3,
+        "race": "klan",
+        "origin": "standart",
+        "physio": "avian",
+        "ethics": {
+          "mil": 2,
+          "aut": 2,
+          "mat": 0,
+          "ahl": 0
+        },
+        "civics": [
+          "enkaz_muh",
+          "maden_lonca"
+        ],
+        "colonies": 1,
+        "res": {
+          "min": 400,
+          "ene": 300,
+          "yiy": 180,
+          "ala": 220,
+          "ara": 0,
+          "tuk": 150,
+          "etk": 70
+        },
+        "inc": {
+          "min": 4.137371600000002,
+          "ene": -14.892869999999995,
+          "yiy": 14.508005000000002,
+          "ala": 4.048571249999998,
+          "ara": 11.6540034,
+          "etk": 8.412500000000001,
+          "tuk": 11.48629728000001
+        }
+      },
+      {
+        "id": 4,
+        "race": "teknokrasi",
+        "origin": "gocebe",
+        "physio": "aquatic",
+        "ethics": {
+          "mil": -1,
+          "aut": 0,
+          "mat": 1,
+          "ahl": 2
+        },
+        "civics": [
+          "burokrasi",
+          "golge_kons"
+        ],
+        "colonies": 1,
+        "res": {
+          "min": 460,
+          "ene": 300,
+          "yiy": 180,
+          "ala": 352,
+          "ara": 0,
+          "tuk": 150,
+          "etk": 70
+        },
+        "inc": {
+          "min": 10.973412000000001,
+          "ene": -7.7120220480000015,
+          "yiy": 10.999254,
+          "ala": -3.85,
+          "ara": 3.9531267,
+          "etk": 6.9425,
+          "tuk": -3.5999999999999996
+        }
+      },
+      {
+        "id": 5,
+        "race": "insan",
+        "origin": "standart",
+        "physio": "plantoid",
+        "ethics": {
+          "mil": -2,
+          "aut": 0,
+          "mat": 1,
+          "ahl": 1
+        },
+        "civics": [
+          "lojistik_k",
+          "maden_lonca"
+        ],
+        "colonies": 1,
+        "res": {
+          "min": 400,
+          "ene": 300,
+          "yiy": 180,
+          "ala": 220,
+          "ara": 0,
+          "tuk": 150,
+          "etk": 70
+        },
+        "inc": {
+          "min": 4.337567000000002,
+          "ene": -11.254605259999995,
+          "yiy": 24.96420575,
+          "ala": 4.286622674999999,
+          "ara": 14.757515175000002,
+          "etk": 9.092500000000001,
+          "tuk": 11.986823100000006
+        }
+      }
+    ]
+  },
+  {
+    "seed": 404,
+    "family": "standard",
+    "input": "/workspace/scratch/8c63e04c27e8/phase96h7/evidence/START-standard-404.save",
+    "sha256": "076f43d86696656146a6b6a3db2432742666d4677152da7f2a15f203f0579327",
+    "sameCoreAfterBothNativeLoads": true,
+    "identities": [
+      {
+        "id": 1,
+        "race": "meclis",
+        "origin": "standart",
+        "physio": "avian",
+        "ethics": {
+          "mil": 0,
+          "aut": 3,
+          "mat": 0,
+          "ahl": -1
+        },
+        "civics": [
+          "kale_dok",
+          "lojistik_k"
+        ],
+        "colonies": 1,
+        "res": {
+          "min": 400,
+          "ene": 300,
+          "yiy": 180,
+          "ala": 220,
+          "ara": 0,
+          "tuk": 150,
+          "etk": 70
+        },
+        "inc": {
+          "min": 3.536785400000001,
+          "ene": -17.517869999999995,
+          "yiy": 14.508005000000002,
+          "ala": 3.5513141249999993,
+          "ara": 14.947526100000001,
+          "etk": 11.1325,
+          "tuk": 9.984719820000006
+        }
+      },
+      {
+        "id": 2,
+        "race": "suru",
+        "origin": "standart",
+        "physio": "hive",
+        "ethics": {
+          "mil": 0,
+          "aut": 0,
+          "mat": -1,
+          "ahl": 3
+        },
+        "civics": [
+          "sinyal_avci",
+          "maden_lonca"
+        ],
+        "colonies": 1,
+        "res": {
+          "min": 400,
+          "ene": 300,
+          "yiy": 180,
+          "ala": 220,
+          "ara": 0,
+          "tuk": 150,
+          "etk": 70
+        },
+        "inc": {
+          "min": 4.337567000000002,
+          "ene": -7.044904099999997,
+          "yiy": 25.831207,
+          "ala": 3.817571249999999,
+          "ara": 13.554112650000002,
+          "etk": 8.5225,
+          "tuk": 11.986823100000006
+        }
+      },
+      {
+        "id": 3,
+        "race": "klan",
+        "origin": "standart",
+        "physio": "avian",
+        "ethics": {
+          "mil": 2,
+          "aut": 2,
+          "mat": 0,
+          "ahl": 0
+        },
+        "civics": [
+          "enkaz_muh",
+          "maden_lonca"
+        ],
+        "colonies": 1,
+        "res": {
+          "min": 400,
+          "ene": 300,
+          "yiy": 180,
+          "ala": 220,
+          "ara": 0,
+          "tuk": 150,
+          "etk": 70
+        },
+        "inc": {
+          "min": 4.137371600000002,
+          "ene": -14.892869999999995,
+          "yiy": 14.508005000000002,
+          "ala": 4.048571249999998,
+          "ara": 11.6540034,
+          "etk": 8.412500000000001,
+          "tuk": 11.48629728000001
+        }
+      },
+      {
+        "id": 4,
+        "race": "teknokrasi",
+        "origin": "standart",
+        "physio": "aquatic",
+        "ethics": {
+          "mil": -1,
+          "aut": 0,
+          "mat": 1,
+          "ahl": 2
+        },
+        "civics": [
+          "burokrasi",
+          "golge_kons"
+        ],
+        "colonies": 1,
+        "res": {
+          "min": 400,
+          "ene": 300,
+          "yiy": 180,
+          "ala": 220,
+          "ara": 0,
+          "tuk": 150,
+          "etk": 70
+        },
+        "inc": {
+          "min": 7.803908,
+          "ene": 12.329842191999994,
+          "yiy": 20.169606,
+          "ala": 5.190147209999999,
+          "ara": 22.269280410000004,
+          "etk": 6.9425,
+          "tuk": 12.821032800000001
+        }
+      },
+      {
+        "id": 5,
+        "race": "insan",
+        "origin": "standart",
+        "physio": "plantoid",
+        "ethics": {
+          "mil": -2,
+          "aut": 0,
+          "mat": 1,
+          "ahl": 1
+        },
+        "civics": [
+          "lojistik_k",
+          "maden_lonca"
+        ],
+        "colonies": 1,
+        "res": {
+          "min": 400,
+          "ene": 300,
+          "yiy": 180,
+          "ala": 220,
+          "ara": 0,
+          "tuk": 150,
+          "etk": 70
+        },
+        "inc": {
+          "min": 4.337567000000002,
+          "ene": -11.254605259999995,
+          "yiy": 24.96420575,
+          "ala": 4.286622674999999,
+          "ara": 14.757515175000002,
+          "etk": 9.092500000000001,
+          "tuk": 11.986823100000006
+        }
+      }
+    ]
+  }
+]

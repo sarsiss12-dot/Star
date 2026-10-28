@@ -1,0 +1,42 @@
+[
+  {
+    "version": "control",
+    "inputSHA256": "5fbc3de87434c7ef0fb168174b11f92ce2c22ce243198f83738fd1f9582791b2",
+    "exactFinalSaveMatches": true,
+    "nonCombatLosses": [],
+    "battleRounds": 212,
+    "battleLossesByActor": {
+      "6": 9,
+      "2": 9,
+      "5": 2,
+      "3": 13,
+      "4": 7
+    }
+  },
+  {
+    "version": "candidate",
+    "inputSHA256": "5fbc3de87434c7ef0fb168174b11f92ce2c22ce243198f83738fd1f9582791b2",
+    "exactFinalSaveMatches": true,
+    "nonCombatLosses": [
+      {
+        "day": 2310,
+        "kind": "aiDisbandTick",
+        "id": 1,
+        "n": 31,
+        "energy": 1102.0892943420524,
+        "net": -204.15549122323077,
+        "lost": 22
+      }
+    ],
+    "battleRounds": 226,
+    "battleLossesByActor": {
+      "6": 16,
+      "2": 10,
+      "5": 15,
+      "3": 14,
+      "4": 6,
+      "0": 1,
+      "1": 0
+    }
+  }
+]

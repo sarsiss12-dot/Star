@@ -1,0 +1,26 @@
+[
+  {
+    "tag": "campaign-11-control",
+    "exit": 0
+  },
+  {
+    "tag": "campaign-11-candidate",
+    "exit": 0
+  },
+  {
+    "tag": "campaign-42-control",
+    "exit": 0
+  },
+  {
+    "tag": "campaign-42-candidate",
+    "exit": 0
+  },
+  {
+    "tag": "campaign-404-control",
+    "exit": 0
+  },
+  {
+    "tag": "campaign-404-candidate",
+    "exit": 0
+  }
+]

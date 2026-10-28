@@ -1,0 +1,7 @@
+const fs=require('fs'),path=require('path'),assert=require('assert/strict'),{P,make,cfg,hash}=require('./host');const rows=[];
+for(const seed of [11,42,404]){
+ for(const [family,version,extra]of [['old-natural','historical',{}],['balanced','control',{}],['standard','control',{aiOrigins:false}]]){
+  const h=make(version,cfg(seed,extra)),raw=h.run('serialize()'),file=path.join(P,'evidence',`START-${family}-${seed}.save`);fs.writeFileSync(file,raw);const pair=['historical','control'].map(v=>make(v,cfg(seed,extra),raw));const select=x=>x.run(`JSON.stringify({rng:RND_STATE,geo:G.sys.map(s=>[s.id,s.x,s.y,s.lanes,s.owner,s.planets.map(p=>[p.owner,p.col?.b,p.col?.pop])]),emps:G.emps.map(e=>[e.id,e.name,e.race,e.origin,e.physio,e.ethics,e.civics,e.traits,e.mizac,e.res,e.inc,e.colonies])})`);const equal=select(pair[0])===select(pair[1]);assert(equal,'matched core '+family+seed);rows.push({seed,family,input:file,sha256:hash(raw),sameCoreAfterBothNativeLoads:equal,identities:JSON.parse(h.run('JSON.stringify(G.emps.filter(e=>e.ai&&!e.wild).map(e=>({id:e.id,race:e.race,origin:e.origin,mizac:e.mizac,physio:e.physio,ethics:e.ethics,civics:e.civics,colonies:e.colonies.length,res:e.res,inc:e.inc})))'))});
+ }
+}
+fs.writeFileSync(path.join(P,'evidence/INITIAL-CONTROLS.json'),JSON.stringify(rows,null,2));console.log('PASS',rows.length,'starts, old/new native loaders match core geography/identity/stocks/income/RNG');

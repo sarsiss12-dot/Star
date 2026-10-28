@@ -1,0 +1,67 @@
+{
+  "phase": "96H.7",
+  "kind": "research-only",
+  "start_head": "94d47ea2e4923db54a4eee89affd594844c7f60d",
+  "historical_source": "fb7454acb48620a0c79c31bfc1ce3b1639504b10",
+  "canonical_game": "96H.6.1",
+  "build": "96h61",
+  "pwa": "stars-v96h61",
+  "save_version": 8,
+  "runtime_changed": false,
+  "playable_release_created": false,
+  "accepted": [],
+  "rejected": {
+    "campaign_deadline": "Fixes perpetual timeout, but sameSave11 month60→84 power10323→4990, tech22→21, ships81→44; actor1 disband22 at day2310. One candidate only."
+  },
+  "game_zip": {
+    "file": "stars-faz96h61.zip",
+    "bytes": 764471,
+    "sha256": "68b64e6cb918a106733568761b0a1a30b16e4550c96d2e26ebde56822ebcb6a0"
+  },
+  "ai_sha256": "27ae25e44d66f5fdbfb04ea7db69aa75769a3165759b6feb0250b5b753e8c739",
+  "evidence": {
+    "file": "stars-faz96h7-kanit.zip",
+    "bytes": 17914238,
+    "sha256": "e21260d1f024d8c43a52629dd543c00faf6f53adff65a061b90bbf9fdb1645bf",
+    "crc": "PASS",
+    "members": 501,
+    "manifest": "PASS",
+    "manifestSHA256": "00aad4c2a263c3da4c63c33f7802d8d0ff720b690fd860b92ce6f4f74d210525",
+    "repository_archive_uploaded": false,
+    "delivery": "Separate verified evidence ZIP delivered with report; repository stores research scripts, decisions and compact evidence."
+  },
+  "fresh_tests": {
+    "targeted_suites": 10,
+    "pass": 203,
+    "fail": 0,
+    "chromium_pass": 17,
+    "chromium_fail": 0,
+    "matched_initial_core": 9,
+    "candidate_local_runs": 6,
+    "candidate_quality": "FAIL",
+    "candidate_120": "NOT RUN: local gate failed",
+    "candidate_240": "NOT RUN: local gate failed",
+    "physical_android": "NOT RUN"
+  },
+  "reuse": {
+    "F4_correct_commit": {
+      "critical": 11,
+      "deliveries": 574,
+      "techs": 337,
+      "colonies": 117,
+      "ships": 1445,
+      "power": 191712
+    },
+    "H61": {
+      "critical": 14,
+      "deliveries": 455,
+      "techs": 331,
+      "colonies": 129,
+      "ships": 1386,
+      "power": 187795
+    },
+    "F4_archive_is_not_requested_commit": true,
+    "fresh_native_reuse_check": "3seeds x24 monthly measured states/RNG match; full serialized hashes not equal"
+  },
+  "next": "Campaign deployment energy/upkeep feasibility vs existing disband threshold, same real seed11 Save. No broad economic sweep."
+}

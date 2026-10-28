@@ -1,0 +1,26 @@
+[
+  {
+    "seed": 11,
+    "months": 24,
+    "sameSaveAndRNG": false,
+    "firstDifference": [
+      1.0
+    ]
+  },
+  {
+    "seed": 42,
+    "months": 24,
+    "sameSaveAndRNG": false,
+    "firstDifference": [
+      1.0
+    ]
+  },
+  {
+    "seed": 404,
+    "months": 24,
+    "sameSaveAndRNG": false,
+    "firstDifference": [
+      1.0
+    ]
+  }
+]

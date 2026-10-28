@@ -1,0 +1,12 @@
+✓ real day2550 colony hull no longer consumes the mineral recovery runway
+✓ post-price gate protects real ene deficits and pending hull upkeep
+✓ post-price gate protects real min deficits and pending hull upkeep
+✓ post-price gate protects real ala deficits and pending hull upkeep
+✓ real critical consumer goods flow still blocks optional hulls through the existing gate
+✓ deep mineral treasury with a mild deficit may still fund real colonization
+✓ paid producer which repairs the deficit is not blocked by hull safety policy
+✓ queued consumption and recovery reservations count before another civilian purchase
+✓ observed essential military defence has bounded three-month rather than six-month runway
+✓ healthy military and science choices retain canonical costs and no grants
+✓ player manual build keeps its existing affordability rule
+GEÇEN: 11 KALAN: 0

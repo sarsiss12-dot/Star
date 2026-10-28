@@ -1,0 +1,30 @@
+diff --git a/ai.js b/ai.js
+index 057e926..686d97d 100644
+--- a/ai.js
++++ b/ai.js
+@@ -663,7 +663,10 @@ function aiMilitaryCampaign(e,armed,my,wars){
+    e.aiCampaign={...old,phase:'recover',reason:'Ekonomi veya savaş kaybı nedeniyle yeniden hazırlık',until:G.day+90};return;
+   }
+   const failed={...(old?.failedTargets||{})};
+-  if(old?.target!==undefined&&G.day-(old.lastProgress??old.since??G.day)>540){failed[old.target]=G.day+360;aiPlanEvent(e,'campaign-reassessed',{target:old.target,reason:'18 ay sefer ilerlemesi yok'});}
++  // A failed-target deadline is fixed until it expires; retry starts a new
++  // progress window instead of extending the same cooldown every AI turn.
++  const retry=old?.target!==undefined&&Object.hasOwn(failed,old.target)&&failed[old.target]<=G.day;
++  if(old?.target!==undefined&&!Object.hasOwn(failed,old.target)&&G.day-(old.lastProgress??old.since??G.day)>540){failed[old.target]=G.day+360;aiPlanEvent(e,'campaign-reassessed',{target:old.target,reason:'18 ay sefer ilerlemesi yok'});}
+   for(const id of Object.keys(failed))if(failed[id]<=G.day)delete failed[id];
+   while(Object.keys(failed).length>6)delete failed[Object.keys(failed)[0]];
+   let target=old&&old.until>G.day&&known.find(s=>s.id===old.target);
+@@ -682,9 +685,10 @@ function aiMilitaryCampaign(e,armed,my,wars){
+   let reachable=0;for(const f of force){const p=aiKnownRoute(e,f,f.mv?f.mv.to:f.sys,rally.id);if(p&&p.eta+(f.mv?(1-f.mv.t)*dist(G.sys[f.mv.from],G.sys[f.mv.to])/Math.max(.001,fleetSpeed(f)):0)<=180)reachable+=fleetPower(f);}
+   const gathered=ready.reduce((n,f)=>n+fleetPower(f),0);
+   const approach=Math.min(...force.map(f=>dist(G.sys[f.mv?f.mv.to:f.sys],target)));
+-  const advanced=!old||old.target!==target.id||reachable>(old.bestPower||0)*1.05||approach<(old.bestDistance??Infinity)-5;
+-  e.aiCampaign={failedTargets:failed,lastProgress:advanced?G.day:old.lastProgress??old.since,bestPower:Math.max(reachable,old?.target===target.id?old.bestPower||0:0),bestDistance:Math.min(approach,old?.target===target.id?old.bestDistance??Infinity:Infinity),target:target.id,rally:rally.id,phase:reachable<need?'build':gathered<need?'gather':'attack',
+-    since:old&&old.target===target.id?old.since:G.day,until:old&&old.target===target.id&&old.until>G.day?old.until:G.day+180,
++  const continuing=old?.target===target.id&&!retry;
++  const advanced=!continuing||reachable>(old.bestPower||0)*1.05||approach<(old.bestDistance??Infinity)-5;
++  e.aiCampaign={failedTargets:failed,lastProgress:advanced?G.day:old.lastProgress??old.since,bestPower:Math.max(reachable,continuing?old.bestPower||0:0),bestDistance:Math.min(approach,continuing?old.bestDistance??Infinity:Infinity),target:target.id,rally:rally.id,phase:reachable<need?'build':gathered<need?'gather':'attack',
++    since:continuing?old.since:G.day,until:continuing&&old.until>G.day?old.until:G.day+180,
+     need,power:reachable,reason:reachable<need?'Tahmini savunma için kuvvet yetersiz':gathered<need?'Ulaşabilir filolar toplanıyor':'Kuvvet birlikte taarruz ediyor'};
+   if(gathered>=need){for(const f of ready)aiMove(e,f,target.id);}
+   for(const f of force){

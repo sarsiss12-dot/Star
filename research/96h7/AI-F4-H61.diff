@@ -1,0 +1,364 @@
+diff --git a/ai.js b/ai.js
+index 7c64049..057e926 100644
+--- a/ai.js
++++ b/ai.js
+@@ -200,8 +200,38 @@ function aiBuildingDelta(e,sys,pl,key,queued=false,direction=1){
+  delta.ene=delta.ene*(1+(e.trade?.mul||0)+(e.mods.tradeMul||0))-(newUp-oldUp)*1.6;
+  return delta;
+ }
++/* 96G-D1: these payments are outside empireIncome, but remain real monthly
++   liabilities. Derive them once in the budget; never spend or waive them. */
++function aiFedBudget(e,income,f=findFed(e)){
++ const net={...income},dues={ene:0,ala:0};
++ if(f){
++  const rate=f.laws?.ortakDon?.09:f.laws?.sivilFon?.03:fedType(f).tithe;
++  for(const r of ['ene','ala']){dues[r]=Math.max(0,net[r]||0)*rate;net[r]=(net[r]||0)-dues[r];}
++  if(f.laws?.filo){dues.ala+=4;net.ala=(net.ala||0)-4;}
++ }
++ return {net,dues};
++}
++/* 96H.3 A1: recurring vassal liabilities use the same positive production
++   basis as vassalTick / edictTick. Current cash already includes past payments;
++   never subtract dues from stock, and never pre-credit uncertain lord receipts. */
++function aiVassalBudget(e,income){
++ const dues={ene:0,min:0,ala:0,yiy:0,tuk:0,ara:0};
++ const c=vassalContractOf(e);
++ if(!c||e.dead||e.wild||c.expires!==null&&G.day>=c.expires)return dues;
++ for(const r of VASSAL_RESOURCES){
++  const rate=c.terms.tax[r]*(e.edicts?.ekVergi?1.5:1);
++  dues[r]=Math.max(0,income[r]||0)*rate;
++ }
++ dues.ara=Math.max(0,income.ara||0)*c.terms.science;
++ if(!e.crisisSide&&e.edicts?.bilimPayi)dues.ara+=Math.max(0,income.ara||0)*.18;
++ return dues;
++}
+ function aiEconomyPlan(e){
+- const projected={...e.inc},committed=aiConstructionCommitment(e),queued={};
++ // A vote resolves after this month's production. Recompute a pure forecast
++ // until the next production month, without crediting income. This also
++ // keeps a mid-month Save8 reload from changing the budget's income basis.
++ const income=Math.floor(e.aiFedReview?.day/30)===Math.floor(G.day/30)?empireIncome({...e},false):e.inc;
++ const projected={...income},committed=aiConstructionCommitment(e),queued={};
+  for(const c of e.colonies){const sys=G.sys[c.s],pl=sys?.planets[c.p];if(!pl?.col||pl.owner!==e.id||!pl.col.q?.length)continue;
+   const d=aiBuildingDelta(e,sys,pl,null,true);for(const r in d)projected[r]=(projected[r]||0)+d[r];
+  }
+@@ -210,6 +240,10 @@ function aiEconomyPlan(e){
+   projected.ene=(projected.ene||0)-SHIPS[q.cls].up*upkeep*(hasCivic(e,'mobilize')&&peace?2:1);
+   projected.ala=(projected.ala||0)-(SHIPS[q.cls].upA||0)*upkeep;queued[q.cls]=(queued[q.cls]||0)+1;
+  }
++ // Tithe applies to production before freight outflows; paid queues above
++ // change future production/upkeep, and each liability is counted once.
++ const budget=aiFedBudget(e,projected),vassal=aiVassalBudget(e,income);Object.assign(projected,budget.net);
++ for(const r in vassal)projected[r]=(projected[r]||0)-vassal[r];
+  if(typeof Commerce!=='undefined'&&G.commerce)for(const c of G.commerce.contracts)if(!Commerce.closed(c))for(const l of c.legs)if(l.e===e.id)projected[l.r]=(projected[l.r]||0)-l.v*30/l.every;
+  const eatsFood=identityEatsFood(e);
+  const target={ene:12,min:16,yiy:eatsFood?4:0,ala:8,tuk:4,ara:0,etk:0},floor={ene:120,min:120,yiy:eatsFood?60:0,ala:100,tuk:60,ara:0,etk:0},rows={};
+@@ -220,7 +254,7 @@ function aiEconomyPlan(e){
+  }
+  const atWar=Object.keys(e.war||{}).some(id=>e.war[id]&&G.emps[id]&&!G.emps[id].dead&&!G.emps[id].wild);
+  const critical=['ene','min','yiy','tuk','ala'].some(r=>rows[r].net<0&&rows[r].months<6);
+- return {horizon:6,rows,committed,queued,policy:critical?'recover':atWar?'war':e.aiCampaign?.phase==='build'?'rebuild':'growth',critical};
++ return {horizon:6,rows,committed,queued,federation:budget.dues,vassal,policy:critical?'recover':atWar?'war':e.aiCampaign?.phase==='build'?'rebuild':'growth',critical};
+ }
+ /* A stock-zero input deficit cannot fund even the cheapest producer. Recover
+    through the player's existing paid demolition/refund path, never a grant. */
+@@ -285,13 +319,13 @@ function aiColonyForecast(e,sys,pl,{purchase=false,excludeFleet=null}={}){
+  }
+  if(!pl||!sys?.surv.includes(e.id)||pl.owner>=0)return {ok:false,reason:'unknown-or-occupied',rows:{}};
+  targets.set(sys.id+':'+pl.i,{s:sys,p:pl});
+- const shadow={...e,colonies:e.colonies.slice(),_trCache:null,_trAt:-1},old=empireIncome({...e},false),restore=[];
++ const shadow={...e,colonies:e.colonies.slice(),_trCache:null,_trAt:-1},old=aiFedBudget(e,empireIncome({...e},false)).net,restore=[];
+  let next;
+  try{
+   for(const {s,p}of targets.values()){
+    restore.push({s,index:p.i,planet:s.planets[p.i]});s.planets[p.i]={...p,col:initialColony(e,p),owner:e.id};shadow.colonies.push({s:s.id,p:p.i});
+   }
+-  recalcMods(shadow);next=empireIncome(shadow,false);
++  recalcMods(shadow);next=aiFedBudget(e,empireIncome(shadow,false)).net;
+  }finally{for(const {s,index,planet}of restore)s.planets[index]=planet;}
+  const strategic=e.aiStrategy?.plan?.target===sys.id&&aiObservedThreat(e,sys.id)>0;
+  const horizon=strategic?3:6+Math.ceil(buildDays(e,'santral')/30),cost=purchase?shipCost(e,'kol'):{},rows={};let reason=null;
+@@ -412,7 +446,7 @@ function aiStrategicFacts(e){
+  const measure={systems:own.length,colonies:e.colonies.length,techs:Object.keys(e.techs||{}).length,power,ports:buildings.liman||0,fort,
+   production:['ene','min','ala','ara','tuk'].reduce((n,k)=>n+Math.max(0,e.inc[k]||0),0),deliveries:G.commerce?.stats?.[e.id]?.deliveries||0,
+   pacts:Object.keys(e.pact||{}).filter(id=>e.pact?.[id]).length,allies:Object.keys(e.ally||{}).filter(id=>e.ally[id]).length,federated:!!findFed(e)};
+- const severe=['ene','min','tuk','ala'].filter(k=>(e.inc[k]||0)<0&&(e.res[k]||0)/-(e.inc[k]||0)<3);
++ const severe=['ene','min','tuk','ala'].filter(k=>findFed(e)?economy.rows[k].net<0&&economy.rows[k].stock/-economy.rows[k].net<3:(e.inc[k]||0)<0&&(e.res[k]||0)/-(e.inc[k]||0)<3);
+  // Only this empire's own recorded war outcome is consulted. A declaration
+  // or an unfinished front cannot manufacture a defeat or expose foreign data.
+  const lastDefeat=(G.warLedger?.fronts||[]).reduce((latest,front)=>{
+@@ -496,7 +530,8 @@ function aiUpdateLongPlan(e){
+  if(previous&&previous.stage!==stage)aiPlanEvent(e,'preparation-stage',{from:previous.stage,to:stage,reason:s.plan.reason});
+ }
+ function aiUpdateStrategy(e){
+- const needs=['ene','min','yiy','tuk','ala'].filter(k=>(e.inc[k]||0)<(k==='yiy'&&RACES[e.race].bio!=='organik'?-999:0));
++ const budget=findFed(e)?aiEconomyPlan(e):null;
++ const needs=['ene','min','yiy','tuk','ala'].filter(k=>(budget?budget.rows[k].net:e.inc[k]||0)<(k==='yiy'&&RACES[e.race].bio!=='organik'?-999:0));
+  const danger=G.sys.some(s=>s.owner===e.id&&aiObservedThreat(e,s.id,false)>0);
+  const war=Object.keys(e.war||{}).some(id=>e.war[id]&&G.emps[id]&&!G.emps[id].dead&&!G.emps[id].wild);
+  const goal=needs.length?'recover':danger?'defend':war?'war':aiProfile(e).sci>.75?'science':'economy';
+@@ -613,8 +648,18 @@ function aiMilitaryCampaign(e,armed,my,wars){
+   if(!known.length){e.aiCampaign={phase:'recon',reason:'Keşfedilmiş düşman konumu yok',until:G.day+30};return;}
+   const old=e.aiCampaign;
+   const long=e.aiStrategy?.plan;
+-  if(long?.stage==='stabilize'||e.aiStrategy?.objective?.kind==='recovery'&&old?.phase==='attack'){
+-   for(const f of force.filter(f=>!f.combat&&!f.mv&&!f.path.length)){const node=my.filter(s=>isSupplyNode(e,s)).sort((a,b)=>dist(G.sys[f.sys],a)-dist(G.sys[f.sys],b)||a.id-b.id)[0];if(node&&node.id!==f.sys)aiMove(e,f,node.id);}
++  // 96G-D2: recovery is an objective, not a one-turn attack-phase toggle.
++  // A defeated gather/supply campaign and already travelling reinforcements
++  // must obey it too. Local defence above and joint authority remain intact.
++  if(long?.stage==='stabilize'||e.aiStrategy?.objective?.kind==='recovery'){
++   for(const f of force){
++    const from=f.mv?f.mv.to:f.sys;
++    const nodes=my.filter(s=>isSupplyNode(e,s)&&!aiObservedThreat(e,s.id,false)).sort((a,b)=>dist(G.sys[from],a)-dist(G.sys[from],b)||a.id-b.id);
++    for(const node of nodes){
++     if(node.id===from&&!f.path.slice(f.mv?1:0).length)break;
++     if(aiMove(e,f,node.id))break;
++    }
++   }
+    e.aiCampaign={...old,phase:'recover',reason:'Ekonomi veya savaş kaybı nedeniyle yeniden hazırlık',until:G.day+90};return;
+   }
+   const failed={...(old?.failedTargets||{})};
+@@ -1563,6 +1608,11 @@ function aiTurn(e){
+   autoExploreTick(e.id);
+ 
+   /* --- 4. kolonizasyon --- */
++  // A settlement held at arrival keeps its real hull/order. Reassess once
++  // per AI month, including after Save v8 reload; no permanent idle order.
++  for(const f of G.fleets.slice()){
++    if(f.e===e.id&&!f.combat&&!f.mv&&!f.path.length&&f.sys>=0&&f.ord?.t==='kol'&&f.ord.s===f.sys&&fleetHasRole(f,'koloni'))arrive(f,G.sys[f.sys]);
++  }
+   const targets = colonizeTargets(e);
+   if (targets.length){
+     const taken = new Set(G.fleets.filter(f=>f.e===e.id && f.ord && f.ord.t==='kol')
+@@ -4437,28 +4487,21 @@ function aiSubmitTick(){
+     e._submitCd = (G.memAge || 0) + 60;
+     e.aiProtectionReason=aiProtection(e,hami);
+ 
+-    if (hami.id === 0){
+-      if (typeof UI !== 'undefined' && UI.notify)
+-        UI.notify({kind:'submit', data:{from: e.id, tehdit: tehdit.id},
+-          ico:'⛓', cls:'sci', pause:false, title:'Sığınma Talebi',
+-          sub: e.name + ' vasalın olmak istiyor', key:'sub:' + e.id});
+-      continue;
++    // Keep the established willingness to open an AI refuge negotiation.
++    // Passing this gate is not a signature: the actual clauses can still be
++    // accepted, rejected or countered by the existing recipient below.
++    if(hami.ai){
++      const P=personaOf(hami);let willingness=.55;
++      if(P.n==='Militarist')willingness+=.25;
++      if(P.n==='Fanatik Arındırıcılar')willingness-=.30;
++      if(P.n==='Pasifist')willingness-=.10;
++      if(hami.war[tehdit.id])willingness+=.25; // recipient's own war knowledge
++      if(rnd()>clamp(willingness,.1,.9))continue;
+     }
+-
+-    const P = (typeof personaOf === 'function') ? personaOf(hami) : null;
+-    let kabul = .55;
+-    if (P && P.n === 'Militarist') kabul += .25;
+-    if (P && P.n === 'Fanatik Arındırıcılar') kabul -= .30;
+-    if (P && P.n === 'Pasifist') kabul -= .10;
+-    if (aiKnownWar(e,hami,tehdit)) kabul += .25;
+-    if (rnd() > clamp(kabul, .1, .9)) continue;
+-
+-    if(!subjugate(hami,e,'bekci'))continue;
+-    e.res.etk-=VASSAL_SEEK_COST;
+-    e.rel[hami.id] = clamp((e.rel[hami.id] || 0) + 25, -100, 100);
+-    e._submitted = true;
+-    if (G.p && !G.p.dead && G.p.contact && G.p.contact[e.id])
+-      say('⛓ ' + e.name + ', ' + hami.name + ' himayesine sığındı', 'sci');
++    const terms=vassalDefaultTerms('bekci');
++    if(e.aiStrategy?.objective?.kind==='recovery')terms.war='defense';
++    const r=seekProtection(e,hami,'bekci',terms);
++    if(r.ok&&r.kabul)e._submitted=true;
+   }
+ }
+ 
+@@ -4550,7 +4593,11 @@ function aiFedLawTick(){
+       if (f.laws && f.laws[k]) continue;
+       if (fedLawConflicts(f,k).length) continue; // AI aynı bütçeyi durmadan tersine çevirmesin.
+       if (!FED_INNER_LAWS[k] || !canFedLaw(e, k).ok) continue;
++      if(!fedLawRetryAllowed(f,k,e))continue;
+       if ((e.res.etk || 0) < FED_INNER_LAWS[k].c) continue;
++      // The proposer must pass its own assessment before paying and committing
++      // its explicit YES. This is not a prediction or veto of other members.
++      if(aiFedVoteAssessment(e,f,{kind:'inner',law:k,proposer:e.id}).score<.5)continue;
+       const r = proposeFedLaw(e, k);
+       if (r && r.ok) e._fedLawCd = (G.memAge || 0) + 36;
+       break;
+@@ -4576,10 +4623,96 @@ function aiFedHelp(e,other,warTarget=false){
+  for(const target of targets)for(const f of forces){const r=aiKnownRoute(e,f,f.mv?f.mv.to:f.sys,target.id,e,warTarget?other.id:null);if(r&&r.eta<=180)return {ok:true,eta:r.eta};}
+  return null;
+ }
+-function aiFedAdmissionScore(e,other,type){
++/* 96G: candidate estimates use only the actor's observed/remembered map
++   and bilateral contracts. Member mandates are explicitly shared political
++   data, not a grant of hidden fleet, treasury or planetary intelligence. */
++function aiFedKnownMandate(e,o,f=null){
++ if(e===o)return fedSelfMandate(e);
++ if(f?.members.includes(e.id)&&f.members.includes(o.id)&&f.representation?.by[o.id])return f.representation.by[o.id];
++ const view=aiView(e),footprint=Object.values(view.systems).filter(r=>r.owner===o.id);
++ const visible=G.fleets.filter(fl=>fl.e===o.id&&isArmed(fl)&&view.ctx.visible.has(fl.mv?fl.mv.to:fl.sys)).reduce((n,fl)=>n+fleetPower(fl),0);
++ const memory=e.aiIntel?.powers?.[o.id],remembered=memory&&G.day-memory.day<=720?memory.value:0;
++ const bilateral=Commerce.state().contracts.filter(c=>!Commerce.closed(c)&&[c.a,c.b].includes(e.id)&&[c.a,c.b].includes(o.id)).length;
++ return {military:Math.sqrt(Math.max(visible,remembered,100+footprint.length*120)+25),economic:Math.sqrt(1+footprint.reduce((n,r)=>n+Math.max(1,r.colonies||0)*12,0)+bilateral*10)};
++}
++function aiFedRegimeScore(e,mode,ids,f=null){
++ const members=[...new Set(ids)].filter(id=>G.emps[id]&&!G.emps[id].dead),ratings=Object.fromEntries(members.map(id=>[id,aiFedKnownMandate(e,G.emps[id],f)]));
++ const weights=fedWeightsFrom(members,mode,ratings),total=Object.values(weights).reduce((a,b)=>a+b,0)||1;
++ const share=(weights[e.id]||1)/total,equal=1/Math.max(1,members.length),p=aiProfile({...e}),goal=e.aiStrategy?.objective?.kind;
++ const interest=clamp((share/equal-1)*.7,-.28,.28);
++ const personality=mode==='hegemonic'?(p.war-.5)*.14+(e.ethics?.aut||0)*.02:mode==='economic'?(p.eco-.5)*.14:mode==='mixed'?(p.dip-.4)*.08:-(e.ethics?.aut||0)*.015;
++ const strategy=mode==='hegemonic'&&['regional','contain'].includes(goal)?.05:mode==='economic'&&['economy','trade'].includes(goal)?.05:mode==='mixed'&&['science','federation'].includes(goal)?.05:0;
++ return {score:clamp(.55+interest+personality+strategy,.05,.95),share,why:FED_BALLOTS[mode].n+' · tahmini oy payı %'+(share*100).toFixed(1)+' · çıkar '+interest.toFixed(2)+' · kişilik '+personality.toFixed(2)+' · hedef '+strategy.toFixed(2)};
++}
++function aiFedBallot(e,ids){return ['equal','hegemonic','economic','mixed'].sort((a,b)=>aiFedRegimeScore(e,b,ids).score-aiFedRegimeScore(e,a,ids).score||a.localeCompare(b))[0];}
++/* Compare only this member's real production and payment rules. Synchronous
++   shadow calculation mirrors aiBuildingDelta; no stock, RNG or foreign
++   intelligence is changed. There is no forecast credit for unbuilt ships. */
++function aiFedLawForecast(e,f,v){
++ const laws=f.laws,shadow={...e,_trAt:-1,_trCache:null};
++ const before=aiFedBudget(e,empireIncome({...e},false),f).net;
++ let after;
++ try{
++  f.laws={...laws};
++  if(v.repeal)delete f.laws[v.law];
++  else{for(const k of fedLawConflicts(f,v.law))delete f.laws[k];f.laws[v.law]={since:G.memAge||0};}
++  recalcMods(shadow);after=aiFedBudget(e,empireIncome(shadow,false),f).net;
++ }finally{f.laws=laws;}
++ const delta=Object.fromEntries(Object.keys(before).map(r=>[r,after[r]-before[r]]));
++ const committed=aiConstructionCommitment(e),risks=[];let pressure=0,benefit=0;
++ for(const r of ['ene','min','yiy','tuk','ala','ara','etk']){
++  const d=delta[r]||0,scale=Math.max(r==='ala'?4:r==='ara'?10:4,Math.abs(before[r]||0));
++  if(d<0){pressure+=Math.min(.4,-d/scale*.4);if(['ene','min','yiy','tuk','ala'].includes(r)&&after[r]<0&&Math.max(0,(e.res[r]||0)-(committed[r]||0))<-after[r]*6)risks.push(r);}
++  else benefit+=Math.min(.15,d/scale*.12);
++ }
++ // This law locks alloy in a separate treasury: it has no automatic ship,
++ // maintenance or combat benefit. Do not value it as a military upgrade.
++ const lockedReserve=v.law==='filo'&&!v.repeal?.18:0;
++ return {before,after,delta,risks,pressure:Math.min(.65,pressure),benefit:Math.min(.2,benefit),lockedReserve};
++}
++function aiFedWarBurden(e){
++ const budget=aiEconomyPlan(e),goal=e.aiStrategy?.objective?.kind;
++ const deployment=fleetUpkeep(e)*.5; // conservative field/supply contingency
++ const ene=budget.rows.ene,ala=budget.rows.ala;
++ const short=ene.stock<Math.max(0,deployment-ene.net)*6||ala.stock<Math.max(0,-ala.net)*6;
++ return {budget,goal,deployment,short};
++}
++function aiFedVoteAssessment(e,f,v){
++ const factors=[],add=(n,value)=>{factors.push({n,v:value});return value;};let score;
++ if(v.kind==='motion'){
++  score=aiFedVoteWant(e,f,v);add('Gündem çıkarı',score-.5);
++  if(v.motion==='admit'){const q=aiFedAdmissionScore(e,G.emps[v.target],f.type,f);return {...q,score,why:q.why};}
++  if(v.motion==='charter'&&v.field==='ballot')factors.push({n:aiFedRegimeScore(e,v.value,f.members,f).why,v:0});
++ }else if(v.kind==='war'){
++  const target=G.emps[v.target];if(!target||!e.contact[target.id]||e.ally[target.id])return {score:0,factors:[],why:'Bilinen yasal dış hedef yok veya müttefik'};
++  score=aiFedVoteWant(e,f,{...v,motion:'newWar'});add('Bilinen tehdit, erişim ve savaş bütçesi',score-.5);
++ }else{
++  const p=aiProfile({...e}),proposer=G.emps[v.proposer],rel=proposer?(e.rel[proposer.id]||0):0,goal=e.aiStrategy?.objective?.kind;
++  const bias=FED_INNER_LAWS[v.law]?.ai||({savunma:'war',arastirma:'sci',ticaret:'eco',filo:'war'})[v.law]||'dip';
++  score=.45+add('Kişilik ve yasa yararı',(p[bias]||.5)*.3)+add('Önerene güven',proposer?clamp(trustOf(e,proposer.id)/500,-.15,.15)+clamp(rel/600,-.15,.15):0)+add('Birlik uyumu',(fedCohesion(f)-50)/500);
++  const costly=['ortakDon','ortakDoktrin','ikmalStandardi','filo','uyumProgrami'].includes(v.law);
++  score+=add('Gerçek ekonomik hazırlık',costly&&aiEconomyPlan(e).critical?-.3:0);
++  score+=add('Uzun vadeli hedef',bias==='sci'&&goal==='science'||bias==='eco'&&['economy','trade','recovery'].includes(goal)||bias==='war'&&['regional','security','contain'].includes(goal)||bias==='dip'&&['federation','influence'].includes(goal)?.08:0);
++  if(v.law==='savunma'&&!fedDuty(f,'defense')&&goal==='recovery')score+=add('Toparlanma planı: yeni otomatik savaş yükümlülüğü',-.35);
++  if(v.law==='savasOnay')score+=add('Saldırı özerkliği',.12-p.war*.18);
++  if(v.repeal)score=1-score;
++  if(v.law!=='savunma'&&v.law!=='savasOnay'&&v.law!=='serbest'&&v.law!=='ticaret'&&v.law!=='arastirma'){
++   const q=aiFedLawForecast(e,f,v);
++   score+=add('Gerçek aylık maliyet ve üretim farkı',q.benefit-q.pressure-q.lockedReserve);
++   if(q.risks.length)score=Math.min(score,.15);
++   factors.push({n:'Altı aylık bütçe '+(q.risks.length?'yetersiz: '+q.risks.join(','):'karşılanabilir')+' · Δenerji '+q.delta.ene.toFixed(2)+' · Δalaşım '+q.delta.ala.toFixed(2)+' · Δbilim '+q.delta.ara.toFixed(2),v:0});
++  }
++  if(v.law==='savunma'&&!fedDuty(f,'defense')&&!v.repeal){
++   const q=aiFedWarBurden(e);
++   if(q.short||q.budget.critical)score+=add('Yeni savunma görevi için altı aylık sefer bütçesi yetersiz',-.4);
++  }
++ }
++ const yes=score>=.5;return {score:clamp(score,0,1),factors,why:(yes?'Destek':'Ret')+' · '+factors.map(x=>x.n+(x.v?' '+(x.v>0?'+':'')+x.v.toFixed(2):'')).join(' · ')};
++}
++function aiFedAdmissionScore(e,other,type,f=null){
+  if(!other||other.dead||!e.contact[other.id]||e.war[other.id]||other.war[e.id]||diploBlocked(e,other))return {ok:false,score:-10,why:'Temas, savaş veya doktrin engeli'};
+  const factors=[],add=(n,v)=>{factors.push({n,v});return v;};
+- const profile=aiProfile(e),et=e.ethics||{},ot=other.ethics||{};
++ const profile=aiProfile({...e}),et=e.ethics||{},ot=other.ethics||{};
+  const distance=['mil','aut','mat','ahl'].reduce((sum,k)=>sum+Math.abs((et[k]||0)-(ot[k]||0)),0);
+  const common=G.emps.filter(o=>o!==e&&o!==other&&!o.dead&&!o.wild&&e.contact[o.id]&&e.war[o.id]&&other.war[o.id]).length;
+  const doctrine=researchDoctrine(e),same=doctrine===researchDoctrine(other);
+@@ -4591,10 +4724,18 @@ function aiFedAdmissionScore(e,other,type){
+   add('Ekonomik / bilimsel çıkar',type==='ticaret'?profile.eco*.12:type==='bilimsel'?profile.sci*.12:profile.war*.08)+
+   add('Antlaşmalar',(e.ally[other.id]?.12:0)+(e.pact?.[other.id]?.08:0)+((e.nap?.[other.id]||0)>G.day?.03:0))+
+   add('Bağımsızlık eğilimi',-clamp(.6-profile.dip,0,.6)*.15+(e.origin==='kapali'?-.18:e.origin==='golgeden'?-.08:e.origin==='gocebe'?-.05:0));
++ const known=aiFedKnownMandate(e,other),own=aiFedKnownMandate(e,e),goal=e.aiStrategy?.objective?.kind;
++ score+=add('Gözlenen askerî katkı',clamp((known.military/Math.max(1,own.military)-1)*.035,-.07,.09));
++ score+=add('Bilinen ekonomik bağlantı',clamp(known.economic/Math.max(1,own.economic)*.025,0,.07));
++ score+=add('Ticaret ve güvenilirlik',e.pact?.[other.id]?clamp(trustOf(e,other.id)/500,-.05,.06):0);
++ if(f&&f.members.includes(e.id)){
++  const mode=fedBallot(f),before=aiFedRegimeScore(e,mode,f.members,f).share,after=aiFedRegimeScore(e,mode,f.members.concat(other.id),f).share;
++  score+=add('Oy dengesi ve stratejik genişleme',clamp((after-before)*.15,-.06,0)+(['federation','influence','trade'].includes(goal)?.04:0));
++ }
+  const ok=score>=.5,sorted=factors.slice().sort((a,b)=>ok?b.v-a.v:a.v-b.v).slice(0,3);
+  return {ok,score,factors,why:(ok?'Olumlu':'Olumsuz')+': '+sorted.map(x=>x.n+' '+(x.v>=0?'+':'')+x.v.toFixed(2)).join(' · ')};
+ }
+-function aiFedWilling(e,founder,type,f=null){
++function aiFedWilling(e,founder,type,f=null,ballot=null,founders=null){
+  if(!e||!founder||e.dead||e.wild||e.crisisSide||isPurifier(e)||isVassal(e)||!e.contact[founder.id]||e.war[founder.id]||(e._fedLeaveUntil||0)>G.day)return {ok:false,why:'Siyasi koşullar uygun değil'};
+  const rel=e.rel[founder.id]||0;if(rel<15||trustOf(e,founder.id)<-35)return {ok:false,why:'Güven veya ilişki yetersiz'};
+  let eta=Infinity;const home=G.sys[e.home];
+@@ -4604,30 +4745,37 @@ function aiFedWilling(e,founder,type,f=null){
+  if(eta>(type==='askeri'?180:360))return {ok:false,why:'Bilinen yardım/iş birliği rotası yetersiz'};
+  // Protection uses 95A's observation/uncertainty estimate, never a private force total.
+  const partners=f?f.members.filter(id=>e.contact[id]).map(id=>G.emps[id]):[founder];
+- const protection=type==='askeri'?clamp(partners.reduce((sum,o)=>sum+aiKnownPower(e,o),0)/(totalPower(e)+100),0,2)*.08:0;
++ const protection=type==='askeri'?clamp(partners.reduce((sum,o)=>sum+aiKnownPower(e,o),0)/(totalPower({...e})+100),0,2)*.08:0;
+  const assessment=aiFedAdmissionScore(e,founder,type);
+  const peers=f?f.members.filter(id=>id!==founder.id&&e.contact[id]):[];
+  const peerBias=peers.length?peers.reduce((sum,id)=>sum+clamp((e.rel[id]||0)/500,-.15,.15),0)/peers.length:0;
+- const score=assessment.score+(aiFedAffinity(e,type)-.5)*.3+protection+peerBias-(f&&fedCohesion(f)<35?.4:0);
++ const regime=ballot||f&&fedBallot(f),regimeVote=regime?aiFedRegimeScore(e,regime,founders||[...(f?.members||[founder.id]),e.id],f):null;
++ const score=assessment.score+(regimeVote?(regimeVote.score-.55)*.7:0)+(aiFedAffinity(e,type)-.5)*.3+protection+peerBias-(f&&fedCohesion(f)<35?.4:0);
+  return {ok:score>=.5,score,eta,why:score>=.5?'İlişki, çıkar ve bilinen erişim uygun · '+assessment.why:assessment.why+' · birlik uyumu / bilinen koruma '+(score-assessment.score).toFixed(2)};
+ }
+ function aiFedVoteWant(e,f,v){
+  const proposer=G.emps[v.proposer],rel=proposer?(e.rel[proposer.id]||0):0;
+  let want=.4+rel/300+(fedCohesion(f)-50)/250;
+- if(v.motion==='admit')return aiFedAdmissionScore(e,G.emps[v.target],f.type).score;
++ if(v.motion==='admit')return aiFedAdmissionScore(e,G.emps[v.target],f.type,f).score;
+  if(v.motion==='expel')return clamp(.3-(e.rel[v.target]||0)/120-trustOf(e,v.target)/200,.02,.95);
+- if(v.motion==='elect')return clamp(.35+(e.rel[v.target]||0)/160+(v.target===e.id?.2:0),.02,.95);
++ if(v.motion==='elect'){const target=G.emps[v.target];return clamp(.35+(e.rel[v.target]||0)/160+trustOf(e,v.target)/500+(v.target===e.id?.2:0)+(target?clamp(aiFedKnownMandate(e,target,f).military/Math.max(1,aiFedKnownMandate(e,e,f).military)*.04,0,.12):0),.02,.95);}
+  if(v.motion==='reform')want+=aiFedAffinity(e,v.type)-aiFedAffinity(e,f.type);
+  if(v.motion==='charter'){
+-  if(v.field==='offense'&&v.value==='auto')want+=aiProfile(e).war*.5-.5;
+-  if(v.field==='defense'&&v.value==='auto')want+=aiProfile(e).war*.2+aiProfile(e).dip*.1;
+-  if(v.field==='admission'&&v.value==='contact')want+=aiProfile(e).dip*.25;
++  if(v.field==='ballot')want+=(aiFedRegimeScore(e,v.value,f.members,f).score-aiFedRegimeScore(e,fedBallot(f),f.members,f).score)*1.5;
++  if(v.field==='offense'&&v.value==='auto')want+=aiProfile({...e}).war*.5-.5;
++  if(v.field==='defense'&&v.value==='auto')want+=aiProfile({...e}).war*.2+aiProfile({...e}).dip*.1;
++  if(v.field==='admission'&&v.value==='contact')want+=aiProfile({...e}).dip*.25;
+  }
+  if(v.motion==='joinWar'||v.motion==='newWar'){
+   const target=G.emps[v.target];if(!target||!e.contact[target.id]||e.ally[target.id]||(e.nap?.[target.id]||0)>G.day)return .01;
+   if(!e.war[target.id]&&(!fedSupportGate(e,target).ok||!aiFedHelp(e,target,true)))return .01;
+-  const ratio=totalPower(e)/(aiKnownPower(e,target)+1);
+-  want=.3+aiProfile(e).war*.35-(e.rel[target.id]||0)/250+((e.war[target.id]||aiObservedThreat(e,e.home)>0)?.25:0)-clamp(.8-ratio,0,.8)*.35;
++  const ratio=totalPower({...e})/(aiKnownPower(e,target)+1);
++  want=.3+aiProfile({...e}).war*.35-(e.rel[target.id]||0)/250+((e.war[target.id]||aiObservedThreat(e,e.home)>0)?.25:0)-clamp(.8-ratio,0,.8)*.35;
++  if(!e.war[target.id]){
++   const burden=aiFedWarBurden(e),defending=aiObservedThreat(e,e.home)>0;
++   if(burden.budget.critical||burden.short)want-=defending?.15:.45;
++   if(burden.goal==='recovery'&&!defending)want-=.25;
++  }
+  }
+  return clamp(want,.02,.95);
+ }
+@@ -4643,8 +4791,8 @@ function aiFederationPolitics(){
+    if(invited)continue;
+    const partner=G.emps.filter(o=>o!==e&&e.contact[o.id]&&findFed(o)&&canRequestFederation(e,o).ok&&aiFedWilling(e,o,findFed(o).type,findFed(o)).ok).sort((a,b)=>(e.rel[b.id]||0)-(e.rel[a.id]||0)||a.id-b.id)[0];
+    if(partner){const result=requestFederation(e,partner);if(result.ok){e._fedPoliticsAfter=G.day+360;e.aiFedReason={day:G.day,kind:'apply',why:'Bilinen erişim, ilişki ve ortak çıkar'};}continue;}
+-   const type=aiFedType(e),gate=canFoundFed(e,type);
+-   if(gate.ok){const result=foundFederation(e,type);e.aiFedReason={day:G.day,kind:'found',type,why:'Kabul eden müttefikler, bilinen rota ve doktrin uyumu'};if(result.ok)e._fedPoliticsAfter=G.day+360;}
++   const type=aiFedType(e),ids=[e.id,...G.emps.filter(o=>o!==e&&e.contact[o.id]&&e.ally[o.id]&&!o.dead&&!o.wild&&!findFed(o)).map(o=>o.id)],ballot=aiFedBallot(e,ids),gate=canFoundFed(e,type,ballot);
++   if(gate.ok){const result=foundFederation(e,type,ballot);e.aiFedReason={day:G.day,kind:'found',type,ballot,why:'Kabul eden müttefikler, bilinen rota ve doktrin uyumu'};if(result.ok)e._fedPoliticsAfter=G.day+360;}
+    continue;
+   }
+   for(const d of Object.values(f.decisions||{}))if(d.state==='ready'&&(d.by===e.id||f.leader===e.id))executeFedDecision(e,f.id,d.id);

@@ -1,0 +1,19 @@
+✓ historical D1 recovery order reproduces outbound gather error
+✓ real2100 defeated gather remains in recovery over consecutive commands
+✓ recovery keeps actual federation war and existing peace prohibition
+✓ ongoing leg is retained while an old offensive tail is redirected legally
+✓ home defence still takes precedence over recovery
+✓ economy objective still permits the original funded offensive gathering
+✓ Save8 recovery continuation preserves resulting orders and RNG
+✓ rejected law writes its reasons into existing bounded history only
+✓ same conditions suppress a new automatic ballot without cost or automatic votes
+✓ suppressed basic ballot preserves established random slot schedule
+✓ unchanged repeated proposal query is pure
+✓ changed own strategic interest can reopen the rejected proposal
+✓ changed political membership or regime permits genuine reconsideration
+✓ political history and pending retry decision survive Save8
+✓ legacy records without retry data are allowed one normal reconsideration
+✓ malformed optional historical retry data does not crash or lock the agenda
+✓ human explicitly resubmitting a rejected law retains the paid transaction path
+✓ all four regimes retain frozen active ballot weights
+GEÇEN: 18 KALAN: 0

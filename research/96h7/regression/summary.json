@@ -1,0 +1,62 @@
+[
+  {
+    "suite": "faz95a_strategic_ai_test.js",
+    "exit": 0,
+    "pass": 51,
+    "fail": 0
+  },
+  {
+    "suite": "faz96f_strategy_test.js",
+    "exit": 0,
+    "pass": 29,
+    "fail": 0
+  },
+  {
+    "suite": "faz96f_memory_test.js",
+    "exit": 0,
+    "pass": 21,
+    "fail": 0
+  },
+  {
+    "suite": "faz96gd2_war_memory_test.js",
+    "exit": 0,
+    "pass": 18,
+    "fail": 0
+  },
+  {
+    "suite": "faz96h52_politics_test.js",
+    "exit": 0,
+    "pass": 27,
+    "fail": 0
+  },
+  {
+    "suite": "faz96h61_alliance_test.js",
+    "exit": 0,
+    "pass": 13,
+    "fail": 0
+  },
+  {
+    "suite": "faz96f4_trade_test.js",
+    "exit": 0,
+    "pass": 9,
+    "fail": 0
+  },
+  {
+    "suite": "faz96f4_colony_test.js",
+    "exit": 0,
+    "pass": 12,
+    "fail": 0
+  },
+  {
+    "suite": "faz96f3_purchase_test.js",
+    "exit": 0,
+    "pass": 11,
+    "fail": 0
+  },
+  {
+    "suite": "faz96g2_setup_test.js",
+    "exit": 0,
+    "pass": 12,
+    "fail": 0
+  }
+]

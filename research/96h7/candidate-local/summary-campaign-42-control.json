@@ -1,0 +1,61 @@
+{
+  "tag": "campaign-42-control",
+  "version": "control",
+  "config": {
+    "seed": 42
+  },
+  "start": 60,
+  "months": 24,
+  "alive": 5,
+  "criticalEmpireMonths": 0,
+  "criticalByActor": {},
+  "foodCritical": 0,
+  "foodByActor": {},
+  "techs": 29,
+  "colonies": 11,
+  "ships": 122,
+  "power": 16719,
+  "deliveries": 22,
+  "cargo": {
+    "received": {
+      "yiy": 95.4,
+      "ala": 79.5,
+      "min": 112.80000000000001
+    },
+    "loaded": {
+      "min": 123.00000000000001,
+      "yiy": 95.4,
+      "ala": 95.4
+    },
+    "lost": {}
+  },
+  "paid": {
+    "ala": 4204,
+    "min": 6568,
+    "ene": 0,
+    "yiy": 0,
+    "ara": 0,
+    "tuk": 0,
+    "etk": 0
+  },
+  "buildingCompletions": 30,
+  "demolitions": 6,
+  "actualColonizations": 1,
+  "warDeclarations": 0,
+  "negotiations": 1,
+  "acceptedNegotiations": 1,
+  "objectiveMonths": {
+    "security": 43,
+    "economy": 15,
+    "regional": 24,
+    "science": 32,
+    "influence": 6
+  },
+  "reviews": 40,
+  "objectiveSwitches": 3,
+  "milestones": 0,
+  "permanentPlansNotClaimed": true,
+  "elapsedMs": 3186.009546,
+  "finalSaveSHA256": "d3ec74a23522171c484a2f1193c2b3eea0135eed59f413e59a501253a79a8447",
+  "finalRNG": -334105866
+}

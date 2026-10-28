@@ -1,0 +1,10 @@
+✓ needed alloy not in old top three signs real mutually profitable freight
+✓ needed alloy at late day3330 signs real mutually profitable freight
+✓ safe fourth-or-later port pair signs real mutually profitable freight
+✓ observed pirate blockage remains a genuine route failure
+✓ stock value threshold is retained without general acceptance bonus
+✓ zero route budget reports no attempt and preserves the global limit
+✓ bounded partial search is not labelled exhaustive route failure
+✓ expanded terms, route memo and diagnostics leave Save v8 and RNG untouched
+✓ canonical full-search terms equal optimized valuation in real states and across stock thresholds
+GEÇEN: 9 KALAN: 0

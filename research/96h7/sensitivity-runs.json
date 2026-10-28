@@ -1,0 +1,98 @@
+[
+  {
+    "tag": "sensitivity-11-base",
+    "exit": 0
+  },
+  {
+    "tag": "sensitivity-11-holdLow",
+    "exit": 0
+  },
+  {
+    "tag": "sensitivity-11-holdHigh",
+    "exit": 0
+  },
+  {
+    "tag": "sensitivity-11-reviewLow",
+    "exit": 0
+  },
+  {
+    "tag": "sensitivity-11-reviewHigh",
+    "exit": 0
+  },
+  {
+    "tag": "sensitivity-11-forceLow",
+    "exit": 0
+  },
+  {
+    "tag": "sensitivity-11-forceHigh",
+    "exit": 0
+  },
+  {
+    "tag": "sensitivity-11-civilianFirst",
+    "exit": 0
+  },
+  {
+    "tag": "sensitivity-42-base",
+    "exit": 0
+  },
+  {
+    "tag": "sensitivity-42-holdLow",
+    "exit": 0
+  },
+  {
+    "tag": "sensitivity-42-holdHigh",
+    "exit": 0
+  },
+  {
+    "tag": "sensitivity-42-reviewLow",
+    "exit": 0
+  },
+  {
+    "tag": "sensitivity-42-reviewHigh",
+    "exit": 0
+  },
+  {
+    "tag": "sensitivity-42-forceLow",
+    "exit": 0
+  },
+  {
+    "tag": "sensitivity-42-forceHigh",
+    "exit": 0
+  },
+  {
+    "tag": "sensitivity-42-civilianFirst",
+    "exit": 0
+  },
+  {
+    "tag": "sensitivity-404-base",
+    "exit": 0
+  },
+  {
+    "tag": "sensitivity-404-holdLow",
+    "exit": 0
+  },
+  {
+    "tag": "sensitivity-404-holdHigh",
+    "exit": 0
+  },
+  {
+    "tag": "sensitivity-404-reviewLow",
+    "exit": 0
+  },
+  {
+    "tag": "sensitivity-404-reviewHigh",
+    "exit": 0
+  },
+  {
+    "tag": "sensitivity-404-forceLow",
+    "exit": 0
+  },
+  {
+    "tag": "sensitivity-404-forceHigh",
+    "exit": 0
+  },
+  {
+    "tag": "sensitivity-404-civilianFirst",
+    "exit": 0
+  }
+]

@@ -1,0 +1,813 @@
+[
+  {
+    "seed": 11,
+    "actors": [
+      {
+        "id": 1,
+        "objective": {
+          "kind": "regional",
+          "since": 1590,
+          "holdUntil": 2310,
+          "reconsiderAfter": 1590,
+          "nextReview": 1860,
+          "priority": 2.00032,
+          "progress": 0,
+          "lastProgress": 1590,
+          "baseline": {
+            "systems": 1,
+            "colonies": 2,
+            "techs": 2,
+            "power": 1394,
+            "ports": 2,
+            "fort": 0,
+            "production": 218.8454263133846,
+            "deliveries": 0,
+            "pacts": 1,
+            "allies": 0,
+            "federated": false
+          },
+          "reason": "Kimlik, bilinen çevre ve kendi ekonomik kapasitesi",
+          "lastPower": 2176,
+          "lastColonies": 2,
+          "lastCritical": false,
+          "lastDanger": false,
+          "lastMemoryMonth": 59,
+          "lastWarEnd": -1
+        },
+        "plan": {
+          "stage": "campaign",
+          "focus": "military",
+          "build": [
+            "dokum",
+            "santral",
+            "tersane"
+          ],
+          "diplomacy": "nap",
+          "partner": 2,
+          "enemy": 0,
+          "target": 6,
+          "forceNeed": 133.75,
+          "reason": "Bölgesel üstünlük için campaign"
+        },
+        "campaign": {
+          "failedTargets": {
+            "6": 2160
+          },
+          "lastProgress": 840,
+          "bestPower": 574,
+          "bestDistance": 596.2322082483522,
+          "target": 6,
+          "rally": 13,
+          "phase": "supply",
+          "since": 810,
+          "until": 1830,
+          "need": 400,
+          "power": 570,
+          "reason": "Bilinen hedefe ikmalli askerî rota yok veya başarısız hedef beklemede"
+        },
+        "access": {
+          "ok": true,
+          "target": 6,
+          "power": 2332,
+          "need": 144.89999999999998
+        },
+        "known": [
+          {
+            "id": 6,
+            "def": 107,
+            "capital": true
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "objective": {
+          "kind": "economy",
+          "since": 1290,
+          "holdUntil": 2010,
+          "reconsiderAfter": 1290,
+          "nextReview": 1830,
+          "priority": 1.0351784615384616,
+          "progress": 0.16312975281075723,
+          "lastProgress": 1560,
+          "baseline": {
+            "systems": 2,
+            "colonies": 2,
+            "techs": 1,
+            "power": 122,
+            "ports": 2,
+            "fort": 0,
+            "production": 284.09779974298937,
+            "deliveries": 0,
+            "pacts": 1,
+            "allies": 0,
+            "federated": false
+          },
+          "reason": "Kimlik, bilinen çevre ve kendi ekonomik kapasitesi",
+          "lastPower": 135,
+          "lastColonies": 2,
+          "lastCritical": false,
+          "lastDanger": true,
+          "lastMemoryMonth": 58,
+          "lastWarEnd": -1
+        },
+        "plan": {
+          "stage": "invest",
+          "focus": "economy",
+          "build": [
+            "santral",
+            "maden"
+          ],
+          "diplomacy": null,
+          "partner": null,
+          "enemy": null,
+          "target": null,
+          "forceNeed": 0,
+          "reason": "Ekonomik güç için invest"
+        },
+        "access": null,
+        "known": []
+      },
+      {
+        "id": 3,
+        "objective": {
+          "kind": "recovery",
+          "since": 1680,
+          "holdUntil": 2400,
+          "reconsiderAfter": 1860,
+          "nextReview": 1860,
+          "priority": -0.8054399999999999,
+          "progress": 1,
+          "lastProgress": 1770,
+          "baseline": {
+            "systems": 1,
+            "colonies": 2,
+            "techs": 1,
+            "power": 0,
+            "ports": 4,
+            "fort": 0,
+            "production": 303.80138172176356,
+            "deliveries": 0,
+            "pacts": 0,
+            "allies": 0,
+            "federated": false
+          },
+          "reason": "Büyük askerî kayıp",
+          "lastPower": 375,
+          "lastColonies": 2,
+          "lastCritical": false,
+          "lastDanger": true,
+          "lastMemoryMonth": 59,
+          "lastWarEnd": -1
+        },
+        "plan": {
+          "stage": "rearm",
+          "focus": "economy",
+          "build": [
+            "santral",
+            "dokum",
+            "fabrika"
+          ],
+          "diplomacy": "nap",
+          "partner": null,
+          "enemy": null,
+          "target": null,
+          "forceNeed": 0,
+          "reason": "Yenilgiden toparlanma için rearm"
+        },
+        "campaign": {
+          "phase": "defend",
+          "reason": "Merkez savunması taarruzdan öncelikli",
+          "until": 1860
+        },
+        "access": null,
+        "known": []
+      },
+      {
+        "id": 4,
+        "objective": {
+          "kind": "recovery",
+          "since": 1140,
+          "holdUntil": 1860,
+          "reconsiderAfter": 1320,
+          "nextReview": 1860,
+          "priority": -0.78784,
+          "progress": 1,
+          "lastProgress": 1320,
+          "baseline": {
+            "systems": 2,
+            "colonies": 2,
+            "techs": 1,
+            "power": 191,
+            "ports": 3,
+            "fort": 0,
+            "production": 127.194424472964,
+            "deliveries": 3,
+            "pacts": 1,
+            "allies": 1,
+            "federated": false
+          },
+          "reason": "Büyük askerî kayıp",
+          "lastPower": 585,
+          "lastColonies": 2,
+          "lastCritical": false,
+          "lastDanger": true,
+          "lastMemoryMonth": 59,
+          "lastWarEnd": -1,
+          "completedAt": 1320
+        },
+        "plan": {
+          "stage": "rearm",
+          "focus": "economy",
+          "build": [
+            "santral",
+            "dokum",
+            "fabrika"
+          ],
+          "diplomacy": "nap",
+          "partner": 5,
+          "enemy": null,
+          "target": null,
+          "forceNeed": 0,
+          "reason": "Yenilgiden toparlanma için rearm"
+        },
+        "access": null,
+        "known": []
+      },
+      {
+        "id": 5,
+        "objective": {
+          "kind": "science",
+          "since": 1710,
+          "holdUntil": 2430,
+          "reconsiderAfter": 1710,
+          "nextReview": 1890,
+          "priority": 1.4519174725553339,
+          "progress": 0.3333333333333333,
+          "lastProgress": 1800,
+          "baseline": {
+            "systems": 3,
+            "colonies": 2,
+            "techs": 4,
+            "power": 1455,
+            "ports": 2,
+            "fort": 0,
+            "production": 210.96437729738926,
+            "deliveries": 14,
+            "pacts": 1,
+            "allies": 1,
+            "federated": false
+          },
+          "reason": "Kimlik, bilinen çevre ve kendi ekonomik kapasitesi",
+          "lastPower": 1458,
+          "lastColonies": 2,
+          "lastCritical": false,
+          "lastDanger": false,
+          "lastMemoryMonth": 60,
+          "lastWarEnd": -1
+        },
+        "plan": {
+          "stage": "research",
+          "focus": "science",
+          "build": [
+            "lab"
+          ],
+          "diplomacy": null,
+          "partner": 4,
+          "enemy": null,
+          "target": null,
+          "forceNeed": 0,
+          "reason": "Teknolojik gelişim için research"
+        },
+        "campaign": {
+          "failedTargets": {},
+          "lastProgress": 1560,
+          "bestPower": 1455,
+          "bestDistance": 0,
+          "target": 41,
+          "rally": 31,
+          "phase": "attack",
+          "since": 900,
+          "until": 1920,
+          "need": 468.75,
+          "power": 1322,
+          "reason": "Kuvvet birlikte taarruz ediyor"
+        },
+        "access": null,
+        "known": []
+      }
+    ]
+  },
+  {
+    "seed": 42,
+    "actors": [
+      {
+        "id": 1,
+        "objective": {
+          "kind": "security",
+          "since": 1650,
+          "holdUntil": 2370,
+          "reconsiderAfter": 1650,
+          "nextReview": 1830,
+          "priority": 1.01,
+          "progress": 0,
+          "lastProgress": 1650,
+          "baseline": {
+            "systems": 4,
+            "colonies": 1,
+            "techs": 3,
+            "power": 2184,
+            "ports": 1,
+            "fort": 1,
+            "production": 120.17409202560006,
+            "deliveries": 0,
+            "pacts": 0,
+            "allies": 0,
+            "federated": false
+          },
+          "reason": "Kimlik, bilinen çevre ve kendi ekonomik kapasitesi",
+          "lastPower": 2128,
+          "lastColonies": 1,
+          "lastCritical": false,
+          "lastDanger": false,
+          "lastMemoryMonth": 58,
+          "lastWarEnd": -1
+        },
+        "plan": {
+          "stage": "fortify",
+          "focus": "military",
+          "build": [
+            "kale",
+            "tersane"
+          ],
+          "diplomacy": "nap",
+          "partner": 0,
+          "enemy": null,
+          "target": null,
+          "forceNeed": 0,
+          "reason": "Güvenli sınırlar için fortify"
+        },
+        "access": null,
+        "known": []
+      },
+      {
+        "id": 2,
+        "objective": {
+          "kind": "economy",
+          "since": 30,
+          "holdUntil": 750,
+          "reconsiderAfter": 30,
+          "nextReview": 1830,
+          "priority": 0.9814,
+          "progress": 1,
+          "lastProgress": 390,
+          "baseline": {
+            "systems": 1,
+            "colonies": 1,
+            "techs": 0,
+            "power": 0,
+            "ports": 0,
+            "fort": 0,
+            "production": 28.51218470000001,
+            "deliveries": 0,
+            "pacts": 0,
+            "allies": 0,
+            "federated": false
+          },
+          "reason": "Kimlik, bilinen çevre ve kendi ekonomik kapasitesi",
+          "lastPower": 4140,
+          "lastColonies": 3,
+          "lastCritical": false,
+          "lastDanger": false,
+          "lastMemoryMonth": 58,
+          "lastWarEnd": -1,
+          "completedAt": 390
+        },
+        "plan": {
+          "stage": "invest",
+          "focus": "economy",
+          "build": [
+            "santral",
+            "maden"
+          ],
+          "diplomacy": null,
+          "partner": 5,
+          "enemy": null,
+          "target": null,
+          "forceNeed": 0,
+          "reason": "Ekonomik güç için invest"
+        },
+        "access": null,
+        "known": []
+      },
+      {
+        "id": 3,
+        "objective": {
+          "kind": "regional",
+          "since": 1380,
+          "holdUntil": 2100,
+          "reconsiderAfter": 1380,
+          "nextReview": 1830,
+          "priority": 1.62272,
+          "progress": 0,
+          "lastProgress": 1380,
+          "baseline": {
+            "systems": 2,
+            "colonies": 2,
+            "techs": 3,
+            "power": 1925,
+            "ports": 1,
+            "fort": 0,
+            "production": 153.14139951384615,
+            "deliveries": 0,
+            "pacts": 0,
+            "allies": 0,
+            "federated": false
+          },
+          "reason": "Kimlik, bilinen çevre ve kendi ekonomik kapasitesi",
+          "lastPower": 1520,
+          "lastColonies": 2,
+          "lastCritical": false,
+          "lastDanger": false,
+          "lastMemoryMonth": 58,
+          "lastWarEnd": -1
+        },
+        "plan": {
+          "stage": "ready",
+          "focus": "military",
+          "build": [
+            "dokum",
+            "santral",
+            "tersane"
+          ],
+          "diplomacy": "nap",
+          "partner": null,
+          "enemy": 4,
+          "target": 27,
+          "forceNeed": 80,
+          "reason": "Bölgesel üstünlük için ready"
+        },
+        "access": {
+          "ok": false,
+          "why": "Ulaşabilir kuvvet ve bilgi yetersiz",
+          "need": 80
+        },
+        "known": [
+          {
+            "id": 27,
+            "def": 0,
+            "capital": true
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "objective": {
+          "kind": "science",
+          "since": 1080,
+          "holdUntil": 1800,
+          "reconsiderAfter": 1080,
+          "nextReview": 1890,
+          "priority": 1.4525975178676445,
+          "progress": 0.3333333333333333,
+          "lastProgress": 1170,
+          "baseline": {
+            "systems": 1,
+            "colonies": 2,
+            "techs": 2,
+            "power": 0,
+            "ports": 0,
+            "fort": 0,
+            "production": 27.4243773399183,
+            "deliveries": 0,
+            "pacts": 0,
+            "allies": 0,
+            "federated": false
+          },
+          "reason": "Kimlik, bilinen çevre ve kendi ekonomik kapasitesi",
+          "lastPower": 0,
+          "lastColonies": 2,
+          "lastCritical": false,
+          "lastDanger": true,
+          "lastMemoryMonth": 60,
+          "lastWarEnd": -1
+        },
+        "plan": {
+          "stage": "research",
+          "focus": "science",
+          "build": [
+            "lab"
+          ],
+          "diplomacy": null,
+          "partner": null,
+          "enemy": null,
+          "target": null,
+          "forceNeed": 0,
+          "reason": "Teknolojik gelişim için research"
+        },
+        "access": null,
+        "known": []
+      },
+      {
+        "id": 5,
+        "objective": {
+          "kind": "science",
+          "since": 30,
+          "holdUntil": 750,
+          "reconsiderAfter": 30,
+          "nextReview": 1830,
+          "priority": 1.5776799999999997,
+          "progress": 1,
+          "lastProgress": 570,
+          "baseline": {
+            "systems": 1,
+            "colonies": 1,
+            "techs": 0,
+            "power": 0,
+            "ports": 0,
+            "fort": 1,
+            "production": 44.320200140000004,
+            "deliveries": 0,
+            "pacts": 0,
+            "allies": 0,
+            "federated": false
+          },
+          "reason": "Kimlik, bilinen çevre ve kendi ekonomik kapasitesi",
+          "lastPower": 2838,
+          "lastColonies": 2,
+          "lastCritical": false,
+          "lastDanger": false,
+          "lastMemoryMonth": 58,
+          "lastWarEnd": -1,
+          "completedAt": 570
+        },
+        "plan": {
+          "stage": "research",
+          "focus": "science",
+          "build": [
+            "lab"
+          ],
+          "diplomacy": null,
+          "partner": 2,
+          "enemy": null,
+          "target": null,
+          "forceNeed": 0,
+          "reason": "Teknolojik gelişim için research"
+        },
+        "access": null,
+        "known": []
+      }
+    ]
+  },
+  {
+    "seed": 404,
+    "actors": [
+      {
+        "id": 1,
+        "objective": {
+          "kind": "influence",
+          "since": 930,
+          "holdUntil": 1650,
+          "reconsiderAfter": 930,
+          "nextReview": 1830,
+          "priority": 1.13453,
+          "progress": 0.5,
+          "lastProgress": 1290,
+          "baseline": {
+            "systems": 3,
+            "colonies": 2,
+            "techs": 0,
+            "power": 778,
+            "ports": 2,
+            "fort": 1,
+            "production": 232.27216363692307,
+            "deliveries": 0,
+            "pacts": 3,
+            "allies": 2,
+            "federated": false
+          },
+          "reason": "Kimlik, bilinen çevre ve kendi ekonomik kapasitesi",
+          "lastPower": 2665,
+          "lastColonies": 2,
+          "lastCritical": false,
+          "lastDanger": false,
+          "lastMemoryMonth": 58,
+          "lastWarEnd": -1
+        },
+        "plan": {
+          "stage": "diplomacy",
+          "focus": "diplomacy",
+          "build": [
+            "liman"
+          ],
+          "diplomacy": "pact",
+          "partner": 5,
+          "enemy": null,
+          "target": null,
+          "forceNeed": 0,
+          "reason": "Diğer sınırda diplomatik güvence aranıyor"
+        },
+        "access": null,
+        "known": []
+      },
+      {
+        "id": 2,
+        "objective": {
+          "kind": "security",
+          "since": 1650,
+          "holdUntil": 2370,
+          "reconsiderAfter": 1650,
+          "nextReview": 1830,
+          "priority": 1.80514,
+          "progress": 0,
+          "lastProgress": 1650,
+          "baseline": {
+            "systems": 4,
+            "colonies": 3,
+            "techs": 3,
+            "power": 2577,
+            "ports": 2,
+            "fort": 2,
+            "production": 219.40330679409027,
+            "deliveries": 0,
+            "pacts": 0,
+            "allies": 0,
+            "federated": false
+          },
+          "reason": "Kimlik, bilinen çevre ve kendi ekonomik kapasitesi",
+          "lastPower": 2700,
+          "lastColonies": 3,
+          "lastCritical": false,
+          "lastDanger": false,
+          "lastMemoryMonth": 58,
+          "lastWarEnd": -1
+        },
+        "plan": {
+          "stage": "defend",
+          "focus": "military",
+          "build": [
+            "kale",
+            "tersane"
+          ],
+          "diplomacy": "nap",
+          "partner": null,
+          "enemy": null,
+          "target": null,
+          "forceNeed": 0,
+          "reason": "Güvenli sınırlar için defend"
+        },
+        "access": null,
+        "known": []
+      },
+      {
+        "id": 3,
+        "objective": {
+          "kind": "economy",
+          "since": 780,
+          "holdUntil": 1500,
+          "reconsiderAfter": 780,
+          "nextReview": 1860,
+          "priority": 1.10792,
+          "progress": 1,
+          "lastProgress": 960,
+          "baseline": {
+            "systems": 2,
+            "colonies": 2,
+            "techs": 0,
+            "power": 1159,
+            "ports": 1,
+            "fort": 0,
+            "production": 159.7504179653846,
+            "deliveries": 0,
+            "pacts": 1,
+            "allies": 1,
+            "federated": false
+          },
+          "reason": "Kimlik, bilinen çevre ve kendi ekonomik kapasitesi",
+          "lastPower": 3787,
+          "lastColonies": 2,
+          "lastCritical": false,
+          "lastDanger": false,
+          "lastMemoryMonth": 59,
+          "lastWarEnd": -1,
+          "completedAt": 960
+        },
+        "plan": {
+          "stage": "invest",
+          "focus": "economy",
+          "build": [
+            "santral",
+            "maden"
+          ],
+          "diplomacy": null,
+          "partner": 4,
+          "enemy": null,
+          "target": null,
+          "forceNeed": 0,
+          "reason": "Ekonomik güç için invest"
+        },
+        "access": null,
+        "known": []
+      },
+      {
+        "id": 4,
+        "objective": {
+          "kind": "science",
+          "since": 30,
+          "holdUntil": 750,
+          "reconsiderAfter": 30,
+          "nextReview": 1830,
+          "priority": 1.622642640803074,
+          "progress": 1,
+          "lastProgress": 750,
+          "baseline": {
+            "systems": 1,
+            "colonies": 1,
+            "techs": 0,
+            "power": 496,
+            "ports": 0,
+            "fort": 0,
+            "production": 14.926538700000002,
+            "deliveries": 0,
+            "pacts": 0,
+            "allies": 0,
+            "federated": false
+          },
+          "reason": "Kimlik, bilinen çevre ve kendi ekonomik kapasitesi",
+          "lastPower": 2414,
+          "lastColonies": 3,
+          "lastCritical": false,
+          "lastDanger": false,
+          "lastMemoryMonth": 58,
+          "lastWarEnd": -1,
+          "completedAt": 750
+        },
+        "plan": {
+          "stage": "research",
+          "focus": "science",
+          "build": [
+            "lab"
+          ],
+          "diplomacy": null,
+          "partner": 5,
+          "enemy": null,
+          "target": null,
+          "forceNeed": 0,
+          "reason": "Teknolojik gelişim için research"
+        },
+        "access": null,
+        "known": []
+      },
+      {
+        "id": 5,
+        "objective": {
+          "kind": "trade",
+          "since": 1440,
+          "holdUntil": 2160,
+          "reconsiderAfter": 1440,
+          "nextReview": 1890,
+          "priority": 1.4074274685270058,
+          "progress": 1,
+          "lastProgress": 1710,
+          "baseline": {
+            "systems": 2,
+            "colonies": 2,
+            "techs": 3,
+            "power": 1999,
+            "ports": 4,
+            "fort": 0,
+            "production": 369.65770204772576,
+            "deliveries": 7,
+            "pacts": 3,
+            "allies": 3,
+            "federated": true
+          },
+          "reason": "Kimlik, bilinen çevre ve kendi ekonomik kapasitesi",
+          "lastPower": 2776,
+          "lastColonies": 2,
+          "lastCritical": false,
+          "lastDanger": false,
+          "lastMemoryMonth": 60,
+          "lastWarEnd": -1,
+          "completedAt": 1710
+        },
+        "plan": {
+          "stage": "trade",
+          "focus": "trade",
+          "build": [
+            "liman",
+            "santral"
+          ],
+          "diplomacy": "pact",
+          "partner": 4,
+          "enemy": null,
+          "target": null,
+          "forceNeed": 0,
+          "reason": "Ticaret ağı için trade"
+        },
+        "access": null,
+        "known": []
+      }
+    ]
+  }
+]

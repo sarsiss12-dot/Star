@@ -1,0 +1,62 @@
+[
+  {
+    "seed": 11,
+    "version": "control",
+    "n": 7,
+    "medianMs": 8.524978000000033,
+    "maxMs": 22.608253999999988,
+    "medianHeapDeltaBytes": 2259528,
+    "maxHeapDeltaBytes": 2746120,
+    "context": "Node VM, one real AI turn from same live-entry Save; excludes VM/setup; GC before each; not physical mobile benchmark"
+  },
+  {
+    "seed": 11,
+    "version": "candidate",
+    "n": 7,
+    "medianMs": 8.933164000000033,
+    "maxMs": 19.017794000000094,
+    "medianHeapDeltaBytes": 2319808,
+    "maxHeapDeltaBytes": 2526984,
+    "context": "Node VM, one real AI turn from same live-entry Save; excludes VM/setup; GC before each; not physical mobile benchmark"
+  },
+  {
+    "seed": 42,
+    "version": "control",
+    "n": 7,
+    "medianMs": 4.813392999999905,
+    "maxMs": 5.866562000000158,
+    "medianHeapDeltaBytes": 1202208,
+    "maxHeapDeltaBytes": 1306112,
+    "context": "Node VM, one real AI turn from same live-entry Save; excludes VM/setup; GC before each; not physical mobile benchmark"
+  },
+  {
+    "seed": 42,
+    "version": "candidate",
+    "n": 7,
+    "medianMs": 5.3727740000003905,
+    "maxMs": 6.9960909999999785,
+    "medianHeapDeltaBytes": 1201688,
+    "maxHeapDeltaBytes": 1306056,
+    "context": "Node VM, one real AI turn from same live-entry Save; excludes VM/setup; GC before each; not physical mobile benchmark"
+  },
+  {
+    "seed": 404,
+    "version": "control",
+    "n": 7,
+    "medianMs": 34.955285,
+    "maxMs": 61.1531700000005,
+    "medianHeapDeltaBytes": 13976440,
+    "maxHeapDeltaBytes": 14643656,
+    "context": "Node VM, one real AI turn from same live-entry Save; excludes VM/setup; GC before each; not physical mobile benchmark"
+  },
+  {
+    "seed": 404,
+    "version": "candidate",
+    "n": 7,
+    "medianMs": 26.888710000000174,
+    "maxMs": 34.07182399999965,
+    "medianHeapDeltaBytes": 14386200,
+    "maxHeapDeltaBytes": 14824136,
+    "context": "Node VM, one real AI turn from same live-entry Save; excludes VM/setup; GC before each; not physical mobile benchmark"
+  }
+]

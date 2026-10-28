@@ -1,0 +1,13 @@
+✓ kucuk unique capitals, exact count and bidirectional connected graph: three shapes / eight seeds / low-default-high density
+✓ orta unique capitals, exact count and bidirectional connected graph: three shapes / eight seeds / low-default-high density
+✓ buyuk unique capitals, exact count and bidirectional connected graph: three shapes / eight seeds / low-default-high density
+✓ devasa unique capitals, exact count and bidirectional connected graph: three shapes / eight seeds / low-default-high density
+✓ ulu unique capitals, exact count and bidirectional connected graph: three shapes / eight seeds / low-default-high density
+✓ invalid densities reject before mutating the existing world
+✓ legacy defaults and explicit equivalent defaults preserve old geography and homes
+✓ count does not change generated star coordinates or chosen player identity
+✓ origin independent RNG, forbidden assignments zero at every chance and disabled stays standard
+✓ empty compatible pool safely falls back to standard
+✓ player Golden Age allowed; old AI Golden Age retained through Save8; new pools cannot advance crisis
+✓ optional aiCount survives Save8 unchanged
+GEÇEN: 12 KALAN: 0
