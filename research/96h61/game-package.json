@@ -1,0 +1,51 @@
+{
+  "game": {
+    "file": "stars-faz96h61.zip",
+    "bytes": 764471,
+    "sha256": "68b64e6cb918a106733568761b0a1a30b16e4550c96d2e26ebde56822ebcb6a0",
+    "crc": "PASS",
+    "members": 20,
+    "manifest_runtime_files": 19
+  },
+  "runtime": {
+    "ai.js": "27ae25e44d66f5fdbfb04ea7db69aa75769a3165759b6feb0250b5b753e8c739",
+    "archive-ui.js": "f3b43957f97f2a32add1f40fc22f493eeca89bc5e1db05e5a5de92eef0e9fc03",
+    "audio.js": "6ddf6e388fa404394fee6220c2bfeeb3d1f9601c51a35ccdfe3181a8781942f7",
+    "combat.js": "b4e21fcdb6fdaaa93da07313131470de3e8a3c28b5650226a9c4a2713bde73a5",
+    "commerce-ui.js": "cc7fef5ab43176093251916aaafbdd873424da0630ec46fe6d3d5106a690b8d4",
+    "commerce.js": "978e4f6b01faed1babeade20070447cbcfaa4e2ea70793a78e50f20fbe66be01",
+    "construction.js": "d9b544b0328f26576ff90e02fe49c1b7f3798dfd844a8c39ee8dc6c0890debda",
+    "diplomacy.js": "ca589f8d2581e7189f6ace471db9bf2e9e1e504117eb2249b7ce9f04e206eaf4",
+    "economic-ledger.js": "67d07f3ee4777cd7c246c8b37dda7cf1577cf86c19a6edeba68945a5d3063501",
+    "economy-ui.js": "61f6e2dcef7f37143821edccf67552718a210ec555f7b8f9074c68191fd5cbcc",
+    "economy.js": "5d412d488760ae2b7193b13822b747788130b63ed782e62bfbd3223154b69d22",
+    "inbox.js": "5f53ac2ca9c3ca8d5f1a12a9e1ba2b2a247ab7e350df0ec9169a13cfe3285204",
+    "index.html": "984d2c51e33637a0b3312a072e3348b5e943f4c2c7156530affeb7d6ceb83259",
+    "main.js": "19ab0f2927a9c8fa924e066f5787dcb2b0d24a6e72768f906527538a1b569c6e",
+    "manifest.json": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
+    "map.js": "d8ca27ee07c484b7399f95d8031aa70fb7539bcf89d768c8442200b7cba76ae3",
+    "news.js": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
+    "sw.js": "71d27bdcb07477b55573a78d384fbc7afc199b2f5a6379542b57ee6d56d02999",
+    "ui.js": "4b2139007f7d4f100afddefeb2769523c03cbd862b0e27678e0d5868c18e3283"
+  },
+  "productionAIUnchanged": true,
+  "saveVersion": 8,
+  "browser": {
+    "pass": 17,
+    "fail": 0,
+    "physicalAndroid": "NOT RUN"
+  },
+  "regression": {
+    "suites": 135,
+    "pass": 6068,
+    "fail": 0
+  },
+  "releaseCampaign120": {
+    "purpose": "Historical replay validation only;old metrics are not fresh results",
+    "initialSaveEqual": true,
+    "initialRngEqual": true,
+    "monthlyEqual": true,
+    "firstDifference": null,
+    "comparedMonths": 120
+  }
+}

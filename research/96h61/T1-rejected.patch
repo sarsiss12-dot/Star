@@ -1,0 +1,33 @@
+diff --git a/ai.js b/ai.js
+index 057e926..1e35c21 100644
+--- a/ai.js
++++ b/ai.js
+@@ -177,8 +177,8 @@ function aiConstructionCommitment(e){
+   if(t.empire===e.id&&t.state!=='building')for(const [r,v]of Object.entries(structCost(e,t.key)))out[r]=(out[r]||0)+v;
+  return out;
+ }
+-function aiBuildingDelta(e,sys,pl,key,queued=false,direction=1){
+- const b={...pl.col.b};if(queued)for(const q of pl.col.q||[])if(BUILDINGS[q.key])b[q.key]=Math.max(0,(b[q.key]||0)+(q.dem?-1:1));
++function aiBuildingDelta(e,sys,pl,key,queued=false,direction=1,queueCount=Infinity){
++ const b={...pl.col.b};if(queued)for(const q of (pl.col.q||[]).slice(0,queueCount))if(BUILDINGS[q.key])b[q.key]=Math.max(0,(b[q.key]||0)+(q.dem?-1:1));
+  if(key)b[key]=Math.max(0,(b[key]||0)+direction);
+  // Ports change the whole trade multiplier; federation laws can depend on
+  // the sign of total income. Use the real calculator for these nonlinear
+@@ -233,7 +233,16 @@ function aiEconomyPlan(e){
+  const income=Math.floor(e.aiFedReview?.day/30)===Math.floor(G.day/30)?empireIncome({...e},false):e.inc;
+  const projected={...income},committed=aiConstructionCommitment(e),queued={};
+  for(const c of e.colonies){const sys=G.sys[c.s],pl=sys?.planets[c.p];if(!pl?.col||pl.owner!==e.id||!pl.col.q?.length)continue;
+-  const d=aiBuildingDelta(e,sys,pl,null,true);for(const r in d)projected[r]=(projected[r]||0)+d[r];
++  // Credit paid serial jobs only for production months inside this horizon.
++  let delay=0,previous={};
++  for(let i=0;i<pl.col.q.length;i++){
++   delay+=Math.max(.5,Math.ceil(pl.col.q[i].left/.5)*.5);
++   const first=Math.ceil((G.day+delay)/30)-Math.floor(G.day/30),weight=Math.max(0,Math.min(6,7-first))/6;
++   if(!weight)break;
++   const next=aiBuildingDelta(e,sys,pl,null,true,1,i+1);
++   for(const r in next)projected[r]=(projected[r]||0)+(next[r]-(previous[r]||0))*weight;
++   previous=next;
++  }
+  }
+  const upkeep=Math.max(.1,1+(e.mods.upMul||0)),peace=!Object.values(e.war||{}).some(Boolean);
+  for(const sys of G.sys)for(const q of sys.queue||[])if(q.e===e.id&&SHIPS[q.cls]){

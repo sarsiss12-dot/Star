@@ -1,0 +1,12 @@
+diff --git a/ai.js b/ai.js
+index 057e926..8fa152e 100644
+--- a/ai.js
++++ b/ai.js
+@@ -402,6 +402,7 @@ function aiDemolitionChoice(e,sys,pl,needs,plan=aiEconomyPlan(e)){
+    if(available<=1&&Object.values(delta).some(v=>v<-.0000001))continue;
+    const safe=['ene','min','yiy','tuk','ala'].every(r=>{
+     if(delta[r]>=-.0000001)return true;
++    if(plan.rows[r].stock<plan.rows[r].reserve)return false;
+     // A cash buffer cannot justify removing a producer while its resource
+     // already runs a deficit. Recovery demolition remains a separate path.
+     return plan.rows[r].net+delta[r]>=-.0000001;

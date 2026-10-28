@@ -1,0 +1,6 @@
+from pathlib import Path
+import hashlib,json
+R=Path(__file__).resolve().parents[2]/'Star';s=(R/'diplomacy.js').read_text();base=(R.parent/'phase96h61/control/diplomacy.js').read_text();a=s.index('/* Normal bilateral withdrawal.');b=s.index('function aiReviewAlliances(){',a);helper=s[a:b];a=base.index('        e.ally[o.id] = false;',base.index('function aiReviewAlliances'));b=base.index('        if (o.id === 0)',a);core=base[a:b]
+code="'use strict';\nconst assert=require('assert/strict'),{createHash}=require('crypto');\nexports.stripReviewedH61=source=>{\n const start=source.indexOf('/* Normal bilateral withdrawal.'),end=source.indexOf('function aiReviewAlliances(){',start),block=source.slice(start,end);\n assert.equal(createHash('sha256').update(block).digest('hex'),"+json.dumps(hashlib.sha256(helper.encode()).hexdigest())+",'exact reviewed H61 alliance helper');\n source=source.slice(0,start)+source.slice(end);\n const call='        applyAllianceEnd(e,o);\\n';assert.equal(source.split(call).length,2,'one reviewed AI delegation');\n return source.replace(call,"+json.dumps(core)+");\n};\n"
+(R/'tests/helpers/96h61-preservation.js').write_text(code)
+p=R/'tests/faz96h31_compact_construction_test.js';s=p.read_text().replace("stripReviewedH52(source)","stripReviewedH52(require('./helpers/96h61-preservation').stripReviewedH61(source))");p.write_text(s)

@@ -1,0 +1,82 @@
+{
+  "seed": 11,
+  "fromMonth": 60,
+  "toMonth": 218,
+  "canonicalSaveEqual": true,
+  "births": [
+    {
+      "day": 6540,
+      "actor": 7,
+      "res": {
+        "min": 400,
+        "ene": 300,
+        "yiy": 180,
+        "ala": 220,
+        "ara": 0,
+        "tuk": 150,
+        "etk": 70
+      },
+      "inc": {
+        "min": 0,
+        "ene": 0,
+        "yiy": 0,
+        "ala": 0,
+        "ara": 0,
+        "tuk": 0,
+        "etk": 0
+      },
+      "colonies": [
+        {
+          "s": 41,
+          "p": 3,
+          "col": {
+            "pop": 18,
+            "stab": 50,
+            "grow": 0.0920244003590256,
+            "b": {
+              "maden": 1,
+              "santral": 3,
+              "liman": 2,
+              "dokum": 4,
+              "arsiv": 1,
+              "lab": 1,
+              "fabrika": 1
+            },
+            "cap": 18,
+            "name": "Elpol IV",
+            "f": "sanayi",
+            "fcd": 0,
+            "shield": 0,
+            "garrison": 0,
+            "shockTot": 36,
+            "garrisonBase": 17,
+            "auto": true,
+            "hist": {
+              "peace": 65,
+              "own": 65,
+              "flips": 1,
+              "sieges": 14,
+              "crises": 0,
+              "siegeRun": 0
+            },
+            "fSet": true,
+            "q": [],
+            "sabCd": 110,
+            "sabotaged": 86,
+            "truceAge": 0,
+            "bombKip": "hassas",
+            "pt": "celik",
+            "siege": 6,
+            "lastWarResult": {
+              "day": 4590,
+              "from": 3,
+              "to": 5
+            },
+            "scorched": 142.54999999999964,
+            "secede": 0
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "sameInput": true,
+  "months": [
+    132,
+    133
+  ],
+  "rngEqual": true,
+  "differences": [
+    {
+      "path": ".emps.2.warCause.7",
+      "old": "Yeniden Birleşme"
+    },
+    {
+      "path": ".emps.2.warDefense.7",
+      "old": {
+        "since": 3960,
+        "defensive": false
+      }
+    },
+    {
+      "path": ".emps.7.warDefense.2",
+      "old": {
+        "since": 3960,
+        "defensive": true
+      }
+    }
+  ]
+}

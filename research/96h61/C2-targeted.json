@@ -1,0 +1,22 @@
+{
+  "results": [
+    {
+      "name": "below reserve prevents replacement without Save/RNG mutation",
+      "status": "PASS"
+    },
+    {
+      "name": "surplus producer remains replaceable",
+      "status": "PASS"
+    },
+    {
+      "name": "emergency demolition remains paid real refund path",
+      "status": "PASS"
+    },
+    {
+      "name": "C2 does not include A2 long reservation",
+      "status": "PASS"
+    }
+  ],
+  "pass": 4,
+  "fail": 0
+}

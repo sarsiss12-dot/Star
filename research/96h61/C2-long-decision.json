@@ -1,0 +1,791 @@
+{
+  "rows": [
+    {
+      "seed": 11,
+      "control": {
+        "techs": 64,
+        "colonies": 17,
+        "ships": 203,
+        "power": 37262,
+        "deliveries": 204,
+        "critical": 10,
+        "criticalByActor": {
+          "4": 1,
+          "7": 9
+        },
+        "alive": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          7
+        ],
+        "newSurvivors": [
+          7
+        ],
+        "demolitions": 113,
+        "rebuild12": 48,
+        "cycleNetMinerals": 6144,
+        "finishedCycleBuildingDays": 8307,
+        "cycles": [
+          {
+            "actor": 1,
+            "s": 13,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 158,
+            "orderDay": 270,
+            "netMinerals": 136,
+            "interruptionDays": 207
+          },
+          {
+            "actor": 2,
+            "s": 0,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 1307,
+            "orderDay": 1530,
+            "netMinerals": 136,
+            "interruptionDays": 341
+          },
+          {
+            "actor": 3,
+            "s": 41,
+            "p": 3,
+            "key": "dokum",
+            "demDay": 1993,
+            "orderDay": 2010,
+            "netMinerals": 136,
+            "interruptionDays": 124
+          },
+          {
+            "actor": 5,
+            "s": 5,
+            "p": 3,
+            "key": "lab",
+            "demDay": 2079,
+            "orderDay": 2130,
+            "netMinerals": 123,
+            "interruptionDays": 149
+          },
+          {
+            "actor": 3,
+            "s": 41,
+            "p": 2,
+            "key": "dokum",
+            "demDay": 2293,
+            "orderDay": 2310,
+            "netMinerals": 136,
+            "interruptionDays": 124
+          },
+          {
+            "actor": 3,
+            "s": 41,
+            "p": 3,
+            "key": "dokum",
+            "demDay": 2323,
+            "orderDay": 2340,
+            "netMinerals": 136,
+            "interruptionDays": 484
+          },
+          {
+            "actor": 2,
+            "s": 0,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 2447,
+            "orderDay": 2670,
+            "netMinerals": 136,
+            "interruptionDays": 341
+          },
+          {
+            "actor": 5,
+            "s": 5,
+            "p": 3,
+            "key": "dokum",
+            "demDay": 2712,
+            "orderDay": 2730,
+            "netMinerals": 136,
+            "interruptionDays": 124
+          },
+          {
+            "actor": 3,
+            "s": 41,
+            "p": 2,
+            "key": "dokum",
+            "demDay": 2863,
+            "orderDay": 2880,
+            "netMinerals": 136,
+            "interruptionDays": 124
+          },
+          {
+            "actor": 3,
+            "s": 41,
+            "p": 2,
+            "key": "dokum",
+            "demDay": 3043,
+            "orderDay": 3060,
+            "netMinerals": 136,
+            "interruptionDays": 124
+          },
+          {
+            "actor": 5,
+            "s": 5,
+            "p": 3,
+            "key": "dokum",
+            "demDay": 3042,
+            "orderDay": 3060,
+            "netMinerals": 136,
+            "interruptionDays": 124
+          },
+          {
+            "actor": 5,
+            "s": 5,
+            "p": 3,
+            "key": "dokum",
+            "demDay": 3222,
+            "orderDay": 3240,
+            "netMinerals": 136,
+            "interruptionDays": 124
+          },
+          {
+            "actor": 4,
+            "s": 37,
+            "p": 2,
+            "key": "lab",
+            "demDay": 3250,
+            "orderDay": 3330,
+            "netMinerals": 123,
+            "interruptionDays": 180
+          },
+          {
+            "actor": 1,
+            "s": 13,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 3368,
+            "orderDay": 3390,
+            "netMinerals": 136,
+            "interruptionDays": 117
+          },
+          {
+            "actor": 1,
+            "s": 13,
+            "p": 2,
+            "key": "lab",
+            "demDay": 3485,
+            "orderDay": 3510,
+            "netMinerals": 123,
+            "interruptionDays": 113
+          },
+          {
+            "actor": 3,
+            "s": 41,
+            "p": 2,
+            "key": "dokum",
+            "demDay": 3763,
+            "orderDay": 4080,
+            "netMinerals": 136,
+            "interruptionDays": 424
+          },
+          {
+            "actor": 3,
+            "s": 41,
+            "p": 3,
+            "key": "liman",
+            "demDay": 4088,
+            "orderDay": 4110,
+            "netMinerals": 117,
+            "interruptionDays": 118
+          },
+          {
+            "actor": 1,
+            "s": 13,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 3968,
+            "orderDay": 4140,
+            "netMinerals": 136,
+            "interruptionDays": 267
+          },
+          {
+            "actor": 3,
+            "s": 41,
+            "p": 2,
+            "key": "dokum",
+            "demDay": 4243,
+            "orderDay": 4260,
+            "netMinerals": 136,
+            "interruptionDays": 124
+          },
+          {
+            "actor": 1,
+            "s": 13,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 4568,
+            "orderDay": 4590,
+            "netMinerals": 136,
+            "interruptionDays": 117
+          },
+          {
+            "actor": 2,
+            "s": 0,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 4337,
+            "orderDay": 4590,
+            "netMinerals": 136,
+            "interruptionDays": 371
+          },
+          {
+            "actor": 1,
+            "s": 44,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 4388,
+            "orderDay": 4710,
+            "netMinerals": 136,
+            "interruptionDays": 417
+          },
+          {
+            "actor": 2,
+            "s": 0,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 4877,
+            "orderDay": 4980,
+            "netMinerals": 136,
+            "interruptionDays": 221
+          },
+          {
+            "actor": 3,
+            "s": 41,
+            "p": 2,
+            "key": "liman",
+            "demDay": 4808,
+            "orderDay": 5070,
+            "netMinerals": 117,
+            "interruptionDays": 358
+          },
+          {
+            "actor": 1,
+            "s": 13,
+            "p": 0,
+            "key": "maden",
+            "demDay": 5126,
+            "orderDay": 5130,
+            "netMinerals": 78,
+            "interruptionDays": 68
+          },
+          {
+            "actor": 5,
+            "s": 25,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 4953,
+            "orderDay": 5130,
+            "netMinerals": 136,
+            "interruptionDays": 260
+          },
+          {
+            "actor": 3,
+            "s": 41,
+            "p": 2,
+            "key": "liman",
+            "demDay": 5288,
+            "orderDay": 5310,
+            "netMinerals": 117,
+            "interruptionDays": 118
+          },
+          {
+            "actor": 2,
+            "s": 0,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 5177,
+            "orderDay": 5370,
+            "netMinerals": 136,
+            "interruptionDays": 322
+          },
+          {
+            "actor": 3,
+            "s": 41,
+            "p": 2,
+            "key": "liman",
+            "demDay": 5468,
+            "orderDay": 5490,
+            "netMinerals": 117,
+            "interruptionDays": 118
+          },
+          {
+            "actor": 1,
+            "s": 13,
+            "p": 0,
+            "key": "maden",
+            "demDay": 5276,
+            "orderDay": 5550,
+            "netMinerals": 78,
+            "interruptionDays": 338
+          },
+          {
+            "actor": 1,
+            "s": 11,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 5648,
+            "orderDay": 5670,
+            "netMinerals": 136,
+            "interruptionDays": 117
+          },
+          {
+            "actor": 4,
+            "s": 37,
+            "p": 2,
+            "key": "dokum",
+            "demDay": 5944,
+            "orderDay": 5970,
+            "netMinerals": 136,
+            "interruptionDays": 110
+          },
+          {
+            "actor": 3,
+            "s": 41,
+            "p": 4,
+            "key": "dokum",
+            "demDay": 6163,
+            "orderDay": 6180,
+            "netMinerals": 136,
+            "interruptionDays": 124
+          },
+          {
+            "actor": 3,
+            "s": 41,
+            "p": 2,
+            "key": "liman",
+            "demDay": 6278,
+            "orderDay": 6300,
+            "netMinerals": 117,
+            "interruptionDays": 118
+          },
+          {
+            "actor": 1,
+            "s": 13,
+            "p": 2,
+            "key": "dokum",
+            "demDay": 6638,
+            "orderDay": 6660,
+            "netMinerals": 136,
+            "interruptionDays": 117
+          },
+          {
+            "actor": 3,
+            "s": 41,
+            "p": 2,
+            "key": "liman",
+            "demDay": 6668,
+            "orderDay": 6690,
+            "netMinerals": 117,
+            "interruptionDays": 97
+          },
+          {
+            "actor": 1,
+            "s": 44,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 6488,
+            "orderDay": 6720,
+            "netMinerals": 136,
+            "interruptionDays": 327
+          },
+          {
+            "actor": 1,
+            "s": 13,
+            "p": 0,
+            "key": "lab",
+            "demDay": 6755,
+            "orderDay": 6810,
+            "netMinerals": 123,
+            "interruptionDays": 143
+          },
+          {
+            "actor": 3,
+            "s": 41,
+            "p": 2,
+            "key": "liman",
+            "demDay": 6840,
+            "orderDay": 6840,
+            "netMinerals": 117,
+            "interruptionDays": 75
+          },
+          {
+            "actor": 3,
+            "s": 41,
+            "p": 4,
+            "key": "liman",
+            "demDay": 6990,
+            "orderDay": 6990,
+            "netMinerals": 117,
+            "interruptionDays": 75
+          },
+          {
+            "actor": 2,
+            "s": 3,
+            "p": 2,
+            "key": "dokum",
+            "demDay": 7007,
+            "orderDay": 7020,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 3,
+            "s": 41,
+            "p": 2,
+            "key": "liman",
+            "demDay": 7050,
+            "orderDay": 7050,
+            "netMinerals": 117,
+            "interruptionDays": 75
+          },
+          {
+            "actor": 1,
+            "s": 13,
+            "p": 2,
+            "key": "dokum",
+            "demDay": 6818,
+            "orderDay": 7080,
+            "netMinerals": 136,
+            "interruptionDays": 357
+          },
+          {
+            "actor": 3,
+            "s": 41,
+            "p": 4,
+            "key": "dokum",
+            "demDay": 7114,
+            "orderDay": 7140,
+            "netMinerals": 136,
+            "interruptionDays": null
+          },
+          {
+            "actor": 3,
+            "s": 41,
+            "p": 2,
+            "key": "liman",
+            "demDay": 7170,
+            "orderDay": 7170,
+            "netMinerals": 117,
+            "interruptionDays": null
+          },
+          {
+            "actor": 1,
+            "s": 13,
+            "p": 0,
+            "key": "lab",
+            "demDay": 6965,
+            "orderDay": 7170,
+            "netMinerals": 123,
+            "interruptionDays": null
+          },
+          {
+            "actor": 1,
+            "s": 44,
+            "p": 0,
+            "key": "lab",
+            "demDay": 6875,
+            "orderDay": 7200,
+            "netMinerals": 123,
+            "interruptionDays": null
+          },
+          {
+            "actor": 4,
+            "s": 30,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 7174,
+            "orderDay": 7200,
+            "netMinerals": 136,
+            "interruptionDays": null
+          }
+        ]
+      },
+      "C2": {
+        "techs": 67,
+        "colonies": 16,
+        "ships": 189,
+        "power": 41400,
+        "deliveries": 155,
+        "critical": 9,
+        "criticalByActor": {
+          "3": 9
+        },
+        "alive": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "newSurvivors": [],
+        "demolitions": 115,
+        "rebuild12": 24,
+        "cycleNetMinerals": 2865,
+        "finishedCycleBuildingDays": 4343,
+        "cycles": [
+          {
+            "actor": 1,
+            "s": 13,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 158,
+            "orderDay": 270,
+            "netMinerals": 136,
+            "interruptionDays": 207
+          },
+          {
+            "actor": 2,
+            "s": 0,
+            "p": 0,
+            "key": "lab",
+            "demDay": 1304,
+            "orderDay": 1650,
+            "netMinerals": 123,
+            "interruptionDays": 527
+          },
+          {
+            "actor": 3,
+            "s": 41,
+            "p": 2,
+            "key": "dokum",
+            "demDay": 1633,
+            "orderDay": 1830,
+            "netMinerals": 136,
+            "interruptionDays": 304
+          },
+          {
+            "actor": 2,
+            "s": 0,
+            "p": 0,
+            "key": "fabrika",
+            "demDay": 2440,
+            "orderDay": 2460,
+            "netMinerals": 111,
+            "interruptionDays": 121
+          },
+          {
+            "actor": 1,
+            "s": 13,
+            "p": 2,
+            "key": "lab",
+            "demDay": 2495,
+            "orderDay": 2520,
+            "netMinerals": 123,
+            "interruptionDays": 113
+          },
+          {
+            "actor": 5,
+            "s": 5,
+            "p": 3,
+            "key": "lab",
+            "demDay": 2919,
+            "orderDay": 2940,
+            "netMinerals": 123,
+            "interruptionDays": 119
+          },
+          {
+            "actor": 1,
+            "s": 13,
+            "p": 2,
+            "key": "maden",
+            "demDay": 3896,
+            "orderDay": 3900,
+            "netMinerals": 78,
+            "interruptionDays": 68
+          },
+          {
+            "actor": 3,
+            "s": 41,
+            "p": 2,
+            "key": "lab",
+            "demDay": 3940,
+            "orderDay": 3960,
+            "netMinerals": 123,
+            "interruptionDays": 120
+          },
+          {
+            "actor": 5,
+            "s": 25,
+            "p": 0,
+            "key": "lab",
+            "demDay": 4419,
+            "orderDay": 4440,
+            "netMinerals": 123,
+            "interruptionDays": 119
+          },
+          {
+            "actor": 5,
+            "s": 25,
+            "p": 0,
+            "key": "liman",
+            "demDay": 4598,
+            "orderDay": 4650,
+            "netMinerals": 117,
+            "interruptionDays": 146
+          },
+          {
+            "actor": 1,
+            "s": 13,
+            "p": 2,
+            "key": "dokum",
+            "demDay": 4718,
+            "orderDay": 4890,
+            "netMinerals": 136,
+            "interruptionDays": 267
+          },
+          {
+            "actor": 4,
+            "s": 37,
+            "p": 2,
+            "key": "maden",
+            "demDay": 5039,
+            "orderDay": 5280,
+            "netMinerals": 78,
+            "interruptionDays": 314
+          },
+          {
+            "actor": 1,
+            "s": 13,
+            "p": 0,
+            "key": "lab",
+            "demDay": 5135,
+            "orderDay": 5400,
+            "netMinerals": 123,
+            "interruptionDays": 353
+          },
+          {
+            "actor": 1,
+            "s": 11,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 5438,
+            "orderDay": 5460,
+            "netMinerals": 136,
+            "interruptionDays": 117
+          },
+          {
+            "actor": 1,
+            "s": 13,
+            "p": 2,
+            "key": "lab",
+            "demDay": 5555,
+            "orderDay": 5580,
+            "netMinerals": 123,
+            "interruptionDays": 113
+          },
+          {
+            "actor": 5,
+            "s": 5,
+            "p": 3,
+            "key": "maden",
+            "demDay": 5849,
+            "orderDay": 5850,
+            "netMinerals": 78,
+            "interruptionDays": 73
+          },
+          {
+            "actor": 5,
+            "s": 25,
+            "p": 0,
+            "key": "liman",
+            "demDay": 6038,
+            "orderDay": 6360,
+            "netMinerals": 117,
+            "interruptionDays": 416
+          },
+          {
+            "actor": 1,
+            "s": 13,
+            "p": 2,
+            "key": "lab",
+            "demDay": 6395,
+            "orderDay": 6480,
+            "netMinerals": 123,
+            "interruptionDays": 173
+          },
+          {
+            "actor": 1,
+            "s": 11,
+            "p": 0,
+            "key": "maden",
+            "demDay": 6266,
+            "orderDay": 6510,
+            "netMinerals": 78,
+            "interruptionDays": 308
+          },
+          {
+            "actor": 1,
+            "s": 44,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 6548,
+            "orderDay": 6570,
+            "netMinerals": 136,
+            "interruptionDays": 117
+          },
+          {
+            "actor": 3,
+            "s": 41,
+            "p": 2,
+            "key": "dokum",
+            "demDay": 6823,
+            "orderDay": 6840,
+            "netMinerals": 136,
+            "interruptionDays": 124
+          },
+          {
+            "actor": 3,
+            "s": 41,
+            "p": 3,
+            "key": "dokum",
+            "demDay": 6823,
+            "orderDay": 6840,
+            "netMinerals": 136,
+            "interruptionDays": 124
+          },
+          {
+            "actor": 5,
+            "s": 5,
+            "p": 3,
+            "key": "dokum",
+            "demDay": 7152,
+            "orderDay": 7170,
+            "netMinerals": 136,
+            "interruptionDays": null
+          },
+          {
+            "actor": 1,
+            "s": 13,
+            "p": 2,
+            "key": "dokum",
+            "demDay": 6878,
+            "orderDay": 7200,
+            "netMinerals": 136,
+            "interruptionDays": null
+          }
+        ]
+      },
+      "rejectionReasons": [
+        "trade below 85% of current canonical seed control"
+      ]
+    }
+  ],
+  "complete": false,
+  "status": "FAIL",
+  "notRun": [
+    23,
+    42,
+    404
+  ]
+}

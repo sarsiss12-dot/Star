@@ -1,0 +1,26 @@
+{
+  "phase": "96H.6.1",
+  "canonical": "28eff6a425825af9142a0ca584370f3d2e5b7a14",
+  "matrix": [
+    11,
+    7,
+    23,
+    42,
+    99,
+    123,
+    404,
+    2026
+  ],
+  "long": [
+    11,
+    23,
+    42,
+    404
+  ],
+  "trade_floor": 0.85,
+  "critical_total_must_not_increase": true,
+  "stop_long_at_first_serious_violation": true,
+  "C2_alone": true,
+  "alliance_excluded_from_economy_worktrees": true,
+  "new_main_economic_candidates_max": 1
+}

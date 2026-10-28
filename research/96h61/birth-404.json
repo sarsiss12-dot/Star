@@ -1,0 +1,92 @@
+{
+  "seed": 404,
+  "fromMonth": 60,
+  "toMonth": 107,
+  "canonicalSaveEqual": true,
+  "births": [
+    {
+      "day": 3210,
+      "actor": 7,
+      "res": {
+        "min": 400,
+        "ene": 300,
+        "yiy": 180,
+        "ala": 220,
+        "ara": 0,
+        "tuk": 150,
+        "etk": 70
+      },
+      "inc": {
+        "min": 0,
+        "ene": 0,
+        "yiy": 0,
+        "ala": 0,
+        "ara": 0,
+        "tuk": 0,
+        "etk": 0
+      },
+      "colonies": [
+        {
+          "s": 24,
+          "p": 1,
+          "col": {
+            "pop": 13.400000000000002,
+            "stab": 50,
+            "grow": 0.8188571428571446,
+            "b": {
+              "maden": 1,
+              "santral": 1,
+              "ciftlik": 1,
+              "liman": 1,
+              "kale": 1
+            },
+            "cap": 21,
+            "name": "Elovos II",
+            "f": "sanayi",
+            "fcd": 0,
+            "shield": 8,
+            "garrison": 40.76,
+            "shockTot": 36,
+            "garrisonBase": 74,
+            "auto": true,
+            "hist": {
+              "peace": 43,
+              "own": 43,
+              "flips": 0,
+              "sieges": 0,
+              "crises": 0
+            },
+            "q": [
+              {
+                "key": "kale",
+                "left": 153,
+                "tot": 191,
+                "paid": {
+                  "min": 138,
+                  "ala": 42
+                },
+                "s": 24,
+                "p": 1
+              },
+              {
+                "key": "kale",
+                "left": 191,
+                "tot": 191,
+                "paid": {
+                  "min": 138,
+                  "ala": 42
+                },
+                "s": 24,
+                "p": 1
+              }
+            ],
+            "truceAge": 0,
+            "bombKip": "hassas",
+            "siege": 0,
+            "secede": 0
+          }
+        }
+      ]
+    }
+  ]
+}

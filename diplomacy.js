@@ -5515,6 +5515,33 @@ function aiWarReview(){
 /* ─── İTTİFAK GÖZDEN GEÇİRME ───
    AI ani ihanet etmez: önce ittifakı bozar, 3 turluk soğuk savaş
    başlar, ancak ondan sonra savaş açabilir. Oyuncuya uyarıdır. */
+/* Normal bilateral withdrawal. Federation and sovereign bonds use their own exits. */
+function canEndAlliance(e,o){
+  if(!e||!o||e===o||G.emps[e.id]!==e||G.emps[o.id]!==o||e.dead||o.dead||e.wild||o.wild)return {ok:false,why:'Devlet artık mevcut veya geçerli değil'};
+  if(sovereignPair(e,o))return {ok:false,why:'Vassallık bağı normal ittifak feshiyle değiştirilemez; sözleşme veya bağımsızlık yönetimini kullan'};
+  const f=findFed(e),other=findFed(o);
+  if(f&&other&&f.id===other.id)return {ok:false,why:'Aynı federasyondaki ittifak bağı üyelik düzeninin parçasıdır. Federasyon Yönetimi içindeki Ayrıl veya İhraç işlemini kullan',federation:true};
+  if(!e.ally[o.id]&&!o.ally[e.id])return {ok:false,why:'Sonlandırılabilecek bir ittifak yok'};
+  return {ok:true};
+}
+function applyAllianceEnd(e,o){
+  e.ally[o.id] = false; o.ally[e.id] = false;
+  e.rel[o.id] = clamp(e.rel[o.id] - 15, -100, 100);
+  o.rel[e.id] = clamp(o.rel[e.id] - 15, -100, 100);
+  remember(o, e.id, 'paktBozdu');
+  for (const w of G.emps){
+    if (w.dead || w.wild || w.id === e.id || w.id === o.id) continue;
+    if (rnd() < .5) remember(w, e.id, 'paktBozdu');
+  }
+  setColdWar(e, o, COLD_WAR_TURNS);
+}
+function endAlliance(e,o){
+  const gate=canEndAlliance(e,o);if(!gate.ok)return gate;
+  applyAllianceEnd(e,o);
+  say('İTTİFAK SONLANDIRILDI — '+o.name+' · '+COLD_WAR_TURNS+' ay soğuk savaş','war');
+  return {ok:true};
+}
+
 function aiReviewAlliances(){
   for (const e of G.emps){
     if (e.dead || e.wild || !e.ai) continue;
@@ -5535,15 +5562,7 @@ function aiReviewAlliances(){
 
       const strain = (-trustOf(e, o.id)) + (-e.rel[o.id] * .4) - bound + (prof.war - .5) * 20;
       if (strain > 45 && rnd() < .05){
-        e.ally[o.id] = false; o.ally[e.id] = false;
-        e.rel[o.id] = clamp(e.rel[o.id] - 15, -100, 100);
-        o.rel[e.id] = clamp(o.rel[e.id] - 15, -100, 100);
-        remember(o, e.id, 'paktBozdu');
-        for (const w of G.emps){
-          if (w.dead || w.wild || w.id === e.id || w.id === o.id) continue;
-          if (rnd() < .5) remember(w, e.id, 'paktBozdu');
-        }
-        setColdWar(e, o, COLD_WAR_TURNS);
+        applyAllianceEnd(e,o);
         if (o.id === 0)
           say('İTTİFAK BOZULDU — ' + e.name + ' anlaşmayı feshetti (' +
               COLD_WAR_TURNS + ' tur soğuk savaş)', 'war');

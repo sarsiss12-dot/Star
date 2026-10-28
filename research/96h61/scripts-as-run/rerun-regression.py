@@ -1,0 +1,7 @@
+import json,pathlib,concurrent.futures,subprocess,re,time
+P=pathlib.Path(__file__).resolve().parents[1];R=P.parent/'Star';initial=json.loads((P/'evidence/regression/summary.json').read_text());out=P/'evidence/regression-followup';out.mkdir(exist_ok=True)
+def run(row):
+ name=row['name'];start=time.time();p=subprocess.run(['node',str(R/'tests'/name)],cwd=R,capture_output=True,text=True,timeout=300);text=p.stdout+p.stderr;(out/(name+'.log')).write_text(text);m=re.search(r'GEÇEN:\s*(\d+)\s+KALAN:\s*(\d+)',text);r={'name':name,'exit':p.returncode,'pass':int(m[1]) if m else 0,'fail':int(m[2]) if m else 1,'durationMs':round((time.time()-start)*1000),'details':'\n'.join(x for x in text.splitlines() if '✗' in x or 'Error' in x)};print(json.dumps(r),flush=True);return r
+failed=[r for r in initial['results'] if r['exit'] or r['fail']]
+with concurrent.futures.ThreadPoolExecutor(max_workers=4) as ex:rows=list(ex.map(run,failed))
+(out/'summary.json').write_text(json.dumps(rows,indent=2));latest={r['name']:r for r in initial['results']};latest.update({r['name']:r for r in rows});all=list(latest.values());d={'suites':len(all),'pass':sum(r['pass'] for r in all),'fail':sum(r['fail'] for r in all),'ok':all and not any(r['fail'] or r['exit'] for r in all),'results':all,'method':'Latest actual completed outcome per unique suite; initial failures retained. Release-manifest build/cache mismatch corrected before followup.'};(P/'evidence/regression-final.json').write_text(json.dumps(d,indent=2));print(json.dumps({k:v for k,v in d.items() if k!='results'}))

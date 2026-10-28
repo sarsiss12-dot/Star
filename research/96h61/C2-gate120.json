@@ -1,0 +1,2615 @@
+{
+  "rows": [
+    {
+      "seed": 11,
+      "initialSaveEqual": true,
+      "control": {
+        "techs": 29,
+        "colonies": 12,
+        "ships": 104,
+        "power": 14356,
+        "deliveries": 84,
+        "critical": 0,
+        "criticalByActor": {},
+        "alive": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "newSurvivors": [],
+        "demolitions": 33,
+        "rebuild12": 15,
+        "cycleNetMinerals": 2001,
+        "finishedCycleBuildingDays": 2800,
+        "cycles": [
+          {
+            "actor": 1,
+            "s": 13,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 158,
+            "orderDay": 270,
+            "netMinerals": 136,
+            "interruptionDays": 207
+          },
+          {
+            "actor": 2,
+            "s": 0,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 1307,
+            "orderDay": 1530,
+            "netMinerals": 136,
+            "interruptionDays": 341
+          },
+          {
+            "actor": 3,
+            "s": 41,
+            "p": 3,
+            "key": "dokum",
+            "demDay": 1993,
+            "orderDay": 2010,
+            "netMinerals": 136,
+            "interruptionDays": 124
+          },
+          {
+            "actor": 5,
+            "s": 5,
+            "p": 3,
+            "key": "lab",
+            "demDay": 2079,
+            "orderDay": 2130,
+            "netMinerals": 123,
+            "interruptionDays": 149
+          },
+          {
+            "actor": 3,
+            "s": 41,
+            "p": 2,
+            "key": "dokum",
+            "demDay": 2293,
+            "orderDay": 2310,
+            "netMinerals": 136,
+            "interruptionDays": 124
+          },
+          {
+            "actor": 3,
+            "s": 41,
+            "p": 3,
+            "key": "dokum",
+            "demDay": 2323,
+            "orderDay": 2340,
+            "netMinerals": 136,
+            "interruptionDays": 484
+          },
+          {
+            "actor": 2,
+            "s": 0,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 2447,
+            "orderDay": 2670,
+            "netMinerals": 136,
+            "interruptionDays": 341
+          },
+          {
+            "actor": 5,
+            "s": 5,
+            "p": 3,
+            "key": "dokum",
+            "demDay": 2712,
+            "orderDay": 2730,
+            "netMinerals": 136,
+            "interruptionDays": 124
+          },
+          {
+            "actor": 3,
+            "s": 41,
+            "p": 2,
+            "key": "dokum",
+            "demDay": 2863,
+            "orderDay": 2880,
+            "netMinerals": 136,
+            "interruptionDays": 124
+          },
+          {
+            "actor": 3,
+            "s": 41,
+            "p": 2,
+            "key": "dokum",
+            "demDay": 3043,
+            "orderDay": 3060,
+            "netMinerals": 136,
+            "interruptionDays": 124
+          },
+          {
+            "actor": 5,
+            "s": 5,
+            "p": 3,
+            "key": "dokum",
+            "demDay": 3042,
+            "orderDay": 3060,
+            "netMinerals": 136,
+            "interruptionDays": 124
+          },
+          {
+            "actor": 5,
+            "s": 5,
+            "p": 3,
+            "key": "dokum",
+            "demDay": 3222,
+            "orderDay": 3240,
+            "netMinerals": 136,
+            "interruptionDays": 124
+          },
+          {
+            "actor": 4,
+            "s": 37,
+            "p": 2,
+            "key": "lab",
+            "demDay": 3250,
+            "orderDay": 3330,
+            "netMinerals": 123,
+            "interruptionDays": 180
+          },
+          {
+            "actor": 1,
+            "s": 13,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 3368,
+            "orderDay": 3390,
+            "netMinerals": 136,
+            "interruptionDays": 117
+          },
+          {
+            "actor": 1,
+            "s": 13,
+            "p": 2,
+            "key": "lab",
+            "demDay": 3485,
+            "orderDay": 3510,
+            "netMinerals": 123,
+            "interruptionDays": 113
+          }
+        ]
+      },
+      "C2": {
+        "techs": 32,
+        "colonies": 13,
+        "ships": 111,
+        "power": 16113,
+        "deliveries": 82,
+        "critical": 1,
+        "criticalByActor": {
+          "3": 1
+        },
+        "alive": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "newSurvivors": [],
+        "demolitions": 31,
+        "rebuild12": 6,
+        "cycleNetMinerals": 752,
+        "finishedCycleBuildingDays": 1391,
+        "cycles": [
+          {
+            "actor": 1,
+            "s": 13,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 158,
+            "orderDay": 270,
+            "netMinerals": 136,
+            "interruptionDays": 207
+          },
+          {
+            "actor": 2,
+            "s": 0,
+            "p": 0,
+            "key": "lab",
+            "demDay": 1304,
+            "orderDay": 1650,
+            "netMinerals": 123,
+            "interruptionDays": 527
+          },
+          {
+            "actor": 3,
+            "s": 41,
+            "p": 2,
+            "key": "dokum",
+            "demDay": 1633,
+            "orderDay": 1830,
+            "netMinerals": 136,
+            "interruptionDays": 304
+          },
+          {
+            "actor": 2,
+            "s": 0,
+            "p": 0,
+            "key": "fabrika",
+            "demDay": 2440,
+            "orderDay": 2460,
+            "netMinerals": 111,
+            "interruptionDays": 121
+          },
+          {
+            "actor": 1,
+            "s": 13,
+            "p": 2,
+            "key": "lab",
+            "demDay": 2495,
+            "orderDay": 2520,
+            "netMinerals": 123,
+            "interruptionDays": 113
+          },
+          {
+            "actor": 5,
+            "s": 5,
+            "p": 3,
+            "key": "lab",
+            "demDay": 2919,
+            "orderDay": 2940,
+            "netMinerals": 123,
+            "interruptionDays": 119
+          }
+        ]
+      }
+    },
+    {
+      "seed": 7,
+      "initialSaveEqual": true,
+      "control": {
+        "techs": 51,
+        "colonies": 16,
+        "ships": 188,
+        "power": 23537,
+        "deliveries": 46,
+        "critical": 5,
+        "criticalByActor": {
+          "3": 5
+        },
+        "alive": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "newSurvivors": [],
+        "demolitions": 37,
+        "rebuild12": 13,
+        "cycleNetMinerals": 1548,
+        "finishedCycleBuildingDays": 2263,
+        "cycles": [
+          {
+            "actor": 1,
+            "s": 44,
+            "p": 0,
+            "key": "maden",
+            "demDay": 1472,
+            "orderDay": 1500,
+            "netMinerals": 78,
+            "interruptionDays": 108
+          },
+          {
+            "actor": 5,
+            "s": 22,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 1337,
+            "orderDay": 1650,
+            "netMinerals": 136,
+            "interruptionDays": 431
+          },
+          {
+            "actor": 1,
+            "s": 44,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 2147,
+            "orderDay": 2160,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 5,
+            "s": 22,
+            "p": 2,
+            "key": "lab",
+            "demDay": 2204,
+            "orderDay": 2220,
+            "netMinerals": 123,
+            "interruptionDays": 126
+          },
+          {
+            "actor": 1,
+            "s": 44,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 2447,
+            "orderDay": 2460,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 2,
+            "s": 8,
+            "p": 2,
+            "key": "ciftlik",
+            "demDay": 2539,
+            "orderDay": 2550,
+            "netMinerals": 71,
+            "interruptionDays": 134
+          },
+          {
+            "actor": 5,
+            "s": 22,
+            "p": 2,
+            "key": "lab",
+            "demDay": 2474,
+            "orderDay": 2640,
+            "netMinerals": 123,
+            "interruptionDays": 276
+          },
+          {
+            "actor": 5,
+            "s": 22,
+            "p": 0,
+            "key": "lab",
+            "demDay": 2744,
+            "orderDay": 2760,
+            "netMinerals": 123,
+            "interruptionDays": 126
+          },
+          {
+            "actor": 1,
+            "s": 44,
+            "p": 0,
+            "key": "liman",
+            "demDay": 2892,
+            "orderDay": 2910,
+            "netMinerals": 117,
+            "interruptionDays": 124
+          },
+          {
+            "actor": 5,
+            "s": 22,
+            "p": 0,
+            "key": "lab",
+            "demDay": 3074,
+            "orderDay": 3090,
+            "netMinerals": 123,
+            "interruptionDays": 126
+          },
+          {
+            "actor": 5,
+            "s": 22,
+            "p": 2,
+            "key": "lab",
+            "demDay": 3044,
+            "orderDay": 3090,
+            "netMinerals": 123,
+            "interruptionDays": 156
+          },
+          {
+            "actor": 5,
+            "s": 31,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 3137,
+            "orderDay": 3150,
+            "netMinerals": 136,
+            "interruptionDays": 198
+          },
+          {
+            "actor": 2,
+            "s": 8,
+            "p": 2,
+            "key": "lab",
+            "demDay": 3191,
+            "orderDay": 3210,
+            "netMinerals": 123,
+            "interruptionDays": 196
+          }
+        ]
+      },
+      "C2": {
+        "techs": 54,
+        "colonies": 19,
+        "ships": 219,
+        "power": 27940,
+        "deliveries": 96,
+        "critical": 5,
+        "criticalByActor": {
+          "3": 5
+        },
+        "alive": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "newSurvivors": [],
+        "demolitions": 29,
+        "rebuild12": 8,
+        "cycleNetMinerals": 979,
+        "finishedCycleBuildingDays": 1359,
+        "cycles": [
+          {
+            "actor": 1,
+            "s": 44,
+            "p": 0,
+            "key": "maden",
+            "demDay": 782,
+            "orderDay": 1080,
+            "netMinerals": 78,
+            "interruptionDays": 378
+          },
+          {
+            "actor": 5,
+            "s": 22,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 1307,
+            "orderDay": 1500,
+            "netMinerals": 136,
+            "interruptionDays": 311
+          },
+          {
+            "actor": 1,
+            "s": 44,
+            "p": 0,
+            "key": "fabrika",
+            "demDay": 1900,
+            "orderDay": 1920,
+            "netMinerals": 111,
+            "interruptionDays": 121
+          },
+          {
+            "actor": 5,
+            "s": 22,
+            "p": 2,
+            "key": "dokum",
+            "demDay": 2537,
+            "orderDay": 2550,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 1,
+            "s": 34,
+            "p": 4,
+            "key": "dokum",
+            "demDay": 2747,
+            "orderDay": 2760,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 1,
+            "s": 10,
+            "p": 1,
+            "key": "dokum",
+            "demDay": 3227,
+            "orderDay": 3240,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 3,
+            "s": 30,
+            "p": 0,
+            "key": "lab",
+            "demDay": 3314,
+            "orderDay": 3360,
+            "netMinerals": 123,
+            "interruptionDays": 156
+          },
+          {
+            "actor": 5,
+            "s": 22,
+            "p": 0,
+            "key": "lab",
+            "demDay": 3524,
+            "orderDay": 3540,
+            "netMinerals": 123,
+            "interruptionDays": null
+          }
+        ]
+      }
+    },
+    {
+      "seed": 23,
+      "initialSaveEqual": true,
+      "control": {
+        "techs": 29,
+        "colonies": 10,
+        "ships": 135,
+        "power": 21514,
+        "deliveries": 0,
+        "critical": 1,
+        "criticalByActor": {
+          "2": 1
+        },
+        "alive": [
+          1,
+          2,
+          3,
+          5
+        ],
+        "newSurvivors": [],
+        "demolitions": 45,
+        "rebuild12": 21,
+        "cycleNetMinerals": 2568,
+        "finishedCycleBuildingDays": 3126,
+        "cycles": [
+          {
+            "actor": 4,
+            "s": 41,
+            "p": 0,
+            "key": "fabrika",
+            "demDay": 160,
+            "orderDay": 240,
+            "netMinerals": 111,
+            "interruptionDays": 227
+          },
+          {
+            "actor": 3,
+            "s": 20,
+            "p": 2,
+            "key": "dokum",
+            "demDay": 827,
+            "orderDay": 840,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 2,
+            "s": 23,
+            "p": 0,
+            "key": "fabrika",
+            "demDay": 842,
+            "orderDay": 1170,
+            "netMinerals": 111,
+            "interruptionDays": 409
+          },
+          {
+            "actor": 2,
+            "s": 23,
+            "p": 0,
+            "key": "fabrika",
+            "demDay": 1322,
+            "orderDay": 1350,
+            "netMinerals": 111,
+            "interruptionDays": 109
+          },
+          {
+            "actor": 2,
+            "s": 23,
+            "p": 0,
+            "key": "fabrika",
+            "demDay": 1532,
+            "orderDay": 1560,
+            "netMinerals": 111,
+            "interruptionDays": 109
+          },
+          {
+            "actor": 2,
+            "s": 23,
+            "p": 0,
+            "key": "fabrika",
+            "demDay": 1742,
+            "orderDay": 1770,
+            "netMinerals": 111,
+            "interruptionDays": 109
+          },
+          {
+            "actor": 3,
+            "s": 20,
+            "p": 2,
+            "key": "dokum",
+            "demDay": 1877,
+            "orderDay": 1890,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 4,
+            "s": 10,
+            "p": 2,
+            "key": "dokum",
+            "demDay": 1907,
+            "orderDay": 1920,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 2,
+            "s": 23,
+            "p": 0,
+            "key": "fabrika",
+            "demDay": 1952,
+            "orderDay": 1980,
+            "netMinerals": 111,
+            "interruptionDays": 109
+          },
+          {
+            "actor": 2,
+            "s": 23,
+            "p": 0,
+            "key": "fabrika",
+            "demDay": 2522,
+            "orderDay": 2550,
+            "netMinerals": 111,
+            "interruptionDays": 109
+          },
+          {
+            "actor": 1,
+            "s": 6,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 2747,
+            "orderDay": 2760,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 2,
+            "s": 23,
+            "p": 0,
+            "key": "fabrika",
+            "demDay": 2762,
+            "orderDay": 2790,
+            "netMinerals": 111,
+            "interruptionDays": 109
+          },
+          {
+            "actor": 3,
+            "s": 27,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 2764,
+            "orderDay": 2790,
+            "netMinerals": 136,
+            "interruptionDays": 262
+          },
+          {
+            "actor": 1,
+            "s": 6,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 2957,
+            "orderDay": 2970,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 2,
+            "s": 23,
+            "p": 0,
+            "key": "fabrika",
+            "demDay": 2972,
+            "orderDay": 3000,
+            "netMinerals": 111,
+            "interruptionDays": 109
+          },
+          {
+            "actor": 5,
+            "s": 33,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 3047,
+            "orderDay": 3060,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 5,
+            "s": 10,
+            "p": 2,
+            "key": "dokum",
+            "demDay": 2747,
+            "orderDay": 3090,
+            "netMinerals": 136,
+            "interruptionDays": 461
+          },
+          {
+            "actor": 2,
+            "s": 23,
+            "p": 0,
+            "key": "fabrika",
+            "demDay": 3122,
+            "orderDay": 3150,
+            "netMinerals": 111,
+            "interruptionDays": 109
+          },
+          {
+            "actor": 2,
+            "s": 23,
+            "p": 0,
+            "key": "fabrika",
+            "demDay": 3452,
+            "orderDay": 3480,
+            "netMinerals": 111,
+            "interruptionDays": 109
+          },
+          {
+            "actor": 3,
+            "s": 27,
+            "p": 0,
+            "key": "lab",
+            "demDay": 3178,
+            "orderDay": 3510,
+            "netMinerals": 123,
+            "interruptionDays": null
+          },
+          {
+            "actor": 1,
+            "s": 6,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 3587,
+            "orderDay": 3600,
+            "netMinerals": 136,
+            "interruptionDays": null
+          }
+        ]
+      },
+      "C2": {
+        "techs": 29,
+        "colonies": 14,
+        "ships": 156,
+        "power": 26676,
+        "deliveries": 0,
+        "critical": 1,
+        "criticalByActor": {
+          "2": 1
+        },
+        "alive": [
+          1,
+          2,
+          3,
+          5
+        ],
+        "newSurvivors": [],
+        "demolitions": 34,
+        "rebuild12": 8,
+        "cycleNetMinerals": 923,
+        "finishedCycleBuildingDays": 1344,
+        "cycles": [
+          {
+            "actor": 4,
+            "s": 41,
+            "p": 0,
+            "key": "fabrika",
+            "demDay": 160,
+            "orderDay": 240,
+            "netMinerals": 111,
+            "interruptionDays": 227
+          },
+          {
+            "actor": 2,
+            "s": 23,
+            "p": 0,
+            "key": "fabrika",
+            "demDay": 1142,
+            "orderDay": 1290,
+            "netMinerals": 111,
+            "interruptionDays": 229
+          },
+          {
+            "actor": 2,
+            "s": 23,
+            "p": 0,
+            "key": "fabrika",
+            "demDay": 1682,
+            "orderDay": 1710,
+            "netMinerals": 111,
+            "interruptionDays": 109
+          },
+          {
+            "actor": 2,
+            "s": 23,
+            "p": 0,
+            "key": "fabrika",
+            "demDay": 1952,
+            "orderDay": 1980,
+            "netMinerals": 111,
+            "interruptionDays": 109
+          },
+          {
+            "actor": 2,
+            "s": 23,
+            "p": 0,
+            "key": "santral",
+            "demDay": 2994,
+            "orderDay": 3210,
+            "netMinerals": 71,
+            "interruptionDays": 277
+          },
+          {
+            "actor": 5,
+            "s": 41,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 3227,
+            "orderDay": 3240,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 5,
+            "s": 10,
+            "p": 2,
+            "key": "dokum",
+            "demDay": 3257,
+            "orderDay": 3270,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 5,
+            "s": 10,
+            "p": 2,
+            "key": "dokum",
+            "demDay": 3467,
+            "orderDay": 3480,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          }
+        ]
+      }
+    },
+    {
+      "seed": 42,
+      "initialSaveEqual": true,
+      "control": {
+        "techs": 42,
+        "colonies": 15,
+        "ships": 142,
+        "power": 20026,
+        "deliveries": 58,
+        "critical": 2,
+        "criticalByActor": {
+          "4": 1,
+          "3": 1
+        },
+        "alive": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "newSurvivors": [],
+        "demolitions": 32,
+        "rebuild12": 8,
+        "cycleNetMinerals": 920,
+        "finishedCycleBuildingDays": 1616,
+        "cycles": [
+          {
+            "actor": 1,
+            "s": 9,
+            "p": 2,
+            "key": "dokum",
+            "demDay": 1457,
+            "orderDay": 1680,
+            "netMinerals": 136,
+            "interruptionDays": 341
+          },
+          {
+            "actor": 5,
+            "s": 14,
+            "p": 0,
+            "key": "lab",
+            "demDay": 1750,
+            "orderDay": 1770,
+            "netMinerals": 123,
+            "interruptionDays": 120
+          },
+          {
+            "actor": 2,
+            "s": 0,
+            "p": 0,
+            "key": "maden",
+            "demDay": 2216,
+            "orderDay": 2250,
+            "netMinerals": 78,
+            "interruptionDays": 98
+          },
+          {
+            "actor": 1,
+            "s": 9,
+            "p": 2,
+            "key": "maden",
+            "demDay": 2582,
+            "orderDay": 2610,
+            "netMinerals": 78,
+            "interruptionDays": 108
+          },
+          {
+            "actor": 2,
+            "s": 0,
+            "p": 1,
+            "key": "dokum",
+            "demDay": 2678,
+            "orderDay": 2910,
+            "netMinerals": 136,
+            "interruptionDays": 327
+          },
+          {
+            "actor": 2,
+            "s": 0,
+            "p": 3,
+            "key": "lab",
+            "demDay": 3335,
+            "orderDay": 3360,
+            "netMinerals": 123,
+            "interruptionDays": 113
+          },
+          {
+            "actor": 3,
+            "s": 2,
+            "p": 0,
+            "key": "lab",
+            "demDay": 3104,
+            "orderDay": 3390,
+            "netMinerals": 123,
+            "interruptionDays": 396
+          },
+          {
+            "actor": 2,
+            "s": 38,
+            "p": 3,
+            "key": "lab",
+            "demDay": 3485,
+            "orderDay": 3510,
+            "netMinerals": 123,
+            "interruptionDays": 113
+          }
+        ]
+      },
+      "C2": {
+        "techs": 38,
+        "colonies": 13,
+        "ships": 155,
+        "power": 22894,
+        "deliveries": 72,
+        "critical": 1,
+        "criticalByActor": {
+          "4": 1
+        },
+        "alive": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "newSurvivors": [],
+        "demolitions": 30,
+        "rebuild12": 4,
+        "cycleNetMinerals": 460,
+        "finishedCycleBuildingDays": 376,
+        "cycles": [
+          {
+            "actor": 2,
+            "s": 0,
+            "p": 1,
+            "key": "lab",
+            "demDay": 2015,
+            "orderDay": 2190,
+            "netMinerals": 123,
+            "interruptionDays": 263
+          },
+          {
+            "actor": 2,
+            "s": 0,
+            "p": 1,
+            "key": "lab",
+            "demDay": 2765,
+            "orderDay": 2790,
+            "netMinerals": 123,
+            "interruptionDays": 113
+          },
+          {
+            "actor": 1,
+            "s": 9,
+            "p": 2,
+            "key": "maden",
+            "demDay": 3362,
+            "orderDay": 3540,
+            "netMinerals": 78,
+            "interruptionDays": null
+          },
+          {
+            "actor": 2,
+            "s": 0,
+            "p": 3,
+            "key": "dokum",
+            "demDay": 3578,
+            "orderDay": 3600,
+            "netMinerals": 136,
+            "interruptionDays": null
+          }
+        ]
+      }
+    },
+    {
+      "seed": 99,
+      "initialSaveEqual": true,
+      "control": {
+        "techs": 47,
+        "colonies": 20,
+        "ships": 187,
+        "power": 26197,
+        "deliveries": 57,
+        "critical": 0,
+        "criticalByActor": {},
+        "alive": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "newSurvivors": [],
+        "demolitions": 50,
+        "rebuild12": 19,
+        "cycleNetMinerals": 2345,
+        "finishedCycleBuildingDays": 3238,
+        "cycles": [
+          {
+            "actor": 5,
+            "s": 33,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 1007,
+            "orderDay": 1020,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 3,
+            "s": 39,
+            "p": 0,
+            "key": "lab",
+            "demDay": 1244,
+            "orderDay": 1260,
+            "netMinerals": 123,
+            "interruptionDays": 126
+          },
+          {
+            "actor": 3,
+            "s": 39,
+            "p": 0,
+            "key": "santral",
+            "demDay": 1410,
+            "orderDay": 1410,
+            "netMinerals": 71,
+            "interruptionDays": 76
+          },
+          {
+            "actor": 5,
+            "s": 33,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 1637,
+            "orderDay": 1650,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 4,
+            "s": 40,
+            "p": 2,
+            "key": "dokum",
+            "demDay": 1667,
+            "orderDay": 1680,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 3,
+            "s": 20,
+            "p": 1,
+            "key": "dokum",
+            "demDay": 2267,
+            "orderDay": 2280,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 1,
+            "s": 27,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 2198,
+            "orderDay": 2460,
+            "netMinerals": 136,
+            "interruptionDays": 357
+          },
+          {
+            "actor": 3,
+            "s": 39,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 2117,
+            "orderDay": 2460,
+            "netMinerals": 136,
+            "interruptionDays": 461
+          },
+          {
+            "actor": 4,
+            "s": 40,
+            "p": 2,
+            "key": "dokum",
+            "demDay": 2507,
+            "orderDay": 2520,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 3,
+            "s": 20,
+            "p": 1,
+            "key": "dokum",
+            "demDay": 2627,
+            "orderDay": 2640,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 5,
+            "s": 33,
+            "p": 0,
+            "key": "maden",
+            "demDay": 2642,
+            "orderDay": 2670,
+            "netMinerals": 78,
+            "interruptionDays": 108
+          },
+          {
+            "actor": 1,
+            "s": 27,
+            "p": 0,
+            "key": "lab",
+            "demDay": 2435,
+            "orderDay": 2730,
+            "netMinerals": 123,
+            "interruptionDays": 383
+          },
+          {
+            "actor": 1,
+            "s": 2,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 2738,
+            "orderDay": 2760,
+            "netMinerals": 136,
+            "interruptionDays": 117
+          },
+          {
+            "actor": 4,
+            "s": 40,
+            "p": 2,
+            "key": "dokum",
+            "demDay": 2717,
+            "orderDay": 2760,
+            "netMinerals": 136,
+            "interruptionDays": 161
+          },
+          {
+            "actor": 3,
+            "s": 39,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 2897,
+            "orderDay": 2910,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 1,
+            "s": 27,
+            "p": 0,
+            "key": "lab",
+            "demDay": 2945,
+            "orderDay": 2970,
+            "netMinerals": 123,
+            "interruptionDays": 113
+          },
+          {
+            "actor": 3,
+            "s": 39,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 3077,
+            "orderDay": 3090,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 4,
+            "s": 32,
+            "p": 0,
+            "key": "maden",
+            "demDay": 3092,
+            "orderDay": 3300,
+            "netMinerals": 78,
+            "interruptionDays": 288
+          },
+          {
+            "actor": 4,
+            "s": 32,
+            "p": 0,
+            "key": "liman",
+            "demDay": 3282,
+            "orderDay": 3540,
+            "netMinerals": 117,
+            "interruptionDays": null
+          }
+        ]
+      },
+      "C2": {
+        "techs": 45,
+        "colonies": 20,
+        "ships": 209,
+        "power": 27258,
+        "deliveries": 55,
+        "critical": 0,
+        "criticalByActor": {},
+        "alive": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "newSurvivors": [],
+        "demolitions": 49,
+        "rebuild12": 14,
+        "cycleNetMinerals": 1802,
+        "finishedCycleBuildingDays": 2045,
+        "cycles": [
+          {
+            "actor": 4,
+            "s": 40,
+            "p": 2,
+            "key": "dokum",
+            "demDay": 1487,
+            "orderDay": 1500,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 2,
+            "s": 44,
+            "p": 1,
+            "key": "dokum",
+            "demDay": 1692,
+            "orderDay": 1740,
+            "netMinerals": 136,
+            "interruptionDays": 154
+          },
+          {
+            "actor": 5,
+            "s": 33,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 1757,
+            "orderDay": 1770,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 5,
+            "s": 24,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 2327,
+            "orderDay": 2340,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 3,
+            "s": 39,
+            "p": 0,
+            "key": "maden",
+            "demDay": 2342,
+            "orderDay": 2370,
+            "netMinerals": 78,
+            "interruptionDays": 108
+          },
+          {
+            "actor": 5,
+            "s": 33,
+            "p": 0,
+            "key": "liman",
+            "demDay": 2472,
+            "orderDay": 2490,
+            "netMinerals": 117,
+            "interruptionDays": 124
+          },
+          {
+            "actor": 3,
+            "s": 20,
+            "p": 1,
+            "key": "dokum",
+            "demDay": 2327,
+            "orderDay": 2610,
+            "netMinerals": 136,
+            "interruptionDays": 401
+          },
+          {
+            "actor": 3,
+            "s": 39,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 2957,
+            "orderDay": 2970,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 3,
+            "s": 20,
+            "p": 1,
+            "key": "dokum",
+            "demDay": 2957,
+            "orderDay": 2970,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 4,
+            "s": 40,
+            "p": 2,
+            "key": "dokum",
+            "demDay": 2777,
+            "orderDay": 3000,
+            "netMinerals": 136,
+            "interruptionDays": 341
+          },
+          {
+            "actor": 3,
+            "s": 20,
+            "p": 1,
+            "key": "dokum",
+            "demDay": 3137,
+            "orderDay": 3150,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 3,
+            "s": 39,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 3167,
+            "orderDay": 3180,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 3,
+            "s": 39,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 3527,
+            "orderDay": 3540,
+            "netMinerals": 136,
+            "interruptionDays": null
+          },
+          {
+            "actor": 5,
+            "s": 33,
+            "p": 0,
+            "key": "fabrika",
+            "demDay": 3520,
+            "orderDay": 3540,
+            "netMinerals": 111,
+            "interruptionDays": null
+          }
+        ]
+      }
+    },
+    {
+      "seed": 123,
+      "initialSaveEqual": true,
+      "control": {
+        "techs": 44,
+        "colonies": 16,
+        "ships": 166,
+        "power": 24080,
+        "deliveries": 56,
+        "critical": 3,
+        "criticalByActor": {
+          "5": 3
+        },
+        "alive": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "newSurvivors": [],
+        "demolitions": 53,
+        "rebuild12": 21,
+        "cycleNetMinerals": 2694,
+        "finishedCycleBuildingDays": 4015,
+        "cycles": [
+          {
+            "actor": 4,
+            "s": 7,
+            "p": 1,
+            "key": "dokum",
+            "demDay": 1298,
+            "orderDay": 1320,
+            "netMinerals": 136,
+            "interruptionDays": 117
+          },
+          {
+            "actor": 2,
+            "s": 27,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 1547,
+            "orderDay": 1560,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 1,
+            "s": 18,
+            "p": 1,
+            "key": "dokum",
+            "demDay": 1577,
+            "orderDay": 1590,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 1,
+            "s": 41,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 1607,
+            "orderDay": 1860,
+            "netMinerals": 136,
+            "interruptionDays": 371
+          },
+          {
+            "actor": 2,
+            "s": 14,
+            "p": 1,
+            "key": "lab",
+            "demDay": 2084,
+            "orderDay": 2370,
+            "netMinerals": 123,
+            "interruptionDays": 396
+          },
+          {
+            "actor": 1,
+            "s": 41,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 2387,
+            "orderDay": 2400,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 2,
+            "s": 27,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 2417,
+            "orderDay": 2430,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 1,
+            "s": 18,
+            "p": 1,
+            "key": "maden",
+            "demDay": 2522,
+            "orderDay": 2550,
+            "netMinerals": 78,
+            "interruptionDays": 108
+          },
+          {
+            "actor": 1,
+            "s": 41,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 2567,
+            "orderDay": 2580,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 4,
+            "s": 28,
+            "p": 2,
+            "key": "lab",
+            "demDay": 2345,
+            "orderDay": 2610,
+            "netMinerals": 123,
+            "interruptionDays": 353
+          },
+          {
+            "actor": 2,
+            "s": 14,
+            "p": 1,
+            "key": "dokum",
+            "demDay": 2357,
+            "orderDay": 2640,
+            "netMinerals": 136,
+            "interruptionDays": 401
+          },
+          {
+            "actor": 4,
+            "s": 28,
+            "p": 1,
+            "key": "lab",
+            "demDay": 2345,
+            "orderDay": 2640,
+            "netMinerals": 123,
+            "interruptionDays": 383
+          },
+          {
+            "actor": 2,
+            "s": 14,
+            "p": 1,
+            "key": "lab",
+            "demDay": 2624,
+            "orderDay": 2910,
+            "netMinerals": 123,
+            "interruptionDays": 396
+          },
+          {
+            "actor": 2,
+            "s": 27,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 2987,
+            "orderDay": 3000,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 4,
+            "s": 28,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 3008,
+            "orderDay": 3030,
+            "netMinerals": 136,
+            "interruptionDays": 117
+          },
+          {
+            "actor": 4,
+            "s": 28,
+            "p": 1,
+            "key": "lab",
+            "demDay": 3185,
+            "orderDay": 3210,
+            "netMinerals": 123,
+            "interruptionDays": 113
+          },
+          {
+            "actor": 4,
+            "s": 7,
+            "p": 1,
+            "key": "lab",
+            "demDay": 3245,
+            "orderDay": 3270,
+            "netMinerals": 123,
+            "interruptionDays": 113
+          },
+          {
+            "actor": 4,
+            "s": 28,
+            "p": 3,
+            "key": "dokum",
+            "demDay": 3338,
+            "orderDay": 3360,
+            "netMinerals": 136,
+            "interruptionDays": 117
+          },
+          {
+            "actor": 2,
+            "s": 27,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 3437,
+            "orderDay": 3450,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 4,
+            "s": 28,
+            "p": 2,
+            "key": "lab",
+            "demDay": 3455,
+            "orderDay": 3480,
+            "netMinerals": 123,
+            "interruptionDays": 113
+          },
+          {
+            "actor": 4,
+            "s": 7,
+            "p": 1,
+            "key": "lab",
+            "demDay": 3545,
+            "orderDay": 3570,
+            "netMinerals": 123,
+            "interruptionDays": null
+          }
+        ]
+      },
+      "C2": {
+        "techs": 41,
+        "colonies": 17,
+        "ships": 170,
+        "power": 25066,
+        "deliveries": 50,
+        "critical": 3,
+        "criticalByActor": {
+          "5": 3
+        },
+        "alive": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "newSurvivors": [],
+        "demolitions": 48,
+        "rebuild12": 14,
+        "cycleNetMinerals": 1626,
+        "finishedCycleBuildingDays": 2324,
+        "cycles": [
+          {
+            "actor": 4,
+            "s": 7,
+            "p": 1,
+            "key": "santral",
+            "demDay": 1284,
+            "orderDay": 1560,
+            "netMinerals": 71,
+            "interruptionDays": 337
+          },
+          {
+            "actor": 2,
+            "s": 27,
+            "p": 0,
+            "key": "maden",
+            "demDay": 1802,
+            "orderDay": 1830,
+            "netMinerals": 78,
+            "interruptionDays": 108
+          },
+          {
+            "actor": 1,
+            "s": 41,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 1847,
+            "orderDay": 1860,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 3,
+            "s": 20,
+            "p": 0,
+            "key": "lab",
+            "demDay": 1934,
+            "orderDay": 1980,
+            "netMinerals": 123,
+            "interruptionDays": 156
+          },
+          {
+            "actor": 4,
+            "s": 7,
+            "p": 1,
+            "key": "lab",
+            "demDay": 1955,
+            "orderDay": 1980,
+            "netMinerals": 123,
+            "interruptionDays": 113
+          },
+          {
+            "actor": 2,
+            "s": 14,
+            "p": 1,
+            "key": "maden",
+            "demDay": 2042,
+            "orderDay": 2070,
+            "netMinerals": 78,
+            "interruptionDays": 108
+          },
+          {
+            "actor": 1,
+            "s": 41,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 2387,
+            "orderDay": 2400,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 3,
+            "s": 20,
+            "p": 0,
+            "key": "lab",
+            "demDay": 2474,
+            "orderDay": 2520,
+            "netMinerals": 123,
+            "interruptionDays": 156
+          },
+          {
+            "actor": 2,
+            "s": 27,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 2687,
+            "orderDay": 2700,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 2,
+            "s": 14,
+            "p": 1,
+            "key": "dokum",
+            "demDay": 2897,
+            "orderDay": 2910,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 1,
+            "s": 18,
+            "p": 1,
+            "key": "maden",
+            "demDay": 2942,
+            "orderDay": 3150,
+            "netMinerals": 78,
+            "interruptionDays": 288
+          },
+          {
+            "actor": 4,
+            "s": 28,
+            "p": 2,
+            "key": "dokum",
+            "demDay": 2888,
+            "orderDay": 3210,
+            "netMinerals": 136,
+            "interruptionDays": 417
+          },
+          {
+            "actor": 4,
+            "s": 28,
+            "p": 1,
+            "key": "dokum",
+            "demDay": 3458,
+            "orderDay": 3480,
+            "netMinerals": 136,
+            "interruptionDays": 117
+          },
+          {
+            "actor": 1,
+            "s": 18,
+            "p": 1,
+            "key": "dokum",
+            "demDay": 3587,
+            "orderDay": 3600,
+            "netMinerals": 136,
+            "interruptionDays": null
+          }
+        ]
+      }
+    },
+    {
+      "seed": 404,
+      "initialSaveEqual": true,
+      "control": {
+        "techs": 49,
+        "colonies": 19,
+        "ships": 251,
+        "power": 31433,
+        "deliveries": 154,
+        "critical": 2,
+        "criticalByActor": {
+          "7": 2
+        },
+        "alive": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          7
+        ],
+        "newSurvivors": [
+          7
+        ],
+        "demolitions": 57,
+        "rebuild12": 19,
+        "cycleNetMinerals": 2313,
+        "finishedCycleBuildingDays": 3928,
+        "cycles": [
+          {
+            "actor": 5,
+            "s": 23,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 1247,
+            "orderDay": 1260,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 1,
+            "s": 32,
+            "p": 0,
+            "key": "maden",
+            "demDay": 1292,
+            "orderDay": 1320,
+            "netMinerals": 78,
+            "interruptionDays": 108
+          },
+          {
+            "actor": 5,
+            "s": 23,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 1457,
+            "orderDay": 1470,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 2,
+            "s": 35,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 1547,
+            "orderDay": 1560,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 3,
+            "s": 30,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 1628,
+            "orderDay": 1650,
+            "netMinerals": 136,
+            "interruptionDays": 117
+          },
+          {
+            "actor": 5,
+            "s": 23,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 1787,
+            "orderDay": 1800,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 3,
+            "s": 30,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 1838,
+            "orderDay": 1860,
+            "netMinerals": 136,
+            "interruptionDays": 117
+          },
+          {
+            "actor": 5,
+            "s": 23,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 1967,
+            "orderDay": 1980,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 2,
+            "s": 35,
+            "p": 0,
+            "key": "maden",
+            "demDay": 1712,
+            "orderDay": 2010,
+            "netMinerals": 78,
+            "interruptionDays": 378
+          },
+          {
+            "actor": 1,
+            "s": 32,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 2447,
+            "orderDay": 2460,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 1,
+            "s": 7,
+            "p": 2,
+            "key": "lab",
+            "demDay": 2504,
+            "orderDay": 2520,
+            "netMinerals": 123,
+            "interruptionDays": 126
+          },
+          {
+            "actor": 5,
+            "s": 36,
+            "p": 1,
+            "key": "dokum",
+            "demDay": 2387,
+            "orderDay": 2640,
+            "netMinerals": 136,
+            "interruptionDays": 371
+          },
+          {
+            "actor": 3,
+            "s": 30,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 2648,
+            "orderDay": 2910,
+            "netMinerals": 136,
+            "interruptionDays": 357
+          },
+          {
+            "actor": 1,
+            "s": 32,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 2957,
+            "orderDay": 2970,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 2,
+            "s": 35,
+            "p": 0,
+            "key": "maden",
+            "demDay": 2792,
+            "orderDay": 3060,
+            "netMinerals": 78,
+            "interruptionDays": 348
+          },
+          {
+            "actor": 3,
+            "s": 30,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 2888,
+            "orderDay": 3120,
+            "netMinerals": 136,
+            "interruptionDays": 327
+          },
+          {
+            "actor": 2,
+            "s": 35,
+            "p": 0,
+            "key": "lab",
+            "demDay": 3044,
+            "orderDay": 3390,
+            "netMinerals": 123,
+            "interruptionDays": 456
+          },
+          {
+            "actor": 5,
+            "s": 23,
+            "p": 0,
+            "key": "lab",
+            "demDay": 3194,
+            "orderDay": 3390,
+            "netMinerals": 123,
+            "interruptionDays": 306
+          },
+          {
+            "actor": 2,
+            "s": 35,
+            "p": 0,
+            "key": "maden",
+            "demDay": 3212,
+            "orderDay": 3570,
+            "netMinerals": 78,
+            "interruptionDays": null
+          }
+        ]
+      },
+      "C2": {
+        "techs": 47,
+        "colonies": 21,
+        "ships": 230,
+        "power": 30080,
+        "deliveries": 169,
+        "critical": 0,
+        "criticalByActor": {},
+        "alive": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "newSurvivors": [],
+        "demolitions": 56,
+        "rebuild12": 21,
+        "cycleNetMinerals": 2237,
+        "finishedCycleBuildingDays": 3924,
+        "cycles": [
+          {
+            "actor": 2,
+            "s": 38,
+            "p": 0,
+            "key": "maden",
+            "demDay": 1262,
+            "orderDay": 1290,
+            "netMinerals": 78,
+            "interruptionDays": 108
+          },
+          {
+            "actor": 1,
+            "s": 32,
+            "p": 0,
+            "key": "maden",
+            "demDay": 1292,
+            "orderDay": 1320,
+            "netMinerals": 78,
+            "interruptionDays": 108
+          },
+          {
+            "actor": 5,
+            "s": 23,
+            "p": 0,
+            "key": "liman",
+            "demDay": 1452,
+            "orderDay": 1470,
+            "netMinerals": 117,
+            "interruptionDays": 124
+          },
+          {
+            "actor": 1,
+            "s": 32,
+            "p": 0,
+            "key": "maden",
+            "demDay": 1562,
+            "orderDay": 1590,
+            "netMinerals": 78,
+            "interruptionDays": 108
+          },
+          {
+            "actor": 1,
+            "s": 32,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 1997,
+            "orderDay": 2010,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 3,
+            "s": 1,
+            "p": 0,
+            "key": "lab",
+            "demDay": 1895,
+            "orderDay": 2190,
+            "netMinerals": 123,
+            "interruptionDays": 383
+          },
+          {
+            "actor": 3,
+            "s": 30,
+            "p": 0,
+            "key": "maden",
+            "demDay": 2066,
+            "orderDay": 2220,
+            "netMinerals": 78,
+            "interruptionDays": 218
+          },
+          {
+            "actor": 3,
+            "s": 30,
+            "p": 0,
+            "key": "maden",
+            "demDay": 2216,
+            "orderDay": 2370,
+            "netMinerals": 78,
+            "interruptionDays": 218
+          },
+          {
+            "actor": 3,
+            "s": 30,
+            "p": 0,
+            "key": "maden",
+            "demDay": 2366,
+            "orderDay": 2490,
+            "netMinerals": 78,
+            "interruptionDays": 188
+          },
+          {
+            "actor": 5,
+            "s": 36,
+            "p": 1,
+            "key": "maden",
+            "demDay": 2462,
+            "orderDay": 2490,
+            "netMinerals": 78,
+            "interruptionDays": 108
+          },
+          {
+            "actor": 2,
+            "s": 35,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 2567,
+            "orderDay": 2730,
+            "netMinerals": 136,
+            "interruptionDays": 281
+          },
+          {
+            "actor": 3,
+            "s": 30,
+            "p": 0,
+            "key": "santral",
+            "demDay": 2724,
+            "orderDay": 2730,
+            "netMinerals": 71,
+            "interruptionDays": 67
+          },
+          {
+            "actor": 3,
+            "s": 1,
+            "p": 0,
+            "key": "maden",
+            "demDay": 2726,
+            "orderDay": 2730,
+            "netMinerals": 78,
+            "interruptionDays": 68
+          },
+          {
+            "actor": 5,
+            "s": 23,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 2567,
+            "orderDay": 2760,
+            "netMinerals": 136,
+            "interruptionDays": 311
+          },
+          {
+            "actor": 1,
+            "s": 32,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 2867,
+            "orderDay": 2880,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 2,
+            "s": 38,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 2987,
+            "orderDay": 3000,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 5,
+            "s": 23,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 3317,
+            "orderDay": 3330,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 2,
+            "s": 35,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 3137,
+            "orderDay": 3390,
+            "netMinerals": 136,
+            "interruptionDays": 371
+          },
+          {
+            "actor": 2,
+            "s": 35,
+            "p": 1,
+            "key": "dokum",
+            "demDay": 3107,
+            "orderDay": 3390,
+            "netMinerals": 136,
+            "interruptionDays": 401
+          },
+          {
+            "actor": 3,
+            "s": 1,
+            "p": 0,
+            "key": "maden",
+            "demDay": 3116,
+            "orderDay": 3390,
+            "netMinerals": 78,
+            "interruptionDays": 338
+          },
+          {
+            "actor": 2,
+            "s": 35,
+            "p": 1,
+            "key": "dokum",
+            "demDay": 3377,
+            "orderDay": 3600,
+            "netMinerals": 136,
+            "interruptionDays": null
+          }
+        ]
+      }
+    },
+    {
+      "seed": 2026,
+      "initialSaveEqual": true,
+      "control": {
+        "techs": 40,
+        "colonies": 21,
+        "ships": 213,
+        "power": 26652,
+        "deliveries": 0,
+        "critical": 1,
+        "criticalByActor": {
+          "2": 1
+        },
+        "alive": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "newSurvivors": [],
+        "demolitions": 42,
+        "rebuild12": 11,
+        "cycleNetMinerals": 1349,
+        "finishedCycleBuildingDays": 2004,
+        "cycles": [
+          {
+            "actor": 4,
+            "s": 9,
+            "p": 1,
+            "key": "liman",
+            "demDay": 1902,
+            "orderDay": 1920,
+            "netMinerals": 117,
+            "interruptionDays": 124
+          },
+          {
+            "actor": 5,
+            "s": 14,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 1907,
+            "orderDay": 1920,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 4,
+            "s": 9,
+            "p": 0,
+            "key": "liman",
+            "demDay": 2052,
+            "orderDay": 2070,
+            "netMinerals": 117,
+            "interruptionDays": 124
+          },
+          {
+            "actor": 4,
+            "s": 9,
+            "p": 1,
+            "key": "liman",
+            "demDay": 2142,
+            "orderDay": 2160,
+            "netMinerals": 117,
+            "interruptionDays": 124
+          },
+          {
+            "actor": 3,
+            "s": 3,
+            "p": 1,
+            "key": "dokum",
+            "demDay": 2018,
+            "orderDay": 2340,
+            "netMinerals": 136,
+            "interruptionDays": 417
+          },
+          {
+            "actor": 4,
+            "s": 9,
+            "p": 1,
+            "key": "liman",
+            "demDay": 2412,
+            "orderDay": 2430,
+            "netMinerals": 117,
+            "interruptionDays": 124
+          },
+          {
+            "actor": 2,
+            "s": 41,
+            "p": 0,
+            "key": "maden",
+            "demDay": 2372,
+            "orderDay": 2580,
+            "netMinerals": 78,
+            "interruptionDays": 288
+          },
+          {
+            "actor": 5,
+            "s": 27,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 2807,
+            "orderDay": 2820,
+            "netMinerals": 136,
+            "interruptionDays": 249
+          },
+          {
+            "actor": 2,
+            "s": 41,
+            "p": 0,
+            "key": "lab",
+            "demDay": 2924,
+            "orderDay": 3120,
+            "netMinerals": 123,
+            "interruptionDays": 306
+          },
+          {
+            "actor": 5,
+            "s": 27,
+            "p": 1,
+            "key": "dokum",
+            "demDay": 3214,
+            "orderDay": 3240,
+            "netMinerals": 136,
+            "interruptionDays": null
+          },
+          {
+            "actor": 3,
+            "s": 3,
+            "p": 1,
+            "key": "dokum",
+            "demDay": 3308,
+            "orderDay": 3330,
+            "netMinerals": 136,
+            "interruptionDays": 117
+          }
+        ]
+      },
+      "C2": {
+        "techs": 42,
+        "colonies": 24,
+        "ships": 232,
+        "power": 29444,
+        "deliveries": 0,
+        "critical": 1,
+        "criticalByActor": {
+          "2": 1
+        },
+        "alive": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "newSurvivors": [],
+        "demolitions": 47,
+        "rebuild12": 14,
+        "cycleNetMinerals": 1609,
+        "finishedCycleBuildingDays": 1883,
+        "cycles": [
+          {
+            "actor": 4,
+            "s": 9,
+            "p": 1,
+            "key": "liman",
+            "demDay": 1902,
+            "orderDay": 1920,
+            "netMinerals": 117,
+            "interruptionDays": 124
+          },
+          {
+            "actor": 4,
+            "s": 9,
+            "p": 1,
+            "key": "liman",
+            "demDay": 2172,
+            "orderDay": 2190,
+            "netMinerals": 117,
+            "interruptionDays": 124
+          },
+          {
+            "actor": 4,
+            "s": 9,
+            "p": 1,
+            "key": "liman",
+            "demDay": 2352,
+            "orderDay": 2370,
+            "netMinerals": 117,
+            "interruptionDays": 124
+          },
+          {
+            "actor": 5,
+            "s": 27,
+            "p": 1,
+            "key": "lab",
+            "demDay": 2504,
+            "orderDay": 2520,
+            "netMinerals": 123,
+            "interruptionDays": 126
+          },
+          {
+            "actor": 5,
+            "s": 27,
+            "p": 0,
+            "key": "lab",
+            "demDay": 2534,
+            "orderDay": 2580,
+            "netMinerals": 123,
+            "interruptionDays": 156
+          },
+          {
+            "actor": 5,
+            "s": 14,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 2747,
+            "orderDay": 2760,
+            "netMinerals": 136,
+            "interruptionDays": 131
+          },
+          {
+            "actor": 3,
+            "s": 3,
+            "p": 1,
+            "key": "maden",
+            "demDay": 2786,
+            "orderDay": 2790,
+            "netMinerals": 78,
+            "interruptionDays": 68
+          },
+          {
+            "actor": 5,
+            "s": 14,
+            "p": 0,
+            "key": "dokum",
+            "demDay": 3004,
+            "orderDay": 3030,
+            "netMinerals": 136,
+            "interruptionDays": 262
+          },
+          {
+            "actor": 1,
+            "s": 38,
+            "p": 2,
+            "key": "liman",
+            "demDay": 3038,
+            "orderDay": 3060,
+            "netMinerals": 117,
+            "interruptionDays": 118
+          },
+          {
+            "actor": 4,
+            "s": 9,
+            "p": 1,
+            "key": "liman",
+            "demDay": 2832,
+            "orderDay": 3060,
+            "netMinerals": 117,
+            "interruptionDays": 334
+          },
+          {
+            "actor": 1,
+            "s": 33,
+            "p": 2,
+            "key": "dokum",
+            "demDay": 3163,
+            "orderDay": 3180,
+            "netMinerals": 136,
+            "interruptionDays": 124
+          },
+          {
+            "actor": 1,
+            "s": 33,
+            "p": 2,
+            "key": "dokum",
+            "demDay": 3403,
+            "orderDay": 3420,
+            "netMinerals": 136,
+            "interruptionDays": 124
+          },
+          {
+            "actor": 3,
+            "s": 3,
+            "p": 0,
+            "key": "maden",
+            "demDay": 3476,
+            "orderDay": 3480,
+            "netMinerals": 78,
+            "interruptionDays": 68
+          },
+          {
+            "actor": 3,
+            "s": 3,
+            "p": 0,
+            "key": "maden",
+            "demDay": 3596,
+            "orderDay": 3600,
+            "netMinerals": 78,
+            "interruptionDays": null
+          }
+        ]
+      }
+    }
+  ],
+  "totals": {
+    "control": {
+      "critical": 14,
+      "deliveries": 455,
+      "techs": 331,
+      "colonies": 129,
+      "ships": 1386,
+      "power": 187795,
+      "demolitions": 349,
+      "rebuild12": 127,
+      "cycleNetMinerals": 15738
+    },
+    "C2": {
+      "critical": 12,
+      "deliveries": 524,
+      "techs": 328,
+      "colonies": 141,
+      "ships": 1482,
+      "power": 205471,
+      "demolitions": 324,
+      "rebuild12": 89,
+      "cycleNetMinerals": 10388
+    }
+  },
+  "gate120": "PASS"
+}
