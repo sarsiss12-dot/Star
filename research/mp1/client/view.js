@@ -24,11 +24,12 @@ function players(L){
 }
 /* Oyun içi görünüm deposu: MP.0 snapshot/delta kuralları */
 function apply(st,m){
-  if(m.type==='snapshot'){st.view=m.view;st.rev=m.rev;st.clock=m.t;st.snapshots=(st.snapshots||0)+1;return null;}
+  /* MP.2: st.changed = bu paketle değişen bölümler (arayüz yalnız onları yeniden kurar) */
+  if(m.type==='snapshot'){st.view=m.view;st.rev=m.rev;st.clock=m.t;st.snapshots=(st.snapshots||0)+1;st.changed=new Set(Object.keys(m.view));return null;}
   if(m.type==='delta'){
     if(m.rev<=st.rev){st.stale=(st.stale||0)+1;return null;}
     if(!st.view||m.base!==st.rev)return 'resync';
-    const o=m.ops||{};
+    const o=m.ops||{};const ch=st.changed||(st.changed=new Set());for(const g of ['up','rm','set'])for(const sec of Object.keys(o[g]||{}))ch.add(sec);
     for(const [sec,up] of Object.entries(o.up||{}))Object.assign(st.view[sec],up);
     for(const [sec,rm] of Object.entries(o.rm||{}))for(const k of rm)delete st.view[sec][k];
     for(const [sec,val] of Object.entries(o.set||{}))st.view[sec]=val;

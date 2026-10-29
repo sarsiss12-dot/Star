@@ -93,7 +93,7 @@ function childRelay(delay){return new Promise((res,rej)=>{const c=spawn(process.
     await B.fill('#jName','Bo"ra<img src=x onerror=__x=1>');await B.press('#jName','Enter');
     await wait(B,()=>MP1Join.screen==='lobby'&&MP1Join.lobby);
     for(const p of [A,B]){assert.equal(await p.evaluate(()=>[typeof G,typeof monthTick,typeof setupGame,typeof serialize].join()),'undefined,undefined,undefined,undefined');
-      assert.deepEqual(await p.evaluate(()=>[...document.scripts].map(s=>s.getAttribute('src'))),['/research/mp1/client/view.js','/research/mp1/client/join.js']);}
+      assert.deepEqual(await p.evaluate(()=>[...document.scripts].map(s=>s.getAttribute('src'))),['/research/mp1/client/view.js','/research/mp2/client/guest-game.js','/research/mp1/client/join.js']);}   // MP.2: motorsuz harita/panel betiği eklendi
     metrics.connectMs={A:await A.evaluate(()=>MP1Join.stats.connectMs),B:await B.evaluate(()=>MP1Join.stats.connectMs)};
   });
   await test('live player list: host and both guests show the same players (name, host mark, online, empire, ready, tab); names are inert text',async()=>{
@@ -232,6 +232,7 @@ function childRelay(delay){return new Promise((res,rej)=>{const c=spawn(process.
   await test('real STARS command from guest A\'s phone UI: host validates with queueBuilding; others cannot act for A',async()=>{
     col=await H.evaluate(id=>{const e=G.emps[id];for(const c of e.colonies){const pl=G.sys[c.s].planets[c.p];if(colonyUsed(pl.col)+colonyQueued(pl.col)<colonySlots(pl.col,e,pl))return {s:c.s,p:c.p,min:e.res.min,q:(pl.col.q||[]).length,cost:buildingCost(e,'santral').min};}return {none:e.colonies.length,res:e.res};},emp.A);
     assert(col&&!col.none&&col.min>=col.cost,'free slot and affordable '+JSON.stringify(col));
+    await A.locator('.mp2-nav [data-tab="cols"]').tap();   // MP.2: inşa kontrolleri KOLONİLER sekmesinde (varsayılan sekme harita)
     await A.selectOption('select[data-col="'+col.s+':'+col.p+'"]','santral');
     const btn=A.locator('button[data-j="build"][data-col="'+col.s+':'+col.p+'"]');assert((await btn.boundingBox()).height>=44);
     const t0=Date.now();await btn.tap();await wait(A,()=>MP1Join.results.some(r=>r.status==='ok'));metrics.commandRoundTripMs=Date.now()-t0;
@@ -360,6 +361,7 @@ function childRelay(delay){return new Promise((res,rej)=>{const c=spawn(process.
       t=Date.now();await h.locator('[data-m="start"]').tap();await wait(g,()=>MP1Join.screen==='game'&&MP1Join.game.view);m.startMs=Date.now()-t;
       await h.evaluate(()=>{G.speed=0;});
       const k=await h.evaluate(id=>{const e=G.emps[id];for(const c of e.colonies){const pl=G.sys[c.s].planets[c.p];if(colonyUsed(pl.col)+colonyQueued(pl.col)<colonySlots(pl.col,e,pl))return c.s+':'+c.p;}},e1);
+      await g.locator('.mp2-nav [data-tab="cols"]').tap();   // MP.2: KOLONİLER sekmesi
       await g.selectOption('select[data-col="'+k+'"]','santral');t=Date.now();await g.locator('button[data-j="build"][data-col="'+k+'"]').tap();
       await wait(g,()=>MP1Join.results.length>0);m.commandMs=Date.now()-t;assert.equal(await g.evaluate(()=>MP1Join.results[0].status),'ok');
       await g.evaluate(()=>{const r=MP1Join.results[0];MP1Join.sendRaw({v:1,type:'cmd',seq:MP1Join.seq,cid:r.cid,cmd:{kind:'build',sys:0,planet:0,key:'santral'}});MP1Join.sendRaw({v:1,type:'cmd',seq:MP1Join.seq,cid:r.cid,cmd:{kind:'build',sys:0,planet:0,key:'santral'}});});

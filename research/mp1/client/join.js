@@ -119,6 +119,7 @@ const SIZE_N={kucuk:'Küçük',orta:'Orta',buyuk:'Büyük',devasa:'Devasa',ulu:'
 function game(app){
   const v=J.game.view,c=J.game.clock;
   if(!v){app.innerHTML=statusBar()+'<div class="mp1-status">Galaksi verisi bekleniyor…</div>';return;}
+  if(window.MP2Game){MP2Game.attach(J);return MP2Game.update(statusBar());}   // MP.2: harita/filolar/koloniler/bilim
   const opts=Object.entries(v.catalog.b).filter(([,b])=>b.ok).map(([k,b])=>'<option value="'+esc(k)+'">'+esc(b.n)+' ('+Object.entries(b.c).map(([r,n])=>esc(r)+' '+(+n)).join(', ')+')</option>').join('');
   const keep={};for(const s of doc.querySelectorAll('select[data-col]'))keep[s.dataset.col]=s.value;
   app.innerHTML=statusBar()+'<div class="mp1-h" style="color:'+V.color(v.me.col)+'">'+esc(v.me.n)+'</div><div class="mp1-sub" id="jClock">Yıl '+(+c.y)+' · Ay '+(+c.m)+' · gün '+(+c.day)+'</div>'+

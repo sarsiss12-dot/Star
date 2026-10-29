@@ -67,7 +67,8 @@ async function setHidden(page,hidden){return page.evaluate(h=>{Object.defineProp
   });
   await test('real STARS command from the guest phone over WSS: santral is queued by the host engine and shown on both sides',async()=>{
     const col=await H.evaluate(()=>{const e=G.emps[3];for(const c of e.colonies){const pl=G.sys[c.s].planets[c.p];if(colonyUsed(pl.col)+colonyQueued(pl.col)<colonySlots(pl.col,e,pl))return {s:c.s,p:c.p,q:(pl.col.q||[]).length};}});
-    assert(col,'free slot');await Gp.selectOption('select[data-col="'+col.s+':'+col.p+'"]','santral');
+    assert(col,'free slot');await Gp.locator('.mp2-nav [data-tab="cols"]').tap();   // MP.2: KOLONİLER sekmesi
+    await Gp.selectOption('select[data-col="'+col.s+':'+col.p+'"]','santral');
     const t0=Date.now();await Gp.locator('button[data-j="build"][data-col="'+col.s+':'+col.p+'"]').tap();await wait(Gp,()=>MP1Join.results.some(r=>r.status==='ok'));metrics.commandMs=Date.now()-t0;
     assert.equal(await H.evaluate(c=>G.sys[c.s].planets[c.p].col.q.at(-1).key,col),'santral');
     await wait(Gp,c=>MP1Join.game.view.cols[c.s+':'+c.p].q.some(w=>w.k==='santral'),col);

@@ -64,6 +64,8 @@ function createHost(opts){
     results:new Map(),lastView:null,lastRev:0,wasAI:false,takeover:null,lastSeen:now()});
   S.slots.set(hostEmpireId,'host');
 
+  const notes=new Map();                                               // MP.2: empireId → son 12 kişisel bildirim
+  function note(id,m,c){const a=notes.get(id)||[];a.push({d:Math.floor(G.day),m:String(m).replace(/<[^>]*>/g,'').slice(0,160),c:c||''});if(a.length>12)a.shift();notes.set(id,a);}
   function out(conn,obj){const text=JSON.stringify(obj);stats.out++;stats.bytesOut+=text.length;send(conn,text);return text.length;}
   function playerOf(conn){const id=S.conns.get(conn);return id?S.players.get(id):null;}
   function humanEmpire(e){return !!e&&S.slots.has(e.id);}
@@ -73,6 +75,8 @@ function createHost(opts){
   if(L){const h=S.players.get('host');h.seat=0;h.ready=true;h.tab='lobi';h.claim=hostEmpireId;h.color=PALETTE[0];}
 
   /* ---------- filtreli görünüm (yalnız okuma) ---------- */
+  /* MP.2: temas kurulmamış devletin kimliği misafire gitmez (-2 = "bilinmeyen devlet"). */
+  function maskOwner(e,id){return id<0||id===e.id||(e.contact&&e.contact[id])?id:-2;}
   function viewFor(e){
     const ctx=explorationContext(e),known=ctx.known,visible=ctx.visible;
     const sys={},lanes=[];
@@ -80,8 +84,8 @@ function createHost(opts){
       const v={i:s.id,x:Math.round(s.x),y:Math.round(s.y)};                // kamu coğrafyası: tek oyunculu haritadaki soluk nokta
       if(known.has(s.id)){
         v.k=1;v.n=s.name;v.st=STARS.indexOf(s.star);
-        if(s.surv.includes(e.id)){v.sv=1;v.pl=s.planets.map(p=>{const o={i:p.i,t:p.t,sz:p.sz};if(visible.has(s.id)&&p.owner>=0)o.o=p.owner;return o;});}
-        if(visible.has(s.id)){v.vis=1;v.o=s.owner;}
+        if(s.surv.includes(e.id)){v.sv=1;v.pl=s.planets.map(p=>{const o={i:p.i,t:p.t,sz:p.sz};if(visible.has(s.id)&&p.owner>=0)o.o=maskOwner(e,p.owner);return o;});}
+        if(visible.has(s.id)){v.vis=1;v.o=maskOwner(e,s.owner);}
       }
       sys[s.id]=v;
       for(const l of s.lanes)if(s.id<l&&(known.has(s.id)||known.has(l)))lanes.push([s.id,l]);
@@ -96,9 +100,15 @@ function createHost(opts){
     const fleets={};
     for(const f of G.fleets){if(!f.ships.length)continue;
       if(f.e===e.id){const sh={};for(const x of f.ships)sh[x.c]=(sh[x.c]||0)+1;
-        fleets[f.id]={id:f.id,own:1,s:f.sys,to:f.path.length?f.path[f.path.length-1]:(f.mv?f.mv.to:f.sys),sh};continue;}
+        /* MP.2: yalnız KENDİ filon için ad, rota, hareket bacağı, güç ve durum (filo paneli + harita). */
+        const st=fleetStatus(f);
+        fleets[f.id]={id:f.id,own:1,s:f.sys,to:f.path.length?f.path[f.path.length-1]:(f.mv?f.mv.to:f.sys),sh,
+          nm:String(f.name||('Filo '+f.id)),pa:f.path.slice(0,24),mv:f.mv?[f.mv.from,f.mv.to,Math.round(f.mv.t*100)/100]:null,
+          pw:Math.round(fleetPower(f)),st:st.t,au:explorationEnabled(f)?1:0};continue;}
       const seen=f.sys>=0?visible.has(f.sys):!!(f.mv&&(visible.has(f.mv.from)||visible.has(f.mv.to)));
-      if(seen)fleets[f.id]={id:f.id,e:f.e,s:f.sys>=0&&visible.has(f.sys)?f.sys:-1,n:f.ships.length};
+      /* Yabancı filo: yalnız görünür sistemde; yoldaysa görünür uçtaki sistemde gösterilir (rota/hedef gitmez).
+         Temas yoksa devlet kimliği gitmez (e:null). */
+      if(seen)fleets[f.id]={id:f.id,e:maskOwner(e,f.e)===-2?null:f.e,s:f.sys>=0?(visible.has(f.sys)?f.sys:-1):(visible.has(f.mv.from)?f.mv.from:f.mv.to),n:f.ships.length};
     }
     const emps={};
     for(const o of G.emps)if(o!==e&&!o.dead&&e.contact[o.id])emps[o.id]={id:o.id,n:o.name,col:o.col,war:!!e.war[o.id],rel:Math.round(e.rel[o.id]||0)};
@@ -107,10 +117,19 @@ function createHost(opts){
     const catalog={b:{}};
     for(const [k,B] of Object.entries(BUILDINGS))catalog.b[k]={n:B.n,c:buildingCost(e,k),max:B.max,ok:!B.tech||!!e.techs[B.tech]};
     catalog.f=Object.fromEntries(Object.entries(FOCUS).map(([k,F])=>[k,F.n]));
-    return {me,sys,lanes,cols,fleets,emps,catalog};
+    /* MP.2 bilim: yalnız kendi devletin araştırma durumu (aktif dal, ilerleme, hedefler, plan). */
+    const plan=researchPlan(e),sci={mode:researchMode(e),ara:r1(e.inc&&e.inc.ara),rq:{},rp:{},rc:{},targets:(e.research&&e.research.targets||[]).slice(),
+      plan:plan.goals.map(g=>({id:g.id,ok:g.ok?1:0,x:g.extra,why:g.ok?'':g.why}))};
+    for(const b of Object.keys(BRANCH)){sci.rq[b]=e.rq[b]||null;sci.rp[b]=Math.round(e.rp[b]||0);sci.rc[b]=e.rq[b]?Math.round(techCost(e,e.rq[b])):0;}
+    const tech={};
+    for(const [id,T] of Object.entries(TECHS)){if(!researchValidTech(id))continue;
+      let st,why='';
+      if(e.techs[id])st='d';else{const a=researchAccess(e,id);if(!a.ok){st='x';why=a.why;}else if(researchReady(e,id))st='r';else{const rt=researchRoute(e,id);st=rt.ok?'l':'x';why=rt.ok?'':rt.why;}}
+      tech[id]={n:T.n,b:T.b,t:T.t,r:(T.r||[]).slice(),d:T.d||'',c:Math.round(techCost(e,id)),s:st,...(why?{w:why}:{})};}
+    return {me,sys,lanes,cols,fleets,emps,catalog,sci,tech,log:(notes.get(e.id)||[]).slice()};
   }
   function clock(){return {day:Math.floor(G.day),y:G.year,m:G.month,spd:G.speed|0};}
-  const KEYED=['sys','cols','fleets','emps'];
+  const KEYED=['sys','cols','fleets','emps','tech'];
   function diff(a,b){
     const ops={};
     for(const sec of KEYED){const up={},rm=[];
@@ -118,12 +137,20 @@ function createHost(opts){
       for(const k of Object.keys(a[sec]))if(!has(b[sec],k))rm.push(k);
       if(Object.keys(up).length)(ops.up||(ops.up={}))[sec]=up;
       if(rm.length)(ops.rm||(ops.rm={}))[sec]=rm;}
-    for(const sec of ['me','lanes','catalog'])if(JSON.stringify(a[sec])!==JSON.stringify(b[sec]))(ops.set||(ops.set={}))[sec]=b[sec];
+    for(const sec of ['me','lanes','catalog','sci','log'])if(JSON.stringify(a[sec])!==JSON.stringify(b[sec]))(ops.set||(ops.set={}))[sec]=b[sec];
     return ops;
+  }
+  /* MP.2: görünüm salt okunur olmalı. explorationContext → borderPressure/totalPower gibi motor yolları
+     günlük önbellek alanları (_powAt, _pressAt…) yazar ve bunlar Save8'e girer; yayın zamanına bağlı bir
+     damga oyunun sonraki kararlarını değiştirebilirdi. aiWarBudget'ın (ai.js) yaptığı gibi bütün "_" önekli
+     önbellek alanları çağrıdan önce alınır, sonra aynen geri konur. */
+  function pure(fn){
+    const objs=[G,...G.emps,...G.fleets,...G.sys],saved=objs.map(o=>{const d={};for(const k of Object.keys(o))if(k[0]==='_')d[k]=Object.getOwnPropertyDescriptor(o,k);return d;});
+    try{return fn();}finally{objs.forEach((o,i)=>{const d=saved[i];for(const k of Object.keys(o))if(k[0]==='_'&&!has(d,k))delete o[k];for(const k in d)Object.defineProperty(o,k,d[k]);});}
   }
   function publishTo(p,rev){
     if(!p.conn||p.empireId===null)return;
-    const e=G.emps[p.empireId],t0=now(),view=viewFor(e);let n;
+    const e=G.emps[p.empireId],t0=now(),view=pure(()=>viewFor(e));let n;
     if(!p.lastView){n=out(p.conn,{v:PROTOCOL,type:'snapshot',rev,t:clock(),you:{playerId:p.playerId,empireId:p.empireId},view});stats.snapshots++;stats.snapshotBytes.push(n);}
     else{n=out(p.conn,{v:PROTOCOL,type:'delta',rev,base:p.lastRev,t:clock(),ops:diff(p.lastView,view)});stats.deltas++;stats.deltaBytes.push(n);}
     p.lastView=view;p.lastRev=rev;stats.publishMs.push(now()-t0);
@@ -157,7 +184,36 @@ function createHost(opts){
       check:c=>int(c.index,0,15),
       why:(e,{pl},c)=>pl.col.q&&pl.col.q[c.index]?null:'no-job',
       roots:(e,{pl})=>[e.res,pl.col],
-      apply:(e,{sys,pl},c)=>cancelBuild(e,sys,pl,c.index)}
+      apply:(e,{sys,pl},c)=>cancelBuild(e,sys,pl,c.index)},
+    /* MP.2 — filo hareketi: motorun orderMove'u (rota, sınır izni, kapı ağı, sevkiyat/keşif devri).
+       İstemciden rota alınmaz; yol host'ta findPath/findPathAllowed ile kurulur. Başkasının ya da
+       olmayan filo aynı kodu alır (filo kimliği yoklanamaz). Tek oyunculu "sendhere" ile aynı: f.ord temizlenir. */
+    move:{keys:['kind','fleet','to'],
+      check:c=>int(c.fleet,0,2147483647)&&int(c.to,0,G.sys.length-1),
+      locate(e,c){const f=G.fleets.find(x=>x.id===c.fleet);if(!f||f.e!==e.id||!f.ships||!f.ships.length)return {err:'not-owner'};return {f};},
+      why(e,{f},c){const from=f.mv?f.mv.to:f.sys;if(!(from>=0))return 'no-position';
+        if(from===c.to&&!f.path.length)return 'same';
+        const p=findPath(from,c.to,e);if(!p)return 'no-route';
+        if(!pathAllowed(e,f,p,from)&&!findPathAllowed(e,f,from,c.to))return 'passage';return null;},
+      roots:(e,{f})=>[f,...(G.construction?[G.construction]:[])],
+      apply:(e,{f},c)=>{const ok=orderMove(f,c.to,false);if(ok)f.ord=null;return ok;}},
+    /* MP.2 — araştırma hedefi: motorun researchTarget'ı (erişim koşulu, ön koşul rotası, plan, dal ataması). */
+    research:{keys:['kind','tech','action','position'],
+      check:c=>typeof c.tech==='string'&&/^[a-z0-9_]{1,32}$/.test(c.tech)&&researchValidTech(c.tech)&&
+        (c.action===undefined||c.action==='toggle'||(c.action==='move'&&int(c.position,0,63)))&&(c.action==='move'||c.position===undefined),
+      locate:()=>({}),
+      why(e,at,c){if(e.techs[c.tech])return 'done';const tg=(e.research&&e.research.targets)||[],i=tg.indexOf(c.tech),act=c.action||'toggle';   // salt okuma
+        if(act==='move'&&(i<0||c.position>=tg.length))return 'bad-position';
+        if(act==='toggle'&&i>=0)return null;                         // hedeften çıkarmak her zaman serbest
+        if(!researchAccess(e,c.tech).ok)return 'access';if(!researchRoute(e,c.tech).ok)return 'route';return null;},
+      roots:e=>[e.research||{},e.rq,e.rp],
+      apply:(e,at,c)=>researchTarget(e,c.tech,c.action||'toggle',c.position).ok},
+    researchMode:{keys:['kind','mode'],
+      check:c=>['manual','semi','auto'].includes(c.mode),
+      locate:()=>({}),
+      why:(e,at,c)=>researchMode(e)===c.mode?'same':null,
+      roots:e=>[e.research||{},e.rq,e.rp],
+      apply:(e,at,c)=>setResearchMode(e,c.mode)}
   });
 
   function result(p,conn,msg,status,code,extra){
@@ -182,7 +238,7 @@ function createHost(opts){
     if(!onlyKeys(c,def.keys)||!def.check(c))return result(p,conn,msg,'rejected','bad-params');
     const e=G.emps[p.empireId];
     if(!e||e.dead)return result(p,conn,msg,'rejected','empire-dead');
-    const at=locate(e,c);if(at.err)return result(p,conn,msg,'rejected',at.err);
+    const at=def.locate?def.locate(e,c):locate(e,c);if(at.err)return result(p,conn,msg,'rejected',at.err);
     const why=def.why(e,at,c);if(why)return result(p,conn,msg,'rejected','rules:'+why);
     const records=txCaptureGraph(def.roots(e,at)),rng=RND_STATE;let ok=false;
     try{ok=!!def.apply(e,at,c);}catch(err){txRestoreGraph(records);rndSeed(rng);return result(p,conn,msg,'rejected','error');}
@@ -329,6 +385,11 @@ function createHost(opts){
   function installGuards(){
     if(root.__mp0Guards)return;root.__mp0Guards=true;
     const neg=aiNegotiate,resp=aiRespond;
+    /* MP.2: uzak insanın araştırma bildirimleri (researchTick içindeki say) host günlüğüne değil o oyuncunun
+       kendi bildirim listesine gider. Yalnız uzak insan için; tek oyunculu ve AI yolu aynen çalışır. */
+    const rtick=researchTick;
+    researchTick=function(e){if(!remoteHuman(e))return rtick.apply(this,arguments);
+      const s0=say;say=function(m,c){note(e.id,m,c);};try{return rtick.apply(this,arguments);}finally{say=s0;}};
     aiNegotiate=function(a,b){if(remoteHuman(a)||remoteHuman(b)){stats.blockedAI++;return {tur:0,karar:null,uygulandi:false,why:'MP.0: insan oyuncu diplomasisi MP.2 kapsamında',karsi:null};}return neg.apply(this,arguments);};
     aiRespond=function(ai){if(remoteHuman(ai)){stats.blockedAI++;return {v:'bekle',why:'İnsan oyuncu: teklif MP.2 gelen kutusuna gider (MP.0 kapalı)'};}return resp.apply(this,arguments);};
   }
