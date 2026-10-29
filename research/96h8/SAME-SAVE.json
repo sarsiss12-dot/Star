@@ -1,0 +1,1125 @@
+{
+ "protocol": "Same Save8 checkpoint, same RNG, 24 months, 60 half-day steps per month. control=96H.7.1 ai.js; rejected=96H.7 campaign-deadline patch on 96H.7.1; cand1=gate only; cand2b=accepted 96H.8; plK=control plus K extra rnd() draws at the first candidate-trigger day (chaos/noise baseline, no logic change). Observers verified pure: control final Save SHA equals canonical unobserved replay.",
+ "windows": {
+  "seed11-month60-to-84": {
+   "actor": 1,
+   "fixture": "tests/fixtures/96h8/seed11-month60.save",
+   "arms": {
+    "control": {
+     "galaxy": {
+      "alive": 5,
+      "ships": 81,
+      "power": 10323,
+      "techs": 22,
+      "colonies": 10,
+      "disbandedShips": 0,
+      "finalSaveSHA256": "652da1c9934ef6c46b4e09caee24a1d34a390d172413df2a463f80c27435c7d2",
+      "inputSHA256": "d4f9f2f9c63a5257ce02011fd838ce35e0baa5e78c8c74a82185728fd7ce359d",
+      "aiSHA256": "f48608cc82ca46b5028c637dcabbfb1b3e2ae09f1e3c1eb24bd2c4c1b326d8d0"
+     },
+     "actor": {
+      "ships": [
+       19,
+       38
+      ],
+      "power": [
+       2462,
+       5421
+      ],
+      "systems": [
+       1,
+       4
+      ],
+      "techs": [
+       2,
+       4
+      ],
+      "energy": [
+       1998,
+       2236
+      ],
+      "minEnergy": 1991,
+      "minEnergyNet": -5.5,
+      "deficitMonths": 3,
+      "maxFleetUpkeep": 125.2,
+      "maxAwayUpkeep": 9.0,
+      "disbandedShips": 0,
+      "recalls": [],
+      "deadlineReassessments": 21,
+      "attackMonths": 0,
+      "fundMonths": 0,
+      "criticalMonths": 0
+     }
+    },
+    "rejected": {
+     "galaxy": {
+      "alive": 5,
+      "ships": 44,
+      "power": 4990,
+      "techs": 21,
+      "colonies": 10,
+      "disbandedShips": 22,
+      "finalSaveSHA256": "efb7f53c366dde4e9a8f720b845108f1f49c3b7ae9543b40e00bde395ce690b5",
+      "inputSHA256": "d4f9f2f9c63a5257ce02011fd838ce35e0baa5e78c8c74a82185728fd7ce359d",
+      "aiSHA256": "06eb09107504b59a2abeb2d30d4077ec12224b7949f7f0150c7740facb9f0e69"
+     },
+     "actor": {
+      "ships": [
+       19,
+       15
+      ],
+      "power": [
+       2462,
+       1771
+      ],
+      "systems": [
+       1,
+       5
+      ],
+      "techs": [
+       2,
+       3
+      ],
+      "energy": [
+       1998,
+       1695
+      ],
+      "minEnergy": 1102,
+      "minEnergyNet": -231.2,
+      "deficitMonths": 7,
+      "maxFleetUpkeep": 351.0,
+      "maxAwayUpkeep": 342.9,
+      "disbandedShips": 22,
+      "recalls": [],
+      "deadlineReassessments": 0,
+      "attackMonths": 1,
+      "fundMonths": 0,
+      "criticalMonths": 0
+     }
+    },
+    "cand2b": {
+     "galaxy": {
+      "alive": 5,
+      "ships": 66,
+      "power": 8528,
+      "techs": 21,
+      "colonies": 10,
+      "disbandedShips": 0,
+      "finalSaveSHA256": "cbe8ee40eaa13f0e9d7d7b85fffea508e4e50ff81208a9c45c40a8ab176d440c",
+      "inputSHA256": "d4f9f2f9c63a5257ce02011fd838ce35e0baa5e78c8c74a82185728fd7ce359d",
+      "aiSHA256": "8141a3fb691db340e66f267a9a94f942d3cb7e2cd542829bbb7493545bff16b0"
+     },
+     "actor": {
+      "ships": [
+       19,
+       36
+      ],
+      "power": [
+       2462,
+       5202
+      ],
+      "systems": [
+       1,
+       5
+      ],
+      "techs": [
+       2,
+       3
+      ],
+      "energy": [
+       1998,
+       2298
+      ],
+      "minEnergy": 1991,
+      "minEnergyNet": -5.5,
+      "deficitMonths": 2,
+      "maxFleetUpkeep": 131.3,
+      "maxAwayUpkeep": 24.0,
+      "disbandedShips": 0,
+      "recalls": [],
+      "deadlineReassessments": 0,
+      "attackMonths": 11,
+      "fundMonths": 0,
+      "criticalMonths": 0
+     }
+    },
+    "pl1": {
+     "galaxy": {
+      "alive": 5,
+      "ships": 48,
+      "power": 6263,
+      "techs": 20,
+      "colonies": 10,
+      "disbandedShips": 0,
+      "finalSaveSHA256": "58d5afdd5969ced59d15fb6207cdfc6ec0e5da8e35be29056e4ce0b14b8ed04f",
+      "inputSHA256": "d4f9f2f9c63a5257ce02011fd838ce35e0baa5e78c8c74a82185728fd7ce359d",
+      "aiSHA256": "f48608cc82ca46b5028c637dcabbfb1b3e2ae09f1e3c1eb24bd2c4c1b326d8d0"
+     },
+     "actor": {
+      "ships": [
+       19,
+       39
+      ],
+      "power": [
+       2462,
+       5577
+      ],
+      "systems": [
+       1,
+       5
+      ],
+      "techs": [
+       2,
+       4
+      ],
+      "energy": [
+       1998,
+       2156
+      ],
+      "minEnergy": 1991,
+      "minEnergyNet": -8.5,
+      "deficitMonths": 9,
+      "maxFleetUpkeep": 129.3,
+      "maxAwayUpkeep": 10.4,
+      "disbandedShips": 0,
+      "recalls": [],
+      "deadlineReassessments": 21,
+      "attackMonths": 0,
+      "fundMonths": 0,
+      "criticalMonths": 0
+     }
+    },
+    "pl2": {
+     "galaxy": {
+      "alive": 5,
+      "ships": 81,
+      "power": 10225,
+      "techs": 22,
+      "colonies": 10,
+      "disbandedShips": 0,
+      "finalSaveSHA256": "3a7f860ac3590ef40892f33e96446a5a5c0a208dfd480292d004912d020d813b",
+      "inputSHA256": "d4f9f2f9c63a5257ce02011fd838ce35e0baa5e78c8c74a82185728fd7ce359d",
+      "aiSHA256": "f48608cc82ca46b5028c637dcabbfb1b3e2ae09f1e3c1eb24bd2c4c1b326d8d0"
+     },
+     "actor": {
+      "ships": [
+       19,
+       37
+      ],
+      "power": [
+       2462,
+       5385
+      ],
+      "systems": [
+       1,
+       4
+      ],
+      "techs": [
+       2,
+       4
+      ],
+      "energy": [
+       1998,
+       2145
+      ],
+      "minEnergy": 1991,
+      "minEnergyNet": -8.5,
+      "deficitMonths": 8,
+      "maxFleetUpkeep": 125.9,
+      "maxAwayUpkeep": 10.4,
+      "disbandedShips": 0,
+      "recalls": [],
+      "deadlineReassessments": 21,
+      "attackMonths": 0,
+      "fundMonths": 0,
+      "criticalMonths": 0
+     }
+    },
+    "pl3": {
+     "galaxy": {
+      "alive": 5,
+      "ships": 66,
+      "power": 8311,
+      "techs": 19,
+      "colonies": 10,
+      "disbandedShips": 0,
+      "finalSaveSHA256": "4e86762be3ab807cda47feb7dfeb1dc34bb4fec9c9562ae6d3d5a1a7421a5635",
+      "inputSHA256": "d4f9f2f9c63a5257ce02011fd838ce35e0baa5e78c8c74a82185728fd7ce359d",
+      "aiSHA256": "f48608cc82ca46b5028c637dcabbfb1b3e2ae09f1e3c1eb24bd2c4c1b326d8d0"
+     },
+     "actor": {
+      "ships": [
+       19,
+       38
+      ],
+      "power": [
+       2462,
+       5421
+      ],
+      "systems": [
+       1,
+       5
+      ],
+      "techs": [
+       2,
+       3
+      ],
+      "energy": [
+       1998,
+       2108
+      ],
+      "minEnergy": 1991,
+      "minEnergyNet": -24.8,
+      "deficitMonths": 9,
+      "maxFleetUpkeep": 125.9,
+      "maxAwayUpkeep": 10.4,
+      "disbandedShips": 0,
+      "recalls": [],
+      "deadlineReassessments": 21,
+      "attackMonths": 0,
+      "fundMonths": 0,
+      "criticalMonths": 0
+     }
+    },
+    "pl4": {
+     "galaxy": {
+      "alive": 5,
+      "ships": 80,
+      "power": 10528,
+      "techs": 22,
+      "colonies": 10,
+      "disbandedShips": 0,
+      "finalSaveSHA256": "e877c7a3eec84788e68dd90836ccba6644e0f828c0c583822f0d8aec5f6cf91c",
+      "inputSHA256": "d4f9f2f9c63a5257ce02011fd838ce35e0baa5e78c8c74a82185728fd7ce359d",
+      "aiSHA256": "f48608cc82ca46b5028c637dcabbfb1b3e2ae09f1e3c1eb24bd2c4c1b326d8d0"
+     },
+     "actor": {
+      "ships": [
+       19,
+       38
+      ],
+      "power": [
+       2462,
+       5541
+      ],
+      "systems": [
+       1,
+       5
+      ],
+      "techs": [
+       2,
+       4
+      ],
+      "energy": [
+       1998,
+       2174
+      ],
+      "minEnergy": 1991,
+      "minEnergyNet": -5.5,
+      "deficitMonths": 6,
+      "maxFleetUpkeep": 127.9,
+      "maxAwayUpkeep": 10.4,
+      "disbandedShips": 0,
+      "recalls": [],
+      "deadlineReassessments": 21,
+      "attackMonths": 0,
+      "fundMonths": 0,
+      "criticalMonths": 0
+     }
+    },
+    "cand1": {
+     "galaxy": {
+      "alive": 5,
+      "ships": 81,
+      "power": 10323,
+      "techs": 22,
+      "colonies": 10,
+      "disbandedShips": 0,
+      "finalSaveSHA256": "09b4ddc4c3be7c5d1385206e077c979bac9bf928c35ff928eacbe44b7bda1daf",
+      "inputSHA256": "d4f9f2f9c63a5257ce02011fd838ce35e0baa5e78c8c74a82185728fd7ce359d",
+      "aiSHA256": "bd2e15995fdcc87e2c81e2a8628102605d4087902b3c56a9fcecc55836beeaef"
+     },
+     "actor": {
+      "ships": [
+       19,
+       38
+      ],
+      "power": [
+       2462,
+       5421
+      ],
+      "systems": [
+       1,
+       4
+      ],
+      "techs": [
+       2,
+       4
+      ],
+      "energy": [
+       1998,
+       2236
+      ],
+      "minEnergy": 1991,
+      "minEnergyNet": -5.5,
+      "deficitMonths": 3,
+      "maxFleetUpkeep": 125.2,
+      "maxAwayUpkeep": 9.0,
+      "disbandedShips": 0,
+      "recalls": [],
+      "deadlineReassessments": 0,
+      "attackMonths": 11,
+      "fundMonths": 0,
+      "criticalMonths": 0
+     }
+    }
+   }
+  },
+  "seed11-month40-to-64": {
+   "actor": 3,
+   "fixture": "tests/fixtures/96h8/seed11-month40.save",
+   "arms": {
+    "control": {
+     "galaxy": {
+      "alive": 5,
+      "ships": 47,
+      "power": 5549,
+      "techs": 16,
+      "colonies": 10,
+      "disbandedShips": 12,
+      "finalSaveSHA256": "0e255c522a18cad20c2f18fd0fe4a55a23b11a5b00610da587504113a9a96b29",
+      "inputSHA256": "77a353f81d1027db56c24575f7e4b022be8947b1b8eb08131b5627b555f695cd",
+      "aiSHA256": "f48608cc82ca46b5028c637dcabbfb1b3e2ae09f1e3c1eb24bd2c4c1b326d8d0"
+     },
+     "actor": {
+      "ships": [
+       12,
+       1
+      ],
+      "power": [
+       2034,
+       175
+      ],
+      "systems": [
+       1,
+       1
+      ],
+      "techs": [
+       0,
+       3
+      ],
+      "energy": [
+       490,
+       986
+      ],
+      "minEnergy": 343,
+      "minEnergyNet": -71.8,
+      "deficitMonths": 6,
+      "maxFleetUpkeep": 147.9,
+      "maxAwayUpkeep": 134.3,
+      "disbandedShips": 12,
+      "recalls": [],
+      "deadlineReassessments": 0,
+      "attackMonths": 4,
+      "fundMonths": 0,
+      "criticalMonths": 0
+     }
+    },
+    "rejected": {
+     "galaxy": {
+      "alive": 5,
+      "ships": 47,
+      "power": 5549,
+      "techs": 16,
+      "colonies": 10,
+      "disbandedShips": 12,
+      "finalSaveSHA256": "f2c1d02ad9b4496c4444f6de2298236a23e6f87ad764e4d1c36916a109dce4f3",
+      "inputSHA256": "77a353f81d1027db56c24575f7e4b022be8947b1b8eb08131b5627b555f695cd",
+      "aiSHA256": "06eb09107504b59a2abeb2d30d4077ec12224b7949f7f0150c7740facb9f0e69"
+     },
+     "actor": {
+      "ships": [
+       12,
+       1
+      ],
+      "power": [
+       2034,
+       175
+      ],
+      "systems": [
+       1,
+       1
+      ],
+      "techs": [
+       0,
+       3
+      ],
+      "energy": [
+       490,
+       986
+      ],
+      "minEnergy": 343,
+      "minEnergyNet": -71.8,
+      "deficitMonths": 6,
+      "maxFleetUpkeep": 147.9,
+      "maxAwayUpkeep": 134.3,
+      "disbandedShips": 12,
+      "recalls": [],
+      "deadlineReassessments": 0,
+      "attackMonths": 4,
+      "fundMonths": 0,
+      "criticalMonths": 0
+     }
+    },
+    "cand2b": {
+     "galaxy": {
+      "alive": 5,
+      "ships": 71,
+      "power": 10026,
+      "techs": 16,
+      "colonies": 10,
+      "disbandedShips": 0,
+      "finalSaveSHA256": "2b65a3a36f1859568f076be2cf7aa11c58ddac836004bbc1fc20c422d354c1cc",
+      "inputSHA256": "77a353f81d1027db56c24575f7e4b022be8947b1b8eb08131b5627b555f695cd",
+      "aiSHA256": "8141a3fb691db340e66f267a9a94f942d3cb7e2cd542829bbb7493545bff16b0"
+     },
+     "actor": {
+      "ships": [
+       12,
+       23
+      ],
+      "power": [
+       2034,
+       4227
+      ],
+      "systems": [
+       1,
+       1
+      ],
+      "techs": [
+       0,
+       2
+      ],
+      "energy": [
+       490,
+       1061
+      ],
+      "minEnergy": 462,
+      "minEnergyNet": -28.0,
+      "deficitMonths": 1,
+      "maxFleetUpkeep": 109.5,
+      "maxAwayUpkeep": 105.5,
+      "disbandedShips": 0,
+      "recalls": [],
+      "deadlineReassessments": 0,
+      "attackMonths": 6,
+      "fundMonths": 0,
+      "criticalMonths": 0
+     }
+    },
+    "pl1": {
+     "galaxy": {
+      "alive": 5,
+      "ships": 43,
+      "power": 4966,
+      "techs": 15,
+      "colonies": 10,
+      "disbandedShips": 12,
+      "finalSaveSHA256": "1380d30e2a9ad695f69c6fcdf581e7a22ffda9dc06ed942c4c46e745dc789a88",
+      "inputSHA256": "77a353f81d1027db56c24575f7e4b022be8947b1b8eb08131b5627b555f695cd",
+      "aiSHA256": "f48608cc82ca46b5028c637dcabbfb1b3e2ae09f1e3c1eb24bd2c4c1b326d8d0"
+     },
+     "actor": {
+      "ships": [
+       12,
+       0
+      ],
+      "power": [
+       2034,
+       0
+      ],
+      "systems": [
+       1,
+       1
+      ],
+      "techs": [
+       0,
+       2
+      ],
+      "energy": [
+       490,
+       1342
+      ],
+      "minEnergy": 338,
+      "minEnergyNet": -74.9,
+      "deficitMonths": 5,
+      "maxFleetUpkeep": 147.9,
+      "maxAwayUpkeep": 134.3,
+      "disbandedShips": 12,
+      "recalls": [],
+      "deadlineReassessments": 0,
+      "attackMonths": 4,
+      "fundMonths": 0,
+      "criticalMonths": 0
+     }
+    },
+    "pl2": {
+     "galaxy": {
+      "alive": 5,
+      "ships": 44,
+      "power": 4892,
+      "techs": 15,
+      "colonies": 10,
+      "disbandedShips": 12,
+      "finalSaveSHA256": "b561c9990a5174364f46134074bd79dfddec92ef74e30c5ae0c200f7d005a120",
+      "inputSHA256": "77a353f81d1027db56c24575f7e4b022be8947b1b8eb08131b5627b555f695cd",
+      "aiSHA256": "f48608cc82ca46b5028c637dcabbfb1b3e2ae09f1e3c1eb24bd2c4c1b326d8d0"
+     },
+     "actor": {
+      "ships": [
+       12,
+       0
+      ],
+      "power": [
+       2034,
+       0
+      ],
+      "systems": [
+       1,
+       1
+      ],
+      "techs": [
+       0,
+       2
+      ],
+      "energy": [
+       490,
+       1333
+      ],
+      "minEnergy": 338,
+      "minEnergyNet": -74.9,
+      "deficitMonths": 5,
+      "maxFleetUpkeep": 147.9,
+      "maxAwayUpkeep": 134.3,
+      "disbandedShips": 12,
+      "recalls": [],
+      "deadlineReassessments": 0,
+      "attackMonths": 4,
+      "fundMonths": 0,
+      "criticalMonths": 0
+     }
+    },
+    "pl3": {
+     "galaxy": {
+      "alive": 5,
+      "ships": 46,
+      "power": 5313,
+      "techs": 16,
+      "colonies": 10,
+      "disbandedShips": 12,
+      "finalSaveSHA256": "67648626df07255070ed8cfbd4a6e4a5e334695aead0d7b16f98256024c9e6ea",
+      "inputSHA256": "77a353f81d1027db56c24575f7e4b022be8947b1b8eb08131b5627b555f695cd",
+      "aiSHA256": "f48608cc82ca46b5028c637dcabbfb1b3e2ae09f1e3c1eb24bd2c4c1b326d8d0"
+     },
+     "actor": {
+      "ships": [
+       12,
+       0
+      ],
+      "power": [
+       2034,
+       0
+      ],
+      "systems": [
+       1,
+       1
+      ],
+      "techs": [
+       0,
+       3
+      ],
+      "energy": [
+       490,
+       1360
+      ],
+      "minEnergy": 345,
+      "minEnergyNet": -71.7,
+      "deficitMonths": 5,
+      "maxFleetUpkeep": 147.9,
+      "maxAwayUpkeep": 134.3,
+      "disbandedShips": 12,
+      "recalls": [],
+      "deadlineReassessments": 0,
+      "attackMonths": 4,
+      "fundMonths": 0,
+      "criticalMonths": 0
+     }
+    },
+    "pl4": {
+     "galaxy": {
+      "alive": 5,
+      "ships": 45,
+      "power": 5283,
+      "techs": 16,
+      "colonies": 10,
+      "disbandedShips": 12,
+      "finalSaveSHA256": "c08ada392a92c84b6a40d6cd107f207b9037deb458490331819399adbcf0859f",
+      "inputSHA256": "77a353f81d1027db56c24575f7e4b022be8947b1b8eb08131b5627b555f695cd",
+      "aiSHA256": "f48608cc82ca46b5028c637dcabbfb1b3e2ae09f1e3c1eb24bd2c4c1b326d8d0"
+     },
+     "actor": {
+      "ships": [
+       12,
+       1
+      ],
+      "power": [
+       2034,
+       198
+      ],
+      "systems": [
+       1,
+       1
+      ],
+      "techs": [
+       0,
+       2
+      ],
+      "energy": [
+       490,
+       1432
+      ],
+      "minEnergy": 350,
+      "minEnergyNet": -70.1,
+      "deficitMonths": 5,
+      "maxFleetUpkeep": 147.9,
+      "maxAwayUpkeep": 134.3,
+      "disbandedShips": 12,
+      "recalls": [],
+      "deadlineReassessments": 0,
+      "attackMonths": 4,
+      "fundMonths": 0,
+      "criticalMonths": 0
+     }
+    }
+   }
+  },
+  "seed23-month15-to-39": {
+   "actor": 5,
+   "fixture": null,
+   "arms": {
+    "control": {
+     "galaxy": {
+      "alive": 5,
+      "ships": 47,
+      "power": 5483,
+      "techs": 11,
+      "colonies": 8,
+      "disbandedShips": 0,
+      "finalSaveSHA256": "7a93ea83ef45855efac2be12c20e2803cf2dd92b04c985490ae3529eb67724b9",
+      "inputSHA256": "e883f6893d1e8f59e3d5285193a4c118037b4535633970c158daa3ef0cef181d",
+      "aiSHA256": "f48608cc82ca46b5028c637dcabbfb1b3e2ae09f1e3c1eb24bd2c4c1b326d8d0"
+     },
+     "actor": {
+      "ships": [
+       7,
+       13
+      ],
+      "power": [
+       1061,
+       2450
+      ],
+      "systems": [
+       2,
+       2
+      ],
+      "techs": [
+       0,
+       2
+      ],
+      "energy": [
+       296,
+       869
+      ],
+      "minEnergy": 261,
+      "minEnergyNet": -25.6,
+      "deficitMonths": 4,
+      "maxFleetUpkeep": 80.2,
+      "maxAwayUpkeep": 79.1,
+      "disbandedShips": 0,
+      "recalls": [],
+      "deadlineReassessments": 0,
+      "attackMonths": 14,
+      "fundMonths": 0,
+      "criticalMonths": 0
+     }
+    },
+    "rejected": {
+     "galaxy": {
+      "alive": 5,
+      "ships": 47,
+      "power": 5483,
+      "techs": 11,
+      "colonies": 8,
+      "disbandedShips": 0,
+      "finalSaveSHA256": "7a93ea83ef45855efac2be12c20e2803cf2dd92b04c985490ae3529eb67724b9",
+      "inputSHA256": "e883f6893d1e8f59e3d5285193a4c118037b4535633970c158daa3ef0cef181d",
+      "aiSHA256": "06eb09107504b59a2abeb2d30d4077ec12224b7949f7f0150c7740facb9f0e69"
+     },
+     "actor": {
+      "ships": [
+       7,
+       13
+      ],
+      "power": [
+       1061,
+       2450
+      ],
+      "systems": [
+       2,
+       2
+      ],
+      "techs": [
+       0,
+       2
+      ],
+      "energy": [
+       296,
+       869
+      ],
+      "minEnergy": 261,
+      "minEnergyNet": -25.6,
+      "deficitMonths": 4,
+      "maxFleetUpkeep": 80.2,
+      "maxAwayUpkeep": 79.1,
+      "disbandedShips": 0,
+      "recalls": [],
+      "deadlineReassessments": 0,
+      "attackMonths": 14,
+      "fundMonths": 0,
+      "criticalMonths": 0
+     }
+    },
+    "cand2b": {
+     "galaxy": {
+      "alive": 5,
+      "ships": 37,
+      "power": 4960,
+      "techs": 12,
+      "colonies": 9,
+      "disbandedShips": 0,
+      "finalSaveSHA256": "173c339a18f8296569fd29ef3b75134e7cc8d41b2878ea2fb47c5b15f297e49d",
+      "inputSHA256": "e883f6893d1e8f59e3d5285193a4c118037b4535633970c158daa3ef0cef181d",
+      "aiSHA256": "8141a3fb691db340e66f267a9a94f942d3cb7e2cd542829bbb7493545bff16b0"
+     },
+     "actor": {
+      "ships": [
+       7,
+       16
+      ],
+      "power": [
+       1061,
+       3123
+      ],
+      "systems": [
+       2,
+       2
+      ],
+      "techs": [
+       0,
+       3
+      ],
+      "energy": [
+       296,
+       992
+      ],
+      "minEnergy": 296,
+      "minEnergyNet": -3.5,
+      "deficitMonths": 3,
+      "maxFleetUpkeep": 88.9,
+      "maxAwayUpkeep": 79.1,
+      "disbandedShips": 0,
+      "recalls": [],
+      "deadlineReassessments": 0,
+      "attackMonths": 17,
+      "fundMonths": 0,
+      "criticalMonths": 0
+     }
+    },
+    "pl1": {
+     "galaxy": {
+      "alive": 5,
+      "ships": 40,
+      "power": 4654,
+      "techs": 11,
+      "colonies": 8,
+      "disbandedShips": 0,
+      "finalSaveSHA256": "3c48739c4ebaa8062af32aca78c24012a9de429d1c936dcf7b71fa96b323406d",
+      "inputSHA256": "e883f6893d1e8f59e3d5285193a4c118037b4535633970c158daa3ef0cef181d",
+      "aiSHA256": "f48608cc82ca46b5028c637dcabbfb1b3e2ae09f1e3c1eb24bd2c4c1b326d8d0"
+     },
+     "actor": {
+      "ships": [
+       7,
+       12
+      ],
+      "power": [
+       1061,
+       2239
+      ],
+      "systems": [
+       2,
+       2
+      ],
+      "techs": [
+       0,
+       2
+      ],
+      "energy": [
+       296,
+       831
+      ],
+      "minEnergy": 261,
+      "minEnergyNet": -25.6,
+      "deficitMonths": 4,
+      "maxFleetUpkeep": 80.2,
+      "maxAwayUpkeep": 79.1,
+      "disbandedShips": 0,
+      "recalls": [],
+      "deadlineReassessments": 0,
+      "attackMonths": 11,
+      "fundMonths": 0,
+      "criticalMonths": 0
+     }
+    },
+    "pl2": {
+     "galaxy": {
+      "alive": 5,
+      "ships": 35,
+      "power": 4278,
+      "techs": 11,
+      "colonies": 8,
+      "disbandedShips": 0,
+      "finalSaveSHA256": "8efaf183369e22f286122e05f16b803857802e0050737e239753351ad67cc4a0",
+      "inputSHA256": "e883f6893d1e8f59e3d5285193a4c118037b4535633970c158daa3ef0cef181d",
+      "aiSHA256": "f48608cc82ca46b5028c637dcabbfb1b3e2ae09f1e3c1eb24bd2c4c1b326d8d0"
+     },
+     "actor": {
+      "ships": [
+       7,
+       12
+      ],
+      "power": [
+       1061,
+       2213
+      ],
+      "systems": [
+       2,
+       2
+      ],
+      "techs": [
+       0,
+       2
+      ],
+      "energy": [
+       296,
+       769
+      ],
+      "minEnergy": 261,
+      "minEnergyNet": -25.6,
+      "deficitMonths": 5,
+      "maxFleetUpkeep": 75.4,
+      "maxAwayUpkeep": 71.4,
+      "disbandedShips": 0,
+      "recalls": [],
+      "deadlineReassessments": 0,
+      "attackMonths": 13,
+      "fundMonths": 0,
+      "criticalMonths": 0
+     }
+    },
+    "pl3": {
+     "galaxy": {
+      "alive": 5,
+      "ships": 49,
+      "power": 5770,
+      "techs": 11,
+      "colonies": 9,
+      "disbandedShips": 0,
+      "finalSaveSHA256": "60107fe034c5d9fa16dab5a7b5703e8cf1989fbcdfd6d2abd9f43ebb6d351063",
+      "inputSHA256": "e883f6893d1e8f59e3d5285193a4c118037b4535633970c158daa3ef0cef181d",
+      "aiSHA256": "f48608cc82ca46b5028c637dcabbfb1b3e2ae09f1e3c1eb24bd2c4c1b326d8d0"
+     },
+     "actor": {
+      "ships": [
+       7,
+       13
+      ],
+      "power": [
+       1061,
+       2441
+      ],
+      "systems": [
+       2,
+       2
+      ],
+      "techs": [
+       0,
+       2
+      ],
+      "energy": [
+       296,
+       854
+      ],
+      "minEnergy": 261,
+      "minEnergyNet": -25.6,
+      "deficitMonths": 4,
+      "maxFleetUpkeep": 80.2,
+      "maxAwayUpkeep": 79.1,
+      "disbandedShips": 0,
+      "recalls": [],
+      "deadlineReassessments": 0,
+      "attackMonths": 13,
+      "fundMonths": 0,
+      "criticalMonths": 0
+     }
+    },
+    "pl4": {
+     "galaxy": {
+      "alive": 5,
+      "ships": 34,
+      "power": 4164,
+      "techs": 11,
+      "colonies": 9,
+      "disbandedShips": 0,
+      "finalSaveSHA256": "6bf30addf086a395b53b80b036992b2d9f010524ab46964e9f4a92c9781a9a1d",
+      "inputSHA256": "e883f6893d1e8f59e3d5285193a4c118037b4535633970c158daa3ef0cef181d",
+      "aiSHA256": "f48608cc82ca46b5028c637dcabbfb1b3e2ae09f1e3c1eb24bd2c4c1b326d8d0"
+     },
+     "actor": {
+      "ships": [
+       7,
+       12
+      ],
+      "power": [
+       1061,
+       2212
+      ],
+      "systems": [
+       2,
+       2
+      ],
+      "techs": [
+       0,
+       2
+      ],
+      "energy": [
+       296,
+       740
+      ],
+      "minEnergy": 261,
+      "minEnergyNet": -25.6,
+      "deficitMonths": 4,
+      "maxFleetUpkeep": 75.4,
+      "maxAwayUpkeep": 71.4,
+      "disbandedShips": 0,
+      "recalls": [],
+      "deadlineReassessments": 0,
+      "attackMonths": 13,
+      "fundMonths": 0,
+      "criticalMonths": 0
+     }
+    }
+   }
+  },
+  "seed42-month60-to-84": {
+   "actor": null,
+   "fixture": null,
+   "arms": {
+    "control": {
+     "galaxy": {
+      "alive": 5,
+      "ships": 122,
+      "power": 16719,
+      "techs": 29,
+      "colonies": 11,
+      "disbandedShips": 9,
+      "finalSaveSHA256": "d32d20aeda31cffc9584a9f146686e4d0cab2ee8cf08397ef8f2d99922e18b8f",
+      "inputSHA256": "9f005f42370f692f5167017c5ae4f99228781e613aa45bfcf24eb909af25355d",
+      "aiSHA256": "f48608cc82ca46b5028c637dcabbfb1b3e2ae09f1e3c1eb24bd2c4c1b326d8d0"
+     }
+    },
+    "rejected": {
+     "galaxy": {
+      "alive": 5,
+      "ships": 122,
+      "power": 16719,
+      "techs": 29,
+      "colonies": 11,
+      "disbandedShips": 9,
+      "finalSaveSHA256": "d32d20aeda31cffc9584a9f146686e4d0cab2ee8cf08397ef8f2d99922e18b8f",
+      "inputSHA256": "9f005f42370f692f5167017c5ae4f99228781e613aa45bfcf24eb909af25355d",
+      "aiSHA256": "06eb09107504b59a2abeb2d30d4077ec12224b7949f7f0150c7740facb9f0e69"
+     }
+    },
+    "cand2b": {
+     "galaxy": {
+      "alive": 5,
+      "ships": 122,
+      "power": 16719,
+      "techs": 29,
+      "colonies": 11,
+      "disbandedShips": 9,
+      "finalSaveSHA256": "d32d20aeda31cffc9584a9f146686e4d0cab2ee8cf08397ef8f2d99922e18b8f",
+      "inputSHA256": "9f005f42370f692f5167017c5ae4f99228781e613aa45bfcf24eb909af25355d",
+      "aiSHA256": "8141a3fb691db340e66f267a9a94f942d3cb7e2cd542829bbb7493545bff16b0"
+     }
+    }
+   }
+  },
+  "seed404-month60-to-84": {
+   "actor": null,
+   "fixture": null,
+   "arms": {
+    "control": {
+     "galaxy": {
+      "alive": 5,
+      "ships": 199,
+      "power": 23409,
+      "techs": 26,
+      "colonies": 16,
+      "disbandedShips": 0,
+      "finalSaveSHA256": "68e88d3be2f4f3d599afd5619e70090991a2da68d0e330ebe09524402335d574",
+      "inputSHA256": "b7ccac81080a11c15a1b1ce0a5b1e72e8237df5faa3d9cb76d9ec1e33dbc16fd",
+      "aiSHA256": "f48608cc82ca46b5028c637dcabbfb1b3e2ae09f1e3c1eb24bd2c4c1b326d8d0"
+     }
+    },
+    "rejected": {
+     "galaxy": {
+      "alive": 5,
+      "ships": 199,
+      "power": 23409,
+      "techs": 26,
+      "colonies": 16,
+      "disbandedShips": 0,
+      "finalSaveSHA256": "68e88d3be2f4f3d599afd5619e70090991a2da68d0e330ebe09524402335d574",
+      "inputSHA256": "b7ccac81080a11c15a1b1ce0a5b1e72e8237df5faa3d9cb76d9ec1e33dbc16fd",
+      "aiSHA256": "06eb09107504b59a2abeb2d30d4077ec12224b7949f7f0150c7740facb9f0e69"
+     }
+    },
+    "cand2b": {
+     "galaxy": {
+      "alive": 5,
+      "ships": 199,
+      "power": 23409,
+      "techs": 26,
+      "colonies": 16,
+      "disbandedShips": 0,
+      "finalSaveSHA256": "68e88d3be2f4f3d599afd5619e70090991a2da68d0e330ebe09524402335d574",
+      "inputSHA256": "b7ccac81080a11c15a1b1ce0a5b1e72e8237df5faa3d9cb76d9ec1e33dbc16fd",
+      "aiSHA256": "8141a3fb691db340e66f267a9a94f942d3cb7e2cd542829bbb7493545bff16b0"
+     }
+    }
+   }
+  }
+ }
+}

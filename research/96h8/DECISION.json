@@ -1,0 +1,33 @@
+{
+ "phase": "96H.8",
+ "status": "ACCEPTED",
+ "base_head": "698874ce2d25c7bddbc17021f2cd825c48b87712",
+ "build": "96h8",
+ "pwa": "stars-v96h8",
+ "save": 8,
+ "accepted": "candidate-2b: fixed failed-target cooldown + deployed-upkeep sustainability check (6-month campaign hold + aiDisbandTick 6-month wartime crisis band) + funded detachment from the merged rally stack + recall of foreign deployments before the disband crisis (6 + return months + 1 AI interval)",
+ "rejected": {
+  "candidate-1": "gate only: seed11 actor1 never attacks (merged 24-ship stack indivisible) — artificial passivity",
+  "candidate-2a": "superseded: open-ended deployment, seed11 actor1 month78 15-ship wartime disband in 120-month run",
+  "96H.7 campaign-deadline": "kept rejected: same-save 22-ship disband; 120-month wartime deployment disbands 27 ships"
+ },
+ "gates": {
+  "real_defect_fixed": "PASS: seed11 deadline 2160 fixed (96H.7.1: 2160→2190→2460); reassessment events 38→2 over 8x120",
+  "attack_capability": "PASS: seed11 actor1 attack months 0→11 (real deployment, away upkeep 9→24); seed23 actor5 11–14→17",
+  "same_save_economy": "PASS: actor1 energy 2236→2298 (band 2108–2174); actor3 min net −72→−28; actor5 −25.6→−3.5; critical 0",
+  "no_large_disband": "PASS: wartime deployment-driven disbands 8x120 12→0; same-save seed11 m40 12→0; total disbanded ships 137→136",
+  "rules_preserved": "see full regression in RELEASE-96H8.json",
+  "save_rng": "PASS: no rnd() in new code; 6/8 seeds monthly full Save+RNG equal for 120 months; Save8 round trip tests",
+  "cost": "PASS: +0.04 ms per campaign call",
+  "measurable_benefit": "PASS: actor3 navy preserved far outside chaos band (m60 3831 vs 0–198; m90 7800 vs 0–1221); 8x120 power +3.3%, techs +4, colonies +2, critical equal"
+ },
+ "not_claimed": [
+  "240-month critical 62→53 (new states not born in candidate runs)",
+  "colony capture of defended worlds (needs ground armies)"
+ ],
+ "open": [
+  "seed23 long-run techs mean 33.6→29.2 (120) and 75→68.8 (240), ranges overlap",
+  "aiDisbandTick base-upkeep over-cut unchanged",
+  "physical Android NOT RUN"
+ ]
+}

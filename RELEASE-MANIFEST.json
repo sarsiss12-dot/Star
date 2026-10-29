@@ -1,14 +1,14 @@
 {
-  "phase": "96H.7.1",
-  "build": "96h71",
-  "scope": "Save8 load hotfix: closed single-member joint campaign history is accepted; active joint plans still require two members. AI decisions, economy, military strategy and galaxy limits unchanged.",
+  "phase": "96H.8",
+  "build": "96h8",
+  "scope": "Military campaign efficiency: fixed failed-target cooldown, real deployed-upkeep check before attack orders, funded detachment from the merged rally stack, and recall of unfunded deployments before the wartime disband crisis. Save8 schema and RNG order unchanged.",
   "save_version": 8,
-  "pwa_cache": "stars-v96h71",
-  "parent_commit": "73c0f2e8d58024c0350e108f68e1dcf708ce8a51",
-  "parent_zip_sha256": "68b64e6cb918a106733568761b0a1a30b16e4550c96d2e26ebde56822ebcb6a0",
+  "pwa_cache": "stars-v96h8",
+  "parent_commit": "698874ce2d25c7bddbc17021f2cd825c48b87712",
+  "parent_zip_sha256": "2c85cc5e714b69d357c6fad1b7389fab13d082a9f48bf733f279992d3bc9ae3b",
   "file_count": 19,
   "files": {
-    "ai.js": "f48608cc82ca46b5028c637dcabbfb1b3e2ae09f1e3c1eb24bd2c4c1b326d8d0",
+    "ai.js": "8141a3fb691db340e66f267a9a94f942d3cb7e2cd542829bbb7493545bff16b0",
     "archive-ui.js": "f3b43957f97f2a32add1f40fc22f493eeca89bc5e1db05e5a5de92eef0e9fc03",
     "audio.js": "6ddf6e388fa404394fee6220c2bfeeb3d1f9601c51a35ccdfe3181a8781942f7",
     "combat.js": "b4e21fcdb6fdaaa93da07313131470de3e8a3c28b5650226a9c4a2713bde73a5",
@@ -21,11 +21,11 @@
     "economy.js": "5d412d488760ae2b7193b13822b747788130b63ed782e62bfbd3223154b69d22",
     "inbox.js": "5f53ac2ca9c3ca8d5f1a12a9e1ba2b2a247ab7e350df0ec9169a13cfe3285204",
     "index.html": "984d2c51e33637a0b3312a072e3348b5e943f4c2c7156530affeb7d6ceb83259",
-    "main.js": "961a4091d329890cb15c42f16c941b4955bd277f846e0042f484c32b5a8a71c3",
+    "main.js": "54720c70c9662577e33456fac1004d2094821067bee67f4ec7dae64a6e518444",
     "manifest.json": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
     "map.js": "d8ca27ee07c484b7399f95d8031aa70fb7539bcf89d768c8442200b7cba76ae3",
     "news.js": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
-    "sw.js": "713e0c4d6ea50cacf752e1294e38c6f4752a9728c466fe71b47a68a523da36f5",
+    "sw.js": "c7de73e6182f59c625b548373ab23f2fad7193eb962c4850160912df1eda38db",
     "ui.js": "4b2139007f7d4f100afddefeb2769523c03cbd862b0e27678e0d5868c18e3283"
   }
 }
