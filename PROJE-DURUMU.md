@@ -6,14 +6,27 @@ Son güncelleme: 2026-10-29. Depo `sarsiss12-dot/Star`.
 
 | | `main` (birleşmiş) | Bu dal (PR) |
 |---|---|---|
-| Faz | 96H.10 + MP.0 (+ 96H.11 araştırma arşivi) | MP.1 (telefon öncelikli oda kur/katıl + galaktik lobi; geliştirme prototipi) |
+| Faz | 96H.10 + MP.0 + MP.1 (+ 96H.11 araştırma arşivi) | MP.1.1 (internet dağıtımına hazırlık; dağıtılmadı) |
 | Build / PWA | `96h10` / `stars-v96h10` | değişmedi |
 | Save | v8 | v8 (şema değişmedi) |
 | Oyun ZIP | `releases/stars-faz96h10.zip` (SHA-256 `78e76d1627b8ec1b990849b2242835f78667f110e1d6f17021760183ee7be6d0`) | yeni ZIP yok |
-| Taban HEAD | `8b748b5f66a6aceb707a312cbbbc8bed20ec4f0e` | — |
+| Taban HEAD | `7fa0eddc648d1148362dc8a41b5b43111b4b1448` | — |
 | Değişen runtime | — | yok (19 dosya 96H.10 ile aynı) |
 
-96H.6.2, 96H.6.3, 96H.7, 96H.11, MP.0 ve MP.1 oyun yayımlamadı.
+96H.6.2, 96H.6.3, 96H.7, 96H.11, MP.0, MP.1 ve MP.1.1 oyun yayımlamadı.
+
+## MP.1.1 — internetten erişime hazırlık (dağıtılmadı)
+
+Ayrıntı: `MULTIPLAYER-MP11-DEPLOYMENT.md`, `MULTIPLAYER-MP11-SECURITY.md`, `MULTIPLAYER-MP11-SONUC.md`. Kod: `research/mp1/deploy/` (Dockerfile, Caddy örneği, ortam şablonu, `smoke.js`), `research/mp1/server/relay.js` üretim kipi. Testler: `tests/mp11_online_test.js`, `tests/browser-mp11.cjs`.
+
+- **Gerçek dağıtım yapılamadı.** Oturumda bulut kimlik bilgisi, dağıtım CLI'ı, Docker daemon'ı ve dışarıdan erişim yoktu; tünel hizmeti ağ politikasınca engelli. URL yok.
+- **Relay üretim kipi:**
+  - herkese açık bağlamada TLS/güvenilen vekil + `https://` köken listesi şart; `MP1_DEV` reddedilir;
+  - HTTP→HTTPS 308 ve TLS'siz WebSocket 403; HSTS; `/healthz`;
+  - `PORT` desteği, IP başı oda açma sınırı, SIGTERM'de düzenli kapanış.
+- **Android arka plan/ekran kilidi:** host gizlenince oyun güvenle duraklar, misafir nedenini görür, komutlar `paused` ile reddedilir; dönünce önceki hız geri gelir.
+- **Kanıt (yerel, gerçek TCP/TLS):** TLS sonlandıran ters vekil arkasında iki ayrı Chromium süreci HTTPS sayfa + WSS ile oda kurdu, katıldı, başlattı, gerçek inşa komutu uyguladı. Smoke aracı doğrudan TLS, vekil arkası ve Dockerfile dosya kümesiyle geçti.
+- **NOT RUN:** gerçek internet, fiziksel Android, aynı Wi-Fi, Docker imaj derlemesi.
 
 ## MP.1 — telefon öncelikli oda kur / katıl, galaktik lobi (geliştirme prototipi, dağıtılmadı)
 
@@ -138,7 +151,8 @@ Sabit başarısız-hedef beklemesi, sevk öncesi gerçek bakım kapısı, karş�
 - 96H.11 (runtime değişmedi, `667cf56` ağacı): 139 paket 6109 PASS / 3 FAIL (aynı 3 FAIL); Chromium `browser-96h10.cjs` 27/27 PASS, sayfa hatası 0; `verify-release.py` ZIP kökünde DOĞRULANDI (19 dosya, build 96h10).
 - MP.0 (runtime değişmedi, `f603975` ağacı + iki yeni test): 140 paket 6120 PASS / 3 FAIL (139 mevcut paket 96H.10 ile aynı, yeni `mp0_core_test.js` 11 PASS); Chromium `browser-96h10.cjs` 27/27 PASS; `browser-mp0.cjs` 20/20 PASS (60 ms gecikmeli relay ile de 20/20).
 - MP.1 (runtime değişmedi, `8b748b5` ağacı + üç yeni test): 142 paket 6143 PASS / 3 FAIL (140 mevcut paket MP.0 ile aynı; `mp1_lobby_core_test.js` 9, `mp1_relay_test.js` 14 PASS); `browser-96h10.cjs` 27/27, `browser-mp0.cjs` 20/20, `browser-mp1.cjs` 22/22 PASS.
-- Önceden var olan 3 FAIL: `faz95d_identity_test.js`, seed 11/99/404 coğrafya koordinatlarında son ondalık basamak farkı (Node/V8 kayan nokta). 96H.7.1–96H.11, MP.0 ve MP.1'de değişiklikten önce ve sonra aynı. Fixture yenilenmedi.
+- MP.1.1 (runtime değişmedi, `7fa0edd` ağacı): 145 paket 6154 PASS / 3 FAIL (yeni `mp11_online_test.js` 9; `mp1_lobby_core_test.js`'in iki uzun denetimi `mp1_actor_vision_test.js` + `_b_` dosyalarına taşındı, run-all 180 sn sınırı); `browser-96h10` 27/27, `browser-mp0` 20/20, `browser-mp1` 22/22, `browser-mp11` 10/10 PASS. Ayrıntı `MULTIPLAYER-MP11-SONUC.md` §4.
+- Önceden var olan 3 FAIL: `faz95d_identity_test.js`, seed 11/99/404 coğrafya koordinatlarında son ondalık basamak farkı (Node/V8 kayan nokta). 96H.7.1–96H.11, MP.0, MP.1 ve MP.1.1'de değişiklikten önce ve sonra aynı. Fixture yenilenmedi.
 - Test yan etkisi: `tests/navy-95a-after-*.json`, `tests/audit-95d/…`, `tests/audit96e1/…`, `tests/audit96g2/`; commit öncesi geri alın.
 
 ## Açık konular (sıralı)

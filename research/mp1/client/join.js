@@ -30,9 +30,10 @@ function connect(){
   J.seq=load().seq||0;J.screen='connecting';render();const t0=performance.now();
   const ws=new WebSocket((location.protocol==='https:'?'wss://':'ws://')+location.host+'/mp1/ws?role=client&code='+code);J.ws=ws;
   ws.onmessage=ev=>receive(String(ev.data),t0);
-  ws.onclose=ev=>{if(J.ws!==ws)return;J.ws=null;J.hostOnline=false;
+  ws.onclose=ev=>{ev=ev||{};if(J.ws!==ws)return;J.ws=null;J.hostOnline=false;
     /* Kapanış kodu son sözdür: neden çerçevesi yolda kaybolsa bile oda kapandı/atıldın/dolu döngüye girmez. */
     if(!J.closed&&(ev.code===4003||FINAL[ev.code])){J.closed=true;J.screen='join';J.lobby=null;J.err=ev.code===4003?kickMsg(ev.reason):V.ERR[ev.reason]||V.ERR[FINAL[ev.code]];}
+    else if(J.screen==='connecting'){J.screen='join';J.err='Bağlanılamadı. İnternet bağlantını ve davet adresini kontrol et.';}   // el sıkışma reddi / sunucu yok
     if(!J.leaving&&!J.closed&&['lobby','game'].includes(J.screen)){const d=Math.min(8000,400*2**J.retry++);J.reconnecting=true;setTimeout(()=>{if(!J.ws&&!J.closed)connect();},d);}
     render();};
 }
@@ -45,7 +46,7 @@ function receive(t,t0){
     if(m.t==='welcome'){J.hostOnline=!!m.host;J.retry=0;J.reconnecting=false;if(J.stats.connectMs===null&&t0)J.stats.connectMs=Math.round(performance.now()-t0);if(J.hostOnline)hello();else J.err=V.ERR['no-host'];}
     else if(m.t==='host-up'){J.hostOnline=true;J.err='';hello();}
     else if(m.t==='host-left'){J.hostOnline=false;}
-    else if(m.t==='room-closed'){J.closed=true;J.screen='join';J.lobby=null;J.err=V.ERR['room-closed'];}
+    else if(m.t==='room-closed'){J.closed=true;J.screen='join';J.lobby=null;J.err=V.ERR[m.reason==='server-restart'?'server-restart':'room-closed'];}
     else if(m.t==='kicked'){J.closed=true;J.screen='join';J.lobby=null;J.err=kickMsg(m.reason);}   // relay K nedeni: host'un gerçek gerekçesi
     else if(m.t==='error'){J.errors.push(m.code);if(['invalid-code','room-full','room-closed','rate-limited','server-full'].includes(m.code)){J.closed=true;J.screen='join';J.err=V.ERR[m.code]||m.code;}}
     return render();}
@@ -62,6 +63,8 @@ function receive(t,t0){
   render();
 }
 setInterval(()=>{if(J.hostOnline&&J.ws)raw({v:1,type:'ping',t:Math.round(performance.now())});},3000);
+/* Telefon uykudan/arka plandan dönünce bekleme süresini beklemeden hemen yeniden bağlan. */
+doc.addEventListener('visibilitychange',()=>{if(!doc.hidden&&!J.ws&&!J.closed&&!J.leaving&&['lobby','game'].includes(J.screen)){J.retry=0;connect();}});
 
 /* ---------- geri tuşu: odadan habersiz çıkılmaz ---------- */
 addEventListener('popstate',()=>{
@@ -88,8 +91,10 @@ function render(){
   if(J.screen==='game')return game(app);
 }
 function statusBar(){const live=J.ws&&J.ws.readyState===1;
-  const t=!live?(J.reconnecting?'Bağlantı koptu — yeniden bağlanılıyor…':'Bağlantı yok'):!J.hostOnline?'Host bağlı değil — oyun duraklatıldı':'Bağlı · oda '+esc(J.code);
-  return '<div class="mp1-status '+(live&&J.hostOnline?'ok':'bad')+'" id="jConn">'+t+'</div>';}
+  const pz=J.lobby&&J.lobby.phase==='paused'?J.lobby.pause:null;
+  const t=!live?(J.reconnecting?'Bağlantı koptu — yeniden bağlanılıyor…':'Bağlantı yok'):!J.hostOnline?'Host bağlı değil — oyun duraklatıldı':
+    pz==='host-background'?'Oyun duraklatıldı — host uygulamayı arka plana aldı ya da ekranı kilitledi':pz?'Oyun duraklatıldı — host bağlantısı bekleniyor':'Bağlı · oda '+esc(J.code);
+  return '<div class="mp1-status '+(live&&J.hostOnline&&!pz?'ok':'bad')+'" id="jConn">'+t+'</div>';}
 function lobby(app){
   const L=J.lobby;if(!L){app.innerHTML=statusBar()+'<div class="mp1-status">Lobi bekleniyor…</div>';return;}
   const me=L.players.find(p=>L.you&&p.seat===L.you.seat)||{};
@@ -122,7 +127,7 @@ function game(app){
       Object.entries(col.b).map(([k,n])=>esc(k)+'×'+(+n)).join(' ')+(col.q.length?'<div class="mp1-sub">Kuyruk: '+col.q.map(w=>esc(w.k)+' '+(+w.l)+'g').join(', ')+'</div>':'')+
       '<select class="mp1-sel" data-col="'+(+col.s)+':'+(+col.p)+'">'+opts+'</select><button class="mp1-btn pri" data-j="build" data-col="'+(+col.s)+':'+(+col.p)+'">İNŞA ET</button></td></tr>').join('')+'</table>'+
     '<div class="mp1-sub">Bilinen sistem '+Object.values(v.sys).filter(s=>s.k).length+' · görünen yabancı filo '+Object.values(v.fleets).filter(f=>!f.own).length+' · temas '+Object.keys(v.emps).length+'</div>'+
-    (J.results.length?'<div class="mp1-card" id="jLog">':'<div id="jLog">')+J.results.slice(-5).reverse().map(r=>esc(r.status)+(r.code?' '+esc(r.code):'')+(r.ms!==undefined?' · '+(+r.ms)+' ms':'')).join('<br>')+'</div>';
+    (J.results.length?'<div class="mp1-card" id="jLog">':'<div id="jLog">')+J.results.slice(-5).reverse().map(r=>esc(r.status)+(r.code?' '+esc(V.ERR[r.code]||r.code):'')+(r.ms!==undefined?' · '+(+r.ms)+' ms':'')).join('<br>')+'</div>';
   for(const [k,val] of Object.entries(keep)){const s=doc.querySelector('select[data-col="'+k+'"]');if(s)s.value=val;}
 }
 doc.addEventListener('click',e=>{

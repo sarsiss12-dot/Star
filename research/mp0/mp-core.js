@@ -172,7 +172,7 @@ function createHost(opts){
     if(p.results.has(msg.cid)){stats.duplicate++;const old=p.results.get(msg.cid);out(conn,{...old,dup:1});return old;}
     if(msg.seq<=p.lastSeq){stats.stale++;return result(null,conn,msg,'rejected','stale-seq');}   // önbelleğe girmez: cid eskisini ezmesin
     p.lastSeq=msg.seq;p.lastSeen=now();
-    if(L&&L.phase!=='ingame')return result(p,conn,msg,'rejected','not-started');
+    if(L&&!['ingame','paused'].includes(L.phase))return result(p,conn,msg,'rejected','not-started');   // duraklatmada 'paused' (aşağıda) döner
     if(p.empireId===null)return result(p,conn,msg,'rejected','no-empire');
     if(has(msg,'empire')&&msg.empire!==p.empireId)return result(p,conn,msg,'rejected','forged-empire');
     if(S.paused)return result(p,conn,msg,'rejected','paused');
@@ -279,7 +279,7 @@ function createHost(opts){
     /* Tohum yalnız host'ta: tohum + açık motor kodu tüm galaksiyi (konumlar, AI devletleri) yeniden kurdurur. */
     const settings=L.settings&&(viewer&&viewer.playerId==='host'?L.settings:{size:L.settings.size,aiCount:L.settings.aiCount,...(L.settings.shape!==undefined?{shape:L.settings.shape}:{})});
     const mine=viewer&&viewer.claim!==null&&G.emps&&G.emps[viewer.claim]?{empire:viewer.claim,...prepCard(G.emps[viewer.claim])}:null;
-    return {v:PROTOCOL,type:'lobby',rev:L.rev,phase:phaseNow(),capacity:L.capacity,settings,galaxyRev:L.galaxyRev,
+    return {v:PROTOCOL,type:'lobby',rev:L.rev,phase:phaseNow(),pause:L.pause||null,capacity:L.capacity,settings,galaxyRev:L.galaxyRev,
       you:viewer?{seat:viewer.seat}:null,canStart:canStart().ok,
       players:gs.map(p=>({seat:p.seat,name:p.name,color:p.color,host:p.playerId==='host',online:p.playerId==='host'||!!p.conn,claim:p.empireId!==null?p.empireId:p.claim,ready:!!p.ready,tab:p.tab})),
       empires,mine};
@@ -399,7 +399,8 @@ function createHost(opts){
   return {onMessage,onLeave,onJoin(){},publish,publishTo,assign,release,installGuards,meta,restore,viewFor,
     isHuman:humanEmpire,isRemoteHuman:remoteHuman,state:S,stats,COMMANDS,HANDLERS,clock,fnv,observeHumans,
     configure,setCapacity,claimFor,setHostTab,start,canStart,kick:kickPlayer,close:closeRoom,lobbyView:()=>L&&lobbyView(S.players.get('host')),lobby:L,
-    setPaused(v){S.paused=!!v;if(L&&['ingame','paused'].includes(L.phase)){const ph=v?'paused':'ingame';if(L.phase!==ph){L.phase=ph;broadcastLobby();}}}};
+    /* MP.1.1: duraklatma nedeni (host-offline / host-background) misafire lobide 'pause' olarak gider; MP.0 çağrısı nedensiz kalır. */
+    setPaused(v,why){S.paused=!!v;if(L&&['ingame','paused'].includes(L.phase)){const ph=v?'paused':'ingame',pw=v?(why||'host'):null;if(L.phase!==ph||L.pause!==pw){L.phase=ph;L.pause=pw;broadcastLobby();}}}};
 }
 root.StarsMP={PROTOCOL,createHost,fnv,isHumanActor,actorVision,TABS};
 })(typeof globalThis!=='undefined'?globalThis:this);

@@ -110,7 +110,7 @@ function open(url,auth){
   ws.onmessage=ev=>{
     const t=String(ev.data),k=t[0];
     if(k==='R'){const m=JSON.parse(t.slice(1));log('relay',{t:m.t,code:m.code&&'***'});
-      if(m.t==='room'){API.connected=true;API.retry=0;if(m.key){API.code=m.code;API.key=m.key;}if(!API.host)makeHost();else API.host.setPaused(false);pushCap();if(API.screen==='connecting')go('lobby',true);else render();}
+      if(m.t==='room'){API.connected=true;API.retry=0;if(m.key){API.code=m.code;API.key=m.key;}if(!API.host)makeHost();else syncPause();pushCap();if(API.screen==='connecting')go('lobby',true);else render();}
       else if(m.t==='error'){API.err=V.ERR[m.code]||m.code;if(!API.host){API.ws=null;go('menu',true);}}
       else if(m.t==='room-closed'){API.closed=true;API.err=V.ERR['room-closed'];}
       return;}
@@ -119,7 +119,7 @@ function open(url,auth){
     else if(k==='L'){API.host.onLeave(t.slice(1));log('leave');}
     else if(k==='F'){const nl=t.indexOf('\n');API.host.onMessage(t.slice(1,nl),t.slice(nl+1));}
   };
-  ws.onclose=ev=>{API.connected=false;API.ws=null;if(API.host)API.host.setPaused(true);
+  ws.onclose=ev=>{ev=ev||{};API.connected=false;API.ws=null;if(API.host)syncPause();
     if(ev.code===4001||ev.code===4004){API.closed=true;API.err=V.ERR[ev.reason]||V.ERR['room-closed'];}   // TTL/host süresi doldu: yeniden deneme yok
     render();
     if(API.host&&!API.closed&&API.code){const d=Math.min(10000,500*2**API.retry++);setTimeout(()=>{if(!API.ws&&!API.closed)open(wsUrl('role=host&code='+encodeURIComponent(API.code)),true);},d);}};
@@ -174,6 +174,16 @@ function mini(){
     (API.connected?'bağlı':API.closed?'oda kapandı — oyun yalnız bu telefonda sürüyor':'bağlantı yok')+' · '+(gs.length-off)+'/'+gs.length+' misafir</button>'+
     (open?gs.map(p=>{const pid=pidOfSeat(p.seat);return '<div>'+esc(p.name)+' · '+(p.online?'bağlı':'koptu — koltuk bekletiliyor')+(p.online?'':'<button class="mp1-btn" data-g="kick" data-pid="'+esc(pid)+'">Çıkar (devlet boşta)</button><button class="mp1-btn" data-g="ai" data-pid="'+esc(pid)+'">Devleti AI\'ya ver</button>')+'</div>';}).join(''):'');
 }
+/* ---------- Android arka plan / ekran kilidi ----------
+   Arka planda rAF durur, zamanlayıcılar kısılır, sekme dondurulabilir. Yarım hızla
+   sürüp misafirleri belirsiz bırakmak yerine: oyun güvenle duraklar, misafir nedeni
+   görür; geri dönünce önceki hız geri gelir. Duraklatma iki kaynaklı: arka plan ve relay yok. */
+function syncPause(){if(!API.host)return;const why=API.bg?'host-background':!API.connected?'host-offline':null;API.host.setPaused(!!why,why||undefined);}
+function onHidden(){if(!API.host||!API.started||API.bg)return;API.bg=true;API.bgSpeed=G.speed;if(G.speed!==0&&typeof UI!=='undefined')UI.setSpeed(0);syncPause();log('background');}
+function onVisible(){if(!API.bg)return;API.bg=false;syncPause();if(API.bgSpeed&&typeof UI!=='undefined')UI.setSpeed(API.bgSpeed);API.bgSpeed=0;log('foreground');
+  if(!API.ws&&!API.closed&&API.code){API.retry=0;open(wsUrl('role=host&code='+encodeURIComponent(API.code)),true);}}
+doc.addEventListener('visibilitychange',()=>{if(doc.hidden)onHidden();else onVisible();});
+addEventListener('pagehide',onHidden);addEventListener('pageshow',()=>{if(!doc.hidden)onVisible();});
 /* ---------- test ve geliştirme API'si (ağdan erişilemez) ---------- */
 API.advance=function(days){
   if(G.speed!==0)throw Error('advance yalnız duraklatılmış oyunda');

@@ -9,7 +9,7 @@ const PHASE={created:'Oda açıldı — galaksi bekleniyor',waiting:'Oyuncular b
 const ERR={'invalid-code':'Oda kodu geçersiz ya da oda yok.','room-full':'Oda dolu.','room-closed':'Oda kapandı.','game-started':'Oyun başladı; yeni oyuncu alınmıyor.',
   kicked:'Host seni odadan çıkardı.','rate-limited':'Çok fazla deneme. Biraz bekle.','no-host':'Host şu an bağlı değil.','server-full':'Sunucu dolu.',
   'bad-host-key':'Host anahtarı geçersiz.','host-exists':'Bu odanın host bağlantısı zaten açık.',taken:'Bu devlet başka bir oyuncuda.','not-claimable':'Bu devlet seçilemez.',
-  'host-empire':'Host\'un devleti seçilemez.','no-claim':'Önce bir devlet seç.',phase:'Bu aşamada yapılamaz.','not-started':'Oyun henüz başlamadı.',offline:'Bağlantı yok.'};
+  'host-empire':'Host\'un devleti seçilemez.','no-claim':'Önce bir devlet seç.',phase:'Bu aşamada yapılamaz.','not-started':'Oyun henüz başlamadı.',offline:'Bağlantı yok.',paused:'Oyun duraklatıldı; komut uygulanmadı.','server-restart':'Sunucu yeniden başlatıldı; oda kapandı.'};
 const fmtCode=c=>String(c||'').replace(/^(.{4})(.+)$/,'$1-$2');
 function players(L){
   return '<div class="mp1-plist">'+L.players.map(p=>{

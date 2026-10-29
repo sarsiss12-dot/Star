@@ -22,18 +22,7 @@ const hello=(h,conn,name,token)=>send(h,conn,{v:1,type:'hello',name,...(token?{t
 const lastLobby=(h,conn)=>msgs(h,conn).filter(m=>m.type==='lobby').at(-1);
 const SETTINGS={size:'orta',aiCount:5,seed:11};
 
-test('isHumanActor is exactly the single-player human (empire 0) over 120 months on five seeds, and is not an id check',()=>{
-  for(const seed of [11,23,42,99,404]){const h=runtime({root});h.run(CORE);h.run(`setupGame({...CFG,seed:${seed}});G.autoSave=false;${STEP}
-    var bad=0;const mt=monthTick;monthTick=function(){const r=mt.apply(this,arguments);const hs=G.emps.filter(StarsMP.isHumanActor).map(e=>e.id).join();if(hs!=='0')bad++;return r;};step(3600)`);
-    assert.equal(h.run('bad'),0,'seed '+seed);}
-  const h=runtime({root});h.run(CORE);h.run('setupGame({...CFG,seed:11});G.emps[3].ai=false');
-  assert.deepEqual(json(h,'G.emps.filter(StarsMP.isHumanActor).map(e=>e.id)'),[0,3]);
-});
-test('actor-general vision equals updateVision for the local player (5 seeds × 120 months)',()=>{
-  for(const seed of [11,23,42,99,404]){const h=runtime({root});h.run(CORE);h.run(`setupGame({...CFG,seed:${seed}});G.autoSave=false;${STEP}
-    var bad=0,n=0;const mt=monthTick;monthTick=function(){const r=mt.apply(this,arguments);n++;if([...StarsMP.actorVision(G.p)].sort().join()!==[...G.vis].sort().join())bad++;return r;};step(3600)`);
-    assert.equal(h.run('bad'),0,'seed '+seed);assert.equal(h.run('n'),120);}
-});
+/* isHumanActor ve actorVision'ın 5 seed × 120 aylık eşdeğerlik kanıtı: tests/mp1_actor_vision_test.js + mp1_actor_vision_b_test.js (ortak simülasyon; run-all süre sınırı). */
 test('lobby host with no remote human is a no-op: same Save8 as the plain engine after 120 days (observeHumans + publish each month)',()=>{
   const a=runtime({root});a.run(`setupGame({...CFG,...${JSON.stringify(SETTINGS)}});applyChosenPersona(G.p,CFG.mizac);G.autoSave=false;${STEP};step(120)`);
   const b=lobbyWorld();b.run(`MP.configure(${JSON.stringify(SETTINGS)});MP.__obs=true;MP.__pub=true;step(120)`);

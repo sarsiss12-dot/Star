@@ -8,11 +8,17 @@
    ters vekil/platform (HTTPS→WSS) ya da MP1_TLS_CERT/MP1_TLS_KEY ile sağlanmalı.
    TLS olmadan internete açılmamalıdır.
 
-   Ortam: MP1_PORT, MP1_BIND (vars. 127.0.0.1), MP1_ORIGINS (virgüllü izinli Origin
+   ÜRETİM KİPİ (MP.1.1): MP1_BIND döngü (loopback) dışındaysa relay ancak şu koşullarla açılır:
+   TLS (MP1_TLS_CERT/KEY) ya da güvenilen TLS vekili (MP1_TRUST_PROXY=1), https:// kökenli
+   MP1_ORIGINS ve kapalı MP1_DEV. Aksi halde başlamayı reddeder. Bu kipte TLS'siz istek
+   (vekilin X-Forwarded-Proto'su https değilse) GET için https'e 308 ile yönlendirilir,
+   WebSocket için 403 alır; yanıtlara HSTS eklenir. /healthz her zaman açıktır (gövde: {"ok":true}).
+
+   Ortam: MP1_PORT (yoksa PORT), MP1_BIND (vars. 127.0.0.1), MP1_ORIGINS (virgüllü izinli Origin
    listesi; boşsa yalnız Host ile aynı köken ya da Origin'siz yerel araç),
    MP1_DEV=1 (/mp/stats açık), MP1_TLS_CERT/MP1_TLS_KEY, MP1_ROOM_TTL_MS,
    MP1_HOST_GRACE_MS, MP1_MAX_ROOMS, MP1_AUTH_MS (host anahtar çerçevesi süresi), MP1_TRUST_PROXY=1 (yalnız güvenilen
-   TLS vekilinin arkasında: istemci IP'si X-Forwarded-For'un son girdisinden), MP1_PING_MS (canlılık yoklaması), MP_DELAY_MS (test gecikmesi).
+   TLS vekilinin arkasında: istemci IP'si X-Forwarded-For'un son girdisinden), MP1_PING_MS (canlılık yoklaması), MP1_CREATES_PER_MIN (IP başı oda açma, vars. 10), MP_DELAY_MS (test gecikmesi).
 
    Uç noktalar
      GET /, /index.html  → oyun sayfası + MP.1 katmanı (runtime dosyaları değişmez)
@@ -30,14 +36,16 @@ const ROOT=path.resolve(process.env.STARS_GAME_ROOT||path.join(__dirname,'../../
 const ALPHABET='ABCDEFGHJKMNPQRSTUVWXYZ23456789';               // 31 sembol, karışan 0/O/1/I/L yok
 const CODE_LEN=8;                                               // 31^8 ≈ 8,5·10^11 (≈39,6 bit)
 const LIMITS={clientMsg:8192,hostMsg:262144,clientRate:20,clientBurst:40,hostRate:200,hostBurst:400,maxDrops:100,
-  perIpConns:16,joinPerMin:30,maxGuests:7};
+  perIpConns:16,joinPerMin:30,createPerMin:10,maxGuests:7};
 const TYPES={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.json':'application/json','.css':'text/css; charset=utf-8'};
 const SEC={'X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer','X-Frame-Options':'DENY','Cache-Control':'no-store'};
 
 function create(env=process.env){
-  const cfg={port:+(env.MP1_PORT||0),bind:env.MP1_BIND||'127.0.0.1',origins:(env.MP1_ORIGINS||'').split(',').map(s=>s.trim()).filter(Boolean),
+  const cfg={port:+(env.MP1_PORT||env.PORT||0),bind:env.MP1_BIND||'127.0.0.1',origins:(env.MP1_ORIGINS||'').split(',').map(s=>s.trim()).filter(Boolean),
     dev:env.MP1_DEV==='1',ttl:+(env.MP1_ROOM_TTL_MS||12*3600e3),grace:+(env.MP1_HOST_GRACE_MS||10*60e3),maxRooms:+(env.MP1_MAX_ROOMS||200),
-    cert:env.MP1_TLS_CERT,key:env.MP1_TLS_KEY,ping:+(env.MP1_PING_MS||25e3),auth:+(env.MP1_AUTH_MS||5000),trustProxy:env.MP1_TRUST_PROXY==='1'};
+    cert:env.MP1_TLS_CERT,key:env.MP1_TLS_KEY,ping:+(env.MP1_PING_MS||25e3),auth:+(env.MP1_AUTH_MS||5000),trustProxy:env.MP1_TRUST_PROXY==='1',creates:+(env.MP1_CREATES_PER_MIN||LIMITS.createPerMin)};
+  cfg.public=!['127.0.0.1','::1','localhost'].includes(cfg.bind);
+  cfg.tls=!!(cfg.cert&&cfg.key);
   const rooms=new Map(),tomb=new Map(),ips=new Map();
   const stats={rooms:0,joins:0,denied:{},dropped:0,closedByLimit:0,msgs:0,bytes:0};
   const deny=k=>{stats.denied[k]=(stats.denied[k]||0)+1;};
@@ -65,11 +73,29 @@ function create(env=process.env){
     if(cfg.origins.length)return cfg.origins.includes(o);
     try{return new URL(o).host===req.headers.host;}catch{return false;}
   }
+  /* İstek TLS ile mi geldi: doğrudan TLS ya da güvenilen vekilin son X-Forwarded-Proto girdisi. */
+  function secure(req){if(cfg.tls)return true;if(!cfg.trustProxy)return false;const x=String(req.headers['x-forwarded-proto']||'').split(',').pop().trim();return x==='https';}
+  const mustTls=req=>cfg.public&&!secure(req);
+  function problems(){
+    if(!cfg.public)return [];
+    const p=[];
+    if(!cfg.tls&&!cfg.trustProxy)p.push('TLS yok: MP1_TLS_CERT/MP1_TLS_KEY ya da güvenilen TLS vekili için MP1_TRUST_PROXY=1 gerekli');
+    if(!cfg.origins.length)p.push('MP1_ORIGINS boş: oyunun https:// adresi yazılmalı');
+    if(cfg.origins.some(o=>!/^https:\/\/[^/]+$/.test(o)))p.push('MP1_ORIGINS yalnız https://alan biçiminde olmalı');
+    if(cfg.dev)p.push('MP1_DEV=1 üretimde kapalı olmalı (/mp/stats)');
+    return p;
+  }
   function serve(req,res){
     const url=new URL(req.url,'http://x'),n=decodeURIComponent(url.pathname);
+    if(n==='/healthz'){res.writeHead(200,{...SEC,'Content-Type':TYPES['.json']});return res.end('{"ok":true}');}
+    if(mustTls(req)){
+      if(req.method==='GET'&&req.headers.host&&/^[A-Za-z0-9.:\[\]-]+$/.test(req.headers.host)){res.writeHead(308,{...SEC,Location:'https://'+req.headers.host+url.pathname+url.search});return res.end();}
+      deny('insecure');res.writeHead(403,SEC);return res.end();
+    }
+    if(cfg.public)res.setHeader('Strict-Transport-Security','max-age=31536000');
     if(req.method!=='GET'){res.writeHead(405,SEC);return res.end();}
     if(n==='/'||n==='/index.html'){res.writeHead(200,{...SEC,'Content-Type':TYPES['.html']});return res.end(page());}
-    if(n==='/mp/join'){res.writeHead(200,{...SEC,'Content-Type':TYPES['.html'],'Content-Security-Policy':"default-src 'self'; connect-src 'self' ws: wss:; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'"});
+    if(n==='/mp/join'){res.writeHead(200,{...SEC,'Content-Type':TYPES['.html'],'Content-Security-Policy':"default-src 'self'; connect-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'"});
       return res.end(fs.readFileSync(path.join(ROOT,'research/mp1/client/join.html')));}
     if(n==='/mp/stats'&&cfg.dev){res.writeHead(200,{...SEC,'Content-Type':TYPES['.json']});return res.end(JSON.stringify({...stats,rooms:rooms.size}));}
     const rel=n.replace(/^\/+/,'');
@@ -81,6 +107,7 @@ function create(env=process.env){
   function upgrade(req,socket){
     const url=new URL(req.url,'http://x'),role=url.searchParams.get('role'),key=req.headers['sec-websocket-key'],ip=ipOf(req);
     if(url.pathname!=='/mp1/ws'||!['host','client'].includes(role)||!key){deny('bad-request');return reject(socket,'400 Bad Request');}
+    if(mustTls(req)){deny('insecure');return reject(socket,'403 Forbidden');}
     if(!originOk(req)){deny('origin');return reject(socket,'403 Forbidden');}
     const I=ips.get(ip)||{conns:0,joins:[],at:Date.now()};ips.set(ip,I);
     if(I.conns>=LIMITS.perIpConns){deny('ip-conns');return reject(socket,'429 Too Many Requests');}
@@ -133,6 +160,9 @@ function create(env=process.env){
         if(!r||r.closed){deny('host-unknown');return end(4004,tomb.has(code)?'room-closed':'invalid-code');}
         pending=r;authT=setTimeout(()=>{if(pending){pending=null;deny('host-key');end(4003,'bad-host-key');}},cfg.auth);
       }else{
+        const t=Date.now();I.creates=(I.creates||[]).filter(x=>t-x<60e3);
+        if(I.creates.length>=cfg.creates){deny('create-rate');return end(4029,'rate-limited');}
+        I.creates.push(t);
         if(rooms.size>=cfg.maxRooms){deny('max-rooms');return end(4029,'server-full');}
         const c=newCode(),hk=crypto.randomBytes(24).toString('base64url');
         room={code:c,keyHash:keyHash(hk),host:conn,clients:new Map(),cap:1,created:Date.now(),closed:false};
@@ -151,12 +181,22 @@ function create(env=process.env){
       if(r.host)r.host.send('J'+id);
     }
   }
+  let server=null;
   function start(){
-    const server=cfg.cert&&cfg.key?https.createServer({cert:fs.readFileSync(cfg.cert),key:fs.readFileSync(cfg.key)},serve):http.createServer(serve);
+    const p=problems();if(p.length)return Promise.reject(Object.assign(Error('Relay herkese açık başlatılamaz: '+p.join('; ')),{problems:p}));
+    server=cfg.tls?https.createServer({cert:fs.readFileSync(cfg.cert),key:fs.readFileSync(cfg.key)},serve):http.createServer(serve);
     server.on('upgrade',upgrade);
     return new Promise(res=>server.listen(cfg.port,cfg.bind,()=>res(server)));
   }
-  return {start,rooms,stats,cfg,LIMITS,ALPHABET,CODE_LEN};
+  /* Platform yeniden başlatması (SIGTERM): odaları nedenle kapat, yeni bağlantı alma. */
+  function shutdown(reason='server-restart'){for(const r of [...rooms.values()])closeRoom(r,reason);if(server)server.close();}
+  return {start,shutdown,problems,rooms,stats,cfg,LIMITS,ALPHABET,CODE_LEN};
 }
 module.exports={create,ALPHABET,CODE_LEN,LIMITS};
-if(require.main===module)create().start().then(s=>console.log('STARS MP.1 relay '+(s instanceof https.Server?'https':'http')+'://'+s.address().address+':'+s.address().port));
+if(require.main===module){
+  const r=create();
+  r.start().then(s=>{
+    console.log('STARS MP.1 relay '+(s instanceof https.Server?'https':'http')+'://'+s.address().address+':'+s.address().port+(r.cfg.public?' (herkese açık kip: TLS '+(r.cfg.tls?'doğrudan':'vekilde')+', izinli köken '+r.cfg.origins.length+')':' (yalnız yerel)'));
+    for(const sig of ['SIGTERM','SIGINT'])process.on(sig,()=>{r.shutdown();setTimeout(()=>process.exit(0),300).unref();});
+  },e=>{console.error(e.message);process.exit(1);});
+}

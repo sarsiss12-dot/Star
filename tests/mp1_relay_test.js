@@ -12,7 +12,8 @@ const test=(n,f)=>tests.push([n,f]);
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const logs=[];for(const k of ['log','error','warn','info'])console[k]=((o)=>(...a)=>{logs.push(a.join(' '));o(...a);})(console[k]);
 
-async function relay(env={}){const r=relayMod.create({MP1_PORT:'0',...env});const s=await r.start();r.server=s;r.port=s.address().port;return r;}
+/* Bu dosyadaki vakalar başka sınırları ölçüyor ve tek IP'den çok oda açıyor; oda açma hızı (MP.1.1) kendi testinde (mp11_online_test.js) varsayılanla ölçülür. */
+async function relay(env={}){const r=relayMod.create({MP1_PORT:'0',MP1_CREATES_PER_MIN:'1000',...env});const s=await r.start();r.server=s;r.port=s.address().port;return r;}
 function stop(r){return new Promise(res=>{for(const x of r.rooms.values())for(const c of [x.host,...x.clients.values()])c?.socket.destroy();r.server.close(()=>res());r.server.closeAllConnections?.();});}
 
 /* Minimal RFC 6455 client: masked text frames out, unmasked frames in. */

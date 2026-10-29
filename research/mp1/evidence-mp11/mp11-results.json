@@ -1,0 +1,142 @@
+{
+ "note": "Yerel makine: gerçek TCP/TLS yığını, kendinden imzalı sertifika, TLS ters vekili. Gerçek internet ya da fiziksel Android DEĞİL.",
+ "results": [
+  {
+   "name": "HTTPS: game page and MP layer load over TLS through the reverse proxy; plain HTTP on the relay port is redirected; secure context",
+   "status": "PASS",
+   "ms": 633
+  },
+  {
+   "name": "host phone opens a room over WSS; the host key never appears in a URL or on the page",
+   "status": "PASS",
+   "ms": 2070
+  },
+  {
+   "name": "guest phone (separate browser process) opens the HTTPS invite link and joins over WSS; the guest page loads no engine",
+   "status": "PASS",
+   "ms": 578
+  },
+  {
+   "name": "lobby over the internet path: claim, ready, start; both phones show the same players and game time",
+   "status": "PASS",
+   "ms": 956
+  },
+  {
+   "name": "real STARS command from the guest phone over WSS: santral is queued by the host engine and shown on both sides",
+   "status": "PASS",
+   "ms": 6746
+  },
+  {
+   "name": "Android background / screen lock on the host: game pauses safely, guests see why, commands are refused, frozen tab resumes at the old speed",
+   "status": "PASS",
+   "ms": 3185
+  },
+  {
+   "name": "network loss and recovery over WSS: guest drop keeps the seat; guest page reload rejoins by itself; host drop pauses and the host reattaches with its key",
+   "status": "PASS",
+   "ms": 1590
+  },
+  {
+   "name": "attacks from a third browser: foreign origin refused, wrong code, fake host, room full — each with a clear Turkish message",
+   "status": "PASS",
+   "ms": 1694
+  },
+  {
+   "name": "resources: guest phone and host phone memory/CPU during play; traffic through the TLS proxy",
+   "status": "PASS",
+   "ms": 18
+  },
+  {
+   "name": "host cost on a mid-range phone approximation (4× CPU throttle): month simulation, vision memory and publish at 45 / 60 / 100 systems",
+   "status": "PASS",
+   "ms": 6180
+  }
+ ],
+ "metrics": {
+  "hostPageLoadMs": 586,
+  "roomCreateMs": 205,
+  "inviteToLobbyMs": 416,
+  "guestConnectMs": 24,
+  "startMs": 388,
+  "commandMs": 182,
+  "rttMs": [
+   15,
+   19
+  ],
+  "backgroundMethod": "görünürlük olayı taklidi",
+  "freezeApplied": false,
+  "hostRecoveryMs": 688,
+  "guestResources": {
+   "heapMB": 4,
+   "taskSec": 0.14,
+   "nodes": 5036
+  },
+  "hostResources": {
+   "heapMB": 10,
+   "taskSec": 12.49,
+   "nodes": 2681
+  },
+  "proxyBytes": 69018,
+  "guestBytes": 12042,
+  "guestMsgs": 11,
+  "hostCostNormal": [
+   {
+    "systems": 45,
+    "empires": 7,
+    "monthMs": 135,
+    "observeMs": 0.1,
+    "publishMs": 1.1,
+    "bytesPerMonth": 2985,
+    "heapMB": 11
+   },
+   {
+    "systems": 60,
+    "empires": 9,
+    "monthMs": 101.4,
+    "observeMs": 0.1,
+    "publishMs": 0.5,
+    "bytesPerMonth": 2199,
+    "heapMB": 16
+   },
+   {
+    "systems": 100,
+    "empires": 13,
+    "monthMs": 218.5,
+    "observeMs": 0.1,
+    "publishMs": 1.2,
+    "bytesPerMonth": 4831,
+    "heapMB": 18
+   }
+  ],
+  "hostCost4x": [
+   {
+    "systems": 45,
+    "empires": 7,
+    "monthMs": 165.5,
+    "observeMs": 0,
+    "publishMs": 0.8,
+    "bytesPerMonth": 2985,
+    "heapMB": 22
+   },
+   {
+    "systems": 60,
+    "empires": 9,
+    "monthMs": 221.2,
+    "observeMs": 0,
+    "publishMs": 4.5,
+    "bytesPerMonth": 2199,
+    "heapMB": 26
+   },
+   {
+    "systems": 100,
+    "empires": 13,
+    "monthMs": 582.3,
+    "observeMs": 0.9,
+    "publishMs": 5.8,
+    "bytesPerMonth": 4831,
+    "heapMB": 23
+   }
+  ],
+  "pageErrors": []
+ }
+}
