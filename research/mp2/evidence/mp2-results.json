@@ -1,0 +1,406 @@
+{
+ "note": "Yerel relay + ayrı Chromium süreçleri (mobil dokunmatik bağlam). Gerçek internet ya da fiziksel Android DEĞİL.",
+ "results": [
+  {
+   "name": "real lobby → game with two guests (empires 3 and 4) on seed 11, 45 systems; guests run no engine",
+   "status": "PASS",
+   "ms": 3778
+  },
+  {
+   "name": "map is the default screen: own capital centred, own systems named, unknown systems only as dots, tabs HARİTA/FİLOLAR/KOLONİLER/BİLİM",
+   "status": "PASS",
+   "ms": 158
+  },
+  {
+   "name": "Android touch: one-finger drag pans, two-finger pinch zooms, buttons fit/capital/zoom; tap on a system opens its panel",
+   "status": "PASS",
+   "ms": 779
+  },
+  {
+   "name": "fleet order from the map: select own warfleet, HEDEF SEÇ, tap a system, confirm GÖNDER → host runs orderMove; route shown; fleet arrives in game time",
+   "status": "PASS",
+   "ms": 1134
+  },
+  {
+   "name": "engine rules reach the phone: a warfleet into closed borders is refused with \"Rota kapalı\" and nothing changes",
+   "status": "PASS",
+   "ms": 118
+  },
+  {
+   "name": "FİLOLAR tab lists own fleets; HARİTADA centres the map; selection and camera survive tab switches",
+   "status": "PASS",
+   "ms": 329
+  },
+  {
+   "name": "science on the phone: pick a ready technology → host runs researchTarget; Elle mode; progress grows and the tech completes in game time",
+   "status": "PASS",
+   "ms": 4079
+  },
+  {
+   "name": "locked technology: reason shown, button disabled; host refuses a forced request without side effects",
+   "status": "PASS",
+   "ms": 343
+  },
+  {
+   "name": "authorization from a real guest page: other player's fleet, forged empire, AI research, duplicate cid, stale seq, malformed packet, paused host — all refused, host Save8/RNG unchanged",
+   "status": "PASS",
+   "ms": 934
+  },
+  {
+   "name": "privacy per player: A and B packets recorded separately — only own fleets/research, no uncontacted empire names or ids, no other player's targets",
+   "status": "PASS",
+   "ms": 214
+  },
+  {
+   "name": "reconnect: guest page reload returns to the same tab, camera and selection; fleet route and research come back from the host",
+   "status": "PASS",
+   "ms": 446
+  },
+  {
+   "name": "phone layouts 360×800, 390×844, 412×915, 844×390, 915×412: map fills the screen, no overflow, ≥44 px targets, readable text on every tab",
+   "status": "PASS",
+   "ms": 4677
+  },
+  {
+   "name": "performance: map draw cost, command latency, snapshot/delta size, message rate (live speed 3), guest memory, host month time (45 systems, 2 guests)",
+   "status": "PASS",
+   "ms": 4533
+  },
+  {
+   "name": "60 systems: real play on a second galaxy (move + research), then 100-system capacity check (snapshot size, draw cost, host publish)",
+   "status": "PASS",
+   "ms": 5106
+  }
+ ],
+ "metrics": {
+  "viewports": {
+   "360x800": {
+    "map": {
+     "overflow": false,
+     "small": [],
+     "wide": [],
+     "minFont": 11,
+     "minAt": ":SIĞDIR",
+     "map": {
+      "w": 360,
+      "h": 658
+     },
+     "vw": 360,
+     "vh": 800
+    },
+    "fleets": {
+     "overflow": false,
+     "small": [],
+     "wide": [],
+     "minFont": 12,
+     "minAt": ":Yıl 2212 · Ay 7 ",
+     "map": {
+      "w": 0,
+      "h": 0
+     },
+     "vw": 360,
+     "vh": 800
+    },
+    "cols": {
+     "overflow": false,
+     "small": [],
+     "wide": [],
+     "minFont": 12,
+     "minAt": ":Yıl 2212 · Ay 7 ",
+     "map": {
+      "w": 0,
+      "h": 0
+     },
+     "vw": 360,
+     "vh": 800
+    },
+    "sci": {
+     "overflow": false,
+     "small": [],
+     "wide": [],
+     "minFont": 12,
+     "minAt": ":Yıl 2212 · Ay 7 ",
+     "map": {
+      "w": 0,
+      "h": 0
+     },
+     "vw": 360,
+     "vh": 800
+    }
+   },
+   "390x844": {
+    "map": {
+     "overflow": false,
+     "small": [],
+     "wide": [],
+     "minFont": 11,
+     "minAt": ":SIĞDIR",
+     "map": {
+      "w": 390,
+      "h": 702
+     },
+     "vw": 390,
+     "vh": 844
+    },
+    "fleets": {
+     "overflow": false,
+     "small": [],
+     "wide": [],
+     "minFont": 12,
+     "minAt": ":Yıl 2212 · Ay 7 ",
+     "map": {
+      "w": 0,
+      "h": 0
+     },
+     "vw": 390,
+     "vh": 844
+    },
+    "cols": {
+     "overflow": false,
+     "small": [],
+     "wide": [],
+     "minFont": 12,
+     "minAt": ":Yıl 2212 · Ay 7 ",
+     "map": {
+      "w": 0,
+      "h": 0
+     },
+     "vw": 390,
+     "vh": 844
+    },
+    "sci": {
+     "overflow": false,
+     "small": [],
+     "wide": [],
+     "minFont": 12,
+     "minAt": ":Yıl 2212 · Ay 7 ",
+     "map": {
+      "w": 0,
+      "h": 0
+     },
+     "vw": 390,
+     "vh": 844
+    }
+   },
+   "412x915": {
+    "map": {
+     "overflow": false,
+     "small": [],
+     "wide": [],
+     "minFont": 11,
+     "minAt": ":SIĞDIR",
+     "map": {
+      "w": 412,
+      "h": 773
+     },
+     "vw": 412,
+     "vh": 915
+    },
+    "fleets": {
+     "overflow": false,
+     "small": [],
+     "wide": [],
+     "minFont": 12,
+     "minAt": ":Yıl 2212 · Ay 7 ",
+     "map": {
+      "w": 0,
+      "h": 0
+     },
+     "vw": 412,
+     "vh": 915
+    },
+    "cols": {
+     "overflow": false,
+     "small": [],
+     "wide": [],
+     "minFont": 12,
+     "minAt": ":Yıl 2212 · Ay 7 ",
+     "map": {
+      "w": 0,
+      "h": 0
+     },
+     "vw": 412,
+     "vh": 915
+    },
+    "sci": {
+     "overflow": false,
+     "small": [],
+     "wide": [],
+     "minFont": 12,
+     "minAt": ":Yıl 2212 · Ay 7 ",
+     "map": {
+      "w": 0,
+      "h": 0
+     },
+     "vw": 412,
+     "vh": 915
+    }
+   },
+   "844x390": {
+    "map": {
+     "overflow": false,
+     "small": [],
+     "wide": [],
+     "minFont": 11,
+     "minAt": ":SIĞDIR",
+     "map": {
+      "w": 844,
+      "h": 281
+     },
+     "vw": 844,
+     "vh": 390
+    },
+    "fleets": {
+     "overflow": false,
+     "small": [],
+     "wide": [],
+     "minFont": 12,
+     "minAt": ":Yıl 2212 · Ay 7 ",
+     "map": {
+      "w": 0,
+      "h": 0
+     },
+     "vw": 844,
+     "vh": 390
+    },
+    "cols": {
+     "overflow": false,
+     "small": [],
+     "wide": [],
+     "minFont": 12,
+     "minAt": ":Yıl 2212 · Ay 7 ",
+     "map": {
+      "w": 0,
+      "h": 0
+     },
+     "vw": 844,
+     "vh": 390
+    },
+    "sci": {
+     "overflow": false,
+     "small": [],
+     "wide": [],
+     "minFont": 12,
+     "minAt": ":Yıl 2212 · Ay 7 ",
+     "map": {
+      "w": 0,
+      "h": 0
+     },
+     "vw": 844,
+     "vh": 390
+    }
+   },
+   "915x412": {
+    "map": {
+     "overflow": false,
+     "small": [],
+     "wide": [],
+     "minFont": 11,
+     "minAt": ":SIĞDIR",
+     "map": {
+      "w": 915,
+      "h": 303
+     },
+     "vw": 915,
+     "vh": 412
+    },
+    "fleets": {
+     "overflow": false,
+     "small": [],
+     "wide": [],
+     "minFont": 12,
+     "minAt": ":Yıl 2212 · Ay 7 ",
+     "map": {
+      "w": 0,
+      "h": 0
+     },
+     "vw": 915,
+     "vh": 412
+    },
+    "cols": {
+     "overflow": false,
+     "small": [],
+     "wide": [],
+     "minFont": 12,
+     "minAt": ":Yıl 2212 · Ay 7 ",
+     "map": {
+      "w": 0,
+      "h": 0
+     },
+     "vw": 915,
+     "vh": 412
+    },
+    "sci": {
+     "overflow": false,
+     "small": [],
+     "wide": [],
+     "minFont": 12,
+     "minAt": ":Yıl 2212 · Ay 7 ",
+     "map": {
+      "w": 0,
+      "h": 0
+     },
+     "vw": 915,
+     "vh": 412
+    }
+   }
+  },
+  "perf": {
+   "s45": {
+    "drawMs": 0.1,
+    "canvas": [
+     780,
+     1404
+    ],
+    "hostMonthMs": 62,
+    "moveCommandMs": 134,
+    "live": {
+     "seconds": 4,
+     "gameDays": 18,
+     "msgs": 19,
+     "bytes": 2046,
+     "deltas": 17,
+     "deltaMedian": 92,
+     "deltaMax": 490,
+     "heapMB": 10.4,
+     "snapshotBytes": 13608,
+     "msgsPerSec": 4.8,
+     "bytesPerSec": 512
+    }
+   },
+   "s60": {
+    "systems": 60,
+    "commandMs": 66,
+    "hostMonthMs": 106,
+    "drawMs": 0.3,
+    "snapshotBytes": 13012
+   },
+   "s100": {
+    "systems": 100,
+    "snapshotBytes": 14275,
+    "hostPublishMs": 1.3,
+    "guestDrawMs": 0.3
+   }
+  },
+  "browserProcesses": 3,
+  "drawMsMedian": 0.3,
+  "moveCommandMs": 134,
+  "arrivalDays": 15,
+  "researchMonths": 30,
+  "privacy": {
+   "A": {
+    "packets": 41,
+    "bytes": 41544,
+    "uncontacted": 4,
+    "hiddenSystems": 36
+   },
+   "B": {
+    "packets": 41,
+    "bytes": 46166,
+    "uncontacted": 3,
+    "hiddenSystems": 29
+   }
+  },
+  "pageErrors": []
+ }
+}

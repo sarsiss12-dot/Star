@@ -6,14 +6,28 @@ Son güncelleme: 2026-10-29. Depo `sarsiss12-dot/Star`.
 
 | | `main` (birleşmiş) | Bu dal (PR) |
 |---|---|---|
-| Faz | 96H.10 + MP.0 + MP.1 (+ 96H.11 araştırma arşivi) | MP.1.1 (internet dağıtımına hazırlık; dağıtılmadı) |
+| Faz | 96H.10 + MP.0 + MP.1 + MP.1.1 (+ 96H.11 araştırma arşivi) | MP.2 (misafir haritası, gerçek filo emri, araştırma; geliştirme prototipi) |
 | Build / PWA | `96h10` / `stars-v96h10` | değişmedi |
 | Save | v8 | v8 (şema değişmedi) |
 | Oyun ZIP | `releases/stars-faz96h10.zip` (SHA-256 `78e76d1627b8ec1b990849b2242835f78667f110e1d6f17021760183ee7be6d0`) | yeni ZIP yok |
-| Taban HEAD | `7fa0eddc648d1148362dc8a41b5b43111b4b1448` | — |
+| Taban HEAD | `43f9cb38aa7f402f8d983275808824ea25ef4b64` | — |
 | Değişen runtime | — | yok (19 dosya 96H.10 ile aynı) |
 
-96H.6.2, 96H.6.3, 96H.7, 96H.11, MP.0, MP.1 ve MP.1.1 oyun yayımlamadı.
+96H.6.2, 96H.6.3, 96H.7, 96H.11, MP.0, MP.1, MP.1.1 ve MP.2 oyun yayımlamadı.
+
+## MP.2 — misafirin gerçek oynanışı: harita, filo, bilim (geliştirme prototipi)
+
+Ayrıntı: `MULTIPLAYER-MP2-MIMARI.md`, `MULTIPLAYER-MP2-MOBIL-HARITA.md`, `MULTIPLAYER-MP2-SONUC.md`. Kod: `research/mp2/client/` + `research/mp0/mp-core.js`. Testler: `tests/mp2_core_test.js`, `tests/browser-mp2.cjs`.
+
+- **Misafir ekranı:** HARİTA (canvas: kaydır, iki parmak yakınlaştır, dokun-seç), FİLOLAR, KOLONİLER, BİLİM. Motor yok.
+- **Gerçek komutlar:**
+  - `move` → host `orderMove` (rota, sınır izni, kapı ağı motorda);
+  - `research` → `researchTarget`;
+  - `researchMode` → `setResearchMode`.
+  - Ağ komutu ile doğrudan motor çağrısı aynı Save8'i veriyor; her ret Save8/RNG'yi değiştirmiyor.
+- **Gizlilik:** yabancı filo yalnız id/devlet/sistem/sayı; temas kurulmamış devlet kimliği maskeli; bilim verisi yalnız kendi devletin.
+- **Çekirdek düzeltmesi:** yayın artık motorun Save8'e giren önbellek damgalarına dokunmuyor (`pure()`; MP.0'dan beri vardı).
+- **NOT RUN:** gerçek internet (sunucu yok), fiziksel Android, gerçek Wi-Fi LAN.
 
 ## MP.1.1 — internetten erişime hazırlık (dağıtılmadı)
 
@@ -152,7 +166,8 @@ Sabit başarısız-hedef beklemesi, sevk öncesi gerçek bakım kapısı, karş�
 - MP.0 (runtime değişmedi, `f603975` ağacı + iki yeni test): 140 paket 6120 PASS / 3 FAIL (139 mevcut paket 96H.10 ile aynı, yeni `mp0_core_test.js` 11 PASS); Chromium `browser-96h10.cjs` 27/27 PASS; `browser-mp0.cjs` 20/20 PASS (60 ms gecikmeli relay ile de 20/20).
 - MP.1 (runtime değişmedi, `8b748b5` ağacı + üç yeni test): 142 paket 6143 PASS / 3 FAIL (140 mevcut paket MP.0 ile aynı; `mp1_lobby_core_test.js` 9, `mp1_relay_test.js` 14 PASS); `browser-96h10.cjs` 27/27, `browser-mp0.cjs` 20/20, `browser-mp1.cjs` 22/22 PASS.
 - MP.1.1 (runtime değişmedi, `7fa0edd` ağacı): 145 paket 6154 PASS / 3 FAIL (yeni `mp11_online_test.js` 9; `mp1_lobby_core_test.js`'in iki uzun denetimi `mp1_actor_vision_test.js` + `_b_` dosyalarına taşındı, run-all 180 sn sınırı); `browser-96h10` 27/27, `browser-mp0` 20/20, `browser-mp1` 22/22, `browser-mp11` 10/10 PASS. Ayrıntı `MULTIPLAYER-MP11-SONUC.md` §4.
-- Önceden var olan 3 FAIL: `faz95d_identity_test.js`, seed 11/99/404 coğrafya koordinatlarında son ondalık basamak farkı (Node/V8 kayan nokta). 96H.7.1–96H.11, MP.0, MP.1 ve MP.1.1'de değişiklikten önce ve sonra aynı. Fixture yenilenmedi.
+- MP.2 (runtime değişmedi, `43f9cb3` ağacı): 146 paket 6161 PASS / 3 FAIL (yeni `mp2_core_test.js` 7); `browser-96h10` 27/27, `browser-mp0` 20/20, `browser-mp1` 22/22, `browser-mp11` 10/10, `browser-mp2` 14/14 PASS. Ayrıntı `MULTIPLAYER-MP2-SONUC.md` §3.
+- Önceden var olan 3 FAIL: `faz95d_identity_test.js`, seed 11/99/404 coğrafya koordinatlarında son ondalık basamak farkı (Node/V8 kayan nokta). 96H.7.1–96H.11 ve MP.0–MP.2'de değişiklikten önce ve sonra aynı. Fixture yenilenmedi.
 - Test yan etkisi: `tests/navy-95a-after-*.json`, `tests/audit-95d/…`, `tests/audit96e1/…`, `tests/audit96g2/`; commit öncesi geri alın.
 
 ## Açık konular (sıralı)
@@ -166,6 +181,6 @@ Sabit başarısız-hedef beklemesi, sevk öncesi gerçek bakım kapısı, karş�
 7. Büyük galaksi (120+ sistem) reddedildi; sınırlar 100/11. Fiziksel Android testi hiç çalıştırılmadı.
 8. Ekonomi (96H.11): yerine koyma puanı dökümhaneyi negatif değerli sayıyor; yıkımların %27'si sökülen binayı yeniden inşa ediyor.
 9. Ekonomi (96H.11): başkent tipi odak bütün anavatan sistemine uygulanıyor. Düzeltme, genel odak zincirinin litoit dışı sanayi açığına yanıt vermemesini açığa çıkarıyor; önce o yanıt tek başına ölçülmeli.
-10. Multiplayer: MP.1 `isHumanActor`, aktör başına görüş ve uzak insan keşif belleğini (MP katmanında) ekledi. Kalanlar: `UI.aiOffer` / federasyon gelen kutusu yalnız host arayüzünde (uzak insana AI teklifi karara bağlanmıyor); `!e.ai` bildirimleri host günlüğüne düşüyor; relay dağıtılmadı; misafir komutları yalnız koloni inşası. Bkz. `MULTIPLAYER-MP1-SONUC.md` §6.
+10. Multiplayer: MP.1 `isHumanActor`, aktör başına görüş ve uzak insan keşif belleğini (MP katmanında) ekledi. Kalanlar: `UI.aiOffer` / federasyon gelen kutusu yalnız host arayüzünde (uzak insana AI teklifi karara bağlanmıyor); `!e.ai` bildirimleri host günlüğüne düşüyor; relay dağıtılmadı. MP.2: misafir harita, filo hareketi ve araştırmayı kullanıyor; filo birleştirme/bölme/sevkiyat/savaş emri ve insan–insan diplomasi yok. Bkz. `MULTIPLAYER-MP2-SONUC.md` §6–7.
 
 Reddedilmiş adaylar: `AI-RED-KARARLARI.md`.

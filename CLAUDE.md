@@ -27,6 +27,7 @@ node tests/browser-mp0.cjs          # MP.0: iki ayrı Chromium + yerel relay (ay
 node tests/browser-mp1.cjs          # MP.1: 5 ayrı Chromium (host + 3 misafir + fazladan telefon), 5 görünüm, 60/150 ms relay süreçleri
 node tests/browser-mp11.cjs         # MP.1.1: üretim kipi relay + yerel TLS ters vekil, HTTPS/WSS, arka plan duraklatma, 4× CPU host maliyeti
 node research/mp1/deploy/smoke.js https://<alan>   # dağıtım sonrası smoke (10 denetim)
+node tests/browser-mp2.cjs          # MP.2: host + 2 misafir (ayrı Chromium), gerçek dokunma olayları, harita/filo/bilim, 45/60/100 sistem
 ```
 
 - Testler Node `vm` sandbox'ında gerçek runtime dosyalarını yükler (`tests/helpers/runtime.js`). Fixture'lar: `tests/helpers/*-fixture.js`, `tests/fixtures/`.
@@ -38,6 +39,7 @@ node research/mp1/deploy/smoke.js https://<alan>   # dağıtım sonrası smoke (
 - Multiplayer (MP.0+): prototip `research/mp0/` altında izole; runtime'a enjekte değil, `dev-relay.js` `/mp/host` yolunda yüklenir. Host-yetkili: istemci simülasyon yürütmez, komutlar `mp-core.js` `COMMANDS` tablosundan ve motorun kendi kurallarından geçer. `dev-relay.js` yalnız geliştirme içindir (TLS/kimlik doğrulama yok). Ayrıntı: `MULTIPLAYER-MP0-*.md`.
 - MP.1: `research/mp1/` (oda relay'i `server/relay.js`, telefon ekranları `client/`). Lobi kipi `mp-core.js`'de opt-in (`opts.lobby`); verilmezse MP.0 davranışı aynen sürer. ÇOK OYUNCULU düğmesi yalnız relay'in sunduğu sayfaya enjekte edilir, runtime/ZIP'te yok. Relay dağıtılmadı; internete yalnız TLS + `MP1_ORIGINS` (+ vekil arkasında `MP1_TRUST_PROXY=1`) ile açılır. Misafire tohum, başka oyuncunun jetonu/kimliği, host anahtarı gitmez; host anahtarı URL'de değil ilk çerçevede. Ayrıntı: `MULTIPLAYER-MP1-*.md`.
 - MP.1.1: relay herkese açık bağlamada (loopback dışı) TLS/`MP1_TRUST_PROXY=1` + https `MP1_ORIGINS` olmadan başlamaz, `MP1_DEV`'i reddeder. Dağıtım dosyaları `research/mp1/deploy/` (Dockerfile + kök `.dockerignore` izin listesi). Dağıtım yapılmadı; URL uydurma. Ayrıntı: `MULTIPLAYER-MP11-*.md`.
+- MP.2: misafir oyun ekranı `research/mp2/client/` (harita/filolar/koloniler/bilim, motor yok). Yeni komutlar `move` (→ `orderMove`), `research` (→ `researchTarget`), `researchMode` (→ `setResearchMode`); istemciden rota alınmaz. `publishTo` görünümü `pure()` içinde kurar (`_` önekli motor önbellekleri Save8'e giriyor, yayın onlara dokunmamalı). Yeni ağ alanı eklerken temas kurulmamış devlet kimliğini maskele, yabancı filoya `{id,e,s,n}` dışında alan ekleme. Ayrıntı: `MULTIPLAYER-MP2-*.md`.
 
 - AI davranış değişikliği: aynı Save'den kontrol ve aday kollarını koşun; kaotik ayrışma için tek RNG çekimli plasebo bandı kullanın (`research/96h8/scripts/arm.js`). Fayda yalnız adayın tetiklendiği devlet ve bant dışı farklar için iddia edilir. Kontrol kökünde `ai.js` çalışma ağacına bağ (symlink) değil, sabit kopya olmalı; yoksa aday aktarıldığında kontrol koşuları sessizce aday koduyla çalışır.
 - Küçük, tek amaçlı, ölçülmüş değişiklikler. RNG tüketim sırası, Save8 baytları ve mevcut savaş/ittifak/federasyon sonuçları korunmalı; yeni davranış aynı Save/RNG üzerinde kontrol–aday karşılaştırmasıyla kanıtlanır.
