@@ -1,0 +1,59 @@
+/* STARS MP.3 — diplomasi ekranı (misafir DİPLOMASİ sekmesi + host MP diplomasi paneli). Telefon öncelikli, ≥44 px dokunma hedefi. */
+.mp3{display:flex;flex-direction:column;gap:6px;max-width:720px;margin:0 auto;color:#d6e6f5;font:14px/1.35 system-ui,-apple-system,"Segoe UI",sans-serif}
+.mp3 *{box-sizing:border-box}
+.mp3 .mp1-card{margin:0;overflow-wrap:anywhere}
+.mp3 .mp1-btn{min-height:44px}
+.mp3 .mp1-row{display:flex;gap:6px;flex-wrap:wrap}
+.mp3 .mp1-row .mp1-btn{flex:1 1 120px;width:auto;margin:4px 0}
+.mp3-sub{display:flex;gap:4px;position:sticky;top:-6px;z-index:2;background:#05080f;padding:2px 0 4px}
+.mp3-sub button{flex:1 1 0;min-width:0;min-height:44px;padding:0 2px;border-radius:8px;border:1px solid #2c3d5c;background:#0b1424;color:#b8c7dc;font:700 12px system-ui,sans-serif;letter-spacing:.01em;touch-action:manipulation}
+.mp3-sub button.on{border-color:#6ff2c8;color:#6ff2c8}
+.mp3-badge{display:inline-block;min-width:18px;padding:0 5px;border-radius:9px;background:#ff6b6b;color:#05080f;font:700 11px/18px system-ui,sans-serif;font-style:normal;text-align:center;vertical-align:1px}
+.mp3-oh{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
+.mp3-oh b{min-width:0;overflow-wrap:anywhere}
+.mp3-st{font-size:12px;font-weight:700;flex:0 0 auto}
+.mp3-st.s-pending{color:#f2d452}.mp3-st.s-accepted{color:#6ff2c8}.mp3-st.s-rejected,.mp3-st.s-invalid,.mp3-st.s-expired{color:#ff6b6b}.mp3-st.s-countered{color:#8b7bff}
+.mp3-terms{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:6px 0}
+.mp3-terms i{display:block;font-style:normal;font-size:12px;color:#7d90ad}
+.mp3-items{margin:2px 0;padding-left:18px}
+.mp3-items li{margin:2px 0;overflow-wrap:anywhere}
+.mp3-draft .mp3-items{padding-left:0;list-style:none}
+.mp3-draft .mp3-items li{display:flex;justify-content:space-between;align-items:center;gap:6px;border-bottom:1px solid #1d2a40}
+.mp3-x{min-width:44px;min-height:44px;border-radius:8px;border:1px solid #2c3d5c;background:#0b1424;color:#ff6b6b;font:700 16px system-ui,sans-serif;touch-action:manipulation}
+.mp3-to{margin:4px 0 6px}
+.mp3-side{border:1px solid #1d2a40;border-radius:8px;padding:6px 8px;margin:6px 0}
+.mp3-side.on{border-color:#4aa8d8}
+.mp3-sidebtn{width:100%;min-height:44px;border-radius:8px;border:1px solid #2c3d5c;background:#0b1424;color:#b8c7dc;font:700 13px system-ui,sans-serif;letter-spacing:.04em;touch-action:manipulation}
+.mp3-sidebtn.on{border-color:#6ff2c8;color:#6ff2c8}
+.mp3-add{border-top:1px solid #1d2a40;margin-top:6px;padding-top:4px}
+.mp3-add .mp1-sel,.mp3-amt{width:100%;min-height:44px;font-size:16px}   /* 16 px: iOS/Android girişte sayfayı yakınlaştırmaz */
+.mp3-pre{display:flex;gap:4px;margin:6px 0;flex-wrap:wrap}
+.mp3-pre button{flex:1 1 52px;min-width:0;min-height:44px;border-radius:8px;border:1px solid #2c3d5c;background:#0b1424;color:#d6e6f5;font:700 13px system-ui,sans-serif;touch-action:manipulation}
+.mp3-pre button:disabled{opacity:.4}
+.mp3-ok{color:#6ff2c8}
+.mp3 .bad{color:#ff6b6b}
+.mp3-foot{margin:8px 0 4px}
+.mp3-back{position:fixed;inset:0;z-index:8000;background:rgba(2,4,9,.72);display:flex;align-items:flex-end;justify-content:center;padding:12px 12px calc(12px + env(safe-area-inset-bottom))}
+.mp3-sheet{width:100%;max-width:520px;max-height:calc(100% - 24px);overflow-y:auto;padding:12px;border-radius:12px;border:1px solid #4aa8d8;background:#0b1424;color:#d6e6f5;font:14px/1.35 system-ui,sans-serif}
+.mp3-sheet .mp1-row{display:flex;gap:8px}
+.mp3-sheet .mp1-btn{flex:1 1 0;min-height:48px;width:auto}
+.mp3-sheet .mp1-btn:disabled{opacity:.5}
+/* bildirim düğmelerin üstünde dursa da dokunuşu yutmasın */
+.mp2-toast,.mp3-host-toast{pointer-events:none}
+/* misafir alt gezinti: 5 sekme 360 px'e sığsın */
+.mp2-nav button{font-size:12px;letter-spacing:.01em;padding:0 1px;min-width:0}
+/* host paneli: küçük MP panelinde aynı satırda DİPLOMASİ düğmesi */
+.mp1-mini{max-width:min(440px,calc(100vw - 12px))}
+.mp3-minirow{display:flex;gap:6px;align-items:center}
+.mp3-minirow .mp1-mini-h{flex:1 1 auto;min-width:0}
+.mp3-minirow .mp3-hostbtn{flex:0 0 auto;width:auto;min-width:44px;margin:4px 0;padding:0 10px;font-size:12px}
+/* host paneli */
+.mp3-host{position:fixed;inset:0;z-index:7500;display:flex;flex-direction:column;background:#05080f;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+.mp3-host-h{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 10px;border-bottom:1px solid #1d2a40;color:#6ff2c8;font:700 14px system-ui,sans-serif;letter-spacing:.06em}
+.mp3-host-h .mp1-btn{flex:0 0 auto;width:auto;min-width:96px;min-height:44px;margin:0;text-align:center}
+.mp3-host-b{flex:1 1 auto;overflow-y:auto;overflow-x:hidden;padding:6px 10px 12px;-webkit-overflow-scrolling:touch}
+.mp3-host-toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom));max-width:calc(100vw - 24px);padding:8px 12px;border-radius:8px;background:#0b1424;border:1px solid #6ff2c8;color:#6ff2c8;z-index:8100}
+.mp3-host-toast.bad{border-color:#ff6b6b;color:#ff6b6b}
+.mp3-host-toast[hidden]{display:none}
+@media (max-width:380px){.mp3-terms{grid-template-columns:1fr}}
+@media (orientation:landscape) and (max-height:520px){.mp3-back{align-items:center}.mp3-sheet{max-height:calc(100% - 8px)}}

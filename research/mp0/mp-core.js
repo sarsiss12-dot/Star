@@ -126,7 +126,7 @@ function createHost(opts){
       let st,why='';
       if(e.techs[id])st='d';else{const a=researchAccess(e,id);if(!a.ok){st='x';why=a.why;}else if(researchReady(e,id))st='r';else{const rt=researchRoute(e,id);st=rt.ok?'l':'x';why=rt.ok?'':rt.why;}}
       tech[id]={n:T.n,b:T.b,t:T.t,r:(T.r||[]).slice(),d:T.d||'',c:Math.round(techCost(e,id)),s:st,...(why?{w:why}:{})};}
-    return {me,sys,lanes,cols,fleets,emps,catalog,sci,tech,log:(notes.get(e.id)||[]).slice()};
+    return {me,sys,lanes,cols,fleets,emps,catalog,sci,tech,log:(notes.get(e.id)||[]).slice(),dip:dipView(e)};
   }
   function clock(){return {day:Math.floor(G.day),y:G.year,m:G.month,spd:G.speed|0};}
   const KEYED=['sys','cols','fleets','emps','tech'];
@@ -137,7 +137,7 @@ function createHost(opts){
       for(const k of Object.keys(a[sec]))if(!has(b[sec],k))rm.push(k);
       if(Object.keys(up).length)(ops.up||(ops.up={}))[sec]=up;
       if(rm.length)(ops.rm||(ops.rm={}))[sec]=rm;}
-    for(const sec of ['me','lanes','catalog','sci','log'])if(JSON.stringify(a[sec])!==JSON.stringify(b[sec]))(ops.set||(ops.set={}))[sec]=b[sec];
+    for(const sec of ['me','lanes','catalog','sci','log','dip'])if(JSON.stringify(a[sec])!==JSON.stringify(b[sec]))(ops.set||(ops.set={}))[sec]=b[sec];
     return ops;
   }
   /* MP.2: görünüm salt okunur olmalı. explorationContext → borderPressure/totalPower gibi motor yolları
@@ -155,7 +155,7 @@ function createHost(opts){
     else{n=out(p.conn,{v:PROTOCOL,type:'delta',rev,base:p.lastRev,t:clock(),ops:diff(p.lastView,view)});stats.deltas++;stats.deltaBytes.push(n);}
     p.lastView=view;p.lastRev=rev;stats.publishMs.push(now()-t0);
   }
-  function publish(){const rev=++S.worldRevision;for(const p of S.players.values())publishTo(p,rev);return rev;}
+  function publish(){dipSweep();const rev=++S.worldRevision;for(const p of S.players.values())publishTo(p,rev);return rev;}
 
   /* ---------- komutlar: yalnız bu tablo ---------- */
   function locate(e,c){
@@ -213,8 +213,144 @@ function createHost(opts){
       locate:()=>({}),
       why:(e,at,c)=>researchMode(e)===c.mode?'same':null,
       roots:e=>[e.research||{},e.rq,e.rp],
-      apply:(e,at,c)=>setResearchMode(e,c.mode)}
+      apply:(e,at,c)=>setResearchMode(e,c.mode)},
+    /* ═══ MP.3 — diplomasi. Yeni motor yok: dealQuote / executeDeal / aiRespond. Teklif kaydı Save8 dışında,
+       oturumdadır (dipView yalnız taraflara gönderir). Taraf olmayan teklif kimliği "yok" ile aynı kodu alır. */
+    offer:{keys:['kind','to','give','want'],
+      check:c=>int(c.to,0,63)&&dipCheck(c),
+      locate:()=>({}),
+      why(e,at,c){const B=G.emps[c.to];if(!B||B===e||!dipParty(B)||!e.contact[B.id]||!B.contact[e.id])return 'no-target';
+        if(D.offers.filter(r=>r.status==='pending'&&r.from===e.id).length>=DIP_PENDING_OUT)return 'too-many';
+        const o=dipNew(e,B,dipItems(c.give),dipItems(c.want));
+        if(D.offers.some(r=>r.status==='pending'&&r.from===e.id&&r.to===B.id&&offerSignature(dipOffer(r))===offerSignature(o)))return 'duplicate';
+        return dipGate(dealQuote(o),e,B);},
+      roots:()=>[],
+      apply:(e,at,c)=>dipSend(e,G.emps[c.to],dipItems(c.give),dipItems(c.want),null)},
+    /* Gönderim öncesi önizleme (salt okuma: işlem, dergi, revizyon, yayın yok). Gösterilen Etki maliyeti ve engeller
+       host'un dealQuote'undan gelir; istemcide maliyet formülü yok. İnsan alıcıda karşı tarafın stoğu yine gizli. */
+    quote:{keys:['kind','to','give','want'],ro:true,
+      check:c=>int(c.to,0,63)&&dipCheck(c),
+      locate:()=>({}),
+      why(e,at,c){const B=G.emps[c.to];return !B||B===e||!dipParty(B)||!e.contact[B.id]||!B.contact[e.id]?'no-target':null;},
+      roots:()=>[],
+      apply(e,at,c){const B=G.emps[c.to],q=dealQuote(dipNew(e,B,dipItems(c.give),dipItems(c.want))),g=dipGate(q,e,B);
+        return {ok:true,extra:{ok:!g,cost:Math.round(q.cost||0),etk:Math.floor(e.res.etk||0),life:dipLife(),reasons:g?g.detail:[]}};}},
+    respond:{keys:['kind','offer','action'],
+      check:c=>int(c.offer,1,2147483647)&&['accept','reject'].includes(c.action),
+      locate(e,c){const r=dipFind(e,c.offer);return r?{r}:{err:'no-offer'};},
+      why(e,{r},c){if(r.to!==e.id)return 'not-recipient';if(r.status!=='pending')return 'closed';if(G.day>r.expires)return 'expired';
+        const A=G.emps[r.from];if(!dipParty(A)||!dipParty(e))return 'invalid';
+        if(c.action==='accept'){const q=dealQuote(dipOffer(r));if(!q.ok)return {code:'quote',detail:dipReasons(q,A)};}return null;},
+      roots:()=>[],
+      apply(e,{r},c){const A=G.emps[r.from];
+        if(c.action==='reject'){r.status='rejected';r.finished=G.day;r.why='Reddedildi';dipNotify(A.id,'Teklif reddedildi — '+e.name,'war');return true;}
+        if(!executeDeal(dipOffer(r)))return false;                       // motorun kendi işlemi: başarısızlıkta kendisi geri alır
+        r.status='accepted';r.finished=G.day;stats.deals=(stats.deals||0)+1;
+        dipNotify(A.id,'Teklif kabul edildi — '+e.name,'win');dipNotify(e.id,'Anlaşma imzalandı — '+A.name,'win');return true;}},
+    counter:{keys:['kind','offer','give','want'],
+      check:c=>int(c.offer,1,2147483647)&&dipCheck(c),
+      locate(e,c){const r=dipFind(e,c.offer);return r?{r}:{err:'no-offer'};},
+      why(e,{r},c){if(r.to!==e.id)return 'not-recipient';if(r.status!=='pending')return 'closed';if(G.day>r.expires)return 'expired';
+        if(r.round>=DIP_ROUNDS)return 'round-limit';
+        const B=G.emps[r.from];if(!dipParty(B)||!dipParty(e)||!e.contact[B.id]||!B.contact[e.id])return 'invalid';
+        return dipGate(dealQuote(dipNew(e,B,dipItems(c.give),dipItems(c.want))),e,B);},
+      roots:()=>[],
+      apply:(e,{r},c)=>dipSend(e,G.emps[r.from],dipItems(c.give),dipItems(c.want),r)},
+    withdraw:{keys:['kind','offer'],
+      check:c=>int(c.offer,1,2147483647),
+      locate(e,c){const r=dipFind(e,c.offer);return r?{r}:{err:'no-offer'};},
+      why:(e,{r})=>r.from!==e.id?'not-sender':r.status!=='pending'?'closed':null,
+      roots:()=>[],
+      apply(e,{r}){r.status='invalid';r.why='Gönderen geri çekti';r.finished=G.day;dipNotify(r.to,'Teklif geri çekildi — '+e.name);return true;}}
   });
+  /* ═══ MP.3 diplomasi durumu (oturum; Save8'e girmez — kalıcılık MP.4) ═══ */
+  const DIP_ROUNDS=6,DIP_PENDING_OUT=8,DIP_KEEP=160,DIP_RES=['min','ene','yiy','ala','tuk','ara','etk'];
+  const D={next:1,offers:[]};
+  const dipLife=()=>typeof DEAL_OFFER_LIFE==='number'?DEAL_OFFER_LIFE:540;   // tek oyunculuyla aynı ömür (oyun günü)
+  /* insanın kurabileceği maddeler: yalnız kaynak ve barış (kanonik motorun desteklediği; kaynak kataloğu RES) */
+  function dipItems(list){
+    if(!Array.isArray(list)||list.length>8)return null;const out=[];
+    for(const it of list){if(!plain(it))return null;
+      if(it.t==='res'&&onlyKeys(it,['t','r','v'])&&DIP_RES.includes(it.r)&&int(it.v,1,10000000))out.push({t:'res',r:it.r,v:it.v});
+      else if(it.t==='peace'&&onlyKeys(it,['t']))out.push({t:'peace'});
+      else return null;}
+    return out;
+  }
+  function dipCheck(c){const g=dipItems(c.give),w=dipItems(c.want);return !!g&&!!w&&g.length+w.length>0&&g.length+w.length<=8;}
+  const dipNew=(A,B,give,want)=>({from:A.id,to:B.id,give,want,born:G.day,expires:G.day+dipLife()});
+  const dipOffer=r=>({from:r.from,to:r.to,give:r.give.map(x=>({...x})),want:r.want.map(x=>({...x})),born:r.born,expires:r.expires});
+  const dipParty=o=>!!o&&!o.dead&&!o.wild&&!o.crisisSide;
+  function dipFind(e,id){const r=D.offers.find(x=>x.id===id);return r&&(r.from===e.id||r.to===e.id)?r:null;}
+  /* Gerekçeleri izleyicinin bakışına indir: karşı tarafın stok/teslim satırları (adıyla başlar) gönderilmez. */
+  function dipReasons(q,other){const pre=String(other.name)+' → ',all=(q.reasons||[]).map(String),own=all.filter(x=>!x.startsWith(pre));
+    if(own.length<all.length)own.push('Karşı taraf bu şartları şu an karşılayamıyor');return own.slice(0,4).map(x=>x.slice(0,160));}
+  /* Gönderim kapısı: insan alıcıda yalnız GÖNDERENİN kendi yükümlülükleri denetlenir (karşı tarafın stoğu gizli kalır,
+     kabulde dealQuote tam denetler); AI alıcıda tek oyunculu dealSend gibi tam quote. */
+  function dipGate(q,A,B){
+    if(isHumanActor(B)){const pre=String(B.name)+' → ',bad=(q.reasons||[]).map(String).filter(x=>!x.startsWith(pre));return bad.length?{code:'quote',detail:bad.slice(0,4)}:null;}
+    return q.ok?null:{code:'quote',detail:(q.reasons||[]).slice(0,4).map(String)};
+  }
+  function dipNotify(id,m,c){const o=G.emps[id];if(!o)return;if(remoteHuman(o))note(id,m,c);else if(id===hostEmpireId&&opts.hostNotify)opts.hostNotify(m,c);}
+  function dipTrim(){const done=D.offers.filter(r=>r.status!=='pending');if(done.length>DIP_KEEP){const drop=new Set(done.slice(0,done.length-DIP_KEEP).map(r=>r.id));D.offers=D.offers.filter(r=>!drop.has(r.id));}}
+  function dipRecord(A,B,o,prev,by,status,why){
+    const rec={id:D.next++,from:A.id,to:B.id,give:o.give.map(x=>({...x})),want:o.want.map(x=>({...x})),born:o.born,expires:o.expires,
+      round:prev?prev.round+1:1,prev:prev?prev.id:null,status,why:why||'',by,cost:dealQuote(o).cost};
+    if(status!=='pending')rec.finished=G.day;D.offers.push(rec);dipTrim();return rec;
+  }
+  /* Teklif/karşı teklif gönder. İnsan alıcı: bekleyen kayıt. AI alıcı: tek oyunculu UI.dealSend ile aynı yol —
+     aiRespond → kabulde executeDeal, karşı teklifte AI'nın ayrı kartı (dealQuote ile denetli), retde hiçbir değişiklik. */
+  function dipSend(A,B,give,want,prev){
+    const o=dipNew(A,B,give,want);
+    if(isHumanActor(B)){
+      if(prev){prev.status='countered';prev.finished=G.day;}
+      const rec=dipRecord(A,B,o,prev,'human','pending');
+      dipNotify(B.id,(prev?'Karşı teklif — ':'Yeni teklif — ')+A.name,'sci');return {ok:true,extra:{offer:rec.id}};
+    }
+    const q=dealQuote(o),r=aiRespond(B,q.norm);
+    if(r.v==='kabul'){
+      if(!executeDeal(q.norm))return false;                              // dünya değişmedi; MP kaydı da yazılmaz
+      if(prev){prev.status='countered';prev.finished=G.day;}
+      const rec=dipRecord(A,B,o,prev,'human','accepted','Kabul edildi');stats.deals=(stats.deals||0)+1;
+      dipNotify(A.id,'Anlaşma imzalandı — '+B.name,'win');return {ok:true,extra:{offer:rec.id,ai:'kabul'}};
+    }
+    if(prev){prev.status='countered';prev.finished=G.day;}
+    if(r.v==='karsi'&&Array.isArray(r.add)&&r.add.length){
+      const c={from:B.id,to:A.id,give:o.want.map(x=>({...x})),want:o.give.concat(r.add).map(x=>({...x})),born:G.day,expires:G.day+dipLife()};
+      if(dealQuote(c).ok){const rec=dipRecord(A,B,o,prev,'human','countered',String(r.why||'').slice(0,240));
+        const cr=dipRecord(B,A,c,rec,'ai','pending');dipNotify(A.id,'Karşı teklif — '+B.name,'sci');return {ok:true,extra:{offer:rec.id,ai:'karsi',counter:cr.id}};}
+      const rec=dipRecord(A,B,o,prev,'human','rejected','Karşı teklif uygulanamıyor');return {ok:true,extra:{offer:rec.id,ai:'red'}};
+    }
+    const rec=dipRecord(A,B,o,prev,'human','rejected',String(r.why||'Reddedildi').slice(0,240));return {ok:true,extra:{offer:rec.id,ai:'red'}};
+  }
+  /* AI → uzak insan: AI'nın kendi kararıyla çağırdığı aiNegotiate burada insan kutusuna yönlendirilir; AI insan adına karar vermez. */
+  function aiToHuman(a,b,give,want){
+    const none={tur:0,karar:null,uygulandi:false,why:'',karsi:null};
+    stats.blockedAI++;                                                    // AI'nın insan adına kararı yine engellendi; karar insana yönlendirildi
+    if(!dipParty(a)||!dipParty(b)||!a.ai)return none;
+    const o={from:a.id,to:b.id,give:(give||[]).map(x=>({...x})),want:(want||[]).map(x=>({...x})),born:G.day,expires:G.day+dipLife()};
+    const q=dealQuote(o);if(!q.ok)return {...none,karar:'gecersiz',why:(q.reasons&&q.reasons[0])||''};
+    const sig=offerSignature(o),pend=D.offers.filter(r=>r.status==='pending'&&r.from===a.id&&r.to===b.id);
+    if(pend.some(r=>offerSignature(dipOffer(r))===sig)||pend.length>=3)return {...none,karar:'bekle',why:'İnsan oyuncuda bekleyen teklif var'};
+    dipRecord(a,b,o,null,'ai','pending');stats.aiOffers=(stats.aiOffers||0)+1;dipNotify(b.id,'Yeni teklif — '+a.name,'sci');
+    return {tur:1,karar:'bekle',uygulandi:false,why:'İnsan oyuncunun kararı bekleniyor',karsi:null};
+  }
+  /* oyun zamanıyla ömür ve geçerlilik süpürmesi (her yayında) */
+  function dipSweep(){
+    for(const r of D.offers){if(r.status!=='pending')continue;const a=G.emps[r.from],b=G.emps[r.to];
+      if(G.day>r.expires){r.status='expired';r.finished=G.day;r.why='Süre doldu';dipNotify(r.from,'Teklif süresi doldu — '+(b?b.name:''));dipNotify(r.to,'Teklif süresi doldu — '+(a?a.name:''));}
+      else if(!dipParty(a)||!dipParty(b)||!a.contact[b.id]||!b.contact[a.id]){r.status='invalid';r.finished=G.day;r.why='Taraflardan biri artık anlaşma yapamaz';
+        dipNotify(r.from,'Teklif geçersizleşti');dipNotify(r.to,'Teklif geçersizleşti');}
+      else if(r.give.concat(r.want).some(it=>it.t!=='res'&&treatyAlreadyActive(a,b,it))){r.status='invalid';r.finished=G.day;r.why='Bu anlaşma artık yürürlükte';   // ör. barış başka teklifle imzalandı
+        dipNotify(r.from,'Teklif geçersizleşti — anlaşma zaten yürürlükte');dipNotify(r.to,'Teklif geçersizleşti — anlaşma zaten yürürlükte');}}
+  }
+  /* Oyuncuya özel diplomasi görünümü: yalnız tarafı olduğu teklifler ve temas kurduğu devletler. */
+  function dipView(e){
+    const nm=id=>G.emps[id]?String(G.emps[id].name):'?',lb=it=>({...it,l:String(dealLabel(it)).replace(/<[^>]*>/g,'').slice(0,90)});
+    const offers=D.offers.filter(r=>r.from===e.id||r.to===e.id).slice(-40).map(r=>({id:r.id,from:r.from,to:r.to,fn:nm(r.from),tn:nm(r.to),give:r.give.map(lb),want:r.want.map(lb),
+      born:Math.floor(r.born),expires:Math.floor(r.expires),round:r.round,prev:r.prev,status:r.status,why:r.why,by:r.by,cost:r.cost}));
+    const contacts=G.emps.filter(o=>o!==e&&dipParty(o)&&e.contact[o.id]).map(o=>({id:o.id,n:nm(o.id),col:o.col,h:isHumanActor(o)?1:0,rel:Math.round(e.rel[o.id]||0),bl:diploBlocked(e,o)?1:0,war:e.war[o.id]?1:0,peace:e.war[o.id]&&canPeace(e,o)?1:0}));
+    return {offers,contacts,life:dipLife(),rounds:DIP_ROUNDS};   // gün: clock.day (her gün dip bölümünü yeniden göndermemek için)
+  }
 
   function result(p,conn,msg,status,code,extra){
     const r={v:PROTOCOL,type:'result',seq:msg.seq,cid:msg.cid,status,code:code||null,rev:S.worldRevision,...(extra||{})};
@@ -232,21 +368,34 @@ function createHost(opts){
     if(p.empireId===null)return result(p,conn,msg,'rejected','no-empire');
     if(has(msg,'empire')&&msg.empire!==p.empireId)return result(p,conn,msg,'rejected','forged-empire');
     if(S.paused)return result(p,conn,msg,'rejected','paused');
-    const c=msg.cmd;
-    if(!plain(c)||typeof c.kind!=='string'||!(c.kind in COMMANDS))return result(p,conn,msg,'rejected','unknown-kind');
-    const def=COMMANDS[c.kind];
-    if(!onlyKeys(c,def.keys)||!def.check(c))return result(p,conn,msg,'rejected','bad-params');
-    const e=G.emps[p.empireId];
-    if(!e||e.dead)return result(p,conn,msg,'rejected','empire-dead');
-    const at=def.locate?def.locate(e,c):locate(e,c);if(at.err)return result(p,conn,msg,'rejected',at.err);
-    const why=def.why(e,at,c);if(why)return result(p,conn,msg,'rejected','rules:'+why);
-    const records=txCaptureGraph(def.roots(e,at)),rng=RND_STATE;let ok=false;
-    try{ok=!!def.apply(e,at,c);}catch(err){txRestoreGraph(records);rndSeed(rng);return result(p,conn,msg,'rejected','error');}
-    if(!ok){txRestoreGraph(records);rndSeed(rng);return result(p,conn,msg,'rejected','rules');}
-    stats.applied++;S.worldRevision++;S.journal.push({rev:S.worldRevision,day:G.day,playerId:p.playerId,empireId:p.empireId,cmd:JSON.parse(JSON.stringify(c))});
-    const r=result(p,conn,msg,'ok',null);stats.commandMs.push(now()-t0);
+    const x=execute(p.playerId,p.empireId,msg.cmd);
+    if(!x.ok)return result(p,conn,msg,'rejected',x.code,x.detail?{detail:x.detail}:undefined);
+    const r=result(p,conn,msg,'ok',null,x.extra?{extra:x.extra}:undefined);if(x.ro)return r;stats.commandMs.push(now()-t0);
     publish();                                   // sonuç herkese kendi filtresiyle yansır
     return r;
+  }
+  /* Ortak komut yürütücü: ağdan gelen misafir (runCommand) ve host'un yerel paneli (local) AYNI yoldan geçer.
+     MP.3: why() {code,detail} dönebilir (oyuncuya kendi bakışından gerekçe); apply() {ok,extra} dönebilir. */
+  function execute(playerId,empireId,c){
+    if(!plain(c)||typeof c.kind!=='string'||!(c.kind in COMMANDS))return {ok:false,code:'unknown-kind'};
+    const def=COMMANDS[c.kind];
+    if(!onlyKeys(c,def.keys)||!def.check(c))return {ok:false,code:'bad-params'};
+    const e=G.emps[empireId];
+    if(!e||e.dead)return {ok:false,code:'empire-dead'};
+    const at=def.locate?def.locate(e,c):locate(e,c);if(at.err)return {ok:false,code:at.err};
+    const why=def.why(e,at,c);if(why)return {ok:false,code:'rules:'+(why.code||why),detail:why.detail};
+    if(def.ro)return {ok:true,ro:true,extra:def.apply(e,at,c).extra};   // salt okuma: durum değişmez, dergiye girmez
+    const records=txCaptureGraph(def.roots(e,at)),rng=RND_STATE;let res;
+    try{res=def.apply(e,at,c);}catch(err){txRestoreGraph(records);rndSeed(rng);return {ok:false,code:'error'};}
+    if(!(res===true||(res&&res.ok))){txRestoreGraph(records);rndSeed(rng);return {ok:false,code:'rules'};}
+    stats.applied++;S.worldRevision++;S.journal.push({rev:S.worldRevision,day:G.day,playerId,empireId,cmd:JSON.parse(JSON.stringify(c))});
+    return {ok:true,extra:res&&res.extra};
+  }
+  /* MP.3: host'un kendi devleti için yerel komut (host paneli). Ağ kimliği yok; aynı kurallar, aynı denetimler. */
+  function local(c){
+    if(L&&!['ingame','paused'].includes(L.phase))return {ok:false,code:'not-started'};
+    if(S.paused)return {ok:false,code:'paused'};
+    const x=execute('host',hostEmpireId,c);if(x.ok&&!x.ro)publish();return x;
   }
 
   /* ---------- ağ mesajları: yalnız bu tablo ---------- */
@@ -390,8 +539,11 @@ function createHost(opts){
     const rtick=researchTick;
     researchTick=function(e){if(!remoteHuman(e))return rtick.apply(this,arguments);
       const s0=say;say=function(m,c){note(e.id,m,c);};try{return rtick.apply(this,arguments);}finally{say=s0;}};
-    aiNegotiate=function(a,b){if(remoteHuman(a)||remoteHuman(b)){stats.blockedAI++;return {tur:0,karar:null,uygulandi:false,why:'MP.0: insan oyuncu diplomasisi MP.2 kapsamında',karsi:null};}return neg.apply(this,arguments);};
-    aiRespond=function(ai){if(remoteHuman(ai)){stats.blockedAI++;return {v:'bekle',why:'İnsan oyuncu: teklif MP.2 gelen kutusuna gider (MP.0 kapalı)'};}return resp.apply(this,arguments);};
+    /* MP.3: AI'nın uzak insana kendi kararıyla yaptığı teklif (NAP, ticaret, ittifak, stratejik…) insan kutusuna gider;
+       insan adına AI karar vermez. Uzak insanın teklif eden olduğu aiNegotiate çağrısı yok sayılır (MP.0 koruması). */
+    aiNegotiate=function(a,b,give,want){if(remoteHuman(b)&&a&&a.ai)return aiToHuman(a,b,give,want);
+      if(remoteHuman(a)||remoteHuman(b)){stats.blockedAI++;return {tur:0,karar:null,uygulandi:false,why:'İnsan oyuncu adına AI karar vermez',karsi:null};}return neg.apply(this,arguments);};
+    aiRespond=function(ai){if(remoteHuman(ai)){stats.blockedAI++;return {v:'bekle',why:'İnsan oyuncu kararı kendi gelen kutusunda verir'};}return resp.apply(this,arguments);};
   }
 
   /* ---------- oturum metadatası (Save8'den ayrı, sürümlü) ---------- */
@@ -457,7 +609,7 @@ function createHost(opts){
     S.players.delete(pid);broadcastLobby();return {ok:true};
   }
   function closeRoom(){if(!L)return {ok:false};L.phase='closed';broadcastLobby();for(const p of guests())if(p.conn){kick(p.conn,'room-closed');S.conns.delete(p.conn);p.conn=null;}return {ok:true};}
-  return {onMessage,onLeave,onJoin(){},publish,publishTo,assign,release,installGuards,meta,restore,viewFor,
+  return {onMessage,onLeave,onJoin(){},publish,publishTo,assign,release,installGuards,meta,restore,viewFor,local,dip:D,dipView,
     isHuman:humanEmpire,isRemoteHuman:remoteHuman,state:S,stats,COMMANDS,HANDLERS,clock,fnv,observeHumans,
     configure,setCapacity,claimFor,setHostTab,start,canStart,kick:kickPlayer,close:closeRoom,lobbyView:()=>L&&lobbyView(S.players.get('host')),lobby:L,
     /* MP.1.1: duraklatma nedeni (host-offline / host-background) misafire lobide 'pause' olarak gider; MP.0 çağrısı nedensiz kalır. */

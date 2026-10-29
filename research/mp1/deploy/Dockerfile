@@ -11,6 +11,7 @@ COPY research/mp0/server/dev-relay.js research/mp0/server/dev-relay.js
 COPY research/mp1/server/relay.js research/mp1/server/relay.js
 COPY research/mp1/client/ research/mp1/client/
 COPY research/mp2/client/ research/mp2/client/
+COPY research/mp3/client/ research/mp3/client/
 # Herkese açık kip: relay TLS'yi önündeki vekilden/platformdan bekler. MP1_ORIGINS
 # dağıtımda ZORUNLU verilir (https://oyun-alanı); verilmezse relay başlamayı reddeder.
 # PORT: platform kendi değerini verirse o kullanılır (MP1_PORT boş bırakıldı).

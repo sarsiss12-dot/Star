@@ -6,14 +6,26 @@ Son güncelleme: 2026-10-29. Depo `sarsiss12-dot/Star`.
 
 | | `main` (birleşmiş) | Bu dal (PR) |
 |---|---|---|
-| Faz | 96H.10 + MP.0 + MP.1 + MP.1.1 (+ 96H.11 araştırma arşivi) | MP.2 (misafir haritası, gerçek filo emri, araştırma; geliştirme prototipi) |
+| Faz | 96H.10 + MP.0 + MP.1 + MP.1.1 + MP.2 (+ 96H.11 araştırma arşivi) | MP.3 (insan oyuncular arası gerçek diplomasi; geliştirme prototipi) |
 | Build / PWA | `96h10` / `stars-v96h10` | değişmedi |
 | Save | v8 | v8 (şema değişmedi) |
 | Oyun ZIP | `releases/stars-faz96h10.zip` (SHA-256 `78e76d1627b8ec1b990849b2242835f78667f110e1d6f17021760183ee7be6d0`) | yeni ZIP yok |
-| Taban HEAD | `43f9cb38aa7f402f8d983275808824ea25ef4b64` | — |
+| Taban HEAD | `1acf62dac1bffbf5aeadf6eb79b69a4347a0a56a` | — |
 | Değişen runtime | — | yok (19 dosya 96H.10 ile aynı) |
 
-96H.6.2, 96H.6.3, 96H.7, 96H.11, MP.0, MP.1, MP.1.1 ve MP.2 oyun yayımlamadı.
+96H.6.2, 96H.6.3, 96H.7, 96H.11, MP.0, MP.1, MP.1.1, MP.2 ve MP.3 oyun yayımlamadı.
+
+## MP.3 — insan oyuncular arası gerçek diplomasi (geliştirme prototipi)
+
+Ayrıntı: `MULTIPLAYER-MP3-MIMARI.md`, `MULTIPLAYER-MP3-DIPLOMASI.md`, `MULTIPLAYER-MP3-SONUC.md`. Kod: `research/mp3/client/` + `research/mp0/mp-core.js`. Testler: `tests/mp3_core_test.js`, `tests/browser-mp3.cjs`.
+
+- **Akış:** iki insan teklif verir; karşı taraf kabul eder, reddeder ya da karşı teklif verir. En fazla 6 tur, 540 oyun günü. Barış önerisi de var.
+- **Motor:** yeni diplomasi motoru yok. Önizleme `dealQuote`, kabul `executeDeal` (kendi işlemi), AI kararı `aiRespond` ile.
+- **AI:** uzak insanın yerine karar vermez. AI'nın insana teklifi o insanın gelen kutusuna düşer. İnsan → AI tek oyunculu `dealSend` yolunu izler.
+- **Gizlilik:** üçüncü oyuncu A–B tekliflerinin hiçbir verisini ağdan almaz. Taraf olmayana teklif "yok" görünür. İnsan alıcının stoğu gönderene sızmaz.
+- **Ekran:** misafirde DİPLOMASİ sekmesi (rozetli), host'ta küçük MP diplomasi paneli (yalnız insanlar). İki adımlı onay, yanlış dokunma koruması.
+- **Kalıcılık:** teklifler oturumdadır (Save8'e girmez). Host sayfası kapanırsa bekleyen teklifler kaybolur (MP.4).
+- **NOT RUN:** gerçek internet (sunucu yok), fiziksel Android, gerçek Wi-Fi LAN.
 
 ## MP.2 — misafirin gerçek oynanışı: harita, filo, bilim (geliştirme prototipi)
 

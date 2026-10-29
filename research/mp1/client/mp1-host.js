@@ -130,6 +130,8 @@ function makeHost(){
   API.host=StarsMP.createHost({roomId:'r-'+API.code.toLowerCase(),random:hex,hostName:(typeof CFG!=='undefined'&&CFG.name)||'Host',send,
     kick:(conn,why)=>{if(API.ws&&API.ws.readyState===1)API.ws.send('K'+conn+'\n'+why);},
     onLobby:L=>{API.lobby=L;if(API.screen==='lobby')render();else if(API.started)mini();},
+    /* MP.3: host'u ilgilendiren diplomasi bildirimi host'un kendi günlüğüne (uzak oyuncununki onun listesine gider) */
+    hostNotify:(m,c)=>{if(typeof say==='function')say(m,c);dipToast(m,false);},
     lobby:{generate(set){setupGame({...CFG,...set});if(CFG.mizac)applyChosenPersona(G.p,CFG.mizac);G.autoSave=false;return {ok:true};}}});
   API.host.installGuards();
   const seed=1+(crypto.getRandomValues(new Uint32Array(1))[0]%2147483646);
@@ -161,19 +163,51 @@ monthTick=function(){const r=month.apply(this,arguments);if(API.host&&API.starte
 setInterval(()=>{
   if(!API.host||!API.started||!API.connected)return;
   const day=Math.floor(G.day);if(API.dirty||day!==API.lastDay){API.dirty=false;API.lastDay=day;API.host.publish();API.publishes++;}
+  dipTick();
 },250);
 function mini(){
   let el=doc.getElementById('mp1Mini');
   if(!el){el=doc.createElement('div');el.id='mp1Mini';el.className='mp1-mini';doc.body.appendChild(el);el.addEventListener('click',e=>{const b=e.target.closest('[data-g]');if(!b)return;
     if(b.dataset.g==='toggle'){API.miniOpen=!API.miniOpen;mini();}
-    else if(b.dataset.g==='kick')API.host.kick(b.dataset.pid,false);else if(b.dataset.g==='ai')API.host.kick(b.dataset.pid,true);});}
+    else if(b.dataset.g==='kick')API.host.kick(b.dataset.pid,false);else if(b.dataset.g==='ai')API.host.kick(b.dataset.pid,true);
+    else if(b.dataset.g==='dip')dipOpen(true);});}
   const L=API.lobby;if(!L)return;
   /* Haritayı kapatmasın: tek satır; bağlantısı kopan misafir varsa (karar gerekir) kendiliğinden açılır. */
   const gs=L.players.filter(p=>!p.host),off=gs.filter(p=>!p.online).length,open=API.miniOpen||off>0;
-  el.innerHTML='<button class="mp1-mini-h" data-g="toggle" aria-expanded="'+open+'"><b>ÇOK OYUNCULU</b> · '+esc(V.fmtCode(API.code))+' · '+
-    (API.connected?'bağlı':API.closed?'oda kapandı — oyun yalnız bu telefonda sürüyor':'bağlantı yok')+' · '+(gs.length-off)+'/'+gs.length+' misafir</button>'+
+  const head='<button class="mp1-mini-h" data-g="toggle" aria-expanded="'+open+'"><b>ÇOK OYUNCULU</b> · '+esc(V.fmtCode(API.code))+' · '+
+    (API.connected?'bağlı':API.closed?'oda kapandı — oyun yalnız bu telefonda sürüyor':'bağlantı yok')+' · '+(gs.length-off)+'/'+gs.length+' misafir</button>';
+  /* MP.3: DİPLOMASİ düğmesi aynı satırda (panel kapalıyken tek satır kalır) */
+  el.innerHTML=(window.MP3Dip?'<div class="mp3-minirow">'+head+'<button class="mp1-btn mp3-hostbtn" data-g="dip" id="mp3HostBtn">'+dipLabel()+'</button></div>':head)+
     (open?gs.map(p=>{const pid=pidOfSeat(p.seat);return '<div>'+esc(p.name)+' · '+(p.online?'bağlı':'koptu — koltuk bekletiliyor')+(p.online?'':'<button class="mp1-btn" data-g="kick" data-pid="'+esc(pid)+'">Çıkar (devlet boşta)</button><button class="mp1-btn" data-g="ai" data-pid="'+esc(pid)+'">Devleti AI\'ya ver</button>')+'</div>';}).join(''):'');
 }
+/* ---------- MP.3: host'un MP diplomasi paneli ----------
+   Yalnız insan oyuncularla teklif (AI devletlerle diplomasi tek oyunculu DİPLOMASİ ekranında, aynı motor).
+   Aynı ekran modülü (dip-ui.js) misafir sekmesiyle ortak; komut host.local() ile AYNI denetimlerden geçer
+   (ağdaki misafir gibi: başkası adına kabul yok, tur/süre/kaynak/Etki denetimi host motorunda). */
+let dipUI=null,dipEl=null,dipTT=0;
+function dipData(){const me=G.p;return {dip:API.host.dipView(me),me:{id:me.id,res:me.res,n:me.name},day:Math.floor(G.day)};}
+function dipCount(){if(!API.host||!API.started||!G.p)return 0;return API.host.dip.offers.filter(r=>r.to===G.p.id&&r.status==='pending').length;}
+function dipLabel(){const n=dipCount();return 'DİPLOMASİ'+(n?' <i class="mp3-badge">'+n+'</i>':'');}
+function dipToast(t,bad){let el=doc.getElementById('mp3HostToast');if(!el){el=doc.createElement('div');el.id='mp3HostToast';el.className='mp3-host-toast';doc.body.appendChild(el);}
+  el.hidden=false;el.textContent=t;el.className='mp3-host-toast'+(bad?' bad':'');clearTimeout(dipTT);dipTT=setTimeout(()=>{el.hidden=true;},3500);}
+function dipOpen(on){
+  if(!window.MP3Dip||!API.host)return;
+  if(!on){if(dipEl){if(dipUI)dipUI.close();dipEl.remove();dipEl=null;dipUI=null;}return;}
+  if(dipEl)return;
+  dipEl=doc.createElement('div');dipEl.className='mp3-host';dipEl.id='mp3Host';
+  dipEl.innerHTML='<div class="mp3-host-h"><span>ÇOK OYUNCULU DİPLOMASİ</span><button class="mp1-btn" data-h="close">KAPAT</button></div><div class="mp3-host-b" id="mp3HostBody"></div>';
+  doc.body.appendChild(dipEl);
+  dipEl.querySelector('[data-h="close"]').addEventListener('click',()=>dipOpen(false));
+  dipUI=MP3Dip.create({root:doc.getElementById('mp3HostBody'),esc,color:V.color,humansOnly:true,data:dipData,
+    online:()=>!!API.host&&API.started&&!API.host.state.paused,toast:dipToast,
+    send(cmd,done){const x=API.host.local(cmd);done({status:x.ok?'ok':'rejected',code:x.code||null,detail:x.detail,extra:x.extra});return {ok:true};}});
+  dipUI.render(true);
+}
+function dipTick(){
+  if(dipUI)dipUI.render();
+  const b=doc.getElementById('mp3HostBtn');if(b){const h=dipLabel();if(b.innerHTML!==h)b.innerHTML=h;}
+}
+API.dip={open:dipOpen,get ui(){return dipUI;}};
 /* ---------- Android arka plan / ekran kilidi ----------
    Arka planda rAF durur, zamanlayıcılar kısılır, sekme dondurulabilir. Yarım hızla
    sürüp misafirleri belirsiz bırakmak yerine: oyun güvenle duraklar, misafir nedeni
