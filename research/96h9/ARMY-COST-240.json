@@ -1,0 +1,59 @@
+{
+ "note": "5 worlds x 240 months; hulls = max size of each army fleet seen in monthly snapshots; SHIPS.ord costs 70 alloy + 120 minerals",
+ "arms": {
+  "11-96H.8": {
+   "armyHullsSeen": 14,
+   "alloy": 980,
+   "minerals": 1680,
+   "cleanInvasions": 1,
+   "colonyCaptures": 8,
+   "alloyPerClean": 980,
+   "alloyPerCapture": 122
+  },
+  "11-B": {
+   "armyHullsSeen": 58,
+   "alloy": 4060,
+   "minerals": 6960,
+   "cleanInvasions": 13,
+   "colonyCaptures": 17,
+   "alloyPerClean": 312,
+   "alloyPerCapture": 239
+  },
+  "11-96H.9": {
+   "armyHullsSeen": 45,
+   "alloy": 3150,
+   "minerals": 5400,
+   "cleanInvasions": 13,
+   "colonyCaptures": 19,
+   "alloyPerClean": 242,
+   "alloyPerCapture": 166
+  },
+  "23-96H.8": {
+   "armyHullsSeen": 36,
+   "alloy": 2520,
+   "minerals": 4320,
+   "cleanInvasions": 0,
+   "colonyCaptures": 14,
+   "alloyPerClean": null,
+   "alloyPerCapture": 180
+  },
+  "23-B": {
+   "armyHullsSeen": 55,
+   "alloy": 3850,
+   "minerals": 6600,
+   "cleanInvasions": 4,
+   "colonyCaptures": 13,
+   "alloyPerClean": 962,
+   "alloyPerCapture": 296
+  },
+  "23-96H.9": {
+   "armyHullsSeen": 37,
+   "alloy": 2590,
+   "minerals": 4440,
+   "cleanInvasions": 1,
+   "colonyCaptures": 9,
+   "alloyPerClean": 2590,
+   "alloyPerCapture": 288
+  }
+ }
+}

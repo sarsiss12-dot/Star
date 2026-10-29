@@ -1,0 +1,1112 @@
+{
+ "seed11-96H.8": [
+  {
+   "world": "base",
+   "colonyCaptures": 0,
+   "capitals": 0,
+   "falls": {
+    "uzay": 1,
+    "teslim": 15
+   },
+   "groundBattles": 0,
+   "captures": []
+  },
+  {
+   "world": "-pl1",
+   "colonyCaptures": 1,
+   "capitals": 1,
+   "falls": {
+    "teslim": 19
+   },
+   "groundBattles": 0,
+   "captures": [
+    {
+     "month": 93,
+     "sys": 5,
+     "by": 3,
+     "from": 5
+    }
+   ]
+  },
+  {
+   "world": "-pl3",
+   "colonyCaptures": 2,
+   "capitals": 1,
+   "falls": {
+    "katastrof": 2,
+    "teslim": 5
+   },
+   "groundBattles": 0,
+   "captures": [
+    {
+     "month": 93,
+     "sys": 41,
+     "by": 5,
+     "from": 3
+    },
+    {
+     "month": 95,
+     "sys": 41,
+     "by": 5,
+     "from": 5
+    }
+   ]
+  },
+  {
+   "world": "-pl5",
+   "colonyCaptures": 5,
+   "capitals": 1,
+   "falls": {
+    "uzay": 1,
+    "teslim": 11,
+    "temiz": 1,
+    "katastrof": 1
+   },
+   "groundBattles": 1,
+   "captures": [
+    {
+     "month": 116,
+     "sys": 4,
+     "by": 5,
+     "from": 3
+    },
+    {
+     "month": 116,
+     "sys": 40,
+     "by": 5,
+     "from": 3
+    },
+    {
+     "month": 212,
+     "sys": 3,
+     "by": 1,
+     "from": 2
+    },
+    {
+     "month": 216,
+     "sys": 0,
+     "by": 1,
+     "from": 2
+    },
+    {
+     "month": 237,
+     "sys": 4,
+     "by": 1,
+     "from": 5
+    }
+   ]
+  },
+  {
+   "world": "-pl6",
+   "colonyCaptures": 0,
+   "capitals": 0,
+   "falls": {
+    "teslim": 11
+   },
+   "groundBattles": 0,
+   "captures": []
+  }
+ ],
+ "seed11-B": [
+  {
+   "world": "base",
+   "colonyCaptures": 3,
+   "capitals": 2,
+   "falls": {
+    "uzay": 2,
+    "teslim": 16,
+    "temiz": 2
+   },
+   "groundBattles": 6,
+   "captures": [
+    {
+     "month": 93,
+     "sys": 5,
+     "by": 3,
+     "from": 5
+    },
+    {
+     "month": 129,
+     "sys": 25,
+     "by": 3,
+     "from": 5
+    },
+    {
+     "month": 142,
+     "sys": 6,
+     "by": 1,
+     "from": 0
+    }
+   ]
+  },
+  {
+   "world": "-pl1",
+   "colonyCaptures": 1,
+   "capitals": 1,
+   "falls": {
+    "teslim": 38,
+    "temiz": 1
+   },
+   "groundBattles": 2,
+   "captures": [
+    {
+     "month": 70,
+     "sys": 6,
+     "by": 1,
+     "from": 0
+    }
+   ]
+  },
+  {
+   "world": "-pl3",
+   "colonyCaptures": 5,
+   "capitals": 3,
+   "falls": {
+    "temiz": 5,
+    "uzay": 2,
+    "teslim": 3
+   },
+   "groundBattles": 5,
+   "captures": [
+    {
+     "month": 67,
+     "sys": 6,
+     "by": 1,
+     "from": 0
+    },
+    {
+     "month": 143,
+     "sys": 5,
+     "by": 3,
+     "from": 5
+    },
+    {
+     "month": 186,
+     "sys": 25,
+     "by": 3,
+     "from": 5
+    },
+    {
+     "month": 214,
+     "sys": 30,
+     "by": 3,
+     "from": 4
+    },
+    {
+     "month": 227,
+     "sys": 37,
+     "by": 3,
+     "from": 4
+    }
+   ]
+  },
+  {
+   "world": "-pl5",
+   "colonyCaptures": 3,
+   "capitals": 2,
+   "falls": {
+    "uzay": 3,
+    "teslim": 41,
+    "temiz": 3
+   },
+   "groundBattles": 3,
+   "captures": [
+    {
+     "month": 116,
+     "sys": 41,
+     "by": 5,
+     "from": 3
+    },
+    {
+     "month": 116,
+     "sys": 41,
+     "by": 5,
+     "from": 5
+    },
+    {
+     "month": 120,
+     "sys": 6,
+     "by": 1,
+     "from": 0
+    }
+   ]
+  },
+  {
+   "world": "-pl6",
+   "colonyCaptures": 5,
+   "capitals": 4,
+   "falls": {
+    "teslim": 4,
+    "uzay": 2,
+    "temiz": 2,
+    "katastrof": 1,
+    "ayrilik": 1
+   },
+   "groundBattles": 2,
+   "captures": [
+    {
+     "month": 73,
+     "sys": 6,
+     "by": 1,
+     "from": 0
+    },
+    {
+     "month": 130,
+     "sys": 0,
+     "by": 1,
+     "from": 2
+    },
+    {
+     "month": 169,
+     "sys": 40,
+     "by": 3,
+     "from": 5
+    },
+    {
+     "month": 172,
+     "sys": 5,
+     "by": 3,
+     "from": 5
+    },
+    {
+     "month": 229,
+     "sys": 0,
+     "by": 1,
+     "from": 7
+    }
+   ]
+  }
+ ],
+ "seed11-C": [
+  {
+   "world": "base",
+   "colonyCaptures": 0,
+   "capitals": 0,
+   "falls": {
+    "uzay": 1,
+    "teslim": 38
+   },
+   "groundBattles": 0,
+   "captures": []
+  },
+  {
+   "world": "-pl1",
+   "colonyCaptures": 4,
+   "capitals": 2,
+   "falls": {
+    "teslim": 13,
+    "katastrof": 3,
+    "ayrilik": 3
+   },
+   "groundBattles": 0,
+   "captures": [
+    {
+     "month": 91,
+     "sys": 5,
+     "by": 3,
+     "from": 5
+    },
+    {
+     "month": 123,
+     "sys": 25,
+     "by": 3,
+     "from": 5
+    },
+    {
+     "month": 188,
+     "sys": 37,
+     "by": 3,
+     "from": 4
+    },
+    {
+     "month": 188,
+     "sys": 30,
+     "by": 3,
+     "from": 4
+    }
+   ]
+  },
+  {
+   "world": "-pl3",
+   "colonyCaptures": 2,
+   "capitals": 1,
+   "falls": {
+    "uzay": 1,
+    "teslim": 14,
+    "temiz": 1
+   },
+   "groundBattles": 1,
+   "captures": [
+    {
+     "month": 62,
+     "sys": 5,
+     "by": 3,
+     "from": 5
+    },
+    {
+     "month": 117,
+     "sys": 25,
+     "by": 3,
+     "from": 5
+    }
+   ]
+  },
+  {
+   "world": "-pl5",
+   "colonyCaptures": 1,
+   "capitals": 1,
+   "falls": {
+    "uzay": 1,
+    "teslim": 11,
+    "katastrof": 1,
+    "ayrilik": 1
+   },
+   "groundBattles": 0,
+   "captures": [
+    {
+     "month": 132,
+     "sys": 6,
+     "by": 1,
+     "from": 0
+    }
+   ]
+  },
+  {
+   "world": "-pl6",
+   "colonyCaptures": 1,
+   "capitals": 1,
+   "falls": {
+    "teslim": 12,
+    "katastrof": 1
+   },
+   "groundBattles": 0,
+   "captures": [
+    {
+     "month": 188,
+     "sys": 0,
+     "by": 1,
+     "from": 2
+    }
+   ]
+  }
+ ],
+ "seed11-BC=96H.9": [
+  {
+   "world": "base",
+   "colonyCaptures": 7,
+   "capitals": 4,
+   "falls": {
+    "uzay": 2,
+    "teslim": 16,
+    "temiz": 3,
+    "katastrof": 1,
+    "ayrilik": 1
+   },
+   "groundBattles": 3,
+   "captures": [
+    {
+     "month": 80,
+     "sys": 5,
+     "by": 3,
+     "from": 5
+    },
+    {
+     "month": 103,
+     "sys": 25,
+     "by": 3,
+     "from": 5
+    },
+    {
+     "month": 127,
+     "sys": 6,
+     "by": 1,
+     "from": 0
+    },
+    {
+     "month": 137,
+     "sys": 37,
+     "by": 3,
+     "from": 4
+    },
+    {
+     "month": 137,
+     "sys": 30,
+     "by": 3,
+     "from": 4
+    },
+    {
+     "month": 153,
+     "sys": 0,
+     "by": 1,
+     "from": 2
+    },
+    {
+     "month": 156,
+     "sys": 3,
+     "by": 1,
+     "from": 2
+    }
+   ]
+  },
+  {
+   "world": "-pl1",
+   "colonyCaptures": 4,
+   "capitals": 2,
+   "falls": {
+    "teslim": 19,
+    "temiz": 2,
+    "uzay": 1
+   },
+   "groundBattles": 2,
+   "captures": [
+    {
+     "month": 77,
+     "sys": 5,
+     "by": 3,
+     "from": 5
+    },
+    {
+     "month": 81,
+     "sys": 25,
+     "by": 3,
+     "from": 5
+    },
+    {
+     "month": 123,
+     "sys": 37,
+     "by": 3,
+     "from": 4
+    },
+    {
+     "month": 124,
+     "sys": 30,
+     "by": 3,
+     "from": 4
+    }
+   ]
+  },
+  {
+   "world": "-pl3",
+   "colonyCaptures": 2,
+   "capitals": 1,
+   "falls": {
+    "temiz": 2,
+    "teslim": 10
+   },
+   "groundBattles": 3,
+   "captures": [
+    {
+     "month": 55,
+     "sys": 5,
+     "by": 3,
+     "from": 5
+    },
+    {
+     "month": 89,
+     "sys": 25,
+     "by": 3,
+     "from": 5
+    }
+   ]
+  },
+  {
+   "world": "-pl5",
+   "colonyCaptures": 3,
+   "capitals": 2,
+   "falls": {
+    "uzay": 1,
+    "teslim": 7,
+    "temiz": 3
+   },
+   "groundBattles": 3,
+   "captures": [
+    {
+     "month": 58,
+     "sys": 5,
+     "by": 3,
+     "from": 5
+    },
+    {
+     "month": 63,
+     "sys": 25,
+     "by": 3,
+     "from": 5
+    },
+    {
+     "month": 122,
+     "sys": 6,
+     "by": 1,
+     "from": 0
+    }
+   ]
+  },
+  {
+   "world": "-pl6",
+   "colonyCaptures": 3,
+   "capitals": 2,
+   "falls": {
+    "teslim": 32,
+    "temiz": 3
+   },
+   "groundBattles": 4,
+   "captures": [
+    {
+     "month": 43,
+     "sys": 5,
+     "by": 3,
+     "from": 5
+    },
+    {
+     "month": 50,
+     "sys": 25,
+     "by": 3,
+     "from": 5
+    },
+    {
+     "month": 118,
+     "sys": 6,
+     "by": 1,
+     "from": 0
+    }
+   ]
+  }
+ ],
+ "seed23-96H.8": [
+  {
+   "world": "base",
+   "colonyCaptures": 2,
+   "capitals": 1,
+   "falls": {
+    "teslim": 2,
+    "uzay": 1
+   },
+   "groundBattles": 0,
+   "captures": [
+    {
+     "month": 54,
+     "sys": 41,
+     "by": 5,
+     "from": 4
+    },
+    {
+     "month": 83,
+     "sys": 10,
+     "by": 5,
+     "from": 4
+    }
+   ]
+  },
+  {
+   "world": "-pl1",
+   "colonyCaptures": 2,
+   "capitals": 1,
+   "falls": {
+    "teslim": 5,
+    "katastrof": 1
+   },
+   "groundBattles": 0,
+   "captures": [
+    {
+     "month": 69,
+     "sys": 41,
+     "by": 5,
+     "from": 4
+    },
+    {
+     "month": 94,
+     "sys": 10,
+     "by": 5,
+     "from": 4
+    }
+   ]
+  },
+  {
+   "world": "-pl2",
+   "colonyCaptures": 3,
+   "capitals": 1,
+   "falls": {
+    "teslim": 3,
+    "uzay": 2
+   },
+   "groundBattles": 0,
+   "captures": [
+    {
+     "month": 52,
+     "sys": 41,
+     "by": 5,
+     "from": 4
+    },
+    {
+     "month": 56,
+     "sys": 10,
+     "by": 5,
+     "from": 4
+    },
+    {
+     "month": 159,
+     "sys": 27,
+     "by": 5,
+     "from": 3
+    }
+   ]
+  },
+  {
+   "world": "-pl3",
+   "colonyCaptures": 2,
+   "capitals": 1,
+   "falls": {
+    "katastrof": 1,
+    "teslim": 1
+   },
+   "groundBattles": 0,
+   "captures": [
+    {
+     "month": 68,
+     "sys": 41,
+     "by": 5,
+     "from": 4
+    },
+    {
+     "month": 72,
+     "sys": 10,
+     "by": 5,
+     "from": 4
+    }
+   ]
+  },
+  {
+   "world": "-pl4",
+   "colonyCaptures": 5,
+   "capitals": 1,
+   "falls": {
+    "teslim": 78,
+    "katastrof": 1
+   },
+   "groundBattles": 0,
+   "captures": [
+    {
+     "month": 68,
+     "sys": 41,
+     "by": 5,
+     "from": 4
+    },
+    {
+     "month": 71,
+     "sys": 10,
+     "by": 5,
+     "from": 4
+    },
+    {
+     "month": 194,
+     "sys": 0,
+     "by": 5,
+     "from": 3
+    },
+    {
+     "month": 199,
+     "sys": 14,
+     "by": 5,
+     "from": 3
+    },
+    {
+     "month": 201,
+     "sys": 27,
+     "by": 5,
+     "from": 3
+    }
+   ]
+  }
+ ],
+ "seed23-B": [
+  {
+   "world": "base",
+   "colonyCaptures": 1,
+   "capitals": 1,
+   "falls": {
+    "temiz": 1,
+    "teslim": 7,
+    "ayrilik": 1
+   },
+   "groundBattles": 1,
+   "captures": [
+    {
+     "month": 39,
+     "sys": 41,
+     "by": 5,
+     "from": 4
+    }
+   ]
+  },
+  {
+   "world": "-pl1",
+   "colonyCaptures": 2,
+   "capitals": 1,
+   "falls": {
+    "katastrof": 1,
+    "teslim": 18
+   },
+   "groundBattles": 0,
+   "captures": [
+    {
+     "month": 54,
+     "sys": 41,
+     "by": 5,
+     "from": 4
+    },
+    {
+     "month": 56,
+     "sys": 10,
+     "by": 5,
+     "from": 4
+    }
+   ]
+  },
+  {
+   "world": "-pl2",
+   "colonyCaptures": 3,
+   "capitals": 1,
+   "falls": {
+    "katastrof": 1,
+    "temiz": 1,
+    "teslim": 4,
+    "uzay": 2
+   },
+   "groundBattles": 1,
+   "captures": [
+    {
+     "month": 66,
+     "sys": 41,
+     "by": 5,
+     "from": 4
+    },
+    {
+     "month": 68,
+     "sys": 10,
+     "by": 5,
+     "from": 4
+    },
+    {
+     "month": 213,
+     "sys": 14,
+     "by": 5,
+     "from": 3
+    }
+   ]
+  },
+  {
+   "world": "-pl3",
+   "colonyCaptures": 2,
+   "capitals": 0,
+   "falls": {
+    "katastrof": 1,
+    "temiz": 1,
+    "ayrilik": 1
+   },
+   "groundBattles": 1,
+   "captures": [
+    {
+     "month": 89,
+     "sys": 10,
+     "by": 5,
+     "from": 4
+    },
+    {
+     "month": 91,
+     "sys": 10,
+     "by": 3,
+     "from": 5
+    }
+   ]
+  },
+  {
+   "world": "-pl4",
+   "colonyCaptures": 5,
+   "capitals": 2,
+   "falls": {
+    "katastrof": 4,
+    "temiz": 1,
+    "teslim": 71,
+    "ayrilik": 2
+   },
+   "groundBattles": 1,
+   "captures": [
+    {
+     "month": 106,
+     "sys": 41,
+     "by": 5,
+     "from": 4
+    },
+    {
+     "month": 107,
+     "sys": 41,
+     "by": 4,
+     "from": 5
+    },
+    {
+     "month": 108,
+     "sys": 41,
+     "by": 5,
+     "from": 4
+    },
+    {
+     "month": 121,
+     "sys": 32,
+     "by": 3,
+     "from": 5
+    },
+    {
+     "month": 136,
+     "sys": 41,
+     "by": 3,
+     "from": 5
+    }
+   ]
+  }
+ ],
+ "seed23-C": [
+  {
+   "world": "base",
+   "colonyCaptures": 1,
+   "capitals": 1,
+   "falls": {
+    "katastrof": 1,
+    "teslim": 74,
+    "ayrilik": 1
+   },
+   "groundBattles": 0,
+   "captures": [
+    {
+     "month": 37,
+     "sys": 41,
+     "by": 5,
+     "from": 4
+    }
+   ]
+  },
+  {
+   "world": "-pl1",
+   "colonyCaptures": 1,
+   "capitals": 1,
+   "falls": {
+    "katastrof": 1,
+    "ayrilik": 1
+   },
+   "groundBattles": 0,
+   "captures": [
+    {
+     "month": 35,
+     "sys": 41,
+     "by": 5,
+     "from": 4
+    }
+   ]
+  },
+  {
+   "world": "-pl2",
+   "colonyCaptures": 7,
+   "capitals": 2,
+   "falls": {
+    "teslim": 9,
+    "uzay": 2,
+    "temiz": 1
+   },
+   "groundBattles": 1,
+   "captures": [
+    {
+     "month": 32,
+     "sys": 41,
+     "by": 5,
+     "from": 4
+    },
+    {
+     "month": 34,
+     "sys": 10,
+     "by": 5,
+     "from": 4
+    },
+    {
+     "month": 145,
+     "sys": 14,
+     "by": 5,
+     "from": 3
+    },
+    {
+     "month": 146,
+     "sys": 0,
+     "by": 5,
+     "from": 3
+    },
+    {
+     "month": 148,
+     "sys": 34,
+     "by": 5,
+     "from": 3
+    },
+    {
+     "month": 216,
+     "sys": 23,
+     "by": 3,
+     "from": 2
+    },
+    {
+     "month": 223,
+     "sys": 40,
+     "by": 3,
+     "from": 5
+    }
+   ]
+  },
+  {
+   "world": "-pl3",
+   "colonyCaptures": 1,
+   "capitals": 1,
+   "falls": {
+    "katastrof": 1,
+    "teslim": 4
+   },
+   "groundBattles": 0,
+   "captures": [
+    {
+     "month": 36,
+     "sys": 41,
+     "by": 5,
+     "from": 4
+    }
+   ]
+  },
+  {
+   "world": "-pl4",
+   "colonyCaptures": 1,
+   "capitals": 1,
+   "falls": {
+    "teslim": 6
+   },
+   "groundBattles": 0,
+   "captures": [
+    {
+     "month": 36,
+     "sys": 41,
+     "by": 5,
+     "from": 4
+    }
+   ]
+  }
+ ],
+ "seed23-BC=96H.9": [
+  {
+   "world": "base",
+   "colonyCaptures": 1,
+   "capitals": 1,
+   "falls": {
+    "katastrof": 1
+   },
+   "groundBattles": 0,
+   "captures": [
+    {
+     "month": 35,
+     "sys": 41,
+     "by": 5,
+     "from": 4
+    }
+   ]
+  },
+  {
+   "world": "-pl1",
+   "colonyCaptures": 1,
+   "capitals": 1,
+   "falls": {
+    "katastrof": 1,
+    "teslim": 7
+   },
+   "groundBattles": 0,
+   "captures": [
+    {
+     "month": 36,
+     "sys": 41,
+     "by": 5,
+     "from": 4
+    }
+   ]
+  },
+  {
+   "world": "-pl2",
+   "colonyCaptures": 3,
+   "capitals": 1,
+   "falls": {
+    "katastrof": 1,
+    "teslim": 8,
+    "uzay": 1
+   },
+   "groundBattles": 0,
+   "captures": [
+    {
+     "month": 33,
+     "sys": 41,
+     "by": 5,
+     "from": 4
+    },
+    {
+     "month": 35,
+     "sys": 10,
+     "by": 5,
+     "from": 4
+    },
+    {
+     "month": 221,
+     "sys": 11,
+     "by": 3,
+     "from": 5
+    }
+   ]
+  },
+  {
+   "world": "-pl3",
+   "colonyCaptures": 1,
+   "capitals": 1,
+   "falls": {
+    "katastrof": 1,
+    "teslim": 8
+   },
+   "groundBattles": 0,
+   "captures": [
+    {
+     "month": 36,
+     "sys": 41,
+     "by": 5,
+     "from": 4
+    }
+   ]
+  },
+  {
+   "world": "-pl4",
+   "colonyCaptures": 3,
+   "capitals": 1,
+   "falls": {
+    "katastrof": 2,
+    "ayrilik": 2,
+    "temiz": 1
+   },
+   "groundBattles": 1,
+   "captures": [
+    {
+     "month": 36,
+     "sys": 41,
+     "by": 5,
+     "from": 4
+    },
+    {
+     "month": 158,
+     "sys": 10,
+     "by": 2,
+     "from": 4
+    },
+    {
+     "month": 169,
+     "sys": 10,
+     "by": 5,
+     "from": 2
+    }
+   ]
+  }
+ ]
+}

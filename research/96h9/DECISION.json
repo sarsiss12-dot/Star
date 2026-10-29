@@ -1,0 +1,24 @@
+{
+ "phase": "96H.9",
+ "decision": "ACCEPT candidate BC (army procurement for a known colonised war target + campaign force holds the siege at the target)",
+ "rejected": {
+  "A": "siege-only intent with unconditional alloy hold: army still failed on energy-runway (seed11 actor1 net -148 needs 1776, has 1688); hold blocked warships; 0 ground battles",
+  "B alone": "real ground invasions appeared, but escort was recalled every AI turn: seed11 5x240 lost 34 army fleets (BC 16)",
+  "C alone": "siege held without armies cannot finish: seed11 240 wartime disband 34.8 -> 46.2 mean; 8x120 single-world total 11 -> 47"
+ },
+ "criteria": {
+  "1 missed invasion opportunity improved": "seed11 month66: 96H.8 never pays for an army during a stalled siege (garrison 43->4); 96H.9 orders it in month 1 and takes sys6 cleanly on day 2130. seed11 month79: 96H.8 recalls the escort on day 2400 and the army is lost; 96H.9 holds and captures sys5 cleanly on day 2430",
+  "2 concrete capture benefit": "seed11 5x240 clean invasions 1 -> 13, colony captures 8 -> 19; same-save s11m60 captures [0,0,1,0,0] -> [0,2,1,1,2] all clean; s11m40 actor1 takes sys6 in 3/5 worlds; s23m15 actor5 takes sys41 in 5/5 worlds (m35-37) vs 2/5 (m53-54)",
+  "3 not 'sending more'": "8x120 army hulls 27 -> 31; seed23 5x240 army hulls 36 -> 37 with army fleets lost 21 -> 14; seed11 army alloy per clean conquest 980 -> 242",
+  "4 losses": "wartime disband seed11 240 34.8 -> 3.8, seed23 0 -> 11.4 (2/5 worlds, both via pre-existing joint-op advance / rally route); deployment-driven disband 10 worlds 59 -> 57, 8x120 0 -> 0; army fleets lost seed11 3 -> 16 (with 2 -> 13 consumed by clean invasions), seed23 21 -> 14",
+  "5 economy": "8x120 crit 14 = 14, techs 335 = 335, colonies 131 -> 138, power -0.8%; seed11 240 trade 130.4 -> 8.8 because the only trade pair loses actor5 to conquest (5/5 worlds), surviving empires' techs equal or higher; seed23 240 techs 72 -> 86, trade 0.8 -> 143.8; canonical 4x240 crit 53 -> 68 (seed11 new state 7 born m218)",
+  "6 defence": "home-defence, threatened-system, recovery and unfunded-recall paths run before the hold and are unchanged; 0 capitals lost while their owner's fleet held a siege elsewhere (20 worlds)",
+  "7 Save8/RNG": "no new Save field (blocks write only the existing monthly aiShipPlan.reasons); aiInvasionTarget read-only; energy-gate failure leaves Save8 byte-identical to 96H.8; seeds 42/404/7/123/2026 monthly Save+RNG identical over 120 months",
+  "8 performance": "see PERFORMANCE.json",
+  "9 rules": "economy.js, combat.js, diplomacy.js bytes equal 96H.8; invasion/shield/garrison rules identical for player and AI"
+ },
+ "trade_offs": [
+  "seed23: held siege reaches the 6-month catastrophe before an army arrives (sys41 by catastrophe 5/5 vs 3/5); earlier but more destructive capture; total colony captures 3 -> 1.8 mean",
+  "AI now really invades the passive player's colonies in simulation (seed11 sys6 taken in 3/5 BC worlds by month 127)"
+ ]
+}

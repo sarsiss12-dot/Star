@@ -1,0 +1,210 @@
+{
+ "method": "arm9u.js (arm9 + home/away upkeep at each aiDisbandTick), 240 months, RELOAD_AT=60; seed11 placebo day 810 k=1/3, 780 k=1, 840 k=1; seed23 day 450 k=1..4. Deployment-driven = away upkeep > home upkeep at the disbanding tick.",
+ "seed11-96H.8": [
+  {
+   "world": "base",
+   "aiSHA": "8141a3fb691db340e66f267a9a94f942d3cb7e2cd542829bbb7493545bff16b0",
+   "finalSaveSHA": "2b40d28c2119495bda170f841baf7b3a5b20be5442e5b2bfd2db66e185368357",
+   "wartimeDisbandShips": 95,
+   "deploymentDriven": 59,
+   "deploymentEvents": [
+    {
+     "month": 149,
+     "actor": 5,
+     "ships": 30,
+     "upHome": 3.3,
+     "upAway": 392.2,
+     "incEne": -160.5
+    },
+    {
+     "month": 211,
+     "actor": 5,
+     "ships": 29,
+     "upHome": 4.1,
+     "upAway": 384.6,
+     "incEne": -156.5
+    }
+   ]
+  },
+  {
+   "world": "pl1",
+   "aiSHA": "8141a3fb691db340e66f267a9a94f942d3cb7e2cd542829bbb7493545bff16b0",
+   "finalSaveSHA": "d1fbcf7414043d6b2d7843b207634892f859050f436fbdbfca91dd06ff93e516",
+   "wartimeDisbandShips": 0,
+   "deploymentDriven": 0,
+   "deploymentEvents": []
+  },
+  {
+   "world": "pl3",
+   "aiSHA": "8141a3fb691db340e66f267a9a94f942d3cb7e2cd542829bbb7493545bff16b0",
+   "finalSaveSHA": "b9e43e0a1b2ebf1cea6797c508ced85d6bfcfa7a6421cfa4359a96889eafae35",
+   "wartimeDisbandShips": 17,
+   "deploymentDriven": 0,
+   "deploymentEvents": []
+  },
+  {
+   "world": "pl5",
+   "aiSHA": "8141a3fb691db340e66f267a9a94f942d3cb7e2cd542829bbb7493545bff16b0",
+   "finalSaveSHA": "c39f25214e4ed118c9fbd2a65af7b3cbe20698f4195886d0663284a1f43372a7",
+   "wartimeDisbandShips": 40,
+   "deploymentDriven": 0,
+   "deploymentEvents": []
+  },
+  {
+   "world": "pl6",
+   "aiSHA": "8141a3fb691db340e66f267a9a94f942d3cb7e2cd542829bbb7493545bff16b0",
+   "finalSaveSHA": "cec9c2a94e3db23616c1dad79933230e80ebae96cb599e087632ebcb72d2dee1",
+   "wartimeDisbandShips": 22,
+   "deploymentDriven": 0,
+   "deploymentEvents": []
+  }
+ ],
+ "seed11-96H.9": [
+  {
+   "world": "base",
+   "aiSHA": "4d7270b6f84466db89fbf944a67c393861dda4485a421ddcabf145b84d6709ed",
+   "finalSaveSHA": "f94daf1ca3ad3a17cf0d15e8c2d38381742dcbaed43803882b3fe2825a6627b7",
+   "wartimeDisbandShips": 6,
+   "deploymentDriven": 0,
+   "deploymentEvents": []
+  },
+  {
+   "world": "pl1",
+   "aiSHA": "4d7270b6f84466db89fbf944a67c393861dda4485a421ddcabf145b84d6709ed",
+   "finalSaveSHA": "c6eb58a433344c2bda2b2a8d4f733092caf3dc3b4b9091d4117985d5762d5cca",
+   "wartimeDisbandShips": 0,
+   "deploymentDriven": 0,
+   "deploymentEvents": []
+  },
+  {
+   "world": "pl3",
+   "aiSHA": "4d7270b6f84466db89fbf944a67c393861dda4485a421ddcabf145b84d6709ed",
+   "finalSaveSHA": "ae4df4660af4e5bbbfab791a80c7b3e658f0865077b9814f2f0d777eff1e11c9",
+   "wartimeDisbandShips": 13,
+   "deploymentDriven": 0,
+   "deploymentEvents": []
+  },
+  {
+   "world": "pl5",
+   "aiSHA": "4d7270b6f84466db89fbf944a67c393861dda4485a421ddcabf145b84d6709ed",
+   "finalSaveSHA": "8549fe0cbb4a8d4264cca6f18625bed2f968d94ee5ac61bd7e1d1815739740e4",
+   "wartimeDisbandShips": 0,
+   "deploymentDriven": 0,
+   "deploymentEvents": []
+  },
+  {
+   "world": "pl6",
+   "aiSHA": "4d7270b6f84466db89fbf944a67c393861dda4485a421ddcabf145b84d6709ed",
+   "finalSaveSHA": "8f02935c2d64443c76ec1f85c234c75816fd3170debb377081ba5123901b53e8",
+   "wartimeDisbandShips": 0,
+   "deploymentDriven": 0,
+   "deploymentEvents": []
+  }
+ ],
+ "seed23-96H.8": [
+  {
+   "world": "base",
+   "aiSHA": "8141a3fb691db340e66f267a9a94f942d3cb7e2cd542829bbb7493545bff16b0",
+   "finalSaveSHA": "7bdce9d718103644c3460921314bc602463f62aca6167a1d503e34fb91b2f342",
+   "wartimeDisbandShips": 0,
+   "deploymentDriven": 0,
+   "deploymentEvents": []
+  },
+  {
+   "world": "pl1",
+   "aiSHA": "8141a3fb691db340e66f267a9a94f942d3cb7e2cd542829bbb7493545bff16b0",
+   "finalSaveSHA": "441c7e0b4861ba4356cae9276949560529fed30aab1bbdd2e6468b177190a303",
+   "wartimeDisbandShips": 0,
+   "deploymentDriven": 0,
+   "deploymentEvents": []
+  },
+  {
+   "world": "pl2",
+   "aiSHA": "8141a3fb691db340e66f267a9a94f942d3cb7e2cd542829bbb7493545bff16b0",
+   "finalSaveSHA": "d0f238ad2180c95272c71c0028308aca1565231b9a5fdfc0d774e957252c956d",
+   "wartimeDisbandShips": 0,
+   "deploymentDriven": 0,
+   "deploymentEvents": []
+  },
+  {
+   "world": "pl3",
+   "aiSHA": "8141a3fb691db340e66f267a9a94f942d3cb7e2cd542829bbb7493545bff16b0",
+   "finalSaveSHA": "b28d212e63522dc0da749d4a2c26e370089992131bcf7262bc064660ff9d586d",
+   "wartimeDisbandShips": 0,
+   "deploymentDriven": 0,
+   "deploymentEvents": []
+  },
+  {
+   "world": "pl4",
+   "aiSHA": "8141a3fb691db340e66f267a9a94f942d3cb7e2cd542829bbb7493545bff16b0",
+   "finalSaveSHA": "4b4373bbb790cc5f95c449e31a94a6add4177019d414c180721908515a7693d7",
+   "wartimeDisbandShips": 0,
+   "deploymentDriven": 0,
+   "deploymentEvents": []
+  }
+ ],
+ "seed23-96H.9": [
+  {
+   "world": "base",
+   "aiSHA": "4d7270b6f84466db89fbf944a67c393861dda4485a421ddcabf145b84d6709ed",
+   "finalSaveSHA": "a7f66fd15f43dc762690038fa2b10412ec31ddecbdc4d40d6d1f1053cabc8adb",
+   "wartimeDisbandShips": 0,
+   "deploymentDriven": 0,
+   "deploymentEvents": []
+  },
+  {
+   "world": "pl1",
+   "aiSHA": "4d7270b6f84466db89fbf944a67c393861dda4485a421ddcabf145b84d6709ed",
+   "finalSaveSHA": "bfff2c2538ef57733a9d9239a84908b01b0ea8f34b9484d5184bb934504cf9a9",
+   "wartimeDisbandShips": 0,
+   "deploymentDriven": 0,
+   "deploymentEvents": []
+  },
+  {
+   "world": "pl2",
+   "aiSHA": "4d7270b6f84466db89fbf944a67c393861dda4485a421ddcabf145b84d6709ed",
+   "finalSaveSHA": "f14424d50cd40d06f8b5a199463829dc5e0cbe6067f86132287a5a115db37110",
+   "wartimeDisbandShips": 24,
+   "deploymentDriven": 24,
+   "deploymentEvents": [
+    {
+     "month": 200,
+     "actor": 1,
+     "ships": 24,
+     "upHome": 4.9,
+     "upAway": 206.7,
+     "incEne": -127.9
+    }
+   ]
+  },
+  {
+   "world": "pl3",
+   "aiSHA": "4d7270b6f84466db89fbf944a67c393861dda4485a421ddcabf145b84d6709ed",
+   "finalSaveSHA": "3f7cc670882bd517fa371d2dfefb9f3ce20eb9a68a514ce0a2d6a421762dc9e6",
+   "wartimeDisbandShips": 0,
+   "deploymentDriven": 0,
+   "deploymentEvents": []
+  },
+  {
+   "world": "pl4",
+   "aiSHA": "4d7270b6f84466db89fbf944a67c393861dda4485a421ddcabf145b84d6709ed",
+   "finalSaveSHA": "a63309b14c084f4f7a7d532815743abf1a8f23924c147b07e9ac641b9d7bd5c6",
+   "wartimeDisbandShips": 33,
+   "deploymentDriven": 33,
+   "deploymentEvents": [
+    {
+     "month": 159,
+     "actor": 5,
+     "ships": 33,
+     "upHome": 25.3,
+     "upAway": 362.5,
+     "incEne": -227.9
+    }
+   ]
+  }
+ ],
+ "cause-96H.9-seed23": {
+  "pl2": "actor1 m200: 30-ship fleet sent by jointAdvance (joint operation, diplomacy.js) at day 5970.5; not an aiMilitaryCampaign order",
+  "pl4": "actor5 m159: build/gather phase rally move 32->41 routed through enemy system 10 (actor2); same loop and decision in 96H.8 code for this state (fleets not at the campaign target)"
+ }
+}

@@ -1,0 +1,72 @@
+--- a/ai.js
++++ b/ai.js
+@@ -766,8 +766,11 @@
+     since:continuing?old.since:G.day,until:continuing&&old.until>G.day?old.until:G.day+180,
+     need,power:reachable,reason:reachable<need?'Tahmini savunma için kuvvet yetersiz':gathered<need?'Ulaşabilir filolar toplanıyor':fund?'Sefer bakımı mevcut enerji/alaşım stokuyla karşılanamıyor':reason};
+   for(const f of send)aiMove(e,f,target.id);
++  // 96H.9: a force that reached the campaign target holds the siege. Pulling
++  // every idle fleet back to the rally each AI turn broke bombardment within a
++  // month and left arriving armies without an escort.
+   for(const f of force){
+-    if(f.mv||f.path.length||f.sys===rally.id||ready.includes(f))continue;
++    if(f.mv||f.path.length||f.sys===rally.id||f.sys===target.id||ready.includes(f))continue;
+     aiMove(e,f,rally.id);
+   }
+ }
+@@ -1382,6 +1385,22 @@
+   return queueShip(e,yard,cls);
+ }
+ 
++/* 96H.9: the army must be bought while the campaign still prepares. Once the
++   fleet is deployed its upkeep consumes the wartime energy runway that every
++   hull purchase needs, so a siege never receives an army. Invasion intent is
++   the campaign's own known colonised enemy target, or an actual siege seen
++   through the empire's own fleet with aiArmyTick's tests (shield at most 55,
++   power at least 80% of the system defence). Read-only. */
++function aiInvasionTarget(e){
++ const c=e.aiCampaign,t=c&&c.until>G.day&&['build','gather','fund','attack'].includes(c.phase)?G.sys[c.target]:null,r=aiKnownSystem(e,t);
++ if(r&&r.colonies>0&&e.war[r.owner])return t;
++ for(const sys of G.sys){
++  let war=0;for(const f of G.fleets)if(f.e===e.id&&f.sys===sys.id&&!f.mv&&f.ships.length&&isArmed(f))war+=fleetPower(f);
++  if(!war||war<(sys.def||0)*.8)continue;
++  if(sys.planets.some(pl=>pl.col&&pl.owner>=0&&pl.owner!==e.id&&e.war[pl.owner]&&(pl.col.shield||0)<=55))return sys;
++ }
++ return null;
++}
+ /* 93D.1: physical hulls, paid pending jobs, upkeep and bounded monthly budget. */
+ function aiShipInventory(e){
+  const counts={},pending={},yards=G.sys.filter(s=>s.owner===e.id&&hasYard(s));
+@@ -1412,7 +1431,7 @@
+  // Payment, reserve, projected upkeep, research and capacity still gate buy().
+  if(underDefended&&!plan.critical&&inv.combatUsage===0&&(e.inc.ala||0)<=0&&old.reasons?.includes('alloy-budget-reserve'))budget=Math.max(budget,Math.min(Math.max(0,(e.res.ala||0)-reserve),shipCost(e,'kor').ala||0));
+  const limit=Math.min(war?10:6,Math.max(1,yards.reduce((n,s)=>n+yardCount(s),0)*(war?3:2)));
+- let orders=0;
++ let orders=0,armyHold=0;
+  const preparing=e.aiStrategy?.plan?.stage==='arm'&&!plan.critical;
+  const target=Math.max(0,e.cap*(preparing?.8:war?.90:threat?.80:clamp(.50+prof.war*.18,.5,.76)));
+  const upkeep=Math.max(.1,1+(e.mods.upMul||0));
+@@ -1428,7 +1447,7 @@
+   if((!war&&d.up>0&&net<2)||e.crisis||(net<0&&(e.res.ene||0)<Math.max(100,-net*(war?12:24)))){note('energy-runway');return false;}
+   const alloyNet=Math.min((e.inc.ala||0)-(inv.queuedAlloy+(d.upA||0))*upkeep,current.rows.ala.net-(d.upA||0)*upkeep);
+   if(alloyNet<0&&(e.res.ala||0)-(c.ala||0)<-alloyNet*18){note('alloy-upkeep');return false;}
+-  if((c.ala||0)>budget||(e.res.ala||0)-(c.ala||0)<reserve){note('alloy-budget-reserve');return false;}
++  if((c.ala||0)>budget||(e.res.ala||0)-(c.ala||0)<reserve+(cls==='ord'?0:armyHold)){note('alloy-budget-reserve');return false;}
+   if(!war&&current.rows.tuk.net<0&&current.rows.tuk.months<6){note('consumer-runway');return false;}
+   if(!Object.entries(c).every(([r,v])=>e.res[r]-(r==='ala'?0:commitment[r]||0)>=v)){note('resource-cost');return false;}
+   if(!aiShipPurchaseSustainable(e,cls,current,recovery?.cost||{},visibleDanger)){note('post-purchase-runway');return false;}
+@@ -1443,6 +1462,15 @@
+   if(!ok){note('delivery-or-template');return false;}
+   budget-=Math.max(0,before-e.res.ala);orders++;inv=aiShipInventory(e);return true;
+  }
++ // A 70-alloy army never fits after cheaper warships drain each war month's
++ // alloy. With invasion intent and no army, try it first; if only its alloy
++ // price is missing, that price is a derived reservation (as in
++ // aiRecoveryInvestment), never a grant. Other failing gates change nothing.
++ if(war&&!(inv.counts.ord||0)&&!(inv.pending.ord||0)&&shipBuildAccess(e,'ord').ok&&aiInvasionTarget(e)){
++  const seen=state.reasons;state.reasons=[];const bought=buy('ord'),why=state.reasons;
++  state.reasons=seen.concat(why.filter(k=>!seen.includes(k)));
++  if(!bought&&why.length===1&&why[0]==='alloy-budget-reserve')armyHold=shipCost(e,'ord').ala||0;
++ }
+  const classes=['zir','kru','muh','kor','esk'].filter(c=>shipBuildAccess(e,c).ok);
+  for(let i=0;i<limit;i++){
+   if(inv.combatUsage>=target){note('deterrence-target');break;}

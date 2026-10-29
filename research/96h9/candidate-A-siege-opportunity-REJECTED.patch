@@ -1,0 +1,50 @@
+--- a/ai.js
++++ b/ai.js
+@@ -1382,6 +1382,18 @@
+   return queueShip(e,yard,cls);
+ }
+ 
++/* 96H.9: an actual siege is the only invasion opening aiArmyTick acts on:
++   own warships in orbit of an enemy colony at war, with aiArmyTick's own
++   tests (shield at most 55, power at least 80% of the system defence).
++   Read-only; observed through the empire's own fleet. */
++function aiSiegeOpportunity(e){
++ for(const sys of G.sys){
++  let war=0;for(const f of G.fleets)if(f.e===e.id&&f.sys===sys.id&&!f.mv&&f.ships.length&&isArmed(f))war+=fleetPower(f);
++  if(!war||war<(sys.def||0)*.8)continue;
++  if(sys.planets.some(pl=>pl.col&&pl.owner>=0&&pl.owner!==e.id&&e.war[pl.owner]&&(pl.col.shield||0)<=55))return sys;
++ }
++ return null;
++}
+ /* 93D.1: physical hulls, paid pending jobs, upkeep and bounded monthly budget. */
+ function aiShipInventory(e){
+  const counts={},pending={},yards=G.sys.filter(s=>s.owner===e.id&&hasYard(s));
+@@ -1413,6 +1425,11 @@
+  if(underDefended&&!plan.critical&&inv.combatUsage===0&&(e.inc.ala||0)<=0&&old.reasons?.includes('alloy-budget-reserve'))budget=Math.max(budget,Math.min(Math.max(0,(e.res.ala||0)-reserve),shipCost(e,'kor').ala||0));
+  const limit=Math.min(war?10:6,Math.max(1,yards.reduce((n,s)=>n+yardCount(s),0)*(war?3:2)));
+  let orders=0;
++ // 96H.9: a 70-alloy army never fits after cheaper warships drain the monthly
++ // alloy each war month. While a real siege has no army, its actual price is a
++ // derived reservation (like aiRecoveryInvestment), not a grant.
++ const siege=war&&!(inv.counts.ord||0)&&!(inv.pending.ord||0)&&shipBuildAccess(e,'ord').ok&&aiSiegeOpportunity(e);
++ let armyHold=siege?(shipCost(e,'ord').ala||0):0;
+  const preparing=e.aiStrategy?.plan?.stage==='arm'&&!plan.critical;
+  const target=Math.max(0,e.cap*(preparing?.8:war?.90:threat?.80:clamp(.50+prof.war*.18,.5,.76)));
+  const upkeep=Math.max(.1,1+(e.mods.upMul||0));
+@@ -1428,7 +1445,7 @@
+   if((!war&&d.up>0&&net<2)||e.crisis||(net<0&&(e.res.ene||0)<Math.max(100,-net*(war?12:24)))){note('energy-runway');return false;}
+   const alloyNet=Math.min((e.inc.ala||0)-(inv.queuedAlloy+(d.upA||0))*upkeep,current.rows.ala.net-(d.upA||0)*upkeep);
+   if(alloyNet<0&&(e.res.ala||0)-(c.ala||0)<-alloyNet*18){note('alloy-upkeep');return false;}
+-  if((c.ala||0)>budget||(e.res.ala||0)-(c.ala||0)<reserve){note('alloy-budget-reserve');return false;}
++  if((c.ala||0)>budget||(e.res.ala||0)-(c.ala||0)<reserve+(cls==='ord'?0:armyHold)){note('alloy-budget-reserve');return false;}
+   if(!war&&current.rows.tuk.net<0&&current.rows.tuk.months<6){note('consumer-runway');return false;}
+   if(!Object.entries(c).every(([r,v])=>e.res[r]-(r==='ala'?0:commitment[r]||0)>=v)){note('resource-cost');return false;}
+   if(!aiShipPurchaseSustainable(e,cls,current,recovery?.cost||{},visibleDanger)){note('post-purchase-runway');return false;}
+@@ -1443,6 +1460,7 @@
+   if(!ok){note('delivery-or-template');return false;}
+   budget-=Math.max(0,before-e.res.ala);orders++;inv=aiShipInventory(e);return true;
+  }
++ if(siege&&buy('ord'))armyHold=0;
+  const classes=['zir','kru','muh','kor','esk'].filter(c=>shipBuildAccess(e,c).ok);
+  for(let i=0;i<limit;i++){
+   if(inv.combatUsage>=target){note('deterrence-target');break;}

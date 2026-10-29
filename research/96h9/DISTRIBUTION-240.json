@@ -1,0 +1,2450 @@
+{
+ "11-120-control": {
+  "worlds": [
+   "",
+   "-pl1",
+   "-pl3",
+   "-pl5",
+   "-pl6"
+  ],
+  "rows": [
+   {
+    "colonyCaptures": 0,
+    "clean": 0,
+    "catas": 0,
+    "ground": 0,
+    "armyLost": 0,
+    "ships": 106,
+    "power": 16146,
+    "techs": 34,
+    "cols": 11,
+    "alive": 5,
+    "crit": 0,
+    "warDisband": 11,
+    "armyWarMonths": 0
+   },
+   {
+    "colonyCaptures": 1,
+    "clean": 0,
+    "catas": 0,
+    "ground": 0,
+    "armyLost": 0,
+    "ships": 110,
+    "power": 18021,
+    "techs": 33,
+    "cols": 11,
+    "alive": 5,
+    "crit": 0,
+    "warDisband": 0,
+    "armyWarMonths": 0
+   },
+   {
+    "colonyCaptures": 2,
+    "clean": 0,
+    "catas": 2,
+    "ground": 0,
+    "armyLost": 0,
+    "ships": 81,
+    "power": 11222,
+    "techs": 26,
+    "cols": 12,
+    "alive": 4,
+    "crit": 17,
+    "warDisband": 17,
+    "armyWarMonths": 0
+   },
+   {
+    "colonyCaptures": 2,
+    "clean": 0,
+    "catas": 0,
+    "ground": 0,
+    "armyLost": 0,
+    "ships": 98,
+    "power": 15168,
+    "techs": 35,
+    "cols": 15,
+    "alive": 5,
+    "crit": 0,
+    "warDisband": 8,
+    "armyWarMonths": 16
+   },
+   {
+    "colonyCaptures": 0,
+    "clean": 0,
+    "catas": 0,
+    "ground": 0,
+    "armyLost": 0,
+    "ships": 97,
+    "power": 16193,
+    "techs": 35,
+    "cols": 13,
+    "alive": 5,
+    "crit": 0,
+    "warDisband": 8,
+    "armyWarMonths": 18
+   }
+  ],
+  "mean_min_max": {
+   "colonyCaptures": [
+    1,
+    0,
+    2
+   ],
+   "clean": [
+    0,
+    0,
+    0
+   ],
+   "catas": [
+    0.4,
+    0,
+    2
+   ],
+   "ground": [
+    0,
+    0,
+    0
+   ],
+   "armyLost": [
+    0,
+    0,
+    0
+   ],
+   "ships": [
+    98.4,
+    81,
+    110
+   ],
+   "power": [
+    15350,
+    11222,
+    18021
+   ],
+   "techs": [
+    32.6,
+    26,
+    35
+   ],
+   "cols": [
+    12.4,
+    11,
+    15
+   ],
+   "alive": [
+    4.8,
+    4,
+    5
+   ],
+   "crit": [
+    3.4,
+    0,
+    17
+   ],
+   "warDisband": [
+    8.8,
+    0,
+    17
+   ],
+   "armyWarMonths": [
+    6.8,
+    0,
+    18
+   ]
+  }
+ },
+ "11-120-B": {
+  "worlds": [
+   "",
+   "-pl1",
+   "-pl3",
+   "-pl5",
+   "-pl6"
+  ],
+  "rows": [
+   {
+    "colonyCaptures": 1,
+    "clean": 0,
+    "catas": 0,
+    "ground": 3,
+    "armyLost": 21.3,
+    "ships": 35,
+    "power": 5394,
+    "techs": 29,
+    "cols": 13,
+    "alive": 5,
+    "crit": 1,
+    "warDisband": 16,
+    "armyWarMonths": 32
+   },
+   {
+    "colonyCaptures": 1,
+    "clean": 1,
+    "catas": 0,
+    "ground": 2,
+    "armyLost": 16.0,
+    "ships": 64,
+    "power": 11100,
+    "techs": 34,
+    "cols": 12,
+    "alive": 5,
+    "crit": 0,
+    "warDisband": 0,
+    "armyWarMonths": 42
+   },
+   {
+    "colonyCaptures": 1,
+    "clean": 1,
+    "catas": 0,
+    "ground": 1,
+    "armyLost": 5.8,
+    "ships": 135,
+    "power": 22495,
+    "techs": 33,
+    "cols": 15,
+    "alive": 5,
+    "crit": 2,
+    "warDisband": 16,
+    "armyWarMonths": 83
+   },
+   {
+    "colonyCaptures": 3,
+    "clean": 3,
+    "catas": 0,
+    "ground": 3,
+    "armyLost": 0,
+    "ships": 95,
+    "power": 12804,
+    "techs": 28,
+    "cols": 12,
+    "alive": 4,
+    "crit": 0,
+    "warDisband": 0,
+    "armyWarMonths": 83
+   },
+   {
+    "colonyCaptures": 1,
+    "clean": 1,
+    "catas": 0,
+    "ground": 1,
+    "armyLost": 6.3,
+    "ships": 98,
+    "power": 14615,
+    "techs": 33,
+    "cols": 14,
+    "alive": 5,
+    "crit": 1,
+    "warDisband": 5,
+    "armyWarMonths": 83
+   }
+  ],
+  "mean_min_max": {
+   "colonyCaptures": [
+    1.4,
+    1,
+    3
+   ],
+   "clean": [
+    1.2,
+    0,
+    3
+   ],
+   "catas": [
+    0,
+    0,
+    0
+   ],
+   "ground": [
+    2,
+    1,
+    3
+   ],
+   "armyLost": [
+    9.9,
+    0,
+    21.3
+   ],
+   "ships": [
+    85.4,
+    35,
+    135
+   ],
+   "power": [
+    13281.6,
+    5394,
+    22495
+   ],
+   "techs": [
+    31.4,
+    28,
+    34
+   ],
+   "cols": [
+    13.2,
+    12,
+    15
+   ],
+   "alive": [
+    4.8,
+    4,
+    5
+   ],
+   "crit": [
+    0.8,
+    0,
+    2
+   ],
+   "warDisband": [
+    7.4,
+    0,
+    16
+   ],
+   "armyWarMonths": [
+    64.6,
+    32,
+    83
+   ]
+  }
+ },
+ "11-120-C": {
+  "worlds": [
+   "",
+   "-pl1",
+   "-pl3",
+   "-pl5",
+   "-pl6"
+  ],
+  "rows": [
+   {
+    "colonyCaptures": 0,
+    "clean": 0,
+    "catas": 0,
+    "ground": 0,
+    "armyLost": 0,
+    "ships": 86,
+    "power": 12446,
+    "techs": 33,
+    "cols": 12,
+    "alive": 5,
+    "crit": 0,
+    "warDisband": 47,
+    "armyWarMonths": 3
+   },
+   {
+    "colonyCaptures": 1,
+    "clean": 0,
+    "catas": 1,
+    "ground": 0,
+    "armyLost": 0,
+    "ships": 98,
+    "power": 15988,
+    "techs": 31,
+    "cols": 13,
+    "alive": 5,
+    "crit": 1,
+    "warDisband": 24,
+    "armyWarMonths": 0
+   },
+   {
+    "colonyCaptures": 2,
+    "clean": 1,
+    "catas": 0,
+    "ground": 1,
+    "armyLost": 2.5,
+    "ships": 60,
+    "power": 10868,
+    "techs": 20,
+    "cols": 12,
+    "alive": 4,
+    "crit": 2,
+    "warDisband": 19,
+    "armyWarMonths": 29
+   },
+   {
+    "colonyCaptures": 0,
+    "clean": 0,
+    "catas": 0,
+    "ground": 0,
+    "armyLost": 0,
+    "ships": 158,
+    "power": 25405,
+    "techs": 33,
+    "cols": 15,
+    "alive": 5,
+    "crit": 0,
+    "warDisband": 0,
+    "armyWarMonths": 0
+   },
+   {
+    "colonyCaptures": 0,
+    "clean": 0,
+    "catas": 0,
+    "ground": 0,
+    "armyLost": 0,
+    "ships": 65,
+    "power": 10536,
+    "techs": 31,
+    "cols": 12,
+    "alive": 5,
+    "crit": 0,
+    "warDisband": 14,
+    "armyWarMonths": 0
+   }
+  ],
+  "mean_min_max": {
+   "colonyCaptures": [
+    0.6,
+    0,
+    2
+   ],
+   "clean": [
+    0.2,
+    0,
+    1
+   ],
+   "catas": [
+    0.2,
+    0,
+    1
+   ],
+   "ground": [
+    0.2,
+    0,
+    1
+   ],
+   "armyLost": [
+    0.5,
+    0,
+    2.5
+   ],
+   "ships": [
+    93.4,
+    60,
+    158
+   ],
+   "power": [
+    15048.6,
+    10536,
+    25405
+   ],
+   "techs": [
+    29.6,
+    20,
+    33
+   ],
+   "cols": [
+    12.8,
+    12,
+    15
+   ],
+   "alive": [
+    4.8,
+    4,
+    5
+   ],
+   "crit": [
+    0.6,
+    0,
+    2
+   ],
+   "warDisband": [
+    20.8,
+    0,
+    47
+   ],
+   "armyWarMonths": [
+    6.4,
+    0,
+    29
+   ]
+  }
+ },
+ "11-120-BC": {
+  "worlds": [
+   "",
+   "-pl1",
+   "-pl3",
+   "-pl5",
+   "-pl6"
+  ],
+  "rows": [
+   {
+    "colonyCaptures": 2,
+    "clean": 0,
+    "catas": 0,
+    "ground": 0,
+    "armyLost": 0,
+    "ships": 106,
+    "power": 16286,
+    "techs": 23,
+    "cols": 17,
+    "alive": 4,
+    "crit": 0,
+    "warDisband": 6,
+    "armyWarMonths": 57
+   },
+   {
+    "colonyCaptures": 2,
+    "clean": 1,
+    "catas": 0,
+    "ground": 1,
+    "armyLost": 1.3,
+    "ships": 89,
+    "power": 16260,
+    "techs": 23,
+    "cols": 14,
+    "alive": 4,
+    "crit": 1,
+    "warDisband": 0,
+    "armyWarMonths": 35
+   },
+   {
+    "colonyCaptures": 2,
+    "clean": 2,
+    "catas": 0,
+    "ground": 3,
+    "armyLost": 11.0,
+    "ships": 91,
+    "power": 15943,
+    "techs": 22,
+    "cols": 13,
+    "alive": 4,
+    "crit": 0,
+    "warDisband": 13,
+    "armyWarMonths": 52
+   },
+   {
+    "colonyCaptures": 2,
+    "clean": 2,
+    "catas": 0,
+    "ground": 2,
+    "armyLost": 6.9,
+    "ships": 109,
+    "power": 20398,
+    "techs": 26,
+    "cols": 13,
+    "alive": 4,
+    "crit": 0,
+    "warDisband": 0,
+    "armyWarMonths": 36
+   },
+   {
+    "colonyCaptures": 3,
+    "clean": 3,
+    "catas": 0,
+    "ground": 4,
+    "armyLost": 21.2,
+    "ships": 101,
+    "power": 20535,
+    "techs": 27,
+    "cols": 14,
+    "alive": 4,
+    "crit": 1,
+    "warDisband": 0,
+    "armyWarMonths": 23
+   }
+  ],
+  "mean_min_max": {
+   "colonyCaptures": [
+    2.2,
+    2,
+    3
+   ],
+   "clean": [
+    1.6,
+    0,
+    3
+   ],
+   "catas": [
+    0,
+    0,
+    0
+   ],
+   "ground": [
+    2,
+    0,
+    4
+   ],
+   "armyLost": [
+    8.1,
+    0,
+    21.2
+   ],
+   "ships": [
+    99.2,
+    89,
+    109
+   ],
+   "power": [
+    17884.4,
+    15943,
+    20535
+   ],
+   "techs": [
+    24.2,
+    22,
+    27
+   ],
+   "cols": [
+    14.2,
+    13,
+    17
+   ],
+   "alive": [
+    4,
+    4,
+    4
+   ],
+   "crit": [
+    0.4,
+    0,
+    1
+   ],
+   "warDisband": [
+    3.8,
+    0,
+    13
+   ],
+   "armyWarMonths": [
+    40.6,
+    23,
+    57
+   ]
+  }
+ },
+ "11-240-control": {
+  "worlds": [
+   "",
+   "-pl1",
+   "-pl3",
+   "-pl5",
+   "-pl6"
+  ],
+  "rows": [
+   {
+    "colonyCaptures": 0,
+    "clean": 0,
+    "catas": 0,
+    "ground": 0,
+    "armyLost": 0,
+    "ships": 142,
+    "power": 34339,
+    "techs": 60,
+    "cols": 12,
+    "alive": 5,
+    "crit": 1,
+    "warDisband": 95,
+    "armyWarMonths": 0
+   },
+   {
+    "colonyCaptures": 1,
+    "clean": 0,
+    "catas": 0,
+    "ground": 0,
+    "armyLost": 0,
+    "ships": 217,
+    "power": 55600,
+    "techs": 66,
+    "cols": 21,
+    "alive": 5,
+    "crit": 5,
+    "warDisband": 0,
+    "armyWarMonths": 0
+   },
+   {
+    "colonyCaptures": 2,
+    "clean": 0,
+    "catas": 2,
+    "ground": 0,
+    "armyLost": 0,
+    "ships": 160,
+    "power": 32996,
+    "techs": 57,
+    "cols": 18,
+    "alive": 4,
+    "crit": 17,
+    "warDisband": 17,
+    "armyWarMonths": 6
+   },
+   {
+    "colonyCaptures": 5,
+    "clean": 1,
+    "catas": 1,
+    "ground": 1,
+    "armyLost": 0,
+    "ships": 102,
+    "power": 21884,
+    "techs": 64,
+    "cols": 19,
+    "alive": 4,
+    "crit": 0,
+    "warDisband": 40,
+    "armyWarMonths": 162
+   },
+   {
+    "colonyCaptures": 0,
+    "clean": 0,
+    "catas": 0,
+    "ground": 0,
+    "armyLost": 0,
+    "ships": 149,
+    "power": 36916,
+    "techs": 68,
+    "cols": 15,
+    "alive": 5,
+    "crit": 0,
+    "warDisband": 22,
+    "armyWarMonths": 114
+   }
+  ],
+  "mean_min_max": {
+   "colonyCaptures": [
+    1.6,
+    0,
+    5
+   ],
+   "clean": [
+    0.2,
+    0,
+    1
+   ],
+   "catas": [
+    0.6,
+    0,
+    2
+   ],
+   "ground": [
+    0.2,
+    0,
+    1
+   ],
+   "armyLost": [
+    0,
+    0,
+    0
+   ],
+   "ships": [
+    154,
+    102,
+    217
+   ],
+   "power": [
+    36347,
+    21884,
+    55600
+   ],
+   "techs": [
+    63,
+    57,
+    68
+   ],
+   "cols": [
+    17,
+    12,
+    21
+   ],
+   "alive": [
+    4.6,
+    4,
+    5
+   ],
+   "crit": [
+    4.6,
+    0,
+    17
+   ],
+   "warDisband": [
+    34.8,
+    0,
+    95
+   ],
+   "armyWarMonths": [
+    56.4,
+    0,
+    162
+   ]
+  }
+ },
+ "11-240-B": {
+  "worlds": [
+   "",
+   "-pl1",
+   "-pl3",
+   "-pl5",
+   "-pl6"
+  ],
+  "rows": [
+   {
+    "colonyCaptures": 3,
+    "clean": 2,
+    "catas": 0,
+    "ground": 6,
+    "armyLost": 40.5,
+    "ships": 200,
+    "power": 56212,
+    "techs": 57,
+    "cols": 23,
+    "alive": 4,
+    "crit": 1,
+    "warDisband": 16,
+    "armyWarMonths": 51
+   },
+   {
+    "colonyCaptures": 1,
+    "clean": 1,
+    "catas": 0,
+    "ground": 2,
+    "armyLost": 16.0,
+    "ships": 162,
+    "power": 46111,
+    "techs": 70,
+    "cols": 19,
+    "alive": 5,
+    "crit": 1,
+    "warDisband": 8,
+    "armyWarMonths": 155
+   },
+   {
+    "colonyCaptures": 5,
+    "clean": 5,
+    "catas": 0,
+    "ground": 5,
+    "armyLost": 8.3,
+    "ships": 198,
+    "power": 57372,
+    "techs": 50,
+    "cols": 27,
+    "alive": 3,
+    "crit": 2,
+    "warDisband": 16,
+    "armyWarMonths": 113
+   },
+   {
+    "colonyCaptures": 3,
+    "clean": 3,
+    "catas": 0,
+    "ground": 3,
+    "armyLost": 0,
+    "ships": 232,
+    "power": 57022,
+    "techs": 67,
+    "cols": 29,
+    "alive": 4,
+    "crit": 0,
+    "warDisband": 0,
+    "armyWarMonths": 83
+   },
+   {
+    "colonyCaptures": 5,
+    "clean": 2,
+    "catas": 1,
+    "ground": 2,
+    "armyLost": 6.3,
+    "ships": 188,
+    "power": 49251,
+    "techs": 75,
+    "cols": 22,
+    "alive": 5,
+    "crit": 24,
+    "warDisband": 5,
+    "armyWarMonths": 94
+   }
+  ],
+  "mean_min_max": {
+   "colonyCaptures": [
+    3.4,
+    1,
+    5
+   ],
+   "clean": [
+    2.6,
+    1,
+    5
+   ],
+   "catas": [
+    0.2,
+    0,
+    1
+   ],
+   "ground": [
+    3.6,
+    2,
+    6
+   ],
+   "armyLost": [
+    14.2,
+    0,
+    40.5
+   ],
+   "ships": [
+    196,
+    162,
+    232
+   ],
+   "power": [
+    53193.6,
+    46111,
+    57372
+   ],
+   "techs": [
+    63.8,
+    50,
+    75
+   ],
+   "cols": [
+    24,
+    19,
+    29
+   ],
+   "alive": [
+    4.2,
+    3,
+    5
+   ],
+   "crit": [
+    5.6,
+    0,
+    24
+   ],
+   "warDisband": [
+    9,
+    0,
+    16
+   ],
+   "armyWarMonths": [
+    99.2,
+    51,
+    155
+   ]
+  }
+ },
+ "11-240-C": {
+  "worlds": [
+   "",
+   "-pl1",
+   "-pl3",
+   "-pl5",
+   "-pl6"
+  ],
+  "rows": [
+   {
+    "colonyCaptures": 0,
+    "clean": 0,
+    "catas": 0,
+    "ground": 0,
+    "armyLost": 0,
+    "ships": 156,
+    "power": 35676,
+    "techs": 65,
+    "cols": 20,
+    "alive": 5,
+    "crit": 1,
+    "warDisband": 61,
+    "armyWarMonths": 12
+   },
+   {
+    "colonyCaptures": 4,
+    "clean": 0,
+    "catas": 3,
+    "ground": 0,
+    "armyLost": 0,
+    "ships": 173,
+    "power": 53624,
+    "techs": 50,
+    "cols": 20,
+    "alive": 6,
+    "crit": 3,
+    "warDisband": 39,
+    "armyWarMonths": 0
+   },
+   {
+    "colonyCaptures": 2,
+    "clean": 1,
+    "catas": 0,
+    "ground": 1,
+    "armyLost": 2.5,
+    "ships": 184,
+    "power": 52123,
+    "techs": 55,
+    "cols": 17,
+    "alive": 4,
+    "crit": 2,
+    "warDisband": 19,
+    "armyWarMonths": 29
+   },
+   {
+    "colonyCaptures": 1,
+    "clean": 0,
+    "catas": 1,
+    "ground": 0,
+    "armyLost": 0,
+    "ships": 180,
+    "power": 39422,
+    "techs": 71,
+    "cols": 17,
+    "alive": 6,
+    "crit": 23,
+    "warDisband": 98,
+    "armyWarMonths": 307
+   },
+   {
+    "colonyCaptures": 1,
+    "clean": 0,
+    "catas": 1,
+    "ground": 0,
+    "armyLost": 0,
+    "ships": 200,
+    "power": 49018,
+    "techs": 65,
+    "cols": 17,
+    "alive": 5,
+    "crit": 4,
+    "warDisband": 14,
+    "armyWarMonths": 83
+   }
+  ],
+  "mean_min_max": {
+   "colonyCaptures": [
+    1.6,
+    0,
+    4
+   ],
+   "clean": [
+    0.2,
+    0,
+    1
+   ],
+   "catas": [
+    1,
+    0,
+    3
+   ],
+   "ground": [
+    0.2,
+    0,
+    1
+   ],
+   "armyLost": [
+    0.5,
+    0,
+    2.5
+   ],
+   "ships": [
+    178.6,
+    156,
+    200
+   ],
+   "power": [
+    45972.6,
+    35676,
+    53624
+   ],
+   "techs": [
+    61.2,
+    50,
+    71
+   ],
+   "cols": [
+    18.2,
+    17,
+    20
+   ],
+   "alive": [
+    5.2,
+    4,
+    6
+   ],
+   "crit": [
+    6.6,
+    1,
+    23
+   ],
+   "warDisband": [
+    46.2,
+    14,
+    98
+   ],
+   "armyWarMonths": [
+    86.2,
+    0,
+    307
+   ]
+  }
+ },
+ "11-240-BC": {
+  "worlds": [
+   "",
+   "-pl1",
+   "-pl3",
+   "-pl5",
+   "-pl6"
+  ],
+  "rows": [
+   {
+    "colonyCaptures": 7,
+    "clean": 3,
+    "catas": 1,
+    "ground": 3,
+    "armyLost": 0,
+    "ships": 207,
+    "power": 85579,
+    "techs": 50,
+    "cols": 24,
+    "alive": 3,
+    "crit": 16,
+    "warDisband": 6,
+    "armyWarMonths": 74
+   },
+   {
+    "colonyCaptures": 4,
+    "clean": 2,
+    "catas": 0,
+    "ground": 2,
+    "armyLost": 1.3,
+    "ships": 150,
+    "power": 78173,
+    "techs": 52,
+    "cols": 21,
+    "alive": 3,
+    "crit": 1,
+    "warDisband": 0,
+    "armyWarMonths": 37
+   },
+   {
+    "colonyCaptures": 2,
+    "clean": 2,
+    "catas": 0,
+    "ground": 3,
+    "armyLost": 11.0,
+    "ships": 205,
+    "power": 60617,
+    "techs": 57,
+    "cols": 19,
+    "alive": 4,
+    "crit": 0,
+    "warDisband": 13,
+    "armyWarMonths": 54
+   },
+   {
+    "colonyCaptures": 3,
+    "clean": 3,
+    "catas": 0,
+    "ground": 3,
+    "armyLost": 6.9,
+    "ships": 209,
+    "power": 60491,
+    "techs": 69,
+    "cols": 25,
+    "alive": 4,
+    "crit": 2,
+    "warDisband": 0,
+    "armyWarMonths": 39
+   },
+   {
+    "colonyCaptures": 3,
+    "clean": 3,
+    "catas": 0,
+    "ground": 4,
+    "armyLost": 21.2,
+    "ships": 243,
+    "power": 84546,
+    "techs": 68,
+    "cols": 39,
+    "alive": 4,
+    "crit": 4,
+    "warDisband": 0,
+    "armyWarMonths": 23
+   }
+  ],
+  "mean_min_max": {
+   "colonyCaptures": [
+    3.8,
+    2,
+    7
+   ],
+   "clean": [
+    2.6,
+    2,
+    3
+   ],
+   "catas": [
+    0.2,
+    0,
+    1
+   ],
+   "ground": [
+    3,
+    2,
+    4
+   ],
+   "armyLost": [
+    8.1,
+    0,
+    21.2
+   ],
+   "ships": [
+    202.8,
+    150,
+    243
+   ],
+   "power": [
+    73881.2,
+    60491,
+    85579
+   ],
+   "techs": [
+    59.2,
+    50,
+    69
+   ],
+   "cols": [
+    25.6,
+    19,
+    39
+   ],
+   "alive": [
+    3.6,
+    3,
+    4
+   ],
+   "crit": [
+    4.6,
+    0,
+    16
+   ],
+   "warDisband": [
+    3.8,
+    0,
+    13
+   ],
+   "armyWarMonths": [
+    45.4,
+    23,
+    74
+   ]
+  }
+ },
+ "23-120-control": {
+  "worlds": [
+   "",
+   "-pl1",
+   "-pl2",
+   "-pl3",
+   "-pl4"
+  ],
+  "rows": [
+   {
+    "colonyCaptures": 2,
+    "clean": 0,
+    "catas": 0,
+    "ground": 0,
+    "armyLost": 0,
+    "ships": 152,
+    "power": 25989,
+    "techs": 28,
+    "cols": 13,
+    "alive": 4,
+    "crit": 1,
+    "warDisband": 0,
+    "armyWarMonths": 0
+   },
+   {
+    "colonyCaptures": 2,
+    "clean": 0,
+    "catas": 1,
+    "ground": 0,
+    "armyLost": 0,
+    "ships": 116,
+    "power": 19500,
+    "techs": 26,
+    "cols": 12,
+    "alive": 4,
+    "crit": 1,
+    "warDisband": 0,
+    "armyWarMonths": 14
+   },
+   {
+    "colonyCaptures": 2,
+    "clean": 0,
+    "catas": 0,
+    "ground": 0,
+    "armyLost": 0,
+    "ships": 118,
+    "power": 21136,
+    "techs": 30,
+    "cols": 11,
+    "alive": 4,
+    "crit": 1,
+    "warDisband": 0,
+    "armyWarMonths": 57
+   },
+   {
+    "colonyCaptures": 2,
+    "clean": 0,
+    "catas": 1,
+    "ground": 0,
+    "armyLost": 0,
+    "ships": 121,
+    "power": 20847,
+    "techs": 29,
+    "cols": 11,
+    "alive": 4,
+    "crit": 1,
+    "warDisband": 0,
+    "armyWarMonths": 7
+   },
+   {
+    "colonyCaptures": 2,
+    "clean": 0,
+    "catas": 1,
+    "ground": 0,
+    "armyLost": 0,
+    "ships": 128,
+    "power": 18965,
+    "techs": 27,
+    "cols": 10,
+    "alive": 4,
+    "crit": 1,
+    "warDisband": 0,
+    "armyWarMonths": 57
+   }
+  ],
+  "mean_min_max": {
+   "colonyCaptures": [
+    2,
+    2,
+    2
+   ],
+   "clean": [
+    0,
+    0,
+    0
+   ],
+   "catas": [
+    0.6,
+    0,
+    1
+   ],
+   "ground": [
+    0,
+    0,
+    0
+   ],
+   "armyLost": [
+    0,
+    0,
+    0
+   ],
+   "ships": [
+    127,
+    116,
+    152
+   ],
+   "power": [
+    21287.4,
+    18965,
+    25989
+   ],
+   "techs": [
+    28,
+    26,
+    30
+   ],
+   "cols": [
+    11.4,
+    10,
+    13
+   ],
+   "alive": [
+    4,
+    4,
+    4
+   ],
+   "crit": [
+    1,
+    1,
+    1
+   ],
+   "warDisband": [
+    0,
+    0,
+    0
+   ],
+   "armyWarMonths": [
+    27,
+    0,
+    57
+   ]
+  }
+ },
+ "23-120-B": {
+  "worlds": [
+   "",
+   "-pl1",
+   "-pl2",
+   "-pl3",
+   "-pl4"
+  ],
+  "rows": [
+   {
+    "colonyCaptures": 1,
+    "clean": 1,
+    "catas": 0,
+    "ground": 1,
+    "armyLost": 5.9,
+    "ships": 144,
+    "power": 23090,
+    "techs": 41,
+    "cols": 12,
+    "alive": 5,
+    "crit": 1,
+    "warDisband": 0,
+    "armyWarMonths": 3
+   },
+   {
+    "colonyCaptures": 2,
+    "clean": 0,
+    "catas": 1,
+    "ground": 0,
+    "armyLost": 0,
+    "ships": 154,
+    "power": 23466,
+    "techs": 28,
+    "cols": 12,
+    "alive": 4,
+    "crit": 1,
+    "warDisband": 0,
+    "armyWarMonths": 1
+   },
+   {
+    "colonyCaptures": 2,
+    "clean": 1,
+    "catas": 1,
+    "ground": 1,
+    "armyLost": 0,
+    "ships": 163,
+    "power": 25493,
+    "techs": 29,
+    "cols": 13,
+    "alive": 4,
+    "crit": 1,
+    "warDisband": 0,
+    "armyWarMonths": 65
+   },
+   {
+    "colonyCaptures": 2,
+    "clean": 1,
+    "catas": 1,
+    "ground": 1,
+    "armyLost": 0,
+    "ships": 126,
+    "power": 15796,
+    "techs": 34,
+    "cols": 12,
+    "alive": 5,
+    "crit": 2,
+    "warDisband": 0,
+    "armyWarMonths": 15
+   },
+   {
+    "colonyCaptures": 3,
+    "clean": 0,
+    "catas": 3,
+    "ground": 0,
+    "armyLost": 0,
+    "ships": 88,
+    "power": 14505,
+    "techs": 38,
+    "cols": 12,
+    "alive": 5,
+    "crit": 1,
+    "warDisband": 1,
+    "armyWarMonths": 31
+   }
+  ],
+  "mean_min_max": {
+   "colonyCaptures": [
+    2,
+    1,
+    3
+   ],
+   "clean": [
+    0.6,
+    0,
+    1
+   ],
+   "catas": [
+    1.2,
+    0,
+    3
+   ],
+   "ground": [
+    0.6,
+    0,
+    1
+   ],
+   "armyLost": [
+    1.2,
+    0,
+    5.9
+   ],
+   "ships": [
+    135,
+    88,
+    163
+   ],
+   "power": [
+    20470,
+    14505,
+    25493
+   ],
+   "techs": [
+    34,
+    28,
+    41
+   ],
+   "cols": [
+    12.2,
+    12,
+    13
+   ],
+   "alive": [
+    4.6,
+    4,
+    5
+   ],
+   "crit": [
+    1.2,
+    1,
+    2
+   ],
+   "warDisband": [
+    0.2,
+    0,
+    1
+   ],
+   "armyWarMonths": [
+    23,
+    1,
+    65
+   ]
+  }
+ },
+ "23-120-C": {
+  "worlds": [
+   "",
+   "-pl1",
+   "-pl2",
+   "-pl3",
+   "-pl4"
+  ],
+  "rows": [
+   {
+    "colonyCaptures": 1,
+    "clean": 0,
+    "catas": 1,
+    "ground": 0,
+    "armyLost": 0,
+    "ships": 134,
+    "power": 20690,
+    "techs": 37,
+    "cols": 14,
+    "alive": 5,
+    "crit": 1,
+    "warDisband": 0,
+    "armyWarMonths": 0
+   },
+   {
+    "colonyCaptures": 1,
+    "clean": 0,
+    "catas": 1,
+    "ground": 0,
+    "armyLost": 0,
+    "ships": 137,
+    "power": 23296,
+    "techs": 37,
+    "cols": 16,
+    "alive": 5,
+    "crit": 1,
+    "warDisband": 0,
+    "armyWarMonths": 14
+   },
+   {
+    "colonyCaptures": 2,
+    "clean": 0,
+    "catas": 0,
+    "ground": 0,
+    "armyLost": 0,
+    "ships": 172,
+    "power": 28146,
+    "techs": 31,
+    "cols": 16,
+    "alive": 4,
+    "crit": 2,
+    "warDisband": 0,
+    "armyWarMonths": 0
+   },
+   {
+    "colonyCaptures": 1,
+    "clean": 0,
+    "catas": 1,
+    "ground": 0,
+    "armyLost": 0,
+    "ships": 133,
+    "power": 17614,
+    "techs": 35,
+    "cols": 15,
+    "alive": 5,
+    "crit": 1,
+    "warDisband": 0,
+    "armyWarMonths": 0
+   },
+   {
+    "colonyCaptures": 1,
+    "clean": 0,
+    "catas": 0,
+    "ground": 0,
+    "armyLost": 0,
+    "ships": 154,
+    "power": 22775,
+    "techs": 37,
+    "cols": 12,
+    "alive": 5,
+    "crit": 1,
+    "warDisband": 0,
+    "armyWarMonths": 0
+   }
+  ],
+  "mean_min_max": {
+   "colonyCaptures": [
+    1.2,
+    1,
+    2
+   ],
+   "clean": [
+    0,
+    0,
+    0
+   ],
+   "catas": [
+    0.6,
+    0,
+    1
+   ],
+   "ground": [
+    0,
+    0,
+    0
+   ],
+   "armyLost": [
+    0,
+    0,
+    0
+   ],
+   "ships": [
+    146,
+    133,
+    172
+   ],
+   "power": [
+    22504.2,
+    17614,
+    28146
+   ],
+   "techs": [
+    35.4,
+    31,
+    37
+   ],
+   "cols": [
+    14.6,
+    12,
+    16
+   ],
+   "alive": [
+    4.8,
+    4,
+    5
+   ],
+   "crit": [
+    1.2,
+    1,
+    2
+   ],
+   "warDisband": [
+    0,
+    0,
+    0
+   ],
+   "armyWarMonths": [
+    2.8,
+    0,
+    14
+   ]
+  }
+ },
+ "23-120-BC": {
+  "worlds": [
+   "",
+   "-pl1",
+   "-pl2",
+   "-pl3",
+   "-pl4"
+  ],
+  "rows": [
+   {
+    "colonyCaptures": 1,
+    "clean": 0,
+    "catas": 1,
+    "ground": 0,
+    "armyLost": 0,
+    "ships": 152,
+    "power": 24330,
+    "techs": 39,
+    "cols": 14,
+    "alive": 5,
+    "crit": 1,
+    "warDisband": 0,
+    "armyWarMonths": 0
+   },
+   {
+    "colonyCaptures": 1,
+    "clean": 0,
+    "catas": 1,
+    "ground": 0,
+    "armyLost": 0,
+    "ships": 147,
+    "power": 20504,
+    "techs": 32,
+    "cols": 14,
+    "alive": 5,
+    "crit": 1,
+    "warDisband": 0,
+    "armyWarMonths": 0
+   },
+   {
+    "colonyCaptures": 2,
+    "clean": 0,
+    "catas": 1,
+    "ground": 0,
+    "armyLost": 0,
+    "ships": 139,
+    "power": 22858,
+    "techs": 36,
+    "cols": 11,
+    "alive": 4,
+    "crit": 1,
+    "warDisband": 0,
+    "armyWarMonths": 0
+   },
+   {
+    "colonyCaptures": 1,
+    "clean": 0,
+    "catas": 1,
+    "ground": 0,
+    "armyLost": 0,
+    "ships": 128,
+    "power": 19300,
+    "techs": 37,
+    "cols": 14,
+    "alive": 5,
+    "crit": 1,
+    "warDisband": 0,
+    "armyWarMonths": 0
+   },
+   {
+    "colonyCaptures": 1,
+    "clean": 0,
+    "catas": 1,
+    "ground": 0,
+    "armyLost": 0,
+    "ships": 137,
+    "power": 21752,
+    "techs": 35,
+    "cols": 12,
+    "alive": 6,
+    "crit": 4,
+    "warDisband": 0,
+    "armyWarMonths": 13
+   }
+  ],
+  "mean_min_max": {
+   "colonyCaptures": [
+    1.2,
+    1,
+    2
+   ],
+   "clean": [
+    0,
+    0,
+    0
+   ],
+   "catas": [
+    1,
+    1,
+    1
+   ],
+   "ground": [
+    0,
+    0,
+    0
+   ],
+   "armyLost": [
+    0,
+    0,
+    0
+   ],
+   "ships": [
+    140.6,
+    128,
+    152
+   ],
+   "power": [
+    21748.8,
+    19300,
+    24330
+   ],
+   "techs": [
+    35.8,
+    32,
+    39
+   ],
+   "cols": [
+    13,
+    11,
+    14
+   ],
+   "alive": [
+    5,
+    4,
+    6
+   ],
+   "crit": [
+    1.6,
+    1,
+    4
+   ],
+   "warDisband": [
+    0,
+    0,
+    0
+   ],
+   "armyWarMonths": [
+    2.6,
+    0,
+    13
+   ]
+  }
+ },
+ "23-240-control": {
+  "worlds": [
+   "",
+   "-pl1",
+   "-pl2",
+   "-pl3",
+   "-pl4"
+  ],
+  "rows": [
+   {
+    "colonyCaptures": 2,
+    "clean": 0,
+    "catas": 0,
+    "ground": 0,
+    "armyLost": 0,
+    "ships": 203,
+    "power": 85642,
+    "techs": 74,
+    "cols": 26,
+    "alive": 4,
+    "crit": 1,
+    "warDisband": 0,
+    "armyWarMonths": 185
+   },
+   {
+    "colonyCaptures": 2,
+    "clean": 0,
+    "catas": 1,
+    "ground": 0,
+    "armyLost": 0,
+    "ships": 286,
+    "power": 84935,
+    "techs": 75,
+    "cols": 36,
+    "alive": 4,
+    "crit": 1,
+    "warDisband": 0,
+    "armyWarMonths": 39
+   },
+   {
+    "colonyCaptures": 3,
+    "clean": 0,
+    "catas": 0,
+    "ground": 0,
+    "armyLost": 0,
+    "ships": 291,
+    "power": 100482,
+    "techs": 74,
+    "cols": 35,
+    "alive": 4,
+    "crit": 1,
+    "warDisband": 0,
+    "armyWarMonths": 207
+   },
+   {
+    "colonyCaptures": 2,
+    "clean": 0,
+    "catas": 1,
+    "ground": 0,
+    "armyLost": 0,
+    "ships": 239,
+    "power": 50366,
+    "techs": 70,
+    "cols": 15,
+    "alive": 4,
+    "crit": 1,
+    "warDisband": 0,
+    "armyWarMonths": 7
+   },
+   {
+    "colonyCaptures": 6,
+    "clean": 0,
+    "catas": 1,
+    "ground": 0,
+    "armyLost": 0,
+    "ships": 218,
+    "power": 60808,
+    "techs": 67,
+    "cols": 19,
+    "alive": 4,
+    "crit": 1,
+    "warDisband": 0,
+    "armyWarMonths": 61
+   }
+  ],
+  "mean_min_max": {
+   "colonyCaptures": [
+    3,
+    2,
+    6
+   ],
+   "clean": [
+    0,
+    0,
+    0
+   ],
+   "catas": [
+    0.6,
+    0,
+    1
+   ],
+   "ground": [
+    0,
+    0,
+    0
+   ],
+   "armyLost": [
+    0,
+    0,
+    0
+   ],
+   "ships": [
+    247.4,
+    203,
+    291
+   ],
+   "power": [
+    76446.6,
+    50366,
+    100482
+   ],
+   "techs": [
+    72,
+    67,
+    75
+   ],
+   "cols": [
+    26.2,
+    15,
+    36
+   ],
+   "alive": [
+    4,
+    4,
+    4
+   ],
+   "crit": [
+    1,
+    1,
+    1
+   ],
+   "warDisband": [
+    0,
+    0,
+    0
+   ],
+   "armyWarMonths": [
+    99.8,
+    7,
+    207
+   ]
+  }
+ },
+ "23-240-B": {
+  "worlds": [
+   "",
+   "-pl1",
+   "-pl2",
+   "-pl3",
+   "-pl4"
+  ],
+  "rows": [
+   {
+    "colonyCaptures": 1,
+    "clean": 1,
+    "catas": 0,
+    "ground": 1,
+    "armyLost": 5.9,
+    "ships": 343,
+    "power": 80202,
+    "techs": 85,
+    "cols": 33,
+    "alive": 6,
+    "crit": 1,
+    "warDisband": 0,
+    "armyWarMonths": 3
+   },
+   {
+    "colonyCaptures": 2,
+    "clean": 0,
+    "catas": 1,
+    "ground": 0,
+    "armyLost": 0,
+    "ships": 143,
+    "power": 78905,
+    "techs": 78,
+    "cols": 28,
+    "alive": 4,
+    "crit": 1,
+    "warDisband": 0,
+    "armyWarMonths": 58
+   },
+   {
+    "colonyCaptures": 4,
+    "clean": 1,
+    "catas": 1,
+    "ground": 1,
+    "armyLost": 0,
+    "ships": 267,
+    "power": 84768,
+    "techs": 80,
+    "cols": 25,
+    "alive": 4,
+    "crit": 1,
+    "warDisband": 0,
+    "armyWarMonths": 313
+   },
+   {
+    "colonyCaptures": 2,
+    "clean": 1,
+    "catas": 1,
+    "ground": 1,
+    "armyLost": 0,
+    "ships": 391,
+    "power": 73097,
+    "techs": 85,
+    "cols": 34,
+    "alive": 6,
+    "crit": 5,
+    "warDisband": 15,
+    "armyWarMonths": 37
+   },
+   {
+    "colonyCaptures": 5,
+    "clean": 1,
+    "catas": 4,
+    "ground": 1,
+    "armyLost": 0.6,
+    "ships": 248,
+    "power": 49375,
+    "techs": 68,
+    "cols": 28,
+    "alive": 7,
+    "crit": 32,
+    "warDisband": 28,
+    "armyWarMonths": 77
+   }
+  ],
+  "mean_min_max": {
+   "colonyCaptures": [
+    2.8,
+    1,
+    5
+   ],
+   "clean": [
+    0.8,
+    0,
+    1
+   ],
+   "catas": [
+    1.4,
+    0,
+    4
+   ],
+   "ground": [
+    0.8,
+    0,
+    1
+   ],
+   "armyLost": [
+    1.3,
+    0,
+    5.9
+   ],
+   "ships": [
+    278.4,
+    143,
+    391
+   ],
+   "power": [
+    73269.4,
+    49375,
+    84768
+   ],
+   "techs": [
+    79.2,
+    68,
+    85
+   ],
+   "cols": [
+    29.6,
+    25,
+    34
+   ],
+   "alive": [
+    5.4,
+    4,
+    7
+   ],
+   "crit": [
+    8,
+    1,
+    32
+   ],
+   "warDisband": [
+    8.6,
+    0,
+    28
+   ],
+   "armyWarMonths": [
+    97.6,
+    3,
+    313
+   ]
+  }
+ },
+ "23-240-C": {
+  "worlds": [
+   "",
+   "-pl1",
+   "-pl2",
+   "-pl3",
+   "-pl4"
+  ],
+  "rows": [
+   {
+    "colonyCaptures": 1,
+    "clean": 0,
+    "catas": 1,
+    "ground": 0,
+    "armyLost": 0,
+    "ships": 302,
+    "power": 60941,
+    "techs": 78,
+    "cols": 23,
+    "alive": 6,
+    "crit": 1,
+    "warDisband": 0,
+    "armyWarMonths": 0
+   },
+   {
+    "colonyCaptures": 1,
+    "clean": 0,
+    "catas": 1,
+    "ground": 0,
+    "armyLost": 0,
+    "ships": 324,
+    "power": 77501,
+    "techs": 84,
+    "cols": 24,
+    "alive": 5,
+    "crit": 1,
+    "warDisband": 40,
+    "armyWarMonths": 340
+   },
+   {
+    "colonyCaptures": 8,
+    "clean": 1,
+    "catas": 0,
+    "ground": 1,
+    "armyLost": 0,
+    "ships": 179,
+    "power": 69703,
+    "techs": 70,
+    "cols": 26,
+    "alive": 3,
+    "crit": 2,
+    "warDisband": 0,
+    "armyWarMonths": 204
+   },
+   {
+    "colonyCaptures": 1,
+    "clean": 0,
+    "catas": 1,
+    "ground": 0,
+    "armyLost": 0,
+    "ships": 375,
+    "power": 79120,
+    "techs": 87,
+    "cols": 41,
+    "alive": 5,
+    "crit": 1,
+    "warDisband": 0,
+    "armyWarMonths": 0
+   },
+   {
+    "colonyCaptures": 1,
+    "clean": 0,
+    "catas": 0,
+    "ground": 0,
+    "armyLost": 0,
+    "ships": 354,
+    "power": 78595,
+    "techs": 89,
+    "cols": 31,
+    "alive": 5,
+    "crit": 1,
+    "warDisband": 0,
+    "armyWarMonths": 0
+   }
+  ],
+  "mean_min_max": {
+   "colonyCaptures": [
+    2.4,
+    1,
+    8
+   ],
+   "clean": [
+    0.2,
+    0,
+    1
+   ],
+   "catas": [
+    0.6,
+    0,
+    1
+   ],
+   "ground": [
+    0.2,
+    0,
+    1
+   ],
+   "armyLost": [
+    0,
+    0,
+    0
+   ],
+   "ships": [
+    306.8,
+    179,
+    375
+   ],
+   "power": [
+    73172,
+    60941,
+    79120
+   ],
+   "techs": [
+    81.6,
+    70,
+    89
+   ],
+   "cols": [
+    29,
+    23,
+    41
+   ],
+   "alive": [
+    4.8,
+    3,
+    6
+   ],
+   "crit": [
+    1.2,
+    1,
+    2
+   ],
+   "warDisband": [
+    8,
+    0,
+    40
+   ],
+   "armyWarMonths": [
+    108.8,
+    0,
+    340
+   ]
+  }
+ },
+ "23-240-BC": {
+  "worlds": [
+   "",
+   "-pl1",
+   "-pl2",
+   "-pl3",
+   "-pl4"
+  ],
+  "rows": [
+   {
+    "colonyCaptures": 1,
+    "clean": 0,
+    "catas": 1,
+    "ground": 0,
+    "armyLost": 0,
+    "ships": 330,
+    "power": 79441,
+    "techs": 96,
+    "cols": 25,
+    "alive": 5,
+    "crit": 1,
+    "warDisband": 0,
+    "armyWarMonths": 0
+   },
+   {
+    "colonyCaptures": 1,
+    "clean": 0,
+    "catas": 1,
+    "ground": 0,
+    "armyLost": 0,
+    "ships": 380,
+    "power": 91603,
+    "techs": 91,
+    "cols": 37,
+    "alive": 5,
+    "crit": 1,
+    "warDisband": 0,
+    "armyWarMonths": 0
+   },
+   {
+    "colonyCaptures": 3,
+    "clean": 0,
+    "catas": 1,
+    "ground": 0,
+    "armyLost": 0,
+    "ships": 206,
+    "power": 59953,
+    "techs": 75,
+    "cols": 22,
+    "alive": 4,
+    "crit": 2,
+    "warDisband": 24,
+    "armyWarMonths": 148
+   },
+   {
+    "colonyCaptures": 1,
+    "clean": 0,
+    "catas": 1,
+    "ground": 0,
+    "armyLost": 0,
+    "ships": 314,
+    "power": 86765,
+    "techs": 94,
+    "cols": 34,
+    "alive": 5,
+    "crit": 1,
+    "warDisband": 0,
+    "armyWarMonths": 0
+   },
+   {
+    "colonyCaptures": 3,
+    "clean": 1,
+    "catas": 2,
+    "ground": 1,
+    "armyLost": 2.5,
+    "ships": 271,
+    "power": 58536,
+    "techs": 74,
+    "cols": 17,
+    "alive": 6,
+    "crit": 5,
+    "warDisband": 33,
+    "armyWarMonths": 117
+   }
+  ],
+  "mean_min_max": {
+   "colonyCaptures": [
+    1.8,
+    1,
+    3
+   ],
+   "clean": [
+    0.2,
+    0,
+    1
+   ],
+   "catas": [
+    1.2,
+    1,
+    2
+   ],
+   "ground": [
+    0.2,
+    0,
+    1
+   ],
+   "armyLost": [
+    0.5,
+    0,
+    2.5
+   ],
+   "ships": [
+    300.2,
+    206,
+    380
+   ],
+   "power": [
+    75259.6,
+    58536,
+    91603
+   ],
+   "techs": [
+    86,
+    74,
+    96
+   ],
+   "cols": [
+    27,
+    17,
+    37
+   ],
+   "alive": [
+    5,
+    4,
+    6
+   ],
+   "crit": [
+    2,
+    1,
+    5
+   ],
+   "warDisband": [
+    11.4,
+    0,
+    33
+   ],
+   "armyWarMonths": [
+    53,
+    0,
+    148
+   ]
+  }
+ }
+}

@@ -1,0 +1,108 @@
+{
+ "method": "tools/timing9.js: seed11 month40 Save8 (tests/fixtures/96h8), 60 months, wall-clock per call (process.hrtime), Node v22.22.0, 3 alternating runs per arm on an otherwise idle 4-core container; median of runs",
+ "arms": {
+  "96H.8": {
+   "wallMs": 5840,
+   "aiShipProduction": {
+    "calls": 300,
+    "perCallMsMedian": 1.218,
+    "runs": [
+     1.216,
+     1.245,
+     1.218
+    ]
+   },
+   "aiMilitaryCampaign": {
+    "calls": 187,
+    "perCallMsMedian": 0.417,
+    "runs": [
+     0.417,
+     0.431,
+     0.406
+    ]
+   },
+   "aiArmyTick": {
+    "calls": 60,
+    "perCallMsMedian": 0.036,
+    "runs": [
+     0.035,
+     0.04,
+     0.036
+    ]
+   },
+   "aiTurn": {
+    "calls": 360,
+    "perCallMsMedian": 3.518,
+    "runs": [
+     3.518,
+     3.681,
+     3.514
+    ]
+   },
+   "monthTick": {
+    "calls": 60,
+    "perCallMsMedian": 41.538,
+    "runs": [
+     41.538,
+     42.183,
+     40.688
+    ]
+   }
+  },
+  "96H.9": {
+   "wallMs": 6389,
+   "aiShipProduction": {
+    "calls": 300,
+    "perCallMsMedian": 1.28,
+    "runs": [
+     1.156,
+     1.281,
+     1.28
+    ]
+   },
+   "aiMilitaryCampaign": {
+    "calls": 193,
+    "perCallMsMedian": 0.342,
+    "runs": [
+     0.312,
+     0.342,
+     0.345
+    ]
+   },
+   "aiArmyTick": {
+    "calls": 60,
+    "perCallMsMedian": 0.113,
+    "runs": [
+     0.109,
+     0.125,
+     0.113
+    ]
+   },
+   "aiTurn": {
+    "calls": 360,
+    "perCallMsMedian": 3.756,
+    "runs": [
+     3.453,
+     3.77,
+     3.756
+    ]
+   },
+   "monthTick": {
+    "calls": 60,
+    "perCallMsMedian": 43.152,
+    "runs": [
+     39.591,
+     43.172,
+     43.152
+    ]
+   }
+  }
+ },
+ "aiInvasionTarget_micro": {
+  "fixture": "tests/fixtures/96h9/seed11-month79-escort.save (45 systems, 48 fleets)",
+  "worstCaseMsPerCall": 0.0629,
+  "campaignTargetHitMsPerCall": 0.0013,
+  "calls": "at most once per AI empire per month, only at war without an army"
+ },
+ "note": "Arms diverge after the first army, so per-call times include different world states (more armies and ships under 96H.9), not only code cost; run-to-run spread is of the same order as the difference."
+}
