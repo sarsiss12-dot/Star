@@ -1,0 +1,340 @@
+{
+ "directiveStatus": {
+  "Mineral # altında": 4985,
+  "Alaşım # altında": 1495,
+  "Zaten inşa sürüyor": 5069,
+  "Boş yapı alanı yok": 218,
+  "build": 145
+ },
+ "completed": 1549,
+ "refund": 0,
+ "demolitions": 331,
+ "perSeed": {
+  "11": {
+   "aiTurnOk": 205,
+   "aiTurnFailedAttempt": 762,
+   "directiveOk": 0,
+   "directiveFailedAttempt": 0,
+   "completed": 186,
+   "refund": 0,
+   "demolitions": 33,
+   "focusChanges": 107,
+   "finalSaveSHA": "29c5af02b36ad4291f8259a0f0824cb38d193a2f4b6c3cae272b07801306f530",
+   "directiveStatus": {
+    "Mineral # altında": 532,
+    "Alaşım # altında": 195,
+    "Zaten inşa sürüyor": 607,
+    "Boş yapı alanı yok": 54
+   }
+  },
+  "23": {
+   "aiTurnOk": 173,
+   "aiTurnFailedAttempt": 426,
+   "directiveOk": 1,
+   "directiveFailedAttempt": 0,
+   "completed": 160,
+   "refund": 0,
+   "demolitions": 32,
+   "focusChanges": 31,
+   "finalSaveSHA": "1b66fa974a252c533481991c274677901335f67b6dc1770b1cc21c0c8e358bfd",
+   "directiveStatus": {
+    "Mineral # altında": 548,
+    "Alaşım # altında": 104,
+    "Zaten inşa sürüyor": 506,
+    "build": 1
+   }
+  },
+  "42": {
+   "aiTurnOk": 160,
+   "aiTurnFailedAttempt": 421,
+   "directiveOk": 0,
+   "directiveFailedAttempt": 0,
+   "completed": 158,
+   "refund": 0,
+   "demolitions": 32,
+   "focusChanges": 9,
+   "finalSaveSHA": "982c64fb3cc6a9d889d232362fd6043396698d555ca330bec16ef5686857c69f",
+   "directiveStatus": {
+    "Mineral # altında": 750,
+    "Alaşım # altında": 68,
+    "Zaten inşa sürüyor": 461
+   }
+  },
+  "99": {
+   "aiTurnOk": 235,
+   "aiTurnFailedAttempt": 761,
+   "directiveOk": 0,
+   "directiveFailedAttempt": 0,
+   "completed": 220,
+   "refund": 0,
+   "demolitions": 46,
+   "focusChanges": 39,
+   "finalSaveSHA": "8eedbc1789fe594d85f404e25b3942cd172d13f0d35de33db9c3589264544386",
+   "directiveStatus": {
+    "Mineral # altında": 511,
+    "Alaşım # altında": 254,
+    "Zaten inşa sürüyor": 720,
+    "Boş yapı alanı yok": 8
+   }
+  },
+  "404": {
+   "aiTurnOk": 238,
+   "aiTurnFailedAttempt": 881,
+   "directiveOk": 2,
+   "directiveFailedAttempt": 5,
+   "completed": 229,
+   "refund": 0,
+   "demolitions": 57,
+   "focusChanges": 47,
+   "finalSaveSHA": "ac725fa3346e00e908e6bd065c80c8baf13e1a406d8bf42357fede0deff1ce71",
+   "directiveStatus": {
+    "Mineral # altında": 521,
+    "Alaşım # altında": 292,
+    "Zaten inşa sürüyor": 762,
+    "Boş yapı alanı yok": 55,
+    "build": 7
+   }
+  },
+  "7": {
+   "aiTurnOk": 176,
+   "aiTurnFailedAttempt": 429,
+   "directiveOk": 7,
+   "directiveFailedAttempt": 36,
+   "completed": 178,
+   "refund": 0,
+   "demolitions": 37,
+   "focusChanges": 48,
+   "finalSaveSHA": "6c4d895eba836d3ce6f363694dc514220f3f8b8bf43f9bf6380c2b4ddc9446dc",
+   "directiveStatus": {
+    "Mineral # altında": 869,
+    "build": 43,
+    "Alaşım # altında": 168,
+    "Zaten inşa sürüyor": 602
+   }
+  },
+  "123": {
+   "aiTurnOk": 188,
+   "aiTurnFailedAttempt": 736,
+   "directiveOk": 3,
+   "directiveFailedAttempt": 4,
+   "completed": 185,
+   "refund": 0,
+   "demolitions": 53,
+   "focusChanges": 50,
+   "finalSaveSHA": "287759036e301bd45efa2ac496aa2b0a0a7effceb2f899c4ccdf3c2bc975e23b",
+   "directiveStatus": {
+    "Alaşım # altında": 246,
+    "Mineral # altında": 723,
+    "Zaten inşa sürüyor": 584,
+    "Boş yapı alanı yok": 63,
+    "build": 8
+   }
+  },
+  "2026": {
+   "aiTurnOk": 236,
+   "aiTurnFailedAttempt": 937,
+   "directiveOk": 15,
+   "directiveFailedAttempt": 69,
+   "completed": 233,
+   "refund": 0,
+   "demolitions": 41,
+   "focusChanges": 21,
+   "finalSaveSHA": "5fbe87e87af570a76ed0026c9be7c01078a261974a6218852a9ae5249fc9424e",
+   "directiveStatus": {
+    "Alaşım # altında": 168,
+    "Mineral # altında": 531,
+    "Zaten inşa sürüyor": 827,
+    "Boş yapı alanı yok": 38,
+    "build": 86
+   }
+  }
+ },
+ "aiTurnOk": 1611,
+ "aiTurnFailedAttempt": 5353,
+ "directiveOk": 28,
+ "directiveFailedAttempt": 114,
+ "focusChanges": 352,
+ "directiveShareOfPaidOrders": 0.0171,
+ "churn": [
+  "demolitions 331 of a building completed <=12m earlier 157 <=24m 216 by key {\"dokum\":140,\"ciftlik\":27,\"lab\":67,\"maden\":50,\"fabrika\":22,\"liman\":11,\"tersane\":1,\"santral\":7,\"kale\":6}",
+  "colony-months with directive order 28 also aiTurn order same colony 5 same building 1",
+  "build days avg 98.8 wait behind another job avg 32.1 share with wait 45.6%"
+ ],
+ "rebuildSameKey": "TOTAL {\"dem\":331,\"next\":315,\"same\":88,\"same6\":84,\"none\":16} same-key rebuild by key {\"dokum\":49,\"maden\":10,\"lab\":21,\"santral\":1,\"liman\":5,\"ciftlik\":1,\"fabrika\":1}",
+ "replacementOutcome": "{\"wanted:ok\":114,\"same:ok\":51,\"wanted:belowReserve\":18,\"same:belowReserve\":36,\"other:ok\":70,\"other:belowReserve\":17,\"none:ok\":14,\"none:belowReserve\":1}",
+ "focusOracleKnapsack6m": [
+  "foc-11.json arastir research gain 85 industry loss actual 301 optimal 299 saving 1 = 0.04% of min+ala income in those windows",
+  "foc-23.json arastir research gain 153 industry loss actual 907 optimal 875 saving 32 = 1.36% of min+ala income in those windows",
+  "foc-42.json arastir research gain 12 industry loss actual 70 optimal 70 saving 0 = 0.02% of min+ala income in those windows",
+  "foc-99.json arastir research gain 40 industry loss actual 216 optimal 214 saving 2 = 0.06% of min+ala income in those windows",
+  "foc-404.json arastir research gain 116 industry loss actual 367 optimal 365 saving 2 = 0.05% of min+ala income in those windows",
+  "foc-7.json arastir research gain 119 industry loss actual 464 optimal 463 saving 1 = 0.04% of min+ala income in those windows",
+  "foc-123.json arastir research gain 163 industry loss actual 920 optimal 885 saving 35 = 0.48% of min+ala income in those windows",
+  "foc-2026.json arastir research gain 27 industry loss actual 178 optimal 177 saving 1 = 0.04% of min+ala income in those windows",
+  "TOTAL saving 76 of loss 3423 (min+ala inc in windows 28786)"
+ ],
+ "focusOracleKnapsack12m": "TOTAL saving 76 of loss 3423 (min+ala inc in windows 28786)",
+ "focus": {
+  "11": {
+   "colonyMonthsByFocus": {
+    "yonetim": 825,
+    "sanayi": 391,
+    "arastir": 106,
+    "tarim": 40,
+    "garnizon": 28
+   },
+   "nonHomeMonthlyFlipRate": 0.1757,
+   "secondaryHomeYonetimVsSanayi": {
+    "colonyMonths": 265,
+    "etkLost": 605.5,
+    "min": 4391.5,
+    "ala": 1621.8,
+    "ene": 3673.5,
+    "ara": 195.2,
+    "yiy": -314.6,
+    "tuk": 128.9
+   },
+   "finalSaveSHA": "29c5af02b36ad4291f8259a0f0824cb38d193a2f4b6c3cae272b07801306f530"
+  },
+  "23": {
+   "colonyMonthsByFocus": {
+    "yonetim": 514,
+    "arastir": 104,
+    "sanayi": 538,
+    "tarim": 3
+   },
+   "nonHomeMonthlyFlipRate": 0.0394,
+   "secondaryHomeYonetimVsSanayi": {
+    "colonyMonths": 0,
+    "etkLost": 0,
+    "min": 0,
+    "ala": 0,
+    "ene": 0,
+    "ara": 0,
+    "yiy": 0,
+    "tuk": 0
+   },
+   "finalSaveSHA": "1b66fa974a252c533481991c274677901335f67b6dc1770b1cc21c0c8e358bfd"
+  },
+  "42": {
+   "colonyMonthsByFocus": {
+    "yonetim": 899,
+    "sanayi": 348,
+    "arastir": 35
+   },
+   "nonHomeMonthlyFlipRate": 0.0107,
+   "secondaryHomeYonetimVsSanayi": {
+    "colonyMonths": 299,
+    "etkLost": 569.2,
+    "min": 4580.8,
+    "ala": 1622.8,
+    "ene": 2438.7,
+    "ara": 251.0,
+    "yiy": -316.6,
+    "tuk": 445.9
+   },
+   "finalSaveSHA": "982c64fb3cc6a9d889d232362fd6043396698d555ca330bec16ef5686857c69f"
+  },
+  "99": {
+   "colonyMonthsByFocus": {
+    "yonetim": 594,
+    "arastir": 90,
+    "sanayi": 795,
+    "tarim": 9,
+    "garnizon": 5
+   },
+   "nonHomeMonthlyFlipRate": 0.0374,
+   "secondaryHomeYonetimVsSanayi": {
+    "colonyMonths": 0,
+    "etkLost": 0,
+    "min": 0,
+    "ala": 0,
+    "ene": 0,
+    "ara": 0,
+    "yiy": 0,
+    "tuk": 0
+   },
+   "finalSaveSHA": "8eedbc1789fe594d85f404e25b3942cd172d13f0d35de33db9c3589264544386"
+  },
+  "404": {
+   "colonyMonthsByFocus": {
+    "yonetim": 614,
+    "arastir": 122,
+    "sanayi": 870,
+    "tarim": 32
+   },
+   "nonHomeMonthlyFlipRate": 0.0396,
+   "secondaryHomeYonetimVsSanayi": {
+    "colonyMonths": 14,
+    "etkLost": 18.7,
+    "min": 52.4,
+    "ala": 0,
+    "ene": 45.2,
+    "ara": 3.0,
+    "yiy": -10.5,
+    "tuk": 0
+   },
+   "finalSaveSHA": "ac725fa3346e00e908e6bd065c80c8baf13e1a406d8bf42357fede0deff1ce71"
+  },
+  "7": {
+   "colonyMonthsByFocus": {
+    "yonetim": 1023,
+    "arastir": 166,
+    "sanayi": 475,
+    "tarim": 22
+   },
+   "nonHomeMonthlyFlipRate": 0.0598,
+   "secondaryHomeYonetimVsSanayi": {
+    "colonyMonths": 423,
+    "etkLost": 949.1,
+    "min": 4695.3,
+    "ala": 1349.7,
+    "ene": 3300.4,
+    "ara": 567.6,
+    "yiy": -418.6,
+    "tuk": 285.3
+   },
+   "finalSaveSHA": "6c4d895eba836d3ce6f363694dc514220f3f8b8bf43f9bf6380c2b4ddc9446dc"
+  },
+  "123": {
+   "colonyMonthsByFocus": {
+    "yonetim": 600,
+    "arastir": 270,
+    "sanayi": 750,
+    "tarim": 6
+   },
+   "nonHomeMonthlyFlipRate": 0.0424,
+   "secondaryHomeYonetimVsSanayi": {
+    "colonyMonths": 0,
+    "etkLost": 0,
+    "min": 0,
+    "ala": 0,
+    "ene": 0,
+    "ara": 0,
+    "yiy": 0,
+    "tuk": 0
+   },
+   "finalSaveSHA": "287759036e301bd45efa2ac496aa2b0a0a7effceb2f899c4ccdf3c2bc975e23b"
+  },
+  "2026": {
+   "colonyMonthsByFocus": {
+    "yonetim": 836,
+    "sanayi": 737,
+    "arastir": 63,
+    "tarim": 16
+   },
+   "nonHomeMonthlyFlipRate": 0.02,
+   "secondaryHomeYonetimVsSanayi": {
+    "colonyMonths": 236,
+    "etkLost": 500.3,
+    "min": 3031.4,
+    "ala": 680.5,
+    "ene": 1543.2,
+    "ara": 135.3,
+    "yiy": -182.6,
+    "tuk": 219.9
+   },
+   "finalSaveSHA": "5fbe87e87af570a76ed0026c9be7c01078a261974a6218852a9ae5249fc9424e"
+  }
+ }
+}

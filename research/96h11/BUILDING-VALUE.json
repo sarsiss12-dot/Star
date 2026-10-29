@@ -1,0 +1,198 @@
+{
+ "maden": {
+  "n": 231,
+  "cost": {
+   "min": 120
+  },
+  "medianNetPerMonth": {
+   "ene": -1.6,
+   "min": 15.68,
+   "ala": 0,
+   "yiy": 0,
+   "tuk": 0,
+   "ara": 0,
+   "etk": 0
+  },
+  "paybackMonthsOwnMineral": 7.7
+ },
+ "santral": {
+  "n": 231,
+  "cost": {
+   "min": 110
+  },
+  "medianNetPerMonth": {
+   "ene": 18.34,
+   "min": 0,
+   "ala": 0,
+   "yiy": 0,
+   "tuk": 0,
+   "ara": 0,
+   "etk": 0
+  },
+  "paybackMonthsOwnMineral": null
+ },
+ "ciftlik": {
+  "n": 217,
+  "cost": {
+   "min": 110
+  },
+  "medianNetPerMonth": {
+   "ene": -1.6,
+   "min": 0,
+   "ala": 0,
+   "yiy": 11.83,
+   "tuk": 0,
+   "ara": 0,
+   "etk": 0
+  },
+  "paybackMonthsOwnMineral": null
+ },
+ "lab": {
+  "n": 175,
+  "cost": {
+   "min": 190
+  },
+  "medianNetPerMonth": {
+   "ene": -4.8,
+   "min": 0,
+   "ala": 0,
+   "yiy": 0,
+   "tuk": 0,
+   "ara": 13.25,
+   "etk": 0
+  },
+  "paybackMonthsOwnMineral": null
+ },
+ "fabrika": {
+  "n": 127,
+  "cost": {
+   "min": 170
+  },
+  "medianNetPerMonth": {
+   "ene": -3.2,
+   "min": -5.3,
+   "ala": 0,
+   "yiy": 0,
+   "tuk": 15.95,
+   "ara": 0,
+   "etk": 0
+  },
+  "paybackMonthsOwnMineral": null
+ },
+ "tersane": {
+  "n": 137,
+  "cost": {
+   "min": 260,
+   "ala": 45
+  },
+  "medianNetPerMonth": {
+   "ene": -3.2,
+   "min": 0,
+   "ala": 0,
+   "yiy": 0,
+   "tuk": 0,
+   "ara": 0,
+   "etk": 0
+  },
+  "paybackMonthsOwnMineral": null
+ },
+ "liman": {
+  "n": 212,
+  "cost": {
+   "min": 180
+  },
+  "medianNetPerMonth": {
+   "ene": 16.96,
+   "min": 0,
+   "ala": 0,
+   "yiy": 0,
+   "tuk": 0,
+   "ara": 0,
+   "etk": 0.73
+  },
+  "paybackMonthsOwnMineral": null
+ },
+ "dokum": {
+  "n": 170,
+  "cost": {
+   "min": 210
+  },
+  "medianNetPerMonth": {
+   "ene": -3.2,
+   "min": -14.65,
+   "ala": 11.63,
+   "yiy": 0,
+   "tuk": 0,
+   "ara": 0,
+   "etk": 0
+  },
+  "paybackMonthsOwnMineral": null
+ },
+ "kale": {
+  "n": 22,
+  "cost": {
+   "min": 230,
+   "ala": 70
+  },
+  "medianNetPerMonth": {
+   "ene": -3.2,
+   "min": 0,
+   "ala": 0,
+   "yiy": 0,
+   "tuk": 0,
+   "ara": 0,
+   "etk": 0
+  },
+  "paybackMonthsOwnMineral": null
+ },
+ "kuyu": {
+  "n": 1,
+  "cost": {
+   "min": 200
+  },
+  "medianNetPerMonth": {
+   "ene": 20.46,
+   "min": 0,
+   "ala": 0,
+   "yiy": 0,
+   "tuk": 0,
+   "ara": 0,
+   "etk": 0
+  },
+  "paybackMonthsOwnMineral": null
+ },
+ "arsiv": {
+  "n": 2,
+  "cost": {
+   "min": 280,
+   "ala": 40
+  },
+  "medianNetPerMonth": {
+   "ene": -4.8,
+   "min": 0,
+   "ala": 0,
+   "yiy": 0,
+   "tuk": 0,
+   "ara": 10.53,
+   "etk": 2.03
+  },
+  "paybackMonthsOwnMineral": null
+ },
+ "biyom_b": {
+  "n": 1,
+  "cost": {
+   "min": 260,
+   "ala": 35
+  },
+  "medianNetPerMonth": {
+   "ene": -4.8,
+   "min": 0,
+   "ala": 0,
+   "yiy": 22.11,
+   "tuk": 0,
+   "ara": 5.66,
+   "etk": 0
+  },
+  "paybackMonthsOwnMineral": null
+ }
+}

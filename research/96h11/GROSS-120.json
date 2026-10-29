@@ -1,0 +1,71 @@
+{
+ "note": "Single uninterrupted 8 x 120 runs from canonical initial Save8; chaotic, not evidence by themselves",
+ "runs": {
+  "R": [
+   "11 crit 0→0 | food 0→0 | techs 23→16 | ships 106→77 | power 16286→12738 | cols 17→16 | dem 33→28 | done 186→158 | inc_min 340.2→317.6 | inc_ala 79.5→80.9 | inc_ara 258.5→243.9 | inc_ene 172.3→148.7 | inc_tuk 48.9→60.3",
+   "23 crit 1→1 | food 0→0 | techs 39→36 | ships 152→140 | power 24330→21064 | cols 14→8 | dem 32→13 | done 160→96 | inc_min 310.8→258.9 | inc_ala 72.8→62 | inc_ara 314.1→286.8 | inc_ene 356.9→236.2 | inc_tuk 50.6→55.8",
+   "42 crit 2→1 | food 0→0 | techs 42→41 | ships 142→116 | power 20026→16643 | cols 15→13 | dem 32→24 | done 158→137 | inc_min 281→258.9 | inc_ala 64.8→65.4 | inc_ara 400.1→375.9 | inc_ene 79.9→81.6 | inc_tuk 54.3→54.1",
+   "99 crit 0→0 | food 0→0 | techs 47→47 | ships 198→244 | power 26221→30697 | cols 20→21 | dem 46→33 | done 220→214 | inc_min 501.9→548.9 | inc_ala 105.3→90.6 | inc_ara 405.1→380.6 | inc_ene 372.5→441.3 | inc_tuk 58.4→52.4",
+   "404 crit 2→0 | food 0→0 | techs 49→40 | ships 251→215 | power 31433→27007 | cols 19→20 | dem 57→39 | done 229→189 | inc_min 521.4→538.4 | inc_ala 118.5→106.3 | inc_ara 463.3→409.5 | inc_ene 484.9→492.3 | inc_tuk 67.7→66.8",
+   "7 crit 5→1 | food 0→0 | techs 51→52 | ships 188→207 | power 23537→26246 | cols 16→19 | dem 37→21 | done 178→199 | inc_min 415.1→481.3 | inc_ala 85.7→91.9 | inc_ara 491→498.4 | inc_ene 427.3→571.6 | inc_tuk 68.1→91",
+   "123 crit 3→3 | food 0→0 | techs 44→38 | ships 166→186 | power 24080→24422 | cols 16→16 | dem 53→24 | done 185→153 | inc_min 381.8→393.1 | inc_ala 82.9→87.9 | inc_ara 399.3→334.6 | inc_ene 447.4→383.7 | inc_tuk 42.2→42.6",
+   "2026 crit 1→3 | food 0→0 | techs 41→42 | ships 180→200 | power 23956→23790 | cols 21→26 | dem 41→47 | done 233→271 | inc_min 470.8→495.2 | inc_ala 90.2→82.4 | inc_ara 313.1→336.8 | inc_ene 258.8→250.9 | inc_tuk 67→54.2",
+   "TOTAL crit 14→9 | food 0→0 | techs 336→312 | ships 1383→1385 | power 189869→182607 | cols 138→139 | used 1914→1878 | slots 2181→2163 | alive 40→38 | inc_ene 2600→2606 | res_ene 304431→304000 | inc_min 3223→3292 | res_min 68314→85637 | inc_ala 700→667 | res_ala 9214→9860 | inc_yiy 867→914 | res_yiy 109987→113390 | inc_tuk 457→477 | res_tuk 60667→61409 | inc_ara 3044→2866 | res_ara 266→192 | inc_etk 481→467 | res_etk 41040→38428 | dem 331→229 | done 1549→1417 | paidMin 1639→1516"
+  ],
+  "B1": [
+   "11 crit 0→2 | food 0→0 | techs 23→35 | ships 106→133 | power 16286→27215 | cols 17→19 | dem 33→46 | done 186→243 | inc_min 340.2→534.7 | inc_ala 79.5→92.8 | inc_ara 258.5→400.6 | inc_ene 172.3→288.8 | inc_tuk 48.9→60.1",
+   "23 crit 1→1 | food 0→0 | techs 39→39 | ships 152→152 | power 24330→24330 | cols 14→14 | dem 32→32 | done 160→160 | inc_min 310.8→310.8 | inc_ala 72.8→72.8 | inc_ara 314.1→314.1 | inc_ene 356.9→356.9 | inc_tuk 50.6→50.6",
+   "42 crit 2→3 | food 0→0 | techs 42→44 | ships 142→135 | power 20026→21646 | cols 15→13 | dem 32→33 | done 158→146 | inc_min 281→309.7 | inc_ala 64.8→77.5 | inc_ara 400.1→417.4 | inc_ene 79.9→114 | inc_tuk 54.3→53.4",
+   "99 crit 0→0 | food 0→0 | techs 47→47 | ships 198→198 | power 26221→26221 | cols 20→20 | dem 46→46 | done 220→220 | inc_min 501.9→501.9 | inc_ala 105.3→105.3 | inc_ara 405.1→405.1 | inc_ene 372.5→372.5 | inc_tuk 58.4→58.4",
+   "404 crit 2→2 | food 0→0 | techs 49→49 | ships 251→251 | power 31433→31433 | cols 19→19 | dem 57→57 | done 229→229 | inc_min 521.4→521.4 | inc_ala 118.5→118.5 | inc_ara 463.3→463.3 | inc_ene 484.9→484.9 | inc_tuk 67.7→67.7",
+   "7 crit 5→2 | food 0→0 | techs 51→52 | ships 188→187 | power 23537→24968 | cols 16→19 | dem 37→30 | done 178→206 | inc_min 415.1→513.9 | inc_ala 85.7→117 | inc_ara 491→521.4 | inc_ene 427.3→546.4 | inc_tuk 68.1→78.2",
+   "123 crit 3→3 | food 0→0 | techs 44→44 | ships 166→166 | power 24080→24080 | cols 16→16 | dem 53→53 | done 185→185 | inc_min 381.8→381.8 | inc_ala 82.9→82.9 | inc_ara 399.3→399.3 | inc_ene 447.4→447.4 | inc_tuk 42.2→42.2",
+   "2026 crit 1→1 | food 0→0 | techs 41→41 | ships 180→228 | power 23956→30619 | cols 21→20 | dem 41→46 | done 233→238 | inc_min 470.8→468.8 | inc_ala 90.2→95 | inc_ara 313.1→345.6 | inc_ene 258.8→308.8 | inc_tuk 67→61",
+   "TOTAL crit 14→14 | food 0→0 | techs 336→351 | ships 1383→1450 | power 189869→210512 | cols 138→140 | used 1914→1999 | slots 2181→2258 | alive 40→40 | inc_ene 2600→2920 | res_ene 304431→344906 | inc_min 3223→3543 | res_min 68314→83079 | inc_ala 700→762 | res_ala 9214→10489 | inc_yiy 867→883 | res_yiy 109987→112069 | inc_tuk 457→472 | res_tuk 60667→62359 | inc_ara 3044→3267 | res_ara 266→269 | inc_etk 481→459 | res_etk 41040→38999 | dem 331→343 | done 1549→1627 | paidMin 1639→1715"
+  ],
+  "M": [
+   "11 crit 0→0 | food 0→0 | techs 23→23 | ships 106→106 | power 16286→16286 | cols 17→17 | dem 33→33 | done 186→186 | inc_min 340.2→340.2 | inc_ala 79.5→79.5 | inc_ara 258.5→258.5 | inc_ene 172.3→172.3 | inc_tuk 48.9→48.9",
+   "23 crit 1→1 | food 0→0 | techs 39→36 | ships 152→153 | power 24330→24288 | cols 14→12 | dem 32→34 | done 160→158 | inc_min 310.8→293.1 | inc_ala 72.8→83.7 | inc_ara 314.1→306.1 | inc_ene 356.9→363.3 | inc_tuk 50.6→57.4",
+   "42 crit 2→2 | food 0→0 | techs 42→42 | ships 142→142 | power 20026→20026 | cols 15→15 | dem 32→32 | done 158→158 | inc_min 281→281 | inc_ala 64.8→64.8 | inc_ara 400.1→400.1 | inc_ene 79.9→79.9 | inc_tuk 54.3→54.3",
+   "99 crit 0→0 | food 0→0 | techs 47→48 | ships 198→179 | power 26221→24313 | cols 20→20 | dem 46→52 | done 220→220 | inc_min 501.9→502.5 | inc_ala 105.3→106.7 | inc_ara 405.1→405.2 | inc_ene 372.5→375.2 | inc_tuk 58.4→56.6",
+   "404 crit 2→2 | food 0→0 | techs 49→49 | ships 251→251 | power 31433→31433 | cols 19→19 | dem 57→57 | done 229→229 | inc_min 521.4→521.4 | inc_ala 118.5→118.5 | inc_ara 463.3→463.3 | inc_ene 484.9→484.9 | inc_tuk 67.7→67.7",
+   "7 crit 5→5 | food 0→0 | techs 51→51 | ships 188→188 | power 23537→23537 | cols 16→16 | dem 37→37 | done 178→178 | inc_min 415.1→415.1 | inc_ala 85.7→85.7 | inc_ara 491→491 | inc_ene 427.3→427.3 | inc_tuk 68.1→68.1",
+   "123 crit 3→4 | food 0→0 | techs 44→43 | ships 166→209 | power 24080→28450 | cols 16→20 | dem 53→47 | done 185→186 | inc_min 381.8→396.3 | inc_ala 82.9→83.9 | inc_ara 399.3→397.5 | inc_ene 447.4→434.4 | inc_tuk 42.2→43.8",
+   "2026 crit 1→1 | food 0→0 | techs 41→41 | ships 180→180 | power 23956→23956 | cols 21→21 | dem 41→41 | done 233→233 | inc_min 470.8→470.8 | inc_ala 90.2→90.2 | inc_ara 313.1→313.1 | inc_ene 258.8→258.8 | inc_tuk 67→67",
+   "TOTAL crit 14→15 | food 0→0 | techs 336→333 | ships 1383→1408 | power 189869→192289 | cols 138→140 | used 1914→1918 | slots 2181→2189 | alive 40→40 | inc_ene 2600→2596 | res_ene 304431→303826 | inc_min 3223→3220 | res_min 68314→66849 | inc_ala 700→713 | res_ala 9214→9512 | inc_yiy 867→880 | res_yiy 109987→111611 | inc_tuk 457→464 | res_tuk 60667→61469 | inc_ara 3044→3035 | res_ara 266→244 | inc_etk 481→482 | res_etk 41040→40708 | dem 331→333 | done 1549→1548 | paidMin 1639→1641"
+  ],
+  "BM": [
+   "11 crit 0→0 | food 0→0 | techs 23→36 | ships 106→212 | power 16286→32724 | cols 17→18 | dem 33→35 | done 186→224 | inc_min 340.2→459.5 | inc_ala 79.5→100.4 | inc_ara 258.5→420 | inc_ene 172.3→201.8 | inc_tuk 48.9→53.3",
+   "23 crit 1→1 | food 0→0 | techs 39→36 | ships 152→153 | power 24330→24288 | cols 14→12 | dem 32→34 | done 160→158 | inc_min 310.8→293.1 | inc_ala 72.8→83.7 | inc_ara 314.1→306.1 | inc_ene 356.9→363.3 | inc_tuk 50.6→57.4",
+   "42 crit 2→1 | food 0→0 | techs 42→44 | ships 142→135 | power 20026→21646 | cols 15→13 | dem 32→33 | done 158→147 | inc_min 281→311.5 | inc_ala 64.8→77.5 | inc_ara 400.1→418 | inc_ene 79.9→113 | inc_tuk 54.3→54.5",
+   "99 crit 0→0 | food 0→0 | techs 47→48 | ships 198→179 | power 26221→24313 | cols 20→20 | dem 46→52 | done 220→220 | inc_min 501.9→502.5 | inc_ala 105.3→106.7 | inc_ara 405.1→405.2 | inc_ene 372.5→375.2 | inc_tuk 58.4→56.6",
+   "404 crit 2→2 | food 0→0 | techs 49→49 | ships 251→251 | power 31433→31433 | cols 19→19 | dem 57→57 | done 229→229 | inc_min 521.4→521.4 | inc_ala 118.5→118.5 | inc_ara 463.3→463.3 | inc_ene 484.9→484.9 | inc_tuk 67.7→67.7",
+   "7 crit 5→2 | food 0→0 | techs 51→52 | ships 188→187 | power 23537→24968 | cols 16→19 | dem 37→30 | done 178→206 | inc_min 415.1→513.9 | inc_ala 85.7→117 | inc_ara 491→521.4 | inc_ene 427.3→546.4 | inc_tuk 68.1→78.2",
+   "123 crit 3→4 | food 0→0 | techs 44→43 | ships 166→209 | power 24080→28450 | cols 16→20 | dem 53→47 | done 185→186 | inc_min 381.8→396.3 | inc_ala 82.9→83.9 | inc_ara 399.3→397.5 | inc_ene 447.4→434.4 | inc_tuk 42.2→43.8",
+   "2026 crit 1→1 | food 0→0 | techs 41→44 | ships 180→287 | power 23956→36775 | cols 21→25 | dem 41→54 | done 233→300 | inc_min 470.8→639.6 | inc_ala 90.2→101.1 | inc_ara 313.1→432.6 | inc_ene 258.8→353.1 | inc_tuk 67→78.9",
+   "TOTAL crit 14→11 | food 0→0 | techs 336→352 | ships 1383→1613 | power 189869→224597 | cols 138→146 | used 1914→2045 | slots 2181→2330 | alive 40→41 | inc_ene 2600→2872 | res_ene 304431→344291 | inc_min 3223→3638 | res_min 68314→87150 | inc_ala 700→789 | res_ala 9214→11411 | inc_yiy 867→908 | res_yiy 109987→116371 | inc_tuk 457→491 | res_tuk 60667→65083 | inc_ara 3044→3364 | res_ara 266→247 | inc_etk 481→464 | res_etk 41040→39536 | dem 331→342 | done 1549→1670 | paidMin 1639→1770"
+  ],
+  "BM2": [
+   "11 crit 0→13 | food 0→0 | techs 23→33 | ships 106→81 | power 16286→16297 | cols 17→16 | dem 33→42 | done 186→195 | inc_min 340.2→338.1 | inc_ala 79.5→90.1 | inc_ara 258.5→347 | inc_ene 172.3→204.7 | inc_tuk 48.9→70.8",
+   "23 crit 1→1 | food 0→0 | techs 39→35 | ships 152→146 | power 24330→23360 | cols 14→12 | dem 32→34 | done 160→138 | inc_min 310.8→268.2 | inc_ala 72.8→78.3 | inc_ara 314.1→299.1 | inc_ene 356.9→270.9 | inc_tuk 50.6→52.6",
+   "42 crit 2→6 | food 0→0 | techs 42→44 | ships 142→116 | power 20026→18715 | cols 15→16 | dem 32→37 | done 158→173 | inc_min 281→340.4 | inc_ala 64.8→71.1 | inc_ara 400.1→438.5 | inc_ene 79.9→83.4 | inc_tuk 54.3→58.4",
+   "99 crit 0→0 | food 0→0 | techs 47→44 | ships 198→218 | power 26221→30500 | cols 20→17 | dem 46→49 | done 220→189 | inc_min 501.9→450.8 | inc_ala 105.3→100.3 | inc_ara 405.1→350.5 | inc_ene 372.5→335.4 | inc_tuk 58.4→63.9",
+   "404 crit 2→0 | food 0→0 | techs 49→46 | ships 251→213 | power 31433→27398 | cols 19→18 | dem 57→60 | done 229→207 | inc_min 521.4→485.6 | inc_ala 118.5→105.8 | inc_ara 463.3→445.1 | inc_ene 484.9→556.4 | inc_tuk 67.7→74.5",
+   "7 crit 5→3 | food 0→0 | techs 51→48 | ships 188→231 | power 23537→27190 | cols 16→16 | dem 37→37 | done 178→186 | inc_min 415.1→468.6 | inc_ala 85.7→95.4 | inc_ara 491→489.6 | inc_ene 427.3→429 | inc_tuk 68.1→75.3",
+   "123 crit 3→1 | food 0→0 | techs 44→37 | ships 166→175 | power 24080→23911 | cols 16→17 | dem 53→47 | done 185→177 | inc_min 381.8→393.1 | inc_ala 82.9→89.6 | inc_ara 399.3→349.3 | inc_ene 447.4→382.6 | inc_tuk 42.2→40.5",
+   "2026 crit 1→1 | food 0→0 | techs 41→41 | ships 180→275 | power 23956→35910 | cols 21→22 | dem 41→57 | done 233→262 | inc_min 470.8→547.6 | inc_ala 90.2→121.7 | inc_ara 313.1→374.2 | inc_ene 258.8→271.2 | inc_tuk 67→55.2",
+   "TOTAL crit 14→25 | food 0→0 | techs 336→328 | ships 1383→1455 | power 189869→203281 | cols 138→134 | used 1914→1860 | slots 2181→2126 | alive 40→41 | inc_ene 2600→2534 | res_ene 304431→306141 | inc_min 3223→3292 | res_min 68314→75336 | inc_ala 700→752 | res_ala 9214→10647 | inc_yiy 867→921 | res_yiy 109987→117957 | inc_tuk 457→491 | res_tuk 60667→65192 | inc_ara 3044→3093 | res_ara 266→159 | inc_etk 481→458 | res_etk 41040→40001 | dem 331→363 | done 1549→1527 | paidMin 1639→1620"
+  ],
+  "BM4": [
+   "11 crit 0→2 | food 0→0 | techs 23→24 | ships 106→117 | power 16286→21278 | cols 17→12 | dem 33→41 | done 186→162 | inc_min 340.2→358.9 | inc_ala 79.5→82.1 | inc_ara 258.5→278.7 | inc_ene 172.3→147.3 | inc_tuk 48.9→63.4",
+   "23 crit 1→1 | food 0→0 | techs 39→30 | ships 152→132 | power 24330→18674 | cols 14→12 | dem 32→37 | done 160→161 | inc_min 310.8→351.5 | inc_ala 72.8→80.2 | inc_ara 314.1→281.3 | inc_ene 356.9→321.6 | inc_tuk 50.6→55.3",
+   "42 crit 2→1 | food 0→0 | techs 42→48 | ships 142→148 | power 20026→22639 | cols 15→14 | dem 32→35 | done 158→160 | inc_min 281→361 | inc_ala 64.8→71.9 | inc_ara 400.1→454.5 | inc_ene 79.9→99.7 | inc_tuk 54.3→56.1",
+   "99 crit 0→1 | food 0→0 | techs 47→43 | ships 198→230 | power 26221→29528 | cols 20→15 | dem 46→41 | done 220→180 | inc_min 501.9→459.7 | inc_ala 105.3→95.6 | inc_ara 405.1→357 | inc_ene 372.5→306.3 | inc_tuk 58.4→49.5",
+   "404 crit 2→0 | food 0→0 | techs 49→46 | ships 251→202 | power 31433→25155 | cols 19→21 | dem 57→62 | done 229→247 | inc_min 521.4→582.4 | inc_ala 118.5→102.6 | inc_ara 463.3→414.1 | inc_ene 484.9→647.5 | inc_tuk 67.7→96.4",
+   "7 crit 5→3 | food 0→0 | techs 51→52 | ships 188→223 | power 23537→27849 | cols 16→18 | dem 37→31 | done 178→202 | inc_min 415.1→459.7 | inc_ala 85.7→125.1 | inc_ara 491→525.8 | inc_ene 427.3→483.6 | inc_tuk 68.1→64.8",
+   "123 crit 3→1 | food 0→0 | techs 44→45 | ships 166→187 | power 24080→25338 | cols 16→15 | dem 53→50 | done 185→177 | inc_min 381.8→399.6 | inc_ala 82.9→84 | inc_ara 399.3→424.4 | inc_ene 447.4→433.5 | inc_tuk 42.2→46.4",
+   "2026 crit 1→1 | food 0→0 | techs 41→43 | ships 180→293 | power 23956→37474 | cols 21→28 | dem 41→47 | done 233→306 | inc_min 470.8→605.4 | inc_ala 90.2→106.9 | inc_ara 313.1→388.4 | inc_ene 258.8→274.6 | inc_tuk 67→54.9",
+   "TOTAL crit 14→10 | food 0→0 | techs 336→331 | ships 1383→1532 | power 189869→207935 | cols 138→135 | used 1914→1933 | slots 2181→2156 | alive 40→39 | inc_ene 2600→2714 | res_ene 304431→323391 | inc_min 3223→3578 | res_min 68314→81742 | inc_ala 700→748 | res_ala 9214→11305 | inc_yiy 867→908 | res_yiy 109987→113999 | inc_tuk 457→487 | res_tuk 60667→63232 | inc_ara 3044→3124 | res_ara 266→219 | inc_etk 481→453 | res_etk 41040→38631 | dem 331→344 | done 1549→1595 | paidMin 1639→1684"
+  ]
+ }
+}

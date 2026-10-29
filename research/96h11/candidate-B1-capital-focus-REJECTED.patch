@@ -1,0 +1,21 @@
+--- a/ai.js	2026-10-29 11:12:41.280363634 +0000
++++ b/ai.js	2026-10-29 11:12:41.287882230 +0000
+@@ -1618,12 +1618,17 @@
+ 
+   /* --- 0. koloni odakları --- */
+   const atWarNow = Object.keys(e.war).some(k => e.war[k]);
++  /* 96H.11: başkent tipi odak (Yönetim) başkent sistemindeki ilk kolonidedir.
++     Aynı sistemdeki diğer koloniler ortak kuralla seçilir. Ölçüm (96H.10,
++     8 × 120): 4 seed'de ikincil anavatan kolonileri sürekli Yönetim'de;
++     seed11'de 120 ayda +605 Etki için 4392 mineral, 1622 alaşım, 3674 enerji. */
++  const capital = e.colonies.find(c => c.s === e.home && G.sys[c.s].planets[c.p].col && G.sys[c.s].planets[c.p].owner === e.id);
+   for (const c of e.colonies){
+     const sys = G.sys[c.s], pl = sys.planets[c.p];
+     if (!pl.col || (pl.col.fcd||0) > 0) continue;
+     const border = sys.lanes.some(l => G.sys[l].owner >= 0 && G.sys[l].owner !== e.id);
+     let want;
+-    if (e.home === sys.id) want = 'yonetim';
++    if (c === capital) want = 'yonetim';
+     else if ((atWarNow && border) || (prof.turtle > .5 && border && threatAt(e, sys.id) > 0)) want = 'garnizon';
+     else if (identityEatsFood(e) && (e.crisis === 'yiyecek' || e.inc.yiy < 3)) want = 'tarim';
+     else if (e.crisis === 'mineral') want = 'sanayi';

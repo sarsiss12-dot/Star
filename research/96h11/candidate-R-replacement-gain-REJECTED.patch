@@ -1,0 +1,28 @@
+--- a/ai.js	2026-10-29 11:12:41.262301796 +0000
++++ b/ai.js	2026-10-29 11:12:41.266461372 +0000
+@@ -474,10 +474,24 @@
+    }
+    if(!best||score>best.score||score===best.score&&key<best.key)best={key,wanted,score,delta};
+   }
+-  if(best)return best;
++  if(best&&aiReplacementGains(e,sys,pl,wanted,queued,best.score,plan))return best;
+  }
+  return null;
+ }
++/* 96H.11: a producer replaces a working building only when it adds more
++   marginal value than the demolition removes, under the same weights.
++   Measured (96H.10, 8 x 120): only 41% of replacements built the wanted
++   building next; 27% rebuilt the demolished one. Capability buildings
++   without resource output (defence, yard) keep the strategic rule. */
++function aiReplacementGains(e,sys,pl,wanted,queued,lost,plan){
++ if(!Object.keys(BUILDINGS[wanted].g||{}).length)return true;
++ const whole=aiBuildingDelta(e,sys,pl,wanted,true);let gain=0;
++ for(const r of ['ene','min','yiy','tuk','ala','ara','etk']){
++  const weight=r==='ara'?1:r==='etk'?2:2+(plan.rows[r]?.urgency||0)/12;
++  gain+=(whole[r]-queued[r])*weight;
++ }
++ return gain+lost>0;
++}
+ /* 96F extends the existing aiStrategy record; goal remains the tactical
+    compatibility field. The objective and its preparation never grant resources. */
+ const AI_OBJECTIVES={regional:'Bölgesel üstünlük',economy:'Ekonomik güç',science:'Teknolojik gelişim',security:'Güvenli sınırlar',federation:'Federasyon güvenliği',trade:'Ticaret ağı',contain:'Rakibi sınırlama',recovery:'Yenilgiden toparlanma',influence:'Diplomatik nüfuz'};

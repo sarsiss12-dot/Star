@@ -1,0 +1,1370 @@
+{
+ "candB-11-6m": {
+  "ene": {
+   "control_med": -5.81,
+   "cand_med": -5.46,
+   "pct": -5.9,
+   "flag": "ABOVE"
+  },
+  "min": {
+   "control_med": 15.09,
+   "cand_med": 14.79,
+   "pct": -2.0,
+   "flag": "BELOW"
+  },
+  "ala": {
+   "control_med": 11.17,
+   "cand_med": 11.17,
+   "pct": 0.0,
+   "flag": ""
+  },
+  "tuk": {
+   "control_med": 26.49,
+   "cand_med": 26.49,
+   "pct": 0.0,
+   "flag": ""
+  },
+  "ara": {
+   "control_med": 31.03,
+   "cand_med": 31.38,
+   "pct": 1.1,
+   "flag": "ABOVE"
+  },
+  "etk": {
+   "control_med": 19.9,
+   "cand_med": 16.98,
+   "pct": -14.7,
+   "flag": "BELOW"
+  }
+ },
+ "candB-11-12m": {
+  "ene": {
+   "control_med": 8.52,
+   "cand_med": 9.18,
+   "pct": 7.8,
+   "flag": ""
+  },
+  "min": {
+   "control_med": 28.6,
+   "cand_med": 28.14,
+   "pct": -1.6,
+   "flag": ""
+  },
+  "ala": {
+   "control_med": 11.11,
+   "cand_med": 11.11,
+   "pct": 0.0,
+   "flag": ""
+  },
+  "tuk": {
+   "control_med": 28.58,
+   "cand_med": 28.58,
+   "pct": 0.0,
+   "flag": ""
+  },
+  "ara": {
+   "control_med": 35.13,
+   "cand_med": 35.77,
+   "pct": 1.8,
+   "flag": "ABOVE"
+  },
+  "etk": {
+   "control_med": 20.91,
+   "cand_med": 17.27,
+   "pct": -17.4,
+   "flag": "BELOW"
+  }
+ },
+ "candB-11-24m": {
+  "ene": {
+   "control_med": 23.93,
+   "cand_med": 25.61,
+   "pct": 7.0,
+   "flag": ""
+  },
+  "min": {
+   "control_med": 45.86,
+   "cand_med": 53.43,
+   "pct": 16.5,
+   "flag": ""
+  },
+  "ala": {
+   "control_med": 12.34,
+   "cand_med": 12.34,
+   "pct": 0.0,
+   "flag": ""
+  },
+  "tuk": {
+   "control_med": 30.15,
+   "cand_med": 30.15,
+   "pct": 0.0,
+   "flag": ""
+  },
+  "ara": {
+   "control_med": 44.25,
+   "cand_med": 45.06,
+   "pct": 1.8,
+   "flag": ""
+  },
+  "etk": {
+   "control_med": 22.14,
+   "cand_med": 17.79,
+   "pct": -19.6,
+   "flag": "BELOW"
+  }
+ },
+ "candB-42-6m": {
+  "ene": {
+   "control_med": -6.12,
+   "cand_med": -4.66,
+   "pct": -23.8,
+   "flag": ""
+  },
+  "min": {
+   "control_med": 5.77,
+   "cand_med": 6.45,
+   "pct": 11.9,
+   "flag": ""
+  },
+  "ala": {
+   "control_med": 13.29,
+   "cand_med": 13.51,
+   "pct": 1.7,
+   "flag": ""
+  },
+  "tuk": {
+   "control_med": 16.17,
+   "cand_med": 16.77,
+   "pct": 3.7,
+   "flag": ""
+  },
+  "ara": {
+   "control_med": 34.92,
+   "cand_med": 35.81,
+   "pct": 2.5,
+   "flag": ""
+  },
+  "etk": {
+   "control_med": 18.08,
+   "cand_med": 15.22,
+   "pct": -15.8,
+   "flag": "BELOW"
+  }
+ },
+ "candB-42-12m": {
+  "ene": {
+   "control_med": 5.82,
+   "cand_med": 6.54,
+   "pct": 12.4,
+   "flag": ""
+  },
+  "min": {
+   "control_med": 10.33,
+   "cand_med": 13.07,
+   "pct": 26.5,
+   "flag": ""
+  },
+  "ala": {
+   "control_med": 13.7,
+   "cand_med": 12.6,
+   "pct": -8.0,
+   "flag": ""
+  },
+  "tuk": {
+   "control_med": 15.89,
+   "cand_med": 16.77,
+   "pct": 5.5,
+   "flag": ""
+  },
+  "ara": {
+   "control_med": 37.87,
+   "cand_med": 39.51,
+   "pct": 4.3,
+   "flag": ""
+  },
+  "etk": {
+   "control_med": 18.57,
+   "cand_med": 15.42,
+   "pct": -17.0,
+   "flag": "BELOW"
+  }
+ },
+ "candB-42-24m": {
+  "ene": {
+   "control_med": 31.85,
+   "cand_med": 33.81,
+   "pct": 6.2,
+   "flag": ""
+  },
+  "min": {
+   "control_med": 25.8,
+   "cand_med": 32.47,
+   "pct": 25.9,
+   "flag": ""
+  },
+  "ala": {
+   "control_med": 14.61,
+   "cand_med": 9.73,
+   "pct": -33.4,
+   "flag": ""
+  },
+  "tuk": {
+   "control_med": 17.02,
+   "cand_med": 17.02,
+   "pct": 0.0,
+   "flag": ""
+  },
+  "ara": {
+   "control_med": 47.15,
+   "cand_med": 49.31,
+   "pct": 4.6,
+   "flag": ""
+  },
+  "etk": {
+   "control_med": 19.9,
+   "cand_med": 16.16,
+   "pct": -18.8,
+   "flag": "BELOW"
+  }
+ },
+ "candB-7-6m": {
+  "ene": {
+   "control_med": -5.0,
+   "cand_med": -5.51,
+   "pct": 10.3,
+   "flag": "BELOW"
+  },
+  "min": {
+   "control_med": 45.98,
+   "cand_med": 45.04,
+   "pct": -2.0,
+   "flag": "BELOW"
+  },
+  "ala": {
+   "control_med": 8.13,
+   "cand_med": 7.77,
+   "pct": -4.4,
+   "flag": "BELOW"
+  },
+  "tuk": {
+   "control_med": 15.03,
+   "cand_med": 14.98,
+   "pct": -0.3,
+   "flag": "BELOW"
+  },
+  "ara": {
+   "control_med": 26.79,
+   "cand_med": 28.04,
+   "pct": 4.7,
+   "flag": "ABOVE"
+  },
+  "etk": {
+   "control_med": 21.61,
+   "cand_med": 17.01,
+   "pct": -21.3,
+   "flag": "BELOW"
+  }
+ },
+ "candB-7-12m": {
+  "ene": {
+   "control_med": 12.82,
+   "cand_med": 15.32,
+   "pct": 19.6,
+   "flag": ""
+  },
+  "min": {
+   "control_med": 53.1,
+   "cand_med": 51.77,
+   "pct": -2.5,
+   "flag": ""
+  },
+  "ala": {
+   "control_med": 7.77,
+   "cand_med": 7.54,
+   "pct": -2.9,
+   "flag": ""
+  },
+  "tuk": {
+   "control_med": 24.94,
+   "cand_med": 24.83,
+   "pct": -0.5,
+   "flag": ""
+  },
+  "ara": {
+   "control_med": 31.23,
+   "cand_med": 33.11,
+   "pct": 6.0,
+   "flag": "ABOVE"
+  },
+  "etk": {
+   "control_med": 23.0,
+   "cand_med": 17.57,
+   "pct": -23.6,
+   "flag": "BELOW"
+  }
+ },
+ "candB-7-24m": {
+  "ene": {
+   "control_med": 46.39,
+   "cand_med": 45.3,
+   "pct": -2.3,
+   "flag": ""
+  },
+  "min": {
+   "control_med": 90.73,
+   "cand_med": 89.74,
+   "pct": -1.1,
+   "flag": ""
+  },
+  "ala": {
+   "control_med": 5.59,
+   "cand_med": 6.48,
+   "pct": 15.9,
+   "flag": ""
+  },
+  "tuk": {
+   "control_med": 32.54,
+   "cand_med": 32.32,
+   "pct": -0.7,
+   "flag": ""
+  },
+  "ara": {
+   "control_med": 43.15,
+   "cand_med": 45.93,
+   "pct": 6.4,
+   "flag": ""
+  },
+  "etk": {
+   "control_med": 24.5,
+   "cand_med": 18.18,
+   "pct": -25.8,
+   "flag": "BELOW"
+  }
+ },
+ "candB-2026-6m": {
+  "ene": {
+   "control_med": 10.35,
+   "cand_med": 10.78,
+   "pct": 4.2,
+   "flag": ""
+  },
+  "min": {
+   "control_med": 13.8,
+   "cand_med": 13.41,
+   "pct": -2.8,
+   "flag": "BELOW"
+  },
+  "ala": {
+   "control_med": 10.64,
+   "cand_med": 10.64,
+   "pct": 0.0,
+   "flag": ""
+  },
+  "tuk": {
+   "control_med": 17.37,
+   "cand_med": 17.37,
+   "pct": 0.0,
+   "flag": ""
+  },
+  "ara": {
+   "control_med": 31.16,
+   "cand_med": 31.68,
+   "pct": 1.7,
+   "flag": "ABOVE"
+  },
+  "etk": {
+   "control_med": 20.73,
+   "cand_med": 17.66,
+   "pct": -14.8,
+   "flag": "BELOW"
+  }
+ },
+ "candB-2026-12m": {
+  "ene": {
+   "control_med": 24.01,
+   "cand_med": 24.73,
+   "pct": 3.0,
+   "flag": ""
+  },
+  "min": {
+   "control_med": 35.61,
+   "cand_med": 35.06,
+   "pct": -1.5,
+   "flag": ""
+  },
+  "ala": {
+   "control_med": 6.93,
+   "cand_med": 6.93,
+   "pct": 0.0,
+   "flag": ""
+  },
+  "tuk": {
+   "control_med": 19.02,
+   "cand_med": 19.02,
+   "pct": 0.0,
+   "flag": ""
+  },
+  "ara": {
+   "control_med": 37.37,
+   "cand_med": 38.17,
+   "pct": 2.1,
+   "flag": "ABOVE"
+  },
+  "etk": {
+   "control_med": 21.88,
+   "cand_med": 18.3,
+   "pct": -16.4,
+   "flag": "BELOW"
+  }
+ },
+ "candB-2026-24m": {
+  "ene": {
+   "control_med": 52.09,
+   "cand_med": 52.86,
+   "pct": 1.5,
+   "flag": ""
+  },
+  "min": {
+   "control_med": 84.61,
+   "cand_med": 80.16,
+   "pct": -5.3,
+   "flag": ""
+  },
+  "ala": {
+   "control_med": 4.47,
+   "cand_med": 4.64,
+   "pct": 3.9,
+   "flag": ""
+  },
+  "tuk": {
+   "control_med": 18.96,
+   "cand_med": 18.96,
+   "pct": 0.0,
+   "flag": ""
+  },
+  "ara": {
+   "control_med": 46.73,
+   "cand_med": 47.78,
+   "pct": 2.2,
+   "flag": "ABOVE"
+  },
+  "etk": {
+   "control_med": 22.79,
+   "cand_med": 18.77,
+   "pct": -17.7,
+   "flag": "BELOW"
+  }
+ },
+ "candBM-11-6m": {
+  "ene": {
+   "control_med": -5.81,
+   "cand_med": -5.12,
+   "pct": -11.8,
+   "flag": "ABOVE"
+  },
+  "min": {
+   "control_med": 15.09,
+   "cand_med": 15.34,
+   "pct": 1.6,
+   "flag": "ABOVE"
+  },
+  "ala": {
+   "control_med": 11.17,
+   "cand_med": 11.17,
+   "pct": 0.0,
+   "flag": ""
+  },
+  "tuk": {
+   "control_med": 26.49,
+   "cand_med": 26.49,
+   "pct": 0.0,
+   "flag": ""
+  },
+  "ara": {
+   "control_med": 31.03,
+   "cand_med": 31.29,
+   "pct": 0.8,
+   "flag": "ABOVE"
+  },
+  "etk": {
+   "control_med": 19.9,
+   "cand_med": 16.98,
+   "pct": -14.7,
+   "flag": "BELOW"
+  }
+ },
+ "candBM-11-12m": {
+  "ene": {
+   "control_med": 8.52,
+   "cand_med": 9.35,
+   "pct": 9.8,
+   "flag": ""
+  },
+  "min": {
+   "control_med": 28.6,
+   "cand_med": 28.41,
+   "pct": -0.7,
+   "flag": ""
+  },
+  "ala": {
+   "control_med": 11.11,
+   "cand_med": 11.11,
+   "pct": 0.0,
+   "flag": ""
+  },
+  "tuk": {
+   "control_med": 28.58,
+   "cand_med": 28.58,
+   "pct": 0.0,
+   "flag": ""
+  },
+  "ara": {
+   "control_med": 35.13,
+   "cand_med": 35.73,
+   "pct": 1.7,
+   "flag": ""
+  },
+  "etk": {
+   "control_med": 20.91,
+   "cand_med": 17.27,
+   "pct": -17.4,
+   "flag": "BELOW"
+  }
+ },
+ "candBM-11-24m": {
+  "ene": {
+   "control_med": 23.93,
+   "cand_med": 25.7,
+   "pct": 7.4,
+   "flag": ""
+  },
+  "min": {
+   "control_med": 45.86,
+   "cand_med": 49.81,
+   "pct": 8.6,
+   "flag": ""
+  },
+  "ala": {
+   "control_med": 12.34,
+   "cand_med": 12.34,
+   "pct": 0.0,
+   "flag": ""
+  },
+  "tuk": {
+   "control_med": 30.15,
+   "cand_med": 30.15,
+   "pct": 0.0,
+   "flag": ""
+  },
+  "ara": {
+   "control_med": 44.25,
+   "cand_med": 45.04,
+   "pct": 1.8,
+   "flag": ""
+  },
+  "etk": {
+   "control_med": 22.14,
+   "cand_med": 17.98,
+   "pct": -18.8,
+   "flag": "BELOW"
+  }
+ },
+ "candBM-42-6m": {
+  "ene": {
+   "control_med": -6.12,
+   "cand_med": -4.21,
+   "pct": -31.2,
+   "flag": ""
+  },
+  "min": {
+   "control_med": 5.77,
+   "cand_med": 7.27,
+   "pct": 26.0,
+   "flag": ""
+  },
+  "ala": {
+   "control_med": 13.29,
+   "cand_med": 13.51,
+   "pct": 1.7,
+   "flag": ""
+  },
+  "tuk": {
+   "control_med": 16.17,
+   "cand_med": 16.77,
+   "pct": 3.7,
+   "flag": ""
+  },
+  "ara": {
+   "control_med": 34.92,
+   "cand_med": 35.61,
+   "pct": 2.0,
+   "flag": ""
+  },
+  "etk": {
+   "control_med": 18.08,
+   "cand_med": 15.22,
+   "pct": -15.8,
+   "flag": "BELOW"
+  }
+ },
+ "candBM-42-12m": {
+  "ene": {
+   "control_med": 5.82,
+   "cand_med": 7.22,
+   "pct": 24.2,
+   "flag": ""
+  },
+  "min": {
+   "control_med": 10.33,
+   "cand_med": 13.99,
+   "pct": 35.5,
+   "flag": ""
+  },
+  "ala": {
+   "control_med": 13.7,
+   "cand_med": 12.6,
+   "pct": -8.0,
+   "flag": ""
+  },
+  "tuk": {
+   "control_med": 15.89,
+   "cand_med": 16.77,
+   "pct": 5.5,
+   "flag": ""
+  },
+  "ara": {
+   "control_med": 37.87,
+   "cand_med": 39.26,
+   "pct": 3.7,
+   "flag": ""
+  },
+  "etk": {
+   "control_med": 18.57,
+   "cand_med": 15.42,
+   "pct": -17.0,
+   "flag": "BELOW"
+  }
+ },
+ "candBM-42-24m": {
+  "ene": {
+   "control_med": 31.85,
+   "cand_med": 34.3,
+   "pct": 7.7,
+   "flag": ""
+  },
+  "min": {
+   "control_med": 25.8,
+   "cand_med": 32.93,
+   "pct": 27.6,
+   "flag": ""
+  },
+  "ala": {
+   "control_med": 14.61,
+   "cand_med": 9.73,
+   "pct": -33.4,
+   "flag": ""
+  },
+  "tuk": {
+   "control_med": 17.02,
+   "cand_med": 17.02,
+   "pct": 0.0,
+   "flag": ""
+  },
+  "ara": {
+   "control_med": 47.15,
+   "cand_med": 49.19,
+   "pct": 4.3,
+   "flag": ""
+  },
+  "etk": {
+   "control_med": 19.9,
+   "cand_med": 16.16,
+   "pct": -18.8,
+   "flag": "BELOW"
+  }
+ },
+ "candBM-7-6m": {
+  "ene": {
+   "control_med": -5.0,
+   "cand_med": -5.51,
+   "pct": 10.3,
+   "flag": "BELOW"
+  },
+  "min": {
+   "control_med": 45.98,
+   "cand_med": 45.04,
+   "pct": -2.0,
+   "flag": "BELOW"
+  },
+  "ala": {
+   "control_med": 8.13,
+   "cand_med": 7.77,
+   "pct": -4.4,
+   "flag": "BELOW"
+  },
+  "tuk": {
+   "control_med": 15.03,
+   "cand_med": 14.98,
+   "pct": -0.3,
+   "flag": "BELOW"
+  },
+  "ara": {
+   "control_med": 26.79,
+   "cand_med": 28.04,
+   "pct": 4.7,
+   "flag": "ABOVE"
+  },
+  "etk": {
+   "control_med": 21.61,
+   "cand_med": 17.01,
+   "pct": -21.3,
+   "flag": "BELOW"
+  }
+ },
+ "candBM-7-12m": {
+  "ene": {
+   "control_med": 12.82,
+   "cand_med": 15.32,
+   "pct": 19.6,
+   "flag": ""
+  },
+  "min": {
+   "control_med": 53.1,
+   "cand_med": 51.77,
+   "pct": -2.5,
+   "flag": ""
+  },
+  "ala": {
+   "control_med": 7.77,
+   "cand_med": 7.54,
+   "pct": -2.9,
+   "flag": ""
+  },
+  "tuk": {
+   "control_med": 24.94,
+   "cand_med": 24.83,
+   "pct": -0.5,
+   "flag": ""
+  },
+  "ara": {
+   "control_med": 31.23,
+   "cand_med": 33.11,
+   "pct": 6.0,
+   "flag": "ABOVE"
+  },
+  "etk": {
+   "control_med": 23.0,
+   "cand_med": 17.57,
+   "pct": -23.6,
+   "flag": "BELOW"
+  }
+ },
+ "candBM-7-24m": {
+  "ene": {
+   "control_med": 46.39,
+   "cand_med": 45.3,
+   "pct": -2.3,
+   "flag": ""
+  },
+  "min": {
+   "control_med": 90.73,
+   "cand_med": 89.74,
+   "pct": -1.1,
+   "flag": ""
+  },
+  "ala": {
+   "control_med": 5.59,
+   "cand_med": 6.48,
+   "pct": 15.9,
+   "flag": ""
+  },
+  "tuk": {
+   "control_med": 32.54,
+   "cand_med": 32.32,
+   "pct": -0.7,
+   "flag": ""
+  },
+  "ara": {
+   "control_med": 43.15,
+   "cand_med": 45.93,
+   "pct": 6.4,
+   "flag": ""
+  },
+  "etk": {
+   "control_med": 24.5,
+   "cand_med": 18.18,
+   "pct": -25.8,
+   "flag": "BELOW"
+  }
+ },
+ "candBM-2026-6m": {
+  "ene": {
+   "control_med": 10.35,
+   "cand_med": 11.66,
+   "pct": 12.7,
+   "flag": ""
+  },
+  "min": {
+   "control_med": 13.8,
+   "cand_med": 14.89,
+   "pct": 7.9,
+   "flag": "ABOVE"
+  },
+  "ala": {
+   "control_med": 10.64,
+   "cand_med": 10.64,
+   "pct": 0.0,
+   "flag": ""
+  },
+  "tuk": {
+   "control_med": 17.37,
+   "cand_med": 17.37,
+   "pct": 0.0,
+   "flag": ""
+  },
+  "ara": {
+   "control_med": 31.16,
+   "cand_med": 31.4,
+   "pct": 0.8,
+   "flag": "ABOVE"
+  },
+  "etk": {
+   "control_med": 20.73,
+   "cand_med": 17.66,
+   "pct": -14.8,
+   "flag": "BELOW"
+  }
+ },
+ "candBM-2026-12m": {
+  "ene": {
+   "control_med": 24.01,
+   "cand_med": 25.03,
+   "pct": 4.3,
+   "flag": ""
+  },
+  "min": {
+   "control_med": 35.61,
+   "cand_med": 35.8,
+   "pct": 0.5,
+   "flag": ""
+  },
+  "ala": {
+   "control_med": 6.93,
+   "cand_med": 6.93,
+   "pct": 0.0,
+   "flag": ""
+  },
+  "tuk": {
+   "control_med": 19.02,
+   "cand_med": 19.02,
+   "pct": 0.0,
+   "flag": ""
+  },
+  "ara": {
+   "control_med": 37.37,
+   "cand_med": 38.03,
+   "pct": 1.8,
+   "flag": "ABOVE"
+  },
+  "etk": {
+   "control_med": 21.88,
+   "cand_med": 18.3,
+   "pct": -16.4,
+   "flag": "BELOW"
+  }
+ },
+ "candBM-2026-24m": {
+  "ene": {
+   "control_med": 52.09,
+   "cand_med": 52.94,
+   "pct": 1.6,
+   "flag": ""
+  },
+  "min": {
+   "control_med": 84.61,
+   "cand_med": 85.25,
+   "pct": 0.8,
+   "flag": ""
+  },
+  "ala": {
+   "control_med": 4.47,
+   "cand_med": 4.64,
+   "pct": 3.9,
+   "flag": ""
+  },
+  "tuk": {
+   "control_med": 18.96,
+   "cand_med": 18.96,
+   "pct": 0.0,
+   "flag": ""
+  },
+  "ara": {
+   "control_med": 46.73,
+   "cand_med": 47.71,
+   "pct": 2.1,
+   "flag": "ABOVE"
+  },
+  "etk": {
+   "control_med": 22.79,
+   "cand_med": 18.77,
+   "pct": -17.7,
+   "flag": "BELOW"
+  }
+ },
+ "candBM4-11-6m": {
+  "ene": {
+   "control_med": -5.81,
+   "cand_med": -5.46,
+   "pct": -5.9,
+   "flag": "ABOVE"
+  },
+  "min": {
+   "control_med": 15.09,
+   "cand_med": 14.79,
+   "pct": -2.0,
+   "flag": "BELOW"
+  },
+  "ala": {
+   "control_med": 11.17,
+   "cand_med": 11.17,
+   "pct": 0.0,
+   "flag": ""
+  },
+  "tuk": {
+   "control_med": 26.49,
+   "cand_med": 26.49,
+   "pct": 0.0,
+   "flag": ""
+  },
+  "ara": {
+   "control_med": 31.03,
+   "cand_med": 31.38,
+   "pct": 1.1,
+   "flag": "ABOVE"
+  },
+  "etk": {
+   "control_med": 19.9,
+   "cand_med": 16.98,
+   "pct": -14.7,
+   "flag": "BELOW"
+  }
+ },
+ "candBM4-11-12m": {
+  "ene": {
+   "control_med": 8.52,
+   "cand_med": 9.18,
+   "pct": 7.8,
+   "flag": ""
+  },
+  "min": {
+   "control_med": 28.6,
+   "cand_med": 28.27,
+   "pct": -1.1,
+   "flag": ""
+  },
+  "ala": {
+   "control_med": 11.11,
+   "cand_med": 11.11,
+   "pct": 0.0,
+   "flag": ""
+  },
+  "tuk": {
+   "control_med": 28.58,
+   "cand_med": 28.58,
+   "pct": 0.0,
+   "flag": ""
+  },
+  "ara": {
+   "control_med": 35.13,
+   "cand_med": 35.77,
+   "pct": 1.8,
+   "flag": "ABOVE"
+  },
+  "etk": {
+   "control_med": 20.91,
+   "cand_med": 17.27,
+   "pct": -17.4,
+   "flag": "BELOW"
+  }
+ },
+ "candBM4-11-24m": {
+  "ene": {
+   "control_med": 23.93,
+   "cand_med": 25.61,
+   "pct": 7.0,
+   "flag": ""
+  },
+  "min": {
+   "control_med": 45.86,
+   "cand_med": 51.27,
+   "pct": 11.8,
+   "flag": ""
+  },
+  "ala": {
+   "control_med": 12.34,
+   "cand_med": 12.34,
+   "pct": 0.0,
+   "flag": ""
+  },
+  "tuk": {
+   "control_med": 30.15,
+   "cand_med": 30.13,
+   "pct": -0.1,
+   "flag": ""
+  },
+  "ara": {
+   "control_med": 44.25,
+   "cand_med": 45.05,
+   "pct": 1.8,
+   "flag": ""
+  },
+  "etk": {
+   "control_med": 22.14,
+   "cand_med": 17.68,
+   "pct": -20.2,
+   "flag": "BELOW"
+  }
+ },
+ "candBM4-42-6m": {
+  "ene": {
+   "control_med": -6.12,
+   "cand_med": -4.44,
+   "pct": -27.4,
+   "flag": ""
+  },
+  "min": {
+   "control_med": 5.77,
+   "cand_med": 6.75,
+   "pct": 17.0,
+   "flag": ""
+  },
+  "ala": {
+   "control_med": 13.29,
+   "cand_med": 13.51,
+   "pct": 1.7,
+   "flag": ""
+  },
+  "tuk": {
+   "control_med": 16.17,
+   "cand_med": 16.77,
+   "pct": 3.7,
+   "flag": ""
+  },
+  "ara": {
+   "control_med": 34.92,
+   "cand_med": 35.72,
+   "pct": 2.3,
+   "flag": ""
+  },
+  "etk": {
+   "control_med": 18.08,
+   "cand_med": 15.22,
+   "pct": -15.8,
+   "flag": "BELOW"
+  }
+ },
+ "candBM4-42-12m": {
+  "ene": {
+   "control_med": 5.82,
+   "cand_med": 7.21,
+   "pct": 23.9,
+   "flag": ""
+  },
+  "min": {
+   "control_med": 10.33,
+   "cand_med": 13.85,
+   "pct": 34.1,
+   "flag": ""
+  },
+  "ala": {
+   "control_med": 13.7,
+   "cand_med": 12.6,
+   "pct": -8.0,
+   "flag": ""
+  },
+  "tuk": {
+   "control_med": 15.89,
+   "cand_med": 16.77,
+   "pct": 5.5,
+   "flag": ""
+  },
+  "ara": {
+   "control_med": 37.87,
+   "cand_med": 39.28,
+   "pct": 3.7,
+   "flag": ""
+  },
+  "etk": {
+   "control_med": 18.57,
+   "cand_med": 15.42,
+   "pct": -17.0,
+   "flag": "BELOW"
+  }
+ },
+ "candBM4-42-24m": {
+  "ene": {
+   "control_med": 31.85,
+   "cand_med": 35.42,
+   "pct": 11.2,
+   "flag": ""
+  },
+  "min": {
+   "control_med": 25.8,
+   "cand_med": 34.15,
+   "pct": 32.4,
+   "flag": ""
+  },
+  "ala": {
+   "control_med": 14.61,
+   "cand_med": 9.73,
+   "pct": -33.4,
+   "flag": ""
+  },
+  "tuk": {
+   "control_med": 17.02,
+   "cand_med": 17.02,
+   "pct": 0.0,
+   "flag": ""
+  },
+  "ara": {
+   "control_med": 47.15,
+   "cand_med": 48.81,
+   "pct": 3.5,
+   "flag": ""
+  },
+  "etk": {
+   "control_med": 19.9,
+   "cand_med": 16.14,
+   "pct": -18.9,
+   "flag": "BELOW"
+  }
+ },
+ "candBM4-7-6m": {
+  "ene": {
+   "control_med": -5.0,
+   "cand_med": -5.51,
+   "pct": 10.3,
+   "flag": "BELOW"
+  },
+  "min": {
+   "control_med": 45.98,
+   "cand_med": 45.04,
+   "pct": -2.0,
+   "flag": "BELOW"
+  },
+  "ala": {
+   "control_med": 8.13,
+   "cand_med": 7.77,
+   "pct": -4.4,
+   "flag": "BELOW"
+  },
+  "tuk": {
+   "control_med": 15.03,
+   "cand_med": 14.98,
+   "pct": -0.3,
+   "flag": "BELOW"
+  },
+  "ara": {
+   "control_med": 26.79,
+   "cand_med": 28.04,
+   "pct": 4.7,
+   "flag": "ABOVE"
+  },
+  "etk": {
+   "control_med": 21.61,
+   "cand_med": 17.01,
+   "pct": -21.3,
+   "flag": "BELOW"
+  }
+ },
+ "candBM4-7-12m": {
+  "ene": {
+   "control_med": 12.82,
+   "cand_med": 15.32,
+   "pct": 19.6,
+   "flag": ""
+  },
+  "min": {
+   "control_med": 53.1,
+   "cand_med": 51.77,
+   "pct": -2.5,
+   "flag": ""
+  },
+  "ala": {
+   "control_med": 7.77,
+   "cand_med": 7.54,
+   "pct": -2.9,
+   "flag": ""
+  },
+  "tuk": {
+   "control_med": 24.94,
+   "cand_med": 24.83,
+   "pct": -0.5,
+   "flag": ""
+  },
+  "ara": {
+   "control_med": 31.23,
+   "cand_med": 33.11,
+   "pct": 6.0,
+   "flag": "ABOVE"
+  },
+  "etk": {
+   "control_med": 23.0,
+   "cand_med": 17.57,
+   "pct": -23.6,
+   "flag": "BELOW"
+  }
+ },
+ "candBM4-7-24m": {
+  "ene": {
+   "control_med": 46.39,
+   "cand_med": 52.77,
+   "pct": 13.8,
+   "flag": ""
+  },
+  "min": {
+   "control_med": 90.73,
+   "cand_med": 87.87,
+   "pct": -3.1,
+   "flag": ""
+  },
+  "ala": {
+   "control_med": 5.59,
+   "cand_med": 6.07,
+   "pct": 8.5,
+   "flag": ""
+  },
+  "tuk": {
+   "control_med": 32.54,
+   "cand_med": 32.32,
+   "pct": -0.7,
+   "flag": ""
+  },
+  "ara": {
+   "control_med": 43.15,
+   "cand_med": 46.03,
+   "pct": 6.7,
+   "flag": ""
+  },
+  "etk": {
+   "control_med": 24.5,
+   "cand_med": 18.22,
+   "pct": -25.6,
+   "flag": "BELOW"
+  }
+ },
+ "candBM4-2026-6m": {
+  "ene": {
+   "control_med": 10.35,
+   "cand_med": 10.96,
+   "pct": 5.9,
+   "flag": ""
+  },
+  "min": {
+   "control_med": 13.8,
+   "cand_med": 13.7,
+   "pct": -0.7,
+   "flag": ""
+  },
+  "ala": {
+   "control_med": 10.64,
+   "cand_med": 10.64,
+   "pct": 0.0,
+   "flag": ""
+  },
+  "tuk": {
+   "control_med": 17.37,
+   "cand_med": 17.37,
+   "pct": 0.0,
+   "flag": ""
+  },
+  "ara": {
+   "control_med": 31.16,
+   "cand_med": 31.62,
+   "pct": 1.5,
+   "flag": "ABOVE"
+  },
+  "etk": {
+   "control_med": 20.73,
+   "cand_med": 17.66,
+   "pct": -14.8,
+   "flag": "BELOW"
+  }
+ },
+ "candBM4-2026-12m": {
+  "ene": {
+   "control_med": 24.01,
+   "cand_med": 24.82,
+   "pct": 3.4,
+   "flag": ""
+  },
+  "min": {
+   "control_med": 35.61,
+   "cand_med": 35.2,
+   "pct": -1.1,
+   "flag": ""
+  },
+  "ala": {
+   "control_med": 6.93,
+   "cand_med": 6.93,
+   "pct": 0.0,
+   "flag": ""
+  },
+  "tuk": {
+   "control_med": 19.02,
+   "cand_med": 19.02,
+   "pct": 0.0,
+   "flag": ""
+  },
+  "ara": {
+   "control_med": 37.37,
+   "cand_med": 38.12,
+   "pct": 2.0,
+   "flag": "ABOVE"
+  },
+  "etk": {
+   "control_med": 21.88,
+   "cand_med": 18.3,
+   "pct": -16.4,
+   "flag": "BELOW"
+  }
+ },
+ "candBM4-2026-24m": {
+  "ene": {
+   "control_med": 52.09,
+   "cand_med": 52.9,
+   "pct": 1.6,
+   "flag": ""
+  },
+  "min": {
+   "control_med": 84.61,
+   "cand_med": 80.23,
+   "pct": -5.2,
+   "flag": ""
+  },
+  "ala": {
+   "control_med": 4.47,
+   "cand_med": 4.64,
+   "pct": 3.9,
+   "flag": ""
+  },
+  "tuk": {
+   "control_med": 18.96,
+   "cand_med": 18.96,
+   "pct": 0.0,
+   "flag": ""
+  },
+  "ara": {
+   "control_med": 46.73,
+   "cand_med": 47.73,
+   "pct": 2.1,
+   "flag": "ABOVE"
+  },
+  "etk": {
+   "control_med": 22.79,
+   "cand_med": 18.77,
+   "pct": -17.7,
+   "flag": "BELOW"
+  }
+ }
+}
