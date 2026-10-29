@@ -6,14 +6,29 @@ Son güncelleme: 2026-10-29. Depo `sarsiss12-dot/Star`.
 
 | | `main` (birleşmiş) | Bu dal (PR) |
 |---|---|---|
-| Faz | 96H.10 | 96H.11 (yalnız araştırma) |
+| Faz | 96H.10 (+ 96H.11 araştırma arşivi) | MP.0 (multiplayer temeli; izole prototip) |
 | Build / PWA | `96h10` / `stars-v96h10` | değişmedi |
-| Save | v8 | v8 |
+| Save | v8 | v8 (şema değişmedi) |
 | Oyun ZIP | `releases/stars-faz96h10.zip` (SHA-256 `78e76d1627b8ec1b990849b2242835f78667f110e1d6f17021760183ee7be6d0`) | yeni ZIP yok |
-| Taban HEAD | `667cf567200c2e8a430856e14b3e395d31623b99` | — |
+| Taban HEAD | `f6039752cf6ca699eb3ae30ff22e106bd7fe9e6c` | — |
 | Değişen runtime | — | yok (19 dosya 96H.10 ile aynı) |
 
-96H.6.2, 96H.6.3, 96H.7 ve 96H.11 yalnız araştırmadır; oyun yayımlamadılar.
+96H.6.2, 96H.6.3, 96H.7, 96H.11 ve MP.0 oyun yayımlamadı.
+
+## MP.0 — multiplayer temeli (izole prototip, oynanabilir sürüm değil)
+
+Ayrıntı: `MULTIPLAYER-MP0-MIMARI.md`, `MULTIPLAYER-MP0-PROTOKOL.md`, `MULTIPLAYER-MP0-SONUC.md`. Kod: `research/mp0/`. Testler: `tests/mp0_core_test.js`, `tests/browser-mp0.cjs`. Görevler: #6, #7.
+
+- **Mimari:** host-yetkili. Zaman, RNG, AI ve kurallar yalnız host'ta çalışıyor; istemci motor yüklemiyor ve komut gönderiyor.
+- **Kimlik:** `playerId` ≠ `empireId`. Eşleme yalnız host API'siyle değişiyor; paketteki devlet kimliği kullanılmıyor.
+- **Taşıyıcı:** bağımlılıksız yerel geliştirme WebSocket relay'i. Üretim LAN/online hizmeti değil.
+- **Kanıt:** iki ayrı Chromium sürecinde gerçek seed11 galaksisi paylaşıldı.
+  - İkinci oyuncu devlet 3'ü yönetti; gerçek inşa komutu `queueBuilding` ile uygulandı.
+  - Yetkisiz, sahte, tekrar ve eski komutlar reddedildi; kanonik Save8 değişmedi.
+  - İstemci paketlerinde bilinmeyen 36 sistemin adı ve gizli alanlar yok.
+  - Host kapanınca istemci duraklıyor; Save8 + ayrı oturum metası ile aynı koltuklar geri geliyor.
+- **Bulgu:** Chromium ile Node arasında aynı seed ve komutlarla RNG ve oyun durumu aynı, koordinatların son basamağı farklı. Lockstep güvenilmez; host-yetkili seçim doğrulandı.
+- **NOT RUN:** gerçek Wi-Fi LAN, internet (NAT/TURN), fiziksel Android.
 
 ## 96H.11 — AI gezegen uzmanlaşması ve inşa verimliliği (araştırma, sürüm yok)
 
@@ -93,7 +108,8 @@ Sabit başarısız-hedef beklemesi, sevk öncesi gerçek bakım kapısı, karş�
 
 - Tam regresyon: taban `54058e0` 138 paket 6098 PASS / 3 FAIL; 96H.10 139 paket 6109 PASS / 3 FAIL (mevcut 138 paket aynı, yeni paket 11 PASS). Chromium `browser-96h10.cjs` 27/27 PASS, sayfa hatası 0.
 - 96H.11 (runtime değişmedi, `667cf56` ağacı): 139 paket 6109 PASS / 3 FAIL (aynı 3 FAIL); Chromium `browser-96h10.cjs` 27/27 PASS, sayfa hatası 0; `verify-release.py` ZIP kökünde DOĞRULANDI (19 dosya, build 96h10).
-- Önceden var olan 3 FAIL: `faz95d_identity_test.js`, seed 11/99/404 coğrafya koordinatlarında son ondalık basamak farkı (Node/V8 kayan nokta). 96H.7.1–96H.11'de değişiklikten önce ve sonra aynı. Fixture yenilenmedi.
+- MP.0 (runtime değişmedi, `f603975` ağacı + iki yeni test): 140 paket 6120 PASS / 3 FAIL (139 mevcut paket 96H.10 ile aynı, yeni `mp0_core_test.js` 11 PASS); Chromium `browser-96h10.cjs` 27/27 PASS; `browser-mp0.cjs` 20/20 PASS (60 ms gecikmeli relay ile de 20/20).
+- Önceden var olan 3 FAIL: `faz95d_identity_test.js`, seed 11/99/404 coğrafya koordinatlarında son ondalık basamak farkı (Node/V8 kayan nokta). 96H.7.1–96H.11 ve MP.0'da değişiklikten önce ve sonra aynı. Fixture yenilenmedi.
 - Test yan etkisi: `tests/navy-95a-after-*.json`, `tests/audit-95d/…`, `tests/audit96e1/…`, `tests/audit96g2/`; commit öncesi geri alın.
 
 ## Açık konular (sıralı)
@@ -107,5 +123,6 @@ Sabit başarısız-hedef beklemesi, sevk öncesi gerçek bakım kapısı, karş�
 7. Büyük galaksi (120+ sistem) reddedildi; sınırlar 100/11. Fiziksel Android testi hiç çalıştırılmadı.
 8. Ekonomi (96H.11): yerine koyma puanı dökümhaneyi negatif değerli sayıyor; yıkımların %27'si sökülen binayı yeniden inşa ediyor.
 9. Ekonomi (96H.11): başkent tipi odak bütün anavatan sistemine uygulanıyor. Düzeltme, genel odak zincirinin litoit dışı sanayi açığına yanıt vermemesini açığa çıkarıyor; önce o yanıt tek başına ölçülmeli.
+10. Multiplayer (MP.0): `aiNegotiate` / `UI.aiOffer` / federasyon gelen kutusu id 0'a bağlı; uzak insan için görüş belleği (`updateVision`) yok; `!e.ai` bildirimleri host günlüğüne düşüyor. MP.1'de motorda `isHumanActor` ve aktör başına görüş gerekir.
 
 Reddedilmiş adaylar: `AI-RED-KARARLARI.md`.
