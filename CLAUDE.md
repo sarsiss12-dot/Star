@@ -21,19 +21,19 @@ npm install --prefix tests          # @napi-rs/canvas + playwright (yalnız test
 node tests/run-all.js               # tüm *_test.js paketleri; "SUITES: n GEÇEN: x KALAN: y"
 STARS_TEST_FILTER=joint node tests/run-all.js   # ad filtresi
 STARS_TEST_WORKERS=4 STARS_TEST_LOGS=/abs/dizin node tests/run-all.js
-node tests/browser-96h9.cjs         # gerçek Chromium + PWA (STARS_CHROMIUM_PATH=/opt/pw-browsers/chromium, STARS_OUTPUT=/abs/dizin)
+node tests/browser-96h10.cjs        # gerçek Chromium + PWA (STARS_CHROMIUM_PATH=/opt/pw-browsers/chromium, STARS_OUTPUT=/abs/dizin)
 python3 tools/verify-release.py     # manifest ↔ çalışma ağacı bütünlüğü
 ```
 
 - Testler Node `vm` sandbox'ında gerçek runtime dosyalarını yükler (`tests/helpers/runtime.js`). Fixture'lar: `tests/helpers/*-fixture.js`, `tests/fixtures/`.
-- Koruma testleri eski sürüm baytlarını hash ile doğrular. Onaylı bir değişiklik eklenince `tests/helpers/96hXX-preservation.js` içinde **tam metinle** geri alınabilen bir "strip" adaptörü yazılır ve ilgili koruma testine eklenir (örn. `96h63-preservation.js`, `96h8-preservation.js`, `96h9-preservation.js`, `faz96h31_compact_construction_test.js`; yeni adaptör zincirin en başına eklenir: `stripReviewedH8(stripReviewedH9(src))`). Hash'i gevşetme, testi silme.
+- Koruma testleri eski sürüm baytlarını hash ile doğrular. Onaylı bir değişiklik eklenince `tests/helpers/96hXX-preservation.js` içinde **tam metinle** geri alınabilen bir "strip" adaptörü yazılır ve ilgili koruma testine eklenir (örn. `96h63-preservation.js`, `96h8-preservation.js`, `96h9-preservation.js`, `96h10-preservation.js`, `faz96h31_compact_construction_test.js`; yeni adaptör zincirin en başına eklenir: `stripReviewedH8(stripReviewedH9(stripReviewedH10(src)))`). Hash'i gevşetme, testi silme.
 - Her test dosyası `GEÇEN: n KALAN: m` satırı basmalı; `run-all.js` bunu okur.
 
 ## Çalışma kuralları
 
 - AI davranış değişikliği: aynı Save'den kontrol ve aday kollarını koşun; kaotik ayrışma için tek RNG çekimli plasebo bandı kullanın (`research/96h8/scripts/arm.js`). Fayda yalnız adayın tetiklendiği devlet ve bant dışı farklar için iddia edilir. Kontrol kökünde `ai.js` çalışma ağacına bağ (symlink) değil, sabit kopya olmalı; yoksa aday aktarıldığında kontrol koşuları sessizce aday koduyla çalışır.
 - Küçük, tek amaçlı, ölçülmüş değişiklikler. RNG tüketim sırası, Save8 baytları ve mevcut savaş/ittifak/federasyon sonuçları korunmalı; yeni davranış aynı Save/RNG üzerinde kontrol–aday karşılaştırmasıyla kanıtlanır.
-- `research/**/*REJECTED*.patch`, `*SUPERSEDED*.patch`, `*-rejected*.patch` ve `CAPACITY-REJECTED.patch` üretime **uygulanmaz** (A1, A2, AC, C1, C2, D1, D2, T1, I1, F1, kapasite, 96H.7 sefer bekleme, 96H.8 aday 1/2a, 96H.9 aday A ve tek başına B/C). Ayrıntı: `AI-RED-KARARLARI.md`.
+- `research/**/*REJECTED*.patch`, `*SUPERSEDED*.patch`, `*-rejected*.patch` ve `CAPACITY-REJECTED.patch` üretime **uygulanmaz** (A1, A2, AC, C1, C2, D1, D2, T1, I1, F1, kapasite, 96H.7 sefer bekleme, 96H.8 aday 1/2a, 96H.9 aday A ve tek başına B/C, 96H.10 aday D2/P/E). Ayrıntı: `AI-RED-KARARLARI.md`.
 - Ekonomik AI eşikleri, askerî strateji ve galaksi sınırları (100 sistem / 11 AI) ayrı faz kararı olmadan değiştirilmez.
 - Rapor dili: PASS / FAIL / NOT RUN ayrı yazılır; çalıştırılmayan test PASS sayılmaz, fiziksel Android sonucu iddia edilmez.
 - `tests/node_modules/` ve `tests/package-lock.json` commit edilmez. Tam koşu bazı audit/navy JSON ve PNG dosyalarını yeniden yazar (`git status` ile görün, commit öncesi geri alın).

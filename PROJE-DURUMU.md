@@ -6,14 +6,41 @@ Son güncelleme: 2026-10-29. Depo `sarsiss12-dot/Star`.
 
 | | `main` (birleşmiş) | Bu dal (PR) |
 |---|---|---|
-| Faz | 96H.8 | 96H.9 |
-| Build / PWA | `96h8` / `stars-v96h8` | `96h9` / `stars-v96h9` |
+| Faz | 96H.9 | 96H.10 |
+| Build / PWA | `96h9` / `stars-v96h9` | `96h10` / `stars-v96h10` |
 | Save | v8 | v8 (şema değişmedi) |
-| Oyun ZIP | `releases/stars-faz96h8.zip` | `releases/stars-faz96h9.zip` |
-| Taban HEAD | `8413f6e5e8702c0c866f6ac3cfb8748177579e9d` | — |
-| Değişen runtime | — | `ai.js` (ordu satın alma + kuşatmayı sürdürme), `main.js` (`BUILD_ID`), `sw.js` (`CACHE`) |
+| Oyun ZIP | `releases/stars-faz96h9.zip` | `releases/stars-faz96h10.zip` |
+| Taban HEAD | `54058e08e2f9102f6e4b37195f1490f6fa389f99` | — |
+| Değişen runtime | — | `ai.js` (`aiArmyTick` ordu güvenliği), `main.js` (`BUILD_ID`), `sw.js` (`CACHE`) |
 
 96H.6.2, 96H.6.3 ve 96H.7 yalnız araştırmadır; oyun yayımlamadılar.
+
+## 96H.10 — kara ordusu güvenliği (kabul edildi)
+
+Ayrıntı: `AI-KARA-ORDUSU-GUVENLIGI-96H10.md`. Kanıt: `research/96h10/`. Testler: `tests/faz96h10_army_safety_test.js`, `tests/browser-96h10.cjs`.
+
+- **Ordu artık görünür düşman gücünün tuttuğu sisteme gönderilmiyor.** Görünür düşman savaş gücü, oradaki ya da oraya giden kendi savaş filolarını ×1,15 payıyla aşıyorsa silahsız ordu o sisteme gönderilmiyor (taarruz, sınır ve savunma hedefleri).
+- **Yoldaki ordu yeniden karar veriyor.** Varış güvensizleşirse ya da hedef geçersizleşirse (ele geçirildi, savaş bitti) ordu yeniden yönlendiriliyor.
+- **96H.9'un kanıtlanmış hatası:** ordular, korsan ya da düşman filosunun tuttuğu kendi kolonilerine tek tek gönderilip varışta ölüyordu. seed11 pl1, sys20: 13 emir, 12 ölü ordu.
+- **Değişmeyenler:**
+  - ortak sefer, teslimat ve oyuncu emirleri;
+  - istila, kalkan, garnizon ve katastrof kuralları;
+  - 96H.8 ve 96H.9 davranışları;
+  - Save şeması ve RNG.
+
+Sonuç, uzay savaşında kaybedilen ordu gövdesi (5 dünya × 240 ay ve 8 × 120):
+
+| | 96H.9 | 96H.10 |
+|---|---|---|
+| seed11 | 22 | 12 |
+| seed23 | 16 | 13 |
+| 8 × 120 | 10 | 9 |
+
+Temiz fetih, koloni fethi, katastrof, kritik ay, terhis ve ticaret aynı. Plasebo bantlarında ordu kaybı medyanı tetiklenen 7 dünyanın hepsinde eşit ya da düşük.
+
+Reddedilenler: D2 (güvenli rota), P (salınım), E (ordu alaşım tavanı).
+
+Seed23 katastrofları çözülmedi: saldırgan orduyu karşılayamıyor (ekonomi eşiği). Ayrı faz kararı gerekir.
 
 ## 96H.9 — kara ordusu koordinasyonu (kabul edildi)
 
@@ -53,17 +80,18 @@ Sabit başarısız-hedef beklemesi, sevk öncesi gerçek bakım kapısı, karş�
 
 ## Bilinen test durumu (Node v22.22.0)
 
-- Tam regresyon: taban `8413f6e` 137 paket 6087 PASS / 3 FAIL; 96H.9 138 paket 6098 PASS / 3 FAIL (mevcut 137 paket aynı, yeni paket 11 PASS). Chromium `browser-96h9.cjs` 24/24 PASS, sayfa hatası 0.
-- Önceden var olan 3 FAIL: `faz95d_identity_test.js`, seed 11/99/404 coğrafya koordinatlarında son ondalık basamak farkı (Node/V8 kayan nokta). 96H.7.1, 96H.8 ve 96H.9'da değişiklikten önce ve sonra aynı. Fixture yenilenmedi.
+- Tam regresyon: taban `54058e0` 138 paket 6098 PASS / 3 FAIL; 96H.10 139 paket 6109 PASS / 3 FAIL (mevcut 138 paket aynı, yeni paket 11 PASS). Chromium `browser-96h10.cjs` 27/27 PASS, sayfa hatası 0.
+- Önceden var olan 3 FAIL: `faz95d_identity_test.js`, seed 11/99/404 coğrafya koordinatlarında son ondalık basamak farkı (Node/V8 kayan nokta). 96H.7.1–96H.10'da değişiklikten önce ve sonra aynı. Fixture yenilenmedi.
 - Test yan etkisi: `tests/navy-95a-after-*.json`, `tests/audit-95d/…`, `tests/audit96e1/…`, `tests/audit96g2/`; commit öncesi geri alın.
 
 ## Açık konular (sıralı)
 
-1. Yoldaki ordu, eskort çekilince yeniden değerlendirilmiyor (`aiArmyTick` yalnız boştaki taşıyıcı). Ordu yetişmezse tutulan kuşatma 6 ayda katastrofa dönebiliyor.
-2. `jointAdvance` ve rally toplanma rotası konuşlanma bakım kapısının dışında (seed23 240 ayda 2 terhis).
-3. `aiDisbandTick` kesintiyi taban bakımla sayıyor (aşırı kesinti); kural değişmedi.
-4. Dokuz stratejik hedefin başarı ölçümü dolaylı (contain/security/recovery).
-5. Ekonomide kuyruk zamanı ve takip eden üreticinin finansmanı; seed11/404 geç dönem yeni devletleri.
-6. Büyük galaksi (120+ sistem) reddedildi; sınırlar 100/11. Fiziksel Android testi hiç çalıştırılmadı.
+1. Saldırı altındaki tersanede doğan ordular varışta ölüyor (96H.9 kontrolünde 11 gövde). Üretim yer seçimi tehdidi görmüyor.
+2. Savunma adımında ordular ileri-geri salınıyor (aday P ölçüldü ve reddedildi). Son şeritte ya da ara sistemde ölüm (D2 reddedildi).
+3. Yoksul saldırgan orduyu karşılayamıyor (aylık alaşım tavanı ve maden). Tutulan kuşatma 6 ayda katastrofa dönüyor (seed23 sys41, 5/5). Ekonomi eşiği; ayrı faz kararı.
+4. `incomingArmy` ateşkesi yalnız son atlayıştaki orduyu görüyor; 96H.9'daki 28 fethin hiçbirinde devreye girmedi. Motor kuralı.
+5. `jointAdvance` ve rally toplanma rotası konuşlanma bakım kapısının dışında (seed23 240 ayda 2 terhis).
+6. `aiDisbandTick` kesintiyi taban bakımla sayıyor (aşırı kesinti); ekonomide kuyruk zamanı sorunu sürüyor.
+7. Büyük galaksi (120+ sistem) reddedildi; sınırlar 100/11. Fiziksel Android testi hiç çalıştırılmadı.
 
 Reddedilmiş adaylar: `AI-RED-KARARLARI.md`.

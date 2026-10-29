@@ -1,14 +1,14 @@
 {
-  "phase": "96H.9",
-  "build": "96h9",
-  "scope": "Military AI invasion coordination: a campaign with a known colonised war target buys its ground army while it prepares (alloy-only shortfall reserves the army price from warships, never a grant), and the campaign force that reached the target holds the siege instead of being recalled to the rally every AI turn. Invasion, shield, garrison and combat rules, Save8 schema and RNG order unchanged.",
+  "phase": "96H.10",
+  "build": "96h10",
+  "scope": "Military AI army safety: an unarmed ground army is not sent into, and does not keep heading for, a system where visible hostile warships outgun the empire's own warships there or bound there (defence, staging and attack destinations; moving armies re-decided only when their destination turns unsafe or invalid). Invasion/shield/garrison/combat rules, economy thresholds, Save8 schema and RNG order unchanged.",
   "save_version": 8,
-  "pwa_cache": "stars-v96h9",
-  "parent_commit": "8413f6e5e8702c0c866f6ac3cfb8748177579e9d",
-  "parent_zip_sha256": "576511fd8a4a3e4b417a00129503ae79dd4e2ed4edff5dba4fe1045e9090b594",
+  "pwa_cache": "stars-v96h10",
+  "parent_commit": "54058e08e2f9102f6e4b37195f1490f6fa389f99",
+  "parent_zip_sha256": "d50b7969d523fb0a7279107cd0bc449c89aee31ccf3d8462038c377bb4891778",
   "file_count": 19,
   "files": {
-    "ai.js": "4d7270b6f84466db89fbf944a67c393861dda4485a421ddcabf145b84d6709ed",
+    "ai.js": "11485356c0e75c39d9dabb2fc06b50bfb425598d3d08a2b767fc691c39ce51c6",
     "archive-ui.js": "f3b43957f97f2a32add1f40fc22f493eeca89bc5e1db05e5a5de92eef0e9fc03",
     "audio.js": "6ddf6e388fa404394fee6220c2bfeeb3d1f9601c51a35ccdfe3181a8781942f7",
     "combat.js": "b4e21fcdb6fdaaa93da07313131470de3e8a3c28b5650226a9c4a2713bde73a5",
@@ -21,11 +21,11 @@
     "economy.js": "5d412d488760ae2b7193b13822b747788130b63ed782e62bfbd3223154b69d22",
     "inbox.js": "5f53ac2ca9c3ca8d5f1a12a9e1ba2b2a247ab7e350df0ec9169a13cfe3285204",
     "index.html": "984d2c51e33637a0b3312a072e3348b5e943f4c2c7156530affeb7d6ceb83259",
-    "main.js": "d9c051188f15b1a45508e440ac0d518d2d9fecd4d474b556d9db5495b4482a57",
+    "main.js": "40949866d6ebe7b5d90836b11c383e0d38f9f0d767520c500954a8e6d6e4c602",
     "manifest.json": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
     "map.js": "d8ca27ee07c484b7399f95d8031aa70fb7539bcf89d768c8442200b7cba76ae3",
     "news.js": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
-    "sw.js": "9e6867704714b611adae34abb582000dbb1172982c315777057b8401c136bdf3",
+    "sw.js": "1fb9b81e408c77014cc979636b5f7070d648507ca83661e83862782132c96216",
     "ui.js": "4b2139007f7d4f100afddefeb2769523c03cbd862b0e27678e0d5868c18e3283"
   }
 }
