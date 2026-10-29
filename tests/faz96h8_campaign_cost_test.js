@@ -4,13 +4,13 @@
    perpetual failed-target deadline and the wartime disband after an unfunded
    full dispatch. The 96H.7.1 control is rebuilt from the reviewed adapter. */
 const fs=require('fs'),os=require('os'),path=require('path'),assert=require('assert/strict'),crypto=require('crypto');
-const {runtime}=require('./helpers/runtime'),{harness}=require('./helpers/95e-fixture'),{stripReviewedH8}=require('./helpers/96h8-preservation'),{stripReviewedH9}=require('./helpers/96h9-preservation');
+const {runtime}=require('./helpers/runtime'),{harness}=require('./helpers/95e-fixture'),{stripReviewedH8}=require('./helpers/96h8-preservation'),{stripReviewedH9}=require('./helpers/96h9-preservation'),{stripReviewedH10}=require('./helpers/96h10-preservation');
 const {test,end}=harness(),root=path.resolve(__dirname,'..');
 const fixture=n=>fs.readFileSync(path.join(__dirname,'fixtures/96h8',n),'utf8');
 function legacyRoot(){
   const dir=fs.mkdtempSync(path.join(os.tmpdir(),'stars-96h71-'));
   for(const n of fs.readdirSync(root))if(/\.(js|html|json)$/.test(n)&&fs.statSync(path.join(root,n)).isFile())fs.symlinkSync(path.join(root,n),path.join(dir,n));
-  fs.unlinkSync(path.join(dir,'ai.js'));fs.writeFileSync(path.join(dir,'ai.js'),stripReviewedH8(stripReviewedH9(fs.readFileSync(path.join(root,'ai.js'),'utf8'))));
+  fs.unlinkSync(path.join(dir,'ai.js'));fs.writeFileSync(path.join(dir,'ai.js'),stripReviewedH8(stripReviewedH9(stripReviewedH10(fs.readFileSync(path.join(root,'ai.js'),'utf8')))));
   return dir;
 }
 function load(save,base=root){
@@ -88,6 +88,6 @@ test('natural 24 months from seed11 month 40: actor3 keeps its navy instead of t
 });
 test('only the reviewed 96H.8 campaign blocks differ from 96H.7.1 ai.js',()=>{
   const source=fs.readFileSync(path.join(root,'ai.js'),'utf8');
-  assert.equal(crypto.createHash('sha256').update(stripReviewedH8(stripReviewedH9(source))).digest('hex'),'f48608cc82ca46b5028c637dcabbfb1b3e2ae09f1e3c1eb24bd2c4c1b326d8d0');
+  assert.equal(crypto.createHash('sha256').update(stripReviewedH8(stripReviewedH9(stripReviewedH10(source)))).digest('hex'),'f48608cc82ca46b5028c637dcabbfb1b3e2ae09f1e3c1eb24bd2c4c1b326d8d0');
 });
 end();
