@@ -6,16 +6,27 @@ Son güncelleme: 2026-10-29. Depo `sarsiss12-dot/Star`.
 
 | | `main` (birleşmiş) | Bu dal (PR) |
 |---|---|---|
-| Faz | 96H.9 | 96H.10 |
-| Build / PWA | `96h9` / `stars-v96h9` | `96h10` / `stars-v96h10` |
-| Save | v8 | v8 (şema değişmedi) |
-| Oyun ZIP | `releases/stars-faz96h9.zip` | `releases/stars-faz96h10.zip` |
-| Taban HEAD | `54058e08e2f9102f6e4b37195f1490f6fa389f99` | — |
-| Değişen runtime | — | `ai.js` (`aiArmyTick` ordu güvenliği), `main.js` (`BUILD_ID`), `sw.js` (`CACHE`) |
+| Faz | 96H.10 | 96H.11 (yalnız araştırma) |
+| Build / PWA | `96h10` / `stars-v96h10` | değişmedi |
+| Save | v8 | v8 |
+| Oyun ZIP | `releases/stars-faz96h10.zip` (SHA-256 `78e76d1627b8ec1b990849b2242835f78667f110e1d6f17021760183ee7be6d0`) | yeni ZIP yok |
+| Taban HEAD | `667cf567200c2e8a430856e14b3e395d31623b99` | — |
+| Değişen runtime | — | yok (19 dosya 96H.10 ile aynı) |
 
-96H.6.2, 96H.6.3 ve 96H.7 yalnız araştırmadır; oyun yayımlamadılar.
+96H.6.2, 96H.6.3, 96H.7 ve 96H.11 yalnız araştırmadır; oyun yayımlamadılar.
 
-## 96H.10 — kara ordusu güvenliği (kabul edildi)
+## 96H.11 — AI gezegen uzmanlaşması ve inşa verimliliği (araştırma, sürüm yok)
+
+Ayrıntı: `AI-GEZEGEN-VERIMLILIGI-96H11.md`. Kanıt: `research/96h11/`.
+
+- **İki inşa mekanizması çatışmıyor.** `directiveTick` `diploTick` içinde önce, `aiTurn` sonra çalışıyor. AI'nın ücretli emirlerinin %98,3'ü `aiTurn`'den. Otomasyon (%1,7) mineral 400 / alaşım 300 tabanında ve dolu kuyrukta bekliyor; bu bilinçli bekleme.
+- **Odak salınımı bedelsiz.** Gezegen başına araştırma tahsisinin tavanı küçük (≤%0,7).
+- **Kanıtlanan kusurlar:**
+  1. Yıkım–yeniden inşa döngüsü: yıkımların %27'si.
+  2. Başkent tipi odak (Yönetim) bütün anavatan sistemine uygulanıyor (4/8 seed). Örnek seed11, 120 ay: +605 Etki için −4392 mineral, −1622 alaşım, −3674 enerji.
+- **Adaylar R, B1, M, BM, BM2, BM4 reddedildi.** Nedenler: stoklama; seed42'de zayıf devletin mineral ve tüketim malı krizi; yaygın araştırma kaybı; ticaret koruması (seed11 240 ay teslimat medyanı 288 → 95).
+
+## 96H.10 — kara ordusu güvenliği (kabul edildi, `main`)
 
 Ayrıntı: `AI-KARA-ORDUSU-GUVENLIGI-96H10.md`. Kanıt: `research/96h10/`. Testler: `tests/faz96h10_army_safety_test.js`, `tests/browser-96h10.cjs`.
 
@@ -81,7 +92,8 @@ Sabit başarısız-hedef beklemesi, sevk öncesi gerçek bakım kapısı, karş�
 ## Bilinen test durumu (Node v22.22.0)
 
 - Tam regresyon: taban `54058e0` 138 paket 6098 PASS / 3 FAIL; 96H.10 139 paket 6109 PASS / 3 FAIL (mevcut 138 paket aynı, yeni paket 11 PASS). Chromium `browser-96h10.cjs` 27/27 PASS, sayfa hatası 0.
-- Önceden var olan 3 FAIL: `faz95d_identity_test.js`, seed 11/99/404 coğrafya koordinatlarında son ondalık basamak farkı (Node/V8 kayan nokta). 96H.7.1–96H.10'da değişiklikten önce ve sonra aynı. Fixture yenilenmedi.
+- 96H.11 (runtime değişmedi, `667cf56` ağacı): 139 paket 6109 PASS / 3 FAIL (aynı 3 FAIL); Chromium `browser-96h10.cjs` 27/27 PASS, sayfa hatası 0; `verify-release.py` ZIP kökünde DOĞRULANDI (19 dosya, build 96h10).
+- Önceden var olan 3 FAIL: `faz95d_identity_test.js`, seed 11/99/404 coğrafya koordinatlarında son ondalık basamak farkı (Node/V8 kayan nokta). 96H.7.1–96H.11'de değişiklikten önce ve sonra aynı. Fixture yenilenmedi.
 - Test yan etkisi: `tests/navy-95a-after-*.json`, `tests/audit-95d/…`, `tests/audit96e1/…`, `tests/audit96g2/`; commit öncesi geri alın.
 
 ## Açık konular (sıralı)
@@ -93,5 +105,7 @@ Sabit başarısız-hedef beklemesi, sevk öncesi gerçek bakım kapısı, karş�
 5. `jointAdvance` ve rally toplanma rotası konuşlanma bakım kapısının dışında (seed23 240 ayda 2 terhis).
 6. `aiDisbandTick` kesintiyi taban bakımla sayıyor (aşırı kesinti); ekonomide kuyruk zamanı sorunu sürüyor.
 7. Büyük galaksi (120+ sistem) reddedildi; sınırlar 100/11. Fiziksel Android testi hiç çalıştırılmadı.
+8. Ekonomi (96H.11): yerine koyma puanı dökümhaneyi negatif değerli sayıyor; yıkımların %27'si sökülen binayı yeniden inşa ediyor.
+9. Ekonomi (96H.11): başkent tipi odak bütün anavatan sistemine uygulanıyor. Düzeltme, genel odak zincirinin litoit dışı sanayi açığına yanıt vermemesini açığa çıkarıyor; önce o yanıt tek başına ölçülmeli.
 
 Reddedilmiş adaylar: `AI-RED-KARARLARI.md`.

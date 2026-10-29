@@ -1,0 +1,36 @@
+{
+ "phase": "96H.11",
+ "decision": "NO_GAME_RELEASE",
+ "production": "96H.10 (build 96h10, PWA stars-v96h10, Save v8) unchanged",
+ "start_head": "667cf567200c2e8a430856e14b3e395d31623b99",
+ "control_ai_sha256": "11485356c0e75c39d9dabb2fc06b50bfb425598d3d08a2b767fc691c39ce51c6",
+ "control_pinning": "git show 667cf56:ai.js private copy (no symlink)",
+ "measured_defects": {
+  "dual_build": "No conflict. aiDirectiveTick/directiveTick run inside diploTick (main.js:9101, diplomacy.js:5597-5608) before the aiTurn loop (main.js:9116). Automation = 28 of 1639 paid AI orders (1.71%); blocked by mineral<400 (41.8%), queue busy (42.6%), alloy<300 (12.6%). Same colony same month 5, same building 1. Not a defect: aiTurn already applies the same aiEconomicOrder filter.",
+  "focus_flip": "Monthly sanayi/arastir/tarim limit cycle around empire thresholds (FOCUS_COOLDOWN 30 days). Multipliers are linear in time: no switching cost. Oracle per-colony research allocation saves <=0.7% of min+ala income. Not a defect worth code.",
+  "capital_type_focus": "Rule e.home===sys.id forces every home-system colony to yonetim. 4/8 seeds, 2 empires each from month 2. seed11 120 months: +605 etk vs sanayi -4392 min -1622 ala -3674 ene. Proven inefficiency, but the fix exposes weak empires to a generic focus chain that ignores non-lithoid industrial deficits.",
+  "replacement_churn": "331 AI demolitions in 8x120; 88 (27%) followed by rebuilding the demolished key (84 within 6 months); only 41% build the wanted building next. The replacement scorer values a foundry (-14.65 min, +11.63 ala, -3.2 ene per month) as net negative. Known since 96H.6 (C1/C2 rejected)."
+ },
+ "candidates": {
+  "R": "REJECTED: replacement must add more marginal value than it removes. Demolitions 331->229 but same-key rebuilds 88->85; techs 336->312, mineral stock 68k->86k (stockpiling).",
+  "B1": "REJECTED: only the first live home-system colony keeps yonetim. Untriggered seeds byte-identical; triggered gains, but seed42 empire4 mineral trap: crisis months [3,45,9,57,57] vs control [1,0,0,2,2] (outside band).",
+  "M": "REJECTED alone: e.inc.min<0 counts like the lithoid mineral crisis. Triggered 23/99/123; no effect outside the placebo bands.",
+  "BM": "REJECTED: B1+M. 120 months good (canonical 8x120 techs 336->352, crisis months 14->11, deliveries 417->513) but seed42 empire4 240-month min/tuk crisis median 98 [1..129] vs control 1 [0..55].",
+  "BM2": "REJECTED: B1 + any ene/min/ala/tuk deficit -> sanayi. Fixes seed42 but triggers everywhere; 8x120 crisis months 14->25, techs 336->328 (seed11 0->13 crisis months).",
+  "BM4": "REJECTED: B1 + sanayi when aiEconomicOrder's own urgency criterion marks ene/min/ala/tuk urgent. Crisis equal or lower in 7/8 seeds at 120 (seed99 median 0->1), seed42 240 crisis fixed, several outputs above band. Fails trade protection: seed11 240 deliveries median 288->95 (mean -34%), seed7 120 median 104->52; seed404 world ships/power below band (end-of-horizon war, 3 effective worlds). Broad: changes every seed."
+ },
+ "gates": {
+  "proven_defect": "PASS for capital-type focus and replacement churn",
+  "real_net_gain": "PARTIAL (B1/BM/BM4 above band in several worlds)",
+  "no_stockpile_only": "FAIL for R",
+  "no_longer_crisis": "FAIL for B1 (120) and BM (240); PASS for BM4 except seed99 median +1",
+  "trade_protection_85pct": "FAIL for BM4 (seed11 240, seed7 120 medians)",
+  "player_untouched": "PASS (aiTurn only)",
+  "focus_rules_respected": "PASS (setFocus, fcd, oneparty unchanged)",
+  "save8_rng": "PASS (no new state; first month RNG identical in fixture check)",
+  "military_gains": "NOT CLAIMED (no production change)"
+ },
+ "release": "none; ZIP releases/stars-faz96h10.zip remains canonical",
+ "android": "NOT RUN",
+ "next_narrow_step": "Give the generic focus chain a non-lithoid industrial-deficit response that does not reduce research elsewhere, measured alone; then reconsider B1 with a trade (etk -> commerce) analysis."
+}

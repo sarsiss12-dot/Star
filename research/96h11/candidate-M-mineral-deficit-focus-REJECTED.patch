@@ -1,0 +1,11 @@
+--- a/ai.js	2026-10-29 11:12:41.315710660 +0000
++++ b/ai.js	2026-10-29 11:12:41.319736964 +0000
+@@ -1626,7 +1626,7 @@
+     if (e.home === sys.id) want = 'yonetim';
+     else if ((atWarNow && border) || (prof.turtle > .5 && border && threatAt(e, sys.id) > 0)) want = 'garnizon';
+     else if (identityEatsFood(e) && (e.crisis === 'yiyecek' || e.inc.yiy < 3)) want = 'tarim';
+-    else if (e.crisis === 'mineral') want = 'sanayi';
++    else if (e.crisis === 'mineral' || e.inc.min < 0) want = 'sanayi';   // 96H.11: mineral açığı her türde
+     else if (e.inc.ara < 18 + prof.sci*22) want = 'arastir';
+     else want = 'sanayi';
+     if (pl.col.f !== want) setFocus(e, sys, pl, want);
