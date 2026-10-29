@@ -1,0 +1,163 @@
+{
+  "results": [
+    {
+      "name": "single-player shell is unchanged: / loads without MP code and every runtime file is served byte-identical to the manifest",
+      "status": "PASS"
+    },
+    {
+      "name": "host starts the real seed11 galaxy in its own browser process and registers the room",
+      "status": "PASS"
+    },
+    {
+      "name": "second browser process joins: gets a player identity, no empire, and runs no simulation",
+      "status": "PASS"
+    },
+    {
+      "name": "host assigns empire 3 to the second player; the client receives its own filtered snapshot",
+      "status": "PASS"
+    },
+    {
+      "name": "both players observe the same host game time (deterministic host steps)",
+      "status": "PASS"
+    },
+    {
+      "name": "real build command from the client UI: host validates with queueBuilding, result is visible on both sides",
+      "status": "PASS"
+    },
+    {
+      "name": "duplicate packet: the same command id sent twice is applied exactly once",
+      "status": "PASS"
+    },
+    {
+      "name": "unauthorized, forged, unknown, malformed, oversized and stale commands are refused; canonical Save8 unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "a third isolated browser context cannot impersonate player 2 or take its empire",
+      "status": "PASS"
+    },
+    {
+      "name": "host canonical result equals a plain-engine replay of the host journal (Node vm, same seed and commands)",
+      "status": "PASS"
+    },
+    {
+      "name": "real-time host loop: the client follows the running game clock (speed 1, then pause)",
+      "status": "PASS"
+    },
+    {
+      "name": "gap and stale packets: a dropped delta triggers a safe resync; an old packet never overwrites newer state",
+      "status": "PASS"
+    },
+    {
+      "name": "AI never acts for the human empire over 6 months: no AI turn, no automatic deal, no inherited automation",
+      "status": "PASS"
+    },
+    {
+      "name": "leak scan: every packet received by player 2 carries only empire-3 knowledge",
+      "status": "PASS"
+    },
+    {
+      "name": "client reload reconnects to the same player and empire with a full snapshot; sequence numbers continue",
+      "status": "PASS"
+    },
+    {
+      "name": "host disconnect pauses the client: no commands, no clock change, no local simulation",
+      "status": "PASS"
+    },
+    {
+      "name": "host resumes from Save8 + separate session metadata: same seats, same empire, same day; commands work again",
+      "status": "PASS"
+    },
+    {
+      "name": "performance sample: snapshot/delta size, publish and command cost, RTT, heap, monthly simulation time",
+      "status": "PASS"
+    },
+    {
+      "name": "client layout on phone portrait and landscape: 44 px touch targets, no horizontal overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "no uncaught page errors in host, client or third context",
+      "status": "PASS"
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "browserProfiles": 2,
+    "hostStart": {
+      "day": 0,
+      "rng": -1449254009,
+      "speed": 0,
+      "p": 0
+    },
+    "client2": "p-b368dcb66d43",
+    "commandRttMs": 132,
+    "third": "p-450da6a355bd",
+    "replay": {
+      "journal": 3,
+      "differingKeys": [
+        "log",
+        "sys",
+        "fl"
+      ],
+      "rngEqual": true,
+      "firstDiffIgnoringLog": null,
+      "floatLastDigit": {
+        "n": 39,
+        "max": 2.1567573802235175e-15,
+        "paths": [
+          "/sys/14/x",
+          "/sys/14/y",
+          "/sys/15/y",
+          "/sys/17/y",
+          "/sys/25/x"
+        ]
+      }
+    },
+    "live": {
+      "speed": 3,
+      "seconds": 4,
+      "days": 18,
+      "clientBytes": 6290,
+      "clientMsgs": 19,
+      "bytesPerSecond": 1573
+    },
+    "aiGuard": {
+      "aiTurns": 30,
+      "dealsWithHuman": 0,
+      "blockedAI": 0,
+      "humanCommands": 2
+    },
+    "client": {
+      "packets": 48,
+      "bytes": 26798,
+      "maxPacket": 4640,
+      "saveBytes": 192311,
+      "knownSystemsEver": 9,
+      "hiddenSystems": 36
+    },
+    "perf": {
+      "snapshotBytes": [
+        5341
+      ],
+      "deltaBytesAvg": 596.6,
+      "deltaBytesMax": 751,
+      "publishMsAvg": 0.7,
+      "publishMsMax": 2,
+      "commandMsAvg": 1,
+      "monthTickMsAvg": 36,
+      "monthTickMsMax": 80.60000000009313,
+      "pingRttMsAvg": 148.3,
+      "pingRttMsMax": 200,
+      "hostHeapBytes": 21413886,
+      "clientHeapBytes": 5124262,
+      "clientMsgs": 23,
+      "clientBytes": 17215,
+      "hostMsgsOut": 20,
+      "hostBytesOut": 11470,
+      "relay": 127
+    }
+  },
+  "pass": 20,
+  "fail": 0
+}
