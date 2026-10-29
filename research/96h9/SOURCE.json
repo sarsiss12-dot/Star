@@ -1,0 +1,32 @@
+{
+ "base_commit": "8413f6e5e8702c0c866f6ac3cfb8748177579e9d",
+ "ai_sha256": {
+  "96H.8 control": "8141a3fb691db340e66f267a9a94f942d3cb7e2cd542829bbb7493545bff16b0",
+  "A siege-opportunity (REJECTED)": "de38232d6440f046b831619a57794c57801ea237b25392b0fd1a8d2750fa7c7f",
+  "B army procurement only (REJECTED alone)": "0ea579dea234d53bff0445dd670b1b0ab071cc54857df014a7636446f41b3817",
+  "C siege hold only (REJECTED alone)": "02bbc5833ab256ea3383616cac6844905ed35364c0c4d4bfcf2a40278a0de5d0",
+  "BC = 96H.9 (ACCEPTED)": "4d7270b6f84466db89fbf944a67c393861dda4485a421ddcabf145b84d6709ed"
+ },
+ "patches": "candidate-*.patch apply to 96H.8 ai.js and reproduce the hashes above (verified with patch(1)).",
+ "inputs": {
+  "seed11 canonical month0 (replay.js 45/5 spiral, orta, council/crisis off)": "f5ddc95bc4d0e84487b82c011337e28323d8eeeede0a3de4028f0824bd804cf0",
+  "seed23 canonical month0": "fc13c68bac267d7235aa5de96a708ffd639e08be792f41398fda4122035e49bb",
+  "tests/fixtures/96h8/seed11-month40.save": "77a353f81d1027db56c24575f7e4b022be8947b1b8eb08131b5627b555f695cd",
+  "tests/fixtures/96h8/seed11-month60.save": "d4f9f2f9c63a5257ce02011fd838ce35e0baa5e78c8c74a82185728fd7ce359d",
+  "seed23 canonical control month15 checkpoint": "e883f6893d1e8f59e3d5285193a4c118037b4535633970c158daa3ef0cef181d"
+ },
+ "fixtures": {
+  "tests/fixtures/96h9/seed11-month66-siege.save": {
+   "sha256": "a512ad5ea83a1799ad63b0d01379d7302fca4232157a8e11bede311e57fc5b84",
+   "made_by": "PLACEBO_DAY=1230 PLACEBO_RNG=4 node scripts/checkpoint2.js <96H.9 root> tests/fixtures/96h8/seed11-month40.save 26 out.save",
+   "reproduced": true
+  },
+  "tests/fixtures/96h9/seed11-month79-escort.save": {
+   "sha256": "05040676705e234992855b88cc32fbb4dadc4a3b6fb117942acab9d1bdb29ce0",
+   "made_by": "node scripts/checkpoint.js <candidate B root> <seed11 canonical month0> 79 out.save 60   (Save8 reload at month 60)",
+   "reproduced": true
+  }
+ },
+ "control_arm_note": "Control runs use a pinned copy of the 96H.8 ai.js (not a link to the working tree). Four seed23 placebo control runs that had been started from a linked control root after the 96H.9 port were discarded and rerun with the pinned root; every control run in these summaries has aiSHA 8141a3fb… and its final Save SHA equals the pre-port control run.",
+ "node": "v22.22.0"
+}

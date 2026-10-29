@@ -1,0 +1,421 @@
+{
+ "note": "army fleets seen in monthly snapshots; consumed = disappears within a month of a clean (temiz) invasion, else lost/other",
+ "arms": {
+  "seed11-96H.8": {
+   "perWorld": [
+    {
+     "armiesSeen": 0,
+     "endedBeforeHorizon": 0,
+     "consumedByCleanInvasion": 0,
+     "lostOrOther": 0,
+     "armyMonthsAtWar": 0,
+     "armyMonthsInOrbitWithoutOwnWarships": 0
+    },
+    {
+     "armiesSeen": 4,
+     "endedBeforeHorizon": 1,
+     "consumedByCleanInvasion": 0,
+     "lostOrOther": 1,
+     "armyMonthsAtWar": 0,
+     "armyMonthsInOrbitWithoutOwnWarships": 0
+    },
+    {
+     "armiesSeen": 2,
+     "endedBeforeHorizon": 0,
+     "consumedByCleanInvasion": 0,
+     "lostOrOther": 0,
+     "armyMonthsAtWar": 6,
+     "armyMonthsInOrbitWithoutOwnWarships": 0
+    },
+    {
+     "armiesSeen": 4,
+     "endedBeforeHorizon": 4,
+     "consumedByCleanInvasion": 2,
+     "lostOrOther": 2,
+     "armyMonthsAtWar": 162,
+     "armyMonthsInOrbitWithoutOwnWarships": 0
+    },
+    {
+     "armiesSeen": 3,
+     "endedBeforeHorizon": 0,
+     "consumedByCleanInvasion": 0,
+     "lostOrOther": 0,
+     "armyMonthsAtWar": 114,
+     "armyMonthsInOrbitWithoutOwnWarships": 0
+    }
+   ],
+   "total": {
+    "armiesSeen": 13,
+    "endedBeforeHorizon": 5,
+    "consumedByCleanInvasion": 2,
+    "lostOrOther": 3,
+    "armyMonthsAtWar": 282,
+    "armyMonthsInOrbitWithoutOwnWarships": 0
+   }
+  },
+  "seed11-B": {
+   "perWorld": [
+    {
+     "armiesSeen": 10,
+     "endedBeforeHorizon": 7,
+     "consumedByCleanInvasion": 2,
+     "lostOrOther": 5,
+     "armyMonthsAtWar": 51,
+     "armyMonthsInOrbitWithoutOwnWarships": 0
+    },
+    {
+     "armiesSeen": 14,
+     "endedBeforeHorizon": 14,
+     "consumedByCleanInvasion": 3,
+     "lostOrOther": 11,
+     "armyMonthsAtWar": 155,
+     "armyMonthsInOrbitWithoutOwnWarships": 0
+    },
+    {
+     "armiesSeen": 16,
+     "endedBeforeHorizon": 16,
+     "consumedByCleanInvasion": 6,
+     "lostOrOther": 10,
+     "armyMonthsAtWar": 113,
+     "armyMonthsInOrbitWithoutOwnWarships": 0
+    },
+    {
+     "armiesSeen": 10,
+     "endedBeforeHorizon": 8,
+     "consumedByCleanInvasion": 2,
+     "lostOrOther": 6,
+     "armyMonthsAtWar": 83,
+     "armyMonthsInOrbitWithoutOwnWarships": 0
+    },
+    {
+     "armiesSeen": 5,
+     "endedBeforeHorizon": 4,
+     "consumedByCleanInvasion": 2,
+     "lostOrOther": 2,
+     "armyMonthsAtWar": 90,
+     "armyMonthsInOrbitWithoutOwnWarships": 0
+    }
+   ],
+   "total": {
+    "armiesSeen": 55,
+    "endedBeforeHorizon": 49,
+    "consumedByCleanInvasion": 15,
+    "lostOrOther": 34,
+    "armyMonthsAtWar": 492,
+    "armyMonthsInOrbitWithoutOwnWarships": 0
+   }
+  },
+  "seed11-C": {
+   "perWorld": [
+    {
+     "armiesSeen": 1,
+     "endedBeforeHorizon": 1,
+     "consumedByCleanInvasion": 0,
+     "lostOrOther": 1,
+     "armyMonthsAtWar": 12,
+     "armyMonthsInOrbitWithoutOwnWarships": 0
+    },
+    {
+     "armiesSeen": 1,
+     "endedBeforeHorizon": 0,
+     "consumedByCleanInvasion": 0,
+     "lostOrOther": 0,
+     "armyMonthsAtWar": 0,
+     "armyMonthsInOrbitWithoutOwnWarships": 0
+    },
+    {
+     "armiesSeen": 3,
+     "endedBeforeHorizon": 1,
+     "consumedByCleanInvasion": 1,
+     "lostOrOther": 0,
+     "armyMonthsAtWar": 29,
+     "armyMonthsInOrbitWithoutOwnWarships": 0
+    },
+    {
+     "armiesSeen": 5,
+     "endedBeforeHorizon": 0,
+     "consumedByCleanInvasion": 0,
+     "lostOrOther": 0,
+     "armyMonthsAtWar": 244,
+     "armyMonthsInOrbitWithoutOwnWarships": 0
+    },
+    {
+     "armiesSeen": 4,
+     "endedBeforeHorizon": 2,
+     "consumedByCleanInvasion": 0,
+     "lostOrOther": 2,
+     "armyMonthsAtWar": 83,
+     "armyMonthsInOrbitWithoutOwnWarships": 0
+    }
+   ],
+   "total": {
+    "armiesSeen": 14,
+    "endedBeforeHorizon": 4,
+    "consumedByCleanInvasion": 1,
+    "lostOrOther": 3,
+    "armyMonthsAtWar": 368,
+    "armyMonthsInOrbitWithoutOwnWarships": 0
+   }
+  },
+  "seed11-BC=96H.9": {
+   "perWorld": [
+    {
+     "armiesSeen": 6,
+     "endedBeforeHorizon": 4,
+     "consumedByCleanInvasion": 3,
+     "lostOrOther": 1,
+     "armyMonthsAtWar": 74,
+     "armyMonthsInOrbitWithoutOwnWarships": 0
+    },
+    {
+     "armiesSeen": 17,
+     "endedBeforeHorizon": 15,
+     "consumedByCleanInvasion": 2,
+     "lostOrOther": 13,
+     "armyMonthsAtWar": 37,
+     "armyMonthsInOrbitWithoutOwnWarships": 0
+    },
+    {
+     "armiesSeen": 4,
+     "endedBeforeHorizon": 2,
+     "consumedByCleanInvasion": 2,
+     "lostOrOther": 0,
+     "armyMonthsAtWar": 54,
+     "armyMonthsInOrbitWithoutOwnWarships": 0
+    },
+    {
+     "armiesSeen": 8,
+     "endedBeforeHorizon": 4,
+     "consumedByCleanInvasion": 3,
+     "lostOrOther": 1,
+     "armyMonthsAtWar": 39,
+     "armyMonthsInOrbitWithoutOwnWarships": 0
+    },
+    {
+     "armiesSeen": 10,
+     "endedBeforeHorizon": 4,
+     "consumedByCleanInvasion": 3,
+     "lostOrOther": 1,
+     "armyMonthsAtWar": 23,
+     "armyMonthsInOrbitWithoutOwnWarships": 0
+    }
+   ],
+   "total": {
+    "armiesSeen": 45,
+    "endedBeforeHorizon": 29,
+    "consumedByCleanInvasion": 13,
+    "lostOrOther": 16,
+    "armyMonthsAtWar": 227,
+    "armyMonthsInOrbitWithoutOwnWarships": 0
+   }
+  },
+  "seed23-96H.8": {
+   "perWorld": [
+    {
+     "armiesSeen": 14,
+     "endedBeforeHorizon": 10,
+     "consumedByCleanInvasion": 0,
+     "lostOrOther": 10,
+     "armyMonthsAtWar": 185,
+     "armyMonthsInOrbitWithoutOwnWarships": 0
+    },
+    {
+     "armiesSeen": 7,
+     "endedBeforeHorizon": 3,
+     "consumedByCleanInvasion": 0,
+     "lostOrOther": 3,
+     "armyMonthsAtWar": 32,
+     "armyMonthsInOrbitWithoutOwnWarships": 0
+    },
+    {
+     "armiesSeen": 7,
+     "endedBeforeHorizon": 1,
+     "consumedByCleanInvasion": 0,
+     "lostOrOther": 1,
+     "armyMonthsAtWar": 207,
+     "armyMonthsInOrbitWithoutOwnWarships": 0
+    },
+    {
+     "armiesSeen": 1,
+     "endedBeforeHorizon": 1,
+     "consumedByCleanInvasion": 0,
+     "lostOrOther": 1,
+     "armyMonthsAtWar": 7,
+     "armyMonthsInOrbitWithoutOwnWarships": 0
+    },
+    {
+     "armiesSeen": 6,
+     "endedBeforeHorizon": 6,
+     "consumedByCleanInvasion": 0,
+     "lostOrOther": 6,
+     "armyMonthsAtWar": 61,
+     "armyMonthsInOrbitWithoutOwnWarships": 0
+    }
+   ],
+   "total": {
+    "armiesSeen": 35,
+    "endedBeforeHorizon": 21,
+    "consumedByCleanInvasion": 0,
+    "lostOrOther": 21,
+    "armyMonthsAtWar": 492,
+    "armyMonthsInOrbitWithoutOwnWarships": 0
+   }
+  },
+  "seed23-B": {
+   "perWorld": [
+    {
+     "armiesSeen": 10,
+     "endedBeforeHorizon": 6,
+     "consumedByCleanInvasion": 1,
+     "lostOrOther": 5,
+     "armyMonthsAtWar": 3,
+     "armyMonthsInOrbitWithoutOwnWarships": 0
+    },
+    {
+     "armiesSeen": 9,
+     "endedBeforeHorizon": 9,
+     "consumedByCleanInvasion": 0,
+     "lostOrOther": 9,
+     "armyMonthsAtWar": 58,
+     "armyMonthsInOrbitWithoutOwnWarships": 0
+    },
+    {
+     "armiesSeen": 11,
+     "endedBeforeHorizon": 6,
+     "consumedByCleanInvasion": 1,
+     "lostOrOther": 5,
+     "armyMonthsAtWar": 313,
+     "armyMonthsInOrbitWithoutOwnWarships": 0
+    },
+    {
+     "armiesSeen": 8,
+     "endedBeforeHorizon": 3,
+     "consumedByCleanInvasion": 1,
+     "lostOrOther": 2,
+     "armyMonthsAtWar": 37,
+     "armyMonthsInOrbitWithoutOwnWarships": 0
+    },
+    {
+     "armiesSeen": 13,
+     "endedBeforeHorizon": 10,
+     "consumedByCleanInvasion": 1,
+     "lostOrOther": 9,
+     "armyMonthsAtWar": 65,
+     "armyMonthsInOrbitWithoutOwnWarships": 0
+    }
+   ],
+   "total": {
+    "armiesSeen": 51,
+    "endedBeforeHorizon": 34,
+    "consumedByCleanInvasion": 4,
+    "lostOrOther": 30,
+    "armyMonthsAtWar": 476,
+    "armyMonthsInOrbitWithoutOwnWarships": 0
+   }
+  },
+  "seed23-C": {
+   "perWorld": [
+    {
+     "armiesSeen": 12,
+     "endedBeforeHorizon": 7,
+     "consumedByCleanInvasion": 0,
+     "lostOrOther": 7,
+     "armyMonthsAtWar": 0,
+     "armyMonthsInOrbitWithoutOwnWarships": 0
+    },
+    {
+     "armiesSeen": 5,
+     "endedBeforeHorizon": 0,
+     "consumedByCleanInvasion": 0,
+     "lostOrOther": 0,
+     "armyMonthsAtWar": 215,
+     "armyMonthsInOrbitWithoutOwnWarships": 0
+    },
+    {
+     "armiesSeen": 8,
+     "endedBeforeHorizon": 3,
+     "consumedByCleanInvasion": 1,
+     "lostOrOther": 2,
+     "armyMonthsAtWar": 204,
+     "armyMonthsInOrbitWithoutOwnWarships": 0
+    },
+    {
+     "armiesSeen": 8,
+     "endedBeforeHorizon": 1,
+     "consumedByCleanInvasion": 0,
+     "lostOrOther": 1,
+     "armyMonthsAtWar": 0,
+     "armyMonthsInOrbitWithoutOwnWarships": 0
+    },
+    {
+     "armiesSeen": 5,
+     "endedBeforeHorizon": 1,
+     "consumedByCleanInvasion": 0,
+     "lostOrOther": 1,
+     "armyMonthsAtWar": 0,
+     "armyMonthsInOrbitWithoutOwnWarships": 0
+    }
+   ],
+   "total": {
+    "armiesSeen": 38,
+    "endedBeforeHorizon": 12,
+    "consumedByCleanInvasion": 1,
+    "lostOrOther": 11,
+    "armyMonthsAtWar": 419,
+    "armyMonthsInOrbitWithoutOwnWarships": 0
+   }
+  },
+  "seed23-BC=96H.9": {
+   "perWorld": [
+    {
+     "armiesSeen": 11,
+     "endedBeforeHorizon": 4,
+     "consumedByCleanInvasion": 0,
+     "lostOrOther": 4,
+     "armyMonthsAtWar": 0,
+     "armyMonthsInOrbitWithoutOwnWarships": 0
+    },
+    {
+     "armiesSeen": 5,
+     "endedBeforeHorizon": 1,
+     "consumedByCleanInvasion": 0,
+     "lostOrOther": 1,
+     "armyMonthsAtWar": 0,
+     "armyMonthsInOrbitWithoutOwnWarships": 0
+    },
+    {
+     "armiesSeen": 6,
+     "endedBeforeHorizon": 4,
+     "consumedByCleanInvasion": 0,
+     "lostOrOther": 4,
+     "armyMonthsAtWar": 148,
+     "armyMonthsInOrbitWithoutOwnWarships": 0
+    },
+    {
+     "armiesSeen": 5,
+     "endedBeforeHorizon": 0,
+     "consumedByCleanInvasion": 0,
+     "lostOrOther": 0,
+     "armyMonthsAtWar": 0,
+     "armyMonthsInOrbitWithoutOwnWarships": 0
+    },
+    {
+     "armiesSeen": 7,
+     "endedBeforeHorizon": 6,
+     "consumedByCleanInvasion": 1,
+     "lostOrOther": 5,
+     "armyMonthsAtWar": 112,
+     "armyMonthsInOrbitWithoutOwnWarships": 0
+    }
+   ],
+   "total": {
+    "armiesSeen": 34,
+    "endedBeforeHorizon": 15,
+    "consumedByCleanInvasion": 1,
+    "lostOrOther": 14,
+    "armyMonthsAtWar": 260,
+    "armyMonthsInOrbitWithoutOwnWarships": 0
+   }
+  }
+ }
+}

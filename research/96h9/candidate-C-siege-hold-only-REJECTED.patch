@@ -1,0 +1,15 @@
+--- a/ai.js
++++ b/ai.js
+@@ -766,8 +766,11 @@
+     since:continuing?old.since:G.day,until:continuing&&old.until>G.day?old.until:G.day+180,
+     need,power:reachable,reason:reachable<need?'Tahmini savunma için kuvvet yetersiz':gathered<need?'Ulaşabilir filolar toplanıyor':fund?'Sefer bakımı mevcut enerji/alaşım stokuyla karşılanamıyor':reason};
+   for(const f of send)aiMove(e,f,target.id);
++  // 96H.9: a force that reached the campaign target holds the siege. Pulling
++  // every idle fleet back to the rally each AI turn broke bombardment within a
++  // month and left arriving armies without an escort.
+   for(const f of force){
+-    if(f.mv||f.path.length||f.sys===rally.id||ready.includes(f))continue;
++    if(f.mv||f.path.length||f.sys===rally.id||f.sys===target.id||ready.includes(f))continue;
+     aiMove(e,f,rally.id);
+   }
+ }

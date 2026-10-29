@@ -1,0 +1,1257 @@
+{
+ "s11m60": {
+  "control": {
+   "captures": [],
+   "falls": {},
+   "actorColonies": [
+    2,
+    2
+   ],
+   "actorShips": [
+    19,
+    43
+   ],
+   "actorPower": [
+    2462,
+    6196
+   ],
+   "actorEnergy": [
+    1998,
+    2540
+   ],
+   "minNet": -5.5,
+   "armiesUsed": 0,
+   "groundArmyLost": 0,
+   "siegeMonths": 2,
+   "disband": 0,
+   "crit": 0,
+   "galaxyShips": 90,
+   "alive": 5
+  },
+  "control-pl1": {
+   "captures": [],
+   "falls": {},
+   "actorColonies": [
+    2,
+    4
+   ],
+   "actorShips": [
+    19,
+    36
+   ],
+   "actorPower": [
+    2462,
+    5257
+   ],
+   "actorEnergy": [
+    1998,
+    3138
+   ],
+   "minNet": -15.4,
+   "armiesUsed": 0,
+   "groundArmyLost": 0,
+   "siegeMonths": 4,
+   "disband": 0,
+   "crit": 0,
+   "galaxyShips": 79,
+   "alive": 5
+  },
+  "control-pl2": {
+   "captures": [
+    [
+     95,
+     41,
+     5,
+     [
+      3
+     ]
+    ]
+   ],
+   "falls": {
+    "katastrof": 1
+   },
+   "actorColonies": [
+    2,
+    3
+   ],
+   "actorShips": [
+    19,
+    41
+   ],
+   "actorPower": [
+    2462,
+    6540
+   ],
+   "actorEnergy": [
+    1998,
+    2459
+   ],
+   "minNet": -5.5,
+   "armiesUsed": 0,
+   "groundArmyLost": 0,
+   "siegeMonths": 4,
+   "disband": 0,
+   "crit": 0,
+   "galaxyShips": 90,
+   "alive": 5
+  },
+  "control-pl3": {
+   "captures": [],
+   "falls": {},
+   "actorColonies": [
+    2,
+    3
+   ],
+   "actorShips": [
+    19,
+    43
+   ],
+   "actorPower": [
+    2462,
+    6297
+   ],
+   "actorEnergy": [
+    1998,
+    2763
+   ],
+   "minNet": -5.5,
+   "armiesUsed": 0,
+   "groundArmyLost": 0,
+   "siegeMonths": 4,
+   "disband": 0,
+   "crit": 0,
+   "galaxyShips": 96,
+   "alive": 5
+  },
+  "control-pl4": {
+   "captures": [],
+   "falls": {},
+   "actorColonies": [
+    2,
+    3
+   ],
+   "actorShips": [
+    19,
+    43
+   ],
+   "actorPower": [
+    2462,
+    6503
+   ],
+   "actorEnergy": [
+    1998,
+    2466
+   ],
+   "minNet": -5.5,
+   "armiesUsed": 0,
+   "groundArmyLost": 0,
+   "siegeMonths": 4,
+   "disband": 0,
+   "crit": 0,
+   "galaxyShips": 83,
+   "alive": 5
+  },
+  "candB": {
+   "captures": [
+    [
+     95,
+     41,
+     5,
+     [
+      3
+     ]
+    ],
+    [
+     95,
+     41,
+     5,
+     [
+      3
+     ]
+    ]
+   ],
+   "falls": {
+    "temiz": 2
+   },
+   "actorColonies": [
+    2,
+    2
+   ],
+   "actorShips": [
+    19,
+    39
+   ],
+   "actorPower": [
+    2462,
+    5498
+   ],
+   "actorEnergy": [
+    1998,
+    2352
+   ],
+   "minNet": -9.7,
+   "armiesUsed": 1,
+   "groundArmyLost": 0,
+   "siegeMonths": 3,
+   "disband": 0,
+   "crit": 0,
+   "galaxyShips": 84,
+   "alive": 4
+  },
+  "candC": {
+   "captures": [],
+   "falls": {},
+   "actorColonies": [
+    2,
+    2
+   ],
+   "actorShips": [
+    19,
+    39
+   ],
+   "actorPower": [
+    2462,
+    5726
+   ],
+   "actorEnergy": [
+    1998,
+    2634
+   ],
+   "minNet": -6.1,
+   "armiesUsed": 0,
+   "groundArmyLost": 0,
+   "siegeMonths": 3,
+   "disband": 0,
+   "crit": 0,
+   "galaxyShips": 84,
+   "alive": 5
+  },
+  "candBC": {
+   "captures": [],
+   "falls": {},
+   "actorColonies": [
+    2,
+    2
+   ],
+   "actorShips": [
+    19,
+    37
+   ],
+   "actorPower": [
+    2462,
+    5221
+   ],
+   "actorEnergy": [
+    1998,
+    2394
+   ],
+   "minNet": -10.2,
+   "armiesUsed": 1,
+   "groundArmyLost": 0,
+   "siegeMonths": 3,
+   "disband": 0,
+   "crit": 0,
+   "galaxyShips": 99,
+   "alive": 5
+  },
+  "candBC-pl1": {
+   "captures": [
+    [
+     73,
+     41,
+     5,
+     [
+      3
+     ]
+    ],
+    [
+     73,
+     41,
+     5,
+     [
+      3
+     ]
+    ]
+   ],
+   "falls": {
+    "temiz": 2
+   },
+   "actorColonies": [
+    2,
+    3
+   ],
+   "actorShips": [
+    19,
+    44
+   ],
+   "actorPower": [
+    2462,
+    6368
+   ],
+   "actorEnergy": [
+    1998,
+    2446
+   ],
+   "minNet": -15.9,
+   "armiesUsed": 1,
+   "groundArmyLost": 0,
+   "siegeMonths": 3,
+   "disband": 0,
+   "crit": 0,
+   "galaxyShips": 85,
+   "alive": 4
+  },
+  "candBC-pl2": {
+   "captures": [
+    [
+     92,
+     41,
+     5,
+     [
+      3
+     ]
+    ]
+   ],
+   "falls": {
+    "temiz": 1
+   },
+   "actorColonies": [
+    2,
+    2
+   ],
+   "actorShips": [
+    19,
+    38
+   ],
+   "actorPower": [
+    2462,
+    5462
+   ],
+   "actorEnergy": [
+    1998,
+    2443
+   ],
+   "minNet": -21,
+   "armiesUsed": 1,
+   "groundArmyLost": 0,
+   "siegeMonths": 4,
+   "disband": 0,
+   "crit": 0,
+   "galaxyShips": 77,
+   "alive": 5
+  },
+  "candBC-pl3": {
+   "captures": [
+    [
+     92,
+     41,
+     5,
+     [
+      3
+     ]
+    ]
+   ],
+   "falls": {
+    "temiz": 1
+   },
+   "actorColonies": [
+    2,
+    2
+   ],
+   "actorShips": [
+    19,
+    38
+   ],
+   "actorPower": [
+    2462,
+    5462
+   ],
+   "actorEnergy": [
+    1998,
+    2443
+   ],
+   "minNet": -21,
+   "armiesUsed": 1,
+   "groundArmyLost": 0,
+   "siegeMonths": 4,
+   "disband": 0,
+   "crit": 0,
+   "galaxyShips": 78,
+   "alive": 5
+  },
+  "candBC-pl4": {
+   "captures": [
+    [
+     93,
+     41,
+     5,
+     [
+      3
+     ]
+    ],
+    [
+     93,
+     41,
+     5,
+     [
+      3
+     ]
+    ]
+   ],
+   "falls": {
+    "temiz": 2
+   },
+   "actorColonies": [
+    2,
+    2
+   ],
+   "actorShips": [
+    19,
+    38
+   ],
+   "actorPower": [
+    2462,
+    5462
+   ],
+   "actorEnergy": [
+    1998,
+    2462
+   ],
+   "minNet": -21,
+   "armiesUsed": 1,
+   "groundArmyLost": 0,
+   "siegeMonths": 4,
+   "disband": 0,
+   "crit": 0,
+   "galaxyShips": 75,
+   "alive": 4
+  }
+ },
+ "s11m40": {
+  "control": {
+   "captures": [],
+   "falls": {},
+   "actorColonies": [
+    2,
+    2
+   ],
+   "actorShips": [
+    12,
+    33
+   ],
+   "actorPower": [
+    2034,
+    7602
+   ],
+   "actorEnergy": [
+    490,
+    168
+   ],
+   "minNet": -41.8,
+   "armiesUsed": 0,
+   "groundArmyLost": 0,
+   "siegeMonths": 3,
+   "disband": 7,
+   "crit": 0,
+   "galaxyShips": 90,
+   "alive": 5
+  },
+  "control-pl1": {
+   "captures": [],
+   "falls": {},
+   "actorColonies": [
+    2,
+    2
+   ],
+   "actorShips": [
+    12,
+    51
+   ],
+   "actorPower": [
+    2034,
+    9785
+   ],
+   "actorEnergy": [
+    490,
+    1437
+   ],
+   "minNet": -28,
+   "armiesUsed": 0,
+   "groundArmyLost": 0,
+   "siegeMonths": 6,
+   "disband": 0,
+   "crit": 0,
+   "galaxyShips": 141,
+   "alive": 5
+  },
+  "control-pl2": {
+   "captures": [
+    [
+     100,
+     41,
+     4,
+     [
+      3
+     ]
+    ]
+   ],
+   "falls": {
+    "katastrof": 1
+   },
+   "actorColonies": [
+    2,
+    2
+   ],
+   "actorShips": [
+    12,
+    0
+   ],
+   "actorPower": [
+    2034,
+    0
+   ],
+   "actorEnergy": [
+    490,
+    379
+   ],
+   "minNet": -39.2,
+   "armiesUsed": 0,
+   "groundArmyLost": 0,
+   "siegeMonths": 5,
+   "disband": 9,
+   "crit": 0,
+   "galaxyShips": 92,
+   "alive": 5
+  },
+  "control-pl3": {
+   "captures": [],
+   "falls": {},
+   "actorColonies": [
+    2,
+    3
+   ],
+   "actorShips": [
+    12,
+    0
+   ],
+   "actorPower": [
+    2034,
+    0
+   ],
+   "actorEnergy": [
+    490,
+    99
+   ],
+   "minNet": -73.4,
+   "armiesUsed": 0,
+   "groundArmyLost": 0,
+   "siegeMonths": 4,
+   "disband": 37,
+   "crit": 1,
+   "galaxyShips": 70,
+   "alive": 5
+  },
+  "control-pl4": {
+   "captures": [],
+   "falls": {},
+   "actorColonies": [
+    2,
+    3
+   ],
+   "actorShips": [
+    12,
+    1
+   ],
+   "actorPower": [
+    2034,
+    198
+   ],
+   "actorEnergy": [
+    490,
+    198
+   ],
+   "minNet": -65.4,
+   "armiesUsed": 0,
+   "groundArmyLost": 0,
+   "siegeMonths": 4,
+   "disband": 23,
+   "crit": 1,
+   "galaxyShips": 90,
+   "alive": 5
+  },
+  "candB": {
+   "captures": [],
+   "falls": {},
+   "actorColonies": [
+    2,
+    3
+   ],
+   "actorShips": [
+    12,
+    39
+   ],
+   "actorPower": [
+    2034,
+    7403
+   ],
+   "actorEnergy": [
+    490,
+    239
+   ],
+   "minNet": -43.6,
+   "armiesUsed": 2,
+   "groundArmyLost": 0,
+   "siegeMonths": 9,
+   "disband": 0,
+   "crit": 0,
+   "galaxyShips": 118,
+   "alive": 5
+  },
+  "candC": {
+   "captures": [],
+   "falls": {},
+   "actorColonies": [
+    2,
+    3
+   ],
+   "actorShips": [
+    12,
+    30
+   ],
+   "actorPower": [
+    2034,
+    5617
+   ],
+   "actorEnergy": [
+    490,
+    153
+   ],
+   "minNet": -45.2,
+   "armiesUsed": 0,
+   "groundArmyLost": 0,
+   "siegeMonths": 7,
+   "disband": 9,
+   "crit": 0,
+   "galaxyShips": 132,
+   "alive": 5
+  },
+  "candBC": {
+   "captures": [],
+   "falls": {},
+   "actorColonies": [
+    2,
+    2
+   ],
+   "actorShips": [
+    12,
+    40
+   ],
+   "actorPower": [
+    2034,
+    7602
+   ],
+   "actorEnergy": [
+    490,
+    402
+   ],
+   "minNet": -36.2,
+   "armiesUsed": 1,
+   "groundArmyLost": 0,
+   "siegeMonths": 5,
+   "disband": 0,
+   "crit": 0,
+   "galaxyShips": 134,
+   "alive": 5
+  },
+  "candBC-pl1": {
+   "captures": [],
+   "falls": {},
+   "actorColonies": [
+    2,
+    2
+   ],
+   "actorShips": [
+    12,
+    41
+   ],
+   "actorPower": [
+    2034,
+    7527
+   ],
+   "actorEnergy": [
+    490,
+    994
+   ],
+   "minNet": -34.2,
+   "armiesUsed": 1,
+   "groundArmyLost": 0,
+   "siegeMonths": 2,
+   "disband": 0,
+   "crit": 0,
+   "galaxyShips": 118,
+   "alive": 5
+  },
+  "candBC-pl2": {
+   "captures": [
+    [
+     73,
+     6,
+     1,
+     [
+      0
+     ]
+    ],
+    [
+     82,
+     5,
+     3,
+     [
+      5
+     ]
+    ],
+    [
+     89,
+     25,
+     3,
+     [
+      5
+     ]
+    ]
+   ],
+   "falls": {
+    "temiz": 3
+   },
+   "actorColonies": [
+    2,
+    8
+   ],
+   "actorShips": [
+    12,
+    16
+   ],
+   "actorPower": [
+    2034,
+    2561
+   ],
+   "actorEnergy": [
+    490,
+    409
+   ],
+   "minNet": -58.2,
+   "armiesUsed": 2,
+   "groundArmyLost": 19.9,
+   "siegeMonths": 10,
+   "disband": 6,
+   "crit": 0,
+   "galaxyShips": 53,
+   "alive": 4
+  },
+  "candBC-pl3": {
+   "captures": [
+    [
+     72,
+     6,
+     1,
+     [
+      0
+     ]
+    ]
+   ],
+   "falls": {
+    "temiz": 1
+   },
+   "actorColonies": [
+    2,
+    2
+   ],
+   "actorShips": [
+    12,
+    22
+   ],
+   "actorPower": [
+    2034,
+    3916
+   ],
+   "actorEnergy": [
+    490,
+    487
+   ],
+   "minNet": -39.2,
+   "armiesUsed": 3,
+   "groundArmyLost": 0,
+   "siegeMonths": 5,
+   "disband": 0,
+   "crit": 0,
+   "galaxyShips": 82,
+   "alive": 5
+  },
+  "candBC-pl4": {
+   "captures": [
+    [
+     71,
+     6,
+     1,
+     [
+      0
+     ]
+    ]
+   ],
+   "falls": {
+    "temiz": 1
+   },
+   "actorColonies": [
+    2,
+    2
+   ],
+   "actorShips": [
+    12,
+    23
+   ],
+   "actorPower": [
+    2034,
+    4115
+   ],
+   "actorEnergy": [
+    490,
+    1477
+   ],
+   "minNet": -28,
+   "armiesUsed": 3,
+   "groundArmyLost": 20.1,
+   "siegeMonths": 8,
+   "disband": 0,
+   "crit": 0,
+   "galaxyShips": 62,
+   "alive": 5
+  }
+ },
+ "s23m15": {
+  "control": {
+   "captures": [
+    [
+     54,
+     41,
+     5,
+     [
+      4
+     ]
+    ]
+   ],
+   "falls": {},
+   "actorColonies": [
+    2,
+    3
+   ],
+   "actorShips": [
+    7,
+    22
+   ],
+   "actorPower": [
+    1061,
+    4011
+   ],
+   "actorEnergy": [
+    296,
+    1499
+   ],
+   "minNet": -16.4,
+   "armiesUsed": 0,
+   "groundArmyLost": 0,
+   "siegeMonths": 22,
+   "disband": 0,
+   "crit": 0,
+   "galaxyShips": 63,
+   "alive": 5
+  },
+  "control-pl1": {
+   "captures": [
+    [
+     53,
+     41,
+     5,
+     [
+      4
+     ]
+    ]
+   ],
+   "falls": {},
+   "actorColonies": [
+    2,
+    3
+   ],
+   "actorShips": [
+    7,
+    20
+   ],
+   "actorPower": [
+    1061,
+    3621
+   ],
+   "actorEnergy": [
+    296,
+    1489
+   ],
+   "minNet": -20.6,
+   "armiesUsed": 0,
+   "groundArmyLost": 0,
+   "siegeMonths": 24,
+   "disband": 0,
+   "crit": 0,
+   "galaxyShips": 72,
+   "alive": 5
+  },
+  "control-pl2": {
+   "captures": [],
+   "falls": {},
+   "actorColonies": [
+    2,
+    2
+   ],
+   "actorShips": [
+    7,
+    26
+   ],
+   "actorPower": [
+    1061,
+    5309
+   ],
+   "actorEnergy": [
+    296,
+    630
+   ],
+   "minNet": -46.7,
+   "armiesUsed": 0,
+   "groundArmyLost": 0,
+   "siegeMonths": 20,
+   "disband": 0,
+   "crit": 0,
+   "galaxyShips": 89,
+   "alive": 5
+  },
+  "control-pl3": {
+   "captures": [],
+   "falls": {},
+   "actorColonies": [
+    2,
+    2
+   ],
+   "actorShips": [
+    7,
+    21
+   ],
+   "actorPower": [
+    1061,
+    3819
+   ],
+   "actorEnergy": [
+    296,
+    1060
+   ],
+   "minNet": -20.6,
+   "armiesUsed": 0,
+   "groundArmyLost": 0,
+   "siegeMonths": 23,
+   "disband": 0,
+   "crit": 0,
+   "galaxyShips": 74,
+   "alive": 5
+  },
+  "control-pl4": {
+   "captures": [],
+   "falls": {},
+   "actorColonies": [
+    2,
+    2
+   ],
+   "actorShips": [
+    7,
+    19
+   ],
+   "actorPower": [
+    1061,
+    3345
+   ],
+   "actorEnergy": [
+    296,
+    1062
+   ],
+   "minNet": -20.2,
+   "armiesUsed": 0,
+   "groundArmyLost": 0,
+   "siegeMonths": 19,
+   "disband": 0,
+   "crit": 0,
+   "galaxyShips": 75,
+   "alive": 5
+  },
+  "candB": {
+   "captures": [
+    [
+     39,
+     41,
+     5,
+     [
+      4
+     ]
+    ]
+   ],
+   "falls": {
+    "temiz": 1
+   },
+   "actorColonies": [
+    2,
+    3
+   ],
+   "actorShips": [
+    7,
+    27
+   ],
+   "actorPower": [
+    1061,
+    5012
+   ],
+   "actorEnergy": [
+    296,
+    1487
+   ],
+   "minNet": -16.4,
+   "armiesUsed": 1,
+   "groundArmyLost": 5.9,
+   "siegeMonths": 11,
+   "disband": 0,
+   "crit": 0,
+   "galaxyShips": 75,
+   "alive": 5
+  },
+  "candC": {
+   "captures": [
+    [
+     37,
+     41,
+     5,
+     [
+      4
+     ]
+    ]
+   ],
+   "falls": {
+    "katastrof": 1
+   },
+   "actorColonies": [
+    2,
+    3
+   ],
+   "actorShips": [
+    7,
+    19
+   ],
+   "actorPower": [
+    1061,
+    3427
+   ],
+   "actorEnergy": [
+    296,
+    1598
+   ],
+   "minNet": -1.6,
+   "armiesUsed": 0,
+   "groundArmyLost": 0,
+   "siegeMonths": 19,
+   "disband": 0,
+   "crit": 0,
+   "galaxyShips": 64,
+   "alive": 5
+  },
+  "candBC": {
+   "captures": [
+    [
+     35,
+     41,
+     5,
+     [
+      4
+     ]
+    ]
+   ],
+   "falls": {
+    "katastrof": 1
+   },
+   "actorColonies": [
+    2,
+    3
+   ],
+   "actorShips": [
+    7,
+    21
+   ],
+   "actorPower": [
+    1061,
+    3823
+   ],
+   "actorEnergy": [
+    296,
+    1814
+   ],
+   "minNet": -21.2,
+   "armiesUsed": 0,
+   "groundArmyLost": 0,
+   "siegeMonths": 18,
+   "disband": 0,
+   "crit": 0,
+   "galaxyShips": 70,
+   "alive": 5
+  },
+  "candBC-pl1": {
+   "captures": [
+    [
+     35,
+     41,
+     5,
+     [
+      4
+     ]
+    ]
+   ],
+   "falls": {},
+   "actorColonies": [
+    2,
+    3
+   ],
+   "actorShips": [
+    7,
+    22
+   ],
+   "actorPower": [
+    1061,
+    4022
+   ],
+   "actorEnergy": [
+    296,
+    1138
+   ],
+   "minNet": -10.4,
+   "armiesUsed": 0,
+   "groundArmyLost": 0,
+   "siegeMonths": 18,
+   "disband": 0,
+   "crit": 0,
+   "galaxyShips": 63,
+   "alive": 5
+  },
+  "candBC-pl2": {
+   "captures": [
+    [
+     35,
+     41,
+     5,
+     [
+      4
+     ]
+    ]
+   ],
+   "falls": {},
+   "actorColonies": [
+    2,
+    3
+   ],
+   "actorShips": [
+    7,
+    23
+   ],
+   "actorPower": [
+    1061,
+    4221
+   ],
+   "actorEnergy": [
+    296,
+    1249
+   ],
+   "minNet": -13.9,
+   "armiesUsed": 0,
+   "groundArmyLost": 0,
+   "siegeMonths": 19,
+   "disband": 0,
+   "crit": 0,
+   "galaxyShips": 74,
+   "alive": 5
+  },
+  "candBC-pl3": {
+   "captures": [
+    [
+     37,
+     41,
+     5,
+     [
+      4
+     ]
+    ]
+   ],
+   "falls": {
+    "katastrof": 1
+   },
+   "actorColonies": [
+    2,
+    3
+   ],
+   "actorShips": [
+    7,
+    23
+   ],
+   "actorPower": [
+    1061,
+    4221
+   ],
+   "actorEnergy": [
+    296,
+    1279
+   ],
+   "minNet": -13.5,
+   "armiesUsed": 0,
+   "groundArmyLost": 0,
+   "siegeMonths": 20,
+   "disband": 0,
+   "crit": 0,
+   "galaxyShips": 74,
+   "alive": 5
+  },
+  "candBC-pl4": {
+   "captures": [
+    [
+     36,
+     41,
+     5,
+     [
+      4
+     ]
+    ]
+   ],
+   "falls": {
+    "katastrof": 1
+   },
+   "actorColonies": [
+    2,
+    3
+   ],
+   "actorShips": [
+    7,
+    24
+   ],
+   "actorPower": [
+    1061,
+    4416
+   ],
+   "actorEnergy": [
+    296,
+    1490
+   ],
+   "minNet": -21.2,
+   "armiesUsed": 0,
+   "groundArmyLost": 0,
+   "siegeMonths": 19,
+   "disband": 0,
+   "crit": 0,
+   "galaxyShips": 80,
+   "alive": 5
+  }
+ }
+}
