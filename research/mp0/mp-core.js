@@ -126,7 +126,7 @@ function createHost(opts){
       let st,why='';
       if(e.techs[id])st='d';else{const a=researchAccess(e,id);if(!a.ok){st='x';why=a.why;}else if(researchReady(e,id))st='r';else{const rt=researchRoute(e,id);st=rt.ok?'l':'x';why=rt.ok?'':rt.why;}}
       tech[id]={n:T.n,b:T.b,t:T.t,r:(T.r||[]).slice(),d:T.d||'',c:Math.round(techCost(e,id)),s:st,...(why?{w:why}:{})};}
-    return {me,sys,lanes,cols,fleets,emps,catalog,sci,tech,log:(notes.get(e.id)||[]).slice(),dip:dipView(e)};
+    return {me,sys,lanes,cols,fleets,emps,catalog,sci,tech,log:(notes.get(e.id)||[]).slice(),dip:dipView(e),pol:polView(e)};
   }
   function clock(){return {day:Math.floor(G.day),y:G.year,m:G.month,spd:G.speed|0};}
   const KEYED=['sys','cols','fleets','emps','tech'];
@@ -137,7 +137,7 @@ function createHost(opts){
       for(const k of Object.keys(a[sec]))if(!has(b[sec],k))rm.push(k);
       if(Object.keys(up).length)(ops.up||(ops.up={}))[sec]=up;
       if(rm.length)(ops.rm||(ops.rm={}))[sec]=rm;}
-    for(const sec of ['me','lanes','catalog','sci','log','dip'])if(JSON.stringify(a[sec])!==JSON.stringify(b[sec]))(ops.set||(ops.set={}))[sec]=b[sec];
+    for(const sec of ['me','lanes','catalog','sci','log','dip','pol'])if(JSON.stringify(a[sec])!==JSON.stringify(b[sec]))(ops.set||(ops.set={}))[sec]=b[sec];
     return ops;
   }
   /* MP.2: görünüm salt okunur olmalı. explorationContext → borderPressure/totalPower gibi motor yolları
@@ -155,7 +155,7 @@ function createHost(opts){
     else{n=out(p.conn,{v:PROTOCOL,type:'delta',rev,base:p.lastRev,t:clock(),ops:diff(p.lastView,view)});stats.deltas++;stats.deltaBytes.push(n);}
     p.lastView=view;p.lastRev=rev;stats.publishMs.push(now()-t0);
   }
-  function publish(){dipSweep();const rev=++S.worldRevision;for(const p of S.players.values())publishTo(p,rev);return rev;}
+  function publish(){dipSweep();pure(polSweep);const rev=++S.worldRevision;for(const p of S.players.values())publishTo(p,rev);return rev;}
 
   /* ---------- komutlar: yalnız bu tablo ---------- */
   function locate(e,c){
@@ -261,7 +261,51 @@ function createHost(opts){
       locate(e,c){const r=dipFind(e,c.offer);return r?{r}:{err:'no-offer'};},
       why:(e,{r})=>r.from!==e.id?'not-sender':r.status!=='pending'?'closed':null,
       roots:()=>[],
-      apply(e,{r}){r.status='invalid';r.why='Gönderen geri çekti';r.finished=G.day;dipNotify(r.to,'Teklif geri çekildi — '+e.name);return true;}}
+      apply(e,{r}){r.status='invalid';r.why='Gönderen geri çekti';r.finished=G.day;dipNotify(r.to,'Teklif geri çekildi — '+e.name);return true;}},
+    /* ═══ MP.3.1 — federasyon ve vasallık. Yeni siyasi motor yok: her komut motorun kendi işlevini çağırır
+       (requestFederation, proposeFedMotion, acceptFedInvite / rejectFedInvite, castFedVote, leaveFederation, proposeFedLaw,
+       foundFederation, vassalOffer, vassalReply). Bu işlevlerin kendi işlemi (fedChange / vassalTransaction) vardır; ikinci
+       bir işlem katmanı açılmaz (roots boş). Kayıtlar kanonik G'dedir (Save8); MP deposuna kopyalanmaz. */
+    fedRequest:{keys:['kind','via'],check:c=>int(c.via,0,63),locate:()=>({}),
+      why(e,at,c){const o=G.emps[c.via];if(!o||o===e||!e.contact[o.id]||!polParty(o))return 'no-target';const q=canRequestFederation(e,o);return q.ok?null:polWhy(q);},
+      roots:()=>[],apply:(e,at,c)=>requestFederation(e,G.emps[c.via])},
+    fedInvite:{keys:['kind','target'],check:c=>int(c.target,0,63),locate:()=>({}),
+      why(e,at,c){const o=G.emps[c.target];if(!o||o===e||!e.contact[o.id]||!polParty(o))return 'no-target';if(!findFed(e))return 'no-fed';const q=canFedMotion(e,'admit',{target:o.id});return q.ok?null:polWhy(q);},
+      roots:()=>[],apply:(e,at,c)=>proposeFedMotion(e,'admit',{target:c.target})},
+    fedReply:{keys:['kind','fed','action'],check:c=>int(c.fed,0,2147483647)&&['accept','reject'].includes(c.action),
+      locate(e,c){const f=fedOf(c.fed),inv=f&&f.invites&&f.invites[e.id];return inv?{f,inv}:{err:'no-invite'};},   // davet edilmeyene davet "yok"
+      why(e,{f,inv},c){if(inv.expires<=G.day)return 'expired';if(c.action==='reject')return null;if(inv.terms!==fedCharterKey(f))return 'changed';const g=fedAdmissionGate(f,e);return g.ok?null:polWhy(g);},
+      roots:()=>[],apply:(e,{f},c)=>c.action==='accept'?acceptFedInvite(e,f.id):rejectFedInvite(e,f.id)},
+    fedVote:{keys:['kind','fed','token','yes'],check:c=>int(c.fed,0,2147483647)&&typeof c.token==='string'&&c.token.length<=40&&typeof c.yes==='boolean',
+      locate(e,c){const f=fedOf(c.fed);return f&&f.members.includes(e.id)?{f}:{err:'no-fed'};},       // üye olmayana federasyon "yok"
+      why(e,{f},c){const v=f.vote;if(!v)return 'no-vote';if(fedVoteToken(v)!==c.token)return 'stale';if(Number.isFinite(v.expires)&&G.day>=v.expires)return 'expired';
+        return fedVoteCounts(f).waiting.includes(e.id)?null:'voted';},
+      roots:()=>[],apply:(e,{f},c)=>castFedVote(e,f.id,c.token,c.yes)},
+    fedLeave:{keys:['kind'],check:()=>true,locate:()=>({}),why:e=>findFed(e)?null:'no-fed',roots:()=>[],apply:e=>leaveFederation(e)},
+    fedLaw:{keys:['kind','law','repeal'],check:c=>typeof c.law==='string'&&(Object.hasOwn(FED_LAWS,c.law)||Object.hasOwn(FED_INNER_LAWS,c.law))&&(c.repeal===undefined||typeof c.repeal==='boolean'),
+      locate:()=>({}),why(e,at,c){if(!findFed(e))return 'no-fed';const q=canFedLaw(e,c.law,!!c.repeal);return q.ok?null:polWhy(q);},
+      roots:()=>[],apply:(e,at,c)=>proposeFedLaw(e,c.law,!!c.repeal)},
+    fedFound:{keys:['kind','type','ballot'],check:c=>Object.hasOwn(FED_TYPES,c.type)&&Object.hasOwn(FED_BALLOTS,c.ballot),locate:()=>({}),
+      why(e,at,c){const q=canFoundFed(e,c.type,c.ballot);return q.ok?null:{code:'fed',detail:(q.reasons||[q.why]).slice(0,4).map(String)};},
+      roots:()=>[],apply:(e,at,c)=>foundFederation(e,c.type,c.ballot)},
+    fedFoundQuote:{keys:['kind','type','ballot'],ro:true,check:c=>Object.hasOwn(FED_TYPES,c.type)&&Object.hasOwn(FED_BALLOTS,c.ballot),locate:()=>({}),why:()=>null,roots:()=>[],
+      apply(e,at,c){const q=canFoundFed(e,c.type,c.ballot);return {ok:true,extra:{ok:!!q.ok,cost:q.cost,reasons:(q.reasons||[]).slice(0,6).map(String),
+        candidates:(q.candidates||[]).map(x=>({id:x.id,n:polName(e,x.id),h:isHumanActor(G.emps[x.id])?1:0,ok:!!x.ok,why:String(x.why||'').slice(0,160)}))}};}},
+    /* Vasallık: to = karşı taraf; mode demand (ben senyör), seek (ben vasal), renew (mevcut sözleşme), release (vasal bağımsızlık ister). */
+    vassalOffer:{keys:['kind','to','mode','type','terms'],check:c=>int(c.to,0,63)&&['demand','seek','renew','release'].includes(c.mode)&&Object.hasOwn(VASSAL_TYPES,c.type)&&vasTermsShape(c.terms),
+      locate:()=>({}),
+      why(e,at,c){const o=G.emps[c.to];if(!o||o===e||!polParty(o)||!e.contact[o.id]&&!(o.overlord===e.id||e.overlord===o.id))return 'no-target';
+        if(['renew','release'].includes(c.mode)&&!(e.overlord===o.id||o.overlord===e.id))return 'no-contract';return vassalTerms(c.type,c.terms)?null:'terms';},
+      roots:()=>[],apply(e,at,c){const r=vassalOffer(e,G.emps[c.to],c.mode,c.type,c.terms);return r.ok?{ok:true,extra:{karar:r.karar,round:r.round}}:r;}},
+    vassalQuote:{keys:['kind','to','mode','type','terms'],ro:true,check:c=>int(c.to,0,63)&&['demand','seek','renew','release'].includes(c.mode)&&Object.hasOwn(VASSAL_TYPES,c.type)&&vasTermsShape(c.terms),
+      locate:()=>({}),why(e,at,c){const o=G.emps[c.to];return !o||o===e||!polParty(o)||!e.contact[o.id]&&!(o.overlord===e.id||e.overlord===o.id)?'no-target':null;},
+      roots:()=>[],apply:(e,at,c)=>({ok:true,extra:vasQuote(e,G.emps[c.to],c.mode,c.type,c.terms)})},
+    vassalReply:{keys:['kind','sub','id','round','action','terms'],check:c=>int(c.sub,0,63)&&typeof c.id==='string'&&c.id.length<=64&&int(c.round,1,3)&&['accept','reject','counter'].includes(c.action)&&
+        (c.action==='counter'?vasTermsShape(c.terms):c.terms===undefined),
+      locate(e,c){const s=G.emps[c.sub],q=s&&s.vassalTalk;return q&&(q.lord===e.id||q.sub===e.id)?{q}:{err:'no-offer'};},   // taraf olmayana müzakere "yok"
+      why(e,{q},c){if(q.status!=='pending')return 'closed';if(q.to!==e.id)return 'not-recipient';if(q.id!==c.id||q.round!==c.round)return 'stale';if(G.day>=q.expires)return 'expired';
+        if(c.action==='counter'&&!vassalTerms(q.type,c.terms))return 'terms';return null;},
+      roots:()=>[],apply:(e,{q},c)=>vassalReply(e,c.sub,c.id,c.round,c.action,c.action==='counter'?c.terms:null)}
   });
   /* ═══ MP.3 diplomasi durumu (oturum; Save8'e girmez — kalıcılık MP.4) ═══ */
   const DIP_ROUNDS=6,DIP_PENDING_OUT=8,DIP_KEEP=160,DIP_RES=['min','ene','yiy','ala','tuk','ara','etk'];
@@ -352,6 +396,112 @@ function createHost(opts){
     return {offers,contacts,life:dipLife(),rounds:DIP_ROUNDS};   // gün: clock.day (her gün dip bölümünü yeniden göndermemek için)
   }
 
+  /* ═══ MP.3.1 federasyon / vasallık: görünüm, önizleme, bildirim ═══ */
+  const polParty=o=>!!o&&!o.dead&&!o.wild&&!o.crisisSide;
+  const polWhy=q=>({code:'fed',detail:[String(q.why||'').slice(0,200)]});
+  const polName=(e,id)=>id===e.id||(e.contact&&e.contact[id])?String(G.emps[id]?.name||'?'):null;   // temassız devlet adı gitmez
+  const VAS_KEYS=['tax','science','defense','war','autonomy','duration','renegotiate','sensors'];
+  function vasTermsShape(t){
+    if(!plain(t)||!onlyKeys(t,VAS_KEYS))return false;
+    if(t.tax!==undefined&&(!plain(t.tax)||!onlyKeys(t.tax,['ene','min','ala','yiy','tuk'])||Object.values(t.tax).some(x=>typeof x!=='number'||!Number.isFinite(x))))return false;
+    for(const k of ['science'])if(t[k]!==undefined&&(typeof t[k]!=='number'||!Number.isFinite(t[k])))return false;
+    for(const k of ['defense','sensors'])if(t[k]!==undefined&&typeof t[k]!=='boolean')return false;
+    for(const k of ['war','autonomy'])if(t[k]!==undefined&&typeof t[k]!=='string')return false;
+    for(const k of ['duration','renegotiate'])if(t[k]!==undefined&&!Number.isSafeInteger(t[k]))return false;
+    return true;
+  }
+  /* Arayüzün sunduğu seçenekler: küçük bir ızgara, her değer motorun vassalTerms'ünden geçenlerle süzülür (yeni sınır icat edilmez). */
+  let vasLimCache=null;
+  function vasLimits(){
+    if(vasLimCache)return vasLimCache;const grid=[0,.05,.1,.15,.2,.25,.3],out={};
+    for(const [k,T] of Object.entries(VASSAL_TYPES)){const d=vassalDefaultTerms(k),ok=t=>!!vassalTerms(k,t);
+      out[k]={n:T.n,d:T.d,def:d,tax:grid.filter(x=>ok({...d,tax:{...d.tax,ene:x}})),science:grid.filter(x=>ok({...d,science:x})),
+        war:['none','defense','all'].filter(w=>ok({...d,war:w})),autonomy:['free','consent'].filter(a=>ok({...d,autonomy:a})),
+        duration:[0,12,24,60,120,240].filter(n=>ok({...d,duration:n})),renegotiate:[12,24,60].filter(n=>ok({...d,renegotiate:n}))};}
+    return vasLimCache=out;
+  }
+  function vasCtr(e,c,sub){if(!c)return null;const lord=G.emps[c.lord];
+    return {lord:c.lord,ln:polName(e,c.lord),sub:sub.id,sn:polName(e,sub.id),type:c.type,tn:VASSAL_TYPES[c.type]?.n||c.type,terms:c.terms,started:Math.floor(c.started),
+      expires:c.expires===null?null:Math.floor(c.expires),reneg:Math.floor(c.started+c.terms.renegotiate*30),rev:c.revision||0,legacy:!!c.legacy,
+      est:Object.fromEntries(Object.entries(vassalEstimate(sub,c.terms)).map(([k,v])=>[k,r1(v)])),lh:isHumanActor(lord)?1:0,sh:isHumanActor(sub)?1:0};}
+  function vasTalk(e,q){
+    return {id:q.id,lord:q.lord,sub:q.sub,ln:polName(e,q.lord),sn:polName(e,q.sub),kind:q.kind,mode:q.mode,type:q.type,tn:VASSAL_TYPES[q.type]?.n||q.type,terms:q.terms,
+      from:q.from,to:q.to,born:Math.floor(q.born),expires:Math.floor(q.expires),round:q.round,status:q.status,why:String(q.why||'').slice(0,240),
+      hist:(q.history||[]).map(h=>({day:Math.floor(h.day),by:h.by,action:h.action,why:String(h.why||'').slice(0,240),...(h.terms?{terms:h.terms}:{})})),paid:q.paid||{}};
+  }
+  /* Vasallık önizlemesi: yalnız motorun saf denetimleri (vassalTerms, canDemandVassal / canSeekProtection, bekleme, Etki) ve motor sabitleri.
+     Son karar gönderimde vassalOffer'dadır. Karşı tarafın geliri gizlidir: tahmin yalnız vasal kendisiyse verilir. */
+  function vasQuote(e,o,mode,type,raw){
+    const existing=mode==='renew'||mode==='release',sub=existing?(e.overlord===o.id?e:o.overlord===e.id?o:null):mode==='demand'?o:e;
+    const terms=vassalTerms(type,raw),cost=mode==='demand'?VASSAL_DEMAND_COST:mode==='seek'?VASSAL_SEEK_COST:mode==='release'?40:60,reasons=[];
+    if(!terms)reasons.push('Bu vasal türü için hükümler geçersiz');
+    if(existing&&!sub)reasons.push('Geçerli sözleşme yok');
+    if(mode==='release'&&sub!==e)reasons.push('Barışçıl bağımsızlığı vasal talep eder');
+    const c=existing&&sub?vassalContractOf(sub):null;
+    if(mode==='renew'&&c&&G.day<c.started+c.terms.renegotiate*30)reasons.push('Yeniden müzakere tarihi gelmedi (gün '+Math.floor(c.started+c.terms.renegotiate*30)+')');
+    if(!existing){const g=mode==='demand'?canDemandVassal(e,o):canSeekProtection(e,o);if(!g.ok)reasons.push(String(g.why));}
+    else if(e.war[o.id]||isPurifier(e)||isPurifier(o))reasons.push('Savaş veya doktrin müzakereye engel');
+    if(sub&&sub.vassalTalk&&sub.vassalTalk.status==='pending'&&G.day<sub.vassalTalk.expires)reasons.push('Bu vasal için zaten bekleyen müzakere var');
+    if(sub&&(sub._vassalTalkAfter||0)>G.day)reasons.push('Müzakere soğuma süresi devam ediyor');
+    if((e.res.etk||0)<cost)reasons.push(cost+' Etki gerekir');
+    return {ok:!reasons.length,reasons:[...new Set(reasons)].slice(0,6),cost,etk:Math.floor(e.res.etk||0),terms,life:180,rounds:3,
+      est:sub===e&&terms?Object.fromEntries(Object.entries(vassalEstimate(e,terms)).map(([k,v])=>[k,r1(v)])):null};
+  }
+  function fedVoteView(e,f){
+    const v=f.vote;if(!v)return null;const c=fedVoteCounts(f),L=fedVoteLaw(v)||{n:String(v.law),d:''};
+    return {token:fedVoteToken(v),n:L.n,d:L.d||'',kind:v.kind,motion:v.motion||null,repeal:!!v.repeal,target:v.target??null,tn:v.target!==undefined?polName(e,v.target):null,
+      proposer:v.proposer,pn:v.proposer!==null?polName(e,v.proposer):null,opened:Math.floor(v.opened),expires:Math.floor(v.expires),
+      yes:c.eligible.filter(id=>v.yes.includes(id)),no:c.eligible.filter(id=>v.no.includes(id)),waiting:c.waiting,eligible:c.eligible,w:c.weights,
+      cy:c.yes,cn:c.no,total:Math.round(c.total*1000)/1000,rule:fedVoteRule(f,c),mode:v.ballotSnapshot?.mode||fedBallot(f),
+      mine:c.waiting.includes(e.id)?'wait':v.yes.includes(e.id)?'yes':v.no.includes(e.id)?'no':'none'};
+  }
+  function polView(e){
+    if(e.dead)return null;const f=findFed(e),lawName=k=>(FED_LAWS[k]||FED_INNER_LAWS[k]||{}).n||k,B=k=>({k,n:FED_BALLOTS[k]?.n||k,d:FED_BALLOTS[k]?.d||''});
+    let fed=null;
+    if(f){const w=f.vote?fedVoteCounts(f).weights:fedLiveWeights(f),lv=f.lastVote;
+      fed={id:f.id,n:f.name,type:{k:f.type,n:fedType(f).n,d:fedType(f).d},leader:f.leader,founder:f.founder,ballot:B(fedBallot(f)),duty:fedDutyText(f),
+        cohesion:Math.round(fedCohesion(f)),charter:fedCharter(f),founded:Math.floor(f.founded||0),
+        members:f.members.map(id=>({id,n:polName(e,id)||'?',col:G.emps[id]?.col,h:isHumanActor(G.emps[id])?1:0,w:w[id]||1})),
+        laws:Object.keys(f.laws||{}).filter(k=>f.laws[k]).map(k=>({k,n:lawName(k)})),
+        lawsOpen:[...Object.keys(FED_LAWS),...Object.keys(FED_INNER_LAWS)].map(k=>{const on=!!(f.laws&&f.laws[k]),q=canFedLaw(e,k,on);return {k,n:lawName(k),d:String((FED_LAWS[k]||FED_INNER_LAWS[k]).d||'').slice(0,200),on:on?1:0,cost:fedLawCost(k,on),ok:q.ok?1:0,why:q.ok?'':String(q.why||'').slice(0,160)};}),
+        vote:fedVoteView(e,f),
+        last:lv?{id:lv.id,n:(fedVoteLaw(lv)||{n:String(lv.law)}).n,passed:!!lv.passed,yes:lv.yes,no:lv.no,abstain:lv.abstain,day:Math.floor(lv.day),why:String(lv.why||'').slice(0,200),rule:String(lv.rule||'').slice(0,200)}:null,
+        invites:Object.entries(f.invites||{}).map(([id,inv])=>({id:+id,n:polName(e,+id),expires:Math.floor(inv.expires),by:inv.by})),
+        leaveWait:720};
+    }
+    const invites=(G.feds||[]).filter(x=>x.invites&&x.invites[e.id]).map(x=>{const inv=x.invites[e.id],g=fedAdmissionGate(x,e);
+      return {fid:x.id,n:x.name,type:fedType(x).n,ballot:B(fedBallot(x)),duty:fedDutyText(x),size:x.members.length,members:x.members.map(id=>polName(e,id)).filter(Boolean),
+        expires:Math.floor(inv.expires),by:inv.by,bn:polName(e,inv.by),valid:inv.terms===fedCharterKey(x)&&inv.expires>G.day?1:0,gate:g.ok?'':String(g.why)};});
+    const apps=[];for(const x of G.feds||[])for(const [tok,row] of Object.entries(x.admissionResults||{}))if(row.target===e.id)apps.push({fid:x.id,n:x.name,token:tok,status:row.status,why:String(row.why||'').slice(0,240),day:Math.floor(row.updated||0)});
+    const others=f?[]:(G.feds||[]).map(x=>{const vias=x.members.filter(id=>id!==e.id&&e.contact[id]&&G.emps[id]&&!G.emps[id].dead);if(!vias.length)return null;
+      return {fid:x.id,n:x.name,type:fedType(x).n,ballot:B(fedBallot(x)),size:x.members.length,
+        vias:vias.map(id=>{const q=canRequestFederation(e,G.emps[id]);return {id,n:polName(e,id),ok:q.ok?1:0,why:q.ok?'':String(q.why||'').slice(0,160)};})};}).filter(Boolean);
+    const lord=overlordOf(e);
+    const talks=G.emps.filter(s=>s.vassalTalk&&(s.vassalTalk.lord===e.id||s.vassalTalk.sub===e.id)).map(s=>vasTalk(e,s.vassalTalk));
+    const vas={lord:lord?vasCtr(e,vassalContractOf(e),e):null,subs:vassalsOf(e).map(s=>vasCtr(e,vassalContractOf(s),s)),talks,
+      cand:G.emps.filter(o=>o!==e&&polParty(o)&&e.contact[o.id]).map(o=>{const d=canDemandVassal(e,o),k=canSeekProtection(e,o);
+        return {id:o.id,n:o.name,h:isHumanActor(o)?1:0,demand:d.ok?'':String(d.why).slice(0,160),seek:k.ok?'':String(k.why).slice(0,160)};}),
+      costs:{demand:VASSAL_DEMAND_COST,seek:VASSAL_SEEK_COST,renew:60,release:40,counter:20},lim:vasLimits(),free:Math.max(0,Math.floor(((e.freeUntil||0)-(G.memAge||0))))};
+    return {fed,invites,apps,others,canFound:!f&&!isVassal(e)?{cost:fedFoundCost(e),types:Object.entries(FED_TYPES).map(([k,t])=>({k,n:t.n,d:t.d})),ballots:Object.keys(FED_BALLOTS).filter(k=>k!=='weighted').map(B)}:null,vas};
+  }
+  /* Kişisel siyasi bildirimler: yalnız uzak insanlar (host'unkiler motorun kendi arayüzünde). Yalnız okur; ilk geçişte sessizce tohumlanır. */
+  const polSeen=new Map();
+  function polSweep(){
+    for(const [eid] of S.slots){const e=G.emps[eid];if(!remoteHuman(e)||e.dead)continue;
+      let seen=polSeen.get(eid),first=false;if(!seen){seen=new Set();polSeen.set(eid,seen);first=true;}
+      const say2=(k,m,c)=>{if(seen.has(k))return;seen.add(k);if(!first)note(eid,m,c);};
+      const f=findFed(e);say2('fed:'+(f?f.id:'none')+':'+(e._fedLeaveUntil||0),f?'Federasyon üyeliği — '+f.name:'Federasyon üyeliğin yok','sci');
+      if(f){const v=f.vote;if(v&&fedVoteCounts(f).waiting.includes(eid))say2('v:'+f.id+':'+fedVoteToken(v),'Federasyon oylaması başladı — '+((fedVoteLaw(v)||{}).n||v.law)+' · oyunu ver','sci');
+        const lv=f.lastVote;if(lv)say2('r:'+f.id+':'+lv.id+':'+lv.day,'Oylama sonucu — '+((fedVoteLaw(lv)||{}).n||lv.law)+': '+(lv.passed?'KABUL':'RED')+' ('+lv.yes+' evet / '+lv.no+' hayır)',lv.passed?'win':'');}
+      for(const x of G.feds||[]){const inv=x.invites&&x.invites[eid];if(inv)say2('i:'+x.id+':'+inv.expires,'Federasyon daveti — '+x.name,'sci');
+        for(const [tok,row] of Object.entries(x.admissionResults||{}))if(row.target===eid)say2('a:'+x.id+':'+tok+':'+row.status,'Üyelik başvurusu — '+x.name+': '+row.why,row.status==='accepted'?'win':'');}
+      for(const s of G.emps){const q=s.vassalTalk;if(!q||(q.lord!==eid&&q.sub!==eid))continue;const other=G.emps[q.lord===eid?q.sub:q.lord];
+        if(q.status==='pending'&&q.to===eid)say2('t:'+q.id+':'+q.round,(q.kind==='release'?'Bağımsızlık talebi':q.round>1?'Vasallık karşı teklifi':'Vasallık teklifi')+' — '+(other?other.name:''),'sci');
+        if(q.status!=='pending')say2('tf:'+q.id+':'+q.status,'Vasallık müzakeresi: '+({accepted:'kabul edildi',rejected:'reddedildi',expired:'süresi doldu',invalid:'geçersizleşti'}[q.status]||q.status)+' — '+(other?other.name:''),q.status==='accepted'?'win':'');}
+      const lord=overlordOf(e),vc=e.vassalContract;say2('lord:'+(lord?lord.id:'none')+':'+(vc?vc.revision+':'+vc.status:''),lord?'Vasallık başladı — senyör '+lord.name:'Bağımsızsın','sci');
+    }
+  }
+
   function result(p,conn,msg,status,code,extra){
     const r={v:PROTOCOL,type:'result',seq:msg.seq,cid:msg.cid,status,code:code||null,rev:S.worldRevision,...(extra||{})};
     if(p&&typeof msg.cid==='string'){p.results.set(msg.cid,r);if(p.results.size>RESULT_CACHE)p.results.delete(p.results.keys().next().value);}
@@ -387,7 +537,8 @@ function createHost(opts){
     if(def.ro)return {ok:true,ro:true,extra:def.apply(e,at,c).extra};   // salt okuma: durum değişmez, dergiye girmez
     const records=txCaptureGraph(def.roots(e,at)),rng=RND_STATE;let res;
     try{res=def.apply(e,at,c);}catch(err){txRestoreGraph(records);rndSeed(rng);return {ok:false,code:'error'};}
-    if(!(res===true||(res&&res.ok))){txRestoreGraph(records);rndSeed(rng);return {ok:false,code:'rules'};}
+    if(!(res===true||(res&&res.ok))){txRestoreGraph(records);rndSeed(rng);   // MP.3.1: motorun kendi gerekçesi (ör. vassalOffer) ayrıntı olarak döner
+      return res&&typeof res.why==='string'?{ok:false,code:'rules:engine',detail:[res.why.slice(0,200)]}:{ok:false,code:'rules'};}
     stats.applied++;S.worldRevision++;S.journal.push({rev:S.worldRevision,day:G.day,playerId,empireId,cmd:JSON.parse(JSON.stringify(c))});
     return {ok:true,extra:res&&res.extra};
   }
@@ -544,6 +695,21 @@ function createHost(opts){
     aiNegotiate=function(a,b,give,want){if(remoteHuman(b)&&a&&a.ai)return aiToHuman(a,b,give,want);
       if(remoteHuman(a)||remoteHuman(b)){stats.blockedAI++;return {tur:0,karar:null,uygulandi:false,why:'İnsan oyuncu adına AI karar vermez',karsi:null};}return neg.apply(this,arguments);};
     aiRespond=function(ai){if(remoteHuman(ai)){stats.blockedAI++;return {v:'bekle',why:'İnsan oyuncu kararı kendi gelen kutusunda verir'};}return resp.apply(this,arguments);};
+    /* MP.3.1: federasyon oylamasında motor yalnız devlet 0'ın oyunu AI değerlendirmesinden ayırıyordu; uzak insanın oyu
+       aiFedVoteAssessment ile veriliyor ve rezerve RNG çekiliyordu. Motorun kendi fedOpenVote / startFedVote metni tek
+       koşulla genişletilir: uzak insan seçmen, devlet 0 gibi atlanır (değerlendirme, öneri oyu ve RNG çekimi yok).
+       Uzak insan yokken __mpHumanVoter hep false: davranış ve RNG birebir aynı. Metin beklenen biçimde değilse kurulum durur. */
+    root.__mpHumanVoter=id=>remoteHuman(G.emps[id]);
+    fedOpenVote=patchEngine(fedOpenVote,'if (id === 0) continue;','if (id === 0 || __mpHumanVoter(id)) continue;');
+    startFedVote=patchEngine(startFedVote,'if(id!==0&&G.emps[id]&&!G.emps[id].dead)rnd();','if(id!==0&&!__mpHumanVoter(id)&&G.emps[id]&&!G.emps[id].dead)rnd();');
+    /* Kurucu adayı: motor devlet 0 için "oyuncunun açık onayı gerekli" diyor, diğerlerine aiFedWilling uyguluyordu.
+       Uzak insan da AI eğilimiyle kurucu yazılamaz. */
+    const founder=fedFounderCandidate;
+    fedFounderCandidate=function(e,o){if(o&&o!==e&&remoteHuman(o)){stats.blockedAI++;const why='Oyuncunun açık üyelik onayı gerekli';return {ok:false,reasons:[why],why};}return founder.apply(this,arguments);};
+  }
+  function patchEngine(fn,from,to){
+    const src=String(fn);if(src.split(from).length!==2)throw Error('MP.3.1: motor metni beklenen biçimde değil — '+from);
+    return (0,eval)('('+src.replace(from,to)+')');   // global kapsamda: motorun genel adlarını aynen görür
   }
 
   /* ---------- oturum metadatası (Save8'den ayrı, sürümlü) ---------- */
@@ -609,7 +775,7 @@ function createHost(opts){
     S.players.delete(pid);broadcastLobby();return {ok:true};
   }
   function closeRoom(){if(!L)return {ok:false};L.phase='closed';broadcastLobby();for(const p of guests())if(p.conn){kick(p.conn,'room-closed');S.conns.delete(p.conn);p.conn=null;}return {ok:true};}
-  return {onMessage,onLeave,onJoin(){},publish,publishTo,assign,release,installGuards,meta,restore,viewFor,local,dip:D,dipView,
+  return {onMessage,onLeave,onJoin(){},publish,publishTo,assign,release,installGuards,meta,restore,viewFor,local,dip:D,dipView,polView,
     isHuman:humanEmpire,isRemoteHuman:remoteHuman,state:S,stats,COMMANDS,HANDLERS,clock,fnv,observeHumans,
     configure,setCapacity,claimFor,setHostTab,start,canStart,kick:kickPlayer,close:closeRoom,lobbyView:()=>L&&lobbyView(S.players.get('host')),lobby:L,
     /* MP.1.1: duraklatma nedeni (host-offline / host-background) misafire lobide 'pause' olarak gider; MP.0 çağrısı nedensiz kalır. */
