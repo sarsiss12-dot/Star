@@ -1,0 +1,26 @@
+# Yalnız relay imajının ihtiyaç duyduğu dosyalar (research/mp1/deploy/Dockerfile)
+*
+!RELEASE-MANIFEST.json
+!index.html
+!manifest.json
+!sw.js
+!main.js
+!map.js
+!combat.js
+!ui.js
+!ai.js
+!diplomacy.js
+!economy.js
+!commerce.js
+!commerce-ui.js
+!economic-ledger.js
+!economy-ui.js
+!news.js
+!inbox.js
+!construction.js
+!archive-ui.js
+!audio.js
+!research/mp0/mp-core.js
+!research/mp0/server/dev-relay.js
+!research/mp1/server/relay.js
+!research/mp1/client/

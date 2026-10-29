@@ -1,0 +1,10 @@
+# Tek sanal sunucu için örnek: Caddy otomatik Let's Encrypt sertifikası alır,
+# HTTP'yi HTTPS'e yönlendirir, WebSocket'i (wss) kendiliğinden geçirir ve
+# X-Forwarded-For / X-Forwarded-Proto başlıklarını ekler.
+# "stars.ornek-alan.tr" yerine kendi alan adını yaz (DNS A kaydı bu sunucuyu göstermeli).
+stars.ornek-alan.tr {
+	encode gzip
+	reverse_proxy 127.0.0.1:8080
+}
+# Relay aynı makinede yalnız 127.0.0.1'e değil 0.0.0.0'a bağlıysa güvenlik duvarında
+# 8080'i dışarıya KAPAT; yalnız 80/443 açık kalsın.
