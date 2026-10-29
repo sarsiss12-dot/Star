@@ -1,0 +1,67 @@
+{
+ "engine": "Node v22.22.0 vm (gerçek runtime)",
+ "seed": 11,
+ "months": 24,
+ "rows": [
+  {
+   "size": "orta",
+   "systems": 45,
+   "empires": 7,
+   "remoteHumans": 1,
+   "monthSimMsAvg": 88,
+   "monthSimMsMax": 148,
+   "publishMsAvg": 1.2,
+   "publishMsMax": 5,
+   "snapshotBytesAvg": 7083,
+   "deltaBytesAvg": 951.4,
+   "deltaBytesMax": 1352,
+   "saveBytes": 258283,
+   "monthlyBytesPerPlayer": 951.4
+  },
+  {
+   "size": "buyuk",
+   "systems": 60,
+   "empires": 9,
+   "remoteHumans": 1,
+   "monthSimMsAvg": 175.8,
+   "monthSimMsMax": 228,
+   "publishMsAvg": 0.8,
+   "publishMsMax": 1,
+   "snapshotBytesAvg": 4808,
+   "deltaBytesAvg": 679.5,
+   "deltaBytesMax": 1338,
+   "saveBytes": 342428,
+   "monthlyBytesPerPlayer": 679.5
+  },
+  {
+   "size": "ulu",
+   "systems": 100,
+   "empires": 13,
+   "remoteHumans": 1,
+   "monthSimMsAvg": 323.2,
+   "monthSimMsMax": 496,
+   "publishMsAvg": 1.5,
+   "publishMsMax": 4,
+   "snapshotBytesAvg": 12685,
+   "deltaBytesAvg": 1321.9,
+   "deltaBytesMax": 1926,
+   "saveBytes": 541095,
+   "monthlyBytesPerPlayer": 1321.9
+  },
+  {
+   "size": "ulu",
+   "systems": 100,
+   "empires": 13,
+   "remoteHumans": 3,
+   "monthSimMsAvg": 287.9,
+   "monthSimMsMax": 397,
+   "publishMsAvg": 3.3,
+   "publishMsMax": 4,
+   "snapshotBytesAvg": 8419,
+   "deltaBytesAvg": 1137.4,
+   "deltaBytesMax": 2164,
+   "saveBytes": 510637,
+   "monthlyBytesPerPlayer": 1137.4
+  }
+ ]
+}

@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>STARS MP.0 istemci (geliştirme prototipi)</title>
+<style>
+:root{--bg:#070d18;--fg:#d6e6f5;--dim:#7d90ad;--ac:#4aa8d8;--ok:#92f5b2;--bad:#ff6b6b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:14px system-ui,sans-serif;padding:10px}
+h1{font-size:15px;margin:0 0 6px}#status{padding:6px 8px;border:1px solid var(--ac);border-radius:6px;margin-bottom:8px}
+#status.bad{border-color:var(--bad);color:var(--bad)}.dim{color:var(--dim)}table{border-collapse:collapse;width:100%;table-layout:fixed}td{overflow-wrap:anywhere}select{max-width:100%;width:100%}
+td,th{border-bottom:1px solid #1d2a40;padding:4px;text-align:left;vertical-align:top}select,button{min-height:44px;font-size:14px}
+.row{display:flex;flex-wrap:wrap;gap:6px;align-items:center}.res span{margin-right:10px}#log{font-size:12px;max-height:160px;overflow:auto}
+</style>
+</head>
+<body>
+<h1>STARS MP.0 — istemci (geliştirme prototipi, oynanabilir sürüm değil)</h1>
+<div id="status">Bağlanıyor…</div>
+<div id="me"></div>
+<div id="cols"></div>
+<div id="world" class="dim"></div>
+<div id="log"></div>
+<script src="mp-client.js"></script>
+</body>
+</html>
