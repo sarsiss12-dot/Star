@@ -1,6 +1,6 @@
 # STARS — Reddedilmiş AI araştırmaları: karar özeti
 
-Bu belge, 96H.5.1 → 96H.10 arasında denenip **üretime alınmayan** bütün AI adaylarını tek yerde toplar. Buradaki hiçbir yama oyuna otomatik eklenmez. Bir adayı yeniden açmak için yeni faz kararı, önceden ilan edilmiş kabul kapısı ve aynı Save/RNG üzerinde kontrol–aday karşılaştırması gerekir.
+Bu belge, 96H.5.1 → 96H.11 arasında denenip **üretime alınmayan** bütün AI adaylarını tek yerde toplar. Buradaki hiçbir yama oyuna otomatik eklenmez. Bir adayı yeniden açmak için yeni faz kararı, önceden ilan edilmiş kabul kapısı ve aynı Save/RNG üzerinde kontrol–aday karşılaştırması gerekir.
 
 Ortak ders: yerel bir göstergede kazanç (tek seed, tek kaynak, tek devlet) genel faydayı kanıtlamadı. Reddedilen her adayda ya başka bir kaynak (gıda, maden, ticaret), ya yeni devlet toparlanması, ya da filo/güç geriledi.
 
@@ -26,6 +26,12 @@ Ortak ders: yerel bir göstergede kazanç (tek seed, tek kaynak, tek devlet) gen
 | 96H.10 aday D2 (D + güvenli rota) | 96H.10 | Ordu rotası görünür düşman gücünün tuttuğu ara sistemlerden geçmesin | seed11'de D ile aynı; seed23'te eskortsuz varış 0 → 3, savaş terhisi 57 → 61. Ek fayda yok | `research/96h10/candidate-D2-route-safety-REJECTED.patch` |
 | 96H.10 aday P (D + yığma cezası varışa baksın) | 96H.10 | Aynı kolonideki orduların birlikte ileri-geri salınmasını önleme | Emir sayısı D'ye göre seed11 222 → 74, seed23 196 → 73. Ancak plasebo bantlarında ordu kaybı tutarsız (bir dünyada 3 → 10), kritik ay iki dünyada +1 | `research/96h10/candidate-P-stacking-destination-REJECTED.patch` |
 | 96H.10 aday E (ordu için alaşım tavanı) | 96H.10 | Stok yetiyorsa tek ordu gövdesi aylık alaşım bütçe tavanını aşsın (96C.1 benzeri) | Hedef olayda (seed23 sys41) ordu maden kapısında düştü, alaşım ayırması çözüldü, katastrof aynı ay; nedensel fayda yok. Kök neden ekonomi eşiği, ayrı faz kararı | `research/96h10/candidate-E-army-budget-REJECTED.patch` |
+| 96H.11 aday R (yerine koyma değer kapısı) | 96H.11 | Üretken bina, aynı ağırlıklarla söktüğünden fazla değer eklemiyorsa yıkım yapılmasın | Yıkım 331 → 229, ama aynı binayı yeniden inşa 88 → 85 (hedefte etkisiz); 8 × 120 teknoloji 336 → 312, mineral stoku 68k → 86k (stoklama) | `research/96h11/candidate-R-replacement-gain-REJECTED.patch` |
+| 96H.11 aday B1 (başkent tipi odak kapsamı) | 96H.11 | Yönetim yalnız başkent sistemindeki ilk koloniye; diğer anavatan kolonileri ortak kuralla | Tetiklenen 4 seed'de çıktı artıyor, Etki −%15–25. Ama seed42 devlet4 mineral tuzağı: kritik ay [3,45,9,57,57], kontrol [1,0,0,2,2] (bant dışı) | `research/96h11/candidate-B1-capital-focus-REJECTED.patch` |
+| 96H.11 aday M (litoit dışı mineral açığı) | 96H.11 | `e.inc.min < 0` mineral krizi gibi Sanayi seçtirsin | Tek başına plasebo bandı dışında etki yok (seed 23/99/123) | `research/96h11/candidate-M-mineral-deficit-focus-REJECTED.patch` |
+| 96H.11 aday BM (B1 + M) | 96H.11 | Birlikte | 120 ay iyi (kanonik teknoloji 336 → 352, kritik ay 14 → 11), ama 240 ayda seed42 devlet4 min/tuk krizi medyan 98 [1..129], kontrol 1 [0..55] | `research/96h11/candidate-BM-capital-focus-mineral-REJECTED.patch` |
+| 96H.11 aday BM2 (B1 + her sanayi açığı) | 96H.11 | Herhangi bir ene/min/ala/tuk geliri negatifse Sanayi | Her seed'de tetikleniyor; 8 × 120 kritik ay 14 → 25, teknoloji 336 → 328 (seed11 0 → 13 kritik ay) | `research/96h11/candidate-BM2-industrial-deficit-REJECTED.patch` |
+| 96H.11 aday BM4 (B1 + acil sanayi kaynağı) | 96H.11 | `aiEconomicOrder` aciliyet ölçütü ene/min/ala/tuk'u acil sayınca Sanayi | Kriz 7/8 seed'de eşit ya da düşük, seed42 düzeliyor. Ticaret koruması geçmiyor: seed11 240 ay teslimat medyanı 288 → 95, seed7 120 ay 104 → 52. seed404 dünya gücü bant altında; değişiklik geniş | `research/96h11/candidate-BM4-urgent-industry-REJECTED.patch` |
 
 ## Açık kalan gerçek sorunlar (çözülmedi)
 
@@ -36,6 +42,8 @@ Ortak ders: yerel bir göstergede kazanç (tek seed, tek kaynak, tek devlet) gen
 - Hedef → eylem → başarı bağı: `contain` kendi toprak artışını, `security` kale sayısını, `recovery` bütçeyi ölçüyor; `prof.exp` / `e.agr` karara bağlı değil.
 - Ekonomide kuyruk zamanı ve takip eden üreticinin finansmanı (A2/C2/T1/I1/F1 hattı).
 - Seed11/404 geç dönem yeni devlet ekonomisi, seed2026 ticaret kaybı.
+- 96H.11: yerine koyma (yıkım) döngüsü. Yıkımların %27'sinde sonraki sipariş sökülen bina oluyor; puan dökümhaneyi (−14,65 min, +11,63 ala) negatif değerli sayıyor. C1, C2 ve R reddedildi.
+- 96H.11: başkent tipi odak bütün anavatan sistemine uygulanıyor (4/8 seed). Düzeltme (B1), Sanayi'yi yalnız litoit mineral krizinde seçen genel odak zincirini açığa çıkarıyor. Önce zincirin litoit dışı sanayi açığı yanıtı tek başına ölçülmeli (`AI-GEZEGEN-VERIMLILIGI-96H11.md`).
 
 ## Kabul edilen (red değil)
 

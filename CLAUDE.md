@@ -33,7 +33,7 @@ python3 tools/verify-release.py     # manifest ↔ çalışma ağacı bütünlü
 
 - AI davranış değişikliği: aynı Save'den kontrol ve aday kollarını koşun; kaotik ayrışma için tek RNG çekimli plasebo bandı kullanın (`research/96h8/scripts/arm.js`). Fayda yalnız adayın tetiklendiği devlet ve bant dışı farklar için iddia edilir. Kontrol kökünde `ai.js` çalışma ağacına bağ (symlink) değil, sabit kopya olmalı; yoksa aday aktarıldığında kontrol koşuları sessizce aday koduyla çalışır.
 - Küçük, tek amaçlı, ölçülmüş değişiklikler. RNG tüketim sırası, Save8 baytları ve mevcut savaş/ittifak/federasyon sonuçları korunmalı; yeni davranış aynı Save/RNG üzerinde kontrol–aday karşılaştırmasıyla kanıtlanır.
-- `research/**/*REJECTED*.patch`, `*SUPERSEDED*.patch`, `*-rejected*.patch` ve `CAPACITY-REJECTED.patch` üretime **uygulanmaz** (A1, A2, AC, C1, C2, D1, D2, T1, I1, F1, kapasite, 96H.7 sefer bekleme, 96H.8 aday 1/2a, 96H.9 aday A ve tek başına B/C, 96H.10 aday D2/P/E). Ayrıntı: `AI-RED-KARARLARI.md`.
+- `research/**/*REJECTED*.patch`, `*SUPERSEDED*.patch`, `*-rejected*.patch` ve `CAPACITY-REJECTED.patch` üretime **uygulanmaz** (A1, A2, AC, C1, C2, D1, D2, T1, I1, F1, kapasite, 96H.7 sefer bekleme, 96H.8 aday 1/2a, 96H.9 aday A ve tek başına B/C, 96H.10 aday D2/P/E, 96H.11 aday R/B1/M/BM/BM2/BM4). Ayrıntı: `AI-RED-KARARLARI.md`.
 - Ekonomik AI eşikleri, askerî strateji ve galaksi sınırları (100 sistem / 11 AI) ayrı faz kararı olmadan değiştirilmez.
 - Rapor dili: PASS / FAIL / NOT RUN ayrı yazılır; çalıştırılmayan test PASS sayılmaz, fiziksel Android sonucu iddia edilmez.
 - `tests/node_modules/` ve `tests/package-lock.json` commit edilmez. Tam koşu bazı audit/navy JSON ve PNG dosyalarını yeniden yazar (`git status` ile görün, commit öncesi geri alın).
