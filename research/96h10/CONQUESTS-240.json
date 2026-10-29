@@ -1,0 +1,773 @@
+{
+ "note": "every colony ownership flip: type (temiz=clean army landing, katastrof=6-month siege catastrophe, teslim=surrender), population and building loss in the flipping tick, still held after 12/24 months",
+ "arms": {
+  "seed11-96H.9": [
+   {
+    "t": "teslim",
+    "popLoss": 0.0,
+    "popPct": 0.0,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 24.4
+   },
+   {
+    "t": "teslim",
+    "popLoss": 0.0,
+    "popPct": 0.0,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 18.28
+   },
+   {
+    "t": "temiz",
+    "popLoss": 0.120000000000001,
+    "popPct": 0.005000000000000042,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 24
+   },
+   {
+    "t": "temiz",
+    "popLoss": 0.0,
+    "popPct": 0.0,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 14.88
+   },
+   {
+    "t": "teslim",
+    "popLoss": 0.0,
+    "popPct": 0.0,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 14.16
+   },
+   {
+    "t": "katastrof",
+    "popLoss": 18,
+    "popPct": 0.75,
+    "bLoss": 9,
+    "held12": true,
+    "held24": true,
+    "pop0": 24
+   },
+   {
+    "t": "temiz",
+    "popLoss": 0.0,
+    "popPct": 0.0,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 21.44
+   },
+   {
+    "t": "temiz",
+    "popLoss": 0.120000000000001,
+    "popPct": 0.004870129870129911,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 24.64
+   },
+   {
+    "t": "teslim",
+    "popLoss": 0.0,
+    "popPct": 0.0,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 18.88
+   },
+   {
+    "t": "temiz",
+    "popLoss": 0.120000000000001,
+    "popPct": 0.008064516129032324,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 14.88
+   },
+   {
+    "t": "teslim",
+    "popLoss": 0.0,
+    "popPct": 0.0,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 14.71
+   },
+   {
+    "t": "temiz",
+    "popLoss": 0,
+    "popPct": 0.0,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 24
+   },
+   {
+    "t": "temiz",
+    "popLoss": 0.0,
+    "popPct": 0.0,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 18.76
+   },
+   {
+    "t": "temiz",
+    "popLoss": 0.11999999999999744,
+    "popPct": 0.004823151125401826,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 24.88
+   },
+   {
+    "t": "temiz",
+    "popLoss": 0.0,
+    "popPct": 0.0,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 17.88
+   },
+   {
+    "t": "temiz",
+    "popLoss": 0.0,
+    "popPct": 0.0,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 24.88
+   },
+   {
+    "t": "temiz",
+    "popLoss": 0.120000000000001,
+    "popPct": 0.005000000000000042,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 24
+   },
+   {
+    "t": "temiz",
+    "popLoss": 0.120000000000001,
+    "popPct": 0.0064377682403434005,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 18.64
+   },
+   {
+    "t": "temiz",
+    "popLoss": 0,
+    "popPct": 0.0,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 24
+   }
+  ],
+  "seed11-96H.10 (D)": [
+   {
+    "t": "teslim",
+    "popLoss": 0.0,
+    "popPct": 0.0,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 24.4
+   },
+   {
+    "t": "teslim",
+    "popLoss": 0.0,
+    "popPct": 0.0,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 18.28
+   },
+   {
+    "t": "temiz",
+    "popLoss": 0.120000000000001,
+    "popPct": 0.005000000000000042,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 24
+   },
+   {
+    "t": "temiz",
+    "popLoss": 0.0,
+    "popPct": 0.0,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 14.88
+   },
+   {
+    "t": "teslim",
+    "popLoss": 0.0,
+    "popPct": 0.0,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 14.16
+   },
+   {
+    "t": "katastrof",
+    "popLoss": 18,
+    "popPct": 0.75,
+    "bLoss": 9,
+    "held12": true,
+    "held24": true,
+    "pop0": 24
+   },
+   {
+    "t": "temiz",
+    "popLoss": 0.0,
+    "popPct": 0.0,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 21.44
+   },
+   {
+    "t": "temiz",
+    "popLoss": 0.120000000000001,
+    "popPct": 0.004870129870129911,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 24.64
+   },
+   {
+    "t": "teslim",
+    "popLoss": 0.0,
+    "popPct": 0.0,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 18.88
+   },
+   {
+    "t": "temiz",
+    "popLoss": 0.120000000000001,
+    "popPct": 0.008064516129032324,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 14.88
+   },
+   {
+    "t": "teslim",
+    "popLoss": 0.0,
+    "popPct": 0.0,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 14.71
+   },
+   {
+    "t": "temiz",
+    "popLoss": 0,
+    "popPct": 0.0,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 24
+   },
+   {
+    "t": "temiz",
+    "popLoss": 0.0,
+    "popPct": 0.0,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 18.76
+   },
+   {
+    "t": "temiz",
+    "popLoss": 0.11999999999999744,
+    "popPct": 0.004823151125401826,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 24.88
+   },
+   {
+    "t": "temiz",
+    "popLoss": 0.0,
+    "popPct": 0.0,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 17.88
+   },
+   {
+    "t": "temiz",
+    "popLoss": 0.0,
+    "popPct": 0.0,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 24.88
+   },
+   {
+    "t": "temiz",
+    "popLoss": 0.120000000000001,
+    "popPct": 0.005000000000000042,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 24
+   },
+   {
+    "t": "temiz",
+    "popLoss": 0.120000000000001,
+    "popPct": 0.0064377682403434005,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 18.64
+   },
+   {
+    "t": "temiz",
+    "popLoss": 0,
+    "popPct": 0.0,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 24
+   }
+  ],
+  "seed11-D+P (REJECTED)": [
+   {
+    "t": "teslim",
+    "popLoss": 0.0,
+    "popPct": 0.0,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 24.4
+   },
+   {
+    "t": "teslim",
+    "popLoss": 0.0,
+    "popPct": 0.0,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 18.28
+   },
+   {
+    "t": "temiz",
+    "popLoss": 0.120000000000001,
+    "popPct": 0.005000000000000042,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 24
+   },
+   {
+    "t": "temiz",
+    "popLoss": 0.0,
+    "popPct": 0.0,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 14.88
+   },
+   {
+    "t": "teslim",
+    "popLoss": 0.0,
+    "popPct": 0.0,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 14.16
+   },
+   {
+    "t": "katastrof",
+    "popLoss": 18,
+    "popPct": 0.75,
+    "bLoss": 9,
+    "held12": true,
+    "held24": true,
+    "pop0": 24
+   },
+   {
+    "t": "temiz",
+    "popLoss": 0.0,
+    "popPct": 0.0,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 21.44
+   },
+   {
+    "t": "temiz",
+    "popLoss": 0.120000000000001,
+    "popPct": 0.004870129870129911,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 24.64
+   },
+   {
+    "t": "teslim",
+    "popLoss": 0.0,
+    "popPct": 0.0,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 18.88
+   },
+   {
+    "t": "temiz",
+    "popLoss": 0.120000000000001,
+    "popPct": 0.008064516129032324,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 14.88
+   },
+   {
+    "t": "teslim",
+    "popLoss": 0.0,
+    "popPct": 0.0,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 14.71
+   },
+   {
+    "t": "temiz",
+    "popLoss": 0,
+    "popPct": 0.0,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 24
+   },
+   {
+    "t": "temiz",
+    "popLoss": 0.0,
+    "popPct": 0.0,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 18.76
+   },
+   {
+    "t": "temiz",
+    "popLoss": 0.11999999999999744,
+    "popPct": 0.004823151125401826,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 24.88
+   },
+   {
+    "t": "temiz",
+    "popLoss": 0.0,
+    "popPct": 0.0,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 17.88
+   },
+   {
+    "t": "temiz",
+    "popLoss": 0.0,
+    "popPct": 0.0,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 24.88
+   },
+   {
+    "t": "temiz",
+    "popLoss": 0.120000000000001,
+    "popPct": 0.005000000000000042,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 24
+   },
+   {
+    "t": "temiz",
+    "popLoss": 0.120000000000001,
+    "popPct": 0.0064377682403434005,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 18.64
+   },
+   {
+    "t": "temiz",
+    "popLoss": 0,
+    "popPct": 0.0,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 24
+   }
+  ],
+  "seed23-96H.9": [
+   {
+    "t": "katastrof",
+    "popLoss": 9.76,
+    "popPct": 0.6612466124661247,
+    "bLoss": 8,
+    "held12": true,
+    "held24": true,
+    "pop0": 14.76
+   },
+   {
+    "t": "katastrof",
+    "popLoss": 9.88,
+    "popPct": 0.6639784946236559,
+    "bLoss": 8,
+    "held12": true,
+    "held24": true,
+    "pop0": 14.88
+   },
+   {
+    "t": "katastrof",
+    "popLoss": 9.88,
+    "popPct": 0.6639784946236559,
+    "bLoss": 8,
+    "held12": true,
+    "held24": true,
+    "pop0": 14.88
+   },
+   {
+    "t": "teslim",
+    "popLoss": 0,
+    "popPct": 0.0,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 18
+   },
+   {
+    "t": "teslim",
+    "popLoss": 0.8799999999999999,
+    "popPct": 0.3055555555555555,
+    "bLoss": 0,
+    "held12": true,
+    "held24": null,
+    "pop0": 2.88
+   },
+   {
+    "t": "katastrof",
+    "popLoss": 10.64,
+    "popPct": 0.680306905370844,
+    "bLoss": 8,
+    "held12": true,
+    "held24": true,
+    "pop0": 15.64
+   },
+   {
+    "t": "katastrof",
+    "popLoss": 9.76,
+    "popPct": 0.6192893401015228,
+    "bLoss": 9,
+    "held12": true,
+    "held24": true,
+    "pop0": 15.76
+   },
+   {
+    "t": "temiz",
+    "popLoss": 0.0,
+    "popPct": 0.0,
+    "bLoss": 0,
+    "held12": false,
+    "held24": false,
+    "pop0": 24.88
+   },
+   {
+    "t": "katastrof",
+    "popLoss": 18.76,
+    "popPct": 0.6522948539638387,
+    "bLoss": 10,
+    "held12": true,
+    "held24": true,
+    "pop0": 28.76
+   }
+  ],
+  "seed23-96H.10 (D)": [
+   {
+    "t": "katastrof",
+    "popLoss": 9.76,
+    "popPct": 0.6612466124661247,
+    "bLoss": 8,
+    "held12": true,
+    "held24": true,
+    "pop0": 14.76
+   },
+   {
+    "t": "katastrof",
+    "popLoss": 9.88,
+    "popPct": 0.6639784946236559,
+    "bLoss": 8,
+    "held12": true,
+    "held24": true,
+    "pop0": 14.88
+   },
+   {
+    "t": "katastrof",
+    "popLoss": 9.88,
+    "popPct": 0.6639784946236559,
+    "bLoss": 8,
+    "held12": true,
+    "held24": true,
+    "pop0": 14.88
+   },
+   {
+    "t": "teslim",
+    "popLoss": 0,
+    "popPct": 0.0,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 18
+   },
+   {
+    "t": "teslim",
+    "popLoss": 1,
+    "popPct": 0.25,
+    "bLoss": 0,
+    "held12": true,
+    "held24": null,
+    "pop0": 4
+   },
+   {
+    "t": "katastrof",
+    "popLoss": 10.64,
+    "popPct": 0.680306905370844,
+    "bLoss": 8,
+    "held12": true,
+    "held24": true,
+    "pop0": 15.64
+   },
+   {
+    "t": "katastrof",
+    "popLoss": 9.76,
+    "popPct": 0.6192893401015228,
+    "bLoss": 9,
+    "held12": true,
+    "held24": true,
+    "pop0": 15.76
+   },
+   {
+    "t": "temiz",
+    "popLoss": 0.0,
+    "popPct": 0.0,
+    "bLoss": 0,
+    "held12": false,
+    "held24": false,
+    "pop0": 24.88
+   },
+   {
+    "t": "katastrof",
+    "popLoss": 18.76,
+    "popPct": 0.6522948539638387,
+    "bLoss": 10,
+    "held12": true,
+    "held24": true,
+    "pop0": 28.76
+   }
+  ],
+  "seed23-D+P (REJECTED)": [
+   {
+    "t": "katastrof",
+    "popLoss": 9.76,
+    "popPct": 0.6612466124661247,
+    "bLoss": 8,
+    "held12": true,
+    "held24": true,
+    "pop0": 14.76
+   },
+   {
+    "t": "katastrof",
+    "popLoss": 9.88,
+    "popPct": 0.6639784946236559,
+    "bLoss": 8,
+    "held12": true,
+    "held24": true,
+    "pop0": 14.88
+   },
+   {
+    "t": "katastrof",
+    "popLoss": 9.88,
+    "popPct": 0.6639784946236559,
+    "bLoss": 8,
+    "held12": true,
+    "held24": true,
+    "pop0": 14.88
+   },
+   {
+    "t": "teslim",
+    "popLoss": 0,
+    "popPct": 0.0,
+    "bLoss": 0,
+    "held12": true,
+    "held24": true,
+    "pop0": 18
+   },
+   {
+    "t": "teslim",
+    "popLoss": 1,
+    "popPct": 0.25,
+    "bLoss": 0,
+    "held12": true,
+    "held24": null,
+    "pop0": 4
+   },
+   {
+    "t": "katastrof",
+    "popLoss": 10.64,
+    "popPct": 0.680306905370844,
+    "bLoss": 8,
+    "held12": true,
+    "held24": true,
+    "pop0": 15.64
+   },
+   {
+    "t": "katastrof",
+    "popLoss": 9.76,
+    "popPct": 0.6192893401015228,
+    "bLoss": 9,
+    "held12": true,
+    "held24": true,
+    "pop0": 15.76
+   },
+   {
+    "t": "temiz",
+    "popLoss": 0.0,
+    "popPct": 0.0,
+    "bLoss": 0,
+    "held12": false,
+    "held24": false,
+    "pop0": 24.88
+   },
+   {
+    "t": "katastrof",
+    "popLoss": 18.76,
+    "popPct": 0.6522948539638387,
+    "bLoss": 10,
+    "held12": true,
+    "held24": true,
+    "pop0": 28.76
+   }
+  ]
+ }
+}

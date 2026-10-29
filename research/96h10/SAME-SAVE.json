@@ -1,0 +1,905 @@
+{
+ "note": "24 months from 96H.9 checkpoints at the natural defect; control, D, D2 (route safety, REJECTED); 4 one-draw placebos each",
+ "windows": {
+  "s11pl1-m216": {
+   "c9": {
+    "base": {
+     "armyCombatLoss": 15,
+     "lossNonAttack": 15,
+     "lossAttack": 0,
+     "clean": 0,
+     "groundLoss": 0,
+     "armyBuiltApprox": 8,
+     "caps": [],
+     "falls": {},
+     "ships": 150,
+     "power": 78173,
+     "ala": 15568,
+     "crit": 0
+    },
+    "-pl1": {
+     "armyCombatLoss": 6,
+     "lossNonAttack": 6,
+     "lossAttack": 0,
+     "clean": 0,
+     "groundLoss": 0,
+     "armyBuiltApprox": 3,
+     "caps": [],
+     "falls": {},
+     "ships": 169,
+     "power": 80719,
+     "ala": 16795,
+     "crit": 0
+    },
+    "-pl2": {
+     "armyCombatLoss": 6,
+     "lossNonAttack": 6,
+     "lossAttack": 0,
+     "clean": 0,
+     "groundLoss": 0,
+     "armyBuiltApprox": 3,
+     "caps": [],
+     "falls": {},
+     "ships": 169,
+     "power": 80719,
+     "ala": 16795,
+     "crit": 0
+    },
+    "-pl3": {
+     "armyCombatLoss": 0,
+     "lossNonAttack": 0,
+     "lossAttack": 0,
+     "clean": 0,
+     "groundLoss": 0,
+     "armyBuiltApprox": 0,
+     "caps": [],
+     "falls": {},
+     "ships": 168,
+     "power": 65404,
+     "ala": 19801,
+     "crit": 0
+    },
+    "-pl4": {
+     "armyCombatLoss": 0,
+     "lossNonAttack": 0,
+     "lossAttack": 0,
+     "clean": 0,
+     "groundLoss": 0,
+     "armyBuiltApprox": 0,
+     "caps": [],
+     "falls": {},
+     "ships": 167,
+     "power": 64877,
+     "ala": 19701,
+     "crit": 0
+    }
+   },
+   "candD": {
+    "base": {
+     "armyCombatLoss": 7,
+     "lossNonAttack": 7,
+     "lossAttack": 0,
+     "clean": 0,
+     "groundLoss": 0,
+     "armyBuiltApprox": 3,
+     "caps": [],
+     "falls": {},
+     "ships": 152,
+     "power": 78607,
+     "ala": 16066,
+     "crit": 0
+    },
+    "-pl1": {
+     "armyCombatLoss": 3,
+     "lossNonAttack": 3,
+     "lossAttack": 0,
+     "clean": 0,
+     "groundLoss": 0,
+     "armyBuiltApprox": 3,
+     "caps": [],
+     "falls": {},
+     "ships": 172,
+     "power": 81061,
+     "ala": 16864,
+     "crit": 0
+    },
+    "-pl2": {
+     "armyCombatLoss": 3,
+     "lossNonAttack": 3,
+     "lossAttack": 0,
+     "clean": 0,
+     "groundLoss": 0,
+     "armyBuiltApprox": 3,
+     "caps": [],
+     "falls": {},
+     "ships": 172,
+     "power": 81061,
+     "ala": 16864,
+     "crit": 0
+    },
+    "-pl3": {
+     "armyCombatLoss": 0,
+     "lossNonAttack": 0,
+     "lossAttack": 0,
+     "clean": 0,
+     "groundLoss": 0,
+     "armyBuiltApprox": 0,
+     "caps": [],
+     "falls": {},
+     "ships": 168,
+     "power": 65404,
+     "ala": 19801,
+     "crit": 0
+    },
+    "-pl4": {
+     "armyCombatLoss": 0,
+     "lossNonAttack": 0,
+     "lossAttack": 0,
+     "clean": 0,
+     "groundLoss": 0,
+     "armyBuiltApprox": 0,
+     "caps": [],
+     "falls": {},
+     "ships": 167,
+     "power": 64877,
+     "ala": 19701,
+     "crit": 0
+    }
+   },
+   "candD2": {
+    "base": {
+     "armyCombatLoss": 7,
+     "lossNonAttack": 7,
+     "lossAttack": 0,
+     "clean": 0,
+     "groundLoss": 0,
+     "armyBuiltApprox": 3,
+     "caps": [],
+     "falls": {},
+     "ships": 152,
+     "power": 78607,
+     "ala": 16066,
+     "crit": 0
+    },
+    "-pl1": {
+     "armyCombatLoss": 3,
+     "lossNonAttack": 3,
+     "lossAttack": 0,
+     "clean": 0,
+     "groundLoss": 0,
+     "armyBuiltApprox": 3,
+     "caps": [],
+     "falls": {},
+     "ships": 172,
+     "power": 81061,
+     "ala": 16864,
+     "crit": 0
+    },
+    "-pl2": {
+     "armyCombatLoss": 3,
+     "lossNonAttack": 3,
+     "lossAttack": 0,
+     "clean": 0,
+     "groundLoss": 0,
+     "armyBuiltApprox": 3,
+     "caps": [],
+     "falls": {},
+     "ships": 172,
+     "power": 81061,
+     "ala": 16864,
+     "crit": 0
+    },
+    "-pl3": {
+     "armyCombatLoss": 0,
+     "lossNonAttack": 0,
+     "lossAttack": 0,
+     "clean": 0,
+     "groundLoss": 0,
+     "armyBuiltApprox": 0,
+     "caps": [],
+     "falls": {},
+     "ships": 168,
+     "power": 65404,
+     "ala": 19801,
+     "crit": 0
+    },
+    "-pl4": {
+     "armyCombatLoss": 0,
+     "lossNonAttack": 0,
+     "lossAttack": 0,
+     "clean": 0,
+     "groundLoss": 0,
+     "armyBuiltApprox": 0,
+     "caps": [],
+     "falls": {},
+     "ships": 167,
+     "power": 64877,
+     "ala": 19701,
+     "crit": 0
+    }
+   }
+  },
+  "s23pl4-m156": {
+   "c9": {
+    "base": {
+     "armyCombatLoss": 3,
+     "lossNonAttack": 2,
+     "lossAttack": 1,
+     "clean": 1,
+     "groundLoss": 0,
+     "armyBuiltApprox": 2,
+     "caps": [
+      [
+       158,
+       10,
+       4,
+       2
+      ],
+      [
+       169,
+       10,
+       2,
+       5
+      ]
+     ],
+     "falls": {
+      "temiz": 1,
+      "katastrof": 1
+     },
+     "ships": 135,
+     "power": 23069,
+     "ala": 383,
+     "crit": 1
+    },
+    "-pl1": {
+     "armyCombatLoss": 2,
+     "lossNonAttack": 1,
+     "lossAttack": 1,
+     "clean": 1,
+     "groundLoss": 0,
+     "armyBuiltApprox": 2,
+     "caps": [
+      [
+       158,
+       10,
+       4,
+       2
+      ],
+      [
+       167,
+       10,
+       2,
+       5
+      ]
+     ],
+     "falls": {
+      "temiz": 1,
+      "katastrof": 1,
+      "teslim": 28
+     },
+     "ships": 114,
+     "power": 19298,
+     "ala": 332,
+     "crit": 1
+    },
+    "-pl2": {
+     "armyCombatLoss": 3,
+     "lossNonAttack": 2,
+     "lossAttack": 1,
+     "clean": 1,
+     "groundLoss": 0,
+     "armyBuiltApprox": 2,
+     "caps": [
+      [
+       158,
+       10,
+       4,
+       2
+      ],
+      [
+       169,
+       10,
+       2,
+       5
+      ]
+     ],
+     "falls": {
+      "temiz": 1,
+      "katastrof": 1
+     },
+     "ships": 170,
+     "power": 27509,
+     "ala": 379,
+     "crit": 1
+    },
+    "-pl3": {
+     "armyCombatLoss": 2,
+     "lossNonAttack": 1,
+     "lossAttack": 1,
+     "clean": 1,
+     "groundLoss": 0,
+     "armyBuiltApprox": 2,
+     "caps": [
+      [
+       158,
+       10,
+       4,
+       2
+      ],
+      [
+       167,
+       10,
+       2,
+       5
+      ]
+     ],
+     "falls": {
+      "temiz": 1,
+      "katastrof": 1,
+      "teslim": 28
+     },
+     "ships": 114,
+     "power": 19298,
+     "ala": 332,
+     "crit": 1
+    },
+    "-pl4": {
+     "armyCombatLoss": 2,
+     "lossNonAttack": 1,
+     "lossAttack": 1,
+     "clean": 1,
+     "groundLoss": 0,
+     "armyBuiltApprox": 2,
+     "caps": [
+      [
+       158,
+       10,
+       4,
+       2
+      ],
+      [
+       167,
+       10,
+       2,
+       5
+      ]
+     ],
+     "falls": {
+      "temiz": 1,
+      "katastrof": 1
+     },
+     "ships": 174,
+     "power": 29062,
+     "ala": 331,
+     "crit": 1
+    }
+   },
+   "candD": {
+    "base": {
+     "armyCombatLoss": 3,
+     "lossNonAttack": 3,
+     "lossAttack": 0,
+     "clean": 1,
+     "groundLoss": 0,
+     "armyBuiltApprox": 2,
+     "caps": [
+      [
+       158,
+       10,
+       4,
+       2
+      ],
+      [
+       169,
+       10,
+       2,
+       5
+      ]
+     ],
+     "falls": {
+      "temiz": 1,
+      "katastrof": 1
+     },
+     "ships": 135,
+     "power": 23069,
+     "ala": 383,
+     "crit": 1
+    },
+    "-pl1": {
+     "armyCombatLoss": 2,
+     "lossNonAttack": 1,
+     "lossAttack": 1,
+     "clean": 1,
+     "groundLoss": 0,
+     "armyBuiltApprox": 2,
+     "caps": [
+      [
+       158,
+       10,
+       4,
+       2
+      ],
+      [
+       167,
+       10,
+       2,
+       5
+      ]
+     ],
+     "falls": {
+      "temiz": 1,
+      "katastrof": 1,
+      "teslim": 28
+     },
+     "ships": 114,
+     "power": 19298,
+     "ala": 332,
+     "crit": 1
+    },
+    "-pl2": {
+     "armyCombatLoss": 3,
+     "lossNonAttack": 3,
+     "lossAttack": 0,
+     "clean": 1,
+     "groundLoss": 0,
+     "armyBuiltApprox": 2,
+     "caps": [
+      [
+       158,
+       10,
+       4,
+       2
+      ],
+      [
+       169,
+       10,
+       2,
+       5
+      ]
+     ],
+     "falls": {
+      "temiz": 1,
+      "katastrof": 1
+     },
+     "ships": 170,
+     "power": 27509,
+     "ala": 379,
+     "crit": 1
+    },
+    "-pl3": {
+     "armyCombatLoss": 2,
+     "lossNonAttack": 1,
+     "lossAttack": 1,
+     "clean": 1,
+     "groundLoss": 0,
+     "armyBuiltApprox": 2,
+     "caps": [
+      [
+       158,
+       10,
+       4,
+       2
+      ],
+      [
+       167,
+       10,
+       2,
+       5
+      ]
+     ],
+     "falls": {
+      "temiz": 1,
+      "katastrof": 1,
+      "teslim": 28
+     },
+     "ships": 114,
+     "power": 19298,
+     "ala": 332,
+     "crit": 1
+    },
+    "-pl4": {
+     "armyCombatLoss": 2,
+     "lossNonAttack": 1,
+     "lossAttack": 1,
+     "clean": 1,
+     "groundLoss": 0,
+     "armyBuiltApprox": 2,
+     "caps": [
+      [
+       158,
+       10,
+       4,
+       2
+      ],
+      [
+       167,
+       10,
+       2,
+       5
+      ]
+     ],
+     "falls": {
+      "temiz": 1,
+      "katastrof": 1
+     },
+     "ships": 174,
+     "power": 29062,
+     "ala": 331,
+     "crit": 1
+    }
+   },
+   "candD2": {
+    "base": {
+     "armyCombatLoss": 2,
+     "lossNonAttack": 2,
+     "lossAttack": 0,
+     "clean": 1,
+     "groundLoss": 0,
+     "armyBuiltApprox": 2,
+     "caps": [
+      [
+       158,
+       10,
+       4,
+       2
+      ],
+      [
+       169,
+       10,
+       2,
+       5
+      ]
+     ],
+     "falls": {
+      "temiz": 1,
+      "katastrof": 1
+     },
+     "ships": 170,
+     "power": 28166,
+     "ala": 344,
+     "crit": 1
+    },
+    "-pl1": {
+     "armyCombatLoss": 2,
+     "lossNonAttack": 1,
+     "lossAttack": 1,
+     "clean": 1,
+     "groundLoss": 0,
+     "armyBuiltApprox": 2,
+     "caps": [
+      [
+       158,
+       10,
+       4,
+       2
+      ],
+      [
+       167,
+       10,
+       2,
+       5
+      ]
+     ],
+     "falls": {
+      "temiz": 1,
+      "katastrof": 1,
+      "teslim": 28
+     },
+     "ships": 114,
+     "power": 19298,
+     "ala": 332,
+     "crit": 1
+    },
+    "-pl2": {
+     "armyCombatLoss": 2,
+     "lossNonAttack": 2,
+     "lossAttack": 0,
+     "clean": 1,
+     "groundLoss": 0,
+     "armyBuiltApprox": 2,
+     "caps": [
+      [
+       158,
+       10,
+       4,
+       2
+      ],
+      [
+       169,
+       10,
+       2,
+       5
+      ]
+     ],
+     "falls": {
+      "temiz": 1,
+      "katastrof": 1
+     },
+     "ships": 164,
+     "power": 26624,
+     "ala": 482,
+     "crit": 1
+    },
+    "-pl3": {
+     "armyCombatLoss": 2,
+     "lossNonAttack": 1,
+     "lossAttack": 1,
+     "clean": 1,
+     "groundLoss": 0,
+     "armyBuiltApprox": 2,
+     "caps": [
+      [
+       158,
+       10,
+       4,
+       2
+      ],
+      [
+       167,
+       10,
+       2,
+       5
+      ]
+     ],
+     "falls": {
+      "temiz": 1,
+      "katastrof": 1,
+      "teslim": 28
+     },
+     "ships": 114,
+     "power": 19298,
+     "ala": 332,
+     "crit": 1
+    },
+    "-pl4": {
+     "armyCombatLoss": 2,
+     "lossNonAttack": 1,
+     "lossAttack": 1,
+     "clean": 1,
+     "groundLoss": 0,
+     "armyBuiltApprox": 2,
+     "caps": [
+      [
+       158,
+       10,
+       4,
+       2
+      ],
+      [
+       167,
+       10,
+       2,
+       5
+      ]
+     ],
+     "falls": {
+      "temiz": 1,
+      "katastrof": 1
+     },
+     "ships": 174,
+     "power": 29062,
+     "ala": 331,
+     "crit": 1
+    }
+   }
+  },
+  "s23pl4-m112": {
+   "c9": {
+    "base": {
+     "armyCombatLoss": 3,
+     "lossNonAttack": 1,
+     "lossAttack": 2,
+     "clean": 0,
+     "groundLoss": 0,
+     "armyBuiltApprox": 2,
+     "caps": [],
+     "falls": {},
+     "ships": 164,
+     "power": 27510,
+     "ala": 286,
+     "crit": 0
+    },
+    "-pl1": {
+     "armyCombatLoss": 4,
+     "lossNonAttack": 2,
+     "lossAttack": 2,
+     "clean": 0,
+     "groundLoss": 0,
+     "armyBuiltApprox": 2,
+     "caps": [],
+     "falls": {},
+     "ships": 144,
+     "power": 23282,
+     "ala": 285,
+     "crit": 0
+    },
+    "-pl2": {
+     "armyCombatLoss": 4,
+     "lossNonAttack": 2,
+     "lossAttack": 2,
+     "clean": 0,
+     "groundLoss": 0,
+     "armyBuiltApprox": 2,
+     "caps": [],
+     "falls": {},
+     "ships": 156,
+     "power": 24444,
+     "ala": 276,
+     "crit": 0
+    },
+    "-pl3": {
+     "armyCombatLoss": 3,
+     "lossNonAttack": 1,
+     "lossAttack": 2,
+     "clean": 0,
+     "groundLoss": 0,
+     "armyBuiltApprox": 2,
+     "caps": [],
+     "falls": {},
+     "ships": 155,
+     "power": 25355,
+     "ala": 155,
+     "crit": 0
+    },
+    "-pl4": {
+     "armyCombatLoss": 3,
+     "lossNonAttack": 1,
+     "lossAttack": 2,
+     "clean": 0,
+     "groundLoss": 0,
+     "armyBuiltApprox": 1,
+     "caps": [],
+     "falls": {},
+     "ships": 155,
+     "power": 24555,
+     "ala": 267,
+     "crit": 0
+    }
+   },
+   "candD": {
+    "base": {
+     "armyCombatLoss": 3,
+     "lossNonAttack": 1,
+     "lossAttack": 2,
+     "clean": 0,
+     "groundLoss": 0,
+     "armyBuiltApprox": 2,
+     "caps": [],
+     "falls": {},
+     "ships": 164,
+     "power": 27510,
+     "ala": 286,
+     "crit": 0
+    },
+    "-pl1": {
+     "armyCombatLoss": 4,
+     "lossNonAttack": 2,
+     "lossAttack": 2,
+     "clean": 0,
+     "groundLoss": 0,
+     "armyBuiltApprox": 2,
+     "caps": [],
+     "falls": {},
+     "ships": 144,
+     "power": 23282,
+     "ala": 285,
+     "crit": 0
+    },
+    "-pl2": {
+     "armyCombatLoss": 4,
+     "lossNonAttack": 2,
+     "lossAttack": 2,
+     "clean": 0,
+     "groundLoss": 0,
+     "armyBuiltApprox": 2,
+     "caps": [],
+     "falls": {},
+     "ships": 156,
+     "power": 24444,
+     "ala": 276,
+     "crit": 0
+    },
+    "-pl3": {
+     "armyCombatLoss": 3,
+     "lossNonAttack": 1,
+     "lossAttack": 2,
+     "clean": 0,
+     "groundLoss": 0,
+     "armyBuiltApprox": 2,
+     "caps": [],
+     "falls": {},
+     "ships": 155,
+     "power": 25355,
+     "ala": 155,
+     "crit": 0
+    },
+    "-pl4": {
+     "armyCombatLoss": 3,
+     "lossNonAttack": 1,
+     "lossAttack": 2,
+     "clean": 0,
+     "groundLoss": 0,
+     "armyBuiltApprox": 1,
+     "caps": [],
+     "falls": {},
+     "ships": 155,
+     "power": 24555,
+     "ala": 267,
+     "crit": 0
+    }
+   },
+   "candD2": {
+    "base": {
+     "armyCombatLoss": 3,
+     "lossNonAttack": 1,
+     "lossAttack": 2,
+     "clean": 0,
+     "groundLoss": 0,
+     "armyBuiltApprox": 2,
+     "caps": [],
+     "falls": {},
+     "ships": 164,
+     "power": 27744,
+     "ala": 255,
+     "crit": 0
+    },
+    "-pl1": {
+     "armyCombatLoss": 4,
+     "lossNonAttack": 2,
+     "lossAttack": 2,
+     "clean": 0,
+     "groundLoss": 0,
+     "armyBuiltApprox": 2,
+     "caps": [],
+     "falls": {},
+     "ships": 144,
+     "power": 23167,
+     "ala": 195,
+     "crit": 0
+    },
+    "-pl2": {
+     "armyCombatLoss": 4,
+     "lossNonAttack": 2,
+     "lossAttack": 2,
+     "clean": 0,
+     "groundLoss": 0,
+     "armyBuiltApprox": 2,
+     "caps": [],
+     "falls": {},
+     "ships": 161,
+     "power": 25537,
+     "ala": 248,
+     "crit": 0
+    },
+    "-pl3": {
+     "armyCombatLoss": 5,
+     "lossNonAttack": 2,
+     "lossAttack": 3,
+     "clean": 0,
+     "groundLoss": 0,
+     "armyBuiltApprox": 2,
+     "caps": [],
+     "falls": {},
+     "ships": 138,
+     "power": 23143,
+     "ala": 361,
+     "crit": 0
+    },
+    "-pl4": {
+     "armyCombatLoss": 3,
+     "lossNonAttack": 1,
+     "lossAttack": 2,
+     "clean": 0,
+     "groundLoss": 0,
+     "armyBuiltApprox": 2,
+     "caps": [],
+     "falls": {},
+     "ships": 169,
+     "power": 27020,
+     "ala": 266,
+     "crit": 0
+    }
+   }
+  }
+ }
+}

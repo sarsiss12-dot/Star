@@ -1,0 +1,31 @@
+{
+ "base_commit": "54058e08e2f9102f6e4b37195f1490f6fa389f99",
+ "ai_sha256": {
+  "96H.9 control": "4d7270b6f84466db89fbf944a67c393861dda4485a421ddcabf145b84d6709ed",
+  "D = 96H.10 (ACCEPTED)": "11485356c0e75c39d9dabb2fc06b50bfb425598d3d08a2b767fc691c39ce51c6",
+  "D2 (REJECTED)": "20de08ef82fee8e7b93e225dd8e7ab1108b56198b7cc7829a1ba44e2b38ebe1e",
+  "D+P (REJECTED)": "51fb8bf7f628bc8fdb638112c848e1766a7e8ba09b3b359d163a623aca006059",
+  "E alone (REJECTED)": "7b06412f013942aa2df9e9b4e4963a317d2bf74da0224129dd89233f73bf7325",
+  "D+E (REJECTED)": "e24b5948d4e309970dd5ead57fa55e5ad1fa797ebf4c56c555610b6347d2bafd"
+ },
+ "patches": "candidate-*.patch apply to 96H.9 ai.js and reproduce the hashes above (verified with patch(1)); D2 and P patches include D.",
+ "inputs": {
+  "seed11 canonical month0": "f5ddc95bc4d0e84487b82c011337e28323d8eeeede0a3de4028f0824bd804cf0",
+  "seed23 canonical month0": "fc13c68bac267d7235aa5de96a708ffd639e08be792f41398fda4122035e49bb",
+  "seed23 canonical control month15": "e883f6893d1e8f59e3d5285193a4c118037b4535633970c158daa3ef0cef181d"
+ },
+ "fixtures": {
+  "tests/fixtures/96h10/seed11-month228-occupied-colony.save": {
+   "sha256": "2d9b26dc245835c48c3112e078d378b186c6eaf9530f2a0063160b3ce1b1cb40",
+   "made_by": "PLACEBO_DAY=810 PLACEBO_RNG=1 RELOAD_AT=60 node scripts/ckpt10.js <96H.9 root> <seed11 canonical month0> 228 out.save",
+   "rng_matches_96H9_run": true
+  },
+  "tests/fixtures/96h10/seed11-month173-in-transit.save": {
+   "sha256": "06a7d167afe9cfbb10f7647e6a1ef8d58e3caa32e3deeace2adcecb566567d70",
+   "made_by": "PLACEBO_DAY=780 PLACEBO_RNG=1 RELOAD_AT=60 node scripts/ckpt10.js <96H.9 root> <seed11 canonical month0> 173 out.save",
+   "rng_matches_96H9_run": true
+  }
+ },
+ "control_runs": "arm10/arm10b observers are pure: all 18 control final Save SHAs equal the original 96H.9 arm9 runs; control root uses a pinned copy of the 96H.9 ai.js",
+ "node": "v22.22.0"
+}

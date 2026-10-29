@@ -1,0 +1,88 @@
+{
+ "method": "timing9.js: seed11 month173 Save8 (tests/fixtures/96h10, armies present), 60 months, wall-clock per call, Node v22.22.0, 3 alternating runs per arm on an idle 4-core container; median",
+ "arms": {
+  "96H.9": {
+   "wallMs": 11625,
+   "aiShipProduction": {
+    "calls": 240,
+    "perCallMsMedian": 2.533,
+    "runs": [
+     2.428,
+     2.533,
+     2.584
+    ]
+   },
+   "aiArmyTick": {
+    "calls": 60,
+    "perCallMsMedian": 0.552,
+    "runs": [
+     0.551,
+     0.557,
+     0.552
+    ]
+   },
+   "aiTurn": {
+    "calls": 300,
+    "perCallMsMedian": 16.433,
+    "runs": [
+     16.171,
+     16.433,
+     17.667
+    ]
+   },
+   "monthTick": {
+    "calls": 60,
+    "perCallMsMedian": 120.307,
+    "runs": [
+     120.003,
+     120.307,
+     127.955
+    ]
+   }
+  },
+  "96H.10": {
+   "wallMs": 12157,
+   "aiShipProduction": {
+    "calls": 240,
+    "perCallMsMedian": 2.851,
+    "runs": [
+     2.742,
+     2.851,
+     3.074
+    ]
+   },
+   "aiArmyTick": {
+    "calls": 60,
+    "perCallMsMedian": 0.846,
+    "runs": [
+     0.816,
+     0.846,
+     0.917
+    ]
+   },
+   "aiTurn": {
+    "calls": 300,
+    "perCallMsMedian": 16.57,
+    "runs": [
+     15.605,
+     16.57,
+     17.337
+    ]
+   },
+   "monthTick": {
+    "calls": 60,
+    "perCallMsMedian": 122.711,
+    "runs": [
+     115.626,
+     122.711,
+     127.629
+    ]
+   }
+  }
+ },
+ "aiArmySafe_micro": {
+  "fixture": "seed11-month228-occupied-colony.save (45 systems, 44 fleets)",
+  "msPerCall": 0.0388,
+  "cache": "per empire per aiArmyTick"
+ }
+}
