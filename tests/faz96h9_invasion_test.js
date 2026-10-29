@@ -6,14 +6,14 @@
    at month 79 the escort is recalled to the rally and the arriving army lands
    alone. The 96H.8 control is rebuilt from the reviewed adapter. */
 const fs=require('fs'),os=require('os'),path=require('path'),assert=require('assert/strict'),crypto=require('crypto');
-const {runtime}=require('./helpers/runtime'),{harness}=require('./helpers/95e-fixture'),{stripReviewedH9,reviewedH9Blocks}=require('./helpers/96h9-preservation');
+const {runtime}=require('./helpers/runtime'),{harness}=require('./helpers/95e-fixture'),{stripReviewedH9,reviewedH9Blocks}=require('./helpers/96h9-preservation'),{stripReviewedH10}=require('./helpers/96h10-preservation');
 const {test,end}=harness(),root=path.resolve(__dirname,'..');
 const fixture=n=>fs.readFileSync(path.join(__dirname,'fixtures/96h9',n),'utf8');
 const SIEGE='seed11-month66-siege.save',ESCORT='seed11-month79-escort.save';
 function legacyRoot(){
   const dir=fs.mkdtempSync(path.join(os.tmpdir(),'stars-96h8-'));
   for(const n of fs.readdirSync(root))if(/\.(js|html|json)$/.test(n)&&fs.statSync(path.join(root,n)).isFile())fs.symlinkSync(path.join(root,n),path.join(dir,n));
-  fs.unlinkSync(path.join(dir,'ai.js'));fs.writeFileSync(path.join(dir,'ai.js'),stripReviewedH9(fs.readFileSync(path.join(root,'ai.js'),'utf8')));
+  fs.unlinkSync(path.join(dir,'ai.js'));fs.writeFileSync(path.join(dir,'ai.js'),stripReviewedH9(stripReviewedH10(fs.readFileSync(path.join(root,'ai.js'),'utf8'))));
   return dir;
 }
 function load(save,base=root){
@@ -97,6 +97,6 @@ test('invasion, combat and diplomacy rules keep their 96H.8 bytes',()=>{
 });
 test('only the reviewed 96H.9 invasion blocks differ from 96H.8 ai.js',()=>{
   const source=fs.readFileSync(path.join(root,'ai.js'),'utf8');
-  assert.equal(crypto.createHash('sha256').update(stripReviewedH9(source)).digest('hex'),'8141a3fb691db340e66f267a9a94f942d3cb7e2cd542829bbb7493545bff16b0');
+  assert.equal(crypto.createHash('sha256').update(stripReviewedH9(stripReviewedH10(source))).digest('hex'),'8141a3fb691db340e66f267a9a94f942d3cb7e2cd542829bbb7493545bff16b0');
 });
 end();

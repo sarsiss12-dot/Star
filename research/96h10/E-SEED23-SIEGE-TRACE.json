@@ -1,0 +1,2276 @@
+{
+ "note": "seed23 canonical month-15 control Save; actor5 besieges actor4 capital sys41; monthly planet state, attacker armies, production reasons",
+ "traces": {
+  "c9": [
+   {
+    "day": 450,
+    "m": 15,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 22,
+      "g": 31,
+      "gb": 31,
+      "siege": 0,
+      "truce": null,
+      "ta": 0,
+      "pop": 15,
+      "b": 13
+     }
+    ],
+    "war": 0,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 296,
+    "inc": 7,
+    "ala": 113,
+    "camp": "gather:41",
+    "falls": []
+   },
+   {
+    "day": 480,
+    "m": 16,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 22,
+      "g": 31,
+      "gb": 31,
+      "siege": 0,
+      "truce": null,
+      "ta": 0,
+      "pop": 15,
+      "b": 13
+     }
+    ],
+    "war": 0,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 300,
+    "inc": 4,
+    "ala": 88,
+    "camp": "attack:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 510,
+    "m": 17,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 20.4,
+      "g": 31,
+      "gb": 31,
+      "siege": 0,
+      "truce": null,
+      "ta": 0,
+      "pop": 15,
+      "b": 13
+     }
+    ],
+    "war": 202,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 298,
+    "inc": -2,
+    "ala": 94,
+    "camp": "attack:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 540,
+    "m": 18,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 20.6,
+      "g": 30,
+      "gb": 30,
+      "siege": 0,
+      "truce": null,
+      "ta": 0,
+      "pop": 15,
+      "b": 13
+     }
+    ],
+    "war": 170,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 293,
+    "inc": 7,
+    "ala": 101,
+    "camp": "attack:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 570,
+    "m": 19,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 10.8,
+      "g": 31,
+      "gb": 31,
+      "siege": 0,
+      "truce": null,
+      "ta": 0,
+      "pop": 15,
+      "b": 13
+     }
+    ],
+    "war": 1364,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 272,
+    "inc": -21,
+    "ala": 106,
+    "camp": "gather:41",
+    "reasons": "energy-runway,alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 600,
+    "m": 20,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 3.8,
+      "g": 31,
+      "gb": 31,
+      "siege": 0,
+      "truce": null,
+      "ta": 0,
+      "pop": 15,
+      "b": 13
+     }
+    ],
+    "war": 1351,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 253,
+    "inc": -19,
+    "ala": 112,
+    "camp": "gather:41",
+    "reasons": "energy-runway,alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 630,
+    "m": 21,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 0,
+      "g": 24.9,
+      "gb": 31,
+      "siege": 0,
+      "truce": null,
+      "ta": 0,
+      "pop": 15,
+      "b": 13
+     }
+    ],
+    "war": 1347,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 234,
+    "inc": -19,
+    "ala": 118,
+    "camp": "gather:41",
+    "reasons": "energy-runway,alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 660,
+    "m": 22,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 0,
+      "g": 17.2,
+      "gb": 30,
+      "siege": 0,
+      "truce": null,
+      "ta": 0,
+      "pop": 15,
+      "b": 13
+     }
+    ],
+    "war": 1344,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 229,
+    "inc": -5,
+    "ala": 92,
+    "camp": "gather:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 690,
+    "m": 23,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 0,
+      "g": 9.9,
+      "gb": 28,
+      "siege": 0,
+      "truce": null,
+      "ta": 0,
+      "pop": 15,
+      "b": 13
+     }
+    ],
+    "war": 1331,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 223,
+    "inc": -6,
+    "ala": 97,
+    "camp": "attack:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 720,
+    "m": 24,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 0,
+      "g": 5,
+      "gb": 26,
+      "siege": 0,
+      "truce": null,
+      "ta": 0,
+      "pop": 15,
+      "b": 13
+     }
+    ],
+    "war": 1530,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 213,
+    "inc": -10,
+    "ala": 103,
+    "camp": "gather:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 750,
+    "m": 25,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 0,
+      "g": 3.5,
+      "gb": 24,
+      "siege": 0,
+      "truce": null,
+      "ta": 0,
+      "pop": 15,
+      "b": 13
+     }
+    ],
+    "war": 1516,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 217,
+    "inc": 3,
+    "ala": 108,
+    "camp": "gather:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 780,
+    "m": 26,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 0,
+      "g": 2.7,
+      "gb": 22,
+      "siege": 0,
+      "truce": null,
+      "ta": 0,
+      "pop": 15,
+      "b": 13
+     }
+    ],
+    "war": 1512,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 224,
+    "inc": 7,
+    "ala": 82,
+    "camp": "gather:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 810,
+    "m": 27,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 0,
+      "g": 2.1,
+      "gb": 20,
+      "siege": 0,
+      "truce": null,
+      "ta": 0,
+      "pop": 14.9,
+      "b": 13
+     }
+    ],
+    "war": 1499,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 231,
+    "inc": 7,
+    "ala": 87,
+    "camp": "attack:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 840,
+    "m": 28,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 0,
+      "g": 0.9,
+      "gb": 18,
+      "siege": 0,
+      "truce": null,
+      "ta": 0,
+      "pop": 14.9,
+      "b": 13
+     }
+    ],
+    "war": 1696,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 234,
+    "inc": 3,
+    "ala": 92,
+    "camp": "gather:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 870,
+    "m": 29,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 0,
+      "g": 0.4,
+      "gb": 17,
+      "siege": 0,
+      "truce": null,
+      "ta": 0,
+      "pop": 14.9,
+      "b": 13
+     }
+    ],
+    "war": 1723,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 247,
+    "inc": 13,
+    "ala": 98,
+    "camp": "gather:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 900,
+    "m": 30,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 0,
+      "g": 0,
+      "gb": 15,
+      "siege": 1,
+      "truce": null,
+      "ta": 0,
+      "pop": 14.9,
+      "b": 13
+     }
+    ],
+    "war": 1646,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 261,
+    "inc": 14,
+    "ala": 103,
+    "camp": "gather:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 930,
+    "m": 31,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 0,
+      "g": 0,
+      "gb": 13,
+      "siege": 2,
+      "truce": null,
+      "ta": 0,
+      "pop": 14.9,
+      "b": 13
+     }
+    ],
+    "war": 1641,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 284,
+    "inc": 23,
+    "ala": 109,
+    "camp": "gather:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 960,
+    "m": 32,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 0,
+      "g": 0,
+      "gb": 13,
+      "siege": 3,
+      "truce": null,
+      "ta": 0,
+      "pop": 14.9,
+      "b": 12
+     }
+    ],
+    "war": 1462,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 317,
+    "inc": 33,
+    "ala": 84,
+    "camp": "gather:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 990,
+    "m": 33,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 0,
+      "g": 0,
+      "gb": 13,
+      "siege": 4,
+      "truce": null,
+      "ta": 0,
+      "pop": 14.9,
+      "b": 12
+     }
+    ],
+    "war": 1457,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 357,
+    "inc": 40,
+    "ala": 91,
+    "camp": "attack:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 1020,
+    "m": 34,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 0,
+      "g": 0,
+      "gb": 13,
+      "siege": 5,
+      "truce": null,
+      "ta": 0,
+      "pop": 14.8,
+      "b": 12
+     }
+    ],
+    "war": 1674,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 393,
+    "inc": 36,
+    "ala": 97,
+    "camp": "gather:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 1050,
+    "m": 35,
+    "pl": [
+     {
+      "o": 5,
+      "sh": 0,
+      "g": 0,
+      "gb": 13,
+      "siege": 6,
+      "truce": null,
+      "ta": 0,
+      "pop": 5,
+      "b": 4
+     }
+    ],
+    "war": 1521,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 466,
+    "inc": 73,
+    "ala": 73,
+    "camp": "gather:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": [
+     "1050:katastrof"
+    ]
+   },
+   {
+    "day": 1080,
+    "m": 36,
+    "pl": [
+     {
+      "o": 5,
+      "sh": 0,
+      "g": 0,
+      "gb": 9,
+      "siege": 6,
+      "truce": null,
+      "ta": 0,
+      "pop": 6,
+      "b": 4
+     }
+    ],
+    "war": 1535,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 547,
+    "inc": 81,
+    "ala": 49,
+    "camp": "gather:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 1110,
+    "m": 37,
+    "pl": [
+     {
+      "o": 5,
+      "sh": 0,
+      "g": 0,
+      "gb": 11,
+      "siege": 6,
+      "truce": null,
+      "ta": 0,
+      "pop": 6,
+      "b": 4
+     }
+    ],
+    "war": 1548,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 622,
+    "inc": 76,
+    "ala": 55,
+    "camp": "gather:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 1140,
+    "m": 38,
+    "pl": [
+     {
+      "o": 5,
+      "sh": 0,
+      "g": 0,
+      "gb": 11,
+      "siege": 6,
+      "truce": null,
+      "ta": 0,
+      "pop": 6,
+      "b": 4
+     }
+    ],
+    "war": 1558,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 699,
+    "inc": 77,
+    "ala": 62,
+    "camp": "gather:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 1170,
+    "m": 39,
+    "pl": [
+     {
+      "o": 5,
+      "sh": 0,
+      "g": 0,
+      "gb": 11,
+      "siege": 6,
+      "truce": null,
+      "ta": 0,
+      "pop": 6,
+      "b": 4
+     }
+    ],
+    "war": 1561,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 775,
+    "inc": 76,
+    "ala": 70,
+    "camp": "gather:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   }
+  ],
+  "candE": [
+   {
+    "day": 450,
+    "m": 15,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 22,
+      "g": 31,
+      "gb": 31,
+      "siege": 0,
+      "truce": null,
+      "ta": 0,
+      "pop": 15,
+      "b": 13
+     }
+    ],
+    "war": 0,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 296,
+    "inc": 7,
+    "ala": 113,
+    "camp": "gather:41",
+    "falls": []
+   },
+   {
+    "day": 480,
+    "m": 16,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 22,
+      "g": 31,
+      "gb": 31,
+      "siege": 0,
+      "truce": null,
+      "ta": 0,
+      "pop": 15,
+      "b": 13
+     }
+    ],
+    "war": 0,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 300,
+    "inc": 4,
+    "ala": 88,
+    "camp": "attack:41",
+    "reasons": "resource-cost,alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 510,
+    "m": 17,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 20.4,
+      "g": 31,
+      "gb": 31,
+      "siege": 0,
+      "truce": null,
+      "ta": 0,
+      "pop": 15,
+      "b": 13
+     }
+    ],
+    "war": 202,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 298,
+    "inc": -2,
+    "ala": 62,
+    "camp": "attack:41",
+    "reasons": "resource-cost,alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 540,
+    "m": 18,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 22,
+      "g": 30,
+      "gb": 30,
+      "siege": 0,
+      "truce": null,
+      "ta": 0,
+      "pop": 15,
+      "b": 13
+     }
+    ],
+    "war": 0,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 301,
+    "inc": 15,
+    "ala": 69,
+    "camp": "attack:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 570,
+    "m": 19,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 12.2,
+      "g": 30,
+      "gb": 30,
+      "siege": 0,
+      "truce": null,
+      "ta": 0,
+      "pop": 15,
+      "b": 13
+     }
+    ],
+    "war": 1195,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 284,
+    "inc": -16,
+    "ala": 75,
+    "camp": "attack:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 600,
+    "m": 20,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 4.9,
+      "g": 30,
+      "gb": 30,
+      "siege": 0,
+      "truce": null,
+      "ta": 0,
+      "pop": 15,
+      "b": 13
+     }
+    ],
+    "war": 1377,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 265,
+    "inc": -19,
+    "ala": 81,
+    "camp": "gather:41",
+    "reasons": "energy-runway,alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 630,
+    "m": 21,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 0,
+      "g": 26.6,
+      "gb": 31,
+      "siege": 0,
+      "truce": null,
+      "ta": 0,
+      "pop": 15,
+      "b": 13
+     }
+    ],
+    "war": 1373,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 247,
+    "inc": -19,
+    "ala": 87,
+    "camp": "gather:41",
+    "reasons": "energy-runway,alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 660,
+    "m": 22,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 0,
+      "g": 15.8,
+      "gb": 29,
+      "siege": 0,
+      "truce": null,
+      "ta": 0,
+      "pop": 14.9,
+      "b": 13
+     }
+    ],
+    "war": 1369,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 241,
+    "inc": -5,
+    "ala": 61,
+    "camp": "gather:41",
+    "reasons": "resource-cost,alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 690,
+    "m": 23,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 0,
+      "g": 8.1,
+      "gb": 27,
+      "siege": 0,
+      "truce": null,
+      "ta": 0,
+      "pop": 14.9,
+      "b": 13
+     }
+    ],
+    "war": 1357,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 236,
+    "inc": -6,
+    "ala": 66,
+    "camp": "attack:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 720,
+    "m": 24,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 0,
+      "g": 4.2,
+      "gb": 25,
+      "siege": 0,
+      "truce": null,
+      "ta": 0,
+      "pop": 14.8,
+      "b": 13
+     }
+    ],
+    "war": 1555,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 226,
+    "inc": -10,
+    "ala": 72,
+    "camp": "gather:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 750,
+    "m": 25,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 0,
+      "g": 3,
+      "gb": 23,
+      "siege": 0,
+      "truce": null,
+      "ta": 0,
+      "pop": 15.8,
+      "b": 13
+     }
+    ],
+    "war": 1551,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 229,
+    "inc": 3,
+    "ala": 77,
+    "camp": "gather:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 780,
+    "m": 26,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 0,
+      "g": 2.7,
+      "gb": 23,
+      "siege": 0,
+      "truce": null,
+      "ta": 0,
+      "pop": 15.8,
+      "b": 13
+     }
+    ],
+    "war": 1546,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 236,
+    "inc": 7,
+    "ala": 51,
+    "camp": "gather:41",
+    "reasons": "resource-cost,alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 810,
+    "m": 27,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 0,
+      "g": 2.2,
+      "gb": 21,
+      "siege": 0,
+      "truce": null,
+      "ta": 0,
+      "pop": 15.8,
+      "b": 13
+     }
+    ],
+    "war": 1535,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 243,
+    "inc": 7,
+    "ala": 56,
+    "camp": "attack:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 840,
+    "m": 28,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 0,
+      "g": 1,
+      "gb": 19,
+      "siege": 0,
+      "truce": null,
+      "ta": 0,
+      "pop": 15.6,
+      "b": 13
+     }
+    ],
+    "war": 1732,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 246,
+    "inc": 3,
+    "ala": 61,
+    "camp": "gather:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 870,
+    "m": 29,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 0,
+      "g": 0.6,
+      "gb": 18,
+      "siege": 0,
+      "truce": null,
+      "ta": 0,
+      "pop": 15.5,
+      "b": 13
+     }
+    ],
+    "war": 1764,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 259,
+    "inc": 13,
+    "ala": 67,
+    "camp": "gather:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 900,
+    "m": 30,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 0,
+      "g": 0,
+      "gb": 14,
+      "siege": 1,
+      "truce": null,
+      "ta": 0,
+      "pop": 15.5,
+      "b": 13
+     }
+    ],
+    "war": 1870,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 269,
+    "inc": 10,
+    "ala": 72,
+    "camp": "gather:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 930,
+    "m": 31,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 0,
+      "g": 0,
+      "gb": 14,
+      "siege": 2,
+      "truce": null,
+      "ta": 0,
+      "pop": 15.5,
+      "b": 13
+     }
+    ],
+    "war": 1865,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 279,
+    "inc": 10,
+    "ala": 78,
+    "camp": "gather:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 960,
+    "m": 32,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 0,
+      "g": 0,
+      "gb": 14,
+      "siege": 3,
+      "truce": null,
+      "ta": 0,
+      "pop": 15.5,
+      "b": 14
+     }
+    ],
+    "war": 1861,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 300,
+    "inc": 20,
+    "ala": 51,
+    "camp": "gather:41",
+    "reasons": "resource-cost,alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 990,
+    "m": 33,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 0,
+      "g": 0,
+      "gb": 14,
+      "siege": 4,
+      "truce": null,
+      "ta": 0,
+      "pop": 15.4,
+      "b": 14
+     }
+    ],
+    "war": 1856,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 319,
+    "inc": 20,
+    "ala": 56,
+    "camp": "attack:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 1020,
+    "m": 34,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 0,
+      "g": 0,
+      "gb": 14,
+      "siege": 5,
+      "truce": null,
+      "ta": 0,
+      "pop": 15.3,
+      "b": 14
+     }
+    ],
+    "war": 2070,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 335,
+    "inc": 16,
+    "ala": 61,
+    "camp": "gather:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 1050,
+    "m": 35,
+    "pl": [
+     {
+      "o": 5,
+      "sh": 0,
+      "g": 0,
+      "gb": 13,
+      "siege": 6,
+      "truce": null,
+      "ta": 0,
+      "pop": 5,
+      "b": 5
+     }
+    ],
+    "war": 1879,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 390,
+    "inc": 55,
+    "ala": 68,
+    "camp": "gather:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": [
+     "1050:katastrof"
+    ]
+   },
+   {
+    "day": 1080,
+    "m": 36,
+    "pl": [
+     {
+      "o": 5,
+      "sh": 0,
+      "g": 0,
+      "gb": 9,
+      "siege": 6,
+      "truce": null,
+      "ta": 0,
+      "pop": 5,
+      "b": 5
+     }
+    ],
+    "war": 1899,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 459,
+    "inc": 69,
+    "ala": 75,
+    "camp": "gather:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 1110,
+    "m": 37,
+    "pl": [
+     {
+      "o": 5,
+      "sh": 0,
+      "g": 0,
+      "gb": 9,
+      "siege": 6,
+      "truce": null,
+      "ta": 0,
+      "pop": 5,
+      "b": 5
+     }
+    ],
+    "war": 1916,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 531,
+    "inc": 72,
+    "ala": 50,
+    "camp": "gather:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 1140,
+    "m": 38,
+    "pl": [
+     {
+      "o": 5,
+      "sh": 0,
+      "g": 0,
+      "gb": 9,
+      "siege": 6,
+      "truce": null,
+      "ta": 0,
+      "pop": 5,
+      "b": 5
+     }
+    ],
+    "war": 1930,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 604,
+    "inc": 72,
+    "ala": 56,
+    "camp": "gather:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 1170,
+    "m": 39,
+    "pl": [
+     {
+      "o": 5,
+      "sh": 0,
+      "g": 0,
+      "gb": 9,
+      "siege": 6,
+      "truce": null,
+      "ta": 0,
+      "pop": 5,
+      "b": 5
+     }
+    ],
+    "war": 1937,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 676,
+    "inc": 72,
+    "ala": 62,
+    "camp": "gather:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 1200,
+    "m": 40,
+    "pl": [
+     {
+      "o": 5,
+      "sh": 0,
+      "g": 0,
+      "gb": 9,
+      "siege": 6,
+      "truce": null,
+      "ta": 0,
+      "pop": 5,
+      "b": 6
+     }
+    ],
+    "war": 1944,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 749,
+    "inc": 73,
+    "ala": 69,
+    "camp": "gather:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 1230,
+    "m": 41,
+    "pl": [
+     {
+      "o": 5,
+      "sh": 0,
+      "g": 0,
+      "gb": 10,
+      "siege": 6,
+      "truce": null,
+      "ta": 0,
+      "pop": 6,
+      "b": 6
+     }
+    ],
+    "war": 1951,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 826,
+    "inc": 77,
+    "ala": 76,
+    "camp": "gather:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 1260,
+    "m": 42,
+    "pl": [
+     {
+      "o": 5,
+      "sh": 0,
+      "g": 0,
+      "gb": 12,
+      "siege": 6,
+      "truce": null,
+      "ta": 0,
+      "pop": 6,
+      "b": 6
+     }
+    ],
+    "war": 1958,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 901,
+    "inc": 74,
+    "ala": 50,
+    "camp": "gather:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 1290,
+    "m": 43,
+    "pl": [
+     {
+      "o": 5,
+      "sh": 0,
+      "g": 0,
+      "gb": 12,
+      "siege": 6,
+      "truce": null,
+      "ta": 0,
+      "pop": 6,
+      "b": 6
+     }
+    ],
+    "war": 1965,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 972,
+    "inc": 72,
+    "ala": 56,
+    "camp": "gather:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 1320,
+    "m": 44,
+    "pl": [
+     {
+      "o": 5,
+      "sh": 0,
+      "g": 0,
+      "gb": 12,
+      "siege": 6,
+      "truce": null,
+      "ta": 0,
+      "pop": 6,
+      "b": 6
+     }
+    ],
+    "war": 1972,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 1039,
+    "inc": 67,
+    "ala": 62,
+    "camp": "gather:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 1350,
+    "m": 45,
+    "pl": [
+     {
+      "o": 5,
+      "sh": 0,
+      "g": 0,
+      "gb": 13,
+      "siege": 6,
+      "truce": null,
+      "ta": 0,
+      "pop": 7,
+      "b": 6
+     }
+    ],
+    "war": 1979,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 1108,
+    "inc": 69,
+    "ala": 68,
+    "camp": "gather:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   }
+  ],
+  "candDE": [
+   {
+    "day": 450,
+    "m": 15,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 22,
+      "g": 31,
+      "gb": 31,
+      "siege": 0,
+      "truce": null,
+      "ta": 0,
+      "pop": 15,
+      "b": 13
+     }
+    ],
+    "war": 0,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 296,
+    "inc": 7,
+    "ala": 113,
+    "camp": "gather:41",
+    "falls": []
+   },
+   {
+    "day": 480,
+    "m": 16,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 22,
+      "g": 31,
+      "gb": 31,
+      "siege": 0,
+      "truce": null,
+      "ta": 0,
+      "pop": 15,
+      "b": 13
+     }
+    ],
+    "war": 0,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 300,
+    "inc": 4,
+    "ala": 88,
+    "camp": "attack:41",
+    "reasons": "resource-cost,alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 510,
+    "m": 17,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 20.4,
+      "g": 31,
+      "gb": 31,
+      "siege": 0,
+      "truce": null,
+      "ta": 0,
+      "pop": 15,
+      "b": 13
+     }
+    ],
+    "war": 202,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 298,
+    "inc": -2,
+    "ala": 62,
+    "camp": "attack:41",
+    "reasons": "resource-cost,alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 540,
+    "m": 18,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 22,
+      "g": 30,
+      "gb": 30,
+      "siege": 0,
+      "truce": null,
+      "ta": 0,
+      "pop": 15,
+      "b": 13
+     }
+    ],
+    "war": 0,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 301,
+    "inc": 15,
+    "ala": 69,
+    "camp": "attack:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 570,
+    "m": 19,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 12.2,
+      "g": 30,
+      "gb": 30,
+      "siege": 0,
+      "truce": null,
+      "ta": 0,
+      "pop": 15,
+      "b": 13
+     }
+    ],
+    "war": 1195,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 284,
+    "inc": -16,
+    "ala": 75,
+    "camp": "attack:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 600,
+    "m": 20,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 4.9,
+      "g": 30,
+      "gb": 30,
+      "siege": 0,
+      "truce": null,
+      "ta": 0,
+      "pop": 15,
+      "b": 13
+     }
+    ],
+    "war": 1377,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 265,
+    "inc": -19,
+    "ala": 81,
+    "camp": "gather:41",
+    "reasons": "energy-runway,alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 630,
+    "m": 21,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 0,
+      "g": 26.6,
+      "gb": 31,
+      "siege": 0,
+      "truce": null,
+      "ta": 0,
+      "pop": 15,
+      "b": 13
+     }
+    ],
+    "war": 1373,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 247,
+    "inc": -19,
+    "ala": 87,
+    "camp": "gather:41",
+    "reasons": "energy-runway,alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 660,
+    "m": 22,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 0,
+      "g": 15.8,
+      "gb": 29,
+      "siege": 0,
+      "truce": null,
+      "ta": 0,
+      "pop": 14.9,
+      "b": 13
+     }
+    ],
+    "war": 1369,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 241,
+    "inc": -5,
+    "ala": 61,
+    "camp": "gather:41",
+    "reasons": "resource-cost,alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 690,
+    "m": 23,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 0,
+      "g": 8.1,
+      "gb": 27,
+      "siege": 0,
+      "truce": null,
+      "ta": 0,
+      "pop": 14.9,
+      "b": 13
+     }
+    ],
+    "war": 1357,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 236,
+    "inc": -6,
+    "ala": 66,
+    "camp": "attack:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 720,
+    "m": 24,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 0,
+      "g": 4.2,
+      "gb": 25,
+      "siege": 0,
+      "truce": null,
+      "ta": 0,
+      "pop": 14.8,
+      "b": 13
+     }
+    ],
+    "war": 1555,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 226,
+    "inc": -10,
+    "ala": 72,
+    "camp": "gather:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 750,
+    "m": 25,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 0,
+      "g": 3,
+      "gb": 23,
+      "siege": 0,
+      "truce": null,
+      "ta": 0,
+      "pop": 15.8,
+      "b": 13
+     }
+    ],
+    "war": 1551,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 229,
+    "inc": 3,
+    "ala": 77,
+    "camp": "gather:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 780,
+    "m": 26,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 0,
+      "g": 2.7,
+      "gb": 23,
+      "siege": 0,
+      "truce": null,
+      "ta": 0,
+      "pop": 15.8,
+      "b": 13
+     }
+    ],
+    "war": 1546,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 236,
+    "inc": 7,
+    "ala": 51,
+    "camp": "gather:41",
+    "reasons": "resource-cost,alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 810,
+    "m": 27,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 0,
+      "g": 2.2,
+      "gb": 21,
+      "siege": 0,
+      "truce": null,
+      "ta": 0,
+      "pop": 15.8,
+      "b": 13
+     }
+    ],
+    "war": 1535,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 243,
+    "inc": 7,
+    "ala": 56,
+    "camp": "attack:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 840,
+    "m": 28,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 0,
+      "g": 1,
+      "gb": 19,
+      "siege": 0,
+      "truce": null,
+      "ta": 0,
+      "pop": 15.6,
+      "b": 13
+     }
+    ],
+    "war": 1732,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 246,
+    "inc": 3,
+    "ala": 61,
+    "camp": "gather:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 870,
+    "m": 29,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 0,
+      "g": 0.6,
+      "gb": 18,
+      "siege": 0,
+      "truce": null,
+      "ta": 0,
+      "pop": 15.5,
+      "b": 13
+     }
+    ],
+    "war": 1764,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 259,
+    "inc": 13,
+    "ala": 67,
+    "camp": "gather:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 900,
+    "m": 30,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 0,
+      "g": 0,
+      "gb": 14,
+      "siege": 1,
+      "truce": null,
+      "ta": 0,
+      "pop": 15.5,
+      "b": 13
+     }
+    ],
+    "war": 1870,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 269,
+    "inc": 10,
+    "ala": 72,
+    "camp": "gather:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 930,
+    "m": 31,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 0,
+      "g": 0,
+      "gb": 14,
+      "siege": 2,
+      "truce": null,
+      "ta": 0,
+      "pop": 15.5,
+      "b": 13
+     }
+    ],
+    "war": 1865,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 279,
+    "inc": 10,
+    "ala": 78,
+    "camp": "gather:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 960,
+    "m": 32,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 0,
+      "g": 0,
+      "gb": 14,
+      "siege": 3,
+      "truce": null,
+      "ta": 0,
+      "pop": 15.5,
+      "b": 14
+     }
+    ],
+    "war": 1861,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 300,
+    "inc": 20,
+    "ala": 51,
+    "camp": "gather:41",
+    "reasons": "resource-cost,alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 990,
+    "m": 33,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 0,
+      "g": 0,
+      "gb": 14,
+      "siege": 4,
+      "truce": null,
+      "ta": 0,
+      "pop": 15.4,
+      "b": 14
+     }
+    ],
+    "war": 1856,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 319,
+    "inc": 20,
+    "ala": 56,
+    "camp": "attack:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 1020,
+    "m": 34,
+    "pl": [
+     {
+      "o": 4,
+      "sh": 0,
+      "g": 0,
+      "gb": 14,
+      "siege": 5,
+      "truce": null,
+      "ta": 0,
+      "pop": 15.3,
+      "b": 14
+     }
+    ],
+    "war": 2070,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 335,
+    "inc": 16,
+    "ala": 61,
+    "camp": "gather:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 1050,
+    "m": 35,
+    "pl": [
+     {
+      "o": 5,
+      "sh": 0,
+      "g": 0,
+      "gb": 13,
+      "siege": 6,
+      "truce": null,
+      "ta": 0,
+      "pop": 5,
+      "b": 5
+     }
+    ],
+    "war": 1879,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 390,
+    "inc": 55,
+    "ala": 68,
+    "camp": "gather:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": [
+     "1050:katastrof"
+    ]
+   },
+   {
+    "day": 1080,
+    "m": 36,
+    "pl": [
+     {
+      "o": 5,
+      "sh": 0,
+      "g": 0,
+      "gb": 9,
+      "siege": 6,
+      "truce": null,
+      "ta": 0,
+      "pop": 5,
+      "b": 5
+     }
+    ],
+    "war": 1899,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 459,
+    "inc": 69,
+    "ala": 75,
+    "camp": "gather:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 1110,
+    "m": 37,
+    "pl": [
+     {
+      "o": 5,
+      "sh": 0,
+      "g": 0,
+      "gb": 9,
+      "siege": 6,
+      "truce": null,
+      "ta": 0,
+      "pop": 5,
+      "b": 5
+     }
+    ],
+    "war": 1916,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 531,
+    "inc": 72,
+    "ala": 50,
+    "camp": "gather:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 1140,
+    "m": 38,
+    "pl": [
+     {
+      "o": 5,
+      "sh": 0,
+      "g": 0,
+      "gb": 9,
+      "siege": 6,
+      "truce": null,
+      "ta": 0,
+      "pop": 5,
+      "b": 5
+     }
+    ],
+    "war": 1930,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 604,
+    "inc": 72,
+    "ala": 56,
+    "camp": "gather:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 1170,
+    "m": 39,
+    "pl": [
+     {
+      "o": 5,
+      "sh": 0,
+      "g": 0,
+      "gb": 9,
+      "siege": 6,
+      "truce": null,
+      "ta": 0,
+      "pop": 5,
+      "b": 5
+     }
+    ],
+    "war": 1937,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 676,
+    "inc": 72,
+    "ala": 62,
+    "camp": "gather:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 1200,
+    "m": 40,
+    "pl": [
+     {
+      "o": 5,
+      "sh": 0,
+      "g": 0,
+      "gb": 9,
+      "siege": 6,
+      "truce": null,
+      "ta": 0,
+      "pop": 5,
+      "b": 6
+     }
+    ],
+    "war": 1944,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 749,
+    "inc": 73,
+    "ala": 69,
+    "camp": "gather:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 1230,
+    "m": 41,
+    "pl": [
+     {
+      "o": 5,
+      "sh": 0,
+      "g": 0,
+      "gb": 10,
+      "siege": 6,
+      "truce": null,
+      "ta": 0,
+      "pop": 6,
+      "b": 6
+     }
+    ],
+    "war": 1951,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 826,
+    "inc": 77,
+    "ala": 76,
+    "camp": "gather:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 1260,
+    "m": 42,
+    "pl": [
+     {
+      "o": 5,
+      "sh": 0,
+      "g": 0,
+      "gb": 12,
+      "siege": 6,
+      "truce": null,
+      "ta": 0,
+      "pop": 6,
+      "b": 6
+     }
+    ],
+    "war": 1958,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 901,
+    "inc": 74,
+    "ala": 50,
+    "camp": "gather:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 1290,
+    "m": 43,
+    "pl": [
+     {
+      "o": 5,
+      "sh": 0,
+      "g": 0,
+      "gb": 12,
+      "siege": 6,
+      "truce": null,
+      "ta": 0,
+      "pop": 6,
+      "b": 6
+     }
+    ],
+    "war": 1965,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 972,
+    "inc": 72,
+    "ala": 56,
+    "camp": "gather:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 1320,
+    "m": 44,
+    "pl": [
+     {
+      "o": 5,
+      "sh": 0,
+      "g": 0,
+      "gb": 12,
+      "siege": 6,
+      "truce": null,
+      "ta": 0,
+      "pop": 6,
+      "b": 6
+     }
+    ],
+    "war": 1972,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 1039,
+    "inc": 67,
+    "ala": 62,
+    "camp": "gather:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   },
+   {
+    "day": 1350,
+    "m": 45,
+    "pl": [
+     {
+      "o": 5,
+      "sh": 0,
+      "g": 0,
+      "gb": 13,
+      "siege": 6,
+      "truce": null,
+      "ta": 0,
+      "pop": 7,
+      "b": 6
+     }
+    ],
+    "war": 1979,
+    "armies": [],
+    "ordQ": "0+0",
+    "ene": 1108,
+    "inc": 69,
+    "ala": 68,
+    "camp": "gather:41",
+    "reasons": "alloy-budget-reserve,science-covered",
+    "falls": []
+   }
+  ]
+ }
+}

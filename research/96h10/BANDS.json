@@ -1,0 +1,1616 @@
+{
+ "D_vs_96H9": {
+  "2026-base": {
+   "c9": [
+    {
+     "ships": 213,
+     "power": 26652,
+     "techs": 40,
+     "cols": 21,
+     "armyLoss": 1,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 219,
+     "power": 27508,
+     "techs": 40,
+     "cols": 21,
+     "armyLoss": 1,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 219,
+     "power": 28113,
+     "techs": 40,
+     "cols": 23,
+     "armyLoss": 1,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 158,
+     "power": 21320,
+     "techs": 40,
+     "cols": 25,
+     "armyLoss": 3,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 158,
+     "power": 21320,
+     "techs": 40,
+     "cols": 25,
+     "armyLoss": 3,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    }
+   ],
+   "candD": [
+    {
+     "ships": 180,
+     "power": 23956,
+     "techs": 41,
+     "cols": 21,
+     "armyLoss": 0,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 154,
+     "power": 20716,
+     "techs": 40,
+     "cols": 23,
+     "armyLoss": 2,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 224,
+     "power": 28918,
+     "techs": 41,
+     "cols": 24,
+     "armyLoss": 0,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 208,
+     "power": 26616,
+     "techs": 40,
+     "cols": 23,
+     "armyLoss": 0,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 208,
+     "power": 26616,
+     "techs": 40,
+     "cols": 23,
+     "armyLoss": 0,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    }
+   ]
+  },
+  "11-pl6": {
+   "c9": [
+    {
+     "ships": 243,
+     "power": 84546,
+     "techs": 68,
+     "cols": 39,
+     "armyLoss": 1,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 1,
+     "wdis": 0
+    },
+    {
+     "ships": 320,
+     "power": 116208,
+     "techs": 65,
+     "cols": 42,
+     "armyLoss": 0,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 1,
+     "wdis": 0
+    },
+    {
+     "ships": 312,
+     "power": 106424,
+     "techs": 69,
+     "cols": 40,
+     "armyLoss": 1,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 1,
+     "wdis": 0
+    },
+    {
+     "ships": 314,
+     "power": 112246,
+     "techs": 67,
+     "cols": 41,
+     "armyLoss": 1,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 1,
+     "wdis": 0
+    },
+    {
+     "ships": 322,
+     "power": 104972,
+     "techs": 67,
+     "cols": 41,
+     "armyLoss": 5,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 1,
+     "wdis": 0
+    }
+   ],
+   "candD": [
+    {
+     "ships": 189,
+     "power": 67070,
+     "techs": 67,
+     "cols": 40,
+     "armyLoss": 0,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 1,
+     "wdis": 0
+    },
+    {
+     "ships": 320,
+     "power": 116244,
+     "techs": 65,
+     "cols": 42,
+     "armyLoss": 0,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 1,
+     "wdis": 0
+    },
+    {
+     "ships": 312,
+     "power": 106424,
+     "techs": 69,
+     "cols": 40,
+     "armyLoss": 1,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 1,
+     "wdis": 0
+    },
+    {
+     "ships": 310,
+     "power": 102961,
+     "techs": 64,
+     "cols": 39,
+     "armyLoss": 1,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 3,
+     "wdis": 0
+    },
+    {
+     "ships": 323,
+     "power": 105060,
+     "techs": 67,
+     "cols": 41,
+     "armyLoss": 1,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 1,
+     "wdis": 0
+    }
+   ]
+  },
+  "23-pl2": {
+   "c9": [
+    {
+     "ships": 206,
+     "power": 59953,
+     "techs": 75,
+     "cols": 22,
+     "armyLoss": 4,
+     "clean": 0,
+     "caps": 1,
+     "kat": 0,
+     "crit": 1,
+     "wdis": 24
+    },
+    {
+     "ships": 244,
+     "power": 65187,
+     "techs": 74,
+     "cols": 22,
+     "armyLoss": 1,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 1,
+     "wdis": 24
+    },
+    {
+     "ships": 217,
+     "power": 62760,
+     "techs": 75,
+     "cols": 22,
+     "armyLoss": 5,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 1,
+     "wdis": 45
+    },
+    {
+     "ships": 240,
+     "power": 66868,
+     "techs": 73,
+     "cols": 22,
+     "armyLoss": 4,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 1,
+     "wdis": 43
+    },
+    {
+     "ships": 239,
+     "power": 68995,
+     "techs": 74,
+     "cols": 24,
+     "armyLoss": 2,
+     "clean": 1,
+     "caps": 1,
+     "kat": 0,
+     "crit": 1,
+     "wdis": 24
+    }
+   ],
+   "candD": [
+    {
+     "ships": 172,
+     "power": 49076,
+     "techs": 74,
+     "cols": 22,
+     "armyLoss": 3,
+     "clean": 0,
+     "caps": 1,
+     "kat": 0,
+     "crit": 1,
+     "wdis": 24
+    },
+    {
+     "ships": 247,
+     "power": 67933,
+     "techs": 74,
+     "cols": 24,
+     "armyLoss": 3,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 2,
+     "wdis": 35
+    },
+    {
+     "ships": 220,
+     "power": 58489,
+     "techs": 75,
+     "cols": 23,
+     "armyLoss": 2,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 1,
+     "wdis": 24
+    },
+    {
+     "ships": 220,
+     "power": 58489,
+     "techs": 75,
+     "cols": 23,
+     "armyLoss": 2,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 1,
+     "wdis": 24
+    },
+    {
+     "ships": 237,
+     "power": 66531,
+     "techs": 75,
+     "cols": 22,
+     "armyLoss": 1,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 1,
+     "wdis": 24
+    }
+   ]
+  },
+  "11-pl5": {
+   "c9": [
+    {
+     "ships": 209,
+     "power": 60491,
+     "techs": 69,
+     "cols": 25,
+     "armyLoss": 1,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 204,
+     "power": 61728,
+     "techs": 63,
+     "cols": 32,
+     "armyLoss": 0,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 204,
+     "power": 61728,
+     "techs": 63,
+     "cols": 32,
+     "armyLoss": 0,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 247,
+     "power": 71296,
+     "techs": 66,
+     "cols": 31,
+     "armyLoss": 0,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 258,
+     "power": 71776,
+     "techs": 65,
+     "cols": 31,
+     "armyLoss": 1,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    }
+   ],
+   "candD": [
+    {
+     "ships": 217,
+     "power": 61412,
+     "techs": 65,
+     "cols": 28,
+     "armyLoss": 0,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 205,
+     "power": 61924,
+     "techs": 63,
+     "cols": 32,
+     "armyLoss": 1,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 205,
+     "power": 61924,
+     "techs": 63,
+     "cols": 32,
+     "armyLoss": 1,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 247,
+     "power": 71296,
+     "techs": 66,
+     "cols": 31,
+     "armyLoss": 0,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 264,
+     "power": 71816,
+     "techs": 64,
+     "cols": 26,
+     "armyLoss": 0,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    }
+   ]
+  },
+  "23-base": {
+   "c9": [
+    {
+     "ships": 330,
+     "power": 79441,
+     "techs": 96,
+     "cols": 25,
+     "armyLoss": 5,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 309,
+     "power": 73247,
+     "techs": 91,
+     "cols": 36,
+     "armyLoss": 3,
+     "clean": 1,
+     "caps": 1,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 369,
+     "power": 90248,
+     "techs": 90,
+     "cols": 41,
+     "armyLoss": 2,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 377,
+     "power": 89688,
+     "techs": 93,
+     "cols": 42,
+     "armyLoss": 2,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 354,
+     "power": 83083,
+     "techs": 92,
+     "cols": 36,
+     "armyLoss": 2,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    }
+   ],
+   "candD": [
+    {
+     "ships": 328,
+     "power": 79639,
+     "techs": 96,
+     "cols": 25,
+     "armyLoss": 3,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 357,
+     "power": 88319,
+     "techs": 89,
+     "cols": 40,
+     "armyLoss": 2,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 371,
+     "power": 90449,
+     "techs": 90,
+     "cols": 41,
+     "armyLoss": 0,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 377,
+     "power": 89688,
+     "techs": 93,
+     "cols": 42,
+     "armyLoss": 2,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 354,
+     "power": 83083,
+     "techs": 92,
+     "cols": 36,
+     "armyLoss": 2,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    }
+   ]
+  },
+  "23-pl4": {
+   "c9": [
+    {
+     "ships": 271,
+     "power": 58536,
+     "techs": 74,
+     "cols": 17,
+     "armyLoss": 2,
+     "clean": 0,
+     "caps": 1,
+     "kat": 1,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 275,
+     "power": 55555,
+     "techs": 73,
+     "cols": 20,
+     "armyLoss": 1,
+     "clean": 0,
+     "caps": 1,
+     "kat": 1,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 169,
+     "power": 37684,
+     "techs": 79,
+     "cols": 27,
+     "armyLoss": 7,
+     "clean": 0,
+     "caps": 5,
+     "kat": 4,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 249,
+     "power": 46304,
+     "techs": 73,
+     "cols": 16,
+     "armyLoss": 6,
+     "clean": 0,
+     "caps": 2,
+     "kat": 2,
+     "crit": 2,
+     "wdis": 40
+    },
+    {
+     "ships": 230,
+     "power": 42800,
+     "techs": 73,
+     "cols": 20,
+     "armyLoss": 6,
+     "clean": 0,
+     "caps": 3,
+     "kat": 3,
+     "crit": 0,
+     "wdis": 0
+    }
+   ],
+   "candD": [
+    {
+     "ships": 271,
+     "power": 58536,
+     "techs": 74,
+     "cols": 17,
+     "armyLoss": 2,
+     "clean": 0,
+     "caps": 1,
+     "kat": 1,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 275,
+     "power": 55555,
+     "techs": 73,
+     "cols": 20,
+     "armyLoss": 1,
+     "clean": 0,
+     "caps": 1,
+     "kat": 1,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 169,
+     "power": 37684,
+     "techs": 79,
+     "cols": 27,
+     "armyLoss": 7,
+     "clean": 0,
+     "caps": 5,
+     "kat": 4,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 264,
+     "power": 49359,
+     "techs": 73,
+     "cols": 16,
+     "armyLoss": 6,
+     "clean": 0,
+     "caps": 2,
+     "kat": 2,
+     "crit": 2,
+     "wdis": 40
+    },
+    {
+     "ships": 206,
+     "power": 41485,
+     "techs": 73,
+     "cols": 22,
+     "armyLoss": 6,
+     "clean": 0,
+     "caps": 9,
+     "kat": 8,
+     "crit": 1,
+     "wdis": 1
+    }
+   ]
+  },
+  "11-pl1": {
+   "c9": [
+    {
+     "ships": 150,
+     "power": 78173,
+     "techs": 52,
+     "cols": 21,
+     "armyLoss": 15,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 175,
+     "power": 83537,
+     "techs": 52,
+     "cols": 21,
+     "armyLoss": 17,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 166,
+     "power": 80266,
+     "techs": 53,
+     "cols": 21,
+     "armyLoss": 17,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 168,
+     "power": 80775,
+     "techs": 53,
+     "cols": 21,
+     "armyLoss": 17,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 170,
+     "power": 81438,
+     "techs": 52,
+     "cols": 21,
+     "armyLoss": 13,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    }
+   ],
+   "candD": [
+    {
+     "ships": 152,
+     "power": 78607,
+     "techs": 53,
+     "cols": 21,
+     "armyLoss": 7,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 166,
+     "power": 81613,
+     "techs": 53,
+     "cols": 21,
+     "armyLoss": 3,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 176,
+     "power": 83207,
+     "techs": 54,
+     "cols": 21,
+     "armyLoss": 3,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 177,
+     "power": 83345,
+     "techs": 52,
+     "cols": 21,
+     "armyLoss": 3,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 169,
+     "power": 80651,
+     "techs": 52,
+     "cols": 21,
+     "armyLoss": 3,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    }
+   ]
+  }
+ },
+ "P_vs_D": {
+  "11-pl1": {
+   "candD": [
+    {
+     "ships": 152,
+     "power": 78607,
+     "techs": 53,
+     "cols": 21,
+     "armyLoss": 7,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 176,
+     "power": 87486,
+     "techs": 54,
+     "cols": 21,
+     "armyLoss": 1,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 171,
+     "power": 84214,
+     "techs": 54,
+     "cols": 21,
+     "armyLoss": 0,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 155,
+     "power": 83640,
+     "techs": 54,
+     "cols": 21,
+     "armyLoss": 0,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 162,
+     "power": 69314,
+     "techs": 53,
+     "cols": 21,
+     "armyLoss": 1,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    }
+   ],
+   "candDP": [
+    {
+     "ships": 128,
+     "power": 62474,
+     "techs": 53,
+     "cols": 21,
+     "armyLoss": 3,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 1,
+     "wdis": 0
+    },
+    {
+     "ships": 176,
+     "power": 87486,
+     "techs": 54,
+     "cols": 21,
+     "armyLoss": 1,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 171,
+     "power": 84214,
+     "techs": 54,
+     "cols": 21,
+     "armyLoss": 0,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 155,
+     "power": 83640,
+     "techs": 54,
+     "cols": 21,
+     "armyLoss": 0,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 158,
+     "power": 69028,
+     "techs": 52,
+     "cols": 21,
+     "armyLoss": 5,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    }
+   ]
+  },
+  "11-pl3": {
+   "candD": [
+    {
+     "ships": 205,
+     "power": 60617,
+     "techs": 57,
+     "cols": 19,
+     "armyLoss": 0,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 207,
+     "power": 61135,
+     "techs": 57,
+     "cols": 19,
+     "armyLoss": 0,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 175,
+     "power": 54487,
+     "techs": 57,
+     "cols": 19,
+     "armyLoss": 0,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 195,
+     "power": 59111,
+     "techs": 57,
+     "cols": 19,
+     "armyLoss": 0,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 205,
+     "power": 60815,
+     "techs": 57,
+     "cols": 20,
+     "armyLoss": 0,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    }
+   ],
+   "candDP": [
+    {
+     "ships": 205,
+     "power": 60617,
+     "techs": 57,
+     "cols": 19,
+     "armyLoss": 0,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 207,
+     "power": 61135,
+     "techs": 57,
+     "cols": 19,
+     "armyLoss": 0,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 175,
+     "power": 54487,
+     "techs": 57,
+     "cols": 19,
+     "armyLoss": 0,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 195,
+     "power": 59111,
+     "techs": 57,
+     "cols": 19,
+     "armyLoss": 0,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 205,
+     "power": 60815,
+     "techs": 57,
+     "cols": 20,
+     "armyLoss": 0,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    }
+   ]
+  },
+  "11-pl6": {
+   "candD": [
+    {
+     "ships": 189,
+     "power": 67070,
+     "techs": 67,
+     "cols": 40,
+     "armyLoss": 0,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 308,
+     "power": 104856,
+     "techs": 67,
+     "cols": 40,
+     "armyLoss": 2,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 307,
+     "power": 104721,
+     "techs": 67,
+     "cols": 40,
+     "armyLoss": 2,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 304,
+     "power": 103282,
+     "techs": 67,
+     "cols": 40,
+     "armyLoss": 0,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 297,
+     "power": 102301,
+     "techs": 67,
+     "cols": 40,
+     "armyLoss": 0,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    }
+   ],
+   "candDP": [
+    {
+     "ships": 189,
+     "power": 67071,
+     "techs": 67,
+     "cols": 40,
+     "armyLoss": 0,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 308,
+     "power": 104857,
+     "techs": 67,
+     "cols": 40,
+     "armyLoss": 2,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 307,
+     "power": 104722,
+     "techs": 67,
+     "cols": 40,
+     "armyLoss": 2,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 304,
+     "power": 103283,
+     "techs": 67,
+     "cols": 40,
+     "armyLoss": 0,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 297,
+     "power": 102302,
+     "techs": 67,
+     "cols": 40,
+     "armyLoss": 0,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    }
+   ]
+  },
+  "23-base": {
+   "candD": [
+    {
+     "ships": 328,
+     "power": 79639,
+     "techs": 96,
+     "cols": 25,
+     "armyLoss": 1,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 333,
+     "power": 76632,
+     "techs": 95,
+     "cols": 27,
+     "armyLoss": 1,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 328,
+     "power": 74983,
+     "techs": 96,
+     "cols": 27,
+     "armyLoss": 3,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 329,
+     "power": 77793,
+     "techs": 95,
+     "cols": 27,
+     "armyLoss": 3,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 348,
+     "power": 80863,
+     "techs": 95,
+     "cols": 34,
+     "armyLoss": 3,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    }
+   ],
+   "candDP": [
+    {
+     "ships": 333,
+     "power": 80655,
+     "techs": 97,
+     "cols": 25,
+     "armyLoss": 2,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 333,
+     "power": 75748,
+     "techs": 94,
+     "cols": 27,
+     "armyLoss": 2,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 1,
+     "wdis": 0
+    },
+    {
+     "ships": 332,
+     "power": 75350,
+     "techs": 95,
+     "cols": 25,
+     "armyLoss": 3,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 290,
+     "power": 71078,
+     "techs": 96,
+     "cols": 25,
+     "armyLoss": 3,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 319,
+     "power": 74192,
+     "techs": 95,
+     "cols": 29,
+     "armyLoss": 10,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    }
+   ]
+  },
+  "23-pl3": {
+   "candD": [
+    {
+     "ships": 314,
+     "power": 86765,
+     "techs": 94,
+     "cols": 34,
+     "armyLoss": 0,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 335,
+     "power": 75091,
+     "techs": 93,
+     "cols": 30,
+     "armyLoss": 0,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 308,
+     "power": 84832,
+     "techs": 95,
+     "cols": 35,
+     "armyLoss": 0,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 304,
+     "power": 71182,
+     "techs": 94,
+     "cols": 37,
+     "armyLoss": 0,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 341,
+     "power": 83181,
+     "techs": 94,
+     "cols": 36,
+     "armyLoss": 0,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    }
+   ],
+   "candDP": [
+    {
+     "ships": 308,
+     "power": 85020,
+     "techs": 94,
+     "cols": 35,
+     "armyLoss": 0,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 326,
+     "power": 72465,
+     "techs": 92,
+     "cols": 31,
+     "armyLoss": 0,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 308,
+     "power": 84832,
+     "techs": 95,
+     "cols": 35,
+     "armyLoss": 0,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 314,
+     "power": 77585,
+     "techs": 93,
+     "cols": 35,
+     "armyLoss": 1,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    },
+    {
+     "ships": 332,
+     "power": 81996,
+     "techs": 95,
+     "cols": 38,
+     "armyLoss": 0,
+     "clean": 0,
+     "caps": 0,
+     "kat": 0,
+     "crit": 0,
+     "wdis": 0
+    }
+   ]
+  }
+ },
+ "note": "checkpoint one month before the first decision difference; 4 one-draw placebos at the trigger month for each arm",
+ "D_vs_96H9_canonical_seed404_240": {
+  "note": "canonical 4x240 seed404 diverged (deliveries 717->509); trigger day 3870 (army 294 re-tasked away from sys39 held by 2837 visible hostile power); checkpoint month 128, 112 months, base + placebos at day 3870 (k=1..4)",
+  "96H.9": [
+   {
+    "ships": 395,
+    "power": 75500,
+    "techs": 121,
+    "alive": 7,
+    "deliveries": 717,
+    "armyLoss": 4,
+    "crit": 40
+   },
+   {
+    "ships": 366,
+    "power": 71881,
+    "techs": 125,
+    "alive": 6,
+    "deliveries": 549,
+    "armyLoss": 2,
+    "crit": 17
+   },
+   {
+    "ships": 366,
+    "power": 71881,
+    "techs": 125,
+    "alive": 6,
+    "deliveries": 549,
+    "armyLoss": 2,
+    "crit": 17
+   },
+   {
+    "ships": 391,
+    "power": 75313,
+    "techs": 124,
+    "alive": 8,
+    "deliveries": 726,
+    "armyLoss": 13,
+    "crit": 20
+   },
+   {
+    "ships": 369,
+    "power": 66413,
+    "techs": 121,
+    "alive": 6,
+    "deliveries": 500,
+    "armyLoss": 3,
+    "crit": 15
+   }
+  ],
+  "96H.10": [
+   {
+    "ships": 351,
+    "power": 65612,
+    "techs": 116,
+    "alive": 6,
+    "deliveries": 509,
+    "armyLoss": 0,
+    "crit": 38
+   },
+   {
+    "ships": 369,
+    "power": 62859,
+    "techs": 120,
+    "alive": 7,
+    "deliveries": 630,
+    "armyLoss": 2,
+    "crit": 11
+   },
+   {
+    "ships": 396,
+    "power": 80646,
+    "techs": 118,
+    "alive": 6,
+    "deliveries": 624,
+    "armyLoss": 2,
+    "crit": 16
+   },
+   {
+    "ships": 405,
+    "power": 71900,
+    "techs": 130,
+    "alive": 8,
+    "deliveries": 879,
+    "armyLoss": 0,
+    "crit": 20
+   },
+   {
+    "ships": 398,
+    "power": 72442,
+    "techs": 121,
+    "alive": 7,
+    "deliveries": 635,
+    "armyLoss": 0,
+    "crit": 13
+   }
+  ]
+ }
+}
