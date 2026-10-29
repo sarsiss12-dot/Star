@@ -775,7 +775,7 @@ function createHost(opts){
     S.players.delete(pid);broadcastLobby();return {ok:true};
   }
   function closeRoom(){if(!L)return {ok:false};L.phase='closed';broadcastLobby();for(const p of guests())if(p.conn){kick(p.conn,'room-closed');S.conns.delete(p.conn);p.conn=null;}return {ok:true};}
-  return {onMessage,onLeave,onJoin(){},publish,publishTo,assign,release,installGuards,meta,restore,viewFor,local,dip:D,dipView,polView,
+  return {onMessage,onLeave,onJoin(){},publish,publishTo,assign,release,installGuards,meta,restore,viewFor,local,dip:D,dipView,polView:e=>pure(()=>polView(e)),
     isHuman:humanEmpire,isRemoteHuman:remoteHuman,state:S,stats,COMMANDS,HANDLERS,clock,fnv,observeHumans,
     configure,setCapacity,claimFor,setHostTab,start,canStart,kick:kickPlayer,close:closeRoom,lobbyView:()=>L&&lobbyView(S.players.get('host')),lobby:L,
     /* MP.1.1: duraklatma nedeni (host-offline / host-background) misafire lobide 'pause' olarak gider; MP.0 çağrısı nedensiz kalır. */

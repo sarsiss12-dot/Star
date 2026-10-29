@@ -184,30 +184,39 @@ function mini(){
    Yalnız insan oyuncularla teklif (AI devletlerle diplomasi tek oyunculu DİPLOMASİ ekranında, aynı motor).
    Aynı ekran modülü (dip-ui.js) misafir sekmesiyle ortak; komut host.local() ile AYNI denetimlerden geçer
    (ağdaki misafir gibi: başkası adına kabul yok, tur/süre/kaynak/Etki denetimi host motorunda). */
-let dipUI=null,dipEl=null,dipTT=0;
+let dipUI=null,polUI=null,dipEl=null,dipTT=0,dipSeg='trade';
 function dipData(){const me=G.p;return {dip:API.host.dipView(me),me:{id:me.id,res:me.res,n:me.name},day:Math.floor(G.day)};}
-function dipCount(){if(!API.host||!API.started||!G.p)return 0;return API.host.dip.offers.filter(r=>r.to===G.p.id&&r.status==='pending').length;}
+/* MP.3.1: host'un federasyon/vasallık bölümü — misafirle aynı polView ve aynı komutlar (host.local). Host başka oyuncu adına karar veremez. */
+function polData(){const me=G.p;return {pol:API.host.polView(me),dip:API.host.dipView(me),me:{id:me.id,res:me.res,n:me.name},day:Math.floor(G.day)};}
+function dipCount(){if(!API.host||!API.started||!G.p)return 0;return API.host.dip.offers.filter(r=>r.to===G.p.id&&r.status==='pending').length+(polUI?polUI.pending():0);}
 function dipLabel(){const n=dipCount();return 'DİPLOMASİ'+(n?' <i class="mp3-badge">'+n+'</i>':'');}
 function dipToast(t,bad){let el=doc.getElementById('mp3HostToast');if(!el){el=doc.createElement('div');el.id='mp3HostToast';el.className='mp3-host-toast';doc.body.appendChild(el);}
   el.hidden=false;el.textContent=t;el.className='mp3-host-toast'+(bad?' bad':'');clearTimeout(dipTT);dipTT=setTimeout(()=>{el.hidden=true;},3500);}
 function dipOpen(on){
   if(!window.MP3Dip||!API.host)return;
-  if(!on){if(dipEl){if(dipUI)dipUI.close();dipEl.remove();dipEl=null;dipUI=null;}return;}
+  if(!on){if(dipEl){if(dipUI)dipUI.close();if(polUI)polUI.close();dipEl.remove();dipEl=null;dipUI=null;polUI=null;}return;}
   if(dipEl)return;
   dipEl=doc.createElement('div');dipEl.className='mp3-host';dipEl.id='mp3Host';
-  dipEl.innerHTML='<div class="mp3-host-h"><span>ÇOK OYUNCULU DİPLOMASİ</span><button class="mp1-btn" data-h="close">KAPAT</button></div><div class="mp3-host-b" id="mp3HostBody"></div>';
+  const seg=window.MP31Pol?'<div class="mp31-seg">'+[['trade','TİCARET'],['fed','FEDERASYON'],['vas','VASALLIK']].map(([k,n])=>'<button data-hs="'+k+'">'+n+'</button>').join('')+'</div>':'';
+  dipEl.innerHTML='<div class="mp3-host-h"><span>ÇOK OYUNCULU DİPLOMASİ</span><button class="mp1-btn" data-h="close">KAPAT</button></div><div class="mp3-host-b" id="mp3HostBody">'+seg+'<div id="mp3HostT"></div><div id="mp3HostP" hidden></div></div>';
   doc.body.appendChild(dipEl);
   dipEl.querySelector('[data-h="close"]').addEventListener('click',()=>dipOpen(false));
-  dipUI=MP3Dip.create({root:doc.getElementById('mp3HostBody'),esc,color:V.color,humansOnly:true,data:dipData,
-    online:()=>!!API.host&&API.started&&!API.host.state.paused,toast:dipToast,
-    send(cmd,done){const x=API.host.local(cmd);done({status:x.ok?'ok':'rejected',code:x.code||null,detail:x.detail,extra:x.extra});return {ok:true};}});
-  dipUI.render(true);
+  const online=()=>!!API.host&&API.started&&!API.host.state.paused,
+    send=(cmd,done)=>{const x=API.host.local(cmd);done({status:x.ok?'ok':'rejected',code:x.code||null,detail:x.detail,extra:x.extra});return {ok:true};};
+  dipUI=MP3Dip.create({root:doc.getElementById('mp3HostT'),esc,color:V.color,humansOnly:true,data:dipData,online,toast:dipToast,send});
+  if(window.MP31Pol){polUI=MP31Pol.create({root:doc.getElementById('mp3HostP'),esc,color:V.color,data:polData,online,toast:dipToast,send});
+    dipEl.querySelector('.mp31-seg').addEventListener('click',e=>{const b=e.target.closest('[data-hs]');if(b)hostSeg(b.dataset.hs);});}
+  hostSeg(dipSeg);
 }
-function dipTick(){
-  if(dipUI)dipUI.render();
+function hostSeg(s){dipSeg=s;const T=doc.getElementById('mp3HostT'),P=doc.getElementById('mp3HostP');if(!T)return;T.hidden=s!=='trade';if(P)P.hidden=s==='trade';
+  if(dipUI)dipUI.close();if(polUI){polUI.close();if(s!=='trade')polUI.U.sec=s;}dipTick(true);}
+function dipTick(force){
+  if(dipUI&&dipSeg==='trade')dipUI.render(force);if(polUI&&dipSeg!=='trade')polUI.render(force);
+  if(polUI&&dipEl){const c=polUI.counts(),t=dipUI?dipUI.incoming().length:0;for(const [k,n,x] of [['trade','TİCARET',t],['fed','FEDERASYON',c.fed],['vas','VASALLIK',c.vas]]){const b=dipEl.querySelector('[data-hs="'+k+'"]');
+    if(!b)continue;const h=n+(x?' <i class="mp3-badge">'+x+'</i>':'');if(b.innerHTML!==h)b.innerHTML=h;b.classList.toggle('on',dipSeg===k);}}
   const b=doc.getElementById('mp3HostBtn');if(b){const h=dipLabel();if(b.innerHTML!==h)b.innerHTML=h;}
 }
-API.dip={open:dipOpen,get ui(){return dipUI;}};
+API.dip={open:dipOpen,seg:hostSeg,get ui(){return dipUI;},get pol(){return polUI;}};
 /* ---------- Android arka plan / ekran kilidi ----------
    Arka planda rAF durur, zamanlayıcılar kısılır, sekme dondurulabilir. Yarım hızla
    sürüp misafirleri belirsiz bırakmak yerine: oyun güvenle duraklar, misafir nedeni

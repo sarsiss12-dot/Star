@@ -200,6 +200,18 @@ test('gizlilik: üçüncü oyuncu C, A–B vasallık müzakeresinin kimliğini, 
   const pc=pol(h,C);assert.deepEqual(pc.vas.talks,[]);assert.equal(pc.fed,null);assert(!pc.others.some(x=>x.vias.some(v=>v.id===A||v.id===B)),'no uncontacted members listed');
   assert.equal(cmd(h,C,{kind:'vassalReply',sub:B,id:q.id,round:2,action:'accept'}).code,cmd(h,C,{kind:'vassalReply',sub:0,id:'0:1',round:1,action:'accept'}).code);
 });
+test('çakışmalar motor kuralıyla: vasal federasyona başvuramaz; üye vasal olursa motor ne yapıyorsa o (raporlanır); oy sürerken ayrılan üyenin oyu sayılmaz; ölen insanın açık müzakeresi ve daveti geçersizleşir',()=>{
+  const h=world(),terms={tax:{ene:.1,min:.1,ala:.1,yiy:0,tuk:0},science:0,defense:true,war:'none',autonomy:'consent',duration:0,renegotiate:24,sensors:false};
+  h.run('for(const id of F.members){G.emps[1].ally[id]=G.emps[id].ally[1]=true;}');
+  h.run(`subjugate(G.emps[4],G.emps[1],'haracguzar',${JSON.stringify(terms)},'voluntary');MP.publish()`);   // FİKSTÜR: A, C'nin vasalı
+  const r=cmd(h,A,{kind:'fedRequest',via:AI5});assert.equal(r.code,'rules:fed');assert.match(r.detail[0],/bağımsız/);
+  // üye B vasal olursa (motor kuralı): sonuç raporlanır
+  const k=world();k.run(`subjugate(G.emps[1],G.emps[3],'haracguzar',${JSON.stringify(terms)},'voluntary');updateFederations();MP.publish()`);
+  const still=J(k,'F.members.includes(3)');console.log('   üye B vasal olunca federasyon üyeliği (motor): '+(still?'sürüyor':'sona erdi'));
+  // ölen insan: açık vasallık müzakeresi ve federasyon daveti geçersizleşir
+  const d=world();cmd(d,B,{kind:'vassalOffer',to:A,mode:'seek',type:'haracguzar',terms});d.run('F.invites[1]={expires:G.day+180,terms:fedCharterKey(F),by:5,vote:"x"};G.emps[1].dead=true;vassalTalkTick();updateFederations();MP.publish()');
+  assert.deepEqual(J(d,'[G.emps[3].vassalTalk.status,!!F.invites[1]]'),['invalid',false]);
+});
 test('kayıt: bekleyen federasyon oylaması ve vasallık müzakeresi kanonik G\'de (Save8) — deserialize(serialize()) sonrası insan kendi kararını verir',()=>{
   const h=world();openLaw(h);const terms={tax:{ene:.2,min:.2,ala:.2,yiy:0,tuk:0},science:0,defense:true,war:'none',autonomy:'consent',duration:0,renegotiate:24,sensors:false};
   cmd(h,B,{kind:'vassalOffer',to:A,mode:'seek',type:'haracguzar',terms});const tk=token(h),q=J(h,'G.emps[3].vassalTalk');

@@ -130,7 +130,7 @@ function create(o){
       if(s&&s.dataset.s==='ok'&&!s.disabled){const c=U.confirm;close();act(c.kind,c.id);}
       else if(!s||s.dataset.s==='no'){if(e.target===el||s)close();}});
   }
-  function close(){if(U.confirm){U.confirm.el.remove();U.confirm=null;U.guard=performance.now()+400;}}   // kapanış dokunuşu alttaki düğmeye geçmez
+  function close(){if(U.confirm){U.confirm.el.remove();U.confirm=null;U.guard=performance.now()+400;return true;}return false;}   // kapanış dokunuşu alttaki düğmeye geçmez
 
   function act(kind,id){
     if(off())return o.toast(CODE['host-yok'],true);

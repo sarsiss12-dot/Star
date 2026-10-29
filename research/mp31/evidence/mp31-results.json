@@ -1,0 +1,151 @@
+{
+ "note": "Yerel relay + 4 ayrı Chromium süreci (mobil dokunmatik bağlam). Gerçek internet ya da fiziksel Android DEĞİL. Siyasi başlangıç durumu açık fikstür.",
+ "results": [
+  {
+   "name": "kurulum: gerçek lobi → oyun, 3 misafir; siyasi fikstür; misafirde motor yok; DİPLOMASİ altında TİCARET / FEDERASYON / VASALLIK",
+   "status": "PASS",
+   "ms": 4704
+  },
+  {
+   "name": "B. kritik: AI başkanın yasa önerisinde B oy vermeden evet/hayır listesinde değil; B telefondan HAYIR oyu verir (iki adımlı onay); yalnız B'nin oyu kaydedilir",
+   "status": "PASS",
+   "ms": 1510
+  },
+  {
+   "name": "A/D. üyelik başvurusu: A, AI 5 üzerinden BAŞVUR → kabul oylaması → B oy verir → davet A'nın DAVETLER bölümüne → A KATIL → gerçek üyelik; sonra A AYRIL → üyelik kalkar",
+   "status": "PASS",
+   "ms": 4465
+  },
+  {
+   "name": "E. vasallık insan–insan: B himaye ister (haraçgüzar, Enerji %20) → A karşı teklif (Enerji %10) → B kabul → gerçek sözleşme; eski tur reddedilir; A'nın DURUM ekranında sözleşme",
+   "status": "PASS",
+   "ms": 5133
+  },
+  {
+   "name": "F. barışçıl bağımsızlık: B BAĞIMSIZLIK İSTE → A REDDET (vasallık sürer, savaş yok) → yeniden talep → A KABUL → B bağımsız; geri tuşu açık onay penceresini kapatır, oyundan çıkmaz",
+   "status": "PASS",
+   "ms": 6096
+  },
+  {
+   "name": "G. AI ↔ insan: C (güçlü) AI 5'ten biat ister; AI motorla (vassalDriveAI) yanıtlar; AI karşı teklifi C'nin GELEN kutusunda bekler, AI C adına karar vermez",
+   "status": "PASS",
+   "ms": 1495
+  },
+  {
+   "name": "H. yetki ve gizlilik: üye olmayan oy, sahte federasyon, sahte token, sahte devlet, başkasının müzakeresi, geçersiz vergi, host başkası adına; C ağdan A–B müzakeresini ve F oylamasını almaz",
+   "status": "PASS",
+   "ms": 1857
+  },
+  {
+   "name": "host paneli: FEDERASYON / VASALLIK bölümleri aynı görünüm ve kurallarla; host üye olmadığı federasyonda oy veremez; düzen 915×412",
+   "status": "PASS",
+   "ms": 2246
+  },
+  {
+   "name": "Android görünümleri 360×800, 390×844, 412×915, 844×390, 915×412: federasyon (4 bölüm), vasallık (4 bölüm), sözleşme taslağı ve onay penceresi — taşma yok, ≥44 px, yazı ≥11 px",
+   "status": "PASS",
+   "ms": 9899
+  },
+  {
+   "name": "bağlantı: host ağı kesilince federasyon/vasallık düğmeleri kapanır ve komut gönderilmez; host dönünce açılır",
+   "status": "PASS",
+   "ms": 825
+  },
+  {
+   "name": "J. performans (host + 3 misafir): oy ve vasallık gecikmesi, pol bölümü boyutu, delta, host yayını, çizim, bellek",
+   "status": "PASS",
+   "ms": 139
+  }
+ ],
+ "metrics": {
+  "viewports": {
+   "360x800": {
+    "fed-gen": 0,
+    "fed-mem": 0,
+    "fed-vote": 0,
+    "fed-inv": 0
+   },
+   "390x844": {
+    "fed-gen": 0,
+    "fed-mem": 0,
+    "fed-vote": 0,
+    "fed-inv": 0
+   },
+   "412x915": {
+    "fed-gen": 0,
+    "fed-mem": 0,
+    "fed-vote": 0,
+    "fed-inv": 0
+   },
+   "844x390": {
+    "fed-gen": 0,
+    "fed-mem": 0,
+    "fed-vote": 0,
+    "fed-inv": 0
+   },
+   "915x412": {
+    "fed-gen": 0,
+    "fed-mem": 0,
+    "fed-vote": 0,
+    "fed-inv": 0
+   }
+  },
+  "perf": {
+   "host": {
+    "publishMedianMs": 3.9,
+    "publishP95Ms": 6.7,
+    "heapMB": 12.8
+   },
+   "guests": {
+    "A": {
+     "polBytes": 4524,
+     "polDeltas": 15,
+     "polDeltaMedian": 5119,
+     "polDeltaMax": 6387,
+     "snapshotMax": 19789,
+     "renderMedianMs": 0.4,
+     "heapMB": 3.2
+    },
+    "B": {
+     "polBytes": 6566,
+     "polDeltas": 18,
+     "polDeltaMedian": 7616,
+     "polDeltaMax": 10608,
+     "snapshotMax": 21230,
+     "renderMedianMs": 0.4,
+     "heapMB": 5.4
+    },
+    "C": {
+     "polBytes": 4602,
+     "polDeltas": 4,
+     "polDeltaMedian": 4666,
+     "polDeltaMax": 5126,
+     "snapshotMax": 18292,
+     "renderMedianMs": 0.8,
+     "heapMB": 3
+    }
+   },
+   "latency": {
+    "voteMs": 30,
+    "voteWall": 111,
+    "vassalOfferMs": 16,
+    "vassalAcceptMs": 16
+   }
+  },
+  "latency": {
+   "voteMs": 30,
+   "voteWall": 111,
+   "vassalOfferMs": 16,
+   "vassalAcceptMs": 16
+  },
+  "notes": [
+   "yasa savunma: KABUL 2/1",
+   "üyelik oylaması: KABUL — Gerekli üye ve oy çoğunluğu sağlandı",
+   "vergi: {\"day\":30.34,\"lord\":1,\"paid\":{\"ene\":0,\"min\":0,\"ala\":0.8647035,\"yiy\":0,\"tuk\":0,\"ara\":0}}",
+   "C→AI5 biat: rejected tur 1",
+   "yetki/gizlilik yasa elect:false"
+  ],
+  "browserProcesses": 4,
+  "pageErrors": []
+ }
+}
