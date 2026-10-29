@@ -72,7 +72,7 @@ async function sync(p){const day=await H.evaluate(()=>Math.floor(G.day));await w
   });
   await test('map is the default screen: own capital centred, own systems named, unknown systems only as dots, tabs HARİTA/FİLOLAR/KOLONİLER/BİLİM',async()=>{
     const g=await A.evaluate(()=>({tab:MP2Game.G.tab,draws:MP2Game.G.stats.draws,cam:MP2Game.G.cam,home:MP1Join.game.view.me.home,tabs:[...document.querySelectorAll('.mp2-nav button')].map(b=>b.textContent)}));
-    assert.equal(g.tab,'map');assert(g.draws>0);assert.deepEqual(g.tabs,['HARİTA','FİLOLAR','KOLONİLER','BİLİM']);
+    assert.equal(g.tab,'map');assert(g.draws>0);assert.deepEqual(g.tabs,['HARİTA','FİLOLAR','KOLONİLER','BİLİM','DİPLOMASİ']);   // MP.3: DİPLOMASİ sekmesi (rozet yokken düz metin)
     const b=await canvasBox(A),h=await A.evaluate(id=>MP2Game.screenOf('s',id),g.home);
     assert(Math.abs(h.x-b.width/2)<2&&Math.abs(h.y-b.height/2)<2,'capital centred');
     const px=await A.evaluate(()=>{const c=document.getElementById('mp2Map'),d=c.getContext('2d').getImageData(0,0,c.width,c.height).data;let n=0;for(let i=0;i<d.length;i+=16)if(d[i]+d[i+1]+d[i+2]>60)n++;return n;});assert(px>50,'map drawn');

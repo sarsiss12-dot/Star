@@ -103,6 +103,18 @@ test('authorization and validation: third party, forged empire, bad items, self/
   assert.equal(cmd(h,B,{kind:'respond',offer:id,action:'accept'}).code,'rules:closed');assert(lastView(h,A).log.some(x=>/süresi doldu/.test(x.m)));
   h.run('MP.setPaused(true,"host-background")');assert.equal(cmd(h,A,{kind:'offer',to:B,give:[res1('min',5)],want:[]}).code,'paused');h.run('MP.setPaused(false)');
 });
+test('preview (quote): cost and blockers come from the host dealQuote; read-only — no state, journal, revision or broadcast; the other human\'s stock stays hidden',()=>{
+  const h=world();h.run(`declareWar(G.emps[${A}],G.emps[${B}])`);h.run('MP.publish()');
+  const s0=st(h),j0=J(h,'MP.state.journal.length'),rev0=J(h,'MP.state.worldRevision'),n0=h.sb.__out.length;
+  const q=cmd(h,A,{kind:'quote',to:B,give:[{t:'peace'},res1('min',10)],want:[res1('ala',9999999)]});
+  assert.equal(q.status,'ok');assert.equal(q.extra.cost,J(h,`dealQuote({from:${A},to:${B},give:[{t:'peace'},{t:'res',r:'min',v:10}],want:[{t:'res',r:'ala',v:9999999}],born:G.day,expires:G.day+DEAL_OFFER_LIFE}).cost`));
+  assert.equal(q.extra.cost,J(h,'DEAL_TREATY_COST.peace'));assert.equal(q.extra.life,J(h,'DEAL_OFFER_LIFE'));
+  assert.equal(q.extra.ok,q.extra.etk>=q.extra.cost,'only the sender\'s own obligations gate a human target');assert(!q.extra.reasons.some(x=>/Alaşım/.test(x)),'B stock not revealed');
+  const big=cmd(h,A,{kind:'quote',to:B,give:[res1('min',9999999)],want:[]});assert.equal(big.extra.ok,false);assert(big.extra.reasons.some(x=>/Mineral/.test(x)));
+  assert.equal(cmd(h,A,{kind:'quote',to:C,give:[res1('min',1)],want:[]}).code,'rules:no-target');
+  assert.deepEqual(st(h),s0);assert.equal(J(h,'MP.state.journal.length'),j0);assert.equal(J(h,'MP.state.worldRevision'),rev0);
+  assert.equal(h.sb.__out.slice(n0).filter(([,t])=>/"type":"(delta|snapshot)"/.test(t)).length,0,'no broadcast');
+});
 test('atomicity: a failure injected inside executeDeal rolls everything back; the offer stays pending and can still be accepted once',()=>{
   const h=world();const id=cmd(h,A,{kind:'offer',to:B,give:[res1('min',100)],want:[res1('ala',20)]}).extra.offer;const s0=st(h);
   for(const at of ['after:items','after:cost','after:goodwill','after:recalc']){
@@ -113,13 +125,14 @@ test('atomicity: a failure injected inside executeDeal rolls everything back; th
 test('peace between humans: proposing does not end the war; acceptance runs the engine (makePeace via executeDeal); an old peace offer after peace is refused',()=>{
   const h=world();assert.equal(J(h,`declareWar(G.emps[${A}],G.emps[${B}])`),true);assert.equal(J(h,`!!G.emps[${A}].war[${B}]`),true);
   h.run(`G.emps[${A}].res.etk=Math.max(G.emps[${A}].res.etk,200);G.emps[${B}].res.etk=Math.max(G.emps[${B}].res.etk,200)`);h.run('MP.publish()');
-  assert.deepEqual(lastView(h,A).dip.contacts.find(c=>c.id===B),{id:B,h:1,war:1,peace:1});
+  {const k=lastView(h,A).dip.contacts.find(c=>c.id===B);assert.deepEqual([k.id,k.h,k.war,k.peace,k.bl],[B,1,1,1,0]);}
   const p1=cmd(h,A,{kind:'offer',to:B,give:[{t:'peace'}],want:[]});assert.equal(p1.status,'ok',JSON.stringify(p1));
   const p2=cmd(h,B,{kind:'offer',to:A,give:[{t:'peace'}],want:[]});assert.equal(p2.status,'ok');
   assert.equal(J(h,`!!G.emps[${A}].war[${B}]`),true,'war continues while the offer waits');
   const etk=res(h,A).etk;assert.equal(cmd(h,B,{kind:'respond',offer:p1.extra.offer,action:'accept'}).status,'ok');
   assert.deepEqual(J(h,`[!!G.emps[${A}].war[${B}],!!G.emps[${B}].war[${A}]]`),[false,false]);assert.equal(res(h,A).etk,etk-J(h,`DEAL_TREATY_COST.peace`),'peace cost charged to the proposer');
-  const s0=st(h);const old=cmd(h,A,{kind:'respond',offer:p2.extra.offer,action:'accept'});assert.equal(old.code,'rules:quote');assert.deepEqual(st(h),s0);
+  assert.equal(offerOf(h,A,p2.extra.offer).status,'invalid','the crossing peace offer is invalidated once peace exists');
+  const s0=st(h);const old=cmd(h,A,{kind:'respond',offer:p2.extra.offer,action:'accept'});assert.equal(old.code,'rules:closed');assert.deepEqual(st(h),s0);
   // Etki yetmezse barış teklifi gönderilemez
   assert.equal(J(h,`declareWar(G.emps[${A}],G.emps[${B}])`),true);h.run(`G.emps[${A}].res.etk=1`);
   const poor=cmd(h,A,{kind:'offer',to:B,give:[{t:'peace'}],want:[]});assert.equal(poor.code,'rules:quote');assert(poor.detail.some(x=>/Etki/.test(x)));

@@ -1,0 +1,175 @@
+{
+ "note": "Yerel relay + 4 ayrı Chromium süreci (mobil dokunmatik bağlam). Gerçek internet ya da fiziksel Android DEĞİL. Klavye: Chromium yazılım klavyesi açmaz; görünür alan küçültülerek benzetildi.",
+ "results": [
+  {
+   "name": "real lobby → game with three guests (1, 3, 4) on seed 22; contact comes from exploration as host time advances; guests run no engine and have a DİPLOMASİ tab",
+   "status": "PASS",
+   "ms": 5387
+  },
+  {
+   "name": "A. human ↔ human trade on two phones: A composes with presets and the keyboard, previews the host quote, sends; B sees the badge, accepts with two-step confirm; exact resources move once",
+   "status": "PASS",
+   "ms": 3294
+  },
+  {
+   "name": "B. counter-offer: B answers 60 instead of 100 alloy from the inbox; A sees round 2 and accepts; the old round is closed; only the new terms move",
+   "status": "PASS",
+   "ms": 3107
+  },
+  {
+   "name": "C. reject moves nothing; a tap on the backdrop over the KABUL button only closes the sheet; withdraw by the sender",
+   "status": "PASS",
+   "ms": 4489
+  },
+  {
+   "name": "D. AI ↔ human: guest → AI runs aiRespond (accept moves resources, one-sided demand is refused); natural AI → guest offers wait in the human inbox, AI never decides for the human",
+   "status": "PASS",
+   "ms": 3361
+  },
+  {
+   "name": "E. privacy (3 players): C never receives the A–B offers, ids, amounts or counter rounds over the network; probing a real id looks the same as a missing one",
+   "status": "PASS",
+   "ms": 3218
+  },
+  {
+   "name": "F. security and atomicity over the network: forged empire, bad items, duplicate cid, stale seq, accept+reject race, stock change, low Etki, injected engine failure, expiry, paused host — no partial change",
+   "status": "PASS",
+   "ms": 9814
+  },
+  {
+   "name": "peace between humans via the UI: BARIŞ ÖNER previews the host cost; war continues while pending; acceptance runs makePeace through executeDeal; the crossing offer becomes invalid",
+   "status": "PASS",
+   "ms": 2331
+  },
+  {
+   "name": "host MP diplomacy panel: humans only, same rules through host.local(); host ↔ C trade both ways with two-step confirm; host cannot act on other parties' offers; host notices go to the host log only",
+   "status": "PASS",
+   "ms": 10186
+  },
+  {
+   "name": "G. phone layouts 360×800, 390×844, 412×915, 844×390, 915×412: contacts, draft (keyboard), inbox, sent, history and the confirm sheet — no overflow, ≥44 px, ≥11 px text; the amount field stays visible with a keyboard-sized viewport",
+   "status": "PASS",
+   "ms": 13403
+  },
+  {
+   "name": "disconnect / reconnect: offline guest cannot act; reload restores the inbox from the host; host offline disables actions until it returns",
+   "status": "PASS",
+   "ms": 2896
+  },
+  {
+   "name": "H. performance with 4 humans (host + 3 guests): offer/accept round trip, inbox size in snapshot and delta, host publish cost, render cost, memory",
+   "status": "PASS",
+   "ms": 121
+  }
+ ],
+ "metrics": {
+  "viewports": {
+   "host915": {
+    "overflow": false,
+    "small": [],
+    "wide": [],
+    "minFont": 12,
+    "minAt": ":DEVLETLER",
+    "controls": 5,
+    "vw": 915,
+    "vh": 412
+   },
+   "360x800": {
+    "emp": 0,
+    "in": 0,
+    "out": 0,
+    "hist": 0
+   },
+   "390x844": {
+    "emp": 0,
+    "in": 0,
+    "out": 0,
+    "hist": 0
+   },
+   "412x915": {
+    "emp": 0,
+    "in": 0,
+    "out": 0,
+    "hist": 0
+   },
+   "844x390": {
+    "emp": 0,
+    "in": 0,
+    "out": 0,
+    "hist": 0
+   },
+   "915x412": {
+    "emp": 0,
+    "in": 0,
+    "out": 0,
+    "hist": 0
+   }
+  },
+  "perf": {
+   "host": {
+    "publishMedianMs": 4.6,
+    "publishP95Ms": 5.7,
+    "offers": 27,
+    "heapMB": 17.1
+   },
+   "guests": {
+    "A": {
+     "dipBytes": 5952,
+     "dipDeltas": 35,
+     "dipDeltaMedian": 3816,
+     "dipDeltaMax": 8108,
+     "snapshotMax": 22504,
+     "renderMedianMs": 0.6,
+     "heapMB": 4.1
+    },
+    "B": {
+     "dipBytes": 5622,
+     "dipDeltas": 1,
+     "dipDeltaMedian": 6901,
+     "dipDeltaMax": 6901,
+     "snapshotMax": 21495,
+     "renderMedianMs": 0.5,
+     "heapMB": 5.1
+    },
+    "C": {
+     "dipBytes": 1597,
+     "dipDeltas": 9,
+     "dipDeltaMedian": 1838,
+     "dipDeltaMax": 2428,
+     "snapshotMax": 16025,
+     "renderMedianMs": 0.7,
+     "heapMB": 3.1
+    }
+   },
+   "latency": {
+    "offerMs": 19,
+    "offerWallMs": 103,
+    "acceptMs": 17,
+    "acceptWallMs": 1172
+   }
+  },
+  "latency": {
+   "offerMs": 19,
+   "offerWallMs": 103,
+   "acceptMs": 17,
+   "acceptWallMs": 1172
+  },
+  "browserProcesses": 4,
+  "aiAnswers": {
+   "accept": "kabul",
+   "oneSided": "red"
+  },
+  "aiToHuman": {
+   "months": 2,
+   "offers": 1,
+   "kinds": [
+    "pact",
+    "res"
+   ],
+   "aiOffersStat": 1,
+   "decision": "accepted"
+  },
+  "peaceWar": true,
+  "pageErrors": []
+ }
+}

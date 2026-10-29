@@ -226,6 +226,15 @@ function createHost(opts){
         return dipGate(dealQuote(o),e,B);},
       roots:()=>[],
       apply:(e,at,c)=>dipSend(e,G.emps[c.to],dipItems(c.give),dipItems(c.want),null)},
+    /* Gönderim öncesi önizleme (salt okuma: işlem, dergi, revizyon, yayın yok). Gösterilen Etki maliyeti ve engeller
+       host'un dealQuote'undan gelir; istemcide maliyet formülü yok. İnsan alıcıda karşı tarafın stoğu yine gizli. */
+    quote:{keys:['kind','to','give','want'],ro:true,
+      check:c=>int(c.to,0,63)&&dipCheck(c),
+      locate:()=>({}),
+      why(e,at,c){const B=G.emps[c.to];return !B||B===e||!dipParty(B)||!e.contact[B.id]||!B.contact[e.id]?'no-target':null;},
+      roots:()=>[],
+      apply(e,at,c){const B=G.emps[c.to],q=dealQuote(dipNew(e,B,dipItems(c.give),dipItems(c.want))),g=dipGate(q,e,B);
+        return {ok:true,extra:{ok:!g,cost:Math.round(q.cost||0),etk:Math.floor(e.res.etk||0),life:dipLife(),reasons:g?g.detail:[]}};}},
     respond:{keys:['kind','offer','action'],
       check:c=>int(c.offer,1,2147483647)&&['accept','reject'].includes(c.action),
       locate(e,c){const r=dipFind(e,c.offer);return r?{r}:{err:'no-offer'};},
@@ -330,15 +339,17 @@ function createHost(opts){
     for(const r of D.offers){if(r.status!=='pending')continue;const a=G.emps[r.from],b=G.emps[r.to];
       if(G.day>r.expires){r.status='expired';r.finished=G.day;r.why='Süre doldu';dipNotify(r.from,'Teklif süresi doldu — '+(b?b.name:''));dipNotify(r.to,'Teklif süresi doldu — '+(a?a.name:''));}
       else if(!dipParty(a)||!dipParty(b)||!a.contact[b.id]||!b.contact[a.id]){r.status='invalid';r.finished=G.day;r.why='Taraflardan biri artık anlaşma yapamaz';
-        dipNotify(r.from,'Teklif geçersizleşti');dipNotify(r.to,'Teklif geçersizleşti');}}
+        dipNotify(r.from,'Teklif geçersizleşti');dipNotify(r.to,'Teklif geçersizleşti');}
+      else if(r.give.concat(r.want).some(it=>it.t!=='res'&&treatyAlreadyActive(a,b,it))){r.status='invalid';r.finished=G.day;r.why='Bu anlaşma artık yürürlükte';   // ör. barış başka teklifle imzalandı
+        dipNotify(r.from,'Teklif geçersizleşti — anlaşma zaten yürürlükte');dipNotify(r.to,'Teklif geçersizleşti — anlaşma zaten yürürlükte');}}
   }
   /* Oyuncuya özel diplomasi görünümü: yalnız tarafı olduğu teklifler ve temas kurduğu devletler. */
   function dipView(e){
     const nm=id=>G.emps[id]?String(G.emps[id].name):'?',lb=it=>({...it,l:String(dealLabel(it)).replace(/<[^>]*>/g,'').slice(0,90)});
     const offers=D.offers.filter(r=>r.from===e.id||r.to===e.id).slice(-40).map(r=>({id:r.id,from:r.from,to:r.to,fn:nm(r.from),tn:nm(r.to),give:r.give.map(lb),want:r.want.map(lb),
       born:Math.floor(r.born),expires:Math.floor(r.expires),round:r.round,prev:r.prev,status:r.status,why:r.why,by:r.by,cost:r.cost}));
-    const contacts=G.emps.filter(o=>o!==e&&dipParty(o)&&e.contact[o.id]).map(o=>({id:o.id,h:isHumanActor(o)?1:0,war:e.war[o.id]?1:0,peace:e.war[o.id]&&canPeace(e,o)?1:0}));
-    return {offers,contacts,life:dipLife(),rounds:DIP_ROUNDS};
+    const contacts=G.emps.filter(o=>o!==e&&dipParty(o)&&e.contact[o.id]).map(o=>({id:o.id,n:nm(o.id),col:o.col,h:isHumanActor(o)?1:0,rel:Math.round(e.rel[o.id]||0),bl:diploBlocked(e,o)?1:0,war:e.war[o.id]?1:0,peace:e.war[o.id]&&canPeace(e,o)?1:0}));
+    return {offers,contacts,life:dipLife(),rounds:DIP_ROUNDS};   // gün: clock.day (her gün dip bölümünü yeniden göndermemek için)
   }
 
   function result(p,conn,msg,status,code,extra){
@@ -359,7 +370,7 @@ function createHost(opts){
     if(S.paused)return result(p,conn,msg,'rejected','paused');
     const x=execute(p.playerId,p.empireId,msg.cmd);
     if(!x.ok)return result(p,conn,msg,'rejected',x.code,x.detail?{detail:x.detail}:undefined);
-    const r=result(p,conn,msg,'ok',null,x.extra?{extra:x.extra}:undefined);stats.commandMs.push(now()-t0);
+    const r=result(p,conn,msg,'ok',null,x.extra?{extra:x.extra}:undefined);if(x.ro)return r;stats.commandMs.push(now()-t0);
     publish();                                   // sonuç herkese kendi filtresiyle yansır
     return r;
   }
@@ -373,6 +384,7 @@ function createHost(opts){
     if(!e||e.dead)return {ok:false,code:'empire-dead'};
     const at=def.locate?def.locate(e,c):locate(e,c);if(at.err)return {ok:false,code:at.err};
     const why=def.why(e,at,c);if(why)return {ok:false,code:'rules:'+(why.code||why),detail:why.detail};
+    if(def.ro)return {ok:true,ro:true,extra:def.apply(e,at,c).extra};   // salt okuma: durum değişmez, dergiye girmez
     const records=txCaptureGraph(def.roots(e,at)),rng=RND_STATE;let res;
     try{res=def.apply(e,at,c);}catch(err){txRestoreGraph(records);rndSeed(rng);return {ok:false,code:'error'};}
     if(!(res===true||(res&&res.ok))){txRestoreGraph(records);rndSeed(rng);return {ok:false,code:'rules'};}
@@ -383,7 +395,7 @@ function createHost(opts){
   function local(c){
     if(L&&!['ingame','paused'].includes(L.phase))return {ok:false,code:'not-started'};
     if(S.paused)return {ok:false,code:'paused'};
-    const x=execute('host',hostEmpireId,c);if(x.ok)publish();return x;
+    const x=execute('host',hostEmpireId,c);if(x.ok&&!x.ro)publish();return x;
   }
 
   /* ---------- ağ mesajları: yalnız bu tablo ---------- */
