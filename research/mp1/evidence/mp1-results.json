@@ -1,0 +1,538 @@
+{
+ "results": [
+  {
+   "name": "menu: relay page keeps YENİ OYUN / OYUNA DEVAM ET / AYARLAR and adds ÇOK OYUNCULU before AYARLAR; the release index.html has no MP code",
+   "status": "PASS",
+   "ms": 2507
+  },
+  {
+   "name": "host phone creates a room: secure code on screen, host key never in the page, galaxy settings applied by the host only",
+   "status": "PASS",
+   "ms": 396
+  },
+  {
+   "name": "guest A joins by invite link, guest B types the code by hand (lowercase, no dash) and presses Enter; guests run no engine",
+   "status": "PASS",
+   "ms": 453
+  },
+  {
+   "name": "live player list: host and both guests show the same players (name, host mark, online, empire, ready, tab); names are inert text",
+   "status": "PASS",
+   "ms": 377
+  },
+  {
+   "name": "presence: a guest opening Doktrin and the host opening Galaksi ayarları are visible to everyone; prep tabs never touch Save8/RNG",
+   "status": "PASS",
+   "ms": 299
+  },
+  {
+   "name": "empire selection: one empire per player, no host/wild empire, ready needs a claim, ready state syncs to every phone",
+   "status": "PASS",
+   "ms": 281
+  },
+  {
+   "name": "ready rules: changing empire resets ready; duplicate ready is idempotent; nobody can set another player's ready or empire",
+   "status": "PASS",
+   "ms": 367
+  },
+  {
+   "name": "host changes the galaxy: every guest's empire and ready are reset; guests see sizes but never the seed",
+   "status": "PASS",
+   "ms": 464
+  },
+  {
+   "name": "mobile lobby layout at 360×800, 390×844, 412×915, 844×390, 915×412: no horizontal overflow, ≥44 px targets, readable text, keyboard keeps inputs visible, back asks before leaving",
+   "status": "PASS",
+   "ms": 10435
+  },
+  {
+   "name": "host + 3 guests: C joins on a 412 px phone, cannot take a held empire, the room shows 4/4 and a fifth phone gets \"Oda dolu.\"",
+   "status": "PASS",
+   "ms": 753
+  },
+  {
+   "name": "start: blocked until every guest is ready, applies once on a double tap, fixes the mapping and moves every phone into the game",
+   "status": "PASS",
+   "ms": 984
+  },
+  {
+   "name": "every phone sees the same host game time (host steps, guests follow)",
+   "status": "PASS",
+   "ms": 333
+  },
+  {
+   "name": "real STARS command from guest A's phone UI: host validates with queueBuilding; others cannot act for A",
+   "status": "PASS",
+   "ms": 166
+  },
+  {
+   "name": "AI never plays the three human empires over 4 months; AI–AI play continues",
+   "status": "PASS",
+   "ms": 489
+  },
+  {
+   "name": "per-player vision: each guest's packets carry only its own exploration, colonies and contacts — never other players' secrets",
+   "status": "PASS",
+   "ms": 132
+  },
+  {
+   "name": "reconnect: guest A's page reload rejoins by itself with the same seat and empire; a short network loss on B keeps B's seat",
+   "status": "PASS",
+   "ms": 558
+  },
+  {
+   "name": "host phone loses the network: guests see \"Host bağlı değil\", the game pauses, the host reattaches with its key and play resumes",
+   "status": "PASS",
+   "ms": 620
+  },
+  {
+   "name": "host returns an offline guest's empire to the AI from the in-game panel; the kicked phone cannot rejoin",
+   "status": "PASS",
+   "ms": 315
+  },
+  {
+   "name": "in-game layout on guest and host phones at all five viewports",
+   "status": "PASS",
+   "ms": 3108
+  },
+  {
+   "name": "performance: traffic per player, lobby message rate, connect time, update latency, host memory and per-month MP overhead",
+   "status": "PASS",
+   "ms": 760
+  },
+  {
+   "name": "network delay 60 ms (separate relay process): create, join, claim, ready, start, command, duplicate, close, old code",
+   "status": "PASS",
+   "ms": 5758
+  },
+  {
+   "name": "network delay 150 ms (separate relay process): create, join, claim, ready, start, command, duplicate, close, old code",
+   "status": "PASS",
+   "ms": 8856
+  }
+ ],
+ "metrics": {
+  "viewports": {
+   "360x800": {
+    "hostLobby": {
+     "vw": 360,
+     "vh": 800,
+     "scrollW": 360,
+     "overflow": false,
+     "controls": 16,
+     "small": [],
+     "wide": [],
+     "minFont": 11,
+     "minAt": "B.mp1-tag:HOST"
+    },
+    "guestLobby": {
+     "vw": 360,
+     "vh": 800,
+     "scrollW": 360,
+     "overflow": false,
+     "controls": 15,
+     "small": [],
+     "wide": [],
+     "minFont": 11,
+     "minAt": "B.mp1-tag:HOST"
+    },
+    "joinLobby": {
+     "vw": 360,
+     "vh": 800,
+     "scrollW": 360,
+     "overflow": false,
+     "controls": 4,
+     "small": [],
+     "wide": [],
+     "minFont": 13,
+     "minAt": "P.mp1-sub:Host oyuncunun telef"
+    },
+    "keyboard": {
+     "top": 134.484375,
+     "bottom": 182.484375,
+     "vh": 360,
+     "focus": "jCode"
+    },
+    "hostKeyboard": {
+     "top": 156.375,
+     "bottom": 204.375,
+     "vh": 360
+    },
+    "guestGame": {
+     "vw": 360,
+     "vh": 800,
+     "scrollW": 360,
+     "overflow": false,
+     "controls": 2,
+     "small": [],
+     "wide": [],
+     "minFont": 13,
+     "minAt": "DIV.mp1-sub:Yıl 2210 · Ay 8 · gü"
+    },
+    "hostGame": {
+     "overflow": false,
+     "small": []
+    }
+   },
+   "390x844": {
+    "hostLobby": {
+     "vw": 390,
+     "vh": 844,
+     "scrollW": 390,
+     "overflow": false,
+     "controls": 16,
+     "small": [],
+     "wide": [],
+     "minFont": 11,
+     "minAt": "B.mp1-tag:HOST"
+    },
+    "guestLobby": {
+     "vw": 390,
+     "vh": 844,
+     "scrollW": 390,
+     "overflow": false,
+     "controls": 15,
+     "small": [],
+     "wide": [],
+     "minFont": 11,
+     "minAt": "B.mp1-tag:HOST"
+    },
+    "joinLobby": {
+     "vw": 390,
+     "vh": 844,
+     "scrollW": 390,
+     "overflow": false,
+     "controls": 4,
+     "small": [],
+     "wide": [],
+     "minFont": 13,
+     "minAt": "P.mp1-sub:Host oyuncunun telef"
+    },
+    "keyboard": {
+     "top": 134.484375,
+     "bottom": 182.484375,
+     "vh": 380,
+     "focus": "jCode"
+    },
+    "hostKeyboard": {
+     "top": 166.375,
+     "bottom": 214.375,
+     "vh": 380
+    },
+    "guestGame": {
+     "vw": 390,
+     "vh": 844,
+     "scrollW": 390,
+     "overflow": false,
+     "controls": 2,
+     "small": [],
+     "wide": [],
+     "minFont": 13,
+     "minAt": "DIV.mp1-sub:Yıl 2210 · Ay 8 · gü"
+    },
+    "hostGame": {
+     "overflow": false,
+     "small": []
+    }
+   },
+   "412x915": {
+    "hostLobby": {
+     "vw": 412,
+     "vh": 915,
+     "scrollW": 412,
+     "overflow": false,
+     "controls": 16,
+     "small": [],
+     "wide": [],
+     "minFont": 11,
+     "minAt": "B.mp1-tag:HOST"
+    },
+    "guestLobby": {
+     "vw": 412,
+     "vh": 915,
+     "scrollW": 412,
+     "overflow": false,
+     "controls": 15,
+     "small": [],
+     "wide": [],
+     "minFont": 11,
+     "minAt": "B.mp1-tag:HOST"
+    },
+    "joinLobby": {
+     "vw": 412,
+     "vh": 915,
+     "scrollW": 412,
+     "overflow": false,
+     "controls": 4,
+     "small": [],
+     "wide": [],
+     "minFont": 13,
+     "minAt": "P.mp1-sub:Host oyuncunun telef"
+    },
+    "keyboard": {
+     "top": 134.484375,
+     "bottom": 182.484375,
+     "vh": 412,
+     "focus": "jCode"
+    },
+    "hostKeyboard": {
+     "top": 182.375,
+     "bottom": 230.375,
+     "vh": 412
+    },
+    "guestGame": {
+     "vw": 412,
+     "vh": 915,
+     "scrollW": 412,
+     "overflow": false,
+     "controls": 2,
+     "small": [],
+     "wide": [],
+     "minFont": 13,
+     "minAt": "DIV.mp1-sub:Yıl 2210 · Ay 8 · gü"
+    },
+    "hostGame": {
+     "overflow": false,
+     "small": []
+    }
+   },
+   "844x390": {
+    "hostLobby": {
+     "vw": 844,
+     "vh": 390,
+     "scrollW": 844,
+     "overflow": false,
+     "controls": 16,
+     "small": [],
+     "wide": [],
+     "minFont": 11,
+     "minAt": "B.mp1-tag:HOST"
+    },
+    "guestLobby": {
+     "vw": 844,
+     "vh": 390,
+     "scrollW": 844,
+     "overflow": false,
+     "controls": 15,
+     "small": [],
+     "wide": [],
+     "minFont": 11,
+     "minAt": "B.mp1-tag:HOST"
+    },
+    "joinLobby": {
+     "vw": 844,
+     "vh": 390,
+     "scrollW": 844,
+     "overflow": false,
+     "controls": 4,
+     "small": [],
+     "wide": [],
+     "minFont": 13,
+     "minAt": "P.mp1-sub:Host oyuncunun telef"
+    },
+    "keyboard": {
+     "top": 63.9375,
+     "bottom": 111.9375,
+     "vh": 176,
+     "focus": "jCode"
+    },
+    "hostKeyboard": {
+     "top": 64.375,
+     "bottom": 112.375,
+     "vh": 176
+    },
+    "guestGame": {
+     "vw": 844,
+     "vh": 390,
+     "scrollW": 844,
+     "overflow": false,
+     "controls": 2,
+     "small": [],
+     "wide": [],
+     "minFont": 13,
+     "minAt": "DIV.mp1-sub:Yıl 2210 · Ay 8 · gü"
+    },
+    "hostGame": {
+     "overflow": false,
+     "small": []
+    }
+   },
+   "915x412": {
+    "hostLobby": {
+     "vw": 915,
+     "vh": 412,
+     "scrollW": 915,
+     "overflow": false,
+     "controls": 16,
+     "small": [],
+     "wide": [],
+     "minFont": 11,
+     "minAt": "B.mp1-tag:HOST"
+    },
+    "guestLobby": {
+     "vw": 915,
+     "vh": 412,
+     "scrollW": 915,
+     "overflow": false,
+     "controls": 15,
+     "small": [],
+     "wide": [],
+     "minFont": 11,
+     "minAt": "B.mp1-tag:HOST"
+    },
+    "joinLobby": {
+     "vw": 915,
+     "vh": 412,
+     "scrollW": 915,
+     "overflow": false,
+     "controls": 4,
+     "small": [],
+     "wide": [],
+     "minFont": 13,
+     "minAt": "P.mp1-sub:Host oyuncunun telef"
+    },
+    "keyboard": {
+     "top": 68.9375,
+     "bottom": 116.9375,
+     "vh": 185,
+     "focus": "jCode"
+    },
+    "hostKeyboard": {
+     "top": 68.375,
+     "bottom": 116.375,
+     "vh": 185
+    },
+    "guestGame": {
+     "vw": 915,
+     "vh": 412,
+     "scrollW": 915,
+     "overflow": false,
+     "controls": 2,
+     "small": [],
+     "wide": [],
+     "minFont": 13,
+     "minAt": "DIV.mp1-sub:Yıl 2210 · Ay 8 · gü"
+    },
+    "hostGame": {
+     "overflow": false,
+     "small": []
+    }
+   }
+  },
+  "delay": {
+   "60": {
+    "createMs": 206,
+    "joinMs": 261,
+    "claimToHostMs": 123,
+    "claimEchoMs": 186,
+    "startMs": 191,
+    "commandMs": 281,
+    "updateMs": 139
+   },
+   "150": {
+    "createMs": 297,
+    "joinMs": 528,
+    "claimToHostMs": 229,
+    "claimEchoMs": 363,
+    "startMs": 216,
+    "commandMs": 376,
+    "updateMs": 238
+   }
+  },
+  "browserProcesses": 5,
+  "roomCreateMs": 114,
+  "connectMs": {
+   "A": 14,
+   "B": 6
+  },
+  "presenceToHostMs": 57,
+  "presenceToGuestMs": 60,
+  "startToAllGuestsMs": 170,
+  "clockLagMs": [
+   12,
+   9,
+   10
+  ],
+  "commandRoundTripMs": 66,
+  "commandMsClient": 18,
+  "aiGuard": {
+   "aiTurns": 12,
+   "blockedAI": 0
+  },
+  "privacy": {
+   "A": {
+    "packets": 81,
+    "bytes": 79675,
+    "maxPacket": 4215,
+    "saveBytes": 130059,
+    "known": 9,
+    "everKnown": 9,
+    "hidden": 36
+   },
+   "B": {
+    "packets": 90,
+    "bytes": 79210,
+    "maxPacket": 4372,
+    "saveBytes": 130059,
+    "known": 14,
+    "everKnown": 14,
+    "hidden": 31
+   },
+   "C": {
+    "packets": 28,
+    "bytes": 25085,
+    "maxPacket": 4320,
+    "saveBytes": 130059,
+    "known": 10,
+    "everKnown": 10,
+    "hidden": 35
+   }
+  },
+  "hostPanelPx": {
+   "collapsed": 46
+  },
+  "relayPerConnection": {
+   "host": {
+    "inBytes": 41339,
+    "outBytes": 669,
+    "framesIn": 33,
+    "framesOut": 14
+   },
+   "guest:cf9ed": {
+    "inBytes": 228,
+    "outBytes": 23432,
+    "framesIn": 4,
+    "framesOut": 20
+   },
+   "guest:ce708": {
+    "inBytes": 267,
+    "outBytes": 23601,
+    "framesIn": 4,
+    "framesOut": 17
+   }
+  },
+  "guestA": {
+   "lobby": 9,
+   "snap": 2,
+   "deltas": 3,
+   "bytes": 23053,
+   "msgs": 20,
+   "rtt": [
+    7
+   ]
+  },
+  "hostCost": {
+   "monthMs": 42.700000000186265,
+   "observeMs": 0,
+   "publishMs": 0.2999999998137355,
+   "heapMB": 20
+  },
+  "guestBytesPerMonth": 1219,
+  "lobbyPackets": {
+   "count": 58,
+   "maxBytes": 1482,
+   "avgBytes": 1302
+  },
+  "pageErrors": []
+ }
+}

@@ -30,3 +30,7 @@ node research/mp0/server/dev-relay.js            # elle deneme: MP_PORT=8765, MP
 ```
 
 `MP_BIND=0.0.0.0`, relay'i aynı ağdaki cihazlara açar. Bu yalnız güvenilir geliştirme ağı içindir. Gerçek Wi-Fi/Android LAN testi yapılmadı (NOT RUN).
+
+## MP.1 notu
+
+`mp-core.js` MP.1'de opt-in bir lobi kipi kazandı (`createHost({lobby:{generate}})`): `isHumanActor`, `actorVision`, `observeHumans`, lobi durum makinesi, `presence`/`claim`/`ready`/`leave` mesajları. `opts.lobby` verilmezse MP.0 davranışı aynen sürer (`mp0_core_test.js` 11/11, `browser-mp0.cjs` 20/20). `server/dev-relay.js` yalnız `encode`/`attach`'ı dışa açtı; MP.1 relay'i (`../mp1/server/relay.js`) RFC 6455 çekirdeğini buradan kullanır. Ayrıntı: `../mp1/README.md`.
