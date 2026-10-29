@@ -130,5 +130,5 @@ function start(port=PORT){
   server.on('upgrade',upgrade);
   return new Promise(res=>server.listen(port,BIND,()=>res(server)));
 }
-module.exports={start,stats,rooms};
+module.exports={start,stats,rooms,encode,attach};
 if(require.main===module)start().then(s=>console.log('STARS MP.0 dev relay http://'+BIND+':'+s.address().port+' (yalnız geliştirme)'));
