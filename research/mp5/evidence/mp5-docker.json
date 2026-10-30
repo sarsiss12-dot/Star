@@ -1,0 +1,56 @@
+{
+ "note": "Yerel Docker konteyneri + yerel TLS vekili. Gerçek internet dağıtımı DEĞİL.",
+ "results": [
+  {
+   "name": "imaj derlenir: yalnız 19 runtime + manifest + MP istemci/sunucu dosyaları; test, ZIP, .git, gizli anahtar yok; node kullanıcısı",
+   "status": "PASS",
+   "ms": 10587
+  },
+  {
+   "name": "yanlış yapılandırma: MP1_ORIGINS yok / http:// / MP1_DEV=1 → konteyner gerekçeyle çıkar (kod 1); güvensiz relay başlamaz",
+   "status": "PASS",
+   "ms": 2093
+  },
+  {
+   "name": "doğru yapılandırma: sağlık 200; TLS'siz GET 308 → https; vekilden https ile 200 + HSTS; /mp/stats ve izin listesi dışı 404; Docker HEALTHCHECK \"healthy\"",
+   "status": "PASS",
+   "ms": 30518
+  },
+  {
+   "name": "WSS (TLS vekili → konteyner): oda açılır, misafir katılır, ileti iki yönde; bozuk istekler konteyneri düşürmez",
+   "status": "PASS",
+   "ms": 1285
+  },
+  {
+   "name": "bellek: boşta ve 50 oda × (host + 2 misafir) = 150 WSS bağlantısıyla konteyner belleği",
+   "status": "PASS",
+   "ms": 9314
+  },
+  {
+   "name": "yeniden başlatma: docker restart → misafir ve host \"server-restart\" nedeniyle kapanış alır; konteyner temiz çıkar; sağlık geri gelir; eski oda kodu artık yok",
+   "status": "PASS",
+   "ms": 1435
+  }
+ ],
+ "metrics": {
+  "docker": "29.9.2",
+  "buildMs": 1034,
+  "imageFiles": 36,
+  "imageSize": "242886046",
+  "coldStartMs": 645,
+  "healthcheck": "healthy",
+  "wssRoomMs": 28,
+  "wssJoinMs": 17,
+  "wssRoundTripMs": 12,
+  "logsAfterSession": [
+   "STARS MP.1 relay http://0.0.0.0:8080 (herkese açık kip: TLS vekilde, izinli köken 1)"
+  ],
+  "memIdleMB": 12.49,
+  "mem50RoomsMB": 15.54,
+  "mem50RoomsConns": 150,
+  "memAfterMB": 12.34,
+  "restartMs": 851,
+  "healthBackMs": 177,
+  "stopMs": 345
+ }
+}

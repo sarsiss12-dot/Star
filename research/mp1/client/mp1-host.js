@@ -190,7 +190,7 @@ function mini(){
   /* Haritayı kapatmasın: tek satır; bağlantısı kopan misafir varsa (karar gerekir) kendiliğinden açılır. */
   const gs=L.players.filter(p=>!p.host),off=gs.filter(p=>!p.online).length,open=API.miniOpen||off>0;
   const head='<button class="mp1-mini-h" data-g="toggle" aria-expanded="'+open+'"><b>ÇOK OYUNCULU</b> · '+esc(V.fmtCode(API.code))+' · '+
-    (API.connected?'bağlı':API.closed?'oda kapandı — oyun yalnız bu telefonda sürüyor':'bağlantı yok')+' · '+(gs.length-off)+'/'+gs.length+' misafir</button>';
+    (API.connected?'bağlı':API.closed?'oda kapandı — oyun duraklatıldı; OYUNU KAYDET ile yeni odada sürdürebilirsin':'bağlantı yok — oyun duraklatıldı, yeniden bağlanılıyor')+' · '+(gs.length-off)+'/'+gs.length+' misafir</button>';
   /* MP.3: DİPLOMASİ düğmesi aynı satırda (panel kapalıyken tek satır kalır) */
   el.innerHTML=(window.MP3Dip?'<div class="mp3-minirow">'+head+'<button class="mp1-btn mp3-hostbtn" data-g="dip" id="mp3HostBtn">'+dipLabel()+'</button></div>':head)+
     (open?gs.map(p=>{const pid=pidOfSeat(p.seat);return '<div>'+esc(p.name)+' · '+(p.online?'bağlı':'koptu — koltuk bekletiliyor')+(p.online?'':'<button class="mp1-btn" data-g="kick" data-pid="'+esc(pid)+'">Çıkar (devlet boşta)</button><button class="mp1-btn" data-g="ai" data-pid="'+esc(pid)+'">Devleti AI\'ya ver</button>')+'</div>';}).join('')+
@@ -307,12 +307,20 @@ API.mp4={saveNow,exportNow,refreshSaves};
    Arka planda rAF durur, zamanlayıcılar kısılır, sekme dondurulabilir. Yarım hızla
    sürüp misafirleri belirsiz bırakmak yerine: oyun güvenle duraklar, misafir nedeni
    görür; geri dönünce önceki hız geri gelir. Duraklatma iki kaynaklı: arka plan ve relay yok. */
-function syncPause(){if(!API.host)return;const why=API.bg?'host-background':!API.connected?'host-offline':null;API.host.setPaused(!!why,why||undefined);}
+function syncPause(){if(!API.host)return;const why=API.bg?'host-background':!API.connected?'host-offline':null;API.host.setPaused(!!why,why||undefined);
+  /* MP.5: host'un ağı kopunca misafirler "duraklatıldı" görüyordu ama host'ta zaman akmaya devam ediyordu (misafir devletleri sahipsiz kalıyordu).
+     Artık zaman da durur; bağlantı dönünce önceki hız geri gelir. Oda kapandıysa (relay yeniden başladı) host isterse hızı elle açıp tek başına sürebilir. */
+  if(API.started&&!API.bg&&typeof UI!=='undefined'){if(why==='host-offline'&&!API.netSpeed&&G.speed){API.netSpeed=G.speed;UI.setSpeed(0);log('net-pause');}
+    else if(!why&&API.netSpeed){UI.setSpeed(API.netSpeed);API.netSpeed=0;log('net-resume');}}}
 function onHidden(){if(!API.host||!API.started||API.bg)return;API.bg=true;API.bgSpeed=G.speed;if(G.speed!==0&&typeof UI!=='undefined')UI.setSpeed(0);syncPause();log('background');}
-function onVisible(){if(!API.bg)return;API.bg=false;syncPause();if(API.bgSpeed&&typeof UI!=='undefined')UI.setSpeed(API.bgSpeed);API.bgSpeed=0;log('foreground');
+function onVisible(){if(!API.bg)return;API.bg=false;if(API.bgSpeed&&typeof UI!=='undefined')UI.setSpeed(API.bgSpeed);API.bgSpeed=0;syncPause();log('foreground');   // önce hız, sonra ağ durumu (ağ yoksa yine durur)
   if(!API.ws&&!API.closed&&API.code){API.retry=0;open(wsUrl('role=host&code='+encodeURIComponent(API.code)),true);}}
 doc.addEventListener('visibilitychange',()=>{if(doc.hidden)onHidden();else onVisible();});
 addEventListener('pagehide',onHidden);addEventListener('pageshow',()=>{if(!doc.hidden)onVisible();});
+/* MP.5: ağ değişimi (Wi-Fi ↔ mobil veri): eski soket ölü olabilir; ağ dönünce eskisini bırakıp anahtarla hemen yeniden bağlan
+   (relay, bir yoklama aralığından uzun süre sessiz kalan eski host bağlantısının yerine doğru anahtarlı yenisini alır). */
+addEventListener('online',()=>{if(!API.host||API.closed||!API.code)return;const old=API.ws;API.ws=null;API.connected=false;
+  if(old){old.onclose=null;try{old.close();}catch{}}syncPause();render();API.retry=0;API.reconnects=(API.reconnects||0)+1;log('online');open(wsUrl('role=host&code='+encodeURIComponent(API.code)),true);});
 /* ---------- test ve geliştirme API'si (ağdan erişilemez) ---------- */
 API.advance=function(days){
   if(G.speed!==0)throw Error('advance yalnız duraklatılmış oyunda');

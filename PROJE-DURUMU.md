@@ -6,14 +6,24 @@ Son güncelleme: 2026-10-30. Depo `sarsiss12-dot/Star`.
 
 | | `main` (birleşmiş) | Bu dal (PR) |
 |---|---|---|
-| Faz | 96H.10 + MP.0 + MP.1 + MP.1.1 + MP.2 + MP.3 + MP.3.1 (+ 96H.11 araştırma arşivi) | MP.4 (çok oyunculu kayıt/yükleme, odayı yeniden açma, oyuncu kimliği; geliştirme prototipi) |
+| Faz | 96H.10 + MP.0 – MP.4 (+ 96H.11 araştırma arşivi) | MP.5 (internete hazır relay, kopma/yeniden bağlanma, dağıtım paketi; canlı sunucu yok) |
 | Build / PWA | `96h10` / `stars-v96h10` | değişmedi |
 | Save | v8 | v8 (şema değişmedi) |
 | Oyun ZIP | `releases/stars-faz96h10.zip` (SHA-256 `78e76d1627b8ec1b990849b2242835f78667f110e1d6f17021760183ee7be6d0`) | yeni ZIP yok |
-| Taban HEAD | `ff0a4187a2fa2adedf535fdf981cbc25cc85e63d` | — |
+| Taban HEAD | `4296ad2d43fedce6264020b3761f50f1839fd836` | — |
 | Değişen runtime | — | yok (19 dosya 96H.10 ile aynı) |
 
-96H.6.2, 96H.6.3, 96H.7, 96H.11, MP.0, MP.1, MP.1.1, MP.2, MP.3, MP.3.1 ve MP.4 oyun yayımlamadı.
+96H.6.2, 96H.6.3, 96H.7, 96H.11 ve MP.0 – MP.5 oyun yayımlamadı.
+
+## MP.5 — güvenli internet bağlantısı ve relay dağıtım paketi (canlı sunucu yok)
+
+Ayrıntı: `MULTIPLAYER-MP5-MIMARI.md`, `MULTIPLAYER-MP5-SECURITY.md`, `MULTIPLAYER-MP5-DEPLOYMENT.md`, `MULTIPLAYER-MP5-SONUC.md`. Testler: `tests/mp5_relay_security_test.js`, `tests/mp5_docker.cjs`, `tests/browser-mp5.cjs`.
+
+- **Kritik düzeltme:** tek bir bozuk HTTP/WebSocket isteği relay sürecini (bütün odaları) düşürüyordu (3 yol) — artık 400.
+- **Kopma:** misafir ağ kopmasında oyun ekranı korunuyor ve kendiliğinden dönüyor (eskiden giriş ekranına düşüyordu); ağ değişiminde ölü soket "oda dolu" yapmıyor; host'un ağı kopunca zaman da duruyor.
+- **Sınırlar:** IP başı yanlış kod/anahtar sınırı, rol başına çerçeve sınırı, toplam bağlantı sınırı, sayaç sızıntısı giderildi, `MP1_IP_HEADER`.
+- **Dağıtım:** Docker imajı ilk kez gerçekten derlendi ve çalıştırıldı (sağlık, TLS yönlendirme, WSS, yeniden başlatma, ~15 MB bellek). Sağlayıcı değerlendirmesi yapıldı; hesap erişimi olmadığı için **canlı dağıtım yok**.
+- **NOT RUN:** gerçek internet, fiziksel Android, LAN.
 
 ## MP.4 — çok oyunculu kayıt / yükleme ve odayı yeniden açma (geliştirme prototipi)
 
