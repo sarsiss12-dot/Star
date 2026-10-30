@@ -45,11 +45,11 @@ async function setHidden(page,hidden){return page.evaluate(h=>{Object.defineProp
     await wait(H,()=>MP1Host.lobby&&MP1Host.lobby.phase==='waiting');metrics.roomCreateMs=Date.now()-t0;
     ({code,key:hostKey}=await H.evaluate(()=>({code:MP1Host.code,key:MP1Host.key})));
     const urls=await H.evaluate(()=>MP1Host.urls);assert(urls.every(u=>u.startsWith('wss://localhost:')&&!u.includes(hostKey)),urls.join());
-    assert(!(await H.content()).includes(hostKey));assert.equal(await H.textContent('#mp1Link'),base+'/mp/join?code='+code);
+    assert(!(await H.content()).includes(hostKey));assert.equal(await H.textContent('#mp1Link'),base+'/mp/play?code='+code);
     await H.evaluate(()=>MP1Host.host.configure({size:'orta',aiCount:5,seed:11}));
   });
   await test('guest phone (separate browser process) opens the HTTPS invite link and joins over WSS; the guest page loads no engine',async()=>{
-    const link=await H.textContent('#mp1Link');const t0=Date.now();await Gp.goto(link);await wait(Gp,()=>window.MP1Join&&document.getElementById('jCode'));
+    const link=(await H.textContent('#mp1Link')).replace('/mp/play?','/mp/join?');const t0=Date.now();await Gp.goto(link);   // MP.6: bu paketin misafir vakaları hafif istemciyle (/mp/join); gerçek arayüz browser-mp6'daawait wait(Gp,()=>window.MP1Join&&document.getElementById('jCode'));
     await Gp.fill('#jName','Ayşe');await Gp.locator('[data-j="go"]').tap();await wait(Gp,()=>MP1Join.screen==='lobby'&&MP1Join.lobby);metrics.inviteToLobbyMs=Date.now()-t0;
     const g=await Gp.evaluate(()=>({proto:location.protocol,ws:MP1Join.ws&&MP1Join.ws.url,engine:typeof G+typeof setupGame,connectMs:MP1Join.stats.connectMs}));
     assert.equal(g.proto,'https:');assert.match(g.ws,/^wss:\/\/localhost:\d+\/mp1\/ws\?role=client&code=/);assert.equal(g.engine,'undefinedundefined');metrics.guestConnectMs=g.connectMs;

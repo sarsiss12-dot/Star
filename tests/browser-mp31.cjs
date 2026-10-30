@@ -13,6 +13,7 @@ const results=[],errors=[],metrics={viewports:{},perf:{},latency:{},notes:[]};
 const launch={executablePath:process.env.STARS_CHROMIUM_PATH||undefined,args:['--no-sandbox','--disable-gpu','--disable-dev-shm-usage','--enable-precise-memory-info']};
 const PHONE=(w,h)=>({viewport:{width:w,height:h},isMobile:true,hasTouch:true,deviceScaleFactor:2});
 let relay,base,bH,bA,bB,bC,H,A,B,C,code;const E={A:1,B:3,C:4,AI2:2,AI5:5};
+const freeBar=p=>p.evaluate(()=>{const m=document.getElementById('modal');if(m&&!m.classList.contains('hidden')&&typeof UI!=='undefined'){const s=G.speed;UI.closeModal();UI.setSpeed(s);}});   // MP.6: açık STARS penceresi (danışman/olay) MP çubuğunun üstündedir; kapat, hızı koru
 async function test(name,fn){const t0=Date.now();try{await fn();results.push({name,status:'PASS',ms:Date.now()-t0});console.log('PASS '+name);}
   catch(e){results.push({name,status:'FAIL',error:String(e&&e.stack||e).slice(0,1600)});console.log('FAIL '+name+'\n'+(e&&e.stack||e));}}
 const wait=(p,fn,arg,timeout=20000)=>p.waitForFunction(fn,arg,{timeout,polling:50});
@@ -193,7 +194,7 @@ const LAW=`[...Object.keys(FED_LAWS),...Object.keys(FED_INNER_LAWS)].find(k=>can
   });
 
   await test('host paneli: FEDERASYON / VASALLIK bölümleri aynı görünüm ve kurallarla; host üye olmadığı federasyonda oy veremez; düzen 915×412',async()=>{
-    await H.locator('#mp3HostBtn').tap();await wait(H,()=>document.querySelector('#mp3Host .mp31-seg'));
+    await freeBar(H);await H.locator('#mp3HostBtn').tap();await wait(H,()=>document.querySelector('#mp3Host .mp31-seg'));
     await H.locator('#mp3Host [data-hs="fed"]').tap();await wait(H,()=>!document.getElementById('mp3HostP').hidden&&document.querySelector('#mp3HostP .mp31'));
     assert.match(await H.textContent('#mp3HostP'),/Federasyon üyeliğin yok/);await shot(H,'host-fed');assertLayout(await layout(H,'#mp3Host'),'host fed');
     await H.locator('#mp3Host [data-hs="vas"]').tap();await wait(H,()=>document.querySelector('#mp3HostP [data-p="vsub"]'));await shot(H,'host-vas');assertLayout(await layout(H,'#mp3Host'),'host vas');

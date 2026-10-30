@@ -61,7 +61,8 @@ function receive(t,t0){
       if(['invalid-code','room-full','room-closed','rate-limited','server-full'].includes(m.code)){J.closed=true;J.screen='join';J.err=V.ERR[m.code]||m.code;}}
     return render();}
   if(t[0]!=='H')return;let m;try{m=JSON.parse(t.slice(1));}catch{return;}if(m.v!==1)return;
-  if(m.type==='assign'){J.assigned=true;J.playerId=m.playerId;J.empireId=m.empireId;J.saveId=m.saveId;save({token:m.token,seq:Math.max(J.seq,m.lastSeq||0)});J.seq=Math.max(J.seq,m.lastSeq||0);saveSeat(m.saveId,m.token,m.empireId);}
+  if(window.MP6Stars&&MP6Stars.onMessage(m))return;   // MP.6: ayna dünya (gerçek STARS arayüzü)
+  if(m.type==='assign'){if(window.MP6Stars)MP6Stars.onAssign();J.assigned=true;J.playerId=m.playerId;J.empireId=m.empireId;J.saveId=m.saveId;save({token:m.token,seq:Math.max(J.seq,m.lastSeq||0)});J.seq=Math.max(J.seq,m.lastSeq||0);saveSeat(m.saveId,m.token,m.empireId);}
   else if(m.type==='resume'){   // MP.4: devam lobisi bu bağlantıyı tanımadı; cihazda bu kayıt için kimlik varsa bir kez gönder
     const s=seatOf(m.saveId);J.resumeTried=J.resumeTried||{};
     if(s&&s.token&&!J.resumeTried[m.saveId]){J.resumeTried[m.saveId]=1;raw({v:1,type:'hello',name:J.name,token:s.token});}
@@ -95,7 +96,8 @@ addEventListener('popstate',()=>{
 });
 /* ---------- ekranlar ---------- */
 function render(){
-  const app=$('app');if(!app)return;
+  const app=$(window.MP6Stars?'mp6App':'app');if(!app)return;   // MP.6: gerçek oyun sayfasında #app oyunun kendi kökü
+  if(window.MP6Stars)MP6Stars.screen(J.screen);
   if(J.screen==='join'||J.screen==='connecting'){
     const fresh=!$('jCode');
     if(fresh)app.innerHTML='<div class="mp1-h">ODAYA KATIL</div><p class="mp1-sub">Host oyuncunun telefonunda görünen oda kodunu gir. Simülasyon host telefonda çalışır; bu sayfa yalnız senin devletini gösterir.</p>'+
@@ -147,6 +149,7 @@ const SIZE_N={kucuk:'Küçük',orta:'Orta',buyuk:'Büyük',devasa:'Devasa',ulu:'
 function game(app){
   const v=J.game.view,c=J.game.clock;
   if(!v){app.innerHTML=statusBar()+'<div class="mp1-status">Galaksi verisi bekleniyor…</div>';return;}
+  if(window.MP6Stars){MP6Stars.attach(J);return MP6Stars.update(statusBar());}   // MP.6: gerçek STARS arayüzü (/mp/join)
   if(window.MP2Game){MP2Game.attach(J);return MP2Game.update(statusBar());}   // MP.2: harita/filolar/koloniler/bilim
   const opts=Object.entries(v.catalog.b).filter(([,b])=>b.ok).map(([k,b])=>'<option value="'+esc(k)+'">'+esc(b.n)+' ('+Object.entries(b.c).map(([r,n])=>esc(r)+' '+(+n)).join(', ')+')</option>').join('');
   const keep={};for(const s of doc.querySelectorAll('select[data-col]'))keep[s.dataset.col]=s.value;

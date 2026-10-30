@@ -1,0 +1,5 @@
+/* STARS MP.6 — misafirin gerçek STARS arayüzü: yalnız lobi katmanı ve host'takiyle aynı çok oyunculu çubuk. Oyun ekranı index.html'in kendi stilleriyle çizilir. */
+.mp6-join{overflow-y:auto;overflow-x:hidden;padding:max(12px,env(safe-area-inset-top)) 12px 24px}
+.mp6-join>*{max-width:560px;margin-left:auto;margin-right:auto}
+.mp6-mini .mp6-conn{display:flex;align-items:center;min-height:44px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mp6-mini .mp6-conn.bad{color:#ff8f7a}

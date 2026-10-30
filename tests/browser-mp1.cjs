@@ -76,7 +76,7 @@ function childRelay(delay){return new Promise((res,rej)=>{const c=spawn(process.
     assert.match(code,/^[ABCDEFGHJKMNPQRSTUVWXYZ23456789]{8}$/);
     assert.equal(await H.textContent('#mp1Code'),code.slice(0,4)+'-'+code.slice(4));
     assert(!(await H.content()).includes(hostKey),'host key is not rendered');
-    assert.equal(await H.textContent('#mp1Link'),base+'/mp/join?code='+code);
+    assert.equal(await H.textContent('#mp1Link'),base+'/mp/play?code='+code);   // MP.6: davet gerçek STARS arayüzüne gider; bu paketteki misafir vakaları hafif istemciyle (/mp/join) koşar
     await H.locator('[data-m="tab"][data-tab="galaksi"]').tap();
     await H.selectOption('#mp1Ai','5');await H.selectOption('#mp1Cap','4');await H.fill('#mp1Seed','11');await H.locator('[data-m="apply"]').tap();
     await wait(H,()=>MP1Host.lobby.settings.seed===11&&MP1Host.lobby.capacity===4);
@@ -312,6 +312,8 @@ function childRelay(delay){return new Promise((res,rej)=>{const c=spawn(process.
   await test('host returns an offline guest\'s empire to the AI from the in-game panel; the kicked phone cannot rejoin',async()=>{
     await C.evaluate(()=>{window.WebSocket=function(){const o={readyState:3,send(){},close(){}};setTimeout(()=>o.onclose&&o.onclose(),20);return o;};});
     const cId=await H.evaluate(e=>{for(const p of MP1Host.host.state.players.values())if(p.empireId===e)return p.conn;},emp.C);relay.rooms.get(code).clients.get(cId).socket.destroy();
+    await H.setViewportSize({width:915,height:412});   // MP.6: oyun yalnız yatayda oynanır; dikeyde STARS "çevir" uyarısı MP çubuğunu da örter
+    await H.evaluate(()=>{if(!document.getElementById('modal').classList.contains('hidden'))UI.closeModal();UI.setSpeed(0);});   // MP.6: açık STARS penceresi (danışman) MP çubuğunun üstündedir
     await wait(H,()=>document.querySelector('#mp1Mini [data-g="ai"]'));await H.locator('#mp1Mini [data-g="ai"]').tap();
     await wait(H,e=>G.emps[e].ai===true,emp.C);assert.equal((await hostL()).players.length,3);
     await H.evaluate(()=>MP1Host.advance(30));

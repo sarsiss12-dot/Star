@@ -1,0 +1,294 @@
+{
+ "note": "Yerel relay + 4 ayrı Chromium süreci (mobil dokunmatik bağlam). Gerçek internet ya da fiziksel Android DEĞİL. Siyasi başlangıç açık fikstür.",
+ "results": [
+  {
+   "name": "kurulum: host oda açar; davet bağlantısı GERÇEK oyun sayfasına (/mp/play) gider; B ve C aynı lobiden katılır; oyun başlar; misafirler gerçek STARS arayüzüyle açılır",
+   "status": "PASS",
+   "ms": 9295
+  },
+  {
+   "name": "aynı arayüz iskeleti: host ve misafirde aynı üst çubuk, sol araçlar, tarih/hız kutusu, sağ panel sekmeleri, aynı yazı tipleri; misafir sayfasında MP.2 basit arayüzü yok",
+   "status": "PASS",
+   "ms": 89
+  },
+  {
+   "name": "görsel: aynı ayna dünya için misafir ekranı ile düz tek oyunculu STARS sayfası piksel piksel karşılaştırılır (çok oyunculu çubuk hariç); host ekranı aynı tasarım",
+   "status": "PASS",
+   "ms": 8648
+  },
+  {
+   "name": "zorunlu yatay ekran: 844×390, 915×412, 960×540 yatayda oyun görünür, yatay taşma yok; dikey tutulunca mevcut \"çevir\" uyarısı çıkar (host ve misafir aynı)",
+   "status": "PASS",
+   "ms": 15567
+  },
+  {
+   "name": "harita ve panel etkileşimi (misafir, gerçek dokunma): sistem seçimi sağ paneli açar; sürükleme kamerayı kaydırır; sekmeler ve sol menü açılır; senkron sırasında seçim ve kamera korunur",
+   "status": "PASS",
+   "ms": 5327
+  },
+  {
+   "name": "gerçek komutlar gerçek arayüzden (misafir B): bilim ağacından araştırma hedefi, koloni panelinden bina, filo panelinden ROTA + haritada hedef → host motoru uygular; misafir kendi devleti dışında komut veremez",
+   "status": "PASS",
+   "ms": 8137
+  },
+  {
+   "name": "desteklenmeyen eylemler açıkça engellenir ve host'a dokunmaz: hız düğmesi, filo duruşu, birleştirme, savaş ilanı, hediye; misafirde zaman ilerlemez",
+   "status": "PASS",
+   "ms": 2163
+  },
+  {
+   "name": "gizlilik: misafirin aynasında başka devletin kaynağı/teknolojisi/koloni ayrıntısı, host günlüğü, gerçek tohum ve RNG yok; görünmeyen sistemde sahip yok; C'nin aynası B'nin kuyruğunu ve araştırmasını içermez",
+   "status": "PASS",
+   "ms": 349
+  },
+  {
+   "name": "MP diplomasi (host ile aynı panel ve aynı çubuk): B DİPLOMASİ panelinden C'ye ticaret teklifi gönderir; C kendi panelinden kabul eder; host motoru tam bir kez uygular",
+   "status": "PASS",
+   "ms": 6143
+  },
+  {
+   "name": "kopma/yeniden bağlanma: misafirin soketi düşer; gerçek arayüz kalır, yeniden bağlanınca tam ayna yeniden gelir ve oyun aynı devletle sürer",
+   "status": "PASS",
+   "ms": 2092
+  },
+  {
+   "name": "performans: 45 / 60 / 100 sistemde ayna boyutu (tam ve fark), host ayna üretimi, misafir yeniden kurulum süresi",
+   "status": "PASS",
+   "ms": 1381
+  }
+ ],
+ "metrics": {
+  "pixel": {
+   "guestVsSingleplayer": {
+    "ratio": 0,
+    "pixels": 1233236
+   }
+  },
+  "perf": {
+   "mirrorKB": 18,
+   "sizes": {
+    "s45": {
+     "systems": 45,
+     "fullKB": 16.2,
+     "delta10dKB": 0.3,
+     "buildMs": 3.9,
+     "guestLoadMs": 41.1,
+     "ok": true
+    },
+    "s60": {
+     "systems": 60,
+     "fullKB": 20.2,
+     "delta10dKB": 1,
+     "buildMs": 1,
+     "guestLoadMs": 12.7,
+     "ok": true
+    },
+    "s100": {
+     "systems": 100,
+     "fullKB": 29.9,
+     "delta10dKB": 0.3,
+     "buildMs": 0.9,
+     "guestLoadMs": 40.9,
+     "ok": true
+    }
+   },
+   "liveGuestBuildMs": [
+    172.6,
+    42.1,
+    54.7,
+    66.8,
+    16.9,
+    24,
+    24.5,
+    18.4,
+    14.9,
+    30
+   ],
+   "hostMirrorBytes": [
+    875,
+    3419,
+    324,
+    135,
+    2619,
+    2651,
+    18895,
+    18896,
+    383,
+    1548
+   ]
+  },
+  "layout": {
+   "guest": {
+    "844x390": {
+     "overflow": false,
+     "rotate": false,
+     "game": true
+    },
+    "915x412": {
+     "overflow": false,
+     "rotate": false,
+     "game": true
+    },
+    "960x540": {
+     "overflow": false,
+     "rotate": false,
+     "game": true
+    },
+    "390x844": {
+     "overflow": false,
+     "rotate": true,
+     "game": true
+    }
+   },
+   "host": {
+    "844x390": {
+     "overflow": false,
+     "rotate": false,
+     "game": true
+    },
+    "915x412": {
+     "overflow": false,
+     "rotate": false,
+     "game": true
+    },
+    "960x540": {
+     "overflow": false,
+     "rotate": false,
+     "game": true
+    },
+    "390x844": {
+     "overflow": false,
+     "rotate": true,
+     "game": true
+    }
+   }
+  },
+  "blocked": {
+   "spd": 1,
+   "stance": 1,
+   "merge": 1,
+   "war": 1,
+   "giftDo": 1,
+   "autoex": 1,
+   "colonize": 1,
+   "demolish": 1,
+   "stop": 1
+  },
+  "notes": [
+   "filo 12 → 12 (gerçek ROTA dokunuşu)",
+   "yeniden bağlanma sonrası tam ayna: 2"
+  ],
+  "skeleton": {
+   "host": {
+    "top": true,
+    "tools": 4,
+    "toolsA": [
+     "home:",
+     "fit:",
+     "save:",
+     "grpTog:map",
+     "mapMode:siyasi",
+     "mapMode:diplomasi",
+     "mapMode:savas",
+     "fedLinksToggle:",
+     "allyLinksToggle:",
+     "warLinksToggle:",
+     "logiToggle:",
+     "radarTog:",
+     "fleetNamesToggle:",
+     "convoyToggle:",
+     "grpTog:emp",
+     "globalPane:imp",
+     "globalPane:bilim",
+     "news:",
+     "diplomaticInbox:",
+     "diploPane:",
+     "tab:intel",
+     "cncPane:",
+     "fedPane:",
+     "marketPane:",
+     "commerce:",
+     "globalPane:ekonomi"
+    ],
+    "timepod": [
+     "⏸",
+     "▸",
+     "▸▸",
+     "▸▸▸",
+     "▸▸▸▸"
+    ],
+    "tabs": [
+     "SİSTEM",
+     "FİLO",
+     "İSTİHBARAT"
+    ],
+    "font": "system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+    "panel": true
+   },
+   "guest": {
+    "top": true,
+    "tools": 4,
+    "toolsA": [
+     "home:",
+     "fit:",
+     "save:",
+     "grpTog:map",
+     "mapMode:siyasi",
+     "mapMode:diplomasi",
+     "mapMode:savas",
+     "fedLinksToggle:",
+     "allyLinksToggle:",
+     "warLinksToggle:",
+     "logiToggle:",
+     "radarTog:",
+     "fleetNamesToggle:",
+     "convoyToggle:",
+     "grpTog:emp",
+     "globalPane:imp",
+     "globalPane:bilim",
+     "news:",
+     "diplomaticInbox:",
+     "diploPane:",
+     "tab:intel",
+     "cncPane:",
+     "fedPane:",
+     "marketPane:",
+     "commerce:",
+     "globalPane:ekonomi"
+    ],
+    "timepod": [
+     "⏸",
+     "▸",
+     "▸▸",
+     "▸▸▸",
+     "▸▸▸▸"
+    ],
+    "tabs": [
+     "SİSTEM",
+     "FİLO",
+     "İSTİHBARAT"
+    ],
+    "font": "system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+    "panel": true
+   }
+  },
+  "sent": {
+   "research": 1,
+   "build": 1,
+   "move": 1
+  },
+  "privacy": {
+   "res": 0,
+   "techs": 0,
+   "foreignColDetail": false,
+   "seed": 166680443,
+   "cfgSeed": 166680443,
+   "rs": 1,
+   "log": 0,
+   "aiPlans": false,
+   "hiddenOwners": 0,
+   "names": 0
+  },
+  "pageErrors": []
+ }
+}

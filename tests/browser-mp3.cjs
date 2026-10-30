@@ -11,6 +11,7 @@ const results=[],errors=[],metrics={viewports:{},perf:{},latency:{}};
 const launch={executablePath:process.env.STARS_CHROMIUM_PATH||undefined,args:['--no-sandbox','--disable-gpu','--disable-dev-shm-usage','--enable-precise-memory-info']};
 const PHONE=(w,h)=>({viewport:{width:w,height:h},isMobile:true,hasTouch:true,deviceScaleFactor:2});
 let relay,base,bH,bA,bB,bC,H,A,B,C,code;const E={A:1,B:3,C:4,AI:5};
+const freeBar=p=>p.evaluate(()=>{const m=document.getElementById('modal');if(m&&!m.classList.contains('hidden')&&typeof UI!=='undefined'){const s=G.speed;UI.closeModal();UI.setSpeed(s);}});   // MP.6: açık STARS penceresi (danışman/olay) MP çubuğunun üstündedir; kapat, hızı koru
 async function test(name,fn){const t0=Date.now();try{await fn();results.push({name,status:'PASS',ms:Date.now()-t0});console.log('PASS '+name);}
   catch(e){results.push({name,status:'FAIL',error:String(e&&e.stack||e).slice(0,1600)});console.log('FAIL '+name+'\n'+(e&&e.stack||e));}}
 const wait=(p,fn,arg,timeout=20000)=>p.waitForFunction(fn,arg,{timeout,polling:50});
@@ -275,7 +276,7 @@ async function room(guests){
   });
 
   await test('host MP diplomacy panel: humans only, same rules through host.local(); host ↔ C trade both ways with two-step confirm; host cannot act on other parties\' offers; host notices go to the host log only',async()=>{
-    await H.locator('#mp3HostBtn').tap();await wait(H,()=>document.querySelector('#mp3Host .mp3'));const P='#mp3Host';
+    await freeBar(H);await H.locator('#mp3HostBtn').tap();await wait(H,()=>document.querySelector('#mp3Host .mp3'));const P='#mp3Host';
     await sub(H,'emp',P);const ids=await H.evaluate(()=>[...document.querySelectorAll('#mp3Host [data-emp]')].map(e=>+e.dataset.emp));
     assert(ids.includes(E.C)&&!ids.includes(E.AI)&&ids.every(i=>[E.A,E.B,E.C].includes(i)),'humans only (AI diplomacy stays in the single-player DİPLOMASİ screen): '+ids);
     assert.equal(await H.evaluate(()=>!!G.emps[0].contact[5]),true,'host knows the AI, yet it is not listed here');await shot(H,'host-panel-contacts');

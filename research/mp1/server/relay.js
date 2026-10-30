@@ -59,10 +59,22 @@ function create(env=process.env){
     'research/mp2/client/guest-game.js','research/mp2/client/mp2.css',   // MP.2 misafir haritası
     'research/mp3/client/dip-ui.js','research/mp3/client/mp3.css',       // MP.3 diplomasi ekranı (misafir sekmesi + host paneli)
     'research/mp31/client/pol-ui.js','research/mp31/client/mp31.css',  // MP.3.1 federasyon ve vasallık bölümleri
-    'research/mp4/client/mp4-save.js','research/mp4/client/mp4.css']);  // MP.4 kayıt deposu (IndexedDB + dosya) ve kayıt ekranları
+    'research/mp4/client/mp4-save.js','research/mp4/client/mp4.css',  // MP.4 kayıt deposu (IndexedDB + dosya) ve kayıt ekranları
+    'research/mp6/mirror.js','research/mp6/client/guest-stars.js','research/mp6/client/mp6.css']);  // MP.6 ayna dünya + misafirde gerçek STARS arayüzü
   function page(){
     const html=fs.readFileSync(path.join(ROOT,'index.html'),'utf8');if(!html.includes('</body>'))throw Error('index.html');
-    return html.replace('</body>','<link rel="stylesheet" href="/research/mp1/client/mp1.css"><link rel="stylesheet" href="/research/mp3/client/mp3.css"><link rel="stylesheet" href="/research/mp31/client/mp31.css"><link rel="stylesheet" href="/research/mp4/client/mp4.css"><script src="/research/mp0/mp-core.js"></script><script src="/research/mp1/client/view.js"></script><script src="/research/mp3/client/dip-ui.js"></script><script src="/research/mp31/client/pol-ui.js"></script><script src="/research/mp4/client/mp4-save.js"></script><script src="/research/mp1/client/mp1-host.js"></script></body>');
+    return html.replace('</body>','<link rel="stylesheet" href="/research/mp1/client/mp1.css"><link rel="stylesheet" href="/research/mp3/client/mp3.css"><link rel="stylesheet" href="/research/mp31/client/mp31.css"><link rel="stylesheet" href="/research/mp4/client/mp4.css"><script src="/research/mp0/mp-core.js"></script><script src="/research/mp1/client/view.js"></script><script src="/research/mp3/client/dip-ui.js"></script><script src="/research/mp31/client/pol-ui.js"></script><script src="/research/mp4/client/mp4-save.js"></script><script src="/research/mp6/mirror.js"></script><script src="/research/mp1/client/mp1-host.js"></script></body>');
+  }
+  /* MP.6: misafirin oyun sayfası = AYNI index.html (19 runtime dosyası, gerçek arayüz) + lobi/bağlantı (join.js) + ayna dünya istemcisi.
+     Sayfa motoru yükler ama simülasyon yürütmez. CSP katı kalır: yalnız index.html'in kendi satır içi betiği ve tam ekran düğmesinin
+     satır içi işleyicisi özetiyle izinli (başka satır içi betik çalışmaz). */
+  const inlineHashes=(()=>{const html=fs.readFileSync(path.join(ROOT,'index.html'),'utf8'),h=t=>"'sha256-"+crypto.createHash('sha256').update(t).digest('base64')+"'";
+    const scripts=[...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(m=>h(m[1]));return {scripts,handlers:[h('forceFullscreen()')]};})();
+  const GUEST_CSP="default-src 'self'; connect-src 'self'; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; worker-src 'self'; manifest-src 'self'; "+
+    "script-src 'self' 'unsafe-hashes' "+inlineHashes.scripts.concat(inlineHashes.handlers).join(' ');
+  function guestPage(){
+    const html=fs.readFileSync(path.join(ROOT,'index.html'),'utf8');if(!html.includes('</body>')||!html.includes('<head>'))throw Error('index.html');
+    return html.replace('<head>','<head><base href="/">').replace('</body>','<link rel="stylesheet" href="/research/mp1/client/mp1.css"><link rel="stylesheet" href="/research/mp3/client/mp3.css"><link rel="stylesheet" href="/research/mp31/client/mp31.css"><link rel="stylesheet" href="/research/mp6/client/mp6.css"><script src="/research/mp1/client/view.js"></script><script src="/research/mp3/client/dip-ui.js"></script><script src="/research/mp31/client/pol-ui.js"></script><script src="/research/mp6/mirror.js"></script><script src="/research/mp6/client/guest-stars.js"></script><script src="/research/mp1/client/join.js"></script></body>');
   }
   function newCode(){for(;;){let c='';for(let i=0;i<CODE_LEN;i++)c+=ALPHABET[crypto.randomInt(ALPHABET.length)];if(!rooms.has(c)&&!tomb.has(c))return c;}}
   const norm=c=>typeof c==='string'?c.toUpperCase().replace(/[^A-Z0-9]/g,''):'';
@@ -106,6 +118,7 @@ function create(env=process.env){
     if(cfg.public)res.setHeader('Strict-Transport-Security','max-age=31536000');
     if(req.method!=='GET'){res.writeHead(405,SEC);return res.end();}
     if(n==='/'||n==='/index.html'){res.writeHead(200,{...SEC,'Content-Type':TYPES['.html']});return res.end(page());}
+    if(n==='/mp/play'){res.writeHead(200,{...SEC,'Content-Type':TYPES['.html'],'Content-Security-Policy':GUEST_CSP});return res.end(guestPage());}
     if(n==='/mp/join'){res.writeHead(200,{...SEC,'Content-Type':TYPES['.html'],'Content-Security-Policy':"default-src 'self'; connect-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'"});
       return res.end(fs.readFileSync(path.join(ROOT,'research/mp1/client/join.html')));}
     if(n==='/mp/stats'&&cfg.dev){res.writeHead(200,{...SEC,'Content-Type':TYPES['.json']});return res.end(JSON.stringify({...stats,rooms:rooms.size}));}
