@@ -282,6 +282,19 @@ function createHost(opts){
     if(!p.lastView){n=out(p.conn,{v:PROTOCOL,type:'snapshot',rev,t:clock(),you:{playerId:p.playerId,empireId:p.empireId},view});stats.snapshots++;stats.snapshotBytes.push(n);}
     else{n=out(p.conn,{v:PROTOCOL,type:'delta',rev,base:p.lastRev,t:clock(),ops:diff(p.lastView,view)});stats.deltas++;stats.deltaBytes.push(n);}
     p.lastView=view;p.lastRev=rev;stats.publishMs.push(now()-t0);
+    if(p.ui==='stars')sendMirror(p);
+  }
+  /* MP.6: gerçek STARS arayüzünü kullanan misafire "ayna dünya" (research/mp6/mirror.js): yetkiye göre süzülmüş, misafiri 0 numara
+     yapan Save8 biçimi. İlk kez tam, sonra fark; en sık opts.mirrorMs'de bir (son durum ertelenmiş gönderimle mutlaka gider). */
+  const mirrorMs=Number.isFinite(opts.mirrorMs)?opts.mirrorMs:700,cosmetic=parseInt(fnv(String(opts.roomId||'r')).slice(0,7),16)%2147483646+1;
+  function sendMirror(p){
+    if(!p.conn||p.empireId===null||!root.StarsMirror)return;
+    const t=now();if(p.lastMirror&&mirrorMs>0&&t-(p.mirrorAt||0)<mirrorMs){if(!p.mirrorTimer&&typeof setTimeout==='function')p.mirrorTimer=setTimeout(()=>{p.mirrorTimer=null;sendMirror(p);},mirrorMs-(t-(p.mirrorAt||0)));return;}
+    const m=pure(()=>root.StarsMirror.build(p.empireId,{cosmeticSeed:cosmetic,log:notes.get(p.empireId)||[]}));
+    const rev=(p.mirrorRev||0)+1;let n;
+    if(!p.lastMirror)n=out(p.conn,{v:PROTOCOL,type:'mirror',rev,full:m});
+    else{const ops=root.StarsMirror.diff(p.lastMirror,m);if(!Object.keys(ops).length){p.mirrorAt=t;return;}n=out(p.conn,{v:PROTOCOL,type:'mirrorDelta',rev,base:p.mirrorRev,ops});}
+    p.lastMirror=m;p.mirrorRev=rev;p.mirrorAt=t;stats.mirrors=(stats.mirrors||0)+1;(stats.mirrorBytes||(stats.mirrorBytes=[])).push(n);if(stats.mirrorBytes.length>200)stats.mirrorBytes.shift();
   }
   function publish(){dipSweep();pure(polSweep);const rev=++S.worldRevision;for(const p of S.players.values())publishTo(p,rev);return rev;}
 
@@ -704,7 +717,7 @@ function createHost(opts){
         if(L){p.seat=L.seatNext++;p.ready=false;p.tab='lobi';p.claim=null;p.color=PALETTE[p.seat%PALETTE.length];p.rate=[];if(L.phase==='resume')p.visitor=true;}
         S.players.set(p.playerId,p);}
       const prev=playerOf(conn);if(prev&&prev!==p){prev.conn=null;prev.lastView=null;if(prev.visitor)S.players.delete(prev.playerId);}   // aynı bağlantı başka kimliğe geçerse eskisi bağsız kalır (MP.4: doğrulanan ziyaretçi kaydı silinir)
-      p.conn=conn;p.lastView=null;p.lastSeen=now();S.conns.set(conn,p.playerId);
+      p.conn=conn;p.lastView=null;p.lastMirror=null;p.lastSeen=now();S.conns.set(conn,p.playerId);
       out(conn,{v:PROTOCOL,type:'assign',room:S.roomId,saveId:S.saveId,hostId:S.hostId,playerId:p.playerId,token:p.token,empireId:p.empireId,lastSeq:p.lastSeq,rev:S.worldRevision});
       if(p.empireId!==null)publishTo(p,S.worldRevision);
       if(p.visitor)out(conn,{v:PROTOCOL,type:'resume',saveId:S.saveId});   // MP.4: cihazında bu kayıt için jeton varsa misafir onu gönderir
@@ -716,7 +729,10 @@ function createHost(opts){
         return out(conn,{v:PROTOCOL,type:'error',code:'bad-cmd'});
       runCommand(conn,m);
     },
-    resync(conn,m){const p=playerOf(conn);if(!p||p.empireId===null)return out(conn,{v:PROTOCOL,type:'error',code:'no-empire'});p.lastView=null;publishTo(p,S.worldRevision);},
+    resync(conn,m){const p=playerOf(conn);if(!p||p.empireId===null)return out(conn,{v:PROTOCOL,type:'error',code:'no-empire'});p.lastView=null;p.lastMirror=null;publishTo(p,S.worldRevision);},
+    /* MP.6: misafir gerçek STARS arayüzünü açtı → ayna dünya istenir (yalnız kendi devleti için; görünüm kuralları aynadadır) */
+    ui(conn,m){const p=playerOf(conn);if(!onlyKeys(m,['v','type','mode'])||m.mode!=='stars')return out(conn,{v:PROTOCOL,type:'error',code:'bad-ui'});
+      if(!p||p.empireId===null)return out(conn,{v:PROTOCOL,type:'error',code:'no-empire'});p.ui='stars';p.lastMirror=null;if(L&&!['ingame','paused'].includes(L.phase))return;sendMirror(p);},
     ping(conn,m){if(!int(m.t,0,Number.MAX_SAFE_INTEGER))return;out(conn,{v:PROTOCOL,type:'pong',t:m.t,day:Math.floor(G.day)});},
     /* MP.1 lobi: yalnız bağlı oyuncunun KENDİ alanları değişir; kimlik bağlantıdan */
     presence(conn,m){const p=lobbyActor(conn,m,['v','type','tab'],'presence');if(!p)return;

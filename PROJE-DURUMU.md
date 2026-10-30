@@ -6,14 +6,23 @@ Son güncelleme: 2026-10-30. Depo `sarsiss12-dot/Star`.
 
 | | `main` (birleşmiş) | Bu dal (PR) |
 |---|---|---|
-| Faz | 96H.10 + MP.0 – MP.4 (+ 96H.11 araştırma arşivi) | MP.5 (internete hazır relay, kopma/yeniden bağlanma, dağıtım paketi; canlı sunucu yok) |
+| Faz | 96H.10 + MP.0 – MP.4 (+ 96H.11 araştırma arşivi) | MP.5 (PR #17, açık) + MP.6 (misafirde gerçek STARS arayüzü; kısmi eşitlik) |
 | Build / PWA | `96h10` / `stars-v96h10` | değişmedi |
 | Save | v8 | v8 (şema değişmedi) |
 | Oyun ZIP | `releases/stars-faz96h10.zip` (SHA-256 `78e76d1627b8ec1b990849b2242835f78667f110e1d6f17021760183ee7be6d0`) | yeni ZIP yok |
 | Taban HEAD | `4296ad2d43fedce6264020b3761f50f1839fd836` | — |
 | Değişen runtime | — | yok (19 dosya 96H.10 ile aynı) |
 
-96H.6.2, 96H.6.3, 96H.7, 96H.11 ve MP.0 – MP.5 oyun yayımlamadı.
+96H.6.2, 96H.6.3, 96H.7, 96H.11 ve MP.0 – MP.6 oyun yayımlamadı.
+
+## MP.6 — misafirde gerçek STARS arayüzü (geliştirme sürümü, kısmi eşitlik)
+
+Ayrıntı: `MULTIPLAYER-MP6-MIMARI.md`, `MULTIPLAYER-MP6-SONUC.md`. Kod: `research/mp6/` + `mp-core.js` + `research/mp1/`. Testler: `tests/mp6_mirror_test.js`, `tests/browser-mp6.cjs`.
+
+- Davet bağlantısı (`/mp/play`) misafire **aynı `index.html`'i ve aynı arayüz kodunu** açar; host her misafire yetkiye göre süzülmüş "ayna dünya" gönderir, misafir motorun `deserialize`'ıyla kurar (simülasyon yok).
+- Aynı ayna için misafir ekranı ile düz tek oyunculu sayfa arasında piksel farkı 0 (çok oyunculu çubuk hariç).
+- Çalışan: harita, kamera, seçim, üst çubuk, sol menü, sağ panel, bilim ağacı (hedef), koloni binası, filo rotası, MP diplomasi paneli (ticaret/federasyon/vasallık). Yatay zorunlu; dikeyde "çevir" uyarısı.
+- Eksik (MP.6.x): gerçek diplomasi/federasyon/casusluk pencerelerinin eylemleri, gemi üretimi, filo bölme/birleştirme/kolonileştirme/durdurma, yıkım/iptal/odak, haberler/gelen kutusu/ekonomi geçmişi.
 
 ## MP.5 — güvenli internet bağlantısı ve relay dağıtım paketi (canlı sunucu yok)
 

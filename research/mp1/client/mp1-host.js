@@ -53,7 +53,7 @@ function render(){
 function lobbyScreen(){
   if(API.lobby&&API.lobby.phase==='resume')return resumeLobby();
   const L=API.lobby;if(!L){overlay.innerHTML='<div class="mp1-wrap"><div class="mp1-status">Lobi hazırlanıyor…</div></div>';return;}
-  const link=location.origin+'/mp/join?code='+API.code,cs=API.host.canStart(),me=G.p;
+  const link=location.origin+'/mp/play?code='+API.code,cs=API.host.canStart(),me=G.p;
   const tabs=['lobi','galaksi','doktrin','gorunus','fizyoloji','etik','civic','koken'];
   let body='';
   if(API.tab==='lobi'){
@@ -103,7 +103,7 @@ function onClick(e){
     const nm=(API.host.state.players.get(sp)||{}).name||'';sheet('Bu bağlantı "'+nm+'" koltuğuna atansın mı? Eski cihazın jetonu geçersiz olur. Yalnız kimliğinden emin olduğun oyuncu için yap.','Kimliği kurtar',()=>{const r=API.host.recoverSeat(el.dataset.pid,sp);if(!r.ok)toast(RECOVER_WHY[r.why]||r.why);render();});return;}
   if(m==='tab'){API.tab=el.dataset.tab;API.host.setHostTab(API.tab);render();return;}
   if(m==='copy'){copy(V.fmtCode(API.code));return;}
-  if(m==='share'){const url=location.origin+'/mp/join?code='+API.code;if(navigator.share)navigator.share({title:'STARS odası',text:'STARS oda kodu: '+V.fmtCode(API.code),url}).catch(()=>{});else copy(url);return;}
+  if(m==='share'){const url=location.origin+'/mp/play?code='+API.code;if(navigator.share)navigator.share({title:'STARS odası',text:'STARS oda kodu: '+V.fmtCode(API.code),url}).catch(()=>{});else copy(url);return;}
   if(m==='apply'){applySettings();return;}
   if(m==='kick'){sheet('Bu oyuncu odadan çıkarılsın mı? (bu odaya tekrar giremez)','Çıkar',()=>{API.host.kick(el.dataset.pid,false);});return;}
   if(m==='start'){startGame();return;}
@@ -181,7 +181,7 @@ setInterval(()=>{
 },250);
 function mini(){
   let el=doc.getElementById('mp1Mini');
-  if(!el){el=doc.createElement('div');el.id='mp1Mini';el.className='mp1-mini';doc.body.appendChild(el);el.addEventListener('click',e=>{const b=e.target.closest('[data-g]');if(!b)return;
+  if(!el){el=doc.createElement('div');el.id='mp1Mini';el.className='mp1-mini';(doc.getElementById('app')||doc.body).appendChild(el);   /* MP.6: oyunun kök kabında — STARS pencereleri ve 'çevir' uyarısıyla aynı katman bağlamı */el.addEventListener('click',e=>{const b=e.target.closest('[data-g]');if(!b)return;
     if(b.dataset.g==='toggle'){API.miniOpen=!API.miniOpen;mini();}
     else if(b.dataset.g==='kick')API.host.kick(b.dataset.pid,false);else if(b.dataset.g==='ai')API.host.kick(b.dataset.pid,true);
     else if(b.dataset.g==='dip')dipOpen(true);
@@ -274,7 +274,7 @@ function confirmResume(text,v){
     API.pendingResume=v.pkg;API.err='';createRoom();});
 }
 function resumeLobby(){
-  const L=API.lobby,R=API.resumeInfo||{display:{}},link=location.origin+'/mp/join?code='+API.code,ps=L.players.filter(p=>!p.host);
+  const L=API.lobby,R=API.resumeInfo||{display:{}},link=location.origin+'/mp/play?code='+API.code,ps=L.players.filter(p=>!p.host);
   const seats=ps.filter(p=>!p.visitor),offline=seats.filter(p=>!p.online),visitors=ps.filter(p=>p.visitor);
   overlay.innerHTML='<div class="mp1-wrap mp4"><div class="mp1-h">DEVAM LOBİSİ</div><div class="mp1-card">'+saveCard(R.display)+'</div>'+
     '<div class="mp1-sub">Davet kodu — arkadaşların bu kodla yeniden katılır; cihazlarındaki kimlikle kendi devletlerine dönerler.</div><div class="mp1-code" id="mp1Code">'+esc(V.fmtCode(API.code))+'</div>'+

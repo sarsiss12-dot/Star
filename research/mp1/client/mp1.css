@@ -35,7 +35,7 @@ label.mp1-l{display:block;color:#7d90ad;font-size:13px;margin:10px 0 4px}
 .mp1-emp.mp1-guest{flex-wrap:wrap}.mp1-guest .gn{flex:1 0 100%;font-weight:600;overflow-wrap:anywhere}.mp1-guest .mp1-sel{flex:1 1 140px;width:auto;min-width:0}
 .mp1-sel{width:100%;min-height:48px;background:#0b1424;color:#d6e6f5;border:1px solid #2c3d5c;border-radius:8px;font:inherit;padding:8px}
 .mp1-sheet{position:fixed;left:0;right:0;bottom:0;z-index:6000;background:#0b1424;border-top:1px solid #ff9b3d;padding:14px 14px max(14px,env(safe-area-inset-bottom))}
-.mp1-mini{position:fixed;left:6px;bottom:6px;z-index:4500;max-width:min(320px,calc(100vw - 12px));background:#0b1424ee;color:#cfe;font:12px system-ui,sans-serif;
+.mp1-mini{position:fixed;left:6px;bottom:calc(52px + env(safe-area-inset-bottom));z-index:200;max-width:min(320px,calc(100vw - 12px));background:#0b1424ee;color:#cfe;font:12px system-ui,sans-serif;
   padding:0 8px;border:1px solid #4aa8d8;border-radius:8px}
 .mp1-mini .mp1-btn{min-height:44px;margin:4px 0;font-size:12px}
 .mp1-mini-h{display:block;width:100%;min-height:44px;background:none;border:0;color:inherit;font:inherit;text-align:left;padding:0;touch-action:manipulation}

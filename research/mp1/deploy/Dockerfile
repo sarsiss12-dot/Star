@@ -14,6 +14,8 @@ COPY research/mp2/client/ research/mp2/client/
 COPY research/mp3/client/ research/mp3/client/
 COPY research/mp31/client/ research/mp31/client/
 COPY research/mp4/client/ research/mp4/client/
+COPY research/mp6/mirror.js research/mp6/mirror.js
+COPY research/mp6/client/ research/mp6/client/
 # Herkese açık kip: relay TLS'yi önündeki vekilden/platformdan bekler. MP1_ORIGINS
 # dağıtımda ZORUNLU verilir (https://oyun-alanı); verilmezse relay başlamayı reddeder.
 # PORT: platform kendi değerini verirse o kullanılır (MP1_PORT boş bırakıldı).
