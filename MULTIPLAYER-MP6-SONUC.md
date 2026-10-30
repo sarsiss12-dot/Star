@@ -158,14 +158,17 @@ PASS (§4 madde 4). Fiziksel Android'de `screen.orientation.lock` davranışı: 
 
 | Test | Sonuç |
 |---|---|
-| Tam Node regresyonu | ⟨RUNALL⟩ |
+| Tam Node regresyonu | 151 paket: 6219 GEÇEN / 3 KALAN (yalnız bilinen ortam FAIL'i `faz95d_identity` seed 11/99/404; taban ile aynı) |
 | `browser-mp6` / `mp6_mirror` | 11/11 · 8/8 PASS |
-| `browser-mp5` / `mp5_docker` | ⟨MP5⟩ |
-| `browser-mp4` | ⟨MP4⟩ |
-| `browser-mp0` / `mp1` / `mp11` / `mp2` / `mp3` / `mp31` | ⟨MPX⟩ |
-| `browser-96h10` (tek oyunculu) | ⟨96H10⟩ |
+| `browser-mp5` / `mp5_docker` | 10/10 PASS (Docker kipi: relay konteynerde) · 6/6 PASS |
+| `browser-mp4` | 13/13 PASS |
+| `browser-mp0` / `mp1` / `mp11` / `mp2` / `mp3` / `mp31` | 20/20 · 22/22 · 10/10 · 14/14 · 12/12 · 11/11 PASS |
+| `browser-96h10` (tek oyunculu) | 27/27 PASS |
 | Save8/RNG (`mp4_core`, `mp6_mirror`) | PASS |
 | ZIP / CRC / manifest | DOĞRULANDI, değişmedi |
+
+- Test uyarlaması: MP çubuğu artık STARS pencerelerinin altında. `browser-mp1/mp3/mp31/mp4/mp5` host çubuğuna dokunmadan önce açık STARS penceresini (danışman/olay) kapatır, hızı korur (`freeBar`). İlk koşuda bu yüzden mp3 1, mp31 1, mp4 11, mp5 1 FAIL verdi; düzeltmeden sonra hepsi PASS.
+- `mp5_docker` ilk koşuda Docker daemon kapalı olduğu için NOT RUN oldu; daemon yeniden başlatılıp koşuldu: 6/6 PASS.
 
 ## 12. Açık sorunlar / sonraki faz (MP.6.1)
 
@@ -179,6 +182,7 @@ PASS (§4 madde 4). Fiziksel Android'de `screen.orientation.lock` davranışı: 
 4. **MP.2 basit istemcisinin (`/mp/join`) kaldırılması:** MP.1–MP.5 tarayıcı testlerinin gerçek arayüze taşınması.
 5. **Telefonda sık `deserialize` maliyetinin ölçülmesi** ve gerekirse sıklığın uyarlanması (fiziksel Android NOT RUN).
 6. **Hız göstergesi:** misafirin hız düğmeleri host'un gerçek hızını göstermiyor (yalnız engelli).
+7. **MP çubuğu STARS pencerelerinin altında:** host ya da misafir, açık bir STARS penceresi (danışman, olay) varken çubuğa ulaşamaz; önce pencereyi kapatması gerekir. Bu bilinçli bir seçim (eskiden çubuk tarih/hız kutusunu ve pencereleri örtüyordu); gerekirse pencere başlığına küçük bir MP göstergesi eklenebilir.
 
 ## 13. NOT RUN
 
