@@ -153,7 +153,7 @@ Federasyon kur / başvur / davet / yasa ve vasallık penceresinin gönderimi ayn
   - filo ve koloni komutları (sahiplik; ağ = doğrudan motor);
   - kolonileştirme ve bildirim yönlendirme;
   - vasallık, federasyon ve ekonomi aynası.
-- `tests/browser-mp61.cjs` — **⟨MP61⟩**: 3 ayrı Chromium (host 915×412, B 844×390, C 960×540), gerçek dokunma.
+- `tests/browser-mp61.cjs` — **13/13 PASS**: 3 ayrı Chromium (host 915×412, B 844×390, C 960×540), gerçek dokunma.
 - `tests/browser-mp6.cjs` — MP.6.1'de çalışan eylemler (hız, duruş, birleştirme…) "engelli" listesinden çıkarıldı.
   - Engelli denetimi artık hâlâ desteklenmeyen 8 eylemle yapılıyor.
   - Rota denetimi aynanın gelmesini bekliyor.
@@ -164,28 +164,32 @@ Federasyon kur / başvur / davet / yasa ve vasallık penceresinin gönderimi ayn
 |---|---|---|---|
 | Tam ayna (yeni oyun) | 16,6 KB | 20,6 KB | 30,3 KB |
 | 10 günlük fark | 0,3 KB | 1,0 KB | 0,3 KB |
-| Misafir kurulum (`deserialize`) | 13,8 ms | 6,7 ms | 9,3 ms |
-| 2 misafir için ayna üretimi | 2,7 ms | 0,7 ms | 1,2 ms |
+| Misafir kurulum (`deserialize`) | 10,2 ms | 7,7 ms | 9,7 ms |
+| 2 misafir için ayna üretimi | 3,0 ms | 0,8 ms | 1,3 ms |
 
-- **Canlı oyunda misafir yeniden kurulumu:** 5,7–26,5 ms.
-- **Host ayna iletileri:** 71 B – 4,3 KB.
-- **Dokunuş → host'ta uygulanma:** 276–664 ms. Test yoklaması ve yerel relay dahil; gerçek ağda gidiş-dönüş eklenir.
-- **Panel açılma:** 254–408 ms (Playwright dokunma süresi dahil).
-- **Pencere açıkken bekletilen ayna:** 7 kez (tek test akışında).
+- **Canlı oyunda misafir yeniden kurulumu:** 6,5–24,2 ms.
+- **Host ayna iletileri:** 80 B – 4,3 KB.
+- **Dokunuş → host'ta uygulanma:** 294–606 ms. Test yoklaması ve yerel relay dahil; gerçek ağda gidiş-dönüş eklenir.
+- **Panel açılma:** 306–367 ms (Playwright dokunma süresi dahil).
+- **Pencere açıkken bekletilen ayna:** 8 kez (tek test akışında).
 - **Telefon:** düşük / orta seviye Android'de `deserialize` süresi ölçülmedi (NOT RUN). Masaüstü süresinin birkaç katı olabilir.
 
 ## 8. Regresyon
 
 | Test | Sonuç |
 |---|---|
-| Tam Node regresyonu | ⟨RUNALL⟩ |
-| `mp61_core` / `browser-mp61` | 9/9 · ⟨MP61⟩ |
-| `browser-mp6` | ⟨MP6⟩ |
-| `browser-mp5` / `mp5_docker` | ⟨MP5⟩ |
-| `browser-mp4` (kayıt / yükleme) | ⟨MP4⟩ |
-| `browser-mp0` / `mp1` / `mp11` / `mp2` / `mp3` / `mp31` | ⟨MPX⟩ |
-| `browser-96h10` (tek oyunculu) | ⟨96H10⟩ |
-| ZIP / SHA-256 / CRC32 / manifest | ⟨ZIP⟩ |
+| Tam Node regresyonu | 152 paket: 6228 GEÇEN / 3 KALAN (yalnız bilinen `faz95d_identity` seed 11/99/404) |
+| `mp61_core` / `browser-mp61` | 9/9 · 13/13 PASS |
+| `browser-mp6` | 11/11 PASS |
+| `browser-mp5` / `mp5_docker` | 10/10 (Docker kipi) · 6/6 PASS |
+| `browser-mp4` (kayıt / yükleme) | 13/13 PASS |
+| `browser-mp0` / `mp1` / `mp11` / `mp2` / `mp3` / `mp31` | 20/20 · 22/22 · 10/10 · 14/14 · 12/12 · 11/11 PASS |
+| `browser-96h10` (tek oyunculu) | 27/27 PASS |
+| ZIP / SHA-256 / CRC32 / manifest | değişmedi; `verify-release --root` DOĞRULANDI |
+
+- **Notlar:**
+  - `browser-mp6` ilk koşuda 1 FAIL verdi: bina kuyruğu denetimi, aynanın gelişini beklemeden bakıyordu (MP.6'daki aynı zamanlama yarışı). Denetim beklemeye çevrildi, sonra 11/11.
+  - MP.6.1'den önceki ilk ara koşuda `mp31_core` 1 FAIL verdi. Neden: bildirim yönlendirmesi eski komutlarda Save8 baytını değiştiriyordu. Yönlendirme yalnız yeni komutlarla sınırlandı.
 
 ## 9. Açık sorunlar / MP.6.2
 
