@@ -1,0 +1,270 @@
+{
+ "note": "Ayrı süreçler: relay (Node, yeniden başlatıldı), kalıcı profilli host Chromium (gerçekten kapatılıp yeniden açıldı), misafirler ayrı Chromium (mobil dokunmatik bağlam). Gerçek internet ya da fiziksel Android DEĞİL. Siyasi başlangıç durumu açık fikstür.",
+ "results": [
+  {
+   "name": "kurulum: gerçek lobi → oyun (B = 3, C = 5); siyasi fikstür; gerçek komutlar; bekleyen MP.3 karşı teklifi, federasyon oyu ve vasallık karşı teklifi",
+   "status": "PASS",
+   "ms": 4555
+  },
+  {
+   "name": "kayıt: OYUN İÇİ → OYUNU KAYDET (IndexedDB) ve DOSYAYA AKTAR (indirme); kayıt Save8/RNG değiştirmez; dosyada jeton yok; misafir cihazında kayıt kimliği saklı",
+   "status": "PASS",
+   "ms": 1834
+  },
+  {
+   "name": "gerçek kapanış: misafir C tarayıcısı ve host tarayıcı SÜRECİ kapanır, relay süreci de durur ve yeniden başlar (eski oda yok)",
+   "status": "PASS",
+   "ms": 994
+  },
+  {
+   "name": "yeniden açılış: host yeni süreçte aynı profille → KAYITLI OYUNA DEVAM ET → kayıt kartı (ad, tarih, insanlar) → DEVAM ET → doğrulama → yeni oda + devam lobisi; dünya motorun yüklediğiyle aynı, RNG aynı, zaman ilerlemiyor",
+   "status": "PASS",
+   "ms": 7639
+  },
+  {
+   "name": "dönüş: B yeni kodla katılır → cihazındaki kimlikle devlet 3 (\"Eski devletin bulundu\"); izinsiz kişi C'nin adıyla gelir → ziyaretçi, uydurma jeton/talep/komut geçmez",
+   "status": "PASS",
+   "ms": 6792
+  },
+  {
+   "name": "devam: host DEVAM ET (C yok → onay); ziyaretçi çıkarılır; B oyunda kendi devletiyle; C'nin devleti AI'ya geçmez, B'nin bekleyen oyu AI tarafından verilmez",
+   "status": "PASS",
+   "ms": 916
+  },
+  {
+   "name": "geç dönüş: C'nin tarayıcısı yeni süreçte aynı profille açılır, yeni kodla katılır → oyun sürerken kendi devleti 5; jetonsuz yabancı reddedilir",
+   "status": "PASS",
+   "ms": 2684
+  },
+  {
+   "name": "diplomasi sürer: B, C'nin karşı teklifini kabul eder (tam bir kez); eski tur kabul edilemez; B FEDERASYON ekranından oy verir; B vasallık karşı teklifini kabul eder → sözleşme",
+   "status": "PASS",
+   "ms": 1365
+  },
+  {
+   "name": "ikinci kayıt + dosya: host kaydeder ve dışa aktarır, host süreci yine kapanır; otomatik kayıt sınırlı",
+   "status": "PASS",
+   "ms": 11217
+  },
+  {
+   "name": "dosyadan açma (boş profil, yeni host süreci): bozuk JSON, değiştirilmiş Save8 ve tek oyunculu kayıt reddedilir, mevcut durum bozulmaz; geçerli dosya → devam lobisi",
+   "status": "PASS",
+   "ms": 5917
+  },
+  {
+   "name": "kimlik kurtarma: C telefonunu kaybetti (temiz tarayıcı) → ziyaretçi; host onaylı KİMLİĞİ KURTAR ile yalnız bağlı olmayan C koltuğunu verir; B kendi (yenilenmiş) jetonuyla döner; DEVAM ET onaysız",
+   "status": "PASS",
+   "ms": 2656
+  },
+  {
+   "name": "KAYITLARI YÖNET: ilk profil yeniden açılır; liste (elle + otomatik), DIŞA AKTAR indirir, SİL onay ister (Vazgeç → kalır, Sil → gider); 5 ekran boyutu",
+   "status": "PASS",
+   "ms": 10523
+  },
+  {
+   "name": "performans: 45 / 60 / 100 sistem, gerçek tarayıcıda kayıt alma, doğrulama, yükleme ve IndexedDB yazma; dosya boyutu",
+   "status": "PASS",
+   "ms": 1087
+  }
+ ],
+ "metrics": {
+  "processes": {
+   "relay1": 11880,
+   "host1": 11892,
+   "c1": 12111,
+   "relay2": 12287,
+   "host2": 12295,
+   "c2": 12730,
+   "host3": 12878
+  },
+  "perf": {
+   "saveWallMs": 830,
+   "snapshotMs": 3.6,
+   "resumeWallMs": 281,
+   "s45": {
+    "systems": 45,
+    "kb": 58,
+    "snapMs": 31.2,
+    "validateMs": 23.7,
+    "loadMs": 74.4,
+    "idbMs": 105.2,
+    "ok": true
+   },
+   "s60": {
+    "systems": 60,
+    "kb": 76,
+    "snapMs": 9.1,
+    "validateMs": 9.9,
+    "loadMs": 32.1,
+    "idbMs": 9.6,
+    "ok": true
+   },
+   "s100": {
+    "systems": 100,
+    "kb": 118,
+    "snapMs": 7.7,
+    "validateMs": 3.8,
+    "loadMs": 24,
+    "idbMs": 16.7,
+    "ok": true
+   }
+  },
+  "files": {
+   "realDownload": true,
+   "save1": {
+    "bytes": 88985,
+    "name": "stars-mp-yeni-hanedan-y2210-a2.starsmp.json"
+   },
+   "idbSave1": 88985,
+   "save2": {
+    "bytes": 439684
+   }
+  },
+  "viewports": {
+   "host-resume-lobby": {
+    "360x800": {
+     "controls": 6,
+     "minFont": 13
+    },
+    "390x844": {
+     "controls": 6,
+     "minFont": 13
+    },
+    "412x915": {
+     "controls": 6,
+     "minFont": 13
+    },
+    "844x390": {
+     "controls": 6,
+     "minFont": 13
+    },
+    "915x412": {
+     "controls": 6,
+     "minFont": 13
+    }
+   },
+   "guest-resume-lobby": {
+    "360x800": {
+     "controls": 0,
+     "minFont": 11
+    },
+    "390x844": {
+     "controls": 0,
+     "minFont": 11
+    },
+    "412x915": {
+     "controls": 0,
+     "minFont": 11
+    },
+    "844x390": {
+     "controls": 0,
+     "minFont": 11
+    },
+    "915x412": {
+     "controls": 0,
+     "minFont": 11
+    }
+   },
+   "guest-visitor-lobby": {
+    "360x800": {
+     "controls": 1,
+     "minFont": 11
+    },
+    "390x844": {
+     "controls": 1,
+     "minFont": 11
+    },
+    "412x915": {
+     "controls": 1,
+     "minFont": 11
+    },
+    "844x390": {
+     "controls": 1,
+     "minFont": 11
+    },
+    "915x412": {
+     "controls": 1,
+     "minFont": 11
+    }
+   },
+   "host-file-card": {
+    "360x800": {
+     "controls": 3,
+     "minFont": 13
+    },
+    "390x844": {
+     "controls": 3,
+     "minFont": 13
+    },
+    "412x915": {
+     "controls": 3,
+     "minFont": 13
+    },
+    "844x390": {
+     "controls": 3,
+     "minFont": 13
+    },
+    "915x412": {
+     "controls": 3,
+     "minFont": 13
+    }
+   },
+   "host-mp-menu": {
+    "360x800": {
+     "controls": 5,
+     "minFont": 13
+    },
+    "390x844": {
+     "controls": 5,
+     "minFont": 13
+    },
+    "412x915": {
+     "controls": 5,
+     "minFont": 13
+    },
+    "844x390": {
+     "controls": 5,
+     "minFont": 13
+    },
+    "915x412": {
+     "controls": 5,
+     "minFont": 13
+    }
+   },
+   "host-saves-manage": {
+    "360x800": {
+     "controls": 17,
+     "minFont": 13
+    },
+    "390x844": {
+     "controls": 17,
+     "minFont": 13
+    },
+    "412x915": {
+     "controls": 17,
+     "minFont": 13
+    },
+    "844x390": {
+     "controls": 17,
+     "minFont": 13
+    },
+    "915x412": {
+     "controls": 17,
+     "minFont": 13
+    }
+   }
+  },
+  "notes": [
+   "B inşa: rejected rules:slots",
+   "B eski oda kapanışı: Sunucu yeniden başlatıldı; oda kapandı.",
+   "yükleme sonrası oyun durumu kayıttan önceki durumla (önbellek alanları dışında) motor normalleştirmesi kadar farklı.",
+   "oyun sürerken jetonsuz katılım: Oyun kayıttan devam ediyor ve bu cihazda bu kayda ait oyuncu kimliği yok. Host'tan kimliğini kurtarmasını iste.",
+   "~36 oyun ayında otomatik kayıt sayısı (sınır 3): 3",
+   "bad-json.starsmp.json: Dosya okunamadı (geçersiz JSON).",
+   "tampered.starsmp.json: Kayıt bozulmuş ya da değiştirilmiş (oyun özeti tutmuyor).",
+   "single.starsmp.json: Kayıt eksik ya da bozuk.",
+   "profil 1 kayıtları: manual,auto,auto,auto,manual"
+  ],
+  "pageErrors": []
+ }
+}

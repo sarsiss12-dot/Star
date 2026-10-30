@@ -11,6 +11,11 @@ const J={ws:null,code:V.fmtCode((q.get('code')||'').toUpperCase().replace(/[^A-Z
 const keyOf=c=>'mp1:'+c.replace(/-/g,'');
 function load(){try{return JSON.parse(localStorage.getItem(keyOf(J.code)))||{};}catch{return {};}}
 function save(o){try{localStorage.setItem(keyOf(J.code),JSON.stringify({...load(),...o}));}catch{}}
+/* MP.4: kayıtlı oyuna dönüş kimliği oda kodundan bağımsız, kayıt kimliğine (saveId) bağlı saklanır. Jeton yalnız bu cihazda kalır;
+   host kayıt dosyasına jetonu değil, tuzlu SHA-256 özetini yazar. Yalnız devleti olan atama saklanır (ziyaretçi jetonu üzerine yazmaz). */
+const saveKey=id=>'mp4:save:'+id;
+function saveSeat(id,token,empire){if(!/^s-[a-f0-9]{16}$/.test(String(id))||!token||empire===null||empire===undefined)return;try{localStorage.setItem(saveKey(id),JSON.stringify({token,empire,at:Date.now()}));}catch{}}
+function seatOf(id){try{return JSON.parse(localStorage.getItem(saveKey(id)))||null;}catch{return null;}}
 try{J.name=localStorage.getItem('mp1:name')||'';}catch{}
 function raw(obj){if(!J.ws||J.ws.readyState!==1)return false;J.ws.send(JSON.stringify(obj));return true;}
 J.sendRaw=raw;
@@ -27,7 +32,7 @@ function connect(){
   const name=($('jName')&&$('jName').value||J.name).replace(/[\u0000-\u001f<>]/g,'').trim().slice(0,24);
   if(!name){J.err='Bir oyuncu adı yaz.';return render();}
   J.name=name;try{localStorage.setItem('mp1:name',name);}catch{}
-  J.seq=load().seq||0;J.screen='connecting';render();const t0=performance.now();
+  J.seq=load().seq||0;J.assigned=false;J.screen='connecting';render();const t0=performance.now();
   const ws=new WebSocket((location.protocol==='https:'?'wss://':'ws://')+location.host+'/mp1/ws?role=client&code='+code);J.ws=ws;
   ws.onmessage=ev=>receive(String(ev.data),t0);
   ws.onclose=ev=>{ev=ev||{};if(J.ws!==ws)return;J.ws=null;J.hostOnline=false;
@@ -51,7 +56,11 @@ function receive(t,t0){
     else if(m.t==='error'){J.errors.push(m.code);if(['invalid-code','room-full','room-closed','rate-limited','server-full'].includes(m.code)){J.closed=true;J.screen='join';J.err=V.ERR[m.code]||m.code;}}
     return render();}
   if(t[0]!=='H')return;let m;try{m=JSON.parse(t.slice(1));}catch{return;}if(m.v!==1)return;
-  if(m.type==='assign'){J.playerId=m.playerId;J.empireId=m.empireId;save({token:m.token,seq:Math.max(J.seq,m.lastSeq||0)});J.seq=Math.max(J.seq,m.lastSeq||0);}
+  if(m.type==='assign'){J.assigned=true;J.playerId=m.playerId;J.empireId=m.empireId;J.saveId=m.saveId;save({token:m.token,seq:Math.max(J.seq,m.lastSeq||0)});J.seq=Math.max(J.seq,m.lastSeq||0);saveSeat(m.saveId,m.token,m.empireId);}
+  else if(m.type==='resume'){   // MP.4: devam lobisi bu bağlantıyı tanımadı; cihazda bu kayıt için kimlik varsa bir kez gönder
+    const s=seatOf(m.saveId);J.resumeTried=J.resumeTried||{};
+    if(s&&s.token&&!J.resumeTried[m.saveId]){J.resumeTried[m.saveId]=1;raw({v:1,type:'hello',name:J.name,token:s.token});}
+    else{J.resumeNoId=true;if(!J.assigned){J.closed=true;J.screen='join';J.err=V.ERR['no-save-id'];try{J.ws&&J.ws.close();}catch{}}}}   // oyun sürüyor ve bu cihazda kimlik yok
   else if(m.type==='lobby'){J.lobby=m;if(m.phase==='closed'){J.closed=true;J.screen='join';J.err=V.ERR['room-closed'];}
     else if(['ingame','paused'].includes(m.phase)&&J.empireId!==null){if(J.screen!=='game'){J.screen='game';J.tab='oyun';history.pushState({mp1:'game'},'');raw({v:1,type:'presence',tab:'oyun'});}}
     else if(J.screen!=='lobby'&&J.screen!=='game'){J.screen='lobby';history.pushState({mp1:'lobby'},'');}}
@@ -88,7 +97,7 @@ function render(){
     const s=$('jStatus');s.className='mp1-status'+(J.err?' bad':'');s.textContent=J.screen==='connecting'?'Bağlanıyor…':(J.err||'Kodu girip KATIL\'a dokun.');
     $('jCode').disabled=$('jName').disabled=J.screen==='connecting';return;
   }
-  if(J.screen==='lobby')return lobby(app);
+  if(J.screen==='lobby')return J.lobby&&J.lobby.phase==='resume'?resumeLobby(app):lobby(app);
   if(J.screen==='game')return game(app);
 }
 function statusBar(){const live=J.ws&&J.ws.readyState===1;
@@ -115,6 +124,15 @@ function lobby(app){
     '<div class="mp1-tabs">'+tabs.map(t=>'<button data-j="tab" data-tab="'+t+'" class="'+(t===J.tab?'on':'')+'">'+esc(V.TAB[t])+'</button>').join('')+'</div>'+body+
     '<button class="mp1-btn '+(me.ready?'':'pri')+'" data-j="ready" id="jReady"'+(me.claim===null||me.claim===undefined?' disabled':'')+'>'+(me.ready?'HAZIR DEĞİLİM':'HAZIRIM')+'</button>'+
     '<button class="mp1-btn warn" data-j="leave">ODADAN AYRIL</button>';
+}
+/* MP.4: kayıtlı oyunun devam lobisi — devlet seçimi yok; kimlik doğrulanırsa eski devlet, yoksa ziyaretçi */
+function resumeLobby(app){
+  const L=J.lobby,R=L.resume||{},me=L.players.find(p=>L.you&&p.seat===L.you.seat)||{},mine=!me.visitor&&R.you;
+  app.innerHTML=statusBar()+'<div class="mp1-h">KAYITLI OYUN — DEVAM LOBİSİ</div><div class="mp1-sub">'+esc(R.name||'Galaksi')+' · Yıl '+(+R.year||0)+' · Ay '+(+R.month||0)+' · oda '+esc(J.code)+'</div>'+
+    '<div class="mp1-card" id="jResume">'+(mine?'<b>Eski devletin bulundu: '+esc(R.you)+'</b><p class="mp1-sub">Kimliğin bu cihazda saklı kayıtla doğrulandı. Host DEVAM ET dediğinde oyun kaldığı yerden sürer.</p>':
+      '<b>Kimliğin doğrulanmadı</b><p class="mp1-sub">Bu cihazda bu kayda ait oyuncu kimliği yok. Kaydı oynadığın cihazdan katıl ya da host\'tan kimliğini onaylamasını iste. Başka oyuncunun devleti alınamaz.</p>')+'</div>'+
+    '<div class="mp1-status'+(J.hostOnline?'':' bad')+'" id="jWait">'+(J.hostOnline?'Host\'un DEVAM ET demesi bekleniyor…':'Host bağlı değil — bekleniyor')+'</div>'+
+    V.players(L)+(mine?'':'<button class="mp1-btn warn" data-j="leave">ODADAN AYRIL</button>');
 }
 const SIZE_N={kucuk:'Küçük',orta:'Orta',buyuk:'Büyük',devasa:'Devasa',ulu:'Ulu'};
 function game(app){

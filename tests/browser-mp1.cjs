@@ -64,7 +64,7 @@ function childRelay(delay){return new Promise((res,rej)=>{const c=spawn(process.
     const box=await H.locator('#mp1Btn').boundingBox();assert(box.height>=44,'button '+box.height);
     assert(!fs.readFileSync(path.join(root,'index.html'),'utf8').includes('mp1'),'runtime index.html untouched');
     await H.locator('#mp1Btn').tap();await wait(H,()=>MP1Host.screen==='menu');
-    assert.deepEqual(await H.evaluate(()=>[...document.querySelectorAll('#mp1 .mp1-btn')].map(b=>b.textContent)),['ODA OLUŞTUR','ODAYA KATIL','GERİ']);
+    assert.deepEqual(await H.evaluate(()=>[...document.querySelectorAll('#mp1 .mp1-btn')].map(b=>b.textContent)),['ODA OLUŞTUR','ODAYA KATIL','KAYITLI OYUNA DEVAM ET','KAYITLARI YÖNET','GERİ']);   // MP.4: kayıtlı çok oyunculu oyunlar
     await H.locator('[data-m="back"]').tap();await wait(H,()=>!document.getElementById('mp1'));
     assert.equal(await H.evaluate(()=>getComputedStyle(document.getElementById('title')).display!=='none'),true,'back returns to the title menu');
     await H.locator('#mp1Btn').tap();await wait(H,()=>MP1Host.screen==='menu');await shot(H,'host-mp-menu');

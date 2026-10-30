@@ -40,14 +40,18 @@ function render(){
   if(!overlay){overlay=doc.createElement('div');overlay.className='mp1-overlay';overlay.id='mp1';doc.body.appendChild(overlay);overlay.addEventListener('click',onClick);overlay.addEventListener('change',onChange);}
   if(API.screen==='menu'){
     overlay.innerHTML='<div class="mp1-wrap"><div class="mp1-h">ÇOK OYUNCULU</div><p class="mp1-sub">Telefonundan oda kur; arkadaşın oda koduyla katılsın. Simülasyon host telefonda çalışır.</p>'+
-      '<button class="mp1-btn pri" data-m="create">ODA OLUŞTUR</button><button class="mp1-btn" data-m="join">ODAYA KATIL</button><button class="mp1-btn" data-m="back">GERİ</button>'+
+      '<button class="mp1-btn pri" data-m="create">ODA OLUŞTUR</button><button class="mp1-btn" data-m="join">ODAYA KATIL</button>'+
+      (window.MP4Save?'<button class="mp1-btn" data-m="saves" data-mode="resume">KAYITLI OYUNA DEVAM ET</button><button class="mp1-btn" data-m="saves" data-mode="manage">KAYITLARI YÖNET</button>':'')+
+      '<button class="mp1-btn" data-m="back">GERİ</button>'+
       '<div class="mp1-status'+(API.err?' bad':'')+'" id="mp1Status">'+esc(API.err||'Bağlantı hizmeti: '+location.host)+'</div></div>';
     return;
   }
   if(API.screen==='connecting'){overlay.innerHTML='<div class="mp1-wrap"><div class="mp1-h">ODA OLUŞTURULUYOR</div><div class="mp1-status">Bağlantı kuruluyor…</div></div>';return;}
+  if(API.screen==='saves')return savesScreen();
   if(API.screen==='lobby')lobbyScreen();
 }
 function lobbyScreen(){
+  if(API.lobby&&API.lobby.phase==='resume')return resumeLobby();
   const L=API.lobby;if(!L){overlay.innerHTML='<div class="mp1-wrap"><div class="mp1-status">Lobi hazırlanıyor…</div></div>';return;}
   const link=location.origin+'/mp/join?code='+API.code,cs=API.host.canStart(),me=G.p;
   const tabs=['lobi','galaksi','doktrin','gorunus','fizyoloji','etik','civic','koken'];
@@ -83,12 +87,20 @@ function lobbyScreen(){
 const START_WHY={'no-guests':'En az bir oyuncunun katılması gerekiyor.','guest-not-ready':'Bütün oyuncular hazır değil.','guest-no-empire':'Her oyuncu bir devlet seçmeli.',
   'guest-offline':'Bağlantısı kopan oyuncu var.','no-galaxy':'Önce galaksiyi uygula.','already-started':'Oyun zaten başladı.','not-claimable':'Seçilen devlet artık uygun değil.'};
 function pidOfSeat(seat){for(const p of API.host.state.players.values())if(p.seat===seat)return p.playerId;return '';}
-function onChange(e){const t=e.target;if(t.dataset.m==='claimFor'&&t.value!==''){const r=API.host.claimFor(t.dataset.pid,+t.value);if(!r.ok)toast(V.ERR[r.why]||r.why);}}
+function onChange(e){const t=e.target;if(t.id==='mp4File'){onFile(t);return;}if(t.dataset.m==='claimFor'&&t.value!==''){const r=API.host.claimFor(t.dataset.pid,+t.value);if(!r.ok)toast(V.ERR[r.why]||r.why);}}
 function onClick(e){
   const el=e.target.closest('[data-m]');if(!el)return;const m=el.dataset.m;
   if(m==='back'){history.back();return;}
   if(m==='join'){location.assign('/mp/join');return;}
   if(m==='create'){createRoom();return;}
+  if(m==='saves'){API.savesMode=el.dataset.mode||'resume';API.saveErr='';API.fileSave=null;API.saves=null;go('saves');refreshSaves();return;}
+  if(m==='resume'){resumeFromKey(el.dataset.k);return;}
+  if(m==='resumeFile'){if(API.fileSave)confirmResume(API.fileSave.text,API.fileSave.v);return;}
+  if(m==='export'){exportKey(el.dataset.k);return;}
+  if(m==='del'){const x=(API.saves||[]).find(r=>r.key===el.dataset.k);if(x)sheet('"'+(x.display&&x.display.name||'Kayıt')+'" silinsin mi? Bu işlem geri alınamaz.','Sil',async()=>{try{await MP4Save.del(x.key);}catch{}refreshSaves();});return;}
+  if(m==='resumeGo'){resumeGo();return;}
+  if(m==='recover'){const seat=doc.querySelector('select[data-rec="'+el.dataset.pid+'"]');const sp=seat&&seat.value;if(!sp)return;
+    const nm=(API.host.state.players.get(sp)||{}).name||'';sheet('Bu bağlantı "'+nm+'" koltuğuna atansın mı? Eski cihazın jetonu geçersiz olur. Yalnız kimliğinden emin olduğun oyuncu için yap.','Kimliği kurtar',()=>{const r=API.host.recoverSeat(el.dataset.pid,sp);if(!r.ok)toast(RECOVER_WHY[r.why]||r.why);render();});return;}
   if(m==='tab'){API.tab=el.dataset.tab;API.host.setHostTab(API.tab);render();return;}
   if(m==='copy'){copy(V.fmtCode(API.code));return;}
   if(m==='share'){const url=location.origin+'/mp/join?code='+API.code;if(navigator.share)navigator.share({title:'STARS odası',text:'STARS oda kodu: '+V.fmtCode(API.code),url}).catch(()=>{});else copy(url);return;}
@@ -127,13 +139,15 @@ function open(url,auth){
 function send(conn,text){if(API.ws&&API.ws.readyState===1)API.ws.send('T'+conn+'\n'+text);}
 function pushCap(){if(API.ws&&API.ws.readyState===1&&API.host&&API.host.lobby)API.ws.send('C'+JSON.stringify({cap:API.host.lobby.capacity-1}));}
 function makeHost(){
-  API.host=StarsMP.createHost({roomId:'r-'+API.code.toLowerCase(),random:hex,hostName:(typeof CFG!=='undefined'&&CFG.name)||'Host',send,
+  const resume=API.pendingResume;API.pendingResume=null;   // MP.4: doğrulanmış ve yüklenmiş kayıt
+  API.host=StarsMP.createHost({roomId:'r-'+API.code.toLowerCase(),random:hex,hostName:(typeof CFG!=='undefined'&&CFG.name)||'Host',send,...(resume?{resume}:{}),
     kick:(conn,why)=>{if(API.ws&&API.ws.readyState===1)API.ws.send('K'+conn+'\n'+why);},
     onLobby:L=>{API.lobby=L;if(API.screen==='lobby')render();else if(API.started)mini();},
     /* MP.3: host'u ilgilendiren diplomasi bildirimi host'un kendi günlüğüne (uzak oyuncununki onun listesine gider) */
     hostNotify:(m,c)=>{if(typeof say==='function')say(m,c);dipToast(m,false);},
     lobby:{generate(set){setupGame({...CFG,...set});if(CFG.mizac)applyChosenPersona(G.p,CFG.mizac);G.autoSave=false;return {ok:true};}}});
   API.host.installGuards();
+  if(resume){API.resumeInfo={display:resume.display,speed:resume.session.speed|0,saveId:resume.saveId};API.lobby=API.host.lobbyView();return;}
   const seed=1+(crypto.getRandomValues(new Uint32Array(1))[0]%2147483646);
   API.host.configure({size:'orta',aiCount:5,seed,...(CFG.shape?{shape:CFG.shape}:{})});
 }
@@ -159,7 +173,7 @@ function closeRoom(){
 }
 /* ---------- 4. oyun içi: yayın, keşif belleği, host paneli ---------- */
 const month=monthTick;
-monthTick=function(){const r=month.apply(this,arguments);if(API.host&&API.started){API.host.observeHumans();API.dirty=true;}return r;};
+monthTick=function(){const r=month.apply(this,arguments);if(API.host&&API.started){API.host.observeHumans();API.dirty=true;autosave();}return r;};
 setInterval(()=>{
   if(!API.host||!API.started||!API.connected)return;
   const day=Math.floor(G.day);if(API.dirty||day!==API.lastDay){API.dirty=false;API.lastDay=day;API.host.publish();API.publishes++;}
@@ -170,7 +184,8 @@ function mini(){
   if(!el){el=doc.createElement('div');el.id='mp1Mini';el.className='mp1-mini';doc.body.appendChild(el);el.addEventListener('click',e=>{const b=e.target.closest('[data-g]');if(!b)return;
     if(b.dataset.g==='toggle'){API.miniOpen=!API.miniOpen;mini();}
     else if(b.dataset.g==='kick')API.host.kick(b.dataset.pid,false);else if(b.dataset.g==='ai')API.host.kick(b.dataset.pid,true);
-    else if(b.dataset.g==='dip')dipOpen(true);});}
+    else if(b.dataset.g==='dip')dipOpen(true);
+    else if(b.dataset.g==='save')saveNow('manual');else if(b.dataset.g==='export')exportNow();});}
   const L=API.lobby;if(!L)return;
   /* Haritayı kapatmasın: tek satır; bağlantısı kopan misafir varsa (karar gerekir) kendiliğinden açılır. */
   const gs=L.players.filter(p=>!p.host),off=gs.filter(p=>!p.online).length,open=API.miniOpen||off>0;
@@ -178,7 +193,8 @@ function mini(){
     (API.connected?'bağlı':API.closed?'oda kapandı — oyun yalnız bu telefonda sürüyor':'bağlantı yok')+' · '+(gs.length-off)+'/'+gs.length+' misafir</button>';
   /* MP.3: DİPLOMASİ düğmesi aynı satırda (panel kapalıyken tek satır kalır) */
   el.innerHTML=(window.MP3Dip?'<div class="mp3-minirow">'+head+'<button class="mp1-btn mp3-hostbtn" data-g="dip" id="mp3HostBtn">'+dipLabel()+'</button></div>':head)+
-    (open?gs.map(p=>{const pid=pidOfSeat(p.seat);return '<div>'+esc(p.name)+' · '+(p.online?'bağlı':'koptu — koltuk bekletiliyor')+(p.online?'':'<button class="mp1-btn" data-g="kick" data-pid="'+esc(pid)+'">Çıkar (devlet boşta)</button><button class="mp1-btn" data-g="ai" data-pid="'+esc(pid)+'">Devleti AI\'ya ver</button>')+'</div>';}).join(''):'');
+    (open?gs.map(p=>{const pid=pidOfSeat(p.seat);return '<div>'+esc(p.name)+' · '+(p.online?'bağlı':'koptu — koltuk bekletiliyor')+(p.online?'':'<button class="mp1-btn" data-g="kick" data-pid="'+esc(pid)+'">Çıkar (devlet boşta)</button><button class="mp1-btn" data-g="ai" data-pid="'+esc(pid)+'">Devleti AI\'ya ver</button>')+'</div>';}).join('')+
+      (window.MP4Save?'<div class="mp1-row"><button class="mp1-btn" data-g="save">OYUNU KAYDET</button><button class="mp1-btn" data-g="export">DOSYAYA AKTAR</button></div>':''):'');
 }
 /* ---------- MP.3: host'un MP diplomasi paneli ----------
    Yalnız insan oyuncularla teklif (AI devletlerle diplomasi tek oyunculu DİPLOMASİ ekranında, aynı motor).
@@ -217,6 +233,76 @@ function dipTick(force){
   const b=doc.getElementById('mp3HostBtn');if(b){const h=dipLabel();if(b.innerHTML!==h)b.innerHTML=h;}
 }
 API.dip={open:dipOpen,seg:hostSeg,get ui(){return dipUI;},get pol(){return polUI;}};
+/* ---------- MP.4: kayıt / yükleme / devam lobisi ----------
+   Paket mp-core'da üretilir ve doğrulanır (StarsMP); MP4Save yalnız saklar ve dosya işler. Yükleme: önce doğrula, sonra
+   motorun deserialize'ı (kendi işlemiyle geri alır), sonra yeni oda + devam lobisi. Oyun host DEVAM ET'e basana kadar ilerlemez. */
+const PKG_WHY={json:'Dosya okunamadı (geçersiz JSON).',fields:'Kayıt eksik ya da bozuk.',format:'Bu bir STARS çok oyunculu kaydı değil.',version:'Desteklenmeyen kayıt sürümü.',
+  build:'Kayıt başka bir oyun sürümüne ait.','too-big':'Dosya çok büyük.',integrity:'Kayıt bütünlük bilgisi eksik.','integrity-save8':'Kayıt bozulmuş ya da değiştirilmiş (oyun özeti tutmuyor).',
+  'integrity-body':'Kayıt bozulmuş ya da değiştirilmiş (oturum özeti tutmuyor).','save8-json':'Oyun kaydı okunamadı.','save-version':'Desteklenmeyen Save sürümü (v8 gerekir).',
+  session:'Oyuncu bilgisi bozuk.','dup-player':'Aynı oyuncu iki kez kayıtlı.','dup-empire':'Bir devlete iki oyuncu atanmış.','bad-empire':'Geçersiz devlet kimliği.',host:'Host kaydı geçersiz.',
+  auth:'Oyuncu kimlik özeti eksik ya da bozuk.',offers:'Teklif deposu bozuk.',round:'Teklif turları tutarsız.',amount:'Teklifte geçersiz miktar.',items:'Teklif maddesi geçersiz.',display:'Kayıt özeti bozuk.',
+  legacy:'Eski MP.0 oturum metası doğrudan yüklenemez.','save8-apply':'Oyun motoru kaydı uygulayamadı; önceki durum korundu.','slot-state':'Kayıttaki insan devletleri dünyayla uyuşmuyor; önceki durum korundu.',
+  busy:'Bir işlem sürüyor; birazdan yeniden dene.',phase:'Oyun başlamadan kaydedilemez.',full:'Kayıt sınırı doldu (12). Önce eski bir kaydı sil.',idb:'Telefonun tarayıcı deposu kullanılamıyor; DOSYAYA AKTAR ile sakla.'};
+const RECOVER_WHY={phase:'Bu aşamada yapılamaz.',visitor:'Bağlantı artık yok.',seat:'Geçersiz koltuk.','seat-online':'Bu koltuk şu an bağlı; devralınamaz.'};
+const SIZE_N={kucuk:'Küçük',orta:'Orta',buyuk:'Büyük',devasa:'Devasa',ulu:'Ulu'};
+function saveCard(d,extra){d=d||{};return '<b>'+esc(d.name||'Kayıt')+'</b><div class="mp1-sub">Yıl '+(+d.year||0)+' · Ay '+(+d.month||0)+(d.size?' · '+esc(SIZE_N[d.size]||d.size):'')+' · '+(+d.systems||0)+' sistem · '+
+  ((d.humans||[]).length)+' insan: '+(d.humans||[]).map(h=>esc(h.name)+' ('+esc(h.empire)+')').join(', ')+'</div>'+(extra||'');}
+async function refreshSaves(){API.saves=null;render();try{API.idb=await MP4Save.available();API.saves=API.idb?await MP4Save.list():[];}catch{API.saves=[];API.idb=false;}if(API.screen==='saves')render();}
+function savesScreen(){
+  const list=API.saves,title=API.savesMode==='manage'?'KAYITLARI YÖNET':'KAYITLI OYUNA DEVAM ET';
+  overlay.innerHTML='<div class="mp1-wrap mp4"><div class="mp1-h">'+title+'</div>'+
+    '<p class="mp1-sub">Kayıtlı galaksiyi yeni bir odada açarsın; arkadaşların yeni kodla katılınca kendi devletlerine döner.</p>'+
+    '<label class="mp1-btn" for="mp4File" id="mp4FileBtn">DOSYADAN AÇ</label><input type="file" id="mp4File" accept=".json,application/json" hidden>'+
+    (API.fileSave?'<div class="mp1-card mp4-card" id="mp4FileCard">'+saveCard(API.fileSave.v.display,'<div class="mp1-sub">Dosya: '+esc(API.fileSave.name)+'</div>')+
+      '<button class="mp1-btn pri" data-m="resumeFile">DEVAM ET</button></div>':'')+
+    '<div class="mp1-status'+(API.saveErr?' bad':'')+'" id="mp4Status">'+esc(API.saveErr||(list==null?'Kayıtlar okunuyor…':API.idb===false?PKG_WHY.idb:list.length?list.length+' kayıt':'Telefonda kayıt yok. Oyun içinde ÇOK OYUNCULU → OYUNU KAYDET.'))+'</div>'+
+    (list||[]).map(x=>'<div class="mp1-card mp4-card" data-save="'+esc(x.key)+'">'+saveCard(x.display,'<div class="mp1-sub">'+(x.kind==='auto'?'Otomatik kayıt':'Elle kayıt')+' · '+esc(new Date(x.created).toLocaleString('tr-TR'))+' · '+Math.round(x.size/1024)+' KB</div>')+
+      '<div class="mp1-row"><button class="mp1-btn pri" data-m="resume" data-k="'+esc(x.key)+'">DEVAM ET</button><button class="mp1-btn" data-m="export" data-k="'+esc(x.key)+'">DIŞA AKTAR</button>'+
+      '<button class="mp1-btn warn" data-m="del" data-k="'+esc(x.key)+'">SİL</button></div></div>').join('')+
+    '<button class="mp1-btn" data-m="back">GERİ</button></div>';
+}
+function saveErr(t){API.saveErr=t;const s=doc.getElementById('mp4Status');if(s){s.textContent=t;s.className='mp1-status bad';}}
+async function resumeFromKey(key){try{const x=await MP4Save.get(key);if(!x)return saveErr('Kayıt bulunamadı.');const v=StarsMP.validatePackage(x.text);if(!v.ok)return saveErr(PKG_WHY[v.why]||v.why);confirmResume(x.text,v);}catch{saveErr(PKG_WHY.idb);}}
+async function exportKey(key){try{const x=await MP4Save.get(key);if(x){const n=MP4Save.exportFile(x.text,x.display);saveErr('Dosya indirildi: '+n);}}catch{saveErr(PKG_WHY.idb);}}
+function onFile(input){const f=input.files&&input.files[0];if(!f)return;
+  MP4Save.readFile(f).then(text=>{const v=StarsMP.validatePackage(text);if(!v.ok){API.fileSave=null;saveErr(PKG_WHY[v.why]||v.why);render();return;}API.saveErr='';API.fileSave={text,v,name:f.name};render();},
+    e=>saveErr(e&&e.message==='too-big'?PKG_WHY['too-big']:PKG_WHY.json));input.value='';}
+function confirmResume(text,v){
+  sheet('"'+v.display.name+'" (Yıl '+v.display.year+', Ay '+v.display.month+') yeni bir odada açılsın mı? Arkadaşların yeni kodla katılıp kendi devletlerine döner.','Yükle ve oda aç',()=>{
+    const r=StarsMP.loadWorld(v.pkg);if(!r.ok){saveErr(PKG_WHY[r.why]||r.why);render();return;}
+    G.speed=0;G.autoSave=false;   // yüklenen dünya DEVAM ET'e kadar ilerlemez; tek oyunculu kayıt yuvasına yazılmaz
+    API.pendingResume=v.pkg;API.err='';createRoom();});
+}
+function resumeLobby(){
+  const L=API.lobby,R=API.resumeInfo||{display:{}},link=location.origin+'/mp/join?code='+API.code,ps=L.players.filter(p=>!p.host);
+  const seats=ps.filter(p=>!p.visitor),offline=seats.filter(p=>!p.online),visitors=ps.filter(p=>p.visitor);
+  overlay.innerHTML='<div class="mp1-wrap mp4"><div class="mp1-h">DEVAM LOBİSİ</div><div class="mp1-card">'+saveCard(R.display)+'</div>'+
+    '<div class="mp1-sub">Davet kodu — arkadaşların bu kodla yeniden katılır; cihazlarındaki kimlikle kendi devletlerine dönerler.</div><div class="mp1-code" id="mp1Code">'+esc(V.fmtCode(API.code))+'</div>'+
+    '<div class="mp1-row"><button class="mp1-btn" data-m="copy">KODU KOPYALA</button><button class="mp1-btn" data-m="share">DAVET PAYLAŞ</button></div><div class="mp1-sub" id="mp1Link">'+esc(link)+'</div>'+
+    '<div class="mp1-card" id="mp4Seats"><b>İnsan oyuncular</b>'+seats.map(p=>'<div class="mp4-seat" data-seat="'+(+p.seat)+'"><span>'+esc(p.name)+' — '+esc(G.emps[p.claim]?G.emps[p.claim].name:'?')+'</span><span class="'+(p.online?'ok':'bad')+'">'+(p.online?'bağlı':'bekleniyor')+'</span></div>').join('')+'</div>'+
+    (visitors.length?'<div class="mp1-card" id="mp4Visitors"><b>Kimliği doğrulanmayan bağlantılar</b><p class="mp1-sub">Cihazında bu kaydın kimliği yok. Yalnız tanıdığın oyuncuyu, bağlı olmayan bir koltuğa atayabilirsin.</p>'+
+      visitors.map(p=>{const pid=pidOfSeat(p.seat);return '<div class="mp4-seat"><span>'+esc(p.name)+'</span>'+(offline.length?'<select class="mp1-sel" data-rec="'+esc(pid)+'">'+offline.map(o=>'<option value="'+esc(pidOfSeat(o.seat))+'">'+esc(o.name)+' — '+esc(G.emps[o.claim]?G.emps[o.claim].name:'?')+'</option>').join('')+'</select>'+
+        '<button class="mp1-btn warn" data-m="recover" data-pid="'+esc(pid)+'">KİMLİĞİ KURTAR</button>':'<span class="mp1-sub">boş koltuk yok</span>')+'</div>';}).join('')+'</div>':'')+
+    '<div class="mp1-status'+(offline.length?'':' ok')+'" id="mp1Start">'+(offline.length?offline.length+' oyuncu bekleniyor. Devam edersen devletleri ayrılmış kalır (AI yönetmez); sonra katılabilirler.':'Bütün oyuncular bağlı.')+'</div>'+
+    '<button class="mp1-btn pri" data-m="resumeGo">DEVAM ET</button><button class="mp1-btn warn" data-m="close">ODAYI KAPAT</button>'+
+    '<div class="mp1-status'+(API.connected?'':' bad')+'">'+(API.connected?'Bağlantı hizmetine bağlı':'Bağlantı hizmeti yok — yeniden deneniyor')+'</div></div>';
+}
+function resumeGo(){
+  const go2=()=>{const r=API.host.resumeStart();if(!r.ok){toast(r.why);return;}
+    API.started=true;API.tab='oyun';API.host.setHostTab('oyun');leaveTitle(null);doc.getElementById('menu').classList.add('hidden');doc.getElementById('game').classList.remove('hidden');
+    enterGame(true);if(typeof UI!=='undefined')UI.setSpeed((API.resumeInfo&&API.resumeInfo.speed)|0);API.lastDay=Math.floor(G.day);go('game',true);};
+  const off=API.lobby.players.filter(p=>!p.host&&!p.visitor&&!p.online).length;
+  if(off)sheet(off+' oyuncu bağlı değil. Devletleri ayrılmış kalır, AI yönetmez. Devam edilsin mi?','Devam et',go2);else go2();
+}
+let autoMonth=null;
+function autosaveEvery(){let n=3;try{const v=localStorage.getItem('mp4:autosaveMonths');if(v!==null)n=Math.max(0,Math.min(24,parseInt(v,10)||0));}catch{}return n;}
+function autosave(){const every=autosaveEvery();if(!every||!window.MP4Save)return;const m=G.year*12+G.month;if(autoMonth===null){autoMonth=m;return;}if(m-autoMonth<every)return;autoMonth=m;saveNow('auto');}
+function snapshotText(){const r=API.host.snapshot({});if(!r.ok){dipToast(PKG_WHY[r.why]||r.why,true);return null;}return {text:JSON.stringify(r.pkg),pkg:r.pkg};}
+async function saveNow(kind){const s=snapshotText();if(!s)return;try{const r=await MP4Save.put(s.text,{saveId:s.pkg.saveId,display:s.pkg.display,kind});
+  dipToast(r.ok?(kind==='auto'?'Otomatik kayıt alındı':'Oyun kaydedildi — '+s.pkg.display.name):PKG_WHY[r.why]||r.why,!r.ok);API.lastSave={ok:r.ok,kind,at:Date.now(),bytes:s.text.length};}
+  catch{dipToast('Kayıt yazılamadı; mevcut kayıtlar korunuyor. DOSYAYA AKTAR ile sakla.',true);API.lastSave={ok:false,kind};}}
+function exportNow(){const s=snapshotText();if(!s)return;const n=MP4Save.exportFile(s.text,s.pkg.display);dipToast('Dosya indirildi: '+n,false);}
+API.mp4={saveNow,exportNow,refreshSaves};
 /* ---------- Android arka plan / ekran kilidi ----------
    Arka planda rAF durur, zamanlayıcılar kısılır, sekme dondurulabilir. Yarım hızla
    sürüp misafirleri belirsiz bırakmak yerine: oyun güvenle duraklar, misafir nedeni
