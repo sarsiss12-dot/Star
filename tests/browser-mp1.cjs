@@ -93,7 +93,7 @@ function childRelay(delay){return new Promise((res,rej)=>{const c=spawn(process.
     await B.fill('#jName','Bo"ra<img src=x onerror=__x=1>');await B.press('#jName','Enter');
     await wait(B,()=>MP1Join.screen==='lobby'&&MP1Join.lobby);
     for(const p of [A,B]){assert.equal(await p.evaluate(()=>[typeof G,typeof monthTick,typeof setupGame,typeof serialize].join()),'undefined,undefined,undefined,undefined');
-      assert.deepEqual(await p.evaluate(()=>[...document.scripts].map(s=>s.getAttribute('src'))),['/research/mp1/client/view.js','/research/mp3/client/dip-ui.js','/research/mp2/client/guest-game.js','/research/mp1/client/join.js']);}   // MP.2: motorsuz harita/panel betiği; MP.3: motorsuz diplomasi ekranı
+      assert.deepEqual(await p.evaluate(()=>[...document.scripts].map(s=>s.getAttribute('src'))),['/research/mp1/client/view.js','/research/mp3/client/dip-ui.js','/research/mp31/client/pol-ui.js','/research/mp2/client/guest-game.js','/research/mp1/client/join.js']);}   // MP.2: motorsuz harita/panel betiği; MP.3: motorsuz diplomasi ekranı; MP.3.1: federasyon/vasallık
     metrics.connectMs={A:await A.evaluate(()=>MP1Join.stats.connectMs),B:await B.evaluate(()=>MP1Join.stats.connectMs)};
   });
   await test('live player list: host and both guests show the same players (name, host mark, online, empire, ready, tab); names are inert text',async()=>{

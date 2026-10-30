@@ -58,7 +58,7 @@ test('static: injected game page, exact runtime bytes, join page CSP, allowlist 
   const r=await relay();try{
     const idx=await get(r.port,'/');assert.equal(idx.status,200);const html=idx.body.toString();
     const orig=fs.readFileSync(path.join(root,'index.html'),'utf8');
-    assert.equal(html,orig.replace('</body>','<link rel="stylesheet" href="/research/mp1/client/mp1.css"><link rel="stylesheet" href="/research/mp3/client/mp3.css"><script src="/research/mp0/mp-core.js"></script><script src="/research/mp1/client/view.js"></script><script src="/research/mp3/client/dip-ui.js"></script><script src="/research/mp1/client/mp1-host.js"></script></body>'));   // MP.3: diplomasi paneli
+    assert.equal(html,orig.replace('</body>','<link rel="stylesheet" href="/research/mp1/client/mp1.css"><link rel="stylesheet" href="/research/mp3/client/mp3.css"><link rel="stylesheet" href="/research/mp31/client/mp31.css"><script src="/research/mp0/mp-core.js"></script><script src="/research/mp1/client/view.js"></script><script src="/research/mp3/client/dip-ui.js"></script><script src="/research/mp31/client/pol-ui.js"></script><script src="/research/mp1/client/mp1-host.js"></script></body>'));   // MP.3: diplomasi paneli; MP.3.1: federasyon/vasallık
     assert.equal((await get(r.port,'/index.html')).body.toString(),html);
     const man=JSON.parse(fs.readFileSync(path.join(root,'RELEASE-MANIFEST.json'),'utf8'));
     for(const f of Object.keys(man.files).filter(f=>f!=='index.html')){const x=await get(r.port,'/'+f);assert.equal(x.status,200,f);
@@ -67,7 +67,7 @@ test('static: injected game page, exact runtime bytes, join page CSP, allowlist 
     assert.equal(j.headers['x-content-type-options'],'nosniff');assert.equal(j.headers['x-frame-options'],'DENY');assert.equal(j.headers['referrer-policy'],'no-referrer');
     for(const p of ['/research/mp1/server/relay.js','/research/mp0/server/dev-relay.js','/package.json','/tests/run-all.js','/.git/config','/%2e%2e/etc/passwd','/../etc/passwd',
       '/RELEASE-MANIFEST.json','/research/mp1/client/join.html','/mp/stats','/mp/host','/research/mp0/mp-host.js'])assert.equal((await get(r.port,p)).status,404,p);
-    for(const p of ['/research/mp0/mp-core.js','/research/mp1/client/mp1-host.js','/research/mp1/client/join.js','/research/mp1/client/view.js','/research/mp1/client/mp1.css','/research/mp3/client/dip-ui.js','/research/mp3/client/mp3.css'])
+    for(const p of ['/research/mp0/mp-core.js','/research/mp1/client/mp1-host.js','/research/mp1/client/join.js','/research/mp1/client/view.js','/research/mp1/client/mp1.css','/research/mp3/client/dip-ui.js','/research/mp3/client/mp3.css','/research/mp31/client/pol-ui.js','/research/mp31/client/mp31.css'])
       assert.equal((await get(r.port,p)).status,200,p);
     assert.equal((await get(r.port,'/',{method:'POST'})).status,405);
   }finally{await stop(r);}

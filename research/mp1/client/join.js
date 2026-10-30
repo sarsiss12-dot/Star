@@ -68,6 +68,7 @@ doc.addEventListener('visibilitychange',()=>{if(!doc.hidden&&!J.ws&&!J.closed&&!
 
 /* ---------- geri tuşu: odadan habersiz çıkılmaz ---------- */
 addEventListener('popstate',()=>{
+  if(J.screen==='game'&&window.__mpBack&&window.__mpBack()){history.pushState({mp1:'game'},'');return;}   // MP.3.1: önce açık onay penceresi kapanır
   if(['lobby','game'].includes(J.screen)){history.pushState({mp1:J.screen},'');
     if(!$('jSheet')){const el=doc.createElement('div');el.className='mp1-sheet';el.id='jSheet';
       el.innerHTML='<div>'+(J.screen==='game'?'Oyundan çıkarsan koltuğun host tarafından bekletilir.':'Odadan ayrılmak istiyor musun?')+'</div><div class="mp1-row"><button class="mp1-btn warn" data-j="sheetLeave">Ayrıl</button><button class="mp1-btn" data-j="sheetStay">Kal</button></div>';

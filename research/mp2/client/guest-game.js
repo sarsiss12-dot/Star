@@ -16,11 +16,12 @@ const CODE={'not-owner':'Bu filo senin değil ya da artık yok.','rules:passage'
   'rules:same':'Zaten bu durumda.','rules:no-position':'Filonun konumu belirsiz.','rules':'Oyun kuralı izin vermedi.','rules:access':'Erişim koşulu sağlanmıyor.',
   'rules:route':'Ön koşul rotası kapalı.','rules:done':'Bu teknoloji tamamlandı.','rules:bad-position':'Geçersiz sıra.','bad-params':'Geçersiz komut.',
   'forged-empire':'Başka devlet adına komut verilemez.','host-yok':'Host bağlı değil.'};
-const G2={mounted:false,tab:'map',sel:null,aim:null,pending:null,cam:null,branch:'fiz',tech:null,dirty:true,lastRes:0,lastLog:null,waits:{},dip:null,dsub:null,stats:{draws:0,drawMs:[],renders:{}},J:null};
+const DSEG=[['trade','TİCARET'],['fed','FEDERASYON'],['vas','VASALLIK']];   // MP.3.1: diplomasi bölümleri
+const G2={mounted:false,tab:'map',sel:null,aim:null,pending:null,cam:null,branch:'fiz',tech:null,dirty:true,lastRes:0,lastLog:null,waits:{},dip:null,pol:null,dsub:null,dseg:'trade',psub:null,stats:{draws:0,drawMs:[],renders:{}},J:null};
 let el={},ctx=null,dpr=1,bounds=null,raf=0;
 const key=()=>'mp2:'+(G2.J&&G2.J.code||'');
-function persist(){try{sessionStorage.setItem(key(),JSON.stringify({tab:G2.tab,cam:G2.cam,sel:G2.sel,branch:G2.branch,dsub:G2.dip&&G2.dip.U.sub!=='draft'?G2.dip.U.sub:null}));}catch{}}
-function restore(){try{const o=JSON.parse(sessionStorage.getItem(key()));if(o){G2.tab=TABS.some(t=>t[0]===o.tab)?o.tab:G2.tab;G2.cam=o.cam||null;G2.sel=o.sel||null;G2.branch=o.branch||G2.branch;G2.dsub=o.dsub||null;}}catch{}}
+function persist(){try{sessionStorage.setItem(key(),JSON.stringify({tab:G2.tab,cam:G2.cam,sel:G2.sel,branch:G2.branch,dsub:G2.dip&&G2.dip.U.sub!=='draft'?G2.dip.U.sub:null,dseg:G2.dseg,psub:G2.pol?[G2.pol.U.fsub,G2.pol.U.vsub]:null}));}catch{}}
+function restore(){try{const o=JSON.parse(sessionStorage.getItem(key()));if(o){G2.tab=TABS.some(t=>t[0]===o.tab)?o.tab:G2.tab;G2.cam=o.cam||null;G2.sel=o.sel||null;G2.branch=o.branch||G2.branch;G2.dsub=o.dsub||null;G2.dseg=DSEG.some(s=>s[0]===o.dseg)?o.dseg:'trade';G2.psub=Array.isArray(o.psub)?o.psub:null;}}catch{}}
 const view=()=>G2.J.game.view;
 const sysName=id=>{const s=view().sys[id];return s&&s.k?s.n:(id>=0?'Bilinmeyen sistem':'—');};
 const empCol=o=>{const v=view();return o===v.me.id?V.color(v.me.col):o>=0&&v.emps[o]?V.color(v.emps[o].col):o===-2?'#9aa3b2':null;};
@@ -38,8 +39,15 @@ function mount(app){
     map:doc.getElementById('mp2Map'),sel:doc.getElementById('mp2Sel'),aim:doc.getElementById('mp2Aim'),fleets:doc.getElementById('mp2Fleets'),cols:doc.getElementById('mp2Cols'),
     sci:doc.getElementById('mp2Sci'),dip:doc.getElementById('mp2Dip'),toast:doc.getElementById('mp2Toast')};
   /* MP.3: diplomasi ekranı yalnız host görünümünü okur; komutların sonucu cid ile kendi geri çağrısına döner */
-  if(el.dip){G2.dip=MP3Dip.create({root:el.dip,esc,color:V.color,data:()=>({dip:view().dip,me:view().me,day:(G2.J.game.clock||{}).day}),online:()=>!!G2.J.hostOnline,toast,
-    send(cmd,done){const r=G2.J.cmd(cmd);if(r.ok)G2.waits[r.cid]=done;return r;},onBadge:badge});if(G2.dsub)G2.dip.U.sub=G2.dsub;}
+  if(el.dip){
+    const sendF=(cmd,done)=>{const r=G2.J.cmd(cmd);if(r.ok)G2.waits[r.cid]=done;return r;},online=()=>!!G2.J.hostOnline,day=()=>(G2.J.game.clock||{}).day;
+    if(window.MP31Pol)el.dip.innerHTML='<div class="mp31-seg">'+DSEG.map(([k,n])=>'<button data-g2="dseg" data-seg="'+k+'">'+n+'</button>').join('')+'</div><div id="mp2DipT"></div><div id="mp2DipP" hidden></div>';
+    el.dipT=doc.getElementById('mp2DipT')||el.dip;el.dipP=doc.getElementById('mp2DipP');
+    G2.dip=MP3Dip.create({root:el.dipT,esc,color:V.color,data:()=>({dip:view().dip,me:view().me,day:day()}),online,toast,send:sendF,onBadge:()=>badge()});if(G2.dsub)G2.dip.U.sub=G2.dsub;
+    /* MP.3.1: federasyon ve vasallık bölümleri (aynı onay ve geri tuşu kuralları) */
+    if(el.dipP){G2.pol=MP31Pol.create({root:el.dipP,esc,color:V.color,data:()=>({pol:view().pol,dip:view().dip,me:view().me,day:day()}),online,toast,send:sendF});
+      MP31Pol.addCloser(G2.dip.close);if(G2.psub){G2.pol.U.fsub=G2.psub[0]||'gen';G2.pol.U.vsub=G2.psub[1]||'st';}setSeg(G2.dseg,true);}
+  }
   {const lg=view().log||[];G2.lastLog=lg.length?JSON.stringify(lg[lg.length-1]):'';}
   ctx=el.map.getContext('2d');
   el.root.addEventListener('click',onClick);
@@ -51,7 +59,7 @@ function setTab(t,first){
   G2.tab=t;for(const s of el.root.querySelectorAll('.mp2-pane'))s.hidden=s.dataset.pane!==t;
   for(const b of el.root.querySelectorAll('.mp2-nav button'))b.classList.toggle('on',b.dataset.tab===t);
   if(t==='map'){sizeCanvas();if(!G2.cam)fit('home');G2.dirty=true;draw();}else renderPane(t);
-  if(G2.dip&&t!=='dip')G2.dip.close();
+  if(G2.dip&&t!=='dip'){G2.dip.close();if(G2.pol)G2.pol.close();}
   if(!first)persist();
 }
 /* ---------- her güncellemede: yalnız değişen parçalar ---------- */
@@ -70,17 +78,22 @@ function update(statusHtml){
   if(G2.tab==='sci'&&(ch.has('sci')||ch.has('tech')))renderPane('sci');
   const on=!!J.hostOnline,onCh=on!==G2.lastOnline;G2.lastOnline=on;   // host gidip gelince diplomasi düğmeleri hemen kapanır/açılır
   if(onCh&&!on)for(const [cid,w] of Object.entries(G2.waits)){delete G2.waits[cid];w({status:'rejected',code:'lost'});}   // yanıtı gelmeyen komut: taslak kilitli kalmasın
-  if(G2.dip&&(onCh||ch.has('dip')||ch.has('me')||ch.has('emps'))){if(G2.tab==='dip')renderPane('dip');else badge(G2.dip.incoming().length);}
+  if(G2.dip&&(onCh||ch.has('dip')||ch.has('pol')||ch.has('me')||ch.has('emps'))){if(G2.tab==='dip')renderPane('dip');else badge();}
   /* MP.3: kişisel bildirim (yeni teklif, kabul, ret, karşı teklif, süre doldu) */
   if(ch.has('log')){const lg=v.log||[],k=lg.length?JSON.stringify(lg[lg.length-1]):'';if(k&&k!==G2.lastLog)toast(lg[lg.length-1].m,false);G2.lastLog=k;}
   while(J.results.length>G2.lastRes){const r=J.results[G2.lastRes++],w=G2.waits[r.cid];
     if(w){delete G2.waits[r.cid];w(r);continue;}
     if(G2.lastRes===J.results.length)toast(r.status==='ok'?'Emir uygulandı'+(r.ms!==undefined?' · '+(+r.ms)+' ms':''):(CODE[r.code]||V.ERR[r.code]||r.code),r.status!=='ok');}
 }
-function badge(n){const b=el.root&&el.root.querySelector('.mp2-nav [data-tab="dip"]');if(!b)return;const h='DİPLOMASİ'+(n?' <i class="mp3-badge" aria-label="'+(+n)+' yeni teklif">'+(+n)+'</i>':'');if(b.innerHTML!==h)b.innerHTML=h;}
+function badge(){if(!G2.dip)return;const t=G2.dip.incoming().length,c=G2.pol?G2.pol.counts():{fed:0,vas:0},n=t+c.fed+c.vas;
+  const b=el.root&&el.root.querySelector('.mp2-nav [data-tab="dip"]');if(b){const h='DİPLOMASİ'+(n?' <i class="mp3-badge" aria-label="'+(+n)+' yeni karar">'+(+n)+'</i>':'');if(b.innerHTML!==h)b.innerHTML=h;}
+  for(const [k,x] of [['trade',t],['fed',c.fed],['vas',c.vas]]){const s=el.dip&&el.dip.querySelector('.mp31-seg [data-seg="'+k+'"]');if(!s)continue;const h=DSEG.find(d=>d[0]===k)[1]+(x?' <i class="mp3-badge">'+(+x)+'</i>':'');
+    if(s.innerHTML!==h)s.innerHTML=h;s.classList.toggle('on',G2.dseg===k);}}
+function setSeg(s,first){G2.dseg=s;if(el.dipT)el.dipT.hidden=s!=='trade';if(el.dipP)el.dipP.hidden=s==='trade';if(G2.pol&&s!=='trade')G2.pol.U.sec=s;
+  G2.dip.close();if(G2.pol)G2.pol.close();if(G2.tab==='dip')renderPane('dip');else badge();if(!first)persist();}
 function toast(t,bad){el.toast.hidden=false;el.toast.textContent=t;el.toast.className='mp2-toast'+(bad?' bad':'');clearTimeout(G2.tt);G2.tt=setTimeout(()=>{el.toast.hidden=true;},3500);}
 function renderPane(t){const t0=performance.now();
-  if(t==='fleets')el.fleets.innerHTML=fleetsHtml();else if(t==='cols')colsRender();else if(t==='sci')el.sci.innerHTML=sciHtml();else if(t==='dip'&&G2.dip)G2.dip.render();
+  if(t==='fleets')el.fleets.innerHTML=fleetsHtml();else if(t==='cols')colsRender();else if(t==='sci')el.sci.innerHTML=sciHtml();else if(t==='dip'&&G2.dip){if(G2.pol&&G2.dseg!=='trade')G2.pol.render();else G2.dip.render();badge();}
   G2.stats.renders[t]=Math.round((performance.now()-t0)*10)/10;}
 
 /* ---------- harita ---------- */
@@ -219,6 +232,7 @@ function onClick(e){
   else if(a==='cancel'){G2.aim=null;G2.pending=null;renderAim();G2.dirty=true;draw();}
   else if(a==='send'&&G2.pending){const r=J.cmd({kind:'move',fleet:G2.pending.fleet,to:G2.pending.to});if(!r.ok)toast(CODE[r.why]||r.why,true);
     G2.sel={t:'f',id:G2.pending.fleet};G2.aim=null;G2.pending=null;renderAim();renderSel();G2.dirty=true;draw();}
+  else if(a==='dseg')setSeg(b.dataset.seg);
   else if(a==='branch'){G2.branch=b.dataset.b;G2.tech=null;renderPane('sci');persist();}
   else if(a==='tech'){G2.tech=G2.tech===b.dataset.tech?null:b.dataset.tech;renderPane('sci');}
   else if(a==='rtoggle'){const r=J.cmd({kind:'research',tech:b.dataset.tech});if(!r.ok)toast(CODE[r.why]||r.why,true);}

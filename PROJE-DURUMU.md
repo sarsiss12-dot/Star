@@ -6,14 +6,25 @@ Son güncelleme: 2026-10-29. Depo `sarsiss12-dot/Star`.
 
 | | `main` (birleşmiş) | Bu dal (PR) |
 |---|---|---|
-| Faz | 96H.10 + MP.0 + MP.1 + MP.1.1 + MP.2 (+ 96H.11 araştırma arşivi) | MP.3 (insan oyuncular arası gerçek diplomasi; geliştirme prototipi) |
+| Faz | 96H.10 + MP.0 + MP.1 + MP.1.1 + MP.2 + MP.3 (+ 96H.11 araştırma arşivi) | MP.3.1 (federasyon siyaseti ve vasallık sözleşmeleri; geliştirme prototipi) |
 | Build / PWA | `96h10` / `stars-v96h10` | değişmedi |
 | Save | v8 | v8 (şema değişmedi) |
 | Oyun ZIP | `releases/stars-faz96h10.zip` (SHA-256 `78e76d1627b8ec1b990849b2242835f78667f110e1d6f17021760183ee7be6d0`) | yeni ZIP yok |
-| Taban HEAD | `1acf62dac1bffbf5aeadf6eb79b69a4347a0a56a` | — |
+| Taban HEAD | `e7e65b9cb82bf7115f8c2e92c18dff3520be8aee` | — |
 | Değişen runtime | — | yok (19 dosya 96H.10 ile aynı) |
 
-96H.6.2, 96H.6.3, 96H.7, 96H.11, MP.0, MP.1, MP.1.1, MP.2 ve MP.3 oyun yayımlamadı.
+96H.6.2, 96H.6.3, 96H.7, 96H.11, MP.0, MP.1, MP.1.1, MP.2, MP.3 ve MP.3.1 oyun yayımlamadı.
+
+## MP.3.1 — federasyon siyaseti ve vasallık sözleşmeleri (geliştirme prototipi)
+
+Ayrıntı: `MULTIPLAYER-MP31-MIMARI.md`, `MULTIPLAYER-MP31-FEDERASYON.md`, `MULTIPLAYER-MP31-VASSALLIK.md`, `MULTIPLAYER-MP31-SONUC.md`. Kod: `research/mp31/client/` + `research/mp0/mp-core.js`. Testler: `tests/mp31_core_test.js`, `tests/browser-mp31.cjs`.
+
+- **Düzeltilen kritik sorun:** motor federasyon oylamasında yalnız devlet 0'ı AI değerlendirmesinden ayırıyordu; uzak insanın oyu AI tarafından veriliyordu. Artık insan oyu yalnız kendisinden gelir (RNG de çekilmez). Uzak insan yokken davranış ve RNG aynı.
+- **Federasyon:** başvuru, davet, kabul/ret, oy, yasa önerme, ayrılma, kuruluş (yalnız kabul eden AI müttefiklerle). Beş oy rejiminde sonuçlar motorla aynı.
+- **Vasallık:** insan–insan teklif, karşı teklif (3 tur), kabul, yeniden müzakere, barışçıl bağımsızlık. Vergi aktarımı motorla aynı.
+- **Ekran:** DİPLOMASİ altında TİCARET / FEDERASYON / VASALLIK; host panelinde aynı bölümler.
+- **Kayıt:** federasyon ve vasallık kayıtları Save8'de (kanonik `G`); oyuncu–devlet eşlemesiyle tam oda kayıt/yükleme MP.4.
+- **NOT RUN:** gerçek internet, fiziksel Android, LAN.
 
 ## MP.3 — insan oyuncular arası gerçek diplomasi (geliştirme prototipi)
 
