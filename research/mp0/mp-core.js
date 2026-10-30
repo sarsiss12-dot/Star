@@ -52,6 +52,134 @@ const TABS=['lobi','doktrin','gorunus','fizyoloji','etik','civic','koken','galak
 const PALETTE=['#6ff2c8','#ff9b3d','#8b7bff','#f2d452','#ff5f6d','#4aa8d8','#e069c0','#96b13a'];
 function fnv(text){let a=0x811c9dc5,b=0x01000193^0x5bd1e995;for(let i=0;i<text.length;i++){const c=text.charCodeAt(i);a=Math.imul(a^c,0x01000193)>>>0;b=Math.imul(b^c,0x5bd1e995)>>>0;}return ('0000000'+a.toString(16)).slice(-8)+('0000000'+b.toString(16)).slice(-8);}
 
+/* ═══ MP.4 — çok oyunculu kayıt paketi (Save8 değişmez; yanına sürümlü oturum + teklif deposu) ═══
+   Bütünlük: SHA-256 (save8 ve gövdenin kanonik JSON'u) bozulma/yanlış dosyayı yakalar. Kimlik: kayıtta jeton YOK; her
+   misafir için tuzlu SHA-256 özeti tutulur, yeniden katılırken misafirin cihazındaki jeton bu özetle doğrulanır.
+   Host zaten oyunun otoritesidir; kayıt dosyasının kendisi bir imza değildir (belgede açıkça). */
+const PKG_FORMAT='stars-mp-save',PKG_VERSION=4,MAX_PKG=32e6,MAX_SAVE8=30e6;
+const K256=[0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,
+  0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,
+  0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,
+  0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2];
+/* FIPS 180-4 SHA-256, UTF-8 metin girdisi; eşzamanlı (motor ve çekirdek eşzamanlı çalışır). Test vektörleriyle denetlenir. */
+function sha256(str){
+  str=String(str);const buf=new Uint8Array(str.length*3+72);let n=0;
+  for(let i=0;i<str.length;i++){let c=str.charCodeAt(i);
+    if(c<0x80)buf[n++]=c;
+    else if(c<0x800){buf[n++]=0xc0|c>>6;buf[n++]=0x80|c&63;}
+    else if(c>=0xd800&&c<0xdc00&&i+1<str.length&&str.charCodeAt(i+1)>=0xdc00&&str.charCodeAt(i+1)<0xe000){c=0x10000+((c-0xd800)<<10)+(str.charCodeAt(++i)-0xdc00);
+      buf[n++]=0xf0|c>>18;buf[n++]=0x80|c>>12&63;buf[n++]=0x80|c>>6&63;buf[n++]=0x80|c&63;}
+    else if(c>=0xd800&&c<0xe000){buf[n++]=0xef;buf[n++]=0xbf;buf[n++]=0xbd;}
+    else{buf[n++]=0xe0|c>>12;buf[n++]=0x80|c>>6&63;buf[n++]=0x80|c&63;}}
+  const bytes=n,hi=Math.floor(bytes/0x20000000),lo=(bytes*8)>>>0;buf[n++]=0x80;while(n%64!==56)n++;
+  buf[n++]=hi>>>24&255;buf[n++]=hi>>>16&255;buf[n++]=hi>>>8&255;buf[n++]=hi&255;buf[n++]=lo>>>24&255;buf[n++]=lo>>>16&255;buf[n++]=lo>>>8&255;buf[n++]=lo&255;
+  const W=new Int32Array(64),ror=(x,k)=>(x>>>k)|(x<<(32-k));
+  let h0=0x6a09e667,h1=0xbb67ae85,h2=0x3c6ef372,h3=0xa54ff53a,h4=0x510e527f,h5=0x9b05688c,h6=0x1f83d9ab,h7=0x5be0cd19;
+  for(let o=0;o<n;o+=64){
+    for(let t=0;t<16;t++)W[t]=buf[o+4*t]<<24|buf[o+4*t+1]<<16|buf[o+4*t+2]<<8|buf[o+4*t+3];
+    for(let t=16;t<64;t++){const a=W[t-15],b=W[t-2];W[t]=(W[t-16]+(ror(a,7)^ror(a,18)^(a>>>3))+W[t-7]+(ror(b,17)^ror(b,19)^(b>>>10)))|0;}
+    let a=h0,b=h1,c=h2,d=h3,e=h4,f=h5,g=h6,h=h7;
+    for(let t=0;t<64;t++){const t1=(h+(ror(e,6)^ror(e,11)^ror(e,25))+((e&f)^(~e&g))+K256[t]+W[t])|0,t2=((ror(a,2)^ror(a,13)^ror(a,22))+((a&b)^(a&c)^(b&c)))|0;
+      h=g;g=f;f=e;e=(d+t1)|0;d=c;c=b;b=a;a=(t1+t2)|0;}
+    h0=(h0+a)|0;h1=(h1+b)|0;h2=(h2+c)|0;h3=(h3+d)|0;h4=(h4+e)|0;h5=(h5+f)|0;h6=(h6+g)|0;h7=(h7+h)|0;}
+  return [h0,h1,h2,h3,h4,h5,h6,h7].map(x=>('0000000'+(x>>>0).toString(16)).slice(-8)).join('');
+}
+/* sıralı anahtarlı JSON (bütünlük özeti için; undefined alanlar JSON'daki gibi düşer) */
+function canon(v){if(Array.isArray(v))return '['+v.map(x=>x===undefined?'null':canon(x)).join(',')+']';
+  if(v&&typeof v==='object')return '{'+Object.keys(v).filter(k=>v[k]!==undefined).sort().map(k=>JSON.stringify(k)+':'+canon(v[k])).join(',')+'}';return JSON.stringify(v);}
+const HEX=(s,n)=>typeof s==='string'&&s.length===n&&/^[a-f0-9]+$/.test(s);
+const ITEM_T=['res','peace','nap','pact','ally','intel','spynet','passage','tech','sys','lux','freight','tribute','warOn','peaceWith'];
+const RES_K=['min','ene','yiy','ala','tuk','ara','etk'];
+function pkgItem(it){if(!plain(it)||!ITEM_T.includes(it.t)||Object.keys(it).length>8)return 'items';
+  for(const [k,v] of Object.entries(it))if(!['number','string','boolean'].includes(typeof v)||typeof v==='number'&&!Number.isFinite(v)||typeof v==='string'&&v.length>40)return 'items';
+  if(it.t==='res'&&(!RES_K.includes(it.r)||!Number.isFinite(it.v)||it.v<=0||it.v>1e7))return 'amount';return null;}
+/* Paketi doğrula (yan etkisiz). Metin ya da nesne alır. Önce boyut ve bütünlük, sonra şema. */
+function validatePackage(input,o={}){
+  const fail=(why,detail)=>({ok:false,why,...(detail?{detail}:{})});let pkg=input;
+  if(typeof input==='string'){if(input.length>MAX_PKG)return fail('too-big');try{pkg=JSON.parse(input);}catch{return fail('json');}}
+  if(!plain(pkg))return fail('json');
+  if(pkg.mpMeta===1)return fail('legacy');
+  const KEYS=['format','mpVersion','build','createdAt','saveId','session','diplomacy','display','save8','integrity'];
+  if(!onlyKeys(pkg,KEYS)||KEYS.some(k=>!has(pkg,k)))return fail('fields');
+  if(pkg.format!==PKG_FORMAT)return fail('format');
+  if(pkg.mpVersion!==PKG_VERSION)return fail('version');
+  const build=has(o,'build')?o.build:(typeof BUILD_ID==='string'?BUILD_ID:null);if(pkg.build!==build)return fail('build');
+  if(typeof pkg.save8!=='string')return fail('fields');if(pkg.save8.length>MAX_SAVE8)return fail('too-big');
+  if(!Number.isFinite(pkg.createdAt)||typeof pkg.saveId!=='string'||!/^s-[a-f0-9]{16}$/.test(pkg.saveId))return fail('fields');
+  const I=pkg.integrity;if(!plain(I)||!onlyKeys(I,['alg','save8','body'])||I.alg!=='SHA-256'||!HEX(I.save8,64)||!HEX(I.body,64))return fail('integrity');
+  if(sha256(pkg.save8)!==I.save8)return fail('integrity-save8');
+  const body={};for(const k of KEYS)if(k!=='integrity')body[k]=pkg[k];body.save8=I.save8;
+  if(sha256(canon(body))!==I.body)return fail('integrity-body');
+  let d;try{d=JSON.parse(pkg.save8);}catch{return fail('save8-json');}
+  if(!plain(d))return fail('save8-json');if(d.v!==8)return fail('save-version');
+  const ss=pkg.session;
+  if(!plain(ss)||!onlyKeys(ss,['roomId','worldRevision','hostEmpireId','speed','capacity','settings','players','notes']))return fail('session');
+  if(!int(ss.worldRevision,0,2147483647)||!int(ss.hostEmpireId,0,63)||!int(ss.speed,0,16)||!int(ss.capacity,2,8)||typeof ss.roomId!=='string'||ss.roomId.length>40)return fail('session');
+  if(ss.settings!==null&&(!plain(ss.settings)||!onlyKeys(ss.settings,['size','aiCount','shape'])||typeof ss.settings.size!=='string'||!int(ss.settings.aiCount,1,11)))return fail('session');
+  if(!Array.isArray(ss.players)||ss.players.length<1||ss.players.length>8)return fail('session');
+  if(ss.players.filter(x=>plain(x)&&x.playerId==='host').length!==1)return fail('host');
+  const pids=new Set(),eids=new Set();let hosts=0;
+  for(const x of ss.players){
+    if(!plain(x)||!onlyKeys(x,['playerId','name','empireId','seat','color','lastSeq','wasAI','takeover','auth']))return fail('session');
+    if(typeof x.name!=='string'||x.name.length>24||!int(x.seat,0,64)||typeof x.color!=='string'||x.color.length>16||!int(x.lastSeq,0,2147483647))return fail('session');
+    if(!int(x.empireId,0,63))return fail('bad-empire');
+    if(pids.has(x.playerId))return fail('dup-player');pids.add(x.playerId);
+    if(eids.has(x.empireId))return fail('dup-empire');eids.add(x.empireId);
+    if(x.playerId==='host'){hosts++;if(x.empireId!==ss.hostEmpireId||has(x,'auth'))return fail('host');continue;}
+    if(typeof x.playerId!=='string'||!/^p-[a-f0-9]{12}$/.test(x.playerId))return fail('session');
+    if(x.empireId===ss.hostEmpireId)return fail('dup-empire');
+    if(!plain(x.auth)||!onlyKeys(x.auth,['salt','hash'])||!HEX(x.auth.salt,32)||!HEX(x.auth.hash,64))return fail('auth');
+    if(typeof x.wasAI!=='boolean')return fail('session');
+    if(x.takeover!==null&&(!plain(x.takeover)||!onlyKeys(x.takeover,['ai','auto'])||typeof x.takeover.ai!=='boolean'||!plain(x.takeover.auto)||
+      Object.entries(x.takeover.auto).some(([k,v])=>!/^\d{1,4}:\d{1,2}$/.test(k)||typeof v!=='boolean')))return fail('session');
+  }
+  if(hosts!==1)return fail('host');if(ss.players.length>ss.capacity)return fail('session');
+  if(!plain(ss.notes))return fail('session');
+  for(const [k,v] of Object.entries(ss.notes))if(!/^\d{1,2}$/.test(k)||!Array.isArray(v)||v.length>12||v.some(x=>!plain(x)||!onlyKeys(x,['d','m','c'])||!Number.isFinite(x.d)||typeof x.m!=='string'||x.m.length>160||typeof x.c!=='string'||x.c.length>12))return fail('session');
+  const dp=pkg.diplomacy;
+  if(!plain(dp)||!onlyKeys(dp,['next','offers'])||!int(dp.next,1,2147483647)||!Array.isArray(dp.offers)||dp.offers.length>400)return fail('offers');
+  const ids=new Map();
+  for(const r of dp.offers){
+    if(!plain(r)||!onlyKeys(r,['id','from','to','give','want','born','expires','round','prev','status','why','by','cost','finished']))return fail('offers');
+    if(!int(r.id,1,dp.next-1)||ids.has(r.id)||!int(r.from,0,63)||!int(r.to,0,63)||r.from===r.to)return fail('offers');
+    if(!Array.isArray(r.give)||!Array.isArray(r.want)||r.give.length+r.want.length<1||r.give.length+r.want.length>12)return fail('offers');
+    for(const it of r.give.concat(r.want)){const e=pkgItem(it);if(e)return fail(e);}
+    if(!Number.isFinite(r.born)||!Number.isFinite(r.expires)||r.expires<r.born||!int(r.round,1,6)||!(r.prev===null||int(r.prev,1,2147483647)))return fail('offers');
+    if(!['pending','accepted','rejected','countered','expired','invalid'].includes(r.status)||typeof r.why!=='string'||r.why.length>240||!['human','ai'].includes(r.by)||
+      !Number.isFinite(r.cost)||r.cost<0||(has(r,'finished')&&!Number.isFinite(r.finished)))return fail('offers');
+    if(r.round===1&&r.prev!==null||r.round>1&&r.prev===null)return fail('round');
+    ids.set(r.id,r);}
+  for(const r of dp.offers)if(r.prev!==null&&ids.has(r.prev)){const q=ids.get(r.prev);if(q.round!==r.round-1||q.status!=='countered'||!(q.from===r.to&&q.to===r.from))return fail('round');}
+  const ds=pkg.display;
+  if(!plain(ds)||typeof ds.name!=='string'||ds.name.length>40||!int(ds.year,0,99999)||!int(ds.month,0,12)||!int(ds.day,0,1e7)||!int(ds.systems,1,1000)||!Array.isArray(ds.humans)||ds.humans.length>8)return fail('display');
+  return {ok:true,pkg,display:ds};
+}
+/* Doğrulanmış paketin dünyasını yükle: motorun kendi deserialize'ı (kendi işlemiyle geri alır). Oturumdaki her insan
+   devleti yüklenen dünyada insan (ai:false) değilse önceki dünya geri yüklenir. */
+function loadWorld(pkg){
+  let prev=null;try{if(typeof G!=='undefined'&&G&&Array.isArray(G.emps)&&G.emps.length&&Array.isArray(G.sys)&&G.sys.length)prev=serialize();}catch{prev=null;}
+  let ok=false;try{ok=deserialize(pkg.save8);}catch{ok=false;}
+  if(!ok)return {ok:false,why:'save8-apply'};
+  const bad=pkg.session.players.some(x=>{const e=G.emps[x.empireId];return !e||e.ai!==false;});
+  if(bad){if(prev){try{deserialize(prev);}catch{}}return {ok:false,why:'slot-state'};}
+  return {ok:true};
+}
+/* Eski MP.0 meta (mpMeta:1; jeton açık, FNV özeti) → MP.4 paketi: FNV ile eşleşme denetlenir, jetonlar tuzlu özete çevrilir,
+   teklif deposu boş başlar (MP.0'da yoktu). FNV kriptografik değildir; yalnız eşleşme denetimi. */
+function upgradeLegacy(m,saveText,o={}){
+  if(!plain(m)||m.mpMeta!==1||m.saveVersion!==8||typeof saveText!=='string')return {ok:false,why:'legacy'};
+  if(m.saveHash!==fnv(saveText))return {ok:false,why:'legacy-hash'};
+  const random=o.random;if(typeof random!=='function')return {ok:false,why:'legacy'};
+  let d;try{d=JSON.parse(saveText);}catch{return {ok:false,why:'save8-json'};}
+  const ps=(m.players||[]).filter(x=>x&&(x.playerId==='host'||x.empireId!==null));
+  const players=ps.map((x,i)=>{const y={playerId:x.playerId,name:String(x.name||'Oyuncu').slice(0,24),empireId:x.empireId,seat:x.playerId==='host'?0:i,color:'',lastSeq:x.lastSeq|0};
+    if(x.playerId!=='host'){const salt=random(16);y.wasAI=!!x.wasAI;y.takeover=x.takeover||null;y.auth={salt,hash:sha256(salt+':'+String(x.token||''))};}return y;});
+  const body={format:PKG_FORMAT,mpVersion:PKG_VERSION,build:m.build,createdAt:Number(o.now?o.now():0),saveId:/^s-[a-f0-9]{16}$/.test(m.saveId)?m.saveId:'s-'+random(8),
+    session:{roomId:String(m.roomId||'').slice(0,40),worldRevision:m.worldRevision|0,hostEmpireId:0,speed:m.speed|0,capacity:Math.max(2,players.length),settings:null,players,notes:{}},
+    diplomacy:{next:1,offers:[]},display:{name:'Eski MP.0 kaydı',year:d.year|0,month:d.month|0,day:Math.floor(d.day||0),size:null,systems:Array.isArray(d.sys)?d.sys.length:1,humans:players.map(x=>({name:x.name,empire:'?',host:x.playerId==='host'?1:0}))}};
+  const h8=sha256(saveText),pkg={...body,save8:saveText,integrity:{alg:'SHA-256',save8:h8,body:sha256(canon({...body,save8:h8}))}};
+  return validatePackage(pkg,{build:m.build});
+}
 function createHost(opts){
     const send=opts.send,kick=opts.kick||(()=>{}),random=opts.random,now=opts.now||(()=>Date.now());
   const hostEmpireId=Number.isInteger(opts.hostEmpireId)?opts.hostEmpireId:0;
@@ -555,22 +683,27 @@ function createHost(opts){
       if(!onlyKeys(m,['v','type','name','token'])||typeof m.name!=='string'||(m.token!==undefined&&(typeof m.token!=='string'||!/^[a-f0-9]{32}$/.test(m.token))))
         return out(conn,{v:PROTOCOL,type:'error',code:'bad-hello'});
       const name=m.name.replace(/[\u0000-\u001f<>]/g,'').slice(0,24)||'Oyuncu';
-      let p=m.token?[...S.players.values()].find(x=>x.token===m.token):null;
+      let p=m.token?[...S.players.values()].find(x=>x.token&&x.token===m.token):null;
+      /* MP.4: kayıttan dönen oyuncu. Kayıtta jeton yok, yalnız tuzlu SHA-256 özeti var; eşleşirse yeni jeton verilir. */
+      if(!p&&m.token&&(!L||!L.banned.has(m.token))){p=[...S.players.values()].find(x=>x.auth&&x.auth.hash===sha256(x.auth.salt+':'+m.token))||null;
+        if(p){p.token=random(16);p.auth=null;p.verified='token';}}
       if(L){
         const deny=code=>{out(conn,{v:PROTOCOL,type:'error',code});kick(conn,code);};
         if(L.phase==='closed')return deny('room-closed');
         if(m.token&&L.banned.has(m.token))return deny('kicked');
         if(!p&&['starting','ingame','paused'].includes(L.phase))return deny('game-started');
-        if(!p&&guests().length>=L.capacity-1)return deny('room-full');
+        if(!p&&L.phase==='resume'){if(guests().filter(x=>x.visitor).length>=4)return deny('room-full');}
+        else if(!p&&guests().length>=L.capacity-1)return deny('room-full');
       }
       if(p){if(p.conn&&p.conn!==conn){S.conns.delete(p.conn);kick(p.conn,'replaced');}}
       else{p={playerId:'p-'+random(6),name,token:random(16),empireId:null,conn:null,lastSeq:0,results:new Map(),lastView:null,lastRev:0,wasAI:null,takeover:null,lastSeen:now()};
-        if(L){p.seat=L.seatNext++;p.ready=false;p.tab='lobi';p.claim=null;p.color=PALETTE[p.seat%PALETTE.length];p.rate=[];}
+        if(L){p.seat=L.seatNext++;p.ready=false;p.tab='lobi';p.claim=null;p.color=PALETTE[p.seat%PALETTE.length];p.rate=[];if(L.phase==='resume')p.visitor=true;}
         S.players.set(p.playerId,p);}
-      const prev=playerOf(conn);if(prev&&prev!==p){prev.conn=null;prev.lastView=null;}   // aynı bağlantı başka kimliğe geçerse eskisi bağsız kalır
+      const prev=playerOf(conn);if(prev&&prev!==p){prev.conn=null;prev.lastView=null;if(prev.visitor)S.players.delete(prev.playerId);}   // aynı bağlantı başka kimliğe geçerse eskisi bağsız kalır (MP.4: doğrulanan ziyaretçi kaydı silinir)
       p.conn=conn;p.lastView=null;p.lastSeen=now();S.conns.set(conn,p.playerId);
-      out(conn,{v:PROTOCOL,type:'assign',room:S.roomId,hostId:S.hostId,playerId:p.playerId,token:p.token,empireId:p.empireId,lastSeq:p.lastSeq,rev:S.worldRevision});
+      out(conn,{v:PROTOCOL,type:'assign',room:S.roomId,saveId:S.saveId,hostId:S.hostId,playerId:p.playerId,token:p.token,empireId:p.empireId,lastSeq:p.lastSeq,rev:S.worldRevision});
       if(p.empireId!==null)publishTo(p,S.worldRevision);
+      if(p.visitor)out(conn,{v:PROTOCOL,type:'resume',saveId:S.saveId});   // MP.4: cihazında bu kayıt için jeton varsa misafir onu gönderir
       if(L)broadcastLobby();
       if(opts.onPlayer)opts.onPlayer(p.playerId,'hello');
     },
@@ -594,7 +727,7 @@ function createHost(opts){
       if(m.value&&p.claim===null)return lres(conn,'ready',false,'no-claim');
       const changed=p.ready!==m.value;p.ready=m.value;lres(conn,'ready',true,null);if(changed)broadcastLobby();},
     leave(conn,m){const p=lobbyActor(conn,m,['v','type'],'leave');if(!p)return;
-      if(['starting','ingame','paused'].includes(L.phase))return lres(conn,'leave',false,'phase');
+      if(['starting','ingame','paused'].includes(L.phase)||L.phase==='resume'&&!p.visitor)return lres(conn,'leave',false,'phase');
       S.players.delete(p.playerId);S.conns.delete(conn);lres(conn,'leave',true,null);kick(conn,'left');broadcastLobby();}
   });
   function lres(conn,action,ok,code){out(conn,{v:PROTOCOL,type:'lresult',action,ok:!!ok,code:code||null});}
@@ -618,6 +751,7 @@ function createHost(opts){
   function phaseNow(){if(!L)return 'ingame';if(L.phase==='waiting'&&canStart().ok)return 'ready';return L.phase;}
   function canStart(){
     if(!L)return {ok:false,why:'no-lobby'};
+    if(L.phase==='resume')return {ok:false,why:'resume'};
     if(!['waiting','ready'].includes(L.phase))return {ok:false,why:L.phase==='created'?'no-galaxy':'already-started'};
     const gs=guests();
     if(!gs.length)return {ok:false,why:'no-guests'};
@@ -630,15 +764,15 @@ function createHost(opts){
   function lobbyView(viewer){
     const gs=[...S.players.values()].sort((a,b)=>a.seat-b.seat);
     /* Oyun başlayınca AI devlet listesi gitmez (temas kurulmamış devletler gizli); yalnız insanların devletleri kalır. */
-    const started=['starting','ingame','paused'].includes(L.phase);
+    const started=['starting','ingame','paused','resume'].includes(L.phase);
     const empires=L.galaxyRev?G.emps.filter(e=>e.id!==hostEmpireId&&!e.wild&&!e.crisisSide&&!e.dead).map(e=>({...empireCard(e),seat:(gs.find(p=>p.playerId!=='host'&&(p.claim===e.id||p.empireId===e.id))||{}).seat??null})).filter(e=>!started||e.seat!==null):[];
     /* Tohum yalnız host'ta: tohum + açık motor kodu tüm galaksiyi (konumlar, AI devletleri) yeniden kurdurur. */
     const settings=L.settings&&(viewer&&viewer.playerId==='host'?L.settings:{size:L.settings.size,aiCount:L.settings.aiCount,...(L.settings.shape!==undefined?{shape:L.settings.shape}:{})});
     const mine=viewer&&viewer.claim!==null&&G.emps&&G.emps[viewer.claim]?{empire:viewer.claim,...prepCard(G.emps[viewer.claim])}:null;
     return {v:PROTOCOL,type:'lobby',rev:L.rev,phase:phaseNow(),pause:L.pause||null,capacity:L.capacity,settings,galaxyRev:L.galaxyRev,
       you:viewer?{seat:viewer.seat}:null,canStart:canStart().ok,
-      players:gs.map(p=>({seat:p.seat,name:p.name,color:p.color,host:p.playerId==='host',online:p.playerId==='host'||!!p.conn,claim:p.empireId!==null?p.empireId:p.claim,ready:!!p.ready,tab:p.tab})),
-      empires,mine};
+      players:gs.map(p=>({seat:p.seat,name:p.name,color:p.color,host:p.playerId==='host',online:p.playerId==='host'||!!p.conn,claim:p.empireId!==null?p.empireId:p.claim,ready:!!p.ready,tab:p.tab,...(p.visitor?{visitor:1}:{})})),
+      empires,mine,...(L.resume?{resume:{name:L.resume.name,year:L.resume.year,month:L.resume.month,size:L.resume.size,you:viewer&&viewer.empireId!==null&&G.emps[viewer.empireId]?G.emps[viewer.empireId].name:null}}:{})};
   }
   function broadcastLobby(){if(!L)return;L.rev++;for(const p of S.players.values())if(p.conn)out(p.conn,lobbyView(p));if(opts.onLobby)opts.onLobby(lobbyView(S.players.get('host')));}
   function onMessage(conn,text){
@@ -666,14 +800,14 @@ function createHost(opts){
     for(const c of e.colonies){const pl=G.sys[c.s]?.planets[c.p];if(pl&&pl.col&&pl.owner===e.id){p.takeover.auto[c.s+':'+c.p]=pl.col.auto;pl.col.auto=false;}}
     p.wasAI=!!e.ai;e.ai=false;p.empireId=empireId;S.slots.set(empireId,playerId);S.journal.push({rev:S.worldRevision,day:G.day,playerId,empireId,assign:1});
     if(typeof AI_VIEW_CACHE!=='undefined')AI_VIEW_CACHE.delete(e);
-    if(p.conn){p.lastView=null;out(p.conn,{v:PROTOCOL,type:'assign',room:S.roomId,hostId:S.hostId,playerId:p.playerId,token:p.token,empireId,lastSeq:p.lastSeq,rev:S.worldRevision});publishTo(p,S.worldRevision);}
+    if(p.conn){p.lastView=null;out(p.conn,{v:PROTOCOL,type:'assign',room:S.roomId,saveId:S.saveId,hostId:S.hostId,playerId:p.playerId,token:p.token,empireId,lastSeq:p.lastSeq,rev:S.worldRevision});publishTo(p,S.worldRevision);}
     return {ok:true};
   }
   function release(empireId,toAI=true){
     const pid=S.slots.get(empireId),p=pid&&S.players.get(pid);if(!p||pid==='host')return {ok:false};
     const e=G.emps[empireId];S.slots.delete(empireId);p.empireId=null;p.lastView=null;
     if(toAI&&e){e.ai=true;for(const [k,v] of Object.entries(p.takeover?.auto||{})){const [s,i]=k.split(':').map(Number),pl=G.sys[s]?.planets[i];if(pl&&pl.col&&pl.owner===e.id)pl.col.auto=v;}}
-    p.takeover=null;if(p.conn)out(p.conn,{v:PROTOCOL,type:'assign',room:S.roomId,hostId:S.hostId,playerId:p.playerId,token:p.token,empireId:null,lastSeq:p.lastSeq,rev:S.worldRevision});
+    p.takeover=null;if(p.conn)out(p.conn,{v:PROTOCOL,type:'assign',room:S.roomId,saveId:S.saveId,hostId:S.hostId,playerId:p.playerId,token:p.token,empireId:null,lastSeq:p.lastSeq,rev:S.worldRevision});
     return {ok:true};
   }
 
@@ -683,35 +817,86 @@ function createHost(opts){
      aiRespond doğrudan çağrıldığında (host arayüzünden uzak insana teklif) karar
      verilmez. Gerçek insan gelen kutusu MP.2 kapsamıdır. */
   function installGuards(){
+    /* MP.4: aynı sayfada yeni oda ya da yüklenen kayıt yeni bir host örneği kurar. Korumalar bir kez sarılır ama
+       her çağrıda ETKİN host'a yönlenir (eski odanın oyuncu tablosu kullanılmaz). */
+    root.__mpCur={remoteHuman,aiToHuman,note,stats};
+    root.__mpHumanVoter=id=>root.__mpCur.remoteHuman(G.emps[id]);
     if(root.__mp0Guards)return;root.__mp0Guards=true;
+    const cur=()=>root.__mpCur,RH=e=>cur().remoteHuman(e),NOTE=(id,m,c)=>cur().note(id,m,c),ATH=(...a)=>cur().aiToHuman(...a),ST={get blockedAI(){return cur().stats.blockedAI;},set blockedAI(v){cur().stats.blockedAI=v;}};
     const neg=aiNegotiate,resp=aiRespond;
     /* MP.2: uzak insanın araştırma bildirimleri (researchTick içindeki say) host günlüğüne değil o oyuncunun
        kendi bildirim listesine gider. Yalnız uzak insan için; tek oyunculu ve AI yolu aynen çalışır. */
     const rtick=researchTick;
-    researchTick=function(e){if(!remoteHuman(e))return rtick.apply(this,arguments);
-      const s0=say;say=function(m,c){note(e.id,m,c);};try{return rtick.apply(this,arguments);}finally{say=s0;}};
+    researchTick=function(e){if(!RH(e))return rtick.apply(this,arguments);
+      const s0=say;say=function(m,c){NOTE(e.id,m,c);};try{return rtick.apply(this,arguments);}finally{say=s0;}};
     /* MP.3: AI'nın uzak insana kendi kararıyla yaptığı teklif (NAP, ticaret, ittifak, stratejik…) insan kutusuna gider;
        insan adına AI karar vermez. Uzak insanın teklif eden olduğu aiNegotiate çağrısı yok sayılır (MP.0 koruması). */
-    aiNegotiate=function(a,b,give,want){if(remoteHuman(b)&&a&&a.ai)return aiToHuman(a,b,give,want);
-      if(remoteHuman(a)||remoteHuman(b)){stats.blockedAI++;return {tur:0,karar:null,uygulandi:false,why:'İnsan oyuncu adına AI karar vermez',karsi:null};}return neg.apply(this,arguments);};
-    aiRespond=function(ai){if(remoteHuman(ai)){stats.blockedAI++;return {v:'bekle',why:'İnsan oyuncu kararı kendi gelen kutusunda verir'};}return resp.apply(this,arguments);};
+    aiNegotiate=function(a,b,give,want){if(RH(b)&&a&&a.ai)return ATH(a,b,give,want);
+      if(RH(a)||RH(b)){ST.blockedAI++;return {tur:0,karar:null,uygulandi:false,why:'İnsan oyuncu adına AI karar vermez',karsi:null};}return neg.apply(this,arguments);};
+    aiRespond=function(ai){if(RH(ai)){ST.blockedAI++;return {v:'bekle',why:'İnsan oyuncu kararı kendi gelen kutusunda verir'};}return resp.apply(this,arguments);};
     /* MP.3.1: federasyon oylamasında motor yalnız devlet 0'ın oyunu AI değerlendirmesinden ayırıyordu; uzak insanın oyu
        aiFedVoteAssessment ile veriliyor ve rezerve RNG çekiliyordu. Motorun kendi fedOpenVote / startFedVote metni tek
        koşulla genişletilir: uzak insan seçmen, devlet 0 gibi atlanır (değerlendirme, öneri oyu ve RNG çekimi yok).
        Uzak insan yokken __mpHumanVoter hep false: davranış ve RNG birebir aynı. Metin beklenen biçimde değilse kurulum durur. */
-    root.__mpHumanVoter=id=>remoteHuman(G.emps[id]);
     fedOpenVote=patchEngine(fedOpenVote,'if (id === 0) continue;','if (id === 0 || __mpHumanVoter(id)) continue;');
     startFedVote=patchEngine(startFedVote,'if(id!==0&&G.emps[id]&&!G.emps[id].dead)rnd();','if(id!==0&&!__mpHumanVoter(id)&&G.emps[id]&&!G.emps[id].dead)rnd();');
     /* Kurucu adayı: motor devlet 0 için "oyuncunun açık onayı gerekli" diyor, diğerlerine aiFedWilling uyguluyordu.
        Uzak insan da AI eğilimiyle kurucu yazılamaz. */
     const founder=fedFounderCandidate;
-    fedFounderCandidate=function(e,o){if(o&&o!==e&&remoteHuman(o)){stats.blockedAI++;const why='Oyuncunun açık üyelik onayı gerekli';return {ok:false,reasons:[why],why};}return founder.apply(this,arguments);};
+    fedFounderCandidate=function(e,o){if(o&&o!==e&&RH(o)){ST.blockedAI++;const why='Oyuncunun açık üyelik onayı gerekli';return {ok:false,reasons:[why],why};}return founder.apply(this,arguments);};
   }
   function patchEngine(fn,from,to){
     const src=String(fn);if(src.split(from).length!==2)throw Error('MP.3.1: motor metni beklenen biçimde değil — '+from);
     return (0,eval)('('+src.replace(from,to)+')');   // global kapsamda: motorun genel adlarını aynen görür
   }
 
+  /* ═══ MP.4 — çok oyunculu kayıt paketi: Save8 + oturum + MP.3 teklif deposu. Jeton kayda girmez (tuzlu özet). ═══ */
+  function snapshot(o={}){
+    if(G._sideBuf||(typeof _dealTxActive!=='undefined'&&_dealTxActive)||(typeof _loadTxActive!=='undefined'&&_loadTxActive))return {ok:false,why:'busy'};   // yarım işlem kayda girmez
+    if(L&&!['ingame','paused'].includes(L.phase))return {ok:false,why:'phase'};
+    const save8=serialize(),gs=[...S.players.values()].filter(p=>p.playerId==='host'||p.empireId!==null);
+    const players=gs.map(p=>{const x={playerId:p.playerId,name:String(p.name).slice(0,24),empireId:p.empireId,seat:p.seat|0,color:String(p.color||''),lastSeq:p.lastSeq|0};
+      if(p.playerId!=='host'){x.wasAI=!!p.wasAI;x.takeover=p.takeover?JSON.parse(JSON.stringify(p.takeover)):null;
+        if(p.token){const salt=random(16);x.auth={salt,hash:sha256(salt+':'+p.token)};}else x.auth=p.auth?{...p.auth}:null;}
+      return x;});
+    const hostE=G.emps[hostEmpireId],name=String(o.name||'').replace(/[\u0000-\u001f<>]/g,'').trim().slice(0,40)||(hostE?hostE.name:'Galaksi')+' · Yıl '+G.year;
+    const body={format:PKG_FORMAT,mpVersion:PKG_VERSION,build:typeof BUILD_ID==='string'?BUILD_ID:null,createdAt:now(),saveId:S.saveId,
+      session:{roomId:S.roomId,worldRevision:S.worldRevision,hostEmpireId,speed:G.speed|0,capacity:L?L.capacity:Math.max(2,players.length),settings:L&&L.settings?{size:L.settings.size,aiCount:L.settings.aiCount,...(L.settings.shape!==undefined?{shape:L.settings.shape}:{})}:null,
+        players,notes:Object.fromEntries([...notes].map(([k,v])=>[k,v.slice(-12)]))},
+      diplomacy:{next:D.next,offers:JSON.parse(JSON.stringify(D.offers))},
+      display:{name,year:G.year,month:G.month,day:Math.floor(G.day),size:L&&L.settings?L.settings.size:null,systems:G.sys.length,
+        humans:gs.map(p=>({name:String(p.name).slice(0,24),empire:G.emps[p.empireId]?String(G.emps[p.empireId].name):'?',host:p.playerId==='host'?1:0}))}};
+    const h8=sha256(save8);
+    return {ok:true,pkg:{...body,save8,integrity:{alg:'SHA-256',save8:h8,body:sha256(canon({...body,save8:h8}))}}};
+  }
+  /* Yüklenen kayıttan oturum: oyuncular bağlantısız ve doğrulanmamış (yalnız özet), devletleri ayrılmış, teklif deposu geri. */
+  function restoreSession(pkg){
+    const ss=pkg.session;S.saveId=pkg.saveId;S.worldRevision=ss.worldRevision;S.players.clear();S.slots.clear();S.conns.clear();
+    for(const x of ss.players){const p={...x,token:null,conn:null,results:new Map(),lastView:null,lastRev:0,lastSeen:now(),ready:true,tab:'oyun',claim:x.empireId,rate:[]};
+      if(x.playerId==='host'){p.token=null;delete p.auth;}S.players.set(p.playerId,p);if(x.empireId!==null)S.slots.set(x.empireId,x.playerId);}
+    D.next=pkg.diplomacy.next;D.offers=JSON.parse(JSON.stringify(pkg.diplomacy.offers));
+    notes.clear();for(const [k,v] of Object.entries(ss.notes||{}))notes.set(+k,v.slice(-12));
+    if(L){L.phase='resume';L.capacity=ss.capacity;L.settings=ss.settings?{...ss.settings}:null;L.galaxyRev=1;L.seatNext=Math.max(1,...ss.players.map(x=>(x.seat|0)+1));
+      L.resume={name:pkg.display.name,year:pkg.display.year,month:pkg.display.month,size:pkg.display.size,createdAt:pkg.createdAt};}
+  }
+  /* Devam: host açıkça başlatır. Kimliği doğrulanmamış ziyaretçiler çıkar; bekleyen koltuklar ayrılmış kalır (AI yönetmez). */
+  function resumeStart(){
+    if(!L||L.phase!=='resume')return {ok:false,why:'phase'};
+    for(const p of guests())if(p.visitor){if(p.conn){out(p.conn,{v:PROTOCOL,type:'error',code:'game-started'});kick(p.conn,'game-started');S.conns.delete(p.conn);}S.players.delete(p.playerId);}
+    L.phase='ingame';delete L.resume;broadcastLobby();publish();return {ok:true};
+  }
+  /* Kimlik kurtarma: yalnız host, yalnız bağlı olmayan koltuk ve bağlı bir ziyaretçi için (başka oyuncunun aktif devleti devralınamaz). */
+  function recoverSeat(visitorPid,seatPid){
+    const v=S.players.get(visitorPid),p=S.players.get(seatPid);
+    if(!L||!['resume','ingame','paused'].includes(L.phase))return {ok:false,why:'phase'};
+    if(!v||!v.visitor||!v.conn)return {ok:false,why:'visitor'};
+    if(!p||seatPid==='host'||p.visitor||p.empireId===null)return {ok:false,why:'seat'};
+    if(p.conn)return {ok:false,why:'seat-online'};
+    const conn=v.conn;S.players.delete(visitorPid);p.conn=conn;p.token=random(16);p.auth=null;p.verified='host-recovery';p.lastView=null;p.lastSeen=now();S.conns.set(conn,p.playerId);
+    S.journal.push({rev:S.worldRevision,day:G.day,playerId:seatPid,empireId:p.empireId,recover:1});
+    out(conn,{v:PROTOCOL,type:'assign',room:S.roomId,saveId:S.saveId,hostId:S.hostId,playerId:p.playerId,token:p.token,empireId:p.empireId,lastSeq:p.lastSeq,rev:S.worldRevision});
+    if(L.phase!=='resume')publishTo(p,S.worldRevision);broadcastLobby();return {ok:true};
+  }
   /* ---------- oturum metadatası (Save8'den ayrı, sürümlü) ---------- */
   function meta(saveText){
     return {mpMeta:1,saveId:S.saveId,roomId:S.roomId,worldRevision:S.worldRevision,hostId:S.hostId,
@@ -775,11 +960,13 @@ function createHost(opts){
     S.players.delete(pid);broadcastLobby();return {ok:true};
   }
   function closeRoom(){if(!L)return {ok:false};L.phase='closed';broadcastLobby();for(const p of guests())if(p.conn){kick(p.conn,'room-closed');S.conns.delete(p.conn);p.conn=null;}return {ok:true};}
+  if(opts.resume){if(!L)throw Error('MP.4: kayıttan devam lobi kipi ister');restoreSession(opts.resume);}
   return {onMessage,onLeave,onJoin(){},publish,publishTo,assign,release,installGuards,meta,restore,viewFor,local,dip:D,dipView,polView:e=>pure(()=>polView(e)),
+    snapshot,resumeStart,recoverSeat,
     isHuman:humanEmpire,isRemoteHuman:remoteHuman,state:S,stats,COMMANDS,HANDLERS,clock,fnv,observeHumans,
     configure,setCapacity,claimFor,setHostTab,start,canStart,kick:kickPlayer,close:closeRoom,lobbyView:()=>L&&lobbyView(S.players.get('host')),lobby:L,
     /* MP.1.1: duraklatma nedeni (host-offline / host-background) misafire lobide 'pause' olarak gider; MP.0 çağrısı nedensiz kalır. */
     setPaused(v,why){S.paused=!!v;if(L&&['ingame','paused'].includes(L.phase)){const ph=v?'paused':'ingame',pw=v?(why||'host'):null;if(L.phase!==ph||L.pause!==pw){L.phase=ph;L.pause=pw;broadcastLobby();}}}};
 }
-root.StarsMP={PROTOCOL,createHost,fnv,isHumanActor,actorVision,TABS};
+root.StarsMP={PROTOCOL,createHost,fnv,isHumanActor,actorVision,TABS,sha256,canon,validatePackage,loadWorld,upgradeLegacy,PKG_FORMAT,PKG_VERSION};
 })(typeof globalThis!=='undefined'?globalThis:this);
