@@ -57,8 +57,10 @@ function encode(text,opcode=1){
   else{head=Buffer.alloc(10);head[0]=0x80|opcode;head[1]=127;head.writeBigUInt64BE(BigInt(len),2);}
   return Buffer.concat([head,body]);
 }
-function attach(socket,onText,onClose){
+function attach(socket,onText,onClose0,maxPayload=MAX_PAYLOAD){
   let buf=Buffer.alloc(0),closed=false;
+  /* MP.5: bağlantı başı sayaç kapanınca silinir (uzun süre açık relay'de sınırsız büyümesin) */
+  const onClose=()=>{delete stats.byConn[conn.id];onClose0();};
   const conn={socket,send(text){if(closed)return;const fr=encode(text);stats.framesOut++;stats.bytesOut+=fr.length;
       const s=stats.byConn[conn.id]||(stats.byConn[conn.id]={in:0,out:0,framesIn:0,framesOut:0});s.out+=fr.length;s.framesOut++;
       if(DELAY)setTimeout(()=>{if(!closed)socket.write(fr);},DELAY);else socket.write(fr);},
@@ -69,8 +71,8 @@ function attach(socket,onText,onClose){
     while(buf.length>=2){
       const fin=buf[0]&0x80,op=buf[0]&0x0f,masked=buf[1]&0x80;let len=buf[1]&0x7f,off=2;
       if(len===126){if(buf.length<4)return;len=buf.readUInt16BE(2);off=4;}
-      else if(len===127){if(buf.length<10)return;const big=buf.readBigUInt64BE(2);if(big>BigInt(MAX_PAYLOAD)){stats.rejected++;return conn.close(1009,'too big');}len=Number(big);off=10;}
-      if(len>MAX_PAYLOAD){stats.rejected++;return conn.close(1009,'too big');}
+      else if(len===127){if(buf.length<10)return;const big=buf.readBigUInt64BE(2);if(big>BigInt(maxPayload)){stats.rejected++;return conn.close(1009,'too big');}len=Number(big);off=10;}
+      if(len>maxPayload){stats.rejected++;return conn.close(1009,'too big');}
       if(!masked){stats.rejected++;return conn.close(1002,'unmasked');}   // istemci çerçeveleri maskeli olmalı
       if(buf.length<off+4+len)return;
       const mask=buf.slice(off,off+4),data=Buffer.from(buf.slice(off+4,off+4+len));

@@ -1,0 +1,166 @@
+{
+ "note": "Aynı makinede: dağıtım imajı (docker) + yerel TLS vekili + telefon başına TCP kesici + ayrı Chromium süreçleri (mobil dokunmatik bağlam). Gerçek internet ya da fiziksel Android DEĞİL. Siyasi başlangıç açık fikstür.",
+ "results": [
+  {
+   "name": "kurulum (HTTPS/WSS, 3 ayrı tarayıcı süreci, ayrı ağ yolları): A oda açar, B ve C davet bağlantısıyla katılır, farklı devlet seçer; misafirde motor yok",
+   "status": "PASS",
+   "ms": 5529
+  },
+  {
+   "name": "eşzamanlı oyun: B ve C AYNI ANDA araştırma, inşa ve filo komutu verir; host motoru hepsini uygular, her oyuncu yalnız kendi devletini yönetir",
+   "status": "PASS",
+   "ms": 630
+  },
+  {
+   "name": "diplomasi WSS üzerinden: ticaret teklifi → karşı teklif → kabul (tam bir kez); federasyon oyu insanda kalır; vasallık teklif/karşı teklif/kabul",
+   "status": "PASS",
+   "ms": 1148
+  },
+  {
+   "name": "B ağ kopması (8 s): oyun ekranı korunur, \"yeniden bağlanılıyor\" görünür; ağ dönünce aynı devletle otomatik döner; host B'yi bağlantısız görür; komut çalışır",
+   "status": "PASS",
+   "ms": 12756
+  },
+  {
+   "name": "B ağ değişimi (sessiz ölü soket, FIN yok): \"online\" olayıyla eski soket bırakılır, yeni soketle hemen döner; host eski bağlantıyı yenisiyle değiştirir",
+   "status": "PASS",
+   "ms": 12989
+  },
+  {
+   "name": "host ağ kopması (8 s): misafirler \"host bağlı değil — duraklatıldı\" görür, komut gönderilmez, host'ta zaman DURUR; ağ dönünce host anahtarla aynı odaya döner, hız geri gelir",
+   "status": "PASS",
+   "ms": 16319
+  },
+  {
+   "name": "host ağ değişimi (sessiz ölü host soketi): \"online\" olayıyla host yeni soket açar; relay canlıyken reddeder (host-exists), eski soket bir yoklama aralığı sessiz kalınca yenisini alır",
+   "status": "PASS",
+   "ms": 36633
+  },
+  {
+   "name": "yetkisiz: izinsiz kişi dolu odaya giremez; yanlış host anahtarı, sahte devlet ve başkasının filosu reddedilir; WSS URL'lerinde jeton/anahtar yok",
+   "status": "PASS",
+   "ms": 1650
+  },
+  {
+   "name": "relay yeniden başlatma: oda kapanır, misafirler \"Sunucu yeniden başlatıldı\" görür; host oyunu kaybetmez (duraklar), kaydeder; host tarayıcısı GERÇEKTEN kapanıp açılır, yeni odada B ve C eski devletlerine döner",
+   "status": "PASS",
+   "ms": 8385
+  },
+  {
+   "name": "performans: 45 / 60 / 100 sistem — bağlantı, ilk görünüm, anlık görüntü/delta boyutu, 30 günlük trafik, komut gecikmesi, kopma sonrası dönüş, relay belleği",
+   "status": "PASS",
+   "ms": 49798
+  }
+ ],
+ "metrics": {
+  "mode": "docker",
+  "net": {
+   "hostPageMs": 2272,
+   "roomCreateMs": 305,
+   "joinBMs": 562,
+   "connectBMs": 64,
+   "joinCMs": 569,
+   "connectCMs": 61,
+   "startToViewMs": 461,
+   "snapshotBytes": 15457,
+   "concurrentMs": 129,
+   "cmdRttMs": [
+    14
+   ]
+  },
+  "reconnect": {
+   "guestOutage8sMs": 3068,
+   "guestNetworkChangeMs": 12808,
+   "hostOutage8sMs": 7097,
+   "hostNetworkChangeMs": 36497,
+   "relayRestartMs": 1157,
+   "saveToResumeLobbyMs": 490
+  },
+  "perf": {
+   "s45": {
+    "systems": 45,
+    "joinMs": 403,
+    "startToViewMs": 345,
+    "snapshotBytes": 15270,
+    "deltaMedianBytes": 228,
+    "deltaMaxBytes": 956,
+    "bytes30Days": 7788,
+    "rttMs": [
+     20,
+     5,
+     12
+    ],
+    "reconnectAfter2sOutageMs": 929,
+    "relayMem": "12.98MiB / 15.71GiB",
+    "tabTapMs": 79
+   },
+   "s60": {
+    "systems": 60,
+    "joinMs": 465,
+    "startToViewMs": 392,
+    "snapshotBytes": 16015,
+    "deltaMedianBytes": 226,
+    "deltaMaxBytes": 944,
+    "bytes30Days": 8577,
+    "rttMs": [
+     36,
+     10,
+     9
+    ],
+    "reconnectAfter2sOutageMs": 942,
+    "relayMem": "14.43MiB / 15.71GiB",
+    "tabTapMs": 72
+   },
+   "s100": {
+    "systems": 100,
+    "joinMs": 525,
+    "startToViewMs": 422,
+    "snapshotBytes": 17195,
+    "deltaMedianBytes": 227,
+    "deltaMaxBytes": 1188,
+    "bytes30Days": 8302,
+    "rttMs": [
+     16,
+     9,
+     28
+    ],
+    "reconnectAfter2sOutageMs": 951,
+    "relayMem": "14.86MiB / 15.71GiB",
+    "tabTapMs": 60
+   }
+  },
+  "viewports": {
+   "guest-reconnecting": [
+    "360x800",
+    "390x844",
+    "412x915",
+    "844x390"
+   ],
+   "guest-room-closed": [
+    "360x800",
+    "390x844",
+    "412x915",
+    "844x390"
+   ]
+  },
+  "wsUrls": [
+   "wss://localhost:44211/mp1/ws?role=host",
+   "wss://localhost:36097/mp1/ws?role=client&code=XXXXXXXX",
+   "wss://localhost:45019/mp1/ws?role=client&code=XXXXXXXX",
+   "wss://localhost:44211/mp1/ws?role=host&code=XXXXXXXX",
+   "wss://localhost:38403/mp1/ws?role=client&code=XXXXXXXX"
+  ],
+  "notes": [
+   "eşzamanlı komutlar: ok, ok, ok, ok, ok",
+   "host ağ değişimi: yoklama 25000 ms (varsayılan) ile 36497 ms"
+  ],
+  "imageBuildMs": 504,
+  "relayStartMs": 183,
+  "processes": {
+   "host": 21497,
+   "host2": 22178
+  },
+  "relayLogLines": 1,
+  "pageErrors": []
+ }
+}
