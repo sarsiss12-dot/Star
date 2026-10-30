@@ -691,7 +691,11 @@ function createHost(opts){
         const deny=code=>{out(conn,{v:PROTOCOL,type:'error',code});kick(conn,code);};
         if(L.phase==='closed')return deny('room-closed');
         if(m.token&&L.banned.has(m.token))return deny('kicked');
-        if(!p&&['starting','ingame','paused'].includes(L.phase))return deny('game-started');
+        if(!p&&['starting','ingame','paused'].includes(L.phase)){
+          /* MP.4: kayıttan sürüyor ve dönmeyen koltuk var — jetonsuz ilk selamda oyuncu kaydı açılmaz, yalnız kayıt kimliği sorulur;
+             cihazdaki jetonla gelen ikinci selam doğrulanır, doğrulanamayan selam reddedilir. */
+          if(!m.token&&[...S.players.values()].some(x=>x.auth&&!x.conn))return out(conn,{v:PROTOCOL,type:'resume',saveId:S.saveId});
+          return deny('game-started');}
         if(!p&&L.phase==='resume'){if(guests().filter(x=>x.visitor).length>=4)return deny('room-full');}
         else if(!p&&guests().length>=L.capacity-1)return deny('room-full');
       }
@@ -859,7 +863,7 @@ function createHost(opts){
       if(p.playerId!=='host'){x.wasAI=!!p.wasAI;x.takeover=p.takeover?JSON.parse(JSON.stringify(p.takeover)):null;
         if(p.token){const salt=random(16);x.auth={salt,hash:sha256(salt+':'+p.token)};}else x.auth=p.auth?{...p.auth}:null;}
       return x;});
-    const hostE=G.emps[hostEmpireId],name=String(o.name||'').replace(/[\u0000-\u001f<>]/g,'').trim().slice(0,40)||(hostE?hostE.name:'Galaksi')+' · Yıl '+G.year;
+    const hostE=G.emps[hostEmpireId],name=String(o.name||'').replace(/[\u0000-\u001f<>]/g,'').trim().slice(0,40)||(hostE?String(hostE.name).slice(0,40):'Galaksi');   // tarih ayrı alanlarda (year/month)
     const body={format:PKG_FORMAT,mpVersion:PKG_VERSION,build:typeof BUILD_ID==='string'?BUILD_ID:null,createdAt:now(),saveId:S.saveId,
       session:{roomId:S.roomId,worldRevision:S.worldRevision,hostEmpireId,speed:G.speed|0,capacity:L?L.capacity:Math.max(2,players.length),settings:L&&L.settings?{size:L.settings.size,aiCount:L.settings.aiCount,...(L.settings.shape!==undefined?{shape:L.settings.shape}:{})}:null,
         players,notes:Object.fromEntries([...notes].map(([k,v])=>[k,v.slice(-12)]))},

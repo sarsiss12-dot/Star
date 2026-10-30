@@ -124,6 +124,20 @@ test('kimlik güvenliği: uydurma jeton, başka kaydın jetonu, eski (yenilenmi�
   assert(g.sb.__out.some(([c,t])=>['x2','x3','nC'].includes(c)&&t.includes('game-started')),'unverified visitors removed at continue');
   assert.equal(msg(g,'x9',{v:1,type:'hello',name:'Geç'}).find(x=>x.type==='error').code,'game-started');
 });
+test('DEVAM ET sonrası geç dönüş: C bağlanmadan oyun sürer (devleti AI\'ya geçmez); jetonsuz yabancıya yalnız kayıt kimliği sorulur, oyuncu kaydı açılmaz; uydurma jeton reddedilir; C cihazındaki jetonla kendi devletine döner',()=>{
+  const {h}=sc();const text=JSON.stringify(J(h,'MP.snapshot({})').pkg);const tB=lastAssign(h,'cB').token,tC=lastAssign(h,'cC').token;
+  const y=loadWorld(text),g=y.h;msg(g,'nB',{v:1,type:'hello',name:'Bora',token:tB});assert.equal(J(g,'MP.resumeStart().ok'),true);
+  g.run('step(20);MP.publish()');assert.equal(J(g,`G.emps[${C}].ai`),false,'waiting seat is not handed to the AI');
+  const n0=J(g,'MP.state.players.size'),saveId=J(g,'MP.state.saveId');
+  const r1=msg(g,'x7',{v:1,type:'hello',name:'Yabancı'});assert.deepEqual(r1.map(x=>x.type),['resume']);assert.equal(r1[0].saveId,saveId);
+  assert.equal(J(g,'MP.state.players.size'),n0,'no player record for an unverified connection');
+  assert.equal(msg(g,'x7',{v:1,type:'hello',name:'Yabancı',token:crypto.randomBytes(16).toString('hex')}).find(x=>x.type==='error').code,'game-started');
+  assert.equal(cmd(g,'x7',{kind:'fedLeave'}).code,'not-joined','unbound connection cannot command');
+  assert.deepEqual(msg(g,'nC',{v:1,type:'hello',name:'Cem'}).map(x=>x.type),['resume']);
+  const back=msg(g,'nC',{v:1,type:'hello',name:'Cem',token:tC});assert.equal(back.find(x=>x.type==='assign').empireId,C);assert(back.some(x=>x.type==='snapshot'),'view published on return');
+  assert.notEqual(back.find(x=>x.type==='assign').token,tC,'token rotated');
+  assert.equal(msg(g,'x8',{v:1,type:'hello',name:'Geç'}).find(x=>x.type==='error').code,'game-started','no waiting seat → plain refusal');
+});
 test('MP.3 teklif kalıcılığı: karşı teklif turu, kimlik, süre ve geçmiş yüklenir; B karşı teklifi kabul eder → kaynaklar tam bir kez; eski tur ve ikinci kabul reddedilir; sıra/komut tekrarı geçmez',()=>{
   const {h,o1,o2,o3}=sc();const text=JSON.stringify(J(h,'MP.snapshot({})').pkg);const tB=lastAssign(h,'cB').token,tC=lastAssign(h,'cC').token,lsB=lastAssign(h,'cB').lastSeq;
   const g=loadWorld(text).h;msg(g,'nB',{v:1,type:'hello',name:'Bora',token:tB});msg(g,'nC',{v:1,type:'hello',name:'Cem',token:tC});g.run('MP.resumeStart()');

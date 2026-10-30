@@ -1,0 +1,11 @@
+/* STARS MP.4 — kayıt listesi ve devam lobisi (host sayfası). mp1.css görsel dilini kullanır; ≥44 px dokunma hedefi, yatay taşma yok. */
+.mp4 .mp4-card{overflow-wrap:anywhere}
+.mp4 .mp4-card b{display:block;font-size:15px}
+.mp4 .mp4-card .mp1-row{margin-top:4px}
+.mp4 .mp4-card .mp1-row>.mp1-btn{flex:1 1 96px;min-height:44px;margin:4px 0;text-align:center}
+.mp4 label.mp1-btn{text-align:center;cursor:pointer;box-sizing:border-box}
+.mp4-seat{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:6px 0;border-bottom:1px solid #1d2a40}
+.mp4-seat>span{flex:1 1 140px;min-width:0;overflow-wrap:anywhere}
+.mp4-seat>span.ok{flex:0 0 auto;color:#6ff2c8}.mp4-seat>span.bad{flex:0 0 auto;color:#ff9b3d}
+.mp4-seat .mp1-sel{flex:1 1 160px;min-width:0;min-height:44px;font-size:16px}
+.mp4-seat .mp1-btn{flex:0 0 auto;width:auto;min-width:120px;min-height:44px;margin:2px 0;text-align:center}
