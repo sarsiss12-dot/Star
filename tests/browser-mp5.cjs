@@ -83,7 +83,8 @@ async function guestJoin(p,laneName,code,name){await p.goto(origin[laneName]+'/m
   if(name)await p.fill('#jName',name);await p.locator('[data-j="go"]').tap();}
 async function hostMenu(){await H.goto(origin.H+'/');await wait(H,()=>typeof setupGame==='function'&&document.getElementById('mp1Btn'));await H.locator('#mp1Btn').tap();await wait(H,()=>MP1Host.screen==='menu');}
 async function sheetOk(p){await wait(p,()=>document.getElementById('mp1Sheet'));await p.locator('#mp1Sheet [data-m="sheetOk"]').tap();await wait(p,()=>!document.getElementById('mp1Sheet'));}
-async function miniTap(g){if(!await H.locator('#mp1Mini [data-g="'+g+'"]').count())await H.locator('#mp1Mini [data-g="toggle"]').tap();await H.locator('#mp1Mini [data-g="'+g+'"]').tap();}
+const freeBar=p=>p.evaluate(()=>{const m=document.getElementById('modal');if(m&&!m.classList.contains('hidden')&&typeof UI!=='undefined'){const s=G.speed;UI.closeModal();UI.setSpeed(s);}});   // MP.6: açık STARS penceresi (danışman/olay) MP çubuğunun üstündedir; kapat, hızı koru
+async function miniTap(g){await freeBar(H);if(!await H.locator('#mp1Mini [data-g="'+g+'"]').count())await H.locator('#mp1Mini [data-g="toggle"]').tap();await H.locator('#mp1Mini [data-g="'+g+'"]').tap();}
 
 (async()=>{tlsK=selfSigned();try{
   metrics.mode=dockerOk()?'docker':'node-process';

@@ -63,7 +63,8 @@ async function hostMenu(H,base){await H.goto(base+'/');await wait(H,()=>typeof s
 async function guestJoin(p,base,code,name){await p.goto(base+'/mp/join?code='+code);await wait(p,()=>window.MP1Join&&document.getElementById('jCode'));
   if(name)await p.fill('#jName',name);await p.locator('[data-j="go"]').tap();}
 async function sheetOk(H){await wait(H,()=>document.getElementById('mp1Sheet'));await H.locator('#mp1Sheet [data-m="sheetOk"]').tap();await wait(H,()=>!document.getElementById('mp1Sheet'));}
-async function miniTap(H,g){if(!await H.locator('#mp1Mini [data-g="'+g+'"]').count())await H.locator('#mp1Mini [data-g="toggle"]').tap();await H.locator('#mp1Mini [data-g="'+g+'"]').tap();}
+const freeBar=p=>p.evaluate(()=>{const m=document.getElementById('modal');if(m&&!m.classList.contains('hidden')&&typeof UI!=='undefined'){const s=G.speed;UI.closeModal();UI.setSpeed(s);}});   // MP.6: açık STARS penceresi (danışman/olay) MP çubuğunun üstündedir; kapat, hızı koru
+async function miniTap(H,g){await freeBar(H);if(!await H.locator('#mp1Mini [data-g="'+g+'"]').count())await H.locator('#mp1Mini [data-g="toggle"]').tap();await H.locator('#mp1Mini [data-g="'+g+'"]').tap();}
 /* Gerçek indirme (Playwright download olayı) ilk oturumda doğrulanır. Aynı kalıcı profil YENİDEN açıldığında bu ortamda Chromium indirmeyi
    ".crdownload"da bırakıyor ya da tarayıcı çöküyor (crashpad; Playwright/Chromium kısıtı, oyun kodundan bağımsız, boş sayfayla yeniden üretildi):
    o oturumlarda yerel indirme tetiklenmez; sayfanın oluşturduğu Blob ve <a download> adı yakalanır (dışa aktarma kodu aynı yoldan geçer). */
