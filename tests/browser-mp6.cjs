@@ -149,17 +149,19 @@ let relay,base,bH,bB,bC,bR,H,Bp,Cp,R,code;
     await Bp.locator('[data-a="route"]').first().tap();await wait(Bp,()=>View.route);
     await centerOn(Bp,mv.t);await tapWorld(Bp,mv.t);
     await wait(H,m=>{const f=G.fleets.find(x=>x.id===m.f);return !!(f&&(f.mv||f.path.length));},mv);metrics.notes.push('filo '+mv.f+' → '+mv.t+' (gerçek ROTA dokunuşu)');
-    await synced(H,Bp);assert.equal(await Bp.evaluate(f=>{const x=G.fleets.find(y=>y.id===f);return !!(x&&(x.mv||x.path.length));},mv.f),true,'guest sees the route');await shot(Bp,'b-fleet-route');
+    await synced(H,Bp);await wait(Bp,f=>{const x=G.fleets.find(y=>y.id===f);return !!(x&&(x.mv||x.path.length));},mv.f);   // misafir rotayı görür (ayna gecikmesi en çok ~0,7 s)await shot(Bp,'b-fleet-route');
     metrics.sent=await Bp.evaluate(()=>MP6Stars.S.stats.sent);
   });
 
-  await test('desteklenmeyen eylemler açıkça engellenir ve host\'a dokunmaz: hız düğmesi, filo duruşu, birleştirme, savaş ilanı, hediye; misafirde zaman ilerlemez',async()=>{
+  /* MP.6.1: hız, duruş, birleştirme, otomatik keşif, kolonileştirme, yıkım ve dur artık host komutlarıdır (browser-mp61);
+     burada hâlâ desteklenmeyen eylemler denetlenir. */
+  await test('desteklenmeyen eylemler açıkça engellenir ve host\'a dokunmaz: savaş ilanı, hediye, casusluk, elçi, terraform, takviye, ittifak, pakt; misafirde zaman ilerlemez',async()=>{
     const s0=await H.evaluate(()=>({speed:G.speed,day:G.day,ser:serialize().length}));
-    await tapEl(Bp,'#timepod [data-a="spd"][data-x="3"]');await Bp.waitForTimeout(400);
-    assert.equal(await Bp.evaluate(()=>G.speed),0,'guest stays at speed 0');
-    for(const a of ['stance','merge','war','giftDo','autoex','colonize','demolish','stop'])await Bp.evaluate(a=>UI.act(a,'1'),a);
+    const UNS=['war','giftDo','spy','envoyTask','terraform','reinf','ally','pact'];
+    for(const a of UNS)await Bp.evaluate(a=>UI.act(a,'1'),a);await Bp.waitForTimeout(400);
+    assert.equal(await Bp.evaluate(()=>G.speed),0,'guest local speed stays 0 (no local simulation)');
     metrics.blocked=await Bp.evaluate(()=>MP6Stars.S.stats.blocked);
-    for(const a of ['spd','stance','merge','war','giftDo','autoex','colonize','demolish','stop'])assert(metrics.blocked[a]>=1,'blocked '+a);
+    for(const a of UNS)assert(metrics.blocked[a]>=1,'blocked '+a);
     const s1=await H.evaluate(()=>({speed:G.speed,day:G.day}));assert.deepEqual([s1.speed,s1.day],[s0.speed,s0.day],'host time/speed untouched');
     assert.match(await Bp.evaluate(()=>[...document.querySelectorAll('#alerts *')].map(x=>x.textContent).join(' | ')),/host|henüz yok/i);await shot(Bp,'b-blocked-toast');
   });

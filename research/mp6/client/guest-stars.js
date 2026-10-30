@@ -72,8 +72,12 @@ function gate(){
      (dokununca açık uyarı). Liste arayüz kodundan okunur; yeni eylem eklenirse kendiliğinden kapsanır. */
   try{const all=new Set([...String(UI.act).matchAll(/case '([A-Za-z0-9_]+)'/g)].map(m=>m[1]));S.unsupported=[...all].filter(a=>!VIEW.has(a)&&!ACT[a]).sort();
     const st=doc.createElement('style');st.id='mp6Disabled';st.textContent=S.unsupported.map(a=>'[data-a="'+a+'"]').join(',')+'{opacity:.42!important;filter:grayscale(.7)}';doc.head.appendChild(st);}catch{}
+  /* onay/seçim düğmeleri (_hook) kendi dinleyicisiyle çalışır; UI.act'te karşılığı yoktur (boş geçer). Adları arayüz kaynağından:
+     yalnız izinli bir pencereden açılabilirler ve dünyayı değiştiren son çağrıları yukarıdaki MP sarmalayıcılarına iner. */
+  S.hooks=new Set();for(const o of [UI,typeof ArchiveUI!=='undefined'?ArchiveUI:null].filter(Boolean))   // ArchiveUI sözcüksel const (window'da yok)
+    for(const k of Object.keys(o))if(typeof o[k]==='function')for(const m of String(o[k]).matchAll(/_hook\('([A-Za-z0-9_]+)'/g))S.hooks.add(m[1]);
   const act=UI.act.bind(UI);
-  UI.act=function(a,x,el){if(!S.on)return act(a,x,el);if(ACT[a]){ACT[a](x);return;}if(VIEW.has(a))return act(a,x,el);return blocked(a);};
+  UI.act=function(a,x,el){if(!S.on)return act(a,x,el);if(ACT[a]){ACT[a](x);return;}if(VIEW.has(a)||S.hooks.has(a))return act(a,x,el);return blocked(a);};
   /* misafirde yerel zaman hep durur (tik yok); hız düğmeleri host'un GERÇEK ortak hızını gösterir */
   UI.setSpeed=function(){G.speed=0;paintSpeed();};
   /* motor eylemleri → MP komutu (yalnız misafirin kendi devleti: aynada 0) */
@@ -114,6 +118,12 @@ function gate(){
     this.dealMsg=cid?'Teklif host\'a gönderildi; yanıt gelen kutuna ve bildirimlere düşer.':'Host bağlı değil; teklif gönderilmedi.';
     if(cid)waits[cid]=res=>toast(res.status==='ok'?'Teklif gönderildi — '+(G.emps[d.to]?.name||''):'Host reddetti: '+why(res),res.status!=='ok');
     this.drawDeal();};
+  /* anlaşma penceresinin yerel önizlemesi: karşı tarafın stoğu aynada yok (kabuk). MP.3 dipGate ile aynı kural: misafirde yalnız
+     KENDİ yükümlülükleri denetlenir, karşı tarafın kaynak satırları ("Ad → …") düşer; kesin denetim host'ta (offer / respond). */
+  wrap('dealQuote',(o,offer)=>{const q=o(offer);if(!q||!offer||offer.from!==0||!G.emps[offer.to])return q;
+    const pre=String(G.emps[offer.to].name)+' → ',wf=[],reasons=(q.reasons||[]).filter(r=>!String(r).startsWith(pre));   // wantFail = karşı tarafın satırları
+    if(!(q.wantFail||[]).length&&reasons.length===(q.reasons||[]).length)return q;
+    return {...q,wantFail:wf,reasons,ok:!(q.giveFail||[]).length&&!wf.length&&!reasons.length};});
   /* gelen kutusundaki MP teklifi için "Karşı teklif hazırla" (aiDealOpen → offCounter): karşı teklif bağlamı hatırlanır, GÖNDER → 'counter' */
   const aiDealOpen0=UI.aiDealOpen.bind(UI);
   UI.aiDealOpen=function(p){if(S.on&&p){const v=S.J&&S.J.game.view,o=v&&v.dip&&v.dip.offers.find(x=>x.status==='pending'&&x.to===S.J.empireId&&local(x.from)===p.from&&x.born===p.born);

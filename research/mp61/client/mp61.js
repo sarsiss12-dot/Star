@@ -1,6 +1,6 @@
 'use strict';
 /* STARS MP.6.1 — ortak oyun hızı bildirimi ve pencere üstü durum hapı (host ve misafir sayfasında AYNI modül).
-   - Hız bildirimi: hız çubuğunun (#timepod) hemen üstündeki şeritte, MP çubuğunun sağında; ~3 s sonra solarak kaybolur.
+   - Hız bildirimi: hız çubuğunun (#timepod) hemen üstündeki şeritte (MP çubuğu bu şeridin üstünde durur); ~3 s sonra solarak kaybolur.
      Dokunmayı engellemez (pointer-events:none). Aynı hızın yeniden seçilmesi bildirim üretmez (host 'same' ile reddeder).
    - Durum hapı: bir STARS penceresi (#modal, diplomasi paneli) açıkken MP çubuğu pencerenin altında kalır; bağlantı durumu ve
      ortak hız ekranın üstünde küçük, dokunulamaz bir hapta görünür. Hız bildirimi de pencere açıkken bu hapta gösterilir.
@@ -28,11 +28,11 @@ function rotated(){const r=$('rotate');return !!(r&&r.classList.contains('show')
 function place(){
   if(!noteEl)return;
   const tp=$('timepod'),bar=$('mp1Mini'),sb=$('sidebar'),vw=innerWidth,vh=innerHeight;
-  const t=tp&&tp.getBoundingClientRect(),b=bar&&bar.offsetParent!==null?bar.getBoundingClientRect():null;
+  const t=tp&&tp.getBoundingClientRect(),br=bar&&bar.getBoundingClientRect(),b=br&&br.width&&br.height?br:null;   // sabit konumlu: offsetParent her zaman null
   const sbLeft=sb&&sb.offsetWidth&&!sb.classList.contains('off')?sb.getBoundingClientRect().left:vw;
   const base=t&&t.height?t.top:vh-52;                                  // hız çubuğunun üst kenarı
   let left=t&&t.width?t.left:6;
-  if(b&&b.width&&b.bottom>base-60&&b.top<base)left=Math.max(left,b.right+6);   // MP çubuğu aynı şeritteyse sağına
+  if(b&&b.width&&b.bottom>base-30&&b.top<base)left=Math.max(left,b.right+6);   // şerit MP çubuğunca dolu (ör. açılmış host listesi) → sağına
   noteEl.style.left=Math.round(left)+'px';noteEl.style.bottom=Math.round(vh-base+4)+'px';
   noteEl.style.maxWidth=Math.max(140,Math.round(sbLeft-left-10))+'px';
 }
@@ -41,7 +41,7 @@ function paint(){
   if(!noteEl){noteEl=doc.createElement('div');noteEl.id='mp61Note';noteEl.className='mp61-note';noteEl.setAttribute('role','status');noteEl.setAttribute('aria-live','polite');(($('app'))||doc.body).appendChild(noteEl);}
   if(!pillEl){pillEl=doc.createElement('div');pillEl.id='mp61Pill';pillEl.className='mp61-pill';pillEl.setAttribute('aria-live','polite');doc.body.appendChild(pillEl);}
   /* bildirim şeridi (pencere kapalıyken) */
-  const showNote=noteOn&&!open;
+  const showNote=noteOn&&!open&&!rotated();
   if(showNote){if(noteEl.textContent!==S.note)noteEl.textContent=S.note;place();}
   noteEl.classList.toggle('on',!!showNote);noteEl.classList.toggle('fade',!!showNote&&S.noteUntil-now<450);
   /* durum hapı (pencere açıkken): bağlantı + ortak hız; bildirim varsa onun metni */
