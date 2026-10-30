@@ -84,6 +84,20 @@ Değişmeyenler:
 - Komutlar MP.0–MP.3.1'in mevcut yetki denetiminden geçer: sahte devlet `forged-empire`, başkasının filosu `not-owner`.
 - Misafirin yerel `G`'si host'u etkileyemez.
 
+> **MP.6.1 güncellemesi:** aşağıdaki eksiklerin çoğu kapatıldı. Kapananlar:
+> - ortak hız;
+> - filo DUR / DURUŞ / AYIR / BİRLEŞTİR / keşif / kolonileştir;
+> - tersane, yıkım, iptal, odak;
+> - gerçek anlaşma penceresi ve gelen kutusu;
+> - federasyon / vasallık pencereleri;
+> - ekonomi geçmişi.
+>
+> Ayrıca:
+> - MP çubuğu bir sıra yukarı alındı (hız bildirimi şeridi);
+> - STARS penceresi açıkken ayna bekletilir.
+>
+> Güncel durum: `MULTIPLAYER-MP61-SONUC.md`.
+
 ## 6. Bu fazda eşitlenmeyenler (MP.6.x)
 
 - **Gerçek diplomasi/federasyon/vasallık/casusluk/pazar/ticaret pencereleri misafirde açılır ama eylemleri engellidir.**

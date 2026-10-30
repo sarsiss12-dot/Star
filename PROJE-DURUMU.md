@@ -6,14 +6,32 @@ Son güncelleme: 2026-10-30. Depo `sarsiss12-dot/Star`.
 
 | | `main` (birleşmiş) | Bu dal (PR) |
 |---|---|---|
-| Faz | 96H.10 + MP.0 – MP.4 (+ 96H.11 araştırma arşivi) | MP.5 (PR #17, açık) + MP.6 (misafirde gerçek STARS arayüzü; kısmi eşitlik) |
+| Faz | 96H.10 + MP.0 – MP.4 (+ 96H.11 araştırma arşivi) | MP.5 (PR #17, açık) + MP.6 (PR #18, açık) + MP.6.1 (ortak hız; gerçek pencerelerden filo/koloni/diplomasi/federasyon) |
 | Build / PWA | `96h10` / `stars-v96h10` | değişmedi |
 | Save | v8 | v8 (şema değişmedi) |
 | Oyun ZIP | `releases/stars-faz96h10.zip` (SHA-256 `78e76d1627b8ec1b990849b2242835f78667f110e1d6f17021760183ee7be6d0`) | yeni ZIP yok |
 | Taban HEAD | `4296ad2d43fedce6264020b3761f50f1839fd836` | — |
 | Değişen runtime | — | yok (19 dosya 96H.10 ile aynı) |
 
-96H.6.2, 96H.6.3, 96H.7, 96H.11 ve MP.0 – MP.6 oyun yayımlamadı.
+96H.6.2, 96H.6.3, 96H.7, 96H.11 ve MP.0 – MP.6.1 oyun yayımlamadı.
+
+## MP.6.1 — gerçek arayüzde işlevsel eşitlik + ortak oyun hızı (geliştirme sürümü)
+
+Ayrıntı: `MULTIPLAYER-MP61-SONUC.md`. Kod: `research/mp0/mp-core.js`, `research/mp6/`, `research/mp61/client/`, `research/mp1/client/`. Testler: `tests/mp61_core_test.js`, `tests/browser-mp61.cjs`.
+
+- **Ortak hız:** her oyuncu kendi STARS hız düğmesiyle; host tek yetkili kaynak; herkesin hız çubuğu aynı gerçek hızı gösterir.
+  - Hız çubuğunun hemen üstünde değiştirenin adıyla ~3 s'lik bildirim.
+  - Spam koruması; dönen oyuncu güncel hızı alır.
+- **Gerçek düğmelerden çalışan (misafir):**
+  - filo: DUR, DURUŞ, AYIR, BİRLEŞTİR, otomatik keşif, KOLONİ KUR;
+  - koloni: tersane, odak, yıkım (onaylı), kuyruk iptali;
+  - anlaşma penceresi (kaynak + barış);
+  - gerçek gelen kutusundan kabul / ret / karşı teklif (insan ve AI teklifleri);
+  - federasyon oyu.
+- **Federasyon / vasallık pencereleri:** MP.3.1 komutlarına bağlandı (tarayıcıda yalnız oy denendi).
+- **Aynaya eklenen:** taraf olunan vasallık kayıtları (MP.6 vasal misafir hatası düzeltildi), üyeye federasyon oyu, kendi ekonomi geçmişi.
+- **Pencere açıkken:** ayna bekletilir; üstte bağlantı + hız durum hapı; MP çubuğu dokunulamaz.
+- **Hâlâ engelli:** savaş ilanı, ittifak / pakt, hediye / ambargo, casusluk, pazar, elçi, sevkiyat, terraform; haberler aynada yok (MP.6.2).
 
 ## MP.6 — misafirde gerçek STARS arayüzü (geliştirme sürümü, kısmi eşitlik)
 

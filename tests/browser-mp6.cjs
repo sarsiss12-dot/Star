@@ -140,7 +140,7 @@ let relay,base,bH,bB,bC,bR,H,Bp,Cp,R,code;
     await wait(Bp,x=>document.querySelector('[data-a="build"][data-x="'+x+'"]'),col.s+':'+col.i+':'+col.k);
     await Bp.locator('[data-a="build"][data-x="'+col.s+':'+col.i+':'+col.k+'"]').first().tap();
     await wait(H,c=>(G.sys[c.s].planets[c.p].col.q||[]).length>c.q,col);await synced(H,Bp);
-    assert.equal(await Bp.evaluate(c=>(G.sys[c.s].planets[c.p].col.q||[]).some(w=>w.key===c.k),col),true,'queue visible on the guest');await shot(Bp,'b-build-queued');
+    await wait(Bp,c=>(G.sys[c.s].planets[c.p].col.q||[]).some(w=>w.key===c.k),col);   // kuyruk misafirde görünür (ayna gecikmesi en çok ~0,7 s)await shot(Bp,'b-build-queued');
     /* filo rotası */
     const mv=await H.evaluate(b=>{const E=G.emps[b];for(const f of G.fleets.filter(f=>f.e===b&&!f.mv&&!f.path.length&&f.ships.length))for(const s of G.sys){if(s.id===f.sys)continue;
         const p=findPath(f.sys,s.id,E);if(p&&p.length>=1&&p.length<=2&&pathAllowed(E,f,p,f.sys))return {f:f.id,from:f.sys,t:s.id};}return null;},B);
