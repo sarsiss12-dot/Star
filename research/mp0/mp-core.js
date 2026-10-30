@@ -306,6 +306,29 @@ function createHost(opts){
     if(pl.owner!==e.id)return {err:'not-owner'};
     return {sys,pl};
   }
+  /* MP.6.1: başkasının ya da olmayan filo aynı kodu alır (filo kimliği yoklanamaz) */
+  function ownFleet(e,c){const f=G.fleets.find(x=>x.id===c.fleet);return f&&f.e===e.id&&f.ships&&f.ships.length?{f}:{err:'not-owner'};}
+  /* tek oyunculu mergeFleets: aynı sistemde, sevkiyatsız, aynı gruptan (savaş / sivil) kendi filoları */
+  function mergeMates(e,f){const g=fleetGroup(f);return G.fleets.filter(x=>x!==f&&x.e===e.id&&x.sys===f.sys&&x.ships.length&&!hasShipment(x)&&fleetGroup(x)===g);}
+  /* ═══ MP.6.1 ortak oyun hızı ═══
+     Tek yetkili kaynak host'un G.speed'idir. Bir oyuncunun hız komutu (ya da host'un kendi hız düğmesi, host.local) motorun
+     hız işlevini çağırır ve herkese 'speed' iletisi gider. Host'un kendi iç duraklatmaları (pencere, arka plan, ağ)
+     speedSync ile yayınlanır. Spam koruması: oyuncu başına en az SPEED_GAP ms ara, SPEED_WINDOW içinde en çok SPEED_BURST. */
+  const SPEED_MAX=4,SPEED_GAP=700,SPEED_WINDOW=20000,SPEED_BURST=8,speedRate=new Map();let curActor=null,lastSpeed=null;
+  const setSpeed=v=>{if(opts.setSpeed)opts.setSpeed(v);else G.speed=v;};
+  /* Hızı değiştirenin adı alıcının bakışından: kendi devleti ya da temaslı devletse devlet adı, değilse lobideki oyuncu adı
+     (lobi adları herkese açıktır; temas kurulmamış devletin adı gitmez). Ad istemciden değil oturumdan gelir. */
+  function speedWho(viewerEmp,byEmp,byPlayer){
+    if(byEmp===null||byEmp===undefined)return null;const o=G.emps[byEmp],v=G.emps[viewerEmp];
+    if(o&&(viewerEmp===byEmp||v&&v.contact&&v.contact[byEmp]))return String(o.name).slice(0,60);
+    const p=byPlayer&&S.players.get(byPlayer);return p?String(p.name).slice(0,24):'Bir oyuncu';}
+  function speedOut(byEmp,byPlayer,auto,reason){
+    const spd=G.speed|0;lastSpeed=spd;stats.speedChanges=(stats.speedChanges||0)+1;
+    for(const p of S.players.values()){if(p.playerId==='host'){if(opts.onSpeed)opts.onSpeed({spd,who:speedWho(hostEmpireId,byEmp,byPlayer),auto:!!auto,self:byEmp===hostEmpireId&&!auto,reason:reason||null});continue;}
+      if(!p.conn)continue;out(p.conn,{v:PROTOCOL,type:'speed',spd,who:speedWho(p.empireId,byEmp,byPlayer),auto:auto?1:0,self:byEmp===p.empireId&&!auto?1:0,...(reason?{reason}:{})});}
+  }
+  /* host'un iç hız değişiklikleri (pencere açınca duraklatma, arka plan, ağ, kayıttan devam): değiştiyse yayınla */
+  function speedSync(reason){if(lastSpeed===null){lastSpeed=G.speed|0;return false;}if((G.speed|0)===lastSpeed)return false;speedOut(hostEmpireId,'host',true,reason);return true;}
   const COMMANDS=table({
     build:{keys:['kind','sys','planet','key'],
       check:c=>typeof c.key==='string'&&/^[a-z_]{2,16}$/.test(c.key)&&has(BUILDINGS,c.key),
@@ -355,6 +378,62 @@ function createHost(opts){
       why:(e,at,c)=>researchMode(e)===c.mode?'same':null,
       roots:e=>[e.research||{},e.rq,e.rp],
       apply:(e,at,c)=>setResearchMode(e,c.mode)},
+    /* ═══ MP.6.1 — gerçek STARS filo/koloni düğmelerinin host tarafı. Her komut tek oyunculu düğmenin çağırdığı motor
+       işlevini (queueShip, queueDemolish, splitType, newFleet, cancelExploration, shipmentAction, doColonize, claimColony,
+       orderMove) ya da aynı satırları, YALNIZ komutu verenin kendi devleti için yürütür. Kimlik bağlantıdan gelir. */
+    ship:{say:'actor',keys:['kind','sys','key'],
+      check:c=>int(c.sys,0,G.sys.length-1)&&typeof c.key==='string'&&/^[a-z_]{2,16}$/.test(c.key)&&has(SHIPS,c.key),
+      locate(e,c){const sys=G.sys[c.sys];return sys.owner===e.id?{sys}:{err:'not-owner'};},
+      why(e,{sys},c){const a=shipBuildAccess(e,c.key);if(!a.ok)return {code:'access',detail:[String(a.why||'').slice(0,160)]};
+        if(!hasYard(sys))return 'no-yard';if(sys.yardLock&&sys.yardLock>(G.memAge||0))return 'yard-locked';
+        const cost=shipCost(e,c.key);for(const r in cost)if(e.res[r]<cost[r])return 'resources';return null;},
+      roots:(e,{sys})=>[e.res,sys],
+      apply:(e,{sys},c)=>queueShip(e,sys,c.key)},
+    demolish:{say:'actor',keys:['kind','sys','planet','key'],
+      check:c=>typeof c.key==='string'&&/^[a-z_]{2,16}$/.test(c.key)&&has(BUILDINGS,c.key),
+      why(e,{pl},c){const col=pl.col,n=(col.b[c.key]||0)-(col.q||[]).filter(w=>w.dem&&w.key===c.key).length;return n<=0||c.key==='santral'&&n<=1?'none':null;},
+      roots:(e,{pl})=>[pl.col],
+      apply:(e,{sys,pl},c)=>queueDemolish(e,sys,pl,c.key)},
+    stop:{say:'actor',keys:['kind','fleet'],check:c=>int(c.fleet,0,2147483647),locate:ownFleet,why:()=>null,
+      roots:(e,{f})=>[f,...(G.construction?[G.construction]:[])],
+      apply(e,{f}){cancelExploration(f);if(hasShipment(f)){if(!shipmentAction(e,f,'cancel').ok)return false;}else f.path=[];f.ord=null;return true;}},
+    stance:{say:'actor',keys:['kind','fleet'],check:c=>int(c.fleet,0,2147483647),locate:ownFleet,why:()=>null,roots:(e,{f})=>[f],
+      apply(e,{f}){f.stance=f.stance==='agresif'?'savunma':'agresif';return true;}},
+    merge:{say:'actor',keys:['kind','fleet'],check:c=>int(c.fleet,0,2147483647),locate:ownFleet,
+      why(e,{f}){if(f.sys<0)return 'no-position';if(hasShipment(f))return 'shipment';return mergeMates(e,f).length?null:'none';},
+      roots:(e,{f})=>[f],
+      apply(e,{f}){const others=mergeMates(e,f);others.forEach(o=>{f.ships.push(...o.ships);if(o.ord&&!f.ord)f.ord=o.ord;});G.fleets=G.fleets.filter(x=>x===f||!others.includes(x));return true;}},
+    split:{say:'actor',keys:['kind','fleet'],check:c=>int(c.fleet,0,2147483647),locate:ownFleet,
+      why:(e,{f})=>f.sys<0?'no-position':f.ships.length<2?'too-small':null,roots:(e,{f})=>[f],
+      apply(e,{f}){const half=f.ships.splice(0,Math.floor(f.ships.length/2)),nf=newFleet(e,f.sys,half.map(s=>({c:s.c})));half.forEach((s,i)=>nf.ships[i].h=s.h);return true;}},
+    splitType:{say:'actor',keys:['kind','fleet','cls','all'],check:c=>int(c.fleet,0,2147483647)&&typeof c.cls==='string'&&has(SHIPS,c.cls)&&typeof c.all==='boolean',locate:ownFleet,
+      why:(e,{f},c)=>f.sys<0?'no-position':f.ships.some(s=>s.c===c.cls)?null:'none',roots:(e,{f})=>[f],
+      apply:(e,{f},c)=>!!splitType(e,f,c.cls,c.all?f.ships.filter(s=>s.c===c.cls).length:1)},
+    /* otomatik keşif: tek oyunculu 'autoex' / 'autoAll' satırları (bilim gemisi) */
+    explore:{say:'actor',keys:['kind','fleet'],check:c=>int(c.fleet,0,2147483647),locate:ownFleet,why:(e,{f})=>fleetHasRole(f,'bilim')?null:'role',roots:(e,{f})=>[f],
+      apply(e,{f}){delete f.explore;f.auto=!f.auto;if(!f.auto){f.path=[];delete f.stalled;delete f._stallSaid;}return true;}},
+    exploreAll:{say:'actor',keys:['kind'],check:()=>true,locate:()=>({}),why:e=>G.fleets.some(f=>f.e===e.id&&fleetHasRole(f,'bilim'))?null:'none',roots:()=>[],
+      apply(e){const sci=G.fleets.filter(f=>f.e===e.id&&fleetHasRole(f,'bilim')),allOn=sci.every(f=>f.auto);
+        for(const f of sci){delete f.explore;f.auto=!allOn;if(allOn){f.path=[];delete f.stalled;delete f._stallSaid;if(f.ord&&f.ord.t!=='kol')f.ord=null;}}return true;}},
+    /* kolonileştir: tek oyunculu doColonizeOrder (seçili / oradaki / en yakın koloni gemisi; hedef kilidi; tek gemi harcanır) */
+    colonize:{say:'actor',keys:['kind','sys','planet','fleet'],check:c=>int(c.sys,0,G.sys.length-1)&&int(c.planet,0,63)&&(c.fleet===undefined||int(c.fleet,0,2147483647)),
+      locate(e,c){const sys=G.sys[c.sys],pl=sys.planets.find(p=>p.i===c.planet);if(!pl)return {err:'bad-target'};
+        const pool=G.fleets.filter(f=>f.e===e.id&&f.ships.length&&fleetHasRole(f,'koloni'));let f=c.fleet!==undefined?pool.find(x=>x.id===c.fleet)||null:null;
+        if(!f)f=pool.find(x=>x.sys===sys.id)||null;
+        if(!f&&pool.length)f=pool.slice().sort((a,b)=>dist(a.sys>=0?G.sys[a.sys]:{x:a.x,y:a.y},sys)-dist(b.sys>=0?G.sys[b.sys]:{x:b.x,y:b.y},sys))[0];
+        return f?{sys,pl,f}:{err:'no-colony-ship'};},
+      why(e,{sys,pl,f}){if(f.sys===sys.id)return canColonize(e,sys,pl)?null:'cannot';if(colonyClaimedBy(pl,f.id))return 'claimed';
+        const from=f.mv?f.mv.to:f.sys;return from>=0&&findPath(from,sys.id,e)?null:'no-route';},
+      roots:(e,{sys,pl,f})=>[f,pl,sys,e],
+      apply(e,{sys,pl,f}){
+        if(f.sys===sys.id){doColonize(e,sys,pl);const k=f.ships.findIndex(s=>s.c==='kol');if(k>=0)f.ships.splice(k,1);if(!f.ships.length)G.fleets=G.fleets.filter(x=>x!==f);return true;}
+        claimColony(f,sys,pl.i);if(!orderMove(f,sys.id))return false;f.ord={t:'kol',s:sys.id,p:pl.i};return true;}},
+    /* MP.6.1 — ortak oyun hızı: tek yetkili host. Değişiklik herkese yayınlanır (speedOut); aynı hız 'same' (bildirim yok). */
+    speed:{keys:['kind','value'],check:c=>int(c.value,0,SPEED_MAX),locate:()=>({}),
+      why(e,at,c){if((G.speed|0)===c.value)return 'same';const t=now(),a=(speedRate.get(e.id)||[]).filter(x=>t-x<SPEED_WINDOW);
+        if(a.length>=SPEED_BURST||a.length&&t-a[a.length-1]<SPEED_GAP)return 'rate-limited';return null;},
+      roots:()=>[],
+      apply(e,at,c){const t=now();speedRate.set(e.id,[...(speedRate.get(e.id)||[]).filter(x=>t-x<SPEED_WINDOW),t]);setSpeed(c.value);speedOut(e.id,curActor,false);return true;}},
     /* ═══ MP.3 — diplomasi. Yeni motor yok: dealQuote / executeDeal / aiRespond. Teklif kaydı Save8 dışında,
        oturumdadır (dipView yalnız taraflara gönderir). Taraf olmayan teklif kimliği "yok" ile aynı kodu alır. */
     offer:{keys:['kind','to','give','want'],
@@ -677,7 +756,12 @@ function createHost(opts){
     const why=def.why(e,at,c);if(why)return {ok:false,code:'rules:'+(why.code||why),detail:why.detail};
     if(def.ro)return {ok:true,ro:true,extra:def.apply(e,at,c).extra};   // salt okuma: durum değişmez, dergiye girmez
     const records=txCaptureGraph(def.roots(e,at)),rng=RND_STATE;let res;
+    /* MP.6.1: motorun "oyuncu" bildirimleri (ör. doColonize → say, !e.ai) uzak insanın komutunda host günlüğüne değil o
+       oyuncunun kendi bildirim listesine gider (MP.2 researchTick korumasıyla aynı yol). */
+    const s0=typeof say==='function'?say:null,routeSay=s0&&def.say==='actor'&&remoteHuman(e);curActor=playerId;   // yalnız MP.6.1 komutları: eski komutların Save8 baytları aynı kalır
+    if(routeSay)say=function(m,cl){note(e.id,m,cl);};
     try{res=def.apply(e,at,c);}catch(err){txRestoreGraph(records);rndSeed(rng);return {ok:false,code:'error'};}
+    finally{if(routeSay)say=s0;curActor=null;}
     if(!(res===true||(res&&res.ok))){txRestoreGraph(records);rndSeed(rng);   // MP.3.1: motorun kendi gerekçesi (ör. vassalOffer) ayrıntı olarak döner
       return res&&typeof res.why==='string'?{ok:false,code:'rules:engine',detail:[res.why.slice(0,200)]}:{ok:false,code:'rules'};}
     stats.applied++;S.worldRevision++;S.journal.push({rev:S.worldRevision,day:G.day,playerId,empireId,cmd:JSON.parse(JSON.stringify(c))});
@@ -720,6 +804,7 @@ function createHost(opts){
       p.conn=conn;p.lastView=null;p.lastMirror=null;p.lastSeen=now();S.conns.set(conn,p.playerId);
       out(conn,{v:PROTOCOL,type:'assign',room:S.roomId,saveId:S.saveId,hostId:S.hostId,playerId:p.playerId,token:p.token,empireId:p.empireId,lastSeq:p.lastSeq,rev:S.worldRevision});
       if(p.empireId!==null)publishTo(p,S.worldRevision);
+      if(!L||['ingame','paused'].includes(L.phase))out(conn,{v:PROTOCOL,type:'speed',spd:G.speed|0,silent:1});   // MP.6.1: dönen oyuncu güncel ortak hızı alır (bildirimsiz)
       if(p.visitor)out(conn,{v:PROTOCOL,type:'resume',saveId:S.saveId});   // MP.4: cihazında bu kayıt için jeton varsa misafir onu gönderir
       if(L)broadcastLobby();
       if(opts.onPlayer)opts.onPlayer(p.playerId,'hello');
@@ -981,7 +1066,7 @@ function createHost(opts){
   }
   function closeRoom(){if(!L)return {ok:false};L.phase='closed';broadcastLobby();for(const p of guests())if(p.conn){kick(p.conn,'room-closed');S.conns.delete(p.conn);p.conn=null;}return {ok:true};}
   if(opts.resume){if(!L)throw Error('MP.4: kayıttan devam lobi kipi ister');restoreSession(opts.resume);}
-  return {onMessage,onLeave,onJoin(){},publish,publishTo,assign,release,installGuards,meta,restore,viewFor,local,dip:D,dipView,polView:e=>pure(()=>polView(e)),
+  return {onMessage,onLeave,onJoin(){},publish,publishTo,speedSync,assign,release,installGuards,meta,restore,viewFor,local,dip:D,dipView,polView:e=>pure(()=>polView(e)),
     snapshot,resumeStart,recoverSeat,
     isHuman:humanEmpire,isRemoteHuman:remoteHuman,state:S,stats,COMMANDS,HANDLERS,clock,fnv,observeHumans,
     configure,setCapacity,claimFor,setHostTab,start,canStart,kick:kickPlayer,close:closeRoom,lobbyView:()=>L&&lobbyView(S.players.get('host')),lobby:L,

@@ -1,0 +1,616 @@
+{
+ "results": [
+  {
+   "name": "kurulum: host oda açar; B ve C davet bağlantısıyla (/mp/play) katılır; oyun başlar; misafirler gerçek STARS arayüzünde; fikstür: temaslar + federasyon (2, B)",
+   "status": "PASS",
+   "ms": 6084
+  },
+  {
+   "name": "ortak hız: B kendi STARS hız düğmesine dokunur → host hızı değişir, üç ekranın hız çubuğu aynı gerçek hızı gösterir; bildirim hız çubuğunun hemen üstünde, değiştirenin adıyla, ~3 s sonra solar; dokunmayı engellemez; aynı hız bildirim üretmez",
+   "status": "PASS",
+   "ms": 9623
+  },
+  {
+   "name": "ortak hız: eşzamanlı istekler host'un işleme sırasıyla; host kendi düğmesiyle de değiştirir; host penceresi açınca herkes \"duraklatıldı\" görür; spam koruması",
+   "status": "PASS",
+   "ms": 8311
+  },
+  {
+   "name": "ortak hız: kopan misafir döndüğünde güncel hızı (bildirimsiz) alır",
+   "status": "PASS",
+   "ms": 3114
+  },
+  {
+   "name": "filo (misafir B, gerçek STARS filo paneli): DURUŞ, AYIR, BİRLEŞTİR, otomatik keşif ve seçili filonun DUR düğmesi host motorunda; başka devletin filosu reddedilir",
+   "status": "PASS",
+   "ms": 3795
+  },
+  {
+   "name": "koloni ve tersane (misafir B, gerçek sistem paneli): gemi üretimi, odak, bina yıkımı (gerçek onay penceresi), kuyruk iptali → host motoru; pencere açıkken ayna bekletilir, durum hapı görünür, MP çubuğu dokunulamaz",
+   "status": "PASS",
+   "ms": 5994
+  },
+  {
+   "name": "kolonileştir (misafir B, gerçek gezegen düğmesi KOLONİ KUR): host motoru koloni gemisini yollar ya da koloniyi kurar; bildirim B'nin kendi listesine",
+   "status": "PASS",
+   "ms": 533
+  },
+  {
+   "name": "diplomasi (gerçek STARS anlaşma penceresi + gerçek gelen kutusu): B, C'ye kaynak teklifi sunar (TEKLİFİ SUN); C gelen kutusundan kabul eder → host tam bir kez uygular; karşı teklif ve ret de gerçek düğmelerden",
+   "status": "PASS",
+   "ms": 15858
+  },
+  {
+   "name": "federasyon (gerçek gelen kutusu): AI başkanın yasa önerisi B'nin gerçek gelen kutusuna \"Federasyon oylaması\" olarak düşer; B EVET OYU VER → host castFedVote; üye olmayan C'de kayıt yok",
+   "status": "PASS",
+   "ms": 2842
+  },
+  {
+   "name": "yatay ekran ve çakışma: 844×390, 915×412, 960×540'ta MP çubuğu, hız bildirimi, hız çubuğu, sol araçlar ve kenar çubuğu düğmesi birbirini örtmez; dikeyde \"çevir\" uyarısı her şeyin üstünde, hap ve bildirim gizli",
+   "status": "PASS",
+   "ms": 8202
+  },
+  {
+   "name": "gizlilik: B'nin aynasında C'nin gelen kutusu/teklifi yok; ekonomi geçmişi yalnız kendi satırı; federasyon oylaması üye olmayan C'ye gitmez; misafirin yerel G'si host'u etkilemez",
+   "status": "PASS",
+   "ms": 570
+  },
+  {
+   "name": "performans: ayna (tam/fark) boyutu, misafir yeniden kurulumu, pencere açıkken bekletme, dokunuş → host uygulama gecikmesi, panel açılma süresi; 45 / 60 / 100 sistem (host + 2 misafir)",
+   "status": "PASS",
+   "ms": 1481
+  },
+  {
+   "name": "sayfa hataları yok (host, B, C)",
+   "status": "PASS",
+   "ms": 0
+  }
+ ],
+ "metrics": {
+  "speed": {
+   "texts": {
+    "B": "Hızı 2× yaptın",
+    "C": "Altın Othrys Konfederasyonu hızı 2× yaptı",
+    "host": "Altın Othrys Konfederasyonu hızı 2× yaptı"
+   },
+   "concurrent": {
+    "final": 3,
+    "journal": null
+   },
+   "afterHostWindow": 3,
+   "spam": [
+    "rules:same",
+    null,
+    "rules:rate-limited"
+   ]
+  },
+  "layout": {
+   "notice-B": {
+    "notice": {
+     "x": 6,
+     "y": 314.40625,
+     "w": 101.6875,
+     "h": 27.59375,
+     "r": 107.6875,
+     "b": 342
+    },
+    "timepod": {
+     "x": 6,
+     "y": 346,
+     "w": 245,
+     "h": 38,
+     "r": 251,
+     "b": 384
+    },
+    "gap": 4
+   },
+   "notice-C": {
+    "notice": {
+     "x": 6,
+     "y": 464.40625,
+     "w": 263.640625,
+     "h": 27.59375,
+     "r": 269.640625,
+     "b": 492
+    },
+    "timepod": {
+     "x": 6,
+     "y": 496,
+     "w": 245,
+     "h": 38,
+     "r": 251,
+     "b": 534
+    },
+    "gap": 4
+   },
+   "notice-host": {
+    "notice": {
+     "x": 6,
+     "y": 336.40625,
+     "w": 263.640625,
+     "h": 27.59375,
+     "r": 269.640625,
+     "b": 364
+    },
+    "timepod": {
+     "x": 6,
+     "y": 368,
+     "w": 245,
+     "h": 38,
+     "r": 251,
+     "b": 406
+    },
+    "gap": 4
+   },
+   "guest": {
+    "844x390": {
+     "bar": {
+      "x": 6,
+      "y": 250,
+      "w": 377.671875,
+      "h": 54,
+      "r": 383.671875,
+      "b": 304
+     },
+     "note": {
+      "x": 6,
+      "y": 314.40625,
+      "w": 187.125,
+      "h": 27.59375,
+      "r": 193.125,
+      "b": 342
+     },
+     "tp": {
+      "x": 6,
+      "y": 346,
+      "w": 245,
+      "h": 38,
+      "r": 251,
+      "b": 384
+     },
+     "tools": {
+      "x": 6,
+      "y": 36,
+      "w": 27,
+      "h": 189,
+      "r": 33,
+      "b": 225
+     },
+     "sb": {
+      "x": 520,
+      "y": 38,
+      "w": 22,
+      "h": 44,
+      "r": 542,
+      "b": 82
+     }
+    },
+    "915x412": {
+     "bar": {
+      "x": 6,
+      "y": 272,
+      "w": 377.671875,
+      "h": 54,
+      "r": 383.671875,
+      "b": 326
+     },
+     "note": {
+      "x": 6,
+      "y": 336.40625,
+      "w": 187.125,
+      "h": 27.59375,
+      "r": 193.125,
+      "b": 364
+     },
+     "tp": {
+      "x": 6,
+      "y": 368,
+      "w": 245,
+      "h": 38,
+      "r": 251,
+      "b": 406
+     },
+     "tools": {
+      "x": 6,
+      "y": 40,
+      "w": 32,
+      "h": 229,
+      "r": 38,
+      "b": 269
+     },
+     "sb": {
+      "x": 591,
+      "y": 42,
+      "w": 22,
+      "h": 44,
+      "r": 613,
+      "b": 86
+     }
+    },
+    "960x540": {
+     "bar": {
+      "x": 6,
+      "y": 400,
+      "w": 377.671875,
+      "h": 54,
+      "r": 383.671875,
+      "b": 454
+     },
+     "note": {
+      "x": 6,
+      "y": 464.40625,
+      "w": 187.125,
+      "h": 27.59375,
+      "r": 193.125,
+      "b": 492
+     },
+     "tp": {
+      "x": 6,
+      "y": 496,
+      "w": 245,
+      "h": 38,
+      "r": 251,
+      "b": 534
+     },
+     "tools": {
+      "x": 6,
+      "y": 40,
+      "w": 32,
+      "h": 229,
+      "r": 38,
+      "b": 269
+     },
+     "sb": {
+      "x": 636,
+      "y": 42,
+      "w": 22,
+      "h": 44,
+      "r": 658,
+      "b": 86
+     }
+    },
+    "390x844": {
+     "rot": true,
+     "note": "none",
+     "pill": "none",
+     "top": "rotate"
+    }
+   },
+   "host": {
+    "844x390": {
+     "bar": {
+      "x": 6,
+      "y": 250,
+      "w": 405.15625,
+      "h": 54,
+      "r": 411.15625,
+      "b": 304
+     },
+     "note": {
+      "x": 6,
+      "y": 314.40625,
+      "w": 187.125,
+      "h": 27.59375,
+      "r": 193.125,
+      "b": 342
+     },
+     "tp": {
+      "x": 6,
+      "y": 346,
+      "w": 245,
+      "h": 38,
+      "r": 251,
+      "b": 384
+     },
+     "tools": {
+      "x": 6,
+      "y": 36,
+      "w": 27,
+      "h": 189,
+      "r": 33,
+      "b": 225
+     },
+     "sb": {
+      "x": 472,
+      "y": 38,
+      "w": 22,
+      "h": 44,
+      "r": 494,
+      "b": 82
+     }
+    },
+    "915x412": {
+     "bar": {
+      "x": 6,
+      "y": 272,
+      "w": 405.15625,
+      "h": 54,
+      "r": 411.15625,
+      "b": 326
+     },
+     "note": {
+      "x": 6,
+      "y": 336.40625,
+      "w": 187.125,
+      "h": 27.59375,
+      "r": 193.125,
+      "b": 364
+     },
+     "tp": {
+      "x": 6,
+      "y": 368,
+      "w": 245,
+      "h": 38,
+      "r": 251,
+      "b": 406
+     },
+     "tools": {
+      "x": 6,
+      "y": 40,
+      "w": 32,
+      "h": 229,
+      "r": 38,
+      "b": 269
+     },
+     "sb": {
+      "x": 543,
+      "y": 42,
+      "w": 22,
+      "h": 44,
+      "r": 565,
+      "b": 86
+     }
+    },
+    "960x540": {
+     "bar": {
+      "x": 6,
+      "y": 400,
+      "w": 405.15625,
+      "h": 54,
+      "r": 411.15625,
+      "b": 454
+     },
+     "note": {
+      "x": 6,
+      "y": 464.40625,
+      "w": 187.125,
+      "h": 27.59375,
+      "r": 193.125,
+      "b": 492
+     },
+     "tp": {
+      "x": 6,
+      "y": 496,
+      "w": 245,
+      "h": 38,
+      "r": 251,
+      "b": 534
+     },
+     "tools": {
+      "x": 6,
+      "y": 40,
+      "w": 32,
+      "h": 229,
+      "r": 38,
+      "b": 269
+     },
+     "sb": {
+      "x": 588,
+      "y": 42,
+      "w": 22,
+      "h": 44,
+      "r": 610,
+      "b": 86
+     }
+    },
+    "390x844": {
+     "rot": true,
+     "note": "none",
+     "pill": "none",
+     "top": "rotate"
+    }
+   }
+  },
+  "perf": {
+   "guestBuildMs": {
+    "B": [
+     14.8,
+     13,
+     14.4,
+     24.2,
+     8.1,
+     7,
+     13.1,
+     12,
+     7,
+     12.6,
+     8.5,
+     7.4,
+     15,
+     11.9,
+     6.5,
+     7.4,
+     15.4,
+     19.4,
+     7.5,
+     20.2
+    ],
+    "C": [
+     15.7,
+     17.7,
+     6.5,
+     6.9,
+     7.5,
+     9,
+     17.1,
+     8.5,
+     8.4,
+     10.7,
+     18.9,
+     9.6,
+     7.5,
+     6.8,
+     9.6,
+     13.1,
+     15.1,
+     8,
+     8.5,
+     13.6
+    ]
+   },
+   "held": {
+    "B": 8
+   },
+   "hostMirrorBytes": [
+    359,
+    592,
+    80,
+    4307,
+    1067,
+    1391,
+    490,
+    1162,
+    1074,
+    338,
+    138,
+    3768,
+    3603,
+    278,
+    479,
+    351,
+    4321,
+    687,
+    1672,
+    489
+   ],
+   "panelOpenMs": [
+    367,
+    318,
+    306
+   ],
+   "sizes": {
+    "s45": {
+     "systems": 45,
+     "fullKB": 16.6,
+     "fullKB2": 16.7,
+     "delta10dKB": 0.3,
+     "buildMs": 3,
+     "guestLoadMs": 10.2,
+     "ok": true
+    },
+    "s60": {
+     "systems": 60,
+     "fullKB": 20.6,
+     "fullKB2": 20.6,
+     "delta10dKB": 1,
+     "buildMs": 0.8,
+     "guestLoadMs": 7.7,
+     "ok": true
+    },
+    "s100": {
+     "systems": 100,
+     "fullKB": 30.3,
+     "fullKB2": 30.3,
+     "delta10dKB": 0.3,
+     "buildMs": 1.3,
+     "guestLoadMs": 9.7,
+     "ok": true
+    }
+   },
+   "cmdLatencyMs": {
+    "speed": [
+     318
+    ],
+    "stance": [
+     491
+    ],
+    "split": [
+     606
+    ],
+    "merge": [
+     455
+    ],
+    "stop": [
+     552
+    ],
+    "explore": [
+     382
+    ],
+    "ship": [
+     420
+    ],
+    "focus": [
+     349
+    ],
+    "demolish": [
+     418
+    ],
+    "cancel": [
+     335
+    ],
+    "colonize": [
+     364
+    ],
+    "accept": [
+     487
+    ],
+    "reject": [
+     320
+    ],
+    "fedVote": [
+     294
+    ]
+   }
+  },
+  "cmds": {
+   "speed": [
+    318
+   ],
+   "stance": [
+    491
+   ],
+   "split": [
+    606
+   ],
+   "merge": [
+    455
+   ],
+   "stop": [
+    552
+   ],
+   "explore": [
+    382
+   ],
+   "ship": [
+    420
+   ],
+   "focus": [
+    349
+   ],
+   "demolish": [
+    418
+   ],
+   "cancel": [
+    335
+   ],
+   "colonize": [
+    364
+   ],
+   "accept": [
+    487
+   ],
+   "reject": [
+    320
+   ],
+   "fedVote": [
+    294
+   ]
+  },
+  "notes": [
+   "teklif taslağı [[{\"t\":\"res\",\"r\":\"min\",\"v\":10}],[{\"t\":\"res\",\"r\":\"ala\",\"v\":10}]]",
+   "B gelen kutusundaki MP teklifleri (insan + AI): [{\"id\":2,\"mp\":1,\"title\":\"Teklif — Qadesh ve Bağlı Dünyalar\"},{\"id\":3,\"mp\":2,\"title\":\"Teklif — Yüce Myrrh Yüksek Hâkimiyeti\"},{\"id\":4,\"mp\":5,\"title\":\"Karşı teklif — Thalor ve Bağlı Dünyalar\"}]",
+   "federasyon oyu: {\"open\":false,\"yes\":null,\"last\":{\"passed\":true,\"yes\":2}}"
+  ]
+ },
+ "errors": []
+}

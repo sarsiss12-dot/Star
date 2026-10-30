@@ -45,7 +45,7 @@ const memMB=name=>{const m=dk('stats','--no-stream','--format','{{.MemUsage}}',n
       const t0=Date.now();dk('build','-q','-f','research/mp1/deploy/Dockerfile','-t',IMG,root);metrics.buildMs=Date.now()-t0;
       const files=dk('run','--rm','--entrypoint','sh',IMG,'-c','cd /app && find . -type f | sort').split('\n').map(f=>f.replace(/^\.\//,''));
       const man=JSON.parse(fs.readFileSync(path.join(root,'RELEASE-MANIFEST.json')));for(const f of Object.keys(man.files))assert(files.includes(f),f);
-      assert.equal(files.filter(f=>!f.startsWith('research/')).length,20);assert(files.every(f=>/^research\/mp(0|1|2|3|31|4|6)\//.test(f)||!f.includes('/')),files.join());
+      assert.equal(files.filter(f=>!f.startsWith('research/')).length,20);assert(files.every(f=>/^research\/mp(0|1|2|3|31|4|6|61)\//.test(f)||!f.includes('/')),files.join());
       assert(!files.some(f=>/test|\.zip$|\.pem$|\.env$|node_modules|\.git/.test(f)));
       for(const f of Object.keys(man.files))assert.equal(dk('run','--rm','--entrypoint','sha256sum',IMG,'/app/'+f).split(' ')[0],man.files[f].sha256??man.files[f],'byte-identical '+f);
       assert.equal(dk('run','--rm','--entrypoint','id',IMG,'-un'),'node');metrics.imageFiles=files.length;metrics.imageSize=dk('image','inspect',IMG,'--format','{{.Size}}');

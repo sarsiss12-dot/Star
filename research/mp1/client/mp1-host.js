@@ -145,8 +145,12 @@ function makeHost(){
     onLobby:L=>{API.lobby=L;if(API.screen==='lobby')render();else if(API.started)mini();},
     /* MP.3: host'u ilgilendiren diplomasi bildirimi host'un kendi günlüğüne (uzak oyuncununki onun listesine gider) */
     hostNotify:(m,c)=>{if(typeof say==='function')say(m,c);dipToast(m,false);},
+    /* MP.6.1: ortak hız — host'un G.speed'i tek kaynak; değişiklik herkese yayınlanır, host da aynı bildirimi görür */
+    setSpeed:v=>{if(typeof UI!=='undefined')UI.setSpeed(v);else G.speed=v;},
+    onSpeed:info=>{if(window.MP61)MP61.speed(info);},
     lobby:{generate(set){setupGame({...CFG,...set});if(CFG.mizac)applyChosenPersona(G.p,CFG.mizac);G.autoSave=false;return {ok:true};}}});
   API.host.installGuards();
+  if(window.MP61)MP61.source=()=>G.speed|0;
   if(resume){API.resumeInfo={display:resume.display,speed:resume.session.speed|0,saveId:resume.saveId};API.lobby=API.host.lobbyView();return;}
   const seed=1+(crypto.getRandomValues(new Uint32Array(1))[0]%2147483646);
   API.host.configure({size:'orta',aiCount:5,seed,...(CFG.shape?{shape:CFG.shape}:{})});
@@ -177,8 +181,16 @@ monthTick=function(){const r=month.apply(this,arguments);if(API.host&&API.starte
 setInterval(()=>{
   if(!API.host||!API.started||!API.connected)return;
   const day=Math.floor(G.day);if(API.dirty||day!==API.lastDay){API.dirty=false;API.lastDay=day;API.host.publish();API.publishes++;}
+  API.host.speedSync(window.MP61&&MP61.windowOpen()?'window':API.bg?'background':null);   // MP.6.1: host'un iç duraklatmaları da herkese
   dipTick();
 },250);
+/* MP.6.1: host'un STARS hız düğmeleri de ortak hız komutundan geçer (host.local: misafirle aynı kurallar, aynı bildirim).
+   Oyun dışında (lobi, tek oyunculu) düğme olduğu gibi çalışır. */
+if(typeof UI!=='undefined'){const act0=UI.act.bind(UI);UI.act=function(a,x,el){
+  if(a==='spd'&&API.host&&API.started){const r=API.host.local({kind:'speed',value:+x});
+    if(!r.ok&&r.code!=='rules:same')dipToast(r.code==='rules:rate-limited'?'Hız çok sık değiştiriliyor; biraz bekle.':r.code==='paused'?'Bağlantı yok — oyun duraklatıldı.':'Hız değiştirilemedi.',true);
+    return;}
+  return act0(a,x,el);};}
 function mini(){
   let el=doc.getElementById('mp1Mini');
   if(!el){el=doc.createElement('div');el.id='mp1Mini';el.className='mp1-mini';(doc.getElementById('app')||doc.body).appendChild(el);   /* MP.6: oyunun kök kabında — STARS pencereleri ve 'çevir' uyarısıyla aynı katman bağlamı */el.addEventListener('click',e=>{const b=e.target.closest('[data-g]');if(!b)return;
@@ -192,6 +204,7 @@ function mini(){
   const head='<button class="mp1-mini-h" data-g="toggle" aria-expanded="'+open+'"><b>ÇOK OYUNCULU</b> · '+esc(V.fmtCode(API.code))+' · '+
     (API.connected?'bağlı':API.closed?'oda kapandı — oyun duraklatıldı; OYUNU KAYDET ile yeni odada sürdürebilirsin':'bağlantı yok — oyun duraklatıldı, yeniden bağlanılıyor')+' · '+(gs.length-off)+'/'+gs.length+' misafir</button>';
   /* MP.3: DİPLOMASİ düğmesi aynı satırda (panel kapalıyken tek satır kalır) */
+  if(window.MP61)MP61.status((API.connected?'bağlı':API.closed?'oda kapandı':'bağlantı yok')+' · '+(gs.length-off)+'/'+gs.length+' misafir',API.connected);
   el.innerHTML=(window.MP3Dip?'<div class="mp3-minirow">'+head+'<button class="mp1-btn mp3-hostbtn" data-g="dip" id="mp3HostBtn">'+dipLabel()+'</button></div>':head)+
     (open?gs.map(p=>{const pid=pidOfSeat(p.seat);return '<div>'+esc(p.name)+' · '+(p.online?'bağlı':'koptu — koltuk bekletiliyor')+(p.online?'':'<button class="mp1-btn" data-g="kick" data-pid="'+esc(pid)+'">Çıkar (devlet boşta)</button><button class="mp1-btn" data-g="ai" data-pid="'+esc(pid)+'">Devleti AI\'ya ver</button>')+'</div>';}).join('')+
       (window.MP4Save?'<div class="mp1-row"><button class="mp1-btn" data-g="save">OYUNU KAYDET</button><button class="mp1-btn" data-g="export">DOSYAYA AKTAR</button></div>':''):'');
