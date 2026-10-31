@@ -462,40 +462,41 @@ function createHost(opts){
        Önizleme (warQuote) motorun kendi bilgisini kullanır: yalnız ilan edenin temaslı olduğu devletler, bilinen federasyon
        bağları, istihbarat ≥3. Konsey yasağında motor yalnız devlet 0'a "bilerek çiğne" yolunu açıyor, diğerlerine AI zarı
        (rnd < .75 → vazgeç) atıyor: insan için devlet 0 dalı aynen uygulanır (ceza + savaş), AI zarı ve RNG çekimi yok. */
-    warQuote:{keys:['kind','target','goal'],ro:true,check:c=>int(c.target,0,63)&&typeof c.goal==='string'&&has(WAR_GOALS,c.goal),locate:()=>({}),
+    warQuote:{keys:['kind','target','goal'],ro:true,check:c=>int(c.target,0,63)&&typeof c.goal==='string'&&has(WAR_GOALS,c.goal),locate:(e,c)=>{const o=warTarget(e,c);return o?{o}:{err:'no-target'};},
       why:(e,at,c)=>warTarget(e,c)?null:'no-target',roots:()=>[],
       apply:(e,at,c)=>({ok:true,extra:warDeclarationPreview(e,G.emps[c.target],c.goal)})},
-    war:{say:'actor',keys:['kind','target','goal'],check:c=>int(c.target,0,63)&&typeof c.goal==='string'&&has(WAR_GOALS,c.goal),locate:()=>({}),
+    war:{keys:['kind','target','goal'],check:c=>int(c.target,0,63)&&typeof c.goal==='string'&&has(WAR_GOALS,c.goal),locate:(e,c)=>{const o=warTarget(e,c);return o?{o}:{err:'no-target'};},
       why(e,at,c){const o=warTarget(e,c);if(!o)return 'no-target';const p=warDeclarationPreview(e,o,c.goal);return p.ok?null:{code:'war',detail:p.blockers.slice(0,4).map(String)};},
       roots:()=>[],
       apply(e,at,c){const o=G.emps[c.target];if(!warDeclarationAccess(e,o).ok)return false;
         const council=typeof councilBlocksWar==='function'&&councilBlocksWar(e,o),cb0=council?councilBlocksWar:null;
-        if(council){say('KONSEY YASAĞI: '+o.name+' korunuyor. Yine de saldırırsan konsey sana döner.','war');councilPunish(e);councilBlocksWar=()=>false;}
+        const own=(m,cl)=>{if(remoteHuman(e))note(e.id,m,cl);};   // ilan edene özel iletiler; motorun kamu iletileri (gerekçesiz savaş…) host günlüğüne motorun yazdığı gibi
+        if(council){own('KONSEY YASAĞI: '+o.name+' korunuyor. Yine de saldırırsan konsey sana döner.','war');councilPunish(e);councilBlocksWar=()=>false;}
         let ok;try{ok=declareWar(e,o);}finally{if(council)councilBlocksWar=cb0;}
-        if(!ok)return false;if(setWarGoal(e,o,c.goal))say('Savaş hedefi: '+WAR_GOALS[c.goal].n,'war');return true;}},
+        if(!ok)return false;if(setWarGoal(e,o,c.goal))own('Savaş hedefi: '+WAR_GOALS[c.goal].n,'war');return true;}},
     /* ittifakı sonlandır (canEndAlliance / endAlliance), ticaret anlaşmasını feshet (tek oyunculu unpactYes satırları),
        ambargo (setEmbargo), hediye (tek oyunculu giftDo satırları) */
-    endAlliance:{say:'actor',keys:['kind','target'],check:c=>int(c.target,0,63),locate:()=>({}),
+    endAlliance:{say:'actor',keys:['kind','target'],check:c=>int(c.target,0,63),locate:(e,c)=>{const o=diploTarget(e,c);return o?{o}:{err:'no-target'};},
       why(e,at,c){const o=diploTarget(e,c);if(!o)return 'no-target';const g=canEndAlliance(e,o);return g.ok?null:{code:'diplo',detail:[String(g.why||'').slice(0,200)]};},
       roots:()=>[],apply:(e,at,c)=>endAlliance(e,G.emps[c.target])},
-    unpact:{say:'actor',keys:['kind','target'],check:c=>int(c.target,0,63),locate:()=>({}),
+    unpact:{say:'actor',keys:['kind','target'],check:c=>int(c.target,0,63),locate:(e,c)=>{const o=diploTarget(e,c);return o?{o}:{err:'no-target'};},
       why(e,at,c){const o=diploTarget(e,c);if(!o)return 'no-target';return e.pact&&e.pact[o.id]?null:'no-pact';},
-      roots:(e,at,c)=>[e.pact,e.rel,G.emps[c.target].pact],
+      roots:(e,{o})=>[e.pact,e.rel,o.pact],
       apply(e,at,c){const o=G.emps[c.target];breakPact(e,o);e.rel[o.id]=clamp(e.rel[o.id]-10,-100,100);say('Ticaret anlaşması feshedildi');return true;}},
-    embargo:{say:'actor',keys:['kind','target','on'],check:c=>int(c.target,0,63)&&typeof c.on==='boolean',locate:()=>({}),
+    embargo:{say:'actor',keys:['kind','target','on'],check:c=>int(c.target,0,63)&&typeof c.on==='boolean',locate:(e,c)=>{const o=diploTarget(e,c);return o?{o}:{err:'no-target'};},
       why(e,at,c){const o=diploTarget(e,c);if(!o)return 'no-target';return !!(e.embargo&&e.embargo[o.id])===c.on?'same':null;},
       roots:()=>[],
       apply(e,at,c){if(!setEmbargo(e,G.emps[c.target],c.on,c.on?'kararın':undefined))return false;G.emps.forEach(z=>{if(!z.dead)recalcMods(z);});return true;}},
-    gift:{say:'actor',keys:['kind','target','r','v'],check:c=>int(c.target,0,63)&&['min','ene','ala','tuk','yiy'].includes(c.r)&&int(c.v,1,10000000),locate:()=>({}),
+    gift:{say:'actor',keys:['kind','target','r','v'],check:c=>int(c.target,0,63)&&['min','ene','ala','tuk','yiy'].includes(c.r)&&int(c.v,1,10000000),locate:(e,c)=>{const o=diploTarget(e,c);return o?{o}:{err:'no-target'};},
       why(e,at,c){const o=diploTarget(e,c);if(!o)return 'no-target';return (e.res[c.r]||0)<c.v?'resources':null;},
-      roots:(e,at,c)=>[e.res,e.rel,G.emps[c.target].res,G.emps[c.target].rel],
+      roots:(e,{o})=>[e.res,e.rel,o.res,o.rel],
       apply(e,at,c){const o=G.emps[c.target],r=c.r,amt=c.v;e.res[r]-=amt;o.res[r]=(o.res[r]||0)+amt;
         const base=itemValue(o,{t:'res',r,v:amt},e),gain=clamp(Math.round(base*.10*(1+e.mods.dipMul)),3,45);
         e.rel[o.id]=clamp(e.rel[o.id]+gain,-100,100);o.rel[e.id]=clamp(o.rel[e.id]+gain,-100,100);say(o.name+' hediyeyi kabul etti (+'+gain+' ilişki)','win');
         if(remoteHuman(o))note(o.id,'Hediye — '+e.name+': '+amt+' '+RES[r].n,'win');return true;}},
     /* statüko barışı: AI hedefe tek oyunculu 'statuko' gibi doğrudan (canStatusQuo kapısı); İNSAN hedefe teklif olur ve
        kararı o insan verir (statusQuoReply). AI'nın uzak insana teklifi de buraya düşer (installGuards). */
-    statusQuo:{say:'actor',keys:['kind','target'],check:c=>int(c.target,0,63),locate:()=>({}),
+    statusQuo:{say:'actor',keys:['kind','target'],check:c=>int(c.target,0,63),locate:(e,c)=>{const o=diploTarget(e,c);return o?{o}:{err:'no-target'};},
       why(e,at,c){const o=diploTarget(e,c);if(!o)return 'no-target';if(!e.war[o.id])return 'no-war';
         if(isHumanActor(o)&&o.id!==e.id){return SQ.some(q=>q.status==='pending'&&q.from===e.id&&q.to===o.id)?'duplicate':null;}
         const g=canStatusQuo(e,o);return g.ok?null:{code:'diplo',detail:[String(g.why||'').slice(0,200)]};},
