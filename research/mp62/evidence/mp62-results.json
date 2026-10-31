@@ -1,0 +1,155 @@
+{
+ "results": [
+  {
+   "name": "kurulum: host + B + C (/mp/play), gerçek STARS arayüzü; fikstür: temaslar + AI federasyonu {2,1}",
+   "status": "PASS",
+   "ms": 7046
+  },
+  {
+   "name": "antlaşmalar (gerçek anlaşma penceresi + gerçek gelen kutusu): B → C saldırmazlık ve ticaret paktı; C kabul eder → host executeDeal; B ticaret paktını FESHET düğmesiyle bozar; AMBARGO / kaldır; HEDİYE",
+   "status": "PASS",
+   "ms": 20898
+  },
+  {
+   "name": "ittifak: B → C ittifak teklifi (gerçek anlaşma penceresi), C kabul eder; sonra B İTTİFAKI SONLANDIR + gerçek onay penceresi → host endAlliance",
+   "status": "PASS",
+   "ms": 8934
+  },
+  {
+   "name": "SAVAŞ İLANI (gerçek pencereler): B → C: SAVAŞ HEDEFİ SEÇ → hedef → host önizlemesi gerçek önizleme penceresinde (saldırmazlık riski görünür) → ONAYLA → host warDeclarationAccess/declareWar/setWarGoal; C ve host ekranında savaş; savaşta ortak hız çalışır",
+   "status": "PASS",
+   "ms": 7896
+  },
+  {
+   "name": "statüko ve barış (savaş sürerken): B statüko teklif eder → C'nin GERÇEK gelen kutusunda \"Statüko barışı\" → C reddeder; ardından B barış maddesiyle teklif → C kabul eder → host makePeace (executeDeal)",
+   "status": "PASS",
+   "ms": 11825
+  },
+  {
+   "name": "federasyon (gerçek pencereler): kurma girişimi; B AI üye 2 üzerinden başvurur → host kabul oylaması (AI üyeler) → davet B'nin gerçek gelen kutusunda → B KABUL → üye; AI yasa önerir → B EVET; B yasa önerir; B C'yi davet eder; B ayrılır",
+   "status": "PASS",
+   "ms": 22455
+  },
+  {
+   "name": "vasallık (gerçek vasallık penceresi + gerçek gelen kutusu): B, C'ye teklif (motorun izin verdiği yön) → C karşı teklif → B kabul → host sözleşmesi; sonra vasal barışçıl bağımsızlık ister → senyör reddeder",
+   "status": "PASS",
+   "ms": 33837
+  },
+  {
+   "name": "yetkisiz ve gizlilik: B C adına savaş/ilişki komutu veremez (forged-empire); başkasının teklifine yanıt yok (no-offer); temassız hedef \"yok\"; C'nin aynasında B'nin savaş hedefi ve vasallık dışı görüşmeler yok",
+   "status": "PASS",
+   "ms": 1575
+  },
+  {
+   "name": "kopma ve dönüş: B'nin soketi düşer; döndüğünde diplomatik durum (antlaşma/vasallık/savaş haritaları) host'unkiyle aynı",
+   "status": "PASS",
+   "ms": 706
+  },
+  {
+   "name": "sayfa hataları yok (host, B, C)",
+   "status": "PASS",
+   "ms": 0
+  }
+ ],
+ "metrics": {
+  "notes": [
+   "teklif 1 [{\"t\":\"nap\"}] → [\"pending\",\"\"]",
+   "teklif 2 [{\"t\":\"pact\"}] → [\"pending\",\"\"]",
+   "teklif 3 [{\"t\":\"ally\"}] → [\"pending\",\"\"]",
+   "savaş önizlemesi: SAVAŞ İLANI ÖNİZLEMESİHedef: Thalor ve Bağlı Dünyalar · Boyun Eğdirme Etki bedeli: 45 ◈. Son onaya kadar savaş başlamaz. İttifak tek başına otomatik savaş katılımı değildir. KESİN KATILACAKLARBilinen katılımcı yok.KOŞULLU KATILABİLECEKLERBilinen katılımcı yok. BİLİNMEYENLERİstihbarat kapsamı dışında",
+   "onay düğmesi: {\"inView\":true,\"top\":true,\"hit\":\"warFinalConfirm\"}",
+   "savaş Etki bedeli: 45",
+   "statüko düğmesi (host kapısıyla): disabled",
+   "teklif 4 [{\"t\":\"peace\"}] → [\"pending\",\"\"]",
+   "kurma: gerçek düğme disabled · host önizlemesi {\"ok\":false,\"reasons\":[\"En az 2 bağımsız, kabul eden AI müttefik gerekir (şu an 0).\"]}",
+   "başvur düğmesi: enabled",
+   "başvuru sonrası: {\"vote\":null,\"inv\":true,\"member\":false,\"adm\":[[\"pending\",\"Üye oylaması kabul edildi; adayın yükümlülükleri kabul etmesi bekleniyor.\"]]}",
+   "kabul oylaması (AI üyeler): {\"vote\":false,\"inv\":true,\"last\":{\"passed\":true,\"why\":\"Gerekli üye ve oy çoğunluğu sağlandı\"}}",
+   "yasa öner düğmesi: arastirma",
+   "davet düğmesi: enabled",
+   "host üye kabul kapısı: {\"ok\":true,\"fed\":{\"id\":100,\"name\":\"MP62 Birliği\",\"type\":\"askeri\",\"charter\":{\"defense\":\"auto\",\"offense\":\"vote\",\"admission\":\"allies\",\"ballot\":\"weighted\"},\"leader\":2,\"founder\":2,\"members\":[2,1,3],\"laws\":{\"savunma\":{\"since\":0,\"by\":2},\"arastirma\":{\"since\":4,\"by\":3}},\"fund\":{\"ala\":0.9576681600000001,\"ene\":0},\"treasury\":0,\"founded\":5.7666,\"typeSince\":5.7666,\"dutySince\":{\"defense\":0,\"offense\":0},\"invites\":{},\"decisions\":{},\"dutyConsent\":{\"3\":{\"offense\":false,\"since\":6.793239999999998}},\"cohesion\":67.53523998222222,\"nextVote\":300.29323999999997,\"politicsVersion\":96,\"identityType\":\"askeri\",\"emblem\":{\"v\":1,\"shape\":\"hex\",\"symbol\":\"sword\",\"pattern\":\"stripe\",\"primary\":\"#f5c25c\",\"secondary\":\"#202537\",\"federation\":true},\"requestAfter\":{\"admit:3\":186.79324},\"voteSeq\":3,\"vote\":null,\"admissionResults\":{\"1\":{\"target\":3,\"status\":\"accepted\",\"why\":\"Kabul edildi; devlet federasyona katıldı.\",\"updated\":6.793239999999998}},\"lastVote\":{\"id\":\"3\",\"law\":\"arastirma\",\"kind\":\"basic\",\"reasons\":{\"1\":\"Destek · Kişilik ve yasa yararı +0.16 · Önerene güven · Birlik uyumu +0.04 · Gerçek ekonomik hazırlık · Uzun vadeli hedef\",\"2\":\"Destek · Kişilik ve yasa yararı +0.13 · Önerene güven · Birlik uyumu +0.04 · Gerçek ekonomik hazırlık · Uzun vadeli hedef\"},\"assessments\":{\"1\":{\"score\":0.6473500000000001,\"factors\":[{\"n\":\"Kişilik ve yasa yararı\",\"v\":0.15735},{\"n\":\"Önerene güven\",\"v\":0},{\"n\":\"Birlik uyumu\",\"v\":0.04},{\"n\":\"Gerçek ekonomik hazırlık\",\"v\":0},{\"n\":\"Uzun vadeli hedef\",\"v\":0}],\"why\":\"Destek · Kişilik ve yasa yararı +0.16 · Önerene güven · Birlik uyumu +0.04 · Gerçek ekonomik hazırlık · Uzun vadeli hedef\"},\"2\":{\"score\":0.6211,\"factors\":[{\"n\":\"Kişilik ve yasa yararı\",\"v\":0.1311},{\"n\":\"Önerene güven\",\"v\":0},{\"n\":\"Birlik uyumu\",\"v\":0.04},{\"n\":\"Gerçek ekonomik hazırlık\",\"v\":0},{\"n\":\"Uzun vadeli hedef\",\"v\":0}],\"why\":\"Destek · Kişilik ve yasa yararı +0.13 · Önerene güven · Birlik uyumu +0.04 · Gerçek ekonomik hazırlık · Uzun vadeli hedef\"}},\"ballotSnapshot\":{\"mode\":\"weighted\",\"weights\":{\"1\":1,\"2\":1,\"3\":1},\"modern\":true,\"source\":\"opened\"},\"rule\":\"Mutlak üye çoğunluğu (2/3) ve toplam oy ağırlığının yarısından fazlası. Süre sonunda eksik oy çekimserdir.\",\"proposer\":3,\"repeal\":false,\"invalid\":\"\",\"yesMembers\":[2,1],\"noMembers\":[],\"day\":120.29324,\"passed\":true,\"yes\":2,\"no\":0,\"abstain\":1,\"why\":\"Gerekli üye ve oy çoğunluğu sağlandı\"},\"history\":[{\"day\":6.793239999999998,\"year\":2210,\"month\":1,\"event\":\"vote\",\"kind\":\"motion\",\"law\":\"motion\",\"passed\":true,\"yes\":2,\"no\":0},{\"day\":6.793239999999998,\"year\":2210,\"month\":1,\"event\":\"motion\",\"kind\":\"admit\",\"target\":3},{\"day\":6.793239999999998,\"year\":2210,\"month\":1,\"event\":\"join\",\"target\":3},{\"day\":6.793239999999998,\"year\":2210,\"month\":1,\"event\":\"vote\",\"kind\":\"basic\",\"law\":\"savunma\",\"passed\":true,\"yes\":3,\"no\":0},{\"day\":120.29324,\"year\":2210,\"month\":5,\"event\":\"vote\",\"kind\":\"basic\",\"law\":\"arastirma\",\"passed\":true,\"yes\":2,\"no\":0}]},\"cost\":60,\"key\":\"admit:5\"}",
+   "C daveti: true",
+   "ayrıl düğmesi: enabled",
+   "vasallık düğmesi demand: enabled",
+   "bağımsızlık düğmesi: enabled",
+   "yetkisiz: [\"forged-empire\",\"no-offer\",null]"
+  ],
+  "engine": [
+   "bağımsızlık talebi: host reddetti — [[null,null],[\"rules:engine\",[\"Bu iki devlet arasında 12 aylık müzakere soğuma süresi sürüyor\"]]]"
+  ],
+  "cmds": {
+   "offer": [
+    43,
+    69,
+    48,
+    46
+   ],
+   "accept": [
+    59,
+    40,
+    37,
+    33
+   ],
+   "unpact": [
+    45
+   ],
+   "embargo": [
+    46
+   ],
+   "unembargo": [
+    30
+   ],
+   "gift": [
+    39
+   ],
+   "endAlliance": [
+    40
+   ],
+   "war": [
+    47
+   ],
+   "speedInWar": [
+    44,
+    61
+   ],
+   "statusQuo": [
+    43
+   ],
+   "statusQuoReply": [
+    59
+   ],
+   "fedRequest": [
+    55
+   ],
+   "fedJoin": [
+    61
+   ],
+   "fedVote": [
+    32
+   ],
+   "fedLaw": [
+    60
+   ],
+   "fedInvite": [
+    36
+   ],
+   "fedInviteReject": [
+    80
+   ],
+   "fedLeave": [
+    40
+   ],
+   "vassalOffer": [
+    84
+   ],
+   "vassalCounter": [
+    49
+   ],
+   "vassalAccept": [
+    63
+   ]
+  },
+  "perf": {}
+ },
+ "errors": []
+}

@@ -21,7 +21,7 @@ const doc=document;
 const ov=doc.createElement('div');ov.id='mp6App';ov.className='mp1-overlay mp6-join';ov.innerHTML='<div class="mp1-status">Yükleniyor…</div>';
 (doc.body||doc.documentElement).appendChild(ov);
 
-const S={counter:null,J:null,mirror:null,rev:0,timer:null,building:false,started:false,on:false,lastBuild:0,minGap:600,uiSent:false,seenResults:0,hostSpd:0,held:0,
+const S={warQuote:{},pendingWar:null,counter:null,J:null,mirror:null,rev:0,timer:null,building:false,started:false,on:false,lastBuild:0,minGap:600,uiSent:false,seenResults:0,hostSpd:0,held:0,
   stats:{mirrors:0,deltas:0,bytes:0,builds:0,buildMs:[],resyncs:0,held:0,blocked:{},sent:{},speedMsgs:0}};
 
 /* ---- 1. eylem kapısı ---- */
@@ -39,7 +39,9 @@ const VIEW=new Set(['tab','full','cameraReset','cameraFocus','home','fit','topSt
   'fedVoteYes','fedVoteNo','fedVoteNow',
   /* MP.6.1 — motor işlevi MP komutuna çevrilen gerçek düğmeler */
   'sendhere','ship','focus','cancelBuild','demolish','foundFed','fedDipInvite','fedDipRequest','fedMotion','fedInviteAccept','fedInviteReject',
-  'fedLawPropose','fedLawRepeal','fedLeave','vsSend','vsReply','dealSend']);
+  'fedLawPropose','fedLawRepeal','fedLeave','vsSend','vsReply','dealSend',
+  /* MP.6.2 — savaş ve ikili siyaset: gerçek pencere açılır, son çağrı MP komutuna iner */
+  'war','ally','pact','dealPact','endAlliance','unpact','embargo','unembargo','gift']);
 /* MP.6.1 — UI.act kapısında doğrudan MP komutuna çevrilen düğmeler (tek oyunculu kodları dünyayı yerelde değiştirir) */
 const sel=()=>View.sel&&View.sel.e===0&&G.fleets.includes(View.sel)?View.sel:null;
 const ACT={
@@ -55,6 +57,13 @@ const ACT={
   /* MP teklifine karşı teklif kartı: kabul / ret = MP 'respond' (tek oyunculuda AI karşı teklifini yerelde uygular) */
   ctrYes:()=>S.counter?respond(true):blocked('ctrYes'),
   ctrNo:()=>S.counter?respond(false):blocked('ctrNo'),
+  /* MP.6.2: savaş hedefi seçildi → önce host'un önizlemesi (warQuote, ilan edenin kendi bilgisiyle), sonra GERÇEK STARS önizleme
+     penceresi bu veriyle açılır; ONAYLA → declareWar/setWarGoal sarmalayıcısı → 'war' komutu */
+  setwg:x=>{const [id,key]=String(x).split(':');const cid=send({kind:'warQuote',target:real(+id),goal:key});
+    if(cid)waits[cid]=res=>{if(res.status!=='ok'){toast('Host reddetti: '+why(res),true);return;}S.warQuote[id+':'+key]=warLocal(res.extra);UI.warDeclarationPreview(+id,key);};},
+  giftDo:x=>{const [id,r,v]=String(x).split(':');const cid=send({kind:'gift',target:real(+id),r,v:+v});
+    if(cid)waits[cid]=res=>toast(res.status==='ok'?'Hediye gönderildi; host uyguladı.':'Host reddetti: '+why(res),res.status!=='ok');try{UI.closeModal();}catch{}},
+  statuko:x=>{const cid=send({kind:'statusQuo',target:real(+x)});if(cid)waits[cid]=res=>toast(res.status==='ok'?'Statüko barışı: host uyguladı ya da teklif karşı oyuncuya gitti.':'Host reddetti: '+why(res),res.status!=='ok');},
   colonize:x=>{const [s,p]=String(x).split(':').map(Number),f=sel(),c={kind:'colonize',sys:s,planet:p};if(f&&fleetHasRole(f,'koloni'))c.fleet=f.id;return send(c);}
 };
 function respond(yes){const c=S.counter;const cid=send({kind:'respond',offer:c.offer,action:yes?'accept':'reject'});
@@ -105,18 +114,37 @@ function gate(){
   wrap('proposeFedLaw',(o,e,law,repeal)=>mine(e)?r({kind:'fedLaw',law:String(law),repeal:!!repeal}):NOT_MP);
   wrap('vassalOffer',(o,e,other,mode,type,terms)=>mine(e)&&other?r({kind:'vassalOffer',to:real(other.id),mode:String(mode),type:String(type),terms:vasTerms(type,terms)}):NOT_MP);
   wrap('vassalReply',(o,actor,sub,id,round,action,terms)=>mine(actor)?r({kind:'vassalReply',sub:real(+sub),id:String(id),round:round|0,action:String(action),...(action==='counter'?{terms:vasTerms(null,terms)}:{})}):NOT_MP);
+  /* MP.6.2 — savaş ilanı: gerçek önizleme penceresi host'un önizlemesiyle (warQuote) çizilir; erişim ve son karar host'ta.
+     declareWar yalnız hedefi işaretler; ardından gelen setWarGoal hedef+amaçla TEK 'war' komutu gönderir. */
+  wrap('warDeclarationPreview',(o,actor,target,key)=>mine(actor)&&target&&S.warQuote[target.id+':'+key]?S.warQuote[target.id+':'+key]:o(actor,target,key));
+  wrap('warDeclarationAccess',(o,a,b,opt)=>mine(a)&&b&&Object.keys(S.warQuote).some(k=>k.startsWith(b.id+':'))?{ok:true,why:''}:o(a,b,opt));
+  wrap('declareWar',(o,a,b)=>{if(!mine(a)||!b)return false;S.pendingWar=b.id;return true;});
+  wrap('setWarGoal',(o,e,foe,key)=>{if(!mine(e)||!foe||S.pendingWar!==foe.id)return false;S.pendingWar=null;delete S.warQuote[foe.id+':'+key];
+    const cid=send({kind:'war',target:real(foe.id),goal:String(key)});
+    if(cid)waits[cid]=res=>toast(res.status==='ok'?'Savaş ilanı host\'ta uygulandı — '+(foe.name||''):'Host reddetti: '+why(res),res.status!=='ok');return !!cid;});
+  /* MP.6.2 — misafirin aynasında eksik olan veriye dayanan düğme kapıları host'un kararını kullanır (MP.2/MP.3.1 görünümü):
+     statüko (işgal haritası), federasyona başvuru (aracı üyenin Etkisi) ve üye kabul önergesi (adayın ittifak bağları). */
+  const hv=()=>S.J&&S.J.game&&S.J.game.view;
+  wrap('canStatusQuo',(o,a,b)=>{if(mine(a)&&b){const c=hv()&&hv().dip&&hv().dip.contacts.find(x=>x.id===real(b.id));if(c&&c.sq!==undefined)return {ok:!!c.sq,why:c.sqw||''};}return o(a,b);});
+  wrap('canRequestFederation',(o,e,via)=>{if(mine(e)&&via){const p=hv()&&hv().pol;const v=p&&(p.others||[]).flatMap(x=>x.vias||[]).find(x=>x.id===real(via.id));if(v)return {ok:!!v.ok,why:v.why||''};}return o(e,via);});   // aracı üyenin Etkisi kabukta yok: MP.3.1 polView kararı
+  wrap('canFedMotion',(o,e,kind,opt)=>{if(mine(e)&&kind==='admit'&&opt&&Number.isInteger(opt.target)){const f=hv()&&hv().pol&&hv().pol.fed,row=f&&(f.admit||[]).find(x=>x.id===real(opt.target));if(row)return {ok:!!row.ok,why:row.why};}return o(e,kind,opt);});
+  /* MP.6.2 — ittifakı sonlandır, ticaret anlaşmasını feshet, ambargo: gerçek onay pencereleri → komut */
+  wrap('endAlliance',(o,e,other)=>mine(e)&&other?r({kind:'endAlliance',target:real(other.id)}):NOT_MP);
+  wrap('breakPact',(o,a,b)=>{if(!mine(a)||!b)return o(a,b);send({kind:'unpact',target:real(b.id)});});
+  wrap('setEmbargo',(o,e,t,on)=>{if(!mine(e)||!t)return false;return !!send({kind:'embargo',target:real(t.id),on:!!on});});
   /* MP.6.1 — gerçek anlaşma penceresi: GÖNDER → MP.3 'offer' (yalnız MP.3'ün desteklediği maddeler: kaynak ve barış).
      Karşı tarafın stoğu aynada yok; uygunluğu host denetler ve sonucu bildirir. */
   const dealSend0=UI.dealSend.bind(UI);
   UI.dealSend=function(){if(!S.on)return dealSend0();this.ensureDiploWorld();const d=this.deal;if(!d)return;
-    const items=l=>(l||[]).map(i=>i&&i.t==='res'&&Number.isInteger(i.v)?{t:'res',r:i.r,v:i.v}:i&&i.t==='peace'?{t:'peace'}:null);
+    const items=l=>(l||[]).map(i=>i&&i.t==='res'&&Number.isInteger(i.v)?{t:'res',r:i.r,v:i.v}:i&&TREATY.includes(i.t)?{t:i.t}:null);
     const give=items(d.give),want=items(d.want);
-    if(give.includes(null)||want.includes(null)){this.dealMsg='Çok oyunculuda şimdilik yalnız kaynak ve barış maddeleri gönderilebilir (MP.6.2).';this.drawDeal();return;}
+    if(give.includes(null)||want.includes(null)){this.dealMsg='Çok oyunculuda kaynak, barış ve antlaşma maddeleri (saldırmazlık, ticaret, ittifak, sensör, geçiş) gönderilebilir; teknoloji, sistem, haraç, lüks, savaş sözü ve casusluk ağı henüz yok.';this.drawDeal();return;}
     if(!give.length&&!want.length){this.dealMsg='Teklif boş.';this.drawDeal();return;}
     const ctr=S.counter&&S.counter.to===d.to?S.counter:null;
     const cid=send(ctr?{kind:'counter',offer:ctr.offer,give,want}:{kind:'offer',to:real(d.to),give,want});if(ctr)S.counter=null;
     this.dealMsg=cid?'Teklif host\'a gönderildi; yanıt gelen kutuna ve bildirimlere düşer.':'Host bağlı değil; teklif gönderilmedi.';
     if(cid)waits[cid]=res=>toast(res.status==='ok'?'Teklif gönderildi — '+(G.emps[d.to]?.name||''):'Host reddetti: '+why(res),res.status!=='ok');
+    if(cid){const to=d.to,m=this.dealMsg;this.forgetDeal(to);this.openDeal(to);this.dealMsg=m;}   // gönderilen taslak temizlenir (tek oyunculuda imzada forgetDeal)
     this.drawDeal();};
   /* anlaşma penceresinin yerel önizlemesi: karşı tarafın stoğu aynada yok (kabuk). MP.3 dipGate ile aynı kural: misafirde yalnız
      KENDİ yükümlülükleri denetlenir, karşı tarafın kaynak satırları ("Ad → …") düşer; kesin denetim host'ta (offer / respond). */
@@ -132,12 +160,14 @@ function gate(){
   wrap('executeDeal',()=>{toast('Çok oyunculuda anlaşma kararı gelen kutusundan verilir; host uygular.',true);return false;});
   /* MP.6.1 — gerçek gelen kutusu: karar → MP komutu. MP.3 tekliflerinde uygunluğu host denetler (karşı tarafın stoğu aynada yok). */
   const DI=DiplomaticInbox,resolve0=DI.resolve.bind(DI),gate0=DI.gate.bind(DI);
-  DI.gate=function(rec){if(S.on&&rec&&rec.mp){if(rec.status!=='pending')return {ok:false,why:'Teklif sonuçlandı',terminal:true};return {ok:true,why:''};}return gate0(rec);};
+  DI.gate=function(rec){if(S.on&&rec&&rec.mpSq!==undefined){return rec.status==='pending'?{ok:true,why:''}:{ok:false,why:'Teklif sonuçlandı',terminal:true};}
+    if(S.on&&rec&&rec.mp){if(rec.status!=='pending')return {ok:false,why:'Teklif sonuçlandı',terminal:true};return {ok:true,why:''};}return gate0(rec);};
   DI.resolve=function(id,yes,option,world){
     if(!S.on)return resolve0(id,yes,option,world);
     const rec=this.get(id);if(!rec||rec.status!=='pending')return {ok:false,why:'Teklif geçersiz'};
     let c=null;
-    if(rec.mp)c={kind:'respond',offer:rec.mp,action:yes?'accept':'reject'};
+    if(rec.mpSq!==undefined)c={kind:'statusQuoReply',from:rec.mpSq,accept:!!yes};
+    else if(rec.mp)c={kind:'respond',offer:rec.mp,action:yes?'accept':'reject'};
     else if(rec.kind==='invite')c={kind:'fedReply',fed:rec.fid,action:yes?'accept':'reject'};
     else if(rec.kind==='fedvote')c={kind:'fedVote',fed:rec.fid,token:String(rec.token),yes:!!yes};
     else if(rec.kind==='vassal'){const q=G.emps[rec.fid]?.vassalTalk;if(!q)return {ok:false,why:'Müzakere bulunamadı'};c={kind:'vassalReply',sub:real(rec.fid),id:q.id,round:q.round,action:yes?'accept':'reject'};}
@@ -147,6 +177,9 @@ function gate(){
     rec.status=yes?'accepted':'rejected';rec.finished=G.day;rec.why='Karar host\'a gönderildi';   // iyimser; bir sonraki ayna host'un gerçeğini getirir
     return {ok:true};};
 }
+const TREATY=['peace','nap','pact','ally','intel','passage'];   // mp-core DIP_TREATY ile aynı
+/* host önizlemesi (gerçek kimlikler) → aynadaki numaralar; adlar host'ta ilan edenin bilgisiyle süzülmüş gelir */
+function warLocal(p){const m=x=>x&&{...x,id:local(x.id)};return {...p,target:m(p.target),certain:(p.certain||[]).map(m),conditional:(p.conditional||[]).map(m)};}
 const vasTerms=(type,t)=>{const o={};for(const k of ['tax','science','defense','war','autonomy','duration','renegotiate','sensors'])if(t&&t[k]!==undefined)o[k]=JSON.parse(JSON.stringify(t[k]));return o;};
 function why(res){const d=res.detail&&res.detail.length?' — '+res.detail.join(' · '):'';return (MP1View.ERR[res.code]||res.code)+d;}
 function send(cmd){const J=S.J;if(!J)return null;const r=J.cmd(cmd);S.stats.sent[cmd.kind]=(S.stats.sent[cmd.kind]||0)+1;
@@ -163,10 +196,9 @@ function onMessage(m){
   if(m.type==='speed'){S.hostSpd=m.spd|0;S.stats.speedMsgs++;paintSpeed();if(window.MP61)MP61.speed(m);return true;}
   return false;
 }
-/* ayna bekletme: gerçek onay penceresi (#modal) ya da diplomasi/federasyon sayfası açıkken (taslaklar G.p kimliğine bağlı).
-   Bilim ekranı (aynı #diploPane) canlı güncellenir: tek oyunculuda da açıkken oyun sürer. */
-function holdBuild(){const m=doc.getElementById('modal'),d=doc.getElementById('diploPane');
-  return !!(m&&!m.classList.contains('hidden'))||!!(d&&d.classList.contains('show')&&UI.globalCur!=='bilim');}
+/* ayna bekletme: yalnız gerçek onay penceresi (#modal) açıkken. MP.6.2: diplomasi sayfası açıkken de ayna uygulanır; sayfa,
+   hedef ve anlaşma taslağı yeni dünyaya taşınır (ensureDiploWorld G.p kimliği değişince bunları sıfırlıyordu). */
+function holdBuild(){const m=doc.getElementById('modal');return !!(m&&!m.classList.contains('hidden'));}
 function schedule(){if(S.timer)return;const wait=Math.max(0,S.minGap-(Date.now()-S.lastBuild));S.timer=setTimeout(rebuild,wait);}
 function rebuild(){
   S.timer=null;if(!S.mirror)return;
@@ -176,11 +208,12 @@ function rebuild(){
      yarım hareketi bozulmasın diye korunur. Kamera View.cam'de; deserialize ona dokunmaz. Seçili filo kimlikle korunur. */
   const keep={route:View.route,routed:View.routed,note:UI._openNote,offer:UI.pendingOffer,sel:View.sel&&View.sel.id},rg=View.resetGesture;
   const t0=performance.now();S.building=true;let ok=false;
-  try{View.resetGesture=S.started?function(){}:rg;ok=deserialize(JSON.stringify(S.mirror));if(ok)inboxOffers();}catch{ok=false;}
+  try{View.resetGesture=S.started?function(){}:rg;ok=deserialize(JSON.stringify(S.mirror));if(ok)inboxOffers();S.inboxSig=null;}catch{ok=false;}
   finally{View.resetGesture=rg;S.building=false;}
   S.lastBuild=Date.now();
   if(!ok){S.stats.fail=(S.stats.fail||0)+1;S.timer=setTimeout(rebuild,1000);return;}
   G.autoSave=false;G.speed=0;
+  if(S.started&&UI._diploWorld)UI._diploWorld=G.p;   // açık diplomasi sayfası ve taslaklar korunur
   if(S.started){View.route=keep.route;View.routed=keep.routed;UI._openNote=keep.note;UI.pendingOffer=keep.offer;
     if(keep.sel!==null&&keep.sel!==undefined&&!View.sel){const f=G.fleets.find(x=>x.id===keep.sel);if(f)View.sel=f;}}
   const ms=performance.now()-t0;S.stats.builds++;S.stats.buildMs.push(Math.round(ms*10)/10);if(S.stats.buildMs.length>60)S.stats.buildMs.shift();
@@ -195,6 +228,10 @@ function inboxOffers(){
     const strip=l=>l.map(({l:_,...i})=>i),data={from:local(o.from),to:0,give:strip(o.give),want:strip(o.want),born:o.born,expires:o.expires};
     const rec=DiplomaticInbox.capture({kind:'aideal',data,born:o.born,title:(o.round>1?'Karşı teklif':'Teklif')+' — '+o.fn,sub:'Çok oyunculu teklif · tur '+o.round});
     if(rec)rec.mp=o.id;}
+  /* MP.6.2: statüko barışı teklifleri (insan ya da AI → bu oyuncu) → gerçek gelen kutusunda 'sqOffer' */
+  for(const q of v.dip.sq||[]){if(q.to!==me||q.status!=='pending'||!G.emps[local(q.from)])continue;
+    const rec=DiplomaticInbox.capture({kind:'sqOffer',data:local(q.from),born:q.born,key:'mpsq:'+q.from+':'+q.born,title:'Statüko barışı teklifi — '+q.fn,sub:'Sınırlar fiili durumda donar; kabul edersen host uygular.'});
+    if(rec){rec.mpSq=q.from;rec.expires=q.expires;}}
 }
 function start(){
   S.started=true;S.on=true;gate();
@@ -256,6 +293,10 @@ function update(statusHtml){
     if(waits[r.cid]){const w=waits[r.cid];delete waits[r.cid];try{w(r);}catch{}continue;}   // MP diplomasi paneli / gelen kutusu kendi sonucunu gösterir
     if(r.status!=='ok'&&r.code!=='rules:same')toast('Host reddetti: '+why(r),true);}
   if(dipEl)dipTick(false);
+  /* MP.6.2: bekleyen teklif G'yi değiştirmez → host yeni ayna göndermeyebilir; MP.3 'dip' görünümü değişince gerçek gelen
+     kutusu ayna beklemeden güncellenir (capture tekrar eden kaydı yeniden eklemez). */
+  const v=J.game&&J.game.view;if(S.started&&!S.building&&v&&v.dip){const sig=JSON.stringify([v.dip.offers.filter(o=>o.to===J.empireId&&o.status==='pending').map(o=>o.id),(v.dip.sq||[]).filter(q=>q.to===J.empireId&&q.status==='pending').map(q=>q.from+':'+q.born)]);
+    if(sig!==S.inboxSig){S.inboxSig=sig;try{inboxOffers();}catch{}}}
 }
 window.MP6Stars={S,onMessage,update,screen,attach(J){S.J=J;},onAssign(){S.uiSent=false;},VIEW,ACT,dip:{open:dipOpen,seg:seg6,get ui(){return dipUI;},get pol(){return polUI;}}};
 /* telefon geri tuşu: önce açık MP diplomasi onayı/paneli kapanır (join.js popstate bunu sorar) */

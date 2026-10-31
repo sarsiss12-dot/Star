@@ -6,14 +6,29 @@ Son güncelleme: 2026-10-30. Depo `sarsiss12-dot/Star`.
 
 | | `main` (birleşmiş) | Bu dal (PR) |
 |---|---|---|
-| Faz | 96H.10 + MP.0 – MP.4 (+ 96H.11 araştırma arşivi) | MP.5 (PR #17, açık) + MP.6 (PR #18, açık) + MP.6.1 (ortak hız; gerçek pencerelerden filo/koloni/diplomasi/federasyon) |
+| Faz | 96H.10 + MP.0 – MP.4 (+ 96H.11 araştırma arşivi) | MP.5 (PR #17) + MP.6 (PR #18) + MP.6.1 (PR #19) + MP.6.2 (savaş/diplomasi/federasyon/vasallık gerçek pencerelerden) — hepsi açık |
 | Build / PWA | `96h10` / `stars-v96h10` | değişmedi |
 | Save | v8 | v8 (şema değişmedi) |
 | Oyun ZIP | `releases/stars-faz96h10.zip` (SHA-256 `78e76d1627b8ec1b990849b2242835f78667f110e1d6f17021760183ee7be6d0`) | yeni ZIP yok |
 | Taban HEAD | `4296ad2d43fedce6264020b3761f50f1839fd836` | — |
 | Değişen runtime | — | yok (19 dosya 96H.10 ile aynı) |
 
-96H.6.2, 96H.6.3, 96H.7, 96H.11 ve MP.0 – MP.6.1 oyun yayımlamadı.
+96H.6.2, 96H.6.3, 96H.7, 96H.11 ve MP.0 – MP.6.2 oyun yayımlamadı.
+
+## MP.6.2 — savaş ve diplomasi entegrasyonu (geliştirme sürümü)
+
+Ayrıntı: `MULTIPLAYER-MP62-SONUC.md`. Testler: `tests/mp62_core_test.js`, `tests/browser-mp62.cjs`.
+
+- **Savaş ilanı:** misafir gerçek pencerelerden ilan eder: hedef → host önizlemesi → onay. Host'ta motorun zinciri çalışır; ağ = motor.
+  - Konsey yasağında uzak insan artık AI zarı atmaz.
+- **Antlaşmalar:** saldırmazlık, ticaret, ittifak, sensör, geçiş, barış insan–insan; ittifak sonu, fesih, ambargo, hediye.
+  - Statüko insan hedefe teklif olur.
+- **AI insan adına karar vermez:** barış teklifi artık host'un değil uzak insanın kutusuna gider; AI statüko imzalamaz.
+- **Ayna:** savaş haritaları doğru numaralandırılır (MP.6 hatası); üçüncü taraf savaşı yalnız motorun bilgi kuralıyla.
+- **Tarayıcıda doğrulanan federasyon akışları:** başvuru, oy, yasa, davet / ret, ayrılma.
+- **Tarayıcıda doğrulanan vasallık akışları:** talep, karşı teklif, kabul.
+- **Tarayıcıda doğrulanamayan (motor şartı):** federasyon kurma, bağımsızlık talebi.
+- **Eksik:** ihraç / reform / anayasa / ortak savaş önergeleri, bağımsızlık desteği, toprak paylaşımı onayı, casusluk, pazar.
 
 ## MP.6.1 — gerçek arayüzde işlevsel eşitlik + ortak oyun hızı (geliştirme sürümü)
 
