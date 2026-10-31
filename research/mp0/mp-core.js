@@ -296,7 +296,19 @@ function createHost(opts){
     else{const ops=root.StarsMirror.diff(p.lastMirror,m);if(!Object.keys(ops).length){p.mirrorAt=t;return;}n=out(p.conn,{v:PROTOCOL,type:'mirrorDelta',rev,base:p.mirrorRev,ops});}
     p.lastMirror=m;p.mirrorRev=rev;p.mirrorAt=t;stats.mirrors=(stats.mirrors||0)+1;(stats.mirrorBytes||(stats.mirrorBytes=[])).push(n);if(stats.mirrorBytes.length>200)stats.mirrorBytes.shift();
   }
-  function publish(){dipSweep();pure(polSweep);const rev=++S.worldRevision;for(const p of S.players.values())publishTo(p,rev);return rev;}
+  /* MP.6.2: uzak insanın savaş bildirimleri. Motor savaş başlangıcını yalnız devlet 0'a bildiriyor (warStartNotice, fedDefend,
+     overlordDefend); uzak insan, örneğin federasyon savunma yükümlülüğüyle savaşa girdiğinde bunu kendi listesinde görür.
+     Yalnız okur; ilk geçişte sessizce tohumlanır. Temassız devletin adı gitmez. */
+  const warSeen=new Map();
+  function warSweep(){
+    for(const [eid] of S.slots){const e=G.emps[eid];if(!remoteHuman(e)||e.dead)continue;
+      const prev=warSeen.get(eid),cur=new Set(G.emps.filter(o=>o!==e&&!o.dead&&e.war[o.id]).map(o=>o.id)),nm=id=>e.contact&&e.contact[id]?G.emps[id].name:'Bilinmeyen devlet';
+      if(prev){for(const id of cur)if(!prev.has(id)){const d=e.warDefense&&e.warDefense[id],why=e.warCause&&e.warCause[id];
+          note(eid,'SAVAŞ BAŞLADI — '+nm(id)+(d&&d.defensive?' (savunma)':'')+(why?' · '+why:''),'war');}
+        for(const id of prev)if(!cur.has(id))note(eid,'Savaş sona erdi — '+nm(id),'win');}
+      warSeen.set(eid,cur);}
+  }
+  function publish(){dipSweep();pure(polSweep);pure(warSweep);const rev=++S.worldRevision;for(const p of S.players.values())publishTo(p,rev);return rev;}
 
   /* ---------- komutlar: yalnız bu tablo ---------- */
   function locate(e,c){
@@ -308,6 +320,17 @@ function createHost(opts){
   }
   /* MP.6.1: başkasının ya da olmayan filo aynı kodu alır (filo kimliği yoklanamaz) */
   function ownFleet(e,c){const f=G.fleets.find(x=>x.id===c.fleet);return f&&f.e===e.id&&f.ships&&f.ships.length?{f}:{err:'not-owner'};}
+  /* MP.6.2: hedef devlet — yaşıyor, kendisi değil, temaslı (temassız hedef "yok" ile aynı kodu alır) */
+  function warTarget(e,c){const o=G.emps[c.target];return o&&o!==e&&!o.dead&&e.contact&&e.contact[o.id]?o:null;}
+  function diploTarget(e,c){const o=warTarget(e,c);return o&&!o.wild?o:null;}
+  /* MP.6.2 statüko teklifleri (oturum; Save8'e ve MP.4 paketine girmez): insan alıcı kendisi karar verir. Host'un devleti alıcıysa
+     motorun tek oyunculu bildirimi (sqOffer) kullanılır, ama oyunu herkes için duraklatmaz (pause:false). */
+  const SQ=[],SQ_LIFE=180;
+  function sqOffer(a,b){
+    if(b.id===hostEmpireId&&typeof UI!=='undefined'&&UI.notify){UI.notify({kind:'sqOffer',data:a.id,ico:'🤝',cls:'sci',pause:false,title:'STATÜKO BARIŞI TEKLİFİ',sub:a.name+' sınırların donmasını öneriyor',key:'sq:'+a.id});return true;}
+    if(SQ.some(q=>q.status==='pending'&&q.from===a.id&&q.to===b.id))return true;
+    SQ.push({from:a.id,to:b.id,born:Math.floor(G.day),expires:Math.floor(G.day)+SQ_LIFE,status:'pending'});if(SQ.length>100)SQ.splice(0,SQ.length-100);
+    dipNotify(b.id,'Statüko barışı teklifi — '+a.name,'sci');return true;}
   /* tek oyunculu mergeFleets: aynı sistemde, sevkiyatsız, aynı gruptan (savaş / sivil) kendi filoları */
   function mergeMates(e,f){const g=fleetGroup(f);return G.fleets.filter(x=>x!==f&&x.e===e.id&&x.sys===f.sys&&x.ships.length&&!hasShipment(x)&&fleetGroup(x)===g);}
   /* ═══ MP.6.1 ortak oyun hızı ═══
@@ -434,6 +457,55 @@ function createHost(opts){
         if(a.length>=SPEED_BURST||a.length&&t-a[a.length-1]<SPEED_GAP)return 'rate-limited';return null;},
       roots:()=>[],
       apply(e,at,c){const t=now();speedRate.set(e.id,[...(speedRate.get(e.id)||[]).filter(x=>t-x<SPEED_WINDOW),t]);setSpeed(c.value);speedOut(e.id,curActor,false);return true;}},
+    /* ═══ MP.6.2 — savaş ve ikili siyaset. Yeni motor yok: tek oyunculu son onayın (warFinalConfirm) zinciri —
+       warDeclarationPreview → warDeclarationAccess → declareWar → setWarGoal — yalnız komutu verenin devleti için.
+       Önizleme (warQuote) motorun kendi bilgisini kullanır: yalnız ilan edenin temaslı olduğu devletler, bilinen federasyon
+       bağları, istihbarat ≥3. Konsey yasağında motor yalnız devlet 0'a "bilerek çiğne" yolunu açıyor, diğerlerine AI zarı
+       (rnd < .75 → vazgeç) atıyor: insan için devlet 0 dalı aynen uygulanır (ceza + savaş), AI zarı ve RNG çekimi yok. */
+    warQuote:{keys:['kind','target','goal'],ro:true,check:c=>int(c.target,0,63)&&typeof c.goal==='string'&&has(WAR_GOALS,c.goal),locate:()=>({}),
+      why:(e,at,c)=>warTarget(e,c)?null:'no-target',roots:()=>[],
+      apply:(e,at,c)=>({ok:true,extra:warDeclarationPreview(e,G.emps[c.target],c.goal)})},
+    war:{say:'actor',keys:['kind','target','goal'],check:c=>int(c.target,0,63)&&typeof c.goal==='string'&&has(WAR_GOALS,c.goal),locate:()=>({}),
+      why(e,at,c){const o=warTarget(e,c);if(!o)return 'no-target';const p=warDeclarationPreview(e,o,c.goal);return p.ok?null:{code:'war',detail:p.blockers.slice(0,4).map(String)};},
+      roots:()=>[],
+      apply(e,at,c){const o=G.emps[c.target];if(!warDeclarationAccess(e,o).ok)return false;
+        const council=typeof councilBlocksWar==='function'&&councilBlocksWar(e,o),cb0=council?councilBlocksWar:null;
+        if(council){say('KONSEY YASAĞI: '+o.name+' korunuyor. Yine de saldırırsan konsey sana döner.','war');councilPunish(e);councilBlocksWar=()=>false;}
+        let ok;try{ok=declareWar(e,o);}finally{if(council)councilBlocksWar=cb0;}
+        if(!ok)return false;if(setWarGoal(e,o,c.goal))say('Savaş hedefi: '+WAR_GOALS[c.goal].n,'war');return true;}},
+    /* ittifakı sonlandır (canEndAlliance / endAlliance), ticaret anlaşmasını feshet (tek oyunculu unpactYes satırları),
+       ambargo (setEmbargo), hediye (tek oyunculu giftDo satırları) */
+    endAlliance:{say:'actor',keys:['kind','target'],check:c=>int(c.target,0,63),locate:()=>({}),
+      why(e,at,c){const o=diploTarget(e,c);if(!o)return 'no-target';const g=canEndAlliance(e,o);return g.ok?null:{code:'diplo',detail:[String(g.why||'').slice(0,200)]};},
+      roots:()=>[],apply:(e,at,c)=>endAlliance(e,G.emps[c.target])},
+    unpact:{say:'actor',keys:['kind','target'],check:c=>int(c.target,0,63),locate:()=>({}),
+      why(e,at,c){const o=diploTarget(e,c);if(!o)return 'no-target';return e.pact&&e.pact[o.id]?null:'no-pact';},
+      roots:(e,at,c)=>[e.pact,e.rel,G.emps[c.target].pact],
+      apply(e,at,c){const o=G.emps[c.target];breakPact(e,o);e.rel[o.id]=clamp(e.rel[o.id]-10,-100,100);say('Ticaret anlaşması feshedildi');return true;}},
+    embargo:{say:'actor',keys:['kind','target','on'],check:c=>int(c.target,0,63)&&typeof c.on==='boolean',locate:()=>({}),
+      why(e,at,c){const o=diploTarget(e,c);if(!o)return 'no-target';return !!(e.embargo&&e.embargo[o.id])===c.on?'same':null;},
+      roots:()=>[],
+      apply(e,at,c){if(!setEmbargo(e,G.emps[c.target],c.on,c.on?'kararın':undefined))return false;G.emps.forEach(z=>{if(!z.dead)recalcMods(z);});return true;}},
+    gift:{say:'actor',keys:['kind','target','r','v'],check:c=>int(c.target,0,63)&&['min','ene','ala','tuk','yiy'].includes(c.r)&&int(c.v,1,10000000),locate:()=>({}),
+      why(e,at,c){const o=diploTarget(e,c);if(!o)return 'no-target';return (e.res[c.r]||0)<c.v?'resources':null;},
+      roots:(e,at,c)=>[e.res,e.rel,G.emps[c.target].res,G.emps[c.target].rel],
+      apply(e,at,c){const o=G.emps[c.target],r=c.r,amt=c.v;e.res[r]-=amt;o.res[r]=(o.res[r]||0)+amt;
+        const base=itemValue(o,{t:'res',r,v:amt},e),gain=clamp(Math.round(base*.10*(1+e.mods.dipMul)),3,45);
+        e.rel[o.id]=clamp(e.rel[o.id]+gain,-100,100);o.rel[e.id]=clamp(o.rel[e.id]+gain,-100,100);say(o.name+' hediyeyi kabul etti (+'+gain+' ilişki)','win');
+        if(remoteHuman(o))note(o.id,'Hediye — '+e.name+': '+amt+' '+RES[r].n,'win');return true;}},
+    /* statüko barışı: AI hedefe tek oyunculu 'statuko' gibi doğrudan (canStatusQuo kapısı); İNSAN hedefe teklif olur ve
+       kararı o insan verir (statusQuoReply). AI'nın uzak insana teklifi de buraya düşer (installGuards). */
+    statusQuo:{say:'actor',keys:['kind','target'],check:c=>int(c.target,0,63),locate:()=>({}),
+      why(e,at,c){const o=diploTarget(e,c);if(!o)return 'no-target';if(!e.war[o.id])return 'no-war';
+        if(isHumanActor(o)&&o.id!==e.id){return SQ.some(q=>q.status==='pending'&&q.from===e.id&&q.to===o.id)?'duplicate':null;}
+        const g=canStatusQuo(e,o);return g.ok?null:{code:'diplo',detail:[String(g.why||'').slice(0,200)]};},
+      roots:()=>[],
+      apply(e,at,c){const o=G.emps[c.target];if(isHumanActor(o))return sqOffer(e,o);const r=statusQuoPeace(e,o);return r&&r.ok?true:{ok:false,why:(r&&r.why)||'Barış uygulanamadı'};}},
+    statusQuoReply:{say:'actor',keys:['kind','from','accept'],check:c=>int(c.from,0,63)&&typeof c.accept==='boolean',locate(e,c){const q=SQ.find(x=>x.status==='pending'&&x.from===c.from&&x.to===e.id);return q?{q}:{err:'no-offer'};},
+      why(e,{q},c){if(G.day>=q.expires)return 'expired';const o=G.emps[q.from];if(!o||o.dead||!e.war[o.id])return 'closed';if(!c.accept)return null;const g=canStatusQuo(e,o);return g.ok?null:{code:'diplo',detail:[String(g.why||'').slice(0,200)]};},
+      roots:()=>[],
+      apply(e,{q},c){const o=G.emps[q.from];if(!c.accept){q.status='rejected';dipNotify(o.id,'Statüko teklifi reddedildi — '+e.name,'war');return true;}
+        const r=statusQuoPeace(e,o);if(!(r&&r.ok))return {ok:false,why:(r&&r.why)||'Barış uygulanamadı'};q.status='accepted';dipNotify(o.id,'Statüko barışı imzalandı — '+e.name,'win');return true;}},
     /* ═══ MP.3 — diplomasi. Yeni motor yok: dealQuote / executeDeal / aiRespond. Teklif kaydı Save8 dışında,
        oturumdadır (dipView yalnız taraflara gönderir). Taraf olmayan teklif kimliği "yok" ile aynı kodu alır. */
     offer:{keys:['kind','to','give','want'],
@@ -529,14 +601,16 @@ function createHost(opts){
   });
   /* ═══ MP.3 diplomasi durumu (oturum; Save8'e girmez — kalıcılık MP.4) ═══ */
   const DIP_ROUNDS=6,DIP_PENDING_OUT=8,DIP_KEEP=160,DIP_RES=['min','ene','yiy','ala','tuk','ara','etk'];
+  /* MP.6.2: parametresiz antlaşma maddeleri — saldırmazlık, ticaret, ittifak, sensör paylaşımı, sınır geçişi (casusluk ağı kapsam dışı) */
+  const DIP_TREATY=['peace','nap','pact','ally','intel','passage'];
   const D={next:1,offers:[]};
   const dipLife=()=>typeof DEAL_OFFER_LIFE==='number'?DEAL_OFFER_LIFE:540;   // tek oyunculuyla aynı ömür (oyun günü)
-  /* insanın kurabileceği maddeler: yalnız kaynak ve barış (kanonik motorun desteklediği; kaynak kataloğu RES) */
+  /* insanın kurabileceği maddeler: kaynak, barış ve MP.6.2 antlaşmaları (kanonik motorun desteklediği; kaynak kataloğu RES) */
   function dipItems(list){
     if(!Array.isArray(list)||list.length>8)return null;const out=[];
     for(const it of list){if(!plain(it))return null;
       if(it.t==='res'&&onlyKeys(it,['t','r','v'])&&DIP_RES.includes(it.r)&&int(it.v,1,10000000))out.push({t:'res',r:it.r,v:it.v});
-      else if(it.t==='peace'&&onlyKeys(it,['t']))out.push({t:'peace'});
+      else if(DIP_TREATY.includes(it.t)&&onlyKeys(it,['t']))out.push({t:it.t});   // MP.6.2: barış + antlaşmalar (motorun dealQuote / executeDeal'i)
       else return null;}
     return out;
   }
@@ -600,6 +674,7 @@ function createHost(opts){
   }
   /* oyun zamanıyla ömür ve geçerlilik süpürmesi (her yayında) */
   function dipSweep(){
+    for(const q of SQ)if(q.status==='pending'&&G.day>=q.expires)q.status='expired';   // MP.6.2 statüko teklifleri
     for(const r of D.offers){if(r.status!=='pending')continue;const a=G.emps[r.from],b=G.emps[r.to];
       if(G.day>r.expires){r.status='expired';r.finished=G.day;r.why='Süre doldu';dipNotify(r.from,'Teklif süresi doldu — '+(b?b.name:''));dipNotify(r.to,'Teklif süresi doldu — '+(a?a.name:''));}
       else if(!dipParty(a)||!dipParty(b)||!a.contact[b.id]||!b.contact[a.id]){r.status='invalid';r.finished=G.day;r.why='Taraflardan biri artık anlaşma yapamaz';
@@ -613,7 +688,8 @@ function createHost(opts){
     const offers=D.offers.filter(r=>r.from===e.id||r.to===e.id).slice(-40).map(r=>({id:r.id,from:r.from,to:r.to,fn:nm(r.from),tn:nm(r.to),give:r.give.map(lb),want:r.want.map(lb),
       born:Math.floor(r.born),expires:Math.floor(r.expires),round:r.round,prev:r.prev,status:r.status,why:r.why,by:r.by,cost:r.cost}));
     const contacts=G.emps.filter(o=>o!==e&&dipParty(o)&&e.contact[o.id]).map(o=>({id:o.id,n:nm(o.id),col:o.col,h:isHumanActor(o)?1:0,rel:Math.round(e.rel[o.id]||0),bl:diploBlocked(e,o)?1:0,war:e.war[o.id]?1:0,peace:e.war[o.id]&&canPeace(e,o)?1:0}));
-    return {offers,contacts,life:dipLife(),rounds:DIP_ROUNDS};   // gün: clock.day (her gün dip bölümünü yeniden göndermemek için)
+    const sq=SQ.filter(q=>q.from===e.id||q.to===e.id).slice(-20).map(q=>({...q,fn:nm(q.from),tn:nm(q.to)}));   // MP.6.2: yalnız taraflara
+    return {offers,contacts,life:dipLife(),rounds:DIP_ROUNDS,sq};   // gün: clock.day (her gün dip bölümünü yeniden göndermemek için)
   }
 
   /* ═══ MP.3.1 federasyon / vasallık: görünüm, önizleme, bildirim ═══ */
@@ -924,7 +1000,7 @@ function createHost(opts){
   function installGuards(){
     /* MP.4: aynı sayfada yeni oda ya da yüklenen kayıt yeni bir host örneği kurar. Korumalar bir kez sarılır ama
        her çağrıda ETKİN host'a yönlenir (eski odanın oyuncu tablosu kullanılmaz). */
-    root.__mpCur={remoteHuman,aiToHuman,note,stats};
+    root.__mpCur={remoteHuman,aiToHuman,note,stats,sqOffer};
     root.__mpHumanVoter=id=>root.__mpCur.remoteHuman(G.emps[id]);
     if(root.__mp0Guards)return;root.__mp0Guards=true;
     const cur=()=>root.__mpCur,RH=e=>cur().remoteHuman(e),NOTE=(id,m,c)=>cur().note(id,m,c),ATH=(...a)=>cur().aiToHuman(...a),ST={get blockedAI(){return cur().stats.blockedAI;},set blockedAI(v){cur().stats.blockedAI=v;}};
@@ -949,6 +1025,22 @@ function createHost(opts){
        Uzak insan da AI eğilimiyle kurucu yazılamaz. */
     const founder=fedFounderCandidate;
     fedFounderCandidate=function(e,o){if(o&&o!==e&&RH(o)){ST.blockedAI++;const why='Oyuncunun açık üyelik onayı gerekli';return {ok:false,reasons:[why],why};}return founder.apply(this,arguments);};
+    /* MP.6.2: AI'nın barış ve statüko kararları. Motor yalnız devlet 0'a "teklif et, karar onun" diyordu:
+       - aiTurn barış adımı insan hedefe UI.peaceOffer(e) çağırıyordu → teklif HOST'un gelen kutusuna düşüyordu;
+       - aiStatusQuoTick devlet 0 dışındaki her hedefle statusQuoPeace'i AI kararıyla imzalıyordu (uzak insan adına).
+       Uzak insan hedefte teklif o insanın kendi kutusuna gider (MP.3 'peace' maddesi / MP.6.2 statüko teklifi); kararı o verir.
+       Uzak insan yokken __mpHumanVoter hep false: davranış ve RNG birebir aynı. Metin beklenen biçimde değilse kurulum durur. */
+    root.__mpPeaceOffer=(a,b)=>cur().aiToHuman(a,b,[{t:'peace'}],[]);
+    root.__mpSqOffer=(a,b)=>{ST.blockedAI++;return cur().sqOffer(a,b);};
+    /* aiTurn EconomyLedger sarmalayıcısının içinde (metni yamalanamaz). Barış adımı UI.peaceOffer(e)'den hemen önce
+       e.lastOffer[o.id]=G.day yazar ve hedefleri sırayla dolaşır: o gün teklif yazılmış, henüz işlenmemiş ilk AI-olmayan
+       hedef bu çağrının hedefidir (deterministik; RNG yok). Uzak insansa teklif onun kutusuna, değilse (host) motorun yolu. */
+    if(typeof UI!=='undefined'&&typeof UI.peaceOffer==='function'){const po=UI.peaceOffer,done=new Map();
+      UI.peaceOffer=function(e){const day=G.day,d=done.get(e&&e.id);const seen=d&&d.day===day?d.ids:new Set();
+        const o=e&&e.lastOffer?G.emps.find(x=>x&&x!==e&&!x.ai&&e.war&&e.war[x.id]&&e.lastOffer[x.id]===day&&!seen.has(x.id)):null;
+        if(o){seen.add(o.id);done.set(e.id,{day,ids:seen});if(RH(o))return root.__mpPeaceOffer(e,o);}
+        return po.apply(this,arguments);};}
+    aiStatusQuoTick=patchEngine(aiStatusQuoTick,'if (o.id === 0){\n        /* Oyuncuya teklif edilir','if (__mpHumanVoter(o.id)){__mpSqOffer(e,o);e._sqCd=(G.memAge||0)+24;continue;}\n      if (o.id === 0){\n        /* Oyuncuya teklif edilir');
   }
   function patchEngine(fn,from,to){
     const src=String(fn);if(src.split(from).length!==2)throw Error('MP.3.1: motor metni beklenen biçimde değil — '+from);

@@ -12,7 +12,11 @@
    G'ye yazmaz, RNG çekmez; çıktı yalnız JSON. Ayrıntı: MULTIPLAYER-MP6-MIMARI.md. */
 (function(root){
 const J=x=>x===undefined?undefined:JSON.parse(JSON.stringify(x));
-const EMP_MAPS=['rel','war','ally','contact','nap','pact','embargo','envoy','exh','giftAt','intel','intelP','mem','smuggle','spy','spynet','visionFrom','shareVis','warPend'];
+const EMP_MAPS=['rel','war','ally','contact','nap','pact','embargo','envoy','exh','giftAt','intel','intelP','mem','smuggle','spy','spynet','visionFrom','shareVis','warPend',
+  /* MP.6.2: devlet kimliğiyle anahtarlı diğer haritalar (MP.6'da yeniden numaralandırılmıyordu: host'la savaş başka devlete görünürdü) */
+  'peaceAt','passage','warCause','warSince','warStart','wg','warDefense','coldWar','lastOffer','offerRefused','proxyWar','tradeFlow','routeIntel','fleetIntel','fakeTo','responses','lastSwap'];
+/* kabukta misafirle ikili kamu durumları (savaş başlangıcı, savunma tarafı, barış, geçiş, soğuk savaş, ambargo) */
+const SHELL_PAIR=['warSince','warStart','warDefense','peaceAt','passage','coldWar','embargo'];
 const STRIP_ME=['aiIntel','aiStrategy','aiShipPlan','aiTalk','aiLastOp','_aiSpyNext','_prof','_trCache','_trSig','_press','_pressAt','_powC','_powAt','_trAt','_persAt'];
 const UNKNOWN_COL='#7d90ad';
 const EH_EVENTS=40;
@@ -24,6 +28,7 @@ function build(meId,o={}){
   const remapKeys=m=>{if(!m||typeof m!=='object')return m;const r={};for(const [k,v] of Object.entries(m)){const n=+k;r[/^\d+$/.test(k)&&n<N?pi(n):k]=J(v);}return r;};
   const ctx=explorationContext(me),known=ctx.known,visible=ctx.visible;
   const contacted=id=>id===meId||!!(me.contact&&me.contact[id]);
+  const knownWar=new Set(knownWarPairs(me).map(p=>p.a+':'+p.b));
   /* ---- sistemler ---- */
   const sys=G.sys.map(s=>{
     const k=known.has(s.id),v=visible.has(s.id),surv=s.surv.includes(meId),mine=s.owner===meId;
@@ -54,7 +59,9 @@ function build(meId,o={}){
     /* ilişkileri: misafirle olan gerçek ilişkiler + temaslı devletler arası kamu savaş/ittifak (haritadaki çizgiler) */
     if(c){s.contact[0]=true;s.rel[0]=Math.round((e.rel&&e.rel[meId])||0);if(e.war&&e.war[meId])s.war[0]=J(e.war[meId]);if(e.ally&&e.ally[meId])s.ally[0]=true;
       if(e.nap&&e.nap[meId])s.nap[0]=J(e.nap[meId]);if(e.pact&&e.pact[meId])s.pact[0]=J(e.pact[meId]);
-      for(const o2 of G.emps)if(o2!==e&&o2!==me&&contacted(o2.id)){if(e.war&&e.war[o2.id])s.war[pi(o2.id)]=J(e.war[o2.id]);if(e.ally&&e.ally[o2.id])s.ally[pi(o2.id)]=true;}
+      for(const k of SHELL_PAIR)if(e[k]&&e[k][meId]!==undefined&&e[k][meId]!==null){s[k]=s[k]||{};s[k][0]=J(e[k][meId]);}
+      /* üçüncü taraf savaşları motorun bilgi kuralıyla (knownWarPairs: temas + taraf ya da istihbarat ≥3); MP.6 temaslı her savaşı veriyordu */
+      for(const o2 of G.emps)if(o2!==e&&o2!==me&&contacted(o2.id)){if(e.war&&e.war[o2.id]&&knownWar.has(Math.min(e.id,o2.id)+':'+Math.max(e.id,o2.id)))s.war[pi(o2.id)]=J(e.war[o2.id]);if(e.ally&&e.ally[o2.id]&&knownAllianceBond(me,e,o2))s.ally[pi(o2.id)]=true;}   // ittifak bağı da motorun bilgi kuralıyla
       if(e.overlord!=null&&contacted(e.overlord)){s.overlord=pi(e.overlord);s.vassalType=e.vassalType;}}
     return s;};
   /* MP.6.1: vasallık kayıtları (sözleşme / müzakere) — kimlik alanları yeniden numaralandırılır (restoreVassalContracts
