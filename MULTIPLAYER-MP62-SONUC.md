@@ -165,7 +165,7 @@ Misafirin aynası kabuk olduğundan yerel önizleme yanlış olurdu; bu yüzden 
   - MP.4 paketi;
   - host düğme kapıları;
   - iki insanın ortak savaşı.
-- `tests/browser-mp62.cjs` — **⟨MP62⟩**: host + 2 misafir, 3 ayrı Chromium, gerçek dokunma (§5, §6).
+- `tests/browser-mp62.cjs` — **10/10 PASS**: host + 2 misafir, 3 ayrı Chromium, gerçek dokunma (§5, §6).
 - Komut gecikmesi (dokunuş → host'ta uygulama; yerel relay): 25–196 ms.
   - Savaş 40 ms; kabul 34–196 ms; federasyon 25–79 ms; vasallık 35–91 ms.
 
@@ -173,14 +173,29 @@ Misafirin aynası kabuk olduğundan yerel önizleme yanlış olurdu; bu yüzden 
 
 | Test | Sonuç |
 |---|---|
-| Tam Node regresyonu | ⟨RUNALL⟩ |
-| `mp62_core` / `browser-mp62` | 13/13 · ⟨MP62⟩ |
-| `browser-mp61` / `mp6` | ⟨MP61⟩ · ⟨MP6⟩ |
-| `browser-mp5` / `mp5_docker` | ⟨MP5⟩ |
-| `browser-mp4` | ⟨MP4⟩ |
-| `browser-mp0` / `mp1` / `mp11` / `mp2` / `mp3` / `mp31` | ⟨MPX⟩ |
-| `browser-96h10` (tek oyunculu) | ⟨96H10⟩ |
-| ZIP / SHA-256 / CRC32 / manifest | ⟨ZIP⟩ |
+| Tam Node regresyonu | 153 paket: 6241 GEÇEN / 3 KALAN (yalnız bilinen `faz95d_identity` seed 11/99/404) |
+| `mp62_core` / `browser-mp62` | 13/13 · 10/10 PASS |
+| `browser-mp61` / `mp6` | 13/13 · 11/11 PASS (düzeltme sonrası yeniden koşu) |
+| `browser-mp5` / `mp5_docker` | 10/10 (Docker kipi) · 6/6 PASS |
+| `browser-mp4` | 13/13 PASS |
+| `browser-mp0` / `mp1` / `mp11` / `mp2` / `mp3` / `mp31` | 20/20 · 22/22 (düzeltme sonrası) · 10/10 · 14/14 · 12/12 · 11/11 PASS |
+| `browser-96h10` (tek oyunculu) | 27/27 PASS |
+| ZIP / SHA-256 / CRC32 / manifest | değişmedi; `verify-release --root` DOĞRULANDI |
+
+**Notlar:**
+
+- **İlk regresyon koşusunda `browser-mp1` 1 FAIL — gizlilik hatası bulundu ve düzeltildi.**
+  - MP.6.1 hız bildiriminde, host'un devletiyle teması olmayan misafire host'un lobi adı gidiyordu.
+  - Host sayfasında bu ad `CFG.name`, yani **devlet adıdır**: temassız devlet adı sızıntısı.
+  - Düzeltme:
+    - iç duraklatmalarda (pencere, arka plan) misafire hiç ad gitmez;
+    - host'un açık değişikliğinde temassız misafir "Host" görür.
+  - Sonrasında `browser-mp1` 22/22 PASS.
+- **İlk koşuda `browser-mp6` 2 FAIL — beklenen davranış değişikliği.**
+  - Savaş, ittifak, pakt ve hediye artık çalışıyor; "engelli eylemler" listesi hâlâ desteklenmeyen 8 eylemle güncellendi.
+  - İkinci FAIL bunun sonucuydu: açılan gerçek savaş penceresi MP çubuğunu örtüyordu.
+  - Sonrasında 11/11 PASS.
+- Tam Node koşusu bu küçük düzeltmeden önce yapıldı. Düzeltme yalnız `speed` iletisini etkiler; `mp6*` Node paketleri yeniden koşuldu: 30/0.
 
 ## 11. Açık sorunlar / MP.6.3
 

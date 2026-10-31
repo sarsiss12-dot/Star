@@ -155,9 +155,9 @@ let relay,base,bH,bB,bC,bR,H,Bp,Cp,R,code;
 
   /* MP.6.1: hız, duruş, birleştirme, otomatik keşif, kolonileştirme, yıkım ve dur artık host komutlarıdır (browser-mp61);
      burada hâlâ desteklenmeyen eylemler denetlenir. */
-  await test('desteklenmeyen eylemler açıkça engellenir ve host\'a dokunmaz: savaş ilanı, hediye, casusluk, elçi, terraform, takviye, ittifak, pakt; misafirde zaman ilerlemez',async()=>{
+  await test('desteklenmeyen eylemler açıkça engellenir ve host\'a dokunmaz: casusluk, elçi, terraform, takviye, pazar, rüşvet, federasyon kararı uygulama, bağımsızlık desteği; misafirde zaman ilerlemez',async()=>{
     const s0=await H.evaluate(()=>({speed:G.speed,day:G.day,ser:serialize().length}));
-    const UNS=['war','giftDo','spy','envoyTask','terraform','reinf','ally','pact'];
+    const UNS=['spy','envoyTask','terraform','reinf','mktTrade','bribe','fedExecute','supIndep'];   // MP.6.2: savaş, hediye, ittifak, pakt artık çalışıyor (browser-mp62)
     for(const a of UNS)await Bp.evaluate(a=>UI.act(a,'1'),a);await Bp.waitForTimeout(400);
     assert.equal(await Bp.evaluate(()=>G.speed),0,'guest local speed stays 0 (no local simulation)');
     metrics.blocked=await Bp.evaluate(()=>MP6Stars.S.stats.blocked);

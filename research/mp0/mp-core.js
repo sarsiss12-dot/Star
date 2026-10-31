@@ -344,11 +344,13 @@ function createHost(opts){
   function speedWho(viewerEmp,byEmp,byPlayer){
     if(byEmp===null||byEmp===undefined)return null;const o=G.emps[byEmp],v=G.emps[viewerEmp];
     if(o&&(viewerEmp===byEmp||v&&v.contact&&v.contact[byEmp]))return String(o.name).slice(0,60);
+    if(byPlayer==='host')return 'Host';   // host'un lobi adı devlet adıdır (CFG.name): temassız misafire gitmez
     const p=byPlayer&&S.players.get(byPlayer);return p?String(p.name).slice(0,24):'Bir oyuncu';}
+  /* iç duraklatmada (auto) misafire ad gitmez; açık değişiklikte alıcının bakışından ad */
   function speedOut(byEmp,byPlayer,auto,reason){
     const spd=G.speed|0;lastSpeed=spd;stats.speedChanges=(stats.speedChanges||0)+1;
     for(const p of S.players.values()){if(p.playerId==='host'){if(opts.onSpeed)opts.onSpeed({spd,who:speedWho(hostEmpireId,byEmp,byPlayer),auto:!!auto,self:byEmp===hostEmpireId&&!auto,reason:reason||null});continue;}
-      if(!p.conn)continue;out(p.conn,{v:PROTOCOL,type:'speed',spd,who:speedWho(p.empireId,byEmp,byPlayer),auto:auto?1:0,self:byEmp===p.empireId&&!auto?1:0,...(reason?{reason}:{})});}
+      if(!p.conn)continue;out(p.conn,{v:PROTOCOL,type:'speed',spd,who:auto?null:speedWho(p.empireId,byEmp,byPlayer),auto:auto?1:0,self:byEmp===p.empireId&&!auto?1:0,...(reason?{reason}:{})});}
   }
   /* host'un iç hız değişiklikleri (pencere açınca duraklatma, arka plan, ağ, kayıttan devam): değiştiyse yayınla */
   function speedSync(reason){if(lastSpeed===null){lastSpeed=G.speed|0;return false;}if((G.speed|0)===lastSpeed)return false;speedOut(hostEmpireId,'host',true,reason);return true;}

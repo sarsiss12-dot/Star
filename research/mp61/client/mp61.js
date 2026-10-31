@@ -16,8 +16,8 @@ function text(m){
   const n=m.spd|0;
   if(m.self)return n?'Hızı '+n+'× yaptın':'Oyunu duraklattın';
   if(m.auto){
-    if(m.reason==='window')return n?'Oyun sürüyor — '+n+'×':(m.who?m.who+' bir pencere açtı — ':'')+'oyun duraklatıldı';
-    if(m.reason==='background')return n?'Oyun sürüyor — '+n+'×':(m.who?m.who+' uygulamadan çıktı — ':'')+'oyun duraklatıldı';
+    if(m.reason==='window')return n?'Oyun sürüyor — '+n+'×':(m.who||'Host')+' bir pencere açtı — oyun duraklatıldı';   // misafire ad gitmez: "Host"
+    if(m.reason==='background')return n?'Oyun sürüyor — '+n+'×':(m.who||'Host')+' uygulamadan çıktı — oyun duraklatıldı';
     return n?'Oyun hızı '+n+'×':'Oyun duraklatıldı';}
   const who=m.who||'Bir oyuncu';
   return n?who+' hızı '+n+'× yaptı':who+' oyunu duraklattı';
