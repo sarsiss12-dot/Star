@@ -181,4 +181,13 @@ test('host düğme kapıları (misafirin aynasında eksik veri): statüko kapıs
   for(const r of vb.pol.fed.admit)assert.deepEqual(Object.keys(r).sort(),['id','ok','why']);
   assert(!JSON.stringify(vb.pol).includes('assessments')&&!JSON.stringify(vc).includes('assessments'));
 });
+test('iki insanın ortak savaşı: A ve B aynı AI\'ya farklı hedeflerle savaş açar (ayrı cepheler, ayrı hedefler); A barış yapar, B\'nin savaşı sürer; toprak paylaşımında insan üyeli öneriyi AI uygulamaz (motor kuralı)',()=>{
+  const h=world(`G.feds=[];for(const e of G.emps)e.ally={};`),gs=J(h,'Object.keys(WAR_GOALS)');
+  assert.equal(cmd(h,A,{kind:'war',target:5,goal:gs[0]}).status,'ok');assert.equal(cmd(h,B,{kind:'war',target:5,goal:gs[1]||gs[0]}).status,'ok');
+  assert.deepEqual(J(h,`[G.emps[${A}].wg[5].t,G.emps[${B}].wg[5].t]`),[gs[0],gs[1]||gs[0]],'own war goals');
+  const fr=J(h,`[warLedgerFind(${A},5),warLedgerFind(${B},5)].map(f=>f&&f.id)`);assert(fr[0]&&fr[1]&&fr[0]!==fr[1],'separate fronts');
+  h.run(`makePeace(G.emps[${A}],G.emps[5])`);   // barış motorun yolu (insan–AI barışı MP.3 teklifiyle executeDeal → makePeace)
+  assert.deepEqual(J(h,`[!!G.emps[${A}].war[5],!!G.emps[${B}].war[5]]`),[false,true],'B\'s war continues');
+  assert(J(h,'String(settlementAgendaTick).includes("!G.emps[id]?.ai")'),'engine: offers with a non-AI member are never auto-applied');
+});
 end();
