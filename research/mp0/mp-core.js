@@ -688,7 +688,9 @@ function createHost(opts){
     const nm=id=>G.emps[id]?String(G.emps[id].name):'?',lb=it=>({...it,l:String(dealLabel(it)).replace(/<[^>]*>/g,'').slice(0,90)});
     const offers=D.offers.filter(r=>r.from===e.id||r.to===e.id).slice(-40).map(r=>({id:r.id,from:r.from,to:r.to,fn:nm(r.from),tn:nm(r.to),give:r.give.map(lb),want:r.want.map(lb),
       born:Math.floor(r.born),expires:Math.floor(r.expires),round:r.round,prev:r.prev,status:r.status,why:r.why,by:r.by,cost:r.cost}));
-    const contacts=G.emps.filter(o=>o!==e&&dipParty(o)&&e.contact[o.id]).map(o=>({id:o.id,n:nm(o.id),col:o.col,h:isHumanActor(o)?1:0,rel:Math.round(e.rel[o.id]||0),bl:diploBlocked(e,o)?1:0,war:e.war[o.id]?1:0,peace:e.war[o.id]&&canPeace(e,o)?1:0}));
+    const contacts=G.emps.filter(o=>o!==e&&dipParty(o)&&e.contact[o.id]).map(o=>{const sq=e.war[o.id]?canStatusQuo(e,o):null;   // MP.6.2: statüko kapısı host'ta (misafirin işgal verisi eksik)
+      return {id:o.id,n:nm(o.id),col:o.col,h:isHumanActor(o)?1:0,rel:Math.round(e.rel[o.id]||0),bl:diploBlocked(e,o)?1:0,war:e.war[o.id]?1:0,peace:e.war[o.id]&&canPeace(e,o)?1:0,
+        ...(sq?{sq:sq.ok?1:0,sqw:sq.ok?'':String(sq.why||'').slice(0,160)}:{})};});
     const sq=SQ.filter(q=>q.from===e.id||q.to===e.id).slice(-20).map(q=>({...q,fn:nm(q.from),tn:nm(q.to)}));   // MP.6.2: yalnız taraflara
     return {offers,contacts,life:dipLife(),rounds:DIP_ROUNDS,sq};   // gün: clock.day (her gün dip bölümünü yeniden göndermemek için)
   }
@@ -764,6 +766,8 @@ function createHost(opts){
         vote:fedVoteView(e,f),
         last:lv?{id:lv.id,n:(fedVoteLaw(lv)||{n:String(lv.law)}).n,passed:!!lv.passed,yes:lv.yes,no:lv.no,abstain:lv.abstain,day:Math.floor(lv.day),why:String(lv.why||'').slice(0,200),rule:String(lv.rule||'').slice(0,200)}:null,
         invites:Object.entries(f.invites||{}).map(([id,inv])=>({id:+id,n:polName(e,+id),expires:Math.floor(inv.expires),by:inv.by})),
+        /* MP.6.2: üye kabul önergesi kapısı host'ta (adayın ittifak bağları misafirin aynasında yok) */
+        admit:G.emps.filter(o=>o!==e&&!o.dead&&!o.wild&&e.contact[o.id]&&!f.members.includes(o.id)).map(o=>{const q=canFedMotion(e,'admit',{target:o.id});return {id:o.id,ok:q.ok?1:0,why:q.ok?'':String(q.why||'').slice(0,160)};}),
         leaveWait:720};
     }
     const invites=(G.feds||[]).filter(x=>x.invites&&x.invites[e.id]).map(x=>{const inv=x.invites[e.id],g=fedAdmissionGate(x,e);

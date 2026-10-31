@@ -122,6 +122,12 @@ function gate(){
   wrap('setWarGoal',(o,e,foe,key)=>{if(!mine(e)||!foe||S.pendingWar!==foe.id)return false;S.pendingWar=null;delete S.warQuote[foe.id+':'+key];
     const cid=send({kind:'war',target:real(foe.id),goal:String(key)});
     if(cid)waits[cid]=res=>toast(res.status==='ok'?'Savaş ilanı host\'ta uygulandı — '+(foe.name||''):'Host reddetti: '+why(res),res.status!=='ok');return !!cid;});
+  /* MP.6.2 — misafirin aynasında eksik olan veriye dayanan düğme kapıları host'un kararını kullanır (MP.2/MP.3.1 görünümü):
+     statüko (işgal haritası), federasyona başvuru (aracı üyenin Etkisi) ve üye kabul önergesi (adayın ittifak bağları). */
+  const hv=()=>S.J&&S.J.game&&S.J.game.view;
+  wrap('canStatusQuo',(o,a,b)=>{if(mine(a)&&b){const c=hv()&&hv().dip&&hv().dip.contacts.find(x=>x.id===real(b.id));if(c&&c.sq!==undefined)return {ok:!!c.sq,why:c.sqw||''};}return o(a,b);});
+  wrap('canRequestFederation',(o,e,via)=>{if(mine(e)&&via){const p=hv()&&hv().pol;const v=p&&(p.others||[]).flatMap(x=>x.vias||[]).find(x=>x.id===real(via.id));if(v)return {ok:!!v.ok,why:v.why||''};}return o(e,via);});   // aracı üyenin Etkisi kabukta yok: MP.3.1 polView kararı
+  wrap('canFedMotion',(o,e,kind,opt)=>{if(mine(e)&&kind==='admit'&&opt&&Number.isInteger(opt.target)){const f=hv()&&hv().pol&&hv().pol.fed,row=f&&(f.admit||[]).find(x=>x.id===real(opt.target));if(row)return {ok:!!row.ok,why:row.why};}return o(e,kind,opt);});
   /* MP.6.2 — ittifakı sonlandır, ticaret anlaşmasını feshet, ambargo: gerçek onay pencereleri → komut */
   wrap('endAlliance',(o,e,other)=>mine(e)&&other?r({kind:'endAlliance',target:real(other.id)}):NOT_MP);
   wrap('breakPact',(o,a,b)=>{if(!mine(a)||!b)return o(a,b);send({kind:'unpact',target:real(b.id)});});
@@ -138,6 +144,7 @@ function gate(){
     const cid=send(ctr?{kind:'counter',offer:ctr.offer,give,want}:{kind:'offer',to:real(d.to),give,want});if(ctr)S.counter=null;
     this.dealMsg=cid?'Teklif host\'a gönderildi; yanıt gelen kutuna ve bildirimlere düşer.':'Host bağlı değil; teklif gönderilmedi.';
     if(cid)waits[cid]=res=>toast(res.status==='ok'?'Teklif gönderildi — '+(G.emps[d.to]?.name||''):'Host reddetti: '+why(res),res.status!=='ok');
+    if(cid){const to=d.to,m=this.dealMsg;this.forgetDeal(to);this.openDeal(to);this.dealMsg=m;}   // gönderilen taslak temizlenir (tek oyunculuda imzada forgetDeal)
     this.drawDeal();};
   /* anlaşma penceresinin yerel önizlemesi: karşı tarafın stoğu aynada yok (kabuk). MP.3 dipGate ile aynı kural: misafirde yalnız
      KENDİ yükümlülükleri denetlenir, karşı tarafın kaynak satırları ("Ad → …") düşer; kesin denetim host'ta (offer / respond). */
@@ -189,10 +196,9 @@ function onMessage(m){
   if(m.type==='speed'){S.hostSpd=m.spd|0;S.stats.speedMsgs++;paintSpeed();if(window.MP61)MP61.speed(m);return true;}
   return false;
 }
-/* ayna bekletme: gerçek onay penceresi (#modal) ya da diplomasi/federasyon sayfası açıkken (taslaklar G.p kimliğine bağlı).
-   Bilim ekranı (aynı #diploPane) canlı güncellenir: tek oyunculuda da açıkken oyun sürer. */
-function holdBuild(){const m=doc.getElementById('modal'),d=doc.getElementById('diploPane');
-  return !!(m&&!m.classList.contains('hidden'))||!!(d&&d.classList.contains('show')&&UI.globalCur!=='bilim');}
+/* ayna bekletme: yalnız gerçek onay penceresi (#modal) açıkken. MP.6.2: diplomasi sayfası açıkken de ayna uygulanır; sayfa,
+   hedef ve anlaşma taslağı yeni dünyaya taşınır (ensureDiploWorld G.p kimliği değişince bunları sıfırlıyordu). */
+function holdBuild(){const m=doc.getElementById('modal');return !!(m&&!m.classList.contains('hidden'));}
 function schedule(){if(S.timer)return;const wait=Math.max(0,S.minGap-(Date.now()-S.lastBuild));S.timer=setTimeout(rebuild,wait);}
 function rebuild(){
   S.timer=null;if(!S.mirror)return;
@@ -202,11 +208,12 @@ function rebuild(){
      yarım hareketi bozulmasın diye korunur. Kamera View.cam'de; deserialize ona dokunmaz. Seçili filo kimlikle korunur. */
   const keep={route:View.route,routed:View.routed,note:UI._openNote,offer:UI.pendingOffer,sel:View.sel&&View.sel.id},rg=View.resetGesture;
   const t0=performance.now();S.building=true;let ok=false;
-  try{View.resetGesture=S.started?function(){}:rg;ok=deserialize(JSON.stringify(S.mirror));if(ok)inboxOffers();}catch{ok=false;}
+  try{View.resetGesture=S.started?function(){}:rg;ok=deserialize(JSON.stringify(S.mirror));if(ok)inboxOffers();S.inboxSig=null;}catch{ok=false;}
   finally{View.resetGesture=rg;S.building=false;}
   S.lastBuild=Date.now();
   if(!ok){S.stats.fail=(S.stats.fail||0)+1;S.timer=setTimeout(rebuild,1000);return;}
   G.autoSave=false;G.speed=0;
+  if(S.started&&UI._diploWorld)UI._diploWorld=G.p;   // açık diplomasi sayfası ve taslaklar korunur
   if(S.started){View.route=keep.route;View.routed=keep.routed;UI._openNote=keep.note;UI.pendingOffer=keep.offer;
     if(keep.sel!==null&&keep.sel!==undefined&&!View.sel){const f=G.fleets.find(x=>x.id===keep.sel);if(f)View.sel=f;}}
   const ms=performance.now()-t0;S.stats.builds++;S.stats.buildMs.push(Math.round(ms*10)/10);if(S.stats.buildMs.length>60)S.stats.buildMs.shift();
@@ -286,6 +293,10 @@ function update(statusHtml){
     if(waits[r.cid]){const w=waits[r.cid];delete waits[r.cid];try{w(r);}catch{}continue;}   // MP diplomasi paneli / gelen kutusu kendi sonucunu gösterir
     if(r.status!=='ok'&&r.code!=='rules:same')toast('Host reddetti: '+why(r),true);}
   if(dipEl)dipTick(false);
+  /* MP.6.2: bekleyen teklif G'yi değiştirmez → host yeni ayna göndermeyebilir; MP.3 'dip' görünümü değişince gerçek gelen
+     kutusu ayna beklemeden güncellenir (capture tekrar eden kaydı yeniden eklemez). */
+  const v=J.game&&J.game.view;if(S.started&&!S.building&&v&&v.dip){const sig=JSON.stringify([v.dip.offers.filter(o=>o.to===J.empireId&&o.status==='pending').map(o=>o.id),(v.dip.sq||[]).filter(q=>q.to===J.empireId&&q.status==='pending').map(q=>q.from+':'+q.born)]);
+    if(sig!==S.inboxSig){S.inboxSig=sig;try{inboxOffers();}catch{}}}
 }
 window.MP6Stars={S,onMessage,update,screen,attach(J){S.J=J;},onAssign(){S.uiSent=false;},VIEW,ACT,dip:{open:dipOpen,seg:seg6,get ui(){return dipUI;},get pol(){return polUI;}}};
 /* telefon geri tuşu: önce açık MP diplomasi onayı/paneli kapanır (join.js popstate bunu sorar) */

@@ -172,4 +172,13 @@ test('kayıt: bekleyen ittifak teklifi MP.4 paketinde doğrulanır ve yüklenir 
   const pkg=J(h,'MP.snapshot().pkg');assert.equal(J(h,`StarsMP.validatePackage(${JSON.stringify(JSON.stringify(pkg))},{build:BUILD_ID}).ok`),true);
   assert(pkg.diplomacy.offers.some(o=>o.want.some(i=>i.t==='nap')));
 });
+test('host düğme kapıları (misafirin aynasında eksik veri): statüko kapısı yalnız savaşılan temaslıya, üye kabul kapısı yalnız üyeye ve yalnız {id, ok, why}; AI değerlendirmesi gitmez',()=>{
+  const h=world(),g=goal(h);assert.equal(cmd(h,A,{kind:'war',target:B,goal:g}).status,'ok');h.run('MP.publish()');
+  const va=lastView(h,A),vb=lastView(h,B),vc=lastView(h,C);
+  const cb=va.dip.contacts.find(x=>x.id===B);assert.deepEqual([cb.sq,typeof cb.sqw],[J(h,`canStatusQuo(G.emps[${A}],G.emps[${B}]).ok?1:0`),'string']);
+  for(const x of va.dip.contacts)assert.equal(x.sq!==undefined,J(h,'!!G.emps['+A+'].war['+x.id+']'),'gate only for wars: '+x.id);
+  assert(Array.isArray(vb.pol.fed.admit),'member gets the admission gate');assert.equal(va.pol.fed,null,'non-member gets no federation');
+  for(const r of vb.pol.fed.admit)assert.deepEqual(Object.keys(r).sort(),['id','ok','why']);
+  assert(!JSON.stringify(vb.pol).includes('assessments')&&!JSON.stringify(vc).includes('assessments'));
+});
 end();
