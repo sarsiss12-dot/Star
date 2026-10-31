@@ -14,7 +14,7 @@ const PHONE=(w,h)=>({viewport:{width:w,height:h},isMobile:true,hasTouch:true,dev
 const B=3,C=5;
 let tno=0;const UNTIL=+(process.env.MP63_UNTIL||1e9);
 const ONLY=process.env.MP63_ONLY||'';
-async function test(name,fn){if(++tno>UNTIL||ONLY&&tno>1&&!name.includes(ONLY)&&!name.startsWith('sayfa'))return;const t0=Date.now();try{await fn();results.push({name,status:'PASS',ms:Date.now()-t0});console.log('PASS '+name);}
+async function test(name,fn){if(++tno>UNTIL||ONLY&&tno>1&&!new RegExp(ONLY).test(name)&&!name.startsWith('sayfa'))return;const t0=Date.now();try{await fn();results.push({name,status:'PASS',ms:Date.now()-t0});console.log('PASS '+name);}
   catch(e){results.push({name,status:'FAIL',error:String(e&&e.stack||e).slice(0,1600)});console.log('FAIL '+name+'\n'+(e&&e.stack||e));}}
 const wait=(p,fn,arg,timeout=25000)=>p.waitForFunction(fn,arg,{timeout,polling:80});
 const shot=(p,n)=>p.screenshot({path:path.join(out,n+'.png')}).catch(()=>{});
@@ -23,7 +23,7 @@ const POLITICS=`(()=>{for(const e of G.emps)if(!e.wild){for(const k of ['etk','e
   for(const a of [0,1,2,3,4,5])for(const b of [0,1,2,3,4,5])if(a!==b){G.emps[a].contact[b]=true;G.emps[a].rel[b]=60;}
   for(const id of [0,1,2,3,4,5]){recalcMods(G.emps[id]);G.emps[id]._powAt=-1;}MP1Host.host.publish();})()`;
 async function synced(H,p){await H.evaluate(()=>MP1Host.host.publish());const d=await H.evaluate(()=>G.day);
-  await wait(p,d=>typeof G!=='undefined'&&Math.abs(G.day-d)<1e-9&&!MP6Stars.S.timer,d,15000);}
+  await wait(p,d=>typeof G!=='undefined'&&Math.abs(G.day-d)<1e-9&&!MP6Stars.S.timer,d,15000).catch(async e=>{throw Error('synced: host day '+d+' guest '+JSON.stringify(await p.evaluate(()=>({day:G.day,timer:!!MP6Stars.S.timer,modal:!document.getElementById('modal').classList.contains('hidden')&&document.querySelector('#modal .mhd')?.textContent,held:MP6Stars.S.stats.held}))));});}
 async function tap(p,sel){const l=p.locator(sel).first();await l.scrollIntoViewIfNeeded().catch(()=>{});await l.tap();}
 async function openInbox(p){if(!await p.locator('#tools [data-a="diplomaticInbox"]').first().isVisible())await tap(p,'#tools [data-a="grpTog"][data-x="emp"]');await tap(p,'#tools [data-a="diplomaticInbox"]');}
 const spOn=p=>p.evaluate(()=>{const b=document.querySelector('#timepod .sp.on');return b?+b.dataset.x:null;});
@@ -165,6 +165,58 @@ let relay,base,bH,bB,bC,H,Bp,Cp;
     await tap(Bp,'#timepod .sp[data-x="0"]');await all(0,'end: paused');
   });
 
+  /* ═══ B. ortak savaş ganimeti paylaşımı ═══
+     FİKSTÜR (açıkça; Node mp63_settle_test ile aynı yol): host T=2'ye savaş ilan eder, B ve AI M=4 motorun 'warOn' anlaşmasıyla
+     katılır; T'nin dört boş sistemi kurulup captureSystem ile ele geçirilir (host 1, B 2, M 1); cepheler makePeace ile kapanır.
+     C (5) sefer dışıdır. Sonrası gerçek STARS düğmelerine gerçek dokunma. */
+  const SFIX=`(()=>{for(const s of G.sys){s.seen=G.emps.map(e=>e.id);s.surv=G.emps.map(e=>e.id);}
+    for(const id of [0,3,4,2])for(const o of [0,1,2,3,4,5])G.emps[id].war[o]=G.emps[o].war[id]=false;
+    var P=G.p,Bq=G.emps[3],Tt=G.emps[2],Mm=G.emps[4];declareWar(P,Tt);executeDeal({from:3,to:0,give:[{t:'warOn',target:2}],want:[]});executeDeal({from:4,to:0,give:[{t:'warOn',target:2}],want:[]});
+    var land=G.sys.filter(s=>!s.planets.some(p=>p.col)&&s.owner!==0&&s.owner!==3&&s.owner!==4).slice(0,4);land.forEach((s,i)=>{s.owner=2;captureSystem(s,[0,3,3,4][i]);});
+    window.__land=land.map(s=>s.id);var c=warLedgerFind(0,2).campaign;makePeace(P,Tt);if(Bq.war[2])makePeace(Bq,Tt);if(Mm.war[2])makePeace(Mm,Tt);window.__camp=c;
+    G.inbox=G.inbox.filter(n=>n.kind!=='warstart');UI.drawInbox();MP1Host.host.publish();return {c,ok:settlementPreview(P,c).ok};})()`;
+  const closeAll=p=>p.evaluate(()=>{if(!document.getElementById('modal').classList.contains('hidden'))UI.closeModal();document.getElementById('diploPane').classList.remove('show');});
+  async function agenda(p){await closeAll(p);await p.evaluate(()=>UI.openDiplo());await wait(p,()=>document.getElementById('diploPane').classList.contains('show'));}
+  const modalText=p=>p.evaluate(()=>document.getElementById('modal').textContent.replace(/\s+/g,' '));
+  let camp=null;
+  await test('B1/B2 iki insan + AI ortak seferi kapattı: B gerçek diplomasi merkezinde taslağı açar; katkı puanları ve önerilen paylar host motorundan; "Alıcıyı değiştir" host önizlemesiyle; C hiçbir şey görmez',async()=>{
+    const r=await H.evaluate(SFIX);assert.equal(r.ok,true,'fixture: closed joint campaign');camp=r.c;
+    await synced(H,Bp);await synced(H,Cp);await wait(Bp,c=>MP1Join.game.view.settle&&MP1Join.game.view.settle.drafts.includes(c),camp).catch(async e=>{throw Error('drafts: guest '+JSON.stringify(await Bp.evaluate(()=>MP1Join.game.view.settle))+' host '+JSON.stringify(await H.evaluate(c=>({v:MP1Host.host.viewFor(G.emps[3]).settle,ctx:settlementContext(G.emps[3],c)}),camp)));});
+    assert.deepEqual(await Cp.evaluate(()=>MP1Join.game.view.settle),{offers:[],drafts:[]},'C (outside the campaign) sees no settlement');
+    await agenda(Bp);await wait(Bp,()=>document.querySelector('#diploPane [data-a="shareOpen"]'));await tap(Bp,'#diploPane [data-a="shareOpen"]');
+    await wait(Bp,()=>/ORTAK SAVAŞ PAYLAŞIMI/.test(document.getElementById('modal').textContent));
+    const t=await modalText(Bp);assert.match(t,/İncelenecek taslak/);assert.match(t,/katkı \d+/);assert.equal((t.match(/ağırlık 1/g)||[]).length,4,'4 captured systems');
+    const hostQ=await H.evaluate(c=>{const q=settlementPreview(G.emps[3],c);return q.shares.map(s=>[s.id,s.points,s.allocated]);},camp);
+    const guestQ=await Bp.evaluate(c=>{const q=Object.values(MP6Stars.SET.quotes).find(x=>x.ok);return q.shares.map(s=>[s.id,s.points,s.allocated]);},camp);
+    const loc=id=>id===0?3:id===3?0:id;assert.deepEqual(guestQ.map(([id,p,a])=>[loc(id),p,a]),hostQ,'contribution and shares = host engine preview');
+    await shot(Bp,'b1-b-draft');
+    const to0=await Bp.evaluate(()=>Object.values(MP6Stars.SET.quotes).find(x=>x.ok).rows[0].to);
+    await tap(Bp,'#modal [data-a="shareNext"]');await wait(Bp,to0=>{const q=Object.entries(MP6Stars.SET.quotes).find(([k,x])=>!k.endsWith('|null')&&x.ok);return q&&q[1].rows[0].to!==to0&&/ORTAK SAVAŞ PAYLAŞIMI/.test(document.getElementById('modal').textContent);},to0);
+    metrics.settle={hostShares:hostQ};
+    await tap(Bp,'#modal [data-a="closem"]');
+  });
+  await test('B3/B4 B taslağı sunar (oyu yalnız B\'nin; AI ortak kendi değerlendirmesiyle; host oyu yok) → host kendi gerçek penceresinde onaylar → B "Onaylı paylaşımı uygula" → devir host\'ta BİR KEZ; B\'ye ve host\'a sonuç bildirimi',async()=>{
+    await agenda(Bp);await tap(Bp,'#diploPane [data-a="shareOpen"]');await wait(Bp,()=>document.querySelector('#modal [data-a="shareSend"]'));
+    await tap(Bp,'#modal [data-a="shareSend"]');await wait(H,c=>(G.settlements.offers||[]).some(o=>o.campaign===c),camp);
+    const o=await H.evaluate(c=>{const o=G.settlements.offers.filter(x=>x.campaign===c).at(-1);return {id:o.id,proposer:o.proposer,state:o.state,votes:o.votes.map(v=>[v.by,v.yes])};},camp);
+    metrics.settle.offer=o;assert.equal(o.proposer,B);assert.deepEqual(o.votes.map(v=>v[0]).sort(),[B,4].sort(),'B (proposer) + AI M; host has not voted');
+    assert.equal(o.state,'pending','AI partner accepted on its own assessment; waiting for the host '+JSON.stringify(o));
+    await wait(H,()=>/Ortak savaş paylaşımı önerildi/.test(document.getElementById('mp3HostToast')?.textContent||'')||G.log.some(l=>/Ortak savaş paylaşımı önerildi/.test(l.m)));
+    await agenda(H);await tap(H,'#diploPane [data-a="shareOpen"]');await wait(H,()=>document.querySelector('#modal [data-a="shareYes"]'));await shot(H,'b3-host-vote');
+    const own0=await H.evaluate(()=>window.__land.map(id=>G.sys[id].owner));
+    await tap(H,'#modal [data-a="shareYes"]');await wait(H,id=>settlementOffer(id).state==='approved',o.id);
+    await closeAll(Bp);await synced(H,Bp);await wait(Bp,id=>{const x=MP6Stars.SET.offers.get(id);return x&&x.state==='approved'&&x.apply&&x.apply.ok;},o.id);
+    await agenda(Bp);await tap(Bp,'#diploPane [data-a="shareOpen"]');await wait(Bp,()=>document.querySelector('#modal [data-a="shareApply"]:not([disabled])'));await shot(Bp,'b4-b-apply');
+    await tap(Bp,'#modal [data-a="shareApply"]');await wait(H,id=>settlementOffer(id).state==='applied',o.id);
+    const after=await H.evaluate(id=>{const x=settlementOffer(id);return {own:window.__land.map(s=>G.sys[s].owner),want:window.__land.map(s=>x.rows.find(r=>r.sys===s).to),by:x.receipt.by,n:x.receipt.transfers.length};},o.id);
+    assert.deepEqual(after.own,after.want,'ownership = the approved rows');assert.equal(after.by,B);metrics.settle.applied={before:own0,...after};
+    const again=await Bp.evaluate(id=>new Promise(res=>{const c=MP1Join.cmd({kind:'settleApply',offer:id});setTimeout(()=>res((MP1Join.results.find(x=>x.cid===c.cid)||{}).code),1500);}),o.id);
+    assert.equal(again,'rules:engine','second application refused');assert.deepEqual(await H.evaluate(()=>window.__land.map(id=>G.sys[id].owner)),after.own,'no double transfer');
+    await H.evaluate(()=>MP1Host.host.publish());await wait(Bp,()=>(MP1Join.game.view.log||[]).some(n=>/tamamlandı — \d+ devir/.test(n.m)));
+    assert.equal(await Cp.evaluate(()=>(MP1Join.game.view.log||[]).some(n=>/paylaşım/i.test(n.m))),false,'C gets no notice');
+    await closeAll(Bp);await synced(H,Bp);await agenda(Bp);await tap(Bp,'#diploPane [data-a="shareOpen"]');await wait(Bp,()=>/Paylaşım uygulandı/.test(document.getElementById('modal').textContent));await shot(Bp,'b4-b-applied');
+    await closeAll(Bp);await closeAll(H);
+  });
   await test('sayfa hataları yok (host, B, C)',async()=>{assert.deepEqual(errors,[]);});
 }catch(e){console.log('FATAL',e);results.push({name:'FATAL',status:'FAIL',error:String(e&&e.stack||e)});}
 finally{
