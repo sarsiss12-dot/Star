@@ -193,7 +193,8 @@ function onMessage(m){
   if(m.type==='mirror'){S.mirror=m.full;S.rev=m.rev;S.stats.mirrors++;schedule();return true;}
   if(m.type==='mirrorDelta'){if(!S.mirror||m.base!==S.rev){S.stats.resyncs++;S.J&&S.J.sendRaw({v:1,type:'resync'});return true;}
     StarsMirror.apply(S.mirror,m.ops);S.rev=m.rev;S.stats.deltas++;schedule();return true;}
-  if(m.type==='speed'){S.hostSpd=m.spd|0;S.stats.speedMsgs++;paintSpeed();if(window.MP61)MP61.speed(m);return true;}
+  if(m.type==='speed'){if(Number.isFinite(m.n)){if(m.n<=(S.speedN||0)){S.stats.staleSpeed=(S.stats.staleSpeed||0)+1;return true;}S.speedN=m.n;}   // MP.6.3: eski hız iletisi yenisini ezmez
+    S.hostSpd=m.spd|0;S.hostWant=Number.isInteger(m.want)?m.want:S.hostSpd;S.stats.speedMsgs++;paintSpeed();if(window.MP61)MP61.speed(m);return true;}
   return false;
 }
 /* ayna bekletme: yalnız gerçek onay penceresi (#modal) açıkken. MP.6.2: diplomasi sayfası açıkken de ayna uygulanır; sayfa,

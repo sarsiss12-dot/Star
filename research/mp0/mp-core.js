@@ -339,6 +339,11 @@ function createHost(opts){
      speedSync ile yayınlanır. Spam koruması: oyuncu başına en az SPEED_GAP ms ara, SPEED_WINDOW içinde en çok SPEED_BURST. */
   const SPEED_MAX=4,SPEED_GAP=700,SPEED_WINDOW=20000,SPEED_BURST=8,speedRate=new Map();let curActor=null,lastSpeed=null;
   const setSpeed=v=>{if(opts.setSpeed)opts.setSpeed(v);else G.speed=v;};
+  /* MP.6.3: host sayfası akıllı duraklatma politikası verirse (opts.speedInfo → {want,reason}) ortak hız = son AÇIK seçim (want);
+     uygulanan G.speed geçici nedenlerle (karar penceresi, arka plan, ağ) daha düşük olabilir. Politika yoksa MP.6.1 davranışı aynen. */
+  const sharedSpeed=()=>{const i=opts.speedInfo&&opts.speedInfo();return i&&Number.isInteger(i.want)?i:{want:G.speed|0,reason:null};};
+  let speedSeq=0;const nextSeq=()=>(speedSeq=Math.max(speedSeq+1,Date.now()));   // eski hız iletisi yenisini ezmesin (misafir küçük n'yi yok sayar)
+  function speedExtra(){const i=sharedSpeed(),spd=G.speed|0;return i.want!==spd?{want:i.want,...(i.reason?{hold:i.reason}:{})}:{};}
   /* Hızı değiştirenin adı alıcının bakışından: kendi devleti ya da temaslı devletse devlet adı, değilse lobideki oyuncu adı
      (lobi adları herkese açıktır; temas kurulmamış devletin adı gitmez). Ad istemciden değil oturumdan gelir. */
   function speedWho(viewerEmp,byEmp,byPlayer){
@@ -348,9 +353,9 @@ function createHost(opts){
     const p=byPlayer&&S.players.get(byPlayer);return p?String(p.name).slice(0,24):'Bir oyuncu';}
   /* iç duraklatmada (auto) misafire ad gitmez; açık değişiklikte alıcının bakışından ad */
   function speedOut(byEmp,byPlayer,auto,reason){
-    const spd=G.speed|0;lastSpeed=spd;stats.speedChanges=(stats.speedChanges||0)+1;
-    for(const p of S.players.values()){if(p.playerId==='host'){if(opts.onSpeed)opts.onSpeed({spd,who:speedWho(hostEmpireId,byEmp,byPlayer),auto:!!auto,self:byEmp===hostEmpireId&&!auto,reason:reason||null});continue;}
-      if(!p.conn)continue;out(p.conn,{v:PROTOCOL,type:'speed',spd,who:auto?null:speedWho(p.empireId,byEmp,byPlayer),auto:auto?1:0,self:byEmp===p.empireId&&!auto?1:0,...(reason?{reason}:{})});}
+    const spd=G.speed|0,x=speedExtra(),n=nextSeq();lastSpeed=spd;stats.speedChanges=(stats.speedChanges||0)+1;
+    for(const p of S.players.values()){if(p.playerId==='host'){if(opts.onSpeed)opts.onSpeed({spd,who:speedWho(hostEmpireId,byEmp,byPlayer),auto:!!auto,self:byEmp===hostEmpireId&&!auto,reason:reason||null,host:1,n,...x});continue;}
+      if(!p.conn)continue;out(p.conn,{v:PROTOCOL,type:'speed',spd,who:auto?null:speedWho(p.empireId,byEmp,byPlayer),auto:auto?1:0,self:byEmp===p.empireId&&!auto?1:0,...(reason?{reason}:{}),n,...x});}
   }
   /* host'un iç hız değişiklikleri (pencere açınca duraklatma, arka plan, ağ, kayıttan devam): değiştiyse yayınla */
   function speedSync(reason){if(lastSpeed===null){lastSpeed=G.speed|0;return false;}if((G.speed|0)===lastSpeed)return false;speedOut(hostEmpireId,'host',true,reason);return true;}
@@ -455,7 +460,7 @@ function createHost(opts){
         claimColony(f,sys,pl.i);if(!orderMove(f,sys.id))return false;f.ord={t:'kol',s:sys.id,p:pl.i};return true;}},
     /* MP.6.1 — ortak oyun hızı: tek yetkili host. Değişiklik herkese yayınlanır (speedOut); aynı hız 'same' (bildirim yok). */
     speed:{keys:['kind','value'],check:c=>int(c.value,0,SPEED_MAX),locate:()=>({}),
-      why(e,at,c){if((G.speed|0)===c.value)return 'same';const t=now(),a=(speedRate.get(e.id)||[]).filter(x=>t-x<SPEED_WINDOW);
+      why(e,at,c){if(sharedSpeed().want===c.value)return 'same';const t=now(),a=(speedRate.get(e.id)||[]).filter(x=>t-x<SPEED_WINDOW);
         if(a.length>=SPEED_BURST||a.length&&t-a[a.length-1]<SPEED_GAP)return 'rate-limited';return null;},
       roots:()=>[],
       apply(e,at,c){const t=now();speedRate.set(e.id,[...(speedRate.get(e.id)||[]).filter(x=>t-x<SPEED_WINDOW),t]);setSpeed(c.value);speedOut(e.id,curActor,false);return true;}},
@@ -887,7 +892,7 @@ function createHost(opts){
       p.conn=conn;p.lastView=null;p.lastMirror=null;p.lastSeen=now();S.conns.set(conn,p.playerId);
       out(conn,{v:PROTOCOL,type:'assign',room:S.roomId,saveId:S.saveId,hostId:S.hostId,playerId:p.playerId,token:p.token,empireId:p.empireId,lastSeq:p.lastSeq,rev:S.worldRevision});
       if(p.empireId!==null)publishTo(p,S.worldRevision);
-      if(!L||['ingame','paused'].includes(L.phase))out(conn,{v:PROTOCOL,type:'speed',spd:G.speed|0,silent:1});   // MP.6.1: dönen oyuncu güncel ortak hızı alır (bildirimsiz)
+      if(!L||['ingame','paused'].includes(L.phase))out(conn,{v:PROTOCOL,type:'speed',spd:G.speed|0,silent:1,n:nextSeq(),...speedExtra()});   // MP.6.1: dönen oyuncu güncel ortak hızı alır (bildirimsiz)
       if(p.visitor)out(conn,{v:PROTOCOL,type:'resume',saveId:S.saveId});   // MP.4: cihazında bu kayıt için jeton varsa misafir onu gönderir
       if(L)broadcastLobby();
       if(opts.onPlayer)opts.onPlayer(p.playerId,'hello');
@@ -1065,7 +1070,7 @@ function createHost(opts){
       return x;});
     const hostE=G.emps[hostEmpireId],name=String(o.name||'').replace(/[\u0000-\u001f<>]/g,'').trim().slice(0,40)||(hostE?String(hostE.name).slice(0,40):'Galaksi');   // tarih ayrı alanlarda (year/month)
     const body={format:PKG_FORMAT,mpVersion:PKG_VERSION,build:typeof BUILD_ID==='string'?BUILD_ID:null,createdAt:now(),saveId:S.saveId,
-      session:{roomId:S.roomId,worldRevision:S.worldRevision,hostEmpireId,speed:G.speed|0,capacity:L?L.capacity:Math.max(2,players.length),settings:L&&L.settings?{size:L.settings.size,aiCount:L.settings.aiCount,...(L.settings.shape!==undefined?{shape:L.settings.shape}:{})}:null,
+      session:{roomId:S.roomId,worldRevision:S.worldRevision,hostEmpireId,speed:sharedSpeed().want,capacity:L?L.capacity:Math.max(2,players.length),settings:L&&L.settings?{size:L.settings.size,aiCount:L.settings.aiCount,...(L.settings.shape!==undefined?{shape:L.settings.shape}:{})}:null,
         players,notes:Object.fromEntries([...notes].map(([k,v])=>[k,v.slice(-12)]))},
       diplomacy:{next:D.next,offers:JSON.parse(JSON.stringify(D.offers))},
       display:{name,year:G.year,month:G.month,day:Math.floor(G.day),size:L&&L.settings?L.settings.size:null,systems:G.sys.length,
@@ -1104,7 +1109,7 @@ function createHost(opts){
   /* ---------- oturum metadatası (Save8'den ayrı, sürümlü) ---------- */
   function meta(saveText){
     return {mpMeta:1,saveId:S.saveId,roomId:S.roomId,worldRevision:S.worldRevision,hostId:S.hostId,
-      build:typeof BUILD_ID==='string'?BUILD_ID:null,saveVersion:8,seed:G.seed,day:G.day,speed:G.speed|0,access:S.access,
+      build:typeof BUILD_ID==='string'?BUILD_ID:null,saveVersion:8,seed:G.seed,day:G.day,speed:sharedSpeed().want,access:S.access,
       saveHash:typeof saveText==='string'?fnv(saveText):null,
       players:[...S.players.values()].map(p=>({playerId:p.playerId,name:p.name,token:p.token,empireId:p.empireId,lastSeq:p.lastSeq,wasAI:p.wasAI,takeover:p.takeover,lastSeen:p.lastSeen}))};
   }

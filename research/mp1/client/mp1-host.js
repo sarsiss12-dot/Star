@@ -146,7 +146,9 @@ function makeHost(){
     /* MP.3: host'u ilgilendiren diplomasi bildirimi host'un kendi günlüğüne (uzak oyuncununki onun listesine gider) */
     hostNotify:(m,c)=>{if(typeof say==='function')say(m,c);dipToast(m,false);},
     /* MP.6.1: ortak hız — host'un G.speed'i tek kaynak; değişiklik herkese yayınlanır, host da aynı bildirimi görür */
-    setSpeed:v=>{if(typeof UI!=='undefined')UI.setSpeed(v);else G.speed=v;},
+    setSpeed:v=>{if(PZ&&API.started){PZ.command(v);applySpeed(false);}else if(typeof UI!=='undefined')UI.setSpeed(v);else G.speed=v;},
+    /* MP.6.3: ortak hız = son açık seçim (want); uygulanan hız geçici nedenlerle (karar penceresi / arka plan / ağ) düşük olabilir */
+    speedInfo:()=>PZ&&API.started?{want:PZ.want,reason:PZ.reason()}:null,
     onSpeed:info=>{if(window.MP61)MP61.speed(info);},
     lobby:{generate(set){setupGame({...CFG,...set});if(CFG.mizac)applyChosenPersona(G.p,CFG.mizac);G.autoSave=false;return {ok:true};}}});
   API.host.installGuards();
@@ -181,7 +183,7 @@ monthTick=function(){const r=month.apply(this,arguments);if(API.host&&API.starte
 setInterval(()=>{
   if(!API.host||!API.started||!API.connected)return;
   const day=Math.floor(G.day);if(API.dirty||day!==API.lastDay){API.dirty=false;API.lastDay=day;API.host.publish();API.publishes++;}
-  API.host.speedSync(window.MP61&&MP61.windowOpen()?'window':API.bg?'background':null);   // MP.6.1: host'un iç duraklatmaları da herkese
+  if(PZ)applySpeed(true);else API.host.speedSync(window.MP61&&MP61.windowOpen()?'window':API.bg?'background':null);   // MP.6.1/6.3: host'un iç hız nedenleri de herkese
   dipTick();
 },250);
 /* MP.6.1: host'un STARS hız düğmeleri de ortak hız komutundan geçer (host.local: misafirle aynı kurallar, aynı bildirim).
@@ -191,12 +193,55 @@ if(typeof UI!=='undefined'){const act0=UI.act.bind(UI);UI.act=function(a,x,el){
     if(!r.ok&&r.code!=='rules:same')dipToast(r.code==='rules:rate-limited'?'Hız çok sık değiştiriliyor; biraz bekle.':r.code==='paused'?'Bağlantı yok — oyun duraklatıldı.':'Hız değiştirilemedi.',true);
     return;}
   return act0(a,x,el);};}
+/* ---------- MP.6.3 akıllı duraklatma ----------
+   STARS'ın tek oyunculu kuralı (openModal → setSpeed(0), closeModal → prePause/modalPrevSpeed) MP'de bütün oyuncuları
+   durduruyordu. Oyun başladıktan sonra host'ta motorun pencere/bildirim kaynaklı setSpeed çağrıları UYGULANMAZ; hız
+   mp63-pause.js politikasından gelir (uygulanan = min(son açık seçim, neden üst sınırları)):
+   - sıradan paneller (diplomasi, bilim, ekonomi, gezegen, filo, casusluk, federasyon/vasallık bilgi ekranları): etkisiz;
+   - karar/olay pencereleri (tek oyunculuda duraklatan bildirimler + savaş bildirimleri): otomatik duraklatma kapalıysa 1×,
+     açıksa duraklatma. Savaş bildirimleri tek oyunculu "Savaşa katılınca duraklat" ayarını (WAR_PAUSE_ON) izler; öteki karar
+     pencereleri host'un MP ayarını ('mp63:decisionPause', varsayılan: yavaşlat);
+   - manuel duraklatma (want 0) önceliklidir: pencere kapanınca oyun kendiliğinden başlamaz;
+   - arka plan / ağ / oyun sonu (G.over) → 0 (MP.5 güvenli duraklatma). Nedenler birbirini silmez; yeniden bağlanınca
+     eski modal kaydı uygulanmaz (want'a yalnız açık hız seçimi dokunur).
+   Misafirin yerel pencereleri host'a hiçbir şey göndermez (misafir simülasyon yürütmez). Host'un başka yollardan doğrudan
+   UI.setSpeed çağrısı (oyun başlangıcı, kayıttan devam, test yardımcıları) açık seçim sayılır. */
+const PZ=window.StarsPause?StarsPause.create({want:0}):null;
+const DEC_KINDS=new Set(['sqOffer','cncnew','cncvote','fedvote','chain','event','anomaly','faccoup','criswarn','crisis','crisend','wardec','warstart']),WAR_KINDS=new Set(['wardec','warstart']);
+let pzQuiet=0,pzRaw=null;const PZS={suppressed:0,applied:0,decisions:0};
+const mpOn=()=>!!(PZ&&API.host&&API.started);
+function decisionPause(){try{return localStorage.getItem('mp63:decisionPause')==='pause';}catch{return false;}}
+const isDecision=n=>!!(n&&(n.pause||DEC_KINDS.has(n.kind)));
+function decCap(n){if(WAR_KINDS.has(n.kind))return typeof WAR_PAUSE_ON!=='undefined'&&WAR_PAUSE_ON?0:1;return decisionPause()?0:1;}
+const inInbox=uid=>(typeof G!=='undefined'&&G.inbox||[]).some(n=>n.uid===uid);
+const modalOpen=()=>{const m=doc.getElementById('modal');return !!(m&&!m.classList.contains('hidden'));};
+function applySpeed(sync){
+  if(!mpOn())return;
+  PZ.toggle('background',!!API.bg,0);PZ.toggle('offline',!API.connected,0);PZ.toggle('engine',!!G.over,0);
+  PZ.reconcile(inInbox,modalOpen());
+  const eff=PZ.effective();if((G.speed|0)!==eff){PZS.applied++;pzRaw(eff);}
+  if(sync&&API.host&&API.connected)API.host.speedSync(PZ.reason());
+}
+if(typeof UI!=='undefined'&&PZ){
+  pzRaw=UI.setSpeed.bind(UI);
+  UI.setSpeed=function(i){if(!mpOn())return pzRaw(i);if(pzQuiet){PZS.suppressed++;applySpeed(false);return;}PZ.setWant(+i|0);applySpeed(false);};
+  const quiet=(name,after)=>{const f=UI[name];UI[name]=function(){if(!mpOn())return f.apply(this,arguments);const pre=after&&after.pre?after.pre.apply(this,arguments):null;pzQuiet++;let r;try{r=f.apply(this,arguments);}finally{pzQuiet--;}if(after)after.post.call(this,pre,arguments);applySpeed(true);return r;};};
+  quiet('act');quiet('openModal');
+  quiet('closeModal',{post(){PZ.decClose(inInbox);}});
+  quiet('notify',{post(_,a){const it=a[0];if(isDecision(it)&&(G.inbox||[]).includes(it)){PZ.decPending(it.uid,decCap(it));PZS.decisions++;}}});
+  quiet('openNote',{pre(uid){return (G.inbox||[]).find(x=>x.uid===+uid)||null;},post(it){if(isDecision(it)&&modalOpen())PZ.decOpen(it.uid,decCap(it));}});
+}
+API.pause=PZ;API.pauseStats=PZS;
+/* MP.5 uyumluluğu: ağ/arka plan duraklatması süren ortak hız (eski netSpeed/bgSpeed alanlarının anlamı) */
+Object.defineProperty(API,'netSpeed',{get:()=>mpOn()&&!API.connected?PZ.want:0});
+Object.defineProperty(API,'bgSpeed',{get:()=>mpOn()&&API.bg?PZ.want:0});
 function mini(){
   let el=doc.getElementById('mp1Mini');
   if(!el){el=doc.createElement('div');el.id='mp1Mini';el.className='mp1-mini';(doc.getElementById('app')||doc.body).appendChild(el);   /* MP.6: oyunun kök kabında — STARS pencereleri ve 'çevir' uyarısıyla aynı katman bağlamı */el.addEventListener('click',e=>{const b=e.target.closest('[data-g]');if(!b)return;
     if(b.dataset.g==='toggle'){API.miniOpen=!API.miniOpen;mini();}
     else if(b.dataset.g==='kick')API.host.kick(b.dataset.pid,false);else if(b.dataset.g==='ai')API.host.kick(b.dataset.pid,true);
     else if(b.dataset.g==='dip')dipOpen(true);
+    else if(b.dataset.g==='dpause'){try{localStorage.setItem('mp63:decisionPause',decisionPause()?'slow':'pause');}catch{}mini();}
     else if(b.dataset.g==='save')saveNow('manual');else if(b.dataset.g==='export')exportNow();});}
   const L=API.lobby;if(!L)return;
   /* Haritayı kapatmasın: tek satır; bağlantısı kopan misafir varsa (karar gerekir) kendiliğinden açılır. */
@@ -207,6 +252,7 @@ function mini(){
   if(window.MP61)MP61.status((API.connected?'bağlı':API.closed?'oda kapandı':'bağlantı yok')+' · '+(gs.length-off)+'/'+gs.length+' misafir',API.connected);
   el.innerHTML=(window.MP3Dip?'<div class="mp3-minirow">'+head+'<button class="mp1-btn mp3-hostbtn" data-g="dip" id="mp3HostBtn">'+dipLabel()+'</button></div>':head)+
     (open?gs.map(p=>{const pid=pidOfSeat(p.seat);return '<div>'+esc(p.name)+' · '+(p.online?'bağlı':'koptu — koltuk bekletiliyor')+(p.online?'':'<button class="mp1-btn" data-g="kick" data-pid="'+esc(pid)+'">Çıkar (devlet boşta)</button><button class="mp1-btn" data-g="ai" data-pid="'+esc(pid)+'">Devleti AI\'ya ver</button>')+'</div>';}).join('')+
+      (PZ?'<div class="mp1-row"><button class="mp1-btn" data-g="dpause" id="mp63Dpause" aria-pressed="'+decisionPause()+'">Karar pencerelerinde: '+(decisionPause()?'DURAKLAT':'1× YAVAŞLAT')+'</button></div>':'')+
       (window.MP4Save?'<div class="mp1-row"><button class="mp1-btn" data-g="save">OYUNU KAYDET</button><button class="mp1-btn" data-g="export">DOSYAYA AKTAR</button></div>':''):'');
 }
 /* ---------- MP.3: host'un MP diplomasi paneli ----------
@@ -323,10 +369,10 @@ API.mp4={saveNow,exportNow,refreshSaves};
 function syncPause(){if(!API.host)return;const why=API.bg?'host-background':!API.connected?'host-offline':null;API.host.setPaused(!!why,why||undefined);
   /* MP.5: host'un ağı kopunca misafirler "duraklatıldı" görüyordu ama host'ta zaman akmaya devam ediyordu (misafir devletleri sahipsiz kalıyordu).
      Artık zaman da durur; bağlantı dönünce önceki hız geri gelir. Oda kapandıysa (relay yeniden başladı) host isterse hızı elle açıp tek başına sürebilir. */
-  if(API.started&&!API.bg&&typeof UI!=='undefined'){if(why==='host-offline'&&!API.netSpeed&&G.speed){API.netSpeed=G.speed;UI.setSpeed(0);log('net-pause');}
-    else if(!why&&API.netSpeed){UI.setSpeed(API.netSpeed);API.netSpeed=0;log('net-resume');}}}
-function onHidden(){if(!API.host||!API.started||API.bg)return;API.bg=true;API.bgSpeed=G.speed;if(G.speed!==0&&typeof UI!=='undefined')UI.setSpeed(0);syncPause();log('background');}
-function onVisible(){if(!API.bg)return;API.bg=false;if(API.bgSpeed&&typeof UI!=='undefined')UI.setSpeed(API.bgSpeed);API.bgSpeed=0;syncPause();log('foreground');   // önce hız, sonra ağ durumu (ağ yoksa yine durur)
+  /* MP.6.3: hız kaydet/geri yükle yerine ayrı nedenler ('offline'/'background'): ortak hız (want) korunur, nedenler kalkınca o uygulanır */
+  if(API.started){const was=G.speed|0;applySpeed(false);if(was!==(G.speed|0))log(G.speed?'net-resume':'net-pause');}}
+function onHidden(){if(!API.host||!API.started||API.bg)return;API.bg=true;applySpeed(true);syncPause();log('background');}
+function onVisible(){if(!API.bg)return;API.bg=false;syncPause();log('foreground');   // nedenler ayrı: ağ yoksa 'offline' yine durdurur
   if(!API.ws&&!API.closed&&API.code){API.retry=0;open(wsUrl('role=host&code='+encodeURIComponent(API.code)),true);}}
 doc.addEventListener('visibilitychange',()=>{if(doc.hidden)onHidden();else onVisible();});
 addEventListener('pagehide',onHidden);addEventListener('pageshow',()=>{if(!doc.hidden)onVisible();});

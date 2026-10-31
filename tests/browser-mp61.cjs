@@ -83,7 +83,7 @@ let relay,base,bH,bB,bC,H,Bp,Cp,code;
     assert.equal(await note(Bp),(await H.evaluate(c=>G.emps[c].name,C))+' oyunu duraklattı');
   });
 
-  await test('ortak hız: eşzamanlı istekler host\'un işleme sırasıyla; host kendi düğmesiyle de değiştirir; host penceresi açınca herkes "duraklatıldı" görür; spam koruması',async()=>{
+  await test('ortak hız: eşzamanlı istekler host\'un işleme sırasıyla; host kendi düğmesiyle de değiştirir; host'un sıradan penceresi ortak hızı değiştirmez (MP.6.3); spam koruması',async()=>{
     await sleep(800);
     await Promise.all([tap(Bp,'#timepod .sp[data-x="1"]'),tap(Cp,'#timepod .sp[data-x="3"]')]);await sleep(1500);
     const hs=await H.evaluate(()=>G.speed);assert([1,3].includes(hs));for(const p of [H,Bp,Cp])assert.equal(await spOn(p),hs,'all screens show the host speed');
@@ -91,9 +91,9 @@ let relay,base,bH,bB,bC,H,Bp,Cp,code;
     await sleep(800);await tap(H,'#timepod .sp[data-x="4"]');await wait(H,()=>G.speed===4);await spWait(Bp,4,'B');await spWait(Cp,4,'C');
     assert.equal(await note(Cp),(await H.evaluate(()=>G.p.name))+' hızı 4× yaptı');
     await H.evaluate(()=>UI.openModal('<div class="mhd">TEST</div><div class="mbd">pencere</div><div class="mft"><button class="ch" data-a="closem">KAPAT</button></div>'));
-    await wait(Bp,()=>{const b=document.querySelector('#timepod .sp.on');return b&&b.dataset.x==='0';});
-    assert.match(await note(Bp),/pencere açtı — oyun duraklatıldı/);await shot(Bp,'b-host-window-paused');
-    await H.evaluate(()=>UI.closeModal());await sleep(700);const back=await H.evaluate(()=>G.speed);   // STARS kapanışta kendi kuralıyla geri yükler (prePause || modalPrevSpeed)
+    /* MP.6.3: host'un sıradan penceresi ortak hızı DEĞİŞTİRMEZ (önceden herkes "duraklatıldı" görüyordu; akıllı duraklatma browser-mp63'te) */
+    await sleep(900);assert.equal(await H.evaluate(()=>G.speed),4,'host ordinary window keeps the shared speed');assert.equal(await spOn(Bp),4);await shot(Bp,'b-host-window-running');
+    await H.evaluate(()=>UI.closeModal());await sleep(700);const back=await H.evaluate(()=>G.speed);assert.equal(back,4);
     await spWait(Bp,back,'B');await spWait(Cp,back,'C');metrics.speed.afterHostWindow=back;
     const r=await Bp.evaluate(()=>new Promise(res=>{const out=[];let i=0;const go=()=>{const c=MP1Join.cmd({kind:'speed',value:i%2?2:3});out.push(c.cid);if(++i<3)go();else setTimeout(()=>res(out.map(id=>MP1Join.results.find(x=>x.cid===id)).map(x=>x&&x.code)),1500);};go();}));
     assert(r.includes('rules:rate-limited'),'rapid speed spam is limited: '+JSON.stringify(r));metrics.speed.spam=r;
