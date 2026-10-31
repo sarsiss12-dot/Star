@@ -254,7 +254,7 @@ function createHost(opts){
       let st,why='';
       if(e.techs[id])st='d';else{const a=researchAccess(e,id);if(!a.ok){st='x';why=a.why;}else if(researchReady(e,id))st='r';else{const rt=researchRoute(e,id);st=rt.ok?'l':'x';why=rt.ok?'':rt.why;}}
       tech[id]={n:T.n,b:T.b,t:T.t,r:(T.r||[]).slice(),d:T.d||'',c:Math.round(techCost(e,id)),s:st,...(why?{w:why}:{})};}
-    return {me,sys,lanes,cols,fleets,emps,catalog,sci,tech,log:(notes.get(e.id)||[]).slice(),dip:dipView(e),pol:polView(e)};
+    return {me,sys,lanes,cols,fleets,emps,catalog,sci,tech,log:(notes.get(e.id)||[]).slice(),dip:dipView(e),pol:polView(e),settle:settleView(e)};
   }
   function clock(){return {day:Math.floor(G.day),y:G.year,m:G.month,spd:G.speed|0};}
   const KEYED=['sys','cols','fleets','emps','tech'];
@@ -308,7 +308,50 @@ function createHost(opts){
         for(const id of prev)if(!cur.has(id))note(eid,'Savaş sona erdi — '+nm(id),'win');}
       warSeen.set(eid,cur);}
   }
-  function publish(){dipSweep();pure(polSweep);pure(warSweep);const rev=++S.worldRevision;for(const p of S.players.values())publishTo(p,rev);return rev;}
+  /* ═══ MP.6.3 — ortak savaş paylaşımı: görünüm (yalnız katılımcıya), taslak özeti, bildirim taraması ═══
+     Görünür olmayan toprak satırının sistem/gezegen kimliği gitmez (h<n> anahtarı; host gerçek satıra çevirir). Damga (sefer
+     kaydının tamamı, devletlerin mizacı) gitmez; yalnız özeti. Kimlikler gerçek; misafir aynasına π ile çevirir. */
+  const settleSide=(e,c)=>(G.warLedger&&G.warLedger.fronts||[]).some(f=>f.campaign===c&&f.sides.includes(e.id));
+  function settleMember(e,id){const o=typeof settlementOffer==='function'&&settlementOffer(id);return o&&o.members.includes(e.id)?{o}:{err:'no-offer'};}
+  function settleAssignOk(a){return a===null||plain(a)&&Object.keys(a).length<=64&&Object.entries(a).every(([k,v])=>typeof k==='string'&&k.length<=24&&int(v,0,63));}
+  function settleRows(e,rows){return rows.map((r,i)=>settlementVisible(e,r)?{key:r.key,sys:r.sys,planet:r.planet,from:r.from,to:r.to,value:r.value,claims:r.claims.slice(),why:String(r.why||'').slice(0,200),vis:1}
+    :{key:'h'+i,sys:-1,planet:null,from:r.from,to:r.to,value:r.value,claims:[],why:'',vis:0});}
+  const settleShares=l=>l.map(s=>({id:s.id,points:s.points,target:Math.round(s.target*1000)/1000,held:s.held,allocated:s.allocated,delta:s.delta}));
+  function settleQ(e,c,assign){
+    const base=settlementPreview(e,c);if(!base.ok)return {ok:false,why:base.why};
+    let a=null;if(assign){a={};for(const [k,v] of Object.entries(assign)){const key=/^h\d+$/.test(k)?(base.rows[+k.slice(1)]||{}).key:k;if(!key)return {ok:false,why:'Geçersiz toprak satırı'};a[key]=v;}}
+    const q=a?settlementPreview(e,c,a):base;if(!q.ok)return {ok:false,why:q.why};
+    return {ok:true,q,out:{ok:true,campaign:c,role:q.role,members:q.members.slice(),rows:settleRows(e,q.rows),shares:settleShares(q.shares),total:q.total,stamp:fnv(q.stamp)}};
+  }
+  function settleOut(e,o){const st=settlementState(o),ap=st.state==='approved'?settlementApplyQuote(e,o.id):null;
+    return {id:o.id,campaign:o.campaign,role:o.role,proposer:o.proposer,created:o.created,expires:o.expires,rows:settleRows(e,o.rows),shares:settleShares(o.shares),total:o.total,
+      members:o.members.slice(),state:st.state,why:String(st.why||o.why||'').slice(0,200),votes:o.votes.map(v=>({by:v.by,yes:!!v.yes,why:String(v.why||'').slice(0,120)})),
+      ...(o.receipt?{receipt:{at:o.receipt.at,n:o.receipt.transfers.length}}:{}),...(ap?{apply:{ok:!!ap.ok,why:ap.ok?'':String(ap.why||'')}}:{})};}
+  function settleView(e){
+    if(typeof settlementState!=='function')return {offers:[],drafts:[]};
+    const latest=new Map();for(const o of G.settlements&&G.settlements.offers||[])if(o.members.includes(e.id))latest.set(o.campaign,o);   // arayüz gibi: sefer başına son teklif
+    const offers=[...latest.values()].slice(-12).map(o=>settleOut(e,o));
+    const camps=[...new Set((G.warLedger&&G.warLedger.fronts||[]).filter(f=>f.sides.includes(e.id)).map(f=>f.campaign))];
+    const drafts=camps.filter(c=>{const o=offers.find(x=>x.campaign===c);return (!o||!['pending','approved','applied'].includes(o.state))&&settlementContext(e,c).ok;});
+    return {offers,drafts};
+  }
+  /* katılımcıya özel sonuç bildirimi: uzak insana kendi listesinde, host'a host bildirimiyle (motor host'a yalnız AI gündemini ve
+     uygulamayı söyler). İlk geçişte sessizce tohumlanır (kayıttan devam bildirim yağdırmaz). */
+  const settleSeen=new Map();let settlePrimed=false;
+  const SETTLE_TXT={approved:'oybirliğiyle onaylandı — bir ortak UYGULA ile devri yapar',rejected:'reddedildi',expired:'180 günlük süresi doldu',invalid:'koşullar değişti; teklif geçersiz',withdrawn:'öneren geri çekti'};
+  function settleSweep(){
+    if(typeof settlementState!=='function')return;
+    for(const o of G.settlements&&G.settlements.offers||[]){const st=settlementState(o).state,prev=settleSeen.get(o.id);settleSeen.set(o.id,st);
+      if(!settlePrimed||prev===st)continue;
+      for(const id of o.members){const m=G.emps[id],rh=remoteHuman(m),host=id===hostEmpireId;if(!m||!rh&&!host)continue;
+        let t=null;
+        if(prev===undefined&&st==='pending'){if(id!==o.proposer)t='Ortak savaş paylaşımı önerildi (sefer '+o.campaign+') — Diplomasi merkezi › Ortak savaş paylaşımları; oyunu yalnız sen verirsin';}
+        else if(st==='applied'){if(rh)t='Ortak savaş paylaşımı tamamlandı — '+(o.receipt?o.receipt.transfers.length:0)+' devir';}   // host'a motor söyler
+        else if(SETTLE_TXT[st])t='Ortak savaş paylaşımı (sefer '+o.campaign+') '+SETTLE_TXT[st];
+        if(!t)continue;if(rh)note(id,t,st==='applied'?'win':st==='pending'||st==='approved'?'dip':'war');else if(opts.hostNotify)opts.hostNotify(t,'dip');}}
+    settlePrimed=true;
+  }
+  function publish(){dipSweep();pure(polSweep);pure(warSweep);pure(settleSweep);const rev=++S.worldRevision;for(const p of S.players.values())publishTo(p,rev);return rev;}
 
   /* ---------- komutlar: yalnız bu tablo ---------- */
   function locate(e,c){
@@ -605,7 +648,23 @@ function createHost(opts){
       locate(e,c){const s=G.emps[c.sub],q=s&&s.vassalTalk;return q&&(q.lord===e.id||q.sub===e.id)?{q}:{err:'no-offer'};},   // taraf olmayana müzakere "yok"
       why(e,{q},c){if(q.status!=='pending')return 'closed';if(q.to!==e.id)return 'not-recipient';if(q.id!==c.id||q.round!==c.round)return 'stale';if(G.day>=q.expires)return 'expired';
         if(c.action==='counter'&&!vassalTerms(q.type,c.terms))return 'terms';return null;},
-      roots:()=>[],apply:(e,{q},c)=>vassalReply(e,c.sub,c.id,c.round,c.action,c.action==='counter'?c.terms:null)}
+      roots:()=>[],apply:(e,{q},c)=>vassalReply(e,c.sub,c.id,c.round,c.action,c.action==='counter'?c.terms:null)},
+    /* ═══ MP.6.3 — ortak savaş ganimeti paylaşımı: motorun 92B–92D işlevleri (settlementPreview / Submit / Vote / Apply /
+       Withdraw). Yeni dağıtım yok; 180 günlük süre ve oybirliği motorda. Kimlik oturumdan (e): kimse başkası adına oy veremez,
+       aynı oy iki kez verilemez (motor), onaylı içerik değişmez (settlementTerms), aynı devir iki kez uygulanmaz ('applied').
+       Sefere katılmayana teklif ve taslak "yok" (no-offer). Taslak damgası istemciye özet olarak gider (fnv): eski taslak
+       host'ta yeniden türetilip denetlenir ('stale'). Motor işlemleri kendi dealTx geri almasıyla atomiktir. */
+    settleQuote:{keys:['kind','campaign','assign'],ro:true,check:c=>int(c.campaign,0,2147483647)&&settleAssignOk(c.assign),
+      locate:(e,c)=>settleSide(e,c.campaign)?{}:{err:'no-offer'},why:()=>null,roots:()=>[],
+      apply(e,at,c){const r=settleQ(e,c.campaign,c.assign);return {ok:true,extra:r.ok?r.out:{ok:false,why:r.why}};}},
+    settleSubmit:{keys:['kind','campaign','stamp','assign'],check:c=>int(c.campaign,0,2147483647)&&typeof c.stamp==='string'&&c.stamp.length<=40&&settleAssignOk(c.assign),
+      locate:(e,c)=>settleSide(e,c.campaign)?{}:{err:'no-offer'},
+      why(e,at,c){const r=settleQ(e,c.campaign,c.assign);if(!r.ok)return {code:'engine',detail:[String(r.why).slice(0,200)]};return r.out.stamp===c.stamp?null:'stale';},
+      roots:()=>[],apply(e,at,c){const r=settleQ(e,c.campaign,c.assign);return settlementSubmit(e,c.campaign,r.q.stamp,Object.fromEntries(r.q.rows.map(x=>[x.key,x.to])));}},
+    settleVote:{keys:['kind','offer','yes'],check:c=>int(c.offer,1,2147483647)&&typeof c.yes==='boolean',locate:(e,c)=>settleMember(e,c.offer),why:()=>null,roots:()=>[],
+      apply:(e,at,c)=>settlementVote(e,c.offer,c.yes)},
+    settleApply:{keys:['kind','offer'],check:c=>int(c.offer,1,2147483647),locate:(e,c)=>settleMember(e,c.offer),why:()=>null,roots:()=>[],apply:(e,at,c)=>settlementApply(e,c.offer)},
+    settleWithdraw:{keys:['kind','offer'],check:c=>int(c.offer,1,2147483647),locate:(e,c)=>settleMember(e,c.offer),why:()=>null,roots:()=>[],apply:(e,at,c)=>settlementWithdraw(e,c.offer)}
   });
   /* ═══ MP.3 diplomasi durumu (oturum; Save8'e girmez — kalıcılık MP.4) ═══ */
   const DIP_ROUNDS=6,DIP_PENDING_OUT=8,DIP_KEEP=160,DIP_RES=['min','ene','yiy','ala','tuk','ara','etk'];
@@ -1052,6 +1111,10 @@ function createHost(opts){
         const o=e&&e.lastOffer?G.emps.find(x=>x&&x!==e&&!x.ai&&e.war&&e.war[x.id]&&e.lastOffer[x.id]===day&&!seen.has(x.id)):null;
         if(o){seen.add(o.id);done.set(e.id,{day,ids:seen});if(RH(o))return root.__mpPeaceOffer(e,o);}
         return po.apply(this,arguments);};}
+    /* MP.6.3: settlementSubmit önerenden ve devlet 0'dan başka her ortağın oyunu settlementOpinion (AI değerlendirmesi) ile yazıyordu:
+       uzak insan adına otomatik EVET/HAYIR. Uzak insan da devlet 0 gibi atlanır; oyunu kendi 'settleVote' komutuyla verir.
+       settlementOpinion RNG tüketmez; uzak insan yokken davranış ve Save8 birebir aynı. */
+    settlementSubmit=patchEngine(settlementSubmit,'if(id===e.id||id===0)continue;','if(id===e.id||id===0||__mpHumanVoter(id))continue;');
     aiStatusQuoTick=patchEngine(aiStatusQuoTick,'if (o.id === 0){\n        /* Oyuncuya teklif edilir','if (__mpHumanVoter(o.id)){__mpSqOffer(e,o);e._sqCd=(G.memAge||0)+24;continue;}\n      if (o.id === 0){\n        /* Oyuncuya teklif edilir');
   }
   function patchEngine(fn,from,to){

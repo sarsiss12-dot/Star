@@ -83,7 +83,7 @@ let relay,base,bH,bB,bC,H,Bp,Cp,code;
     assert.equal(await note(Bp),(await H.evaluate(c=>G.emps[c].name,C))+' oyunu duraklattı');
   });
 
-  await test('ortak hız: eşzamanlı istekler host\'un işleme sırasıyla; host kendi düğmesiyle de değiştirir; host'un sıradan penceresi ortak hızı değiştirmez (MP.6.3); spam koruması',async()=>{
+  await test('ortak hız: eşzamanlı istekler host\'un işleme sırasıyla; host kendi düğmesiyle de değiştirir; host\'un sıradan penceresi ortak hızı değiştirmez (MP.6.3); spam koruması',async()=>{
     await sleep(800);
     await Promise.all([tap(Bp,'#timepod .sp[data-x="1"]'),tap(Cp,'#timepod .sp[data-x="3"]')]);await sleep(1500);
     const hs=await H.evaluate(()=>G.speed);assert([1,3].includes(hs));for(const p of [H,Bp,Cp])assert.equal(await spOn(p),hs,'all screens show the host speed');
