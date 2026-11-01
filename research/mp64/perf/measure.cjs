@@ -10,9 +10,10 @@ const {runtime}=require(path.join(root,'tests/helpers/runtime'));
 const [size='ulu',ai='11',months='240',seed='22']=process.argv.slice(2);
 const MIR=fs.readFileSync(path.join(root,'research/mp6/mirror.js'),'utf8');
 const CHECK=[12,60,120,180,240].filter(m=>m<=+months);
-function arm(name,share){
+function arm(name,share,contactAll=false){
   const h=runtime({root,native:true,width:1280,height:720});h.sb.performance=performance;h.run(MIR);   // gerçek yüksek çözünürlüklü saat
-  h.run(`setupGame({...CFG,size:${JSON.stringify(size)},aiCount:${+ai},seed:${+seed}});G.autoSave=false;enterGame();if(!document.getElementById('modal').classList.contains('hidden'))UI.closeModal();UI.setSpeed(0);
+  h.run(`setupGame({...CFG,size:${JSON.stringify(size)},aiCount:${+ai},seed:${+seed}});G.autoSave=false;enterGame();
+    if(${contactAll}){for(const a of G.emps)for(const b of G.emps)if(a!==b&&!a.wild&&!b.wild){a.contact[b.id]=true;}}   /* C kolu fikstürü: herkesle temas */if(!document.getElementById('modal').classList.contains('hidden'))UI.closeModal();UI.setSpeed(0);
     var __perf={ai:0,vis:0,shared:0,month:0,daily:0,aiN:0};
     const wrapT=(name,key)=>{const o=globalThis[name];globalThis[name]=function(){const t=performance.now();try{return o.apply(this,arguments);}finally{__perf[key]+=performance.now()-t;if(key==='ai')__perf.aiN++;}};};
     wrapT('aiTurn','ai');wrapT('updateVision','vis');wrapT('refreshSharedVision','shared');wrapT('monthTick','month');
@@ -43,5 +44,7 @@ function arm(name,share){
   }
   res.wallSec=+((performance.now()-wall0)/1000).toFixed(1);return res;
 }
-const out={size,ai:+ai,months:+months,seed:+seed,node:process.version,arms:[arm('A-paylasim-kapali',false),arm('B-paylasim-acik',true)]};
+/* MP64_ARMS=A,B,C — C: B + başlangıçta bütün devletlerle temas (paylaşım hemen geniş: "galaksinin büyük bölümü görünür" durumu) */
+const want=(process.env.MP64_ARMS||'A,B').split(','),ARMS={A:()=>arm('A-paylasim-kapali',false),B:()=>arm('B-paylasim-acik',true),C:()=>arm('C-temas-tam-paylasim-acik',true,true)};
+const out={size,ai:+ai,months:+months,seed:+seed,node:process.version,arms:want.filter(k=>ARMS[k]).map(k=>ARMS[k]())};
 process.stdout.write(JSON.stringify(out,null,1)+'\n');

@@ -6,14 +6,24 @@ Son güncelleme: 2026-11-01. Depo `sarsiss12-dot/Star`.
 
 | | `main` (birleşmiş) | Bu dal (PR) |
 |---|---|---|
-| Faz | 96H.10 + MP.0 – MP.4 (+ 96H.11 araştırma arşivi) | MP.5 (PR #17) + MP.6 (PR #18) + MP.6.1 (PR #19) + MP.6.2 (PR #20) + MP.6.3 (akıllı duraklatma, ortak savaş paylaşımı, federasyon/vasallık kararları, statüko kalıcılığı) — hepsi açık |
+| Faz | 96H.10 + MP.0 – MP.4 (+ 96H.11 araştırma arşivi) | MP.5 (PR #17) + MP.6 (PR #18) + MP.6.1 (PR #19) + MP.6.2 (PR #20) + MP.6.3 (PR #21) + MP.6.4 (casusluk, borsa, kalan filo/koloni işlemleri, oyuncuya özel haberler) — hepsi açık |
 | Build / PWA | `96h10` / `stars-v96h10` | değişmedi |
 | Save | v8 | v8 (şema değişmedi) |
 | Oyun ZIP | `releases/stars-faz96h10.zip` (SHA-256 `78e76d1627b8ec1b990849b2242835f78667f110e1d6f17021760183ee7be6d0`) | yeni ZIP yok |
 | Taban HEAD | `4296ad2d43fedce6264020b3761f50f1839fd836` | — |
 | Değişen runtime | — | yok (19 dosya 96H.10 ile aynı) |
 
-96H.6.2, 96H.6.3, 96H.7, 96H.11 ve MP.0 – MP.6.3 oyun yayımlamadı.
+96H.6.2, 96H.6.3, 96H.7, 96H.11 ve MP.0 – MP.6.4 oyun yayımlamadı.
+
+## MP.6.4 — casusluk, borsa, kalan filo/koloni işlemleri, oyuncuya özel bilgi (geliştirme sürümü)
+
+Ayrıntı: `MULTIPLAYER-MP64-SONUC.md`. Testler: `tests/mp64_*_test.js`, `tests/browser-mp64.cjs`; ölçüm `research/mp64/perf/`.
+
+- **Casusluk:** gerçek İSTİHBARAT ekranından ağ ve operasyon; değerler ve zar host motorunda. Gizlilik düzeltmesi: tespit edilmemiş operasyonun faili artık mağdurun aynasına gitmiyor.
+- **Borsa:** takas motorun `marketTrade`'iyle; eski fiyatla gelen istek yeniden onay ister; çoğaltma yok.
+- **Filo/koloni:** takviye, sevkiyat, sipariş iptali, toplanma, sürekli üretim, onarım, terraform, habitat, lider.
+- **Haberler:** her oyuncu motorun görünürlük kuralıyla kendi bakışındaki haberleri görür.
+- **MP.6.3'ten kalanlar tarayıcıda:** paylaşım ret/geri çekme, federasyon ihraç/reform/başkan/ortak savaş + uygulama, vasallık yenileme/destek/bağımsızlık.
 
 ## MP.6.3 — akıllı duraklatma, ortak savaş paylaşımı, federasyon/vasallık kararları (geliştirme sürümü)
 
