@@ -43,7 +43,9 @@ const VIEW=new Set(['tab','full','cameraReset','cameraFocus','home','fit','topSt
   /* MP.6.2 — savaş ve ikili siyaset: gerçek pencere açılır, son çağrı MP komutuna iner */
   'war','ally','pact','dealPact','endAlliance','unpact','embargo','unembargo','gift',
   /* MP.6.3 — ortak savaş paylaşımı penceresi (taslak/oy/uygula düğmeleri _hook; son çağrılar MP komutuna iner) */
-  'shareOpen']);
+  'shareOpen',
+  /* MP.6.3 — federasyon kararları ve bağımsızlık desteği: motor işlevi MP komutuna iner */
+  'fedExecute','fedGrant','supIndep']);
 /* MP.6.1 — UI.act kapısında doğrudan MP komutuna çevrilen düğmeler (tek oyunculu kodları dünyayı yerelde değiştirir) */
 const sel=()=>View.sel&&View.sel.e===0&&G.fleets.includes(View.sel)?View.sel:null;
 const ACT={
@@ -108,7 +110,14 @@ function gate(){
   const r=c=>send(c)?{ok:true}:{ok:false,why:'Host bağlı değil; karar gönderilmedi.'};
   wrap('foundFederation',(o,e,type,ballot)=>mine(e)?r({kind:'fedFound',type:String(type),ballot:String(ballot)}):NOT_MP);
   wrap('requestFederation',(o,e,via)=>mine(e)&&via?r({kind:'fedRequest',via:real(via.id)}):NOT_MP);
-  wrap('proposeFedMotion',(o,e,kind,opt)=>mine(e)&&kind==='admit'&&opt&&Number.isInteger(opt.target)?r({kind:'fedInvite',target:real(opt.target)}):NOT_MP);
+  wrap('proposeFedMotion',(o,e,kind,opt)=>{if(!mine(e))return NOT_MP;opt=opt||{};
+    if(kind==='admit')return Number.isInteger(opt.target)?r({kind:'fedInvite',target:real(opt.target)}):NOT_MP;
+    /* MP.6.3: ihraç, başkan seçimi, reform, anayasa / oy rejimi, savaşa katılma, ortak savaş izni — motorun önerge yolu host'ta */
+    const c={kind:'fedMotion',motion:String(kind)};for(const k of ['target','sponsor'])if(Number.isInteger(opt[k]))c[k]=real(opt[k]);
+    for(const k of ['type','field','value'])if(typeof opt[k]==='string')c[k]=opt[k];return r(c);});
+  wrap('executeFedDecision',(o,e,fid,id)=>mine(e)?r({kind:'fedExecute',fed:+fid,id:String(id)}):NOT_MP);
+  wrap('grantFed',(o,e)=>mine(e)?r({kind:'fedGrant'}):NOT_MP);
+  wrap('supportIndep',(o,e,sub)=>mine(e)&&sub?r({kind:'supIndep',sub:real(sub.id)}):NOT_MP);
   wrap('acceptFedInvite',(o,e,fid)=>mine(e)?r({kind:'fedReply',fed:+fid,action:'accept'}):NOT_MP);
   wrap('rejectFedInvite',(o,e,fid)=>mine(e)?r({kind:'fedReply',fed:+fid,action:'reject'}):NOT_MP);
   wrap('castFedVote',(o,e,fid,token,yes)=>mine(e)?r({kind:'fedVote',fed:+fid,token:String(token),yes:!!yes}):NOT_MP);

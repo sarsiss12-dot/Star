@@ -311,6 +311,7 @@ function createHost(opts){
   /* ═══ MP.6.3 — ortak savaş paylaşımı: görünüm (yalnız katılımcıya), taslak özeti, bildirim taraması ═══
      Görünür olmayan toprak satırının sistem/gezegen kimliği gitmez (h<n> anahtarı; host gerçek satıra çevirir). Damga (sefer
      kaydının tamamı, devletlerin mizacı) gitmez; yalnız özeti. Kimlikler gerçek; misafir aynasına π ile çevirir. */
+  function fedMotionOpts(c){const o={};for(const k of ['target','sponsor','type','field','value'])if(c[k]!==undefined)o[k]=c[k];return o;}
   const settleSide=(e,c)=>(G.warLedger&&G.warLedger.fronts||[]).some(f=>f.campaign===c&&f.sides.includes(e.id));
   function settleMember(e,id){const o=typeof settlementOffer==='function'&&settlementOffer(id);return o&&o.members.includes(e.id)?{o}:{err:'no-offer'};}
   function settleAssignOk(a){return a===null||plain(a)&&Object.keys(a).length<=64&&Object.entries(a).every(([k,v])=>typeof k==='string'&&k.length<=24&&int(v,0,63));}
@@ -649,6 +650,30 @@ function createHost(opts){
       why(e,{q},c){if(q.status!=='pending')return 'closed';if(q.to!==e.id)return 'not-recipient';if(q.id!==c.id||q.round!==c.round)return 'stale';if(G.day>=q.expires)return 'expired';
         if(c.action==='counter'&&!vassalTerms(q.type,c.terms))return 'terms';return null;},
       roots:()=>[],apply:(e,{q},c)=>vassalReply(e,c.sub,c.id,c.round,c.action,c.action==='counter'?c.terms:null)},
+    /* ═══ MP.6.3 — federasyonun kalan kararları: motorun kendi önerge yolu (canFedMotion / proposeFedMotion) ihraç, reform,
+       anayasa/oy rejimi, başkan seçimi, mevcut savaşa katılma ve ortak savaş izni için; oylama ve kabul kuralları federasyonun
+       anayasasından (motor). Kabul edilen savaş kararını yalnız önerici ya da başkan uygular (executeFedDecision). Acil hibe
+       (canGrantFed / grantFed) yalnız üyenin kendi kaynağından. Kimlikler gerçek; seçenekler yalnız motorun beklediği alanlar. */
+    fedMotion:{keys:['kind','motion','target','sponsor','type','field','value'],
+      check:c=>typeof c.motion==='string'&&Object.hasOwn(FED_MOTIONS,c.motion)&&c.motion!=='admit'&&[c.target,c.sponsor].every(x=>x===undefined||int(x,0,63))&&
+        [c.type,c.field,c.value].every(x=>x===undefined||typeof x==='string'&&x.length<=24),
+      locate:()=>({}),why(e,at,c){if(!findFed(e))return 'no-fed';if(c.target!==undefined&&!e.contact[c.target]&&!findFed(e).members.includes(c.target))return 'no-target';
+        const q=canFedMotion(e,c.motion,fedMotionOpts(c));return q.ok?null:polWhy(q);},
+      roots:()=>[],apply:(e,at,c)=>proposeFedMotion(e,c.motion,fedMotionOpts(c))},
+    fedExecute:{keys:['kind','fed','id'],check:c=>int(c.fed,0,2147483647)&&typeof c.id==='string'&&c.id.length<=80,
+      locate(e,c){const f=findFed(e);return f&&f.id===c.fed&&f.decisions&&f.decisions[c.id]?{f}:{err:'no-offer'};},why:()=>null,roots:()=>[],
+      apply(e,at,c){const r=executeFedDecision(e,c.fed,c.id);if(r.ok&&remoteHuman(e))note(e.id,'Federasyon savaş kararı uygulandı — '+(r.joined||[]).length+' üye savaşa katıldı','war');return r;}},
+    fedGrant:{keys:['kind'],check:()=>true,locate:()=>({}),why(e){if(!findFed(e))return 'no-fed';const q=canGrantFed(e);return q.ok?null:polWhy(q);},roots:()=>[],
+      apply(e){const r=grantFed(e);if(r.ok&&remoteHuman(e))note(e.id,'🏛 ACİL HİBE — federal fona '+GRANT_ALA+' alaşım, '+GRANT_ENE+' enerji aktarıldı','win');return r;}},
+    /* MP.6.3 — vasalın bağımsızlığına destek sözü (canSupportIndep / supportIndep). Motor yalnız devlet 0'a bildiriyordu:
+       uzak insan söz veren kendi sonucunu, uzak insan senyör sızan görüşmeyi kendi listesinde görür (motorun metniyle). */
+    supIndep:{keys:['kind','sub'],check:c=>int(c.sub,0,63),locate:()=>({}),
+      why(e,at,c){const s=G.emps[c.sub];if(!s||s===e||!polParty(s)||!e.contact[s.id])return 'no-target';const q=canSupportIndep(e,s);return q.ok?null:polWhy(q);},
+      roots:()=>[],apply(e,at,c){const s=G.emps[c.sub],lord=overlordOf(s),r0=lord?lord.rel[e.id]||0:0,r=supportIndep(e,s);if(!r||!r.ok)return r;
+        const sp=lord&&(lord.rel[e.id]||0)<r0;   // motor sızıntıda senyörün ilişkisini düşürür (RNG motorda)
+        if(remoteHuman(e))note(e.id,sp?'⚠ Destek sözün sızdı — '+(e.contact[lord.id]?lord.name:'senyör')+' öfkeli':'🕯 '+s.name+' bağımsızlık sözünü aldı — isyan ederlerse yanlarında savaşacaksın',sp?'war':'sci');
+        if(sp&&remoteHuman(lord))note(lord.id,'🕯 '+(lord.contact[e.id]?e.name:'Bir devlet')+' vasalın '+s.name+' ile gizli görüşmeler yapıyor','war');
+        return r;}},
     /* ═══ MP.6.3 — ortak savaş ganimeti paylaşımı: motorun 92B–92D işlevleri (settlementPreview / Submit / Vote / Apply /
        Withdraw). Yeni dağıtım yok; 180 günlük süre ve oybirliği motorda. Kimlik oturumdan (e): kimse başkası adına oy veremez,
        aynı oy iki kez verilemez (motor), onaylı içerik değişmez (settlementTerms), aynı devir iki kez uygulanmaz ('applied').
