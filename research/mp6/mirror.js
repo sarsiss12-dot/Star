@@ -113,8 +113,10 @@ function build(meId,o={}){
     const lv=member&&f.lastVote?{id:f.lastVote.id,law:f.lastVote.law,kind:f.lastVote.kind,passed:!!f.lastVote.passed,day:f.lastVote.day,why:f.lastVote.why,rule:f.lastVote.rule,
       yes:Array.isArray(f.lastVote.yes)?f.lastVote.yes.map(piN):f.lastVote.yes,no:Array.isArray(f.lastVote.no)?f.lastVote.no.map(piN):f.lastVote.no,abstain:Array.isArray(f.lastVote.abstain)?f.lastVote.abstain.map(piN):f.lastVote.abstain}:null;
     return {id:f.id,name:f.name,type:f.type,charter:J(f.charter),leader:piN(f.leader),founder:piN(f.founder),members:f.members.map(piN),laws:J(f.laws)||{},fund:{ala:0,ene:0},treasury:0,
-      founded:f.founded,typeSince:f.typeSince,dutySince:{defense:0,offense:0},invites,decisions:{},dutyConsent:{},cohesion:f.cohesion,nextVote:f.nextVote,politicsVersion:f.politicsVersion,
+      founded:f.founded,typeSince:f.typeSince,dutySince:{defense:0,offense:0},invites,decisions:member?decs(f.decisions):{},dutyConsent:{},cohesion:f.cohesion,nextVote:f.nextVote,politicsVersion:f.politicsVersion,
       vote:member?vote(f.vote)||null:null,lastVote:lv,...(Object.keys(adm).length?{admissionResults:adm}:{})};});
+  /* MP.6.4: federasyonun kabul edilmiş savaş kararları üyeye (gerçek STARS "uygula" düğmesi); kimlikler numaralandırılır */
+  function decs(d){const o={};for(const [k,x] of Object.entries(d||{})){if(!x)continue;o[k]={...J(x),sponsor:piN(x.sponsor),target:piN(x.target),by:piN(x.by),approved:(x.approved||[]).map(piN),...(Array.isArray(x.joined)?{joined:x.joined.map(piN)}:{}),...(Array.isArray(x.blocked)?{blocked:x.blocked.map(b=>({...b,id:piN(b.id)}))}:{})};}return o;}
   /* ---- kök ---- */
   const cfg={...J(G.cfg),seed:o.cosmeticSeed|0,name:me.name,race:me.race,look:me.look,physio:me.physio,sigil:me.sigil,ethics:J(me.ethics),civics:J(me.civics),
     origin:me.origin,monoRes:me.monoRes,mizac:me.mizac,traits:J(me.traits),color:me.col,portraitVariant:me.portraitVariant||0};

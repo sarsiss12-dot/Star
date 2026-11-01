@@ -47,7 +47,7 @@ const VIEW=new Set(['tab','full','cameraReset','cameraFocus','home','fit','topSt
   /* MP.6.3 — federasyon kararları ve bağımsızlık desteği: motor işlevi MP komutuna iner */
   'fedExecute','fedGrant','supIndep',
   /* MP.6.4 — casusluk: ağ, standart operasyonlar (onay ekranı → host), özel operasyonlar; son çağrılar MP komutuna iner */
-  'spy','ops','opDone','runop','opGo','saboPick','saboCancel','saboGo','incite','deepInv','ffTarget','ffPatsy','ffGo','stealTech',
+  'spy','spySel','spyOpen','spyClear','ops','opDone','runop','opAsk','opGo','saboPick','saboCancel','saboGo','incite','deepInv','ffTarget','ffPatsy','ffGo','stealTech',
   /* MP.6.4 — Galaktik Borsa (seçim görünüm, TAKAS ET → 'market') */
   'mktTrade',
   /* MP.6.4 — kalan filo / koloni işlemleri (motor işlevi MP komutuna iner) */
