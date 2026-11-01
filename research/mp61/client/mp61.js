@@ -7,21 +7,30 @@
    Metin her zaman oturumdan gelen adla kurulur (host 'speed' iletisi); istemci ad üretmez. */
 (function(){
 const doc=document,LABEL=['⏸','▸','▸▸','▸▸▸','▸▸▸▸'];
-const S={status:'',good:true,spd:null,note:null,noteUntil:0,timer:0,shown:0};
+const S={status:'',good:true,spd:null,want:null,hold:null,n:0,note:null,noteUntil:0,timer:0,shown:0};
 let noteEl=null,pillEl=null;
 const $=id=>doc.getElementById(id);
 function speedLabel(spd){return spd>0?LABEL[spd]+' '+spd+'×':'⏸ duraklatıldı';}
 /* bildirim metni: kim değiştirdi (oturumdaki ad) + yeni hız; iç duraklatmalarda nedeni */
 function text(m){
   const n=m.spd|0;
-  if(m.self)return n?'Hızı '+n+'× yaptın':'Oyunu duraklattın';
+  const held=hold(m);
+  if(m.self)return (n||held?'Hızı '+(held?m.want:n)+'× yaptın':'Oyunu duraklattın')+held;
   if(m.auto){
+    /* MP.6.3: karar penceresi (host'ta; misafire ad gitmez), host ağı, oyun sonu */
+    if(m.reason==='decision'){const w=m.host?'Karar penceresi açık':(m.who||'Host')+' bir karar penceresinde';return n?w+' — oyun '+n+'× yavaşladı':w+' — oyun duraklatıldı';}
+    if(m.reason==='offline')return 'Host bağlı değil — oyun duraklatıldı';
+    if(m.reason==='engine')return 'Oyun sona erdi — duraklatıldı';
     if(m.reason==='window')return n?'Oyun sürüyor — '+n+'×':(m.who||'Host')+' bir pencere açtı — oyun duraklatıldı';   // misafire ad gitmez: "Host"
     if(m.reason==='background')return n?'Oyun sürüyor — '+n+'×':(m.who||'Host')+' uygulamadan çıktı — oyun duraklatıldı';
     return n?'Oyun hızı '+n+'×':'Oyun duraklatıldı';}
   const who=m.who||'Bir oyuncu';
-  return n?who+' hızı '+n+'× yaptı':who+' oyunu duraklattı';
+  return (n||held?who+' hızı '+(held?m.want:n)+'× yaptı':who+' oyunu duraklattı')+held;
 }
+/* MP.6.3: açık seçim geçici bir nedenle tutuluyorsa (ör. host karar penceresinde 1×) neden ve uygulanan hız eklenir */
+function hold(m){if(!Number.isInteger(m.want)||m.want<=(m.spd|0)||!m.want)return '';
+  const why=m.hold==='decision'?'karar penceresi kapanınca':m.hold==='background'||m.hold==='offline'?'host dönünce':'sonra';
+  return ' — '+why+' uygulanacak (şimdi '+((m.spd|0)?(m.spd|0)+'×':'duraklatıldı')+')';}
 function windowOpen(){const m=$('modal'),d=$('diploPane'),r=$('raceInfo');
   return !!(m&&!m.classList.contains('hidden'))||!!(d&&d.classList.contains('show'))||!!(r&&getComputedStyle(r).display!=='none');}
 function rotated(){const r=$('rotate');return !!(r&&r.classList.contains('show'));}
@@ -52,7 +61,8 @@ function paint(){
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 /* host ya da misafir: 'speed' iletisi / onSpeed bilgisi geldi */
 function speed(m){
-  const changed=S.spd!==null&&S.spd!==(m.spd|0);S.spd=m.spd|0;
+  if(Number.isFinite(m.n)){if(m.n<=S.n)return;S.n=m.n;}   // MP.6.3: eski hız iletisi son komutu ezmesin
+  const changed=S.spd!==null&&S.spd!==(m.spd|0);S.spd=m.spd|0;S.want=Number.isInteger(m.want)?m.want:null;S.hold=m.hold||null;
   if(!m.silent&&(changed||!m.auto)){S.note=text(m);S.noteUntil=Date.now()+3000;S.shown++;}
   paint();
 }

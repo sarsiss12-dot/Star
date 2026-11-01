@@ -216,6 +216,11 @@ let port,base,relay,host1Dir,host2Dir,cDir,H,hostCtx,Bb,Bp,Cc,Cp,Ib,Ip,code0,cod
     await H.evaluate(()=>MP4Save.idle());const na=await autos();
     metrics.notes.push('~36 oyun ayında otomatik kayıt sayısı (sınır 3): '+na);assert.equal(na,3,'bounded autosaves');
     assert.equal(await H.evaluate(c=>G.emps[c].ai,C),false);
+    /* MP.6.3 — statüko teklifi kayda girer. FİKSTÜR: AI 4 C'ye savaş açar (warAuthorize), AI'nın statüko adımının insan hedefe
+       yolu (aiStatusQuoTick → __mpSqOffer, MP.6.2 koruması) teklifi C'nin kutusuna koyar; karar C'nin. */
+    saved.sq=await H.evaluate(c=>{warAuthorize(G.emps[4],G.emps[c],{n:'test'});declareWar(G.emps[4],G.emps[c]);warAuthClear();__mpSqOffer(G.emps[4],G.emps[c]);MP1Host.host.publish();
+      return MP1Host.host.dipView(G.emps[c]).sq.filter(q=>q.status==='pending').map(q=>({from:q.from,expires:q.expires}));},C);
+    assert.deepEqual(saved.sq.map(q=>q.from),[4],'pending status-quo offer to C before the save');
     await miniTap(H,'save');await wait(H,()=>MP1Host.lastSave&&MP1Host.lastSave.ok&&MP1Host.lastSave.kind==='manual'&&Date.now()-MP1Host.lastSave.at<5000);
     saved.state2=await HS(H);saved.overlord=await H.evaluate(b=>G.emps[b].overlord,B);
     const ex=await exportFile(H,'mp4-save-2.starsmp.json');file2=ex.file;metrics.files.save2={bytes:fs.readFileSync(file2,'utf8').length};
@@ -253,6 +258,11 @@ let port,base,relay,host1Dir,host2Dir,cDir,H,hostCtx,Bb,Bp,Cc,Cp,Ib,Ip,code0,cod
     await wait(Np,()=>/Eski devletin bulundu/.test(document.getElementById('jResume').textContent));
     await H.locator('[data-m="resumeGo"]').tap();await wait(H,()=>MP1Host.started&&MP1Host.host.lobby.phase==='ingame');assert.equal(await H.locator('#mp1Sheet').count(),0,'no confirm when all seats are online');
     await wait(Np,c=>MP1Join.screen==='game'&&MP1Join.game.view&&MP1Join.game.view.me.id===c,C);await wait(Bp,b=>MP1Join.screen==='game'&&MP1Join.game.view.me.id===b,B);
+    /* MP.6.3: host süreci kapanıp dosyadan açıldı — C'nin bekleyen statüko teklifi aynı süreyle geri geldi; yanıt bir kez işlenir */
+    await wait(Np,()=>MP1Join.game.view.dip&&(MP1Join.game.view.dip.sq||[]).some(q=>q.from===4&&q.status==='pending'));
+    assert.equal(await Np.evaluate(()=>MP1Join.game.view.dip.sq.find(q=>q.from===4).expires),saved.sq[0].expires,'expiry not extended by the save');
+    assert.equal((await raw(Np,{kind:'statusQuoReply',from:4,accept:false})).status,'ok');assert.equal((await raw(Np,{kind:'statusQuoReply',from:4,accept:false})).code,'no-offer','processed once');
+    assert.equal(await H.evaluate(c=>!!G.emps[c].war[4],C),true,'rejected: war continues');metrics.notes.push('MP.6.3 statüko: kayıt → host kapanış → dosyadan açma → C reddetti (bir kez)');
     assert.equal((await raw(Np,{kind:'fedLeave'})).code!=='not-joined',true);await shot(Np,'c-recovered-game');await Nb.close();
   });
 

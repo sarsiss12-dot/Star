@@ -94,6 +94,7 @@ function pkgItem(it){if(!plain(it)||!ITEM_T.includes(it.t)||Object.keys(it).leng
   for(const [k,v] of Object.entries(it))if(!['number','string','boolean'].includes(typeof v)||typeof v==='number'&&!Number.isFinite(v)||typeof v==='string'&&v.length>40)return 'items';
   if(it.t==='res'&&(!RES_K.includes(it.r)||!Number.isFinite(it.v)||it.v<=0||it.v>1e7))return 'amount';return null;}
 /* Paketi doğrula (yan etkisiz). Metin ya da nesne alır. Önce boyut ve bütünlük, sonra şema. */
+const SQ_LIFE=180;   // MP.6.2 statüko teklifinin ömrü (gün)
 function validatePackage(input,o={}){
   const fail=(why,detail)=>({ok:false,why,...(detail?{detail}:{})});let pkg=input;
   if(typeof input==='string'){if(input.length>MAX_PKG)return fail('too-big');try{pkg=JSON.parse(input);}catch{return fail('json');}}
@@ -137,7 +138,13 @@ function validatePackage(input,o={}){
   if(!plain(ss.notes))return fail('session');
   for(const [k,v] of Object.entries(ss.notes))if(!/^\d{1,2}$/.test(k)||!Array.isArray(v)||v.length>12||v.some(x=>!plain(x)||!onlyKeys(x,['d','m','c'])||!Number.isFinite(x.d)||typeof x.m!=='string'||x.m.length>160||typeof x.c!=='string'||x.c.length>12))return fail('session');
   const dp=pkg.diplomacy;
-  if(!plain(dp)||!onlyKeys(dp,['next','offers'])||!int(dp.next,1,2147483647)||!Array.isArray(dp.offers)||dp.offers.length>400)return fail('offers');
+  if(!plain(dp)||!onlyKeys(dp,['next','offers','sq'])||!int(dp.next,1,2147483647)||!Array.isArray(dp.offers)||dp.offers.length>400)return fail('offers');
+  /* MP.6.3: statüko teklifleri (isteğe bağlı alan; MP.6.2 ve öncesi kayıtlarda yok → aynen yüklenir). Süre mutlak oyun günüdür:
+     kayıt bekleyen teklifi uzatmaz (expires = born + 180). */
+  if(has(dp,'sq')){if(!Array.isArray(dp.sq)||dp.sq.length>100)return fail('offers');
+    for(const q of dp.sq)if(!plain(q)||!onlyKeys(q,['from','to','born','expires','status'])||!int(q.from,0,63)||!int(q.to,0,63)||q.from===q.to||!int(q.born,0,1e7)||q.expires!==q.born+SQ_LIFE||
+      !['pending','accepted','rejected','expired'].includes(q.status))return fail('offers');
+    if(new Set(dp.sq.filter(q=>q.status==='pending').map(q=>q.from+'>'+q.to)).size!==dp.sq.filter(q=>q.status==='pending').length)return fail('offers');}
   const ids=new Map();
   for(const r of dp.offers){
     if(!plain(r)||!onlyKeys(r,['id','from','to','give','want','born','expires','round','prev','status','why','by','cost','finished']))return fail('offers');
@@ -254,7 +261,7 @@ function createHost(opts){
       let st,why='';
       if(e.techs[id])st='d';else{const a=researchAccess(e,id);if(!a.ok){st='x';why=a.why;}else if(researchReady(e,id))st='r';else{const rt=researchRoute(e,id);st=rt.ok?'l':'x';why=rt.ok?'':rt.why;}}
       tech[id]={n:T.n,b:T.b,t:T.t,r:(T.r||[]).slice(),d:T.d||'',c:Math.round(techCost(e,id)),s:st,...(why?{w:why}:{})};}
-    return {me,sys,lanes,cols,fleets,emps,catalog,sci,tech,log:(notes.get(e.id)||[]).slice(),dip:dipView(e),pol:polView(e)};
+    return {me,sys,lanes,cols,fleets,emps,catalog,sci,tech,log:(notes.get(e.id)||[]).slice(),dip:dipView(e),pol:polView(e),settle:settleView(e)};
   }
   function clock(){return {day:Math.floor(G.day),y:G.year,m:G.month,spd:G.speed|0};}
   const KEYED=['sys','cols','fleets','emps','tech'];
@@ -265,7 +272,7 @@ function createHost(opts){
       for(const k of Object.keys(a[sec]))if(!has(b[sec],k))rm.push(k);
       if(Object.keys(up).length)(ops.up||(ops.up={}))[sec]=up;
       if(rm.length)(ops.rm||(ops.rm={}))[sec]=rm;}
-    for(const sec of ['me','lanes','catalog','sci','log','dip','pol'])if(JSON.stringify(a[sec])!==JSON.stringify(b[sec]))(ops.set||(ops.set={}))[sec]=b[sec];
+    for(const sec of ['me','lanes','catalog','sci','log','dip','pol','settle'])if(JSON.stringify(a[sec])!==JSON.stringify(b[sec]))(ops.set||(ops.set={}))[sec]=b[sec];
     return ops;
   }
   /* MP.2: görünüm salt okunur olmalı. explorationContext → borderPressure/totalPower gibi motor yolları
@@ -308,7 +315,51 @@ function createHost(opts){
         for(const id of prev)if(!cur.has(id))note(eid,'Savaş sona erdi — '+nm(id),'win');}
       warSeen.set(eid,cur);}
   }
-  function publish(){dipSweep();pure(polSweep);pure(warSweep);const rev=++S.worldRevision;for(const p of S.players.values())publishTo(p,rev);return rev;}
+  /* ═══ MP.6.3 — ortak savaş paylaşımı: görünüm (yalnız katılımcıya), taslak özeti, bildirim taraması ═══
+     Görünür olmayan toprak satırının sistem/gezegen kimliği gitmez (h<n> anahtarı; host gerçek satıra çevirir). Damga (sefer
+     kaydının tamamı, devletlerin mizacı) gitmez; yalnız özeti. Kimlikler gerçek; misafir aynasına π ile çevirir. */
+  function fedMotionOpts(c){const o={};for(const k of ['target','sponsor','type','field','value'])if(c[k]!==undefined)o[k]=c[k];return o;}
+  const settleSide=(e,c)=>(G.warLedger&&G.warLedger.fronts||[]).some(f=>f.campaign===c&&f.sides.includes(e.id));
+  function settleMember(e,id){const o=typeof settlementOffer==='function'&&settlementOffer(id);return o&&o.members.includes(e.id)?{o}:{err:'no-offer'};}
+  function settleAssignOk(a){return a===null||plain(a)&&Object.keys(a).length<=64&&Object.entries(a).every(([k,v])=>typeof k==='string'&&k.length<=24&&int(v,0,63));}
+  function settleRows(e,rows){return rows.map((r,i)=>settlementVisible(e,r)?{key:r.key,sys:r.sys,planet:r.planet,from:r.from,to:r.to,value:r.value,claims:r.claims.slice(),why:String(r.why||'').slice(0,200),vis:1}
+    :{key:'h'+i,sys:-1,planet:null,from:r.from,to:r.to,value:r.value,claims:[],why:'',vis:0});}
+  const settleShares=l=>l.map(s=>({id:s.id,points:s.points,target:Math.round(s.target*1000)/1000,held:s.held,allocated:s.allocated,delta:s.delta}));
+  function settleQ(e,c,assign){
+    const base=settlementPreview(e,c);if(!base.ok)return {ok:false,why:base.why};
+    let a=null;if(assign){a={};for(const [k,v] of Object.entries(assign)){const key=/^h\d+$/.test(k)?(base.rows[+k.slice(1)]||{}).key:k;if(!key)return {ok:false,why:'Geçersiz toprak satırı'};a[key]=v;}}
+    const q=a?settlementPreview(e,c,a):base;if(!q.ok)return {ok:false,why:q.why};
+    return {ok:true,q,out:{ok:true,campaign:c,role:q.role,members:q.members.slice(),rows:settleRows(e,q.rows),shares:settleShares(q.shares),total:q.total,stamp:fnv(q.stamp)}};
+  }
+  function settleOut(e,o){const st=settlementState(o),ap=st.state==='approved'?settlementApplyQuote(e,o.id):null;
+    return {id:o.id,campaign:o.campaign,role:o.role,proposer:o.proposer,created:o.created,expires:o.expires,rows:settleRows(e,o.rows),shares:settleShares(o.shares),total:o.total,
+      members:o.members.slice(),state:st.state,why:String(st.why||o.why||'').slice(0,200),votes:o.votes.map(v=>({by:v.by,yes:!!v.yes,why:String(v.why||'').slice(0,120)})),
+      ...(o.receipt?{receipt:{at:o.receipt.at,n:o.receipt.transfers.length}}:{}),...(ap?{apply:{ok:!!ap.ok,why:ap.ok?'':String(ap.why||'')}}:{})};}
+  function settleView(e){
+    if(typeof settlementState!=='function')return {offers:[],drafts:[]};
+    const latest=new Map();for(const o of G.settlements&&G.settlements.offers||[])if(o.members.includes(e.id))latest.set(o.campaign,o);   // arayüz gibi: sefer başına son teklif
+    const offers=[...latest.values()].slice(-12).map(o=>settleOut(e,o));
+    const camps=[...new Set((G.warLedger&&G.warLedger.fronts||[]).filter(f=>f.sides.includes(e.id)).map(f=>f.campaign))];
+    const drafts=camps.filter(c=>{const o=offers.find(x=>x.campaign===c);return (!o||!['pending','approved','applied'].includes(o.state))&&settlementContext(e,c).ok;});
+    return {offers,drafts};
+  }
+  /* katılımcıya özel sonuç bildirimi: uzak insana kendi listesinde, host'a host bildirimiyle (motor host'a yalnız AI gündemini ve
+     uygulamayı söyler). İlk geçişte sessizce tohumlanır (kayıttan devam bildirim yağdırmaz). */
+  const settleSeen=new Map();let settlePrimed=false;
+  const SETTLE_TXT={approved:'oybirliğiyle onaylandı — bir ortak UYGULA ile devri yapar',rejected:'reddedildi',expired:'180 günlük süresi doldu',invalid:'koşullar değişti; teklif geçersiz',withdrawn:'öneren geri çekti'};
+  function settleSweep(){
+    if(typeof settlementState!=='function')return;
+    for(const o of G.settlements&&G.settlements.offers||[]){const st=settlementState(o).state,prev=settleSeen.get(o.id);settleSeen.set(o.id,st);
+      if(!settlePrimed||prev===st)continue;
+      for(const id of o.members){const m=G.emps[id],rh=remoteHuman(m),host=id===hostEmpireId;if(!m||!rh&&!host)continue;
+        let t=null;
+        if(prev===undefined&&st==='pending'){if(id!==o.proposer)t='Ortak savaş paylaşımı önerildi (sefer '+o.campaign+') — Diplomasi merkezi › Ortak savaş paylaşımları; oyunu yalnız sen verirsin';}
+        else if(st==='applied'){if(rh)t='Ortak savaş paylaşımı tamamlandı — '+(o.receipt?o.receipt.transfers.length:0)+' devir';}   // host'a motor söyler
+        else if(SETTLE_TXT[st])t='Ortak savaş paylaşımı (sefer '+o.campaign+') '+SETTLE_TXT[st];
+        if(!t)continue;if(rh)note(id,t,st==='applied'?'win':st==='pending'||st==='approved'?'dip':'war');else if(opts.hostNotify)opts.hostNotify(t,'dip');}}
+    settlePrimed=true;
+  }
+  function publish(){dipSweep();pure(polSweep);pure(warSweep);pure(settleSweep);const rev=++S.worldRevision;for(const p of S.players.values())publishTo(p,rev);return rev;}
 
   /* ---------- komutlar: yalnız bu tablo ---------- */
   function locate(e,c){
@@ -325,7 +376,7 @@ function createHost(opts){
   function diploTarget(e,c){const o=warTarget(e,c);return o&&!o.wild?o:null;}
   /* MP.6.2 statüko teklifleri (oturum; Save8'e ve MP.4 paketine girmez): insan alıcı kendisi karar verir. Host'un devleti alıcıysa
      motorun tek oyunculu bildirimi (sqOffer) kullanılır, ama oyunu herkes için duraklatmaz (pause:false). */
-  const SQ=[],SQ_LIFE=180;
+  const SQ=[];
   function sqOffer(a,b){
     if(b.id===hostEmpireId&&typeof UI!=='undefined'&&UI.notify){UI.notify({kind:'sqOffer',data:a.id,ico:'🤝',cls:'sci',pause:false,title:'STATÜKO BARIŞI TEKLİFİ',sub:a.name+' sınırların donmasını öneriyor',key:'sq:'+a.id});return true;}
     if(SQ.some(q=>q.status==='pending'&&q.from===a.id&&q.to===b.id))return true;
@@ -339,6 +390,11 @@ function createHost(opts){
      speedSync ile yayınlanır. Spam koruması: oyuncu başına en az SPEED_GAP ms ara, SPEED_WINDOW içinde en çok SPEED_BURST. */
   const SPEED_MAX=4,SPEED_GAP=700,SPEED_WINDOW=20000,SPEED_BURST=8,speedRate=new Map();let curActor=null,lastSpeed=null;
   const setSpeed=v=>{if(opts.setSpeed)opts.setSpeed(v);else G.speed=v;};
+  /* MP.6.3: host sayfası akıllı duraklatma politikası verirse (opts.speedInfo → {want,reason}) ortak hız = son AÇIK seçim (want);
+     uygulanan G.speed geçici nedenlerle (karar penceresi, arka plan, ağ) daha düşük olabilir. Politika yoksa MP.6.1 davranışı aynen. */
+  const sharedSpeed=()=>{const i=opts.speedInfo&&opts.speedInfo();return i&&Number.isInteger(i.want)?i:{want:G.speed|0,reason:null};};
+  let speedSeq=0;const nextSeq=()=>(speedSeq=Math.max(speedSeq+1,Date.now()));   // eski hız iletisi yenisini ezmesin (misafir küçük n'yi yok sayar)
+  function speedExtra(){const i=sharedSpeed(),spd=G.speed|0;return i.want!==spd?{want:i.want,...(i.reason?{hold:i.reason}:{})}:{};}
   /* Hızı değiştirenin adı alıcının bakışından: kendi devleti ya da temaslı devletse devlet adı, değilse lobideki oyuncu adı
      (lobi adları herkese açıktır; temas kurulmamış devletin adı gitmez). Ad istemciden değil oturumdan gelir. */
   function speedWho(viewerEmp,byEmp,byPlayer){
@@ -348,9 +404,9 @@ function createHost(opts){
     const p=byPlayer&&S.players.get(byPlayer);return p?String(p.name).slice(0,24):'Bir oyuncu';}
   /* iç duraklatmada (auto) misafire ad gitmez; açık değişiklikte alıcının bakışından ad */
   function speedOut(byEmp,byPlayer,auto,reason){
-    const spd=G.speed|0;lastSpeed=spd;stats.speedChanges=(stats.speedChanges||0)+1;
-    for(const p of S.players.values()){if(p.playerId==='host'){if(opts.onSpeed)opts.onSpeed({spd,who:speedWho(hostEmpireId,byEmp,byPlayer),auto:!!auto,self:byEmp===hostEmpireId&&!auto,reason:reason||null});continue;}
-      if(!p.conn)continue;out(p.conn,{v:PROTOCOL,type:'speed',spd,who:auto?null:speedWho(p.empireId,byEmp,byPlayer),auto:auto?1:0,self:byEmp===p.empireId&&!auto?1:0,...(reason?{reason}:{})});}
+    const spd=G.speed|0,x=speedExtra(),n=nextSeq();lastSpeed=spd;stats.speedChanges=(stats.speedChanges||0)+1;
+    for(const p of S.players.values()){if(p.playerId==='host'){if(opts.onSpeed)opts.onSpeed({spd,who:speedWho(hostEmpireId,byEmp,byPlayer),auto:!!auto,self:byEmp===hostEmpireId&&!auto,reason:reason||null,host:1,n,...x});continue;}
+      if(!p.conn)continue;out(p.conn,{v:PROTOCOL,type:'speed',spd,who:auto?null:speedWho(p.empireId,byEmp,byPlayer),auto:auto?1:0,self:byEmp===p.empireId&&!auto?1:0,...(reason?{reason}:{}),n,...x});}
   }
   /* host'un iç hız değişiklikleri (pencere açınca duraklatma, arka plan, ağ, kayıttan devam): değiştiyse yayınla */
   function speedSync(reason){if(lastSpeed===null){lastSpeed=G.speed|0;return false;}if((G.speed|0)===lastSpeed)return false;speedOut(hostEmpireId,'host',true,reason);return true;}
@@ -455,7 +511,7 @@ function createHost(opts){
         claimColony(f,sys,pl.i);if(!orderMove(f,sys.id))return false;f.ord={t:'kol',s:sys.id,p:pl.i};return true;}},
     /* MP.6.1 — ortak oyun hızı: tek yetkili host. Değişiklik herkese yayınlanır (speedOut); aynı hız 'same' (bildirim yok). */
     speed:{keys:['kind','value'],check:c=>int(c.value,0,SPEED_MAX),locate:()=>({}),
-      why(e,at,c){if((G.speed|0)===c.value)return 'same';const t=now(),a=(speedRate.get(e.id)||[]).filter(x=>t-x<SPEED_WINDOW);
+      why(e,at,c){if(sharedSpeed().want===c.value)return 'same';const t=now(),a=(speedRate.get(e.id)||[]).filter(x=>t-x<SPEED_WINDOW);
         if(a.length>=SPEED_BURST||a.length&&t-a[a.length-1]<SPEED_GAP)return 'rate-limited';return null;},
       roots:()=>[],
       apply(e,at,c){const t=now();speedRate.set(e.id,[...(speedRate.get(e.id)||[]).filter(x=>t-x<SPEED_WINDOW),t]);setSpeed(c.value);speedOut(e.id,curActor,false);return true;}},
@@ -600,7 +656,47 @@ function createHost(opts){
       locate(e,c){const s=G.emps[c.sub],q=s&&s.vassalTalk;return q&&(q.lord===e.id||q.sub===e.id)?{q}:{err:'no-offer'};},   // taraf olmayana müzakere "yok"
       why(e,{q},c){if(q.status!=='pending')return 'closed';if(q.to!==e.id)return 'not-recipient';if(q.id!==c.id||q.round!==c.round)return 'stale';if(G.day>=q.expires)return 'expired';
         if(c.action==='counter'&&!vassalTerms(q.type,c.terms))return 'terms';return null;},
-      roots:()=>[],apply:(e,{q},c)=>vassalReply(e,c.sub,c.id,c.round,c.action,c.action==='counter'?c.terms:null)}
+      roots:()=>[],apply:(e,{q},c)=>vassalReply(e,c.sub,c.id,c.round,c.action,c.action==='counter'?c.terms:null)},
+    /* ═══ MP.6.3 — federasyonun kalan kararları: motorun kendi önerge yolu (canFedMotion / proposeFedMotion) ihraç, reform,
+       anayasa/oy rejimi, başkan seçimi, mevcut savaşa katılma ve ortak savaş izni için; oylama ve kabul kuralları federasyonun
+       anayasasından (motor). Kabul edilen savaş kararını yalnız önerici ya da başkan uygular (executeFedDecision). Acil hibe
+       (canGrantFed / grantFed) yalnız üyenin kendi kaynağından. Kimlikler gerçek; seçenekler yalnız motorun beklediği alanlar. */
+    fedMotion:{keys:['kind','motion','target','sponsor','type','field','value'],
+      check:c=>typeof c.motion==='string'&&Object.hasOwn(FED_MOTIONS,c.motion)&&c.motion!=='admit'&&[c.target,c.sponsor].every(x=>x===undefined||int(x,0,63))&&
+        [c.type,c.field,c.value].every(x=>x===undefined||typeof x==='string'&&x.length<=24),
+      locate:()=>({}),why(e,at,c){if(!findFed(e))return 'no-fed';if(c.target!==undefined&&!e.contact[c.target]&&!findFed(e).members.includes(c.target))return 'no-target';
+        const q=canFedMotion(e,c.motion,fedMotionOpts(c));return q.ok?null:polWhy(q);},
+      roots:()=>[],apply:(e,at,c)=>proposeFedMotion(e,c.motion,fedMotionOpts(c))},
+    fedExecute:{keys:['kind','fed','id'],check:c=>int(c.fed,0,2147483647)&&typeof c.id==='string'&&c.id.length<=80,
+      locate(e,c){const f=findFed(e);return f&&f.id===c.fed&&f.decisions&&f.decisions[c.id]?{f}:{err:'no-offer'};},why:()=>null,roots:()=>[],
+      apply(e,at,c){const r=executeFedDecision(e,c.fed,c.id);if(r.ok&&remoteHuman(e))note(e.id,'Federasyon savaş kararı uygulandı — '+(r.joined||[]).length+' üye savaşa katıldı','war');return r;}},
+    fedGrant:{keys:['kind'],check:()=>true,locate:()=>({}),why(e){if(!findFed(e))return 'no-fed';const q=canGrantFed(e);return q.ok?null:polWhy(q);},roots:()=>[],
+      apply(e){const r=grantFed(e);if(r.ok&&remoteHuman(e))note(e.id,'🏛 ACİL HİBE — federal fona '+GRANT_ALA+' alaşım, '+GRANT_ENE+' enerji aktarıldı','win');return r;}},
+    /* MP.6.3 — vasalın bağımsızlığına destek sözü (canSupportIndep / supportIndep). Motor yalnız devlet 0'a bildiriyordu:
+       uzak insan söz veren kendi sonucunu, uzak insan senyör sızan görüşmeyi kendi listesinde görür (motorun metniyle). */
+    supIndep:{keys:['kind','sub'],check:c=>int(c.sub,0,63),locate:()=>({}),
+      why(e,at,c){const s=G.emps[c.sub];if(!s||s===e||!polParty(s)||!e.contact[s.id])return 'no-target';const q=canSupportIndep(e,s);return q.ok?null:polWhy(q);},
+      roots:()=>[],apply(e,at,c){const s=G.emps[c.sub],lord=overlordOf(s),r0=lord?lord.rel[e.id]||0:0,r=supportIndep(e,s);if(!r||!r.ok)return r;
+        const sp=lord&&(lord.rel[e.id]||0)<r0;   // motor sızıntıda senyörün ilişkisini düşürür (RNG motorda)
+        if(remoteHuman(e))note(e.id,sp?'⚠ Destek sözün sızdı — '+(e.contact[lord.id]?lord.name:'senyör')+' öfkeli':'🕯 '+s.name+' bağımsızlık sözünü aldı — isyan ederlerse yanlarında savaşacaksın',sp?'war':'sci');
+        if(sp&&remoteHuman(lord))note(lord.id,'🕯 '+(lord.contact[e.id]?e.name:'Bir devlet')+' vasalın '+s.name+' ile gizli görüşmeler yapıyor','war');
+        return r;}},
+    /* ═══ MP.6.3 — ortak savaş ganimeti paylaşımı: motorun 92B–92D işlevleri (settlementPreview / Submit / Vote / Apply /
+       Withdraw). Yeni dağıtım yok; 180 günlük süre ve oybirliği motorda. Kimlik oturumdan (e): kimse başkası adına oy veremez,
+       aynı oy iki kez verilemez (motor), onaylı içerik değişmez (settlementTerms), aynı devir iki kez uygulanmaz ('applied').
+       Sefere katılmayana teklif ve taslak "yok" (no-offer). Taslak damgası istemciye özet olarak gider (fnv): eski taslak
+       host'ta yeniden türetilip denetlenir ('stale'). Motor işlemleri kendi dealTx geri almasıyla atomiktir. */
+    settleQuote:{keys:['kind','campaign','assign'],ro:true,check:c=>int(c.campaign,0,2147483647)&&settleAssignOk(c.assign),
+      locate:(e,c)=>settleSide(e,c.campaign)?{}:{err:'no-offer'},why:()=>null,roots:()=>[],
+      apply(e,at,c){const r=settleQ(e,c.campaign,c.assign);return {ok:true,extra:r.ok?r.out:{ok:false,why:r.why}};}},
+    settleSubmit:{keys:['kind','campaign','stamp','assign'],check:c=>int(c.campaign,0,2147483647)&&typeof c.stamp==='string'&&c.stamp.length<=40&&settleAssignOk(c.assign),
+      locate:(e,c)=>settleSide(e,c.campaign)?{}:{err:'no-offer'},
+      why(e,at,c){const r=settleQ(e,c.campaign,c.assign);if(!r.ok)return {code:'engine',detail:[String(r.why).slice(0,200)]};return r.out.stamp===c.stamp?null:'stale';},
+      roots:()=>[],apply(e,at,c){const r=settleQ(e,c.campaign,c.assign);return settlementSubmit(e,c.campaign,r.q.stamp,Object.fromEntries(r.q.rows.map(x=>[x.key,x.to])));}},
+    settleVote:{keys:['kind','offer','yes'],check:c=>int(c.offer,1,2147483647)&&typeof c.yes==='boolean',locate:(e,c)=>settleMember(e,c.offer),why:()=>null,roots:()=>[],
+      apply:(e,at,c)=>settlementVote(e,c.offer,c.yes)},
+    settleApply:{keys:['kind','offer'],check:c=>int(c.offer,1,2147483647),locate:(e,c)=>settleMember(e,c.offer),why:()=>null,roots:()=>[],apply:(e,at,c)=>settlementApply(e,c.offer)},
+    settleWithdraw:{keys:['kind','offer'],check:c=>int(c.offer,1,2147483647),locate:(e,c)=>settleMember(e,c.offer),why:()=>null,roots:()=>[],apply:(e,at,c)=>settlementWithdraw(e,c.offer)}
   });
   /* ═══ MP.3 diplomasi durumu (oturum; Save8'e girmez — kalıcılık MP.4) ═══ */
   const DIP_ROUNDS=6,DIP_PENDING_OUT=8,DIP_KEEP=160,DIP_RES=['min','ene','yiy','ala','tuk','ara','etk'];
@@ -887,7 +983,7 @@ function createHost(opts){
       p.conn=conn;p.lastView=null;p.lastMirror=null;p.lastSeen=now();S.conns.set(conn,p.playerId);
       out(conn,{v:PROTOCOL,type:'assign',room:S.roomId,saveId:S.saveId,hostId:S.hostId,playerId:p.playerId,token:p.token,empireId:p.empireId,lastSeq:p.lastSeq,rev:S.worldRevision});
       if(p.empireId!==null)publishTo(p,S.worldRevision);
-      if(!L||['ingame','paused'].includes(L.phase))out(conn,{v:PROTOCOL,type:'speed',spd:G.speed|0,silent:1});   // MP.6.1: dönen oyuncu güncel ortak hızı alır (bildirimsiz)
+      if(!L||['ingame','paused'].includes(L.phase))out(conn,{v:PROTOCOL,type:'speed',spd:G.speed|0,silent:1,n:nextSeq(),...speedExtra()});   // MP.6.1: dönen oyuncu güncel ortak hızı alır (bildirimsiz)
       if(p.visitor)out(conn,{v:PROTOCOL,type:'resume',saveId:S.saveId});   // MP.4: cihazında bu kayıt için jeton varsa misafir onu gönderir
       if(L)broadcastLobby();
       if(opts.onPlayer)opts.onPlayer(p.playerId,'hello');
@@ -1047,6 +1143,10 @@ function createHost(opts){
         const o=e&&e.lastOffer?G.emps.find(x=>x&&x!==e&&!x.ai&&e.war&&e.war[x.id]&&e.lastOffer[x.id]===day&&!seen.has(x.id)):null;
         if(o){seen.add(o.id);done.set(e.id,{day,ids:seen});if(RH(o))return root.__mpPeaceOffer(e,o);}
         return po.apply(this,arguments);};}
+    /* MP.6.3: settlementSubmit önerenden ve devlet 0'dan başka her ortağın oyunu settlementOpinion (AI değerlendirmesi) ile yazıyordu:
+       uzak insan adına otomatik EVET/HAYIR. Uzak insan da devlet 0 gibi atlanır; oyunu kendi 'settleVote' komutuyla verir.
+       settlementOpinion RNG tüketmez; uzak insan yokken davranış ve Save8 birebir aynı. */
+    settlementSubmit=patchEngine(settlementSubmit,'if(id===e.id||id===0)continue;','if(id===e.id||id===0||__mpHumanVoter(id))continue;');
     aiStatusQuoTick=patchEngine(aiStatusQuoTick,'if (o.id === 0){\n        /* Oyuncuya teklif edilir','if (__mpHumanVoter(o.id)){__mpSqOffer(e,o);e._sqCd=(G.memAge||0)+24;continue;}\n      if (o.id === 0){\n        /* Oyuncuya teklif edilir');
   }
   function patchEngine(fn,from,to){
@@ -1065,9 +1165,9 @@ function createHost(opts){
       return x;});
     const hostE=G.emps[hostEmpireId],name=String(o.name||'').replace(/[\u0000-\u001f<>]/g,'').trim().slice(0,40)||(hostE?String(hostE.name).slice(0,40):'Galaksi');   // tarih ayrı alanlarda (year/month)
     const body={format:PKG_FORMAT,mpVersion:PKG_VERSION,build:typeof BUILD_ID==='string'?BUILD_ID:null,createdAt:now(),saveId:S.saveId,
-      session:{roomId:S.roomId,worldRevision:S.worldRevision,hostEmpireId,speed:G.speed|0,capacity:L?L.capacity:Math.max(2,players.length),settings:L&&L.settings?{size:L.settings.size,aiCount:L.settings.aiCount,...(L.settings.shape!==undefined?{shape:L.settings.shape}:{})}:null,
+      session:{roomId:S.roomId,worldRevision:S.worldRevision,hostEmpireId,speed:sharedSpeed().want,capacity:L?L.capacity:Math.max(2,players.length),settings:L&&L.settings?{size:L.settings.size,aiCount:L.settings.aiCount,...(L.settings.shape!==undefined?{shape:L.settings.shape}:{})}:null,
         players,notes:Object.fromEntries([...notes].map(([k,v])=>[k,v.slice(-12)]))},
-      diplomacy:{next:D.next,offers:JSON.parse(JSON.stringify(D.offers))},
+      diplomacy:{next:D.next,offers:JSON.parse(JSON.stringify(D.offers)),...(SQ.length?{sq:SQ.map(q=>({from:q.from,to:q.to,born:q.born,expires:q.expires,status:q.status}))}:{})},   // MP.6.3: statüko teklifleri
       display:{name,year:G.year,month:G.month,day:Math.floor(G.day),size:L&&L.settings?L.settings.size:null,systems:G.sys.length,
         humans:gs.map(p=>({name:String(p.name).slice(0,24),empire:G.emps[p.empireId]?String(G.emps[p.empireId].name):'?',host:p.playerId==='host'?1:0}))}};
     const h8=sha256(save8);
@@ -1079,6 +1179,7 @@ function createHost(opts){
     for(const x of ss.players){const p={...x,token:null,conn:null,results:new Map(),lastView:null,lastRev:0,lastSeen:now(),ready:true,tab:'oyun',claim:x.empireId,rate:[]};
       if(x.playerId==='host'){p.token=null;delete p.auth;}S.players.set(p.playerId,p);if(x.empireId!==null)S.slots.set(x.empireId,x.playerId);}
     D.next=pkg.diplomacy.next;D.offers=JSON.parse(JSON.stringify(pkg.diplomacy.offers));
+    SQ.length=0;for(const q of pkg.diplomacy.sq||[])SQ.push({...q,...(q.status==='pending'&&G.day>=q.expires?{status:'expired'}:{})});   // MP.6.3: süresi dolan yapay uzatılmaz
     notes.clear();for(const [k,v] of Object.entries(ss.notes||{}))notes.set(+k,v.slice(-12));
     if(L){L.phase='resume';L.capacity=ss.capacity;L.settings=ss.settings?{...ss.settings}:null;L.galaxyRev=1;L.seatNext=Math.max(1,...ss.players.map(x=>(x.seat|0)+1));
       L.resume={name:pkg.display.name,year:pkg.display.year,month:pkg.display.month,size:pkg.display.size,createdAt:pkg.createdAt};}
@@ -1104,7 +1205,7 @@ function createHost(opts){
   /* ---------- oturum metadatası (Save8'den ayrı, sürümlü) ---------- */
   function meta(saveText){
     return {mpMeta:1,saveId:S.saveId,roomId:S.roomId,worldRevision:S.worldRevision,hostId:S.hostId,
-      build:typeof BUILD_ID==='string'?BUILD_ID:null,saveVersion:8,seed:G.seed,day:G.day,speed:G.speed|0,access:S.access,
+      build:typeof BUILD_ID==='string'?BUILD_ID:null,saveVersion:8,seed:G.seed,day:G.day,speed:sharedSpeed().want,access:S.access,
       saveHash:typeof saveText==='string'?fnv(saveText):null,
       players:[...S.players.values()].map(p=>({playerId:p.playerId,name:p.name,token:p.token,empireId:p.empireId,lastSeq:p.lastSeq,wasAI:p.wasAI,takeover:p.takeover,lastSeen:p.lastSeen}))};
   }

@@ -41,7 +41,11 @@ const VIEW=new Set(['tab','full','cameraReset','cameraFocus','home','fit','topSt
   'sendhere','ship','focus','cancelBuild','demolish','foundFed','fedDipInvite','fedDipRequest','fedMotion','fedInviteAccept','fedInviteReject',
   'fedLawPropose','fedLawRepeal','fedLeave','vsSend','vsReply','dealSend',
   /* MP.6.2 — savaş ve ikili siyaset: gerçek pencere açılır, son çağrı MP komutuna iner */
-  'war','ally','pact','dealPact','endAlliance','unpact','embargo','unembargo','gift']);
+  'war','ally','pact','dealPact','endAlliance','unpact','embargo','unembargo','gift',
+  /* MP.6.3 — ortak savaş paylaşımı penceresi (taslak/oy/uygula düğmeleri _hook; son çağrılar MP komutuna iner) */
+  'shareOpen',
+  /* MP.6.3 — federasyon kararları ve bağımsızlık desteği: motor işlevi MP komutuna iner */
+  'fedExecute','fedGrant','supIndep']);
 /* MP.6.1 — UI.act kapısında doğrudan MP komutuna çevrilen düğmeler (tek oyunculu kodları dünyayı yerelde değiştirir) */
 const sel=()=>View.sel&&View.sel.e===0&&G.fleets.includes(View.sel)?View.sel:null;
 const ACT={
@@ -106,7 +110,26 @@ function gate(){
   const r=c=>send(c)?{ok:true}:{ok:false,why:'Host bağlı değil; karar gönderilmedi.'};
   wrap('foundFederation',(o,e,type,ballot)=>mine(e)?r({kind:'fedFound',type:String(type),ballot:String(ballot)}):NOT_MP);
   wrap('requestFederation',(o,e,via)=>mine(e)&&via?r({kind:'fedRequest',via:real(via.id)}):NOT_MP);
-  wrap('proposeFedMotion',(o,e,kind,opt)=>mine(e)&&kind==='admit'&&opt&&Number.isInteger(opt.target)?r({kind:'fedInvite',target:real(opt.target)}):NOT_MP);
+  wrap('proposeFedMotion',(o,e,kind,opt)=>{if(!mine(e))return NOT_MP;opt=opt||{};
+    if(kind==='admit')return Number.isInteger(opt.target)?r({kind:'fedInvite',target:real(opt.target)}):NOT_MP;
+    /* MP.6.3: ihraç, başkan seçimi, reform, anayasa / oy rejimi, savaşa katılma, ortak savaş izni — motorun önerge yolu host'ta */
+    const c={kind:'fedMotion',motion:String(kind)};for(const k of ['target','sponsor'])if(Number.isInteger(opt[k]))c[k]=real(opt[k]);
+    for(const k of ['type','field','value'])if(typeof opt[k]==='string')c[k]=opt[k];return r(c);});
+  /* MP.6.3: kuruluş uygunluğu (AI adaylarının kabulü) aynada hesaplanamaz (AI gözlem kaydı, rota, güven host'ta): gerçek kuruluş
+     penceresi host'un motor kararını (fedFoundQuote, salt okuma) gösterir; gelince pencere yeniden çizilir. Kuruluşta host yeniden doğrular. */
+  const FF={q:{},wait:{},at:0};
+  wrap('canFoundFed',(o,e,type,ballot)=>{if(!mine(e))return o(e,type,ballot);const k=type+':'+ballot,c=FF.q[k];
+    if(c&&Date.now()-c.at<8000)return c.v;
+    if(!FF.wait[k]){const cid=send({kind:'fedFoundQuote',type:String(type),ballot:String(ballot)});if(cid){FF.wait[k]=1;waits[cid]=res=>{delete FF.wait[k];
+      const x=res.status==='ok'?res.extra:{ok:false,reasons:['Host reddetti: '+why(res)],candidates:[],cost:0};
+      const allies=(x.candidates||[]).filter(a=>a.ok&&!a.h).map(a=>G.emps[local(a.id)]).filter(Boolean);
+      FF.q[k]={at:Date.now(),v:{ok:!!x.ok,why:(x.reasons||[])[0]||'',reasons:x.ok?[]:(x.reasons||[]),allies,candidates:x.candidates||[],cost:x.cost|0}};
+      const pane=doc.getElementById('diploPane');if(Date.now()-FF.at<60000&&pane&&pane.classList.contains('show')&&!S.building)try{UI.openFed();}catch{}};}}
+    return c?c.v:{ok:false,why:'Host uygunluğu denetliyor…',reasons:['Host uygunluğu denetliyor…'],allies:[],candidates:[],cost:0};});
+  const of0=UI.openFed.bind(UI);UI.openFed=function(...a){if(S.on)FF.at=Date.now();return of0(...a);};
+  wrap('executeFedDecision',(o,e,fid,id)=>mine(e)?r({kind:'fedExecute',fed:+fid,id:String(id)}):NOT_MP);
+  wrap('grantFed',(o,e)=>mine(e)?r({kind:'fedGrant'}):NOT_MP);
+  wrap('supportIndep',(o,e,sub)=>mine(e)&&sub?r({kind:'supIndep',sub:real(sub.id)}):NOT_MP);
   wrap('acceptFedInvite',(o,e,fid)=>mine(e)?r({kind:'fedReply',fed:+fid,action:'accept'}):NOT_MP);
   wrap('rejectFedInvite',(o,e,fid)=>mine(e)?r({kind:'fedReply',fed:+fid,action:'reject'}):NOT_MP);
   wrap('castFedVote',(o,e,fid,token,yes)=>mine(e)?r({kind:'fedVote',fed:+fid,token:String(token),yes:!!yes}):NOT_MP);
@@ -128,10 +151,38 @@ function gate(){
   wrap('canStatusQuo',(o,a,b)=>{if(mine(a)&&b){const c=hv()&&hv().dip&&hv().dip.contacts.find(x=>x.id===real(b.id));if(c&&c.sq!==undefined)return {ok:!!c.sq,why:c.sqw||''};}return o(a,b);});
   wrap('canRequestFederation',(o,e,via)=>{if(mine(e)&&via){const p=hv()&&hv().pol;const v=p&&(p.others||[]).flatMap(x=>x.vias||[]).find(x=>x.id===real(via.id));if(v)return {ok:!!v.ok,why:v.why||''};}return o(e,via);});   // aracı üyenin Etkisi kabukta yok: MP.3.1 polView kararı
   wrap('canFedMotion',(o,e,kind,opt)=>{if(mine(e)&&kind==='admit'&&opt&&Number.isInteger(opt.target)){const f=hv()&&hv().pol&&hv().pol.fed,row=f&&(f.admit||[]).find(x=>x.id===real(opt.target));if(row)return {ok:!!row.ok,why:row.why};}return o(e,kind,opt);});
+  /* MP.6.3 — vasallık giriş kapıları: güç oranı ve karşı tarafın vasalları aynada eksik (kabuk) → MP.3.1 polView'daki host kararı */
+  const vcand=o=>{const p=hv()&&hv().pol;return p&&p.vas&&(p.vas.cand||[]).find(x=>x.id===real(o.id));};
+  wrap('canSeekProtection',(o,e,t)=>{if(mine(e)&&t){const c=vcand(t);if(c)return {ok:!c.seek,why:c.seek||''};}return o(e,t);});
+  wrap('canDemandVassal',(o,e,t)=>{if(mine(e)&&t){const c=vcand(t);if(c)return {ok:!c.demand,why:c.demand||''};}return o(e,t);});
   /* MP.6.2 — ittifakı sonlandır, ticaret anlaşmasını feshet, ambargo: gerçek onay pencereleri → komut */
   wrap('endAlliance',(o,e,other)=>mine(e)&&other?r({kind:'endAlliance',target:real(other.id)}):NOT_MP);
   wrap('breakPact',(o,a,b)=>{if(!mine(a)||!b)return o(a,b);send({kind:'unpact',target:real(b.id)});});
   wrap('setEmbargo',(o,e,t,on)=>{if(!mine(e)||!t)return false;return !!send({kind:'embargo',target:real(t.id),on:!!on});});
+  /* MP.6.3 — ortak savaş ganimeti paylaşımı: GERÇEK STARS penceresi (UI.openSettlement) host'un verisiyle çizilir. Aynada sefer
+     kaydı yok; durum, görünürlük, uygulama kapısı ve teklif nesneleri host'un 'settle' görünümünden (yalnız katılımcıya),
+     taslak önizlemesi host'un motorundan (settleQuote). Oy / sun / uygula / geri çek → MP komutu; oyu yalnız bu oyuncu verir. */
+  wrap('settlementState',(o,x)=>x&&x.__mp?{state:x.state,why:x.why||''}:o(x));
+  wrap('settlementVisible',(o,e,row)=>row&&row.__mp?!!row.vis:o(e,row));
+  wrap('settlementOffer',(o,id)=>SET.offers.get(id)||o(id));
+  wrap('settlementApplyQuote',(o,e,id)=>{const x=SET.offers.get(id);if(!x)return o(e,id);return x.apply&&x.apply.ok?{ok:true,offer:x,transfers:[]}:{ok:false,why:(x.apply&&x.apply.why)||x.why||'Uygulanabilir ortak onayı yok'};});
+  wrap('settlementPreview',(o,e,campaign,assign)=>{if(!mine(e))return o(e,campaign,assign);const key=campaign+'|'+JSON.stringify(assign||null);
+    if(SET.quotes[key])return SET.quotes[key];
+    if(!SET.wait[key]){const a=assign?Object.fromEntries(Object.entries(assign).map(([k,v])=>[k,real(+v)])):null,cid=send({kind:'settleQuote',campaign:+campaign,assign:a});
+      if(cid){SET.wait[key]=1;waits[cid]=res=>{delete SET.wait[key];SET.quotes[key]=res.status==='ok'?setQuote(res.extra):{ok:false,why:'Host reddetti: '+why(res)};
+        const L=SET.last;if(L&&L[0]===campaign&&setShown())UI.openSettlement(...L);};}}
+    return {ok:false,why:'Paylaşım taslağı host\'un motorundan alınıyor…'};});
+  const sres=(c,okText)=>{const cid=send(c);if(!cid)return {ok:false,why:'Host bağlı değil; karar gönderilmedi.'};
+    waits[cid]=res=>{toast(res.status==='ok'?okText:'Host reddetti: '+why(res),res.status!=='ok');SET.quotes={};};return {ok:true,state:'pending'};};
+  wrap('settlementSubmit',(o,e,campaign,stamp,assign)=>mine(e)?sres({kind:'settleSubmit',campaign:+campaign,stamp:String(stamp),assign:assign?Object.fromEntries(Object.entries(assign).map(([k,v])=>[k,real(+v)])):null},'Paylaşım teklifi host\'ta kaydedildi; ortakların onayı bekleniyor.'):NOT_MP);
+  wrap('settlementVote',(o,e,id,yes)=>mine(e)?sres({kind:'settleVote',offer:+id,yes:!!yes},yes?'Onayın host\'ta kaydedildi.':'Reddin host\'ta kaydedildi.'):NOT_MP);
+  wrap('settlementApply',(o,e,id)=>mine(e)?sres({kind:'settleApply',offer:+id},'Paylaşım host\'ta uygulandı.'):NOT_MP);
+  wrap('settlementWithdraw',(o,e,id)=>mine(e)?sres({kind:'settleWithdraw',offer:+id},'Teklif geri çekildi.'):NOT_MP);
+  const os0=UI.openSettlement.bind(UI);UI.openSettlement=function(...a){if(S.on)SET.last=a;return os0(...a);};
+  /* taslak girişi: tek oyunculuda savaş katkı kaydından (aynada sefer kaydı yok) — host'un "taslak açılabilir" listesi aynı düğmeyle */
+  const sa0=UI.settlementAgenda.bind(UI);UI.settlementAgenda=function(){const h=sa0();if(!S.on)return h;const v=hv(),d=v&&v.settle?v.settle.drafts:[];
+    return h+(d.length?'<details class="dcDetails" open><summary>Ortak savaş paylaşımı taslakları</summary>'+d.map(c=>'<button class="abtn" data-a="shareOpen" data-x="'+(+c)+'">⚖ Sefer '+(+c)+' · Paylaşım taslağı hazırla</button>').join('')+
+      '<div class="mini">Seferdeki bütün cepheler kapandı. Taslak host\'un motorunda hazırlanır; sunmak oy vermek değildir.</div></details>':'');};
   /* MP.6.1 — gerçek anlaşma penceresi: GÖNDER → MP.3 'offer' (yalnız MP.3'ün desteklediği maddeler: kaynak ve barış).
      Karşı tarafın stoğu aynada yok; uygunluğu host denetler ve sonucu bildirir. */
   const dealSend0=UI.dealSend.bind(UI);
@@ -178,6 +229,22 @@ function gate(){
     return {ok:true};};
 }
 const TREATY=['peace','nap','pact','ally','intel','passage'];   // mp-core DIP_TREATY ile aynı
+/* MP.6.3 — ortak savaş paylaşımı: host görünümü (gerçek kimlikler) → aynadaki numaralar; teklif nesneleri kimlikle kalıcı
+   (pencere onay düğmeleri settlementOffer(id)===o denetler) */
+const SET={offers:new Map(),quotes:{},wait:{},sig:null,last:null};
+const setRow=r=>({...r,from:local(r.from),to:local(r.to),claims:(r.claims||[]).map(local),__mp:1});
+const setShares=l=>(l||[]).map(x=>({...x,id:local(x.id)}));
+function setQuote(q){if(!q||!q.ok)return {ok:false,why:(q&&q.why)||'Taslak yok'};return {...q,members:q.members.map(local),rows:q.rows.map(setRow),shares:setShares(q.shares)};}
+function setOffer(o){return {...o,proposer:local(o.proposer),members:o.members.map(local),rows:o.rows.map(setRow),shares:setShares(o.shares),votes:o.votes.map(v=>({...v,by:local(v.by)})),
+  receipt:o.receipt?{at:o.receipt.at,transfers:Array.from({length:o.receipt.n},()=>({}))}:undefined,__mp:1};}
+const setShown=()=>{const m=doc.getElementById('modal');return !!(m&&!m.classList.contains('hidden')&&/PAYLAŞIM/.test((m.querySelector('.mhd')||{}).textContent||''));};
+function setSync(){
+  const v=S.J&&S.J.game&&S.J.game.view;if(!v||!v.settle||typeof G==='undefined'||!G)return;
+  const sig=JSON.stringify(v.settle),fresh=!G.settlements||!G.settlements.__mp;if(sig===SET.sig&&!fresh)return;const changed=sig!==SET.sig;SET.sig=sig;if(changed)SET.quotes={};
+  const offers=v.settle.offers.map(o=>{const n=setOffer(o),old=SET.offers.get(o.id);if(old){for(const k of Object.keys(old))delete old[k];Object.assign(old,n);return old;}SET.offers.set(o.id,n);return n;});
+  if(fresh)G.settlements={v:1,next:1,offers:[],__mp:1};G.settlements.offers=offers;
+  if(changed&&S.started&&setShown()&&SET.last)try{UI.openSettlement(...SET.last.slice(0,1));}catch{}   // açık paylaşım penceresi host'un yeni durumunu gösterir
+}
 /* host önizlemesi (gerçek kimlikler) → aynadaki numaralar; adlar host'ta ilan edenin bilgisiyle süzülmüş gelir */
 function warLocal(p){const m=x=>x&&{...x,id:local(x.id)};return {...p,target:m(p.target),certain:(p.certain||[]).map(m),conditional:(p.conditional||[]).map(m)};}
 const vasTerms=(type,t)=>{const o={};for(const k of ['tax','science','defense','war','autonomy','duration','renegotiate','sensors'])if(t&&t[k]!==undefined)o[k]=JSON.parse(JSON.stringify(t[k]));return o;};
@@ -193,7 +260,8 @@ function onMessage(m){
   if(m.type==='mirror'){S.mirror=m.full;S.rev=m.rev;S.stats.mirrors++;schedule();return true;}
   if(m.type==='mirrorDelta'){if(!S.mirror||m.base!==S.rev){S.stats.resyncs++;S.J&&S.J.sendRaw({v:1,type:'resync'});return true;}
     StarsMirror.apply(S.mirror,m.ops);S.rev=m.rev;S.stats.deltas++;schedule();return true;}
-  if(m.type==='speed'){S.hostSpd=m.spd|0;S.stats.speedMsgs++;paintSpeed();if(window.MP61)MP61.speed(m);return true;}
+  if(m.type==='speed'){if(Number.isFinite(m.n)){if(m.n<=(S.speedN||0)){S.stats.staleSpeed=(S.stats.staleSpeed||0)+1;return true;}S.speedN=m.n;}   // MP.6.3: eski hız iletisi yenisini ezmez
+    S.hostSpd=m.spd|0;S.hostWant=Number.isInteger(m.want)?m.want:S.hostSpd;S.stats.speedMsgs++;paintSpeed();if(window.MP61)MP61.speed(m);return true;}
   return false;
 }
 /* ayna bekletme: yalnız gerçek onay penceresi (#modal) açıkken. MP.6.2: diplomasi sayfası açıkken de ayna uygulanır; sayfa,
@@ -208,7 +276,7 @@ function rebuild(){
      yarım hareketi bozulmasın diye korunur. Kamera View.cam'de; deserialize ona dokunmaz. Seçili filo kimlikle korunur. */
   const keep={route:View.route,routed:View.routed,note:UI._openNote,offer:UI.pendingOffer,sel:View.sel&&View.sel.id},rg=View.resetGesture;
   const t0=performance.now();S.building=true;let ok=false;
-  try{View.resetGesture=S.started?function(){}:rg;ok=deserialize(JSON.stringify(S.mirror));if(ok)inboxOffers();S.inboxSig=null;}catch{ok=false;}
+  try{View.resetGesture=S.started?function(){}:rg;ok=deserialize(JSON.stringify(S.mirror));if(ok){inboxOffers();setSync();}S.inboxSig=null;}catch{ok=false;}
   finally{View.resetGesture=rg;S.building=false;}
   S.lastBuild=Date.now();
   if(!ok){S.stats.fail=(S.stats.fail||0)+1;S.timer=setTimeout(rebuild,1000);return;}
@@ -296,9 +364,10 @@ function update(statusHtml){
   /* MP.6.2: bekleyen teklif G'yi değiştirmez → host yeni ayna göndermeyebilir; MP.3 'dip' görünümü değişince gerçek gelen
      kutusu ayna beklemeden güncellenir (capture tekrar eden kaydı yeniden eklemez). */
   const v=J.game&&J.game.view;if(S.started&&!S.building&&v&&v.dip){const sig=JSON.stringify([v.dip.offers.filter(o=>o.to===J.empireId&&o.status==='pending').map(o=>o.id),(v.dip.sq||[]).filter(q=>q.to===J.empireId&&q.status==='pending').map(q=>q.from+':'+q.born)]);
-    if(sig!==S.inboxSig){S.inboxSig=sig;try{inboxOffers();}catch{}}}
+    if(sig!==S.inboxSig){S.inboxSig=sig;try{inboxOffers();}catch{}}
+    try{setSync();}catch{}}
 }
-window.MP6Stars={S,onMessage,update,screen,attach(J){S.J=J;},onAssign(){S.uiSent=false;},VIEW,ACT,dip:{open:dipOpen,seg:seg6,get ui(){return dipUI;},get pol(){return polUI;}}};
+window.MP6Stars={SET,S,onMessage,update,screen,attach(J){S.J=J;},onAssign(){S.uiSent=false;},VIEW,ACT,dip:{open:dipOpen,seg:seg6,get ui(){return dipUI;},get pol(){return polUI;}}};
 /* telefon geri tuşu: önce açık MP diplomasi onayı/paneli kapanır (join.js popstate bunu sorar) */
 const prevBack=window.__mpBack;window.__mpBack=()=>{if(prevBack&&prevBack())return true;if(dipEl){dipOpen(false);return true;}return false;};
 })();
