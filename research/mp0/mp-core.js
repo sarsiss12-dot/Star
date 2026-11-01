@@ -94,6 +94,7 @@ function pkgItem(it){if(!plain(it)||!ITEM_T.includes(it.t)||Object.keys(it).leng
   for(const [k,v] of Object.entries(it))if(!['number','string','boolean'].includes(typeof v)||typeof v==='number'&&!Number.isFinite(v)||typeof v==='string'&&v.length>40)return 'items';
   if(it.t==='res'&&(!RES_K.includes(it.r)||!Number.isFinite(it.v)||it.v<=0||it.v>1e7))return 'amount';return null;}
 /* Paketi doğrula (yan etkisiz). Metin ya da nesne alır. Önce boyut ve bütünlük, sonra şema. */
+const SQ_LIFE=180;   // MP.6.2 statüko teklifinin ömrü (gün)
 function validatePackage(input,o={}){
   const fail=(why,detail)=>({ok:false,why,...(detail?{detail}:{})});let pkg=input;
   if(typeof input==='string'){if(input.length>MAX_PKG)return fail('too-big');try{pkg=JSON.parse(input);}catch{return fail('json');}}
@@ -137,7 +138,13 @@ function validatePackage(input,o={}){
   if(!plain(ss.notes))return fail('session');
   for(const [k,v] of Object.entries(ss.notes))if(!/^\d{1,2}$/.test(k)||!Array.isArray(v)||v.length>12||v.some(x=>!plain(x)||!onlyKeys(x,['d','m','c'])||!Number.isFinite(x.d)||typeof x.m!=='string'||x.m.length>160||typeof x.c!=='string'||x.c.length>12))return fail('session');
   const dp=pkg.diplomacy;
-  if(!plain(dp)||!onlyKeys(dp,['next','offers'])||!int(dp.next,1,2147483647)||!Array.isArray(dp.offers)||dp.offers.length>400)return fail('offers');
+  if(!plain(dp)||!onlyKeys(dp,['next','offers','sq'])||!int(dp.next,1,2147483647)||!Array.isArray(dp.offers)||dp.offers.length>400)return fail('offers');
+  /* MP.6.3: statüko teklifleri (isteğe bağlı alan; MP.6.2 ve öncesi kayıtlarda yok → aynen yüklenir). Süre mutlak oyun günüdür:
+     kayıt bekleyen teklifi uzatmaz (expires = born + 180). */
+  if(has(dp,'sq')){if(!Array.isArray(dp.sq)||dp.sq.length>100)return fail('offers');
+    for(const q of dp.sq)if(!plain(q)||!onlyKeys(q,['from','to','born','expires','status'])||!int(q.from,0,63)||!int(q.to,0,63)||q.from===q.to||!int(q.born,0,1e7)||q.expires!==q.born+SQ_LIFE||
+      !['pending','accepted','rejected','expired'].includes(q.status))return fail('offers');
+    if(new Set(dp.sq.filter(q=>q.status==='pending').map(q=>q.from+'>'+q.to)).size!==dp.sq.filter(q=>q.status==='pending').length)return fail('offers');}
   const ids=new Map();
   for(const r of dp.offers){
     if(!plain(r)||!onlyKeys(r,['id','from','to','give','want','born','expires','round','prev','status','why','by','cost','finished']))return fail('offers');
@@ -369,7 +376,7 @@ function createHost(opts){
   function diploTarget(e,c){const o=warTarget(e,c);return o&&!o.wild?o:null;}
   /* MP.6.2 statüko teklifleri (oturum; Save8'e ve MP.4 paketine girmez): insan alıcı kendisi karar verir. Host'un devleti alıcıysa
      motorun tek oyunculu bildirimi (sqOffer) kullanılır, ama oyunu herkes için duraklatmaz (pause:false). */
-  const SQ=[],SQ_LIFE=180;
+  const SQ=[];
   function sqOffer(a,b){
     if(b.id===hostEmpireId&&typeof UI!=='undefined'&&UI.notify){UI.notify({kind:'sqOffer',data:a.id,ico:'🤝',cls:'sci',pause:false,title:'STATÜKO BARIŞI TEKLİFİ',sub:a.name+' sınırların donmasını öneriyor',key:'sq:'+a.id});return true;}
     if(SQ.some(q=>q.status==='pending'&&q.from===a.id&&q.to===b.id))return true;
@@ -1160,7 +1167,7 @@ function createHost(opts){
     const body={format:PKG_FORMAT,mpVersion:PKG_VERSION,build:typeof BUILD_ID==='string'?BUILD_ID:null,createdAt:now(),saveId:S.saveId,
       session:{roomId:S.roomId,worldRevision:S.worldRevision,hostEmpireId,speed:sharedSpeed().want,capacity:L?L.capacity:Math.max(2,players.length),settings:L&&L.settings?{size:L.settings.size,aiCount:L.settings.aiCount,...(L.settings.shape!==undefined?{shape:L.settings.shape}:{})}:null,
         players,notes:Object.fromEntries([...notes].map(([k,v])=>[k,v.slice(-12)]))},
-      diplomacy:{next:D.next,offers:JSON.parse(JSON.stringify(D.offers))},
+      diplomacy:{next:D.next,offers:JSON.parse(JSON.stringify(D.offers)),...(SQ.length?{sq:SQ.map(q=>({from:q.from,to:q.to,born:q.born,expires:q.expires,status:q.status}))}:{})},   // MP.6.3: statüko teklifleri
       display:{name,year:G.year,month:G.month,day:Math.floor(G.day),size:L&&L.settings?L.settings.size:null,systems:G.sys.length,
         humans:gs.map(p=>({name:String(p.name).slice(0,24),empire:G.emps[p.empireId]?String(G.emps[p.empireId].name):'?',host:p.playerId==='host'?1:0}))}};
     const h8=sha256(save8);
@@ -1172,6 +1179,7 @@ function createHost(opts){
     for(const x of ss.players){const p={...x,token:null,conn:null,results:new Map(),lastView:null,lastRev:0,lastSeen:now(),ready:true,tab:'oyun',claim:x.empireId,rate:[]};
       if(x.playerId==='host'){p.token=null;delete p.auth;}S.players.set(p.playerId,p);if(x.empireId!==null)S.slots.set(x.empireId,x.playerId);}
     D.next=pkg.diplomacy.next;D.offers=JSON.parse(JSON.stringify(pkg.diplomacy.offers));
+    SQ.length=0;for(const q of pkg.diplomacy.sq||[])SQ.push({...q,...(q.status==='pending'&&G.day>=q.expires?{status:'expired'}:{})});   // MP.6.3: süresi dolan yapay uzatılmaz
     notes.clear();for(const [k,v] of Object.entries(ss.notes||{}))notes.set(+k,v.slice(-12));
     if(L){L.phase='resume';L.capacity=ss.capacity;L.settings=ss.settings?{...ss.settings}:null;L.galaxyRev=1;L.seatNext=Math.max(1,...ss.players.map(x=>(x.seat|0)+1));
       L.resume={name:pkg.display.name,year:pkg.display.year,month:pkg.display.month,size:pkg.display.size,createdAt:pkg.createdAt};}
