@@ -141,5 +141,5 @@ Ayrıntı: `research/mp7/evidence/REGRESYON.md`.
 
 - **Diplomasi:** ayrı MP diplomasi panelindeki bekleyen insan teklifleri listesi ve geri çekme gerçek diplomasi ekranına taşınmadı.
 - **Host lobi adı:** host'un lobideki oyuncu adı kurulumdaki devlet adıyla güncellenmez (oyuncu adı ≠ devlet adı).
-- **Misafir eşzamanlılığı:** taslağı kaydedilmeden açık kalan kurulum ekranı, host oyunu başlatırsa kapanmaz. Host herkes hazır olmadan başlatamadığı için yalnız HAZIR sonrası yeniden düzenleme sırasında olabilir; değişiklik hazırı sıfırlar.
+- **Misafir eşzamanlılığı:** HAZIR sonrası yeniden düzenleme sırasında host oyunu başlatırsa kurulum ekranı kaydetmeden kapanır ve oyun açılır. Kaydedilmemiş değişiklik uygulanmaz; host'taki son geçerli taslak kullanılır.
 - **Fiziksel cihaz ve canlı Render:** doğrulama yapılmadı.

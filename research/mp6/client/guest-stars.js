@@ -378,6 +378,7 @@ function inboxOffers(){
     if(rec){rec.mpSq=q.from;rec.expires=q.expires;}}
 }
 function start(){
+  if(window.MP7Setup&&MP7Setup.active)MP7Setup.close(false);   // MP.7: oyun başlarken açık kalan kurulum ekranı kaydetmeden kapanır
   S.started=true;S.on=true;gate();bootLog('ready');S.boot.stage='ready';S.boot.err='';S.boot.failed=false;
   try{leaveTitle(null);}catch{}
   doc.getElementById('menu').classList.add('hidden');doc.getElementById('game').classList.remove('hidden');ov.style.display='none';
