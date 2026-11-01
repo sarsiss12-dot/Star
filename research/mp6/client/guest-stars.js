@@ -47,7 +47,9 @@ const VIEW=new Set(['tab','full','cameraReset','cameraFocus','home','fit','topSt
   /* MP.6.3 — federasyon kararları ve bağımsızlık desteği: motor işlevi MP komutuna iner */
   'fedExecute','fedGrant','supIndep',
   /* MP.6.4 — casusluk: ağ, standart operasyonlar (onay ekranı → host), özel operasyonlar; son çağrılar MP komutuna iner */
-  'spy','ops','opDone','runop','opGo','saboPick','saboCancel','saboGo','incite','deepInv','ffTarget','ffPatsy','ffGo','stealTech']);
+  'spy','ops','opDone','runop','opGo','saboPick','saboCancel','saboGo','incite','deepInv','ffTarget','ffPatsy','ffGo','stealTech',
+  /* MP.6.4 — Galaktik Borsa (seçim görünüm, TAKAS ET → 'market') */
+  'mktTrade']);
 /* MP.6.1 — UI.act kapısında doğrudan MP komutuna çevrilen düğmeler (tek oyunculu kodları dünyayı yerelde değiştirir) */
 const sel=()=>View.sel&&View.sel.e===0&&G.fleets.includes(View.sel)?View.sel:null;
 const ACT={
@@ -185,6 +187,17 @@ function gate(){
   wrap('deepInvestigate',(o,e)=>mine(e)?special({kind:'spySpecial',op:'deepInv'},{msg:'Soruşturma host\'a gönderildi.'}):NOT_MP);
   wrap('falseFlagOp',(o,e,t,p,tur)=>mine(e)&&t&&p?special({kind:'spySpecial',op:'falseFlag',target:real(t.id),patsy:real(p.id),tur:String(tur||'')},{msg:'Sahte bayrak host\'a gönderildi.'}):NOT_MP);
   wrap('stealTech',(o,e,t)=>mine(e)&&t?special({kind:'spySpecial',op:'stealTech',target:real(t.id)}):NOT_MP);
+  /* MP.6.4 — Galaktik Borsa: durum ve fiyatlar host'tan (aynada konsey yok); TAKAS ET → 'market' (beklenen sonuçla; fiyat
+     değiştiyse host 'stale' ile güncel teklifi döner, işlem yapılmaz) */
+  const mv=()=>hv()&&hv().mkt;
+  wrap('marketOpen',o=>{const m=mv();return m?!!m.open:o();});
+  wrap('marketFeeNow',o=>{const m=mv();return m&&typeof m.fee==='number'?m.fee:o();});
+  wrap('marketInit',o=>{const m=mv();if(m&&m.mul){G.market={mul:{...m.mul},hist:[],acildi:0};return G.market;}return o();});
+  wrap('marketTrade',(o,e,sat,al,mik)=>{if(!mine(e))return o(e,sat,al,mik);const q=marketQuote(sat,al,+mik);
+    const cid=send({kind:'market',sat:String(sat),al:String(al),amount:Math.round(+mik)||0,...(q&&q.ok?{expect:Math.round(q.alinan*100)/100}:{})});
+    if(!cid)return {ok:false,why:'Host bağlı değil; takas gönderilmedi.'};
+    waits[cid]=res=>{toast(res.status==='ok'?'Takas host\'ta uygulandı: '+Math.round(res.extra.alinan)+' '+(RES[al]?RES[al].n:al):'Host reddetti: '+why(res),res.status!=='ok');try{if(doc.getElementById('diploPane').classList.contains('show'))UI.openMarket();}catch{}};
+    return {ok:true};});
   /* MP.6.2 — ittifakı sonlandır, ticaret anlaşmasını feshet, ambargo: gerçek onay pencereleri → komut */
   wrap('endAlliance',(o,e,other)=>mine(e)&&other?r({kind:'endAlliance',target:real(other.id)}):NOT_MP);
   wrap('breakPact',(o,a,b)=>{if(!mine(a)||!b)return o(a,b);send({kind:'unpact',target:real(b.id)});});

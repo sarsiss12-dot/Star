@@ -261,7 +261,7 @@ function createHost(opts){
       let st,why='';
       if(e.techs[id])st='d';else{const a=researchAccess(e,id);if(!a.ok){st='x';why=a.why;}else if(researchReady(e,id))st='r';else{const rt=researchRoute(e,id);st=rt.ok?'l':'x';why=rt.ok?'':rt.why;}}
       tech[id]={n:T.n,b:T.b,t:T.t,r:(T.r||[]).slice(),d:T.d||'',c:Math.round(techCost(e,id)),s:st,...(why?{w:why}:{})};}
-    return {me,sys,lanes,cols,fleets,emps,catalog,sci,tech,log:(notes.get(e.id)||[]).slice(),dip:dipView(e),pol:polView(e),settle:settleView(e)};
+    return {me,sys,lanes,cols,fleets,emps,catalog,sci,tech,log:(notes.get(e.id)||[]).slice(),dip:dipView(e),pol:polView(e),settle:settleView(e),mkt:mktView()};
   }
   function clock(){return {day:Math.floor(G.day),y:G.year,m:G.month,spd:G.speed|0};}
   const KEYED=['sys','cols','fleets','emps','tech'];
@@ -272,7 +272,7 @@ function createHost(opts){
       for(const k of Object.keys(a[sec]))if(!has(b[sec],k))rm.push(k);
       if(Object.keys(up).length)(ops.up||(ops.up={}))[sec]=up;
       if(rm.length)(ops.rm||(ops.rm={}))[sec]=rm;}
-    for(const sec of ['me','lanes','catalog','sci','log','dip','pol','settle'])if(JSON.stringify(a[sec])!==JSON.stringify(b[sec]))(ops.set||(ops.set={}))[sec]=b[sec];
+    for(const sec of ['me','lanes','catalog','sci','log','dip','pol','settle','mkt'])if(JSON.stringify(a[sec])!==JSON.stringify(b[sec]))(ops.set||(ops.set={}))[sec]=b[sec];
     return ops;
   }
   /* MP.2: görünüm salt okunur olmalı. explorationContext → borderPressure/totalPower gibi motor yolları
@@ -346,6 +346,9 @@ function createHost(opts){
     if(!spyPrimed){for(const e of G.emps)for(const h of e.hitLog||[])spyHitSeen.add(h);}
     spyPrimed=true;
   }
+  /* MP.6.4: borsa durumu (herkese açık fiyat çarpanları ve komisyon; kimin ne takas ettiği yok) */
+  function mktView(){if(typeof marketOpen!=='function')return {open:0};const open=marketOpen();
+    return {open:open?1:0,fee:typeof marketFeeNow==='function'?marketFeeNow():null,mul:open&&G.market?{...G.market.mul}:null};}
   function fedMotionOpts(c){const o={};for(const k of ['target','sponsor','type','field','value'])if(c[k]!==undefined)o[k]=c[k];return o;}
   const settleSide=(e,c)=>(G.warLedger&&G.warLedger.fronts||[]).some(f=>f.campaign===c&&f.sides.includes(e.id));
   function settleMember(e,id){const o=typeof settlementOffer==='function'&&settlementOffer(id);return o&&o.members.includes(e.id)?{o}:{err:'no-offer'};}
@@ -709,6 +712,20 @@ function createHost(opts){
         const x={msg:String(r.msg||'').slice(0,240),caught:!!r.caught};for(const k of ['basarili','cozuldu','savas'])if(r[k]!==undefined)x[k]=!!r[k];
         if(r.tech!==undefined&&TECHS[r.tech])x.tech=r.tech;   // gerçekten edinilen teknoloji
         if(remoteHuman(e)&&x.msg)note(e.id,x.msg,x.caught?'war':'sci');return {ok:true,extra:x};}},
+    /* ═══ MP.6.4 — Galaktik Borsa: motorun anlık takası (marketTrade). Motor bekleyen emir tutmaz: emir yönetimi/iptali yok.
+       Fiyat host'ta, işlem anında; misafirin gördüğü sonuç (expect) host'unkinden farklıysa 'stale' + güncel teklif (yeniden onay).
+       Eşzamanlı istekler host'un sırasıyla; her işlem kendi anındaki fiyatla ve motorun bakiye denetimiyle → çoğaltma yok. */
+    market:{keys:['kind','sat','al','amount','expect'],check:c=>typeof MARKET_RES!=='undefined'&&MARKET_RES.includes(c.sat)&&MARKET_RES.includes(c.al)&&c.sat!==c.al&&int(c.amount,1,1000000)&&
+        (c.expect===undefined||typeof c.expect==='number'&&Number.isFinite(c.expect)&&c.expect>=0),locate:()=>({}),
+      why(e,at,c){if(!marketOpen())return {code:'market',detail:['Galaktik Borsa henüz kurulmadı — konseyin karar vermesi gerekiyor']};
+        if(typeof isPurifier==='function'&&isPurifier(e))return {code:'market',detail:['Fanatik Arındırıcılar Galaktik Borsayı kullanamaz']};
+        const q=marketQuote(c.sat,c.al,c.amount);if(!q.ok)return {code:'market',detail:[String(q.why)]};
+        if((e.res[c.sat]||0)<c.amount)return {code:'market',detail:['Yeterli '+(RES[c.sat]?RES[c.sat].n:c.sat)+' yok']};
+        if(c.expect!==undefined&&Math.abs(q.alinan-c.expect)>Math.max(.5,c.expect*.005))return {code:'stale',detail:['Fiyat değişti — güncel: '+Math.round(q.alinan)+' '+(RES[c.al]?RES[c.al].n:c.al),String(Math.round(q.alinan*100)/100)]};
+        return null;},
+      roots:()=>[],apply(e,at,c){const r=marketTrade(e,c.sat,c.al,c.amount);if(!r||!r.ok)return r||false;
+        if(remoteHuman(e))note(e.id,'💱 '+c.amount+' '+(RES[c.sat]?RES[c.sat].n:c.sat)+' → '+Math.round(r.alinan)+' '+(RES[c.al]?RES[c.al].n:c.al)+' (komisyon %'+Math.round(marketFeeNow()*100)+')','sci');
+        return {ok:true,extra:{alinan:Math.round(r.alinan*100)/100}};}},
     /* ═══ MP.6.3 — federasyonun kalan kararları: motorun kendi önerge yolu (canFedMotion / proposeFedMotion) ihraç, reform,
        anayasa/oy rejimi, başkan seçimi, mevcut savaşa katılma ve ortak savaş izni için; oylama ve kabul kuralları federasyonun
        anayasasından (motor). Kabul edilen savaş kararını yalnız önerici ya da başkan uygular (executeFedDecision). Acil hibe
