@@ -297,7 +297,7 @@ function createHost(opts){
   function sendMirror(p){
     if(!p.conn||p.empireId===null||!root.StarsMirror)return;
     const t=now();if(p.lastMirror&&mirrorMs>0&&t-(p.mirrorAt||0)<mirrorMs){if(!p.mirrorTimer&&typeof setTimeout==='function')p.mirrorTimer=setTimeout(()=>{p.mirrorTimer=null;sendMirror(p);},mirrorMs-(t-(p.mirrorAt||0)));return;}
-    const m=pure(()=>root.StarsMirror.build(p.empireId,{cosmeticSeed:cosmetic,log:notes.get(p.empireId)||[]}));
+    const m=pure(()=>root.StarsMirror.build(p.empireId,{cosmeticSeed:cosmetic,log:notes.get(p.empireId)||[],news:(newsBy.get(p.empireId)||{records:[]}).records}));
     const rev=(p.mirrorRev||0)+1;let n;
     if(!p.lastMirror)n=out(p.conn,{v:PROTOCOL,type:'mirror',rev,full:m});
     else{const ops=root.StarsMirror.diff(p.lastMirror,m);if(!Object.keys(ops).length){p.mirrorAt=t;return;}n=out(p.conn,{v:PROTOCOL,type:'mirrorDelta',rev,base:p.mirrorRev,ops});}
@@ -349,6 +349,32 @@ function createHost(opts){
   /* MP.6.4: borsa durumu (herkese açık fiyat çarpanları ve komisyon; kimin ne takas ettiği yok) */
   function mktView(){if(typeof marketOpen!=='function')return {open:0};const open=marketOpen();
     return {open:open?1:0,fee:typeof marketFeeNow==='function'?marketFeeNow():null,mul:open&&G.market?{...G.market.mul}:null};}
+  /* MP.6.4 oyuncuya özel haberler: motorun GalacticNews.visibility kuralının adımları, devlet 0 / host görüşü yerine o oyuncunun
+     kendi teması, keşfi (s.seen) ve görüşüyle (actorVision). Paylaşılan sensörün "keşif" yolu dahil edilmez (daha az gösterir,
+     asla daha fazla değil). Bilgi olay anında donar (motor gibi). Oturumda tutulur, oyuncu başına en çok NEWS_MAX kayıt. */
+  const NEWS_MAX=80,newsBy=new Map(),newsVisCache=new Map();
+  function newsVisionOf(h){const c=newsVisCache.get(h.id);if(c&&c.day===Math.floor(G.day))return c.v;const v=actorVision(h);newsVisCache.set(h.id,{day:Math.floor(G.day),v});return v;}
+  function newsVis(h,ev){
+    const ids=ev.empires||[],self=ids.includes(h.id);if(!ids.every(id=>id===h.id||!!(h.contact&&h.contact[id])))return '';
+    if(ev.system!==undefined){const s=G.sys[ev.system];if(!s||!s.seen.includes(h.id))return '';if(!self&&!newsVisionOf(h).has(s.id))return '';}
+    if(ev.scope==='player')return self?'Doğrudan katılım':'';
+    if(ev.scope==='public')return 'Öğrenilmiş galaktik duyuru';
+    if(ev.federation){const f=ev.federation;if(!(ev.bonds||f.members).every(id=>knownFederationBond(h,f,id)))return '';return 'Bilinen federasyon ilişkileri';}
+    if(self)return 'Doğrudan katılım';
+    if(ev.system!==undefined)return 'Görüş / sensör gözlemi';
+    return ids.length&&ids.some(id=>intelOf(h,id)>=3)?'Diplomatik istihbarat (seviye 3)':'';}
+  function newsFan(ev){
+    if(!ev||typeof GalacticNews==='undefined'||!Object.hasOwn(GalacticNews.categories,ev.category))return;
+    if(typeof _loadTxActive!=='undefined'&&_loadTxActive||G._newsSetup)return;
+    const key=String(ev.key||[ev.category,G.day,ev.empires,ev.system,ev.planet,ev.title].join('|')).slice(0,240),text=v=>String(v||'').slice(0,800);
+    for(const [eid] of S.slots){const h=G.emps[eid];if(!remoteHuman(h)||h.dead)continue;const knowledge=newsVis(h,ev);if(!knowledge)continue;
+      const st=newsBy.get(eid)||{next:1,records:[]};if(st.records.some(r=>r.key===key))continue;
+      const r={id:st.next++,key,day:G.day,year:G.year,month:G.month,category:ev.category,title:text(ev.title).slice(0,180),text:text(ev.text),important:!!ev.important,read:false,pinned:false,knowledge,
+        empires:[...new Set(ev.empires||[])].filter(id=>Number.isInteger(id)&&G.emps[id]).slice(0,16).map(id=>({id,name:text(G.emps[id].name).slice(0,120)}))};
+      if(Number.isInteger(ev.system)&&G.sys[ev.system]){r.system={id:ev.system,name:text(G.sys[ev.system].name).slice(0,120)};const pl=G.sys[ev.system].planets.find(p=>p.i===ev.planet);if(pl)r.planet={id:pl.i,name:text(pl.name).slice(0,120)};}
+      if(ev.federation)r.federation={id:ev.federation.id,name:text(ev.federation.name).slice(0,120)};
+      st.records.push(r);while(st.records.length>NEWS_MAX)st.records.shift();newsBy.set(eid,st);}
+  }
   function fedMotionOpts(c){const o={};for(const k of ['target','sponsor','type','field','value'])if(c[k]!==undefined)o[k]=c[k];return o;}
   const settleSide=(e,c)=>(G.warLedger&&G.warLedger.fronts||[]).some(f=>f.campaign===c&&f.sides.includes(e.id));
   function settleMember(e,id){const o=typeof settlementOffer==='function'&&settlementOffer(id);return o&&o.members.includes(e.id)?{o}:{err:'no-offer'};}
@@ -1216,9 +1242,13 @@ function createHost(opts){
   function installGuards(){
     /* MP.4: aynı sayfada yeni oda ya da yüklenen kayıt yeni bir host örneği kurar. Korumalar bir kez sarılır ama
        her çağrıda ETKİN host'a yönlenir (eski odanın oyuncu tablosu kullanılmaz). */
-    root.__mpCur={remoteHuman,aiToHuman,note,stats,sqOffer};
+    root.__mpCur={remoteHuman,aiToHuman,note,stats,sqOffer,newsFan};
     root.__mpHumanVoter=id=>root.__mpCur.remoteHuman(G.emps[id]);
     if(root.__mp0Guards)return;root.__mp0Guards=true;
+    /* MP.6.4: galaktik haberler — motor bilgiyi olay anında YALNIZ host'un bakışıyla donduruyor (GalacticNews.visibility, G.p).
+       Her olay ayrıca her uzak insanın bakışıyla değerlendirilir (newsFan); host'un listesi misafire gitmez. */
+    if(typeof GalacticNews!=='undefined'&&typeof GalacticNews.emit==='function'){const emit0=GalacticNews.emit;
+      GalacticNews.emit=function(ev){const r=emit0.apply(this,arguments);try{root.__mpCur.newsFan(ev);}catch{}return r;};}
     const cur=()=>root.__mpCur,RH=e=>cur().remoteHuman(e),NOTE=(id,m,c)=>cur().note(id,m,c),ATH=(...a)=>cur().aiToHuman(...a),ST={get blockedAI(){return cur().stats.blockedAI;},set blockedAI(v){cur().stats.blockedAI=v;}};
     const neg=aiNegotiate,resp=aiRespond;
     /* MP.2: uzak insanın araştırma bildirimleri (researchTick içindeki say) host günlüğüne değil o oyuncunun
@@ -1379,7 +1409,8 @@ function createHost(opts){
   }
   function closeRoom(){if(!L)return {ok:false};L.phase='closed';broadcastLobby();for(const p of guests())if(p.conn){kick(p.conn,'room-closed');S.conns.delete(p.conn);p.conn=null;}return {ok:true};}
   if(opts.resume){if(!L)throw Error('MP.4: kayıttan devam lobi kipi ister');restoreSession(opts.resume);}
-  return {onMessage,onLeave,onJoin(){},publish,publishTo,speedSync,assign,release,installGuards,meta,restore,viewFor,local,dip:D,dipView,polView:e=>pure(()=>polView(e)),
+  const newsOf=id=>JSON.parse(JSON.stringify((newsBy.get(id)||{records:[]}).records));
+  return {newsOf,onMessage,onLeave,onJoin(){},publish,publishTo,speedSync,assign,release,installGuards,meta,restore,viewFor,local,dip:D,dipView,polView:e=>pure(()=>polView(e)),
     snapshot,resumeStart,recoverSeat,
     isHuman:humanEmpire,isRemoteHuman:remoteHuman,state:S,stats,COMMANDS,HANDLERS,clock,fnv,observeHumans,
     configure,setCapacity,claimFor,setHostTab,start,canStart,kick:kickPlayer,close:closeRoom,lobbyView:()=>L&&lobbyView(S.players.get('host')),lobby:L,

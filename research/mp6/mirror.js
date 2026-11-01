@@ -121,7 +121,10 @@ function build(meId,o={}){
   /* MP.6.1: ekonomi geçmişi — yalnız misafirin KENDİ satırı (devlet 0 olarak); başka devletlerin defteri girmez */
   const EH=G.economyHistory,row=EH&&EH.empires&&EH.empires[meId];
   const economyHistory=row?{v:EH.v,started:EH.started,lastClosed:EH.lastClosed,next:EH.next,empires:{0:{...J(row),events:J(row.events.slice(-EH_EVENTS))}}}:undefined;   // son EH_EVENTS olay (boyut)
-  return {v:8,cfg,day:G.day,year:G.year,month:G.month,seed:o.cosmeticSeed|0,rs:1,log:J(o.log||[]),...(economyHistory?{economyHistory}:{}),W:G.W,H:G.H,
+  /* MP.6.4: oyuncuya özel haberler (host'ta o oyuncunun bakışıyla süzülmüş; host'un haber listesi girmez) — motorun Save8 haber biçimi */
+  const nw=Array.isArray(o.news)?o.news.map(r=>({...J(r),empires:(r.empires||[]).map(x=>({id:pi(x.id),name:x.name}))})):[];
+  const news={v:1,next:nw.reduce((n,r)=>Math.max(n,r.id+1),1),hiddenNext:1,records:nw,hidden:[]};
+  return {v:8,cfg,day:G.day,year:G.year,month:G.month,seed:o.cosmeticSeed|0,rs:1,log:J(o.log||[]),news,...(economyHistory?{economyHistory}:{}),W:G.W,H:G.H,
     world:{memAge:G.memAge,cncAge:G.cncAge,council:null,feds,fedUid:G.fedUid,friction:{},rebelAlliance:null,megaWatch:[],sandbox:false},
     sys,emps,fl,nf:G.nextFleet};
 }
