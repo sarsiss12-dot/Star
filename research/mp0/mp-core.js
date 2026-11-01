@@ -318,6 +318,34 @@ function createHost(opts){
   /* ═══ MP.6.3 — ortak savaş paylaşımı: görünüm (yalnız katılımcıya), taslak özeti, bildirim taraması ═══
      Görünür olmayan toprak satırının sistem/gezegen kimliği gitmez (h<n> anahtarı; host gerçek satıra çevirir). Damga (sefer
      kaydının tamamı, devletlerin mizacı) gitmez; yalnız özeti. Kimlikler gerçek; misafir aynasına π ile çevirir. */
+  /* MP.6.4 casusluk: host'un tek oyunculu onay ekranında gösterilen değerleri (maliyet, ifşa riski yüzdesi, seviye, uygunluk) —
+     hedefin teknoloji/stok/koloni ayrıntısı opQuote'ta zaten gizli (viableDesc yalnız seviye yeterse). Kesin risk değeri yerine yüzde. */
+  function spyQuoteOut(e,t){const ops={};
+    for(const k of Object.keys(OPS)){const q=opQuote(e,t,k);ops[k]={ok:!!q.ok,why:String(q.why||'').slice(0,200),cost:q.cost||{},riskPct:q.riskPct|0,lvlHave:q.lvlHave|0,lvlNeed:q.lvlNeed|0,afford:!!q.afford,viable:!!q.viable,viableDesc:String(q.viableDesc||'').slice(0,200)};}
+    const sabo={};for(const tur of ['yard','supply']){const g=canSabotage(e,t,tur);sabo[tur]={ok:!!g.ok,why:String(g.why||'').slice(0,160),targets:g.ok?(g.hedefler||[]).map(s=>s&&s.id!==undefined?s.id:s).filter(Number.isInteger).slice(0,40):[]};}
+    const ic=typeof canIncite==='function'?canIncite(e,t):{ok:false,why:'—'};
+    return {target:t.id,lvl:intelOf(e,t.id),ops,sabo,incite:{ok:!!ic.ok,why:String(ic.why||'').slice(0,160)}};}
+  /* MP.6.4 casusluk bildirimleri: motor yalnız devlet 0'a söylüyordu (istihbarat artışı, casus yakalanması, mağdur ipucu / ifşa).
+     Uzak insana kendi listesinde, motorun kendi kayıtlarından (e.intel, e.spy, hitLog) ve motorun metinleriyle; faili bilinmeyen
+     operasyonda fail adı gitmez. İlk geçişte sessizce tohumlanır. */
+  const spyIntelSeen=new Map(),spyNetSeen=new Map(),spyHitSeen=new WeakSet();let spyPrimed=false;
+  function spyMark(e){spyNetSeen.set(e.id,new Set(Object.keys(e.spy||{}).filter(k=>e.spy[k]).map(Number)));}
+  function spySweep(){
+    if(typeof intelOf!=='function')return;
+    for(const [eid] of S.slots){const e=G.emps[eid];if(!remoteHuman(e)||e.dead)continue;const nm=id=>e.contact&&e.contact[id]&&G.emps[id]?G.emps[id].name:'Bilinmeyen devlet';
+      const lv={};for(const o of G.emps)if(o!==e&&!o.dead&&!o.wild)lv[o.id]=intelOf(e,o.id);
+      const pl=spyIntelSeen.get(eid);if(spyPrimed&&pl)for(const id in lv)if(lv[id]>(pl[id]||0)&&typeof INTEL_LEVELS!=='undefined'&&INTEL_LEVELS[lv[id]])note(eid,'İstihbarat seviyesi arttı — '+nm(+id)+' ('+INTEL_LEVELS[lv[id]].n+')','sci');
+      spyIntelSeen.set(eid,lv);
+      const net=new Set(Object.keys(e.spy||{}).filter(k=>e.spy[k]).map(Number)),pn=spyNetSeen.get(eid);
+      if(spyPrimed&&pn)for(const id of pn)if(!net.has(id))note(eid,'CASUSUN YAKALANDI — '+nm(id)+' (ilişki −25)','war');
+      spyNetSeen.set(eid,net);
+      for(const h of e.hitLog||[]){if(spyHitSeen.has(h))continue;spyHitSeen.add(h);if(!spyPrimed)continue;
+        const OPn=OPS[h.k]?OPS[h.k].n:h.k;
+        if(h.known&&Number.isInteger(h.by))note(eid,'CASUSLUK YAKALANDI — '+nm(h.by)+' sana "'+OPn+'" operasyonu çekti','war');
+        else note(eid,typeof opVictimHint==='function'?opVictimHint(h.k):'Şüpheli bir istihbarat faaliyeti tespit edildi — fail bilinmiyor','war');}}
+    if(!spyPrimed){for(const e of G.emps)for(const h of e.hitLog||[])spyHitSeen.add(h);}
+    spyPrimed=true;
+  }
   function fedMotionOpts(c){const o={};for(const k of ['target','sponsor','type','field','value'])if(c[k]!==undefined)o[k]=c[k];return o;}
   const settleSide=(e,c)=>(G.warLedger&&G.warLedger.fronts||[]).some(f=>f.campaign===c&&f.sides.includes(e.id));
   function settleMember(e,id){const o=typeof settlementOffer==='function'&&settlementOffer(id);return o&&o.members.includes(e.id)?{o}:{err:'no-offer'};}
@@ -359,7 +387,7 @@ function createHost(opts){
         if(!t)continue;if(rh)note(id,t,st==='applied'?'win':st==='pending'||st==='approved'?'dip':'war');else if(opts.hostNotify)opts.hostNotify(t,'dip');}}
     settlePrimed=true;
   }
-  function publish(){dipSweep();pure(polSweep);pure(warSweep);pure(settleSweep);const rev=++S.worldRevision;for(const p of S.players.values())publishTo(p,rev);return rev;}
+  function publish(){dipSweep();pure(polSweep);pure(warSweep);pure(settleSweep);pure(spySweep);const rev=++S.worldRevision;for(const p of S.players.values())publishTo(p,rev);return rev;}
 
   /* ---------- komutlar: yalnız bu tablo ---------- */
   function locate(e,c){
@@ -657,6 +685,30 @@ function createHost(opts){
       why(e,{q},c){if(q.status!=='pending')return 'closed';if(q.to!==e.id)return 'not-recipient';if(q.id!==c.id||q.round!==c.round)return 'stale';if(G.day>=q.expires)return 'expired';
         if(c.action==='counter'&&!vassalTerms(q.type,c.terms))return 'terms';return null;},
       roots:()=>[],apply:(e,{q},c)=>vassalReply(e,c.sub,c.id,c.round,c.action,c.action==='counter'?c.terms:null)},
+    /* ═══ MP.6.4 — casusluk: motorun kendi kapıları (spyAssignQuote/assignSpy, opQuote/runOp, canSabotage/doSabotage,
+       canIncite/inciteRebellion, deepInvestigate, canFalseFlag/falseFlagOp, stealTech). Yeni casusluk motoru yok. Başarı ve ifşa
+       zarları yalnız host motorunda (rnd); istemciye gizli iç değer, RNG durumu ya da hedefin gizli verisi gitmez. Kimlik oturumdan. */
+    spyAssign:{keys:['kind','target'],check:c=>int(c.target,0,63),locate:(e,c)=>G.emps[c.target]&&(e.contact[c.target]||e.spy&&e.spy[c.target])?{}:{err:'no-target'},
+      why(e,at,c){const q=spyAssignQuote(e,c.target);return q.ok?null:{code:'spy',detail:[String(q.why||'').slice(0,200)]};},roots:()=>[],
+      apply(e,at,c){const q=spyAssignQuote(e,c.target);if(!assignSpy(e,c.target))return false;spyMark(e);
+        if(remoteHuman(e))note(e.id,(q.withdraw?'Casus geri çekildi — ':'Casus yerleştirildi — ')+G.emps[c.target].name,'sci');return true;}},
+    spyQuote:{keys:['kind','target'],ro:true,check:c=>int(c.target,0,63),locate:(e,c)=>G.emps[c.target]&&e.contact[c.target]?{}:{err:'no-target'},why:()=>null,roots:()=>[],
+      apply:(e,at,c)=>({ok:true,extra:spyQuoteOut(e,G.emps[c.target])})},
+    spyOp:{keys:['kind','target','op','cost','riskPct'],check:c=>int(c.target,0,63)&&typeof c.op==='string'&&Object.prototype.hasOwnProperty.call(OPS,c.op)&&typeof c.cost==='string'&&c.cost.length<=120&&int(c.riskPct,0,100),
+      locate:(e,c)=>G.emps[c.target]&&e.contact[c.target]?{}:{err:'no-target'},
+      why(e,at,c){const q=opQuote(e,G.emps[c.target],c.op);if(!q.ok)return {code:'spy',detail:[String(q.why||'').slice(0,200)]};
+        return JSON.stringify(q.cost)===c.cost&&q.riskPct===c.riskPct?null:'stale';},   // tek oyunculu onay ekranı gibi: maliyet ya da risk değiştiyse yeniden onay
+      roots:()=>[],apply(e,at,c){const r=runOp(e,G.emps[c.target],c.op);if(!r||!r.ok)return r;return {ok:true,extra:{msg:String(r.msg||'').slice(0,240),caught:!!r.caught,op:c.op,target:c.target}};}},
+    spySpecial:{keys:['kind','op','target','patsy','tur','sys'],
+      check:c=>['sabotage','incite','deepInv','falseFlag','stealTech'].includes(c.op)&&[c.target,c.patsy].every(x=>x===undefined||int(x,0,63))&&(c.tur===undefined||typeof c.tur==='string'&&c.tur.length<=16)&&(c.sys===undefined||int(c.sys,0,4095)),
+      locate(e,c){if(c.op==='deepInv')return {};const t=G.emps[c.target];if(!t||!e.contact[t.id])return {err:'no-target'};if(c.op==='falseFlag'&&(!G.emps[c.patsy]||!e.contact[c.patsy]))return {err:'no-target'};return {};},
+      why(e,at,c){if(c.op==='sabotage'&&!['yard','supply'].includes(c.tur))return 'bad-op';if(c.op==='sabotage'&&c.sys===undefined)return 'bad-op';return null;},roots:()=>[],
+      apply(e,at,c){const t=G.emps[c.target],r=c.op==='sabotage'?doSabotage(e,t,c.tur,c.sys):c.op==='incite'?inciteRebellion(e,t):c.op==='deepInv'?deepInvestigate(e):
+          c.op==='falseFlag'?falseFlagOp(e,t,G.emps[c.patsy],c.tur):stealTech(e,t);
+        if(!r||!r.ok)return r||false;
+        const x={msg:String(r.msg||'').slice(0,240),caught:!!r.caught};for(const k of ['basarili','cozuldu','savas'])if(r[k]!==undefined)x[k]=!!r[k];
+        if(r.tech!==undefined&&TECHS[r.tech])x.tech=r.tech;   // gerçekten edinilen teknoloji
+        if(remoteHuman(e)&&x.msg)note(e.id,x.msg,x.caught?'war':'sci');return {ok:true,extra:x};}},
     /* ═══ MP.6.3 — federasyonun kalan kararları: motorun kendi önerge yolu (canFedMotion / proposeFedMotion) ihraç, reform,
        anayasa/oy rejimi, başkan seçimi, mevcut savaşa katılma ve ortak savaş izni için; oylama ve kabul kuralları federasyonun
        anayasasından (motor). Kabul edilen savaş kararını yalnız önerici ya da başkan uygular (executeFedDecision). Acil hibe

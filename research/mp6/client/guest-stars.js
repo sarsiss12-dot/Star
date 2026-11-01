@@ -45,7 +45,9 @@ const VIEW=new Set(['tab','full','cameraReset','cameraFocus','home','fit','topSt
   /* MP.6.3 — ortak savaş paylaşımı penceresi (taslak/oy/uygula düğmeleri _hook; son çağrılar MP komutuna iner) */
   'shareOpen',
   /* MP.6.3 — federasyon kararları ve bağımsızlık desteği: motor işlevi MP komutuna iner */
-  'fedExecute','fedGrant','supIndep']);
+  'fedExecute','fedGrant','supIndep',
+  /* MP.6.4 — casusluk: ağ, standart operasyonlar (onay ekranı → host), özel operasyonlar; son çağrılar MP komutuna iner */
+  'spy','ops','opDone','runop','opGo','saboPick','saboCancel','saboGo','incite','deepInv','ffTarget','ffPatsy','ffGo','stealTech']);
 /* MP.6.1 — UI.act kapısında doğrudan MP komutuna çevrilen düğmeler (tek oyunculu kodları dünyayı yerelde değiştirir) */
 const sel=()=>View.sel&&View.sel.e===0&&G.fleets.includes(View.sel)?View.sel:null;
 const ACT={
@@ -155,6 +157,34 @@ function gate(){
   const vcand=o=>{const p=hv()&&hv().pol;return p&&p.vas&&(p.vas.cand||[]).find(x=>x.id===real(o.id));};
   wrap('canSeekProtection',(o,e,t)=>{if(mine(e)&&t){const c=vcand(t);if(c)return {ok:!c.seek,why:c.seek||''};}return o(e,t);});
   wrap('canDemandVassal',(o,e,t)=>{if(mine(e)&&t){const c=vcand(t);if(c)return {ok:!c.demand,why:c.demand||''};}return o(e,t);});
+  /* MP.6.4 — casusluk. Aynada hedefin kabuğu var (teknoloji/stok/koloni gizli): onay ekranının değerleri (maliyet, ifşa yüzdesi,
+     seviye, uygunluk) host'un opQuote'undan (spyQuote, salt okuma, önbellekli); zar ve sonuç yalnız host'ta (spyOp / spySpecial).
+     Sonuç gelince GERÇEK STARS sonuç penceresi host'un sonucuyla çizilir (opExecute yeniden çağrılır, runOp önbellekten döner). */
+  wrap('assignSpy',(o,e,id)=>{if(!mine(e))return o(e,id);return !!send({kind:'spyAssign',target:real(+id)});});
+  wrap('opQuote',(o,e,t,key)=>{const q=o(e,t,key);if(!mine(e)||!t||!q||!q.op)return q;const h=spyQ(t.id),x=h&&h.ops[key];
+    if(!x)return {...q,ok:false,why:'Host operasyonu denetliyor…'};
+    return {...q,ok:x.ok,why:x.why,cost:x.cost,riskPct:x.riskPct,risk:x.riskPct/100,lvlHave:x.lvlHave,afford:x.afford,viable:x.viable,viableDesc:x.viableDesc};});
+  const oe0=UI.opExecute.bind(UI);UI.opExecute=function(...a){if(S.on)SPY.pend=this._opPending;return oe0(...a);};
+  wrap('runOp',(o,e,t,key)=>{if(!mine(e)||!t)return o(e,t,key);const k=t.id+':'+key;if(SPY.res[k]){const r=SPY.res[k];delete SPY.res[k];return r;}
+    const q=opQuote(e,t,key),pend=SPY.pend;SPY.pend=null;
+    const cid=send({kind:'spyOp',target:real(t.id),op:String(key),cost:JSON.stringify(q.cost||{}),riskPct:q.riskPct|0});if(!cid)return {ok:false,msg:'Host bağlı değil; operasyon gönderilmedi.'};
+    waits[cid]=res=>{if(res.status!=='ok'){toast('Host reddetti: '+why(res),true);delete SPY.q[t.id];return;}
+      SPY.res[k]={ok:true,msg:res.extra.msg,caught:!!res.extra.caught,key,target:t.id};
+      if(pend){const tq=opQuote(G.p,G.emps[pend.id],key);UI._opPending={...pend,actor:G.p,target:G.emps[pend.id],emps:G.emps,systems:G.sys,cost:JSON.stringify(tq.cost),risk:tq.risk};
+        try{UI.opExecute(pend.id,pend.key,pend.token);}catch{}}
+      delete SPY.res[k];delete SPY.q[t.id];};
+    return {ok:false,msg:'Operasyon host\'a gönderildi — sonuç birazdan gelecek.'};});
+  wrap('canSabotage',(o,e,t,tur)=>{if(!mine(e)||!t)return o(e,t,tur);const h=spyQ(t.id),x=h&&h.sabo[tur];
+    return x?{ok:x.ok,why:x.why,hedefler:x.targets.map(id=>G.sys[id]).filter(Boolean)}:{ok:false,why:'Host denetliyor…'};});
+  wrap('canIncite',(o,e,t)=>{if(!mine(e)||!t)return o(e,t);const h=spyQ(t.id);return h?{...h.incite}:{ok:false,why:'Host denetliyor…'};});
+  const special=(c,quiet)=>{const cid=send(c);if(!cid)return {ok:false,why:'Host bağlı değil; operasyon gönderilmedi.'};
+    waits[cid]=res=>{if(res.status!=='ok'){toast('Host reddetti: '+why(res),true);return;}const x=res.extra||{};toast((x.caught?'☠ ':'')+(x.msg||'Operasyon host\'ta uygulandı.'),!!x.caught);delete SPY.q[c.target!==undefined?local(c.target):-1];};
+    return {ok:true,caught:false,sys:true,basarili:true,cozuldu:false,savas:false,msg:'',...quiet};};
+  wrap('doSabotage',(o,e,t,tur,sys)=>mine(e)&&t?special({kind:'spySpecial',op:'sabotage',target:real(t.id),tur:String(tur),sys:+sys}):NOT_MP);
+  wrap('inciteRebellion',(o,e,t)=>mine(e)&&t?special({kind:'spySpecial',op:'incite',target:real(t.id)}):NOT_MP);
+  wrap('deepInvestigate',(o,e)=>mine(e)?special({kind:'spySpecial',op:'deepInv'},{msg:'Soruşturma host\'a gönderildi.'}):NOT_MP);
+  wrap('falseFlagOp',(o,e,t,p,tur)=>mine(e)&&t&&p?special({kind:'spySpecial',op:'falseFlag',target:real(t.id),patsy:real(p.id),tur:String(tur||'')},{msg:'Sahte bayrak host\'a gönderildi.'}):NOT_MP);
+  wrap('stealTech',(o,e,t)=>mine(e)&&t?special({kind:'spySpecial',op:'stealTech',target:real(t.id)}):NOT_MP);
   /* MP.6.2 — ittifakı sonlandır, ticaret anlaşmasını feshet, ambargo: gerçek onay pencereleri → komut */
   wrap('endAlliance',(o,e,other)=>mine(e)&&other?r({kind:'endAlliance',target:real(other.id)}):NOT_MP);
   wrap('breakPact',(o,a,b)=>{if(!mine(a)||!b)return o(a,b);send({kind:'unpact',target:real(b.id)});});
@@ -232,6 +262,12 @@ const TREATY=['peace','nap','pact','ally','intel','passage'];   // mp-core DIP_T
 /* MP.6.3 — ortak savaş paylaşımı: host görünümü (gerçek kimlikler) → aynadaki numaralar; teklif nesneleri kimlikle kalıcı
    (pencere onay düğmeleri settlementOffer(id)===o denetler) */
 const SET={offers:new Map(),quotes:{},wait:{},sig:null,last:null};
+/* MP.6.4 casusluk: hedef başına host teklifi (8 s), gelince istihbarat görünümü yeniden çizilir */
+const SPY={q:{},wait:{},res:{},pend:null};
+function spyQ(id){const c=SPY.q[id];if(c&&Date.now()-c.at<8000)return c.v;
+  if(!SPY.wait[id]&&S.J&&S.on){const cid=send({kind:'spyQuote',target:real(id)});if(cid){SPY.wait[id]=1;waits[cid]=res=>{delete SPY.wait[id];if(res.status!=='ok')return;SPY.q[id]={at:Date.now(),v:res.extra};
+    if(!holdBuild()&&!S.building)try{UI.keepScroll=true;UI.refresh();}catch{}};}}
+  return c?c.v:null;}
 const setRow=r=>({...r,from:local(r.from),to:local(r.to),claims:(r.claims||[]).map(local),__mp:1});
 const setShares=l=>(l||[]).map(x=>({...x,id:local(x.id)}));
 function setQuote(q){if(!q||!q.ok)return {ok:false,why:(q&&q.why)||'Taslak yok'};return {...q,members:q.members.map(local),rows:q.rows.map(setRow),shares:setShares(q.shares)};}

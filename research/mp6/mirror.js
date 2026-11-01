@@ -73,7 +73,10 @@ function build(meId,o={}){
   const party=q=>!!q&&(q.lord===meId||q.sub===meId);
   const mine=J(me);for(const k of STRIP_ME)delete mine[k];
   mine.id=0;mine.ai=false;for(const k of EMP_MAPS)if(mine[k])mine[k]=remapKeys(mine[k]);
-  for(const k of ['hitLog'])if(Array.isArray(mine[k]))for(const h of mine[k])if(h&&Number.isInteger(h.by))h.by=piN(h.by);
+  /* MP.6.4 gizlilik: mağdur kaydında fail yalnız BİLİNİYORSA (yakalandı / soruşturmayla çözüldü) gider; tespit edilmemiş
+     operasyonun faili ve sahte kanıtın gerçek yerleştiricisi (framed: "gerçeği yalnız biz biliriz") misafire gitmez. */
+  for(const k of ['hitLog'])if(Array.isArray(mine[k]))for(const h of mine[k]){if(!h)continue;delete h.framed;if(!h.known)delete h.by;else if(Number.isInteger(h.by))h.by=piN(h.by);}
+  if(Array.isArray(mine.whisperLog))for(const w of mine.whisperLog)if(w){for(const k of ['a','b'])if(Number.isInteger(w[k]))w[k]=piN(w[k]);}
   if(Array.isArray(mine.opLog))for(const h of mine.opLog)if(h&&Number.isInteger(h.o))h.o=piN(h.o);
   if(mine.overlord!=null)mine.overlord=piN(mine.overlord);
   if(mine.vassalContract)mine.vassalContract=vasC(mine.vassalContract);
