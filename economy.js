@@ -189,7 +189,7 @@ function tradeHubs(e){
    grafiğine, sabit sistem konumlarına ve radyasyon kümesine bağlıdır. Aynı dünya için yönlü (start→l) sonuç
    saklanır; dünya (G.sys), bir sistemin şerit dizisi/uzunluğu ya da radyasyon kümesi değişince sıfırlanır.
    Save8'e girmez, RNG kullanmaz; dönen rota yalnız kopyalanarak (concat) kullanılır. */
-const TRADE_PATHS = {sys:null, lanes:[], lens:[], rad:'', memo:new Map()};
+const TRADE_PATHS = {sys:null, lanes:[], lens:[], rad:'', memo:new Map(), bfs:new Map()};
 function tradePathMemo(){
   const S = G.sys, T = TRADE_PATHS;
   let ok = T.sys === S && T.lanes.length === S.length, rad = '';
@@ -199,10 +199,34 @@ function tradePathMemo(){
     if (ok && (T.lanes[i] !== s.lanes || T.lens[i] !== s.lanes.length)) ok = false;
   }
   if (!ok || T.rad !== rad){
-    T.sys = S; T.rad = rad; T.memo = new Map();
+    T.sys = S; T.rad = rad; T.memo = new Map(); T.bfs = new Map();
     T.lanes = S.map(s => s.lanes); T.lens = S.map(s => s.lanes.length);
   }
   return T.memo;
+}
+/* PERF.1: tradeLinks'in 3 sıçramalık genişlik-öncelikli taraması (ziyaret sırası ve her düğümün ilk ziyaret
+   eden ebeveyni) yalnız şerit grafiğine bağlıdır; başlangıç limanı başına bir kez çıkarılır (tradePathMemo ile
+   aynı geçerlilik). Savaş kesintisi (bl) her çağrıda aynı ifadeyle, aynı sırayla ebeveyn zincirinden hesaplanır. */
+function tradeHubBfs(start){
+  const B = TRADE_PATHS.bfs;
+  let t = B.get(start);
+  if (t) return t;
+  const ids = [], par = [];
+  const q = [{id:start, d:0, i:-1}];
+  const vis = new Set([start]);
+  while (q.length){
+    const cur = q.shift();
+    if (cur.d >= 3) continue;
+    for (const l of G.sys[cur.id].lanes){
+      if (vis.has(l)) continue;
+      vis.add(l);
+      ids.push(l); par.push(cur.i);
+      q.push({id:l, d:cur.d+1, i:ids.length-1});
+    }
+  }
+  t = {ids, par};
+  B.set(start, t);
+  return t;
 }
 function tradeLinks(e){
   const paths = tradePathMemo();
@@ -218,16 +242,12 @@ function tradeLinks(e){
   const colSet = new Set(cols);
   const links = [], seenPair = new Set();
   for (const start of cols){
-    const q = [{id:start, d:0, bl:false}];
-    const vis = new Set([start]);
-    while (q.length){
-      const cur = q.shift();
-      if (cur.d >= 3) continue;
-      for (const l of G.sys[cur.id].lanes){
-        if (vis.has(l)) continue;
-        vis.add(l);
+    const tree = tradeHubBfs(start), ids = tree.ids, par = tree.par, bls = new Array(ids.length);
+    for (let i = 0; i < ids.length; i++){
+        const l = ids[i], curBl = par[i] < 0 ? false : bls[par[i]];
         const o = G.sys[l].owner;
-        const bl = cur.bl || (o >= 0 && o !== e.id && e.war[o]);
+        const bl = curBl || (o >= 0 && o !== e.id && e.war[o]);
+        bls[i] = bl;
         if (colSet.has(l)){
           const key = start < l ? start+'_'+l : l+'_'+start;
           if (!seenPair.has(key)){
@@ -242,8 +262,6 @@ function tradeLinks(e){
                         path: route ? [start].concat(route) : [start, l]});
           }
         }
-        q.push({id:l, d:cur.d+1, bl});
-      }
     }
   }
   return links;
