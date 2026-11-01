@@ -1,0 +1,122 @@
+{
+ "root": "candABC",
+ "save": "ulu11-s22-m240.json",
+ "seconds": 10,
+ "arms": [
+  {
+   "speed": 0,
+   "share": false,
+   "zoom": "far",
+   "frames": 544,
+   "fps": 54.4,
+   "meanMs": 18.4,
+   "medianMs": 16.7,
+   "p95Ms": 33.3,
+   "p99Ms": 33.4,
+   "maxMs": 166.7,
+   "over50": 3,
+   "over250": 0,
+   "draw": {
+    "median": 1.6,
+    "p95": 2.5,
+    "max": 4.9
+   },
+   "daysAdvanced": 0,
+   "visibleSystems": 3,
+   "visibleFleets": 8,
+   "errors": []
+  },
+  {
+   "speed": 0,
+   "share": true,
+   "zoom": "far",
+   "frames": 542,
+   "fps": 54.2,
+   "meanMs": 18.4,
+   "medianMs": 16.7,
+   "p95Ms": 33.3,
+   "p99Ms": 33.4,
+   "maxMs": 33.4,
+   "over50": 0,
+   "over250": 0,
+   "draw": {
+    "median": 2.7,
+    "p95": 4.2,
+    "max": 15.6
+   },
+   "daysAdvanced": 0,
+   "visibleSystems": 100,
+   "visibleFleets": 133,
+   "errors": []
+  },
+  {
+   "speed": 0,
+   "share": true,
+   "zoom": "near",
+   "frames": 541,
+   "fps": 54.1,
+   "meanMs": 18.5,
+   "medianMs": 16.7,
+   "p95Ms": 33.3,
+   "p99Ms": 33.4,
+   "maxMs": 33.4,
+   "over50": 0,
+   "over250": 0,
+   "draw": {
+    "median": 1.7,
+    "p95": 2.6,
+    "max": 9.3
+   },
+   "daysAdvanced": 0,
+   "visibleSystems": 100,
+   "visibleFleets": 133,
+   "errors": []
+  },
+  {
+   "speed": 4,
+   "share": false,
+   "zoom": "far",
+   "frames": 417,
+   "fps": 41.7,
+   "meanMs": 24,
+   "medianMs": 16.7,
+   "p95Ms": 33.4,
+   "p99Ms": 33.4,
+   "maxMs": 916.6,
+   "over50": 3,
+   "over250": 3,
+   "draw": {
+    "median": 1.8,
+    "p95": 3.4,
+    "max": 11.7
+   },
+   "daysAdvanced": 79.5,
+   "visibleSystems": 3,
+   "visibleFleets": 11,
+   "errors": []
+  },
+  {
+   "speed": 4,
+   "share": true,
+   "zoom": "far",
+   "frames": 374,
+   "fps": 37.4,
+   "meanMs": 26.7,
+   "medianMs": 16.7,
+   "p95Ms": 33.4,
+   "p99Ms": 66.6,
+   "maxMs": 849.9,
+   "over50": 5,
+   "over250": 3,
+   "draw": {
+    "median": 3,
+    "p95": 5.5,
+    "max": 51.4
+   },
+   "daysAdvanced": 77.7,
+   "visibleSystems": 100,
+   "visibleFleets": 145,
+   "errors": []
+  }
+ ]
+}

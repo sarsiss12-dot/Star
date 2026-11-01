@@ -1,0 +1,103 @@
+{
+  "phase": "PERF.1",
+  "build": "96h10p1",
+  "pwa_cache": "stars-v96h10p1",
+  "save_version": 8,
+  "parent_commit": "eb4bd68913180f271b40d42d04963cd9b48f8032",
+  "parent_game": "96H.10",
+  "parent_zip_sha256": "78e76d1627b8ec1b990849b2242835f78667f110e1d6f17021760183ee7be6d0",
+  "parent_branch": "claude/stars-mp64-espionage-market (MP.6.4, PR #22)",
+  "scope": "Late-game performance without behaviour change: trade-route pathfinding (findPath without traveller) is memoised per lane graph and radiation set; the 3-hop trade scan tree is built once per hub per lane graph; EconomyLedger stock snapshots are allocation-free. Same AI decisions, Save8 bytes and RNG order (byte-identical control/candidate campaigns, seeds 11/22/42/404, 240 months). Gameplay, economy thresholds, Save8 schema unchanged.",
+  "report": "PERF1-SONUC.md",
+  "evidence": "research/perf1/",
+  "runtime_changed": [
+    "economy.js",
+    "economic-ledger.js",
+    "main.js",
+    "sw.js"
+  ],
+  "behaviour_change": false,
+  "preservation_adapter": "tests/helpers/perf1-preservation.js",
+  "game": {
+    "file": "stars-faz96h10p1.zip",
+    "bytes": 768865,
+    "sha256": "253a0282a18509ec3394dc87f2ddbef98150ceb90b1f137841139a36ecf70448",
+    "crc32_file": "60e78b12",
+    "crc": "PASS",
+    "members": 20,
+    "manifest_runtime_files": 19,
+    "repack_identical": true,
+    "clean_git_archive_repack_identical": true,
+    "verify_release_extracted": "PASS"
+  },
+  "equivalence": {
+    "new_game_240_months_seeds": [
+      11,
+      22,
+      42,
+      404
+    ],
+    "checkpoint_saves_identical": "16/16",
+    "monthly_trace_save8_rng": "identical",
+    "mp_host_3_guests_messages_and_world": "identical"
+  },
+  "performance_ms_per_month_median": {
+    "s22_m120": [
+      1377,
+      1006
+    ],
+    "s22_m180": [
+      2999,
+      1331
+    ],
+    "s22_m240": [
+      5430,
+      2106
+    ],
+    "s11_m180": [
+      2148,
+      1104
+    ],
+    "s404_m180": [
+      3408,
+      1659
+    ],
+    "s42_m180": [
+      5146,
+      2189
+    ]
+  },
+  "tests": {
+    "node": "v22",
+    "after_perf1": {
+      "suites": 162,
+      "pass": 6297,
+      "fail": 3,
+      "known_fail": "faz95d_identity 3 (also in control eb4bd68)"
+    },
+    "chromium": {
+      "browser-96h10": "27/27",
+      "browser-mp0": "20/20",
+      "browser-mp1": "22/22",
+      "browser-mp11": "10/10",
+      "browser-mp2": "14/14",
+      "browser-mp3": "12/12",
+      "browser-mp31": "11/11",
+      "browser-mp4": "13/13",
+      "browser-mp5": "10/10 (docker)",
+      "mp5_docker": "6/6",
+      "browser-mp6": "11/11",
+      "browser-mp61": "13/13",
+      "browser-mp62": "10/10",
+      "browser-mp63": "15/15",
+      "browser-mp64": "10/10"
+    },
+    "not_run": [
+      "physical Android",
+      "real internet",
+      "LAN",
+      "GPU-accelerated browser frame timing"
+    ]
+  },
+  "multiplayer_note": "MP code (research/mp*) is not in the game ZIP. This runtime = MP.6.4 runtime + PERF.1; use with the MP code of branch claude/stars-perf1-ai-mp-optimization (relay verifies runtime bytes against RELEASE-MANIFEST.json)."
+}

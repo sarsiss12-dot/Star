@@ -1,0 +1,122 @@
+{
+ "root": "control",
+ "save": "ulu11-s22-m180.json",
+ "seconds": 10,
+ "arms": [
+  {
+   "speed": 0,
+   "share": false,
+   "zoom": "far",
+   "frames": 568,
+   "fps": 56.8,
+   "meanMs": 17.6,
+   "medianMs": 16.7,
+   "p95Ms": 33.2,
+   "p99Ms": 33.4,
+   "maxMs": 50,
+   "over50": 0,
+   "over250": 0,
+   "draw": {
+    "median": 1.3,
+    "p95": 2,
+    "max": 3.4
+   },
+   "daysAdvanced": 0,
+   "visibleSystems": 3,
+   "visibleFleets": 5,
+   "errors": []
+  },
+  {
+   "speed": 0,
+   "share": true,
+   "zoom": "far",
+   "frames": 582,
+   "fps": 58.2,
+   "meanMs": 17.2,
+   "medianMs": 16.7,
+   "p95Ms": 16.8,
+   "p99Ms": 33.4,
+   "maxMs": 33.4,
+   "over50": 0,
+   "over250": 0,
+   "draw": {
+    "median": 2.3,
+    "p95": 3.5,
+    "max": 11.8
+   },
+   "daysAdvanced": 0,
+   "visibleSystems": 94,
+   "visibleFleets": 100,
+   "errors": []
+  },
+  {
+   "speed": 0,
+   "share": true,
+   "zoom": "near",
+   "frames": 571,
+   "fps": 57.1,
+   "meanMs": 17.5,
+   "medianMs": 16.7,
+   "p95Ms": 16.8,
+   "p99Ms": 33.4,
+   "maxMs": 33.4,
+   "over50": 0,
+   "over250": 0,
+   "draw": {
+    "median": 1.4,
+    "p95": 2.3,
+    "max": 4.2
+   },
+   "daysAdvanced": 0,
+   "visibleSystems": 94,
+   "visibleFleets": 100,
+   "errors": []
+  },
+  {
+   "speed": 4,
+   "share": false,
+   "zoom": "far",
+   "frames": 410,
+   "fps": 41,
+   "meanMs": 24.4,
+   "medianMs": 16.7,
+   "p95Ms": 33.4,
+   "p99Ms": 49.9,
+   "maxMs": 1049.9,
+   "over50": 3,
+   "over250": 3,
+   "draw": {
+    "median": 1.5,
+    "p95": 3.1,
+    "max": 9
+   },
+   "daysAdvanced": 78.1,
+   "visibleSystems": 3,
+   "visibleFleets": 6,
+   "errors": []
+  },
+  {
+   "speed": 4,
+   "share": true,
+   "zoom": "far",
+   "frames": 363,
+   "fps": 36.3,
+   "meanMs": 27.5,
+   "medianMs": 16.7,
+   "p95Ms": 33.4,
+   "p99Ms": 66.8,
+   "maxMs": 966.7,
+   "over50": 6,
+   "over250": 3,
+   "draw": {
+    "median": 2.6,
+    "p95": 5.5,
+    "max": 35.5
+   },
+   "daysAdvanced": 75.9,
+   "visibleSystems": 94,
+   "visibleFleets": 101,
+   "errors": []
+  }
+ ]
+}

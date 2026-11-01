@@ -93,7 +93,7 @@ test('Save8 shape and RNG: 96H.9 stores no new state; a natural 96H.9 run reload
 });
 test('invasion, combat and diplomacy rules keep their 96H.8 bytes',()=>{
   const want={'economy.js':'5d412d488760ae2b7193b13822b747788130b63ed782e62bfbd3223154b69d22','combat.js':'b4e21fcdb6fdaaa93da07313131470de3e8a3c28b5650226a9c4a2713bde73a5','diplomacy.js':'ca589f8d2581e7189f6ace471db9bf2e9e1e504117eb2249b7ce9f04e206eaf4'};
-  for(const [n,sha]of Object.entries(want))assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(root,n))).digest('hex'),sha,n);
+  for(const [n,sha]of Object.entries(want))assert.equal(crypto.createHash('sha256').update(require('./helpers/perf1-preservation').stripReviewedP1(n,fs.readFileSync(path.join(root,n),'utf8'))).digest('hex'),sha,n);   // PERF.1: incelenmiş performans bloğu tam metinle geri alınır
 });
 test('only the reviewed 96H.9 invasion blocks differ from 96H.8 ai.js',()=>{
   const source=fs.readFileSync(path.join(root,'ai.js'),'utf8');

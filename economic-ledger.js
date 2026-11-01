@@ -3,11 +3,13 @@
 const EconomyLedger={
  keys:['ene','min','yiy','ala','tuk','ara','etk'],eventLimit:192,monthLimit:12,stack:[],muted:0,atomic:0,freightDepth:0,colonyDepth:0,
  clean(n){return Number.isFinite(n)?n:0;},
- stock(e){return Object.fromEntries(this.keys.map(k=>[k,this.clean(e.res?.[k])]));},
+ stock(e){const res=e.res,o={};for(const k of this.keys)o[k]=this.clean(res?.[k]);return o;},   // PERF.1: aynı nesne, ara dizi yok
  zero(){return Object.fromEntries(this.keys.map(k=>[k,0]));},
  state(){return G.economyHistory||null;},
  start(){const s={v:1,started:G.day,lastClosed:null,next:1,empires:{}};for(const e of G.emps){const stock=this.stock(e);s.empires[e.id]={balance:stock,opening:{...stock},start:G.day,in:this.zero(),out:this.zero(),months:[],events:[],shortage:!!e.shortage,crisis:e.crisis||null};}G.economyHistory=s;return s;},
- snapshot(){return Object.fromEntries(G.emps.map(e=>[e.id,this.stock(e)]));},
+ snapshot(){const o={};for(const e of G.emps)o[e.id]=this.stock(e);return o;},
+ /* PERF.1: observe'un "stok değişti mi" denetimi — stock(e) ile aynı değerler, ara nesne/dizi üretmeden */
+ changedSince(before){for(const e of G.emps){const b=before[e.id],res=e.res;for(const k of this.keys)if(this.clean(res?.[k])!==b?.[k])return true;}return false;},
  flush(frame){if(!frame||frame.processed)return;frame.processed=true;const index=this.stack.indexOf(frame),parent=this.stack[index-1];this.flush(parent);this.sync(parent?.label,parent?.kind,parent?.link,frame.before);},
  sync(label='Açıklanamayan stok farkı',kind='unexplained',link=null,snapshot=null){
   const s=this.state();if(!s||this.muted||this.atomic)return;
@@ -20,7 +22,7 @@ const EconomyLedger={
  observe(label,kind,fn,link=null,atomic=false){
   if(this.muted||this.atomic||!this.state())return fn();
   const world=G.emps,frame={label,kind,link,before:this.snapshot(),processed:false};this.stack.push(frame);if(atomic)this.atomic++;
-  try{return fn();}finally{if(atomic)this.atomic--;if(world===G.emps&&(frame.processed||G.emps.some(e=>Object.entries(this.stock(e)).some(([k,v])=>v!==frame.before[e.id]?.[k])))){this.flush(frame);this.sync(label,kind,link);}this.stack.pop();}
+  try{return fn();}finally{if(atomic)this.atomic--;if(world===G.emps&&(frame.processed||this.changedSince(frame.before))){this.flush(frame);this.sync(label,kind,link);}this.stack.pop();}
  },
  closeMonth(){const s=this.state();if(!s||this.muted||s.lastClosed===G.day)return;this.sync();
   for(const e of G.emps){const r=s.empires[e.id];if(!r)continue;const current=this.stock(e),delta=this.zero();for(const k of this.keys)delta[k]=current[k]-r.opening[k];

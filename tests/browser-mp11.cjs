@@ -35,7 +35,7 @@ async function setHidden(page,hidden){return page.evaluate(h=>{Object.defineProp
 
   await test('HTTPS: game page and MP layer load over TLS through the reverse proxy; plain HTTP on the relay port is redirected; secure context',async()=>{
     const t0=Date.now();await H.goto(base+'/');await wait(H,()=>typeof setupGame==='function'&&document.getElementById('mp1Btn'));metrics.hostPageLoadMs=Date.now()-t0;
-    const s=await H.evaluate(()=>({proto:location.protocol,secure:isSecureContext,build:BUILD_ID}));assert.deepEqual(s,{proto:'https:',secure:true,build:'96h10'});
+    const s=await H.evaluate(()=>({proto:location.protocol,secure:isSecureContext,build:BUILD_ID}));assert.deepEqual(s,{proto:'https:',secure:true,build:JSON.parse(fs.readFileSync(path.join(__dirname,'..','RELEASE-MANIFEST.json'),'utf8')).build});   // PERF.1: sürüm manifestten
     const r=await new Promise((ok,no)=>require('http').get({host:'127.0.0.1',port:rs.address().port,path:'/mp/join?code=X',headers:{host:'localhost:'+pport}},x=>{x.resume();ok(x);}).on('error',no));
     assert.equal(r.statusCode,308);assert.equal(r.headers.location,base+'/mp/join?code=X');
     const hs=await H.evaluate(async()=>{const r=await fetch('/healthz');return [r.status,await r.text()];});assert.deepEqual(hs,[200,'{"ok":true}']);
