@@ -6,14 +6,30 @@ Son güncelleme: 2026-11-01. Depo `sarsiss12-dot/Star`.
 
 | | `main` (birleşmiş) | Bu dal (PR) |
 |---|---|---|
-| Faz | 96H.10 + MP.0 – MP.4 (+ 96H.11 araştırma arşivi) | MP.5 (PR #17) + MP.6 (PR #18) + MP.6.1 (PR #19) + MP.6.2 (PR #20) + MP.6.3 (PR #21) + MP.6.4 (casusluk, borsa, kalan filo/koloni işlemleri, oyuncuya özel haberler) — hepsi açık |
-| Build / PWA | `96h10` / `stars-v96h10` | değişmedi |
+| Faz | 96H.10 + MP.0 – MP.4 (+ 96H.11 araştırma arşivi) | MP.5 (PR #17) + MP.6 (PR #18) + MP.6.1 (PR #19) + MP.6.2 (PR #20) + MP.6.3 (PR #21) + MP.6.4 (PR #22) + PERF.1 (geç oyun performansı, davranış aynı) — hepsi açık |
+| Build / PWA | `96h10` / `stars-v96h10` | `96h10p1` / `stars-v96h10p1` (PERF.1) |
 | Save | v8 | v8 (şema değişmedi) |
-| Oyun ZIP | `releases/stars-faz96h10.zip` (SHA-256 `78e76d1627b8ec1b990849b2242835f78667f110e1d6f17021760183ee7be6d0`) | yeni ZIP yok |
+| Oyun ZIP | `releases/stars-faz96h10.zip` (SHA-256 `78e76d1627b8ec1b990849b2242835f78667f110e1d6f17021760183ee7be6d0`) | `releases/stars-faz96h10p1.zip` (SHA-256 `253a0282a18509ec3394dc87f2ddbef98150ceb90b1f137841139a36ecf70448`) |
 | Taban HEAD | `4296ad2d43fedce6264020b3761f50f1839fd836` | — |
-| Değişen runtime | — | yok (19 dosya 96H.10 ile aynı) |
+| Değişen runtime | — | PERF.1: `economy.js`, `economic-ledger.js`, `main.js` (BUILD_ID), `sw.js` (CACHE) |
 
-96H.6.2, 96H.6.3, 96H.7, 96H.11 ve MP.0 – MP.6.4 oyun yayımlamadı.
+96H.6.2, 96H.6.3, 96H.7, 96H.11 ve MP.0 – MP.6.4 oyun yayımlamadı. PERF.1 yeni oyun ZIP'i üretti (yalnız runtime; MP kodu ZIP'te değil).
+
+## PERF.1 — geç oyun performansı (davranış aynı)
+
+Ayrıntı: `PERF1-SONUC.md`. Ölçüm ve kanıt: `research/perf1/`. Test: `tests/perf1_equivalence_test.js`.
+
+- **Kök neden:** AI bina değerlendirmesi her adayda imparatorluk gelirini, dolayısıyla ticaret ağını ve liman çiftleri arası yol bulmayı baştan hesaplıyordu (180. ay, 3 ay: 268 251 `findPath`).
+- **Değişiklik:**
+  - yolcusuz ticaret rotası önbelleği (şerit / radyasyon / dünya imzası);
+  - sabit 3 sıçramalık tarama ağacı;
+  - EconomyLedger'de ara nesnesiz stok anlık görüntüsü.
+- **Sonuç:** simülasyon ms/ay 120. ay −27%, 180. ay −49…−57% (4 tohum), 240. ay −61%. `aiTurn` 180. ayda −70%. Aylık AI turunun tarayıcıdaki en kötü karesi ~%35–45 kısa.
+- **Eşdeğerlik:**
+  - 4 tohum × 240 ay yeni oyundan kayıtlar kontrolle bayt-bayt aynı;
+  - her ay Save8 / RNG birebir;
+  - MP host'ta (3 misafir) mesajlar ve son dünya aynı.
+- **Yapılmayan (PERF.2 / MP.7):** tur içi `aiEconomyPlan` / gölge gelir önbelleği, MP `pure()` maliyeti, misafirde yerinde delta.
 
 ## MP.6.4 — casusluk, borsa, kalan filo/koloni işlemleri, oyuncuya özel bilgi (geliştirme sürümü)
 
