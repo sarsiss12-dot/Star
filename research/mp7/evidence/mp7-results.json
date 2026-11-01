@@ -1,0 +1,70 @@
+{
+  "results": [
+    {
+      "name": "A1 host oda açar (üretim kipi relay, HTTPS/WSS); lobi yeni sade lobi: oda kodu, davet, oyuncular, DEVLETİMİ DÜZENLE, GALAKSİ AYARLARI, kapasite; eski sekmeler yok",
+      "status": "PASS",
+      "ms": 2535
+    },
+    {
+      "name": "A2 host kendi devletini GERÇEK tek oyunculu kurulum ekranında tasarlar (doktrin/görünüş/fizyoloji/etik/civic/köken + galaksi boyutu) ve lobiye döner; seçimler host CFG'sinde, lobi özeti güncel",
+      "status": "PASS",
+      "ms": 2198
+    },
+    {
+      "name": "A3 misafir B davet bağlantısıyla katılır, AYNI kurulum ekranında (galaksi adımı yok) kendi devletini tasarlar ve kaydeder; host taslağı motorun kurallarıyla kabul eder; B HAZIRIM",
+      "status": "PASS",
+      "ms": 3989
+    },
+    {
+      "name": "A4 host OYUNU BAŞLAT: galaksi iki taslakla kurulur; misafir sonsuz beklemeden GERÇEK STARS haritasına geçer (vekil büyük iletileri parçalarken); her oyuncu kendi tasarladığı devleti yönetir",
+      "status": "PASS",
+      "ms": 2016
+    },
+    {
+      "name": "A5 misafir gerçek arayüzden kendi devletine emir verir (bilim ağacından araştırma hedefi); host motoru uygular; iki tarafta güncel",
+      "status": "PASS",
+      "ms": 1856
+    },
+    {
+      "name": "B1 ikinci oda (kapasite 3): B yeniden katılır (cihazdaki taslağı kurulum ekranına geri gelir), C 412×915 telefondan farklı bir devlet tasarlar; ikisi de hazır",
+      "status": "PASS",
+      "ms": 9339
+    },
+    {
+      "name": "B2 başlangıçta aksilikler: host'un B'ye tam aynası ilk 6 sn, ayna farkları 12 sn kaybolur (fark yok → yeniden eşitleme tetiklenemez; yalnız bekçi kurtarır), C'nin ağı başlangıç anında 3 sn kopar; B başlangıç bekçisiyle aynayı yeniden ister, C aynı devletine döner; ikisi de sonsuz beklemeden haritaya geçer",
+      "status": "PASS",
+      "ms": 10799
+    },
+    {
+      "name": "B3 C kendi filosuna gerçek komut verir (filo seçimi → ROTA → haritada hedef) ve host uygular; B'nin aynasında C'nin kaynağı/teknolojisi yok",
+      "status": "PASS",
+      "ms": 304
+    },
+    {
+      "name": "sayfa hataları yok (host, B, C)",
+      "status": "PASS",
+      "ms": 0
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "notes": [],
+    "guestStartMs": 733,
+    "fragmented": 2,
+    "cStartMs": 3679,
+    "bStartMs": 9145,
+    "droppedToB": 12,
+    "bBoot": {
+      "log": [
+        "assign",
+        "assign",
+        "stage:view",
+        "ask-mirror",
+        "ready"
+      ],
+      "resyncs": 0
+    }
+  },
+  "pass": 9,
+  "fail": 0
+}
