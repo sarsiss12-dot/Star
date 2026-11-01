@@ -216,7 +216,7 @@ function childRelay(delay){return new Promise((res,rej)=>{const c=spawn(process.
     assert.deepEqual(st.slots.map(x=>x[0]),[0,3,4,5]);assert.equal(st.slots[0][1],'host');assert.equal(st.game,true);assert.equal(st.hostScreen,'game');
     for(const p of [A,B,C])await p.evaluate(()=>{MP1Join.lresults.length=0;MP1Join.claim(1);MP1Join.ready(false);});
     for(const p of [A,B,C]){await wait(p,()=>MP1Join.lresults.length>=2);assert.deepEqual(await p.evaluate(()=>MP1Join.lresults.map(r=>r.code)),['phase','phase']);}
-    await H.evaluate(()=>{G.speed=0;});
+    await H.evaluate(()=>{UI.setSpeed(0);});   // MP.6.3: hız API'si (doğrudan G.speed yazımı ortak hız politikasınca geri alınır)
     await X.reload();await wait(X,()=>window.MP1Join&&document.getElementById('jCode'));await X.fill('#jName','Geç');await X.locator('[data-j="go"]').tap();
     await wait(X,()=>/Oda dolu|Oyun başladı/.test(document.getElementById('jStatus').textContent));
     const L=await hostL();assert.deepEqual(L.empires.map(e=>e.id).sort(),[3,4,5],'after the start the lobby lists only human empires');
@@ -361,7 +361,7 @@ function childRelay(delay){return new Promise((res,rej)=>{const c=spawn(process.
       await wait(g,e=>MP1Join.lobby.players[1].claim===e,e1);m.claimEchoMs=Date.now()-t;
       await g.locator('#jReady').tap();await wait(h,()=>MP1Host.host.canStart().ok);
       t=Date.now();await h.locator('[data-m="start"]').tap();await wait(g,()=>MP1Join.screen==='game'&&MP1Join.game.view);m.startMs=Date.now()-t;
-      await h.evaluate(()=>{G.speed=0;});
+      await h.evaluate(()=>{UI.setSpeed(0);});   // MP.6.3: hız API'si
       const k=await h.evaluate(id=>{const e=G.emps[id];for(const c of e.colonies){const pl=G.sys[c.s].planets[c.p];if(colonyUsed(pl.col)+colonyQueued(pl.col)<colonySlots(pl.col,e,pl))return c.s+':'+c.p;}},e1);
       await g.locator('.mp2-nav [data-tab="cols"]').tap();   // MP.2: KOLONİLER sekmesi
       await g.selectOption('select[data-col="'+k+'"]','santral');t=Date.now();await g.locator('button[data-j="build"][data-col="'+k+'"]').tap();
