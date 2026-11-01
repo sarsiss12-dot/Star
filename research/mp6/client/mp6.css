@@ -3,3 +3,6 @@
 .mp6-join>*{max-width:560px;margin-left:auto;margin-right:auto}
 .mp6-mini .mp6-conn{display:flex;align-items:center;min-height:44px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .mp6-mini .mp6-conn.bad{color:#ff8f7a}
+/* MP.7: oyun başlangıcı aşamaları (misafir) */
+.mp7-boot ol.mp7-steps{list-style:none;margin:8px 0;padding:0;font-size:13px;line-height:1.7}
+.mp7-boot li{color:#5d6b85}.mp7-boot li.ok{color:#6fe3b4}.mp7-boot li.now{color:#e8eefc;font-weight:600}.mp7-boot li.bad{color:#ff7a7a;font-weight:600}

@@ -22,7 +22,10 @@ const ov=doc.createElement('div');ov.id='mp6App';ov.className='mp1-overlay mp6-j
 (doc.body||doc.documentElement).appendChild(ov);
 
 const S={warQuote:{},pendingWar:null,counter:null,J:null,mirror:null,rev:0,timer:null,building:false,started:false,on:false,lastBuild:0,minGap:600,uiSent:false,seenResults:0,hostSpd:0,held:0,
-  stats:{mirrors:0,deltas:0,bytes:0,builds:0,buildMs:[],resyncs:0,held:0,blocked:{},sent:{},speedMsgs:0}};
+  stats:{mirrors:0,deltas:0,bytes:0,builds:0,buildMs:[],resyncs:0,held:0,blocked:{},sent:{},speedMsgs:0},
+  /* MP.7: oyun başlangıcı durum makinesi — her aşama yalnız gerçek olay olunca tamamlanır; eksik veri sınırlı geri çekilmeyle
+     yeniden istenir (sonsuz bekleme ya da hızlı döngü yok); hata nedeni oyun verisi/jeton/oda anahtarı içermez */
+  boot:{since:0,stage:null,tries:0,next:0,fails:0,err:'',failed:false,log:[]}};
 
 /* ---- 1. eylem kapısı ---- */
 /* Yalnız görünüm/gezinme (dünyayı değiştirmeyen) eylemler yerelde çalışır. MP.6.1: arşiv/gelen kutusu görünümleri, anlaşma,
@@ -346,10 +349,12 @@ function rebuild(){
   const t0=performance.now();S.building=true;let ok=false;
   /* MP.6.4: haber okundu / sabitlendi işaretleri yereldir; ayna yeniden kurulunca anahtarla geri konur */
   const nk=new Map(((typeof G!=='undefined'&&G&&G.news&&G.news.records)||[]).map(r=>[r.key,[r.read,r.pinned]]));
-  try{View.resetGesture=S.started?function(){}:rg;ok=deserialize(JSON.stringify(S.mirror));if(ok){inboxOffers();setSync();for(const r of (G.news&&G.news.records)||[]){const k=nk.get(r.key);if(k){r.read=k[0];r.pinned=k[1];}}}S.inboxSig=null;}catch{ok=false;}
+  let why='';try{View.resetGesture=S.started?function(){}:rg;ok=deserialize(JSON.stringify(S.mirror));if(!ok)why='kayıt doğrulaması reddetti';if(ok){inboxOffers();setSync();for(const r of (G.news&&G.news.records)||[]){const k=nk.get(r.key);if(k){r.read=k[0];r.pinned=k[1];}}}S.inboxSig=null;}catch(e){ok=false;why=String(e&&e.message||e).slice(0,160);}
   finally{View.resetGesture=rg;S.building=false;}
   S.lastBuild=Date.now();
-  if(!ok){S.stats.fail=(S.stats.fail||0)+1;S.timer=setTimeout(rebuild,1000);return;}
+  /* MP.7: bozuk/uyumsuz ayna aynı veriyle 1 s'de bir sonsuza dek yeniden kurulmuyordu-kurulmaya çalışılıyordu. Artık ayna bırakılır,
+     gerçek neden kaydedilir ve host'tan TAM ayna sınırlı geri çekilmeyle (bootTick) yeniden istenir. */
+  if(!ok){S.stats.fail=(S.stats.fail||0)+1;S.boot.fails++;S.boot.err='Galaksi verisi kurulamadı: '+why;bootLog('deserialize-fail');S.mirror=null;S.rev=0;S.boot.next=Date.now()+1500;return;}
   G.autoSave=false;G.speed=0;
   if(S.started&&UI._diploWorld)UI._diploWorld=G.p;   // açık diplomasi sayfası ve taslaklar korunur
   if(S.started&&UI._fedTabsWorld)UI._fedTabsWorld=G.emps;   // MP.6.4: federasyon sekmesi / açık bölümler / kaydırma canlı senkronda korunur (openFed dünya kimliği değişince GENEL'e döner)
@@ -373,7 +378,7 @@ function inboxOffers(){
     if(rec){rec.mpSq=q.from;rec.expires=q.expires;}}
 }
 function start(){
-  S.started=true;S.on=true;gate();
+  S.started=true;S.on=true;gate();bootLog('ready');S.boot.stage='ready';S.boot.err='';S.boot.failed=false;
   try{leaveTitle(null);}catch{}
   doc.getElementById('menu').classList.add('hidden');doc.getElementById('game').classList.remove('hidden');ov.style.display='none';
   enterGame(true);UI.setSpeed(0);
@@ -426,7 +431,7 @@ function update(statusHtml){
   if(!S.uiSent&&J.empireId!==null&&J.ws&&J.ws.readyState===1){S.uiSent=true;J.sendRaw({v:1,type:'ui',mode:'stars'});}
   const tmp=doc.createElement('div');tmp.innerHTML=statusHtml;const s=tmp.firstChild;
   if(S.started&&s)chip(s.textContent,/\bok\b/.test(s.className));
-  else if(!S.started){ov.style.display='';ov.innerHTML=statusHtml+'<div class="mp1-status">Galaksi verisi bekleniyor…</div>';}
+  else if(!S.started){ov.style.display='';const h=statusHtml+bootHtml();if(ov.innerHTML!==h)ov.innerHTML=h;}
   /* host'un reddettiği komutlar: gerçek arayüzün kendi uyarısıyla */
   for(;S.seenResults<J.results.length;S.seenResults++){const r=J.results[S.seenResults];
     if(waits[r.cid]){const w=waits[r.cid];delete waits[r.cid];try{w(r);}catch{}continue;}   // MP diplomasi paneli / gelen kutusu kendi sonucunu gösterir
@@ -438,7 +443,43 @@ function update(statusHtml){
     if(sig!==S.inboxSig){S.inboxSig=sig;try{inboxOffers();}catch{}}
     try{setSync();}catch{}}
 }
-window.MP6Stars={SET,S,onMessage,update,screen,attach(J){S.J=J;},onAssign(){S.uiSent=false;},VIEW,ACT,dip:{open:dipOpen,seg:seg6,get ui(){return dipUI;},get pol(){return polUI;}}};
+/* ---- MP.7: başlangıç aşamaları ve güvenli kurtarma ----
+   ODAYA BAĞLANDI → DEVLET ATANDI → HOST OYUNU BAŞLATTI → GALAKSİ VERİSİ ALINDI → STARS DÜNYASI YÜKLENİYOR → OYUN HAZIR.
+   Görünüm (snapshot) ya da ayna gelmezse aynı isteği (resync / ui:stars — ikisi de host'ta TAM veri üretir ve idempotenttir)
+   8 s, 16 s, 32 s, 64 s aralıkla yeniden gönderir; 5 denemeden sonra durur ve YENİDEN DENE gösterir. Bağlantı yokken sayaç işlemez
+   (join.js zaten yeniden bağlanır; dönüşte aynı devlet 'assign' ile gelir ve ui yeniden gönderilir). */
+const BOOT_STEPS=[['room','ODAYA BAĞLANDI'],['empire','DEVLET ATANDI'],['started','HOST OYUNU BAŞLATTI'],['view','GALAKSİ VERİSİ ALINDI'],['mirror','STARS DÜNYASI YÜKLENİYOR'],['ready','OYUN HAZIR']];
+const BOOT_MAX=5;
+function bootLog(what){const b=S.boot;b.log.push({t:Math.round(performance.now()),what});if(b.log.length>40)b.log.shift();}
+function bootStage(){const J=S.J;if(!J)return null;if(S.started)return 'ready';
+  const live=J.ws&&J.ws.readyState===1;if(!live||!J.hostOnline)return J.empireId!==null&&J.screen==='game'?'started':'room';
+  if(J.empireId===null)return 'room';if(J.screen!=='game')return 'empire';if(!J.game.view)return 'started';if(!S.mirror)return 'view';return 'mirror';}
+function bootHtml(){
+  const b=S.boot,cur=bootStage(),idx=BOOT_STEPS.findIndex(x=>x[0]===cur),J=S.J,live=J&&J.ws&&J.ws.readyState===1&&J.hostOnline;
+  const rows=BOOT_STEPS.map(([k,n],i)=>'<li class="'+(i<idx?'ok':i===idx?(b.failed?'bad':'now'):'')+'">'+(i<idx?'✓ ':i===idx?(b.failed?'✗ ':'… '):'· ')+n+'</li>').join('');
+  return '<div class="mp1-card mp7-boot" id="mp7Boot"><b>OYUN BAŞLIYOR</b><ol class="mp7-steps">'+rows+'</ol>'+
+    (b.failed?'<div class="mp1-status bad" id="mp7BootErr">'+esc(b.err||'Host\'tan galaksi verisi alınamadı.')+'</div><button class="mp1-btn pri" data-g7="retry" id="mp7Retry">YENİDEN DENE</button>':
+      b.err?'<div class="mp1-status bad" id="mp7BootErr">'+esc(b.err)+' — yeniden isteniyor…</div>':
+      !live&&J&&J.screen==='game'?'<div class="mp1-status bad">Bağlantı bekleniyor; geri gelince aynı devletine dönersin.</div>':'')+'</div>';
+}
+function bootAsk(){const J=S.J;if(!J||!J.ws||J.ws.readyState!==1)return;
+  if(!J.game.view){J.sendRaw({v:1,type:'resync'});S.stats.resyncs++;bootLog('ask-view');}
+  else{J.sendRaw({v:1,type:'ui',mode:'stars'});S.uiSent=true;bootLog('ask-mirror');}}
+function bootTick(){
+  const J=S.J,b=S.boot;if(!J)return;
+  if(S.started||J.screen!=='game'||J.empireId===null){if(!S.started){b.since=0;b.tries=0;b.next=0;b.failed=false;b.fails=0;b.err='';}b.stage=bootStage();return;}
+  const st=bootStage();if(st!==b.stage){bootLog('stage:'+st);b.stage=st;}
+  const live=J.ws&&J.ws.readyState===1&&J.hostOnline;if(!live)return;   // ağ yokken deneme sayılmaz
+  const now=Date.now();if(!b.since){b.since=now;b.next=now+8000;}
+  if(!['started','view'].includes(st)||b.failed||S.building||S.timer)return;
+  if(now<b.next)return;
+  if(b.tries>=BOOT_MAX||b.fails>=3){b.failed=true;if(!b.err)b.err=st==='started'?'Host\'tan galaksi verisi gelmedi.':'Host\'tan STARS dünyası (ayna) gelmedi.';bootLog('failed');update(statusNow());return;}
+  b.tries++;b.next=now+8000*2**Math.min(b.tries,3);bootAsk();
+}
+function statusNow(){const t=doc.getElementById('jConn');return t?t.outerHTML:'';}
+setInterval(()=>{try{bootTick();if(S.J&&!S.started&&S.J.screen==='game')update(statusNow());}catch{}},1000);
+doc.addEventListener('click',e=>{const el=e.target.closest('[data-g7="retry"]');if(!el)return;const b=S.boot;b.failed=false;b.tries=0;b.fails=0;b.err='';b.next=0;S.mirror=null;bootLog('retry');bootAsk();b.next=Date.now()+8000;update(statusNow());});
+window.MP6Stars={SET,S,onMessage,update,screen,attach(J){S.J=J;},onAssign(){S.uiSent=false;bootLog('assign');},VIEW,ACT,boot:{stage:bootStage,tick:bootTick},dip:{open:dipOpen,seg:seg6,get ui(){return dipUI;},get pol(){return polUI;}}};
 /* telefon geri tuşu: önce açık MP diplomasi onayı/paneli kapanır (join.js popstate bunu sorar) */
 const prevBack=window.__mpBack;window.__mpBack=()=>{if(prevBack&&prevBack())return true;if(dipEl){dipOpen(false);return true;}return false;};
 })();
