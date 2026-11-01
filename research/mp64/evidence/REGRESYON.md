@@ -31,7 +31,7 @@ Yeni paketler:
 
 | Test | Sonuç |
 |---|---|
-| browser-mp64 | Ayrıntı aşağıda |
+| browser-mp64 | **10/10 PASS** (son koşu; ayrıntı aşağıda) |
 | browser-mp0 | 20/20 PASS |
 | browser-mp1 | 22/22 PASS |
 | browser-mp11 | 10/10 PASS |
@@ -41,7 +41,7 @@ Yeni paketler:
 | browser-mp4 | 13/13 PASS |
 | browser-mp5 (Docker relay + TLS vekili) | 10/10 PASS |
 | mp5_docker | 6/6 PASS |
-| browser-mp6 | Ayrıntı aşağıda |
+| browser-mp6 | **11/11 PASS** (ayrıntı aşağıda) |
 | browser-mp61 | 13/13 PASS |
 | browser-mp62 | 10/10 PASS |
 | browser-mp63 | 15/15 PASS |
@@ -59,7 +59,13 @@ Yeni paketler:
   - açık ASKERÎ sekmesi gerçek ayna yeniden kurulumundan sonra korundu.
 
 **browser-mp6:** ilk koşu 9/2, düzeltmeden sonra **11/11 PASS**.
-- `guest-stars.js` federasyon sekmesi düzeltmesinden sonra misafir arayüzü testleri (mp6, mp61, mp62, mp63) yeniden koşuldu; sonuçlar aşağıda.
+- `guest-stars.js` federasyon sekmesi düzeltmesinden sonra misafir arayüzü testleri (mp6, mp61, mp62, mp63) yeniden koşuldu; sonuçlar:
+  - browser-mp6 11/11
+  - browser-mp61 13/13
+  - browser-mp62 10/10
+  - browser-mp63 15/15
+
+  Hepsi PASS.
 - Test listesi casus ağı, terraform, takviye ve borsayı hâlâ "engelli" sayıyordu; bunlar artık MP komutu. Engelli liste: elçi, rüşvet.
 - İkinci FAIL ilkinin ardılıydı: `UI.act('mktTrade')` artık borsa panelini açtığı için DİPLOMASİ düğmesinin üstünde kaldı.
 
