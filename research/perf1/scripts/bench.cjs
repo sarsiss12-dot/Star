@@ -13,7 +13,8 @@ h.run(`G.autoSave=false;var __c={};
 if(COUNT)h.run(`for(const n of ['aiTurn','aiBuildingDelta','aiEconomyPlan','aiBuildingSustainable','empireIncome','tradeInfo','tradeLinks','findPath','colonyOutput']){const o=globalThis[n];if(typeof o!=='function')continue;const r=__c[n]={n:0,ms:0,depth:0};
   globalThis[n]=function(){r.n++;const t=performance.now();r.depth++;try{return o.apply(this,arguments);}finally{r.depth--;if(!r.depth)r.ms+=performance.now()-t;}};}`);
 const sha=s=>crypto.createHash('sha256').update(s).digest('hex');
-const per=[],trace=[];
+const per=[],trace=[],WARM=+(process.env.WARM||0);
+for(let w=0;w<WARM;w++)h.run('__step()');   // ısınma ayları ölçüme girmez (aynı kayıttan iki kol da aynı)
 for(let m=0;m<+months;m++){const t=performance.now();h.run('__step()');per.push(performance.now()-t);if(TRACE)trace.push(sha(h.run('serialize()')).slice(0,16)+':'+h.run('RND_STATE'));}
 const s=[...per].sort((a,b)=>a-b),q=p=>+s[Math.min(s.length-1,Math.floor(p*s.length))].toFixed(1);
 const out={label,root:path.basename(path.resolve(root)),save:path.basename(save),months:+months,node:process.version,
