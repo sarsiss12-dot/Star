@@ -1145,8 +1145,8 @@ function createHost(opts){
       if(typeof m.tab!=='string'||!TABS.includes(m.tab))return lres(conn,'presence',false,'bad-tab');
       if(p.tab!==m.tab){p.tab=m.tab;broadcastLobby();}},
     claim(conn,m){const p=lobbyActor(conn,m,['v','type','empire'],'claim');if(!p)return;
+      if(!['waiting','ready'].includes(L.phase))return lres(conn,'claim',false,'phase');   // önce aşama (devam lobisi/oyun: eski yanıt aynen)
       if(L.mode==='design')return lres(conn,'claim',false,'mode');
-      if(!['waiting','ready'].includes(L.phase))return lres(conn,'claim',false,'phase');
       const r=setClaim(p,m.empire);lres(conn,'claim',r.ok,r.why);},
     ready(conn,m){const p=lobbyActor(conn,m,['v','type','value'],'ready');if(!p)return;
       if(typeof m.value!=='boolean')return lres(conn,'ready',false,'bad-value');
