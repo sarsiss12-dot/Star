@@ -230,7 +230,8 @@ let relay,base,bH,bB,bC,bA,H,Bp,Cp,Ap;
       const fl=G.fleets.find(f=>f.e===a&&f.ships.length&&isArmed(f));if(!fl||!adj)return {fl:!!fl,adj:!!adj};fl.sys=adj.id;fl.mv=null;AI_VIEW_CACHE.delete(me);
       MP1Host.host.publish();return {fleet:fl.id,at:adj.id,help:aiFedHelp(me,G.emps[x],true)};},[A,X])));
     await closeAll(Ap);await synced(Ap);await Ap.evaluate(()=>UI.openFed());await tapIn(Ap,'#diploPane [data-a="fedTab"][data-x="military"]');
-    await tapIn(Ap,'#diploPane [data-a="fedExecute"][data-x="'+fid+':'+d.id+'"]');
+    await tapIn(Ap,'#diploPane [data-a="fedExecute"][data-x="'+fid+':'+d.id+'"]').catch(async e=>{throw Error('fedExecute button: host '+JSON.stringify(await H.evaluate(([f,id])=>({d:fedOf(f).decisions[id],day:G.day,speed:G.speed}),[fid,d.id]))+' A '+
+      JSON.stringify(await Ap.evaluate(()=>({decs:(findFed(G.p)||{}).decisions,day:G.day,btns:[...document.querySelectorAll('#diploPane [data-a]')].map(b=>b.dataset.a).slice(0,40)}))).slice(0,900));});
     await hostWait(([f,id])=>{const x=fedOf(f).decisions[id];return x&&x.state!=='ready';},[fid,d.id],'fedExecute');
     const dx=await H.evaluate(([f,id])=>fedOf(f).decisions[id],[fid,d.id]);metrics.notes.push('ortak savaş kararı: '+JSON.stringify(dx).slice(0,240));
     assert.equal(dx.state,'applied','engine executeFedDecision applied the decision');assert(dx.joined.includes(A),'A joined the war through the engine');
