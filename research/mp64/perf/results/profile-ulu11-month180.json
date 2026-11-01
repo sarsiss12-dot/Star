@@ -1,0 +1,272 @@
+{
+ "months": 180,
+ "profileMonths": 6,
+ "wallMs": 20718,
+ "msPerMonth": 3453,
+ "state": {
+  "alive": 12,
+  "fleets": 113,
+  "ships": 472,
+  "wars": 2.5,
+  "fronts": 7
+ },
+ "topSelf": [
+  {
+   "fn": "findPath main.js:3411",
+   "ms": 4476.5,
+   "pct": 21.6
+  },
+  {
+   "fn": "tradeLinks economy.js:188",
+   "ms": 3830.5,
+   "pct": 18.5
+  },
+  {
+   "fn": "dist main.js:16",
+   "ms": 1336.6,
+   "pct": 6.5
+  },
+  {
+   "fn": "stock economic-ledger.js:6",
+   "ms": 1308.6,
+   "pct": 6.3
+  },
+  {
+   "fn": "aiBuildingDelta ai.js:180",
+   "ms": 829.1,
+   "pct": 4
+  },
+  {
+   "fn": "empireIncome economy.js:321",
+   "ms": 727.8,
+   "pct": 3.5
+  },
+  {
+   "fn": "supplyDistance main.js:3219",
+   "ms": 714,
+   "pct": 3.4
+  },
+  {
+   "fn": "tradeInfo economy.js:270",
+   "ms": 582.8,
+   "pct": 2.8
+  },
+  {
+   "fn": "clean economic-ledger.js:5",
+   "ms": 459.9,
+   "pct": 2.2
+  },
+  {
+   "fn": "(garbage collector) :0",
+   "ms": 446.8,
+   "pct": 2.2
+  },
+  {
+   "fn": "(anon) economic-ledger.js:23",
+   "ms": 436.5,
+   "pct": 2.1
+  },
+  {
+   "fn": "colonyOutput economy.js:47",
+   "ms": 418.8,
+   "pct": 2
+  },
+  {
+   "fn": "txCaptureGraph diplomacy.js:2057",
+   "ms": 414.6,
+   "pct": 2
+  },
+  {
+   "fn": "gateSupplyNodes main.js:3212",
+   "ms": 409.9,
+   "pct": 2
+  },
+  {
+   "fn": "isSupplyNode main.js:3164",
+   "ms": 323.4,
+   "pct": 1.6
+  },
+  {
+   "fn": "explorationContext main.js:3975",
+   "ms": 254.4,
+   "pct": 1.2
+  },
+  {
+   "fn": "fleetSupply main.js:3251",
+   "ms": 194.7,
+   "pct": 0.9
+  },
+  {
+   "fn": "reinforcementThreats main.js:5100",
+   "ms": 151.9,
+   "pct": 0.7
+  },
+  {
+   "fn": "autoExploreTick main.js:4071",
+   "ms": 131.4,
+   "pct": 0.6
+  },
+  {
+   "fn": "post node:inspector:118",
+   "ms": 130.4,
+   "pct": 0.6
+  },
+  {
+   "fn": "fleetUpkeep main.js:3322",
+   "ms": 122.2,
+   "pct": 0.6
+  },
+  {
+   "fn": "influenceAt diplomacy.js:41",
+   "ms": 110,
+   "pct": 0.5
+  },
+  {
+   "fn": "EconomyLedger.observe.sy.system economic-ledger.js:57",
+   "ms": 109.6,
+   "pct": 0.5
+  },
+  {
+   "fn": "routeVolume economy.js:231",
+   "ms": 109.5,
+   "pct": 0.5
+  },
+  {
+   "fn": "sysDefense main.js:3762",
+   "ms": 99.9,
+   "pct": 0.5
+  }
+ ],
+ "topTotal": [
+  {
+   "fn": "(anon) profile-ai.cjs:14",
+   "ms": 20402,
+   "pct": 98.5
+  },
+  {
+   "fn": "run runtime.js:112",
+   "ms": 20271.1,
+   "pct": 97.8
+  },
+  {
+   "fn": "(anon) evalmachine.<anonymous>:0",
+   "ms": 20270.8,
+   "pct": 97.8
+  },
+  {
+   "fn": "__step evalmachine.<anonymous>:2",
+   "ms": 20269.2,
+   "pct": 97.8
+  },
+  {
+   "fn": "obj.<computed> economic-ledger.js:57",
+   "ms": 19155,
+   "pct": 92.5
+  },
+  {
+   "fn": "observe economic-ledger.js:20",
+   "ms": 19143.1,
+   "pct": 92.4
+  },
+  {
+   "fn": "EconomyLedger.observe.sy.system economic-ledger.js:57",
+   "ms": 18958.4,
+   "pct": 91.5
+  },
+  {
+   "fn": "monthTick economic-ledger.js:137",
+   "ms": 15753.8,
+   "pct": 76
+  },
+  {
+   "fn": "monthTick main.js:9087",
+   "ms": 15753.2,
+   "pct": 76
+  },
+  {
+   "fn": "aiTurn ai.js:1596",
+   "ms": 14408.4,
+   "pct": 69.5
+  },
+  {
+   "fn": "aiBuildingDelta ai.js:180",
+   "ms": 13234.3,
+   "pct": 63.9
+  },
+  {
+   "fn": "empireIncome economy.js:321",
+   "ms": 13167.8,
+   "pct": 63.6
+  },
+  {
+   "fn": "aiEconomyPlan ai.js:229",
+   "ms": 11863.9,
+   "pct": 57.3
+  },
+  {
+   "fn": "tradeInfo economy.js:270",
+   "ms": 10433.9,
+   "pct": 50.4
+  },
+  {
+   "fn": "tradeLinks economy.js:188",
+   "ms": 9835.5,
+   "pct": 47.5
+  },
+  {
+   "fn": "aiEconomicOrder ai.js:436",
+   "ms": 6507.3,
+   "pct": 31.4
+  },
+  {
+   "fn": "findPath main.js:3411",
+   "ms": 5796.9,
+   "pct": 28
+  },
+  {
+   "fn": "aiColonyForecast ai.js:374",
+   "ms": 3532.9,
+   "pct": 17.1
+  },
+  {
+   "fn": "aiColonyPreparation ai.js:410",
+   "ms": 3123.3,
+   "pct": 15.1
+  },
+  {
+   "fn": "dailyTick main.js:4227",
+   "ms": 3077.4,
+   "pct": 14.9
+  },
+  {
+   "fn": "aiStrategicBuildingNeeds ai.js:603",
+   "ms": 2531.2,
+   "pct": 12.2
+  },
+  {
+   "fn": "aiShipProduction ai.js:1414",
+   "ms": 2528.2,
+   "pct": 12.2
+  },
+  {
+   "fn": "tick commerce.js:110",
+   "ms": 1878.7,
+   "pct": 9.1
+  },
+  {
+   "fn": "buy ai.js:1456",
+   "ms": 1875.6,
+   "pct": 9.1
+  },
+  {
+   "fn": "fleetSupply main.js:3251",
+   "ms": 1828.3,
+   "pct": 8.8
+  },
+  {
+   "fn": "can ai.js:1439",
+   "ms": 1820.6,
+   "pct": 8.8
+  }
+ ]
+}
