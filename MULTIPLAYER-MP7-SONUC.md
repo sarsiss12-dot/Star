@@ -126,3 +126,20 @@ Bu listeyi gerçek diplomasi ekranına taşımak MP.7.1'e bırakıldı.
 ## 7. Testler
 
 Ayrıntı: `research/mp7/evidence/REGRESYON.md`.
+
+- **Node:** 164 paket, 6310 / 3; yalnız bilinen `faz95d_identity`.
+- **Yeni testler:**
+  - `mp7_ws_frames_test` 6/6;
+  - `mp7_lobby_test` 7/7;
+  - `browser-mp7` 9/9 (üretim kipi relay + parçalayan vekil + dikey telefonlar).
+- **Eski MP ve tek oyunculu tarayıcı testleri:** hepsi PASS.
+  - browser-mp4 bir düzeltmeyle;
+  - mp5_docker izin listesi güncellemesiyle.
+- **NOT RUN:** fiziksel Android, gerçek internet, LAN, canlı Render servisi.
+
+## 8. Açık sorunlar / MP.7.1
+
+- **Diplomasi:** ayrı MP diplomasi panelindeki bekleyen insan teklifleri listesi ve geri çekme gerçek diplomasi ekranına taşınmadı.
+- **Host lobi adı:** host'un lobideki oyuncu adı kurulumdaki devlet adıyla güncellenmez (oyuncu adı ≠ devlet adı).
+- **Misafir eşzamanlılığı:** taslağı kaydedilmeden açık kalan kurulum ekranı, host oyunu başlatırsa kapanmaz. Host herkes hazır olmadan başlatamadığı için yalnız HAZIR sonrası yeniden düzenleme sırasında olabilir; değişiklik hazırı sıfırlar.
+- **Fiziksel cihaz ve canlı Render:** doğrulama yapılmadı.
