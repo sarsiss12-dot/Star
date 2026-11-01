@@ -222,9 +222,13 @@ let relay,base,bH,bB,bC,bA,H,Bp,Cp,Ap;
     v=await motion('military','joinWar:'+loc(A,X)+':'+loc(A,2),'joinWar');assert.equal(v.motion,'joinWar');
     const d=await H.evaluate(f=>Object.values(fedOf(f).decisions||{}).find(d=>d.kind==='joinWar'&&d.state==='ready')||null,fid);
     assert(d,'joinWar motion accepted by the engine vote (ready decision)');
-    /* FİKSTÜR (açıkça): motorun aiFedHelp kapısı katılımcının hedefi bilinen haritada görmesini ister (aiKnownSystems / aiKnownRoute);
-       A'ya hedefin sistemleri motorun kendi alanında (s.seen) "görülmüş" yazılır. Uygulama kararı yine motorun executeFedDecision'ı. */
-    await H.evaluate(([a,x])=>{for(const s of G.sys)if(!s.seen.includes(a))s.seen.push(a);MP1Host.host.publish();void x;},[A,X]);
+    /* FİKSTÜR (açıkça): motorun aiFedHelp kapısı katılımcının hedefi ŞU AN görmesini ister (aiKnownSystems: AI istihbarat kaydı ya da
+       explorationContext görüşü; insanın AI kaydı yok). A'nın silahlı bir filosu hedefin A'ya en yakın sistemine komşu sisteme konur
+       (f.sys — motorun alanı). Uygulama kararı yine motorun executeFedDecision'ı. */
+    metrics.notes.push('fedHelp fikstürü: '+JSON.stringify(await H.evaluate(([a,x])=>{const me=G.emps[a],home=G.sys[me.home];
+      const tgt=G.sys.filter(s=>s.owner===x).sort((p,q)=>dist(home,p)-dist(home,q))[0];const adj=tgt&&tgt.lanes.map(i=>G.sys[i]).filter(s=>s.owner!==x).sort((p,q)=>dist(home,p)-dist(home,q))[0];
+      const fl=G.fleets.find(f=>f.e===a&&f.ships.length&&isArmed(f));if(!fl||!adj)return {fl:!!fl,adj:!!adj};fl.sys=adj.id;fl.mv=null;AI_VIEW_CACHE.delete(me);
+      MP1Host.host.publish();return {fleet:fl.id,at:adj.id,help:aiFedHelp(me,G.emps[x],true)};},[A,X])));
     await closeAll(Ap);await synced(Ap);await Ap.evaluate(()=>UI.openFed());await tapIn(Ap,'#diploPane [data-a="fedTab"][data-x="military"]');
     await tapIn(Ap,'#diploPane [data-a="fedExecute"][data-x="'+fid+':'+d.id+'"]');
     await hostWait(([f,id])=>{const x=fedOf(f).decisions[id];return x&&x.state!=='ready';},[fid,d.id],'fedExecute');

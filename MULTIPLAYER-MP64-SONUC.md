@@ -213,6 +213,10 @@ Sonuçlar: `research/mp64/evidence/REGRESYON.md`.
 - **Sensör paylaşımı yolu:** haber görünürlüğünde dahil edilmedi; daha az gösterir, asla fazla değil.
 - **Bağımsızlık desteği:** sızma zarı motorun. Tarayıcı koşusunda sızma olmadı, bu yüzden senyöre giden sızma bildirimi gerçek tarayıcıda görülmedi. Node testi (`mp63_polvas_test`) yalnız "bildirim = sızma" eşitliğini denetler; hangi dalın koşulduğu zara bağlıdır.
 - **Federasyon tür reformu:** önerge gerçek dokunmayla açıldı, motorun oylamasında geçmedi. Reformun uygulanması tarayıcıda görülmedi.
-- **Ortak savaş kararı:** uygulanması için açık fikstür gerekti: katılımcının hedefi motorun `s.seen` alanında "görmüş" olması (motorun `aiFedHelp` kapısı).
+- **Ortak savaş kararı:** motorun `aiFedHelp` kapısı, katılımcının hedefi **şu an** görmesini ister (AI istihbarat kaydı ya da `explorationContext` görüşü).
+  - İnsan üyenin AI istihbarat kaydı yoktur; tek oyunculu oyunda da devlet 0 için durum aynıdır.
+  - Tarayıcı testinde açık fikstür kullanıldı: A'nın silahlı filosu hedefe komşu sisteme konur.
+  - Yalnız `s.seen` yazmak yetmedi (ölçüldü).
+  - Fikstürsüz durumda motor kararı "Geçerli ve ulaşabilir katılımcı kalmadı" gerekçesiyle uygulamaz; bu motorun kuralıdır.
 - **Borsa:** motorda emir defteri yok. Bekleyen emir / iptal yazılmadı.
 
