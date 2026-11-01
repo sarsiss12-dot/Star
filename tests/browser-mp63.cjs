@@ -197,7 +197,9 @@ let relay,base,bH,bB,bC,H,Bp,Cp;
     await tap(Bp,'#modal [data-a="closem"]');
   });
   await test('B3/B4 B taslağı sunar (oyu yalnız B\'nin; AI ortak kendi değerlendirmesiyle; host oyu yok) → host kendi gerçek penceresinde onaylar → B "Onaylı paylaşımı uygula" → devir host\'ta BİR KEZ; B\'ye ve host\'a sonuç bildirimi',async()=>{
-    await agenda(Bp);await tap(Bp,'#diploPane [data-a="shareOpen"]');await wait(Bp,()=>document.querySelector('#modal [data-a="shareSend"]'));
+    /* gerçek devir: B ilk satırın (host'un sistemi) alıcısını değiştirir (host önizlemesi), sonra bu taslağı sunar */
+    await agenda(Bp);await tap(Bp,'#diploPane [data-a="shareOpen"]');await wait(Bp,()=>document.querySelector('#modal [data-a="shareNext"]'));
+    await tap(Bp,'#modal [data-a="shareNext"]');await wait(Bp,()=>Object.entries(MP6Stars.SET.quotes).some(([k,x])=>!k.endsWith('|null')&&x.ok)&&document.querySelector('#modal [data-a="shareSend"]:not([disabled])'));
     await tap(Bp,'#modal [data-a="shareSend"]');await wait(H,c=>(G.settlements.offers||[]).some(o=>o.campaign===c),camp);
     const o=await H.evaluate(c=>{const o=G.settlements.offers.filter(x=>x.campaign===c).at(-1);return {id:o.id,proposer:o.proposer,state:o.state,votes:o.votes.map(v=>[v.by,v.yes])};},camp);
     metrics.settle.offer=o;assert.equal(o.proposer,B);assert.deepEqual(o.votes.map(v=>v[0]).sort(),[B,4].sort(),'B (proposer) + AI M; host has not voted');
@@ -210,7 +212,8 @@ let relay,base,bH,bB,bC,H,Bp,Cp;
     await agenda(Bp);await tap(Bp,'#diploPane [data-a="shareOpen"]');await wait(Bp,()=>document.querySelector('#modal [data-a="shareApply"]:not([disabled])'));await shot(Bp,'b4-b-apply');
     await tap(Bp,'#modal [data-a="shareApply"]');await wait(H,id=>settlementOffer(id).state==='applied',o.id);
     const after=await H.evaluate(id=>{const x=settlementOffer(id);return {own:window.__land.map(s=>G.sys[s].owner),want:window.__land.map(s=>x.rows.find(r=>r.sys===s).to),by:x.receipt.by,n:x.receipt.transfers.length};},o.id);
-    assert.deepEqual(after.own,after.want,'ownership = the approved rows');assert.equal(after.by,B);metrics.settle.applied={before:own0,...after};
+    assert.deepEqual(after.own,after.want,'ownership = the approved rows');assert.equal(after.by,B);
+    assert(after.n>=1&&after.own.some((o,i)=>o!==own0[i]),'a real ownership transfer happened: '+JSON.stringify({own0,after}));metrics.settle.applied={before:own0,...after};
     const again=await Bp.evaluate(id=>new Promise(res=>{const c=MP1Join.cmd({kind:'settleApply',offer:id});setTimeout(()=>res((MP1Join.results.find(x=>x.cid===c.cid)||{}).code),1500);}),o.id);
     assert.equal(again,'rules:engine','second application refused');assert.deepEqual(await H.evaluate(()=>window.__land.map(id=>G.sys[id].owner)),after.own,'no double transfer');
     await H.evaluate(()=>MP1Host.host.publish());await wait(Bp,()=>(MP1Join.game.view.log||[]).some(n=>/tamamlandı — \d+ devir/.test(n.m)));

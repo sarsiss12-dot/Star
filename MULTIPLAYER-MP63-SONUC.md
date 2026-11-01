@@ -113,6 +113,10 @@ Hepsi motorun işlevleridir; 180 gün ve oybirliği motorda kalır.
 - Görünmeyen toprak satırı maskelenir: anahtar `h<n>`, sistem ve gezegen kimliği yok. Host bu satırı gerçek satıra çevirir. Motor bu durumda kabulü zaten reddeder ("keşif gerekli").
 - Ham damga (sefer kaydının tamamı, devletlerin mizacı) gönderilmez.
 
+### Gerçek devir
+
+Motorun varsayılan taslağı her toprağı mevcut sahibinde bırakabilir (puan formülü mevcut kontrole ağırlık verir). Bu durumda uygulama "0 devir" olur. Testler bu yüzden bir satırın alıcısı değiştirilmiş taslağı sunar: tarayıcıda gerçek "Alıcıyı değiştir" düğmesi kullanılır. Host'un sistemi B'ye geçer; tam 1 devir yapılır ve bir kez uygulanır. Dağıtım formülü değişmedi.
+
 ### Bildirim (`settleSweep`)
 
 Uzak insan kendi listesinde görür: önerildi / onaylandı / reddedildi / süresi doldu / geçersiz / geri çekildi / tamamlandı. Host'a da host bildirimi gider. İlk geçiş sessizdir, böylece kayıttan devamda bildirim yağmaz.
@@ -182,7 +186,7 @@ Misafire yalnız işlemin mümkün olup olmadığı, nedeni ve görmeye hakkı o
 | Test | Sonuç |
 |---|---|
 | `tests/mp63_pause_test.js` (politika + mp-core hız protokolü) | 7/7 PASS |
-| `tests/mp63_settle_test.js` (paylaşım: koruma kontrolü, gündem, gizlilik, oy/uygula, öneri/stale, ret/geri çekme, maske, MP.4) | 8/8 PASS |
+| `tests/mp63_settle_test.js` (paylaşım: koruma kontrolü, gündem, gizlilik, oy/uygula, öneri/stale, gerçek devir, ret/geri çekme, maske, MP.4) | 9/9 PASS |
 | `tests/mp63_polvas_test.js` (kuruluş, oy, anayasa, reform/başkan, ihraç, ortak savaş, hibe, himaye, yenileme, bağımsızlık, destek) | 11/11 PASS |
 | `tests/mp63_sq_test.js` (statüko kalıcılığı, bir kez, süre, geriye uyum) | 4/4 PASS |
 | `tests/browser-mp63.cjs` (A1–A8 duraklatma, B1–B4 paylaşım, C1–C3 federasyon, D1 himaye) | sonuç bölümünde |

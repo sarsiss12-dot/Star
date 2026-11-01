@@ -89,6 +89,17 @@ test('B önerir: host taslağı (settleQuote) → eski damga "stale" → doğru 
   const o=offer(h);assert.equal(o.proposer,B);assert.equal(o.rows[0].to,M);assert.deepEqual(o.votes.map(v=>v.by).sort(),[B,M].sort(),'B (proposer) + AI M opinion; host not');
   assert.equal(cmd(h,B,{kind:'settleSubmit',campaign:c,stamp:out.stamp,assign:a}).code,'rules:engine','second open offer for the same side refused');
 });
+test('gerçek devir: B host\'un sistemini kendine alan taslağı sunar; AI ortak kendi değerlendirmesiyle, host kendi oyuyla onaylar; B uygular → sahiplik ve devlet indeksleri değişir, bir kez',()=>{
+  const h=world();const c=J(h,'campaign'),q=cmd(h,B,{kind:'settleQuote',campaign:c,assign:null}).extra;const a={};for(const r of q.rows)a[r.key]=r.to;
+  const row=q.rows.find(r=>r.from===0);assert(row,'a host-held row');a[row.key]=B;
+  assert.equal(cmd(h,B,{kind:'settleSubmit',campaign:c,stamp:q.stamp,assign:a}).status,'ok');let o=offer(h);
+  assert.equal(o.state,'pending','AI partner M accepts on its own assessment; host has not voted');
+  assert.equal(J(h,`MP.local({kind:'settleVote',offer:${o.id},yes:true}).ok`),true);o=offer(h);assert.equal(o.state,'approved');
+  const sys=row.sys,before=J(h,`G.sys[${sys}].owner`);assert.equal(before,0);
+  assert.equal(cmd(h,B,{kind:'settleApply',offer:o.id}).status,'ok');o=offer(h);
+  assert.equal(J(h,`G.sys[${sys}].owner`),B,'system transferred to B');assert.equal(o.receipt.transfers.length,1);assert.deepEqual(o.receipt.transfers[0],{key:row.key,from:0,to:B});
+  assert.equal(cmd(h,B,{kind:'settleApply',offer:o.id}).code,'rules:engine');assert.equal(J(h,`G.sys[${sys}].owner`),B,'no second transfer');
+});
 test('ret hakkı ve geri çekme: B reddeder → teklif reddedildi, host artık oy veremez; geri çekmeyi yalnız önerici yapar',()=>{
   const h=world();h.run('(()=>{const q=settlementPreview(Mm,campaign);settlementSubmit(Mm,campaign,q.stamp);})()');const id=offer(h).id;
   assert.equal(cmd(h,B,{kind:'settleWithdraw',offer:id}).code,'rules:engine','B is not the proposer');
