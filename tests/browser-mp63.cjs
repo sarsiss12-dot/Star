@@ -158,7 +158,8 @@ let relay,base,bH,bB,bC,H,Bp,Cp;
     assert.equal(await H.evaluate(()=>G.inbox.some(n=>n.kind==='warstart')),true);
     let uid=await H.evaluate(()=>G.inbox.find(n=>n.kind==='warstart').uid);await hostOpenNote(uid);await tap(H,'#modal [data-a="closem"]');await all(2,'war notice acknowledged → 2×');
     await tap(H,'#tools [data-a="save"]');await wait(H,()=>document.querySelector('#modal [data-a="warPauseToggle"]'));await tap(H,'#modal [data-a="warPauseToggle"]');
-    await wait(H,()=>WAR_PAUSE_ON===false);await tap(H,'#modal [data-a="closem"]');await sleep(500);assert.equal(await H.evaluate(()=>G.speed),2,'settings window did not touch the speed');
+    await wait(H,()=>WAR_PAUSE_ON===false);await tap(H,'#modal [data-a="closem"]');await sleep(500);await all(2,'settings window did not touch the speed');
+    assert.deepEqual(await H.evaluate(()=>MP1Host.pause.state().dec.filter(d=>(window.__mine||[]).includes(d.uid))),[],'no decision token from the settings window');
     await H.evaluate(x=>{G._dealAuth=true;try{declareWar(G.emps[x],G.p);}finally{G._dealAuth=false;}},ids[1]);await all(1,'war notice + auto-pause off → 1×');
     uid=await H.evaluate(()=>G.inbox.filter(n=>n.kind==='warstart').at(-1).uid);await hostOpenNote(uid);await tap(H,'#modal [data-a="closem"]');await all(2,'→ 2×');
     await tap(H,'#tools [data-a="save"]');await tap(H,'#modal [data-a="warPauseToggle"]');await wait(H,()=>WAR_PAUSE_ON===true);await tap(H,'#modal [data-a="closem"]');
@@ -218,14 +219,18 @@ let relay,base,bH,bB,bC,H,Bp,Cp;
     await closeAll(Bp);await closeAll(H);
   });
   /* ═══ C. federasyon: GERÇEK kuruluş + karar + oy + hibe; D. vasallık: himaye talebi ═══
-     FİKSTÜR (açıkça): AI 2 ve 4'ün gözlem kaydı (e.aiIntel.systems, motorun biçimi), B–2, B–4, 2–4 ittifakları, savaşlar kapalı,
+     FİKSTÜR (açıkça): AI'ların gözlem kaydı (e.aiIntel.systems, motorun biçimi), B ile motorun kabul ettiği iki AI arasında ittifaklar, savaşlar kapalı,
      kaynak. Kuruluş, önerge, oy ve hibe gerçek STARS düğmelerine gerçek dokunmadır. */
   const FFIX=`(()=>{for(const s of G.sys){s.seen=G.emps.map(e=>e.id);s.surv=G.emps.map(e=>e.id);}for(const e of G.emps){if(e.wild)continue;e.aiIntel=e.aiIntel||{};e.aiIntel.systems=e.aiIntel.systems||{};
       for(const s of G.sys)if(s.owner>=0)e.aiIntel.systems[s.id]={owner:s.owner,defense:sysDefense(s),colonies:s.planets.filter(p=>p.col).length,capital:G.emps[s.owner]&&G.emps[s.owner].home===s.id,day:G.day};}
     for(const a of [2,3,4,5,0])for(const b of [2,3,4,5,0])if(a!==b&&G.emps[a].war[b])makePeace(G.emps[a],G.emps[b]);
-    G.feds=(G.feds||[]).filter(f=>!f.members.some(m=>[2,3,4].includes(m)));for(const [a,b] of [[3,2],[3,4],[2,4]]){G.emps[a].ally[b]=G.emps[b].ally[a]=true;G.emps[a].rel[b]=G.emps[b].rel[a]=80;}
     for(const e of G.emps)if(!e.wild)for(const k of ['etk','ene','min','ala'])e.res[k]=Math.max(e.res[k],3000);
-    for(const id of [0,1,2,3,4,5]){recalcMods(G.emps[id]);G.emps[id]._powAt=-1;}MP1Host.host.publish();const q=canFoundFed(G.emps[3],'bilimsel','equal');return q.ok||JSON.stringify(q.reasons.concat((q.candidates||[]).map(c=>c.id+':'+c.why)));})()`;
+    for(const x of [1,2,4])G.emps[x].rel[3]=G.emps[3].rel[x]=80;G.day+=1;
+    /* kurucu ortaklar motorun kendi kabul kararıyla seçilir (önceki testlerin savaşı AI hafızasında güveni düşürmüş olabilir) */
+    const pick=[1,2,4].filter(x=>!findFed(G.emps[x])&&aiFedWilling(G.emps[x],G.emps[3],'bilimsel').ok).slice(0,2);window.__founders=pick;
+    G.feds=(G.feds||[]).filter(f=>!f.members.some(m=>[3,...pick].includes(m)));for(const a of [3,...pick])for(const b of [3,...pick])if(a!==b)G.emps[a].ally[b]=true;
+    for(const id of [0,1,2,3,4,5]){recalcMods(G.emps[id]);G.emps[id]._powAt=-1;}MP1Host.host.publish();const q=canFoundFed(G.emps[3],'bilimsel','equal');
+    return q.ok?pick:JSON.stringify(q.reasons.concat((q.candidates||[]).map(c=>c.id+':'+c.why)));})()`;
   const openDetails=p=>p.evaluate(()=>{for(const d of document.querySelectorAll('#diploPane details'))d.open=true;});
   /* pencere host'un yanıtıyla yeniden çizilince katlanmış bölümler kapanır: bölümleri açıp yeniden dene */
   async function tapIn(p,sel){let err;for(let i=0;i<6;i++){await openDetails(p);try{const l=p.locator(sel).first();await l.scrollIntoViewIfNeeded({timeout:2000}).catch(()=>{});await l.tap({timeout:3000});return;}catch(e){err=e;await sleep(400);}}throw err;}
@@ -236,13 +241,13 @@ let relay,base,bH,bB,bC,H,Bp,Cp;
       talks:G.emps.filter(x=>x.vassalTalk).map(x=>[x.id,x.vassalTalk.lord,x.vassalTalk.sub,x.vassalTalk.to,x.vassalTalk.status]),modal:!document.getElementById('modal').classList.contains('hidden'),held:MP6Stars.S.stats.held,day:G.day}))));});
     const id=await p.evaluate(pr=>DiplomaticInbox.state().records.find(r=>r.status==='pending'&&new Function('r','return '+pr)(r)).id,pred);
     await tap(p,'[data-a="diplomaticRecord"][data-x="'+id+'"]');await wait(p,sel=>{const b=document.querySelector(sel);return b&&!b.disabled;},ready);}
-  await test('C1 GERÇEK federasyon kuruluşu: B kuruluş penceresinde (uygunluk host motorundan) BİLİMSEL KUR\'a dokunur → host\'ta B + iki bağımsız AI müttefik (2, 4) ile federasyon; başkan B',async()=>{
-    assert.equal(await H.evaluate(FFIX),true,'fixture meets the engine condition');
+  await test('C1 GERÇEK federasyon kuruluşu: B kuruluş penceresinde (uygunluk host motorundan) BİLİMSEL KUR\'a dokunur → host\'ta B + motorun kabul ettiği iki bağımsız AI müttefik ile federasyon; başkan B',async()=>{
+    const founders=await H.evaluate(FFIX);assert(Array.isArray(founders)&&founders.length===2,'fixture meets the engine condition: '+founders);metrics.fed={founders};
     await fedPane(Bp);await wait(Bp,()=>document.querySelector('#diploPane [data-a="foundFed"][data-x="bilimsel:equal"]:not([disabled])'),undefined,20000);
     await shot(Bp,'c1-b-found-window');await tapIn(Bp,'#diploPane [data-a="foundFed"][data-x="bilimsel:equal"]');
     await wait(H,()=>(G.feds||[]).some(f=>f.founder===3||f.leader===3));
-    const f=await H.evaluate(()=>{const f=G.feds.find(f=>f.leader===3);return {id:f.id,m:f.members.slice().sort(),leader:f.leader,ballot:fedCharter(f).ballot,type:f.type};});
-    assert.deepEqual(f.m,[2,3,4]);assert.equal(f.leader,3);assert.equal(f.type,'bilimsel');metrics.fed={founded:f};
+    const f=await H.evaluate(()=>{const f=G.feds.find(f=>f.leader===3);return {id:f.id,m:f.members.slice().sort((a,b)=>a-b),leader:f.leader,ballot:fedCharter(f).ballot,type:f.type};});
+    assert.deepEqual(f.m,[3,...founders].sort((a,b)=>a-b));assert.equal(f.leader,3);assert.equal(f.type,'bilimsel');metrics.fed.founded=f;
   });
   await test('C2 anayasa önergesi + oy: B YÖNETİM sekmesinde "oy rejimi" önergesine dokunur; B\'nin oyu otomatik DEĞİL (AI üyeler kendi değerlendirmesiyle); B gerçek gelen kutusundan EVET; sonuç federasyonun kuralıyla (≥%75)',async()=>{
     await fedPane(Bp,'manage');const x=await Bp.evaluate(()=>{const b=[...document.querySelectorAll('#diploPane [data-a="fedMotion"]')].find(b=>!b.disabled&&/^charter:ballot:/.test(b.dataset.x));return b&&b.dataset.x;});

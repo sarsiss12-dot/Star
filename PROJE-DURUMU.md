@@ -1,19 +1,29 @@
 # STARS — Güncel proje durumu
 
-Son güncelleme: 2026-10-30. Depo `sarsiss12-dot/Star`.
+Son güncelleme: 2026-11-01. Depo `sarsiss12-dot/Star`.
 
 ## Oynanabilir sürüm
 
 | | `main` (birleşmiş) | Bu dal (PR) |
 |---|---|---|
-| Faz | 96H.10 + MP.0 – MP.4 (+ 96H.11 araştırma arşivi) | MP.5 (PR #17) + MP.6 (PR #18) + MP.6.1 (PR #19) + MP.6.2 (savaş/diplomasi/federasyon/vasallık gerçek pencerelerden) — hepsi açık |
+| Faz | 96H.10 + MP.0 – MP.4 (+ 96H.11 araştırma arşivi) | MP.5 (PR #17) + MP.6 (PR #18) + MP.6.1 (PR #19) + MP.6.2 (PR #20) + MP.6.3 (akıllı duraklatma, ortak savaş paylaşımı, federasyon/vasallık kararları, statüko kalıcılığı) — hepsi açık |
 | Build / PWA | `96h10` / `stars-v96h10` | değişmedi |
 | Save | v8 | v8 (şema değişmedi) |
 | Oyun ZIP | `releases/stars-faz96h10.zip` (SHA-256 `78e76d1627b8ec1b990849b2242835f78667f110e1d6f17021760183ee7be6d0`) | yeni ZIP yok |
 | Taban HEAD | `4296ad2d43fedce6264020b3761f50f1839fd836` | — |
 | Değişen runtime | — | yok (19 dosya 96H.10 ile aynı) |
 
-96H.6.2, 96H.6.3, 96H.7, 96H.11 ve MP.0 – MP.6.2 oyun yayımlamadı.
+96H.6.2, 96H.6.3, 96H.7, 96H.11 ve MP.0 – MP.6.3 oyun yayımlamadı.
+
+## MP.6.3 — akıllı duraklatma, ortak savaş paylaşımı, federasyon/vasallık kararları (geliştirme sürümü)
+
+Ayrıntı: `MULTIPLAYER-MP63-SONUC.md`. Testler: `tests/mp63_*_test.js`, `tests/browser-mp63.cjs`, `tests/browser-mp4.cjs` (statüko adımı).
+
+- **Akıllı duraklatma:** host'un sıradan penceresi ortak hızı değiştirmez. Karar penceresi 1×'e yavaşlatır ya da duraklatır (savaş: `WAR_PAUSE_ON`; öteki: host MP ayarı). Manuel duraklatma önceliklidir; arka plan/ağ güvenli duraklatması nedenlerle; eski modal hızı yeniden bağlanmada uygulanmaz.
+- **Ortak savaş paylaşımı:** uzak insanlar gerçek STARS penceresinden taslak/oy/uygula. Motor uzak insan adına oy yazıyordu (`settlementSubmit`) — düzeltildi.
+- **Federasyon:** gerçek kuruluş (fikstür: AI gözlem kaydı), ihraç/reform/anayasa/başkan/ortak savaş önergeleri, karar uygulama, hibe.
+- **Vasallık:** himaye, yenileme (24 ay), barışçıl bağımsızlık (12 ay soğuma), bağımsızlık desteği — süreler motorun.
+- **Statüko teklifleri** kayıt/yükleme sonrası sürer (MP.4 paketinde isteğe bağlı alan; eski kayıtlar aynen yüklenir).
 
 ## MP.6.2 — savaş ve diplomasi entegrasyonu (geliştirme sürümü)
 
