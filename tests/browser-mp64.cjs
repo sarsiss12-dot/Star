@@ -131,9 +131,14 @@ let relay,base,bH,bB,bC,bA,H,Bp,Cp,Ap;
      (motorun dealQuote gerekçesi), bu yüzden C ortak olamaz. ═══ */
   await test('paylaşım RET ve GERİ ÇEKME: B önerir (gerçek pencere) → B geri çeker (gerçek "Teklifi geri çek") → yeni taslak → A (ortak) gerçek "Reddet" → teklif reddedildi; devir yok',async()=>{
     const camp=await H.evaluate(([b,c])=>{for(const id of [0,2,3,4,5])for(const o of [0,1,2,3,4,5])G.emps[id].war[o]=G.emps[o].war[id]=false;
-      const P=G.emps[b],T=G.emps[2],Q=G.emps[c];G._dealAuth=true;try{declareWar(P,T);}finally{G._dealAuth=false;}executeDeal({from:c,to:b,give:[{t:'warOn',target:2}],want:[]});
+      const P=G.emps[b],T=G.emps[2];G._dealAuth=true;try{declareWar(P,T);}finally{G._dealAuth=false;}
+      /* ortak: motorun warOn anlaşmasını kabul ettiği ilk insan (önceki testler doktrin/koruma durumunu değiştirebilir) */
+      const why={};const pick=[c,5].find(x=>{const q=dealQuote({from:x,to:b,give:[{t:'warOn',target:2}],want:[]});why[x]=q.ok?'ok':(q.reasons||[]).join(';');return q.ok&&executeDeal({from:x,to:b,give:[{t:'warOn',target:2}],want:[]})&&G.emps[x].war[2];});
+      if(pick===undefined)return {err:why};c=pick;const Q=G.emps[c];window.__partner=c;
       const land=G.sys.filter(s=>!s.planets.some(p=>p.col)&&s.owner!==b&&s.owner!==c).slice(0,3);land.forEach((s,i)=>{s.owner=2;captureSystem(s,[b,c,c][i]);});
       window.__land=land.map(s=>s.id);const k=warLedgerFind(b,2).campaign;makePeace(P,T);if(Q.war[2])makePeace(Q,T);G.inbox=G.inbox.filter(n=>n.kind!=='warstart');UI.drawInbox();MP1Host.host.publish();return k;},[B,A]);
+    assert(Number.isInteger(camp),'fixture: a human partner joined by the engine '+JSON.stringify(camp));
+    const partner=await H.evaluate(()=>window.__partner),Pp=partner===A?Ap:Cp;metrics.notes.push('paylaşım ortağı: '+partner);
     const open=async p=>{await closeAll(p);await synced(p);await p.evaluate(()=>UI.openDiplo());await wait(p,()=>document.querySelector('#diploPane [data-a="shareOpen"]')).catch(async e=>{
         throw Error('shareOpen: '+JSON.stringify({guest:await p.evaluate(()=>MP1Join.game.view.settle),host:await H.evaluate(([b,k])=>settlementContext(G.emps[b],k).why||'ok',[B,camp])}));});await tap(p,'#diploPane [data-a="shareOpen"]');};
     await open(Bp);await wait(Bp,()=>document.querySelector('#modal [data-a="shareSend"]:not([disabled])'));await tap(Bp,'#modal [data-a="shareSend"]');
@@ -144,11 +149,11 @@ let relay,base,bH,bB,bC,bA,H,Bp,Cp,Ap;
     await wait(Bp,()=>document.querySelector('#modal [data-a="shareSend"]:not([disabled])'));await tap(Bp,'#modal [data-a="shareSend"]');
     await hostWait(k=>{const o=G.settlements.offers.filter(o=>o.campaign===k).at(-1);return o.state==='pending'&&o.proposer===3;},camp,'settleSubmit2');
     const own0=await H.evaluate(()=>window.__land.map(id=>G.sys[id].owner));
-    await open(Ap);await wait(Ap,()=>document.querySelector('#modal [data-a="shareNo"]'));await shot(Ap,'p1-a-reject');await tap(Ap,'#modal [data-a="shareNo"]');
+    await open(Pp);await wait(Pp,()=>document.querySelector('#modal [data-a="shareNo"]'));await shot(Pp,'p1-partner-reject');await tap(Pp,'#modal [data-a="shareNo"]');
     await hostWait(k=>G.settlements.offers.filter(o=>o.campaign===k).at(-1).state==='rejected',camp,'settleReject');
     assert.deepEqual(await H.evaluate(()=>window.__land.map(id=>G.sys[id].owner)),own0,'rejected: no transfer');
-    assert.equal(await H.evaluate(([k,c])=>G.settlements.offers.filter(o=>o.campaign===k).at(-1).votes.find(v=>v.by===c).yes,[camp,A]),false,'A\'s own NO');
-    await closeAll(Bp);await closeAll(Ap);
+    assert.equal(await H.evaluate(([k,c])=>G.settlements.offers.filter(o=>o.campaign===k).at(-1).votes.find(v=>v.by===c).yes,[camp,partner]),false,'partner\'s own NO');
+    await closeAll(Bp);await closeAll(Pp);
   });
 
   await test('vasallık: sözleşme yenileme (B öneri, C kabul), bağımsızlık desteği (A gerçek düğme) ve barışçıl bağımsızlık (C gerçek pencere, B gelen kutusundan KABUL); C, B\'nin vasalı (fikstür: motorla kurulan sözleşme, tarihleri 25 ay geriye; 12 ay soğuma için ayrıca 13 ay)',async()=>{
@@ -209,8 +214,12 @@ let relay,base,bH,bB,bC,bA,H,Bp,Cp,Ap;
     await H.evaluate(f=>{fedOf(f).requestAfter={};MP1Host.host.publish();},fid);
     v=await motion('members','elect:'+loc(A,2),'elect');assert.equal(v.motion,'elect');metrics.notes.push('başkan: '+await H.evaluate(f=>fedOf(f).leader,fid));
     /* ortak savaş: üye AI 2, dış devlet 5 (C) ile savaşta; A desteği önerir */
-    await H.evaluate(f=>{fedOf(f).requestAfter={};warAuthorize(G.emps[2],G.emps[5],{n:'test'});declareWar(G.emps[2],G.emps[5]);warAuthClear();G.inbox=G.inbox.filter(n=>n.kind!=='warstart');UI.drawInbox();MP1Host.host.publish();},fid);
-    v=await motion('military','joinWar:'+loc(A,C)+':'+loc(A,2),'joinWar');assert.equal(v.motion,'joinWar');
+    /* dış hedef: motorun savaş ilanına izin verdiği ilk dış devlet (C bağımsızlık korumasında olabilir; host 0) */
+    const X=await H.evaluate(f=>{fedOf(f).requestAfter={};let x=null;for(const t of [5,0]){if(fedOf(f).members.includes(t))continue;if(!G.emps[2].war[t]){warAuthorize(G.emps[2],G.emps[t],{n:'test'});declareWar(G.emps[2],G.emps[t]);warAuthClear();}if(G.emps[2].war[t]){x=t;break;}}
+      G.inbox=G.inbox.filter(n=>n.kind!=='warstart');UI.drawInbox();MP1Host.host.publish();return x;},fid);
+    assert(X!==null,'fixture: member 2 at war with an outsider');metrics.notes.push('ortak savaş hedefi: '+X);
+    await synced(Ap);await wait(Ap,([x,s])=>!!(G.emps[s]&&G.emps[s].war&&G.emps[s].war[x]),[loc(A,X),loc(A,2)]);
+    v=await motion('military','joinWar:'+loc(A,X)+':'+loc(A,2),'joinWar');assert.equal(v.motion,'joinWar');
     const d=await H.evaluate(f=>Object.values(fedOf(f).decisions||{}).find(d=>d.kind==='joinWar'&&d.state==='ready')||null,fid);
     if(!d){metrics.notes.push('ortak savaş önergesi motor oylamasında kabul edilmedi');return;}
     await closeAll(Ap);await synced(Ap);await Ap.evaluate(()=>UI.openFed());await tapIn(Ap,'#diploPane [data-a="fedTab"][data-x="military"]');
