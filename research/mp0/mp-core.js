@@ -206,7 +206,10 @@ function createHost(opts){
   function humanEmpire(e){return !!e&&S.slots.has(e.id);}
   function remoteHuman(e){return isHumanActor(e)&&e.id!==hostEmpireId;}
   /* ---------- MP.1 lobi durumu (opts.lobby verilmezse MP.0 davranışı) ---------- */
-  const L=opts.lobby?{phase:'created',capacity:2,settings:null,galaxyRev:0,banned:new Set(),seatNext:1,rev:0,starts:0}:null;
+  const L=opts.lobby?{phase:'created',capacity:2,settings:null,galaxyRev:0,banned:new Set(),seatNext:1,rev:0,starts:0,
+    /* MP.7: 'design' — her oyuncu kendi devletini tek oyunculu kurulum ekranında tasarlar, galaksi OYUN BAŞLARKEN bu taslaklarla
+       kurulur (setupGame cfg.humans). 'claim' — MP.1 davranışı (galaksideki AI devletini devralma; eski testler/araçlar). */
+    mode:opts.lobby.design?'design':'claim'}:null;
   if(L){const h=S.players.get('host');h.seat=0;h.ready=true;h.tab='lobi';h.claim=hostEmpireId;h.color=PALETTE[0];}
 
   /* ---------- filtreli görünüm (yalnız okuma) ---------- */
@@ -1142,13 +1145,25 @@ function createHost(opts){
       if(typeof m.tab!=='string'||!TABS.includes(m.tab))return lres(conn,'presence',false,'bad-tab');
       if(p.tab!==m.tab){p.tab=m.tab;broadcastLobby();}},
     claim(conn,m){const p=lobbyActor(conn,m,['v','type','empire'],'claim');if(!p)return;
+      if(L.mode==='design')return lres(conn,'claim',false,'mode');
       if(!['waiting','ready'].includes(L.phase))return lres(conn,'claim',false,'phase');
       const r=setClaim(p,m.empire);lres(conn,'claim',r.ok,r.why);},
     ready(conn,m){const p=lobbyActor(conn,m,['v','type','value'],'ready');if(!p)return;
       if(typeof m.value!=='boolean')return lres(conn,'ready',false,'bad-value');
       if(!['waiting','ready'].includes(L.phase))return lres(conn,'ready',false,'phase');
-      if(m.value&&p.claim===null)return lres(conn,'ready',false,'no-claim');
+      if(m.value&&L.mode==='design'&&!p.draft)return lres(conn,'ready',false,'no-draft');
+      if(m.value&&L.mode!=='design'&&p.claim===null)return lres(conn,'ready',false,'no-claim');
       const changed=p.ready!==m.value;p.ready=m.value;lres(conn,'ready',true,null);if(changed)broadcastLobby();},
+    /* MP.7: oyuncunun KENDİ devlet taslağı (kimlik bağlantıdan; başka oyuncunun taslağına yol yok). rev artan sayı: eski/yeniden
+       gönderilen taslak yenisini ezmez. Kurallar motorun kendi normalleştiricileri (draftCheck); değişen taslak hazırı sıfırlar. */
+    draft(conn,m){const p=lobbyActor(conn,m,['v','type','rev','draft'],'draft');if(!p)return;
+      if(L.mode!=='design')return lres(conn,'draft',false,'mode');
+      if(!['waiting','ready'].includes(L.phase))return lres(conn,'draft',false,'phase');
+      if(!int(m.rev,1,2147483647))return lres(conn,'draft',false,'bad-rev');
+      if(m.rev<=(p.draftRev||0))return lres(conn,'draft',false,'stale');
+      const c=draftCheck(m.draft);if(!c.ok)return lres(conn,'draft',false,'draft:'+c.why);
+      const same=p.draft&&canon(p.draft)===canon(c.draft);p.draft=c.draft;p.draftRev=m.rev;
+      if(!same&&p.ready)p.ready=false;lres(conn,'draft',true,null);broadcastLobby();},
     leave(conn,m){const p=lobbyActor(conn,m,['v','type'],'leave');if(!p)return;
       if(['starting','ingame','paused'].includes(L.phase)||L.phase==='resume'&&!p.visitor)return lres(conn,'leave',false,'phase');
       S.players.delete(p.playerId);S.conns.delete(conn);lres(conn,'leave',true,null);kick(conn,'left');broadcastLobby();}
@@ -1178,22 +1193,69 @@ function createHost(opts){
     if(!['waiting','ready'].includes(L.phase))return {ok:false,why:L.phase==='created'?'no-galaxy':'already-started'};
     const gs=guests();
     if(!gs.length)return {ok:false,why:'no-guests'};
+    if(L.mode==='design'){
+      if(!L.settings)return {ok:false,why:'no-galaxy'};
+      if(L.settings.aiCount+gs.length>11)return {ok:false,why:'too-many-states'};
+      if(!hostDraftNow().ok)return {ok:false,why:'host-draft'};
+      for(const p of gs){if(!p.conn)return {ok:false,why:'guest-offline'};if(!p.draft)return {ok:false,why:'guest-no-draft'};if(!p.ready)return {ok:false,why:'guest-not-ready'};}
+      return {ok:true};
+    }
     for(const p of gs){if(!p.conn)return {ok:false,why:'guest-offline'};if(p.claim===null)return {ok:false,why:'guest-no-empire'};if(!p.ready)return {ok:false,why:'guest-not-ready'};if(!claimable(p.claim))return {ok:false,why:'not-claimable'};}
     return {ok:true};
   }
   function empireCard(e){return {id:e.id,n:e.name,race:RACES[e.race]?RACES[e.race].n:e.race,doc:PERSONAS[e._pers||e.mizac]?PERSONAS[e._pers||e.mizac].n:null,col:e.col};}
   function prepCard(e){return {doktrin:PERSONAS[e._pers||e.mizac]?.n||null,gorunus:LOOKS[e.look]?.n||null,fizyoloji:PHYSIO[e.physio]?.n||null,etik:{...e.ethics},
     civic:(e.civics||[]).map(c=>CIVICS[c]?.n||c),koken:ORIGINS[e.origin]?.n||null,irk:RACES[e.race]?.n||null};}
+  /* ---------- MP.7: devlet taslağı doğrulaması ----------
+     Beyaz liste + tür denetimi; kuralların kendisi motorun: normalizeNewEthics (bütçe/sınır), normalizeNewCivics (yuva, radikal,
+     uyumsuzluk), normalizeNewTraits (bütçe, çakışma, işe yararlık), originCompatible. Motor taslakta herhangi bir seçimi
+     değiştirecekse taslak geçersizdir (sessiz düzeltme yok: oyuncu gördüğüyle başlar). Kopya kural yazılmaz. */
+  const DRAFT_KEYS=['name','race','mizac','physio','look','portraitVariant','color','ethics','civics','traits','origin','sigil','monoRes','emblem'];
+  const EMBLEM_KEYS=['shape','symbol','pattern','primary','secondary'];
+  function draftCheck(d){
+    if(!plain(d)||!onlyKeys(d,DRAFT_KEYS))return {ok:false,why:'keys'};
+    const str=(v,n)=>typeof v==='string'&&v.length>0&&v.length<=n;
+    if(!str(d.name,40))return {ok:false,why:'name'};
+    const name=d.name.replace(/[\u0000-\u001f<>]/g,'').trim().slice(0,40);if(!name)return {ok:false,why:'name'};
+    if(!str(d.race,24)||!has(RACES,d.race))return {ok:false,why:'race'};
+    if(!str(d.mizac,24)||typeof PERSONAS==='undefined'||!has(PERSONAS,d.mizac))return {ok:false,why:'mizac'};
+    if(!str(d.physio,24)||!has(PHYSIO,d.physio))return {ok:false,why:'physio'};
+    if(!str(d.look,24)||!has(LOOKS,d.look))return {ok:false,why:'look'};
+    if(!str(d.origin,24)||!has(ORIGINS,d.origin))return {ok:false,why:'origin'};
+    if(!str(d.sigil,24)||!has(SIGILS,d.sigil))return {ok:false,why:'sigil'};
+    if(d.monoRes!==undefined&&d.monoRes!==null&&!['min','ene','yiy'].includes(d.monoRes))return {ok:false,why:'monoRes'};
+    if(d.portraitVariant!==undefined&&!int(d.portraitVariant,0,255))return {ok:false,why:'portraitVariant'};
+    if(d.color!==undefined&&d.color!==null&&!(typeof d.color==='string'&&/^#[0-9a-fA-F]{6}$/.test(d.color)))return {ok:false,why:'color'};
+    if(d.emblem!==undefined&&d.emblem!==null&&(!plain(d.emblem)||!onlyKeys(d.emblem,EMBLEM_KEYS)||Object.values(d.emblem).some(v=>!str(v,24))))return {ok:false,why:'emblem'};
+    if(!plain(d.ethics)||!onlyKeys(d.ethics,Object.keys(ETHICS))||Object.values(d.ethics).some(v=>!Number.isInteger(v)))return {ok:false,why:'ethics'};
+    if(!Array.isArray(d.civics)||d.civics.length>6||d.civics.some(k=>!str(k,24)))return {ok:false,why:'civics'};
+    if(!Array.isArray(d.traits)||d.traits.length>8||d.traits.some(k=>!str(k,24)))return {ok:false,why:'traits'};
+    const ethics=normalizeNewEthics(d.ethics);
+    if(Object.keys(ETHICS).some(k=>(d.ethics[k]||0)!==ethics[k]))return {ok:false,why:'ethics'};
+    const id={race:d.race,physio:d.physio,mizac:d.mizac,_pers:d.mizac,ethics,civics:[],origin:d.origin,look:d.look};
+    const civics=normalizeNewCivics(d.civics,id);if(civics.length!==d.civics.length||civics.some((k,i)=>k!==d.civics[i]))return {ok:false,why:'civics'};
+    id.civics=civics;
+    const traits=normalizeNewTraits(d.traits,id);if(traits.length!==new Set(d.traits).size||d.traits.length!==traits.length||d.traits.some(k=>!traits.includes(k)))return {ok:false,why:'traits'};
+    if(!originCompatible(id,d.origin))return {ok:false,why:'origin'};
+    const out={name,race:d.race,mizac:d.mizac,physio:d.physio,look:d.look,origin:d.origin,sigil:d.sigil,ethics,civics,traits:[...d.traits],
+      monoRes:d.monoRes||'min',portraitVariant:d.portraitVariant|0,color:d.color||null,...(d.emblem?{emblem:{...d.emblem}}:{})};
+    return {ok:true,draft:out};
+  }
+  /* host'un taslağı host sayfasının kurulum durumundan (tek oyunculu CFG) gelir; aynı denetimden geçer */
+  function hostDraftNow(){const d=opts.lobby&&opts.lobby.hostDraft?opts.lobby.hostDraft():null;return d?draftCheck(d):{ok:false,why:'none'};}
+  function draftCard(d){return d?{n:d.name,race:RACES[d.race]?.n||d.race,doc:PERSONAS[d.mizac]?.n||null,org:ORIGINS[d.origin]?.n||null,ph:PHYSIO[d.physio]?.n||null,col:d.color||null}:null;}
   function lobbyView(viewer){
     const gs=[...S.players.values()].sort((a,b)=>a.seat-b.seat);
     /* Oyun başlayınca AI devlet listesi gitmez (temas kurulmamış devletler gizli); yalnız insanların devletleri kalır. */
     const started=['starting','ingame','paused','resume'].includes(L.phase);
-    const empires=L.galaxyRev?G.emps.filter(e=>e.id!==hostEmpireId&&!e.wild&&!e.crisisSide&&!e.dead).map(e=>({...empireCard(e),seat:(gs.find(p=>p.playerId!=='host'&&(p.claim===e.id||p.empireId===e.id))||{}).seat??null})).filter(e=>!started||e.seat!==null):[];
+    const empires=L.galaxyRev&&(L.mode!=='design'||started)&&G.emps?G.emps.filter(e=>e.id!==hostEmpireId&&!e.wild&&!e.crisisSide&&!e.dead).map(e=>({...empireCard(e),seat:(gs.find(p=>p.playerId!=='host'&&(p.claim===e.id||p.empireId===e.id))||{}).seat??null})).filter(e=>!started||e.seat!==null):[];
     /* Tohum yalnız host'ta: tohum + açık motor kodu tüm galaksiyi (konumlar, AI devletleri) yeniden kurdurur. */
     const settings=L.settings&&(viewer&&viewer.playerId==='host'?L.settings:{size:L.settings.size,aiCount:L.settings.aiCount,...(L.settings.shape!==undefined?{shape:L.settings.shape}:{})});
     const mine=viewer&&viewer.claim!==null&&G.emps&&G.emps[viewer.claim]?{empire:viewer.claim,...prepCard(G.emps[viewer.claim])}:null;
-    return {v:PROTOCOL,type:'lobby',rev:L.rev,phase:phaseNow(),pause:L.pause||null,capacity:L.capacity,settings,galaxyRev:L.galaxyRev,
-      you:viewer?{seat:viewer.seat}:null,canStart:canStart().ok,
+    const design=L.mode==='design',hd=design?hostDraftNow():null;
+    return {v:PROTOCOL,type:'lobby',rev:L.rev,mode:L.mode,phase:phaseNow(),pause:L.pause||null,capacity:L.capacity,settings,galaxyRev:L.galaxyRev,
+      you:viewer?{seat:viewer.seat,...(design?{draftRev:viewer.draftRev||0,draft:!!viewer.draft}:{})}:null,canStart:canStart().ok,
+      ...(design?{designs:gs.map(p=>({seat:p.seat,card:p.playerId==='host'?(hd.ok?draftCard(hd.draft):null):draftCard(p.draft)}))}:{}),
       players:gs.map(p=>({seat:p.seat,name:p.name,color:p.color,host:p.playerId==='host',online:p.playerId==='host'||!!p.conn,claim:p.empireId!==null?p.empireId:p.claim,ready:!!p.ready,tab:p.tab,...(p.visitor?{visitor:1}:{})})),
       empires,mine,...(L.resume?{resume:{name:L.resume.name,year:L.resume.year,month:L.resume.month,size:L.resume.size,you:viewer&&viewer.empireId!==null&&G.emps[viewer.empireId]?G.emps[viewer.empireId].name:null}}:{})};
   }
@@ -1376,6 +1438,13 @@ function createHost(opts){
     if(!['created','waiting','ready'].includes(L.phase))return {ok:false,why:'phase'};
     if(!plain(set)||!onlyKeys(set,SETTINGS_KEYS))return {ok:false,why:'bad-settings'};
     if(!has(SIZES,set.size)||(set.shape!==undefined&&!has(SHAPES,set.shape))||!int(set.aiCount,1,11)||!int(set.seed,1,2147483647))return {ok:false,why:'bad-settings'};
+    if(L.mode==='design'){
+      /* MP.7: galaksi OYUN BAŞLARKEN taslaklarla kurulur; burada yalnız ayar doğrulanır. AI + insan ≤ 11 (motorun sınırı). */
+      if(set.aiCount+(L.capacity-1)>11)return {ok:false,why:'too-many-states'};
+      L.settings={...set};L.galaxyRev++;L.phase='waiting';
+      for(const p of guests()){if(p.draft&&!draftCheck(p.draft).ok)p.draft=null;p.ready=false;}   // ayar değişti: hazırlar sıfır, taslaklar yeniden denetlenir
+      broadcastLobby();return {ok:true};
+    }
     if(set.aiCount<L.capacity-1)return {ok:false,why:'ai-below-capacity'};
     const r=opts.lobby.generate({...set});if(!r||!r.ok)return {ok:false,why:'generate'};
     L.settings={...set};L.galaxyRev++;L.phase='waiting';
@@ -1386,7 +1455,8 @@ function createHost(opts){
     if(!L||!['created','waiting','ready'].includes(L.phase))return {ok:false,why:'phase'};
     if(!int(n,2,4))return {ok:false,why:'bad-capacity'};
     if(guests().length>n-1)return {ok:false,why:'too-many'};
-    if(L.settings&&L.settings.aiCount<n-1)return {ok:false,why:'ai-below-capacity'};
+    if(L.mode==='design'){if(L.settings&&L.settings.aiCount+n-1>11)return {ok:false,why:'too-many-states'};}
+    else if(L.settings&&L.settings.aiCount<n-1)return {ok:false,why:'ai-below-capacity'};
     L.capacity=n;broadcastLobby();return {ok:true};
   }
   function claimFor(pid,empire){const p=S.players.get(pid);if(!L||!p||pid==='host')return {ok:false,why:'player'};
@@ -1395,6 +1465,17 @@ function createHost(opts){
   function start(){
     const c=canStart();if(!c.ok){if(L&&c.why==='already-started')L.starts++;return c;}
     L.phase='starting';L.starts++;
+    if(L.mode==='design'){
+      /* MP.7: bütün taslaklar son kez motorun kurallarıyla denetlenir; galaksi host'un ayarları + host taslağı (CFG) + misafir
+         taslaklarıyla (koltuk sırasıyla id 1..k) gerçek setupGame'le kurulur. Başarısızlıkta lobiye dönülür, dünya değişmez sayılır. */
+      const gs=guests().sort((a,b)=>a.seat-b.seat),drafts=[];
+      for(const p of gs){const c=draftCheck(p.draft);if(!c.ok){p.draft=null;p.ready=false;L.phase='waiting';broadcastLobby();return {ok:false,why:'guest-draft'};}drafts.push(c.draft);}
+      const hd=hostDraftNow();if(!hd.ok){L.phase='waiting';broadcastLobby();return {ok:false,why:'host-draft'};}
+      let r;try{r=opts.lobby.generate({...L.settings,aiCount:L.settings.aiCount+drafts.length,humans:drafts,host:hd.draft});}catch(e){r={ok:false,why:String(e&&e.message||e)};}
+      if(!r||!r.ok){L.phase='waiting';broadcastLobby();return {ok:false,why:'generate',detail:r&&r.why};}
+      for(let i=0;i<gs.length;i++){const a=assign(gs[i].playerId,i+1);if(!a.ok){L.phase='waiting';broadcastLobby();return {ok:false,why:'assign:'+a.why};}}
+      observeHumans();L.phase='ingame';broadcastLobby();publish();return {ok:true};
+    }
     const done=[];
     for(const p of guests()){const r=assign(p.playerId,p.claim);if(!r.ok){for(const d of done)release(d,true);L.phase='waiting';broadcastLobby();return {ok:false,why:'assign:'+r.why};}done.push(p.claim);}
     observeHumans();
@@ -1413,7 +1494,7 @@ function createHost(opts){
   return {newsOf,onMessage,onLeave,onJoin(){},publish,publishTo,speedSync,assign,release,installGuards,meta,restore,viewFor,local,dip:D,dipView,polView:e=>pure(()=>polView(e)),
     snapshot,resumeStart,recoverSeat,
     isHuman:humanEmpire,isRemoteHuman:remoteHuman,state:S,stats,COMMANDS,HANDLERS,clock,fnv,observeHumans,
-    configure,setCapacity,claimFor,setHostTab,start,canStart,kick:kickPlayer,close:closeRoom,lobbyView:()=>L&&lobbyView(S.players.get('host')),lobby:L,
+    configure,setCapacity,claimFor,setHostTab,start,canStart,draftCheck,kick:kickPlayer,close:closeRoom,lobbyView:()=>L&&lobbyView(S.players.get('host')),lobby:L,
     /* MP.1.1: duraklatma nedeni (host-offline / host-background) misafire lobide 'pause' olarak gider; MP.0 çağrısı nedensiz kalır. */
     setPaused(v,why){S.paused=!!v;if(L&&['ingame','paused'].includes(L.phase)){const ph=v?'paused':'ingame',pw=v?(why||'host'):null;if(L.phase!==ph||L.pause!==pw){L.phase=ph;L.pause=pw;broadcastLobby();}}}};
 }
