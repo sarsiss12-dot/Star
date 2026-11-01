@@ -103,6 +103,51 @@ let relay,px,base,tls,bH,bB,bC,H,Bp,Cp,code,link;
     await wait(Bp,t=>G.p.research.targets.includes(t),tech);await shot(Bp,'a5-b-research');
   });
 
+  /* ---------- B: üç oyuncu, ayrı oda (host + B + C) ---------- */
+  let H2,link2;
+  await test('B1 ikinci oda (kapasite 3): B yeniden katılır (cihazdaki taslağı kurulum ekranına geri gelir), C 412×915 telefondan farklı bir devlet tasarlar; ikisi de hazır',async()=>{
+    H2=await (await bH.newContext(PHONE(390,844))).newPage();H2.on('pageerror',e=>errors.push('host2: '+e.message));
+    await H2.goto(base+'/');await wait(H2,()=>typeof setupGame==='function'&&document.getElementById('mp1Btn')&&window.MP7Setup);
+    await tap(H2,'#mp1Btn');await tap(H2,'[data-m="create"]');await wait(H2,()=>MP1Host.lobby&&MP1Host.lobby.mode==='design'&&MP1Host.lobby.phase==='waiting');
+    await H2.selectOption('#mp7Cap','3');await wait(H2,()=>MP1Host.lobby.capacity===3);link2=await H2.textContent('#mp1Link');
+    for(const [p,name] of [[Bp,'Bora'],[Cp,'Cem']]){await p.goto(link2);await wait(p,()=>window.MP1Join&&document.getElementById('jName'));await p.fill('#jName',name);await tap(p,'[data-j="go"]');
+      await wait(p,()=>MP1Join.screen==='lobby'&&MP1Join.lobby&&MP1Join.lobby.mode==='design'&&document.getElementById('jEditMe'));}
+    await tap(Bp,'#jEditMe');await wait(Bp,()=>document.getElementById('mp7Head'));
+    assert.deepEqual(await Bp.evaluate(()=>[CFG.name,CFG.mizac,CFG.origin]),['Saf Akıl Ağı','teknokrasi','son_umut'],'device keeps the previous design');
+    await tap(Bp,'#setup [data-a="start"]');await wait(Bp,()=>document.getElementById('menu').classList.contains('hidden'));
+    await tap(Cp,'#jEditMe');await wait(Cp,()=>document.getElementById('mp7Head'));
+    await design(Cp,{name:'Okyanus Ticaret Birliği',mizac:'tuccar',look:'akuatik',physio:'aquatic',ethics:['aut:-1','mat:1'],civics:['maden_lonca'],origin:'gocebe',shot:'b1-c-setup'});
+    for(const p of [Bp,Cp]){await wait(p,()=>/kaydedildi/.test(document.getElementById('jDraft').textContent));await tap(p,'#jReady');}
+    await wait(H2,()=>MP1Host.host.canStart().ok);await shot(H2,'b1-host-lobby');await shot(Cp,'b1-c-lobby');
+  });
+  await test('B2 başlangıçta aksilikler: host\'un B\'ye tam aynası ilk 6 sn, ayna farkları 12 sn kaybolur (fark yok → yeniden eşitleme tetiklenemez; yalnız bekçi kurtarır), C\'nin ağı başlangıç anında 3 sn kopar; B başlangıç bekçisiyle aynayı yeniden ister, C aynı devletine döner; ikisi de sonsuz beklemeden haritaya geçer',async()=>{
+    const bConn=await H2.evaluate(n=>{for(const p of MP1Host.host.state.players.values())if(p.name===n)return [...MP1Host.host.state.conns.entries()].find(([,pid])=>pid===p.playerId)[0];},'Bora');
+    /* başlangıçtan sonraki 6 sn boyunca B'ye giden BÜTÜN ayna ve ayna farkı iletileri kaybolur: fark gelmediği için tam yeniden eşitleme
+       tetiklenemez; yalnız başlangıç bekçisi (8 sn sonra ui:stars yeniden) kurtarabilir */
+    await H2.evaluate(c=>{const ws=MP1Host.ws,s0=ws.send.bind(ws);window.__dropped=0;window.__t0=0;ws.send=t=>{
+      if(typeof t==='string'&&t.startsWith('T'+c+'\n')){const full=t.includes('"type":"mirror"'),delta=t.includes('"type":"mirrorDelta"');
+        if((full||delta)&&!window.__t0)window.__t0=Date.now();const age=Date.now()-window.__t0;
+        if(full&&age<6000||delta&&age<12000){window.__dropped++;return;}}return s0(t);};},bConn);
+    const t0=Date.now();await tap(H2,'[data-m="start"]');await Cp.context().setOffline(true);await Cp.waitForTimeout(3000);await Cp.context().setOffline(false);
+    await wait(Cp,()=>window.MP6Stars&&MP6Stars.S.started,undefined,60000);metrics.cStartMs=Date.now()-t0;
+    await wait(Bp,()=>window.MP6Stars&&MP6Stars.S.started,undefined,60000);metrics.bStartMs=Date.now()-t0;
+    metrics.droppedToB=await H2.evaluate(()=>window.__dropped);assert(metrics.droppedToB>=1,'mirror traffic to B was really dropped');
+    const bl=await Bp.evaluate(()=>({log:MP6Stars.S.boot.log.map(x=>x.what),resyncs:MP6Stars.S.stats.resyncs}));metrics.bBoot=bl;
+    assert(bl.log.includes('ask-mirror'),'B start watchdog re-requested the mirror: '+JSON.stringify(bl));
+    const c=await Cp.evaluate(()=>({id:MP1Join.empireId,n:G.p.name,reconnects:MP1Join.reconnects||0,stage:MP6Stars.S.boot.stage}));
+    assert.deepEqual([c.id,c.n,c.stage],[2,'Okyanus Ticaret Birliği','ready']);
+    const b=await Bp.evaluate(()=>[MP1Join.empireId,G.p.name]);assert.deepEqual(b,[1,'Saf Akıl Ağı']);
+    await shot(Bp,'b2-b-game');await shot(Cp,'b2-c-game');
+  });
+  await test('B3 C kendi filosuna gerçek komut verir (filo seçimi → ROTA → haritada hedef) ve host uygular; B\'nin aynasında C\'nin kaynağı/teknolojisi yok',async()=>{
+    await Cp.setViewportSize({width:915,height:412});
+    const plan=await H2.evaluate(()=>{const e=G.emps[2],f=G.fleets.find(x=>x.e===2&&x.ships.length&&x.sys>=0&&!x.mv);return {f:f.id,to:G.sys[f.sys].lanes[0]};});
+    const r=await Cp.evaluate(p=>new Promise(res=>{const cid=MP1Join.cmd({kind:'move',fleet:p.f,to:p.to}).cid;const t=setInterval(()=>{const x=MP1Join.results.find(y=>y.cid===cid);if(x){clearInterval(t);res(x);}},50);}),plan);
+    assert.equal(r.status,'ok',JSON.stringify(r));assert.equal(await H2.evaluate(p=>{const f=G.fleets.find(x=>x.id===p.f);return !!(f.mv||f.path.length);},plan),true);
+    const priv=await Bp.evaluate(()=>{const c=MP6Stars.S.mirror.emps.find(e=>e.name==='Okyanus Ticaret Birliği');return c?{res:Object.values(c.res).reduce((a,b)=>a+b,0),techs:Object.keys(c.techs).length}:'not-contacted';});
+    assert(priv==='not-contacted'||(priv.res===0&&priv.techs===0),JSON.stringify(priv));
+  });
+
   await test('sayfa hataları yok (host, B, C)',async()=>{assert.deepEqual(errors,[]);});
 }catch(e){console.log('FATAL',e);results.push({name:'FATAL',status:'FAIL',error:String(e&&e.stack||e)});}
 finally{fs.writeFileSync(path.join(out,'mp7-results.json'),JSON.stringify({results,errors,metrics,pass:results.filter(r=>r.status==='PASS').length,fail:results.filter(r=>r.status==='FAIL').length},null,2));
