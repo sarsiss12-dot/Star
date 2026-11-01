@@ -1,0 +1,211 @@
+{
+ "size": "ulu",
+ "ai": 11,
+ "months": 240,
+ "seed": 22,
+ "node": "v22.22.0",
+ "arms": [
+  {
+   "arm": "A-paylasim-kapali",
+   "share": false,
+   "checkpoints": [
+    {
+     "month": 12,
+     "day": 360,
+     "simMsPerMonth": 407,
+     "breakdown": {
+      "aiTurn": 105.8,
+      "updateVision": 0.28,
+      "refreshSharedVision": 0.03,
+      "monthTick": 183.19,
+      "dailyLoop": 223.47
+     },
+     "aiTurnCalls": 12,
+     "drawMs": {
+      "median": 3.1,
+      "max": 30.3
+     },
+     "counts": {
+      "systems": 100,
+      "visible": 6,
+      "seen0": 13,
+      "fleets": 53,
+      "visibleFleets": 4,
+      "ships": 93,
+      "alive": 12,
+      "news": 0,
+      "newsHidden": 28,
+      "log": 9,
+      "shareActive": 0
+     },
+     "saveKB": 420,
+     "serializeMs": 7.8,
+     "mirror": {
+      "buildMs": 5.9,
+      "kb": 57,
+      "guestDeserializeMs": 175,
+      "ok": true
+     },
+     "heapMB": 21
+    },
+    {
+     "month": 60,
+     "day": 1800,
+     "simMsPerMonth": 675.9,
+     "breakdown": {
+      "aiTurn": 147.74,
+      "updateVision": 0.27,
+      "refreshSharedVision": 0.02,
+      "monthTick": 246.36,
+      "dailyLoop": 429.18
+     },
+     "aiTurnCalls": 12,
+     "drawMs": {
+      "median": 3.6,
+      "max": 30.7
+     },
+     "counts": {
+      "systems": 100,
+      "visible": 9,
+      "seen0": 21,
+      "fleets": 83,
+      "visibleFleets": 6,
+      "ships": 207,
+      "alive": 11,
+      "news": 0,
+      "newsHidden": 76,
+      "log": 20,
+      "shareActive": 0
+     },
+     "saveKB": 913,
+     "serializeMs": 12,
+     "mirror": {
+      "buildMs": 4.3,
+      "kb": 74,
+      "guestDeserializeMs": 147.5,
+      "ok": true
+     },
+     "heapMB": 27
+    },
+    {
+     "month": 120,
+     "day": 3600,
+     "simMsPerMonth": 874.5,
+     "breakdown": {
+      "aiTurn": 388.27,
+      "updateVision": 0.24,
+      "refreshSharedVision": 0.02,
+      "monthTick": 490.72,
+      "dailyLoop": 383.51
+     },
+     "aiTurnCalls": 11,
+     "drawMs": {
+      "median": 5.2,
+      "max": 41.7
+     },
+     "counts": {
+      "systems": 100,
+      "visible": 3,
+      "seen0": 21,
+      "fleets": 125,
+      "visibleFleets": 6,
+      "ships": 449,
+      "alive": 11,
+      "news": 0,
+      "newsHidden": 96,
+      "log": 39,
+      "shareActive": 0
+     },
+     "saveKB": 1098,
+     "serializeMs": 28.4,
+     "mirror": {
+      "buildMs": 4.3,
+      "kb": 86,
+      "guestDeserializeMs": 162.9,
+      "ok": true
+     },
+     "heapMB": 29
+    },
+    {
+     "month": 180,
+     "day": 5400,
+     "simMsPerMonth": 2816.6,
+     "breakdown": {
+      "aiTurn": 2026.01,
+      "updateVision": 0.23,
+      "refreshSharedVision": 0.02,
+      "monthTick": 2230.15,
+      "dailyLoop": 586.15
+     },
+     "aiTurnCalls": 11,
+     "drawMs": {
+      "median": 4.4,
+      "max": 52.7
+     },
+     "counts": {
+      "systems": 100,
+      "visible": 3,
+      "seen0": 21,
+      "fleets": 114,
+      "visibleFleets": 5,
+      "ships": 433,
+      "alive": 12,
+      "news": 11,
+      "newsHidden": 167,
+      "log": 60,
+      "shareActive": 0
+     },
+     "saveKB": 1326,
+     "serializeMs": 29.4,
+     "mirror": {
+      "buildMs": 5.8,
+      "kb": 93,
+      "guestDeserializeMs": 269.5,
+      "ok": true
+     },
+     "heapMB": 29
+    },
+    {
+     "month": 240,
+     "day": 7200,
+     "simMsPerMonth": 2812.9,
+     "breakdown": {
+      "aiTurn": 2050.67,
+      "updateVision": 0.76,
+      "refreshSharedVision": 0.02,
+      "monthTick": 2416.46,
+      "dailyLoop": 395.73
+     },
+     "aiTurnCalls": 13,
+     "drawMs": {
+      "median": 10.5,
+      "max": 94.3
+     },
+     "counts": {
+      "systems": 100,
+      "visible": 3,
+      "seen0": 21,
+      "fleets": 133,
+      "visibleFleets": 10,
+      "ships": 566,
+      "alive": 12,
+      "news": 177,
+      "newsHidden": 256,
+      "log": 60,
+      "shareActive": 0
+     },
+     "saveKB": 1670,
+     "serializeMs": 95.7,
+     "mirror": {
+      "buildMs": 6.2,
+      "kb": 97,
+      "guestDeserializeMs": 245.3,
+      "ok": true
+     },
+     "heapMB": 33
+    }
+   ],
+   "wallSec": 393.6
+  }
+ ]
+}
