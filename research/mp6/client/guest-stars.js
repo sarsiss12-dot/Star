@@ -115,6 +115,18 @@ function gate(){
     /* MP.6.3: ihraç, başkan seçimi, reform, anayasa / oy rejimi, savaşa katılma, ortak savaş izni — motorun önerge yolu host'ta */
     const c={kind:'fedMotion',motion:String(kind)};for(const k of ['target','sponsor'])if(Number.isInteger(opt[k]))c[k]=real(opt[k]);
     for(const k of ['type','field','value'])if(typeof opt[k]==='string')c[k]=opt[k];return r(c);});
+  /* MP.6.3: kuruluş uygunluğu (AI adaylarının kabulü) aynada hesaplanamaz (AI gözlem kaydı, rota, güven host'ta): gerçek kuruluş
+     penceresi host'un motor kararını (fedFoundQuote, salt okuma) gösterir; gelince pencere yeniden çizilir. Kuruluşta host yeniden doğrular. */
+  const FF={q:{},wait:{},at:0};
+  wrap('canFoundFed',(o,e,type,ballot)=>{if(!mine(e))return o(e,type,ballot);const k=type+':'+ballot,c=FF.q[k];
+    if(c&&Date.now()-c.at<8000)return c.v;
+    if(!FF.wait[k]){const cid=send({kind:'fedFoundQuote',type:String(type),ballot:String(ballot)});if(cid){FF.wait[k]=1;waits[cid]=res=>{delete FF.wait[k];
+      const x=res.status==='ok'?res.extra:{ok:false,reasons:['Host reddetti: '+why(res)],candidates:[],cost:0};
+      const allies=(x.candidates||[]).filter(a=>a.ok&&!a.h).map(a=>G.emps[local(a.id)]).filter(Boolean);
+      FF.q[k]={at:Date.now(),v:{ok:!!x.ok,why:(x.reasons||[])[0]||'',reasons:x.ok?[]:(x.reasons||[]),allies,candidates:x.candidates||[],cost:x.cost|0}};
+      const pane=doc.getElementById('diploPane');if(Date.now()-FF.at<60000&&pane&&pane.classList.contains('show')&&!S.building)try{UI.openFed();}catch{}};}}
+    return c?c.v:{ok:false,why:'Host uygunluğu denetliyor…',reasons:['Host uygunluğu denetliyor…'],allies:[],candidates:[],cost:0};});
+  const of0=UI.openFed.bind(UI);UI.openFed=function(...a){if(S.on)FF.at=Date.now();return of0(...a);};
   wrap('executeFedDecision',(o,e,fid,id)=>mine(e)?r({kind:'fedExecute',fed:+fid,id:String(id)}):NOT_MP);
   wrap('grantFed',(o,e)=>mine(e)?r({kind:'fedGrant'}):NOT_MP);
   wrap('supportIndep',(o,e,sub)=>mine(e)&&sub?r({kind:'supIndep',sub:real(sub.id)}):NOT_MP);
@@ -139,6 +151,10 @@ function gate(){
   wrap('canStatusQuo',(o,a,b)=>{if(mine(a)&&b){const c=hv()&&hv().dip&&hv().dip.contacts.find(x=>x.id===real(b.id));if(c&&c.sq!==undefined)return {ok:!!c.sq,why:c.sqw||''};}return o(a,b);});
   wrap('canRequestFederation',(o,e,via)=>{if(mine(e)&&via){const p=hv()&&hv().pol;const v=p&&(p.others||[]).flatMap(x=>x.vias||[]).find(x=>x.id===real(via.id));if(v)return {ok:!!v.ok,why:v.why||''};}return o(e,via);});   // aracı üyenin Etkisi kabukta yok: MP.3.1 polView kararı
   wrap('canFedMotion',(o,e,kind,opt)=>{if(mine(e)&&kind==='admit'&&opt&&Number.isInteger(opt.target)){const f=hv()&&hv().pol&&hv().pol.fed,row=f&&(f.admit||[]).find(x=>x.id===real(opt.target));if(row)return {ok:!!row.ok,why:row.why};}return o(e,kind,opt);});
+  /* MP.6.3 — vasallık giriş kapıları: güç oranı ve karşı tarafın vasalları aynada eksik (kabuk) → MP.3.1 polView'daki host kararı */
+  const vcand=o=>{const p=hv()&&hv().pol;return p&&p.vas&&(p.vas.cand||[]).find(x=>x.id===real(o.id));};
+  wrap('canSeekProtection',(o,e,t)=>{if(mine(e)&&t){const c=vcand(t);if(c)return {ok:!c.seek,why:c.seek||''};}return o(e,t);});
+  wrap('canDemandVassal',(o,e,t)=>{if(mine(e)&&t){const c=vcand(t);if(c)return {ok:!c.demand,why:c.demand||''};}return o(e,t);});
   /* MP.6.2 — ittifakı sonlandır, ticaret anlaşmasını feshet, ambargo: gerçek onay pencereleri → komut */
   wrap('endAlliance',(o,e,other)=>mine(e)&&other?r({kind:'endAlliance',target:real(other.id)}):NOT_MP);
   wrap('breakPact',(o,a,b)=>{if(!mine(a)||!b)return o(a,b);send({kind:'unpact',target:real(b.id)});});

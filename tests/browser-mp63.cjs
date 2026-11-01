@@ -217,6 +217,68 @@ let relay,base,bH,bB,bC,H,Bp,Cp;
     await closeAll(Bp);await synced(H,Bp);await agenda(Bp);await tap(Bp,'#diploPane [data-a="shareOpen"]');await wait(Bp,()=>/Paylaşım uygulandı/.test(document.getElementById('modal').textContent));await shot(Bp,'b4-b-applied');
     await closeAll(Bp);await closeAll(H);
   });
+  /* ═══ C. federasyon: GERÇEK kuruluş + karar + oy + hibe; D. vasallık: himaye talebi ═══
+     FİKSTÜR (açıkça): AI 2 ve 4'ün gözlem kaydı (e.aiIntel.systems, motorun biçimi), B–2, B–4, 2–4 ittifakları, savaşlar kapalı,
+     kaynak. Kuruluş, önerge, oy ve hibe gerçek STARS düğmelerine gerçek dokunmadır. */
+  const FFIX=`(()=>{for(const s of G.sys){s.seen=G.emps.map(e=>e.id);s.surv=G.emps.map(e=>e.id);}for(const e of G.emps){if(e.wild)continue;e.aiIntel=e.aiIntel||{};e.aiIntel.systems=e.aiIntel.systems||{};
+      for(const s of G.sys)if(s.owner>=0)e.aiIntel.systems[s.id]={owner:s.owner,defense:sysDefense(s),colonies:s.planets.filter(p=>p.col).length,capital:G.emps[s.owner]&&G.emps[s.owner].home===s.id,day:G.day};}
+    for(const a of [2,3,4,5,0])for(const b of [2,3,4,5,0])if(a!==b&&G.emps[a].war[b])makePeace(G.emps[a],G.emps[b]);
+    G.feds=(G.feds||[]).filter(f=>!f.members.some(m=>[2,3,4].includes(m)));for(const [a,b] of [[3,2],[3,4],[2,4]]){G.emps[a].ally[b]=G.emps[b].ally[a]=true;G.emps[a].rel[b]=G.emps[b].rel[a]=80;}
+    for(const e of G.emps)if(!e.wild)for(const k of ['etk','ene','min','ala'])e.res[k]=Math.max(e.res[k],3000);
+    for(const id of [0,1,2,3,4,5]){recalcMods(G.emps[id]);G.emps[id]._powAt=-1;}MP1Host.host.publish();const q=canFoundFed(G.emps[3],'bilimsel','equal');return q.ok||JSON.stringify(q.reasons.concat((q.candidates||[]).map(c=>c.id+':'+c.why)));})()`;
+  const openDetails=p=>p.evaluate(()=>{for(const d of document.querySelectorAll('#diploPane details'))d.open=true;});
+  /* pencere host'un yanıtıyla yeniden çizilince katlanmış bölümler kapanır: bölümleri açıp yeniden dene */
+  async function tapIn(p,sel){let err;for(let i=0;i<6;i++){await openDetails(p);try{const l=p.locator(sel).first();await l.scrollIntoViewIfNeeded({timeout:2000}).catch(()=>{});await l.tap({timeout:3000});return;}catch(e){err=e;await sleep(400);}}throw err;}
+  async function fedPane(p,tab){await closeAll(p);await synced(H,p);await p.evaluate(()=>UI.openFed());await wait(p,()=>document.getElementById('diploPane').classList.contains('show'));
+    if(tab){await tap(p,'#diploPane [data-a="fedTab"][data-x="'+tab+'"]');await sleep(300);}await openDetails(p);}
+  async function inboxRecord(p,pred,ready='#inboxYes'){await closeAll(p);await synced(H,p);await openInbox(p);
+    await wait(p,pr=>DiplomaticInbox.state().records.some(r=>r.status==='pending'&&new Function('r','return '+pr)(r)),pred).catch(async e=>{throw Error('record '+pred+' '+JSON.stringify(await p.evaluate(()=>({recs:DiplomaticInbox.state().records.map(r=>[r.id,r.kind,r.status,r.fid]),
+      talks:G.emps.filter(x=>x.vassalTalk).map(x=>[x.id,x.vassalTalk.lord,x.vassalTalk.sub,x.vassalTalk.to,x.vassalTalk.status]),modal:!document.getElementById('modal').classList.contains('hidden'),held:MP6Stars.S.stats.held,day:G.day}))));});
+    const id=await p.evaluate(pr=>DiplomaticInbox.state().records.find(r=>r.status==='pending'&&new Function('r','return '+pr)(r)).id,pred);
+    await tap(p,'[data-a="diplomaticRecord"][data-x="'+id+'"]');await wait(p,sel=>{const b=document.querySelector(sel);return b&&!b.disabled;},ready);}
+  await test('C1 GERÇEK federasyon kuruluşu: B kuruluş penceresinde (uygunluk host motorundan) BİLİMSEL KUR\'a dokunur → host\'ta B + iki bağımsız AI müttefik (2, 4) ile federasyon; başkan B',async()=>{
+    assert.equal(await H.evaluate(FFIX),true,'fixture meets the engine condition');
+    await fedPane(Bp);await wait(Bp,()=>document.querySelector('#diploPane [data-a="foundFed"][data-x="bilimsel:equal"]:not([disabled])'),undefined,20000);
+    await shot(Bp,'c1-b-found-window');await tapIn(Bp,'#diploPane [data-a="foundFed"][data-x="bilimsel:equal"]');
+    await wait(H,()=>(G.feds||[]).some(f=>f.founder===3||f.leader===3));
+    const f=await H.evaluate(()=>{const f=G.feds.find(f=>f.leader===3);return {id:f.id,m:f.members.slice().sort(),leader:f.leader,ballot:fedCharter(f).ballot,type:f.type};});
+    assert.deepEqual(f.m,[2,3,4]);assert.equal(f.leader,3);assert.equal(f.type,'bilimsel');metrics.fed={founded:f};
+  });
+  await test('C2 anayasa önergesi + oy: B YÖNETİM sekmesinde "oy rejimi" önergesine dokunur; B\'nin oyu otomatik DEĞİL (AI üyeler kendi değerlendirmesiyle); B gerçek gelen kutusundan EVET; sonuç federasyonun kuralıyla (≥%75)',async()=>{
+    await fedPane(Bp,'manage');const x=await Bp.evaluate(()=>{const b=[...document.querySelectorAll('#diploPane [data-a="fedMotion"]')].find(b=>!b.disabled&&/^charter:ballot:/.test(b.dataset.x));return b&&b.dataset.x;});
+    assert(x,'charter/ballot motion button enabled');await tapIn(Bp,'#diploPane [data-a="fedMotion"][data-x="'+x+'"]');
+    await wait(H,()=>{const f=G.feds.find(f=>f.leader===3);return f&&f.vote&&f.vote.motion==='charter';});
+    const v0=await H.evaluate(()=>{const v=G.feds.find(f=>f.leader===3).vote;return {yes:v.yes.slice(),no:v.no.slice(),tok:fedVoteToken(v)};});
+    assert(!v0.yes.includes(3)&&!v0.no.includes(3),'B not auto-voted '+JSON.stringify(v0));
+    await inboxRecord(Bp,"r.kind==='fedvote'");await shot(Bp,'c2-b-ballot');await tap(Bp,'#inboxYes');
+    await wait(H,t=>{const f=G.feds.find(f=>f.leader===3);return !f.vote||fedVoteToken(f.vote)!==t||f.vote.yes.includes(3);},v0.tok);
+    const r2=await H.evaluate(x=>{const f=G.feds.find(f=>f.leader===3);return {open:!!f.vote,ballot:fedCharter(f).ballot,want:x.split(':')[2]};},x);
+    metrics.fed.charter={aiVotes:v0,result:r2};
+    if(!r2.open)assert.equal(r2.ballot===r2.want,v0.yes.length>=2,'outcome follows the 75% rule with B\'s yes');
+    await closeAll(Bp);
+  });
+  await test('C3 acil hibe: başkan B gerçek ACİL HİBE düğmesine dokunur → federal fona motorun miktarı, B\'nin kaynağından; B\'ye kendi bildirimi',async()=>{
+    const f0=await H.evaluate(()=>{const f=G.feds.find(f=>f.leader===3);return {fund:{...(f.fund||{ala:0,ene:0})},ala:G.emps[3].res.ala};});
+    await fedPane(Bp);let found=await Bp.locator('#diploPane [data-a="fedGrant"]').count();
+    for(const t of ['general','manage','military','members','laws','votes']){if(found)break;await fedPane(Bp,t);found=await Bp.locator('#diploPane [data-a="fedGrant"]').count();}
+    assert(found,'grant button present');await tapIn(Bp,'#diploPane [data-a="fedGrant"]');
+    await wait(H,a=>G.emps[3].res.ala<a-1,f0.ala);const f1=await H.evaluate(()=>{const f=G.feds.find(f=>f.leader===3);return {fund:f.fund,ala:G.emps[3].res.ala,g:GRANT_ALA};});
+    assert.equal(Math.round(f1.fund.ala-(f0.fund.ala||0)),f1.g);await H.evaluate(()=>MP1Host.host.publish());await wait(Bp,()=>(MP1Join.game.view.log||[]).some(n=>/ACİL HİBE/.test(n.m)));
+    await closeAll(Bp);
+  });
+  await test('D1 himaye talebi: C (zayıf) gerçek vasallık penceresinden B\'den himaye ister (giriş kapısı host kararı); karar B\'nin: B gerçek gelen kutusundan KABUL → C, B\'nin vasalı',async()=>{
+    await H.evaluate(()=>{for(let i=0;i<4;i++)newFleet(G.emps[3],G.emps[3].home,Array.from({length:12},()=>({c:'kor'})));G.emps[3]._powAt=-1;G.emps[5]._powAt=-1;G.feds=G.feds.filter(f=>!f.members.includes(5));MP1Host.host.publish();});
+    await wait(Cp,()=>{const c=(MP1Join.game.view.pol.vas.cand||[]).find(x=>x.id===3);return c&&!c.seek;}).catch(async e=>{throw Error('seek gate '+JSON.stringify(await Cp.evaluate(()=>MP1Join.game.view.pol.vas.cand)));});
+    await closeAll(Cp);await synced(H,Cp);await Cp.evaluate(()=>{UI.openDiplo();UI.selectDiplo(3,'relation');});await wait(Cp,()=>document.getElementById('diploPane').classList.contains('show'));await openDetails(Cp);
+    await wait(Cp,()=>document.querySelector('#diploPane [data-a="vsOpen"][data-x="3:seek"]:not([disabled])')).catch(async e=>{throw Error('vsOpen '+JSON.stringify(await Cp.evaluate(()=>({btn:[...document.querySelectorAll('#diploPane [data-a="vsOpen"]')].map(b=>[b.dataset.x,b.disabled]),txt:document.getElementById('diploPane').textContent.replace(/\s+/g,' ').match(/.{0,80}(vasal|himaye|Himaye).{0,120}/gi)}))));});await tapIn(Cp,'#diploPane [data-a="vsOpen"][data-x="3:seek"]');
+    await wait(Cp,()=>document.querySelector('[data-a="vsSend"]'));await shot(Cp,'d1-c-seek');await tap(Cp,'[data-a="vsSend"]');
+    await wait(H,()=>G.emps[5].vassalTalk&&G.emps[5].vassalTalk.status==='pending'&&G.emps[5].vassalTalk.mode==='seek');
+    assert.equal(await H.evaluate(()=>G.emps[5].vassalTalk.to),3,'decision belongs to B (no AI decision for a human lord)');
+    await inboxRecord(Bp,"r.kind==='vassal'",'[data-a="vsReply"][data-x="accept"]');await shot(Bp,'d1-b-vassal-inbox');await tap(Bp,'[data-a="vsReply"][data-x="accept"]');
+    await wait(H,()=>G.emps[5].overlord===3);assert.equal(await H.evaluate(()=>vassalContractOf(G.emps[5]).lord),3);
+    const third=await H.evaluate(()=>{const v=MP1Host.host.polView(G.p).vas;return [v.lord,v.subs.length,v.talks.length];});assert.deepEqual(third,[null,0,0],'host (third party) sees no contract/negotiation');
+    await closeAll(Bp);await closeAll(Cp);
+  });
   await test('sayfa hataları yok (host, B, C)',async()=>{assert.deepEqual(errors,[]);});
 }catch(e){console.log('FATAL',e);results.push({name:'FATAL',status:'FAIL',error:String(e&&e.stack||e)});}
 finally{
