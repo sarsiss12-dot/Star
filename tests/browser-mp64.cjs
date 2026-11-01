@@ -124,7 +124,7 @@ let relay,base,bH,bB,bC,bA,H,Bp,Cp,Ap;
     await tap(Bp,'#tools [data-a="news"]');await wait(Bp,()=>/Savaş/.test(document.getElementById('modal').textContent||'')||/Savaş/.test((document.getElementById('diploPane')||{}).textContent||''));
     await shot(Bp,'n1-b-news');assert.equal(await Bp.evaluate(()=>GalacticNews.state().records.some(r=>r.category==='war')),true);
     await synced(Ap);assert.equal(await Ap.evaluate(()=>GalacticNews.state().records.some(r=>r.category==='war')),false,'A has no contact with 2');
-    await closeAll(Bp);await H.evaluate(b=>{makePeace(G.emps[2],G.emps[b]);MP1Host.host.publish();},B);
+    await closeAll(Bp);await H.evaluate(([b,a])=>{makePeace(G.emps[2],G.emps[b]);G.emps[a].contact[2]=G.emps[2].contact[a]=true;MP1Host.host.publish();},[B,A]);   // fikstür geri: A–2 teması
   });
 
   /* ═══ MP.6.3'ten kalan siyasi işlemler — gerçek tarayıcı. Paylaşım ortağı A: C'nin doktrini vekâlet savaşını yasaklıyor
