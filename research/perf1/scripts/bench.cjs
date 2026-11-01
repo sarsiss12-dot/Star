@@ -20,5 +20,6 @@ const s=[...per].sort((a,b)=>a-b),q=p=>+s[Math.min(s.length-1,Math.floor(p*s.len
 const out={label,root:path.basename(path.resolve(root)),save:path.basename(save),months:+months,node:process.version,
   msPerMonth:{mean:+(per.reduce((a,b)=>a+b,0)/per.length).toFixed(1),median:q(.5),p95:q(.95),all:per.map(x=>+x.toFixed(1))},
   counts:COUNT?JSON.parse(h.run('JSON.stringify(Object.fromEntries(Object.entries(__c).map(([k,v])=>[k,{n:v.n,ms:+v.ms.toFixed(1)}])))')):null,
-  final:{day:+h.run('G.day'),save8:sha(h.run('serialize()')),rng:h.run('String(RND_STATE)')},trace:TRACE?trace:undefined,heapMB:Math.round(process.memoryUsage().heapUsed/1048576)};
+  final:{day:+h.run('G.day'),save8:sha(h.run('serialize()')),rng:h.run('String(RND_STATE)')},trace:TRACE?trace:undefined,heapMB:Math.round(process.memoryUsage().heapUsed/1048576),heapAfterGcMB:global.gc?(global.gc(),global.gc(),+(process.memoryUsage().heapUsed/1048576).toFixed(1)):null,
+  tradeMemo:(()=>{try{return JSON.parse(h.run('JSON.stringify(typeof TRADE_PATHS!=="undefined"?{routes:TRADE_PATHS.memo.size,trees:TRADE_PATHS.bfs.size}:null)'));}catch{return null;}})()};
 process.stdout.write(JSON.stringify(out)+'\n');
