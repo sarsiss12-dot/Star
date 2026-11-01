@@ -1,0 +1,272 @@
+{
+ "months": 120,
+ "profileMonths": 6,
+ "wallMs": 6715,
+ "msPerMonth": 1119,
+ "state": {
+  "alive": 11,
+  "fleets": 126,
+  "ships": 487,
+  "wars": 1.5,
+  "fronts": 2
+ },
+ "topSelf": [
+  {
+   "fn": "supplyDistance main.js:3219",
+   "ms": 551.3,
+   "pct": 8.2
+  },
+  {
+   "fn": "stock economic-ledger.js:6",
+   "ms": 545.6,
+   "pct": 8.1
+  },
+  {
+   "fn": "explorationContext main.js:3975",
+   "ms": 438.6,
+   "pct": 6.5
+  },
+  {
+   "fn": "gateSupplyNodes main.js:3212",
+   "ms": 353.8,
+   "pct": 5.3
+  },
+  {
+   "fn": "isSupplyNode main.js:3164",
+   "ms": 318.3,
+   "pct": 4.7
+  },
+  {
+   "fn": "tradeLinks economy.js:188",
+   "ms": 290.1,
+   "pct": 4.3
+  },
+  {
+   "fn": "findPath main.js:3411",
+   "ms": 281.1,
+   "pct": 4.2
+  },
+  {
+   "fn": "reinforcementThreats main.js:5100",
+   "ms": 252.4,
+   "pct": 3.8
+  },
+  {
+   "fn": "clean economic-ledger.js:5",
+   "ms": 211,
+   "pct": 3.1
+  },
+  {
+   "fn": "(anon) economic-ledger.js:23",
+   "ms": 201,
+   "pct": 3
+  },
+  {
+   "fn": "autoExploreTick main.js:4071",
+   "ms": 179.5,
+   "pct": 2.7
+  },
+  {
+   "fn": "aiBuildingDelta ai.js:180",
+   "ms": 176.7,
+   "pct": 2.6
+  },
+  {
+   "fn": "empireIncome economy.js:321",
+   "ms": 167.3,
+   "pct": 2.5
+  },
+  {
+   "fn": "(garbage collector) :0",
+   "ms": 145,
+   "pct": 2.2
+  },
+  {
+   "fn": "fleetSupply main.js:3251",
+   "ms": 138.6,
+   "pct": 2.1
+  },
+  {
+   "fn": "influenceAt diplomacy.js:41",
+   "ms": 123.2,
+   "pct": 1.8
+  },
+  {
+   "fn": "post node:inspector:118",
+   "ms": 117.2,
+   "pct": 1.7
+  },
+  {
+   "fn": "sysDefense main.js:3762",
+   "ms": 112.8,
+   "pct": 1.7
+  },
+  {
+   "fn": "dist main.js:16",
+   "ms": 109.4,
+   "pct": 1.6
+  },
+  {
+   "fn": "colonyOutput economy.js:47",
+   "ms": 88.5,
+   "pct": 1.3
+  },
+  {
+   "fn": "fleetPower main.js:3053",
+   "ms": 87.4,
+   "pct": 1.3
+  },
+  {
+   "fn": "EconomyLedger.observe.sy.system economic-ledger.js:57",
+   "ms": 82.9,
+   "pct": 1.2
+  },
+  {
+   "fn": "txCaptureGraph diplomacy.js:2057",
+   "ms": 77,
+   "pct": 1.1
+  },
+  {
+   "fn": "stepFleets main.js:3840",
+   "ms": 63.1,
+   "pct": 0.9
+  },
+  {
+   "fn": "tradeInfo economy.js:270",
+   "ms": 61.2,
+   "pct": 0.9
+  }
+ ],
+ "topTotal": [
+  {
+   "fn": "(anon) profile-ai.cjs:14",
+   "ms": 6687.3,
+   "pct": 99.6
+  },
+  {
+   "fn": "(anon) evalmachine.<anonymous>:0",
+   "ms": 6569.7,
+   "pct": 97.8
+  },
+  {
+   "fn": "run runtime.js:112",
+   "ms": 6569.7,
+   "pct": 97.8
+  },
+  {
+   "fn": "__step evalmachine.<anonymous>:2",
+   "ms": 6569.4,
+   "pct": 97.8
+  },
+  {
+   "fn": "obj.<computed> economic-ledger.js:57",
+   "ms": 4791.2,
+   "pct": 71.4
+  },
+  {
+   "fn": "observe economic-ledger.js:20",
+   "ms": 4780.7,
+   "pct": 71.2
+  },
+  {
+   "fn": "EconomyLedger.observe.sy.system economic-ledger.js:57",
+   "ms": 4631.1,
+   "pct": 69
+  },
+  {
+   "fn": "monthTick economic-ledger.js:137",
+   "ms": 2933.6,
+   "pct": 43.7
+  },
+  {
+   "fn": "monthTick main.js:9087",
+   "ms": 2933,
+   "pct": 43.7
+  },
+  {
+   "fn": "aiTurn ai.js:1596",
+   "ms": 2357.1,
+   "pct": 35.1
+  },
+  {
+   "fn": "autoExploreTick main.js:4071",
+   "ms": 1773,
+   "pct": 26.4
+  },
+  {
+   "fn": "empireIncome economy.js:321",
+   "ms": 1719.7,
+   "pct": 25.6
+  },
+  {
+   "fn": "aiBuildingDelta ai.js:180",
+   "ms": 1624.7,
+   "pct": 24.2
+  },
+  {
+   "fn": "dailyTick main.js:4227",
+   "ms": 1595,
+   "pct": 23.8
+  },
+  {
+   "fn": "fleetSupply main.js:3251",
+   "ms": 1512.9,
+   "pct": 22.5
+  },
+  {
+   "fn": "supplyDistance main.js:3219",
+   "ms": 1371.2,
+   "pct": 20.4
+  },
+  {
+   "fn": "aiEconomyPlan ai.js:229",
+   "ms": 1227.3,
+   "pct": 18.3
+  },
+  {
+   "fn": "explorationContext main.js:3975",
+   "ms": 999.8,
+   "pct": 14.9
+  },
+  {
+   "fn": "explorationBlock main.js:4005",
+   "ms": 870.5,
+   "pct": 13
+  },
+  {
+   "fn": "aiEconomicOrder ai.js:436",
+   "ms": 843.5,
+   "pct": 12.6
+  },
+  {
+   "fn": "tick commerce.js:110",
+   "ms": 825,
+   "pct": 12.3
+  },
+  {
+   "fn": "raidTick commerce.js:103",
+   "ms": 783.9,
+   "pct": 11.7
+  },
+  {
+   "fn": "Commerce.<computed> economic-ledger.js:139",
+   "ms": 776.6,
+   "pct": 11.6
+  },
+  {
+   "fn": "stock economic-ledger.js:6",
+   "ms": 764.2,
+   "pct": 11.4
+  },
+  {
+   "fn": "tradeInfo economy.js:270",
+   "ms": 739.2,
+   "pct": 11
+  },
+  {
+   "fn": "tradeLinks economy.js:188",
+   "ms": 674.3,
+   "pct": 10
+  }
+ ]
+}

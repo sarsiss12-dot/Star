@@ -1,0 +1,78 @@
+{
+ "results": [
+  {
+   "name": "kurulum: host oda açar; B, C, A davet bağlantısıyla (/mp/play) katılır; oyun başlar; fikstür: temas + kaynak",
+   "status": "PASS",
+   "ms": 12101
+  },
+  {
+   "name": "casusluk ağı: B gerçek İSTİHBARAT ekranında C'yi seçer, CASUS ATA'ya dokunur → host'ta motorun ağı (e.spy); kapasite yazısı host kaydıyla tutarlı",
+   "status": "PASS",
+   "ms": 1758
+  },
+  {
+   "name": "casusluk operasyonu: B operasyon kartına dokunur → onay penceresi host'un değerleri (maliyet, %ifşa) → ONAYLA → host motoru zar atar → B gerçek SONUÇ penceresinde host'un sonucu; C motorun izin verdiğini, A hiçbir şey görmez",
+   "status": "PASS",
+   "ms": 11841
+  },
+  {
+   "name": "Galaktik Borsa: B gerçek borsa panelinde seçim yapar, TAKAS ET'e dokunur → host'ta motorun marketTrade'i, kaynak BİR kez; C'nin bakiyesi değişmez",
+   "status": "PASS",
+   "ms": 3059
+  },
+  {
+   "name": "filo: B kendi hasarlı filosunda gerçek TAMİRİ DURDUR düğmesine dokunur → host'ta onarım durur; C'nin filosu için komut reddedilir",
+   "status": "PASS",
+   "ms": 3619
+  },
+  {
+   "name": "haberler: AI 2, B'ye savaş ilan eder → B gerçek HABERLER panelinde \"Savaş\" haberini görür (doğrudan katılım); 2 ile temassız A görmez",
+   "status": "PASS",
+   "ms": 3078
+  },
+  {
+   "name": "paylaşım RET ve GERİ ÇEKME: B önerir (gerçek pencere) → B geri çeker (gerçek \"Teklifi geri çek\") → yeni taslak → A (ortak) gerçek \"Reddet\" → teklif reddedildi; devir yok",
+   "status": "PASS",
+   "ms": 11290
+  },
+  {
+   "name": "vasallık: sözleşme yenileme (B öneri, C kabul), bağımsızlık desteği (A gerçek düğme) ve barışçıl bağımsızlık (C gerçek pencere, B gelen kutusundan KABUL); C, B'nin vasalı (fikstür: motorla kurulan sözleşme, tarihleri 25 ay geriye; 12 ay soğuma için ayrıca 13 ay)",
+   "status": "PASS",
+   "ms": 21144
+  },
+  {
+   "name": "federasyon: A üyeler sekmesinde İHRAÇ önergesine, sonra REFORM'a ve Başkan önerisine, ASKERÎ sekmede ortak savaş desteğine gerçek dokunur; insanlar gelen kutusundan kendi oyunu verir; kabul edilen savaş kararını önerici A uygular",
+   "status": "PASS",
+   "ms": 39325
+  },
+  {
+   "name": "sayfa hataları yok (host, B, C, A)",
+   "status": "PASS",
+   "ms": 0
+  }
+ ],
+ "metrics": {
+  "spy": {
+   "assigned": true,
+   "op": {
+    "caught": false,
+    "msg": "Thalor ve Bağlı Dünyalar ticaret rotaları haritalandı — yağma şansın arttı."
+   }
+  },
+  "market": {
+   "paid": 200,
+   "got": 80.5
+  },
+  "notes": [
+   "paylaşım ortağı: 1",
+   "bağımsızlık desteği sızdı mı: false",
+   "ihraç sonucu (motor oylaması): kabul",
+   "reform: null",
+   "başkan: 2",
+   "ortak savaş hedefi: 5",
+   "fedHelp fikstürü: {\"fleet\":4,\"at\":16,\"help\":{\"ok\":true,\"eta\":9.21626608179284}}",
+   "ortak savaş kararı: {\"id\":\"4\",\"kind\":\"joinWar\",\"sponsor\":2,\"target\":5,\"by\":1,\"approved\":[2,1,3],\"expires\":188.2264,\"state\":\"applied\",\"blocked\":[{\"id\":3,\"why\":\"Bilinen ulaşabilir askerî yardım rotası yok\"}],\"applied\":8.226399999999998,\"joined\":[1]}"
+  ]
+ },
+ "errors": []
+}

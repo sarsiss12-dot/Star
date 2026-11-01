@@ -33,7 +33,7 @@ function build(meId,o={}){
   const sys=G.sys.map(s=>{
     const k=known.has(s.id),v=visible.has(s.id),surv=s.surv.includes(meId),mine=s.owner===meId;
     const x={i:s.id,x:s.x,y:s.y,n:k?s.name:'',st:k?Math.max(0,STARS.indexOf(s.star)):0,p:[],
-      l:s.lanes.filter(n=>k||known.has(n)),o:v||mine?piN(s.owner):-1,sv:surv?[0]:[],se:k?[0]:[],q:mine?J(s.queue)||[]:[],
+      l:s.lanes.filter(n=>k||known.has(n)),o:v||mine?piN(s.owner):-1,sv:surv?[0]:[],se:k?[0]:[],q:mine?(J(s.queue)||[]).map(x=>x&&Number.isInteger(x.e)?{...x,e:piN(x.e)}:x):[],
       an:surv?!!s.anom:false,ak:surv?s.anomK:'sinyal',d:v||mine?(s.def||0):0,pu:k?!!s.pulsar:false,nb:k?!!s.nebulaS:false};   // gizli alanlar motorun varsayılan biçiminde
     if(surv||mine)x.p=s.planets.map(p=>{
       const q={i:p.i,t:p.t,dep:p.dep,sz:p.sz,seed:p.seed,name:p.name,owner:-1};
@@ -73,7 +73,10 @@ function build(meId,o={}){
   const party=q=>!!q&&(q.lord===meId||q.sub===meId);
   const mine=J(me);for(const k of STRIP_ME)delete mine[k];
   mine.id=0;mine.ai=false;for(const k of EMP_MAPS)if(mine[k])mine[k]=remapKeys(mine[k]);
-  for(const k of ['hitLog'])if(Array.isArray(mine[k]))for(const h of mine[k])if(h&&Number.isInteger(h.by))h.by=piN(h.by);
+  /* MP.6.4 gizlilik: mağdur kaydında fail yalnız BİLİNİYORSA (yakalandı / soruşturmayla çözüldü) gider; tespit edilmemiş
+     operasyonun faili ve sahte kanıtın gerçek yerleştiricisi (framed: "gerçeği yalnız biz biliriz") misafire gitmez. */
+  for(const k of ['hitLog'])if(Array.isArray(mine[k]))for(const h of mine[k]){if(!h)continue;delete h.framed;if(!h.known)delete h.by;else if(Number.isInteger(h.by))h.by=piN(h.by);}
+  if(Array.isArray(mine.whisperLog))for(const w of mine.whisperLog)if(w){for(const k of ['a','b'])if(Number.isInteger(w[k]))w[k]=piN(w[k]);}
   if(Array.isArray(mine.opLog))for(const h of mine.opLog)if(h&&Number.isInteger(h.o))h.o=piN(h.o);
   if(mine.overlord!=null)mine.overlord=piN(mine.overlord);
   if(mine.vassalContract)mine.vassalContract=vasC(mine.vassalContract);
@@ -110,15 +113,20 @@ function build(meId,o={}){
     const lv=member&&f.lastVote?{id:f.lastVote.id,law:f.lastVote.law,kind:f.lastVote.kind,passed:!!f.lastVote.passed,day:f.lastVote.day,why:f.lastVote.why,rule:f.lastVote.rule,
       yes:Array.isArray(f.lastVote.yes)?f.lastVote.yes.map(piN):f.lastVote.yes,no:Array.isArray(f.lastVote.no)?f.lastVote.no.map(piN):f.lastVote.no,abstain:Array.isArray(f.lastVote.abstain)?f.lastVote.abstain.map(piN):f.lastVote.abstain}:null;
     return {id:f.id,name:f.name,type:f.type,charter:J(f.charter),leader:piN(f.leader),founder:piN(f.founder),members:f.members.map(piN),laws:J(f.laws)||{},fund:{ala:0,ene:0},treasury:0,
-      founded:f.founded,typeSince:f.typeSince,dutySince:{defense:0,offense:0},invites,decisions:{},dutyConsent:{},cohesion:f.cohesion,nextVote:f.nextVote,politicsVersion:f.politicsVersion,
+      founded:f.founded,typeSince:f.typeSince,dutySince:{defense:0,offense:0},invites,decisions:member?decs(f.decisions):{},dutyConsent:{},cohesion:f.cohesion,nextVote:f.nextVote,politicsVersion:f.politicsVersion,
       vote:member?vote(f.vote)||null:null,lastVote:lv,...(Object.keys(adm).length?{admissionResults:adm}:{})};});
+  /* MP.6.4: federasyonun kabul edilmiş savaş kararları üyeye (gerçek STARS "uygula" düğmesi); kimlikler numaralandırılır */
+  function decs(d){const o={};for(const [k,x] of Object.entries(d||{})){if(!x)continue;o[k]={...J(x),sponsor:piN(x.sponsor),target:piN(x.target),by:piN(x.by),approved:(x.approved||[]).map(piN),...(Array.isArray(x.joined)?{joined:x.joined.map(piN)}:{}),...(Array.isArray(x.blocked)?{blocked:x.blocked.map(b=>({...b,id:piN(b.id)}))}:{})};}return o;}
   /* ---- kök ---- */
   const cfg={...J(G.cfg),seed:o.cosmeticSeed|0,name:me.name,race:me.race,look:me.look,physio:me.physio,sigil:me.sigil,ethics:J(me.ethics),civics:J(me.civics),
     origin:me.origin,monoRes:me.monoRes,mizac:me.mizac,traits:J(me.traits),color:me.col,portraitVariant:me.portraitVariant||0};
   /* MP.6.1: ekonomi geçmişi — yalnız misafirin KENDİ satırı (devlet 0 olarak); başka devletlerin defteri girmez */
   const EH=G.economyHistory,row=EH&&EH.empires&&EH.empires[meId];
   const economyHistory=row?{v:EH.v,started:EH.started,lastClosed:EH.lastClosed,next:EH.next,empires:{0:{...J(row),events:J(row.events.slice(-EH_EVENTS))}}}:undefined;   // son EH_EVENTS olay (boyut)
-  return {v:8,cfg,day:G.day,year:G.year,month:G.month,seed:o.cosmeticSeed|0,rs:1,log:J(o.log||[]),...(economyHistory?{economyHistory}:{}),W:G.W,H:G.H,
+  /* MP.6.4: oyuncuya özel haberler (host'ta o oyuncunun bakışıyla süzülmüş; host'un haber listesi girmez) — motorun Save8 haber biçimi */
+  const nw=Array.isArray(o.news)?o.news.map(r=>({...J(r),empires:(r.empires||[]).map(x=>({id:pi(x.id),name:x.name}))})):[];
+  const news={v:1,next:nw.reduce((n,r)=>Math.max(n,r.id+1),1),hiddenNext:1,records:nw,hidden:[]};
+  return {v:8,cfg,day:G.day,year:G.year,month:G.month,seed:o.cosmeticSeed|0,rs:1,log:J(o.log||[]),news,...(economyHistory?{economyHistory}:{}),W:G.W,H:G.H,
     world:{memAge:G.memAge,cncAge:G.cncAge,council:null,feds,fedUid:G.fedUid,friction:{},rebelAlliance:null,megaWatch:[],sandbox:false},
     sys,emps,fl,nf:G.nextFleet};
 }

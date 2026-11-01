@@ -261,7 +261,7 @@ function createHost(opts){
       let st,why='';
       if(e.techs[id])st='d';else{const a=researchAccess(e,id);if(!a.ok){st='x';why=a.why;}else if(researchReady(e,id))st='r';else{const rt=researchRoute(e,id);st=rt.ok?'l':'x';why=rt.ok?'':rt.why;}}
       tech[id]={n:T.n,b:T.b,t:T.t,r:(T.r||[]).slice(),d:T.d||'',c:Math.round(techCost(e,id)),s:st,...(why?{w:why}:{})};}
-    return {me,sys,lanes,cols,fleets,emps,catalog,sci,tech,log:(notes.get(e.id)||[]).slice(),dip:dipView(e),pol:polView(e),settle:settleView(e)};
+    return {me,sys,lanes,cols,fleets,emps,catalog,sci,tech,log:(notes.get(e.id)||[]).slice(),dip:dipView(e),pol:polView(e),settle:settleView(e),mkt:mktView()};
   }
   function clock(){return {day:Math.floor(G.day),y:G.year,m:G.month,spd:G.speed|0};}
   const KEYED=['sys','cols','fleets','emps','tech'];
@@ -272,7 +272,7 @@ function createHost(opts){
       for(const k of Object.keys(a[sec]))if(!has(b[sec],k))rm.push(k);
       if(Object.keys(up).length)(ops.up||(ops.up={}))[sec]=up;
       if(rm.length)(ops.rm||(ops.rm={}))[sec]=rm;}
-    for(const sec of ['me','lanes','catalog','sci','log','dip','pol','settle'])if(JSON.stringify(a[sec])!==JSON.stringify(b[sec]))(ops.set||(ops.set={}))[sec]=b[sec];
+    for(const sec of ['me','lanes','catalog','sci','log','dip','pol','settle','mkt'])if(JSON.stringify(a[sec])!==JSON.stringify(b[sec]))(ops.set||(ops.set={}))[sec]=b[sec];
     return ops;
   }
   /* MP.2: görünüm salt okunur olmalı. explorationContext → borderPressure/totalPower gibi motor yolları
@@ -297,7 +297,7 @@ function createHost(opts){
   function sendMirror(p){
     if(!p.conn||p.empireId===null||!root.StarsMirror)return;
     const t=now();if(p.lastMirror&&mirrorMs>0&&t-(p.mirrorAt||0)<mirrorMs){if(!p.mirrorTimer&&typeof setTimeout==='function')p.mirrorTimer=setTimeout(()=>{p.mirrorTimer=null;sendMirror(p);},mirrorMs-(t-(p.mirrorAt||0)));return;}
-    const m=pure(()=>root.StarsMirror.build(p.empireId,{cosmeticSeed:cosmetic,log:notes.get(p.empireId)||[]}));
+    const m=pure(()=>root.StarsMirror.build(p.empireId,{cosmeticSeed:cosmetic,log:notes.get(p.empireId)||[],news:(newsBy.get(p.empireId)||{records:[]}).records}));
     const rev=(p.mirrorRev||0)+1;let n;
     if(!p.lastMirror)n=out(p.conn,{v:PROTOCOL,type:'mirror',rev,full:m});
     else{const ops=root.StarsMirror.diff(p.lastMirror,m);if(!Object.keys(ops).length){p.mirrorAt=t;return;}n=out(p.conn,{v:PROTOCOL,type:'mirrorDelta',rev,base:p.mirrorRev,ops});}
@@ -318,6 +318,63 @@ function createHost(opts){
   /* ═══ MP.6.3 — ortak savaş paylaşımı: görünüm (yalnız katılımcıya), taslak özeti, bildirim taraması ═══
      Görünür olmayan toprak satırının sistem/gezegen kimliği gitmez (h<n> anahtarı; host gerçek satıra çevirir). Damga (sefer
      kaydının tamamı, devletlerin mizacı) gitmez; yalnız özeti. Kimlikler gerçek; misafir aynasına π ile çevirir. */
+  /* MP.6.4 casusluk: host'un tek oyunculu onay ekranında gösterilen değerleri (maliyet, ifşa riski yüzdesi, seviye, uygunluk) —
+     hedefin teknoloji/stok/koloni ayrıntısı opQuote'ta zaten gizli (viableDesc yalnız seviye yeterse). Kesin risk değeri yerine yüzde. */
+  function spyQuoteOut(e,t){const ops={};
+    for(const k of Object.keys(OPS)){const q=opQuote(e,t,k);ops[k]={ok:!!q.ok,why:String(q.why||'').slice(0,200),cost:q.cost||{},riskPct:q.riskPct|0,lvlHave:q.lvlHave|0,lvlNeed:q.lvlNeed|0,afford:!!q.afford,viable:!!q.viable,viableDesc:String(q.viableDesc||'').slice(0,200)};}
+    const sabo={};for(const tur of ['yard','supply']){const g=canSabotage(e,t,tur);sabo[tur]={ok:!!g.ok,why:String(g.why||'').slice(0,160),targets:g.ok?(g.hedefler||[]).map(s=>s&&s.id!==undefined?s.id:s).filter(Number.isInteger).slice(0,40):[]};}
+    const ic=typeof canIncite==='function'?canIncite(e,t):{ok:false,why:'—'};
+    return {target:t.id,lvl:intelOf(e,t.id),ops,sabo,incite:{ok:!!ic.ok,why:String(ic.why||'').slice(0,160)}};}
+  /* MP.6.4 casusluk bildirimleri: motor yalnız devlet 0'a söylüyordu (istihbarat artışı, casus yakalanması, mağdur ipucu / ifşa).
+     Uzak insana kendi listesinde, motorun kendi kayıtlarından (e.intel, e.spy, hitLog) ve motorun metinleriyle; faili bilinmeyen
+     operasyonda fail adı gitmez. İlk geçişte sessizce tohumlanır. */
+  const spyIntelSeen=new Map(),spyNetSeen=new Map(),spyHitSeen=new WeakSet();let spyPrimed=false;
+  function spyMark(e){spyNetSeen.set(e.id,new Set(Object.keys(e.spy||{}).filter(k=>e.spy[k]).map(Number)));}
+  function spySweep(){
+    if(typeof intelOf!=='function')return;
+    for(const [eid] of S.slots){const e=G.emps[eid];if(!remoteHuman(e)||e.dead)continue;const nm=id=>e.contact&&e.contact[id]&&G.emps[id]?G.emps[id].name:'Bilinmeyen devlet';
+      const lv={};for(const o of G.emps)if(o!==e&&!o.dead&&!o.wild)lv[o.id]=intelOf(e,o.id);
+      const pl=spyIntelSeen.get(eid);if(spyPrimed&&pl)for(const id in lv)if(lv[id]>(pl[id]||0)&&typeof INTEL_LEVELS!=='undefined'&&INTEL_LEVELS[lv[id]])note(eid,'İstihbarat seviyesi arttı — '+nm(+id)+' ('+INTEL_LEVELS[lv[id]].n+')','sci');
+      spyIntelSeen.set(eid,lv);
+      const net=new Set(Object.keys(e.spy||{}).filter(k=>e.spy[k]).map(Number)),pn=spyNetSeen.get(eid);
+      if(spyPrimed&&pn)for(const id of pn)if(!net.has(id))note(eid,'CASUSUN YAKALANDI — '+nm(id)+' (ilişki −25)','war');
+      spyNetSeen.set(eid,net);
+      for(const h of e.hitLog||[]){if(spyHitSeen.has(h))continue;spyHitSeen.add(h);if(!spyPrimed)continue;
+        const OPn=OPS[h.k]?OPS[h.k].n:h.k;
+        if(h.known&&Number.isInteger(h.by))note(eid,'CASUSLUK YAKALANDI — '+nm(h.by)+' sana "'+OPn+'" operasyonu çekti','war');
+        else note(eid,typeof opVictimHint==='function'?opVictimHint(h.k):'Şüpheli bir istihbarat faaliyeti tespit edildi — fail bilinmiyor','war');}}
+    if(!spyPrimed){for(const e of G.emps)for(const h of e.hitLog||[])spyHitSeen.add(h);}
+    spyPrimed=true;
+  }
+  /* MP.6.4: borsa durumu (herkese açık fiyat çarpanları ve komisyon; kimin ne takas ettiği yok) */
+  function mktView(){if(typeof marketOpen!=='function')return {open:0};const open=marketOpen();
+    return {open:open?1:0,fee:typeof marketFeeNow==='function'?marketFeeNow():null,mul:open&&G.market?{...G.market.mul}:null};}
+  /* MP.6.4 oyuncuya özel haberler: motorun GalacticNews.visibility kuralının adımları, devlet 0 / host görüşü yerine o oyuncunun
+     kendi teması, keşfi (s.seen) ve görüşüyle (actorVision). Paylaşılan sensörün "keşif" yolu dahil edilmez (daha az gösterir,
+     asla daha fazla değil). Bilgi olay anında donar (motor gibi). Oturumda tutulur, oyuncu başına en çok NEWS_MAX kayıt. */
+  const NEWS_MAX=80,newsBy=new Map(),newsVisCache=new Map();
+  function newsVisionOf(h){const c=newsVisCache.get(h.id);if(c&&c.day===Math.floor(G.day))return c.v;const v=actorVision(h);newsVisCache.set(h.id,{day:Math.floor(G.day),v});return v;}
+  function newsVis(h,ev){
+    const ids=ev.empires||[],self=ids.includes(h.id);if(!ids.every(id=>id===h.id||!!(h.contact&&h.contact[id])))return '';
+    if(ev.system!==undefined){const s=G.sys[ev.system];if(!s||!s.seen.includes(h.id))return '';if(!self&&!newsVisionOf(h).has(s.id))return '';}
+    if(ev.scope==='player')return self?'Doğrudan katılım':'';
+    if(ev.scope==='public')return 'Öğrenilmiş galaktik duyuru';
+    if(ev.federation){const f=ev.federation;if(!(ev.bonds||f.members).every(id=>knownFederationBond(h,f,id)))return '';return 'Bilinen federasyon ilişkileri';}
+    if(self)return 'Doğrudan katılım';
+    if(ev.system!==undefined)return 'Görüş / sensör gözlemi';
+    return ids.length&&ids.some(id=>intelOf(h,id)>=3)?'Diplomatik istihbarat (seviye 3)':'';}
+  function newsFan(ev){
+    if(!ev||typeof GalacticNews==='undefined'||!Object.hasOwn(GalacticNews.categories,ev.category))return;
+    if(typeof _loadTxActive!=='undefined'&&_loadTxActive||G._newsSetup)return;
+    const key=String(ev.key||[ev.category,G.day,ev.empires,ev.system,ev.planet,ev.title].join('|')).slice(0,240),text=v=>String(v||'').slice(0,800);
+    for(const [eid] of S.slots){const h=G.emps[eid];if(!remoteHuman(h)||h.dead)continue;const knowledge=newsVis(h,ev);if(!knowledge)continue;
+      const st=newsBy.get(eid)||{next:1,records:[]};if(st.records.some(r=>r.key===key))continue;
+      const r={id:st.next++,key,day:G.day,year:G.year,month:G.month,category:ev.category,title:text(ev.title).slice(0,180),text:text(ev.text),important:!!ev.important,read:false,pinned:false,knowledge,
+        empires:[...new Set(ev.empires||[])].filter(id=>Number.isInteger(id)&&G.emps[id]).slice(0,16).map(id=>({id,name:text(G.emps[id].name).slice(0,120)}))};
+      if(Number.isInteger(ev.system)&&G.sys[ev.system]){r.system={id:ev.system,name:text(G.sys[ev.system].name).slice(0,120)};const pl=G.sys[ev.system].planets.find(p=>p.i===ev.planet);if(pl)r.planet={id:pl.i,name:text(pl.name).slice(0,120)};}
+      if(ev.federation)r.federation={id:ev.federation.id,name:text(ev.federation.name).slice(0,120)};
+      st.records.push(r);while(st.records.length>NEWS_MAX)st.records.shift();newsBy.set(eid,st);}
+  }
   function fedMotionOpts(c){const o={};for(const k of ['target','sponsor','type','field','value'])if(c[k]!==undefined)o[k]=c[k];return o;}
   const settleSide=(e,c)=>(G.warLedger&&G.warLedger.fronts||[]).some(f=>f.campaign===c&&f.sides.includes(e.id));
   function settleMember(e,id){const o=typeof settlementOffer==='function'&&settlementOffer(id);return o&&o.members.includes(e.id)?{o}:{err:'no-offer'};}
@@ -359,7 +416,7 @@ function createHost(opts){
         if(!t)continue;if(rh)note(id,t,st==='applied'?'win':st==='pending'||st==='approved'?'dip':'war');else if(opts.hostNotify)opts.hostNotify(t,'dip');}}
     settlePrimed=true;
   }
-  function publish(){dipSweep();pure(polSweep);pure(warSweep);pure(settleSweep);const rev=++S.worldRevision;for(const p of S.players.values())publishTo(p,rev);return rev;}
+  function publish(){dipSweep();pure(polSweep);pure(warSweep);pure(settleSweep);pure(spySweep);const rev=++S.worldRevision;for(const p of S.players.values())publishTo(p,rev);return rev;}
 
   /* ---------- komutlar: yalnız bu tablo ---------- */
   function locate(e,c){
@@ -657,6 +714,88 @@ function createHost(opts){
       why(e,{q},c){if(q.status!=='pending')return 'closed';if(q.to!==e.id)return 'not-recipient';if(q.id!==c.id||q.round!==c.round)return 'stale';if(G.day>=q.expires)return 'expired';
         if(c.action==='counter'&&!vassalTerms(q.type,c.terms))return 'terms';return null;},
       roots:()=>[],apply:(e,{q},c)=>vassalReply(e,c.sub,c.id,c.round,c.action,c.action==='counter'?c.terms:null)},
+    /* ═══ MP.6.4 — casusluk: motorun kendi kapıları (spyAssignQuote/assignSpy, opQuote/runOp, canSabotage/doSabotage,
+       canIncite/inciteRebellion, deepInvestigate, canFalseFlag/falseFlagOp, stealTech). Yeni casusluk motoru yok. Başarı ve ifşa
+       zarları yalnız host motorunda (rnd); istemciye gizli iç değer, RNG durumu ya da hedefin gizli verisi gitmez. Kimlik oturumdan. */
+    spyAssign:{keys:['kind','target'],check:c=>int(c.target,0,63),locate:(e,c)=>G.emps[c.target]&&(e.contact[c.target]||e.spy&&e.spy[c.target])?{}:{err:'no-target'},
+      why(e,at,c){const q=spyAssignQuote(e,c.target);return q.ok?null:{code:'spy',detail:[String(q.why||'').slice(0,200)]};},roots:()=>[],
+      apply(e,at,c){const q=spyAssignQuote(e,c.target);if(!assignSpy(e,c.target))return false;spyMark(e);
+        if(remoteHuman(e))note(e.id,(q.withdraw?'Casus geri çekildi — ':'Casus yerleştirildi — ')+G.emps[c.target].name,'sci');return true;}},
+    spyQuote:{keys:['kind','target'],ro:true,check:c=>int(c.target,0,63),locate:(e,c)=>G.emps[c.target]&&e.contact[c.target]?{}:{err:'no-target'},why:()=>null,roots:()=>[],
+      apply:(e,at,c)=>({ok:true,extra:spyQuoteOut(e,G.emps[c.target])})},
+    spyOp:{keys:['kind','target','op','cost','riskPct'],check:c=>int(c.target,0,63)&&typeof c.op==='string'&&Object.prototype.hasOwnProperty.call(OPS,c.op)&&typeof c.cost==='string'&&c.cost.length<=120&&int(c.riskPct,0,100),
+      locate:(e,c)=>G.emps[c.target]&&e.contact[c.target]?{}:{err:'no-target'},
+      why(e,at,c){const q=opQuote(e,G.emps[c.target],c.op);if(!q.ok)return {code:'spy',detail:[String(q.why||'').slice(0,200)]};
+        return JSON.stringify(q.cost)===c.cost&&q.riskPct===c.riskPct?null:'stale';},   // tek oyunculu onay ekranı gibi: maliyet ya da risk değiştiyse yeniden onay
+      roots:()=>[],apply(e,at,c){const r=runOp(e,G.emps[c.target],c.op);if(!r||!r.ok)return r;return {ok:true,extra:{msg:String(r.msg||'').slice(0,240),caught:!!r.caught,op:c.op,target:c.target}};}},
+    spySpecial:{keys:['kind','op','target','patsy','tur','sys'],
+      check:c=>['sabotage','incite','deepInv','falseFlag','stealTech'].includes(c.op)&&[c.target,c.patsy].every(x=>x===undefined||int(x,0,63))&&(c.tur===undefined||typeof c.tur==='string'&&c.tur.length<=16)&&(c.sys===undefined||int(c.sys,0,4095)),
+      locate(e,c){if(c.op==='deepInv')return {};const t=G.emps[c.target];if(!t||!e.contact[t.id])return {err:'no-target'};if(c.op==='falseFlag'&&(!G.emps[c.patsy]||!e.contact[c.patsy]))return {err:'no-target'};return {};},
+      why(e,at,c){if(c.op==='sabotage'&&!['yard','supply'].includes(c.tur))return 'bad-op';if(c.op==='sabotage'&&c.sys===undefined)return 'bad-op';return null;},roots:()=>[],
+      apply(e,at,c){const t=G.emps[c.target],r=c.op==='sabotage'?doSabotage(e,t,c.tur,c.sys):c.op==='incite'?inciteRebellion(e,t):c.op==='deepInv'?deepInvestigate(e):
+          c.op==='falseFlag'?falseFlagOp(e,t,G.emps[c.patsy],c.tur):stealTech(e,t);
+        if(!r||!r.ok)return r||false;
+        const x={msg:String(r.msg||'').slice(0,240),caught:!!r.caught};for(const k of ['basarili','cozuldu','savas'])if(r[k]!==undefined)x[k]=!!r[k];
+        if(r.tech!==undefined&&TECHS[r.tech])x.tech=r.tech;   // gerçekten edinilen teknoloji
+        if(remoteHuman(e)&&x.msg)note(e.id,x.msg,x.caught?'war':'sci');return {ok:true,extra:x};}},
+    /* ═══ MP.6.4 — kalan filo / koloni işlemleri: tek oyunculu düğmenin motor işlevi, yalnız komutu verenin devletinde.
+       reinforce (reinforceFleet), shipment (shipmentAction), shipCancel (cancelShipOrders: oyuncunun o sistemdeki kendi
+       siparişlerinin sırası), rally (setRally), terraform (startTerraform; olası "uyuyan" zarı motorda), habitat (buildHabitat),
+       leader (recruitLeader / assignLeader / görevden alma). loop / repair / görevden alma motor işlevi olmayan tek oyunculu
+       arayüz kuralıdır: aynı kural, aynı alanlar, yalnız kendi nesnesinde. */
+    reinforce:{say:'actor',keys:['kind','fleet'],check:c=>int(c.fleet,0,2147483647),locate:ownFleet,why:()=>null,roots:()=>[],apply:(e,{f})=>reinforceFleet(e,f)},
+    shipment:{say:'actor',keys:['kind','fleet','action','target'],check:c=>int(c.fleet,0,2147483647)&&['cancel','retarget','retry'].includes(c.action)&&
+        (c.target===undefined||plain(c.target)&&onlyKeys(c.target,['fleet','sys'])&&Object.keys(c.target).length===1&&Object.values(c.target).every(v=>int(v,0,2147483647))),
+      locate(e,c){const f=G.fleets.find(x=>x.id===c.fleet);return f&&f.e===e.id?{f}:{err:'not-owner'};},
+      why(e,at,c){if(c.target&&c.target.fleet!==undefined){const t=G.fleets.find(x=>x.id===c.target.fleet);if(!t||t.e!==e.id)return 'not-owner';}return null;},roots:()=>[],
+      apply:(e,{f},c)=>shipmentAction(e,f,c.action,c.target?{...c.target}:undefined)},
+    shipCancel:{say:'actor',keys:['kind','sys','orders','all'],check:c=>int(c.sys,0,G.sys.length-1)&&Array.isArray(c.orders)&&c.orders.length>=1&&c.orders.length<=64&&
+        c.orders.every(i=>int(i,0,255))&&new Set(c.orders).size===c.orders.length&&typeof c.all==='boolean',
+      locate(e,c){const sys=G.sys[c.sys],mineQ=(sys.queue||[]).filter(q=>q.e===e.id);if(!mineQ.length)return {err:'not-owner'};
+        const orders=c.orders.map(i=>mineQ[i]);return orders.every(Boolean)?{sys,orders}:{err:'stale'};},why:()=>null,roots:()=>[],
+      apply:(e,{sys,orders},c)=>cancelShipOrders(e,sys,orders,c.all)},
+    rally:{say:'actor',keys:['kind','sys','target'],check:c=>int(c.sys,0,G.sys.length-1)&&(c.target===null||int(c.target,0,G.sys.length-1)),
+      locate(e,c){const sys=G.sys[c.sys];return sys.owner===e.id?{sys}:{err:'not-owner'};},why:()=>null,roots:()=>[],apply:(e,{sys},c)=>setRally(e,sys,c.target)},
+    loop:{say:'actor',keys:['kind','sys','cls'],check:c=>int(c.sys,0,G.sys.length-1)&&(c.cls===null||typeof c.cls==='string'&&has(SHIPS,c.cls)),
+      locate(e,c){const sys=G.sys[c.sys];return sys.owner===e.id?{sys}:{err:'not-owner'};},
+      why(e,at,c){if(c.cls===null)return null;const a=shipBuildAccess(e,c.cls);return a.ok?null:{code:'access',detail:[String(a.why||'').slice(0,160)]};},
+      roots:(e,{sys})=>[sys],apply(e,{sys},c){if(c.cls===null){delete sys.loopBuild;delete sys._loopWarn;say('⏹ '+sys.name+' üretim döngüsü durduruldu');}
+        else{sys.loopBuild=c.cls;delete sys._loopWarn;say('🔁 '+sys.name+' sürekli '+SHIPS[c.cls].n+' üretecek','win');}return true;}},
+    repair:{say:'actor',keys:['kind','fleet'],check:c=>int(c.fleet,0,2147483647),locate:ownFleet,why:()=>null,roots:(e,{f})=>[f],
+      apply(e,{f}){f.repairOff=!f.repairOff;say(f.repairOff?'Onarım durduruldu — kaynak harcanmayacak':'Onarım başlatıldı');return true;}},
+    terraform:{say:'actor',keys:['kind','sys','planet'],check:c=>int(c.sys,0,G.sys.length-1)&&int(c.planet,0,31),
+      locate(e,c){const sys=G.sys[c.sys],pl=sys.planets[c.planet];return pl?{sys,pl}:{err:'no-planet'};},
+      why(e,{sys,pl}){const q=canTerraform(e,sys,pl);return q.ok?null:{code:'colony',detail:[String(q.why||'').slice(0,160)]};},roots:()=>[],apply:(e,{sys,pl})=>startTerraform(e,sys,pl)},
+    habitat:{say:'actor',keys:['kind','sys','planet'],check:c=>int(c.sys,0,G.sys.length-1)&&int(c.planet,0,31),
+      locate(e,c){const sys=G.sys[c.sys],pl=sys.planets[c.planet];return pl?{sys,pl}:{err:'no-planet'};},
+      why(e,{sys,pl}){if(!canHabitat(e,sys,pl))return {code:'colony',detail:['Habitat bu gezegene kurulamaz']};const c=BUILDINGS.habitat.c;
+        for(const r in c)if((e.res[r]||0)<c[r])return {code:'colony',detail:['Habitat kurulamadı — kaynak yetersiz']};return null;},roots:()=>[],apply:(e,{sys,pl})=>buildHabitat(e,sys,pl)},
+    leader:{say:'actor',keys:['kind','action','tip','leader','target'],check:c=>['hire','assign','unassign'].includes(c.action)&&(c.tip===undefined||['amiral','vali'].includes(c.tip))&&
+        (c.leader===undefined||int(c.leader,0,2147483647))&&(c.target===undefined||typeof c.target==='string'&&/^\d{1,10}(:\d{1,3})?$/.test(c.target)),
+      locate(e,c){if(c.action==='hire')return c.tip?{}:{err:'bad-params'};const L=leaderPool(e).find(x=>x.id===c.leader);return L?{L}:{err:'not-owner'};},
+      why(e,at,c){if(c.action==='assign'&&(!c.tip||c.target===undefined))return 'bad-params';
+        if(c.action==='assign'&&c.tip==='amiral'){const f=G.fleets.find(x=>x.id===+c.target);if(!f||f.e!==e.id)return 'not-owner';}
+        if(c.action==='assign'&&c.tip==='vali'){const [si,pi]=c.target.split(':').map(Number),pl=G.sys[si]&&G.sys[si].planets[pi];if(!pl||pl.owner!==e.id||!pl.col)return 'not-owner';}return null;},
+      roots:()=>[],   // işe alma / atama motorda kendi denetimiyle; görevden alma her zaman başarılı
+      apply(e,at,c){if(c.action==='hire')return recruitLeader(e,c.tip);
+        if(c.action==='assign'){const r=assignLeader(e,c.leader,c.tip,c.tip==='amiral'?+c.target:c.target);if(r.ok)say('👤 '+r.leader.name+' göreve başladı','win');return r;}
+        const L=at.L;if(L.tip==='amiral'){const f2=G.fleets.find(q=>q.id===L.post);if(f2&&f2.e===e.id)delete f2.leader;}
+        else if(L.post!==undefined){const [si,pi2]=String(L.post).split(':').map(Number),sy2=G.sys[si],pl2=sy2&&sy2.planets[pi2];if(pl2&&pl2.col&&pl2.owner===e.id)delete pl2.col.leader;}
+        delete L.post;say('👤 '+L.name+' görevden alındı');return true;}},
+    /* ═══ MP.6.4 — Galaktik Borsa: motorun anlık takası (marketTrade). Motor bekleyen emir tutmaz: emir yönetimi/iptali yok.
+       Fiyat host'ta, işlem anında; misafirin gördüğü sonuç (expect) host'unkinden farklıysa 'stale' + güncel teklif (yeniden onay).
+       Eşzamanlı istekler host'un sırasıyla; her işlem kendi anındaki fiyatla ve motorun bakiye denetimiyle → çoğaltma yok. */
+    market:{keys:['kind','sat','al','amount','expect'],check:c=>typeof MARKET_RES!=='undefined'&&MARKET_RES.includes(c.sat)&&MARKET_RES.includes(c.al)&&c.sat!==c.al&&int(c.amount,1,1000000)&&
+        (c.expect===undefined||typeof c.expect==='number'&&Number.isFinite(c.expect)&&c.expect>=0),locate:()=>({}),
+      why(e,at,c){if(!marketOpen())return {code:'market',detail:['Galaktik Borsa henüz kurulmadı — konseyin karar vermesi gerekiyor']};
+        if(typeof isPurifier==='function'&&isPurifier(e))return {code:'market',detail:['Fanatik Arındırıcılar Galaktik Borsayı kullanamaz']};
+        const q=marketQuote(c.sat,c.al,c.amount);if(!q.ok)return {code:'market',detail:[String(q.why)]};
+        if((e.res[c.sat]||0)<c.amount)return {code:'market',detail:['Yeterli '+(RES[c.sat]?RES[c.sat].n:c.sat)+' yok']};
+        if(c.expect!==undefined&&Math.abs(q.alinan-c.expect)>Math.max(.5,c.expect*.005))return {code:'stale',detail:['Fiyat değişti — güncel: '+Math.round(q.alinan)+' '+(RES[c.al]?RES[c.al].n:c.al),String(Math.round(q.alinan*100)/100)]};
+        return null;},
+      roots:()=>[],apply(e,at,c){const r=marketTrade(e,c.sat,c.al,c.amount);if(!r||!r.ok)return r||false;
+        if(remoteHuman(e))note(e.id,'💱 '+c.amount+' '+(RES[c.sat]?RES[c.sat].n:c.sat)+' → '+Math.round(r.alinan)+' '+(RES[c.al]?RES[c.al].n:c.al)+' (komisyon %'+Math.round(marketFeeNow()*100)+')','sci');
+        return {ok:true,extra:{alinan:Math.round(r.alinan*100)/100}};}},
     /* ═══ MP.6.3 — federasyonun kalan kararları: motorun kendi önerge yolu (canFedMotion / proposeFedMotion) ihraç, reform,
        anayasa/oy rejimi, başkan seçimi, mevcut savaşa katılma ve ortak savaş izni için; oylama ve kabul kuralları federasyonun
        anayasasından (motor). Kabul edilen savaş kararını yalnız önerici ya da başkan uygular (executeFedDecision). Acil hibe
@@ -1103,9 +1242,13 @@ function createHost(opts){
   function installGuards(){
     /* MP.4: aynı sayfada yeni oda ya da yüklenen kayıt yeni bir host örneği kurar. Korumalar bir kez sarılır ama
        her çağrıda ETKİN host'a yönlenir (eski odanın oyuncu tablosu kullanılmaz). */
-    root.__mpCur={remoteHuman,aiToHuman,note,stats,sqOffer};
+    root.__mpCur={remoteHuman,aiToHuman,note,stats,sqOffer,newsFan};
     root.__mpHumanVoter=id=>root.__mpCur.remoteHuman(G.emps[id]);
     if(root.__mp0Guards)return;root.__mp0Guards=true;
+    /* MP.6.4: galaktik haberler — motor bilgiyi olay anında YALNIZ host'un bakışıyla donduruyor (GalacticNews.visibility, G.p).
+       Her olay ayrıca her uzak insanın bakışıyla değerlendirilir (newsFan); host'un listesi misafire gitmez. */
+    if(typeof GalacticNews!=='undefined'&&typeof GalacticNews.emit==='function'){const emit0=GalacticNews.emit;
+      GalacticNews.emit=function(ev){const r=emit0.apply(this,arguments);try{root.__mpCur.newsFan(ev);}catch{}return r;};}
     const cur=()=>root.__mpCur,RH=e=>cur().remoteHuman(e),NOTE=(id,m,c)=>cur().note(id,m,c),ATH=(...a)=>cur().aiToHuman(...a),ST={get blockedAI(){return cur().stats.blockedAI;},set blockedAI(v){cur().stats.blockedAI=v;}};
     const neg=aiNegotiate,resp=aiRespond;
     /* MP.2: uzak insanın araştırma bildirimleri (researchTick içindeki say) host günlüğüne değil o oyuncunun
@@ -1266,7 +1409,8 @@ function createHost(opts){
   }
   function closeRoom(){if(!L)return {ok:false};L.phase='closed';broadcastLobby();for(const p of guests())if(p.conn){kick(p.conn,'room-closed');S.conns.delete(p.conn);p.conn=null;}return {ok:true};}
   if(opts.resume){if(!L)throw Error('MP.4: kayıttan devam lobi kipi ister');restoreSession(opts.resume);}
-  return {onMessage,onLeave,onJoin(){},publish,publishTo,speedSync,assign,release,installGuards,meta,restore,viewFor,local,dip:D,dipView,polView:e=>pure(()=>polView(e)),
+  const newsOf=id=>JSON.parse(JSON.stringify((newsBy.get(id)||{records:[]}).records));
+  return {newsOf,onMessage,onLeave,onJoin(){},publish,publishTo,speedSync,assign,release,installGuards,meta,restore,viewFor,local,dip:D,dipView,polView:e=>pure(()=>polView(e)),
     snapshot,resumeStart,recoverSeat,
     isHuman:humanEmpire,isRemoteHuman:remoteHuman,state:S,stats,COMMANDS,HANDLERS,clock,fnv,observeHumans,
     configure,setCapacity,claimFor,setHostTab,start,canStart,kick:kickPlayer,close:closeRoom,lobbyView:()=>L&&lobbyView(S.players.get('host')),lobby:L,
