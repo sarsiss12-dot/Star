@@ -221,11 +221,17 @@ let relay,base,bH,bB,bC,bA,H,Bp,Cp,Ap;
     await synced(Ap);await wait(Ap,([x,s])=>!!(G.emps[s]&&G.emps[s].war&&G.emps[s].war[x]),[loc(A,X),loc(A,2)]);
     v=await motion('military','joinWar:'+loc(A,X)+':'+loc(A,2),'joinWar');assert.equal(v.motion,'joinWar');
     const d=await H.evaluate(f=>Object.values(fedOf(f).decisions||{}).find(d=>d.kind==='joinWar'&&d.state==='ready')||null,fid);
-    if(!d){metrics.notes.push('ortak savaş önergesi motor oylamasında kabul edilmedi');return;}
+    assert(d,'joinWar motion accepted by the engine vote (ready decision)');
+    /* FİKSTÜR (açıkça): motorun aiFedHelp kapısı katılımcının hedefi bilinen haritada görmesini ister (aiKnownSystems / aiKnownRoute);
+       A'ya hedefin sistemleri motorun kendi alanında (s.seen) "görülmüş" yazılır. Uygulama kararı yine motorun executeFedDecision'ı. */
+    await H.evaluate(([a,x])=>{for(const s of G.sys)if(!s.seen.includes(a))s.seen.push(a);MP1Host.host.publish();void x;},[A,X]);
     await closeAll(Ap);await synced(Ap);await Ap.evaluate(()=>UI.openFed());await tapIn(Ap,'#diploPane [data-a="fedTab"][data-x="military"]');
     await tapIn(Ap,'#diploPane [data-a="fedExecute"][data-x="'+fid+':'+d.id+'"]');
-    await hostWait(([f,id])=>{const x=fedOf(f).decisions[id];return x&&x.state!=='ready';},[fid,d.id],'fedExecute').catch(async e=>{metrics.notes.push('karar uygulanamadı (motor): '+JSON.stringify(await notesOf(Ap)).slice(0,200));});
-    metrics.notes.push('ortak savaş kararı: '+JSON.stringify(await H.evaluate(([f,id])=>fedOf(f).decisions[id],[fid,d.id])).slice(0,200));await closeAll(Ap);
+    await hostWait(([f,id])=>{const x=fedOf(f).decisions[id];return x&&x.state!=='ready';},[fid,d.id],'fedExecute');
+    const dx=await H.evaluate(([f,id])=>fedOf(f).decisions[id],[fid,d.id]);metrics.notes.push('ortak savaş kararı: '+JSON.stringify(dx).slice(0,240));
+    assert.equal(dx.state,'applied','engine executeFedDecision applied the decision');assert(dx.joined.includes(A),'A joined the war through the engine');
+    assert(await H.evaluate(([a,x])=>!!G.emps[a].war[x],[A,X]),'host: A at war with the target');
+    await wait(Ap,()=>(MP1Join.game.view.log||[]).some(n=>/Federasyon savaş kararı uygulandı/.test(n.m)));await shot(Ap,'f1-a-executed');await closeAll(Ap);
   });
 
   await test('sayfa hataları yok (host, B, C, A)',async()=>{assert.deepEqual(errors,[]);});

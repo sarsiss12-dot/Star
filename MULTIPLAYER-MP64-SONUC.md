@@ -168,7 +168,22 @@ Komutların hepsi yalnız komutu verenin kendi devletinde çalışır:
 
 ## 6. Geç oyun performans ön ölçümü (tanı; optimizasyon yok)
 
-Bkz. `research/mp64/perf/SONUC.md` (aşağıda özet).
+Ayrıntı: `research/mp64/perf/SONUC.md`.
+
+**Koşullar:**
+- ULU (100 sistem), 11 AI, seed 22, 240 ay; gerçek motor Node vm'de.
+- Kollar: A paylaşım kapalı, B paylaşım açık, C tam temas + paylaşım.
+- Tarayıcı FPS, GPU ve fiziksel Android: **NOT RUN**.
+
+| Neden | Bulgu | Durum |
+|---|---|---|
+| A. Harita çizimi | Tam görünürlükte medyan 5 → 15–25 ms, ilk kare tepeleri 300–410 ms (yalnız Skia CPU) | Ölçüldü; ana kaynak değil |
+| B. AI / ekonomi | Simülasyonun >%70'i `aiTurn`; 120 → 180. ay ~5×; 180. ayda 2,8–3,1 s/ay. Profil: `aiBuildingDelta` → `empireIncome` → `tradeInfo` → `tradeLinks` → `findPath` (%64 toplam) | **Kanıtlanmış ana kaynak**; paylaşımdan bağımsız |
+| C. Sensör görünürlüğü | `refreshSharedVision` + `updateVision` ≤ 17 ms/ay | Ölçüldü; ihmal edilebilir |
+| D. Biriken veri | Kayıt 420 KB → 1,7 MB, yığın 21 → 33 MB | Ölçüldü; kanıtlanmış kaynak değil |
+| E. MP ayna | Kurma 4–14 ms, 86–105 KB; misafirde `deserialize` 150–270 ms (masaüstü CPU) | Telefonda maliyet hipotezi; cihazda ölçülmedi |
+
+Optimizasyon yapılmadı. Öneriler PERF.1'e bırakıldı ve kontrol–aday eşdeğerliği ile kanıtlanmalı.
 
 ## 7. Yayın bütünlüğü ve çalışma ağacı
 
@@ -184,3 +199,20 @@ Dosya silinmedi, manifest değiştirilmedi.
 ## 8. Testler
 
 Sonuçlar: `research/mp64/evidence/REGRESYON.md`.
+
+Özet:
+- Node: 161 paket, 6293 GEÇEN / 3 KALAN; yalnız bilinen `faz95d_identity` 3 vakası.
+- Yeni `mp64_*` paketleri: 21/21.
+- Chromium: 15 test, hepsi PASS (browser-mp64 ayrıntısı belgede).
+- Fiziksel Android / internet / LAN: NOT RUN.
+
+## 9. Bilinen sınırlar ve tamamlanmayanlar
+
+- **Engelli kalanlar** (misafirde soluk görünür ve uyarı verir): rüşvet / şantaj (Konsey oyu), fısıltı, Panoptikon yeniden hedefleme, elçi görevleri, filo bileşim şablonları.
+- **Haber geçmişi:** oturumda tutulur, MP.4 paketine girmez.
+- **Sensör paylaşımı yolu:** haber görünürlüğünde dahil edilmedi; daha az gösterir, asla fazla değil.
+- **Bağımsızlık desteği:** sızma zarı motorun. Tarayıcı koşusunda sızma olmadı, bu yüzden senyöre giden sızma bildirimi gerçek tarayıcıda görülmedi. Node testi (`mp63_polvas_test`) yalnız "bildirim = sızma" eşitliğini denetler; hangi dalın koşulduğu zara bağlıdır.
+- **Federasyon tür reformu:** önerge gerçek dokunmayla açıldı, motorun oylamasında geçmedi. Reformun uygulanması tarayıcıda görülmedi.
+- **Ortak savaş kararı:** uygulanması için açık fikstür gerekti: katılımcının hedefi motorun `s.seen` alanında "görmüş" olması (motorun `aiFedHelp` kapısı).
+- **Borsa:** motorda emir defteri yok. Bekleyen emir / iptal yazılmadı.
+
