@@ -161,6 +161,8 @@ Komutların hepsi yalnız komutu verenin kendi devletinde çalışır:
   - mevcut savaşa katılma önergesi → kabul, hazır karar;
   - A gerçek "uygula" düğmesine dokunur → motorun `executeFedDecision`'ı.
   - Ayna artık üyeye federasyon kararlarını numaralandırılmış olarak verir; önceden `decisions:{}` idi ve "uygula" düğmesi görünmüyordu.
+  - **Misafir düzeltmesi:** `openFed` dünya kimliği değişince sekmeyi GENEL'e döndürüyordu. Misafirde her ayna kurulumu yeni `G.emps` ürettiğinden açık sekme host'taki her değişiklikte kayboluyordu. Canlı senkronda `_fedTabsWorld` yeni dünyaya bağlanır.
+  - Motor kararı uyguladı (`applied`, A katıldı, B "ulaşabilir rota yok" ile engellendi). Fikstür için bkz. §9.
 - **Vasallık:**
   - yenileme: B gerçek pencereden önerir, C gelen kutusundan kabul eder; 24 ay süresi motorun, tarihler 25 ay geriye alındı;
   - bağımsızlık desteği: A gerçek düğmeye dokunur; sızma olursa B'ye bildirim gider;
