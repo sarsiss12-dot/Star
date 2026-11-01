@@ -53,6 +53,7 @@ function render(){
 function lobbyScreen(){
   if(API.lobby&&API.lobby.phase==='resume')return resumeLobby();
   const L=API.lobby;if(!L){overlay.innerHTML='<div class="mp1-wrap"><div class="mp1-status">Lobi hazırlanıyor…</div></div>';return;}
+  if(L.mode==='design')return designLobby();
   const link=location.origin+'/mp/play?code='+API.code,cs=API.host.canStart(),me=G.p;
   const tabs=['lobi','galaksi','doktrin','gorunus','fizyoloji','etik','civic','koken'];
   let body='';
@@ -85,9 +86,12 @@ function lobbyScreen(){
     '<div class="mp1-status'+(API.connected?'':' bad')+'">'+(API.connected?'Bağlantı hizmetine bağlı':'Bağlantı hizmeti yok — yeniden deneniyor')+'</div></div>';
 }
 const START_WHY={'no-guests':'En az bir oyuncunun katılması gerekiyor.','guest-not-ready':'Bütün oyuncular hazır değil.','guest-no-empire':'Her oyuncu bir devlet seçmeli.',
-  'guest-offline':'Bağlantısı kopan oyuncu var.','no-galaxy':'Önce galaksiyi uygula.','already-started':'Oyun zaten başladı.','not-claimable':'Seçilen devlet artık uygun değil.'};
+  'guest-offline':'Bağlantısı kopan oyuncu var.','no-galaxy':'Önce galaksiyi uygula.','already-started':'Oyun zaten başladı.','not-claimable':'Seçilen devlet artık uygun değil.',
+  /* MP.7 tasarım kipi */
+  'guest-no-draft':'Her oyuncu devletini tasarlayıp kaydetmeli.','host-draft':'Kendi devletini tamamla (DEVLETİMİ DÜZENLE).','too-many-states':'AI + insan oyuncu sayısı 11\'i aşamaz; AI sayısını azalt.',
+  'guest-draft':'Bir oyuncunun devlet taslağı geçersiz; yeniden kaydetmeli.','generate':'Galaksi bu ayarlarla kurulamadı.'};
 function pidOfSeat(seat){for(const p of API.host.state.players.values())if(p.seat===seat)return p.playerId;return '';}
-function onChange(e){const t=e.target;if(t.id==='mp4File'){onFile(t);return;}if(t.dataset.m==='claimFor'&&t.value!==''){const r=API.host.claimFor(t.dataset.pid,+t.value);if(!r.ok)toast(V.ERR[r.why]||r.why);}}
+function onChange(e){const t=e.target;if(t.id==='mp4File'){onFile(t);return;}if(t.id==='mp7Cap'){const r=API.host.setCapacity(+t.value);if(!r.ok)toast(r.why==='too-many'?'Odada bu kapasiteden fazla oyuncu var.':START_WHY[r.why]||r.why);else{pushCap();applyHostSetup();}return;}if(t.dataset.m==='claimFor'&&t.value!==''){const r=API.host.claimFor(t.dataset.pid,+t.value);if(!r.ok)toast(V.ERR[r.why]||r.why);}}
 function onClick(e){
   const el=e.target.closest('[data-m]');if(!el)return;const m=el.dataset.m;
   if(m==='back'){history.back();return;}
@@ -107,6 +111,8 @@ function onClick(e){
   if(m==='apply'){applySettings();return;}
   if(m==='kick'){sheet('Bu oyuncu odadan çıkarılsın mı? (bu odaya tekrar giremez)','Çıkar',()=>{API.host.kick(el.dataset.pid,false);});return;}
   if(m==='start'){startGame();return;}
+  /* MP.7: tek oyunculu kurulum ekranı (aynı ekran, aynı kurallar); kaydedince galaksi ayarları lobiye uygulanır */
+  if(m==='editMe'||m==='galaxy'){if(window.MP7Setup)MP7Setup.open({role:'host',step:m==='galaxy'?'galaksi':'mizac',done(){applyHostSetup();}});return;}
   if(m==='close'){sheet('Oda kapatılsın mı? Bağlı oyuncular çıkarılır.','Odayı kapat',closeRoom);return;}
 }
 function toast(t){const s=doc.getElementById('mp1Start');if(s){s.textContent=t;s.className='mp1-status bad';}}
@@ -150,12 +156,41 @@ function makeHost(){
     /* MP.6.3: ortak hız = son açık seçim (want); uygulanan hız geçici nedenlerle (karar penceresi / arka plan / ağ) düşük olabilir */
     speedInfo:()=>PZ&&API.started?{want:PZ.want,reason:PZ.reason()}:null,
     onSpeed:info=>{if(window.MP61)MP61.speed(info);},
-    lobby:{generate(set){setupGame({...CFG,...set});if(CFG.mizac)applyChosenPersona(G.p,CFG.mizac);G.autoSave=false;return {ok:true};}}});
+    /* MP.7: tasarım kipi — host'un devleti kendi kurulum ekranındaki CFG, misafirlerinki kendi taslakları; galaksi OYUNU BAŞLAT'ta
+       gerçek setupGame(cfg.humans) ile kurulur. MP7Setup yüklenmemişse (eski sayfa) MP.1 devralma kipi. */
+    lobby:{design:!!window.MP7Setup,hostDraft:()=>window.MP7Setup?MP7Setup.draft():null,
+      generate(set){const {host:_h,...rest}=set;setupGame({...CFG,...rest});if(CFG.mizac)applyChosenPersona(G.p,CFG.mizac);G.autoSave=false;return {ok:true};}}});
   API.host.installGuards();
   if(window.MP61)MP61.source=()=>G.speed|0;
   if(resume){API.resumeInfo={display:resume.display,speed:resume.session.speed|0,saveId:resume.saveId};API.lobby=API.host.lobbyView();return;}
   const seed=1+(crypto.getRandomValues(new Uint32Array(1))[0]%2147483646);
+  if(API.host.lobby.mode==='design'){CFG.seed=seed;applyHostSetup();return;}
   API.host.configure({size:'orta',aiCount:5,seed,...(CFG.shape?{shape:CFG.shape}:{})});
+}
+/* MP.7: host'un kurulum ekranındaki galaksi ayarları (aynı CFG) lobiye uygulanır; AI + insan ≤ 11 */
+function applyHostSetup(){
+  const cap=API.host.lobby.capacity,ai=Math.max(1,Math.min(aiCountFor(CFG),12-cap));
+  const r=API.host.configure({size:CFG.size,aiCount:ai,seed:Math.trunc(+CFG.seed)%2147483646||1,...(CFG.shape?{shape:CFG.shape}:{})});
+  API.setupNote=r.ok?(ai!==aiCountFor(CFG)?'AI devlet sayısı insan oyuncularla birlikte 11\'i aşmasın diye '+ai+' yapıldı.':''):(START_WHY[r.why]||r.why);
+  if(API.screen==='lobby')render();
+}
+function designLobby(){
+  const L=API.lobby,cs=API.host.canStart(),link=location.origin+'/mp/play?code='+API.code,s=L.settings||{},cards=new Map((L.designs||[]).map(d=>[d.seat,d.card]));
+  const rows=L.players.slice().sort((a,b)=>a.seat-b.seat).map(p=>{const pid=p.host?'':pidOfSeat(p.seat),c=cards.get(p.seat);
+    const st=p.host?(c?'<span class="st ok">hazır</span>':'<span class="st wait">devletini tamamla</span>'):!p.online?'<span class="st off">bağlantı yok</span>':!c?'<span class="st wait">devlet hazırlanıyor</span>':p.ready?'<span class="st ok">hazır</span>':'<span class="st wait">hazır değil</span>';
+    return '<div class="mp7-pl" data-seat="'+(+p.seat)+'"><span class="dot" style="background:'+esc(c&&c.col||p.color)+'"></span><div class="who">'+esc(p.name)+(p.host?' (host)':'')+'<br>'+MP7Setup.card(c)+'</div>'+st+
+      (p.host?'':'<button class="mp1-btn warn" data-m="kick" data-pid="'+esc(pid)+'">Çıkar</button>')+'</div>';}).join('');
+  overlay.innerHTML='<div class="mp1-wrap mp7-lobby"><div class="mp1-h">STARS — ÇOK OYUNCULU LOBİ</div>'+
+    '<div class="mp1-code" id="mp1Code">'+esc(V.fmtCode(API.code))+'</div><div class="mp1-row"><button class="mp1-btn" data-m="copy">KODU KOPYALA</button><button class="mp1-btn" data-m="share">DAVET PAYLAŞ</button></div>'+
+    '<div class="mp1-sub" id="mp1Link">'+esc(link)+'</div>'+
+    '<div class="mp1-card" id="mp7Players"><b>Oyuncular — '+L.players.length+'/'+L.capacity+'</b>'+rows+(L.players.length<2?'<div class="mp1-sub">Henüz oyuncu yok. Oda kodunu ya da davet bağlantısını paylaş.</div>':'')+'</div>'+
+    '<button class="mp1-btn pri" data-m="editMe" id="mp7EditMe">DEVLETİMİ DÜZENLE</button>'+
+    '<div class="mp1-card" id="mp7Galaxy"><b>Galaksi</b><div>'+esc((SIZES[s.size]||{}).n||s.size||'—')+' · '+esc((SHAPES[s.shape]||{}).n||'')+' · '+(+s.aiCount||0)+' AI + '+L.capacity+' insan</div>'+
+      '<label class="mp1-l" for="mp7Cap">İnsan oyuncu kapasitesi (host dahil)</label><select class="mp1-sel" id="mp7Cap">'+[2,3,4].map(n=>'<option'+(n===L.capacity?' selected':'')+'>'+n+'</option>').join('')+'</select>'+
+      '<button class="mp1-btn" data-m="galaxy" id="mp7GalaxyBtn">GALAKSİ AYARLARI</button>'+(API.setupNote?'<div class="mp1-sub">'+esc(API.setupNote)+'</div>':'')+'</div>'+
+    '<div class="mp1-status'+(cs.ok?' ok':'')+'" id="mp1Start">'+(cs.ok?'Herkes hazır. Oyunu başlatabilirsin.':esc(START_WHY[cs.why]||cs.why))+'</div>'+
+    '<button class="mp1-btn pri" data-m="start"'+(cs.ok?'':' disabled')+'>OYUNU BAŞLAT</button><button class="mp1-btn warn" data-m="close">ODAYI KAPAT</button>'+
+    '<div class="mp1-status'+(API.connected?'':' bad')+'">'+(API.connected?'Bağlantı hizmetine bağlı':'Bağlantı hizmeti yok — yeniden deneniyor')+'</div></div>';
 }
 function applySettings(){
   const set={size:doc.getElementById('mp1Size').value,aiCount:+doc.getElementById('mp1Ai').value,seed:Math.trunc(+doc.getElementById('mp1Seed').value)||1,...(CFG.shape?{shape:CFG.shape}:{})};

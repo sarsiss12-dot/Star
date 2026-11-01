@@ -1,0 +1,8 @@
+/* MP.7: kurulum ekranı açıkken çok oyunculu katmanlar gizlenir; ekranın kendisi tek oyunculudakiyle aynı */
+.mp7-hide{display:none!important}
+.mp7-head{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;margin:0 0 10px;padding:8px 10px;border:1px solid #2b3b5c;border-radius:8px;background:#0c1426;color:#cfe0ff;font-size:12px}
+.mp7-head b{color:#6ff2c8;letter-spacing:.06em}.mp7-head span{flex:1 1 180px;color:#8ea3c6}
+.mp7-lobby .mp7-pl{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid #1d2a44}
+.mp7-lobby .mp7-pl .who{flex:1 1 auto;min-width:0}.mp7-lobby .mp7-pl .st{font-size:11px;white-space:nowrap}
+.mp7-lobby .st.ok{color:#6ff2c8}.mp7-lobby .st.wait{color:#f5c25c}.mp7-lobby .st.off{color:#ff7a7a}
+.mp7-lobby .dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:4px;vertical-align:middle}

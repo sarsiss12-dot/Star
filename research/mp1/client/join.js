@@ -116,8 +116,32 @@ function statusBar(){const live=J.ws&&J.ws.readyState===1;
   const t=J.netDown?'Ağ bağlantısı yok — ağ dönünce yeniden bağlanılacak':!live?(J.reconnecting?'Bağlantı koptu — yeniden bağlanılıyor…':'Bağlantı yok'):!J.hostOnline?'Host bağlı değil — oyun duraklatıldı':
     pz==='host-background'?'Oyun duraklatıldı — host uygulamayı arka plana aldı ya da ekranı kilitledi':pz?'Oyun duraklatıldı — host bağlantısı bekleniyor':'Bağlı · oda '+esc(J.code);
   return '<div class="mp1-status '+(live&&J.hostOnline&&!pz&&!J.netDown?'ok':'bad')+'" id="jConn">'+t+'</div>';}
+/* MP.7: tasarım kipi lobisi — her oyuncu kendi devletini tek oyunculu kurulum ekranında (gerçek STARS ekranı, /mp/play) tasarlar */
+const DRAFT_ERR={name:'Devlet adı geçersiz.',race:'Tür geçersiz.',mizac:'Doktrin geçersiz.',physio:'Fizyoloji geçersiz.',look:'Görünüş geçersiz.',origin:'Köken bu devletle uyumsuz.',
+  ethics:'Etik seçimi kuralları aşıyor.',civics:'Civic seçimi kuralları aşıyor.',traits:'Özellik seçimi kuralları aşıyor.',keys:'Taslak biçimi geçersiz.'};
+function draftMsg(r){if(!r)return '';if(r.ok)return 'Devletin host\'a kaydedildi.';if(r.code==='stale')return 'Daha yeni bir taslağın zaten kayıtlı.';
+  const k=String(r.code||'').replace(/^draft:/,'');return 'Taslak reddedildi: '+(DRAFT_ERR[k]||V.ERR[r.code]||r.code);}
+function sendDraft(d){const L=J.lobby;const rev=Math.max(((L&&L.you&&L.you.draftRev)||0)+1,Math.floor(Date.now()/1000)%2147483647);J.draftSent=rev;raw({v:1,type:'draft',rev,draft:d});}
+J.sendDraft=sendDraft;
+function designLobby(app){
+  const L=J.lobby,me=L.players.find(p=>L.you&&p.seat===L.you.seat)||{},cards=new Map((L.designs||[]).map(d=>[d.seat,d.card])),s=L.settings||{};
+  const last=J.lresults.filter(r=>r.action==='draft').slice(-1)[0];
+  if(!window.MP7Setup){app.innerHTML=statusBar()+'<div class="mp1-h">STARS — ÇOK OYUNCULU LOBİ</div><div class="mp1-card"><b>Devletini tasarlamak için oyun sayfasından katıl</b><p class="mp1-sub">Bu basit sayfada kurulum ekranı yok.</p><a class="mp1-btn pri" href="/mp/play?code='+esc(J.code.replace(/-/g,''))+'">OYUN SAYFASINI AÇ</a></div>';return;}
+  const rows=L.players.slice().sort((a,b)=>a.seat-b.seat).map(p=>{const c=cards.get(p.seat);
+    const st=!p.online?'<span class="st off">bağlantı yok</span>':!c?'<span class="st wait">devlet hazırlanıyor</span>':p.host||p.ready?'<span class="st ok">hazır</span>':'<span class="st wait">hazır değil</span>';
+    return '<div class="mp7-pl" data-seat="'+(+p.seat)+'"><span class="dot" style="background:'+esc(c&&c.col||p.color)+'"></span><div class="who">'+esc(p.name)+(p.host?' (host)':'')+(p.seat===me.seat?' (sen)':'')+'<br>'+MP7Setup.card(c)+'</div>'+st+'</div>';}).join('');
+  const has=!!(L.you&&L.you.draft);
+  app.innerHTML=statusBar()+'<div class="mp1-wrap mp7-lobby"><div class="mp1-h">STARS — ÇOK OYUNCULU LOBİ</div><div class="mp1-sub">'+esc(V.PHASE[L.phase]||L.phase)+' · oda '+esc(J.code)+'</div>'+
+    '<div class="mp1-card" id="jPlayers"><b>Oyuncular — '+L.players.length+'/'+L.capacity+'</b>'+rows+'</div>'+
+    '<button class="mp1-btn '+(has?'':'pri')+'" data-j="editMe" id="jEditMe">DEVLETİMİ DÜZENLE</button>'+
+    '<div class="mp1-status'+(last&&!last.ok?' bad':has?' ok':'')+'" id="jDraft">'+esc(last?draftMsg(last):has?'Devletin host\'a kaydedildi.':'Önce devletini tasarla ve kaydet.')+'</div>'+
+    '<div class="mp1-card" id="jGalaxy"><b>Galaksi</b> (host ayarlar)<div>'+esc((SIZE_N[s.size])||s.size||'—')+' · '+(+s.aiCount||0)+' AI + '+L.capacity+' insan</div></div>'+
+    '<button class="mp1-btn '+(me.ready?'':'pri')+'" data-j="ready" id="jReady"'+(has?'':' disabled')+'>'+(me.ready?'HAZIR DEĞİLİM':'HAZIRIM')+'</button>'+
+    '<button class="mp1-btn warn" data-j="leave">ODADAN AYRIL</button></div>';
+}
 function lobby(app){
   const L=J.lobby;if(!L){app.innerHTML=statusBar()+'<div class="mp1-status">Lobi bekleniyor…</div>';return;}
+  if(L.mode==='design')return designLobby(app);
   const me=L.players.find(p=>L.you&&p.seat===L.you.seat)||{};
   const tabs=['lobi','doktrin','gorunus','fizyoloji','etik','civic','koken','galaksi'];
   let body='';
@@ -168,6 +192,7 @@ doc.addEventListener('click',e=>{
   else if(a==='tab')J.presence(el.dataset.tab);
   else if(a==='claim')J.claim(+el.dataset.e);
   else if(a==='unclaim')J.claim(null);
+  else if(a==='editMe'&&window.MP7Setup)MP7Setup.open({role:'guest',storeKey:'mp7:draft',restore:true,done(d){sendDraft(d);render();}});
   else if(a==='ready'){const L=J.lobby,me=L&&L.players.find(p=>p.seat===L.you.seat);J.ready(!(me&&me.ready));}
   else if(a==='leave'||a==='sheetLeave'){$('jSheet')&&$('jSheet').remove();J.leave();}
   else if(a==='sheetStay')$('jSheet')&&$('jSheet').remove();
