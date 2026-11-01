@@ -185,7 +185,27 @@ function tradeHubs(e){
   }
   return out;
 }
+/* PERF.1: ticaret rotası findPath(start,l) yolcu/kapı/geçiş kuralı olmadan çağrılır; sonucu yalnız şerit
+   grafiğine, sabit sistem konumlarına ve radyasyon kümesine bağlıdır. Aynı dünya için yönlü (start→l) sonuç
+   saklanır; dünya (G.sys), bir sistemin şerit dizisi/uzunluğu ya da radyasyon kümesi değişince sıfırlanır.
+   Save8'e girmez, RNG kullanmaz; dönen rota yalnız kopyalanarak (concat) kullanılır. */
+const TRADE_PATHS = {sys:null, lanes:[], lens:[], rad:'', memo:new Map()};
+function tradePathMemo(){
+  const S = G.sys, T = TRADE_PATHS;
+  let ok = T.sys === S && T.lanes.length === S.length, rad = '';
+  for (let i = 0; i < S.length; i++){
+    const s = S[i];
+    if (s.radiation) rad += i + ',';
+    if (ok && (T.lanes[i] !== s.lanes || T.lens[i] !== s.lanes.length)) ok = false;
+  }
+  if (!ok || T.rad !== rad){
+    T.sys = S; T.rad = rad; T.memo = new Map();
+    T.lanes = S.map(s => s.lanes); T.lens = S.map(s => s.lanes.length);
+  }
+  return T.memo;
+}
 function tradeLinks(e){
+  const paths = tradePathMemo();
   const cols = tradeHubs(e);
   // ticaret anlaşmalı imparatorlukların limanları da ağa dahil
   const foreign = {};
@@ -213,7 +233,9 @@ function tradeLinks(e){
           if (!seenPair.has(key)){
             seenPair.add(key);
             const raided = (G.raids && G.raids[key] && G.raids[key] > G.day);
-            const route = findPath(start, l);
+            const pk = start * 65536 + l;
+            let route = paths.get(pk);
+            if (route === undefined){ route = findPath(start, l); paths.set(pk, route); }
             links.push({a:start, b:l, bl: bl || raided, raided,
                         dis: (foreign[start] !== undefined || foreign[l] !== undefined),
                         key, vol: routeVolume(e, start, l),
