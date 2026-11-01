@@ -1,0 +1,122 @@
+{
+ "root": "control",
+ "save": "ulu11-s22-m180.json",
+ "seconds": 10,
+ "arms": [
+  {
+   "speed": 0,
+   "share": false,
+   "zoom": "far",
+   "frames": 566,
+   "fps": 56.6,
+   "meanMs": 17.6,
+   "medianMs": 16.7,
+   "p95Ms": 33.3,
+   "p99Ms": 33.4,
+   "maxMs": 50,
+   "over50": 0,
+   "over250": 0,
+   "draw": {
+    "median": 1.4,
+    "p95": 2.1,
+    "max": 3.9
+   },
+   "daysAdvanced": 0,
+   "visibleSystems": 3,
+   "visibleFleets": 5,
+   "errors": []
+  },
+  {
+   "speed": 0,
+   "share": true,
+   "zoom": "far",
+   "frames": 508,
+   "fps": 50.8,
+   "meanMs": 19.7,
+   "medianMs": 16.7,
+   "p95Ms": 33.4,
+   "p99Ms": 33.4,
+   "maxMs": 50.1,
+   "over50": 2,
+   "over250": 0,
+   "draw": {
+    "median": 2.4,
+    "p95": 5.3,
+    "max": 9.4
+   },
+   "daysAdvanced": 0,
+   "visibleSystems": 94,
+   "visibleFleets": 100,
+   "errors": []
+  },
+  {
+   "speed": 0,
+   "share": true,
+   "zoom": "near",
+   "frames": 546,
+   "fps": 54.6,
+   "meanMs": 18.3,
+   "medianMs": 16.7,
+   "p95Ms": 33.3,
+   "p99Ms": 33.4,
+   "maxMs": 49.9,
+   "over50": 0,
+   "over250": 0,
+   "draw": {
+    "median": 1.4,
+    "p95": 2.6,
+    "max": 7.2
+   },
+   "daysAdvanced": 0,
+   "visibleSystems": 94,
+   "visibleFleets": 100,
+   "errors": []
+  },
+  {
+   "speed": 4,
+   "share": false,
+   "zoom": "far",
+   "frames": 414,
+   "fps": 41.4,
+   "meanMs": 24.2,
+   "medianMs": 16.7,
+   "p95Ms": 33.4,
+   "p99Ms": 33.4,
+   "maxMs": 966.6,
+   "over50": 3,
+   "over250": 3,
+   "draw": {
+    "median": 1.4,
+    "p95": 2.8,
+    "max": 10.4
+   },
+   "daysAdvanced": 77.1,
+   "visibleSystems": 3,
+   "visibleFleets": 6,
+   "errors": []
+  },
+  {
+   "speed": 4,
+   "share": true,
+   "zoom": "far",
+   "frames": 459,
+   "fps": 45.9,
+   "meanMs": 21.8,
+   "medianMs": 16.7,
+   "p95Ms": 33.4,
+   "p99Ms": 50,
+   "maxMs": 1333.3,
+   "over50": 4,
+   "over250": 1,
+   "draw": {
+    "median": 2.5,
+    "p95": 4.3,
+    "max": 26.7
+   },
+   "daysAdvanced": 14.7,
+   "visibleSystems": 94,
+   "visibleFleets": 98,
+   "errors": []
+  }
+ ]
+}

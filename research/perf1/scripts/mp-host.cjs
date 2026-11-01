@@ -37,4 +37,4 @@ const stats=+guests>0?JSON.parse(h.run('JSON.stringify((()=>{const s=MP.stats||{
 process.stdout.write(JSON.stringify({root:path.basename(root),save:path.basename(save),guests:+guests,months:+months,
   median:{simMs:med('simMs'),publishMs:med('publishMs'),bytesKB:+(med('bytes')/1024).toFixed(1),msgs:med('msgs')},
   cmdLatencyMs:lat.length?+[...lat].sort((a,b)=>a-b)[2].toFixed(2):null,cmdStatus:latStatus,guestDeserializeMs:des,fullMirrorKB:fullKB,stats,
-  heapMB:Math.round(process.memoryUsage().heapUsed/1048576),rows:rows.map(r=>({simMs:+r.simMs.toFixed(1),publishMs:+r.publishMs.toFixed(1),bytes:r.bytes,msgs:r.msgs}))})+'\n');
+  heapMB:Math.round(process.memoryUsage().heapUsed/1048576),hostFinal:{save8:crypto.createHash('sha256').update(h.run('serialize()')).digest('hex'),rng:h.run('String(RND_STATE)')},rows:rows.map(r=>({simMs:+r.simMs.toFixed(1),publishMs:+r.publishMs.toFixed(1),bytes:r.bytes,msgs:r.msgs}))})+'\n');
