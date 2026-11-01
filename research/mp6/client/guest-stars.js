@@ -352,6 +352,7 @@ function rebuild(){
   if(!ok){S.stats.fail=(S.stats.fail||0)+1;S.timer=setTimeout(rebuild,1000);return;}
   G.autoSave=false;G.speed=0;
   if(S.started&&UI._diploWorld)UI._diploWorld=G.p;   // açık diplomasi sayfası ve taslaklar korunur
+  if(S.started&&UI._fedTabsWorld)UI._fedTabsWorld=G.emps;   // MP.6.4: federasyon sekmesi / açık bölümler / kaydırma canlı senkronda korunur (openFed dünya kimliği değişince GENEL'e döner)
   if(S.started){View.route=keep.route;View.routed=keep.routed;UI._openNote=keep.note;UI.pendingOffer=keep.offer;
     if(keep.sel!==null&&keep.sel!==undefined&&!View.sel){const f=G.fleets.find(x=>x.id===keep.sel);if(f)View.sel=f;}}
   const ms=performance.now()-t0;S.stats.builds++;S.stats.buildMs.push(Math.round(ms*10)/10);if(S.stats.buildMs.length>60)S.stats.buildMs.shift();
