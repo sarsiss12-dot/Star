@@ -82,7 +82,7 @@ async function dipLayout(p,where){return p.evaluate(where=>{const vw=innerWidth,
 function assertLayout(l,where){assert(!l.overflow,where+' overflow');assert.deepEqual(l.wide,[],where+' wide');assert.deepEqual(l.small,[],where+' <44px');assert(l.minFont>=11,where+' font '+l.minFont+' '+l.minAt);assert(l.controls>0,where+' has controls');}
 async function room(guests){
   await H.goto(base+'/');await wait(H,()=>typeof setupGame==='function'&&document.getElementById('mp1Btn'));
-  await H.locator('#mp1Btn').tap();await H.locator('[data-m="create"]').tap();await wait(H,()=>MP1Host.lobby&&MP1Host.lobby.phase==='waiting');
+  await H.locator('#mp1Btn').tap();await H.evaluate(()=>{window.MP7Legacy=1;/* MP.7: bu test MP.1 devralma kipini (AI devletini seçme) sınar; tasarım kipi browser-mp7 */}).then(()=>H.locator('[data-m="create"]').tap());await wait(H,()=>MP1Host.lobby&&MP1Host.lobby.phase==='waiting');
   const c=await H.evaluate(n=>{MP1Host.host.setCapacity(n+1);MP1Host.host.configure({size:'orta',aiCount:5,seed:22});return MP1Host.code;},guests.length);
   await H.evaluate(()=>{MP1Host.ws.send('C'+JSON.stringify({cap:MP1Host.host.lobby.capacity-1}));});
   for(const [g,name,e] of guests){await g.goto(base+'/mp/join?code='+c);await wait(g,()=>window.MP1Join&&document.getElementById('jCode'));await g.fill('#jName',name);

@@ -86,7 +86,7 @@ let port,base,relay,host1Dir,host2Dir,cDir,H,hostCtx,Bb,Bp,Cc,Cp,Ib,Ip,code0,cod
   await test('kurulum: gerçek lobi → oyun (B = 3, C = 5); siyasi fikstür; gerçek komutlar; bekleyen MP.3 karşı teklifi, federasyon oyu ve vasallık karşı teklifi',async()=>{
     await hostMenu(H,base);
     assert.deepEqual(await H.evaluate(()=>[...document.querySelectorAll('#mp1 .mp1-btn')].map(b=>b.textContent)),['ODA OLUŞTUR','ODAYA KATIL','KAYITLI OYUNA DEVAM ET','KAYITLARI YÖNET','GERİ']);
-    await H.locator('[data-m="create"]').tap();await wait(H,()=>MP1Host.lobby&&MP1Host.lobby.phase==='waiting');
+    await H.evaluate(()=>{window.MP7Legacy=1;/* MP.7: bu test MP.1 devralma kipini (AI devletini seçme) sınar; tasarım kipi browser-mp7 */}).then(()=>H.locator('[data-m="create"]').tap());await wait(H,()=>MP1Host.lobby&&MP1Host.lobby.phase==='waiting');
     code0=await H.evaluate(()=>{MP1Host.host.setCapacity(3);MP1Host.host.configure({size:'orta',aiCount:5,seed:22});MP1Host.ws.send('C'+JSON.stringify({cap:2}));return MP1Host.code;});
     for(const [g,name,e] of [[Bp,'Bora',B],[Cp,'Cem',C]]){await guestJoin(g,base,code0,name);await wait(g,()=>MP1Join.screen==='lobby'&&MP1Join.lobby);await g.evaluate(x=>MP1Join.claim(x),e);
       await wait(H,e=>MP1Host.lobby.players.some(p=>p.claim===e),e);await g.evaluate(()=>MP1Join.ready(true));}

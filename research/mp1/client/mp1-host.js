@@ -158,7 +158,7 @@ function makeHost(){
     onSpeed:info=>{if(window.MP61)MP61.speed(info);},
     /* MP.7: tasarım kipi — host'un devleti kendi kurulum ekranındaki CFG, misafirlerinki kendi taslakları; galaksi OYUNU BAŞLAT'ta
        gerçek setupGame(cfg.humans) ile kurulur. MP7Setup yüklenmemişse (eski sayfa) MP.1 devralma kipi. */
-    lobby:{design:!!window.MP7Setup,hostDraft:()=>window.MP7Setup?MP7Setup.draft():null,
+    lobby:{design:!!window.MP7Setup&&!window.MP7Legacy,hostDraft:()=>window.MP7Setup?MP7Setup.draft():null,
       generate(set){const {host:_h,...rest}=set;setupGame({...CFG,...rest});if(CFG.mizac)applyChosenPersona(G.p,CFG.mizac);G.autoSave=false;return {ok:true};}}});
   API.host.installGuards();
   if(window.MP61)MP61.source=()=>G.speed|0;

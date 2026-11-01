@@ -41,7 +41,7 @@ async function setHidden(page,hidden){return page.evaluate(h=>{Object.defineProp
     const hs=await H.evaluate(async()=>{const r=await fetch('/healthz');return [r.status,await r.text()];});assert.deepEqual(hs,[200,'{"ok":true}']);
   });
   await test('host phone opens a room over WSS; the host key never appears in a URL or on the page',async()=>{
-    await H.locator('#mp1Btn').tap();await wait(H,()=>MP1Host.screen==='menu');const t0=Date.now();await H.locator('[data-m="create"]').tap();
+    await H.locator('#mp1Btn').tap();await wait(H,()=>MP1Host.screen==='menu');const t0=Date.now();await H.evaluate(()=>{window.MP7Legacy=1;/* MP.7: bu test MP.1 devralma kipini (AI devletini seçme) sınar; tasarım kipi browser-mp7 */}).then(()=>H.locator('[data-m="create"]').tap());
     await wait(H,()=>MP1Host.lobby&&MP1Host.lobby.phase==='waiting');metrics.roomCreateMs=Date.now()-t0;
     ({code,key:hostKey}=await H.evaluate(()=>({code:MP1Host.code,key:MP1Host.key})));
     const urls=await H.evaluate(()=>MP1Host.urls);assert(urls.every(u=>u.startsWith('wss://localhost:')&&!u.includes(hostKey)),urls.join());

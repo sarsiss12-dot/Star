@@ -45,7 +45,7 @@ async function layout(p){return p.evaluate(()=>{const vw=innerWidth,root=documen
 function assertLayout(l,where){assert(!l.overflow,where+' overflow');assert.deepEqual(l.wide,[],where+' wide');assert.deepEqual(l.small,[],where+' <44px');assert(l.minFont>=11,where+' font '+l.minFont+' '+l.minAt);}
 async function room(hostPage,size,ai,seed,guests){
   await hostPage.goto(base+'/');await wait(hostPage,()=>typeof setupGame==='function'&&document.getElementById('mp1Btn'));
-  await hostPage.locator('#mp1Btn').tap();await hostPage.locator('[data-m="create"]').tap();await wait(hostPage,()=>MP1Host.lobby&&MP1Host.lobby.phase==='waiting');
+  await hostPage.locator('#mp1Btn').tap();await hostPage.evaluate(()=>{window.MP7Legacy=1;/* MP.7: bu test MP.1 devralma kipini (AI devletini seçme) sınar; tasarım kipi browser-mp7 */}).then(()=>hostPage.locator('[data-m="create"]').tap());await wait(hostPage,()=>MP1Host.lobby&&MP1Host.lobby.phase==='waiting');
   const c=await hostPage.evaluate(([size,ai,seed,n])=>{MP1Host.host.setCapacity(n+1);MP1Host.host.configure({size,aiCount:ai,seed});return MP1Host.code;},[size,ai,seed,guests.length]);
   await hostPage.evaluate(()=>{MP1Host.ws.send('C'+JSON.stringify({cap:MP1Host.host.lobby.capacity-1}));});
   for(const [g,name,e] of guests){await g.goto(base+'/mp/join?code='+c);await wait(g,()=>window.MP1Join&&document.getElementById('jCode'));await g.fill('#jName',name);
