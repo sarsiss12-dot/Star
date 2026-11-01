@@ -49,7 +49,7 @@ let relay,base,bH,bB,bC,H,Bp,Cp,code;
 
   await test('kurulum: host oda açar; B ve C davet bağlantısıyla (/mp/play) katılır; oyun başlar; misafirler gerçek STARS arayüzünde; fikstür: temaslar + federasyon (2, B)',async()=>{
     await H.goto(base+'/');await wait(H,()=>typeof setupGame==='function'&&document.getElementById('mp1Btn'));
-    await tap(H,'#mp1Btn');await tap(H,'[data-m="create"]');await wait(H,()=>MP1Host.lobby&&MP1Host.lobby.phase==='waiting');
+    await tap(H,'#mp1Btn');await H.evaluate(()=>{window.MP7Legacy=1;/* MP.7: bu test MP.1 devralma kipini (AI devletini seçme) sınar; tasarım kipi browser-mp7 */}).then(()=>tap(H,'[data-m="create"]'));await wait(H,()=>MP1Host.lobby&&MP1Host.lobby.phase==='waiting');
     code=await H.evaluate(()=>{MP1Host.host.setCapacity(3);MP1Host.host.configure({size:'orta',aiCount:5,seed:22});MP1Host.ws.send('C'+JSON.stringify({cap:2}));return MP1Host.code;});
     const link=await H.textContent('#mp1Link');
     for(const [p,name,e] of [[Bp,'Bora',B],[Cp,'Cem',C]]){await p.goto(link);await wait(p,()=>window.MP1Join&&document.getElementById('jCode'));

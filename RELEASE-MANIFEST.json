@@ -1,11 +1,11 @@
 {
-  "phase": "PERF.1",
-  "build": "96h10p1",
-  "scope": "Late-game performance without behaviour change: trade-route pathfinding (findPath without traveller) is memoised per lane graph and radiation set; the 3-hop trade scan tree is built once per hub per lane graph; EconomyLedger stock snapshots are allocation-free. Same AI decisions, Save8 bytes and RNG order (byte-identical control/candidate campaigns, seeds 11/22/42/404, 240 months). Gameplay, economy thresholds, Save8 schema unchanged.",
+  "phase": "MP.7",
+  "build": "96h10p2",
+  "scope": "Multiplayer start and per-player empire design: setupGame accepts cfg.humans (empires 1..k built by the same configured-empire path as the single-player empire: species, doctrine, physiology, ethics, civics, traits, origin, look, colour, emblem; AI + humans <= 11). Single-player setup, Save8 bytes and RNG unchanged without cfg.humans. PERF.1 optimizations retained.",
   "save_version": 8,
-  "pwa_cache": "stars-v96h10p1",
-  "parent_commit": "eb4bd68913180f271b40d42d04963cd9b48f8032",
-  "parent_zip_sha256": "78e76d1627b8ec1b990849b2242835f78667f110e1d6f17021760183ee7be6d0",
+  "pwa_cache": "stars-v96h10p2",
+  "parent_commit": "50e3563acb932d7effd04d3e2359bb391557e1d0",
+  "parent_zip_sha256": "253a0282a18509ec3394dc87f2ddbef98150ceb90b1f137841139a36ecf70448",
   "file_count": 19,
   "files": {
     "ai.js": "11485356c0e75c39d9dabb2fc06b50bfb425598d3d08a2b767fc691c39ce51c6",
@@ -21,11 +21,11 @@
     "economy.js": "315653254c3e690523d5068d8ccec6a4cd7adc7f44e7a563adc04917f1eeee80",
     "inbox.js": "5f53ac2ca9c3ca8d5f1a12a9e1ba2b2a247ab7e350df0ec9169a13cfe3285204",
     "index.html": "984d2c51e33637a0b3312a072e3348b5e943f4c2c7156530affeb7d6ceb83259",
-    "main.js": "8c3a1e9ed360f9114d9cce34b1911bc676994e763682694d7c53d0210465fbd1",
+    "main.js": "b85e1f0c41203343526bf8654c45c0fb0ee38971c61aab276606f6c607020653",
     "manifest.json": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
     "map.js": "d8ca27ee07c484b7399f95d8031aa70fb7539bcf89d768c8442200b7cba76ae3",
     "news.js": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
-    "sw.js": "40d268ebe543396e35afbac30a1f3d506fba67465b24a989f1b1460ecad94f29",
+    "sw.js": "442ae695b586860fcd54858e7a5d1eed0ead5524f10233084054d98d972e78d8",
     "ui.js": "4b2139007f7d4f100afddefeb2769523c03cbd862b0e27678e0d5868c18e3283"
   }
 }

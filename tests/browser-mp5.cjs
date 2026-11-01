@@ -102,7 +102,7 @@ async function miniTap(g){await freeBar(H);if(!await H.locator('#mp1Mini [data-g
   await test('kurulum (HTTPS/WSS, 3 ayrı tarayıcı süreci, ayrı ağ yolları): A oda açar, B ve C davet bağlantısıyla katılır, farklı devlet seçer; misafirde motor yok',async()=>{
     const t0=Date.now();await hostMenu();metrics.net.hostPageMs=Date.now()-t0;
     assert.deepEqual(await H.evaluate(()=>[location.protocol,isSecureContext]),['https:',true]);
-    const t1=Date.now();await H.locator('[data-m="create"]').tap();await wait(H,()=>MP1Host.lobby&&MP1Host.lobby.phase==='waiting');metrics.net.roomCreateMs=Date.now()-t1;
+    const t1=Date.now();await H.evaluate(()=>{window.MP7Legacy=1;/* MP.7: bu test MP.1 devralma kipini (AI devletini seçme) sınar; tasarım kipi browser-mp7 */}).then(()=>H.locator('[data-m="create"]').tap());await wait(H,()=>MP1Host.lobby&&MP1Host.lobby.phase==='waiting');metrics.net.roomCreateMs=Date.now()-t1;
     code0=await H.evaluate(()=>{MP1Host.host.setCapacity(3);MP1Host.host.configure({size:'orta',aiCount:5,seed:22});MP1Host.ws.send('C'+JSON.stringify({cap:2}));return MP1Host.code;});
     for(const [p,n,name,e] of [[Bp,'B','Bora',B],[Cp,'C','Cem',C]]){const t=Date.now();await guestJoin(p,n,code0,name);await wait(p,()=>MP1Join.screen==='lobby'&&MP1Join.lobby);metrics.net['join'+n+'Ms']=Date.now()-t;
       metrics.net['connect'+n+'Ms']=await p.evaluate(()=>MP1Join.stats.connectMs);
@@ -231,7 +231,7 @@ async function miniTap(g){await freeBar(H);if(!await H.locator('#mp1Mini [data-g
   await test('performans: 45 / 60 / 100 sistem — bağlantı, ilk görünüm, anlık görüntü/delta boyutu, 30 günlük trafik, komut gecikmesi, kopma sonrası dönüş, relay belleği',async()=>{
     for(const [size,ai] of [['orta',5],['buyuk',7],['ulu',11]]){
       await H.evaluate(()=>{MP1Host.started=false;});await hostCtx.close();({ctx:hostCtx,p:H}=await openHost());
-      await hostMenu();await H.locator('[data-m="create"]').tap();await wait(H,()=>MP1Host.lobby&&MP1Host.lobby.phase==='waiting');
+      await hostMenu();await H.evaluate(()=>{window.MP7Legacy=1;/* MP.7: bu test MP.1 devralma kipini (AI devletini seçme) sınar; tasarım kipi browser-mp7 */}).then(()=>H.locator('[data-m="create"]').tap());await wait(H,()=>MP1Host.lobby&&MP1Host.lobby.phase==='waiting');
       const code=await H.evaluate(([s,a])=>{MP1Host.host.setCapacity(2);MP1Host.host.configure({size:s,aiCount:a,seed:42});MP1Host.ws.send('C'+JSON.stringify({cap:1}));return MP1Host.code;},[size,ai]);
       const t0=Date.now();await guestJoin(Bp,'B',code,'Bora');await wait(Bp,()=>MP1Join.screen==='lobby'&&MP1Join.lobby);const join=Date.now()-t0;
       await Bp.locator('[data-j="claim"]').first().tap();await wait(H,()=>MP1Host.lobby.players.some(p=>!p.host&&p.claim!==null));await Bp.locator('#jReady').tap();await wait(H,()=>MP1Host.host.canStart().ok);

@@ -70,7 +70,7 @@ function childRelay(delay){return new Promise((res,rej)=>{const c=spawn(process.
     await H.locator('#mp1Btn').tap();await wait(H,()=>MP1Host.screen==='menu');await shot(H,'host-mp-menu');
   });
   await test('host phone creates a room: secure code on screen, host key never in the page, galaxy settings applied by the host only',async()=>{
-    const t0=Date.now();await H.locator('[data-m="create"]').tap();await wait(H,()=>MP1Host.screen==='lobby'&&MP1Host.lobby&&MP1Host.lobby.phase==='waiting');
+    const t0=Date.now();await H.evaluate(()=>{window.MP7Legacy=1;/* MP.7: bu test MP.1 devralma kipini (AI devletini seçme) sınar; tasarım kipi browser-mp7 */}).then(()=>H.locator('[data-m="create"]').tap());await wait(H,()=>MP1Host.screen==='lobby'&&MP1Host.lobby&&MP1Host.lobby.phase==='waiting');
     metrics.roomCreateMs=Date.now()-t0;
     ({code,key:hostKey}=await H.evaluate(()=>({code:MP1Host.code,key:MP1Host.key})));
     assert.match(code,/^[ABCDEFGHJKMNPQRSTUVWXYZ23456789]{8}$/);
@@ -353,7 +353,7 @@ function childRelay(delay){return new Promise((res,rej)=>{const c=spawn(process.
     try{const h=await ctxh.newPage(),g=await ctxg.newPage();for(const p of [h,g])p.on('pageerror',e=>errors.push('delay'+delay+': '+e.message));
       const m=metrics.delay[delay]={};
       await h.goto(r.base+'/');await wait(h,()=>document.getElementById('mp1Btn'));await h.locator('#mp1Btn').tap();
-      let t=Date.now();await h.locator('[data-m="create"]').tap();await wait(h,()=>MP1Host.lobby&&MP1Host.lobby.phase==='waiting');m.createMs=Date.now()-t;
+      let t=Date.now();await h.evaluate(()=>{window.MP7Legacy=1;/* MP.7: bu test MP.1 devralma kipini (AI devletini seçme) sınar; tasarım kipi browser-mp7 */}).then(()=>h.locator('[data-m="create"]').tap());await wait(h,()=>MP1Host.lobby&&MP1Host.lobby.phase==='waiting');m.createMs=Date.now()-t;
       const c=await h.evaluate(()=>MP1Host.code);
       await g.goto(r.base+'/mp/join?code='+c);await wait(g,()=>document.getElementById('jCode'));await g.fill('#jName','Gecikme');
       t=Date.now();await g.locator('[data-j="go"]').tap();await wait(g,()=>MP1Join.screen==='lobby');m.joinMs=Date.now()-t;
@@ -371,7 +371,7 @@ function childRelay(delay){return new Promise((res,rej)=>{const c=spawn(process.
       t=Date.now();await h.evaluate(()=>MP1Host.advance(30));const hd=await h.evaluate(()=>Math.floor(G.day));await wait(g,d=>MP1Join.game.clock.day===d,hd);m.updateMs=Date.now()-t;
       assert(m.commandMs>=2*delay*0.9,'delay really applied ('+m.commandMs+' ms)');
       // odayı kapat: oyun içinde değil, ikinci bir lobide
-      const h2=await ctxh.newPage();await h2.goto(r.base+'/');await wait(h2,()=>document.getElementById('mp1Btn'));await h2.locator('#mp1Btn').tap();await h2.locator('[data-m="create"]').tap();
+      const h2=await ctxh.newPage();await h2.goto(r.base+'/');await wait(h2,()=>document.getElementById('mp1Btn'));await h2.locator('#mp1Btn').tap();await h2.evaluate(()=>{window.MP7Legacy=1;/* MP.7: bu test MP.1 devralma kipini (AI devletini seçme) sınar; tasarım kipi browser-mp7 */}).then(()=>h2.locator('[data-m="create"]').tap());
       await wait(h2,()=>MP1Host.lobby&&MP1Host.lobby.phase==='waiting');const c2=await h2.evaluate(()=>MP1Host.code);
       const g2=await ctxg.newPage();await g2.goto(r.base+'/mp/join?code='+c2);await wait(g2,()=>document.getElementById('jCode'));await g2.fill('#jName','Kapanış');await g2.locator('[data-j="go"]').tap();await wait(g2,()=>MP1Join.screen==='lobby');
       await h2.locator('[data-m="close"]').tap();await h2.locator('[data-m="sheetOk"]').tap();

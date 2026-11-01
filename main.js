@@ -2427,8 +2427,41 @@ function colorFor(i, rnd){
   return pool[i % pool.length];
 }
 
+/* Kurulum ekranında tasarlanan devlet (tek oyunculuda oyuncu, MP.7'de her insan oyuncu): aynı yol, aynı kurallar.
+   FAZ 46: renk seçilmediyse paletin sıradakini alır — AI'lar kalanlardan devam eder, çakışma olmaz.
+   FAZ 52: fizyoloji aktarımı — habOf, beslenme ve büyüme hesapları physioOf(e) üzerinden bunu okur.
+   FAZ 72: doktrin aktarılır — recalcMods bonusları PERSONAS[e.mizac].e bloğundan okuyor. */
+function makeConfiguredEmpire(id, src, rnd){
+  const pe = makeEmpire(id, src.race, src.name, false, rnd, src.traits);
+  pe.monoRes = src.monoRes || 'min';    // FAZ 77B: tek ürün seçimi
+  pe.mizac = src.mizac || 'yayilmaci';
+  pe._pers = pe.mizac;
+  pe.physio = src.physio || 'humanoid';
+  if (PHYSIO[pe.physio] && PHYSIO[pe.physio].e)
+    pe.extra = Object.assign(pe.extra || {}, PHYSIO[pe.physio].e);
+  if (src.color && !(id && G.emps.some(x=>x.col===src.color))) pe.col = src.color;   // MP.7: aynı rengi seçen ikinci insan paletten alır
+  else if (G._palet && G._paletIx < G._palet.length) pe.col = G._palet[G._paletIx++];
+  else pe.col = RACES[src.race].col;
+  pe.ethics = normalizeNewEthics(src.ethics);
+  pe.civics = normalizeNewCivics(src.civics,pe);
+  pe.traits = normalizeNewTraits(src.traits,pe);
+  pe.origin = Object.hasOwn(ORIGINS,src.origin) ? src.origin : 'standart';
+  pe.sigil  = src.sigil  || 'simetrik';
+  pe.look   = Object.hasOwn(LOOKS,src.look) ? src.look : 'humanoid';
+  pe.portraitVariant=normalizePortraitVariant(src.portraitVariant);
+  pe.monoRes = src.monoRes || 'min';
+  recalcMods(pe);
+  return pe;
+}
+/* MP.7: cfg.humans — misafirlerin kendi kurulum ekranında tasarladığı devletler (id 1..k). Tek oyunculuda yoktur;
+   verilmezse kurulum, RNG ve Save8 baytları değişmez. aiCount insanlar dahil normal devlet sayısıdır (oyuncu hariç). */
+function humanDraftsError(cfg){
+ if(cfg.humans===undefined)return '';
+ if(!Array.isArray(cfg.humans)||cfg.humans.some(h=>!h||typeof h!=='object'||!Object.hasOwn(RACES,h.race)))return 'Geçersiz oyuncu devlet taslağı.';
+ return cfg.humans.length<aiCountFor(cfg)?'':'En az bir AI devleti kalmalı: AI + insan oyuncu sayısı 11\'i aşamaz.';
+}
 function setupGame(cfg){
-  const invalid=setupConfigError(cfg);if(invalid)throw new RangeError(invalid);
+  const invalid=setupConfigError(cfg)||humanDraftsError(cfg);if(invalid)throw new RangeError(invalid);
   G._newsSetup=true;G._95eFaults={};
   if(typeof GalacticNews!=='undefined')G.news=GalacticNews.empty();
   if(typeof DiplomaticInbox!=='undefined')G.diplomaticInbox=DiplomaticInbox.empty();
@@ -2466,31 +2499,7 @@ function setupGame(cfg){
   G._warAuth = null; G._warWhy = null; G._dealAuth = false;
 
   // oyuncu
-  const pe = makeEmpire(0, cfg.race, cfg.name, false, rnd, cfg.traits);
-  /* FAZ 46: oyuncu renk seçmediyse paletin ilkini alır — AI'lar
-     kalanlardan devam eder, çakışma olmaz. */
-  /* FAZ 52: fizyoloji aktarımı — habOf, beslenme ve büyüme
-     hesapları physioOf(e) üzerinden bunu okur. */
-  /* FAZ 72: doktrin oyuncuya aktarılır — recalcMods bonusları
-     PERSONAS[e.mizac].e bloğundan okuyor. */
-  pe.monoRes = cfg.monoRes || 'min';    // FAZ 77B: tek ürün seçimi
-  pe.mizac = cfg.mizac || 'yayilmaci';
-  pe._pers = pe.mizac;
-  pe.physio = cfg.physio || 'humanoid';
-  if (PHYSIO[pe.physio] && PHYSIO[pe.physio].e)
-    pe.extra = Object.assign(pe.extra || {}, PHYSIO[pe.physio].e);
-  if (cfg.color) pe.col = cfg.color;
-  else if (G._palet && G._paletIx < G._palet.length) pe.col = G._palet[G._paletIx++];
-  else pe.col = RACES[cfg.race].col;
-  pe.ethics = normalizeNewEthics(cfg.ethics);
-  pe.civics = normalizeNewCivics(cfg.civics,pe);
-  pe.traits = normalizeNewTraits(cfg.traits,pe);
-  pe.origin = Object.hasOwn(ORIGINS,cfg.origin) ? cfg.origin : 'standart';
-  pe.sigil  = cfg.sigil  || 'simetrik';
-  pe.look   = Object.hasOwn(LOOKS,cfg.look) ? cfg.look : 'humanoid';
-  pe.portraitVariant=normalizePortraitVariant(cfg.portraitVariant);
-  pe.monoRes = cfg.monoRes || 'min';
-  recalcMods(pe);
+  const pe = makeConfiguredEmpire(0, cfg, rnd);
   G.emps.push(pe);
   G.p = pe;
 
@@ -2500,6 +2509,15 @@ function setupGame(cfg){
   // rakipler
   const others = shuffle(rnd, Object.keys(RACES).filter(k=>true));
   for (let i=0;i<nAI;i++){
+    const human = cfg.humans && cfg.humans[i];
+    if (human){
+      const he = makeConfiguredEmpire(i+1, human, rnd);
+      G._adlar[he.name]=1;
+      he.emblem=uniqueEmblem(normalizeEmblem(human.emblem,he.col,'state:'+G.seed+':'+he.id),he.col,G.emps.map(x=>x.emblem),'state:'+G.seed+':'+he.id);
+      if (human.mizac) applyChosenPersona(he, human.mizac);
+      G.emps.push(he);
+      continue;
+    }
     const rk = others[i % others.length];
     const ai = makeEmpire(i+1, rk, RACES[rk].n, true, rnd, []);
     ai.col = colorFor(i+1, rnd);
@@ -8308,7 +8326,7 @@ function forceRedraw(sebep){
    Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
    Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
 /* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */
-const BUILD_ID = '96h10p1';
+const BUILD_ID = '96h10p2';
 const DIAG_MAX = 40;
 const DIAG = [];
 function logDiag(tur, mesaj){

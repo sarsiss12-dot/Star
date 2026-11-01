@@ -1,0 +1,61 @@
+{
+  "phase": "MP.7",
+  "build": "96h10p2",
+  "pwa_cache": "stars-v96h10p2",
+  "save_version": 8,
+  "parent_commit": "50e3563acb932d7effd04d3e2359bb391557e1d0",
+  "parent_game": "PERF.1 (96h10p1)",
+  "parent_zip_sha256": "253a0282a18509ec3394dc87f2ddbef98150ceb90b1f137841139a36ecf70448",
+  "scope": "Multiplayer start and per-player empire design: setupGame accepts cfg.humans (empires 1..k built by the same configured-empire path as the single-player empire: species, doctrine, physiology, ethics, civics, traits, origin, look, colour, emblem; AI + humans <= 11). Single-player setup, Save8 bytes and RNG unchanged without cfg.humans. PERF.1 optimizations retained.",
+  "report": "MULTIPLAYER-MP7-SONUC.md",
+  "evidence": "research/mp7/evidence/",
+  "runtime_changed": [
+    "main.js",
+    "sw.js"
+  ],
+  "single_player_save8_rng": "identical without cfg.humans (5 configurations, after setup and after 3 months)",
+  "game": {
+    "file": "stars-faz96h10p2.zip",
+    "bytes": 769312,
+    "sha256": "dc52bfe543b11bf7483969b6935172bcc65ece8c307fb28a0587ee1640e7bc62",
+    "crc32_file": "fac53d8b",
+    "crc": "PASS",
+    "members": 20,
+    "manifest_runtime_files": 19,
+    "repack_identical": true,
+    "verify_release_extracted": "PASS"
+  },
+  "tests": {
+    "node": {
+      "suites": 164,
+      "pass": 6310,
+      "fail": 3,
+      "known_fail": "faz95d_identity 3"
+    },
+    "chromium": {
+      "browser-mp7": "9/9",
+      "browser-96h10": "27/27",
+      "browser-mp0": "20/20",
+      "browser-mp1": "22/22",
+      "browser-mp11": "10/10",
+      "browser-mp2": "14/14",
+      "browser-mp3": "12/12",
+      "browser-mp31": "11/11",
+      "browser-mp4": "13/13 (after fix)",
+      "browser-mp5": "10/10 (docker)",
+      "mp5_docker": "6/6",
+      "browser-mp6": "11/11",
+      "browser-mp61": "13/13",
+      "browser-mp62": "10/10",
+      "browser-mp63": "15/15",
+      "browser-mp64": "10/10"
+    },
+    "not_run": [
+      "physical Android",
+      "real internet",
+      "LAN",
+      "live Render service (network policy)"
+    ]
+  },
+  "multiplayer_note": "MP code is not in the game ZIP; deploy the relay image (research/mp1/deploy/Dockerfile) from branch claude/stars-mp7-mobile-setup-start; see research/mp7/RENDER.md."
+}
