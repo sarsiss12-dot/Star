@@ -49,7 +49,9 @@ const VIEW=new Set(['tab','full','cameraReset','cameraFocus','home','fit','topSt
   /* MP.6.4 — casusluk: ağ, standart operasyonlar (onay ekranı → host), özel operasyonlar; son çağrılar MP komutuna iner */
   'spy','ops','opDone','runop','opGo','saboPick','saboCancel','saboGo','incite','deepInv','ffTarget','ffPatsy','ffGo','stealTech',
   /* MP.6.4 — Galaktik Borsa (seçim görünüm, TAKAS ET → 'market') */
-  'mktTrade']);
+  'mktTrade',
+  /* MP.6.4 — kalan filo / koloni işlemleri (motor işlevi MP komutuna iner) */
+  'reinf','shipmentMenu','shipmentApply','shipCancel','shipCancelAll','shipCancelConfirm','rallySysSet','rallySysClear','rallySysCancel','terraform','habitat','ldrAssign','ldrHire']);
 /* MP.6.1 — UI.act kapısında doğrudan MP komutuna çevrilen düğmeler (tek oyunculu kodları dünyayı yerelde değiştirir) */
 const sel=()=>View.sel&&View.sel.e===0&&G.fleets.includes(View.sel)?View.sel:null;
 const ACT={
@@ -72,6 +74,11 @@ const ACT={
   giftDo:x=>{const [id,r,v]=String(x).split(':');const cid=send({kind:'gift',target:real(+id),r,v:+v});
     if(cid)waits[cid]=res=>toast(res.status==='ok'?'Hediye gönderildi; host uyguladı.':'Host reddetti: '+why(res),res.status!=='ok');try{UI.closeModal();}catch{}},
   statuko:x=>{const cid=send({kind:'statusQuo',target:real(+x)});if(cid)waits[cid]=res=>toast(res.status==='ok'?'Statüko barışı: host uyguladı ya da teklif karşı oyuncuya gitti.':'Host reddetti: '+why(res),res.status!=='ok');},
+  /* MP.6.4: motor işlevi olmayan tek oyunculu arayüz kuralları → host komutu (aynı kural, yalnız kendi nesnesi) */
+  loopSet:x=>{const [s,c]=String(x).split(':');return send({kind:'loop',sys:+s,cls:String(c)});},
+  loopOff:x=>send({kind:'loop',sys:+x,cls:null}),
+  repairToggle:x=>send({kind:'repair',fleet:+x}),
+  ldrUnassign:x=>send({kind:'leader',action:'unassign',leader:+x}),
   colonize:x=>{const [s,p]=String(x).split(':').map(Number),f=sel(),c={kind:'colonize',sys:s,planet:p};if(f&&fleetHasRole(f,'koloni'))c.fleet=f.id;return send(c);}
 };
 function respond(yes){const c=S.counter;const cid=send({kind:'respond',offer:c.offer,action:yes?'accept':'reject'});
@@ -187,6 +194,18 @@ function gate(){
   wrap('deepInvestigate',(o,e)=>mine(e)?special({kind:'spySpecial',op:'deepInv'},{msg:'Soruşturma host\'a gönderildi.'}):NOT_MP);
   wrap('falseFlagOp',(o,e,t,p,tur)=>mine(e)&&t&&p?special({kind:'spySpecial',op:'falseFlag',target:real(t.id),patsy:real(p.id),tur:String(tur||'')},{msg:'Sahte bayrak host\'a gönderildi.'}):NOT_MP);
   wrap('stealTech',(o,e,t)=>mine(e)&&t?special({kind:'spySpecial',op:'stealTech',target:real(t.id)}):NOT_MP);
+  /* MP.6.4 — kalan filo / koloni işlemleri: gerçek düğmenin motor işlevi → komut (sahiplik, maliyet, koşul host'ta) */
+  wrap('reinforceFleet',(o,e,f)=>mine(e)&&f?r({kind:'reinforce',fleet:f.id}):NOT_MP);
+  wrap('shipmentAction',(o,e,f,action,target)=>{if(!mine(e)||!f)return NOT_MP;const t=target&&target.fleet!==undefined?{fleet:+target.fleet}:target&&Number.isInteger(target.sys)?{sys:target.sys}:undefined;
+    return r({kind:'shipment',fleet:f.id,action:String(action),...(t?{target:t}:{})});});
+  wrap('cancelShipOrders',(o,e,sys,orders,all)=>{if(!mine(e)||!sys)return NOT_MP;const own=(sys.queue||[]).filter(q=>q.e===0),idx=(orders||[]).map(q=>own.indexOf(q));
+    if(idx.some(i=>i<0))return {ok:false,why:'Kuyruk değişti; siparişi yeniden seç.'};const x=r({kind:'shipCancel',sys:sys.id,orders:idx,all:!!all});return x.ok?{...x,count:idx.length}:x;});
+  wrap('setRally',(o,e,sys,t)=>mine(e)&&sys?r({kind:'rally',sys:sys.id,target:t===null||t===undefined?null:+t}):NOT_MP);
+  wrap('startTerraform',(o,e,sys,pl)=>mine(e)&&sys&&pl&&sys.planets?r({kind:'terraform',sys:sys.id,planet:pl.i}):NOT_MP);
+  wrap('buildHabitat',(o,e,sys,pl)=>mine(e)&&sys&&pl?!!send({kind:'habitat',sys:sys.id,planet:pl.i}):false);
+  wrap('recruitLeader',(o,e,tip)=>mine(e)?r({kind:'leader',action:'hire',tip:String(tip)}):NOT_MP);
+  wrap('assignLeader',(o,e,id,tip,t)=>{if(!mine(e))return NOT_MP;const x=r({kind:'leader',action:'assign',leader:+id,tip:String(tip),target:String(tip==='amiral'?+t:t)});
+    return x.ok?{...x,leader:{name:'Lider'}}:x;});
   /* MP.6.4 — Galaktik Borsa: durum ve fiyatlar host'tan (aynada konsey yok); TAKAS ET → 'market' (beklenen sonuçla; fiyat
      değiştiyse host 'stale' ile güncel teklifi döner, işlem yapılmaz) */
   const mv=()=>hv()&&hv().mkt;

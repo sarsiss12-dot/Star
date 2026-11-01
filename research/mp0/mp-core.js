@@ -712,6 +712,50 @@ function createHost(opts){
         const x={msg:String(r.msg||'').slice(0,240),caught:!!r.caught};for(const k of ['basarili','cozuldu','savas'])if(r[k]!==undefined)x[k]=!!r[k];
         if(r.tech!==undefined&&TECHS[r.tech])x.tech=r.tech;   // gerçekten edinilen teknoloji
         if(remoteHuman(e)&&x.msg)note(e.id,x.msg,x.caught?'war':'sci');return {ok:true,extra:x};}},
+    /* ═══ MP.6.4 — kalan filo / koloni işlemleri: tek oyunculu düğmenin motor işlevi, yalnız komutu verenin devletinde.
+       reinforce (reinforceFleet), shipment (shipmentAction), shipCancel (cancelShipOrders: oyuncunun o sistemdeki kendi
+       siparişlerinin sırası), rally (setRally), terraform (startTerraform; olası "uyuyan" zarı motorda), habitat (buildHabitat),
+       leader (recruitLeader / assignLeader / görevden alma). loop / repair / görevden alma motor işlevi olmayan tek oyunculu
+       arayüz kuralıdır: aynı kural, aynı alanlar, yalnız kendi nesnesinde. */
+    reinforce:{say:'actor',keys:['kind','fleet'],check:c=>int(c.fleet,0,2147483647),locate:ownFleet,why:()=>null,roots:()=>[],apply:(e,{f})=>reinforceFleet(e,f)},
+    shipment:{say:'actor',keys:['kind','fleet','action','target'],check:c=>int(c.fleet,0,2147483647)&&['cancel','retarget','retry'].includes(c.action)&&
+        (c.target===undefined||plain(c.target)&&onlyKeys(c.target,['fleet','sys'])&&Object.keys(c.target).length===1&&Object.values(c.target).every(v=>int(v,0,2147483647))),
+      locate(e,c){const f=G.fleets.find(x=>x.id===c.fleet);return f&&f.e===e.id?{f}:{err:'not-owner'};},
+      why(e,at,c){if(c.target&&c.target.fleet!==undefined){const t=G.fleets.find(x=>x.id===c.target.fleet);if(!t||t.e!==e.id)return 'not-owner';}return null;},roots:()=>[],
+      apply:(e,{f},c)=>shipmentAction(e,f,c.action,c.target?{...c.target}:undefined)},
+    shipCancel:{say:'actor',keys:['kind','sys','orders','all'],check:c=>int(c.sys,0,G.sys.length-1)&&Array.isArray(c.orders)&&c.orders.length>=1&&c.orders.length<=64&&
+        c.orders.every(i=>int(i,0,255))&&new Set(c.orders).size===c.orders.length&&typeof c.all==='boolean',
+      locate(e,c){const sys=G.sys[c.sys],mineQ=(sys.queue||[]).filter(q=>q.e===e.id);if(!mineQ.length)return {err:'not-owner'};
+        const orders=c.orders.map(i=>mineQ[i]);return orders.every(Boolean)?{sys,orders}:{err:'stale'};},why:()=>null,roots:()=>[],
+      apply:(e,{sys,orders},c)=>cancelShipOrders(e,sys,orders,c.all)},
+    rally:{say:'actor',keys:['kind','sys','target'],check:c=>int(c.sys,0,G.sys.length-1)&&(c.target===null||int(c.target,0,G.sys.length-1)),
+      locate(e,c){const sys=G.sys[c.sys];return sys.owner===e.id?{sys}:{err:'not-owner'};},why:()=>null,roots:()=>[],apply:(e,{sys},c)=>setRally(e,sys,c.target)},
+    loop:{say:'actor',keys:['kind','sys','cls'],check:c=>int(c.sys,0,G.sys.length-1)&&(c.cls===null||typeof c.cls==='string'&&has(SHIPS,c.cls)),
+      locate(e,c){const sys=G.sys[c.sys];return sys.owner===e.id?{sys}:{err:'not-owner'};},
+      why(e,at,c){if(c.cls===null)return null;const a=shipBuildAccess(e,c.cls);return a.ok?null:{code:'access',detail:[String(a.why||'').slice(0,160)]};},
+      roots:(e,{sys})=>[sys],apply(e,{sys},c){if(c.cls===null){delete sys.loopBuild;delete sys._loopWarn;say('⏹ '+sys.name+' üretim döngüsü durduruldu');}
+        else{sys.loopBuild=c.cls;delete sys._loopWarn;say('🔁 '+sys.name+' sürekli '+SHIPS[c.cls].n+' üretecek','win');}return true;}},
+    repair:{say:'actor',keys:['kind','fleet'],check:c=>int(c.fleet,0,2147483647),locate:ownFleet,why:()=>null,roots:(e,{f})=>[f],
+      apply(e,{f}){f.repairOff=!f.repairOff;say(f.repairOff?'Onarım durduruldu — kaynak harcanmayacak':'Onarım başlatıldı');return true;}},
+    terraform:{say:'actor',keys:['kind','sys','planet'],check:c=>int(c.sys,0,G.sys.length-1)&&int(c.planet,0,31),
+      locate(e,c){const sys=G.sys[c.sys],pl=sys.planets[c.planet];return pl?{sys,pl}:{err:'no-planet'};},
+      why(e,{sys,pl}){const q=canTerraform(e,sys,pl);return q.ok?null:{code:'colony',detail:[String(q.why||'').slice(0,160)]};},roots:()=>[],apply:(e,{sys,pl})=>startTerraform(e,sys,pl)},
+    habitat:{say:'actor',keys:['kind','sys','planet'],check:c=>int(c.sys,0,G.sys.length-1)&&int(c.planet,0,31),
+      locate(e,c){const sys=G.sys[c.sys],pl=sys.planets[c.planet];return pl?{sys,pl}:{err:'no-planet'};},
+      why(e,{sys,pl}){if(!canHabitat(e,sys,pl))return {code:'colony',detail:['Habitat bu gezegene kurulamaz']};const c=BUILDINGS.habitat.c;
+        for(const r in c)if((e.res[r]||0)<c[r])return {code:'colony',detail:['Habitat kurulamadı — kaynak yetersiz']};return null;},roots:()=>[],apply:(e,{sys,pl})=>buildHabitat(e,sys,pl)},
+    leader:{say:'actor',keys:['kind','action','tip','leader','target'],check:c=>['hire','assign','unassign'].includes(c.action)&&(c.tip===undefined||['amiral','vali'].includes(c.tip))&&
+        (c.leader===undefined||int(c.leader,0,2147483647))&&(c.target===undefined||typeof c.target==='string'&&/^\d{1,10}(:\d{1,3})?$/.test(c.target)),
+      locate(e,c){if(c.action==='hire')return c.tip?{}:{err:'bad-params'};const L=leaderPool(e).find(x=>x.id===c.leader);return L?{L}:{err:'not-owner'};},
+      why(e,at,c){if(c.action==='assign'&&(!c.tip||c.target===undefined))return 'bad-params';
+        if(c.action==='assign'&&c.tip==='amiral'){const f=G.fleets.find(x=>x.id===+c.target);if(!f||f.e!==e.id)return 'not-owner';}
+        if(c.action==='assign'&&c.tip==='vali'){const [si,pi]=c.target.split(':').map(Number),pl=G.sys[si]&&G.sys[si].planets[pi];if(!pl||pl.owner!==e.id||!pl.col)return 'not-owner';}return null;},
+      roots:()=>[],   // işe alma / atama motorda kendi denetimiyle; görevden alma her zaman başarılı
+      apply(e,at,c){if(c.action==='hire')return recruitLeader(e,c.tip);
+        if(c.action==='assign'){const r=assignLeader(e,c.leader,c.tip,c.tip==='amiral'?+c.target:c.target);if(r.ok)say('👤 '+r.leader.name+' göreve başladı','win');return r;}
+        const L=at.L;if(L.tip==='amiral'){const f2=G.fleets.find(q=>q.id===L.post);if(f2&&f2.e===e.id)delete f2.leader;}
+        else if(L.post!==undefined){const [si,pi2]=String(L.post).split(':').map(Number),sy2=G.sys[si],pl2=sy2&&sy2.planets[pi2];if(pl2&&pl2.col&&pl2.owner===e.id)delete pl2.col.leader;}
+        delete L.post;say('👤 '+L.name+' görevden alındı');return true;}},
     /* ═══ MP.6.4 — Galaktik Borsa: motorun anlık takası (marketTrade). Motor bekleyen emir tutmaz: emir yönetimi/iptali yok.
        Fiyat host'ta, işlem anında; misafirin gördüğü sonuç (expect) host'unkinden farklıysa 'stale' + güncel teklif (yeniden onay).
        Eşzamanlı istekler host'un sırasıyla; her işlem kendi anındaki fiyatla ve motorun bakiye denetimiyle → çoğaltma yok. */

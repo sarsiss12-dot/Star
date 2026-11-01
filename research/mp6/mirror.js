@@ -33,7 +33,7 @@ function build(meId,o={}){
   const sys=G.sys.map(s=>{
     const k=known.has(s.id),v=visible.has(s.id),surv=s.surv.includes(meId),mine=s.owner===meId;
     const x={i:s.id,x:s.x,y:s.y,n:k?s.name:'',st:k?Math.max(0,STARS.indexOf(s.star)):0,p:[],
-      l:s.lanes.filter(n=>k||known.has(n)),o:v||mine?piN(s.owner):-1,sv:surv?[0]:[],se:k?[0]:[],q:mine?J(s.queue)||[]:[],
+      l:s.lanes.filter(n=>k||known.has(n)),o:v||mine?piN(s.owner):-1,sv:surv?[0]:[],se:k?[0]:[],q:mine?(J(s.queue)||[]).map(x=>x&&Number.isInteger(x.e)?{...x,e:piN(x.e)}:x):[],
       an:surv?!!s.anom:false,ak:surv?s.anomK:'sinyal',d:v||mine?(s.def||0):0,pu:k?!!s.pulsar:false,nb:k?!!s.nebulaS:false};   // gizli alanlar motorun varsayılan biçiminde
     if(surv||mine)x.p=s.planets.map(p=>{
       const q={i:p.i,t:p.t,dep:p.dep,sz:p.sz,seed:p.seed,name:p.name,owner:-1};
