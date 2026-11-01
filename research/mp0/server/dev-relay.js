@@ -58,7 +58,7 @@ function encode(text,opcode=1){
   return Buffer.concat([head,body]);
 }
 function attach(socket,onText,onClose0,maxPayload=MAX_PAYLOAD){
-  let buf=Buffer.alloc(0),closed=false;
+  let buf=Buffer.alloc(0),closed=false,frag=null,fragLen=0;   // MP.7: parçalı mesaj (RFC 6455 5.4) — devam çerçeveleri birleştirilir
   /* MP.5: bağlantı başı sayaç kapanınca silinir (uzun süre açık relay'de sınırsız büyümesin) */
   const onClose=()=>{delete stats.byConn[conn.id];onClose0();};
   const conn={socket,send(text){if(closed)return;const fr=encode(text);stats.framesOut++;stats.bytesOut+=fr.length;
@@ -78,13 +78,25 @@ function attach(socket,onText,onClose0,maxPayload=MAX_PAYLOAD){
       const mask=buf.slice(off,off+4),data=Buffer.from(buf.slice(off+4,off+4+len));
       for(let i=0;i<data.length;i++)data[i]^=mask[i&3];
       buf=buf.slice(off+4+len);
-      if(!fin){stats.rejected++;return conn.close(1003,'fragmentation unsupported');}
-      if(op===8){closed=true;socket.end();onClose();return;}
-      if(op===9){socket.write(encode(data,10));continue;}
-      if(op===10)continue;
-      if(op!==1){stats.rejected++;return conn.close(1003,'text only');}
-      stats.framesIn++;stats.bytesIn+=len;const s=stats.byConn[conn.id]||(stats.byConn[conn.id]={in:0,out:0,framesIn:0,framesOut:0});s.in+=len;s.framesIn++;
-      onText(data.toString('utf8'));
+      /* MP.7: aracılar (bulut vekilleri) mesajı parçalayabilir (RFC 6455 5.4). Eskiden FIN=0 bağlantıyı 1003 ile kapatıyordu:
+         vekil host'un büyük iletilerini (görünüm / ayna) bölünce host bağlantısı her seferinde düşüyor, misafir oyuna geçemiyordu.
+         Kontrol çerçeveleri (8–10) parçalanamaz ve parçalı mesajın ortasına girebilir; veri parçaları op=1 ile başlar, op=0 ile sürer.
+         Sınır parçaların toplamına uygulanır. */
+      if(op>=8){
+        if(!fin||len>125){stats.rejected++;return conn.close(1002,'bad control frame');}
+        if(op===8){closed=true;socket.end();onClose();return;}
+        if(op===9){socket.write(encode(data,10));continue;}
+        if(op===10)continue;
+        stats.rejected++;return conn.close(1002,'bad opcode');
+      }
+      if(op===0){if(!frag){stats.rejected++;return conn.close(1002,'unexpected continuation');}}
+      else if(frag){stats.rejected++;return conn.close(1002,'interleaved message');}
+      else if(op!==1){stats.rejected++;return conn.close(1003,'text only');}
+      if(op===1&&!fin){frag=[data];fragLen=len;stats.fragmented=(stats.fragmented||0)+1;continue;}
+      let msg=data,size=len;
+      if(frag){fragLen+=len;if(fragLen>maxPayload){stats.rejected++;frag=null;return conn.close(1009,'too big');}frag.push(data);if(!fin)continue;msg=Buffer.concat(frag);size=fragLen;frag=null;fragLen=0;}
+      stats.framesIn++;stats.bytesIn+=size;const s=stats.byConn[conn.id]||(stats.byConn[conn.id]={in:0,out:0,framesIn:0,framesOut:0});s.in+=size;s.framesIn++;
+      onText(msg.toString('utf8'));
     }
   });
   socket.on('close',()=>{if(!closed){closed=true;onClose();}});
