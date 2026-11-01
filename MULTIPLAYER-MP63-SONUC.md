@@ -189,7 +189,7 @@ Misafire yalnız işlemin mümkün olup olmadığı, nedeni ve görmeye hakkı o
 | `tests/mp63_settle_test.js` (paylaşım: koruma kontrolü, gündem, gizlilik, oy/uygula, öneri/stale, gerçek devir, ret/geri çekme, maske, MP.4) | 9/9 PASS |
 | `tests/mp63_polvas_test.js` (kuruluş, oy, anayasa, reform/başkan, ihraç, ortak savaş, hibe, himaye, yenileme, bağımsızlık, destek) | 11/11 PASS |
 | `tests/mp63_sq_test.js` (statüko kalıcılığı, bir kez, süre, geriye uyum) | 4/4 PASS |
-| `tests/browser-mp63.cjs` (A1–A8 duraklatma, B1–B4 paylaşım, C1–C3 federasyon, D1 himaye) | sonuç bölümünde |
+| `tests/browser-mp63.cjs` (A1–A8 duraklatma, B1–B4 paylaşım + gerçek devir, C1–C3 federasyon, D1 himaye) | 15/15 PASS |
 | `tests/browser-mp4.cjs` (+ statüko: gerçek host süreci kapanış → dosyadan açılış) | 13/13 PASS |
 
 Tam regresyon ve Chromium sonuçları: `research/mp63/evidence/REGRESYON.md`.

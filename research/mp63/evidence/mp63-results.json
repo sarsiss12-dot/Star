@@ -1,0 +1,239 @@
+{
+ "results": [
+  {
+   "name": "kurulum: host oda açar; B ve C davet bağlantısıyla (/mp/play) katılır; oyun başlar; fikstür: temaslar + kaynak",
+   "status": "PASS",
+   "ms": 7361
+  },
+  {
+   "name": "A1/A2 sıradan paneller: host KAYIT VE AYARLAR penceresini, B gelen kutusunu gerçek düğmeyle açar — ortak hız 2× kalır, host'ta ve misafirlerde zaman ilerler, \"duraklatıldı\" bildirimi yok",
+   "status": "PASS",
+   "ms": 12702
+  },
+  {
+   "name": "A3–A5 karar penceresi + manuel duraklatma: 3× → host'a karar isteyen olay (1×, herkes nedenini görür) → host olayı açar (1×) → B gerçek ⏸ → host kararı verip kapatır → oyun DURAKLI kalır → C 3× seçer → 3×",
+   "status": "PASS",
+   "ms": 9067
+  },
+  {
+   "name": "A3b otomatik duraklatma açık (host MP çubuğundaki gerçek ayar): karar olayı oyunu durdurur; karar bitince önceki geçerli hız (3×) döner; aynı bildirim iki kez kilit biriktirmez",
+   "status": "PASS",
+   "ms": 5878
+  },
+  {
+   "name": "A6/A7 birden çok neden: bekleyen karar (1×) + host arka plana geçer (0, MP.5 güvenli duraklatma, misafir komutu reddedilir) → öne gelir: karar hâlâ bekliyor (1×) → host kararı kapatır → 3×",
+   "status": "PASS",
+   "ms": 4268
+  },
+  {
+   "name": "A7b manuel duraklatma + arka plan: B duraklatır → host arka plan/ön plan → oyun DURAKLI kalır (eski hız geri yüklenmez) → B 2× seçer",
+   "status": "PASS",
+   "ms": 3543
+  },
+  {
+   "name": "A8 kayıt + yeniden bağlanma: karar 1×'de tutarken kayıt paketi ortak hızı (2×) yazar; host ağı kopar (0) ve döner → eski modal kaydı değil karar kuralı (1×); karar kapanınca 2×",
+   "status": "PASS",
+   "ms": 3961
+  },
+  {
+   "name": "A3c savaş bildirimi tek oyunculu \"Savaşa katılınca duraklat\" tercihini izler: AÇIK → AI'nın savaş ilanı oyunu durdurur; host ayarı gerçek düğmeyle KAPATIR → sonraki ilanda 1×",
+   "status": "PASS",
+   "ms": 8424
+  },
+  {
+   "name": "B1/B2 iki insan + AI ortak seferi kapattı: B gerçek diplomasi merkezinde taslağı açar; katkı puanları ve önerilen paylar host motorundan; \"Alıcıyı değiştir\" host önizlemesiyle; C hiçbir şey görmez",
+   "status": "PASS",
+   "ms": 2450
+  },
+  {
+   "name": "B3/B4 B taslağı sunar (oyu yalnız B'nin; AI ortak kendi değerlendirmesiyle; host oyu yok) → host kendi gerçek penceresinde onaylar → B \"Onaylı paylaşımı uygula\" → devir host'ta BİR KEZ; B'ye ve host'a sonuç bildirimi",
+   "status": "PASS",
+   "ms": 8668
+  },
+  {
+   "name": "C1 GERÇEK federasyon kuruluşu: B kuruluş penceresinde (uygunluk host motorundan) BİLİMSEL KUR'a dokunur → host'ta B + motorun kabul ettiği iki bağımsız AI müttefik ile federasyon; başkan B",
+   "status": "PASS",
+   "ms": 1341
+  },
+  {
+   "name": "C2 anayasa önergesi + oy: B YÖNETİM sekmesinde \"oy rejimi\" önergesine dokunur; B'nin oyu otomatik DEĞİL (AI üyeler kendi değerlendirmesiyle); B gerçek gelen kutusundan EVET; sonuç federasyonun kuralıyla (≥%75)",
+   "status": "PASS",
+   "ms": 4143
+  },
+  {
+   "name": "C3 acil hibe: başkan B gerçek ACİL HİBE düğmesine dokunur → federal fona motorun miktarı, B'nin kaynağından; B'ye kendi bildirimi",
+   "status": "PASS",
+   "ms": 1183
+  },
+  {
+   "name": "D1 himaye talebi: C (zayıf) gerçek vasallık penceresinden B'den himaye ister (giriş kapısı host kararı); karar B'nin: B gerçek gelen kutusundan KABUL → C, B'nin vasalı",
+   "status": "PASS",
+   "ms": 5121
+  },
+  {
+   "name": "sayfa hataları yok (host, B, C)",
+   "status": "PASS",
+   "ms": 0
+  }
+ ],
+ "metrics": {
+  "pause": {
+   "ordinary": {
+    "hostDays": 5.17,
+    "guestDays": 4.37,
+    "suppressed": 4
+   },
+   "scenario": [
+    {
+     "t": "want",
+     "v": 2,
+     "raw": 1
+    },
+    {
+     "t": "want",
+     "v": 0,
+     "raw": 1
+    },
+    {
+     "t": "want",
+     "v": 2,
+     "prev": 0,
+     "acked": 0
+    },
+    {
+     "t": "dec",
+     "uid": 4,
+     "state": "pending",
+     "cap": 1
+    },
+    {
+     "t": "want",
+     "v": 3,
+     "prev": 2,
+     "acked": 1
+    },
+    {
+     "t": "dec",
+     "uid": 5,
+     "state": "pending",
+     "cap": 1
+    },
+    {
+     "t": "dec",
+     "uid": 5,
+     "state": "open",
+     "cap": 1
+    },
+    {
+     "t": "want",
+     "v": 0,
+     "prev": 3,
+     "acked": 0
+    },
+    {
+     "t": "want",
+     "v": 3,
+     "prev": 0,
+     "acked": 0
+    }
+   ]
+  },
+  "notes": [
+   {
+    "naturalDecisionsDroppedInWait": [
+     "anomaly",
+     "anomaly"
+    ]
+   }
+  ],
+  "settle": {
+   "hostShares": [
+    [
+     0,
+     3,
+     1
+    ],
+    [
+     3,
+     5,
+     2
+    ],
+    [
+     4,
+     3,
+     1
+    ]
+   ],
+   "offer": {
+    "id": 1,
+    "proposer": 3,
+    "state": "pending",
+    "votes": [
+     [
+      3,
+      true
+     ],
+     [
+      4,
+      true
+     ]
+    ]
+   },
+   "applied": {
+    "before": [
+     0,
+     3,
+     3,
+     4
+    ],
+    "own": [
+     3,
+     3,
+     3,
+     4
+    ],
+    "want": [
+     3,
+     3,
+     3,
+     4
+    ],
+    "by": 3,
+    "n": 1
+   }
+  },
+  "fed": {
+   "founders": [
+    1,
+    4
+   ],
+   "founded": {
+    "id": 1,
+    "m": [
+     1,
+     3,
+     4
+    ],
+    "leader": 3,
+    "ballot": "equal",
+    "type": "bilimsel"
+   },
+   "charter": {
+    "aiVotes": {
+     "yes": [
+      1,
+      4
+     ],
+     "no": [],
+     "tok": "1"
+    },
+    "result": {
+     "open": false,
+     "ballot": "hegemonic",
+     "want": "hegemonic"
+    }
+   }
+  }
+ },
+ "errors": []
+}
