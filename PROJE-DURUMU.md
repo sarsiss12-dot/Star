@@ -23,7 +23,15 @@ Ayrıntı: `MULTIPLAYER-MP64-SONUC.md`. Testler: `tests/mp64_*_test.js`, `tests/
 - **Borsa:** takas motorun `marketTrade`'iyle; eski fiyatla gelen istek yeniden onay ister; çoğaltma yok.
 - **Filo/koloni:** takviye, sevkiyat, sipariş iptali, toplanma, sürekli üretim, onarım, terraform, habitat, lider.
 - **Haberler:** her oyuncu motorun görünürlük kuralıyla kendi bakışındaki haberleri görür.
-- **MP.6.3'ten kalanlar tarayıcıda:** paylaşım ret/geri çekme, federasyon ihraç/reform/başkan/ortak savaş + uygulama, vasallık yenileme/destek/bağımsızlık.
+- **MP.6.3'ten kalanlar tarayıcıda:**
+  - paylaşım ret / geri çekme;
+  - federasyon: ihraç, başkan, ortak savaş + uygulama; reform önergesi açıldı ama motor oylamasında geçmedi;
+  - vasallık: yenileme / destek / bağımsızlık.
+- **Misafir düzeltmesi:** federasyon sekmesi canlı senkronda GENEL'e dönmüyor.
+- **Bilinen sınırlar:**
+  - rüşvet / şantaj, fısıltı, elçi ve şablonlar hâlâ engelli;
+  - haber geçmişi oturumda.
+- **Performans tanısı:** geç oyun yavaşlığının kanıtlanmış ana kaynağı AI yapı değerlendirmesindeki ticaret yol bulması (`research/mp64/perf/SONUC.md`). Optimizasyon yapılmadı.
 
 ## MP.6.3 — akıllı duraklatma, ortak savaş paylaşımı, federasyon/vasallık kararları (geliştirme sürümü)
 
