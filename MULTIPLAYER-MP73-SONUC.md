@@ -143,7 +143,7 @@ Ayrıntı: `research/mp73/evidence/REGRESYON.md`.
   - varsayılan 4200 gün: konsey kuruluşu, AI'nın otomatik katılımı, 4 kampanya + oylama;
   - `MP73_EQUIV_DAYS=9000` ile 25 yıl ayrıca koşuldu.
 
-**`tests/browser-mp73.cjs` (Chromium).** Üretim kipi relay + parçalayan TLS vekili; yatay 844×390 / 800×360 / 915×412; düğmeler gerçek dokunmayla.
+**`tests/browser-mp73.cjs` (Chromium): 8/0.** Üretim kipi relay + parçalayan TLS vekili; yatay 844×390 / 800×360 / 915×412; düğmeler gerçek dokunmayla.
 - **A1–A3 (host + 1):** Android rehberinin akışı:
   - oda, iki tasarım, başlat;
   - sürüm işareti, `/mp/version`, misafir tanı satırı;
@@ -158,6 +158,11 @@ Ayrıntı: `research/mp73/evidence/REGRESYON.md`.
   - tasarı ve AI üyeye rüşvet (İSTİHBARAT → SİYASİ VE LOJİSTİK); insan üyeye ret; aynada yalnız kilit;
   - fısıltı ağı gerçek pencereden;
   - onaysız yutma çağrısı komut göndermez.
+
+**Regresyon (son aday):**
+- Node tam koşu 167 paket, 6330 / 4. Bunların 3'ü bilinen `faz95d_identity`; 1'i, `mp73_council_test`'in 180 sn sınırı, paket bölünerek giderildi.
+- Chromium: MP.0–MP.7.3, tek oyunculu 96H.10 ve Docker (mp5_docker 6/0, browser-mp5 10/0) hepsi PASS.
+- Docker imajında 9 MP dosyası çalışma ağacıyla aynı.
 
 **Yalnız Node'da kanıtlı:** 24 ay sınırı, daimi hükümdarlık reddi, veto / taht / reform, yıkıcı işlemlerin ret ve ikinci onay yolu, uzun eşdeğerlik. Tarayıcıda rastgele galaksi bu durumları kendiliğinden üretmez.
 
