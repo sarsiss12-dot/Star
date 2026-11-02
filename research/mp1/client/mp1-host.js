@@ -216,6 +216,7 @@ function closeRoom(){
 const month=monthTick;
 monthTick=function(){const r=month.apply(this,arguments);if(API.host&&API.started){API.host.observeHumans();API.dirty=true;autosave();}return r;};
 setInterval(()=>{
+  if(API.host&&API.started&&window.MP71Dip)mp71Tick();
   if(!API.host||!API.started||!API.connected)return;
   const day=Math.floor(G.day);if(API.dirty||day!==API.lastDay){API.dirty=false;API.lastDay=day;API.host.publish();API.publishes++;}
   if(PZ)applySpeed(true);else API.host.speedSync(window.MP61&&MP61.windowOpen()?'window':API.bg?'background':null);   // MP.6.1/6.3: host'un iç hız nedenleri de herkese
@@ -285,7 +286,7 @@ function mini(){
     (API.connected?'bağlı':API.closed?'oda kapandı — oyun duraklatıldı; OYUNU KAYDET ile yeni odada sürdürebilirsin':'bağlantı yok — oyun duraklatıldı, yeniden bağlanılıyor')+' · '+(gs.length-off)+'/'+gs.length+' misafir</button>';
   /* MP.3: DİPLOMASİ düğmesi aynı satırda (panel kapalıyken tek satır kalır) */
   if(window.MP61)MP61.status((API.connected?'bağlı':API.closed?'oda kapandı':'bağlantı yok')+' · '+(gs.length-off)+'/'+gs.length+' misafir',API.connected);
-  el.innerHTML=(window.MP3Dip?'<div class="mp3-minirow">'+head+'<button class="mp1-btn mp3-hostbtn" data-g="dip" id="mp3HostBtn">'+dipLabel()+'</button></div>':head)+
+  el.innerHTML=(window.MP3Dip&&window.MP7Legacy?'<div class="mp3-minirow">'+head+'<button class="mp1-btn mp3-hostbtn" data-g="dip" id="mp3HostBtn">'+dipLabel()+'</button></div>':head)+
     (open?gs.map(p=>{const pid=pidOfSeat(p.seat);return '<div>'+esc(p.name)+' · '+(p.online?'bağlı':'koptu — koltuk bekletiliyor')+(p.online?'':'<button class="mp1-btn" data-g="kick" data-pid="'+esc(pid)+'">Çıkar (devlet boşta)</button><button class="mp1-btn" data-g="ai" data-pid="'+esc(pid)+'">Devleti AI\'ya ver</button>')+'</div>';}).join('')+
       (PZ?'<div class="mp1-row"><button class="mp1-btn" data-g="dpause" id="mp63Dpause" aria-pressed="'+decisionPause()+'">Karar pencerelerinde: '+(decisionPause()?'DURAKLAT':'1× YAVAŞLAT')+'</button></div>':'')+
       (window.MP4Save?'<div class="mp1-row"><button class="mp1-btn" data-g="save">OYUNU KAYDET</button><button class="mp1-btn" data-g="export">DOSYAYA AKTAR</button></div>':''):'');
@@ -327,6 +328,20 @@ function dipTick(force){
   const b=doc.getElementById('mp3HostBtn');if(b){const h=dipLabel();if(b.innerHTML!==h)b.innerHTML=h;}
 }
 API.dip={open:dipOpen,seg:hostSeg,get ui(){return dipUI;},get pol(){return polUI;}};
+/* ---------- MP.7.1: tek STARS arayüzü — insanlarla teklifler gerçek anlaşma penceresi ve gerçek gelen kutusunda ----------
+   Ayrı MP diplomasi paneli (yukarıdaki dipOpen) yalnız eski tarayıcı testlerinin window.MP7Legacy kipinde açılır.
+   Host bağdaştırıcısı: kimlikler gerçek (host = devlet 0), komut host.local() ile misafirle AYNI denetimlerden geçer. */
+let mp71At=0,mp71On=false;
+function mp71Tick(){
+  if(!mp71On){mp71On=true;const human=id=>{const o=G.emps[id];return !!o&&o!==G.p&&o.ai===false&&!o.wild&&!o.crisisSide&&!o.dead;};
+    const exec=c=>{const x=API.host.local(c);return {ok:!!x.ok,code:x.code||null,detail:x.detail,extra:x.extra};};
+    MP71Dip.attach({role:'host',on:()=>!!API.host&&API.started&&!!G.p,me:()=>G.p.id,offers:()=>API.host.dipView(G.p).offers,raw:()=>API.host.dip.offers,
+      local:id=>id,real:id=>id,human,exec,day:()=>G.day,toast:(t,bad)=>dipToast(t,bad),
+      send:(c,done)=>{const x=exec(c);if(done)done({status:x.ok?'ok':'rejected',code:x.code,detail:x.detail,extra:x.extra});return 1;},
+      record:id=>{const o=API.host.dip.offers.find(x=>x.id===id);if(!o)return null;MP71Dip.sync();const key='deal:'+offerSignature({from:o.from,to:0,give:o.give,want:o.want})+':'+o.born;
+        return DiplomaticInbox.state().records.find(r=>r.key===key)||null;}});}
+  const now=Date.now();if(now-mp71At<1000)return;mp71At=now;MP71Dip.tick();
+}
 /* ---------- MP.4: kayıt / yükleme / devam lobisi ----------
    Paket mp-core'da üretilir ve doğrulanır (StarsMP); MP4Save yalnız saklar ve dosya işler. Yükleme: önce doğrula, sonra
    motorun deserialize'ı (kendi işlemiyle geri alır), sonra yeni oda + devam lobisi. Oyun host DEVAM ET'e basana kadar ilerlemez. */
