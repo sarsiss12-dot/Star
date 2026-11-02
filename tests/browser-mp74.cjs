@@ -56,7 +56,7 @@ async function room(H,cap,guests){
   const link=await H.textContent('#mp1Link');
   for(const [p,name,d,taps] of guests){await joinTaps(p,link,name,taps||1);
     await wait(p,()=>MP1Join.screen==='lobby'&&MP1Join.lobby&&MP1Join.lobby.mode==='design'&&document.getElementById('jEditMe'),undefined,40000);
-    metrics['joinErrors_'+name]=await p.evaluate(()=>MP1Join.errors.slice());await p.waitForTimeout(800);   // lobi açılışındaki 700 ms dokunma yutma penceresi (MP.7.4)
+    metrics['joinErrors_'+name]=await p.evaluate(()=>MP1Join.errors.slice());
     await tap(p,'#jEditMe');await wait(p,()=>document.getElementById('mp7Head'));await design(p,d);
     await wait(p,()=>/kaydedildi/.test(document.getElementById('jDraft').textContent));await tap(p,'#jReady');}
   await wait(H,()=>MP1Host.host.canStart().ok);await H.waitForTimeout(300);await shot(H,'room-lobby-'+guests.length);

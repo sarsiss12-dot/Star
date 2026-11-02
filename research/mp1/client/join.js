@@ -78,7 +78,7 @@ function receive(t,t0){
     else{J.resumeNoId=true;if(!J.assigned){J.closed=true;J.screen='join';J.err=V.ERR['no-save-id'];try{J.ws&&J.ws.close();}catch{}}}}   // oyun sürüyor ve bu cihazda kimlik yok
   else if(m.type==='lobby'){J.lobby=m;if(m.phase==='closed'){J.closed=true;J.screen='join';J.err=V.ERR['room-closed'];}
     else if(['ingame','paused'].includes(m.phase)&&J.empireId!==null){if(J.screen!=='game'){J.screen='game';J.tab='oyun';history.pushState({mp1:'game'},'');raw({v:1,type:'presence',tab:'oyun'});}}
-    else if(J.screen!=='lobby'&&J.screen!=='game'){J.screen='lobby';J.swallowUntil=Date.now()+700;history.pushState({mp1:'lobby'},'');}}   // MP.7.4: KATIL'a çift dokunmanın ikinci dokunuşu aynı noktadaki lobi düğmesine düşmez
+    else if(J.screen!=='lobby'&&J.screen!=='game'){J.screen='lobby';J.lobbyAt=performance.now();history.pushState({mp1:'lobby'},'');}}   // MP.7.4: bkz. hayalet dokunuş kuralı (click işleyicisi)
   else if(m.type==='snapshot'||m.type==='delta'){if(V.apply(J.game,m)==='resync'){J.resyncs=(J.resyncs||0)+1;raw({v:1,type:'resync'});}}
   else if(m.type==='result'){if(J.pending&&J.pending.cid===m.cid){m.ms=Math.round(performance.now()-J.pending.at);J.pending=null;}J.results.push(m);}
   else if(m.type==='lresult')J.lresults.push(m);
@@ -197,7 +197,9 @@ function game(app){
 }
 doc.addEventListener('click',e=>{
   const el=e.target.closest('[data-j]');if(!el)return;const a=el.dataset.j;
-  if(J.swallowUntil&&Date.now()<J.swallowUntil&&a!=='go'){e.preventDefault();e.stopPropagation();return;}
+  /* MP.7.4: KATIL'a çift dokunmanın ikinci dokunuşu lobi çizilmeden BAŞLAR ama tıklaması lobi düğmesine (aynı noktada "devletini tasarla" /
+     "odadan ayrıl") düşer. Yalnız başlangıcı lobiden önce olan dokunuş yutulur; lobi göründükten sonra başlayan her dokunuş geçer. */
+  if(a!=='go'&&e.isTrusted&&J.lobbyAt&&J.downAt<J.lobbyAt&&performance.now()-J.lobbyAt<1500){e.preventDefault();e.stopPropagation();return;}
   if(a==='go'){J.code=V.fmtCode(($('jCode').value||'').toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,V.CODE_LEN));connect();}
   else if(a==='tab')J.presence(el.dataset.tab);
   else if(a==='claim')J.claim(+el.dataset.e);
@@ -208,6 +210,7 @@ doc.addEventListener('click',e=>{
   else if(a==='sheetStay')$('jSheet')&&$('jSheet').remove();
   else if(a==='build'){const [s,p]=el.dataset.col.split(':').map(Number),sel=doc.querySelector('select[data-col="'+el.dataset.col+'"]');J.cmd({kind:'build',sys:s,planet:p,key:sel.value});}
 });
+doc.addEventListener('pointerdown',()=>{J.downAt=performance.now();},true);
 doc.addEventListener('keydown',e=>{if(e.key==='Enter'&&(e.target.id==='jCode'||e.target.id==='jName')){e.preventDefault();doc.querySelector('[data-j="go"]').click();}});
 doc.addEventListener('input',e=>{if(e.target.id==='jCode'){const v=e.target.value.toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,V.CODE_LEN);e.target.value=V.fmtCode(v);}});
 doc.addEventListener('focusin',e=>{if(e.target.matches&&e.target.matches('input'))setTimeout(()=>e.target.scrollIntoView({block:'center'}),250);});
