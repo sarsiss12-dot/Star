@@ -87,6 +87,19 @@ test('federasyon savaş izni (fedWarRequest → proposeFedWar): federasyonsuz de
   const r=cmd(h,A,{kind:'fedWar',target:ai});assert.equal(r.code,'rules:fed');
   const noC=J(h,`G.emps.find(e=>e.id!==${A}&&!e.dead&&!G.emps[${A}].contact[e.id])?.id??null`);if(noC!==null)assert.equal(code(cmd(h,A,{kind:'fedWar',target:noC})),'no-target');
 });
+test('insan müttefik kararı: A federasyonda savaş izni önerir (fedWar → proposeFedWar); öteki insan üye B\'nin oyu AI tarafından VERİLMEZ, B\'nin bekleyen kararı olur; B kendi oyunu fedVote ile verir',()=>{
+  const h=world();const x=J(h,`(()=>{const ai=G.emps.find(e=>e.ai&&!e.dead&&!e.wild),t=G.emps.find(e=>e.ai&&!e.dead&&!e.wild&&e!==ai);
+    for(const a of [${A},${B},ai.id])for(const b of [${A},${B},ai.id,t.id])if(a!==b){G.emps[a].contact[b]=G.emps[b].contact[a]=true;}
+    const f={id:900,name:'MP Konfederasyonu',type:'askeri',leader:${A},founder:${A},members:[${A},${B},ai.id],laws:{savasOnay:true},charter:fedDefaultCharter('askeri'),fund:{ene:0,ala:0},treasury:0,founded:0,typeSince:0,
+      dutySince:{defense:0,offense:0},dutyConsent:{},invites:{},decisions:{},cohesion:70,nextVote:G.day+1000};G.feds=(G.feds||[]).concat(f);MP.publish();return {ai:ai.id,t:t.id,gate:canFedWarRequest(G.emps[${A}],t)};})()`);
+  if(!x.gate.ok){assert.fail('fixture gate: '+x.gate.why);}
+  const r=cmd(h,A,{kind:'fedWar',target:x.t});assert.equal(r.status,'ok',JSON.stringify(r));
+  const v=J(h,`(()=>{const f=fedOf(900);return {kind:f.vote&&f.vote.kind,yes:f.vote.yes,no:f.vote.no||[],waiting:fedVoteCounts(f).waiting,token:fedVoteToken(f.vote)};})()`);
+  assert(v.waiting.includes(B),'B waits (human vote not given by AI): '+JSON.stringify(v));assert(!v.yes.includes(B)&&!v.no.includes(B));
+  h.run('MP.publish()');const pv=lastView(h,B).pol;assert(pv&&pv.fed&&pv.fed.vote,'vote visible to B');
+  assert.equal(code(cmd(h,B,{kind:'fedVote',fed:900,token:v.token,yes:false})),'ok');
+  assert.equal(code(cmd(h,B,{kind:'fedVote',fed:900,token:v.token,yes:true})),'rules:voted','one vote per human');
+});
 test('ortak destek görünümü: yalnız bu oyuncunun destek bağı olan AI müttefikleri ve kendi planları; komut motorun devlet-0 engeline takılmaz (seferi yoksa motorun gerekçesi)',()=>{
   const h=world();h.run('MP.publish()');const v=lastView(h,A);assert(v.joint&&Array.isArray(v.joint.allies)&&Array.isArray(v.joint.plans));
   for(const a of v.joint.allies)assert.equal(J(h,`!!(G.emps[${a.id}].ai&&G.emps[${A}].contact[${a.id}])`),true);

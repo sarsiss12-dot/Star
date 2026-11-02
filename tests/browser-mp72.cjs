@@ -96,13 +96,13 @@ let relay,px,base,tls,bH,bB,bC;
 
   const real=(p,id)=>p.evaluate(id=>{const me=MP1Join.empireId;return id===0?me:id===me?0:id;},id);
   /* ---------- A: host + 1 misafir (B 800×360) ---------- */
-  await test('A1 oda, iki tasarım, başlat; misafirde desteklenmeyen eylem envanteri 68 → 46 (22 eylem bağlandı / yerel görünüm); ayrı MP paneli yok',async()=>{
+  await test('A1 oda, iki tasarım, başlat; misafirde desteklenmeyen eylem envanteri 68 → 45 (23 eylem bağlandı / yerel görünüm); ayrı MP paneli yok',async()=>{
     await room(H,2,[[Bp,'Bora',{name:'Saf Akıl Ağı',mizac:'teknokrasi',origin:'standart',ethics:['mat:2','mil:-1'],civics:['sinyal_avci']}]]);
     await wait(Bp,()=>MP6Stars.S.unsupported&&MP6Stars.S.unsupported.length>0);
     metrics.unsupported=await Bp.evaluate(()=>MP6Stars.S.unsupported);metrics.jointPatched=await Bp.evaluate(()=>!!MP6Stars.S.jointPatched);
-    for(const a of ['envoy','envoyTask','envoyRecall','compositionEdit','compositionSave','compositionAuto','mergeArmed','dirTog','bombMode','build2','jointPrepare','jointChooseTarget','jointRequest','jointCancel','fedWarRequest','ultimatum','patronage','aimSet','aimCancel','rallySet','warPauseToggle','dismissBattleReport'])
+    for(const a of ['envoy','envoyTask','envoyRecall','compositionEdit','compositionSave','compositionAuto','mergeArmed','dirTog','bombMode','build2','jointPrepare','jointChooseTarget','jointRequest','jointCancel','fedWarRequest','ultimatum','patronage','aimSet','aimCancel','rallySet','warPauseToggle','dismissBattleReport','gobattle'])
       assert(!metrics.unsupported.includes(a),a+' still unsupported');
-    assert.equal(metrics.unsupported.length,46,JSON.stringify(metrics.unsupported));assert.equal(metrics.jointPatched,true,'joint panel bound to host data');
+    assert.equal(metrics.unsupported.length,45,JSON.stringify(metrics.unsupported));assert.equal(metrics.jointPatched,true,'joint panel bound to host data');
     assert.equal(await Bp.evaluate(()=>!!document.getElementById('mp6DipBtn')||!!document.getElementById('mp3HostBtn')),false);
   });
   let ai;

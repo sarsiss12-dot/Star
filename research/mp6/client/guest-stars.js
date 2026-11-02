@@ -61,7 +61,7 @@ const VIEW=new Set(['tab','full','cameraReset','cameraFocus','home','fit','topSt
   'ctrBack','dTab',
   /* MP.7.2 — görünüm / pencere (yerel): elçi penceresi, filo bileşimi penceresi, ortak destek hazırlığı ve haritadan hedef seçimi,
      tekil gemi nişangâhı, eski toplanma düğmesi (yalnız bilgi), savaş bildirimi duraklatma tercihi, savaş raporunu gizleme */
-  'envoy','compositionEdit','jointPrepare','jointChooseTarget','aimSet','aimCancel','rallySet','warPauseToggle','dismissBattleReport',
+  'envoy','compositionEdit','jointPrepare','jointChooseTarget','aimSet','aimCancel','rallySet','warPauseToggle','dismissBattleReport','gobattle',
   /* MP.7.2 — motor işlevi MP komutuna çevrilen gerçek düğmeler */
   'envoyTask','envoyRecall','compositionSave','compositionAuto','build2','jointRequest','jointCancel','fedWarRequest','ultimatum','patronage']);
 /* MP.6.1 — UI.act kapısında doğrudan MP komutuna çevrilen düğmeler (tek oyunculu kodları dünyayı yerelde değiştirir) */
