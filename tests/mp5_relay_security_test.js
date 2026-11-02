@@ -112,10 +112,42 @@ test('MP1_IP_HEADER: CDN önlü platformda istemci IP\'si ayrı başlıktan okun
     for(const c of open)c.end();
   }finally{await stop(q);}
 });
-test('kaba kuvvet hesabı: 31^8 kod uzayı, IP başı 60 deneme / 10 dk → 200 oda açıkken bir IP\'nin günlük isabet olasılığı < 1e-5',()=>{
-  const space=relayMod.ALPHABET.length**relayMod.CODE_LEN,perDay=relayMod.LIMITS.badPer10Min*6*24,p=1-Math.pow(1-200/space,perDay);
-  assert.equal(relayMod.ALPHABET.length,31);assert.equal(relayMod.CODE_LEN,8);assert(p<1e-5,String(p));
-  console.log('   kod uzayı '+space.toExponential(2)+'; IP başı günde en çok '+perDay+' deneme; 200 açık odada günlük isabet olasılığı '+p.toExponential(2));
+test('kaba kuvvet hesabı (MP.7.4): 31^5 kod uzayı; IP başı 20 / 10 dk + relay geneli 120 / 10 dk yanlış deneme sınırı',()=>{
+  /* 5 karakterli kod telefonda yazılabilir ama uzay 31^8'den ~3·10^4 kat küçük. Telafi: IP başı sınır 60 → 20 ve relay geneli sınır
+     (aşılınca yanlış denemesi olan her IP bekletilir). Kalan risk: çok sayıda farklı IP'den tekil denemeler (yalnız lobi aşamasındaki
+     odalara katılabilir; oyun başladıktan sonra yeni oyuncu alınmaz, host atabilir / yasaklayabilir). */
+  const space=relayMod.ALPHABET.length**relayMod.CODE_LEN,L=relayMod.LIMITS;
+  assert.equal(relayMod.ALPHABET.length,31);assert.equal(relayMod.CODE_LEN,5);assert.equal(L.badPer10Min,20);assert.equal(L.globalBadPer10Min,120);
+  const day=n=>n*6*24,p=(tries,rooms)=>1-Math.pow(1-rooms/space,tries);
+  const ipDay=p(day(L.badPer10Min),10),globalDay=p(day(L.globalBadPer10Min),10);
+  assert(ipDay<0.002,String(ipDay));assert(globalDay<0.01,String(globalDay));
+  console.log('   kod uzayı '+space.toExponential(2)+'; 10 açık odada günlük isabet: tek IP '+ipDay.toExponential(2)+', relay geneli '+globalDay.toExponential(2));
+});
+test('MP.7.4 relay geneli yanlış kod sınırı: aşılınca yanlış denemesi olan IP bekletilir; temiz IP doğru kodla katılır',async()=>{
+  const r=await relay({MP1_TRUST_PROXY:'1'}),g=relayMod.LIMITS.globalBadPer10Min;relayMod.LIMITS.globalBadPer10Min=6;
+  try{
+    const h=await host(r);await setCap(r,h,3);
+    for(let i=0;i<6;i++){const c=await ws(r.port,'role=client&code=ZZZZ'+(i+2),{xff:'198.51.100.'+(60+i)});assert.equal((await c.ctl('error')).code,'invalid-code');c.end();}
+    assert.equal((await ws(r.port,'role=client&code=ZZZZ9',{xff:'198.51.100.60'})).status,429,'IP with a miss is held while the global budget is spent');
+    assert.equal((await ws(r.port,'role=client&code='+h.code,{xff:'198.51.100.61'})).status,429,'even with a real code');
+    const ok=await ws(r.port,'role=client&code='+h.code,{xff:'198.51.100.99'});assert.equal(ok.status,101);await ok.ctl('welcome');
+    assert(r.stats.denied['guess-limit-global']>=2);ok.end();
+  }finally{relayMod.LIMITS.globalBadPer10Min=g;await stop(r);}
+});
+test('MP.7.4 çift KATIL: aynı sekme etiketiyle (dev) gelen ikinci soket öncekinin yerine geçer (koltuk tek); başka sekme oda doluyken reddedilir; geçersiz etiket yok sayılır',async()=>{
+  const r=await relay();
+  try{
+    const h=await host(r);const dev='A'.repeat(11)+'b_-'+'9'.repeat(8);
+    const a1=await ws(r.port,'role=client&code='+h.code+'&dev='+dev);const w1=await a1.ctl('welcome');
+    const a2=await ws(r.port,'role=client&code='+h.code+'&dev='+dev);const w2=await a2.ctl('welcome');assert.notEqual(w1.conn,w2.conn);
+    assert.equal((await a1.waitClose()).code,4009,'old socket of the same tab is closed');
+    await h.wait(m=>m==='L'+w1.conn);assert.equal(r.rooms.get(h.code).clients.size,1);
+    const b=await ws(r.port,'role=client&code='+h.code+'&dev='+'B'.repeat(22));assert.equal((await b.ctl('error')).code,'room-full','another tab cannot take the seat');
+    const a3=await ws(r.port,'role=client&code='+h.code+'&dev=short');assert.equal((await a3.ctl('error')).code,'room-full','malformed tag is ignored (no replacement)');
+    const raceA=await ws(r.port,'role=client&code='+h.code+'&dev='+dev),raceB=await ws(r.port,'role=client&code='+h.code+'&dev='+dev);await raceA.ctl('welcome');await raceB.ctl('welcome');
+    await raceA.waitClose();assert.equal(r.rooms.get(h.code).clients.size,1,'two quick taps still hold one seat');
+    a2.end();raceB.end();
+  }finally{await stop(r);}
 });
 test('toplam bağlantı sınırı (MP1_MAX_CONNS): dolunca yeni el sıkışma 503; bağlantı kapanınca yer açılır',async()=>{
   const r=await relay({MP1_MAX_CONNS:'3'});try{
@@ -169,7 +201,7 @@ test('misafir ağ değişimi: oda doluyken sessiz kalmış (ölü) eski misafir 
 test('sızıntı: relay günlüğe hiçbir şey yazmaz; oda kodu yalnız davet URL\'sinde, host anahtarı ve oyuncu jetonu hiçbir URL\'de yok (ilk çerçeve / H içerikleri)',async()=>{
   const join=fs.readFileSync(path.join(root,'research/mp1/client/join.js'),'utf8'),hostjs=fs.readFileSync(path.join(root,'research/mp1/client/mp1-host.js'),'utf8');
   const urls=src=>[...src.matchAll(/new WebSocket\(([^;]*)\)/g),...src.matchAll(/wsUrl\(([^)]*)\)/g)].map(m=>m[1]);
-  for(const u of urls(join))assert(!/token|key|name/i.test(u),'guest ws URL: '+u);assert.match(join,/\/mp1\/ws\?role=client&code='\+code\);/);
+  for(const u of urls(join))assert(!/token|key|name/i.test(u),'guest ws URL: '+u);assert.match(join,/\/mp1\/ws\?role=client&code='\+code\+'&dev='\+encodeURIComponent\(tabTag\(\)\)\);/);   // MP.7.4: sekme etiketi (gizli değil, jeton değil)
   for(const u of urls(hostjs))assert(!/API\.key|token/.test(u),'host ws URL: '+u);
   assert.match(hostjs,/ws\.onopen=\(\)=>ws\.send\('A'\+API\.key\)/);
 });

@@ -1,0 +1,32 @@
+{
+  "phase": "MP.7.4",
+  "build": "96h10p3",
+  "pwa_cache": "stars-v96h10p3",
+  "save_version": 8,
+  "parent_commit": "53c961f3f95113c49589575f8cc42a53edf0e9f7",
+  "parent_game": "MP.7 (96h10p2)",
+  "parent_zip_sha256": "dc52bfe543b11bf7483969b6935172bcc65ece8c307fb28a0587ee1640e7bc62",
+  "scope": "Swipeable notice cards (swipe dismisses the card only; decision records stay in the diplomatic inbox) and quick decisions on notice cards (accept / reject / counter-offer through the existing DiplomaticInbox.resolve and deal window). Simulation, Save8 schema and RNG unchanged. PERF.1 optimizations retained.",
+  "report": "MULTIPLAYER-MP74-SONUC.md",
+  "evidence": "research/mp74/evidence/",
+  "runtime_changed": [
+    "ui.js",
+    "index.html",
+    "main.js",
+    "sw.js"
+  ],
+  "single_player_save8_rng": "simulation untouched; full Node regression 170 suites 6355/3 (3 = known faz95d_identity)",
+  "game": {
+    "file": "stars-faz96h10p3.zip",
+    "bytes": 771121,
+    "sha256": "1cb0ea94f4e6e891454e1d09f4908e891e2ab2a633ae152a86cc4b02d73aad77",
+    "crc32_file": "3769aff4",
+    "crc": "PASS",
+    "members": 20,
+    "manifest_runtime_files": 19,
+    "repack_identical": true,
+    "verify_release_extracted": "PASS"
+  },
+  "physical_android": "NOT RUN",
+  "live_render": "NOT RUN"
+}

@@ -202,7 +202,7 @@ async function miniTap(g){await freeBar(H);if(!await H.locator('#mp1Mini [data-g
       setTimeout(()=>{const b=Buffer.from('A'+'0'.repeat(32)),m=crypto.randomBytes(4),x=Buffer.from(b);for(let i=0;i<x.length;i++)x[i]^=m[i&3];s.write(Buffer.concat([Buffer.from([0x81,0x80|b.length]),m,x]));},200);});
       s.on('data',x=>{d+=x.toString('latin1');});s.on('close',()=>r(d));setTimeout(()=>{s.destroy();},3000);});
     assert.match(got,/bad-host-key/);assert.equal(await H.evaluate(()=>MP1Host.connected),true,'real host unaffected');
-    for(const u of metrics.wsUrls){assert.match(u,/^wss:\/\/localhost:\d+\/mp1\/ws\?role=(host|client)(&code=[A-Z0-9]{8})?$/,u);assert(!u.includes(key));}
+    for(const u of metrics.wsUrls){assert.match(u,/^wss:\/\/localhost:\d+\/mp1\/ws\?role=(host|client)(&code=[A-Z0-9]{5}(&dev=[A-Za-z0-9_-]{22,64})?)?$/,u);assert(!u.includes(key));}
     const toks=await H.evaluate(()=>[...MP1Host.host.state.players.values()].map(p=>p.token).filter(Boolean));for(const u of metrics.wsUrls)for(const t of toks)assert(!u.includes(t));
     if(metrics.mode==='docker'){const l=execSync('docker logs mp5-e2e 2>&1',{encoding:'utf8'});assert(!l.includes(code0)&&!l.includes(key)&&!toks.some(t=>l.includes(t)),'relay logs');metrics.relayLogLines=l.trim().split('\n').length;}
   });
@@ -250,7 +250,7 @@ async function miniTap(g){await freeBar(H);if(!await H.locator('#mp1Mini [data-g
   assert.equal(errors.length,0,'page errors: '+errors.join(' | '));
 }catch(e){results.push({name:'harness',status:'FAIL',error:String(e&&e.stack||e)});console.log('FAIL harness\n'+(e&&e.stack||e));}
 finally{
-  metrics.pageErrors=errors;metrics.wsUrls=[...new Set(metrics.wsUrls.map(u=>u.replace(/code=[A-Z0-9]{8}/,'code=XXXXXXXX')))];
+  metrics.pageErrors=errors;metrics.wsUrls=[...new Set(metrics.wsUrls.map(u=>u.replace(/code=[A-Z0-9]{5}/,'code=XXXXX').replace(/dev=[^&]*/,'dev=…')))];
   fs.writeFileSync(path.join(out,'mp5-results.json'),JSON.stringify({note:'Aynı makinede: dağıtım imajı ('+metrics.mode+') + yerel TLS vekili + telefon başına TCP kesici + ayrı Chromium süreçleri (mobil dokunmatik bağlam). Gerçek internet ya da fiziksel Android DEĞİL. Siyasi başlangıç açık fikstür.',results,metrics},null,1));
   for(const x of [hostCtx])if(x)await x.close().catch(()=>{});for(const b of [Bb,Cb,Xb])if(b)await b.close().catch(()=>{});
   if(metrics.mode==='docker'){try{dk('rm','-f','mp5-e2e');}catch{}}else if(relayProc)relayProc.kill();

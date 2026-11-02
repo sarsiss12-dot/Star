@@ -1951,6 +1951,8 @@ const UI = {
         break;
       }
       case 'openNote': this.openNote(x); break;
+      case 'noteQuick': this.noteQuickAct(x); break;   // MP.7.4
+      case 'noteSwipe': return this.noteSwipe(x);      // MP.7.4
       case 'closem': this.closeModal(); break;
       case 'restart': location.reload(); break;
     }
@@ -7408,10 +7410,79 @@ const UI = {
          <span class="nIco">${it.ico||'✉'}</span>
          <span class="nTxt"><b>${esc(it.title)}</b><i>${esc(it.sub||'')}</i></span>
          <span class="nGo">›</span>
-       </button>`).join('');
+       </button>${this.noteQuick(it)}`).join('');
     // Keep an unchanged decision's DOM node and entrance animation stable during refresh.
     if(box._inboxMarkup96d!==markup){box.innerHTML=markup;box._inboxMarkup96d=markup;}
+    this.noteSwipeBind(box);
   },
+  /* MP.7.4: KAYDIRILABİLİR BİLDİRİM + KARTTAN HIZLI KARAR
+     Yeni bildirim / karar motoru yok: kart düğmeleri Gelen kutusu penceresinin
+     yolunu kullanır (DiplomaticInbox.resolve, karşı teklifte aiDealOpen).
+     Kaydırmak yalnız kartı ekrandan kaldırır: karar vermez, kaydı silmez. */
+  noteRecord(it){
+    if(!it||typeof DiplomaticInbox==='undefined'||!DiplomaticInbox.supported(it.kind))return null;
+    const byId=Number.isInteger(it.rec)?DiplomaticInbox.get(it.rec):null;   // çok oyunculu kartın kayıt bağı
+    if(byId)return byId.status==='pending'?byId:null;
+    return DiplomaticInbox.state().records.find(r=>r.status==='pending'&&r.note&&r.note.uid===it.uid)||null;
+  },
+  noteQuick(it){
+    if(!['aideal','pact','invite','fedvote'].includes(it.kind))return '';
+    const r=this.noteRecord(it);if(!r)return '';
+    if(r._mpWait)return `<div class="nQuick" data-uid="${it.uid}"><span class="nqWait">Karar gönderildi — yanıt bekleniyor…</span></div>`;
+    const v=it.kind==='fedvote';
+    return `<div class="nQuick" data-uid="${it.uid}"><button class="nq ok" data-a="noteQuick" data-x="${it.uid}:y">${v?'EVET':'KABUL'}</button>`+
+      `<button class="nq no" data-a="noteQuick" data-x="${it.uid}:n">${v?'HAYIR':'REDDET'}</button>`+
+      (it.kind==='aideal'?`<button class="nq" data-a="noteQuick" data-x="${it.uid}:c">KARŞI TEKLİF</button>`:'')+'</div>';
+  },
+  noteQuickAct(x){
+    const [u,c]=String(x).split(':'),it=(G.inbox||[]).find(n=>n.uid===+u);if(!it)return;
+    const r=this.noteRecord(it);if(!r){this.openNote(it.uid);return;}
+    if(c==='c'){
+      if(r.kind!=='aideal')return;const g=DiplomaticInbox.gate(r);
+      if(!g.ok){say(g.why||'Karşı teklif hazırlanamaz','war');return;}
+      this.aiDealOpen(r.note.data);if(this._hooks&&this._hooks.offCounter)this._hooks.offCounter();return;
+    }
+    if(c!=='y'&&c!=='n')return;
+    const out=DiplomaticInbox.resolve(r.id,c==='y','haracguzar',G.emps);
+    say(out.ok?(out.pending?'Karar gönderildi — yanıt bekleniyor':'Diplomatik karar kaydedildi'):(out.why||'Karar verilemedi'),out.ok?'win':'war');
+    this.noteResume();this.drawInbox();this.topbar();
+  },
+  noteSwipe(uid){
+    const list=G.inbox||[],i=list.findIndex(n=>n.uid===+uid);if(i<0)return false;
+    const it=list[i],dip=typeof DiplomaticInbox!=='undefined'&&DiplomaticInbox.supported(it.kind);
+    if(!dip&&!['wardec','warstart','crisend','cncnew'].includes(it.kind)){
+      say('Bu olay karar bekliyor — karta dokunup karar ver','war');this.drawInbox();return false;
+    }
+    if(dip&&!DiplomaticInbox.capture(it)&&!this.noteRecord(it)){say('Gelen kutusu dolu; bildirim kaldırılmadı','war');this.drawInbox();return false;}
+    list.splice(i,1);if(G.minNote===it.uid){G.minNote=null;this.topbar();}
+    say(dip?'Bildirim kaldırıldı — karar Gelen kutusunda bekliyor':'Bildirim kaldırıldı');
+    this.noteResume();this.drawInbox();return true;
+  },
+  noteResume(){
+    // Kartın duraklattığı oyun, duraklatan başka kart ve açık pencere kalmayınca önceki hıza döner.
+    const m=$('modal');if(!this.prePause||G.speed>0||(G.inbox||[]).some(n=>n.pause)||m&&m.innerHTML&&!m.classList.contains('hidden'))return;
+    const back=this.prePause;this.prePause=0;this.setSpeed(back);
+  },
+  noteSwipeBind(box){
+    if(box._swipe74)return;box._swipe74=true;let st=null;
+    const card=e=>e.target.closest&&e.target.closest('.nCard');
+    box.addEventListener('pointerdown',e=>{const c=card(e);if(!c||e.button>0)return;st={c,x:e.clientX,y:e.clientY,dx:0,on:false,id:e.pointerId};},{passive:true});
+    box.addEventListener('pointermove',e=>{
+      if(!st||e.pointerId!==st.id)return;const dx=e.clientX-st.x,dy=e.clientY-st.y;
+      if(!st.on){if(Math.abs(dy)>12&&Math.abs(dy)>Math.abs(dx)){st=null;return;}if(Math.abs(dx)<12||Math.abs(dx)<Math.abs(dy)*1.5)return;st.on=true;try{st.c.setPointerCapture(e.pointerId);}catch{}}
+      st.dx=dx;st.c.style.transition='none';st.c.style.transform='translateX('+dx+'px)';st.c.style.opacity=String(Math.max(.25,1-Math.abs(dx)/260));
+    },{passive:true});
+    const end=e=>{
+      if(!st||e.pointerId!==st.id)return;const s=st;st=null;if(!s.on)return;box._swipeAt74=Date.now();
+      const w=s.c.getBoundingClientRect().width||240,go=Math.abs(s.dx)>=Math.max(80,w*.35);
+      s.c.style.transition='transform .18s ease,opacity .18s ease';
+      if(go){s.c.style.transform='translateX('+(s.dx>0?w:-w)+'px)';s.c.style.opacity='0';setTimeout(()=>{if(!UI.act('noteSwipe',s.c.dataset.x)){s.c.style.transform='';s.c.style.opacity='';}},170);}
+      else{s.c.style.transform='';s.c.style.opacity='';}
+    };
+    box.addEventListener('pointerup',end);box.addEventListener('pointercancel',end);
+    box.addEventListener('click',e=>{if(box._swipeAt74&&Date.now()-box._swipeAt74<400&&card(e)){e.stopPropagation();e.preventDefault();}},true);
+  },
+  /* END MP.7.4 NOTICES */
   openNote(uid){
     const list = G.inbox || [];
     const i = list.findIndex(x => x.uid === +uid);

@@ -1217,7 +1217,12 @@ function createHost(opts){
           if(!m.token&&[...S.players.values()].some(x=>x.auth&&!x.conn))return out(conn,{v:PROTOCOL,type:'resume',saveId:S.saveId});
           return deny('game-started');}
         if(!p&&L.phase==='resume'){if(guests().filter(x=>x.visitor).length>=4)return deny('room-full');}
-        else if(!p&&guests().length>=L.capacity-1)return deny('room-full');
+        else if(!p&&guests().length>=L.capacity-1){
+          /* MP.7.4: oyun başlamadan önce bağlantısı kopmuş misafir kaydı (ör. çift KATIL'ın ilk soketi, jetonu kaydedilmeden kapanan sekme) koltuğu
+             tutmaz: oda doluysa en eski bağsız kayıt yeni gelene yer açar. Devlet henüz kurulmadığı için kaybedilen yalnız lobi kaydıdır;
+             bağlı oyunculara ve oyun başladıktan sonraki koltuklara dokunulmaz. */
+          const ghost=guests().filter(x=>!x.conn&&!x.visitor).sort((a,b)=>(a.lastSeen||0)-(b.lastSeen||0))[0];
+          if(!ghost)return deny('room-full');S.players.delete(ghost.playerId);stats.ghostSeats=(stats.ghostSeats|0)+1;}
       }
       if(p){if(p.conn&&p.conn!==conn){S.conns.delete(p.conn);kick(p.conn,'replaced');}}
       else{p={playerId:'p-'+random(6),name,token:random(16),empireId:null,conn:null,lastSeq:0,results:new Map(),lastView:null,lastRev:0,wasAI:null,takeover:null,lastSeen:now()};

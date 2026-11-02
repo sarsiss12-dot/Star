@@ -282,8 +282,12 @@ function mini(){
   const L=API.lobby;if(!L)return;
   /* Haritayı kapatmasın: tek satır; bağlantısı kopan misafir varsa (karar gerekir) kendiliğinden açılır. */
   const gs=L.players.filter(p=>!p.host),off=gs.filter(p=>!p.online).length,open=API.miniOpen||off>0;
-  const head='<button class="mp1-mini-h" data-g="toggle" aria-expanded="'+open+'"><b>ÇOK OYUNCULU</b> · '+esc(V.fmtCode(API.code))+' · '+
-    (API.connected?'bağlı':API.closed?'oda kapandı — oyun duraklatıldı; OYUNU KAYDET ile yeni odada sürdürebilirsin':'bağlantı yok — oyun duraklatıldı, yeniden bağlanılıyor')+' · '+(gs.length-off)+'/'+gs.length+' misafir</button>';
+  /* MP.7.4: kapalıyken haritayı kapatmayan küçük düğme (👥 bağlı insan sayısı + bağlantı noktası); dokununca aynı panel açılır */
+  const ok=API.connected&&!off,head=open?'<button class="mp1-mini-h" data-g="toggle" aria-expanded="true"><b>ÇOK OYUNCULU</b> · '+esc(V.fmtCode(API.code))+' · '+
+    (API.connected?'bağlı':API.closed?'oda kapandı — oyun duraklatıldı; OYUNU KAYDET ile yeni odada sürdürebilirsin':'bağlantı yok — oyun duraklatıldı, yeniden bağlanılıyor')+' · '+(gs.length-off)+'/'+gs.length+' misafir</button>':
+    '<button class="mp1-mini-h mp74-pill" data-g="toggle" aria-expanded="false" aria-label="Çok oyunculu paneli — '+(1+gs.length-off)+' oyuncu bağlı'+(ok?'':', bağlantı sorunu')+'">'+
+    '<i class="mp74-dot'+(ok?'':' bad')+'"></i>👥 '+(1+gs.length-off)+(ok?'':' ⚠')+'</button>';
+  el.classList.toggle('mp74-compact',!open);
   /* MP.3: DİPLOMASİ düğmesi aynı satırda (panel kapalıyken tek satır kalır) */
   if(window.MP61)MP61.status((API.connected?'bağlı':API.closed?'oda kapandı':'bağlantı yok')+' · '+(gs.length-off)+'/'+gs.length+' misafir',API.connected);
   el.innerHTML=(window.MP3Dip&&window.MP7Legacy?'<div class="mp3-minirow">'+head+'<button class="mp1-btn mp3-hostbtn" data-g="dip" id="mp3HostBtn">'+dipLabel()+'</button></div>':head)+

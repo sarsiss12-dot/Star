@@ -43,7 +43,7 @@ test('behind a trusted proxy: plain HTTP is redirected (308) or refused (403 for
     const u=`ws://127.0.0.1:${r.port}/mp1/ws?role=host`,o='https://stars.example';
     assert.equal((await connect(u,{origin:o,headers:{host:'stars.example'}})).status,403,'plain ws refused');
     assert.equal((await connect(u,{origin:o,headers:{'x-forwarded-proto':'http'}})).status,403);
-    const w=await connect(u,{origin:o,headers:{'x-forwarded-proto':'https'}});assert.equal(w.status,101);assert.match((await w.ctl('room')).code,/^[A-Z2-9]{8}$/);w.end();
+    const w=await connect(u,{origin:o,headers:{'x-forwarded-proto':'https'}});assert.equal(w.status,101);assert.match((await w.ctl('room')).code,/^[A-Z2-9]{5}$/);w.end();
     assert.equal((await connect(u,{origin:'https://other.example',headers:{'x-forwarded-proto':'https'}})).status,403,'origin allowlist');
     assert.equal((await get(r.port,'/mp/stats',{'x-forwarded-proto':'https'})).status,404);
     assert.equal(r.stats.denied.insecure,3,'odd Host + two plain WebSocket upgrades (redirects are not denials)');

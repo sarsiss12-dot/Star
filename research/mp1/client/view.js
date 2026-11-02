@@ -11,7 +11,8 @@ const ERR={'invalid-code':'Oda kodu geçersiz ya da oda yok.','room-full':'Oda d
   'bad-host-key':'Host anahtarı geçersiz.','host-exists':'Bu odanın host bağlantısı zaten açık.',taken:'Bu devlet başka bir oyuncuda.','not-claimable':'Bu devlet seçilemez.',
   'host-empire':'Host\'un devleti seçilemez.','no-claim':'Önce bir devlet seç.',phase:'Bu aşamada yapılamaz.','not-started':'Oyun henüz başlamadı.',offline:'Bağlantı yok.',paused:'Oyun duraklatıldı; komut uygulanmadı.','server-restart':'Sunucu yeniden başlatıldı; oda kapandı.',
   'no-save-id':'Oyun kayıttan devam ediyor ve bu cihazda bu kayda ait oyuncu kimliği yok. Host\'tan kimliğini kurtarmasını iste.'};
-const fmtCode=c=>String(c||'').replace(/^(.{4})(.+)$/,'$1-$2');
+const CODE_LEN=5;   // MP.7.4: oda kodu 5 karakter (relay CODE_LEN ile aynı); tire yok
+const fmtCode=c=>{c=String(c||'');return c.length>CODE_LEN?c.replace(/^(.{4})(.+)$/,'$1-$2'):c;};
 function players(L){
   return '<div class="mp1-plist">'+L.players.map(p=>{
     const e=L.empires.find(x=>x.id===p.claim);
@@ -39,7 +40,7 @@ function apply(st,m){
   return null;
 }
 /* MP.7.3: salt okunur sürüm işareti — telefonda (bilgisayarsız) doğru dağıtımın açıldığını görmek için; relay /mp/version ile aynı */
-const MP_VERSION='MP.7.3';
+const MP_VERSION='MP.7.4';
 const verLine=()=>'STARS '+MP_VERSION+' · oyun '+(typeof BUILD_ID==='string'?BUILD_ID:'?');
-root.MP1View={esc,color,TAB,PHASE,ERR,fmtCode,players,apply,MP_VERSION,verLine};
+root.MP1View={esc,color,TAB,PHASE,ERR,fmtCode,CODE_LEN,players,apply,MP_VERSION,verLine};
 })(typeof globalThis!=='undefined'?globalThis:this);

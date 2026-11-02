@@ -7,7 +7,7 @@ Bu rehber bilgisayarı olmayan bir kişi için yazıldı. Her adım telefondan v
 ## 0. Dağıtım (Render paneli)
 
 1. **Settings → Build & Deploy**
-   - **Branch:** `claude/stars-mp73-council-intrigue`
+   - **Branch:** `claude/stars-mp74-lobby-notifications` (MP.7.4; MP.7.3 dahil)
    - **Runtime:** Docker
    - **Dockerfile Path:** `research/mp1/deploy/Dockerfile`
    - **Docker Build Context Directory:** `.` (depo kökü)
@@ -19,7 +19,7 @@ Bu rehber bilgisayarı olmayan bir kişi için yazıldı. Her adım telefondan v
 4. **Manual Deploy → Clear build cache & deploy**
 5. **Sürümü doğrulayın.** Telefon tarayıcısında `<adres>/mp/version` açın. Görmeniz gereken:
    ```
-   {"mp":"MP.7.3","build":"96h10p2","files":{...}}
+   {"mp":"MP.7.4","build":"96h10p3","files":{...}}
    ```
    - `mp` alanı `MP.7.3` değilse eski imaj çalışıyordur: 4. adımı yineleyin.
    - `files` içindeki 12 haneli özetler yalnız dosya sürümünü gösterir; gizli bilgi değildir.
@@ -44,7 +44,7 @@ Sürüm üç yerde görünür:
 | 1 | Branch `claude/stars-mp73-council-intrigue` deploy edilir (§0) | `/mp/version` → `MP.7.3` |
 | 2 | İki telefonda `<adres>` açılır | Başlık ekranı; ana menüde ÇOK OYUNCULU düğmesi |
 | 3 | Telefon A: ÇOK OYUNCULU → ODA KUR | Oda kodu görünür |
-| 4 | Telefon B: ÇOK OYUNCULU → ODAYA KATIL, kodu yazar | B lobide görünür |
+| 4 | Telefon B: ÇOK OYUNCULU → ODAYA KATIL, kodu yazar (MP.7.4: 5 karakter, örn. K7M2P) | B lobide görünür (KATIL'a iki kez basmak sorun yaratmaz) |
 | 5 | İki oyuncu kendi devletini tasarlar (gerçek kurulum ekranı) | Farklı adlar / renkler |
 | 6 | İkisi de HAZIR'a dokunur | Host'ta BAŞLAT açılır |
 | 7 | Host BAŞLAT'a dokunur | B'de OYUN BAŞLIYOR adımları, sonra oyun |

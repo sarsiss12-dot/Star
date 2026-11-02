@@ -99,16 +99,16 @@ let relay,px,base,tls,bH,bB,bC;
     await room(H,2,[[Bp,'Bora',{name:'Saf Akıl Ağı',mizac:'teknokrasi',origin:'standart',ethics:['mat:2','mil:-1'],civics:['sinyal_avci']}]]);
     for(const p of [H,Bp])assert.equal(await p.evaluate(()=>!!document.getElementById('map')&&!document.getElementById('game').classList.contains('hidden')),true);
     const v=await Bp.evaluate(async()=>{const r=await fetch('/mp/version',{cache:'no-store'});return {s:r.status,j:await r.json(),b:BUILD_ID,line:MP1View.verLine(),chip:(document.getElementById('mp1Mini')||{}).title||''};});
-    metrics.version=v.j;assert.equal(v.s,200);assert.equal(v.j.mp,'MP.7.3');assert.equal(v.j.build,v.b);assert.match(v.line,/MP\.7\.3 · oyun 96h10p2/);assert.match(v.chip,/MP\.7\.3/);
+    metrics.version=v.j;assert.equal(v.s,200);assert.match(v.j.mp,/^MP\.7\.[34]$/);assert.equal(v.j.build,v.b);assert.match(v.line,/MP\.7\.[34] · oyun 96h10p[23]/);assert.match(v.chip,/MP\.7\.[34]/);
     assert.equal(Object.values(v.j.files).every(x=>/^[0-9a-f]{12}$/.test(x)),true);
     await wait(Bp,()=>MP6Stars.S.unsupported&&MP6Stars.S.unsupported.length>0);metrics.unsupported=await Bp.evaluate(()=>MP6Stars.S.unsupported);
     for(const a of ['bill','billPick','billTarget','cncFound','cncJoin','cncLeave','cncNo','cncPane','cncYes','permanent','reform','throneBuild','veto','bribe','blackmail','bmGo','fundSep','panoptRetarget','revolt','revoltConfirm','whisperBlame','whisperGo','whisperMenu','whisperPick','devour','devourConfirm','colFire'])
       assert(!metrics.unsupported.includes(a),a+' still unsupported');
     assert.equal(metrics.unsupported.length,18,JSON.stringify(metrics.unsupported));
     await tap(Bp,'#mp6Conn');await wait(Bp,()=>document.getElementById('mpVer')&&document.getElementById('mpVer').offsetParent);   // telefonda görünür tanı satırı
-    metrics.guestDiag=await Bp.evaluate(()=>document.getElementById('mpVer').textContent);assert.match(metrics.guestDiag,/MP\.7\.3 · oyun 96h10p2 · host bağlı .*son hata: /);
+    metrics.guestDiag=await Bp.evaluate(()=>document.getElementById('mpVer').textContent);assert.match(metrics.guestDiag,/MP\.7\.[34] · oyun 96h10p[23] · host bağlı .*son hata: /);
     assert.doesNotMatch(metrics.guestDiag,/tok|key|anahtar/i);await shot(Bp,'a1-guest-diag');await tap(Bp,'#mp6Conn');
-    assert.match(await H.evaluate(()=>{MP1Host.miniOpen=true;try{document.querySelector('[data-g="toggle"]')&&0;}catch{}return MP1View.verLine();}),/MP\.7\.3/);
+    assert.match(await H.evaluate(()=>{MP1Host.miniOpen=true;try{document.querySelector('[data-g="toggle"]')&&0;}catch{}return MP1View.verLine();}),/MP\.7\.[34]/);
   });
   await test('A2 rehber 9–12: misafir filosunu yürütür (gerçek orderMove → host), B → host diplomatik teklif ve host gelen kutusundan kabul eder; zaman iki ekranda ilerler',async()=>{
     const plan=await H.evaluate(()=>{const f=G.fleets.find(x=>x.e===1&&x.ships.length&&x.sys>=0&&!x.mv);return {f:f.id,to:G.sys[f.sys].lanes[0]};});
@@ -178,8 +178,9 @@ let relay,px,base,tls,bH,bB,bC;
       if(go){await tap(B2,'#modal [data-a="whisperGo"]');await H2.waitForTimeout(1500);metrics.whisper=await H2.evaluate(()=>(G.emps[1].whisperLog||[]).length);
         assert(metrics.whisper>=w0,'B log');assert.equal(await H2.evaluate(()=>(G.p.whisperLog||[]).length),hl,'host log untouched');}
       else metrics.whisper='gönder düğmesi motor koşuluyla kapalı';}
-    const s0=await B2.evaluate(()=>JSON.stringify(MP6Stars.S.stats.sent));await B2.evaluate(()=>{UI.closeModal();UI.act('devourConfirm');});await B2.waitForTimeout(300);
-    assert.equal(await B2.evaluate(()=>JSON.stringify(MP6Stars.S.stats.sent)),s0,'no command without a confirmed preview');
+    const sentW=p=>p.evaluate(()=>{const o={...MP6Stars.S.stats.sent};for(const k of ['spyQuote','quote','warQuote','vassalQuote','settleQuote','fedFoundQuote'])delete o[k];return JSON.stringify(o);});   // salt okuma sorguları hariç
+    const s0=await sentW(B2);await B2.evaluate(()=>{UI.closeModal();UI.act('devourConfirm');});await B2.waitForTimeout(300);
+    assert.equal(await sentW(B2),s0,'no command without a confirmed preview');
   });
   await test('sayfa hataları yok',async()=>{assert.deepEqual(errors,[]);});
 }catch(e){console.log('FATAL',e);results.push({name:'FATAL',status:'FAIL',error:String(e&&e.stack||e)});}

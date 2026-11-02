@@ -1117,6 +1117,13 @@ body.fauxFull canvas#map{width:100vw !important;height:100dvh !important}
 .nCard{min-height:44px}
 .warBrief{overflow-wrap:anywhere}
 /* END FAZ 94D.1 NOTICES */
+/* MP.7.4: swipeable notices and quick decisions */
+.nCard{touch-action:pan-y}
+.nQuick{display:flex;gap:4px;margin:-2px 0 2px;justify-content:flex-end}
+.nq{min-height:44px;min-width:64px;padding:0 10px;font:700 11px var(--mono);letter-spacing:.04em;background:rgba(14,21,36,.97);border:1px solid var(--phos);color:var(--phos)}
+.nq.ok{border-color:var(--ok,#46d68c);color:var(--ok,#46d68c)}.nq.no{border-color:var(--bad);color:var(--bad)}
+.nq:disabled{opacity:.45}.nqWait{font:10px var(--mono);color:var(--dim);padding:4px 2px}
+/* END MP.7.4 NOTICES */
 /* FAZ 95C.1 — bounded mobile controls */
 #topbar{overflow:hidden;touch-action:pan-x}
 #resourceStrip{display:flex;align-items:center;flex:1 1 auto;min-width:0;height:100%;overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;overscroll-behavior-x:contain;touch-action:pan-x;-webkit-overflow-scrolling:touch}
