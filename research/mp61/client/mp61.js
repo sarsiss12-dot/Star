@@ -54,8 +54,8 @@ function paint(){
   if(showNote){if(noteEl.textContent!==S.note)noteEl.textContent=S.note;place();}
   noteEl.classList.toggle('on',!!showNote);noteEl.classList.toggle('fade',!!showNote&&S.noteUntil-now<450);
   /* durum hapı (pencere açıkken): bağlantı + ortak hız; bildirim varsa onun metni */
-  /* MP.7.5: üstteki hap yalnız bildirim ya da bağlantı sorununda (kaynak çubuğunu kapatmasın) */
-  if(open&&S.status&&(noteOn||!S.good)){const h=(noteOn?'<b>'+esc(S.note)+'</b>':'<i class="'+(S.good?'ok':'bad')+'"></i>ÇOK OYUNCULU · '+esc(S.status)+(cur()!==null?' · '+esc(speedLabel(cur())):''));
+  /* MP.7.5: üstteki hap yalnız bildirim, bağlantı sorunu ya da duraklatılmış oyunda (normal oynanışta kaynak çubuğunu kapatmasın) */
+  if(open&&S.status&&(noteOn||!S.good||cur()===0)){const h=(noteOn?'<b>'+esc(S.note)+'</b>':'<i class="'+(S.good?'ok':'bad')+'"></i>ÇOK OYUNCULU · '+esc(S.status)+(cur()!==null?' · '+esc(speedLabel(cur())):''));
     if(pillEl.innerHTML!==h)pillEl.innerHTML=h;pillEl.classList.add('on');}
   else pillEl.classList.remove('on');
 }
