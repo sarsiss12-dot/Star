@@ -1996,7 +1996,7 @@ const UI = {
     const minimized=this.minimizedEvent(),keys=new Set();
     for(const n of G.inbox||[]){
       if(typeof DiplomaticInbox!=='undefined'&&DiplomaticInbox.supported(n.kind))continue;
-      if(!n.pause&&!['warstart','wardec','criswarn','crisis','facdem','faccoup','cncvote'].includes(n.kind)&&n.uid!==minimized?.uid)continue;
+      if(!n.pause&&!n.hidden&&!['warstart','wardec','criswarn','crisis','facdem','faccoup','cncvote'].includes(n.kind)&&n.uid!==minimized?.uid)continue;   // MP.7.5: gizlenen olay listede kalır
       const key=n.key||n.uid;if(keys.has(key))continue;keys.add(key);
       add('▣ '+n.title,n.uid===minimized?.uid?'restoreModal':'openNote',1,String(n.uid));
     }
@@ -7390,7 +7390,8 @@ const UI = {
     G.inbox.push(item);
     // kutu şişmesin: en eski duraklatmayan bildirimler düşer
     while (G.inbox.length > 6){
-      const i = G.inbox.findIndex(x => !x.pause&&x.uid!==G.minNote);
+      let i = G.inbox.findIndex(x => !x.pause&&!x.hidden&&x.uid!==G.minNote);   // MP.7.5: gizlenen karar olayı önce düşmez
+      if (i < 0) i = G.inbox.findIndex(x => !x.pause&&x.uid!==G.minNote);
       const fallback=G.inbox.findIndex(x=>x.uid!==G.minNote);
       G.inbox.splice(i >= 0 ? i : fallback, 1);
     }
@@ -7403,7 +7404,7 @@ const UI = {
   drawInbox(){
     const box = $('inbox');
     if (!box) return;
-    const list = G.inbox || [];
+    const list = (G.inbox || []).filter(n=>!n.hidden);   // MP.7.5: kaydırılarak gizlenen olay kartı çizilmez
     if (!list.length){ if(box.innerHTML)box.innerHTML='';box._inboxMarkup96d=null;box.classList.add('hidden');return; }
     box.classList.remove('hidden');
     const markup = list.map(it =>
@@ -7452,7 +7453,10 @@ const UI = {
     const list=G.inbox||[],i=list.findIndex(n=>n.uid===+uid);if(i<0)return false;
     const it=list[i],dip=typeof DiplomaticInbox!=='undefined'&&DiplomaticInbox.supported(it.kind);
     if(!dip&&!['wardec','warstart','crisend','cncnew'].includes(it.kind)){
-      say('Bu olay karar bekliyor — karta dokunup karar ver','war');this.drawInbox();return false;
+      /* MP.7.5: karar bekleyen olay silinmez — kart gizlenir, olay ☰ durum listesinde kalır ve oradan aynı karar penceresiyle açılır
+         (pencere kind + data'dan yeniden kurulur; geçici callback yok). Karar değişmez. */
+      it.hidden=true;if(G.minNote===it.uid){G.minNote=null;this.topbar();}
+      say('Olay gizlendi — karar bekliyor; üstteki ☰ listesinden aç','sci');this.noteResume();this.drawInbox();this.topbar();return true;
     }
     if(dip&&!DiplomaticInbox.capture(it)&&!this.noteRecord(it)){say('Gelen kutusu dolu; bildirim kaldırılmadı','war');this.drawInbox();return false;}
     list.splice(i,1);if(G.minNote===it.uid){G.minNote=null;this.topbar();}
@@ -7461,7 +7465,7 @@ const UI = {
   },
   noteResume(){
     // Kartın duraklattığı oyun, duraklatan başka kart ve açık pencere kalmayınca önceki hıza döner.
-    const m=$('modal');if(!this.prePause||G.speed>0||(G.inbox||[]).some(n=>n.pause)||m&&m.innerHTML&&!m.classList.contains('hidden'))return;
+    const m=$('modal');if(!this.prePause||G.speed>0||(G.inbox||[]).some(n=>n.pause&&!n.hidden)||m&&m.innerHTML&&!m.classList.contains('hidden'))return;
     const back=this.prePause;this.prePause=0;this.setSpeed(back);
   },
   noteSwipeBind(box){
@@ -7515,6 +7519,28 @@ const UI = {
     this._hook('activeWarDiplo',x=>{const id=+x;this.closeModal();if(typeof closeAllGroups==='function')closeAllGroups();this.openDiplo();this.selectDiplo(id,'relation');});
   },
   /* END MP.7.5 WARS */
+  /* MP.7.5: DOKUNMATİK MİKTAR DÜĞMELERİ — pencere içindeki her sayı alanının altına (klavye açmadan) artır / azalt / sıfırla / MAKS.
+     Yalnız alanın değerini değiştirir ve alanın kendi input/change olaylarını tetikler: onay yine gerçek STARS düğmesiyle. Sınırlar
+     alanın min / max özniteliğidir (motorun üst sınırı). Filo bileşimi ±10/±50, diğer miktarlar ±10/±100. */
+  stepperize(root){
+    if(!root||!root.querySelectorAll)return;
+    for(const inp of root.querySelectorAll('input[type="number"]')){
+      if(inp.dataset.stepped)continue;inp.dataset.stepped='1';
+      const fleet=/^fc-/.test(inp.id||''),pct=/^vs/.test(inp.id||''),steps=fleet?[-50,-10,10,50]:pct?[-5,-1,1,5]:[-100,-10,10,100];
+      const wrap=document.createElement('div');wrap.className='qtySteps';wrap.setAttribute('role','group');wrap.setAttribute('aria-label','Miktar');
+      const mk=(t,fn,label)=>{const b=document.createElement('button');b.type='button';b.className='qtyStep';b.textContent=t;b.setAttribute('aria-label',label||t);
+        b.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();fn();},true);b.addEventListener('mousedown',e=>e.preventDefault());wrap.appendChild(b);};
+      const lim=k=>{const v=parseFloat(inp.getAttribute(k));return Number.isFinite(v)?v:null;};
+      const set=v=>{const lo=lim('min'),hi=lim('max');let n=Math.round(v);if(lo!==null)n=Math.max(lo,n);else n=Math.max(0,n);if(hi!==null)n=Math.min(hi,n);
+        if(String(n)===inp.value)return;inp.value=String(n);inp.dispatchEvent(new Event('input',{bubbles:true}));inp.dispatchEvent(new Event('change',{bubbles:true}));};
+      const cur=()=>{const v=parseFloat(inp.value);return Number.isFinite(v)?v:0;};
+      mk('SIFIR',()=>set(lim('min')??0),'Sıfırla');
+      for(const d of steps)mk((d>0?'+':'−')+Math.abs(d),()=>set(cur()+d));
+      if(lim('max')!==null)mk('MAKS',()=>set(lim('max')),'En yüksek');
+      (inp.closest('label')||inp).insertAdjacentElement('afterend',wrap);
+    }
+  },
+  /* END MP.7.5 QTY */
   openNote(uid){
     const list = G.inbox || [];
     const i = list.findIndex(x => x.uid === +uid);
@@ -7717,6 +7743,7 @@ const UI = {
     const sanat = (art && typeof ART !== 'undefined' && ART.PIXEL_ART && ART.PIXEL_ART[art])
       ? `<div class="evArt"><canvas id="eventCanvas" width="128" height="128"></canvas></div>` : '';
     $('modal').innerHTML = `<div class="mbox ${cls||''}">${extra}${sanat}${html}</div>`;
+    this.stepperize($('modal'));   // MP.7.5: dokunmatik miktar düğmeleri
     if (sanat){
       const cv = $('eventCanvas');
       if (cv){

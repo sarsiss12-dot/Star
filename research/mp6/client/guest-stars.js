@@ -550,7 +550,7 @@ function chip(text,good){
   /* MP.7.4: kapalıyken küçük düğme (👥 odadaki bağlı insan sayısı + bağlantı noktası); dokununca aynı satır + tanı açılır.
      Host bağlantısı yoksa (kritik) kendiliğinden açık. */
   const open=!!S.diag||!S.chipGood,L=S.J&&S.J.lobby,n0=L&&L.players?L.players.filter(p=>p.online!==false).length:0;
-  chipEl.classList.toggle('mp74-compact',!open);
+  chipEl.classList.toggle('mp74-compact',!open);if(V.dock&&S.started)V.dock(chipEl,!open);   // MP.7.5
   if(S.chipText!==undefined){const n=dipCount();const h='<div class="mp3-minirow">'+(open?'<span class="mp1-mini-h mp6-conn '+(S.chipGood?'ok':'bad')+'" id="mp6Conn" role="button" aria-expanded="true"><b>ÇOK OYUNCULU</b> · '+esc(S.chipText)+'</span>':
       '<span class="mp1-mini-h mp6-conn mp74-pill" id="mp6Conn" role="button" aria-expanded="false" aria-label="Çok oyunculu — '+esc(S.chipText)+'"><i class="mp74-dot"></i>👥 '+(n0||'')+'</span>')+
       (window.MP3Dip&&window.MP7Legacy?'<button class="mp1-btn mp3-hostbtn" data-g6="dip" id="mp6DipBtn">DİPLOMASİ'+(n?' <i class="mp3-badge">'+n+'</i>':'')+'</button>':'')+'</div>'+
