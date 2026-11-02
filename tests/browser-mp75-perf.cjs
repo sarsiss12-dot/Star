@@ -104,7 +104,19 @@ let relay,px,base,tls,bH,bB;
     await room(H,2,[[Bp,'Bora',{name:'Saf Akıl Ağı',mizac:'teknokrasi',origin:'standart',ethics:['mat:2','mil:-1'],civics:['sinyal_avci']},1]]);
     await instrument(H,true);await instrument(Bp,false);
     await Bp.evaluate(()=>{UI.openDiplo();});await H.evaluate(()=>MP1Host.host.local({kind:'speed',value:4}));
-    const t0=Date.now();for(const m of CHECK){await H.waitForFunction(m=>G.day>=m*30||G.over,m,{timeout:3600000,polling:1000});
+    /* oyun olayları pencere açıp oyunu duraklatabilir (tek oyunculu davranış): ölçüm penceresinde pencereler kapatılır, hız yeniden istenir */
+    const drive=async m=>{for(;;){const st=await H.evaluate(m=>{const md=document.getElementById('modal');if(md&&!md.classList.contains('hidden'))UI.closeModal();
+        if(G.speed<4)MP1Host.host.local({kind:'speed',value:4});return {done:G.day>=m*30||!!G.over};},m);
+      await Bp.evaluate(()=>{const md=document.getElementById('modal');if(md&&!md.classList.contains('hidden'))UI.closeModal();if(!document.getElementById('diploPane').classList.contains('show'))UI.openDiplo();});
+      if(st.done)return;await H.waitForTimeout(3000);}};
+    /* hızlı ilerletme: host simülasyonu sayfa içinde ölçüm noktasının 2 ay öncesine kadar (PERF.1 mp-host adımları + her gün yayın;
+       monthTick host sarmalayıcısıyla observeHumans çağırır; misafir aynaları alır). Sonra 2 oyun ayı gerçek döngü en yüksek hızda ölçülür. */
+    const ff=async m=>{for(;;){const d=await H.evaluate(m=>{MP1Host.host.local({kind:'speed',value:0});const md=document.getElementById('modal');if(md&&!md.classList.contains('hidden'))UI.closeModal();
+        for(let i=0;i<60&&G.day<m*30-90;i++){const b=Math.floor(G.day/30),d0=Math.floor(G.day);G.day+=.5;dailyTick(.5);structTick(.5);colonyBuildTick(.5);autoExploreTick();
+          if(Math.floor(G.day/30)>b)monthTick();if(Math.floor(G.day)!==d0)MP1Host.host.publish();}return G.day;},m);
+      await H.waitForTimeout(30);if(d>=m*30-90)return;}};
+    const reset=async()=>{for(const p of [H,Bp])await p.evaluate(()=>{const T=window.__perf;for(const k of ['month','publish','build','refresh','long'])T[k]=[];T.paneRewrites=0;T.mut=0;if(window.MP6Stars)MP6Stars.S.stats.buildMs=[];});};
+    const t0=Date.now();for(const m of CHECK){const f0=Date.now();await ff(m);metrics['ffS_m'+m]=Math.round((Date.now()-f0)/1000);await H.waitForTimeout(2500);await reset();await drive(m);
       await H.evaluate(()=>MP1Host.host.local({kind:'speed',value:0}));await H.waitForTimeout(1500);const r=await snap(H,Bp,'m'+m);r.wallS=Math.round((Date.now()-t0)/1000);
       await Bp.evaluate(()=>{if(!document.getElementById('diploPane').classList.contains('show'))UI.openDiplo();});await H.evaluate(()=>MP1Host.host.local({kind:'speed',value:4}));}
   });
