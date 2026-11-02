@@ -40,7 +40,7 @@ async function layout(p){return p.evaluate(()=>{
 function assertLayout(l,where){assert(!l.overflow,where+' horizontal overflow '+l.scrollW+'>'+l.vw);assert.deepEqual(l.wide,[],where+' element wider than screen');
   assert.deepEqual(l.small,[],where+' touch target < 44 px');assert(l.minFont>=11,where+' font '+l.minFont+' '+l.minAt);}
 async function joinByLink(p,name){await p.goto(base+'/mp/join?code='+code);await wait(p,()=>window.MP1Join&&document.getElementById('jCode'));
-  assert.equal(await p.inputValue('#jCode'),code);   // MP.7.4: 5 karakter, tiresizawait p.fill('#jName',name);
+  assert.equal(await p.inputValue('#jCode'),code);await p.fill('#jName',name);   // MP.7.4: 5 karakter, tiresiz
   await p.locator('[data-j="go"]').tap();await wait(p,()=>MP1Join.screen==='lobby'&&MP1Join.lobby&&MP1Join.playerId);}
 function childRelay(delay){return new Promise((res,rej)=>{const c=spawn(process.execPath,[path.join(root,'research/mp1/server/relay.js')],{env:{...process.env,MP1_PORT:'0',MP_DELAY_MS:String(delay)},stdio:['ignore','pipe','pipe']});
   let buf='';c.stdout.on('data',d=>{buf+=d;const m=buf.match(/http:\/\/127\.0\.0\.1:(\d+)/);if(m)res({proc:c,base:'http://127.0.0.1:'+m[1],stdout:()=>buf});});c.on('error',rej);setTimeout(()=>rej(Error('relay start')),10000);});}
