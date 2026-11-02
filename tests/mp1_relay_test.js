@@ -76,7 +76,7 @@ test('static: injected game page, exact runtime bytes, join page CSP, allowlist 
 });
 test('room codes: 8 symbols from the 31-letter unambiguous alphabet, unique; host key is 192-bit base64url and never sent to guests',async()=>{
   const r=await relay();try{
-    const codes=new Set();for(let i=0;i<40;i++){const h=await host(r);assert.match(h.code,/^[ABCDEFGHJKMNPQRSTUVWXYZ23456789]{8}$/);assert.match(h.key,/^[A-Za-z0-9_-]{32}$/);
+    const codes=new Set();for(let i=0;i<40;i++){const h=await host(r);assert.match(h.code,/^[ABCDEFGHJKMNPQRSTUVWXYZ23456789]{5}$/);assert.match(h.key,/^[A-Za-z0-9_-]{32}$/);
       assert.equal(Buffer.from(h.key,'base64url').length,24);codes.add(h.code);h.send('X');await h.waitClose();}
     assert.equal(codes.size,40);assert.equal(relayMod.ALPHABET.length,31);assert.ok(Math.log2(31**8)>39);
     const h=await host(r);await setCap(r,h,3);const c=await client(r,h.code);const w=await c.ctl('welcome');
@@ -179,12 +179,14 @@ test('origin and request checks: foreign Origin 403, same-host Origin ok, MP1_OR
   }finally{await stop(a);}
 });
 test('abuse: join guessing rate-limited per IP (30/min), room cap → server-full',async()=>{
-  const r=await relay({MP1_MAX_ROOMS:'2'});try{
+  const r=await relay({MP1_MAX_ROOMS:'2'}),bp=relayMod.LIMITS.badPer10Min,gp=relayMod.LIMITS.globalBadPer10Min;
+  relayMod.LIMITS.badPer10Min=relayMod.LIMITS.globalBadPer10Min=1000;   // MP.7.4: yanlış kod sınırı (20) dakikalık katılım sınırından önce devreye girer; burada katılım sınırı sınanır
+  try{
     for(let i=0;i<relayMod.LIMITS.joinPerMin;i++){const c=await client(r,'GUESS'+i);assert.equal((await c.ctl('error')).code,'invalid-code');await c.waitClose();}
     const c=await client(r,'GUESSXX');assert.equal((await c.ctl('error')).code,'rate-limited');
     assert.equal(r.stats.denied['join-rate'],1);
     await host(r);await host(r);const x=await ws(r.port,'role=host');assert.equal((await x.ctl('error')).code,'server-full');
-  }finally{await stop(r);}
+  }finally{relayMod.LIMITS.badPer10Min=bp;relayMod.LIMITS.globalBadPer10Min=gp;await stop(r);}
 });
 test('behind a trusted proxy (MP1_TRUST_PROXY=1) per-IP limits use the last X-Forwarded-For hop; without it the header is ignored',async()=>{
   const p=await relay({MP1_TRUST_PROXY:'1'});try{
@@ -202,7 +204,7 @@ test('TLS mode: HTTPS page and WSS room with a certificate (self-signed, test-on
   const ca=fs.readFileSync(cert);const r=await relay({MP1_TLS_CERT:cert,MP1_TLS_KEY:key});try{
     assert.ok(r.server instanceof https.Server);
     const p=await get(r.port,'/',{secure:true,ca});assert.equal(p.status,200);assert.match(p.body.toString(),/mp1-host\.js/);
-    const h=await ws(r.port,'role=host',{secure:true,ca});const m=await h.ctl('room');assert.match(m.code,/^[A-Z2-9]{8}$/);
+    const h=await ws(r.port,'role=host',{secure:true,ca});const m=await h.ctl('room');assert.match(m.code,/^[A-Z2-9]{5}$/);
     const c=await ws(r.port,'role=client&code='+m.code,{secure:true,ca});await c.ctl('welcome');
     c.send('{"v":1}');assert.match(await h.wait(x=>x[0]==='F'),/\{"v":1\}$/);
     await assert.rejects(get(r.port,'/'));

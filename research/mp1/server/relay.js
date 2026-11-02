@@ -34,10 +34,10 @@ const http=require('http'),https=require('https'),fs=require('fs'),path=require(
 const {attach,encode}=require('../../mp0/server/dev-relay.js');
 const ROOT=path.resolve(process.env.STARS_GAME_ROOT||path.join(__dirname,'../../..'));
 const ALPHABET='ABCDEFGHJKMNPQRSTUVWXYZ23456789';               // 31 sembol, karışan 0/O/1/I/L yok
-const CODE_LEN=8;                                               // 31^8 ≈ 8,5·10^11 (≈39,6 bit)
+const CODE_LEN=5;                                               // MP.7.4: 31^5 ≈ 2,86·10^7 (≈24,8 bit; telefonda yazılabilir). Daha küçük uzay → IP başı ve relay geneli yanlış kod sınırı (aşağıda)
 const LIMITS={clientMsg:8192,hostMsg:262144,clientRate:20,clientBurst:40,hostRate:200,hostBurst:400,maxDrops:100,
   perIpConns:16,joinPerMin:30,createPerMin:10,maxGuests:7,
-  badPer10Min:60,maxConns:2000,maxTomb:50000};   // MP.5: IP başı yanlış kod/anahtar denemesi (10 dk), toplam bağlantı, kapanmış kod belleği
+  badPer10Min:20,globalBadPer10Min:120,maxConns:2000,maxTomb:50000};   // MP.5: IP başı yanlış kod/anahtar denemesi (10 dk), toplam bağlantı, kapanmış kod belleği
 const TYPES={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.json':'application/json','.css':'text/css; charset=utf-8'};
 const SEC={'X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer','X-Frame-Options':'DENY','Cache-Control':'no-store'};
 
@@ -48,7 +48,7 @@ function create(env=process.env){
     maxConns:+(env.MP1_MAX_CONNS||LIMITS.maxConns),ipHeader:/^[a-z0-9-]{1,40}$/i.test(env.MP1_IP_HEADER||'')?env.MP1_IP_HEADER.toLowerCase():null};
   cfg.public=!['127.0.0.1','::1','localhost'].includes(cfg.bind);
   cfg.tls=!!(cfg.cert&&cfg.key);
-  const rooms=new Map(),tomb=new Map(),ips=new Map();
+  const rooms=new Map(),tomb=new Map(),ips=new Map();let gbad=[];   // MP.7.4: relay geneli yanlış kod / anahtar zamanları (10 dk)
   const stats={rooms:0,joins:0,denied:{},dropped:0,closedByLimit:0,msgs:0,bytes:0,errors:0,conns:0};
   /* MP.5: tek bir isteğin/iletinin beklenmeyen hatası süreci (ve bütün odaları) düşürmez; sayılır, ayrıntısı günlüğe girmez (jeton/kod sızmasın). */
   const oops=()=>{stats.errors++;};
@@ -56,7 +56,7 @@ function create(env=process.env){
   const manifest=JSON.parse(fs.readFileSync(path.join(ROOT,'RELEASE-MANIFEST.json'),'utf8'));
   /* MP.7.3: dağıtım doğrulaması — çok oyunculu sürüm, oyun build'i ve sunulan MP dosyalarının kısa SHA-256 özetleri (gizli bilgi yok) */
   const sha12=f=>{try{return crypto.createHash('sha256').update(fs.readFileSync(path.join(ROOT,f))).digest('hex').slice(0,12);}catch{return null;}};
-  const MP_VERSION_JSON=JSON.stringify({mp:'MP.7.3',build:manifest.build,files:Object.fromEntries(['research/mp0/mp-core.js','research/mp1/server/relay.js','research/mp1/client/mp1-host.js','research/mp1/client/join.js',
+  const MP_VERSION_JSON=JSON.stringify({mp:'MP.7.4',build:manifest.build,files:Object.fromEntries(['research/mp0/mp-core.js','research/mp1/server/relay.js','research/mp1/client/mp1-host.js','research/mp1/client/join.js',
     'research/mp6/mirror.js','research/mp6/client/guest-stars.js','research/mp71/client/mp71-dip.js','research/mp7/client/mp7-setup.js'].map(f=>[f.split('/').pop(),sha12(f)]))});
   const ALLOW=new Set([...Object.keys(manifest.files),'research/mp0/mp-core.js',
     'research/mp1/client/mp1.css','research/mp1/client/mp1-host.js','research/mp1/client/join.js','research/mp1/client/view.js',
@@ -151,7 +151,10 @@ function create(env=process.env){
     if(I.conns>=LIMITS.perIpConns){deny('ip-conns');return reject(socket,'429 Too Many Requests');}
     /* MP.5: oda kodu / host anahtarı tahmini — IP başı 10 dakikada en çok badPer10Min yanlış deneme; sonra bağlantı açılmaz */
     const tn=Date.now();I.bad=I.bad.filter(x=>tn-x<600e3);if(I.bad.length>=LIMITS.badPer10Min){deny('guess-limit');return reject(socket,'429 Too Many Requests');}
-    const bad=()=>I.bad.push(Date.now());
+    /* MP.7.4: 5 karakterli kodda dağıtık tahmine karşı relay geneli sınır — aşılınca 10 dk içinde yanlış denemesi olan her IP bekletilir
+       (yanlış denemesi olmayan oyuncular ve doğru kodla bağlanan host / misafir etkilenmez) */
+    gbad=gbad.filter(x=>tn-x<600e3);if(gbad.length>=LIMITS.globalBadPer10Min&&I.bad.length){deny('guess-limit-global');return reject(socket,'429 Too Many Requests');}
+    const bad=()=>{const t=Date.now();I.bad.push(t);gbad.push(t);};
     socket.write('HTTP/1.1 101 Switching Protocols\r\nUpgrade: websocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: '+
       crypto.createHash('sha1').update(key+'258EAFA5-E914-47DA-95CA-C5AB0DC85B11').digest('base64')+'\r\n\r\n');
     I.conns++;I.at=Date.now();stats.conns++;
@@ -221,6 +224,10 @@ function create(env=process.env){
       I.joins.push(t);
       const code=norm(url.searchParams.get('code')),r=rooms.get(code);
       if(!r||r.closed){deny('invalid-code');if(!tomb.has(code))bad();return end(4004,tomb.has(code)?'room-closed':'invalid-code');}   // kapanmış gerçek oda kodu tahmin sayılmaz
+      /* MP.7.4: aynı sekmenin (cihaz anahtarı dev: tarayıcı sekmesinde rastgele 128 bit, yalnız relay'e gider) önceki soketi yeni bağlantıyla
+         DEĞİŞTİRİLİR — çift KATIL dokunuşu ya da ağ değişimi ikinci koltuk tutmaz. Başka cihazın soketine dokunulmaz; kimlik doğrulaması host'ta (jeton). */
+      const dev=/^[A-Za-z0-9_-]{22,64}$/.test(url.searchParams.get('dev')||'')?url.searchParams.get('dev'):null;
+      if(dev){for(const [cid,c] of r.clients)if(c.dev===dev){deny('client-replaced');r.clients.delete(cid);if(r.host)r.host.send('L'+cid);try{c.close(4009,'replaced');}catch{}}}
       if(r.clients.size>=r.cap){
         /* MP.5: ağ değiştiren telefonun eski soketi ölü kalır (FIN yok) ve yerini tutar; yeniden bağlanan oyuncu "oda dolu" alırdı.
            Bir yoklama aralığından uzun süredir hiç veri gelmeyen (canlı tarayıcı yoklamaya hemen yanıt verir) bağlantı çıkarılır. */
@@ -228,7 +235,7 @@ function create(env=process.env){
         const now=Date.now(),lim=r.host?Math.min(12000,cfg.ping+5000):cfg.ping+5000,stale=[...r.clients.values()].find(c=>now-(c.lastIn||0)>lim);
         if(stale){deny('client-stale');try{stale.close(4009,'stale');}catch{}}
         if(r.clients.size>=r.cap){deny('room-full');return end(4005,'room-full');}}
-      room=r;r.clients.set(id,conn);stats.joins++;
+      room=r;conn.dev=dev;r.clients.set(id,conn);stats.joins++;
       ctl({t:'welcome',conn:id,host:!!r.host});
       if(r.host)r.host.send('J'+id);
     }

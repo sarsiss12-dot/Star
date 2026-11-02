@@ -32,7 +32,7 @@ async function main(argv){
     must([301,308].includes(r.status)&&String(r.h.location).startsWith('https://'),'durum '+r.status+' '+r.h.location);});
   let host,key,code;
   await check((secure?'WSS':'WS')+' oda kurma (host)',async()=>{const t0=Date.now();host=await connect(wsBase+'role=host',{origin,ca});must(host.status===101,'el sıkışma '+host.status);
-    const m=await host.ctl('room');code=m.code;key=m.key;must(/^[A-Z2-9]{8}$/.test(code)&&key&&key.length>=32,'oda');return (Date.now()-t0)+' ms';});
+    const m=await host.ctl('room');code=m.code;key=m.key;must(/^[A-Z2-9]{5}$/.test(code)&&key&&key.length>=32,'oda');return (Date.now()-t0)+' ms';});
   let guest,conn;
   await check('misafir koda katılır, mesajlar iki yönde iletilir',async()=>{host.send('C{"cap":1}');const t0=Date.now();guest=await connect(wsBase+'role=client&code='+code.slice(0,4)+'-'+code.slice(4),{origin,ca});
     const w=await guest.ctl('welcome');conn=w.conn;await host.wait(x=>x==='J'+conn);guest.send('{"v":1,"type":"ping","t":1}');await host.wait(x=>x==='F'+conn+'\n{"v":1,"type":"ping","t":1}');

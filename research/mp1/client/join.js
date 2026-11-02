@@ -5,7 +5,7 @@
 (function(){
 const V=MP1View,esc=V.esc,doc=document,$=id=>doc.getElementById(id);
 const q=new URLSearchParams(location.search);
-const J={ws:null,code:V.fmtCode((q.get('code')||'').toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,8)),name:'',screen:'join',lobby:null,game:{view:null,rev:-1,clock:null},
+const J={ws:null,code:V.fmtCode((q.get('code')||'').toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,V.CODE_LEN)),name:'',screen:'join',lobby:null,game:{view:null,rev:-1,clock:null},
   playerId:null,empireId:null,hostOnline:false,err:'',tab:'lobi',results:[],packets:[],lresults:[],errors:[],seq:0,retry:0,leaving:false,closed:false,
   stats:{msgs:0,bytes:0,rtt:[],connectMs:null}};
 const keyOf=c=>'mp1:'+c.replace(/-/g,'');
@@ -26,16 +26,25 @@ J.claim=id=>raw({v:1,type:'claim',empire:id});
 J.presence=t=>{J.tab=t;raw({v:1,type:'presence',tab:t});render();};
 J.leave=()=>{J.leaving=true;raw({v:1,type:'leave'});setTimeout(()=>{try{J.ws&&J.ws.close();}catch{}J.ws=null;J.screen='join';J.lobby=null;render();},200);};
 
+/* MP.7.4: sekme başına cihaz anahtarı (rastgele 128 bit, sessionStorage). Yalnız relay'e gider: aynı sekmenin önceki soketi yeni
+   bağlantıyla değiştirilir (çift KATIL / ağ değişimi ikinci koltuk tutmaz). Kimlik değildir; oyuncu kimliği host'taki jetondur. */
+function tabTag(){let d=null;try{d=sessionStorage.getItem('mp1:dev');}catch{}
+  if(!/^[A-Za-z0-9_-]{22,64}$/.test(d||'')){const b=new Uint8Array(16);crypto.getRandomValues(b);d=btoa(String.fromCharCode(...b)).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+    try{sessionStorage.setItem('mp1:dev',d);}catch{}}return d;}
 function connect(){
+  /* MP.7.4 kök neden düzeltmesi: bağlantı sürerken ikinci KATIL dokunuşu ikinci soket açıyordu; ilk soket kapatılmadan koltuğu tuttuğu için
+     ikincisi "oda dolu" alıyordu. Kurulmakta / açık olan soket varken yeni bağlantı açılmaz; eskisi varsa önce kapatılır. */
+  if(J.ws&&J.ws.readyState<=1&&!J.closed)return;
+  if(J.ws){const old=J.ws;J.ws=null;old.onclose=null;old.onmessage=null;try{old.close();}catch{}}
   J.err='';J.closed=false;const code=J.code.replace(/-/g,'');
-  if(!/^[A-Z0-9]{8}$/.test(code)){J.err='Oda kodu 8 karakter olmalı (örn. ABCD-EFGH).';return render();}
+  if(!new RegExp('^[A-Z0-9]{'+V.CODE_LEN+'}$').test(code)){J.err='Oda kodu '+V.CODE_LEN+' karakter olmalı (örn. K7M2P).';return render();}
   const name=($('jName')&&$('jName').value||J.name).replace(/[\u0000-\u001f<>]/g,'').trim().slice(0,24);
   if(!name){J.err='Bir oyuncu adı yaz.';return render();}
   J.name=name;try{localStorage.setItem('mp1:name',name);}catch{}
   /* MP.5: lobide/oyundayken kopan bağlantı yeniden kurulurken ekran korunur; başarısız deneme yeniden denemeyi bitirmez (eskiden ilk başarısız
      denemede giriş ekranına düşüp ağ dönünce de bağlanmıyordu). Yalnız ilk katılım "Bağlanıyor…" ekranını gösterir. */
   J.seq=load().seq||0;J.assigned=false;if(['lobby','game'].includes(J.screen))J.reconnecting=true;else J.screen='connecting';render();const t0=performance.now();
-  const ws=new WebSocket((location.protocol==='https:'?'wss://':'ws://')+location.host+'/mp1/ws?role=client&code='+code);J.ws=ws;
+  const ws=new WebSocket((location.protocol==='https:'?'wss://':'ws://')+location.host+'/mp1/ws?role=client&code='+code+'&dev='+encodeURIComponent(tabTag()));J.ws=ws;
   ws.onmessage=ev=>receive(String(ev.data),t0);
   ws.onclose=ev=>{ev=ev||{};if(J.ws!==ws)return;J.ws=null;J.hostOnline=false;
     /* Kapanış kodu son sözdür: neden çerçevesi yolda kaybolsa bile oda kapandı/atıldın/dolu döngüye girmez. */
@@ -101,12 +110,12 @@ function render(){
   if(J.screen==='join'||J.screen==='connecting'){
     const fresh=!$('jCode');
     if(fresh)app.innerHTML='<div class="mp1-h">ODAYA KATIL</div><p class="mp1-sub">Host oyuncunun telefonunda görünen oda kodunu gir. Simülasyon host telefonda çalışır; bu sayfa yalnız senin devletini gösterir.</p>'+
-      '<label class="mp1-l" for="jCode">Oda kodu</label><input class="mp1-in" id="jCode" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="9" enterkeyhint="go" placeholder="ABCD-EFGH">'+
+      '<label class="mp1-l" for="jCode">Oda kodu</label><input class="mp1-in" id="jCode" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="'+V.CODE_LEN+'" enterkeyhint="go" placeholder="K7M2P">'+
       '<label class="mp1-l" for="jName">Oyuncu adı</label><input class="mp1-in name" id="jName" autocomplete="nickname" maxlength="24" enterkeyhint="go" placeholder="Adın">'+
       '<button class="mp1-btn pri" data-j="go">KATIL</button><a class="mp1-btn" href="/" data-j="home">GERİ</a><div class="mp1-status" id="jStatus"></div>';
     if(fresh){$('jCode').value=J.code;$('jName').value=J.name;}
     const s=$('jStatus');s.className='mp1-status'+(J.err?' bad':'');s.textContent=J.screen==='connecting'?'Bağlanıyor…':(J.err||'Kodu girip KATIL\'a dokun.');
-    $('jCode').disabled=$('jName').disabled=J.screen==='connecting';return;
+    $('jCode').disabled=$('jName').disabled=J.screen==='connecting';const go=doc.querySelector('[data-j="go"]');if(go){go.disabled=J.screen==='connecting';go.textContent=J.screen==='connecting'?'BAĞLANIYOR…':'KATIL';}return;
   }
   if(J.screen==='lobby')return J.lobby&&J.lobby.phase==='resume'?resumeLobby(app):lobby(app);
   if(J.screen==='game')return game(app);
@@ -188,7 +197,7 @@ function game(app){
 }
 doc.addEventListener('click',e=>{
   const el=e.target.closest('[data-j]');if(!el)return;const a=el.dataset.j;
-  if(a==='go'){J.code=V.fmtCode(($('jCode').value||'').toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,8));connect();}
+  if(a==='go'){J.code=V.fmtCode(($('jCode').value||'').toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,V.CODE_LEN));connect();}
   else if(a==='tab')J.presence(el.dataset.tab);
   else if(a==='claim')J.claim(+el.dataset.e);
   else if(a==='unclaim')J.claim(null);
@@ -199,10 +208,10 @@ doc.addEventListener('click',e=>{
   else if(a==='build'){const [s,p]=el.dataset.col.split(':').map(Number),sel=doc.querySelector('select[data-col="'+el.dataset.col+'"]');J.cmd({kind:'build',sys:s,planet:p,key:sel.value});}
 });
 doc.addEventListener('keydown',e=>{if(e.key==='Enter'&&(e.target.id==='jCode'||e.target.id==='jName')){e.preventDefault();doc.querySelector('[data-j="go"]').click();}});
-doc.addEventListener('input',e=>{if(e.target.id==='jCode'){const v=e.target.value.toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,8);e.target.value=V.fmtCode(v);}});
+doc.addEventListener('input',e=>{if(e.target.id==='jCode'){const v=e.target.value.toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,V.CODE_LEN);e.target.value=V.fmtCode(v);}});
 doc.addEventListener('focusin',e=>{if(e.target.matches&&e.target.matches('input'))setTimeout(()=>e.target.scrollIntoView({block:'center'}),250);});
 if(window.visualViewport)visualViewport.addEventListener('resize',()=>{const a=doc.activeElement;if(a&&a.matches&&a.matches('input'))a.scrollIntoView({block:'center'});});
 window.MP1Join=J;render();
 /* Android arka plandaki sekmeyi yeniden yükleyebilir: bu oda için koltuk jetonu varsa kendiliğinden geri bağlan. */
-if(J.code.length===9&&J.name&&load().token){J.auto=true;connect();}
+if(J.code.length===V.CODE_LEN&&J.name&&load().token){J.auto=true;connect();}
 })();
