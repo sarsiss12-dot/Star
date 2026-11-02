@@ -1989,7 +1989,8 @@ const UI = {
     const e=G.p,items=[],battles=battleCount(),wars=G.emps.filter(o=>!o.dead&&o.id!==e.id&&e.war[o.id]).length;
     const add=(label,action,count=1,x)=>items.push({label,action,count,x});
     if(battles)add('⚔ '+battles+' çatışma','gobattle');
-    if(wars)add('⚔ '+wars+' savaş · Aktif savaşlar','activeWars');   // MP.7.5: sayaçla aynı kanonik listeye götürür
+    if(wars)add('⚔ '+wars+' savaş · Diplomasi','diploPane');
+    if(wars)add('⚔ Aktif savaşlar listesi · '+wars+' düşman','activeWars',0);   // MP.7.5: sayaçla aynı kanonik liste (temas yoksa "Bilinmeyen düşman")
     const pending=typeof DiplomaticInbox!=='undefined'?DiplomaticInbox.pending():0;
     if(pending)add('✉ '+pending+' bekleyen diplomatik teklif','diplomaticInbox',pending);
     if(typeof ArchiveUI!=='undefined'&&ArchiveUI.returnRecord?.world===G.emps)add('✉ İncelenen teklife geri dön','inboxReturn',0);
