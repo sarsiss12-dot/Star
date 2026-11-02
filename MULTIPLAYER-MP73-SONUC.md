@@ -160,7 +160,7 @@ Ayrıntı: `research/mp73/evidence/REGRESYON.md`.
   - onaysız yutma çağrısı komut göndermez.
 
 **Regresyon (son aday):**
-- Node tam koşu 167 paket, 6330 / 4. Bunların 3'ü bilinen `faz95d_identity`; 1'i, `mp73_council_test`'in 180 sn sınırı, paket bölünerek giderildi.
+- Node tam koşu 167 paket, 6330 / 4. Bunların 3'ü bilinen `faz95d_identity`; 1'i, `mp73_council_test`'in 180 sn sınırı, paket bölünerek giderildi; ayrılmış testlerle MP alt kümesi 37 paket 708 / 0.
 - Chromium: MP.0–MP.7.3, tek oyunculu 96H.10 ve Docker (mp5_docker 6/0, browser-mp5 10/0) hepsi PASS.
 - Docker imajında 9 MP dosyası çalışma ağacıyla aynı.
 

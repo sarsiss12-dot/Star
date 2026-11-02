@@ -21,7 +21,7 @@ Koşulmayanlar (**NOT RUN**): fiziksel Android, gerçek internet, LAN ve canlı 
 | `mp73_council_test` (ayrıldıktan sonra) | **10 / 0**, 12 sn |
 | `mp73_council_equiv_test` (4200 gün: kuruluş + AI katılımı + 4 kampanya) | **1 / 0**, 51 sn |
 | `MP73_EQUIV_DAYS=9000` (25 yıl) | **1 / 0**. Kollar 198 / 133 sn; konsey 5 üye; Save8 + RNG birebir. |
-| MP alt kümesi (`STARS_TEST_FILTER=mp`, 4 işçi; ayrılmış testlerle) | §Ek |
+| MP alt kümesi (`STARS_TEST_FILTER=mp`, 4 işçi; ayrılmış testlerle) | **37 paket, 708 / 0** (`mp73_council_test` 10/0, `mp73_council_equiv_test` 1/0 sınır içinde) |
 
 Tam koşudan sonra üretim kodu değişmedi. Değişenler yalnız testler (paket bölme, tarayıcı testi beklemeleri) ve belgeler.
 
@@ -97,6 +97,3 @@ Tam koşunun yeniden yazdığı dosyalar geri alındı:
 | B4 | Fısıltı ağı gerçek pencereden (B'nin günlüğü +1, host'unki aynı); onaysız `devourConfirm` komut göndermez |
 | — | Sayfa hatası yok |
 
-## Ek: MP Node alt kümesi (ayrılmış testlerle)
-
-Sonuç bu bölümde, koşu bitince yazılır.
