@@ -58,7 +58,12 @@ const VIEW=new Set(['tab','full','cameraReset','cameraFocus','home','fit','topSt
   /* MP.7.1 — Ekonomi Merkezi görünüm eylemleri (runtime economy-ui.js UI.act sarmalayıcısında; kaynak seçimi, süzgeç, kendi sistemine / filosuna git) */
   'ecoPick','ecoFilter','ecoSystem','ecoFleet',
   /* MP.7.1 — salt gezinme: karşı teklif kartında "Düzenlemeye dön", eski diplomasi bağlantıları (ilişki / istihbarat sayfası) */
-  'ctrBack','dTab']);
+  'ctrBack','dTab',
+  /* MP.7.2 — görünüm / pencere (yerel): elçi penceresi, filo bileşimi penceresi, ortak destek hazırlığı ve haritadan hedef seçimi,
+     tekil gemi nişangâhı, eski toplanma düğmesi (yalnız bilgi), savaş bildirimi duraklatma tercihi, savaş raporunu gizleme */
+  'envoy','compositionEdit','jointPrepare','jointChooseTarget','aimSet','aimCancel','rallySet','warPauseToggle','dismissBattleReport','gobattle',
+  /* MP.7.2 — motor işlevi MP komutuna çevrilen gerçek düğmeler */
+  'envoyTask','envoyRecall','compositionSave','compositionAuto','build2','jointRequest','jointCancel','fedWarRequest','ultimatum','patronage']);
 /* MP.6.1 — UI.act kapısında doğrudan MP komutuna çevrilen düğmeler (tek oyunculu kodları dünyayı yerelde değiştirir) */
 const sel=()=>View.sel&&View.sel.e===0&&G.fleets.includes(View.sel)?View.sel:null;
 const ACT={
@@ -86,7 +91,11 @@ const ACT={
   loopOff:x=>send({kind:'loop',sys:+x,cls:null}),
   repairToggle:x=>send({kind:'repair',fleet:+x}),
   ldrUnassign:x=>send({kind:'leader',action:'unassign',leader:+x}),
-  colonize:x=>{const [s,p]=String(x).split(':').map(Number),f=sel(),c={kind:'colonize',sys:s,planet:p};if(f&&fleetHasRole(f,'koloni'))c.fleet=f.id;return send(c);}
+  colonize:x=>{const [s,p]=String(x).split(':').map(Number),f=sel(),c={kind:'colonize',sys:s,planet:p};if(f&&fleetHasRole(f,'koloni'))c.fleet=f.id;return send(c);},
+  /* MP.7.2: motor işlevi olmayan tek oyunculu düğmeler → host komutu (aynı işlem host'ta, yalnız kendi nesnesi) */
+  mergeArmed:x=>{const f=G.fleets.find(q=>q.e===0&&q.sys===+x&&q.ships.length&&isArmed(q));return f?send({kind:'merge',fleet:f.id}):toast('Birleşecek savaş filosu yok',true);},   // MP.6.1 'merge' (aynı gruptaki savaş filoları)
+  dirTog:x=>{const [s,p]=String(x).split(':').map(Number);return send({kind:'colAuto',sys:s,planet:p});},
+  bombMode:x=>{const [f,m]=String(x).split(':');return send({kind:'bombMode',fleet:+f,mode:String(m)});}
 };
 function respond(yes){const c=S.counter;const cid=send({kind:'respond',offer:c.offer,action:yes?'accept':'reject'});
   if(cid)waits[cid]=res=>toast(res.status==='ok'?(yes?'Teklif kabul edildi — host uyguladı.':'Teklif reddedildi.'):'Host reddetti: '+why(res),res.status!=='ok');
@@ -119,7 +128,7 @@ function gate(){
   /* motor eylemleri → MP komutu (yalnız misafirin kendi devleti: aynada 0) */
   const wrap=(name,fn)=>{const o=window[name];if(typeof o!=='function')return;window[name]=function(...a){if(!S.on||S.building)return o.apply(this,a);return fn(o,...a);};};
   const mine=e=>e&&e.id===0;
-  wrap('orderMove',(o,f,target,append,automatic)=>{if(automatic||!f||f.e!==0)return false;return send({kind:'move',fleet:f.id,to:+target})!==null;});
+  wrap('orderMove',(o,f,target,append,automatic)=>{if(automatic||!f||f.e!==0)return false;if(S.aimCol===f.id+':'+(+target)){S.aimCol=null;return true;}return send({kind:'move',fleet:f.id,to:+target})!==null;});
   wrap('queueBuilding',(o,e,sys,pl,k)=>{if(!mine(e)||!sys||!pl)return false;return send({kind:'build',sys:sys.id,planet:pl.i,key:String(k)})!==null;});
   wrap('researchTarget',(o,e,id,action,position)=>{if(!mine(e))return {ok:false,why:'—'};const c={kind:'research',tech:String(id)};
     if(action&&action!=='toggle'){c.action=action;c.position=position|0;}return send(c)?{ok:true}:{ok:false,why:'Host bağlı değil'};});
@@ -160,6 +169,51 @@ function gate(){
   wrap('proposeFedLaw',(o,e,law,repeal)=>mine(e)?r({kind:'fedLaw',law:String(law),repeal:!!repeal}):NOT_MP);
   wrap('vassalOffer',(o,e,other,mode,type,terms)=>mine(e)&&other?r({kind:'vassalOffer',to:real(other.id),mode:String(mode),type:String(type),terms:vasTerms(type,terms)}):NOT_MP);
   wrap('vassalReply',(o,actor,sub,id,round,action,terms)=>mine(actor)?r({kind:'vassalReply',sub:real(+sub),id:String(id),round:round|0,action:String(action),...(action==='counter'?{terms:vasTerms(null,terms)}:{})}):NOT_MP);
+  /* MP.7.2 — elçi: gerçek elçi penceresi (görev / geri çağırma) → 'envoy' (motorun setEnvoyTask / recallEnvoy'u host'ta) */
+  const hostSays=(c,ok)=>{const cid=send(c);if(cid)waits[cid]=res=>toast(res.status==='ok'?(ok?ok(res):'Host uyguladı.'):'Host reddetti: '+why(res),res.status!=='ok');return cid;};
+  wrap('setEnvoyTask',(o,e,id,task)=>{if(!mine(e)||!Object.prototype.hasOwnProperty.call(ENVOY_TASKS,task))return o(e,id,task);const old=e.envoy&&e.envoy[id];   // geçersiz görev: motorun kendi reddi (dünya değişmez)
+    return hostSays({kind:'envoy',target:real(+id),task:String(task)},()=>'Elçi görevi host\'ta uygulandı.')?{ok:true,changed:true,action:old?'change':'send'}:{ok:false,why:'Host bağlı değil; emir gönderilmedi.'};});
+  wrap('recallEnvoy',(o,e,id)=>{if(!mine(e))return o(e,id);return hostSays({kind:'envoy',target:real(+id),task:null},()=>'Elçi geri çekildi; host uyguladı.')?{ok:true,changed:true,action:'recall'}:{ok:false,why:'Host bağlı değil; emir gönderilmedi.'};});
+  /* MP.7.2 — filo bileşimi: gerçek bileşim penceresi (kaydet / otomatik) → 'composition' (motorun setFleetTemplate'i host'ta) */
+  wrap('setFleetTemplate',(o,e,f,counts,auto)=>{if(!mine(e)||!f)return o(e,f,counts,auto);const k={};for(const c of fleetTemplateClasses())k[c]=Math.max(0,Math.round(+counts[c]||0));
+    return hostSays({kind:'composition',fleet:f.id,counts:k,auto:!!auto},()=>'Filo bileşimi host\'ta kaydedildi.')?{ok:true}:{ok:false,why:'Host bağlı değil; emir gönderilmedi.'};});
+  /* MP.7.2 — inşaat gemisiyle yapı (build2) → 'struct' (motorun startStruct'ı host'ta) */
+  wrap('startStruct',(o,e,sys,key,f)=>{if(!mine(e)||!sys)return o(e,sys,key,f);return !!hostSays({kind:'struct',sys:sys.id,key:String(key),fleet:f?f.id:null},()=>'İnşaat host\'ta başladı.');});
+  /* MP.7.2 — ortak askerî destek: talep / iptal → 'jointRequest' / 'jointCancel'. Panel verisi (müttefikler, aynı sefer, planlar)
+     host'un 'joint' görünümünden: aynada savaş defteri ve ortak sefer kaydı yok. */
+  const jv=()=>{const v=hv();return v&&v.joint||{allies:[],plans:[]};};
+  wrap('jointBinding',(o,a,b)=>{if(mine(a)&&b&&b.ai){const x=jv().allies.find(y=>y.id===real(b.id));return x?{kind:'mp'}:null;}return o(a,b);});
+  wrap('jointView',(o,e)=>{if(!mine(e))return o(e);const L=id=>Number.isInteger(id)?local(id):id;
+    return jv().plans.map(p=>({...p,requester:L(p.requester),members:p.members.map(L),responses:Object.fromEntries(Object.entries(p.responses||{}).map(([k,v])=>[L(+k),v])),
+      fleets:(p.fleets||[]).map(f=>({...f,owner:L(f.owner)}))}));});
+  wrap('jointRequest',(o,e,recipient,kind,target)=>{if(!mine(e))return o(e,recipient,kind,target);
+    const cid=send({kind:'jointRequest',ally:real(+recipient),type:String(kind),target:+target});if(!cid)return {ok:false,why:'Host bağlı değil; talep gönderilmedi.'};
+    waits[cid]=res=>{UI._jointFeedback=res.status==='ok'?'Kabul: '+((res.extra&&res.extra.why)||'Destek görevi değerlendirildi'):'Ret: '+why(res);toast(UI._jointFeedback,res.status!=='ok');try{UI.keepScroll=true;UI.refresh();}catch{}};
+    setTimeout(()=>{if(UI._jointFeedback&&/^Kabul: Talep host/.test(UI._jointFeedback))return;UI._jointFeedback='Talep host\'a gönderildi; müttefikin yanıtı bekleniyor…';try{UI.keepScroll=true;UI.refresh();}catch{}},0);
+    return {ok:true,why:'Talep host\'a gönderildi'};});
+  wrap('jointCancel',(o,e,id)=>mine(e)?(hostSays({kind:'jointCancel',plan:+id},()=>'Destek talebi iptal edildi; gemiler korunuyor.')?{ok:true}:{ok:false,why:'Host bağlı değil.'}):o(e,id));
+  /* aynı sefer denetimi aynada yapılamaz (savaş defteri yok). Misafir sayfasının CSP'si eval'e izin vermez; bu yüzden panel çizilirken
+     YALNIZ o çağrı süresince motorun kendi yolu (G.warLedger → warLedgerPair → jointContext) host'un kararıyla beslenir ve sonra geri yüklenir. */
+  const jp0=UI.jointPanel;
+  UI.jointPanel=function(...a){if(!S.on)return jp0.apply(this,a);const shared=jv().allies.filter(x=>x.shared).map(x=>local(x.id));
+    const L0=G.warLedger,P0=window.warLedgerPair,C0=window.jointContext;
+    G.warLedger={v:1,next:1,fronts:[{campaign:'mp72',ended:null,sides:[0,-7],roles:[0,1]}]};
+    window.warLedgerPair=(x,y)=>x===0&&y===-7||y===0&&x===-7?true:P0(x,y);
+    window.jointContext=(c,...r)=>c==='mp72'?{members:[0,...shared]}:C0(c,...r);
+    try{return jp0.apply(this,a);}finally{G.warLedger=L0;window.warLedgerPair=P0;window.jointContext=C0;}};
+  S.jointPatched=true;
+  /* MP.7.2 — federasyon savaş izni önerisi → 'fedWar' (motorun proposeFedWar'ı; insan üyelerin oyu kendi gelen kutusunda) */
+  wrap('proposeFedWar',(o,a,b)=>mine(a)&&b?r({kind:'fedWar',target:real(b.id)}):o(a,b));
+  /* MP.7.2 — ültimatom / himaye: hedef AI ise motor karar verir (host'ta); insan hedef host'ta reddedilir. Sonuç bildirim olarak gelir. */
+  const dice=(kind,b,label)=>{const cid=send({kind,target:real(b.id)});if(!cid)return {ok:false,why:'Host bağlı değil; gönderilmedi.'};
+    waits[cid]=res=>toast(res.status==='ok'?(res.extra&&res.extra.msg||'Host uyguladı.'):'Host reddetti: '+why(res),res.status!=='ok'||!(res.extra&&res.extra.kabul));
+    return {ok:true,kabul:true,msg:label+' host\'a gönderildi; yanıt bildirim olarak gelecek.'};};
+  wrap('sendUltimatum',(o,e,t)=>mine(e)&&t?dice('ultimatum',t,'Ültimatom'):o(e,t));
+  wrap('offerPatronage',(o,e,t)=>mine(e)&&t?dice('patronage',t,'Himaye teklifi'):o(e,t));
+  /* MP.7.2 — tekil gemi nişangâhı (aimSet): koloni gemisi hedefte boş gezegen bulursa 'colonize' (rota + hak talebi host'ta);
+     ardından gelen aynı hedefli yerel orderMove ayrıca 'move' göndermez */
+  wrap('claimColony',(o,f,sys,pi)=>{if(!f||f.e!==0||!sys||!sys.planets[pi])return false;const cid=send({kind:'colonize',sys:sys.id,planet:sys.planets[pi].i,fleet:f.id});
+    if(cid)S.aimCol=f.id+':'+sys.id;return !!cid;});
   /* MP.6.2 — savaş ilanı: gerçek önizleme penceresi host'un önizlemesiyle (warQuote) çizilir; erişim ve son karar host'ta.
      declareWar yalnız hedefi işaretler; ardından gelen setWarGoal hedef+amaçla TEK 'war' komutu gönderir. */
   wrap('warDeclarationPreview',(o,actor,target,key)=>mine(actor)&&target&&S.warQuote[target.id+':'+key]?S.warQuote[target.id+':'+key]:o(actor,target,key));
@@ -360,7 +414,8 @@ function rebuild(){
   const t0=performance.now();S.building=true;let ok=false;
   /* MP.6.4: haber okundu / sabitlendi işaretleri yereldir; ayna yeniden kurulunca anahtarla geri konur */
   const nk=new Map(((typeof G!=='undefined'&&G&&G.news&&G.news.records)||[]).map(r=>[r.key,[r.read,r.pinned]]));
-  let why='';try{View.resetGesture=S.started?function(){}:rg;ok=deserialize(JSON.stringify(S.mirror));if(!ok)why='kayıt doğrulaması reddetti';if(ok){inboxOffers();setSync();for(const r of (G.news&&G.news.records)||[]){const k=nk.get(r.key);if(k){r.read=k[0];r.pinned=k[1];}}}S.inboxSig=null;}catch(e){ok=false;why=String(e&&e.message||e).slice(0,160);}
+  const dbr=typeof G!=='undefined'&&G&&G.dismissedBattleReports?{...G.dismissedBattleReports}:null;   // MP.7.2: gizlenen savaş raporları yereldir
+  let why='';try{View.resetGesture=S.started?function(){}:rg;ok=deserialize(JSON.stringify(S.mirror));if(!ok)why='kayıt doğrulaması reddetti';if(ok){inboxOffers();setSync();if(dbr)try{G.dismissedBattleReports=cleanBattleDismissals({...(G.dismissedBattleReports||{}),...dbr});}catch{}for(const r of (G.news&&G.news.records)||[]){const k=nk.get(r.key);if(k){r.read=k[0];r.pinned=k[1];}}}S.inboxSig=null;}catch(e){ok=false;why=String(e&&e.message||e).slice(0,160);}
   finally{View.resetGesture=rg;S.building=false;}
   S.lastBuild=Date.now();
   /* MP.7: bozuk/uyumsuz ayna aynı veriyle 1 s'de bir sonsuza dek yeniden kurulmuyordu-kurulmaya çalışılıyordu. Artık ayna bırakılır,

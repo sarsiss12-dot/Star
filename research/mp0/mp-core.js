@@ -264,7 +264,7 @@ function createHost(opts){
       let st,why='';
       if(e.techs[id])st='d';else{const a=researchAccess(e,id);if(!a.ok){st='x';why=a.why;}else if(researchReady(e,id))st='r';else{const rt=researchRoute(e,id);st=rt.ok?'l':'x';why=rt.ok?'':rt.why;}}
       tech[id]={n:T.n,b:T.b,t:T.t,r:(T.r||[]).slice(),d:T.d||'',c:Math.round(techCost(e,id)),s:st,...(why?{w:why}:{})};}
-    return {me,sys,lanes,cols,fleets,emps,catalog,sci,tech,log:(notes.get(e.id)||[]).slice(),dip:dipView(e),pol:polView(e),settle:settleView(e),mkt:mktView()};
+    return {me,sys,lanes,cols,fleets,emps,catalog,sci,tech,log:(notes.get(e.id)||[]).slice(),dip:dipView(e),pol:polView(e),settle:settleView(e),mkt:mktView(),joint:jointMpView(e)};
   }
   function clock(){return {day:Math.floor(G.day),y:G.year,m:G.month,spd:G.speed|0};}
   const KEYED=['sys','cols','fleets','emps','tech'];
@@ -275,7 +275,7 @@ function createHost(opts){
       for(const k of Object.keys(a[sec]))if(!has(b[sec],k))rm.push(k);
       if(Object.keys(up).length)(ops.up||(ops.up={}))[sec]=up;
       if(rm.length)(ops.rm||(ops.rm={}))[sec]=rm;}
-    for(const sec of ['me','lanes','catalog','sci','log','dip','pol','settle','mkt'])if(JSON.stringify(a[sec])!==JSON.stringify(b[sec]))(ops.set||(ops.set={}))[sec]=b[sec];
+    for(const sec of ['me','lanes','catalog','sci','log','dip','pol','settle','mkt','joint'])if(JSON.stringify(a[sec])!==JSON.stringify(b[sec]))(ops.set||(ops.set={}))[sec]=b[sec];
     return ops;
   }
   /* MP.2: görünüm salt okunur olmalı. explorationContext → borderPressure/totalPower gibi motor yolları
@@ -395,6 +395,15 @@ function createHost(opts){
     return {id:o.id,campaign:o.campaign,role:o.role,proposer:o.proposer,created:o.created,expires:o.expires,rows:settleRows(e,o.rows),shares:settleShares(o.shares),total:o.total,
       members:o.members.slice(),state:st.state,why:String(st.why||o.why||'').slice(0,200),votes:o.votes.map(v=>({by:v.by,yes:!!v.yes,why:String(v.why||'').slice(0,120)})),
       ...(o.receipt?{receipt:{at:o.receipt.at,n:o.receipt.transfers.length}}:{}),...(ap?{apply:{ok:!!ap.ok,why:ap.ok?'':String(ap.why||'')}}:{})};}
+  /* MP.7.2: ortak askerî koordinasyon paneli için yalnız bu oyuncunun bakışı: destek bağı olan AI müttefikler, aynı geçerli seferde
+     olup olmadıkları (motorun jointContext'i) ve motorun kendi süzgeçli jointView(e) planları. Savaş defteri ve başkalarının planları gitmez. */
+  function jointMpView(e){
+    if(!e||e.dead||typeof jointBinding!=='function')return {allies:[],plans:[]};
+    const fronts=(G.warLedger&&G.warLedger.fronts||[]).filter(f=>f.ended===null&&f.sides.includes(e.id)&&warLedgerPair(...f.sides));
+    const allies=G.emps.filter(o=>o.id!==e.id&&o.ai&&!o.dead&&e.contact[o.id]&&jointBinding(e,o)).map(o=>({id:o.id,shared:fronts.some(f=>{const c=jointContext(f.campaign,f.roles[f.sides.indexOf(e.id)],e.id,f.sides.find(id=>id!==e.id));return !!(c&&c.members.includes(o.id));})?1:0}));
+    const plans=G.jointOps&&G.jointOps.plans.some(p=>p.members.includes(e.id))?jointView(e):[];
+    return {allies,plans};
+  }
   function settleView(e){
     if(typeof settlementState!=='function')return {offers:[],drafts:[]};
     const latest=new Map();for(const o of G.settlements&&G.settlements.offers||[])if(o.members.includes(e.id))latest.set(o.campaign,o);   // arayüz gibi: sefer başına son teklif
@@ -838,8 +847,43 @@ function createHost(opts){
     settleVote:{keys:['kind','offer','yes'],check:c=>int(c.offer,1,2147483647)&&typeof c.yes==='boolean',locate:(e,c)=>settleMember(e,c.offer),why:()=>null,roots:()=>[],
       apply:(e,at,c)=>settlementVote(e,c.offer,c.yes)},
     settleApply:{keys:['kind','offer'],check:c=>int(c.offer,1,2147483647),locate:(e,c)=>settleMember(e,c.offer),why:()=>null,roots:()=>[],apply:(e,at,c)=>settlementApply(e,c.offer)},
-    settleWithdraw:{keys:['kind','offer'],check:c=>int(c.offer,1,2147483647),locate:(e,c)=>settleMember(e,c.offer),why:()=>null,roots:()=>[],apply:(e,at,c)=>settlementWithdraw(e,c.offer)}
+    settleWithdraw:{keys:['kind','offer'],check:c=>int(c.offer,1,2147483647),locate:(e,c)=>settleMember(e,c.offer),why:()=>null,roots:()=>[],apply:(e,at,c)=>settlementWithdraw(e,c.offer)},
+    /* ═══ MP.7.2 — eksik oynanış işlevleri. Her komut gerçek STARS düğmesinin çağırdığı MOTOR işlevini oyuncunun KENDİ devletiyle
+       yürütür (yeni kural yok); temas kurulmamış / başkasına ait hedef "yok" ile aynı kodu alır. ═══ */
+    envoy:{say:'actor',keys:['kind','target','task'],check:c=>int(c.target,0,63)&&(c.task===null||typeof c.task==='string'&&has(ENVOY_TASKS,c.task)),
+      locate(e,c){const o=G.emps[c.target];return o&&o!==e&&(e.contact[o.id]||envoyRecord(e,o.id))?{o}:{err:'no-target'};},
+      why(e,{o},c){if(c.task===null)return envoyRecord(e,o.id)?null:{code:'envoy',detail:['Bu devlette elçin yok']};const g=envoyGate(e,o.id);return g.ok?null:{code:'envoy',detail:[String(g.why).slice(0,160)]};},
+      roots:()=>[],apply:(e,{o},c)=>c.task===null?recallEnvoy(e,o.id):setEnvoyTask(e,o.id,c.task)},
+    composition:{say:'actor',keys:['kind','fleet','counts','auto'],check:c=>int(c.fleet,0,2147483647)&&plain(c.counts)&&onlyKeys(c.counts,fleetTemplateClasses())&&
+        Object.values(c.counts).every(v=>int(v,0,FLEET_TEMPLATE_LIMIT))&&typeof c.auto==='boolean',
+      locate:ownFleet,why:()=>null,roots:()=>[],apply:(e,{f},c)=>setFleetTemplate(e,f,{...c.counts},c.auto)},
+    struct:{say:'actor',keys:['kind','sys','key','fleet'],check:c=>int(c.sys,0,G.sys.length-1)&&typeof c.key==='string'&&has(STRUCTS,c.key)&&(c.fleet===null||int(c.fleet,0,2147483647)),
+      locate(e,c){const sys=G.sys[c.sys];if(!sys.seen.includes(e.id))return {err:'no-target'};const f=c.fleet===null?null:G.fleets.find(x=>x.id===c.fleet);
+        return c.fleet!==null&&(!f||f.e!==e.id)?{err:'not-owner'}:{sys,f};},
+      why:()=>null,roots:()=>[],apply:(e,{sys,f},c)=>startStruct(e,sys,c.key,f)?true:{ok:false,why:'İnşaat başlatılamadı — kaynak veya konum uygun değil'}},
+    colAuto:{say:'actor',keys:['kind','sys','planet'],check:c=>int(c.sys,0,G.sys.length-1)&&int(c.planet,0,63),
+      locate(e,c){const pl=G.sys[c.sys].planets[c.planet];return pl&&pl.col&&pl.owner===e.id?{pl}:{err:'not-owner'};},why:()=>null,roots:()=>[],
+      apply(e,{pl}){pl.col.auto=!pl.col.auto;delete pl.col._dirWarn;   // tek oyunculu 'dirTog' düğmesinin işlemi (motorda ayrı işlevi yok)
+        say(pl.col.auto?'🏗 '+(pl.col.name||pl.name)+' otomatik inşa açıldı':'⏹ '+(pl.col.name||pl.name)+' otomasyonu kapatıldı',pl.col.auto?'win':'');return true;}},
+    bombMode:{say:'actor',keys:['kind','fleet','mode'],check:c=>int(c.fleet,0,2147483647)&&['hassas','yikici'].includes(c.mode),locate:ownFleet,why:()=>null,roots:()=>[],
+      apply(e,{f},c){f.bombMode=c.mode;   // tek oyunculu 'bombMode' düğmesinin işlemi
+        say(c.mode==='yikici'?'💥 Yıkıcı bombardıman — tahkimat hızla erir, binalar yıkılır':'🎯 Hassas vuruş — yavaş ama gezegen sağlam kalır',c.mode==='yikici'?'war':'sci');return true;}},
+    /* ortak askerî destek talebi: alıcı yalnız AI müttefik (motor böyle; insanın filoları hiçbir ortak planda kullanılmaz — jointSelect) */
+    jointRequest:{say:'actor',keys:['kind','ally','type','target'],check:c=>int(c.ally,0,63)&&['follow','capture','defend'].includes(c.type)&&int(c.target,0,2147483647),
+      locate(e,c){const o=G.emps[c.ally];return o&&o!==e&&e.contact[o.id]?{o}:{err:'no-target'};},why:()=>null,roots:()=>[],
+      apply(e,{o},c){const r=jointRequest(e,o.id,c.type,c.target);return r&&r.ok?{ok:true,extra:{why:String(r.why||'').slice(0,200)}}:r;}},
+    jointCancel:{say:'actor',keys:['kind','plan'],check:c=>int(c.plan,0,2147483647),locate:()=>({}),why:()=>null,roots:()=>[],apply:(e,at,c)=>jointCancel(e,c.plan)},
+    fedWar:{keys:['kind','target'],check:c=>int(c.target,0,63),locate(e,c){const o=G.emps[c.target];return o&&o!==e&&e.contact[o.id]?{o}:{err:'no-target'};},
+      why(e,{o}){const g=canFedWarRequest(e,o);return g.ok?null:polWhy(g);},roots:()=>[],apply:(e,{o})=>proposeFedWar(e,o)},
+    /* ültimatom / himaye: hedefin kararı motorda zarla verilir (AI davranışı) → yalnız AI hedef; insan adına AI karar vermez */
+    ultimatum:{say:'actor',keys:['kind','target'],check:c=>int(c.target,0,63),locate(e,c){const o=G.emps[c.target];return o&&o!==e&&e.contact[o.id]?{o}:{err:'no-target'};},
+      why(e,{o}){if(isHumanActor(o))return {code:'human',detail:[HUMAN_DICE]};const g=canUltimatum(e,o);return g.ok?null:{code:'diplo',detail:[String(g.why||'').slice(0,160)]};},
+      roots:()=>[],apply(e,{o}){const r=sendUltimatum(e,o);return r&&r.ok?{ok:true,extra:{kabul:!!r.kabul,msg:String(r.msg||'').slice(0,200)}}:r;}},
+    patronage:{say:'actor',keys:['kind','target'],check:c=>int(c.target,0,63),locate(e,c){const o=G.emps[c.target];return o&&o!==e&&e.contact[o.id]?{o}:{err:'no-target'};},
+      why(e,{o}){if(isHumanActor(o))return {code:'human',detail:[HUMAN_DICE]};const g=canOfferPatronage(e,o);return g.ok?null:{code:'diplo',detail:[String(g.why||'').slice(0,160)]};},
+      roots:()=>[],apply(e,{o}){const r=offerPatronage(e,o);return r&&r.ok?{ok:true,extra:{kabul:!!r.kabul,msg:String(r.msg||'').slice(0,200)}}:r;}}
   });
+  const HUMAN_DICE='İnsan oyuncunun kararını zar veremez; bu işlem çok oyunculuda yalnız AI devlete yapılır.';
   /* ═══ MP.3 diplomasi durumu (oturum; Save8'e girmez — kalıcılık MP.4) ═══ */
   const DIP_ROUNDS=6,DIP_PENDING_OUT=8,DIP_KEEP=160,DIP_RES=['min','ene','yiy','ala','tuk','ara','etk'];
   /* MP.6.2: parametresiz antlaşma maddeleri — saldırmazlık, ticaret, ittifak, sensör paylaşımı, sınır geçişi (casusluk ağı kapsam dışı) */
@@ -1352,6 +1396,18 @@ function createHost(opts){
        uzak insan adına otomatik EVET/HAYIR. Uzak insan da devlet 0 gibi atlanır; oyunu kendi 'settleVote' komutuyla verir.
        settlementOpinion RNG tüketmez; uzak insan yokken davranış ve Save8 birebir aynı. */
     settlementSubmit=patchEngine(settlementSubmit,'if(id===e.id||id===0)continue;','if(id===e.id||id===0||__mpHumanVoter(id))continue;');
+    /* MP.7.2: ortak askerî destek talebi ve iptali motorda yalnız devlet 0 içindi (e!==G.p). Uzak insan da kendi talebini verir /
+       iptal eder; oyuncunun talebi AI'nın kendi planını değiştirebilir (devlet 0 dalı). Uzak insan yokken __mpHumanVoter hep false:
+       davranış ve RNG birebir aynı. Metin beklenen biçimde değilse kurulum durur. */
+    jointRequest=patchEngine(jointRequest,"if(e!==G.p||!other","if(e!==G.p&&!__mpHumanVoter(e.id)||!other");
+    jointCancel=patchEngine(jointCancel,"if(!p||e!==G.p||","if(!p||e!==G.p&&!__mpHumanVoter(e.id)||");
+    jointAnchorPower=patchEngine(patchEngine(patchEngine(jointAnchorPower,"f.e===0&&f.ships.length","(f.e===0||__mpHumanVoter(f.e))&&f.ships.length"),
+      "fleetSupply(G.p,f)","fleetSupply(G.emps[f.e],f)"),"aiKnownRoute(G.p,f,","aiKnownRoute(G.emps[f.e],f,");   // desteklenen filonun gücü sahibinin bakışıyla (devlet 0'da G.emps[0]===G.p)
+    jointCreate=patchEngine(jointCreate,"!(options.requester===0&&previous.requester===null)","!((options.requester===0||__mpHumanVoter(options.requester))&&previous.requester===null)");
+    /* MP.7.2: ültimatomda hedefin "boyun eğme" kararı zarla verilir (AI davranışı). Host'un kendi STARS arayüzünden bir insana
+       ültimatom → insan adına zar. Çok oyunculuda insan hedefe yapılmaz (misafir komutu da aynı kuralla reddedilir). */
+    const ult=sendUltimatum;
+    sendUltimatum=function(e,target){if(target&&isHumanActor(target)&&(RH(target)||RH(e))){ST.blockedAI++;return {ok:false,why:'İnsan oyuncunun kararını zar veremez; ültimatom çok oyunculuda yalnız AI devlete verilir.'};}return ult.apply(this,arguments);};
     aiStatusQuoTick=patchEngine(aiStatusQuoTick,'if (o.id === 0){\n        /* Oyuncuya teklif edilir','if (__mpHumanVoter(o.id)){__mpSqOffer(e,o);e._sqCd=(G.memAge||0)+24;continue;}\n      if (o.id === 0){\n        /* Oyuncuya teklif edilir');
   }
   function patchEngine(fn,from,to){
