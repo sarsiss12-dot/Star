@@ -428,7 +428,14 @@ function createHost(opts){
         if(!t)continue;if(rh)note(id,t,st==='applied'?'win':st==='pending'||st==='approved'?'dip':'war');else if(opts.hostNotify)opts.hostNotify(t,'dip');}}
     settlePrimed=true;
   }
-  function publish(){dipSweep();pure(polSweep);pure(warSweep);pure(settleSweep);pure(spySweep);const rev=++S.worldRevision;for(const p of S.players.values())publishTo(p,rev);return rev;}
+  /* MP.7.3: konsey oylaması açılınca oy hakkı olan uzak insan üyeye bildirim (oyunu Konsey ekranından verir) */
+  const cncSeen=new Map();
+  function councilSweep(){
+    const c=cncOpen();if(!c||!c.vote||c.vote.done)return;const tok=cncTok(c)+':'+(c.vote.opened||'');
+    for(const [eid] of S.slots){const e=G.emps[eid];if(!remoteHuman(e)||e.dead||!c.members.includes(eid)||cncSilent(e)||c.vote.yes.includes(eid)||c.vote.no.includes(eid))continue;
+      if(cncSeen.get(eid)===tok)continue;cncSeen.set(eid,tok);const R=RESOLUTIONS[c.vote.key];note(eid,'KONSEY OYLAMASI — '+(R?R.n:c.vote.key)+' · oyunu Konsey ekranından ver','sci');}
+  }
+  function publish(){dipSweep();pure(polSweep);pure(warSweep);pure(settleSweep);pure(spySweep);pure(councilSweep);const rev=++S.worldRevision;for(const p of S.players.values())publishTo(p,rev);return rev;}
 
   /* ---------- komutlar: yalnız bu tablo ---------- */
   function locate(e,c){
@@ -881,9 +888,58 @@ function createHost(opts){
       roots:()=>[],apply(e,{o}){const r=sendUltimatum(e,o);return r&&r.ok?{ok:true,extra:{kabul:!!r.kabul,msg:String(r.msg||'').slice(0,200)}}:r;}},
     patronage:{say:'actor',keys:['kind','target'],check:c=>int(c.target,0,63),locate(e,c){const o=G.emps[c.target];return o&&o!==e&&e.contact[o.id]?{o}:{err:'no-target'};},
       why(e,{o}){if(isHumanActor(o))return {code:'human',detail:[HUMAN_DICE]};const g=canOfferPatronage(e,o);return g.ok?null:{code:'diplo',detail:[String(g.why||'').slice(0,160)]};},
-      roots:()=>[],apply(e,{o}){const r=offerPatronage(e,o);return r&&r.ok?{ok:true,extra:{kabul:!!r.kabul,msg:String(r.msg||'').slice(0,200)}}:r;}}
+      roots:()=>[],apply(e,{o}){const r=offerPatronage(e,o);return r&&r.ok?{ok:true,extra:{kabul:!!r.kabul,msg:String(r.msg||'').slice(0,200)}}:r;}},
+    /* ═══ MP.7.3 — Galaktik Konsey, siyasi entrikalar, yıkıcı savaş (yardımcılar tablonun altında) ═══ */
+    councilFound:{say:'actor',keys:['kind'],check:()=>true,locate:()=>({}),why(e){const q=canFoundCouncil(e);return q.ok?null:{code:'council',detail:[String(q.why||'').slice(0,160)]};},roots:()=>[],apply:e=>foundCouncil(e)},
+    councilJoin:{say:'actor',keys:['kind'],check:()=>true,locate:()=>({}),why:()=>null,roots:()=>[],apply:e=>joinCouncil(e)?true:{ok:false,why:'Konseye katılamadın'}},
+    councilLeave:{say:'actor',keys:['kind'],check:()=>true,locate:()=>({}),why:e=>cncOpen()&&inCouncil(e)?null:'no-council',roots:()=>[],apply:e=>leaveCouncil(e)?true:{ok:false,why:'Konsey üyesi değilsin'}},
+    bill:{say:'actor',keys:['kind','key','target'],check:c=>typeof c.key==='string'&&has(RESOLUTIONS,c.key)&&(c.target===null||int(c.target,0,63)),
+      locate(e,c){if(c.target===null)return {};return empT(e,c.target)||c.target===e.id?{}:{err:'no-target'};},
+      why(e){const q=canProposeBill(e);return q.ok?null:{code:'council',detail:[String(q.why||'').slice(0,160)]};},roots:()=>[],apply:(e,at,c)=>proposeBill(e,c.key,c.target===null?undefined:c.target)},
+    councilVote:{keys:['kind','token','yes'],check:c=>typeof c.token==='string'&&c.token.length<=64&&typeof c.yes==='boolean',
+      locate(e){const c=cncOpen();return c&&c.members.includes(e.id)?{c}:{err:'no-council'};},   // üye olmayana oylama "yok"
+      why(e,{c},x){if(!c.vote||c.vote.done)return 'no-vote';if(cncTok(c)!==x.token)return 'stale';if(cncSilent(e))return 'vassal';
+        return c.vote.yes.includes(e.id)||c.vote.no.includes(e.id)?'voted':null;},
+      roots:()=>[],apply(e,{c},x){(x.yes?c.vote.yes:c.vote.no).push(e.id);finishCouncilVote();return true;}},   // tek oyunculu cncYes / cncNo ile aynı işlem
+    veto:{say:'actor',keys:['kind','law'],check:c=>typeof c.law==='string'&&has(RESOLUTIONS,c.law),locate:()=>({}),why:()=>null,roots:()=>[],apply:(e,at,c)=>guardianVeto(e,c.law)},
+    permanent:{say:'actor',keys:['kind'],check:()=>true,locate:()=>({}),why(e){const c=cncOpen();if(c&&c.members.some(id=>id!==e.id&&isHumanActor(G.emps[id])&&!G.emps[id].dead))return {code:'human',detail:[PERM_HUMANS]};
+        const q=canClaimPermanent(e);return q.ok?null:{code:'council',detail:[String(q.why||'').slice(0,160)]};},roots:()=>[],
+      apply(e){const r=claimPermanent(e);return r&&r.ok?{ok:true,extra:{gecti:!!r.gecti}}:r;}},
+    throne:{say:'actor',keys:['kind','sys'],check:c=>int(c.sys,0,G.sys.length-1),locate(e,c){const sys=G.sys[c.sys];return sys.seen.includes(e.id)?{sys}:{err:'no-target'};},
+      why:()=>null,roots:()=>[],apply:(e,{sys})=>rebuildThrone(e,sys)},
+    reform:{say:'actor',keys:['kind','axis','dir'],check:c=>['mil','aut','mat'].includes(c.axis)&&(c.dir===1||c.dir===-1),locate:()=>({}),why:()=>null,roots:()=>[],apply:(e,at,c)=>doReform(e,c.axis,c.dir)},
+    bribe:{say:'actor',keys:['kind','target','yon'],check:c=>int(c.target,0,63)&&['yes','no'].includes(c.yon),locate(e,c){const o=empT(e,c.target);return o?{o}:{err:'no-target'};},
+      why:(e,{o})=>isHumanActor(o)?{code:'human',detail:[HUMAN_VOTE]}:null,roots:()=>[],apply:(e,{o},c)=>bribeVote(e,o,200,c.yon)},
+    blackmail:{say:'actor',keys:['kind','target','yon'],check:c=>int(c.target,0,63)&&['yes','no'].includes(c.yon),locate(e,c){const o=empT(e,c.target);return o?{o}:{err:'no-target'};},
+      why:(e,{o})=>isHumanActor(o)?{code:'human',detail:[HUMAN_VOTE]}:null,roots:()=>[],
+      apply(e,{o},c){const r=blackmailVote(e,o,c.yon);return r&&r.ok?{ok:true,extra:{caught:!!r.caught,msg:String(r.msg||'').slice(0,200)}}:r;}},
+    /* siyasi entrikalar (motorun parametreli işlevleri; playerRevolt / playerWhisper aktör parametresiyle — installGuards) */
+    bmLeader:{say:'actor',keys:['kind','target','leader'],check:c=>int(c.target,0,63)&&int(c.leader,0,2147483647),locate(e,c){const o=empT(e,c.target);return o?{o}:{err:'no-target'};},
+      why:()=>null,roots:()=>[],apply(e,{o},c){const r=blackmailLeader(e,o,c.leader);return r&&r.ok?{ok:true,extra:{basarili:!!r.basarili,ifsa:!!r.ifsa}}:r;}},
+    fundSep:{say:'actor',keys:['kind','target'],check:c=>int(c.target,0,63),locate(e,c){const o=empT(e,c.target);return o?{o}:{err:'no-target'};},why:()=>null,roots:()=>[],apply:(e,{o})=>fundSeparatists(e,o)},
+    panopt:{say:'actor',keys:['kind','from','to'],check:c=>int(c.from,0,G.sys.length-1)&&int(c.to,0,G.sys.length-1),locate(e,c){return G.sys[c.to].seen.includes(e.id)?{}:{err:'no-target'};},
+      why:()=>null,roots:()=>[],apply:(e,at,c)=>panopticonLock(e,c.from,c.to)},
+    revolt:{say:'actor',keys:['kind'],check:()=>true,locate:()=>({}),why:e=>isVassal(e)?null:'not-vassal',roots:()=>[],apply:e=>playerRevolt(e)},
+    whisper:{say:'actor',keys:['kind','a','b','blame'],check:c=>int(c.a,0,63)&&int(c.b,0,63)&&c.a!==c.b&&(c.blame===null||int(c.blame,0,63)),
+      locate(e,c){const a=empT(e,c.a),b=empT(e,c.b),bl=c.blame===null?null:empT(e,c.blame);return a&&b&&(c.blame===null||bl)?{a,b,bl}:{err:'no-target'};},
+      why:()=>null,roots:()=>[],apply(e,{a,b,bl}){const r=playerWhisper(a,b,bl,e);return r&&r.ok?{ok:true,extra:{basari:!!r.basari,ifsa:!!r.ifsa}}:r;}},
+    /* yıkıcı savaş: yalnız onay sonrası son çağrı; host aynı motor koşullarını yeniden denetler, ikinci onay ikinci yıkım yapamaz */
+    devour:{say:'actor',keys:['kind','sys','planet'],check:c=>int(c.sys,0,G.sys.length-1)&&int(c.planet,0,63),
+      locate(e,c){const sys=G.sys[c.sys],pl=sys.planets.find(p=>p.i===c.planet);return pl&&sys.seen.includes(e.id)?{sys,pl}:{err:'no-target'};},
+      why:()=>null,roots:()=>[],apply:(e,{sys,pl})=>devourPlanet(e,sys,pl)},
+    colFire:{say:'actor',keys:['kind','fleet','mod'],check:c=>int(c.fleet,0,2147483647)&&['catlat','notron'].includes(c.mod),locate:ownFleet,
+      why:(e,{f})=>colossusTarget(f)?null:{code:'war',detail:['Ateşleme koşulları sağlanmıyor']},roots:()=>[],
+      apply:(e,{f},c)=>colossusFire(f,colossusTarget(f),c.mod)?true:{ok:false,why:'Ateşleme koşulları sağlanmıyor'}}
   });
   const HUMAN_DICE='İnsan oyuncunun kararını zar veremez; bu işlem çok oyunculuda yalnız AI devlete yapılır.';
+  /* ═══ MP.7.3 — Galaktik Konsey, siyasi entrikalar, yıkıcı savaş. Her komut gerçek STARS düğmesinin motor işlevini oyuncunun KENDİ
+     devletiyle yürütür. İnsan oyları: AI vermez (installGuards), oylama bütün insan üyeler oy verince (ya da motorun 24 ay sınırında) kapanır. ═══ */
+  const cncOpen=()=>typeof councilExists==='function'&&councilExists()?G.council:null;
+  const cncSilent=e=>typeof isVassal==='function'&&isVassal(e)&&G.council.members.includes(e.overlord);   // motor: vasal senyörü adına susar
+  const cncTok=c=>c.vote.key+':'+(c.vote.target===null||c.vote.target===undefined?'':c.vote.target);
+  const empT=(e,id)=>{const o=G.emps[id];return o&&o!==e&&!o.dead&&(e.contact[o.id]||(cncOpen()&&G.council.members.includes(o.id)))?o:null;};
+  const HUMAN_VOTE='İnsan oyuncunun konsey oyunu kendisi verir; rüşvet / şantaj çok oyunculuda yalnız AI üyeye yapılır.';
+  const PERM_HUMANS='Daimi hükümdarlık oylamasında üyelerin oyu motorda zarla belirlenir; başka insan üye varken çok oyunculuda talep edilemez.';
   /* ═══ MP.3 diplomasi durumu (oturum; Save8'e girmez — kalıcılık MP.4) ═══ */
   const DIP_ROUNDS=6,DIP_PENDING_OUT=8,DIP_KEEP=160,DIP_RES=['min','ene','yiy','ala','tuk','ara','etk'];
   /* MP.6.2: parametresiz antlaşma maddeleri — saldırmazlık, ticaret, ittifak, sensör paylaşımı, sınır geçişi (casusluk ağı kapsam dışı) */
@@ -1125,8 +1181,10 @@ function createHost(opts){
        oyuncunun kendi bildirim listesine gider (MP.2 researchTick korumasıyla aynı yol). */
     const s0=typeof say==='function'?say:null,routeSay=s0&&def.say==='actor'&&remoteHuman(e);curActor=playerId;   // yalnız MP.6.1 komutları: eski komutların Save8 baytları aynı kalır
     if(routeSay)say=function(m,cl){note(e.id,m,cl);};
+    /* MP.7.3: motorun oyuncuya yönelik olay penceresi (UI.eventArt; ör. !e.ai) uzak insanın komutunda host ekranında açılmaz, o oyuncunun listesine gider */
+    const ea0=routeSay&&typeof UI!=='undefined'&&typeof UI.eventArt==='function'?UI.eventArt:null;if(ea0)UI.eventArt=function(art,title,text,cl){note(e.id,String(title||'')+' — '+String(text||'').replace(/<[^>]*>/g,'').slice(0,200),cl);};
     try{res=def.apply(e,at,c);}catch(err){txRestoreGraph(records);rndSeed(rng);return {ok:false,code:'error'};}
-    finally{if(routeSay)say=s0;curActor=null;}
+    finally{if(routeSay)say=s0;if(ea0)UI.eventArt=ea0;curActor=null;}
     if(!(res===true||(res&&res.ok))){txRestoreGraph(records);rndSeed(rng);   // MP.3.1: motorun kendi gerekçesi (ör. vassalOffer) ayrıntı olarak döner
       return res&&typeof res.why==='string'?{ok:false,code:'rules:engine',detail:[res.why.slice(0,200)]}:{ok:false,code:'rules'};}
     stats.applied++;S.worldRevision++;S.journal.push({rev:S.worldRevision,day:G.day,playerId,empireId,cmd:JSON.parse(JSON.stringify(c))});
@@ -1404,6 +1462,35 @@ function createHost(opts){
     jointAnchorPower=patchEngine(patchEngine(patchEngine(jointAnchorPower,"f.e===0&&f.ships.length","(f.e===0||__mpHumanVoter(f.e))&&f.ships.length"),
       "fleetSupply(G.p,f)","fleetSupply(G.emps[f.e],f)"),"aiKnownRoute(G.p,f,","aiKnownRoute(G.emps[f.e],f,");   // desteklenen filonun gücü sahibinin bakışıyla (devlet 0'da G.emps[0]===G.p)
     jointCreate=patchEngine(jointCreate,"!(options.requester===0&&previous.requester===null)","!((options.requester===0||__mpHumanVoter(options.requester))&&previous.requester===null)");
+    /* MP.7.3: Galaktik Konsey. Motor yalnız devlet 0'ı oyuncu sayıyordu; uzak insanın adına AI gündeme yasa ekliyor (agendaTick),
+       onu sponsor yapıp "evet" yazıyor ve oyunu hesaplıyor (startCouncilVote), zarla konseye katıyordu (councilTick). Uzak insan da devlet 0
+       gibi atlanır; oylama bütün insan üyeler oy verince ya da motorun 24 ay sınırında kapanır (finishCouncilVote). Uzak insan yokken
+       __mpHumanVoter hep false: davranış ve RNG birebir aynı. Metin beklenen biçimde değilse kurulum durur. */
+    agendaTick=patchEngine(agendaTick,"!G.emps[m].wild && m !== 0 &&","!G.emps[m].wild && m !== 0 && !__mpHumanVoter(m) &&");
+    startCouncilVote=patchEngine(patchEngine(patchEngine(startCouncilVote,
+      "if (sponsor && (sponsor.dead || sponsor.id === 0)) sponsor = null;","if (sponsor && (sponsor.dead || sponsor.id === 0 || __mpHumanVoter(sponsor.id))) sponsor = null;"),
+      "if (b === 0 || (sponsor","if (b === 0 || __mpHumanVoter(b) || (sponsor"),
+      "    if (id === 0) continue;","    if (id === 0 || __mpHumanVoter(id)) continue;");
+    /* councilTick başka bir runtime katmanınca sarılı (metni yamalanamaz): ayın konsey adımı sırasında AI'nın "ara ara katılır" zarı
+       uzak insanı konseye YAZAMAZ (zar aynı sırada çekilir; uzak insan yokken birebir aynı). İnsanın kendi katılımı 'councilJoin' komutuyla. */
+    let inCncTick=0;const ct0=councilTick,jc0=joinCouncil;
+    councilTick=function(){inCncTick++;try{return ct0.apply(this,arguments);}finally{inCncTick--;}};
+    joinCouncil=function(e){if(inCncTick&&RH(e)){ST.blockedAI++;return false;}return jc0.apply(this,arguments);};
+    const fcv=finishCouncilVote;
+    finishCouncilVote=function(){const c=G.council;
+      if(c&&c.vote&&!c.vote.done&&(c.vote.age||0)<=24&&c.members.some(id=>{const o=G.emps[id];return o&&!o.dead&&(id===0||RH(o))&&!(typeof isVassal==='function'&&isVassal(o)&&c.members.includes(o.overlord))&&
+        !c.vote.yes.includes(id)&&!c.vote.no.includes(id);})&&c.members.some(id=>RH(G.emps[id])))return;   // insan üyelerin oyu bekleniyor
+      return fcv.apply(this,arguments);};
+    const perm=claimPermanent;
+    claimPermanent=function(e){const c=G.council;if(c&&e&&c.members.some(id=>id!==e.id&&RH(G.emps[id])||id!==e.id&&id===0&&RH(e))){ST.blockedAI++;
+        return {ok:false,why:'Daimi hükümdarlık oylamasında üyelerin oyu motorda zarla belirlenir; başka insan üye varken çok oyunculuda talep edilemez.'};}return perm.apply(this,arguments);};
+    for(const [nm,fn] of [['bribeVote',bribeVote],['blackmailVote',blackmailVote]]){const f0=fn;
+      const w=function(e,target){if(e&&!e.ai&&target&&isHumanActor(target)&&(RH(target)||RH(e))){ST.blockedAI++;return {ok:false,why:'İnsan oyuncunun konsey oyunu kendisi verir; rüşvet / şantaj çok oyunculuda yalnız AI üyeye yapılır.'};}
+        const r=f0.apply(this,arguments);if(nm==='bribeVote'&&r&&r.ok&&e&&e.ai&&target&&RH(target))NOTE(target.id,e.name+' senato oyun için '+r.miktar+' mineral teklif etti (oyunu yine sen verirsin)','sci');return r;};
+      if(nm==='bribeVote')bribeVote=w;else blackmailVote=w;}
+    /* MP.7.3: bağımsızlık savaşı ve fısıltı işlemi motorda yalnız G.p içindi (const e = G.p); aktör parametresi eklenir (parametresiz çağrı aynen) */
+    playerRevolt=patchEngine(playerRevolt,"const e = G.p;","const e = arguments[0] || G.p;");
+    playerWhisper=patchEngine(playerWhisper,"const e = G.p;","const e = arguments[3] || G.p;");
     /* MP.7.2: ültimatomda hedefin "boyun eğme" kararı zarla verilir (AI davranışı). Host'un kendi STARS arayüzünden bir insana
        ültimatom → insan adına zar. Çok oyunculuda insan hedefe yapılmaz (misafir komutu da aynı kuralla reddedilir). */
     const ult=sendUltimatum;
