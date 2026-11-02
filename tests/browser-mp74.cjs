@@ -156,8 +156,9 @@ let relay,px,base,tls,bH,bB,bC;
     await H.evaluate(()=>MP71Dip.tick());await wait(H,k=>(G.inbox||[]).some(n=>n.key===k),'mp71:'+id).catch(()=>{});
     const uid=await H.evaluate(id=>{const n=(G.inbox||[]).find(n=>typeof n.key==='string'&&n.key.includes(String(id)))||(G.inbox||[]).filter(n=>n.kind==='aideal').at(-1);return n?n.uid:null;},id);
     assert(uid,'host card');await wait(H,u=>document.querySelector('#inbox [data-x="'+u+':y"]'),uid);const m0=await H.evaluate(()=>G.p.res.min);
+    await H.evaluate(()=>MP1Host.host.local({kind:'speed',value:0}));const m1=await H.evaluate(()=>G.p.res.min);   // ölçüm sırasında ay geliri işlemesin (gerçek hız komutu)
     await tap(H,'#inbox [data-x="'+uid+':y"]');await wait(H,id=>MP1Host.host.dip.offers.find(o=>o.id===id).status==='accepted',id);
-    assert.equal(await H.evaluate(m=>Math.round(G.p.res.min-m),m0),23);
+    assert.equal(await H.evaluate(m=>Math.round(G.p.res.min-m),m1),23);void m0;await H.evaluate(()=>MP1Host.host.local({kind:'speed',value:1}));
   });
   /* ---------- B: host + 2 (C 915×412); kapasite 3; dördüncü telefon reddedilir ---------- */
   for(const p of [H,Bp])await p.close().catch(()=>{});
