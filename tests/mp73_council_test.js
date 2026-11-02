@@ -81,6 +81,15 @@ test('tasarı: A kendi tasarısını sunar (proposeBill; kampanya sponsoru A); a
   /* host'un kendi STARS arayüzünden insana rüşvet de reddedilir */
   assert.equal(J(h,`bribeVote(G.p,G.emps[${B}],200,'yes').ok`),false);
 });
+test('üyelik: A councilLeave ile ayrılır (motorun leaveCouncil\'i), üye değilken ayrılma "yok"; councilJoin ile geri döner; konsey varken councilFound motorun gerekçesiyle reddedilir; host\'un üyeliği değişmez',()=>{
+  const h=world();const host0=J(h,'G.council.members.includes(0)');
+  assert.equal(code(cmd(h,A,{kind:'councilLeave'})),'ok');assert.equal(J(h,`G.council.members.includes(${A})`),false);
+  assert.equal(code(cmd(h,A,{kind:'councilLeave'})),'rules:no-council');
+  const j=cmd(h,A,{kind:'councilJoin'});assert(['ok','rules:engine'].includes(code(j)),JSON.stringify(j));
+  if(code(j)==='ok')assert.equal(J(h,`G.council.members.includes(${A})`),true);
+  assert.equal(code(cmd(h,B,{kind:'councilFound'})),'rules:council');
+  assert.equal(J(h,'G.council.members.includes(0)'),host0);
+});
 test('daimi hükümdarlık: başka insan üye varken talep edilemez (üyelerin oyu motorda zarla); host\'un arayüzü de; veto / taht / reform motorun kendi gerekçesiyle',()=>{
   const h=world();assert.equal(code(cmd(h,A,{kind:'permanent'})),'rules:human');
   assert.equal(J(h,'claimPermanent(G.p).ok'),false);assert.match(J(h,'claimPermanent(G.p).why'),/zarla/);

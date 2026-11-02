@@ -128,10 +128,11 @@ Tek oyunculuda da bozuk; düzeltme runtime değişikliği gerektirir (ayrı faz 
 
 Ayrıntı: `research/mp73/evidence/REGRESYON.md`.
 
-**`tests/mp73_council_test.js` (Node): 10/0** (12 sn) + **`tests/mp73_council_equiv_test.js`: 1/0** (uzun eşdeğerlik ayrı pakette; `run-all` 180 sn paket sınırı).
+**`tests/mp73_council_test.js` (Node): 11/0** (~13 sn) + **`tests/mp73_council_equiv_test.js`: 1/0** (uzun eşdeğerlik ayrı pakette; `run-all` 180 sn paket sınırı).
 - AI insanlar adına oy / sponsor / gündem yazmaz;
 - insan oyu + host bekler;
 - `voted` / `stale` / `no-council`;
+- üyelik: `councilLeave` / `councilJoin` (motorun işlevleri), üye değilken ayrılma "yok", konsey varken `councilFound` reddi;
 - 24 ay sınırı;
 - tasarı + AI'ya rüşvet (200 mineral) ve insan hedef reddi;
 - daimi / veto / taht / reform;

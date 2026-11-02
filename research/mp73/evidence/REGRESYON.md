@@ -18,7 +18,7 @@ Koşulmayanlar (**NOT RUN**): fiziksel Android, gerçek internet, LAN ve canlı 
 | Tam `node tests/run-all.js` (4 işçi; son üretim koduyla) | 167 paket, **6330 GEÇEN / 4 KALAN** |
 | — 3 KALAN | Bilinen `faz95d_identity` (11/99/404 coğrafya, Node v22 kayan nokta; değişiklikten bağımsız) |
 | — 1 KALAN | `mp73_council_test`: 180 sn paket sınırında öldürüldü (11/0'ı tek başına geçiyordu). Uzun eşdeğerlik ayrı pakete alındı (aşağıda). |
-| `mp73_council_test` (ayrıldıktan sonra) | **10 / 0**, 12 sn |
+| `mp73_council_test` (ayrıldıktan sonra) | **10 / 0**, 12 sn; üyelik vakası eklendikten sonra (son aday) **11 / 0** |
 | `mp73_council_equiv_test` (4200 gün: kuruluş + AI katılımı + 4 kampanya) | **1 / 0**, 51 sn |
 | `MP73_EQUIV_DAYS=9000` (25 yıl) | **1 / 0**. Kollar 198 / 133 sn; konsey 5 üye; Save8 + RNG birebir. |
 | MP alt kümesi (`STARS_TEST_FILTER=mp`, 4 işçi; ayrılmış testlerle) | **37 paket, 708 / 0** (`mp73_council_test` 10/0, `mp73_council_equiv_test` 1/0 sınır içinde) |
