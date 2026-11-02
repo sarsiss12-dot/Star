@@ -102,7 +102,7 @@ let relay,px,base,tls,bH,bB,bC;
     metrics.unsupported=await Bp.evaluate(()=>MP6Stars.S.unsupported);metrics.jointPatched=await Bp.evaluate(()=>!!MP6Stars.S.jointPatched);
     for(const a of ['envoy','envoyTask','envoyRecall','compositionEdit','compositionSave','compositionAuto','mergeArmed','dirTog','bombMode','build2','jointPrepare','jointChooseTarget','jointRequest','jointCancel','fedWarRequest','ultimatum','patronage','aimSet','aimCancel','rallySet','warPauseToggle','dismissBattleReport','gobattle'])
       assert(!metrics.unsupported.includes(a),a+' still unsupported');
-    assert.equal(metrics.unsupported.length,45,JSON.stringify(metrics.unsupported));assert.equal(metrics.jointPatched,true,'joint panel bound to host data');
+    assert.equal(metrics.unsupported.length,18,JSON.stringify(metrics.unsupported));   // MP.7.2'de 45; MP.7.3 27 eylemi daha bağladı (browser-mp73 A1)assert.equal(metrics.jointPatched,true,'joint panel bound to host data');
     assert.equal(await Bp.evaluate(()=>!!document.getElementById('mp6DipBtn')||!!document.getElementById('mp3HostBtn')),false);
   });
   let ai;

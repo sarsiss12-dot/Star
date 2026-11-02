@@ -6,7 +6,7 @@ Son güncelleme: 2026-11-02. Depo `sarsiss12-dot/Star`.
 
 | | `main` (birleşmiş) | Bu dal (PR) |
 |---|---|---|
-| Faz | 96H.10 + MP.0 – MP.4 (+ 96H.11 araştırma arşivi) | MP.5 (PR #17) + MP.6 (PR #18) + MP.6.1 (PR #19) + MP.6.2 (PR #20) + MP.6.3 (PR #21) + MP.6.4 (PR #22) + PERF.1 (PR #23) + MP.7 (PR #24, mobil başlangıç düzeltmesi, oyuncuya özel devlet tasarımı) + MP.7.1 (PR #25, tek STARS arayüzü) + MP.7.2 (eksik oynanış işlevleri; runtime değişmedi) — hepsi açık |
+| Faz | 96H.10 + MP.0 – MP.4 (+ 96H.11 araştırma arşivi) | MP.5 (PR #17) + MP.6 (PR #18) + MP.6.1 (PR #19) + MP.6.2 (PR #20) + MP.6.3 (PR #21) + MP.6.4 (PR #22) + PERF.1 (PR #23) + MP.7 (PR #24, mobil başlangıç düzeltmesi, oyuncuya özel devlet tasarımı) + MP.7.1 (PR #25, tek STARS arayüzü) + MP.7.2 (PR #26, eksik oynanış işlevleri) + MP.7.3 (Galaktik Konsey, entrikalar, yıkıcı savaş, Android testine hazırlık; runtime değişmedi) — hepsi açık |
 | Build / PWA | `96h10` / `stars-v96h10` | `96h10p2` / `stars-v96h10p2` (MP.7; PERF.1 `96h10p1` dahil) |
 | Save | v8 | v8 (şema değişmedi) |
 | Oyun ZIP | `releases/stars-faz96h10.zip` (SHA-256 `78e76d1627b8ec1b990849b2242835f78667f110e1d6f17021760183ee7be6d0`) | `releases/stars-faz96h10p2.zip` (SHA-256 `dc52bfe543b11bf7483969b6935172bcc65ece8c307fb28a0587ee1640e7bc62`); PERF.1 `stars-faz96h10p1.zip` |
@@ -14,6 +14,18 @@ Son güncelleme: 2026-11-02. Depo `sarsiss12-dot/Star`.
 | Değişen runtime | — | PERF.1: `economy.js`, `economic-ledger.js`; MP.7: `main.js` (setupGame cfg.humans, BUILD_ID), `sw.js` (CACHE) |
 
 96H.6.2, 96H.6.3, 96H.7, 96H.11 ve MP.0 – MP.6.4 oyun yayımlamadı. PERF.1 yeni oyun ZIP'i üretti (yalnız runtime; MP kodu ZIP'te değil).
+
+## MP.7.3 — Galaktik Konsey, siyasi entrikalar, yıkıcı savaş, Android testine hazırlık
+
+Ayrıntı: `MULTIPLAYER-MP73-SONUC.md`. Testler: `tests/mp73_council_test.js`, `tests/browser-mp73.cjs`. Android rehberi: `research/mp73/ANDROID-TEST.md`. Runtime değişmedi (build `96h10p2`, ZIP yok).
+
+- **Konsey:** misafir gerçek Konsey ekranından kurar / katılır / ayrılır, tasarı sunar, oy verir (bildirim kartı ya da Konsey ekranı), veto / taht / reform yapar; rüşvet / şantaj İSTİHBARAT → SİYASİ VE LOJİSTİK'ten.
+- **İnsan oyları:** AI insanlar adına oy, sponsorluk, gündem desteği ya da konseye katılım yazmaz; oylama bütün insan üyeler oy verene kadar (motorun 24 ay sınırına dek) açık kalır.
+- **Güvenli kısıtlar:** rüşvet / şantaj yalnız AI üyeye; daimi hükümdarlık başka insan üye varken talep edilemez (motor oyları zarla verir).
+- **Entrika / yıkıcı savaş:** fısıltı ağı, isyan, ayrılıkçı fon, Panoptikon, lider şantajı, gezegen tüketme, Kolossus ateşi; yıkıcı işlemler tek oyunculunun onay penceresinden.
+- **Ertelenen:** gölge isyan ittifakı (`joinRebel` / `leaveRebel`), durum seçimi (`sitPick`, yalnız devlet 0'da oluşur).
+- **Envanter:** 45 → 18 (13 bilerek kapalı, 2 tek oyunculuda da bozuk, 3 ertelendi / uygulanamaz).
+- **Android:** salt okunur `/mp/version`, lobi / başlangıç / MP çubuğunda sürüm satırı, misafirde dokununca tanı satırı.
 
 ## MP.7.2 — eksik oynanış işlevleri gerçek STARS düğmeleriyle
 

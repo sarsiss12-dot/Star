@@ -113,6 +113,16 @@ test('yıkıcı savaş: yutma / Kolossus yalnız motor koşuluyla; host\'un filo
   assert.equal(code(cmd(h,A,{kind:'colFire',fleet:hf,mod:'catlat'})),'not-owner');assert.equal(code(cmd(h,A,{kind:'colFire',fleet:af,mod:'catlat'})),'rules:war');
   assert.equal(code(cmd(h,A,{kind:'colFire',fleet:af,mod:'nuke'})),'bad-params');assert.equal(h.run('serialize()'),s0);
 });
+test('yutma: Yıldız Yiyen devlet kendi yörüngesindeki kolonisiz gezegeni tüketir (motorun devourPlanet\'i, kazanç aktöre); aynı komut ikinci kez yıkım yapmaz (motor reddeder, dünya değişmez)',()=>{
+  const h=world();
+  const t=J(h,`(()=>{const e=G.emps[${A}];e.civics=[...(e.civics||[]),'yildiz_yiyen'];const sys=G.sys[e.home];const pl=sys.planets.find(p=>!p.col&&p.devoured===undefined&&!p.shattered&&p.t!=='enkaz');
+    if(!G.fleets.some(f=>f.e===e.id&&f.sys===sys.id&&!f.mv&&f.ships.length)){const f=G.fleets.find(f=>f.e===e.id&&f.ships.length);f.sys=sys.id;f.mv=null;f.path=[];f.combat=null;f.retreating=false;}
+    return pl?{sys:sys.id,planet:pl.i,min:e.res.min}:null;})()`);
+  assert(t,'fixture planet');const r=cmd(h,A,{kind:'devour',sys:t.sys,planet:t.planet});assert.equal(r.status,'ok',JSON.stringify(r));
+  assert.equal(J(h,`G.sys[${t.sys}].planets.find(p=>p.i===${t.planet}).devoured`),true);assert(J(h,`G.emps[${A}].res.min`)>t.min,'gain to the actor');
+  const s1=h.run('serialize()'),r2=cmd(h,A,{kind:'devour',sys:t.sys,planet:t.planet});assert.equal(r2.code,'rules:engine',JSON.stringify(r2));assert.equal(h.run('serialize()'),s1,'no second destruction');
+  assert.equal(code(cmd(h,B,{kind:'devour',sys:t.sys,planet:t.planet})),code(cmd(h,B,{kind:'devour',sys:t.sys,planet:t.planet})));   // başka devlet de aynı ret (tekrar dokunma dahil)
+});
 test('konsey eşdeğerliği: uzak insan yokken yamalı konsey motoru (gündem, kampanya, oylama, otomatik katılım) 25 yıl tek oyunculuyla aynı: Save8 ve RNG birebir',()=>{
   const mk=guard=>{const h=runtime({root});h.run(CORE);h.run(`${STEP}setupGame({...CFG,size:'orta',aiCount:5,seed:22});G.autoSave=false;${guard?"var MP=StarsMP.createHost({roomId:'q',random:()=>'ab',send(){},kick(){}});MP.installGuards();":''}`);return h;};
   const a=mk(true),b=mk(false);a.run('step(9000)');b.run('step(9000)');

@@ -518,11 +518,16 @@ function start(){
 const V=window.MP1View,esc=V.esc;let chipEl=null,dipEl=null,dipUI=null,polUI=null,dipSeg='trade';const waits={};
 function chip(text,good){
   if(!chipEl){chipEl=doc.createElement('div');chipEl.id='mp1Mini';chipEl.className='mp1-mini mp6-mini';(doc.getElementById('app')||doc.body).appendChild(chipEl);   // oyunun kök kabında (STARS katman bağlamı)
-    chipEl.addEventListener('click',e=>{if(e.target.closest('[data-g6="dip"]'))dipOpen(true);});}
-  if(text!==undefined){const n=dipCount();const h='<div class="mp3-minirow"><span class="mp1-mini-h mp6-conn '+(good?'ok':'bad')+'" id="mp6Conn"><b>ÇOK OYUNCULU</b> · '+esc(text)+'</span>'+
-      (window.MP3Dip&&window.MP7Legacy?'<button class="mp1-btn mp3-hostbtn" data-g6="dip" id="mp6DipBtn">DİPLOMASİ'+(n?' <i class="mp3-badge">'+n+'</i>':'')+'</button>':'')+'</div>';if(chipEl.innerHTML!==h)chipEl.innerHTML=h;
-    if(window.MP61)MP61.status(text,good);}
-  chipEl.title=V.verLine()+(S.lastErr?' · son hata: '+S.lastErr:'')+(S.boot.stage?' · aşama: '+S.boot.stage:'');
+    chipEl.addEventListener('click',e=>{if(e.target.closest('[data-g6="dip"]'))dipOpen(true);
+      /* MP.7.3: çubuğa dokununca telefonda görünür tanı satırı (sürüm · bağlantı · aşama · son hata kodu); jeton / oda anahtarı yok */
+      else if(e.target.closest('#mp6Conn')){S.diag=!S.diag;chip(S.chipText,S.chipGood);}});}
+  if(text!==undefined){S.chipText=text;S.chipGood=good;}
+  const diag=V.verLine()+' · '+(online()?'host bağlı':'host yok')+(S.boot.stage?' · aşama: '+S.boot.stage:'')+' · son hata: '+(S.lastErr||'yok');
+  if(S.chipText!==undefined){const n=dipCount();const h='<div class="mp3-minirow"><span class="mp1-mini-h mp6-conn '+(S.chipGood?'ok':'bad')+'" id="mp6Conn" role="button" aria-expanded="'+!!S.diag+'"><b>ÇOK OYUNCULU</b> · '+esc(S.chipText)+'</span>'+
+      (window.MP3Dip&&window.MP7Legacy?'<button class="mp1-btn mp3-hostbtn" data-g6="dip" id="mp6DipBtn">DİPLOMASİ'+(n?' <i class="mp3-badge">'+n+'</i>':'')+'</button>':'')+'</div>'+
+      (S.diag?'<div class="mp1-sub" id="mpVer">'+esc(diag)+'</div>':'');if(chipEl.innerHTML!==h)chipEl.innerHTML=h;
+    if(text!==undefined&&window.MP61)MP61.status(text,good);}
+  chipEl.title=diag;
   chipEl.style.display=S.started?'':'none';
 }
 const view=()=>S.J&&S.J.game.view,day=()=>((S.J&&S.J.game.clock)||{}).day,online=()=>!!(S.J&&S.J.hostOnline);
