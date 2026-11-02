@@ -3,37 +3,37 @@
     {
       "name": "A1 rehber 1–8: oda, iki farklı devlet, hazır, başlat; iki ekranda galaksi; sürüm işareti lobi / başlangıç / MP çubuğunda ve /mp/version oyun build'iyle aynı",
       "status": "PASS",
-      "ms": 10905
+      "ms": 14572
     },
     {
       "name": "A2 rehber 9–12: misafir filosunu yürütür (gerçek orderMove → host), B → host diplomatik teklif ve host gelen kutusundan kabul eder; zaman iki ekranda ilerler",
       "status": "PASS",
-      "ms": 4602
+      "ms": 3948
     },
     {
       "name": "A3 rehber 13–15: misafir bağlantısı kopar ve döner → aynı devlet; host oyun kaydı alır (MP.4 paketi doğrulanır)",
       "status": "PASS",
-      "ms": 3397
+      "ms": 3396
     },
     {
       "name": "B1 konsey motorun kendi yoluyla kurulur (fikstür: temas); AI insanlar adına oy / sponsor yazmaz; B gerçek \"KONSEY OYLAMASI\" kartından Konsey ekranını açar ve EVET (dokunma) → host kaydeder, oylama açık kalır",
       "status": "PASS",
-      "ms": 53067
+      "ms": 55946
     },
     {
       "name": "B2 C (915×412) HAYIR verir; oylama host oy verene kadar açık; host kendi Konsey ekranından EVET → motor kapatır; tekrar oy reddedilir",
       "status": "PASS",
-      "ms": 34878
+      "ms": 36139
     },
     {
       "name": "B3 tasarı: B Konsey ekranından tasarı sunar (dokunma) → host kampanya sponsoru B; B AI üyeye rüşvet (dokunma) → host 200 mineral aktarır; insan üye C'ye rüşvet reddedilir; C'nin aynasında rüşvetin yönü yok",
       "status": "PASS",
-      "ms": 9163
+      "ms": 6541
     },
     {
       "name": "B4 entrika ve yıkıcı onay: B fısıltı ağını gerçek pencereden açar, iki AI seçer, gönderir → host motoru (B'nin günlüğü ya da motorun gerekçesi); onaysız yutma çağrısı host'a hiçbir şey göndermez",
       "status": "PASS",
-      "ms": 9448
+      "ms": 5926
     },
     {
       "name": "sayfa hataları yok",
