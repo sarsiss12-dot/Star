@@ -1,12 +1,12 @@
 # STARS — Güncel proje durumu
 
-Son güncelleme: 2026-11-01. Depo `sarsiss12-dot/Star`.
+Son güncelleme: 2026-11-02. Depo `sarsiss12-dot/Star`.
 
 ## Oynanabilir sürüm
 
 | | `main` (birleşmiş) | Bu dal (PR) |
 |---|---|---|
-| Faz | 96H.10 + MP.0 – MP.4 (+ 96H.11 araştırma arşivi) | MP.5 (PR #17) + MP.6 (PR #18) + MP.6.1 (PR #19) + MP.6.2 (PR #20) + MP.6.3 (PR #21) + MP.6.4 (PR #22) + PERF.1 (PR #23) + MP.7 (mobil başlangıç düzeltmesi, oyuncuya özel devlet tasarımı) — hepsi açık |
+| Faz | 96H.10 + MP.0 – MP.4 (+ 96H.11 araştırma arşivi) | MP.5 (PR #17) + MP.6 (PR #18) + MP.6.1 (PR #19) + MP.6.2 (PR #20) + MP.6.3 (PR #21) + MP.6.4 (PR #22) + PERF.1 (PR #23) + MP.7 (PR #24, mobil başlangıç düzeltmesi, oyuncuya özel devlet tasarımı) + MP.7.1 (tek STARS arayüzü; runtime değişmedi) — hepsi açık |
 | Build / PWA | `96h10` / `stars-v96h10` | `96h10p2` / `stars-v96h10p2` (MP.7; PERF.1 `96h10p1` dahil) |
 | Save | v8 | v8 (şema değişmedi) |
 | Oyun ZIP | `releases/stars-faz96h10.zip` (SHA-256 `78e76d1627b8ec1b990849b2242835f78667f110e1d6f17021760183ee7be6d0`) | `releases/stars-faz96h10p2.zip` (SHA-256 `dc52bfe543b11bf7483969b6935172bcc65ece8c307fb28a0587ee1640e7bc62`); PERF.1 `stars-faz96h10p1.zip` |
@@ -14,6 +14,18 @@ Son güncelleme: 2026-11-01. Depo `sarsiss12-dot/Star`.
 | Değişen runtime | — | PERF.1: `economy.js`, `economic-ledger.js`; MP.7: `main.js` (setupGame cfg.humans, BUILD_ID), `sw.js` (CACHE) |
 
 96H.6.2, 96H.6.3, 96H.7, 96H.11 ve MP.0 – MP.6.4 oyun yayımlamadı. PERF.1 yeni oyun ZIP'i üretti (yalnız runtime; MP kodu ZIP'te değil).
+
+## MP.7.1 — tek STARS arayüzü, iki oyun modu
+
+Ayrıntı: `MULTIPLAYER-MP71-SONUC.md`. Testler: `tests/mp71_bridge_test.js`, `tests/browser-mp71.cjs`. Runtime değişmedi (build `96h10p2`, ZIP yok).
+
+- **Ayrı ÇOK OYUNCULU DİPLOMASİ paneli kaldırıldı** (yalnız eski testlerin `MP7Legacy` kipinde). İşlevleri gerçek STARS ekranlarında:
+  - insanlar arası teklif / karşı teklif: gerçek MÜZAKERE penceresi (host'ta yeni);
+  - gelen teklif: gerçek bildirim kartı + Gelen kutusu kaydı (host'ta yeni, misafirde kart yeni);
+  - gönderilen / geçmiş / geri çekme: Gelen kutusu penceresinde **Gönderilen** sekmesi ve MÜZAKERE sayfasında bekleyen teklifler kutusu;
+  - federasyon / vasallık: gerçek pencereler (MP.6.1–6.3; host'ta motor insan alıcı adına karar vermez).
+- **Düzeltme (MP.7 hatası):** kurulum ekranını kapatan dokunuşun sentetik tıklaması lobi düğmesine düşüyordu (yatayda ODAYI KAPAT).
+- **Bırakılan:** teknoloji / sistem / haraç / lüks / savaş sözü / casusluk ağı maddeleri insanlar arası teklifte yok (MP.3 kapsamı).
 
 ## MP.7 — gerçek mobil başlangıç + oyuncuya özel devlet tasarımı
 
@@ -23,7 +35,7 @@ Ayrıntı: `MULTIPLAYER-MP7-SONUC.md`. Testler: `tests/mp7_ws_frames_test.js`, `
 - **Başlangıç:** misafirde aşamalı başlangıç ekranı, sınırlı yeniden istek, YENİDEN DENE.
 - **Devlet tasarımı:** her oyuncu tek oyunculu kurulum ekranının kendisiyle; galaksi başlarken motorun oyuncu yoluyla kurulur.
 - **Lobi:** oyuncular + devlet özetleri, DEVLETİMİ DÜZENLE, GALAKSİ AYARLARI, HAZIRIM, OYUNU BAŞLAT; eski sekmeler yok.
-- **Bırakılan (MP.7.1):** ayrı MP diplomasi panelindeki bekleyen insan teklifleri listesini gerçek diplomasi ekranına taşımak.
+- **Bırakılan (MP.7.1'de yapıldı):** ayrı MP diplomasi panelindeki bekleyen insan teklifleri listesini gerçek diplomasi ekranına taşımak.
 
 ## PERF.1 — geç oyun performansı (davranış aynı)
 

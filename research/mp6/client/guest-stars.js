@@ -54,7 +54,11 @@ const VIEW=new Set(['tab','full','cameraReset','cameraFocus','home','fit','topSt
   /* MP.6.4 — Galaktik Borsa (seçim görünüm, TAKAS ET → 'market') */
   'mktTrade',
   /* MP.6.4 — kalan filo / koloni işlemleri (motor işlevi MP komutuna iner) */
-  'reinf','shipmentMenu','shipmentApply','shipCancel','shipCancelAll','shipCancelConfirm','rallySysSet','rallySysClear','rallySysCancel','terraform','habitat','ldrAssign','ldrHire']);
+  'reinf','shipmentMenu','shipmentApply','shipCancel','shipCancelAll','shipCancelConfirm','rallySysSet','rallySysClear','rallySysCancel','terraform','habitat','ldrAssign','ldrHire',
+  /* MP.7.1 — Ekonomi Merkezi görünüm eylemleri (runtime economy-ui.js UI.act sarmalayıcısında; kaynak seçimi, süzgeç, kendi sistemine / filosuna git) */
+  'ecoPick','ecoFilter','ecoSystem','ecoFleet',
+  /* MP.7.1 — salt gezinme: karşı teklif kartında "Düzenlemeye dön", eski diplomasi bağlantıları (ilişki / istihbarat sayfası) */
+  'ctrBack','dTab']);
 /* MP.6.1 — UI.act kapısında doğrudan MP komutuna çevrilen düğmeler (tek oyunculu kodları dünyayı yerelde değiştirir) */
 const sel=()=>View.sel&&View.sel.e===0&&G.fleets.includes(View.sel)?View.sel:null;
 const ACT={
@@ -97,8 +101,13 @@ const NOT_MP={ok:false,why:'Bu karar çok oyunculuda henüz desteklenmiyor (MP.6
 function gate(){
   /* desteklenmeyen kontroller görsel olarak da devre dışı: gerçek UI.act'in eylem listesinden misafirde izinli olmayanlar soluk gösterilir
      (dokununca açık uyarı). Liste arayüz kodundan okunur; yeni eylem eklenirse kendiliğinden kapsanır. */
-  try{const all=new Set([...String(UI.act).matchAll(/case '([A-Za-z0-9_]+)'/g)].map(m=>m[1]));S.unsupported=[...all].filter(a=>!VIEW.has(a)&&!ACT[a]).sort();
-    const st=doc.createElement('style');st.id='mp6Disabled';st.textContent=S.unsupported.map(a=>'[data-a="'+a+'"]').join(',')+'{opacity:.42!important;filter:grayscale(.7)}';doc.head.appendChild(st);}catch{}
+  /* MP.7.1: runtime UI.act'i kendisi sarıyor (ekonomi arayüzü); String(UI.act) sarmalayıcıyı verdiğinden liste boş kalıyordu
+     (düğmeler engelleniyor ama soluk gösterilmiyordu). Liste yine aynı kaynaktan, gerçek act gövdesinden (/ui.js) çıkarılır. */
+  const fill=src=>{try{const all=new Set([...String(src).matchAll(/case '([A-Za-z0-9_]+)'/g)].map(m=>m[1]));S.unsupported=[...all].filter(a=>!VIEW.has(a)&&!ACT[a]).sort();
+    const st=doc.getElementById('mp6Disabled')||doc.head.appendChild(Object.assign(doc.createElement('style'),{id:'mp6Disabled'}));
+    st.textContent=S.unsupported.length?S.unsupported.map(a=>'[data-a="'+a+'"]').join(',')+'{opacity:.42!important;filter:grayscale(.7)}':'';}catch{}};
+  if(/case '/.test(String(UI.act)))fill(UI.act);
+  else fetch('ui.js').then(r=>r.text()).then(t=>{const i=t.indexOf('  act(a, x, el){');if(i<0)return;const j=t.slice(i+16).search(/\n  [A-Za-z_$][\w$]*\s*\(/);fill(t.slice(i,j<0?undefined:i+16+j));}).catch(()=>{});
   /* onay/seçim düğmeleri (_hook) kendi dinleyicisiyle çalışır; UI.act'te karşılığı yoktur (boş geçer). Adları arayüz kaynağından:
      yalnız izinli bir pencereden açılabilirler ve dünyayı değiştiren son çağrıları yukarıdaki MP sarmalayıcılarına iner. */
   S.hooks=new Set();for(const o of [UI,typeof ArchiveUI!=='undefined'?ArchiveUI:null].filter(Boolean))   // ArchiveUI sözcüksel const (window'da yok)
@@ -259,7 +268,8 @@ function gate(){
     const ctr=S.counter&&S.counter.to===d.to?S.counter:null;
     const cid=send(ctr?{kind:'counter',offer:ctr.offer,give,want}:{kind:'offer',to:real(d.to),give,want});if(ctr)S.counter=null;
     this.dealMsg=cid?'Teklif host\'a gönderildi; yanıt gelen kutuna ve bildirimlere düşer.':'Host bağlı değil; teklif gönderilmedi.';
-    if(cid)waits[cid]=res=>toast(res.status==='ok'?'Teklif gönderildi — '+(G.emps[d.to]?.name||''):'Host reddetti: '+why(res),res.status!=='ok');
+    if(cid)waits[cid]=res=>{const ai=res.status==='ok'&&res.extra&&res.extra.ai,R=window.MP71Dip?MP71Dip.AI_REPLY:{};
+      toast(res.status==='ok'?(ai?(G.emps[d.to]?.name||'')+' '+(R[ai]||ai):'Teklif gönderildi — '+(G.emps[d.to]?.name||'')+'. Durum: Gelen kutusu → Gönderilen.'):'Host reddetti: '+(window.MP71Dip?MP71Dip.why(res):why(res)),res.status!=='ok');};
     if(cid){const to=d.to,m=this.dealMsg;this.forgetDeal(to);this.openDeal(to);this.dealMsg=m;}   // gönderilen taslak temizlenir (tek oyunculuda imzada forgetDeal)
     this.drawDeal();};
   /* anlaşma penceresinin yerel önizlemesi: karşı tarafın stoğu aynada yok (kabuk). MP.3 dipGate ile aynı kural: misafirde yalnız
@@ -290,7 +300,8 @@ function gate(){
     if(!c)return NOT_MP;
     const cid=send(c);if(!cid)return {ok:false,why:'Host bağlı değil; karar gönderilmedi.'};
     waits[cid]=res=>toast(res.status==='ok'?'Kararın host\'ta uygulandı.':'Host reddetti: '+why(res),res.status!=='ok');
-    rec.status=yes?'accepted':'rejected';rec.finished=G.day;rec.why='Karar host\'a gönderildi';   // iyimser; bir sonraki ayna host'un gerçeğini getirir
+    rec.status=yes?'accepted':'rejected';rec.finished=G.day;rec.why='Karar host\'a gönderildi';
+    if(rec.mp){G.inbox=(G.inbox||[]).filter(n=>n.key!=='mp71:'+rec.mp);try{UI.drawInbox();}catch{}}   // MP.7.1: kararı verilen teklifin kartı kalkar   // iyimser; bir sonraki ayna host'un gerçeğini getirir
     return {ok:true};};
 }
 const TREATY=['peace','nap','pact','ally','intel','passage'];   // mp-core DIP_TREATY ile aynı
@@ -368,10 +379,23 @@ function rebuild(){
    Kimlikler aynadaki numaralara çevrilir; kabul/ret DiplomaticInbox.resolve → MP 'respond'. */
 function inboxOffers(){
   const v=S.J&&S.J.game.view,me=S.J&&S.J.empireId;if(!v||!v.dip||typeof DiplomaticInbox==='undefined')return;
-  for(const o of v.dip.offers){if(o.to!==me||o.status!=='pending'||!G.emps[local(o.from)])continue;
+  /* MP.7.1: sonuçlanan teklifler de (geçmiş) gerçek gelen kutusunda; durum ve yanıt host'un teklif deposundan. Önce eskiler. */
+  for(const o of v.dip.offers.slice().sort((a,b)=>a.id-b.id)){if(o.to!==me||!G.emps[local(o.from)])continue;
     const strip=l=>l.map(({l:_,...i})=>i),data={from:local(o.from),to:0,give:strip(o.give),want:strip(o.want),born:o.born,expires:o.expires};
-    const rec=DiplomaticInbox.capture({kind:'aideal',data,born:o.born,title:(o.round>1?'Karşı teklif':'Teklif')+' — '+o.fn,sub:'Çok oyunculu teklif · tur '+o.round});
-    if(rec)rec.mp=o.id;}
+    let rec=DiplomaticInbox.state().records.find(r=>r.mp===o.id);
+    if(!rec)rec=DiplomaticInbox.capture({kind:'aideal',data,born:o.born,title:(o.round>1?'Karşı teklif':'Teklif')+' — '+o.fn,sub:'Çok oyunculu teklif · tur '+o.round});
+    if(!rec)continue;rec.mp=o.id;
+    if(o.status!=='pending'&&rec.status!==o.status){rec.status=Object.hasOwn(DiplomaticInbox.states,o.status)?o.status:'invalid';rec.finished=Math.min(G.day,o.expires);rec.why=String(o.why||'');
+      if(window.MP71Dip&&MP71Dip.stateOf(o)==='withdrawn'&&!/geri çekti/.test(rec.sub))rec.sub='Gönderen geri çekti · '+rec.sub;}}
+  /* MP.7.1: bekleyen insan / AI teklifi için host'taki gibi gerçek bildirim kartı (üstte; dokununca gelen kutusu kaydı açılır).
+     Ayna her kurulumda G.inbox'ı yeniler; kartlar host'un bekleyen tekliflerinden yeniden çıkarılır, sonuçlananların kartı kalkar. */
+  const live=new Set(v.dip.offers.filter(o=>o.to===me&&o.status==='pending').map(o=>'mp71:'+o.id));
+  const before=(G.inbox||[]).length;G.inbox=(G.inbox||[]).filter(n=>!(typeof n.key==='string'&&n.key.startsWith('mp71:'))||live.has(n.key));let changed=G.inbox.length!==before;
+  for(const o of v.dip.offers){if(!live.has('mp71:'+o.id)||G.inbox.some(n=>n.key==='mp71:'+o.id)||!G.emps[local(o.from)])continue;
+    const strip=l=>l.map(({l:_,...i})=>i);G.inboxUid=(G.inboxUid||0)+1;
+    G.inbox.push({kind:'aideal',data:{from:local(o.from),to:0,give:strip(o.give),want:strip(o.want),born:o.born,expires:o.expires},ico:'📜',cls:'sci',pause:false,uid:G.inboxUid,born:o.born,
+      title:(o.round>1?'Karşı teklif':'Teklif')+' — '+o.fn,sub:'Çok oyunculu teklif · '+(o.want.map(i=>i.l).join(', ')||'anlaşma')+' istiyor',key:'mp71:'+o.id});changed=true;}
+  if(changed)try{UI.drawInbox();UI.topbar();}catch{}
   /* MP.6.2: statüko barışı teklifleri (insan ya da AI → bu oyuncu) → gerçek gelen kutusunda 'sqOffer' */
   for(const q of v.dip.sq||[]){if(q.to!==me||q.status!=='pending'||!G.emps[local(q.from)])continue;
     const rec=DiplomaticInbox.capture({kind:'sqOffer',data:local(q.from),born:q.born,key:'mpsq:'+q.from+':'+q.born,title:'Statüko barışı teklifi — '+q.fn,sub:'Sınırlar fiili durumda donar; kabul edersen host uygular.'});
@@ -383,6 +407,11 @@ function start(){
   try{leaveTitle(null);}catch{}
   doc.getElementById('menu').classList.add('hidden');doc.getElementById('game').classList.remove('hidden');ov.style.display='none';
   enterGame(true);UI.setSpeed(0);
+  /* MP.7.1: insanlarla tekliflerin gönderilen / geçmiş görünümü gerçek gelen kutusunda (ayrı MP paneli yok) */
+  if(window.MP71Dip)MP71Dip.attach({role:'guest',on:()=>S.on&&S.started,me:()=>S.J.empireId,offers:()=>{const v=view();return (v&&v.dip&&v.dip.offers)||[];},
+    local,real,day:()=>day()||0,toast,human:id=>{const v=view(),c=v&&v.dip&&v.dip.contacts.find(x=>x.id===real(id));return !!(c&&c.h);},
+    send:(c,done)=>{const cid=send(c);if(cid&&done)waits[cid]=done;return cid;},
+    record:id=>{try{inboxOffers();}catch{}return DiplomaticInbox.state().records.find(r=>r.mp===id)||null;}});
   View.selSys=G.sys[G.p.home]||null;try{View.center(View.selSys.x,View.selSys.y);}catch{}
   chip();
 }
@@ -393,7 +422,7 @@ function chip(text,good){
   if(!chipEl){chipEl=doc.createElement('div');chipEl.id='mp1Mini';chipEl.className='mp1-mini mp6-mini';(doc.getElementById('app')||doc.body).appendChild(chipEl);   // oyunun kök kabında (STARS katman bağlamı)
     chipEl.addEventListener('click',e=>{if(e.target.closest('[data-g6="dip"]'))dipOpen(true);});}
   if(text!==undefined){const n=dipCount();const h='<div class="mp3-minirow"><span class="mp1-mini-h mp6-conn '+(good?'ok':'bad')+'" id="mp6Conn"><b>ÇOK OYUNCULU</b> · '+esc(text)+'</span>'+
-      (window.MP3Dip?'<button class="mp1-btn mp3-hostbtn" data-g6="dip" id="mp6DipBtn">DİPLOMASİ'+(n?' <i class="mp3-badge">'+n+'</i>':'')+'</button>':'')+'</div>';if(chipEl.innerHTML!==h)chipEl.innerHTML=h;
+      (window.MP3Dip&&window.MP7Legacy?'<button class="mp1-btn mp3-hostbtn" data-g6="dip" id="mp6DipBtn">DİPLOMASİ'+(n?' <i class="mp3-badge">'+n+'</i>':'')+'</button>':'')+'</div>';if(chipEl.innerHTML!==h)chipEl.innerHTML=h;
     if(window.MP61)MP61.status(text,good);}
   chipEl.style.display=S.started?'':'none';
 }
@@ -440,9 +469,10 @@ function update(statusHtml){
   if(dipEl)dipTick(false);
   /* MP.6.2: bekleyen teklif G'yi değiştirmez → host yeni ayna göndermeyebilir; MP.3 'dip' görünümü değişince gerçek gelen
      kutusu ayna beklemeden güncellenir (capture tekrar eden kaydı yeniden eklemez). */
-  const v=J.game&&J.game.view;if(S.started&&!S.building&&v&&v.dip){const sig=JSON.stringify([v.dip.offers.filter(o=>o.to===J.empireId&&o.status==='pending').map(o=>o.id),(v.dip.sq||[]).filter(q=>q.to===J.empireId&&q.status==='pending').map(q=>q.from+':'+q.born)]);
+  const v=J.game&&J.game.view;if(S.started&&!S.building&&v&&v.dip){const sig=JSON.stringify([v.dip.offers.filter(o=>o.to===J.empireId).map(o=>o.id+':'+o.status),(v.dip.sq||[]).filter(q=>q.to===J.empireId&&q.status==='pending').map(q=>q.from+':'+q.born)]);
     if(sig!==S.inboxSig){S.inboxSig=sig;try{inboxOffers();}catch{}}
     try{setSync();}catch{}}
+  if(S.started&&!S.building&&window.MP71Dip)try{MP71Dip.tick();}catch{}   // MP.7.1: gelen kutusundaki Gönderilen sekmesi / anlaşma sayfası kutusu
 }
 /* ---- MP.7: başlangıç aşamaları ve güvenli kurtarma ----
    ODAYA BAĞLANDI → DEVLET ATANDI → HOST OYUNU BAŞLATTI → GALAKSİ VERİSİ ALINDI → STARS DÜNYASI YÜKLENİYOR → OYUN HAZIR.
