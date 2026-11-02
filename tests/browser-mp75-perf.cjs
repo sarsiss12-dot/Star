@@ -10,7 +10,7 @@ const fs=require('fs'),path=require('path'),assert=require('assert/strict'),{exe
 const root=path.resolve(__dirname,'..'),out=path.resolve(process.env.STARS_OUTPUT||path.join(root,'../evidence/mp75perf'));fs.mkdirSync(out,{recursive:true});
 const relayMod=require('../research/mp1/server/relay.js'),{selfSigned,startProxy}=require('./helpers/mp11-tls-proxy.js');
 const results=[],errors=[],metrics={};
-const SIZE=process.env.MP75_SIZE||'orta',AI=+(process.env.MP75_AI||5),CHECK=(process.env.MP75_MONTHS||'60,120').split(',').map(Number);
+const PANE=process.env.MP75_PANE||'diplo',SIZE=process.env.MP75_SIZE||'orta',AI=+(process.env.MP75_AI||5),CHECK=(process.env.MP75_MONTHS||'60,120').split(',').map(Number);
 async function test(name,fn){const t0=Date.now();
   try{await fn();results.push({name,status:'PASS',ms:Date.now()-t0});console.log('PASS '+name);}
   catch(e){results.push({name,status:'FAIL',error:String(e&&e.stack||e).slice(0,1800)});console.log('FAIL '+name+'\n'+(e&&e.stack||e));}}
@@ -103,11 +103,12 @@ let relay,px,base,tls,bH,bB;
   await test('uzun oyun ölçümü: '+SIZE+' / '+AI+' AI, misafirde diplomasi paneli açık, en yüksek hız; '+CHECK.join('/')+'. ay',async()=>{
     await room(H,2,[[Bp,'Bora',{name:'Saf Akıl Ağı',mizac:'teknokrasi',origin:'standart',ethics:['mat:2','mil:-1'],civics:['sinyal_avci']},1]]);
     await instrument(H,true);await instrument(Bp,false);
-    await Bp.evaluate(()=>{UI.openDiplo();});await H.evaluate(()=>MP1Host.host.local({kind:'speed',value:4}));
+    await Bp.evaluate(p=>{if(p==='council')UI.openCouncil();else UI.openDiplo();},PANE);await H.evaluate(()=>MP1Host.host.local({kind:'speed',value:4}));
     /* oyun olayları pencere açıp oyunu duraklatabilir (tek oyunculu davranış): ölçüm penceresinde pencereler kapatılır, hız yeniden istenir */
     const drive=async m=>{for(;;){const st=await H.evaluate(m=>{const md=document.getElementById('modal');if(md&&!md.classList.contains('hidden'))UI.closeModal();
         if(G.speed<4)MP1Host.host.local({kind:'speed',value:4});return {done:G.day>=m*30||!!G.over};},m);
       await Bp.evaluate(()=>{const md=document.getElementById('modal');if(md&&!md.classList.contains('hidden'))UI.closeModal();if(!document.getElementById('diploPane').classList.contains('show'))UI.openDiplo();});
+      if(PANE==='council')await Bp.evaluate(()=>{if(document.getElementById('diploPane')._surfaceKey!=='council')UI.openCouncil();});
       if(st.done)return;await H.waitForTimeout(3000);}};
     /* hızlı ilerletme: host simülasyonu sayfa içinde ölçüm noktasının 2 ay öncesine kadar (PERF.1 mp-host adımları + her gün yayın;
        monthTick host sarmalayıcısıyla observeHumans çağırır; misafir aynaları alır). Sonra 2 oyun ayı gerçek döngü en yüksek hızda ölçülür. */
