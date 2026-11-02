@@ -102,7 +102,7 @@ let relay,px,base,tls,bH,bB,bC;
     metrics.unsupported=await Bp.evaluate(()=>MP6Stars.S.unsupported);metrics.jointPatched=await Bp.evaluate(()=>!!MP6Stars.S.jointPatched);
     for(const a of ['envoy','envoyTask','envoyRecall','compositionEdit','compositionSave','compositionAuto','mergeArmed','dirTog','bombMode','build2','jointPrepare','jointChooseTarget','jointRequest','jointCancel','fedWarRequest','ultimatum','patronage','aimSet','aimCancel','rallySet','warPauseToggle','dismissBattleReport','gobattle'])
       assert(!metrics.unsupported.includes(a),a+' still unsupported');
-    assert.equal(metrics.unsupported.length,45,JSON.stringify(metrics.unsupported));assert.equal(metrics.jointPatched,true,'joint panel bound to host data');
+    assert.equal(metrics.unsupported.length,18,JSON.stringify(metrics.unsupported));   // MP.7.2'de 45; MP.7.3 27 eylemi daha bağladı (browser-mp73 A1)assert.equal(metrics.jointPatched,true,'joint panel bound to host data');
     assert.equal(await Bp.evaluate(()=>!!document.getElementById('mp6DipBtn')||!!document.getElementById('mp3HostBtn')),false);
   });
   let ai;
@@ -165,7 +165,8 @@ let relay,px,base,tls,bH,bB,bC;
     await wait(Bp,()=>document.querySelector('#diploPane .jointOps'));
     await Bp.evaluate(()=>{const d=document.querySelector('#diploPane .jointOps');d.open=true;d.scrollIntoView();});
     /* etkin gerçek destek düğmesi (BÖLGEYİ SAVUN ya da FİLOMU DESTEKLE; etkinliği aynadaki bilinen sistem / seçili filoya bağlı) */
-    const btn=await (await Bp.waitForFunction(a=>{const b=document.querySelector('#diploPane [data-a="jointPrepare"][data-x^="'+a+':defend:"]:not([disabled])')||document.querySelector('#diploPane [data-a="jointPrepare"][data-x^="'+a+':follow:"]:not([disabled])');return b?b.dataset.x:false;},fx.ally,{timeout:30000,polling:100})).jsonValue();
+    const btn=await (await Bp.waitForFunction(a=>{const b=document.querySelector('#diploPane [data-a="jointPrepare"][data-x^="'+a+':defend:"]:not([disabled])')||document.querySelector('#diploPane [data-a="jointPrepare"][data-x^="'+a+':follow:"]:not([disabled])');return b?b.dataset.x:false;},fx.ally,{timeout:30000,polling:100})
+      .catch(async e=>{metrics.jointButtons=await Bp.evaluate(()=>[...document.querySelectorAll('#diploPane .jointOps button, #diploPane .jointOps .mini')].map(b=>(b.dataset.a||'')+'|'+(b.dataset.x||'')+'|'+(b.disabled?'dis':'')+'|'+b.textContent.trim().slice(0,80)));await shot(Bp,'a6-fail');throw e;})).jsonValue();
     metrics.jointKind=btn.split(':')[1];await shot(Bp,'a6-b-joint-panel');
     await tap(Bp,'#diploPane [data-a="jointPrepare"][data-x="'+btn+'"]');await wait(Bp,()=>document.querySelector('#modal [data-a="jointSend"]'));await shot(Bp,'a6-b-joint-confirm');
     const n0=await H.evaluate(()=>MP1Host.host.state.journal?MP1Host.host.state.journal.length:0);

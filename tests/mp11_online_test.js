@@ -69,7 +69,7 @@ test('smoke tool passes against direct TLS (wss) with a certificate',async()=>{
   const port=await freePort();
   const r2=await relay({MP1_BIND:'0.0.0.0',MP1_PORT:String(port),MP1_TLS_CERT:tls.cert,MP1_TLS_KEY:tls.key,MP1_ORIGINS:'https://localhost:'+port});try{
     const {r:res,lines}=await quiet(()=>smoke.main(['https://localhost:'+port,'--ca',tls.cert]));
-    assert.equal(res.ok,true,lines.join('\n'));assert.equal(res.res.length,10);assert.match(lines.at(-1),/SMOKE PASS 10\/10/);
+    assert.equal(res.ok,true,lines.join('\n'));assert.equal(res.res.length,11);assert.match(lines.at(-1),/SMOKE PASS 11\/11/);   // MP.7.3: /mp/version denetimi
   }finally{await stop(r2);}
 });
 test('smoke tool passes through a TLS-terminating reverse proxy (MP1_TRUST_PROXY, X-Forwarded-*), including http→https on the relay port',async()=>{

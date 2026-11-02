@@ -1,0 +1,85 @@
+{
+  "results": [
+    {
+      "name": "A1 oda, iki tasarım, başlat; misafirde desteklenmeyen eylem envanteri 68 → 45 (23 eylem bağlandı / yerel görünüm); ayrı MP paneli yok",
+      "status": "PASS",
+      "ms": 9432
+    },
+    {
+      "name": "A2 elçi: B gerçek İLİŞKİ sayfasından ELÇİ GÖNDER → elçi penceresinde görev seçer (dokunma) → host motoru uygular; yeniden açınca MEVCUT GÖREV; GERİ ÇEK → host kaydı siler",
+      "status": "PASS",
+      "ms": 4645
+    },
+    {
+      "name": "A3 filo bileşimi: B kendi filosunu seçer, BİLEŞİMİ OLUŞTUR penceresinde sayı yazar, KAYDET (dokunma) → host setFleetTemplate; OTOMATİK TAKVİYE düğmesi → host açar/kapatır",
+      "status": "PASS",
+      "ms": 2698
+    },
+    {
+      "name": "A4 savaş filolarını birleştir: B'nin aynı sistemde iki savaş filosu (fikstür) → sistem panelindeki \"SAVAŞ FİLOSUNU BİRLEŞTİR\" (dokunma) → host MP.6.1 merge komutu",
+      "status": "PASS",
+      "ms": 1257
+    },
+    {
+      "name": "A5 koloni otomasyonu: B kendi gezegeninin OTOMATİK İNŞAYI AÇ / KAPAT düğmesi (dokunma) → host col.auto; bombardıman kipi gerçek UI.act yolundan → host",
+      "status": "PASS",
+      "ms": 587
+    },
+    {
+      "name": "A6 ortak askerî destek: B ile AI müttefik aynı savaş seferinde (fikstür); B'nin İLİŞKİ sayfasındaki gerçek \"Ortak askerî koordinasyon\" bölümü host verisiyle; BÖLGEYİ SAVUN → TALEBİ GÖNDER → host motoru (jointRequest) değerlendirir; plan oluşursa iptal edilir",
+      "status": "PASS",
+      "ms": 2767
+    },
+    {
+      "name": "A7 yetki: B host'un filosunun bileşimini / kipini değiştiremez, host kolonisinin otomasyonunu değiştiremez, temas kurmadığı devlete elçi gönderemez (host'ta hiçbir şey değişmez)",
+      "status": "PASS",
+      "ms": 496
+    },
+    {
+      "name": "B1 host + 2: C (915×412) insan B'ye gerçek pencereden elçi gönderir → host uygular; B'nin aynasında C'nin elçi haritası yok (gizlilik); B, C'nin filosunu yönetemez",
+      "status": "PASS",
+      "ms": 23300
+    },
+    {
+      "name": "sayfa hataları yok",
+      "status": "PASS",
+      "ms": 0
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "startModal": [
+      "🛰 DANIŞMAN",
+      "",
+      "🛰 DANIŞMAN",
+      "",
+      ""
+    ],
+    "unsupported": [
+      "autoEvent",
+      "diagCopy",
+      "joinRebel",
+      "leaveRebel",
+      "mapFix",
+      "physio",
+      "restart",
+      "rollName",
+      "sandbox",
+      "sitPick",
+      "stashNote",
+      "survey",
+      "terra",
+      "toTitle",
+      "tplDel",
+      "tplLoad",
+      "tplSave",
+      "trigCrisis"
+    ],
+    "jointPatched": true,
+    "jointKind": "defend",
+    "jointFeedback": "Ret: rules:engine — Kendi stratejik savunması veya kritik filo görevi öncelikli",
+    "jointPlan": false
+  },
+  "pass": 9,
+  "fail": 0
+}

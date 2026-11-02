@@ -126,8 +126,18 @@ function build(meId,o={}){
   /* MP.6.4: oyuncuya özel haberler (host'ta o oyuncunun bakışıyla süzülmüş; host'un haber listesi girmez) — motorun Save8 haber biçimi */
   const nw=Array.isArray(o.news)?o.news.map(r=>({...J(r),empires:(r.empires||[]).map(x=>({id:pi(x.id),name:x.name}))})):[];
   const news={v:1,next:nw.reduce((n,r)=>Math.max(n,r.id+1),1),hiddenNext:1,records:nw,hidden:[]};
+  /* MP.7.3: Galaktik Konsey — kamu kurumu (tek oyunculuda oyuncu üyeliği ve oylamayı görür); kimlikler π ile. Kampanya rüşvetinin yönü /
+     gücü ve şantajın yönü gitmez (yalnız "bu üyeye teklif yapıldı" kilidi, motorun kendi düğme kuralı için); temassız devletin konuşması gitmez. */
+  const cc=G.council,council=!cc||cc.dead?null:(()=>{const m=a=>(a||[]).filter(Number.isInteger).map(piN),cv=cc.vote,cp=cc.campaign;
+    return {name:cc.name,founder:piN(cc.founder),members:m(cc.members),laws:J(cc.laws||{}),targeted:Object.fromEntries(Object.entries(cc.targeted||{}).map(([k,v])=>[k,piN(v)])),
+      treasury:cc.treasury||0,president:piN(cc.president),...(cc.permanent!==undefined&&cc.permanent!==null?{permanent:piN(cc.permanent)}:{}),terms:remapKeys(cc.terms||{}),
+      termAge:cc.termAge|0,voteIn:cc.voteIn,dead:false,byConvention:!!cc.byConvention,firstLaw:cc.firstLaw||null,pariahs:remapKeys(cc.pariahs||{}),
+      agenda:(cc.agenda||[]).map(a=>({key:a.key,backers:m(a.backers),age:a.age|0,target:piN(a.target),by:piN(a.by)})),
+      vote:cv?{key:cv.key,target:piN(cv.target),yes:m(cv.yes),no:m(cv.no),speeches:(cv.speeches||[]).filter(x=>contacted(x.id)).map(x=>({...J(x),id:piN(x.id)})),done:!!cv.done,age:cv.age|0,sponsor:piN(cv.sponsor)}:null,
+      campaign:cp?{key:cp.key,sponsor:piN(cp.sponsor),left:cp.left,bribed:Object.fromEntries(Object.keys(cp.bribed||{}).map(k=>[pi(+k),1])),
+        blackmailed:(cp.blackmailed||[]).map(b=>({id:piN(b&&b.id!==undefined?b.id:b),yon:0})),agenda:null,target:piN(cp.target),...(cp.hedefId!==undefined?{hedefId:piN(cp.hedefId)}:{}),byPlayer:cp.sponsor===meId}:null};})();
   return {v:8,cfg,day:G.day,year:G.year,month:G.month,seed:o.cosmeticSeed|0,rs:1,log:J(o.log||[]),news,...(economyHistory?{economyHistory}:{}),W:G.W,H:G.H,
-    world:{memAge:G.memAge,cncAge:G.cncAge,council:null,feds,fedUid:G.fedUid,friction:{},rebelAlliance:null,megaWatch:[],sandbox:false},
+    world:{memAge:G.memAge,cncAge:G.cncAge,council,feds,fedUid:G.fedUid,friction:{},rebelAlliance:null,megaWatch:[],sandbox:false},
     sys,emps,fl,nf:G.nextFleet};
 }
 /* MP.6.1 ekonomi geçmişi farkı: olay ve ay listeleri yalnız sona eklenir, en eskiler baştan düşer → {drop, add};

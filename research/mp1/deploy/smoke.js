@@ -2,7 +2,7 @@
 /* STARS MP.1 relay dağıtım smoke testi.
    Kullanım: node research/mp1/deploy/smoke.js https://stars.ornek-alan.tr [--ca sertifika.pem] [--http-redirect]
    Yalnız okuma + kısa ömürlü bir test odası açar ve kapatır; hız sınırlarını zorlamaz.
-   Doğrular: /healthz, HSTS, oyun sayfası + MP betikleri, runtime baytları = RELEASE-MANIFEST,
+   Doğrular: /healthz, /mp/version (MP.7.3: dağıtılan MP dosyaları bu ağaçla aynı mı), HSTS, oyun sayfası + MP betikleri, runtime baytları = RELEASE-MANIFEST,
    misafir sayfası CSP, WSS ile oda kurma/katılma/iletme, anahtarın URL'de olmaması,
    yanlış host anahtarı ve yabancı Origin reddi, oda kapatma, (isteğe bağlı) http→https. */
 const fs=require('fs'),path=require('path'),http=require('http'),https=require('https'),crypto=require('crypto');
@@ -20,6 +20,13 @@ async function main(argv){
   await check('runtime dosyaları RELEASE-MANIFEST ile bayt bayt aynı (index.html hariç, enjekte)',async()=>{const m=JSON.parse(fs.readFileSync(path.join(ROOT,'RELEASE-MANIFEST.json')));let n=0;
     for(const [f,h] of Object.entries(m.files)){if(f==='index.html')continue;const r=await get('/'+f);must(r.status===200,f+' '+r.status);must(crypto.createHash('sha256').update(r.body).digest('hex')===(h.sha256||h),f+' farklı');n++;}return n+' dosya, build '+m.build;});
   await check('misafir sayfası /mp/join ve sıkı CSP',async()=>{const r=await get('/mp/join?code=ABCD-EFGH');must(r.status===200,'durum '+r.status);must(/connect-src 'self'/.test(r.h['content-security-policy']||''),'CSP');});
+  /* MP.7.3: dağıtım doğrulaması — sunulan MP dosyaları bu çalışma ağacıyla aynı mı (eski imaj / eski dal tespit edilir) */
+  await check('sürüm işareti /mp/version: MP sürümü, oyun build\'i ve MP dosyaları bu çalışma ağacıyla aynı',async()=>{const r=await get('/mp/version');must(r.status===200,'durum '+r.status+' (eski dağıtım?)');
+    const v=JSON.parse(r.body.toString()),m=JSON.parse(fs.readFileSync(path.join(ROOT,'RELEASE-MANIFEST.json')));must(v.build===m.build,'build '+v.build+' ≠ '+m.build);
+    const local={'mp-core.js':'research/mp0/mp-core.js','relay.js':'research/mp1/server/relay.js','mp1-host.js':'research/mp1/client/mp1-host.js','join.js':'research/mp1/client/join.js',
+      'mirror.js':'research/mp6/mirror.js','guest-stars.js':'research/mp6/client/guest-stars.js','mp71-dip.js':'research/mp71/client/mp71-dip.js','mp7-setup.js':'research/mp7/client/mp7-setup.js'};
+    for(const [k,f] of Object.entries(local))must(v.files[k]===crypto.createHash('sha256').update(fs.readFileSync(path.join(ROOT,f))).digest('hex').slice(0,12),k+' farklı (eski dağıtım ya da farklı dal)');
+    return v.mp+' · '+v.build;});
   await check('geliştirme uç noktaları kapalı (/mp/stats 404)',async()=>{const r=await get('/mp/stats');must(r.status===404,'durum '+r.status);});
   if(argv.includes('--http-redirect'))await check('http → https yönlendirmesi',async()=>{const u=new URL(base);u.protocol='http:';u.port='';const r=await get('/mp/join?code=X',u);
     must([301,308].includes(r.status)&&String(r.h.location).startsWith('https://'),'durum '+r.status+' '+r.h.location);});

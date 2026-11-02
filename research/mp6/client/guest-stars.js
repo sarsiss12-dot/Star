@@ -63,7 +63,11 @@ const VIEW=new Set(['tab','full','cameraReset','cameraFocus','home','fit','topSt
      tekil gemi nişangâhı, eski toplanma düğmesi (yalnız bilgi), savaş bildirimi duraklatma tercihi, savaş raporunu gizleme */
   'envoy','compositionEdit','jointPrepare','jointChooseTarget','aimSet','aimCancel','rallySet','warPauseToggle','dismissBattleReport','gobattle',
   /* MP.7.2 — motor işlevi MP komutuna çevrilen gerçek düğmeler */
-  'envoyTask','envoyRecall','compositionSave','compositionAuto','build2','jointRequest','jointCancel','fedWarRequest','ultimatum','patronage']);
+  'envoyTask','envoyRecall','compositionSave','compositionAuto','build2','jointRequest','jointCancel','fedWarRequest','ultimatum','patronage',
+  /* MP.7.3 — Galaktik Konsey (pencere / tasarı seçimi yerel; son çağrılar motor işlevi sarmalayıcısıyla host komutuna) */
+  'cncPane','billPick','bill','billTarget','cncFound','cncJoin','cncLeave','veto','permanent','throneBuild','reform','bribe','blackmail',
+  /* MP.7.3 — siyasi entrikalar ve yıkıcı savaş (fısıltı seçimi, Panoptikon hedef kipi, onay pencereleri yerel) */
+  'bmGo','fundSep','panoptRetarget','revolt','revoltConfirm','whisperMenu','whisperPick','whisperBlame','whisperGo','devour','devourConfirm','colFire']);
 /* MP.6.1 — UI.act kapısında doğrudan MP komutuna çevrilen düğmeler (tek oyunculu kodları dünyayı yerelde değiştirir) */
 const sel=()=>View.sel&&View.sel.e===0&&G.fleets.includes(View.sel)?View.sel:null;
 const ACT={
@@ -95,8 +99,14 @@ const ACT={
   /* MP.7.2: motor işlevi olmayan tek oyunculu düğmeler → host komutu (aynı işlem host'ta, yalnız kendi nesnesi) */
   mergeArmed:x=>{const f=G.fleets.find(q=>q.e===0&&q.sys===+x&&q.ships.length&&isArmed(q));return f?send({kind:'merge',fleet:f.id}):toast('Birleşecek savaş filosu yok',true);},   // MP.6.1 'merge' (aynı gruptaki savaş filoları)
   dirTog:x=>{const [s,p]=String(x).split(':').map(Number);return send({kind:'colAuto',sys:s,planet:p});},
+  /* MP.7.3: konsey oyu (tek oyunculu cncYes / cncNo devlet 0'ı doğrudan oy listesine yazar) → 'councilVote'; belirteç = oylanan yasa + hedef */
+  cncYes:()=>councilVote(true),cncNo:()=>councilVote(false),
   bombMode:x=>{const [f,m]=String(x).split(':');return send({kind:'bombMode',fleet:+f,mode:String(m)});}
 };
+function councilVote(yes){const c=G.council,v=c&&c.vote;if(!v||v.done)return toast('Açık konsey oylaması yok.',true);
+  const tok=v.key+':'+(v.target===null||v.target===undefined?'':real(v.target)),cid=send({kind:'councilVote',token:tok,yes:!!yes});
+  if(cid)waits[cid]=res=>toast(res.status==='ok'?'Oyun host\'ta kaydedildi ('+(yes?'EVET':'HAYIR')+').':'Host reddetti: '+why(res),res.status!=='ok');
+  try{UI.closeModal();UI.openCouncil();}catch{}return cid;}
 function respond(yes){const c=S.counter;const cid=send({kind:'respond',offer:c.offer,action:yes?'accept':'reject'});
   if(cid)waits[cid]=res=>toast(res.status==='ok'?(yes?'Teklif kabul edildi — host uyguladı.':'Teklif reddedildi.'):'Host reddetti: '+why(res),res.status!=='ok');
   S.counter=null;try{UI.dealCounter=null;UI.closeDiplo?UI.closeDiplo():doc.getElementById('diploPane').classList.remove('show');}catch{}}
@@ -214,6 +224,32 @@ function gate(){
      ardından gelen aynı hedefli yerel orderMove ayrıca 'move' göndermez */
   wrap('claimColony',(o,f,sys,pi)=>{if(!f||f.e!==0||!sys||!sys.planets[pi])return false;const cid=send({kind:'colonize',sys:sys.id,planet:sys.planets[pi].i,fleet:f.id});
     if(cid)S.aimCol=f.id+':'+sys.id;return !!cid;});
+  /* MP.7.3 — Galaktik Konsey: gerçek Konsey ekranının motor işlevleri → host komutları (kural, maliyet, zar host'ta) */
+  wrap('foundCouncil',(o,e)=>mine(e)?r({kind:'councilFound'}):o(e));
+  wrap('joinCouncil',(o,e)=>mine(e)?!!hostSays({kind:'councilJoin'},()=>'Konseye katıldın; host uyguladı.'):o(e));
+  wrap('leaveCouncil',(o,e)=>mine(e)?!!hostSays({kind:'councilLeave'},()=>'Konseyden ayrıldın; host uyguladı.'):o(e));
+  wrap('proposeBill',(o,e,key,t)=>mine(e)?r({kind:'bill',key:String(key),target:Number.isInteger(t)?real(t):null}):o(e,key,t));
+  wrap('guardianVeto',(o,e,key)=>mine(e)?r({kind:'veto',law:String(key)}):o(e,key));
+  wrap('claimPermanent',(o,e)=>{if(!mine(e))return o(e);return hostSays({kind:'permanent'},res=>res.extra&&res.extra.gecti?'👑 DAİMİ HÜKÜMDARLIK İLAN EDİLDİ':'Konsey daimi hükümdarlığı reddetti.')?{ok:true}:{ok:false,why:'Host bağlı değil.'};});
+  wrap('rebuildThrone',(o,e,sys)=>mine(e)&&sys?r({kind:'throne',sys:sys.id}):o(e,sys));
+  wrap('doReform',(o,e,axis,dir)=>mine(e)?r({kind:'reform',axis:String(axis),dir:+dir>0?1:-1}):o(e,axis,dir));
+  wrap('bribeVote',(o,e,t,miktar,yon)=>mine(e)&&t?r({kind:'bribe',target:real(t.id),yon:yon==='no'?'no':'yes'}):o(e,t,miktar,yon));
+  wrap('blackmailVote',(o,e,t,yon)=>{if(!mine(e)||!t)return o(e,t,yon);const cid=send({kind:'blackmail',target:real(t.id),yon:yon==='no'?'no':'yes'});if(!cid)return {ok:false,why:'Host bağlı değil.'};
+    waits[cid]=res=>toast(res.status==='ok'?(res.extra.caught?'☠ ':'🕵 ')+res.extra.msg:'Host reddetti: '+why(res),res.status!=='ok'||res.extra.caught);
+    return {ok:true,caught:false,msg:'Şantaj host\'a gönderildi; sonuç bildirim olarak gelecek.'};});
+  /* MP.7.3 — siyasi entrikalar: zar ve sonuç yalnız host'ta; misafir ekranı yalnız gönderildiğini gösterir, sonuç host'tan */
+  wrap('blackmailLeader',(o,e,t,lid)=>{if(!mine(e)||!t)return o(e,t,lid);const cid=send({kind:'bmLeader',target:real(t.id),leader:+lid});if(!cid)return {ok:false,why:'Host bağlı değil.'};
+    waits[cid]=res=>toast(res.status==='ok'?(res.extra.basarili?'Lider şantajı başarılı.':res.extra.ifsa?'☠ Lider şantajı ifşa oldu.':'Ajanlarımız belge bulamadı.'):'Host reddetti: '+why(res),res.status!=='ok'||!res.extra.basarili);
+    return {ok:true,basarili:true};});
+  wrap('fundSeparatists',(o,e,v)=>mine(e)&&v?r({kind:'fundSep',target:real(v.id)}):o(e,v));
+  wrap('panopticonLock',(o,e,from,to)=>mine(e)?r({kind:'panopt',from:+from,to:+to}):o(e,from,to));
+  wrap('playerRevolt',o=>S.on?r({kind:'revolt'}):o());
+  wrap('playerWhisper',(o,a,b,c)=>{if(!a||!b)return o(a,b,c);const cid=send({kind:'whisper',a:real(a.id),b:real(b.id),blame:c?real(c.id):null});if(!cid)return {ok:false,why:'Host bağlı değil.'};
+    waits[cid]=res=>toast(res.status==='ok'?(res.extra.ifsa?'☠ Fısıltı ifşa oldu.':res.extra.basari?'Fısıltı işe yaradı.':'Fısıltı tutmadı.'):'Host reddetti: '+why(res),res.status!=='ok'||res.extra.ifsa);
+    return {ok:true,basari:false,ifsa:false,cost:WHISPER_COST,msg:'Fısıltı host\'a gönderildi; sonuç bildirim olarak gelecek'};});
+  /* MP.7.3 — yıkıcı savaş: onay penceresi yerel (motorun kendi önizlemesi); son çağrı host'ta yeniden denetlenir */
+  wrap('devourPlanet',(o,e,sys,pl)=>mine(e)&&sys&&pl?r({kind:'devour',sys:sys.id,planet:pl.i}):o(e,sys,pl));
+  wrap('colossusFire',(o,f,pl,mod)=>f&&f.e===0?!!hostSays({kind:'colFire',fleet:f.id,mod:String(mod)},()=>'Kolossus ateşlendi; host uyguladı.'):o(f,pl,mod));
   /* MP.6.2 — savaş ilanı: gerçek önizleme penceresi host'un önizlemesiyle (warQuote) çizilir; erişim ve son karar host'ta.
      declareWar yalnız hedefi işaretler; ardından gelen setWarGoal hedef+amaçla TEK 'war' komutu gönderir. */
   wrap('warDeclarationPreview',(o,actor,target,key)=>mine(actor)&&target&&S.warQuote[target.id+':'+key]?S.warQuote[target.id+':'+key]:o(actor,target,key));
@@ -450,6 +486,13 @@ function inboxOffers(){
     const strip=l=>l.map(({l:_,...i})=>i);G.inboxUid=(G.inboxUid||0)+1;
     G.inbox.push({kind:'aideal',data:{from:local(o.from),to:0,give:strip(o.give),want:strip(o.want),born:o.born,expires:o.expires},ico:'📜',cls:'sci',pause:false,uid:G.inboxUid,born:o.born,
       title:(o.round>1?'Karşı teklif':'Teklif')+' — '+o.fn,sub:'Çok oyunculu teklif · '+(o.want.map(i=>i.l).join(', ')||'anlaşma')+' istiyor',key:'mp71:'+o.id});changed=true;}
+  /* MP.7.3: açık konsey oylamasında oy hakkı olan misafire host'taki gibi gerçek 'KONSEY OYLAMASI' kartı (dokununca Konsey ekranı) */
+  const cv=G.council&&G.council.vote,cm=G.council&&G.council.members||[];
+  const canVote=cv&&!cv.done&&cm.includes(0)&&!cv.yes.includes(0)&&!cv.no.includes(0)&&!(typeof isVassal==='function'&&isVassal(G.p)&&cm.includes(G.p.overlord));
+  const ckey=cv?'mp73cnc:'+cv.key+':'+(cv.target===null||cv.target===undefined?'':cv.target):null;
+  const nb=G.inbox.length;G.inbox=G.inbox.filter(n=>!(typeof n.key==='string'&&n.key.startsWith('mp73cnc:'))||canVote&&n.key===ckey);if(G.inbox.length!==nb)changed=true;
+  if(canVote&&!G.inbox.some(n=>n.key===ckey)){G.inboxUid=(G.inboxUid||0)+1;const R=typeof RESOLUTIONS!=='undefined'&&RESOLUTIONS[cv.key];
+    G.inbox.push({kind:'cncvote',data:cv.key,ico:'🌐',cls:'sci',pause:false,uid:G.inboxUid,born:G.day,title:'KONSEY OYLAMASI',sub:R?R.n:cv.key,key:ckey});changed=true;}
   if(changed)try{UI.drawInbox();UI.topbar();}catch{}
   /* MP.6.2: statüko barışı teklifleri (insan ya da AI → bu oyuncu) → gerçek gelen kutusunda 'sqOffer' */
   for(const q of v.dip.sq||[]){if(q.to!==me||q.status!=='pending'||!G.emps[local(q.from)])continue;
@@ -475,10 +518,16 @@ function start(){
 const V=window.MP1View,esc=V.esc;let chipEl=null,dipEl=null,dipUI=null,polUI=null,dipSeg='trade';const waits={};
 function chip(text,good){
   if(!chipEl){chipEl=doc.createElement('div');chipEl.id='mp1Mini';chipEl.className='mp1-mini mp6-mini';(doc.getElementById('app')||doc.body).appendChild(chipEl);   // oyunun kök kabında (STARS katman bağlamı)
-    chipEl.addEventListener('click',e=>{if(e.target.closest('[data-g6="dip"]'))dipOpen(true);});}
-  if(text!==undefined){const n=dipCount();const h='<div class="mp3-minirow"><span class="mp1-mini-h mp6-conn '+(good?'ok':'bad')+'" id="mp6Conn"><b>ÇOK OYUNCULU</b> · '+esc(text)+'</span>'+
-      (window.MP3Dip&&window.MP7Legacy?'<button class="mp1-btn mp3-hostbtn" data-g6="dip" id="mp6DipBtn">DİPLOMASİ'+(n?' <i class="mp3-badge">'+n+'</i>':'')+'</button>':'')+'</div>';if(chipEl.innerHTML!==h)chipEl.innerHTML=h;
-    if(window.MP61)MP61.status(text,good);}
+    chipEl.addEventListener('click',e=>{if(e.target.closest('[data-g6="dip"]'))dipOpen(true);
+      /* MP.7.3: çubuğa dokununca telefonda görünür tanı satırı (sürüm · bağlantı · aşama · son hata kodu); jeton / oda anahtarı yok */
+      else if(e.target.closest('#mp6Conn')){S.diag=!S.diag;chip(S.chipText,S.chipGood);}});}
+  if(text!==undefined){S.chipText=text;S.chipGood=good;}
+  const diag=V.verLine()+' · '+(online()?'host bağlı':'host yok')+(S.boot.stage?' · aşama: '+S.boot.stage:'')+' · son hata: '+(S.lastErr||'yok');
+  if(S.chipText!==undefined){const n=dipCount();const h='<div class="mp3-minirow"><span class="mp1-mini-h mp6-conn '+(S.chipGood?'ok':'bad')+'" id="mp6Conn" role="button" aria-expanded="'+!!S.diag+'"><b>ÇOK OYUNCULU</b> · '+esc(S.chipText)+'</span>'+
+      (window.MP3Dip&&window.MP7Legacy?'<button class="mp1-btn mp3-hostbtn" data-g6="dip" id="mp6DipBtn">DİPLOMASİ'+(n?' <i class="mp3-badge">'+n+'</i>':'')+'</button>':'')+'</div>'+
+      (S.diag?'<div class="mp1-sub" id="mpVer">'+esc(diag)+'</div>':'');if(chipEl.innerHTML!==h)chipEl.innerHTML=h;
+    if(text!==undefined&&window.MP61)MP61.status(text,good);}
+  chipEl.title=diag;
   chipEl.style.display=S.started?'':'none';
 }
 const view=()=>S.J&&S.J.game.view,day=()=>((S.J&&S.J.game.clock)||{}).day,online=()=>!!(S.J&&S.J.hostOnline);
@@ -521,6 +570,8 @@ function update(statusHtml){
   for(;S.seenResults<J.results.length;S.seenResults++){const r=J.results[S.seenResults];
     if(waits[r.cid]){const w=waits[r.cid];delete waits[r.cid];try{w(r);}catch{}continue;}   // MP diplomasi paneli / gelen kutusu kendi sonucunu gösterir
     if(r.status!=='ok'&&r.code!=='rules:same')toast('Host reddetti: '+why(r),true);}
+  /* MP.7.3 tanı: son reddedilen komutun KODU (içerik / jeton yok) — MP çubuğunun ipucunda */
+  for(let i=J.results.length-1;i>=0&&i>=J.results.length-5;i--){const r=J.results[i];if(r.status!=='ok'&&r.code!=='rules:same'){S.lastErr=r.code;break;}}
   if(dipEl)dipTick(false);
   /* MP.6.2: bekleyen teklif G'yi değiştirmez → host yeni ayna göndermeyebilir; MP.3 'dip' görünümü değişince gerçek gelen
      kutusu ayna beklemeden güncellenir (capture tekrar eden kaydı yeniden eklemez). */
@@ -543,7 +594,7 @@ function bootStage(){const J=S.J;if(!J)return null;if(S.started)return 'ready';
 function bootHtml(){
   const b=S.boot,cur=bootStage(),idx=BOOT_STEPS.findIndex(x=>x[0]===cur),J=S.J,live=J&&J.ws&&J.ws.readyState===1&&J.hostOnline;
   const rows=BOOT_STEPS.map(([k,n],i)=>'<li class="'+(i<idx?'ok':i===idx?(b.failed?'bad':'now'):'')+'">'+(i<idx?'✓ ':i===idx?(b.failed?'✗ ':'… '):'· ')+n+'</li>').join('');
-  return '<div class="mp1-card mp7-boot" id="mp7Boot"><b>OYUN BAŞLIYOR</b><ol class="mp7-steps">'+rows+'</ol>'+
+  return '<div class="mp1-card mp7-boot" id="mp7Boot"><b>OYUN BAŞLIYOR</b><ol class="mp7-steps">'+rows+'</ol><div class="mp1-sub" id="mpVer">'+esc(V.verLine())+'</div>'+
     (b.failed?'<div class="mp1-status bad" id="mp7BootErr">'+esc(b.err||'Host\'tan galaksi verisi alınamadı.')+'</div><button class="mp1-btn pri" data-g7="retry" id="mp7Retry">YENİDEN DENE</button>':
       b.err?'<div class="mp1-status bad" id="mp7BootErr">'+esc(b.err)+' — yeniden isteniyor…</div>':
       !live&&J&&J.screen==='game'?'<div class="mp1-status bad">Bağlantı bekleniyor; geri gelince aynı devletine dönersin.</div>':'')+'</div>';
