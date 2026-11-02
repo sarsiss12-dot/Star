@@ -90,7 +90,7 @@ let relay,px,base,tls,bH,bB;
     for(const [p,sel,n] of [[H,'#mp1Mini [data-g="toggle"]','host'],[Bp,'#mp6Conn','B']]){
       await wait(p,()=>{const m=document.getElementById('mp1Mini');return m&&m.parentNode&&m.parentNode.id==='tools';});
       const r=await p.evaluate(()=>{const R=e=>e&&e.getBoundingClientRect(),m=R(document.getElementById('mp1Mini')),hit=(a,b)=>a&&b&&a.width&&b.width&&a.x<b.x+b.width&&b.x<a.x+a.width&&a.y<b.y+b.height&&b.y<a.y+a.height;
-        const others=[...document.querySelectorAll('#tools .tool, #timepod, #topbar, #convoyToggle')].filter(e=>!e.contains(document.getElementById('mp1Mini'))&&e.getClientRects().length);
+        const others=[...document.querySelectorAll('#tools .tool, #timepod, #topbar, #convoyToggle')].filter(e=>!e.contains(document.getElementById('mp1Mini'))&&e.getClientRects().length&&getComputedStyle(e).visibility==='visible'&&!(e.closest('.grpOut')&&!e.closest('.grpOut').classList.contains('open')));   // kapalı açılır grup görünmez
         return {m:[m.x,m.y,m.width,m.height],overlap:others.filter(e=>hit(m,R(e))).map(e=>e.id||e.className),inView:m.y>=0&&m.bottom<=innerHeight};});
       metrics['dock_'+n]=r;assert.deepEqual(r.overlap,[],n+' '+JSON.stringify(r));assert.equal(r.inView,true);await shot(p,'a1-'+n+'-dock');
       await tap(p,sel);await wait(p,()=>{const m=document.getElementById('mp1Mini');return m.parentNode.id!=='tools'&&!m.classList.contains('mp74-compact');});
@@ -105,7 +105,7 @@ let relay,px,base,tls,bH,bB;
     await Bp.evaluate(()=>{UI.closeDiplo?UI.closeDiplo():document.getElementById('diploPane').classList.remove('show');});
   });
   await test('A3 savaş / barış: misafir AI ile savaşta; AI barış teklifi misafirin kartına gelir; KABUL (dokunma) → host\'ta savaş biter; AKTİF SAVAŞLAR üst sayaçla aynı sayıyı gösterir',async()=>{
-    const x=await H.evaluate(()=>{const a=G.emps[1];const o=G.emps.find(e=>e.ai&&!e.dead&&!e.wild&&a.contact[e.id]&&!a.war[e.id]);declareWar(a,o);MP1Host.host.publish();return o.id;});
+    const x=await H.evaluate(()=>{const a=G.emps[1];const o=G.emps.find(e=>e.ai&&!e.dead&&!e.wild&&!a.war[e.id]&&!(a.ally&&a.ally[e.id]));a.contact[o.id]=o.contact[a.id]=true;declareWar(a,o);MP1Host.host.publish();return o.id;});
     await wait(Bp,()=>UI.topStatusItems().wars>=1);
     const L=await Bp.evaluate(()=>{UI.act('activeWars');return {n:UI.activeWarsList().length,top:UI.topStatusItems().wars,html:document.getElementById('modal').textContent};});
     metrics.activeWars=L;assert.equal(L.n,L.top);assert.match(L.html,/AKTİF SAVAŞLAR/);await shot(Bp,'a3-b-active-wars');await Bp.evaluate(()=>UI.closeModal());
@@ -123,22 +123,23 @@ let relay,px,base,tls,bH,bB;
     await tap(Bp,'#diploPane [data-a="dealAdd"][data-x="give:res"]');await tap(Bp,'#modal [data-a="pickOne"][data-x="0"]');
     await wait(Bp,()=>document.querySelector('#modal .qtySteps'));await shot(Bp,'a4-b-deal-qty');
     const sent0=await Bp.evaluate(()=>JSON.stringify(MP6Stars.S.stats.sent));
-    const v0=+(await Bp.inputValue('#dealAmountInput'));await tap(Bp,'#modal .qtyStep:text-is("+100")');await tap(Bp,'#modal .qtyStep:text-is("+10")');
+    const v0=+(await Bp.inputValue('#dealAmountInput'));await Bp.locator('#modal .qtySteps').first().locator('.qtyStep:text-is("+100")').tap();await Bp.locator('#modal .qtySteps').first().locator('.qtyStep:text-is("+10")').tap();
     const v1=+(await Bp.inputValue('#dealAmountInput')),max=+(await Bp.getAttribute('#dealAmountInput','max'));
     assert.equal(v1,Math.min(max,v0+110));assert.notEqual(await Bp.evaluate(()=>document.activeElement&&document.activeElement.id),'dealAmountInput','keyboard not opened');
-    await tap(Bp,'#modal .qtyStep:text-is("MAKS")');assert.equal(+(await Bp.inputValue('#dealAmountInput')),max);
-    await tap(Bp,'#modal .qtyStep:text-is("SIFIR")');assert.equal(+(await Bp.inputValue('#dealAmountInput')),+((await Bp.getAttribute('#dealAmountInput','min'))||0));
+    await Bp.locator('#modal .qtySteps').first().locator('.qtyStep:text-is("MAKS")').tap();assert.equal(+(await Bp.inputValue('#dealAmountInput')),max);
+    await Bp.locator('#modal .qtySteps').first().locator('.qtyStep:text-is("SIFIR")').tap();assert.equal(+(await Bp.inputValue('#dealAmountInput')),+((await Bp.getAttribute('#dealAmountInput','min'))||0));
     assert.equal(await Bp.evaluate(()=>JSON.stringify(MP6Stars.S.stats.sent)),sent0,'steppers send nothing');
     await Bp.evaluate(()=>{UI.closeModal();document.getElementById('diploPane').classList.remove('show');});
     const fid=await H.evaluate(()=>G.fleets.find(f=>f.e===0&&f.ships.length&&!f.federal).id);
     await H.evaluate(id=>{View.sel=G.fleets.find(f=>f.id===id);UI.tab('filo');UI.refresh();},fid);await tap(H,'[data-a="compositionEdit"][data-x="'+fid+'"]');
     await wait(H,()=>document.querySelector('#modal .qtySteps'));const first=await H.evaluate(()=>document.querySelector('#modal input[id^="fc-"]').id);
-    const steps=await H.evaluate(id=>[...document.getElementById(id).closest('.box').querySelectorAll('.qtyStep')].map(b=>b.textContent),first);metrics.fleetSteps=steps;
+    const steps=await H.evaluate(()=>[...document.querySelector('#modal .qtySteps').querySelectorAll('.qtyStep')].map(b=>b.textContent));metrics.fleetSteps=steps;
     assert.deepEqual(steps.slice(0,5),['SIFIR','−50','−10','+10','+50']);
-    const c0=+(await H.inputValue('#'+first));await H.locator('#'+first).locator('xpath=ancestor::div[contains(@class,"box")]').locator('.qtyStep:text-is("+10")').tap();
+    const c0=+(await H.inputValue('#'+first));await H.locator('#modal .qtySteps').first().locator('.qtyStep:text-is("+10")').tap();
     assert.equal(+(await H.inputValue('#'+first)),c0+10);await shot(H,'a4-host-fleet-qty');await H.evaluate(()=>UI.closeModal());
   });
   await test('A5 karar bekleyen olay kaydırılınca gizlenir (silinmez), ☰ durum listesinde kalır ve oradan aynı karar penceresi açılır',async()=>{
+    await H.evaluate(()=>{UI.closeModal();document.getElementById('diploPane').classList.remove('show');});
     await H.evaluate(()=>UI.notify({kind:'criswarn',data:2400,ico:'🔮',pause:false,title:'KRİZ KEHANETİ',sub:'deneme',key:'cw:t75'}));
     const u=await H.evaluate(()=>G.inbox.find(n=>n.key==='cw:t75').uid);await swipe(H,cardSel(u),230);
     await wait(H,u=>!document.querySelector('#inbox .nCard[data-x="'+u+'"]')&&G.inbox.find(n=>n.uid===u).hidden,u);
