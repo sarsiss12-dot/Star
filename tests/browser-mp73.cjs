@@ -136,7 +136,9 @@ let relay,px,base,tls,bH,bB,bC;
     const key=await (await B2.waitForFunction(()=>{const n=(G.inbox||[]).find(n=>typeof n.key==='string'&&n.key.startsWith('mp73cnc:'));return n?n.key:false;},undefined,{timeout:30000,polling:100})).jsonValue();
     await openCard(B2,key).catch(()=>{});await wait(B2,()=>{const b=document.querySelector('#diploPane [data-a="cncYes"]'),r=b&&b.getBoundingClientRect();return r&&r.x>=0&&r.right<=innerWidth;});   // panel kayarak açılır
     await B2.waitForTimeout(400);await shot(B2,'b1-b-council-vote');
-    const L=await layout(B2,['#diploPane [data-a="cncYes"]','#diploPane [data-a="cncNo"]']);assert.deepEqual(L.bad,[],JSON.stringify(L));
+    /* layout() düğmeyi scrollIntoView ile getirir; ilk okuma kaydırma sürerken olabilir → yerleşince yeniden ölç (en çok 3 kez) */
+    let L;for(let i=0;i<3;i++){L=await layout(B2,['#diploPane [data-a="cncYes"]','#diploPane [data-a="cncNo"]']);if(!L.bad.length)break;metrics.b1Relayout=(metrics.b1Relayout|0)+1;await B2.waitForTimeout(500);}
+    assert.deepEqual(L.bad,[],JSON.stringify(L));
     await tap(B2,'#diploPane [data-a="cncYes"]');await wait(H2,()=>G.council.vote&&G.council.vote.yes.includes(1));assert.equal((await cv()).done,false,'still open for C and host');
   });
   await test('B2 C (915×412) HAYIR verir; oylama host oy verene kadar açık; host kendi Konsey ekranından EVET → motor kapatır; tekrar oy reddedilir',async()=>{
