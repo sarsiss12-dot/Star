@@ -54,7 +54,9 @@ const VIEW=new Set(['tab','full','cameraReset','cameraFocus','home','fit','topSt
   /* MP.6.4 — Galaktik Borsa (seçim görünüm, TAKAS ET → 'market') */
   'mktTrade',
   /* MP.6.4 — kalan filo / koloni işlemleri (motor işlevi MP komutuna iner) */
-  'reinf','shipmentMenu','shipmentApply','shipCancel','shipCancelAll','shipCancelConfirm','rallySysSet','rallySysClear','rallySysCancel','terraform','habitat','ldrAssign','ldrHire']);
+  'reinf','shipmentMenu','shipmentApply','shipCancel','shipCancelAll','shipCancelConfirm','rallySysSet','rallySysClear','rallySysCancel','terraform','habitat','ldrAssign','ldrHire',
+  /* MP.7.1 — Ekonomi Merkezi görünüm eylemleri (runtime economy-ui.js UI.act sarmalayıcısında; kaynak seçimi, süzgeç, kendi sistemine / filosuna git) */
+  'ecoPick','ecoFilter','ecoSystem','ecoFleet']);
 /* MP.6.1 — UI.act kapısında doğrudan MP komutuna çevrilen düğmeler (tek oyunculu kodları dünyayı yerelde değiştirir) */
 const sel=()=>View.sel&&View.sel.e===0&&G.fleets.includes(View.sel)?View.sel:null;
 const ACT={

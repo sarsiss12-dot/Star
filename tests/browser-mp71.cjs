@@ -102,7 +102,10 @@ let relay,px,base,tls,bH,bB,bC;
     assert.equal(await Bp.evaluate(()=>G.p.name),'Saf Akıl Ağı');await shot(H,'a1-host-map');await shot(Bp,'a1-b-map');
     /* diğer paneller denetimi: misafirde MP komutu olmayan (soluk + uyarı) gerçek STARS eylemleri — envanter (MULTIPLAYER-MP71-SONUC.md) */
     await wait(Bp,()=>MP6Stars.S.unsupported&&MP6Stars.S.unsupported.length>0&&document.getElementById('mp6Disabled').textContent.length>0);
-    metrics.unsupported=await Bp.evaluate(()=>MP6Stars.S.unsupported);assert(!metrics.unsupported.includes('dealSend')&&!metrics.unsupported.includes('tab'),'view/supported actions are not dimmed');metrics.hooks=await Bp.evaluate(()=>[...MP6Stars.S.hooks].sort());
+    metrics.unsupported=await Bp.evaluate(()=>MP6Stars.S.unsupported);assert(!metrics.unsupported.includes('dealSend')&&!metrics.unsupported.includes('tab'),'view/supported actions are not dimmed');
+    /* Ekonomi Merkezi görünüm eylemi misafirde çalışır (engellenmez): kaynak seçimi */
+    const eco=await Bp.evaluate(()=>{const b0=JSON.stringify(MP6Stars.S.stats.blocked);UI.act('globalPane','ekonomi');UI.act('ecoPick','ene');const r={res:EconomyUI.resource,blocked:JSON.stringify(MP6Stars.S.stats.blocked)===b0};UI.act('closeDiplo');return r;});
+    assert.deepEqual(eco,{res:'ene',blocked:true});metrics.hooks=await Bp.evaluate(()=>[...MP6Stars.S.hooks].sort());
   });
   let o1;
   if(process.env.MP71_STOP==='A1')throw Error('stop');
