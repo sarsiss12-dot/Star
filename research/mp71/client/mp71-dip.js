@@ -31,7 +31,7 @@ function stateText(o,all){const s=stateOf(o);
   if(s==='countered'){const c=all.find(x=>x.prev===o.id);if(c&&c.from!==o.from)return 'Karşı teklif geldi'+(c.status==='pending'?' · senin yanıtın bekleniyor':' · '+(STATE[stateOf(c)]||c.status).toLowerCase());}
   return STATE[s]||s;}
 function why(res){const d=res&&res.detail&&res.detail.length?' — '+res.detail.slice(0,2).join(' · '):'';const c=res&&res.code;
-  return (CODE[c]||(window.MP1View&&MP1View.ERR[c])||c||'işlem yapılmadı')+d;}
+  return (CODE[c]||(typeof MP1View!=='undefined'&&MP1View.ERR[c])||c||'işlem yapılmadı')+d;}
 const terms=l=>(l||[]).map(i=>i.l||(typeof dealLabel==='function'?String(dealLabel(i)).replace(/<[^>]*>/g,''):i.t)).join(', ')||'—';
 const all=()=>{try{return M.ad.offers()||[];}catch{return [];}};
 const mine=()=>{const me=M.ad.me();return all().filter(o=>o.from===me).sort((a,b)=>b.id-a.id);};
@@ -130,8 +130,8 @@ function installHost(){
   const A=M.ad;
   /* anlaşma penceresi önizlemesi: insan karşı tarafın stoğu gösterilmez (MP.3 dipGate ile aynı kural; misafirdeki gibi).
      Yalnız pencere çizilirken: motorun kendi dealQuote çağrıları (AI kararları, executeDeal) aynen. */
-  let quiet=0;const dq0=window.dealQuote;
-  window.dealQuote=function(offer){const q=dq0.apply(this,arguments);if(!quiet||!q||!offer||offer.from!==G.p.id||!A.human(offer.to))return q;return hideOther(q,G.emps[offer.to]);};
+  let quiet=0;const dq0=dealQuote;
+  dealQuote=function(offer){const q=dq0.apply(this,arguments);if(!quiet||!q||!offer||offer.from!==G.p.id||!A.human(offer.to))return q;return hideOther(q,G.emps[offer.to]);};
   const dd0=UI.drawDeal;UI.drawDeal=function(){quiet++;try{return dd0.apply(this,arguments);}finally{quiet--;if(on())dealBox();}};
   /* TEKLİFİ SUN → 'offer' (karşı teklif bağlamında 'counter') */
   const ds0=UI.dealSend;
@@ -167,7 +167,8 @@ function installHost(){
 }
 /* gerekçe süzgeci: karşı tarafın kendi satırları ("Ad → …") düşer, yerine tek genel satır (MP.3 dipReasons) */
 function hideOther(q,other){if(!q||!other)return q;const pre=String(other.name)+' → ',rs=(q.reasons||[]).map(String),own=rs.filter(r=>!r.startsWith(pre));
-  if(own.length===rs.length&&!(q.wantFail||[]).length)return q;return {...q,wantFail:[],reasons:own,ok:!(q.giveFail||[]).length&&!own.length};}
+  if(own.length===rs.length&&!(q.wantFail||[]).length)return q;const out=own.slice();if(own.length<rs.length)out.push('Karşı taraf bu şartları şu an karşılayamıyor');
+  return {...q,wantFail:[],reasons:out,ok:!(q.giveFail||[]).length&&!out.length};}
 /* host: teklif deposundaki kayıt ↔ gelen kutusu kaydı (aynı anahtar: DiplomaticInbox.capture'ın 'deal:' imzası + doğuş günü) */
 const keyOf=o=>'deal:'+offerSignature({from:o.from,to:0,give:o.give,want:o.want})+':'+o.born;
 function offerOfRec(rec){const me=G.p.id;return M.ad.raw().find(o=>o.to===me&&keyOf(o)===rec.key)||null;}
@@ -181,9 +182,13 @@ function sync(){
       UI.notify({kind:'aideal',data:{from:o.from,to:0,give:o.give.map(i=>({...i})),want:o.want.map(i=>({...i})),born:o.born,expires:o.expires},ico:'📜',pause:false,
         title:(o.round>1?'Karşı teklif':'Teklif')+' — '+e.name,sub:'Çok oyunculu teklif · '+(o.want.map(dealLabel).join(', ')||'anlaşma')+' istiyor',key:'mp71:'+o.id});
       r=DI.state().records.find(x=>x.key===key);if(r){M.stats.notified++;recs.set(key,r);}}
-    if(r&&r.status==='pending'&&o.status!=='pending'){const st=o.status==='invalid'&&/geri çekti/i.test(o.why||'')?'invalid':o.status;
-      r.status=Object.hasOwn(DI.states,st)?st:'invalid';r.finished=G.day;r.why=String(o.why||'').slice(0,600);if(stateOf(o)==='withdrawn')r.sub=String('Gönderen geri çekti · '+r.sub).slice(0,600);
-      G.inbox=(G.inbox||[]).filter(n=>n.uid!==(r.note&&r.note.uid));M.stats.synced++;try{UI.drawInbox();UI.topbar();}catch{}}}
+    if(o.status==='pending')continue;
+    /* kabulde motorun executeDeal'i eşleşen kaydı (findDeal) kendisi "kabul edildi" yapar; kart yine de kaldırılmalı */
+    let changed=false;
+    if(r&&r.status==='pending'){r.status=Object.hasOwn(DI.states,o.status)?o.status:'invalid';r.finished=G.day;r.why=String(o.why||'').slice(0,600);
+      if(stateOf(o)==='withdrawn')r.sub=String('Gönderen geri çekti · '+r.sub).slice(0,600);changed=true;M.stats.synced++;}
+    const n0=(G.inbox||[]).length;G.inbox=(G.inbox||[]).filter(n=>n.key!=='mp71:'+o.id&&!(r&&r.note&&n.uid===r.note.uid));
+    if(changed||G.inbox.length!==n0)try{UI.drawInbox();UI.topbar();}catch{}}
 }
 function tick(){if(!on())return;try{sync();}catch{}refreshOpen(false);}
 /* gelen kutusu kaydı bir çok oyunculu teklif mi (host: depo eşleşmesi; misafir: rec.mp) */
@@ -200,5 +205,6 @@ function attach(ad){
   if(ad.role==='guest'){const dd0=UI.drawDeal;UI.drawDeal=function(){const r=dd0.apply(this,arguments);if(on())dealBox();return r;};}
   else installHost();
 }
-window.MP71Dip={attach,tick,sync,openSent,stateOf,stateText,why,CODE,STATE,AI_REPLY,get stats(){return M.stats;},get counter(){return M.counter;},_M:M};
+const API={attach,tick,sync,openSent,stateOf,stateText,why,CODE,STATE,AI_REPLY,get stats(){return M.stats;},get counter(){return M.counter;},_M:M};
+globalThis.MP71Dip=API;if(typeof window!=='undefined')window.MP71Dip=API;
 })();

@@ -100,6 +100,8 @@ let relay,px,base,tls,bH,bB,bC;
       btn:!!document.getElementById('mp3HostBtn')||!!document.getElementById('mp6DipBtn'),panel:!!document.getElementById('mp3Host'),txt:/ÇOK OYUNCULU DİPLOMASİ/.test(document.body.innerText)}));
       assert.deepEqual(x,{map:true,btn:false,panel:false,txt:false});}
     assert.equal(await Bp.evaluate(()=>G.p.name),'Saf Akıl Ağı');await shot(H,'a1-host-map');await shot(Bp,'a1-b-map');
+    /* diğer paneller denetimi: misafirde MP komutu olmayan (soluk + uyarı) gerçek STARS eylemleri — envanter (MULTIPLAYER-MP71-SONUC.md) */
+    metrics.unsupported=await Bp.evaluate(()=>MP6Stars.S.unsupported);metrics.hooks=await Bp.evaluate(()=>[...MP6Stars.S.hooks].sort());
   });
   let o1;
   if(process.env.MP71_STOP==='A1')throw Error('stop');
