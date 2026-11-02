@@ -1,11 +1,11 @@
 {
-  "phase": "MP.7",
-  "build": "96h10p2",
-  "scope": "Multiplayer start and per-player empire design: setupGame accepts cfg.humans (empires 1..k built by the same configured-empire path as the single-player empire: species, doctrine, physiology, ethics, civics, traits, origin, look, colour, emblem; AI + humans <= 11). Single-player setup, Save8 bytes and RNG unchanged without cfg.humans. PERF.1 optimizations retained.",
+  "phase": "MP.7.4",
+  "build": "96h10p3",
+  "scope": "Swipeable notice cards (swipe dismisses the card only; decision records stay in the diplomatic inbox) and quick decisions on notice cards (accept / reject / counter-offer through the existing DiplomaticInbox.resolve and deal window). Simulation, Save8 schema and RNG unchanged. PERF.1 optimizations retained.",
   "save_version": 8,
-  "pwa_cache": "stars-v96h10p2",
-  "parent_commit": "50e3563acb932d7effd04d3e2359bb391557e1d0",
-  "parent_zip_sha256": "253a0282a18509ec3394dc87f2ddbef98150ceb90b1f137841139a36ecf70448",
+  "pwa_cache": "stars-v96h10p3",
+  "parent_commit": "53c961f3f95113c49589575f8cc42a53edf0e9f7",
+  "parent_zip_sha256": "dc52bfe543b11bf7483969b6935172bcc65ece8c307fb28a0587ee1640e7bc62",
   "file_count": 19,
   "files": {
     "ai.js": "11485356c0e75c39d9dabb2fc06b50bfb425598d3d08a2b767fc691c39ce51c6",
@@ -20,12 +20,12 @@
     "economy-ui.js": "61f6e2dcef7f37143821edccf67552718a210ec555f7b8f9074c68191fd5cbcc",
     "economy.js": "315653254c3e690523d5068d8ccec6a4cd7adc7f44e7a563adc04917f1eeee80",
     "inbox.js": "5f53ac2ca9c3ca8d5f1a12a9e1ba2b2a247ab7e350df0ec9169a13cfe3285204",
-    "index.html": "984d2c51e33637a0b3312a072e3348b5e943f4c2c7156530affeb7d6ceb83259",
-    "main.js": "b85e1f0c41203343526bf8654c45c0fb0ee38971c61aab276606f6c607020653",
+    "index.html": "3666b0114fe667e13407454f6c7ba10a4c5e14506c3442c9abc89d28a8acabe7",
+    "main.js": "6e69cce9a561ca12150193480b3cc61195cc4dafac97debe4197985cf37707c5",
     "manifest.json": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
     "map.js": "d8ca27ee07c484b7399f95d8031aa70fb7539bcf89d768c8442200b7cba76ae3",
     "news.js": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
-    "sw.js": "442ae695b586860fcd54858e7a5d1eed0ead5524f10233084054d98d972e78d8",
-    "ui.js": "4b2139007f7d4f100afddefeb2769523c03cbd862b0e27678e0d5868c18e3283"
+    "sw.js": "ab9e64c69777aa61c32efe0c16c19ff56722f42a430522aecf636a48d454e473",
+    "ui.js": "a49846ea1cf11c2b9b90349d42095eed44e1e8ae2b8ab4f7e16aec2e79baf6b7"
   }
 }
