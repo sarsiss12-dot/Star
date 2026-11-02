@@ -522,6 +522,7 @@ function chip(text,good){
   if(text!==undefined){const n=dipCount();const h='<div class="mp3-minirow"><span class="mp1-mini-h mp6-conn '+(good?'ok':'bad')+'" id="mp6Conn"><b>ÇOK OYUNCULU</b> · '+esc(text)+'</span>'+
       (window.MP3Dip&&window.MP7Legacy?'<button class="mp1-btn mp3-hostbtn" data-g6="dip" id="mp6DipBtn">DİPLOMASİ'+(n?' <i class="mp3-badge">'+n+'</i>':'')+'</button>':'')+'</div>';if(chipEl.innerHTML!==h)chipEl.innerHTML=h;
     if(window.MP61)MP61.status(text,good);}
+  chipEl.title=V.verLine()+(S.lastErr?' · son hata: '+S.lastErr:'')+(S.boot.stage?' · aşama: '+S.boot.stage:'');
   chipEl.style.display=S.started?'':'none';
 }
 const view=()=>S.J&&S.J.game.view,day=()=>((S.J&&S.J.game.clock)||{}).day,online=()=>!!(S.J&&S.J.hostOnline);
@@ -564,6 +565,8 @@ function update(statusHtml){
   for(;S.seenResults<J.results.length;S.seenResults++){const r=J.results[S.seenResults];
     if(waits[r.cid]){const w=waits[r.cid];delete waits[r.cid];try{w(r);}catch{}continue;}   // MP diplomasi paneli / gelen kutusu kendi sonucunu gösterir
     if(r.status!=='ok'&&r.code!=='rules:same')toast('Host reddetti: '+why(r),true);}
+  /* MP.7.3 tanı: son reddedilen komutun KODU (içerik / jeton yok) — MP çubuğunun ipucunda */
+  for(let i=J.results.length-1;i>=0&&i>=J.results.length-5;i--){const r=J.results[i];if(r.status!=='ok'&&r.code!=='rules:same'){S.lastErr=r.code;break;}}
   if(dipEl)dipTick(false);
   /* MP.6.2: bekleyen teklif G'yi değiştirmez → host yeni ayna göndermeyebilir; MP.3 'dip' görünümü değişince gerçek gelen
      kutusu ayna beklemeden güncellenir (capture tekrar eden kaydı yeniden eklemez). */
@@ -586,7 +589,7 @@ function bootStage(){const J=S.J;if(!J)return null;if(S.started)return 'ready';
 function bootHtml(){
   const b=S.boot,cur=bootStage(),idx=BOOT_STEPS.findIndex(x=>x[0]===cur),J=S.J,live=J&&J.ws&&J.ws.readyState===1&&J.hostOnline;
   const rows=BOOT_STEPS.map(([k,n],i)=>'<li class="'+(i<idx?'ok':i===idx?(b.failed?'bad':'now'):'')+'">'+(i<idx?'✓ ':i===idx?(b.failed?'✗ ':'… '):'· ')+n+'</li>').join('');
-  return '<div class="mp1-card mp7-boot" id="mp7Boot"><b>OYUN BAŞLIYOR</b><ol class="mp7-steps">'+rows+'</ol>'+
+  return '<div class="mp1-card mp7-boot" id="mp7Boot"><b>OYUN BAŞLIYOR</b><ol class="mp7-steps">'+rows+'</ol><div class="mp1-sub" id="mpVer">'+esc(V.verLine())+'</div>'+
     (b.failed?'<div class="mp1-status bad" id="mp7BootErr">'+esc(b.err||'Host\'tan galaksi verisi alınamadı.')+'</div><button class="mp1-btn pri" data-g7="retry" id="mp7Retry">YENİDEN DENE</button>':
       b.err?'<div class="mp1-status bad" id="mp7BootErr">'+esc(b.err)+' — yeniden isteniyor…</div>':
       !live&&J&&J.screen==='game'?'<div class="mp1-status bad">Bağlantı bekleniyor; geri gelince aynı devletine dönersin.</div>':'')+'</div>';

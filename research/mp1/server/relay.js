@@ -54,6 +54,10 @@ function create(env=process.env){
   const oops=()=>{stats.errors++;};
   const deny=k=>{stats.denied[k]=(stats.denied[k]||0)+1;};
   const manifest=JSON.parse(fs.readFileSync(path.join(ROOT,'RELEASE-MANIFEST.json'),'utf8'));
+  /* MP.7.3: dağıtım doğrulaması — çok oyunculu sürüm, oyun build'i ve sunulan MP dosyalarının kısa SHA-256 özetleri (gizli bilgi yok) */
+  const sha12=f=>{try{return crypto.createHash('sha256').update(fs.readFileSync(path.join(ROOT,f))).digest('hex').slice(0,12);}catch{return null;}};
+  const MP_VERSION_JSON=JSON.stringify({mp:'MP.7.3',build:manifest.build,files:Object.fromEntries(['research/mp0/mp-core.js','research/mp1/server/relay.js','research/mp1/client/mp1-host.js','research/mp1/client/join.js',
+    'research/mp6/mirror.js','research/mp6/client/guest-stars.js','research/mp71/client/mp71-dip.js','research/mp7/client/mp7-setup.js'].map(f=>[f.split('/').pop(),sha12(f)]))});
   const ALLOW=new Set([...Object.keys(manifest.files),'research/mp0/mp-core.js',
     'research/mp1/client/mp1.css','research/mp1/client/mp1-host.js','research/mp1/client/join.js','research/mp1/client/view.js',
     'research/mp2/client/guest-game.js','research/mp2/client/mp2.css',   // MP.2 misafir haritası
@@ -115,6 +119,7 @@ function create(env=process.env){
   function serve0(req,res){
     const url=new URL(req.url,'http://x'),n=decodeURIComponent(url.pathname);   // bozuk %-kodlama URIError atar → serve 400 döner
     if(n==='/healthz'){res.writeHead(200,{...SEC,'Content-Type':TYPES['.json']});return res.end('{"ok":true}');}
+    if(n==='/mp/version'){res.writeHead(200,{...SEC,'Content-Type':TYPES['.json'],'Cache-Control':'no-store'});return res.end(MP_VERSION_JSON);}   // MP.7.3: salt okunur sürüm işareti
     if(mustTls(req)){
       if(req.method==='GET'&&req.headers.host&&/^[A-Za-z0-9.:\[\]-]+$/.test(req.headers.host)){res.writeHead(308,{...SEC,Location:'https://'+req.headers.host+url.pathname+url.search});return res.end();}
       deny('insecure');res.writeHead(403,SEC);return res.end();

@@ -26,7 +26,7 @@ python3 tools/verify-release.py     # manifest ↔ çalışma ağacı bütünlü
 node tests/browser-mp0.cjs          # MP.0: iki ayrı Chromium + yerel relay (aynı ortam değişkenleri)
 node tests/browser-mp1.cjs          # MP.1: 5 ayrı Chromium (host + 3 misafir + fazladan telefon), 5 görünüm, 60/150 ms relay süreçleri
 node tests/browser-mp11.cjs         # MP.1.1: üretim kipi relay + yerel TLS ters vekil, HTTPS/WSS, arka plan duraklatma, 4× CPU host maliyeti
-node research/mp1/deploy/smoke.js https://<alan>   # dağıtım sonrası smoke (10 denetim)
+node research/mp1/deploy/smoke.js https://<alan>   # dağıtım sonrası smoke (11 denetim; MP.7.3 /mp/version dahil)
 node tests/browser-mp2.cjs          # MP.2: host + 2 misafir (ayrı Chromium), gerçek dokunma olayları, harita/filo/bilim, 45/60/100 sistem
 node tests/browser-mp3.cjs          # MP.3: host + 3 misafir (4 ayrı Chromium), insan–insan / insan–AI diplomasi, gizlilik, 5 görünüm
 node tests/browser-mp31.cjs         # MP.3.1: host + 3 misafir, federasyon oyu/başvuru/davet/ayrılma, vasallık teklif/karşı teklif/bağımsızlık

@@ -190,7 +190,7 @@ function designLobby(){
       '<button class="mp1-btn" data-m="galaxy" id="mp7GalaxyBtn">GALAKSİ AYARLARI</button>'+(API.setupNote?'<div class="mp1-sub">'+esc(API.setupNote)+'</div>':'')+'</div>'+
     '<div class="mp1-status'+(cs.ok?' ok':'')+'" id="mp1Start">'+(cs.ok?'Herkes hazır. Oyunu başlatabilirsin.':esc(START_WHY[cs.why]||cs.why))+'</div>'+
     '<button class="mp1-btn pri" data-m="start"'+(cs.ok?'':' disabled')+'>OYUNU BAŞLAT</button><button class="mp1-btn warn" data-m="close">ODAYI KAPAT</button>'+
-    '<div class="mp1-status'+(API.connected?'':' bad')+'">'+(API.connected?'Bağlantı hizmetine bağlı':'Bağlantı hizmeti yok — yeniden deneniyor')+'</div></div>';
+    '<div class="mp1-status'+(API.connected?'':' bad')+'">'+(API.connected?'Bağlantı hizmetine bağlı':'Bağlantı hizmeti yok — yeniden deneniyor')+'</div><div class="mp1-sub" id="mpVer">'+esc(V.verLine())+'</div></div>';
 }
 function applySettings(){
   const set={size:doc.getElementById('mp1Size').value,aiCount:+doc.getElementById('mp1Ai').value,seed:Math.trunc(+doc.getElementById('mp1Seed').value)||1,...(CFG.shape?{shape:CFG.shape}:{})};
@@ -289,7 +289,8 @@ function mini(){
   el.innerHTML=(window.MP3Dip&&window.MP7Legacy?'<div class="mp3-minirow">'+head+'<button class="mp1-btn mp3-hostbtn" data-g="dip" id="mp3HostBtn">'+dipLabel()+'</button></div>':head)+
     (open?gs.map(p=>{const pid=pidOfSeat(p.seat);return '<div>'+esc(p.name)+' · '+(p.online?'bağlı':'koptu — koltuk bekletiliyor')+(p.online?'':'<button class="mp1-btn" data-g="kick" data-pid="'+esc(pid)+'">Çıkar (devlet boşta)</button><button class="mp1-btn" data-g="ai" data-pid="'+esc(pid)+'">Devleti AI\'ya ver</button>')+'</div>';}).join('')+
       (PZ?'<div class="mp1-row"><button class="mp1-btn" data-g="dpause" id="mp63Dpause" aria-pressed="'+decisionPause()+'">Karar pencerelerinde: '+(decisionPause()?'DURAKLAT':'1× YAVAŞLAT')+'</button></div>':'')+
-      (window.MP4Save?'<div class="mp1-row"><button class="mp1-btn" data-g="save">OYUNU KAYDET</button><button class="mp1-btn" data-g="export">DOSYAYA AKTAR</button></div>':''):'');
+      (window.MP4Save?'<div class="mp1-row"><button class="mp1-btn" data-g="save">OYUNU KAYDET</button><button class="mp1-btn" data-g="export">DOSYAYA AKTAR</button></div>':'')+
+      '<div class="mp1-sub" id="mpVer">'+esc(V.verLine())+' · yeniden bağlanma '+(API.reconnects|0)+'</div>':'');
 }
 /* ---------- MP.3: host'un MP diplomasi paneli ----------
    Yalnız insan oyuncularla teklif (AI devletlerle diplomasi tek oyunculu DİPLOMASİ ekranında, aynı motor).

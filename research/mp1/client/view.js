@@ -38,5 +38,8 @@ function apply(st,m){
   }
   return null;
 }
-root.MP1View={esc,color,TAB,PHASE,ERR,fmtCode,players,apply};
+/* MP.7.3: salt okunur sürüm işareti — telefonda (bilgisayarsız) doğru dağıtımın açıldığını görmek için; relay /mp/version ile aynı */
+const MP_VERSION='MP.7.3';
+const verLine=()=>'STARS '+MP_VERSION+' · oyun '+(typeof BUILD_ID==='string'?BUILD_ID:'?');
+root.MP1View={esc,color,TAB,PHASE,ERR,fmtCode,players,apply,MP_VERSION,verLine};
 })(typeof globalThis!=='undefined'?globalThis:this);

@@ -137,7 +137,7 @@ function designLobby(app){
     '<div class="mp1-status'+(last&&!last.ok?' bad':has?' ok':'')+'" id="jDraft">'+esc(last?draftMsg(last):has?'Devletin host\'a kaydedildi.':'Önce devletini tasarla ve kaydet.')+'</div>'+
     '<div class="mp1-card" id="jGalaxy"><b>Galaksi</b> (host ayarlar)<div>'+esc((SIZE_N[s.size])||s.size||'—')+' · '+(+s.aiCount||0)+' AI + '+L.capacity+' insan</div></div>'+
     '<button class="mp1-btn '+(me.ready?'':'pri')+'" data-j="ready" id="jReady"'+(has?'':' disabled')+'>'+(me.ready?'HAZIR DEĞİLİM':'HAZIRIM')+'</button>'+
-    '<button class="mp1-btn warn" data-j="leave">ODADAN AYRIL</button></div>';
+    '<button class="mp1-btn warn" data-j="leave">ODADAN AYRIL</button><div class="mp1-sub" id="mpVer">'+esc(V.verLine())+'</div></div>';
 }
 function lobby(app){
   const L=J.lobby;if(!L){app.innerHTML=statusBar()+'<div class="mp1-status">Lobi bekleniyor…</div>';return;}
