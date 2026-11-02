@@ -40,7 +40,7 @@ async function layout(p){return p.evaluate(()=>{
 function assertLayout(l,where){assert(!l.overflow,where+' horizontal overflow '+l.scrollW+'>'+l.vw);assert.deepEqual(l.wide,[],where+' element wider than screen');
   assert.deepEqual(l.small,[],where+' touch target < 44 px');assert(l.minFont>=11,where+' font '+l.minFont+' '+l.minAt);}
 async function joinByLink(p,name){await p.goto(base+'/mp/join?code='+code);await wait(p,()=>window.MP1Join&&document.getElementById('jCode'));
-  assert.equal(await p.inputValue('#jCode'),code.slice(0,4)+'-'+code.slice(4));await p.fill('#jName',name);
+  assert.equal(await p.inputValue('#jCode'),code);   // MP.7.4: 5 karakter, tiresizawait p.fill('#jName',name);
   await p.locator('[data-j="go"]').tap();await wait(p,()=>MP1Join.screen==='lobby'&&MP1Join.lobby&&MP1Join.playerId);}
 function childRelay(delay){return new Promise((res,rej)=>{const c=spawn(process.execPath,[path.join(root,'research/mp1/server/relay.js')],{env:{...process.env,MP1_PORT:'0',MP_DELAY_MS:String(delay)},stdio:['ignore','pipe','pipe']});
   let buf='';c.stdout.on('data',d=>{buf+=d;const m=buf.match(/http:\/\/127\.0\.0\.1:(\d+)/);if(m)res({proc:c,base:'http://127.0.0.1:'+m[1],stdout:()=>buf});});c.on('error',rej);setTimeout(()=>rej(Error('relay start')),10000);});}
@@ -73,8 +73,8 @@ function childRelay(delay){return new Promise((res,rej)=>{const c=spawn(process.
     const t0=Date.now();await H.evaluate(()=>{window.MP7Legacy=1;/* MP.7: bu test MP.1 devralma kipini (AI devletini seçme) sınar; tasarım kipi browser-mp7 */}).then(()=>H.locator('[data-m="create"]').tap());await wait(H,()=>MP1Host.screen==='lobby'&&MP1Host.lobby&&MP1Host.lobby.phase==='waiting');
     metrics.roomCreateMs=Date.now()-t0;
     ({code,key:hostKey}=await H.evaluate(()=>({code:MP1Host.code,key:MP1Host.key})));
-    assert.match(code,/^[ABCDEFGHJKMNPQRSTUVWXYZ23456789]{8}$/);
-    assert.equal(await H.textContent('#mp1Code'),code.slice(0,4)+'-'+code.slice(4));
+    assert.match(code,/^[ABCDEFGHJKMNPQRSTUVWXYZ23456789]{5}$/);   // MP.7.4
+    assert.equal(await H.textContent('#mp1Code'),code);
     assert(!(await H.content()).includes(hostKey),'host key is not rendered');
     assert.equal(await H.textContent('#mp1Link'),base+'/mp/play?code='+code);   // MP.6: davet gerçek STARS arayüzüne gider; bu paketteki misafir vakaları hafif istemciyle (/mp/join) koşar
     await H.locator('[data-m="tab"][data-tab="galaksi"]').tap();
@@ -89,7 +89,7 @@ function childRelay(delay){return new Promise((res,rej)=>{const c=spawn(process.
   await test('guest A joins by invite link, guest B types the code by hand (lowercase, no dash) and presses Enter; guests run no engine',async()=>{
     await joinByLink(A,'Ayşe');
     await B.goto(base+'/mp/join');await wait(B,()=>window.MP1Join);await B.locator('#jCode').tap();await B.keyboard.type(code.toLowerCase());
-    assert.equal(await B.inputValue('#jCode'),code.slice(0,4)+'-'+code.slice(4),'typed code is normalised as XXXX-XXXX');
+    assert.equal(await B.inputValue('#jCode'),code,'typed code is normalised (upper case, 5 characters)');
     await B.fill('#jName','Bo"ra<img src=x onerror=__x=1>');await B.press('#jName','Enter');
     await wait(B,()=>MP1Join.screen==='lobby'&&MP1Join.lobby);
     for(const p of [A,B]){assert.equal(await p.evaluate(()=>[typeof G,typeof monthTick,typeof setupGame,typeof serialize].join()),'undefined,undefined,undefined,undefined');
