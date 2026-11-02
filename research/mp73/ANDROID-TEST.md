@@ -7,7 +7,7 @@ Bu rehber bilgisayarı olmayan bir kişi için yazıldı. Her adım telefondan v
 ## 0. Dağıtım (Render paneli)
 
 1. **Settings → Build & Deploy**
-   - **Branch:** `claude/stars-mp74-lobby-notifications` (MP.7.4; MP.7.3 dahil)
+   - **Branch:** `claude/stars-mp75-stability-performance` (MP.7.5; MP.7.3 ve MP.7.4 dahil)
    - **Runtime:** Docker
    - **Dockerfile Path:** `research/mp1/deploy/Dockerfile`
    - **Docker Build Context Directory:** `.` (depo kökü)
@@ -19,7 +19,7 @@ Bu rehber bilgisayarı olmayan bir kişi için yazıldı. Her adım telefondan v
 4. **Manual Deploy → Clear build cache & deploy**
 5. **Sürümü doğrulayın.** Telefon tarayıcısında `<adres>/mp/version` açın. Görmeniz gereken:
    ```
-   {"mp":"MP.7.4","build":"96h10p3","files":{...}}
+   {"mp":"MP.7.5","build":"96h10p4","files":{...}}
    ```
    - `mp` alanı `MP.7.3` değilse eski imaj çalışıyordur: 4. adımı yineleyin.
    - `files` içindeki 12 haneli özetler yalnız dosya sürümünü gösterir; gizli bilgi değildir.
