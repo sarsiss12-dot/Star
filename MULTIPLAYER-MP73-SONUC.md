@@ -128,7 +128,7 @@ Tek oyunculuda da bozuk; düzeltme runtime değişikliği gerektirir (ayrı faz 
 
 Ayrıntı: `research/mp73/evidence/REGRESYON.md`.
 
-**`tests/mp73_council_test.js` (Node): 10/0.**
+**`tests/mp73_council_test.js` (Node): 10/0** (12 sn) + **`tests/mp73_council_equiv_test.js`: 1/0** (uzun eşdeğerlik ayrı pakette; `run-all` 180 sn paket sınırı).
 - AI insanlar adına oy / sponsor / gündem yazmaz;
 - insan oyu + host bekler;
 - `voted` / `stale` / `no-council`;
@@ -137,8 +137,11 @@ Ayrıntı: `research/mp73/evidence/REGRESYON.md`.
 - daimi / veto / taht / reform;
 - ayna gizliliği;
 - entrikalar aktörün devletinde (`whisperLog`), `revolt` vasal değilken ret;
-- yıkıcı ret yolları ve ikinci yutma;
-- uzak insan yokken 25 yıl Save8 / RNG eşdeğerliği.
+- yıkıcı ret yolları;
+- Yıldız Yiyen yutma başarılı, aynı komut ikinci kez yıkım yapmaz;
+- uzak insan yokken Save8 / RNG eşdeğerliği:
+  - varsayılan 4200 gün: konsey kuruluşu, AI'nın otomatik katılımı, 4 kampanya + oylama;
+  - `MP73_EQUIV_DAYS=9000` ile 25 yıl ayrıca koşuldu.
 
 **`tests/browser-mp73.cjs` (Chromium).** Üretim kipi relay + parçalayan TLS vekili; yatay 844×390 / 800×360 / 915×412; düğmeler gerçek dokunmayla.
 - **A1–A3 (host + 1):** Android rehberinin akışı:
