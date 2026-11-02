@@ -6,7 +6,7 @@ Son güncelleme: 2026-11-02. Depo `sarsiss12-dot/Star`.
 
 | | `main` (birleşmiş) | Bu dal (PR) |
 |---|---|---|
-| Faz | 96H.10 + MP.0 – MP.4 (+ 96H.11 araştırma arşivi) | MP.5 (PR #17) + MP.6 (PR #18) + MP.6.1 (PR #19) + MP.6.2 (PR #20) + MP.6.3 (PR #21) + MP.6.4 (PR #22) + PERF.1 (PR #23) + MP.7 (PR #24, mobil başlangıç düzeltmesi, oyuncuya özel devlet tasarımı) + MP.7.1 (tek STARS arayüzü; runtime değişmedi) — hepsi açık |
+| Faz | 96H.10 + MP.0 – MP.4 (+ 96H.11 araştırma arşivi) | MP.5 (PR #17) + MP.6 (PR #18) + MP.6.1 (PR #19) + MP.6.2 (PR #20) + MP.6.3 (PR #21) + MP.6.4 (PR #22) + PERF.1 (PR #23) + MP.7 (PR #24, mobil başlangıç düzeltmesi, oyuncuya özel devlet tasarımı) + MP.7.1 (PR #25, tek STARS arayüzü) + MP.7.2 (eksik oynanış işlevleri; runtime değişmedi) — hepsi açık |
 | Build / PWA | `96h10` / `stars-v96h10` | `96h10p2` / `stars-v96h10p2` (MP.7; PERF.1 `96h10p1` dahil) |
 | Save | v8 | v8 (şema değişmedi) |
 | Oyun ZIP | `releases/stars-faz96h10.zip` (SHA-256 `78e76d1627b8ec1b990849b2242835f78667f110e1d6f17021760183ee7be6d0`) | `releases/stars-faz96h10p2.zip` (SHA-256 `dc52bfe543b11bf7483969b6935172bcc65ece8c307fb28a0587ee1640e7bc62`); PERF.1 `stars-faz96h10p1.zip` |
@@ -14,6 +14,14 @@ Son güncelleme: 2026-11-02. Depo `sarsiss12-dot/Star`.
 | Değişen runtime | — | PERF.1: `economy.js`, `economic-ledger.js`; MP.7: `main.js` (setupGame cfg.humans, BUILD_ID), `sw.js` (CACHE) |
 
 96H.6.2, 96H.6.3, 96H.7, 96H.11 ve MP.0 – MP.6.4 oyun yayımlamadı. PERF.1 yeni oyun ZIP'i üretti (yalnız runtime; MP kodu ZIP'te değil).
+
+## MP.7.2 — eksik oynanış işlevleri gerçek STARS düğmeleriyle
+
+Ayrıntı: `MULTIPLAYER-MP72-SONUC.md`. Testler: `tests/mp72_gameplay_test.js`, `tests/browser-mp72.cjs`. Runtime değişmedi (build `96h10p2`, ZIP yok).
+
+- **Misafirde artık çalışan:** elçi (gönder / görev / geri çek), filo bileşimi (kaydet / otomatik takviye), savaş filolarını birleştir, koloni otomasyonu, bombardıman kipi, inşaat gemisiyle yapı, ortak askerî destek talebi / iptali (AI müttefik; gerçek panel host verisiyle), federasyon savaş izni önerisi, ültimatom / himaye (yalnız AI hedef).
+- **Güvenlik:** host'un kendi arayüzünden insana ültimatom (insan adına zar) artık reddediliyor; insanın filoları ortak planda kullanılmıyor.
+- **Envanter:** 68 → 45 (13 bilerek kapalı, 2 tek oyunculuda da bozuk, 30 MP.7.3: Galaktik Konsey, karmaşık entrika, yıkıcı savaş).
 
 ## MP.7.1 — tek STARS arayüzü, iki oyun modu
 
