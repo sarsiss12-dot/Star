@@ -240,7 +240,8 @@ let relay,base,bH,bB,bC,H,Bp,Cp,code;
       for(const [w,h] of LAND){await p.setViewportSize({width:w,height:h});await p.evaluate(()=>{dispatchEvent(new Event('resize'));UI.checkOrient&&UI.checkOrient();});await p.waitForTimeout(300);
         await p.evaluate(()=>MP61.speed({spd:2,who:'Deneme Devleti',auto:0,self:0}));await p.waitForTimeout(120);
         const r={bar:await rect(p,'#mp1Mini'),note:await rect(p,'#mp61Note'),tp:await rect(p,'#timepod'),tools:await rect(p,'#tools'),sb:await rect(p,'#sbToggle')};metrics.layout[n][w+'x'+h]=r;
-        for(const [a,b] of [['bar','tp'],['bar','tools'],['bar','sb'],['note','tp'],['note','tools'],['note','bar'],['note','sb']])assert(!hit(r[a],r[b]),n+' '+w+'x'+h+': '+a+' overlaps '+b+' '+JSON.stringify([r[a],r[b]]));
+        const docked=await p.evaluate(()=>{const m=document.getElementById('mp1Mini');return !!(m&&m.parentNode&&m.parentNode.id==='tools');});   // MP.7.5: kapalı MP düğmesi araç sütununun kendi öğesi
+        for(const [a,b] of [['bar','tp'],...(docked?[]:[['bar','tools']]),['bar','sb'],['note','tp'],['note','tools'],['note','bar'],['note','sb']])assert(!hit(r[a],r[b]),n+' '+w+'x'+h+': '+a+' overlaps '+b+' '+JSON.stringify([r[a],r[b]]));
         assert(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'no horizontal overflow');await shot(p,'mp61-'+n+'-'+w+'x'+h);}
       await p.setViewportSize({width:390,height:844});await p.evaluate(()=>{dispatchEvent(new Event('resize'));UI.checkOrient&&UI.checkOrient();MP61.speed({spd:1,who:'X',auto:0,self:0});});await p.waitForTimeout(300);
       const pr=await p.evaluate(()=>({rot:document.getElementById('rotate').classList.contains('show'),note:getComputedStyle(document.getElementById('mp61Note')).display,pill:getComputedStyle(document.getElementById('mp61Pill')).display,

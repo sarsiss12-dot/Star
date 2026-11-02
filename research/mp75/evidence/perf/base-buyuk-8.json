@@ -1,0 +1,179 @@
+{
+  "results": [
+    {
+      "name": "uzun oyun ölçümü: buyuk / 8 AI, misafirde diplomasi paneli açık, en yüksek hız; 60/120/240. ay",
+      "status": "PASS",
+      "ms": 192086
+    }
+  ],
+  "metrics": {
+    "joinErrors_Bora": [],
+    "ffS_m60": 17,
+    "rows": [
+      {
+        "label": "m60",
+        "month": 60,
+        "host": {
+          "monthTick": {
+            "n": 3,
+            "med": 73.5,
+            "p95": 92.5,
+            "max": 92.5
+          },
+          "publish": {
+            "n": 57,
+            "med": 6.4,
+            "p95": 19.7,
+            "max": 34.4
+          },
+          "longtask": {
+            "n": 112,
+            "med": 61,
+            "p95": 87,
+            "max": 150
+          },
+          "heapMB": 38
+        },
+        "guest": {
+          "build": {
+            "n": 42,
+            "med": 20.5,
+            "p95": 38.2,
+            "max": 39
+          },
+          "refresh": {
+            "n": 63,
+            "med": 9.9,
+            "p95": 26.7,
+            "max": 56.9
+          },
+          "longtask": {
+            "n": 95,
+            "med": 57,
+            "p95": 90,
+            "max": 101
+          },
+          "builds": 71,
+          "deltas": 70,
+          "minGap": 600,
+          "paneRewrites": 0,
+          "mutations": 0,
+          "surfaceKept": 0,
+          "heapMB": 28
+        },
+        "wallS": 68
+      },
+      {
+        "label": "m120",
+        "month": 120,
+        "host": {
+          "monthTick": {
+            "n": 3,
+            "med": 125.3,
+            "p95": 165.7,
+            "max": 165.7
+          },
+          "publish": {
+            "n": 49,
+            "med": 3.6,
+            "p95": 11.7,
+            "max": 19
+          },
+          "longtask": {
+            "n": 31,
+            "med": 56,
+            "p95": 157,
+            "max": 212
+          },
+          "heapMB": 40
+        },
+        "guest": {
+          "build": {
+            "n": 17,
+            "med": 16.9,
+            "p95": 38.5,
+            "max": 38.5
+          },
+          "refresh": {
+            "n": 23,
+            "med": 9.3,
+            "p95": 21.6,
+            "max": 25.3
+          },
+          "longtask": {
+            "n": 18,
+            "med": 55,
+            "p95": 81,
+            "max": 81
+          },
+          "builds": 115,
+          "deltas": 114,
+          "minGap": 600,
+          "paneRewrites": 0,
+          "mutations": 0,
+          "surfaceKept": 0,
+          "heapMB": 17
+        },
+        "wallS": 104
+      },
+      {
+        "label": "m240",
+        "month": 240,
+        "host": {
+          "monthTick": {
+            "n": 3,
+            "med": 455.6,
+            "p95": 580.9,
+            "max": 580.9
+          },
+          "publish": {
+            "n": 46,
+            "med": 4.1,
+            "p95": 19.9,
+            "max": 43.5
+          },
+          "longtask": {
+            "n": 37,
+            "med": 60,
+            "p95": 496,
+            "max": 617
+          },
+          "heapMB": 76
+        },
+        "guest": {
+          "build": {
+            "n": 17,
+            "med": 24.4,
+            "p95": 48,
+            "max": 48
+          },
+          "refresh": {
+            "n": 23,
+            "med": 9.6,
+            "p95": 29.8,
+            "max": 42.4
+          },
+          "longtask": {
+            "n": 27,
+            "med": 59,
+            "p95": 103,
+            "max": 108
+          },
+          "builds": 212,
+          "deltas": 211,
+          "minGap": 600,
+          "paneRewrites": 0,
+          "mutations": 0,
+          "surfaceKept": 0,
+          "heapMB": 33
+        },
+        "wallS": 180
+      }
+    ],
+    "ffS_m120": 20,
+    "ffS_m240": 59,
+    "errors": []
+  },
+  "size": "buyuk",
+  "ai": 8
+}

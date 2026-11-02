@@ -1124,6 +1124,11 @@ body.fauxFull canvas#map{width:100vw !important;height:100dvh !important}
 .nq.ok{border-color:var(--ok,#46d68c);color:var(--ok,#46d68c)}.nq.no{border-color:var(--bad);color:var(--bad)}
 .nq:disabled{opacity:.45}.nqWait{font:10px var(--mono);color:var(--dim);padding:4px 2px}
 /* END MP.7.4 NOTICES */
+/* MP.7.5: touch quantity steppers */
+.qtySteps{display:flex;flex-wrap:wrap;gap:4px;margin:4px 0 6px}
+.qtyStep{min-width:48px;min-height:44px;padding:0 8px;font:700 12px var(--mono);background:rgba(14,21,36,.97);border:1px solid var(--line);color:var(--phos);touch-action:manipulation}
+.qtyStep:active{background:var(--bulk)}
+/* END MP.7.5 QTY */
 /* FAZ 95C.1 — bounded mobile controls */
 #topbar{overflow:hidden;touch-action:pan-x}
 #resourceStrip{display:flex;align-items:center;flex:1 1 auto;min-width:0;height:100%;overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;overscroll-behavior-x:contain;touch-action:pan-x;-webkit-overflow-scrolling:touch}

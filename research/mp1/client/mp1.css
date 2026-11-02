@@ -49,3 +49,7 @@ table.mp1-t{width:100%;border-collapse:collapse;table-layout:fixed}.mp1-t td{bor
 .mp74-pill{display:inline-flex!important;align-items:center;gap:6px;width:auto!important;min-width:44px;min-height:44px;padding:0 8px!important;font-size:14px!important;white-space:nowrap}
 .mp74-dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#46d68c;box-shadow:0 0 6px #46d68c}
 .mp74-dot.bad{background:#ffb04a;box-shadow:0 0 6px #ffb04a}
+
+/* MP.7.5: kapalı düğme sol araç sütununda (#tools) — haritada yüzen kutu yok */
+#tools .mp1-mini.mp74-compact{position:static;left:auto;bottom:auto;padding:0;border-radius:4px;max-width:none;width:32px;flex:0 0 auto;border-color:var(--line,#4aa8d8)}
+#tools .mp74-pill{min-width:32px!important;width:32px!important;min-height:40px;padding:0!important;font-size:11px!important;flex-direction:column;justify-content:center;gap:2px}

@@ -398,6 +398,7 @@ const UI = {
         if(key&&pSeen(s)&&el?.dataset.report===key){G.dismissedBattleReports=cleanBattleDismissals({...G.dismissedBattleReports,[s.id]:key});this.refresh();}
         break;
       }
+      case 'activeWars': this.activeWarsOpen(); break;   // MP.7.5
       case 'diploPane':
         if (typeof closeAllGroups === 'function') closeAllGroups();
         this.openDiplo(); break;
@@ -1989,13 +1990,14 @@ const UI = {
     const add=(label,action,count=1,x)=>items.push({label,action,count,x});
     if(battles)add('⚔ '+battles+' çatışma','gobattle');
     if(wars)add('⚔ '+wars+' savaş · Diplomasi','diploPane');
+    if(wars)add('⚔ Aktif savaşlar listesi · '+wars+' düşman','activeWars',0);   // MP.7.5: sayaçla aynı kanonik liste (temas yoksa "Bilinmeyen düşman")
     const pending=typeof DiplomaticInbox!=='undefined'?DiplomaticInbox.pending():0;
     if(pending)add('✉ '+pending+' bekleyen diplomatik teklif','diplomaticInbox',pending);
     if(typeof ArchiveUI!=='undefined'&&ArchiveUI.returnRecord?.world===G.emps)add('✉ İncelenen teklife geri dön','inboxReturn',0);
     const minimized=this.minimizedEvent(),keys=new Set();
     for(const n of G.inbox||[]){
       if(typeof DiplomaticInbox!=='undefined'&&DiplomaticInbox.supported(n.kind))continue;
-      if(!n.pause&&!['warstart','wardec','criswarn','crisis','facdem','faccoup','cncvote'].includes(n.kind)&&n.uid!==minimized?.uid)continue;
+      if(!n.pause&&!n.hidden&&!['warstart','wardec','criswarn','crisis','facdem','faccoup','cncvote'].includes(n.kind)&&n.uid!==minimized?.uid)continue;   // MP.7.5: gizlenen olay listede kalır
       const key=n.key||n.uid;if(keys.has(key))continue;keys.add(key);
       add('▣ '+n.title,n.uid===minimized?.uid?'restoreModal':'openNote',1,String(n.uid));
     }
@@ -7389,7 +7391,8 @@ const UI = {
     G.inbox.push(item);
     // kutu şişmesin: en eski duraklatmayan bildirimler düşer
     while (G.inbox.length > 6){
-      const i = G.inbox.findIndex(x => !x.pause&&x.uid!==G.minNote);
+      let i = G.inbox.findIndex(x => !x.pause&&!x.hidden&&x.uid!==G.minNote);   // MP.7.5: gizlenen karar olayı önce düşmez
+      if (i < 0) i = G.inbox.findIndex(x => !x.pause&&x.uid!==G.minNote);
       const fallback=G.inbox.findIndex(x=>x.uid!==G.minNote);
       G.inbox.splice(i >= 0 ? i : fallback, 1);
     }
@@ -7402,7 +7405,7 @@ const UI = {
   drawInbox(){
     const box = $('inbox');
     if (!box) return;
-    const list = G.inbox || [];
+    const list = (G.inbox || []).filter(n=>!n.hidden);   // MP.7.5: kaydırılarak gizlenen olay kartı çizilmez
     if (!list.length){ if(box.innerHTML)box.innerHTML='';box._inboxMarkup96d=null;box.classList.add('hidden');return; }
     box.classList.remove('hidden');
     const markup = list.map(it =>
@@ -7451,7 +7454,10 @@ const UI = {
     const list=G.inbox||[],i=list.findIndex(n=>n.uid===+uid);if(i<0)return false;
     const it=list[i],dip=typeof DiplomaticInbox!=='undefined'&&DiplomaticInbox.supported(it.kind);
     if(!dip&&!['wardec','warstart','crisend','cncnew'].includes(it.kind)){
-      say('Bu olay karar bekliyor — karta dokunup karar ver','war');this.drawInbox();return false;
+      /* MP.7.5: karar bekleyen olay silinmez — kart gizlenir, olay ☰ durum listesinde kalır ve oradan aynı karar penceresiyle açılır
+         (pencere kind + data'dan yeniden kurulur; geçici callback yok). Karar değişmez. */
+      it.hidden=true;if(G.minNote===it.uid){G.minNote=null;this.topbar();}
+      say('Olay gizlendi — karar bekliyor; üstteki ☰ listesinden aç','sci');this.noteResume();this.drawInbox();this.topbar();return true;
     }
     if(dip&&!DiplomaticInbox.capture(it)&&!this.noteRecord(it)){say('Gelen kutusu dolu; bildirim kaldırılmadı','war');this.drawInbox();return false;}
     list.splice(i,1);if(G.minNote===it.uid){G.minNote=null;this.topbar();}
@@ -7460,7 +7466,7 @@ const UI = {
   },
   noteResume(){
     // Kartın duraklattığı oyun, duraklatan başka kart ve açık pencere kalmayınca önceki hıza döner.
-    const m=$('modal');if(!this.prePause||G.speed>0||(G.inbox||[]).some(n=>n.pause)||m&&m.innerHTML&&!m.classList.contains('hidden'))return;
+    const m=$('modal');if(!this.prePause||G.speed>0||(G.inbox||[]).some(n=>n.pause&&!n.hidden)||m&&m.innerHTML&&!m.classList.contains('hidden'))return;
     const back=this.prePause;this.prePause=0;this.setSpeed(back);
   },
   noteSwipeBind(box){
@@ -7483,6 +7489,60 @@ const UI = {
     box.addEventListener('click',e=>{if(box._swipeAt74&&Date.now()-box._swipeAt74<400&&card(e)){e.stopPropagation();e.preventDefault();}},true);
   },
   /* END MP.7.4 NOTICES */
+  /* MP.7.5: AKTİF SAVAŞLAR — üst ⚔ sayacının saydığı G.p.war listesinin kendisi (yeni savaş motoru yok).
+     Sayaç her canlı düşmanı sayar; diplomasi listesi yalnız temas kurulanları gösterir. Burada hepsi görünür:
+     temas kurulmamış düşman "Bilinmeyen düşman", kriz / vahşi taraf kendi adıyla (gizli bilgi açılmaz). */
+  activeWarsList(){
+    const e=G.p,fronts=(G.warLedger&&G.warLedger.fronts||[]).filter(f=>f.ended===null&&f.sides.includes(e.id));
+    return G.emps.filter(o=>o&&!o.dead&&o.id!==e.id&&e.war[o.id]).map(o=>{
+      const known=!!this.diploKnown(o.id),f=fronts.find(x=>x.sides.includes(o.id)),since=e.warSince&&e.warSince[o.id];
+      const camp=f?fronts.filter(x=>x.campaign===f.campaign&&x!==f):[];
+      const allies=new Set();for(const x of camp)x.sides.forEach((id,i)=>{if(id!==o.id&&id!==e.id&&x.roles[i]===f.roles[f.sides.indexOf(e.id)])allies.add(id);});
+      const pend=typeof DiplomaticInbox!=='undefined'?DiplomaticInbox.state().records.filter(r=>r.status==='pending'&&r.from===o.id&&['peace','sqOffer'].includes(r.kind)).length:0;
+      const sq=typeof canStatusQuo==='function'?canStatusQuo(e,o):null;
+      return {id:o.id,name:o.crisisSide||o.wild?o.name:known?o.name:'Bilinmeyen düşman',known:known&&!o.wild&&!o.crisisSide,special:!!(o.crisisSide||o.wild),
+        cause:known&&e.warCause&&e.warCause[o.id]||'',months:Number.isFinite(since)?Math.max(0,Math.floor((G.day-since)/30)):null,
+        mutual:!!o.war[e.id],front:!!f,allies:[...allies].filter(id=>this.diploKnown(id)).map(id=>this.diploName(id)),pend,
+        peace:typeof canPeace==='function'?canPeace(e,o):true,sq:sq?(sq.ok?'':sq.why):''};});
+  },
+  activeWarsOpen(){
+    const L=this.activeWarsList(),unknown=L.filter(w=>!w.known&&!w.special).length,fronts=L.filter(w=>w.front).length;
+    const row=w=>`<div class="box"><div class="bt"><span>⚔ ${esc(w.name)}</span>${w.pend?`<span class="tag p">${w.pend} barış teklifi</span>`:''}</div>
+      <div class="mini">${w.months!==null?w.months+' aydır savaşta':'Süre bilinmiyor'}${w.cause?' · '+esc(w.cause):''}${w.front?' · aktif cephe':' · cephe kaydı yok'}${w.mutual?'':' · tek taraflı savaş durumu'}</div>
+      ${w.allies.length?`<div class="mini">Aynı seferdeki ortakların: ${w.allies.map(esc).join(', ')}</div>`:''}
+      <div class="mini">${!w.peace?'Barış bu devletle mümkün değil (kan hukuku / sürgün kuralı).':w.sq?'Statüko barışı: '+esc(w.sq):'Statüko barışı koşulları sağlanıyor.'}</div>
+      ${w.known?`<div class="act2"><button class="abtn" data-a="activeWarDiplo" data-x="${w.id}">Diplomasi · barış görüşmesi</button></div>`:''}</div>`;
+    this.openModal(`<div class="mhd"><span>⚔ AKTİF SAVAŞLAR</span><button class="riX" data-a="closem">✕</button></div>
+      <div class="mbd"><div class="row"><span>Savaştığın devlet</span><b>${L.length}</b></div><div class="row"><span>Aktif savaş cephesi</span><b>${fronts}</b></div>
+      ${unknown?`<div class="mini">${unknown} düşmanla henüz temas kurulmadı; adları ve ayrıntıları gizli kalır.</div>`:''}
+      ${L.length?L.map(row).join(''):'<p>Şu anda savaşta değilsin.</p>'}</div>
+      <div class="mft"><button class="ch" data-a="diplomaticInbox">GELEN KUTUSU</button><button class="ch" data-a="closem">KAPAT</button></div>`,'war');
+    this._hook('activeWarDiplo',x=>{const id=+x;this.closeModal();if(typeof closeAllGroups==='function')closeAllGroups();this.openDiplo();this.selectDiplo(id,'relation');});
+  },
+  /* END MP.7.5 WARS */
+  /* MP.7.5: DOKUNMATİK MİKTAR DÜĞMELERİ — pencere içindeki her sayı alanının altına (klavye açmadan) artır / azalt / sıfırla / MAKS.
+     Yalnız alanın değerini değiştirir ve alanın kendi input/change olaylarını tetikler: onay yine gerçek STARS düğmesiyle. Sınırlar
+     alanın min / max özniteliğidir (motorun üst sınırı). Filo bileşimi ±10/±50, diğer miktarlar ±10/±100. */
+  stepperize(root){
+    if(!root||!root.querySelectorAll)return;
+    for(const inp of root.querySelectorAll('input[type="number"]')){
+      if(inp.dataset.stepped)continue;inp.dataset.stepped='1';
+      if(inp.parentElement&&inp.parentElement.querySelector('button'))continue;   // pencerenin kendi miktar düğmeleri var (ör. anlaşma miktarı ±10 / hazır değerler)
+      const fleet=/^fc-/.test(inp.id||''),pct=/^vs/.test(inp.id||''),steps=fleet?[-50,-10,10,50]:pct?[-5,-1,1,5]:[-100,-10,10,100];
+      const wrap=document.createElement('div');wrap.className='qtySteps';wrap.setAttribute('role','group');wrap.setAttribute('aria-label','Miktar');
+      const mk=(t,fn,label)=>{const b=document.createElement('button');b.type='button';b.className='qtyStep';b.textContent=t;b.setAttribute('aria-label',label||t);
+        b.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();fn();},true);b.addEventListener('mousedown',e=>e.preventDefault());wrap.appendChild(b);};
+      const lim=k=>{const v=parseFloat(inp.getAttribute(k));return Number.isFinite(v)?v:null;};
+      const set=v=>{const lo=lim('min'),hi=lim('max');let n=Math.round(v);if(lo!==null)n=Math.max(lo,n);else n=Math.max(0,n);if(hi!==null)n=Math.min(hi,n);
+        if(String(n)===inp.value)return;inp.value=String(n);inp.dispatchEvent(new Event('input',{bubbles:true}));inp.dispatchEvent(new Event('change',{bubbles:true}));};
+      const cur=()=>{const v=parseFloat(inp.value);return Number.isFinite(v)?v:0;};
+      mk('SIFIR',()=>set(lim('min')??0),'Sıfırla');
+      for(const d of steps)mk((d>0?'+':'−')+Math.abs(d),()=>set(cur()+d));
+      if(lim('max')!==null)mk('MAKS',()=>set(lim('max')),'En yüksek');
+      (inp.closest('label')||inp).insertAdjacentElement('afterend',wrap);
+    }
+  },
+  /* END MP.7.5 QTY */
   openNote(uid){
     const list = G.inbox || [];
     const i = list.findIndex(x => x.uid === +uid);
@@ -7685,6 +7745,7 @@ const UI = {
     const sanat = (art && typeof ART !== 'undefined' && ART.PIXEL_ART && ART.PIXEL_ART[art])
       ? `<div class="evArt"><canvas id="eventCanvas" width="128" height="128"></canvas></div>` : '';
     $('modal').innerHTML = `<div class="mbox ${cls||''}">${extra}${sanat}${html}</div>`;
+    this.stepperize($('modal'));   // MP.7.5: dokunmatik miktar düğmeleri
     if (sanat){
       const cv = $('eventCanvas');
       if (cv){

@@ -5,6 +5,12 @@ const hash=s=>createHash('sha256').update(s).digest('hex');
 // block must restore the untouched canonical 93A.1/93C HTML hash.
 // Historical referans-sha.json remains intact; neither half is exempted.
 exports.isReviewedUI=source=>{
+ // MP.7.5: touch quantity stepper CSS — one reviewed block; stripping it (then MP.7.4) restores the 96H.10 HTML.
+ const mp75Start=source.indexOf('/* MP.7.5: touch quantity steppers */');
+ if(mp75Start>=0){const marker='/* END MP.7.5 QTY */\n',end=source.indexOf(marker,mp75Start)+marker.length;
+  if(end<mp75Start||hash(source.slice(mp75Start,end))!=='f0404b191e157ee3ed315f89ca245e2602fbece8e146aa8476a09e606bfc5175')return false;
+  source=source.slice(0,mp75Start)+source.slice(end);
+ }
  // MP.7.4: swipeable notice cards + quick decision buttons — one reviewed CSS block; stripping it restores the 96H.10 HTML.
  const mp74Start=source.indexOf('/* MP.7.4: swipeable notices and quick decisions */');
  if(mp74Start>=0){const marker='/* END MP.7.4 NOTICES */\n',end=source.indexOf(marker,mp74Start)+marker.length;

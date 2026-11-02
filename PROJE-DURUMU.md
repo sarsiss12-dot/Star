@@ -6,7 +6,7 @@ Son güncelleme: 2026-11-02. Depo `sarsiss12-dot/Star`.
 
 | | `main` (birleşmiş) | Bu dal (PR) |
 |---|---|---|
-| Faz | 96H.10 + MP.0 – MP.4 (+ 96H.11 araştırma arşivi) | MP.5 (PR #17) + MP.6 (PR #18) + MP.6.1 (PR #19) + MP.6.2 (PR #20) + MP.6.3 (PR #21) + MP.6.4 (PR #22) + PERF.1 (PR #23) + MP.7 (PR #24, mobil başlangıç düzeltmesi, oyuncuya özel devlet tasarımı) + MP.7.1 (PR #25, tek STARS arayüzü) + MP.7.2 (PR #26, eksik oynanış işlevleri) + MP.7.3 (PR #27, Galaktik Konsey, entrikalar, yıkıcı savaş) + MP.7.4 (lobi hataları, küçük MP düğmesi, kaydırılabilir bildirimler, karttan hızlı karar; build 96h10p3) — hepsi açık |
+| Faz | 96H.10 + MP.0 – MP.4 (+ 96H.11 araştırma arşivi) | MP.5 (PR #17) + MP.6 (PR #18) + MP.6.1 (PR #19) + MP.6.2 (PR #20) + MP.6.3 (PR #21) + MP.6.4 (PR #22) + PERF.1 (PR #23) + MP.7 (PR #24, mobil başlangıç düzeltmesi, oyuncuya özel devlet tasarımı) + MP.7.1 (PR #25, tek STARS arayüzü) + MP.7.2 (PR #26, eksik oynanış işlevleri) + MP.7.3 (PR #27, Galaktik Konsey, entrikalar, yıkıcı savaş) + MP.7.4 (PR #28) + MP.7.5 (savaş/barış tutarlılığı, misafir panel kararlılığı ve performans, mobil miktar; build 96h10p4) — hepsi açık |
 | Build / PWA | `96h10` / `stars-v96h10` | `96h10p2` / `stars-v96h10p2` (MP.7; PERF.1 `96h10p1` dahil) |
 | Save | v8 | v8 (şema değişmedi) |
 | Oyun ZIP | `releases/stars-faz96h10.zip` (SHA-256 `78e76d1627b8ec1b990849b2242835f78667f110e1d6f17021760183ee7be6d0`) | `releases/stars-faz96h10p2.zip` (SHA-256 `dc52bfe543b11bf7483969b6935172bcc65ece8c307fb28a0587ee1640e7bc62`); PERF.1 `stars-faz96h10p1.zip` |
@@ -14,6 +14,14 @@ Son güncelleme: 2026-11-02. Depo `sarsiss12-dot/Star`.
 | Değişen runtime | — | PERF.1: `economy.js`, `economic-ledger.js`; MP.7: `main.js` (setupGame cfg.humans, BUILD_ID), `sw.js` (CACHE) |
 
 96H.6.2, 96H.6.3, 96H.7, 96H.11 ve MP.0 – MP.6.4 oyun yayımlamadı. PERF.1 yeni oyun ZIP'i üretti (yalnız runtime; MP kodu ZIP'te değil).
+
+## MP.7.5 — savaş / barış tutarlılığı, uzun oyun performansı, panel kararlılığı
+
+Ayrıntı: `MULTIPLAYER-MP75-SONUC.md`. Build `96h10p4`, ZIP `releases/stars-faz96h10p4.zip`.
+
+- **Barış:** kabul savaşı bitiriyor (uzun MP simülasyonlarında ölçüldü). Biriken barış kayıtları kapanıyor; üst ⚔ sayacı "Aktif savaşlar" penceresiyle aynı liste.
+- **Misafir:** açık Konsey / panel her ayna kurulumunda baştan yazılıyordu (kök neden: `surfaceRender` dünya bağı) → yerinde güncelleme. Uzun görevler ve `refresh` süresi belirgin azaldı.
+- **Arayüz:** MP düğmesi sol araç sütununda; dokunmatik miktar düğmeleri; karar bekleyen olay kaydırılınca gizlenir ve ☰ listesinden açılır.
 
 ## MP.7.4 — gerçek telefon testinin düzeltmeleri + bildirim kartları
 

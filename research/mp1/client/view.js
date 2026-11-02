@@ -40,7 +40,10 @@ function apply(st,m){
   return null;
 }
 /* MP.7.3: salt okunur sürüm işareti — telefonda (bilgisayarsız) doğru dağıtımın açıldığını görmek için; relay /mp/version ile aynı */
-const MP_VERSION='MP.7.4';
+const MP_VERSION='MP.7.5';
 const verLine=()=>'STARS '+MP_VERSION+' · oyun '+(typeof BUILD_ID==='string'?BUILD_ID:'?');
-root.MP1View={esc,color,TAB,PHASE,ERR,fmtCode,CODE_LEN,players,apply,MP_VERSION,verLine};
+/* MP.7.5: kapalı çok oyunculu düğmesi sol araç sütununun (#tools) son öğesi olur; açık panel eski kaplama konumunda (#app).
+   Sütun yeniden çizilirse düğme bir sonraki durum güncellemesinde geri eklenir. */
+const dock=(el,compact)=>{const doc=root.document,tools=doc&&doc.getElementById('tools'),host=compact&&tools?tools:(doc.getElementById('app')||doc.body);if(el&&el.parentNode!==host)host.appendChild(el);};
+root.MP1View={esc,color,TAB,PHASE,ERR,fmtCode,CODE_LEN,dock,players,apply,MP_VERSION,verLine};
 })(typeof globalThis!=='undefined'?globalThis:this);

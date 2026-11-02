@@ -23,11 +23,12 @@ test('KARŞI TEKLİF gerçek anlaşma penceresini (aiDealOpen) karşı teklif ki
   const h=world();h.run('var r=addOffer(10),n=G.inbox.at(-1),opened=null,o0=UI.aiDealOpen;UI.aiDealOpen=function(d){opened=d;return o0.apply(this,arguments);};UI.act("noteQuick",n.uid+":c");');
   eq(J(h,'!!opened&&opened.from===1'),true);eq(J(h,'r.status'),'pending');
 });
-test('kaydırma: teklif kartı kalkar, karar Gelen kutusunda bekler (yeni kayıt yok); karar bekleyen olay kartı kaydırılarak kaybolmaz; bilgi kartı kalkar',()=>{
+test('kaydırma: teklif kartı kalkar, karar Gelen kutusunda bekler (yeni kayıt yok); karar bekleyen olay kaydırılınca gizlenir ve durum listesinden açılır (MP.7.5); bilgi kartı kalkar',()=>{
   const h=world();h.run('var r=addOffer(10),n=G.inbox.at(-1),c0=DiplomaticInbox.state().records.length;');
   eq(J(h,'UI.noteSwipe(n.uid)'),true);eq(J(h,'G.inbox.some(x=>x.uid===n.uid)'),false);eq(J(h,'r.status'),'pending');eq(J(h,'DiplomaticInbox.state().records.length===c0'),true);
   h.run(`UI.notify({kind:'chain',data:{id:'x'},ico:'?',title:'Olay',sub:'karar',key:'ch1'});var ev=G.inbox.at(-1);`);
-  eq(J(h,'UI.noteSwipe(ev.uid)'),false);eq(J(h,'G.inbox.some(x=>x.uid===ev.uid)'),true,'decision event stays');
+  eq(J(h,'UI.noteSwipe(ev.uid)'),true);eq(J(h,'G.inbox.find(x=>x.uid===ev.uid).hidden'),true,'MP.7.5: decision event kept, card hidden');
+  eq(J(h,`UI.topStatusItems().items.some(i=>i.x===String(ev.uid))`),true,'re-openable from the status list');
   h.run(`UI.notify({kind:'wardec',data:1,ico:'⚔',title:'SAVAŞ İLANI',sub:'x',key:'wd:1'});var wd=G.inbox.at(-1);`);
   eq(J(h,'UI.noteSwipe(wd.uid)'),true);eq(J(h,'G.inbox.some(x=>x.uid===wd.uid)'),false);
 });
