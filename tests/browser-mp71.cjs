@@ -101,7 +101,8 @@ let relay,px,base,tls,bH,bB,bC;
       assert.deepEqual(x,{map:true,btn:false,panel:false,txt:false});}
     assert.equal(await Bp.evaluate(()=>G.p.name),'Saf Akıl Ağı');await shot(H,'a1-host-map');await shot(Bp,'a1-b-map');
     /* diğer paneller denetimi: misafirde MP komutu olmayan (soluk + uyarı) gerçek STARS eylemleri — envanter (MULTIPLAYER-MP71-SONUC.md) */
-    metrics.unsupported=await Bp.evaluate(()=>MP6Stars.S.unsupported);metrics.hooks=await Bp.evaluate(()=>[...MP6Stars.S.hooks].sort());
+    await wait(Bp,()=>MP6Stars.S.unsupported&&MP6Stars.S.unsupported.length>0&&document.getElementById('mp6Disabled').textContent.length>0);
+    metrics.unsupported=await Bp.evaluate(()=>MP6Stars.S.unsupported);assert(!metrics.unsupported.includes('dealSend')&&!metrics.unsupported.includes('tab'),'view/supported actions are not dimmed');metrics.hooks=await Bp.evaluate(()=>[...MP6Stars.S.hooks].sort());
   });
   let o1;
   if(process.env.MP71_STOP==='A1')throw Error('stop');

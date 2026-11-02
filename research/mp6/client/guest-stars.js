@@ -97,8 +97,13 @@ const NOT_MP={ok:false,why:'Bu karar çok oyunculuda henüz desteklenmiyor (MP.6
 function gate(){
   /* desteklenmeyen kontroller görsel olarak da devre dışı: gerçek UI.act'in eylem listesinden misafirde izinli olmayanlar soluk gösterilir
      (dokununca açık uyarı). Liste arayüz kodundan okunur; yeni eylem eklenirse kendiliğinden kapsanır. */
-  try{const all=new Set([...String(UI.act).matchAll(/case '([A-Za-z0-9_]+)'/g)].map(m=>m[1]));S.unsupported=[...all].filter(a=>!VIEW.has(a)&&!ACT[a]).sort();
-    const st=doc.createElement('style');st.id='mp6Disabled';st.textContent=S.unsupported.map(a=>'[data-a="'+a+'"]').join(',')+'{opacity:.42!important;filter:grayscale(.7)}';doc.head.appendChild(st);}catch{}
+  /* MP.7.1: runtime UI.act'i kendisi sarıyor (ekonomi arayüzü); String(UI.act) sarmalayıcıyı verdiğinden liste boş kalıyordu
+     (düğmeler engelleniyor ama soluk gösterilmiyordu). Liste yine aynı kaynaktan, gerçek act gövdesinden (/ui.js) çıkarılır. */
+  const fill=src=>{try{const all=new Set([...String(src).matchAll(/case '([A-Za-z0-9_]+)'/g)].map(m=>m[1]));S.unsupported=[...all].filter(a=>!VIEW.has(a)&&!ACT[a]).sort();
+    const st=doc.getElementById('mp6Disabled')||doc.head.appendChild(Object.assign(doc.createElement('style'),{id:'mp6Disabled'}));
+    st.textContent=S.unsupported.length?S.unsupported.map(a=>'[data-a="'+a+'"]').join(',')+'{opacity:.42!important;filter:grayscale(.7)}':'';}catch{}};
+  if(/case '/.test(String(UI.act)))fill(UI.act);
+  else fetch('ui.js').then(r=>r.text()).then(t=>{const i=t.indexOf('  act(a, x, el){');if(i<0)return;const j=t.slice(i+16).search(/\n  [A-Za-z_$][\w$]*\s*\(/);fill(t.slice(i,j<0?undefined:i+16+j));}).catch(()=>{});
   /* onay/seçim düğmeleri (_hook) kendi dinleyicisiyle çalışır; UI.act'te karşılığı yoktur (boş geçer). Adları arayüz kaynağından:
      yalnız izinli bir pencereden açılabilirler ve dünyayı değiştiren son çağrıları yukarıdaki MP sarmalayıcılarına iner. */
   S.hooks=new Set();for(const o of [UI,typeof ArchiveUI!=='undefined'?ArchiveUI:null].filter(Boolean))   // ArchiveUI sözcüksel const (window'da yok)
