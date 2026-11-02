@@ -56,7 +56,7 @@ async function room(H,cap,guests){
   const link=await H.textContent('#mp1Link');
   for(const [p,name,d,taps] of guests){await joinTaps(p,link,name,taps||1);
     await wait(p,()=>MP1Join.screen==='lobby'&&MP1Join.lobby&&MP1Join.lobby.mode==='design'&&document.getElementById('jEditMe'),undefined,40000);
-    metrics['joinErrors_'+name]=await p.evaluate(()=>MP1Join.errors.slice());
+    metrics['joinErrors_'+name]=await p.evaluate(()=>MP1Join.errors.slice());await p.waitForTimeout(800);   // lobi açılışındaki 700 ms dokunma yutma penceresi (MP.7.4)
     await tap(p,'#jEditMe');await wait(p,()=>document.getElementById('mp7Head'));await design(p,d);
     await wait(p,()=>/kaydedildi/.test(document.getElementById('jDraft').textContent));await tap(p,'#jReady');}
   await wait(H,()=>MP1Host.host.canStart().ok);await H.waitForTimeout(300);await shot(H,'room-lobby-'+guests.length);
@@ -102,7 +102,7 @@ let relay,px,base,tls,bH,bB,bC;
   });
   await test('A2 küçük çok oyunculu düğmesi: host ve misafirde varsayılan "👥 n" (haritayı ve hız kutusunu kapatmaz); dokununca mevcut panel (kod, durum, KAYDET), tekrar dokununca kapanır',async()=>{
     for(const [p,sel] of [[H,'#mp1Mini [data-g="toggle"]'],[Bp,'#mp6Conn']]){
-      await wait(p,()=>{const m=document.getElementById('mp1Mini');return m&&m.classList.contains('mp74-compact')&&m.offsetParent;});
+      await wait(p,()=>{const m=document.getElementById('mp1Mini');return m&&m.classList.contains('mp74-compact')&&m.getClientRects().length>0;});
       const r=await p.evaluate(()=>{const a=document.getElementById('mp1Mini').getBoundingClientRect(),t=document.getElementById('timepod'),b=t&&t.getBoundingClientRect();
         return {w:a.width,h:a.height,text:document.getElementById('mp1Mini').textContent.trim(),overlap:!!b&&a.x<b.x+b.width&&b.x<a.x+a.width&&a.y<b.y+b.height&&b.y<a.y+a.height};});
       metrics['pill_'+(p===H?'host':'B')]=r;assert(r.w<=130&&r.h<=60,JSON.stringify(r));assert.match(r.text,/👥\s*\d/);assert.equal(r.overlap,false,'pill overlaps the time box');
@@ -127,21 +127,23 @@ let relay,px,base,tls,bH,bB,bC;
   });
   await test('A4 karttan hızlı karar (misafir): KABUL gerçek dokunmayla → host kabul eder, kaynak bir kez aktarılır; ÇİFT dokunma tek "respond"; REDDET; KARŞI TEKLİF gerçek anlaşma penceresini açar',async()=>{
     await Bp.evaluate(()=>{const c0=MP1Join.cmd;window.__cmds=[];MP1Join.cmd=function(c){__cmds.push(c.kind);return c0.apply(this,arguments);};});
-    const id=await hostOffer(H,1,13),key='mp71:'+id;await wait(Bp,k=>(G.inbox||[]).some(n=>n.key===k)&&document.querySelector('#inbox [data-a="noteQuick"]'),key);
-    const uid=await Bp.evaluate(k=>G.inbox.find(n=>n.key===k).uid,key);await shot(Bp,'a4-b-quick');
-    const L=await Bp.evaluate(u=>[...document.querySelectorAll('#inbox [data-x^="'+u+':"]')].map(b=>{const r=b.getBoundingClientRect();return [b.textContent,r.x>=0&&r.right<=innerWidth&&r.y>=0&&r.bottom<=innerHeight,r.height];}),uid);
-    metrics.quickButtons=L;assert.deepEqual(L.map(x=>x[0]),['KABUL','REDDET','KARŞI TEKLİF']);assert(L.every(x=>x[1]&&x[2]>=44),JSON.stringify(L));
-    const e0=await Bp.evaluate(()=>G.p.res.ene);const b=await Bp.locator('#inbox [data-x="'+uid+':y"]').boundingBox();
-    await tapAt(Bp,b.x+b.width/2,b.y+b.height/2);await tapAt(Bp,b.x+b.width/2,b.y+b.height/2);
+    const id=await hostOffer(H,1,13),key='mp71:'+id;
+    /* ayna her yenilendiğinde kartın uid'si değişir: düğmeler her seferinde teklif anahtarından bulunur */
+    const btns=k=>Bp.evaluate(k=>{const n=(G.inbox||[]).find(n=>n.key===k);if(!n)return [];return [...document.querySelectorAll('#inbox [data-x^="'+n.uid+':"]')].map(b=>{const r=b.getBoundingClientRect();return {t:b.textContent,x:b.dataset.x.split(':')[1],in:r.x>=0&&r.right<=innerWidth&&r.y>=0&&r.bottom<=innerHeight,h:r.height,cx:r.x+r.width/2,cy:r.y+r.height/2};});},k);
+    await Bp.waitForFunction(k=>{const n=(G.inbox||[]).find(n=>n.key===k);return n&&document.querySelectorAll('#inbox [data-x^="'+n.uid+':"]').length===3;},key,{timeout:30000,polling:100});
+    const L=await btns(key);await shot(Bp,'a4-b-quick');
+    metrics.quickButtons=L.map(b=>[b.t,b.in,b.h]);assert.deepEqual(L.map(b=>b.t),['KABUL','REDDET','KARŞI TEKLİF']);assert(L.every(b=>b.in&&b.h>=44),JSON.stringify(L));
+    const e0=await Bp.evaluate(()=>G.p.res.ene);const yb=L.find(b=>b.x==='y');
+    await tapAt(Bp,yb.cx,yb.cy);await tapAt(Bp,yb.cx,yb.cy);
     await wait(H,id=>MP1Host.host.dip.offers.find(o=>o.id===id).status==='accepted',id);await Bp.waitForTimeout(800);
     assert.equal(await Bp.evaluate(()=>__cmds.filter(k=>k==='respond').length),1,'double tap sends one command');
     await wait(Bp,([k,id])=>!G.inbox.some(n=>n.key===k)&&(DiplomaticInbox.state().records.find(r=>r.mp===id)||{}).status==='accepted',[key,id]);
     await wait(Bp,e=>G.p.res.ene>=e+13,e0);
-    const id2=await hostOffer(H,1,17),k2='mp71:'+id2;await wait(Bp,k=>(G.inbox||[]).some(n=>n.key===k),k2);const u2=await Bp.evaluate(k=>G.inbox.find(n=>n.key===k).uid,k2);
-    await wait(Bp,u=>document.querySelector('#inbox [data-x="'+u+':n"]'),u2);await tap(Bp,'#inbox [data-x="'+u2+':n"]');
+    const tapQuick=async(k,c)=>{await Bp.waitForFunction(k=>{const n=(G.inbox||[]).find(n=>n.key===k);return n&&document.querySelectorAll('#inbox [data-x^="'+n.uid+':"]').length===3;},k,{timeout:30000,polling:100});
+      const b=(await btns(k)).find(b=>b.x===c);await tapAt(Bp,b.cx,b.cy);};
+    const id2=await hostOffer(H,1,17);await tapQuick('mp71:'+id2,'n');
     await wait(H,id=>MP1Host.host.dip.offers.find(o=>o.id===id).status==='rejected',id2);
-    const id3=await hostOffer(H,1,19),k3='mp71:'+id3;await wait(Bp,k=>(G.inbox||[]).some(n=>n.key===k),k3);const u3=await Bp.evaluate(k=>G.inbox.find(n=>n.key===k).uid,k3);
-    await wait(Bp,u=>document.querySelector('#inbox [data-x="'+u+':c"]'),u3);await tap(Bp,'#inbox [data-x="'+u3+':c"]');
+    const id3=await hostOffer(H,1,19);await tapQuick('mp71:'+id3,'c');
     await wait(Bp,()=>document.getElementById('diploPane').classList.contains('show')||!document.getElementById('modal').classList.contains('hidden'));await shot(Bp,'a4-b-counter');
     metrics.counterView=await Bp.evaluate(()=>(document.querySelector('#diploPane.show,#modal:not(.hidden)')||{}).textContent.slice(0,200));
     assert.match(metrics.counterView,/teklif|TEKLİF|Müzakere|MÜZAKERE/i);

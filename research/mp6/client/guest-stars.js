@@ -21,7 +21,7 @@ const doc=document;
 const ov=doc.createElement('div');ov.id='mp6App';ov.className='mp1-overlay mp6-join';ov.innerHTML='<div class="mp1-status">Yükleniyor…</div>';
 (doc.body||doc.documentElement).appendChild(ov);
 
-const S={swiped:new Set(),warQuote:{},pendingWar:null,counter:null,J:null,mirror:null,rev:0,timer:null,building:false,started:false,on:false,lastBuild:0,minGap:600,uiSent:false,seenResults:0,hostSpd:0,held:0,
+const S={swiped:new Set(),decWait:new Map(),warQuote:{},pendingWar:null,counter:null,J:null,mirror:null,rev:0,timer:null,building:false,started:false,on:false,lastBuild:0,minGap:600,uiSent:false,seenResults:0,hostSpd:0,held:0,
   stats:{mirrors:0,deltas:0,bytes:0,builds:0,buildMs:[],resyncs:0,held:0,blocked:{},sent:{},speedMsgs:0},
   /* MP.7: oyun başlangıcı durum makinesi — her aşama yalnız gerçek olay olunca tamamlanır; eksik veri sınırlı geri çekilmeyle
      yeniden istenir (sonsuz bekleme ya da hızlı döngü yok); hata nedeni oyun verisi/jeton/oda anahtarı içermez */
@@ -378,12 +378,11 @@ function gate(){
   /* MP.7.4: kaydırılan kartın imzası saklanır (ayna G.inbox'ı her kurulumda yeniler) */
   if(typeof UI.noteSwipe==='function'){const ns0=UI.noteSwipe.bind(UI);UI.noteSwipe=function(uid){const it=(G.inbox||[]).find(n=>n.uid===+uid),ok=ns0(uid);if(ok&&it&&S.on)S.swiped.add(noteSig(it));return ok;};}
   const DI=DiplomaticInbox,resolve0=DI.resolve.bind(DI),gate0=DI.gate.bind(DI);
-  DI.gate=function(rec){if(S.on&&rec&&rec._mpWait)return {ok:false,why:'Karar gönderildi; host yanıtı bekleniyor'};if(S.on&&rec&&rec.mpSq!==undefined){return rec.status==='pending'?{ok:true,why:''}:{ok:false,why:'Teklif sonuçlandı',terminal:true};}
+  DI.gate=function(rec){if(S.on&&rec&&(rec._mpWait||rec.mp&&S.decWait.has('respond:'+rec.mp+':')))return {ok:false,why:'Karar gönderildi; host yanıtı bekleniyor'};if(S.on&&rec&&rec.mpSq!==undefined){return rec.status==='pending'?{ok:true,why:''}:{ok:false,why:'Teklif sonuçlandı',terminal:true};}
     if(S.on&&rec&&rec.mp){if(rec.status!=='pending')return {ok:false,why:'Teklif sonuçlandı',terminal:true};return {ok:true,why:''};}return gate0(rec);};
   DI.resolve=function(id,yes,option,world){
     if(!S.on)return resolve0(id,yes,option,world);
     const rec=this.get(id);if(!rec||rec.status!=='pending')return {ok:false,why:'Teklif geçersiz'};
-    if(rec._mpWait)return {ok:false,why:'Karar gönderildi; host yanıtı bekleniyor'};   // MP.7.4: çift dokunma ikinci komut göndermez
     let c=null;
     if(rec.mpSq!==undefined)c={kind:'statusQuoReply',from:rec.mpSq,accept:!!yes};
     else if(rec.mp)c={kind:'respond',offer:rec.mp,action:yes?'accept':'reject'};
@@ -391,10 +390,12 @@ function gate(){
     else if(rec.kind==='fedvote')c={kind:'fedVote',fed:rec.fid,token:String(rec.token),yes:!!yes};
     else if(rec.kind==='vassal'){const q=G.emps[rec.fid]?.vassalTalk;if(!q)return {ok:false,why:'Müzakere bulunamadı'};c={kind:'vassalReply',sub:real(rec.fid),id:q.id,round:q.round,action:yes?'accept':'reject'};}
     if(!c)return NOT_MP;
-    const cid=send(c);if(!cid)return {ok:false,why:'Host bağlı değil; karar gönderilmedi.'};
+    /* MP.7.4: çift dokunma ikinci komut göndermez — bekleyen karar komut hedefine göre tutulur (ayna kaydı yeniden kursa da) */
+    const dk=decKey(c);if(S.decWait.has(dk))return {ok:false,why:'Karar gönderildi; host yanıtı bekleniyor'};
+    const cid=send(c);if(cid)S.decWait.set(dk,cid);if(!cid)return {ok:false,why:'Host bağlı değil; karar gönderilmedi.'};
     /* MP.7.4: sonuç host'tan gelene kadar kayıt BEKLİYOR kalır (iyimser "kabul edildi" yok); kart ve gelen kutusu yanıtla güncellenir */
     rec._mpWait=cid;rec.why='Karar host\'a gönderildi — yanıt bekleniyor';
-    waits[cid]=res=>{delete rec._mpWait;
+    waits[cid]=res=>{delete rec._mpWait;S.decWait.delete(dk);
       if(res.status==='ok'){rec.status=yes?'accepted':'rejected';rec.finished=G.day;rec.why='';G.inbox=(G.inbox||[]).filter(n=>!(rec.mp&&n.key==='mp71:'+rec.mp)&&n.rec!==rec.id&&!(rec.note&&n.uid===rec.note.uid));}
       else rec.why='Host reddetti: '+why(res);
       toast(res.status==='ok'?'Kararın host\'ta uygulandı.':'Host reddetti: '+why(res),res.status!=='ok');try{UI.drawInbox();UI.topbar();if(typeof ArchiveUI!=='undefined'&&ArchiveUI.selected===rec.id&&!doc.getElementById('modal').classList.contains('hidden'))ArchiveUI.record(rec.id);}catch{}};
@@ -475,6 +476,7 @@ function rebuild(){
 }
 /* MP.6.1: MP.3 teklifleri (insan ya da AI → bu oyuncu) gerçek STARS gelen kutusuna 'aideal' kaydı olarak girer.
    Kimlikler aynadaki numaralara çevrilir; kabul/ret DiplomaticInbox.resolve → MP 'respond'. */
+const decKey=c=>c.kind+':'+(c.offer??c.fed??c.from??c.sub??'')+':'+(c.token??c.id??'');
 const noteSig=n=>typeof n.key==='string'&&n.key?n.key:n.kind+':'+JSON.stringify(n.data===undefined?null:n.data);
 function inboxOffers(){
   const v=S.J&&S.J.game.view,me=S.J&&S.J.empireId;if(!v||!v.dip||typeof DiplomaticInbox==='undefined')return;

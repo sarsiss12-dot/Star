@@ -78,7 +78,7 @@ function receive(t,t0){
     else{J.resumeNoId=true;if(!J.assigned){J.closed=true;J.screen='join';J.err=V.ERR['no-save-id'];try{J.ws&&J.ws.close();}catch{}}}}   // oyun sürüyor ve bu cihazda kimlik yok
   else if(m.type==='lobby'){J.lobby=m;if(m.phase==='closed'){J.closed=true;J.screen='join';J.err=V.ERR['room-closed'];}
     else if(['ingame','paused'].includes(m.phase)&&J.empireId!==null){if(J.screen!=='game'){J.screen='game';J.tab='oyun';history.pushState({mp1:'game'},'');raw({v:1,type:'presence',tab:'oyun'});}}
-    else if(J.screen!=='lobby'&&J.screen!=='game'){J.screen='lobby';history.pushState({mp1:'lobby'},'');}}
+    else if(J.screen!=='lobby'&&J.screen!=='game'){J.screen='lobby';J.swallowUntil=Date.now()+700;history.pushState({mp1:'lobby'},'');}}   // MP.7.4: KATIL'a çift dokunmanın ikinci dokunuşu aynı noktadaki lobi düğmesine düşmez
   else if(m.type==='snapshot'||m.type==='delta'){if(V.apply(J.game,m)==='resync'){J.resyncs=(J.resyncs||0)+1;raw({v:1,type:'resync'});}}
   else if(m.type==='result'){if(J.pending&&J.pending.cid===m.cid){m.ms=Math.round(performance.now()-J.pending.at);J.pending=null;}J.results.push(m);}
   else if(m.type==='lresult')J.lresults.push(m);
@@ -197,6 +197,7 @@ function game(app){
 }
 doc.addEventListener('click',e=>{
   const el=e.target.closest('[data-j]');if(!el)return;const a=el.dataset.j;
+  if(J.swallowUntil&&Date.now()<J.swallowUntil&&a!=='go'){e.preventDefault();e.stopPropagation();return;}
   if(a==='go'){J.code=V.fmtCode(($('jCode').value||'').toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,V.CODE_LEN));connect();}
   else if(a==='tab')J.presence(el.dataset.tab);
   else if(a==='claim')J.claim(+el.dataset.e);
