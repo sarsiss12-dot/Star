@@ -35,7 +35,7 @@ Tam koşudan sonra değişen yalnız istemci dosyalarıdır (`guest-stars.js` g�
 | mp5_docker | 6 / 0 | imaj güncel ağaçtan derlendi; `research/mp71/client/mp71-dip.js` imajda |
 | browser-mp5 | 10 / 0 | Docker relay + TLS vekili + TCP kesici |
 
-SON_ADAY_TEKRAR
+**Son aday tekrar** (misafir görünüm listesi düzeltmelerinden sonra): browser-mp71 12/0, browser-mp6 11/0, browser-mp61 13/0, browser-mp62 10/0, browser-mp63 15/0, browser-mp64 10/0, browser-mp7 9/0. Diğer satırlar aynı adayın köprüsüyle; değişiklik yalnız misafir görünüm listesindeydi.
 
 ## browser-mp71 vakaları
 
