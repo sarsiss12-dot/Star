@@ -1,0 +1,122 @@
+{
+  "results": [
+    {
+      "name": "uzun oyun ölçümü: orta / 5 AI, misafirde diplomasi paneli açık, en yüksek hız; 60/120. ay",
+      "status": "PASS",
+      "ms": 58298
+    }
+  ],
+  "metrics": {
+    "joinErrors_Bora": [],
+    "ffS_m60": 10,
+    "rows": [
+      {
+        "label": "m60",
+        "month": 60,
+        "host": {
+          "monthTick": {
+            "n": 3,
+            "med": 24.4,
+            "p95": 62.8,
+            "max": 62.8
+          },
+          "publish": {
+            "n": 38,
+            "med": 1.9,
+            "p95": 7.5,
+            "max": 17.6
+          },
+          "longtask": {
+            "n": 1,
+            "med": 87,
+            "p95": 87,
+            "max": 87
+          },
+          "heapMB": 27
+        },
+        "guest": {
+          "build": {
+            "n": 13,
+            "med": 14.3,
+            "p95": 25.5,
+            "max": 25.5
+          },
+          "refresh": {
+            "n": 18,
+            "med": 1.8,
+            "p95": 6.5,
+            "max": 6.5
+          },
+          "longtask": {
+            "n": 1,
+            "med": 65,
+            "p95": 65,
+            "max": 65
+          },
+          "builds": 31,
+          "deltas": 30,
+          "minGap": 600,
+          "paneRewrites": 0,
+          "mutations": 0,
+          "surfaceKept": 30,
+          "heapMB": 13
+        },
+        "wallS": 23
+      },
+      {
+        "label": "m120",
+        "month": 120,
+        "host": {
+          "monthTick": {
+            "n": 3,
+            "med": 43.9,
+            "p95": 72.5,
+            "max": 72.5
+          },
+          "publish": {
+            "n": 37,
+            "med": 2.4,
+            "p95": 4.4,
+            "max": 5.5
+          },
+          "longtask": {
+            "n": 3,
+            "med": 63,
+            "p95": 97,
+            "max": 97
+          },
+          "heapMB": 43
+        },
+        "guest": {
+          "build": {
+            "n": 13,
+            "med": 13.9,
+            "p95": 21.4,
+            "max": 21.4
+          },
+          "refresh": {
+            "n": 18,
+            "med": 1.9,
+            "p95": 5.4,
+            "max": 5.4
+          },
+          "longtask": {
+            "n": 0
+          },
+          "builds": 61,
+          "deltas": 60,
+          "minGap": 600,
+          "paneRewrites": 0,
+          "mutations": 0,
+          "surfaceKept": 60,
+          "heapMB": 22
+        },
+        "wallS": 48
+      }
+    ],
+    "ffS_m120": 11,
+    "errors": []
+  },
+  "size": "orta",
+  "ai": 5
+}

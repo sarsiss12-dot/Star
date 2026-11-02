@@ -118,17 +118,12 @@ let relay,px,base,tls,bH,bB;
     await wait(Bp,()=>UI.activeWarsList().length===UI.topStatusItems().wars);
     metrics.afterPeace=await Bp.evaluate(()=>({wars:UI.topStatusItems().wars,list:UI.activeWarsList().length}));
   });
-  await test('A4 dokunmatik miktar: anlaşma miktarı ve filo bileşimi penceresinde +10 / +50 / MAKS / SIFIR (dokunma); klavye açılmaz; değer motor sınırında; onaysız komut gitmez',async()=>{
+  await test('A4 dokunmatik miktar: filo bileşimi penceresinde SIFIR / −50 / −10 / +10 / +50 (dokunma), klavye açılmaz; anlaşma miktarında pencerenin kendi düğmeleri korunur (çift kontrol yok)',async()=>{
     await Bp.evaluate(()=>{UI.openDiplo();UI.selectDiplo(1,'deal');});
     await tap(Bp,'#diploPane [data-a="dealAdd"][data-x="give:res"]');await tap(Bp,'#modal [data-a="pickOne"][data-x="0"]');
-    await wait(Bp,()=>document.querySelector('#modal .qtySteps'));await shot(Bp,'a4-b-deal-qty');
-    const sent0=await Bp.evaluate(()=>JSON.stringify(MP6Stars.S.stats.sent));
-    const v0=+(await Bp.inputValue('#dealAmountInput'));await Bp.locator('#modal .qtySteps').first().locator('.qtyStep:text-is("+100")').tap();await Bp.locator('#modal .qtySteps').first().locator('.qtyStep:text-is("+10")').tap();
-    const v1=+(await Bp.inputValue('#dealAmountInput')),max=+(await Bp.getAttribute('#dealAmountInput','max'));
-    assert.equal(v1,Math.min(max,v0+110));assert.notEqual(await Bp.evaluate(()=>document.activeElement&&document.activeElement.id),'dealAmountInput','keyboard not opened');
-    await Bp.locator('#modal .qtySteps').first().locator('.qtyStep:text-is("MAKS")').tap();assert.equal(+(await Bp.inputValue('#dealAmountInput')),max);
-    await Bp.locator('#modal .qtySteps').first().locator('.qtyStep:text-is("SIFIR")').tap();assert.equal(+(await Bp.inputValue('#dealAmountInput')),+((await Bp.getAttribute('#dealAmountInput','min'))||0));
-    assert.equal(await Bp.evaluate(()=>JSON.stringify(MP6Stars.S.stats.sent)),sent0,'steppers send nothing');
+    /* anlaşma miktarı penceresinin kendi ±10 ve hazır miktar düğmeleri var: ek satır eklenmez (çift kontrol yok) */
+    await wait(Bp,()=>document.getElementById('dealAmountInput'));await shot(Bp,'a4-b-deal-qty');
+    assert.equal(await Bp.evaluate(()=>document.querySelectorAll('#modal .qtySteps').length),0,'no duplicate stepper next to the window\'s own amount buttons');
     await Bp.evaluate(()=>{UI.closeModal();document.getElementById('diploPane').classList.remove('show');});
     const fid=await H.evaluate(()=>G.fleets.find(f=>f.e===0&&f.ships.length&&!f.federal).id);
     await H.evaluate(id=>{View.sel=G.fleets.find(f=>f.id===id);UI.tab('filo');UI.refresh();},fid);await tap(H,'[data-a="compositionEdit"][data-x="'+fid+'"]');
@@ -136,7 +131,8 @@ let relay,px,base,tls,bH,bB;
     const steps=await H.evaluate(()=>[...document.querySelector('#modal .qtySteps').querySelectorAll('.qtyStep')].map(b=>b.textContent));metrics.fleetSteps=steps;
     assert.deepEqual(steps.slice(0,5),['SIFIR','−50','−10','+10','+50']);
     const c0=+(await H.inputValue('#'+first));await H.locator('#modal .qtySteps').first().locator('.qtyStep:text-is("+10")').tap();
-    assert.equal(+(await H.inputValue('#'+first)),c0+10);await shot(H,'a4-host-fleet-qty');await H.evaluate(()=>UI.closeModal());
+    assert.equal(+(await H.inputValue('#'+first)),c0+10);assert.notEqual(await H.evaluate(()=>document.activeElement&&document.activeElement.tagName),'INPUT','keyboard not opened');
+    await H.locator('#modal .qtySteps').first().locator('.qtyStep:text-is("SIFIR")').tap();assert.equal(+(await H.inputValue('#'+first)),0);await shot(H,'a4-host-fleet-qty');await H.evaluate(()=>UI.closeModal());
   });
   await test('A5 karar bekleyen olay kaydırılınca gizlenir (silinmez), ☰ durum listesinde kalır ve oradan aynı karar penceresi açılır',async()=>{
     await H.evaluate(()=>{UI.closeModal();document.getElementById('diploPane').classList.remove('show');});

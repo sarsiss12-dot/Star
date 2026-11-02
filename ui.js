@@ -7527,6 +7527,7 @@ const UI = {
     if(!root||!root.querySelectorAll)return;
     for(const inp of root.querySelectorAll('input[type="number"]')){
       if(inp.dataset.stepped)continue;inp.dataset.stepped='1';
+      if(inp.parentElement&&inp.parentElement.querySelector('button'))continue;   // pencerenin kendi miktar düğmeleri var (ör. anlaşma miktarı ±10 / hazır değerler)
       const fleet=/^fc-/.test(inp.id||''),pct=/^vs/.test(inp.id||''),steps=fleet?[-50,-10,10,50]:pct?[-5,-1,1,5]:[-100,-10,10,100];
       const wrap=document.createElement('div');wrap.className='qtySteps';wrap.setAttribute('role','group');wrap.setAttribute('aria-label','Miktar');
       const mk=(t,fn,label)=>{const b=document.createElement('button');b.type='button';b.className='qtyStep';b.textContent=t;b.setAttribute('aria-label',label||t);
