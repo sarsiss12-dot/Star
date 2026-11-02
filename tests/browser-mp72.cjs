@@ -108,7 +108,8 @@ let relay,px,base,tls,bH,bB,bC;
   let ai;
   await test('A2 elçi: B gerçek İLİŞKİ sayfasından ELÇİ GÖNDER → elçi penceresinde görev seçer (dokunma) → host motoru uygular; yeniden açınca MEVCUT GÖREV; GERİ ÇEK → host kaydı siler',async()=>{
     /* fikstür: B ile bir AI arasında temas (yeni oyunda henüz yok); elçi kuralları motorun */
-    ai=await H.evaluate(()=>{const B=G.emps[1],o=G.emps.find(e=>e.ai&&!e.dead&&!e.wild&&!B.war[e.id]);B.contact[o.id]=o.contact[B.id]=true;MP1Host.host.publish();return envoyGate(B,o.id).ok?o.id:-1;});
+    ai=await H.evaluate(()=>{const B=G.emps[1];for(const o of G.emps.filter(e=>e.ai&&!e.dead&&!e.wild&&!B.war[e.id])){const c=[B.contact[o.id],o.contact[B.id]];B.contact[o.id]=o.contact[B.id]=true;
+      if(envoyGate(B,o.id).ok){MP1Host.host.publish();return o.id;}B.contact[o.id]=c[0];o.contact[B.id]=c[1];}return -1;});   // doktrini elçiyi yasaklamayan bir AI
     assert(ai>0,'envoy gate');
     await wait(Bp,id=>G.p.contact[id],ai);
     await Bp.evaluate(id=>{UI.openDiplo();UI.selectDiplo(id,'relation');},ai);await tap(Bp,'#diploPane [data-a="envoy"][data-x="'+ai+'"]');
@@ -163,8 +164,10 @@ let relay,px,base,tls,bH,bB,bC;
     await Bp.evaluate(([a,id])=>{UI.closeModal();View.sel=G.fleets.find(f=>f.id===id);View.selSys=G.sys[G.p.home];UI.openDiplo();UI.selectDiplo(a,'relation');},[fx.ally,fid]);
     await wait(Bp,()=>document.querySelector('#diploPane .jointOps'));
     await Bp.evaluate(()=>{const d=document.querySelector('#diploPane .jointOps');d.open=true;d.scrollIntoView();});
-    await wait(Bp,a=>document.querySelector('#diploPane [data-a="jointPrepare"][data-x^="'+a+':defend:"]:not([disabled])'),fx.ally);await shot(Bp,'a6-b-joint-panel');
-    await tap(Bp,'#diploPane [data-a="jointPrepare"][data-x^="'+fx.ally+':defend:"]');await wait(Bp,()=>document.querySelector('#modal [data-a="jointSend"]'));await shot(Bp,'a6-b-joint-confirm');
+    /* etkin gerçek destek düğmesi (BÖLGEYİ SAVUN ya da FİLOMU DESTEKLE; etkinliği aynadaki bilinen sistem / seçili filoya bağlı) */
+    const btn=await (await Bp.waitForFunction(a=>{const b=document.querySelector('#diploPane [data-a="jointPrepare"][data-x^="'+a+':defend:"]:not([disabled])')||document.querySelector('#diploPane [data-a="jointPrepare"][data-x^="'+a+':follow:"]:not([disabled])');return b?b.dataset.x:false;},fx.ally,{timeout:30000,polling:100})).jsonValue();
+    metrics.jointKind=btn.split(':')[1];await shot(Bp,'a6-b-joint-panel');
+    await tap(Bp,'#diploPane [data-a="jointPrepare"][data-x="'+btn+'"]');await wait(Bp,()=>document.querySelector('#modal [data-a="jointSend"]'));await shot(Bp,'a6-b-joint-confirm');
     const n0=await H.evaluate(()=>MP1Host.host.state.journal?MP1Host.host.state.journal.length:0);
     await tap(Bp,'#modal [data-a="jointSend"]');
     metrics.jointFeedback=await (await Bp.waitForFunction(()=>{const f=UI._jointFeedback||'';return /^(Kabul|Ret): /.test(f)&&!/host'a gönderildi/.test(f)?f:false;},undefined,{timeout:30000,polling:50})).jsonValue();

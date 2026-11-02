@@ -171,7 +171,7 @@ function gate(){
   wrap('vassalReply',(o,actor,sub,id,round,action,terms)=>mine(actor)?r({kind:'vassalReply',sub:real(+sub),id:String(id),round:round|0,action:String(action),...(action==='counter'?{terms:vasTerms(null,terms)}:{})}):NOT_MP);
   /* MP.7.2 — elçi: gerçek elçi penceresi (görev / geri çağırma) → 'envoy' (motorun setEnvoyTask / recallEnvoy'u host'ta) */
   const hostSays=(c,ok)=>{const cid=send(c);if(cid)waits[cid]=res=>toast(res.status==='ok'?(ok?ok(res):'Host uyguladı.'):'Host reddetti: '+why(res),res.status!=='ok');return cid;};
-  wrap('setEnvoyTask',(o,e,id,task)=>{if(!mine(e))return o(e,id,task);const old=e.envoy&&e.envoy[id];
+  wrap('setEnvoyTask',(o,e,id,task)=>{if(!mine(e)||!Object.prototype.hasOwnProperty.call(ENVOY_TASKS,task))return o(e,id,task);const old=e.envoy&&e.envoy[id];   // geçersiz görev: motorun kendi reddi (dünya değişmez)
     return hostSays({kind:'envoy',target:real(+id),task:String(task)},()=>'Elçi görevi host\'ta uygulandı.')?{ok:true,changed:true,action:old?'change':'send'}:{ok:false,why:'Host bağlı değil; emir gönderilmedi.'};});
   wrap('recallEnvoy',(o,e,id)=>{if(!mine(e))return o(e,id);return hostSays({kind:'envoy',target:real(+id),task:null},()=>'Elçi geri çekildi; host uyguladı.')?{ok:true,changed:true,action:'recall'}:{ok:false,why:'Host bağlı değil; emir gönderilmedi.'};});
   /* MP.7.2 — filo bileşimi: gerçek bileşim penceresi (kaydet / otomatik) → 'composition' (motorun setFleetTemplate'i host'ta) */

@@ -97,6 +97,11 @@ MP.0'dan beri host kendi STARS arayüzünden bir insana ültimatom verebiliyordu
 
 Ayrıntı: `research/mp72/evidence/REGRESYON.md`.
 
+**Regresyon:**
+- Node tam koşu 166 paket, 6330 / 3 (yalnız bilinen `faz95d_identity`).
+- Son adayla MP paketleri 35 / 697 / 0.
+- Chromium: MP.0–MP.7.2, tek oyunculu 96H.10 ve Docker hepsi PASS.
+
 **`tests/mp72_gameplay_test.js` (Node): 12/0.**
 - elçi (motor çağrısıyla bayt-bayt aynı; Save8'de);
 - elçi yetkisi ve kapasitesi;
@@ -120,6 +125,8 @@ Ayrıntı: `research/mp72/evidence/REGRESYON.md`.
 - A6: ortak destek. Gerçek panel host verisiyle, BÖLGEYİ SAVUN → TALEBİ GÖNDER, host motoru değerlendirir. Rastgele galaksinin rota / ikmal / savunma koşullarıyla motor kendi gerekçesiyle "Ret" verdi; kabul + iptal yolu Node fikstüründe.
 - A7: yetki.
 - B1: host + 2. C → B elçi; B'nin aynasında C'nin elçi haritası yok; başkasının filosu yönetilemez.
+
+**Testlerin yakaladığı ve düzeltilen hata:** misafirde geçersiz elçi görevi (`UI.act('envoyTask','1')`) sarmalayıcıdan "başarılı" dönüyor, tek oyunculu kod `ENVOY_TASKS[undefined].n`'de çöküyordu. Artık geçersiz görev motorun kendi reddine gider.
 
 ## 7. Dağıtım
 
