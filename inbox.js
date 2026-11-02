@@ -39,6 +39,10 @@ const DiplomaticInbox = {
     for(const r of this.state().records)if(r.status==='pending'){
       if(G.day>=r.expires){r.status='expired';r.finished=G.day;continue;}
       if(r.kind==='fedrequest'){const row=fedOf(r.fid)?.admissionResults?.[r.token];if(row)r.sub=row.why;}
+      /* MP.7.5: savaş bittiyse barış / statüko kaydı kapanır; aynı devletten daha yeni barış teklifi eskisinin yerine geçer (bekleyen eş kayıt birikmez) */
+      if((r.kind==='peace'||r.kind==='sqOffer')&&G.emps[r.from]&&(!G.p.war[r.from]||this.state().records.some(x=>x!==r&&x.kind===r.kind&&x.from===r.from&&x.status==='pending'&&x.born>r.born))){
+        r.status='invalid';r.why=G.p.war[r.from]?'Aynı devletten daha yeni teklif geldi':'Savaş sona erdi';r.finished=G.day;G.inbox=(G.inbox||[]).filter(n=>n.uid!==r.note?.uid);continue;}
+      /* END MP.7.5 INBOX */
       if(this.deal(r))continue; // quote only on inspection/commit, not every daily tick
       const gate=this.gate(r);if(gate.terminal){r.status=gate.status||'invalid';r.why=gate.why;r.finished=G.day;}
     }

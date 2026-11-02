@@ -30,7 +30,7 @@ const S={swiped:new Set(),decWait:new Map(),warQuote:{},pendingWar:null,counter:
 /* ---- 1. eylem kapısı ---- */
 /* Yalnız görünüm/gezinme (dünyayı değiştirmeyen) eylemler yerelde çalışır. MP.6.1: arşiv/gelen kutusu görünümleri, anlaşma,
    vasallık ve federasyon taslak ekranları da görünümdür (gönderim motor işlevinde MP komutuna çevrilir). */
-const VIEW=new Set(['noteQuick','noteSwipe','tab','full','cameraReset','cameraFocus','home','fit','topStatus','diploPane','globalPane','advClose','advShow','advNever','planetFold',
+const VIEW=new Set(['activeWars','activeWarDiplo','noteQuick','noteSwipe','tab','full','cameraReset','cameraFocus','home','fit','topStatus','diploPane','globalPane','advClose','advShow','advNever','planetFold',
   'radarTog','fleetNamesToggle','grpTog','fedLinksToggle','allyLinksToggle','warLinksToggle','logiToggle','mapMode','bgTog','diploView','diploPick',
   'diploRelation','diploNav','diploFilter','bmPick','bmCancel','vsCurrent','vsInspect','vsType','vsEdit','vsBack','fleetFilter','fedTab','fedMember',
   'closeFed','closeDeal','closeMarket','closeDiplo','memTog','intelView','intelGroup','upInfo','crisInfo','selsys','selfleet','route','fedPane',
@@ -455,6 +455,9 @@ function rebuild(){
   /* finishSaveLoad yüklemede rota kipini, dokunma hareketini ve açık bildirimi sıfırlar; canlı senkronda kullanıcının
      yarım hareketi bozulmasın diye korunur. Kamera View.cam'de; deserialize ona dokunmaz. Seçili filo kimlikle korunur. */
   const keep={route:View.route,routed:View.routed,note:UI._openNote,offer:UI.pendingOffer,sel:View.sel&&View.sel.id},rg=View.resetGesture;
+  /* MP.7.5: kullanıcı dokunurken / kaydırırken (STARS yüzey işaretçisi) ayna uygulanmaz — düğmeler parmağın altında yer değiştirmesin */
+  if(S.started&&UI._surfacePointers&&(UI._surfacePointers.size||Date.now()<(UI._surfaceUntil||0))){S.stats.touchHeld=(S.stats.touchHeld||0)+1;S.timer=setTimeout(rebuild,200);return;}
+  const oldEmps=typeof G!=='undefined'&&G?G.emps:null;
   const t0=performance.now();S.building=true;let ok=false;
   /* MP.6.4: haber okundu / sabitlendi işaretleri yereldir; ayna yeniden kurulunca anahtarla geri konur */
   const nk=new Map(((typeof G!=='undefined'&&G&&G.news&&G.news.records)||[]).map(r=>[r.key,[r.read,r.pinned]]));
@@ -467,10 +470,18 @@ function rebuild(){
   if(!ok){S.stats.fail=(S.stats.fail||0)+1;S.boot.fails++;S.boot.err='Galaksi verisi kurulamadı: '+why;bootLog('deserialize-fail');S.mirror=null;S.rev=0;S.boot.next=Date.now()+1500;return;}
   G.autoSave=false;G.speed=0;
   if(S.started&&UI._diploWorld)UI._diploWorld=G.p;   // açık diplomasi sayfası ve taslaklar korunur
-  if(S.started&&UI._fedTabsWorld)UI._fedTabsWorld=G.emps;   // MP.6.4: federasyon sekmesi / açık bölümler / kaydırma canlı senkronda korunur (openFed dünya kimliği değişince GENEL'e döner)
+  if(S.started&&UI._fedTabsWorld)UI._fedTabsWorld=G.emps;
+  /* MP.7.5 kök neden (misafirde Konsey / federasyon / ekonomi / sağ panel sürekli yenileniyordu): UI.surfaceRender açık paneli yalnız
+     aynı dünya nesnesinde (el._surfaceWorld===G.emps) yerinde günceller; deserialize her kurulumda yeni G.emps yaratınca panel baştan
+     yazılıyordu (titreme, kaydırma ve açık bölüm kaybı, dokunurken düğme kayması). Ayna aynı oyunun yeni hâlidir: önceki dünyaya bağlı
+     yüzeyler yeni dünyaya taşınır; motorun kendi yerinde güncelleme (morph) yolu kullanılır. */
+  if(S.started&&oldEmps)for(const el of doc.querySelectorAll('#diploPane,#panel,#modal')){if(el._surfaceWorld===oldEmps){el._surfaceWorld=G.emps;S.stats.surfaceKept=(S.stats.surfaceKept||0)+1;}}   // MP.6.4: federasyon sekmesi / açık bölümler / kaydırma canlı senkronda korunur (openFed dünya kimliği değişince GENEL'e döner)
   if(S.started){View.route=keep.route;View.routed=keep.routed;UI._openNote=keep.note;UI.pendingOffer=keep.offer;
     if(keep.sel!==null&&keep.sel!==undefined&&!View.sel){const f=G.fleets.find(x=>x.id===keep.sel);if(f)View.sel=f;}}
   const ms=performance.now()-t0;S.stats.builds++;S.stats.buildMs.push(Math.round(ms*10)/10);if(S.stats.buildMs.length>60)S.stats.buildMs.shift();
+  /* MP.7.5: kurulum aralığı ölçülen kurulum süresine uyarlanır (yavaş telefonda deserialize süresinin ~4 katı; 0,6–3 s). Tam ayna her
+     kurulumda yine aynı veriyle kurulur; yalnız sıklık azalır → misafir zamanının çoğunu deserialize'a harcamaz. */
+  {const b=S.stats.buildMs.slice(-5).sort((x,y)=>x-y),med=b[Math.floor(b.length/2)]||0;S.minGap=Math.round(Math.min(3000,Math.max(600,med*4)));}
   if(!S.started)start();else{UI.keepScroll=true;try{UI.refresh();}catch{}}
   paintSpeed();
 }

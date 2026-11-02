@@ -398,6 +398,7 @@ const UI = {
         if(key&&pSeen(s)&&el?.dataset.report===key){G.dismissedBattleReports=cleanBattleDismissals({...G.dismissedBattleReports,[s.id]:key});this.refresh();}
         break;
       }
+      case 'activeWars': this.activeWarsOpen(); break;   // MP.7.5
       case 'diploPane':
         if (typeof closeAllGroups === 'function') closeAllGroups();
         this.openDiplo(); break;
@@ -1988,7 +1989,7 @@ const UI = {
     const e=G.p,items=[],battles=battleCount(),wars=G.emps.filter(o=>!o.dead&&o.id!==e.id&&e.war[o.id]).length;
     const add=(label,action,count=1,x)=>items.push({label,action,count,x});
     if(battles)add('⚔ '+battles+' çatışma','gobattle');
-    if(wars)add('⚔ '+wars+' savaş · Diplomasi','diploPane');
+    if(wars)add('⚔ '+wars+' savaş · Aktif savaşlar','activeWars');   // MP.7.5: sayaçla aynı kanonik listeye götürür
     const pending=typeof DiplomaticInbox!=='undefined'?DiplomaticInbox.pending():0;
     if(pending)add('✉ '+pending+' bekleyen diplomatik teklif','diplomaticInbox',pending);
     if(typeof ArchiveUI!=='undefined'&&ArchiveUI.returnRecord?.world===G.emps)add('✉ İncelenen teklife geri dön','inboxReturn',0);
@@ -7483,6 +7484,37 @@ const UI = {
     box.addEventListener('click',e=>{if(box._swipeAt74&&Date.now()-box._swipeAt74<400&&card(e)){e.stopPropagation();e.preventDefault();}},true);
   },
   /* END MP.7.4 NOTICES */
+  /* MP.7.5: AKTİF SAVAŞLAR — üst ⚔ sayacının saydığı G.p.war listesinin kendisi (yeni savaş motoru yok).
+     Sayaç her canlı düşmanı sayar; diplomasi listesi yalnız temas kurulanları gösterir. Burada hepsi görünür:
+     temas kurulmamış düşman "Bilinmeyen düşman", kriz / vahşi taraf kendi adıyla (gizli bilgi açılmaz). */
+  activeWarsList(){
+    const e=G.p,fronts=(G.warLedger&&G.warLedger.fronts||[]).filter(f=>f.ended===null&&f.sides.includes(e.id));
+    return G.emps.filter(o=>o&&!o.dead&&o.id!==e.id&&e.war[o.id]).map(o=>{
+      const known=!!this.diploKnown(o.id),f=fronts.find(x=>x.sides.includes(o.id)),since=e.warSince&&e.warSince[o.id];
+      const camp=f?fronts.filter(x=>x.campaign===f.campaign&&x!==f):[];
+      const allies=new Set();for(const x of camp)x.sides.forEach((id,i)=>{if(id!==o.id&&id!==e.id&&x.roles[i]===f.roles[f.sides.indexOf(e.id)])allies.add(id);});
+      const pend=typeof DiplomaticInbox!=='undefined'?DiplomaticInbox.state().records.filter(r=>r.status==='pending'&&r.from===o.id&&['peace','sqOffer'].includes(r.kind)).length:0;
+      const sq=typeof canStatusQuo==='function'?canStatusQuo(e,o):null;
+      return {id:o.id,name:o.crisisSide||o.wild?o.name:known?o.name:'Bilinmeyen düşman',known:known&&!o.wild&&!o.crisisSide,special:!!(o.crisisSide||o.wild),
+        cause:known&&e.warCause&&e.warCause[o.id]||'',months:Number.isFinite(since)?Math.max(0,Math.floor((G.day-since)/30)):null,
+        mutual:!!o.war[e.id],front:!!f,allies:[...allies].filter(id=>this.diploKnown(id)).map(id=>this.diploName(id)),pend,
+        peace:typeof canPeace==='function'?canPeace(e,o):true,sq:sq?(sq.ok?'':sq.why):''};});
+  },
+  activeWarsOpen(){
+    const L=this.activeWarsList(),unknown=L.filter(w=>!w.known&&!w.special).length,fronts=L.filter(w=>w.front).length;
+    const row=w=>`<div class="box"><div class="bt"><span>⚔ ${esc(w.name)}</span>${w.pend?`<span class="tag p">${w.pend} barış teklifi</span>`:''}</div>
+      <div class="mini">${w.months!==null?w.months+' aydır savaşta':'Süre bilinmiyor'}${w.cause?' · '+esc(w.cause):''}${w.front?' · aktif cephe':' · cephe kaydı yok'}${w.mutual?'':' · tek taraflı savaş durumu'}</div>
+      ${w.allies.length?`<div class="mini">Aynı seferdeki ortakların: ${w.allies.map(esc).join(', ')}</div>`:''}
+      <div class="mini">${!w.peace?'Barış bu devletle mümkün değil (kan hukuku / sürgün kuralı).':w.sq?'Statüko barışı: '+esc(w.sq):'Statüko barışı koşulları sağlanıyor.'}</div>
+      ${w.known?`<div class="act2"><button class="abtn" data-a="activeWarDiplo" data-x="${w.id}">Diplomasi · barış görüşmesi</button></div>`:''}</div>`;
+    this.openModal(`<div class="mhd"><span>⚔ AKTİF SAVAŞLAR</span><button class="riX" data-a="closem">✕</button></div>
+      <div class="mbd"><div class="row"><span>Savaştığın devlet</span><b>${L.length}</b></div><div class="row"><span>Aktif savaş cephesi</span><b>${fronts}</b></div>
+      ${unknown?`<div class="mini">${unknown} düşmanla henüz temas kurulmadı; adları ve ayrıntıları gizli kalır.</div>`:''}
+      ${L.length?L.map(row).join(''):'<p>Şu anda savaşta değilsin.</p>'}</div>
+      <div class="mft"><button class="ch" data-a="diplomaticInbox">GELEN KUTUSU</button><button class="ch" data-a="closem">KAPAT</button></div>`,'war');
+    this._hook('activeWarDiplo',x=>{const id=+x;this.closeModal();if(typeof closeAllGroups==='function')closeAllGroups();this.openDiplo();this.selectDiplo(id,'relation');});
+  },
+  /* END MP.7.5 WARS */
   openNote(uid){
     const list = G.inbox || [];
     const i = list.findIndex(x => x.uid === +uid);
