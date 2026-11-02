@@ -106,6 +106,11 @@ test('ortak destek: uzak insan (devlet 2) motorun kendi yoluyla AI müttefikten 
   const ships=J(h,'G.fleets.reduce((n,f)=>n+f.ships.length,0)');assert.equal(J(h,`jointCancel(G.emps[2],${r.id}).ok`),true);
   assert.equal(J(h,'G.fleets.reduce((n,f)=>n+f.ships.length,0)'),ships);assert.equal(J(h,'G.fleets.filter(f=>jointReserved(f)).length'),0);
 });
+test('ortak destek "filomu destekle": uzak insanın kendi filosu dayanak; dayanak gücü sahibinin bakışıyla sayılır (motorun devlet-0 varsayımı yalnız uzak insan için genişletildi)',()=>{
+  const h=jw(true);const r=J(h,`(()=>{const a=forces[2];const r=jointRequest(G.emps[2],1,'follow',a.id);return {ok:r.ok,why:r.why,anchor:r.plan&&r.plan.anchor,a:a.id,pow:jointAnchorPower(a.id,jointAt(a)),own:fleetPower(a)};})()`);
+  assert.equal(r.ok,true,r.why);assert.equal(r.anchor,r.a);assert.equal(r.pow,r.own,'anchor power counted for the remote human');
+  const z=jw(false);assert.equal(J(z,`jointAnchorPower(forces[2].id,jointAt(forces[2]))`),0,'without a remote human the engine rule is unchanged (only empire 0)');
+});
 test('ortak destek eşdeğerliği: uzak insan yokken yamalı motor tek oyunculuyla aynı (oyuncu talebi + 20 gün: Save8 ve RNG birebir); insan olmayan devlet 2 hâlâ reddedilir',()=>{
   const a=jw(false),b=jointWorld({player:true});const run=`var __r=jointRequest(G.p,1,'capture',8);for(let i=0;i<400;i++){G.day+=.05;jointTick();stepFleets(.05);}`;
   a.run(run);b.run(run);assert.equal(a.run('serialize()'),b.run('serialize()'));assert.equal(a.run('RND_STATE'),b.run('RND_STATE'));

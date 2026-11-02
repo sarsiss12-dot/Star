@@ -275,7 +275,7 @@ function createHost(opts){
       for(const k of Object.keys(a[sec]))if(!has(b[sec],k))rm.push(k);
       if(Object.keys(up).length)(ops.up||(ops.up={}))[sec]=up;
       if(rm.length)(ops.rm||(ops.rm={}))[sec]=rm;}
-    for(const sec of ['me','lanes','catalog','sci','log','dip','pol','settle','mkt'])if(JSON.stringify(a[sec])!==JSON.stringify(b[sec]))(ops.set||(ops.set={}))[sec]=b[sec];
+    for(const sec of ['me','lanes','catalog','sci','log','dip','pol','settle','mkt','joint'])if(JSON.stringify(a[sec])!==JSON.stringify(b[sec]))(ops.set||(ops.set={}))[sec]=b[sec];
     return ops;
   }
   /* MP.2: görünüm salt okunur olmalı. explorationContext → borderPressure/totalPower gibi motor yolları
@@ -1401,6 +1401,8 @@ function createHost(opts){
        davranış ve RNG birebir aynı. Metin beklenen biçimde değilse kurulum durur. */
     jointRequest=patchEngine(jointRequest,"if(e!==G.p||!other","if(e!==G.p&&!__mpHumanVoter(e.id)||!other");
     jointCancel=patchEngine(jointCancel,"if(!p||e!==G.p||","if(!p||e!==G.p&&!__mpHumanVoter(e.id)||");
+    jointAnchorPower=patchEngine(patchEngine(patchEngine(jointAnchorPower,"f.e===0&&f.ships.length","(f.e===0||__mpHumanVoter(f.e))&&f.ships.length"),
+      "fleetSupply(G.p,f)","fleetSupply(G.emps[f.e],f)"),"aiKnownRoute(G.p,f,","aiKnownRoute(G.emps[f.e],f,");   // desteklenen filonun gücü sahibinin bakışıyla (devlet 0'da G.emps[0]===G.p)
     jointCreate=patchEngine(jointCreate,"!(options.requester===0&&previous.requester===null)","!((options.requester===0||__mpHumanVoter(options.requester))&&previous.requester===null)");
     /* MP.7.2: ültimatomda hedefin "boyun eğme" kararı zarla verilir (AI davranışı). Host'un kendi STARS arayüzünden bir insana
        ültimatom → insan adına zar. Çok oyunculuda insan hedefe yapılmaz (misafir komutu da aynı kuralla reddedilir). */

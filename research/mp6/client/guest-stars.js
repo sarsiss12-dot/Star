@@ -192,10 +192,16 @@ function gate(){
     setTimeout(()=>{if(UI._jointFeedback&&/^Kabul: Talep host/.test(UI._jointFeedback))return;UI._jointFeedback='Talep host\'a gönderildi; müttefikin yanıtı bekleniyor…';try{UI.keepScroll=true;UI.refresh();}catch{}},0);
     return {ok:true,why:'Talep host\'a gönderildi'};});
   wrap('jointCancel',(o,e,id)=>mine(e)?(hostSays({kind:'jointCancel',plan:+id},()=>'Destek talebi iptal edildi; gemiler korunuyor.')?{ok:true}:{ok:false,why:'Host bağlı değil.'}):o(e,id));
-  /* aynı sefer denetimi aynada yapılamaz (savaş defteri yok): gerçek panelin bu ifadesi host kararına bağlanır (metin değişirse panel aynen kalır) */
-  try{const src=String(UI.jointPanel),from="const shared=(G.warLedger?.fronts||[]).some(f=>f.ended===null&&f.sides.includes(e.id)&&warLedgerPair(...f.sides)&&\n        jointContext(f.campaign,f.roles[f.sides.indexOf(e.id)],e.id,f.sides.find(id=>id!==e.id))?.members.includes(o.id));";
-    if(src.split(from).length===2){window.__mp72Shared=id=>!!(jv().allies.find(y=>y.id===real(id))||{}).shared;
-      UI.jointPanel=(0,eval)('({'+src.replace(from,'const shared=__mp72Shared(o.id);')+'})').jointPanel;S.jointPatched=true;}}catch{S.jointPatched=false;}
+  /* aynı sefer denetimi aynada yapılamaz (savaş defteri yok). Misafir sayfasının CSP'si eval'e izin vermez; bu yüzden panel çizilirken
+     YALNIZ o çağrı süresince motorun kendi yolu (G.warLedger → warLedgerPair → jointContext) host'un kararıyla beslenir ve sonra geri yüklenir. */
+  const jp0=UI.jointPanel;
+  UI.jointPanel=function(...a){if(!S.on)return jp0.apply(this,a);const shared=jv().allies.filter(x=>x.shared).map(x=>local(x.id));
+    const L0=G.warLedger,P0=window.warLedgerPair,C0=window.jointContext;
+    G.warLedger={v:1,next:1,fronts:[{campaign:'mp72',ended:null,sides:[0,-7],roles:[0,1]}]};
+    window.warLedgerPair=(x,y)=>x===0&&y===-7||y===0&&x===-7?true:P0(x,y);
+    window.jointContext=(c,...r)=>c==='mp72'?{members:[0,...shared]}:C0(c,...r);
+    try{return jp0.apply(this,a);}finally{G.warLedger=L0;window.warLedgerPair=P0;window.jointContext=C0;}};
+  S.jointPatched=true;
   /* MP.7.2 — federasyon savaş izni önerisi → 'fedWar' (motorun proposeFedWar'ı; insan üyelerin oyu kendi gelen kutusunda) */
   wrap('proposeFedWar',(o,a,b)=>mine(a)&&b?r({kind:'fedWar',target:real(b.id)}):o(a,b));
   /* MP.7.2 — ültimatom / himaye: hedef AI ise motor karar verir (host'ta); insan hedef host'ta reddedilir. Sonuç bildirim olarak gelir. */
