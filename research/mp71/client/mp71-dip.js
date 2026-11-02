@@ -56,10 +56,10 @@ function openSent(){
 function rows(){
   const box=$('archiveRows');if(!box||box.dataset.mp71view!=='sent')return;const keep=box.scrollTop,list0=all();
   const list=mine().filter(o=>{const s=stateOf(o);return !M.filter||(M.filter==='done'?s!=='pending':s===M.filter);});
-  box.innerHTML=list.length?list.map(o=>'<article class="archiveRow mp71Row" data-offer="'+o.id+'"><span class="archiveDate">Gün '+(o.born|0)+'</span><span class="archiveType">'+(o.round>1?'Karşı teklif':'Diplomatik teklif')+'</span>'+
+  box.innerHTML=list.length?list.map(o=>'<article class="archiveRow mp71Row" data-offer="'+o.id+'"><span class="archiveDate">Gün '+(o.born|0)+'</span><span class="archiveType">'+(o.round>1?'Karşı teklif':'Teklif')+'</span>'+
     '<button class="archiveEmpire" data-mp71="empire" data-x="'+o.to+'" title="Devleti incele">'+esc(nameOf(o,o.to))+'</button>'+
-    '<button class="archiveTitle" data-mp71="detail" data-x="'+o.id+'" aria-label="Ayrıntı"><strong>Veriyorsun: '+esc(terms(o.give))+'</strong><span>İstiyorsun: '+esc(terms(o.want))+(o.why&&o.status!=='pending'?' · '+esc(o.why):'')+'</span></button>'+
-    '<span class="archiveState" data-mp71state="'+esc(stateOf(o))+'">'+esc(stateText(o,list0))+'</span></article>').join(''):'<div class="mini archiveEmpty">Bu filtrede gönderilen teklif yok. Teklif: DİPLOMASİ → devlet → MÜZAKERE → TEKLİFİ SUN.</div>';
+    '<button class="archiveTitle" data-mp71="detail" data-x="'+o.id+'" aria-label="Ayrıntı"><strong>Veriyorsun: '+esc(terms(o.give))+'</strong><span>İstiyorsun: '+esc(terms(o.want))+' · <i class="mp71-st">'+esc(stateText(o,list0))+'</i>'+(o.why&&o.status!=='pending'&&o.status!=='countered'?' · '+esc(o.why):'')+'</span></button>'+
+    '<span class="archiveState" data-mp71state="'+esc(stateOf(o))+'" title="'+esc(stateText(o,list0))+'">'+esc(STATE[stateOf(o)]||o.status)+'</span></article>').join(''):'<div class="mini archiveEmpty">Bu filtrede gönderilen teklif yok. Teklif: DİPLOMASİ → devlet → MÜZAKERE → TEKLİFİ SUN.</div>';
   box.scrollTop=keep||ArchiveUI.scroll||0;
 }
 function detail(id){
@@ -186,12 +186,17 @@ function sync(){
       G.inbox=(G.inbox||[]).filter(n=>n.uid!==(r.note&&r.note.uid));M.stats.synced++;try{UI.drawInbox();UI.topbar();}catch{}}}
 }
 function tick(){if(!on())return;try{sync();}catch{}refreshOpen(false);}
+/* gelen kutusu kaydı bir çok oyunculu teklif mi (host: depo eşleşmesi; misafir: rec.mp) */
+const isMp=rec=>!!rec&&rec.kind==='aideal'&&(M.ad.role==='guest'?!!rec.mp:!!offerOfRec(rec));
 /* ---------- kurulum ---------- */
 function attach(ad){
   M.ad=ad;if(M.installed)return;M.installed=true;
   doc.addEventListener('click',onClick,true);
   const shell0=ArchiveUI.shell;ArchiveUI.shell=function(){const r=shell0.apply(this,arguments);if(this.mode!=='mpsent')M.mode=null;else M.mode='sent';if(this.mode!=='mpsent'){M.detail=null;M.confirm=null;}addTab();return r;};
   /* misafir: anlaşma sayfası çizilince kutu (host'ta drawDeal sarmalayıcısı aynı işi yapar) */
+  /* KARARIN ETKİSİ: tek oyunculu AI teklifinin ret yaptırımları (27 ay bekleme, ilişki −5) MP.3 kararında uygulanmaz; doğru metin */
+  const dc0=ArchiveUI.decisionContext;ArchiveUI.decisionContext=function(r,f){if(!on()||!isMp(r))return dc0.apply(this,arguments);
+    return '<div class="box" id="mp71Context"><b>KARARIN ETKİSİ</b><p class="mini">Çok oyunculu teklif. Kabul: hükümler host\'ta mevcut işlem motoruyla (dealQuote / executeDeal) uygulanır; imza Etkisini gönderen öder, senden istenenler kabulde stokundan alınır. Ret: kaynak aktarımı veya anlaşma olmaz; gönderene "reddedildi" bildirimi gider. Karşı teklif: teklif "Karşı teklif gönderildi" olur, yeni şartlar gönderenin gelen kutusuna düşer (en çok 6 tur). Karşı tarafın stoğu sana gösterilmez; kabulde host denetler.</p></div>';};
   if(ad.role==='guest'){const dd0=UI.drawDeal;UI.drawDeal=function(){const r=dd0.apply(this,arguments);if(on())dealBox();return r;};}
   else installHost();
 }

@@ -291,7 +291,8 @@ function gate(){
     if(!c)return NOT_MP;
     const cid=send(c);if(!cid)return {ok:false,why:'Host bağlı değil; karar gönderilmedi.'};
     waits[cid]=res=>toast(res.status==='ok'?'Kararın host\'ta uygulandı.':'Host reddetti: '+why(res),res.status!=='ok');
-    rec.status=yes?'accepted':'rejected';rec.finished=G.day;rec.why='Karar host\'a gönderildi';   // iyimser; bir sonraki ayna host'un gerçeğini getirir
+    rec.status=yes?'accepted':'rejected';rec.finished=G.day;rec.why='Karar host\'a gönderildi';
+    if(rec.mp){G.inbox=(G.inbox||[]).filter(n=>n.key!=='mp71:'+rec.mp);try{UI.drawInbox();}catch{}}   // MP.7.1: kararı verilen teklifin kartı kalkar   // iyimser; bir sonraki ayna host'un gerçeğini getirir
     return {ok:true};};
 }
 const TREATY=['peace','nap','pact','ally','intel','passage'];   // mp-core DIP_TREATY ile aynı
@@ -377,6 +378,15 @@ function inboxOffers(){
     if(!rec)continue;rec.mp=o.id;
     if(o.status!=='pending'&&rec.status!==o.status){rec.status=Object.hasOwn(DiplomaticInbox.states,o.status)?o.status:'invalid';rec.finished=Math.min(G.day,o.expires);rec.why=String(o.why||'');
       if(window.MP71Dip&&MP71Dip.stateOf(o)==='withdrawn'&&!/geri çekti/.test(rec.sub))rec.sub='Gönderen geri çekti · '+rec.sub;}}
+  /* MP.7.1: bekleyen insan / AI teklifi için host'taki gibi gerçek bildirim kartı (üstte; dokununca gelen kutusu kaydı açılır).
+     Ayna her kurulumda G.inbox'ı yeniler; kartlar host'un bekleyen tekliflerinden yeniden çıkarılır, sonuçlananların kartı kalkar. */
+  const live=new Set(v.dip.offers.filter(o=>o.to===me&&o.status==='pending').map(o=>'mp71:'+o.id));
+  const before=(G.inbox||[]).length;G.inbox=(G.inbox||[]).filter(n=>!(typeof n.key==='string'&&n.key.startsWith('mp71:'))||live.has(n.key));let changed=G.inbox.length!==before;
+  for(const o of v.dip.offers){if(!live.has('mp71:'+o.id)||G.inbox.some(n=>n.key==='mp71:'+o.id)||!G.emps[local(o.from)])continue;
+    const strip=l=>l.map(({l:_,...i})=>i);G.inboxUid=(G.inboxUid||0)+1;
+    G.inbox.push({kind:'aideal',data:{from:local(o.from),to:0,give:strip(o.give),want:strip(o.want),born:o.born,expires:o.expires},ico:'📜',cls:'sci',pause:false,uid:G.inboxUid,born:o.born,
+      title:(o.round>1?'Karşı teklif':'Teklif')+' — '+o.fn,sub:'Çok oyunculu teklif · '+(o.want.map(i=>i.l).join(', ')||'anlaşma')+' istiyor',key:'mp71:'+o.id});changed=true;}
+  if(changed)try{UI.drawInbox();UI.topbar();}catch{}
   /* MP.6.2: statüko barışı teklifleri (insan ya da AI → bu oyuncu) → gerçek gelen kutusunda 'sqOffer' */
   for(const q of v.dip.sq||[]){if(q.to!==me||q.status!=='pending'||!G.emps[local(q.from)])continue;
     const rec=DiplomaticInbox.capture({kind:'sqOffer',data:local(q.from),born:q.born,key:'mpsq:'+q.from+':'+q.born,title:'Statüko barışı teklifi — '+q.fn,sub:'Sınırlar fiili durumda donar; kabul edersen host uygular.'});

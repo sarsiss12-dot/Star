@@ -182,6 +182,8 @@ let relay,base,bH,bB,bC,bR,H,Bp,Cp,R,code;
   });
 
   await test('MP diplomasi (host ile aynı panel ve aynı çubuk): B DİPLOMASİ panelinden C\'ye ticaret teklifi gönderir; C kendi panelinden kabul eder; host motoru tam bir kez uygular',async()=>{
+    /* MP.7.1: ayrı MP diplomasi paneli yalnız eski kipte (window.MP7Legacy); bu test o paneli sınar. Gerçek STARS ekranlarıyla akış: browser-mp71 */
+    for(const p of [Bp,Cp])await p.evaluate(()=>{window.MP7Legacy=1;});await wait(Bp,()=>document.getElementById('mp6DipBtn'));await wait(Cp,()=>document.getElementById('mp6DipBtn'));
     await tapEl(Bp,'#mp6DipBtn');await wait(Bp,()=>document.getElementById('mp3Host'));await shot(Bp,'b-mp-diplomacy');
     const n0=await Bp.evaluate(()=>MP1Join.results.length);
     const r=await Bp.evaluate(c=>new Promise(res=>{MP6Stars.dip.ui;const cid=MP1Join.cmd({kind:'offer',to:c,give:[{t:'res',r:'min',v:100}],want:[{t:'res',r:'ala',v:40}]}).cid;

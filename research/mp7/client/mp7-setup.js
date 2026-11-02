@@ -9,7 +9,7 @@
 (function(){
 const doc=document,$=id=>doc.getElementById(id);
 const EMB=['shape','symbol','pattern','primary','secondary'];
-const M={active:false,role:null,done:null,removed:null,hidden:[],obs:null,storeKey:null,swallow:0};
+const M={active:false,role:null,done:null,removed:null,hidden:[],obs:null,storeKey:null,swallow:0,ghostUntil:0};
 const clean=s=>String(s||'').replace(/[\u0000-\u001f<>]/g,'').trim().slice(0,40);
 /* CFG → taslak (host'un draftCheck'iyle aynı alanlar). Renk/amblem isteğe bağlı. */
 function draft(){
@@ -64,7 +64,11 @@ function close(saved){
 /* son düğme (GALAKSİYİ YARAT / VARSAYILANLARLA BAŞLA) MP kurulumundayken oyunu başlatmaz: taslağı kaydeder */
 const sp=window.startGame;
 window.startGame=function(){if(!M.active)return sp.apply(this,arguments);
-  const d=draft();if(M.storeKey)save(M.storeKey,d);M.swallow++;history.back();close(true);};
+  const d=draft();if(M.storeKey)save(M.storeKey,d);M.swallow++;M.ghostUntil=Date.now()+700;history.back();close(true);};
+/* MP.7.1: kurulum düğmeleri pointerup'ta çalışır (setupClickHandler); kurulum o anda kapanınca tarayıcının ardından ürettiği
+   sentetik click AYNI noktadaki lobi düğmesine düşüyordu (yatay telefonda ODAYI KAPAT → "Oda kapatılsın mı?"). Kapanıştan sonraki
+   700 ms içindeki tek sentetik tıklama yutulur (setupClickHandler'ın kendi 700 ms eşleşme penceresiyle aynı). */
+doc.addEventListener('click',e=>{if(M.ghostUntil&&Date.now()<M.ghostUntil){M.ghostUntil=0;e.preventDefault();e.stopImmediatePropagation();}},true);
 doc.addEventListener('click',e=>{if(e.target.closest('[data-mp7="cancel"]')){e.preventDefault();history.back();}},true);
 /* geri tuşu: kurulum açıkken yalnız kurulumu kapatır; lobi/oda katmanlarının geri tuşu işleyicileri bu olayı görmez */
 addEventListener('popstate',ev=>{if(M.swallow>0){M.swallow--;ev.stopImmediatePropagation();return;}if(M.active){ev.stopImmediatePropagation();close(false);}},true);
