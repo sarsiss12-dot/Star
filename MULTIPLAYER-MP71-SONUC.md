@@ -101,25 +101,45 @@ Host ve misafir aynı modülü kullanır. Rol bağdaştırıcısı kimlik eşlem
 
 ## 6. Diğer paneller denetimi
 
-Misafirde MP komutu olmayan STARS eylemleri soluk görünür ve dokununca açık uyarı verir (MP.6). Liste arayüz kodundan çıkarılır ve `research/mp71/evidence/mp71-results.json` `metrics.unsupported` alanında yer alır. Ayrıntılı envanter `research/mp71/evidence/REGRESYON.md`'dedir. Yeni mekanik eklenmedi.
+Misafirde MP komutu olmayan STARS eylemleri soluk görünür; dokununca açık uyarı verir ve dünya değişmez (MP.6).
+
+**Bulunan ve düzeltilen:**
+- **Boş liste:** runtime `economy-ui.js` `UI.act`'i sardığı için bu liste MP.6'dan beri boştu. Düğmeler engelleniyor ama soluk gösterilmiyordu. Liste artık `/ui.js`'teki gerçek `act` gövdesinden çıkarılır.
+- **Gereksiz engel:** Ekonomi Merkezi görünüm eylemleri (`ecoPick`, `ecoFilter`, `ecoSystem`, `ecoFleet`) ve salt gezinme `ctrBack` (karşı teklif kartında düzenlemeye dön), `dTab` misafirde yanlışlıkla engelleniyordu. Artık yerel görünüm.
+
+**Kalan 68 eylem** (gruplu envanter: `research/mp71/evidence/REGRESYON.md`):
+- galaktik konsey: 13;
+- MP.6.4 dışı özel entrika: 15;
+- elçi: 3;
+- savaş / ortak savaş hazırlığı / savaş alanı: 15;
+- filo / koloni üretim düzeni: 9;
+- tek oyunculu oyun / kurulum / geliştirici eylemleri: 13 (MP'de anlamsız).
+
+Yeni mekanik eklenmedi.
 
 ## 7. Testler
 
 Ayrıntı: `research/mp71/evidence/REGRESYON.md`.
 
-- **`tests/mp71_bridge_test.js` (Node, 8 vaka):**
+**Yeni testler:**
+- **`tests/mp71_bridge_test.js` (Node): 8/0.**
   - insan → host teklifi gerçek gelen kutusunda;
-  - kabul ve ret;
+  - kabul (dünya, MP komutuyla aynı);
+  - ret (yaptırım yok);
   - geri çekme ve süre dolumu;
   - gizlilik;
   - host'un gerçek anlaşma penceresi;
   - MP.4 paketi;
   - vasallık (AI karar vermez);
   - Save8 / RNG eşitliği.
-- **`tests/browser-mp71.cjs` (Chromium, 12 vaka):** üretim kipi relay + parçalayan TLS vekili, yatay telefonlar 844×390 / 800×360 / 915×412, kararlar gerçek dokunmayla.
-  - host + 1: zorunlu senaryo, karşı teklif, geri çekme, açık pencere, yetki / yineleme, bağlantı kopması, kayıt;
+- **`tests/browser-mp71.cjs` (Chromium): 12/0.**
+  - Kurulum: üretim kipi relay + parçalayan TLS vekili; yatay telefonlar 844×390 / 800×360 / 915×412; kararlar gerçek dokunmayla.
+  - host + 1: zorunlu senaryo, karşı teklif, geri çekme, açık pencere, yetki / yineleme, bağlantı kopması, kayıt.
   - host + 2: insan ↔ insan karşı teklif, gizlilik.
-- **Eski testler:** eski MP paneli testleri (browser-mp3 / mp31 / mp6) panelin eski kipinde sürer.
+
+**Regresyon:**
+- **Node:** 165 paket, 6318 / 3. 3 KALAN yalnız bilinen `faz95d_identity`. Son adayla MP paketleri 34 paket, 685 / 0.
+- **Chromium:** MP.0 – MP.7 ve tek oyunculu 96H.10 testleri ile Docker (mp5_docker, browser-mp5) hepsi PASS. Eski MP paneli testleri (browser-mp3 / mp31 / mp6) panelin eski kipinde sürer.
 
 ## 8. Açık konular
 
@@ -127,4 +147,15 @@ Ayrıntı: `research/mp71/evidence/REGRESYON.md`.
 - **MÜZAKERE eğilim satırı:** host'ta insan karşı tarafa da tek oyunculu AI değerlendirme satırı gösterilebilir (istihbarat ≥ 2). Bilgilendirici; karar etmez.
 - **İstihbarat asimetrisi:** host'un istihbaratı ≥ 3 ise miktar seçiminde karşı insanın stoğu görünür. Bu tek oyunculu istihbarat kuralıdır; misafirin aynasında karşılığı yok.
 - **Eski panel modülleri:** dosyalar eski test kipinde duruyor; eski testler gerçek ekranlara taşınınca kaldırılabilir.
-- **Doğrulanmayan:** fiziksel Android ve canlı Render doğrulanmadı.
+- **Doğrulanmayan:** fiziksel Android ve canlı Render doğrulanmadı (NOT RUN).
+
+## 9. Dağıtım (Render)
+
+Adımlar `research/mp7/RENDER.md` ile aynıdır; yalnız:
+- **Branch:** `claude/stars-mp71-unified-ui` (PR'ler merge edilirse `main`).
+- **Ek doğrulama:** `<adres>/research/mp71/client/mp71-dip.js` → 200.
+
+Notlar:
+- Oyun build'i değişmedi (`96h10p2`).
+- Relay izin listesi, sayfa enjeksiyonu, Dockerfile ve `.dockerignore` güncellendi; imajda varlığı `mp5_docker` ile doğrulandı.
+- Bu oturumdan dağıtım yapılmadı. Canlı servis NOT RUN.
