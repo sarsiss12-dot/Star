@@ -1,0 +1,33 @@
+{
+  "phase": "MP.7.5",
+  "build": "96h10p4",
+  "pwa_cache": "stars-v96h10p4",
+  "save_version": 8,
+  "parent_commit": "7e43f825d1bac473c66de22cf9addd518b181f68",
+  "parent_game": "MP.7.4 (96h10p3)",
+  "parent_zip_sha256": "1cb0ea94f4e6e891454e1d09f4908e891e2ab2a633ae152a86cc4b02d73aad77",
+  "scope": "War/peace consistency (stale peace / status-quo inbox records close when the war ends or a newer offer supersedes them; ACTIVE WARS window shows the same list as the top war counter), decision events can be swiped away and reopened from the status list, touch quantity steppers in dialogs. Simulation, AI, Save8 schema and RNG unchanged; PERF.1 retained.",
+  "report": "MULTIPLAYER-MP75-SONUC.md",
+  "evidence": "research/mp75/evidence/",
+  "runtime_changed": [
+    "ui.js",
+    "inbox.js",
+    "index.html",
+    "main.js",
+    "sw.js"
+  ],
+  "single_player_save8_rng": "simulation untouched; full Node regression 171 suites 6359/3 (3 = known faz95d_identity)",
+  "game": {
+    "file": "stars-faz96h10p4.zip",
+    "bytes": 773870,
+    "sha256": "3ebc53ab8d15620666b7bb40b73efdbd0948b2f0469182e96aa988179c22e0d8",
+    "crc32_file": "cb205d22",
+    "crc": "PASS",
+    "members": 20,
+    "manifest_runtime_files": 19,
+    "repack_identical": true,
+    "verify_release_extracted": "PASS"
+  },
+  "physical_android": "NOT RUN",
+  "live_render": "NOT RUN"
+}
