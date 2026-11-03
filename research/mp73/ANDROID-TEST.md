@@ -1,4 +1,4 @@
-# STARS MP.7.3 — iki Android telefonla gerçek test rehberi
+# STARS MP.8 — iki Android telefonla gerçek test rehberi (MP.7.3'te başladı)
 
 Bu rehber bilgisayarı olmayan bir kişi için yazıldı. Her adım telefondan ve Render panelinden yapılır.
 - `<adres>`: Render servisinin kendi `https://…onrender.com` adresi. Depoya yazılmaz.
@@ -7,7 +7,7 @@ Bu rehber bilgisayarı olmayan bir kişi için yazıldı. Her adım telefondan v
 ## 0. Dağıtım (Render paneli)
 
 1. **Settings → Build & Deploy**
-   - **Branch:** `claude/stars-mp75-stability-performance` (MP.7.5; MP.7.3 ve MP.7.4 dahil)
+   - **Branch:** `claude/stars-mp8-stability-audit` (MP.8; MP.7.3 – MP.7.5, PERF.1 ve PERF.2 dahil)
    - **Runtime:** Docker
    - **Dockerfile Path:** `research/mp1/deploy/Dockerfile`
    - **Docker Build Context Directory:** `.` (depo kökü)
@@ -19,21 +19,22 @@ Bu rehber bilgisayarı olmayan bir kişi için yazıldı. Her adım telefondan v
 4. **Manual Deploy → Clear build cache & deploy**
 5. **Sürümü doğrulayın.** Telefon tarayıcısında `<adres>/mp/version` açın. Görmeniz gereken:
    ```
-   {"mp":"MP.7.5","build":"96h10p4","files":{...}}
+   {"mp":"MP.8","build":"96h10p5","files":{...}}
    ```
-   - `mp` alanı `MP.7.3` değilse eski imaj çalışıyordur: 4. adımı yineleyin.
+   - `mp` alanı `MP.8` değilse eski imaj çalışıyordur: 4. adımı yineleyin.
    - `files` içindeki 12 haneli özetler yalnız dosya sürümünü gösterir; gizli bilgi değildir.
 
 ## 1. Telefonlarda sürüm işareti
 
-Her iki telefonda açık STARS sekmelerini kapatıp yeniden açın. Service worker yeni önbelleği (`stars-v96h10p2`) alır.
+Her iki telefonda açık STARS sekmelerini kapatıp yeniden açın. Service worker yeni önbelleği (`stars-v96h10p5`) alır.
 
 Sürüm üç yerde görünür:
-- **Lobi** (host ve misafir): kartın altında `STARS MP.7.3 · oyun 96h10p2`.
+- **Lobi** (host ve misafir): kartın altında `STARS MP.8 · oyun 96h10p5`.
 - **OYUN BAŞLIYOR ekranı** (misafir): adım listesinin altında aynı satır.
 - **Oyun içinde**: üstteki ÇOK OYUNCULU çubuğuna dokunun.
-  - Host: açılan bölümde sürüm ve yeniden bağlanma sayısı.
-  - Misafir: sürüm · bağlantı · aşama · son hata kodu.
+  - Host: sürüm · host · bağlı misafir sayısı · son ay adımı (ms) · yeniden bağlanma sayısı.
+  - Misafir: sürüm · misafir · bağlantı · aşama · ayna sürümü ve saati · son kurulum (ms) · son komut sonucu · son hata kodu.
+  - Sorun bildirirken bu satırın ekran görüntüsü yeterlidir; jeton, oda anahtarı ya da gizli bilgi göstermez.
 
 İki telefonda satır farklıysa biri eski önbellektedir: sekmeyi kapatıp yeniden açın.
 
@@ -41,7 +42,7 @@ Sürüm üç yerde görünür:
 
 | # | Adım | Beklenen |
 |---|---|---|
-| 1 | Branch `claude/stars-mp73-council-intrigue` deploy edilir (§0) | `/mp/version` → `MP.7.3` |
+| 1 | Branch `claude/stars-mp8-stability-audit` deploy edilir (§0) | `/mp/version` → `MP.8` |
 | 2 | İki telefonda `<adres>` açılır | Başlık ekranı; ana menüde ÇOK OYUNCULU düğmesi |
 | 3 | Telefon A: ÇOK OYUNCULU → ODA KUR | Oda kodu görünür |
 | 4 | Telefon B: ÇOK OYUNCULU → ODAYA KATIL, kodu yazar (MP.7.4: 5 karakter, örn. K7M2P) | B lobide görünür (KATIL'a iki kez basmak sorun yaratmaz) |
@@ -76,6 +77,8 @@ Son hata kodu örnekleri:
 - `rules:voted`: zaten oy verildi.
 - `rules:stale`: ekran eskidi; pencereyi kapatıp yeniden açın.
 - `rules:no-target`: hedef görülmüyor.
+- "Bu oyuncu bu odada başka bir sekmede … bağlı": aynı telefonda ikinci sekme açıldı; birini kapatın (MP.8).
+- Ağ kesildikten sonra karar "yanıt bekleniyor" kalırsa: MP.8'de bağlantı dönünce yeniden karar verilebilir (host kararı tam bir kez uygular).
 
 Oda kodu ekran görüntüsünde görünebilir; oyun bitince odayı kapatın. Jeton ve host anahtarı hiçbir ekranda görünmez.
 

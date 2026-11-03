@@ -1,0 +1,392 @@
+{
+ "results": [
+  {
+   "name": "N0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde",
+   "status": "PASS",
+   "ms": 17921
+  },
+  {
+   "name": "N1 misafir B 5 s kopar → aynı devlete döner; ayna yeniden eşitlenir; başka koltuk açılmaz",
+   "status": "PASS",
+   "ms": 7886
+  },
+  {
+   "name": "N2 misafir B 30 s kopar (host 10 gün ilerler) → aynı devlet; kaçırılan farklar tam aynayla kapanır",
+   "status": "PASS",
+   "ms": 38715
+  },
+  {
+   "name": "N3 teklif açıkken kopma: C → B teklif; B kopar/döner; teklif hâlâ bekliyor; B tam bir kez kabul eder",
+   "status": "PASS",
+   "ms": 8576
+  },
+  {
+   "name": "N4 komuttan hemen sonra kopma: B bina komutu gönderir ve hat aynı anda kesilir → host tam bir kez uygular (ya da hiç), yanıt kaybı yeniden eşitlemeyle görünür",
+   "status": "PASS",
+   "ms": 28
+  },
+  {
+   "name": "N5 host 8 s kopar: misafirler \"host yok\" görür, komut gönderilmez; host'ta zaman durur; dönünce aynı oda, senkron",
+   "status": "PASS",
+   "ms": 10994
+  },
+  {
+   "name": "N6 aynı oyuncu iki sekme: B aynı profilde ikinci sekmeyle aynı odaya gelir → tek koltuk, başka devlet açılmaz; komut yalnız kendi devletine",
+   "status": "PASS",
+   "ms": 5150
+  },
+  {
+   "name": "N7 relay yeniden başlatma: oda kaybolur (bellekte); misafirler açık hata görür; host dünyası değişmez (duraklar) — devam yalnız kayıt + yeni oda ile (R senaryosu)",
+   "status": "PASS",
+   "ms": 4729
+  }
+ ],
+ "metrics": {
+  "scen": "N",
+  "conf": {
+   "size": "orta",
+   "ai": 5,
+   "seed": 22,
+   "months": 4,
+   "guests": 2,
+   "every": 2
+  },
+  "sync": [
+   {
+    "label": "m0",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     11,
+     11
+    ],
+    "mirrorEq": true,
+    "revMs": 589,
+    "buildMs": 661,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m0",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     4,
+     4
+    ],
+    "mirrorEq": true,
+    "revMs": 757,
+    "buildMs": 816,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "N1",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     13,
+     13
+    ],
+    "mirrorEq": true,
+    "revMs": 701,
+    "buildMs": 765,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "N1",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     4,
+     4
+    ],
+    "mirrorEq": true,
+    "revMs": 824,
+    "buildMs": 878,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "N2",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     16,
+     16
+    ],
+    "mirrorEq": true,
+    "revMs": 652,
+    "buildMs": 709,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "N2",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     6,
+     6
+    ],
+    "mirrorEq": true,
+    "revMs": 776,
+    "buildMs": 850,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "N3",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     19,
+     19
+    ],
+    "mirrorEq": true,
+    "revMs": 732,
+    "buildMs": 790,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "N3",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     6,
+     6
+    ],
+    "mirrorEq": true,
+    "revMs": 903,
+    "buildMs": 964,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "N5",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     26,
+     26
+    ],
+    "mirrorEq": true,
+    "revMs": 695,
+    "buildMs": 754,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "N5",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     13,
+     13
+    ],
+    "mirrorEq": true,
+    "revMs": 840,
+    "buildMs": 893,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "N6",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     26,
+     26
+    ],
+    "mirrorEq": true,
+    "revMs": 179,
+    "buildMs": 239,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "N6",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     13,
+     13
+    ],
+    "mirrorEq": true,
+    "revMs": 323,
+    "buildMs": 409,
+    "diff": [],
+    "leak": []
+   }
+  ],
+  "cmds": [
+   {
+    "label": "N3",
+    "who": "B",
+    "k": "respond",
+    "status": "ok",
+    "code": null,
+    "ms": 31,
+    "before": "pending",
+    "after": "accepted"
+   }
+  ],
+  "perf": [
+   {
+    "label": "m0",
+    "month": 0,
+    "host": {
+     "monthTick": {
+      "n": 0
+     },
+     "publish": {
+      "n": 2,
+      "med": 4,
+      "p95": 4,
+      "max": 4
+     },
+     "longtask": {
+      "n": 0
+     },
+     "heapMB": 18,
+     "dom": 714,
+     "intervals": 2,
+     "timeouts": 1,
+     "offers": 0,
+     "notes": 0,
+     "inbox": 0,
+     "log": 1,
+     "news": 0
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 11,
+       "med": 19.9,
+       "p95": 58.3,
+       "max": 58.3
+      },
+      "refresh": {
+       "n": 2,
+       "med": 7.2,
+       "p95": 7.2,
+       "max": 7.2
+      },
+      "longtask": {
+       "n": 2,
+       "med": 54,
+       "p95": 54,
+       "max": 54
+      },
+      "builds": 11,
+      "deltas": 10,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 12,
+      "dom": 705,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 51,
+      "joinErrors": 0
+     },
+     "C": {
+      "build": {
+       "n": 2,
+       "med": 58.1,
+       "p95": 58.1,
+       "max": 58.1
+      },
+      "refresh": {
+       "n": 0
+      },
+      "longtask": {
+       "n": 2,
+       "med": 52,
+       "p95": 52,
+       "max": 52
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 15,
+      "dom": 695,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 26,
+      "joinErrors": 0
+     }
+    }
+   }
+  ],
+  "notes": [
+   "C başlarken 3 s kesildi; C kendi devletiyle oyuna girdi",
+   "N4: uygun bina yok"
+  ],
+  "net": {
+   "cutAtStart": {
+    "who": "C",
+    "at": 1793716500617
+   },
+   "cut5": {
+    "backMs": 6445
+   },
+   "cut30": {
+    "backMs": 37392
+   },
+   "offerCut": {
+    "secondAccept": "rules:closed"
+   },
+   "hostCut": {
+    "dayDelta": 0,
+    "guestCmd": "host-yok"
+   },
+   "twoTabs": {
+    "prefilled": true,
+    "tab2": {
+     "e": null,
+     "err": "Oda dolu.",
+     "screen": "join"
+    },
+    "tab1": {
+     "e": 1,
+     "online": true,
+     "err": "",
+     "screen": "game",
+     "closed": false
+    },
+    "playersBefore": 3,
+    "playersAfter": 3
+   },
+   "relayRestart": {
+    "guest": {
+     "screen": "join",
+     "err": "Sunucu yeniden başlatıldı; oda kapandı.",
+     "closed": true
+    },
+    "hostDayDelta": 0,
+    "rngSame": true
+   }
+  },
+  "resume": {},
+  "relayPid1": 1909,
+  "seats": [
+   {
+    "e": 1,
+    "conn": true
+   },
+   {
+    "e": 2,
+    "conn": true
+   }
+  ],
+  "relayPid2": 2489,
+  "errors": []
+ }
+}

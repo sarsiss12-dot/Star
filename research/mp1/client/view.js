@@ -6,7 +6,7 @@ const esc=s=>String(s==null?'':s).replace(/[&<>"'`=\/]/g,c=>'&#'+c.charCodeAt(0)
 const color=c=>/^#[0-9a-fA-F]{3,8}$/.test(String(c))?c:'#7d90ad';
 const TAB={lobi:'Lobi',doktrin:'Doktrin',gorunus:'Görünüş',fizyoloji:'Fizyoloji',etik:'Etik',civic:'Civic',koken:'Köken',galaksi:'Galaksi ayarları',oyun:'Oyunda'};
 const PHASE={created:'Oda açıldı — galaksi bekleniyor',waiting:'Oyuncular bekleniyor',ready:'Herkes hazır',starting:'Oyun hazırlanıyor',ingame:'Oyunda',resume:'Kayıtlı oyun — oyuncular bekleniyor',paused:'Duraklatıldı (host yok)',closed:'Oda kapandı'};
-const ERR={'invalid-code':'Oda kodu geçersiz ya da oda yok.','room-full':'Oda dolu.','room-closed':'Oda kapandı.','game-started':'Oyun başladı; yeni oyuncu alınmıyor.',
+const ERR={'invalid-code':'Oda kodu geçersiz ya da oda yok.','room-full':'Oda dolu.','seat-elsewhere':'Bu oyuncu bu odada başka bir sekmede ya da pencerede bağlı. O sekmeyi kapatıp yeniden dene.','room-closed':'Oda kapandı.','game-started':'Oyun başladı; yeni oyuncu alınmıyor.',
   kicked:'Host seni odadan çıkardı.','rate-limited':'Çok fazla deneme. Biraz bekle.','no-host':'Host şu an bağlı değil.','server-full':'Sunucu dolu.',
   'bad-host-key':'Host anahtarı geçersiz.','host-exists':'Bu odanın host bağlantısı zaten açık.',taken:'Bu devlet başka bir oyuncuda.','not-claimable':'Bu devlet seçilemez.',
   'host-empire':'Host\'un devleti seçilemez.','no-claim':'Önce bir devlet seç.',phase:'Bu aşamada yapılamaz.','not-started':'Oyun henüz başlamadı.',offline:'Bağlantı yok.',paused:'Oyun duraklatıldı; komut uygulanmadı.','server-restart':'Sunucu yeniden başlatıldı; oda kapandı.',
@@ -40,7 +40,7 @@ function apply(st,m){
   return null;
 }
 /* MP.7.3: salt okunur sürüm işareti — telefonda (bilgisayarsız) doğru dağıtımın açıldığını görmek için; relay /mp/version ile aynı */
-const MP_VERSION='MP.7.5';
+const MP_VERSION='MP.8';
 const verLine=()=>'STARS '+MP_VERSION+' · oyun '+(typeof BUILD_ID==='string'?BUILD_ID:'?');
 /* MP.7.5: kapalı çok oyunculu düğmesi sol araç sütununun (#tools) son öğesi olur; açık panel eski kaplama konumunda (#app).
    Sütun yeniden çizilirse düğme bir sonraki durum güncellemesinde geri eklenir. */

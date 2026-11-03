@@ -161,6 +161,8 @@ function makeHost(){
     lobby:{design:!!window.MP7Setup&&!window.MP7Legacy,hostDraft:()=>window.MP7Setup?MP7Setup.draft():null,
       generate(set){const {host:_h,...rest}=set;setupGame({...CFG,...rest});if(CFG.mizac)applyChosenPersona(G.p,CFG.mizac);G.autoSave=false;return {ok:true};}}});
   API.host.installGuards();
+  /* MP.8: son ay adımı süresi (yalnız performance.now ölçümü; argüman, dönüş, RNG, sıra aynı) — tanı satırında */
+  if(!API._mtWrap&&typeof window.monthTick==='function'){const mt=window.monthTick;window.monthTick=function(){const t=performance.now();try{return mt.apply(this,arguments);}finally{API.lastMonthMs=Math.round(performance.now()-t);}};API._mtWrap=true;}
   if(window.MP61)MP61.source=()=>G.speed|0;
   if(resume){API.resumeInfo={display:resume.display,speed:resume.session.speed|0,saveId:resume.saveId};API.lobby=API.host.lobbyView();return;}
   const seed=1+(crypto.getRandomValues(new Uint32Array(1))[0]%2147483646);
@@ -294,7 +296,7 @@ function mini(){
     (open?gs.map(p=>{const pid=pidOfSeat(p.seat);return '<div>'+esc(p.name)+' · '+(p.online?'bağlı':'koptu — koltuk bekletiliyor')+(p.online?'':'<button class="mp1-btn" data-g="kick" data-pid="'+esc(pid)+'">Çıkar (devlet boşta)</button><button class="mp1-btn" data-g="ai" data-pid="'+esc(pid)+'">Devleti AI\'ya ver</button>')+'</div>';}).join('')+
       (PZ?'<div class="mp1-row"><button class="mp1-btn" data-g="dpause" id="mp63Dpause" aria-pressed="'+decisionPause()+'">Karar pencerelerinde: '+(decisionPause()?'DURAKLAT':'1× YAVAŞLAT')+'</button></div>':'')+
       (window.MP4Save?'<div class="mp1-row"><button class="mp1-btn" data-g="save">OYUNU KAYDET</button><button class="mp1-btn" data-g="export">DOSYAYA AKTAR</button></div>':'')+
-      '<div class="mp1-sub" id="mpVer">'+esc(V.verLine())+' · yeniden bağlanma '+(API.reconnects|0)+'</div>':'');
+      '<div class="mp1-sub" id="mpVer">'+esc(V.verLine()+' · host · '+(gs.length-off)+'/'+gs.length+' misafir bağlı'+(API.lastMonthMs!==undefined?' · son ay adımı '+API.lastMonthMs+' ms':'')+' · yeniden bağlanma '+(API.reconnects|0))+'</div>':'');   // MP.8: rol + son ay adımı (salt ölçüm)
 }
 /* ---------- MP.3: host'un MP diplomasi paneli ----------
    Yalnız insan oyuncularla teklif (AI devletlerle diplomasi tek oyunculu DİPLOMASİ ekranında, aynı motor).
