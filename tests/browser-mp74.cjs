@@ -47,7 +47,7 @@ async function swipe(p,sel,dx){const c=await touch(p),b=await p.locator(sel).fir
   for(let i=1;i<=8;i++){await c.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:x+dx*i/8,y:y+(i%2)}]});await p.waitForTimeout(16);}
   await c.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});await p.waitForTimeout(350);}
 async function joinTaps(p,link,name,taps){await p.goto(link);await wait(p,()=>window.MP1Join&&document.getElementById('jName'));await p.fill('#jName',name);
-  const b=await p.locator('[data-j="go"]').boundingBox();for(let i=0;i<taps;i++){await tapAt(p,b.x+b.width/2,b.y+b.height/2);await p.waitForTimeout(25);}}
+  await require('./helpers/mp83-join-touch.cjs').joinBurst(p,taps,tapAt);}
 async function room(H,cap,guests){
   await H.goto(base+'/');await wait(H,()=>typeof setupGame==='function'&&document.getElementById('mp1Btn')&&window.MP7Setup&&window.MP71Dip);
   await tap(H,'#mp1Btn');await tap(H,'[data-m="create"]');await wait(H,()=>MP1Host.lobby&&MP1Host.lobby.mode==='design'&&MP1Host.lobby.phase==='waiting');

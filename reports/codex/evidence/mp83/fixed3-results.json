@@ -1,0 +1,149 @@
+{
+  "results": [
+    {
+      "name": "A1 5 karakterli kod: host kodu 5 karakter ve tiresiz; davet bağlantısı kodu taşır; yanlış kod reddedilir; KATIL'a hızlı ÜÇ dokunma (600 ms gecikmeli ağ) tek koltuk, \"oda dolu\" yok; iki telefon oyuna girer",
+      "status": "PASS",
+      "ms": 9148
+    },
+    {
+      "name": "A2 küçük çok oyunculu düğmesi: host ve misafirde varsayılan \"👥 n\" (haritayı ve hız kutusunu kapatmaz); dokununca mevcut panel (kod, durum, KAYDET), tekrar dokununca kapanır",
+      "status": "PASS",
+      "ms": 2802
+    },
+    {
+      "name": "A3 kaydırma (gerçek dokunma): küçük hareket kartı kapatmaz; sağa kaydırınca teklif kartı kalkar, karar Gelen kutusunda BEKLER, ayna yenilenince kart geri gelmez; host'ta teklif bekler",
+      "status": "PASS",
+      "ms": 6985
+    },
+    {
+      "name": "A4 karttan hızlı karar (misafir): KABUL gerçek dokunmayla → host kabul eder, kaynak bir kez aktarılır; ÇİFT dokunma tek \"respond\"; REDDET; KARŞI TEKLİF gerçek anlaşma penceresini açar",
+      "status": "PASS",
+      "ms": 4383
+    },
+    {
+      "name": "A5 host karttan hızlı karar: B → host teklifi host kartında KABUL (dokunma) → kabul, bir kez",
+      "status": "PASS",
+      "ms": 717
+    },
+    {
+      "name": "B1 kapasite 3: host + 2 misafir (ikisi de çift dokunmayla) girer, tek koltuk tutar; dördüncü telefon \"Oda dolu.\" görür; host küçük düğmede 👥 3",
+      "status": "PASS",
+      "ms": 12925
+    },
+    {
+      "name": "sayfa hataları yok",
+      "status": "PASS",
+      "ms": 0
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "nav": [
+      "/mp/play",
+      "/mp/play?code=*",
+      "/mp/play?code=*",
+      "/mp/play?code=*",
+      "/mp/play?code=*",
+      "/mp/play?code=*",
+      "host2 /",
+      "host2 /",
+      "host2 /",
+      "host2 /",
+      "host2 /",
+      "host2 /",
+      "B2 /mp/play",
+      "B2 /mp/play",
+      "B2 /mp/play",
+      "B2 /mp/play",
+      "C2 /mp/play",
+      "C2 /mp/play",
+      "C2 /mp/play",
+      "C2 /mp/play",
+      "B2 /mp/play",
+      "C2 /mp/play",
+      "host2 /"
+    ],
+    "joinErrors_Bora": [],
+    "relayClients": 1,
+    "relayDenied": {
+      "invalid-code": 1
+    },
+    "ghostSeats": 0,
+    "link": "https://localhost:44473/mp/play?code=…",
+    "pill_host": {
+      "w": 32,
+      "h": 42,
+      "text": "👥 2",
+      "overlap": false
+    },
+    "pill_B": {
+      "w": 32,
+      "h": 42,
+      "text": "👥 2",
+      "overlap": false
+    },
+    "quickButtons": [
+      [
+        "KABUL",
+        true,
+        44
+      ],
+      [
+        "REDDET",
+        true,
+        44
+      ],
+      [
+        "KARŞI TEKLİF",
+        true,
+        44
+      ]
+    ],
+    "counterView": "DİPLOMASİ ·  Kızıl Muhafız\n      ✕\n      DEVLETLERİLİŞKİMÜZAKERETaslak bu oturumda saklanır; sekme değiştirirken kaybolmaz.\n      Yalnız TEKLİFİ SUN düğmesi karşı tarafa gönderir.Tutum tahmini için en",
+    "a5pre": {
+      "id": 5,
+      "uidKey": "mp71:5",
+      "inbox": [
+        {
+          "uid": 2,
+          "kind": "aideal",
+          "key": "mp71:5",
+          "hidden": false
+        }
+      ],
+      "dom": [
+        "2",
+        "2:y",
+        "2:n",
+        "2:c"
+      ],
+      "recs": [
+        {
+          "id": 1,
+          "key": "deal:1|res:min:23>:23.859236000000045",
+          "status": "pending",
+          "note": 2
+        }
+      ],
+      "offer": "pending",
+      "stats": {
+        "offers": 0,
+        "counters": 0,
+        "withdraws": 0,
+        "responds": 0,
+        "notified": 1,
+        "synced": 0,
+        "sentRenders": 0,
+        "dealBoxes": 0,
+        "blocked": 0
+      },
+      "speed": 1,
+      "modal": false,
+      "day": 23.97923600000005
+    },
+    "joinErrors_Cem": [],
+    "fourth": "Oda dolu."
+  },
+  "pass": 7,
+  "fail": 0
+}

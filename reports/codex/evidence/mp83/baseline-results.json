@@ -1,0 +1,71 @@
+{
+  "results": [
+    {
+      "name": "A1 5 karakterli kod: host kodu 5 karakter ve tiresiz; davet bağlantısı kodu taşır; yanlış kod reddedilir; KATIL'a hızlı ÜÇ dokunma (600 ms gecikmeli ağ) tek koltuk, \"oda dolu\" yok; iki telefon oyuna girer",
+      "status": "FAIL",
+      "error": "page.waitForFunction: ReferenceError: MP1Join is not defined\n    at eval (eval at predicate (eval at evaluate (:311:30)), <anonymous>:1:19)\n    at predicate (eval at evaluate (:311:30), <anonymous>:7:27)\n    at next (eval at evaluate (:311:30), <anonymous>:29:33)\n    at eval (eval at evaluate (:311:30), <anonymous>:42:13)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at wait (/workspace/Star/tests/browser-mp74.cjs:18:40)\n    at room (/workspace/Star/tests/browser-mp74.cjs:58:11)\n    at async /workspace/Star/tests/browser-mp74.cjs:97:16\n    at async test (/workspace/Star/tests/browser-mp74.cjs:14:7)\n    at async /workspace/Star/tests/browser-mp74.cjs:92:3"
+    },
+    {
+      "name": "A2 küçük çok oyunculu düğmesi: host ve misafirde varsayılan \"👥 n\" (haritayı ve hız kutusunu kapatmaz); dokununca mevcut panel (kod, durum, KAYDET), tekrar dokununca kapanır",
+      "status": "FAIL",
+      "error": "page.waitForFunction: Timeout 30000ms exceeded.\n    at wait (/workspace/Star/tests/browser-mp74.cjs:18:40)\n    at /workspace/Star/tests/browser-mp74.cjs:107:13\n    at test (/workspace/Star/tests/browser-mp74.cjs:14:13)\n    at /workspace/Star/tests/browser-mp74.cjs:105:9"
+    },
+    {
+      "name": "A3 kaydırma (gerçek dokunma): küçük hareket kartı kapatmaz; sağa kaydırınca teklif kartı kalkar, karar Gelen kutusunda BEKLER, ayna yenilenince kart geri gelmez; host'ta teklif bekler",
+      "status": "FAIL",
+      "error": "page.waitForFunction: Timeout 15000ms exceeded.\n    at hostOffer (/workspace/Star/tests/browser-mp74.cjs:77:27)\n    at async /workspace/Star/tests/browser-mp74.cjs:118:14\n    at async test (/workspace/Star/tests/browser-mp74.cjs:14:7)\n    at async /workspace/Star/tests/browser-mp74.cjs:117:3"
+    },
+    {
+      "name": "A4 karttan hızlı karar (misafir): KABUL gerçek dokunmayla → host kabul eder, kaynak bir kez aktarılır; ÇİFT dokunma tek \"respond\"; REDDET; KARŞI TEKLİF gerçek anlaşma penceresini açar",
+      "status": "FAIL",
+      "error": "page.evaluate: ReferenceError: MP1Join is not defined\n    at eval (eval at evaluate (:311:30), <anonymous>:1:15)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at /workspace/Star/tests/browser-mp74.cjs:131:14\n    at test (/workspace/Star/tests/browser-mp74.cjs:14:13)\n    at /workspace/Star/tests/browser-mp74.cjs:130:9"
+    },
+    {
+      "name": "A5 host karttan hızlı karar: B → host teklifi host kartında KABUL (dokunma) → kabul, bir kez",
+      "status": "FAIL",
+      "error": "page.evaluate: ReferenceError: MP1Join is not defined\n    at eval (eval at evaluate (:311:30), <anonymous>:1:13)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at /workspace/Star/tests/browser-mp74.cjs:159:22\n    at test (/workspace/Star/tests/browser-mp74.cjs:14:13)\n    at /workspace/Star/tests/browser-mp74.cjs:158:9"
+    },
+    {
+      "name": "B1 kapasite 3: host + 2 misafir (ikisi de çift dokunmayla) girer, tek koltuk tutar; dördüncü telefon \"Oda dolu.\" görür; host küçük düğmede 👥 3",
+      "status": "PASS",
+      "ms": 12551
+    },
+    {
+      "name": "sayfa hataları yok",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ [\n+   'B: MP1Join is not defined'\n+ ]\n- []\n\n    at /workspace/Star/tests/browser-mp74.cjs:186:52\n    at test (/workspace/Star/tests/browser-mp74.cjs:14:13)\n    at /workspace/Star/tests/browser-mp74.cjs:186:9"
+    }
+  ],
+  "errors": [
+    "B: MP1Join is not defined"
+  ],
+  "metrics": {
+    "nav": [
+      "/mp/play",
+      "/mp/play?code=*",
+      "/",
+      "host2 /",
+      "host2 /",
+      "host2 /",
+      "host2 /",
+      "host2 /",
+      "host2 /",
+      "B2 /mp/play",
+      "B2 /mp/play",
+      "B2 /mp/play",
+      "B2 /mp/play",
+      "C2 /mp/play",
+      "C2 /mp/play",
+      "C2 /mp/play",
+      "C2 /mp/play",
+      "B2 /mp/play",
+      "C2 /mp/play",
+      "host2 /"
+    ],
+    "joinErrors_Bora": [],
+    "joinErrors_Cem": [],
+    "fourth": "Oda dolu."
+  },
+  "pass": 1,
+  "fail": 6
+}

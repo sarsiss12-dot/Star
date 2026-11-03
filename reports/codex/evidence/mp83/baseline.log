@@ -1,0 +1,75 @@
+NAV B /mp/play
+NAV B /mp/play
+NAV B /
+FAIL A1 5 karakterli kod: host kodu 5 karakter ve tiresiz; davet bağlantısı kodu taşır; yanlış kod reddedilir; KATIL'a hızlı ÜÇ dokunma (600 ms gecikmeli ağ) tek koltuk, "oda dolu" yok; iki telefon oyuna girer
+page.waitForFunction: ReferenceError: MP1Join is not defined
+    at eval (eval at predicate (eval at evaluate (:311:30)), <anonymous>:1:19)
+    at predicate (eval at evaluate (:311:30), <anonymous>:7:27)
+    at next (eval at evaluate (:311:30), <anonymous>:29:33)
+    at eval (eval at evaluate (:311:30), <anonymous>:42:13)
+    at UtilityScript.evaluate (<anonymous>:313:16)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+    at wait (/workspace/Star/tests/browser-mp74.cjs:18:40)
+    at room (/workspace/Star/tests/browser-mp74.cjs:58:11)
+    at async /workspace/Star/tests/browser-mp74.cjs:97:16
+    at async test (/workspace/Star/tests/browser-mp74.cjs:14:7)
+    at async /workspace/Star/tests/browser-mp74.cjs:92:3
+FAIL A2 küçük çok oyunculu düğmesi: host ve misafirde varsayılan "👥 n" (haritayı ve hız kutusunu kapatmaz); dokununca mevcut panel (kod, durum, KAYDET), tekrar dokununca kapanır
+page.waitForFunction: Timeout 30000ms exceeded.
+    at wait (/workspace/Star/tests/browser-mp74.cjs:18:40)
+    at /workspace/Star/tests/browser-mp74.cjs:107:13
+    at test (/workspace/Star/tests/browser-mp74.cjs:14:13)
+    at /workspace/Star/tests/browser-mp74.cjs:105:9
+FAIL A3 kaydırma (gerçek dokunma): küçük hareket kartı kapatmaz; sağa kaydırınca teklif kartı kalkar, karar Gelen kutusunda BEKLER, ayna yenilenince kart geri gelmez; host'ta teklif bekler
+page.waitForFunction: Timeout 15000ms exceeded.
+    at hostOffer (/workspace/Star/tests/browser-mp74.cjs:77:27)
+    at async /workspace/Star/tests/browser-mp74.cjs:118:14
+    at async test (/workspace/Star/tests/browser-mp74.cjs:14:7)
+    at async /workspace/Star/tests/browser-mp74.cjs:117:3
+FAIL A4 karttan hızlı karar (misafir): KABUL gerçek dokunmayla → host kabul eder, kaynak bir kez aktarılır; ÇİFT dokunma tek "respond"; REDDET; KARŞI TEKLİF gerçek anlaşma penceresini açar
+page.evaluate: ReferenceError: MP1Join is not defined
+    at eval (eval at evaluate (:311:30), <anonymous>:1:15)
+    at UtilityScript.evaluate (<anonymous>:313:16)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+    at /workspace/Star/tests/browser-mp74.cjs:131:14
+    at test (/workspace/Star/tests/browser-mp74.cjs:14:13)
+    at /workspace/Star/tests/browser-mp74.cjs:130:9
+FAIL A5 host karttan hızlı karar: B → host teklifi host kartında KABUL (dokunma) → kabul, bir kez
+page.evaluate: ReferenceError: MP1Join is not defined
+    at eval (eval at evaluate (:311:30), <anonymous>:1:13)
+    at UtilityScript.evaluate (<anonymous>:313:16)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+    at /workspace/Star/tests/browser-mp74.cjs:159:22
+    at test (/workspace/Star/tests/browser-mp74.cjs:14:13)
+    at /workspace/Star/tests/browser-mp74.cjs:158:9
+NAV host2 /
+NAV host2 /
+NAV host2 /
+NAV host2 /
+NAV host2 /
+NAV host2 /
+NAV B2 /mp/play
+NAV B2 /mp/play
+NAV B2 /mp/play
+NAV B2 /mp/play
+NAV C2 /mp/play
+NAV C2 /mp/play
+NAV C2 /mp/play
+NAV C2 /mp/play
+NAV B2 /mp/play
+NAV C2 /mp/play
+NAV host2 /
+PASS B1 kapasite 3: host + 2 misafir (ikisi de çift dokunmayla) girer, tek koltuk tutar; dördüncü telefon "Oda dolu." görür; host küçük düğmede 👥 3
+FAIL sayfa hataları yok
+AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
++ [
++   'B: MP1Join is not defined'
++ ]
+- []
+
+    at /workspace/Star/tests/browser-mp74.cjs:186:52
+    at test (/workspace/Star/tests/browser-mp74.cjs:14:13)
+    at /workspace/Star/tests/browser-mp74.cjs:186:9
+GEÇEN: 1 KALAN: 6

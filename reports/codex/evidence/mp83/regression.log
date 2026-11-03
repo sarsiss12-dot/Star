@@ -1,0 +1,17 @@
+NAV /mp/play
+IMMEDIATE {
+  go: [ 120, 252.484375, 560, 48 ],
+  appScroll: 0,
+  focus: 'jName',
+  hit: { tag: 'BUTTON', j: 'go', href: null }
+}
+AFTER_FOCUS_TIMER {
+  go: [ 120, 212.484375, 560, 48 ],
+  appScroll: 40,
+  focus: 'jName',
+  hit: { tag: 'A', j: 'home', href: '/' }
+}
+NAV /
+STALE_POINT_NAV /
+NAV /mp/play
+FRESH_POINT_NAV /mp/play; invalid code shown; PASS
