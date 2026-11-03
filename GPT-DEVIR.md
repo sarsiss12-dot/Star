@@ -129,7 +129,7 @@ Bkz. §6.
 | MP.7.5 | #29 | 96h10p4 | Barış kaydı tutarlılığı, AKTİF SAVAŞLAR, misafir panel yerinde güncelleme, miktar düğmeleri | `_surfaceWorld` taşıma |
 | **PERF.2** | #30 | 96h10p5 | `ai.js` okuma-yalnız AI penceresi (gölge gelir + taze ticaret bir kez) + `main.js` doğrudan geçit denetimi | Save8/RNG birebir (`perf2_equivalence_test`). Büyük galaksi geç oyunda ay adımı −21…−31%. |
 | MP.8 | #31 | 96h10p5 (runtime aynı) | `tests/browser-mp8.cjs` uzun kampanya/kayıt/ağ düzeneği | Bkz. aşağı |
-| MP.8.1 | #32 (bu) | 96h10p5 (runtime aynı) | mp74 aralıklı hata tanısı, bu devir belgesi | |
+| MP.8.1 | #32 (bu) | 96h10p5 (runtime aynı) | mp74 aralıklı FAIL kök nedeni (test: yanlış kart araması + zamanlama), bu devir belgesi | Tanı günlükleri (`A5DIAG`, `NAV`) |
 
 **MP.8 düzeltmeleri:**
 - Ağ kopmasında kaybolan karar gelen kutusunu kalıcı kilitliyordu: `S.decWait` artık bağlantı kuşağı `S.gen` ile geçerli.
@@ -266,7 +266,9 @@ node research/perf2/scripts/breakdown.cjs <kök> <kayıt> <ay>
 
 **Kanıtlanmış**
 
-1. **`browser-mp74` aralıklı FAIL.** Sonuç: §9 "MP.8.1 tanı sonucu".
+1. **`browser-mp74` aralıklı FAIL.**
+   - A4 / A5 kök nedeni test hatasıydı; düzeltildi.
+   - A1 "MP1Join is not defined" (yük / soğuk başlangıç) kök nedeni kurulamadı. Bkz. §9.
 2. **Kaydırılan karar olayı kalıcı değil.** `hidden` işareti Save8'e yazılmaz (`ui.js` `NOTE_FIELDS`).
    - Yükleme sonrası kart yeniden görünür. Karar kaybolmaz (güvenli yön), yalnız gizleme unutulur.
    - Kalıcı yapmak `NOTE_FIELDS`'e alan eklemek demektir: runtime + Save8 baytı değişir, yeni build ve koruma adaptörü gerekir. Ayrı faz kararı.
@@ -316,7 +318,18 @@ node research/perf2/scripts/breakdown.cjs <kök> <kayıt> <ay>
 
 ## 9. MP.8.1 tanı sonucu (mp74 aralıklı FAIL)
 
-(Bu bölüm MP.8.1 oturumunun sonunda doldurulmuştur; bkz. `research/mp81/A5-TANI.md`.)
+Ayrıntı ve kanıt: `research/mp81/A5-TANI.md`, `research/mp81/evidence/`.
+
+**A5 (host kartından KABUL) — TEST hatası, ürün doğru:**
+- Kart üretilmişti (`mp71:3`, KABUL / REDDET / KARŞI TEKLİF düğmeleri DOM'da).
+- Test kartı `key.includes(String(id))` ile arıyordu; teklif 3 iken anomali olayı `an:3` eşleşti, yanlış kart beklendi.
+- Tam anahtarla düzeltildi.
+
+**A4 (misafir karttan KABUL) — test zamanlama varsayımı:** oyun akarken misafirin eksi enerji geliri `e0 + 13` eşiğini bozabiliyordu. Ölçüm sırasında duraklatılıyor (A5 ile aynı yöntem).
+
+**A1 "MP1Join is not defined":** yalnız yük altında ve soğuk başlangıçta görüldü; gezinme günlüğüyle 12 koşuda yeniden üretilemedi. Kök neden **kurulamadı**. Testte `NAV` günlüğü kaldı; sonraki FAIL'de sayfanın nereye gittiği görünecek.
+
+**Runtime ve MP ürün kodu MP.8.1'de değişmedi.**
 
 ---
 

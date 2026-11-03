@@ -1,0 +1,7 @@
+FAIL B1 kapasite 3: host + 2 misafir (ikisi de çift dokunmayla) girer, tek koltuk tutar; dördüncü telefon "Oda dolu." görür; host küçük düğmede 👥 3
+page.evaluate: TypeError: Cannot read properties of null (reading 'name')
+    at eval (eval at evaluate (:311:30), <anonymous>:3:21)
+    at UtilityScript.evaluate (<anonymous>:313:16)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+    at tap (/home/user/Star/tests/browser-mp74.cjs:22:117)
+    at async room (/home/user/Star/tests/browser-mp74.cjs:60:5)
