@@ -1,0 +1,2257 @@
+2026-11-03T17:46:59.745Z pw:api => browserType.launch started
+2026-11-03T17:46:59.746Z pw:api => browserType.launch started
+2026-11-03T17:46:59.747Z pw:api => browserType.launch started
+2026-11-03T17:47:00.213Z pw:api <= browserType.launch succeeded
+2026-11-03T17:47:00.228Z pw:api <= browserType.launch succeeded
+2026-11-03T17:47:00.431Z pw:api <= browserType.launch succeeded
+2026-11-03T17:47:00.432Z pw:api => browser.newContext started
+2026-11-03T17:47:00.465Z pw:api <= browser.newContext succeeded
+2026-11-03T17:47:00.467Z pw:api => browserContext.exposeBinding started
+2026-11-03T17:47:00.469Z pw:api <= browserContext.exposeBinding succeeded
+2026-11-03T17:47:00.469Z pw:api => browserContext.addInitScript started
+2026-11-03T17:47:00.470Z pw:api <= browserContext.addInitScript succeeded
+2026-11-03T17:47:00.471Z pw:api => browserContext.newPage started
+2026-11-03T17:47:00.710Z pw:api => browserContext.newCDPSession started
+2026-11-03T17:47:00.710Z pw:api <= browserContext.newPage succeeded
+2026-11-03T17:47:00.711Z pw:api => browser.newContext started
+2026-11-03T17:47:00.717Z pw:api <= browserContext.newCDPSession succeeded
+2026-11-03T17:47:00.718Z pw:api => cdpSession.send started
+2026-11-03T17:47:00.724Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:00.728Z pw:api <= browser.newContext succeeded
+2026-11-03T17:47:00.728Z pw:api => browserContext.exposeBinding started
+2026-11-03T17:47:00.728Z pw:api <= browserContext.exposeBinding succeeded
+2026-11-03T17:47:00.729Z pw:api => browserContext.addInitScript started
+2026-11-03T17:47:00.729Z pw:api <= browserContext.addInitScript succeeded
+2026-11-03T17:47:00.729Z pw:api => browserContext.newPage started
+2026-11-03T17:47:01.021Z pw:api => browserContext.newCDPSession started
+2026-11-03T17:47:01.021Z pw:api <= browserContext.newPage succeeded
+2026-11-03T17:47:01.024Z pw:api => page.goto started
+2026-11-03T17:47:01.025Z pw:api navigating to "https://localhost:43303/mp/play", waiting until "load"
+2026-11-03T17:47:01.044Z pw:api <= browserContext.newCDPSession succeeded
+2026-11-03T17:47:01.045Z pw:api => cdpSession.send started
+2026-11-03T17:47:01.111Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:01.145Z pw:api   "commit" event fired
+2026-11-03T17:47:01.145Z pw:api   navigated to "https://localhost:43303/mp/play"
+NAV B /mp/play
+2026-11-03T17:47:01.502Z pw:api   "domcontentloaded" event fired
+2026-11-03T17:47:01.544Z pw:api   "load" event fired
+2026-11-03T17:47:01.545Z pw:api <= page.goto succeeded
+2026-11-03T17:47:01.545Z pw:api => page.waitForFunction started
+2026-11-03T17:47:01.637Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:01.638Z pw:api => page.fill started
+2026-11-03T17:47:01.641Z pw:api waiting for locator('#jCode')
+2026-11-03T17:47:01.716Z pw:api   locator resolved to <input id="jCode" maxlength="5" class="mp1-in" enterkeyhint="go" autocomplete="off" spellcheck="false" placeholder="K7M2P" autocapitalize="characters"/>
+2026-11-03T17:47:01.720Z pw:api   fill("zzzzz")
+2026-11-03T17:47:01.720Z pw:api attempting fill action
+2026-11-03T17:47:01.721Z pw:api   waiting for element to be visible, enabled and editable
+2026-11-03T17:47:01.738Z pw:api <= page.fill succeeded
+2026-11-03T17:47:01.738Z pw:api => page.fill started
+2026-11-03T17:47:01.739Z pw:api waiting for locator('#jName')
+2026-11-03T17:47:01.746Z pw:api   locator resolved to <input id="jName" maxlength="24" enterkeyhint="go" placeholder="Adın" class="mp1-in name" autocomplete="nickname"/>
+2026-11-03T17:47:01.749Z pw:api   fill("Bora")
+2026-11-03T17:47:01.749Z pw:api attempting fill action
+2026-11-03T17:47:01.749Z pw:api   waiting for element to be visible, enabled and editable
+2026-11-03T17:47:01.762Z pw:api <= page.fill succeeded
+2026-11-03T17:47:01.763Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:01.764Z pw:api waiting for locator('[data-j="go"]').first()
+2026-11-03T17:47:01.770Z pw:api   locator resolved to visible <button data-j="go" class="mp1-btn pri">KATIL</button>
+2026-11-03T17:47:01.775Z pw:api attempting scroll into view action
+2026-11-03T17:47:01.775Z pw:api   waiting for element to be stable
+2026-11-03T17:47:01.815Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:01.815Z pw:api => locator.tap started
+2026-11-03T17:47:01.816Z pw:api waiting for locator('[data-j="go"]').first()
+2026-11-03T17:47:01.822Z pw:api   locator resolved to <button data-j="go" class="mp1-btn pri">KATIL</button>
+2026-11-03T17:47:01.824Z pw:api attempting tap action
+2026-11-03T17:47:01.824Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:01.846Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:01.846Z pw:api   scrolling into view if needed
+2026-11-03T17:47:01.847Z pw:api   done scrolling
+2026-11-03T17:47:01.851Z pw:api   performing tap action
+2026-11-03T17:47:01.993Z pw:api   "networkidle" event fired
+2026-11-03T17:47:02.100Z pw:api   tap action done
+2026-11-03T17:47:02.100Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:02.100Z pw:api   navigations have finished
+2026-11-03T17:47:02.101Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:02.102Z pw:api => page.waitForFunction started
+2026-11-03T17:47:02.105Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:02.106Z pw:api => browserContext.newCDPSession started
+2026-11-03T17:47:02.107Z pw:api <= browserContext.newCDPSession succeeded
+2026-11-03T17:47:02.107Z pw:api => cdpSession.send started
+2026-11-03T17:47:02.108Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:02.108Z pw:api => cdpSession.send started
+2026-11-03T17:47:02.109Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:02.109Z pw:api => page.goto started
+2026-11-03T17:47:02.110Z pw:api navigating to "https://localhost:43303/", waiting until "load"
+2026-11-03T17:47:02.141Z pw:api   "commit" event fired
+2026-11-03T17:47:02.141Z pw:api   navigated to "https://localhost:43303/"
+2026-11-03T17:47:02.391Z pw:api   "domcontentloaded" event fired
+2026-11-03T17:47:02.411Z pw:api   "load" event fired
+2026-11-03T17:47:02.412Z pw:api <= page.goto succeeded
+2026-11-03T17:47:02.412Z pw:api => page.waitForFunction started
+2026-11-03T17:47:02.499Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:02.500Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:02.501Z pw:api waiting for locator('#mp1Btn').first()
+2026-11-03T17:47:02.578Z pw:api   locator resolved to visible <button id="mp1Btn" type="button" class="tBtn mp1-menu">…</button>
+2026-11-03T17:47:02.603Z pw:api attempting scroll into view action
+2026-11-03T17:47:02.603Z pw:api   waiting for element to be stable
+2026-11-03T17:47:02.634Z pw:api   element is not stable
+2026-11-03T17:47:02.634Z pw:api retrying scroll into view action
+2026-11-03T17:47:02.634Z pw:api   waiting for element to be stable
+2026-11-03T17:47:02.664Z pw:api   element is not stable
+2026-11-03T17:47:02.664Z pw:api retrying scroll into view action
+2026-11-03T17:47:02.664Z pw:api   waiting 20ms
+2026-11-03T17:47:02.689Z pw:api   waiting for element to be stable
+2026-11-03T17:47:02.728Z pw:api   element is not stable
+2026-11-03T17:47:02.728Z pw:api retrying scroll into view action
+2026-11-03T17:47:02.728Z pw:api   waiting 100ms
+2026-11-03T17:47:02.836Z pw:api   waiting for element to be stable
+2026-11-03T17:47:02.866Z pw:api   element is not stable
+2026-11-03T17:47:02.866Z pw:api retrying scroll into view action
+2026-11-03T17:47:02.866Z pw:api   waiting 100ms
+2026-11-03T17:47:02.891Z pw:api   "networkidle" event fired
+2026-11-03T17:47:02.972Z pw:api   waiting for element to be stable
+2026-11-03T17:47:02.998Z pw:api   element is not stable
+2026-11-03T17:47:02.998Z pw:api retrying scroll into view action
+2026-11-03T17:47:02.998Z pw:api   waiting 500ms
+2026-11-03T17:47:03.503Z pw:api   waiting for element to be stable
+2026-11-03T17:47:03.529Z pw:api   element is not stable
+2026-11-03T17:47:03.529Z pw:api retrying scroll into view action
+2026-11-03T17:47:03.529Z pw:api   waiting 500ms
+2026-11-03T17:47:04.035Z pw:api   waiting for element to be stable
+2026-11-03T17:47:04.063Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:04.063Z pw:api => locator.tap started
+2026-11-03T17:47:04.064Z pw:api waiting for locator('#mp1Btn').first()
+2026-11-03T17:47:04.068Z pw:api   locator resolved to <button id="mp1Btn" type="button" class="tBtn mp1-menu">…</button>
+2026-11-03T17:47:04.069Z pw:api attempting tap action
+2026-11-03T17:47:04.070Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:04.101Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:04.101Z pw:api   scrolling into view if needed
+2026-11-03T17:47:04.102Z pw:api   done scrolling
+2026-11-03T17:47:04.108Z pw:api   performing tap action
+2026-11-03T17:47:04.334Z pw:api   navigated to "https://localhost:43303/"
+2026-11-03T17:47:04.366Z pw:api   tap action done
+2026-11-03T17:47:04.366Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:04.366Z pw:api   navigations have finished
+2026-11-03T17:47:04.367Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:04.367Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:04.367Z pw:api waiting for locator('[data-m="create"]').first()
+2026-11-03T17:47:04.371Z pw:api   locator resolved to visible <button data-m="create" class="mp1-btn pri">ODA OLUŞTUR</button>
+2026-11-03T17:47:04.375Z pw:api attempting scroll into view action
+2026-11-03T17:47:04.375Z pw:api   waiting for element to be stable
+2026-11-03T17:47:04.415Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:04.416Z pw:api => locator.tap started
+2026-11-03T17:47:04.416Z pw:api waiting for locator('[data-m="create"]').first()
+2026-11-03T17:47:04.421Z pw:api   locator resolved to <button data-m="create" class="mp1-btn pri">ODA OLUŞTUR</button>
+2026-11-03T17:47:04.423Z pw:api attempting tap action
+2026-11-03T17:47:04.424Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:04.458Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:04.458Z pw:api   scrolling into view if needed
+2026-11-03T17:47:04.471Z pw:api   done scrolling
+2026-11-03T17:47:04.474Z pw:api   performing tap action
+2026-11-03T17:47:04.532Z pw:api   navigated to "https://localhost:43303/"
+2026-11-03T17:47:04.540Z pw:api   tap action done
+2026-11-03T17:47:04.541Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:04.541Z pw:api   navigations have finished
+2026-11-03T17:47:04.541Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:04.541Z pw:api => page.waitForFunction started
+2026-11-03T17:47:04.563Z pw:api   navigated to "https://localhost:43303/"
+2026-11-03T17:47:04.584Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:04.584Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:04.585Z pw:api waiting for locator('#mp7EditMe').first()
+2026-11-03T17:47:04.591Z pw:api   locator resolved to visible <button id="mp7EditMe" data-m="editMe" class="mp1-btn pri">DEVLETİMİ DÜZENLE</button>
+2026-11-03T17:47:04.595Z pw:api attempting scroll into view action
+2026-11-03T17:47:04.595Z pw:api   waiting for element to be stable
+2026-11-03T17:47:04.631Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:04.631Z pw:api => locator.tap started
+2026-11-03T17:47:04.632Z pw:api waiting for locator('#mp7EditMe').first()
+2026-11-03T17:47:04.635Z pw:api   locator resolved to <button id="mp7EditMe" data-m="editMe" class="mp1-btn pri">DEVLETİMİ DÜZENLE</button>
+2026-11-03T17:47:04.636Z pw:api attempting tap action
+2026-11-03T17:47:04.636Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:04.678Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:04.678Z pw:api   scrolling into view if needed
+2026-11-03T17:47:04.686Z pw:api   done scrolling
+2026-11-03T17:47:04.692Z pw:api   performing tap action
+2026-11-03T17:47:04.745Z pw:api   navigated to "https://localhost:43303/"
+2026-11-03T17:47:04.842Z pw:api   tap action done
+2026-11-03T17:47:04.843Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:04.843Z pw:api   navigations have finished
+2026-11-03T17:47:04.847Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:04.848Z pw:api => page.setViewportSize started
+2026-11-03T17:47:04.873Z pw:api <= page.setViewportSize succeeded
+2026-11-03T17:47:04.874Z pw:api => page.waitForFunction started
+2026-11-03T17:47:04.887Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:04.887Z pw:api => page.fill started
+2026-11-03T17:47:04.887Z pw:api waiting for locator('#empName')
+2026-11-03T17:47:04.900Z pw:api   locator resolved to <input type="text" id="empName" maxlength="30" class="nameInp" value="Yeni Hanedan" placeholder="Hanedanının adı"/>
+2026-11-03T17:47:04.901Z pw:api   fill("Kızıl Muhafız")
+2026-11-03T17:47:04.901Z pw:api attempting fill action
+2026-11-03T17:47:04.901Z pw:api   waiting for element to be visible, enabled and editable
+2026-11-03T17:47:04.925Z pw:api <= page.fill succeeded
+2026-11-03T17:47:04.925Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:04.931Z pw:api waiting for locator('#setup [data-a="mizacSet"][data-x="militarist"]').first()
+2026-11-03T17:47:04.957Z pw:api   locator resolved to visible <button class="opt " data-a="mizacSet" data-x="militarist">…</button>
+2026-11-03T17:47:04.973Z pw:api attempting scroll into view action
+2026-11-03T17:47:04.980Z pw:api   waiting for element to be stable
+2026-11-03T17:47:05.015Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:05.016Z pw:api => locator.tap started
+2026-11-03T17:47:05.016Z pw:api waiting for locator('#setup [data-a="mizacSet"][data-x="militarist"]').first()
+2026-11-03T17:47:05.061Z pw:api   locator resolved to <button class="opt " data-a="mizacSet" data-x="militarist">…</button>
+2026-11-03T17:47:05.064Z pw:api attempting tap action
+2026-11-03T17:47:05.064Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:05.095Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:05.095Z pw:api   scrolling into view if needed
+2026-11-03T17:47:05.096Z pw:api   done scrolling
+2026-11-03T17:47:05.101Z pw:api   performing tap action
+2026-11-03T17:47:05.216Z pw:api   tap action done
+2026-11-03T17:47:05.216Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:05.216Z pw:api   navigations have finished
+2026-11-03T17:47:05.216Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:05.216Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:05.217Z pw:api waiting for locator('#setup [data-a="step"][data-x="etik"]').first()
+2026-11-03T17:47:05.223Z pw:api   locator resolved to visible <button class="stp " data-a="step" data-x="etik">…</button>
+2026-11-03T17:47:05.225Z pw:api attempting scroll into view action
+2026-11-03T17:47:05.226Z pw:api   waiting for element to be stable
+2026-11-03T17:47:05.266Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:05.267Z pw:api => locator.tap started
+2026-11-03T17:47:05.267Z pw:api waiting for locator('#setup [data-a="step"][data-x="etik"]').first()
+2026-11-03T17:47:05.275Z pw:api   locator resolved to <button class="stp " data-a="step" data-x="etik">…</button>
+2026-11-03T17:47:05.278Z pw:api attempting tap action
+2026-11-03T17:47:05.278Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:05.314Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:05.315Z pw:api   scrolling into view if needed
+2026-11-03T17:47:05.317Z pw:api   done scrolling
+2026-11-03T17:47:05.325Z pw:api   performing tap action
+2026-11-03T17:47:05.458Z pw:api   tap action done
+2026-11-03T17:47:05.458Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:05.458Z pw:api   navigations have finished
+2026-11-03T17:47:05.459Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:05.459Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:05.461Z pw:api waiting for locator('#setup [data-a="ethic"][data-x="mil:2"]').first()
+2026-11-03T17:47:05.473Z pw:api   locator resolved to visible <button data-ax="mil" id="axd_mil_2" data-a="ethic" data-x="mil:2" class="axDot  ">2</button>
+2026-11-03T17:47:05.487Z pw:api attempting scroll into view action
+2026-11-03T17:47:05.487Z pw:api   waiting for element to be stable
+2026-11-03T17:47:05.515Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:05.516Z pw:api => locator.tap started
+2026-11-03T17:47:05.516Z pw:api waiting for locator('#setup [data-a="ethic"][data-x="mil:2"]').first()
+2026-11-03T17:47:05.520Z pw:api   locator resolved to <button data-ax="mil" id="axd_mil_2" data-a="ethic" data-x="mil:2" class="axDot  ">2</button>
+2026-11-03T17:47:05.522Z pw:api attempting tap action
+2026-11-03T17:47:05.522Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:05.546Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:05.546Z pw:api   scrolling into view if needed
+2026-11-03T17:47:05.549Z pw:api   done scrolling
+2026-11-03T17:47:05.554Z pw:api   performing tap action
+2026-11-03T17:47:05.623Z pw:api   tap action done
+2026-11-03T17:47:05.623Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:05.623Z pw:api   navigations have finished
+2026-11-03T17:47:05.623Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:05.623Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:05.624Z pw:api waiting for locator('#setup [data-a="step"][data-x="civic"]').first()
+2026-11-03T17:47:05.636Z pw:api   locator resolved to visible <button class="stp " data-a="step" data-x="civic">…</button>
+2026-11-03T17:47:05.648Z pw:api attempting scroll into view action
+2026-11-03T17:47:05.648Z pw:api   waiting for element to be stable
+2026-11-03T17:47:05.685Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:05.685Z pw:api => locator.tap started
+2026-11-03T17:47:05.686Z pw:api waiting for locator('#setup [data-a="step"][data-x="civic"]').first()
+2026-11-03T17:47:05.697Z pw:api   locator resolved to <button class="stp " data-a="step" data-x="civic">…</button>
+2026-11-03T17:47:05.702Z pw:api attempting tap action
+2026-11-03T17:47:05.703Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:05.730Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:05.730Z pw:api   scrolling into view if needed
+2026-11-03T17:47:05.732Z pw:api   done scrolling
+2026-11-03T17:47:05.738Z pw:api   performing tap action
+2026-11-03T17:47:05.800Z pw:api   tap action done
+2026-11-03T17:47:05.801Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:05.802Z pw:api   navigations have finished
+2026-11-03T17:47:05.805Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:05.805Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:05.806Z pw:api waiting for locator('#setup [data-a="civic"][data-x="kale_dok"]').first()
+2026-11-03T17:47:05.818Z pw:api   locator resolved to visible <button data-a="civic" data-x="kale_dok" class="card civ   ">…</button>
+2026-11-03T17:47:05.837Z pw:api attempting scroll into view action
+2026-11-03T17:47:05.837Z pw:api   waiting for element to be stable
+2026-11-03T17:47:05.871Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:05.871Z pw:api => locator.tap started
+2026-11-03T17:47:05.873Z pw:api waiting for locator('#setup [data-a="civic"][data-x="kale_dok"]').first()
+2026-11-03T17:47:05.882Z pw:api   locator resolved to <button data-a="civic" data-x="kale_dok" class="card civ   ">…</button>
+2026-11-03T17:47:05.884Z pw:api attempting tap action
+2026-11-03T17:47:05.884Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:05.913Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:05.913Z pw:api   scrolling into view if needed
+2026-11-03T17:47:05.914Z pw:api   done scrolling
+2026-11-03T17:47:05.917Z pw:api   performing tap action
+2026-11-03T17:47:05.975Z pw:api   tap action done
+2026-11-03T17:47:05.975Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:05.976Z pw:api   navigations have finished
+2026-11-03T17:47:05.976Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:05.977Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:05.977Z pw:api waiting for locator('#setup [data-a="step"][data-x="koken"]').first()
+2026-11-03T17:47:05.985Z pw:api   locator resolved to visible <button class="stp " data-a="step" data-x="koken">…</button>
+2026-11-03T17:47:05.988Z pw:api attempting scroll into view action
+2026-11-03T17:47:05.988Z pw:api   waiting for element to be stable
+2026-11-03T17:47:06.014Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:06.014Z pw:api => locator.tap started
+2026-11-03T17:47:06.015Z pw:api waiting for locator('#setup [data-a="step"][data-x="koken"]').first()
+2026-11-03T17:47:06.017Z pw:api   locator resolved to <button class="stp " data-a="step" data-x="koken">…</button>
+2026-11-03T17:47:06.019Z pw:api attempting tap action
+2026-11-03T17:47:06.019Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:06.045Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:06.045Z pw:api   scrolling into view if needed
+2026-11-03T17:47:06.046Z pw:api   done scrolling
+2026-11-03T17:47:06.050Z pw:api   performing tap action
+2026-11-03T17:47:06.111Z pw:api   tap action done
+2026-11-03T17:47:06.111Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:06.111Z pw:api   navigations have finished
+2026-11-03T17:47:06.112Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:06.112Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:06.112Z pw:api waiting for locator('#setup [data-a="origin"][data-x="standart"]').first()
+2026-11-03T17:47:06.116Z pw:api   locator resolved to visible <button class="card on" data-a="origin" data-x="standart">…</button>
+2026-11-03T17:47:06.121Z pw:api attempting scroll into view action
+2026-11-03T17:47:06.121Z pw:api   waiting for element to be stable
+2026-11-03T17:47:06.145Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:06.146Z pw:api => locator.tap started
+2026-11-03T17:47:06.146Z pw:api waiting for locator('#setup [data-a="origin"][data-x="standart"]').first()
+2026-11-03T17:47:06.150Z pw:api   locator resolved to <button class="card on" data-a="origin" data-x="standart">…</button>
+2026-11-03T17:47:06.152Z pw:api attempting tap action
+2026-11-03T17:47:06.152Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:06.179Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:06.179Z pw:api   scrolling into view if needed
+2026-11-03T17:47:06.180Z pw:api   done scrolling
+2026-11-03T17:47:06.183Z pw:api   performing tap action
+2026-11-03T17:47:06.232Z pw:api   tap action done
+2026-11-03T17:47:06.233Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:06.233Z pw:api   navigations have finished
+2026-11-03T17:47:06.233Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:06.233Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:06.234Z pw:api waiting for locator('#setup [data-a="start"]').first()
+2026-11-03T17:47:06.238Z pw:api   locator resolved to visible <button data-a="start" class="btn ghost">KAYDET VE LOBİYE DÖN</button>
+2026-11-03T17:47:06.242Z pw:api attempting scroll into view action
+2026-11-03T17:47:06.243Z pw:api   waiting for element to be stable
+2026-11-03T17:47:06.279Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:06.279Z pw:api => locator.tap started
+2026-11-03T17:47:06.280Z pw:api waiting for locator('#setup [data-a="start"]').first()
+2026-11-03T17:47:06.283Z pw:api   locator resolved to <button data-a="start" class="btn ghost">KAYDET VE LOBİYE DÖN</button>
+2026-11-03T17:47:06.284Z pw:api attempting tap action
+2026-11-03T17:47:06.284Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:06.314Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:06.315Z pw:api   scrolling into view if needed
+2026-11-03T17:47:06.315Z pw:api   done scrolling
+2026-11-03T17:47:06.318Z pw:api   performing tap action
+2026-11-03T17:47:06.358Z pw:api   navigated to "https://localhost:43303/"
+2026-11-03T17:47:06.367Z pw:api   tap action done
+2026-11-03T17:47:06.367Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:06.367Z pw:api   navigations have finished
+2026-11-03T17:47:06.367Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:06.367Z pw:api => page.waitForFunction started
+2026-11-03T17:47:06.373Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:06.373Z pw:api => page.setViewportSize started
+2026-11-03T17:47:06.382Z pw:api <= page.setViewportSize succeeded
+2026-11-03T17:47:06.383Z pw:api => page.textContent started
+2026-11-03T17:47:06.383Z pw:api waiting for locator('#mp1Link')
+2026-11-03T17:47:06.386Z pw:api   locator resolved to <div id="mp1Link" class="mp1-sub">https://localhost:43303/mp/play?code=*</div>
+2026-11-03T17:47:06.387Z pw:api <= page.textContent succeeded
+2026-11-03T17:47:06.387Z pw:api => page.goto started
+2026-11-03T17:47:06.387Z pw:api navigating to "https://localhost:43303/mp/play?code=*", waiting until "load"
+2026-11-03T17:47:06.428Z pw:api   "commit" event fired
+2026-11-03T17:47:06.428Z pw:api   navigated to "https://localhost:43303/mp/play?code=*"
+NAV B /mp/play
+2026-11-03T17:47:06.623Z pw:api   "domcontentloaded" event fired
+2026-11-03T17:47:06.630Z pw:api   "load" event fired
+2026-11-03T17:47:06.630Z pw:api <= page.goto succeeded
+2026-11-03T17:47:06.631Z pw:api => page.waitForFunction started
+2026-11-03T17:47:06.693Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:06.694Z pw:api => page.fill started
+2026-11-03T17:47:06.694Z pw:api waiting for locator('#jName')
+2026-11-03T17:47:06.728Z pw:api   locator resolved to <input id="jName" maxlength="24" enterkeyhint="go" placeholder="Adın" class="mp1-in name" autocomplete="nickname"/>
+2026-11-03T17:47:06.731Z pw:api   fill("Bora")
+2026-11-03T17:47:06.731Z pw:api attempting fill action
+2026-11-03T17:47:06.731Z pw:api   waiting for element to be visible, enabled and editable
+2026-11-03T17:47:06.739Z pw:api <= page.fill succeeded
+2026-11-03T17:47:06.741Z pw:api => page.evaluate started
+2026-11-03T17:47:06.743Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:06.743Z pw:api => page.evaluate started
+2026-11-03T17:47:06.747Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:06.747Z pw:api => cdpSession.send started
+2026-11-03T17:47:06.834Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:06.835Z pw:api => page.evaluate started
+2026-11-03T17:47:06.838Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:06.839Z pw:api => cdpSession.send started
+2026-11-03T17:47:06.855Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:06.856Z pw:api => page.waitForTimeout started
+2026-11-03T17:47:06.882Z pw:api <= page.waitForTimeout succeeded
+2026-11-03T17:47:06.882Z pw:api => page.evaluate started
+2026-11-03T17:47:06.885Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:06.886Z pw:api => page.evaluate started
+2026-11-03T17:47:06.887Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:06.888Z pw:api => cdpSession.send started
+2026-11-03T17:47:06.900Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:06.900Z pw:api => page.evaluate started
+2026-11-03T17:47:06.901Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:06.902Z pw:api => cdpSession.send started
+2026-11-03T17:47:06.915Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:06.915Z pw:api => page.waitForTimeout started
+2026-11-03T17:47:06.942Z pw:api <= page.waitForTimeout succeeded
+2026-11-03T17:47:06.942Z pw:api => page.evaluate started
+2026-11-03T17:47:06.944Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:06.944Z pw:api => page.evaluate started
+2026-11-03T17:47:06.945Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:06.946Z pw:api => cdpSession.send started
+2026-11-03T17:47:06.970Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:06.971Z pw:api => page.evaluate started
+2026-11-03T17:47:06.976Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:06.976Z pw:api => cdpSession.send started
+2026-11-03T17:47:06.994Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:06.994Z pw:api => page.waitForTimeout started
+2026-11-03T17:47:07.020Z pw:api <= page.waitForTimeout succeeded
+2026-11-03T17:47:07.020Z pw:api => page.waitForFunction started
+2026-11-03T17:47:07.118Z pw:api   "networkidle" event fired
+2026-11-03T17:47:07.477Z pw:api   navigated to "https://localhost:43303/mp/play?code=*"
+NAV B /mp/play
+2026-11-03T17:47:07.531Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:07.532Z pw:api => page.evaluate started
+2026-11-03T17:47:07.533Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:07.533Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:07.533Z pw:api waiting for locator('#jEditMe').first()
+2026-11-03T17:47:07.541Z pw:api   locator resolved to visible <button id="jEditMe" data-j="editMe" class="mp1-btn pri">DEVLETİMİ DÜZENLE</button>
+2026-11-03T17:47:07.545Z pw:api attempting scroll into view action
+2026-11-03T17:47:07.545Z pw:api   waiting for element to be stable
+2026-11-03T17:47:07.579Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:07.579Z pw:api => locator.tap started
+2026-11-03T17:47:07.579Z pw:api waiting for locator('#jEditMe').first()
+2026-11-03T17:47:07.582Z pw:api   locator resolved to <button id="jEditMe" data-j="editMe" class="mp1-btn pri">DEVLETİMİ DÜZENLE</button>
+2026-11-03T17:47:07.583Z pw:api attempting tap action
+2026-11-03T17:47:07.583Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:07.611Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:07.611Z pw:api   scrolling into view if needed
+2026-11-03T17:47:07.612Z pw:api   done scrolling
+2026-11-03T17:47:07.615Z pw:api   performing tap action
+2026-11-03T17:47:07.652Z pw:api   navigated to "https://localhost:43303/mp/play?code=*"
+NAV B /mp/play
+2026-11-03T17:47:07.736Z pw:api   tap action done
+2026-11-03T17:47:07.736Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:07.736Z pw:api   navigations have finished
+2026-11-03T17:47:07.736Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:07.737Z pw:api => page.waitForFunction started
+2026-11-03T17:47:07.740Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:07.740Z pw:api => page.setViewportSize started
+2026-11-03T17:47:07.768Z pw:api <= page.setViewportSize succeeded
+2026-11-03T17:47:07.769Z pw:api => page.waitForFunction started
+2026-11-03T17:47:07.774Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:07.774Z pw:api => page.fill started
+2026-11-03T17:47:07.774Z pw:api waiting for locator('#empName')
+2026-11-03T17:47:07.779Z pw:api   locator resolved to <input type="text" id="empName" maxlength="30" class="nameInp" value="Yeni Hanedan" placeholder="Hanedanının adı"/>
+2026-11-03T17:47:07.780Z pw:api   fill("Saf Akıl Ağı")
+2026-11-03T17:47:07.780Z pw:api attempting fill action
+2026-11-03T17:47:07.780Z pw:api   waiting for element to be visible, enabled and editable
+2026-11-03T17:47:07.787Z pw:api <= page.fill succeeded
+2026-11-03T17:47:07.787Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:07.787Z pw:api waiting for locator('#setup [data-a="mizacSet"][data-x="teknokrasi"]').first()
+2026-11-03T17:47:07.791Z pw:api   locator resolved to visible <button class="opt " data-a="mizacSet" data-x="teknokrasi">…</button>
+2026-11-03T17:47:07.800Z pw:api attempting scroll into view action
+2026-11-03T17:47:07.800Z pw:api   waiting for element to be stable
+2026-11-03T17:47:07.830Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:07.830Z pw:api => locator.tap started
+2026-11-03T17:47:07.830Z pw:api waiting for locator('#setup [data-a="mizacSet"][data-x="teknokrasi"]').first()
+2026-11-03T17:47:07.834Z pw:api   locator resolved to <button class="opt " data-a="mizacSet" data-x="teknokrasi">…</button>
+2026-11-03T17:47:07.835Z pw:api attempting tap action
+2026-11-03T17:47:07.835Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:07.860Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:07.861Z pw:api   scrolling into view if needed
+2026-11-03T17:47:07.862Z pw:api   done scrolling
+2026-11-03T17:47:07.865Z pw:api   performing tap action
+2026-11-03T17:47:07.900Z pw:api   tap action done
+2026-11-03T17:47:07.900Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:07.901Z pw:api   navigations have finished
+2026-11-03T17:47:07.901Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:07.902Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:07.902Z pw:api waiting for locator('#setup [data-a="step"][data-x="etik"]').first()
+2026-11-03T17:47:07.905Z pw:api   locator resolved to visible <button class="stp " data-a="step" data-x="etik">…</button>
+2026-11-03T17:47:07.908Z pw:api attempting scroll into view action
+2026-11-03T17:47:07.908Z pw:api   waiting for element to be stable
+2026-11-03T17:47:07.949Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:07.949Z pw:api => locator.tap started
+2026-11-03T17:47:07.950Z pw:api waiting for locator('#setup [data-a="step"][data-x="etik"]').first()
+2026-11-03T17:47:07.953Z pw:api   locator resolved to <button class="stp " data-a="step" data-x="etik">…</button>
+2026-11-03T17:47:07.954Z pw:api attempting tap action
+2026-11-03T17:47:07.954Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:07.979Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:07.980Z pw:api   scrolling into view if needed
+2026-11-03T17:47:07.980Z pw:api   done scrolling
+2026-11-03T17:47:07.983Z pw:api   performing tap action
+2026-11-03T17:47:08.023Z pw:api   tap action done
+2026-11-03T17:47:08.023Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:08.024Z pw:api   navigations have finished
+2026-11-03T17:47:08.024Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:08.024Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:08.024Z pw:api waiting for locator('#setup [data-a="ethic"][data-x="mat:2"]').first()
+2026-11-03T17:47:08.029Z pw:api   locator resolved to visible <button data-ax="mat" id="axd_mat_2" data-a="ethic" data-x="mat:2" class="axDot  ">2</button>
+2026-11-03T17:47:08.032Z pw:api attempting scroll into view action
+2026-11-03T17:47:08.032Z pw:api   waiting for element to be stable
+2026-11-03T17:47:08.064Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:08.064Z pw:api => locator.tap started
+2026-11-03T17:47:08.064Z pw:api waiting for locator('#setup [data-a="ethic"][data-x="mat:2"]').first()
+2026-11-03T17:47:08.068Z pw:api   locator resolved to <button data-ax="mat" id="axd_mat_2" data-a="ethic" data-x="mat:2" class="axDot  ">2</button>
+2026-11-03T17:47:08.069Z pw:api attempting tap action
+2026-11-03T17:47:08.069Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:08.094Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:08.094Z pw:api   scrolling into view if needed
+2026-11-03T17:47:08.095Z pw:api   done scrolling
+2026-11-03T17:47:08.097Z pw:api   performing tap action
+2026-11-03T17:47:08.146Z pw:api   tap action done
+2026-11-03T17:47:08.146Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:08.146Z pw:api   navigations have finished
+2026-11-03T17:47:08.146Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:08.147Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:08.147Z pw:api waiting for locator('#setup [data-a="ethic"][data-x="mil:-1"]').first()
+2026-11-03T17:47:08.153Z pw:api   locator resolved to visible <button data-ax="mil" data-a="ethic" class="axDot  " id="axd_mil_-1" data-x="mil:-1">1</button>
+2026-11-03T17:47:08.156Z pw:api attempting scroll into view action
+2026-11-03T17:47:08.157Z pw:api   waiting for element to be stable
+2026-11-03T17:47:08.195Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:08.196Z pw:api => locator.tap started
+2026-11-03T17:47:08.196Z pw:api waiting for locator('#setup [data-a="ethic"][data-x="mil:-1"]').first()
+2026-11-03T17:47:08.202Z pw:api   locator resolved to <button data-ax="mil" data-a="ethic" class="axDot  " id="axd_mil_-1" data-x="mil:-1">1</button>
+2026-11-03T17:47:08.204Z pw:api attempting tap action
+2026-11-03T17:47:08.204Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:08.228Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:08.228Z pw:api   scrolling into view if needed
+2026-11-03T17:47:08.229Z pw:api   done scrolling
+2026-11-03T17:47:08.232Z pw:api   performing tap action
+2026-11-03T17:47:08.261Z pw:api   tap action done
+2026-11-03T17:47:08.261Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:08.261Z pw:api   navigations have finished
+2026-11-03T17:47:08.261Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:08.262Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:08.262Z pw:api waiting for locator('#setup [data-a="step"][data-x="civic"]').first()
+2026-11-03T17:47:08.267Z pw:api   locator resolved to visible <button class="stp " data-a="step" data-x="civic">…</button>
+2026-11-03T17:47:08.271Z pw:api attempting scroll into view action
+2026-11-03T17:47:08.272Z pw:api   waiting for element to be stable
+2026-11-03T17:47:08.300Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:08.301Z pw:api => locator.tap started
+2026-11-03T17:47:08.301Z pw:api waiting for locator('#setup [data-a="step"][data-x="civic"]').first()
+2026-11-03T17:47:08.306Z pw:api   locator resolved to <button class="stp " data-a="step" data-x="civic">…</button>
+2026-11-03T17:47:08.308Z pw:api attempting tap action
+2026-11-03T17:47:08.308Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:08.346Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:08.346Z pw:api   scrolling into view if needed
+2026-11-03T17:47:08.349Z pw:api   done scrolling
+2026-11-03T17:47:08.352Z pw:api   performing tap action
+2026-11-03T17:47:08.388Z pw:api   tap action done
+2026-11-03T17:47:08.388Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:08.388Z pw:api   navigations have finished
+2026-11-03T17:47:08.388Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:08.388Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:08.388Z pw:api waiting for locator('#setup [data-a="civic"][data-x="sinyal_avci"]').first()
+2026-11-03T17:47:08.392Z pw:api   locator resolved to visible <button data-a="civic" class="card civ   " data-x="sinyal_avci">…</button>
+2026-11-03T17:47:08.400Z pw:api attempting scroll into view action
+2026-11-03T17:47:08.400Z pw:api   waiting for element to be stable
+2026-11-03T17:47:08.432Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:08.432Z pw:api => locator.tap started
+2026-11-03T17:47:08.432Z pw:api waiting for locator('#setup [data-a="civic"][data-x="sinyal_avci"]').first()
+2026-11-03T17:47:08.435Z pw:api   locator resolved to <button data-a="civic" class="card civ   " data-x="sinyal_avci">…</button>
+2026-11-03T17:47:08.436Z pw:api attempting tap action
+2026-11-03T17:47:08.436Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:08.460Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:08.460Z pw:api   scrolling into view if needed
+2026-11-03T17:47:08.461Z pw:api   done scrolling
+2026-11-03T17:47:08.463Z pw:api   performing tap action
+2026-11-03T17:47:08.514Z pw:api   tap action done
+2026-11-03T17:47:08.514Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:08.514Z pw:api   navigations have finished
+2026-11-03T17:47:08.514Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:08.514Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:08.515Z pw:api waiting for locator('#setup [data-a="step"][data-x="koken"]').first()
+2026-11-03T17:47:08.522Z pw:api   locator resolved to visible <button class="stp " data-a="step" data-x="koken">…</button>
+2026-11-03T17:47:08.524Z pw:api attempting scroll into view action
+2026-11-03T17:47:08.524Z pw:api   waiting for element to be stable
+2026-11-03T17:47:08.545Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:08.545Z pw:api => locator.tap started
+2026-11-03T17:47:08.545Z pw:api waiting for locator('#setup [data-a="step"][data-x="koken"]').first()
+2026-11-03T17:47:08.549Z pw:api   locator resolved to <button class="stp " data-a="step" data-x="koken">…</button>
+2026-11-03T17:47:08.550Z pw:api attempting tap action
+2026-11-03T17:47:08.550Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:08.577Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:08.577Z pw:api   scrolling into view if needed
+2026-11-03T17:47:08.578Z pw:api   done scrolling
+2026-11-03T17:47:08.581Z pw:api   performing tap action
+2026-11-03T17:47:08.644Z pw:api   tap action done
+2026-11-03T17:47:08.644Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:08.644Z pw:api   navigations have finished
+2026-11-03T17:47:08.644Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:08.645Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:08.645Z pw:api waiting for locator('#setup [data-a="origin"][data-x="standart"]').first()
+2026-11-03T17:47:08.649Z pw:api   locator resolved to visible <button class="card on" data-a="origin" data-x="standart">…</button>
+2026-11-03T17:47:08.655Z pw:api attempting scroll into view action
+2026-11-03T17:47:08.655Z pw:api   waiting for element to be stable
+2026-11-03T17:47:08.695Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:08.696Z pw:api => locator.tap started
+2026-11-03T17:47:08.696Z pw:api waiting for locator('#setup [data-a="origin"][data-x="standart"]').first()
+2026-11-03T17:47:08.699Z pw:api   locator resolved to <button class="card on" data-a="origin" data-x="standart">…</button>
+2026-11-03T17:47:08.699Z pw:api attempting tap action
+2026-11-03T17:47:08.699Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:08.728Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:08.728Z pw:api   scrolling into view if needed
+2026-11-03T17:47:08.730Z pw:api   done scrolling
+2026-11-03T17:47:08.732Z pw:api   performing tap action
+2026-11-03T17:47:08.775Z pw:api   tap action done
+2026-11-03T17:47:08.775Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:08.775Z pw:api   navigations have finished
+2026-11-03T17:47:08.776Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:08.776Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:08.778Z pw:api waiting for locator('#setup [data-a="start"]').first()
+2026-11-03T17:47:08.783Z pw:api   locator resolved to visible <button class="btn" data-a="start">DEVLETİ KAYDET</button>
+2026-11-03T17:47:08.785Z pw:api attempting scroll into view action
+2026-11-03T17:47:08.785Z pw:api   waiting for element to be stable
+2026-11-03T17:47:08.811Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:08.811Z pw:api => locator.tap started
+2026-11-03T17:47:08.812Z pw:api waiting for locator('#setup [data-a="start"]').first()
+2026-11-03T17:47:08.814Z pw:api   locator resolved to <button class="btn" data-a="start">DEVLETİ KAYDET</button>
+2026-11-03T17:47:08.815Z pw:api attempting tap action
+2026-11-03T17:47:08.815Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:08.844Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:08.844Z pw:api   scrolling into view if needed
+2026-11-03T17:47:08.845Z pw:api   done scrolling
+2026-11-03T17:47:08.847Z pw:api   performing tap action
+2026-11-03T17:47:08.892Z pw:api   navigated to "https://localhost:43303/mp/play?code=*"
+NAV B /mp/play
+2026-11-03T17:47:08.906Z pw:api   tap action done
+2026-11-03T17:47:08.906Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:08.906Z pw:api   navigations have finished
+2026-11-03T17:47:08.907Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:08.907Z pw:api => page.waitForFunction started
+2026-11-03T17:47:08.913Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:08.913Z pw:api => page.setViewportSize started
+2026-11-03T17:47:08.921Z pw:api <= page.setViewportSize succeeded
+2026-11-03T17:47:08.921Z pw:api => page.waitForFunction started
+2026-11-03T17:47:08.924Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:08.924Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:08.924Z pw:api waiting for locator('#jReady').first()
+2026-11-03T17:47:08.930Z pw:api   locator resolved to visible <button id="jReady" data-j="ready" class="mp1-btn pri">HAZIRIM</button>
+2026-11-03T17:47:08.937Z pw:api attempting scroll into view action
+2026-11-03T17:47:08.937Z pw:api   waiting for element to be stable
+2026-11-03T17:47:08.961Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:08.962Z pw:api => locator.tap started
+2026-11-03T17:47:08.962Z pw:api waiting for locator('#jReady').first()
+2026-11-03T17:47:08.965Z pw:api   locator resolved to <button id="jReady" data-j="ready" class="mp1-btn pri">HAZIRIM</button>
+2026-11-03T17:47:08.966Z pw:api attempting tap action
+2026-11-03T17:47:08.966Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:08.993Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:08.993Z pw:api   scrolling into view if needed
+2026-11-03T17:47:08.993Z pw:api   done scrolling
+2026-11-03T17:47:08.995Z pw:api   performing tap action
+2026-11-03T17:47:09.018Z pw:api   tap action done
+2026-11-03T17:47:09.018Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:09.018Z pw:api   navigations have finished
+2026-11-03T17:47:09.019Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:09.019Z pw:api => page.waitForFunction started
+2026-11-03T17:47:09.025Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:09.026Z pw:api => page.waitForTimeout started
+2026-11-03T17:47:09.327Z pw:api <= page.waitForTimeout succeeded
+2026-11-03T17:47:09.329Z pw:api => page.screenshot started
+2026-11-03T17:47:09.329Z pw:api taking page screenshot
+2026-11-03T17:47:09.333Z pw:api waiting for fonts to load...
+2026-11-03T17:47:09.334Z pw:api fonts loaded
+2026-11-03T17:47:09.410Z pw:api <= page.screenshot succeeded
+2026-11-03T17:47:09.413Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:09.413Z pw:api waiting for locator('[data-m="start"]').first()
+2026-11-03T17:47:09.416Z pw:api   locator resolved to visible <button data-m="start" class="mp1-btn pri">OYUNU BAŞLAT</button>
+2026-11-03T17:47:09.418Z pw:api attempting scroll into view action
+2026-11-03T17:47:09.418Z pw:api   waiting for element to be stable
+2026-11-03T17:47:09.428Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:09.428Z pw:api => locator.tap started
+2026-11-03T17:47:09.428Z pw:api waiting for locator('[data-m="start"]').first()
+2026-11-03T17:47:09.430Z pw:api   locator resolved to <button data-m="start" class="mp1-btn pri">OYUNU BAŞLAT</button>
+2026-11-03T17:47:09.431Z pw:api attempting tap action
+2026-11-03T17:47:09.431Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:09.460Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:09.460Z pw:api   scrolling into view if needed
+2026-11-03T17:47:09.461Z pw:api   done scrolling
+2026-11-03T17:47:09.463Z pw:api   performing tap action
+2026-11-03T17:47:09.568Z pw:api   navigated to "https://localhost:43303/mp/play?code=*"
+NAV B /mp/play
+2026-11-03T17:47:09.637Z pw:api   navigated to "https://localhost:43303/"
+2026-11-03T17:47:09.754Z pw:api   tap action done
+2026-11-03T17:47:09.754Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:09.755Z pw:api   navigations have finished
+2026-11-03T17:47:09.755Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:09.755Z pw:api => page.waitForFunction started
+2026-11-03T17:47:10.184Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:10.184Z pw:api => page.evaluate started
+2026-11-03T17:47:10.250Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:10.251Z pw:api => page.waitForTimeout started
+2026-11-03T17:47:11.452Z pw:api <= page.waitForTimeout succeeded
+2026-11-03T17:47:11.462Z pw:api => page.evaluate started
+2026-11-03T17:47:11.465Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:11.465Z pw:api => page.$ started
+2026-11-03T17:47:11.465Z pw:api     finding element using the selector "#modal [data-a="advClose"],#modal [data-a="closem"]"
+2026-11-03T17:47:11.625Z pw:api <= page.$ succeeded
+2026-11-03T17:47:11.626Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:11.627Z pw:api waiting for locator('#modal [data-a="advClose"],#modal [data-a="closem"]').first()
+2026-11-03T17:47:11.689Z pw:api   locator resolved to visible <button class="ch" data-a="advClose">…</button>
+2026-11-03T17:47:11.757Z pw:api attempting scroll into view action
+2026-11-03T17:47:11.757Z pw:api   waiting for element to be stable
+2026-11-03T17:47:11.969Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:11.970Z pw:api => locator.tap started
+2026-11-03T17:47:11.970Z pw:api waiting for locator('#modal [data-a="advClose"],#modal [data-a="closem"]').first()
+2026-11-03T17:47:12.014Z pw:api   locator resolved to <button class="ch" data-a="advClose">…</button>
+2026-11-03T17:47:12.024Z pw:api attempting tap action
+2026-11-03T17:47:12.025Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:12.073Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:12.073Z pw:api   scrolling into view if needed
+2026-11-03T17:47:12.079Z pw:api   done scrolling
+2026-11-03T17:47:12.129Z pw:api   performing tap action
+2026-11-03T17:47:12.280Z pw:api   tap action done
+2026-11-03T17:47:12.281Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:12.281Z pw:api   navigations have finished
+2026-11-03T17:47:12.281Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:12.281Z pw:api => page.waitForFunction started
+2026-11-03T17:47:12.323Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:12.324Z pw:api => page.evaluate started
+2026-11-03T17:47:12.339Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:12.339Z pw:api => page.waitForFunction started
+2026-11-03T17:47:12.362Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:12.363Z pw:api => cdpSession.send started
+2026-11-03T17:47:12.374Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:12.375Z pw:api => page.evaluate started
+2026-11-03T17:47:12.385Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:12.386Z pw:api => page.evaluate started
+2026-11-03T17:47:12.404Z pw:api <= page.evaluate succeeded
+PASS A1 5 karakterli kod: host kodu 5 karakter ve tiresiz; davet bağlantısı kodu taşır; yanlış kod reddedilir; KATIL'a hızlı ÜÇ dokunma (600 ms gecikmeli ağ) tek koltuk, "oda dolu" yok; iki telefon oyuna girer
+2026-11-03T17:47:12.407Z pw:api => page.waitForFunction started
+2026-11-03T17:47:12.449Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:12.449Z pw:api => page.evaluate started
+2026-11-03T17:47:12.467Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:12.468Z pw:api => page.screenshot started
+2026-11-03T17:47:12.468Z pw:api taking page screenshot
+2026-11-03T17:47:12.483Z pw:api waiting for fonts to load...
+2026-11-03T17:47:12.497Z pw:api fonts loaded
+2026-11-03T17:47:12.926Z pw:api <= page.screenshot succeeded
+2026-11-03T17:47:12.933Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:12.934Z pw:api waiting for locator('#mp1Mini [data-g="toggle"]').first()
+2026-11-03T17:47:12.964Z pw:api   locator resolved to visible <button data-g="toggle" aria-expanded="false" class="mp1-mini-h mp74-pill" aria-label="Çok oyunculu paneli — 2 oyuncu bağlı">…</button>
+2026-11-03T17:47:13.019Z pw:api attempting scroll into view action
+2026-11-03T17:47:13.020Z pw:api   waiting for element to be stable
+2026-11-03T17:47:13.097Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:13.098Z pw:api => locator.tap started
+2026-11-03T17:47:13.098Z pw:api waiting for locator('#mp1Mini [data-g="toggle"]').first()
+2026-11-03T17:47:13.130Z pw:api   locator resolved to <button data-g="toggle" aria-expanded="false" class="mp1-mini-h mp74-pill" aria-label="Çok oyunculu paneli — 2 oyuncu bağlı">…</button>
+2026-11-03T17:47:13.150Z pw:api attempting tap action
+2026-11-03T17:47:13.151Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:13.184Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:13.184Z pw:api   scrolling into view if needed
+2026-11-03T17:47:13.198Z pw:api   done scrolling
+2026-11-03T17:47:13.234Z pw:api   performing tap action
+2026-11-03T17:47:13.307Z pw:api   tap action done
+2026-11-03T17:47:13.307Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:13.307Z pw:api   navigations have finished
+2026-11-03T17:47:13.308Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:13.308Z pw:api => page.waitForFunction started
+2026-11-03T17:47:13.344Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:13.344Z pw:api => page.textContent started
+2026-11-03T17:47:13.345Z pw:api waiting for locator('#mp1Mini')
+2026-11-03T17:47:13.360Z pw:api   locator resolved to <div id="mp1Mini" class="mp1-mini">…</div>
+2026-11-03T17:47:13.360Z pw:api <= page.textContent succeeded
+2026-11-03T17:47:13.360Z pw:api => page.screenshot started
+2026-11-03T17:47:13.361Z pw:api taking page screenshot
+2026-11-03T17:47:13.369Z pw:api waiting for fonts to load...
+2026-11-03T17:47:13.383Z pw:api fonts loaded
+2026-11-03T17:47:13.726Z pw:api <= page.screenshot succeeded
+2026-11-03T17:47:13.728Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:13.728Z pw:api waiting for locator('#mp1Mini [data-g="toggle"]').first()
+2026-11-03T17:47:13.733Z pw:api   locator resolved to visible <button data-g="toggle" class="mp1-mini-h" aria-expanded="true">…</button>
+2026-11-03T17:47:13.735Z pw:api attempting scroll into view action
+2026-11-03T17:47:13.735Z pw:api   waiting for element to be stable
+2026-11-03T17:47:13.785Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:13.785Z pw:api => locator.tap started
+2026-11-03T17:47:13.785Z pw:api waiting for locator('#mp1Mini [data-g="toggle"]').first()
+2026-11-03T17:47:13.825Z pw:api   locator resolved to <button data-g="toggle" class="mp1-mini-h" aria-expanded="true">…</button>
+2026-11-03T17:47:13.843Z pw:api attempting tap action
+2026-11-03T17:47:13.843Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:13.884Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:13.885Z pw:api   scrolling into view if needed
+2026-11-03T17:47:13.904Z pw:api   done scrolling
+2026-11-03T17:47:13.943Z pw:api   performing tap action
+2026-11-03T17:47:14.055Z pw:api   tap action done
+2026-11-03T17:47:14.055Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:14.055Z pw:api   navigations have finished
+2026-11-03T17:47:14.055Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:14.055Z pw:api => page.waitForFunction started
+2026-11-03T17:47:14.099Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:14.099Z pw:api => page.waitForFunction started
+2026-11-03T17:47:14.121Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:14.121Z pw:api => page.evaluate started
+2026-11-03T17:47:14.140Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:14.141Z pw:api => page.screenshot started
+2026-11-03T17:47:14.141Z pw:api taking page screenshot
+2026-11-03T17:47:14.146Z pw:api waiting for fonts to load...
+2026-11-03T17:47:14.160Z pw:api fonts loaded
+2026-11-03T17:47:14.472Z pw:api <= page.screenshot succeeded
+2026-11-03T17:47:14.476Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:14.476Z pw:api waiting for locator('#mp6Conn').first()
+2026-11-03T17:47:14.500Z pw:api   locator resolved to visible <span id="mp6Conn" role="button" aria-expanded="false" class="mp1-mini-h mp6-conn mp74-pill" aria-label="Çok oyunculu — Bağlı · oda 22JAC">…</span>
+2026-11-03T17:47:14.550Z pw:api attempting scroll into view action
+2026-11-03T17:47:14.550Z pw:api   waiting for element to be stable
+2026-11-03T17:47:14.634Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:14.635Z pw:api => locator.tap started
+2026-11-03T17:47:14.635Z pw:api waiting for locator('#mp6Conn').first()
+2026-11-03T17:47:14.675Z pw:api   locator resolved to <span id="mp6Conn" role="button" aria-expanded="false" class="mp1-mini-h mp6-conn mp74-pill" aria-label="Çok oyunculu — Bağlı · oda 22JAC">…</span>
+2026-11-03T17:47:14.692Z pw:api attempting tap action
+2026-11-03T17:47:14.692Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:14.726Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:14.726Z pw:api   scrolling into view if needed
+2026-11-03T17:47:14.742Z pw:api   done scrolling
+2026-11-03T17:47:14.781Z pw:api   performing tap action
+2026-11-03T17:47:14.883Z pw:api   tap action done
+2026-11-03T17:47:14.883Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:14.883Z pw:api   navigations have finished
+2026-11-03T17:47:14.884Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:14.885Z pw:api => page.waitForFunction started
+2026-11-03T17:47:14.923Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:14.924Z pw:api => page.textContent started
+2026-11-03T17:47:14.924Z pw:api waiting for locator('#mp1Mini')
+2026-11-03T17:47:14.947Z pw:api   locator resolved to <div id="mp1Mini" class="mp1-mini mp6-mini" title="STARS MP.8 · oyun 96h10p5 · misafir · host bağlı · aşama: ready · ayna r7 17:47:14 · kurulum 12 ms · son komut: yok · son hata: yok">…</div>
+2026-11-03T17:47:14.947Z pw:api <= page.textContent succeeded
+2026-11-03T17:47:14.948Z pw:api => page.screenshot started
+2026-11-03T17:47:14.948Z pw:api taking page screenshot
+2026-11-03T17:47:14.973Z pw:api waiting for fonts to load...
+2026-11-03T17:47:15.026Z pw:api fonts loaded
+2026-11-03T17:47:15.546Z pw:api <= page.screenshot succeeded
+2026-11-03T17:47:15.548Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:15.548Z pw:api waiting for locator('#mp6Conn').first()
+2026-11-03T17:47:15.552Z pw:api   locator resolved to visible <span id="mp6Conn" role="button" aria-expanded="true" class="mp1-mini-h mp6-conn ok">…</span>
+2026-11-03T17:47:15.610Z pw:api attempting scroll into view action
+2026-11-03T17:47:15.610Z pw:api   waiting for element to be stable
+2026-11-03T17:47:15.694Z pw:api   element is not stable
+2026-11-03T17:47:15.694Z pw:api retrying scroll into view action
+2026-11-03T17:47:15.694Z pw:api   waiting for element to be stable
+2026-11-03T17:47:15.888Z pw:api <= locator.scrollIntoViewIfNeeded failed
+2026-11-03T17:47:15.889Z pw:api => locator.tap started
+2026-11-03T17:47:15.889Z pw:api waiting for locator('#mp6Conn').first()
+2026-11-03T17:47:15.913Z pw:api   locator resolved to <span id="mp6Conn" role="button" aria-expanded="true" class="mp1-mini-h mp6-conn ok">…</span>
+2026-11-03T17:47:15.925Z pw:api attempting tap action
+2026-11-03T17:47:15.925Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:15.960Z pw:api   element is not stable
+2026-11-03T17:47:15.960Z pw:api retrying tap action
+2026-11-03T17:47:15.960Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:15.987Z pw:api element was detached from the DOM, retrying
+2026-11-03T17:47:16.038Z pw:api   locator resolved to <span id="mp6Conn" role="button" aria-expanded="true" class="mp1-mini-h mp6-conn ok">…</span>
+2026-11-03T17:47:16.078Z pw:api attempting tap action
+2026-11-03T17:47:16.078Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:16.103Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:16.103Z pw:api   scrolling into view if needed
+2026-11-03T17:47:16.114Z pw:api   done scrolling
+2026-11-03T17:47:16.129Z pw:api   performing tap action
+2026-11-03T17:47:16.209Z pw:api   tap action done
+2026-11-03T17:47:16.209Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:16.209Z pw:api   navigations have finished
+2026-11-03T17:47:16.209Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:16.210Z pw:api => page.waitForFunction started
+2026-11-03T17:47:16.224Z pw:api <= page.waitForFunction succeeded
+PASS A2 küçük çok oyunculu düğmesi: host ve misafirde varsayılan "👥 n" (haritayı ve hız kutusunu kapatmaz); dokununca mevcut panel (kod, durum, KAYDET), tekrar dokununca kapanır
+2026-11-03T17:47:16.225Z pw:api => page.evaluate started
+2026-11-03T17:47:16.246Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:16.247Z pw:api => page.waitForFunction started
+2026-11-03T17:47:16.273Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:16.274Z pw:api => jsHandle.jsonValue started
+2026-11-03T17:47:16.274Z pw:api <= jsHandle.jsonValue succeeded
+2026-11-03T17:47:16.274Z pw:api => page.waitForFunction started
+2026-11-03T17:47:16.314Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:16.314Z pw:api => page.evaluate started
+2026-11-03T17:47:16.329Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:16.331Z pw:api => page.screenshot started
+2026-11-03T17:47:16.331Z pw:api taking page screenshot
+2026-11-03T17:47:16.342Z pw:api waiting for fonts to load...
+2026-11-03T17:47:16.357Z pw:api fonts loaded
+2026-11-03T17:47:16.645Z pw:api <= page.screenshot succeeded
+2026-11-03T17:47:16.647Z pw:api => locator.boundingBox started
+2026-11-03T17:47:16.648Z pw:api waiting for locator('#inbox .nCard[data-x="1"]').first()
+2026-11-03T17:47:16.652Z pw:api   locator resolved to visible <button data-x="1" class="nCard sci" data-a="openNote">…</button>
+2026-11-03T17:47:16.659Z pw:api <= locator.boundingBox succeeded
+2026-11-03T17:47:16.659Z pw:api => page.evaluate started
+2026-11-03T17:47:16.672Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:16.673Z pw:api => cdpSession.send started
+2026-11-03T17:47:16.705Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:16.705Z pw:api => page.evaluate started
+2026-11-03T17:47:16.708Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:16.709Z pw:api => cdpSession.send started
+2026-11-03T17:47:16.746Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:16.747Z pw:api => page.waitForTimeout started
+2026-11-03T17:47:16.763Z pw:api <= page.waitForTimeout succeeded
+2026-11-03T17:47:16.764Z pw:api => page.evaluate started
+2026-11-03T17:47:16.771Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:16.772Z pw:api => cdpSession.send started
+2026-11-03T17:47:16.810Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:16.810Z pw:api => page.waitForTimeout started
+2026-11-03T17:47:16.827Z pw:api <= page.waitForTimeout succeeded
+2026-11-03T17:47:16.827Z pw:api => page.evaluate started
+2026-11-03T17:47:16.837Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:16.838Z pw:api => cdpSession.send started
+2026-11-03T17:47:16.882Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:16.883Z pw:api => page.waitForTimeout started
+2026-11-03T17:47:16.899Z pw:api <= page.waitForTimeout succeeded
+2026-11-03T17:47:16.900Z pw:api => page.evaluate started
+2026-11-03T17:47:16.906Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:16.907Z pw:api => cdpSession.send started
+2026-11-03T17:47:16.946Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:16.947Z pw:api => page.waitForTimeout started
+2026-11-03T17:47:16.963Z pw:api <= page.waitForTimeout succeeded
+2026-11-03T17:47:16.964Z pw:api => page.evaluate started
+2026-11-03T17:47:16.985Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:16.985Z pw:api => cdpSession.send started
+2026-11-03T17:47:17.031Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:17.032Z pw:api => page.waitForTimeout started
+2026-11-03T17:47:17.049Z pw:api <= page.waitForTimeout succeeded
+2026-11-03T17:47:17.049Z pw:api => page.evaluate started
+2026-11-03T17:47:17.054Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:17.055Z pw:api => cdpSession.send started
+2026-11-03T17:47:17.082Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:17.082Z pw:api => page.waitForTimeout started
+2026-11-03T17:47:17.098Z pw:api <= page.waitForTimeout succeeded
+2026-11-03T17:47:17.098Z pw:api => page.evaluate started
+2026-11-03T17:47:17.145Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:17.145Z pw:api => cdpSession.send started
+2026-11-03T17:47:17.177Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:17.177Z pw:api => page.waitForTimeout started
+2026-11-03T17:47:17.196Z pw:api <= page.waitForTimeout succeeded
+2026-11-03T17:47:17.197Z pw:api => page.evaluate started
+2026-11-03T17:47:17.205Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:17.206Z pw:api => cdpSession.send started
+2026-11-03T17:47:17.227Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:17.227Z pw:api => page.waitForTimeout started
+2026-11-03T17:47:17.246Z pw:api <= page.waitForTimeout succeeded
+2026-11-03T17:47:17.246Z pw:api => page.evaluate started
+2026-11-03T17:47:17.256Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:17.256Z pw:api => cdpSession.send started
+2026-11-03T17:47:17.282Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:17.283Z pw:api => page.waitForTimeout started
+2026-11-03T17:47:17.633Z pw:api <= page.waitForTimeout succeeded
+2026-11-03T17:47:17.634Z pw:api => page.evaluate started
+2026-11-03T17:47:17.639Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:17.639Z pw:api => locator.boundingBox started
+2026-11-03T17:47:17.639Z pw:api waiting for locator('#inbox .nCard[data-x="1"]').first()
+2026-11-03T17:47:17.643Z pw:api   locator resolved to visible <button data-x="1" class="nCard sci" data-a="openNote">…</button>
+2026-11-03T17:47:17.657Z pw:api <= locator.boundingBox succeeded
+2026-11-03T17:47:17.657Z pw:api => page.evaluate started
+2026-11-03T17:47:17.660Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:17.660Z pw:api => cdpSession.send started
+2026-11-03T17:47:17.707Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:17.707Z pw:api => page.evaluate started
+2026-11-03T17:47:17.720Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:17.720Z pw:api => cdpSession.send started
+2026-11-03T17:47:17.767Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:17.768Z pw:api => page.waitForTimeout started
+2026-11-03T17:47:17.785Z pw:api <= page.waitForTimeout succeeded
+2026-11-03T17:47:17.785Z pw:api => page.evaluate started
+2026-11-03T17:47:17.841Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:17.842Z pw:api => cdpSession.send started
+2026-11-03T17:47:17.870Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:17.870Z pw:api => page.waitForTimeout started
+2026-11-03T17:47:17.887Z pw:api <= page.waitForTimeout succeeded
+2026-11-03T17:47:17.887Z pw:api => page.evaluate started
+2026-11-03T17:47:17.896Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:17.896Z pw:api => cdpSession.send started
+2026-11-03T17:47:17.927Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:17.927Z pw:api => page.waitForTimeout started
+2026-11-03T17:47:17.944Z pw:api <= page.waitForTimeout succeeded
+2026-11-03T17:47:17.944Z pw:api => page.evaluate started
+2026-11-03T17:47:17.958Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:17.958Z pw:api => cdpSession.send started
+2026-11-03T17:47:18.002Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:18.003Z pw:api => page.waitForTimeout started
+2026-11-03T17:47:18.020Z pw:api <= page.waitForTimeout succeeded
+2026-11-03T17:47:18.020Z pw:api => page.evaluate started
+2026-11-03T17:47:18.025Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:18.025Z pw:api => cdpSession.send started
+2026-11-03T17:47:18.064Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:18.064Z pw:api => page.waitForTimeout started
+2026-11-03T17:47:18.081Z pw:api <= page.waitForTimeout succeeded
+2026-11-03T17:47:18.081Z pw:api => page.evaluate started
+2026-11-03T17:47:18.093Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:18.093Z pw:api => cdpSession.send started
+2026-11-03T17:47:18.130Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:18.131Z pw:api => page.waitForTimeout started
+2026-11-03T17:47:18.149Z pw:api <= page.waitForTimeout succeeded
+2026-11-03T17:47:18.149Z pw:api => page.evaluate started
+2026-11-03T17:47:18.159Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:18.159Z pw:api => cdpSession.send started
+2026-11-03T17:47:18.193Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:18.193Z pw:api => page.waitForTimeout started
+2026-11-03T17:47:18.209Z pw:api <= page.waitForTimeout succeeded
+2026-11-03T17:47:18.210Z pw:api => page.evaluate started
+2026-11-03T17:47:18.226Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:18.226Z pw:api => cdpSession.send started
+2026-11-03T17:47:18.260Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:18.260Z pw:api => page.waitForTimeout started
+2026-11-03T17:47:18.277Z pw:api <= page.waitForTimeout succeeded
+2026-11-03T17:47:18.278Z pw:api => page.evaluate started
+2026-11-03T17:47:18.299Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:18.299Z pw:api => cdpSession.send started
+2026-11-03T17:47:18.327Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:18.327Z pw:api => page.waitForTimeout started
+2026-11-03T17:47:18.679Z pw:api <= page.waitForTimeout succeeded
+2026-11-03T17:47:18.679Z pw:api => page.waitForFunction started
+2026-11-03T17:47:18.707Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:18.710Z pw:api => page.evaluate started
+2026-11-03T17:47:18.727Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:18.730Z pw:api => page.evaluate started
+2026-11-03T17:47:18.746Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:18.747Z pw:api => page.waitForTimeout started
+2026-11-03T17:47:22.248Z pw:api <= page.waitForTimeout succeeded
+2026-11-03T17:47:22.248Z pw:api => page.evaluate started
+2026-11-03T17:47:22.254Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:22.254Z pw:api => page.evaluate started
+2026-11-03T17:47:22.258Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:22.259Z pw:api => page.evaluate started
+2026-11-03T17:47:22.264Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:22.264Z pw:api => page.evaluate started
+2026-11-03T17:47:22.290Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:22.291Z pw:api => browserContext.newCDPSession started
+2026-11-03T17:47:22.292Z pw:api <= browserContext.newCDPSession succeeded
+2026-11-03T17:47:22.293Z pw:api => locator.boundingBox started
+2026-11-03T17:47:22.293Z pw:api waiting for locator('#inbox .nCard[data-x="1"]').first()
+2026-11-03T17:47:22.330Z pw:api   locator resolved to visible <button data-x="1" class="nCard " data-a="openNote">…</button>
+2026-11-03T17:47:22.400Z pw:api <= locator.boundingBox succeeded
+2026-11-03T17:47:22.400Z pw:api => page.evaluate started
+2026-11-03T17:47:22.414Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:22.415Z pw:api => cdpSession.send started
+2026-11-03T17:47:22.458Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:22.459Z pw:api => page.evaluate started
+2026-11-03T17:47:22.474Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:22.475Z pw:api => cdpSession.send started
+2026-11-03T17:47:22.531Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:22.531Z pw:api => page.waitForTimeout started
+2026-11-03T17:47:22.547Z pw:api <= page.waitForTimeout succeeded
+2026-11-03T17:47:22.548Z pw:api => page.evaluate started
+2026-11-03T17:47:22.559Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:22.560Z pw:api => cdpSession.send started
+2026-11-03T17:47:22.599Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:22.599Z pw:api => page.waitForTimeout started
+2026-11-03T17:47:22.616Z pw:api <= page.waitForTimeout succeeded
+2026-11-03T17:47:22.616Z pw:api => page.evaluate started
+2026-11-03T17:47:22.626Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:22.627Z pw:api => cdpSession.send started
+2026-11-03T17:47:22.661Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:22.662Z pw:api => page.waitForTimeout started
+2026-11-03T17:47:22.678Z pw:api <= page.waitForTimeout succeeded
+2026-11-03T17:47:22.679Z pw:api => page.evaluate started
+2026-11-03T17:47:22.694Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:22.694Z pw:api => cdpSession.send started
+2026-11-03T17:47:22.731Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:22.731Z pw:api => page.waitForTimeout started
+2026-11-03T17:47:22.748Z pw:api <= page.waitForTimeout succeeded
+2026-11-03T17:47:22.748Z pw:api => page.evaluate started
+2026-11-03T17:47:22.760Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:22.760Z pw:api => cdpSession.send started
+2026-11-03T17:47:22.797Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:22.798Z pw:api => page.waitForTimeout started
+2026-11-03T17:47:22.815Z pw:api <= page.waitForTimeout succeeded
+2026-11-03T17:47:22.815Z pw:api => page.evaluate started
+2026-11-03T17:47:22.825Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:22.825Z pw:api => cdpSession.send started
+2026-11-03T17:47:22.866Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:22.867Z pw:api => page.waitForTimeout started
+2026-11-03T17:47:22.883Z pw:api <= page.waitForTimeout succeeded
+2026-11-03T17:47:22.884Z pw:api => page.evaluate started
+2026-11-03T17:47:22.893Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:22.894Z pw:api => cdpSession.send started
+2026-11-03T17:47:22.931Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:22.931Z pw:api => page.waitForTimeout started
+2026-11-03T17:47:22.948Z pw:api <= page.waitForTimeout succeeded
+2026-11-03T17:47:22.948Z pw:api => page.evaluate started
+2026-11-03T17:47:22.960Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:22.961Z pw:api => cdpSession.send started
+2026-11-03T17:47:22.994Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:22.994Z pw:api => page.waitForTimeout started
+2026-11-03T17:47:23.010Z pw:api <= page.waitForTimeout succeeded
+2026-11-03T17:47:23.011Z pw:api => page.evaluate started
+2026-11-03T17:47:23.027Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:23.028Z pw:api => cdpSession.send started
+2026-11-03T17:47:23.060Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:23.060Z pw:api => page.waitForTimeout started
+2026-11-03T17:47:23.410Z pw:api <= page.waitForTimeout succeeded
+2026-11-03T17:47:23.411Z pw:api => page.waitForFunction started
+2026-11-03T17:47:23.447Z pw:api <= page.waitForFunction succeeded
+PASS A3 kaydırma (gerçek dokunma): küçük hareket kartı kapatmaz; sağa kaydırınca teklif kartı kalkar, karar Gelen kutusunda BEKLER, ayna yenilenince kart geri gelmez; host'ta teklif bekler
+2026-11-03T17:47:23.447Z pw:api => page.evaluate started
+2026-11-03T17:47:23.451Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:23.452Z pw:api => page.evaluate started
+2026-11-03T17:47:23.467Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:23.468Z pw:api => page.waitForFunction started
+2026-11-03T17:47:23.498Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:23.499Z pw:api => jsHandle.jsonValue started
+2026-11-03T17:47:23.499Z pw:api <= jsHandle.jsonValue succeeded
+2026-11-03T17:47:23.499Z pw:api => page.waitForFunction started
+2026-11-03T17:47:23.506Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:23.507Z pw:api => page.evaluate started
+2026-11-03T17:47:23.509Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:23.509Z pw:api => page.screenshot started
+2026-11-03T17:47:23.509Z pw:api taking page screenshot
+2026-11-03T17:47:23.511Z pw:api waiting for fonts to load...
+2026-11-03T17:47:23.522Z pw:api fonts loaded
+2026-11-03T17:47:23.808Z pw:api <= page.screenshot succeeded
+2026-11-03T17:47:23.814Z pw:api => page.evaluate started
+2026-11-03T17:47:23.830Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:23.830Z pw:api => page.evaluate started
+2026-11-03T17:47:23.848Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:23.849Z pw:api => page.waitForFunction started
+2026-11-03T17:47:23.878Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:23.879Z pw:api => page.waitForTimeout started
+2026-11-03T17:47:25.380Z pw:api <= page.waitForTimeout succeeded
+2026-11-03T17:47:25.381Z pw:api => page.evaluate started
+2026-11-03T17:47:25.389Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:25.389Z pw:api => page.evaluate started
+2026-11-03T17:47:25.393Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:25.393Z pw:api => cdpSession.send started
+2026-11-03T17:47:25.447Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:25.447Z pw:api => page.evaluate started
+2026-11-03T17:47:25.456Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:25.456Z pw:api => cdpSession.send started
+2026-11-03T17:47:25.506Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:25.507Z pw:api => page.evaluate started
+2026-11-03T17:47:25.547Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:25.547Z pw:api => cdpSession.send started
+2026-11-03T17:47:25.629Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:25.629Z pw:api => page.evaluate started
+2026-11-03T17:47:25.643Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:25.643Z pw:api => cdpSession.send started
+2026-11-03T17:47:25.729Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:25.729Z pw:api => page.waitForFunction started
+2026-11-03T17:47:25.742Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:25.742Z pw:api => page.waitForTimeout started
+2026-11-03T17:47:26.546Z pw:api <= page.waitForTimeout succeeded
+2026-11-03T17:47:26.546Z pw:api => page.evaluate started
+2026-11-03T17:47:26.555Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:26.556Z pw:api => page.waitForFunction started
+2026-11-03T17:47:26.574Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:26.574Z pw:api => page.waitForFunction started
+2026-11-03T17:47:26.604Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:26.605Z pw:api => page.evaluate started
+2026-11-03T17:47:26.611Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:26.612Z pw:api => page.evaluate started
+2026-11-03T17:47:26.634Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:26.634Z pw:api => page.waitForFunction started
+2026-11-03T17:47:26.670Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:26.670Z pw:api => jsHandle.jsonValue started
+2026-11-03T17:47:26.670Z pw:api <= jsHandle.jsonValue succeeded
+2026-11-03T17:47:26.671Z pw:api => page.waitForFunction started
+2026-11-03T17:47:26.707Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:26.708Z pw:api => page.evaluate started
+2026-11-03T17:47:26.722Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:26.723Z pw:api => page.evaluate started
+2026-11-03T17:47:26.740Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:26.740Z pw:api => cdpSession.send started
+2026-11-03T17:47:26.778Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:26.779Z pw:api => page.evaluate started
+2026-11-03T17:47:26.872Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:26.872Z pw:api => cdpSession.send started
+2026-11-03T17:47:26.968Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:26.968Z pw:api => page.waitForFunction started
+2026-11-03T17:47:27.013Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:27.013Z pw:api => page.evaluate started
+2026-11-03T17:47:27.040Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:27.041Z pw:api => page.waitForFunction started
+2026-11-03T17:47:27.080Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:27.081Z pw:api => jsHandle.jsonValue started
+2026-11-03T17:47:27.081Z pw:api <= jsHandle.jsonValue succeeded
+2026-11-03T17:47:27.081Z pw:api => page.waitForFunction started
+2026-11-03T17:47:27.117Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:27.117Z pw:api => page.evaluate started
+2026-11-03T17:47:27.133Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:27.134Z pw:api => page.evaluate started
+2026-11-03T17:47:27.152Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:27.153Z pw:api => cdpSession.send started
+2026-11-03T17:47:27.216Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:27.216Z pw:api => page.evaluate started
+2026-11-03T17:47:27.344Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:27.344Z pw:api => cdpSession.send started
+2026-11-03T17:47:27.452Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:27.452Z pw:api => page.waitForFunction started
+2026-11-03T17:47:27.506Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:27.507Z pw:api => page.screenshot started
+2026-11-03T17:47:27.507Z pw:api taking page screenshot
+2026-11-03T17:47:27.534Z pw:api waiting for fonts to load...
+2026-11-03T17:47:27.555Z pw:api fonts loaded
+2026-11-03T17:47:27.975Z pw:api <= page.screenshot succeeded
+2026-11-03T17:47:27.979Z pw:api => page.evaluate started
+2026-11-03T17:47:27.983Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:27.984Z pw:api => page.evaluate started
+2026-11-03T17:47:27.992Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:27.992Z pw:api => page.evaluate started
+2026-11-03T17:47:28.003Z pw:api <= page.evaluate succeeded
+PASS A4 karttan hızlı karar (misafir): KABUL gerçek dokunmayla → host kabul eder, kaynak bir kez aktarılır; ÇİFT dokunma tek "respond"; REDDET; KARŞI TEKLİF gerçek anlaşma penceresini açar
+2026-11-03T17:47:28.004Z pw:api => page.evaluate started
+2026-11-03T17:47:28.024Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:28.025Z pw:api => page.waitForFunction started
+2026-11-03T17:47:28.070Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:28.070Z pw:api => jsHandle.jsonValue started
+2026-11-03T17:47:28.070Z pw:api <= jsHandle.jsonValue succeeded
+2026-11-03T17:47:28.070Z pw:api => page.evaluate started
+2026-11-03T17:47:28.092Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:28.092Z pw:api => page.waitForFunction started
+2026-11-03T17:47:28.140Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:28.140Z pw:api => page.evaluate started
+2026-11-03T17:47:28.166Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:28.167Z pw:api => page.evaluate started
+2026-11-03T17:47:28.193Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:28.193Z pw:api => page.waitForFunction started
+2026-11-03T17:47:28.241Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:28.241Z pw:api => page.evaluate started
+2026-11-03T17:47:28.260Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:28.260Z pw:api => page.evaluate started
+2026-11-03T17:47:28.273Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:28.273Z pw:api => page.evaluate started
+2026-11-03T17:47:28.291Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:28.292Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:28.292Z pw:api waiting for locator('#inbox [data-x="2:y"]').first()
+2026-11-03T17:47:28.347Z pw:api   locator resolved to visible <button data-x="2:y" class="nq ok" data-a="noteQuick">KABUL</button>
+2026-11-03T17:47:28.402Z pw:api attempting scroll into view action
+2026-11-03T17:47:28.403Z pw:api   waiting for element to be stable
+2026-11-03T17:47:28.500Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:28.501Z pw:api => locator.tap started
+2026-11-03T17:47:28.501Z pw:api waiting for locator('#inbox [data-x="2:y"]').first()
+2026-11-03T17:47:28.541Z pw:api   locator resolved to <button data-x="2:y" class="nq ok" data-a="noteQuick">KABUL</button>
+2026-11-03T17:47:28.562Z pw:api attempting tap action
+2026-11-03T17:47:28.562Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:28.602Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:28.602Z pw:api   scrolling into view if needed
+2026-11-03T17:47:28.616Z pw:api   done scrolling
+2026-11-03T17:47:28.662Z pw:api   performing tap action
+2026-11-03T17:47:28.790Z pw:api   tap action done
+2026-11-03T17:47:28.790Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:28.790Z pw:api   navigations have finished
+2026-11-03T17:47:28.791Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:28.791Z pw:api => page.waitForFunction started
+2026-11-03T17:47:28.813Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:28.814Z pw:api => page.evaluate started
+2026-11-03T17:47:28.834Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:28.835Z pw:api => page.evaluate started
+2026-11-03T17:47:28.855Z pw:api <= page.evaluate succeeded
+PASS A5 host karttan hızlı karar: B → host teklifi host kartında KABUL (dokunma) → kabul, bir kez
+2026-11-03T17:47:28.856Z pw:api => page.close started
+2026-11-03T17:47:28.894Z pw:api <= page.close succeeded
+2026-11-03T17:47:28.895Z pw:api => page.close started
+2026-11-03T17:47:28.920Z pw:api <= page.close succeeded
+2026-11-03T17:47:28.921Z pw:api => browser.newContext started
+2026-11-03T17:47:28.964Z pw:api <= browser.newContext succeeded
+2026-11-03T17:47:28.964Z pw:api => browserContext.exposeBinding started
+2026-11-03T17:47:28.965Z pw:api <= browserContext.exposeBinding succeeded
+2026-11-03T17:47:28.965Z pw:api => browserContext.addInitScript started
+2026-11-03T17:47:28.965Z pw:api <= browserContext.addInitScript succeeded
+2026-11-03T17:47:28.966Z pw:api => browserContext.newPage started
+2026-11-03T17:47:29.093Z pw:api => browserContext.newCDPSession started
+2026-11-03T17:47:29.093Z pw:api <= browserContext.newPage succeeded
+2026-11-03T17:47:29.093Z pw:api => browser.newContext started
+2026-11-03T17:47:29.096Z pw:api <= browserContext.newCDPSession succeeded
+2026-11-03T17:47:29.096Z pw:api => cdpSession.send started
+2026-11-03T17:47:29.100Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:29.105Z pw:api <= browser.newContext succeeded
+2026-11-03T17:47:29.105Z pw:api => browserContext.exposeBinding started
+2026-11-03T17:47:29.105Z pw:api <= browserContext.exposeBinding succeeded
+2026-11-03T17:47:29.105Z pw:api => browserContext.addInitScript started
+2026-11-03T17:47:29.105Z pw:api <= browserContext.addInitScript succeeded
+2026-11-03T17:47:29.105Z pw:api => browserContext.newPage started
+2026-11-03T17:47:29.261Z pw:api => browserContext.newCDPSession started
+2026-11-03T17:47:29.261Z pw:api <= browserContext.newPage succeeded
+2026-11-03T17:47:29.261Z pw:api => browser.newContext started
+2026-11-03T17:47:29.265Z pw:api <= browserContext.newCDPSession succeeded
+2026-11-03T17:47:29.265Z pw:api => cdpSession.send started
+2026-11-03T17:47:29.271Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:29.281Z pw:api <= browser.newContext succeeded
+2026-11-03T17:47:29.281Z pw:api => browserContext.exposeBinding started
+2026-11-03T17:47:29.282Z pw:api <= browserContext.exposeBinding succeeded
+2026-11-03T17:47:29.282Z pw:api => browserContext.addInitScript started
+2026-11-03T17:47:29.282Z pw:api <= browserContext.addInitScript succeeded
+2026-11-03T17:47:29.282Z pw:api => browserContext.newPage started
+2026-11-03T17:47:29.635Z pw:api => browserContext.newCDPSession started
+2026-11-03T17:47:29.636Z pw:api <= browserContext.newPage succeeded
+2026-11-03T17:47:29.636Z pw:api => page.goto started
+2026-11-03T17:47:29.639Z pw:api navigating to "https://localhost:43303/", waiting until "load"
+2026-11-03T17:47:29.658Z pw:api <= browserContext.newCDPSession succeeded
+2026-11-03T17:47:29.658Z pw:api => cdpSession.send started
+2026-11-03T17:47:29.663Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:29.714Z pw:api   "commit" event fired
+2026-11-03T17:47:29.715Z pw:api   navigated to "https://localhost:43303/"
+NAV host2 /
+2026-11-03T17:47:30.132Z pw:api   "domcontentloaded" event fired
+2026-11-03T17:47:30.170Z pw:api   "load" event fired
+2026-11-03T17:47:30.171Z pw:api <= page.goto succeeded
+2026-11-03T17:47:30.172Z pw:api => page.waitForFunction started
+2026-11-03T17:47:30.246Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:30.247Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:30.250Z pw:api waiting for locator('#mp1Btn').first()
+2026-11-03T17:47:30.366Z pw:api   locator resolved to visible <button id="mp1Btn" type="button" class="tBtn mp1-menu">…</button>
+2026-11-03T17:47:30.380Z pw:api attempting scroll into view action
+2026-11-03T17:47:30.380Z pw:api   waiting for element to be stable
+2026-11-03T17:47:30.423Z pw:api   element is not stable
+2026-11-03T17:47:30.423Z pw:api retrying scroll into view action
+2026-11-03T17:47:30.423Z pw:api   waiting for element to be stable
+2026-11-03T17:47:30.479Z pw:api   element is not stable
+2026-11-03T17:47:30.479Z pw:api retrying scroll into view action
+2026-11-03T17:47:30.479Z pw:api   waiting 20ms
+2026-11-03T17:47:30.512Z pw:api   waiting for element to be stable
+2026-11-03T17:47:30.543Z pw:api   element is not stable
+2026-11-03T17:47:30.544Z pw:api retrying scroll into view action
+2026-11-03T17:47:30.544Z pw:api   waiting 100ms
+2026-11-03T17:47:30.629Z pw:api   "networkidle" event fired
+2026-11-03T17:47:30.649Z pw:api   waiting for element to be stable
+2026-11-03T17:47:30.677Z pw:api   element is not stable
+2026-11-03T17:47:30.677Z pw:api retrying scroll into view action
+2026-11-03T17:47:30.677Z pw:api   waiting 100ms
+2026-11-03T17:47:30.781Z pw:api   waiting for element to be stable
+2026-11-03T17:47:30.811Z pw:api   element is not stable
+2026-11-03T17:47:30.811Z pw:api retrying scroll into view action
+2026-11-03T17:47:30.811Z pw:api   waiting 500ms
+2026-11-03T17:47:31.317Z pw:api   waiting for element to be stable
+2026-11-03T17:47:31.346Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:31.346Z pw:api => locator.tap started
+2026-11-03T17:47:31.347Z pw:api waiting for locator('#mp1Btn').first()
+2026-11-03T17:47:31.351Z pw:api   locator resolved to <button id="mp1Btn" type="button" class="tBtn mp1-menu">…</button>
+2026-11-03T17:47:31.352Z pw:api attempting tap action
+2026-11-03T17:47:31.353Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:31.376Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:31.377Z pw:api   scrolling into view if needed
+2026-11-03T17:47:31.377Z pw:api   done scrolling
+2026-11-03T17:47:31.381Z pw:api   performing tap action
+2026-11-03T17:47:31.456Z pw:api   navigated to "https://localhost:43303/"
+NAV host2 /
+2026-11-03T17:47:31.464Z pw:api   tap action done
+2026-11-03T17:47:31.464Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:31.464Z pw:api   navigations have finished
+2026-11-03T17:47:31.465Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:31.465Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:31.465Z pw:api waiting for locator('[data-m="create"]').first()
+2026-11-03T17:47:31.468Z pw:api   locator resolved to visible <button data-m="create" class="mp1-btn pri">ODA OLUŞTUR</button>
+2026-11-03T17:47:31.472Z pw:api attempting scroll into view action
+2026-11-03T17:47:31.472Z pw:api   waiting for element to be stable
+2026-11-03T17:47:31.511Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:31.512Z pw:api => locator.tap started
+2026-11-03T17:47:31.512Z pw:api waiting for locator('[data-m="create"]').first()
+2026-11-03T17:47:31.518Z pw:api   locator resolved to <button data-m="create" class="mp1-btn pri">ODA OLUŞTUR</button>
+2026-11-03T17:47:31.530Z pw:api attempting tap action
+2026-11-03T17:47:31.530Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:31.562Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:31.562Z pw:api   scrolling into view if needed
+2026-11-03T17:47:31.563Z pw:api   done scrolling
+2026-11-03T17:47:31.566Z pw:api   performing tap action
+2026-11-03T17:47:31.596Z pw:api   navigated to "https://localhost:43303/"
+NAV host2 /
+2026-11-03T17:47:31.601Z pw:api   tap action done
+2026-11-03T17:47:31.601Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:31.601Z pw:api   navigations have finished
+2026-11-03T17:47:31.602Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:31.603Z pw:api => page.waitForFunction started
+2026-11-03T17:47:31.622Z pw:api   navigated to "https://localhost:43303/"
+NAV host2 /
+2026-11-03T17:47:31.705Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:31.706Z pw:api => page.selectOption started
+2026-11-03T17:47:31.707Z pw:api waiting for locator('#mp7Cap')
+2026-11-03T17:47:31.712Z pw:api   locator resolved to <select id="mp7Cap" class="mp1-sel">…</select>
+2026-11-03T17:47:31.714Z pw:api attempting select option action
+2026-11-03T17:47:31.714Z pw:api   waiting for element to be visible and enabled
+2026-11-03T17:47:31.718Z pw:api   selected specified option(s)
+2026-11-03T17:47:31.719Z pw:api <= page.selectOption succeeded
+2026-11-03T17:47:31.719Z pw:api => page.waitForFunction started
+2026-11-03T17:47:31.722Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:31.722Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:31.723Z pw:api waiting for locator('#mp7EditMe').first()
+2026-11-03T17:47:31.726Z pw:api   locator resolved to visible <button id="mp7EditMe" data-m="editMe" class="mp1-btn pri">DEVLETİMİ DÜZENLE</button>
+2026-11-03T17:47:31.732Z pw:api attempting scroll into view action
+2026-11-03T17:47:31.732Z pw:api   waiting for element to be stable
+2026-11-03T17:47:31.761Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:31.761Z pw:api => locator.tap started
+2026-11-03T17:47:31.761Z pw:api waiting for locator('#mp7EditMe').first()
+2026-11-03T17:47:31.764Z pw:api   locator resolved to <button id="mp7EditMe" data-m="editMe" class="mp1-btn pri">DEVLETİMİ DÜZENLE</button>
+2026-11-03T17:47:31.766Z pw:api attempting tap action
+2026-11-03T17:47:31.766Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:31.793Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:31.793Z pw:api   scrolling into view if needed
+2026-11-03T17:47:31.794Z pw:api   done scrolling
+2026-11-03T17:47:31.796Z pw:api   performing tap action
+2026-11-03T17:47:31.826Z pw:api   navigated to "https://localhost:43303/"
+NAV host2 /
+2026-11-03T17:47:31.874Z pw:api   tap action done
+2026-11-03T17:47:31.874Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:31.874Z pw:api   navigations have finished
+2026-11-03T17:47:31.874Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:31.875Z pw:api => page.setViewportSize started
+2026-11-03T17:47:31.886Z pw:api <= page.setViewportSize succeeded
+2026-11-03T17:47:31.886Z pw:api => page.waitForFunction started
+2026-11-03T17:47:31.889Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:31.889Z pw:api => page.fill started
+2026-11-03T17:47:31.889Z pw:api waiting for locator('#empName')
+2026-11-03T17:47:31.892Z pw:api   locator resolved to <input type="text" id="empName" maxlength="30" class="nameInp" value="Yeni Hanedan" placeholder="Hanedanının adı"/>
+2026-11-03T17:47:31.897Z pw:api   fill("Kızıl Muhafız")
+2026-11-03T17:47:31.897Z pw:api attempting fill action
+2026-11-03T17:47:31.897Z pw:api   waiting for element to be visible, enabled and editable
+2026-11-03T17:47:31.908Z pw:api <= page.fill succeeded
+2026-11-03T17:47:31.908Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:31.909Z pw:api waiting for locator('#setup [data-a="mizacSet"][data-x="militarist"]').first()
+2026-11-03T17:47:31.915Z pw:api   locator resolved to visible <button class="opt " data-a="mizacSet" data-x="militarist">…</button>
+2026-11-03T17:47:31.917Z pw:api attempting scroll into view action
+2026-11-03T17:47:31.917Z pw:api   waiting for element to be stable
+2026-11-03T17:47:31.946Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:31.946Z pw:api => locator.tap started
+2026-11-03T17:47:31.947Z pw:api waiting for locator('#setup [data-a="mizacSet"][data-x="militarist"]').first()
+2026-11-03T17:47:31.950Z pw:api   locator resolved to <button class="opt " data-a="mizacSet" data-x="militarist">…</button>
+2026-11-03T17:47:31.951Z pw:api attempting tap action
+2026-11-03T17:47:31.951Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:31.977Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:31.977Z pw:api   scrolling into view if needed
+2026-11-03T17:47:31.978Z pw:api   done scrolling
+2026-11-03T17:47:31.980Z pw:api   performing tap action
+2026-11-03T17:47:32.007Z pw:api   tap action done
+2026-11-03T17:47:32.007Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:32.007Z pw:api   navigations have finished
+2026-11-03T17:47:32.007Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:32.007Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:32.008Z pw:api waiting for locator('#setup [data-a="step"][data-x="etik"]').first()
+2026-11-03T17:47:32.012Z pw:api   locator resolved to visible <button class="stp " data-a="step" data-x="etik">…</button>
+2026-11-03T17:47:32.016Z pw:api attempting scroll into view action
+2026-11-03T17:47:32.016Z pw:api   waiting for element to be stable
+2026-11-03T17:47:32.045Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:32.045Z pw:api => locator.tap started
+2026-11-03T17:47:32.045Z pw:api waiting for locator('#setup [data-a="step"][data-x="etik"]').first()
+2026-11-03T17:47:32.048Z pw:api   locator resolved to <button class="stp " data-a="step" data-x="etik">…</button>
+2026-11-03T17:47:32.048Z pw:api attempting tap action
+2026-11-03T17:47:32.048Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:32.077Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:32.077Z pw:api   scrolling into view if needed
+2026-11-03T17:47:32.077Z pw:api   done scrolling
+2026-11-03T17:47:32.080Z pw:api   performing tap action
+2026-11-03T17:47:32.125Z pw:api   tap action done
+2026-11-03T17:47:32.125Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:32.125Z pw:api   navigations have finished
+2026-11-03T17:47:32.125Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:32.125Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:32.126Z pw:api waiting for locator('#setup [data-a="ethic"][data-x="mil:2"]').first()
+2026-11-03T17:47:32.134Z pw:api   locator resolved to visible <button data-ax="mil" id="axd_mil_2" data-a="ethic" data-x="mil:2" class="axDot  ">2</button>
+2026-11-03T17:47:32.137Z pw:api attempting scroll into view action
+2026-11-03T17:47:32.137Z pw:api   waiting for element to be stable
+2026-11-03T17:47:32.162Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:32.162Z pw:api => locator.tap started
+2026-11-03T17:47:32.163Z pw:api waiting for locator('#setup [data-a="ethic"][data-x="mil:2"]').first()
+2026-11-03T17:47:32.165Z pw:api   locator resolved to <button data-ax="mil" id="axd_mil_2" data-a="ethic" data-x="mil:2" class="axDot  ">2</button>
+2026-11-03T17:47:32.166Z pw:api attempting tap action
+2026-11-03T17:47:32.166Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:32.193Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:32.193Z pw:api   scrolling into view if needed
+2026-11-03T17:47:32.195Z pw:api   done scrolling
+2026-11-03T17:47:32.197Z pw:api   performing tap action
+2026-11-03T17:47:32.246Z pw:api   tap action done
+2026-11-03T17:47:32.246Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:32.246Z pw:api   navigations have finished
+2026-11-03T17:47:32.246Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:32.247Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:32.247Z pw:api waiting for locator('#setup [data-a="step"][data-x="civic"]').first()
+2026-11-03T17:47:32.250Z pw:api   locator resolved to visible <button class="stp " data-a="step" data-x="civic">…</button>
+2026-11-03T17:47:32.252Z pw:api attempting scroll into view action
+2026-11-03T17:47:32.252Z pw:api   waiting for element to be stable
+2026-11-03T17:47:32.277Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:32.277Z pw:api => locator.tap started
+2026-11-03T17:47:32.278Z pw:api waiting for locator('#setup [data-a="step"][data-x="civic"]').first()
+2026-11-03T17:47:32.280Z pw:api   locator resolved to <button class="stp " data-a="step" data-x="civic">…</button>
+2026-11-03T17:47:32.281Z pw:api attempting tap action
+2026-11-03T17:47:32.281Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:32.310Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:32.310Z pw:api   scrolling into view if needed
+2026-11-03T17:47:32.310Z pw:api   done scrolling
+2026-11-03T17:47:32.313Z pw:api   performing tap action
+2026-11-03T17:47:32.363Z pw:api   tap action done
+2026-11-03T17:47:32.363Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:32.363Z pw:api   navigations have finished
+2026-11-03T17:47:32.363Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:32.363Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:32.364Z pw:api waiting for locator('#setup [data-a="civic"][data-x="kale_dok"]').first()
+2026-11-03T17:47:32.367Z pw:api   locator resolved to visible <button data-a="civic" data-x="kale_dok" class="card civ   ">…</button>
+2026-11-03T17:47:32.370Z pw:api attempting scroll into view action
+2026-11-03T17:47:32.370Z pw:api   waiting for element to be stable
+2026-11-03T17:47:32.394Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:32.395Z pw:api => locator.tap started
+2026-11-03T17:47:32.395Z pw:api waiting for locator('#setup [data-a="civic"][data-x="kale_dok"]').first()
+2026-11-03T17:47:32.398Z pw:api   locator resolved to <button data-a="civic" data-x="kale_dok" class="card civ   ">…</button>
+2026-11-03T17:47:32.398Z pw:api attempting tap action
+2026-11-03T17:47:32.398Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:32.426Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:32.426Z pw:api   scrolling into view if needed
+2026-11-03T17:47:32.427Z pw:api   done scrolling
+2026-11-03T17:47:32.429Z pw:api   performing tap action
+2026-11-03T17:47:32.481Z pw:api   tap action done
+2026-11-03T17:47:32.482Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:32.482Z pw:api   navigations have finished
+2026-11-03T17:47:32.482Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:32.482Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:32.483Z pw:api waiting for locator('#setup [data-a="step"][data-x="koken"]').first()
+2026-11-03T17:47:32.485Z pw:api   locator resolved to visible <button class="stp " data-a="step" data-x="koken">…</button>
+2026-11-03T17:47:32.488Z pw:api attempting scroll into view action
+2026-11-03T17:47:32.488Z pw:api   waiting for element to be stable
+2026-11-03T17:47:32.511Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:32.511Z pw:api => locator.tap started
+2026-11-03T17:47:32.512Z pw:api waiting for locator('#setup [data-a="step"][data-x="koken"]').first()
+2026-11-03T17:47:32.515Z pw:api   locator resolved to <button class="stp " data-a="step" data-x="koken">…</button>
+2026-11-03T17:47:32.516Z pw:api attempting tap action
+2026-11-03T17:47:32.516Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:32.543Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:32.543Z pw:api   scrolling into view if needed
+2026-11-03T17:47:32.544Z pw:api   done scrolling
+2026-11-03T17:47:32.548Z pw:api   performing tap action
+2026-11-03T17:47:32.597Z pw:api   tap action done
+2026-11-03T17:47:32.597Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:32.597Z pw:api   navigations have finished
+2026-11-03T17:47:32.598Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:32.599Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:32.599Z pw:api waiting for locator('#setup [data-a="origin"][data-x="standart"]').first()
+2026-11-03T17:47:32.602Z pw:api   locator resolved to visible <button class="card on" data-a="origin" data-x="standart">…</button>
+2026-11-03T17:47:32.606Z pw:api attempting scroll into view action
+2026-11-03T17:47:32.606Z pw:api   waiting for element to be stable
+2026-11-03T17:47:32.646Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:32.646Z pw:api => locator.tap started
+2026-11-03T17:47:32.647Z pw:api waiting for locator('#setup [data-a="origin"][data-x="standart"]').first()
+2026-11-03T17:47:32.650Z pw:api   locator resolved to <button class="card on" data-a="origin" data-x="standart">…</button>
+2026-11-03T17:47:32.651Z pw:api attempting tap action
+2026-11-03T17:47:32.651Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:32.676Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:32.676Z pw:api   scrolling into view if needed
+2026-11-03T17:47:32.677Z pw:api   done scrolling
+2026-11-03T17:47:32.680Z pw:api   performing tap action
+2026-11-03T17:47:32.731Z pw:api   tap action done
+2026-11-03T17:47:32.732Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:32.732Z pw:api   navigations have finished
+2026-11-03T17:47:32.732Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:32.732Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:32.732Z pw:api waiting for locator('#setup [data-a="start"]').first()
+2026-11-03T17:47:32.736Z pw:api   locator resolved to visible <button data-a="start" class="btn ghost">KAYDET VE LOBİYE DÖN</button>
+2026-11-03T17:47:32.738Z pw:api attempting scroll into view action
+2026-11-03T17:47:32.738Z pw:api   waiting for element to be stable
+2026-11-03T17:47:32.761Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:32.761Z pw:api => locator.tap started
+2026-11-03T17:47:32.762Z pw:api waiting for locator('#setup [data-a="start"]').first()
+2026-11-03T17:47:32.764Z pw:api   locator resolved to <button data-a="start" class="btn ghost">KAYDET VE LOBİYE DÖN</button>
+2026-11-03T17:47:32.765Z pw:api attempting tap action
+2026-11-03T17:47:32.765Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:32.793Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:32.793Z pw:api   scrolling into view if needed
+2026-11-03T17:47:32.794Z pw:api   done scrolling
+2026-11-03T17:47:32.797Z pw:api   performing tap action
+2026-11-03T17:47:32.846Z pw:api   navigated to "https://localhost:43303/"
+NAV host2 /
+2026-11-03T17:47:32.852Z pw:api   tap action done
+2026-11-03T17:47:32.852Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:32.852Z pw:api   navigations have finished
+2026-11-03T17:47:32.852Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:32.852Z pw:api => page.waitForFunction started
+2026-11-03T17:47:32.856Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:32.856Z pw:api => page.setViewportSize started
+2026-11-03T17:47:32.866Z pw:api <= page.setViewportSize succeeded
+2026-11-03T17:47:32.866Z pw:api => page.textContent started
+2026-11-03T17:47:32.866Z pw:api waiting for locator('#mp1Link')
+2026-11-03T17:47:32.868Z pw:api   locator resolved to <div id="mp1Link" class="mp1-sub">https://localhost:43303/mp/play?code=*</div>
+2026-11-03T17:47:32.868Z pw:api <= page.textContent succeeded
+2026-11-03T17:47:32.869Z pw:api => page.goto started
+2026-11-03T17:47:32.869Z pw:api navigating to "https://localhost:43303/mp/play?code=*", waiting until "load"
+2026-11-03T17:47:32.899Z pw:api   "commit" event fired
+2026-11-03T17:47:32.899Z pw:api   navigated to "https://localhost:43303/mp/play?code=*"
+NAV B2 /mp/play
+2026-11-03T17:47:33.042Z pw:api   "domcontentloaded" event fired
+2026-11-03T17:47:33.056Z pw:api   "load" event fired
+2026-11-03T17:47:33.057Z pw:api <= page.goto succeeded
+2026-11-03T17:47:33.057Z pw:api => page.waitForFunction started
+2026-11-03T17:47:33.098Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:33.098Z pw:api => page.fill started
+2026-11-03T17:47:33.098Z pw:api waiting for locator('#jName')
+2026-11-03T17:47:33.146Z pw:api   locator resolved to <input id="jName" maxlength="24" enterkeyhint="go" placeholder="Adın" class="mp1-in name" autocomplete="nickname"/>
+2026-11-03T17:47:33.151Z pw:api   fill("Bora")
+2026-11-03T17:47:33.151Z pw:api attempting fill action
+2026-11-03T17:47:33.151Z pw:api   waiting for element to be visible, enabled and editable
+2026-11-03T17:47:33.162Z pw:api <= page.fill succeeded
+2026-11-03T17:47:33.162Z pw:api => page.evaluate started
+2026-11-03T17:47:33.168Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:33.169Z pw:api => browserContext.newCDPSession started
+2026-11-03T17:47:33.170Z pw:api <= browserContext.newCDPSession succeeded
+2026-11-03T17:47:33.171Z pw:api => page.evaluate started
+2026-11-03T17:47:33.173Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:33.173Z pw:api => cdpSession.send started
+2026-11-03T17:47:33.238Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:33.238Z pw:api => page.evaluate started
+2026-11-03T17:47:33.240Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:33.240Z pw:api => cdpSession.send started
+2026-11-03T17:47:33.259Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:33.259Z pw:api => page.waitForTimeout started
+2026-11-03T17:47:33.284Z pw:api <= page.waitForTimeout succeeded
+2026-11-03T17:47:33.287Z pw:api => page.evaluate started
+2026-11-03T17:47:33.289Z pw:api   navigated to "https://localhost:43303/mp/play?code=*"
+NAV B2 /mp/play
+2026-11-03T17:47:33.293Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:33.293Z pw:api => page.evaluate started
+2026-11-03T17:47:33.297Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:33.297Z pw:api => cdpSession.send started
+2026-11-03T17:47:33.314Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:33.314Z pw:api => page.evaluate started
+2026-11-03T17:47:33.320Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:33.321Z pw:api => cdpSession.send started
+2026-11-03T17:47:33.336Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:33.336Z pw:api => page.waitForTimeout started
+2026-11-03T17:47:33.364Z pw:api <= page.waitForTimeout succeeded
+2026-11-03T17:47:33.364Z pw:api => page.waitForFunction started
+2026-11-03T17:47:33.379Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:33.379Z pw:api => page.evaluate started
+2026-11-03T17:47:33.385Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:33.385Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:33.385Z pw:api waiting for locator('#jEditMe').first()
+2026-11-03T17:47:33.391Z pw:api   locator resolved to visible <button id="jEditMe" data-j="editMe" class="mp1-btn pri">DEVLETİMİ DÜZENLE</button>
+2026-11-03T17:47:33.401Z pw:api attempting scroll into view action
+2026-11-03T17:47:33.401Z pw:api   waiting for element to be stable
+2026-11-03T17:47:33.429Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:33.430Z pw:api => locator.tap started
+2026-11-03T17:47:33.430Z pw:api waiting for locator('#jEditMe').first()
+2026-11-03T17:47:33.433Z pw:api   locator resolved to <button id="jEditMe" data-j="editMe" class="mp1-btn pri">DEVLETİMİ DÜZENLE</button>
+2026-11-03T17:47:33.436Z pw:api attempting tap action
+2026-11-03T17:47:33.436Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:33.460Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:33.460Z pw:api   scrolling into view if needed
+2026-11-03T17:47:33.463Z pw:api   done scrolling
+2026-11-03T17:47:33.468Z pw:api   performing tap action
+2026-11-03T17:47:33.491Z pw:api   navigated to "https://localhost:43303/mp/play?code=*"
+NAV B2 /mp/play
+2026-11-03T17:47:33.523Z pw:api   "networkidle" event fired
+2026-11-03T17:47:33.541Z pw:api   tap action done
+2026-11-03T17:47:33.541Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:33.541Z pw:api   navigations have finished
+2026-11-03T17:47:33.541Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:33.542Z pw:api => page.waitForFunction started
+2026-11-03T17:47:33.548Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:33.548Z pw:api => page.setViewportSize started
+2026-11-03T17:47:33.563Z pw:api <= page.setViewportSize succeeded
+2026-11-03T17:47:33.563Z pw:api => page.waitForFunction started
+2026-11-03T17:47:33.568Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:33.569Z pw:api => page.fill started
+2026-11-03T17:47:33.569Z pw:api waiting for locator('#empName')
+2026-11-03T17:47:33.572Z pw:api   locator resolved to <input type="text" id="empName" maxlength="30" class="nameInp" value="Yeni Hanedan" placeholder="Hanedanının adı"/>
+2026-11-03T17:47:33.573Z pw:api   fill("Saf Akıl Ağı")
+2026-11-03T17:47:33.573Z pw:api attempting fill action
+2026-11-03T17:47:33.573Z pw:api   waiting for element to be visible, enabled and editable
+2026-11-03T17:47:33.581Z pw:api <= page.fill succeeded
+2026-11-03T17:47:33.581Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:33.582Z pw:api waiting for locator('#setup [data-a="mizacSet"][data-x="teknokrasi"]').first()
+2026-11-03T17:47:33.585Z pw:api   locator resolved to visible <button class="opt " data-a="mizacSet" data-x="teknokrasi">…</button>
+2026-11-03T17:47:33.589Z pw:api attempting scroll into view action
+2026-11-03T17:47:33.589Z pw:api   waiting for element to be stable
+2026-11-03T17:47:33.610Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:33.611Z pw:api => locator.tap started
+2026-11-03T17:47:33.611Z pw:api waiting for locator('#setup [data-a="mizacSet"][data-x="teknokrasi"]').first()
+2026-11-03T17:47:33.614Z pw:api   locator resolved to <button class="opt " data-a="mizacSet" data-x="teknokrasi">…</button>
+2026-11-03T17:47:33.615Z pw:api attempting tap action
+2026-11-03T17:47:33.615Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:33.643Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:33.644Z pw:api   scrolling into view if needed
+2026-11-03T17:47:33.645Z pw:api   done scrolling
+2026-11-03T17:47:33.647Z pw:api   performing tap action
+2026-11-03T17:47:33.679Z pw:api   tap action done
+2026-11-03T17:47:33.679Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:33.679Z pw:api   navigations have finished
+2026-11-03T17:47:33.680Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:33.680Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:33.680Z pw:api waiting for locator('#setup [data-a="step"][data-x="etik"]').first()
+2026-11-03T17:47:33.685Z pw:api   locator resolved to visible <button class="stp " data-a="step" data-x="etik">…</button>
+2026-11-03T17:47:33.689Z pw:api attempting scroll into view action
+2026-11-03T17:47:33.689Z pw:api   waiting for element to be stable
+2026-11-03T17:47:33.711Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:33.711Z pw:api => locator.tap started
+2026-11-03T17:47:33.712Z pw:api waiting for locator('#setup [data-a="step"][data-x="etik"]').first()
+2026-11-03T17:47:33.715Z pw:api   locator resolved to <button class="stp " data-a="step" data-x="etik">…</button>
+2026-11-03T17:47:33.716Z pw:api attempting tap action
+2026-11-03T17:47:33.716Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:33.743Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:33.743Z pw:api   scrolling into view if needed
+2026-11-03T17:47:33.745Z pw:api   done scrolling
+2026-11-03T17:47:33.748Z pw:api   performing tap action
+2026-11-03T17:47:33.789Z pw:api   tap action done
+2026-11-03T17:47:33.789Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:33.789Z pw:api   navigations have finished
+2026-11-03T17:47:33.790Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:33.790Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:33.791Z pw:api waiting for locator('#setup [data-a="ethic"][data-x="mat:2"]').first()
+2026-11-03T17:47:33.795Z pw:api   locator resolved to visible <button data-ax="mat" id="axd_mat_2" data-a="ethic" data-x="mat:2" class="axDot  ">2</button>
+2026-11-03T17:47:33.799Z pw:api attempting scroll into view action
+2026-11-03T17:47:33.799Z pw:api   waiting for element to be stable
+2026-11-03T17:47:33.828Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:33.829Z pw:api => locator.tap started
+2026-11-03T17:47:33.829Z pw:api waiting for locator('#setup [data-a="ethic"][data-x="mat:2"]').first()
+2026-11-03T17:47:33.833Z pw:api   locator resolved to <button data-ax="mat" id="axd_mat_2" data-a="ethic" data-x="mat:2" class="axDot  ">2</button>
+2026-11-03T17:47:33.834Z pw:api attempting tap action
+2026-11-03T17:47:33.835Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:33.863Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:33.863Z pw:api   scrolling into view if needed
+2026-11-03T17:47:33.865Z pw:api   done scrolling
+2026-11-03T17:47:33.867Z pw:api   performing tap action
+2026-11-03T17:47:33.898Z pw:api   tap action done
+2026-11-03T17:47:33.898Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:33.898Z pw:api   navigations have finished
+2026-11-03T17:47:33.899Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:33.899Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:33.899Z pw:api waiting for locator('#setup [data-a="ethic"][data-x="mil:-1"]').first()
+2026-11-03T17:47:33.902Z pw:api   locator resolved to visible <button data-ax="mil" data-a="ethic" class="axDot  " id="axd_mil_-1" data-x="mil:-1">1</button>
+2026-11-03T17:47:33.905Z pw:api attempting scroll into view action
+2026-11-03T17:47:33.905Z pw:api   waiting for element to be stable
+2026-11-03T17:47:33.943Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:33.944Z pw:api => locator.tap started
+2026-11-03T17:47:33.944Z pw:api waiting for locator('#setup [data-a="ethic"][data-x="mil:-1"]').first()
+2026-11-03T17:47:33.947Z pw:api   locator resolved to <button data-ax="mil" data-a="ethic" class="axDot  " id="axd_mil_-1" data-x="mil:-1">1</button>
+2026-11-03T17:47:33.948Z pw:api attempting tap action
+2026-11-03T17:47:33.948Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:33.976Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:33.976Z pw:api   scrolling into view if needed
+2026-11-03T17:47:33.977Z pw:api   done scrolling
+2026-11-03T17:47:33.980Z pw:api   performing tap action
+2026-11-03T17:47:34.004Z pw:api   tap action done
+2026-11-03T17:47:34.004Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:34.004Z pw:api   navigations have finished
+2026-11-03T17:47:34.005Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:34.005Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:34.005Z pw:api waiting for locator('#setup [data-a="step"][data-x="civic"]').first()
+2026-11-03T17:47:34.010Z pw:api   locator resolved to visible <button class="stp " data-a="step" data-x="civic">…</button>
+2026-11-03T17:47:34.015Z pw:api attempting scroll into view action
+2026-11-03T17:47:34.015Z pw:api   waiting for element to be stable
+2026-11-03T17:47:34.045Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:34.045Z pw:api => locator.tap started
+2026-11-03T17:47:34.045Z pw:api waiting for locator('#setup [data-a="step"][data-x="civic"]').first()
+2026-11-03T17:47:34.049Z pw:api   locator resolved to <button class="stp " data-a="step" data-x="civic">…</button>
+2026-11-03T17:47:34.050Z pw:api attempting tap action
+2026-11-03T17:47:34.050Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:34.076Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:34.076Z pw:api   scrolling into view if needed
+2026-11-03T17:47:34.077Z pw:api   done scrolling
+2026-11-03T17:47:34.079Z pw:api   performing tap action
+2026-11-03T17:47:34.116Z pw:api   tap action done
+2026-11-03T17:47:34.116Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:34.116Z pw:api   navigations have finished
+2026-11-03T17:47:34.117Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:34.117Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:34.117Z pw:api waiting for locator('#setup [data-a="civic"][data-x="sinyal_avci"]').first()
+2026-11-03T17:47:34.124Z pw:api   locator resolved to visible <button data-a="civic" class="card civ   " data-x="sinyal_avci">…</button>
+2026-11-03T17:47:34.129Z pw:api attempting scroll into view action
+2026-11-03T17:47:34.129Z pw:api   waiting for element to be stable
+2026-11-03T17:47:34.161Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:34.161Z pw:api => locator.tap started
+2026-11-03T17:47:34.162Z pw:api waiting for locator('#setup [data-a="civic"][data-x="sinyal_avci"]').first()
+2026-11-03T17:47:34.165Z pw:api   locator resolved to <button data-a="civic" class="card civ   " data-x="sinyal_avci">…</button>
+2026-11-03T17:47:34.165Z pw:api attempting tap action
+2026-11-03T17:47:34.165Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:34.192Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:34.192Z pw:api   scrolling into view if needed
+2026-11-03T17:47:34.194Z pw:api   done scrolling
+2026-11-03T17:47:34.197Z pw:api   performing tap action
+2026-11-03T17:47:34.228Z pw:api   tap action done
+2026-11-03T17:47:34.228Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:34.228Z pw:api   navigations have finished
+2026-11-03T17:47:34.228Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:34.228Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:34.229Z pw:api waiting for locator('#setup [data-a="step"][data-x="koken"]').first()
+2026-11-03T17:47:34.231Z pw:api   locator resolved to visible <button class="stp " data-a="step" data-x="koken">…</button>
+2026-11-03T17:47:34.233Z pw:api attempting scroll into view action
+2026-11-03T17:47:34.234Z pw:api   waiting for element to be stable
+2026-11-03T17:47:34.260Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:34.261Z pw:api => locator.tap started
+2026-11-03T17:47:34.261Z pw:api waiting for locator('#setup [data-a="step"][data-x="koken"]').first()
+2026-11-03T17:47:34.265Z pw:api   locator resolved to <button class="stp " data-a="step" data-x="koken">…</button>
+2026-11-03T17:47:34.266Z pw:api attempting tap action
+2026-11-03T17:47:34.267Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:34.293Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:34.293Z pw:api   scrolling into view if needed
+2026-11-03T17:47:34.297Z pw:api   done scrolling
+2026-11-03T17:47:34.299Z pw:api   performing tap action
+2026-11-03T17:47:34.332Z pw:api   tap action done
+2026-11-03T17:47:34.332Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:34.332Z pw:api   navigations have finished
+2026-11-03T17:47:34.333Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:34.333Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:34.333Z pw:api waiting for locator('#setup [data-a="origin"][data-x="standart"]').first()
+2026-11-03T17:47:34.340Z pw:api   locator resolved to visible <button class="card on" data-a="origin" data-x="standart">…</button>
+2026-11-03T17:47:34.344Z pw:api attempting scroll into view action
+2026-11-03T17:47:34.344Z pw:api   waiting for element to be stable
+2026-11-03T17:47:34.377Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:34.377Z pw:api => locator.tap started
+2026-11-03T17:47:34.377Z pw:api waiting for locator('#setup [data-a="origin"][data-x="standart"]').first()
+2026-11-03T17:47:34.380Z pw:api   locator resolved to <button class="card on" data-a="origin" data-x="standart">…</button>
+2026-11-03T17:47:34.380Z pw:api attempting tap action
+2026-11-03T17:47:34.381Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:34.409Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:34.410Z pw:api   scrolling into view if needed
+2026-11-03T17:47:34.410Z pw:api   done scrolling
+2026-11-03T17:47:34.413Z pw:api   performing tap action
+2026-11-03T17:47:34.445Z pw:api   tap action done
+2026-11-03T17:47:34.445Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:34.446Z pw:api   navigations have finished
+2026-11-03T17:47:34.446Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:34.447Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:34.447Z pw:api waiting for locator('#setup [data-a="start"]').first()
+2026-11-03T17:47:34.451Z pw:api   locator resolved to visible <button class="btn" data-a="start">DEVLETİ KAYDET</button>
+2026-11-03T17:47:34.454Z pw:api attempting scroll into view action
+2026-11-03T17:47:34.454Z pw:api   waiting for element to be stable
+2026-11-03T17:47:34.477Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:34.477Z pw:api => locator.tap started
+2026-11-03T17:47:34.477Z pw:api waiting for locator('#setup [data-a="start"]').first()
+2026-11-03T17:47:34.480Z pw:api   locator resolved to <button class="btn" data-a="start">DEVLETİ KAYDET</button>
+2026-11-03T17:47:34.481Z pw:api attempting tap action
+2026-11-03T17:47:34.481Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:34.509Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:34.509Z pw:api   scrolling into view if needed
+2026-11-03T17:47:34.510Z pw:api   done scrolling
+2026-11-03T17:47:34.512Z pw:api   performing tap action
+2026-11-03T17:47:34.539Z pw:api   navigated to "https://localhost:43303/mp/play?code=*"
+NAV B2 /mp/play
+2026-11-03T17:47:34.544Z pw:api   tap action done
+2026-11-03T17:47:34.544Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:34.544Z pw:api   navigations have finished
+2026-11-03T17:47:34.544Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:34.546Z pw:api => page.waitForFunction started
+2026-11-03T17:47:34.553Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:34.553Z pw:api => page.setViewportSize started
+2026-11-03T17:47:34.562Z pw:api <= page.setViewportSize succeeded
+2026-11-03T17:47:34.562Z pw:api => page.waitForFunction started
+2026-11-03T17:47:34.567Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:34.567Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:34.568Z pw:api waiting for locator('#jReady').first()
+2026-11-03T17:47:34.570Z pw:api   locator resolved to visible <button id="jReady" data-j="ready" class="mp1-btn pri">HAZIRIM</button>
+2026-11-03T17:47:34.573Z pw:api attempting scroll into view action
+2026-11-03T17:47:34.573Z pw:api   waiting for element to be stable
+2026-11-03T17:47:34.594Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:34.594Z pw:api => locator.tap started
+2026-11-03T17:47:34.595Z pw:api waiting for locator('#jReady').first()
+2026-11-03T17:47:34.598Z pw:api   locator resolved to <button id="jReady" data-j="ready" class="mp1-btn pri">HAZIRIM</button>
+2026-11-03T17:47:34.599Z pw:api attempting tap action
+2026-11-03T17:47:34.599Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:34.625Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:34.625Z pw:api   scrolling into view if needed
+2026-11-03T17:47:34.626Z pw:api   done scrolling
+2026-11-03T17:47:34.628Z pw:api   performing tap action
+2026-11-03T17:47:34.652Z pw:api   tap action done
+2026-11-03T17:47:34.652Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:34.652Z pw:api   navigations have finished
+2026-11-03T17:47:34.653Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:34.653Z pw:api => page.goto started
+2026-11-03T17:47:34.653Z pw:api navigating to "https://localhost:43303/mp/play?code=*", waiting until "load"
+2026-11-03T17:47:34.683Z pw:api   "commit" event fired
+2026-11-03T17:47:34.683Z pw:api   navigated to "https://localhost:43303/mp/play?code=*"
+NAV C2 /mp/play
+2026-11-03T17:47:34.865Z pw:api   "domcontentloaded" event fired
+2026-11-03T17:47:34.878Z pw:api   "load" event fired
+2026-11-03T17:47:34.879Z pw:api <= page.goto succeeded
+2026-11-03T17:47:34.879Z pw:api => page.waitForFunction started
+2026-11-03T17:47:34.924Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:34.924Z pw:api => page.fill started
+2026-11-03T17:47:34.926Z pw:api waiting for locator('#jName')
+2026-11-03T17:47:34.957Z pw:api   locator resolved to <input id="jName" maxlength="24" enterkeyhint="go" placeholder="Adın" class="mp1-in name" autocomplete="nickname"/>
+2026-11-03T17:47:34.963Z pw:api   fill("Cem")
+2026-11-03T17:47:34.963Z pw:api attempting fill action
+2026-11-03T17:47:34.963Z pw:api   waiting for element to be visible, enabled and editable
+2026-11-03T17:47:34.978Z pw:api <= page.fill succeeded
+2026-11-03T17:47:34.978Z pw:api => page.evaluate started
+2026-11-03T17:47:34.987Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:34.988Z pw:api => browserContext.newCDPSession started
+2026-11-03T17:47:34.989Z pw:api <= browserContext.newCDPSession succeeded
+2026-11-03T17:47:34.989Z pw:api => page.evaluate started
+2026-11-03T17:47:34.992Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:34.992Z pw:api => cdpSession.send started
+2026-11-03T17:47:35.171Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:35.171Z pw:api => page.evaluate started
+2026-11-03T17:47:35.186Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:35.186Z pw:api => cdpSession.send started
+2026-11-03T17:47:35.217Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:35.218Z pw:api => page.waitForTimeout started
+2026-11-03T17:47:35.243Z pw:api <= page.waitForTimeout succeeded
+2026-11-03T17:47:35.243Z pw:api => page.evaluate started
+2026-11-03T17:47:35.262Z pw:api   navigated to "https://localhost:43303/mp/play?code=*"
+NAV C2 /mp/play
+2026-11-03T17:47:35.270Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:35.271Z pw:api => page.evaluate started
+2026-11-03T17:47:35.277Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:35.277Z pw:api => cdpSession.send started
+2026-11-03T17:47:35.292Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:35.292Z pw:api => page.evaluate started
+2026-11-03T17:47:35.306Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:35.306Z pw:api => cdpSession.send started
+2026-11-03T17:47:35.320Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:35.320Z pw:api => page.waitForTimeout started
+2026-11-03T17:47:35.321Z pw:api   "networkidle" event fired
+2026-11-03T17:47:35.346Z pw:api <= page.waitForTimeout succeeded
+2026-11-03T17:47:35.347Z pw:api => page.waitForFunction started
+2026-11-03T17:47:35.352Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:35.352Z pw:api => page.evaluate started
+2026-11-03T17:47:35.353Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:35.354Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:35.354Z pw:api waiting for locator('#jEditMe').first()
+2026-11-03T17:47:35.357Z pw:api   locator resolved to visible <button id="jEditMe" data-j="editMe" class="mp1-btn pri">DEVLETİMİ DÜZENLE</button>
+2026-11-03T17:47:35.363Z pw:api attempting scroll into view action
+2026-11-03T17:47:35.363Z pw:api   waiting for element to be stable
+2026-11-03T17:47:35.396Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:35.396Z pw:api => locator.tap started
+2026-11-03T17:47:35.396Z pw:api waiting for locator('#jEditMe').first()
+2026-11-03T17:47:35.400Z pw:api   locator resolved to <button id="jEditMe" data-j="editMe" class="mp1-btn pri">DEVLETİMİ DÜZENLE</button>
+2026-11-03T17:47:35.401Z pw:api attempting tap action
+2026-11-03T17:47:35.401Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:35.426Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:35.426Z pw:api   scrolling into view if needed
+2026-11-03T17:47:35.429Z pw:api   done scrolling
+2026-11-03T17:47:35.433Z pw:api   performing tap action
+2026-11-03T17:47:35.456Z pw:api   navigated to "https://localhost:43303/mp/play?code=*"
+NAV C2 /mp/play
+2026-11-03T17:47:35.521Z pw:api   tap action done
+2026-11-03T17:47:35.521Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:35.521Z pw:api   navigations have finished
+2026-11-03T17:47:35.522Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:35.522Z pw:api => page.waitForFunction started
+2026-11-03T17:47:35.528Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:35.529Z pw:api => page.setViewportSize started
+2026-11-03T17:47:35.537Z pw:api <= page.setViewportSize succeeded
+2026-11-03T17:47:35.537Z pw:api => page.waitForFunction started
+2026-11-03T17:47:35.540Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:35.540Z pw:api => page.fill started
+2026-11-03T17:47:35.541Z pw:api waiting for locator('#empName')
+2026-11-03T17:47:35.551Z pw:api   locator resolved to <input type="text" id="empName" maxlength="30" class="nameInp" value="Yeni Hanedan" placeholder="Hanedanının adı"/>
+2026-11-03T17:47:35.552Z pw:api   fill("Okyanus Ticaret Birliği")
+2026-11-03T17:47:35.552Z pw:api attempting fill action
+2026-11-03T17:47:35.552Z pw:api   waiting for element to be visible, enabled and editable
+2026-11-03T17:47:35.562Z pw:api <= page.fill succeeded
+2026-11-03T17:47:35.562Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:35.562Z pw:api waiting for locator('#setup [data-a="mizacSet"][data-x="tuccar"]').first()
+2026-11-03T17:47:35.569Z pw:api   locator resolved to visible <button class="opt " data-x="tuccar" data-a="mizacSet">…</button>
+2026-11-03T17:47:35.572Z pw:api attempting scroll into view action
+2026-11-03T17:47:35.572Z pw:api   waiting for element to be stable
+2026-11-03T17:47:35.611Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:35.612Z pw:api => locator.tap started
+2026-11-03T17:47:35.612Z pw:api waiting for locator('#setup [data-a="mizacSet"][data-x="tuccar"]').first()
+2026-11-03T17:47:35.614Z pw:api   locator resolved to <button class="opt " data-x="tuccar" data-a="mizacSet">…</button>
+2026-11-03T17:47:35.615Z pw:api attempting tap action
+2026-11-03T17:47:35.615Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:35.643Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:35.643Z pw:api   scrolling into view if needed
+2026-11-03T17:47:35.645Z pw:api   done scrolling
+2026-11-03T17:47:35.647Z pw:api   performing tap action
+2026-11-03T17:47:35.675Z pw:api   tap action done
+2026-11-03T17:47:35.675Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:35.675Z pw:api   navigations have finished
+2026-11-03T17:47:35.676Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:35.676Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:35.676Z pw:api waiting for locator('#setup [data-a="step"][data-x="etik"]').first()
+2026-11-03T17:47:35.681Z pw:api   locator resolved to visible <button class="stp " data-a="step" data-x="etik">…</button>
+2026-11-03T17:47:35.684Z pw:api attempting scroll into view action
+2026-11-03T17:47:35.684Z pw:api   waiting for element to be stable
+2026-11-03T17:47:35.711Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:35.711Z pw:api => locator.tap started
+2026-11-03T17:47:35.711Z pw:api waiting for locator('#setup [data-a="step"][data-x="etik"]').first()
+2026-11-03T17:47:35.714Z pw:api   locator resolved to <button class="stp " data-a="step" data-x="etik">…</button>
+2026-11-03T17:47:35.715Z pw:api attempting tap action
+2026-11-03T17:47:35.715Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:35.744Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:35.744Z pw:api   scrolling into view if needed
+2026-11-03T17:47:35.746Z pw:api   done scrolling
+2026-11-03T17:47:35.748Z pw:api   performing tap action
+2026-11-03T17:47:35.792Z pw:api   tap action done
+2026-11-03T17:47:35.792Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:35.792Z pw:api   navigations have finished
+2026-11-03T17:47:35.792Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:35.792Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:35.793Z pw:api waiting for locator('#setup [data-a="ethic"][data-x="aut:-1"]').first()
+2026-11-03T17:47:35.797Z pw:api   locator resolved to visible <button data-ax="aut" data-a="ethic" class="axDot  " id="axd_aut_-1" data-x="aut:-1">1</button>
+2026-11-03T17:47:35.800Z pw:api attempting scroll into view action
+2026-11-03T17:47:35.800Z pw:api   waiting for element to be stable
+2026-11-03T17:47:35.827Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:35.827Z pw:api => locator.tap started
+2026-11-03T17:47:35.828Z pw:api waiting for locator('#setup [data-a="ethic"][data-x="aut:-1"]').first()
+2026-11-03T17:47:35.830Z pw:api   locator resolved to <button data-ax="aut" data-a="ethic" class="axDot  " id="axd_aut_-1" data-x="aut:-1">1</button>
+2026-11-03T17:47:35.832Z pw:api attempting tap action
+2026-11-03T17:47:35.832Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:35.859Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:35.859Z pw:api   scrolling into view if needed
+2026-11-03T17:47:35.860Z pw:api   done scrolling
+2026-11-03T17:47:35.863Z pw:api   performing tap action
+2026-11-03T17:47:35.918Z pw:api   tap action done
+2026-11-03T17:47:35.918Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:35.918Z pw:api   navigations have finished
+2026-11-03T17:47:35.919Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:35.919Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:35.919Z pw:api waiting for locator('#setup [data-a="ethic"][data-x="mat:1"]').first()
+2026-11-03T17:47:35.922Z pw:api   locator resolved to visible <button data-ax="mat" id="axd_mat_1" data-a="ethic" data-x="mat:1" class="axDot  ">1</button>
+2026-11-03T17:47:35.927Z pw:api attempting scroll into view action
+2026-11-03T17:47:35.927Z pw:api   waiting for element to be stable
+2026-11-03T17:47:35.960Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:35.961Z pw:api => locator.tap started
+2026-11-03T17:47:35.961Z pw:api waiting for locator('#setup [data-a="ethic"][data-x="mat:1"]').first()
+2026-11-03T17:47:35.964Z pw:api   locator resolved to <button data-ax="mat" id="axd_mat_1" data-a="ethic" data-x="mat:1" class="axDot  ">1</button>
+2026-11-03T17:47:35.965Z pw:api attempting tap action
+2026-11-03T17:47:35.965Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:35.992Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:35.993Z pw:api   scrolling into view if needed
+2026-11-03T17:47:35.993Z pw:api   done scrolling
+2026-11-03T17:47:35.995Z pw:api   performing tap action
+2026-11-03T17:47:36.041Z pw:api   tap action done
+2026-11-03T17:47:36.041Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:36.041Z pw:api   navigations have finished
+2026-11-03T17:47:36.041Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:36.042Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:36.043Z pw:api waiting for locator('#setup [data-a="step"][data-x="civic"]').first()
+2026-11-03T17:47:36.049Z pw:api   locator resolved to visible <button class="stp " data-a="step" data-x="civic">…</button>
+2026-11-03T17:47:36.052Z pw:api attempting scroll into view action
+2026-11-03T17:47:36.052Z pw:api   waiting for element to be stable
+2026-11-03T17:47:36.077Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:36.077Z pw:api => locator.tap started
+2026-11-03T17:47:36.077Z pw:api waiting for locator('#setup [data-a="step"][data-x="civic"]').first()
+2026-11-03T17:47:36.079Z pw:api   locator resolved to <button class="stp " data-a="step" data-x="civic">…</button>
+2026-11-03T17:47:36.080Z pw:api attempting tap action
+2026-11-03T17:47:36.080Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:36.109Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:36.109Z pw:api   scrolling into view if needed
+2026-11-03T17:47:36.110Z pw:api   done scrolling
+2026-11-03T17:47:36.113Z pw:api   performing tap action
+2026-11-03T17:47:36.170Z pw:api   tap action done
+2026-11-03T17:47:36.170Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:36.170Z pw:api   navigations have finished
+2026-11-03T17:47:36.171Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:36.171Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:36.171Z pw:api waiting for locator('#setup [data-a="civic"][data-x="maden_lonca"]').first()
+2026-11-03T17:47:36.174Z pw:api   locator resolved to visible <button data-a="civic" class="card civ   " data-x="maden_lonca">…</button>
+2026-11-03T17:47:36.178Z pw:api attempting scroll into view action
+2026-11-03T17:47:36.178Z pw:api   waiting for element to be stable
+2026-11-03T17:47:36.210Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:36.211Z pw:api => locator.tap started
+2026-11-03T17:47:36.211Z pw:api waiting for locator('#setup [data-a="civic"][data-x="maden_lonca"]').first()
+2026-11-03T17:47:36.214Z pw:api   locator resolved to <button data-a="civic" class="card civ   " data-x="maden_lonca">…</button>
+2026-11-03T17:47:36.216Z pw:api attempting tap action
+2026-11-03T17:47:36.216Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:36.242Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:36.243Z pw:api   scrolling into view if needed
+2026-11-03T17:47:36.243Z pw:api   done scrolling
+2026-11-03T17:47:36.246Z pw:api   performing tap action
+2026-11-03T17:47:36.298Z pw:api   tap action done
+2026-11-03T17:47:36.298Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:36.298Z pw:api   navigations have finished
+2026-11-03T17:47:36.298Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:36.299Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:36.299Z pw:api waiting for locator('#setup [data-a="step"][data-x="koken"]').first()
+2026-11-03T17:47:36.302Z pw:api   locator resolved to visible <button class="stp " data-a="step" data-x="koken">…</button>
+2026-11-03T17:47:36.305Z pw:api attempting scroll into view action
+2026-11-03T17:47:36.305Z pw:api   waiting for element to be stable
+2026-11-03T17:47:36.327Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:36.327Z pw:api => locator.tap started
+2026-11-03T17:47:36.328Z pw:api waiting for locator('#setup [data-a="step"][data-x="koken"]').first()
+2026-11-03T17:47:36.330Z pw:api   locator resolved to <button class="stp " data-a="step" data-x="koken">…</button>
+2026-11-03T17:47:36.331Z pw:api attempting tap action
+2026-11-03T17:47:36.331Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:36.359Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:36.359Z pw:api   scrolling into view if needed
+2026-11-03T17:47:36.360Z pw:api   done scrolling
+2026-11-03T17:47:36.362Z pw:api   performing tap action
+2026-11-03T17:47:36.417Z pw:api   tap action done
+2026-11-03T17:47:36.418Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:36.418Z pw:api   navigations have finished
+2026-11-03T17:47:36.418Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:36.418Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:36.418Z pw:api waiting for locator('#setup [data-a="origin"][data-x="standart"]').first()
+2026-11-03T17:47:36.421Z pw:api   locator resolved to visible <button class="card on" data-a="origin" data-x="standart">…</button>
+2026-11-03T17:47:36.424Z pw:api attempting scroll into view action
+2026-11-03T17:47:36.424Z pw:api   waiting for element to be stable
+2026-11-03T17:47:36.460Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:36.460Z pw:api => locator.tap started
+2026-11-03T17:47:36.460Z pw:api waiting for locator('#setup [data-a="origin"][data-x="standart"]').first()
+2026-11-03T17:47:36.463Z pw:api   locator resolved to <button class="card on" data-a="origin" data-x="standart">…</button>
+2026-11-03T17:47:36.465Z pw:api attempting tap action
+2026-11-03T17:47:36.465Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:36.493Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:36.493Z pw:api   scrolling into view if needed
+2026-11-03T17:47:36.495Z pw:api   done scrolling
+2026-11-03T17:47:36.497Z pw:api   performing tap action
+2026-11-03T17:47:36.540Z pw:api   tap action done
+2026-11-03T17:47:36.540Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:36.540Z pw:api   navigations have finished
+2026-11-03T17:47:36.541Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:36.541Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:36.542Z pw:api waiting for locator('#setup [data-a="start"]').first()
+2026-11-03T17:47:36.546Z pw:api   locator resolved to visible <button class="btn" data-a="start">DEVLETİ KAYDET</button>
+2026-11-03T17:47:36.548Z pw:api attempting scroll into view action
+2026-11-03T17:47:36.548Z pw:api   waiting for element to be stable
+2026-11-03T17:47:36.576Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:36.577Z pw:api => locator.tap started
+2026-11-03T17:47:36.577Z pw:api waiting for locator('#setup [data-a="start"]').first()
+2026-11-03T17:47:36.580Z pw:api   locator resolved to <button class="btn" data-a="start">DEVLETİ KAYDET</button>
+2026-11-03T17:47:36.580Z pw:api attempting tap action
+2026-11-03T17:47:36.581Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:36.609Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:36.609Z pw:api   scrolling into view if needed
+2026-11-03T17:47:36.610Z pw:api   done scrolling
+2026-11-03T17:47:36.614Z pw:api   performing tap action
+2026-11-03T17:47:36.662Z pw:api   navigated to "https://localhost:43303/mp/play?code=*"
+NAV C2 /mp/play
+2026-11-03T17:47:36.672Z pw:api   tap action done
+2026-11-03T17:47:36.672Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:36.672Z pw:api   navigations have finished
+2026-11-03T17:47:36.673Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:36.673Z pw:api => page.waitForFunction started
+2026-11-03T17:47:36.682Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:36.683Z pw:api => page.setViewportSize started
+2026-11-03T17:47:36.690Z pw:api <= page.setViewportSize succeeded
+2026-11-03T17:47:36.690Z pw:api => page.waitForFunction started
+2026-11-03T17:47:36.697Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:36.697Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:36.697Z pw:api waiting for locator('#jReady').first()
+2026-11-03T17:47:36.703Z pw:api   locator resolved to visible <button id="jReady" data-j="ready" class="mp1-btn pri">HAZIRIM</button>
+2026-11-03T17:47:36.706Z pw:api attempting scroll into view action
+2026-11-03T17:47:36.706Z pw:api   waiting for element to be stable
+2026-11-03T17:47:36.727Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:36.727Z pw:api => locator.tap started
+2026-11-03T17:47:36.727Z pw:api waiting for locator('#jReady').first()
+2026-11-03T17:47:36.729Z pw:api   locator resolved to <button id="jReady" data-j="ready" class="mp1-btn pri">HAZIRIM</button>
+2026-11-03T17:47:36.731Z pw:api attempting tap action
+2026-11-03T17:47:36.731Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:36.758Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:36.759Z pw:api   scrolling into view if needed
+2026-11-03T17:47:36.759Z pw:api   done scrolling
+2026-11-03T17:47:36.761Z pw:api   performing tap action
+2026-11-03T17:47:36.786Z pw:api   tap action done
+2026-11-03T17:47:36.786Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:36.786Z pw:api   navigations have finished
+2026-11-03T17:47:36.787Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:36.787Z pw:api => page.waitForFunction started
+2026-11-03T17:47:36.796Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:36.797Z pw:api => page.waitForTimeout started
+2026-11-03T17:47:37.098Z pw:api <= page.waitForTimeout succeeded
+2026-11-03T17:47:37.099Z pw:api => page.screenshot started
+2026-11-03T17:47:37.099Z pw:api taking page screenshot
+2026-11-03T17:47:37.103Z pw:api waiting for fonts to load...
+2026-11-03T17:47:37.105Z pw:api fonts loaded
+2026-11-03T17:47:37.191Z pw:api <= page.screenshot succeeded
+2026-11-03T17:47:37.193Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:37.193Z pw:api waiting for locator('[data-m="start"]').first()
+2026-11-03T17:47:37.197Z pw:api   locator resolved to visible <button data-m="start" class="mp1-btn pri">OYUNU BAŞLAT</button>
+2026-11-03T17:47:37.199Z pw:api attempting scroll into view action
+2026-11-03T17:47:37.199Z pw:api   waiting for element to be stable
+2026-11-03T17:47:37.209Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:37.210Z pw:api => locator.tap started
+2026-11-03T17:47:37.210Z pw:api waiting for locator('[data-m="start"]').first()
+2026-11-03T17:47:37.212Z pw:api   locator resolved to <button data-m="start" class="mp1-btn pri">OYUNU BAŞLAT</button>
+2026-11-03T17:47:37.213Z pw:api attempting tap action
+2026-11-03T17:47:37.213Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:37.242Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:37.242Z pw:api   scrolling into view if needed
+2026-11-03T17:47:37.243Z pw:api   done scrolling
+2026-11-03T17:47:37.244Z pw:api   performing tap action
+2026-11-03T17:47:37.347Z pw:api   navigated to "https://localhost:43303/mp/play?code=*"
+NAV C2 /mp/play
+2026-11-03T17:47:37.348Z pw:api   navigated to "https://localhost:43303/mp/play?code=*"
+NAV B2 /mp/play
+2026-11-03T17:47:37.406Z pw:api   navigated to "https://localhost:43303/"
+NAV host2 /
+2026-11-03T17:47:37.513Z pw:api   tap action done
+2026-11-03T17:47:37.514Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:37.515Z pw:api   navigations have finished
+2026-11-03T17:47:37.515Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:37.515Z pw:api => page.waitForFunction started
+2026-11-03T17:47:37.776Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:37.783Z pw:api => page.waitForFunction started
+2026-11-03T17:47:37.895Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:37.895Z pw:api => page.evaluate started
+2026-11-03T17:47:37.928Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:37.928Z pw:api => page.waitForTimeout started
+2026-11-03T17:47:39.129Z pw:api <= page.waitForTimeout succeeded
+2026-11-03T17:47:39.130Z pw:api => page.evaluate started
+2026-11-03T17:47:39.160Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:39.160Z pw:api => page.$ started
+2026-11-03T17:47:39.161Z pw:api     finding element using the selector "#modal [data-a="advClose"],#modal [data-a="closem"]"
+2026-11-03T17:47:39.212Z pw:api <= page.$ succeeded
+2026-11-03T17:47:39.212Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:39.218Z pw:api waiting for locator('#modal [data-a="advClose"],#modal [data-a="closem"]').first()
+2026-11-03T17:47:39.262Z pw:api   locator resolved to visible <button class="ch" data-a="advClose">…</button>
+2026-11-03T17:47:39.315Z pw:api attempting scroll into view action
+2026-11-03T17:47:39.315Z pw:api   waiting for element to be stable
+2026-11-03T17:47:39.412Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:39.413Z pw:api => locator.tap started
+2026-11-03T17:47:39.413Z pw:api waiting for locator('#modal [data-a="advClose"],#modal [data-a="closem"]').first()
+2026-11-03T17:47:39.457Z pw:api   locator resolved to <button class="ch" data-a="advClose">…</button>
+2026-11-03T17:47:39.477Z pw:api attempting tap action
+2026-11-03T17:47:39.477Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:39.500Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:39.500Z pw:api   scrolling into view if needed
+2026-11-03T17:47:39.511Z pw:api   done scrolling
+2026-11-03T17:47:39.531Z pw:api   performing tap action
+2026-11-03T17:47:39.659Z pw:api   tap action done
+2026-11-03T17:47:39.659Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:39.659Z pw:api   navigations have finished
+2026-11-03T17:47:39.659Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:39.659Z pw:api => page.waitForFunction started
+2026-11-03T17:47:39.696Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:39.696Z pw:api => page.evaluate started
+2026-11-03T17:47:39.709Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:39.710Z pw:api => page.evaluate started
+2026-11-03T17:47:39.723Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:39.723Z pw:api => page.waitForFunction started
+2026-11-03T17:47:39.791Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:39.792Z pw:api => page.waitForFunction started
+2026-11-03T17:47:39.847Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:39.847Z pw:api => page.evaluate started
+2026-11-03T17:47:39.894Z pw:api <= page.evaluate succeeded
+2026-11-03T17:47:39.894Z pw:api => page.waitForFunction started
+2026-11-03T17:47:39.937Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:39.937Z pw:api => browser.newContext started
+2026-11-03T17:47:39.956Z pw:api <= browser.newContext succeeded
+2026-11-03T17:47:39.956Z pw:api => browserContext.exposeBinding started
+2026-11-03T17:47:39.956Z pw:api <= browserContext.exposeBinding succeeded
+2026-11-03T17:47:39.956Z pw:api => browserContext.addInitScript started
+2026-11-03T17:47:39.956Z pw:api <= browserContext.addInitScript succeeded
+2026-11-03T17:47:39.956Z pw:api => browserContext.newPage started
+2026-11-03T17:47:40.260Z pw:api => browserContext.newCDPSession started
+2026-11-03T17:47:40.260Z pw:api <= browserContext.newPage succeeded
+2026-11-03T17:47:40.260Z pw:api => page.goto started
+2026-11-03T17:47:40.261Z pw:api navigating to "https://localhost:43303/mp/play?code=*", waiting until "load"
+2026-11-03T17:47:40.279Z pw:api <= browserContext.newCDPSession succeeded
+2026-11-03T17:47:40.282Z pw:api => cdpSession.send started
+2026-11-03T17:47:40.371Z pw:api   "commit" event fired
+2026-11-03T17:47:40.371Z pw:api   navigated to "https://localhost:43303/mp/play?code=*"
+2026-11-03T17:47:40.426Z pw:api <= cdpSession.send succeeded
+2026-11-03T17:47:40.885Z pw:api   "domcontentloaded" event fired
+2026-11-03T17:47:40.898Z pw:api   "load" event fired
+2026-11-03T17:47:40.899Z pw:api <= page.goto succeeded
+2026-11-03T17:47:40.899Z pw:api => page.waitForFunction started
+2026-11-03T17:47:40.998Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:41.001Z pw:api => page.fill started
+2026-11-03T17:47:41.002Z pw:api waiting for locator('#jName')
+2026-11-03T17:47:41.091Z pw:api   locator resolved to <input id="jName" maxlength="24" enterkeyhint="go" placeholder="Adın" class="mp1-in name" autocomplete="nickname"/>
+2026-11-03T17:47:41.099Z pw:api   fill("Dördüncü")
+2026-11-03T17:47:41.099Z pw:api attempting fill action
+2026-11-03T17:47:41.099Z pw:api   waiting for element to be visible, enabled and editable
+2026-11-03T17:47:41.130Z pw:api <= page.fill succeeded
+2026-11-03T17:47:41.130Z pw:api => locator.scrollIntoViewIfNeeded started
+2026-11-03T17:47:41.131Z pw:api waiting for locator('[data-j="go"]').first()
+2026-11-03T17:47:41.163Z pw:api   locator resolved to visible <button data-j="go" class="mp1-btn pri">KATIL</button>
+2026-11-03T17:47:41.200Z pw:api attempting scroll into view action
+2026-11-03T17:47:41.200Z pw:api   waiting for element to be stable
+2026-11-03T17:47:41.255Z pw:api <= locator.scrollIntoViewIfNeeded succeeded
+2026-11-03T17:47:41.258Z pw:api => locator.tap started
+2026-11-03T17:47:41.258Z pw:api waiting for locator('[data-j="go"]').first()
+2026-11-03T17:47:41.267Z pw:api   locator resolved to <button data-j="go" class="mp1-btn pri">KATIL</button>
+2026-11-03T17:47:41.270Z pw:api attempting tap action
+2026-11-03T17:47:41.270Z pw:api   waiting for element to be visible, enabled and stable
+2026-11-03T17:47:41.296Z pw:api   "networkidle" event fired
+2026-11-03T17:47:41.338Z pw:api   element is visible, enabled and stable
+2026-11-03T17:47:41.338Z pw:api   scrolling into view if needed
+2026-11-03T17:47:41.364Z pw:api   done scrolling
+2026-11-03T17:47:41.368Z pw:api   performing tap action
+2026-11-03T17:47:41.519Z pw:api   tap action done
+2026-11-03T17:47:41.519Z pw:api   waiting for scheduled navigations to finish
+2026-11-03T17:47:41.520Z pw:api   navigations have finished
+2026-11-03T17:47:41.521Z pw:api <= locator.tap succeeded
+2026-11-03T17:47:41.521Z pw:api => page.waitForFunction started
+2026-11-03T17:47:41.571Z pw:api <= page.waitForFunction succeeded
+2026-11-03T17:47:41.571Z pw:api => page.textContent started
+2026-11-03T17:47:41.571Z pw:api waiting for locator('#jStatus')
+2026-11-03T17:47:41.583Z pw:api   locator resolved to <div id="jStatus" class="mp1-status bad">Oda dolu.</div>
+2026-11-03T17:47:41.583Z pw:api <= page.textContent succeeded
+2026-11-03T17:47:41.584Z pw:api => page.screenshot started
+2026-11-03T17:47:41.584Z pw:api taking page screenshot
+2026-11-03T17:47:41.586Z pw:api waiting for fonts to load...
+2026-11-03T17:47:41.588Z pw:api fonts loaded
+2026-11-03T17:47:42.008Z pw:api <= page.screenshot succeeded
+PASS B1 kapasite 3: host + 2 misafir (ikisi de çift dokunmayla) girer, tek koltuk tutar; dördüncü telefon "Oda dolu." görür; host küçük düğmede 👥 3
+PASS sayfa hataları yok
+2026-11-03T17:47:42.012Z pw:api => browser.close started
+2026-11-03T17:47:42.266Z pw:api <= browser.close succeeded
+2026-11-03T17:47:42.266Z pw:api => browser.close started
+2026-11-03T17:47:42.415Z pw:api <= browser.close succeeded
+2026-11-03T17:47:42.415Z pw:api => browser.close started
+2026-11-03T17:47:42.599Z pw:api <= browser.close succeeded
+GEÇEN: 7 KALAN: 0

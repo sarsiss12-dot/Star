@@ -1,0 +1,6 @@
+✓ gizlenen karar Save8 olay codecinde korunur fakat hidden taşınmaz; menü erişimi sürer
+✓ farklı kayıtlar aynı seed/uid/key/born/payload taşıyabilir; olay fingerprinti kayıt kimliği değildir
+✓ aynı checkpoint tekrar yüklenince yeni bildirimde uid/key/born yeniden kullanılabilir
+✓ gizlenen diplomatik teklif kayıttan sonra Gelen Kutusunda karar bekler; kabul kaynakları yalnız bir kez değiştirir
+✓ misafir aynası global olay kuyruğunu ve özgün RNG/seed bilgisini dışarı taşımaz
+GEÇEN: 5 KALAN: 0

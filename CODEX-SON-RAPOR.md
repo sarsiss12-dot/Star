@@ -1,13 +1,12 @@
 # Son Codex raporu
 
-- Son tamamlanan faz: **MP.8.3 — Multiplayer giriş kararlılığı**.
-- Rapor: [MP83-GIRIS-KARARLILIGI-SONUC.md](reports/codex/MP83-GIRIS-KARARLILIGI-SONUC.md).
-- Geliştirme dalı: `codex/stars-mp83-join-stability`; PR tabanı: `codex/stars-mp82-test-stability`.
-- Doğrulanmış kaynak HEAD: `e000bb0c488c046b3ede9d8fab86eb00ffe8889a`.
-- A1: kontrollü deney eski KATIL koordinatının 40 px odak kaydırmasından sonra GERİ bağlantısına gittiğini gerçek dokunmayla kanıtladı. Test her dokunuşta güncel hedefi ölçüyor; toplam çift/üç dokunuş korunuyor.
-- Yeni MP.7.4 koşuları: taban **1/6 FAIL**; iki tanı **7/0**, **7/0**; ilk helper **6/1 FAIL** (yeni guard); son helper iki temiz koşu **7/0**, **7/0 PASS**. Kontrollü regresyon çıkış 0.
-- Tarihsel B1 kök nedeni açık; kapanmış sayılmaz. Ürün kodu değişmedi; Save8/RNG, build 96h10p5 ve MP.8 korundu.
-- NOT RUN: tam regresyon, PERF.1/PERF.2 tekrarları, MP.8 senaryoları, Docker, Android ve canlı Render.
-- GitHub/PR teslim kaydı: faz raporunun sonunda.
-
-- GitHub teslimi: `64e338062056ea9fc5902cc655838492796f014f` rapor/test commit’i push edildi ve uzak HEAD doğrulandı. PR iki denemede GraphQL Forbidden nedeniyle oluşturulamadı; [doğru tabanla oluşturma ekranı](https://github.com/sarsiss12-dot/Star/compare/codex/stars-mp82-test-stability...codex/stars-mp83-join-stability?expand=1).
+- Son faz: **MP.8.4 — Bildirim/kayıt kimliği güvenlik analizi**. **Gizleme kalıcılığı uygulanmadı; ana kabul kriteri karşılanmadı.**
+- Rapor: [MP84-BILDIRIM-KALICILIGI-SONUC.md](reports/codex/MP84-BILDIRIM-KALICILIGI-SONUC.md).
+- Dal: `codex/stars-mp84-notice-persistence`; PR tabanı: `codex/stars-mp83-join-stability`.
+- Doğrulanmış başlangıç HEAD: `3017fbe7e38d6261f3f7f4683e3fcafa66299294`.
+- Kanıt: farklı kayıtlar aynı olay kimliğini taşıyabilir; checkpoint sonrası UID/key/born yeniden kullanılabilir. Ham SP Save8'de soy kimliği yok. Riskli otomatik yerel eşleştirme eklenmedi; yeni kayıt-zarfı/sidecar sözleşmesi önerildi.
+- PASS: kimlik denetimi 5/0; PERF.2 5/0; Chromium MP.7.4 7/0, MP.7.5 6/0, MP.8 N 9/0, MP.8 R (6+6 ay) 5/0; Node MP.7.4 6/0, MP.7.5 4/0.
+- B1 yeniden üretilemedi, açık. A1 test düzeltmesi korundu.
+- Ürün/Save8/RNG değişmedi; build 96h10p5, MP.8. Yeni ZIP yok.
+- NOT RUN: uygulanmamış kalıcılık kabul senaryoları ve storage hata testleri, tam regresyon/uzun kampanyalar, Docker, fiziksel Android, canlı Render.
+- GitHub/PR teslim kaydı faz raporunun sonunda.
