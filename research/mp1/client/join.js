@@ -50,12 +50,15 @@ function connect(){
     /* Kapanış kodu son sözdür: neden çerçevesi yolda kaybolsa bile oda kapandı/atıldın/dolu döngüye girmez. */
     /* MP.5: yeniden bağlanırken "oda dolu" kalıcı değildir — relay eski (ölü) soketimizi henüz bırakmamış olabilir; denemeye devam */
     const retryFull=ev.code===4005&&J.reconnecting&&['lobby','game'].includes(J.screen);
-    if(!J.closed&&!retryFull&&(ev.code===4003||FINAL[ev.code])){J.closed=true;J.screen='join';J.lobby=null;J.err=ev.code===4003?kickMsg(ev.reason):V.ERR[ev.reason]||V.ERR[FINAL[ev.code]];}
+    if(!J.closed&&!retryFull&&(ev.code===4003||FINAL[ev.code])){J.closed=true;J.screen='join';J.lobby=null;J.err=ev.code===4003?kickMsg(ev.reason):ev.code===4005?fullMsg():V.ERR[ev.reason]||V.ERR[FINAL[ev.code]];}
     else if(J.screen==='connecting'){J.screen='join';J.err='Bağlanılamadı. İnternet bağlantını ve davet adresini kontrol et.';}   // el sıkışma reddi / sunucu yok
     if(!J.leaving&&!J.closed&&['lobby','game'].includes(J.screen)){const d=Math.min(8000,400*2**J.retry++);J.reconnecting=true;setTimeout(()=>{if(!J.ws&&!J.closed)connect();},d);}
     render();};
 }
 const FINAL={4001:'room-closed',4004:'invalid-code',4005:'room-full',4008:'rate-limited',4029:'rate-limited'};
+/* MP.8: dolu odaya aynı tarayıcıdan ikinci sekme — relay soketi jeton host'a ulaşmadan reddeder (koltuk güvenliği doğru); bu tarayıcıda
+   bu odanın oyuncu kimliği varsa "oda dolu" yerine gerçek durumu söyle. Jeton gösterilmez, kural değişmez. */
+function fullMsg(){return load().token?V.ERR['seat-elsewhere']:V.ERR['room-full'];}
 function kickMsg(r){return r==='left'?'Odadan ayrıldın.':r==='replaced'?'Bu oyuncu başka bir sekmede açıldı.':r&&r!=='kicked'&&V.ERR[r]||V.ERR.kicked;}
 function hello(){const s=load();raw({v:1,type:'hello',name:J.name,...(s.token?{token:s.token}:{})});}
 function receive(t,t0){
@@ -67,7 +70,7 @@ function receive(t,t0){
     else if(m.t==='room-closed'){J.closed=true;J.screen='join';J.lobby=null;J.err=V.ERR[m.reason==='server-restart'?'server-restart':'room-closed'];}
     else if(m.t==='kicked'){J.closed=true;J.screen='join';J.lobby=null;J.err=kickMsg(m.reason);}   // relay K nedeni: host'un gerçek gerekçesi
     else if(m.t==='error'){J.errors.push(m.code);if(m.code==='room-full'&&J.reconnecting&&['lobby','game'].includes(J.screen))return render();
-      if(['invalid-code','room-full','room-closed','rate-limited','server-full'].includes(m.code)){J.closed=true;J.screen='join';J.err=V.ERR[m.code]||m.code;}}
+      if(['invalid-code','room-full','room-closed','rate-limited','server-full'].includes(m.code)){J.closed=true;J.screen='join';J.err=m.code==='room-full'?fullMsg():V.ERR[m.code]||m.code;}}
     return render();}
   if(t[0]!=='H')return;let m;try{m=JSON.parse(t.slice(1));}catch{return;}if(m.v!==1)return;
   if(window.MP6Stars&&MP6Stars.onMessage(m))return;   // MP.6: ayna dünya (gerçek STARS arayüzü)

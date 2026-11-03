@@ -108,7 +108,7 @@ let relay,px,base,tls,bH,bB,bC;
       metrics['pill_'+(p===H?'host':'B')]=r;assert(r.w<=130&&r.h<=60,JSON.stringify(r));assert.match(r.text,/👥\s*\d/);assert.equal(r.overlap,false,'pill overlaps the time box');
       await shot(p,'a2-'+(p===H?'host':'b')+'-pill');
       await tap(p,sel);await wait(p,()=>!document.getElementById('mp1Mini').classList.contains('mp74-compact'));
-      const t=await p.textContent('#mp1Mini');assert.match(t,/ÇOK OYUNCULU/);if(p===H){assert.match(t,/[A-HJ-NP-Z2-9]{5}/);assert.match(t,/OYUNU KAYDET/);}else assert.match(t,/MP\.7\.[45]/);
+      const t=await p.textContent('#mp1Mini');assert.match(t,/ÇOK OYUNCULU/);if(p===H){assert.match(t,/[A-HJ-NP-Z2-9]{5}/);assert.match(t,/OYUNU KAYDET/);}else assert.match(t,/MP\.(7\.[45]|8)/);
       await shot(p,'a2-'+(p===H?'host':'b')+'-open');
       await tap(p,sel);await wait(p,()=>document.getElementById('mp1Mini').classList.contains('mp74-compact'));}
   });

@@ -378,7 +378,9 @@ function gate(){
   /* MP.7.4: kaydırılan kartın imzası saklanır (ayna G.inbox'ı her kurulumda yeniler) */
   if(typeof UI.noteSwipe==='function'){const ns0=UI.noteSwipe.bind(UI);UI.noteSwipe=function(uid){const it=(G.inbox||[]).find(n=>n.uid===+uid),ok=ns0(uid);if(ok&&it&&S.on)S.swiped.add(noteSig(it));return ok;};}
   const DI=DiplomaticInbox,resolve0=DI.resolve.bind(DI),gate0=DI.gate.bind(DI);
-  DI.gate=function(rec){if(S.on&&rec&&(rec._mpWait||rec.mp&&S.decWait.has('respond:'+rec.mp+':')))return {ok:false,why:'Karar gönderildi; host yanıtı bekleniyor'};if(S.on&&rec&&rec.mpSq!==undefined){return rec.status==='pending'?{ok:true,why:''}:{ok:false,why:'Teklif sonuçlandı',terminal:true};}
+  /* MP.8: karar kilidi yalnız aynı bağlantı kuşağında geçerli (bkz. tam ayna) */
+  const decBusy=dk=>{const w=S.decWait.get(dk);return !!w&&w.gen===(S.gen|0);};
+  DI.gate=function(rec){if(S.on&&rec&&(rec._mpWait||rec.mp&&decBusy('respond:'+rec.mp+':')))return {ok:false,why:'Karar gönderildi; host yanıtı bekleniyor'};if(S.on&&rec&&rec.mpSq!==undefined){return rec.status==='pending'?{ok:true,why:''}:{ok:false,why:'Teklif sonuçlandı',terminal:true};}
     if(S.on&&rec&&rec.mp){if(rec.status!=='pending')return {ok:false,why:'Teklif sonuçlandı',terminal:true};return {ok:true,why:''};}return gate0(rec);};
   DI.resolve=function(id,yes,option,world){
     if(!S.on)return resolve0(id,yes,option,world);
@@ -391,11 +393,11 @@ function gate(){
     else if(rec.kind==='vassal'){const q=G.emps[rec.fid]?.vassalTalk;if(!q)return {ok:false,why:'Müzakere bulunamadı'};c={kind:'vassalReply',sub:real(rec.fid),id:q.id,round:q.round,action:yes?'accept':'reject'};}
     if(!c)return NOT_MP;
     /* MP.7.4: çift dokunma ikinci komut göndermez — bekleyen karar komut hedefine göre tutulur (ayna kaydı yeniden kursa da) */
-    const dk=decKey(c);if(S.decWait.has(dk))return {ok:false,why:'Karar gönderildi; host yanıtı bekleniyor'};
-    const cid=send(c);if(cid)S.decWait.set(dk,cid);if(!cid)return {ok:false,why:'Host bağlı değil; karar gönderilmedi.'};
+    const dk=decKey(c);if(decBusy(dk))return {ok:false,why:'Karar gönderildi; host yanıtı bekleniyor'};
+    const cid=send(c);if(cid)S.decWait.set(dk,{cid,gen:S.gen|0});if(!cid)return {ok:false,why:'Host bağlı değil; karar gönderilmedi.'};
     /* MP.7.4: sonuç host'tan gelene kadar kayıt BEKLİYOR kalır (iyimser "kabul edildi" yok); kart ve gelen kutusu yanıtla güncellenir */
     rec._mpWait=cid;rec.why='Karar host\'a gönderildi — yanıt bekleniyor';
-    waits[cid]=res=>{delete rec._mpWait;S.decWait.delete(dk);
+    waits[cid]=res=>{delete rec._mpWait;if((S.decWait.get(dk)||{}).cid===cid)S.decWait.delete(dk);
       if(res.status==='ok'){rec.status=yes?'accepted':'rejected';rec.finished=G.day;rec.why='';G.inbox=(G.inbox||[]).filter(n=>!(rec.mp&&n.key==='mp71:'+rec.mp)&&n.rec!==rec.id&&!(rec.note&&n.uid===rec.note.uid));}
       else rec.why='Host reddetti: '+why(res);
       toast(res.status==='ok'?'Kararın host\'ta uygulandı.':'Host reddetti: '+why(res),res.status!=='ok');try{UI.drawInbox();UI.topbar();if(typeof ArchiveUI!=='undefined'&&ArchiveUI.selected===rec.id&&!doc.getElementById('modal').classList.contains('hidden'))ArchiveUI.record(rec.id);}catch{}};
@@ -437,9 +439,12 @@ function paintSpeed(){for(const b of doc.querySelectorAll('#timepod .sp'))b.clas
 
 /* ---- 3. ayna dünya → motorun kendi deserialize'ı ---- */
 function onMessage(m){
-  if(m.type==='mirror'){S.mirror=m.full;S.rev=m.rev;S.stats.mirrors++;schedule();return true;}
+  /* MP.8: tam ayna = yeni bağlantı (ya da yeniden eşitleme). Önceki bağlantıda gönderilen kararların yanıtı artık gelmez
+     (kopmada kaybolan komut host'a hiç ulaşmamış olabilir); o kuşağın karar kilitleri geçersiz. Gerçek sonuç aynada: uygulandıysa
+     kayıt kapalıdır, uygulanmadıysa oyuncu yeniden karar verebilir. Tam bir kez kuralı host'ta (kapalı teklife ikinci yanıt 'closed'). */
+  if(m.type==='mirror'){S.mirror=m.full;S.rev=m.rev;S.mirrorAt=Date.now();S.gen=(S.gen|0)+1;S.stats.mirrors++;schedule();return true;}
   if(m.type==='mirrorDelta'){if(!S.mirror||m.base!==S.rev){S.stats.resyncs++;S.J&&S.J.sendRaw({v:1,type:'resync'});return true;}
-    StarsMirror.apply(S.mirror,m.ops);S.rev=m.rev;S.stats.deltas++;schedule();return true;}
+    StarsMirror.apply(S.mirror,m.ops);S.rev=m.rev;S.mirrorAt=Date.now();S.stats.deltas++;schedule();return true;}
   if(m.type==='speed'){if(Number.isFinite(m.n)){if(m.n<=(S.speedN||0)){S.stats.staleSpeed=(S.stats.staleSpeed||0)+1;return true;}S.speedN=m.n;}   // MP.6.3: eski hız iletisi yenisini ezmez
     S.hostSpd=m.spd|0;S.hostWant=Number.isInteger(m.want)?m.want:S.hostSpd;S.stats.speedMsgs++;paintSpeed();if(window.MP61)MP61.speed(m);return true;}
   return false;
@@ -546,7 +551,10 @@ function chip(text,good){
       /* MP.7.3: çubuğa dokununca telefonda görünür tanı satırı (sürüm · bağlantı · aşama · son hata kodu); jeton / oda anahtarı yok */
       else if(e.target.closest('#mp6Conn')){S.diag=!S.diag;chip(S.chipText,S.chipGood);}});}
   if(text!==undefined){S.chipText=text;S.chipGood=good;}
-  const diag=V.verLine()+' · '+(online()?'host bağlı':'host yok')+(S.boot.stage?' · aşama: '+S.boot.stage:'')+' · son hata: '+(S.lastErr||'yok');
+  /* MP.8: ekran görüntüsüyle teknik durum — rol, ayna sürümü ve saati, son kurulum süresi, son komut sonucu (jeton / anahtar / istihbarat yok) */
+  const hhmm=t=>t?new Date(t).toTimeString().slice(0,8):'—',lr=S.J&&S.J.results&&S.J.results.length?S.J.results[S.J.results.length-1]:null,bm=S.stats.buildMs||[];
+  const diag=V.verLine()+' · misafir · '+(online()?'host bağlı':'host yok')+(S.boot.stage?' · aşama: '+S.boot.stage:'')+' · ayna r'+(S.rev|0)+' '+hhmm(S.mirrorAt)+
+    (bm.length?' · kurulum '+Math.round(bm[bm.length-1])+' ms':'')+' · son komut: '+(lr?lr.status+(lr.code?' '+lr.code:''):'yok')+' · son hata: '+(S.lastErr||'yok');
   /* MP.7.4: kapalıyken küçük düğme (👥 odadaki bağlı insan sayısı + bağlantı noktası); dokununca aynı satır + tanı açılır.
      Host bağlantısı yoksa (kritik) kendiliğinden açık. */
   const open=!!S.diag||!S.chipGood,L=S.J&&S.J.lobby,n0=L&&L.players?L.players.filter(p=>p.online!==false).length:0;
