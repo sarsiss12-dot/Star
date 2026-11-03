@@ -8,3 +8,5 @@
 - Yeni sonuçlar: MP.7.4 taban **1 PASS / 6 FAIL**; iki sıralı harici tanı koşusu **7/0 PASS**, **7/0 PASS**. A1 yeniden üretildi; B1 üç koşuda geçti, aralıklı hata kapanmış sayılmaz.
 - NOT RUN: bu fazda PERF.1/PERF.2, MP.8 senaryoları, tam regresyon, Docker testleri, fiziksel Android ve canlı Render.
 - Runtime/test kodu değişmedi; Save8/RNG ve yayın dosyaları korunuyor.
+
+- GitHub teslimi: rapor ve kanıtlar geliştirme dalına push edildi; uzak HEAD doğrulandı. PR API erişimi engelli kaldı.

@@ -78,7 +78,11 @@ Runtime değişmedi: build `96h10p5`, MP sürümü `MP.8` korundu. Yeni ZIP/mani
 
 PR oluşturma denendi; `gh pr create` GraphQL isteği `Forbidden` döndü. Salt okunur GraphQL ve REST sorguları da `Forbidden` döndü. Bu sonuç Git push yetkisinin yokluğunu tek başına kanıtlamaz. PR oluşturulmuş gibi gösterilmiyor; doğrulanmış PR bağlantısı yok.
 
-Rapor geliştirme dalına commit edilerek gönderilecek; gönderim sonucu ve uzak HEAD doğrulaması aşağıdaki teslim kaydında belirtilecektir. `main` hedeflenmez. GitHub API erişimi sağlandığında PR başlığı: “MP.8.2: A1/B1 tanısı ve kalıcı Codex raporları”; tabanı `claude/stars-mp81-final-handoff` olmalıdır.
+İlk rapor/kanıt commit’i `4fd2aeb` geliştirme dalına başarıyla push edildi; uzak dal `git ls-remote` ile doğrulandı. Bu teslim kaydı ek bir rapor commit’iyle aynı dala gönderilir; nihai SHA sohbet tesliminde verilir. `main` hedeflenmedi. Uzak dal oluşturulduktan sonra PR oluşturma yeniden denendi; GraphQL yine `Forbidden` döndü. GitHub API erişimi sağlandığında PR başlığı: “MP.8.2: A1/B1 tanısı ve kalıcı Codex raporları”; tabanı `claude/stars-mp81-final-handoff` olmalıdır.
+
+GitHub raporu: https://github.com/sarsiss12-dot/Star/blob/codex/stars-mp82-test-stability/reports/codex/MP82-TEST-KARARLILIGI-SONUC.md
+
+PR oluşturma ekranı (oluşturulmuş PR değildir; taban önceden seçili): https://github.com/sarsiss12-dot/Star/compare/claude/stars-mp81-final-handoff...codex/stars-mp82-test-stability?expand=1
 
 ## Kalan sorunlar ve sonraki faz
 
