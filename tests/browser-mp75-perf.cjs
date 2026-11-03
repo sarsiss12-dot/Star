@@ -10,6 +10,7 @@ const fs=require('fs'),path=require('path'),assert=require('assert/strict'),{exe
 const root=path.resolve(__dirname,'..'),out=path.resolve(process.env.STARS_OUTPUT||path.join(root,'../evidence/mp75perf'));fs.mkdirSync(out,{recursive:true});
 const relayMod=require('../research/mp1/server/relay.js'),{selfSigned,startProxy}=require('./helpers/mp11-tls-proxy.js');
 const results=[],errors=[],metrics={};
+const WIN=+(process.env.MP75_WINDOW||3);   /* PERF.2: gerçek döngü ölçüm penceresi (oyun ayı); varsayılan 3 = MP.7.5 */
 const PANE=process.env.MP75_PANE||'diplo',SIZE=process.env.MP75_SIZE||'orta',AI=+(process.env.MP75_AI||5),CHECK=(process.env.MP75_MONTHS||'60,120').split(',').map(Number);
 async function test(name,fn){const t0=Date.now();
   try{await fn();results.push({name,status:'PASS',ms:Date.now()-t0});console.log('PASS '+name);}
@@ -53,7 +54,7 @@ async function room(H,cap,guests){
   await H.goto(base+'/');await wait(H,()=>typeof setupGame==='function'&&document.getElementById('mp1Btn')&&window.MP7Setup&&window.MP71Dip);
   await tap(H,'#mp1Btn');await tap(H,'[data-m="create"]');await wait(H,()=>MP1Host.lobby&&MP1Host.lobby.mode==='design'&&MP1Host.lobby.phase==='waiting');
   if(cap>2){await H.selectOption('#mp7Cap',String(cap));await wait(H,c=>MP1Host.lobby.capacity===c,cap);}
-  {const r=await H.evaluate(([s,a])=>MP1Host.host.configure({size:s,aiCount:a,seed:+(process.env.MP75_SEED||22)}),[SIZE,AI]);if(!r.ok)throw Error('configure '+JSON.stringify(r));}
+  {const r=await H.evaluate(([s,a,z])=>MP1Host.host.configure({size:s,aiCount:a,seed:z}),[SIZE,AI,+(process.env.MP75_SEED||22)]);if(!r.ok)throw Error('configure '+JSON.stringify(r));}
   await tap(H,'#mp7EditMe');await design(H,{name:'Kızıl Muhafız',mizac:'militarist',origin:'standart',ethics:['mil:2'],civics:['kale_dok']});
   const link=await H.textContent('#mp1Link');
   for(const [p,name,d,taps] of guests){await joinTaps(p,link,name,taps||1);
@@ -112,10 +113,10 @@ let relay,px,base,tls,bH,bB;
       if(st.done)return;await H.waitForTimeout(3000);}};
     /* hızlı ilerletme: host simülasyonu sayfa içinde ölçüm noktasının 2 ay öncesine kadar (PERF.1 mp-host adımları + her gün yayın;
        monthTick host sarmalayıcısıyla observeHumans çağırır; misafir aynaları alır). Sonra 2 oyun ayı gerçek döngü en yüksek hızda ölçülür. */
-    const ff=async m=>{for(;;){const d=await H.evaluate(m=>{MP1Host.host.local({kind:'speed',value:0});const md=document.getElementById('modal');if(md&&!md.classList.contains('hidden'))UI.closeModal();
-        for(let i=0;i<60&&G.day<m*30-90;i++){const b=Math.floor(G.day/30),d0=Math.floor(G.day);G.day+=.5;dailyTick(.5);structTick(.5);colonyBuildTick(.5);autoExploreTick();
-          if(Math.floor(G.day/30)>b)monthTick();if(Math.floor(G.day)!==d0)MP1Host.host.publish();}return G.day;},m);
-      await H.waitForTimeout(30);if(d>=m*30-90)return;}};
+    const ff=async m=>{for(;;){const d=await H.evaluate(([m,w])=>{MP1Host.host.local({kind:'speed',value:0});const md=document.getElementById('modal');if(md&&!md.classList.contains('hidden'))UI.closeModal();
+        for(let i=0;i<60&&G.day<m*30-w*30;i++){const b=Math.floor(G.day/30),d0=Math.floor(G.day);G.day+=.5;dailyTick(.5);structTick(.5);colonyBuildTick(.5);autoExploreTick();
+          if(Math.floor(G.day/30)>b)monthTick();if(Math.floor(G.day)!==d0)MP1Host.host.publish();}return G.day;},[m,WIN]);
+      await H.waitForTimeout(30);if(d>=m*30-WIN*30)return;}};
     const reset=async()=>{for(const p of [H,Bp])await p.evaluate(()=>{const T=window.__perf;for(const k of ['month','publish','build','refresh','long'])T[k]=[];T.paneRewrites=0;T.mut=0;if(window.MP6Stars)MP6Stars.S.stats.buildMs=[];});};
     const t0=Date.now();for(const m of CHECK){const f0=Date.now();await ff(m);metrics['ffS_m'+m]=Math.round((Date.now()-f0)/1000);await H.waitForTimeout(2500);await reset();await drive(m);
       await H.evaluate(()=>MP1Host.host.local({kind:'speed',value:0}));await H.waitForTimeout(1500);const r=await snap(H,Bp,'m'+m);r.wallS=Math.round((Date.now()-t0)/1000);
