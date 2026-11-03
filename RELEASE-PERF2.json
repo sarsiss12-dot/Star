@@ -1,0 +1,31 @@
+{
+  "phase": "PERF.2",
+  "build": "96h10p5",
+  "pwa_cache": "stars-v96h10p5",
+  "save_version": 8,
+  "parent_commit": "8fa82031bd9cc4f27fff8b6ce2b2ad0ca18ee523",
+  "parent_game": "MP.7.5 (96h10p4)",
+  "parent_zip_sha256": "3ebc53ab8d15620666b7bb40b73efdbd0948b2f0469182e96aa988179c22e0d8",
+  "scope": "Host AI performance: a read-only AI evaluation window computes an empire's unchanged shadow income and the fresh trade result of port-neutral shadows once per window instead of per building candidate; supplyDistance checks usable gates directly instead of scanning the galaxy. Same decisions: Save8 bytes and RNG identical month by month. Save8 schema unchanged; PERF.1 and MP.7.5 retained.",
+  "report": "PERF2-SONUC.md",
+  "evidence": "research/perf2/",
+  "runtime_changed": [
+    "ai.js",
+    "main.js",
+    "sw.js"
+  ],
+  "single_player_save8_rng": "Save8 + RNG identical month by month vs control (12 checkpoints x 30 months; 16/16 checkpoint saves from new games byte-identical; 240->360 month identical); full Node regression 172 suites 6364/3 (3 = known faz95d_identity)",
+  "game": {
+    "file": "stars-faz96h10p5.zip",
+    "bytes": 774562,
+    "sha256": "15c247db0efa7952fc025fc7df7368eeff1adc2f8eb7c47eaf4645b8ec2c012a",
+    "crc32_file": "aa4c7676",
+    "crc": "PASS",
+    "members": 20,
+    "manifest_runtime_files": 19,
+    "repack_identical": true,
+    "verify_release_extracted": "PASS"
+  },
+  "physical_android": "NOT RUN",
+  "live_render": "NOT RUN"
+}
