@@ -17,6 +17,22 @@
    - Lobi ve bağlantı join.js'tedir (aynı modül); bu dosya oyun ekranını gerçek arayüzle değiştirir. */
 (function(){
 const doc=document;
+/* MP.8.6 NEBULA PIXELS — guest-only, one bounded deterministic texture; fresh canvas per load. */
+(()=>{
+ const build=ART.nebula;let cached=null;
+ ART.nebula=function(seed,w,h){
+  const eligible=Number.isSafeInteger(seed)&&Number.isSafeInteger(w)&&Number.isSafeInteger(h)&&w>0&&h>0&&w*h<=65536;
+  if(eligible&&cached&&cached.seed===seed&&cached.w===w&&cached.h===h){
+   try{const c=document.createElement('canvas');c.width=w;c.height=h;const g=c.getContext('2d');g.imageSmoothingEnabled=false;g.putImageData(cached.pixels,0,0);return c;}
+   catch{cached=null;} // A fresh original build remains the fallback on canvas/context failure.
+  }
+  const c=build.apply(this,arguments);cached=null;
+  if(eligible)try{cached={seed,w,h,pixels:c.getContext('2d').getImageData(0,0,w,h)};}catch{}
+  return c;
+ };
+})();
+/* END MP.8.6 NEBULA PIXELS */
+
 /* join.js lobisi için katman (oyun başlayınca gizlenir) */
 const ov=doc.createElement('div');ov.id='mp6App';ov.className='mp1-overlay mp6-join';ov.innerHTML='<div class="mp1-status">Yükleniyor…</div>';
 (doc.body||doc.documentElement).appendChild(ov);

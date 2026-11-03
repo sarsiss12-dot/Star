@@ -110,6 +110,7 @@ let relay,px,base,tls,bH,bB;
     const L=await Bp.evaluate(()=>{UI.act('activeWars');return {n:UI.activeWarsList().length,top:UI.topStatusItems().wars,html:document.getElementById('modal').textContent};});
     metrics.activeWars=L;assert.equal(L.n,L.top);assert.match(L.html,/AKTİF SAVAŞLAR/);await shot(Bp,'a3-b-active-wars');await Bp.evaluate(()=>UI.closeModal());
     const id=await H.evaluate(x=>{const e=G.emps[x];e.lastOffer=e.lastOffer||{};e.lastOffer[1]=G.day;UI.peaceOffer(e);MP1Host.host.publish();const o=MP1Host.host.dip.offers.filter(o=>o.from===x&&o.to===1&&o.status==='pending').at(-1);return o?o.id:null;},x);
+    if(!id)metrics.peaceFailure=await H.evaluate(x=>({day:G.day,ai:x,aiIsAI:G.emps[x].ai,guestIsAI:G.emps[1].ai,wars:G.emps[x].war,lastOffer:G.emps[x].lastOffer,offers:MP1Host.host.dip.offers.map(o=>({id:o.id,from:o.from,to:o.to,status:o.status,give:o.give,want:o.want}))}),x);
     assert(id,'AI peace offer to the guest');const key='mp71:'+id;
     await Bp.waitForFunction(k=>{const n=(G.inbox||[]).find(n=>n.key===k);return n&&document.querySelector('#inbox [data-x="'+n.uid+':y"]');},key,{timeout:30000,polling:100});
     const b=await Bp.evaluate(k=>{const n=G.inbox.find(n=>n.key===k),r=document.querySelector('#inbox [data-x="'+n.uid+':y"]').getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2};},key);

@@ -13,6 +13,7 @@ const results=[],errors=[],metrics={};
 const CPU=Number(process.env.MP75_CPU||1);if(![1,4].includes(CPU))throw Error('MP75_CPU 1|4');
 const WIN=+(process.env.MP75_WINDOW||3);   /* PERF.2: gerçek döngü ölçüm penceresi (oyun ayı); varsayılan 3 = MP.7.5 */
 const PANE=process.env.MP75_PANE||'diplo',SIZE=process.env.MP75_SIZE||'orta',AI=+(process.env.MP75_AI||5),CHECK=(process.env.MP75_MONTHS||'60,120').split(',').map(Number);
+if(process.env.MP86_PROFILE==='1'&&CHECK.length!==1)throw Error('MP86_PROFILE tek checkpoint gerektirir: profil host dünyasını ilerletir; salt kayıt için MP86_CAPTURE=1');
 async function test(name,fn){const t0=Date.now();
   try{await fn();results.push({name,status:'PASS',ms:Date.now()-t0});console.log('PASS '+name);}
   catch(e){results.push({name,status:'FAIL',error:String(e&&e.stack||e).slice(0,1800)});console.log('FAIL '+name+'\n'+(e&&e.stack||e));}}
@@ -127,7 +128,7 @@ let relay,px,base,tls,bH,bB;
       await H.waitForTimeout(30);if(d>=m*30-WIN*30)return;}};
     const reset=async()=>{for(const p of [H,Bp])await p.evaluate(()=>{const T=window.__perf;for(const k of ['month','publish','build','refresh','deserialize','frames','long'])T[k]=[];T.paneRewrites=0;T.mut=0;T.measuring=true;T.lastFrame=null;T.start=performance.now();if(window.MP6Stars)MP6Stars.S.stats.buildMs=[];});};
     const t0=Date.now();for(const m of CHECK){const f0=Date.now();await ff(m);metrics['ffS_m'+m]=Math.round((Date.now()-f0)/1000);await H.waitForTimeout(2500);for(const c of cpuSessions)await c.send('Emulation.setCPUThrottlingRate',{rate:CPU});await reset();wires.host.reset();wires.guest.reset();await drive(m);
-      await H.evaluate(()=>MP1Host.host.local({kind:'speed',value:0}));await H.waitForTimeout(1500);const r=await snap(H,Bp,'m'+m);assert(r.month>=m&&r.host.monthTick.n>=WIN,'ölçüm hedef aya ulaşmalı ve pencerenin ay adımları çalışmalı');r.cpuRate=CPU;r.requestedSeed=+(process.env.MP75_SEED||22);r.wire={host:wires.host.snap(),guest:wires.guest.snap()};for(const p of [H,Bp])await p.evaluate(()=>{window.__perf.measuring=false;});for(const c of cpuSessions)await c.send('Emulation.setCPUThrottlingRate',{rate:1});r.wallS=Math.round((Date.now()-t0)/1000);
+      await H.evaluate(()=>MP1Host.host.local({kind:'speed',value:0}));await H.waitForTimeout(1500);const r=await snap(H,Bp,'m'+m);assert(r.month>=m&&r.host.monthTick.n>=WIN,'ölçüm hedef aya ulaşmalı ve pencerenin ay adımları çalışmalı');r.cpuRate=CPU;r.requestedSeed=+(process.env.MP75_SEED||22);r.wire={host:wires.host.snap(),guest:wires.guest.snap()};for(const p of [H,Bp])await p.evaluate(()=>{window.__perf.measuring=false;});for(const c of cpuSessions)await c.send('Emulation.setCPUThrottlingRate',{rate:1});r.wallS=Math.round((Date.now()-t0)/1000);if(process.env.MP86_PROFILE==='1'||process.env.MP86_CAPTURE==='1')await require('./helpers/mp86-profile.cjs')(H,Bp,out,m);
       await Bp.evaluate(()=>{if(!document.getElementById('diploPane').classList.contains('show'))UI.openDiplo();});await H.evaluate(()=>MP1Host.host.local({kind:'speed',value:4}));}
   });
 }catch(e){console.log('FATAL',e);results.push({name:'FATAL',status:'FAIL',error:String(e&&e.stack||e)});}

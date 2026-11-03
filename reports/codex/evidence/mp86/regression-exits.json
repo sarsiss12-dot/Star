@@ -1,0 +1,34 @@
+[
+  {
+    "name": "pixels",
+    "exit": 0
+  },
+  {
+    "name": "perf1",
+    "exit": 0
+  },
+  {
+    "name": "perf2",
+    "exit": 0
+  },
+  {
+    "name": "mp74",
+    "exit": 0
+  },
+  {
+    "name": "mp75",
+    "exit": 1
+  },
+  {
+    "name": "mp8-N",
+    "exit": 0
+  },
+  {
+    "name": "mp8-R6",
+    "exit": 0
+  },
+  {
+    "name": "mp73",
+    "exit": 0
+  }
+]

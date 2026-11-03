@@ -1,0 +1,328 @@
+{
+  "samples": 921,
+  "wallMs": 1985.551,
+  "self": [
+    {
+      "fn": "(program) :0",
+      "ms": 642.67
+    },
+    {
+      "fn": "txCaptureGraph diplomacy.js:2057",
+      "ms": 264.46
+    },
+    {
+      "fn": "nebula map.js:616",
+      "ms": 244.7
+    },
+    {
+      "fn": "recalcMods main.js:2136",
+      "ms": 103.95
+    },
+    {
+      "fn": "deserialize main.js:7887",
+      "ms": 91.6
+    },
+    {
+      "fn": "hash2 main.js:34",
+      "ms": 49.96
+    },
+    {
+      "fn": "fbm main.js:46",
+      "ms": 48.83
+    },
+    {
+      "fn": "putImageData :0",
+      "ms": 31.01
+    },
+    {
+      "fn": "applySaveData main.js:7914",
+      "ms": 30.84
+    },
+    {
+      "fn": "(garbage collector) :0",
+      "ms": 28.6
+    },
+    {
+      "fn": "restore economic-ledger.js:36",
+      "ms": 25.3
+    },
+    {
+      "fn": "lerp main.js:15",
+      "ms": 21.85
+    },
+    {
+      "fn": "finish economic-ledger.js:51",
+      "ms": 17.11
+    },
+    {
+      "fn": "add main.js:2156",
+      "ms": 16.28
+    },
+    {
+      "fn": "vnoise main.js:40",
+      "ms": 15.83
+    },
+    {
+      "fn": "empireIncome economy.js:361",
+      "ms": 12.04
+    },
+    {
+      "fn": "economyTick economy.js:516",
+      "ms": 11.96
+    },
+    {
+      "fn": "getContext :0",
+      "ms": 11.85
+    },
+    {
+      "fn": "createBiquadFilter :0",
+      "ms": 9.72
+    },
+    {
+      "fn": "read news.js:43",
+      "ms": 9.55
+    },
+    {
+      "fn": "restoreEventsWorld main.js:7348",
+      "ms": 9.25
+    },
+    {
+      "fn": "buildBorders map.js:796",
+      "ms": 9.22
+    },
+    {
+      "fn": "(anon) main.js:7999",
+      "ms": 8.77
+    },
+    {
+      "fn": "restorePoliticalWorld main.js:6732",
+      "ms": 8.61
+    },
+    {
+      "fn": "embargoMods diplomacy.js:5745",
+      "ms": 8.56
+    },
+    {
+      "fn": "draw map.js:1720",
+      "ms": 8.27
+    },
+    {
+      "fn": "jsonSafeClone main.js:6686",
+      "ms": 8.23
+    },
+    {
+      "fn": "validSaveEnvelope main.js:7842",
+      "ms": 8.16
+    },
+    {
+      "fn": "setAttribute :0",
+      "ms": 7.72
+    },
+    {
+      "fn": "(anon) main.js:7381",
+      "ms": 7.46
+    },
+    {
+      "fn": "restore inbox.js:117",
+      "ms": 7.08
+    },
+    {
+      "fn": "drawImage :0",
+      "ms": 6.93
+    },
+    {
+      "fn": "observePlayerHabitats main.js:3750",
+      "ms": 6.84
+    },
+    {
+      "fn": "createOscillator :0",
+      "ms": 6.81
+    },
+    {
+      "fn": "decodeNote main.js:7283",
+      "ms": 6.05
+    },
+    {
+      "fn": "tradeLinks economy.js:231",
+      "ms": 5.76
+    },
+    {
+      "fn": "window.deserialize :4",
+      "ms": 5.67
+    },
+    {
+      "fn": "add :0",
+      "ms": 4.67
+    },
+    {
+      "fn": "refreshIdentityLayerButtons main.js:9506",
+      "ms": 4.56
+    },
+    {
+      "fn": "_num main.js:7145",
+      "ms": 4.54
+    }
+  ],
+  "inclusive": [
+    {
+      "fn": "(root) :0",
+      "ms": 1983.76
+    },
+    {
+      "fn": "evaluate :305",
+      "ms": 1230.75
+    },
+    {
+      "fn": "(anon) :1",
+      "ms": 1230.75
+    },
+    {
+      "fn": "window.deserialize :4",
+      "ms": 1229.67
+    },
+    {
+      "fn": "deserialize main.js:7887",
+      "ms": 1223.99
+    },
+    {
+      "fn": "deserialize economic-ledger.js:138",
+      "ms": 1223.99
+    },
+    {
+      "fn": "applySaveData main.js:7914",
+      "ms": 834.94
+    },
+    {
+      "fn": "(program) :0",
+      "ms": 642.67
+    },
+    {
+      "fn": "nebula map.js:616",
+      "ms": 410.36
+    },
+    {
+      "fn": "txCaptureGraph diplomacy.js:2057",
+      "ms": 264.46
+    },
+    {
+      "fn": "recalcMods main.js:2136",
+      "ms": 145.05
+    },
+    {
+      "fn": "fbm main.js:46",
+      "ms": 136.48
+    },
+    {
+      "fn": "obj.<computed> economic-ledger.js:59",
+      "ms": 116.69
+    },
+    {
+      "fn": "economyTick economy.js:516",
+      "ms": 114.61
+    },
+    {
+      "fn": "EconomyLedger.observe.sy.system economic-ledger.js:59",
+      "ms": 114.61
+    },
+    {
+      "fn": "observe economic-ledger.js:22",
+      "ms": 114.61
+    },
+    {
+      "fn": "vnoise main.js:40",
+      "ms": 87.65
+    },
+    {
+      "fn": "rebuildDerivedStateAfterLoad main.js:7774",
+      "ms": 70.87
+    },
+    {
+      "fn": "(anon) main.js:7999",
+      "ms": 68.21
+    },
+    {
+      "fn": "View.draw commerce-ui.js:56",
+      "ms": 52.05
+    },
+    {
+      "fn": "frame main.js:9049",
+      "ms": 52.05
+    },
+    {
+      "fn": "empireIncome economy.js:361",
+      "ms": 50.99
+    },
+    {
+      "fn": "hash2 main.js:34",
+      "ms": 49.96
+    },
+    {
+      "fn": "draw map.js:1720",
+      "ms": 48.19
+    },
+    {
+      "fn": "restore economic-ledger.js:36",
+      "ms": 32.59
+    },
+    {
+      "fn": "putImageData :0",
+      "ms": 31.01
+    },
+    {
+      "fn": "buildBorders map.js:796",
+      "ms": 30.45
+    },
+    {
+      "fn": "refreshLuxury economy.js:151",
+      "ms": 30
+    },
+    {
+      "fn": "(garbage collector) :0",
+      "ms": 28.6
+    },
+    {
+      "fn": "restoreEventsWorld main.js:7348",
+      "ms": 23.76
+    },
+    {
+      "fn": "lerp main.js:15",
+      "ms": 21.85
+    },
+    {
+      "fn": "musicVoice audio.js:181",
+      "ms": 20.38
+    },
+    {
+      "fn": "pump audio.js:208",
+      "ms": 20.38
+    },
+    {
+      "fn": "finishSaveLoad main.js:8014",
+      "ms": 19.88
+    },
+    {
+      "fn": "restore inbox.js:117",
+      "ms": 18.37
+    },
+    {
+      "fn": "present main.js:8017",
+      "ms": 17.22
+    },
+    {
+      "fn": "finish economic-ledger.js:51",
+      "ms": 17.11
+    },
+    {
+      "fn": "restorePoliticalWorld main.js:6732",
+      "ms": 16.84
+    },
+    {
+      "fn": "add main.js:2156",
+      "ms": 16.28
+    },
+    {
+      "fn": "decodeNote main.js:7283",
+      "ms": 14.95
+    }
+  ]
+}

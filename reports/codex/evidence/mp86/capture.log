@@ -1,0 +1,9 @@
+ROW {"label":"m120","month":120,"context":{"seed":404,"systems":45,"states":7,"alive":7,"humans":2,"pane":"diplo"},"host":{"monthTick":{"n":3,"med":77.8,"p95":368,"max":368},"publish":{"n":46,"med":4.6,"p95":12.6,"max":508.3},"longtask":{"n":42,"med":64,"p95":171,"max":508},"heapMB":45},"guest":{"build":{"n":17,"med":22.5,"p95":81.6,"max":81.6},"deserialize":{"n":17,"med":17.2,"p95":61.2,"max":61.2},"refresh":{"n":23,"med":4.3,"p95":16.9,"max":20.7},"rafMs":{"n":441,"med":33.3,"p95":66.6,"max":549.9},"rafFps":31.690140845070424,"windowMs":13916,"longtask":{"n":18,"med":66,"p95":502,"max":502},"builds":106,"deltas":106,"minGap":600,"paneRewrites":0,"mutations":0,"surfaceKept":105,"heapMB":39}}
+CAPTURE checkpoint 120
+ROW {"label":"m240","month":237,"context":{"seed":404,"systems":45,"states":7,"alive":6,"humans":2,"pane":"diplo"},"host":{"monthTick":{"n":0},"publish":{"n":0},"longtask":{"n":2,"med":65,"p95":65,"max":65},"heapMB":135},"guest":{"build":{"n":0},"deserialize":{"n":0},"refresh":{"n":1,"med":7.8,"p95":7.8,"max":7.8},"rafMs":{"n":47,"med":33.3,"p95":66.7,"max":100},"rafFps":27.522398547758794,"windowMs":1707.6999999997206,"longtask":{"n":6,"med":81,"p95":97,"max":97},"builds":204,"deltas":206,"minGap":600,"paneRewrites":0,"mutations":0,"surfaceKept":203,"heapMB":42}}
+FAIL uzun oyun ölçümü: orta / 5 AI, misafirde diplomasi paneli açık, en yüksek hız; 120/240. ay
+AssertionError [ERR_ASSERTION]: ölçüm hedef aya ulaşmalı ve pencerenin ay adımları çalışmalı
+    at /workspace/Star/tests/browser-mp75-perf.cjs:130:132
+    at async test (/workspace/Star/tests/browser-mp75-perf.cjs:17:7)
+    at async /workspace/Star/tests/browser-mp75-perf.cjs:111:3
+GEÇEN: 0 KALAN: 1

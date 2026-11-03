@@ -1,16 +1,13 @@
 # Son Codex raporu
 
-- Son faz: **MP.8.5 — Canlı/mobil denetim**.
-- Rapor: [MP85-CANLI-MOBIL-DENETIM-SONUC.md](reports/codex/MP85-CANLI-MOBIL-DENETIM-SONUC.md).
-- [İki Android telefonla test planı](reports/codex/MP85-ANDROID-TEST-PLANI.md).
-- Dal: `codex/stars-mp85-live-mobile-audit`; taban: `codex/stars-mp84-notice-persistence`.
-- Başlangıç HEAD: `3a2a82a20271e6b8141dc965fb08b329bbfb1921`.
-- Canlı Render health/version: proxy tünelinde 403, **BLOCKED**; servis kapalı olduğu iddia edilmez. Canlı WSS/oda/sürüm eşleşmesi NOT RUN. Deploy/restart/ayar değişmedi.
-- MOBİL CHROMIUM: MP.7.4 7/0; son seed-doğrulamalı N 9/0, kısa R 5/0; MP.6.1 ilk 3 test 3/0; MP.6.3 A alt kümesi 9/0 PASS. Arka plan girdisi sentetik visibilitychange'dir. Android NOT RUN.
-- Kanıtlanan test kusurları: host tasarımı CFG'deki rastgele seed ile yapılandırmayı eziyordu; hedef aya ulaşmadan sıfır örnek PASS olabiliyordu. Test fikstürleri düzeltildi; ilk FAIL ve geçersiz-seed ölçümleri raporda saklandı.
-- Doğrulanmış seed404/45 sistem/2 insan+5 AI, 120/240 ay: 1× host med/p95 61,5/70,5 ve 105,9/165,1 ms; 4× 349,4/359,3 ve 590,9/687,1 ms. 4× guest rAF/s 14,7/11,9; fiziksel FPS değildir. Eski seed etiketli Chromium karşılaştırmaları yeniden doğrulanmalı.
-- Ürün/Save8/RNG/PERF algoritmaları değişmedi; build96h10p5/MP.8, manifest19 eşleşti; yeni ZIP yok.
-- Açık: Render erişimi/sürüm uyumu, fiziksel Android, düşük CPU tepkiselliği; B1 kök nedeni belirsiz, gizleme kalıcılığı uygulanmadı.
-- GitHub/PR teslim kaydı ana raporun sonunda.
-
-- GitHub teslimi: `869f5ebeb169fa02bab4d85588e1b41ddc32d4d1` test/rapor commit’i push edildi ve uzak HEAD doğrulandı. PR GraphQL Forbidden nedeniyle oluşturulamadı; [doğru tabanla oluşturma ekranı](https://github.com/sarsiss12-dot/Star/compare/codex/stars-mp84-notice-persistence...codex/stars-mp85-live-mobile-audit?expand=1).
+- Son faz: **MP.8.6 — Misafir yükleme optimizasyonu ve CPU profili**.
+- Rapor: [MP86-PERFORMANS-SONUC.md](reports/codex/MP86-PERFORMANS-SONUC.md).
+- Dal: `codex/stars-mp86-performance`; PR tabanı: `codex/stars-mp85-live-mobile-audit`.
+- Başlangıç HEAD: `c005f82c240ab26375f5307405d11a883207a453`.
+- Kabul edilen tek aday: MP misafirinde bounded, tek-girdili deterministik bulutsu ImageData önbelleği; her yüklemede yeni canvas. Host/AI/ekonomi değişmedi.
+- Aynı gerçek 120. ay Save8, 4× CPU, dört AB/BA turu, kol başına48 sıcak deserialize: ortanca **167,7→61,1 ms (%63,6)**, p95 **360,1→109 ms (%69,7)**. Final Save8 SHA/RNG eşit. Uçtan uca build/FPS/host ay kazancı değildir.
+- PASS: native piksel 3/0, Chromium piksel3 vaka, PERF.1 4/0, PERF.2 5/0, MP74 7/0, N9/0, kısa R5/0, MP73 8/0; MP75 kontrol ve aday tekrarları6/0.
+- FAIL korunuyor: ilk MP75 5/1 (A3 AI barış teklifi; tekrarda oluşmadı), iki 240 hedefli performans koşusu0/1 (237. ay/n=0). 240 kazanımı ve FPS artışı iddia edilmez; B1 açık.
+- Oyun96h10p5/Save8/manifest19 aynı; MP sürümü **MP.8.6**. Yeni game ZIP/CRC üretimi gerekmedi. Docker/allowlist mevcut dosyayı kapsıyor; deploy yapılmadı.
+- Render ve fiziksel Android **NOT RUN**; hiçbir Render bağlantısı veya izin isteği yapılmadı.
+- Son GitHub HEAD / PR kaydı raporun teslim bölümünde ve son sohbet yanıtındadır.

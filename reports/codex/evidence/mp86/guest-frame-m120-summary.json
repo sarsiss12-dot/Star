@@ -1,0 +1,328 @@
+{
+  "samples": 2026,
+  "wallMs": 6386.995,
+  "self": [
+    {
+      "fn": "(program) :0",
+      "ms": 5651.33
+    },
+    {
+      "fn": "frame main.js:9049",
+      "ms": 125.64
+    },
+    {
+      "fn": "topbar ui.js:2036",
+      "ms": 96.8
+    },
+    {
+      "fn": "(idle) :0",
+      "ms": 88.93
+    },
+    {
+      "fn": "draw map.js:1720",
+      "ms": 74.27
+    },
+    {
+      "fn": "drawImage :0",
+      "ms": 49.42
+    },
+    {
+      "fn": "territoryRegions map.js:1500",
+      "ms": 20.55
+    },
+    {
+      "fn": "drawTerritoryLabels map.js:1633",
+      "ms": 19.64
+    },
+    {
+      "fn": "fleetPower main.js:3071",
+      "ms": 17.94
+    },
+    {
+      "fn": "querySelectorAll :0",
+      "ms": 15.39
+    },
+    {
+      "fn": "planetConflictStates economy.js:1707",
+      "ms": 10.9
+    },
+    {
+      "fn": "getBoundingClientRect :0",
+      "ms": 9.71
+    },
+    {
+      "fn": "fillText :0",
+      "ms": 9.62
+    },
+    {
+      "fn": "(anon) main.js:5261",
+      "ms": 9.24
+    },
+    {
+      "fn": "save :0",
+      "ms": 9.19
+    },
+    {
+      "fn": "requestAnimationFrame :0",
+      "ms": 7.7
+    },
+    {
+      "fn": "paint mp61.js:48",
+      "ms": 7.55
+    },
+    {
+      "fn": "drawFleet map.js:2874",
+      "ms": 7.33
+    },
+    {
+      "fn": "measureText :0",
+      "ms": 7.18
+    },
+    {
+      "fn": "add :0",
+      "ms": 7.09
+    },
+    {
+      "fn": "stroke :0",
+      "ms": 6.85
+    },
+    {
+      "fn": "(anon) map.js:1501",
+      "ms": 6.41
+    },
+    {
+      "fn": "fillRect :0",
+      "ms": 5.75
+    },
+    {
+      "fn": "star map.js:191",
+      "ms": 5.73
+    },
+    {
+      "fn": "restore :0",
+      "ms": 5.57
+    },
+    {
+      "fn": "UI.jointPanel guest-stars.js:208",
+      "ms": 5.44
+    },
+    {
+      "fn": "track audio.js:66",
+      "ms": 5.43
+    },
+    {
+      "fn": "sysDefense main.js:3781",
+      "ms": 5.41
+    },
+    {
+      "fn": "View.draw commerce-ui.js:56",
+      "ms": 5.37
+    },
+    {
+      "fn": "createBufferSource :0",
+      "ms": 5.17
+    },
+    {
+      "fn": "buildBorders map.js:796",
+      "ms": 5.11
+    },
+    {
+      "fn": "disconnect :0",
+      "ms": 4.58
+    },
+    {
+      "fn": "update guest-stars.js:600",
+      "ms": 4.49
+    },
+    {
+      "fn": "createOscillator :0",
+      "ms": 4.43
+    },
+    {
+      "fn": "strokeText :0",
+      "ms": 4.42
+    },
+    {
+      "fn": "(anon) map.js:2517",
+      "ms": 4.22
+    },
+    {
+      "fn": "setTimeout :0",
+      "ms": 4.05
+    },
+    {
+      "fn": "(anon) map.js:665",
+      "ms": 3.87
+    },
+    {
+      "fn": "createBiquadFilter :0",
+      "ms": 3.2
+    },
+    {
+      "fn": "isArmed main.js:3019",
+      "ms": 3.19
+    }
+  ],
+  "inclusive": [
+    {
+      "fn": "(root) :0",
+      "ms": 6384.57
+    },
+    {
+      "fn": "(program) :0",
+      "ms": 5651.33
+    },
+    {
+      "fn": "frame main.js:9049",
+      "ms": 593.17
+    },
+    {
+      "fn": "View.draw commerce-ui.js:56",
+      "ms": 330.97
+    },
+    {
+      "fn": "draw map.js:1720",
+      "ms": 323.96
+    },
+    {
+      "fn": "topbar ui.js:2036",
+      "ms": 98.45
+    },
+    {
+      "fn": "(idle) :0",
+      "ms": 88.93
+    },
+    {
+      "fn": "drawTerritoryLabels map.js:1633",
+      "ms": 77.99
+    },
+    {
+      "fn": "UI.tick economy-ui.js:75",
+      "ms": 77.24
+    },
+    {
+      "fn": "tick ui.js:2126",
+      "ms": 76.56
+    },
+    {
+      "fn": "drawImage :0",
+      "ms": 49.42
+    },
+    {
+      "fn": "drawWorldImage map.js:726",
+      "ms": 44.43
+    },
+    {
+      "fn": "refresh ui.js:2142",
+      "ms": 37.21
+    },
+    {
+      "fn": "UI.refresh :7",
+      "ms": 37.21
+    },
+    {
+      "fn": "pump audio.js:208",
+      "ms": 28.06
+    },
+    {
+      "fn": "territoryRegions map.js:1500",
+      "ms": 27.83
+    },
+    {
+      "fn": "musicVoice audio.js:181",
+      "ms": 22.87
+    },
+    {
+      "fn": "fleetPower main.js:3071",
+      "ms": 17.94
+    },
+    {
+      "fn": "querySelectorAll :0",
+      "ms": 15.39
+    },
+    {
+      "fn": "paintSprites ui.js:8521",
+      "ms": 15.39
+    },
+    {
+      "fn": "planetConflictStates economy.js:1707",
+      "ms": 11.62
+    },
+    {
+      "fn": "drawPlanetConflicts map.js:1561",
+      "ms": 11.62
+    },
+    {
+      "fn": "yardCount economy.js:1028",
+      "ms": 10.82
+    },
+    {
+      "fn": "drawFleet map.js:2874",
+      "ms": 10.52
+    },
+    {
+      "fn": "drawHabitatMarker main.js:3763",
+      "ms": 10.27
+    },
+    {
+      "fn": "getBoundingClientRect :0",
+      "ms": 9.71
+    },
+    {
+      "fn": "fillText :0",
+      "ms": 9.62
+    },
+    {
+      "fn": "(anon) main.js:5261",
+      "ms": 9.24
+    },
+    {
+      "fn": "save :0",
+      "ms": 9.19
+    },
+    {
+      "fn": "paintLeaderPortraits ui.js:8491",
+      "ms": 8.04
+    },
+    {
+      "fn": "track audio.js:66",
+      "ms": 7.89
+    },
+    {
+      "fn": "requestAnimationFrame :0",
+      "ms": 7.7
+    },
+    {
+      "fn": "paint mp61.js:48",
+      "ms": 7.55
+    },
+    {
+      "fn": "(anon) map.js:1501",
+      "ms": 7.28
+    },
+    {
+      "fn": "measureText :0",
+      "ms": 7.18
+    },
+    {
+      "fn": "add :0",
+      "ms": 7.09
+    },
+    {
+      "fn": "seltag ui.js:2170",
+      "ms": 7.09
+    },
+    {
+      "fn": "stroke :0",
+      "ms": 6.85
+    },
+    {
+      "fn": "game join.js:185",
+      "ms": 6
+    },
+    {
+      "fn": "render join.js:110",
+      "ms": 6
+    }
+  ]
+}

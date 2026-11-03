@@ -1,0 +1,203 @@
+{
+  "results": [
+    {
+      "name": "uzun oyun ölçümü: orta / 5 AI, misafirde diplomasi paneli açık, en yüksek hız; 120/240. ay",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: ölçüm hedef aya ulaşmalı ve pencerenin ay adımları çalışmalı\n    at /workspace/Star/tests/browser-mp75-perf.cjs:130:132\n    at async test (/workspace/Star/tests/browser-mp75-perf.cjs:17:7)\n    at async /workspace/Star/tests/browser-mp75-perf.cjs:111:3"
+    }
+  ],
+  "metrics": {
+    "joinErrors_Bora": [],
+    "ffS_m120": 63,
+    "rows": [
+      {
+        "label": "m120",
+        "month": 120,
+        "context": {
+          "seed": 404,
+          "systems": 45,
+          "states": 7,
+          "alive": 7,
+          "humans": 2,
+          "pane": "diplo"
+        },
+        "host": {
+          "monthTick": {
+            "n": 3,
+            "med": 962.2,
+            "p95": 1246.1,
+            "max": 1246.1
+          },
+          "publish": {
+            "n": 71,
+            "med": 24.1,
+            "p95": 75.6,
+            "max": 563.3
+          },
+          "longtask": {
+            "n": 214,
+            "med": 149,
+            "p95": 260,
+            "max": 1496
+          },
+          "heapMB": 75
+        },
+        "guest": {
+          "build": {
+            "n": 37,
+            "med": 120.6,
+            "p95": 159.2,
+            "max": 162.4
+          },
+          "deserialize": {
+            "n": 37,
+            "med": 93.7,
+            "p95": 130.7,
+            "max": 139.8
+          },
+          "refresh": {
+            "n": 43,
+            "med": 20.5,
+            "p95": 88.6,
+            "max": 112.2
+          },
+          "rafMs": {
+            "n": 211,
+            "med": 149.9,
+            "p95": 383.3,
+            "max": 716.6
+          },
+          "rafFps": 5.529552971020936,
+          "windowMs": 38158.60000000009,
+          "longtask": {
+            "n": 249,
+            "med": 140,
+            "p95": 223,
+            "max": 651
+          },
+          "builds": 125,
+          "deltas": 125,
+          "minGap": 600,
+          "paneRewrites": 0,
+          "mutations": 0,
+          "surfaceKept": 124,
+          "heapMB": 46
+        },
+        "cpuRate": 4,
+        "requestedSeed": 404,
+        "wire": {
+          "host": {
+            "seconds": 38.180407194,
+            "rx": {
+              "sizes": {
+                "n": 13,
+                "med": 46,
+                "p95": 47,
+                "max": 47
+              },
+              "payloadBytes": 603,
+              "messagesPerSecond": 0.34048877304909764
+            },
+            "tx": {
+              "sizes": {
+                "n": 125,
+                "med": 110,
+                "p95": 621,
+                "max": 11891
+              },
+              "payloadBytes": 52573,
+              "messagesPerSecond": 3.273930510087477
+            }
+          },
+          "guest": {
+            "seconds": 38.18115604100001,
+            "rx": {
+              "sizes": {
+                "n": 125,
+                "med": 96,
+                "p95": 607,
+                "max": 11877
+              },
+              "payloadBytes": 50823,
+              "messagesPerSecond": 3.273866298489534
+            },
+            "tx": {
+              "sizes": {
+                "n": 12,
+                "med": 31,
+                "p95": 32,
+                "max": 32
+              },
+              "payloadBytes": 377,
+              "messagesPerSecond": 0.31429116465499524
+            }
+          }
+        },
+        "wallS": 105
+      },
+      {
+        "label": "m240",
+        "month": 237,
+        "context": {
+          "seed": 404,
+          "systems": 45,
+          "states": 7,
+          "alive": 5,
+          "humans": 2,
+          "pane": "diplo"
+        },
+        "host": {
+          "monthTick": {
+            "n": 0
+          },
+          "publish": {
+            "n": 0
+          },
+          "longtask": {
+            "n": 11,
+            "med": 122,
+            "p95": 843,
+            "max": 843
+          },
+          "heapMB": 251
+        },
+        "guest": {
+          "build": {
+            "n": 0
+          },
+          "deserialize": {
+            "n": 0
+          },
+          "refresh": {
+            "n": 0
+          },
+          "rafMs": {
+            "n": 10,
+            "med": 133.3,
+            "p95": 833.3,
+            "max": 833.3
+          },
+          "rafFps": 4.895481470602188,
+          "windowMs": 2042.7000000001863,
+          "longtask": {
+            "n": 11,
+            "med": 119,
+            "p95": 851,
+            "max": 851
+          },
+          "builds": 217,
+          "deltas": 218,
+          "minGap": 600,
+          "paneRewrites": 0,
+          "mutations": 0,
+          "surfaceKept": 216,
+          "heapMB": 35
+        }
+      }
+    ],
+    "ffS_m240": 74,
+    "errors": []
+  },
+  "size": "orta",
+  "ai": 5
+}

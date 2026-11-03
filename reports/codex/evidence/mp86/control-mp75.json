@@ -1,0 +1,84 @@
+{
+  "results": [
+    {
+      "name": "A1 oda + başlangıç; MP düğmesi host ve misafirde sol araç sütununda (#tools), hız kutusu / kaynak çubuğu / araç düğmeleriyle örtüşmez; açılınca panel, kapanınca sütuna döner",
+      "status": "PASS",
+      "ms": 11791
+    },
+    {
+      "name": "A2 misafirde açık panel yerinde güncellenir: diplomasi sayfası açıkken oyun ilerler, ayna birçok kez kurulur, panel baştan yazılmaz (surfaceKept)",
+      "status": "PASS",
+      "ms": 3831
+    },
+    {
+      "name": "A3 savaş / barış: misafir AI ile savaşta; AI barış teklifi misafirin kartına gelir; KABUL (dokunma) → host'ta savaş biter; AKTİF SAVAŞLAR üst sayaçla aynı sayıyı gösterir",
+      "status": "PASS",
+      "ms": 2378
+    },
+    {
+      "name": "A4 dokunmatik miktar: filo bileşimi penceresinde SIFIR / −50 / −10 / +10 / +50 (dokunma), klavye açılmaz; anlaşma miktarında pencerenin kendi düğmeleri korunur (çift kontrol yok)",
+      "status": "PASS",
+      "ms": 3673
+    },
+    {
+      "name": "A5 karar bekleyen olay kaydırılınca gizlenir (silinmez), ☰ durum listesinde kalır ve oradan aynı karar penceresi açılır",
+      "status": "PASS",
+      "ms": 1245
+    },
+    {
+      "name": "sayfa hataları yok",
+      "status": "PASS",
+      "ms": 0
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "joinErrors_Bora": [],
+    "dock_host": {
+      "m": [
+        6,
+        224,
+        32,
+        42
+      ],
+      "overlap": [],
+      "inView": true
+    },
+    "dock_B": {
+      "m": [
+        6,
+        269,
+        32,
+        42
+      ],
+      "overlap": [],
+      "inView": true
+    },
+    "pane": {
+      "builds": 6,
+      "rewrites": 0,
+      "kept": 12,
+      "minGap": 600,
+      "open": true
+    },
+    "activeWars": {
+      "n": 1,
+      "top": 1,
+      "html": "⚔ AKTİF SAVAŞLAR✕\n      Savaştığın devlet1Aktif savaş cephesi1\n      \n      ⚔ Birleşik Talassar Cumhuriyeti\n      0 aydır savaşta · Gerekçesiz Saldırı · aktif cephe\n      \n      Statüko barışı: Henüz iki taraf da yeterince yorulmadı (0/85)\n      Diplomasi · barış görüşmesi\n      GELEN KUTUSUKAPAT"
+    },
+    "afterPeace": {
+      "wars": 1,
+      "list": 1
+    },
+    "fleetSteps": [
+      "SIFIR",
+      "−50",
+      "−10",
+      "+10",
+      "+50",
+      "MAKS"
+    ]
+  },
+  "pass": 6,
+  "fail": 0
+}

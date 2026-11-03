@@ -1,0 +1,328 @@
+{
+  "samples": 2251,
+  "wallMs": 7514.571,
+  "self": [
+    {
+      "fn": "(program) :0",
+      "ms": 3093.08
+    },
+    {
+      "fn": "empireIncome economy.js:361",
+      "ms": 402.36
+    },
+    {
+      "fn": "reinforcementThreats main.js:5119",
+      "ms": 330.09
+    },
+    {
+      "fn": "tradeInfo economy.js:310",
+      "ms": 300.39
+    },
+    {
+      "fn": "aiBuildingDelta ai.js:194",
+      "ms": 290.05
+    },
+    {
+      "fn": "supplyDistance main.js:3237",
+      "ms": 168.14
+    },
+    {
+      "fn": "tradeLinks economy.js:231",
+      "ms": 140.2
+    },
+    {
+      "fn": "colonyOutput economy.js:47",
+      "ms": 135.8
+    },
+    {
+      "fn": "sha256 mp-core.js:65",
+      "ms": 118.69
+    },
+    {
+      "fn": "txCaptureGraph diplomacy.js:2057",
+      "ms": 95.54
+    },
+    {
+      "fn": "explorationContext main.js:3994",
+      "ms": 89.16
+    },
+    {
+      "fn": "observe economic-ledger.js:22",
+      "ms": 87.15
+    },
+    {
+      "fn": "snapshotText mp1-host.js:416",
+      "ms": 74.38
+    },
+    {
+      "fn": "dailyTick main.js:4246",
+      "ms": 69.16
+    },
+    {
+      "fn": "serialize main.js:7719",
+      "ms": 63.71
+    },
+    {
+      "fn": "autoExploreTick main.js:4090",
+      "ms": 58.95
+    },
+    {
+      "fn": "aiEconomyPlan ai.js:244",
+      "ms": 55.67
+    },
+    {
+      "fn": "send :0",
+      "ms": 51.98
+    },
+    {
+      "fn": "explorationGraph main.js:4034",
+      "ms": 51.12
+    },
+    {
+      "fn": "dealTxBegin diplomacy.js:2103",
+      "ms": 45.68
+    },
+    {
+      "fn": "tick commerce.js:110",
+      "ms": 45.15
+    },
+    {
+      "fn": "routeVolume economy.js:271",
+      "ms": 43.61
+    },
+    {
+      "fn": "EconomyLedger.observe.sy.system economic-ledger.js:59",
+      "ms": 42.81
+    },
+    {
+      "fn": "pure mp-core.js:285",
+      "ms": 42.09
+    },
+    {
+      "fn": "fleetAlloyUpkeep main.js:3331",
+      "ms": 41.09
+    },
+    {
+      "fn": "fleetUpkeep main.js:3341",
+      "ms": 40.35
+    },
+    {
+      "fn": "(garbage collector) :0",
+      "ms": 40.25
+    },
+    {
+      "fn": "(idle) :0",
+      "ms": 38.85
+    },
+    {
+      "fn": "aiShadowIncome ai.js:189",
+      "ms": 35.32
+    },
+    {
+      "fn": "aiColonyForecast ai.js:389",
+      "ms": 35.07
+    },
+    {
+      "fn": "claimOf diplomacy.js:62",
+      "ms": 34.66
+    },
+    {
+      "fn": "aiTurn ai.js:1615",
+      "ms": 33.47
+    },
+    {
+      "fn": "structTick main.js:4890",
+      "ms": 33.34
+    },
+    {
+      "fn": "topbar ui.js:2036",
+      "ms": 33.12
+    },
+    {
+      "fn": "explorationWaitKey main.js:4086",
+      "ms": 33.06
+    },
+    {
+      "fn": "draw map.js:1720",
+      "ms": 32.67
+    },
+    {
+      "fn": "explorationEnabled main.js:3984",
+      "ms": 31.68
+    },
+    {
+      "fn": "combatTick main.js:4319",
+      "ms": 29.18
+    },
+    {
+      "fn": "fleetPower main.js:3071",
+      "ms": 28.06
+    },
+    {
+      "fn": "fbm main.js:46",
+      "ms": 27.49
+    }
+  ],
+  "inclusive": [
+    {
+      "fn": "(root) :0",
+      "ms": 7509.76
+    },
+    {
+      "fn": "evaluate :305",
+      "ms": 4135.48
+    },
+    {
+      "fn": "(anon) :1",
+      "ms": 4135.48
+    },
+    {
+      "fn": "(program) :0",
+      "ms": 3093.08
+    },
+    {
+      "fn": "obj.<computed> economic-ledger.js:59",
+      "ms": 3039.42
+    },
+    {
+      "fn": "observe economic-ledger.js:22",
+      "ms": 3030.97
+    },
+    {
+      "fn": "EconomyLedger.observe.sy.system economic-ledger.js:59",
+      "ms": 2981.93
+    },
+    {
+      "fn": "monthTick mp1-host.js:219",
+      "ms": 2823.95
+    },
+    {
+      "fn": "window.monthTick mp1-host.js:165",
+      "ms": 2823.95
+    },
+    {
+      "fn": "window.monthTick :5",
+      "ms": 2823.95
+    },
+    {
+      "fn": "monthTick economic-ledger.js:139",
+      "ms": 2548.51
+    },
+    {
+      "fn": "monthTick main.js:9106",
+      "ms": 2546.51
+    },
+    {
+      "fn": "aiTurn ai.js:1615",
+      "ms": 1936.69
+    },
+    {
+      "fn": "(anon) ai.js:187",
+      "ms": 1863.59
+    },
+    {
+      "fn": "aiBuildingDelta ai.js:194",
+      "ms": 1483.75
+    },
+    {
+      "fn": "aiEconomyPlan ai.js:244",
+      "ms": 1394.03
+    },
+    {
+      "fn": "empireIncome economy.js:361",
+      "ms": 1378.36
+    },
+    {
+      "fn": "aiEconomicOrder ai.js:451",
+      "ms": 843.61
+    },
+    {
+      "fn": "autoExploreTick main.js:4090",
+      "ms": 629.44
+    },
+    {
+      "fn": "aiColonyForecast ai.js:389",
+      "ms": 563.62
+    },
+    {
+      "fn": "explorationContext main.js:3994",
+      "ms": 492.58
+    },
+    {
+      "fn": "tradeInfo economy.js:310",
+      "ms": 491.7
+    },
+    {
+      "fn": "reinforcementThreats main.js:5119",
+      "ms": 380.26
+    },
+    {
+      "fn": "aiColonyPreparation ai.js:425",
+      "ms": 368.04
+    },
+    {
+      "fn": "dailyTick main.js:4246",
+      "ms": 365.87
+    },
+    {
+      "fn": "aiStrategicBuildingNeeds ai.js:622",
+      "ms": 295.11
+    },
+    {
+      "fn": "snapshotText mp1-host.js:416",
+      "ms": 275.44
+    },
+    {
+      "fn": "saveNow mp1-host.js:417",
+      "ms": 275.44
+    },
+    {
+      "fn": "autosave mp1-host.js:415",
+      "ms": 275.44
+    },
+    {
+      "fn": "aiColonyReady ai.js:417",
+      "ms": 210.85
+    },
+    {
+      "fn": "aiShipProduction ai.js:1433",
+      "ms": 208.23
+    },
+    {
+      "fn": "snapshot mp-core.js:1511",
+      "ms": 201.06
+    },
+    {
+      "fn": "colonyOutput economy.js:47",
+      "ms": 193.78
+    },
+    {
+      "fn": "h.publish :6",
+      "ms": 192.14
+    },
+    {
+      "fn": "supplyDistance main.js:3237",
+      "ms": 191.66
+    },
+    {
+      "fn": "tradeLinks economy.js:231",
+      "ms": 191.32
+    },
+    {
+      "fn": "publish mp-core.js:438",
+      "ms": 191.02
+    },
+    {
+      "fn": "aiShadowIncome ai.js:189",
+      "ms": 188.92
+    },
+    {
+      "fn": "diploTick diplomacy.js:5577",
+      "ms": 176.11
+    },
+    {
+      "fn": "frame main.js:9049",
+      "ms": 163.85
+    }
+  ]
+}
