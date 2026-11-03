@@ -1,0 +1,27 @@
+browser-mp75 rc=0 26s GEÇEN: 6 KALAN: 0 pass=6 fail=0
+browser-mp74 rc=1 94s GEÇEN: 3 KALAN: 4 pass=3 fail=4
+browser-mp73 rc=1 129s GEÇEN: 7 KALAN: 1 pass=7 fail=1
+browser-mp72 rc=0 50s GEÇEN: 9 KALAN: 0 pass=9 fail=0
+browser-mp71 rc=0 102s GEÇEN: 12 KALAN: 0 pass=12 fail=0
+browser-mp7 rc=0 36s GEÇEN: 9 KALAN: 0 pass=9 fail=0
+browser-mp64 rc=0 173s GEÇEN: 10 KALAN: 0 pass=10 fail=0
+browser-mp63 rc=0 126s GEÇEN: 15 KALAN: 0 pass=15 fail=0
+browser-mp62 rc=0 162s GEÇEN: 10 KALAN: 0 pass=10 fail=0
+browser-mp61 rc=0 94s GEÇEN: 13 KALAN: 0 pass=13 fail=0
+browser-mp6 rc=0 50s GEÇEN: 11 KALAN: 0 pass=11 fail=0
+browser-mp4 rc=0 53s GEÇEN: 13 KALAN: 0 pass=13 fail=0
+browser-mp31 rc=0 41s GEÇEN: 11 KALAN: 0 pass=11 fail=0
+browser-mp3 rc=0 61s GEÇEN: 12 KALAN: 0 pass=12 fail=0
+browser-mp2 rc=0 26s GEÇEN: 14 KALAN: 0 pass=14 fail=0
+browser-mp11 rc=0 23s GEÇEN: 10 KALAN: 0 pass=10 fail=0
+browser-mp1 rc=0 53s GEÇEN: 22 KALAN: 0 pass=22 fail=0
+browser-mp0 rc=0 19s GEÇEN: 20 KALAN: 0 pass=20 fail=0
+browser-96h10 rc=0 30s  pass=27 fail=0
+mp5_docker rc=0 68s GEÇEN: 6 KALAN: 0 pass=0 fail=0
+browser-mp5 rc=0 135s GEÇEN: 10 KALAN: 0 pass=10 fail=0
+mp8-A rc=0 88s GEÇEN: 2 KALAN: 0
+mp8-B rc=0 131s GEÇEN: 3 KALAN: 0
+mp8-C rc=0 163s GEÇEN: 2 KALAN: 0
+mp8-R rc=0 111s GEÇEN: 5 KALAN: 0
+mp8-N rc=0 111s GEÇEN: 9 KALAN: 0
+ALLDONE

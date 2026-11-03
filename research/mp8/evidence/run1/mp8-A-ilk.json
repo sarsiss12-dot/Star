@@ -1,0 +1,2507 @@
+{
+ "results": [
+  {
+   "name": "A0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 2 insan + 5 AI, orta, seed 11; misafir gerçek STARS arayüzünde",
+   "status": "PASS",
+   "ms": 8415
+  },
+  {
+   "name": "A1 kampanya: 120 ay; her 6 ayda misafir(ler) araştırma, filo, bina, gemi, insan/AI teklifi, gelen kutusu, savaş/barış, federasyon, konsey; her turda host ↔ misafir senkron + gizlilik",
+   "status": "PASS",
+   "ms": 67570
+  }
+ ],
+ "metrics": {
+  "scen": "A",
+  "conf": {
+   "size": "orta",
+   "ai": 5,
+   "seed": 11,
+   "months": 120,
+   "guests": 1,
+   "every": 6
+  },
+  "sync": [
+   {
+    "label": "m0",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 512,
+    "buildMs": 574,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m6",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     7,
+     7
+    ],
+    "mirrorEq": true,
+    "revMs": 203,
+    "buildMs": 234,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m12",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     10,
+     10
+    ],
+    "mirrorEq": true,
+    "revMs": 528,
+    "buildMs": 540,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m18",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     15,
+     15
+    ],
+    "mirrorEq": true,
+    "revMs": 453,
+    "buildMs": 488,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m24",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     19,
+     19
+    ],
+    "mirrorEq": true,
+    "revMs": 338,
+    "buildMs": 369,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m30",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     22,
+     22
+    ],
+    "mirrorEq": true,
+    "revMs": 483,
+    "buildMs": 518,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m36",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     25,
+     25
+    ],
+    "mirrorEq": true,
+    "revMs": 798,
+    "buildMs": 815,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m42",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     29,
+     29
+    ],
+    "mirrorEq": true,
+    "revMs": 646,
+    "buildMs": 696,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m48",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     33,
+     33
+    ],
+    "mirrorEq": true,
+    "revMs": 253,
+    "buildMs": 306,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m54",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     37,
+     37
+    ],
+    "mirrorEq": true,
+    "revMs": 212,
+    "buildMs": 256,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m60",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     41,
+     41
+    ],
+    "mirrorEq": true,
+    "revMs": 636,
+    "buildMs": 689,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m66",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     46,
+     46
+    ],
+    "mirrorEq": true,
+    "revMs": 380,
+    "buildMs": 410,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m72",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     50,
+     50
+    ],
+    "mirrorEq": true,
+    "revMs": 612,
+    "buildMs": 653,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m78",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     54,
+     54
+    ],
+    "mirrorEq": true,
+    "revMs": 801,
+    "buildMs": 854,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m84",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     58,
+     58
+    ],
+    "mirrorEq": true,
+    "revMs": 724,
+    "buildMs": 789,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m90",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     62,
+     62
+    ],
+    "mirrorEq": true,
+    "revMs": 831,
+    "buildMs": 865,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m96",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     66,
+     66
+    ],
+    "mirrorEq": true,
+    "revMs": 391,
+    "buildMs": 428,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m102",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     71,
+     71
+    ],
+    "mirrorEq": true,
+    "revMs": 570,
+    "buildMs": 617,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m108",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     76,
+     76
+    ],
+    "mirrorEq": true,
+    "revMs": 570,
+    "buildMs": 618,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m114",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     80,
+     80
+    ],
+    "mirrorEq": true,
+    "revMs": 755,
+    "buildMs": 769,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m120",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     84,
+     84
+    ],
+    "mirrorEq": true,
+    "revMs": 858,
+    "buildMs": 897,
+    "diff": [],
+    "leak": []
+   }
+  ],
+  "cmds": [
+   {
+    "label": "m6",
+    "who": "H",
+    "k": "offerHuman",
+    "status": "ok",
+    "before": 0,
+    "after": 1,
+    "res": true
+   },
+   {
+    "label": "m6",
+    "who": "B",
+    "k": "research",
+    "status": "ok",
+    "code": null,
+    "ms": 21,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m6",
+    "who": "B",
+    "k": "move",
+    "status": "ok",
+    "code": null,
+    "ms": 50,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m6",
+    "who": "B",
+    "k": "ship",
+    "status": "ok",
+    "code": null,
+    "ms": 34,
+    "before": 0,
+    "after": 1
+   },
+   {
+    "label": "m6",
+    "who": "B",
+    "k": "offerHuman",
+    "status": "ok",
+    "code": null,
+    "ms": 28,
+    "before": 0,
+    "after": 1
+   },
+   {
+    "label": "m6",
+    "who": "B",
+    "k": "respond",
+    "status": "ok",
+    "code": null,
+    "ms": 34,
+    "before": "pending",
+    "after": "accepted"
+   },
+   {
+    "label": "m6",
+    "who": "B",
+    "k": "fedFound",
+    "status": "skip",
+    "why": "fed"
+   },
+   {
+    "label": "m6",
+    "who": "B",
+    "k": "councilVote",
+    "status": "skip",
+    "why": "no-council"
+   },
+   {
+    "label": "m12",
+    "who": "H",
+    "k": "offerHuman",
+    "status": "ok",
+    "before": 1,
+    "after": 2,
+    "res": true
+   },
+   {
+    "label": "m12",
+    "who": "B",
+    "k": "research",
+    "status": "ok",
+    "code": null,
+    "ms": 6,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m12",
+    "who": "B",
+    "k": "move",
+    "status": "ok",
+    "code": null,
+    "ms": 4,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m12",
+    "who": "B",
+    "k": "ship",
+    "status": "ok",
+    "code": null,
+    "ms": 3,
+    "before": 0,
+    "after": 1
+   },
+   {
+    "label": "m12",
+    "who": "B",
+    "k": "offerHuman",
+    "status": "ok",
+    "code": null,
+    "ms": 4,
+    "before": 1,
+    "after": 2
+   },
+   {
+    "label": "m12",
+    "who": "B",
+    "k": "respond",
+    "status": "ok",
+    "code": null,
+    "ms": 9,
+    "before": "pending",
+    "after": "accepted"
+   },
+   {
+    "label": "m12",
+    "who": "B",
+    "k": "war",
+    "status": "skip",
+    "why": "no-eligible-target"
+   },
+   {
+    "label": "m12",
+    "who": "B",
+    "k": "councilVote",
+    "status": "skip",
+    "why": "no-council"
+   },
+   {
+    "label": "m18",
+    "who": "H",
+    "k": "offerHuman",
+    "status": "ok",
+    "before": 2,
+    "after": 3,
+    "res": true
+   },
+   {
+    "label": "m18",
+    "who": "B",
+    "k": "research",
+    "status": "ok",
+    "code": null,
+    "ms": 27,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m18",
+    "who": "B",
+    "k": "move",
+    "status": "ok",
+    "code": null,
+    "ms": 26,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m18",
+    "who": "B",
+    "k": "ship",
+    "status": "ok",
+    "code": null,
+    "ms": 29,
+    "before": 0,
+    "after": 1
+   },
+   {
+    "label": "m18",
+    "who": "B",
+    "k": "offerHuman",
+    "status": "ok",
+    "code": null,
+    "ms": 16,
+    "before": 2,
+    "after": 3
+   },
+   {
+    "label": "m18",
+    "who": "B",
+    "k": "respond",
+    "status": "ok",
+    "code": null,
+    "ms": 22,
+    "before": "pending",
+    "after": "accepted"
+   },
+   {
+    "label": "m18",
+    "who": "B",
+    "k": "councilVote",
+    "status": "skip",
+    "why": "no-council"
+   },
+   {
+    "label": "m24",
+    "who": "H",
+    "k": "offerHuman",
+    "status": "ok",
+    "before": 3,
+    "after": 4,
+    "res": true
+   },
+   {
+    "label": "m24",
+    "who": "B",
+    "k": "research",
+    "status": "ok",
+    "code": null,
+    "ms": 16,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m24",
+    "who": "B",
+    "k": "move",
+    "status": "ok",
+    "code": null,
+    "ms": 19,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m24",
+    "who": "B",
+    "k": "ship",
+    "status": "ok",
+    "code": null,
+    "ms": 18,
+    "before": 0,
+    "after": 1
+   },
+   {
+    "label": "m24",
+    "who": "B",
+    "k": "offerHuman",
+    "status": "ok",
+    "code": null,
+    "ms": 48,
+    "before": 3,
+    "after": 4
+   },
+   {
+    "label": "m24",
+    "who": "B",
+    "k": "respond",
+    "status": "ok",
+    "code": null,
+    "ms": 16,
+    "before": "pending",
+    "after": "accepted"
+   },
+   {
+    "label": "m24",
+    "who": "B",
+    "k": "fedFound",
+    "status": "skip",
+    "why": "fed"
+   },
+   {
+    "label": "m24",
+    "who": "B",
+    "k": "councilVote",
+    "status": "skip",
+    "why": "no-council"
+   },
+   {
+    "label": "m30",
+    "who": "H",
+    "k": "offerHuman",
+    "status": "ok",
+    "before": 4,
+    "after": 5,
+    "res": true
+   },
+   {
+    "label": "m30",
+    "who": "B",
+    "k": "research",
+    "status": "ok",
+    "code": null,
+    "ms": 20,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m30",
+    "who": "B",
+    "k": "move",
+    "status": "ok",
+    "code": null,
+    "ms": 32,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m30",
+    "who": "B",
+    "k": "ship",
+    "status": "ok",
+    "code": null,
+    "ms": 29,
+    "before": 0,
+    "after": 1
+   },
+   {
+    "label": "m30",
+    "who": "B",
+    "k": "offerHuman",
+    "status": "ok",
+    "code": null,
+    "ms": 28,
+    "before": 4,
+    "after": 5
+   },
+   {
+    "label": "m30",
+    "who": "B",
+    "k": "respond",
+    "status": "skip",
+    "why": "quote"
+   },
+   {
+    "label": "m30",
+    "who": "B",
+    "k": "councilVote",
+    "status": "skip",
+    "why": "no-council"
+   },
+   {
+    "label": "m36",
+    "who": "H",
+    "k": "offerHuman",
+    "status": "ok",
+    "before": 5,
+    "after": 6,
+    "res": true
+   },
+   {
+    "label": "m36",
+    "who": "B",
+    "k": "research",
+    "status": "ok",
+    "code": null,
+    "ms": 108,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m36",
+    "who": "B",
+    "k": "move",
+    "status": "ok",
+    "code": null,
+    "ms": 26,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m36",
+    "who": "B",
+    "k": "ship",
+    "status": "ok",
+    "code": null,
+    "ms": 17,
+    "before": 0,
+    "after": 1
+   },
+   {
+    "label": "m36",
+    "who": "B",
+    "k": "offerHuman",
+    "status": "ok",
+    "code": null,
+    "ms": 29,
+    "before": 5,
+    "after": 6
+   },
+   {
+    "label": "m36",
+    "who": "B",
+    "k": "respond",
+    "status": "skip",
+    "why": "quote"
+   },
+   {
+    "label": "m36",
+    "who": "B",
+    "k": "councilVote",
+    "status": "skip",
+    "why": "no-council"
+   },
+   {
+    "label": "m42",
+    "who": "H",
+    "k": "offerHuman",
+    "status": "ok",
+    "before": 6,
+    "after": 7,
+    "res": true
+   },
+   {
+    "label": "m42",
+    "who": "B",
+    "k": "research",
+    "status": "ok",
+    "code": null,
+    "ms": 17,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m42",
+    "who": "B",
+    "k": "move",
+    "status": "ok",
+    "code": null,
+    "ms": 23,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m42",
+    "who": "B",
+    "k": "ship",
+    "status": "ok",
+    "code": null,
+    "ms": 33,
+    "before": 0,
+    "after": 1
+   },
+   {
+    "label": "m42",
+    "who": "B",
+    "k": "offerHuman",
+    "status": "ok",
+    "code": null,
+    "ms": 34,
+    "before": 6,
+    "after": 7
+   },
+   {
+    "label": "m42",
+    "who": "B",
+    "k": "offerAI",
+    "status": "ok",
+    "code": null,
+    "ms": 30,
+    "before": 0,
+    "after": 1
+   },
+   {
+    "label": "m42",
+    "who": "B",
+    "k": "respond",
+    "status": "ok",
+    "code": null,
+    "ms": 38,
+    "before": "pending",
+    "after": "accepted"
+   },
+   {
+    "label": "m42",
+    "who": "B",
+    "k": "fedFound",
+    "status": "skip",
+    "why": "fed"
+   },
+   {
+    "label": "m42",
+    "who": "B",
+    "k": "councilVote",
+    "status": "skip",
+    "why": "no-council"
+   },
+   {
+    "label": "m48",
+    "who": "H",
+    "k": "offerHuman",
+    "status": "ok",
+    "before": 7,
+    "after": 8,
+    "res": true
+   },
+   {
+    "label": "m48",
+    "who": "B",
+    "k": "research",
+    "status": "ok",
+    "code": null,
+    "ms": 28,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m48",
+    "who": "B",
+    "k": "move",
+    "status": "ok",
+    "code": null,
+    "ms": 39,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m48",
+    "who": "B",
+    "k": "ship",
+    "status": "ok",
+    "code": null,
+    "ms": 33,
+    "before": 0,
+    "after": 1
+   },
+   {
+    "label": "m48",
+    "who": "B",
+    "k": "offerHuman",
+    "status": "ok",
+    "code": null,
+    "ms": 67,
+    "before": 7,
+    "after": 8
+   },
+   {
+    "label": "m48",
+    "who": "B",
+    "k": "offerAI",
+    "status": "ok",
+    "code": null,
+    "ms": 45,
+    "before": 1,
+    "after": 2
+   },
+   {
+    "label": "m48",
+    "who": "B",
+    "k": "respond",
+    "status": "ok",
+    "code": null,
+    "ms": 20,
+    "before": "pending",
+    "after": "accepted"
+   },
+   {
+    "label": "m48",
+    "who": "B",
+    "k": "councilVote",
+    "status": "skip",
+    "why": "no-council"
+   },
+   {
+    "label": "m54",
+    "who": "H",
+    "k": "offerHuman",
+    "status": "ok",
+    "before": 8,
+    "after": 9,
+    "res": true
+   },
+   {
+    "label": "m54",
+    "who": "B",
+    "k": "research",
+    "status": "ok",
+    "code": null,
+    "ms": 21,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m54",
+    "who": "B",
+    "k": "move",
+    "status": "ok",
+    "code": null,
+    "ms": 46,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m54",
+    "who": "B",
+    "k": "ship",
+    "status": "ok",
+    "code": null,
+    "ms": 21,
+    "before": 0,
+    "after": 1
+   },
+   {
+    "label": "m54",
+    "who": "B",
+    "k": "offerHuman",
+    "status": "ok",
+    "code": null,
+    "ms": 69,
+    "before": 8,
+    "after": 9
+   },
+   {
+    "label": "m54",
+    "who": "B",
+    "k": "offerAI",
+    "status": "ok",
+    "code": null,
+    "ms": 55,
+    "before": 2,
+    "after": 3
+   },
+   {
+    "label": "m54",
+    "who": "B",
+    "k": "respond",
+    "status": "ok",
+    "code": null,
+    "ms": 25,
+    "before": "pending",
+    "after": "accepted"
+   },
+   {
+    "label": "m54",
+    "who": "B",
+    "k": "councilVote",
+    "status": "skip",
+    "why": "no-council"
+   },
+   {
+    "label": "m60",
+    "who": "H",
+    "k": "offerHuman",
+    "status": "ok",
+    "before": 9,
+    "after": 10,
+    "res": true
+   },
+   {
+    "label": "m60",
+    "who": "B",
+    "k": "research",
+    "status": "ok",
+    "code": null,
+    "ms": 42,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m60",
+    "who": "B",
+    "k": "move",
+    "status": "ok",
+    "code": null,
+    "ms": 22,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m60",
+    "who": "B",
+    "k": "ship",
+    "status": "ok",
+    "code": null,
+    "ms": 24,
+    "before": 0,
+    "after": 1
+   },
+   {
+    "label": "m60",
+    "who": "B",
+    "k": "offerHuman",
+    "status": "ok",
+    "code": null,
+    "ms": 40,
+    "before": 9,
+    "after": 10
+   },
+   {
+    "label": "m60",
+    "who": "B",
+    "k": "offerAI",
+    "status": "ok",
+    "code": null,
+    "ms": 17,
+    "before": 3,
+    "after": 4
+   },
+   {
+    "label": "m60",
+    "who": "B",
+    "k": "respond",
+    "status": "ok",
+    "code": null,
+    "ms": 58,
+    "before": "pending",
+    "after": "accepted"
+   },
+   {
+    "label": "m60",
+    "who": "B",
+    "k": "fedFound",
+    "status": "skip",
+    "why": "fed"
+   },
+   {
+    "label": "m60",
+    "who": "B",
+    "k": "councilVote",
+    "status": "skip",
+    "why": "no-council"
+   },
+   {
+    "label": "m66",
+    "who": "H",
+    "k": "offerHuman",
+    "status": "ok",
+    "before": 10,
+    "after": 11,
+    "res": true
+   },
+   {
+    "label": "m66",
+    "who": "B",
+    "k": "research",
+    "status": "ok",
+    "code": null,
+    "ms": 20,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m66",
+    "who": "B",
+    "k": "move",
+    "status": "ok",
+    "code": null,
+    "ms": 30,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m66",
+    "who": "B",
+    "k": "ship",
+    "status": "ok",
+    "code": null,
+    "ms": 18,
+    "before": 0,
+    "after": 1
+   },
+   {
+    "label": "m66",
+    "who": "B",
+    "k": "offerHuman",
+    "status": "ok",
+    "code": null,
+    "ms": 49,
+    "before": 10,
+    "after": 11
+   },
+   {
+    "label": "m66",
+    "who": "B",
+    "k": "offerAI",
+    "status": "ok",
+    "code": null,
+    "ms": 33,
+    "before": 4,
+    "after": 5
+   },
+   {
+    "label": "m66",
+    "who": "B",
+    "k": "respond",
+    "status": "ok",
+    "code": null,
+    "ms": 39,
+    "before": "pending",
+    "after": "accepted"
+   },
+   {
+    "label": "m66",
+    "who": "B",
+    "k": "councilVote",
+    "status": "skip",
+    "why": "no-council"
+   },
+   {
+    "label": "m72",
+    "who": "H",
+    "k": "offerHuman",
+    "status": "ok",
+    "before": 11,
+    "after": 12,
+    "res": true
+   },
+   {
+    "label": "m72",
+    "who": "B",
+    "k": "research",
+    "status": "ok",
+    "code": null,
+    "ms": 27,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m72",
+    "who": "B",
+    "k": "move",
+    "status": "ok",
+    "code": null,
+    "ms": 38,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m72",
+    "who": "B",
+    "k": "ship",
+    "status": "ok",
+    "code": null,
+    "ms": 23,
+    "before": 0,
+    "after": 1
+   },
+   {
+    "label": "m72",
+    "who": "B",
+    "k": "offerHuman",
+    "status": "ok",
+    "code": null,
+    "ms": 26,
+    "before": 11,
+    "after": 12
+   },
+   {
+    "label": "m72",
+    "who": "B",
+    "k": "offerAI",
+    "status": "ok",
+    "code": null,
+    "ms": 22,
+    "before": 5,
+    "after": 6
+   },
+   {
+    "label": "m72",
+    "who": "B",
+    "k": "respond",
+    "status": "ok",
+    "code": null,
+    "ms": 40,
+    "before": "pending",
+    "after": "accepted"
+   },
+   {
+    "label": "m72",
+    "who": "B",
+    "k": "councilVote",
+    "status": "skip",
+    "why": "no-council"
+   },
+   {
+    "label": "m78",
+    "who": "H",
+    "k": "offerHuman",
+    "status": "ok",
+    "before": 12,
+    "after": 13,
+    "res": true
+   },
+   {
+    "label": "m78",
+    "who": "B",
+    "k": "research",
+    "status": "ok",
+    "code": null,
+    "ms": 35,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m78",
+    "who": "B",
+    "k": "move",
+    "status": "ok",
+    "code": null,
+    "ms": 27,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m78",
+    "who": "B",
+    "k": "ship",
+    "status": "ok",
+    "code": null,
+    "ms": 16,
+    "before": 0,
+    "after": 1
+   },
+   {
+    "label": "m78",
+    "who": "B",
+    "k": "offerHuman",
+    "status": "ok",
+    "code": null,
+    "ms": 27,
+    "before": 12,
+    "after": 13
+   },
+   {
+    "label": "m78",
+    "who": "B",
+    "k": "offerAI",
+    "status": "ok",
+    "code": null,
+    "ms": 16,
+    "before": 6,
+    "after": 7
+   },
+   {
+    "label": "m78",
+    "who": "B",
+    "k": "respond",
+    "status": "ok",
+    "code": null,
+    "ms": 36,
+    "before": "pending",
+    "after": "accepted"
+   },
+   {
+    "label": "m78",
+    "who": "B",
+    "k": "fedFound",
+    "status": "skip",
+    "why": "fed"
+   },
+   {
+    "label": "m78",
+    "who": "B",
+    "k": "councilVote",
+    "status": "skip",
+    "why": "no-council"
+   },
+   {
+    "label": "m84",
+    "who": "H",
+    "k": "offerHuman",
+    "status": "ok",
+    "before": 13,
+    "after": 14,
+    "res": true
+   },
+   {
+    "label": "m84",
+    "who": "B",
+    "k": "research",
+    "status": "ok",
+    "code": null,
+    "ms": 48,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m84",
+    "who": "B",
+    "k": "move",
+    "status": "ok",
+    "code": null,
+    "ms": 36,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m84",
+    "who": "B",
+    "k": "offerHuman",
+    "status": "ok",
+    "code": null,
+    "ms": 50,
+    "before": 13,
+    "after": 14
+   },
+   {
+    "label": "m84",
+    "who": "B",
+    "k": "offerAI",
+    "status": "ok",
+    "code": null,
+    "ms": 45,
+    "before": 7,
+    "after": 8
+   },
+   {
+    "label": "m84",
+    "who": "B",
+    "k": "respond",
+    "status": "ok",
+    "code": null,
+    "ms": 38,
+    "before": "pending",
+    "after": "accepted"
+   },
+   {
+    "label": "m84",
+    "who": "B",
+    "k": "councilVote",
+    "status": "skip",
+    "why": "no-council"
+   },
+   {
+    "label": "m90",
+    "who": "H",
+    "k": "offerHuman",
+    "status": "ok",
+    "before": 14,
+    "after": 15,
+    "res": true
+   },
+   {
+    "label": "m90",
+    "who": "B",
+    "k": "research",
+    "status": "ok",
+    "code": null,
+    "ms": 19,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m90",
+    "who": "B",
+    "k": "move",
+    "status": "ok",
+    "code": null,
+    "ms": 25,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m90",
+    "who": "B",
+    "k": "offerHuman",
+    "status": "ok",
+    "code": null,
+    "ms": 24,
+    "before": 14,
+    "after": 15
+   },
+   {
+    "label": "m90",
+    "who": "B",
+    "k": "offerAI",
+    "status": "ok",
+    "code": null,
+    "ms": 41,
+    "before": 8,
+    "after": 9
+   },
+   {
+    "label": "m90",
+    "who": "B",
+    "k": "respond",
+    "status": "ok",
+    "code": null,
+    "ms": 61,
+    "before": "pending",
+    "after": "accepted"
+   },
+   {
+    "label": "m90",
+    "who": "B",
+    "k": "councilVote",
+    "status": "skip",
+    "why": "no-council"
+   },
+   {
+    "label": "m96",
+    "who": "H",
+    "k": "offerHuman",
+    "status": "ok",
+    "before": 15,
+    "after": 16,
+    "res": true
+   },
+   {
+    "label": "m96",
+    "who": "B",
+    "k": "research",
+    "status": "ok",
+    "code": null,
+    "ms": 42,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m96",
+    "who": "B",
+    "k": "move",
+    "status": "ok",
+    "code": null,
+    "ms": 30,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m96",
+    "who": "B",
+    "k": "offerHuman",
+    "status": "ok",
+    "code": null,
+    "ms": 29,
+    "before": 15,
+    "after": 16
+   },
+   {
+    "label": "m96",
+    "who": "B",
+    "k": "offerAI",
+    "status": "ok",
+    "code": null,
+    "ms": 38,
+    "before": 9,
+    "after": 10
+   },
+   {
+    "label": "m96",
+    "who": "B",
+    "k": "respond",
+    "status": "ok",
+    "code": null,
+    "ms": 45,
+    "before": "pending",
+    "after": "accepted"
+   },
+   {
+    "label": "m96",
+    "who": "B",
+    "k": "fedFound",
+    "status": "skip",
+    "why": "fed"
+   },
+   {
+    "label": "m96",
+    "who": "B",
+    "k": "councilVote",
+    "status": "skip",
+    "why": "no-council"
+   },
+   {
+    "label": "m102",
+    "who": "H",
+    "k": "offerHuman",
+    "status": "ok",
+    "before": 16,
+    "after": 17,
+    "res": true
+   },
+   {
+    "label": "m102",
+    "who": "B",
+    "k": "research",
+    "status": "ok",
+    "code": null,
+    "ms": 34,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m102",
+    "who": "B",
+    "k": "move",
+    "status": "ok",
+    "code": null,
+    "ms": 33,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m102",
+    "who": "B",
+    "k": "offerHuman",
+    "status": "ok",
+    "code": null,
+    "ms": 24,
+    "before": 16,
+    "after": 17
+   },
+   {
+    "label": "m102",
+    "who": "B",
+    "k": "offerAI",
+    "status": "ok",
+    "code": null,
+    "ms": 36,
+    "before": 10,
+    "after": 11
+   },
+   {
+    "label": "m102",
+    "who": "B",
+    "k": "respond",
+    "status": "ok",
+    "code": null,
+    "ms": 19,
+    "before": "pending",
+    "after": "accepted"
+   },
+   {
+    "label": "m102",
+    "who": "B",
+    "k": "councilVote",
+    "status": "skip",
+    "why": "no-vote"
+   },
+   {
+    "label": "m108",
+    "who": "H",
+    "k": "offerHuman",
+    "status": "ok",
+    "before": 17,
+    "after": 18,
+    "res": true
+   },
+   {
+    "label": "m108",
+    "who": "B",
+    "k": "research",
+    "status": "ok",
+    "code": null,
+    "ms": 45,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m108",
+    "who": "B",
+    "k": "move",
+    "status": "ok",
+    "code": null,
+    "ms": 41,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m108",
+    "who": "B",
+    "k": "offerHuman",
+    "status": "ok",
+    "code": null,
+    "ms": 39,
+    "before": 17,
+    "after": 18
+   },
+   {
+    "label": "m108",
+    "who": "B",
+    "k": "offerAI",
+    "status": "ok",
+    "code": null,
+    "ms": 39,
+    "before": 11,
+    "after": 12
+   },
+   {
+    "label": "m108",
+    "who": "B",
+    "k": "respond",
+    "status": "ok",
+    "code": null,
+    "ms": 24,
+    "before": "pending",
+    "after": "accepted"
+   },
+   {
+    "label": "m108",
+    "who": "B",
+    "k": "councilVote",
+    "status": "ok",
+    "code": null,
+    "ms": 48,
+    "before": 0,
+    "after": 1
+   },
+   {
+    "label": "m114",
+    "who": "H",
+    "k": "offerHuman",
+    "status": "ok",
+    "before": 18,
+    "after": 19,
+    "res": true
+   },
+   {
+    "label": "m114",
+    "who": "B",
+    "k": "research",
+    "status": "ok",
+    "code": null,
+    "ms": 18,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m114",
+    "who": "B",
+    "k": "move",
+    "status": "ok",
+    "code": null,
+    "ms": 33,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m114",
+    "who": "B",
+    "k": "offerHuman",
+    "status": "ok",
+    "code": null,
+    "ms": 58,
+    "before": 18,
+    "after": 19
+   },
+   {
+    "label": "m114",
+    "who": "B",
+    "k": "offerAI",
+    "status": "ok",
+    "code": null,
+    "ms": 36,
+    "before": 12,
+    "after": 13
+   },
+   {
+    "label": "m114",
+    "who": "B",
+    "k": "respond",
+    "status": "ok",
+    "code": null,
+    "ms": 57,
+    "before": "pending",
+    "after": "accepted"
+   },
+   {
+    "label": "m114",
+    "who": "B",
+    "k": "fedFound",
+    "status": "skip",
+    "why": "fed"
+   },
+   {
+    "label": "m114",
+    "who": "B",
+    "k": "councilVote",
+    "status": "skip",
+    "why": "voted"
+   },
+   {
+    "label": "m120",
+    "who": "H",
+    "k": "offerHuman",
+    "status": "ok",
+    "before": 19,
+    "after": 20,
+    "res": true
+   },
+   {
+    "label": "m120",
+    "who": "B",
+    "k": "research",
+    "status": "ok",
+    "code": null,
+    "ms": 28,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m120",
+    "who": "B",
+    "k": "move",
+    "status": "ok",
+    "code": null,
+    "ms": 41,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m120",
+    "who": "B",
+    "k": "offerHuman",
+    "status": "ok",
+    "code": null,
+    "ms": 30,
+    "before": 19,
+    "after": 20
+   },
+   {
+    "label": "m120",
+    "who": "B",
+    "k": "offerAI",
+    "status": "ok",
+    "code": null,
+    "ms": 34,
+    "before": 13,
+    "after": 14
+   },
+   {
+    "label": "m120",
+    "who": "B",
+    "k": "respond",
+    "status": "ok",
+    "code": null,
+    "ms": 32,
+    "before": "pending",
+    "after": "accepted"
+   },
+   {
+    "label": "m120",
+    "who": "B",
+    "k": "councilVote",
+    "status": "skip",
+    "why": "voted"
+   }
+  ],
+  "perf": [
+   {
+    "label": "m0",
+    "month": 0,
+    "host": {
+     "monthTick": {
+      "n": 0
+     },
+     "publish": {
+      "n": 2,
+      "med": 3,
+      "p95": 3,
+      "max": 3
+     },
+     "longtask": {
+      "n": 0
+     },
+     "heapMB": 15,
+     "dom": 696,
+     "intervals": 2,
+     "timeouts": 2,
+     "offers": 0,
+     "notes": 0,
+     "inbox": 0,
+     "log": 1,
+     "news": 0
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 2,
+       "med": 34.8,
+       "p95": 34.8,
+       "max": 34.8
+      },
+      "refresh": {
+       "n": 1,
+       "med": 2.4,
+       "p95": 2.4,
+       "max": 2.4
+      },
+      "longtask": {
+       "n": 0
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 14,
+      "dom": 697,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 20,
+      "joinErrors": 0
+     }
+    }
+   },
+   {
+    "label": "m12",
+    "month": 12,
+    "host": {
+     "monthTick": {
+      "n": 12,
+      "med": 40.5,
+      "p95": 177.7,
+      "max": 177.7
+     },
+     "publish": {
+      "n": 371,
+      "med": 1.9,
+      "p95": 6.7,
+      "max": 29.7
+     },
+     "longtask": {
+      "n": 9,
+      "med": 79,
+      "p95": 192,
+      "max": 192
+     },
+     "heapMB": 26,
+     "dom": 741,
+     "intervals": 2,
+     "timeouts": 14,
+     "offers": 4,
+     "notes": 0,
+     "inbox": 0,
+     "log": 18,
+     "news": 0
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 8,
+       "med": 21.4,
+       "p95": 37,
+       "max": 37
+      },
+      "refresh": {
+       "n": 10,
+       "med": 9.4,
+       "p95": 18.8,
+       "max": 18.8
+      },
+      "longtask": {
+       "n": 3,
+       "med": 54,
+       "p95": 74,
+       "max": 74
+      },
+      "builds": 10,
+      "deltas": 9,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 18,
+      "dom": 720,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 10,
+      "packets": 423,
+      "joinErrors": 0
+     }
+    }
+   },
+   {
+    "label": "m24",
+    "month": 24,
+    "host": {
+     "monthTick": {
+      "n": 12,
+      "med": 36.2,
+      "p95": 61.5,
+      "max": 61.5
+     },
+     "publish": {
+      "n": 373,
+      "med": 1.7,
+      "p95": 5,
+      "max": 23.6
+     },
+     "longtask": {
+      "n": 2,
+      "med": 476,
+      "p95": 476,
+      "max": 476
+     },
+     "heapMB": 26,
+     "dom": 736,
+     "intervals": 2,
+     "timeouts": 14,
+     "offers": 8,
+     "notes": 0,
+     "inbox": 0,
+     "log": 34,
+     "news": 0
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 9,
+       "med": 16.3,
+       "p95": 23.2,
+       "max": 23.2
+      },
+      "refresh": {
+       "n": 11,
+       "med": 10,
+       "p95": 13.2,
+       "max": 13.2
+      },
+      "longtask": {
+       "n": 0
+      },
+      "builds": 19,
+      "deltas": 18,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 12,
+      "dom": 721,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 20,
+      "packets": 829,
+      "joinErrors": 0
+     }
+    }
+   },
+   {
+    "label": "m36",
+    "month": 36,
+    "host": {
+     "monthTick": {
+      "n": 12,
+      "med": 43.1,
+      "p95": 70.7,
+      "max": 70.7
+     },
+     "publish": {
+      "n": 372,
+      "med": 1.7,
+      "p95": 4.4,
+      "max": 12.4
+     },
+     "longtask": {
+      "n": 1,
+      "med": 56,
+      "p95": 56,
+      "max": 56
+     },
+     "heapMB": 78,
+     "dom": 736,
+     "intervals": 2,
+     "timeouts": 6,
+     "offers": 12,
+     "notes": 0,
+     "inbox": 0,
+     "log": 40,
+     "news": 2
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 6,
+       "med": 16.6,
+       "p95": 19.6,
+       "max": 19.6
+      },
+      "refresh": {
+       "n": 9,
+       "med": 9.5,
+       "p95": 13.4,
+       "max": 13.4
+      },
+      "longtask": {
+       "n": 0
+      },
+      "builds": 25,
+      "deltas": 24,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 12,
+      "dom": 741,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 28,
+      "packets": 1227,
+      "joinErrors": 0
+     }
+    }
+   },
+   {
+    "label": "m48",
+    "month": 48,
+    "host": {
+     "monthTick": {
+      "n": 12,
+      "med": 41.1,
+      "p95": 57.5,
+      "max": 57.5
+     },
+     "publish": {
+      "n": 372,
+      "med": 1.9,
+      "p95": 4.6,
+      "max": 7.8
+     },
+     "longtask": {
+      "n": 0
+     },
+     "heapMB": 54,
+     "dom": 735,
+     "intervals": 2,
+     "timeouts": 22,
+     "offers": 21,
+     "notes": 0,
+     "inbox": 0,
+     "log": 60,
+     "news": 4
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 8,
+       "med": 19.3,
+       "p95": 32.5,
+       "max": 32.5
+      },
+      "refresh": {
+       "n": 11,
+       "med": 8.7,
+       "p95": 17.2,
+       "max": 17.2
+      },
+      "longtask": {
+       "n": 1,
+       "med": 50,
+       "p95": 50,
+       "max": 50
+      },
+      "builds": 33,
+      "deltas": 32,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 22,
+      "dom": 771,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 40,
+      "packets": 1635,
+      "joinErrors": 0
+     }
+    }
+   },
+   {
+    "label": "m60",
+    "month": 60,
+    "host": {
+     "monthTick": {
+      "n": 12,
+      "med": 41,
+      "p95": 59,
+      "max": 59
+     },
+     "publish": {
+      "n": 371,
+      "med": 2.1,
+      "p95": 4.7,
+      "max": 49.4
+     },
+     "longtask": {
+      "n": 0
+     },
+     "heapMB": 60,
+     "dom": 735,
+     "intervals": 2,
+     "timeouts": 12,
+     "offers": 28,
+     "notes": 0,
+     "inbox": 0,
+     "log": 60,
+     "news": 7
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 8,
+       "med": 16.3,
+       "p95": 20.7,
+       "max": 20.7
+      },
+      "refresh": {
+       "n": 11,
+       "med": 8.8,
+       "p95": 21.6,
+       "max": 21.6
+      },
+      "longtask": {
+       "n": 0
+      },
+      "builds": 41,
+      "deltas": 40,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 20,
+      "dom": 781,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 52,
+      "packets": 2042,
+      "joinErrors": 0
+     }
+    }
+   },
+   {
+    "label": "m72",
+    "month": 72,
+    "host": {
+     "monthTick": {
+      "n": 12,
+      "med": 40.6,
+      "p95": 66.7,
+      "max": 66.7
+     },
+     "publish": {
+      "n": 369,
+      "med": 2,
+      "p95": 4.9,
+      "max": 11
+     },
+     "longtask": {
+      "n": 1,
+      "med": 60,
+      "p95": 60,
+      "max": 60
+     },
+     "heapMB": 49,
+     "dom": 735,
+     "intervals": 2,
+     "timeouts": 9,
+     "offers": 36,
+     "notes": 0,
+     "inbox": 0,
+     "log": 60,
+     "news": 7
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 9,
+       "med": 18.2,
+       "p95": 28.3,
+       "max": 28.3
+      },
+      "refresh": {
+       "n": 12,
+       "med": 13.3,
+       "p95": 15.2,
+       "max": 15.2
+      },
+      "longtask": {
+       "n": 1,
+       "med": 74,
+       "p95": 74,
+       "max": 74
+      },
+      "builds": 50,
+      "deltas": 49,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 39,
+      "dom": 781,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 64,
+      "packets": 2449,
+      "joinErrors": 0
+     }
+    }
+   },
+   {
+    "label": "m84",
+    "month": 84,
+    "host": {
+     "monthTick": {
+      "n": 12,
+      "med": 58.7,
+      "p95": 102.3,
+      "max": 102.3
+     },
+     "publish": {
+      "n": 372,
+      "med": 2.1,
+      "p95": 4.4,
+      "max": 8.6
+     },
+     "longtask": {
+      "n": 1,
+      "med": 56,
+      "p95": 56,
+      "max": 56
+     },
+     "heapMB": 51,
+     "dom": 735,
+     "intervals": 2,
+     "timeouts": 7,
+     "offers": 42,
+     "notes": 0,
+     "inbox": 0,
+     "log": 60,
+     "news": 7
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 8,
+       "med": 18.4,
+       "p95": 22.8,
+       "max": 22.8
+      },
+      "refresh": {
+       "n": 11,
+       "med": 8.4,
+       "p95": 22.2,
+       "max": 22.2
+      },
+      "longtask": {
+       "n": 2,
+       "med": 61,
+       "p95": 61,
+       "max": 61
+      },
+      "builds": 58,
+      "deltas": 57,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 39,
+      "dom": 744,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 75,
+      "packets": 2855,
+      "joinErrors": 0
+     }
+    }
+   },
+   {
+    "label": "m96",
+    "month": 96,
+    "host": {
+     "monthTick": {
+      "n": 12,
+      "med": 37,
+      "p95": 91,
+      "max": 91
+     },
+     "publish": {
+      "n": 372,
+      "med": 2.4,
+      "p95": 4.5,
+      "max": 11.2
+     },
+     "longtask": {
+      "n": 1,
+      "med": 59,
+      "p95": 59,
+      "max": 59
+     },
+     "heapMB": 68,
+     "dom": 737,
+     "intervals": 2,
+     "timeouts": 11,
+     "offers": 50,
+     "notes": 0,
+     "inbox": 0,
+     "log": 60,
+     "news": 10
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 8,
+       "med": 18.3,
+       "p95": 26.2,
+       "max": 26.2
+      },
+      "refresh": {
+       "n": 11,
+       "med": 2.6,
+       "p95": 16.3,
+       "max": 16.3
+      },
+      "longtask": {
+       "n": 0
+      },
+      "builds": 66,
+      "deltas": 65,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 29,
+      "dom": 754,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 85,
+      "packets": 3000,
+      "joinErrors": 0
+     }
+    }
+   },
+   {
+    "label": "m108",
+    "month": 108,
+    "host": {
+     "monthTick": {
+      "n": 12,
+      "med": 57.8,
+      "p95": 80.5,
+      "max": 80.5
+     },
+     "publish": {
+      "n": 373,
+      "med": 2.6,
+      "p95": 5.2,
+      "max": 12.5
+     },
+     "longtask": {
+      "n": 1,
+      "med": 50,
+      "p95": 50,
+      "max": 50
+     },
+     "heapMB": 63,
+     "dom": 737,
+     "intervals": 2,
+     "timeouts": 11,
+     "offers": 57,
+     "notes": 0,
+     "inbox": 0,
+     "log": 60,
+     "news": 11
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 10,
+       "med": 16.5,
+       "p95": 31.3,
+       "max": 31.3
+      },
+      "refresh": {
+       "n": 13,
+       "med": 4.8,
+       "p95": 12.9,
+       "max": 12.9
+      },
+      "longtask": {
+       "n": 1,
+       "med": 56,
+       "p95": 56,
+       "max": 56
+      },
+      "builds": 76,
+      "deltas": 75,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 38,
+      "dom": 744,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 96,
+      "packets": 3000,
+      "joinErrors": 0
+     }
+    }
+   },
+   {
+    "label": "m120",
+    "month": 120,
+    "host": {
+     "monthTick": {
+      "n": 12,
+      "med": 63.5,
+      "p95": 87.1,
+      "max": 87.1
+     },
+     "publish": {
+      "n": 371,
+      "med": 2.6,
+      "p95": 5.8,
+      "max": 20.5
+     },
+     "longtask": {
+      "n": 1,
+      "med": 60,
+      "p95": 60,
+      "max": 60
+     },
+     "heapMB": 57,
+     "dom": 737,
+     "intervals": 2,
+     "timeouts": 16,
+     "offers": 65,
+     "notes": 0,
+     "inbox": 0,
+     "log": 60,
+     "news": 12
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 8,
+       "med": 17.6,
+       "p95": 36.5,
+       "max": 36.5
+      },
+      "refresh": {
+       "n": 12,
+       "med": 6.8,
+       "p95": 24.3,
+       "max": 24.3
+      },
+      "longtask": {
+       "n": 1,
+       "med": 61,
+       "p95": 61,
+       "max": 61
+      },
+      "builds": 84,
+      "deltas": 83,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 34,
+      "dom": 764,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 106,
+      "packets": 3000,
+      "joinErrors": 0
+     }
+    }
+   }
+  ],
+  "notes": [],
+  "net": {},
+  "resume": {},
+  "relayPid1": 1393,
+  "seats": [
+   {
+    "e": 1,
+    "conn": true
+   }
+  ],
+  "cmdSummary": {
+   "ok": 126,
+   "rejected": 0,
+   "skip": 29,
+   "byKind": {
+    "offerHuman:ok": 40,
+    "research:ok": 20,
+    "move:ok": 20,
+    "ship:ok": 13,
+    "respond:ok": 18,
+    "fedFound:skip": 7,
+    "councilVote:skip": 19,
+    "war:skip": 1,
+    "respond:skip": 2,
+    "offerAI:ok": 14,
+    "councilVote:ok": 1
+   }
+  },
+  "errors": []
+ }
+}

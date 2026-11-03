@@ -99,7 +99,7 @@ let relay,px,base,tls,bH,bB,bC;
     await room(H,2,[[Bp,'Bora',{name:'Saf Akıl Ağı',mizac:'teknokrasi',origin:'standart',ethics:['mat:2','mil:-1'],civics:['sinyal_avci']}]]);
     for(const p of [H,Bp])assert.equal(await p.evaluate(()=>!!document.getElementById('map')&&!document.getElementById('game').classList.contains('hidden')),true);
     const v=await Bp.evaluate(async()=>{const r=await fetch('/mp/version',{cache:'no-store'});return {s:r.status,j:await r.json(),b:BUILD_ID,line:MP1View.verLine(),chip:(document.getElementById('mp1Mini')||{}).title||''};});
-    metrics.version=v.j;assert.equal(v.s,200);assert.match(v.j.mp,/^MP\.(7\.[345]|8)$/);assert.equal(v.j.build,v.b);assert.match(v.line,new RegExp('MP\\.(7\\.[345]|8) · oyun '+BUILD+'$'));   /* PERF.2: build manifestten (sabit liste yerine) */assert.match(v.chip,/MP\.7\.[345]/);
+    metrics.version=v.j;assert.equal(v.s,200);assert.match(v.j.mp,/^MP\.(7\.[345]|8)$/);assert.equal(v.j.build,v.b);assert.match(v.line,new RegExp('MP\\.(7\\.[345]|8) · oyun '+BUILD+'$'));   /* PERF.2: build manifestten (sabit liste yerine) */assert.match(v.chip,/MP\.(7\.[345]|8)/);
     assert.equal(Object.values(v.j.files).every(x=>/^[0-9a-f]{12}$/.test(x)),true);
     await wait(Bp,()=>MP6Stars.S.unsupported&&MP6Stars.S.unsupported.length>0);metrics.unsupported=await Bp.evaluate(()=>MP6Stars.S.unsupported);
     for(const a of ['bill','billPick','billTarget','cncFound','cncJoin','cncLeave','cncNo','cncPane','cncYes','permanent','reform','throneBuild','veto','bribe','blackmail','bmGo','fundSep','panoptRetarget','revolt','revoltConfirm','whisperBlame','whisperGo','whisperMenu','whisperPick','devour','devourConfirm','colFire'])

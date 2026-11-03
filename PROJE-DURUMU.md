@@ -6,7 +6,7 @@ Son güncelleme: 2026-11-03. Depo `sarsiss12-dot/Star`.
 
 | | `main` (birleşmiş) | Bu dal (PR) |
 |---|---|---|
-| Faz | 96H.10 + MP.0 – MP.4 (+ 96H.11 araştırma arşivi) | MP.5 (PR #17) + MP.6 (PR #18) + MP.6.1 (PR #19) + MP.6.2 (PR #20) + MP.6.3 (PR #21) + MP.6.4 (PR #22) + PERF.1 (PR #23) + MP.7 (PR #24, mobil başlangıç düzeltmesi, oyuncuya özel devlet tasarımı) + MP.7.1 (PR #25, tek STARS arayüzü) + MP.7.2 (PR #26, eksik oynanış işlevleri) + MP.7.3 (PR #27, Galaktik Konsey, entrikalar, yıkıcı savaş) + MP.7.4 (PR #28) + MP.7.5 (PR #29, savaş/barış tutarlılığı, misafir panel kararlılığı ve performans, mobil miktar; build 96h10p4) + PERF.2 (host AI performansı; build 96h10p5) — hepsi açık |
+| Faz | 96H.10 + MP.0 – MP.4 (+ 96H.11 araştırma arşivi) | MP.5 (PR #17) + MP.6 (PR #18) + MP.6.1 (PR #19) + MP.6.2 (PR #20) + MP.6.3 (PR #21) + MP.6.4 (PR #22) + PERF.1 (PR #23) + MP.7 (PR #24, mobil başlangıç düzeltmesi, oyuncuya özel devlet tasarımı) + MP.7.1 (PR #25, tek STARS arayüzü) + MP.7.2 (PR #26, eksik oynanış işlevleri) + MP.7.3 (PR #27, Galaktik Konsey, entrikalar, yıkıcı savaş) + MP.7.4 (PR #28) + MP.7.5 (PR #29, savaş/barış tutarlılığı, misafir panel kararlılığı ve performans, mobil miktar; build 96h10p4) + PERF.2 (PR #30, host AI performansı; build 96h10p5) + MP.8 (uzun oyun dayanıklılığı, senkron, kayıt/kurtarma, ağ; runtime değişmedi) — hepsi açık |
 | Build / PWA | `96h10` / `stars-v96h10` | `96h10p5` / `stars-v96h10p5` (PERF.2; MP.7.5 `96h10p4`, PERF.1 `96h10p1` dahil) |
 | Save | v8 | v8 (şema değişmedi) |
 | Oyun ZIP | `releases/stars-faz96h10.zip` (SHA-256 `78e76d1627b8ec1b990849b2242835f78667f110e1d6f17021760183ee7be6d0`) | `releases/stars-faz96h10p5.zip` (SHA-256 `15c247db0efa7952fc025fc7df7368eeff1adc2f8eb7c47eaf4645b8ec2c012a`); önceki: `stars-faz96h10p4.zip` (MP.7.5), `stars-faz96h10p1.zip` (PERF.1) |
@@ -14,6 +14,17 @@ Son güncelleme: 2026-11-03. Depo `sarsiss12-dot/Star`.
 | Değişen runtime | — | PERF.1: `economy.js`, `economic-ledger.js`; MP.7: `main.js` (setupGame cfg.humans); MP.7.4/7.5: `ui.js`, `inbox.js`, `index.html`; PERF.2: `ai.js`, `main.js`; her sürümde `main.js` BUILD_ID, `sw.js` CACHE |
 
 96H.6.2, 96H.6.3, 96H.7, 96H.11 ve MP.0 – MP.6.4 oyun yayımlamadı. PERF.1 yeni oyun ZIP'i üretti (yalnız runtime; MP kodu ZIP'te değil).
+
+## MP.8 — uzun oyun dayanıklılığı, senkron, kayıt / kurtarma, ağ kopması
+
+Ayrıntı: `MULTIPLAYER-MP8-SONUC.md`. Runtime değişmedi (build `96h10p5`); MP sürümü `MP.8`.
+
+- **Yeni düzenek** `tests/browser-mp8.cjs`: gerçek STARS misafir arayüzü + üretim relay süreci + oyuncu başına ayrı Chromium; 120 / 240 ay kampanya (2 ve 3 insan), her turda host ↔ misafir ayna ve durum birebir, gizlilik.
+- **Kayıt → bütün süreçler + relay kapanır → yeni oda → aynı devletler:** dünya, teklifler, savaşlar, federasyon, konsey, hız aynı.
+- **Düzeltmeler:**
+  - ağ kopmasında kaybolan karar gelen kutusunu kalıcı kilitliyordu (`guest-stars.js`);
+  - ikinci sekme "Oda dolu" yerine gerçek durumu söyler;
+  - tanı satırı genişletildi.
 
 ## PERF.2 — host AI performansı (aynı kararlar)
 
