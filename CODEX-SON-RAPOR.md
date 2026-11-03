@@ -10,4 +10,6 @@
 - FAIL korunuyor: ilk MP75 5/1 (A3 AI barış teklifi; tekrarda oluşmadı), iki 240 hedefli performans koşusu0/1 (237. ay/n=0). 240 kazanımı ve FPS artışı iddia edilmez; B1 açık.
 - Oyun96h10p5/Save8/manifest19 aynı; MP sürümü **MP.8.6**. Yeni game ZIP/CRC üretimi gerekmedi. Docker/allowlist mevcut dosyayı kapsıyor; deploy yapılmadı.
 - Render ve fiziksel Android **NOT RUN**; hiçbir Render bağlantısı veya izin isteği yapılmadı.
-- Son GitHub HEAD / PR kaydı raporun teslim bölümünde ve son sohbet yanıtındadır.
+- GitHub'a push edilip uzak dalda doğrulanan kod/kanıt HEAD'i: `a7ffada319ddd88ab5c62e299ca62fc61bc0fd43`. Bitiş belge commit SHA'sı son sohbet yanıtındadır.
+- GitHub rapor teslimi **PASS**; tek PR denemesi API **Forbidden / BLOCKED**, PR oluşturulmadı. [Doğru tabanla karşılaştır / PR oluştur](https://github.com/sarsiss12-dot/Star/compare/codex/stars-mp85-live-mobile-audit...codex/stars-mp86-performance?expand=1).
+- [GitHub raporu](https://github.com/sarsiss12-dot/Star/blob/codex/stars-mp86-performance/reports/codex/MP86-PERFORMANS-SONUC.md).

@@ -141,4 +141,10 @@ Piksel bloğu istemcide `MP.8.6 NEBULA PIXELS` marker'ları arasındadır. Host 
 
 ## GitHub teslim kaydı
 
-Kod, testler, bu rapor ve kanıtlar `codex/stars-mp86-performance` dalına gönderilecektir. Gönderim ve tek PR denemesinin doğrulanmış sonucu teslimden sonra bu bölüme yazılacaktır. Nihai rapor commit SHA'sı son sohbet yanıtında yer alır.
+- Kod/kanıt/rapor commit'i **`a7ffada319ddd88ab5c62e299ca62fc61bc0fd43`** GitHub'a başarıyla push edildi; `git ls-remote --heads origin refs/heads/codex/stars-mp86-performance` aynı SHA'yı doğruladı.
+- Bitiş durumu: doğrulanmış kod HEAD'i yukarıdadır. Bu teslim kaydını tamamlayan son belge commit'inin SHA'sı son sohbet yanıtında verilir; kendi SHA'sını yazmak için ek commit zinciri oluşturulmaz.
+- Geliştirme dalı: `codex/stars-mp86-performance`; PR tabanı: `codex/stars-mp85-live-mobile-audit`.
+- **PR oluşturulamadı / BLOCKED**: tek `gh pr create` denemesi `Post "https://api.github.com/graphql": Forbidden` ile çıkış1 döndürdü. Tekrar denenmedi, güvenlik sınırları değiştirilmedi. [Hata kaydı](evidence/mp86/pr-attempt.log).
+- [GitHub sonuç raporu](https://github.com/sarsiss12-dot/Star/blob/codex/stars-mp86-performance/reports/codex/MP86-PERFORMANS-SONUC.md).
+- [Doğru tabanla karşılaştır / PR oluştur](https://github.com/sarsiss12-dot/Star/compare/codex/stars-mp85-live-mobile-audit...codex/stars-mp86-performance?expand=1).
+- `main` değiştirilmedi; merge/rebase/force-push ve Render işlemi yapılmadı. GitHub rapor teslimi **PASS**, otomatik PR oluşturma **BLOCKED**.
