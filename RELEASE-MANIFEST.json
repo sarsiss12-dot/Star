@@ -1,14 +1,14 @@
 {
-  "phase": "MP.7.5",
-  "build": "96h10p4",
-  "scope": "War/peace consistency (stale peace / status-quo inbox records close when the war ends or a newer offer supersedes them; ACTIVE WARS window shows the same list as the top war counter), decision events can be swiped away and reopened from the status list, touch quantity steppers in dialogs. Simulation, AI, Save8 schema and RNG unchanged; PERF.1 retained.",
+  "phase": "PERF.2",
+  "build": "96h10p5",
+  "scope": "Host AI performance: a read-only AI evaluation window computes an empire's unchanged shadow income and the fresh trade result of port-neutral shadows once per window instead of per building candidate; supplyDistance checks usable gates directly instead of scanning the galaxy. Same decisions: Save8 bytes and RNG identical month by month. Save8 schema unchanged; PERF.1 and MP.7.5 retained.",
   "save_version": 8,
-  "pwa_cache": "stars-v96h10p4",
-  "parent_commit": "7e43f825d1bac473c66de22cf9addd518b181f68",
-  "parent_zip_sha256": "1cb0ea94f4e6e891454e1d09f4908e891e2ab2a633ae152a86cc4b02d73aad77",
+  "pwa_cache": "stars-v96h10p5",
+  "parent_commit": "8fa82031bd9cc4f27fff8b6ce2b2ad0ca18ee523",
+  "parent_zip_sha256": "3ebc53ab8d15620666b7bb40b73efdbd0948b2f0469182e96aa988179c22e0d8",
   "file_count": 19,
   "files": {
-    "ai.js": "11485356c0e75c39d9dabb2fc06b50bfb425598d3d08a2b767fc691c39ce51c6",
+    "ai.js": "49bb05c0621b8a31e9d61f361ea3a36250915f440a51d77e58aec7cc1e653b87",
     "archive-ui.js": "f3b43957f97f2a32add1f40fc22f493eeca89bc5e1db05e5a5de92eef0e9fc03",
     "audio.js": "6ddf6e388fa404394fee6220c2bfeeb3d1f9601c51a35ccdfe3181a8781942f7",
     "combat.js": "b4e21fcdb6fdaaa93da07313131470de3e8a3c28b5650226a9c4a2713bde73a5",
@@ -21,11 +21,11 @@
     "economy.js": "315653254c3e690523d5068d8ccec6a4cd7adc7f44e7a563adc04917f1eeee80",
     "inbox.js": "e97f82d178f6908a89df792af28bebd4ba22315917e3e2c0bc15a874291ceb49",
     "index.html": "c859ad7204a3dac2df210f63eb7eb577a193812370ba3b39d7e42be06f72e427",
-    "main.js": "3b259d32d22877bae16cfbd5e59f2abed0ec829146cf690e0eb460e75f76ba00",
+    "main.js": "312d9fdd9f9e3c0fd8638b2fdc0d980828e4880a5be74316c1cca1ac532e32ef",
     "manifest.json": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
     "map.js": "d8ca27ee07c484b7399f95d8031aa70fb7539bcf89d768c8442200b7cba76ae3",
     "news.js": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
-    "sw.js": "29f4526b52a2c41abec73fe707891d98580ed91d46d7c7ea128a311a9e8fec37",
+    "sw.js": "f0067c51e1b8698deb550a663a60387e2c032ff3374e5c69ef70bb39b71f2154",
     "ui.js": "1c746c4503f94a36e66c288cfc8715fd095fd3011fbc0f849bacabc752999f0f"
   }
 }

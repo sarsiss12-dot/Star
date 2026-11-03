@@ -13,7 +13,7 @@ const SIEGE='seed11-month66-siege.save',ESCORT='seed11-month79-escort.save';
 function legacyRoot(){
   const dir=fs.mkdtempSync(path.join(os.tmpdir(),'stars-96h8-'));
   for(const n of fs.readdirSync(root))if(/\.(js|html|json)$/.test(n)&&fs.statSync(path.join(root,n)).isFile())fs.symlinkSync(path.join(root,n),path.join(dir,n));
-  fs.unlinkSync(path.join(dir,'ai.js'));fs.writeFileSync(path.join(dir,'ai.js'),stripReviewedH9(stripReviewedH10(fs.readFileSync(path.join(root,'ai.js'),'utf8'))));
+  fs.unlinkSync(path.join(dir,'ai.js'));fs.writeFileSync(path.join(dir,'ai.js'),stripReviewedH9(stripReviewedH10(require('./helpers/perf2-preservation').stripReviewedP2('ai.js',fs.readFileSync(path.join(root,'ai.js'),'utf8')))));
   return dir;
 }
 function load(save,base=root){
@@ -93,10 +93,10 @@ test('Save8 shape and RNG: 96H.9 stores no new state; a natural 96H.9 run reload
 });
 test('invasion, combat and diplomacy rules keep their 96H.8 bytes',()=>{
   const want={'economy.js':'5d412d488760ae2b7193b13822b747788130b63ed782e62bfbd3223154b69d22','combat.js':'b4e21fcdb6fdaaa93da07313131470de3e8a3c28b5650226a9c4a2713bde73a5','diplomacy.js':'ca589f8d2581e7189f6ace471db9bf2e9e1e504117eb2249b7ce9f04e206eaf4'};
-  for(const [n,sha]of Object.entries(want))assert.equal(crypto.createHash('sha256').update(require('./helpers/perf1-preservation').stripReviewedP1(n,fs.readFileSync(path.join(root,n),'utf8'))).digest('hex'),sha,n);   // PERF.1: incelenmiş performans bloğu tam metinle geri alınır
+  for(const [n,sha]of Object.entries(want))assert.equal(crypto.createHash('sha256').update(require('./helpers/perf1-preservation').stripReviewedP1(n,require('./helpers/perf2-preservation').stripReviewedP2(n,fs.readFileSync(path.join(root,n),'utf8')))).digest('hex'),sha,n);   // PERF.1: incelenmiş performans bloğu tam metinle geri alınır
 });
 test('only the reviewed 96H.9 invasion blocks differ from 96H.8 ai.js',()=>{
-  const source=fs.readFileSync(path.join(root,'ai.js'),'utf8');
+  const source=require('./helpers/perf2-preservation').stripReviewedP2('ai.js',fs.readFileSync(path.join(root,'ai.js'),'utf8'));
   assert.equal(crypto.createHash('sha256').update(stripReviewedH9(stripReviewedH10(source))).digest('hex'),'8141a3fb691db340e66f267a9a94f942d3cb7e2cd542829bbb7493545bff16b0');
 });
 end();

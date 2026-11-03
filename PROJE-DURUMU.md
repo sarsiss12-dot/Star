@@ -1,19 +1,27 @@
 # STARS — Güncel proje durumu
 
-Son güncelleme: 2026-11-02. Depo `sarsiss12-dot/Star`.
+Son güncelleme: 2026-11-03. Depo `sarsiss12-dot/Star`.
 
 ## Oynanabilir sürüm
 
 | | `main` (birleşmiş) | Bu dal (PR) |
 |---|---|---|
-| Faz | 96H.10 + MP.0 – MP.4 (+ 96H.11 araştırma arşivi) | MP.5 (PR #17) + MP.6 (PR #18) + MP.6.1 (PR #19) + MP.6.2 (PR #20) + MP.6.3 (PR #21) + MP.6.4 (PR #22) + PERF.1 (PR #23) + MP.7 (PR #24, mobil başlangıç düzeltmesi, oyuncuya özel devlet tasarımı) + MP.7.1 (PR #25, tek STARS arayüzü) + MP.7.2 (PR #26, eksik oynanış işlevleri) + MP.7.3 (PR #27, Galaktik Konsey, entrikalar, yıkıcı savaş) + MP.7.4 (PR #28) + MP.7.5 (savaş/barış tutarlılığı, misafir panel kararlılığı ve performans, mobil miktar; build 96h10p4) — hepsi açık |
-| Build / PWA | `96h10` / `stars-v96h10` | `96h10p2` / `stars-v96h10p2` (MP.7; PERF.1 `96h10p1` dahil) |
+| Faz | 96H.10 + MP.0 – MP.4 (+ 96H.11 araştırma arşivi) | MP.5 (PR #17) + MP.6 (PR #18) + MP.6.1 (PR #19) + MP.6.2 (PR #20) + MP.6.3 (PR #21) + MP.6.4 (PR #22) + PERF.1 (PR #23) + MP.7 (PR #24, mobil başlangıç düzeltmesi, oyuncuya özel devlet tasarımı) + MP.7.1 (PR #25, tek STARS arayüzü) + MP.7.2 (PR #26, eksik oynanış işlevleri) + MP.7.3 (PR #27, Galaktik Konsey, entrikalar, yıkıcı savaş) + MP.7.4 (PR #28) + MP.7.5 (PR #29, savaş/barış tutarlılığı, misafir panel kararlılığı ve performans, mobil miktar; build 96h10p4) + PERF.2 (host AI performansı; build 96h10p5) — hepsi açık |
+| Build / PWA | `96h10` / `stars-v96h10` | `96h10p5` / `stars-v96h10p5` (PERF.2; MP.7.5 `96h10p4`, PERF.1 `96h10p1` dahil) |
 | Save | v8 | v8 (şema değişmedi) |
-| Oyun ZIP | `releases/stars-faz96h10.zip` (SHA-256 `78e76d1627b8ec1b990849b2242835f78667f110e1d6f17021760183ee7be6d0`) | `releases/stars-faz96h10p2.zip` (SHA-256 `dc52bfe543b11bf7483969b6935172bcc65ece8c307fb28a0587ee1640e7bc62`); PERF.1 `stars-faz96h10p1.zip` |
+| Oyun ZIP | `releases/stars-faz96h10.zip` (SHA-256 `78e76d1627b8ec1b990849b2242835f78667f110e1d6f17021760183ee7be6d0`) | `releases/stars-faz96h10p5.zip` (SHA-256 `15c247db0efa7952fc025fc7df7368eeff1adc2f8eb7c47eaf4645b8ec2c012a`); önceki: `stars-faz96h10p4.zip` (MP.7.5), `stars-faz96h10p1.zip` (PERF.1) |
 | Taban HEAD | `4296ad2d43fedce6264020b3761f50f1839fd836` | — |
-| Değişen runtime | — | PERF.1: `economy.js`, `economic-ledger.js`; MP.7: `main.js` (setupGame cfg.humans, BUILD_ID), `sw.js` (CACHE) |
+| Değişen runtime | — | PERF.1: `economy.js`, `economic-ledger.js`; MP.7: `main.js` (setupGame cfg.humans); MP.7.4/7.5: `ui.js`, `inbox.js`, `index.html`; PERF.2: `ai.js`, `main.js`; her sürümde `main.js` BUILD_ID, `sw.js` CACHE |
 
 96H.6.2, 96H.6.3, 96H.7, 96H.11 ve MP.0 – MP.6.4 oyun yayımlamadı. PERF.1 yeni oyun ZIP'i üretti (yalnız runtime; MP kodu ZIP'te değil).
+
+## PERF.2 — host AI performansı (aynı kararlar)
+
+Ayrıntı: `PERF2-SONUC.md`. Build `96h10p5` (runtime: `ai.js`, `main.js`, `sw.js`), ZIP `releases/stars-faz96h10p5.zip`.
+
+- **Darboğaz:** federasyon üyesinin her bina adayı için iki tam gölge gelir (biri adaydan bağımsız) ve her seferinde baştan kurulan ticaret ağı; ayrıca her ikmal hesabında tüm galaksinin geçit taraması.
+- **Kazanç:** büyük galaksi geç oyunda ay adımı medyanı −21… −31%, p95 −19… −29% (Node, 30 ay); MP host simülasyonu 1 misafirle p50 713 → 434 ms (240. ay).
+- **Eşdeğerlik:** Save8 + RNG ay ay birebir; yeni oyundan 240 ay 16/16 kayıt bayt-bayt aynı.
 
 ## MP.7.5 — savaş / barış tutarlılığı, uzun oyun performansı, panel kararlılığı
 

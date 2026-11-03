@@ -10,7 +10,7 @@ const fixture=n=>fs.readFileSync(path.join(__dirname,'fixtures/96h8',n),'utf8');
 function legacyRoot(){
   const dir=fs.mkdtempSync(path.join(os.tmpdir(),'stars-96h71-'));
   for(const n of fs.readdirSync(root))if(/\.(js|html|json)$/.test(n)&&fs.statSync(path.join(root,n)).isFile())fs.symlinkSync(path.join(root,n),path.join(dir,n));
-  fs.unlinkSync(path.join(dir,'ai.js'));fs.writeFileSync(path.join(dir,'ai.js'),stripReviewedH8(stripReviewedH9(stripReviewedH10(fs.readFileSync(path.join(root,'ai.js'),'utf8')))));
+  fs.unlinkSync(path.join(dir,'ai.js'));fs.writeFileSync(path.join(dir,'ai.js'),stripReviewedH8(stripReviewedH9(stripReviewedH10(require('./helpers/perf2-preservation').stripReviewedP2('ai.js',fs.readFileSync(path.join(root,'ai.js'),'utf8'))))));
   return dir;
 }
 function load(save,base=root){
@@ -87,7 +87,7 @@ test('natural 24 months from seed11 month 40: actor3 keeps its navy instead of t
   assert(h.run('!dis8.some(x=>x.e===3)&&ships8(3)>=12'),h.run('JSON.stringify({dis8,ships:ships8(3)})'));
 });
 test('only the reviewed 96H.8 campaign blocks differ from 96H.7.1 ai.js',()=>{
-  const source=fs.readFileSync(path.join(root,'ai.js'),'utf8');
+  const source=require('./helpers/perf2-preservation').stripReviewedP2('ai.js',fs.readFileSync(path.join(root,'ai.js'),'utf8'));
   assert.equal(crypto.createHash('sha256').update(stripReviewedH8(stripReviewedH9(stripReviewedH10(source)))).digest('hex'),'f48608cc82ca46b5028c637dcabbfb1b3e2ae09f1e3c1eb24bd2c4c1b326d8d0');
 });
 end();

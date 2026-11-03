@@ -177,6 +177,20 @@ function aiConstructionCommitment(e){
   if(t.empire===e.id&&t.state!=='building')for(const [r,v]of Object.entries(structCost(e,t.key)))out[r]=(out[r]||0)+v;
  return out;
 }
+/* PERF.2 A: okuma-yalnız AI değerlendirme penceresi. Aşağıdaki işlevlerin en dış çağrısı süresince
+   dünya değişmez (yalnız eşzamanlı geri yüklenen gölge koloniler). Bu sürede devletin değişmemiş
+   gölge geliri ve liman sayısı değişmeyen gölgenin taze ticaret sonucu devlet başına bir kez
+   hesaplanır. Pencere bitince atılır; Save8'e girmez, RNG kullanmaz, pencere dışında davranış aynen. */
+const AI_INCOME_WINDOW={depth:0,old:new Map(),trade:new Map()};
+function aiIncomeWindow(fn){
+ const W=AI_INCOME_WINDOW;
+ return function(){if(W.depth++===0){W.old.clear();W.trade.clear();}try{return fn.apply(this,arguments);}finally{if(--W.depth===0){W.old.clear();W.trade.clear();}}};
+}
+function aiShadowIncome(e){
+ const W=AI_INCOME_WINDOW;if(!W.depth)return empireIncome({...e},false);
+ let v=W.old.get(e);if(!v){v=empireIncome({...e},false);W.old.set(e,v);}return {...v};
+}
+/* END PERF.2 A WINDOW */
 function aiBuildingDelta(e,sys,pl,key,queued=false,direction=1){
  const b={...pl.col.b};if(queued)for(const q of pl.col.q||[])if(BUILDINGS[q.key])b[q.key]=Math.max(0,(b[q.key]||0)+(q.dem?-1:1));
  if(key)b[key]=Math.max(0,(b[key]||0)+direction);
@@ -184,8 +198,9 @@ function aiBuildingDelta(e,sys,pl,key,queued=false,direction=1){
  // the sign of total income. Use the real calculator for these nonlinear
  // cases, on a shadow empire and a synchronously restored colony only.
  if((b.liman||0)!==(pl.col.b.liman||0)||findFed(e)){
-  const original=pl.col,old=empireIncome({...e},false);let next;
-  try{pl.col={...original,b};next=empireIncome({...e,_trAt:-1,_trCache:null},false);}
+  const original=pl.col,old=aiShadowIncome(e);let next;
+  const W=AI_INCOME_WINDOW,same=W.depth>0&&(b.liman||0)===(pl.col.b.liman||0),tr=same?W.trade.get(e):null;
+  try{pl.col={...original,b};const sh=tr?{...e,_trAt:tr.at,_trCache:tr.cache,_trSig:tr.sig}:{...e,_trAt:-1,_trCache:null};next=empireIncome(sh,false);if(same&&!tr)W.trade.set(e,{at:sh._trAt,cache:sh._trCache,sig:sh._trSig});}
   finally{pl.col=original;}
   return Object.fromEntries(Object.keys(old).map(r=>[r,next[r]-old[r]]));
  }
@@ -230,7 +245,7 @@ function aiEconomyPlan(e){
  // A vote resolves after this month's production. Recompute a pure forecast
  // until the next production month, without crediting income. This also
  // keeps a mid-month Save8 reload from changing the budget's income basis.
- const income=Math.floor(e.aiFedReview?.day/30)===Math.floor(G.day/30)?empireIncome({...e},false):e.inc;
+ const income=Math.floor(e.aiFedReview?.day/30)===Math.floor(G.day/30)?aiShadowIncome(e):e.inc;
  const projected={...income},committed=aiConstructionCommitment(e),queued={};
  for(const c of e.colonies){const sys=G.sys[c.s],pl=sys?.planets[c.p];if(!pl?.col||pl.owner!==e.id||!pl.col.q?.length)continue;
   const d=aiBuildingDelta(e,sys,pl,null,true);for(const r in d)projected[r]=(projected[r]||0)+d[r];
@@ -379,7 +394,7 @@ function aiColonyForecast(e,sys,pl,{purchase=false,excludeFleet=null}={}){
  }
  if(!pl||!sys?.surv.includes(e.id)||pl.owner>=0)return {ok:false,reason:'unknown-or-occupied',rows:{}};
  targets.set(sys.id+':'+pl.i,{s:sys,p:pl});
- const shadow={...e,colonies:e.colonies.slice(),_trCache:null,_trAt:-1},old=aiFedBudget(e,empireIncome({...e},false)).net,restore=[];
+ const shadow={...e,colonies:e.colonies.slice(),_trCache:null,_trAt:-1},old=aiFedBudget(e,aiShadowIncome(e)).net,restore=[];
  let next;
  try{
   for(const {s,p}of targets.values()){
@@ -478,6 +493,10 @@ function aiDemolitionChoice(e,sys,pl,needs,plan=aiEconomyPlan(e)){
  }
  return null;
 }
+/* PERF.2 A: pencere işlevleri (en dış çağrı pencereyi açar/kapatır). */
+aiEconomyPlan=aiIncomeWindow(aiEconomyPlan);aiEconomicOrder=aiIncomeWindow(aiEconomicOrder);aiDemolitionChoice=aiIncomeWindow(aiDemolitionChoice);
+aiStrategicBuildingNeeds=aiIncomeWindow(aiStrategicBuildingNeeds);aiColonyForecast=aiIncomeWindow(aiColonyForecast);aiRecoveryInvestment=aiIncomeWindow(aiRecoveryInvestment);
+/* END PERF.2 A WRAP */
 /* 96F extends the existing aiStrategy record; goal remains the tactical
    compatibility field. The objective and its preparation never grant resources. */
 const AI_OBJECTIVES={regional:'Bölgesel üstünlük',economy:'Ekonomik güç',science:'Teknolojik gelişim',security:'Güvenli sınırlar',federation:'Federasyon güvenliği',trade:'Ticaret ağı',contain:'Rakibi sınırlama',recovery:'Yenilgiden toparlanma',influence:'Diplomatik nüfuz'};

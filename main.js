@@ -3239,14 +3239,15 @@ function supplyDistance(e, f){
   if (sid < 0) return 0;
   if (isSupplyNode(e, G.sys[sid])) return 0;
   /* FAZ 63: geçit varsa mesafe sıfır — ağ tek nokta gibi davranır */
-  const kapilar = gateSupplyNodes(e);
-  if (kapilar.length){
-    if (kapilar.indexOf(sid) >= 0) return 0;
+  /* PERF.2 B: gateSupplyNodes listesinin üyeliği = hasUsableGate (saf); tüm galaksiyi taramadan aynı denetim. */
+  {
+    if (hasUsableGate(e, G.sys[sid])) return 0;
     /* Geçide komşuysak da ağa bağlıyız sayılır (1 atlama) */
     const sy0 = G.sys[sid];
     if (sy0 && sy0.lanes)
-      for (const l of sy0.lanes) if (kapilar.indexOf(l) >= 0) return 0;
+      for (const l of sy0.lanes) if (hasUsableGate(e, G.sys[l])) return 0;
   }
+  /* END PERF.2 B */
   const gorulen = new Set([sid]);
   let sinir = [sid];
   for (let d = 1; d <= SUPPLY_LIMIT + 1; d++){
@@ -8326,7 +8327,7 @@ function forceRedraw(sebep){
    Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
    Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
 /* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */
-const BUILD_ID = '96h10p4';
+const BUILD_ID = '96h10p5';
 const DIAG_MAX = 40;
 const DIAG = [];
 function logDiag(tur, mesaj){
