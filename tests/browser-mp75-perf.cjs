@@ -53,7 +53,7 @@ async function room(H,cap,guests){
   await H.goto(base+'/');await wait(H,()=>typeof setupGame==='function'&&document.getElementById('mp1Btn')&&window.MP7Setup&&window.MP71Dip);
   await tap(H,'#mp1Btn');await tap(H,'[data-m="create"]');await wait(H,()=>MP1Host.lobby&&MP1Host.lobby.mode==='design'&&MP1Host.lobby.phase==='waiting');
   if(cap>2){await H.selectOption('#mp7Cap',String(cap));await wait(H,c=>MP1Host.lobby.capacity===c,cap);}
-  {const r=await H.evaluate(([s,a])=>MP1Host.host.configure({size:s,aiCount:a,seed:22}),[SIZE,AI]);if(!r.ok)throw Error('configure '+JSON.stringify(r));}
+  {const r=await H.evaluate(([s,a])=>MP1Host.host.configure({size:s,aiCount:a,seed:+(process.env.MP75_SEED||22)}),[SIZE,AI]);if(!r.ok)throw Error('configure '+JSON.stringify(r));}
   await tap(H,'#mp7EditMe');await design(H,{name:'Kızıl Muhafız',mizac:'militarist',origin:'standart',ethics:['mil:2'],civics:['kale_dok']});
   const link=await H.textContent('#mp1Link');
   for(const [p,name,d,taps] of guests){await joinTaps(p,link,name,taps||1);
