@@ -1,0 +1,26 @@
+NAV B /mp/play
+NAV B /mp/play
+NAV B /mp/play
+NAV B /mp/play
+NAV B /mp/play
+NAV B /mp/play
+FAIL A4 karttan hızlı karar (misafir): KABUL gerçek dokunmayla → host kabul eder, kaynak bir kez aktarılır; ÇİFT dokunma tek "respond"; REDDET; KARŞI TEKLİF gerçek anlaşma penceresini açar
+A5DIAG {"uid":2,"id":3,"uidKey":"mp71:3","inbox":[{"uid":2,"kind":"anomaly","key":"an:3","hidden":false},{"uid":3,"kind":"aideal","key":"mp71:3","hidden":false},{"uid":4,"kind":"anomaly","key":"an:35","hidden":false}],"dom":["2","3","3:y","3:n","3:c","4"],"recs":[{"id":1,"key":"deal:1|res:min:23>:56.47752000000078","status":"pending","note":3}],"offer":"pending","stats":{"offers":0,"counters":0,"withdraws":0,"responds":0,"notified":1,"synced":0,"sentRenders":0,"dealBoxes":0,"blocked":0},"speed":1,"modal":false,"day":80.66319999999999}
+FAIL A5 host karttan hızlı karar: B → host teklifi host kartında KABUL (dokunma) → kabul, bir kez
+NAV host2 /
+NAV host2 /
+NAV host2 /
+NAV host2 /
+NAV host2 /
+NAV host2 /
+NAV B2 /mp/play
+NAV B2 /mp/play
+NAV B2 /mp/play
+NAV B2 /mp/play
+NAV C2 /mp/play
+NAV C2 /mp/play
+NAV C2 /mp/play
+NAV C2 /mp/play
+NAV B2 /mp/play
+NAV C2 /mp/play
+NAV host2 /

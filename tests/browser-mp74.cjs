@@ -21,7 +21,7 @@ let tapFail=0;
 const tap=async(p,sel)=>{const l=p.locator(sel).first();await l.scrollIntoViewIfNeeded().catch(()=>{});try{await l.tap({timeout:8000});}
   catch(e){const n='tapfail-'+(++tapFail);await shot(p,n);throw Error('tap '+sel+' ['+n+'] '+JSON.stringify(await p.evaluate(sel=>{const m=document.getElementById('modal'),sh=document.getElementById('mp1Sheet'),el=document.querySelector(sel),r=el&&el.getBoundingClientRect();
     const top=r&&document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);
-    return {who:G.p.name,modal:m&&!m.classList.contains('hidden')?m.textContent.slice(0,160):'',sheet:sh?sh.textContent.slice(0,200):'',diplo:document.getElementById('diploPane').classList.contains('show'),
+    return {who:typeof G!=='undefined'&&G.p?G.p.name:(window.MP1Join?'join:'+MP1Join.screen:location.pathname),modal:m&&!m.classList.contains('hidden')?m.textContent.slice(0,160):'',sheet:sh?sh.textContent.slice(0,200):'',diplo:document.getElementById('diploPane').classList.contains('show'),
       box:r&&[r.x,r.y,r.width,r.height],top:top&&(top.id||top.className||top.tagName),vw:[innerWidth,innerHeight]};},sel)));}};
 async function design(p,o){
   /* kurulum ekranı dikeyde doldurulur (MP.7 testiyle aynı); oyun yatay görünümde oynanır */
@@ -86,6 +86,8 @@ let relay,px,base,tls,bH,bB,bC;
   [bH,bB,bC]=await Promise.all([0,1,2].map(()=>chromium.launch(launch)));
   const H=await (await bH.newContext(PHONE(844,390))).newPage(),Bp=await (await bB.newContext(PHONE(800,360))).newPage();
   for(const [n,p] of [['host',H],['B',Bp]]){p.on('pageerror',e=>errors.push(n+': '+e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|WebSocket connection/.test(m.text()))errors.push(n+' console: '+m.text().slice(0,300));});}
+  /* MP.8.1 tanı: misafir sayfasının ana çerçeve gezinmeleri (beklenmeyen sayfa değişimi = MP1Join kaybolur) */
+  metrics.nav=[];Bp.on('framenavigated',f=>{if(f===Bp.mainFrame()){const u=new URL(f.url());metrics.nav.push(u.pathname+u.search.replace(/code=[^&]+/,'code=*'));console.log('NAV B '+u.pathname);}});
   const roomOf=()=>[...relay.rooms.values()].at(-1);
   await test('A1 5 karakterli kod: host kodu 5 karakter ve tiresiz; davet bağlantısı kodu taşır; yanlış kod reddedilir; KATIL\'a hızlı ÜÇ dokunma (600 ms gecikmeli ağ) tek koltuk, "oda dolu" yok; iki telefon oyuna girer',async()=>{
     /* yanlış kod: gerçek giriş ekranı */
@@ -133,12 +135,15 @@ let relay,px,base,tls,bH,bB,bC;
     await Bp.waitForFunction(k=>{const n=(G.inbox||[]).find(n=>n.key===k);return n&&document.querySelectorAll('#inbox [data-x^="'+n.uid+':"]').length===3;},key,{timeout:30000,polling:100});
     const L=await btns(key);await shot(Bp,'a4-b-quick');
     metrics.quickButtons=L.map(b=>[b.t,b.in,b.h]);assert.deepEqual(L.map(b=>b.t),['KABUL','REDDET','KARŞI TEKLİF']);assert(L.every(b=>b.in&&b.h>=44),JSON.stringify(L));
+    /* MP.8.1: aktarım ölçülürken ay geliri işlemesin (misafirin enerji geliri eksi olabilir; A5 ile aynı yöntem): duraklat, ayna host gününe yetişsin, sonra e0 */
+    await H.evaluate(()=>MP1Host.host.local({kind:'speed',value:0}));const hd=await H.evaluate(()=>{MP1Host.host.publish();return Math.floor(G.day);});
+    await wait(Bp,d=>Math.floor(G.day)===d&&G.speed===0,hd);await Bp.waitForTimeout(1500);
     const e0=await Bp.evaluate(()=>G.p.res.ene);const yb=L.find(b=>b.x==='y');
     await tapAt(Bp,yb.cx,yb.cy);await tapAt(Bp,yb.cx,yb.cy);
     await wait(H,id=>MP1Host.host.dip.offers.find(o=>o.id===id).status==='accepted',id);await Bp.waitForTimeout(800);
     assert.equal(await Bp.evaluate(()=>__cmds.filter(k=>k==='respond').length),1,'double tap sends one command');
     await wait(Bp,([k,id])=>!G.inbox.some(n=>n.key===k)&&(DiplomaticInbox.state().records.find(r=>r.mp===id)||{}).status==='accepted',[key,id]);
-    await wait(Bp,e=>G.p.res.ene>=e+13,e0);
+    await wait(Bp,e=>G.p.res.ene>=e+13,e0);await H.evaluate(()=>MP1Host.host.local({kind:'speed',value:1}));
     const tapQuick=async(k,c)=>{await Bp.waitForFunction(k=>{const n=(G.inbox||[]).find(n=>n.key===k);return n&&document.querySelectorAll('#inbox [data-x^="'+n.uid+':"]').length===3;},k,{timeout:30000,polling:100});
       const b=(await btns(k)).find(b=>b.x===c);await tapAt(Bp,b.cx,b.cy);};
     const id2=await hostOffer(H,1,17);await tapQuick('mp71:'+id2,'n');
@@ -154,8 +159,14 @@ let relay,px,base,tls,bH,bB,bC;
     const r=await Bp.evaluate(()=>MP1Join.cmd({kind:'offer',to:0,give:[{t:'res',r:'min',v:23}],want:[]}));void r;
     const id=await (await H.waitForFunction(()=>{const o=MP1Host.host.dip.offers.filter(o=>o.from===1&&o.to===0&&o.status==='pending').at(-1);return o?o.id:false;},undefined,{timeout:15000,polling:100})).jsonValue();
     await H.evaluate(()=>MP71Dip.tick());await wait(H,k=>(G.inbox||[]).some(n=>n.key===k),'mp71:'+id).catch(()=>{});
-    const uid=await H.evaluate(id=>{const n=(G.inbox||[]).find(n=>typeof n.key==='string'&&n.key.includes(String(id)))||(G.inbox||[]).filter(n=>n.kind==='aideal').at(-1);return n?n.uid:null;},id);
-    assert(uid,'host card');await wait(H,u=>document.querySelector('#inbox [data-x="'+u+':y"]'),uid);const m0=await H.evaluate(()=>G.p.res.min);
+    /* MP.8.1 kök neden: eski arama key.includes(String(id)) idi — teklif 3 iken anomali olayı 'an:3' eşleşip yanlış kart bekleniyordu (aralıklı A5). Tam anahtar. */
+    const uid=await H.evaluate(id=>{const n=(G.inbox||[]).find(n=>n.key==='mp71:'+id);return n?n.uid:null;},id);
+    /* MP.8.1 tanı: kart üretilmedi mi, yoksa test kartı göremedi mi? (başarısızlıkta durum dökümü) */
+    const diag=()=>H.evaluate(id=>({id,uidKey:'mp71:'+id,inbox:(G.inbox||[]).map(n=>({uid:n.uid,kind:n.kind,key:n.key||null,hidden:!!n.hidden})),
+      dom:[...document.querySelectorAll('#inbox [data-x]')].map(b=>b.dataset.x),recs:DiplomaticInbox.state().records.filter(r=>r.kind==='aideal').map(r=>({id:r.id,key:String(r.key).slice(0,60),status:r.status,note:r.note&&r.note.uid})),
+      offer:(MP1Host.host.dip.offers.find(o=>o.id===id)||{}).status,stats:MP71Dip.stats,speed:G.speed,modal:!document.getElementById('modal').classList.contains('hidden'),day:G.day}),id);
+    metrics.a5pre=await diag();
+    assert(uid,'host card');try{await wait(H,u=>document.querySelector('#inbox [data-x="'+u+':y"]'),uid);}catch(e){metrics.a5diag={uid,...await diag()};console.log('A5DIAG '+JSON.stringify(metrics.a5diag));throw e;}const m0=await H.evaluate(()=>G.p.res.min);
     await H.evaluate(()=>MP1Host.host.local({kind:'speed',value:0}));const m1=await H.evaluate(()=>G.p.res.min);   // ölçüm sırasında ay geliri işlemesin (gerçek hız komutu)
     await tap(H,'#inbox [data-x="'+uid+':y"]');await wait(H,id=>MP1Host.host.dip.offers.find(o=>o.id===id).status==='accepted',id);
     assert.equal(await H.evaluate(m=>Math.round(G.p.res.min-m),m1),23);void m0;await H.evaluate(()=>MP1Host.host.local({kind:'speed',value:1}));
@@ -163,7 +174,7 @@ let relay,px,base,tls,bH,bB,bC;
   /* ---------- B: host + 2 (C 915×412); kapasite 3; dördüncü telefon reddedilir ---------- */
   for(const p of [H,Bp])await p.close().catch(()=>{});
   const H2=await (await bH.newContext(PHONE(844,390))).newPage(),B2=await (await bB.newContext(PHONE(800,360))).newPage(),C2=await (await bC.newContext(PHONE(915,412))).newPage();
-  for(const [n,p] of [['host2',H2],['B2',B2],['C2',C2]]){p.on('pageerror',e=>errors.push(n+': '+e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|WebSocket connection/.test(m.text()))errors.push(n+' console: '+m.text().slice(0,300));});}
+  for(const [n,p] of [['host2',H2],['B2',B2],['C2',C2]]){p.on('framenavigated',f=>{if(f===p.mainFrame()){const u=new URL(f.url());metrics.nav.push(n+' '+u.pathname);console.log('NAV '+n+' '+u.pathname);}});p.on('pageerror',e=>errors.push(n+': '+e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|WebSocket connection/.test(m.text()))errors.push(n+' console: '+m.text().slice(0,300));});}
   await test('B1 kapasite 3: host + 2 misafir (ikisi de çift dokunmayla) girer, tek koltuk tutar; dördüncü telefon "Oda dolu." görür; host küçük düğmede 👥 3',async()=>{
     const link=await room(H2,3,[[B2,'Bora',{name:'Saf Akıl Ağı',mizac:'teknokrasi',origin:'standart',ethics:['mat:2','mil:-1'],civics:['sinyal_avci']},2],[C2,'Cem',{name:'Okyanus Ticaret Birliği',mizac:'tuccar',origin:'standart',ethics:['aut:-1','mat:1'],civics:['maden_lonca']},2]]);
     assert.equal(roomOf().clients.size,2);assert.equal(await H2.evaluate(()=>MP1Host.lobby.players.filter(p=>!p.host).length),2);
