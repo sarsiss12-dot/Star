@@ -2,7 +2,7 @@
 
 ## Kaynak ve teslim kapsamı
 
-Başlangıç HEAD **`3a2a82a20271e6b8141dc965fb08b329bbfb1921`**, GitHub'dan fetch edilen `codex/stars-mp84-notice-persistence` ile eşleşti. Başlangıç çalışma ağacı temizdi. Yeni dal `codex/stars-mp85-live-mobile-audit`, PR tabanı `codex/stars-mp84-notice-persistence`. `main`, merge/rebase/force-push kullanılmadı. Bitiş için doğrulanmış önceki teslim commit'i GitHub kaydına eklenir; nihai rapor SHA'sı sohbet teslimindedir.
+Başlangıç HEAD **`3a2a82a20271e6b8141dc965fb08b329bbfb1921`**, GitHub'dan fetch edilen `codex/stars-mp84-notice-persistence` ile eşleşti. Başlangıç çalışma ağacı temizdi. Yeni dal `codex/stars-mp85-live-mobile-audit`, PR tabanı `codex/stars-mp84-notice-persistence`. `main`, merge/rebase/force-push kullanılmadı. Doğrulanmış bitiş referansı (ilk test/rapor teslim commit’i) `869f5ebeb169fa02bab4d85588e1b41ddc32d4d1`; nihai rapor SHA'sı sohbet teslimindedir.
 
 `AGENTS.md`, `GPT-DEVIR.md`, `CLAUDE.md`, son rapor/MP.8.4 kanıtları, `MULTIPLAYER-MP8-SONUC.md`, Android rehberi ve dağıtım dizini incelendi. Önceki testler tarihsel bağlam olarak kullanıldı; uzun dayanıklılık kampanyaları yeniden yapılmadı. Bu fazın yeni bağlantı/hız koşuları ve ölçümleri aşağıdadır.
 
@@ -139,7 +139,7 @@ Chromium ortam değişkeni her komutta `STARS_CHROMIUM_PATH=/usr/bin/chromium` i
 
 ## GitHub teslim kaydı
 
-Rapor, Android planı, test fikstürü düzeltmeleri ve kanıtlar bu geliştirme dalına commit/push edilir. Gönderim ve PR sonucu aşağıdaki doğrulama kaydına eklenir; henüz yapılmamış işlem tamamlanmış gibi gösterilmez.
+Rapor, Android planı, test fikstürü düzeltmeleri ve kanıtlar `869f5ebeb169fa02bab4d85588e1b41ddc32d4d1` commit’iyle GitHub’a push edildi; `git ls-remote` uzak dalda aynı SHA’yı doğruladı. PR oluşturma denemesi GraphQL isteğinde **Forbidden** döndü. Güvenlik/ağ sınırları değiştirilmedi ve PR oluşturulmuş gibi gösterilmedi. Bu teslim kaydı aynı dala ek rapor commit’iyle gönderilir; nihai SHA son yanıtta verilir.
 
 - Rapor: https://github.com/sarsiss12-dot/Star/blob/codex/stars-mp85-live-mobile-audit/reports/codex/MP85-CANLI-MOBIL-DENETIM-SONUC.md
 - PR tabanı: `codex/stars-mp84-notice-persistence`.

@@ -12,3 +12,5 @@
 - Ürün/Save8/RNG/PERF algoritmaları değişmedi; build96h10p5/MP.8, manifest19 eşleşti; yeni ZIP yok.
 - Açık: Render erişimi/sürüm uyumu, fiziksel Android, düşük CPU tepkiselliği; B1 kök nedeni belirsiz, gizleme kalıcılığı uygulanmadı.
 - GitHub/PR teslim kaydı ana raporun sonunda.
+
+- GitHub teslimi: `869f5ebeb169fa02bab4d85588e1b41ddc32d4d1` test/rapor commit’i push edildi ve uzak HEAD doğrulandı. PR GraphQL Forbidden nedeniyle oluşturulamadı; [doğru tabanla oluşturma ekranı](https://github.com/sarsiss12-dot/Star/compare/codex/stars-mp84-notice-persistence...codex/stars-mp85-live-mobile-audit?expand=1).
