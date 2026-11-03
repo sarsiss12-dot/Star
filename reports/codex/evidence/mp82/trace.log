@@ -1,0 +1,72 @@
+NAV B /mp/play
+MP82TRACE {"type":"pointerdown","path":"/mp/play","id":"","j":"go","href":null,"x":400,"y":276.4800109863281,"scroll":0,"screen":"join","trusted":true}
+MP82TRACE {"type":"pointerup","path":"/mp/play","id":"","j":"go","href":null,"x":400,"y":276.4800109863281,"scroll":0,"screen":"join","trusted":true}
+MP82TRACE {"type":"touchend","path":"/mp/play","id":"","j":"go","href":null,"scroll":0,"screen":"join","trusted":true}
+MP82TRACE {"type":"click","path":"/mp/play","id":"","j":"go","href":null,"x":400,"y":276,"scroll":0,"screen":"join","trusted":true}
+NAV B /mp/play
+MP82TRACE {"type":"pointerdown","path":"/mp/play","id":"","j":"go","href":null,"x":400,"y":276.484375,"scroll":0,"screen":"join","trusted":true}
+MP82TRACE {"type":"pointerup","path":"/mp/play","id":"","j":"go","href":null,"x":400,"y":276.484375,"scroll":0,"screen":"join","trusted":true}
+MP82TRACE {"type":"touchend","path":"/mp/play","id":"","j":"go","href":null,"scroll":0,"screen":"join","trusted":true}
+MP82TRACE {"type":"click","path":"/mp/play","id":"","j":"go","href":null,"x":400,"y":276,"scroll":0,"screen":"join","trusted":true}
+MP82TRACE {"type":"pointerdown","path":"/mp/play","id":"","j":"go","href":null,"x":400,"y":276.484375,"scroll":0,"screen":"connecting","trusted":true}
+MP82TRACE {"type":"pointerup","path":"/mp/play","id":"","j":"go","href":null,"x":400,"y":276.484375,"scroll":0,"screen":"connecting","trusted":true}
+MP82TRACE {"type":"touchend","path":"/mp/play","id":"","j":"go","href":null,"scroll":0,"screen":"connecting","trusted":true}
+MP82TRACE {"type":"pointerdown","path":"/mp/play","id":"","j":"go","href":null,"x":400,"y":276.484375,"scroll":0,"screen":"connecting","trusted":true}
+MP82TRACE {"type":"pointerup","path":"/mp/play","id":"","j":"go","href":null,"x":400,"y":276.484375,"scroll":0,"screen":"connecting","trusted":true}
+MP82TRACE {"type":"touchend","path":"/mp/play","id":"","j":"go","href":null,"scroll":0,"screen":"connecting","trusted":true}
+NAV B /mp/play
+MP82TRACE {"type":"pointerdown","path":"/mp/play","id":"jEditMe","j":"editMe","href":null,"x":400,"y":288.2300109863281,"scroll":0,"screen":"lobby","trusted":true}
+MP82TRACE {"type":"pointerup","path":"/mp/play","id":"jEditMe","j":"editMe","href":null,"x":400,"y":288.2300109863281,"scroll":0,"screen":"lobby","trusted":true}
+MP82TRACE {"type":"touchend","path":"/mp/play","id":"jEditMe","j":"editMe","href":null,"scroll":0,"screen":"lobby","trusted":true}
+MP82TRACE {"type":"click","path":"/mp/play","id":"jEditMe","j":"editMe","href":null,"x":400,"y":288,"scroll":0,"screen":"lobby","trusted":true}
+NAV B /mp/play
+NAV B /mp/play
+NAV B /mp/play
+PASS A1 5 karakterli kod: host kodu 5 karakter ve tiresiz; davet bağlantısı kodu taşır; yanlış kod reddedilir; KATIL'a hızlı ÜÇ dokunma (600 ms gecikmeli ağ) tek koltuk, "oda dolu" yok; iki telefon oyuna girer
+PASS A2 küçük çok oyunculu düğmesi: host ve misafirde varsayılan "👥 n" (haritayı ve hız kutusunu kapatmaz); dokununca mevcut panel (kod, durum, KAYDET), tekrar dokununca kapanır
+PASS A3 kaydırma (gerçek dokunma): küçük hareket kartı kapatmaz; sağa kaydırınca teklif kartı kalkar, karar Gelen kutusunda BEKLER, ayna yenilenince kart geri gelmez; host'ta teklif bekler
+PASS A4 karttan hızlı karar (misafir): KABUL gerçek dokunmayla → host kabul eder, kaynak bir kez aktarılır; ÇİFT dokunma tek "respond"; REDDET; KARŞI TEKLİF gerçek anlaşma penceresini açar
+PASS A5 host karttan hızlı karar: B → host teklifi host kartında KABUL (dokunma) → kabul, bir kez
+NAV host2 /
+NAV host2 /
+NAV host2 /
+NAV host2 /
+NAV host2 /
+NAV host2 /
+NAV B2 /mp/play
+MP82TRACE {"type":"pointerdown","path":"/mp/play","id":"","j":"go","href":null,"x":400,"y":276.484375,"scroll":0,"screen":"join","trusted":true}
+MP82TRACE {"type":"pointerup","path":"/mp/play","id":"","j":"go","href":null,"x":400,"y":276.484375,"scroll":0,"screen":"join","trusted":true}
+MP82TRACE {"type":"touchend","path":"/mp/play","id":"","j":"go","href":null,"scroll":0,"screen":"join","trusted":true}
+MP82TRACE {"type":"click","path":"/mp/play","id":"","j":"go","href":null,"x":400,"y":276,"scroll":0,"screen":"join","trusted":true}
+NAV B2 /mp/play
+MP82TRACE {"type":"pointerdown","path":"/mp/play","id":"jEditMe","j":"editMe","href":null,"x":400,"y":328.2300109863281,"scroll":0,"screen":"lobby","trusted":true}
+MP82TRACE {"type":"pointerup","path":"/mp/play","id":"jEditMe","j":"editMe","href":null,"x":400,"y":328.2300109863281,"scroll":0,"screen":"lobby","trusted":true}
+MP82TRACE {"type":"touchend","path":"/mp/play","id":"jEditMe","j":"editMe","href":null,"scroll":0,"screen":"lobby","trusted":true}
+MP82TRACE {"type":"click","path":"/mp/play","id":"jEditMe","j":"editMe","href":null,"x":400,"y":328,"scroll":0,"screen":"lobby","trusted":true}
+NAV B2 /mp/play
+NAV B2 /mp/play
+NAV C2 /mp/play
+MP82TRACE {"type":"pointerdown","path":"/mp/play","id":"","j":"go","href":null,"x":457.5,"y":276.484375,"scroll":0,"screen":"join","trusted":true}
+MP82TRACE {"type":"pointerup","path":"/mp/play","id":"","j":"go","href":null,"x":457.5,"y":276.484375,"scroll":0,"screen":"join","trusted":true}
+MP82TRACE {"type":"touchend","path":"/mp/play","id":"","j":"go","href":null,"scroll":0,"screen":"join","trusted":true}
+MP82TRACE {"type":"click","path":"/mp/play","id":"","j":"go","href":null,"x":458,"y":276,"scroll":0,"screen":"join","trusted":true}
+NAV C2 /mp/play
+MP82TRACE {"type":"pointerdown","path":"/mp/play","id":"jEditMe","j":"editMe","href":null,"x":457.5,"y":387.9800109863281,"scroll":0,"screen":"lobby","trusted":true}
+MP82TRACE {"type":"pointerup","path":"/mp/play","id":"jEditMe","j":"editMe","href":null,"x":457.5,"y":387.9800109863281,"scroll":0,"screen":"lobby","trusted":true}
+MP82TRACE {"type":"touchend","path":"/mp/play","id":"jEditMe","j":"editMe","href":null,"scroll":0,"screen":"lobby","trusted":true}
+MP82TRACE {"type":"click","path":"/mp/play","id":"jEditMe","j":"editMe","href":null,"x":458,"y":388,"scroll":0,"screen":"lobby","trusted":true}
+NAV C2 /mp/play
+NAV C2 /mp/play
+NAV C2 /mp/play
+NAV B2 /mp/play
+NAV host2 /
+MP82TRACE {"type":"pointerdown","path":"/mp/play","id":"","j":"home","href":"/","x":400,"y":276.4800109863281,"scroll":0,"screen":"join","trusted":true}
+MP82TRACE {"type":"pointerup","path":"/mp/play","id":"","j":"home","href":"/","x":400,"y":276.4800109863281,"scroll":0,"screen":"join","trusted":true}
+MP82TRACE {"type":"touchend","path":"/mp/play","id":"","j":"home","href":"/","scroll":0,"screen":"join","trusted":true}
+MP82TRACE {"type":"pointerdown","path":"/mp/play","id":"","j":"go","href":null,"x":400,"y":276.4800109863281,"scroll":0,"screen":"join","trusted":true}
+MP82TRACE {"type":"pointerup","path":"/mp/play","id":"","j":"go","href":null,"x":400,"y":276.4800109863281,"scroll":0,"screen":"join","trusted":true}
+MP82TRACE {"type":"touchend","path":"/mp/play","id":"","j":"go","href":null,"scroll":0,"screen":"join","trusted":true}
+MP82TRACE {"type":"click","path":"/mp/play","id":"","j":"go","href":null,"x":400,"y":276,"scroll":0,"screen":"join","trusted":true}
+PASS B1 kapasite 3: host + 2 misafir (ikisi de çift dokunmayla) girer, tek koltuk tutar; dördüncü telefon "Oda dolu." görür; host küçük düğmede 👥 3
+PASS sayfa hataları yok
+GEÇEN: 7 KALAN: 0

@@ -1,0 +1,12 @@
+const {chromium}=require('/workspace/Star/tests/node_modules/playwright');
+const launch=chromium.launch.bind(chromium);
+chromium.launch=async(...a)=>{
+ const b=await launch(...a),nc=b.newContext.bind(b);
+ b.newContext=async(...a)=>{const c=await nc(...a);await c.addInitScript(()=>{
+  for(const type of ['pointerdown','pointerup','click','touchend'])addEventListener(type,e=>{
+   const t=e.target.closest('button,a,input')||e.target;
+   if(!location.pathname.startsWith('/mp/'))return;
+   console.log('MP82TRACE '+JSON.stringify({type,path:location.pathname,id:t.id,j:t.dataset&&t.dataset.j,href:t.getAttribute('href'),x:e.clientX,y:e.clientY,scroll:scrollY,screen:window.MP1Join&&MP1Join.screen,trusted:e.isTrusted}));
+  },true);
+ });c.on('page',p=>{p.on('console',m=>{if(m.text().startsWith('MP82TRACE '))console.log(m.text());});});return c;};return b;
+};
