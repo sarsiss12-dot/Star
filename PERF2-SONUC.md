@@ -153,8 +153,47 @@ Karar işlevlerinin çağrı sayısı iki kolda aynı: `aiBuildingDelta` 28 128,
 - `txCaptureGraph`: anlaşma başına ~55–60 ms tam dünya anlık görüntüsü. Ayda 0–3 kez olur; tekil en uzun kalem.
 - Günlük `autoExploreTick` / `explorationContext`.
 
-## 7. Tarayıcı ve dağıtım
+## 7. Tarayıcı (Chromium)
 
-Chromium (host + misafir, üretim relay) ve regresyon: `research/perf2/REGRESYON.md`.
+**Aynı Save8, aynı adımlar, gerçek Chromium V8'i** (`research/perf2/scripts/browser-months.cjs`).
+- Sayfa: kökün `index.html`'i; tek oyunculu motor ve arayüz yüklü.
+- 1 ay ısınma + 30 ay; deterministik adım döngüsü.
+- Ham: `research/perf2/results/bmonths.jsonl`.
+- Dört satırda da iki kolun son Save8 ve RNG'si aynı; sayfa hatası 0.
+
+| Kayıt (büyük, 9 AI) | Ay adımı medyan / p95 / en uzun (ms) | `monthTick` medyan / p95 | Ay başına AI turu medyan / p95 |
+|---|---|---|---|
+| s11, 240 | 310 / 401 / 409 → **252 / 307 / 344** | 254 / 329 → **176 / 220** | 186 / 253 → **117 / 168** |
+| s404, 240 | 254 / 355 / 367 → **210 / 274 / 279** | 186 / 252 → **141 / 188** | 120 / 173 → **84 / 127** |
+| s11, 120 | 203 / 248 / 294 → **171 / 218 / 242** | 155 / 194 → **107 / 156** | 107 / 133 → **71 / 109** |
+| s404, 120 | 217 / 335 / 393 → **184 / 281 / 311** | 145 / 230 → **113 / 165** | 101 / 167 → **72 / 119** |
+
+Değişim:
+- `monthTick` medyanı **−22… −31%**, p95 **−19… −33%**.
+- Aylık AI turu **−30… −37%**.
+- Ay adımının tamamında (günlük adımlar dahil) medyan **−16… −19%**.
+
+`monthTick` tek eşzamanlı çağrıdır: ay geçişindeki takılmanın kendisi.
+
+**Host + misafir, üretim relay + TLS vekili** (`tests/browser-mp75-perf.cjs`).
+- Kurulum: büyük, 2 insan + 8 AI, misafirde diplomasi paneli açık.
+- Koşular: 60 / 120 / 240. ay, 3 aylık pencere, seed 404 ve 11; 30 aylık pencere seed 404.
+- **İşlevsel sonuç:** tüm koşular PASS, sayfa hatası yok.
+  - Misafirde panel baştan yazılması 0; yüzey taşıma çalışıyor (MP.7.5 kazanımı yerinde).
+  - Misafir kurulum p95 ≤ 25 ms.
+- **Karşılaştırma sınırı:** ölçüm penceresi gerçek zamanlıdır.
+  - Akıllı duraklatma ve oyun olayları iki kolda farklı anlarda devreye girer.
+  - 30 aylık pencerede aday kolun 60. ay penceresi gerçek zamanda çok daha uzun sürdü: yayın sayısı 382 → 846 / 777 (iki koşu), misafir kurulumu 168 → 837 / 735.
+  - Aynı yavaşlama kontrol kolunda da başka pencerelerde görüldü: 30 aylık s404 120. ay 884 yayın; 3 aylık s11 120. ay 72 yayın (aday 37).
+  - Yani yavaşlama kola bağlı değil. Gerçek zamanlı adım (değişken `dt`) oyunu ayrıştırıyor ve o penceredeki karar olayı ortak hızı 1×'e sınırlıyor.
+  - Bu koşularda host ay adımı **karşılaştırılamaz**.
+  - 3 aylık pencerede de durum aynı. Örnek: s11 240. ay 188 → 43 ms; bu, kazanç olarak sunulmadı.
+  - Ham: `research/perf2/results/chromium-w3.txt`, `chromium-w30*.txt`.
+
+Masaüstü Chromium, `--disable-gpu`; telefon değeri değildir.
+
+## 8. Regresyon ve dağıtım
+
+Regresyon: `research/perf2/REGRESYON.md`.
 
 Dağıtım yapılmadı. Canlı Render ve fiziksel Android **NOT RUN**.

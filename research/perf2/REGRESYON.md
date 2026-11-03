@@ -79,3 +79,18 @@ Kontrol: aynı dosya kontrol kökünde.
 **Sınır.** Hızlı ilerletme deterministiktir. Ölçüm penceresi gerçek zamanlıdır: adım sayısı gerçek zamana bağlı olduğundan iki kolun oyun durumu birebir aynı olmayabilir. Aynı durum kanıtı Node ölçümleridir; tarayıcı sonuçları destekleyicidir. Masaüstü Chromium, telefon değildir.
 
 Sonuçlar: §3 aylık pencere `research/perf2/results/chromium-w3.txt`, 30 aylık pencere `research/perf2/results/chromium-w30.txt`.
+
+**Koşular:**
+
+| Koşu | Sonuç |
+|---|---|
+| 3 aylık pencere, seed 404 ve 11, kontrol + aday | 4 / 4 PASS |
+| 30 aylık pencere, seed 404, kontrol + aday | 2 / 2 PASS |
+
+- Aday s404 30 aylık koşusu bir kez yanlışlıkla durduruldu (60. ay penceresinden sonra) ve baştan yeniden koşuldu: PASS.
+- s11 30 aylık koşuları durduruldu: gerçek zamanlı pencere karşılaştırılamaz, işlevsel kapsam s404 ile sağlandı. **NOT RUN**.
+- 30 aylık koşularda oyun 240. aydan önce bitti (iki kolda; etiket `m210`): o noktada ay adımı örneği yok.
+
+**Aynı durum ölçümü:** Chromium V8'inde aynı Save8'den 30 ay (`research/perf2/scripts/browser-months.cjs`, `results/bmonths.jsonl`).
+- `monthTick` medyanı −22… −31%.
+- Save8 + RNG birebir.

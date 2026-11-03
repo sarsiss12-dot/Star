@@ -45,6 +45,8 @@ node tests/browser-mp73.cjs         # MP.7.3: host + 1 / host + 2, yatay; Androi
 node tests/browser-mp74.cjs         # MP.7.4: 5 karakterli kod, KATIL'a çift/üçlü gerçek dokunma (tek koltuk), kapasite 3 + dördüncü telefon, küçük MP düğmesi, bildirim kartını kaydırma, karttan KABUL/REDDET/KARŞI TEKLİF
 node tests/browser-mp75.cjs         # MP.7.5: MP düğmesi araç sütununda (örtüşme yok), misafirde açık panel yerinde güncellenir, AI → misafir barışı karttan + AKTİF SAVAŞLAR, dokunmatik miktar, karar olayı gizleme
 MP75_PANE=council|diplo MP75_SIZE=orta MP75_AI=5 MP75_MONTHS=60,120 node tests/browser-mp75-perf.cjs   # uzun oyun ölçümü (hızlı ilerletme + 3 ay gerçek döngü); taban için aynı dosya eski ağaçta
+MP75_SEED=404 MP75_WINDOW=30 MP75_SIZE=buyuk MP75_AI=8 MP75_MONTHS=60,120,240 node tests/browser-mp75-perf.cjs   # PERF.2: tohum + gerçek döngü penceresi (oyun ayı; varsayılan 3)
+node research/perf2/scripts/breakdown.cjs <kök> <kayıt> <ay>   # PERF.2: işlev başına çağrı/toplam/ortalama/medyan/p95/en uzun + devlet-gün plan tekrarı
 node --expose-gc research/mp64/perf/measure.cjs ulu 11 240 22   # geç oyun ön ölçümü (MP64_ARMS=A,B,C: paylaşım kapalı / açık / tam temas+paylaşım)
 node research/perf1/scripts/gen-saves.cjs <kök> <tohum> <çıkış>     # PERF.1: 60/120/180/240. ay Save8 kontrol noktaları (ULU, 11 AI)
 WARM=1 [COUNT=1|TRACE=1] node research/perf1/scripts/bench.cjs <kök> <kayıt> <ay>   # aynı kayıttan kontrol/aday: ms/ay, sayaçlar, Save8/RNG SHA-256
