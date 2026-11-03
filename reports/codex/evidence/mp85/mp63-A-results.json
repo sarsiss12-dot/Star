@@ -1,0 +1,121 @@
+{
+ "results": [
+  {
+   "name": "kurulum: host oda açar; B ve C davet bağlantısıyla (/mp/play) katılır; oyun başlar; fikstür: temaslar + kaynak",
+   "status": "PASS",
+   "ms": 6768
+  },
+  {
+   "name": "A1/A2 sıradan paneller: host KAYIT VE AYARLAR penceresini, B gelen kutusunu gerçek düğmeyle açar — ortak hız 2× kalır, host'ta ve misafirlerde zaman ilerler, \"duraklatıldı\" bildirimi yok",
+   "status": "PASS",
+   "ms": 13423
+  },
+  {
+   "name": "A3–A5 karar penceresi + manuel duraklatma: 3× → host'a karar isteyen olay (1×, herkes nedenini görür) → host olayı açar (1×) → B gerçek ⏸ → host kararı verip kapatır → oyun DURAKLI kalır → C 3× seçer → 3×",
+   "status": "PASS",
+   "ms": 8639
+  },
+  {
+   "name": "A3b otomatik duraklatma açık (host MP çubuğundaki gerçek ayar): karar olayı oyunu durdurur; karar bitince önceki geçerli hız (3×) döner; aynı bildirim iki kez kilit biriktirmez",
+   "status": "PASS",
+   "ms": 6997
+  },
+  {
+   "name": "A6/A7 birden çok neden: bekleyen karar (1×) + host arka plana geçer (0, MP.5 güvenli duraklatma, misafir komutu reddedilir) → öne gelir: karar hâlâ bekliyor (1×) → host kararı kapatır → 3×",
+   "status": "PASS",
+   "ms": 4284
+  },
+  {
+   "name": "A7b manuel duraklatma + arka plan: B duraklatır → host arka plan/ön plan → oyun DURAKLI kalır (eski hız geri yüklenmez) → B 2× seçer",
+   "status": "PASS",
+   "ms": 3337
+  },
+  {
+   "name": "A8 kayıt + yeniden bağlanma: karar 1×'de tutarken kayıt paketi ortak hızı (2×) yazar; host ağı kopar (0) ve döner → eski modal kaydı değil karar kuralı (1×); karar kapanınca 2×",
+   "status": "PASS",
+   "ms": 3365
+  },
+  {
+   "name": "A3c savaş bildirimi tek oyunculu \"Savaşa katılınca duraklat\" tercihini izler: AÇIK → AI'nın savaş ilanı oyunu durdurur; host ayarı gerçek düğmeyle KAPATIR → sonraki ilanda 1×",
+   "status": "PASS",
+   "ms": 9720
+  },
+  {
+   "name": "sayfa hataları yok (host, B, C)",
+   "status": "PASS",
+   "ms": 0
+  }
+ ],
+ "metrics": {
+  "pause": {
+   "ordinary": {
+    "hostDays": 5.1,
+    "guestDays": 4.4,
+    "suppressed": 5
+   },
+   "scenario": [
+    {
+     "t": "want",
+     "v": 2,
+     "raw": 1
+    },
+    {
+     "t": "want",
+     "v": 0,
+     "raw": 1
+    },
+    {
+     "t": "want",
+     "v": 2,
+     "prev": 0,
+     "acked": 0
+    },
+    {
+     "t": "dec",
+     "uid": 4,
+     "state": "pending",
+     "cap": 1
+    },
+    {
+     "t": "want",
+     "v": 3,
+     "prev": 2,
+     "acked": 0
+    },
+    {
+     "t": "dec",
+     "uid": 5,
+     "state": "pending",
+     "cap": 1
+    },
+    {
+     "t": "dec",
+     "uid": 5,
+     "state": "open",
+     "cap": 1
+    },
+    {
+     "t": "want",
+     "v": 0,
+     "prev": 3,
+     "acked": 0
+    },
+    {
+     "t": "want",
+     "v": 3,
+     "prev": 0,
+     "acked": 0
+    }
+   ]
+  },
+  "notes": [
+   {
+    "naturalDecisionsDroppedInWait": [
+     "anomaly",
+     "anomaly"
+    ]
+   }
+  ]
+ },
+ "errors": []
+}

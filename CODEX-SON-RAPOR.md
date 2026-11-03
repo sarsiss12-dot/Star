@@ -1,14 +1,14 @@
 # Son Codex raporu
 
-- Son faz: **MP.8.4 — Bildirim/kayıt kimliği güvenlik analizi**. **Gizleme kalıcılığı uygulanmadı; ana kabul kriteri karşılanmadı.**
-- Rapor: [MP84-BILDIRIM-KALICILIGI-SONUC.md](reports/codex/MP84-BILDIRIM-KALICILIGI-SONUC.md).
-- Dal: `codex/stars-mp84-notice-persistence`; PR tabanı: `codex/stars-mp83-join-stability`.
-- Doğrulanmış başlangıç HEAD: `3017fbe7e38d6261f3f7f4683e3fcafa66299294`.
-- Kanıt: farklı kayıtlar aynı olay kimliğini taşıyabilir; checkpoint sonrası UID/key/born yeniden kullanılabilir. Ham SP Save8'de soy kimliği yok. Riskli otomatik yerel eşleştirme eklenmedi; yeni kayıt-zarfı/sidecar sözleşmesi önerildi.
-- PASS: kimlik denetimi 5/0; PERF.2 5/0; Chromium MP.7.4 7/0, MP.7.5 6/0, MP.8 N 9/0, MP.8 R (6+6 ay) 5/0; Node MP.7.4 6/0, MP.7.5 4/0.
-- B1 yeniden üretilemedi, açık. A1 test düzeltmesi korundu.
-- Ürün/Save8/RNG değişmedi; build 96h10p5, MP.8. Yeni ZIP yok.
-- NOT RUN: uygulanmamış kalıcılık kabul senaryoları ve storage hata testleri, tam regresyon/uzun kampanyalar, Docker, fiziksel Android, canlı Render.
-- GitHub/PR teslim kaydı faz raporunun sonunda.
-
-- GitHub teslimi: `d7fb2a5da40d20654fdc092e0a9043fa492ef80a` rapor/test commit’i push edildi; uzak HEAD doğrulandı. PR iki denemede GraphQL Forbidden nedeniyle oluşturulamadı. [PR oluşturma ekranı](https://github.com/sarsiss12-dot/Star/compare/codex/stars-mp83-join-stability...codex/stars-mp84-notice-persistence?expand=1).
+- Son faz: **MP.8.5 — Canlı/mobil denetim**.
+- Rapor: [MP85-CANLI-MOBIL-DENETIM-SONUC.md](reports/codex/MP85-CANLI-MOBIL-DENETIM-SONUC.md).
+- [İki Android telefonla test planı](reports/codex/MP85-ANDROID-TEST-PLANI.md).
+- Dal: `codex/stars-mp85-live-mobile-audit`; taban: `codex/stars-mp84-notice-persistence`.
+- Başlangıç HEAD: `3a2a82a20271e6b8141dc965fb08b329bbfb1921`.
+- Canlı Render health/version: proxy tünelinde 403, **BLOCKED**; servis kapalı olduğu iddia edilmez. Canlı WSS/oda/sürüm eşleşmesi NOT RUN. Deploy/restart/ayar değişmedi.
+- MOBİL CHROMIUM: MP.7.4 7/0; son seed-doğrulamalı N 9/0, kısa R 5/0; MP.6.1 ilk 3 test 3/0; MP.6.3 A alt kümesi 9/0 PASS. Arka plan girdisi sentetik visibilitychange'dir. Android NOT RUN.
+- Kanıtlanan test kusurları: host tasarımı CFG'deki rastgele seed ile yapılandırmayı eziyordu; hedef aya ulaşmadan sıfır örnek PASS olabiliyordu. Test fikstürleri düzeltildi; ilk FAIL ve geçersiz-seed ölçümleri raporda saklandı.
+- Doğrulanmış seed404/45 sistem/2 insan+5 AI, 120/240 ay: 1× host med/p95 61,5/70,5 ve 105,9/165,1 ms; 4× 349,4/359,3 ve 590,9/687,1 ms. 4× guest rAF/s 14,7/11,9; fiziksel FPS değildir. Eski seed etiketli Chromium karşılaştırmaları yeniden doğrulanmalı.
+- Ürün/Save8/RNG/PERF algoritmaları değişmedi; build96h10p5/MP.8, manifest19 eşleşti; yeni ZIP yok.
+- Açık: Render erişimi/sürüm uyumu, fiziksel Android, düşük CPU tepkiselliği; B1 kök nedeni belirsiz, gizleme kalıcılığı uygulanmadı.
+- GitHub/PR teslim kaydı ana raporun sonunda.

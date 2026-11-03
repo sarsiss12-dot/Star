@@ -1,0 +1,74 @@
+{
+  "results": [
+    {
+      "name": "uzun oyun ölçümü: orta / 5 AI, misafirde diplomasi paneli açık, en yüksek hız; 120/240. ay",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: ölçüm hedef aya ulaşmalı ve pencerenin ay adımları çalışmalı\n    at /workspace/Star/tests/browser-mp75-perf.cjs:129:132\n    at async test (/workspace/Star/tests/browser-mp75-perf.cjs:17:7)\n    at async /workspace/Star/tests/browser-mp75-perf.cjs:111:3"
+    }
+  ],
+  "metrics": {
+    "joinErrors_Bora": [],
+    "ffS_m120": 26,
+    "rows": [
+      {
+        "label": "m120",
+        "month": 117,
+        "context": {
+          "seed": 1512127268,
+          "systems": 45,
+          "states": 7,
+          "alive": 6,
+          "humans": 2,
+          "pane": "diplo"
+        },
+        "host": {
+          "monthTick": {
+            "n": 0
+          },
+          "publish": {
+            "n": 0
+          },
+          "longtask": {
+            "n": 0
+          },
+          "heapMB": 109
+        },
+        "guest": {
+          "build": {
+            "n": 0
+          },
+          "deserialize": {
+            "n": 0
+          },
+          "refresh": {
+            "n": 1,
+            "med": 2,
+            "p95": 2,
+            "max": 2
+          },
+          "rafMs": {
+            "n": 92,
+            "med": 16.7,
+            "p95": 16.7,
+            "max": 16.8
+          },
+          "rafFps": 59.28981117483338,
+          "windowMs": 1551.7000000001863,
+          "longtask": {
+            "n": 0
+          },
+          "builds": 41,
+          "deltas": 40,
+          "minGap": 600,
+          "paneRewrites": 0,
+          "mutations": 0,
+          "surfaceKept": 40,
+          "heapMB": 17
+        }
+      }
+    ],
+    "errors": []
+  },
+  "size": "orta",
+  "ai": 5
+}

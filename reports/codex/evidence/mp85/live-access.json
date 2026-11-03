@@ -1,0 +1,11 @@
+{
+  "service": "https://stars-zhdu.onrender.com",
+  "runtime_policy": {"mode":"restricted","custom_allowed_hosts":[],"observations_current":true},
+  "attempts": [
+    {"path":"/healthz","transport":"HTTPS through inherited proxy; TLS verification enabled","result":"BLOCKED","error":"Tunnel connection failed: 403 Forbidden"},
+    {"path":"/mp/version","transport":"HTTPS through inherited proxy; TLS verification enabled","result":"BLOCKED","error":"Tunnel connection failed: 403 Forbidden"}
+  ],
+  "interpretation":"No response from Render was obtained. This is not evidence that the service is down.",
+  "not_run":["live smoke.js","live WSS","live room creation/join/game/commands","live reconnect","live file/version comparison","Render server logs"],
+  "required_prerequisite":"Allow stars-zhdu.onrender.com in the supported cloud environment network settings; retain TLS and proxy settings. Render service deployment/configuration was not changed."
+}

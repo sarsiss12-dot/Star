@@ -1,0 +1,105 @@
+{
+ "results": [
+  {
+   "name": "kurulum: host oda açar; B ve C davet bağlantısıyla (/mp/play) katılır; oyun başlar; misafirler gerçek STARS arayüzünde; fikstür: temaslar + federasyon (2, B)",
+   "status": "PASS",
+   "ms": 6906
+  },
+  {
+   "name": "ortak hız: B kendi STARS hız düğmesine dokunur → host hızı değişir, üç ekranın hız çubuğu aynı gerçek hızı gösterir; bildirim hız çubuğunun hemen üstünde, değiştirenin adıyla, ~3 s sonra solar; dokunmayı engellemez; aynı hız bildirim üretmez",
+   "status": "PASS",
+   "ms": 10545
+  },
+  {
+   "name": "ortak hız: eşzamanlı istekler host'un işleme sırasıyla; host kendi düğmesiyle de değiştirir; host'un sıradan penceresi ortak hızı değiştirmez (MP.6.3); spam koruması",
+   "status": "PASS",
+   "ms": 9788
+  }
+ ],
+ "metrics": {
+  "speed": {
+   "texts": {
+    "B": "Hızı 2× yaptın",
+    "C": "Altın Othrys Konfederasyonu hızı 2× yaptı",
+    "host": "Altın Othrys Konfederasyonu hızı 2× yaptı"
+   },
+   "concurrent": {
+    "final": 1,
+    "journal": null
+   },
+   "afterHostWindow": 4,
+   "spam": [
+    null,
+    "rules:rate-limited",
+    "rules:same"
+   ]
+  },
+  "layout": {
+   "notice-B": {
+    "notice": {
+     "x": 6,
+     "y": 314.40625,
+     "w": 102.75,
+     "h": 27.59375,
+     "r": 108.75,
+     "b": 342
+    },
+    "timepod": {
+     "x": 6,
+     "y": 346,
+     "w": 245,
+     "h": 38,
+     "r": 251,
+     "b": 384
+    },
+    "gap": 4
+   },
+   "notice-C": {
+    "notice": {
+     "x": 6,
+     "y": 464.40625,
+     "w": 270.65625,
+     "h": 27.59375,
+     "r": 276.65625,
+     "b": 492
+    },
+    "timepod": {
+     "x": 6,
+     "y": 496,
+     "w": 245,
+     "h": 38,
+     "r": 251,
+     "b": 534
+    },
+    "gap": 4
+   },
+   "notice-host": {
+    "notice": {
+     "x": 6,
+     "y": 336.40625,
+     "w": 270.65625,
+     "h": 27.59375,
+     "r": 276.65625,
+     "b": 364
+    },
+    "timepod": {
+     "x": 6,
+     "y": 368,
+     "w": 245,
+     "h": 38,
+     "r": 251,
+     "b": 406
+    },
+    "gap": 4
+   }
+  },
+  "perf": {},
+  "cmds": {
+   "speed": [
+    543
+   ]
+  },
+  "notes": []
+ },
+ "errors": []
+}

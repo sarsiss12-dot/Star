@@ -71,7 +71,7 @@ async function room({cutAtStart}={}){
   const H=pg.H;await H.goto(origin.H+'/');await wait(H,()=>typeof setupGame==='function'&&document.getElementById('mp1Btn')&&window.MP7Setup);
   await tap(H,'#mp1Btn');await tap(H,'[data-m="create"]');await wait(H,()=>MP1Host.lobby&&MP1Host.lobby.mode==='design'&&MP1Host.lobby.phase==='waiting');
   if(CONF.guests>1){await H.selectOption('#mp7Cap',String(CONF.guests+1));await wait(H,c=>MP1Host.lobby.capacity===c,CONF.guests+1);}
-  {const r=await H.evaluate(c=>MP1Host.host.configure({size:c.size,aiCount:c.ai,seed:c.seed}),CONF);if(!r.ok)throw Error('configure '+JSON.stringify(r));}
+  {const r=await H.evaluate(c=>{Object.assign(CFG,{size:c.size,aiCount:c.ai,seed:c.seed});return MP1Host.host.configure({size:c.size,aiCount:c.ai,seed:c.seed});},CONF);if(!r.ok)throw Error('configure '+JSON.stringify(r));}
   await tap(H,'#mp7EditMe');await design(H,DESIGNS.H);code=await H.evaluate(()=>MP1Host.code);
   for(const n of guestNames()){const p=pg[n];await guestGo(n,code,n==='B'?'Bora':'Cem');
     await wait(p,()=>MP1Join.screen==='lobby'&&MP1Join.lobby&&MP1Join.lobby.mode==='design'&&document.getElementById('jEditMe'),undefined,40000);
@@ -244,6 +244,8 @@ async function campaign(fromMonth,toMonth){let round=Math.floor(fromMonth/CONF.e
 
   await test(SCEN+'0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; '+(CONF.guests+1)+' insan + '+CONF.ai+' AI, '+CONF.size+', seed '+CONF.seed+'; misafir gerçek STARS arayüzünde',async()=>{
     await room(SCEN==='N'?{cutAtStart:'C'}:{});for(const n of guestNames())await pg[n].evaluate(GUESTLIB);
+    metrics.actualWorld=await pg.H.evaluate(()=>({seed:G.seed,size:G.cfg.size,systems:G.sys.length,states:G.emps.filter(e=>!e.wild).length}));
+    assert.equal(metrics.actualWorld.seed,CONF.seed,'gerçek seed yapılandırmayla eşleşmeli');assert.equal(metrics.actualWorld.size,CONF.size,'gerçek boyut yapılandırmayla eşleşmeli');
     const seats=await pg.H.evaluate(()=>__mp8.seats());metrics.seats=seats.map(s=>({e:s.e,conn:s.conn}));assert.equal(seats.length,CONF.guests);
     assert.equal(new Set(seats.map(s=>s.e)).size,CONF.guests,'distinct empires');
     for(const n of guestNames()){const g=await pg[n].evaluate(()=>({e:MP1Join.empireId,name:G.p.name,url:location.pathname,engineRuns:G.speed}));

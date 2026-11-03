@@ -1,0 +1,38 @@
+[
+  {
+    "name": "mp74",
+    "exit": 0,
+    "env": {
+      "STARS_TRACE": "/tmp/star-mp85/mp74-input.jsonl"
+    }
+  },
+  {
+    "name": "mp8-N",
+    "exit": 0,
+    "env": {
+      "MP8_SCEN": "N"
+    }
+  },
+  {
+    "name": "mp8-R6",
+    "exit": 0,
+    "env": {
+      "MP8_SCEN": "R",
+      "MP8_MONTHS": "6"
+    }
+  },
+  {
+    "name": "mp61-speed",
+    "exit": 0,
+    "env": {
+      "MP61_UNTIL": "3"
+    }
+  },
+  {
+    "name": "mp63-A",
+    "exit": 0,
+    "env": {
+      "MP63_ONLY": "kurulum|^A|sayfa"
+    }
+  }
+]

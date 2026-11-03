@@ -1,0 +1,12 @@
+[
+  {
+    "name": "perf-fixed-cpu1",
+    "exit": 0,
+    "cpu": 1
+  },
+  {
+    "name": "perf-fixed-cpu4",
+    "exit": 0,
+    "cpu": 4
+  }
+]

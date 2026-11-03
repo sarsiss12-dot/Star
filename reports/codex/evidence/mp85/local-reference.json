@@ -1,0 +1,17 @@
+{
+  "source": "3a2a82a20271e6b8141dc965fb08b329bbfb1921",
+  "expected_mp": "MP.8",
+  "build": "96h10p5",
+  "runtime_files_verified": 19,
+  "files": {
+    "mp-core.js": "e598045ba58b",
+    "relay.js": "bde0e1446448",
+    "mp1-host.js": "c8e2251d1811",
+    "join.js": "86d23747391f",
+    "mirror.js": "75730fb35ea6",
+    "guest-stars.js": "cf5e3de31560",
+    "mp71-dip.js": "4b7b5e64b5ba",
+    "mp7-setup.js": "4f8fef4ce1a9"
+  },
+  "live_match": "BLOCKED; no live version response"
+}

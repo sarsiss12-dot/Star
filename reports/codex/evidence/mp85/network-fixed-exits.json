@@ -1,0 +1,17 @@
+[
+  {
+    "name": "mp8-fixed-N",
+    "exit": 0,
+    "env": {
+      "MP8_SCEN": "N"
+    }
+  },
+  {
+    "name": "mp8-fixed-R6",
+    "exit": 0,
+    "env": {
+      "MP8_SCEN": "R",
+      "MP8_MONTHS": "6"
+    }
+  }
+]

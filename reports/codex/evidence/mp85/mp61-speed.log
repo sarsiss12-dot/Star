@@ -1,0 +1,4 @@
+PASS kurulum: host oda açar; B ve C davet bağlantısıyla (/mp/play) katılır; oyun başlar; misafirler gerçek STARS arayüzünde; fikstür: temaslar + federasyon (2, B)
+PASS ortak hız: B kendi STARS hız düğmesine dokunur → host hızı değişir, üç ekranın hız çubuğu aynı gerçek hızı gösterir; bildirim hız çubuğunun hemen üstünde, değiştirenin adıyla, ~3 s sonra solar; dokunmayı engellemez; aynı hız bildirim üretmez
+PASS ortak hız: eşzamanlı istekler host'un işleme sırasıyla; host kendi düğmesiyle de değiştirir; host'un sıradan penceresi ortak hızı değiştirmez (MP.6.3); spam koruması
+GEÇEN: 3 KALAN: 0

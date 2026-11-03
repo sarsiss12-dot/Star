@@ -1,0 +1,10 @@
+PASS kurulum: host oda açar; B ve C davet bağlantısıyla (/mp/play) katılır; oyun başlar; fikstür: temaslar + kaynak
+PASS A1/A2 sıradan paneller: host KAYIT VE AYARLAR penceresini, B gelen kutusunu gerçek düğmeyle açar — ortak hız 2× kalır, host'ta ve misafirlerde zaman ilerler, "duraklatıldı" bildirimi yok
+PASS A3–A5 karar penceresi + manuel duraklatma: 3× → host'a karar isteyen olay (1×, herkes nedenini görür) → host olayı açar (1×) → B gerçek ⏸ → host kararı verip kapatır → oyun DURAKLI kalır → C 3× seçer → 3×
+PASS A3b otomatik duraklatma açık (host MP çubuğundaki gerçek ayar): karar olayı oyunu durdurur; karar bitince önceki geçerli hız (3×) döner; aynı bildirim iki kez kilit biriktirmez
+PASS A6/A7 birden çok neden: bekleyen karar (1×) + host arka plana geçer (0, MP.5 güvenli duraklatma, misafir komutu reddedilir) → öne gelir: karar hâlâ bekliyor (1×) → host kararı kapatır → 3×
+PASS A7b manuel duraklatma + arka plan: B duraklatır → host arka plan/ön plan → oyun DURAKLI kalır (eski hız geri yüklenmez) → B 2× seçer
+PASS A8 kayıt + yeniden bağlanma: karar 1×'de tutarken kayıt paketi ortak hızı (2×) yazar; host ağı kopar (0) ve döner → eski modal kaydı değil karar kuralı (1×); karar kapanınca 2×
+PASS A3c savaş bildirimi tek oyunculu "Savaşa katılınca duraklat" tercihini izler: AÇIK → AI'nın savaş ilanı oyunu durdurur; host ayarı gerçek düğmeyle KAPATIR → sonraki ilanda 1×
+PASS sayfa hataları yok (host, B, C)
+GEÇEN: 9 KALAN: 0

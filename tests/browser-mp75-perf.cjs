@@ -10,6 +10,7 @@ const fs=require('fs'),path=require('path'),assert=require('assert/strict'),{exe
 const root=path.resolve(__dirname,'..'),out=path.resolve(process.env.STARS_OUTPUT||path.join(root,'../evidence/mp75perf'));fs.mkdirSync(out,{recursive:true});
 const relayMod=require('../research/mp1/server/relay.js'),{selfSigned,startProxy}=require('./helpers/mp11-tls-proxy.js');
 const results=[],errors=[],metrics={};
+const CPU=Number(process.env.MP75_CPU||1);if(![1,4].includes(CPU))throw Error('MP75_CPU 1|4');
 const WIN=+(process.env.MP75_WINDOW||3);   /* PERF.2: gerçek döngü ölçüm penceresi (oyun ayı); varsayılan 3 = MP.7.5 */
 const PANE=process.env.MP75_PANE||'diplo',SIZE=process.env.MP75_SIZE||'orta',AI=+(process.env.MP75_AI||5),CHECK=(process.env.MP75_MONTHS||'60,120').split(',').map(Number);
 async function test(name,fn){const t0=Date.now();
@@ -49,12 +50,12 @@ async function swipe(p,sel,dx){const c=await touch(p),b=await p.locator(sel).fir
   for(let i=1;i<=8;i++){await c.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:x+dx*i/8,y:y+(i%2)}]});await p.waitForTimeout(16);}
   await c.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});await p.waitForTimeout(350);}
 async function joinTaps(p,link,name,taps){await p.goto(link);await wait(p,()=>window.MP1Join&&document.getElementById('jName'));await p.fill('#jName',name);
-  const b=await p.locator('[data-j="go"]').boundingBox();for(let i=0;i<taps;i++){await tapAt(p,b.x+b.width/2,b.y+b.height/2);await p.waitForTimeout(25);}}
+  await require('./helpers/mp83-join-touch.cjs').joinBurst(p,taps,tapAt);}
 async function room(H,cap,guests){
   await H.goto(base+'/');await wait(H,()=>typeof setupGame==='function'&&document.getElementById('mp1Btn')&&window.MP7Setup&&window.MP71Dip);
   await tap(H,'#mp1Btn');await tap(H,'[data-m="create"]');await wait(H,()=>MP1Host.lobby&&MP1Host.lobby.mode==='design'&&MP1Host.lobby.phase==='waiting');
   if(cap>2){await H.selectOption('#mp7Cap',String(cap));await wait(H,c=>MP1Host.lobby.capacity===c,cap);}
-  {const r=await H.evaluate(([s,a,z])=>MP1Host.host.configure({size:s,aiCount:a,seed:z}),[SIZE,AI,+(process.env.MP75_SEED||22)]);if(!r.ok)throw Error('configure '+JSON.stringify(r));}
+  {const r=await H.evaluate(([s,a,z])=>{Object.assign(CFG,{size:s,aiCount:a,seed:z});return MP1Host.host.configure({size:s,aiCount:a,seed:z});},[SIZE,AI,+(process.env.MP75_SEED||22)]);if(!r.ok)throw Error('configure '+JSON.stringify(r));}
   await tap(H,'#mp7EditMe');await design(H,{name:'Kızıl Muhafız',mizac:'militarist',origin:'standart',ethics:['mil:2'],civics:['kale_dok']});
   const link=await H.textContent('#mp1Link');
   for(const [p,name,d,taps] of guests){await joinTaps(p,link,name,taps||1);
@@ -76,21 +77,26 @@ async function room(H,cap,guests){
 }
 
 /* ölçüm kancaları: host ay adımı + yayın; misafir ayna kurulumu + yenileme; iki sayfada uzun görev (longtask) ve açık panelin baştan yazılması */
-async function instrument(p,host){await p.evaluate(host=>{const T=window.__perf={month:[],publish:[],build:[],refresh:[],long:[],paneRewrites:0,mut:0};
+async function instrument(p,host){await p.evaluate(host=>{const T=window.__perf={month:[],publish:[],build:[],refresh:[],deserialize:[],frames:[],measuring:false,lastFrame:null,start:0,long:[],paneRewrites:0,mut:0};
   try{new PerformanceObserver(l=>{for(const e of l.getEntries())T.long.push(Math.round(e.duration));}).observe({entryTypes:['longtask']});}catch{}
+  const raf=t=>{if(T.measuring){if(T.lastFrame!==null)T.frames.push(t-T.lastFrame);T.lastFrame=t;}requestAnimationFrame(raf);};requestAnimationFrame(raf);
+  if(!host){const ds=window.deserialize;window.deserialize=function(){const t=performance.now();try{return ds.apply(this,arguments);}finally{T.deserialize.push(performance.now()-t);}};}
   if(host){const mt=window.monthTick;window.monthTick=function(){const t=performance.now();try{return mt.apply(this,arguments);}finally{T.month.push(performance.now()-t);}};
     const h=MP1Host.host,pb=h.publish;h.publish=function(){const t=performance.now();try{return pb.apply(this,arguments);}finally{T.publish.push(performance.now()-t);}};}
   else{const rf=UI.refresh;UI.refresh=function(){const t=performance.now();try{return rf.apply(this,arguments);}finally{T.refresh.push(performance.now()-t);}};}
   const pane=document.getElementById('diploPane');new MutationObserver(ms=>{for(const m of ms){T.mut++;if(m.target===pane&&m.type==='childList'&&m.addedNodes.length)T.paneRewrites++;}}).observe(pane,{childList:true,subtree:true});},host);}
 const stat=a=>{if(!a.length)return {n:0};const s=[...a].sort((x,y)=>x-y),q=k=>+s[Math.min(s.length-1,Math.floor(s.length*k))].toFixed(1);return {n:a.length,med:q(.5),p95:q(.95),max:+s[s.length-1].toFixed(1)};};
 async function snap(H,Bp,label){
-  const h=await H.evaluate(()=>{const T=window.__perf;return {month:T.month.splice(0),publish:T.publish.splice(0),long:T.long.splice(0),day:G.day,heap:performance.memory?Math.round(performance.memory.usedJSHeapSize/1048576):null,
+  const h=await H.evaluate(()=>{const T=window.__perf;return {month:T.month.splice(0),publish:T.publish.splice(0),long:T.long.splice(0),day:G.day,seed:G.seed,systems:G.sys.length,states:G.emps.filter(e=>!e.wild).length,alive:G.emps.filter(e=>!e.wild&&!e.dead).length,humans:[...MP1Host.host.state.players.values()].filter(p=>p.empireId!==null&&!p.visitor).length,heap:performance.memory?Math.round(performance.memory.usedJSHeapSize/1048576):null,
     mirrors:(MP1Host.host.stats||{}).mirrors||null};});
-  const g=await Bp.evaluate(()=>{const T=window.__perf,S=MP6Stars.S;const b=S.stats.buildMs.slice();return {refresh:T.refresh.splice(0),long:T.long.splice(0),builds:S.stats.builds,buildMs:b,minGap:S.minGap,
+  const g=await Bp.evaluate(()=>{const T=window.__perf,S=MP6Stars.S;const b=S.stats.buildMs.slice();return {refresh:T.refresh.splice(0),deserialize:T.deserialize.splice(0),frames:T.frames.splice(0),windowMs:performance.now()-T.start,long:T.long.splice(0),builds:S.stats.builds,buildMs:b,minGap:S.minGap,
     paneRewrites:T.paneRewrites,mut:T.mut,deltas:S.stats.deltas,surfaceKept:S.stats.surfaceKept||0,touchHeld:S.stats.touchHeld||0,heap:performance.memory?Math.round(performance.memory.usedJSHeapSize/1048576):null};});
-  const row={label,month:Math.floor(h.day/30),host:{monthTick:stat(h.month),publish:stat(h.publish),longtask:stat(h.long),heapMB:h.heap},
-    guest:{build:stat(g.buildMs),refresh:stat(g.refresh),longtask:stat(g.long),builds:g.builds,deltas:g.deltas,minGap:g.minGap,paneRewrites:g.paneRewrites,mutations:g.mut,surfaceKept:g.surfaceKept,heapMB:g.heap}};
+  const row={label,month:Math.floor(h.day/30),context:{seed:h.seed,systems:h.systems,states:h.states,alive:h.alive,humans:h.humans,pane:PANE},host:{monthTick:stat(h.month),publish:stat(h.publish),longtask:stat(h.long),heapMB:h.heap},
+    guest:{build:stat(g.buildMs),deserialize:stat(g.deserialize),refresh:stat(g.refresh),rafMs:stat(g.frames),rafFps:g.frames.length*1000/g.windowMs,windowMs:g.windowMs,longtask:stat(g.long),builds:g.builds,deltas:g.deltas,minGap:g.minGap,paneRewrites:g.paneRewrites,mutations:g.mut,surfaceKept:g.surfaceKept,heapMB:g.heap}};
   metrics.rows=(metrics.rows||[]).concat(row);console.log('ROW '+JSON.stringify(row));return row;}
+// Yalnız ölçüm: WebSocket payload boyutu/sıklığı; içerik ve kimlik doğrulama verisi kaydedilmez.
+function wire(page){let rx=[],tx=[],start=performance.now();page.on('websocket',ws=>{ws.on('framereceived',f=>rx.push(Buffer.byteLength(f.payload)));ws.on('framesent',f=>tx.push(Buffer.byteLength(f.payload)));});
+ return {reset(){rx=[];tx=[];start=performance.now();},snap(){const seconds=(performance.now()-start)/1000;return {seconds,rx:{sizes:stat(rx),payloadBytes:rx.reduce((a,b)=>a+b,0),messagesPerSecond:rx.length/seconds},tx:{sizes:stat(tx),payloadBytes:tx.reduce((a,b)=>a+b,0),messagesPerSecond:tx.length/seconds}};}};}
 let relay,px,base,tls,bH,bB;
 (async()=>{tls=selfSigned();try{
   const pport=await freePort();base='https://localhost:'+pport;
@@ -100,9 +106,11 @@ let relay,px,base,tls,bH,bB;
   const launch={executablePath:process.env.STARS_CHROMIUM_PATH||undefined,args:['--no-sandbox','--disable-gpu','--disable-dev-shm-usage','--enable-precise-memory-info','--ignore-certificate-errors-spki-list='+spki]};
   [bH,bB]=await Promise.all([0,1].map(()=>chromium.launch(launch)));
   const H=await (await bH.newContext(PHONE(844,390))).newPage(),Bp=await (await bB.newContext(PHONE(800,360))).newPage();
+  const wires={host:wire(H),guest:wire(Bp)},cpuSessions=[await H.context().newCDPSession(H),await Bp.context().newCDPSession(Bp)];
   for(const [n,p] of [['host',H],['B',Bp]]){p.on('pageerror',e=>errors.push(n+': '+e.message));}
   await test('uzun oyun ölçümü: '+SIZE+' / '+AI+' AI, misafirde diplomasi paneli açık, en yüksek hız; '+CHECK.join('/')+'. ay',async()=>{
     await room(H,2,[[Bp,'Bora',{name:'Saf Akıl Ağı',mizac:'teknokrasi',origin:'standart',ethics:['mat:2','mil:-1'],civics:['sinyal_avci']},1]]);
+    assert.equal(await H.evaluate(()=>G.seed),+(process.env.MP75_SEED||22),'gerçek dünya tohumu istenen ölçüm tohumu olmalı');
     await instrument(H,true);await instrument(Bp,false);
     await Bp.evaluate(p=>{if(p==='council')UI.openCouncil();else UI.openDiplo();},PANE);await H.evaluate(()=>MP1Host.host.local({kind:'speed',value:4}));
     /* oyun olayları pencere açıp oyunu duraklatabilir (tek oyunculu davranış): ölçüm penceresinde pencereler kapatılır, hız yeniden istenir */
@@ -117,9 +125,9 @@ let relay,px,base,tls,bH,bB;
         for(let i=0;i<60&&G.day<m*30-w*30;i++){const b=Math.floor(G.day/30),d0=Math.floor(G.day);G.day+=.5;dailyTick(.5);structTick(.5);colonyBuildTick(.5);autoExploreTick();
           if(Math.floor(G.day/30)>b)monthTick();if(Math.floor(G.day)!==d0)MP1Host.host.publish();}return G.day;},[m,WIN]);
       await H.waitForTimeout(30);if(d>=m*30-WIN*30)return;}};
-    const reset=async()=>{for(const p of [H,Bp])await p.evaluate(()=>{const T=window.__perf;for(const k of ['month','publish','build','refresh','long'])T[k]=[];T.paneRewrites=0;T.mut=0;if(window.MP6Stars)MP6Stars.S.stats.buildMs=[];});};
-    const t0=Date.now();for(const m of CHECK){const f0=Date.now();await ff(m);metrics['ffS_m'+m]=Math.round((Date.now()-f0)/1000);await H.waitForTimeout(2500);await reset();await drive(m);
-      await H.evaluate(()=>MP1Host.host.local({kind:'speed',value:0}));await H.waitForTimeout(1500);const r=await snap(H,Bp,'m'+m);r.wallS=Math.round((Date.now()-t0)/1000);
+    const reset=async()=>{for(const p of [H,Bp])await p.evaluate(()=>{const T=window.__perf;for(const k of ['month','publish','build','refresh','deserialize','frames','long'])T[k]=[];T.paneRewrites=0;T.mut=0;T.measuring=true;T.lastFrame=null;T.start=performance.now();if(window.MP6Stars)MP6Stars.S.stats.buildMs=[];});};
+    const t0=Date.now();for(const m of CHECK){const f0=Date.now();await ff(m);metrics['ffS_m'+m]=Math.round((Date.now()-f0)/1000);await H.waitForTimeout(2500);for(const c of cpuSessions)await c.send('Emulation.setCPUThrottlingRate',{rate:CPU});await reset();wires.host.reset();wires.guest.reset();await drive(m);
+      await H.evaluate(()=>MP1Host.host.local({kind:'speed',value:0}));await H.waitForTimeout(1500);const r=await snap(H,Bp,'m'+m);assert(r.month>=m&&r.host.monthTick.n>=WIN,'ölçüm hedef aya ulaşmalı ve pencerenin ay adımları çalışmalı');r.cpuRate=CPU;r.requestedSeed=+(process.env.MP75_SEED||22);r.wire={host:wires.host.snap(),guest:wires.guest.snap()};for(const p of [H,Bp])await p.evaluate(()=>{window.__perf.measuring=false;});for(const c of cpuSessions)await c.send('Emulation.setCPUThrottlingRate',{rate:1});r.wallS=Math.round((Date.now()-t0)/1000);
       await Bp.evaluate(()=>{if(!document.getElementById('diploPane').classList.contains('show'))UI.openDiplo();});await H.evaluate(()=>MP1Host.host.local({kind:'speed',value:4}));}
   });
 }catch(e){console.log('FATAL',e);results.push({name:'FATAL',status:'FAIL',error:String(e&&e.stack||e)});}
