@@ -9,3 +9,5 @@
 - Tarihsel B1 kök nedeni açık; kapanmış sayılmaz. Ürün kodu değişmedi; Save8/RNG, build 96h10p5 ve MP.8 korundu.
 - NOT RUN: tam regresyon, PERF.1/PERF.2 tekrarları, MP.8 senaryoları, Docker, Android ve canlı Render.
 - GitHub/PR teslim kaydı: faz raporunun sonunda.
+
+- GitHub teslimi: `64e338062056ea9fc5902cc655838492796f014f` rapor/test commit’i push edildi ve uzak HEAD doğrulandı. PR iki denemede GraphQL Forbidden nedeniyle oluşturulamadı; [doğru tabanla oluşturma ekranı](https://github.com/sarsiss12-dot/Star/compare/codex/stars-mp82-test-stability...codex/stars-mp83-join-stability?expand=1).

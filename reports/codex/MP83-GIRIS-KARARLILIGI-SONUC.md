@@ -4,7 +4,7 @@
 
 Başlangıç HEAD: `e000bb0c488c046b3ede9d8fab86eb00ffe8889a`. GitHub'dan fetch edilen `codex/stars-mp82-test-stability` ile yerel HEAD eşleşti; başlangıç çalışma ağacı temizdi. Yeni dal `codex/stars-mp83-join-stability`, PR tabanı `codex/stars-mp82-test-stability`. Eski MP.8.1 dalından başlanmadı. `main`, rebase ve force-push kullanılmadı.
 
-Bitiş kaynak HEAD'i başlangıç commit'idir; bu rapor/test değişikliklerinin nihai commit SHA'sı sohbet tesliminde ve Git geçmişinde verilir. Kendi SHA'sını rapora yazmak için yeni commit döngüsü oluşturulmaz. Teslim kaydı aşağıdadır.
+Doğrulanmış başlangıç kaynak referansı yukarıdadır; test değişikliklerini içeren doğrulanmış bitiş referansı `64e338062056ea9fc5902cc655838492796f014f` (ilk teslim commit’i) olarak kaydedildi. Bu teslim kaydı commit’inin nihai SHA’sı sohbet tesliminde ve Git geçmişinde verilir. Kendi SHA'sını rapora yazmak için yeni commit döngüsü oluşturulmaz. Teslim kaydı aşağıdadır.
 
 ## İncelenen kanıtlar
 
@@ -85,7 +85,7 @@ Runtime build **96h10p5**, MP sürümü **MP.8** korunur. Yeni build/PWA kimliğ
 
 ## GitHub teslim kaydı
 
-PR oluşturma denemesi `https://api.github.com/graphql` için **Forbidden** döndü. Güvenlik/ağ sınırları değiştirilmedi; oluşturulmuş PR bağlantısı yok. Rapor ve test değişiklikleri bu geliştirme dalına commit/push edilir; uzak HEAD doğrulaması ek teslim kaydında belirtilir.
+PR oluşturma denemesi `https://api.github.com/graphql` için **Forbidden** döndü. Güvenlik/ağ sınırları değiştirilmedi; oluşturulmuş PR bağlantısı yok. Rapor, kanıtlar ve test değişiklikleri `64e338062056ea9fc5902cc655838492796f014f` commit’iyle GitHub’a push edildi; `git ls-remote` uzak dalda aynı SHA’yı doğruladı. Uzak dal oluşturulduktan sonraki PR denemesi de Forbidden döndü. Bu teslim kaydı aynı dala ek bir rapor commit’iyle gönderilir; nihai SHA son yanıttadır.
 
 - Rapor: https://github.com/sarsiss12-dot/Star/blob/codex/stars-mp83-join-stability/reports/codex/MP83-GIRIS-KARARLILIGI-SONUC.md
 - PR oluşturma ekranı (oluşturulmuş PR değildir): https://github.com/sarsiss12-dot/Star/compare/codex/stars-mp82-test-stability...codex/stars-mp83-join-stability?expand=1
