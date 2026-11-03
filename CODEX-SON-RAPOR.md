@@ -10,3 +10,5 @@
 - Ürün/Save8/RNG değişmedi; build 96h10p5, MP.8. Yeni ZIP yok.
 - NOT RUN: uygulanmamış kalıcılık kabul senaryoları ve storage hata testleri, tam regresyon/uzun kampanyalar, Docker, fiziksel Android, canlı Render.
 - GitHub/PR teslim kaydı faz raporunun sonunda.
+
+- GitHub teslimi: `d7fb2a5da40d20654fdc092e0a9043fa492ef80a` rapor/test commit’i push edildi; uzak HEAD doğrulandı. PR iki denemede GraphQL Forbidden nedeniyle oluşturulamadı. [PR oluşturma ekranı](https://github.com/sarsiss12-dot/Star/compare/codex/stars-mp83-join-stability...codex/stars-mp84-notice-persistence?expand=1).

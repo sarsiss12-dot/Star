@@ -12,7 +12,7 @@ Bu sonuç, Save8 dışında güvenli depolamanın genel olarak imkânsız olduğ
 - GitHub'dan fetch edilen `codex/stars-mp83-join-stability` ile eşleşti; başlangıç ağacı temizdi.
 - Geliştirme dalı: `codex/stars-mp84-notice-persistence`.
 - PR tabanı: `codex/stars-mp83-join-stability`.
-- Bitiş için doğrulanmış önceki commit referansı teslim kaydına eklenir; son rapor commit SHA'sı sohbet tesliminde verilir. `main`, merge/rebase/force-push kullanılmadı.
+- Doğrulanmış bitiş referansı (ilk rapor/test teslim commit’i): `d7fb2a5da40d20654fdc092e0a9043fa492ef80a`; son rapor commit SHA'sı sohbet tesliminde verilir. `main`, merge/rebase/force-push kullanılmadı.
 
 `AGENTS.md`, `GPT-DEVIR.md`, `CLAUDE.md`, son rapor, MP.8.2/MP.8.3 raporları ve MP.8.1 tanısı esas alındı. Önceki araştırmalar yeniden yapılmadı.
 
@@ -107,7 +107,7 @@ Runtime build **96h10p5**, MP sürümü **MP.8** korunur. Yeni build/PWA, manife
 
 ## GitHub teslim kaydı
 
-PR oluşturma denemesi GraphQL için **Forbidden** döndü. Güvenlik/ağ sınırları değiştirilmedi; PR oluşturulmuş gibi gösterilmiyor. Rapor/test/kanıt commit'i bu geliştirme dalına push edilir; uzak HEAD doğrulaması teslim kaydına eklenecek.
+PR oluşturma denemesi GraphQL için **Forbidden** döndü. Güvenlik/ağ sınırları değiştirilmedi; PR oluşturulmuş gibi gösterilmiyor. Rapor/test/kanıt commit’i `d7fb2a5da40d20654fdc092e0a9043fa492ef80a` GitHub’a push edildi ve `git ls-remote` aynı uzak HEAD’i doğruladı. Uzak dal hazırken ikinci PR denemesi de Forbidden döndü. Bu teslim kaydı ek rapor commit’iyle aynı dala gönderilir; nihai SHA son yanıtta verilir.
 
 - Rapor: https://github.com/sarsiss12-dot/Star/blob/codex/stars-mp84-notice-persistence/reports/codex/MP84-BILDIRIM-KALICILIGI-SONUC.md
 - Doğru tabanla PR oluşturma ekranı (oluşturulmuş PR değildir): https://github.com/sarsiss12-dot/Star/compare/codex/stars-mp83-join-stability...codex/stars-mp84-notice-persistence?expand=1
