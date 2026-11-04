@@ -1,0 +1,10 @@
+FAIL uzun oyun ölçümü: orta / 5 AI, misafirde diplomasi paneli açık, en yüksek hız; 60/120. ay
+page.evaluate: Error: no exposed diplomacy target
+    at eval (eval at evaluate (:311:30), <anonymous>:1:266)
+    at UtilityScript.evaluate (<anonymous>:313:16)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+    at module.exports (/workspace/Star/tests/helpers/mp87-frame.cjs:39:35)
+    at async /workspace/Star/tests/browser-mp75-perf.cjs:115:54
+    at async test (/workspace/Star/tests/browser-mp75-perf.cjs:18:7)
+    at async /workspace/Star/tests/browser-mp75-perf.cjs:113:3
+GEÇEN: 0 KALAN: 1

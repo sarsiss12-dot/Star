@@ -1,0 +1,15 @@
+{
+  "results": [
+    {
+      "name": "uzun oyun ölçümü: orta / 5 AI, misafirde diplomasi paneli açık, en yüksek hız; 60/120. ay",
+      "status": "FAIL",
+      "error": "locator.tap: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for locator('#diploPane .dcSelect').first()\u001b[22m\n\n    at module.exports (/workspace/Star/tests/helpers/mp87-frame.cjs:39:62)\n    at async /workspace/Star/tests/browser-mp75-perf.cjs:115:54\n    at async test (/workspace/Star/tests/browser-mp75-perf.cjs:18:7)\n    at async /workspace/Star/tests/browser-mp75-perf.cjs:113:3"
+    }
+  ],
+  "metrics": {
+    "joinErrors_Bora": [],
+    "errors": []
+  },
+  "size": "orta",
+  "ai": 5
+}

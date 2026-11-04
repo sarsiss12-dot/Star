@@ -1,0 +1,15 @@
+{
+  "results": [
+    {
+      "name": "uzun oyun ölçümü: orta / 5 AI, misafirde diplomasi paneli açık, en yüksek hız; 60/120. ay",
+      "status": "FAIL",
+      "error": "page.evaluate: Error: no exposed diplomacy target\n    at eval (eval at evaluate (:311:30), <anonymous>:1:266)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at module.exports (/workspace/Star/tests/helpers/mp87-frame.cjs:39:35)\n    at async /workspace/Star/tests/browser-mp75-perf.cjs:115:54\n    at async test (/workspace/Star/tests/browser-mp75-perf.cjs:18:7)\n    at async /workspace/Star/tests/browser-mp75-perf.cjs:113:3"
+    }
+  ],
+  "metrics": {
+    "joinErrors_Bora": [],
+    "errors": []
+  },
+  "size": "orta",
+  "ai": 5
+}

@@ -1,0 +1,12 @@
+{
+  "filesScanned": 27,
+  "rows": [
+    {
+      "file": "tests/fixtures/96h10/seed11-month228-occupied-colony.save",
+      "day": 6840,
+      "month": 228,
+      "seed": 11,
+      "alive": 4
+    }
+  ]
+}

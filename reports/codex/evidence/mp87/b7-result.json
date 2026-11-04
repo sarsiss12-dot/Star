@@ -1,0 +1,50 @@
+{
+  "results": [
+    {
+      "name": "MP.8.7 sabit kayıt ayna/çizim ölçümü: orta / 5 AI, misafirde diplomasi paneli açık, en yüksek hız; 60/120. ay",
+      "status": "FAIL",
+      "error": "page.waitForFunction: ReferenceError: MP1Join is not defined\n    at eval (eval at predicate (eval at evaluate (:311:30)), <anonymous>:1:19)\n    at predicate (eval at evaluate (:311:30), <anonymous>:7:27)\n    at next (eval at evaluate (:311:30), <anonymous>:29:33)\n    at eval (eval at evaluate (:311:30), <anonymous>:42:13)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at wait (/workspace/Star/tests/browser-mp75-perf.cjs:22:40)\n    at room (/workspace/Star/tests/browser-mp75-perf.cjs:63:11)\n    at async /workspace/Star/tests/browser-mp75-perf.cjs:114:5\n    at async test (/workspace/Star/tests/browser-mp75-perf.cjs:18:7)\n    at async /workspace/Star/tests/browser-mp75-perf.cjs:113:3"
+    }
+  ],
+  "metrics": {
+    "nav87": [
+      {
+        "page": "host",
+        "path": "/"
+      },
+      {
+        "page": "host",
+        "path": "/"
+      },
+      {
+        "page": "host",
+        "path": "/"
+      },
+      {
+        "page": "host",
+        "path": "/"
+      },
+      {
+        "page": "host",
+        "path": "/"
+      },
+      {
+        "page": "host",
+        "path": "/"
+      },
+      {
+        "page": "B",
+        "path": "/mp/play"
+      },
+      {
+        "page": "B",
+        "path": "/"
+      }
+    ],
+    "errors": [
+      "B: MP1Join is not defined"
+    ]
+  },
+  "size": "orta",
+  "ai": 5
+}

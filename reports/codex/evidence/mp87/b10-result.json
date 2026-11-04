@@ -1,0 +1,84 @@
+{
+  "results": [
+    {
+      "name": "MP.8.7 sabit kayıt ayna/çizim ölçümü: orta / 5 AI, misafirde diplomasi paneli açık, en yüksek hız; 60/120. ay",
+      "status": "PASS",
+      "ms": 57201
+    }
+  ],
+  "metrics": {
+    "nav87": [
+      {
+        "page": "host",
+        "path": "/"
+      },
+      {
+        "page": "host",
+        "path": "/"
+      },
+      {
+        "page": "host",
+        "path": "/"
+      },
+      {
+        "page": "host",
+        "path": "/"
+      },
+      {
+        "page": "host",
+        "path": "/"
+      },
+      {
+        "page": "host",
+        "path": "/"
+      },
+      {
+        "page": "B",
+        "path": "/mp/play"
+      },
+      {
+        "page": "B",
+        "path": "/mp/play"
+      },
+      {
+        "page": "B",
+        "path": "/mp/play"
+      },
+      {
+        "page": "B",
+        "path": "/mp/play"
+      },
+      {
+        "page": "B",
+        "path": "/mp/play"
+      },
+      {
+        "page": "host",
+        "path": "/"
+      }
+    ],
+    "joinErrors_Bora": [],
+    "frame87": {
+      "arm": "mp86",
+      "context": {
+        "day": 3614.7329999999893,
+        "over": false,
+        "seed": 404,
+        "systems": 45,
+        "states": 7,
+        "guestWasAI": false,
+        "alive": 7
+      },
+      "receiveToDraw": {
+        "n": 18,
+        "med": 268.6000000089407,
+        "p95": 958.6999999880791,
+        "max": 958.6999999880791
+      },
+      "rafPerSec": 6.317613114583879
+    },
+    "errors": []
+  },
+  "size": "orta",
+  "ai": 5
+}

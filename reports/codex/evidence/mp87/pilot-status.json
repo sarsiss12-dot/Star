@@ -1,0 +1,22 @@
+[
+  {
+    "run": "a1",
+    "status": "FAIL",
+    "reason": "Diagnostic button covered by open diplomacy panel; not valid performance data."
+  },
+  {
+    "run": "a2",
+    "status": "ABORTED",
+    "reason": "Stopped to retain throttling CDP sessions for full measurement; no accepted data."
+  },
+  {
+    "run": "a4",
+    "status": "FAIL",
+    "reason": "State selection navigated to relation page; next input target absent."
+  },
+  {
+    "run": "a6",
+    "status": "FAIL",
+    "reason": "MP1Join is not defined during lobby setup; measurement never began."
+  }
+]

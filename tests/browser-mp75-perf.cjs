@@ -51,7 +51,8 @@ async function swipe(p,sel,dx){const c=await touch(p),b=await p.locator(sel).fir
   for(let i=1;i<=8;i++){await c.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:x+dx*i/8,y:y+(i%2)}]});await p.waitForTimeout(16);}
   await c.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});await p.waitForTimeout(350);}
 async function joinTaps(p,link,name,taps){await p.goto(link);await wait(p,()=>window.MP1Join&&document.getElementById('jName'));await p.fill('#jName',name);
-  await require('./helpers/mp83-join-touch.cjs').joinBurst(p,taps,tapAt);}
+  if(process.env.MP87_FRAME==='1')await p.press('#jName','Enter'); // Performance bootstrap uses the product's existing Enter handler; touch-join coverage stays in MP74.
+  else await require('./helpers/mp83-join-touch.cjs').joinBurst(p,taps,tapAt);}
 async function room(H,cap,guests){
   await H.goto(base+'/');await wait(H,()=>typeof setupGame==='function'&&document.getElementById('mp1Btn')&&window.MP7Setup&&window.MP71Dip);
   await tap(H,'#mp1Btn');await tap(H,'[data-m="create"]');await wait(H,()=>MP1Host.lobby&&MP1Host.lobby.mode==='design'&&MP1Host.lobby.phase==='waiting');
@@ -107,10 +108,12 @@ let relay,px,base,tls,bH,bB;
   const launch={executablePath:process.env.STARS_CHROMIUM_PATH||undefined,args:['--no-sandbox','--disable-gpu','--disable-dev-shm-usage','--enable-precise-memory-info','--ignore-certificate-errors-spki-list='+spki]};
   [bH,bB]=await Promise.all([0,1].map(()=>chromium.launch(launch)));
   const H=await (await bH.newContext(PHONE(844,390))).newPage(),Bp=await (await bB.newContext(PHONE(800,360))).newPage();
+  if(process.env.MP87_CONTROL)await Bp.route('**/guest-stars.js',r=>r.fulfill({contentType:'text/javascript',body:fs.readFileSync(process.env.MP87_CONTROL,'utf8')}));
   const wires={host:wire(H),guest:wire(Bp)},cpuSessions=[await H.context().newCDPSession(H),await Bp.context().newCDPSession(Bp)];
-  for(const [n,p] of [['host',H],['B',Bp]]){p.on('pageerror',e=>errors.push(n+': '+e.message));}
-  await test('uzun oyun ölçümü: '+SIZE+' / '+AI+' AI, misafirde diplomasi paneli açık, en yüksek hız; '+CHECK.join('/')+'. ay',async()=>{
+  for(const [n,p] of [['host',H],['B',Bp]]){p.on('pageerror',e=>errors.push(n+': '+e.message));if(process.env.MP87_FRAME==='1')p.on('framenavigated',f=>{if(f===p.mainFrame())(metrics.nav87||(metrics.nav87=[])).push({page:n,path:new URL(f.url()).pathname});});}
+  await test(process.env.MP87_FRAME==='1'?'MP.8.7 sabit kayıt ayna/çizim ölçümü: '+(process.env.MP87_SAVE||'MP86 120. ay checkpoint'):'uzun oyun ölçümü: '+SIZE+' / '+AI+' AI, misafirde diplomasi paneli açık, en yüksek hız; '+CHECK.join('/')+'. ay',async()=>{
     await room(H,2,[[Bp,'Bora',{name:'Saf Akıl Ağı',mizac:'teknokrasi',origin:'standart',ethics:['mat:2','mil:-1'],civics:['sinyal_avci']},1]]);
+    if(process.env.MP87_FRAME==='1'){metrics.frame87=await require('./helpers/mp87-frame.cjs')(H,Bp,out);assert.equal(errors.length,0,'page errors');return;}
     assert.equal(await H.evaluate(()=>G.seed),+(process.env.MP75_SEED||22),'gerçek dünya tohumu istenen ölçüm tohumu olmalı');
     await instrument(H,true);await instrument(Bp,false);
     await Bp.evaluate(p=>{if(p==='council')UI.openCouncil();else UI.openDiplo();},PANE);await H.evaluate(()=>MP1Host.host.local({kind:'speed',value:4}));

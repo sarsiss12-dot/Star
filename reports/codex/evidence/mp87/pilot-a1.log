@@ -1,0 +1,37 @@
+FAIL uzun oyun ölçümü: orta / 5 AI, misafirde diplomasi paneli açık, en yüksek hız; 60/120. ay
+locator.tap: Timeout 8000ms exceeded.
+Call log:
+[2m  - waiting for locator('#mp6Conn')[22m
+[2m    - locator resolved to <span id="mp6Conn" role="button" aria-expanded="false" class="mp1-mini-h mp6-conn mp74-pill" aria-label="Çok oyunculu — Bağlı · oda 65VFX">…</span>[22m
+[2m  - attempting tap action[22m
+[2m    2 × waiting for element to be visible, enabled and stable[22m
+[2m      - element is visible, enabled and stable[22m
+[2m      - scrolling into view if needed[22m
+[2m      - done scrolling[22m
+[2m      - <button data-x="1" class="dcSelect" data-a="diploPick">…</button> from <div class="show" id="diploPane">…</div> subtree intercepts pointer events[22m
+[2m    - retrying tap action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible, enabled and stable[22m
+[2m      - element is visible, enabled and stable[22m
+[2m      - scrolling into view if needed[22m
+[2m      - done scrolling[22m
+[2m      - <button data-x="1" class="dcSelect" data-a="diploPick">…</button> from <div class="show" id="diploPane">…</div> subtree intercepts pointer events[22m
+[2m    - retrying tap action[22m
+[2m      - waiting 100ms[22m
+[2m    10 × waiting for element to be visible, enabled and stable[22m
+[2m       - element is visible, enabled and stable[22m
+[2m       - scrolling into view if needed[22m
+[2m       - done scrolling[22m
+[2m       - <button data-x="1" class="dcSelect" data-a="diploPick">…</button> from <div class="show" id="diploPane">…</div> subtree intercepts pointer events[22m
+[2m     - retrying tap action[22m
+[2m       - waiting 500ms[22m
+[2m    - waiting for element to be visible, enabled and stable[22m
+[2m    - element is visible, enabled and stable[22m
+[2m    - scrolling into view if needed[22m
+[2m    - done scrolling[22m
+
+    at module.exports (/workspace/Star/tests/helpers/mp87-frame.cjs:39:42)
+    at async /workspace/Star/tests/browser-mp75-perf.cjs:115:54
+    at async test (/workspace/Star/tests/browser-mp75-perf.cjs:18:7)
+    at async /workspace/Star/tests/browser-mp75-perf.cjs:113:3
+GEÇEN: 0 KALAN: 1

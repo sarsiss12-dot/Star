@@ -1,0 +1,14 @@
+FAIL MP.8.7 sabit kayıt ayna/çizim ölçümü: orta / 5 AI, misafirde diplomasi paneli açık, en yüksek hız; 60/120. ay
+page.waitForFunction: ReferenceError: MP1Join is not defined
+    at eval (eval at predicate (eval at evaluate (:311:30)), <anonymous>:1:19)
+    at predicate (eval at evaluate (:311:30), <anonymous>:7:27)
+    at next (eval at evaluate (:311:30), <anonymous>:29:33)
+    at eval (eval at evaluate (:311:30), <anonymous>:42:13)
+    at UtilityScript.evaluate (<anonymous>:313:16)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+    at wait (/workspace/Star/tests/browser-mp75-perf.cjs:22:40)
+    at room (/workspace/Star/tests/browser-mp75-perf.cjs:63:11)
+    at async /workspace/Star/tests/browser-mp75-perf.cjs:114:5
+    at async test (/workspace/Star/tests/browser-mp75-perf.cjs:18:7)
+    at async /workspace/Star/tests/browser-mp75-perf.cjs:113:3
+GEÇEN: 0 KALAN: 1

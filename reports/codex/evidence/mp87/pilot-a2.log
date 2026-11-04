@@ -1,0 +1,10 @@
+FAIL uzun oyun ölçümü: orta / 5 AI, misafirde diplomasi paneli açık, en yüksek hız; 60/120. ay
+locator.tap: Target page, context or browser has been closed
+Call log:
+[2m  - waiting for locator('#diploPane .dcSelect').first()[22m
+
+    at module.exports (/workspace/Star/tests/helpers/mp87-frame.cjs:39:62)
+    at async /workspace/Star/tests/browser-mp75-perf.cjs:115:54
+    at async test (/workspace/Star/tests/browser-mp75-perf.cjs:18:7)
+    at async /workspace/Star/tests/browser-mp75-perf.cjs:113:3
+GEÇEN: 0 KALAN: 1

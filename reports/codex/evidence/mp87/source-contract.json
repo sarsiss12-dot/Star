@@ -1,0 +1,10 @@
+{
+  "canonicalHead": "0dfb449e52bcdd6a9c1c73838f2f476ae37b2216",
+  "mp85Commit": "c005f82c240ab26375f5307405d11a883207a453",
+  "mp85GuestSHA256": "cf5e3de3156046322814c904b4ddc60424f8dae59afc8734d4951924f0c781e4",
+  "mp86GuestSHA256": "f172748247692e258dffe247bb4191bf8b6502affd91e2118d2083995ff49a8f",
+  "onlyGuestDifference": "MP.8.6 NEBULA PIXELS block",
+  "runtimeFiles": 19,
+  "runtimeManifestHashesMatch": true,
+  "build": "96h10p5"
+}

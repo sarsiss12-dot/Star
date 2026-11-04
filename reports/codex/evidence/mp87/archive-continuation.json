@@ -1,0 +1,15 @@
+{
+  "note": "Separate disposable copy; fixture and measured worlds unchanged; natural engine steps stop at G.over",
+  "before": {
+    "day": 6840,
+    "playerColonies": 1,
+    "actor1Colonies": 3,
+    "over": false
+  },
+  "after": {
+    "day": 6870,
+    "over": false,
+    "alive": 4,
+    "rng": 1660012913
+  }
+}

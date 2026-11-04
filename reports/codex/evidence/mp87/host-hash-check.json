@@ -1,0 +1,20 @@
+{
+  "controlRepeatMismatchIndices": [
+    5,
+    6,
+    9,
+    10,
+    13,
+    14
+  ],
+  "candidateRepeatMismatchIndices": [
+    5,
+    6,
+    10,
+    13,
+    14,
+    15,
+    16
+  ],
+  "note": "Even same-code repeat host snapshots differ at intermediate steps; no source-field difference capture. Do not claim host step-by-step byte equivalence."
+}
