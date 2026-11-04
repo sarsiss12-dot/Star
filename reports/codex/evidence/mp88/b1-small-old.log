@@ -1,0 +1,6 @@
+page.waitForFunction: Timeout 30000ms exceeded.
+    at Object.joinBurst (/workspace/Star/tests/helpers/mp83-join-touch.cjs:18:72)
+    at async /workspace/Star/tests/browser-mp88-lobby.cjs:11:45 {
+  log: [],
+  name: 'TimeoutError'
+}

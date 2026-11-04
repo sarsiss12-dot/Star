@@ -1,0 +1,60 @@
+{
+  "oldWorldSeeds": [
+    404,
+    22
+  ],
+  "sameFinalSave8": true,
+  "sameRNG": true,
+  "mirrorDiff": [
+    {
+      "path": "/log/0/m",
+      "a": "Şüpheli bir istihbarat faaliyeti tespit edildi — fail bilinmiyor",
+      "b": "İstihbarat seviyesi arttı — Kızıl Muhafız (İZLENİYOR)"
+    },
+    {
+      "path": "/log/0/c",
+      "a": "war",
+      "b": "sci"
+    },
+    {
+      "path": "/log/1",
+      "b": {
+        "d": 3614,
+        "m": "İstihbarat seviyesi arttı — Muhafız Nerith İmparatorluğu (İZLENİYOR)",
+        "c": "sci"
+      }
+    },
+    {
+      "path": "/log/2",
+      "b": {
+        "d": 3614,
+        "m": "İstihbarat seviyesi arttı — Uzak Sentez Topluluğu — Orinth (İZLENİYOR)",
+        "c": "sci"
+      }
+    },
+    {
+      "path": "/log/3",
+      "b": {
+        "d": 3614,
+        "m": "İstihbarat seviyesi arttı — Sylph Halk Meclisi (TANIDIK)",
+        "c": "sci"
+      }
+    },
+    {
+      "path": "/log/4",
+      "b": {
+        "d": 3614,
+        "m": "İstihbarat seviyesi arttı — Kharon Ortak Zihni (İZLENİYOR)",
+        "c": "sci"
+      }
+    },
+    {
+      "path": "/log/5",
+      "b": {
+        "d": 3614,
+        "m": "Şüpheli bir istihbarat faaliyeti tespit edildi — fail bilinmiyor",
+        "c": "war"
+      }
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+mp74-final START
+mp74-final running 30s
+mp74-final running 60s
+mp74-final running 90s
+mp74-final running 120s
+mp74-final running 150s
+mp74-final exit=0
+mp75-diag START
+mp75-diag running 30s
+mp75-diag running 60s
+mp75-diag exit=0
+mp73 START
+mp73 running 30s
+mp73 running 60s
+mp73 running 90s
+mp73 running 120s
+mp73 running 150s
+mp73 running 180s
+mp73 running 210s
+mp73 running 240s
+mp73 running 270s
+mp73 running 300s
+mp73 exit=0
+N7-target START
+N7-target running 31s
+N7-target running 63s
+N7-target exit=0
+R6-final START
+R6-final running 30s
+R6-final running 60s
+R6-final running 90s
+R6-final exit=1

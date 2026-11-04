@@ -1,0 +1,29 @@
+{
+  "note": "Strict comparison FAIL retained. Fixed host Save8 does not include MP session observer baselines or personal note map from the earlier lobby world. No log field filtering applied.",
+  "step1Diff": [
+    {
+      "path": "/log/3/m",
+      "a": "İstihbarat seviyesi arttı — Sylph Halk Meclisi (TANIDIK)",
+      "b": "İstihbarat seviyesi arttı — Kharon Ortak Zihni (İZLENİYOR)"
+    },
+    {
+      "path": "/log/4/c",
+      "a": "sci",
+      "b": "war"
+    },
+    {
+      "path": "/log/4/m",
+      "a": "İstihbarat seviyesi arttı — Kharon Ortak Zihni (İZLENİYOR)",
+      "b": "Şüpheli bir istihbarat faaliyeti tespit edildi — fail bilinmiyor"
+    },
+    {
+      "path": "/log/5",
+      "a": {
+        "d": 3614,
+        "m": "Şüpheli bir istihbarat faaliyeti tespit edildi — fail bilinmiyor",
+        "c": "war"
+      },
+      "b": null
+    }
+  ]
+}

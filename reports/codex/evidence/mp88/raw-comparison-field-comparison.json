@@ -1,0 +1,169 @@
+{
+  "mode": "raw",
+  "firstDifferent": 5,
+  "rows": [
+    {
+      "step": 1,
+      "shaEqual": true,
+      "rngEqual": true,
+      "mirrorEqual": true,
+      "diff": []
+    },
+    {
+      "step": 2,
+      "shaEqual": true,
+      "rngEqual": true,
+      "mirrorEqual": true,
+      "diff": []
+    },
+    {
+      "step": 3,
+      "shaEqual": true,
+      "rngEqual": true,
+      "mirrorEqual": true,
+      "diff": []
+    },
+    {
+      "step": 4,
+      "shaEqual": true,
+      "rngEqual": true,
+      "mirrorEqual": true,
+      "diff": []
+    },
+    {
+      "step": 5,
+      "shaEqual": false,
+      "rngEqual": true,
+      "mirrorEqual": true,
+      "diff": [
+        {
+          "path": "/emps/0/_powAt",
+          "a": 3616.7329999999893,
+          "b": 3615.2329999999893,
+          "category": "cache-derived"
+        },
+        {
+          "path": "/emps/0/_pressAt",
+          "a": 3616.7329999999893,
+          "b": 3615.2329999999893,
+          "category": "cache-derived"
+        },
+        {
+          "path": "/emps/1/_powAt",
+          "a": 3616.7329999999893,
+          "b": 3615.2329999999893,
+          "category": "cache-derived"
+        },
+        {
+          "path": "/emps/1/_pressAt",
+          "a": 3616.7329999999893,
+          "b": 3615.2329999999893,
+          "category": "cache-derived"
+        },
+        {
+          "path": "/emps/4/_powAt",
+          "a": 3616.7329999999893,
+          "b": 3615.2329999999893,
+          "category": "cache-derived"
+        },
+        {
+          "path": "/emps/4/_pressAt",
+          "a": 3616.7329999999893,
+          "b": 3615.2329999999893,
+          "category": "cache-derived"
+        },
+        {
+          "path": "/emps/5/_powAt",
+          "a": 3616.7329999999893,
+          "b": 3615.2329999999893,
+          "category": "cache-derived"
+        },
+        {
+          "path": "/emps/5/_pressAt",
+          "a": 3616.7329999999893,
+          "b": 3615.2329999999893,
+          "category": "cache-derived"
+        }
+      ]
+    },
+    {
+      "step": 6,
+      "shaEqual": false,
+      "rngEqual": true,
+      "mirrorEqual": true,
+      "diff": [
+        {
+          "path": "/emps/0/_powAt",
+          "a": 3616.7329999999893,
+          "b": 3615.2329999999893,
+          "category": "cache-derived"
+        },
+        {
+          "path": "/emps/0/_pressAt",
+          "a": 3616.7329999999893,
+          "b": 3615.2329999999893,
+          "category": "cache-derived"
+        },
+        {
+          "path": "/emps/1/_powAt",
+          "a": 3616.7329999999893,
+          "b": 3615.2329999999893,
+          "category": "cache-derived"
+        },
+        {
+          "path": "/emps/1/_pressAt",
+          "a": 3616.7329999999893,
+          "b": 3615.2329999999893,
+          "category": "cache-derived"
+        },
+        {
+          "path": "/emps/4/_powAt",
+          "a": 3616.7329999999893,
+          "b": 3615.2329999999893,
+          "category": "cache-derived"
+        },
+        {
+          "path": "/emps/4/_pressAt",
+          "a": 3616.7329999999893,
+          "b": 3615.2329999999893,
+          "category": "cache-derived"
+        },
+        {
+          "path": "/emps/5/_powAt",
+          "a": 3616.7329999999893,
+          "b": 3615.2329999999893,
+          "category": "cache-derived"
+        },
+        {
+          "path": "/emps/5/_pressAt",
+          "a": 3616.7329999999893,
+          "b": 3615.2329999999893,
+          "category": "cache-derived"
+        }
+      ]
+    },
+    {
+      "step": 7,
+      "shaEqual": true,
+      "rngEqual": true,
+      "mirrorEqual": true,
+      "diff": []
+    },
+    {
+      "step": 8,
+      "shaEqual": true,
+      "rngEqual": true,
+      "mirrorEqual": true,
+      "diff": []
+    }
+  ],
+  "categories": {
+    "canonical-game": 0,
+    "economy-diplomacy": 0,
+    "fleet-colony-tech": 0,
+    "rng-time": 0,
+    "ui-presentation": 0,
+    "cache-derived": 16,
+    "async-external": 0
+  }
+}

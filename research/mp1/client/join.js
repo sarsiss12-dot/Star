@@ -213,10 +213,14 @@ doc.addEventListener('click',e=>{
   else if(a==='sheetStay')$('jSheet')&&$('jSheet').remove();
   else if(a==='build'){const [s,p]=el.dataset.col.split(':').map(Number),sel=doc.querySelector('select[data-col="'+el.dataset.col+'"]');J.cmd({kind:'build',sys:s,planet:p,key:sel.value});}
 });
-doc.addEventListener('pointerdown',()=>{J.downAt=performance.now();},true);
+/* MP.8.8: delayed focus scrolling must not move KATIL/GERİ during a trusted tap. */
+let focusScrollTimer=null;
+const cancelFocusScroll=()=>{if(focusScrollTimer!==null)clearTimeout(focusScrollTimer);focusScrollTimer=null;};
+doc.addEventListener('pointerdown',()=>{J.downAt=performance.now();cancelFocusScroll();},true);
+doc.addEventListener('focusout',cancelFocusScroll);
 doc.addEventListener('keydown',e=>{if(e.key==='Enter'&&(e.target.id==='jCode'||e.target.id==='jName')){e.preventDefault();doc.querySelector('[data-j="go"]').click();}});
 doc.addEventListener('input',e=>{if(e.target.id==='jCode'){const v=e.target.value.toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,V.CODE_LEN);e.target.value=V.fmtCode(v);}});
-doc.addEventListener('focusin',e=>{if(e.target.matches&&e.target.matches('input'))setTimeout(()=>e.target.scrollIntoView({block:'center'}),250);});
+doc.addEventListener('focusin',e=>{if(e.target.matches&&e.target.matches('input')){cancelFocusScroll();const input=e.target;focusScrollTimer=setTimeout(()=>{focusScrollTimer=null;if(doc.activeElement===input&&input.isConnected)input.scrollIntoView({block:'center'});},250);}});
 if(window.visualViewport)visualViewport.addEventListener('resize',()=>{const a=doc.activeElement;if(a&&a.matches&&a.matches('input'))a.scrollIntoView({block:'center'});});
 window.MP1Join=J;render();
 /* Android arka plandaki sekmeyi yeniden yükleyebilir: bu oda için koltuk jetonu varsa kendiliğinden geri bağlan. */

@@ -1,0 +1,17 @@
+'use strict';
+// Controlled replay of MP87's remaining join tap entering setup before the test's explicit tap.
+const fs=require('fs'),path=require('path'),assert=require('assert/strict'),{chromium}=require('playwright'),relay=require('../research/mp1/server/relay'),design=require('./helpers/mp88-design.cjs');
+const out=process.env.STARS_OUTPUT||'/tmp/star-mp88/lobby';fs.mkdirSync(out,{recursive:true});
+(async()=>{const r=relay.create({MP1_PORT:'0',MP1_BIND:'127.0.0.1',MP1_DEV:'1'});let b;try{const server=await r.start();b=await chromium.launch({executablePath:process.env.STARS_CHROMIUM_PATH||'/usr/bin/chromium',args:['--no-sandbox','--disable-gpu','--disable-dev-shm-usage']});
+ const base='http://127.0.0.1:'+server.address().port,H=await b.newPage({viewport:{width:844,height:390}}),p=await b.newPage({viewport:{width:800,height:360},hasTouch:true,isMobile:true,deviceScaleFactor:2});
+ await H.goto(base);await H.waitForFunction(()=>window.MP7Setup&&document.getElementById('mp1Btn'));
+ await H.evaluate(()=>MP7Setup.apply({name:'Kızıl Muhafız',mizac:'militarist',ethics:{mil:2,aut:0,mat:0,ahl:0},civics:['kale_dok'],race:'insan',origin:'standart'}));
+ await H.locator('#mp1Btn').click();await H.locator('[data-m=create]').click();await H.waitForFunction(()=>MP1Host.lobby?.mode==='design');await H.evaluate(()=>{const x=MP1Host.host.configure({size:'orta',aiCount:5,seed:22});if(!x.ok)throw Error('configure');return MP1Host.host.setCapacity(3);});
+ await p.goto(await H.textContent('#mp1Link'));await p.waitForFunction(()=>window.MP1Join&&document.getElementById('jName'));await design.arm(p);await p.fill('#jName','Bora');await p.evaluate(()=>{document.activeElement.blur();document.getElementById('mp6App').scrollTop=0;}); // Freeze initial geometry for the recorded 40px controlled replay.
+ const c=await p.context().newCDPSession(p);await require('./helpers/mp83-join-touch.cjs').joinBurst(p,2,async(_,x,y)=>{await c.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x,y}]});await c.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});console.log('TOUCH',await p.evaluate(()=>({path:location.pathname,screen:MP1Join.screen,status:document.getElementById('jStatus')?.textContent,errors:MP1Join.errors,scroll:document.getElementById('mp6App').scrollTop})));});
+ await p.waitForFunction(()=>MP7Setup.active&&document.getElementById('mp7Head'));
+ const before=await p.evaluate(()=>({audit:__design88,active:MP7Setup.active,role:MP7Setup.role,screen:MP1Join.screen}));assert.equal(before.audit.clicks,1);assert.equal(before.audit.opens,1);let originalError=null;
+ if(process.env.MP88_OLD_DESIGN==='1'){try{await p.locator('#jEditMe').tap({timeout:8000});}catch(e){originalError={name:e.name,message:e.message,stack:e.stack};}assert(originalError,'old helper must fail on already hidden button');assert.equal(originalError.name,'TimeoutError');assert.match(originalError.message,/element is not visible/);console.log('REPRODUCED B1: design opened by remaining join touch BEFORE locator.tap; '+originalError.name);}
+ else{const res=await design.enter(p,()=>p.locator('#jEditMe').tap({timeout:8000}));assert(res.fromBurst);console.log('PASS B1: one trusted design click, one setup open; no duplicate action');}
+ fs.writeFileSync(path.join(out,'lobby-replay.json'),JSON.stringify({before,originalError,after:await p.evaluate(()=>__design88)},null,2));
+ }finally{await b?.close();r.shutdown();}})().catch(e=>{console.error(e);process.exitCode=1});

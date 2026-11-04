@@ -1,0 +1,41 @@
+{
+  "results": [
+    {
+      "name": "B1 kapasite 3: host + 2 misafir (ikisi de çift dokunmayla) girer, tek koltuk tutar; dördüncü telefon \"Oda dolu.\" görür; host küçük düğmede 👥 3",
+      "status": "PASS",
+      "ms": 20497
+    },
+    {
+      "name": "sayfa hataları yok",
+      "status": "PASS",
+      "ms": 5
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "nav": [
+      "host2 /",
+      "host2 /",
+      "host2 /",
+      "host2 /",
+      "host2 /",
+      "host2 /",
+      "B2 /mp/play",
+      "B2 /mp/play",
+      "B2 /mp/play",
+      "B2 /mp/play",
+      "C2 /mp/play",
+      "C2 /mp/play",
+      "C2 /mp/play",
+      "C2 /mp/play",
+      "C2 /mp/play",
+      "B2 /mp/play",
+      "host2 /"
+    ],
+    "joinErrors_Bora": [],
+    "joinErrors_Cem": [],
+    "fourth": "Oda dolu."
+  },
+  "pass": 2,
+  "fail": 0
+}

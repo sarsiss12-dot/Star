@@ -1,0 +1,71 @@
+{
+  "control": true,
+  "point": {
+    "x": 400,
+    "y": 276.484375
+  },
+  "during": {
+    "scroll": 40,
+    "hit": "home"
+  },
+  "path": "/",
+  "events": [
+    {
+      "event": "pointerdown",
+      "path": "/mp/play",
+      "j": "go",
+      "x": 400,
+      "y": 276.484375,
+      "scroll": 0,
+      "at": 1225.5999999940395,
+      "trusted": true
+    },
+    {
+      "event": "touchstart",
+      "path": "/mp/play",
+      "j": "go",
+      "x": 400,
+      "y": 276.484375,
+      "scroll": 0,
+      "at": 1423.8999999910593,
+      "trusted": true
+    },
+    {
+      "event": "scroll",
+      "path": "/mp/play",
+      "scroll": 40,
+      "at": 1555.7000000029802,
+      "trusted": true
+    },
+    {
+      "event": "pointerup",
+      "path": "/mp/play",
+      "j": "go",
+      "x": 400,
+      "y": 276.484375,
+      "scroll": 40,
+      "at": 1773.7000000029802,
+      "trusted": true
+    },
+    {
+      "event": "touchend",
+      "path": "/mp/play",
+      "j": "go",
+      "x": 400,
+      "y": 276.484375,
+      "scroll": 40,
+      "at": 1774,
+      "trusted": true
+    },
+    {
+      "event": "click",
+      "path": "/mp/play",
+      "j": "home",
+      "x": 400,
+      "y": 276,
+      "scroll": 40,
+      "at": 1777,
+      "trusted": true
+    }
+  ]
+}

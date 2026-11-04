@@ -1,0 +1,15 @@
+TOUCH {
+  path: '/mp/play',
+  screen: 'connecting',
+  status: 'Bağlanıyor…',
+  errors: [],
+  scroll: 0
+}
+TOUCH {
+  path: '/mp/play',
+  screen: 'lobby',
+  status: undefined,
+  errors: [],
+  scroll: 0
+}
+REPRODUCED B1: design opened by remaining join touch BEFORE locator.tap; TimeoutError

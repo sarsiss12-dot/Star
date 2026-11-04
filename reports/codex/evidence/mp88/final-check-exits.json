@@ -1,0 +1,27 @@
+[
+  {
+    "name": "mp74-final",
+    "exit": 0,
+    "ms": 155173
+  },
+  {
+    "name": "mp75-diag",
+    "exit": 0,
+    "ms": 62266
+  },
+  {
+    "name": "mp73",
+    "exit": 0,
+    "ms": 318154
+  },
+  {
+    "name": "N7-target",
+    "exit": 0,
+    "ms": 72018
+  },
+  {
+    "name": "R6-final",
+    "exit": 1,
+    "ms": 100597
+  }
+]

@@ -1,0 +1,87 @@
+{
+  "source": "cdf58527d7fac51b97746b366f7c38f128db8e39",
+  "build": "96h10p5",
+  "pwa": "stars-v96h10p5",
+  "mp": "MP.8.8",
+  "protocol": 1,
+  "mpPackage": 4,
+  "checks": [
+    {
+      "file": "ai.js",
+      "match": true
+    },
+    {
+      "file": "archive-ui.js",
+      "match": true
+    },
+    {
+      "file": "audio.js",
+      "match": true
+    },
+    {
+      "file": "combat.js",
+      "match": true
+    },
+    {
+      "file": "commerce-ui.js",
+      "match": true
+    },
+    {
+      "file": "commerce.js",
+      "match": true
+    },
+    {
+      "file": "construction.js",
+      "match": true
+    },
+    {
+      "file": "diplomacy.js",
+      "match": true
+    },
+    {
+      "file": "economic-ledger.js",
+      "match": true
+    },
+    {
+      "file": "economy-ui.js",
+      "match": true
+    },
+    {
+      "file": "economy.js",
+      "match": true
+    },
+    {
+      "file": "inbox.js",
+      "match": true
+    },
+    {
+      "file": "index.html",
+      "match": true
+    },
+    {
+      "file": "main.js",
+      "match": true
+    },
+    {
+      "file": "manifest.json",
+      "match": true
+    },
+    {
+      "file": "map.js",
+      "match": true
+    },
+    {
+      "file": "news.js",
+      "match": true
+    },
+    {
+      "file": "sw.js",
+      "match": true
+    },
+    {
+      "file": "ui.js",
+      "match": true
+    }
+  ],
+  "newZip": false
+}

@@ -1,0 +1,127 @@
+{
+  "results": [
+    {
+      "name": "MP.8.7 sabit kayıt ayna/çizim ölçümü: MP86 120. ay checkpoint",
+      "status": "PASS",
+      "ms": 80507
+    }
+  ],
+  "metrics": {
+    "nav87": [
+      {
+        "page": "host",
+        "path": "/"
+      },
+      {
+        "page": "host",
+        "path": "/"
+      },
+      {
+        "page": "host",
+        "path": "/"
+      },
+      {
+        "page": "host",
+        "path": "/"
+      },
+      {
+        "page": "host",
+        "path": "/"
+      },
+      {
+        "page": "host",
+        "path": "/"
+      },
+      {
+        "page": "B",
+        "path": "/mp/play"
+      },
+      {
+        "page": "B",
+        "path": "/mp/play"
+      },
+      {
+        "page": "B",
+        "path": "/mp/play"
+      },
+      {
+        "page": "B",
+        "path": "/mp/play"
+      },
+      {
+        "page": "B",
+        "path": "/mp/play"
+      },
+      {
+        "page": "host",
+        "path": "/"
+      }
+    ],
+    "joinErrors_Bora": [],
+    "frame87": {
+      "mode": "raw",
+      "steps": [
+        {
+          "step": 1,
+          "day": 3615.2329999999893,
+          "rng": 773794045,
+          "sha": "c4969164a6e3334df9befb8194fd02cf250c2784c304ac37eda68502a753daa2",
+          "mirrorSha": "f009da7cddcf5450872787fc6192e986b58bba2fee1f42e40fe35e82d9273604"
+        },
+        {
+          "step": 2,
+          "day": 3615.7329999999893,
+          "rng": 773794045,
+          "sha": "1f4c355c8ef31de464c3117f97385465b0a2e8ffce04fdaba322ba496f11ffd8",
+          "mirrorSha": "7c4f54f3fc963de3e388117992b92cc63ac2531f0db7f565d2d959ec755031cb"
+        },
+        {
+          "step": 3,
+          "day": 3616.2329999999893,
+          "rng": 773794045,
+          "sha": "31d45d1265d07afd1410895acee9cb347efd96612cff144511ed5cf118454301",
+          "mirrorSha": "47272aa8f34274d661069874367990d2d078320ed1c0fc92f875a403e920eda9"
+        },
+        {
+          "step": 4,
+          "day": 3616.7329999999893,
+          "rng": 773794045,
+          "sha": "ce4565fb3949f6f313e3df40902d97ea367c34a7ce5dff0bb5a027866b5f49e9",
+          "mirrorSha": "fbec19221decf7c6984cc26fa6fcff6c2b7c6ebe95645db027201562f5a7c1a1"
+        },
+        {
+          "step": 5,
+          "day": 3617.2329999999893,
+          "rng": 773794045,
+          "sha": "d79df1d5b20ee553f114ad6594fbd9602f7af7d1bc5177ab71e3738ff2f60982",
+          "mirrorSha": "4cd3649728b4e83f190c0554048b9c0c504b4c817668cc6f52530675a0056871"
+        },
+        {
+          "step": 6,
+          "day": 3617.7329999999893,
+          "rng": 773794045,
+          "sha": "219152197e6fb2d27eb040374cdd3c7953a007eadee38925a84ff53eee70c6a9",
+          "mirrorSha": "de9aef9280bf721fa60623f80da35a182804d20c98b40328697c22d24ba89647"
+        },
+        {
+          "step": 7,
+          "day": 3618.2329999999893,
+          "rng": 773794045,
+          "sha": "75f7f8ac4a6a27f629a1c7ac096698d30e2de0c825c96ff836742a8ee05ed7a2",
+          "mirrorSha": "efce041d77977df7c3fd425b4a2c223a146f1c7ae9eee03322e1f66a5022453a"
+        },
+        {
+          "step": 8,
+          "day": 3618.7329999999893,
+          "rng": 773794045,
+          "sha": "37bb3606004025490cfc9ac98613dd944ab91f44f3e0f95aefd8e08f4ad232ba",
+          "mirrorSha": "0803443c9974e8b110036c652c612ef21aebf4c691cf820b7c281185abd1284a"
+        }
+      ],
+      "writes": 176
+    },
+    "errors": []
+  },
+  "size": "orta",
+  "ai": 5
+}

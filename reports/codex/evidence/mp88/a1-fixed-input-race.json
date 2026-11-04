@@ -1,0 +1,64 @@
+{
+  "control": false,
+  "point": {
+    "x": 400,
+    "y": 276.484375
+  },
+  "during": {
+    "scroll": 0,
+    "hit": "go"
+  },
+  "path": "/mp/play",
+  "events": [
+    {
+      "event": "pointerdown",
+      "path": "/mp/play",
+      "j": "go",
+      "x": 400,
+      "y": 276.484375,
+      "scroll": 0,
+      "at": 1194.1000000089407,
+      "trusted": true
+    },
+    {
+      "event": "touchstart",
+      "path": "/mp/play",
+      "j": "go",
+      "x": 400,
+      "y": 276.484375,
+      "scroll": 0,
+      "at": 1370.2999999970198,
+      "trusted": true
+    },
+    {
+      "event": "pointerup",
+      "path": "/mp/play",
+      "j": "go",
+      "x": 400,
+      "y": 276.484375,
+      "scroll": 0,
+      "at": 1729,
+      "trusted": true
+    },
+    {
+      "event": "touchend",
+      "path": "/mp/play",
+      "j": "go",
+      "x": 400,
+      "y": 276.484375,
+      "scroll": 0,
+      "at": 1729.5,
+      "trusted": true
+    },
+    {
+      "event": "click",
+      "path": "/mp/play",
+      "j": "go",
+      "x": 400,
+      "y": 276,
+      "scroll": 0,
+      "at": 1732.9000000059605,
+      "trusted": true
+    }
+  ]
+}

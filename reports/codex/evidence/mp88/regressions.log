@@ -1,0 +1,9 @@
+a1-fixed2 exit=0
+hash-native exit=0
+native exit=0
+perf1 exit=0
+perf2 exit=0
+pixels exit=0
+mp74 exit=0
+mp75 exit=1
+mp8-N exit=1

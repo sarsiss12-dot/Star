@@ -1,0 +1,26 @@
+{
+  "results": [
+    {
+      "name": "B1 kapasite 3: host + 2 misafir (ikisi de çift dokunmayla) girer, tek koltuk tutar; dördüncü telefon \"Oda dolu.\" görür; host küçük düğmede 👥 3",
+      "status": "FAIL",
+      "error": "Error: tap #setup [data-a=\"step\"][data-x=\"civic\"] [tapfail-1] {\"who\":\"/\",\"modal\":\"\",\"sheet\":\"\",\"diplo\":false,\"box\":[227.28125,203,46.25,41],\"top\":\"B\",\"vw\":[390,844]}\n    at tap (/workspace/Star/tests/browser-mp74.cjs:22:65)\n    at async design0 (/workspace/Star/tests/browser-mp74.cjs:35:3)\n    at async design (/workspace/Star/tests/browser-mp74.cjs:29:7)\n    at async room (/workspace/Star/tests/browser-mp74.cjs:55:29)\n    at async /workspace/Star/tests/browser-mp74.cjs:179:16\n    at async test (/workspace/Star/tests/browser-mp74.cjs:14:7)\n    at async /workspace/Star/tests/browser-mp74.cjs:178:3"
+    },
+    {
+      "name": "sayfa hataları yok",
+      "status": "PASS",
+      "ms": 6
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "nav": [
+      "host2 /",
+      "host2 /",
+      "host2 /",
+      "host2 /",
+      "host2 /"
+    ]
+  },
+  "pass": 1,
+  "fail": 1
+}

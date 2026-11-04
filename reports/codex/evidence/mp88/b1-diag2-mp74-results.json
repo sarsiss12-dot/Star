@@ -1,0 +1,29 @@
+{
+  "results": [
+    {
+      "name": "B1 kapasite 3: host + 2 misafir (ikisi de çift dokunmayla) girer, tek koltuk tutar; dördüncü telefon \"Oda dolu.\" görür; host küçük düğmede 👥 3",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: KATIL yalnız lobiye geçişte kalkabilir\n    at Object.joinBurst (/workspace/Star/tests/helpers/mp83-join-touch.cjs:14:19)\n    at runNextTicks (node:internal/process/task_queues:65:5)\n    at process.processImmediate (node:internal/timers:541:9)\n    at async joinTaps (/workspace/Star/tests/browser-mp74.cjs:50:3)\n    at async room (/workspace/Star/tests/browser-mp74.cjs:57:40)\n    at async /workspace/Star/tests/browser-mp74.cjs:179:16\n    at async test (/workspace/Star/tests/browser-mp74.cjs:14:7)\n    at async /workspace/Star/tests/browser-mp74.cjs:178:3"
+    },
+    {
+      "name": "sayfa hataları yok",
+      "status": "PASS",
+      "ms": 1
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "nav": [
+      "host2 /",
+      "host2 /",
+      "host2 /",
+      "host2 /",
+      "host2 /",
+      "host2 /",
+      "B2 /mp/play",
+      "B2 /"
+    ]
+  },
+  "pass": 1,
+  "fail": 1
+}

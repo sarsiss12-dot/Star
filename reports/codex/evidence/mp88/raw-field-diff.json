@@ -1,0 +1,140 @@
+[
+  {
+    "step": 1,
+    "shaEqual": true,
+    "rngEqual": true,
+    "mirrorEqual": true,
+    "diff": []
+  },
+  {
+    "step": 2,
+    "shaEqual": true,
+    "rngEqual": true,
+    "mirrorEqual": true,
+    "diff": []
+  },
+  {
+    "step": 3,
+    "shaEqual": true,
+    "rngEqual": true,
+    "mirrorEqual": true,
+    "diff": []
+  },
+  {
+    "step": 4,
+    "shaEqual": true,
+    "rngEqual": true,
+    "mirrorEqual": true,
+    "diff": []
+  },
+  {
+    "step": 5,
+    "shaEqual": false,
+    "rngEqual": true,
+    "mirrorEqual": true,
+    "diff": [
+      {
+        "path": "/emps/0/_powAt",
+        "a": 3616.7329999999893,
+        "b": 3615.2329999999893
+      },
+      {
+        "path": "/emps/0/_pressAt",
+        "a": 3616.7329999999893,
+        "b": 3615.2329999999893
+      },
+      {
+        "path": "/emps/1/_powAt",
+        "a": 3616.7329999999893,
+        "b": 3615.2329999999893
+      },
+      {
+        "path": "/emps/1/_pressAt",
+        "a": 3616.7329999999893,
+        "b": 3615.2329999999893
+      },
+      {
+        "path": "/emps/4/_powAt",
+        "a": 3616.7329999999893,
+        "b": 3615.2329999999893
+      },
+      {
+        "path": "/emps/4/_pressAt",
+        "a": 3616.7329999999893,
+        "b": 3615.2329999999893
+      },
+      {
+        "path": "/emps/5/_powAt",
+        "a": 3616.7329999999893,
+        "b": 3615.2329999999893
+      },
+      {
+        "path": "/emps/5/_pressAt",
+        "a": 3616.7329999999893,
+        "b": 3615.2329999999893
+      }
+    ]
+  },
+  {
+    "step": 6,
+    "shaEqual": false,
+    "rngEqual": true,
+    "mirrorEqual": true,
+    "diff": [
+      {
+        "path": "/emps/0/_powAt",
+        "a": 3616.7329999999893,
+        "b": 3615.2329999999893
+      },
+      {
+        "path": "/emps/0/_pressAt",
+        "a": 3616.7329999999893,
+        "b": 3615.2329999999893
+      },
+      {
+        "path": "/emps/1/_powAt",
+        "a": 3616.7329999999893,
+        "b": 3615.2329999999893
+      },
+      {
+        "path": "/emps/1/_pressAt",
+        "a": 3616.7329999999893,
+        "b": 3615.2329999999893
+      },
+      {
+        "path": "/emps/4/_powAt",
+        "a": 3616.7329999999893,
+        "b": 3615.2329999999893
+      },
+      {
+        "path": "/emps/4/_pressAt",
+        "a": 3616.7329999999893,
+        "b": 3615.2329999999893
+      },
+      {
+        "path": "/emps/5/_powAt",
+        "a": 3616.7329999999893,
+        "b": 3615.2329999999893
+      },
+      {
+        "path": "/emps/5/_pressAt",
+        "a": 3616.7329999999893,
+        "b": 3615.2329999999893
+      }
+    ]
+  },
+  {
+    "step": 7,
+    "shaEqual": true,
+    "rngEqual": true,
+    "mirrorEqual": true,
+    "diff": []
+  },
+  {
+    "step": 8,
+    "shaEqual": true,
+    "rngEqual": true,
+    "mirrorEqual": true,
+    "diff": []
+  }
+]

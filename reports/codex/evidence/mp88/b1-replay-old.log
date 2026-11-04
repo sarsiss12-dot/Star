@@ -1,0 +1,21 @@
+NOT RUN A1 5 karakterli kod: host kodu 5 karakter ve tiresiz; davet bağlantısı kodu taşır; yanlış kod reddedilir; KATIL'a hızlı ÜÇ dokunma (600 ms gecikmeli ağ) tek koltuk, "oda dolu" yok; iki telefon oyuna girer
+NOT RUN A2 küçük çok oyunculu düğmesi: host ve misafirde varsayılan "👥 n" (haritayı ve hız kutusunu kapatmaz); dokununca mevcut panel (kod, durum, KAYDET), tekrar dokununca kapanır
+NOT RUN A3 kaydırma (gerçek dokunma): küçük hareket kartı kapatmaz; sağa kaydırınca teklif kartı kalkar, karar Gelen kutusunda BEKLER, ayna yenilenince kart geri gelmez; host'ta teklif bekler
+NOT RUN A4 karttan hızlı karar (misafir): KABUL gerçek dokunmayla → host kabul eder, kaynak bir kez aktarılır; ÇİFT dokunma tek "respond"; REDDET; KARŞI TEKLİF gerçek anlaşma penceresini açar
+NOT RUN A5 host karttan hızlı karar: B → host teklifi host kartında KABUL (dokunma) → kabul, bir kez
+NAV host2 /
+NAV host2 /
+NAV host2 /
+NAV host2 /
+NAV host2 /
+FAIL B1 kapasite 3: host + 2 misafir (ikisi de çift dokunmayla) girer, tek koltuk tutar; dördüncü telefon "Oda dolu." görür; host küçük düğmede 👥 3
+Error: tap #setup [data-a="step"][data-x="civic"] [tapfail-1] {"who":"/","modal":"","sheet":"","diplo":false,"box":[227.28125,203,46.25,41],"top":"B","vw":[390,844]}
+    at tap (/workspace/Star/tests/browser-mp74.cjs:22:65)
+    at async design0 (/workspace/Star/tests/browser-mp74.cjs:35:3)
+    at async design (/workspace/Star/tests/browser-mp74.cjs:29:7)
+    at async room (/workspace/Star/tests/browser-mp74.cjs:55:29)
+    at async /workspace/Star/tests/browser-mp74.cjs:179:16
+    at async test (/workspace/Star/tests/browser-mp74.cjs:14:7)
+    at async /workspace/Star/tests/browser-mp74.cjs:178:3
+PASS sayfa hataları yok
+GEÇEN: 1 KALAN: 1

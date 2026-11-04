@@ -1,0 +1,216 @@
+{
+  "firstAcrossFour": 3,
+  "firstSameControl": 5,
+  "differentSteps": [
+    {
+      "step": 3,
+      "values": {
+        "a10": {
+          "sha": "61e86eaaf846957f84888220dcee7ae962a552aeded075e6cec36869bf40485d",
+          "rng": 773794045
+        },
+        "b9": {
+          "sha": "31d45d1265d07afd1410895acee9cb347efd96612cff144511ed5cf118454301",
+          "rng": 773794045
+        },
+        "b10": {
+          "sha": "31d45d1265d07afd1410895acee9cb347efd96612cff144511ed5cf118454301",
+          "rng": 773794045
+        },
+        "a11": {
+          "sha": "61e86eaaf846957f84888220dcee7ae962a552aeded075e6cec36869bf40485d",
+          "rng": 773794045
+        }
+      }
+    },
+    {
+      "step": 4,
+      "values": {
+        "a10": {
+          "sha": "8e979096c1a53d7421c9baafd3a833fc972d8f457a92d25228e83d8e3819aecc",
+          "rng": 773794045
+        },
+        "b9": {
+          "sha": "ce4565fb3949f6f313e3df40902d97ea367c34a7ce5dff0bb5a027866b5f49e9",
+          "rng": 773794045
+        },
+        "b10": {
+          "sha": "ce4565fb3949f6f313e3df40902d97ea367c34a7ce5dff0bb5a027866b5f49e9",
+          "rng": 773794045
+        },
+        "a11": {
+          "sha": "8e979096c1a53d7421c9baafd3a833fc972d8f457a92d25228e83d8e3819aecc",
+          "rng": 773794045
+        }
+      }
+    },
+    {
+      "step": 5,
+      "values": {
+        "a10": {
+          "sha": "d79df1d5b20ee553f114ad6594fbd9602f7af7d1bc5177ab71e3738ff2f60982",
+          "rng": 773794045
+        },
+        "b9": {
+          "sha": "d00cf6ffbfd16fd2f45f813bc95483f36897ae1157c97f1e2486ad5bb890342b",
+          "rng": 773794045
+        },
+        "b10": {
+          "sha": "d79df1d5b20ee553f114ad6594fbd9602f7af7d1bc5177ab71e3738ff2f60982",
+          "rng": 773794045
+        },
+        "a11": {
+          "sha": "88c508c38665b277fc818f3ce41ad30ac1504a584b45c0ca9b3558da6a3671b3",
+          "rng": 773794045
+        }
+      }
+    },
+    {
+      "step": 6,
+      "values": {
+        "a10": {
+          "sha": "219152197e6fb2d27eb040374cdd3c7953a007eadee38925a84ff53eee70c6a9",
+          "rng": 773794045
+        },
+        "b9": {
+          "sha": "f08b39ba2f9cae09d1b13e734a416953ea945d5e0b9e9066bc1c503ef122c26e",
+          "rng": 773794045
+        },
+        "b10": {
+          "sha": "219152197e6fb2d27eb040374cdd3c7953a007eadee38925a84ff53eee70c6a9",
+          "rng": 773794045
+        },
+        "a11": {
+          "sha": "a091fedfa05b0d4468c25972de383d10d729ac78f7965bfad291da7c24366572",
+          "rng": 773794045
+        }
+      }
+    },
+    {
+      "step": 9,
+      "values": {
+        "a10": {
+          "sha": "39b8b5508778f17e91b38d04525e84cc00f7ff1a300f9ec3c16f06cd99da2b7d",
+          "rng": 773794045
+        },
+        "b9": {
+          "sha": "39b8b5508778f17e91b38d04525e84cc00f7ff1a300f9ec3c16f06cd99da2b7d",
+          "rng": 773794045
+        },
+        "b10": {
+          "sha": "39b8b5508778f17e91b38d04525e84cc00f7ff1a300f9ec3c16f06cd99da2b7d",
+          "rng": 773794045
+        },
+        "a11": {
+          "sha": "7fdbe239f9d92b123e89c722ff500b9f92c89dad4516b6136d40640fa8b5c115",
+          "rng": 773794045
+        }
+      }
+    },
+    {
+      "step": 10,
+      "values": {
+        "a10": {
+          "sha": "869755d2a2c592c2033a378d06da9c31e848323f92e4697ad20797e55012a781",
+          "rng": 773794045
+        },
+        "b9": {
+          "sha": "c45f50f627babcb571ba945b0fc16fe8b24ba79184cc5b8f4e83de66c8aba5de",
+          "rng": 773794045
+        },
+        "b10": {
+          "sha": "869755d2a2c592c2033a378d06da9c31e848323f92e4697ad20797e55012a781",
+          "rng": 773794045
+        },
+        "a11": {
+          "sha": "a230239d15340325dc67dd6a83be9eafcf2e5ff5e6173447c6d701294f6be607",
+          "rng": 773794045
+        }
+      }
+    },
+    {
+      "step": 13,
+      "values": {
+        "a10": {
+          "sha": "a0212dd5211f7fe40578f5b30d4cf6b4d094ed3a30313845f3b0bcbb556a06fd",
+          "rng": 773794045
+        },
+        "b9": {
+          "sha": "813cfa5d3f7d7f41531ff58fa92cacf48cf1c647122387f5a7b7a5841f7f4ae5",
+          "rng": 773794045
+        },
+        "b10": {
+          "sha": "a0212dd5211f7fe40578f5b30d4cf6b4d094ed3a30313845f3b0bcbb556a06fd",
+          "rng": 773794045
+        },
+        "a11": {
+          "sha": "813cfa5d3f7d7f41531ff58fa92cacf48cf1c647122387f5a7b7a5841f7f4ae5",
+          "rng": 773794045
+        }
+      }
+    },
+    {
+      "step": 14,
+      "values": {
+        "a10": {
+          "sha": "a1d18ccdd9da023a0725701a5fae54e1772a67b2d320e26ddeb538cb14dd8d70",
+          "rng": 773794045
+        },
+        "b9": {
+          "sha": "330d2df575c209c909a1f28949633b5be5a41c67d68e27ffbb8ae1b15ca448d7",
+          "rng": 773794045
+        },
+        "b10": {
+          "sha": "a1d18ccdd9da023a0725701a5fae54e1772a67b2d320e26ddeb538cb14dd8d70",
+          "rng": 773794045
+        },
+        "a11": {
+          "sha": "330d2df575c209c909a1f28949633b5be5a41c67d68e27ffbb8ae1b15ca448d7",
+          "rng": 773794045
+        }
+      }
+    },
+    {
+      "step": 15,
+      "values": {
+        "a10": {
+          "sha": "1a7ab003f3fc5e84a79e6ffa114bc3cf82b9909048b4f64d10f515c0694d5261",
+          "rng": 773794045
+        },
+        "b9": {
+          "sha": "c9931322b8bcfa54faab71538e30988a8a77d473b88299329975d50e1b834705",
+          "rng": 773794045
+        },
+        "b10": {
+          "sha": "df03fd94487aa093747756bfc8c97494e6d139e387dc8d10d56ff60c48e2a35f",
+          "rng": 773794045
+        },
+        "a11": {
+          "sha": "1a7ab003f3fc5e84a79e6ffa114bc3cf82b9909048b4f64d10f515c0694d5261",
+          "rng": 773794045
+        }
+      }
+    },
+    {
+      "step": 16,
+      "values": {
+        "a10": {
+          "sha": "50c913cc80bd862b52f3f477c05f5574f80acfa3c74b23eddfd94e1a1194769e",
+          "rng": 773794045
+        },
+        "b9": {
+          "sha": "1b950079b84d47fb61cde81f23b0d18d0ee4a5479301ee2f3d2fb318f4953d26",
+          "rng": 773794045
+        },
+        "b10": {
+          "sha": "edc16c3c69139650745d1fda95ca0d62b4ddec833e8df23daa9ef3738a894eb0",
+          "rng": 773794045
+        },
+        "a11": {
+          "sha": "50c913cc80bd862b52f3f477c05f5574f80acfa3c74b23eddfd94e1a1194769e",
+          "rng": 773794045
+        }
+      }
+    }
+  ]
+}

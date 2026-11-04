@@ -1,0 +1,19 @@
+TOUCH {
+  path: '/mp/play',
+  screen: 'connecting',
+  status: 'Bağlanıyor…',
+  errors: [],
+  scroll: 40
+}
+TOUCH {
+  path: '/mp/play',
+  screen: 'lobby',
+  status: undefined,
+  errors: [],
+  scroll: 40
+}
+page.waitForFunction: Timeout 30000ms exceeded.
+    at /workspace/Star/tests/browser-mp88-lobby.cjs:12:10 {
+  log: [],
+  name: 'TimeoutError'
+}

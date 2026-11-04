@@ -1,0 +1,12 @@
+FAIL A1 oda + başlangıç; MP düğmesi host ve misafirde sol araç sütununda (#tools), hız kutusu / kaynak çubuğu / araç düğmeleriyle örtüşmez; açılınca panel, kapanınca sütuna döner
+Error: tap #mp6Conn [tapfail-1] {"who":"Saf Akıl Ağı","modal":"","sheet":"","diplo":false,"box":[15,235,422,44],"top":"mp6Conn","vw":[915,412]}
+    at tap (/workspace/Star/tests/browser-mp75.cjs:24:65)
+    at async /workspace/Star/tests/browser-mp75.cjs:97:7
+    at async test (/workspace/Star/tests/browser-mp75.cjs:16:7)
+    at async /workspace/Star/tests/browser-mp75.cjs:88:3
+PASS A2 misafirde açık panel yerinde güncellenir: diplomasi sayfası açıkken oyun ilerler, ayna birçok kez kurulur, panel baştan yazılmaz (surfaceKept)
+PASS A3 savaş / barış: misafir AI ile savaşta; AI barış teklifi misafirin kartına gelir; KABUL (dokunma) → host'ta savaş biter; AKTİF SAVAŞLAR üst sayaçla aynı sayıyı gösterir
+PASS A4 dokunmatik miktar: filo bileşimi penceresinde SIFIR / −50 / −10 / +10 / +50 (dokunma), klavye açılmaz; anlaşma miktarında pencerenin kendi düğmeleri korunur (çift kontrol yok)
+PASS A5 karar bekleyen olay kaydırılınca gizlenir (silinmez), ☰ durum listesinde kalır ve oradan aynı karar penceresi açılır
+PASS sayfa hataları yok
+GEÇEN: 5 KALAN: 1

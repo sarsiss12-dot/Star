@@ -1,0 +1,71 @@
+{
+  "mode": "settled",
+  "firstDifferent": null,
+  "rows": [
+    {
+      "step": 1,
+      "shaEqual": true,
+      "rngEqual": true,
+      "mirrorEqual": false,
+      "diff": []
+    },
+    {
+      "step": 2,
+      "shaEqual": true,
+      "rngEqual": true,
+      "mirrorEqual": false,
+      "diff": []
+    },
+    {
+      "step": 3,
+      "shaEqual": true,
+      "rngEqual": true,
+      "mirrorEqual": false,
+      "diff": []
+    },
+    {
+      "step": 4,
+      "shaEqual": true,
+      "rngEqual": true,
+      "mirrorEqual": false,
+      "diff": []
+    },
+    {
+      "step": 5,
+      "shaEqual": true,
+      "rngEqual": true,
+      "mirrorEqual": false,
+      "diff": []
+    },
+    {
+      "step": 6,
+      "shaEqual": true,
+      "rngEqual": true,
+      "mirrorEqual": false,
+      "diff": []
+    },
+    {
+      "step": 7,
+      "shaEqual": true,
+      "rngEqual": true,
+      "mirrorEqual": false,
+      "diff": []
+    },
+    {
+      "step": 8,
+      "shaEqual": true,
+      "rngEqual": true,
+      "mirrorEqual": false,
+      "diff": []
+    }
+  ],
+  "categories": {
+    "canonical-game": 0,
+    "economy-diplomacy": 0,
+    "fleet-colony-tech": 0,
+    "rng-time": 0,
+    "ui-presentation": 0,
+    "cache-derived": 0,
+    "async-external": 0
+  }
+}

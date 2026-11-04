@@ -1,0 +1,36 @@
+{
+  "firstR": {
+    "status": "ABORTED",
+    "reason": "Agent stopped the first regression runner during R3; downstream page/context closed failures are caused by interruption. R0-R2 had passed; not used for resume acceptance."
+  },
+  "controlledLobbyPilots": [
+    {
+      "name": "b1-replay-old",
+      "status": "FAIL",
+      "reason": "Controlled diagnostic/setup attempt failed before accepted comparison; see original log."
+    },
+    {
+      "name": "b1-small-old",
+      "status": "FAIL",
+      "reason": "Controlled diagnostic/setup attempt failed before accepted comparison; see original log."
+    },
+    {
+      "name": "b1-small-old2",
+      "status": "FAIL",
+      "reason": "Controlled diagnostic/setup attempt failed before accepted comparison; see original log."
+    },
+    {
+      "name": "b1-small-fixed",
+      "status": "FAIL",
+      "reason": "Controlled diagnostic/setup attempt failed before accepted comparison; see original log."
+    },
+    {
+      "name": "b1-small-fixed2",
+      "status": "FAIL",
+      "reason": "Controlled diagnostic/setup attempt failed before accepted comparison; see original log."
+    }
+  ],
+  "acceptedLobbyBaseline": "b1-counter-final",
+  "acceptedLobbyCandidate": "b1-small-fixed3",
+  "noFailuresRemoved": true
+}

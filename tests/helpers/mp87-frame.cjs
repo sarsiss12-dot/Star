@@ -16,6 +16,7 @@ module.exports=async(H,B,out)=>{
  await B.waitForFunction(d=>G.day===d&&MP6Stars.S.started&&!MP6Stars.S.building,context.day,{timeout:30000});
  await B.evaluate(()=>{UI.closeModal();View.fit();View.sel=G.fleets.find(f=>f.e===0)||null;UI.openDiplo();});
  const sessions=[];for(const p of [H,B]){const c=await p.context().newCDPSession(p);await c.send('Emulation.setCPUThrottlingRate',{rate:4});sessions.push(c);}
+ if(process.env.MP88_HASH){try{return await require('./mp88-host-hash.cjs')(H,B,out,{input,cosmetic,context,mode:process.env.MP88_HASH});}finally{for(const c of sessions)await c.detach();}}
  await B.evaluate(()=>{
   const T=window.__frame87={active:false,draw:[],refresh:[],deserialize:[],tick:[],sprites:[],worldImage:[],borders:[],fleetLabels:[],frames:[],long:[],samples:[],events:[],inputs:[],last:null,pending:null,input:null};
   const wrap=(o,k,a)=>{const f=o[k];o[k]=function(...args){const t=performance.now();try{return f.apply(this,args);}finally{if(T.active)T[a].push(performance.now()-t);}};};

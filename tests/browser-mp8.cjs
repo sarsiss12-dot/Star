@@ -19,7 +19,7 @@ if(!CONF)throw Error('MP8_SCEN A|B|C|R|N');
 const MONTHS=+(process.env.MP8_MONTHS||CONF.months);
 const results=[],errors=[],metrics={scen:SCEN,conf:{...CONF,months:MONTHS},sync:[],cmds:[],perf:[],notes:[],net:{},resume:{}};
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
-async function test(name,fn){const t0=Date.now();try{await fn();results.push({name,status:'PASS',ms:Date.now()-t0});console.log('PASS '+name);}
+async function test(name,fn){if(process.env.MP8_ONLY&&!new RegExp(process.env.MP8_ONLY).test(name)){console.log('NOT RUN '+name);return;}const t0=Date.now();try{await fn();results.push({name,status:'PASS',ms:Date.now()-t0});console.log('PASS '+name);}
   catch(e){results.push({name,status:'FAIL',error:String(e&&e.stack||e).slice(0,2400)});console.log('FAIL '+name+'\n'+(e&&e.stack||e));}}
 const PHONE=(w,h)=>({viewport:{width:w,height:h},isMobile:true,hasTouch:true,deviceScaleFactor:2,serviceWorkers:'allow'});
 const VIEW={H:[844,390],B:[800,360],C:[915,412],X:[844,390]};
@@ -41,9 +41,10 @@ let relayProc=null,relayPort,tlsK,px,launch,lanes={},origin={},dirs={},ctx={},pg
 async function startRelay(){
   const env={MP1_BIND:'0.0.0.0',MP1_TRUST_PROXY:'1',MP1_ORIGINS:Object.values(origin).join(',')};const e={...process.env};for(const k of Object.keys(e))if(k.startsWith('MP1_'))delete e[k];
   relayProc=spawn(process.execPath,[path.join(root,'research/mp1/server/relay.js')],{env:{...e,...env,MP1_PORT:String(relayPort)},stdio:['ignore','pipe','pipe']});
-  relayProc.stderr.on('data',d=>metrics.notes.push('relay stderr: '+String(d).slice(0,200)));
-  const t0=Date.now();for(;;){const ok=await new Promise(r=>require('http').get({host:'127.0.0.1',port:relayPort,path:'/healthz'},x=>{x.resume();r(x.statusCode===200);}).on('error',()=>r(false)));if(ok)break;
-    if(Date.now()-t0>20000)throw Error('relay did not start');await sleep(50);}return relayProc.pid;}
+  let startupStderr='',startupError=null,lastHealth=null;relayProc.on('error',e=>{startupError=String(e);});
+  relayProc.stderr.on('data',d=>{startupStderr+=String(d);metrics.notes.push('relay stderr: '+String(d).slice(0,200));});
+  const t0=Date.now();for(;;){const ok=await new Promise(r=>require('http').get({host:'127.0.0.1',port:relayPort,path:'/healthz'},x=>{x.resume();lastHealth={status:x.statusCode};r(x.statusCode===200);}).on('error',e=>{lastHealth={error:e.message};r(false);}));if(ok)break;
+    if(Date.now()-t0>20000)throw Error('relay did not start: '+JSON.stringify({pid:relayProc.pid,exitCode:relayProc.exitCode,signal:relayProc.signalCode,startupError,startupStderr,lastHealth}));await sleep(50);}return relayProc.pid;}
 async function stopRelay(){if(!relayProc)return;const p=relayProc;relayProc=null;p.kill('SIGTERM');await new Promise(r=>p.on('exit',r));}
 async function open(n){const c=await chromium.launchPersistentContext(dirs[n],{...launch,...PHONE(...VIEW[n])});const p=c.pages()[0]||await c.newPage();
   p.on('pageerror',e=>errors.push(n+': '+e.message));ctx[n]=c;pg[n]=p;return p;}
