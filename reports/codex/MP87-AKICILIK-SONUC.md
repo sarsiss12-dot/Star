@@ -159,7 +159,13 @@ Chromium piksel denetimi mevcut `mp86-nebula-bench.cjs` aracıyla `MP86_PIXELS_O
 
 ## GitHub teslimi
 
-Bu bölüm ilk push ve yalnız bir PR denemesinin doğrulanmış sonucuyla tamamlanır. Rapor commit'i kendi SHA'sını içeremez; doğrulanmış önceki teslim commit'i rapora, son belge HEAD'i son sohbet yanıtına yazılır.
+- Test araçları/kanıt/rapor bitiş referansı **`b4eaec7049f4495e4f3db415b09df5a93e813bcf`** commit'i GitHub'a push edildi; `git ls-remote --heads origin refs/heads/codex/stars-mp87-frame-performance` aynı SHA'yı doğruladı. Rapor teslimi **PASS**.
+- Başlangıç **`0dfb449e52bcdd6a9c1c73838f2f476ae37b2216`** → doğrulanmış teslim referansı yukarıda. Bu teslim kaydını ekleyen son belge commit'i kendi SHA'sını önceden bilemez; nihai HEAD son sohbet yanıtında verilir. Sırf kendi SHA'sını yazmak için yeni commit zinciri üretilmedi.
+- Dal `codex/stars-mp87-frame-performance`; PR tabanı `codex/stars-mp86-performance`.
+- **PR oluşturulamadı / BLOCKED**: yalnız bir `gh pr create` denemesi `Post "https://api.github.com/graphql": Forbidden` ile çıkış1 döndü. Tekrar araştırılmadı; güvenlik sınırları değiştirilmedi. [Hata kaydı](evidence/mp87/pr-attempt.log).
+- [GitHub raporu](https://github.com/sarsiss12-dot/Star/blob/codex/stars-mp87-frame-performance/reports/codex/MP87-AKICILIK-SONUC.md).
+- [Doğru tabanla karşılaştır / PR oluştur](https://github.com/sarsiss12-dot/Star/compare/codex/stars-mp86-performance...codex/stars-mp87-frame-performance?expand=1).
+- Çalışma dalı dışında main/merge/rebase/force-push ve canlı dağıtım işlemi yapılmadı.
 
 ## Açıklar / sonraki öncelikler
 

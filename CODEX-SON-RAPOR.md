@@ -14,4 +14,6 @@
 - Oyun96h10p5/PWA/Save8/manifest19 ve MP.8.6 aynı. Yeni ZIP/SHA-256/CRC32 paket üretimi gerekmedi. Deploy yok.
 - MP8 N/R, MP73 ve tam regresyon bu fazda **NOT RUN** (ürün değişmedi). Fiziksel Android ve bütün canlı Render kontrolleri **NOT RUN**; erişim/izin denemesi yapılmadı.
 - Önceki MP75 A3 FAIL'i ve bildirim gizleme kalıcılığı açık kalır.
-- Doğrulanmış teslim HEAD'i ve tek PR denemesinin sonucu raporun GitHub bölümüne, nihai belge HEAD'i son sohbet yanıtına yazılır.
+- GitHub'a push edilip uzak dalda doğrulanan test/kanıt/rapor bitiş referansı: `b4eaec7049f4495e4f3db415b09df5a93e813bcf`. Nihai belge HEAD'i son sohbet yanıtındadır.
+- GitHub rapor teslimi **PASS**; tek PR oluşturma denemesi API **Forbidden / BLOCKED**. PR oluşturulmadı. [Karşılaştır / PR oluştur](https://github.com/sarsiss12-dot/Star/compare/codex/stars-mp86-performance...codex/stars-mp87-frame-performance?expand=1).
+- [GitHub sonuç raporu](https://github.com/sarsiss12-dot/Star/blob/codex/stars-mp87-frame-performance/reports/codex/MP87-AKICILIK-SONUC.md).
