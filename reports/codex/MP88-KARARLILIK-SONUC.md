@@ -148,7 +148,13 @@ Ham karşılaştırma cache damgası farkını raporlar; `settled` modunda stric
 
 ## GitHub teslimi
 
-İlk push ve tek PR denemesinin doğrulanmış sonucu burada tamamlanacak. Kendi SHA'sını önceden bilemeyen son rapor commit'i için doğrulanmış önceki teslim referansı rapora, nihai HEAD son sohbet yanıtına yazılır.
+- Kod/test/kanıt/rapor bitiş referansı **`cb9a2048b98edc1795649cfe7dc34dd1bf4213c9`** GitHub'a push edildi; `git ls-remote --heads origin refs/heads/codex/stars-mp88-stability` aynı SHA'yı doğruladı. **GitHub rapor teslimi PASS**.
+- Başlangıç **`cdf58527d7fac51b97746b366f7c38f128db8e39`** → doğrulanmış kod/test teslimi yukarıda. Bu GitHub kaydını ekleyen son belge commit'i kendi SHA'sını önceden içeremez; nihai HEAD son sohbet yanıtında verilir. Sonsuz SHA commit zinciri üretilmedi.
+- Dal `codex/stars-mp88-stability`; PR tabanı `codex/stars-mp87-frame-performance`.
+- **PR oluşturulamadı / BLOCKED**: açık R3/R4 FAIL'i ve diğer sınırları belirten yalnız bir taslak `gh pr create --draft` denemesi `Post "https://api.github.com/graphql": Forbidden` ile çıkış1 verdi. Tekrar araştırılmadı; güvenlik/ağ sınırları değiştirilmedi. [Tam hata](evidence/mp88/pr-attempt.log).
+- [GitHub sonuç raporu](https://github.com/sarsiss12-dot/Star/blob/codex/stars-mp88-stability/reports/codex/MP88-KARARLILIK-SONUC.md).
+- [Doğru tabanla karşılaştır / PR oluştur](https://github.com/sarsiss12-dot/Star/compare/codex/stars-mp87-frame-performance...codex/stars-mp88-stability?expand=1).
+- **Tam MP kayıt/devam kabulü FAIL** olarak kalır; raporun teslim edilmiş olması bütün regresyonların geçtiği veya merge/deploy onayı anlamına gelmez. `main`, merge/rebase/force-push ve Render işlemi yapılmadı.
 
 ## Açıklar / sonraki faz öncelikleri
 

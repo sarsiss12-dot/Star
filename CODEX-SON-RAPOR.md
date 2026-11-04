@@ -12,4 +12,6 @@
 - Diğer ilk FAIL'ler korunur: MP75 5/1 (#mp6Conn dock tap, A3 PASS), tam N8/1 (N7 relay başlangıç); tekrarda geçmeleri kesin çözüm sayılmadı. İlk R ajan tarafından kesildi ve ABORTED kabul edildi.
 - Oyun96h10p5/PWA/manifest19/Save8v8 aynı; MP **8.8**, protokol1/paket4 aynı. Yeni oyun ZIP/SHA-256/CRC32 yayını gerekmedi. Deploy yapılmadı.
 - Fiziksel Android, canlı Render,120/240 uzun kampanya, yeni performans ve tam genel regresyon **NOT RUN**. Render erişimi/izin/environment işlemi yapılmadı. Main merge/rebase/force-push yok.
-- Doğrulanmış GitHub teslim HEAD'i ve tek PR denemesinin sonucu raporun teslim bölümüne; nihai belge HEAD'i son sohbet yanıtına yazılır.
+- GitHub'a push edilip uzak dalda doğrulanan kod/test/kanıt referansı **`cb9a2048b98edc1795649cfe7dc34dd1bf4213c9`**. Nihai belge HEAD'i son sohbet yanıtındadır.
+- GitHub rapor teslimi **PASS**; tek taslak PR oluşturma denemesi **Forbidden / BLOCKED**, PR oluşturulmadı. [Doğru tabanla karşılaştır / PR oluştur](https://github.com/sarsiss12-dot/Star/compare/codex/stars-mp87-frame-performance...codex/stars-mp88-stability?expand=1).
+- [GitHub raporu](https://github.com/sarsiss12-dot/Star/blob/codex/stars-mp88-stability/reports/codex/MP88-KARARLILIK-SONUC.md). R3/R4 FAIL nedeniyle tam MP devam kabulü sağlanmadı.
