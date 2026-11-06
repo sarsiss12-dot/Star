@@ -1,0 +1,14 @@
+{
+  "repository": "sarsiss12-dot/Star",
+  "baseBranch": "codex/stars-mp89-pc-ui-stability",
+  "verifiedBaseHead": "74a57bc0eeac0f2b4db9106b247fe26c1d4eb865",
+  "branch": "codex/stars-beta0-stability",
+  "codeCommit": "5865fd078f2c28fc26578e6de358343043cd4242",
+  "remoteCodeHeadVerified": "5865fd078f2c28fc26578e6de358343043cd4242",
+  "push": "PASS",
+  "prAttempts": 1,
+  "prCreated": false,
+  "prError": "Post https://api.github.com/graphql: Forbidden",
+  "compareUrl": "https://github.com/sarsiss12-dot/Star/compare/codex/stars-mp89-pc-ui-stability...codex/stars-beta0-stability?expand=1",
+  "finalReportCommit": "SHA reported in final chat and GitHub history; documents cannot contain their own commit SHA"
+}

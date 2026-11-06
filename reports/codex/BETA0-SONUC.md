@@ -8,8 +8,8 @@
 - Başlangıç/PR tabanı: `codex/stars-mp89-pc-ui-stability`.
 - Beklenen ve uzak daldan doğrulanan başlangıç HEAD: `74a57bc0eeac0f2b4db9106b247fe26c1d4eb865`. Sapma yok; temiz ağaçtan devam edildi.
 - Geliştirme dalı: `codex/stars-beta0-stability`.
-- Doğrulanmış kod teslim commit'i: TESLIM_HEAD_BEKLENIYOR. Nihai rapor commit'i kendi SHA'sını önceden içermez; bitiş HEAD sohbet tesliminde ve GitHub geçmişinde verilir.
-- PR: TESLIM_PR_BEKLENIYOR. Main/merge/rebase/force-push yapılmadı.
+- Doğrulanmış kod teslim commit'i: `5865fd078f2c28fc26578e6de358343043cd4242` — GitHub uzak dalında doğrulandı. Nihai rapor commit'i kendi SHA'sını önceden içermez; bitiş HEAD sohbet tesliminde ve GitHub geçmişinde verilir.
+- PR: **BLOCKED — tek PR denemesi GitHub GraphQL API Forbidden ile reddedildi; PR oluşturulmadı.** [Doğru tabanla karşılaştır/PR oluştur](https://github.com/sarsiss12-dot/Star/compare/codex/stars-mp89-pc-ui-stability...codex/stars-beta0-stability?expand=1). [Hata kaydı](evidence/beta0/pr-create.log). Main/merge/rebase/force-push yapılmadı.
 - MP.8.9 tamamlanmış kaynak ve kanıtları korundu; yeniden kurtarma veya ağır kampanya yapılmadı. AGENTS, GPT-DEVIR, CLAUDE, son rapor, MP89 ana/açık işler/manuel planı ve başarısızlık kanıtları okundu.
 
 ## 2. Kanıtlanan P0: aynı saat iki başarılı kaydı tek satıra düşürüyordu
@@ -151,6 +151,10 @@ MP75 A3 ve eski B1 için yeni geniş araştırma yapılmadı; tarihsel aralıkl�
 - MP sürüm işaretleri: `research/mp1/client/view.js`, `research/mp1/server/relay.js`.
 - Test: `tests/browser-beta0-storage.cjs`, `tests/mp4_core_test.js`, `tests/browser-mp73.cjs`, `tests/browser-mp89-ui.cjs`; üç `tests/helpers/beta0-*.cjs` tanı/ölçek yardımcısı. Eski UI testi yalnız isteğe bağlı tanı/viewport/CPU kapsamıyla genişletildi.
 - Raporlar: bu dosya, BETA-ACIK-ISLER, LOAD0-PLAN, BETA0-P2-PLANLARI, CODEX-SON-RAPOR, CLAUDE faz notu; `evidence/beta0/` günlük/JSON/PNG kanıtları.
+
+### GitHub teslim kaydı
+
+Kod, kanıtlar ve rapor `5865fd078f2c28fc26578e6de358343043cd4242` commit'iyle push edildi; `git ls-remote` aynı SHA'yı döndürdü. Son belge commit'i PR engelini ve bu doğrulamayı kaydeder. [Teslim doğrulaması](evidence/beta0/github-delivery.json). API engeli araştırılmadı veya güvenlik sınırı değiştirilmedi. Rapor GitHub'a teslim edildi; PR engeli push işlemini engellemedi.
 
 ## 10. Açık beta kapıları ve sonraki tek faz
 
