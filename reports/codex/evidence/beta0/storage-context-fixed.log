@@ -1,0 +1,8 @@
+PASS same-clock manual snapshots never overwrite the earlier save
+PASS legacy row without order remains readable and sorts with new records
+PASS auto retention keeps latest writes across coarse and backward clocks; manual records survive
+PASS simultaneous tabs cannot silently overwrite a successful write
+PASS quota failure preserves all existing records
+PASS manual limit rejects new writes without pruning or overwriting existing saves
+PASS delete requires confirmation; export/import and corrupt input preserve world
+GEÇEN: 7 KALAN: 0

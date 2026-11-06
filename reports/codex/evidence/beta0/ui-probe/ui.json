@@ -1,0 +1,587 @@
+{
+  "results": [
+    {
+      "name": "1280x720 menu + setup",
+      "status": "PASS"
+    },
+    {
+      "name": "1280 PC/touch inputs + MP lobby",
+      "status": "PASS",
+      "data": {
+        "wheel": true,
+        "drag": true,
+        "rightClick": true,
+        "keyboardFocusEscape": true,
+        "resize": true,
+        "lobbyDesign": true,
+        "cpuRate": 1,
+        "scaleProof": [
+          {
+            "scale": {
+              "preferred": 80,
+              "effective": 80,
+              "limited": false
+            },
+            "viewport": [
+              1280,
+              720
+            ],
+            "canvas": [
+              0,
+              0,
+              1280,
+              720
+            ],
+            "modal": [
+              352,
+              12,
+              576,
+              696
+            ],
+            "hit": true
+          },
+          {
+            "scale": {
+              "preferred": 100,
+              "effective": 100,
+              "limited": false
+            },
+            "viewport": [
+              1280,
+              720
+            ],
+            "canvas": [
+              0,
+              0,
+              1280,
+              720
+            ],
+            "modal": [
+              380,
+              43.203125,
+              520,
+              633.59375
+            ],
+            "hit": true
+          },
+          {
+            "scale": {
+              "preferred": 125,
+              "effective": 125,
+              "limited": false
+            },
+            "viewport": [
+              1280,
+              720
+            ],
+            "canvas": [
+              0,
+              0,
+              1280,
+              720
+            ],
+            "modal": [
+              190,
+              12,
+              900,
+              696
+            ],
+            "hit": true
+          }
+        ],
+        "browserZoom": {
+          "before": {
+            "width": 1280,
+            "height": 720,
+            "dpr": 1,
+            "visual": 1
+          },
+          "plus": {
+            "width": 1280,
+            "height": 720,
+            "dpr": 1,
+            "visual": 1
+          },
+          "minus": {
+            "width": 1280,
+            "height": 720,
+            "dpr": 1,
+            "visual": 1
+          },
+          "status": "NOT RUN",
+          "note": "Native keyboard shortcuts in headless Chromium; unchanged metrics do not prove browser zoom."
+        }
+      }
+    },
+    {
+      "name": "1920x1080 menu + setup",
+      "status": "PASS"
+    },
+    {
+      "name": "1920 PC/touch inputs + MP lobby",
+      "status": "PASS",
+      "data": {
+        "wheel": true,
+        "drag": true,
+        "rightClick": true,
+        "keyboardFocusEscape": true,
+        "resize": true,
+        "lobbyDesign": true,
+        "cpuRate": 1,
+        "scaleProof": [
+          {
+            "scale": {
+              "preferred": 80,
+              "effective": 80,
+              "limited": false
+            },
+            "viewport": [
+              1920,
+              1080
+            ],
+            "canvas": [
+              0,
+              0,
+              1920,
+              1080
+            ],
+            "modal": [
+              656,
+              63.96875,
+              608,
+              952.0625
+            ],
+            "hit": true
+          },
+          {
+            "scale": {
+              "preferred": 100,
+              "effective": 100,
+              "limited": false
+            },
+            "viewport": [
+              1920,
+              1080
+            ],
+            "canvas": [
+              0,
+              0,
+              1920,
+              1080
+            ],
+            "modal": [
+              700,
+              64.796875,
+              520,
+              950.390625
+            ],
+            "hit": true
+          },
+          {
+            "scale": {
+              "preferred": 125,
+              "effective": 125,
+              "limited": false
+            },
+            "viewport": [
+              1920,
+              1080
+            ],
+            "canvas": [
+              0,
+              0,
+              1920,
+              1080
+            ],
+            "modal": [
+              485,
+              12,
+              950,
+              1056
+            ],
+            "hit": true
+          }
+        ],
+        "browserZoom": {
+          "before": {
+            "width": 1920,
+            "height": 1080,
+            "dpr": 1,
+            "visual": 1
+          },
+          "plus": {
+            "width": 1920,
+            "height": 1080,
+            "dpr": 1,
+            "visual": 1
+          },
+          "minus": {
+            "width": 1920,
+            "height": 1080,
+            "dpr": 1,
+            "visual": 1
+          },
+          "status": "NOT RUN",
+          "note": "Native keyboard shortcuts in headless Chromium; unchanged metrics do not prove browser zoom."
+        }
+      }
+    },
+    {
+      "name": "2560x1440 menu + setup",
+      "status": "PASS"
+    },
+    {
+      "name": "2560 PC/touch inputs + MP lobby",
+      "status": "PASS",
+      "data": {
+        "wheel": true,
+        "drag": true,
+        "rightClick": true,
+        "keyboardFocusEscape": true,
+        "resize": true,
+        "lobbyDesign": true,
+        "cpuRate": 1,
+        "scaleProof": [
+          {
+            "scale": {
+              "preferred": 80,
+              "effective": 80,
+              "limited": false
+            },
+            "viewport": [
+              2560,
+              1440
+            ],
+            "canvas": [
+              0,
+              0,
+              2560,
+              1440
+            ],
+            "modal": [
+              976,
+              243.96875,
+              608,
+              952.0625
+            ],
+            "hit": true
+          },
+          {
+            "scale": {
+              "preferred": 100,
+              "effective": 100,
+              "limited": false
+            },
+            "viewport": [
+              2560,
+              1440
+            ],
+            "canvas": [
+              0,
+              0,
+              2560,
+              1440
+            ],
+            "modal": [
+              1020,
+              126.265625,
+              520,
+              1187.453125
+            ],
+            "hit": true
+          },
+          {
+            "scale": {
+              "preferred": 125,
+              "effective": 125,
+              "limited": false
+            },
+            "viewport": [
+              2560,
+              1440
+            ],
+            "canvas": [
+              0,
+              0,
+              2560,
+              1440
+            ],
+            "modal": [
+              805,
+              12,
+              950,
+              1416
+            ],
+            "hit": true
+          }
+        ],
+        "browserZoom": {
+          "before": {
+            "width": 2560,
+            "height": 1440,
+            "dpr": 1,
+            "visual": 1
+          },
+          "plus": {
+            "width": 2560,
+            "height": 1440,
+            "dpr": 1,
+            "visual": 1
+          },
+          "minus": {
+            "width": 2560,
+            "height": 1440,
+            "dpr": 1,
+            "visual": 1
+          },
+          "status": "NOT RUN",
+          "note": "Native keyboard shortcuts in headless Chromium; unchanged metrics do not prove browser zoom."
+        }
+      }
+    },
+    {
+      "name": "3440x1440 menu + setup",
+      "status": "PASS"
+    },
+    {
+      "name": "3440 PC/touch inputs + MP lobby",
+      "status": "PASS",
+      "data": {
+        "wheel": true,
+        "drag": true,
+        "rightClick": true,
+        "keyboardFocusEscape": true,
+        "resize": true,
+        "lobbyDesign": true,
+        "cpuRate": 4,
+        "scaleProof": [
+          {
+            "scale": {
+              "preferred": 80,
+              "effective": 80,
+              "limited": false
+            },
+            "viewport": [
+              3440,
+              1440
+            ],
+            "canvas": [
+              0,
+              0,
+              3440,
+              1440
+            ],
+            "modal": [
+              1416,
+              243.96875,
+              608,
+              952.0625
+            ],
+            "hit": true
+          },
+          {
+            "scale": {
+              "preferred": 100,
+              "effective": 100,
+              "limited": false
+            },
+            "viewport": [
+              3440,
+              1440
+            ],
+            "canvas": [
+              0,
+              0,
+              3440,
+              1440
+            ],
+            "modal": [
+              1460,
+              126.265625,
+              520,
+              1187.453125
+            ],
+            "hit": true
+          },
+          {
+            "scale": {
+              "preferred": 125,
+              "effective": 125,
+              "limited": false
+            },
+            "viewport": [
+              3440,
+              1440
+            ],
+            "canvas": [
+              0,
+              0,
+              3440,
+              1440
+            ],
+            "modal": [
+              1245,
+              12,
+              950,
+              1416
+            ],
+            "hit": true
+          }
+        ],
+        "browserZoom": {
+          "before": {
+            "width": 3440,
+            "height": 1440,
+            "dpr": 1,
+            "visual": 1
+          },
+          "plus": {
+            "width": 3440,
+            "height": 1440,
+            "dpr": 1,
+            "visual": 1
+          },
+          "minus": {
+            "width": 3440,
+            "height": 1440,
+            "dpr": 1,
+            "visual": 1
+          },
+          "status": "NOT RUN",
+          "note": "Native keyboard shortcuts in headless Chromium; unchanged metrics do not prove browser zoom."
+        }
+      }
+    },
+    {
+      "name": "800x360 menu + setup",
+      "status": "PASS"
+    },
+    {
+      "name": "800 PC/touch inputs + MP lobby",
+      "status": "PASS",
+      "data": {
+        "wheel": true,
+        "drag": true,
+        "rightClick": true,
+        "keyboardFocusEscape": true,
+        "resize": true,
+        "lobbyDesign": true,
+        "cpuRate": 1,
+        "scaleProof": [
+          {
+            "scale": {
+              "preferred": 100,
+              "effective": 100,
+              "limited": true
+            },
+            "viewport": [
+              800,
+              360
+            ],
+            "canvas": [
+              0,
+              0,
+              800,
+              360
+            ],
+            "modal": [
+              140,
+              33.921875,
+              520,
+              292.15625
+            ],
+            "hit": true
+          }
+        ],
+        "browserZoom": {
+          "before": {
+            "width": 800,
+            "height": 360,
+            "dpr": 1,
+            "visual": 1
+          },
+          "plus": {
+            "width": 800,
+            "height": 360,
+            "dpr": 1,
+            "visual": 1
+          },
+          "minus": {
+            "width": 800,
+            "height": 360,
+            "dpr": 1,
+            "visual": 1
+          },
+          "status": "NOT RUN",
+          "note": "Native keyboard shortcuts in headless Chromium; unchanged metrics do not prove browser zoom."
+        }
+      }
+    },
+    {
+      "name": "960x540 menu + setup",
+      "status": "PASS"
+    },
+    {
+      "name": "960 PC/touch inputs + MP lobby",
+      "status": "PASS",
+      "data": {
+        "wheel": true,
+        "drag": true,
+        "rightClick": true,
+        "keyboardFocusEscape": true,
+        "resize": true,
+        "lobbyDesign": true,
+        "cpuRate": 4,
+        "scaleProof": [
+          {
+            "scale": {
+              "preferred": 100,
+              "effective": 100,
+              "limited": true
+            },
+            "viewport": [
+              960,
+              540
+            ],
+            "canvas": [
+              0,
+              0,
+              960,
+              540
+            ],
+            "modal": [
+              220,
+              44.71875,
+              520,
+              450.546875
+            ],
+            "hit": true
+          }
+        ],
+        "browserZoom": {
+          "before": {
+            "width": 960,
+            "height": 540,
+            "dpr": 1,
+            "visual": 1
+          },
+          "plus": {
+            "width": 960,
+            "height": 540,
+            "dpr": 1,
+            "visual": 1
+          },
+          "minus": {
+            "width": 960,
+            "height": 540,
+            "dpr": 1,
+            "visual": 1
+          },
+          "status": "NOT RUN",
+          "note": "Native keyboard shortcuts in headless Chromium; unchanged metrics do not prove browser zoom."
+        }
+      }
+    }
+  ],
+  "errors": []
+}

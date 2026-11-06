@@ -1,0 +1,33 @@
+[
+  [
+    "storage-final",
+    "tests/browser-beta0-storage.cjs",
+    {}
+  ],
+  [
+    "save-boundary",
+    "tests/faz90rc_1_save_boundary_test.js",
+    {}
+  ],
+  [
+    "mp4-core",
+    "tests/mp4_core_test.js",
+    {}
+  ],
+  [
+    "R",
+    "tests/browser-mp8.cjs",
+    {
+      "MP8_SCEN": "R",
+      "MP8_MONTHS": "6",
+      "MP89_R_STATE": "1",
+      "MP89_UI": "1",
+      "MP89_MENU_DIAG": "1"
+    }
+  ],
+  [
+    "mp73",
+    "tests/browser-mp73.cjs",
+    {}
+  ]
+]

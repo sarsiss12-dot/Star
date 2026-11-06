@@ -1,0 +1,12 @@
+PASS same-clock manual snapshots never overwrite the earlier save
+PASS legacy row without order remains readable and sorts with new records
+PASS auto retention keeps latest writes across coarse and backward clocks; manual records survive
+FAIL simultaneous tabs cannot silently overwrite a successful write Error: Please use browser.newContext()
+    at _BrowserContext.newPage (/workspace/Star/tests/node_modules/playwright-core/lib/coreBundle.js:62018:17)
+    at /workspace/Star/tests/browser-beta0-storage.cjs:18:33
+    at test (/workspace/Star/tests/browser-beta0-storage.cjs:4:140)
+    at /workspace/Star/tests/browser-beta0-storage.cjs:17:8
+PASS quota failure preserves all existing records
+PASS manual limit rejects new writes without pruning or overwriting existing saves
+PASS delete requires confirmation; export/import and corrupt input preserve world
+GEÇEN: 6 KALAN: 1

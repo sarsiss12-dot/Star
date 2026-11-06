@@ -1,0 +1,24 @@
+{
+  "modal": [
+    656,
+    61.96875,
+    608,
+    956.0625
+  ],
+  "canvas": [
+    0,
+    0,
+    1920,
+    1080
+  ],
+  "viewport": [
+    1920,
+    1080
+  ],
+  "effective": {
+    "preferred": 80,
+    "effective": 80,
+    "limited": false
+  },
+  "overflow": false
+}

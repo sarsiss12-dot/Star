@@ -5,8 +5,10 @@ const fixture=fs.readFileSync(path.join(__dirname,'helpers/96e-fixture.js'),'utf
 const results=[],errors=[];let relay,b,ctx,p;
 async function test(name,fn){try{const data=await fn();results.push({name,status:'PASS',data});console.log('PASS '+name);}catch(e){results.push({name,status:'FAIL',error:e.stack});console.log('FAIL '+name+' '+e.stack);if(p)await p.evaluate(()=>({viewport:[innerWidth,innerHeight],path:location.pathname,scale:UI.getUIScale?.(),modal:document.getElementById('modal')?.innerHTML.slice(0,1500),title:document.getElementById('title')?.className,menu:document.getElementById('menu')?.className})).then(d=>fs.writeFileSync(path.join(out,'fail-'+results.length+'-dom.json'),JSON.stringify(d,null,2))).catch(()=>{});await p?.screenshot({path:path.join(out,'fail-'+results.length+'.png')}).catch(()=>{});}fs.writeFileSync(path.join(out,'ui.json'),JSON.stringify({results,errors},null,2));}
 (async()=>{try{relay=relayMod.create({MP1_PORT:'0',MP1_BIND:'127.0.0.1',MP1_DEV:'1'});const s=await relay.start(),base='http://127.0.0.1:'+s.address().port;b=await chromium.launch({executablePath:process.env.STARS_CHROMIUM_PATH||'/usr/bin/chromium',args:['--no-sandbox','--disable-gpu','--disable-dev-shm-usage']});
-for(const [w,h,mobile] of [[1280,720,false],[1366,768,false],[1920,1080,false],[2560,1440,false],[3440,1440,false],[800,360,true],[960,540,true]].filter(([w])=>!process.env.MP89_WIDTH||w===Number(process.env.MP89_WIDTH))){
+for(const [w,h,mobile] of [[1280,720,false],[1366,768,false],[1920,1080,false],[2560,1440,false],[3440,1440,false],[800,360,true],[960,540,true]].filter(([w])=>!process.env.MP89_WIDTH||w===Number(process.env.MP89_WIDTH)).filter(([w])=>!process.env.BETA0_WIDTHS||process.env.BETA0_WIDTHS.split(',').map(Number).includes(w))){
  ctx=await b.newContext({viewport:{width:w,height:h},isMobile:mobile,hasTouch:mobile,deviceScaleFactor:1});p=await ctx.newPage();p.setDefaultTimeout(8000);p.on('pageerror',e=>errors.push(e.message));
+ const cpuRate=(process.env.BETA0_CPU_VIEWS||'').split(',').includes(String(w))?4:1;if(cpuRate===4){const c=await ctx.newCDPSession(p);await c.send('Emulation.setCPUThrottlingRate',{rate:4});}
+ if(process.env.BETA0_DIAG==='1')await require('./helpers/beta0-ui-diag.cjs')(p,out,String(w));
  const shot=n=>p.screenshot({path:path.join(out,w+'-'+n+'.png')});
  const world=async()=>{await p.evaluate(s=>{deserialize(s);$('title').classList.add('hidden');enterGame(true);LOOP.on=false;G.autoSave=false;UI.setSpeed(0);UI.closeModal();UI.setSpeed(0);UI.modalPrevSpeed=0;UI.checkOrient();},save);};
  if(process.env.MP89_PANEL_ONLY){await p.goto(base);await p.waitForFunction(()=>typeof UI!=='undefined'&&UI.getUIScale);await p.evaluate(()=>UI.uiScaleReady);if(process.env.MP89_PANEL_SCALE)await p.evaluate(v=>UI.setUIScale(v),Number(process.env.MP89_PANEL_SCALE));}
@@ -32,13 +34,18 @@ for(const [w,h,mobile] of [[1280,720,false],[1366,768,false],[1920,1080,false],[
   const old=await p.evaluate(()=>({...View.cam}));await p.mouse.move(w/2,h/2);await p.mouse.down();await p.mouse.move(w/2+70,h/2+25,{steps:6});await p.mouse.up();
   const moved=await p.evaluate(()=>({...View.cam}));assert(Math.abs(moved.x-old.x)>10,'mouse drag');
   const selected=await p.evaluate(()=>[View.sel?.id,View.selSys?.id]);await p.mouse.click(w/2,h/2,{button:'right'});assert.deepEqual(await p.evaluate(()=>[View.sel?.id,View.selSys?.id]),selected,'right click no game command');
-  await p.evaluate(()=>UI.saveMenu());await p.locator('#uiScaleSelect').focus();await p.keyboard.press('ArrowDown');await p.keyboard.press('Escape');assert(await p.locator('#modal').evaluate(e=>e.classList.contains('hidden')),'Escape closes modal');
+  await p.evaluate(()=>UI.saveMenu());await p.locator('#uiScaleSelect').focus();const scaleProof=process.env.BETA0_DIAG==='1'?await require('./helpers/beta0-ui-scale.cjs')(p,mobile):null;await p.keyboard.press('ArrowDown');await p.keyboard.press('Escape');assert(await p.locator('#modal').evaluate(e=>e.classList.contains('hidden')),'Escape closes modal');
+  let browserZoom=null;if(process.env.BETA0_DIAG==='1'){
+   const read=()=>p.evaluate(()=>({width:innerWidth,height:innerHeight,dpr:devicePixelRatio,visual:visualViewport?.scale}));
+   const before=await read();await p.keyboard.press('Control+Equal');await p.waitForTimeout(100);const plus=await read();await p.keyboard.press('Control+Minus');await p.waitForTimeout(100);const minus=await read();await p.keyboard.press('Control+Digit0');
+   browserZoom={before,plus,minus,status:JSON.stringify(before)!==JSON.stringify(plus)?'OBSERVED':'NOT RUN',note:'Native keyboard shortcuts in headless Chromium; unchanged metrics do not prove browser zoom.'};
+  }
   await p.setViewportSize({width:w-80,height:h-30});await p.setViewportSize({width:w,height:h});assert(!await p.locator('#rotate').evaluate(e=>e.classList.contains('show')));
   if(!mobile)await p.evaluate(()=>UI.setUIScale(125));
   await p.goto(base);await p.waitForFunction(()=>document.getElementById('mp1Btn'));const end=process.env.MP89_TRACE==='1'?await require('./helpers/mp89-menu-diag.cjs')(p,out):null;let error;try{await p.locator('#mp1Btn')[mobile?'tap':'click']({timeout:8000});await p.locator('[data-m="create"]').click({timeout:8000});}catch(e){error=e;throw e;}finally{if(end)await end(error);}
   await p.waitForFunction(()=>MP1Host.lobby?.phase==='waiting');await shot('mp-lobby');
   await p.locator('#mp7EditMe').click({timeout:8000});await p.waitForFunction(()=>document.getElementById('mp7Head'));await shot('mp-design');
-  return {wheel:true,drag:true,rightClick:true,keyboardFocusEscape:true,resize:true,lobbyDesign:true};
+  return {wheel:true,drag:true,rightClick:true,keyboardFocusEscape:true,resize:true,lobbyDesign:true,cpuRate,scaleProof,browserZoom};
  });
  await ctx.close();ctx=null;
 }

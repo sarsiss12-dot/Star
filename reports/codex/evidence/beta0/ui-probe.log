@@ -1,0 +1,13 @@
+PASS 1280x720 menu + setup
+PASS 1280 PC/touch inputs + MP lobby
+PASS 1920x1080 menu + setup
+PASS 1920 PC/touch inputs + MP lobby
+PASS 2560x1440 menu + setup
+PASS 2560 PC/touch inputs + MP lobby
+PASS 3440x1440 menu + setup
+PASS 3440 PC/touch inputs + MP lobby
+PASS 800x360 menu + setup
+PASS 800 PC/touch inputs + MP lobby
+PASS 960x540 menu + setup
+PASS 960 PC/touch inputs + MP lobby
+TOTAL 12/0

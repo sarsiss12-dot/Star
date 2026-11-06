@@ -1,0 +1,5 @@
+PASS same-clock manual snapshots never overwrite the earlier save
+PASS auto retention keeps latest writes across coarse and backward clocks; manual records survive
+PASS quota failure preserves all existing records
+PASS delete requires confirmation; export/import and corrupt input preserve world
+GEÇEN: 4 KALAN: 0

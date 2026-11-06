@@ -31,7 +31,7 @@ function hostWorld(){
 function loadWorld(text,o={}){
   const h=runtime({root});h.sb.__rand=rnd(10000);h.sb.__out=[];h.sb.__text=text;h.run(CORE);
   const r=JSON.parse(h.run(`${STEP};var seq={};var V=StarsMP.validatePackage(__text);var LW=V.ok?StarsMP.loadWorld(V.pkg):null;
-    var MP=V.ok&&LW.ok?StarsMP.createHost({roomId:'r4b',random:__rand,send:(c,t)=>__out.push([c,t]),kick(c,why){__out.push([c,JSON.stringify({type:'kicked',why})]);},lobby:{generate(){return {ok:false};}},resume:V.pkg}):null;
+    var MP=V.ok&&LW.ok?StarsMP.createHost({roomId:${JSON.stringify(o.roomId||'r4b')},random:__rand,send:(c,t)=>__out.push([c,t]),kick(c,why){__out.push([c,JSON.stringify({type:'kicked',why})]);},lobby:{generate(){return {ok:false};}},resume:V.pkg}):null;
     if(MP)MP.installGuards();JSON.stringify({ok:V.ok&&LW.ok,why:V.why||(LW&&LW.why)})`));
   return {h,...r};
 }
@@ -103,6 +103,7 @@ test('yükleme yeni süreçte: aynı galaksi, devam lobisi; B ve C cihazlarında
   m=msg(g,'nC',{v:1,type:'hello',name:'Cem',token:tC});assert.equal(m.find(x=>x.type==='assign').empireId,C);
   const d0=J(g,'G.day');g.run('MP.publish()');assert.equal(J(g,'G.day'),d0,'no hidden time advance');
   assert.equal(J(g,'MP.lobby.phase'),'resume');assert.equal(J(g,'MP.resumeStart().ok'),true);assert.equal(J(g,'MP.lobby.phase'),'ingame');
+  const started=st(g);assert.deepEqual(J(g,'MP.resumeStart()'),{ok:false,why:'phase'});assert.deepEqual(st(g),started,'duplicate resume cannot mutate Save8/RNG');
   assert(g.sb.__out.some(([c,t])=>c==='nB'&&t.includes('"type":"snapshot"')),'B receives its view');
 });
 test('kimlik güvenliği: uydurma jeton, başka kaydın jetonu, eski (yenilenmiş) jeton ve jetonsuz kişi devleti alamaz; ziyaretçi talep/komut yapamaz ve devamda çıkarılır; host yalnız bağlı olmayan koltuk için onaylı kurtarma yapabilir',()=>{
@@ -237,6 +238,11 @@ test('eski MP.0 meta (mpMeta:1) güvenle yükseltilir: FNV eşleşmesi zorunlu, 
   assert(!JSON.stringify(up.pkg).includes(tB),'legacy token not carried in clear');assert.equal(up.pkg.diplomacy.offers.length,0);
   assert.equal(J(h,'StarsMP.upgradeLegacy(__m,__s+" ",{random:__rand}).why'),'legacy-hash');assert.equal(J(h,`StarsMP.validatePackage(${JSON.stringify(JSON.stringify(m))}).why`),'legacy');
   const g=loadWorld(JSON.stringify(up.pkg)).h;assert.equal(msg(g,'nB',{v:1,type:'hello',name:'Bora',token:tB}).find(x=>x.type==='assign').empireId,B,'legacy player returns to the same empire');
+});
+test('aynı kayıt iki bağımsız oda dalı olarak açılabilir; global saveId kilidi vaat edilmez',()=>{
+  const {h}=sc(),text=JSON.stringify(J(h,'MP.snapshot({})').pkg),a=loadWorld(text,{roomId:'fork-a'}),b=loadWorld(text,{roomId:'fork-b'});
+  assert(a.ok&&b.ok);assert.notEqual(J(a.h,'MP.state.roomId'),J(b.h,'MP.state.roomId'));assert.equal(J(a.h,'MP.state.saveId'),J(b.h,'MP.state.saveId'));
+  const before=st(b.h);a.h.run('G.p.res.min+=1');assert.deepEqual(st(b.h),before,'world copies are independent');
 });
 test('SHA-256 standart test vektörleri (FIPS 180-4) ve Node crypto ile aynı',()=>{
   const h=runtime({root});h.run(CORE);

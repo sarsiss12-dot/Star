@@ -1,0 +1,7 @@
+[
+  {
+    "name": "same-clock manual snapshots never overwrite the earlier save",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: two successful manual writes must remain two records\n\n1 !== 2\n\n    at /workspace/Star/tests/browser-beta0-storage.cjs:9:86\n    at async test (/workspace/Star/tests/browser-beta0-storage.cjs:4:134)\n    at async /workspace/Star/tests/browser-beta0-storage.cjs:7:2"
+  }
+]

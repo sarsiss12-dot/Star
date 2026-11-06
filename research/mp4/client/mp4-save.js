@@ -19,17 +19,20 @@ function tx(mode,fn){return db().then(d=>new Promise((res,rej)=>{const t=d.trans
 const req=r=>new Promise((res,rej)=>{r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error);});
 let chain=Promise.resolve();
 async function putNow(pkgText,meta){
-  const kind=meta.kind==='auto'?'auto':'manual',created=Date.now(),key=kind+':'+meta.saveId+':'+created;
+  const kind=meta.kind==='auto'?'auto':'manual',created=Date.now();
   const all=await API.list();
+  // BETA.0: wall clocks can repeat/go backwards. Keep display time, order writes separately.
+  const order=all.reduce((n,x)=>Math.max(n,Number.isSafeInteger(x.order)?x.order:Number.isSafeInteger(x.created)?x.created:0),created)+1;
+  const key=kind+':'+meta.saveId+':'+order;
   if(kind==='manual'&&all.filter(x=>x.kind==='manual').length>=MAX_MANUAL)return {ok:false,why:'full'};
-  await tx('readwrite',async s=>{await req(s.put({key,saveId:meta.saveId,kind,created,display:meta.display,size:pkgText.length,text:pkgText}));});
+  await tx('readwrite',async s=>{await req(s.add({key,saveId:meta.saveId,kind,created,order,display:meta.display,size:pkgText.length,text:pkgText}));});
   if(kind==='auto'){const old=(await API.list()).filter(x=>x.kind==='auto'&&x.saveId===meta.saveId).slice(MAX_AUTO);for(const x of old)await API.del(x.key);}   // yenisi yazıldıktan SONRA
   return {ok:true,key};
 }
 const API={
   async available(){try{await db();return true;}catch{return false;}},
   /* özet liste (metinsiz), yeni → eski */
-  async list(){return tx('readonly',async(s,set)=>{const all=await req(s.getAll());set(all.map(({text,...x})=>x).sort((a,b)=>b.created-a.created));});},
+  async list(){return tx('readonly',async(s,set)=>{const all=await req(s.getAll());set(all.map(({text,...x})=>x).sort((a,b)=>(b.order??b.created)-(a.order??a.created)));});},
   async get(key){return tx('readonly',async(s,set)=>{set(await req(s.get(key)));});},
   async del(key){return tx('readwrite',async s=>{await req(s.delete(key));});},
   /* pkgText: doğrulanmış paketin JSON metni; meta: {saveId, display, kind}. Yazmalar sıralı: otomatik kayıt sınırı yarışta aşılmaz. */

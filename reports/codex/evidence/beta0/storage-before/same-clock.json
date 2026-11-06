@@ -1,0 +1,19 @@
+{
+  "a": {
+    "ok": true,
+    "key": "manual:s-abababababababab:1800000000000"
+  },
+  "z": {
+    "ok": true,
+    "key": "manual:s-abababababababab:1800000000000"
+  },
+  "rows": [
+    {
+      "key": "manual:s-abababababababab:1800000000000",
+      "created": 1800000000000,
+      "name": "Yeni kayıt"
+    }
+  ],
+  "oldPreserved": false,
+  "newPreserved": true
+}

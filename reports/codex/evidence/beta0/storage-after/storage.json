@@ -1,0 +1,74 @@
+[
+  {
+    "name": "same-clock manual snapshots never overwrite the earlier save",
+    "status": "PASS",
+    "data": {
+      "a": {
+        "ok": true,
+        "key": "manual:s-abababababababab:1800000000001"
+      },
+      "z": {
+        "ok": true,
+        "key": "manual:s-abababababababab:1800000000002"
+      },
+      "rows": [
+        {
+          "key": "manual:s-abababababababab:1800000000002",
+          "created": 1800000000000,
+          "order": 1800000000002,
+          "name": "Yeni kayıt"
+        },
+        {
+          "key": "manual:s-abababababababab:1800000000001",
+          "created": 1800000000000,
+          "order": 1800000000001,
+          "name": "Önceki kayıt"
+        }
+      ],
+      "oldPreserved": true,
+      "newPreserved": true
+    }
+  },
+  {
+    "name": "auto retention keeps latest writes across coarse and backward clocks; manual records survive",
+    "status": "PASS",
+    "data": {
+      "expected": [
+        "auto:s-abababababababab:1800000000007",
+        "auto:s-abababababababab:1800000000006",
+        "auto:s-abababababababab:1800000000005"
+      ],
+      "auto": [
+        "auto:s-abababababababab:1800000000007",
+        "auto:s-abababababababab:1800000000006",
+        "auto:s-abababababababab:1800000000005"
+      ],
+      "manualBefore": [
+        "manual:s-abababababababab:1800000000002",
+        "manual:s-abababababababab:1800000000001"
+      ],
+      "manualAfter": [
+        "manual:s-abababababababab:1800000000002",
+        "manual:s-abababababababab:1800000000001"
+      ]
+    }
+  },
+  {
+    "name": "quota failure preserves all existing records",
+    "status": "PASS",
+    "data": {
+      "rejected": true,
+      "unchanged": true
+    }
+  },
+  {
+    "name": "delete requires confirmation; export/import and corrupt input preserve world",
+    "status": "PASS",
+    "data": {
+      "cancelPreserved": true,
+      "confirmedDeletion": true,
+      "fileRoundtrip": true,
+      "corruptRollback": true
+    }
+  }
+]

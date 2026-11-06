@@ -1,0 +1,8 @@
+FAIL same-clock manual snapshots never overwrite the earlier save AssertionError [ERR_ASSERTION]: two successful manual writes must remain two records
+
+1 !== 2
+
+    at /workspace/Star/tests/browser-beta0-storage.cjs:9:86
+    at async test (/workspace/Star/tests/browser-beta0-storage.cjs:4:134)
+    at async /workspace/Star/tests/browser-beta0-storage.cjs:7:2
+GEÇEN: 0 KALAN: 1

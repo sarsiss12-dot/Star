@@ -1,13 +1,15 @@
 # Son Codex raporu
 
-- Son faz: **MP.8.9 — Beta hazırlığı, kayıt/devam ve PC UI Scale**. Yerel kabul PASS; **beta yayın onayı yok**.
-- [Ana rapor](reports/codex/MP89-PC-UI-KARARLILIK-SONUC.md) · [Açık işler](reports/codex/BETA-ACIK-ISLER.md) · [Manuel PC/Android planı](reports/codex/MP89-MANUEL-BETA-PLANI.md).
-- Dal `codex/stars-mp89-pc-ui-stability`; PR tabanı `codex/stars-mp88-stability`.
-- Doğrulanan başlangıç HEAD `8ce738b42636cd792a8d552230ca8194a4da053f`; kurtarma teslimi `5210281c46afc3b38048ead53a7399625e340b35` GitHub'da doğrulandı. Son rapor commit'i kendi SHA'sını önceden içermez; nihai HEAD sohbet tesliminde ve dosya tarihinde.
-- MP89/MP810 uzak dalları başlangıçta yoktu; MP89 yayımlanmamış kod/kanıtları kurtarıldı. MP810 tamamlandı sayılmadı.
-- **PASS:** iki temiz dolu savaş/federasyon/vasallık R0–R4; ilkinde ek misafir UI dahil6/0, ikinci5/0. SP/MP ölçek ve yalıtım; depo3/0; son mobil paneller2/0+2/0,1280 %125 panel1/0. N9/0, MP74 7/0, MP75 6/0, MP73 8/0, PERF1 4/0, PERF2 5/0, native piksel3/0, Chromium3 vaka ve host hash5/0 kanıtları korundu.
-- **FAIL geçmişi korunur:** eski R menü timeout, Chromium açılış3/2, ilk misafir animasyon ölçümü, menü tekrarında12/2 ve ilk depo/fikstür hataları. Yeni PASS bunların kesin kök nedeninin kapandığı anlamına gelmez.
-- Açık beta kapıları: aralıklı giriş/otomasyon kökü; gerçek cihaz/LAN/online kabulü; manuel Ctrl± ve ayrı MP dok kapsamı. Fiziksel Android/Render NOT RUN. Yeni environment/izin/deploy/restart yok.
-- #5 ve #8 AÇIK/P2; #6 ve #7 KISMEN. Issue kapatılmadı. Sonraki tek faz BETA.0 kabul/tanı; yeni mekanik/AI sistemi yok.
-- Build96h10p6 / PWA stars-v96h10p6 / MP8.9; Save8v8 aynı. Nihai ZIP776457 bayt, SHA256 `9f0bf5f11913c277ca23274c7a84544fd15ecee3edffd3e8ab56ca149ff814f9`, CRC32 `ee942090`; iki üretim tam aynı, manifest/CRC/SHA PASS. Eski ara ZIP hash'i yayın kimliği değildir.
-- PR bir kez denendi: API **Forbidden**, oluşturulmadı. [Karşılaştır/PR oluştur](https://github.com/sarsiss12-dot/Star/compare/codex/stars-mp88-stability...codex/stars-mp89-pc-ui-stability?expand=1). Main/merge/rebase/force-push yok.
+- Son faz: **BETA.0 — multiplayer kayıt güvenliği ve beta açık işler denetimi**. Yerel hedefli kabul PASS; genel beta yayın onayı yok.
+- [Ana rapor](reports/codex/BETA0-SONUC.md) · [Açık işler](reports/codex/BETA-ACIK-ISLER.md) · [LOAD.0 planı](reports/codex/LOAD0-PLAN.md) · [P2 planları](reports/codex/BETA0-P2-PLANLARI.md) · [Manuel cihaz planı](reports/codex/MP89-MANUEL-BETA-PLANI.md).
+- Dal `codex/stars-beta0-stability`; PR tabanı `codex/stars-mp89-pc-ui-stability`.
+- Uzak başlangıç HEAD `74a57bc0eeac0f2b4db9106b247fe26c1d4eb865`. Doğrulanmış kod teslimi: TESLIM_HEAD_BEKLENIYOR. Son rapor commit SHA'sı sohbet tesliminde/GitHub geçmişinde.
+- **Çözülen P0:** aynı duvar saatiyle MP4Save iki başarılı yazmada ilk kaydı eziyordu. Yerel sıra ve atomik add, eski satır uyumu; aynı anda iki sekme yazarsa ikinci işlem açık hata verebilir, sessiz üzerine yazma olmaz.
+- **Yeni PASS:** depo7/0; Save8 sınır19/0; MP4 core14/0; dolu R0–R4+misafir ölçek6/0; MP73 8/0; altı çözünürlük UI12/0 (3440/960 CPU4×). Oyun19 dosya/manifest ve dört kritik MP dosyası tabanla aynı.
+- **FAIL korunur:** düzeltmesiz depo0/1; ilk geniş depo6/1 Playwright context kurulumu, düzeltilmiş test7/0; geçmiş R3/960/3440/launch hataları silinmedi. Son menü PASS'leri kesin kök neden çözümü değildir.
+- **Tekrar kullanılan eski kanıtlar:** MP89 N9/0, MP74 7/0, MP75 6/0, PERF1 4/0, PERF2 5/0, MP86 piksel. Bu fazda yeni koşuları NOT RUN.
+- **NOT RUN:** Render, gerçek LAN/Wi-Fi, fiziksel Android/PC insan kabulü, gerçek Ctrl± zoom kabulü. Headless tuş denemesi zoom üretmedi. Deploy/restart/izin/environment değişikliği yok.
+- Oyun96h10p6 / PWA stars-v96h10p6 / MP.8.9b1; Save8v8/protokol1/paket4 aynı. Yeni oyun ZIP'i yok. Mevcut ZIP SHA256 `9f0bf5f11913c277ca23274c7a84544fd15ecee3edffd3e8ab56ca149ff814f9`, CRC32 `ee942090`,776457 bayt doğrulandı.
+- #5/#8 AÇIK/P2, #6/#7 KISMEN; issue kapatılmadı. MP çapraz-build uyumu ve tek oyunculu çoklu kayıt ekranı tamamlanmış değil. Ani host çöküşünde kaydedilmemiş ilerleme garanti edilmez.
+- PR: TESLIM_PR_BEKLENIYOR. Main/merge/rebase/force-push yok.
+- Sonraki tek faz: **BETA.1 aralıklı girişin hata-anı kanıtı ve kabul kapısı**; kapı kapanınca LOAD.0.

@@ -1,0 +1,118 @@
+[
+  {
+    "name": "same-clock manual snapshots never overwrite the earlier save",
+    "status": "PASS",
+    "data": {
+      "a": {
+        "ok": true,
+        "key": "manual:s-abababababababab:1800000000001"
+      },
+      "z": {
+        "ok": true,
+        "key": "manual:s-abababababababab:1800000000002"
+      },
+      "rows": [
+        {
+          "key": "manual:s-abababababababab:1800000000002",
+          "created": 1800000000000,
+          "order": 1800000000002,
+          "name": "Yeni kayıt"
+        },
+        {
+          "key": "manual:s-abababababababab:1800000000001",
+          "created": 1800000000000,
+          "order": 1800000000001,
+          "name": "Önceki kayıt"
+        }
+      ],
+      "oldPreserved": true,
+      "newPreserved": true
+    }
+  },
+  {
+    "name": "legacy row without order remains readable and sorts with new records",
+    "status": "PASS",
+    "data": {
+      "first": "manual:s-abababababababab:2000000000001",
+      "expected": "manual:s-abababababababab:2000000000001",
+      "legacyUnchanged": true,
+      "legacyHasOrder": false
+    }
+  },
+  {
+    "name": "auto retention keeps latest writes across coarse and backward clocks; manual records survive",
+    "status": "PASS",
+    "data": {
+      "expected": [
+        "auto:s-abababababababab:2000000000006",
+        "auto:s-abababababababab:2000000000005",
+        "auto:s-abababababababab:2000000000004"
+      ],
+      "auto": [
+        "auto:s-abababababababab:2000000000006",
+        "auto:s-abababababababab:2000000000005",
+        "auto:s-abababababababab:2000000000004"
+      ],
+      "manualBefore": [
+        "manual:s-abababababababab:2000000000001",
+        "manual:legacy:2000000000000",
+        "manual:s-abababababababab:1800000000002",
+        "manual:s-abababababababab:1800000000001"
+      ],
+      "manualAfter": [
+        "manual:s-abababababababab:2000000000001",
+        "manual:legacy:2000000000000",
+        "manual:s-abababababababab:1800000000002",
+        "manual:s-abababababababab:1800000000001"
+      ]
+    }
+  },
+  {
+    "name": "simultaneous tabs cannot silently overwrite a successful write",
+    "status": "PASS",
+    "data": {
+      "writes": [
+        {
+          "ok": false,
+          "error": "ConstraintError"
+        },
+        {
+          "ok": true,
+          "key": "manual:s-abababababababab:2100000000001"
+        }
+      ],
+      "successfulWritesRetained": 1,
+      "explicitConflictRejected": true
+    }
+  },
+  {
+    "name": "quota failure preserves all existing records",
+    "status": "PASS",
+    "data": {
+      "rejected": true,
+      "unchanged": true
+    }
+  },
+  {
+    "name": "manual limit rejects new writes without pruning or overwriting existing saves",
+    "status": "PASS",
+    "data": {
+      "extra": {
+        "ok": false,
+        "why": "full"
+      },
+      "unchanged": true,
+      "count": 12
+    }
+  },
+  {
+    "name": "delete requires confirmation; export/import and corrupt input preserve world",
+    "status": "PASS",
+    "data": {
+      "cancelPreserved": true,
+      "confirmedDeletion": true,
+      "fileRoundtrip": true,
+      "corruptRollback": true
+    }
+  }
+]
