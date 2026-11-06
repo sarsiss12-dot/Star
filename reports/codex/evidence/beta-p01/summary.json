@@ -1,0 +1,113 @@
+{
+  "overall": "Selected deterministic fixes verified; release approval blocked by full MP73 setup failures and remaining acceptance scope",
+  "results": {
+    "panelsSP": {
+      "log": "panels-final.log",
+      "pass": 3,
+      "fail": 0,
+      "status": "PASS"
+    },
+    "panelsMP": {
+      "log": "mp-panels3.log",
+      "pass": 2,
+      "fail": 0,
+      "status": "PASS"
+    },
+    "warNewsNative": {
+      "log": "news-final2.log",
+      "pass": 4,
+      "fail": 0,
+      "status": "PASS"
+    },
+    "ballotsSP": {
+      "log": "ballot-final.log",
+      "pass": 3,
+      "fail": 0,
+      "status": "PASS"
+    },
+    "councilCore": {
+      "log": "council-final.log",
+      "pass": 13,
+      "fail": 0,
+      "status": "PASS"
+    },
+    "warEnd": {
+      "log": "war-end-final.log",
+      "pass": 5,
+      "fail": 0,
+      "status": "PASS"
+    },
+    "embargo": {
+      "log": "embargo-final.log",
+      "pass": 5,
+      "fail": 0,
+      "status": "PASS"
+    },
+    "mirrorPublicWar": {
+      "log": "mirror-final.log",
+      "pass": 3,
+      "fail": 0,
+      "status": "PASS"
+    },
+    "saveBoundary": {
+      "log": "save-boundary-final.log",
+      "pass": 19,
+      "fail": 0,
+      "status": "PASS"
+    },
+    "previousPackage": {
+      "log": "compat.log",
+      "pass": 3,
+      "fail": 0,
+      "status": "PASS"
+    },
+    "warUI": {
+      "log": "war-ui-final.log",
+      "pass": 34,
+      "fail": 0,
+      "status": "PASS"
+    },
+    "networkN": {
+      "log": "N.log",
+      "pass": 9,
+      "fail": 0,
+      "status": "PASS"
+    },
+    "resumeR": {
+      "log": "R.log",
+      "pass": 6,
+      "fail": 0,
+      "status": "PASS"
+    },
+    "diplomacyMP75": {
+      "log": "mp75.log",
+      "pass": 6,
+      "fail": 0,
+      "status": "PASS"
+    },
+    "mp73Full": {
+      "log": "mp73-full.log",
+      "pass": 4,
+      "fail": 4,
+      "status": "FAIL"
+    },
+    "mpCritical": {
+      "log": "mp-critical.log",
+      "pass": 2,
+      "fail": 1,
+      "status": "FAIL"
+    },
+    "newsTouch": {
+      "log": "news-browser-final.log",
+      "pass": 1,
+      "fail": 0,
+      "status": "PASS"
+    }
+  },
+  "render": "NOT RUN",
+  "physicalAndroid": "NOT RUN",
+  "realLAN": "NOT RUN",
+  "task33Write": "BLOCKED",
+  "tasksCompletedWithoutUserApproval": [],
+  "note": "Initial failures and setup/environment errors retained; later PASS does not erase them."
+}

@@ -1,0 +1,4 @@
+✓ native canvas pixels exactly match original across seed and dimensions; fresh canvas and RNG unchanged
+✓ caller mutation/context clearing cannot poison cached pixels; cache keeps only last key
+✓ canvas failure on cache hit falls back to original; oversized input is not retained
+GEÇEN: 3 KALAN: 0

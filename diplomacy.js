@@ -127,6 +127,7 @@ function borderFriction(){
 /* 92A — savaş kanıt defteri. Puan/ödül/toprak dağıtmaz, RNG tüketmez.
    Her cephe tek devlet çiftine aittir. Yalnız açık destek çağrısı aynı
    sefere bağlar; ortak düşman/sonradan ittifak geçmişi yeniden yazmaz. */
+const WAR_END_REASONS={exhaustion:'%100 savaş yorgunluğu nedeniyle zorunlu barış',crisis:'Galaktik kriz nedeniyle AI ateşkesi',agreement:'Diplomatik barış anlaşması','ai-peace':'AI tarafından başlatılan barış','council-unity':'Konsey Galaktik Odak kuralı','proxy-peace':'Vekil savaş yükümlülüğünün sona ermesi','status-quo':'Statüko anlaşması','alliance':'İttifak anlaşması','alliance-conflict':'İttifak ile savaş çelişkisinin onarılması','subject-binding':'Vasallık bağıyla çelişen savaşın onarılması','subjugation':'Boyun eğdirme sonucu','subjugation-federation':'Boyun eğdirme / federasyon sonucu','rebel-coalition':'Ortak isyancı koalisyonu','rebellion-victory':'Özgürlük savaşının kazanılması'};
 function warLedgerEmpty(){ return {v:1,next:1,fronts:[]}; }
 function warLedgerPair(a,b){
   const x=G.emps[a],y=G.emps[b];
@@ -180,11 +181,14 @@ function warLedgerOpen(a,b,support=null,legacy=false){
   if(!legacy)recordNews({category:'war',empires:[a,b],key:'war-front:'+f.id,title:parent?'Savaşa yeni katılım':'Savaş ilanı',text:G.emps[a].name+' → '+G.emps[b].name,important:true});
   return f;
 }
-function warLedgerSync(reason='observed'){
+function warLedgerSync(reason='observed',actor=null){
   if(!G.warLedger) G.warLedger=warLedgerEmpty();
   for(const f of G.warLedger.fronts){
     if(f.ended!==null) continue;
-    if(!warLedgerPair(...f.sides)){f.ended=G.day;f.endReason=reason;continue;}
+    if(!warLedgerPair(...f.sides)){
+      f.ended=G.day;f.endReason=reason+'|actor:'+(actor===null?(['observed','load-observed','legacy'].includes(reason)?'unknown':'auto'):actor);
+      recordNews({category:'peace',empires:f.sides,key:'war-end:'+f.id,title:'Savaş sona erdi',text:(typeof WAR_END_REASONS!=='undefined'&&WAR_END_REASONS[reason]||'Bitiş nedeni: '+reason)+' · Savaş #'+f.id+' · '+f.sides.map(id=>G.emps[id]?.name||'?').join(' ↔ ')+' · gün '+G.day+' · '+f.endReason,important:true});continue;
+    }
     for(const id of f.sides){
       const n=warLedgerMember(id),prev=f.membership.filter(x=>x.id===id).slice(-1)[0];
       if(!prev || prev.fed!==n.fed || prev.lord!==n.lord) f.membership.push(n);
@@ -838,7 +842,7 @@ function resolveProxyWars(a, b){
   }
   warLedgerSync('proxy-peace');
 }
-function makePeace(a, b){
+function makePeace(a, b, reason=a?.ai?'ai-peace':'agreement', actor=a?.id??null){
   if (!canPeace(a,b)) return false;
   a.war[b.id] = false; b.war[a.id] = false;
   if (a.warDefense) delete a.warDefense[b.id];
@@ -865,8 +869,8 @@ function makePeace(a, b){
   if (b.warCause) delete b.warCause[a.id];
   remember(a, b.id, 'barisImzala');
   remember(b, a.id, 'barisImzala');
+  warLedgerSync(reason,actor);
   resolveProxyWars(a, b);
-  warLedgerSync('peace');
   recordNews({category:'peace',empires:[a.id,b.id],key:'peace:'+Math.min(a.id,b.id)+':'+Math.max(a.id,b.id)+':'+G.day,title:'Barış anlaşması',text:a.name+' ile '+b.name+' arasındaki savaş sona erdi',important:true});
   if (typeof facEvent === 'function'){ facEvent(a,'peace'); facEvent(b,'peace'); }
   a.rel[b.id] = Math.max(a.rel[b.id], -10);
@@ -1391,7 +1395,7 @@ function applyItems(giver, taker, items){
         recordNews({category:'politics',empires:[giver.id,taker.id],title:'İttifak kuruldu',text:giver.name+' ile '+taker.name+' ittifak imzaladı'});
         giver.ally[taker.id] = true; taker.ally[giver.id] = true;
         clearBilateralEmbargo(giver,taker);
-        warLedgerSync('alliance');
+        warLedgerSync('alliance',giver.id);
         giver.rel[taker.id] = Math.max(giver.rel[taker.id], 55);
         taker.rel[giver.id] = Math.max(taker.rel[giver.id], 55);
         break;
@@ -2613,6 +2617,7 @@ function fixDiploConflicts(){
       if (a.ally[b.id] && a.war[b.id]){
         // ittifak kazanır: savaş iptal
         a.war[b.id] = false; b.war[a.id] = false;
+        warLedgerSync('alliance-conflict',null);
         a.peaceAt = a.peaceAt || {}; b.peaceAt = b.peaceAt || {};
         a.peaceAt[b.id] = G.day; b.peaceAt[a.id] = G.day;
         if (a.id === 0 || b.id === 0)
@@ -4221,6 +4226,7 @@ function warExhTick(){
       if (wsMonths > 96) amt += 2.0;
       addExh(e, o.id, amt);
 
+      if(e.exh[o.id]>=85&&e.exh[o.id]<100){const f=warLedgerFind(e.id,o.id);if(f)recordNews({category:'war',empires:[e.id,o.id],key:'war-exhaustion:'+f.id+':'+e.id,title:'Zorunlu barış yaklaşıyor',text:e.name+' savaş yorgunluğu %'+Math.floor(e.exh[o.id])+': %100 düzeyinde zorunlu barış uygulanır.',important:true});}
       // fraksiyonlar yorgunluktan etkilenir
       if (e.factions && e.exh[o.id] > 60 && rnd() < .2)
         facShift(e, 'halk', -3, 'savaş yorgunluğu');
@@ -4246,7 +4252,8 @@ function warExhTick(){
           if (e.id === 0 || o.id === 0)
             say('ORDU SAVAŞAMIYOR — ' + (e.id===0?o.name:e.name) +
                 ' ile çatışma kendiliğinden durdu', 'war');
-        } else makePeace(e, o);
+          warLedgerSync('exhaustion',null);
+        } else makePeace(e, o,'exhaustion',null);
         e.exh[o.id] = 55; o.exh = o.exh || {}; o.exh[e.id] = Math.min(o.exh[e.id]||0, 55);
         if (e.id === 0) say('SAVAŞ YORGUNLUĞU DORUKTA — ' + o.name + ' ile barış zorunlu oldu', 'war');
         else if (o.id === 0) say(e.name + ' savaştan çekildi — barış imzalandı', 'win');
@@ -4682,7 +4689,7 @@ function startCouncilVote(kampanya){
     }
     target = cands[0].id;
   }
-  c.vote = {key, target, yes:[], no:[], speeches:[], done:false, age:0,
+  c.vote = {key, target, opened:G.day, yes:[], no:[], speeches:[], done:false, age:0,
             sponsor: sponsor ? sponsor.id : null};
   /* Sponsor kendi teklifine oy verir */
   if (sponsor) c.vote.yes.push(sponsor.id);
@@ -4850,6 +4857,19 @@ function startCouncilVote(kampanya){
   }
   if (c.members.includes(0) && G.emps[0] && !G.emps[0].dead) UI.councilVote();
   else finishCouncilVote();
+}
+// BETA-P0.1: ballot identity survives Save8 and distinguishes repeated laws.
+function councilVoteToken(v){
+  return v?v.key+':'+(v.target===null||v.target===undefined?'':v.target)+':'+(Number.isFinite(v.opened)?v.opened:'legacy'):'';
+}
+function castCouncilVote(e,yes,token){
+  const c=G.council,v=c&&c.vote;
+  if(!e||!c||!c.members.includes(e.id))return {ok:false,why:'Konsey üyesi değilsin'};
+  if(!v||v.done)return {ok:false,why:'Açık oylama yok'};
+  if(token!==councilVoteToken(v))return {ok:false,why:'Oylama değişti; güncel oylamayı aç'};
+  if(typeof isVassal==='function'&&isVassal(e)&&c.members.includes(e.overlord))return {ok:false,why:'Senyörün adına oy kullanılıyor'};
+  if(v.yes.includes(e.id)||v.no.includes(e.id))return {ok:false,why:'Oyun zaten kaydedildi'};
+  (yes?v.yes:v.no).push(e.id);finishCouncilVote();return {ok:true};
 }
 function finishCouncilVote(){
   const c = G.council;
@@ -5676,7 +5696,7 @@ function normalizeDiplomaticBindings(){
   for(let i=0;i<G.emps.length;i++)for(let j=i+1;j<G.emps.length;j++){
     const a=G.emps[i],b=G.emps[j];if(!a||!b||a.dead||b.dead)continue;
     if(sovereignPair(a,b)&&(a.war[b.id]||b.war[a.id])){
-      a.war[b.id]=false;b.war[a.id]=false;repaired++;
+      a.war[b.id]=false;b.war[a.id]=false;warLedgerSync('subject-binding',null);repaired++;
     }
     if(protectedDiplomaticPair(a,b)&&clearBilateralEmbargo(a,b))repaired++;
     if(a.war[b.id]||b.war[a.id])endTreatiesForWar(a,b);
@@ -5724,7 +5744,7 @@ function setEmbargo(e, target, on, sebep){
     if (target.id === 0) say(e.name + ' ambargoyu kaldırdı', 'win');
   }
   /* ticaret önbelleklerini geçersiz kıl */
-  recordNews({category:'economy',empires:[e.id,target.id],title:on?'Ticari ambargo':'Ambargo kaldırıldı',text:e.name+' → '+target.name+(sebep?' · '+sebep:'')});
+  recordNews({category:'economy',empires:[e.id,target.id],title:on?'Ticari ambargo':'Ambargo kaldırıldı',text:e.name+' → '+target.name+' · '+(sebep||(e.ai===false?'oyuncu kararı':'AI kararı'))});
   e._trAt = -1; target._trAt = -1;
   return true;
 }
@@ -5781,7 +5801,7 @@ function isPariah(e){
 function embargoTick(){
   normalizeDiplomaticBindings();
   for (const e of G.emps){
-    if (e.dead || e.wild) continue;
+    if (e.dead || e.wild || e.ai!==true) continue;
     for (const o of G.emps){
       if (o.dead || o.wild || o.id === e.id) continue;
       if (!e.contact[o.id]) continue;
@@ -5968,7 +5988,7 @@ function applyUnity(){
       if (!b || b.dead || b.wild) continue;
       /* Savaşları dondur */
       if (a.war[b.id] && typeof canPeace === 'function' && canPeace(a, b)){
-        if (typeof makePeace === 'function' && makePeace(a, b)) barisan++;
+        if (typeof makePeace === 'function' && makePeace(a, b,'council-unity',null)) barisan++;
       }
       /* Sınırları karşılıklı aç */
       a.passage = a.passage || {};
@@ -6004,7 +6024,7 @@ function unityTick(){
       const b = G.emps[idB];
       if (!b || b.dead || b.wild) continue;
       if (a.war[b.id] && typeof canPeace === 'function' && canPeace(a, b))
-        makePeace(a, b);
+        makePeace(a, b,'council-unity',null);
       a.passage = a.passage || {};
       a.passage[b.id] = true;
     }
@@ -6628,7 +6648,7 @@ function crisisDiplomacyTick(){
 
       /* 4. AMBARGOLAR GEVŞER — kriz varken ekonomik savaş lüks */
       if (typeof embargoOn === 'function' && embargoOn(e, o.id) && e.embargo &&
-          e.embargo[o.id] && rnd() < .10 + p * .18){
+          e.embargo[o.id] && rnd() < .10 + p * .18 && e.ai===true){
         if (typeof setEmbargo === 'function') setEmbargo(e, o, false);
         if (o.id === 0 || e.id === 0)
           say((e.id===0?'Ambargonu kaldırdın':e.name + ' ambargoyu kaldırdı') +
@@ -6651,13 +6671,14 @@ function crisisDiplomacyTick(){
       if (o.dead || o.wild || o.crisisSide || !e.war[o.id]) continue;
       if (rnd() > .10 + p * .22) continue;
       if (typeof canPeace === 'function' && canPeace(e, o)){
-        if (makePeace(e, o) && (e.id === 0 || o.id === 0))
+        if (makePeace(e, o,'crisis',e.id) && (e.id === 0 || o.id === 0))
           say('Kriz yüzünden barış — ortak düşman kapıda', 'win');
       } else {
         /* Kilit varsa bile kriz baskısı savaşı durdurur */
         e.war[o.id] = false; o.war[e.id] = false;
         e.peaceAt = e.peaceAt || {}; o.peaceAt = o.peaceAt || {};
         e.peaceAt[o.id] = G.day; o.peaceAt[e.id] = G.day;
+        warLedgerSync('crisis',e.id);
         if (e.id === 0 || o.id === 0)
           say('Ateşkes — galaksi ortak düşmana döndü', 'win');
       }
@@ -8238,7 +8259,7 @@ function rebelTick(){
           if (a >= b) continue;
           const ea = G.emps[a], eb = G.emps[b];
           if (!ea || !eb || ea.dead || eb.dead) continue;
-          if (ea.war[b] && typeof makePeace === 'function') makePeace(ea, eb);
+          if (ea.war[b] && typeof makePeace === 'function') makePeace(ea, eb,'rebel-coalition',null);
           ea.rel[b] = clamp((ea.rel[b] || 0) + 30, -100, 100);
           eb.rel[a] = clamp((eb.rel[a] || 0) + 30, -100, 100);
         }
@@ -8342,11 +8363,11 @@ function rebelVictoryCheck(){
   for (const id of ra.members){
     const e = G.emps[id];
     if (!e || e.dead) continue;
-    if (e.war[zalim.id] && typeof makePeace === 'function') makePeace(e, zalim);
+    if (e.war[zalim.id] && typeof makePeace === 'function') makePeace(e, zalim,'rebellion-victory',null);
     e.rel[zalim.id] = clamp((e.rel[zalim.id] || 0) + 25, -100, 100);
   }
   if (G.p && !G.p.dead && G.p.war[zalim.id] && typeof makePeace === 'function')
-    makePeace(G.p, zalim);
+    makePeace(G.p, zalim,'rebellion-victory',null);
 
   const alanE = (alan >= 0) ? G.emps[alan] : null;
   const uyeAldi = alanE && (ra.members.indexOf(alan) >= 0 || alan === 0);
@@ -8805,7 +8826,7 @@ function statusQuoPeace(a, b){
     ' fiili sınırları tanıdı' + (n ? ' (' + n + ' sistem el değiştirdi)' : '');
   if (a.id === 0 || b.id === 0) say('🕊 ' + mesaj, 'win');
   else say(mesaj);
-  warLedgerSync('status-quo');
+  warLedgerSync('status-quo',a.id);
   recordNews({category:'peace',empires:[a.id,b.id],key:'status-quo:'+a.id+':'+b.id+':'+G.day,title:'Statüko barışı',text:a.name+' ile '+b.name+' fiili sınırları tanıdı',important:true});
   return {ok:true, devredilen:n};
 }

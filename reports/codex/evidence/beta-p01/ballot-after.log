@@ -1,0 +1,32 @@
+FAIL SP aynı insanın oyu iki kez listeye yazılamaz evalmachine.<anonymous>:1
+G.council.vote.yes.filter(x=>x===G.p.id).length
+               ^
+
+TypeError: Cannot read properties of null (reading 'yes')
+    at evalmachine.<anonymous>:1:16
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/Star/tests/helpers/runtime.js:112:25)
+    at /workspace/Star/tests/beta_p01_ballot_test.js:5:133
+    at test (/workspace/Star/tests/beta_p01_ballot_test.js:3:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_p01_ballot_test.js:5:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+PASS eski Konsey düğmesi aynı kanunun yeni oylamasına oy veremez
+FAIL sonuçlanmış oylamada düğme pasif; ikinci dokunma panel değiştirmez evalmachine.<anonymous>:1
+G.council.vote.no.length
+               ^
+
+TypeError: Cannot read properties of null (reading 'no')
+    at evalmachine.<anonymous>:1:16
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/Star/tests/helpers/runtime.js:112:25)
+    at /workspace/Star/tests/beta_p01_ballot_test.js:7:243
+    at test (/workspace/Star/tests/beta_p01_ballot_test.js:3:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_p01_ballot_test.js:7:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+GEÇEN: 1 KALAN: 2

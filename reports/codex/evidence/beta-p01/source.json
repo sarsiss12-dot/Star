@@ -1,0 +1,21 @@
+{
+  "repository": "sarsiss12-dot/Star",
+  "verifiedMainHead": "4296ad2d43fedce6264020b3761f50f1839fd836",
+  "mainBuild": "96h10",
+  "mainMpPhase": "MP.4",
+  "verifiedDevelopmentBase": "d307864edbc2ab9ca4347e5d065640e150279411",
+  "baseBranch": "codex/stars-beta0-stability",
+  "branch": "codex/stars-beta-p01-critical",
+  "mainIsAncestorOfBase": true,
+  "baseReason": "Keep subsequent multiplayer mirror/authority, UI Scale, Save8 safety and PERF fixes; only the five selected task rows change. Main was not assumed current.",
+  "openPrQuery": "GitHub GraphQL Forbidden; current open PR list could not be verified",
+  "trackingIssue": "https://github.com/sarsiss12-dot/Star/issues/33",
+  "boardTasks": 39,
+  "selectedTaskIds": [
+    1,
+    34,
+    3,
+    4,
+    21
+  ]
+}

@@ -6,7 +6,7 @@
    hedefe yapılmaz; daimi hükümdarlık insan üye varken talep edilemez; entrikalar aktörün kendi devletinde; uzak insan yokken Save8/RNG aynı. */
 const fs=require('fs'),path=require('path'),crypto=require('crypto'),assert=require('assert/strict');
 const {runtime}=require('./helpers/runtime'),{harness}=require('./helpers/95e-fixture');
-const {test,end}=harness(),root=path.resolve(__dirname,'..');
+const {test,end}=harness(),root=process.env.STARS_CONTROL_ROOT||path.resolve(__dirname,'..');
 const CORE=fs.readFileSync(path.join(root,'research/mp0/mp-core.js'),'utf8'),MIR=fs.readFileSync(path.join(root,'research/mp6/mirror.js'),'utf8');
 const STEP='function step(days){for(let i=0;i<days*2;i++){const b=Math.floor(G.day/30);G.day+=.5;dailyTick(.5);structTick(.5);colonyBuildTick(.5);autoExploreTick();if(Math.floor(G.day/30)>b){monthTick();if(typeof MP!=="undefined"&&MP.observeHumans)MP.observeHumans();}}}';
 const A=1,B=3,CONN={[A]:'cA',[B]:'cB'};
@@ -32,7 +32,7 @@ function cmd(h,who,c){const conn=CONN[who],n=h.sb.__out.length,s=h.run(`seq[${JS
   h.run(`MP.onMessage(${JSON.stringify(conn)},${JSON.stringify(JSON.stringify({v:1,type:'cmd',seq:s,cid:'m73'+conn+String(s).padStart(5,'0'),cmd:c}))})`);
   return h.sb.__out.slice(n).filter(([cc])=>cc===conn).map(([,t])=>JSON.parse(t)).find(m=>m.type==='result');}
 const code=r=>r.status==='ok'?'ok':r.code;
-const tok=h=>J(h,`G.council.vote.key+':'+(G.council.vote.target===null||G.council.vote.target===undefined?'':G.council.vote.target)`);
+const tok=h=>J(h,`typeof councilVoteToken==='function'?councilVoteToken(G.council.vote):G.council.vote.key+':'+(G.council.vote.target??'')`);
 function lastView(h,who){const conn=CONN[who];let v=null,base=null;for(const [c,t] of h.sb.__out){if(c!==conn)continue;const m=JSON.parse(t);
   if(m.type==='snapshot'){v=JSON.parse(JSON.stringify(m.view));base=m.rev;}else if(m.type==='delta'&&v&&m.base===base){const o=m.ops||{};
     for(const [s,u] of Object.entries(o.up||{}))Object.assign(v[s],u);for(const [s,r] of Object.entries(o.rm||{}))for(const k of r)delete v[s][k];for(const [s,x] of Object.entries(o.set||{}))v[s]=x;base=m.rev;}}return v;}
@@ -131,5 +131,12 @@ test('yutma: Yıldız Yiyen devlet kendi yörüngesindeki kolonisiz gezegeni tü
   assert.equal(J(h,`G.sys[${t.sys}].planets.find(p=>p.i===${t.planet}).devoured`),true);assert(J(h,`G.emps[${A}].res.min`)>t.min,'gain to the actor');
   const s1=h.run('serialize()'),r2=cmd(h,A,{kind:'devour',sys:t.sys,planet:t.planet});assert.equal(r2.code,'rules:engine',JSON.stringify(r2));assert.equal(h.run('serialize()'),s1,'no second destruction');
   assert.equal(code(cmd(h,B,{kind:'devour',sys:t.sys,planet:t.planet})),code(cmd(h,B,{kind:'devour',sys:t.sys,planet:t.planet})));   // başka devlet de aynı ret (tekrar dokunma dahil)
+});
+test('BETA-P0.1: host çift EVET insan oyunu iki kez saymaz',()=>{
+  const h=world();h.run("UI.openCouncil();UI.act('cncYes');UI.act('cncYes')");assert.equal(J(h,'G.council.vote.yes.filter(id=>id===0).length'),1);
+});
+test('BETA-P0.1: aynı yasa ve hedefin yeni oylaması eski belirteci reddeder',()=>{
+  const h=world(),old=tok(h);h.run('G.day+=30;G.council.vote={...G.council.vote,opened:G.day,yes:[],no:[],done:false,age:0}');
+  assert.equal(code(cmd(h,A,{kind:'councilVote',token:old,yes:true})),'rules:stale');assert(!J(h,'G.council.vote.yes').includes(A));
 });
 end();

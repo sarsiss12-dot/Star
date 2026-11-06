@@ -1,15 +1,12 @@
 # Son Codex raporu
 
-- Son faz: **BETA.0 — multiplayer kayıt güvenliği ve beta açık işler denetimi**. Yerel hedefli kabul PASS; genel beta yayın onayı yok.
-- [Ana rapor](reports/codex/BETA0-SONUC.md) · [Açık işler](reports/codex/BETA-ACIK-ISLER.md) · [LOAD.0 planı](reports/codex/LOAD0-PLAN.md) · [P2 planları](reports/codex/BETA0-P2-PLANLARI.md) · [Manuel cihaz planı](reports/codex/MP89-MANUEL-BETA-PLANI.md).
-- Dal `codex/stars-beta0-stability`; PR tabanı `codex/stars-mp89-pc-ui-stability`.
-- Uzak başlangıç HEAD `74a57bc0eeac0f2b4db9106b247fe26c1d4eb865`. Doğrulanmış kod teslimi: `5865fd078f2c28fc26578e6de358343043cd4242` — GitHub uzak dalında doğrulandı. Son rapor commit SHA'sı sohbet tesliminde/GitHub geçmişinde.
-- **Çözülen P0:** aynı duvar saatiyle MP4Save iki başarılı yazmada ilk kaydı eziyordu. Yerel sıra ve atomik add, eski satır uyumu; aynı anda iki sekme yazarsa ikinci işlem açık hata verebilir, sessiz üzerine yazma olmaz.
-- **Yeni PASS:** depo7/0; Save8 sınır19/0; MP4 core14/0; dolu R0–R4+misafir ölçek6/0; MP73 8/0; altı çözünürlük UI12/0 (3440/960 CPU4×). Oyun19 dosya/manifest ve dört kritik MP dosyası tabanla aynı.
-- **FAIL korunur:** düzeltmesiz depo0/1; ilk geniş depo6/1 Playwright context kurulumu, düzeltilmiş test7/0; geçmiş R3/960/3440/launch hataları silinmedi. Son menü PASS'leri kesin kök neden çözümü değildir.
-- **Tekrar kullanılan eski kanıtlar:** MP89 N9/0, MP74 7/0, MP75 6/0, PERF1 4/0, PERF2 5/0, MP86 piksel. Bu fazda yeni koşuları NOT RUN.
-- **NOT RUN:** Render, gerçek LAN/Wi-Fi, fiziksel Android/PC insan kabulü, gerçek Ctrl± zoom kabulü. Headless tuş denemesi zoom üretmedi. Deploy/restart/izin/environment değişikliği yok.
-- Oyun96h10p6 / PWA stars-v96h10p6 / MP.8.9b1; Save8v8/protokol1/paket4 aynı. Yeni oyun ZIP'i yok. Mevcut ZIP SHA256 `9f0bf5f11913c277ca23274c7a84544fd15ecee3edffd3e8ab56ca149ff814f9`, CRC32 `ee942090`,776457 bayt doğrulandı.
-- #5/#8 AÇIK/P2, #6/#7 KISMEN; issue kapatılmadı. MP çapraz-build uyumu ve tek oyunculu çoklu kayıt ekranı tamamlanmış değil. Ani host çöküşünde kaydedilmemiş ilerleme garanti edilmez.
-- PR: **BLOCKED — tek PR denemesi GitHub GraphQL API Forbidden ile reddedildi; PR oluşturulmadı.** [Doğru tabanla karşılaştır/PR oluştur](https://github.com/sarsiss12-dot/Star/compare/codex/stars-mp89-pc-ui-stability...codex/stars-beta0-stability?expand=1). [Hata kaydı](reports/codex/evidence/beta0/pr-create.log). Main/merge/rebase/force-push yok.
-- Sonraki tek faz: **BETA.1 aralıklı girişin hata-anı kanıtı ve kabul kapısı**; kapı kapanınca LOAD.0.
+- Faz **BETA-P0.1 — beş kritik oyun görevi**, dal `codex/stars-beta-p01-critical`; yerel hedefli düzeltmeler teslim, genel beta yayın onayı yok.
+- [Sonuç raporu](reports/codex/BETA-P01-SONUC.md) · [#33 durum önerileri](reports/codex/BETA-P01-GOREV-DURUMLARI.md) · [İki cihaz kabul planı](reports/codex/BETA-P01-KABUL-PLANI.md).
+- Main doğrulaması `4296ad2d43fedce6264020b3761f50f1839fd836` (MP4); çalışma başlangıcı BETA0 `d307864edbc2ab9ca4347e5d065640e150279411`. Önceki MP/UI/Save8 kazanımlarını korumak için devam dalı taban alındı. PR tabanı `codex/stars-beta0-stability`.
+- Kod teslimi TESLIM_HEAD_BEKLENIYOR; nihai rapor commit SHA'sı sohbet/GitHub geçmişinde.
+- #1 eski panel sahipliği kökü kanıtlandı; SP3/0 ve iki insan MP2/0, son SP tekrar3/0 PASS. #34 sabit savaş kimliği/native4/0/ayna3/0/gerçek dokunma1/0; mevcut olmayan tarihsel güç/cephe verisi üretilmedi. #3 çift oy/eski kimlik kökleri; çekirdek13/0, iki insan tek dokunma/bekleme/ACK/kopma PASS. #4 bitiş nedeni ve #21 insan ambargo sahipliği5/0+5/0 PASS.
+- Yeni regresyon PASS: N9/0, dolu R0–R4+misafir UI6/0, MP75 6/0, eski Save8 sınır19/0, p6 MP paket/legacy oy3/0, MP62 13/0, MP64 news4/0, MP4 core14/0, PERF1 4/0, PERF2 5/0, MP86 cache3/0, eski savaş UI34/0.
+- FAIL'ler korunur: tam MP73 4/4 (ikinci oda KATIL timeout ve bağımlı B2–B4); özel iki insan kritik koşusu2/1 (A1 mp6Conn timeout, iki hedef vaka PASS); ilk haber fikstürü ve iki tanı düzenek hatası. Bu testler kesin çözülmüş sayılmadı. Orijinal Playwright hataları yeni yardımcıyla kaydedilir.
+- Oyun96h10p7 / PWA stars-v96h10p7 / MP8.9b2 / Save8v8 / paket4. Önceki p6 paket4 için dar uyumluluk; eski kayıt silinmez. Yeni opened alanı isteğe bağlıdır; tüm eski/hatalı dünya ile bayt eşitliği iddiası yok, RNG/AI strateji kodu değişmedi.
+- Deterministik ZIP SHA256 `1bfa5fddbaacd0e281796f99292c6d0ddd78962f7cd3943a9b1ea79efa3a7673`, CRC32 `44c4a49f`,779126 bayt; manifest/CRC/iki üretim PASS.
+- Render/fiziksel Android/gerçek LAN NOT RUN. Main/deploy/restart/rebase/force-push yok. #33 yazma Forbidden; hiçbir görev TAMAMLANDI yapılmadı. PR: TESLIM_PR_BEKLENIYOR.

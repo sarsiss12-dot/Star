@@ -1,0 +1,58 @@
+[
+  {
+    "test": "faz94d1_war_visibility_test.js",
+    "status": 1,
+    "summary": [
+      "GEÇEN: 32 KALAN: 2"
+    ]
+  },
+  {
+    "test": "mp62_core_test.js",
+    "status": 0,
+    "summary": [
+      "GEÇEN: 13 KALAN: 0"
+    ]
+  },
+  {
+    "test": "mp64_news_test.js",
+    "status": 0,
+    "summary": [
+      "GEÇEN: 4 KALAN: 0"
+    ]
+  },
+  {
+    "test": "mp73_council_test.js",
+    "status": 0,
+    "summary": [
+      "GEÇEN: 13 KALAN: 0"
+    ]
+  },
+  {
+    "test": "mp4_core_test.js",
+    "status": 0,
+    "summary": [
+      "GEÇEN: 14 KALAN: 0"
+    ]
+  },
+  {
+    "test": "perf1_equivalence_test.js",
+    "status": 0,
+    "summary": [
+      "GEÇEN: 4 KALAN: 0"
+    ]
+  },
+  {
+    "test": "perf2_equivalence_test.js",
+    "status": 0,
+    "summary": [
+      "GEÇEN: 5 KALAN: 0"
+    ]
+  },
+  {
+    "test": "mp86_nebula_cache_test.js",
+    "status": 0,
+    "summary": [
+      "GEÇEN: 3 KALAN: 0"
+    ]
+  }
+]

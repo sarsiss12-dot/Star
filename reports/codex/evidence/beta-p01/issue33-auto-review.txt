@@ -1,0 +1,1 @@
+Otomatik onay denetimi #33 gövdesinin tamamını HTML’den çıkarılmış kopyayla değiştirmeyi reddetti: ortak issue metninin bağımsız doğrulanmadan üzerine yazılması veri kaybı riski taşıyor. Reddedilen işlem çalıştırılmadı ve dolaylı yolla tekrarlanmadı. Daha güvenli ek durum yorumu denendi; GitHub GraphQL Forbidden ile engellendi. GitHub satırları güncellenmiş sayılmadı.

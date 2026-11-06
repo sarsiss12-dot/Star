@@ -104,7 +104,7 @@ function validatePackage(input,o={}){
   if(!onlyKeys(pkg,KEYS)||KEYS.some(k=>!has(pkg,k)))return fail('fields');
   if(pkg.format!==PKG_FORMAT)return fail('format');
   if(pkg.mpVersion!==PKG_VERSION)return fail('version');
-  const build=has(o,'build')?o.build:(typeof BUILD_ID==='string'?BUILD_ID:null);if(pkg.build!==build)return fail('build');
+  const build=has(o,'build')?o.build:(typeof BUILD_ID==='string'?BUILD_ID:null);if(pkg.build!==build&&!(build==='96h10p7'&&pkg.build==='96h10p6'))return fail('build'); // BETA-P0.1: explicit v8/package4 compatibility, all remaining checks still mandatory
   if(typeof pkg.save8!=='string')return fail('fields');if(pkg.save8.length>MAX_SAVE8)return fail('too-big');
   if(!Number.isFinite(pkg.createdAt)||typeof pkg.saveId!=='string'||!/^s-[a-f0-9]{16}$/.test(pkg.saveId))return fail('fields');
   const I=pkg.integrity;if(!plain(I)||!onlyKeys(I,['alg','save8','body'])||I.alg!=='SHA-256'||!HEX(I.save8,64)||!HEX(I.body,64))return fail('integrity');
@@ -900,7 +900,7 @@ function createHost(opts){
       locate(e){const c=cncOpen();return c&&c.members.includes(e.id)?{c}:{err:'no-council'};},   // üye olmayana oylama "yok"
       why(e,{c},x){if(!c.vote||c.vote.done)return 'no-vote';if(cncTok(c)!==x.token)return 'stale';if(cncSilent(e))return 'vassal';
         return c.vote.yes.includes(e.id)||c.vote.no.includes(e.id)?'voted':null;},
-      roots:()=>[],apply(e,{c},x){(x.yes?c.vote.yes:c.vote.no).push(e.id);finishCouncilVote();return true;}},   // tek oyunculu cncYes / cncNo ile aynı işlem
+      roots:()=>[],apply(e,{c},x){return castCouncilVote(e,x.yes,x.token);}},   // tek oyunculu cncYes / cncNo ile aynı işlem
     veto:{say:'actor',keys:['kind','law'],check:c=>typeof c.law==='string'&&has(RESOLUTIONS,c.law),locate:()=>({}),why:()=>null,roots:()=>[],apply:(e,at,c)=>guardianVeto(e,c.law)},
     permanent:{say:'actor',keys:['kind'],check:()=>true,locate:()=>({}),why(e){const c=cncOpen();if(c&&c.members.some(id=>id!==e.id&&isHumanActor(G.emps[id])&&!G.emps[id].dead))return {code:'human',detail:[PERM_HUMANS]};
         const q=canClaimPermanent(e);return q.ok?null:{code:'council',detail:[String(q.why||'').slice(0,160)]};},roots:()=>[],
@@ -936,7 +936,7 @@ function createHost(opts){
      devletiyle yürütür. İnsan oyları: AI vermez (installGuards), oylama bütün insan üyeler oy verince (ya da motorun 24 ay sınırında) kapanır. ═══ */
   const cncOpen=()=>typeof councilExists==='function'&&councilExists()?G.council:null;
   const cncSilent=e=>typeof isVassal==='function'&&isVassal(e)&&G.council.members.includes(e.overlord);   // motor: vasal senyörü adına susar
-  const cncTok=c=>c.vote.key+':'+(c.vote.target===null||c.vote.target===undefined?'':c.vote.target);
+  const cncTok=c=>councilVoteToken(c.vote);
   const empT=(e,id)=>{const o=G.emps[id];return o&&o!==e&&!o.dead&&(e.contact[o.id]||(cncOpen()&&G.council.members.includes(o.id)))?o:null;};
   const HUMAN_VOTE='İnsan oyuncunun konsey oyunu kendisi verir; rüşvet / şantaj çok oyunculuda yalnız AI üyeye yapılır.';
   const PERM_HUMANS='Daimi hükümdarlık oylamasında üyelerin oyu motorda zarla belirlenir; başka insan üye varken çok oyunculuda talep edilemez.';

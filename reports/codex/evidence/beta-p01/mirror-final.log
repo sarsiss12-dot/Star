@@ -1,0 +1,4 @@
+PASS misafir yalnız kamu savaş kimliği/durumunu alır; host katkı ve filo verisi aktarılmaz
+PASS eski savaş biter ve aynı çift yeniden savaşırsa eski haber aynada kapalı kalır
+PASS kamu haber eki oyun RNG tüketmez
+GEÇEN: 3 KALAN: 0

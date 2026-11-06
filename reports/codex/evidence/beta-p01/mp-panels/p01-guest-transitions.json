@@ -1,0 +1,72 @@
+[
+  {
+    "action": "diploPane",
+    "x": null,
+    "beforeHead": "DİPLOMASİ\n      ✕",
+    "beforeKey": "diplo:states:all",
+    "afterHead": "DİPLOMASİ\n      ✕",
+    "afterKey": "diplo:states:all",
+    "stolen": false,
+    "modalUnchanged": true
+  },
+  {
+    "action": "globalPane",
+    "x": "bilim",
+    "beforeHead": "✦ BİLİM✕",
+    "beforeKey": "science",
+    "afterHead": "✦ BİLİM✕",
+    "afterKey": "science",
+    "stolen": false,
+    "modalUnchanged": true
+  },
+  {
+    "action": "globalPane",
+    "x": "imp",
+    "beforeHead": "👑 DEVLET\n        ✕",
+    "beforeKey": "global:imp",
+    "afterHead": "👑 DEVLET\n        ✕",
+    "afterKey": "global:imp",
+    "stolen": false,
+    "modalUnchanged": true
+  },
+  {
+    "action": "globalPane",
+    "x": "ekonomi",
+    "beforeHead": "📊 EKONOMİ MERKEZİ✕",
+    "beforeKey": "economy",
+    "afterHead": "📊 EKONOMİ MERKEZİ✕",
+    "afterKey": "economy",
+    "stolen": false,
+    "modalUnchanged": true
+  },
+  {
+    "action": "fedPane",
+    "x": null,
+    "beforeHead": "🏛 FEDERASYON\n        ✕",
+    "beforeKey": "federation:general",
+    "afterHead": "🏛 FEDERASYON\n        ✕",
+    "afterKey": "federation:general",
+    "stolen": false,
+    "modalUnchanged": true
+  },
+  {
+    "action": "marketPane",
+    "x": null,
+    "beforeHead": "💱 BORSA KAPALI\n          ✕",
+    "beforeKey": "market",
+    "afterHead": "💱 BORSA KAPALI\n          ✕",
+    "afterKey": "market",
+    "stolen": false,
+    "modalUnchanged": true
+  },
+  {
+    "action": "tab",
+    "x": "intel",
+    "beforeHead": "🌐 GALAKTİK KONSEY\n        ✕",
+    "beforeKey": "council",
+    "afterHead": "🌐 GALAKTİK KONSEY\n        ✕",
+    "afterKey": "council",
+    "stolen": false,
+    "modalUnchanged": true
+  }
+]

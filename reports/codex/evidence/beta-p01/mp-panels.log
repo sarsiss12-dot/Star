@@ -1,0 +1,10 @@
+PASS A1 rehber 1–8: oda, iki farklı devlet, hazır, başlat; iki ekranda galaksi; sürüm işareti lobi / başlangıç / MP çubuğunda ve /mp/version oyun build'iyle aynı
+FAIL P01 #1 host ve misafir panel sahipliği / ayna yenilemesi
+page.waitForFunction: Timeout 30000ms exceeded.
+    at wait (/workspace/Star/tests/browser-mp73.cjs:17:40)
+    at /workspace/Star/tests/browser-mp73.cjs:118:112
+    at async module.exports (/workspace/Star/tests/helpers/beta-p01-panels.cjs:15:14)
+    at async /workspace/Star/tests/browser-mp73.cjs:117:22
+    at async test (/workspace/Star/tests/browser-mp73.cjs:13:7)
+    at async /workspace/Star/tests/browser-mp73.cjs:113:40
+GEÇEN: 1 KALAN: 1

@@ -124,7 +124,12 @@ function build(meId,o={}){
   const EH=G.economyHistory,row=EH&&EH.empires&&EH.empires[meId];
   const economyHistory=row?{v:EH.v,started:EH.started,lastClosed:EH.lastClosed,next:EH.next,empires:{0:{...J(row),events:J(row.events.slice(-EH_EVENTS))}}}:undefined;   // son EH_EVENTS olay (boyut)
   /* MP.6.4: oyuncuya özel haberler (host'ta o oyuncunun bakışıyla süzülmüş; host'un haber listesi girmez) — motorun Save8 haber biçimi */
-  const nw=Array.isArray(o.news)?o.news.map(r=>({...J(r),empires:(r.empires||[]).map(x=>({id:pi(x.id),name:x.name}))})):[];
+  const nw=Array.isArray(o.news)?o.news.map(r=>{
+    const row={...J(r),empires:(r.empires||[]).map(x=>({id:pi(x.id),name:x.name}))};
+    const id=+(/^war-front:(\d+)$/.exec(r.key||'')?.[1]||0),f=id&&(G.warLedger?.fronts||[]).find(x=>x.id===id);
+    if(f&&f.sides.every(contacted)&&(f.sides.includes(meId)||f.sides.some(id=>intelOf(me,id)>=3)))row.warStatus={id:f.id,sides:f.sides.map(pi),opened:f.legacy?null:f.opened,ended:f.ended,legacy:f.legacy,reason:String(f.endReason||'').split('|')[0]};
+    return row;
+  }):[];
   const news={v:1,next:nw.reduce((n,r)=>Math.max(n,r.id+1),1),hiddenNext:1,records:nw,hidden:[]};
   /* MP.7.3: Galaktik Konsey — kamu kurumu (tek oyunculuda oyuncu üyeliği ve oylamayı görür); kimlikler π ile. Kampanya rüşvetinin yönü /
      gücü ve şantajın yönü gitmez (yalnız "bu üyeye teklif yapıldı" kilidi, motorun kendi düğme kuralı için); temassız devletin konuşması gitmez. */
@@ -133,7 +138,7 @@ function build(meId,o={}){
       treasury:cc.treasury||0,president:piN(cc.president),...(cc.permanent!==undefined&&cc.permanent!==null?{permanent:piN(cc.permanent)}:{}),terms:remapKeys(cc.terms||{}),
       termAge:cc.termAge|0,voteIn:cc.voteIn,dead:false,byConvention:!!cc.byConvention,firstLaw:cc.firstLaw||null,pariahs:remapKeys(cc.pariahs||{}),
       agenda:(cc.agenda||[]).map(a=>({key:a.key,backers:m(a.backers),age:a.age|0,target:piN(a.target),by:piN(a.by)})),
-      vote:cv?{key:cv.key,target:piN(cv.target),yes:m(cv.yes),no:m(cv.no),speeches:(cv.speeches||[]).filter(x=>contacted(x.id)).map(x=>({...J(x),id:piN(x.id)})),done:!!cv.done,age:cv.age|0,sponsor:piN(cv.sponsor)}:null,
+      vote:cv?{key:cv.key,...(Number.isFinite(cv.opened)?{opened:cv.opened}:{}),target:piN(cv.target),yes:m(cv.yes),no:m(cv.no),speeches:(cv.speeches||[]).filter(x=>contacted(x.id)).map(x=>({...J(x),id:piN(x.id)})),done:!!cv.done,age:cv.age|0,sponsor:piN(cv.sponsor)}:null,
       campaign:cp?{key:cp.key,sponsor:piN(cp.sponsor),left:cp.left,bribed:Object.fromEntries(Object.keys(cp.bribed||{}).map(k=>[pi(+k),1])),
         blackmailed:(cp.blackmailed||[]).map(b=>({id:piN(b&&b.id!==undefined?b.id:b),yon:0})),agenda:null,target:piN(cp.target),...(cp.hedefId!==undefined?{hedefId:piN(cp.hedefId)}:{}),byPlayer:cp.sponsor===meId}:null};})();
   return {v:8,cfg,day:G.day,year:G.year,month:G.month,seed:o.cosmeticSeed|0,rs:1,log:J(o.log||[]),news,...(economyHistory?{economyHistory}:{}),W:G.W,H:G.H,

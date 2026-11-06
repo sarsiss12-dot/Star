@@ -9,7 +9,7 @@ const fs=require('fs'),path=require('path'),assert=require('assert/strict'),{exe
 const root=path.resolve(__dirname,'..'),out=path.resolve(process.env.STARS_OUTPUT||path.join(root,'../evidence/mp73'));fs.mkdirSync(out,{recursive:true});
 const relayMod=require('../research/mp1/server/relay.js'),{selfSigned,startProxy}=require('./helpers/mp11-tls-proxy.js');
 const BUILD=JSON.parse(fs.readFileSync(path.join(root,'RELEASE-MANIFEST.json'),'utf8')).build;const results=[],errors=[],metrics={};
-async function test(name,fn){const t0=Date.now();
+async function test(name,fn){if(process.env.MP73_ONLY&&!new RegExp(process.env.MP73_ONLY).test(name))return;const t0=Date.now();
   try{await fn();results.push({name,status:'PASS',ms:Date.now()-t0});console.log('PASS '+name);}
   catch(e){results.push({name,status:'FAIL',error:String(e&&e.stack||e).slice(0,1800)});console.log('FAIL '+name+'\n'+(e&&e.stack||e));}}
 const PHONE=(w,h)=>({viewport:{width:w,height:h},isMobile:true,hasTouch:true,deviceScaleFactor:2,serviceWorkers:'allow'});
@@ -18,10 +18,9 @@ const wait=(p,fn,arg,timeout=30000)=>p.waitForFunction(fn,arg,{timeout,polling:1
 const shot=(p,n)=>p.screenshot({path:path.join(out,n+'.png')}).catch(()=>{});
 let tapFail=0;
 const tap=async(p,sel)=>{const l=p.locator(sel).first();await l.scrollIntoViewIfNeeded().catch(()=>{});try{await l.tap({timeout:8000});}
-  catch(e){const n='tapfail-'+(++tapFail);await shot(p,n);throw Error('tap '+sel+' ['+n+'] '+JSON.stringify(await p.evaluate(sel=>{const m=document.getElementById('modal'),sh=document.getElementById('mp1Sheet'),el=document.querySelector(sel),r=el&&el.getBoundingClientRect();
-    const top=r&&document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);
-    return {who:G.p.name,modal:m&&!m.classList.contains('hidden')?m.textContent.slice(0,160):'',sheet:sh?sh.textContent.slice(0,200):'',diplo:document.getElementById('diploPane').classList.contains('show'),
-      box:r&&[r.x,r.y,r.width,r.height],top:top&&(top.id||top.className||top.tagName),vw:[innerWidth,innerHeight]};},sel)));}};
+  catch(e){const n='tapfail-'+(++tapFail);fs.writeFileSync(path.join(out,n+'-playwright-error.json'),JSON.stringify({selector:sel,name:e.name,message:e.message,stack:e.stack},null,2));await shot(p,n);
+    const d=await p.evaluate(sel=>{const el=document.querySelector(sel),r=el?.getBoundingClientRect(),top=r&&document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);return {selector:sel,url:location.pathname,who:G.p?.name,box:r&&[r.x,r.y,r.width,r.height],connected:el?.isConnected,top:top&&(top.id||top.className||top.tagName),viewport:[innerWidth,innerHeight],scroll:[scrollX,scrollY],focus:document.activeElement?.id,modal:document.getElementById('modal')?.className};},sel).catch(x=>({diagnosticError:x.message}));
+    fs.writeFileSync(path.join(out,n+'-target.json'),JSON.stringify(d,null,2));throw e;}};
 async function design(p,o){
   /* kurulum ekranı dikeyde doldurulur (MP.7 testiyle aynı); oyun yatay görünümde oynanır */
   const vp=p.viewportSize();if(vp.width>vp.height)await p.setViewportSize({width:vp.height,height:vp.width});
@@ -99,17 +98,27 @@ let relay,px,base,tls,bH,bB,bC;
     await room(H,2,[[Bp,'Bora',{name:'Saf Akıl Ağı',mizac:'teknokrasi',origin:'standart',ethics:['mat:2','mil:-1'],civics:['sinyal_avci']}]]);
     for(const p of [H,Bp])assert.equal(await p.evaluate(()=>!!document.getElementById('map')&&!document.getElementById('game').classList.contains('hidden')),true);
     const v=await Bp.evaluate(async()=>{const r=await fetch('/mp/version',{cache:'no-store'});return {s:r.status,j:await r.json(),b:BUILD_ID,line:MP1View.verLine(),chip:(document.getElementById('mp1Mini')||{}).title||''};});
-    metrics.version=v.j;assert.equal(v.s,200);assert.match(v.j.mp,/^MP\.8\.9b1$/);assert.equal(v.j.build,v.b);assert.match(v.line,new RegExp('MP\\.8\\.9b1 · oyun '+BUILD+'$'));   /* PERF.2: build manifestten (sabit liste yerine) */assert.match(v.chip,/MP\.8\.9b1/);
+    metrics.version=v.j;assert.equal(v.s,200);assert.match(v.j.mp,/^MP\.8\.9b2$/);assert.equal(v.j.build,v.b);assert.match(v.line,new RegExp('MP\\.8\\.9b2 · oyun '+BUILD+'$'));   /* PERF.2: build manifestten (sabit liste yerine) */assert.match(v.chip,/MP\.8\.9b2/);
     assert.equal(Object.values(v.j.files).every(x=>/^[0-9a-f]{12}$/.test(x)),true);
     await wait(Bp,()=>MP6Stars.S.unsupported&&MP6Stars.S.unsupported.length>0);metrics.unsupported=await Bp.evaluate(()=>MP6Stars.S.unsupported);
     for(const a of ['bill','billPick','billTarget','cncFound','cncJoin','cncLeave','cncNo','cncPane','cncYes','permanent','reform','throneBuild','veto','bribe','blackmail','bmGo','fundSep','panoptRetarget','revolt','revoltConfirm','whisperBlame','whisperGo','whisperMenu','whisperPick','devour','devourConfirm','colFire'])
       assert(!metrics.unsupported.includes(a),a+' still unsupported');
     assert.equal(metrics.unsupported.length,18,JSON.stringify(metrics.unsupported));
     await tap(Bp,'#mp6Conn');await wait(Bp,()=>document.getElementById('mpVer')&&document.getElementById('mpVer').offsetParent);   // telefonda görünür tanı satırı
-    metrics.guestDiag=await Bp.evaluate(()=>document.getElementById('mpVer').textContent);assert.match(metrics.guestDiag,new RegExp('MP\\.8\\.9b1 · oyun '+BUILD+'( · misafir)? · host bağlı .*son hata: ')   /* MP.8: rol + ayna + son komut eklendi */);
+    metrics.guestDiag=await Bp.evaluate(()=>document.getElementById('mpVer').textContent);assert.match(metrics.guestDiag,new RegExp('MP\\.8\\.9b2 · oyun '+BUILD+'( · misafir)? · host bağlı .*son hata: ')   /* MP.8: rol + ayna + son komut eklendi */);
     assert.doesNotMatch(metrics.guestDiag,/tok|key|anahtar/i);await shot(Bp,'a1-guest-diag');await tap(Bp,'#mp6Conn');
-    assert.match(await H.evaluate(()=>{MP1Host.miniOpen=true;try{document.querySelector('[data-g="toggle"]')&&0;}catch{}return MP1View.verLine();}),/MP\.8\.9b1/);
+    assert.match(await H.evaluate(()=>{MP1Host.miniOpen=true;try{document.querySelector('[data-g="toggle"]')&&0;}catch{}return MP1View.verLine();}),/MP\.8\.9b2/);
   });
+  if(process.env.BETA_P01_PANELS==='1')await test('P01 #1 host ve misafir panel sahipliği / ayna yenilemesi',async()=>{
+    await H.evaluate(()=>{MP1Host.host.local({kind:'speed',value:0});G.cfg.council='acik';G.council={name:'P0.1 Test Konseyi',founder:0,members:[0,1],laws:{},targeted:{},treasury:0,president:0,termStart:G.day,terms:{0:1},voteIn:30,vote:null,dead:false};MP1Host.host.publish();});
+    await wait(Bp,()=>!!G.council);
+    metrics.p01Host=await require('./helpers/beta-p01-panels.cjs')(H,out,'p01-host');
+    metrics.p01Guest=await require('./helpers/beta-p01-panels.cjs')(Bp,out,'p01-guest',async()=>{
+      const v=await H.evaluate(()=>{G.council.voteIn-=1;MP1Host.host.publish();return G.council.voteIn});await wait(Bp,v=>MP6Stars.S.mirror?.world?.council?.voteIn===v,v);const held=await Bp.evaluate(()=>!document.getElementById('modal').classList.contains('hidden'));if(!held)await wait(Bp,v=>G.council.voteIn===v,v);
+    });
+  });
+  if(process.env.BETA_P01_VOTES==='1')await test('P03 #3 tek dokunma, bekleyen gerçek ACK, panel koruması ve yeniden bağlantı',async()=>{metrics.p03=await require('./helpers/beta-p01-votes.cjs')(H,Bp);});
+  if(process.env.BETA_P01_WAR==='1')await test('P04 #4/#21 iki insan savaş bitişi, güvenli haber aynası ve ambargo',async()=>{metrics.p04=await require('./helpers/beta-p01-war-mp.cjs')(H,Bp);});
   await test('A2 rehber 9–12: misafir filosunu yürütür (gerçek orderMove → host), B → host diplomatik teklif ve host gelen kutusundan kabul eder; zaman iki ekranda ilerler',async()=>{
     const plan=await H.evaluate(()=>{const f=G.fleets.find(x=>x.e===1&&x.ships.length&&x.sys>=0&&!x.mv);return {f:f.id,to:G.sys[f.sys].lanes[0]};});
     await Bp.evaluate(p=>orderMove(G.fleets.find(f=>f.id===p.f),p.to),plan);await wait(H,p=>{const f=G.fleets.find(x=>x.id===p.f);return !!(f.mv||f.path.length);},plan);

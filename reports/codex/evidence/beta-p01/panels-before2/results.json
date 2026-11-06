@@ -1,0 +1,7 @@
+[
+  {
+    "name": "#1 SP panel sahipliği",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: sp diploPane:null became Council\n\ntrue !== false\n\n    at module.exports (/workspace/Star/tests/helpers/beta-p01-panels.cjs:17:34)\n    at async /workspace/Star/tests/browser-beta-p01-panels.cjs:9:13"
+  }
+]

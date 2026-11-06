@@ -1,0 +1,8 @@
+locator.tap: Timeout 8000ms exceeded.
+Call log:
+[2m  - waiting for locator('#outEmp [data-a="globalPane"][data-x="ldr"]').first()[22m
+
+    at open (/workspace/Star/tests/helpers/beta-p01-panels.cjs:9:86)
+    at async module.exports (/workspace/Star/tests/helpers/beta-p01-panels.cjs:13:3)
+    at async /workspace/Star/tests/browser-beta-p01-panels.cjs:9:13
+GEÇEN: 0 KALAN: 1
