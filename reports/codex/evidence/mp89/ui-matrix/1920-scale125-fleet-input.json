@@ -1,0 +1,40 @@
+{
+  "target": {
+    "x": 960,
+    "y": 540,
+    "id": 1,
+    "hit": "map",
+    "expected": 1,
+    "camera": {
+      "x": 4794.65990309025,
+      "y": 4858.316358992229,
+      "z": 0.4
+    }
+  },
+  "events": [
+    {
+      "kind": "pointerdown",
+      "t": 2184.9000000059605,
+      "target": "map",
+      "x": 960,
+      "y": 540,
+      "trusted": true
+    },
+    {
+      "kind": "pointerup",
+      "t": 2186,
+      "target": "map",
+      "x": 960,
+      "y": 540,
+      "trusted": true
+    },
+    {
+      "kind": "click",
+      "t": 2221.5,
+      "target": "map",
+      "x": 960,
+      "y": 540,
+      "trusted": true
+    }
+  ]
+}

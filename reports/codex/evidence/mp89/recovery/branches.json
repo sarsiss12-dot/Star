@@ -1,0 +1,8 @@
+{
+  "base": "codex/stars-mp88-stability",
+  "remote_head": "8ce738b42636cd792a8d552230ca8194a4da053f",
+  "mp89_remote_exists": false,
+  "mp810_remote_exists": false,
+  "local_branch": "codex/stars-mp89-pc-ui-stability",
+  "recovered_worktree": true
+}

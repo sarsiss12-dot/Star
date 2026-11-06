@@ -1,0 +1,6 @@
+[
+  {
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n100 !== 125\n\n    at /workspace/Star/tests/browser-mp89-prefs.cjs:5:947"
+  }
+]

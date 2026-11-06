@@ -26,7 +26,7 @@ const VIEW={H:[844,390],B:[800,360],C:[915,412],X:[844,390]};
 const freePort=()=>new Promise(r=>{const s=net.createServer().listen(0,'127.0.0.1',()=>{const p=s.address().port;s.close(()=>r(p));});});
 const wait=(p,fn,arg,timeout=30000)=>p.waitForFunction(fn,arg,{timeout,polling:100});
 const shot=(p,n)=>p.screenshot({path:path.join(out,n+'.png')}).catch(()=>{});
-const tap=async(p,sel)=>{const l=p.locator(sel).first();await l.scrollIntoViewIfNeeded().catch(()=>{});await l.tap({timeout:10000});};
+const tap=async(p,sel)=>{const l=p.locator(sel).first();await l.scrollIntoViewIfNeeded().catch(()=>{});const end=process.env.MP89_MENU_DIAG==='1'&&sel==='#mp1Btn'?await require('./helpers/mp89-menu-diag.cjs')(p,out):null;let error;try{await l.tap({timeout:10000});}catch(e){error=e;throw e;}finally{if(end)await end(error);}};
 
 /* ---- "ağ": her oyuncu kendi TCP yolundan TLS vekiline gider (MP.5 ile aynı); kes = bütün soketler RST + dinleme kapanır ---- */
 function lane(target){let srv=null,port=0;const pairs=new Set();
@@ -265,14 +265,17 @@ async function campaign(fromMonth,toMonth){let round=Math.floor(fromMonth/CONF.e
     try{const t0=Date.now();await advance(60);metrics.throttle={advance60dMs:Date.now()-t0};const s=await syncCheck('m'+(MONTHS+2)+'-cpu4');metrics.throttle.settle=s;await perfRow('cpu4');}
     finally{for(const c of cdps)await c.send('Emulation.setCPUThrottlingRate',{rate:1}).catch(()=>{});}});
 
-  if(SCEN==='R'){const saved={};
-    await test('R1 60 ay kampanya + bekleyen insan teklifi (C → B), savaş, federasyon/konsey denemeleri; senkron',async()=>{
+  if(SCEN==='R'){const saved={};let resumeVerified=false;
+    await test(`R1 ${MONTHS} ay kampanya + bekleyen insan teklifi (C → B), savaş, federasyon/konsey denemeleri; senkron`,async()=>{
       await campaign(0,MONTHS);const e={B:await pg.B.evaluate(()=>MP1Join.empireId),C:await pg.C.evaluate(()=>MP1Join.empireId)};saved.e=e;
+      if(process.env.MP89_R_STATE==='1')metrics.resume.explicitFixture=await require('./helpers/mp89-resume-fixture.cjs')(pg.H);
       const r=await cmd('C',{kind:'offer',to:e.B,give:[{t:'res',r:'min',v:7}],want:[{t:'res',r:'ene',v:3}]});metrics.resume.pendingOffer=r;
       saved.pending=r.status==='ok'?await pg.H.evaluate(([b,c])=>MP1Host.host.dip.offers.filter(o=>o.status==='pending'&&o.from===c&&o.to===b).map(o=>o.id),[e.B,e.C]):[];
+      assert(saved.pending.length>0,'R requires a pending human offer');
       await syncCheck('m'+MONTHS+'-pre-save');});
     await test('R2 kayıt: OYUNU KAYDET (IndexedDB); Save8/RNG değişmez; misafir cihazında kayıt kimliği; tüm tarayıcı süreçleri + relay süreci kapanır',async()=>{
       saved.state=await pg.H.evaluate(()=>__mp8.state());saved.speed=saved.state.speed;
+      if(process.env.MP89_R_STATE==='1')saved.records=await pg.H.evaluate(()=>{const s=JSON.parse(serialize());return {dip:JSON.parse(JSON.stringify(MP1Host.host.dip)),feds:s.world.feds,warLedger:s.warLedger,relations:s.emps.map(e=>({id:e.id,war:e.war,ally:e.ally,nap:e.nap,pact:e.pact,overlord:e.overlord,vassalType:e.vassalType,vassalContract:e.vassalContract}))};});
       await pg.H.evaluate(()=>MP1Host.mp4.saveNow('manual'));await wait(pg.H,()=>MP1Host.lastSave&&MP1Host.lastSave.ok);
       assert.deepEqual(await pg.H.evaluate(()=>__mp8.state()),saved.state,'saving changes nothing');
       saved.saveId=await pg.H.evaluate(async()=>(await MP4Save.list())[0].saveId);
@@ -293,12 +296,24 @@ async function campaign(fromMonth,toMonth){let round=Math.floor(fromMonth/CONF.e
       for(const n of guestNames()){await wait(pg[n],()=>window.MP6Stars&&MP6Stars.S.started&&!document.getElementById('game').classList.contains('hidden'),undefined,60000);await pg[n].evaluate(CANON);await pg[n].evaluate(GUESTLIB);}
       code=code1;const now=await H.evaluate(()=>__mp8.state());metrics.resume.after=now;metrics.resume.before=saved.state;
       for(const k of ['day','r','offers','wars','feds','council','vassal','humans','speed'])assert.equal(now[k],saved.state[k],'resume keeps '+k);
-      await syncCheck('resume');});
+      if(saved.records){const after=await H.evaluate(()=>{const s=JSON.parse(serialize());return {dip:JSON.parse(JSON.stringify(MP1Host.host.dip)),feds:s.world.feds,warLedger:s.warLedger,relations:s.emps.map(e=>({id:e.id,war:e.war,ally:e.ally,nap:e.nap,pact:e.pact,overlord:e.overlord,vassalType:e.vassalType,vassalContract:e.vassalContract}))};});
+        fs.writeFileSync(path.join(out,'resume-records.json'),JSON.stringify({before:saved.records,after},null,2));assert.deepEqual(after,saved.records,'full offer/federation/war/diplomatic records preserved');metrics.resume.fullRecordsEqual=true;}
+      await syncCheck('resume');resumeVerified=true;});
     await test('R4 devam eden oyun: bekleyen teklif B tarafından tam bir kez kabul edilir; 6 ay daha kampanya + senkron',async()=>{
+      assert(resumeVerified,'R3 must complete before R4 can be accepted');
       if(saved.pending.length){const r=await doAct('B',saved.e.B,{k:'respond',cmd:{kind:'respond',offer:saved.pending[0],action:'accept'}},'resume');assert.equal(r.status,'ok');
         const again=await cmd('B',{kind:'respond',offer:saved.pending[0],action:'accept'});assert.notEqual(again.status,'ok','second accept refused ('+again.code+')');metrics.resume.secondAccept=again.code;}
       else metrics.notes.push('R4: bekleyen teklif yok (C teklifi motor kapısından geçmedi: '+JSON.stringify(metrics.resume.pendingOffer)+')');
       await campaign(MONTHS,MONTHS+6);});}
+
+  if(process.env.MP89_UI==='1')await test('UI89 misafir PC ölçeği, gerçek giriş ve yerel kalıcılık; host ve C değişmez',async()=>{
+    const p=pg.B,old=p.viewportSize();assert(await p.evaluate(()=>window.MP6Stars?.S.started),'guest UI requires completed game setup');await p.setViewportSize({width:1920,height:1080});
+    const baseline=await pg.H.evaluate(()=>({rng:RND_STATE,scale:UI.getUIScale()})),other=await pg.C.evaluate(()=>UI.getUIScale());
+    try{metrics.ui89=await require('./helpers/mp89-scale.cjs')(p,out,'guest1920',async()=>{
+      await p.reload();await wait(p,()=>window.MP6Stars&&MP6Stars.S.started&&!document.getElementById('game').classList.contains('hidden'),undefined,60000);
+    });assert.deepEqual(await pg.H.evaluate(()=>({rng:RND_STATE,scale:UI.getUIScale()})),baseline,'host untouched');assert.deepEqual(await pg.C.evaluate(()=>UI.getUIScale()),other,'other guest untouched');}
+    finally{await p.setViewportSize(old);}
+  });
 
   if(SCEN==='N'){
     const E=async n=>pg[n].evaluate(()=>MP1Join.empireId);

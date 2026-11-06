@@ -328,6 +328,8 @@ const UI = {
       const button = group.querySelector('.grpHead');
       if (!button) continue;
       const r = button.getBoundingClientRect();
+      // MP.8.9: DOM rectangles are screen CSS pixels; fixed flyouts inherit the tools' local zoom.
+      const zoom = this.getUIScale ? this.getUIScale().effective / 100 : 1;
       let top = vy + margin, bottom = vy + vh - margin;
       const bar = $('topbar');
       if (bar){
@@ -336,8 +338,8 @@ const UI = {
           top = Math.max(top, b.bottom + margin);
       }
       const left = Math.max(vx + margin, Math.min(r.right + 6, vx + vw - 56));
-      menu.style.maxWidth = Math.max(1, vx + vw - margin - left) + 'px';
-      const width = menu.offsetWidth;
+      menu.style.maxWidth = Math.max(1, vx + vw - margin - left) / zoom + 'px';
+      const width = menu.offsetWidth * zoom;
       for (const id of ['timepod','seltag']){
         const control = $(id);
         if (!control || control.classList.contains('hidden')) continue;
@@ -346,12 +348,12 @@ const UI = {
             b.left < left + width && b.top > top && b.top < bottom)
           bottom = b.top - margin;
       }
-      menu.style.maxHeight = Math.max(1, bottom - top) + 'px';
-      const height = menu.offsetHeight;
+      menu.style.maxHeight = Math.max(1, bottom - top) / zoom + 'px';
+      const height = menu.offsetHeight * zoom;
       // Center the flyout around its button instead of extending down from it.
-      menu.style.left = left + 'px';
+      menu.style.left = left / zoom + 'px';
       menu.style.top = Math.max(top, Math.min(r.top + r.height/2 - height/2,
-                                             bottom - height)) + 'px';
+                                             bottom - height)) / zoom + 'px';
     }
   },
 
@@ -8376,6 +8378,14 @@ const UI = {
         <button class="ch" data-a="closem"><div class="cht">Kapat</div></button>
        </div>`);
 
+    /* MP.8.9: local presentation controls; hooks remain visible to the guest gate. */
+    if(this.uiScaleControls){
+      this.uiScaleControls();
+      this._hook('uiScaleDown',()=>this.stepUIScale(-1));
+      this._hook('uiScaleUp',()=>this.stepUIScale(1));
+      this._hook('uiScaleReset',()=>this.setUIScale(100));
+    }
+    /* END MP.8.9 SAVE CONTROLS */
     storageDiag().then(d=>{
       const box = $('diagBox');
       if (!box) return;
@@ -9445,3 +9455,48 @@ const TITLE = {
     g.fillRect(cx - R * .35, cy - R * .35 * sy - 20, R * .7, R * .7 * sy + 40);
   }
 };
+
+/* MP.8.9: device-local UI scale. Never touches G, View, Save8 or the mirror. */
+(()=>{
+  const root=document.documentElement;
+  if(!root?.style?.setProperty)return;
+  const values=[80,90,100,110,120,125],key='stars:uiScale';
+  let preferred=100,effective=100,revision=0,writes=Promise.resolve(false);
+  const small=()=>innerWidth<1000||innerHeight<600;
+  const valid=v=>values.includes(Number(v))?Number(v):100;
+  function controls(){
+    const box=document.getElementById('uiScaleControls');if(!box)return;
+    box.querySelector('select').value=String(effective);
+    for(const option of box.querySelectorAll('option'))option.disabled=small()&&Number(option.value)!==100;
+    box.querySelector('[data-a="uiScaleDown"]').disabled=small()||preferred===80;
+    box.querySelector('[data-a="uiScaleUp"]').disabled=small()||preferred===125;
+    box.querySelector('output').textContent='%'+effective;
+    box.querySelector('.scaleHint').textContent=small()?'Bu ekran boyutunda güvenli ölçek %100.':'Harita yakınlaştırması değişmez. Yalnız bu cihazda saklanır.';
+  }
+  function apply(){
+    effective=small()?100:preferred;
+    root.style.setProperty('--ui-scale',effective/100);
+    root.toggleAttribute('data-ui-scaled',effective!==100);
+    controls();UI.positionToolMenus();
+  }
+  UI.getUIScale=()=>({preferred,effective,limited:small()});
+  UI.setUIScale=value=>{
+    preferred=small()?100:valid(value);revision++;apply();
+    const stored=String(preferred);
+    writes=writes.catch(()=>false).then(()=>storeSet(key,stored));
+    return writes;
+  };
+  UI.stepUIScale=delta=>UI.setUIScale(values[Math.max(0,Math.min(values.length-1,values.indexOf(preferred)+delta))]);
+  UI.uiScaleControls=()=>{
+    const modal=document.getElementById('modal'),body=modal?.querySelector('.mbd');if(!body)return;
+    const box=document.createElement('section');box.id='uiScaleControls';box.className='uiScaleControls';
+    box.innerHTML='<label for="uiScaleSelect">Arayüz Ölçeği</label><div class="scaleRow"><button type="button" data-a="uiScaleDown" aria-label="Arayüzü küçült">−</button><output aria-live="polite"></output><button type="button" data-a="uiScaleUp" aria-label="Arayüzü büyüt">+</button><select id="uiScaleSelect" aria-label="Arayüz Ölçeği">'+values.map((v,i)=>'<option value="'+v+'">%'+v+' — '+['Çok küçük','Küçük','Varsayılan','Büyük','Çok büyük','Ekstra büyük'][i]+'</option>').join('')+'</select><button type="button" data-a="uiScaleReset">Varsayılana döndür</button></div><div class="scaleHint"></div>';
+    body.prepend(box);controls();
+    box.querySelector('select').addEventListener('change',e=>UI.setUIScale(e.target.value));
+  };
+  addEventListener('resize',apply);
+  apply();
+  const initial=revision;
+  UI.uiScaleReady=storeGet(key).then(v=>{if(revision===initial){preferred=valid(v);apply();}}).catch(()=>{});
+})();
+/* END MP.8.9 UI SCALE */

@@ -1,0 +1,10 @@
+PASS 1280x720 menu + setup
+PASS 1280x720 game and panels
+FAIL 1280 desktop scales AssertionError [ERR_ASSERTION]: fleet real map hit
+
+3 !== 1
+
+    at scales (/workspace/Star/tests/helpers/mp89-scale.cjs:16:100)
+    at async test (/workspace/Star/tests/browser-mp89-ui.cjs:5:45)
+    at async /workspace/Star/tests/browser-mp89-ui.cjs:18:13
+TOTAL 2/1

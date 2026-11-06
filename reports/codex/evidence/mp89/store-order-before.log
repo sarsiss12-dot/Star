@@ -1,0 +1,12 @@
+AssertionError [ERR_ASSERTION]: latest preference must win with an asynchronous device backend
+
+'125' !== '80'
+
+    at /workspace/Star/tests/browser-mp89-store-order.cjs:5:486 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: '125',
+  expected: '80',
+  operator: 'strictEqual',
+  diff: 'simple'
+}

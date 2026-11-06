@@ -1,0 +1,21 @@
+{
+  "results": [
+    {
+      "name": "960x540 menu + setup",
+      "status": "PASS"
+    },
+    {
+      "name": "960 PC/touch inputs + MP lobby",
+      "status": "PASS",
+      "data": {
+        "wheel": true,
+        "drag": true,
+        "rightClick": true,
+        "keyboardFocusEscape": true,
+        "resize": true,
+        "lobbyDesign": true
+      }
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,529 @@
+{
+ "results": [
+  {
+   "name": "R0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 11; misafir gerçek STARS arayüzünde",
+   "status": "PASS",
+   "ms": 33145
+  },
+  {
+   "name": "R1 60 ay kampanya + bekleyen insan teklifi (C → B), savaş, federasyon/konsey denemeleri; senkron",
+   "status": "PASS",
+   "ms": 25462
+  },
+  {
+   "name": "R2 kayıt: OYUNU KAYDET (IndexedDB); Save8/RNG değişmez; misafir cihazında kayıt kimliği; tüm tarayıcı süreçleri + relay süreci kapanır",
+   "status": "PASS",
+   "ms": 4450
+  },
+  {
+   "name": "R3 devam: yeni host süreci aynı profil → KAYITLI OYUNA DEVAM ET → yeni oda; misafirler yeni kodla gerçek STARS arayüzünden döner → aynı devletler; dünya, teklifler, savaşlar, federasyon, konsey, hız aynı",
+   "status": "FAIL",
+   "error": "browserType.launchPersistentContext: Timeout 180000ms exceeded.\nCall log:\n\u001b[2m  - <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --no-sandbox --disable-gpu --disable-dev-shm-usage --enable-precise-memory-info --ignore-certificate-errors-spki-list=l9+L4vAPybsM4As78G+oo4y6qnx9FAtTjU5vtlC7vg8= --user-data-dir=/tmp/mp8-C-85sy5G --remote-debugging-pipe about:blank\u001b[22m\n\u001b[2m  - <launched> pid=112384\u001b[22m\n\u001b[2m  - [pid=112384][err] [112384:112412:1104/192435.733224:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory\u001b[22m\n\u001b[2m  - [pid=112384][err] [112384:112412:1104/192435.746196:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are \"tcp\" and on UNIX \"unix\")\u001b[22m\n\u001b[2"
+  },
+  {
+   "name": "R4 devam eden oyun: bekleyen teklif B tarafından tam bir kez kabul edilir; 6 ay daha kampanya + senkron",
+   "status": "FAIL",
+   "error": "AssertionError [ERR_ASSERTION]: R3 must complete before R4 can be accepted\n    at /workspace/Star/tests/browser-mp8.cjs:298:7\n    at test (/workspace/Star/tests/browser-mp8.cjs:22:168)\n    at /workspace/Star/tests/browser-mp8.cjs:297:11\n    at runNextTicks (node:internal/process/task_queues:65:5)\n    at process.processImmediate (node:internal/timers:541:9)"
+  }
+ ],
+ "metrics": {
+  "scen": "R",
+  "conf": {
+   "size": "orta",
+   "ai": 5,
+   "seed": 11,
+   "months": 6,
+   "guests": 2,
+   "every": 6
+  },
+  "sync": [
+   {
+    "label": "m0",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     3,
+     3
+    ],
+    "mirrorEq": true,
+    "revMs": 1000,
+    "buildMs": 1193,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m0",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     3,
+     3
+    ],
+    "mirrorEq": true,
+    "revMs": 1527,
+    "buildMs": 2291,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m6",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     21,
+     21
+    ],
+    "mirrorEq": true,
+    "revMs": 773,
+    "buildMs": 809,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m6",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     21,
+     21
+    ],
+    "mirrorEq": true,
+    "revMs": 1142,
+    "buildMs": 1277,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m6-pre-save",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     22,
+     22
+    ],
+    "mirrorEq": true,
+    "revMs": 415,
+    "buildMs": 603,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m6-pre-save",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     21,
+     21
+    ],
+    "mirrorEq": true,
+    "revMs": 877,
+    "buildMs": 1095,
+    "diff": [],
+    "leak": []
+   }
+  ],
+  "cmds": [
+   {
+    "label": "m6",
+    "who": "H",
+    "k": "offerHuman",
+    "status": "ok",
+    "before": 0,
+    "after": 1,
+    "res": true
+   },
+   {
+    "label": "m6",
+    "who": "B",
+    "k": "research",
+    "status": "ok",
+    "code": null,
+    "ms": 58,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m6",
+    "who": "B",
+    "k": "move",
+    "status": "ok",
+    "code": null,
+    "ms": 264,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m6",
+    "who": "B",
+    "k": "build",
+    "status": "ok",
+    "code": null,
+    "ms": 32,
+    "before": 0,
+    "after": 1
+   },
+   {
+    "label": "m6",
+    "who": "B",
+    "k": "ship",
+    "status": "ok",
+    "code": null,
+    "ms": 90,
+    "before": 0,
+    "after": 1
+   },
+   {
+    "label": "m6",
+    "who": "B",
+    "k": "offerHuman",
+    "status": "ok",
+    "code": null,
+    "ms": 27,
+    "before": 0,
+    "after": 1
+   },
+   {
+    "label": "m6",
+    "who": "B",
+    "k": "offerAI",
+    "status": "skip",
+    "why": "quote"
+   },
+   {
+    "label": "m6",
+    "who": "B",
+    "k": "respond",
+    "status": "ok",
+    "code": null,
+    "ms": 61,
+    "before": "pending",
+    "after": "accepted"
+   },
+   {
+    "label": "m6",
+    "who": "B",
+    "k": "fedFound",
+    "status": "skip",
+    "why": "fed"
+   },
+   {
+    "label": "m6",
+    "who": "B",
+    "k": "councilVote",
+    "status": "skip",
+    "why": "no-council"
+   },
+   {
+    "label": "m6",
+    "who": "C",
+    "k": "research",
+    "status": "ok",
+    "code": null,
+    "ms": 48,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m6",
+    "who": "C",
+    "k": "move",
+    "status": "ok",
+    "code": null,
+    "ms": 86,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m6",
+    "who": "C",
+    "k": "build",
+    "status": "ok",
+    "code": null,
+    "ms": 77,
+    "before": 0,
+    "after": 1
+   },
+   {
+    "label": "m6",
+    "who": "C",
+    "k": "ship",
+    "status": "ok",
+    "code": null,
+    "ms": 88,
+    "before": 0,
+    "after": 1
+   },
+   {
+    "label": "m6",
+    "who": "C",
+    "k": "offerHuman",
+    "status": "ok",
+    "code": null,
+    "ms": 135,
+    "before": 0,
+    "after": 1
+   },
+   {
+    "label": "m6",
+    "who": "C",
+    "k": "offerAI",
+    "status": "ok",
+    "code": null,
+    "ms": 149,
+    "before": 0,
+    "after": 1
+   },
+   {
+    "label": "m6",
+    "who": "C",
+    "k": "respond",
+    "status": "ok",
+    "code": null,
+    "ms": 488,
+    "before": "pending",
+    "after": "accepted"
+   },
+   {
+    "label": "m6",
+    "who": "C",
+    "k": "fedFound",
+    "status": "skip",
+    "why": "fed"
+   },
+   {
+    "label": "m6",
+    "who": "C",
+    "k": "councilVote",
+    "status": "skip",
+    "why": "no-council"
+   }
+  ],
+  "perf": [
+   {
+    "label": "m0",
+    "month": 0,
+    "host": {
+     "monthTick": {
+      "n": 0
+     },
+     "publish": {
+      "n": 2,
+      "med": 33.4,
+      "p95": 33.4,
+      "max": 33.4
+     },
+     "longtask": {
+      "n": 24,
+      "med": 88,
+      "p95": 208,
+      "max": 229
+     },
+     "heapMB": 16,
+     "dom": 719,
+     "intervals": 2,
+     "timeouts": 1,
+     "offers": 0,
+     "notes": 0,
+     "inbox": 0,
+     "log": 1,
+     "news": 0
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 3,
+       "med": 38.7,
+       "p95": 190.1,
+       "max": 190.1
+      },
+      "refresh": {
+       "n": 1,
+       "med": 41.1,
+       "p95": 41.1,
+       "max": 41.1
+      },
+      "longtask": {
+       "n": 20,
+       "med": 109,
+       "p95": 370,
+       "max": 370
+      },
+      "builds": 3,
+      "deltas": 2,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 16,
+      "dom": 696,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 32,
+      "joinErrors": 0
+     },
+     "C": {
+      "build": {
+       "n": 3,
+       "med": 72.4,
+       "p95": 158.7,
+       "max": 158.7
+      },
+      "refresh": {
+       "n": 1,
+       "med": 4.2,
+       "p95": 4.2,
+       "max": 4.2
+      },
+      "longtask": {
+       "n": 24,
+       "med": 88,
+       "p95": 315,
+       "max": 368
+      },
+      "builds": 3,
+      "deltas": 2,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 16,
+      "dom": 695,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 27,
+      "joinErrors": 0
+     }
+    }
+   },
+   {
+    "label": "m6",
+    "month": 6,
+    "host": {
+     "monthTick": {
+      "n": 6,
+      "med": 548.8,
+      "p95": 1001,
+      "max": 1001
+     },
+     "publish": {
+      "n": 187,
+      "med": 7.4,
+      "p95": 71.8,
+      "max": 935.6
+     },
+     "longtask": {
+      "n": 56,
+      "med": 84,
+      "p95": 597,
+      "max": 1856
+     },
+     "heapMB": 22,
+     "dom": 764,
+     "intervals": 2,
+     "timeouts": 1,
+     "offers": 5,
+     "notes": 0,
+     "inbox": 3,
+     "log": 22,
+     "news": 1
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 18,
+       "med": 15.1,
+       "p95": 44,
+       "max": 44
+      },
+      "refresh": {
+       "n": 24,
+       "med": 19.2,
+       "p95": 47,
+       "max": 56.8
+      },
+      "longtask": {
+       "n": 93,
+       "med": 74,
+       "p95": 851,
+       "max": 1805
+      },
+      "builds": 21,
+      "deltas": 20,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 16,
+      "dom": 727,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 6,
+      "packets": 265,
+      "joinErrors": 0
+     },
+     "C": {
+      "build": {
+       "n": 17,
+       "med": 19.8,
+       "p95": 91.1,
+       "max": 91.1
+      },
+      "refresh": {
+       "n": 22,
+       "med": 21.7,
+       "p95": 110.4,
+       "max": 153.2
+      },
+      "longtask": {
+       "n": 111,
+       "med": 86,
+       "p95": 777,
+       "max": 1784
+      },
+      "builds": 20,
+      "deltas": 20,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 19,
+      "dom": 726,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 7,
+      "packets": 261,
+      "joinErrors": 0
+     }
+    }
+   }
+  ],
+  "notes": [],
+  "net": {},
+  "resume": {
+   "pendingOffer": {
+    "status": "ok",
+    "code": null,
+    "ms": 156,
+    "cid": "jmw2i8u130rofqsh8"
+   },
+   "pkgBytes": 207282
+  },
+  "relayPid1": 111425,
+  "actualWorld": {
+   "seed": 11,
+   "size": "orta",
+   "systems": 45,
+   "states": 8
+  },
+  "seats": [
+   {
+    "e": 1,
+    "conn": true
+   },
+   {
+    "e": 2,
+    "conn": true
+   }
+  ],
+  "relayPid2": 112053,
+  "errors": []
+ }
+}

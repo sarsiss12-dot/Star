@@ -1294,6 +1294,29 @@ body.fauxFull canvas#map{width:100vw !important;height:100dvh !important}
 @container(min-width:318px){.buildingGrid.act2{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:480px){.fedTabs{grid-template-columns:repeat(3,minmax(0,1fr))}.fedTable th,.fedTable td{padding:2px}.fedTable th:nth-child(3){width:16%}.fedTabBody{padding:6px}}
 /* END 96H.5.2 UI */
+/* MP.8.9: bounded UI scale; Canvas and its world coordinates stay unscaled. */
+.uiScaleControls{border:1px solid #34445b;border-radius:8px;padding:10px;margin-bottom:12px}
+.uiScaleControls label{display:block;font-weight:bold;margin-bottom:8px}
+.scaleRow{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.scaleRow button,.scaleRow select{min-height:32px;padding:5px 8px;color:inherit;background:#152337;border:1px solid #425777;border-radius:5px;font:inherit}
+.scaleRow button:disabled{opacity:.4}.scaleRow output{min-width:42px;text-align:center}
+.scaleHint{font-size:11px;color:#a2b3c9;margin-top:8px}
+/* Native zoom on explicit UI islands updates layout and hit boxes, unlike a transform.
+   Viewport constraints are divided by scale. Never zoom #app, #game or any map Canvas. */
+html[data-ui-scaled] :is(#topbar,#tools,#sidebar,#sbToggle,#timepod,#inbox,#alerts,#seltag,#mapToast,.tWrap,#menu .mwrap,.dpBox,.mbox,.riBox){zoom:var(--ui-scale)}
+html[data-ui-scaled] :is(#mp1,#mp6App) .mp1-wrap{zoom:var(--ui-scale);max-width:min(560px,calc((100vw - 32px) / var(--ui-scale)))}
+html[data-ui-scaled] #topbar{width:calc(100% / var(--ui-scale));right:auto}
+html[data-ui-scaled] #sidebar{height:calc((100dvh - var(--top)*var(--ui-scale)) / var(--ui-scale));top:var(--top);bottom:auto;max-width:calc(65vw / var(--ui-scale))}
+html[data-ui-scaled] #sbToggle{right:min(var(--sb),calc(65vw / var(--ui-scale)))}
+html[data-ui-scaled] #sbToggle.off{right:0}
+html[data-ui-scaled] #tools{max-height:calc((100dvh - var(--top)*var(--ui-scale) - 14px) / var(--ui-scale));overflow-y:auto}
+html[data-ui-scaled] #modal .mbox,html[data-ui-scaled] #diploPane .dpBox,html[data-ui-scaled] #raceInfo .riBox{max-width:calc((100vw - 24px) / var(--ui-scale));max-height:calc((100dvh - 24px) / var(--ui-scale));overflow:auto}
+html[data-ui-scaled] #modal .mbox{height:auto}
+html[data-ui-scaled] :is(.mbox,.dpBox) :is(.mhd,.dpHd){position:sticky;top:0;z-index:5;background:#101c2d}
+html[data-ui-scaled] :is(.tWrap,#menu .mwrap){max-height:calc((100dvh - 16px) / var(--ui-scale));overflow:auto}
+html[data-ui-scaled] .tWrap{max-width:min(520px,calc((100vw - 16px) / var(--ui-scale)))}
+html[data-ui-scaled] #menu .mwrap{max-width:min(860px,calc((100vw - 16px) / var(--ui-scale)))}
+/* END MP.8.9 UI SCALE CSS */
 </style>
 </head>
 <body>

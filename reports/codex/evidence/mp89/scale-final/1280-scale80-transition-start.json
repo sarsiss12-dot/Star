@@ -1,0 +1,19 @@
+{
+  "className": "grpOut open",
+  "opacity": "0.101348",
+  "transform": "matrix(0.964054, 0, 0, 0.964054, -7.18922, 0)",
+  "animations": [
+    {
+      "state": "running",
+      "time": 16.67000000448926
+    },
+    {
+      "state": "running",
+      "time": 16.67000000448926
+    },
+    {
+      "state": "running",
+      "time": 16.67000000448926
+    }
+  ]
+}

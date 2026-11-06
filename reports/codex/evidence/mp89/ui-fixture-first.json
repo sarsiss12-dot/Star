@@ -1,0 +1,1767 @@
+{
+  "results": [
+    {
+      "name": "1280x720 menu + setup",
+      "status": "FAIL",
+      "error": "locator.click: Timeout 8000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-a=\"new\"]').first()\u001b[22m\n\n    at /workspace/Star/tests/browser-mp89-ui.cjs:11:233\n    at async test (/workspace/Star/tests/browser-mp89-ui.cjs:5:45)\n    at async /workspace/Star/tests/browser-mp89-ui.cjs:11:2"
+    },
+    {
+      "name": "1280x720 game and panels",
+      "status": "PASS",
+      "data": [
+        {
+          "name": "map",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                930,
+                38,
+                350,
+                682
+              ],
+              "scroll": [
+                682,
+                682
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "fleet",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                970,
+                38,
+                310,
+                682
+              ],
+              "scroll": [
+                682,
+                682
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "science",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                970,
+                38,
+                310,
+                682
+              ],
+              "scroll": [
+                682,
+                682
+              ]
+            },
+            {
+              "class": "dpBox scienceBox",
+              "rect": [
+                150,
+                28.796875,
+                980,
+                662.40625
+              ],
+              "scroll": [
+                660,
+                660
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "diplo",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                970,
+                38,
+                310,
+                682
+              ],
+              "scroll": [
+                682,
+                682
+              ]
+            },
+            {
+              "class": "dpBox dcBox",
+              "rect": [
+                180,
+                28.796875,
+                920,
+                662.390625
+              ],
+              "scroll": [
+                660,
+                660
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "federation",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                970,
+                38,
+                310,
+                682
+              ],
+              "scroll": [
+                682,
+                682
+              ]
+            },
+            {
+              "class": "dpBox dcBox fedBox",
+              "rect": [
+                0,
+                0,
+                1040,
+                720
+              ],
+              "scroll": [
+                718,
+                718
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "vassal",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                970,
+                38,
+                310,
+                682
+              ],
+              "scroll": [
+                682,
+                682
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "spy",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                970,
+                38,
+                310,
+                682
+              ],
+              "scroll": [
+                682,
+                682
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "council",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                970,
+                38,
+                310,
+                682
+              ],
+              "scroll": [
+                682,
+                682
+              ]
+            },
+            {
+              "class": "dpBox",
+              "rect": [
+                200,
+                216,
+                880,
+                288
+              ],
+              "scroll": [
+                286,
+                286
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "settings",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                970,
+                38,
+                310,
+                682
+              ],
+              "scroll": [
+                682,
+                682
+              ]
+            },
+            {
+              "class": "mbox ",
+              "rect": [
+                380,
+                43.203125,
+                520,
+                633.59375
+              ],
+              "scroll": [
+                1185,
+                632
+              ]
+            }
+          ],
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "1280 desktop scales",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: system real map hit\n\nundefined !== 30\n\n    at scales (/workspace/Star/tests/helpers/mp89-scale.cjs:16:100)\n    at async test (/workspace/Star/tests/browser-mp89-ui.cjs:5:45)\n    at async /workspace/Star/tests/browser-mp89-ui.cjs:18:13"
+    },
+    {
+      "name": "1366x768 menu + setup",
+      "status": "FAIL",
+      "error": "locator.click: Timeout 8000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-a=\"new\"]').first()\u001b[22m\n\n    at /workspace/Star/tests/browser-mp89-ui.cjs:11:233\n    at async test (/workspace/Star/tests/browser-mp89-ui.cjs:5:45)\n    at async /workspace/Star/tests/browser-mp89-ui.cjs:11:2"
+    },
+    {
+      "name": "1366x768 game and panels",
+      "status": "PASS",
+      "data": [
+        {
+          "name": "map",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                1016,
+                38,
+                350,
+                730
+              ],
+              "scroll": [
+                730,
+                730
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "fleet",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                1056,
+                38,
+                310,
+                730
+              ],
+              "scroll": [
+                730,
+                730
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "science",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                1056,
+                38,
+                310,
+                730
+              ],
+              "scroll": [
+                730,
+                730
+              ]
+            },
+            {
+              "class": "dpBox scienceBox",
+              "rect": [
+                193,
+                30.71875,
+                980,
+                706.5625
+              ],
+              "scroll": [
+                705,
+                705
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "diplo",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                1056,
+                38,
+                310,
+                730
+              ],
+              "scroll": [
+                730,
+                730
+              ]
+            },
+            {
+              "class": "dpBox dcBox",
+              "rect": [
+                223,
+                30.71875,
+                920,
+                706.546875
+              ],
+              "scroll": [
+                705,
+                705
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "federation",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                1056,
+                38,
+                310,
+                730
+              ],
+              "scroll": [
+                730,
+                730
+              ]
+            },
+            {
+              "class": "dpBox dcBox fedBox",
+              "rect": [
+                0,
+                0,
+                1040,
+                768
+              ],
+              "scroll": [
+                766,
+                766
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "vassal",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                1056,
+                38,
+                310,
+                730
+              ],
+              "scroll": [
+                730,
+                730
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "spy",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                1056,
+                38,
+                310,
+                730
+              ],
+              "scroll": [
+                730,
+                730
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "council",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                1056,
+                38,
+                310,
+                730
+              ],
+              "scroll": [
+                730,
+                730
+              ]
+            },
+            {
+              "class": "dpBox",
+              "rect": [
+                243,
+                240,
+                880,
+                288
+              ],
+              "scroll": [
+                286,
+                286
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "settings",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                1056,
+                38,
+                310,
+                730
+              ],
+              "scroll": [
+                730,
+                730
+              ]
+            },
+            {
+              "class": "mbox ",
+              "rect": [
+                423,
+                46.078125,
+                520,
+                675.828125
+              ],
+              "scroll": [
+                1185,
+                674
+              ]
+            }
+          ],
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "1366 desktop scales",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: system real map hit\n\nundefined !== 30\n\n    at scales (/workspace/Star/tests/helpers/mp89-scale.cjs:16:100)\n    at async test (/workspace/Star/tests/browser-mp89-ui.cjs:5:45)\n    at async /workspace/Star/tests/browser-mp89-ui.cjs:18:13"
+    },
+    {
+      "name": "1920x1080 menu + setup",
+      "status": "FAIL",
+      "error": "locator.click: Timeout 8000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-a=\"new\"]').first()\u001b[22m\n\n    at /workspace/Star/tests/browser-mp89-ui.cjs:11:233\n    at async test (/workspace/Star/tests/browser-mp89-ui.cjs:5:45)\n    at async /workspace/Star/tests/browser-mp89-ui.cjs:11:2"
+    },
+    {
+      "name": "1920x1080 game and panels",
+      "status": "PASS",
+      "data": [
+        {
+          "name": "map",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                1497.609375,
+                38,
+                422.390625,
+                1042
+              ],
+              "scroll": [
+                1042,
+                1042
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "fleet",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                1536,
+                38,
+                384,
+                1042
+              ],
+              "scroll": [
+                1042,
+                1042
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "science",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                1536,
+                38,
+                384,
+                1042
+              ],
+              "scroll": [
+                1042,
+                1042
+              ]
+            },
+            {
+              "class": "dpBox scienceBox",
+              "rect": [
+                470,
+                43.1875,
+                980,
+                993.625
+              ],
+              "scroll": [
+                992,
+                992
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "diplo",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                1536,
+                38,
+                384,
+                1042
+              ],
+              "scroll": [
+                1042,
+                1042
+              ]
+            },
+            {
+              "class": "dpBox dcBox",
+              "rect": [
+                500,
+                43.203125,
+                920,
+                993.59375
+              ],
+              "scroll": [
+                992,
+                992
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "federation",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                1536,
+                38,
+                384,
+                1042
+              ],
+              "scroll": [
+                1042,
+                1042
+              ]
+            },
+            {
+              "class": "dpBox dcBox fedBox",
+              "rect": [
+                0,
+                0,
+                1040,
+                1080
+              ],
+              "scroll": [
+                1078,
+                1078
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "vassal",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                1536,
+                38,
+                384,
+                1042
+              ],
+              "scroll": [
+                1042,
+                1042
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "spy",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                1536,
+                38,
+                384,
+                1042
+              ],
+              "scroll": [
+                1042,
+                1042
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "council",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                1536,
+                38,
+                384,
+                1042
+              ],
+              "scroll": [
+                1042,
+                1042
+              ]
+            },
+            {
+              "class": "dpBox",
+              "rect": [
+                435.1783447265625,
+                396,
+                1040,
+                288
+              ],
+              "scroll": [
+                286,
+                286
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "settings",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                1536,
+                38,
+                384,
+                1042
+              ],
+              "scroll": [
+                1042,
+                1042
+              ]
+            },
+            {
+              "class": "mbox ",
+              "rect": [
+                700,
+                64.796875,
+                520,
+                950.390625
+              ],
+              "scroll": [
+                1185,
+                948
+              ]
+            }
+          ],
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "1920 desktop scales",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: system real map hit\n\nundefined !== 30\n\n    at scales (/workspace/Star/tests/helpers/mp89-scale.cjs:16:100)\n    at async test (/workspace/Star/tests/browser-mp89-ui.cjs:5:45)\n    at async /workspace/Star/tests/browser-mp89-ui.cjs:18:13"
+    },
+    {
+      "name": "2560x1440 menu + setup",
+      "status": "FAIL",
+      "error": "locator.click: Timeout 8000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-a=\"new\"]').first()\u001b[22m\n\n    at /workspace/Star/tests/browser-mp89-ui.cjs:11:233\n    at async test (/workspace/Star/tests/browser-mp89-ui.cjs:5:45)\n    at async /workspace/Star/tests/browser-mp89-ui.cjs:11:2"
+    },
+    {
+      "name": "2560x1440 game and panels",
+      "status": "PASS",
+      "data": [
+        {
+          "name": "map",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                2100,
+                38,
+                460,
+                1402
+              ],
+              "scroll": [
+                1402,
+                1402
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "fleet",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                2100,
+                38,
+                460,
+                1402
+              ],
+              "scroll": [
+                1402,
+                1402
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "science",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                2100,
+                38,
+                460,
+                1402
+              ],
+              "scroll": [
+                1402,
+                1402
+              ]
+            },
+            {
+              "class": "dpBox scienceBox",
+              "rect": [
+                790,
+                57.59375,
+                980,
+                1324.8125
+              ],
+              "scroll": [
+                1323,
+                1323
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "diplo",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                2100,
+                38,
+                460,
+                1402
+              ],
+              "scroll": [
+                1402,
+                1402
+              ]
+            },
+            {
+              "class": "dpBox dcBox",
+              "rect": [
+                820,
+                57.59375,
+                920,
+                1324.796875
+              ],
+              "scroll": [
+                1323,
+                1323
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "federation",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                2100,
+                38,
+                460,
+                1402
+              ],
+              "scroll": [
+                1402,
+                1402
+              ]
+            },
+            {
+              "class": "dpBox dcBox fedBox",
+              "rect": [
+                0,
+                0,
+                1040,
+                1440
+              ],
+              "scroll": [
+                1438,
+                1438
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "vassal",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                2100,
+                38,
+                460,
+                1402
+              ],
+              "scroll": [
+                1402,
+                1402
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "spy",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                2100,
+                38,
+                460,
+                1402
+              ],
+              "scroll": [
+                1402,
+                1402
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "council",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                2100,
+                38,
+                460,
+                1402
+              ],
+              "scroll": [
+                1402,
+                1402
+              ]
+            },
+            {
+              "class": "dpBox",
+              "rect": [
+                760,
+                576,
+                1040,
+                288
+              ],
+              "scroll": [
+                286,
+                286
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "settings",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                2100,
+                38,
+                460,
+                1402
+              ],
+              "scroll": [
+                1402,
+                1402
+              ]
+            },
+            {
+              "class": "mbox ",
+              "rect": [
+                1020,
+                126.265625,
+                520,
+                1187.453125
+              ],
+              "scroll": [
+                1185,
+                1185
+              ]
+            }
+          ],
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "2560 desktop scales",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: system real map hit\n\nundefined !== 30\n\n    at scales (/workspace/Star/tests/helpers/mp89-scale.cjs:16:100)\n    at async test (/workspace/Star/tests/browser-mp89-ui.cjs:5:45)\n    at async /workspace/Star/tests/browser-mp89-ui.cjs:18:13"
+    },
+    {
+      "name": "3440x1440 menu + setup",
+      "status": "FAIL",
+      "error": "locator.click: Timeout 8000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-a=\"new\"]').first()\u001b[22m\n\n    at /workspace/Star/tests/browser-mp89-ui.cjs:11:233\n    at async test (/workspace/Star/tests/browser-mp89-ui.cjs:5:45)\n    at async /workspace/Star/tests/browser-mp89-ui.cjs:11:2"
+    },
+    {
+      "name": "3440x1440 game and panels",
+      "status": "PASS",
+      "data": [
+        {
+          "name": "map",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                2980,
+                38,
+                460,
+                1402
+              ],
+              "scroll": [
+                1402,
+                1402
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "fleet",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                2980,
+                38,
+                460,
+                1402
+              ],
+              "scroll": [
+                1402,
+                1402
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "science",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                2980,
+                38,
+                460,
+                1402
+              ],
+              "scroll": [
+                1402,
+                1402
+              ]
+            },
+            {
+              "class": "dpBox scienceBox",
+              "rect": [
+                1230,
+                57.59375,
+                980,
+                1324.8125
+              ],
+              "scroll": [
+                1323,
+                1323
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "diplo",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                2980,
+                38,
+                460,
+                1402
+              ],
+              "scroll": [
+                1402,
+                1402
+              ]
+            },
+            {
+              "class": "dpBox dcBox",
+              "rect": [
+                1260,
+                57.59375,
+                920,
+                1324.796875
+              ],
+              "scroll": [
+                1323,
+                1323
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "federation",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                2980,
+                38,
+                460,
+                1402
+              ],
+              "scroll": [
+                1402,
+                1402
+              ]
+            },
+            {
+              "class": "dpBox dcBox fedBox",
+              "rect": [
+                0,
+                0,
+                1040,
+                1440
+              ],
+              "scroll": [
+                1438,
+                1438
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "vassal",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                2980,
+                38,
+                460,
+                1402
+              ],
+              "scroll": [
+                1402,
+                1402
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "spy",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                2980,
+                38,
+                460,
+                1402
+              ],
+              "scroll": [
+                1402,
+                1402
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "council",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                2980,
+                38,
+                460,
+                1402
+              ],
+              "scroll": [
+                1402,
+                1402
+              ]
+            },
+            {
+              "class": "dpBox",
+              "rect": [
+                1200,
+                576,
+                1040,
+                288
+              ],
+              "scroll": [
+                286,
+                286
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "settings",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                2980,
+                38,
+                460,
+                1402
+              ],
+              "scroll": [
+                1402,
+                1402
+              ]
+            },
+            {
+              "class": "mbox ",
+              "rect": [
+                1460,
+                126.265625,
+                520,
+                1187.453125
+              ],
+              "scroll": [
+                1185,
+                1185
+              ]
+            }
+          ],
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "3440 desktop scales",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: system real map hit\n\nundefined !== 30\n\n    at scales (/workspace/Star/tests/helpers/mp89-scale.cjs:16:100)\n    at async test (/workspace/Star/tests/browser-mp89-ui.cjs:5:45)\n    at async /workspace/Star/tests/browser-mp89-ui.cjs:18:13"
+    },
+    {
+      "name": "800x360 menu + setup",
+      "status": "FAIL",
+      "error": "page.goto: Timeout 8000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:46235/\", waiting until \"load\"\u001b[22m\n\n    at /workspace/Star/tests/browser-mp89-ui.cjs:11:55\n    at test (/workspace/Star/tests/browser-mp89-ui.cjs:5:51)\n    at /workspace/Star/tests/browser-mp89-ui.cjs:11:8"
+    },
+    {
+      "name": "800x360 game and panels",
+      "status": "PASS",
+      "data": [
+        {
+          "name": "map",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                450,
+                30,
+                350,
+                330
+              ],
+              "scroll": [
+                330,
+                330
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "fleet",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                498,
+                30,
+                302,
+                330
+              ],
+              "scroll": [
+                330,
+                330
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "science",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                498,
+                30,
+                302,
+                330
+              ],
+              "scroll": [
+                330,
+                330
+              ]
+            },
+            {
+              "class": "dpBox scienceBox",
+              "rect": [
+                0,
+                0,
+                800,
+                360
+              ],
+              "scroll": [
+                360,
+                360
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "diplo",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                498,
+                30,
+                302,
+                330
+              ],
+              "scroll": [
+                330,
+                330
+              ]
+            },
+            {
+              "class": "dpBox dcBox",
+              "rect": [
+                0,
+                0,
+                800,
+                360
+              ],
+              "scroll": [
+                360,
+                360
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "federation",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                498,
+                30,
+                302,
+                330
+              ],
+              "scroll": [
+                330,
+                330
+              ]
+            },
+            {
+              "class": "dpBox dcBox fedBox",
+              "rect": [
+                0,
+                0,
+                800,
+                360
+              ],
+              "scroll": [
+                360,
+                360
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "vassal",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                498,
+                30,
+                302,
+                330
+              ],
+              "scroll": [
+                330,
+                330
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "spy",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                498,
+                30,
+                302,
+                330
+              ],
+              "scroll": [
+                330,
+                330
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "council",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                498,
+                30,
+                302,
+                330
+              ],
+              "scroll": [
+                330,
+                330
+              ]
+            },
+            {
+              "class": "dpBox",
+              "rect": [
+                -3.3347506523132324,
+                0,
+                720,
+                360
+              ],
+              "scroll": [
+                360,
+                360
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "settings",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                498,
+                30,
+                302,
+                330
+              ],
+              "scroll": [
+                330,
+                330
+              ]
+            },
+            {
+              "class": "mbox ",
+              "rect": [
+                140,
+                33.921875,
+                520,
+                292.15625
+              ],
+              "scroll": [
+                1185,
+                290
+              ]
+            }
+          ],
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "800 touch + scale limit",
+      "status": "PASS"
+    },
+    {
+      "name": "960x540 menu + setup",
+      "status": "FAIL",
+      "error": "locator.click: Timeout 8000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-a=\"new\"]').first()\u001b[22m\n\n    at /workspace/Star/tests/browser-mp89-ui.cjs:11:233\n    at async test (/workspace/Star/tests/browser-mp89-ui.cjs:5:45)\n    at async /workspace/Star/tests/browser-mp89-ui.cjs:11:2"
+    },
+    {
+      "name": "960x540 game and panels",
+      "status": "PASS",
+      "data": [
+        {
+          "name": "map",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                610,
+                34,
+                350,
+                506
+              ],
+              "scroll": [
+                506,
+                506
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "fleet",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                658,
+                34,
+                302,
+                506
+              ],
+              "scroll": [
+                506,
+                506
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "science",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                658,
+                34,
+                302,
+                506
+              ],
+              "scroll": [
+                506,
+                506
+              ]
+            },
+            {
+              "class": "dpBox scienceBox",
+              "rect": [
+                0,
+                0,
+                960,
+                540
+              ],
+              "scroll": [
+                540,
+                540
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "diplo",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                658,
+                34,
+                302,
+                506
+              ],
+              "scroll": [
+                506,
+                506
+              ]
+            },
+            {
+              "class": "dpBox dcBox",
+              "rect": [
+                -21.509349822998047,
+                0,
+                920,
+                540
+              ],
+              "scroll": [
+                540,
+                540
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "federation",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                658,
+                34,
+                302,
+                506
+              ],
+              "scroll": [
+                506,
+                506
+              ]
+            },
+            {
+              "class": "dpBox dcBox fedBox",
+              "rect": [
+                0,
+                0,
+                960,
+                540
+              ],
+              "scroll": [
+                540,
+                540
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "vassal",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                658,
+                34,
+                302,
+                506
+              ],
+              "scroll": [
+                506,
+                506
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "spy",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                658,
+                34,
+                302,
+                506
+              ],
+              "scroll": [
+                506,
+                506
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "council",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                658,
+                34,
+                302,
+                506
+              ],
+              "scroll": [
+                506,
+                506
+              ]
+            },
+            {
+              "class": "dpBox",
+              "rect": [
+                0,
+                0,
+                720,
+                540
+              ],
+              "scroll": [
+                540,
+                540
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "settings",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                658,
+                34,
+                302,
+                506
+              ],
+              "scroll": [
+                506,
+                506
+              ]
+            },
+            {
+              "class": "mbox ",
+              "rect": [
+                220,
+                44.71875,
+                520,
+                450.546875
+              ],
+              "scroll": [
+                1185,
+                449
+              ]
+            }
+          ],
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "960 touch + scale limit",
+      "status": "PASS"
+    }
+  ],
+  "errors": []
+}

@@ -1,11 +1,11 @@
 {
-  "phase": "PERF.2",
-  "build": "96h10p5",
-  "scope": "Host AI performance: a read-only AI evaluation window computes an empire's unchanged shadow income and the fresh trade result of port-neutral shadows once per window instead of per building candidate; supplyDistance checks usable gates directly instead of scanning the galaxy. Same decisions: Save8 bytes and RNG identical month by month. Save8 schema unchanged; PERF.1 and MP.7.5 retained.",
+  "phase": "MP.8.9",
+  "build": "96h10p6",
+  "scope": "github-runtime-only",
   "save_version": 8,
-  "pwa_cache": "stars-v96h10p5",
-  "parent_commit": "8fa82031bd9cc4f27fff8b6ce2b2ad0ca18ee523",
-  "parent_zip_sha256": "3ebc53ab8d15620666b7bb40b73efdbd0948b2f0469182e96aa988179c22e0d8",
+  "pwa_cache": "stars-v96h10p6",
+  "parent_commit": "8ce738b42636cd792a8d552230ca8194a4da053f",
+  "parent_zip_sha256": "15c247db0efa7952fc025fc7df7368eeff1adc2f8eb7c47eaf4645b8ec2c012a",
   "file_count": 19,
   "files": {
     "ai.js": "49bb05c0621b8a31e9d61f361ea3a36250915f440a51d77e58aec7cc1e653b87",
@@ -20,12 +20,13 @@
     "economy-ui.js": "61f6e2dcef7f37143821edccf67552718a210ec555f7b8f9074c68191fd5cbcc",
     "economy.js": "315653254c3e690523d5068d8ccec6a4cd7adc7f44e7a563adc04917f1eeee80",
     "inbox.js": "e97f82d178f6908a89df792af28bebd4ba22315917e3e2c0bc15a874291ceb49",
-    "index.html": "c859ad7204a3dac2df210f63eb7eb577a193812370ba3b39d7e42be06f72e427",
-    "main.js": "312d9fdd9f9e3c0fd8638b2fdc0d980828e4880a5be74316c1cca1ac532e32ef",
+    "index.html": "ae85599b00da6a7cc30035de6398337384d9e30d9cd5f8c3488b1ada6caf135c",
+    "main.js": "7aeff079be9fdf4c618a1a1606035e8879870bd871d662abe4aac107aa1f6a53",
     "manifest.json": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
     "map.js": "d8ca27ee07c484b7399f95d8031aa70fb7539bcf89d768c8442200b7cba76ae3",
     "news.js": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
-    "sw.js": "f0067c51e1b8698deb550a663a60387e2c032ff3374e5c69ef70bb39b71f2154",
-    "ui.js": "1c746c4503f94a36e66c288cfc8715fd095fd3011fbc0f849bacabc752999f0f"
-  }
+    "sw.js": "904d464319951d27ece9f8acc50a62ed5ded22817cb4c73284d22c6bc95fc970",
+    "ui.js": "359135693964c3d61d620c105432b9d22abb6259ad814957f6ba650c9fdc1f95"
+  },
+  "description": "Device-local bounded UI Scale; original simulation and Save8 v8 unchanged; PERF.1/PERF.2 retained. Multiplayer client/server (including the unchanged MP.8.6 guest-only nebula cache) ship separately in the repository, outside this game ZIP."
 }

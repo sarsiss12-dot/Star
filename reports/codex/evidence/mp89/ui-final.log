@@ -1,0 +1,29 @@
+PASS 1280x720 menu + setup
+PASS 1280x720 game and panels
+PASS 1280 desktop scales
+PASS 1280 PC/touch inputs + MP lobby
+PASS 1366x768 menu + setup
+PASS 1366x768 game and panels
+PASS 1366 desktop scales
+PASS 1366 PC/touch inputs + MP lobby
+PASS 1920x1080 menu + setup
+PASS 1920x1080 game and panels
+PASS 1920 desktop scales
+PASS 1920 PC/touch inputs + MP lobby
+PASS 2560x1440 menu + setup
+PASS 2560x1440 game and panels
+PASS 2560 desktop scales
+PASS 2560 PC/touch inputs + MP lobby
+PASS 3440x1440 menu + setup
+PASS 3440x1440 game and panels
+PASS 3440 desktop scales
+PASS 3440 PC/touch inputs + MP lobby
+PASS 800x360 menu + setup
+PASS 800x360 game and panels
+PASS 800 touch + scale limit
+PASS 800 PC/touch inputs + MP lobby
+PASS 960x540 menu + setup
+PASS 960x540 game and panels
+PASS 960 touch + scale limit
+PASS 960 PC/touch inputs + MP lobby
+TOTAL 28/0

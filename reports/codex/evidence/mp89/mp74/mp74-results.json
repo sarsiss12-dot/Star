@@ -1,0 +1,184 @@
+{
+  "results": [
+    {
+      "name": "A1 5 karakterli kod: host kodu 5 karakter ve tiresiz; davet bağlantısı kodu taşır; yanlış kod reddedilir; KATIL'a hızlı ÜÇ dokunma (600 ms gecikmeli ağ) tek koltuk, \"oda dolu\" yok; iki telefon oyuna girer",
+      "status": "PASS",
+      "ms": 24086
+    },
+    {
+      "name": "A2 küçük çok oyunculu düğmesi: host ve misafirde varsayılan \"👥 n\" (haritayı ve hız kutusunu kapatmaz); dokununca mevcut panel (kod, durum, KAYDET), tekrar dokununca kapanır",
+      "status": "PASS",
+      "ms": 10428
+    },
+    {
+      "name": "A3 kaydırma (gerçek dokunma): küçük hareket kartı kapatmaz; sağa kaydırınca teklif kartı kalkar, karar Gelen kutusunda BEKLER, ayna yenilenince kart geri gelmez; host'ta teklif bekler",
+      "status": "PASS",
+      "ms": 19689
+    },
+    {
+      "name": "A4 karttan hızlı karar (misafir): KABUL gerçek dokunmayla → host kabul eder, kaynak bir kez aktarılır; ÇİFT dokunma tek \"respond\"; REDDET; KARŞI TEKLİF gerçek anlaşma penceresini açar",
+      "status": "PASS",
+      "ms": 15701
+    },
+    {
+      "name": "A5 host karttan hızlı karar: B → host teklifi host kartında KABUL (dokunma) → kabul, bir kez",
+      "status": "PASS",
+      "ms": 4281
+    },
+    {
+      "name": "B1 kapasite 3: host + 2 misafir (ikisi de çift dokunmayla) girer, tek koltuk tutar; dördüncü telefon \"Oda dolu.\" görür; host küçük düğmede 👥 3",
+      "status": "PASS",
+      "ms": 46784
+    },
+    {
+      "name": "sayfa hataları yok",
+      "status": "PASS",
+      "ms": 0
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "nav": [
+      "/mp/play",
+      "/mp/play?code=*",
+      "/mp/play?code=*",
+      "/mp/play?code=*",
+      "/mp/play?code=*",
+      "/mp/play?code=*",
+      "host2 /",
+      "host2 /",
+      "host2 /",
+      "host2 /",
+      "host2 /",
+      "host2 /",
+      "B2 /mp/play",
+      "B2 /mp/play",
+      "B2 /mp/play",
+      "B2 /mp/play",
+      "C2 /mp/play",
+      "C2 /mp/play",
+      "C2 /mp/play",
+      "C2 /mp/play",
+      "B2 /mp/play",
+      "C2 /mp/play",
+      "host2 /"
+    ],
+    "joinErrors_Bora": [],
+    "designEntry_Bora": {
+      "fromBurst": false,
+      "audit": {
+        "clicks": 1,
+        "opens": 1,
+        "unexpected": 0
+      },
+      "active": true,
+      "role": "guest",
+      "screen": "lobby",
+      "path": "/mp/play",
+      "head": true,
+      "menu": true
+    },
+    "relayClients": 1,
+    "relayDenied": {
+      "invalid-code": 1
+    },
+    "ghostSeats": 0,
+    "link": "https://localhost:37581/mp/play?code=…",
+    "pill_host": {
+      "w": 32,
+      "h": 42,
+      "text": "👥 2",
+      "overlap": false
+    },
+    "pill_B": {
+      "w": 32,
+      "h": 42,
+      "text": "👥 2",
+      "overlap": false
+    },
+    "quickButtons": [
+      [
+        "KABUL",
+        true,
+        44
+      ],
+      [
+        "REDDET",
+        true,
+        44
+      ],
+      [
+        "KARŞI TEKLİF",
+        true,
+        44
+      ]
+    ],
+    "counterView": "DİPLOMASİ ·  Kızıl Muhafız\n      ✕\n      DEVLETLERİLİŞKİMÜZAKERETaslak bu oturumda saklanır; sekme değiştirirken kaybolmaz.\n      Yalnız TEKLİFİ SUN düğmesi karşı tarafa gönderir.Tutum tahmini için en",
+    "a5pre": {
+      "id": 5,
+      "uidKey": "mp71:5",
+      "inbox": [
+        {
+          "uid": 1,
+          "kind": "anomaly",
+          "key": "an:40",
+          "hidden": false
+        },
+        {
+          "uid": 3,
+          "kind": "aideal",
+          "key": "mp71:5",
+          "hidden": false
+        }
+      ],
+      "dom": [
+        "1",
+        "3",
+        "3:y",
+        "3:n",
+        "3:c"
+      ],
+      "recs": [
+        {
+          "id": 1,
+          "key": "deal:1|res:min:23>:31.185999999999726",
+          "status": "pending",
+          "note": 3
+        }
+      ],
+      "offer": "pending",
+      "stats": {
+        "offers": 0,
+        "counters": 0,
+        "withdraws": 0,
+        "responds": 0,
+        "notified": 1,
+        "synced": 0,
+        "sentRenders": 0,
+        "dealBoxes": 0,
+        "blocked": 0
+      },
+      "speed": 1,
+      "modal": false,
+      "day": 31.45263999999972
+    },
+    "joinErrors_Cem": [],
+    "designEntry_Cem": {
+      "fromBurst": false,
+      "audit": {
+        "clicks": 1,
+        "opens": 1,
+        "unexpected": 0
+      },
+      "active": true,
+      "role": "guest",
+      "screen": "lobby",
+      "path": "/mp/play",
+      "head": true,
+      "menu": true
+    },
+    "fourth": "Oda dolu."
+  },
+  "pass": 7,
+  "fail": 0
+}

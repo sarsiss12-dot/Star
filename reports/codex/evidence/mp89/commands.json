@@ -1,0 +1,95 @@
+[
+  [
+    "ui-retake",
+    "tests/browser-mp89-ui.cjs",
+    {
+      "MP89_RETAKE": "1"
+    }
+  ],
+  [
+    "prefs",
+    "tests/browser-mp89-prefs.cjs",
+    {}
+  ],
+  [
+    "R-final1",
+    "tests/browser-mp8.cjs",
+    {
+      "MP8_SCEN": "R",
+      "MP8_MONTHS": "6",
+      "MP89_UI": "1",
+      "MP89_MENU_DIAG": "1"
+    }
+  ],
+  [
+    "R-final2",
+    "tests/browser-mp8.cjs",
+    {
+      "MP8_SCEN": "R",
+      "MP8_MONTHS": "6",
+      "MP89_MENU_DIAG": "1"
+    }
+  ],
+  [
+    "N",
+    "tests/browser-mp8.cjs",
+    {
+      "MP8_SCEN": "N"
+    }
+  ],
+  [
+    "mp74",
+    "tests/browser-mp74.cjs",
+    {}
+  ],
+  [
+    "mp75",
+    "tests/browser-mp75.cjs",
+    {}
+  ],
+  [
+    "mp73",
+    "tests/browser-mp73.cjs",
+    {}
+  ],
+  [
+    "perf1",
+    "tests/perf1_equivalence_test.js",
+    {}
+  ],
+  [
+    "perf2",
+    "tests/perf2_equivalence_test.js",
+    {}
+  ],
+  [
+    "cache",
+    "tests/mp86_nebula_cache_test.js",
+    {}
+  ],
+  [
+    "host-hash",
+    "tests/mp88_host_hash_test.js",
+    {
+      "MP88_EVIDENCE": "/workspace/Star/reports/codex/evidence/mp89/host-hash"
+    }
+  ],
+  [
+    "source-integrity",
+    "tests/mp89_ui_integrity_test.js",
+    {}
+  ],
+  [
+    "browser-pixels",
+    "tests/mp86-nebula-bench.cjs",
+    {
+      "MP86_PIXELS_ONLY": "1"
+    },
+    [
+      "/workspace/Star",
+      "/tmp/star-mp89/nebula-block.js",
+      "reports/codex/evidence/mp86/capture-guest-m120.save",
+      "/workspace/Star/reports/codex/evidence/mp89/browser-pixels.json"
+    ]
+  ]
+]

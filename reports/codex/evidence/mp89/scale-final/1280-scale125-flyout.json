@@ -1,0 +1,21 @@
+{
+  "className": "grpOut open",
+  "opacity": "1",
+  "transform": "matrix(1, 0, 0, 1, 0, 0)",
+  "rect": [
+    53.5,
+    55.5,
+    200,
+    558.5
+  ],
+  "button": [
+    7.5,
+    251.25,
+    40,
+    40
+  ],
+  "viewport": [
+    1280,
+    720
+  ]
+}

@@ -5,6 +5,13 @@ const hash=s=>createHash('sha256').update(s).digest('hex');
 // block must restore the untouched canonical 93A.1/93C HTML hash.
 // Historical referans-sha.json remains intact; neither half is exempted.
 exports.isReviewedUI=source=>{
+ // MP.8.9: only the exact scoped scale CSS is removed; existing layout pins remain.
+ const mp89Start=source.indexOf('/* MP.8.9: bounded UI scale;');
+ if(mp89Start>=0){const marker='/* END MP.8.9 UI SCALE CSS */\n',end=source.indexOf(marker,mp89Start)+marker.length;
+  if(end<mp89Start||hash(source.slice(mp89Start,end))!=='40b73ce92f093e8d972d3c77d409bd5f4bf6ba8b9713da11eea6a412bb433822')return false;
+  source=source.slice(0,mp89Start)+source.slice(end);
+ }
+
  // MP.7.5: touch quantity stepper CSS — one reviewed block; stripping it (then MP.7.4) restores the 96H.10 HTML.
  const mp75Start=source.indexOf('/* MP.7.5: touch quantity steppers */');
  if(mp75Start>=0){const marker='/* END MP.7.5 QTY */\n',end=source.indexOf(marker,mp75Start)+marker.length;

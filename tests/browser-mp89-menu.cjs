@@ -1,0 +1,8 @@
+'use strict';
+// Bounded fresh-process menu probe, no simulation or live server.
+const fs=require('fs'),path=require('path'),os=require('os'),assert=require('assert/strict'),{chromium}=require('playwright'),relay=require('../research/mp1/server/relay'),arm=require('./helpers/mp89-menu-diag.cjs');
+const out=process.env.STARS_OUTPUT||'/tmp/star-mp89/menu-probe';fs.mkdirSync(out,{recursive:true});
+(async()=>{const r=relay.create({MP1_PORT:'0',MP1_BIND:'127.0.0.1',MP1_DEV:'1'}),dir=fs.mkdtempSync(path.join(os.tmpdir(),'mp89-menu-'));let ctx;const rows=[];try{const s=await r.start();for(let i=0;i<4;i++){
+ ctx=await chromium.launchPersistentContext(dir,{executablePath:process.env.STARS_CHROMIUM_PATH||'/usr/bin/chromium',viewport:{width:844,height:390},hasTouch:true,isMobile:true,deviceScaleFactor:2,args:['--no-sandbox','--disable-gpu','--disable-dev-shm-usage']});const p=ctx.pages()[0],c=await ctx.newCDPSession(p);await c.send('Emulation.setCPUThrottlingRate',{rate:4});await p.goto('http://127.0.0.1:'+s.address().port);await p.waitForFunction(()=>typeof setupGame==='function'&&document.getElementById('mp1Btn'));const finish=await arm(p,out),t=Date.now();let error=null;
+ try{await p.locator('#mp1Btn').tap({timeout:10000});assert.equal(await p.evaluate(()=>MP1Host.screen),'menu');}catch(e){error={name:e.name,message:e.message};}await finish(error);rows.push({i,cpu:4,ms:Date.now()-t,error});fs.writeFileSync(path.join(out,'probe.json'),JSON.stringify(rows,null,2));console.log('MENU '+JSON.stringify(rows.at(-1)));await ctx.close();ctx=null;
+ }}finally{await ctx?.close();r.shutdown();fs.rmSync(dir,{recursive:true,force:true});}if(rows.some(r=>r.error))process.exitCode=1;})().catch(e=>{console.error(e);process.exitCode=1});

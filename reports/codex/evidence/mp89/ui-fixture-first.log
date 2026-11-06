@@ -1,0 +1,94 @@
+FAIL 1280x720 menu + setup locator.click: Timeout 8000ms exceeded.
+Call log:
+[2m  - waiting for locator('[data-a="new"]').first()[22m
+
+    at /workspace/Star/tests/browser-mp89-ui.cjs:11:233
+    at async test (/workspace/Star/tests/browser-mp89-ui.cjs:5:45)
+    at async /workspace/Star/tests/browser-mp89-ui.cjs:11:2
+PASS 1280x720 game and panels
+FAIL 1280 desktop scales AssertionError [ERR_ASSERTION]: system real map hit
+
+undefined !== 30
+
+    at scales (/workspace/Star/tests/helpers/mp89-scale.cjs:16:100)
+    at async test (/workspace/Star/tests/browser-mp89-ui.cjs:5:45)
+    at async /workspace/Star/tests/browser-mp89-ui.cjs:18:13
+FAIL 1366x768 menu + setup locator.click: Timeout 8000ms exceeded.
+Call log:
+[2m  - waiting for locator('[data-a="new"]').first()[22m
+
+    at /workspace/Star/tests/browser-mp89-ui.cjs:11:233
+    at async test (/workspace/Star/tests/browser-mp89-ui.cjs:5:45)
+    at async /workspace/Star/tests/browser-mp89-ui.cjs:11:2
+PASS 1366x768 game and panels
+FAIL 1366 desktop scales AssertionError [ERR_ASSERTION]: system real map hit
+
+undefined !== 30
+
+    at scales (/workspace/Star/tests/helpers/mp89-scale.cjs:16:100)
+    at async test (/workspace/Star/tests/browser-mp89-ui.cjs:5:45)
+    at async /workspace/Star/tests/browser-mp89-ui.cjs:18:13
+FAIL 1920x1080 menu + setup locator.click: Timeout 8000ms exceeded.
+Call log:
+[2m  - waiting for locator('[data-a="new"]').first()[22m
+
+    at /workspace/Star/tests/browser-mp89-ui.cjs:11:233
+    at async test (/workspace/Star/tests/browser-mp89-ui.cjs:5:45)
+    at async /workspace/Star/tests/browser-mp89-ui.cjs:11:2
+PASS 1920x1080 game and panels
+FAIL 1920 desktop scales AssertionError [ERR_ASSERTION]: system real map hit
+
+undefined !== 30
+
+    at scales (/workspace/Star/tests/helpers/mp89-scale.cjs:16:100)
+    at async test (/workspace/Star/tests/browser-mp89-ui.cjs:5:45)
+    at async /workspace/Star/tests/browser-mp89-ui.cjs:18:13
+FAIL 2560x1440 menu + setup locator.click: Timeout 8000ms exceeded.
+Call log:
+[2m  - waiting for locator('[data-a="new"]').first()[22m
+
+    at /workspace/Star/tests/browser-mp89-ui.cjs:11:233
+    at async test (/workspace/Star/tests/browser-mp89-ui.cjs:5:45)
+    at async /workspace/Star/tests/browser-mp89-ui.cjs:11:2
+PASS 2560x1440 game and panels
+FAIL 2560 desktop scales AssertionError [ERR_ASSERTION]: system real map hit
+
+undefined !== 30
+
+    at scales (/workspace/Star/tests/helpers/mp89-scale.cjs:16:100)
+    at async test (/workspace/Star/tests/browser-mp89-ui.cjs:5:45)
+    at async /workspace/Star/tests/browser-mp89-ui.cjs:18:13
+FAIL 3440x1440 menu + setup locator.click: Timeout 8000ms exceeded.
+Call log:
+[2m  - waiting for locator('[data-a="new"]').first()[22m
+
+    at /workspace/Star/tests/browser-mp89-ui.cjs:11:233
+    at async test (/workspace/Star/tests/browser-mp89-ui.cjs:5:45)
+    at async /workspace/Star/tests/browser-mp89-ui.cjs:11:2
+PASS 3440x1440 game and panels
+FAIL 3440 desktop scales AssertionError [ERR_ASSERTION]: system real map hit
+
+undefined !== 30
+
+    at scales (/workspace/Star/tests/helpers/mp89-scale.cjs:16:100)
+    at async test (/workspace/Star/tests/browser-mp89-ui.cjs:5:45)
+    at async /workspace/Star/tests/browser-mp89-ui.cjs:18:13
+FAIL 800x360 menu + setup page.goto: Timeout 8000ms exceeded.
+Call log:
+[2m  - navigating to "http://127.0.0.1:46235/", waiting until "load"[22m
+
+    at /workspace/Star/tests/browser-mp89-ui.cjs:11:55
+    at test (/workspace/Star/tests/browser-mp89-ui.cjs:5:51)
+    at /workspace/Star/tests/browser-mp89-ui.cjs:11:8
+PASS 800x360 game and panels
+PASS 800 touch + scale limit
+FAIL 960x540 menu + setup locator.click: Timeout 8000ms exceeded.
+Call log:
+[2m  - waiting for locator('[data-a="new"]').first()[22m
+
+    at /workspace/Star/tests/browser-mp89-ui.cjs:11:233
+    at async test (/workspace/Star/tests/browser-mp89-ui.cjs:5:45)
+    at async /workspace/Star/tests/browser-mp89-ui.cjs:11:2
+PASS 960x540 game and panels
+PASS 960 touch + scale limit
+TOTAL 9/12

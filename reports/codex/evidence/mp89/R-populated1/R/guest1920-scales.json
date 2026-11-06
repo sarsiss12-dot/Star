@@ -1,0 +1,48 @@
+[
+  {
+    "value": 80,
+    "picks": [
+      {
+        "kind": "system",
+        "id": 3
+      },
+      {
+        "kind": "fleet",
+        "id": 4
+      }
+    ],
+    "geometry": {
+      "modal": [
+        656,
+        61.96875,
+        608,
+        956.0625
+      ],
+      "canvas": [
+        0,
+        0,
+        1920,
+        1080
+      ],
+      "viewport": [
+        1920,
+        1080
+      ],
+      "effective": {
+        "preferred": 80,
+        "effective": 80,
+        "limited": false
+      },
+      "overflow": false
+    },
+    "saveRngCameraUnchanged": true,
+    "saveSha256": "e64596b571f8f3ced6d4ab0db5e4d144ee09c4bcc94308227a1bf0e1bd479bac",
+    "rng": 1,
+    "camera": {
+      "x": 3819.1301459997685,
+      "y": 2210.029806240188,
+      "z": 0.4
+    },
+    "reload": true
+  }
+]

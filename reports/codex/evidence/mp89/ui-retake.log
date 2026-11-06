@@ -1,0 +1,33 @@
+PASS 1280x720 menu + setup
+PASS 1280 PC/touch inputs + MP lobby
+PASS 1366x768 menu + setup
+PASS 1366 PC/touch inputs + MP lobby
+PASS 1920x1080 menu + setup
+PASS 1920 PC/touch inputs + MP lobby
+PASS 2560x1440 menu + setup
+PASS 2560 PC/touch inputs + MP lobby
+PASS 3440x1440 menu + setup
+FAIL 3440 PC/touch inputs + MP lobby locator.focus: Timeout 8000ms exceeded.
+Call log:
+[2m  - waiting for locator('#uiScaleSelect')[22m
+
+    at /workspace/Star/tests/browser-mp89-ui.cjs:29:73
+    at async test (/workspace/Star/tests/browser-mp89-ui.cjs:6:45)
+    at async /workspace/Star/tests/browser-mp89-ui.cjs:22:34
+PASS 800x360 menu + setup
+PASS 800 PC/touch inputs + MP lobby
+PASS 960x540 menu + setup
+FAIL 960 PC/touch inputs + MP lobby locator.click: Timeout 8000ms exceeded.
+Call log:
+[2m  - waiting for locator('[data-m="create"]')[22m
+[2m    - locator resolved to <button data-m="create" class="mp1-btn pri">ODA OLUŞTUR</button>[22m
+[2m  - attempting click action[22m
+[2m    - waiting for element to be visible, enabled and stable[22m
+[2m    - element is visible, enabled and stable[22m
+[2m    - scrolling into view if needed[22m
+[2m    - done scrolling[22m
+
+    at /workspace/Star/tests/browser-mp89-ui.cjs:32:187
+    at async test (/workspace/Star/tests/browser-mp89-ui.cjs:6:45)
+    at async /workspace/Star/tests/browser-mp89-ui.cjs:22:34
+TOTAL 12/2

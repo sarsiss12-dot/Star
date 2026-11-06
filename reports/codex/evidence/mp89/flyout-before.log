@@ -1,0 +1,5 @@
+FAIL 1280 desktop scales AssertionError [ERR_ASSERTION]: flyout uses actual screen coordinates
+    at scales (/workspace/Star/tests/helpers/mp89-scale.cjs:32:3)
+    at async test (/workspace/Star/tests/browser-mp89-ui.cjs:6:45)
+    at async /workspace/Star/tests/browser-mp89-ui.cjs:20:13
+TOTAL 0/1

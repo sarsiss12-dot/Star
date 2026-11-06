@@ -1,0 +1,10 @@
+{
+  "results": [
+    {
+      "name": "1280 desktop scales",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: modal fits\n    at scales (/workspace/Star/tests/helpers/mp89-scale.cjs:34:3)\n    at async test (/workspace/Star/tests/browser-mp89-ui.cjs:5:45)\n    at async /workspace/Star/tests/browser-mp89-ui.cjs:19:13"
+    }
+  ],
+  "errors": []
+}

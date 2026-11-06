@@ -1,0 +1,119 @@
+[
+  {
+    "value": 80,
+    "picks": [
+      {
+        "kind": "system",
+        "id": 6
+      },
+      {
+        "kind": "fleet",
+        "id": 1
+      }
+    ],
+    "geometry": {
+      "modal": [
+        1416,
+        243.96875,
+        608,
+        952.0625
+      ],
+      "canvas": [
+        0,
+        0,
+        3440,
+        1440
+      ],
+      "viewport": [
+        3440,
+        1440
+      ],
+      "effective": {
+        "preferred": 80,
+        "effective": 80,
+        "limited": false
+      },
+      "overflow": false
+    },
+    "saveRngCameraUnchanged": true,
+    "reload": true
+  },
+  {
+    "value": 100,
+    "picks": [
+      {
+        "kind": "system",
+        "id": 6
+      },
+      {
+        "kind": "fleet",
+        "id": 1
+      }
+    ],
+    "geometry": {
+      "modal": [
+        1460,
+        126.265625,
+        520,
+        1187.453125
+      ],
+      "canvas": [
+        0,
+        0,
+        3440,
+        1440
+      ],
+      "viewport": [
+        3440,
+        1440
+      ],
+      "effective": {
+        "preferred": 100,
+        "effective": 100,
+        "limited": false
+      },
+      "overflow": false
+    },
+    "saveRngCameraUnchanged": true,
+    "reload": true
+  },
+  {
+    "value": 125,
+    "picks": [
+      {
+        "kind": "system",
+        "id": 6
+      },
+      {
+        "kind": "fleet",
+        "id": 1
+      }
+    ],
+    "geometry": {
+      "modal": [
+        1245,
+        12,
+        950,
+        1416
+      ],
+      "canvas": [
+        0,
+        0,
+        3440,
+        1440
+      ],
+      "viewport": [
+        3440,
+        1440
+      ],
+      "effective": {
+        "preferred": 125,
+        "effective": 125,
+        "limited": false
+      },
+      "overflow": false
+    },
+    "saveRngCameraUnchanged": true,
+    "reload": true
+  }
+]

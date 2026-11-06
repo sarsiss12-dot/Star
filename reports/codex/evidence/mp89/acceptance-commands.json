@@ -1,0 +1,64 @@
+[
+  [
+    "store-order-after",
+    "tests/browser-mp89-store-order.cjs",
+    {}
+  ],
+  [
+    "prefs-final",
+    "tests/browser-mp89-prefs.cjs",
+    {}
+  ],
+  [
+    "scale-final",
+    "tests/browser-mp89-ui.cjs",
+    {
+      "MP89_WIDTH": "1280",
+      "MP89_ONLY_SCALE": "1"
+    }
+  ],
+  [
+    "ui-trace3440",
+    "tests/browser-mp89-ui.cjs",
+    {
+      "MP89_WIDTH": "3440",
+      "MP89_RETAKE": "1",
+      "MP89_TRACE": "1"
+    }
+  ],
+  [
+    "ui-trace960",
+    "tests/browser-mp89-ui.cjs",
+    {
+      "MP89_WIDTH": "960",
+      "MP89_RETAKE": "1",
+      "MP89_TRACE": "1"
+    }
+  ],
+  [
+    "R-populated1",
+    "tests/browser-mp8.cjs",
+    {
+      "MP8_SCEN": "R",
+      "MP8_MONTHS": "6",
+      "MP89_R_STATE": "1",
+      "MP89_UI": "1",
+      "MP89_MENU_DIAG": "1"
+    }
+  ],
+  [
+    "R-populated2",
+    "tests/browser-mp8.cjs",
+    {
+      "MP8_SCEN": "R",
+      "MP8_MONTHS": "6",
+      "MP89_R_STATE": "1",
+      "MP89_MENU_DIAG": "1"
+    }
+  ],
+  [
+    "source-final",
+    "tests/mp89_ui_integrity_test.js",
+    {}
+  ]
+]

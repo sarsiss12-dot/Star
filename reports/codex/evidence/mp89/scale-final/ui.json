@@ -1,0 +1,149 @@
+{
+  "results": [
+    {
+      "name": "1280 desktop scales",
+      "status": "PASS",
+      "data": [
+        {
+          "value": 80,
+          "picks": [
+            {
+              "kind": "system",
+              "id": 6
+            },
+            {
+              "kind": "fleet",
+              "id": 1
+            }
+          ],
+          "geometry": {
+            "modal": [
+              352,
+              12,
+              576,
+              696
+            ],
+            "canvas": [
+              0,
+              0,
+              1280,
+              720
+            ],
+            "viewport": [
+              1280,
+              720
+            ],
+            "effective": {
+              "preferred": 80,
+              "effective": 80,
+              "limited": false
+            },
+            "overflow": false
+          },
+          "saveRngCameraUnchanged": true,
+          "saveSha256": "b8cd2af03fabcefdff3d1b00771f2ce87e4df4f41c9219514a4cf33a91c95f1c",
+          "rng": -951432214,
+          "camera": {
+            "x": 4794.65990309025,
+            "y": 4858.316358992229,
+            "z": 0.4
+          },
+          "reload": true
+        },
+        {
+          "value": 100,
+          "picks": [
+            {
+              "kind": "system",
+              "id": 6
+            },
+            {
+              "kind": "fleet",
+              "id": 1
+            }
+          ],
+          "geometry": {
+            "modal": [
+              380,
+              43.203125,
+              520,
+              633.59375
+            ],
+            "canvas": [
+              0,
+              0,
+              1280,
+              720
+            ],
+            "viewport": [
+              1280,
+              720
+            ],
+            "effective": {
+              "preferred": 100,
+              "effective": 100,
+              "limited": false
+            },
+            "overflow": false
+          },
+          "saveRngCameraUnchanged": true,
+          "saveSha256": "b8cd2af03fabcefdff3d1b00771f2ce87e4df4f41c9219514a4cf33a91c95f1c",
+          "rng": -951432214,
+          "camera": {
+            "x": 4794.65990309025,
+            "y": 4858.316358992229,
+            "z": 0.4
+          },
+          "reload": true
+        },
+        {
+          "value": 125,
+          "picks": [
+            {
+              "kind": "system",
+              "id": 6
+            },
+            {
+              "kind": "fleet",
+              "id": 1
+            }
+          ],
+          "geometry": {
+            "modal": [
+              190,
+              12,
+              900,
+              696
+            ],
+            "canvas": [
+              0,
+              0,
+              1280,
+              720
+            ],
+            "viewport": [
+              1280,
+              720
+            ],
+            "effective": {
+              "preferred": 125,
+              "effective": 125,
+              "limited": false
+            },
+            "overflow": false
+          },
+          "saveRngCameraUnchanged": true,
+          "saveSha256": "b8cd2af03fabcefdff3d1b00771f2ce87e4df4f41c9219514a4cf33a91c95f1c",
+          "rng": -951432214,
+          "camera": {
+            "x": 4794.65990309025,
+            "y": 4858.316358992229,
+            "z": 0.4
+          },
+          "reload": true
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

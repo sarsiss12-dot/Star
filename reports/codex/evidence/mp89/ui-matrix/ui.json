@@ -1,0 +1,2525 @@
+{
+  "results": [
+    {
+      "name": "1280x720 menu + setup",
+      "status": "PASS"
+    },
+    {
+      "name": "1280x720 game and panels",
+      "status": "PASS",
+      "data": [
+        {
+          "name": "map",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                930,
+                38,
+                350,
+                682
+              ],
+              "scroll": [
+                682,
+                682
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "fleet",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                970,
+                38,
+                310,
+                682
+              ],
+              "scroll": [
+                682,
+                682
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "science",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                970,
+                38,
+                310,
+                682
+              ],
+              "scroll": [
+                682,
+                682
+              ]
+            },
+            {
+              "class": "dpBox scienceBox",
+              "rect": [
+                150,
+                28.796875,
+                980,
+                662.40625
+              ],
+              "scroll": [
+                660,
+                660
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "diplo",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                970,
+                38,
+                310,
+                682
+              ],
+              "scroll": [
+                682,
+                682
+              ]
+            },
+            {
+              "class": "dpBox dcBox",
+              "rect": [
+                180,
+                28.796875,
+                920,
+                662.390625
+              ],
+              "scroll": [
+                660,
+                660
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "federation",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                970,
+                38,
+                310,
+                682
+              ],
+              "scroll": [
+                682,
+                682
+              ]
+            },
+            {
+              "class": "dpBox dcBox fedBox",
+              "rect": [
+                0,
+                0,
+                1040,
+                720
+              ],
+              "scroll": [
+                718,
+                718
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "vassal",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                970,
+                38,
+                310,
+                682
+              ],
+              "scroll": [
+                682,
+                682
+              ]
+            },
+            {
+              "class": "mbox sci",
+              "rect": [
+                380,
+                43.203125,
+                520,
+                633.59375
+              ],
+              "scroll": [
+                1026,
+                632
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "spy",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                970,
+                38,
+                310,
+                682
+              ],
+              "scroll": [
+                682,
+                682
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "council",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                970,
+                38,
+                310,
+                682
+              ],
+              "scroll": [
+                682,
+                682
+              ]
+            },
+            {
+              "class": "dpBox",
+              "rect": [
+                189.74612426757812,
+                216,
+                880,
+                288
+              ],
+              "scroll": [
+                286,
+                286
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "settings",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                970,
+                38,
+                310,
+                682
+              ],
+              "scroll": [
+                682,
+                682
+              ]
+            },
+            {
+              "class": "mbox ",
+              "rect": [
+                380,
+                43.203125,
+                520,
+                633.59375
+              ],
+              "scroll": [
+                1185,
+                632
+              ]
+            }
+          ],
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "1280 desktop scales",
+      "status": "PASS",
+      "data": [
+        {
+          "value": 80,
+          "picks": [
+            {
+              "kind": "system",
+              "id": 6
+            },
+            {
+              "kind": "fleet",
+              "id": 1
+            }
+          ],
+          "geometry": {
+            "modal": [
+              352,
+              12,
+              576,
+              696
+            ],
+            "canvas": [
+              0,
+              0,
+              1280,
+              720
+            ],
+            "viewport": [
+              1280,
+              720
+            ],
+            "effective": {
+              "preferred": 80,
+              "effective": 80,
+              "limited": false
+            },
+            "overflow": false
+          },
+          "saveRngCameraUnchanged": true,
+          "reload": true
+        },
+        {
+          "value": 100,
+          "picks": [
+            {
+              "kind": "system",
+              "id": 6
+            },
+            {
+              "kind": "fleet",
+              "id": 1
+            }
+          ],
+          "geometry": {
+            "modal": [
+              380,
+              43.203125,
+              520,
+              633.59375
+            ],
+            "canvas": [
+              0,
+              0,
+              1280,
+              720
+            ],
+            "viewport": [
+              1280,
+              720
+            ],
+            "effective": {
+              "preferred": 100,
+              "effective": 100,
+              "limited": false
+            },
+            "overflow": false
+          },
+          "saveRngCameraUnchanged": true,
+          "reload": true
+        },
+        {
+          "value": 125,
+          "picks": [
+            {
+              "kind": "system",
+              "id": 6
+            },
+            {
+              "kind": "fleet",
+              "id": 1
+            }
+          ],
+          "geometry": {
+            "modal": [
+              190,
+              12,
+              900,
+              696
+            ],
+            "canvas": [
+              0,
+              0,
+              1280,
+              720
+            ],
+            "viewport": [
+              1280,
+              720
+            ],
+            "effective": {
+              "preferred": 125,
+              "effective": 125,
+              "limited": false
+            },
+            "overflow": false
+          },
+          "saveRngCameraUnchanged": true,
+          "reload": true
+        }
+      ]
+    },
+    {
+      "name": "1280 PC/touch inputs + MP lobby",
+      "status": "PASS",
+      "data": {
+        "wheel": true,
+        "drag": true,
+        "rightClick": true,
+        "keyboardFocusEscape": true,
+        "resize": true,
+        "lobbyDesign": true
+      }
+    },
+    {
+      "name": "1366x768 menu + setup",
+      "status": "PASS"
+    },
+    {
+      "name": "1366x768 game and panels",
+      "status": "PASS",
+      "data": [
+        {
+          "name": "map",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                1016,
+                38,
+                350,
+                730
+              ],
+              "scroll": [
+                730,
+                730
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "fleet",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                1056,
+                38,
+                310,
+                730
+              ],
+              "scroll": [
+                730,
+                730
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "science",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                1056,
+                38,
+                310,
+                730
+              ],
+              "scroll": [
+                730,
+                730
+              ]
+            },
+            {
+              "class": "dpBox scienceBox",
+              "rect": [
+                193,
+                30.71875,
+                980,
+                706.5625
+              ],
+              "scroll": [
+                705,
+                705
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "diplo",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                1056,
+                38,
+                310,
+                730
+              ],
+              "scroll": [
+                730,
+                730
+              ]
+            },
+            {
+              "class": "dpBox dcBox",
+              "rect": [
+                223,
+                30.71875,
+                920,
+                706.546875
+              ],
+              "scroll": [
+                705,
+                705
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "federation",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                1056,
+                38,
+                310,
+                730
+              ],
+              "scroll": [
+                730,
+                730
+              ]
+            },
+            {
+              "class": "dpBox dcBox fedBox",
+              "rect": [
+                0,
+                0,
+                1040,
+                768
+              ],
+              "scroll": [
+                766,
+                766
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "vassal",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                1056,
+                38,
+                310,
+                730
+              ],
+              "scroll": [
+                730,
+                730
+              ]
+            },
+            {
+              "class": "mbox sci",
+              "rect": [
+                423,
+                46.078125,
+                520,
+                675.828125
+              ],
+              "scroll": [
+                1026,
+                674
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "spy",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                1056,
+                38,
+                310,
+                730
+              ],
+              "scroll": [
+                730,
+                730
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "council",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                1056,
+                38,
+                310,
+                730
+              ],
+              "scroll": [
+                730,
+                730
+              ]
+            },
+            {
+              "class": "dpBox",
+              "rect": [
+                243,
+                240,
+                880,
+                288
+              ],
+              "scroll": [
+                286,
+                286
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "settings",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                1056,
+                38,
+                310,
+                730
+              ],
+              "scroll": [
+                730,
+                730
+              ]
+            },
+            {
+              "class": "mbox ",
+              "rect": [
+                423,
+                46.078125,
+                520,
+                675.828125
+              ],
+              "scroll": [
+                1185,
+                674
+              ]
+            }
+          ],
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "1366 desktop scales",
+      "status": "PASS",
+      "data": [
+        {
+          "value": 80,
+          "picks": [
+            {
+              "kind": "system",
+              "id": 6
+            },
+            {
+              "kind": "fleet",
+              "id": 1
+            }
+          ],
+          "geometry": {
+            "modal": [
+              395,
+              12,
+              576,
+              744
+            ],
+            "canvas": [
+              0,
+              0,
+              1366,
+              768
+            ],
+            "viewport": [
+              1366,
+              768
+            ],
+            "effective": {
+              "preferred": 80,
+              "effective": 80,
+              "limited": false
+            },
+            "overflow": false
+          },
+          "saveRngCameraUnchanged": true,
+          "reload": true
+        },
+        {
+          "value": 100,
+          "picks": [
+            {
+              "kind": "system",
+              "id": 6
+            },
+            {
+              "kind": "fleet",
+              "id": 1
+            }
+          ],
+          "geometry": {
+            "modal": [
+              423,
+              46.078125,
+              520,
+              675.828125
+            ],
+            "canvas": [
+              0,
+              0,
+              1366,
+              768
+            ],
+            "viewport": [
+              1366,
+              768
+            ],
+            "effective": {
+              "preferred": 100,
+              "effective": 100,
+              "limited": false
+            },
+            "overflow": false
+          },
+          "saveRngCameraUnchanged": true,
+          "reload": true
+        },
+        {
+          "value": 125,
+          "picks": [
+            {
+              "kind": "system",
+              "id": 6
+            },
+            {
+              "kind": "fleet",
+              "id": 1
+            }
+          ],
+          "geometry": {
+            "modal": [
+              233,
+              12,
+              900,
+              744
+            ],
+            "canvas": [
+              0,
+              0,
+              1366,
+              768
+            ],
+            "viewport": [
+              1366,
+              768
+            ],
+            "effective": {
+              "preferred": 125,
+              "effective": 125,
+              "limited": false
+            },
+            "overflow": false
+          },
+          "saveRngCameraUnchanged": true,
+          "reload": true
+        }
+      ]
+    },
+    {
+      "name": "1366 PC/touch inputs + MP lobby",
+      "status": "PASS",
+      "data": {
+        "wheel": true,
+        "drag": true,
+        "rightClick": true,
+        "keyboardFocusEscape": true,
+        "resize": true,
+        "lobbyDesign": true
+      }
+    },
+    {
+      "name": "1920x1080 menu + setup",
+      "status": "PASS"
+    },
+    {
+      "name": "1920x1080 game and panels",
+      "status": "PASS",
+      "data": [
+        {
+          "name": "map",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                1497.609375,
+                38,
+                422.390625,
+                1042
+              ],
+              "scroll": [
+                1042,
+                1042
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "fleet",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                1536,
+                38,
+                384,
+                1042
+              ],
+              "scroll": [
+                1042,
+                1042
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "science",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                1536,
+                38,
+                384,
+                1042
+              ],
+              "scroll": [
+                1042,
+                1042
+              ]
+            },
+            {
+              "class": "dpBox scienceBox",
+              "rect": [
+                470,
+                43.1875,
+                980,
+                993.625
+              ],
+              "scroll": [
+                992,
+                992
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "diplo",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                1536,
+                38,
+                384,
+                1042
+              ],
+              "scroll": [
+                1042,
+                1042
+              ]
+            },
+            {
+              "class": "dpBox dcBox",
+              "rect": [
+                500,
+                43.203125,
+                920,
+                993.59375
+              ],
+              "scroll": [
+                992,
+                992
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "federation",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                1536,
+                38,
+                384,
+                1042
+              ],
+              "scroll": [
+                1042,
+                1042
+              ]
+            },
+            {
+              "class": "dpBox dcBox fedBox",
+              "rect": [
+                0,
+                0,
+                1040,
+                1080
+              ],
+              "scroll": [
+                1078,
+                1078
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "vassal",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                1536,
+                38,
+                384,
+                1042
+              ],
+              "scroll": [
+                1042,
+                1042
+              ]
+            },
+            {
+              "class": "mbox sci",
+              "rect": [
+                700,
+                64.796875,
+                520,
+                950.390625
+              ],
+              "scroll": [
+                1026,
+                948
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "spy",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                1536,
+                38,
+                384,
+                1042
+              ],
+              "scroll": [
+                1042,
+                1042
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "council",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                1536,
+                38,
+                384,
+                1042
+              ],
+              "scroll": [
+                1042,
+                1042
+              ]
+            },
+            {
+              "class": "dpBox",
+              "rect": [
+                440,
+                396,
+                1040,
+                288
+              ],
+              "scroll": [
+                286,
+                286
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "settings",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                1536,
+                38,
+                384,
+                1042
+              ],
+              "scroll": [
+                1042,
+                1042
+              ]
+            },
+            {
+              "class": "mbox ",
+              "rect": [
+                700,
+                64.796875,
+                520,
+                950.390625
+              ],
+              "scroll": [
+                1185,
+                948
+              ]
+            }
+          ],
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "1920 desktop scales",
+      "status": "PASS",
+      "data": [
+        {
+          "value": 80,
+          "picks": [
+            {
+              "kind": "system",
+              "id": 6
+            },
+            {
+              "kind": "fleet",
+              "id": 1
+            }
+          ],
+          "geometry": {
+            "modal": [
+              656,
+              63.96875,
+              608,
+              952.0625
+            ],
+            "canvas": [
+              0,
+              0,
+              1920,
+              1080
+            ],
+            "viewport": [
+              1920,
+              1080
+            ],
+            "effective": {
+              "preferred": 80,
+              "effective": 80,
+              "limited": false
+            },
+            "overflow": false
+          },
+          "saveRngCameraUnchanged": true,
+          "reload": true
+        },
+        {
+          "value": 100,
+          "picks": [
+            {
+              "kind": "system",
+              "id": 6
+            },
+            {
+              "kind": "fleet",
+              "id": 1
+            }
+          ],
+          "geometry": {
+            "modal": [
+              700,
+              64.796875,
+              520,
+              950.390625
+            ],
+            "canvas": [
+              0,
+              0,
+              1920,
+              1080
+            ],
+            "viewport": [
+              1920,
+              1080
+            ],
+            "effective": {
+              "preferred": 100,
+              "effective": 100,
+              "limited": false
+            },
+            "overflow": false
+          },
+          "saveRngCameraUnchanged": true,
+          "reload": true
+        },
+        {
+          "value": 125,
+          "picks": [
+            {
+              "kind": "system",
+              "id": 6
+            },
+            {
+              "kind": "fleet",
+              "id": 1
+            }
+          ],
+          "geometry": {
+            "modal": [
+              485,
+              12,
+              950,
+              1056
+            ],
+            "canvas": [
+              0,
+              0,
+              1920,
+              1080
+            ],
+            "viewport": [
+              1920,
+              1080
+            ],
+            "effective": {
+              "preferred": 125,
+              "effective": 125,
+              "limited": false
+            },
+            "overflow": false
+          },
+          "saveRngCameraUnchanged": true,
+          "reload": true
+        }
+      ]
+    },
+    {
+      "name": "1920 PC/touch inputs + MP lobby",
+      "status": "PASS",
+      "data": {
+        "wheel": true,
+        "drag": true,
+        "rightClick": true,
+        "keyboardFocusEscape": true,
+        "resize": true,
+        "lobbyDesign": true
+      }
+    },
+    {
+      "name": "2560x1440 menu + setup",
+      "status": "PASS"
+    },
+    {
+      "name": "2560x1440 game and panels",
+      "status": "PASS",
+      "data": [
+        {
+          "name": "map",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                2100,
+                38,
+                460,
+                1402
+              ],
+              "scroll": [
+                1402,
+                1402
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "fleet",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                2100,
+                38,
+                460,
+                1402
+              ],
+              "scroll": [
+                1402,
+                1402
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "science",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                2100,
+                38,
+                460,
+                1402
+              ],
+              "scroll": [
+                1402,
+                1402
+              ]
+            },
+            {
+              "class": "dpBox scienceBox",
+              "rect": [
+                790,
+                57.59375,
+                980,
+                1324.8125
+              ],
+              "scroll": [
+                1323,
+                1323
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "diplo",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                2100,
+                38,
+                460,
+                1402
+              ],
+              "scroll": [
+                1402,
+                1402
+              ]
+            },
+            {
+              "class": "dpBox dcBox",
+              "rect": [
+                820,
+                57.59375,
+                920,
+                1324.796875
+              ],
+              "scroll": [
+                1323,
+                1323
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "federation",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                2100,
+                38,
+                460,
+                1402
+              ],
+              "scroll": [
+                1402,
+                1402
+              ]
+            },
+            {
+              "class": "dpBox dcBox fedBox",
+              "rect": [
+                0,
+                0,
+                1040,
+                1440
+              ],
+              "scroll": [
+                1438,
+                1438
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "vassal",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                2100,
+                38,
+                460,
+                1402
+              ],
+              "scroll": [
+                1402,
+                1402
+              ]
+            },
+            {
+              "class": "mbox sci",
+              "rect": [
+                1020,
+                206.0625,
+                520,
+                1027.859375
+              ],
+              "scroll": [
+                1026,
+                1026
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "spy",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                2100,
+                38,
+                460,
+                1402
+              ],
+              "scroll": [
+                1402,
+                1402
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "council",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                2100,
+                38,
+                460,
+                1402
+              ],
+              "scroll": [
+                1402,
+                1402
+              ]
+            },
+            {
+              "class": "dpBox",
+              "rect": [
+                760,
+                576,
+                1040,
+                288
+              ],
+              "scroll": [
+                286,
+                286
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "settings",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                2100,
+                38,
+                460,
+                1402
+              ],
+              "scroll": [
+                1402,
+                1402
+              ]
+            },
+            {
+              "class": "mbox ",
+              "rect": [
+                1020,
+                126.265625,
+                520,
+                1187.453125
+              ],
+              "scroll": [
+                1185,
+                1185
+              ]
+            }
+          ],
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "2560 desktop scales",
+      "status": "PASS",
+      "data": [
+        {
+          "value": 80,
+          "picks": [
+            {
+              "kind": "system",
+              "id": 6
+            },
+            {
+              "kind": "fleet",
+              "id": 1
+            }
+          ],
+          "geometry": {
+            "modal": [
+              976,
+              243.96875,
+              608,
+              952.0625
+            ],
+            "canvas": [
+              0,
+              0,
+              2560,
+              1440
+            ],
+            "viewport": [
+              2560,
+              1440
+            ],
+            "effective": {
+              "preferred": 80,
+              "effective": 80,
+              "limited": false
+            },
+            "overflow": false
+          },
+          "saveRngCameraUnchanged": true,
+          "reload": true
+        },
+        {
+          "value": 100,
+          "picks": [
+            {
+              "kind": "system",
+              "id": 6
+            },
+            {
+              "kind": "fleet",
+              "id": 1
+            }
+          ],
+          "geometry": {
+            "modal": [
+              1020,
+              126.265625,
+              520,
+              1187.453125
+            ],
+            "canvas": [
+              0,
+              0,
+              2560,
+              1440
+            ],
+            "viewport": [
+              2560,
+              1440
+            ],
+            "effective": {
+              "preferred": 100,
+              "effective": 100,
+              "limited": false
+            },
+            "overflow": false
+          },
+          "saveRngCameraUnchanged": true,
+          "reload": true
+        },
+        {
+          "value": 125,
+          "picks": [
+            {
+              "kind": "system",
+              "id": 6
+            },
+            {
+              "kind": "fleet",
+              "id": 1
+            }
+          ],
+          "geometry": {
+            "modal": [
+              805,
+              12,
+              950,
+              1416
+            ],
+            "canvas": [
+              0,
+              0,
+              2560,
+              1440
+            ],
+            "viewport": [
+              2560,
+              1440
+            ],
+            "effective": {
+              "preferred": 125,
+              "effective": 125,
+              "limited": false
+            },
+            "overflow": false
+          },
+          "saveRngCameraUnchanged": true,
+          "reload": true
+        }
+      ]
+    },
+    {
+      "name": "2560 PC/touch inputs + MP lobby",
+      "status": "PASS",
+      "data": {
+        "wheel": true,
+        "drag": true,
+        "rightClick": true,
+        "keyboardFocusEscape": true,
+        "resize": true,
+        "lobbyDesign": true
+      }
+    },
+    {
+      "name": "3440x1440 menu + setup",
+      "status": "PASS"
+    },
+    {
+      "name": "3440x1440 game and panels",
+      "status": "PASS",
+      "data": [
+        {
+          "name": "map",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                2980,
+                38,
+                460,
+                1402
+              ],
+              "scroll": [
+                1402,
+                1402
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "fleet",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                2980,
+                38,
+                460,
+                1402
+              ],
+              "scroll": [
+                1402,
+                1402
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "science",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                2980,
+                38,
+                460,
+                1402
+              ],
+              "scroll": [
+                1402,
+                1402
+              ]
+            },
+            {
+              "class": "dpBox scienceBox",
+              "rect": [
+                1230,
+                57.59375,
+                980,
+                1324.8125
+              ],
+              "scroll": [
+                1323,
+                1323
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "diplo",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                2980,
+                38,
+                460,
+                1402
+              ],
+              "scroll": [
+                1402,
+                1402
+              ]
+            },
+            {
+              "class": "dpBox dcBox",
+              "rect": [
+                1260,
+                57.59375,
+                920,
+                1324.796875
+              ],
+              "scroll": [
+                1323,
+                1323
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "federation",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                2980,
+                38,
+                460,
+                1402
+              ],
+              "scroll": [
+                1402,
+                1402
+              ]
+            },
+            {
+              "class": "dpBox dcBox fedBox",
+              "rect": [
+                0,
+                0,
+                1040,
+                1440
+              ],
+              "scroll": [
+                1438,
+                1438
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "vassal",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                2980,
+                38,
+                460,
+                1402
+              ],
+              "scroll": [
+                1402,
+                1402
+              ]
+            },
+            {
+              "class": "mbox sci",
+              "rect": [
+                1460,
+                206.0625,
+                520,
+                1027.859375
+              ],
+              "scroll": [
+                1026,
+                1026
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "spy",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                2980,
+                38,
+                460,
+                1402
+              ],
+              "scroll": [
+                1402,
+                1402
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "council",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                2980,
+                38,
+                460,
+                1402
+              ],
+              "scroll": [
+                1402,
+                1402
+              ]
+            },
+            {
+              "class": "dpBox",
+              "rect": [
+                1200,
+                576,
+                1040,
+                288
+              ],
+              "scroll": [
+                286,
+                286
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "settings",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                2980,
+                38,
+                460,
+                1402
+              ],
+              "scroll": [
+                1402,
+                1402
+              ]
+            },
+            {
+              "class": "mbox ",
+              "rect": [
+                1460,
+                126.265625,
+                520,
+                1187.453125
+              ],
+              "scroll": [
+                1185,
+                1185
+              ]
+            }
+          ],
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "3440 desktop scales",
+      "status": "PASS",
+      "data": [
+        {
+          "value": 80,
+          "picks": [
+            {
+              "kind": "system",
+              "id": 6
+            },
+            {
+              "kind": "fleet",
+              "id": 1
+            }
+          ],
+          "geometry": {
+            "modal": [
+              1416,
+              243.96875,
+              608,
+              952.0625
+            ],
+            "canvas": [
+              0,
+              0,
+              3440,
+              1440
+            ],
+            "viewport": [
+              3440,
+              1440
+            ],
+            "effective": {
+              "preferred": 80,
+              "effective": 80,
+              "limited": false
+            },
+            "overflow": false
+          },
+          "saveRngCameraUnchanged": true,
+          "reload": true
+        },
+        {
+          "value": 100,
+          "picks": [
+            {
+              "kind": "system",
+              "id": 6
+            },
+            {
+              "kind": "fleet",
+              "id": 1
+            }
+          ],
+          "geometry": {
+            "modal": [
+              1460,
+              126.265625,
+              520,
+              1187.453125
+            ],
+            "canvas": [
+              0,
+              0,
+              3440,
+              1440
+            ],
+            "viewport": [
+              3440,
+              1440
+            ],
+            "effective": {
+              "preferred": 100,
+              "effective": 100,
+              "limited": false
+            },
+            "overflow": false
+          },
+          "saveRngCameraUnchanged": true,
+          "reload": true
+        },
+        {
+          "value": 125,
+          "picks": [
+            {
+              "kind": "system",
+              "id": 6
+            },
+            {
+              "kind": "fleet",
+              "id": 1
+            }
+          ],
+          "geometry": {
+            "modal": [
+              1245,
+              12,
+              950,
+              1416
+            ],
+            "canvas": [
+              0,
+              0,
+              3440,
+              1440
+            ],
+            "viewport": [
+              3440,
+              1440
+            ],
+            "effective": {
+              "preferred": 125,
+              "effective": 125,
+              "limited": false
+            },
+            "overflow": false
+          },
+          "saveRngCameraUnchanged": true,
+          "reload": true
+        }
+      ]
+    },
+    {
+      "name": "3440 PC/touch inputs + MP lobby",
+      "status": "PASS",
+      "data": {
+        "wheel": true,
+        "drag": true,
+        "rightClick": true,
+        "keyboardFocusEscape": true,
+        "resize": true,
+        "lobbyDesign": true
+      }
+    },
+    {
+      "name": "800x360 menu + setup",
+      "status": "PASS"
+    },
+    {
+      "name": "800x360 game and panels",
+      "status": "PASS",
+      "data": [
+        {
+          "name": "map",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                450,
+                30,
+                350,
+                330
+              ],
+              "scroll": [
+                330,
+                330
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "fleet",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                498,
+                30,
+                302,
+                330
+              ],
+              "scroll": [
+                330,
+                330
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "science",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                498,
+                30,
+                302,
+                330
+              ],
+              "scroll": [
+                330,
+                330
+              ]
+            },
+            {
+              "class": "dpBox scienceBox",
+              "rect": [
+                -18.679101943969727,
+                0,
+                800,
+                360
+              ],
+              "scroll": [
+                360,
+                360
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "diplo",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                498,
+                30,
+                302,
+                330
+              ],
+              "scroll": [
+                330,
+                330
+              ]
+            },
+            {
+              "class": "dpBox dcBox",
+              "rect": [
+                -33.51375961303711,
+                0,
+                800,
+                360
+              ],
+              "scroll": [
+                360,
+                360
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "federation",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                498,
+                30,
+                302,
+                330
+              ],
+              "scroll": [
+                330,
+                330
+              ]
+            },
+            {
+              "class": "dpBox dcBox fedBox",
+              "rect": [
+                0,
+                0,
+                800,
+                360
+              ],
+              "scroll": [
+                360,
+                360
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "vassal",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                498,
+                30,
+                302,
+                330
+              ],
+              "scroll": [
+                330,
+                330
+              ]
+            },
+            {
+              "class": "mbox sci",
+              "rect": [
+                140,
+                33.921875,
+                520,
+                292.15625
+              ],
+              "scroll": [
+                1026,
+                290
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "spy",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                498,
+                30,
+                302,
+                330
+              ],
+              "scroll": [
+                330,
+                330
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "council",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                498,
+                30,
+                302,
+                330
+              ],
+              "scroll": [
+                330,
+                330
+              ]
+            },
+            {
+              "class": "dpBox",
+              "rect": [
+                -0.000005183379471418448,
+                0,
+                720,
+                360
+              ],
+              "scroll": [
+                360,
+                360
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "settings",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                498,
+                30,
+                302,
+                330
+              ],
+              "scroll": [
+                330,
+                330
+              ]
+            },
+            {
+              "class": "mbox ",
+              "rect": [
+                140,
+                33.921875,
+                520,
+                292.15625
+              ],
+              "scroll": [
+                1185,
+                290
+              ]
+            }
+          ],
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "800 touch + scale limit",
+      "status": "PASS"
+    },
+    {
+      "name": "800 PC/touch inputs + MP lobby",
+      "status": "PASS",
+      "data": {
+        "wheel": true,
+        "drag": true,
+        "rightClick": true,
+        "keyboardFocusEscape": true,
+        "resize": true,
+        "lobbyDesign": true
+      }
+    },
+    {
+      "name": "960x540 menu + setup",
+      "status": "PASS"
+    },
+    {
+      "name": "960x540 game and panels",
+      "status": "PASS",
+      "data": [
+        {
+          "name": "map",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                610,
+                34,
+                350,
+                506
+              ],
+              "scroll": [
+                506,
+                506
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "fleet",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                658,
+                34,
+                302,
+                506
+              ],
+              "scroll": [
+                506,
+                506
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "science",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                658,
+                34,
+                302,
+                506
+              ],
+              "scroll": [
+                506,
+                506
+              ]
+            },
+            {
+              "class": "dpBox scienceBox",
+              "rect": [
+                0,
+                0,
+                960,
+                540
+              ],
+              "scroll": [
+                540,
+                540
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "diplo",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                658,
+                34,
+                302,
+                506
+              ],
+              "scroll": [
+                506,
+                506
+              ]
+            },
+            {
+              "class": "dpBox dcBox",
+              "rect": [
+                -4.275247573852539,
+                0,
+                920,
+                540
+              ],
+              "scroll": [
+                540,
+                540
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "federation",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                658,
+                34,
+                302,
+                506
+              ],
+              "scroll": [
+                506,
+                506
+              ]
+            },
+            {
+              "class": "dpBox dcBox fedBox",
+              "rect": [
+                0,
+                0,
+                960,
+                540
+              ],
+              "scroll": [
+                540,
+                540
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "vassal",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                658,
+                34,
+                302,
+                506
+              ],
+              "scroll": [
+                506,
+                506
+              ]
+            },
+            {
+              "class": "mbox sci",
+              "rect": [
+                220,
+                44.71875,
+                520,
+                450.546875
+              ],
+              "scroll": [
+                1026,
+                449
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "spy",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                658,
+                34,
+                302,
+                506
+              ],
+              "scroll": [
+                506,
+                506
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "council",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                658,
+                34,
+                302,
+                506
+              ],
+              "scroll": [
+                506,
+                506
+              ]
+            },
+            {
+              "class": "dpBox",
+              "rect": [
+                -0.7466552257537842,
+                0,
+                720,
+                540
+              ],
+              "scroll": [
+                540,
+                540
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "settings",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                658,
+                34,
+                302,
+                506
+              ],
+              "scroll": [
+                506,
+                506
+              ]
+            },
+            {
+              "class": "mbox ",
+              "rect": [
+                220,
+                44.71875,
+                520,
+                450.546875
+              ],
+              "scroll": [
+                1185,
+                449
+              ]
+            }
+          ],
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "960 touch + scale limit",
+      "status": "PASS"
+    },
+    {
+      "name": "960 PC/touch inputs + MP lobby",
+      "status": "PASS",
+      "data": {
+        "wheel": true,
+        "drag": true,
+        "rightClick": true,
+        "keyboardFocusEscape": true,
+        "resize": true,
+        "lobbyDesign": true
+      }
+    }
+  ],
+  "errors": []
+}

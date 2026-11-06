@@ -1,0 +1,12 @@
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+100 !== 125
+
+    at /workspace/Star/tests/browser-mp89-prefs.cjs:5:947 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: 100,
+  expected: 125,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
