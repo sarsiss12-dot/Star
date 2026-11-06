@@ -1,0 +1,302 @@
+{
+  "results": [
+    {
+      "name": "800x360 game and panels",
+      "status": "PASS",
+      "data": [
+        {
+          "name": "map",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                450,
+                30,
+                350,
+                330
+              ],
+              "scroll": [
+                330,
+                330
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "production",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                450,
+                30,
+                350,
+                330
+              ],
+              "scroll": [
+                330,
+                330
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "fleet",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                498,
+                30,
+                302,
+                330
+              ],
+              "scroll": [
+                330,
+                330
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "science",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                498,
+                30,
+                302,
+                330
+              ],
+              "scroll": [
+                330,
+                330
+              ]
+            },
+            {
+              "class": "dpBox scienceBox",
+              "rect": [
+                0,
+                0,
+                800,
+                360
+              ],
+              "scroll": [
+                360,
+                360
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "diplo",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                498,
+                30,
+                302,
+                330
+              ],
+              "scroll": [
+                330,
+                330
+              ]
+            },
+            {
+              "class": "dpBox dcBox",
+              "rect": [
+                0,
+                0,
+                800,
+                360
+              ],
+              "scroll": [
+                360,
+                360
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "notification",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                498,
+                30,
+                302,
+                330
+              ],
+              "scroll": [
+                330,
+                330
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "federation",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                498,
+                30,
+                302,
+                330
+              ],
+              "scroll": [
+                330,
+                330
+              ]
+            },
+            {
+              "class": "dpBox dcBox fedBox",
+              "rect": [
+                0,
+                0,
+                800,
+                360
+              ],
+              "scroll": [
+                360,
+                360
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "vassal",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                498,
+                30,
+                302,
+                330
+              ],
+              "scroll": [
+                330,
+                330
+              ]
+            },
+            {
+              "class": "mbox sci",
+              "rect": [
+                140,
+                33.921875,
+                520,
+                292.15625
+              ],
+              "scroll": [
+                1026,
+                290
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "spy",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                498,
+                30,
+                302,
+                330
+              ],
+              "scroll": [
+                330,
+                330
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "council",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                498,
+                30,
+                302,
+                330
+              ],
+              "scroll": [
+                330,
+                330
+              ]
+            },
+            {
+              "class": "dpBox",
+              "rect": [
+                0,
+                0,
+                720,
+                360
+              ],
+              "scroll": [
+                360,
+                360
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "settings",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                498,
+                30,
+                302,
+                330
+              ],
+              "scroll": [
+                330,
+                330
+              ]
+            },
+            {
+              "class": "mbox ",
+              "rect": [
+                140,
+                33.921875,
+                520,
+                292.15625
+              ],
+              "scroll": [
+                1185,
+                290
+              ]
+            }
+          ],
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "800 touch + scale limit",
+      "status": "PASS"
+    }
+  ],
+  "errors": []
+}

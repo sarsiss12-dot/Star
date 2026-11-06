@@ -1,0 +1,15 @@
+{
+  "transport": "local loopback HTTP; not Render",
+  "mp": "MP.8.9",
+  "build": "96h10p6",
+  "files": {
+    "mp-core.js": "e598045ba58b",
+    "relay.js": "4b9e7740d629",
+    "mp1-host.js": "c8e2251d1811",
+    "join.js": "bc2732493741",
+    "mirror.js": "75730fb35ea6",
+    "guest-stars.js": "f17274824769",
+    "mp71-dip.js": "4b7b5e64b5ba",
+    "mp7-setup.js": "4f8fef4ce1a9"
+  }
+}

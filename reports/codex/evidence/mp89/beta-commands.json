@@ -1,0 +1,58 @@
+[
+  [
+    "beta-prefs",
+    "tests/browser-mp89-prefs.cjs",
+    {}
+  ],
+  [
+    "beta-R1",
+    "tests/browser-mp8.cjs",
+    {
+      "MP8_SCEN": "R",
+      "MP8_MONTHS": "6",
+      "MP89_R_STATE": "1",
+      "MP89_UI": "1",
+      "MP89_MENU_DIAG": "1"
+    }
+  ],
+  [
+    "beta-R2",
+    "tests/browser-mp8.cjs",
+    {
+      "MP8_SCEN": "R",
+      "MP8_MONTHS": "6",
+      "MP89_R_STATE": "1",
+      "MP89_MENU_DIAG": "1"
+    }
+  ],
+  [
+    "beta-panel800",
+    "tests/browser-mp89-ui.cjs",
+    {
+      "MP89_PANEL_ONLY": "1",
+      "MP89_WIDTH": "800"
+    }
+  ],
+  [
+    "beta-panel960",
+    "tests/browser-mp89-ui.cjs",
+    {
+      "MP89_PANEL_ONLY": "1",
+      "MP89_WIDTH": "960"
+    }
+  ],
+  [
+    "beta-panel125",
+    "tests/browser-mp89-ui.cjs",
+    {
+      "MP89_PANEL_ONLY": "1",
+      "MP89_WIDTH": "1280",
+      "MP89_PANEL_SCALE": "125"
+    }
+  ],
+  [
+    "beta-source",
+    "tests/mp89_ui_integrity_test.js",
+    {}
+  ]
+]

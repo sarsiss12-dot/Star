@@ -1,0 +1,70 @@
+{
+  "base": "8ce738b42636cd792a8d552230ca8194a4da053f",
+  "rows": [
+    {
+      "file": "main.js",
+      "sha256": "7aeff079be9fdf4c618a1a1606035e8879870bd871d662abe4aac107aa1f6a53",
+      "same_as_base_except_declared_version": true
+    },
+    {
+      "file": "map.js",
+      "sha256": "d8ca27ee07c484b7399f95d8031aa70fb7539bcf89d768c8442200b7cba76ae3",
+      "same_as_base_except_declared_version": true
+    },
+    {
+      "file": "ai.js",
+      "sha256": "49bb05c0621b8a31e9d61f361ea3a36250915f440a51d77e58aec7cc1e653b87",
+      "same_as_base_except_declared_version": true
+    },
+    {
+      "file": "economy.js",
+      "sha256": "315653254c3e690523d5068d8ccec6a4cd7adc7f44e7a563adc04917f1eeee80",
+      "same_as_base_except_declared_version": true
+    },
+    {
+      "file": "diplomacy.js",
+      "sha256": "ca589f8d2581e7189f6ace471db9bf2e9e1e504117eb2249b7ce9f04e206eaf4",
+      "same_as_base_except_declared_version": true
+    },
+    {
+      "file": "economic-ledger.js",
+      "sha256": "309837d46e3d533f17d0ecb76a5c531474662cb57e05802ca52ffa904d5c5c3c",
+      "same_as_base_except_declared_version": true
+    },
+    {
+      "file": "research/mp0/mp-core.js",
+      "sha256": "e598045ba58bfa7cf9f1582b313833565c67383ddf19c126ac7aef6674e03530",
+      "same_as_base_except_declared_version": true
+    },
+    {
+      "file": "research/mp6/mirror.js",
+      "sha256": "75730fb35ea6601e2a7c26a7c478827b7082c998145537628e815ff7ace29659",
+      "same_as_base_except_declared_version": true
+    },
+    {
+      "file": "research/mp6/client/guest-stars.js",
+      "sha256": "f172748247692e258dffe247bb4191bf8b6502affd91e2118d2083995ff49a8f",
+      "same_as_base_except_declared_version": true
+    },
+    {
+      "file": "research/mp4/client/mp4-save.js",
+      "sha256": "d6e085c3b2787a3ad3c9dee314cebebb4f232934a71f9144f8d065583ceffb79",
+      "same_as_base_except_declared_version": true
+    },
+    {
+      "file": "research/mp1/client/join.js",
+      "sha256": "bc27324937414ab638f81b0c1ba3e70c5e540c196d787e3580948c1028236094",
+      "same_as_base_except_declared_version": true
+    },
+    {
+      "file": "research/mp1/server/relay.js",
+      "sha256": "4b9e7740d62952f48a3d560d8dd34085c10166f15076eec1b94461dc157fc405",
+      "same_as_base_except_declared_version": true
+    },
+    {
+      "file": "research/mp1/client/view.js",
+      "sha256": "500902722f4af90327ef60ef806a5f8f5c67249acd2f79e5cc06e1e7cd79fa1c",
+      "same_as_base_except_declared_version": true
+    }
+  ]
+}

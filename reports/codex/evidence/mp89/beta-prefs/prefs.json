@@ -1,0 +1,14 @@
+[
+  {
+    "mode": "empty",
+    "status": "PASS"
+  },
+  {
+    "mode": "corrupt",
+    "status": "PASS"
+  },
+  {
+    "mode": "blocked",
+    "status": "PASS"
+  }
+]

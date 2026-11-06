@@ -1,109 +1,110 @@
 {
   "file": "releases/stars-faz96h10p6.zip",
-  "bytes": 776370,
-  "sha256": "71a485d3ae9f20d0ccf37a3fdd6c861dc87ac1dc21bc8465b41f08380205e6f6",
-  "crc32": "7ec6dc93",
+  "bytes": 776457,
+  "sha256": "9f0bf5f11913c277ca23274c7a84544fd15ecee3edffd3e8ab56ca149ff814f9",
+  "crc32": "ee942090",
   "deterministic_repeat_equal": true,
+  "manifest_sha256": "1df79e50bc85bb4602589c0e5a78bca62eb4c3433019d157a7bfcf6598c2a408",
   "members": [
     {
       "file": "RELEASE-MANIFEST.json",
-      "crc32": "5f98b34f",
-      "bytes": 2166
+      "bytes": 2218,
+      "crc32": "0119a38a"
     },
     {
       "file": "ai.js",
-      "crc32": "bcb7097f",
-      "bytes": 284547
+      "bytes": 284547,
+      "crc32": "bcb7097f"
     },
     {
       "file": "archive-ui.js",
-      "crc32": "4574c084",
-      "bytes": 16852
+      "bytes": 16852,
+      "crc32": "4574c084"
     },
     {
       "file": "audio.js",
-      "crc32": "8e4ebbb4",
-      "bytes": 20197
+      "bytes": 20197,
+      "crc32": "8e4ebbb4"
     },
     {
       "file": "combat.js",
-      "crc32": "60f044a8",
-      "bytes": 16353
+      "bytes": 16353,
+      "crc32": "60f044a8"
     },
     {
       "file": "commerce-ui.js",
-      "crc32": "1d6711a6",
-      "bytes": 11105
+      "bytes": 11105,
+      "crc32": "1d6711a6"
     },
     {
       "file": "commerce.js",
-      "crc32": "8c20977c",
-      "bytes": 29743
+      "bytes": 29743,
+      "crc32": "8c20977c"
     },
     {
       "file": "construction.js",
-      "crc32": "d9a9cbdd",
-      "bytes": 8838
+      "bytes": 8838,
+      "crc32": "d9a9cbdd"
     },
     {
       "file": "diplomacy.js",
-      "crc32": "339d8f2a",
-      "bytes": 505766
+      "bytes": 505766,
+      "crc32": "339d8f2a"
     },
     {
       "file": "economic-ledger.js",
-      "crc32": "a513ee94",
-      "bytes": 17942
+      "bytes": 17942,
+      "crc32": "a513ee94"
     },
     {
       "file": "economy-ui.js",
-      "crc32": "5e1d2442",
-      "bytes": 17157
+      "bytes": 17157,
+      "crc32": "5e1d2442"
     },
     {
       "file": "economy.js",
-      "crc32": "abf1349e",
-      "bytes": 214033
+      "bytes": 214033,
+      "crc32": "abf1349e"
     },
     {
       "file": "inbox.js",
-      "crc32": "1d739fed",
-      "bytes": 11972
+      "bytes": 11972,
+      "crc32": "1d739fed"
     },
     {
       "file": "index.html",
-      "crc32": "9f962e83",
-      "bytes": 94586
+      "bytes": 94586,
+      "crc32": "9f962e83"
     },
     {
       "file": "main.js",
-      "crc32": "959f760c",
-      "bytes": 480680
+      "bytes": 480680,
+      "crc32": "959f760c"
     },
     {
       "file": "manifest.json",
-      "crc32": "641ae79b",
-      "bytes": 1922
+      "bytes": 1922,
+      "crc32": "641ae79b"
     },
     {
       "file": "map.js",
-      "crc32": "b4dcdb97",
-      "bytes": 146657
+      "bytes": 146657,
+      "crc32": "b4dcdb97"
     },
     {
       "file": "news.js",
-      "crc32": "a13ff379",
-      "bytes": 6039
+      "bytes": 6039,
+      "crc32": "a13ff379"
     },
     {
       "file": "sw.js",
-      "crc32": "527a0cb4",
-      "bytes": 2803
+      "bytes": 2803,
+      "crc32": "527a0cb4"
     },
     {
       "file": "ui.js",
-      "crc32": "55f5d8f7",
-      "bytes": 562448
+      "bytes": 562556,
+      "crc32": "98506dfe"
     }
   ]
 }

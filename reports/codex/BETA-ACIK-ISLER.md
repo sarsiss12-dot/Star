@@ -21,9 +21,10 @@ Dört issue GitHub web sayfasındaki özgün React verisinden title/body/state a
 |---|---|---|
 | Yerel bağlantı kopması sonrası aynı devlete dönüş, kararın tek uygulanması ve gizlilik | **TAMAMLANDI / KANITLI** — yalnız test edilen yerel kapsam | P0; [MP8 N9/0](evidence/mp89/N.log), [MP73 8/0](evidence/mp89/mp73.log) |
 | A1/B1 önceki düzeltmelerinin yerel regresyonu | **TAMAMLANDI / KANITLI** — kalıcı olarak her ortamda hatasızlık iddiası değil | [MP74 7/0](evidence/mp89/mp74.log); [MP88 kök nedenleri](MP88-KARARLILIK-SONUC.md) |
-| Kayıt/devamın dolu savaş/federasyon/vasallık ile iki temiz kabulü | **AÇIK / DOĞRULANMADI** — kabul çalışıyor | P0; son durum [MP89 ana raporu](MP89-PC-UI-KARARLILIK-SONUC.md) |
-| PC UI Scale ve mobil koruma | **KISMEN TAMAMLANDI** | P1; kurtarılan UI uygulanmış, son kabul ana raporda |
+| Kayıt/devamın dolu savaş/federasyon/vasallık ile iki temiz kabulü | **TAMAMLANDI / KANITLI** — yalnız yerel otomatik kapsam | P0; iki temiz R0–R4 PASS ve tam siyasi alan karşılaştırması; son durum [MP89 ana raporu](MP89-PC-UI-KARARLILIK-SONUC.md) |
+| PC UI Scale ve mobil koruma | **TAMAMLANDI / KANITLI** — test edilen Chromium boyutları | P1; SP/MP80/100/125 ve mobil100 kabulü PASS; ayrı MP doku/gerçek cihaz/Ctrl± sınırları ana raporda |
 | Save8/RNG, PERF.1/PERF.2, MP.8.6 koruması | **TAMAMLANDI / KANITLI** — kaydedilmiş regresyon kapsamı | [PERF1](evidence/mp89/perf1.log), [PERF2](evidence/mp89/perf2.log), [piksel](evidence/mp89/cache.log); nihai paket ayrıca doğrulanır |
+| Eski aralıklı R3/3440/960 giriş/otomasyon hatalarının kesin kökü | **AÇIK / DOĞRULANMADI** | P0/P1 yayın güvenilirliği; tekrar PASS kalıcı çözüm sayılmaz. |
 | Gerçek PC/Android/LAN/online uçtan uca beta kabulü | **AÇIK / DOĞRULANMADI** | P1/P0 yayın kapısı; [manuel plan](MP89-MANUEL-BETA-PLANI.md). Render ve fiziksel Android bu fazda NOT RUN. |
 
 Issue başlığının tamamlanmış görünmesi için alt kapsam PASS'leri yeterli sayılmaz. Boş politika alanının eşit yüklenmesi dolu savaş/federasyon/vasallık kabulü sayılmaz. Çalıştırılmamış cihaz/ağ testi yerel relay PASS'iyle değiştirilemez.

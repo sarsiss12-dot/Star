@@ -1,0 +1,375 @@
+{
+  "source_head": "8ce738b42636cd792a8d552230ca8194a4da053f",
+  "checkpoint_head": "5210281c46afc3b38048ead53a7399625e340b35",
+  "branch": "codex/stars-mp89-pc-ui-stability",
+  "base": "codex/stars-mp88-stability",
+  "beta_release_approved": false,
+  "resume": {
+    "beta-R1": {
+      "results": [
+        {
+          "name": "R0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 11; misafir gerçek STARS arayüzünde",
+          "status": "PASS"
+        },
+        {
+          "name": "R1 6 ay kampanya + bekleyen insan teklifi (C → B), savaş, federasyon/konsey denemeleri; senkron",
+          "status": "PASS"
+        },
+        {
+          "name": "R2 kayıt: OYUNU KAYDET (IndexedDB); Save8/RNG değişmez; misafir cihazında kayıt kimliği; tüm tarayıcı süreçleri + relay süreci kapanır",
+          "status": "PASS"
+        },
+        {
+          "name": "R3 devam: yeni host süreci aynı profil → KAYITLI OYUNA DEVAM ET → yeni oda; misafirler yeni kodla gerçek STARS arayüzünden döner → aynı devletler; dünya, teklifler, savaşlar, federasyon, konsey, hız aynı",
+          "status": "PASS"
+        },
+        {
+          "name": "R4 devam eden oyun: bekleyen teklif B tarafından tam bir kez kabul edilir; 6 ay daha kampanya + senkron",
+          "status": "PASS"
+        },
+        {
+          "name": "UI89 misafir PC ölçeği, gerçek giriş ve yerel kalıcılık; host ve C değişmez",
+          "status": "PASS"
+        }
+      ],
+      "fixture": {
+        "explicitFixture": true,
+        "day": 182.4596,
+        "seed": 11,
+        "humanIds": [
+          0,
+          1,
+          2
+        ],
+        "aiCount": 5,
+        "federation": {
+          "id": 1,
+          "members": [
+            0,
+            1
+          ]
+        },
+        "war": [
+          3,
+          0
+        ],
+        "vassal": {
+          "lord": 0,
+          "subject": 4,
+          "type": "haracguzar"
+        },
+        "rng": 1344760556
+      },
+      "fullRecordsEqual": true,
+      "secondAccept": "rules:closed"
+    },
+    "beta-R2": {
+      "results": [
+        {
+          "name": "R0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 11; misafir gerçek STARS arayüzünde",
+          "status": "PASS"
+        },
+        {
+          "name": "R1 6 ay kampanya + bekleyen insan teklifi (C → B), savaş, federasyon/konsey denemeleri; senkron",
+          "status": "PASS"
+        },
+        {
+          "name": "R2 kayıt: OYUNU KAYDET (IndexedDB); Save8/RNG değişmez; misafir cihazında kayıt kimliği; tüm tarayıcı süreçleri + relay süreci kapanır",
+          "status": "PASS"
+        },
+        {
+          "name": "R3 devam: yeni host süreci aynı profil → KAYITLI OYUNA DEVAM ET → yeni oda; misafirler yeni kodla gerçek STARS arayüzünden döner → aynı devletler; dünya, teklifler, savaşlar, federasyon, konsey, hız aynı",
+          "status": "PASS"
+        },
+        {
+          "name": "R4 devam eden oyun: bekleyen teklif B tarafından tam bir kez kabul edilir; 6 ay daha kampanya + senkron",
+          "status": "PASS"
+        }
+      ],
+      "fixture": {
+        "explicitFixture": true,
+        "day": 181.373084,
+        "seed": 11,
+        "humanIds": [
+          0,
+          1,
+          2
+        ],
+        "aiCount": 5,
+        "federation": {
+          "id": 1,
+          "members": [
+            0,
+            1
+          ]
+        },
+        "war": [
+          3,
+          0
+        ],
+        "vassal": {
+          "lord": 0,
+          "subject": 4,
+          "type": "haracguzar"
+        },
+        "rng": 1344760556
+      },
+      "fullRecordsEqual": true,
+      "secondAccept": "rules:closed"
+    }
+  },
+  "ui": {
+    "guest_scales": [
+      {
+        "value": 80,
+        "picks": [
+          {
+            "kind": "system",
+            "id": 3
+          },
+          {
+            "kind": "fleet",
+            "id": 4
+          }
+        ],
+        "geometry": {
+          "modal": [
+            656,
+            61.96875,
+            608,
+            956.0625
+          ],
+          "canvas": [
+            0,
+            0,
+            1920,
+            1080
+          ],
+          "viewport": [
+            1920,
+            1080
+          ],
+          "effective": {
+            "preferred": 80,
+            "effective": 80,
+            "limited": false
+          },
+          "overflow": false
+        },
+        "saveRngCameraUnchanged": true,
+        "saveSha256": "2f044b251ce22bc195d4fef55c8ddd7c9c0b1a8448dbecad7e821fd3689743f1",
+        "rng": 1,
+        "camera": {
+          "x": 3819.1301459997685,
+          "y": 2210.029806240188,
+          "z": 0.4
+        },
+        "reload": true
+      },
+      {
+        "value": 100,
+        "picks": [
+          {
+            "kind": "system",
+            "id": 3
+          },
+          {
+            "kind": "fleet",
+            "id": 4
+          }
+        ],
+        "geometry": {
+          "modal": [
+            700,
+            64.796875,
+            520,
+            950.390625
+          ],
+          "canvas": [
+            0,
+            0,
+            1920,
+            1080
+          ],
+          "viewport": [
+            1920,
+            1080
+          ],
+          "effective": {
+            "preferred": 100,
+            "effective": 100,
+            "limited": false
+          },
+          "overflow": false
+        },
+        "saveRngCameraUnchanged": true,
+        "saveSha256": "2f044b251ce22bc195d4fef55c8ddd7c9c0b1a8448dbecad7e821fd3689743f1",
+        "rng": 1,
+        "camera": {
+          "x": 3819.1301459997685,
+          "y": 2210.029806240188,
+          "z": 0.4
+        },
+        "reload": true
+      },
+      {
+        "value": 125,
+        "picks": [
+          {
+            "kind": "system",
+            "id": 3
+          },
+          {
+            "kind": "fleet",
+            "id": 4
+          }
+        ],
+        "geometry": {
+          "modal": [
+            485,
+            12,
+            950,
+            1056
+          ],
+          "canvas": [
+            0,
+            0,
+            1920,
+            1080
+          ],
+          "viewport": [
+            1920,
+            1080
+          ],
+          "effective": {
+            "preferred": 125,
+            "effective": 125,
+            "limited": false
+          },
+          "overflow": false
+        },
+        "saveRngCameraUnchanged": true,
+        "saveSha256": "2f044b251ce22bc195d4fef55c8ddd7c9c0b1a8448dbecad7e821fd3689743f1",
+        "rng": 1,
+        "camera": {
+          "x": 3819.1301459997685,
+          "y": 2210.029806240188,
+          "z": 0.4
+        },
+        "reload": true
+      }
+    ],
+    "storage": [
+      {
+        "mode": "empty",
+        "status": "PASS"
+      },
+      {
+        "mode": "corrupt",
+        "status": "PASS"
+      },
+      {
+        "mode": "blocked",
+        "status": "PASS"
+      }
+    ],
+    "panel_exit_codes": [
+      {
+        "name": "panel-settled800",
+        "code": 0
+      },
+      {
+        "name": "panel-settled960",
+        "code": 0
+      },
+      {
+        "name": "panel-settled125",
+        "code": 0
+      }
+    ]
+  },
+  "not_run": [
+    "physical Android",
+    "physical PC manual",
+    "live Render",
+    "real LAN",
+    "browser Ctrl+/- zoom",
+    "Docker/Node22"
+  ],
+  "open": [
+    "intermittent menu action timeout root cause",
+    "real device/network acceptance"
+  ],
+  "github_pr": {
+    "status": "BLOCKED",
+    "attempts": 1,
+    "reason": "API Forbidden"
+  },
+  "preserved_fail_logs": [
+    "R-clean2.log",
+    "R-final1.log",
+    "ui-retake.log",
+    "prefs.log",
+    "prefs-final.log",
+    "ui-fixture-first.log",
+    "store-order-before.log",
+    "modal-before.log",
+    "flyout-before.log"
+  ],
+  "reused_regressions": {
+    "N": {
+      "name": "N",
+      "start": "2026-11-05T18:27:02.598Z",
+      "end": "2026-11-05T18:29:53.116Z",
+      "code": 0
+    },
+    "mp74": {
+      "name": "mp74",
+      "start": "2026-11-05T18:29:53.123Z",
+      "end": "2026-11-05T18:32:03.575Z",
+      "code": 0
+    },
+    "mp75": {
+      "name": "mp75",
+      "start": "2026-11-05T18:32:03.577Z",
+      "end": "2026-11-05T18:33:21.907Z",
+      "code": 0
+    },
+    "mp73": {
+      "name": "mp73",
+      "start": "2026-11-05T18:33:21.908Z",
+      "end": "2026-11-05T18:36:07.914Z",
+      "code": 0
+    },
+    "perf1": {
+      "name": "perf1",
+      "start": "2026-11-05T18:36:07.915Z",
+      "end": "2026-11-05T18:36:10.784Z",
+      "code": 0
+    },
+    "perf2": {
+      "name": "perf2",
+      "start": "2026-11-05T18:36:10.784Z",
+      "end": "2026-11-05T18:36:15.773Z",
+      "code": 0
+    },
+    "cache": {
+      "name": "cache",
+      "start": "2026-11-05T18:36:15.776Z",
+      "end": "2026-11-05T18:36:19.775Z",
+      "code": 0
+    },
+    "host-hash": {
+      "name": "host-hash",
+      "start": "2026-11-05T18:36:19.775Z",
+      "end": "2026-11-05T18:36:29.353Z",
+      "code": 0
+    },
+    "browser-pixels": {
+      "name": "browser-pixels",
+      "start": "2026-11-05T18:36:29.554Z",
+      "end": "2026-11-05T18:36:38.099Z",
+      "code": 0
+    }
+  }
+}

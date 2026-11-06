@@ -1,0 +1,140 @@
+[
+  {
+    "value": 80,
+    "picks": [
+      {
+        "kind": "system",
+        "id": 3
+      },
+      {
+        "kind": "fleet",
+        "id": 4
+      }
+    ],
+    "geometry": {
+      "modal": [
+        656,
+        61.96875,
+        608,
+        956.0625
+      ],
+      "canvas": [
+        0,
+        0,
+        1920,
+        1080
+      ],
+      "viewport": [
+        1920,
+        1080
+      ],
+      "effective": {
+        "preferred": 80,
+        "effective": 80,
+        "limited": false
+      },
+      "overflow": false
+    },
+    "saveRngCameraUnchanged": true,
+    "saveSha256": "2f044b251ce22bc195d4fef55c8ddd7c9c0b1a8448dbecad7e821fd3689743f1",
+    "rng": 1,
+    "camera": {
+      "x": 3819.1301459997685,
+      "y": 2210.029806240188,
+      "z": 0.4
+    },
+    "reload": true
+  },
+  {
+    "value": 100,
+    "picks": [
+      {
+        "kind": "system",
+        "id": 3
+      },
+      {
+        "kind": "fleet",
+        "id": 4
+      }
+    ],
+    "geometry": {
+      "modal": [
+        700,
+        64.796875,
+        520,
+        950.390625
+      ],
+      "canvas": [
+        0,
+        0,
+        1920,
+        1080
+      ],
+      "viewport": [
+        1920,
+        1080
+      ],
+      "effective": {
+        "preferred": 100,
+        "effective": 100,
+        "limited": false
+      },
+      "overflow": false
+    },
+    "saveRngCameraUnchanged": true,
+    "saveSha256": "2f044b251ce22bc195d4fef55c8ddd7c9c0b1a8448dbecad7e821fd3689743f1",
+    "rng": 1,
+    "camera": {
+      "x": 3819.1301459997685,
+      "y": 2210.029806240188,
+      "z": 0.4
+    },
+    "reload": true
+  },
+  {
+    "value": 125,
+    "picks": [
+      {
+        "kind": "system",
+        "id": 3
+      },
+      {
+        "kind": "fleet",
+        "id": 4
+      }
+    ],
+    "geometry": {
+      "modal": [
+        485,
+        12,
+        950,
+        1056
+      ],
+      "canvas": [
+        0,
+        0,
+        1920,
+        1080
+      ],
+      "viewport": [
+        1920,
+        1080
+      ],
+      "effective": {
+        "preferred": 125,
+        "effective": 125,
+        "limited": false
+      },
+      "overflow": false
+    },
+    "saveRngCameraUnchanged": true,
+    "saveSha256": "2f044b251ce22bc195d4fef55c8ddd7c9c0b1a8448dbecad7e821fd3689743f1",
+    "rng": 1,
+    "camera": {
+      "x": 3819.1301459997685,
+      "y": 2210.029806240188,
+      "z": 0.4
+    },
+    "reload": true
+  }
+]

@@ -1,0 +1,100 @@
+[
+  {
+    "viewport": [
+      1280,
+      720
+    ],
+    "sidebar100": [
+      930,
+      38,
+      350,
+      682
+    ],
+    "screen_dir": "ui-matrix",
+    "mobile_touch": false
+  },
+  {
+    "viewport": [
+      1366,
+      768
+    ],
+    "sidebar100": [
+      1016,
+      38,
+      350,
+      730
+    ],
+    "screen_dir": "ui-matrix",
+    "mobile_touch": false
+  },
+  {
+    "viewport": [
+      1920,
+      1080
+    ],
+    "sidebar100": [
+      1497.609375,
+      38,
+      422.390625,
+      1042
+    ],
+    "screen_dir": "ui-matrix",
+    "mobile_touch": false
+  },
+  {
+    "viewport": [
+      2560,
+      1440
+    ],
+    "sidebar100": [
+      2100,
+      38,
+      460,
+      1402
+    ],
+    "screen_dir": "ui-matrix",
+    "mobile_touch": false
+  },
+  {
+    "viewport": [
+      3440,
+      1440
+    ],
+    "sidebar100": [
+      2980,
+      38,
+      460,
+      1402
+    ],
+    "screen_dir": "ui-matrix",
+    "mobile_touch": false
+  },
+  {
+    "viewport": [
+      800,
+      360
+    ],
+    "sidebar100": [
+      450,
+      30,
+      350,
+      330
+    ],
+    "screen_dir": "ui-matrix",
+    "mobile_touch": true
+  },
+  {
+    "viewport": [
+      960,
+      540
+    ],
+    "sidebar100": [
+      610,
+      34,
+      350,
+      506
+    ],
+    "screen_dir": "ui-matrix",
+    "mobile_touch": true
+  }
+]

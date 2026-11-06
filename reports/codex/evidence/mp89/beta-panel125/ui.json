@@ -1,0 +1,298 @@
+{
+  "results": [
+    {
+      "name": "1280x720 game and panels",
+      "status": "PASS",
+      "data": [
+        {
+          "name": "map",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                842.5,
+                47.5,
+                437.5,
+                672.5
+              ],
+              "scroll": [
+                538,
+                538
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "production",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                842.5,
+                47.5,
+                437.5,
+                672.5
+              ],
+              "scroll": [
+                538,
+                538
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "fleet",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                892.5,
+                47.5,
+                387.5,
+                672.5
+              ],
+              "scroll": [
+                538,
+                538
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "science",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                892.5,
+                47.5,
+                387.5,
+                672.5
+              ],
+              "scroll": [
+                538,
+                538
+              ]
+            },
+            {
+              "class": "dpBox scienceBox",
+              "rect": [
+                27.5,
+                28.796875,
+                1225,
+                662.40625
+              ],
+              "scroll": [
+                528,
+                528
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "diplo",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                892.5,
+                47.5,
+                387.5,
+                672.5
+              ],
+              "scroll": [
+                538,
+                538
+              ]
+            },
+            {
+              "class": "dpBox dcBox",
+              "rect": [
+                65,
+                28.796875,
+                1150,
+                662.40625
+              ],
+              "scroll": [
+                528,
+                528
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "notification",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                892.5,
+                47.5,
+                387.5,
+                672.5
+              ],
+              "scroll": [
+                538,
+                538
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "federation",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                892.5,
+                47.5,
+                387.5,
+                672.5
+              ],
+              "scroll": [
+                538,
+                538
+              ]
+            },
+            {
+              "class": "dpBox dcBox fedBox",
+              "rect": [
+                0,
+                0,
+                1256,
+                696
+              ],
+              "scroll": [
+                555,
+                555
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "vassal",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                892.5,
+                47.5,
+                387.5,
+                672.5
+              ],
+              "scroll": [
+                538,
+                538
+              ]
+            },
+            {
+              "class": "mbox sci",
+              "rect": [
+                190,
+                12,
+                900,
+                696
+              ],
+              "scroll": [
+                939,
+                555
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "spy",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                892.5,
+                47.5,
+                387.5,
+                672.5
+              ],
+              "scroll": [
+                538,
+                538
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "council",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                892.5,
+                47.5,
+                387.5,
+                672.5
+              ],
+              "scroll": [
+                538,
+                538
+              ]
+            },
+            {
+              "class": "dpBox",
+              "rect": [
+                90,
+                179.75,
+                1100,
+                360.5
+              ],
+              "scroll": [
+                287,
+                287
+              ]
+            }
+          ],
+          "overflow": false
+        },
+        {
+          "name": "settings",
+          "boxes": [
+            {
+              "class": "",
+              "rect": [
+                892.5,
+                47.5,
+                387.5,
+                672.5
+              ],
+              "scroll": [
+                538,
+                538
+              ]
+            },
+            {
+              "class": "mbox ",
+              "rect": [
+                190,
+                12,
+                900,
+                696
+              ],
+              "scroll": [
+                1178,
+                555
+              ]
+            }
+          ],
+          "overflow": false
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

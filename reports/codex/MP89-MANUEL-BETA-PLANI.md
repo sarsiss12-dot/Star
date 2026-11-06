@@ -1,6 +1,6 @@
 # MP.8.9 — Gerçek PC ve Android manuel kabul planı
 
-Bu plan henüz uygulanmadı: fiziksel Android, gerçek PC tarayıcı etkileşimi ve canlı Render **NOT RUN**. Otomatik Chromium emülasyonu fiziksel cihaz sonucu değildir. Terminal/geliştirici aracı gerekmez. Erişimi ayrıca doğrulanmış oyun bağlantısını kullanın; bu plan sunucuyu yeniden dağıtmayı gerektirmez.
+Bu plan henüz uygulanmadı: fiziksel Android, fiziksel PC üzerinde insanla manuel kabul ve canlı Render **NOT RUN**. Otomatik Chromium emülasyonu fiziksel cihaz sonucu değildir. Terminal/geliştirici aracı gerekmez. Erişimi ayrıca doğrulanmış oyun bağlantısını kullanın; bu plan sunucuyu yeniden dağıtmayı gerektirmez.
 
 Her oturumda oyun/MP sürüm satırının ekran görüntüsünü alın. Hata olursa cihaz modeli, tarayıcı sürümü, adım, oda kodu (oda kapandıktan sonra paylaşılabilir), yaklaşık oyun ayı ve host/misafir rolünü yazın. Anahtar/jeton/parola paylaşmayın.
 
