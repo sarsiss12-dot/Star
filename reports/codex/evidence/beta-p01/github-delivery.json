@@ -1,0 +1,16 @@
+{
+  "repository": "sarsiss12-dot/Star",
+  "branch": "codex/stars-beta-p01-critical",
+  "base": "codex/stars-beta0-stability",
+  "codeHead": "66e1a10cd464b6d4df27fb1252f12890d79b21b8",
+  "remoteCodeHeadVerified": "66e1a10cd464b6d4df27fb1252f12890d79b21b8",
+  "mainUnchanged": "4296ad2d43fedce6264020b3761f50f1839fd836",
+  "baseUnchanged": "d307864edbc2ab9ca4347e5d065640e150279411",
+  "push": "PASS",
+  "prAttempts": 1,
+  "prCreated": false,
+  "prError": "Post https://api.github.com/graphql: Forbidden",
+  "compareUrl": "https://github.com/sarsiss12-dot/Star/compare/codex/stars-beta0-stability...codex/stars-beta-p01-critical?expand=1",
+  "issue33Write": "BLOCKED; selected rows remain PROMPT HAZIR, not TAMAMLANDI",
+  "reportCommit": "Own SHA is reported in final chat and GitHub history, not embedded in itself"
+}

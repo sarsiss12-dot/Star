@@ -18,3 +18,5 @@ Node24.22.1 / Chromium155.0.8059.79 / Playwright1.62.1; mevcut kurulum. Canlı R
 - `python3 tools/package-release.py` ve ikinci `/tmp/.../repeat.zip`: tam bayt eşit. Çıkarılmış ZIP üzerinde `tools/verify-release.py --root ...`; package.json SHA256/CRC32/MP dosya hash'lerini içerir.
 
 Fiziksel Android, gerçek LAN/internet ve Render NOT RUN. Yeni performans yüzdesi ölçülmedi.
+
+Son ek kontroller: `BETA_P01_NEWS=1 STARS_OUTPUT=.../news-browser-final node tests/browser-beta-p01-panels.cjs`1/0 (üç alt vaka); `STARS_OUTPUT=.../panels-final node ...`3/0; ardından sistem/gezegen ve filo gerçek sekmeleriyle `STARS_OUTPUT=.../panels-final-allmenus node ...`3/0. Ürün kaynağı değişmedi. İlk SP haber fikstüründeki normal barışa kapalı doktrin düzeltildi, gerçek makePeace başarısı ve yeni front ID'sinin farklı olduğu açıkça denetlendi.

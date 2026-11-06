@@ -7,8 +7,8 @@
 - Güncel uzak `main`: `4296ad2d43fedce6264020b3761f50f1839fd836`, MP.4 /96h10. BETA.0 bunun devamıdır; sonraki MP ayna/otorite, Save8, PERF ve UI Scale kazanımları main'e henüz gelmemiştir.
 - Doğrulanan gerçek çalışma başlangıcı: `d307864edbc2ab9ca4347e5d065640e150279411`, `codex/stars-beta0-stability`.
 - Yeni dal: `codex/stars-beta-p01-critical`. PR tabanı aynı BETA.0 dalı; seçilen beş görevin farkı ayrı incelenebilir. Main/merge/rebase/force-push yok.
-- Kod teslim HEAD: TESLIM_HEAD_BEKLENIYOR. Son rapor commit'inin SHA'sı nihai sohbet tesliminde verilir; kendi SHA'sı için döngüsel commit üretilmez.
-- Açık PR listesi sorgusu GraphQL **Forbidden**: mevcut açık PR'lar doğrulanamadı. Yeni PR: TESLIM_PR_BEKLENIYOR.
+- Kod teslim HEAD: `66e1a10cd464b6d4df27fb1252f12890d79b21b8` — GitHub uzak dalında doğrulandı. Son rapor commit'inin SHA'sı nihai sohbet tesliminde verilir; kendi SHA'sı için döngüsel commit üretilmez.
+- Açık PR listesi sorgusu GraphQL **Forbidden**: mevcut açık PR'lar doğrulanamadı. Yeni PR: **BLOKE: tek taslak PR denemesi GitHub GraphQL Forbidden ile reddedildi; PR oluşturulmadı.** [Karşılaştır/PR oluştur](https://github.com/sarsiss12-dot/Star/compare/codex/stars-beta0-stability...codex/stars-beta-p01-critical?expand=1).
 - [Kaynak doğrulaması](evidence/beta-p01/source.json). AGENTS, GPT-DEVIR ve CLAUDE ile önceki kanıtlar esas alındı; tamamlanmış MP89/BETA0 işleri yeniden yazılmadı.
 
 ## 2. #1 — İstemsiz Galaktik Konsey paneli
@@ -19,7 +19,7 @@
 
 **Minimal düzeltme:** `surfaceReplace` ortak panelde sahipliği, dünya/HTML önbelleğini ve bekleyen timer'ı birlikte değiştirir. Doğrudan DOM değiştiren mevcut yollar bu yardımcından geçer. Otomatik `openCouncil(true)` yalnız açık ve sahibi Konsey olan panelde çalışır. Kullanıcının açık Konsey talebi/bildirim yolu korunur. Yeni panel sistemi yazılmadı.
 
-**Kanıt:** [SP3/0](evidence/beta-p01/panels-full.log): Konsey öncesi, sonrası, Save8 yeniden yükleme; gerçek dokunmayla Diplomasi/Bilim/Devlet/Ekonomi/Federasyon/Piyasa/İstihbarat/Haberler geçişleri ve eski ertelenmiş yenilemenin iptali. [MP2/0](evidence/beta-p01/mp-panels3.log): gerçek yerel host/misafir, farklı insan devletleri, ayna güncellemeleri. İki ilk MP tanı koşusu modal korumasını/ayna yolunu yanlış beklediği için FAIL oldu; [ilk](evidence/beta-p01/mp-panels.log) ve [ikinci](evidence/beta-p01/mp-panels2.log) silinmedi. Ürün düzeltmesini gizleyen timeout artışı yapılmadı.
+**Kanıt:** [SP3/0](evidence/beta-p01/panels-full.log): Konsey öncesi, sonrası, Save8 yeniden yükleme; gerçek dokunmayla Diplomasi/Bilim/Devlet/Ekonomi/Federasyon/Piyasa/İstihbarat/Haberler geçişleri ve eski ertelenmiş yenilemenin iptali. [MP2/0](evidence/beta-p01/mp-panels3.log): gerçek yerel host/misafir, farklı insan devletleri, ayna güncellemeleri. [Son ek kabul3/0](evidence/beta-p01/panels-final-allmenus.log) aynı üç aşamada sistem/gezegen ve filo sekmelerine gerçek dokunmayı da ekler. İki ilk MP tanı koşusu modal korumasını/ayna yolunu yanlış beklediği için FAIL oldu; [ilk](evidence/beta-p01/mp-panels.log) ve [ikinci](evidence/beta-p01/mp-panels2.log) silinmedi. Ürün düzeltmesini gizleyen timeout artışı yapılmadı.
 
 ## 3. #34 — Doğru savaş/olay paneli
 
@@ -103,10 +103,14 @@ Düzeltilen insan oyları/ambargolar ve yeni bitiş haberleri eski hatalı düny
 
 Açık: aralıklı Chromium/tap lobi hatası; üç insanlı UI senaryosunun tamamlanması; geçmişte kaydedilmemiş savaş alanları; fiziksel dokunma/Android ve canlı internet kabulü. Eski gerçek oyun savaş bitiş nedeni geriye dönük kanıtlanamaz. Bütün beta engelleri kapanmış sayılmadı; yeni büyük özellik eklenmedi.
 
+### GitHub teslim doğrulaması
+
+Kod, paket, kanıtlar ve rapor `66e1a10cd464b6d4df27fb1252f12890d79b21b8` commit'iyle GitHub'a push edildi; `git ls-remote` aynı SHA'yı doğruladı. Main ve taban BETA0 SHA'ları aynı kaldı. Son belge commit'i bu doğrulamayı ve PR engelini kaydeder; kendi SHA'sı sohbet tesliminde/GitHub dosya tarihinde bulunur. [Teslim kaydı](evidence/beta-p01/github-delivery.json), [PR hatası](evidence/beta-p01/pr-create.log).
+
 ## 10. #33 durumları ve kullanıcı onayı
 
 Asıl kaynak [#33 takip panosu](https://github.com/sarsiss12-dot/Star/issues/33) **39 satırlıdır**; seçili ID'ler1,34,3,4,21 pano görevleridir. Diğer34 satıra dokunulmadı. Bu fazda bağımsız issue #5–#8 yeniden değiştirilmedi/kapatılmadı.
 
-GitHub yazma **BLOKE**: mevcut beş satır kaynak okumasında PROMPT HAZIR; AJANA VERİLDİ/GELİŞTİRMEDE için ek yorum denemesi GraphQL Forbidden ile engellendi. Gerçekte güncellenmiş gibi sunulmaz. Son rapor/test/onay önerileri [seçili görev durumları](BETA-P01-GOREV-DURUMLARI.md) dosyasında. [İki cihaz manuel kabul planı](BETA-P01-KABUL-PLANI.md) henüz uygulanmadı; fiziksel sonuç değildir. Hiçbir görev kullanıcı açık onayı olmadan TAMAMLANDI değildir.
+GitHub issue yazma **BLOKE**: [son salt okunur doğrulamada](evidence/beta-p01/issue33-final-read.json) mevcut beş satır hâlâ PROMPT HAZIR; AJANA VERİLDİ/GELİŞTİRMEDE için ek yorum denemesi GraphQL Forbidden ile engellendi. Gerçekte güncellenmiş gibi sunulmaz. Bu rapor sonucu yerel olarak RAPOR GELDİ/TESTTE aşamasına kaydedildi; API engeli yüzünden GitHub satırlarına uygulanmadı. Son rapor/test/onay önerileri [seçili görev durumları](BETA-P01-GOREV-DURUMLARI.md) dosyasında. [İki cihaz manuel kabul planı](BETA-P01-KABUL-PLANI.md) henüz uygulanmadı; fiziksel sonuç değildir. Hiçbir görev kullanıcı açık onayı olmadan TAMAMLANDI değildir.
 
 Otomatik onay denetimi, #33 gövdesinin tamamını HTML'den çıkarılmış kopyayla değiştirmeyi veri kaybı riski nedeniyle reddetti. Reddedilen işlem çalıştırılmadı veya dolaylı yolla tekrarlanmadı. Daha güvenli ek yorum da API Forbidden ile engellendi; main birleştirmesi ve canlı dağıtım için kullanıcı onayı hâlâ yoktur ve bu işlemler yapılmadı.
