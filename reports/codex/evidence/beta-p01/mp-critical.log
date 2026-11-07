@@ -1,0 +1,9 @@
+FAIL A1 rehber 1–8: oda, iki farklı devlet, hazır, başlat; iki ekranda galaksi; sürüm işareti lobi / başlangıç / MP çubuğunda ve /mp/version oyun build'iyle aynı
+Error: tap #mp6Conn [tapfail-1] {"who":"Saf Akıl Ağı","modal":"","sheet":"","diplo":false,"box":[15,183,422,44],"top":"mp6Conn","vw":[800,360]}
+    at tap (/workspace/Star/tests/browser-mp73.cjs:21:65)
+    at async /workspace/Star/tests/browser-mp73.cjs:110:94
+    at async test (/workspace/Star/tests/browser-mp73.cjs:13:7)
+    at async /workspace/Star/tests/browser-mp73.cjs:98:3
+PASS P03 #3 tek dokunma, bekleyen gerçek ACK, panel koruması ve yeniden bağlantı
+PASS P04 #4/#21 iki insan savaş bitişi, güvenli haber aynası ve ambargo
+GEÇEN: 2 KALAN: 1

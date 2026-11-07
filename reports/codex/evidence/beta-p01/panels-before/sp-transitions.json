@@ -1,0 +1,32 @@
+[
+  {
+    "action": "diploPane",
+    "x": null,
+    "beforeHead": "DİPLOMASİ\n      ✕",
+    "beforeKey": "council",
+    "afterHead": "DİPLOMASİ\n      ✕",
+    "afterKey": "council",
+    "stolen": false,
+    "modalUnchanged": true
+  },
+  {
+    "action": "globalPane",
+    "x": "bilim",
+    "beforeHead": "✦ BİLİM✕",
+    "beforeKey": "council",
+    "afterHead": "✦ BİLİM✕",
+    "afterKey": "council",
+    "stolen": false,
+    "modalUnchanged": true
+  },
+  {
+    "action": "globalPane",
+    "x": "imp",
+    "beforeHead": "👑 DEVLET\n        ✕",
+    "beforeKey": "council",
+    "afterHead": "👑 DEVLET\n        ✕",
+    "afterKey": "council",
+    "stolen": false,
+    "modalUnchanged": true
+  }
+]

@@ -1,0 +1,33 @@
+FAIL host ve uzak insan adına düşük güvende kişisel ambargo uygulanmaz AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+12 !== 0
+
+    at /workspace/Star/tests/beta_p01_embargo_test.js:5:125
+    at test (/workspace/Star/tests/beta_p01_embargo_test.js:3:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_p01_embargo_test.js:5:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+PASS AI otomatik ambargo davranışı korunur
+FAIL insanın bilinçli ambargosu yüksek güvende kendiliğinden kaldırılmaz AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- true
+
+    at /workspace/Star/tests/beta_p01_embargo_test.js:7:196
+    at test (/workspace/Star/tests/beta_p01_embargo_test.js:3:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_p01_embargo_test.js:7:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+PASS Konsey yaptırımı kişisel ambargo tablosundan bağımsız kalır
+GEÇEN: 2 KALAN: 2

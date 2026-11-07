@@ -1,0 +1,83 @@
+{
+  "results": [
+    {
+      "name": "A1 rehber 1–8: oda, iki farklı devlet, hazır, başlat; iki ekranda galaksi; sürüm işareti lobi / başlangıç / MP çubuğunda ve /mp/version oyun build'iyle aynı",
+      "status": "FAIL",
+      "error": "Error: tap #mp6Conn [tapfail-1] {\"who\":\"Saf Akıl Ağı\",\"modal\":\"\",\"sheet\":\"\",\"diplo\":false,\"box\":[15,183,422,44],\"top\":\"mp6Conn\",\"vw\":[800,360]}\n    at tap (/workspace/Star/tests/browser-mp73.cjs:21:65)\n    at async /workspace/Star/tests/browser-mp73.cjs:110:94\n    at async test (/workspace/Star/tests/browser-mp73.cjs:13:7)\n    at async /workspace/Star/tests/browser-mp73.cjs:98:3"
+    },
+    {
+      "name": "P03 #3 tek dokunma, bekleyen gerçek ACK, panel koruması ve yeniden bağlantı",
+      "status": "PASS",
+      "ms": 12777
+    },
+    {
+      "name": "P04 #4/#21 iki insan savaş bitişi, güvenli haber aynası ve ambargo",
+      "status": "PASS",
+      "ms": 2314
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "startModal": [
+      "🛰 DANIŞMAN",
+      ""
+    ],
+    "version": {
+      "mp": "MP.8.9b2",
+      "build": "96h10p7",
+      "files": {
+        "mp-core.js": "f7247a4ad3de",
+        "relay.js": "3a6d42ac65d9",
+        "mp1-host.js": "c8e2251d1811",
+        "join.js": "bc2732493741",
+        "mirror.js": "df0ddd70622f",
+        "guest-stars.js": "c2b0fc1de62a",
+        "mp71-dip.js": "4b7b5e64b5ba",
+        "mp7-setup.js": "4f8fef4ce1a9"
+      }
+    },
+    "unsupported": [
+      "autoEvent",
+      "diagCopy",
+      "joinRebel",
+      "leaveRebel",
+      "mapFix",
+      "physio",
+      "restart",
+      "rollName",
+      "sandbox",
+      "sitPick",
+      "stashNote",
+      "survey",
+      "terra",
+      "toTitle",
+      "tplDel",
+      "tplLoad",
+      "tplSave",
+      "trigCrisis"
+    ],
+    "guestDiag": "STARS MP.8.9b2 · oyun 96h10p7 · misafir · host bağlı · aşama: ready · ayna r5 22:02:02 · kurulum 7 ms · son komut: yok · son hata: yok",
+    "p03": {
+      "guestYes": 1,
+      "hostNo": 1,
+      "singleTap": true,
+      "realAckHeldByTest": true,
+      "otherPanelKept": true,
+      "reconnect": true
+    },
+    "p04": {
+      "war": [
+        false,
+        false
+      ],
+      "humanEmbargo": [
+        [],
+        []
+      ],
+      "reason": "exhaustion|actor:auto",
+      "save": true
+    }
+  },
+  "pass": 2,
+  "fail": 1
+}

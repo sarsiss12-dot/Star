@@ -1,0 +1,14 @@
+{
+  "selector": "[data-j=\"go\"]",
+  "url": "/mp/play",
+  "viewport": [
+    915,
+    412
+  ],
+  "scroll": [
+    0,
+    0
+  ],
+  "focus": "",
+  "modal": "hidden"
+}

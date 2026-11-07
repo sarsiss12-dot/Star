@@ -1,0 +1,42 @@
+main.js:2617:    if (a!==b){ a.rel[b.id] = 0; a.war[b.id] = false; a.ally[b.id] = false; a.contact[b.id] = false; }
+main.js:4247:  warLedgerSync();
+main.js:4569:  warLedgerSync('eliminated');
+main.js:9151:    warLedgerSync();
+main.js:9197:  warLedgerSync();
+diplomacy.js:184:function warLedgerSync(reason='observed',actor=null){
+diplomacy.js:245:  if(raw===undefined || raw===null){G.warLedger=warLedgerEmpty();warLedgerSync('legacy');return;}
+diplomacy.js:276:  warLedgerSync('load-observed');
+diplomacy.js:709:  warLedgerSync();
+diplomacy.js:826:      x.war[b.id] = false; b.war[x.id] = false;
+diplomacy.js:835:      x.war[a.id] = false; a.war[x.id] = false;
+diplomacy.js:843:  warLedgerSync('proxy-peace');
+diplomacy.js:845:function makePeace(a, b, reason=a?.ai?'ai-peace':'agreement', actor=a?.id??null){
+diplomacy.js:847:  a.war[b.id] = false; b.war[a.id] = false;
+diplomacy.js:872:  warLedgerSync(reason,actor);
+diplomacy.js:1377:      case 'peace': makePeace(giver, taker); break;
+diplomacy.js:1390:          giver.war[taker.id] = false; taker.war[giver.id] = false;
+diplomacy.js:1398:        warLedgerSync('alliance',giver.id);
+diplomacy.js:1413:        if (t && !t.dead && giver.war[t.id]) makePeace(giver, t);
+diplomacy.js:2619:        a.war[b.id] = false; b.war[a.id] = false;
+diplomacy.js:2620:        warLedgerSync('alliance-conflict',null);
+diplomacy.js:4245:          e.war[o.id] = false; o.war[e.id] = false;
+diplomacy.js:4255:          warLedgerSync('exhaustion',null);
+diplomacy.js:4256:        } else makePeace(e, o,'exhaustion',null);
+diplomacy.js:5699:      a.war[b.id]=false;b.war[a.id]=false;warLedgerSync('subject-binding',null);repaired++;
+diplomacy.js:5991:        if (typeof makePeace === 'function' && makePeace(a, b,'council-unity',null)) barisan++;
+diplomacy.js:6027:        makePeace(a, b,'council-unity',null);
+diplomacy.js:6298:  peer.war[sub.id]=false;sub.war[id]=false;
+diplomacy.js:6303: warLedgerSync('subjugation-federation');
+diplomacy.js:6315:  for (const v of vassalsOf(sub)){if(v.vassalContract?.status==='active')v.vassalContract.lord=lord.id;v.overlord=lord.id;clearBilateralEmbargo(lord,v);lord.war[v.id]=false;v.war[lord.id]=false;}
+diplomacy.js:6329:    lord.war[sub.id] = false; sub.war[lord.id] = false;
+diplomacy.js:6335:  warLedgerSync('subjugation');
+diplomacy.js:6674:        if (makePeace(e, o,'crisis',e.id) && (e.id === 0 || o.id === 0))
+diplomacy.js:6678:        e.war[o.id] = false; o.war[e.id] = false;
+diplomacy.js:6681:        warLedgerSync('crisis',e.id);
+diplomacy.js:8262:          if (ea.war[b] && typeof makePeace === 'function') makePeace(ea, eb,'rebel-coalition',null);
+diplomacy.js:8366:    if (e.war[zalim.id] && typeof makePeace === 'function') makePeace(e, zalim,'rebellion-victory',null);
+diplomacy.js:8370:    makePeace(G.p, zalim,'rebellion-victory',null);
+diplomacy.js:8810:  a.war[b.id] = false; b.war[a.id] = false;
+diplomacy.js:8829:  warLedgerSync('status-quo',a.id);
+ai.js:1828:    if (peaceAlwaysAccepted(e, o)){ makePeace(e, o); continue; }
+ai.js:1831:    if (o.ai){ makePeace(e, o); continue; }

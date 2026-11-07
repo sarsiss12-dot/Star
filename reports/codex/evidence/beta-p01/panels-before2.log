@@ -1,0 +1,7 @@
+AssertionError [ERR_ASSERTION]: sp diploPane:null became Council
+
+true !== false
+
+    at module.exports (/workspace/Star/tests/helpers/beta-p01-panels.cjs:17:34)
+    at async /workspace/Star/tests/browser-beta-p01-panels.cjs:9:13
+GEÇEN: 0 KALAN: 1

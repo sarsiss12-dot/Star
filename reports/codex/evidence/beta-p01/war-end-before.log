@@ -1,0 +1,58 @@
+FAIL %100 yorgunluk barışının bitiş günü ve otomatik kuralı kaydedilir AssertionError [ERR_ASSERTION]: The input did not match the regular expression /exhaustion/. Input:
+
+'proxy-peace'
+
+    at /workspace/Star/tests/beta_p01_war_end_test.js:5:218
+    at test (/workspace/Star/tests/beta_p01_war_end_test.js:3:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_p01_war_end_test.js:5:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+FAIL barış kilidi kırılan %100 yorgunlukta da kayıt aynı adımda kapanır AssertionError [ERR_ASSERTION]: The input did not match the regular expression /exhaustion/. Input:
+
+'proxy-peace'
+
+    at /workspace/Star/tests/beta_p01_war_end_test.js:6:238
+    at test (/workspace/Star/tests/beta_p01_war_end_test.js:3:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_p01_war_end_test.js:6:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+FAIL kriz AI barışı aktör ve neden içerir; insanlar AI diye yönetilmez AssertionError [ERR_ASSERTION]: The input did not match the regular expression /crisis.*actor:2/. Input:
+
+'proxy-peace'
+
+    at /workspace/Star/tests/beta_p01_war_end_test.js:7:399
+    at test (/workspace/Star/tests/beta_p01_war_end_test.js:3:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_p01_war_end_test.js:7:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+PASS yalnız iki insanın krizdeki savaşı AI barış döngüsüyle sona ermez
+FAIL normal anlaşmalı barış ve Save8 tekrar yükleme neden/kimliği korur AssertionError [ERR_ASSERTION]: The input did not match the regular expression /agreement/. Input:
+
+'proxy-peace'
+
+    at /workspace/Star/tests/beta_p01_war_end_test.js:9:203
+    at test (/workspace/Star/tests/beta_p01_war_end_test.js:3:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_p01_war_end_test.js:9:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+GEÇEN: 1 KALAN: 4

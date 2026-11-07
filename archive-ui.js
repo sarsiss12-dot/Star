@@ -17,8 +17,8 @@ const ArchiveUI = {
     if(this.listVisible)this.scroll=$('archiveRows')?.scrollTop||0;
     this.views[this.mode]={filter:this.filter,query:this.query,page:this.page,unreadOnly:!!this.unreadOnly,pinnedOnly:!!this.pinnedOnly,selected:this.selected,scroll:this.scroll||0};
   },
-  shell(body,footer='',list=false){
-    UI.openModal(`<div class="mhd"><span>GALAKTİK HABER AĞI</span><button class="abtn" data-a="closem" aria-label="Haritaya dön">✕</button></div>
+  shell(body,footer='',list=false,title='GALAKTİK HABER AĞI'){
+    UI.openModal(`<div class="mhd"><span>${esc(title)}</span><button class="abtn" data-a="closem" aria-label="Haritaya dön">✕</button></div>
       <nav class="archiveTabs" aria-label="Haber ağı"><button class="abtn ${this.mode==='news'?'pri':''}" data-a="news" aria-pressed="${this.mode==='news'}">Haberler · ${GalacticNews.unread()}</button><button class="abtn ${this.mode==='inbox'?'pri':''}" data-a="diplomaticInbox" aria-pressed="${this.mode==='inbox'}">Gelen kutusu · ${DiplomaticInbox.pending()}</button></nav>
       ${body}${list?'':`<div class="mft">${footer}<button class="ch" data-a="closem">Haritaya dön</button></div>`}`,'archiveShell');
     $('modal').classList.add('archiveHost');this.listVisible=list;
@@ -50,8 +50,41 @@ const ArchiveUI = {
       (list.length>this.page?'<button class="abtn archiveMore" data-a="archiveMore">Daha eski kayıtları göster</button>':'');
     $('archiveRows').scrollTop=this.scroll||0;
   },
+  warStatus(r){
+    // Host ledger IDs are authoritative. Guest mirrors intentionally omit this ledger.
+    const id=Number.isSafeInteger(r.front)?r.front:+(/^war-front:(\d+)$/.exec(r.key||'')?.[1]||0);
+    const guest=typeof MP6Stars!=='undefined'&&MP6Stars.S?.started;
+    const front=!guest&&id?(G.warLedger?.fronts||[]).find(f=>f.id===id):null;
+    const emps=r.empires||[{id:r.attacker,name:UI.warNoticeName(r.attacker)},{id:r.defender,name:UI.warNoticeName(r.defender)}];
+    const known=emps.filter(e=>GalacticNews.known(e.id));
+    const exact=front&&front.sides.every(id=>emps.some(e=>e.id===id));
+    const f=exact?front:null,meta=guest?MP6Stars.S.mirror?.news?.records?.find(x=>x.key===r.key)?.warStatus:null,status=f||meta,active=status&&status.ended===null;
+    const day=d=>Number.isFinite(d)?(2210+Math.floor(d/360))+'.'+String(Math.floor(d%360/30)+1).padStart(2,'0')+' · gün '+Math.floor(d):'kesin tarih bilinmiyor';
+    const label=id=>esc(known.find(e=>e.id===id)?.name||'Bilinmeyen devlet');
+    let h=`<div class="mbd archiveDetail" data-war-status="${esc(r.key||'war-front:'+id)}"><div class="mini">Olay: ${esc(r.key||'war-front:'+id)}</div><h3>${esc(r.title||'Savaş bildirimi')}</h3>`;
+    h+=`<div class="row"><span>Saldıran → Savunan</span><b>${status?label(status.sides[0])+' → '+label(status.sides[1]):known.map(e=>esc(e.name)).join(' / ')+' · tarihsel taraf rolü kesin bilinmiyor'}</b></div>`;
+    if(status){const side=f?.roles?.[f.sides.indexOf(G.p.id)];if(side===0||side===1)h+='<p>'+ (side===0?'Saldıran taraf':'Savunan taraf')+'</p>';}
+    const entry=r.reason||f?.entryKind,entries={declaration:'Savaş ilanı',federation:'Federasyon savunma paktı',overlord:'Senyörün vasalını koruma yükümlülüğü',vassal:'Senyörün savunma çağrısı',promise:'Müzakerede verilen savaş sözü',independence:'Bağımsızlık savaşı',independenceSupport:'Bağımsızlığa destek sözü',event:'Gerçekleşen olay sonucu savaş'};
+    if(entries[entry])h+='<p>'+esc(entries[entry])+'</p>';
+    h+=`<p>Başlangıç / haber tarihi: ${status&&!status.legacy?day(status.opened):this.date(r)}${status?.legacy?' · önceki başlangıç kesin bilinmiyor':''}</p>`;
+    h+=status?`<p><b>${active?'AKTİF':'SONA ERDİ'}</b>${!active?' · Bitiş '+day(status.ended)+' · Neden: '+esc(WAR_END_REASONS[String(status.endReason||status.reason).split('|')[0]]||status.endReason||status.reason||'kayıtta belirtilmemiş'):''}</p>`:'<p>Bu haberin kesin savaş durumu / bitiş tarihi bilinmiyor. Güncel başka bir savaş bu tarihsel kayda bağlanmaz.</p>';
+    if(f){
+      const participants=new Set();for(const x of G.warLedger.fronts)if(x.campaign===f.campaign)for(const id of x.sides)if(GalacticNews.known(id))participants.add(id);
+      h+='<p>Bilinen katılımcılar: '+[...participants].map(id=>esc(UI.warNoticeName(id))).join(' · ')+'</p>';
+      if(active)for(const id of f.sides){const other=f.sides.find(x=>x!==id),e=G.emps[id],value=e?.exh?.[other];h+='<p>'+label(id)+' savaş yorgunluğu: '+(Number.isFinite(value)&&(id===G.p.id||intelOf(G.p,id)>=3)?'%'+Math.round(value):'bilinmiyor')+'</p>';}
+      else h+='<p>Tarihsel savaş yorgunluğu: kaydedilmedi.</p>';
+      const mine=f.sides.indexOf(G.p.id),m=mine>=0?f.metrics[mine]:null;
+      if(m)h+=`<p>Bu cephede kaybettiğin / imha ettiğin gemiler: ${m.shipsLost} / ${m.shipsDestroyed}</p>`;
+      const goals=f.goals.filter(g=>g.by===G.p.id).map(g=>esc(g.type));if(goals.length)h+='<p>Kayıtlı kendi savaş hedefin: '+goals.join(' · ')+'</p>';
+    }
+    h+='<p>Askerî güç, gizli filo konumları ve kaydedilmemiş tarihsel cephe/ittifak ayrıntıları bu haberde verilmez. Mevcut bilgiye ek tahmin üretilmez.</p>';
+    const foe=known.some(e=>e.id===G.p.id)?known.find(e=>e.id!==G.p.id):null;
+    this.shell(h+'</div>',(foe?'<button class="ch" data-a="wdDiplo">'+esc(foe.name)+' · Güncel diplomasi</button>':'')+'<button class="ch" data-a="news">Haber listesine dön</button>',false,'⚔ SAVAŞ DURUMU');
+    if(foe){const world=G.emps,player=G.p,marker='data-war-status="'+esc(r.key||'war-front:'+id)+'"';UI._hook('wdDiplo',()=>{if(G.emps!==world||G.p!==player||!$('modal').innerHTML.includes(marker))return;UI.closeModal();UI.selectDiplo(foe.id,'relation');});}
+
+  },
   detail(id){
-    this.ensureWorld();const r=GalacticNews.get(id);if(!r)return;this.remember();this.selected=r.id;r.read=true;UI.topbar();
+    this.ensureWorld();const r=GalacticNews.get(id);if(!r)return;this.remember();this.selected=r.id;r.read=true;UI.topbar();if(r.category==='war'){this.warStatus(r);return;}
     this.shell(`<div class="mbd archiveDetail archive95e"><h3>${esc(r.title)}</h3><div class="mini">${esc(this.date(r))} · ${esc(GalacticNews.categories[r.category])}</div><p>${esc(r.text)}</p>
       <div class="mini">Bilgi kaynağı: ${esc(r.knowledge)}</div><div class="ph">İLGİLİ DEVLETLER</div>${r.empires.map((e,i)=>GalacticNews.known(e.id)?`<button class="abtn" data-a="newsEmpire" data-x="${r.id}:${i}">${esc(e.name)}${G.emps[e.id]?.dead?' · tarihsel devlet':''}</button>`:'').join('')}
       ${r.federation?`<p>Federasyon: ${esc(r.federation.name)}</p>`:''}${GalacticNews.location(r)?`<button class="abtn" data-a="newsLocation" data-x="${r.id}">${esc(r.system.name)}${r.planet?' · '+esc(r.planet.name):''} · Konuma git</button>`:''}</div>`,

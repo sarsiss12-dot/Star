@@ -115,14 +115,20 @@ const ACT={
   /* MP.7.2: motor işlevi olmayan tek oyunculu düğmeler → host komutu (aynı işlem host'ta, yalnız kendi nesnesi) */
   mergeArmed:x=>{const f=G.fleets.find(q=>q.e===0&&q.sys===+x&&q.ships.length&&isArmed(q));return f?send({kind:'merge',fleet:f.id}):toast('Birleşecek savaş filosu yok',true);},   // MP.6.1 'merge' (aynı gruptaki savaş filoları)
   dirTog:x=>{const [s,p]=String(x).split(':').map(Number);return send({kind:'colAuto',sys:s,planet:p});},
-  /* MP.7.3: konsey oyu (tek oyunculu cncYes / cncNo devlet 0'ı doğrudan oy listesine yazar) → 'councilVote'; belirteç = oylanan yasa + hedef */
-  cncYes:()=>councilVote(true),cncNo:()=>councilVote(false),
+  /* BETA-P0.1: canonical ballot command; token = law + real target + opened (legacy allowed). */
+  cncYes:x=>councilVote(true,x),cncNo:x=>councilVote(false,x),
   bombMode:x=>{const [f,m]=String(x).split(':');return send({kind:'bombMode',fleet:+f,mode:String(m)});}
 };
-function councilVote(yes){const c=G.council,v=c&&c.vote;if(!v||v.done)return toast('Açık konsey oylaması yok.',true);
-  const tok=v.key+':'+(v.target===null||v.target===undefined?'':real(v.target)),cid=send({kind:'councilVote',token:tok,yes:!!yes});
-  if(cid)waits[cid]=res=>toast(res.status==='ok'?'Oyun host\'ta kaydedildi ('+(yes?'EVET':'HAYIR')+').':'Host reddetti: '+why(res),res.status!=='ok');
-  try{UI.closeModal();UI.openCouncil();}catch{}return cid;}
+function councilVote(yes,clickedToken){const c=G.council,v=c&&c.vote;if(!v||v.done)return toast('Açık konsey oylaması yok.',true);
+  const token=councilVoteToken(v);
+  if(clickedToken!==undefined&&clickedToken!==token)return toast('Oylama değişti; güncel oylamayı aç.',true);
+  if(UI._councilPending?.token===token||UI._councilAck?.token===token)return toast('Oy gönderildi; host durumu bekleniyor.',false);
+  const tok=councilVoteToken({...v,target:v.target===null||v.target===undefined?v.target:real(v.target)}),cid=send({kind:'councilVote',token:tok,yes:!!yes});
+  const refresh=()=>{const pane=doc.getElementById('diploPane');if(pane?.classList.contains('show')&&pane._surfaceKey==='council')UI.openCouncil(true);};
+  if(cid){UI._councilPending={token,gen:S.gen};waits[cid]=res=>{
+    if(UI._councilPending?.token===token)UI._councilPending=null;
+    const ok=res.status==='ok',text=ok?'Oy host tarafından kaydedildi ('+(yes?'EVET':'HAYIR')+').':'Host reddetti: '+why(res);
+    if(ok)UI._councilAck={token,gen:S.gen};UI._councilMessage={token,text};toast(text,!ok);refresh();};refresh();}return cid;}
 function respond(yes){const c=S.counter;const cid=send({kind:'respond',offer:c.offer,action:yes?'accept':'reject'});
   if(cid)waits[cid]=res=>toast(res.status==='ok'?(yes?'Teklif kabul edildi — host uyguladı.':'Teklif reddedildi.'):'Host reddetti: '+why(res),res.status!=='ok');
   S.counter=null;try{UI.dealCounter=null;UI.closeDiplo?UI.closeDiplo():doc.getElementById('diploPane').classList.remove('show');}catch{}}
@@ -489,6 +495,7 @@ function rebuild(){
   /* MP.7: bozuk/uyumsuz ayna aynı veriyle 1 s'de bir sonsuza dek yeniden kurulmuyordu-kurulmaya çalışılıyordu. Artık ayna bırakılır,
      gerçek neden kaydedilir ve host'tan TAM ayna sınırlı geri çekilmeyle (bootTick) yeniden istenir. */
   if(!ok){S.stats.fail=(S.stats.fail||0)+1;S.boot.fails++;S.boot.err='Galaksi verisi kurulamadı: '+why;bootLog('deserialize-fail');S.mirror=null;S.rev=0;S.boot.next=Date.now()+1500;return;}
+  for(const key of ['_councilPending','_councilAck'])if(UI[key]&&UI[key].gen!==S.gen)UI[key]=null;
   G.autoSave=false;G.speed=0;
   if(S.started&&UI._diploWorld)UI._diploWorld=G.p;   // açık diplomasi sayfası ve taslaklar korunur
   if(S.started&&UI._fedTabsWorld)UI._fedTabsWorld=G.emps;

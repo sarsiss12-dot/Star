@@ -1,0 +1,7 @@
+AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert(text.includes(expect))
+
+    at module.exports (/workspace/Star/tests/helpers/beta-p01-news.cjs:7:213)
+    at async /workspace/Star/tests/browser-beta-p01-panels.cjs:9:49
+GEÇEN: 0 KALAN: 1

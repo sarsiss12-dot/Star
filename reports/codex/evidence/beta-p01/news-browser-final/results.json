@@ -1,0 +1,23 @@
+[
+  {
+    "name": "#34 SP gerçek haber dokunması",
+    "status": "PASS",
+    "data": [
+      {
+        "type": "old",
+        "expect": "SONA ERDİ",
+        "status": "PASS"
+      },
+      {
+        "type": "current",
+        "expect": "AKTİF",
+        "status": "PASS"
+      },
+      {
+        "type": "legacy",
+        "expect": "kesin savaş durumu / bitiş tarihi bilinmiyor",
+        "status": "PASS"
+      }
+    ]
+  }
+]

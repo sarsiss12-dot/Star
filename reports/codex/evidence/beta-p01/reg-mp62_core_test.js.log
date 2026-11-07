@@ -1,0 +1,16 @@
+✓ savaş ilanı: önizleme host'un warDeclarationPreview'u (salt okuma); ilan = tek oyunculu son onay zinciri, ağdan = doğrudan motor (Save8 + RNG); Etki bir kez
+✓ savaş ilanı yetkisi: sahte devlet, temassız hedef, kendisi, geçersiz hedef ve bilinmeyen anahtar reddedilir; dünya değişmez
+✓ konsey yasağı: motor devlet 0'a "bilerek çiğne" (ceza + savaş), diğerlerine AI zarı uyguluyordu; uzak insanda devlet 0 dalı — savaş başlar, ceza uygulanır, zar ve RNG çekimi yok
+  A → AI 2 savaşına girenler (motorla aynı): [2,3] · kesin katılım önizlemesi: []
+  senyör 5 savaşa girdi mi (motorla aynı): false · vasal koruma görevi: true
+✓ çok taraflı: federasyon savunma yükümlülüğü ve senyör koruması motorla aynı; savaşa sürüklenen uzak insan B kendi listesinde "SAVAŞ BAŞLADI" görür
+✓ ittifak / saldırmazlık / ticaret paktı insan–insan: MP teklifi → karşı insan kabul eder → executeDeal (ağdan = doğrudan motor); üçüncü kişi yanıtlayamaz; AI insan adına yanıt vermez
+✓ ittifakı sonlandır, ticaret anlaşmasını feshet, ambargo, hediye: motorun işlevleri / tek oyunculu satırları; yalnız kendi devleti; hediye alan uzak insan bildirim alır
+✓ statüko barışı: insan hedefe TEKLİF (savaş sürer, karar onun; yalnız taraflar görür); kabulde motorun statusQuoPeace'i ya da motorun gerekçesiyle ret; AI hedefe tek oyunculu yol
+✓ AI insan adına karar vermez: AI'nın barış teklifi uzak insan B'nin kutusuna gider (host'unkine değil); host hedefte motorun yolu; uzak insan yokken düz motor
+✓ AI statüko ve barışı uzak insan adına imzalamaz: B iki AI ile savaşta, 400 gün; motorun statusQuoPeace / makePeace çağrılarında karşı taraf B olan hiçbiri AI kararı değil
+✓ ayna: savaş haritaları yeniden numaralandırılır (host'la savaş misafirde doğru devlette); kendi savaş hedefi; üçüncü taraf savaşı yalnız motorun bilgi kuralıyla (istihbarat ≥3)
+✓ kayıt: bekleyen ittifak teklifi MP.4 paketinde doğrulanır ve yüklenir (antlaşma maddeleri paket şemasında); statüko teklifi oturumdur (belgelenir)
+✓ host düğme kapıları (misafirin aynasında eksik veri): statüko kapısı yalnız savaşılan temaslıya, üye kabul kapısı yalnız üyeye ve yalnız {id, ok, why}; AI değerlendirmesi gitmez
+✓ iki insanın ortak savaşı: A ve B aynı AI'ya farklı hedeflerle savaş açar (ayrı cepheler, ayrı hedefler); A barış yapar, B'nin savaşı sürer; toprak paylaşımında insan üyeli öneriyi AI uygulamaz (motor kuralı)
+GEÇEN: 13 KALAN: 0

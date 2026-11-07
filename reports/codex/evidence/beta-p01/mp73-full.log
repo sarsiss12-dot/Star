@@ -1,0 +1,52 @@
+PASS A1 rehber 1–8: oda, iki farklı devlet, hazır, başlat; iki ekranda galaksi; sürüm işareti lobi / başlangıç / MP çubuğunda ve /mp/version oyun build'iyle aynı
+PASS A2 rehber 9–12: misafir filosunu yürütür (gerçek orderMove → host), B → host diplomatik teklif ve host gelen kutusundan kabul eder; zaman iki ekranda ilerler
+PASS A3 rehber 13–15: misafir bağlantısı kopar ve döner → aynı devlet; host oyun kaydı alır (MP.4 paketi doğrulanır)
+FAIL B1 konsey motorun kendi yoluyla kurulur (fikstür: temas); AI insanlar adına oy / sponsor yazmaz; B gerçek "KONSEY OYLAMASI" kartından Konsey ekranını açar ve EVET (dokunma) → host kaydeder, oylama açık kalır
+locator.tap: Timeout 8000ms exceeded.
+Call log:
+[2m  - waiting for locator('[data-j="go"]').first()[22m
+[2m    - locator resolved to <button data-j="go" class="mp1-btn pri">KATIL</button>[22m
+[2m  - attempting tap action[22m
+[2m    - waiting for element to be visible, enabled and stable[22m
+[2m    - element is visible, enabled and stable[22m
+[2m    - scrolling into view if needed[22m
+[2m    - done scrolling[22m
+[2m    - performing tap action[22m
+
+    at tap (/workspace/Star/tests/browser-mp73.cjs:20:116)
+    at async room (/workspace/Star/tests/browser-mp73.cjs:45:149)
+    at async /workspace/Star/tests/browser-mp73.cjs:141:5
+    at async test (/workspace/Star/tests/browser-mp73.cjs:13:7)
+    at async /workspace/Star/tests/browser-mp73.cjs:140:3
+FAIL B2 C (915×412) HAYIR verir; oylama host oy verene kadar açık; host kendi Konsey ekranından EVET → motor kapatır; tekrar oy reddedilir
+page.waitForFunction: Timeout 30000ms exceeded.
+    at /workspace/Star/tests/browser-mp73.cjs:154:31
+    at test (/workspace/Star/tests/browser-mp73.cjs:13:13)
+    at /workspace/Star/tests/browser-mp73.cjs:153:9
+FAIL B3 tasarı: B Konsey ekranından tasarı sunar (dokunma) → host kampanya sponsoru B; B AI üyeye rüşvet (dokunma) → host 200 mineral aktarır; insan üye C'ye rüşvet reddedilir; C'nin aynasında rüşvetin yönü yok
+page.evaluate: TypeError: Cannot read properties of null (reading 'ethics')
+    at canFoundCouncil (https://localhost:44699/diplomacy.js:4469:18)
+    at Object.openCouncil (https://localhost:44699/ui.js:4997:19)
+    at eval (eval at evaluate (:311:30), <anonymous>:1:25)
+    at UtilityScript.evaluate (<anonymous>:313:16)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+    at /workspace/Star/tests/browser-mp73.cjs:163:14
+    at test (/workspace/Star/tests/browser-mp73.cjs:13:13)
+    at /workspace/Star/tests/browser-mp73.cjs:162:9
+FAIL B4 entrika ve yıkıcı onay: B fısıltı ağını gerçek pencereden açar, iki AI seçer, gönderir → host motoru (B'nin günlüğü ya da motorun gerekçesi); onaysız yutma çağrısı host'a hiçbir şey göndermez
+page.evaluate: TypeError: Cannot read properties of null (reading 'res')
+    at Object.whisperMenu (https://localhost:44699/ui.js:5854:62)
+    at Object.act (https://localhost:44699/ui.js:1790:32)
+    at UI.act (https://localhost:44699/commerce-ui.js:53:34)
+    at UI.act (https://localhost:44699/economy-ui.js:72:22)
+    at https://localhost:44699/economic-ledger.js:147:349
+    at Object.observe (https://localhost:44699/economic-ledger.js:23:52)
+    at UI.act (https://localhost:44699/economic-ledger.js:147:299)
+    at eval (eval at evaluate (:311:30), <anonymous>:1:25)
+    at UtilityScript.evaluate (<anonymous>:313:16)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+    at /workspace/Star/tests/browser-mp73.cjs:183:14
+    at test (/workspace/Star/tests/browser-mp73.cjs:13:13)
+    at /workspace/Star/tests/browser-mp73.cjs:182:9
+PASS sayfa hataları yok
+GEÇEN: 4 KALAN: 4

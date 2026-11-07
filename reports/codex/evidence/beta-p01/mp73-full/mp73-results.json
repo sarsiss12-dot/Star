@@ -1,0 +1,88 @@
+{
+  "results": [
+    {
+      "name": "A1 rehber 1–8: oda, iki farklı devlet, hazır, başlat; iki ekranda galaksi; sürüm işareti lobi / başlangıç / MP çubuğunda ve /mp/version oyun build'iyle aynı",
+      "status": "PASS",
+      "ms": 63202
+    },
+    {
+      "name": "A2 rehber 9–12: misafir filosunu yürütür (gerçek orderMove → host), B → host diplomatik teklif ve host gelen kutusundan kabul eder; zaman iki ekranda ilerler",
+      "status": "PASS",
+      "ms": 28743
+    },
+    {
+      "name": "A3 rehber 13–15: misafir bağlantısı kopar ve döner → aynı devlet; host oyun kaydı alır (MP.4 paketi doğrulanır)",
+      "status": "PASS",
+      "ms": 9421
+    },
+    {
+      "name": "B1 konsey motorun kendi yoluyla kurulur (fikstür: temas); AI insanlar adına oy / sponsor yazmaz; B gerçek \"KONSEY OYLAMASI\" kartından Konsey ekranını açar ve EVET (dokunma) → host kaydeder, oylama açık kalır",
+      "status": "FAIL",
+      "error": "locator.tap: Timeout 8000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-j=\"go\"]').first()\u001b[22m\n\u001b[2m    - locator resolved to <button data-j=\"go\" class=\"mp1-btn pri\">KATIL</button>\u001b[22m\n\u001b[2m  - attempting tap action\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is visible, enabled and stable\u001b[22m\n\u001b[2m    - scrolling into view if needed\u001b[22m\n\u001b[2m    - done scrolling\u001b[22m\n\u001b[2m    - performing tap action\u001b[22m\n\n    at tap (/workspace/Star/tests/browser-mp73.cjs:20:116)\n    at async room (/workspace/Star/tests/browser-mp73.cjs:45:149)\n    at async /workspace/Star/tests/browser-mp73.cjs:141:5\n    at async test (/workspace/Star/tests/browser-mp73.cjs:13:7)\n    at async /workspace/Star/tests/browser-mp73.cjs:140:3"
+    },
+    {
+      "name": "B2 C (915×412) HAYIR verir; oylama host oy verene kadar açık; host kendi Konsey ekranından EVET → motor kapatır; tekrar oy reddedilir",
+      "status": "FAIL",
+      "error": "page.waitForFunction: Timeout 30000ms exceeded.\n    at /workspace/Star/tests/browser-mp73.cjs:154:31\n    at test (/workspace/Star/tests/browser-mp73.cjs:13:13)\n    at /workspace/Star/tests/browser-mp73.cjs:153:9"
+    },
+    {
+      "name": "B3 tasarı: B Konsey ekranından tasarı sunar (dokunma) → host kampanya sponsoru B; B AI üyeye rüşvet (dokunma) → host 200 mineral aktarır; insan üye C'ye rüşvet reddedilir; C'nin aynasında rüşvetin yönü yok",
+      "status": "FAIL",
+      "error": "page.evaluate: TypeError: Cannot read properties of null (reading 'ethics')\n    at canFoundCouncil (https://localhost:44699/diplomacy.js:4469:18)\n    at Object.openCouncil (https://localhost:44699/ui.js:4997:19)\n    at eval (eval at evaluate (:311:30), <anonymous>:1:25)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at /workspace/Star/tests/browser-mp73.cjs:163:14\n    at test (/workspace/Star/tests/browser-mp73.cjs:13:13)\n    at /workspace/Star/tests/browser-mp73.cjs:162:9"
+    },
+    {
+      "name": "B4 entrika ve yıkıcı onay: B fısıltı ağını gerçek pencereden açar, iki AI seçer, gönderir → host motoru (B'nin günlüğü ya da motorun gerekçesi); onaysız yutma çağrısı host'a hiçbir şey göndermez",
+      "status": "FAIL",
+      "error": "page.evaluate: TypeError: Cannot read properties of null (reading 'res')\n    at Object.whisperMenu (https://localhost:44699/ui.js:5854:62)\n    at Object.act (https://localhost:44699/ui.js:1790:32)\n    at UI.act (https://localhost:44699/commerce-ui.js:53:34)\n    at UI.act (https://localhost:44699/economy-ui.js:72:22)\n    at https://localhost:44699/economic-ledger.js:147:349\n    at Object.observe (https://localhost:44699/economic-ledger.js:23:52)\n    at UI.act (https://localhost:44699/economic-ledger.js:147:299)\n    at eval (eval at evaluate (:311:30), <anonymous>:1:25)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at /workspace/Star/tests/browser-mp73.cjs:183:14\n    at test (/workspace/Star/tests/browser-mp73.cjs:13:13)\n    at /workspace/Star/tests/browser-mp73.cjs:182:9"
+    },
+    {
+      "name": "sayfa hataları yok",
+      "status": "PASS",
+      "ms": 1
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "startModal": [
+      "🛰 DANIŞMAN",
+      ""
+    ],
+    "version": {
+      "mp": "MP.8.9b2",
+      "build": "96h10p7",
+      "files": {
+        "mp-core.js": "f7247a4ad3de",
+        "relay.js": "3a6d42ac65d9",
+        "mp1-host.js": "c8e2251d1811",
+        "join.js": "bc2732493741",
+        "mirror.js": "df0ddd70622f",
+        "guest-stars.js": "c2b0fc1de62a",
+        "mp71-dip.js": "4b7b5e64b5ba",
+        "mp7-setup.js": "4f8fef4ce1a9"
+      }
+    },
+    "unsupported": [
+      "autoEvent",
+      "diagCopy",
+      "joinRebel",
+      "leaveRebel",
+      "mapFix",
+      "physio",
+      "restart",
+      "rollName",
+      "sandbox",
+      "sitPick",
+      "stashNote",
+      "survey",
+      "terra",
+      "toTitle",
+      "tplDel",
+      "tplLoad",
+      "tplSave",
+      "trigCrisis"
+    ],
+    "guestDiag": "STARS MP.8.9b2 · oyun 96h10p7 · misafir · host bağlı · aşama: ready · ayna r8 22:05:25 · kurulum 9 ms · son komut: yok · son hata: yok"
+  },
+  "pass": 4,
+  "fail": 4
+}

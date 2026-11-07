@@ -1,0 +1,50 @@
+[
+  {
+    "test": "faz94d1_war_visibility_test.js",
+    "status": 1,
+    "error": "spawnSync /opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node EPERM",
+    "summary": []
+  },
+  {
+    "test": "mp62_core_test.js",
+    "status": 0,
+    "error": "spawnSync /opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node EPERM",
+    "summary": []
+  },
+  {
+    "test": "mp64_news_test.js",
+    "status": 0,
+    "error": "spawnSync /opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node EPERM",
+    "summary": []
+  },
+  {
+    "test": "mp73_council_test.js",
+    "status": 0,
+    "error": "spawnSync /opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node EPERM",
+    "summary": []
+  },
+  {
+    "test": "mp4_core_test.js",
+    "status": 0,
+    "error": "spawnSync /opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node EPERM",
+    "summary": []
+  },
+  {
+    "test": "perf1_equivalence_test.js",
+    "status": 0,
+    "error": "spawnSync /opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node EPERM",
+    "summary": []
+  },
+  {
+    "test": "perf2_equivalence_test.js",
+    "status": 1,
+    "error": "spawnSync /opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node EPERM",
+    "summary": []
+  },
+  {
+    "test": "mp86_nebula_cache_test.js",
+    "status": 0,
+    "error": "spawnSync /opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node EPERM",
+    "summary": []
+  }
+]

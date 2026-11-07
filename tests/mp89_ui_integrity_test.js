@@ -1,7 +1,7 @@
 'use strict';
 // Pin the presentation-only delta against the MP.8.8 canonical runtime, not a normalized Save8.
 const fs=require('fs'),assert=require('assert/strict'),crypto=require('crypto'),path=require('path');
-const root=path.resolve(__dirname,'..'),sha=s=>crypto.createHash('sha256').update(s).digest('hex'),read=f=>fs.readFileSync(path.join(root,f),'utf8');
+const root=path.resolve(__dirname,'..'),sha=s=>crypto.createHash('sha256').update(s).digest('hex'),read=f=>require('./helpers/beta-p01-preservation.cjs').stripReviewedP01(f,fs.readFileSync(path.join(root,f),'utf8'));
 let ui=read('ui.js').replace(/    \/\* MP\.8\.9: local presentation controls;[\s\S]*?    \/\* END MP\.8\.9 SAVE CONTROLS \*\/\n/,'').replace(/\n\/\* MP\.8\.9: device-local UI scale\.[\s\S]*?\/\* END MP\.8\.9 UI SCALE \*\/\n/,'');
 ui=ui.replace("      // MP.8.9: DOM rectangles are screen CSS pixels; fixed flyouts inherit the tools' local zoom.\n      const zoom = this.getUIScale ? this.getUIScale().effective / 100 : 1;\n",'');
 assert.equal(ui.split("Math.max(1, vx + vw - margin - left) / zoom + 'px'").length,2);ui=ui.replace("Math.max(1, vx + vw - margin - left) / zoom + 'px'","Math.max(1, vx + vw - margin - left) + 'px'");
@@ -15,4 +15,4 @@ assert.equal(sha(read('index.html').replace(/\/\* MP\.8\.9: bounded UI scale;[\s
 assert.equal(sha(read('main.js').replace("const BUILD_ID = '96h10p6';","const BUILD_ID = '96h10p5';")),'312d9fdd9f9e3c0fd8638b2fdc0d980828e4880a5be74316c1cca1ac532e32ef','Save8 / simulation unchanged');
 const original=JSON.parse(require('child_process').execFileSync('git',['show','8ce738b42636cd792a8d552230ca8194a4da053f:RELEASE-MANIFEST.json'],{cwd:root}));
 for(const [file,hash] of Object.entries(original.files))if(!['ui.js','index.html','main.js','sw.js'].includes(file))assert.equal(sha(read(file)),hash,file+' unchanged');
-console.log('PASS presentation delta; original UI/layout, simulation, Save8/RNG and MP.8.6 map source preserved');
+console.log('PASS exact reviewed P0.1 delta reversed; MP89 UI/layout and untouched engine/map source pins preserved');

@@ -1,0 +1,14 @@
+✓ konsey motorun kendi yoluyla kurulur; açık oylamada AI uzak insan adına sponsor / oy / gündem destekçisi YAZMAZ
+✓ insan oyları: A ve B kendi komutuyla oy verir; host (devlet 0) de oy verene kadar oylama açık kalır; son insan oyuyla motorun finishCouncilVote'u kapatır
+✓ oy yetkisi: yinelenen oy "voted", eski belirteç "stale", üye olmayan "yok", oylama yokken "no-vote"; reddedilen oy dünyayı değiştirmez
+✓ zaman aşımı: insan hiç oy vermezse motorun 24 ay sınırında oylama kapanır (sonsuz bekleme yok)
+✓ tasarı: A kendi tasarısını sunar (proposeBill; kampanya sponsoru A); açık oylama varken motorun gerekçesi; rüşvet / şantaj insan üyeye reddedilir, AI üyeye motor kuralı
+✓ üyelik: A councilLeave ile ayrılır (motorun leaveCouncil'i), üye değilken ayrılma "yok"; councilJoin ile geri döner; konsey varken councilFound motorun gerekçesiyle reddedilir; host'un üyeliği değişmez
+✓ daimi hükümdarlık: başka insan üye varken talep edilemez (üyelerin oyu motorda zarla); host'un arayüzü de; veto / taht / reform motorun kendi gerekçesiyle
+✓ ayna gizliliği: misafir konseyi kimlikleri π ile görür; rüşvetin yönü/gücü ve şantajın yönü gitmez; host'un konsey dışı verisi yok
+✓ entrikalar aktörün kendi devletinde: fısıltı A'nın günlüğüne (host'unkine değil), bağımsızlık savaşı vasal değilse reddedilir, fon / Panoptikon / lider şantajı motorun gerekçesi; görünmeyen hedef "yok"
+✓ yıkıcı savaş: yutma / Kolossus yalnız motor koşuluyla; host'un filosu not-owner, Kolossus olmayan filo reddedilir; reddedilen işlem dünyayı değiştirmez
+✓ yutma: Yıldız Yiyen devlet kendi yörüngesindeki kolonisiz gezegeni tüketir (motorun devourPlanet'i, kazanç aktöre); aynı komut ikinci kez yıkım yapmaz (motor reddeder, dünya değişmez)
+✓ BETA-P0.1: host çift EVET insan oyunu iki kez saymaz
+✓ BETA-P0.1: aynı yasa ve hedefin yeni oylaması eski belirteci reddeder
+GEÇEN: 13 KALAN: 0

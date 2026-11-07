@@ -1,0 +1,62 @@
+FAIL eski savaş bildirimi aynı iki devletin yeni savaşına bağlanmaz AssertionError [ERR_ASSERTION]: The input did not match the regular expression /SAVAŞ DURUMU/. Input:
+
+'<div class="mbox war"><div class="mhd"><span>⚔ SAVAŞA KATILIM</span><button class="riX" data-a="closem">✕</button></div>\n' +
+  `      <div class="mbd warBrief"><b>Yüce Nyx Zihni → Muhteşem Xel'Naga Otoritesi</b>\n` +
+  '      <div class="mini">İlan / katılım tarihi: 2210.03.01</div>\n' +
+  '      <div class="row"><span>Tarafın</span><b>Saldıran taraf</b></div>\n' +
+  '      <div>Senin savaş ilanın</div>\n' +
+  '      \n' +
+  '      <div class="mini"><b>Bilinen savaş ortakların:</b> Bilinen yok</div>\n' +
+  `      <div class="mini"><b>Bilinen düşmanlar:</b> Muhteşem Xel'Naga Otoritesi</div>\n` +
+  '      <div class="mini">Bu cephede savaş sürüyor.</div></div>\n' +
+  `      <div class="mft"><button class="ch" data-a="wdDiplo"><div class="cht">Muhteşem Xel'Naga Otoritesi · Diplomasi</div></button>\n` +
+  '      <button class="ch" data-a="closem"><div class="cht">Anlaşıldı</div></button></div></div>'
+
+    at /workspace/Star/tests/beta_p01_news_test.js:5:173
+    at test (/workspace/Star/tests/beta_p01_news_test.js:3:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_p01_news_test.js:5:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+FAIL arşiv savaş haberi sabit cephe kimliğiyle özel durum paneli açar AssertionError [ERR_ASSERTION]: The input did not match the regular expression /SAVAŞ DURUMU/. Input:
+
+'<div class="mbox archiveShell"><div class="mhd"><span>GALAKTİK HABER AĞI</span><button class="abtn" data-a="closem" aria-label="Haritaya dön">✕</button></div>\n' +
+  '      <nav class="archiveTabs" aria-label="Haber ağı"><button class="abtn pri" data-a="news" aria-pressed="true">Haberler · 2</button><button class="abtn " data-a="diplomaticInbox" aria-pressed="false">Gelen kutusu · 0</button></nav>\n' +
+  `      <div class="mbd archiveDetail archive95e"><h3>Savaş ilanı</h3><div class="mini">2210.03 · gün 60 · Savaş</div><p>Yüce Nyx Zihni → Muhteşem Xel'Naga Otoritesi</p>\n` +
+  `      <div class="mini">Bilgi kaynağı: Doğrudan katılım</div><div class="ph">İLGİLİ DEVLETLER</div><button class="abtn" data-a="newsEmpire" data-x="1:0">Yüce Nyx Zihni</button><button class="abtn" data-a="newsEmpire" data-x="1:1">Muhteşem Xel'Naga Otoritesi</button>\n` +
+  '      </div><div class="mft"><button class="ch" data-a="newsPin" data-x="1">Sabitle</button><button class="ch" data-a="news">Listeye dön</button><button class="ch" data-a="closem">Haritaya dön</button></div></div>'
+
+    at /workspace/Star/tests/beta_p01_news_test.js:6:207
+    at test (/workspace/Star/tests/beta_p01_news_test.js:3:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_p01_news_test.js:6:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+FAIL eksik tarihsel savaş bilgisi yeni aktif savaştan uydurulmaz AssertionError [ERR_ASSERTION]: The input did not match the regular expression /SAVAŞ DURUMU/. Input:
+
+'<div class="mbox archiveShell"><div class="mhd"><span>GALAKTİK HABER AĞI</span><button class="abtn" data-a="closem" aria-label="Haritaya dön">✕</button></div>\n' +
+  '      <nav class="archiveTabs" aria-label="Haber ağı"><button class="abtn pri" data-a="news" aria-pressed="true">Haberler · 2</button><button class="abtn " data-a="diplomaticInbox" aria-pressed="false">Gelen kutusu · 0</button></nav>\n' +
+  `      <div class="mbd archiveDetail archive95e"><h3>Savaş ilanı</h3><div class="mini">2210.03 · gün 60 · Savaş</div><p>Yüce Nyx Zihni → Muhteşem Xel'Naga Otoritesi</p>\n` +
+  `      <div class="mini">Bilgi kaynağı: Doğrudan katılım</div><div class="ph">İLGİLİ DEVLETLER</div><button class="abtn" data-a="newsEmpire" data-x="1:0">Yüce Nyx Zihni</button><button class="abtn" data-a="newsEmpire" data-x="1:1">Muhteşem Xel'Naga Otoritesi</button>\n` +
+  '      </div><div class="mft"><button class="ch" data-a="newsPin" data-x="1">Sabitle</button><button class="ch" data-a="news">Listeye dön</button><button class="ch" data-a="closem">Haritaya dön</button></div></div>'
+
+    at /workspace/Star/tests/beta_p01_news_test.js:7:190
+    at test (/workspace/Star/tests/beta_p01_news_test.js:3:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_p01_news_test.js:7:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+PASS üçüncü devletin gizli filo bilgisi savaş haberine girmez; UI RNG kullanmaz
+GEÇEN: 1 KALAN: 3

@@ -1,32 +1,32 @@
 {
-  "phase": "MP.8.9",
-  "build": "96h10p6",
+  "phase": "BETA-P0.1",
+  "build": "96h10p7",
   "scope": "github-runtime-only",
   "save_version": 8,
-  "pwa_cache": "stars-v96h10p6",
-  "parent_commit": "8ce738b42636cd792a8d552230ca8194a4da053f",
-  "parent_zip_sha256": "15c247db0efa7952fc025fc7df7368eeff1adc2f8eb7c47eaf4645b8ec2c012a",
+  "pwa_cache": "stars-v96h10p7",
+  "parent_commit": "d307864edbc2ab9ca4347e5d065640e150279411",
+  "parent_zip_sha256": "9f0bf5f11913c277ca23274c7a84544fd15ecee3edffd3e8ab56ca149ff814f9",
   "file_count": 19,
   "files": {
     "ai.js": "49bb05c0621b8a31e9d61f361ea3a36250915f440a51d77e58aec7cc1e653b87",
-    "archive-ui.js": "f3b43957f97f2a32add1f40fc22f493eeca89bc5e1db05e5a5de92eef0e9fc03",
+    "archive-ui.js": "db140fa7f727629eb1defffd891bb0ef1c741a31c1f47cfd861bf48ac6ffb044",
     "audio.js": "6ddf6e388fa404394fee6220c2bfeeb3d1f9601c51a35ccdfe3181a8781942f7",
     "combat.js": "b4e21fcdb6fdaaa93da07313131470de3e8a3c28b5650226a9c4a2713bde73a5",
     "commerce-ui.js": "cc7fef5ab43176093251916aaafbdd873424da0630ec46fe6d3d5106a690b8d4",
     "commerce.js": "978e4f6b01faed1babeade20070447cbcfaa4e2ea70793a78e50f20fbe66be01",
     "construction.js": "d9b544b0328f26576ff90e02fe49c1b7f3798dfd844a8c39ee8dc6c0890debda",
-    "diplomacy.js": "ca589f8d2581e7189f6ace471db9bf2e9e1e504117eb2249b7ce9f04e206eaf4",
+    "diplomacy.js": "7233389b43f1dee15ade118ef94378d265aa69956d9fa11e4e83f327da182cbe",
     "economic-ledger.js": "309837d46e3d533f17d0ecb76a5c531474662cb57e05802ca52ffa904d5c5c3c",
     "economy-ui.js": "61f6e2dcef7f37143821edccf67552718a210ec555f7b8f9074c68191fd5cbcc",
     "economy.js": "315653254c3e690523d5068d8ccec6a4cd7adc7f44e7a563adc04917f1eeee80",
     "inbox.js": "e97f82d178f6908a89df792af28bebd4ba22315917e3e2c0bc15a874291ceb49",
     "index.html": "ae85599b00da6a7cc30035de6398337384d9e30d9cd5f8c3488b1ada6caf135c",
-    "main.js": "7aeff079be9fdf4c618a1a1606035e8879870bd871d662abe4aac107aa1f6a53",
+    "main.js": "b2b8ff0b36879173a98803cca58e3c2b53017330150cbdf3d67ac75e89f7c160",
     "manifest.json": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
     "map.js": "d8ca27ee07c484b7399f95d8031aa70fb7539bcf89d768c8442200b7cba76ae3",
     "news.js": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
-    "sw.js": "904d464319951d27ece9f8acc50a62ed5ded22817cb4c73284d22c6bc95fc970",
-    "ui.js": "359135693964c3d61d620c105432b9d22abb6259ad814957f6ba650c9fdc1f95"
+    "sw.js": "852ca21986d0480f225eee7ff0dd40a673f16171e3d37837a53ec848522d514b",
+    "ui.js": "c8fafc128f76595185324a3d72343bda17ea2902de7644ac9ad846e8d8ebae11"
   },
-  "description": "Device-local bounded UI Scale; original simulation and Save8 v8 unchanged; PERF.1/PERF.2 retained. Multiplayer client/server (including the unchanged MP.8.6 guest-only nebula cache) ship separately in the repository, outside this game ZIP."
+  "description": "Critical shared-panel ownership, event-bound war view, council ballot identity/ACK, explicit war end reasons and human embargo ownership. Save8 v8 and MP package4 compatibility; no AI strategic or economic rule changes."
 }

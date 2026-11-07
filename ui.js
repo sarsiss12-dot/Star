@@ -1277,15 +1277,13 @@ const UI = {
         if (leaveCouncil(G.p)) say('Konseyden ayrıldın — üyeler küstü', 'war');
         this.openCouncil(); break;
       }
-      case 'cncYes': {
-        const c = G.council;
-        if (c && c.vote){ c.vote.yes.push(0); finishCouncilVote(); }
-        this.closeModal(); this.openCouncil(); break;
-      }
+      case 'cncYes':
       case 'cncNo': {
-        const c = G.council;
-        if (c && c.vote){ c.vote.no.push(0); finishCouncilVote(); }
-        this.closeModal(); this.openCouncil(); break;
+        const r=castCouncilVote(G.p,a==='cncYes',x===undefined?councilVoteToken(G.council?.vote):x);
+        if(!r.ok)this.alert(r.why,'war');
+        else this.alert('Oy kaydedildi: '+(a==='cncYes'?'EVET':'HAYIR'));
+        const pane=$('diploPane');if(pane.classList.contains('show')&&pane._surfaceKey==='council')this.openCouncil(true);
+        break;
       }
       case 'fedBallot': {
         if(Object.hasOwn(FED_BALLOTS,x)&&x!=='weighted')this.fedBallotChoice=x;
@@ -2061,6 +2059,13 @@ const UI = {
     document.addEventListener('scroll',e=>{if(relevant(e.target))this._surfaceUntil=Date.now()+220;},{capture:true,passive:true});
     for(const type of ['input','change'])document.addEventListener(type,e=>{if(relevant(e.target)){this._surfaceDirty.add(e.target);this._surfaceUntil=Date.now()+500;}},{passive:true});
     window.addEventListener('blur',()=>this._surfacePointers.clear());
+  },
+  // BETA-P0.1: every replacement takes ownership of the shared panel.
+  surfaceReplace(el,html,key){
+    if(el._surfaceTimer)clearTimeout(el._surfaceTimer);
+    el._surfaceTimer=null;el._surfacePending=null;
+    el._surfaceKey=key;el._surfaceWorld=G.emps;el._surfaceHTML=html;
+    el.innerHTML=html;
   },
   surfaceRender(el,html,key,automatic=false){
     if(!el)return false;
@@ -3343,7 +3348,7 @@ const UI = {
   },
   openScience(focus=false){
     const s=this.scienceState(),pane=$('diploPane');this.globalCur='bilim';
-    pane.innerHTML=`<div class="dpBox scienceBox"><div class="dpHd"><span>✦ BİLİM</span><button class="riX" data-a="closeDiplo" aria-label="Bilim ekranını kapat">✕</button></div>${this.p_bilim()}</div>`;
+    this.surfaceReplace(pane,`<div class="dpBox scienceBox"><div class="dpHd"><span>✦ BİLİM</span><button class="riX" data-a="closeDiplo" aria-label="Bilim ekranını kapat">✕</button></div>${this.p_bilim()}</div>`,'science');
     pane.classList.add('show');this._scienceSig=this.scienceSignature();
     const q=pane.querySelector('.scQueueTrack');if(q)q.scrollLeft=s.queueX||0;
     const v=pane.querySelector('.scViewport');
@@ -3448,7 +3453,7 @@ const UI = {
     const pane=$('diploPane'),old=pane.querySelector?pane.querySelector('.dcBody'):null;
     if (old&&this._dcKey) this._dcScroll[this._dcKey]=old.scrollTop;
     const gen=(this._dcGen||0)+1;this._dcGen=gen;this._dcKey=key;
-    pane.innerHTML=html;pane.classList.add('show');
+    this.surfaceReplace(pane,html,'diplo:'+key);pane.classList.add('show');
     const body=pane.querySelector?pane.querySelector('.dpBody'):null;
     if (body){
       body.scrollTop=this._dcScroll[key]||0;
@@ -4966,11 +4971,11 @@ const UI = {
     sekme += `<button class="gpTab" data-a="diploPane">🤝 DİPLOMASİ</button>`;
     sekme += `</div>`;
 
-    $('diploPane').innerHTML = `<div class="dpBox">
+    this.surfaceReplace($('diploPane'),`<div class="dpBox">
       <div class="dpHd"><span>${P.ico} ${P.n}</span>
         <button class="riX" data-a="closeDiplo">✕</button></div>
       ${sekme}
-      <div class="dpBody">${govde}</div></div>`;
+      <div class="dpBody">${govde}</div></div>`,'global:'+key);
     $('diploPane').classList.add('show');
     /* Panel içindeki canvas'lar (amblem, portre, gezegen) çizilsin */
     setTimeout(()=>{ try{ paintEmblems(); }catch(err){} }, 0);
@@ -4978,6 +4983,8 @@ const UI = {
 
   /* =============== GALAKTİK KONSEY =============== */
   openCouncil(automatic=false){
+    const pane=$('diploPane');
+    if(automatic&&(!pane.classList.contains('show')||pane._surfaceKey!=='council'))return;
     const e = G.p;
     let h = `<div class="dpBox">
       <div class="dpHd"><span>🌐 GALAKTİK KONSEY</span>
@@ -5078,9 +5085,13 @@ const UI = {
               <i>"${esc(sp.txt)}"</i></div>`;
           });
         }
+        const token=councilVoteToken(c.vote),voted=c.vote.yes.includes(e.id)||c.vote.no.includes(e.id);
+        const pending=this._councilPending?.token===token,acked=this._councilAck?.token===token;
+        const disabled=c.vote.done||voted||pending||acked;
         if (mem) h += `<div class="act2">
-          <button class="abtn pri" data-a="cncYes">EVET</button>
-          <button class="abtn dgr" data-a="cncNo">HAYIR</button></div>`;
+          <button class="abtn pri" data-a="cncYes" data-x="${esc(token)}" ${disabled?'disabled':''}>EVET</button>
+          <button class="abtn dgr" data-a="cncNo" data-x="${esc(token)}" ${disabled?'disabled':''}>HAYIR</button></div>
+          <div role="status" id="councilVoteStatus">${pending?'Oy host yanıtı bekliyor…':voted?'Oyun kaydedildi: '+(c.vote.yes.includes(e.id)?'EVET':'HAYIR'):this._councilMessage?.token===token?esc(this._councilMessage.text):c.vote.done?'Oylama sona erdi.':''}</div>`;
         else h += `<div class="mini" style="color:#ff9b3d">Üye olmadığın için oy kullanamazsın.</div>`;
         h += `</div>`;
       } else {
@@ -7344,31 +7355,7 @@ const UI = {
   },
   warStartOpen(d){
     if(!warNoticeData(d))return;
-    const front=(G.warLedger&&G.warLedger.fronts||[]).find(f=>f.id===d.front);
-    const side=front?front.roles[front.sides.indexOf(G.p.id)]:(d.attacker===G.p.id?0:1);
-    const names={declaration:d.attacker===G.p.id?'Senin savaş ilanın':'Sana yöneltilen savaş ilanı',
-      federation:'Federasyon savunma paktı',overlord:'Senyörün vasalını koruma yükümlülüğü',
-      vassal:'Senyörün savunma çağrısı',promise:'Müzakerede verilen savaş sözü',
-      independence:'Bağımsızlık savaşı',independenceSupport:'Bağımsızlığa destek sözü',event:'Gerçekleşen olay sonucu savaş'};
-    const allies=new Set(),enemies=new Set();
-    for(const f of G.warLedger&&G.warLedger.fronts||[])if(f.campaign===d.campaign)
-      f.sides.forEach((id,i)=>{
-        if(id!==G.p.id&&G.p.contact&&G.p.contact[id]) (f.roles[i]===side?allies:enemies).add(id);
-      });
-    const list=ids=>[...ids].map(id=>esc(this.warNoticeName(id))).join(' · ')||'Bilinen yok';
-    const foe=d.attacker===G.p.id?d.defender:d.attacker;
-    this.openModal(`<div class="mhd"><span>⚔ SAVAŞA KATILIM</span><button class="riX" data-a="closem">✕</button></div>
-      <div class="mbd warBrief"><b>${esc(this.warNoticeName(d.attacker))} → ${esc(this.warNoticeName(d.defender))}</b>
-      <div class="mini">İlan / katılım tarihi: ${d.year}.${String(d.month).padStart(2,'0')}.${String(Math.floor(d.day%30)+1).padStart(2,'0')}</div>
-      <div class="row"><span>Tarafın</span><b>${side===0?'Saldıran':'Savunan'} taraf</b></div>
-      <div>${esc(names[d.reason])}${d.sponsor!==null?' · '+esc(this.warNoticeName(d.sponsor)):''}</div>
-      ${(d.rootAttacker!==d.attacker||d.rootDefender!==d.defender)?`<div class="mini">Asıl ilan: ${esc(this.warNoticeName(d.rootAttacker))} → ${esc(this.warNoticeName(d.rootDefender))}</div>`:''}
-      <div class="mini"><b>Bilinen savaş ortakların:</b> ${list(allies)}</div>
-      <div class="mini"><b>Bilinen düşmanlar:</b> ${list(enemies)}</div>
-      <div class="mini">${G.p.war[foe]?'Bu cephede savaş sürüyor.':'Bu cephede savaş artık sürmüyor.'}</div></div>
-      <div class="mft"><button class="ch" data-a="wdDiplo"><div class="cht">${esc(this.warNoticeName(foe))} · Diplomasi</div></button>
-      <button class="ch" data-a="closem"><div class="cht">Anlaşıldı</div></button></div>`,'war');
-    this._hook('wdDiplo',()=>{this.closeModal();this.selectDiplo(foe,'relation');});
+    ArchiveUI.warStatus(d);
   },
   warDecOpen(id){
     const o=G.emps[id];if(!o)return;
@@ -8218,7 +8205,7 @@ const UI = {
     if (typeof marketOpen === 'function' && !marketOpen()){
       const pane0 = $('diploPane');
       const kns = (typeof councilExists === 'function' && councilExists());
-      pane0.innerHTML = `<div class="dpBox">
+      this.surfaceReplace(pane0,`<div class="dpBox">
         <div class="dpHd"><span>💱 BORSA KAPALI</span>
           <button class="riX" data-a="closeMarket">✕</button></div>
         <div class="dpBody"><div class="box" style="border-color:#ff9b3d">
@@ -8230,21 +8217,21 @@ const UI = {
           <div class="act2"><button class="abtn pri" data-a="${
             kns ? 'cncPane' : 'globalPane'}" data-x="imp">${
             kns ? '🌐 KONSEYE GİT' : '🌐 KONSEY KUR'}</button></div>
-        </div></div></div>`;
+        </div></div></div>`,'market');
       pane0.classList.add('show');
       return;
     }
     /* FAZ 73: Arındırıcılar pazara giremez */
     if (typeof isPurifier === 'function' && isPurifier(e)){
       const pane = $('diploPane');
-      pane.innerHTML = `<div class="dpBox">
+      this.surfaceReplace(pane,`<div class="dpBox">
         <div class="dpHd"><span>☣ PAZAR KAPALI</span>
           <button class="riX" data-a="closeMarket">✕</button></div>
         <div class="dpBody"><div class="box" style="border-color:#8b7bff">
           <div class="bt"><span>Fanatik Arındırıcılar</span></div>
           <div class="bd">Galaktik Piyasa yabancılarla alışveriş demektir.
             Doktrinin buna izin vermiyor — ihtiyacın olanı üretir ya da
-            alırsın.</div></div></div></div>`;
+            alırsın.</div></div></div></div>`,'market');
       pane.classList.add('show');
       return;
     }
@@ -8298,7 +8285,7 @@ const UI = {
         data-x="${M.sat}:${M.al}:${M.mik}">💱 TAKAS ET</button></div></div>`;
     h += `</div></div>`;
     const pane = $('diploPane');
-    pane.innerHTML = h;
+    this.surfaceReplace(pane,h,'market');
     pane.classList.add('show');
   },
   confirmSaveLoad(txt, kaynak){

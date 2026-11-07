@@ -1,0 +1,7 @@
+[
+  {
+    "name": "#1 SP panel sahipliği",
+    "status": "FAIL",
+    "error": "locator.tap: Timeout 8000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#outEmp [data-a=\"globalPane\"][data-x=\"ldr\"]').first()\u001b[22m\n\n    at open (/workspace/Star/tests/helpers/beta-p01-panels.cjs:9:86)\n    at async module.exports (/workspace/Star/tests/helpers/beta-p01-panels.cjs:13:3)\n    at async /workspace/Star/tests/browser-beta-p01-panels.cjs:9:13"
+  }
+]

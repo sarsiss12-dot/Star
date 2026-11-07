@@ -1,0 +1,21 @@
+{
+  "build": "96h10p7",
+  "pwa": "stars-v96h10p7",
+  "mpVersion": "MP.8.9b2",
+  "file": "releases/stars-faz96h10p7.zip",
+  "bytes": 779126,
+  "sha256": "1bfa5fddbaacd0e281796f99292c6d0ddd78962f7cd3943a9b1ea79efa3a7673",
+  "crc32": "44c4a49f",
+  "deterministic": true,
+  "zipCRC": "PASS",
+  "mpFiles": {
+    "research/mp0/mp-core.js": "f7247a4ad3de905a755f8f1e03c115d86f199db67645672490ab655040e565e3",
+    "research/mp6/mirror.js": "df0ddd70622fe70cf37a580c0c3e0818485acc83ab48c037f7aedd3e3be5b32a",
+    "research/mp6/client/guest-stars.js": "0a53b1305c6c0c3ab0008e9f6d936347fb42616d2b15ed97a9ae74cf2a461e69",
+    "research/mp1/client/view.js": "7c6ed78d4ae83e6bfbdd2e9bd5548920a3ac37e3e5c802c4dd6969d5707ba63b",
+    "research/mp1/server/relay.js": "3a6d42ac65d9085ff074a049e39727f26e5873125a0f504ad2c22d3fb337719f"
+  },
+  "dockerReview": "Existing COPY client/mirror/core entries and relay allowlist cover all changed files; no new runtime path",
+  "dockerBuild": "NOT RUN",
+  "render": "NOT RUN"
+}

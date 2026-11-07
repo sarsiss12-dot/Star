@@ -1,0 +1,51 @@
+[
+  {
+    "name": "news-browser",
+    "file": "tests/browser-beta-p01-panels.cjs",
+    "env": {
+      "BETA_P01_NEWS": "1"
+    },
+    "start": "2026-11-06T22:04:05.861Z",
+    "end": "2026-11-06T22:04:22.986Z",
+    "code": 1
+  },
+  {
+    "name": "mp73-full",
+    "file": "tests/browser-mp73.cjs",
+    "env": {},
+    "start": "2026-11-06T22:04:22.996Z",
+    "end": "2026-11-06T22:08:19.247Z",
+    "code": 1
+  },
+  {
+    "name": "N",
+    "file": "tests/browser-mp8.cjs",
+    "env": {
+      "MP8_SCEN": "N"
+    },
+    "start": "2026-11-06T22:08:19.250Z",
+    "end": "2026-11-06T22:11:05.583Z",
+    "code": 0
+  },
+  {
+    "name": "R",
+    "file": "tests/browser-mp8.cjs",
+    "env": {
+      "MP8_SCEN": "R",
+      "MP8_MONTHS": "6",
+      "MP89_R_STATE": "1",
+      "MP89_UI": "1"
+    },
+    "start": "2026-11-06T22:11:05.585Z",
+    "end": "2026-11-06T22:13:56.025Z",
+    "code": 0
+  },
+  {
+    "name": "mp75",
+    "file": "tests/browser-mp75.cjs",
+    "env": {},
+    "start": "2026-11-06T22:13:56.025Z",
+    "end": "2026-11-06T22:14:19.556Z",
+    "code": 0
+  }
+]
