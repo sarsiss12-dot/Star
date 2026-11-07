@@ -65,8 +65,9 @@ const ArchiveUI = {
     let h=`<div class="mbd archiveDetail" data-war-status="${esc(r.key||'war-front:'+id)}"><div class="mini">Olay: ${esc(r.key||'war-front:'+id)}</div><h3>${esc(r.title||'Savaş bildirimi')}</h3>`;
     h+=`<div class="row"><span>Saldıran → Savunan</span><b>${status?label(status.parties?.find(x=>x.role===0)?.id??status.sides[0])+' → '+label(status.parties?.find(x=>x.role===1)?.id??status.sides[1]):known.map(e=>esc(e.name)).join(' / ')+' · tarihsel taraf rolü kesin bilinmiyor'}</b></div>`;
     if(status){const side=f?.roles?.[f.sides.indexOf(G.p.id)];if(side===0||side===1)h+='<p>'+ (side===0?'Saldıran taraf':'Savunan taraf')+'</p>';}
-    const entry=r.reason||f?.entryKind,entries={declaration:'Savaş ilanı',federation:'Federasyon savunma paktı',overlord:'Senyörün vasalını koruma yükümlülüğü',vassal:'Senyörün savunma çağrısı',promise:'Müzakerede verilen savaş sözü',independence:'Bağımsızlık savaşı',independenceSupport:'Bağımsızlığa destek sözü',event:'Gerçekleşen olay sonucu savaş'};
+    const entry=r.reason||f?.entryKind||status?.entryKind,entries={declaration:'Savaş ilanı',federation:'Federasyon savunma paktı',overlord:'Senyörün vasalını koruma yükümlülüğü',vassal:'Senyörün savunma çağrısı',promise:'Müzakerede verilen savaş sözü',independence:'Bağımsızlık savaşı',independenceSupport:'Bağımsızlığa destek sözü',event:'Gerçekleşen olay sonucu savaş'};
     if(entries[entry])h+='<p>'+esc(entries[entry])+'</p>';
+    const caller=r.sponsor??f?.sponsor??status?.sponsor;if(Number.isInteger(caller)&&G.emps[caller])h+='<p>Çağıran devlet: '+esc(UI.warNoticeName(caller))+'</p>';
     h+=`<p>Başlangıç / haber tarihi: ${status&&!status.legacy?day(status.opened):this.date(r)}${status?.legacy?' · önceki başlangıç kesin bilinmiyor':''}</p>`;
     h+=status?`<p><b>${active?'AKTİF':'SONA ERDİ'}</b>${!active?' · Bitiş '+day(status.ended)+' · Neden: '+esc(WAR_END_REASONS[String(status.endReason||status.reason).split('|')[0]]||status.endReason||status.reason||'kayıtta belirtilmemiş'):''}</p>`:'<p>Bu haberin kesin savaş durumu / bitiş tarihi bilinmiyor. Güncel başka bir savaş bu tarihsel kayda bağlanmaz.</p>';
     if(status){

@@ -13,6 +13,7 @@ module.exports=async(H,B,out)=>{
  const cards=await B.evaluate(()=>G.inbox.filter(n=>n.kind==='warstart').map(n=>({front:n.data.front,campaign:n.data.campaign,title:n.title,sub:n.sub,key:n.key})));
  assert.equal(new Set(cards.map(c=>c.front)).size,2);assert.equal(new Set(cards.map(c=>c.campaign)).size,1);assert(cards.some(c=>c.sub.includes('Federasyon')));
  await B.screenshot({path:path.join(out,'warfix-guest-two-fronts.png')});
+ const newsId=await B.evaluate(()=>G.news.records.find(r=>r.key==='war-front:2').id);await B.evaluate(()=>ArchiveUI.open('news'));await B.locator('[data-a="newsDetail"][data-x="'+newsId+'"]').tap({timeout:8000});const detailText=await B.locator('#modal').innerText();assert(detailText.includes('Federasyon savunma paktı'));assert(detailText.includes('Çağıran devlet:'));fs.writeFileSync(path.join(out,'warfix-guest-news-detail.txt'),detailText);await B.screenshot({path:path.join(out,'warfix-guest-news-detail.png')});await B.locator('#modal .mhd [data-a="closem"]').tap({timeout:8000});
  for(let i=0;i<2;i++){await H.evaluate(()=>MP1Host.host.publish());await B.waitForTimeout(650);}
  assert.equal(await B.evaluate(()=>G.inbox.filter(n=>n.kind==='warstart').length),2,'mirror rebuild duplicates/loss');
  const deal=await H.evaluate(()=>{for(const e of [G.emps[0],G.emps[1]])e.res.etk=10000;const r=MP1Host.host.local({kind:'offer',to:1,give:[{t:'peace'}],want:[]});if(!r.ok)throw Error(JSON.stringify(r));return MP1Host.host.dip.offers.filter(o=>o.from===0&&o.to===1&&o.status==='pending').at(-1).id;});
