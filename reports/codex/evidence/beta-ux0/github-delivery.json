@@ -1,0 +1,13 @@
+{
+  "branch": "codex/stars-beta-ux0-names",
+  "base": "codex/stars-beta-setup0-pirates",
+  "verifiedSourceHead": "fec9a8b4345b14cca9fa5c2eb496fc84e24f7ad2",
+  "verifiedCodeCommit": "c49c10a5f9d9be16551b7cc7c74174a7a4ed2e38",
+  "verifiedRemoteCodeHead": "c49c10a5f9d9be16551b7cc7c74174a7a4ed2e38",
+  "prAttempts": 1,
+  "prError": "Post \"https://api.github.com/graphql\": Forbidden",
+  "boardStartError": "Post \"https://api.github.com/graphql\": Forbidden",
+  "boardFinalError": "Post \"https://api.github.com/graphql\": Forbidden",
+  "compare": "https://github.com/sarsiss12-dot/Star/compare/codex/stars-beta-setup0-pirates...codex/stars-beta-ux0-names?expand=1",
+  "finalReportCommitSha": "reported in final delivery after push; no self-referencing commit loop"
+}

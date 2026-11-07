@@ -1,0 +1,6 @@
+{
+  "attempts": 1,
+  "exitCode": 1,
+  "base": "codex/stars-beta-setup0-pirates",
+  "head": "codex/stars-beta-ux0-names"
+}

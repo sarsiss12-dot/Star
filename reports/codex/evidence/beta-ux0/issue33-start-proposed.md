@@ -1,0 +1,2 @@
+BETA-UX.0 — yalnız pano #8 / ayrıntılı issue #5: AJANA VERİLDİ → GELİŞTİRMEDE.
+Kaynak codex/stars-beta-setup0-pirates @fec9a8b4345b14cca9fa5c2eb496fc84e24f7ad2 uzak doğrulandı. Yeni dal codex/stars-beta-ux0-names. Üretken iki kelimeli isimler, final doktrine uygun çeşitli unvanlar ve açık doktrin seçmeden zar yasağı geliştiriliyor. Stratejik RNG/harita/başkent, eski Save8 isimleri, SETUP.0 korsan ve P0.2 düzeltmeleri korunacak. Diğer görev durumlarına, özellikle #41'e dokunulmaz. Kullanıcı onayı olmadan TAMAMLANDI yok; merge/Render yok.
