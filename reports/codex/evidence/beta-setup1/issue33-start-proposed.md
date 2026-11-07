@@ -1,0 +1,1 @@
+BETA-SETUP.1 promptu alındı. Yalnız pano #42: AJANA VERİLDİ → GELİŞTİRMEDE. Kaynak codex/stars-beta-ux0-names @ eea55b2ddfae7de8f631eb43eb606585224f64d6, çalışma dalı codex/stars-beta-setup1-galaxy-options. Pregame seçenekleri ve yıldız kapısı denetimi; #8/#41/#44 ve diğer görevler değiştirilmez, TAMAMLANDI yapılmaz.

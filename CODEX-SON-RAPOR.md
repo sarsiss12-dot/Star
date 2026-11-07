@@ -1,14 +1,14 @@
 # Son Codex raporu
 
-- Faz: **BETA-UX.0 / yalnız pano #8, issue #5 — yerel isim/doktrin/zar kabulü PASS**, kullanıcı onayı yok.
-- Rapor: [BETA-UX0-SONUC](reports/codex/BETA-UX0-SONUC.md).
-- Dal: `codex/stars-beta-ux0-names`; taban `codex/stars-beta-setup0-pirates` @`fec9a8b4345b14cca9fa5c2eb496fc84e24f7ad2`.
-- Push ve uzak dal ile doğrulanmış kod/test HEAD: `c49c10a5f9d9be16551b7cc7c74174a7a4ed2e38`; son rapor commit SHA'sı nihai teslim mesajında/uzak daldadır.
-- İki kelime, beş üretken fonetik aile, sekiz doktrin×14 ağırlıklı unvan; ilk varsayılan Yayılmacı açık seçim sayılmaz. Gerçek UI'da seçim yokken exact uyarı, ad/RNG/sayaç korunur; manuel/eski Save8 adları değiştirilmez.
-- 100galaksi/1100AI:1057 kök,1099 tam ad; galaksi içi çakışma0, doktrin uyumsuzluğu0, iki kelime%100. Beş kontrol seed'inde isim dışındaki Save8 alanları/RNG aynı. Eski m60 Save8 +6ay ham bayt/RNG eşit; p9 MP paket eski/yeni yükleme çıktıları aynı.
-- İsim9/0, compat+8havuz2/0; Chromium Pregame14/0, ek panel8/0, yerel MP/P0.2 5/0; mevcut native regresyon106/0. İlk FAIL'ler rapor/kanıtlarda korunur.
-- Oyun96h10p10 /PWA stars-v96h10p10 /MP.8.9b5; Save8v8/paket4/protokol1. [ZIP/hash/CRC](reports/codex/evidence/beta-ux0/RELEASE-VERIFIED.json): SHA256 eb439625982cb688af8d2e4ac21bbfd477d5f6cd52691df8a3013491262c0d24, CRC32 12F8252D; tekrar paket aynı.
-- PR bir deneme Forbidden. [Karşılaştırma/PR oluştur](https://github.com/sarsiss12-dot/Star/compare/codex/stars-beta-setup0-pirates...codex/stars-beta-ux0-names?expand=1).
-- #33 başlangıç/sonuç yorumları Forbidden. #8 son okunabilen gerçek durum PROMPT HAZIR, yerel teslim için öneri KULLANICI ONAYI BEKLİYOR; yazılmış sayılmaz. #41 TEST BEKLİYOR ve diğer görevler değiştirilmedi. TAMAMLANDI yok.
-- NOT RUN: fiziksel Android, gerçek LAN/internet/Render, Docker build, bu fazda tam MP73 B1–B4/MP75/MP8 N/R kampanyaları. Tarihsel lobi timeoutları kapanmış sayılmaz. Main merge/rebase/force-push/deploy yok.
-- Sonraki tek adım: bu paketin fiziksel yatay mobil/MP kullanıcı kabulü; pano ve PR bağlantısı.
+- Faz: **BETA-SETUP.1 / yalnız pano #42 — Pregame seçenekleri ve yıldız kapıları yerel kabul PASS**; kullanıcı/yayın onayı yok.
+- Rapor: [BETA-SETUP1-SONUC](reports/codex/BETA-SETUP1-SONUC.md).
+- Dal: `codex/stars-beta-setup1-galaxy-options`; taban `codex/stars-beta-ux0-names` @`eea55b2ddfae7de8f631eb43eb606585224f64d6`.
+- Kod/test/paket uzak HEAD: `50e244b0a7c2ebbd1defe5b9e1b6090e13b434a6`; nihai rapor commit SHA'sı son mesaj/uzak daldadır.
+- OFF kapı ortak inşaat/AI/uzak sipariş engeli, eski tek kapının genel ikmal etkisi, kapalı bekleyen kriz ve iki yönlü UI semantiği düzeltildi. Görünür MP yapı sahibi π dönüşümü eksikti; mevcut ID uzayına çevrildi. Eski kapı silinmez; önceden ödenmiş iş ek bedelsiz tamamlanır, OFF ise pasiftir; tahminî iade yok.
+-14 ayar (13 grup+seed):210 başlangıç/Save8,205 uyumlu ham p10 eşitliği;42 kamu ayna varyantı. ON eski/yeni ve OFF bağımsız tekrar0–120ay121'er Save8/RNG noktası,30.ay yükleme aynı.19seed/209AI oranları20→43,35→69,60→128,100→209.
+- Native204/0; kapı12 bunun içinde, yeni ayna2/0 ayrıca. Gerçek yatay Chromium8/0+ON2/0, yerel MP5/0+ekA1 1/0. İlk FAIL'ler korunur. İsim9/0,korsan10/0,Konsey14/0,Save8 sınır19/0,PERF1 4/0,PERF2 5/0,piksel3/0.
+- Oyun96h10p11/PWA stars-v96h10p11/MP.8.9b6;Save8v8/paket4/protokol1. [Deterministik paket/hash](reports/codex/evidence/beta-setup1/RELEASE-VERIFIED.json): SHA256738da4fe71f200a16469abe647fd8b80be05977b14a905c30429caa2ee41f543,CRC32FF695D20.
+- PR bir deneme Forbidden. [Karşılaştırma/PR oluştur](https://github.com/sarsiss12-dot/Star/compare/codex/stars-beta-ux0-names...codex/stars-beta-setup1-galaxy-options?expand=1).
+- #42 başlangıç/sonuç ek yorumları Forbidden; son kamu okuması#42PROMPT HAZIR. #8KULLANICI ONAYI BEKLİYOR,#41TEST BEKLİYOR,#44PLANLANDI ve diğer durumlar korundu. TAMAMLANDI yok.
+- NOT RUN: fiziksel Android,gerçekLAN/internet/Render,Docker,tam MP73 B1–B4/MP75/MP8 N/R; AÇIK misafir uzaktan görev kuyruğu host aktarımı. MP doğrudan struct ve OFF misafir uzak sipariş reddi test edildi; ayrı kuyrukla karıştırma. Tarihsel lobi timeoutları kapanmış sayılmaz. Main merge/rebase/force-push/deploy yok.
+- Sonraki tek adım: kullanıcı cihazında bu paketin ayar/kapı ve eski ücretli iş politikası kabulü;#42 rapor/PR bağlantısı.

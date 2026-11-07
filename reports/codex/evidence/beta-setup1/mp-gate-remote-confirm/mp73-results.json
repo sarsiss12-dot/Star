@@ -1,0 +1,157 @@
+{
+  "results": [
+    {
+      "name": "A1 rehber 1–8: oda, iki farklı devlet, hazır, başlat; iki ekranda galaksi; sürüm işareti lobi / başlangıç / MP çubuğunda ve /mp/version oyun build'iyle aynı",
+      "status": "PASS",
+      "ms": 16348
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "startModal": [
+      "🛰 DANIŞMAN",
+      ""
+    ],
+    "ux0Names": {
+      "host": [
+        "Qelov Garnizonu",
+        "Alieth Matrisi",
+        "Varak Kovanı",
+        "Rhyaryn Konsorsiyumu",
+        "Liones Komünü",
+        "Karol Dominyonu",
+        "Torira Sendikası",
+        "Nebula Yağmacıları"
+      ],
+      "guestOwn": "Alieth Matrisi",
+      "guestHost": "Qelov Garnizonu"
+    },
+    "setup1": {
+      "hostCfg": {
+        "pirates": false,
+        "gates": false,
+        "randomEvents": false,
+        "aiOrigins": false,
+        "aiOriginChance": 35,
+        "crisisPower": "kapali",
+        "crisis": "kapali",
+        "council": "seyrek",
+        "ruins": "az",
+        "size": "orta",
+        "shape": "sarmal",
+        "diff": "normal",
+        "aiCount": 6
+      },
+      "guestCfg": {
+        "pirates": false,
+        "gates": false,
+        "randomEvents": false,
+        "aiOrigins": false,
+        "aiOriginChance": 35,
+        "crisisPower": "kapali",
+        "crisis": "kapali",
+        "council": "seyrek",
+        "ruins": "az",
+        "size": "orta",
+        "shape": "sarmal",
+        "diff": "normal",
+        "aiCount": 6
+      },
+      "fixture": {
+        "sys": 36,
+        "fleet": 22,
+        "res": "{\"min\":10000,\"ene\":2000,\"yiy\":180,\"ala\":10000,\"ara\":0,\"tuk\":150,\"etk\":400}"
+      },
+      "rejected": {
+        "v": 1,
+        "type": "result",
+        "seq": 1,
+        "cid": "jmw6mno8nxkm0zw2s",
+        "status": "rejected",
+        "code": "rules:engine",
+        "rev": 10,
+        "detail": [
+          "İnşaat başlatılamadı — kaynak veya konum uygun değil"
+        ],
+        "ms": 62
+      },
+      "remoteRejected": {
+        "ok": false,
+        "why": "Bu galakside yıldız kapısı inşası kapalı."
+      },
+      "cost": {
+        "min": 868,
+        "ala": 366
+      },
+      "paid": {
+        "min": 9132,
+        "ene": 2000,
+        "yiy": 180,
+        "ala": 9634,
+        "ara": 0,
+        "tuk": 150,
+        "etk": 400
+      },
+      "gateCompleted": true,
+      "legacyGatePreserved": true,
+      "seedDisclosure": "actual galaxy seed is intentionally not sent; native mirror tests assert cosmetic seed and rs=1"
+    },
+    "setup0": [
+      {
+        "who": "host",
+        "cfg": false,
+        "game": false,
+        "nests": 0,
+        "pirateFleets": 0,
+        "ownName": "Qelov Garnizonu",
+        "ownId": 0
+      },
+      {
+        "who": "guest",
+        "cfg": null,
+        "game": false,
+        "nests": 0,
+        "pirateFleets": 0,
+        "ownName": "Alieth Matrisi",
+        "ownId": 0
+      }
+    ],
+    "version": {
+      "mp": "MP.8.9b6",
+      "build": "96h10p11",
+      "files": {
+        "mp-core.js": "eed97b112abb",
+        "relay.js": "55d1926afc52",
+        "mp1-host.js": "c8e2251d1811",
+        "join.js": "bc2732493741",
+        "mirror.js": "c56eeb3a3180",
+        "guest-stars.js": "727534446b38",
+        "mp71-dip.js": "4b7b5e64b5ba",
+        "mp7-setup.js": "ab7780492379"
+      }
+    },
+    "unsupported": [
+      "autoEvent",
+      "diagCopy",
+      "joinRebel",
+      "leaveRebel",
+      "mapFix",
+      "physio",
+      "restart",
+      "rollName",
+      "sandbox",
+      "sitPick",
+      "stashNote",
+      "survey",
+      "terra",
+      "toTitle",
+      "tplDel",
+      "tplLoad",
+      "tplSave",
+      "trigCrisis"
+    ],
+    "guestDiag": "STARS MP.8.9b6 · oyun 96h10p11 · misafir · host bağlı · aşama: ready · ayna r9 16:38:20 · kurulum 7 ms · son komut: ok · son hata: rules:engine"
+  },
+  "pass": 1,
+  "fail": 0
+}
