@@ -1,0 +1,690 @@
+{
+  "militarist": {
+    "pool": [
+      [
+        "Lejyonu",
+        5
+      ],
+      [
+        "Komutanlığı",
+        5
+      ],
+      [
+        "Armadası",
+        5
+      ],
+      [
+        "Ordusu",
+        4
+      ],
+      [
+        "Cuntası",
+        3
+      ],
+      [
+        "Garnizonu",
+        3
+      ],
+      [
+        "Donanması",
+        4
+      ],
+      [
+        "Muhafızlığı",
+        2
+      ],
+      [
+        "Konseyi",
+        1
+      ],
+      [
+        "Birliği",
+        1
+      ],
+      [
+        "Karargâhı",
+        3
+      ],
+      [
+        "Filosu",
+        3
+      ],
+      [
+        "Taburları",
+        2
+      ],
+      [
+        "Akıncıları",
+        2
+      ]
+    ],
+    "samples": 200,
+    "uniqueNames": 200,
+    "titles": {
+      "Komutanlığı": 25,
+      "Donanması": 14,
+      "Muhafızlığı": 11,
+      "Cuntası": 14,
+      "Konseyi": 9,
+      "Akıncıları": 10,
+      "Garnizonu": 13,
+      "Karargâhı": 11,
+      "Taburları": 8,
+      "Filosu": 9,
+      "Lejyonu": 21,
+      "Birliği": 6,
+      "Ordusu": 30,
+      "Armadası": 19
+    },
+    "examples": [
+      "Zireos Komutanlığı",
+      "Meanel Donanması",
+      "Arkaek Muhafızlığı",
+      "Zorvora Cuntası",
+      "Zorvin Konseyi",
+      "Niraryn Akıncıları"
+    ]
+  },
+  "kriminal": {
+    "pool": [
+      [
+        "Karteli",
+        5
+      ],
+      [
+        "Şebekesi",
+        5
+      ],
+      [
+        "Çetesi",
+        3
+      ],
+      [
+        "Mafyası",
+        3
+      ],
+      [
+        "Sendikası",
+        5
+      ],
+      [
+        "Kaçakçıları",
+        3
+      ],
+      [
+        "Kumpanyası",
+        2
+      ],
+      [
+        "Locası",
+        2
+      ],
+      [
+        "Konsorsiyumu",
+        1
+      ],
+      [
+        "Ortaklığı",
+        1
+      ],
+      [
+        "Birliği",
+        1
+      ],
+      [
+        "Halkası",
+        3
+      ],
+      [
+        "Teşkilatı",
+        2
+      ],
+      [
+        "Örgütü",
+        3
+      ]
+    ],
+    "samples": 200,
+    "uniqueNames": 200,
+    "titles": {
+      "Kaçakçıları": 12,
+      "Sendikası": 28,
+      "Teşkilatı": 10,
+      "Mafyası": 15,
+      "Karteli": 24,
+      "Halkası": 18,
+      "Locası": 9,
+      "Kumpanyası": 11,
+      "Örgütü": 14,
+      "Şebekesi": 23,
+      "Konsorsiyumu": 7,
+      "Çetesi": 21,
+      "Ortaklığı": 3,
+      "Birliği": 5
+    },
+    "examples": [
+      "Feniar Kaçakçıları",
+      "Seaneth Sendikası",
+      "Veluor Teşkilatı",
+      "Tharur Mafyası",
+      "Niviaro Karteli",
+      "Elanna Halkası"
+    ]
+  },
+  "pasifist": {
+    "pool": [
+      [
+        "Birliği",
+        5
+      ],
+      [
+        "Topluluğu",
+        5
+      ],
+      [
+        "Konfederasyonu",
+        4
+      ],
+      [
+        "Komünü",
+        3
+      ],
+      [
+        "Cumhuriyeti",
+        4
+      ],
+      [
+        "Meclisi",
+        4
+      ],
+      [
+        "Federasyonu",
+        3
+      ],
+      [
+        "Cemiyeti",
+        3
+      ],
+      [
+        "Dayanışması",
+        2
+      ],
+      [
+        "Uzlaşısı",
+        3
+      ],
+      [
+        "Ortaklığı",
+        1
+      ],
+      [
+        "Konseyi",
+        1
+      ],
+      [
+        "İttifakı",
+        2
+      ],
+      [
+        "Şurası",
+        2
+      ]
+    ],
+    "samples": 200,
+    "uniqueNames": 200,
+    "titles": {
+      "Cumhuriyeti": 21,
+      "İttifakı": 8,
+      "Topluluğu": 30,
+      "Şurası": 10,
+      "Komünü": 17,
+      "Dayanışması": 10,
+      "Uzlaşısı": 11,
+      "Konfederasyonu": 21,
+      "Cemiyeti": 13,
+      "Konseyi": 6,
+      "Birliği": 20,
+      "Federasyonu": 13,
+      "Meclisi": 14,
+      "Ortaklığı": 6
+    },
+    "examples": [
+      "Qaluis Cumhuriyeti",
+      "Alarla İttifakı",
+      "Tharaa Topluluğu",
+      "Vaona Şurası",
+      "Nivrari Komünü",
+      "Zhaveira Dayanışması"
+    ]
+  },
+  "yayilmaci": {
+    "pool": [
+      [
+        "İmparatorluğu",
+        5
+      ],
+      [
+        "Hanedanı",
+        5
+      ],
+      [
+        "Hegemonyası",
+        4
+      ],
+      [
+        "Egemenliği",
+        4
+      ],
+      [
+        "Dominyonu",
+        4
+      ],
+      [
+        "Kolonileri",
+        3
+      ],
+      [
+        "Federasyonu",
+        2
+      ],
+      [
+        "Krallığı",
+        4
+      ],
+      [
+        "Sultanlığı",
+        2
+      ],
+      [
+        "İdaresi",
+        2
+      ],
+      [
+        "Beyliği",
+        2
+      ],
+      [
+        "Birliği",
+        1
+      ],
+      [
+        "Konseyi",
+        1
+      ],
+      [
+        "Tahtı",
+        3
+      ]
+    ],
+    "samples": 200,
+    "uniqueNames": 200,
+    "titles": {
+      "Hanedanı": 29,
+      "Egemenliği": 16,
+      "Sultanlığı": 7,
+      "Dominyonu": 18,
+      "Hegemonyası": 23,
+      "Krallığı": 16,
+      "İdaresi": 11,
+      "İmparatorluğu": 22,
+      "Kolonileri": 11,
+      "Federasyonu": 10,
+      "Beyliği": 8,
+      "Birliği": 5,
+      "Konseyi": 5,
+      "Tahtı": 19
+    },
+    "examples": [
+      "Kenera Hanedanı",
+      "Kalvith Egemenliği",
+      "Khelrora Sultanlığı",
+      "Arkaer Dominyonu",
+      "Varis Hegemonyası",
+      "Sovyen Krallığı"
+    ]
+  },
+  "teknokrasi": {
+    "pool": [
+      [
+        "Direktörlüğü",
+        5
+      ],
+      [
+        "Teknokrasisi",
+        5
+      ],
+      [
+        "Enstitüsü",
+        4
+      ],
+      [
+        "Kolektifi",
+        4
+      ],
+      [
+        "Akademisi",
+        4
+      ],
+      [
+        "Matrisi",
+        4
+      ],
+      [
+        "Ağı",
+        3
+      ],
+      [
+        "Birliği",
+        1
+      ],
+      [
+        "Konsorsiyumu",
+        1
+      ],
+      [
+        "Meclisi",
+        1
+      ],
+      [
+        "Merkezi",
+        3
+      ],
+      [
+        "Sentezi",
+        3
+      ],
+      [
+        "Çekirdeği",
+        3
+      ],
+      [
+        "Dizgesi",
+        3
+      ]
+    ],
+    "samples": 200,
+    "uniqueNames": 200,
+    "titles": {
+      "Akademisi": 21,
+      "Kolektifi": 17,
+      "Ağı": 15,
+      "Enstitüsü": 19,
+      "Direktörlüğü": 24,
+      "Dizgesi": 12,
+      "Matrisi": 18,
+      "Sentezi": 13,
+      "Meclisi": 7,
+      "Çekirdeği": 11,
+      "Merkezi": 13,
+      "Teknokrasisi": 23,
+      "Konsorsiyumu": 5,
+      "Birliği": 2
+    },
+    "examples": [
+      "Torvave Akademisi",
+      "Taliel Kolektifi",
+      "Draxrex Ağı",
+      "Xeleis Enstitüsü",
+      "İxanon Direktörlüğü",
+      "Draxvin Dizgesi"
+    ]
+  },
+  "tuccar": {
+    "pool": [
+      [
+        "Konsorsiyumu",
+        5
+      ],
+      [
+        "Loncası",
+        5
+      ],
+      [
+        "Tröstü",
+        4
+      ],
+      [
+        "Ortaklığı",
+        4
+      ],
+      [
+        "Korporasyonu",
+        5
+      ],
+      [
+        "Borsası",
+        3
+      ],
+      [
+        "Kumpanyası",
+        3
+      ],
+      [
+        "Birliği",
+        1
+      ],
+      [
+        "Sendikası",
+        2
+      ],
+      [
+        "Karteli",
+        2
+      ],
+      [
+        "Konseyi",
+        1
+      ],
+      [
+        "Meclisi",
+        1
+      ],
+      [
+        "Pazarı",
+        2
+      ],
+      [
+        "Odası",
+        3
+      ]
+    ],
+    "samples": 200,
+    "uniqueNames": 200,
+    "titles": {
+      "Korporasyonu": 24,
+      "Pazarı": 11,
+      "Loncası": 21,
+      "Ortaklığı": 21,
+      "Konsorsiyumu": 26,
+      "Karteli": 15,
+      "Odası": 17,
+      "Tröstü": 18,
+      "Sendikası": 9,
+      "Kumpanyası": 16,
+      "Konseyi": 6,
+      "Meclisi": 3,
+      "Borsası": 10,
+      "Birliği": 3
+    },
+    "examples": [
+      "Torriv Korporasyonu",
+      "Elaareth Pazarı",
+      "Qelerk Loncası",
+      "Arkero Ortaklığı",
+      "Ariuri Konsorsiyumu",
+      "Gronaex Karteli"
+    ]
+  },
+  "teokrasi": {
+    "pool": [
+      [
+        "Ruhbanlığı",
+        5
+      ],
+      [
+        "Konsili",
+        5
+      ],
+      [
+        "Teokrasisi",
+        5
+      ],
+      [
+        "Tarikatı",
+        4
+      ],
+      [
+        "Mabedi",
+        4
+      ],
+      [
+        "İnancı",
+        3
+      ],
+      [
+        "Şurası",
+        3
+      ],
+      [
+        "Cemaati",
+        3
+      ],
+      [
+        "Meclisi",
+        1
+      ],
+      [
+        "Manastırı",
+        3
+      ],
+      [
+        "Hanedanı",
+        1
+      ],
+      [
+        "Birliği",
+        1
+      ],
+      [
+        "Ocağı",
+        2
+      ],
+      [
+        "Ahdi",
+        3
+      ]
+    ],
+    "samples": 200,
+    "uniqueNames": 200,
+    "titles": {
+      "Ruhbanlığı": 26,
+      "Tarikatı": 20,
+      "Şurası": 15,
+      "Ahdi": 19,
+      "Manastırı": 9,
+      "İnancı": 16,
+      "Teokrasisi": 26,
+      "Mabedi": 14,
+      "Konsili": 16,
+      "Cemaati": 11,
+      "Ocağı": 9,
+      "Hanedanı": 7,
+      "Birliği": 7,
+      "Meclisi": 5
+    },
+    "examples": [
+      "Vaeron Ruhbanlığı",
+      "Vorol Tarikatı",
+      "Shavael Şurası",
+      "Talirix Ahdi",
+      "Nyvora Manastırı",
+      "Elinar İnancı"
+    ]
+  },
+  "izolasyonist": {
+    "pool": [
+      [
+        "Enklavı",
+        5
+      ],
+      [
+        "Sığınağı",
+        5
+      ],
+      [
+        "Kalesi",
+        4
+      ],
+      [
+        "Muhafızlığı",
+        4
+      ],
+      [
+        "İçkalesi",
+        4
+      ],
+      [
+        "İnzivası",
+        3
+      ],
+      [
+        "Hisarı",
+        4
+      ],
+      [
+        "Kovanı",
+        2
+      ],
+      [
+        "Birliği",
+        1
+      ],
+      [
+        "Konseyi",
+        1
+      ],
+      [
+        "Direktörlüğü",
+        1
+      ],
+      [
+        "Hanedanı",
+        1
+      ],
+      [
+        "Ocağı",
+        2
+      ],
+      [
+        "Özerkliği",
+        3
+      ]
+    ],
+    "samples": 200,
+    "uniqueNames": 200,
+    "titles": {
+      "Hisarı": 15,
+      "Kalesi": 16,
+      "Sığınağı": 23,
+      "İnzivası": 18,
+      "Enklavı": 31,
+      "Konseyi": 10,
+      "Direktörlüğü": 5,
+      "Muhafızlığı": 19,
+      "Kovanı": 7,
+      "İçkalesi": 29,
+      "Ocağı": 10,
+      "Özerkliği": 10,
+      "Birliği": 6,
+      "Hanedanı": 1
+    },
+    "examples": [
+      "Ulvear Hisarı",
+      "Malrik Kalesi",
+      "Arkvath Sığınağı",
+      "Axiis İnzivası",
+      "Kalex Enklavı",
+      "Luina Konseyi"
+    ]
+  }
+}

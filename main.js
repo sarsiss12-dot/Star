@@ -2401,6 +2401,52 @@ function empireName(random, ethics, used, character={}){
   return uniqueIdentityName(take(roots)+' '+take(forms),used||{});
 }
 
+/* BETA-UX.0: presentation-only names. Never reads or advances strategic RNG. */
+const NAME_TITLES = {
+ militarist:[['Lejyonu',5],['Komutanlığı',5],['Armadası',5],['Ordusu',4],['Cuntası',3],['Garnizonu',3],['Donanması',4],['Muhafızlığı',2],['Konseyi',1],['Birliği',1],['Karargâhı',3],['Filosu',3],['Taburları',2],['Akıncıları',2]],
+ kriminal:[['Karteli',5],['Şebekesi',5],['Çetesi',3],['Mafyası',3],['Sendikası',5],['Kaçakçıları',3],['Kumpanyası',2],['Locası',2],['Konsorsiyumu',1],['Ortaklığı',1],['Birliği',1],['Halkası',3],['Teşkilatı',2],['Örgütü',3]],
+ pasifist:[['Birliği',5],['Topluluğu',5],['Konfederasyonu',4],['Komünü',3],['Cumhuriyeti',4],['Meclisi',4],['Federasyonu',3],['Cemiyeti',3],['Dayanışması',2],['Uzlaşısı',3],['Ortaklığı',1],['Konseyi',1],['İttifakı',2],['Şurası',2]],
+ yayilmaci:[['İmparatorluğu',5],['Hanedanı',5],['Hegemonyası',4],['Egemenliği',4],['Dominyonu',4],['Kolonileri',3],['Federasyonu',2],['Krallığı',4],['Sultanlığı',2],['İdaresi',2],['Beyliği',2],['Birliği',1],['Konseyi',1],['Tahtı',3]],
+ teknokrasi:[['Direktörlüğü',5],['Teknokrasisi',5],['Enstitüsü',4],['Kolektifi',4],['Akademisi',4],['Matrisi',4],['Ağı',3],['Birliği',1],['Konsorsiyumu',1],['Meclisi',1],['Merkezi',3],['Sentezi',3],['Çekirdeği',3],['Dizgesi',3]],
+ tuccar:[['Konsorsiyumu',5],['Loncası',5],['Tröstü',4],['Ortaklığı',4],['Korporasyonu',5],['Borsası',3],['Kumpanyası',3],['Birliği',1],['Sendikası',2],['Karteli',2],['Konseyi',1],['Meclisi',1],['Pazarı',2],['Odası',3]],
+ teokrasi:[['Ruhbanlığı',5],['Konsili',5],['Teokrasisi',5],['Tarikatı',4],['Mabedi',4],['İnancı',3],['Şurası',3],['Cemaati',3],['Meclisi',1],['Manastırı',3],['Hanedanı',1],['Birliği',1],['Ocağı',2],['Ahdi',3]],
+ izolasyonist:[['Enklavı',5],['Sığınağı',5],['Kalesi',4],['Muhafızlığı',4],['İçkalesi',4],['İnzivası',3],['Hisarı',4],['Kovanı',2],['Birliği',1],['Konseyi',1],['Direktörlüğü',1],['Hanedanı',1],['Ocağı',2],['Özerkliği',3]]
+};
+const NAME_SOUNDS = [
+ ['kar thar brak drax vek zor khel gron mal vor skar kra drav var karn kal','a e i o u y ae ia ra re ri ro va ve vi vo','n r x th k s l v ra ri ro va ve on ar en'],
+ ['el al il or ae va ve lu na li me se so auri ela ari','a e i o u y an en in on ar er ir or la le','na ra la va li ri ni ya or el en is eth on ar es'],
+ ['zha sha ny rhy tha mir ly vel aes ni syl myr sel ael oyr qal','a e i o u y ae ia ra re ri ro va ve vi vo','ra ryn th el or eth a ri ya en is al on ira ur ar'],
+ ['xel qel vex zer kel syn tek ax ky ryn qir nel tal val zir ix','a e i o u y an en in on ar er ir or al el','x r n th v k s is os ax ix ex on ar el or'],
+ ['or ka fen tur del mar niv sov vel ark tor ul ken nav dal al','a e i o u y ae ia ra re ri ro va ve vi vo','n r x th k s l v ra ri ro va ve on ar en']
+].map(a=>a.map(s=>s.split(' ')));
+const NAME_CULTURES={militarist:[5,1,1,2,3],kriminal:[3,2,2,1,4],pasifist:[1,5,2,1,2],yayilmaci:[3,2,1,2,5],teknokrasi:[2,1,1,6,2],tuccar:[1,3,1,2,5],teokrasi:[1,3,6,1,2],izolasyonist:[3,1,3,3,2]};
+function nameRootKey(s){return identityNameKey(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/ı/g,'i');}
+function nameRootValid(s){return s.length>=4&&s.length<=9&&!/[aeiouy]{3}|[^aeiouy]{4}|(.)\1\1/i.test(s)&&!/(fuck|shit|sex|nazi|hitler|orospu|siktir|amcik|yarrak|bok)/i.test(nameRootKey(s));}
+function nameRootDistance(a,b){a=nameRootKey(a);b=nameRootKey(b);let row=Array.from({length:b.length+1},(_,i)=>i);for(let i=1;i<=a.length;i++){const next=[i];for(let j=1;j<=b.length;j++)next[j]=Math.min(next[j-1]+1,row[j]+1,row[j-1]+(a[i-1]===b[j-1]?0:1));row=next;}return row[b.length];}
+function namePickWeighted(random,rows){let at=random()*rows.reduce((n,r)=>n+r[1],0);for(const [v,w] of rows){at-=w;if(at<0)return v;}return rows.at(-1)[0];}
+function shortEmpireName(random,doctrine,used={}){
+ if(!Object.hasOwn(NAME_TITLES,doctrine))throw new RangeError('Geçersiz isim doktrini');
+ used=used||{};const names=Object.keys(used),roots=names.map(n=>nameRootKey(n.split(/\s+/)[0])),titles=new Set(names.map(n=>n.split(/\s+/).slice(1).join(' ')));
+ const pool=NAME_TITLES[doctrine],fresh=pool.filter(([t])=>!titles.has(t));
+ const finish=root=>{const title=namePickWeighted(random,fresh.length?fresh:pool),name=root[0].toLocaleUpperCase('tr-TR')+root.slice(1)+' '+title;used[name]=1;return name;};
+ const take=a=>a[Math.min(a.length-1,Math.floor(random()*a.length))];
+ for(let attempt=0;attempt<64;attempt++){
+  const culture=namePickWeighted(random,NAME_CULTURES[doctrine].map((w,i)=>[i,w])),parts=NAME_SOUNDS[culture],root=take(parts[0])+take(parts[1])+take(parts[2]);
+  if(!nameRootValid(root)||roots.some(r=>nameRootDistance(r,root)<=(Math.max(r.length,root.length)>=8?2:1)))continue;
+  return finish(root);
+ }
+ // Bounded pronounceable enumeration: exact uniqueness is mandatory; similarity may relax here.
+ const syll='ba de fi go ha ka le mi na po ra se ti va yo zu'.split(' ');
+ for(let i=0;i<4096;i++){const root='ze'+syll[i>>8]+syll[i>>4&15]+syll[i&15];if(nameRootValid(root)&&!roots.includes(nameRootKey(root)))return finish(root);}
+ throw new RangeError('İsim havuzu dolu; farklı bir isim seç');
+}
+function newEmpireIdentityName(e,used){return shortEmpireName(mulberry32(identityHash('name-ux0:'+G.seed+':'+e.id)),personaKey(e),used);}
+function assignFinalEmpireNames(){
+ const used=Object.fromEntries(G.emps.filter(e=>!e.ai||e.wild||e.crisisSide).map(e=>[e.name,1]));
+ for(const e of G.emps)if(e.ai&&!e.wild&&!e.crisisSide)e.name=newEmpireIdentityName(e,used);
+ G._adlar=used;
+}
+
 function makeEmpire(id, raceKey, name, ai, rnd, traits){
   const race = RACES[raceKey];
   const e = {
@@ -2571,7 +2617,7 @@ function setupGame(cfg){
       if (PHYSIO[ai.physio] && PHYSIO[ai.physio].e)
         ai.extra = Object.assign(ai.extra || {}, PHYSIO[ai.physio].e);
     }
-    ai.name = newEmpireIdentityName(rnd, ai);
+    ai.name = legacyEmpireIdentityName(rnd, ai);
     /* FAZ 46: paletten sıradaki ayrık renk */
     if (G._palet && G._paletIx < G._palet.length)
       ai.col = G._palet[G._paletIx++];
@@ -2865,6 +2911,7 @@ function setupGame(cfg){
   updateVision();
   normalizeIdentities();
   economyTick(true);
+  assignFinalEmpireNames();
   G._newsSetup=false;
   return true;
 }
@@ -5798,6 +5845,19 @@ const STEPS = [
   {k:'galaksi',n:'GALAKSİ'}
 ];
 let SETUP_STEP = 'mizac';
+// BETA-UX.0: setup-only choice; deliberately outside CFG, templates and Save8.
+const SETUP_NAMING={selected:null,roll:0,used:{},warning:''};
+function resetSetupNaming(){SETUP_NAMING.selected=null;SETUP_NAMING.roll=0;SETUP_NAMING.used={};SETUP_NAMING.warning='';}
+function selectSetupDoctrine(k){SETUP_NAMING.selected=Object.hasOwn(PERSONAS,k)?k:null;SETUP_NAMING.warning='';}
+function rollSetupName(){
+ if(!SETUP_NAMING.selected||SETUP_NAMING.selected!==CFG.mizac||!Object.hasOwn(PERSONAS,CFG.mizac)){
+  SETUP_NAMING.warning='⚠️ Önce devletinin doktrinini seç!';const status=$('setupNameStatus');if(status)status.textContent=SETUP_NAMING.warning;return false;
+ }
+ const input=$('empName'),used={...SETUP_NAMING.used},old=input?input.value:CFG.name;if(old)used[old]=1;
+ const random=mulberry32(identityHash('setup-name-ux0:'+CFG.seed+':'+CFG.mizac+':'+SETUP_NAMING.roll));
+ const name=shortEmpireName(random,CFG.mizac,used);SETUP_NAMING.roll++;SETUP_NAMING.used[name]=1;SETUP_NAMING.warning='';CFG.name=name;if(input)input.value=name;safeRenderSetup();return true;
+}
+
 function ethicSpent(){
   /* ═══ FAZ 52 DÜZELTMESİ ═══
      Faz 48'de dördüncü eksen (ahl — Dürüst/Sahtekâr) eklendi ama
@@ -5881,7 +5941,8 @@ function snapshotCFG(){
 }
 
 function applyTemplate(t){
-  if (!t) return false;
+  selectSetupDoctrine(t&&Object.hasOwn(t,'mizac')?t.mizac:null);
+  if (!t||typeof t!=='object'||Array.isArray(t)) return false;
   for (const k of TPL_FIELDS){
     if (t[k] === undefined) continue;
     CFG[k] = (t[k] && typeof t[k] === 'object')
@@ -5900,6 +5961,7 @@ function applyTemplate(t){
   CFG.portraitVariant=normalizePortraitVariant(CFG.portraitVariant);
   if (!Object.hasOwn(ORIGINS,CFG.origin)) CFG.origin = 'standart';
   if (!PHYSIO[CFG.physio])  CFG.physio = 'humanoid';
+  if(!Object.hasOwn(PERSONAS,CFG.mizac))CFG.mizac='yayilmaci';
   return true;
 }
 
@@ -5998,7 +6060,7 @@ document.addEventListener('click', e=>{
     if (typeof AUDIO !== 'undefined' && !AUDIO_OFF){
       try { AUDIO.start(); AUDIO.resume(); } catch(err){}
     }
-    leaveTitle('setup'); return;
+    resetSetupNaming();SETUP_STEP='mizac';leaveTitle('setup'); return;
   }
 
   if (a === 'tCont'){
@@ -8339,7 +8401,7 @@ function forceRedraw(sebep){
    Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
    Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
 /* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */
-const BUILD_ID = '96h10p9';
+const BUILD_ID = '96h10p10';
 const DIAG_MAX = 40;
 const DIAG = [];
 function logDiag(tur, mesaj){
@@ -9520,7 +9582,7 @@ function restoreIdentityViewPrefs(p){G.dismissedBattleReports=cleanBattleDismiss
 
 /* Preserve the pre-95D structural RNG consumption of AI naming. Expanded
    identity text has its own stream, so starting homes/luxuries stay stable. */
-function newEmpireIdentityName(random,e){
+function legacyEmpireIdentityName(random,e){
  const et=e.ethics||{},axes=[];for(const [key,pos,neg] of [['aut','aut','lib'],['mil','mil','pac'],['mat','mat','spi']]){if((et[key]||0)>0)axes.push(pos);if((et[key]||0)<0)axes.push(neg);}if(!axes.length)axes.push('none');
  const used=G._legacyIdentityNames||(G._legacyIdentityNames={});let legacy='';
  for(let i=0;i<40;i++){

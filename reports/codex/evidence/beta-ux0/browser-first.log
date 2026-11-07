@@ -1,0 +1,15 @@
+PASS 800x360 varsayılan Yayılmacı açık seçim değil; engelli zar sıfır RNG/sayaç/isim değişimi
+PASS 800x360 Yayılmacı karta gerçek tap seçimi açar, ardışık zar farklı önerir
+PASS 800x360 sekiz doktrin, manuel adı koruyan seçim ve uygun gerçek zar
+PASS 800x360 gerçek şablon yükleme: geçerli / doktrinsiz / bozuk
+PASS 800x360 başka sekmeden dönüş seçimi korur; yeni oyun yeniden açık seçim ister
+PASS 800x360 doktrin seçmeden normal varsayılan oyun başlangıcı engellenmez; ad kalır
+PASS 800x360 kısa isimler ve uzun manuel ad ortak oyun panellerinde güvenli
+PASS 960x540 varsayılan Yayılmacı açık seçim değil; engelli zar sıfır RNG/sayaç/isim değişimi
+PASS 960x540 Yayılmacı karta gerçek tap seçimi açar, ardışık zar farklı önerir
+PASS 960x540 sekiz doktrin, manuel adı koruyan seçim ve uygun gerçek zar
+PASS 960x540 gerçek şablon yükleme: geçerli / doktrinsiz / bozuk
+PASS 960x540 başka sekmeden dönüş seçimi korur; yeni oyun yeniden açık seçim ister
+PASS 960x540 doktrin seçmeden normal varsayılan oyun başlangıcı engellenmez; ad kalır
+PASS 960x540 kısa isimler ve uzun manuel ad ortak oyun panellerinde güvenli
+GEÇEN: 14 KALAN: 0

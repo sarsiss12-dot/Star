@@ -733,19 +733,7 @@ const UI = {
         safeRenderSetup();
         break;
       }
-      case 'rollName': {
-        /* FAZ 45: kurulum ekranı isim üreteci — Faz 44'teki
-           empireName() aynı etik girdisiyle çalıştırılır. */
-        const inp2 = $('empName');
-        if (inp2 && inp2.value !== undefined) CFG.name = inp2.value;
-        const yeni = (typeof empireName === 'function')
-          ? empireName(Math.random, CFG.ethics || {}, null)
-          : CFG.name;
-        CFG.name = yeni;
-        if (inp2) inp2.value = yeni;
-        safeRenderSetup();
-        break;
-      }
+      case 'rollName': rollSetupName();break;
       case 'patronage': {
         const o = G.emps[+x];
         const r = (typeof offerPatronage === 'function')
@@ -8624,10 +8612,10 @@ function renderSetup(){
           value="${esc(c.name || 'Yeni Hanedan')}"
           placeholder="Hanedanının adı">
         <button class="diceBtn" data-a="rollName"
-          title="Etiğine uygun rastgele ad üret">🎲</button>
+          title="Seçtiğin doktrine uygun iki kelimeli ad üret">🎲</button>
       </div>
-      <div class="mini">Zar, seçtiğin ideoloji eksenlerine uygun bir ad üretir —
-        militarist bir devlet "Kılıç" duyar, ruhaniyetçi bir devlet "Mabet".</div>
+      <div id="setupNameStatus" class="mini" role="status" aria-live="polite">${esc(SETUP_NAMING.warning)}</div>
+      <div class="mini">Önce doktrinini seç. Zar, özgün bir kök ve uygun devlet unvanı üretir; doktrin değişikliği mevcut adını değiştirmez.</div>
     </div>
 
     <div class="sect"><h2>DOKTRİN</h2>
@@ -8637,7 +8625,7 @@ function renderSetup(){
       <div class="grid g2">`;
     for (const k in PERSONAS){
       const P = PERSONAS[k];
-      const on = (c.mizac === k);
+      const on = (SETUP_NAMING.selected === k && c.mizac === k);
       /* ═══ FAZ 76: OKUNABİLİR DOKTRİN DÖKÜMÜ ═══
          "kin ×0.95" kimseye bir şey anlatmıyordu. Artık somut
          etkiler yazılıyor: hangi kaynak ne kadar artıyor,
@@ -8663,7 +8651,7 @@ function renderSetup(){
         }
         const savasEg = P.warBias > .1 ? 'savaşçı'
                       : P.warBias < -.05 ? 'barışçı' : 'dengeli';
-      h += `<button class="opt ${on?'on':''}" data-a="mizacSet" data-x="${k}">${P.ico} ${P.n}
+      h += `<button class="opt ${on?'on':''}" data-a="mizacSet" data-x="${k}" aria-pressed="${on}">${P.ico} ${P.n}
         <small>${arti.length ? '<b style="color:#65e08a">' + arti.join(' · ') + '</b>' : ''}
         ${eksi.length ? '<br><b style="color:#ff9b3d">' + eksi.join(' · ') + '</b>' : ''}
         ${(!arti.length && !eksi.length) ? 'dengeli profil' : ''}
@@ -9183,7 +9171,8 @@ function setupClickHandler(e){
   else if (a === 'look'){ CFG.look = x; safeRenderSetup(); }
   else if (a === 'portraitVariant'){ CFG.portraitVariant=(normalizePortraitVariant(CFG.portraitVariant)+(+x||1)+256)%256;safeRenderSetup(); }
   else if (a === 'mizacSet'){
-    CFG.mizac = x;
+    if(!Object.hasOwn(PERSONAS,x))return;
+    CFG.mizac = x;selectSetupDoctrine(x);
     /* FAZ 72: doktrin ırkı da belirler (TÜR sekmesi kaldırıldı) */
     if (typeof DOCTRINE_RACE !== 'undefined' && DOCTRINE_RACE[x] &&
         RACES[DOCTRINE_RACE[x]]) CFG.race = DOCTRINE_RACE[x];
@@ -9215,19 +9204,7 @@ function setupClickHandler(e){
     if (PHYSIO[x]){ CFG.physio = x; CFG.physioLocked = true; }
     safeRenderSetup();
   }
-  else if (a === 'rollName'){
-    /* Kutudaki elle yazılmış değeri kaybetmeden üret ve senkronla */
-    const inp = $('empName');
-    if (inp && inp.value !== undefined && inp.value !== '') CFG.name = inp.value;
-    CFG.name = (typeof empireName === 'function')
-      ? empireName(Math.random, CFG.ethics || {}, null)
-      : CFG.name;
-    if (inp) inp.value = CFG.name;
-    safeRenderSetup();
-    /* renderSetup DOM'u yeniden kurduğu için input'u tekrar yaz */
-    const inp2 = $('empName');
-    if (inp2) inp2.value = CFG.name;
-  }
+  else if (a === 'rollName'){ rollSetupName(); }
   else if (a === 'color'){ CFG.color = decodeURIComponent(x); CFG.colorLocked = true; safeRenderSetup(); }
   else if (a === 'ethic'){
     /* ═══ ZIRH 2: TAM RE-RENDER YOK, NOKTA CERRAHİSİ ═══

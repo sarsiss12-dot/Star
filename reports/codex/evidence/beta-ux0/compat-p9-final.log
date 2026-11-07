@@ -1,0 +1,17 @@
+evalmachine.<anonymous>:1
+var checked=StarsMP.validatePackage(__pkg);if(!checked.ok)throw Error(checked.why);if(!StarsMP.loadWorld(checked.pkg).ok)throw Error('load')
+                                                          ^
+
+Error: fields
+    at evalmachine.<anonymous>:1:65
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/Star/tests/helpers/runtime.js:112:25)
+    at Object.<anonymous> (/workspace/Star/tests/beta-ux0-compat.cjs:6:117)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+
+Node.js v24.22.1

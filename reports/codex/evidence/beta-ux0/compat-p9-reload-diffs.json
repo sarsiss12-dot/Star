@@ -1,0 +1,149 @@
+[
+  {
+    "path": ".emps.0._prof",
+    "before": {
+      "war": 0.34099999999999997,
+      "exp": 0.6,
+      "sci": 0.535,
+      "eco": 0.5,
+      "dip": 1.013,
+      "turtle": 0.2,
+      "spy": 0.25
+    },
+    "after": null
+  },
+  {
+    "path": ".emps.0._supAt",
+    "after": -1
+  },
+  {
+    "path": ".emps.0._gateAt",
+    "after": -1
+  },
+  {
+    "path": ".emps.1._prof",
+    "before": {
+      "war": 1.3792,
+      "exp": 0.8400000000000001,
+      "sci": 0.39899999999999997,
+      "eco": 0.504,
+      "dip": 0,
+      "turtle": 0.1888,
+      "spy": 0.25
+    },
+    "after": null
+  },
+  {
+    "path": ".emps.1._supAt",
+    "after": -1
+  },
+  {
+    "path": ".emps.1._gateAt",
+    "after": -1
+  },
+  {
+    "path": ".emps.2._prof",
+    "before": {
+      "war": 0.8939999999999999,
+      "exp": 1.08,
+      "sci": 0.5,
+      "eco": 0.638,
+      "dip": 0,
+      "turtle": 0.5853999999999999,
+      "spy": 0.20500000000000002
+    },
+    "after": null
+  },
+  {
+    "path": ".emps.2._supAt",
+    "after": -1
+  },
+  {
+    "path": ".emps.2._gateAt",
+    "after": -1
+  },
+  {
+    "path": ".emps.3._prof",
+    "before": {
+      "war": 1.3419000000000003,
+      "exp": 0.74,
+      "sci": 0.70275,
+      "eco": 0.634,
+      "dip": 0,
+      "turtle": 0.1824,
+      "spy": 0.20500000000000002
+    },
+    "after": null
+  },
+  {
+    "path": ".emps.3._supAt",
+    "after": -1
+  },
+  {
+    "path": ".emps.3._gateAt",
+    "after": -1
+  },
+  {
+    "path": ".emps.4._prof",
+    "before": {
+      "war": 0.13019999999999998,
+      "exp": 0.6599999999999999,
+      "sci": 0.737,
+      "eco": 1.064,
+      "dip": 0.8017999999999998,
+      "turtle": 0.232,
+      "spy": 0.25
+    },
+    "after": null
+  },
+  {
+    "path": ".emps.4._supAt",
+    "after": -1
+  },
+  {
+    "path": ".emps.4._gateAt",
+    "after": -1
+  },
+  {
+    "path": ".emps.5._prof",
+    "before": {
+      "war": 0.05889999999999997,
+      "exp": 0.65,
+      "sci": 1.16025,
+      "eco": 0.52,
+      "dip": 0.9746,
+      "turtle": 0.366,
+      "spy": 0.20500000000000002
+    },
+    "after": null
+  },
+  {
+    "path": ".emps.5._supAt",
+    "after": -1
+  },
+  {
+    "path": ".emps.5._gateAt",
+    "after": -1
+  },
+  {
+    "path": ".emps.6._prof",
+    "before": {
+      "war": 1.4,
+      "exp": 0.8,
+      "sci": 0.472,
+      "eco": 0.5,
+      "dip": 0,
+      "turtle": 0.0842,
+      "spy": 0.25
+    },
+    "after": null
+  },
+  {
+    "path": ".emps.6._supAt",
+    "after": -1
+  },
+  {
+    "path": ".emps.6._gateAt",
+    "after": -1
+  }
+]

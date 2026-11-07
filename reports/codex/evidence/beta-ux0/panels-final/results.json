@@ -1,0 +1,74 @@
+[
+  {
+    "viewport": [
+      800,
+      360
+    ],
+    "panel": "vasallik",
+    "status": "PASS",
+    "name": "Torrien Egemenliği"
+  },
+  {
+    "viewport": [
+      800,
+      360
+    ],
+    "panel": "ticaret",
+    "status": "PASS",
+    "name": "Torrien Egemenliği"
+  },
+  {
+    "viewport": [
+      800,
+      360
+    ],
+    "panel": "savas",
+    "status": "PASS",
+    "name": "Torrien Egemenliği"
+  },
+  {
+    "viewport": [
+      800,
+      360
+    ],
+    "panel": "harita",
+    "status": "PASS",
+    "name": "Torrien Egemenliği"
+  },
+  {
+    "viewport": [
+      960,
+      540
+    ],
+    "panel": "vasallik",
+    "status": "PASS",
+    "name": "Torrien Egemenliği"
+  },
+  {
+    "viewport": [
+      960,
+      540
+    ],
+    "panel": "ticaret",
+    "status": "PASS",
+    "name": "Torrien Egemenliği"
+  },
+  {
+    "viewport": [
+      960,
+      540
+    ],
+    "panel": "savas",
+    "status": "PASS",
+    "name": "Torrien Egemenliği"
+  },
+  {
+    "viewport": [
+      960,
+      540
+    ],
+    "panel": "harita",
+    "status": "PASS",
+    "name": "Torrien Egemenliği"
+  }
+]

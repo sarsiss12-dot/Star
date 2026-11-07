@@ -1,0 +1,63 @@
+{
+  "rng": [
+    1958112829,
+    1958112829
+  ],
+  "diff": [
+    {
+      "path": "save.emps.1.name",
+      "before": "Birleşik Konfederasyonu — Belrun",
+      "after": "Torrien Egemenliği"
+    },
+    {
+      "path": "save.emps.2.name",
+      "before": "Altın Ağı — Selen",
+      "after": "Feniava Sığınağı"
+    },
+    {
+      "path": "save.emps.3.name",
+      "before": "Uzak Belrun Kovanı",
+      "after": "Delaes Meclisi"
+    },
+    {
+      "path": "save.emps.4.name",
+      "before": "Cyrix ve Bağlı Dünyalar",
+      "after": "Tharrar Lejyonu"
+    },
+    {
+      "path": "save.emps.5.name",
+      "before": "Aster Konfederasyonu",
+      "after": "Navvive Konsorsiyumu"
+    },
+    {
+      "path": "save.emps.6.name",
+      "before": "Aethel ve Bağlı Dünyalar",
+      "after": "Veliri Konseyi"
+    },
+    {
+      "path": "save.emps.7.name",
+      "before": "Kutsal Kaevar Yüksek Hâkimiyeti",
+      "after": "Maroen Konfederasyonu"
+    },
+    {
+      "path": "save.emps.8.name",
+      "before": "Solari İmparatorluğu",
+      "after": "Alyon İdaresi"
+    },
+    {
+      "path": "save.emps.9.name",
+      "before": "Auren Konsorsiyumu",
+      "after": "Elyna Tahtı"
+    },
+    {
+      "path": "save.emps.10.name",
+      "before": "Tessaly Çekirdek Kolektifi",
+      "after": "Tekiros Karteli"
+    },
+    {
+      "path": "save.emps.11.name",
+      "before": "Vantia Konsorsiyumu",
+      "after": "Kalrik Halkası"
+    }
+  ]
+}

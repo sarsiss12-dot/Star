@@ -1,0 +1,140 @@
+[
+  {
+    "name": "800x360 varsayılan Yayılmacı açık seçim değil; engelli zar sıfır RNG/sayaç/isim değişimi",
+    "status": "PASS"
+  },
+  {
+    "name": "800x360 Yayılmacı karta gerçek tap seçimi açar, ardışık zar farklı önerir",
+    "status": "PASS",
+    "data": [
+      "Groniari Hegemonyası",
+      "Vorvan Dominyonu"
+    ]
+  },
+  {
+    "name": "800x360 sekiz doktrin, manuel adı koruyan seçim ve uygun gerçek zar",
+    "status": "PASS",
+    "data": [
+      {
+        "doctrine": "militarist",
+        "name": "Elenra Garnizonu"
+      },
+      {
+        "doctrine": "kriminal",
+        "name": "Dravova Örgütü"
+      },
+      {
+        "doctrine": "pasifist",
+        "name": "Vaeri Cumhuriyeti"
+      },
+      {
+        "doctrine": "yayilmaci",
+        "name": "Tharyx Tahtı"
+      },
+      {
+        "doctrine": "teknokrasi",
+        "name": "Karvoro Sentezi"
+      },
+      {
+        "doctrine": "tuccar",
+        "name": "Oronla Kumpanyası"
+      },
+      {
+        "doctrine": "teokrasi",
+        "name": "Syluor İnancı"
+      },
+      {
+        "doctrine": "izolasyonist",
+        "name": "Elinri Sığınağı"
+      }
+    ]
+  },
+  {
+    "name": "800x360 gerçek şablon yükleme: geçerli / doktrinsiz / bozuk",
+    "status": "PASS"
+  },
+  {
+    "name": "800x360 başka sekmeden dönüş seçimi korur; yeni oyun yeniden açık seçim ister",
+    "status": "PASS"
+  },
+  {
+    "name": "800x360 doktrin seçmeden normal varsayılan oyun başlangıcı engellenmez; ad kalır",
+    "status": "PASS",
+    "data": {
+      "name": "Bozuk Şablon"
+    }
+  },
+  {
+    "name": "800x360 kısa isimler ve uzun manuel ad ortak oyun panellerinde güvenli",
+    "status": "PASS"
+  },
+  {
+    "name": "960x540 varsayılan Yayılmacı açık seçim değil; engelli zar sıfır RNG/sayaç/isim değişimi",
+    "status": "PASS"
+  },
+  {
+    "name": "960x540 Yayılmacı karta gerçek tap seçimi açar, ardışık zar farklı önerir",
+    "status": "PASS",
+    "data": [
+      "Groniari Hegemonyası",
+      "Vorvan Dominyonu"
+    ]
+  },
+  {
+    "name": "960x540 sekiz doktrin, manuel adı koruyan seçim ve uygun gerçek zar",
+    "status": "PASS",
+    "data": [
+      {
+        "doctrine": "militarist",
+        "name": "Elenra Garnizonu"
+      },
+      {
+        "doctrine": "kriminal",
+        "name": "Dravova Örgütü"
+      },
+      {
+        "doctrine": "pasifist",
+        "name": "Vaeri Cumhuriyeti"
+      },
+      {
+        "doctrine": "yayilmaci",
+        "name": "Tharyx Tahtı"
+      },
+      {
+        "doctrine": "teknokrasi",
+        "name": "Karvoro Sentezi"
+      },
+      {
+        "doctrine": "tuccar",
+        "name": "Oronla Kumpanyası"
+      },
+      {
+        "doctrine": "teokrasi",
+        "name": "Syluor İnancı"
+      },
+      {
+        "doctrine": "izolasyonist",
+        "name": "Elinri Sığınağı"
+      }
+    ]
+  },
+  {
+    "name": "960x540 gerçek şablon yükleme: geçerli / doktrinsiz / bozuk",
+    "status": "PASS"
+  },
+  {
+    "name": "960x540 başka sekmeden dönüş seçimi korur; yeni oyun yeniden açık seçim ister",
+    "status": "PASS"
+  },
+  {
+    "name": "960x540 doktrin seçmeden normal varsayılan oyun başlangıcı engellenmez; ad kalır",
+    "status": "PASS",
+    "data": {
+      "name": "Bozuk Şablon"
+    }
+  },
+  {
+    "name": "960x540 kısa isimler ve uzun manuel ad ortak oyun panellerinde güvenli",
+    "status": "PASS"
+  }
+]

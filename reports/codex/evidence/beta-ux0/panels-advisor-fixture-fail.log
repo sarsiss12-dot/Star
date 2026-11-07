@@ -1,0 +1,5 @@
+AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert(await p.locator('#modal').evaluate(e=>e.classList.contains('hidden')))
+
+    at /workspace/Star/tests/browser-beta-ux0-panels.cjs:7:956

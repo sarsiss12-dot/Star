@@ -1,0 +1,6 @@
+[
+  {
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert(await p.locator('#modal').evaluate(e=>e.classList.contains('hidden')))\n\n    at /workspace/Star/tests/browser-beta-ux0-panels.cjs:7:956"
+  }
+]

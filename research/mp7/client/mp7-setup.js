@@ -22,6 +22,7 @@ function draft(){
 /* kayıtlı taslağı (bu cihazda) kurulum durumuna geri yükle */
 function apply(d){
   if(!d||typeof d!=='object')return;
+  selectSetupDoctrine(Object.hasOwn(d,'mizac')?d.mizac:null);
   for(const k of ['name','race','mizac','physio','look','origin','sigil','monoRes','portraitVariant','color'])if(d[k]!==undefined&&d[k]!==null)CFG[k]=d[k];
   if(d.ethics)CFG.ethics={...CFG.ethics,...d.ethics};if(Array.isArray(d.civics))CFG.civics=[...d.civics];if(Array.isArray(d.traits))CFG.traits=[...d.traits];
   if(d.emblem)CFG.emblem={...d.emblem};CFG.ethLocked=true;
@@ -42,7 +43,7 @@ function adapt(){
     b.textContent='VAZGEÇ (KAYDETMEDEN LOBİYE DÖN)';row.appendChild(b);}
 }
 function open(opts){
-  if(M.active)return;M.active=true;M.role=opts.role;M.done=opts.done;M.storeKey=opts.storeKey||null;
+  if(M.active)return;resetSetupNaming();M.active=true;M.role=opts.role;M.done=opts.done;M.storeKey=opts.storeKey||null;
   if(M.storeKey&&opts.restore)apply(load(M.storeKey));
   /* misafir: galaksi adımı yok (aynı STEPS dizisinden geçici çıkarılır, kapanınca geri konur) */
   if(M.role!=='host'){const i=STEPS.findIndex(s=>s.k==='galaksi');if(i>=0)M.removed=[i,STEPS.splice(i,1)[0]];}

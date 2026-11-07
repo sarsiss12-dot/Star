@@ -1,0 +1,6898 @@
+{
+  "status": "PASS",
+  "galaxies": [
+    {
+      "seed": 1,
+      "names": [
+        {
+          "id": 1,
+          "name": "Orrir Sendikası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 2,
+          "name": "Luleon Armadası",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 3,
+          "name": "Dravon Birliği",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 4,
+          "name": "Kenraen Tahtı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 5,
+          "name": "Varoth Direktörlüğü",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 6,
+          "name": "Meorni Borsası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 7,
+          "name": "Brakias Sultanlığı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 8,
+          "name": "Alvos Uzlaşısı",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 9,
+          "name": "Delaev Kaçakçıları",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 10,
+          "name": "Nelax Muhafızlığı",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 11,
+          "name": "Navel Cumhuriyeti",
+          "doctrine": "pasifist"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "3eb62821fefee0c94b36db9f1726318a509926aac620faf593e3c0d8d2f42bf1",
+      "rng": 62605809
+    },
+    {
+      "seed": 2,
+      "names": [
+        {
+          "id": 1,
+          "name": "Sylien Enklavı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 2,
+          "name": "Myroeth Hanedanı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 3,
+          "name": "Liirli Konseyi",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 4,
+          "name": "Karaen Konsorsiyumu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 5,
+          "name": "Aelaen Odası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 6,
+          "name": "Kaloon Karargâhı",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 7,
+          "name": "Qiroix Tahtı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 8,
+          "name": "Lyvoira Meclisi",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 9,
+          "name": "Vaela Şebekesi",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 10,
+          "name": "Vexins Hegemonyası",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 11,
+          "name": "Rynenis Konfederasyonu",
+          "doctrine": "pasifist"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "9f43bfc0039262beae3b900d38864f94476c8f8f10448834c0788cfc8d27a099",
+      "rng": -441347464
+    },
+    {
+      "seed": 3,
+      "names": [
+        {
+          "id": 1,
+          "name": "Torav Komünü",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 2,
+          "name": "Axerk Akıncıları",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 3,
+          "name": "Veleal Federasyonu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 4,
+          "name": "Tekav Tahtı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 5,
+          "name": "Ulova Odası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 6,
+          "name": "Rynyos İnzivası",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 7,
+          "name": "Keniro Meclisi",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 8,
+          "name": "Nyrior Karteli",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 9,
+          "name": "Alonla Uzlaşısı",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 10,
+          "name": "Oyryri Lejyonu",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 11,
+          "name": "Navrith Konfederasyonu",
+          "doctrine": "pasifist"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "4b71275c71a022efcb0f24e236713174414882af180aea3465915b3e4eb787a0",
+      "rng": 62605811
+    },
+    {
+      "seed": 4,
+      "names": [
+        {
+          "id": 1,
+          "name": "Shaveri Karteli",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 2,
+          "name": "Dalvoth Uzlaşısı",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 3,
+          "name": "Velol Federasyonu",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 4,
+          "name": "Alrove Odası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 5,
+          "name": "Vorrav Armadası",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 6,
+          "name": "Delros Örgütü",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 7,
+          "name": "Delroon İmparatorluğu",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 8,
+          "name": "İxelos Birliği",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 9,
+          "name": "Fenris Konsorsiyumu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 10,
+          "name": "Brakith Topluluğu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 11,
+          "name": "Arkvion Egemenliği",
+          "doctrine": "yayilmaci"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "07900168420cae58de1bf3c532c2dda66085472de58137b7c4cd2f3f604c4f93",
+      "rng": 1958112824
+    },
+    {
+      "seed": 5,
+      "names": [
+        {
+          "id": 1,
+          "name": "Zerinr Akıncıları",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 2,
+          "name": "Elonna Hanedanı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 3,
+          "name": "Elaova Komünü",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 4,
+          "name": "Ariarla İttifakı",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 5,
+          "name": "Karnel Direktörlüğü",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 6,
+          "name": "İleor Tahtı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 7,
+          "name": "Orinis Çetesi",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 8,
+          "name": "Elaleis Pazarı",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 9,
+          "name": "Nivaera Birliği",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 10,
+          "name": "Marven İdaresi",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 11,
+          "name": "Skaroon Locası",
+          "doctrine": "kriminal"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "668e85c2c66148c04def0e51faaa42cfc744224ed340592fe15453b88792571c",
+      "rng": 1958112823
+    },
+    {
+      "seed": 6,
+      "names": [
+        {
+          "id": 1,
+          "name": "Dalero Karteli",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 2,
+          "name": "Kaan İdaresi",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 3,
+          "name": "Arkiax Sığınağı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 4,
+          "name": "Ulov Sendikası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 5,
+          "name": "Delaeri Kumpanyası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 6,
+          "name": "Fenvek Konfederasyonu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 7,
+          "name": "Dalvove Donanması",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 8,
+          "name": "Kelels Federasyonu",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 9,
+          "name": "Nalaor Şebekesi",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 10,
+          "name": "Selaar İmparatorluğu",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 11,
+          "name": "Fenex Enklavı",
+          "doctrine": "izolasyonist"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "9b8397a47328c9e44dabb75664965d435785bb24dfa030b957de1015d1d4c1cb",
+      "rng": 1958112826
+    },
+    {
+      "seed": 7,
+      "names": [
+        {
+          "id": 1,
+          "name": "Thariak Özerkliği",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 2,
+          "name": "Elyon Dayanışması",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 3,
+          "name": "Talenn Sultanlığı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 4,
+          "name": "Dalrol Konfederasyonu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 5,
+          "name": "Navraar Korporasyonu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 6,
+          "name": "Khelaex İmparatorluğu",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 7,
+          "name": "Malian Armadası",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 8,
+          "name": "Turaer Konsorsiyumu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 9,
+          "name": "Talalor Sığınağı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 10,
+          "name": "Orores Uzlaşısı",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 11,
+          "name": "Vaenon Hegemonyası",
+          "doctrine": "yayilmaci"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "801b44617f6e9b0e72f4b612f02381c8ff073a33e63c69d4df89be7f2d5f31c5",
+      "rng": 1958112825
+    },
+    {
+      "seed": 8,
+      "names": [
+        {
+          "id": 1,
+          "name": "Myraira Topluluğu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 2,
+          "name": "Kaloro Donanması",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 3,
+          "name": "Dravvir Şebekesi",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 4,
+          "name": "Dalvok Hanedanı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 5,
+          "name": "Aurieni Cumhuriyeti",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 6,
+          "name": "Selreira İttifakı",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 7,
+          "name": "Vauni Komünü",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 8,
+          "name": "Orvar İnzivası",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 9,
+          "name": "Karora Konseyi",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 10,
+          "name": "Talyos Cuntası",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 11,
+          "name": "Xeliror Loncası",
+          "doctrine": "tuccar"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "fb88434f7cf68682a44846dc6aa88a546433ffd1431463d2aa4c77a0d63cdc25",
+      "rng": 62605818
+    },
+    {
+      "seed": 9,
+      "names": [
+        {
+          "id": 1,
+          "name": "Sovvera Karteli",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 2,
+          "name": "Zirarar Kumpanyası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 3,
+          "name": "Kalul Federasyonu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 4,
+          "name": "Delaeth Korporasyonu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 5,
+          "name": "Sooren Sendikası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 6,
+          "name": "Ariaron Birliği",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 7,
+          "name": "Khelriri İnzivası",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 8,
+          "name": "Voriara Hegemonyası",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 9,
+          "name": "Zorvaon Şebekesi",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 10,
+          "name": "Qaliri Komünü",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 11,
+          "name": "Sylrari Topluluğu",
+          "doctrine": "pasifist"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "f0f01d9fbbb7c87d03e6e3478eaae61be1c887fe3bb3041fe00635f51fa5475a",
+      "rng": 62605817
+    },
+    {
+      "seed": 10,
+      "names": [
+        {
+          "id": 1,
+          "name": "Velron Locası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 2,
+          "name": "Draxvoth Tahtı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 3,
+          "name": "Vekaero Sendikası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 4,
+          "name": "Zerinon Direktörlüğü",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 5,
+          "name": "Alarya Hanedanı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 6,
+          "name": "Naanla Korporasyonu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 7,
+          "name": "Karvaen Ordusu",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 8,
+          "name": "Rynoos Meclisi",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 9,
+          "name": "Sylaeryn Federasyonu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 10,
+          "name": "Dalian Egemenliği",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 11,
+          "name": "İxirel Cumhuriyeti",
+          "doctrine": "pasifist"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "0a278149d4a4a773dd02f779b0201634bf15c9634d704a6ae5aa432fd9446919",
+      "rng": 1958112830
+    },
+    {
+      "seed": 11,
+      "names": [
+        {
+          "id": 1,
+          "name": "Torrien Egemenliği",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 2,
+          "name": "Feniava Sığınağı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 3,
+          "name": "Delaes Meclisi",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 4,
+          "name": "Tharrar Lejyonu",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 5,
+          "name": "Navvive Konsorsiyumu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 6,
+          "name": "Veliri Konseyi",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 7,
+          "name": "Maroen Konfederasyonu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 8,
+          "name": "Alyon İdaresi",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 9,
+          "name": "Elyna Tahtı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 10,
+          "name": "Tekiros Karteli",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 11,
+          "name": "Kalrik Halkası",
+          "doctrine": "kriminal"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "a9d2cdb103b95c52d9e7aa8cb4191c94f1b51be8e92a46280704a8276a100125",
+      "rng": 1958112829
+    },
+    {
+      "seed": 12,
+      "names": [
+        {
+          "id": 1,
+          "name": "Aelael Meclisi",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 2,
+          "name": "Turvaen Beyliği",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 3,
+          "name": "Veerli Borsası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 4,
+          "name": "Kheliava Taburları",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 5,
+          "name": "Kavear Birliği",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 6,
+          "name": "Oyrvoor Ortaklığı",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 7,
+          "name": "Arianes Komünü",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 8,
+          "name": "Sharoar Direktörlüğü",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 9,
+          "name": "Varvev Topluluğu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 10,
+          "name": "Kalvava Dominyonu",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 11,
+          "name": "Karian Loncası",
+          "doctrine": "tuccar"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "7d07d5568379d04265784a2c48189c27838de8d0853c7c233da78889e4f78026",
+      "rng": 62605822
+    },
+    {
+      "seed": 13,
+      "names": [
+        {
+          "id": 1,
+          "name": "Nalaeth Cumhuriyeti",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 2,
+          "name": "Kenren İmparatorluğu",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 3,
+          "name": "Naari Konfederasyonu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 4,
+          "name": "Brakori Hisarı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 5,
+          "name": "Mirvaon Tahtı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 6,
+          "name": "Valon Ordusu",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 7,
+          "name": "Elaala Halkası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 8,
+          "name": "Ziraax Borsası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 9,
+          "name": "Alreth Korporasyonu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 10,
+          "name": "Vorek Egemenliği",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 11,
+          "name": "Meila Komünü",
+          "doctrine": "pasifist"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "d6d0a1d91468a77fe1295c72501cd60e6fa099d5da8cac5b897d5203f9d797b1",
+      "rng": 1958112831
+    },
+    {
+      "seed": 14,
+      "names": [
+        {
+          "id": 1,
+          "name": "Kalvova Korporasyonu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 2,
+          "name": "Khelvil Komutanlığı",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 3,
+          "name": "Velviis Armadası",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 4,
+          "name": "Navraar Karteli",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 5,
+          "name": "Veenna Şebekesi",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 6,
+          "name": "Ulreva Ortaklığı",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 7,
+          "name": "Marrear Birliği",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 8,
+          "name": "Aliar Hisarı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 9,
+          "name": "Tharval Pazarı",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 10,
+          "name": "Vorral Lejyonu",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 11,
+          "name": "Veeli Egemenliği",
+          "doctrine": "yayilmaci"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "586cb9e0c3de98e263efebdc588cfc25811fcb8fa24fe86062d157577f985fac",
+      "rng": 1958112834
+    },
+    {
+      "seed": 15,
+      "names": [
+        {
+          "id": 1,
+          "name": "Kelith Topluluğu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 2,
+          "name": "Delaeva Muhafızlığı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 3,
+          "name": "Valons Garnizonu",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 4,
+          "name": "Delara Meclisi",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 5,
+          "name": "Arkviv Dominyonu",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 6,
+          "name": "Qiruk Konsorsiyumu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 7,
+          "name": "Torrex Hanedanı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 8,
+          "name": "Alyv Borsası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 9,
+          "name": "Synorex Birliği",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 10,
+          "name": "Tharvero Hisarı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 11,
+          "name": "Varvava Komutanlığı",
+          "doctrine": "militarist"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "83bb961e7bed797f57a339616c02c71a6e9959f53f9d1eb6a372738308108181",
+      "rng": 1958112833
+    },
+    {
+      "seed": 16,
+      "names": [
+        {
+          "id": 1,
+          "name": "Seana Meclisi",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 2,
+          "name": "Luili Filosu",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 3,
+          "name": "Niroen Ortaklığı",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 4,
+          "name": "Dravol Kolonileri",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 5,
+          "name": "Vearli Uzlaşısı",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 6,
+          "name": "Dravian Hisarı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 7,
+          "name": "Ariiren Egemenliği",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 8,
+          "name": "Varvave Loncası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 9,
+          "name": "Rynoel Cumhuriyeti",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 10,
+          "name": "Variak Garnizonu",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 11,
+          "name": "Ulrara Federasyonu",
+          "doctrine": "pasifist"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "b95ad369f55644a9c3893ba24a8387ec15b8f4228b26137ec4cbd78799b0b94b",
+      "rng": 62605794
+    },
+    {
+      "seed": 17,
+      "names": [
+        {
+          "id": 1,
+          "name": "Luorel Borsası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 2,
+          "name": "Dalvil Krallığı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 3,
+          "name": "Turven Topluluğu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 4,
+          "name": "Sovox Taburları",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 5,
+          "name": "Fenvera Korporasyonu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 6,
+          "name": "Ariinri Birliği",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 7,
+          "name": "Uluar Egemenliği",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 8,
+          "name": "Vaona Dayanışması",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 9,
+          "name": "Vexoix Tröstü",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 10,
+          "name": "İlari Hanedanı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 11,
+          "name": "Rynenk Örgütü",
+          "doctrine": "kriminal"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "85edf2007f0cc098fdf134d536a0f44d54899c10d9ce80b91e96d7a71f40050b",
+      "rng": 1958112803
+    },
+    {
+      "seed": 18,
+      "names": [
+        {
+          "id": 1,
+          "name": "Kareen Kalesi",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 2,
+          "name": "Seiva Garnizonu",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 3,
+          "name": "Navvear Meclisi",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 4,
+          "name": "Talanax Uzlaşısı",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 5,
+          "name": "Vekrar Ortaklığı",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 6,
+          "name": "Elaeren Konfederasyonu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 7,
+          "name": "Elaanor Korporasyonu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 8,
+          "name": "Oroneth Hegemonyası",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 9,
+          "name": "Talels İçkalesi",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 10,
+          "name": "Rhyrith Mafyası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 11,
+          "name": "Alarli Kolonileri",
+          "doctrine": "yayilmaci"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "202a9ceaf9569fe56449463e16eb6c76b72ab3d5cf7138c162c7e4e2353b5d7b",
+      "rng": 1958112806
+    },
+    {
+      "seed": 19,
+      "names": [
+        {
+          "id": 1,
+          "name": "Uleen Egemenliği",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 2,
+          "name": "Kenvoon Komünü",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 3,
+          "name": "Torris Loncası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 4,
+          "name": "Alvav Ordusu",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 5,
+          "name": "Draxrath Muhafızlığı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 6,
+          "name": "Velris Birliği",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 7,
+          "name": "Soali Meclisi",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 8,
+          "name": "Naorel Kaçakçıları",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 9,
+          "name": "Malrara Lejyonu",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 10,
+          "name": "Nivvith Cumhuriyeti",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 11,
+          "name": "Elaineth Dayanışması",
+          "doctrine": "pasifist"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "da61b1b7689a1fb84ab22442c7ba5b5291f7a37a71521f6e2ff759fe7c2097f9",
+      "rng": 1958112805
+    },
+    {
+      "seed": 20,
+      "names": [
+        {
+          "id": 1,
+          "name": "Fenoar Donanması",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 2,
+          "name": "Aesiis Çetesi",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 3,
+          "name": "Seorar Şurası",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 4,
+          "name": "Oranen Konsorsiyumu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 5,
+          "name": "Delrari Hisarı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 6,
+          "name": "Torvex Dayanışması",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 7,
+          "name": "Turyn İdaresi",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 8,
+          "name": "Qalua Karteli",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 9,
+          "name": "Skarras Garnizonu",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 10,
+          "name": "Alyk Ortaklığı",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 11,
+          "name": "Aelraor Komünü",
+          "doctrine": "pasifist"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "32336749fe7aafeb3dda6d65bf7298f9aa9f923d4c86188199c4f15bcc8f019d",
+      "rng": 62605798
+    },
+    {
+      "seed": 21,
+      "names": [
+        {
+          "id": 1,
+          "name": "Axix Armadası",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 2,
+          "name": "Nivial Özerkliği",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 3,
+          "name": "İlena Dayanışması",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 4,
+          "name": "Qelyel Karteli",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 5,
+          "name": "Oren Loncası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 6,
+          "name": "Dravik Sendikası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 7,
+          "name": "Sovvara Hanedanı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 8,
+          "name": "Syluri Uzlaşısı",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 9,
+          "name": "Karveva Konseyi",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 10,
+          "name": "Vekyk Kalesi",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 11,
+          "name": "Turrov Topluluğu",
+          "doctrine": "pasifist"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "c6caee8bd1c87fc54f7b20276f432b59dda30425867b222a4ea38e4a2374bf46",
+      "rng": -441347479
+    },
+    {
+      "seed": 22,
+      "names": [
+        {
+          "id": 1,
+          "name": "Karvar Komünü",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 2,
+          "name": "Alanva Birliği",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 3,
+          "name": "Qaliryn Şurası",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 4,
+          "name": "Rhyvaur İttifakı",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 5,
+          "name": "Qirinax Garnizonu",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 6,
+          "name": "Oriar Sendikası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 7,
+          "name": "Vaoni Meclisi",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 8,
+          "name": "Nivaen İdaresi",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 9,
+          "name": "Nivear İmparatorluğu",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 10,
+          "name": "Aloen Örgütü",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 11,
+          "name": "İxaos Topluluğu",
+          "doctrine": "pasifist"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "e86d2ad4307245596668cd5d5ebf018faa97ac21fe12a5374e42e2b2fee8c510",
+      "rng": 62605800
+    },
+    {
+      "seed": 23,
+      "names": [
+        {
+          "id": 1,
+          "name": "Niveva Tröstü",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 2,
+          "name": "Nivroro Konsorsiyumu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 3,
+          "name": "Oyrraeth Muhafızlığı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 4,
+          "name": "Navero Komünü",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 5,
+          "name": "Arkiax Egemenliği",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 6,
+          "name": "Nyveth Donanması",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 7,
+          "name": "Nivyk Şebekesi",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 8,
+          "name": "Elaili Şurası",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 9,
+          "name": "Kenaex Borsası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 10,
+          "name": "Meerri Kumpanyası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 11,
+          "name": "Sylvion Hisarı",
+          "doctrine": "izolasyonist"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "b5a594f758139953230cce0769a69be210affbaaf2ead89214397d9d98185bcc",
+      "rng": 1958112809
+    },
+    {
+      "seed": 24,
+      "names": [
+        {
+          "id": 1,
+          "name": "Brakun İnzivası",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 2,
+          "name": "Oryn Cumhuriyeti",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 3,
+          "name": "Fenveth Donanması",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 4,
+          "name": "Luova Konfederasyonu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 5,
+          "name": "Daliri Komünü",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 6,
+          "name": "Rynenex Topluluğu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 7,
+          "name": "Draxvear Birliği",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 8,
+          "name": "Navvas Hanedanı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 9,
+          "name": "Tharis Sığınağı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 10,
+          "name": "Axelv Örgütü",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 11,
+          "name": "Deliro Lejyonu",
+          "doctrine": "militarist"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "960f0f66fd922e907498982a88d6efec899d340c601b993546959b82459624b0",
+      "rng": 1958112812
+    },
+    {
+      "seed": 25,
+      "names": [
+        {
+          "id": 1,
+          "name": "Aesvaor Konfederasyonu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 2,
+          "name": "Khelveen İçkalesi",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 3,
+          "name": "Navrek Korporasyonu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 4,
+          "name": "Dalvas Birliği",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 5,
+          "name": "Marreri İttifakı",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 6,
+          "name": "Orlava Topluluğu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 7,
+          "name": "Axelv Akıncıları",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 8,
+          "name": "Zeraax Konsorsiyumu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 9,
+          "name": "Karran Karteli",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 10,
+          "name": "Navuen Kalesi",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 11,
+          "name": "Delveva Odası",
+          "doctrine": "tuccar"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "34a4991f07a154867d319e5fa456dfd1b4ed5eace19e230f579774147b8ac9bb",
+      "rng": 1958112811
+    },
+    {
+      "seed": 26,
+      "names": [
+        {
+          "id": 1,
+          "name": "Draxvoar Sığınağı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 2,
+          "name": "Seareth İttifakı",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 3,
+          "name": "Vayra Federasyonu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 4,
+          "name": "Varov Tahtı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 5,
+          "name": "Keliel Krallığı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 6,
+          "name": "İloren Ortaklığı",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 7,
+          "name": "Voraeve Kumpanyası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 8,
+          "name": "Maliave Garnizonu",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 9,
+          "name": "Karnik Karteli",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 10,
+          "name": "Luorna Cemiyeti",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 11,
+          "name": "Elaenis Meclisi",
+          "doctrine": "pasifist"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "8c39355510dd4247190686563dfc9716512cbc00efa1b2bd21171f598f756cdc",
+      "rng": 1958112814
+    },
+    {
+      "seed": 27,
+      "names": [
+        {
+          "id": 1,
+          "name": "Tharreth Sığınağı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 2,
+          "name": "Veinli Konfederasyonu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 3,
+          "name": "Orval Birliği",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 4,
+          "name": "Arilala Sendikası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 5,
+          "name": "Arkreve Borsası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 6,
+          "name": "Tharrori Muhafızlığı",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 7,
+          "name": "Soeli Topluluğu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 8,
+          "name": "Delyk Mafyası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 9,
+          "name": "Soeres Ortaklığı",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 10,
+          "name": "Meaneth Uzlaşısı",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 11,
+          "name": "Khelura İttifakı",
+          "doctrine": "pasifist"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "d7c0b88d04a19911b8bbe257d633b95f02c75beb972e2fd8e060951d641ff451",
+      "rng": 1958112813
+    },
+    {
+      "seed": 28,
+      "names": [
+        {
+          "id": 1,
+          "name": "Fenviro Egemenliği",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 2,
+          "name": "Valorel Komutanlığı",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 3,
+          "name": "Aloon Tahtı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 4,
+          "name": "Elueth Uzlaşısı",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 5,
+          "name": "Elaera Meclisi",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 6,
+          "name": "Gronrave Dayanışması",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 7,
+          "name": "Sovion Pazarı",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 8,
+          "name": "Liirli Mafyası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 9,
+          "name": "Nyrith Dominyonu",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 10,
+          "name": "Zorova Cuntası",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 11,
+          "name": "İlonen Çetesi",
+          "doctrine": "kriminal"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "30de3f38fa1ef9ddf27b444d7212066daa95b166e37cf3869bfacc34a439fb09",
+      "rng": 1958112816
+    },
+    {
+      "seed": 29,
+      "names": [
+        {
+          "id": 1,
+          "name": "Varraar Meclisi",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 2,
+          "name": "Fenviri Federasyonu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 3,
+          "name": "Marrion Beyliği",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 4,
+          "name": "Turvoth Ortaklığı",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 5,
+          "name": "Navrel Lejyonu",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 6,
+          "name": "Ulven Korporasyonu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 7,
+          "name": "Allara Muhafızlığı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 8,
+          "name": "İlaor Konfederasyonu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 9,
+          "name": "Velion Uzlaşısı",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 10,
+          "name": "Selena Cumhuriyeti",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 11,
+          "name": "Varion İdaresi",
+          "doctrine": "yayilmaci"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "71a7be6bf7999695ef9d85c5f601057e2bfb9042675963dc24f7228ffd4bd46a",
+      "rng": 1958112815
+    },
+    {
+      "seed": 30,
+      "names": [
+        {
+          "id": 1,
+          "name": "Torvex Birliği",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 2,
+          "name": "Auriores Tröstü",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 3,
+          "name": "Kyaron Hisarı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 4,
+          "name": "Kraraen Çetesi",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 5,
+          "name": "Skaryl Garnizonu",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 6,
+          "name": "Valenor Beyliği",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 7,
+          "name": "Orerya Korporasyonu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 8,
+          "name": "Nayni Konfederasyonu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 9,
+          "name": "Ulrira İmparatorluğu",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 10,
+          "name": "Sovvak Ortaklığı",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 11,
+          "name": "Kenev Enklavı",
+          "doctrine": "izolasyonist"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "2416578f5b008b52f6ec6f180b89b4faf0704bdfff703ce8b77a7f506259e4bf",
+      "rng": 1958112818
+    },
+    {
+      "seed": 31,
+      "names": [
+        {
+          "id": 1,
+          "name": "Souni Federasyonu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 2,
+          "name": "Seinni Halkası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 3,
+          "name": "Vekvari Muhafızlığı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 4,
+          "name": "Gronver Karteli",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 5,
+          "name": "Torrora İdaresi",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 6,
+          "name": "Kavoen Topluluğu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 7,
+          "name": "Myroor Birliği",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 8,
+          "name": "Karnraon Lejyonu",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 9,
+          "name": "Veenel Cumhuriyeti",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 10,
+          "name": "Lilera Kumpanyası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 11,
+          "name": "Malex Özerkliği",
+          "doctrine": "izolasyonist"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "20cddfa0b4de3e97cd96a698776b6b9bd8465dae3bf508e5dd71da10ab1956eb",
+      "rng": 1958112817
+    },
+    {
+      "seed": 32,
+      "names": [
+        {
+          "id": 1,
+          "name": "Krarel Locası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 2,
+          "name": "Alinni Taburları",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 3,
+          "name": "Marvove Cumhuriyeti",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 4,
+          "name": "Zhairyn Cemiyeti",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 5,
+          "name": "Vekvira İmparatorluğu",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 6,
+          "name": "Malive Kolonileri",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 7,
+          "name": "Aesyis Muhafızlığı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 8,
+          "name": "Alrak Uzlaşısı",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 9,
+          "name": "Xeleon Loncası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 10,
+          "name": "Fenov Lejyonu",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 11,
+          "name": "Vexeros Kaçakçıları",
+          "doctrine": "kriminal"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "baa2c23d9ca7c3ec2671e0b2593e630f4a30666bbdd7bd37efc9a561ace357d3",
+      "rng": 62605842
+    },
+    {
+      "seed": 33,
+      "names": [
+        {
+          "id": 1,
+          "name": "Meala Uzlaşısı",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 2,
+          "name": "Kalor Hisarı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 3,
+          "name": "Turril Armadası",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 4,
+          "name": "Gronyri Birliği",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 5,
+          "name": "Varoen Hegemonyası",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 6,
+          "name": "Skarvor Egemenliği",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 7,
+          "name": "Navith Konsorsiyumu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 8,
+          "name": "Oroel Kumpanyası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 9,
+          "name": "Oyriath Cemiyeti",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 10,
+          "name": "Aesiryn İçkalesi",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 11,
+          "name": "Dalari Filosu",
+          "doctrine": "militarist"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "0b906ae3f84f47be47a7b57d8707f633eafd16a2bdadb87827c5717471509fcc",
+      "rng": 1958112851
+    },
+    {
+      "seed": 34,
+      "names": [
+        {
+          "id": 1,
+          "name": "Velvava Tröstü",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 2,
+          "name": "Arkun Kaçakçıları",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 3,
+          "name": "Aesaeth Karteli",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 4,
+          "name": "Elerla Topluluğu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 5,
+          "name": "Vorraro Kolonileri",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 6,
+          "name": "Gronvov Sendikası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 7,
+          "name": "Maruon Odası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 8,
+          "name": "Vexelth İnzivası",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 9,
+          "name": "İlava Pazarı",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 10,
+          "name": "Orori Komutanlığı",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 11,
+          "name": "Vaira Çetesi",
+          "doctrine": "kriminal"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "18e63be66083e5b3fc454eafce6fbe14110d238486c75f78e2404cca9e7ab16e",
+      "rng": 62605844
+    },
+    {
+      "seed": 35,
+      "names": [
+        {
+          "id": 1,
+          "name": "Kelear Muhafızlığı",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 2,
+          "name": "Nainar Topluluğu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 3,
+          "name": "İlanri Dayanışması",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 4,
+          "name": "Karvion Komutanlığı",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 5,
+          "name": "İxarth Sendikası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 6,
+          "name": "Orleel Hanedanı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 7,
+          "name": "Ariirri Konsorsiyumu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 8,
+          "name": "Qelanix Şurası",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 9,
+          "name": "Tharron Locası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 10,
+          "name": "Zirelex İmparatorluğu",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 11,
+          "name": "Skarviv Halkası",
+          "doctrine": "kriminal"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "38b45a3d3f69b3a1ba343b969633518ca0191f30e7eedefb466c06517b4e98da",
+      "rng": 1958112853
+    },
+    {
+      "seed": 36,
+      "names": [
+        {
+          "id": 1,
+          "name": "Varven Taburları",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 2,
+          "name": "Alara Locası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 3,
+          "name": "Rynenn Kovanı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 4,
+          "name": "Delvive Topluluğu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 5,
+          "name": "Kaveth İmparatorluğu",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 6,
+          "name": "Qirirn Konseyi",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 7,
+          "name": "Nivrir Loncası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 8,
+          "name": "Naviva Hegemonyası",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 9,
+          "name": "Varux Armadası",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 10,
+          "name": "Arkyro Korporasyonu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 11,
+          "name": "Neloar Kalesi",
+          "doctrine": "izolasyonist"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "12fb0db7e297ff1cbc0bcbd6801cd96add6d8e2833db8236f94e97d41fd6eca3",
+      "rng": 1958112856
+    },
+    {
+      "seed": 37,
+      "names": [
+        {
+          "id": 1,
+          "name": "Selviel Kumpanyası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 2,
+          "name": "Arienar Korporasyonu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 3,
+          "name": "Vayri Komünü",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 4,
+          "name": "Ulrion İçkalesi",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 5,
+          "name": "Elura Birliği",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 6,
+          "name": "Thareth Konfederasyonu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 7,
+          "name": "Alaen Ordusu",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 8,
+          "name": "Aleel Hegemonyası",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 9,
+          "name": "Daluv Loncası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 10,
+          "name": "Marrien Meclisi",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 11,
+          "name": "Maruth Topluluğu",
+          "doctrine": "pasifist"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "52fdfe57f1246fcc5c22d7b42e3a3b8d49429cb72a285482059095e14ef29a2d",
+      "rng": 62605845
+    },
+    {
+      "seed": 38,
+      "names": [
+        {
+          "id": 1,
+          "name": "Kraek Odası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 2,
+          "name": "Oruro Tröstü",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 3,
+          "name": "Turvera Kaçakçıları",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 4,
+          "name": "Luerli Meclisi",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 5,
+          "name": "Vekvik Ocağı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 6,
+          "name": "Dalaev Hanedanı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 7,
+          "name": "Delrov Konseyi",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 8,
+          "name": "Zoryon Lejyonu",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 9,
+          "name": "Ulran Konsorsiyumu",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 10,
+          "name": "Soanri Borsası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 11,
+          "name": "Gronyro Komünü",
+          "doctrine": "pasifist"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "7aefd958f44ea43ab76506a118f0740d7bbd53cd50236047bd2c7694156d3967",
+      "rng": 62605848
+    },
+    {
+      "seed": 39,
+      "names": [
+        {
+          "id": 1,
+          "name": "Kavon Sendikası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 2,
+          "name": "Shavari Dayanışması",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 3,
+          "name": "Skariar Armadası",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 4,
+          "name": "Kavav Karteli",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 5,
+          "name": "Luleni Cumhuriyeti",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 6,
+          "name": "Aurieni Cemiyeti",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 7,
+          "name": "Velrori Borsası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 8,
+          "name": "Velyro Hanedanı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 9,
+          "name": "Tekelex Kumpanyası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 10,
+          "name": "Qalreel Federasyonu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 11,
+          "name": "Gronveth Teşkilatı",
+          "doctrine": "kriminal"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "0cd0fc76e50ab9cb91d8231a533c29e89112c99e1b73a12bb9b990a08ecf1d3f",
+      "rng": 62605847
+    },
+    {
+      "seed": 40,
+      "names": [
+        {
+          "id": 1,
+          "name": "Elauva Uzlaşısı",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 2,
+          "name": "Auriireth Meclisi",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 3,
+          "name": "Alaeth Sendikası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 4,
+          "name": "Dalreth Ocağı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 5,
+          "name": "Kavith Kolonileri",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 6,
+          "name": "Orerya Korporasyonu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 7,
+          "name": "Dravvil Karargâhı",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 8,
+          "name": "Velith Krallığı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 9,
+          "name": "Talern Dayanışması",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 10,
+          "name": "Ariora Konseyi",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 11,
+          "name": "Vekiv Çetesi",
+          "doctrine": "kriminal"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "43b2c2c7dbe70bbded65b359ed1b999a3e7a6a97cb08f8782fbadd29aa4807a6",
+      "rng": 62605850
+    },
+    {
+      "seed": 41,
+      "names": [
+        {
+          "id": 1,
+          "name": "Vairva Konsorsiyumu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 2,
+          "name": "Kaleth Halkası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 3,
+          "name": "Draxaes Sultanlığı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 4,
+          "name": "Skarer Sığınağı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 5,
+          "name": "Selrior Hegemonyası",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 6,
+          "name": "Kenveen Cemiyeti",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 7,
+          "name": "Draxun Çetesi",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 8,
+          "name": "Zorrin Lejyonu",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 9,
+          "name": "Nivrero Tröstü",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 10,
+          "name": "Qiralis Topluluğu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 11,
+          "name": "Brakiv Dominyonu",
+          "doctrine": "yayilmaci"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "7021d64163ebc75b83c5933ae168cc4012bb1494365413df995b79fb2bbd0594",
+      "rng": 1958112859
+    },
+    {
+      "seed": 42,
+      "names": [
+        {
+          "id": 1,
+          "name": "Aurileon Odası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 2,
+          "name": "Synelar Topluluğu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 3,
+          "name": "Naonna Hanedanı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 4,
+          "name": "Maryth Krallığı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 5,
+          "name": "Fenviar Muhafızlığı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 6,
+          "name": "Aesreor Borsası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 7,
+          "name": "Orveva İttifakı",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 8,
+          "name": "Tharaeve Lejyonu",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 9,
+          "name": "Torris Pazarı",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 10,
+          "name": "Velyr Kumpanyası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 11,
+          "name": "Zhaira Hegemonyası",
+          "doctrine": "yayilmaci"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "0f96d9fb9881b4919c7ed2b4f1ebd7eea6c96aefc9bdf19adf0193146f79a026",
+      "rng": 62605852
+    },
+    {
+      "seed": 43,
+      "names": [
+        {
+          "id": 1,
+          "name": "Dalyve Hegemonyası",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 2,
+          "name": "Kenuva Korporasyonu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 3,
+          "name": "Velela Konfederasyonu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 4,
+          "name": "Voreon Akıncıları",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 5,
+          "name": "Aliar Ortaklığı",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 6,
+          "name": "Nyroal Meclisi",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 7,
+          "name": "Skaraero Sığınağı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 8,
+          "name": "Lueri Cumhuriyeti",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 9,
+          "name": "Karel Tahtı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 10,
+          "name": "Dalror Loncası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 11,
+          "name": "Aeleon Birliği",
+          "doctrine": "pasifist"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "6f27a5e1926ad40414f8a0688fa2f2e5bdb86de3f02eb7bd46c437cd4b5029ce",
+      "rng": 1958112861
+    },
+    {
+      "seed": 44,
+      "names": [
+        {
+          "id": 1,
+          "name": "Turral İçkalesi",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 2,
+          "name": "Zoraeri Cuntası",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 3,
+          "name": "Elainna Konfederasyonu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 4,
+          "name": "Thaori Tröstü",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 5,
+          "name": "Kaliari Beyliği",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 6,
+          "name": "Dalian Dayanışması",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 7,
+          "name": "Xelenel İmparatorluğu",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 8,
+          "name": "Rhyveal Cemiyeti",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 9,
+          "name": "Khelos Ordusu",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 10,
+          "name": "Zeririx Komutanlığı",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 11,
+          "name": "Ulvok Korporasyonu",
+          "doctrine": "tuccar"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "845d6e41189bdc766cfb02da4dd55a51f5dc1757e3dddc4ad4e48bbf27d0981b",
+      "rng": 1958112864
+    },
+    {
+      "seed": 45,
+      "names": [
+        {
+          "id": 1,
+          "name": "Sovik Örgütü",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 2,
+          "name": "Seluur Cumhuriyeti",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 3,
+          "name": "Arkvoon Sendikası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 4,
+          "name": "Arkros Konfederasyonu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 5,
+          "name": "Lyvaeth Garnizonu",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 6,
+          "name": "Oyriri Karteli",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 7,
+          "name": "Oyriur Ocağı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 8,
+          "name": "Nelonar Konsorsiyumu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 9,
+          "name": "Oyrien Halkası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 10,
+          "name": "Luleli Birliği",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 11,
+          "name": "Kariar Kaçakçıları",
+          "doctrine": "kriminal"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "ce299cc366bc462f6f78537780ec8579b465f393b670735b52b301c70b201393",
+      "rng": 1958112863
+    },
+    {
+      "seed": 46,
+      "names": [
+        {
+          "id": 1,
+          "name": "Elori Konfederasyonu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 2,
+          "name": "Vorvin Çetesi",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 3,
+          "name": "Sovux Mafyası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 4,
+          "name": "Kheluar Cuntası",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 5,
+          "name": "Velvaon Sendikası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 6,
+          "name": "Shaveryn Meclisi",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 7,
+          "name": "Zorves Cumhuriyeti",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 8,
+          "name": "Meiron Birliği",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 9,
+          "name": "Kalren Beyliği",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 10,
+          "name": "Kyes Konseyi",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 11,
+          "name": "Meerni Dominyonu",
+          "doctrine": "yayilmaci"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "f92a2a94bd858b5ee188a47f87123b607e4d19231fb6223284a2659593438d81",
+      "rng": 1958112866
+    },
+    {
+      "seed": 47,
+      "names": [
+        {
+          "id": 1,
+          "name": "Neloix Özerkliği",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 2,
+          "name": "Naerla Komünü",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 3,
+          "name": "Kyelv Konseyi",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 4,
+          "name": "Zoral Filosu",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 5,
+          "name": "Arkral Konsorsiyumu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 6,
+          "name": "Gronrol Cemiyeti",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 7,
+          "name": "Alveve Meclisi",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 8,
+          "name": "Naenli Borsası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 9,
+          "name": "Qiraris Sığınağı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 10,
+          "name": "Khelrel Federasyonu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 11,
+          "name": "Malax İmparatorluğu",
+          "doctrine": "yayilmaci"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "442c999b07939bb24b3546c75208ca228fcbfe9b77dd23720cca5ae239ca6439",
+      "rng": -441347421
+    },
+    {
+      "seed": 48,
+      "names": [
+        {
+          "id": 1,
+          "name": "Auriuri Uzlaşısı",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 2,
+          "name": "Malvaon Lejyonu",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 3,
+          "name": "Velviryn Ortaklığı",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 4,
+          "name": "Veinva Dominyonu",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 5,
+          "name": "Turveve Garnizonu",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 6,
+          "name": "Navvis Birliği",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 7,
+          "name": "Turero İdaresi",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 8,
+          "name": "Kaol Pazarı",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 9,
+          "name": "Oryni Cemiyeti",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 10,
+          "name": "Nivaon Cuntası",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 11,
+          "name": "Lienen Konfederasyonu",
+          "doctrine": "pasifist"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "d51b7ac76e61bae9c70ed97d1fab2a94811f3cbb0327a7148da2447433042df2",
+      "rng": 62605826
+    },
+    {
+      "seed": 49,
+      "names": [
+        {
+          "id": 1,
+          "name": "Alek Konsorsiyumu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 2,
+          "name": "Velrial Cemiyeti",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 3,
+          "name": "Alroth Loncası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 4,
+          "name": "Kyeth Sultanlığı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 5,
+          "name": "Ariireth Ortaklığı",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 6,
+          "name": "Oriara Sığınağı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 7,
+          "name": "Fenver Garnizonu",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 8,
+          "name": "Arkeva Dayanışması",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 9,
+          "name": "Kalyro Pazarı",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 10,
+          "name": "Fenval İmparatorluğu",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 11,
+          "name": "Veorel Meclisi",
+          "doctrine": "pasifist"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "342866c23ca2bb10897887aad454de0df4a3ff479830a16840287f000d57913a",
+      "rng": 62605825
+    },
+    {
+      "seed": 50,
+      "names": [
+        {
+          "id": 1,
+          "name": "Qalyen Komünü",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 2,
+          "name": "Veloor Karteli",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 3,
+          "name": "Brakuva Meclisi",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 4,
+          "name": "Vekyar İmparatorluğu",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 5,
+          "name": "Kaix Sultanlığı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 6,
+          "name": "Seleira Şebekesi",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 7,
+          "name": "Brakrav Ordusu",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 8,
+          "name": "Kyenos Direktörlüğü",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 9,
+          "name": "Oyrvoeth Topluluğu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 10,
+          "name": "Turev Birliği",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 11,
+          "name": "Navvoar Örgütü",
+          "doctrine": "kriminal"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "5321af359197d032f567c2f7350a60c87f2e10d0f6810bce03baebf791f42bb9",
+      "rng": 62605828
+    },
+    {
+      "seed": 51,
+      "names": [
+        {
+          "id": 1,
+          "name": "Sovrova Hanedanı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 2,
+          "name": "Zereth Kolonileri",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 3,
+          "name": "Sovith Şebekesi",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 4,
+          "name": "Marys Kaçakçıları",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 5,
+          "name": "Veinri Uzlaşısı",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 6,
+          "name": "Shareal Federasyonu",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 7,
+          "name": "Keneri Kumpanyası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 8,
+          "name": "Orenya Konfederasyonu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 9,
+          "name": "Synenel Özerkliği",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 10,
+          "name": "Oruri İmparatorluğu",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 11,
+          "name": "Karvos Ordusu",
+          "doctrine": "militarist"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "f3cd02bb3aa9cd7516ef95d249c971668b81c2e40beb887d47589e74b7e33f63",
+      "rng": -441347449
+    },
+    {
+      "seed": 52,
+      "names": [
+        {
+          "id": 1,
+          "name": "Gronvir Taburları",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 2,
+          "name": "Nelux Kovanı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 3,
+          "name": "Braketh Kumpanyası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 4,
+          "name": "Alerar Mafyası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 5,
+          "name": "Qeleel Ordusu",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 6,
+          "name": "Delol Konsorsiyumu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 7,
+          "name": "Turiak Sendikası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 8,
+          "name": "Fenvir Örgütü",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 9,
+          "name": "Turyth Tahtı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 10,
+          "name": "Vekriar Komutanlığı",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 11,
+          "name": "Aelvaon Konseyi",
+          "doctrine": "pasifist"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "d1dfea8f414138f0f318bc555a7ca83e506d0f2e6020b7e1332bb69222d93d61",
+      "rng": -441347446
+    },
+    {
+      "seed": 53,
+      "names": [
+        {
+          "id": 1,
+          "name": "Tekelos Kumpanyası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 2,
+          "name": "İxoros Akıncıları",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 3,
+          "name": "Ulvave Şebekesi",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 4,
+          "name": "Karnveth İmparatorluğu",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 5,
+          "name": "Lulana Konfederasyonu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 6,
+          "name": "Khelvol Krallığı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 7,
+          "name": "Voriaro Kaçakçıları",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 8,
+          "name": "Elaanen Komünü",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 9,
+          "name": "Oyruira Konsorsiyumu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 10,
+          "name": "Brakaar Konseyi",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 11,
+          "name": "Kalava Muhafızlığı",
+          "doctrine": "izolasyonist"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "5c8b23592c04531e1fd583a3bb23fbaf8c168128f9bf831e64d35c28ecd2e407",
+      "rng": 1958112839
+    },
+    {
+      "seed": 54,
+      "names": [
+        {
+          "id": 1,
+          "name": "İlonni Konsorsiyumu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 2,
+          "name": "İluis Komünü",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 3,
+          "name": "Veona Birliği",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 4,
+          "name": "Luleor Loncası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 5,
+          "name": "Dravix Özerkliği",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 6,
+          "name": "Navora Akıncıları",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 7,
+          "name": "Turvin İmparatorluğu",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 8,
+          "name": "Nivvove Örgütü",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 9,
+          "name": "Skariar Tröstü",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 10,
+          "name": "Dravuar Konfederasyonu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 11,
+          "name": "Gronves Meclisi",
+          "doctrine": "pasifist"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "535788956fcbea162c17b663595464a395b81a2bbd0a93af26acff5dca7fef5a",
+      "rng": 62605832
+    },
+    {
+      "seed": 55,
+      "names": [
+        {
+          "id": 1,
+          "name": "Gronrova Egemenliği",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 2,
+          "name": "Rynaris Hegemonyası",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 3,
+          "name": "Alrax Halkası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 4,
+          "name": "Synirar Komünü",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 5,
+          "name": "Skarrith Muhafızlığı",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 6,
+          "name": "Zharear Cemiyeti",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 7,
+          "name": "Qelan İçkalesi",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 8,
+          "name": "Turvora Korporasyonu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 9,
+          "name": "Tharroro Dominyonu",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 10,
+          "name": "Delyri İmparatorluğu",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 11,
+          "name": "Khelvek Birliği",
+          "doctrine": "tuccar"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "340774a1f96617aca26434946a44be659c7024730a498fb3713e3914df99d832",
+      "rng": 1958112841
+    },
+    {
+      "seed": 56,
+      "names": [
+        {
+          "id": 1,
+          "name": "Navviro Sendikası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 2,
+          "name": "Aliar Konseyi",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 3,
+          "name": "Toriaro Korporasyonu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 4,
+          "name": "İllaor Dayanışması",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 5,
+          "name": "Ulan Cemiyeti",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 6,
+          "name": "Oriava Karteli",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 7,
+          "name": "Arkek Hanedanı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 8,
+          "name": "Ulriar Şebekesi",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 9,
+          "name": "Karrov Uzlaşısı",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 10,
+          "name": "Fenvok Meclisi",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 11,
+          "name": "Ellaar Kumpanyası",
+          "doctrine": "tuccar"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "5efa8f14ab362b190722889ce551896cd834800b2aa77d6dd9f01ff42e6372e0",
+      "rng": 62605834
+    },
+    {
+      "seed": 57,
+      "names": [
+        {
+          "id": 1,
+          "name": "Kenara Dominyonu",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 2,
+          "name": "Elirar Federasyonu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 3,
+          "name": "Brakyva Cemiyeti",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 4,
+          "name": "Toryon Locası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 5,
+          "name": "Taliax Direktörlüğü",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 6,
+          "name": "Velori Korporasyonu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 7,
+          "name": "Fenaeri Akıncıları",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 8,
+          "name": "Qelior Birliği",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 9,
+          "name": "Vexelel İmparatorluğu",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 10,
+          "name": "Zhaveon Topluluğu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 11,
+          "name": "Veires Konfederasyonu",
+          "doctrine": "pasifist"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "7e46d99d980e4edcdeacaf7e17fe2ecef87ff6ca7f26d332e2328f4b1de9f216",
+      "rng": 1958112843
+    },
+    {
+      "seed": 58,
+      "names": [
+        {
+          "id": 1,
+          "name": "Zorrek İmparatorluğu",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 2,
+          "name": "Daliri Şurası",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 3,
+          "name": "Tekonon Konsorsiyumu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 4,
+          "name": "Sylvoryn Konseyi",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 5,
+          "name": "Ariireth Lejyonu",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 6,
+          "name": "Nelenn Ocağı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 7,
+          "name": "Aelaen Tröstü",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 8,
+          "name": "Seali Birliği",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 9,
+          "name": "Orrix Hanedanı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 10,
+          "name": "Sovova Cumhuriyeti",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 11,
+          "name": "Kaen Korporasyonu",
+          "doctrine": "tuccar"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "8a75addb11658f0b90acbc57c499e25e90db1ad62facf8fc4a18e7e4aa39f364",
+      "rng": 62605836
+    },
+    {
+      "seed": 59,
+      "names": [
+        {
+          "id": 1,
+          "name": "Mirrien Halkası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 2,
+          "name": "Skareon Lejyonu",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 3,
+          "name": "Orlaar Meclisi",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 4,
+          "name": "Rynarr Karteli",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 5,
+          "name": "Nayli Topluluğu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 6,
+          "name": "Fenaro Komutanlığı",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 7,
+          "name": "Dravvis Kumpanyası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 8,
+          "name": "Deluva İmparatorluğu",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 9,
+          "name": "Dalys Sendikası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 10,
+          "name": "Malaon Dominyonu",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 11,
+          "name": "Navrak Konfederasyonu",
+          "doctrine": "pasifist"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "080165ce12f68ac74b30ecda97bebdf519b04a30a389168e9929bd65abde57a6",
+      "rng": 1958112845
+    },
+    {
+      "seed": 60,
+      "names": [
+        {
+          "id": 1,
+          "name": "Valaeth Birliği",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 2,
+          "name": "Liarar Krallığı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 3,
+          "name": "Seanen Topluluğu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 4,
+          "name": "Soenla Cumhuriyeti",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 5,
+          "name": "Torvek Karargâhı",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 6,
+          "name": "Shareen Konfederasyonu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 7,
+          "name": "Talalis Sendikası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 8,
+          "name": "Tharian Filosu",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 9,
+          "name": "İlorel Meclisi",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 10,
+          "name": "Daluro Hegemonyası",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 11,
+          "name": "Delrak Federasyonu",
+          "doctrine": "pasifist"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "0dbbf899a922c3eba17ead8faf89e9c558f1744412149b14da73307df63bb403",
+      "rng": 1958112848
+    },
+    {
+      "seed": 61,
+      "names": [
+        {
+          "id": 1,
+          "name": "Elaana İmparatorluğu",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 2,
+          "name": "Malien Ortaklığı",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 3,
+          "name": "Arkrel Konseyi",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 4,
+          "name": "Qelanor Cemiyeti",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 5,
+          "name": "Lieni Cumhuriyeti",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 6,
+          "name": "İxonor Cuntası",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 7,
+          "name": "Myruon Birliği",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 8,
+          "name": "Fenrax Sendikası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 9,
+          "name": "Nelonar Sultanlığı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 10,
+          "name": "Uliava Konsorsiyumu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 11,
+          "name": "Arkrox Filosu",
+          "doctrine": "militarist"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "454f3fbe793d72694b3091ad8251a594cb8ad8398c1d1f005618e81a4474cbcf",
+      "rng": 1958112847
+    },
+    {
+      "seed": 62,
+      "names": [
+        {
+          "id": 1,
+          "name": "Sylvea Konseyi",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 2,
+          "name": "Vaerar Topluluğu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 3,
+          "name": "Elanni Konsorsiyumu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 4,
+          "name": "Qiroix Karargâhı",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 5,
+          "name": "Valenr Birliği",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 6,
+          "name": "Seerna Federasyonu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 7,
+          "name": "Fenoen Kumpanyası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 8,
+          "name": "Delien Locası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 9,
+          "name": "Karror İmparatorluğu",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 10,
+          "name": "Synorar Cumhuriyeti",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 11,
+          "name": "Alvov Loncası",
+          "doctrine": "tuccar"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "3770bdd33611cd228003e8a379f032148f3cd6897111a1d0e0c1dfd1df0551ee",
+      "rng": 62605840
+    },
+    {
+      "seed": 63,
+      "names": [
+        {
+          "id": 1,
+          "name": "Aesiryn Beyliği",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 2,
+          "name": "Velrer Federasyonu",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 3,
+          "name": "Luanna Birliği",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 4,
+          "name": "Kraeva Karargâhı",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 5,
+          "name": "Tharrik Korporasyonu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 6,
+          "name": "Turav Odası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 7,
+          "name": "Maloon Konsorsiyumu",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 8,
+          "name": "Meanna Özerkliği",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 9,
+          "name": "Arkvove Sultanlığı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 10,
+          "name": "Alili Meclisi",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 11,
+          "name": "Seonva Cumhuriyeti",
+          "doctrine": "pasifist"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "f0f3156c7e32ff0c94392883a39f4a1e4ac86e0e1ccf1486215fd63c7dbccd9a",
+      "rng": 1958112849
+    },
+    {
+      "seed": 64,
+      "names": [
+        {
+          "id": 1,
+          "name": "Skarvaar Armadası",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 2,
+          "name": "Khelyk Şebekesi",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 3,
+          "name": "Marroar Teşkilatı",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 4,
+          "name": "Naleen Uzlaşısı",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 5,
+          "name": "Xelaos Krallığı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 6,
+          "name": "Meinya Topluluğu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 7,
+          "name": "Orarra Locası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 8,
+          "name": "Kaari Mafyası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 9,
+          "name": "Dalaeri Muhafızlığı",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 10,
+          "name": "Vaeri Şurası",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 11,
+          "name": "Alinva Loncası",
+          "doctrine": "tuccar"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "a7e8193fbe671b1f8dfcb1ac80d9783a9886dde75e1909498b6b2099c2974e65",
+      "rng": 62605874
+    },
+    {
+      "seed": 65,
+      "names": [
+        {
+          "id": 1,
+          "name": "Veanni Konsorsiyumu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 2,
+          "name": "Khelvion Dayanışması",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 3,
+          "name": "Navaeri Egemenliği",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 4,
+          "name": "Zharior Topluluğu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 5,
+          "name": "Auriinor Ortaklığı",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 6,
+          "name": "Brakviri Sığınağı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 7,
+          "name": "Ulyen Konseyi",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 8,
+          "name": "Veloor Federasyonu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 9,
+          "name": "Sylea Loncası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 10,
+          "name": "Elaarri Konfederasyonu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 11,
+          "name": "Liinli Krallığı",
+          "doctrine": "yayilmaci"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "271127743c294ba5ff5cf58f6ed6f824321a8c1ea08a7f5f981fdb6a77de3025",
+      "rng": 1958112883
+    },
+    {
+      "seed": 66,
+      "names": [
+        {
+          "id": 1,
+          "name": "Delrak Korporasyonu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 2,
+          "name": "Dalveen Krallığı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 3,
+          "name": "Vexarx Karargâhı",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 4,
+          "name": "Turvek Şebekesi",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 5,
+          "name": "Tekirv Birliği",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 6,
+          "name": "Aurilaor Topluluğu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 7,
+          "name": "Aelvoeth Konfederasyonu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 8,
+          "name": "Dalvion Hanedanı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 9,
+          "name": "Nalana Konsorsiyumu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 10,
+          "name": "Rynas Şurası",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 11,
+          "name": "Oyrvira Armadası",
+          "doctrine": "militarist"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "a11b5a574c8ead232f80fdc01532bd04775945f7bcc62ea98407c6ee00c3c43e",
+      "rng": 62605876
+    },
+    {
+      "seed": 67,
+      "names": [
+        {
+          "id": 1,
+          "name": "Fenvori Sendikası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 2,
+          "name": "Karrive Örgütü",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 3,
+          "name": "Valelv Komutanlığı",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 4,
+          "name": "Dalyon Birliği",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 5,
+          "name": "Kelael Mafyası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 6,
+          "name": "Tharoor Federasyonu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 7,
+          "name": "Draxaek Armadası",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 8,
+          "name": "Niraur Cumhuriyeti",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 9,
+          "name": "Auriirel Komünü",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 10,
+          "name": "Arienar Konsorsiyumu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 11,
+          "name": "Ulos Tahtı",
+          "doctrine": "yayilmaci"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "8a5dc2a95508da4f3588ade74fca313d871be0ea75bd4431c165c31be19d013b",
+      "rng": 1958112885
+    },
+    {
+      "seed": 68,
+      "names": [
+        {
+          "id": 1,
+          "name": "Vaenni Konfederasyonu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 2,
+          "name": "Delvil Tröstü",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 3,
+          "name": "Daliav Odası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 4,
+          "name": "Arianel Şurası",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 5,
+          "name": "Kenil Lejyonu",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 6,
+          "name": "Niveis Şebekesi",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 7,
+          "name": "Rynalor Birliği",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 8,
+          "name": "Kair Kolonileri",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 9,
+          "name": "Veleni İttifakı",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 10,
+          "name": "Aelaen Korporasyonu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 11,
+          "name": "Fenov Loncası",
+          "doctrine": "tuccar"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "4b43452243cdef1b121a5429ae32ffc1b64e650cb72c5fcb8b3d984d356a67d6",
+      "rng": 62605878
+    },
+    {
+      "seed": 69,
+      "names": [
+        {
+          "id": 1,
+          "name": "Orviva Lejyonu",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 2,
+          "name": "Velrave Şebekesi",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 3,
+          "name": "Dalien Ordusu",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 4,
+          "name": "Luerni Meclisi",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 5,
+          "name": "Zoruar Konfederasyonu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 6,
+          "name": "Orlaes İdaresi",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 7,
+          "name": "Elalaor Tröstü",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 8,
+          "name": "Rynarel Sendikası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 9,
+          "name": "Dravuar Armadası",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 10,
+          "name": "Skaruk Krallığı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 11,
+          "name": "Valaros Sığınağı",
+          "doctrine": "izolasyonist"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "325487f7bb957c7a4f50ec028e9d51b34e9aa38ca3c4fa42da3a1d255917ca43",
+      "rng": 1958112887
+    },
+    {
+      "seed": 70,
+      "names": [
+        {
+          "id": 1,
+          "name": "Tekons Sultanlığı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 2,
+          "name": "Gronrix Muhafızlığı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 3,
+          "name": "Naola Topluluğu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 4,
+          "name": "Luinli Borsası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 5,
+          "name": "Navira Sendikası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 6,
+          "name": "Oryor Uzlaşısı",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 7,
+          "name": "Niver Donanması",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 8,
+          "name": "Arkaro Egemenliği",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 9,
+          "name": "Aesieth İmparatorluğu",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 10,
+          "name": "Elini Filosu",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 11,
+          "name": "Orarel Cemiyeti",
+          "doctrine": "pasifist"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "45283a87f9ead729f7449b379fbe74d2639c274a048b910bcff3d328ff9be9f2",
+      "rng": -441347396
+    },
+    {
+      "seed": 71,
+      "names": [
+        {
+          "id": 1,
+          "name": "Selyra Krallığı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 2,
+          "name": "Thavoal Cuntası",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 3,
+          "name": "Nivren Konsorsiyumu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 4,
+          "name": "Aeliar Cumhuriyeti",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 5,
+          "name": "Fenove İmparatorluğu",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 6,
+          "name": "Navrove Kalesi",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 7,
+          "name": "Rhyreira Kaçakçıları",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 8,
+          "name": "Nyvaen Birliği",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 9,
+          "name": "Velvex Hegemonyası",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 10,
+          "name": "Vaira Taburları",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 11,
+          "name": "Marras Ortaklığı",
+          "doctrine": "tuccar"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "852e8f24d82e48c1c7fcec9e0a102ce4de112201eb226f9bf21c27342555f6f5",
+      "rng": 1958112889
+    },
+    {
+      "seed": 72,
+      "names": [
+        {
+          "id": 1,
+          "name": "Tekeron Beyliği",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 2,
+          "name": "Sovial Meclisi",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 3,
+          "name": "Mariro Kumpanyası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 4,
+          "name": "Velvak Şebekesi",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 5,
+          "name": "Lieron Muhafızlığı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 6,
+          "name": "Zerelx Birliği",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 7,
+          "name": "Ziroron Dayanışması",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 8,
+          "name": "Delreen Loncası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 9,
+          "name": "Veenon Krallığı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 10,
+          "name": "Velroira İttifakı",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 11,
+          "name": "Kavov Sultanlığı",
+          "doctrine": "yayilmaci"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "a3a7cb09b882996c31deda5ced969c860b9f34587b966f3dd1efdd5142763b1b",
+      "rng": 1958112892
+    },
+    {
+      "seed": 73,
+      "names": [
+        {
+          "id": 1,
+          "name": "Karnvoth Enklavı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 2,
+          "name": "Deleon Ortaklığı",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 3,
+          "name": "Kelirk Kumpanyası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 4,
+          "name": "Khelvira Topluluğu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 5,
+          "name": "Vareri Lejyonu",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 6,
+          "name": "Luerel Komünü",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 7,
+          "name": "Xelons Dominyonu",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 8,
+          "name": "Dalvira Şebekesi",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 9,
+          "name": "Valirs Hisarı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 10,
+          "name": "Oriren Örgütü",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 11,
+          "name": "İxorix Konsorsiyumu",
+          "doctrine": "tuccar"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "27092fef5f79c315a3d4753f70ac8e6027a956f3ebb9556989b8779faff00b79",
+      "rng": 1958112891
+    },
+    {
+      "seed": 74,
+      "names": [
+        {
+          "id": 1,
+          "name": "Karveen Komünü",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 2,
+          "name": "Dalol Kolonileri",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 3,
+          "name": "Dravvav Federasyonu",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 4,
+          "name": "Aloren Meclisi",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 5,
+          "name": "Myroel Mafyası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 6,
+          "name": "Velvoar Çetesi",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 7,
+          "name": "Ziruk Filosu",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 8,
+          "name": "Zeriax Muhafızlığı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 9,
+          "name": "Veenis Şurası",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 10,
+          "name": "Seleur Hanedanı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 11,
+          "name": "Maraero Kumpanyası",
+          "doctrine": "kriminal"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "5e7927570981fea81d3322531c21f19aaf96026d071d7e553917cd3006ea0be5",
+      "rng": 1958112894
+    },
+    {
+      "seed": 75,
+      "names": [
+        {
+          "id": 1,
+          "name": "Kalvik Cumhuriyeti",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 2,
+          "name": "Velrari Konseyi",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 3,
+          "name": "Alaar Hanedanı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 4,
+          "name": "Sovvok Borsası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 5,
+          "name": "Dravveth Karargâhı",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 6,
+          "name": "Ulvove Şebekesi",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 7,
+          "name": "Orenli Topluluğu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 8,
+          "name": "Draxvora Kolonileri",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 9,
+          "name": "Elaeni Komünü",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 10,
+          "name": "Nayli Loncası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 11,
+          "name": "Dravur Hegemonyası",
+          "doctrine": "yayilmaci"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "4fbc6f51c89881a93798acfa4d60f40d97e27af4665f3da0d8ab3f2c4d99c231",
+      "rng": 62605883
+    },
+    {
+      "seed": 76,
+      "names": [
+        {
+          "id": 1,
+          "name": "Delreen İmparatorluğu",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 2,
+          "name": "Fenvear Kumpanyası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 3,
+          "name": "Ulial Konseyi",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 4,
+          "name": "Delreve Komünü",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 5,
+          "name": "Zeronk Odası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 6,
+          "name": "Selvora İçkalesi",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 7,
+          "name": "Draxvoon Uzlaşısı",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 8,
+          "name": "Khelyl Kolonileri",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 9,
+          "name": "Skariav Tahtı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 10,
+          "name": "Nivvan Korporasyonu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 11,
+          "name": "Karvava Armadası",
+          "doctrine": "militarist"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "773cceda6f03fa9ef76f00e10fb7106fb523bfc18b970f83a37cf3f3830adf71",
+      "rng": 1958112896
+    },
+    {
+      "seed": 77,
+      "names": [
+        {
+          "id": 1,
+          "name": "Arileni Korporasyonu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 2,
+          "name": "Ulaer Örgütü",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 3,
+          "name": "Toruth Konfederasyonu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 4,
+          "name": "Velvoen Muhafızlığı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 5,
+          "name": "Nivoar Birliği",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 6,
+          "name": "Zorax Tahtı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 7,
+          "name": "Varev İmparatorluğu",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 8,
+          "name": "Turas Ordusu",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 9,
+          "name": "Lileli Topluluğu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 10,
+          "name": "Marveen Kaçakçıları",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 11,
+          "name": "Veorra Federasyonu",
+          "doctrine": "pasifist"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "bf1b3c7b93c018c02f80a7d05110d6e8ee74d592beb46eb996cc7e70f5385323",
+      "rng": 62605885
+    },
+    {
+      "seed": 78,
+      "names": [
+        {
+          "id": 1,
+          "name": "Vaoron Topluluğu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 2,
+          "name": "Karrave Ortaklığı",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 3,
+          "name": "Qirelth Sultanlığı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 4,
+          "name": "Arkyth İmparatorluğu",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 5,
+          "name": "Luenli Karteli",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 6,
+          "name": "Dalvar Tröstü",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 7,
+          "name": "Dravath Muhafızlığı",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 8,
+          "name": "Aesveis Meclisi",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 9,
+          "name": "İlael Komünü",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 10,
+          "name": "Elinon Odası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 11,
+          "name": "Karvori Krallığı",
+          "doctrine": "yayilmaci"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "e44ae7b19d644e0f8fff04a76aa7d950e3c31aaeda2a3bb201d8f6aa94f3e9d0",
+      "rng": 1958112898
+    },
+    {
+      "seed": 79,
+      "names": [
+        {
+          "id": 1,
+          "name": "Sovrero Cemiyeti",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 2,
+          "name": "Lilaon Kumpanyası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 3,
+          "name": "Thariis Konseyi",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 4,
+          "name": "Ziraron Odası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 5,
+          "name": "Vekvev Sığınağı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 6,
+          "name": "Auriiris Karteli",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 7,
+          "name": "Voruro Muhafızlığı",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 8,
+          "name": "Nivvaon Hegemonyası",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 9,
+          "name": "İlara Birliği",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 10,
+          "name": "Vaarra Topluluğu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 11,
+          "name": "Ariereth Sendikası",
+          "doctrine": "kriminal"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "7516d0fe4396e549eb5228dc93c0bd45f875a8c04f21c6e4f6c0bcad9453ead8",
+      "rng": 62605887
+    },
+    {
+      "seed": 80,
+      "names": [
+        {
+          "id": 1,
+          "name": "Kaak Ortaklığı",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 2,
+          "name": "Uluth Hegemonyası",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 3,
+          "name": "Ziraex Ocağı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 4,
+          "name": "Myrvoen Konfederasyonu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 5,
+          "name": "Velaero Garnizonu",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 6,
+          "name": "Tharvera Borsası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 7,
+          "name": "Maror Kolonileri",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 8,
+          "name": "Zerorix Komünü",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 9,
+          "name": "Taliron Tröstü",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 10,
+          "name": "Arilala Karteli",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 11,
+          "name": "Orroon Kalesi",
+          "doctrine": "izolasyonist"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "396b117add315cf26e33a3ce70b75777619f32d79c65671d4a305f794c36705a",
+      "rng": 1958112868
+    },
+    {
+      "seed": 81,
+      "names": [
+        {
+          "id": 1,
+          "name": "Ulaeva Cuntası",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 2,
+          "name": "Vexiis Konseyi",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 3,
+          "name": "Orrira Krallığı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 4,
+          "name": "Fenviva Cumhuriyeti",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 5,
+          "name": "Kelelex Kumpanyası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 6,
+          "name": "Orava Birliği",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 7,
+          "name": "Vexeex Komünü",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 8,
+          "name": "Dalrava Borsası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 9,
+          "name": "Malvol Ordusu",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 10,
+          "name": "Tharaen Hisarı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 11,
+          "name": "Brakrero Hegemonyası",
+          "doctrine": "yayilmaci"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "36678825ce267daba6b58737fb51b1806f19d2f2803b1602d609661bc4562762",
+      "rng": -441347419
+    },
+    {
+      "seed": 82,
+      "names": [
+        {
+          "id": 1,
+          "name": "Zorvel Garnizonu",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 2,
+          "name": "Auriiris Topluluğu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 3,
+          "name": "Zhaera İttifakı",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 4,
+          "name": "Kyelon Pazarı",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 5,
+          "name": "Vexinis Sendikası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 6,
+          "name": "Fenor Karteli",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 7,
+          "name": "Aelia Uzlaşısı",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 8,
+          "name": "Myrrois Sığınağı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 9,
+          "name": "Tekior Kumpanyası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 10,
+          "name": "Zeralix Şurası",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 11,
+          "name": "Seenon Cumhuriyeti",
+          "doctrine": "pasifist"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "56f14f6e5ad39df5f2b9d3fddf13751fc1b7757a9fb76e59e89df1416718a0b0",
+      "rng": 1958112870
+    },
+    {
+      "seed": 83,
+      "names": [
+        {
+          "id": 1,
+          "name": "Draxrek İmparatorluğu",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 2,
+          "name": "Niraal Cemiyeti",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 3,
+          "name": "Kelelel Loncası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 4,
+          "name": "Kaviro Konsorsiyumu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 5,
+          "name": "Kelais Hisarı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 6,
+          "name": "Toreth İttifakı",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 7,
+          "name": "İlenor Hegemonyası",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 8,
+          "name": "Nelirr Karargâhı",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 9,
+          "name": "Karnroro Şebekesi",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 10,
+          "name": "Malvex Sendikası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 11,
+          "name": "Arkaeri Halkası",
+          "doctrine": "kriminal"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "1eaaaa2ff1fabdde27ee9fb2d99dd5e175bf4fb280dd2b1247f6d04234aa9f4a",
+      "rng": 62605859
+    },
+    {
+      "seed": 84,
+      "names": [
+        {
+          "id": 1,
+          "name": "Ulvira İmparatorluğu",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 2,
+          "name": "Veliryn Sendikası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 3,
+          "name": "Khelvien Hegemonyası",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 4,
+          "name": "Alaar Kalesi",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 5,
+          "name": "Luorel Komünü",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 6,
+          "name": "Veyni Topluluğu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 7,
+          "name": "Oriva Ordusu",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 8,
+          "name": "İxirel Dayanışması",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 9,
+          "name": "Zoraro Egemenliği",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 10,
+          "name": "Selani Korporasyonu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 11,
+          "name": "Veenis Karteli",
+          "doctrine": "kriminal"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "744fa2df281d82e160a11afd992754398076884baea4d4cdb0e8b4df9d8c87d9",
+      "rng": 1958112872
+    },
+    {
+      "seed": 85,
+      "names": [
+        {
+          "id": 1,
+          "name": "Arkrith Karteli",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 2,
+          "name": "Soarya Kumpanyası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 3,
+          "name": "Fenoen Muhafızlığı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 4,
+          "name": "Miryor Çetesi",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 5,
+          "name": "Vaara Birliği",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 6,
+          "name": "Aleri Komünü",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 7,
+          "name": "Aelreis Konfederasyonu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 8,
+          "name": "Myrvaal Mafyası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 9,
+          "name": "Sylori Federasyonu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 10,
+          "name": "Velar Loncası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 11,
+          "name": "Selaor Özerkliği",
+          "doctrine": "izolasyonist"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "67e88f5277dbfc4b5990cdbb7f411200bc6422f88f6e5af203cdf80884493553",
+      "rng": 1958112871
+    },
+    {
+      "seed": 86,
+      "names": [
+        {
+          "id": 1,
+          "name": "Zorreve Armadası",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 2,
+          "name": "Torvaen Tahtı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 3,
+          "name": "Dravun Dayanışması",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 4,
+          "name": "Sylvaira Sığınağı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 5,
+          "name": "Lieni Cemiyeti",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 6,
+          "name": "Fenava Karteli",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 7,
+          "name": "Thariath Şurası",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 8,
+          "name": "Arkvok Konseyi",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 9,
+          "name": "Zirorix Donanması",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 10,
+          "name": "Feniar Federasyonu",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 11,
+          "name": "Malori İttifakı",
+          "doctrine": "pasifist"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "664c2f6a706017e6c8b28cc15d87790baf3d45e4b0263d14b3f018524b5559e6",
+      "rng": 1958112874
+    },
+    {
+      "seed": 87,
+      "names": [
+        {
+          "id": 1,
+          "name": "Oryra Hanedanı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 2,
+          "name": "Syliur Cumhuriyeti",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 3,
+          "name": "Gronyk İmparatorluğu",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 4,
+          "name": "Ulaeri İttifakı",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 5,
+          "name": "Elaeva Garnizonu",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 6,
+          "name": "İxarth Korporasyonu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 7,
+          "name": "Brakin Sendikası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 8,
+          "name": "Valenar Sığınağı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 9,
+          "name": "Vekvave Sultanlığı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 10,
+          "name": "Velix Komünü",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 11,
+          "name": "Gronveva Dominyonu",
+          "doctrine": "yayilmaci"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "ef4c6641495f45328579b29a3a157f7bf1b91debb699e3f0e7aa5fd251197eed",
+      "rng": 1958112873
+    },
+    {
+      "seed": 88,
+      "names": [
+        {
+          "id": 1,
+          "name": "Zireln Odası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 2,
+          "name": "Vexelx Akıncıları",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 3,
+          "name": "Alrova Ortaklığı",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 4,
+          "name": "İlirar Örgütü",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 5,
+          "name": "Veanes Karteli",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 6,
+          "name": "Qirov Muhafızlığı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 7,
+          "name": "İlareth Cemiyeti",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 8,
+          "name": "Lyrial Meclisi",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 9,
+          "name": "Marave Korporasyonu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 10,
+          "name": "Elaleeth Lejyonu",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 11,
+          "name": "Maroar Komünü",
+          "doctrine": "pasifist"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "a493b313565b6c7cfe2a36c7d2540107748a4ed4be37803b5415e7d03bb268f1",
+      "rng": 62605866
+    },
+    {
+      "seed": 89,
+      "names": [
+        {
+          "id": 1,
+          "name": "Vekvos Örgütü",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 2,
+          "name": "Draxrari Akıncıları",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 3,
+          "name": "Luanni Loncası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 4,
+          "name": "Vekyen Krallığı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 5,
+          "name": "Thaveen Uzlaşısı",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 6,
+          "name": "Tharriar Sendikası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 7,
+          "name": "Karer Mafyası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 8,
+          "name": "Qelaror Komünü",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 9,
+          "name": "Feniva Ortaklığı",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 10,
+          "name": "Dravrok Çetesi",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 11,
+          "name": "Malrav Kaçakçıları",
+          "doctrine": "kriminal"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "6de001bacb3e65440c5797b2bea740727bceedafe01162aba68828c93ed4df22",
+      "rng": 62605865
+    },
+    {
+      "seed": 90,
+      "names": [
+        {
+          "id": 1,
+          "name": "Elaava İmparatorluğu",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 2,
+          "name": "Draxin Topluluğu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 3,
+          "name": "Seonri Halkası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 4,
+          "name": "Meonon Direktörlüğü",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 5,
+          "name": "Eloar Tahtı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 6,
+          "name": "Qiriros Cemiyeti",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 7,
+          "name": "Marreth Komutanlığı",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 8,
+          "name": "Torive Tröstü",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 9,
+          "name": "Zeryth Krallığı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 10,
+          "name": "Naari İttifakı",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 11,
+          "name": "Elores Örgütü",
+          "doctrine": "kriminal"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "3560864ba9b48aeb8f5d6ee94591f8ba6adb18ee68f8453cf62d62ea57b9a2d2",
+      "rng": 1958112878
+    },
+    {
+      "seed": 91,
+      "names": [
+        {
+          "id": 1,
+          "name": "Marreri Muhafızlığı",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 2,
+          "name": "Zharoel Sendikası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 3,
+          "name": "Ariyla Ortaklığı",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 4,
+          "name": "Velvav Ocağı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 5,
+          "name": "Malvan Hegemonyası",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 6,
+          "name": "Kenras Tahtı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 7,
+          "name": "Liorli Borsası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 8,
+          "name": "Selvial Cumhuriyeti",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 9,
+          "name": "Tharrex Ordusu",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 10,
+          "name": "Dalriri Federasyonu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 11,
+          "name": "Kenrava Konsorsiyumu",
+          "doctrine": "tuccar"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "0b234aaa216339114cc7de4230ffc07c1bbce64bf07fce7d734f567f916f83b6",
+      "rng": 62605867
+    },
+    {
+      "seed": 92,
+      "names": [
+        {
+          "id": 1,
+          "name": "Kavan Dayanışması",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 2,
+          "name": "Naanen Hanedanı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 3,
+          "name": "Tharex İmparatorluğu",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 4,
+          "name": "Axerax Muhafızlığı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 5,
+          "name": "Khelen Lejyonu",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 6,
+          "name": "Thavaira İttifakı",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 7,
+          "name": "Nivvara Kumpanyası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 8,
+          "name": "Velvoor Kaçakçıları",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 9,
+          "name": "Zireax Meclisi",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 10,
+          "name": "Kenvol Beyliği",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 11,
+          "name": "Tekonos Sultanlığı",
+          "doctrine": "yayilmaci"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "69f97f91ff9fa2d4d4371fd08d945039a602e8a827776ccae4c1d2baebbaddf4",
+      "rng": 1958112880
+    },
+    {
+      "seed": 93,
+      "names": [
+        {
+          "id": 1,
+          "name": "Nelinis Ortaklığı",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 2,
+          "name": "Zirirs Sendikası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 3,
+          "name": "Valen Kolonileri",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 4,
+          "name": "Vexinex Hanedanı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 5,
+          "name": "Kelirr Akıncıları",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 6,
+          "name": "Veirni Federasyonu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 7,
+          "name": "Kyorix Komünü",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 8,
+          "name": "Nivvera Korporasyonu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 9,
+          "name": "Navveri Loncası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 10,
+          "name": "Naenen Egemenliği",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 11,
+          "name": "Khelviva İmparatorluğu",
+          "doctrine": "yayilmaci"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "fb0ff9f3f7523cca60a80d2b3dacf2117dd7b4141b18ea22e156fc396e8698a6",
+      "rng": 1958112879
+    },
+    {
+      "seed": 94,
+      "names": [
+        {
+          "id": 1,
+          "name": "Sylien Taburları",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 2,
+          "name": "Velrith Egemenliği",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 3,
+          "name": "Elaenon Loncası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 4,
+          "name": "Turon Konfederasyonu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 5,
+          "name": "Naoreth Uzlaşısı",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 6,
+          "name": "Turvaro Odası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 7,
+          "name": "Veinla Birliği",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 8,
+          "name": "Talus İçkalesi",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 9,
+          "name": "Malvil Ordusu",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 10,
+          "name": "Gronuen Sultanlığı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 11,
+          "name": "Auriuva Tröstü",
+          "doctrine": "tuccar"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "8d1bc0b341e53998f3c56827398e8180456201f007ccd134284437aaf3da1bce",
+      "rng": 1958112882
+    },
+    {
+      "seed": 95,
+      "names": [
+        {
+          "id": 1,
+          "name": "Karuk Şurası",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 2,
+          "name": "Qelelos Borsası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 3,
+          "name": "Arkok İmparatorluğu",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 4,
+          "name": "Torava Konseyi",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 5,
+          "name": "Alenva Hisarı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 6,
+          "name": "Turraro Birliği",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 7,
+          "name": "Tekalax İttifakı",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 8,
+          "name": "Nivuro Komünü",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 9,
+          "name": "Toraero Loncası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 10,
+          "name": "Seeli Korporasyonu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 11,
+          "name": "Kenys Hanedanı",
+          "doctrine": "yayilmaci"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "94e67b15c3325d8446176087c2a882766280864ce2f240bbe8d72d47b8c4f4e2",
+      "rng": 1958112881
+    },
+    {
+      "seed": 96,
+      "names": [
+        {
+          "id": 1,
+          "name": "Navyon Komünü",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 2,
+          "name": "Torrova Kolonileri",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 3,
+          "name": "Karax Tahtı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 4,
+          "name": "Nelyon Odası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 5,
+          "name": "Aelriar Filosu",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 6,
+          "name": "Elion İttifakı",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 7,
+          "name": "Kheluri Ocağı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 8,
+          "name": "Zerans Uzlaşısı",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 9,
+          "name": "Zerax Karteli",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 10,
+          "name": "Dalroar Hanedanı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 11,
+          "name": "Delaer İmparatorluğu",
+          "doctrine": "yayilmaci"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "491a3154b9cf7a4cf58d7edb90c2872a8c30e9838249ae2950136ab6cbecea58",
+      "rng": 1958112916
+    },
+    {
+      "seed": 97,
+      "names": [
+        {
+          "id": 1,
+          "name": "Searis Birliği",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 2,
+          "name": "Rynanel Tröstü",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 3,
+          "name": "Xelir Armadası",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 4,
+          "name": "Naorli Cemiyeti",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 5,
+          "name": "Velraro Örgütü",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 6,
+          "name": "Valoror Kolonileri",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 7,
+          "name": "Kelelel Topluluğu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 8,
+          "name": "Karnyr Şebekesi",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 9,
+          "name": "Oren Odası",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 10,
+          "name": "Nainor Ortaklığı",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 11,
+          "name": "Sovrox Donanması",
+          "doctrine": "militarist"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "8dde69f00a05d5424de1c84cd06ae09f0da5684a081e25eb622460051386fc58",
+      "rng": 62605905
+    },
+    {
+      "seed": 98,
+      "names": [
+        {
+          "id": 1,
+          "name": "Valorx Ortaklığı",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 2,
+          "name": "Elanon Komünü",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 3,
+          "name": "Kelarr Krallığı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 4,
+          "name": "Krayve Sultanlığı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 5,
+          "name": "Zorval Taburları",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 6,
+          "name": "Nelenel Federasyonu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 7,
+          "name": "Axinix Kovanı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 8,
+          "name": "Dravon Konsorsiyumu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 9,
+          "name": "Elior Birliği",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 10,
+          "name": "Valaen Cumhuriyeti",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 11,
+          "name": "Arkav Tahtı",
+          "doctrine": "yayilmaci"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "ba7ba9fa6f89e892376ffbd903512b6f96ce17e33e8a225f7db9089c18f00dc9",
+      "rng": 1958112918
+    },
+    {
+      "seed": 99,
+      "names": [
+        {
+          "id": 1,
+          "name": "İlleva Topluluğu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 2,
+          "name": "Velroar Kumpanyası",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 3,
+          "name": "Turraar Teşkilatı",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 4,
+          "name": "Arkrek Birliği",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 5,
+          "name": "Liuni Hegemonyası",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 6,
+          "name": "Ziruk Pazarı",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 7,
+          "name": "Veenar Hisarı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 8,
+          "name": "Tekonr Akıncıları",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 9,
+          "name": "Vorvira Cumhuriyeti",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 10,
+          "name": "Vareve Örgütü",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 11,
+          "name": "Elorri Meclisi",
+          "doctrine": "pasifist"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "c93c5069d6aa54e48a68518be2f097ca169d9be059c1e643696a5796eb641fed",
+      "rng": 1958112917
+    },
+    {
+      "seed": 404,
+      "names": [
+        {
+          "id": 1,
+          "name": "Voriave Pazarı",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 2,
+          "name": "Karnyve Ordusu",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 3,
+          "name": "Rynalar Hisarı",
+          "doctrine": "izolasyonist"
+        },
+        {
+          "id": 4,
+          "name": "Alora İttifakı",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 5,
+          "name": "Sylvael Topluluğu",
+          "doctrine": "pasifist"
+        },
+        {
+          "id": 6,
+          "name": "Vaaron Birliği",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 7,
+          "name": "Aeleni Tahtı",
+          "doctrine": "yayilmaci"
+        },
+        {
+          "id": 8,
+          "name": "Sovaera Kaçakçıları",
+          "doctrine": "kriminal"
+        },
+        {
+          "id": 9,
+          "name": "Vaorri Konsorsiyumu",
+          "doctrine": "tuccar"
+        },
+        {
+          "id": 10,
+          "name": "Ulros Cuntası",
+          "doctrine": "militarist"
+        },
+        {
+          "id": 11,
+          "name": "Vorrel Ocağı",
+          "doctrine": "izolasyonist"
+        }
+      ],
+      "nearPairs": 0,
+      "saveSha256": "568e458328dc235ec37c024054972c20568831fd792e18d72550f27a51182934",
+      "rng": 1958112936
+    }
+  ],
+  "control": [
+    {
+      "seed": 11,
+      "status": "PASS",
+      "rngEqual": true,
+      "sameSeedSave8Equal": true,
+      "allowedDifferences": [
+        {
+          "path": ".emps.1.name",
+          "before": "Birleşik Konfederasyonu — Belrun",
+          "after": "Torrien Egemenliği"
+        },
+        {
+          "path": ".emps.2.name",
+          "before": "Altın Ağı — Selen",
+          "after": "Feniava Sığınağı"
+        },
+        {
+          "path": ".emps.3.name",
+          "before": "Uzak Belrun Kovanı",
+          "after": "Delaes Meclisi"
+        },
+        {
+          "path": ".emps.4.name",
+          "before": "Cyrix ve Bağlı Dünyalar",
+          "after": "Tharrar Lejyonu"
+        },
+        {
+          "path": ".emps.5.name",
+          "before": "Aster Konfederasyonu",
+          "after": "Navvive Konsorsiyumu"
+        },
+        {
+          "path": ".emps.6.name",
+          "before": "Aethel ve Bağlı Dünyalar",
+          "after": "Veliri Konseyi"
+        },
+        {
+          "path": ".emps.7.name",
+          "before": "Kutsal Kaevar Yüksek Hâkimiyeti",
+          "after": "Maroen Konfederasyonu"
+        },
+        {
+          "path": ".emps.8.name",
+          "before": "Solari İmparatorluğu",
+          "after": "Alyon İdaresi"
+        },
+        {
+          "path": ".emps.9.name",
+          "before": "Auren Konsorsiyumu",
+          "after": "Elyna Tahtı"
+        },
+        {
+          "path": ".emps.10.name",
+          "before": "Tessaly Çekirdek Kolektifi",
+          "after": "Tekiros Karteli"
+        },
+        {
+          "path": ".emps.11.name",
+          "before": "Vantia Konsorsiyumu",
+          "after": "Kalrik Halkası"
+        }
+      ]
+    },
+    {
+      "seed": 23,
+      "status": "PASS",
+      "rngEqual": true,
+      "sameSeedSave8Equal": true,
+      "allowedDifferences": [
+        {
+          "path": ".emps.1.name",
+          "before": "Birleşik Auren Araştırma Birliği",
+          "after": "Niveva Tröstü"
+        },
+        {
+          "path": ".emps.2.name",
+          "before": "Özgür Auren Ortak Zihni",
+          "after": "Nivroro Konsorsiyumu"
+        },
+        {
+          "path": ".emps.3.name",
+          "before": "Sylph Çekirdek Kolektifi",
+          "after": "Oyrraeth Muhafızlığı"
+        },
+        {
+          "path": ".emps.4.name",
+          "before": "Kutsal Yüksek Hâkimiyeti — Auren",
+          "after": "Navero Komünü"
+        },
+        {
+          "path": ".emps.5.name",
+          "before": "Birleşik Özgür Dünyaları — Aster",
+          "after": "Arkiax Egemenliği"
+        },
+        {
+          "path": ".emps.6.name",
+          "before": "Myrrh ve Bağlı Dünyalar",
+          "after": "Nyveth Donanması"
+        },
+        {
+          "path": ".emps.7.name",
+          "before": "Aydınlık Tessara Taç Toprakları",
+          "after": "Nivyk Şebekesi"
+        },
+        {
+          "path": ".emps.8.name",
+          "before": "Yükselen Konfederasyonu — Vantia",
+          "after": "Elaili Şurası"
+        },
+        {
+          "path": ".emps.9.name",
+          "before": "Ilkhan ve Bağlı Dünyalar",
+          "after": "Kenaex Borsası"
+        },
+        {
+          "path": ".emps.10.name",
+          "before": "Özgür Sylph Konfederasyonu",
+          "after": "Meerri Kumpanyası"
+        },
+        {
+          "path": ".emps.11.name",
+          "before": "Altın İşlem Birliği — Kharon",
+          "after": "Sylvion Hisarı"
+        }
+      ]
+    },
+    {
+      "seed": 42,
+      "status": "PASS",
+      "rngEqual": true,
+      "sameSeedSave8Equal": true,
+      "allowedDifferences": [
+        {
+          "path": ".emps.1.name",
+          "before": "Zerun ve Bağlı Dünyalar",
+          "after": "Aurileon Odası"
+        },
+        {
+          "path": ".emps.2.name",
+          "before": "Birleşik Qadesh Özgür Dünyaları",
+          "after": "Synelar Topluluğu"
+        },
+        {
+          "path": ".emps.3.name",
+          "before": "Xel'Naga Konsorsiyumu",
+          "after": "Naonna Hanedanı"
+        },
+        {
+          "path": ".emps.4.name",
+          "before": "Ereth ve Bağlı Dünyalar",
+          "after": "Maryth Krallığı"
+        },
+        {
+          "path": ".emps.5.name",
+          "before": "Kızıl Orion Çekirdek Kolektifi",
+          "after": "Fenviar Muhafızlığı"
+        },
+        {
+          "path": ".emps.6.name",
+          "before": "Yükselen Sentez Topluluğu — Qadesh",
+          "after": "Aesreor Borsası"
+        },
+        {
+          "path": ".emps.7.name",
+          "before": "Eos Yüksek Hâkimiyeti",
+          "after": "Orveva İttifakı"
+        },
+        {
+          "path": ".emps.8.name",
+          "before": "Sombra ve Bağlı Dünyalar",
+          "after": "Tharaeve Lejyonu"
+        },
+        {
+          "path": ".emps.9.name",
+          "before": "Xel'Naga Konfederasyonu",
+          "after": "Torris Pazarı"
+        },
+        {
+          "path": ".emps.10.name",
+          "before": "Zephyr Cumhuriyeti",
+          "after": "Velyr Kumpanyası"
+        },
+        {
+          "path": ".emps.11.name",
+          "before": "Sombra Sentez Topluluğu",
+          "after": "Zhaira Hegemonyası"
+        }
+      ]
+    },
+    {
+      "seed": 99,
+      "status": "PASS",
+      "rngEqual": true,
+      "sameSeedSave8Equal": true,
+      "allowedDifferences": [
+        {
+          "path": ".emps.1.name",
+          "before": "Vantia ve Bağlı Dünyalar",
+          "after": "İlleva Topluluğu"
+        },
+        {
+          "path": ".emps.2.name",
+          "before": "Kharon ve Bağlı Dünyalar",
+          "after": "Velroar Kumpanyası"
+        },
+        {
+          "path": ".emps.3.name",
+          "before": "Nerith Cumhuriyeti",
+          "after": "Turraar Teşkilatı"
+        },
+        {
+          "path": ".emps.4.name",
+          "before": "Veyra ve Bağlı Dünyalar",
+          "after": "Arkrek Birliği"
+        },
+        {
+          "path": ".emps.5.name",
+          "before": "Uzak Sürü Birliği — Aethel",
+          "after": "Liuni Hegemonyası"
+        },
+        {
+          "path": ".emps.6.name",
+          "before": "Nerith ve Bağlı Dünyalar",
+          "after": "Ziruk Pazarı"
+        },
+        {
+          "path": ".emps.7.name",
+          "before": "Birleşik Draven İşlem Birliği",
+          "after": "Veenar Hisarı"
+        },
+        {
+          "path": ".emps.8.name",
+          "before": "Tessaly İmparatorluğu",
+          "after": "Tekonr Akıncıları"
+        },
+        {
+          "path": ".emps.9.name",
+          "before": "Kutsal Yüksek Hâkimiyeti — Myrrh",
+          "after": "Vorvira Cumhuriyeti"
+        },
+        {
+          "path": ".emps.10.name",
+          "before": "Ondris Taç Toprakları",
+          "after": "Vareve Örgütü"
+        },
+        {
+          "path": ".emps.11.name",
+          "before": "Uzak Cumhuriyeti — Myrrh",
+          "after": "Elorri Meclisi"
+        }
+      ]
+    },
+    {
+      "seed": 404,
+      "status": "PASS",
+      "rngEqual": true,
+      "sameSeedSave8Equal": true,
+      "allowedDifferences": [
+        {
+          "path": ".emps.1.name",
+          "before": "Orinth Özgür Dünyaları",
+          "after": "Voriave Pazarı"
+        },
+        {
+          "path": ".emps.2.name",
+          "before": "Drakis ve Bağlı Dünyalar",
+          "after": "Karnyve Ordusu"
+        },
+        {
+          "path": ".emps.3.name",
+          "before": "Selen ve Bağlı Dünyalar",
+          "after": "Rynalar Hisarı"
+        },
+        {
+          "path": ".emps.4.name",
+          "before": "Ebedî Hanedanlığı — Zephyr",
+          "after": "Alora İttifakı"
+        },
+        {
+          "path": ".emps.5.name",
+          "before": "Birleşik Konsorsiyumu — Vantia",
+          "after": "Sylvael Topluluğu"
+        },
+        {
+          "path": ".emps.6.name",
+          "before": "Altın Sylph Sentez Topluluğu",
+          "after": "Vaaron Birliği"
+        },
+        {
+          "path": ".emps.7.name",
+          "before": "Aethel ve Bağlı Dünyalar",
+          "after": "Aeleni Tahtı"
+        },
+        {
+          "path": ".emps.8.name",
+          "before": "Cyrix Halk Meclisi",
+          "after": "Sovaera Kaçakçıları"
+        },
+        {
+          "path": ".emps.9.name",
+          "before": "Morrigan Sürü Birliği",
+          "after": "Vaorri Konsorsiyumu"
+        },
+        {
+          "path": ".emps.10.name",
+          "before": "Kızıl Kovanı — Selen",
+          "after": "Ulros Cuntası"
+        },
+        {
+          "path": ".emps.11.name",
+          "before": "Birleşik Aster Otonom Düğümleri",
+          "after": "Vorrel Ocağı"
+        }
+      ]
+    }
+  ],
+  "diversity": {
+    "galaxies": 100,
+    "aiNames": 1100,
+    "uniqueRoots": 1057,
+    "repeatedRootOccurrences": 43,
+    "uniqueNames": 1099,
+    "repeatedFullOccurrences": 1,
+    "inGalaxyRootCollisions": 0,
+    "inGalaxyNameCollisions": 0,
+    "inGalaxyNearRatio": 0,
+    "nearDefinition": "Levenshtein<=1; all 55 pairs per 11 AI galaxy",
+    "twoWordRate": 1,
+    "doctrineMismatchRate": 0,
+    "distribution": {
+      "kriminal": {
+        "count": 149,
+        "titles": {
+          "Sendikası": 21,
+          "Kaçakçıları": 13,
+          "Şebekesi": 19,
+          "Karteli": 19,
+          "Örgütü": 16,
+          "Çetesi": 11,
+          "Locası": 8,
+          "Kumpanyası": 11,
+          "Halkası": 10,
+          "Ortaklığı": 5,
+          "Mafyası": 10,
+          "Konsorsiyumu": 2,
+          "Teşkilatı": 3,
+          "Birliği": 1
+        },
+        "examples": [
+          "Orrir Sendikası",
+          "Delaev Kaçakçıları",
+          "Vaela Şebekesi",
+          "Nyrior Karteli",
+          "Delros Örgütü"
+        ]
+      },
+      "militarist": {
+        "count": 139,
+        "titles": {
+          "Armadası": 15,
+          "Muhafızlığı": 8,
+          "Karargâhı": 8,
+          "Akıncıları": 11,
+          "Lejyonu": 19,
+          "Birliği": 2,
+          "Donanması": 8,
+          "Cuntası": 9,
+          "Ordusu": 15,
+          "Taburları": 8,
+          "Komutanlığı": 10,
+          "Garnizonu": 13,
+          "Filosu": 8,
+          "Konseyi": 5
+        },
+        "examples": [
+          "Luleon Armadası",
+          "Nelax Muhafızlığı",
+          "Kaloon Karargâhı",
+          "Axerk Akıncıları",
+          "Oyryri Lejyonu"
+        ]
+      },
+      "pasifist": {
+        "count": 311,
+        "titles": {
+          "Birliği": 29,
+          "Uzlaşısı": 23,
+          "Cumhuriyeti": 28,
+          "Konseyi": 7,
+          "Meclisi": 29,
+          "Konfederasyonu": 32,
+          "Komünü": 35,
+          "Federasyonu": 19,
+          "Topluluğu": 38,
+          "İttifakı": 18,
+          "Dayanışması": 17,
+          "Şurası": 12,
+          "Cemiyeti": 20,
+          "Ortaklığı": 4
+        },
+        "examples": [
+          "Dravon Birliği",
+          "Alvos Uzlaşısı",
+          "Navel Cumhuriyeti",
+          "Liirli Konseyi",
+          "Lyvoira Meclisi"
+        ]
+      },
+      "yayilmaci": {
+        "count": 201,
+        "titles": {
+          "Tahtı": 20,
+          "Sultanlığı": 14,
+          "Hanedanı": 20,
+          "Hegemonyası": 21,
+          "Federasyonu": 6,
+          "İmparatorluğu": 35,
+          "Egemenliği": 17,
+          "İdaresi": 9,
+          "Beyliği": 8,
+          "Birliği": 5,
+          "Dominyonu": 11,
+          "Kolonileri": 14,
+          "Krallığı": 17,
+          "Konseyi": 4
+        },
+        "examples": [
+          "Kenraen Tahtı",
+          "Brakias Sultanlığı",
+          "Myroeth Hanedanı",
+          "Qiroix Tahtı",
+          "Vexins Hegemonyası"
+        ]
+      },
+      "izolasyonist": {
+        "count": 101,
+        "titles": {
+          "Direktörlüğü": 7,
+          "Enklavı": 4,
+          "İnzivası": 5,
+          "Sığınağı": 16,
+          "Özerkliği": 8,
+          "Hisarı": 14,
+          "Muhafızlığı": 15,
+          "Kalesi": 7,
+          "İçkalesi": 8,
+          "Hanedanı": 3,
+          "Kovanı": 3,
+          "Ocağı": 8,
+          "Birliği": 2,
+          "Konseyi": 1
+        },
+        "examples": [
+          "Varoth Direktörlüğü",
+          "Sylien Enklavı",
+          "Rynyos İnzivası",
+          "Karnel Direktörlüğü",
+          "Arkiax Sığınağı"
+        ]
+      },
+      "tuccar": {
+        "count": 199,
+        "titles": {
+          "Borsası": 17,
+          "Konsorsiyumu": 29,
+          "Odası": 16,
+          "Karteli": 7,
+          "Pazarı": 10,
+          "Korporasyonu": 29,
+          "Konseyi": 5,
+          "Loncası": 23,
+          "Kumpanyası": 14,
+          "Sendikası": 8,
+          "Meclisi": 4,
+          "Ortaklığı": 15,
+          "Tröstü": 16,
+          "Birliği": 6
+        },
+        "examples": [
+          "Meorni Borsası",
+          "Karaen Konsorsiyumu",
+          "Aelaen Odası",
+          "Ulova Odası",
+          "Shaveri Karteli"
+        ]
+      }
+    },
+    "allTitles": {
+      "Sendikası": 29,
+      "Armadası": 15,
+      "Birliği": 45,
+      "Tahtı": 20,
+      "Direktörlüğü": 7,
+      "Borsası": 17,
+      "Sultanlığı": 14,
+      "Uzlaşısı": 23,
+      "Kaçakçıları": 13,
+      "Muhafızlığı": 23,
+      "Cumhuriyeti": 28,
+      "Enklavı": 4,
+      "Hanedanı": 23,
+      "Konseyi": 22,
+      "Konsorsiyumu": 31,
+      "Odası": 16,
+      "Karargâhı": 8,
+      "Meclisi": 33,
+      "Şebekesi": 19,
+      "Hegemonyası": 21,
+      "Konfederasyonu": 32,
+      "Komünü": 35,
+      "Akıncıları": 11,
+      "Federasyonu": 25,
+      "İnzivası": 5,
+      "Karteli": 26,
+      "Lejyonu": 19,
+      "Örgütü": 16,
+      "İmparatorluğu": 35,
+      "Topluluğu": 38,
+      "Egemenliği": 17,
+      "İttifakı": 18,
+      "Çetesi": 11,
+      "Pazarı": 10,
+      "İdaresi": 9,
+      "Locası": 8,
+      "Sığınağı": 16,
+      "Kumpanyası": 25,
+      "Donanması": 8,
+      "Özerkliği": 8,
+      "Dayanışması": 17,
+      "Korporasyonu": 29,
+      "Cuntası": 9,
+      "Loncası": 23,
+      "Ordusu": 15,
+      "Halkası": 10,
+      "Beyliği": 8,
+      "Taburları": 8,
+      "Ortaklığı": 24,
+      "Dominyonu": 11,
+      "Hisarı": 14,
+      "Komutanlığı": 10,
+      "Garnizonu": 13,
+      "Filosu": 8,
+      "Kolonileri": 14,
+      "Krallığı": 17,
+      "Tröstü": 16,
+      "Kalesi": 7,
+      "İçkalesi": 8,
+      "Mafyası": 10,
+      "Şurası": 12,
+      "Cemiyeti": 20,
+      "Kovanı": 3,
+      "Ocağı": 8,
+      "Teşkilatı": 3
+    }
+  },
+  "oldSave": [
+    {
+      "month": 0,
+      "sha256": "c9ca4064e2cab91ee8b659c420b1d70d6930682af066142768651b8cfdc5c53a",
+      "rng": 689868066
+    },
+    {
+      "month": 1,
+      "sha256": "25d2700d9a7e8e2d95217d5e26677de6f86cf7c48b75775520c5f7d1872a2840",
+      "rng": -1085332850
+    },
+    {
+      "month": 2,
+      "sha256": "d933c1e3e98660ced47148b50f76958a59bd75b4ffe0ed98657e882710b38577",
+      "rng": -1514437832
+    },
+    {
+      "month": 3,
+      "sha256": "ec0b210d33fa6505850f2ac2a12a47b0b22493fd176e1b8f784e9716b14b8795",
+      "rng": 1005328548
+    },
+    {
+      "month": 4,
+      "sha256": "7fae057dbc5e47422f557d31ebe507c54ae1301df10f999870ab090aafe0dad0",
+      "rng": -1401708038
+    },
+    {
+      "month": 5,
+      "sha256": "c7c494468e4ebd81db755533342cd27546dc307ee32b0226ed2e826be48af0be",
+      "rng": 1749894012
+    },
+    {
+      "month": 6,
+      "sha256": "4c9df6b3a4d173adba5f05777517ee864a1a796ecf1b87dd4a2b89a88ee80815",
+      "rng": -1552319332
+    }
+  ]
+}

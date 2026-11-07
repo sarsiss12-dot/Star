@@ -1,0 +1,6 @@
+[
+  {
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'Yükselen Yıldız Devletleri — Ilyra'\n- 'Elle Yazdığım Devlet'\n\n    at /workspace/Star/tests/browser-beta-ux0.cjs:4:757"
+  }
+]

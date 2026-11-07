@@ -1,0 +1,98 @@
+[
+  {
+    "test": "mp89_ui_integrity_test.js",
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 0.19
+  },
+  {
+    "test": "beta_setup0_pirates_test.cjs",
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 1.95
+  },
+  {
+    "test": "beta_p01_ballot_test.js",
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 0.61
+  },
+  {
+    "test": "beta_p01_war_end_test.js",
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 1.07
+  },
+  {
+    "test": "beta_p01_embargo_test.js",
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 0.91
+  },
+  {
+    "test": "beta_p01_news_test.js",
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 0.72
+  },
+  {
+    "test": "beta_p02_news_test.js",
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 1.41
+  },
+  {
+    "test": "beta_p02_news_return_test.js",
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 0.71
+  },
+  {
+    "test": "mp64_news_test.js",
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 1.06
+  },
+  {
+    "test": "mp73_council_test.js",
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 11.22
+  },
+  {
+    "test": "faz90rc_1_save_boundary_test.js",
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 5.59
+  },
+  {
+    "test": "mp86_nebula_cache_test.js",
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 2.31
+  },
+  {
+    "test": "perf1_equivalence_test.js",
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 2.25
+  },
+  {
+    "test": "perf2_equivalence_test.js",
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 2.91
+  },
+  {
+    "test": "mp4_core_test.js",
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 8.88
+  },
+  {
+    "test": "beta_p01_compat_test.js",
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 0.73
+  }
+]

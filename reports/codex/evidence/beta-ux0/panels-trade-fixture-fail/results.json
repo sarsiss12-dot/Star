@@ -1,0 +1,15 @@
+[
+  {
+    "viewport": [
+      800,
+      360
+    ],
+    "panel": "vasallik",
+    "status": "PASS",
+    "name": "Torrien Egemenliği"
+  },
+  {
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert((await p.locator('#modal').innerText()).includes(ai))\n\n    at /workspace/Star/tests/browser-beta-ux0-panels.cjs:7:539"
+  }
+]

@@ -1,0 +1,9 @@
+PASS 8 doktrin,14 tek kelimelik ağırlıklı unvan; ortak unvanlar var
+PASS her doktrinde üretken kök + uygun unvan, tam2 kelime ve geniş çeşitlilik
+PASS sabit bozuk RNG bile250 benzersiz iki kelimeli ad üretir; sonsuz döngü yok
+PASS ilk Yayılmacı varsayılanı açık seçim değil; engelli zar RNG/sayaç/manuele dokunmaz
+PASS açık Yayılmacı seçimi ve sonraki doktrin değişimi manuel adı kendiliğinden değiştirmez
+PASS aynı seed+açık seçim dizisi aynı öneriler, ardışık zarlar farklı; stratejik RNG sabit
+PASS geçerli şablon seçimi kabul; eksik/bozuk doktrin eski seçimi taşımıyor
+PASS eski Save8 adları ve uzun manuel isimler yüklemede birebir kalır
+GEÇEN: 8 KALAN: 0

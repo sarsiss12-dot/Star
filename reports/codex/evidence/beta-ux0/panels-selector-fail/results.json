@@ -1,0 +1,6 @@
+[
+  {
+    "status": "FAIL",
+    "error": "locator.tap: Error: strict mode violation: locator('#modal [data-a=\"vsCancel\"]') resolved to 2 elements:\n    1) <button class=\"riX\" data-a=\"vsCancel\">✕</button> aka getByRole('button', { name: '✕' })\n    2) <button class=\"ch\" data-a=\"vsCancel\">VAZGEÇ</button> aka getByRole('button', { name: 'VAZGEÇ' })\n\nCall log:\n\u001b[2m  - waiting for locator('#modal [data-a=\"vsCancel\"]')\u001b[22m\n\n    at /workspace/Star/tests/browser-beta-ux0-panels.cjs:7:745"
+  }
+]

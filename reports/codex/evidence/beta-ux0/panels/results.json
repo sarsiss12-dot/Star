@@ -1,0 +1,6 @@
+[
+  {
+    "status": "FAIL",
+    "error": "page.evaluate: TypeError: Cannot set properties of null (setting 'textContent')\n    at Object.refresh (http://127.0.0.1:46687/ui.js:2163:31)\n    at eval (eval at evaluate (:311:30), <anonymous>:1:313)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at /workspace/Star/tests/browser-beta-ux0-panels.cjs:6:264"
+  }
+]

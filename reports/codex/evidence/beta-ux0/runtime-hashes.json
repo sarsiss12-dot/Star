@@ -1,0 +1,37 @@
+[
+  {
+    "file": "main.js",
+    "beforeSha256": "7eaed67d44a2bb7d7ac8e1c95b35cf59e47c83fa389169e82cc29e3c3cdfbd71",
+    "afterSha256": "47399531c6c6b337d872e7b56dce3414e8249d405ea9cac26182c7a193bf2587"
+  },
+  {
+    "file": "ui.js",
+    "beforeSha256": "34a3b4536f14c41f30ec53c1895c3efbe694dfd41f3faac7c2571e8c144d70a0",
+    "afterSha256": "283e47be523210f77472606a397d06ff3194a23c8b5503fb758a42f13a026dab"
+  },
+  {
+    "file": "sw.js",
+    "beforeSha256": "ab81e66f16c7dee4e675545e79a270a3fc103eaec5f89fd42ad5c0b09fadb58b",
+    "afterSha256": "ede13a7d6aecc7a3fd4528fcf9576d28a99143ae7dcd14099bc63f71aa46dbba"
+  },
+  {
+    "file": "research/mp7/client/mp7-setup.js",
+    "beforeSha256": "4f8fef4ce1a9de563d3575110308deb73d37db419325851fa07325bf2ca084ab",
+    "afterSha256": "ab778049237959d397e7ad2562a8801037139f4ba9b7c64f052ce8963622c09b"
+  },
+  {
+    "file": "research/mp0/mp-core.js",
+    "beforeSha256": "d1c948397660c46ccc47c265d402e0ca140cf1b16bef85295df5ef3e2c9746d7",
+    "afterSha256": "dcfed98f6352f9f231de547a76e707de83dcc8d33396071edc623747d071e0cd"
+  },
+  {
+    "file": "research/mp1/client/view.js",
+    "beforeSha256": "068949603b0527f571154fcbd8f9daae8db5fa3adeb1e77da6b9c05040b9dc95",
+    "afterSha256": "56598a0ec1ad9c6706dfc31c1487d5682d35eaca33f6064787153549705b21bd"
+  },
+  {
+    "file": "research/mp1/server/relay.js",
+    "beforeSha256": "ccf5ecaab2f285e3ccfb936a6e2352a52dd8c4e54f8ba60c8fa83ecb8d55dd22",
+    "afterSha256": "3509f613fc258f3474789ff9912371b3c93779653ebb2cafb389170ffb6ae751"
+  }
+]

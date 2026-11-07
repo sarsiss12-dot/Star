@@ -1,0 +1,4778 @@
+[
+  {
+    "viewport": "800x360",
+    "type": "pointerdown",
+    "at": 805.5,
+    "trusted": true,
+    "action": "tNew",
+    "rect": [
+      98,
+      155.59375,
+      604,
+      35
+    ],
+    "point": [
+      400,
+      173.08999633789062
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "touchstart",
+    "at": 917.6999999880791,
+    "trusted": true,
+    "action": "tNew",
+    "rect": [
+      98,
+      155.59375,
+      604,
+      35
+    ],
+    "point": [
+      400,
+      173.08999633789062
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerup",
+    "at": 918.3999999761581,
+    "trusted": true,
+    "action": "tNew",
+    "rect": [
+      98,
+      155.59375,
+      604,
+      35
+    ],
+    "point": [
+      400,
+      173.08999633789062
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "touchend",
+    "at": 918.8000000119209,
+    "trusted": true,
+    "action": "tNew",
+    "rect": [
+      98,
+      155.59375,
+      604,
+      35
+    ],
+    "point": [
+      400,
+      173.08999633789062
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "click",
+    "at": 923.6999999880791,
+    "trusted": true,
+    "action": "tNew",
+    "rect": [
+      98,
+      155.59375,
+      604,
+      35
+    ],
+    "point": [
+      400,
+      173
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerdown",
+    "at": 1220.3999999761581,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      255,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      273
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "touchstart",
+    "at": 1221,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      255,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      273
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerup",
+    "at": 1221.6000000238419,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      255,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      273
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "touchend",
+    "at": 1222.800000011921,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      255,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      273
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "click",
+    "at": 1226.199999988079,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      739.3800048828125,
+      256.0799865722656,
+      43.239990234375,
+      33.839996337890625
+    ],
+    "point": [
+      761,
+      273
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerdown",
+    "at": 1420,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "yayilmaci",
+    "rect": [
+      404,
+      147,
+      380,
+      66
+    ],
+    "point": [
+      594,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "touchstart",
+    "at": 1420.8999999761581,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "yayilmaci",
+    "rect": [
+      404,
+      147,
+      380,
+      66
+    ],
+    "point": [
+      594,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerup",
+    "at": 1421.1000000238419,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "yayilmaci",
+    "rect": [
+      404,
+      147,
+      380,
+      66
+    ],
+    "point": [
+      594,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "click",
+    "at": 1429.8999999761581,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "yayilmaci",
+    "rect": [
+      404,
+      133,
+      380,
+      66
+    ],
+    "point": [
+      594,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerdown",
+    "at": 1536.6000000238419,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      162,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "touchstart",
+    "at": 1537.300000011921,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      162,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerup",
+    "at": 1537.6000000238419,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      162,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "click",
+    "at": 1547.300000011921,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      162,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerdown",
+    "at": 1652.800000011921,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      162,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "touchstart",
+    "at": 1653.300000011921,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      162,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerup",
+    "at": 1653.6000000238419,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      162,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "click",
+    "at": 1665.3999999761581,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      162,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerdown",
+    "at": 1787.5,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "militarist",
+    "rect": [
+      16,
+      278,
+      380,
+      66
+    ],
+    "point": [
+      206,
+      311
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "touchstart",
+    "at": 1788,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "militarist",
+    "rect": [
+      16,
+      278,
+      380,
+      66
+    ],
+    "point": [
+      206,
+      311
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerup",
+    "at": 1788.3999999761581,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "militarist",
+    "rect": [
+      16,
+      278,
+      380,
+      66
+    ],
+    "point": [
+      206,
+      311
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "click",
+    "at": 1799,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "militarist",
+    "rect": [
+      16,
+      278,
+      380,
+      66
+    ],
+    "point": [
+      206,
+      311
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerdown",
+    "at": 1888.5,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      162,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "touchstart",
+    "at": 1889.800000011921,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      162,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerup",
+    "at": 1890.1000000238419,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      162,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "click",
+    "at": 1899.199999988079,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      162,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerdown",
+    "at": 2005.5,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "kriminal",
+    "rect": [
+      16,
+      147,
+      380,
+      66
+    ],
+    "point": [
+      206,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "touchstart",
+    "at": 2006.3999999761581,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "kriminal",
+    "rect": [
+      16,
+      147,
+      380,
+      66
+    ],
+    "point": [
+      206,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerup",
+    "at": 2006.800000011921,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "kriminal",
+    "rect": [
+      16,
+      147,
+      380,
+      66
+    ],
+    "point": [
+      206,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "click",
+    "at": 2015.300000011921,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "kriminal",
+    "rect": [
+      16,
+      147,
+      380,
+      66
+    ],
+    "point": [
+      206,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerdown",
+    "at": 2105,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      162,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "touchstart",
+    "at": 2105.699999988079,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      162,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerup",
+    "at": 2106.100000023842,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      162,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "click",
+    "at": 2114.800000011921,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      162,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerdown",
+    "at": 2220.699999988079,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "pasifist",
+    "rect": [
+      16,
+      294,
+      380,
+      66
+    ],
+    "point": [
+      206,
+      327
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "touchstart",
+    "at": 2222.100000023842,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "pasifist",
+    "rect": [
+      16,
+      294,
+      380,
+      66
+    ],
+    "point": [
+      206,
+      327
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerup",
+    "at": 2222.399999976158,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "pasifist",
+    "rect": [
+      16,
+      294,
+      380,
+      66
+    ],
+    "point": [
+      206,
+      327
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "click",
+    "at": 2232.199999988079,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "pasifist",
+    "rect": [
+      16,
+      294,
+      380,
+      66
+    ],
+    "point": [
+      206,
+      327
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerdown",
+    "at": 2320.5,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      104,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      122
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "touchstart",
+    "at": 2321,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      104,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      122
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerup",
+    "at": 2321.199999988079,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      104,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      122
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "click",
+    "at": 2333.199999988079,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      104,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      122
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerdown",
+    "at": 2436.300000011921,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "yayilmaci",
+    "rect": [
+      404,
+      294,
+      380,
+      66
+    ],
+    "point": [
+      594,
+      327
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "touchstart",
+    "at": 2436.600000023842,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "yayilmaci",
+    "rect": [
+      404,
+      294,
+      380,
+      66
+    ],
+    "point": [
+      594,
+      327
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerup",
+    "at": 2436.800000011921,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "yayilmaci",
+    "rect": [
+      404,
+      294,
+      380,
+      66
+    ],
+    "point": [
+      594,
+      327
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "click",
+    "at": 2445.600000023842,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "yayilmaci",
+    "rect": [
+      404,
+      294,
+      380,
+      66
+    ],
+    "point": [
+      594,
+      327
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerdown",
+    "at": 2536.5,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      104,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      122
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "touchstart",
+    "at": 2537.100000023842,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      104,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      122
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerup",
+    "at": 2537.300000011921,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      104,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      122
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "click",
+    "at": 2546.100000023842,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      104,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      122
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerdown",
+    "at": 2653.699999988079,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "teknokrasi",
+    "rect": [
+      404,
+      147,
+      380,
+      66
+    ],
+    "point": [
+      594,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "touchstart",
+    "at": 2654.399999976158,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "teknokrasi",
+    "rect": [
+      404,
+      147,
+      380,
+      66
+    ],
+    "point": [
+      594,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerup",
+    "at": 2654.600000023842,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "teknokrasi",
+    "rect": [
+      404,
+      147,
+      380,
+      66
+    ],
+    "point": [
+      594,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "click",
+    "at": 2661.899999976158,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "teknokrasi",
+    "rect": [
+      404,
+      147,
+      380,
+      66
+    ],
+    "point": [
+      594,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerdown",
+    "at": 2753,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      162,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "touchstart",
+    "at": 2753.399999976158,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      162,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerup",
+    "at": 2753.600000023842,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      162,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "click",
+    "at": 2762.399999976158,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      162,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerdown",
+    "at": 2870.800000011921,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "tuccar",
+    "rect": [
+      404,
+      278,
+      380,
+      66
+    ],
+    "point": [
+      594,
+      311
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "touchstart",
+    "at": 2871.300000011921,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "tuccar",
+    "rect": [
+      404,
+      278,
+      380,
+      66
+    ],
+    "point": [
+      594,
+      311
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerup",
+    "at": 2871.600000023842,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "tuccar",
+    "rect": [
+      404,
+      278,
+      380,
+      66
+    ],
+    "point": [
+      594,
+      311
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "click",
+    "at": 2885.5,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "tuccar",
+    "rect": [
+      404,
+      278,
+      380,
+      66
+    ],
+    "point": [
+      594,
+      311
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerdown",
+    "at": 3003.199999988079,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      162,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "touchstart",
+    "at": 3003.600000023842,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      162,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerup",
+    "at": 3004.199999988079,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      162,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "click",
+    "at": 3014.600000023842,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      162,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerdown",
+    "at": 3121.600000023842,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "teokrasi",
+    "rect": [
+      404,
+      147,
+      380,
+      66
+    ],
+    "point": [
+      594,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "touchstart",
+    "at": 3122,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "teokrasi",
+    "rect": [
+      404,
+      147,
+      380,
+      66
+    ],
+    "point": [
+      594,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerup",
+    "at": 3122.300000011921,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "teokrasi",
+    "rect": [
+      404,
+      147,
+      380,
+      66
+    ],
+    "point": [
+      594,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "click",
+    "at": 3141.300000011921,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "teokrasi",
+    "rect": [
+      404,
+      147,
+      380,
+      66
+    ],
+    "point": [
+      594,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerdown",
+    "at": 3237.100000023842,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      162,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "touchstart",
+    "at": 3237.699999988079,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      162,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerup",
+    "at": 3238.199999988079,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      162,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "click",
+    "at": 3247.600000023842,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      162,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerdown",
+    "at": 3352.699999988079,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "izolasyonist",
+    "rect": [
+      16,
+      147,
+      380,
+      66
+    ],
+    "point": [
+      206,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "touchstart",
+    "at": 3353.100000023842,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "izolasyonist",
+    "rect": [
+      16,
+      147,
+      380,
+      66
+    ],
+    "point": [
+      206,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerup",
+    "at": 3353.199999988079,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "izolasyonist",
+    "rect": [
+      16,
+      147,
+      380,
+      66
+    ],
+    "point": [
+      206,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "click",
+    "at": 3362.600000023842,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "izolasyonist",
+    "rect": [
+      16,
+      147,
+      380,
+      66
+    ],
+    "point": [
+      206,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerdown",
+    "at": 3452.699999988079,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      162,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "touchstart",
+    "at": 3453.399999976158,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      162,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerup",
+    "at": 3453.699999988079,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      162,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "click",
+    "at": 3464.100000023842,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      162,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerdown",
+    "at": 3653.100000023842,
+    "trusted": true,
+    "action": "tplLoad",
+    "x": "UX-gecerli",
+    "rect": [
+      156.59375,
+      99,
+      118.25,
+      25
+    ],
+    "point": [
+      215.7100067138672,
+      111.5
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "touchstart",
+    "at": 3653.800000011921,
+    "trusted": true,
+    "action": "tplLoad",
+    "x": "UX-gecerli",
+    "rect": [
+      156.59375,
+      99,
+      118.25,
+      25
+    ],
+    "point": [
+      215.7100067138672,
+      111.5
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerup",
+    "at": 3655.100000023842,
+    "trusted": true,
+    "action": "tplLoad",
+    "x": "UX-gecerli",
+    "rect": [
+      156.59375,
+      99,
+      118.25,
+      25
+    ],
+    "point": [
+      215.7100067138672,
+      111.5
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "click",
+    "at": 3666.699999988079,
+    "trusted": true,
+    "action": "tplLoad",
+    "x": "UX-gecerli",
+    "rect": [
+      156.59375,
+      99,
+      118.25,
+      25
+    ],
+    "point": [
+      216,
+      112
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerdown",
+    "at": 3753.100000023842,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      164,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      182
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "touchstart",
+    "at": 3753.600000023842,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      164,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      182
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerup",
+    "at": 3753.899999976158,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      164,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      182
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "click",
+    "at": 3770.399999976158,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      164,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      182
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerdown",
+    "at": 3853.5,
+    "trusted": true,
+    "action": "tplLoad",
+    "x": "UX-eksik",
+    "rect": [
+      279.84375,
+      99,
+      105.609375,
+      25
+    ],
+    "point": [
+      332.6400146484375,
+      111.5
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "touchstart",
+    "at": 3854.100000023842,
+    "trusted": true,
+    "action": "tplLoad",
+    "x": "UX-eksik",
+    "rect": [
+      279.84375,
+      99,
+      105.609375,
+      25
+    ],
+    "point": [
+      332.6400146484375,
+      111.5
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerup",
+    "at": 3854.699999988079,
+    "trusted": true,
+    "action": "tplLoad",
+    "x": "UX-eksik",
+    "rect": [
+      279.84375,
+      99,
+      105.609375,
+      25
+    ],
+    "point": [
+      332.6400146484375,
+      111.5
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "click",
+    "at": 3861.800000011921,
+    "trusted": true,
+    "action": "tplLoad",
+    "x": "UX-eksik",
+    "rect": [
+      279.84375,
+      99,
+      105.609375,
+      25
+    ],
+    "point": [
+      333,
+      112
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerdown",
+    "at": 3953,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      164,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      182
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "touchstart",
+    "at": 3953.600000023842,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      164,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      182
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerup",
+    "at": 3953.899999976158,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      164,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      182
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "touchend",
+    "at": 3955.899999976158,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      164,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      182
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "click",
+    "at": 3958.899999976158,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      164,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      182
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerdown",
+    "at": 4053,
+    "trusted": true,
+    "action": "tplLoad",
+    "x": "UX-bozuk",
+    "rect": [
+      390.453125,
+      99,
+      105.609375,
+      25
+    ],
+    "point": [
+      443.25,
+      111.5
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "touchstart",
+    "at": 4053.600000023842,
+    "trusted": true,
+    "action": "tplLoad",
+    "x": "UX-bozuk",
+    "rect": [
+      390.453125,
+      99,
+      105.609375,
+      25
+    ],
+    "point": [
+      443.25,
+      111.5
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerup",
+    "at": 4053.699999988079,
+    "trusted": true,
+    "action": "tplLoad",
+    "x": "UX-bozuk",
+    "rect": [
+      390.453125,
+      99,
+      105.609375,
+      25
+    ],
+    "point": [
+      443.25,
+      111.5
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "click",
+    "at": 4068.399999976158,
+    "trusted": true,
+    "action": "tplLoad",
+    "x": "UX-bozuk",
+    "rect": [
+      390.453125,
+      99,
+      105.609375,
+      25
+    ],
+    "point": [
+      443,
+      112
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerdown",
+    "at": 4169.899999976158,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      164,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      182
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "touchstart",
+    "at": 4170.5,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      164,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      182
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerup",
+    "at": 4170.800000011921,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      164,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      182
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "touchend",
+    "at": 4172.600000023842,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      164,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      182
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "click",
+    "at": 4175.199999988079,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      164,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      182
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerdown",
+    "at": 4271.100000023842,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "kriminal",
+    "rect": [
+      16,
+      147,
+      380,
+      66
+    ],
+    "point": [
+      206,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "touchstart",
+    "at": 4271.600000023842,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "kriminal",
+    "rect": [
+      16,
+      147,
+      380,
+      66
+    ],
+    "point": [
+      206,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerup",
+    "at": 4272.600000023842,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "kriminal",
+    "rect": [
+      16,
+      147,
+      380,
+      66
+    ],
+    "point": [
+      206,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "click",
+    "at": 4283.5,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "kriminal",
+    "rect": [
+      16,
+      133,
+      380,
+      66
+    ],
+    "point": [
+      206,
+      180
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerdown",
+    "at": 4370,
+    "trusted": true,
+    "action": "step",
+    "x": "galaksi",
+    "rect": [
+      677.71875,
+      6,
+      106.28125,
+      41
+    ],
+    "point": [
+      730.8499755859375,
+      26.5
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "touchstart",
+    "at": 4371,
+    "trusted": true,
+    "action": "step",
+    "x": "galaksi",
+    "rect": [
+      677.71875,
+      6,
+      106.28125,
+      41
+    ],
+    "point": [
+      730.8499755859375,
+      26.5
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerup",
+    "at": 4373.300000011921,
+    "trusted": true,
+    "action": "step",
+    "x": "galaksi",
+    "rect": [
+      677.71875,
+      6,
+      106.28125,
+      41
+    ],
+    "point": [
+      730.8499755859375,
+      26.5
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerdown",
+    "at": 4486.199999988079,
+    "trusted": true,
+    "action": "step",
+    "x": "mizac",
+    "rect": [
+      16,
+      118,
+      106.28125,
+      41
+    ],
+    "point": [
+      69.13999938964844,
+      138.5
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "touchstart",
+    "at": 4486.800000011921,
+    "trusted": true,
+    "action": "step",
+    "x": "mizac",
+    "rect": [
+      16,
+      118,
+      106.28125,
+      41
+    ],
+    "point": [
+      69.13999938964844,
+      138.5
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerup",
+    "at": 4487.100000023842,
+    "trusted": true,
+    "action": "step",
+    "x": "mizac",
+    "rect": [
+      16,
+      118,
+      106.28125,
+      41
+    ],
+    "point": [
+      69.13999938964844,
+      138.5
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "click",
+    "at": 4495.899999976158,
+    "trusted": true,
+    "action": "step",
+    "x": "mizac",
+    "rect": [
+      16,
+      118,
+      106.28125,
+      41
+    ],
+    "point": [
+      69,
+      139
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerdown",
+    "at": 4552.800000011921,
+    "trusted": true,
+    "action": "tNew",
+    "rect": [
+      98,
+      155.59375,
+      604,
+      35
+    ],
+    "point": [
+      400,
+      173.08999633789062
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "touchstart",
+    "at": 4553.5,
+    "trusted": true,
+    "action": "tNew",
+    "rect": [
+      98,
+      155.59375,
+      604,
+      35
+    ],
+    "point": [
+      400,
+      173.08999633789062
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerup",
+    "at": 4553.699999988079,
+    "trusted": true,
+    "action": "tNew",
+    "rect": [
+      98,
+      155.59375,
+      604,
+      35
+    ],
+    "point": [
+      400,
+      173.08999633789062
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "touchend",
+    "at": 4553.800000011921,
+    "trusted": true,
+    "action": "tNew",
+    "rect": [
+      98,
+      155.59375,
+      604,
+      35
+    ],
+    "point": [
+      400,
+      173.08999633789062
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "click",
+    "at": 4556.199999988079,
+    "trusted": true,
+    "action": "tNew",
+    "rect": [
+      98,
+      155.59375,
+      604,
+      35
+    ],
+    "point": [
+      400,
+      173
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerdown",
+    "at": 4653.199999988079,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      257,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      275
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "touchstart",
+    "at": 4653.800000011921,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      257,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      275
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerup",
+    "at": 4653.899999976158,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      257,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      275
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "touchend",
+    "at": 4654.899999976158,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      257,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      275
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "click",
+    "at": 4658,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      738,
+      257,
+      46,
+      36
+    ],
+    "point": [
+      761,
+      275
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerdown",
+    "at": 4753.300000011921,
+    "trusted": true,
+    "action": "start",
+    "rect": [
+      16,
+      255,
+      768,
+      37
+    ],
+    "point": [
+      400,
+      273.5
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "touchstart",
+    "at": 4753.699999988079,
+    "trusted": true,
+    "action": "start",
+    "rect": [
+      16,
+      255,
+      768,
+      37
+    ],
+    "point": [
+      400,
+      273.5
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "pointerup",
+    "at": 4754,
+    "trusted": true,
+    "action": "start",
+    "rect": [
+      16,
+      255,
+      768,
+      37
+    ],
+    "point": [
+      400,
+      273.5
+    ]
+  },
+  {
+    "viewport": "800x360",
+    "type": "touchend",
+    "at": 4914.199999988079,
+    "trusted": true,
+    "action": "start",
+    "rect": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "point": [
+      400,
+      273.5
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerdown",
+    "at": 1903.8999999761581,
+    "trusted": true,
+    "action": "tNew",
+    "rect": [
+      240,
+      193.109375,
+      480,
+      60
+    ],
+    "point": [
+      480,
+      223.10000610351562
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "touchstart",
+    "at": 1946,
+    "trusted": true,
+    "action": "tNew",
+    "rect": [
+      240,
+      193.109375,
+      480,
+      60
+    ],
+    "point": [
+      480,
+      223.10000610351562
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerup",
+    "at": 1946.3999999761581,
+    "trusted": true,
+    "action": "tNew",
+    "rect": [
+      240,
+      193.109375,
+      480,
+      60
+    ],
+    "point": [
+      480,
+      223.10000610351562
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "touchend",
+    "at": 1947.0999999642372,
+    "trusted": true,
+    "action": "tNew",
+    "rect": [
+      240,
+      193.109375,
+      480,
+      60
+    ],
+    "point": [
+      480,
+      223.10000610351562
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "click",
+    "at": 1950.8999999761581,
+    "trusted": true,
+    "action": "tNew",
+    "rect": [
+      240,
+      193.109375,
+      480,
+      60
+    ],
+    "point": [
+      480,
+      223
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerdown",
+    "at": 2149.399999976158,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      255,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      273
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "touchstart",
+    "at": 2149.899999976158,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      255,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      273
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerup",
+    "at": 2150.199999988079,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      255,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      273
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "touchend",
+    "at": 2151.5,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      255,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      273
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "click",
+    "at": 2156,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      849.3800048828125,
+      256.0799865722656,
+      43.239990234375,
+      33.839996337890625
+    ],
+    "point": [
+      871,
+      273
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerdown",
+    "at": 2349.899999976158,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "yayilmaci",
+    "rect": [
+      484,
+      459,
+      410,
+      66
+    ],
+    "point": [
+      689,
+      492
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "touchstart",
+    "at": 2350.300000011921,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "yayilmaci",
+    "rect": [
+      484,
+      459,
+      410,
+      66
+    ],
+    "point": [
+      689,
+      492
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerup",
+    "at": 2350.599999964237,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "yayilmaci",
+    "rect": [
+      484,
+      459,
+      410,
+      66
+    ],
+    "point": [
+      689,
+      492
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "click",
+    "at": 2357,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "yayilmaci",
+    "rect": [
+      484,
+      445,
+      410,
+      66
+    ],
+    "point": [
+      689,
+      492
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerdown",
+    "at": 2452.800000011921,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      255,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      273
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "touchstart",
+    "at": 2453.300000011921,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      255,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      273
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerup",
+    "at": 2453.5,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      255,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      273
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "click",
+    "at": 2462,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      255,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      273
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerdown",
+    "at": 2549.399999976158,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      255,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      273
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "touchstart",
+    "at": 2549.899999976158,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      255,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      273
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerup",
+    "at": 2550.099999964237,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      255,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      273
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "click",
+    "at": 2556.5,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      255,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      273
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerdown",
+    "at": 2651.199999988079,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "militarist",
+    "rect": [
+      66,
+      371,
+      410,
+      66
+    ],
+    "point": [
+      271,
+      404
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "touchstart",
+    "at": 2651.899999976158,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "militarist",
+    "rect": [
+      66,
+      371,
+      410,
+      66
+    ],
+    "point": [
+      271,
+      404
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerup",
+    "at": 2652,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "militarist",
+    "rect": [
+      66,
+      371,
+      410,
+      66
+    ],
+    "point": [
+      271,
+      404
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "click",
+    "at": 2659.399999976158,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "militarist",
+    "rect": [
+      66,
+      371,
+      410,
+      66
+    ],
+    "point": [
+      271,
+      404
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerdown",
+    "at": 2749.699999988079,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      255,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      273
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "touchstart",
+    "at": 2750.099999964237,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      255,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      273
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerup",
+    "at": 2750.300000011921,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      255,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      273
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "click",
+    "at": 2757.599999964237,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      255,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      273
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerdown",
+    "at": 2849.800000011921,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "kriminal",
+    "rect": [
+      66,
+      237,
+      410,
+      66
+    ],
+    "point": [
+      271,
+      270
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "touchstart",
+    "at": 2850.199999988079,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "kriminal",
+    "rect": [
+      66,
+      237,
+      410,
+      66
+    ],
+    "point": [
+      271,
+      270
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerup",
+    "at": 2850.300000011921,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "kriminal",
+    "rect": [
+      66,
+      237,
+      410,
+      66
+    ],
+    "point": [
+      271,
+      270
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "click",
+    "at": 2860.899999976158,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "kriminal",
+    "rect": [
+      66,
+      237,
+      410,
+      66
+    ],
+    "point": [
+      271,
+      270
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerdown",
+    "at": 2950.5,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      252,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      270
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "touchstart",
+    "at": 2950.800000011921,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      252,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      270
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerup",
+    "at": 2951.300000011921,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      252,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      270
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "click",
+    "at": 2957,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      252,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      270
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerdown",
+    "at": 3050.800000011921,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "pasifist",
+    "rect": [
+      66,
+      442,
+      410,
+      66
+    ],
+    "point": [
+      271,
+      475
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "touchstart",
+    "at": 3052,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "pasifist",
+    "rect": [
+      66,
+      442,
+      410,
+      66
+    ],
+    "point": [
+      271,
+      475
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerup",
+    "at": 3052.199999988079,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "pasifist",
+    "rect": [
+      66,
+      442,
+      410,
+      66
+    ],
+    "point": [
+      271,
+      475
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "click",
+    "at": 3058.899999976158,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "pasifist",
+    "rect": [
+      66,
+      442,
+      410,
+      66
+    ],
+    "point": [
+      271,
+      475
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerdown",
+    "at": 3150.899999976158,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      252,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      270
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "touchstart",
+    "at": 3151.699999988079,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      252,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      270
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerup",
+    "at": 3152,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      252,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      270
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "click",
+    "at": 3159.699999988079,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      252,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      270
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerdown",
+    "at": 3266.699999988079,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "yayilmaci",
+    "rect": [
+      484,
+      442,
+      410,
+      66
+    ],
+    "point": [
+      689,
+      475
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "touchstart",
+    "at": 3267.199999988079,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "yayilmaci",
+    "rect": [
+      484,
+      442,
+      410,
+      66
+    ],
+    "point": [
+      689,
+      475
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerup",
+    "at": 3267.399999976158,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "yayilmaci",
+    "rect": [
+      484,
+      442,
+      410,
+      66
+    ],
+    "point": [
+      689,
+      475
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "click",
+    "at": 3277.599999964237,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "yayilmaci",
+    "rect": [
+      484,
+      442,
+      410,
+      66
+    ],
+    "point": [
+      689,
+      475
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerdown",
+    "at": 3366.599999964237,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      252,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      270
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "touchstart",
+    "at": 3367.099999964237,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      252,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      270
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerup",
+    "at": 3367.399999976158,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      252,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      270
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "click",
+    "at": 3376.300000011921,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      252,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      270
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerdown",
+    "at": 3483.199999988079,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "teknokrasi",
+    "rect": [
+      484,
+      474,
+      410,
+      66
+    ],
+    "point": [
+      689,
+      507
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "touchstart",
+    "at": 3483.899999976158,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "teknokrasi",
+    "rect": [
+      484,
+      474,
+      410,
+      66
+    ],
+    "point": [
+      689,
+      507
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerup",
+    "at": 3484.099999964237,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "teknokrasi",
+    "rect": [
+      484,
+      474,
+      410,
+      66
+    ],
+    "point": [
+      689,
+      507
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "click",
+    "at": 3492.300000011921,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "teknokrasi",
+    "rect": [
+      484,
+      474,
+      410,
+      66
+    ],
+    "point": [
+      689,
+      507
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerdown",
+    "at": 3583.399999976158,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      210,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      228
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "touchstart",
+    "at": 3583.899999976158,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      210,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      228
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerup",
+    "at": 3584.199999988079,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      210,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      228
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "click",
+    "at": 3597.5,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      210,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      228
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerdown",
+    "at": 3699.899999976158,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "tuccar",
+    "rect": [
+      484,
+      326,
+      410,
+      66
+    ],
+    "point": [
+      689,
+      359
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "touchstart",
+    "at": 3700.399999976158,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "tuccar",
+    "rect": [
+      484,
+      326,
+      410,
+      66
+    ],
+    "point": [
+      689,
+      359
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerup",
+    "at": 3700.599999964237,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "tuccar",
+    "rect": [
+      484,
+      326,
+      410,
+      66
+    ],
+    "point": [
+      689,
+      359
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "click",
+    "at": 3708.699999988079,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "tuccar",
+    "rect": [
+      484,
+      326,
+      410,
+      66
+    ],
+    "point": [
+      689,
+      359
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerdown",
+    "at": 3800,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      210,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      228
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "touchstart",
+    "at": 3800.800000011921,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      210,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      228
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerup",
+    "at": 3801.099999964237,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      210,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      228
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "click",
+    "at": 3808.599999964237,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      210,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      228
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerdown",
+    "at": 3917.300000011921,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "teokrasi",
+    "rect": [
+      484,
+      237,
+      410,
+      66
+    ],
+    "point": [
+      689,
+      270
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "touchstart",
+    "at": 3918.300000011921,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "teokrasi",
+    "rect": [
+      484,
+      237,
+      410,
+      66
+    ],
+    "point": [
+      689,
+      270
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerup",
+    "at": 3918.599999964237,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "teokrasi",
+    "rect": [
+      484,
+      237,
+      410,
+      66
+    ],
+    "point": [
+      689,
+      270
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "click",
+    "at": 3925.199999988079,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "teokrasi",
+    "rect": [
+      484,
+      237,
+      410,
+      66
+    ],
+    "point": [
+      689,
+      270
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerdown",
+    "at": 4016.599999964237,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      252,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      270
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "touchstart",
+    "at": 4017.599999964237,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      252,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      270
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerup",
+    "at": 4017.899999976158,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      252,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      270
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "click",
+    "at": 4026.199999988079,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      252,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      270
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerdown",
+    "at": 4133.300000011921,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "izolasyonist",
+    "rect": [
+      66,
+      474,
+      410,
+      66
+    ],
+    "point": [
+      271,
+      507
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "touchstart",
+    "at": 4133.800000011921,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "izolasyonist",
+    "rect": [
+      66,
+      474,
+      410,
+      66
+    ],
+    "point": [
+      271,
+      507
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerup",
+    "at": 4134,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "izolasyonist",
+    "rect": [
+      66,
+      474,
+      410,
+      66
+    ],
+    "point": [
+      271,
+      507
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "click",
+    "at": 4141.099999964237,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "izolasyonist",
+    "rect": [
+      66,
+      474,
+      410,
+      66
+    ],
+    "point": [
+      271,
+      507
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerdown",
+    "at": 4233.800000011921,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      210,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      228
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "touchstart",
+    "at": 4234.899999976158,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      210,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      228
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerup",
+    "at": 4235.099999964237,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      210,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      228
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "click",
+    "at": 4246.300000011921,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      210,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      228
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerdown",
+    "at": 4432.899999976158,
+    "trusted": true,
+    "action": "tplLoad",
+    "x": "UX-gecerli",
+    "rect": [
+      206.59375,
+      147,
+      118.25,
+      25
+    ],
+    "point": [
+      265.7099914550781,
+      159.5
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "touchstart",
+    "at": 4433.5,
+    "trusted": true,
+    "action": "tplLoad",
+    "x": "UX-gecerli",
+    "rect": [
+      206.59375,
+      147,
+      118.25,
+      25
+    ],
+    "point": [
+      265.7099914550781,
+      159.5
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerup",
+    "at": 4433.800000011921,
+    "trusted": true,
+    "action": "tplLoad",
+    "x": "UX-gecerli",
+    "rect": [
+      206.59375,
+      147,
+      118.25,
+      25
+    ],
+    "point": [
+      265.7099914550781,
+      159.5
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "click",
+    "at": 4445,
+    "trusted": true,
+    "action": "tplLoad",
+    "x": "UX-gecerli",
+    "rect": [
+      206.59375,
+      147,
+      118.25,
+      25
+    ],
+    "point": [
+      266,
+      160
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerdown",
+    "at": 4533.399999976158,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      212,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      230
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "touchstart",
+    "at": 4533.899999976158,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      212,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      230
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerup",
+    "at": 4534.199999988079,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      212,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      230
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "click",
+    "at": 4543.699999988079,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      212,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      230
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerdown",
+    "at": 4632.899999976158,
+    "trusted": true,
+    "action": "tplLoad",
+    "x": "UX-eksik",
+    "rect": [
+      329.84375,
+      147,
+      105.609375,
+      25
+    ],
+    "point": [
+      382.6400146484375,
+      159.5
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "touchstart",
+    "at": 4633.399999976158,
+    "trusted": true,
+    "action": "tplLoad",
+    "x": "UX-eksik",
+    "rect": [
+      329.84375,
+      147,
+      105.609375,
+      25
+    ],
+    "point": [
+      382.6400146484375,
+      159.5
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerup",
+    "at": 4633.800000011921,
+    "trusted": true,
+    "action": "tplLoad",
+    "x": "UX-eksik",
+    "rect": [
+      329.84375,
+      147,
+      105.609375,
+      25
+    ],
+    "point": [
+      382.6400146484375,
+      159.5
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "click",
+    "at": 4643.399999976158,
+    "trusted": true,
+    "action": "tplLoad",
+    "x": "UX-eksik",
+    "rect": [
+      329.84375,
+      147,
+      105.609375,
+      25
+    ],
+    "point": [
+      383,
+      160
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerdown",
+    "at": 4733.199999988079,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      212,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      230
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "touchstart",
+    "at": 4733.699999988079,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      212,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      230
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerup",
+    "at": 4733.899999976158,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      212,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      230
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "touchend",
+    "at": 4734.599999964237,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      212,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      230
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "click",
+    "at": 4737.599999964237,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      212,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      230
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerdown",
+    "at": 4833.099999964237,
+    "trusted": true,
+    "action": "tplLoad",
+    "x": "UX-bozuk",
+    "rect": [
+      440.453125,
+      147,
+      105.609375,
+      25
+    ],
+    "point": [
+      493.25,
+      159.5
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "touchstart",
+    "at": 4833.599999964237,
+    "trusted": true,
+    "action": "tplLoad",
+    "x": "UX-bozuk",
+    "rect": [
+      440.453125,
+      147,
+      105.609375,
+      25
+    ],
+    "point": [
+      493.25,
+      159.5
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerup",
+    "at": 4833.899999976158,
+    "trusted": true,
+    "action": "tplLoad",
+    "x": "UX-bozuk",
+    "rect": [
+      440.453125,
+      147,
+      105.609375,
+      25
+    ],
+    "point": [
+      493.25,
+      159.5
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "click",
+    "at": 4843.300000011921,
+    "trusted": true,
+    "action": "tplLoad",
+    "x": "UX-bozuk",
+    "rect": [
+      440.453125,
+      147,
+      105.609375,
+      25
+    ],
+    "point": [
+      493,
+      160
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerdown",
+    "at": 4932.699999988079,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      212,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      230
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "touchstart",
+    "at": 4933,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      212,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      230
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerup",
+    "at": 4933.399999976158,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      212,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      230
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "touchend",
+    "at": 4934.199999988079,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      212,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      230
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "click",
+    "at": 4937.599999964237,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      212,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      230
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerdown",
+    "at": 5033.5,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "kriminal",
+    "rect": [
+      66,
+      237,
+      410,
+      66
+    ],
+    "point": [
+      271,
+      270
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "touchstart",
+    "at": 5034.399999976158,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "kriminal",
+    "rect": [
+      66,
+      237,
+      410,
+      66
+    ],
+    "point": [
+      271,
+      270
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerup",
+    "at": 5034.800000011921,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "kriminal",
+    "rect": [
+      66,
+      237,
+      410,
+      66
+    ],
+    "point": [
+      271,
+      270
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "click",
+    "at": 5043.199999988079,
+    "trusted": true,
+    "action": "mizacSet",
+    "x": "kriminal",
+    "rect": [
+      66,
+      223,
+      410,
+      66
+    ],
+    "point": [
+      271,
+      270
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerdown",
+    "at": 5133,
+    "trusted": true,
+    "action": "step",
+    "x": "galaksi",
+    "rect": [
+      779.140625,
+      6,
+      114.859375,
+      41
+    ],
+    "point": [
+      836.5700073242188,
+      26.5
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "touchstart",
+    "at": 5133.599999964237,
+    "trusted": true,
+    "action": "step",
+    "x": "galaksi",
+    "rect": [
+      779.140625,
+      6,
+      114.859375,
+      41
+    ],
+    "point": [
+      836.5700073242188,
+      26.5
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerup",
+    "at": 5134,
+    "trusted": true,
+    "action": "step",
+    "x": "galaksi",
+    "rect": [
+      779.140625,
+      6,
+      114.859375,
+      41
+    ],
+    "point": [
+      836.5700073242188,
+      26.5
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerdown",
+    "at": 5234.300000011921,
+    "trusted": true,
+    "action": "step",
+    "x": "mizac",
+    "rect": [
+      66,
+      118,
+      114.84375,
+      41
+    ],
+    "point": [
+      123.41999816894531,
+      138.5
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "touchstart",
+    "at": 5235.300000011921,
+    "trusted": true,
+    "action": "step",
+    "x": "mizac",
+    "rect": [
+      66,
+      118,
+      114.84375,
+      41
+    ],
+    "point": [
+      123.41999816894531,
+      138.5
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerup",
+    "at": 5235.800000011921,
+    "trusted": true,
+    "action": "step",
+    "x": "mizac",
+    "rect": [
+      66,
+      118,
+      114.84375,
+      41
+    ],
+    "point": [
+      123.41999816894531,
+      138.5
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "click",
+    "at": 5247.699999988079,
+    "trusted": true,
+    "action": "step",
+    "x": "mizac",
+    "rect": [
+      66,
+      118,
+      114.84375,
+      41
+    ],
+    "point": [
+      123,
+      139
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerdown",
+    "at": 5316.599999964237,
+    "trusted": true,
+    "action": "tNew",
+    "rect": [
+      240,
+      203.109375,
+      480,
+      60
+    ],
+    "point": [
+      480,
+      233.10000610351562
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "touchstart",
+    "at": 5317.300000011921,
+    "trusted": true,
+    "action": "tNew",
+    "rect": [
+      240,
+      203.109375,
+      480,
+      60
+    ],
+    "point": [
+      480,
+      233.10000610351562
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerup",
+    "at": 5317.699999988079,
+    "trusted": true,
+    "action": "tNew",
+    "rect": [
+      240,
+      203.109375,
+      480,
+      60
+    ],
+    "point": [
+      480,
+      233.10000610351562
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "touchend",
+    "at": 5317.800000011921,
+    "trusted": true,
+    "action": "tNew",
+    "rect": [
+      240,
+      203.109375,
+      480,
+      60
+    ],
+    "point": [
+      480,
+      233.10000610351562
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "click",
+    "at": 5321.399999976158,
+    "trusted": true,
+    "action": "tNew",
+    "rect": [
+      240,
+      203.109375,
+      480,
+      60
+    ],
+    "point": [
+      480,
+      233
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerdown",
+    "at": 5400.099999964237,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      257,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      275
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "touchstart",
+    "at": 5401,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      257,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      275
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerup",
+    "at": 5401.199999988079,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      257,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      275
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "touchend",
+    "at": 5402.5,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      257,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      275
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "click",
+    "at": 5407,
+    "trusted": true,
+    "action": "rollName",
+    "rect": [
+      848,
+      257,
+      46,
+      36
+    ],
+    "point": [
+      871,
+      275
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerdown",
+    "at": 5484,
+    "trusted": true,
+    "action": "start",
+    "rect": [
+      66,
+      435,
+      828,
+      37
+    ],
+    "point": [
+      480,
+      453.5
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "touchstart",
+    "at": 5484.300000011921,
+    "trusted": true,
+    "action": "start",
+    "rect": [
+      66,
+      435,
+      828,
+      37
+    ],
+    "point": [
+      480,
+      453.5
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "pointerup",
+    "at": 5484.599999964237,
+    "trusted": true,
+    "action": "start",
+    "rect": [
+      66,
+      435,
+      828,
+      37
+    ],
+    "point": [
+      480,
+      453.5
+    ]
+  },
+  {
+    "viewport": "960x540",
+    "type": "touchend",
+    "at": 5587.899999976158,
+    "trusted": true,
+    "action": "start",
+    "rect": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "point": [
+      480,
+      453.5
+    ]
+  }
+]

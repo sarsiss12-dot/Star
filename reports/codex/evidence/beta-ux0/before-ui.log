@@ -1,0 +1,8 @@
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ 'Yükselen Yıldız Devletleri — Ilyra'
+- 'Elle Yazdığım Devlet'
+
+    at /workspace/Star/tests/browser-beta-ux0.cjs:4:757
+GEÇEN: 0 KALAN: 1

@@ -1,0 +1,8 @@
+locator.tap: Error: strict mode violation: locator('#modal [data-a="vsCancel"]') resolved to 2 elements:
+    1) <button class="riX" data-a="vsCancel">✕</button> aka getByRole('button', { name: '✕' })
+    2) <button class="ch" data-a="vsCancel">VAZGEÇ</button> aka getByRole('button', { name: 'VAZGEÇ' })
+
+Call log:
+[2m  - waiting for locator('#modal [data-a="vsCancel"]')[22m
+
+    at /workspace/Star/tests/browser-beta-ux0-panels.cjs:7:745

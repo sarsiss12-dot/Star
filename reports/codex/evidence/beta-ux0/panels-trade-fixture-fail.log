@@ -1,0 +1,6 @@
+PASS 800 vasallik Torrien Egemenliği
+AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert((await p.locator('#modal').innerText()).includes(ai))
+
+    at /workspace/Star/tests/browser-beta-ux0-panels.cjs:7:539

@@ -1,0 +1,6 @@
+PASS 800 vasallik Torrien Egemenliği
+page.evaluate: TypeError: Cannot set properties of undefined (setting '0')
+    at eval (eval at evaluate (:311:30), <anonymous>:1:124)
+    at UtilityScript.evaluate (<anonymous>:313:16)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+    at /workspace/Star/tests/browser-beta-ux0-panels.cjs:7:149
