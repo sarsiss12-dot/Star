@@ -7,6 +7,7 @@
    EconomyLedger'in ara nesnesiz stock/snapshot/changedSince'i eski ifadelerle aynı sonucu verir. */
 const fs=require('fs'),os=require('os'),path=require('path'),crypto=require('crypto'),assert=require('assert/strict');
 const {runtime}=require('./helpers/runtime'),{harness}=require('./helpers/95e-fixture'),P=require('./helpers/perf1-preservation');
+const originalStrip=P.stripReviewedP1,stripSetup=require('./helpers/beta-setup0-preservation.cjs').stripReviewedSetup0;P.stripReviewedP1=(f,s)=>originalStrip(f,stripSetup(f,s));
 const {test,end}=harness(),root=path.resolve(__dirname,'..');
 const sha=s=>crypto.createHash('sha256').update(s).digest('hex');
 const SAVE=fs.readFileSync(path.join(__dirname,'fixtures/96h10/seed11-month228-occupied-colony.save'),'utf8');

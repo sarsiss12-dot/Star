@@ -1249,7 +1249,7 @@ function fleetRangeMix(e){
    --------------------------------------------------------------- */
 function wildTurn(e){
   // yuvalar düzenli olarak akıncı üretir
-  for (const nid of (G.nests || [])){
+  for (const nid of (G.cfg.pirates===false?[]:(G.nests || []))){
     const sy = G.sys[nid];
     if (!sy || !sy.nest) continue;
     sy.nest.timer -= 30;
@@ -1280,6 +1280,7 @@ function wildTurn(e){
   // akıncılar en yakın zayıf koloniye saldırır, canavarlar rastgele dolaşır
   for (const f of G.fleets){
     if (f.e !== e.id || f.combat || f.path.length || f.mv || f.sys < 0) continue;
+    if (G.cfg.pirates===false&&!f.monster) continue;
     if (f.name === 'Korsan Muhafızı') continue;          // yuvayı bekler
     const from = f.sys;
     if (f.monster){

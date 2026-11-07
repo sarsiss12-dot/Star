@@ -104,7 +104,7 @@ function validatePackage(input,o={}){
   if(!onlyKeys(pkg,KEYS)||KEYS.some(k=>!has(pkg,k)))return fail('fields');
   if(pkg.format!==PKG_FORMAT)return fail('format');
   if(pkg.mpVersion!==PKG_VERSION)return fail('version');
-  const build=has(o,'build')?o.build:(typeof BUILD_ID==='string'?BUILD_ID:null);if(pkg.build!==build&&!((build==='96h10p7'&&pkg.build==='96h10p6')||(build==='96h10p8'&&['96h10p6','96h10p7'].includes(pkg.build))))return fail('build'); // BETA-P0.1: explicit v8/package4 compatibility, all remaining checks still mandatory
+  const build=has(o,'build')?o.build:(typeof BUILD_ID==='string'?BUILD_ID:null);if(pkg.build!==build&&!((build==='96h10p7'&&pkg.build==='96h10p6')||(build==='96h10p8'&&['96h10p6','96h10p7'].includes(pkg.build))||(build==='96h10p9'&&['96h10p6','96h10p7','96h10p8'].includes(pkg.build))))return fail('build'); // BETA-P0.1: explicit v8/package4 compatibility, all remaining checks still mandatory
   if(typeof pkg.save8!=='string')return fail('fields');if(pkg.save8.length>MAX_SAVE8)return fail('too-big');
   if(!Number.isFinite(pkg.createdAt)||typeof pkg.saveId!=='string'||!/^s-[a-f0-9]{16}$/.test(pkg.saveId))return fail('fields');
   const I=pkg.integrity;if(!plain(I)||!onlyKeys(I,['alg','save8','body'])||I.alg!=='SHA-256'||!HEX(I.save8,64)||!HEX(I.body,64))return fail('integrity');

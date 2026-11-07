@@ -1,0 +1,72 @@
+[
+  {
+    "name": "beta_setup0_pirates_test.cjs",
+    "status": "PASS",
+    "exit": 0
+  },
+  {
+    "name": "beta_p01_ballot_test.js",
+    "status": "PASS",
+    "exit": 0
+  },
+  {
+    "name": "beta_p01_war_end_test.js",
+    "status": "PASS",
+    "exit": 0
+  },
+  {
+    "name": "beta_p01_embargo_test.js",
+    "status": "PASS",
+    "exit": 0
+  },
+  {
+    "name": "beta_p01_compat_test.js",
+    "status": "PASS",
+    "exit": 0
+  },
+  {
+    "name": "beta_p02_news_test.js",
+    "status": "PASS",
+    "exit": 0
+  },
+  {
+    "name": "beta_p02_news_return_test.js",
+    "status": "PASS",
+    "exit": 0
+  },
+  {
+    "name": "beta_p01_mirror_test.js",
+    "status": "PASS",
+    "exit": 0
+  },
+  {
+    "name": "faz90rc_1_save_boundary_test.js",
+    "status": "PASS",
+    "exit": 0
+  },
+  {
+    "name": "mp4_core_test.js",
+    "status": "PASS",
+    "exit": 0
+  },
+  {
+    "name": "mp89_ui_integrity_test.js",
+    "status": "PASS",
+    "exit": 0
+  },
+  {
+    "name": "perf1_equivalence_test.js",
+    "status": "PASS",
+    "exit": 0
+  },
+  {
+    "name": "perf2_equivalence_test.js",
+    "status": "FAIL",
+    "exit": 1
+  },
+  {
+    "name": "mp86_nebula_cache_test.js",
+    "status": "PASS",
+    "exit": 0
+  }
+]

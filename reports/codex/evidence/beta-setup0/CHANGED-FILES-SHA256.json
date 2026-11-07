@@ -1,0 +1,34 @@
+{
+  "main.js": {
+    "before": "3d700c5653dc38fbd9ad379afdd40096c7ebaf87f5da1166e83aee9a0879f160",
+    "after": "7eaed67d44a2bb7d7ac8e1c95b35cf59e47c83fa389169e82cc29e3c3cdfbd71"
+  },
+  "ai.js": {
+    "before": "49bb05c0621b8a31e9d61f361ea3a36250915f440a51d77e58aec7cc1e653b87",
+    "after": "4f0cf937934b6e171b54497cc2605bb783c264a1f8374963b4d64a1052cfabfb"
+  },
+  "map.js": {
+    "before": "d8ca27ee07c484b7399f95d8031aa70fb7539bcf89d768c8442200b7cba76ae3",
+    "after": "3ccc9e66bb13f0ec1eaee1759e26b110ec5a05815ce73d74c7960b9f16828b0d"
+  },
+  "economy.js": {
+    "before": "315653254c3e690523d5068d8ccec6a4cd7adc7f44e7a563adc04917f1eeee80",
+    "after": "f3a97846dc28be10f1d9dc05195bf72f31bfd9889acb6004bc5da28372e27f89"
+  },
+  "sw.js": {
+    "before": "d0abb38ffb55a80ec820918d694c9c8fe836e8ce3719ff9da6ab1286113cdd45",
+    "after": "ab81e66f16c7dee4e675545e79a270a3fc103eaec5f89fd42ad5c0b09fadb58b"
+  },
+  "research/mp0/mp-core.js": {
+    "before": "feabfddce573d948fd979754ae696d0d8ffcc84a04b819dd14e13c11ec0f66dd",
+    "after": "d1c948397660c46ccc47c265d402e0ca140cf1b16bef85295df5ef3e2c9746d7"
+  },
+  "research/mp1/client/view.js": {
+    "before": "88723e5bd8eed24db5704917f40fd8d61a08e29c22006aed72363a1a08848de1",
+    "after": "068949603b0527f571154fcbd8f9daae8db5fa3adeb1e77da6b9c05040b9dc95"
+  },
+  "research/mp1/server/relay.js": {
+    "before": "73430a385477a29baa0a65b8b9c6aea1a0937b0377ce84ac92561ec1ed3294b6",
+    "after": "ccf5ecaab2f285e3ccfb936a6e2352a52dd8c4e54f8ba60c8fa83ecb8d55dd22"
+  }
+}

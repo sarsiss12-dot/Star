@@ -1,0 +1,121 @@
+[
+  {
+    "test": "beta_setup0_pirates_test.cjs",
+    "passCount": 10,
+    "failCount": 0,
+    "status": "PASS",
+    "log": "reg-beta_setup0_pirates_test.cjs.log"
+  },
+  {
+    "test": "beta_p01_ballot_test.js",
+    "passCount": 3,
+    "failCount": 0,
+    "status": "PASS",
+    "log": "reg-beta_p01_ballot_test.js.log"
+  },
+  {
+    "test": "beta_p01_war_end_test.js",
+    "passCount": 5,
+    "failCount": 0,
+    "status": "PASS",
+    "log": "reg-beta_p01_war_end_test.js.log"
+  },
+  {
+    "test": "beta_p01_embargo_test.js",
+    "passCount": 5,
+    "failCount": 0,
+    "status": "PASS",
+    "log": "reg-beta_p01_embargo_test.js.log"
+  },
+  {
+    "test": "beta_p01_compat_test.js",
+    "passCount": 4,
+    "failCount": 0,
+    "status": "PASS",
+    "log": "reg-beta_p01_compat_test.js.log"
+  },
+  {
+    "test": "beta_p02_news_test.js",
+    "passCount": 8,
+    "failCount": 0,
+    "status": "PASS",
+    "log": "reg-beta_p02_news_test.js.log"
+  },
+  {
+    "test": "beta_p02_news_return_test.js",
+    "passCount": 3,
+    "failCount": 0,
+    "status": "PASS",
+    "log": "reg-beta_p02_news_return_test.js.log"
+  },
+  {
+    "test": "beta_p01_mirror_test.js",
+    "passCount": 3,
+    "failCount": 0,
+    "status": "PASS",
+    "log": "reg-beta_p01_mirror_test.js.log"
+  },
+  {
+    "test": "faz90rc_1_save_boundary_test.js",
+    "passCount": 19,
+    "failCount": 0,
+    "status": "PASS",
+    "log": "reg-faz90rc_1_save_boundary_test.js.log"
+  },
+  {
+    "test": "mp4_core_test.js",
+    "passCount": 14,
+    "failCount": 0,
+    "status": "PASS",
+    "log": "reg-mp4_core_test.js.log"
+  },
+  {
+    "test": "mp89_ui_integrity_test.js",
+    "passCount": 1,
+    "failCount": 0,
+    "status": "PASS",
+    "log": "reg-mp89_ui_integrity_test.js.log"
+  },
+  {
+    "test": "perf1_equivalence_test.js",
+    "passCount": 4,
+    "failCount": 0,
+    "status": "PASS",
+    "log": "reg-perf1_equivalence_test.js.log"
+  },
+  {
+    "test": "perf2_equivalence_test.js",
+    "passCount": 5,
+    "failCount": 0,
+    "status": "PASS",
+    "log": "perf2-final.log"
+  },
+  {
+    "test": "mp86_nebula_cache_test.js",
+    "passCount": 3,
+    "failCount": 0,
+    "status": "PASS",
+    "log": "reg-mp86_nebula_cache_test.js.log"
+  },
+  {
+    "test": "fleet label native Canvas",
+    "passCount": 30,
+    "failCount": 0,
+    "status": "PASS",
+    "log": "fleet-labels-native.log"
+  },
+  {
+    "test": "Konsey",
+    "passCount": 14,
+    "failCount": 0,
+    "status": "PASS",
+    "log": "council-final.log"
+  },
+  {
+    "test": "Ticaret/AI",
+    "passCount": 17,
+    "failCount": 0,
+    "status": "PASS",
+    "log": "commerce-final.log"
+  }
+]

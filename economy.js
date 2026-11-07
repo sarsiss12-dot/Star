@@ -2023,7 +2023,7 @@ function invasionTick(){
             col.stab = clamp(col.stab - 6, 0, 100);
             col.siege = 0;
             if (pl.owner === 0)
-              say('Korsanlar ' + (col.name || pl.name) + ' gezegenini yağmaladı', 'war');
+              say((G.cfg.pirates===false?'Uzay canavarları ':'Korsanlar ') + (col.name || pl.name) + ' gezegenini yağmaladı', 'war');
             break;
           }
 

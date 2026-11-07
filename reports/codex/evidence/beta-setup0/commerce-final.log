@@ -1,0 +1,18 @@
+✓ an alloy deficit with short runway is a critical budget, not a healthy rearm state
+✓ a paid producer cannot spend the last recovery currency while its projected net remains negative
+✓ a real producer which removes the input deficit remains affordable through the same rule
+✓ each paid hull rechecks combined pending building and ship upkeep
+✓ projected alloy upkeep includes pending building consumption and all newly accepted hulls
+✓ healthy military investment still pays canonical costs without any resource grant
+✓ repeating an identical valid armed-fleet route does not manufacture action history
+✓ AI port search finds the real safe alternate path instead of rejecting the first unsafe BFS result
+✓ an AI paid convoy actually uses the safe path selected from its own knowledge
+✓ an agreed contract retains physical risk when no safe alternate exists
+✓ live risk change invalidates only the derived AI route choice on the same day
+✓ hidden pirates are not consulted when planning and can still destroy real cargo
+✓ legacy diplomacy memories and long objective survive v8 without fresh RNG
+✓ critical industry waits for its real price instead of spending its fund on cheaper growth
+✓ one real production month can fund the held producer and its completed output works
+✓ the short recovery reservation also protects its price from civilian hull spending
+✓ no positive funding income cannot create an endless fictional savings promise
+GEÇEN: 17 KALAN: 0

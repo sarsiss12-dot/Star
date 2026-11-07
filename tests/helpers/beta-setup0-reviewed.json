@@ -1,0 +1,106 @@
+{
+  "main.js": {
+    "beforeSha256": "3d700c5653dc38fbd9ad379afdd40096c7ebaf87f5da1166e83aee9a0879f160",
+    "afterSha256": "7eaed67d44a2bb7d7ac8e1c95b35cf59e47c83fa389169e82cc29e3c3cdfbd71",
+    "hunks": [
+      {
+        "before": "  });\n\n  // --- korsan yuvaları: anavatanlardan uzak, sahipsiz sistemlere ---\n  const nestCount = Math.max(2, Math.round(G.sys.length / 18));\n  const free = G.sys.filter(sy => sy.owner < 0 &&\n    G.emps.every(em => em.wild || em.home < 0 || hopDist(em.home, sy.id, 2) > 2));\n  shuffle(rnd, free);\n  G.nests = [];\n  for (let i = 0; i < Math.min(nestCount, free.length); i++){\n    const sy = free[i];\n    sy.nest = {hp: 900 + Math.floor(rnd()*500), timer: 60 + Math.floor(rnd()*120)};\n    G.nests.push(sy.id);\n    // yuvayı koruyan başlangıç filosu\n    newFleet(wild, sy.id, [{c:'kor'},{c:'kor'},{c:'muh'}], 'Korsan Muhafızı');\n  }\n\n  // kayıp uygarlık kalıntıları ve kriz zamanlayıcısı\n",
+        "after": "  });\n\n  // --- korsan yuvaları: anavatanlardan uzak, sahipsiz sistemlere ---\n  G.nests = [];\n  if (cfg.pirates !== false){\n  const nestCount = Math.max(2, Math.round(G.sys.length / 18));\n  const free = G.sys.filter(sy => sy.owner < 0 &&\n    G.emps.every(em => em.wild || em.home < 0 || hopDist(em.home, sy.id, 2) > 2));\n  shuffle(rnd, free);\n  for (let i = 0; i < Math.min(nestCount, free.length); i++){\n    const sy = free[i];\n    sy.nest = {hp: 900 + Math.floor(rnd()*500), timer: 60 + Math.floor(rnd()*120)};\n    G.nests.push(sy.id);\n    // yuvayı koruyan başlangıç filosu\n    newFleet(wild, sy.id, [{c:'kor'},{c:'kor'},{c:'muh'}], 'Korsan Muhafızı');\n  }\n  }\n\n  // kayıp uygarlık kalıntıları ve kriz zamanlayıcısı\n"
+      },
+      {
+        "before": "    return {t:'YOLDA', c:'go', d: dest ? dest.name : ''};\n  }\n  if (hasShipment(f)) return {t:'SEVK BEKLİYOR',c:'wk',d:shipmentStatus(f)};\n  if (explorationEnabled(f)&&f.explore) return {t:({pirate:'KORSAN TEHDİDİ · BEKLİYOR',threat:'DÜŞMAN TEHDİDİ · BEKLİYOR',supply:'İKMAL YETERSİZ',complete:'KEŞİF TAMAMLANDI',route:'GÜVENLİ ROTA ARANIYOR',travel:'HEDEFE GİDİYOR',resupply:'İKMAL HATTINA DÖNÜYOR'})[f.explore.status]||'GÜVENLİ ROTA ARANIYOR',c:'wk'};\n  if (fleetHasRole(f,'bilim'))     return {t:'BOŞTA · TARAMA BEKLİYOR', c:'id'};\n  if (fleetHasRole(f,'koloni'))    return {t:'BOŞTA · HEDEF BEKLİYOR', c:'id'};\n  return {t:'BEKLİYOR', c:'id'};\n",
+        "after": "    return {t:'YOLDA', c:'go', d: dest ? dest.name : ''};\n  }\n  if (hasShipment(f)) return {t:'SEVK BEKLİYOR',c:'wk',d:shipmentStatus(f)};\n  if (explorationEnabled(f)&&f.explore) return {t:({pirate:G.cfg.pirates===false?'KALINTI SAVUNMASI · BEKLİYOR':'KORSAN TEHDİDİ · BEKLİYOR',threat:'DÜŞMAN TEHDİDİ · BEKLİYOR',supply:'İKMAL YETERSİZ',complete:'KEŞİF TAMAMLANDI',route:'GÜVENLİ ROTA ARANIYOR',travel:'HEDEFE GİDİYOR',resupply:'İKMAL HATTINA DÖNÜYOR'})[f.explore.status]||'GÜVENLİ ROTA ARANIYOR',c:'wk'};\n  if (fleetHasRole(f,'bilim'))     return {t:'BOŞTA · TARAMA BEKLİYOR', c:'id'};\n  if (fleetHasRole(f,'koloni'))    return {t:'BOŞTA · HEDEF BEKLİYOR', c:'id'};\n  return {t:'BEKLİYOR', c:'id'};\n"
+      },
+      {
+        "before": "/* ---------- TİCARET SAVAŞI ----------\n   Rota üzerindeki düşman veya korsan filoları kervan yağmalar:\n   rota bir süre kapanır, yağmalayan ganimet alır. */\nfunction raidTick(){\n  G.raids=G.raids||{};\n  for(const k in G.raids)if(G.raids[k]<=G.day)delete G.raids[k];\n",
+        "after": "/* ---------- TİCARET SAVAŞI ----------\n   Rota üzerindeki düşman veya korsan filoları kervan yağmalar:\n   rota bir süre kapanır, yağmalayan ganimet alır. */\n// BETA-SETUP.0: repair only explicit OFF saves produced by the old setup bug.\n// Keep empire IDs, ruin defenders, monsters, crisis fleets and ordinary war raids.\nfunction repairDisabledPirates(){\n  if(G.cfg.pirates!==false)return;\n  for(const s of G.sys){delete s.nest;delete s.nestPow;}\n  G.nests=[];\n  if(G.upheaval?.k==='korsanCagi')G.upheaval=null;\n  if(validWildId(G.wildId)!==null)G.fleets=G.fleets.filter(f=>f.e!==G.wildId||f.monster);\n}\nfunction raidTick(){\n  G.raids=G.raids||{};\n  for(const k in G.raids)if(G.raids[k]<=G.day)delete G.raids[k];\n"
+      },
+      {
+        "before": "  if(typeof DiplomaticInbox!=='undefined')DiplomaticInbox.restore(d.diplomaticInbox);\n  if(typeof RemoteConstruction!=='undefined')RemoteConstruction.restore(d.construction);\n  if(typeof Commerce!=='undefined')Commerce.restore(d.commerce);\n  if(typeof EconomyLedger!=='undefined')EconomyLedger.restore(d.economyHistory);\n  if(typeof CommerceUI!=='undefined'){CommerceUI.selected=null;CommerceUI.hits=[];}\n  loadCheckpoint('after:events');\n",
+        "after": "  if(typeof DiplomaticInbox!=='undefined')DiplomaticInbox.restore(d.diplomaticInbox);\n  if(typeof RemoteConstruction!=='undefined')RemoteConstruction.restore(d.construction);\n  if(typeof Commerce!=='undefined')Commerce.restore(d.commerce);\n  repairDisabledPirates();\n  if(typeof EconomyLedger!=='undefined')EconomyLedger.restore(d.economyHistory);\n  if(typeof CommerceUI!=='undefined'){CommerceUI.selected=null;CommerceUI.hits=[];}\n  loadCheckpoint('after:events');\n"
+      },
+      {
+        "before": "   Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺\n   Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */\n/* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */\nconst BUILD_ID = '96h10p8';\nconst DIAG_MAX = 40;\nconst DIAG = [];\nfunction logDiag(tur, mesaj){\n",
+        "after": "   Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺\n   Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */\n/* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */\nconst BUILD_ID = '96h10p9';\nconst DIAG_MAX = 40;\nconst DIAG = [];\nfunction logDiag(tur, mesaj){\n"
+      },
+      {
+        "before": "  if (typeof crisisActive === 'function' && crisisActive()) return;\n  if (rnd() > .035) return;                       // ayda ~%3,5\n\n  const keys = Object.keys(UPHEAVALS);\n  const k = keys[Math.floor(rnd() * keys.length)];\n  const U = UPHEAVALS[k];\n  const sure = U.sure[0] + Math.floor(rnd() * (U.sure[1] - U.sure[0] + 1));\n",
+        "after": "  if (typeof crisisActive === 'function' && crisisActive()) return;\n  if (rnd() > .035) return;                       // ayda ~%3,5\n\n  const keys = Object.keys(UPHEAVALS).filter(k=>G.cfg.pirates!==false||k!=='korsanCagi');\n  const k = keys[Math.floor(rnd() * keys.length)];\n  const U = UPHEAVALS[k];\n  const sure = U.sure[0] + Math.floor(rnd() * (U.sure[1] - U.sure[0] + 1));\n"
+      }
+    ]
+  },
+  "ai.js": {
+    "beforeSha256": "49bb05c0621b8a31e9d61f361ea3a36250915f440a51d77e58aec7cc1e653b87",
+    "afterSha256": "4f0cf937934b6e171b54497cc2605bb783c264a1f8374963b4d64a1052cfabfb",
+    "hunks": [
+      {
+        "before": "   --------------------------------------------------------------- */\nfunction wildTurn(e){\n  // yuvalar düzenli olarak akıncı üretir\n  for (const nid of (G.nests || [])){\n    const sy = G.sys[nid];\n    if (!sy || !sy.nest) continue;\n    sy.nest.timer -= 30;\n",
+        "after": "   --------------------------------------------------------------- */\nfunction wildTurn(e){\n  // yuvalar düzenli olarak akıncı üretir\n  for (const nid of (G.cfg.pirates===false?[]:(G.nests || []))){\n    const sy = G.sys[nid];\n    if (!sy || !sy.nest) continue;\n    sy.nest.timer -= 30;\n"
+      },
+      {
+        "before": "  // akıncılar en yakın zayıf koloniye saldırır, canavarlar rastgele dolaşır\n  for (const f of G.fleets){\n    if (f.e !== e.id || f.combat || f.path.length || f.mv || f.sys < 0) continue;\n    if (f.name === 'Korsan Muhafızı') continue;          // yuvayı bekler\n    const from = f.sys;\n    if (f.monster){\n",
+        "after": "  // akıncılar en yakın zayıf koloniye saldırır, canavarlar rastgele dolaşır\n  for (const f of G.fleets){\n    if (f.e !== e.id || f.combat || f.path.length || f.mv || f.sys < 0) continue;\n    if (G.cfg.pirates===false&&!f.monster) continue;\n    if (f.name === 'Korsan Muhafızı') continue;          // yuvayı bekler\n    const from = f.sys;\n    if (f.monster){\n"
+      }
+    ]
+  },
+  "map.js": {
+    "beforeSha256": "d8ca27ee07c484b7399f95d8031aa70fb7539bcf89d768c8442200b7cba76ae3",
+    "afterSha256": "3ccc9e66bb13f0ec1eaee1759e26b110ec5a05815ce73d74c7960b9f16828b0d",
+    "hunks": [
+      {
+        "before": "    g.textBaseline='middle';g.globalAlpha=1;g.letterSpacing='0px';g.setLineDash([]);\n    for(const j of jobs){\n      const e=G.emps[j.emp],info=territoryOwnerInfo(j.emp);if(!info)continue;\n      const name=e.wild?'Korsanlar':e.crisisSide?'Kriz filosu':info.name;\n      const chars=Array.from(name),max=Math.min(190,this.vw-24);\n      let text=name;\n      while(chars.length&&g.measureText(text).width>max-14){chars.pop();text=chars.join('')+'…';}\n",
+        "after": "    g.textBaseline='middle';g.globalAlpha=1;g.letterSpacing='0px';g.setLineDash([]);\n    for(const j of jobs){\n      const e=G.emps[j.emp],info=territoryOwnerInfo(j.emp);if(!info)continue;\n      const name=e.wild?(G.cfg.pirates===false?(e.crisisSide?'Kriz filosu':'Uzay canavarları'):'Korsanlar'):e.crisisSide?'Kriz filosu':info.name;\n      const chars=Array.from(name),max=Math.min(190,this.vw-24);\n      let text=name;\n      while(chars.length&&g.measureText(text).width>max-14){chars.pop();text=chars.join('')+'…';}\n"
+      }
+    ]
+  },
+  "economy.js": {
+    "beforeSha256": "315653254c3e690523d5068d8ccec6a4cd7adc7f44e7a563adc04917f1eeee80",
+    "afterSha256": "f3a97846dc28be10f1d9dc05195bf72f31bfd9889acb6004bc5da28372e27f89",
+    "hunks": [
+      {
+        "before": "            col.stab = clamp(col.stab - 6, 0, 100);\n            col.siege = 0;\n            if (pl.owner === 0)\n              say('Korsanlar ' + (col.name || pl.name) + ' gezegenini yağmaladı', 'war');\n            break;\n          }\n\n",
+        "after": "            col.stab = clamp(col.stab - 6, 0, 100);\n            col.siege = 0;\n            if (pl.owner === 0)\n              say((G.cfg.pirates===false?'Uzay canavarları ':'Korsanlar ') + (col.name || pl.name) + ' gezegenini yağmaladı', 'war');\n            break;\n          }\n\n"
+      }
+    ]
+  },
+  "sw.js": {
+    "beforeSha256": "d0abb38ffb55a80ec820918d694c9c8fe836e8ce3719ff9da6ab1286113cdd45",
+    "afterSha256": "ab81e66f16c7dee4e675545e79a270a3fc103eaec5f89fd42ad5c0b09fadb58b",
+    "hunks": [
+      {
+        "before": "   önbellekteki tek parça main.js temizlensin. */\n/* FAZ 83: sürüm yükseltildi — eski ve yeni JS dosyalarının\n   karışmasını önler; activate'te eskiler siliniyor. */\nconst CACHE = 'stars-v96h10p8';\n\n/* Oyunun tamamı — hepsi yerel dosya, dış bağımlılık yok */\nconst KABUK = [\n",
+        "after": "   önbellekteki tek parça main.js temizlensin. */\n/* FAZ 83: sürüm yükseltildi — eski ve yeni JS dosyalarının\n   karışmasını önler; activate'te eskiler siliniyor. */\nconst CACHE = 'stars-v96h10p9';\n\n/* Oyunun tamamı — hepsi yerel dosya, dış bağımlılık yok */\nconst KABUK = [\n"
+      }
+    ]
+  },
+  "research/mp0/mp-core.js": {
+    "beforeSha256": "feabfddce573d948fd979754ae696d0d8ffcc84a04b819dd14e13c11ec0f66dd",
+    "afterSha256": "d1c948397660c46ccc47c265d402e0ca140cf1b16bef85295df5ef3e2c9746d7",
+    "hunks": [
+      {
+        "before": "  if(!onlyKeys(pkg,KEYS)||KEYS.some(k=>!has(pkg,k)))return fail('fields');\n  if(pkg.format!==PKG_FORMAT)return fail('format');\n  if(pkg.mpVersion!==PKG_VERSION)return fail('version');\n  const build=has(o,'build')?o.build:(typeof BUILD_ID==='string'?BUILD_ID:null);if(pkg.build!==build&&!((build==='96h10p7'&&pkg.build==='96h10p6')||(build==='96h10p8'&&['96h10p6','96h10p7'].includes(pkg.build))))return fail('build'); // BETA-P0.1: explicit v8/package4 compatibility, all remaining checks still mandatory\n  if(typeof pkg.save8!=='string')return fail('fields');if(pkg.save8.length>MAX_SAVE8)return fail('too-big');\n  if(!Number.isFinite(pkg.createdAt)||typeof pkg.saveId!=='string'||!/^s-[a-f0-9]{16}$/.test(pkg.saveId))return fail('fields');\n  const I=pkg.integrity;if(!plain(I)||!onlyKeys(I,['alg','save8','body'])||I.alg!=='SHA-256'||!HEX(I.save8,64)||!HEX(I.body,64))return fail('integrity');\n",
+        "after": "  if(!onlyKeys(pkg,KEYS)||KEYS.some(k=>!has(pkg,k)))return fail('fields');\n  if(pkg.format!==PKG_FORMAT)return fail('format');\n  if(pkg.mpVersion!==PKG_VERSION)return fail('version');\n  const build=has(o,'build')?o.build:(typeof BUILD_ID==='string'?BUILD_ID:null);if(pkg.build!==build&&!((build==='96h10p7'&&pkg.build==='96h10p6')||(build==='96h10p8'&&['96h10p6','96h10p7'].includes(pkg.build))||(build==='96h10p9'&&['96h10p6','96h10p7','96h10p8'].includes(pkg.build))))return fail('build'); // BETA-P0.1: explicit v8/package4 compatibility, all remaining checks still mandatory\n  if(typeof pkg.save8!=='string')return fail('fields');if(pkg.save8.length>MAX_SAVE8)return fail('too-big');\n  if(!Number.isFinite(pkg.createdAt)||typeof pkg.saveId!=='string'||!/^s-[a-f0-9]{16}$/.test(pkg.saveId))return fail('fields');\n  const I=pkg.integrity;if(!plain(I)||!onlyKeys(I,['alg','save8','body'])||I.alg!=='SHA-256'||!HEX(I.save8,64)||!HEX(I.body,64))return fail('integrity');\n"
+      }
+    ]
+  },
+  "research/mp1/client/view.js": {
+    "beforeSha256": "88723e5bd8eed24db5704917f40fd8d61a08e29c22006aed72363a1a08848de1",
+    "afterSha256": "068949603b0527f571154fcbd8f9daae8db5fa3adeb1e77da6b9c05040b9dc95",
+    "hunks": [
+      {
+        "before": "  return null;\n}\n/* MP.7.3: salt okunur sürüm işareti — telefonda (bilgisayarsız) doğru dağıtımın açıldığını görmek için; relay /mp/version ile aynı */\nconst MP_VERSION='MP.8.9b3';\nconst verLine=()=>'STARS '+MP_VERSION+' · oyun '+(typeof BUILD_ID==='string'?BUILD_ID:'?');\n/* MP.7.5: kapalı çok oyunculu düğmesi sol araç sütununun (#tools) son öğesi olur; açık panel eski kaplama konumunda (#app).\n   Sütun yeniden çizilirse düğme bir sonraki durum güncellemesinde geri eklenir. */\n",
+        "after": "  return null;\n}\n/* MP.7.3: salt okunur sürüm işareti — telefonda (bilgisayarsız) doğru dağıtımın açıldığını görmek için; relay /mp/version ile aynı */\nconst MP_VERSION='MP.8.9b4';\nconst verLine=()=>'STARS '+MP_VERSION+' · oyun '+(typeof BUILD_ID==='string'?BUILD_ID:'?');\n/* MP.7.5: kapalı çok oyunculu düğmesi sol araç sütununun (#tools) son öğesi olur; açık panel eski kaplama konumunda (#app).\n   Sütun yeniden çizilirse düğme bir sonraki durum güncellemesinde geri eklenir. */\n"
+      }
+    ]
+  },
+  "research/mp1/server/relay.js": {
+    "beforeSha256": "73430a385477a29baa0a65b8b9c6aea1a0937b0377ce84ac92561ec1ed3294b6",
+    "afterSha256": "ccf5ecaab2f285e3ccfb936a6e2352a52dd8c4e54f8ba60c8fa83ecb8d55dd22",
+    "hunks": [
+      {
+        "before": "  const manifest=JSON.parse(fs.readFileSync(path.join(ROOT,'RELEASE-MANIFEST.json'),'utf8'));\n  /* MP.7.3: dağıtım doğrulaması — çok oyunculu sürüm, oyun build'i ve sunulan MP dosyalarının kısa SHA-256 özetleri (gizli bilgi yok) */\n  const sha12=f=>{try{return crypto.createHash('sha256').update(fs.readFileSync(path.join(ROOT,f))).digest('hex').slice(0,12);}catch{return null;}};\n  const MP_VERSION_JSON=JSON.stringify({mp:'MP.8.9b3',build:manifest.build,files:Object.fromEntries(['research/mp0/mp-core.js','research/mp1/server/relay.js','research/mp1/client/mp1-host.js','research/mp1/client/join.js',\n    'research/mp6/mirror.js','research/mp6/client/guest-stars.js','research/mp71/client/mp71-dip.js','research/mp7/client/mp7-setup.js'].map(f=>[f.split('/').pop(),sha12(f)]))});\n  const ALLOW=new Set([...Object.keys(manifest.files),'research/mp0/mp-core.js',\n    'research/mp1/client/mp1.css','research/mp1/client/mp1-host.js','research/mp1/client/join.js','research/mp1/client/view.js',\n",
+        "after": "  const manifest=JSON.parse(fs.readFileSync(path.join(ROOT,'RELEASE-MANIFEST.json'),'utf8'));\n  /* MP.7.3: dağıtım doğrulaması — çok oyunculu sürüm, oyun build'i ve sunulan MP dosyalarının kısa SHA-256 özetleri (gizli bilgi yok) */\n  const sha12=f=>{try{return crypto.createHash('sha256').update(fs.readFileSync(path.join(ROOT,f))).digest('hex').slice(0,12);}catch{return null;}};\n  const MP_VERSION_JSON=JSON.stringify({mp:'MP.8.9b4',build:manifest.build,files:Object.fromEntries(['research/mp0/mp-core.js','research/mp1/server/relay.js','research/mp1/client/mp1-host.js','research/mp1/client/join.js',\n    'research/mp6/mirror.js','research/mp6/client/guest-stars.js','research/mp71/client/mp71-dip.js','research/mp7/client/mp7-setup.js'].map(f=>[f.split('/').pop(),sha12(f)]))});\n  const ALLOW=new Set([...Object.keys(manifest.files),'research/mp0/mp-core.js',\n    'research/mp1/client/mp1.css','research/mp1/client/mp1-host.js','research/mp1/client/join.js','research/mp1/client/view.js',\n"
+      }
+    ]
+  }
+}

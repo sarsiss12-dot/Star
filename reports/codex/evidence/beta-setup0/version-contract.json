@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "version": {
+    "mp": "MP.8.9b4",
+    "build": "96h10p9",
+    "files": {
+      "mp-core.js": "d1c948397660",
+      "relay.js": "ccf5ecaab2f2",
+      "mp1-host.js": "c8e2251d1811",
+      "join.js": "bc2732493741",
+      "mirror.js": "8162eea8af28",
+      "guest-stars.js": "727534446b38",
+      "mp71-dip.js": "4b7b5e64b5ba",
+      "mp7-setup.js": "4f8fef4ce1a9"
+    }
+  },
+  "allEightHashesMatch": true,
+  "save8": 8,
+  "package": 4,
+  "protocol": 1
+}

@@ -1606,7 +1606,7 @@ const View = {
     g.textBaseline='middle';g.globalAlpha=1;g.letterSpacing='0px';g.setLineDash([]);
     for(const j of jobs){
       const e=G.emps[j.emp],info=territoryOwnerInfo(j.emp);if(!info)continue;
-      const name=e.wild?'Korsanlar':e.crisisSide?'Kriz filosu':info.name;
+      const name=e.wild?(G.cfg.pirates===false?(e.crisisSide?'Kriz filosu':'Uzay canavarları'):'Korsanlar'):e.crisisSide?'Kriz filosu':info.name;
       const chars=Array.from(name),max=Math.min(190,this.vw-24);
       let text=name;
       while(chars.length&&g.measureText(text).width>max-14){chars.pop();text=chars.join('')+'…';}

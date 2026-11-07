@@ -52,6 +52,11 @@ await check('Same-day contact immediately reveals fleet owner',()=>{
 await check('Visible pirates are recognisable without a diplomatic contact',()=>{
   h.run('G.fleets[2].e=G.emps.find(e=>e.wild).id');h.draw();assert.ok(labels(h).some(l=>l.name==='Korsanlar'));
 });
+await check('SETUP.0 OFF shared wild owner labels monsters and crisis separately, never pirates',()=>{
+  h.run('G.cfg.pirates=false');h.draw();assert.ok(labels(h).some(l=>l.name==='Uzay canavarları'));assert.ok(!labels(h).some(l=>l.name==='Korsanlar'));
+  h.run('var w=G.emps[G.fleets[2].e];w.crisisSide=true');h.draw();assert.ok(labels(h).some(l=>l.name==='Kriz filosu'));
+  h.run('w.crisisSide=false;G.cfg.pirates=true');h.draw();
+});
 await check('Native Canvas name box really contains text pixels',()=>{
   const l=labels(h).find(l=>l.emp===1),g=h.elements.get('map').getContext('2d');assert.ok(l);
   const p=g.getImageData(Math.ceil(l.x+7),Math.ceil(l.y+2),Math.floor(l.w-10),15).data;

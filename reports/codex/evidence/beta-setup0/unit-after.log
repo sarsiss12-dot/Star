@@ -1,0 +1,24 @@
+PASS seed 11 KAPALI başlangıçta sıfır korsan; teknik kimlik ve kalıntılar korunur
+PASS seed 99 KAPALI başlangıçta sıfır korsan; teknik kimlik ve kalıntılar korunur
+PASS seed 404 KAPALI başlangıçta sıfır korsan; teknik kimlik ve kalıntılar korunur
+PASS AÇIK yuva zamanlayıcısı akıncı üretir; KAPALI aynı yol üretmez
+PASS KAPALI uzay canavarı doğar ve hareket eder; wildId silinmez
+FAIL KAPALI kalıntı savunması ve kriz devleti ayrı kalır; normal kriminal AI wild değildir AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- false
+
+    at /workspace/Star/tests/beta_setup0_pirates_test.cjs:10:428
+    at test (/workspace/Star/tests/beta_setup0_pirates_test.cjs:4:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_setup0_pirates_test.cjs:10:2)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+PASS eski hatalı KAPALI kayıtta yalnız korsan varlıkları onarılır; canavar/kalıntı/ID kalır
+PASS ret edilen Save8 yüklemesi korsan onarımını da atomik geri alır
+GEÇEN: 7 KALAN: 1

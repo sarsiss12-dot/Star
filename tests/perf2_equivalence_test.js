@@ -8,6 +8,7 @@
    supplyDistance'ın doğrudan geçit denetimi (B) eski gateSupplyNodes listesiyle her filo ve her sistem için aynı sonucu verir. */
 const fs=require('fs'),os=require('os'),path=require('path'),crypto=require('crypto'),assert=require('assert/strict');
 const {runtime}=require('./helpers/runtime'),{harness}=require('./helpers/95e-fixture'),P=require('./helpers/perf2-preservation');
+const originalStrip=P.stripReviewedP2,stripSetup=require('./helpers/beta-setup0-preservation.cjs').stripReviewedSetup0;P.stripReviewedP2=(f,s)=>originalStrip(f,['ai.js','main.js'].includes(f)?stripSetup(f,s):s);
 const {test,end}=harness(),root=path.resolve(__dirname,'..');
 const sha=s=>crypto.createHash('sha256').update(s).digest('hex');
 const SAVE=fs.readFileSync(path.join(__dirname,'fixtures/perf2/orta6-s404-m60.save'),'utf8');

@@ -1,0 +1,26 @@
+[
+  {
+    "name": "SP Pregame KAPALI gerçek dokunma + yeni Chromium süreçte Save8 yükleme",
+    "status": "PASS",
+    "state": {
+      "cfg": false,
+      "game": false,
+      "nests": 0,
+      "fleets": 0,
+      "rng": -1449254009,
+      "wild": 6
+    }
+  },
+  {
+    "name": "SP Pregame AÇIK gerçek dokunma + yeni Chromium süreçte Save8 yükleme",
+    "status": "PASS",
+    "state": {
+      "cfg": true,
+      "game": true,
+      "nests": 3,
+      "fleets": 3,
+      "rng": -1449254009,
+      "wild": 6
+    }
+  }
+]

@@ -2810,17 +2810,19 @@ function setupGame(cfg){
   });
 
   // --- korsan yuvaları: anavatanlardan uzak, sahipsiz sistemlere ---
+  G.nests = [];
+  if (cfg.pirates !== false){
   const nestCount = Math.max(2, Math.round(G.sys.length / 18));
   const free = G.sys.filter(sy => sy.owner < 0 &&
     G.emps.every(em => em.wild || em.home < 0 || hopDist(em.home, sy.id, 2) > 2));
   shuffle(rnd, free);
-  G.nests = [];
   for (let i = 0; i < Math.min(nestCount, free.length); i++){
     const sy = free[i];
     sy.nest = {hp: 900 + Math.floor(rnd()*500), timer: 60 + Math.floor(rnd()*120)};
     G.nests.push(sy.id);
     // yuvayı koruyan başlangıç filosu
     newFleet(wild, sy.id, [{c:'kor'},{c:'kor'},{c:'muh'}], 'Korsan Muhafızı');
+  }
   }
 
   // kayıp uygarlık kalıntıları ve kriz zamanlayıcısı
@@ -3007,7 +3009,7 @@ function fleetStatus(f){
     return {t:'YOLDA', c:'go', d: dest ? dest.name : ''};
   }
   if (hasShipment(f)) return {t:'SEVK BEKLİYOR',c:'wk',d:shipmentStatus(f)};
-  if (explorationEnabled(f)&&f.explore) return {t:({pirate:'KORSAN TEHDİDİ · BEKLİYOR',threat:'DÜŞMAN TEHDİDİ · BEKLİYOR',supply:'İKMAL YETERSİZ',complete:'KEŞİF TAMAMLANDI',route:'GÜVENLİ ROTA ARANIYOR',travel:'HEDEFE GİDİYOR',resupply:'İKMAL HATTINA DÖNÜYOR'})[f.explore.status]||'GÜVENLİ ROTA ARANIYOR',c:'wk'};
+  if (explorationEnabled(f)&&f.explore) return {t:({pirate:G.cfg.pirates===false?'KALINTI SAVUNMASI · BEKLİYOR':'KORSAN TEHDİDİ · BEKLİYOR',threat:'DÜŞMAN TEHDİDİ · BEKLİYOR',supply:'İKMAL YETERSİZ',complete:'KEŞİF TAMAMLANDI',route:'GÜVENLİ ROTA ARANIYOR',travel:'HEDEFE GİDİYOR',resupply:'İKMAL HATTINA DÖNÜYOR'})[f.explore.status]||'GÜVENLİ ROTA ARANIYOR',c:'wk'};
   if (fleetHasRole(f,'bilim'))     return {t:'BOŞTA · TARAMA BEKLİYOR', c:'id'};
   if (fleetHasRole(f,'koloni'))    return {t:'BOŞTA · HEDEF BEKLİYOR', c:'id'};
   return {t:'BEKLİYOR', c:'id'};
@@ -4295,6 +4297,15 @@ function dailyTick(dt){
 /* ---------- TİCARET SAVAŞI ----------
    Rota üzerindeki düşman veya korsan filoları kervan yağmalar:
    rota bir süre kapanır, yağmalayan ganimet alır. */
+// BETA-SETUP.0: repair only explicit OFF saves produced by the old setup bug.
+// Keep empire IDs, ruin defenders, monsters, crisis fleets and ordinary war raids.
+function repairDisabledPirates(){
+  if(G.cfg.pirates!==false)return;
+  for(const s of G.sys){delete s.nest;delete s.nestPow;}
+  G.nests=[];
+  if(G.upheaval?.k==='korsanCagi')G.upheaval=null;
+  if(validWildId(G.wildId)!==null)G.fleets=G.fleets.filter(f=>f.e!==G.wildId||f.monster);
+}
 function raidTick(){
   G.raids=G.raids||{};
   for(const k in G.raids)if(G.raids[k]<=G.day)delete G.raids[k];
@@ -7985,6 +7996,7 @@ function applySaveData(d){
   if(typeof DiplomaticInbox!=='undefined')DiplomaticInbox.restore(d.diplomaticInbox);
   if(typeof RemoteConstruction!=='undefined')RemoteConstruction.restore(d.construction);
   if(typeof Commerce!=='undefined')Commerce.restore(d.commerce);
+  repairDisabledPirates();
   if(typeof EconomyLedger!=='undefined')EconomyLedger.restore(d.economyHistory);
   if(typeof CommerceUI!=='undefined'){CommerceUI.selected=null;CommerceUI.hits=[];}
   loadCheckpoint('after:events');
@@ -8327,7 +8339,7 @@ function forceRedraw(sebep){
    Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
    Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
 /* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */
-const BUILD_ID = '96h10p8';
+const BUILD_ID = '96h10p9';
 const DIAG_MAX = 40;
 const DIAG = [];
 function logDiag(tur, mesaj){
@@ -9387,7 +9399,7 @@ function upheavalTick(){
   if (typeof crisisActive === 'function' && crisisActive()) return;
   if (rnd() > .035) return;                       // ayda ~%3,5
 
-  const keys = Object.keys(UPHEAVALS);
+  const keys = Object.keys(UPHEAVALS).filter(k=>G.cfg.pirates!==false||k!=='korsanCagi');
   const k = keys[Math.floor(rnd() * keys.length)];
   const U = UPHEAVALS[k];
   const sure = U.sure[0] + Math.floor(rnd() * (U.sure[1] - U.sure[0] + 1));

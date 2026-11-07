@@ -1,0 +1,26 @@
+[
+  {
+    "seed": 11,
+    "pirates": false,
+    "wild": 6,
+    "nests": 3,
+    "fleets": 3,
+    "ruins": 4
+  },
+  {
+    "seed": 99,
+    "pirates": false,
+    "wild": 6,
+    "nests": 3,
+    "fleets": 3,
+    "ruins": 4
+  },
+  {
+    "seed": 404,
+    "pirates": false,
+    "wild": 6,
+    "nests": 3,
+    "fleets": 3,
+    "ruins": 1
+  }
+]
