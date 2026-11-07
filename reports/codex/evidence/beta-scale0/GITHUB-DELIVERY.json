@@ -1,0 +1,18 @@
+{
+  "codeHead": "fcb14ddd20f1ca41691487518c8f196b9e8e804c",
+  "codeRemoteVerified": true,
+  "branch": "codex/stars-beta-scale0-galaxy-ai-colonies",
+  "base": "codex/stars-beta-setup1-galaxy-options",
+  "report": "reports/codex/BETA-SCALE0-SONUC.md",
+  "prAttempts": 1,
+  "prError": "Post \"https://api.github.com/graphql\": Forbidden",
+  "boardWriteSucceeded": false,
+  "boardError": "Post \"https://api.github.com/graphql\": Forbidden",
+  "boardScope": [
+    45,
+    37
+  ],
+  "completedStatusSet": false,
+  "mainMerge": false,
+  "deploy": false
+}

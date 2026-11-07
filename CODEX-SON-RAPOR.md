@@ -1,14 +1,14 @@
 # Son Codex raporu
 
-- Faz: **BETA-SETUP.1 / yalnız pano #42 — Pregame seçenekleri ve yıldız kapıları yerel kabul PASS**; kullanıcı/yayın onayı yok.
-- Rapor: [BETA-SETUP1-SONUC](reports/codex/BETA-SETUP1-SONUC.md).
-- Dal: `codex/stars-beta-setup1-galaxy-options`; taban `codex/stars-beta-ux0-names` @`eea55b2ddfae7de8f631eb43eb606585224f64d6`.
-- Kod/test/paket uzak HEAD: `50e244b0a7c2ebbd1defe5b9e1b6090e13b434a6`; nihai rapor commit SHA'sı son mesaj/uzak daldadır.
-- OFF kapı ortak inşaat/AI/uzak sipariş engeli, eski tek kapının genel ikmal etkisi, kapalı bekleyen kriz ve iki yönlü UI semantiği düzeltildi. Görünür MP yapı sahibi π dönüşümü eksikti; mevcut ID uzayına çevrildi. Eski kapı silinmez; önceden ödenmiş iş ek bedelsiz tamamlanır, OFF ise pasiftir; tahminî iade yok.
--14 ayar (13 grup+seed):210 başlangıç/Save8,205 uyumlu ham p10 eşitliği;42 kamu ayna varyantı. ON eski/yeni ve OFF bağımsız tekrar0–120ay121'er Save8/RNG noktası,30.ay yükleme aynı.19seed/209AI oranları20→43,35→69,60→128,100→209.
-- Native204/0; kapı12 bunun içinde, yeni ayna2/0 ayrıca. Gerçek yatay Chromium8/0+ON2/0, yerel MP5/0+ekA1 1/0. İlk FAIL'ler korunur. İsim9/0,korsan10/0,Konsey14/0,Save8 sınır19/0,PERF1 4/0,PERF2 5/0,piksel3/0.
-- Oyun96h10p11/PWA stars-v96h10p11/MP.8.9b6;Save8v8/paket4/protokol1. [Deterministik paket/hash](reports/codex/evidence/beta-setup1/RELEASE-VERIFIED.json): SHA256738da4fe71f200a16469abe647fd8b80be05977b14a905c30429caa2ee41f543,CRC32FF695D20.
-- PR bir deneme Forbidden. [Karşılaştırma/PR oluştur](https://github.com/sarsiss12-dot/Star/compare/codex/stars-beta-ux0-names...codex/stars-beta-setup1-galaxy-options?expand=1).
-- #42 başlangıç/sonuç ek yorumları Forbidden; son kamu okuması#42PROMPT HAZIR. #8KULLANICI ONAYI BEKLİYOR,#41TEST BEKLİYOR,#44PLANLANDI ve diğer durumlar korundu. TAMAMLANDI yok.
-- NOT RUN: fiziksel Android,gerçekLAN/internet/Render,Docker,tam MP73 B1–B4/MP75/MP8 N/R; AÇIK misafir uzaktan görev kuyruğu host aktarımı. MP doğrudan struct ve OFF misafir uzak sipariş reddi test edildi; ayrı kuyrukla karıştırma. Tarihsel lobi timeoutları kapanmış sayılmaz. Main merge/rebase/force-push/deploy yok.
-- Sonraki tek adım: kullanıcı cihazında bu paketin ayar/kapı ve eski ücretli iş politikası kabulü;#42 rapor/PR bağlantısı.
+- Faz: **BETA-SCALE.0 — #37 yerel kabul PASS; #45 kısmî hedef.** Kullanıcı/yayın onayı yok.
+- [Ana rapor](reports/codex/BETA-SCALE0-SONUC.md) · [Kanıtlar](reports/codex/evidence/beta-scale0/README.md).
+- Dal: `codex/stars-beta-scale0-galaxy-ai-colonies`; taban `codex/stars-beta-setup1-galaxy-options` @ `66ea8d700bc66b1fdb5f75d3a0f5d8f87251e9a8`.
+- Doğrulanmış kod/test/paket uzak HEAD: `fcb14ddd20f1ca41691487518c8f196b9e8e804c`. Nihai rapor commit SHA'sı son mesajda ve uzak dal HEAD'indedir.
+- **Yeni oyun: 30–500 sistem / 1–16 AI.** 1000 sistem ve 24/32/48 AI uzun kabulü geçmedi, pasif. 64 AI kimlik sınırına sığmaz. Son motorla 500/16 SP 120 ay ve iki bağımsız 120→121 Save8/RNG devamı PASS.
+- Kullanıcı kararıyla başlangıç kolonileri korunur. Sonradan kurulan/el değiştiren koloniler ON + 60 gün; manuel OFF ve eski kayıtlar korunur, odak bonusu değişmez. Koloni 12/0, renk 8/0, üretim/legacy 142/0.
+- Yerel 3 insan + 16 AI / 500 sistem R0–R4 **5/0**; MP8 N 9/0, MP74 7/0, MP75 6/0, MP73 yalnız A1 1/0. PERF.1 4/0, PERF.2 son 5/0, piksel 3/0. İlk FAIL kayıtları korunur.
+- 500/16 tam ay standart medyanı **2.533,7 ms**, p95 **3.555,6 ms** (n=120). 120. ay duraklatılmış rAF≈24,8/s, fiziksel FPS değildir. İkmal düğümü çağrısı ≈%80,9 azaldı; süre oynaklığı nedeniyle kararlı genel hızlanma yüzdesi yok. Erken görünürlük atlaması Save8 farkı nedeniyle geri alındı. [Standart istatistik özeti](reports/codex/evidence/beta-scale0/PERFORMANCE-SUMMARY.json).
+- Oyun **96h10p12**, PWA **stars-v96h10p12**, MP **MP.8.9b7**; Save8 v8 / paket4 / protokol1. [ZIP/hash](reports/codex/evidence/beta-scale0/RELEASE-VERIFIED.json): SHA256 `09f8a58c16380d0eae0a187dcd9b259597fb4b5d5b750296b427446cfe35a365`, CRC32 `E1ABA448`, 787.216 bayt.
+- PR bir deneme **Forbidden**. [Karşılaştırma](https://github.com/sarsiss12-dot/Star/compare/codex/stars-beta-setup1-galaxy-options...codex/stars-beta-scale0-galaxy-ai-colonies?expand=1). #33 başlangıç/sonuç yorumları da Forbidden; son kamu okumasında #37/#45 PROMPT HAZIR. Diğer 43 göreve ve TAMAMLANDI durumuna dokunulmadı.
+- **NOT RUN:** fiziksel Android/PC kabulü, gerçek LAN/internet/Render ve deploy. Main merge/rebase/force-push yapılmadı.
+- Sonraki tek faz: **BETA-SCALE.1 — geç oyun keşif/ikmal/sınır performansı**, aynı Save8/RNG ve 240 ay kabulü. Yüksek AI/1000 henüz açılmamalı. #25/#24/#10 ve tarihsel B1/A3 ayrı açık.

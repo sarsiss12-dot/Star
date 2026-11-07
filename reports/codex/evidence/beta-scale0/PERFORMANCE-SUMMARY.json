@@ -1,0 +1,100 @@
+{
+  "final500month": {
+    "n": 120,
+    "median": 2533.7000000178814,
+    "p95": 3555.600000023842,
+    "max": 4362.699999988079
+  },
+  "compare-supply-only": [
+    {
+      "systems": 200,
+      "ai": 16,
+      "arms": {
+        "control": {
+          "n": 10,
+          "median": 806.3499999940395,
+          "p95": 1011.5
+        },
+        "candidate": {
+          "n": 10,
+          "median": 606.7999999821186,
+          "p95": 842.8000000119209
+        }
+      },
+      "observedMedianReductionPercent": 24.747318163749732
+    },
+    {
+      "systems": 300,
+      "ai": 24,
+      "arms": {
+        "control": {
+          "n": 10,
+          "median": 1486.449999988079,
+          "p95": 1876.0999999642372
+        },
+        "candidate": {
+          "n": 10,
+          "median": 1416.25,
+          "p95": 2284.699999988079
+        }
+      },
+      "observedMedianReductionPercent": 4.72266137365146
+    },
+    {
+      "systems": 500,
+      "ai": 32,
+      "arms": {
+        "control": {
+          "n": 10,
+          "median": 6918.349999964237,
+          "p95": 8311.5
+        },
+        "candidate": {
+          "n": 10,
+          "median": 4692.700000017881,
+          "p95": 5222.5
+        }
+      },
+      "observedMedianReductionPercent": 32.17024290412975
+    }
+  ],
+  "compare-AA": [
+    {
+      "systems": 200,
+      "ai": 16,
+      "arms": {
+        "control": {
+          "n": 10,
+          "median": 746.8999999761581,
+          "p95": 1068.199999988079
+        },
+        "candidate": {
+          "n": 10,
+          "median": 1066.1999999582767,
+          "p95": 1343.3999999761581
+        }
+      },
+      "observedMedianReductionPercent": -42.75003347065349
+    }
+  ],
+  "compare-reverse": [
+    {
+      "systems": 500,
+      "ai": 32,
+      "arms": {
+        "candidate": {
+          "n": 3,
+          "median": 5293.600000023842,
+          "p95": 6942.5
+        },
+        "control": {
+          "n": 3,
+          "median": 5662.899999976158,
+          "p95": 6200
+        }
+      },
+      "observedMedianReductionPercent": 6.521393631423322
+    }
+  ],
+  "method": "Arithmetic mean of middle two samples for even n; nearest-rank p95. Original benchmark JSON median fields used upper middle order statistic and remain unchanged; report uses this corrected descriptive summary. No tests/assertions or raw samples changed."
+}
