@@ -1,0 +1,13 @@
+PASS 0 KAPALI yeni yerel kapı: izin/kaynak/kuyruk engeli
+PASS 1 KAPALI yeni yerel kapı: izin/kaynak/kuyruk engeli
+PASS KAPALI uzaktan sipariş reddedilir; kaynak ve görev yok
+PASS AI KAPALI kapı seçmez; AÇIK uygun zengin AI seçebilir
+PASS KAPALI tek başına eski kapı genel ileri ikmal üssü sayılmaz
+PASS AÇIK maliyet bir kez ödenir, gerçek yapı tamamlanır ve gemi serbest kalır
+PASS iki gerçek kapı rota, mesafe ve varış süresi avantajı; anlık değil
+PASS kapıya komşu sahipsiz sistemde ikmal mesafesi ON0/OFF1
+PASS yabancı/düşman kapı izinleri korunur, karşı yön izin açmaz
+PASS eski OFF Save8 kapısı silinmez; önceden ödenmiş iş tamamlanır pasif kalır, çift ödeme/iade yok
+PASS kriz şiddeti OFF + erken zamanlama kaydı yeni kriz yaratmaz
+PASS legacy bekleyen kriz OFF ayarında başlamaz, aktif eski kriz sessiz silinmez
+GEÇEN: 12 KALAN: 0

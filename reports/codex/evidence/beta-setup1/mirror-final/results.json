@@ -1,0 +1,54 @@
+[
+  {
+    "actor": 1,
+    "status": "PASS",
+    "detail": {
+      "actor": 1,
+      "hostBuilt": {
+        "kapi": 1,
+        "sensor": 1
+      },
+      "guestOwner": 0,
+      "guestBuilt": {
+        "kapi": 0,
+        "sensor": 0
+      },
+      "guestWork": [
+        {
+          "key": "platform",
+          "e": 0,
+          "left": 30,
+          "tot": 60
+        }
+      ],
+      "seed": 1234,
+      "rs": 1
+    }
+  },
+  {
+    "actor": 2,
+    "status": "PASS",
+    "detail": {
+      "actor": 2,
+      "hostBuilt": {
+        "kapi": 2,
+        "sensor": 2
+      },
+      "guestOwner": 0,
+      "guestBuilt": {
+        "kapi": 0,
+        "sensor": 0
+      },
+      "guestWork": [
+        {
+          "key": "platform",
+          "e": 0,
+          "left": 30,
+          "tot": 60
+        }
+      ],
+      "seed": 1234,
+      "rs": 1
+    }
+  }
+]

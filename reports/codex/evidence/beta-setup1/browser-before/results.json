@@ -1,0 +1,14 @@
+{
+  "rows": [
+    {
+      "name": "800x360 bütün anahtarlar gerçek tap ile CFG ve görünür seçimi değiştirir",
+      "status": "PASS"
+    },
+    {
+      "name": "800x360 kriz şiddeti/zamanlama iki yönde tutarlı; kapalıdan açma görünür",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n'kapali' !== 'normal'\n\n    at /workspace/Star/tests/browser-beta-setup1.cjs:11:246\n    at async test (/workspace/Star/tests/browser-beta-setup1.cjs:4:39)\n    at async /workspace/Star/tests/browser-beta-setup1.cjs:11:1"
+    }
+  ],
+  "errors": []
+}

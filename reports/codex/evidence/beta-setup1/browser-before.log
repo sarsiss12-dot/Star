@@ -1,0 +1,9 @@
+PASS 800x360 bütün anahtarlar gerçek tap ile CFG ve görünür seçimi değiştirir
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+'kapali' !== 'normal'
+
+    at /workspace/Star/tests/browser-beta-setup1.cjs:11:246
+    at async test (/workspace/Star/tests/browser-beta-setup1.cjs:4:39)
+    at async /workspace/Star/tests/browser-beta-setup1.cjs:11:1
+GEÇEN: 1 KALAN: 1

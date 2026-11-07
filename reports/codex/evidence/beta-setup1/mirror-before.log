@@ -1,0 +1,8 @@
+FAIL actor 1 structure owner must use same guest ID space as system owner
+
+1 !== 0
+
+FAIL actor 2 structure owner must use same guest ID space as system owner
+
+2 !== 0
+

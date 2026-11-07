@@ -1,0 +1,22 @@
+{
+  "rows": [
+    {
+      "name": "800x360 bütün anahtarlar gerçek tap ile CFG ve görünür seçimi değiştirir",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "800x360 kriz şiddeti/zamanlama iki yönde tutarlı; kapalıdan açma görünür",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "800x360 boyut/şekil/zorluk/konsey/kalıntı/AI sayısı ve tohum gerçek UI yolları",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "800x360 CFG→G.cfg→Save8; KAPALI panelde kapı inşa edilemez ve uzaktan neden görünür",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n1 !== 0\n\n    at /workspace/Star/tests/browser-beta-setup1.cjs:13:1032\n    at async test (/workspace/Star/tests/browser-beta-setup1.cjs:4:148)\n    at async /workspace/Star/tests/browser-beta-setup1.cjs:13:1"
+    }
+  ],
+  "errors": []
+}

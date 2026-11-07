@@ -1,0 +1,109 @@
+{
+  "rows": [
+    {
+      "name": "800x360 bütün anahtarlar gerçek tap ile CFG ve görünür seçimi değiştirir",
+      "status": "PASS"
+    },
+    {
+      "name": "800x360 kriz şiddeti/zamanlama iki yönde tutarlı; kapalıdan açma görünür",
+      "status": "PASS"
+    },
+    {
+      "name": "800x360 boyut/şekil/zorluk/konsey/kalıntı/AI sayısı ve tohum gerçek UI yolları",
+      "status": "PASS"
+    },
+    {
+      "name": "800x360 CFG→G.cfg→Save8; KAPALI panelde kapı inşa edilemez ve uzaktan neden görünür",
+      "status": "PASS",
+      "data": {
+        "cfg": {
+          "name": "Yeni Hanedan",
+          "race": "insan",
+          "traits": [],
+          "size": "kucuk",
+          "shape": "kume",
+          "diff": "kabus",
+          "seed": 449072941,
+          "color": null,
+          "ethics": {
+            "mil": 0,
+            "aut": 0,
+            "mat": 0,
+            "ahl": 0
+          },
+          "civics": [],
+          "origin": "standart",
+          "sigil": "simetrik",
+          "monoRes": "min",
+          "look": "humanoid",
+          "portraitVariant": 0,
+          "mizac": "yayilmaci",
+          "crisis": "kapali",
+          "ruins": "cok",
+          "council": "seyrek",
+          "physio": "humanoid",
+          "pirates": false,
+          "gates": false,
+          "crisisPower": "kapali",
+          "aiOrigins": false,
+          "aiOriginChance": 100,
+          "randomEvents": false,
+          "aiCount": 10
+        }
+      }
+    },
+    {
+      "name": "960x540 bütün anahtarlar gerçek tap ile CFG ve görünür seçimi değiştirir",
+      "status": "PASS"
+    },
+    {
+      "name": "960x540 kriz şiddeti/zamanlama iki yönde tutarlı; kapalıdan açma görünür",
+      "status": "PASS"
+    },
+    {
+      "name": "960x540 boyut/şekil/zorluk/konsey/kalıntı/AI sayısı ve tohum gerçek UI yolları",
+      "status": "PASS"
+    },
+    {
+      "name": "960x540 CFG→G.cfg→Save8; KAPALI panelde kapı inşa edilemez ve uzaktan neden görünür",
+      "status": "PASS",
+      "data": {
+        "cfg": {
+          "name": "Yeni Hanedan",
+          "race": "insan",
+          "traits": [],
+          "size": "kucuk",
+          "shape": "kume",
+          "diff": "kabus",
+          "seed": 935389215,
+          "color": null,
+          "ethics": {
+            "mil": 0,
+            "aut": 0,
+            "mat": 0,
+            "ahl": 0
+          },
+          "civics": [],
+          "origin": "standart",
+          "sigil": "simetrik",
+          "monoRes": "min",
+          "look": "humanoid",
+          "portraitVariant": 0,
+          "mizac": "yayilmaci",
+          "crisis": "kapali",
+          "ruins": "cok",
+          "council": "seyrek",
+          "physio": "humanoid",
+          "pirates": false,
+          "gates": false,
+          "crisisPower": "kapali",
+          "aiOrigins": false,
+          "aiOriginChance": 100,
+          "randomEvents": false,
+          "aiCount": 10
+        }
+      }
+    }
+  ],
+  "errors": []
+}

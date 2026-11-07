@@ -2810,6 +2810,7 @@ const UI = {
       }
       if(typeof ArchiveUI!=='undefined'&&View.sel?.e===0&&View.sel.ships.some(sh=>sh.c==='ins'))h+=`<button class="abtn pri" data-a="remoteBuild" data-x="${View.sel.id}">Seçili gemiyle bu sisteme uzaktan inşaat</button>`;
       const builders = G.fleets.filter(f=>f.e===0 && fleetHasRole(f,'insaat') && f.sys===s.id);
+      if(G.cfg.gates===false)h+='<div class="mini">Yıldız kapıları bu galakside kapalı: yeni inşa, geçiş ve kapı ikmali yok. Eski kapılar korunur; önceden ödenmiş işler ek bedel/iade olmadan tamamlanır ve pasif kalır.</div>';
       const avail = Object.keys(STRUCTS).filter(k=>structAllowed(e, s, k));
       if (builders.length && avail.length){
         h += `<div class="mini" style="color:#6ff2c8">🔧 İnşaat gemisi burada — yapı seçebilirsin</div>`;
@@ -8991,15 +8992,15 @@ function renderSetup(){
     /* ═══ FAZ 53: GALAKSİ ÖZELLİK ANAHTARLARI ═══ */
     h += `<div class="sect"><h2>🌌 GALAKSİ ÖZELLİKLERİ</h2>
       <div class="mini">Bu anahtarlar galaksinin karakterini belirler.
-        Kapalı özellikler oyunda hiç görünmez.</div>`;
+        Her ayar yalnız aşağıda belirtilen sistemi etkiler; savaş, diplomasi ve diğer tehditler kendi kurallarıyla sürer.</div>`;
     const tog = (etiket, aciklama, alan, acikMi) => `
       <button class="opt ${acikMi?'on':''}" data-a="${alan}">
         ${etiket}<small>${aciklama} — <b>${acikMi?'AÇIK':'KAPALI'}</b></small></button>`;
     h += `<div class="grid g2">`;
     h += tog('AI Devletlerine Rastgele Köken', 'AI kökenleri dengeli havuzdan seçilir. Altın Çağ gibi aşırı güçlü başlangıçlar rastgele dağıtılmaz.', 'togAIOrigins', c.aiOrigins !== false);
-    h += tog('☠ Korsan Tehdidi', 'Yağmacı filolar ve korsan yuvaları',
+    h += tog('☠ Korsan Tehdidi', 'Korsan yuvaları, filoları ve baskınları. Kapalıyken kalıntılar, canavarlar ve ayrı kriz ayarı etkilenmez',
              'togPirate', c.pirates !== false);
-    h += tog('🌀 Yıldız Kapıları', 'Uzak sistemler arası kısayol ağı',
+    h += tog('🌀 Yıldız Kapıları', 'Hazır ağ vermez. Açıkken devletler kapı inşa edebilir; izinli kapılar hızlı ulaşım ve ikmal sağlar. Kapalıyken yeni inşa ve kullanım yok',
              'togGate', c.gates !== false);
     h += tog('🎲 Rastgele Olaylar',
       'Maden kazası, salgın, tesadüfi hikâye zincirleri ve galaktik çalkantılar; diplomasi, casusluk, savaş ve keşif devam eder',
@@ -9010,12 +9011,12 @@ function renderSetup(){
     h += `<div class="ph">☣ KRİZ ŞİDDETİ</div><div class="grid g3">`;
     [['kapali','KAPALI','Hiçlik Sürüsü hiç gelmez'],
      ['normal','NORMAL ×1','Dengeli kıyamet'],
-     ['acimasiz','ACIMASIZ ×2','İki kat filo, iki kat açlık']].forEach(k => {
+     ['acimasiz','ACIMASIZ ×2','Dalga gücü bütçesi ×2; gemi sınırları korunur']].forEach(k => {
       const on = (c.crisisPower || 'normal') === k[0];
       h += `<button class="opt ${on?'on':''}" data-a="crisisPower" data-x="${k[0]}">
         ${k[1]}<small>${k[2]}</small></button>`;
     });
-    h += `</div></div>`;
+    h += `</div><div class="mini">Şiddet veya zamanlama KAPALI ise yeni kriz başlamaz. Zamanlama yeniden açılırsa kapalı şiddet NORMAL olur. Özel AI köken zarları bağımsızdır; oyuncunun kökeni değişmez.</div></div>`;
     h += `<div class="sect"><h2>GALAKSİ</h2><div class="grid g4">`;
     for (const k in SIZES) h += `<button class="opt ${c.size===k?'on':''}" data-a="size" data-x="${k}">${SIZES[k].n}<small>${SIZES[k].sys} sistem</small></button>`;
     h += `</div><h2>AI DEVLET SAYISI</h2><div class="btnrow"><button class="btn" data-a="aiCount" data-x="-1" ${aiCountFor(c)<=1?'disabled':''} aria-label="AI sayısını azalt">−</button><b id="aiCountValue">${aiCountFor(c)} AI</b><button class="btn" data-a="aiCount" data-x="1" ${aiCountFor(c)>=11?'disabled':''} aria-label="AI sayısını artır">+</button></div><div class="mini" id="aiCountHelp">Oyuncu dahil ${aiCountFor(c)+1} normal devlet. Korsanlar ve sonradan doğan devletler hariç. 1–11 AI.</div>${aiCountFor(c)+1>SIZES[c.size].sys/4?'<div class="mini">Yoğun galaksi: başkent mesafeleri daralabilir; komşu başlangıçlar oluşabilir.</div>':''}<div class="grid g3" style="margin-top:8px">`;
@@ -9032,7 +9033,7 @@ function renderSetup(){
       h += `<button class="opt ${c.crisis===k?'on':''}" data-a="crisisSet" data-x="${k}">${C.n}<small>${C.d}</small></button>`;
     }
     h += `</div><div class="mini" style="margin-top:6px">Galaksinin dışından gelen bir istila.
-      Gücü, o andaki toplam filo gücüne göre ölçeklenir — güçlüysen daha sert gelir.</div></div>`;
+      Güç; filo, üretim ve yerleşimle ölçeklenir. Gösterilen ay aralığında başlar; oyuncunun Altın Çağ kökeni takvimi en erken 72. aya kadar öne çekebilir.</div></div>`;
 
     h += `<div class="sect"><h2>GALAKTİK KONSEY</h2><div class="grid g4">`;
     for (const k in COUNCIL_PACE){
@@ -9040,8 +9041,7 @@ function renderSetup(){
       h += `<button class="opt ${c.council===k?'on':''}" data-a="councilSet" data-x="${k}">${P.n}<small>${P.d}</small></button>`;
     }
     h += `</div><div class="mini" style="margin-top:6px">Konsey kararları galaksi çapında bağlayıcıdır:
-      silahsızlanma, yaptırım, savaş yasağı. Yalnızca <b>Pasifist 2+</b> bir devlet kurabilir —
-      sen kurmazsan bir yapay zekâ kurar. Başkanlık ayrı bir zafer yoludur.</div></div>`;
+      silahsızlanma, yaptırım, savaş yasağı. Erken kuruluş için Pasifist 2, temas ve etki gerekir. 100. aydan itibaren en az üç temaslı devlet varsa kongreyle de kurulabilir. KAPALI, kuruluşu devre dışı bırakır; SIK/NORMAL/SEYREK oylama aralığını belirler.</div></div>`;
 
     h += `<div class="sect"><h2>KAYIP UYGARLIK KALINTILARI</h2><div class="grid g4">`;
     for (const k in RUIN_LEVELS){
@@ -9281,7 +9281,7 @@ function setupClickHandler(e){
   else if (a === 'mono'){ CFG.monoRes = x; safeRenderSetup(); }
   else if (a === 'origin'){ CFG.origin = Object.hasOwn(ORIGINS,x)?x:'standart'; safeRenderSetup();requestAnimationFrame(()=>document.getElementById('originDetails')?.scrollIntoView?.({block:'nearest'})); }
   else if (a === 'councilSet'){ CFG.council = x; safeRenderSetup(); }
-  else if (a === 'crisisSet'){ CFG.crisis = x; safeRenderSetup(); }
+  else if (a === 'crisisSet'){ CFG.crisis = x;if(x==='kapali')CFG.crisisPower='kapali';else if(CFG.crisisPower==='kapali')CFG.crisisPower='normal';safeRenderSetup(); }
   else if (a === 'ruinSet'){ CFG.ruins = x; safeRenderSetup(); }
   else if (a === 'aiCount'){ CFG.aiCount=Math.max(1,Math.min(11,aiCountFor(CFG)+Number(x)));safeRenderSetup(); }
   else if (a === 'size'){ CFG.aiCount=aiCountFor(CFG);CFG.size = x; safeRenderSetup(); }

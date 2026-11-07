@@ -1,0 +1,115 @@
+{
+  "status": "PASS",
+  "density": [
+    {
+      "size": "kucuk",
+      "aiCount": 11,
+      "seed": 11,
+      "ms": 196.85075899999998,
+      "systems": 30,
+      "normal": 12,
+      "minCapitalDistance": 686.5256017263631
+    },
+    {
+      "size": "kucuk",
+      "aiCount": 11,
+      "seed": 23,
+      "ms": 154.59323700000004,
+      "systems": 30,
+      "normal": 12,
+      "minCapitalDistance": 703.991012484468
+    },
+    {
+      "size": "kucuk",
+      "aiCount": 11,
+      "seed": 42,
+      "ms": 159.28276900000003,
+      "systems": 30,
+      "normal": 12,
+      "minCapitalDistance": 476.82270232326374
+    },
+    {
+      "size": "kucuk",
+      "aiCount": 11,
+      "seed": 99,
+      "ms": 153.48577799999998,
+      "systems": 30,
+      "normal": 12,
+      "minCapitalDistance": 663.689574593092
+    },
+    {
+      "size": "kucuk",
+      "aiCount": 11,
+      "seed": 404,
+      "ms": 155.897879,
+      "systems": 30,
+      "normal": 12,
+      "minCapitalDistance": 669.1701631066834
+    },
+    {
+      "size": "ulu",
+      "aiCount": 1,
+      "seed": 11,
+      "ms": 162.5837640000002,
+      "systems": 100,
+      "normal": 2,
+      "minCapitalDistance": 5050.110767561785
+    },
+    {
+      "size": "ulu",
+      "aiCount": 1,
+      "seed": 23,
+      "ms": 151.03381400000012,
+      "systems": 100,
+      "normal": 2,
+      "minCapitalDistance": 4371.873315171732
+    },
+    {
+      "size": "ulu",
+      "aiCount": 1,
+      "seed": 42,
+      "ms": 166.38109999999983,
+      "systems": 100,
+      "normal": 2,
+      "minCapitalDistance": 3157.4278045805263
+    },
+    {
+      "size": "ulu",
+      "aiCount": 1,
+      "seed": 99,
+      "ms": 155.38193800000022,
+      "systems": 100,
+      "normal": 2,
+      "minCapitalDistance": 3041.9731895000737
+    },
+    {
+      "size": "ulu",
+      "aiCount": 1,
+      "seed": 404,
+      "ms": 159.87046800000007,
+      "systems": 100,
+      "normal": 2,
+      "minCapitalDistance": 3415.113927462541
+    }
+  ],
+  "pace": [
+    {
+      "pace": "sik",
+      "status": "PASS",
+      "nextAgendaIn": 12,
+      "campaignStarted": true
+    },
+    {
+      "pace": "normal",
+      "status": "PASS",
+      "nextAgendaIn": 18,
+      "campaignStarted": true
+    },
+    {
+      "pace": "seyrek",
+      "status": "PASS",
+      "nextAgendaIn": 30,
+      "campaignStarted": true
+    }
+  ]
+}

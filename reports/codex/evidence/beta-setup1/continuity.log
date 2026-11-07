@@ -1,0 +1,8 @@
+PASS ON control month 0
+PASS ON control month 30
+PASS ON control month 120
+PASS OFF independent repeat month 0
+PASS OFF independent repeat month 30
+PASS OFF independent repeat month 120
+PASS 42 public-option mirrors; actual seed/RNG not transmitted
+PASS real ruin reward improves construction; old 50% copy was inaccurate

@@ -1,0 +1,377 @@
+{
+  "results": [
+    {
+      "name": "A1 rehber 1–8: oda, iki farklı devlet, hazır, başlat; iki ekranda galaksi; sürüm işareti lobi / başlangıç / MP çubuğunda ve /mp/version oyun build'iyle aynı",
+      "status": "PASS",
+      "ms": 27883
+    },
+    {
+      "name": "P01 #1 host ve misafir panel sahipliği / ayna yenilemesi",
+      "status": "PASS",
+      "ms": 25614
+    },
+    {
+      "name": "P03 #3 tek dokunma, bekleyen gerçek ACK, panel koruması ve yeniden bağlantı",
+      "status": "PASS",
+      "ms": 5259
+    },
+    {
+      "name": "P04 #4/#21 iki insan savaş bitişi, güvenli haber aynası ve ambargo",
+      "status": "PASS",
+      "ms": 2017
+    },
+    {
+      "name": "A3 rehber 13–15: misafir bağlantısı kopar ve döner → aynı devlet; host oyun kaydı alır (MP.4 paketi doğrulanır)",
+      "status": "PASS",
+      "ms": 3413
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "startModal": [
+      "🛰 DANIŞMAN",
+      ""
+    ],
+    "ux0Names": {
+      "host": [
+        "Kenvis Karargâhı",
+        "Orraar Meclisi",
+        "Rhyreon Ortaklığı",
+        "Feneve Konsorsiyumu",
+        "İxirar Lejyonu",
+        "Karvove Şurası",
+        "Qalreor Donanması",
+        "Kızıl Pençe Çetesi"
+      ],
+      "guestOwn": "Orraar Meclisi",
+      "guestHost": "Kenvis Karargâhı"
+    },
+    "setup1": {
+      "hostCfg": {
+        "pirates": false,
+        "gates": false,
+        "randomEvents": false,
+        "aiOrigins": false,
+        "aiOriginChance": 35,
+        "crisisPower": "kapali",
+        "crisis": "kapali",
+        "council": "seyrek",
+        "ruins": "az",
+        "size": "orta",
+        "shape": "sarmal",
+        "diff": "normal",
+        "aiCount": 6
+      },
+      "guestCfg": {
+        "pirates": false,
+        "gates": false,
+        "randomEvents": false,
+        "aiOrigins": false,
+        "aiOriginChance": 35,
+        "crisisPower": "kapali",
+        "crisis": "kapali",
+        "council": "seyrek",
+        "ruins": "az",
+        "size": "orta",
+        "shape": "sarmal",
+        "diff": "normal",
+        "aiCount": 6
+      },
+      "fixture": {
+        "sys": 34,
+        "fleet": 22,
+        "res": "{\"min\":10000,\"ene\":2000,\"yiy\":180,\"ala\":10000,\"ara\":0,\"tuk\":150,\"etk\":400}"
+      },
+      "rejected": {
+        "v": 1,
+        "type": "result",
+        "seq": 1,
+        "cid": "jmw6m9ymte7r9m6l9",
+        "status": "rejected",
+        "code": "rules:engine",
+        "rev": 10,
+        "detail": [
+          "İnşaat başlatılamadı — kaynak veya konum uygun değil"
+        ],
+        "ms": 33
+      },
+      "cost": {
+        "min": 868,
+        "ala": 366
+      },
+      "paid": {
+        "min": 9132,
+        "ene": 2000,
+        "yiy": 180,
+        "ala": 9634,
+        "ara": 0,
+        "tuk": 150,
+        "etk": 400
+      },
+      "gateCompleted": true,
+      "legacyGatePreserved": true,
+      "seedDisclosure": "actual galaxy seed is intentionally not sent; native mirror tests assert cosmetic seed and rs=1"
+    },
+    "setup0": [
+      {
+        "who": "host",
+        "cfg": false,
+        "game": false,
+        "nests": 0,
+        "pirateFleets": 0,
+        "ownName": "Kenvis Karargâhı",
+        "ownId": 0
+      },
+      {
+        "who": "guest",
+        "cfg": null,
+        "game": false,
+        "nests": 0,
+        "pirateFleets": 0,
+        "ownName": "Orraar Meclisi",
+        "ownId": 0
+      }
+    ],
+    "version": {
+      "mp": "MP.8.9b6",
+      "build": "96h10p11",
+      "files": {
+        "mp-core.js": "eed97b112abb",
+        "relay.js": "55d1926afc52",
+        "mp1-host.js": "c8e2251d1811",
+        "join.js": "bc2732493741",
+        "mirror.js": "c56eeb3a3180",
+        "guest-stars.js": "727534446b38",
+        "mp71-dip.js": "4b7b5e64b5ba",
+        "mp7-setup.js": "ab7780492379"
+      }
+    },
+    "unsupported": [
+      "autoEvent",
+      "diagCopy",
+      "joinRebel",
+      "leaveRebel",
+      "mapFix",
+      "physio",
+      "restart",
+      "rollName",
+      "sandbox",
+      "sitPick",
+      "stashNote",
+      "survey",
+      "terra",
+      "toTitle",
+      "tplDel",
+      "tplLoad",
+      "tplSave",
+      "trigCrisis"
+    ],
+    "guestDiag": "STARS MP.8.9b6 · oyun 96h10p11 · misafir · host bağlı · aşama: ready · ayna r8 16:27:39 · kurulum 6 ms · son komut: ok · son hata: rules:engine",
+    "p01Host": [
+      {
+        "action": "diploPane",
+        "x": null,
+        "beforeHead": "DİPLOMASİ\n      ✕",
+        "beforeKey": "diplo:states:all",
+        "afterHead": "DİPLOMASİ\n      ✕",
+        "afterKey": "diplo:states:all",
+        "stolen": false,
+        "modalUnchanged": true
+      },
+      {
+        "action": "globalPane",
+        "x": "bilim",
+        "beforeHead": "✦ BİLİM✕",
+        "beforeKey": "science",
+        "afterHead": "✦ BİLİM✕",
+        "afterKey": "science",
+        "stolen": false,
+        "modalUnchanged": true
+      },
+      {
+        "action": "globalPane",
+        "x": "imp",
+        "beforeHead": "👑 DEVLET\n        ✕",
+        "beforeKey": "global:imp",
+        "afterHead": "👑 DEVLET\n        ✕",
+        "afterKey": "global:imp",
+        "stolen": false,
+        "modalUnchanged": true
+      },
+      {
+        "action": "globalPane",
+        "x": "ekonomi",
+        "beforeHead": "📊 EKONOMİ MERKEZİ✕",
+        "beforeKey": "economy",
+        "afterHead": "📊 EKONOMİ MERKEZİ✕",
+        "afterKey": "economy",
+        "stolen": false,
+        "modalUnchanged": true
+      },
+      {
+        "action": "fedPane",
+        "x": null,
+        "beforeHead": "🏛 FEDERASYON\n        ✕",
+        "beforeKey": "federation:general",
+        "afterHead": "🏛 FEDERASYON\n        ✕",
+        "afterKey": "federation:general",
+        "stolen": false,
+        "modalUnchanged": true
+      },
+      {
+        "action": "marketPane",
+        "x": null,
+        "beforeHead": "💱 BORSA KAPALI\n          ✕",
+        "beforeKey": "market",
+        "afterHead": "💱 BORSA KAPALI\n          ✕",
+        "afterKey": "market",
+        "stolen": false,
+        "modalUnchanged": true
+      },
+      {
+        "action": "tab",
+        "x": "intel",
+        "beforeHead": "🌐 GALAKTİK KONSEY\n        ✕",
+        "beforeKey": "council",
+        "afterHead": "🌐 GALAKTİK KONSEY\n        ✕",
+        "afterKey": "council",
+        "stolen": false,
+        "modalUnchanged": true
+      },
+      {
+        "action": "news",
+        "x": null,
+        "beforeHead": "🌐 GALAKTİK KONSEY\n        ✕",
+        "beforeKey": "council",
+        "afterHead": "🌐 GALAKTİK KONSEY\n        ✕",
+        "afterKey": "council",
+        "stolen": false,
+        "modalUnchanged": true
+      },
+      {
+        "action": "sidebar:sistem",
+        "current": "sistem",
+        "overlay": false
+      },
+      {
+        "action": "sidebar:filo",
+        "current": "filo",
+        "overlay": false
+      }
+    ],
+    "p01Guest": [
+      {
+        "action": "diploPane",
+        "x": null,
+        "beforeHead": "DİPLOMASİ\n      ✕",
+        "beforeKey": "diplo:states:all",
+        "afterHead": "DİPLOMASİ\n      ✕",
+        "afterKey": "diplo:states:all",
+        "stolen": false,
+        "modalUnchanged": true
+      },
+      {
+        "action": "globalPane",
+        "x": "bilim",
+        "beforeHead": "✦ BİLİM✕",
+        "beforeKey": "science",
+        "afterHead": "✦ BİLİM✕",
+        "afterKey": "science",
+        "stolen": false,
+        "modalUnchanged": true
+      },
+      {
+        "action": "globalPane",
+        "x": "imp",
+        "beforeHead": "👑 DEVLET\n        ✕",
+        "beforeKey": "global:imp",
+        "afterHead": "👑 DEVLET\n        ✕",
+        "afterKey": "global:imp",
+        "stolen": false,
+        "modalUnchanged": true
+      },
+      {
+        "action": "globalPane",
+        "x": "ekonomi",
+        "beforeHead": "📊 EKONOMİ MERKEZİ✕",
+        "beforeKey": "economy",
+        "afterHead": "📊 EKONOMİ MERKEZİ✕",
+        "afterKey": "economy",
+        "stolen": false,
+        "modalUnchanged": true
+      },
+      {
+        "action": "fedPane",
+        "x": null,
+        "beforeHead": "🏛 FEDERASYON\n        ✕",
+        "beforeKey": "federation:general",
+        "afterHead": "🏛 FEDERASYON\n        ✕",
+        "afterKey": "federation:general",
+        "stolen": false,
+        "modalUnchanged": true
+      },
+      {
+        "action": "marketPane",
+        "x": null,
+        "beforeHead": "💱 BORSA KAPALI\n          ✕",
+        "beforeKey": "market",
+        "afterHead": "💱 BORSA KAPALI\n          ✕",
+        "afterKey": "market",
+        "stolen": false,
+        "modalUnchanged": true
+      },
+      {
+        "action": "tab",
+        "x": "intel",
+        "beforeHead": "🌐 GALAKTİK KONSEY\n        ✕",
+        "beforeKey": "council",
+        "afterHead": "🌐 GALAKTİK KONSEY\n        ✕",
+        "afterKey": "council",
+        "stolen": false,
+        "modalUnchanged": true
+      },
+      {
+        "action": "news",
+        "x": null,
+        "beforeHead": "🌐 GALAKTİK KONSEY\n        ✕",
+        "beforeKey": "council",
+        "afterHead": "🌐 GALAKTİK KONSEY\n        ✕",
+        "afterKey": "council",
+        "stolen": false,
+        "modalUnchanged": true
+      },
+      {
+        "action": "sidebar:sistem",
+        "current": "sistem",
+        "overlay": false
+      },
+      {
+        "action": "sidebar:filo",
+        "current": "filo",
+        "overlay": false
+      }
+    ],
+    "p03": {
+      "guestYes": 1,
+      "hostNo": 1,
+      "singleTap": true,
+      "realAckHeldByTest": true,
+      "otherPanelKept": true,
+      "reconnect": true
+    },
+    "p04": {
+      "war": [
+        false,
+        false
+      ],
+      "humanEmbargo": [
+        [],
+        []
+      ],
+      "reason": "exhaustion|actor:auto",
+      "save": true
+    }
+  },
+  "pass": 5,
+  "fail": 0
+}

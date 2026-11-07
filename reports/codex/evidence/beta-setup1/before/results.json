@@ -1,0 +1,236 @@
+[
+  {
+    "name": "0 KAPALI yeni yerel kapı: izin/kaynak/kuyruk engeli",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\ntrue !== false\n\n    at /workspace/Star/tests/beta_setup1_gates_test.cjs:8:321\n    at test (/workspace/Star/tests/beta_setup1_gates_test.cjs:4:38)\n    at Object.<anonymous> (/workspace/Star/tests/beta_setup1_gates_test.cjs:8:25)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n    at Module.load (node:internal/modules/cjs/loader:1651:32)\n    at Module._load (node:internal/modules/cjs/loader:1443:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47",
+    "detail": {
+      "before": {
+        "resources": {
+          "min": 100000,
+          "ene": 100000,
+          "yiy": 100000,
+          "ala": 100000,
+          "ara": 100000,
+          "tuk": 100000,
+          "etk": 100000
+        },
+        "queue": [],
+        "built": {},
+        "usable": false,
+        "rng": -951432214
+      },
+      "after": {
+        "resources": {
+          "min": 99132,
+          "ene": 100000,
+          "yiy": 100000,
+          "ala": 99634,
+          "ara": 100000,
+          "tuk": 100000,
+          "etk": 100000
+        },
+        "queue": [
+          {
+            "key": "kapi",
+            "e": 0,
+            "left": 536,
+            "tot": 536
+          }
+        ],
+        "built": {},
+        "usable": false,
+        "rng": -951432214
+      },
+      "allowed": true,
+      "started": true
+    }
+  },
+  {
+    "name": "1 KAPALI yeni yerel kapı: izin/kaynak/kuyruk engeli",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\ntrue !== false\n\n    at /workspace/Star/tests/beta_setup1_gates_test.cjs:8:321\n    at test (/workspace/Star/tests/beta_setup1_gates_test.cjs:4:38)\n    at Object.<anonymous> (/workspace/Star/tests/beta_setup1_gates_test.cjs:8:25)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n    at Module.load (node:internal/modules/cjs/loader:1651:32)\n    at Module._load (node:internal/modules/cjs/loader:1443:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47",
+    "detail": {
+      "before": {
+        "resources": {
+          "min": 100000,
+          "ene": 100000,
+          "yiy": 100000,
+          "ala": 100000,
+          "ara": 100000,
+          "tuk": 100000,
+          "etk": 100000
+        },
+        "queue": [],
+        "built": {},
+        "usable": false,
+        "rng": -951432214
+      },
+      "after": {
+        "resources": {
+          "min": 99100,
+          "ene": 100000,
+          "yiy": 100000,
+          "ala": 99620,
+          "ara": 100000,
+          "tuk": 100000,
+          "etk": 100000
+        },
+        "queue": [
+          {
+            "key": "kapi",
+            "e": 1,
+            "left": 600,
+            "tot": 600
+          }
+        ],
+        "built": {},
+        "usable": false,
+        "rng": -951432214
+      },
+      "allowed": true,
+      "started": true
+    }
+  },
+  {
+    "name": "KAPALI uzaktan sipariş reddedilir; kaynak ve görev yok",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\ntrue !== false\n\n    at /workspace/Star/tests/beta_setup1_gates_test.cjs:9:177\n    at test (/workspace/Star/tests/beta_setup1_gates_test.cjs:4:38)\n    at Object.<anonymous> (/workspace/Star/tests/beta_setup1_gates_test.cjs:9:1)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n    at Module.load (node:internal/modules/cjs/loader:1651:32)\n    at Module._load (node:internal/modules/cjs/loader:1443:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47",
+    "detail": {
+      "result": {
+        "ok": true,
+        "task": {
+          "id": 1,
+          "fleet": 74,
+          "empire": 0,
+          "system": 2,
+          "systemName": "Yelusha",
+          "key": "kapi",
+          "state": "queued",
+          "born": 155.67336000000412,
+          "attempts": 0,
+          "next": 155.67336000000412,
+          "why": "Sırada; kaynaklar henüz harcanmadı"
+        }
+      }
+    }
+  },
+  {
+    "name": "AI KAPALI kapı seçmez; AÇIK uygun zengin AI seçebilir",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n'kapi' !== null\n\n    at /workspace/Star/tests/beta_setup1_gates_test.cjs:10:354\n    at test (/workspace/Star/tests/beta_setup1_gates_test.cjs:4:38)\n    at Object.<anonymous> (/workspace/Star/tests/beta_setup1_gates_test.cjs:10:1)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n    at Module.load (node:internal/modules/cjs/loader:1651:32)\n    at Module._load (node:internal/modules/cjs/loader:1443:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47",
+    "detail": {
+      "off": "kapi"
+    }
+  },
+  {
+    "name": "KAPALI tek başına eski kapı genel ileri ikmal üssü sayılmaz",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\ntrue !== false\n\n    at /workspace/Star/tests/beta_setup1_gates_test.cjs:11:189\n    at test (/workspace/Star/tests/beta_setup1_gates_test.cjs:4:38)\n    at Object.<anonymous> (/workspace/Star/tests/beta_setup1_gates_test.cjs:11:1)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n    at Module.load (node:internal/modules/cjs/loader:1651:32)\n    at Module._load (node:internal/modules/cjs/loader:1443:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47",
+    "detail": {
+      "node": true
+    }
+  },
+  {
+    "name": "AÇIK maliyet bir kez ödenir, gerçek yapı tamamlanır ve gemi serbest kalır",
+    "status": "PASS",
+    "detail": {
+      "cost": {
+        "min": 868,
+        "ala": 366
+      },
+      "before": {
+        "min": 100000,
+        "ene": 100000,
+        "yiy": 100000,
+        "ala": 100000,
+        "ara": 100000,
+        "tuk": 100000,
+        "etk": 100000
+      },
+      "after": {
+        "min": 99132,
+        "ene": 100000,
+        "yiy": 100000,
+        "ala": 99634,
+        "ara": 100000,
+        "tuk": 100000,
+        "etk": 100000
+      },
+      "built": {
+        "kapi": 0
+      }
+    }
+  },
+  {
+    "name": "iki gerçek kapı rota, mesafe ve varış süresi avantajı; anlık değil",
+    "status": "PASS",
+    "detail": {
+      "off": {
+        "path": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "speed": 95.67999999999999,
+        "elapsed": 6.299999999999986,
+        "effectiveDistance": 500
+      },
+      "on": {
+        "path": [
+          5
+        ],
+        "speed": 95.67999999999999,
+        "elapsed": 0.05,
+        "effectiveDistance": 0.1
+      }
+    }
+  },
+  {
+    "name": "kapıya komşu sahipsiz sistemde ikmal mesafesi ON0/OFF1",
+    "status": "PASS",
+    "detail": {
+      "on": 0,
+      "off": 1
+    }
+  },
+  {
+    "name": "yabancı/düşman kapı izinleri korunur, karşı yön izin açmaz",
+    "status": "PASS",
+    "detail": {}
+  },
+  {
+    "name": "eski OFF Save8 kapısı silinmez; önceden ödenmiş iş tamamlanır pasif kalır, çift ödeme/iade yok",
+    "status": "PASS",
+    "detail": {
+      "resources": {
+        "min": 99132,
+        "ene": 100000,
+        "yiy": 100000,
+        "ala": 99634,
+        "ara": 100000,
+        "tuk": 100000,
+        "etk": 100000
+      },
+      "built": {
+        "kapi": 0
+      }
+    }
+  },
+  {
+    "name": "kriz şiddeti OFF + erken zamanlama kaydı yeni kriz yaratmaz",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n3 !== 0\n\n    at /workspace/Star/tests/beta_setup1_gates_test.cjs:17:349\n    at test (/workspace/Star/tests/beta_setup1_gates_test.cjs:4:38)\n    at Object.<anonymous> (/workspace/Star/tests/beta_setup1_gates_test.cjs:17:1)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n    at Module.load (node:internal/modules/cjs/loader:1651:32)\n    at Module._load (node:internal/modules/cjs/loader:1443:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47",
+    "detail": {
+      "stage": 1,
+      "fleets": 3
+    }
+  },
+  {
+    "name": "legacy bekleyen kriz OFF ayarında başlamaz, aktif eski kriz sessiz silinmez",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n1 !== 0\n\n    at /workspace/Star/tests/beta_setup1_gates_test.cjs:18:242\n    at test (/workspace/Star/tests/beta_setup1_gates_test.cjs:4:38)\n    at Object.<anonymous> (/workspace/Star/tests/beta_setup1_gates_test.cjs:18:1)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n    at Module.load (node:internal/modules/cjs/loader:1651:32)\n    at Module._load (node:internal/modules/cjs/loader:1443:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47",
+    "detail": {}
+  }
+]

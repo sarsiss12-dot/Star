@@ -1,0 +1,9 @@
+PASS 800x360 bütün anahtarlar gerçek tap ile CFG ve görünür seçimi değiştirir
+PASS 800x360 kriz şiddeti/zamanlama iki yönde tutarlı; kapalıdan açma görünür
+PASS 800x360 boyut/şekil/zorluk/konsey/kalıntı/AI sayısı ve tohum gerçek UI yolları
+PASS 800x360 CFG→G.cfg→Save8; KAPALI panelde kapı inşa edilemez ve uzaktan neden görünür
+PASS 960x540 bütün anahtarlar gerçek tap ile CFG ve görünür seçimi değiştirir
+PASS 960x540 kriz şiddeti/zamanlama iki yönde tutarlı; kapalıdan açma görünür
+PASS 960x540 boyut/şekil/zorluk/konsey/kalıntı/AI sayısı ve tohum gerçek UI yolları
+PASS 960x540 CFG→G.cfg→Save8; KAPALI panelde kapı inşa edilemez ve uzaktan neden görünür
+GEÇEN: 8 KALAN: 0

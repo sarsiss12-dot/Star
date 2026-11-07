@@ -45,6 +45,7 @@ function build(meId,o={}){
     if(mine){x.b=J(s.built);x.w=J(s.work);if(Array.isArray(x.w))for(const w of x.w)if(w&&Number.isInteger(w.e))w.e=piN(w.e);
       x.ry=J(s.rally);x.lb=J(s.loopBuild);x.yl=J(s.yardLock);}
     else if(v)x.b=J(s.built);                                       // görünen yabancı uzay yapıları haritada görünür
+    if(x.b)for(const k of Object.keys(x.b))x.b[k]=piN(x.b[k]); // same ID space as system owner and construction work
     return x;});
   /* ---- devletler ---- */
   const shell=e=>{

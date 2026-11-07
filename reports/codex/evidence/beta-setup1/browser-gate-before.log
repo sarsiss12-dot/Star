@@ -1,0 +1,8 @@
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+1 !== 0
+
+    at /workspace/Star/tests/browser-beta-setup1.cjs:13:1032
+    at async test (/workspace/Star/tests/browser-beta-setup1.cjs:4:148)
+    at async /workspace/Star/tests/browser-beta-setup1.cjs:13:1
+GEÇEN: 0 KALAN: 1

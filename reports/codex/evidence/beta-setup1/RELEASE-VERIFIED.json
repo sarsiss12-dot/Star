@@ -1,0 +1,111 @@
+{
+  "status": "PASS",
+  "file": "releases/stars-faz96h10p11.zip",
+  "bytes": 784837,
+  "sha256": "738da4fe71f200a16469abe647fd8b80be05977b14a905c30429caa2ee41f543",
+  "crc32": "FF695D20",
+  "manifestSha256": "ad24d9f9e22398471fa0900fa7ebbf46697b40ee0da33afa4c1c6e050e0a2eff",
+  "deterministicByteEqual": true,
+  "members": [
+    {
+      "file": "RELEASE-MANIFEST.json",
+      "crc32": "C45F29C0",
+      "bytes": 2206
+    },
+    {
+      "file": "ai.js",
+      "crc32": "46D9885B",
+      "bytes": 284627
+    },
+    {
+      "file": "archive-ui.js",
+      "crc32": "F3381355",
+      "bytes": 23722
+    },
+    {
+      "file": "audio.js",
+      "crc32": "8E4EBBB4",
+      "bytes": 20197
+    },
+    {
+      "file": "combat.js",
+      "crc32": "60F044A8",
+      "bytes": 16353
+    },
+    {
+      "file": "commerce-ui.js",
+      "crc32": "1D6711A6",
+      "bytes": 11105
+    },
+    {
+      "file": "commerce.js",
+      "crc32": "8C20977C",
+      "bytes": 29743
+    },
+    {
+      "file": "construction.js",
+      "crc32": "CFB3F9D8",
+      "bytes": 8943
+    },
+    {
+      "file": "diplomacy.js",
+      "crc32": "D4A7D7DE",
+      "bytes": 511559
+    },
+    {
+      "file": "economic-ledger.js",
+      "crc32": "A513EE94",
+      "bytes": 17942
+    },
+    {
+      "file": "economy-ui.js",
+      "crc32": "5E1D2442",
+      "bytes": 17157
+    },
+    {
+      "file": "economy.js",
+      "crc32": "96927173",
+      "bytes": 214078
+    },
+    {
+      "file": "inbox.js",
+      "crc32": "1D739FED",
+      "bytes": 11972
+    },
+    {
+      "file": "index.html",
+      "crc32": "9F962E83",
+      "bytes": 94586
+    },
+    {
+      "file": "main.js",
+      "crc32": "738AE0AF",
+      "bytes": 488695
+    },
+    {
+      "file": "manifest.json",
+      "crc32": "641AE79B",
+      "bytes": 1922
+    },
+    {
+      "file": "map.js",
+      "crc32": "7ACF5AC1",
+      "bytes": 146730
+    },
+    {
+      "file": "news.js",
+      "crc32": "A13FF379",
+      "bytes": 6039
+    },
+    {
+      "file": "sw.js",
+      "crc32": "61922EA8",
+      "bytes": 2804
+    },
+    {
+      "file": "ui.js",
+      "crc32": "7505C342",
+      "bytes": 562503
+    }
+  ]
+}

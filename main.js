@@ -3246,7 +3246,7 @@ function isSupplyNode(e, sys){
   }
   /* Kendi uzay yapısı ileri üs sayılır */
   if (sys.built) for (const k in sys.built)
-    if (sys.built[k] === e.id) return true;
+    if (sys.built[k] === e.id && !(k === 'kapi' && G.cfg?.gates === false)) return true;
   return false;
 }
 
@@ -4870,7 +4870,7 @@ const STRUCTS = {
               d:'Koloni olmadan bu sistemde gemi inşa yuvası açar.'},
   kapi     :{n:'Yıldız Kapısı',         ico:'🌀', c:{min:900, ala:380}, ay:20,
               on:['sys'], sp:'gate', mega:1,
-              d:'MEGA YAPI · İki kapı arasında filolar anında geçer.'},
+              d:'MEGA YAPI · İzinli iki kapı arasında 0,1 rota mesafeli çok hızlı geçiş; kapı ve komşusu tam ikmal sağlar. Galaksi ayarı kapalıysa inşa ve kullanım yok.'},
   /* ═══ FAZ 49: PANOPTİKON ═══ */
   panopt   :{n:'Panoptikon',            ico:'🛰', c:{min:1400, ala:520, ara:600}, ay:26,
               on:['sys'], sp:'panopt', mega:1,
@@ -4884,6 +4884,7 @@ const STRUCTS = {
 
 function structAllowed(e, sys, key){
   const S = STRUCTS[key];
+  if (key === 'kapi' && G.cfg?.gates === false) return false;
   if (!S || (S.tech&&!e.techs[S.tech])) return false;
   if (sys.work && sys.work.some(w=>w.key===key)) return false;
   if (sys.built && sys.built[key] !== undefined) return false;
@@ -5393,18 +5394,18 @@ let DEBUG_FORCE_TYRANT = false;
 
 const CRISIS_TIMING = {
   kapali:{n:'KAPALI', yil:0,  d:'Kriz hiç gelmez — saf inşa oyunu'},
-  erken :{n:'ERKEN',  yil:16, d:'Yıl 2226 civarı · hazırlanmak için az zaman'},
-  normal:{n:'NORMAL', yil:26, d:'Yıl 2236 civarı · dengeli'},
-  gec   :{n:'GEÇ',    yil:38, d:'Yıl 2248 civarı · uzun barış dönemi'},
+  erken :{n:'ERKEN',  yil:16, d:'110–150. ay · yaklaşık 2219–2222'},
+  normal:{n:'NORMAL', yil:26, d:'150–200. ay · yaklaşık 2222–2226'},
+  gec   :{n:'GEÇ',    yil:38, d:'230–290. ay · yaklaşık 2229–2234'},
   /* FAZ 33: oyun sonu krizi — imparatorluklar zirveye ulaşsın,
      konsey otursun, sonra Hiçlik Sürüsü gelsin. */
-  sonoyun:{n:'OYUN SONU', yil:80, d:'Yıl 2290 civarı · galaksi olgunlaşır, sonra yok oluş'}
+  sonoyun:{n:'OYUN SONU', yil:80, d:'930–1020. ay · yaklaşık 2287–2295'}
 };
 const RUIN_LEVELS = {
   yok  :{n:'YOK',   say:0, d:'Kalıntı yok'},
-  az   :{n:'AZ',    say:2, d:'2 kalıntı · nadir ve özel'},
-  orta :{n:'ORTA',  say:4, d:'4 kalıntı · dengeli'},
-  cok  :{n:'ÇOK',   say:7, d:'7 kalıntı · galaksi bir mezarlık'}
+  az   :{n:'AZ',    say:2, d:'En çok 2 kalıntı · uygun boş sistemlerde'},
+  orta :{n:'ORTA',  say:4, d:'En çok 4 kalıntı · uygun boş sistemlerde'},
+  cok  :{n:'ÇOK',   say:7, d:'En çok 7 kalıntı · uygun boş sistemlerde'}
 };
 
 /* ---------- KAYIP UYGARLIK KALINTILARI ----------
@@ -5412,7 +5413,7 @@ const RUIN_LEVELS = {
    geç oyunda değerli hedef. Yıkan büyük ödül alır.              */
 const RUIN_REWARDS = [
   {k:'tech',   n:'Kayıp Arşiv',      d:'İki teknoloji bedava'},
-  {k:'mega',   n:'Mega Yapı Planı',  d:'Mega yapılar %50 ucuz ve hızlı (kalıcı)'},
+  {k:'mega',   n:'Mega Yapı Planı',  d:'Kalıcı inşaat verimliliği bonusu'},
   {k:'fleet',  n:'Hayalet Donanma',  d:'Terk edilmiş savaş filosu senin olur'},
   {k:'boost',  n:'Kadim Motorlar',   d:'Kalıcı +%15 filo hızı ve +%10 gövde'},
   {k:'wealth', n:'Hazine Odası',     d:'Büyük kaynak yığını'}
@@ -5459,7 +5460,7 @@ function ruinReward(e, sys){
     case 'mega':
       e.extra = e.extra || {};
       e.extra.megaBoost = true;
-      msg = 'Mega yapı planları çözüldü: Yıldız Kapısı ve Dyson Küresi %50 ucuz ve hızlı.';
+      msg = 'Mega yapı planları çözüldü: kalıcı inşaat verimliliği bonusu; mevcut maliyet ve süre indirimlerine eklenir.';
       break;
     case 'fleet': {
       const ships = [{c:'zir'},{c:'kru'},{c:'kru'},{c:'muh'},{c:'muh'}];
@@ -5501,7 +5502,7 @@ const CRISIS_WINDOW = {
 };
 function initCrisis(){
   const key = (G.cfg && G.cfg.crisis) || 'normal';
-  if (key === 'kapali' || !crisisYear()){ G.crisis = null; return; }
+  if (key === 'kapali' || G.cfg?.crisisPower === 'kapali' || !crisisYear()){ G.crisis = null; return; }
   const w = CRISIS_WINDOW[key] || CRISIS_WINDOW.normal;
   const atMonth = w[0] + Math.floor(rnd() * (w[1] - w[0] + 1));
   G.crisis = {stage:0, at: 2210 + Math.round(atMonth / 12), atMonth, age: 0,
@@ -5650,6 +5651,8 @@ function spawnCrisisWave(stage){
 }
 function crisisTick(){
   if (!G.crisis || G.crisis.over) return;
+  // Existing active crises are preserved; disabled pending/legacy schedules cannot start.
+  if (G.crisis.stage === 0 && (G.cfg?.crisis === 'kapali' || G.cfg?.crisisPower === 'kapali')) return;
   // ay sayacı: yıl/gün senkronuna bağlı kalmaz
   G.crisis.age = (G.crisis.age || 0) + 1;
   const due = G.crisis.atMonth !== undefined ? G.crisis.atMonth : crisisYear() * 12;
@@ -8401,7 +8404,7 @@ function forceRedraw(sebep){
    Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
    Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
 /* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */
-const BUILD_ID = '96h10p10';
+const BUILD_ID = '96h10p11';
 const DIAG_MAX = 40;
 const DIAG = [];
 function logDiag(tur, mesaj){

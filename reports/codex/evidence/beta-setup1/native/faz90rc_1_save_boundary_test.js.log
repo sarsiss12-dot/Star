@@ -1,0 +1,20 @@
+✓ ret ve sıfır mutasyon: gezegen null
+✓ ret ve sıfır mutasyon: gezegen sayı
+✓ ret ve sıfır mutasyon: gemi null
+✓ ret ve sıfır mutasyon: gemi sınıfı eksik
+✓ ret ve sıfır mutasyon: filo kimliği yinelenmiş
+✓ ret ve sıfır mutasyon: kaynak metin
+✓ ret ve sıfır mutasyon: kaynak null
+✓ ret ve sıfır mutasyon: kaynak anahtarı eksik
+✓ ret ve sıfır mutasyon: kaynak dizi
+✓ ret ve sıfır mutasyon: gün eksik
+✓ ret ve sıfır mutasyon: gün negatif
+✓ ret ve sıfır mutasyon: yıl metin
+✓ ret ve sıfır mutasyon: ay sıfır
+✓ ret ve sıfır mutasyon: ay 13
+✓ ret ve sıfır mutasyon: ayar kökü dizi
+✓ localStorage loadGame bozuk kayıtta false döner, açık dünya ve depodaki kayıt korunur
+✓ gerçek eski v8 kaydı tekrar yüklenir; gün kaynak RNG aynı kalır
+✓ kesirli gün/kaynak, boş filo ve eski negatif stok zarf kapısında bozulmaz
+✓ eski kayıtta world/threats/events/W/H gibi ek alanlar zorunlu hale gelmez
+GEÇEN: 19 KALAN: 0

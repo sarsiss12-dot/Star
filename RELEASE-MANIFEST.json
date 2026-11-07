@@ -1,11 +1,11 @@
 {
-  "phase": "BETA-UX.0",
-  "build": "96h10p10",
+  "phase": "BETA-SETUP.1",
+  "build": "96h10p11",
   "scope": "github-runtime-only",
   "save_version": 8,
-  "pwa_cache": "stars-v96h10p10",
-  "parent_commit": "fec9a8b4345b14cca9fa5c2eb496fc84e24f7ad2",
-  "parent_zip_sha256": "b91bb9a089796582b4442ef7ffe7dc2400b838ac0ddc26414d8b605b3d12f3b0",
+  "pwa_cache": "stars-v96h10p11",
+  "parent_commit": "eea55b2ddfae7de8f631eb43eb606585224f64d6",
+  "parent_zip_sha256": "eb439625982cb688af8d2e4ac21bbfd477d5f6cd52691df8a3013491262c0d24",
   "file_count": 19,
   "files": {
     "ai.js": "4f0cf937934b6e171b54497cc2605bb783c264a1f8374963b4d64a1052cfabfb",
@@ -14,19 +14,19 @@
     "combat.js": "b4e21fcdb6fdaaa93da07313131470de3e8a3c28b5650226a9c4a2713bde73a5",
     "commerce-ui.js": "cc7fef5ab43176093251916aaafbdd873424da0630ec46fe6d3d5106a690b8d4",
     "commerce.js": "978e4f6b01faed1babeade20070447cbcfaa4e2ea70793a78e50f20fbe66be01",
-    "construction.js": "d9b544b0328f26576ff90e02fe49c1b7f3798dfd844a8c39ee8dc6c0890debda",
+    "construction.js": "7c1d4912eb3aaf1c51f10e18c31f9178bc0a5dc6fcec9fd9ac47cff9d128439e",
     "diplomacy.js": "9237d139d1678db31116b682da949e76b96afc872246cb057b3ad4e28fed7fdc",
     "economic-ledger.js": "309837d46e3d533f17d0ecb76a5c531474662cb57e05802ca52ffa904d5c5c3c",
     "economy-ui.js": "61f6e2dcef7f37143821edccf67552718a210ec555f7b8f9074c68191fd5cbcc",
     "economy.js": "f3a97846dc28be10f1d9dc05195bf72f31bfd9889acb6004bc5da28372e27f89",
     "inbox.js": "e97f82d178f6908a89df792af28bebd4ba22315917e3e2c0bc15a874291ceb49",
     "index.html": "ae85599b00da6a7cc30035de6398337384d9e30d9cd5f8c3488b1ada6caf135c",
-    "main.js": "47399531c6c6b337d872e7b56dce3414e8249d405ea9cac26182c7a193bf2587",
+    "main.js": "bda89ccdc42ead4cc65fdf6ca2b95735dbaa2512025eabf288bf651758b984e2",
     "manifest.json": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
     "map.js": "3ccc9e66bb13f0ec1eaee1759e26b110ec5a05815ce73d74c7960b9f16828b0d",
     "news.js": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
-    "sw.js": "ede13a7d6aecc7a3fd4528fcf9576d28a99143ae7dcd14099bc63f71aa46dbba",
-    "ui.js": "283e47be523210f77472606a397d06ff3194a23c8b5503fb758a42f13a026dab"
+    "sw.js": "5c9c7bb93b39a91a59f1785fd7b4b56c5fb79a19c3d83c3bfe6f6c4214d7bbb6",
+    "ui.js": "7db6004c11e7eb68e030a66c31991e78498f77ac5985a2fbe718df40106cd362"
   },
   "description": "Critical shared-panel ownership, event-bound war view, council ballot identity/ACK, explicit war end reasons and human embargo ownership. Save8 v8 and MP package4 compatibility; no AI strategic or economic rule changes."
 }

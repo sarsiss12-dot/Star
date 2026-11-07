@@ -41,6 +41,13 @@ async function design0(p,o){
     if(await p.evaluate(()=>CFG.pirates!==false))await tap(p,'#setup [data-a="togPirate"]');
     assert.equal(await p.evaluate(()=>CFG.pirates),false);await p.screenshot({path:path.join(out,'setup0-host-pirates-off.png')});
   }
+  if(process.env.SETUP1_AUDIT&&await p.evaluate(()=>MP7Setup.role==='host')){
+    await tap(p,'#setup [data-a="step"][data-x="galaksi"]');
+    for(const[a,k]of[['togGate','gates'],['togRandomEvents','randomEvents'],['togAIOrigins','aiOrigins']])if(await p.evaluate(k=>CFG[k]!==false,k))await tap(p,'#setup [data-a="'+a+'"]');
+    await tap(p,'#setup [data-a="crisisPower"][data-x="kapali"]');
+    await tap(p,'#setup [data-a="councilSet"][data-x="seyrek"]');
+    await tap(p,'#setup [data-a="ruinSet"][data-x="az"]');
+  }
   await tap(p,'#setup [data-a="start"]');
   try{await wait(p,()=>document.getElementById('menu').classList.contains('hidden'),undefined,10000);}
   catch(e){await shot(p,'design-fail-'+o.mizac);throw Error('kurulum kapanmadı: '+await p.evaluate(()=>(UI.setupError||'')+' | '+(document.querySelector('#setup .err,#setup .setupError')||{}).textContent));}
@@ -107,19 +114,20 @@ let relay,px,base,tls,bH,bB,bC;
   await test('A1 rehber 1–8: oda, iki farklı devlet, hazır, başlat; iki ekranda galaksi; sürüm işareti lobi / başlangıç / MP çubuğunda ve /mp/version oyun build\'iyle aynı',async()=>{
     await room(H,2,[[Bp,'Bora',{name:'Saf Akıl Ağı',mizac:'teknokrasi',origin:'standart',ethics:['mat:2','mil:-1'],civics:['sinyal_avci']}]]);
     if(process.env.UX0_NAMES){const names=await H.evaluate(()=>G.emps.map(e=>e.name));await wait(Bp,names=>G.p.name===names[1],names);assert.equal(await Bp.evaluate(()=>G.emps[1].name),names[0]);metrics.ux0Names={host:names,guestOwn:await Bp.evaluate(()=>G.p.name),guestHost:await Bp.evaluate(()=>G.emps[1].name)};await shot(Bp,'ux0-guest-names');}
+    if(process.env.SETUP1_AUDIT)metrics.setup1=await require('./helpers/beta-setup1-mp.cjs')(H,Bp,out);
     if(process.env.SETUP0_AUDIT){metrics.setup0=[];for(const [who,p] of [['host',H],['guest',Bp]]){await wait(p,()=>G.cfg.pirates===false);const row=await p.evaluate(()=>({cfg:typeof MP1Join==='undefined'?CFG.pirates:null,game:G.cfg.pirates,nests:(G.nests||[]).length,pirateFleets:G.fleets.filter(f=>f.name==='Korsan Muhafızı'||f.name==='Korsan Akıncısı').length,ownName:G.p.name,ownId:G.p.id}));assert.equal(row.game,false);assert.equal(row.nests+row.pirateFleets,0);metrics.setup0.push({who,...row});}assert.equal(metrics.setup0[0].cfg,false);}
     for(const p of [H,Bp])assert.equal(await p.evaluate(()=>!!document.getElementById('map')&&!document.getElementById('game').classList.contains('hidden')),true);
     const v=await Bp.evaluate(async()=>{const r=await fetch('/mp/version',{cache:'no-store'});return {s:r.status,j:await r.json(),b:BUILD_ID,line:MP1View.verLine(),chip:(document.getElementById('mp1Mini')||{}).title||''};});
-    metrics.version=v.j;assert.equal(v.s,200);assert.match(v.j.mp,/^MP\.8\.9b5$/);assert.equal(v.j.build,v.b);assert.match(v.line,new RegExp('MP\\.8\\.9b5 · oyun '+BUILD+'$'));   /* PERF.2: build manifestten (sabit liste yerine) */assert.match(v.chip,/MP\.8\.9b5/);
+    metrics.version=v.j;assert.equal(v.s,200);assert.match(v.j.mp,/^MP\.8\.9b6$/);assert.equal(v.j.build,v.b);assert.match(v.line,new RegExp('MP\\.8\\.9b6 · oyun '+BUILD+'$'));   /* PERF.2: build manifestten (sabit liste yerine) */assert.match(v.chip,/MP\.8\.9b6/);
     assert.equal(Object.values(v.j.files).every(x=>/^[0-9a-f]{12}$/.test(x)),true);
     await wait(Bp,()=>MP6Stars.S.unsupported&&MP6Stars.S.unsupported.length>0);metrics.unsupported=await Bp.evaluate(()=>MP6Stars.S.unsupported);
     for(const a of ['bill','billPick','billTarget','cncFound','cncJoin','cncLeave','cncNo','cncPane','cncYes','permanent','reform','throneBuild','veto','bribe','blackmail','bmGo','fundSep','panoptRetarget','revolt','revoltConfirm','whisperBlame','whisperGo','whisperMenu','whisperPick','devour','devourConfirm','colFire'])
       assert(!metrics.unsupported.includes(a),a+' still unsupported');
     assert.equal(metrics.unsupported.length,18,JSON.stringify(metrics.unsupported));
     await tap(Bp,'#mp6Conn');await wait(Bp,()=>document.getElementById('mpVer')&&document.getElementById('mpVer').offsetParent);   // telefonda görünür tanı satırı
-    metrics.guestDiag=await Bp.evaluate(()=>document.getElementById('mpVer').textContent);assert.match(metrics.guestDiag,new RegExp('MP\\.8\\.9b5 · oyun '+BUILD+'( · misafir)? · host bağlı .*son hata: ')   /* MP.8: rol + ayna + son komut eklendi */);
+    metrics.guestDiag=await Bp.evaluate(()=>document.getElementById('mpVer').textContent);assert.match(metrics.guestDiag,new RegExp('MP\\.8\\.9b6 · oyun '+BUILD+'( · misafir)? · host bağlı .*son hata: ')   /* MP.8: rol + ayna + son komut eklendi */);
     assert.doesNotMatch(metrics.guestDiag,/tok|key|anahtar/i);await shot(Bp,'a1-guest-diag');await tap(Bp,'#mp6Conn');
-    assert.match(await H.evaluate(()=>{MP1Host.miniOpen=true;try{document.querySelector('[data-g="toggle"]')&&0;}catch{}return MP1View.verLine();}),/MP\.8\.9b5/);
+    assert.match(await H.evaluate(()=>{MP1Host.miniOpen=true;try{document.querySelector('[data-g="toggle"]')&&0;}catch{}return MP1View.verLine();}),/MP\.8\.9b6/);
   });
   if(process.env.BETA02_TOUCH_REPEAT)await test('T02 mp6Conn sınırlı gerçek dokunma tekrarı',async()=>{
     for(let i=0;i<Number(process.env.BETA02_TOUCH_REPEAT);i++){

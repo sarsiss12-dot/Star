@@ -1,0 +1,25 @@
+{
+  "sourceHead": "eea55b2ddfae7de8f631eb43eb606585224f64d6",
+  "sourceBranch": "codex/stars-beta-ux0-names",
+  "branch": "codex/stars-beta-setup1-galaxy-options",
+  "node": "v24.22.1",
+  "chromium": "155.0.8059.79",
+  "playwright": "1.62.1",
+  "build": "96h10p11",
+  "mp": "MP.8.9b6",
+  "saveVersion": 8,
+  "packageVersion": 4,
+  "protocolVersion": 1,
+  "render": "NOT RUN",
+  "physicalAndroid": "NOT RUN",
+  "realLAN": "NOT RUN",
+  "realInternet": "NOT RUN",
+  "docker": "NOT RUN",
+  "onlyBoardTask": 42,
+  "boardSourceStatus": {
+    "8": "KULLANICI ONAYI BEKLİYOR",
+    "41": "TEST BEKLİYOR",
+    "42": "PROMPT HAZIR",
+    "44": "PLANLANDI"
+  }
+}

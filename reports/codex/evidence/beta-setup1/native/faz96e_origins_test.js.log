@@ -1,0 +1,28 @@
+✓ new game defaults on and 35 percent; invalid probability safely normalizes
+✓ off preserves player selection and gives no AI special origin
+✓ per-AI 20 percent decisions match independent seeded draws
+✓ per-AI 35 percent decisions match independent seeded draws
+✓ per-AI 60 percent decisions match independent seeded draws
+✓ per-AI 100 percent decisions match independent seeded draws
+✓ same seed reproduces origins and complete initial state
+✓ different seeds produce different origin distributions
+✓ chance thresholds are nested per AI, not an exact quota
+✓ one AI and many AI use the same independent algorithm
+✓ declarative incompatibility is filtered and empty pool safely stays standard
+✓ galaxy positions, reserved capitals and player choice do not depend on origin RNG
+✓ all AI standart starts and effects survive v8 with no repeated grant
+✓ all AI kalinti starts and effects survive v8 with no repeated grant
+✓ all AI kapali starts and effects survive v8 with no repeated grant
+✓ all AI kusatilmis starts and effects survive v8 with no repeated grant
+✓ all AI son_umut starts and effects survive v8 with no repeated grant
+✓ all AI altin_cag starts and effects survive v8 with no repeated grant
+✓ all AI golgeden starts and effects survive v8 with no repeated grant
+✓ all AI gocebe starts and effects survive v8 with no repeated grant
+✓ golden bonus colonies respect each species habitability and reserved capitals
+✓ multiple golden origins adjust single global crisis once, including reload
+✓ golden AI never re-enables disabled crisis
+✓ AI archaeology runs real timed survey for correct owner exactly once
+✓ ancient research stock is actually spent in existing research engine
+✓ origin planners change real AI weights without adding recurring resources
+✓ origins remain fixed over real monthly simulation and mid-run save/load
+GEÇEN: 27 KALAN: 0

@@ -1,0 +1,52 @@
+[
+  {
+    "label": "p10-control",
+    "actorIsAI": true,
+    "rngEqual": true,
+    "diff": [
+      {
+        "path": ".emps.0._powAt",
+        "before": -1,
+        "after": 0
+      },
+      {
+        "path": ".emps.0._pressAt",
+        "before": -1,
+        "after": 0
+      },
+      {
+        "path": ".emps.0._powC",
+        "after": 373
+      },
+      {
+        "path": ".emps.0._press",
+        "after": 0.8230147461832695
+      }
+    ]
+  },
+  {
+    "label": "candidate",
+    "actorIsAI": true,
+    "rngEqual": true,
+    "diff": [
+      {
+        "path": ".emps.0._powAt",
+        "before": -1,
+        "after": 0
+      },
+      {
+        "path": ".emps.0._pressAt",
+        "before": -1,
+        "after": 0
+      },
+      {
+        "path": ".emps.0._powC",
+        "after": 373
+      },
+      {
+        "path": ".emps.0._press",
+        "after": 0.8230147461832695
+      }
+    ]
+  }
+]

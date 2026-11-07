@@ -18,6 +18,7 @@ const RemoteConstruction = {
     const no=why=>({ok:false,why}),e=f&&G.emps[f.e],s=G.sys[sid];
     if(!f||!G.fleets.includes(f)||!e||e.dead||!f.ships.some(sh=>sh.c==='ins'))return no('Geçerli inşaat gemisi yok');
     if(!this.known(e,s))return no('Hedef keşfedilmedi');
+    if(key==='kapi'&&G.cfg?.gates===false)return no('Bu galakside yıldız kapısı inşası kapalı.');
     if(!Object.hasOwn(STRUCTS,key)||!structAllowed(e,s,key))return no('Yapı, sahiplik, araştırma veya hak iddiası koşulu uygun değil');
     if(Object.values(this.state().queues).flat().some(t=>t.system===sid&&t.key===key&&t.state!=='building'))return no('Bu yapı için zaten bir görev var');
     const cost=structCost(e,key),afford=Object.keys(cost).every(k=>(e.res[k]||0)>=cost[k]);

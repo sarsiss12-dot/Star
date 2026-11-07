@@ -1,0 +1,42 @@
+[
+  {
+    "file": "main.js",
+    "beforeSha256": "47399531c6c6b337d872e7b56dce3414e8249d405ea9cac26182c7a193bf2587",
+    "afterSha256": "bda89ccdc42ead4cc65fdf6ca2b95735dbaa2512025eabf288bf651758b984e2"
+  },
+  {
+    "file": "ui.js",
+    "beforeSha256": "283e47be523210f77472606a397d06ff3194a23c8b5503fb758a42f13a026dab",
+    "afterSha256": "7db6004c11e7eb68e030a66c31991e78498f77ac5985a2fbe718df40106cd362"
+  },
+  {
+    "file": "construction.js",
+    "beforeSha256": "d9b544b0328f26576ff90e02fe49c1b7f3798dfd844a8c39ee8dc6c0890debda",
+    "afterSha256": "7c1d4912eb3aaf1c51f10e18c31f9178bc0a5dc6fcec9fd9ac47cff9d128439e"
+  },
+  {
+    "file": "sw.js",
+    "beforeSha256": "ede13a7d6aecc7a3fd4528fcf9576d28a99143ae7dcd14099bc63f71aa46dbba",
+    "afterSha256": "5c9c7bb93b39a91a59f1785fd7b4b56c5fb79a19c3d83c3bfe6f6c4214d7bbb6"
+  },
+  {
+    "file": "research/mp0/mp-core.js",
+    "beforeSha256": "dcfed98f6352f9f231de547a76e707de83dcc8d33396071edc623747d071e0cd",
+    "afterSha256": "eed97b112abb47cc5d1fe0905bb4af7fb39995e7d311f799ca98a2c812d876e0"
+  },
+  {
+    "file": "research/mp1/client/view.js",
+    "beforeSha256": "56598a0ec1ad9c6706dfc31c1487d5682d35eaca33f6064787153549705b21bd",
+    "afterSha256": "56277176d6ad8051675d0e4b85e5fadf02e8a6bc355d1d6aac9b3e8ce2eb0628"
+  },
+  {
+    "file": "research/mp1/server/relay.js",
+    "beforeSha256": "3509f613fc258f3474789ff9912371b3c93779653ebb2cafb389170ffb6ae751",
+    "afterSha256": "55d1926afc52886c7146e10c4b1e8b1d8547d1d4cf5739ad3e3617ca45aa2c92"
+  },
+  {
+    "file": "research/mp6/mirror.js",
+    "beforeSha256": "8162eea8af28285082bc63a152a94737b9af4f663e2bde98781c2a795f6e106b",
+    "afterSha256": "c56eeb3a3180d625520ea738fbd058540ce6fc7628d46b87790740d2dc595a75"
+  }
+]

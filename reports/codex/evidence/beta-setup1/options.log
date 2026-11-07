@@ -1,0 +1,6 @@
+PASS one-variable setup/save/control cases 210
+PASS origins 20 43/209
+PASS origins 35 69/209
+PASS origins 60 128/209
+PASS origins 100 209/209
+PASS events/council/crisis-strength/independent counts/rewards/determinism

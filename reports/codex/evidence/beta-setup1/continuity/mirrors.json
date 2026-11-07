@@ -1,0 +1,296 @@
+[
+  {
+    "key": "pirates",
+    "value": false,
+    "status": "PASS",
+    "host": false,
+    "guest": false
+  },
+  {
+    "key": "pirates",
+    "value": true,
+    "status": "PASS",
+    "host": true,
+    "guest": true
+  },
+  {
+    "key": "gates",
+    "value": false,
+    "status": "PASS",
+    "host": false,
+    "guest": false
+  },
+  {
+    "key": "gates",
+    "value": true,
+    "status": "PASS",
+    "host": true,
+    "guest": true
+  },
+  {
+    "key": "randomEvents",
+    "value": false,
+    "status": "PASS",
+    "host": false,
+    "guest": false
+  },
+  {
+    "key": "randomEvents",
+    "value": true,
+    "status": "PASS",
+    "host": true,
+    "guest": true
+  },
+  {
+    "key": "aiOrigins",
+    "value": false,
+    "status": "PASS",
+    "host": false,
+    "guest": false
+  },
+  {
+    "key": "aiOrigins",
+    "value": true,
+    "status": "PASS",
+    "host": true,
+    "guest": true
+  },
+  {
+    "key": "aiOriginChance",
+    "value": 20,
+    "status": "PASS",
+    "host": 20,
+    "guest": 20
+  },
+  {
+    "key": "aiOriginChance",
+    "value": 35,
+    "status": "PASS",
+    "host": 35,
+    "guest": 35
+  },
+  {
+    "key": "aiOriginChance",
+    "value": 60,
+    "status": "PASS",
+    "host": 60,
+    "guest": 60
+  },
+  {
+    "key": "aiOriginChance",
+    "value": 100,
+    "status": "PASS",
+    "host": 100,
+    "guest": 100
+  },
+  {
+    "key": "crisisPower",
+    "value": "kapali",
+    "status": "PASS",
+    "host": "kapali",
+    "guest": "kapali"
+  },
+  {
+    "key": "crisisPower",
+    "value": "normal",
+    "status": "PASS",
+    "host": "normal",
+    "guest": "normal"
+  },
+  {
+    "key": "crisisPower",
+    "value": "acimasiz",
+    "status": "PASS",
+    "host": "acimasiz",
+    "guest": "acimasiz"
+  },
+  {
+    "key": "crisis",
+    "value": "kapali",
+    "status": "PASS",
+    "host": "kapali",
+    "guest": "kapali"
+  },
+  {
+    "key": "crisis",
+    "value": "erken",
+    "status": "PASS",
+    "host": "erken",
+    "guest": "erken"
+  },
+  {
+    "key": "crisis",
+    "value": "normal",
+    "status": "PASS",
+    "host": "normal",
+    "guest": "normal"
+  },
+  {
+    "key": "crisis",
+    "value": "gec",
+    "status": "PASS",
+    "host": "gec",
+    "guest": "gec"
+  },
+  {
+    "key": "crisis",
+    "value": "sonoyun",
+    "status": "PASS",
+    "host": "sonoyun",
+    "guest": "sonoyun"
+  },
+  {
+    "key": "council",
+    "value": "kapali",
+    "status": "PASS",
+    "host": "kapali",
+    "guest": "kapali"
+  },
+  {
+    "key": "council",
+    "value": "sik",
+    "status": "PASS",
+    "host": "sik",
+    "guest": "sik"
+  },
+  {
+    "key": "council",
+    "value": "normal",
+    "status": "PASS",
+    "host": "normal",
+    "guest": "normal"
+  },
+  {
+    "key": "council",
+    "value": "seyrek",
+    "status": "PASS",
+    "host": "seyrek",
+    "guest": "seyrek"
+  },
+  {
+    "key": "ruins",
+    "value": "yok",
+    "status": "PASS",
+    "host": "yok",
+    "guest": "yok"
+  },
+  {
+    "key": "ruins",
+    "value": "az",
+    "status": "PASS",
+    "host": "az",
+    "guest": "az"
+  },
+  {
+    "key": "ruins",
+    "value": "orta",
+    "status": "PASS",
+    "host": "orta",
+    "guest": "orta"
+  },
+  {
+    "key": "ruins",
+    "value": "cok",
+    "status": "PASS",
+    "host": "cok",
+    "guest": "cok"
+  },
+  {
+    "key": "size",
+    "value": "kucuk",
+    "status": "PASS",
+    "host": "kucuk",
+    "guest": "kucuk"
+  },
+  {
+    "key": "size",
+    "value": "orta",
+    "status": "PASS",
+    "host": "orta",
+    "guest": "orta"
+  },
+  {
+    "key": "size",
+    "value": "buyuk",
+    "status": "PASS",
+    "host": "buyuk",
+    "guest": "buyuk"
+  },
+  {
+    "key": "size",
+    "value": "devasa",
+    "status": "PASS",
+    "host": "devasa",
+    "guest": "devasa"
+  },
+  {
+    "key": "size",
+    "value": "ulu",
+    "status": "PASS",
+    "host": "ulu",
+    "guest": "ulu"
+  },
+  {
+    "key": "shape",
+    "value": "sarmal",
+    "status": "PASS",
+    "host": "sarmal",
+    "guest": "sarmal"
+  },
+  {
+    "key": "shape",
+    "value": "halka",
+    "status": "PASS",
+    "host": "halka",
+    "guest": "halka"
+  },
+  {
+    "key": "shape",
+    "value": "kume",
+    "status": "PASS",
+    "host": "kume",
+    "guest": "kume"
+  },
+  {
+    "key": "aiCount",
+    "value": 1,
+    "status": "PASS",
+    "host": 1,
+    "guest": 1
+  },
+  {
+    "key": "aiCount",
+    "value": 11,
+    "status": "PASS",
+    "host": 11,
+    "guest": 11
+  },
+  {
+    "key": "diff",
+    "value": "kolay",
+    "status": "PASS",
+    "host": "kolay",
+    "guest": "kolay"
+  },
+  {
+    "key": "diff",
+    "value": "normal",
+    "status": "PASS",
+    "host": "normal",
+    "guest": "normal"
+  },
+  {
+    "key": "diff",
+    "value": "zor",
+    "status": "PASS",
+    "host": "zor",
+    "guest": "zor"
+  },
+  {
+    "key": "diff",
+    "value": "kabus",
+    "status": "PASS",
+    "host": "kabus",
+    "guest": "kabus"
+  }
+]

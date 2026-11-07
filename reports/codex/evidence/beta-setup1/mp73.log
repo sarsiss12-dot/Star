@@ -1,0 +1,12 @@
+FAIL A1 rehber 1–8: oda, iki farklı devlet, hazır, başlat; iki ekranda galaksi; sürüm işareti lobi / başlangıç / MP çubuğunda ve /mp/version oyun build'iyle aynı
+page.waitForFunction: Timeout 15000ms exceeded.
+    at wait (/workspace/Star/tests/helpers/beta-setup1-mp.cjs:4:26)
+    at module.exports (/workspace/Star/tests/helpers/beta-setup1-mp.cjs:11:145)
+    at async /workspace/Star/tests/browser-mp73.cjs:117:48
+    at async test (/workspace/Star/tests/browser-mp73.cjs:13:7)
+    at async /workspace/Star/tests/browser-mp73.cjs:114:3
+PASS P01 #1 host ve misafir panel sahipliği / ayna yenilemesi
+PASS P03 #3 tek dokunma, bekleyen gerçek ACK, panel koruması ve yeniden bağlantı
+PASS P04 #4/#21 iki insan savaş bitişi, güvenli haber aynası ve ambargo
+PASS A3 rehber 13–15: misafir bağlantısı kopar ve döner → aynı devlet; host oyun kaydı alır (MP.4 paketi doğrulanır)
+GEÇEN: 4 KALAN: 1

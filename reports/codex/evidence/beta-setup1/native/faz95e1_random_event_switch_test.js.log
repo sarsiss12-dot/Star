@@ -1,0 +1,9 @@
+✓ default setup enables random events, separate from AUTO_EVENT
+✓ setup UI has a separate random event toggle, which survives redraw
+✓ random empire event and chain never fire while disabled and consume no RNG
+✓ dynamic galactic upheaval is blocked without RNG even past first eligible month
+✓ disabled setting persists after Save v8 serialize/deserialize
+✓ old saves without setting keep random events enabled by default
+✓ disabled random setting does not block legitimate diplomacy or espionage mechanics
+✓ player-off setting prevents queued random story continuations on month tick
+GEÇEN: 8 KALAN: 0

@@ -1,0 +1,34 @@
+FAIL 0 KAPALI yeni yerel kapı: izin/kaynak/kuyruk engeli Expected values to be strictly equal:
+
+true !== false
+
+FAIL 1 KAPALI yeni yerel kapı: izin/kaynak/kuyruk engeli Expected values to be strictly equal:
+
+true !== false
+
+FAIL KAPALI uzaktan sipariş reddedilir; kaynak ve görev yok Expected values to be strictly equal:
+
+true !== false
+
+FAIL AI KAPALI kapı seçmez; AÇIK uygun zengin AI seçebilir Expected values to be strictly equal:
+
+'kapi' !== null
+
+FAIL KAPALI tek başına eski kapı genel ileri ikmal üssü sayılmaz Expected values to be strictly equal:
+
+true !== false
+
+PASS AÇIK maliyet bir kez ödenir, gerçek yapı tamamlanır ve gemi serbest kalır
+PASS iki gerçek kapı rota, mesafe ve varış süresi avantajı; anlık değil
+PASS kapıya komşu sahipsiz sistemde ikmal mesafesi ON0/OFF1
+PASS yabancı/düşman kapı izinleri korunur, karşı yön izin açmaz
+PASS eski OFF Save8 kapısı silinmez; önceden ödenmiş iş tamamlanır pasif kalır, çift ödeme/iade yok
+FAIL kriz şiddeti OFF + erken zamanlama kaydı yeni kriz yaratmaz Expected values to be strictly equal:
+
+3 !== 0
+
+FAIL legacy bekleyen kriz OFF ayarında başlamaz, aktif eski kriz sessiz silinmez Expected values to be strictly equal:
+
+1 !== 0
+
+GEÇEN: 5 KALAN: 7

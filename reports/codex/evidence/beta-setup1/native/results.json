@@ -1,0 +1,128 @@
+[
+  {
+    "test": "beta_setup1_gates_test.cjs",
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 5.05
+  },
+  {
+    "test": "beta_ux0_names_test.cjs",
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 6.31
+  },
+  {
+    "test": "beta_setup0_pirates_test.cjs",
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 4.33
+  },
+  {
+    "test": "faz95e1_random_event_switch_test.js",
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 1.76
+  },
+  {
+    "test": "faz96e_origins_test.js",
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 14.18
+  },
+  {
+    "test": "faz88a_fleet_routes_test.js",
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 6.36
+  },
+  {
+    "test": "mp6_mirror_test.js",
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 6.11
+  },
+  {
+    "test": "mp89_ui_integrity_test.js",
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 0.21
+  },
+  {
+    "test": "beta_p01_ballot_test.js",
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 0.66
+  },
+  {
+    "test": "beta_p01_war_end_test.js",
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 1.13
+  },
+  {
+    "test": "beta_p01_embargo_test.js",
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 0.92
+  },
+  {
+    "test": "beta_p02_news_test.js",
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 1.46
+  },
+  {
+    "test": "beta_p02_news_return_test.js",
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 0.76
+  },
+  {
+    "test": "mp64_news_test.js",
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 1.14
+  },
+  {
+    "test": "mp73_council_test.js",
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 12.19
+  },
+  {
+    "test": "faz90rc_1_save_boundary_test.js",
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 6.56
+  },
+  {
+    "test": "mp4_core_test.js",
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 9.39
+  },
+  {
+    "test": "beta_p01_compat_test.js",
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 0.75
+  },
+  {
+    "test": "mp86_nebula_cache_test.js",
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 2.7
+  },
+  {
+    "test": "perf1_equivalence_test.js",
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 2.47
+  },
+  {
+    "test": "perf2_equivalence_test.js",
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 3.07
+  }
+]
