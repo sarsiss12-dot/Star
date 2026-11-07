@@ -1,0 +1,117 @@
+[
+  {
+    "path": ".emps.6.col",
+    "before": "#f5665c",
+    "after": "#5cf5d6"
+  },
+  {
+    "path": ".emps.6.emblem.primary",
+    "before": "#f5665c",
+    "after": "#5cf5d6"
+  },
+  {
+    "path": ".emps.6.emblem.secondary",
+    "before": "#202537",
+    "after": "#f5665c"
+  },
+  {
+    "path": ".emps.7.col",
+    "before": "#5cf5d6",
+    "after": "#3e8f98"
+  },
+  {
+    "path": ".emps.7.emblem.primary",
+    "before": "#5cf5d6",
+    "after": "#3e8f98"
+  },
+  {
+    "path": ".emps.8.col",
+    "before": "#3e8f98",
+    "after": "#3e4a98"
+  },
+  {
+    "path": ".emps.8.emblem.primary",
+    "before": "#3e8f98",
+    "after": "#3e4a98"
+  },
+  {
+    "path": ".emps.9.col",
+    "before": "#3e4a98",
+    "after": "#983e8f"
+  },
+  {
+    "path": ".emps.9.emblem.primary",
+    "before": "#3e4a98",
+    "after": "#983e8f"
+  },
+  {
+    "path": ".emps.10.col",
+    "before": "#983e8f",
+    "after": "#d65cf5"
+  },
+  {
+    "path": ".emps.10.emblem.primary",
+    "before": "#983e8f",
+    "after": "#d65cf5"
+  },
+  {
+    "path": ".emps.11.col",
+    "before": "#d65cf5",
+    "after": "#985f3e"
+  },
+  {
+    "path": ".emps.11.emblem.primary",
+    "before": "#d65cf5",
+    "after": "#985f3e"
+  },
+  {
+    "path": ".emps.12.col",
+    "before": "#985f3e",
+    "after": "#be3737"
+  },
+  {
+    "path": ".emps.12.emblem.primary",
+    "before": "#985f3e",
+    "after": "#be3737"
+  },
+  {
+    "path": ".emps.13.col",
+    "before": "#be3737",
+    "after": "#4dcb72"
+  },
+  {
+    "path": ".emps.13.emblem.primary",
+    "before": "#be3737",
+    "after": "#4dcb72"
+  },
+  {
+    "path": ".emps.14.col",
+    "before": "#4dcb72",
+    "after": "#a769d3"
+  },
+  {
+    "path": ".emps.14.emblem.primary",
+    "before": "#4dcb72",
+    "after": "#a769d3"
+  },
+  {
+    "path": ".emps.15.col",
+    "before": "#a769d3",
+    "after": "#bead37"
+  },
+  {
+    "path": ".emps.15.emblem.primary",
+    "before": "#a769d3",
+    "after": "#bead37"
+  },
+  {
+    "path": ".emps.16.col",
+    "before": "#bead37",
+    "after": "#4db6cb"
+  },
+  {
+    "path": ".emps.16.emblem.primary",
+    "before": "#bead37",
+    "after": "#4db6cb"
+  }
+]

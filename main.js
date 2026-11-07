@@ -1426,11 +1426,22 @@ const SIZES = {
   devasa:{n:'DEVASA', sys:80,  ai:9,  d:'80 sistem · 10 imparatorluk'},
   ulu   :{n:'ULU',    sys:100, ai:11, d:'100 sistem · 12 imparatorluk · ağır'}
 };
+// BETA-SCALE.0: existing keys/values retain their historical seed paths.
+const SCALE_STEPS=[30,45,60,80,100,125,150,175,200,225,250,275,300,350,400,450,500,600,700,800,900,1000];
+const MAX_AI_COUNT=48;
+// 24/32/48 AI are measured research targets, not accepted long-campaign options.
+const SCALE_ACCEPTANCE={maxAI:16};
+for(const n of SCALE_STEPS.filter(n=>n>100))SIZES['s'+n]={n:n+' SİSTEM',sys:n,ai:11,d:n+' sistem · PC',available:n<=500};
+function availableGalaxySteps(){return SCALE_STEPS.filter(n=>Object.values(SIZES).some(s=>s.sys===n&&s.available!==false));}
+function setupSizeKey(n){return Object.keys(SIZES).find(k=>SIZES[k].sys===n);}
+function extendedEmpireColor(i){const h=(i*137.508)%360,s=.55,l=.48+(i%3)*.07,c=(1-Math.abs(2*l-1))*s,x=c*(1-Math.abs(h/60%2-1)),m=l-c/2,parts=h<60?[c,x,0]:h<120?[x,c,0]:h<180?[0,c,x]:h<240?[0,x,c]:h<300?[x,0,c]:[c,0,x];return '#'+parts.map(v=>Math.round((v+m)*255).toString(16).padStart(2,'0')).join('');}
 // Missing field retains each historical size default; explicit values never clamp.
 function aiCountFor(cfg){return cfg.aiCount===undefined?SIZES[cfg.size]?.ai:cfg.aiCount;}
 function setupConfigError(cfg){
- if(!SIZES[cfg.size]||(cfg.shape!==undefined&&!SHAPES[cfg.shape]))return 'Geçersiz galaksi boyutu veya şekli.';
- const n=aiCountFor(cfg);return Number.isInteger(n)&&n>=1&&n<=11?'':'AI devlet sayısı 1–11 arasında bir tam sayı olmalı.';
+ if(!SIZES[cfg.size]||SIZES[cfg.size].available===false||(cfg.shape!==undefined&&!SHAPES[cfg.shape]))return 'Geçersiz galaksi boyutu veya şekli.';
+ const n=aiCountFor(cfg);if(!Number.isInteger(n)||n<1||n>MAX_AI_COUNT)return 'AI devlet sayısı 1–48 arasında bir tam sayı olmalı.';
+ if(n+1>SIZES[cfg.size].sys)return 'Seçilen galaksi bu kadar devleti güvenli yerleştirmek için çok küçük. Yıldız sayısını artır veya AI sayısını azalt.';
+ const actualAI=n-(Array.isArray(cfg.humans)?cfg.humans.length:0);if(actualAI>SCALE_ACCEPTANCE.maxAI)return 'Bu sürümde uzun kampanyası doğrulanmış üst sınır '+SCALE_ACCEPTANCE.maxAI+' AI. 24/32/48 AI deneysel; seçim sessizce azaltılmaz.';return '';
 }
 /* Harita kenarı: 30 sistem → 4200, 100 sistem → ~7670.
    Yıldız yoğunluğu (px/sistem) tüm boyutlarda benzer kalır. */
@@ -1983,6 +1994,13 @@ function generateGalaxy(cfg){
   const rnd = mulberry32(cfg.seed);
   G._adlar = {};                     // FAZ 44: isim tekrarını önler
   G._palet = assignPalette(rnd);     // FAZ 46: ayrık renkler
+  if(aiCountFor(cfg)>11){
+    // Yeni geniş aralıkta insanın özel rengini AI tekrar kullanmasın; eski<=11 yolu aynıdır.
+    const reserved=new Set([cfg.color,...(cfg.humans||[]).map(h=>h.color)].filter(c=>typeof c==='string').map(c=>c.toLowerCase()));
+    G._palet=G._palet.filter(c=>!reserved.has(c.toLowerCase()));
+    const used=new Set(G._palet.map(c=>c.toLowerCase()));
+    for(let i=0;G._palet.length<=aiCountFor(cfg);i++){const c=extendedEmpireColor(i);if(!used.has(c)&&!reserved.has(c)){used.add(c);G._palet.push(c);}}
+  }
   G._paletIx = 0;
   const N = SIZES[cfg.size].sys;
   /* FAZ 32: harita alanı sistem sayısıyla büyür — yıldızlar sıkışmaz
@@ -2504,7 +2522,7 @@ function makeConfiguredEmpire(id, src, rnd){
 function humanDraftsError(cfg){
  if(cfg.humans===undefined)return '';
  if(!Array.isArray(cfg.humans)||cfg.humans.some(h=>!h||typeof h!=='object'||!Object.hasOwn(RACES,h.race)))return 'Geçersiz oyuncu devlet taslağı.';
- return cfg.humans.length<aiCountFor(cfg)?'':'En az bir AI devleti kalmalı: AI + insan oyuncu sayısı 11\'i aşamaz.';
+ return cfg.humans.length<aiCountFor(cfg)?'':'En az bir AI devleti kalmalı: AI + misafir oyuncu sayısı 48\'i aşamaz.';
 }
 function setupGame(cfg){
   const invalid=setupConfigError(cfg)||humanDraftsError(cfg);if(invalid)throw new RangeError(invalid);
@@ -3283,10 +3301,16 @@ function gateSupplyNodes(e){
   return liste;
 }
 
-function supplyDistance(e, f){
+function supplyDistance(e, f, nodes){
+  // Keşif bağlamının mevcut salt-okunur ömrüyle sınırlı; gün/oyun önbelleği değildir.
+  const node = s => {
+    if(!nodes||!s)return isSupplyNode(e,s);
+    if(!nodes.has(s.id))nodes.set(s.id,isSupplyNode(e,s));
+    return nodes.get(s.id);
+  };
   const sid = f.sys >= 0 ? f.sys : (f.mv ? f.mv.to : -1);
   if (sid < 0) return 0;
-  if (isSupplyNode(e, G.sys[sid])) return 0;
+  if (node(G.sys[sid])) return 0;
   /* FAZ 63: geçit varsa mesafe sıfır — ağ tek nokta gibi davranır */
   /* PERF.2 B: gateSupplyNodes listesinin üyeliği = hasUsableGate (saf); tüm galaksiyi taramadan aynı denetim. */
   {
@@ -3305,7 +3329,7 @@ function supplyDistance(e, f){
       for (const l of G.sys[id].lanes){
         if (gorulen.has(l)) continue;
         gorulen.add(l);
-        if (isSupplyNode(e, G.sys[l])) return d;
+        if (node(G.sys[l])) return d;
         sonraki.push(l);
       }
     }
@@ -3316,7 +3340,7 @@ function supplyDistance(e, f){
 }
 
 /* 1 = tam ikmal … 0 = hat tamamen kopuk */
-function fleetSupply(e, f){
+function fleetSupply(e, f, nodes){
   if (!f || !f.ships || !f.ships.length) return 1;
   /* ═══ FAZ 59: LOJİSTİK HACK ═══
      Hacklenmiş sistemdeki filo tedarik tabanına düşer — hattın
@@ -3325,7 +3349,7 @@ function fleetSupply(e, f){
   if (bs && bs.supplyHack && bs.supplyHack > (G.memAge || 0) &&
       bs.supplyHackBy !== f.e)
     return SUPPLY_FLOOR;
-  const d = supplyDistance(e, f);
+  const d = supplyDistance(e, f, nodes);
   if (d <= SUPPLY_FREE) return 1;
   /* ═══ FAZ 54: KADEMELİ CEZA ═══
      Eski formül SUPPLY_LIMIT'te sıfıra iniyordu — filo tamamen
@@ -4068,14 +4092,14 @@ function explorationContext(e){
   const frontier=new Set(known);
   for(const id of known)for(const n of G.sys[id].lanes)frontier.add(n);
   const gates=[...known].filter(id=>hasUsableGate(e,G.sys[id]));
-  return {known,visible,frontier,blocked,pirates,gates,supply:new Map()};
+  return {known,visible,frontier,blocked,pirates,gates,supply:new Map(),supplyNodes:new Map()};
 }
 function explorationBlock(e,f,id,ctx,from){
   if(!G.sys[id]||!ctx.frontier.has(id))return 'route';
   if(ctx.blocked.has(id))return ctx.pirates.has(id)?'pirate':'threat';
   if(from!==undefined && !pathAllowed(e,f,[id],from))return 'route';
   if(!isArmed(f)){
-    if(!ctx.supply.has(id))ctx.supply.set(id,fleetSupply(e,{sys:id,ships:f.ships,e:f.e}));
+    if(!ctx.supply.has(id))ctx.supply.set(id,fleetSupply(e,{sys:id,ships:f.ships,e:f.e},ctx.supplyNodes));
     if(ctx.supply.get(id)<=SUPPLY_FLOOR+.015)return 'supply';
   }
   return '';
@@ -4195,7 +4219,7 @@ function autoExploreTick(onlyEmpire){
       let home=-1;
       if(fleetSupply(e,{sys:from,ships:f.ships,e:f.e})<.999){
         for(const id of ctx.known)if(id!==from&&Number.isFinite(graph.cost[id])&&
-          !explorationBlock(e,f,id,ctx)&&fleetSupply(e,{sys:id,ships:f.ships,e:f.e})>=.999&&
+          !explorationBlock(e,f,id,ctx)&&fleetSupply(e,{sys:id,ships:f.ships,e:f.e},ctx.supplyNodes)>=.999&&
           (home<0||graph.cost[id]<graph.cost[home]))home=id;
       }
       if(home>=0){
@@ -4674,6 +4698,7 @@ function territoryOwnerSet(place, owner){
     if(s)recordNews({category:'territory',empires:[place.owner,owner].filter(id=>id>=0),system:s.id,...(s!==place?{planet:place.i}:{}),key:'territory:'+s.id+':'+(s===place?'sys':place.i)+':'+((place.shareRev||0)+1),title:'Sahiplik değişti',text:(place.name||s.name)+' — '+(G.emps[place.owner]?.name||'Önceki yönetim')+' → '+(G.emps[owner]?.name||'Sahipsiz bölge')});
   }
   if (place.owner !== owner){place.shareRev = (place.shareRev || 0) + 1;if(typeof DIPLO_MAP_CACHE!=='undefined')DIPLO_MAP_CACHE=null;}
+  if(place.owner!==owner&&owner>=0&&place.col&&typeof place.col==='object'&&!G._newsSetup&&!(typeof _loadTxActive!=='undefined'&&_loadTxActive))initializeColonyAutomation(place.col);
   place.owner = owner;
 }
 function captureSystem(sys, byId, cause = 'conquest', onlyPlanet = null){
@@ -8404,7 +8429,7 @@ function forceRedraw(sebep){
    Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
    Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
 /* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */
-const BUILD_ID = '96h10p11';
+const BUILD_ID = '96h10p12';
 const DIAG_MAX = 40;
 const DIAG = [];
 function logDiag(tur, mesaj){

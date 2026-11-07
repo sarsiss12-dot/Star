@@ -1,0 +1,37 @@
+[
+  {
+    "systems": 500,
+    "ai": 32,
+    "seed": 11,
+    "startMonth": 30,
+    "method": "Full 60 half-day engine steps/month, Chromium155 CPU1. Same Save8 and new colony rules in both arms; control restores only pre-SCALE exploration functions.",
+    "arms": {
+      "candidate": {
+        "n": 3,
+        "median": 5293.600000023842,
+        "p95": 6942.5,
+        "times": [
+          4671.800000011921,
+          6942.5,
+          5293.600000023842
+        ],
+        "rng": 305564723,
+        "nodeCalls": 230285
+      },
+      "control": {
+        "n": 3,
+        "median": 5662.899999976158,
+        "p95": 6200,
+        "times": [
+          5610.199999988079,
+          5662.899999976158,
+          6200
+        ],
+        "rng": 305564723,
+        "nodeCalls": 1205803
+      }
+    },
+    "rawSaveRngEqual": true,
+    "medianReductionPercent": 6.521393631423322
+  }
+]

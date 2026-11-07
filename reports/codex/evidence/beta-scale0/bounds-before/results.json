@@ -1,0 +1,31 @@
+[
+  {
+    "name": "200/16 actual public setup (no validation bypass)",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'Geçersiz galaksi boyutu veya şekli.'\n- ''\n\n    at /workspace/Star/tests/beta_scale0_bounds_test.cjs:4:195\n    at test (/workspace/Star/tests/beta_scale0_bounds_test.cjs:3:35)\n    at Object.<anonymous> (/workspace/Star/tests/beta_scale0_bounds_test.cjs:4:56)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n    at Module.load (node:internal/modules/cjs/loader:1651:32)\n    at Module._load (node:internal/modules/cjs/loader:1443:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47"
+  },
+  {
+    "name": "300/24 actual public setup (no validation bypass)",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'Geçersiz galaksi boyutu veya şekli.'\n- ''\n\n    at /workspace/Star/tests/beta_scale0_bounds_test.cjs:4:195\n    at test (/workspace/Star/tests/beta_scale0_bounds_test.cjs:3:35)\n    at Object.<anonymous> (/workspace/Star/tests/beta_scale0_bounds_test.cjs:4:56)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n    at Module.load (node:internal/modules/cjs/loader:1651:32)\n    at Module._load (node:internal/modules/cjs/loader:1443:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47"
+  },
+  {
+    "name": "500/32 actual public setup (no validation bypass)",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'Geçersiz galaksi boyutu veya şekli.'\n- ''\n\n    at /workspace/Star/tests/beta_scale0_bounds_test.cjs:4:195\n    at test (/workspace/Star/tests/beta_scale0_bounds_test.cjs:3:35)\n    at Object.<anonymous> (/workspace/Star/tests/beta_scale0_bounds_test.cjs:4:56)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n    at Module.load (node:internal/modules/cjs/loader:1651:32)\n    at Module._load (node:internal/modules/cjs/loader:1443:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47"
+  },
+  {
+    "name": "500/48 actual public setup (no validation bypass)",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'Geçersiz galaksi boyutu veya şekli.'\n- ''\n\n    at /workspace/Star/tests/beta_scale0_bounds_test.cjs:4:195\n    at test (/workspace/Star/tests/beta_scale0_bounds_test.cjs:3:35)\n    at Object.<anonymous> (/workspace/Star/tests/beta_scale0_bounds_test.cjs:4:56)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n    at Module.load (node:internal/modules/cjs/loader:1651:32)\n    at Module._load (node:internal/modules/cjs/loader:1443:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47"
+  },
+  {
+    "name": "invalid/dense/64AI values rejected explicitly, no silent clamp",
+    "status": "PASS"
+  },
+  {
+    "name": "every enabled step exact and reversible; old presets retained",
+    "status": "FAIL",
+    "error": "evalmachine.<anonymous>:1\navailableGalaxySteps()\n^\n\nReferenceError: availableGalaxySteps is not defined\n    at evalmachine.<anonymous>:1:1\n    at Script.runInContext (node:vm:149:12)\n    at Object.runInContext (node:vm:301:6)\n    at Object.run (/workspace/Star/tests/helpers/runtime.js:112:25)\n    at /workspace/Star/tests/beta_scale0_bounds_test.cjs:6:113\n    at test (/workspace/Star/tests/beta_scale0_bounds_test.cjs:3:35)\n    at Object.<anonymous> (/workspace/Star/tests/beta_scale0_bounds_test.cjs:6:1)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n    at Module.load (node:internal/modules/cjs/loader:1651:32)"
+  }
+]

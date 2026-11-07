@@ -1,0 +1,24 @@
+FAIL 0 yeni koloni ON, ilk60gün harcamasız, sonra tek gerçek bina Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- true
+
+FAIL 1 yeni koloni ON, ilk60gün harcamasız, sonra tek gerçek bina Expected values to be strictly equal:
++ actual - expected
+
++ undefined
+- true
+
+FAIL fetih yeni sahibinde ON, odak ve mevcut manuel kuyruk korunur; yeniden fetih gecikmeyi yeniden başlatır Expected values to be strictly equal:
+
+false !== true
+
+FAIL odaksız koloni temel planla çalışır, ekonomik odak gizlice değişmez The expression evaluated to a falsy value:
+
+  assert(h.run('st.bina'))
+
+PASS manuel OFF aylar ve Save8 boyunca korunur; gecikme yüklemede sıfırlanmaz
+PASS eski Save8 manuelOFF/missing alanları geriye dönük açılmaz
+FAIL kaynak yetersizliği bekler, toparlanınca tek sipariş, tech/slot/çift ücret kapıları korunur Cannot read properties of undefined (reading 'length')
+GEÇEN: 2 KALAN: 5

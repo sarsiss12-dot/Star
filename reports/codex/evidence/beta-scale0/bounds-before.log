@@ -1,0 +1,27 @@
+FAIL 200/16 actual public setup (no validation bypass) Expected values to be strictly equal:
++ actual - expected
+
++ 'Geçersiz galaksi boyutu veya şekli.'
+- ''
+
+FAIL 300/24 actual public setup (no validation bypass) Expected values to be strictly equal:
++ actual - expected
+
++ 'Geçersiz galaksi boyutu veya şekli.'
+- ''
+
+FAIL 500/32 actual public setup (no validation bypass) Expected values to be strictly equal:
++ actual - expected
+
++ 'Geçersiz galaksi boyutu veya şekli.'
+- ''
+
+FAIL 500/48 actual public setup (no validation bypass) Expected values to be strictly equal:
++ actual - expected
+
++ 'Geçersiz galaksi boyutu veya şekli.'
+- ''
+
+PASS invalid/dense/64AI values rejected explicitly, no silent clamp
+FAIL every enabled step exact and reversible; old presets retained availableGalaxySteps is not defined
+GEÇEN: 1 KALAN: 5

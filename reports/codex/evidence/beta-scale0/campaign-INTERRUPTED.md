@@ -1,0 +1,1 @@
+Ön kampanya, tarayıcı performans ölçümüyle CPU yarışını önlemek için ilk vaka sırasında durduruldu. Bu kısmi kayıt PASS/FAIL veya performans karşılaştırması sayılmayacak; izole ölçüm bittikten sonra ayrı çıktı dizininde yeniden başlanacak.

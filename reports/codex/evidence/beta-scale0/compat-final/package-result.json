@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "build": "96h10p11",
+  "package": 4,
+  "save": 8,
+  "rngEqual": true,
+  "tamperRejected": true
+}

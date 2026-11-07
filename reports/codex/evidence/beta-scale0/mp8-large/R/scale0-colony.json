@@ -1,0 +1,240 @@
+{
+  "cfg": {
+    "cfg": {
+      "name": "Kızıl Muhafız",
+      "race": "klan",
+      "traits": [],
+      "size": "s500",
+      "shape": "sarmal",
+      "diff": "normal",
+      "seed": 11,
+      "color": null,
+      "ethics": {
+        "mil": 2,
+        "aut": 0,
+        "mat": 0,
+        "ahl": 0
+      },
+      "civics": [
+        "kale_dok"
+      ],
+      "origin": "standart",
+      "sigil": "simetrik",
+      "monoRes": "min",
+      "look": "humanoid",
+      "portraitVariant": 0,
+      "mizac": "militarist",
+      "crisis": "normal",
+      "ruins": "orta",
+      "council": "normal",
+      "physio": "humanoid",
+      "pirates": true,
+      "gates": true,
+      "crisisPower": "normal",
+      "aiOrigins": true,
+      "aiOriginChance": 35,
+      "randomEvents": true,
+      "aiCount": 18,
+      "ethLocked": true,
+      "humans": [
+        {
+          "name": "Saf Akıl Ağı",
+          "race": "teknokrasi",
+          "mizac": "teknokrasi",
+          "physio": "humanoid",
+          "look": "humanoid",
+          "origin": "standart",
+          "sigil": "simetrik",
+          "ethics": {
+            "mil": -1,
+            "aut": 0,
+            "mat": 2,
+            "ahl": 0
+          },
+          "civics": [
+            "sinyal_avci"
+          ],
+          "traits": [],
+          "monoRes": "min",
+          "portraitVariant": 0,
+          "color": null
+        },
+        {
+          "name": "Yeşil Birlik",
+          "race": "lonca",
+          "mizac": "tuccar",
+          "physio": "humanoid",
+          "look": "humanoid",
+          "origin": "standart",
+          "sigil": "simetrik",
+          "ethics": {
+            "mil": 0,
+            "aut": -1,
+            "mat": 1,
+            "ahl": 0
+          },
+          "civics": [
+            "maden_lonca"
+          ],
+          "traits": [],
+          "monoRes": "min",
+          "portraitVariant": 0,
+          "color": null
+        }
+      ]
+    },
+    "systems": 500,
+    "humans": 3,
+    "ai": 16,
+    "ids": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19
+    ]
+  },
+  "guestCfg": {
+    "name": "Saf Akıl Ağı",
+    "race": "teknokrasi",
+    "traits": [],
+    "size": "s500",
+    "shape": "sarmal",
+    "diff": "normal",
+    "seed": 112557998,
+    "color": "#56983e",
+    "ethics": {
+      "mil": -1,
+      "aut": 0,
+      "mat": 2,
+      "ahl": 0
+    },
+    "civics": [
+      "sinyal_avci"
+    ],
+    "origin": "standart",
+    "sigil": "simetrik",
+    "monoRes": "min",
+    "look": "humanoid",
+    "portraitVariant": 0,
+    "mizac": "teknokrasi",
+    "crisis": "normal",
+    "ruins": "orta",
+    "council": "normal",
+    "physio": "humanoid",
+    "pirates": true,
+    "gates": true,
+    "crisisPower": "normal",
+    "aiOrigins": true,
+    "aiOriginChance": 35,
+    "randomEvents": true,
+    "aiCount": 18,
+    "ethLocked": true,
+    "humans": [
+      {
+        "name": "Saf Akıl Ağı",
+        "race": "teknokrasi",
+        "mizac": "teknokrasi",
+        "physio": "humanoid",
+        "look": "humanoid",
+        "origin": "standart",
+        "sigil": "simetrik",
+        "ethics": {
+          "mil": -1,
+          "aut": 0,
+          "mat": 2,
+          "ahl": 0
+        },
+        "civics": [
+          "sinyal_avci"
+        ],
+        "traits": [],
+        "monoRes": "min",
+        "portraitVariant": 0,
+        "color": null
+      },
+      {
+        "name": "Yeşil Birlik",
+        "race": "lonca",
+        "mizac": "tuccar",
+        "physio": "humanoid",
+        "look": "humanoid",
+        "origin": "standart",
+        "sigil": "simetrik",
+        "ethics": {
+          "mil": 0,
+          "aut": -1,
+          "mat": 1,
+          "ahl": 0
+        },
+        "civics": [
+          "maden_lonca"
+        ],
+        "traits": [],
+        "monoRes": "min",
+        "portraitVariant": 0,
+        "color": null
+      }
+    ]
+  },
+  "actor": 1,
+  "fixture": {
+    "sys": 0,
+    "planet": 0,
+    "fleet": 88
+  },
+  "start": {
+    "day": 1.973399999999998,
+    "deadline": 61.9734
+  },
+  "ack": {
+    "v": 1,
+    "type": "result",
+    "seq": 1,
+    "cid": "jmw6roz2o757kfcde",
+    "status": "ok",
+    "code": null,
+    "rev": 7,
+    "ms": 40
+  },
+  "state": {
+    "auto": false,
+    "deadline": 61.9734,
+    "res": {
+      "min": 5000,
+      "ene": 300,
+      "yiy": 180,
+      "ala": 5000,
+      "ara": 0,
+      "tuk": 150,
+      "etk": 70
+    }
+  },
+  "denied": {
+    "v": 1,
+    "type": "result",
+    "seq": 3,
+    "cid": "jmw6rp16wx6ft9ur3",
+    "status": "rejected",
+    "code": "not-owner",
+    "rev": 10,
+    "ms": 24
+  },
+  "snapshotSaveBytes": 320456,
+  "disclosure": "Starting resources and a licensed colony ship placed at an otherwise valid colonizable planet are explicit fixtures. Actual WebSocket colonize and real guest touch colAuto use production authorization."
+}

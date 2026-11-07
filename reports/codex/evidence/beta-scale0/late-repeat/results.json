@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "systems": 500,
+  "ai": 16,
+  "seed": 11,
+  "fromMonth": 120,
+  "toMonth": 121,
+  "repeats": 2,
+  "sha256": "db693ce84fcf680807d45f1206488cfb9bfec57af511a84fa95f5efe71395dd8",
+  "rng": -1581262004,
+  "rawSaveEqual": true
+}

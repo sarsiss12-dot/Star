@@ -1,0 +1,32 @@
+{
+  "systems": 1000,
+  "ai": 48,
+  "target": 30,
+  "seed": 11,
+  "status": "RUNNING",
+  "checkpoints": [
+    {
+      "month": 0,
+      "day": 0,
+      "rng": 423524101,
+      "empires": 50,
+      "aliveAI": 48,
+      "colonies": 49,
+      "fleets": 214,
+      "wars": 0,
+      "federations": 0,
+      "vassals": 0,
+      "autoColonies": 49,
+      "sha256": "55039f93c256f5de9340f93673579d0bb203c36c1c35b25234c33de2562ee3d6",
+      "saveBytes": 749041,
+      "rssMB": 455.36328125
+    }
+  ],
+  "months": [
+    4402.325746000046,
+    4021.694587999955,
+    5199.501025000005,
+    7835.054467999958,
+    13202.138477000059
+  ]
+}

@@ -1,0 +1,34 @@
+[
+  {
+    "file": "200-16-m30.save",
+    "fullKnowledgeFixture": false,
+    "characters": 77941,
+    "bytes": 78129,
+    "oldRelayLimit": 262144,
+    "wouldFit": true
+  },
+  {
+    "file": "200-16-m30.save",
+    "fullKnowledgeFixture": true,
+    "characters": 134752,
+    "bytes": 134990,
+    "oldRelayLimit": 262144,
+    "wouldFit": true
+  },
+  {
+    "file": "300-24-m30.save",
+    "fullKnowledgeFixture": false,
+    "characters": 106751,
+    "bytes": 106935,
+    "oldRelayLimit": 262144,
+    "wouldFit": true
+  },
+  {
+    "file": "300-24-m30.save",
+    "fullKnowledgeFixture": true,
+    "characters": 218782,
+    "bytes": 219117,
+    "oldRelayLimit": 262144,
+    "wouldFit": true
+  }
+]

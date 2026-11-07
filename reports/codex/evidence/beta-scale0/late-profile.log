@@ -1,0 +1,14 @@
+[
+  [ 'influenceAt diplomacy.js', 914 ],
+  [ 'supplyDistance main.js', 822 ],
+  [ 'claimOf diplomacy.js', 432 ],
+  [ 'isSupplyNode main.js', 371 ],
+  [ 'explorationContext main.js', 227 ],
+  [ '(garbage collector) ', 201 ],
+  [ 'reinforcementThreats main.js', 164 ],
+  [ 'txCaptureGraph diplomacy.js', 147 ],
+  [ 'autoExploreTick main.js', 126 ],
+  [ 'EconomyLedger.observe.sy.system economic-ledger.js', 59 ],
+  [ ' ai.js', 59 ],
+  [ 'clean economic-ledger.js', 57 ]
+]

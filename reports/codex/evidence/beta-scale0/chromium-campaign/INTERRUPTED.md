@@ -1,0 +1,1 @@
+Ölçüm fikstürü hatası: UI.closeModal sonrasında prePause üzerinden hız geri dönebildi; 30. ay gün değeri 901.8662 gözlendi. Kampanya durduruldu; bu koşu kabul veya deterministik performans kanıtı değildir. Ürün hız kodu değiştirilmedi. Yeni koşu setup sonrası ilk frame öncesi hızı durdurur, modalı kapatıp prePause temizler ve her adımda hız=0 doğrular.

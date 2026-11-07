@@ -1,0 +1,102 @@
+[
+  [
+    "influenceAt diplomacy.js",
+    914
+  ],
+  [
+    "supplyDistance main.js",
+    822
+  ],
+  [
+    "claimOf diplomacy.js",
+    432
+  ],
+  [
+    "isSupplyNode main.js",
+    371
+  ],
+  [
+    "explorationContext main.js",
+    227
+  ],
+  [
+    "(garbage collector) ",
+    201
+  ],
+  [
+    "reinforcementThreats main.js",
+    164
+  ],
+  [
+    "txCaptureGraph diplomacy.js",
+    147
+  ],
+  [
+    "autoExploreTick main.js",
+    126
+  ],
+  [
+    "EconomyLedger.observe.sy.system economic-ledger.js",
+    59
+  ],
+  [
+    " ai.js",
+    59
+  ],
+  [
+    "clean economic-ledger.js",
+    57
+  ],
+  [
+    "structTick main.js",
+    54
+  ],
+  [
+    " main.js",
+    39
+  ],
+  [
+    "structAllowed main.js",
+    35
+  ],
+  [
+    "aiEconomyPlan ai.js",
+    34
+  ],
+  [
+    "fleetSupply main.js",
+    29
+  ],
+  [
+    "explorationGraph main.js",
+    25
+  ],
+  [
+    "stepFleets main.js",
+    23
+  ],
+  [
+    "combatTick main.js",
+    22
+  ],
+  [
+    "fleetPower main.js",
+    21
+  ],
+  [
+    "empireIncome economy.js",
+    21
+  ],
+  [
+    "sysDefense main.js",
+    20
+  ],
+  [
+    "dailyTick main.js",
+    18
+  ],
+  [
+    "sync economic-ledger.js",
+    18
+  ]
+]

@@ -1,0 +1,42 @@
+{
+  "systems": 1000,
+  "ai": 48,
+  "target": 10,
+  "seed": 11,
+  "viewport": [
+    1920,
+    1080
+  ],
+  "cpuThrottle": 1,
+  "researchOnly": true,
+  "status": "RUNNING",
+  "months": [
+    2170.600000023842,
+    2509.699999988079,
+    2658,
+    2720.899999976158,
+    2943.899999976158,
+    2603.899999976158,
+    3247.399999976158,
+    3397.300000011921,
+    4270.600000023842
+  ],
+  "checkpoints": [
+    {
+      "month": 0,
+      "day": 0,
+      "rng": 423524101,
+      "normal": 49,
+      "aliveAI": 48,
+      "empires": 50,
+      "colonies": 49,
+      "fleets": 214,
+      "wars": 0,
+      "federations": 0,
+      "vassals": 0,
+      "heapMB": 17.351505279541016,
+      "saveBytes": 747742
+    }
+  ],
+  "errors": []
+}

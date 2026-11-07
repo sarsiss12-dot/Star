@@ -104,7 +104,7 @@ function validatePackage(input,o={}){
   if(!onlyKeys(pkg,KEYS)||KEYS.some(k=>!has(pkg,k)))return fail('fields');
   if(pkg.format!==PKG_FORMAT)return fail('format');
   if(pkg.mpVersion!==PKG_VERSION)return fail('version');
-  const build=has(o,'build')?o.build:(typeof BUILD_ID==='string'?BUILD_ID:null);if(pkg.build!==build&&!((build==='96h10p7'&&pkg.build==='96h10p6')||(build==='96h10p8'&&['96h10p6','96h10p7'].includes(pkg.build))||(build==='96h10p9'&&['96h10p6','96h10p7','96h10p8'].includes(pkg.build))||(build==='96h10p10'&&['96h10p6','96h10p7','96h10p8','96h10p9'].includes(pkg.build))||(build==='96h10p11'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10'].includes(pkg.build))))return fail('build'); // BETA-P0.1: explicit v8/package4 compatibility, all remaining checks still mandatory
+  const build=has(o,'build')?o.build:(typeof BUILD_ID==='string'?BUILD_ID:null);if(pkg.build!==build&&!((build==='96h10p7'&&pkg.build==='96h10p6')||(build==='96h10p8'&&['96h10p6','96h10p7'].includes(pkg.build))||(build==='96h10p9'&&['96h10p6','96h10p7','96h10p8'].includes(pkg.build))||(build==='96h10p10'&&['96h10p6','96h10p7','96h10p8','96h10p9'].includes(pkg.build))||(build==='96h10p11'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10'].includes(pkg.build))||(build==='96h10p12'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11'].includes(pkg.build))))return fail('build'); // BETA-P0.1: explicit v8/package4 compatibility, all remaining checks still mandatory
   if(typeof pkg.save8!=='string')return fail('fields');if(pkg.save8.length>MAX_SAVE8)return fail('too-big');
   if(!Number.isFinite(pkg.createdAt)||typeof pkg.saveId!=='string'||!/^s-[a-f0-9]{16}$/.test(pkg.saveId))return fail('fields');
   const I=pkg.integrity;if(!plain(I)||!onlyKeys(I,['alg','save8','body'])||I.alg!=='SHA-256'||!HEX(I.save8,64)||!HEX(I.body,64))return fail('integrity');
@@ -116,7 +116,7 @@ function validatePackage(input,o={}){
   const ss=pkg.session;
   if(!plain(ss)||!onlyKeys(ss,['roomId','worldRevision','hostEmpireId','speed','capacity','settings','players','notes']))return fail('session');
   if(!int(ss.worldRevision,0,2147483647)||!int(ss.hostEmpireId,0,63)||!int(ss.speed,0,16)||!int(ss.capacity,2,8)||typeof ss.roomId!=='string'||ss.roomId.length>40)return fail('session');
-  if(ss.settings!==null&&(!plain(ss.settings)||!onlyKeys(ss.settings,['size','aiCount','shape'])||typeof ss.settings.size!=='string'||!int(ss.settings.aiCount,1,11)))return fail('session');
+  if(ss.settings!==null&&(!plain(ss.settings)||!onlyKeys(ss.settings,['size','aiCount','shape'])||typeof ss.settings.size!=='string'||!int(ss.settings.aiCount,1,48)))return fail('session');
   if(!Array.isArray(ss.players)||ss.players.length<1||ss.players.length>8)return fail('session');
   if(ss.players.filter(x=>plain(x)&&x.playerId==='host').length!==1)return fail('host');
   const pids=new Set(),eids=new Set();let hosts=0;
@@ -1302,7 +1302,7 @@ function createHost(opts){
     if(!gs.length)return {ok:false,why:'no-guests'};
     if(L.mode==='design'){
       if(!L.settings)return {ok:false,why:'no-galaxy'};
-      if(L.settings.aiCount+gs.length>11)return {ok:false,why:'too-many-states'};
+      if(L.settings.aiCount+gs.length>48)return {ok:false,why:'too-many-states'};
       if(!hostDraftNow().ok)return {ok:false,why:'host-draft'};
       for(const p of gs){if(!p.conn)return {ok:false,why:'guest-offline'};if(!p.draft)return {ok:false,why:'guest-no-draft'};if(!p.ready)return {ok:false,why:'guest-not-ready'};}
       return {ok:true};
@@ -1585,15 +1585,18 @@ function createHost(opts){
     if(!L)return {ok:false,why:'no-lobby'};
     if(!['created','waiting','ready'].includes(L.phase))return {ok:false,why:'phase'};
     if(!plain(set)||!onlyKeys(set,SETTINGS_KEYS))return {ok:false,why:'bad-settings'};
-    if(!has(SIZES,set.size)||(set.shape!==undefined&&!has(SHAPES,set.shape))||!int(set.aiCount,1,11)||!int(set.seed,1,2147483647))return {ok:false,why:'bad-settings'};
+    if(!has(SIZES,set.size)||SIZES[set.size].available===false||(set.shape!==undefined&&!has(SHAPES,set.shape))||!int(set.aiCount,1,48)||!int(set.seed,1,2147483647))return {ok:false,why:'bad-settings'};
+    if(set.aiCount+(L.mode==='design'?L.capacity:1)>SIZES[set.size].sys)return {ok:false,why:'galaxy-too-small'};
     if(L.mode==='design'){
-      /* MP.7: galaksi OYUN BAŞLARKEN taslaklarla kurulur; burada yalnız ayar doğrulanır. AI + insan ≤ 11 (motorun sınırı). */
-      if(set.aiCount+(L.capacity-1)>11)return {ok:false,why:'too-many-states'};
+      /* MP.7: galaksi OYUN BAŞLARKEN taslaklarla kurulur; burada yalnız ayar doğrulanır. AI + insan ≤ 49 (ID 0–63 için özel taraf payı korunur). */
+      if(set.aiCount+(L.capacity-1)>48)return {ok:false,why:'too-many-states'};
+      if(set.aiCount>SCALE_ACCEPTANCE.maxAI)return {ok:false,why:'unverified-scale'};
       L.settings={...set};L.galaxyRev++;L.phase='waiting';
       for(const p of guests()){if(p.draft&&!draftCheck(p.draft).ok)p.draft=null;p.ready=false;}   // ayar değişti: hazırlar sıfır, taslaklar yeniden denetlenir
       broadcastLobby();return {ok:true};
     }
     if(set.aiCount<L.capacity-1)return {ok:false,why:'ai-below-capacity'};
+    if(set.aiCount>SCALE_ACCEPTANCE.maxAI)return {ok:false,why:'unverified-scale'};
     const r=opts.lobby.generate({...set});if(!r||!r.ok)return {ok:false,why:'generate'};
     L.settings={...set};L.galaxyRev++;L.phase='waiting';
     for(const p of guests()){p.claim=null;p.ready=false;}          // ayar değişti: seçim ve hazırlar sıfır
@@ -1603,7 +1606,7 @@ function createHost(opts){
     if(!L||!['created','waiting','ready'].includes(L.phase))return {ok:false,why:'phase'};
     if(!int(n,2,4))return {ok:false,why:'bad-capacity'};
     if(guests().length>n-1)return {ok:false,why:'too-many'};
-    if(L.mode==='design'){if(L.settings&&L.settings.aiCount+n-1>11)return {ok:false,why:'too-many-states'};}
+    if(L.mode==='design'){if(L.settings&&L.settings.aiCount+n-1>48)return {ok:false,why:'too-many-states'};if(L.settings&&L.settings.aiCount+n>SIZES[L.settings.size].sys)return {ok:false,why:'galaxy-too-small'};}
     else if(L.settings&&L.settings.aiCount<n-1)return {ok:false,why:'ai-below-capacity'};
     L.capacity=n;broadcastLobby();return {ok:true};
   }

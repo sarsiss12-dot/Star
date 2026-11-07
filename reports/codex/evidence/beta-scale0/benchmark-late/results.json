@@ -1,0 +1,128 @@
+[
+  {
+    "systems": 200,
+    "ai": 16,
+    "seed": 11,
+    "viewport": [
+      1920,
+      1080
+    ],
+    "cpuThrottle": 1,
+    "researchOnly": false,
+    "setupMs": 151.20000004768372,
+    "startMonth": 120.02489333333332,
+    "fixtureSave": "reports/codex/evidence/beta-scale0/chromium-controlled/200-16-m120.save",
+    "initial": {
+      "drawMs": {
+        "n": 68,
+        "median": 2,
+        "p95": 6.699999988079071,
+        "max": 14.399999976158142
+      },
+      "frameMs": {
+        "n": 67,
+        "median": 33.30000000000018,
+        "p95": 50,
+        "max": 66.69999999999982
+      },
+      "rafPerSecond": 30.113712976186783
+    },
+    "knownMapFixture": {
+      "drawMs": {
+        "n": 69,
+        "median": 2.600000023841858,
+        "p95": 9.899999976158142,
+        "max": 25.80000001192093
+      },
+      "frameMs": {
+        "n": 68,
+        "median": 33.30000000000018,
+        "p95": 50,
+        "max": 83.30000000000018
+      },
+      "rafPerSecond": 30.57553956834532
+    },
+    "months": [
+      566.1000000238419,
+      458.0999999642372,
+      627.6999999880791,
+      298.9000000357628,
+      416
+    ],
+    "monthMs": {
+      "n": 5,
+      "median": 458.0999999642372,
+      "p95": 627.6999999880791,
+      "max": 627.6999999880791
+    },
+    "heapMB": 44.41144943237305,
+    "actualMonth": 125,
+    "browserRssMB": 979.0078125,
+    "saveBytes": 1783994,
+    "errors": [],
+    "status": "MEASURED"
+  },
+  {
+    "systems": 500,
+    "ai": 16,
+    "seed": 11,
+    "viewport": [
+      1920,
+      1080
+    ],
+    "cpuThrottle": 1,
+    "researchOnly": false,
+    "setupMs": 295.7999999523163,
+    "startMonth": 120,
+    "fixtureSave": "reports/codex/evidence/beta-scale0/final-campaign/500-16-m120.save",
+    "initial": {
+      "drawMs": {
+        "n": 56,
+        "median": 2.599999964237213,
+        "p95": 12.900000035762787,
+        "max": 38.60000002384186
+      },
+      "frameMs": {
+        "n": 55,
+        "median": 33.30000000000018,
+        "p95": 133.30000000000018,
+        "max": 200
+      },
+      "rafPerSecond": 24.809418557044857
+    },
+    "knownMapFixture": {
+      "drawMs": {
+        "n": 71,
+        "median": 3.100000023841858,
+        "p95": 6.099999964237213,
+        "max": 31.30000001192093
+      },
+      "frameMs": {
+        "n": 70,
+        "median": 33.30000000000018,
+        "p95": 50,
+        "max": 50.100000000000364
+      },
+      "rafPerSecond": 31.525851198320858
+    },
+    "months": [
+      1312.4000000357628,
+      993.5,
+      1049.800000011921,
+      1030.5,
+      898.8999999761581
+    ],
+    "monthMs": {
+      "n": 5,
+      "median": 1030.5,
+      "p95": 1312.4000000357628,
+      "max": 1312.4000000357628
+    },
+    "heapMB": 83.05224227905273,
+    "actualMonth": 125,
+    "browserRssMB": 968.734375,
+    "saveBytes": 1755671,
+    "errors": [],
+    "status": "MEASURED"
+  }
+]

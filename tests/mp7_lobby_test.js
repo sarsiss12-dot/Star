@@ -48,15 +48,15 @@ test('sahiplik ve sıra: taslak bağlantının kendi oyuncusuna yazılır; eski 
   assert.equal(lres(h,'b',{type:'claim',empire:2}).code,'mode','AI takeover is not part of design mode');
   assert.deepEqual(msg(h,'b',{v:1,type:'draft',rev:8,draft:DB,empire:3}).map(m=>m.code),['bad-draft'],'extra fields (e.g. a target player/empire) are rejected');
 });
-test('hazır ve başlatma: taslaksız hazır olunmaz; herkes hazır olmadan başlamaz; host galaksi ayarı değişince hazırlar sıfırlanır; AI + insan > 11 reddedilir; host taslağı geçersizse başlamaz',()=>{
+test('hazır ve başlatma: taslaksız hazır olunmaz; herkes hazır olmadan başlamaz; host galaksi ayarı değişince hazırlar sıfırlanır; AI + insan > 49 reddedilir; host taslağı geçersizse başlamaz',()=>{
   const h=room();join(h,'b','Bora');join(h,'c','Cem');
   assert.equal(lres(h,'b',{type:'ready',value:true}).code,'no-draft');
   lres(h,'b',{type:'draft',rev:1,draft:DB});lres(h,'c',{type:'draft',rev:1,draft:DC});lres(h,'b',{type:'ready',value:true});
   assert.equal(J(h,'MP.canStart().why'),'guest-not-ready');assert.equal(J(h,'MP.start().ok'),false);
   lres(h,'c',{type:'ready',value:true});assert.equal(J(h,'MP.canStart().ok'),true);
   assert.equal(J(h,'MP.configure({size:"orta",aiCount:6,seed:22}).ok'),true);assert.equal(J(h,'[...MP.state.players.values()].filter(p=>p.playerId!=="host"&&p.ready).length'),0,'settings change resets ready');
-  assert.equal(J(h,'MP.configure({size:"orta",aiCount:10,seed:22}).why'),'too-many-states','10 AI + 2 guests > 11');
-  assert.equal(J(h,'MP.setCapacity(4).ok'),true);assert.equal(J(h,'MP.configure({size:"orta",aiCount:9,seed:22}).why'),'too-many-states');
+  assert.equal(J(h,'MP.configure({size:"ulu",aiCount:47,seed:22}).why'),'too-many-states','47 AI + 2 guests > 48 extras');
+  assert.equal(J(h,'MP.setCapacity(4).ok'),true);assert.equal(J(h,'MP.configure({size:"ulu",aiCount:46,seed:22}).why'),'too-many-states');
   lres(h,'b',{type:'ready',value:true});lres(h,'c',{type:'ready',value:true});
   h.run('HOST.ethics={mil:3,aut:3,mat:3,ahl:3}');assert.equal(J(h,'MP.canStart().why'),'host-draft');h.run('HOST.ethics={mil:2,aut:0,mat:0,ahl:0}');
   assert.equal(J(h,'MP.canStart().ok'),true);

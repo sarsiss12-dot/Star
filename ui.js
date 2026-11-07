@@ -2507,11 +2507,9 @@ const UI = {
                        : (st && st.dur) ? '#ff9b3d' : '#65e08a';
             h += `<div class="row"><span>🏗 Otomatik inşa</span>
               <b style="color:${renk}">${pl.col.auto
-                ? (st && st.dur ? 'BEKLİYOR' : 'AKTİF') : 'kapalı'}</b></div>`;
-            if (!pl.col.f)
-              h += `<div class="mini" style="color:#ff9b3d">Önce bir odak seç —
-                otomasyon o odağın bina planını uygular.</div>`;
-            else if (pl.col.auto && st && st.dur)
+                ? (st && st.dur ? 'AÇIK · BEKLİYOR' : 'AÇIK · AKTİF') : 'KAPALI · Manuel yönetim'}</b></div>`;
+            if (!pl.col.f)h+='<div class="mini">Temel sanayi planı; ekonomik odak bonusu değiştirilmez.</div>';
+            if (pl.col.auto && st && st.dur)
               h += `<div class="mini" style="color:#ff9b3d">${esc(st.why)}</div>`;
             else if (pl.col.auto && st && st.bina)
               h += `<div class="mini">Sırada: <b>${esc(BUILDINGS[st.bina].n)}</b>
@@ -8562,6 +8560,14 @@ const UI = {
   }
 };
 
+function setupHumanSlots(){return window.MP7Setup?.active&&window.MP7Setup.role==='host'?(window.MP1Host?.lobby?.capacity||1):1;}
+function setupSelectionError(c){
+ const why=setupConfigError(c);if(why)return why;
+ const humans=setupHumanSlots();
+ if(humans>1&&aiCountFor(c)+humans>49)return 'Bu oturumda en fazla '+(49-humans)+' AI seçilebilir; insanlarla birlikte en fazla 49 normal devlet.';
+ if(aiCountFor(c)+humans>SIZES[c.size].sys)return 'Seçilen galaksi bu kadar devleti güvenli yerleştirmek için çok küçük. Yıldız sayısını artır veya AI sayısını azalt.';
+ return '';
+}
 function renderSetup(){
   /* ═══ ZIRH 1: GÜVENLİ BAŞLANGIÇ STATE ═══
      ETHICS'teki her eksen CFG.ethics'te sayısal olarak var olmalı.
@@ -9017,9 +9023,11 @@ function renderSetup(){
         ${k[1]}<small>${k[2]}</small></button>`;
     });
     h += `</div><div class="mini">Şiddet veya zamanlama KAPALI ise yeni kriz başlamaz. Zamanlama yeniden açılırsa kapalı şiddet NORMAL olur. Özel AI köken zarları bağımsızdır; oyuncunun kökeni değişmez.</div></div>`;
-    h += `<div class="sect"><h2>GALAKSİ</h2><div class="grid g4">`;
-    for (const k in SIZES) h += `<button class="opt ${c.size===k?'on':''}" data-a="size" data-x="${k}">${SIZES[k].n}<small>${SIZES[k].sys} sistem</small></button>`;
-    h += `</div><h2>AI DEVLET SAYISI</h2><div class="btnrow"><button class="btn" data-a="aiCount" data-x="-1" ${aiCountFor(c)<=1?'disabled':''} aria-label="AI sayısını azalt">−</button><b id="aiCountValue">${aiCountFor(c)} AI</b><button class="btn" data-a="aiCount" data-x="1" ${aiCountFor(c)>=11?'disabled':''} aria-label="AI sayısını artır">+</button></div><div class="mini" id="aiCountHelp">Oyuncu dahil ${aiCountFor(c)+1} normal devlet. Korsanlar ve sonradan doğan devletler hariç. 1–11 AI.</div>${aiCountFor(c)+1>SIZES[c.size].sys/4?'<div class="mini">Yoğun galaksi: başkent mesafeleri daralabilir; komşu başlangıçlar oluşabilir.</div>':''}<div class="grid g3" style="margin-top:8px">`;
+    const count=SIZES[c.size]?.sys||0,steps=availableGalaxySteps(),idx=steps.indexOf(count),mpHumans=setupHumanSlots()>1?setupHumanSlots():0;
+    h += `<div class="sect"><h2>YILDIZ SİSTEMİ SAYISI</h2><div class="btnrow"><button class="btn" data-a="sizeStep" data-x="-1" ${idx<=0?'disabled':''}>−</button><b id="systemCountValue" style="font-size:26px;min-width:80px;text-align:center">${count}</b><button class="btn" data-a="sizeStep" data-x="1" ${idx>=steps.length-1?'disabled':''}>+</button></div><div class="grid g4">`;
+    for(const n of [30,45,60,80,100,200,300,500,1000]){const k=setupSizeKey(n),v=SIZES[k];h+=`<button class="opt ${c.size===k?'on':''}" data-a="size" data-x="${k}" ${v.available===false?'disabled':''}>${n}<small>${v.available===false?'Deneysel · kabul edilmedi':'sistem'}</small></button>`;}
+    h+=`</div>${count>100?'<div class="mini">Büyük PC galaksisi: ay hesabı saniyeler sürebilir; 240 aylık kabul ve fiziksel cihaz performansı henüz doğrulanmadı.</div>':''}<div class="mini">📱 Android için önerilen: yaklaşık 100 yıldız sistemi ve en fazla 9 AI devleti. Daha büyük galaksiler PC için önerilir. Performans cihazın gücüne göre değişebilir.</div>`;
+    h += `<h2>AI DEVLET SAYISI</h2><div class="btnrow"><button class="btn" data-a="aiCount" data-x="-1" ${aiCountFor(c)<=1?'disabled':''} aria-label="AI sayısını azalt">−</button><b id="aiCountValue" style="font-size:22px;min-width:90px;text-align:center">${aiCountFor(c)} AI</b><button class="btn" data-a="aiCount" data-x="1" ${aiCountFor(c)>=SCALE_ACCEPTANCE.maxAI?'disabled':''} aria-label="AI sayısını artır">+</button></div><div class="mini" id="aiCountHelp">${mpHumans?`${aiCountFor(c)} AI + en fazla ${mpHumans} insan; toplam ${aiCountFor(c)+mpHumans} normal devlet. Bu sürümde en fazla 16 AI; kimlik tavanı toplam 49.`:`Oyuncu dahil ${aiCountFor(c)+1} normal devlet. 1–16 doğrulanmış AI.`} Korsanlar ve sonradan doğan devletler hariç.</div><div class="btnrow">${[5,9,16,24,32,48].map(n=>`<button class="btn ghost" data-a="aiPick" data-x="${n}" ${n>SCALE_ACCEPTANCE.maxAI?'disabled':''}>${n}${n>SCALE_ACCEPTANCE.maxAI?' · deneysel':''}</button>`).join('')}</div>${setupSelectionError(c)?`<div class="mini" role="alert">${esc(setupSelectionError(c))}</div>`:''}${aiCountFor(c)+1>SIZES[c.size].sys/4?'<div class="mini">Yoğun galaksi: başkent mesafeleri daralabilir; komşu başlangıçlar oluşabilir.</div>':''}<div class="grid g3" style="margin-top:8px">`;
     for (const k in SHAPES) h += `<button class="opt ${c.shape===k?'on':''}" data-a="shape" data-x="${k}">${SHAPES[k].n}<small>${SHAPES[k].d}</small></button>`;
     h += `</div></div>`;
 
@@ -9083,7 +9091,7 @@ function renderSetup(){
     gv(SHAPES, c.shape)} · ${gv(DIFFS, c.diff)}</b></div>`;
   h += `<div class="sumRow"><span>Kriz · Kalıntı</span><b>${CRISIS_TIMING[c.crisis].n} · ${RUIN_LEVELS[c.ruins].n}</b></div>`;
   h += `<div class="sumRow"><span>Konsey</span><b>${COUNCIL_PACE[c.council]?COUNCIL_PACE[c.council].n:'NORMAL'}</b></div>`;
-  h += `<div class="sumRow"><span>AI devlet sayısı</span><b>${aiCountFor(c)} AI · oyuncuyla ${aiCountFor(c)+1} normal devlet</b></div>`;
+  h += `<div class="sumRow"><span>AI devlet sayısı</span><b>${aiCountFor(c)} AI · ${setupHumanSlots()} insan ile ${aiCountFor(c)+setupHumanSlots()} normal devlet</b></div>`;
   h += `<div class="sumRow"><span>AI kökenleri</span><b>${c.aiOrigins===false?'KAPALI':'AÇIK · %'+aiOriginChance(c)}</b></div>`;
   h += `<div class="sumRow"><span>Rastgele olaylar</span><b>${c.randomEvents===false?'KAPALI':'AÇIK'}</b></div>`;
   h += `</div>`;
@@ -9283,8 +9291,10 @@ function setupClickHandler(e){
   else if (a === 'councilSet'){ CFG.council = x; safeRenderSetup(); }
   else if (a === 'crisisSet'){ CFG.crisis = x;if(x==='kapali')CFG.crisisPower='kapali';else if(CFG.crisisPower==='kapali')CFG.crisisPower='normal';safeRenderSetup(); }
   else if (a === 'ruinSet'){ CFG.ruins = x; safeRenderSetup(); }
-  else if (a === 'aiCount'){ CFG.aiCount=Math.max(1,Math.min(11,aiCountFor(CFG)+Number(x)));safeRenderSetup(); }
-  else if (a === 'size'){ CFG.aiCount=aiCountFor(CFG);CFG.size = x; safeRenderSetup(); }
+  else if (a === 'aiCount'){ CFG.aiCount=Math.max(1,Math.min(SCALE_ACCEPTANCE.maxAI,aiCountFor(CFG)+Number(x)));safeRenderSetup(); }
+  else if(a==='aiPick'){if(Number.isInteger(+x)&&+x>=1&&+x<=SCALE_ACCEPTANCE.maxAI)CFG.aiCount=+x;safeRenderSetup();}
+  else if(a==='sizeStep'){const steps=availableGalaxySteps(),i=steps.indexOf(SIZES[CFG.size]?.sys),n=steps[i+Number(x)];if(n){CFG.aiCount=aiCountFor(CFG);CFG.size=setupSizeKey(n);}safeRenderSetup();}
+  else if (a === 'size'){ if(!SIZES[x]||SIZES[x].available===false)return;CFG.aiCount=aiCountFor(CFG);CFG.size = x; safeRenderSetup(); }
   else if (a === 'shape'){ CFG.shape = x; safeRenderSetup(); }
   else if (a === 'diff'){ CFG.diff = x; safeRenderSetup(); }
   else if (a === 'seed'){ CFG.seed = (Math.random()*1e9)|0; safeRenderSetup(); }

@@ -1,7 +1,8 @@
 'use strict';
 /* PERF.2 — host AI performansı davranışı değiştirmez.
    Kontrol motoru = aynı runtime dosyaları, ai.js ve main.js PERF.2 bloklarından tam metinle arındırılmış
-   (tests/helpers/perf2-preservation.js; MP.7.5 / 96h10p4 baytları). Aday = çalışma ağacı. Aynı gerçek geç oyun Save8'i
+   (tests/helpers/perf2-preservation.js). Kontrol çalışma ağacının güncel özelliklerini korur; yalnız PERF.2 A/B çıkarılır.
+   Tarihsel MP.7.5 kaynak özeti ilk testte ayrıca tam olarak geri kurulur. Aday = çalışma ağacı. Aynı gerçek geç oyun Save8'i
    (orta galaksi, 6 AI devleti, seed 404, 60. ay; 96h10p4 kontrol kökünden; 4 federasyon üyesi) iki ayrı vm'de aynı adımlarla ilerletilir; her ay Save8 ve RNG birebir, karar işlevlerinin çağrı sayısı aynı.
    Ayrıca: okuma-yalnız AI penceresi (A) pencere dışında hiçbir şey saklamaz, pencere sonunda boşalır, hata olsa da kapanır;
    pencere içinde gölge gelir / taze ticaret sonucu pencere kapalıyken hesaplananla aynı; liman değişen aday saklanmaz.
@@ -16,7 +17,7 @@ const FILES=['main.js','map.js','combat.js','ai.js','diplomacy.js','economy.js',
 const BUILD=/const BUILD_ID = '[^']*';/;
 function controlRoot(){
   const dir=fs.mkdtempSync(path.join(os.tmpdir(),'perf2-control-'));
-  for(const f of FILES)fs.writeFileSync(path.join(dir,f),P.stripReviewedP2(f,fs.readFileSync(path.join(root,f),'utf8')));
+  for(const f of FILES)fs.writeFileSync(path.join(dir,f),originalStrip(f,fs.readFileSync(path.join(root,f),'utf8')));
   return dir;
 }
 const STEP=`G.autoSave=false;function __step(){const b=Math.floor(G.day/30);for(let i=0;i<60;i++){G.day+=.5;dailyTick(.5);structTick(.5);colonyBuildTick(.5);autoExploreTick();if(Math.floor(G.day/30)>b){monthTick();break;}}}`;
@@ -34,6 +35,7 @@ test('kontrol ve aday aynı geç oyun Save8\'inden 3 ay: her ay Save8 ve RNG bir
   const dir=controlRoot();try{
     const c=world(dir),a=world(root);c.run(COUNT);a.run(COUNT);
     for(let m=0;m<3;m++){c.run('__step()');a.run('__step()');
+      if(a.run('serialize()')!==c.run('serialize()')){const out=process.env.STARS_OUTPUT||'/tmp/stars-perf2-diff';fs.mkdirSync(out,{recursive:true});const aa=a.run('serialize()'),bb=c.run('serialize()'),diff=[];const walk=(x,y,p='')=>{if(JSON.stringify(x)===JSON.stringify(y))return;if(x&&y&&typeof x==='object'&&typeof y==='object'){for(const k of new Set([...Object.keys(x),...Object.keys(y)]))walk(x[k],y[k],p+'.'+k);}else diff.push({path:p,candidate:x,control:y});};walk(JSON.parse(aa),JSON.parse(bb));fs.writeFileSync(path.join(out,'first-diff.json'),JSON.stringify({month:m+1,diff},null,2));fs.writeFileSync(path.join(out,'candidate.save'),aa);fs.writeFileSync(path.join(out,'control.save'),bb);}
       assert.equal(sha(a.run('serialize()')),sha(c.run('serialize()')),'Save8 month '+(m+1));assert.equal(a.run('RND_STATE'),c.run('RND_STATE'),'RNG month '+(m+1));}
     const nc=JSON.parse(c.run('JSON.stringify(__n)')),na=JSON.parse(a.run('JSON.stringify(__n)'));
     for(const k of ['aiBuildingDelta','aiEconomyPlan','queueBuilding','queueShip','aiMove','executeDeal'])assert.equal(na[k],nc[k],k);

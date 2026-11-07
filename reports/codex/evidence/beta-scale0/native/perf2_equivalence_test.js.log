@@ -1,0 +1,21 @@
+✓ arındırılmış kaynaklar PERF.2 öncesi baytların kendisi: ai.js ve main.js MP.7.5 (96h10p4) özeti
+✗ kontrol ve aday aynı geç oyun Save8'inden 3 ay: her ay Save8 ve RNG birebir; karar çağrıları aynı, gelir hesabı daha az — AssertionError [ERR_ASSERTION]: Save8 month 3
++ actual - expected
+
++ '3c2e28d784013efcdb7a3e60b3ebae4fd6ee0d2e08665c9ad01dde713c63d125'
+- 'd209d0e4728dd6a2b2df97b28240f7ae4d685d90d8c9fc2ddde20afcec133fd9'
+
+    at /workspace/Star/tests/perf2_equivalence_test.js:37:14
+    at test (/workspace/Star/tests/helpers/95e-fixture.js:13:60)
+    at Object.<anonymous> (/workspace/Star/tests/perf2_equivalence_test.js:33:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+✓ AI penceresi: dışarıda saklama yok; içeride gölge gelir bir kez ve kopya; hata olsa da kapanır
+✓ pencere içi aiBuildingDelta = pencere kapalıyken (federasyon üyesi, her koloni ve bina); liman değişen aday ticaret sonucunu saklamaz
+✓ supplyDistance doğrudan geçit denetimi = gateSupplyNodes listesi (her filo, her sistem; geçit eklenince de)
+GEÇEN: 4 KALAN: 1

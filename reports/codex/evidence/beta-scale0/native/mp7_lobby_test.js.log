@@ -1,0 +1,8 @@
+✓ taslak motorun kurallarıyla denetlenir: geçersiz tür/doktrin/köken, bütçe aşan etik, yuva aşan civic, fazla alan, yanlış tür → reddedilir (nedeniyle); geçerli taslak kabul
+✓ sahiplik ve sıra: taslak bağlantının kendi oyuncusuna yazılır; eski ya da yeniden gönderilen rev reddedilir (stale) ve yenisini ezmez; değişen taslak hazırı sıfırlar; aynı taslak sıfırlamaz
+✓ hazır ve başlatma: taslaksız hazır olunmaz; herkes hazır olmadan başlamaz; host galaksi ayarı değişince hazırlar sıfırlanır; AI + insan > 49 reddedilir; host taslağı geçersizse başlamaz
+✓ başlangıç: galaksi taslaklarla gerçek setupGame'le kurulur; misafirler koltuk sırasıyla kendi tasarladığı devlete (id 1, 2) atanır; köken/fizyoloji/doktrin etkileri motorun; AI sayısı insanlardan bağımsız; çift başlatma yok; RNG/Save8 deterministik
+✓ ayna ve gizlilik: misafir kendi tasarlanmış devletini devlet 0 olarak görür; diğer insanın taslağı/kaynağı/teknolojisi aynada yok; misafir başkasının devletine komut veremez
+✓ MP.4: tasarımla kurulan oyun kaydedilir ve yeni süreçte açılır; tasarlanmış devletler Save8'de; misafir jetonuyla aynı devlete döner
+✓ eski MP.1 devralma kipi (design verilmez) aynen: configure galaksiyi kurar, claim çalışır; tek oyunculu setupGame cfg.humans olmadan değişmez
+GEÇEN: 7 KALAN: 0

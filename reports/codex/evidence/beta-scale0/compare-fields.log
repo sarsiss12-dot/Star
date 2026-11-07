@@ -1,0 +1,2 @@
+Error: raw Save8 mismatch: 200 month 31 fields 6 first [{"path":".emps.7._powAt","control":930.7468,"candidate":930.2468},{"path":".emps.7._pressAt","control":930.7468,"candidate":930.2468},{"path":".emps.16._powAt","control":930.7468,"candidate":930.2468}]
+    at /workspace/Star/tests/browser-beta-scale0-compare.cjs:5:2282

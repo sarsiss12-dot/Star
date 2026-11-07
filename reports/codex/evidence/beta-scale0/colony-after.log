@@ -1,0 +1,8 @@
+PASS 0 yeni koloni ON, ilk60gün harcamasız, sonra tek gerçek bina
+PASS 1 yeni koloni ON, ilk60gün harcamasız, sonra tek gerçek bina
+PASS fetih yeni sahibinde ON, odak ve mevcut manuel kuyruk korunur; yeniden fetih gecikmeyi yeniden başlatır
+PASS odaksız koloni temel planla çalışır, ekonomik odak gizlice değişmez
+PASS manuel OFF aylar ve Save8 boyunca korunur; gecikme yüklemede sıfırlanmaz
+PASS eski Save8 manuelOFF/missing alanları geriye dönük açılmaz
+PASS kaynak yetersizliği bekler, toparlanınca tek sipariş, tech/slot/çift ücret kapıları korunur
+GEÇEN: 7 KALAN: 0

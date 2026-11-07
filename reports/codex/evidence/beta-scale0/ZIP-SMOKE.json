@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "zipSha256": "09f8a58c16380d0eae0a187dcd9b259597fb4b5d5b750296b427446cfe35a365",
+  "runtime": "extracted19game files",
+  "systems": 200,
+  "AI": 16,
+  "uniqueNormalColors": 17,
+  "save8Roundtrip": true,
+  "rngPreserved": true
+}

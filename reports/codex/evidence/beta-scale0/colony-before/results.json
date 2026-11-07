@@ -1,0 +1,35 @@
+[
+  {
+    "name": "0 yeni koloni ON, ilk60gün harcamasız, sonra tek gerçek bina",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ undefined\n- true\n\n    at /workspace/Star/tests/beta_scale0_colony_test.cjs:5:131\n    at test (/workspace/Star/tests/beta_scale0_colony_test.cjs:3:25)\n    at Object.<anonymous> (/workspace/Star/tests/beta_scale0_colony_test.cjs:5:25)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n    at Module.load (node:internal/modules/cjs/loader:1651:32)\n    at Module._load (node:internal/modules/cjs/loader:1443:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47"
+  },
+  {
+    "name": "1 yeni koloni ON, ilk60gün harcamasız, sonra tek gerçek bina",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ undefined\n- true\n\n    at /workspace/Star/tests/beta_scale0_colony_test.cjs:5:131\n    at test (/workspace/Star/tests/beta_scale0_colony_test.cjs:3:25)\n    at Object.<anonymous> (/workspace/Star/tests/beta_scale0_colony_test.cjs:5:25)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n    at Module.load (node:internal/modules/cjs/loader:1651:32)\n    at Module._load (node:internal/modules/cjs/loader:1443:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47"
+  },
+  {
+    "name": "fetih yeni sahibinde ON, odak ve mevcut manuel kuyruk korunur; yeniden fetih gecikmeyi yeniden başlatır",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\nfalse !== true\n\n    at /workspace/Star/tests/beta_scale0_colony_test.cjs:6:311\n    at test (/workspace/Star/tests/beta_scale0_colony_test.cjs:3:25)\n    at Object.<anonymous> (/workspace/Star/tests/beta_scale0_colony_test.cjs:6:1)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n    at Module.load (node:internal/modules/cjs/loader:1651:32)\n    at Module._load (node:internal/modules/cjs/loader:1443:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47"
+  },
+  {
+    "name": "odaksız koloni temel planla çalışır, ekonomik odak gizlice değişmez",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert(h.run('st.bina'))\n\n    at /workspace/Star/tests/beta_scale0_colony_test.cjs:7:178\n    at test (/workspace/Star/tests/beta_scale0_colony_test.cjs:3:25)\n    at Object.<anonymous> (/workspace/Star/tests/beta_scale0_colony_test.cjs:7:1)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n    at Module.load (node:internal/modules/cjs/loader:1651:32)\n    at Module._load (node:internal/modules/cjs/loader:1443:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47"
+  },
+  {
+    "name": "manuel OFF aylar ve Save8 boyunca korunur; gecikme yüklemede sıfırlanmaz",
+    "status": "PASS"
+  },
+  {
+    "name": "eski Save8 manuelOFF/missing alanları geriye dönük açılmaz",
+    "status": "PASS"
+  },
+  {
+    "name": "kaynak yetersizliği bekler, toparlanınca tek sipariş, tech/slot/çift ücret kapıları korunur",
+    "status": "FAIL",
+    "error": "evalmachine.<anonymous>:1\npl.col.q.length\n         ^\n\nTypeError: Cannot read properties of undefined (reading 'length')\n    at evalmachine.<anonymous>:1:10\n    at Script.runInContext (node:vm:149:12)\n    at Object.runInContext (node:vm:301:6)\n    at Object.run (/workspace/Star/tests/helpers/runtime.js:112:25)\n    at /workspace/Star/tests/beta_scale0_colony_test.cjs:10:340\n    at test (/workspace/Star/tests/beta_scale0_colony_test.cjs:3:25)\n    at Object.<anonymous> (/workspace/Star/tests/beta_scale0_colony_test.cjs:10:1)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n    at Module.load (node:internal/modules/cjs/loader:1651:32)"
+  }
+]

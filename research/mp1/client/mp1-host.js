@@ -66,7 +66,7 @@ function lobbyScreen(){
   }else if(API.tab==='galaksi'){
     const s=L.settings||{size:'orta',aiCount:5,seed:0};
     body='<div class="mp1-card"><label class="mp1-l">Galaksi boyutu</label><select class="mp1-sel" id="mp1Size">'+Object.entries(SIZES).map(([k,x])=>'<option value="'+k+'"'+(k===s.size?' selected':'')+'>'+esc(x.n+' · '+x.d)+'</option>').join('')+'</select>'+
-      '<label class="mp1-l">AI devlet sayısı</label><select class="mp1-sel" id="mp1Ai">'+Array.from({length:11},(_,i)=>i+1).map(n=>'<option'+(n===s.aiCount?' selected':'')+'>'+n+'</option>').join('')+'</select>'+
+      '<label class="mp1-l">AI devlet sayısı</label><select class="mp1-sel" id="mp1Ai">'+Array.from({length:48},(_,i)=>i+1).map(n=>'<option'+(n===s.aiCount?' selected':'')+(n>SCALE_ACCEPTANCE.maxAI?' disabled':'')+'>'+n+(n>SCALE_ACCEPTANCE.maxAI?' (deneysel)':'')+'</option>').join('')+'</select>'+
       '<label class="mp1-l">İnsan oyuncu kapasitesi (host dahil)</label><select class="mp1-sel" id="mp1Cap">'+[2,3,4].map(n=>'<option'+(n===L.capacity?' selected':'')+'>'+n+'</option>').join('')+'</select>'+
       '<label class="mp1-l">Galaksi tohumu</label><input class="mp1-in name" id="mp1Seed" inputmode="numeric" value="'+(+s.seed||'')+'">'+
       '<p class="mp1-sub">Uygulamak galaksiyi yeniden kurar; misafirlerin devlet seçimi ve hazır durumu sıfırlanır.</p>'+
@@ -88,8 +88,8 @@ function lobbyScreen(){
 const START_WHY={'no-guests':'En az bir oyuncunun katılması gerekiyor.','guest-not-ready':'Bütün oyuncular hazır değil.','guest-no-empire':'Her oyuncu bir devlet seçmeli.',
   'guest-offline':'Bağlantısı kopan oyuncu var.','no-galaxy':'Önce galaksiyi uygula.','already-started':'Oyun zaten başladı.','not-claimable':'Seçilen devlet artık uygun değil.',
   /* MP.7 tasarım kipi */
-  'guest-no-draft':'Her oyuncu devletini tasarlayıp kaydetmeli.','host-draft':'Kendi devletini tamamla (DEVLETİMİ DÜZENLE).','too-many-states':'AI + insan oyuncu sayısı 11\'i aşamaz; AI sayısını azalt.',
-  'guest-draft':'Bir oyuncunun devlet taslağı geçersiz; yeniden kaydetmeli.','generate':'Galaksi bu ayarlarla kurulamadı.'};
+  'guest-no-draft':'Her oyuncu devletini tasarlayıp kaydetmeli.','host-draft':'Kendi devletini tamamla (DEVLETİMİ DÜZENLE).','too-many-states':'AI + insan oyuncu sayısı 49\'u aşamaz; AI sayısını azalt.',
+  'unverified-scale':'Bu sürümde en fazla 16 AI uzun kampanyada doğrulandı; 24/32/48 AI deneysel ve seçilemez.','galaxy-too-small':'Seçilen galaksi bu kadar devleti güvenli yerleştirmek için çok küçük. Yıldız sayısını artır veya AI sayısını azalt.','guest-draft':'Bir oyuncunun devlet taslağı geçersiz; yeniden kaydetmeli.','generate':'Galaksi bu ayarlarla kurulamadı.'};
 function pidOfSeat(seat){for(const p of API.host.state.players.values())if(p.seat===seat)return p.playerId;return '';}
 function onChange(e){const t=e.target;if(t.id==='mp4File'){onFile(t);return;}if(t.id==='mp7Cap'){const r=API.host.setCapacity(+t.value);if(!r.ok)toast(r.why==='too-many'?'Odada bu kapasiteden fazla oyuncu var.':START_WHY[r.why]||r.why);else{pushCap();applyHostSetup();}return;}if(t.dataset.m==='claimFor'&&t.value!==''){const r=API.host.claimFor(t.dataset.pid,+t.value);if(!r.ok)toast(V.ERR[r.why]||r.why);}}
 function onClick(e){
@@ -169,11 +169,11 @@ function makeHost(){
   if(API.host.lobby.mode==='design'){CFG.seed=seed;applyHostSetup();return;}
   API.host.configure({size:'orta',aiCount:5,seed,...(CFG.shape?{shape:CFG.shape}:{})});
 }
-/* MP.7: host'un kurulum ekranındaki galaksi ayarları (aynı CFG) lobiye uygulanır; AI + insan ≤ 11 */
+/* MP.7: host'un kurulum ekranındaki galaksi ayarları (aynı CFG) lobiye uygulanır; AI + insan ≤ 49 */
 function applyHostSetup(){
-  const cap=API.host.lobby.capacity,ai=Math.max(1,Math.min(aiCountFor(CFG),12-cap));
+  const cap=API.host.lobby.capacity,ai=aiCountFor(CFG);
   const r=API.host.configure({size:CFG.size,aiCount:ai,seed:Math.trunc(+CFG.seed)%2147483646||1,...(CFG.shape?{shape:CFG.shape}:{})});
-  API.setupNote=r.ok?(ai!==aiCountFor(CFG)?'AI devlet sayısı insan oyuncularla birlikte 11\'i aşmasın diye '+ai+' yapıldı.':''):(START_WHY[r.why]||r.why);
+  API.setupNote=r.ok?'':r.why==='too-many-states'?'Bu oturumda en fazla '+(49-cap)+' AI seçilebilir; insanlarla birlikte en fazla 49 normal devlet.':r.why==='galaxy-too-small'?'Seçilen galaksi bu kadar devleti güvenli yerleştirmek için çok küçük. Yıldız sayısını artır veya AI sayısını azalt.':(START_WHY[r.why]||r.why);
   if(API.screen==='lobby')render();
 }
 function designLobby(){

@@ -1,0 +1,204 @@
+[
+  {
+    "name": "0 KAPALI yeni yerel kapı: izin/kaynak/kuyruk engeli",
+    "status": "PASS",
+    "detail": {
+      "before": {
+        "resources": {
+          "min": 100000,
+          "ene": 100000,
+          "yiy": 100000,
+          "ala": 100000,
+          "ara": 100000,
+          "tuk": 100000,
+          "etk": 100000
+        },
+        "queue": [],
+        "built": {},
+        "usable": false,
+        "rng": -951432214
+      },
+      "after": {
+        "resources": {
+          "min": 100000,
+          "ene": 100000,
+          "yiy": 100000,
+          "ala": 100000,
+          "ara": 100000,
+          "tuk": 100000,
+          "etk": 100000
+        },
+        "queue": [],
+        "built": {},
+        "usable": false,
+        "rng": -951432214
+      },
+      "allowed": false,
+      "started": false
+    }
+  },
+  {
+    "name": "1 KAPALI yeni yerel kapı: izin/kaynak/kuyruk engeli",
+    "status": "PASS",
+    "detail": {
+      "before": {
+        "resources": {
+          "min": 100000,
+          "ene": 100000,
+          "yiy": 100000,
+          "ala": 100000,
+          "ara": 100000,
+          "tuk": 100000,
+          "etk": 100000
+        },
+        "queue": [],
+        "built": {},
+        "usable": false,
+        "rng": -951432214
+      },
+      "after": {
+        "resources": {
+          "min": 100000,
+          "ene": 100000,
+          "yiy": 100000,
+          "ala": 100000,
+          "ara": 100000,
+          "tuk": 100000,
+          "etk": 100000
+        },
+        "queue": [],
+        "built": {},
+        "usable": false,
+        "rng": -951432214
+      },
+      "allowed": false,
+      "started": false
+    }
+  },
+  {
+    "name": "KAPALI uzaktan sipariş reddedilir; kaynak ve görev yok",
+    "status": "PASS",
+    "detail": {
+      "result": {
+        "ok": false,
+        "why": "Bu galakside yıldız kapısı inşası kapalı."
+      }
+    }
+  },
+  {
+    "name": "AI KAPALI kapı seçmez; AÇIK uygun zengin AI seçebilir",
+    "status": "PASS",
+    "detail": {
+      "off": null,
+      "on": "kapi"
+    }
+  },
+  {
+    "name": "KAPALI tek başına eski kapı genel ileri ikmal üssü sayılmaz",
+    "status": "PASS",
+    "detail": {
+      "node": false
+    }
+  },
+  {
+    "name": "AÇIK maliyet bir kez ödenir, gerçek yapı tamamlanır ve gemi serbest kalır",
+    "status": "PASS",
+    "detail": {
+      "cost": {
+        "min": 868,
+        "ala": 366
+      },
+      "before": {
+        "min": 100000,
+        "ene": 100000,
+        "yiy": 100000,
+        "ala": 100000,
+        "ara": 100000,
+        "tuk": 100000,
+        "etk": 100000
+      },
+      "after": {
+        "min": 99132,
+        "ene": 100000,
+        "yiy": 100000,
+        "ala": 99634,
+        "ara": 100000,
+        "tuk": 100000,
+        "etk": 100000
+      },
+      "built": {
+        "kapi": 0
+      }
+    }
+  },
+  {
+    "name": "iki gerçek kapı rota, mesafe ve varış süresi avantajı; anlık değil",
+    "status": "PASS",
+    "detail": {
+      "off": {
+        "path": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "speed": 95.67999999999999,
+        "elapsed": 6.299999999999986,
+        "effectiveDistance": 500
+      },
+      "on": {
+        "path": [
+          5
+        ],
+        "speed": 95.67999999999999,
+        "elapsed": 0.05,
+        "effectiveDistance": 0.1
+      }
+    }
+  },
+  {
+    "name": "iki kapı varken komşu sahipsiz sistemde ikmal mesafesi ON0/OFF1",
+    "status": "PASS",
+    "detail": {
+      "on": 0,
+      "off": 1
+    }
+  },
+  {
+    "name": "yabancı/düşman kapı izinleri korunur, karşı yön izin açmaz",
+    "status": "PASS",
+    "detail": {}
+  },
+  {
+    "name": "eski OFF Save8 kapısı silinmez; önceden ödenmiş iş tamamlanır pasif kalır, çift ödeme/iade yok",
+    "status": "PASS",
+    "detail": {
+      "resources": {
+        "min": 99132,
+        "ene": 100000,
+        "yiy": 100000,
+        "ala": 99634,
+        "ara": 100000,
+        "tuk": 100000,
+        "etk": 100000
+      },
+      "built": {
+        "kapi": 0
+      }
+    }
+  },
+  {
+    "name": "kriz şiddeti OFF + erken zamanlama kaydı yeni kriz yaratmaz",
+    "status": "PASS",
+    "detail": {
+      "stage": null,
+      "fleets": 0
+    }
+  },
+  {
+    "name": "legacy bekleyen kriz OFF ayarında başlamaz, aktif eski kriz sessiz silinmez",
+    "status": "PASS",
+    "detail": {}
+  }
+]

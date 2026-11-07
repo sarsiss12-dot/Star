@@ -1,0 +1,39 @@
+{
+  "month": 31,
+  "rng": [
+    -796260199,
+    -796260199
+  ],
+  "diff": [
+    {
+      "path": ".emps.7._powAt",
+      "control": 930.7468,
+      "candidate": 930.2468
+    },
+    {
+      "path": ".emps.7._pressAt",
+      "control": 930.7468,
+      "candidate": 930.2468
+    },
+    {
+      "path": ".emps.16._powAt",
+      "control": 930.7468,
+      "candidate": 930.2468
+    },
+    {
+      "path": ".emps.16._pressAt",
+      "control": 930.7468,
+      "candidate": 930.2468
+    },
+    {
+      "path": ".emps.16._powC",
+      "control": 1186,
+      "candidate": 1188
+    },
+    {
+      "path": ".emps.16._press",
+      "control": 0.8770451658165296,
+      "candidate": 0.8771589924026368
+    }
+  ]
+}

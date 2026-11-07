@@ -1656,6 +1656,7 @@ function aiTurn(e){
   for (const c of e.colonies){
     const sys = G.sys[c.s], pl = sys.planets[c.p];
     if (!pl.col) continue;
+    if(colonyAutoWaiting(pl.col))continue;
     /* FAZ 14: Slot doluysa eskiden koloni tamamen ATLANIYORDU ve
        aşağıdaki yıkım mantığına HİÇ ulaşılmıyordu (ölçüm: 6 tohumda
        0 yıkım emri). Artık atlanmıyor; slot doluysa yıkım

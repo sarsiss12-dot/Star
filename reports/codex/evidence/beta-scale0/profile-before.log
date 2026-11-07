@@ -1,0 +1,74 @@
+[
+  {
+    "name": "supplyDistance",
+    "file": "main.js",
+    "line": 3286,
+    "samples": 1582
+  },
+  {
+    "name": "reinforcementThreats",
+    "file": "main.js",
+    "line": 5178,
+    "samples": 1379
+  },
+  {
+    "name": "reinforcementThreats",
+    "file": "main.js",
+    "line": 5178,
+    "samples": 1141
+  },
+  {
+    "name": "reinforcementThreats",
+    "file": "main.js",
+    "line": 5178,
+    "samples": 1013
+  },
+  {
+    "name": "reinforcementThreats",
+    "file": "main.js",
+    "line": 5178,
+    "samples": 523
+  },
+  {
+    "name": "(garbage collector)",
+    "file": "",
+    "line": 0,
+    "samples": 356
+  },
+  {
+    "name": "explorationContext",
+    "file": "main.js",
+    "line": 4043,
+    "samples": 126
+  },
+  {
+    "name": "explorationContext",
+    "file": "main.js",
+    "line": 4043,
+    "samples": 123
+  },
+  {
+    "name": "explorationContext",
+    "file": "main.js",
+    "line": 4043,
+    "samples": 119
+  },
+  {
+    "name": "isSupplyNode",
+    "file": "main.js",
+    "line": 3231,
+    "samples": 113
+  },
+  {
+    "name": "influenceAt",
+    "file": "diplomacy.js",
+    "line": 41,
+    "samples": 101
+  },
+  {
+    "name": "allowed",
+    "file": "ai.js",
+    "line": 3007,
+    "samples": 82
+  }
+]

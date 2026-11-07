@@ -1,0 +1,35 @@
+[
+  {
+    "viewport": [
+      1920,
+      1080
+    ],
+    "mobileEmulation": false,
+    "status": "PASS",
+    "systems": 200,
+    "aiAtStart": 16,
+    "fixture": "Explicit captureSystem fixture for UI. Pregame and OFF use real click/touch; Save8 load uses engine."
+  },
+  {
+    "viewport": [
+      800,
+      360
+    ],
+    "mobileEmulation": true,
+    "status": "PASS",
+    "systems": 200,
+    "aiAtStart": 16,
+    "fixture": "Explicit captureSystem fixture for UI. Pregame and OFF use real click/touch; Save8 load uses engine."
+  },
+  {
+    "viewport": [
+      960,
+      540
+    ],
+    "mobileEmulation": true,
+    "status": "PASS",
+    "systems": 200,
+    "aiAtStart": 16,
+    "fixture": "Explicit captureSystem fixture for UI. Pregame and OFF use real click/touch; Save8 load uses engine."
+  }
+]

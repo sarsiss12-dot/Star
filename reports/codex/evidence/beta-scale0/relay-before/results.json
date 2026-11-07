@@ -1,0 +1,6 @@
+[
+  {
+    "status": "FAIL",
+    "error": "Error: message missing: [\"R{\\\"t\\\":\\\"welcome\\\",\\\"conn\\\":\\\"c727c4d23ff6e\\\",\\\"host\\\":true}\"]\n    at Object.wait (/workspace/Star/tests/beta_scale0_relay_test.cjs:3:403)\n    at async /workspace/Star/tests/beta_scale0_relay_test.cjs:5:124"
+  }
+]

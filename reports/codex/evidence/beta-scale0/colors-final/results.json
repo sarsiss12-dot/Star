@@ -1,0 +1,43 @@
+[
+  {
+    "color": "#f5665c",
+    "normal": 17,
+    "unique": 17,
+    "status": "PASS"
+  },
+  {
+    "color": "#5c9ef5",
+    "normal": 17,
+    "unique": 17,
+    "status": "PASS"
+  },
+  {
+    "color": "#d65cf5",
+    "normal": 17,
+    "unique": 17,
+    "status": "PASS"
+  },
+  {
+    "name": "no custom color: entire initial500/16 Save8 remains byte-identical",
+    "status": "PASS"
+  },
+  {
+    "name": "custom color: only cosmetic fields differ, RNG/geography/economy/names unchanged",
+    "fields": 23,
+    "status": "PASS"
+  },
+  {
+    "name": "3 humans+16AI reserve all chosen human colors",
+    "status": "PASS"
+  },
+  {
+    "name": "legacy11AI custom color full Save8 and RNG preserved",
+    "seed": 11,
+    "status": "PASS"
+  },
+  {
+    "name": "legacy11AI custom color full Save8 and RNG preserved",
+    "seed": 404,
+    "status": "PASS"
+  }
+]

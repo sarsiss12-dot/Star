@@ -1,0 +1,44 @@
+[
+  {
+    "systems": 100,
+    "ai": 9,
+    "status": "FAIL",
+    "error": "evalmachine.<anonymous>:1\ncomponents().length\n^\n\nReferenceError: components is not defined\n    at evalmachine.<anonymous>:1:1\n    at Script.runInContext (node:vm:149:12)\n    at Object.runInContext (node:vm:301:6)\n    at Object.run (/workspace/Star/tests/helpers/runtime.js:112:25)\n    at Object.<anonymous> (/workspace/Star/tests/beta-scale0-probe.cjs:5:725)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n    at Module.load (node:internal/modules/cjs/loader:1651:32)\n    at Module._load (node:internal/modules/cjs/loader:1443:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)"
+  },
+  {
+    "systems": 100,
+    "ai": 11,
+    "status": "FAIL",
+    "error": "evalmachine.<anonymous>:1\ncomponents().length\n^\n\nReferenceError: components is not defined\n    at evalmachine.<anonymous>:1:1\n    at Script.runInContext (node:vm:149:12)\n    at Object.runInContext (node:vm:301:6)\n    at Object.run (/workspace/Star/tests/helpers/runtime.js:112:25)\n    at Object.<anonymous> (/workspace/Star/tests/beta-scale0-probe.cjs:5:725)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n    at Module.load (node:internal/modules/cjs/loader:1651:32)\n    at Module._load (node:internal/modules/cjs/loader:1443:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)"
+  },
+  {
+    "systems": 200,
+    "ai": 16,
+    "status": "FAIL",
+    "error": "evalmachine.<anonymous>:1\ncomponents().length\n^\n\nReferenceError: components is not defined\n    at evalmachine.<anonymous>:1:1\n    at Script.runInContext (node:vm:149:12)\n    at Object.runInContext (node:vm:301:6)\n    at Object.run (/workspace/Star/tests/helpers/runtime.js:112:25)\n    at Object.<anonymous> (/workspace/Star/tests/beta-scale0-probe.cjs:5:725)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n    at Module.load (node:internal/modules/cjs/loader:1651:32)\n    at Module._load (node:internal/modules/cjs/loader:1443:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)"
+  },
+  {
+    "systems": 300,
+    "ai": 24,
+    "status": "FAIL",
+    "error": "evalmachine.<anonymous>:1\ncomponents().length\n^\n\nReferenceError: components is not defined\n    at evalmachine.<anonymous>:1:1\n    at Script.runInContext (node:vm:149:12)\n    at Object.runInContext (node:vm:301:6)\n    at Object.run (/workspace/Star/tests/helpers/runtime.js:112:25)\n    at Object.<anonymous> (/workspace/Star/tests/beta-scale0-probe.cjs:5:725)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n    at Module.load (node:internal/modules/cjs/loader:1651:32)\n    at Module._load (node:internal/modules/cjs/loader:1443:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)"
+  },
+  {
+    "systems": 500,
+    "ai": 32,
+    "status": "FAIL",
+    "error": "evalmachine.<anonymous>:1\ncomponents().length\n^\n\nReferenceError: components is not defined\n    at evalmachine.<anonymous>:1:1\n    at Script.runInContext (node:vm:149:12)\n    at Object.runInContext (node:vm:301:6)\n    at Object.run (/workspace/Star/tests/helpers/runtime.js:112:25)\n    at Object.<anonymous> (/workspace/Star/tests/beta-scale0-probe.cjs:5:725)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n    at Module.load (node:internal/modules/cjs/loader:1651:32)\n    at Module._load (node:internal/modules/cjs/loader:1443:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)"
+  },
+  {
+    "systems": 1000,
+    "ai": 48,
+    "status": "FAIL",
+    "error": "evalmachine.<anonymous>:1\ncomponents().length\n^\n\nReferenceError: components is not defined\n    at evalmachine.<anonymous>:1:1\n    at Script.runInContext (node:vm:149:12)\n    at Object.runInContext (node:vm:301:6)\n    at Object.run (/workspace/Star/tests/helpers/runtime.js:112:25)\n    at Object.<anonymous> (/workspace/Star/tests/beta-scale0-probe.cjs:5:725)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n    at Module.load (node:internal/modules/cjs/loader:1651:32)\n    at Module._load (node:internal/modules/cjs/loader:1443:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)"
+  },
+  {
+    "systems": 1000,
+    "ai": 64,
+    "status": "FAIL",
+    "error": "evalmachine.<anonymous>:1\ncomponents().length\n^\n\nReferenceError: components is not defined\n    at evalmachine.<anonymous>:1:1\n    at Script.runInContext (node:vm:149:12)\n    at Object.runInContext (node:vm:301:6)\n    at Object.run (/workspace/Star/tests/helpers/runtime.js:112:25)\n    at Object.<anonymous> (/workspace/Star/tests/beta-scale0-probe.cjs:5:725)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n    at Module.load (node:internal/modules/cjs/loader:1651:32)\n    at Module._load (node:internal/modules/cjs/loader:1443:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)"
+  }
+]

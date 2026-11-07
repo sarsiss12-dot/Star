@@ -35,7 +35,7 @@ const {attach,encode}=require('../../mp0/server/dev-relay.js');
 const ROOT=path.resolve(process.env.STARS_GAME_ROOT||path.join(__dirname,'../../..'));
 const ALPHABET='ABCDEFGHJKMNPQRSTUVWXYZ23456789';               // 31 sembol, karışan 0/O/1/I/L yok
 const CODE_LEN=5;                                               // MP.7.4: 31^5 ≈ 2,86·10^7 (≈24,8 bit; telefonda yazılabilir). Daha küçük uzay → IP başı ve relay geneli yanlış kod sınırı (aşağıda)
-const LIMITS={clientMsg:8192,hostMsg:262144,clientRate:20,clientBurst:40,hostRate:200,hostBurst:400,maxDrops:100,
+const LIMITS={clientMsg:8192,hostMsg:524288,hostBytesPerSec:8*1048576,hostByteBurst:8*1048576,clientRate:20,clientBurst:40,hostRate:200,hostBurst:400,maxDrops:100,
   perIpConns:16,joinPerMin:30,createPerMin:10,maxGuests:7,
   badPer10Min:20,globalBadPer10Min:120,maxConns:2000,maxTomb:50000};   // MP.5: IP başı yanlış kod/anahtar denemesi (10 dk), toplam bağlantı, kapanmış kod belleği
 const TYPES={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.json':'application/json','.css':'text/css; charset=utf-8'};
@@ -56,7 +56,7 @@ function create(env=process.env){
   const manifest=JSON.parse(fs.readFileSync(path.join(ROOT,'RELEASE-MANIFEST.json'),'utf8'));
   /* MP.7.3: dağıtım doğrulaması — çok oyunculu sürüm, oyun build'i ve sunulan MP dosyalarının kısa SHA-256 özetleri (gizli bilgi yok) */
   const sha12=f=>{try{return crypto.createHash('sha256').update(fs.readFileSync(path.join(ROOT,f))).digest('hex').slice(0,12);}catch{return null;}};
-  const MP_VERSION_JSON=JSON.stringify({mp:'MP.8.9b6',build:manifest.build,files:Object.fromEntries(['research/mp0/mp-core.js','research/mp1/server/relay.js','research/mp1/client/mp1-host.js','research/mp1/client/join.js',
+  const MP_VERSION_JSON=JSON.stringify({mp:'MP.8.9b7',build:manifest.build,files:Object.fromEntries(['research/mp0/mp-core.js','research/mp1/server/relay.js','research/mp1/client/mp1-host.js','research/mp1/client/join.js',
     'research/mp6/mirror.js','research/mp6/client/guest-stars.js','research/mp71/client/mp71-dip.js','research/mp7/client/mp7-setup.js'].map(f=>[f.split('/').pop(),sha12(f)]))});
   const ALLOW=new Set([...Object.keys(manifest.files),'research/mp0/mp-core.js',
     'research/mp1/client/mp1.css','research/mp1/client/mp1-host.js','research/mp1/client/join.js','research/mp1/client/view.js',
@@ -93,7 +93,7 @@ function create(env=process.env){
     if(r.host){r.host.send('R'+JSON.stringify({t:'room-closed',reason}));r.host.close(4001,'room-closed');}
   }
   setInterval(()=>{const t=Date.now();for(const [c,at] of tomb)if(t-at>cfg.ttl)tomb.delete(c);for(const [ip,x] of ips)if(!x.conns&&t-x.at>60e3&&!x.bad.some(b=>t-b<600e3))ips.delete(ip);},60e3).unref();
-  function bucket(rate,burst){let tokens=burst,last=Date.now();return ()=>{const t=Date.now();tokens=Math.min(burst,tokens+(t-last)/1000*rate);last=t;if(tokens<1)return false;tokens--;return true;};}
+  function bucket(rate,burst){let tokens=burst,last=Date.now();return (cost=1)=>{const t=Date.now();tokens=Math.min(burst,tokens+(t-last)/1000*rate);last=t;if(tokens<cost)return false;tokens-=cost;return true;};}
   /* Vekil arkasında bütün telefonlar vekilin IP'sini taşır; IP başı sınırlar ancak vekilin eklediği son girdiyle anlamlıdır. */
   /* MP.5: bazı platformlar (CDN önlü) istemci IP'sini ayrı başlıkta verir (ör. cf-connecting-ip / true-client-ip); XFF'nin son girdisi orada
      ortak bir kenar sunucusu olabilir ve IP başı sınırlar meşru telefonları birlikte engellerdi. Yalnız güvenilen vekil arkasında okunur. */
@@ -160,6 +160,7 @@ function create(env=process.env){
     I.conns++;I.at=Date.now();stats.conns++;
     const id='c'+crypto.randomBytes(6).toString('hex');
     const rl=role==='host'?bucket(LIMITS.hostRate,LIMITS.hostBurst):bucket(LIMITS.clientRate,LIMITS.clientBurst),max=role==='host'?LIMITS.hostMsg:LIMITS.clientMsg;
+    const bytes=role==='host'?bucket(LIMITS.hostBytesPerSec,LIMITS.hostByteBurst):null;
     let room=null,drops=0,conn,dead=false,lastIn=Date.now(),pending=null,authT=null;
     /* Telefon ağdan düşünce FIN gelmeyebilir; yarı açık bağlantıyı ping ile yakala. Karşı taraf kapattıysa (FIN) hemen bırak. */
     socket.on('data',()=>{lastIn=Date.now();if(conn)conn.lastIn=lastIn;});socket.on('end',()=>socket.destroy());
@@ -169,7 +170,7 @@ function create(env=process.env){
     function guard(text){
       stats.msgs++;stats.bytes+=text.length;
       if(text.length>max){deny('too-big');ctl({t:'error',code:'too-big'});return false;}
-      if(!rl()){stats.dropped++;if(++drops>LIMITS.maxDrops){stats.closedByLimit++;end(4008,'rate-limited');}else ctl({t:'error',code:'rate-limited'});return false;}
+      if(!rl()||bytes&&!bytes(Buffer.byteLength(text))){stats.dropped++;if(++drops>LIMITS.maxDrops){stats.closedByLimit++;end(4008,'rate-limited');}else ctl({t:'error',code:'rate-limited'});return false;}
       return true;
     }
     conn=attach(socket,text=>{try{onText(text);}catch{oops();}},()=>{try{onClose();}catch{oops();}},role==='host'?Math.min(1<<20,4*LIMITS.hostMsg):4*LIMITS.clientMsg);   // çerçeve sınırı: UTF-8 en çok 4 bayt/karakter

@@ -1,0 +1,2 @@
+PASS p11 Save8 reload raw bytes/RNG same, manual flags preserved
+PASS actual p11/package4 load, RNG preserved, tamper rejected

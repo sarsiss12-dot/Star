@@ -1,0 +1,42 @@
+[
+  {
+    "name": "200/16 actual public setup (no validation bypass)",
+    "status": "PASS",
+    "data": {
+      "systems": 200,
+      "ai": 16
+    }
+  },
+  {
+    "name": "300/24 actual public setup (no validation bypass)",
+    "status": "PASS",
+    "data": {
+      "systems": 300,
+      "ai": 24
+    }
+  },
+  {
+    "name": "500/32 actual public setup (no validation bypass)",
+    "status": "PASS",
+    "data": {
+      "systems": 500,
+      "ai": 32
+    }
+  },
+  {
+    "name": "500/48 actual public setup (no validation bypass)",
+    "status": "PASS",
+    "data": {
+      "systems": 500,
+      "ai": 48
+    }
+  },
+  {
+    "name": "invalid/dense/64AI values rejected explicitly, no silent clamp",
+    "status": "PASS"
+  },
+  {
+    "name": "every enabled step exact and reversible; old presets retained",
+    "status": "PASS"
+  }
+]

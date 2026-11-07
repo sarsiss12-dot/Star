@@ -1,0 +1,82 @@
+[
+  {
+    "test": "beta-scale0-compat.cjs.log",
+    "summary": "PASS p11 Save8 reload raw bytes/RNG same, manual flags preserved"
+  },
+  {
+    "test": "beta-scale0-generation.cjs.log",
+    "summary": "}"
+  },
+  {
+    "test": "beta-scale0-mp-capacity.cjs.log",
+    "summary": "PASS research capacity49 normal / IDs0..63 unchanged / package4 / high-id mirror privacy / reload"
+  },
+  {
+    "test": "beta_p01_ballot_test.js.log",
+    "summary": "GEÇEN: 3 KALAN: 0"
+  },
+  {
+    "test": "beta_p01_embargo_test.js.log",
+    "summary": "GEÇEN: 5 KALAN: 0"
+  },
+  {
+    "test": "beta_p01_war_end_test.js.log",
+    "summary": "GEÇEN: 5 KALAN: 0"
+  },
+  {
+    "test": "beta_p02_news_return_test.js.log",
+    "summary": "GEÇEN: 3 KALAN: 0"
+  },
+  {
+    "test": "beta_p02_news_test.js.log",
+    "summary": "GEÇEN: 8 KALAN: 0"
+  },
+  {
+    "test": "beta_scale0_bounds_test.cjs.log",
+    "summary": "GEÇEN: 5 KALAN: 0"
+  },
+  {
+    "test": "beta_scale0_colony_test.cjs.log",
+    "summary": "GEÇEN: 10 KALAN: 0"
+  },
+  {
+    "test": "beta_setup0_pirates_test.cjs.log",
+    "summary": "GEÇEN: 10 KALAN: 0"
+  },
+  {
+    "test": "beta_setup1_gates_test.cjs.log",
+    "summary": "GEÇEN: 12 KALAN: 0"
+  },
+  {
+    "test": "beta_ux0_names_test.cjs.log",
+    "summary": "GEÇEN: 9 KALAN: 0"
+  },
+  {
+    "test": "faz90rc_1_save_boundary_test.js.log",
+    "summary": "GEÇEN: 19 KALAN: 0"
+  },
+  {
+    "test": "mp4_core_test.js.log",
+    "summary": "GEÇEN: 14 KALAN: 0"
+  },
+  {
+    "test": "mp6_mirror_test.js.log",
+    "summary": "GEÇEN: 8 KALAN: 0"
+  },
+  {
+    "test": "mp7_lobby_test.js.log",
+    "summary": "GEÇEN: 7 KALAN: 0"
+  },
+  {
+    "test": "mp86_nebula_cache_test.js.log",
+    "summary": "GEÇEN: 3 KALAN: 0"
+  },
+  {
+    "test": "perf1_equivalence_test.js.log",
+    "summary": "GEÇEN: 4 KALAN: 0"
+  },
+  {
+    "test": "perf2_equivalence_test.js.log",
+    "summary": "GEÇEN: 4 KALAN: 1"
+  }
+]

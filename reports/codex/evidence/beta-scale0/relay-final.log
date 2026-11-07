@@ -1,0 +1,10 @@
+[
+  [ 'real500/48 full-known mirror passes auth host transport', 'PASS' ],
+  [ 'client8192-byte command ceiling preserved', 'PASS' ],
+  [ 'new host ceiling still rejects oversize', 'PASS' ],
+  [
+    'actual host burst exceeds byte budget and is rate limited',
+    'PASS'
+  ],
+  [ 'bounded host byte budget configured; no protocol change', 'PASS' ]
+]

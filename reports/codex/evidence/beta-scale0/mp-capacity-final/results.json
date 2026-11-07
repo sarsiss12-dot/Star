@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "researchOnly": true,
+  "systems": 500,
+  "humans": 3,
+  "ai": 46,
+  "initialEmpires": 50,
+  "maxId": 49,
+  "packageBytes": 614369,
+  "sameSeedInitialSaveEqual": true,
+  "highIdWarMapped": true,
+  "ownDeadlinePreserved": true,
+  "foreignResourcesZero": true,
+  "loadRngEqual": true,
+  "disclosure": "In-process production MP host and package path. Does not claim live 46AI acceptance."
+}

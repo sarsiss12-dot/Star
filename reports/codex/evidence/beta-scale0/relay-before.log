@@ -1,0 +1,4 @@
+Error: message missing: ["R{\"t\":\"welcome\",\"conn\":\"c727c4d23ff6e\",\"host\":true}"]
+    at Object.wait (/workspace/Star/tests/beta_scale0_relay_test.cjs:3:403)
+    at async /workspace/Star/tests/beta_scale0_relay_test.cjs:5:124
+[ [ undefined, 'FAIL' ] ]

@@ -1,0 +1,6 @@
+PASS 200/16 actual public setup (no validation bypass)
+PASS 300/16 actual public setup (no validation bypass)
+PASS 500/16 actual public setup (no validation bypass)
+PASS invalid/dense/64AI values rejected explicitly, no silent clamp
+PASS every enabled step exact and reversible; old presets retained
+GEÇEN: 5 KALAN: 0

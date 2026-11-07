@@ -1,0 +1,212 @@
+[
+  {
+    "name": "supplyDistance",
+    "file": "main.js",
+    "line": 3286,
+    "samples": 1582
+  },
+  {
+    "name": "reinforcementThreats",
+    "file": "main.js",
+    "line": 5178,
+    "samples": 1379
+  },
+  {
+    "name": "reinforcementThreats",
+    "file": "main.js",
+    "line": 5178,
+    "samples": 1141
+  },
+  {
+    "name": "reinforcementThreats",
+    "file": "main.js",
+    "line": 5178,
+    "samples": 1013
+  },
+  {
+    "name": "reinforcementThreats",
+    "file": "main.js",
+    "line": 5178,
+    "samples": 523
+  },
+  {
+    "name": "(garbage collector)",
+    "file": "",
+    "line": 0,
+    "samples": 356
+  },
+  {
+    "name": "explorationContext",
+    "file": "main.js",
+    "line": 4043,
+    "samples": 126
+  },
+  {
+    "name": "explorationContext",
+    "file": "main.js",
+    "line": 4043,
+    "samples": 123
+  },
+  {
+    "name": "explorationContext",
+    "file": "main.js",
+    "line": 4043,
+    "samples": 119
+  },
+  {
+    "name": "isSupplyNode",
+    "file": "main.js",
+    "line": 3231,
+    "samples": 113
+  },
+  {
+    "name": "influenceAt",
+    "file": "diplomacy.js",
+    "line": 41,
+    "samples": 101
+  },
+  {
+    "name": "allowed",
+    "file": "ai.js",
+    "line": 3007,
+    "samples": 82
+  },
+  {
+    "name": "reinforcementThreats",
+    "file": "main.js",
+    "line": 5178,
+    "samples": 65
+  },
+  {
+    "name": "influenceAt",
+    "file": "diplomacy.js",
+    "line": 41,
+    "samples": 63
+  },
+  {
+    "name": "influenceAt",
+    "file": "diplomacy.js",
+    "line": 41,
+    "samples": 60
+  },
+  {
+    "name": "aiPickStruct",
+    "file": "ai.js",
+    "line": 3004,
+    "samples": 53
+  },
+  {
+    "name": "supplyDistance",
+    "file": "main.js",
+    "line": 3286,
+    "samples": 52
+  },
+  {
+    "name": "shownPower",
+    "file": "diplomacy.js",
+    "line": 3087,
+    "samples": 43
+  },
+  {
+    "name": "influenceAt",
+    "file": "diplomacy.js",
+    "line": 41,
+    "samples": 41
+  },
+  {
+    "name": "claimOf",
+    "file": "diplomacy.js",
+    "line": 62,
+    "samples": 35
+  },
+  {
+    "name": "aiConstructionCandidate",
+    "file": "ai.js",
+    "line": 3067,
+    "samples": 33
+  },
+  {
+    "name": "fleetSupply",
+    "file": "main.js",
+    "line": 3319,
+    "samples": 32
+  },
+  {
+    "name": "aiTurn",
+    "file": "ai.js",
+    "line": 1616,
+    "samples": 27
+  },
+  {
+    "name": "influenceAt",
+    "file": "diplomacy.js",
+    "line": 41,
+    "samples": 26
+  },
+  {
+    "name": "aiView",
+    "file": "ai.js",
+    "line": 26,
+    "samples": 24
+  },
+  {
+    "name": "claimOf",
+    "file": "diplomacy.js",
+    "line": 62,
+    "samples": 23
+  },
+  {
+    "name": "sync",
+    "file": "economic-ledger.js",
+    "line": 14,
+    "samples": 21
+  },
+  {
+    "name": "aiKnownPower",
+    "file": "ai.js",
+    "line": 53,
+    "samples": 21
+  },
+  {
+    "name": "claimOf",
+    "file": "diplomacy.js",
+    "line": 62,
+    "samples": 20
+  },
+  {
+    "name": "supplyDistance",
+    "file": "main.js",
+    "line": 3286,
+    "samples": 18
+  },
+  {
+    "name": "autoExploreTick",
+    "file": "main.js",
+    "line": 4139,
+    "samples": 17
+  },
+  {
+    "name": "aiView",
+    "file": "ai.js",
+    "line": 26,
+    "samples": 17
+  },
+  {
+    "name": "sysDefense",
+    "file": "main.js",
+    "line": 3830,
+    "samples": 16
+  },
+  {
+    "name": "planetConflictStates",
+    "file": "economy.js",
+    "line": 1707,
+    "samples": 15
+  },
+  {
+    "name": "explorationGraph",
+    "file": "main.js",
+    "line": 4083,
+    "samples": 15
+  }
+]

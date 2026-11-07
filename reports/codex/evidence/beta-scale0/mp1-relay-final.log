@@ -1,0 +1,15 @@
+✓ static: injected game page, exact runtime bytes, join page CSP, allowlist only, security headers, 405, stats hidden unless dev
+✓ room codes: 8 symbols from the 31-letter unambiguous alphabet, unique; host key is 192-bit base64url and never sent to guests
+✓ join: invalid code, normalised typing (lowercase, dash, spaces), room-full by host capacity, capacity frame bounds
+✓ host identity: the code alone never grants host; wrong key, missing key, key in URL, second host refused; right key in the first frame reattaches
+✓ closing: host X closes the room for everyone; old code then answers room-closed (not invalid) for guests and host key
+✓ lifetime: host grace expiry closes an orphaned room (host-timeout); room TTL closes a live room (ttl); reattach inside grace keeps it
+✓ liveness: a half-open phone connection (no data, no FIN) is dropped by ping timeout; a TCP half-close is noticed at once
+✓ kick: host K disconnects only the named guest (4003) with a bounded reason
+✓ limits: oversized guest/host frames refused and not forwarded; message flood dropped then closed (4008); unmasked frame closed
+✓ origin and request checks: foreign Origin 403, same-host Origin ok, MP1_ORIGINS allowlist, bad path/role 400, per-IP connection cap 429
+✓ abuse: join guessing rate-limited per IP (30/min), room cap → server-full
+✓ behind a trusted proxy (MP1_TRUST_PROXY=1) per-IP limits use the last X-Forwarded-For hop; without it the header is ignored
+✓ TLS mode: HTTPS page and WSS room with a certificate (self-signed, test-only); plain HTTP refused on the TLS port
+✓ relay logs nothing (no room codes, host keys or tokens) while serving all of the above
+GEÇEN: 14 KALAN: 0

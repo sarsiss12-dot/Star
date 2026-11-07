@@ -1,14 +1,14 @@
 {
-  "phase": "BETA-SETUP.1",
-  "build": "96h10p11",
+  "phase": "BETA-SCALE.0",
+  "build": "96h10p12",
   "scope": "github-runtime-only",
   "save_version": 8,
-  "pwa_cache": "stars-v96h10p11",
-  "parent_commit": "eea55b2ddfae7de8f631eb43eb606585224f64d6",
-  "parent_zip_sha256": "eb439625982cb688af8d2e4ac21bbfd477d5f6cd52691df8a3013491262c0d24",
+  "pwa_cache": "stars-v96h10p12",
+  "parent_commit": "66ea8d700bc66b1fdb5f75d3a0f5d8f87251e9a8",
+  "parent_zip_sha256": "738da4fe71f200a16469abe647fd8b80be05977b14a905c30429caa2ee41f543",
   "file_count": 19,
   "files": {
-    "ai.js": "4f0cf937934b6e171b54497cc2605bb783c264a1f8374963b4d64a1052cfabfb",
+    "ai.js": "0d892dd717b8593ee37820729425189087d1c0a50f8d58537164628d522d63b3",
     "archive-ui.js": "d3b2daa874065bb7ef611dc21b89fe0615bc25e57a3220b6b58c2ea4c9ca1100",
     "audio.js": "6ddf6e388fa404394fee6220c2bfeeb3d1f9601c51a35ccdfe3181a8781942f7",
     "combat.js": "b4e21fcdb6fdaaa93da07313131470de3e8a3c28b5650226a9c4a2713bde73a5",
@@ -18,15 +18,15 @@
     "diplomacy.js": "9237d139d1678db31116b682da949e76b96afc872246cb057b3ad4e28fed7fdc",
     "economic-ledger.js": "309837d46e3d533f17d0ecb76a5c531474662cb57e05802ca52ffa904d5c5c3c",
     "economy-ui.js": "61f6e2dcef7f37143821edccf67552718a210ec555f7b8f9074c68191fd5cbcc",
-    "economy.js": "f3a97846dc28be10f1d9dc05195bf72f31bfd9889acb6004bc5da28372e27f89",
+    "economy.js": "409f9772017837fbede5cf526968c07e56703627b825f423605e750109a4cae0",
     "inbox.js": "e97f82d178f6908a89df792af28bebd4ba22315917e3e2c0bc15a874291ceb49",
     "index.html": "ae85599b00da6a7cc30035de6398337384d9e30d9cd5f8c3488b1ada6caf135c",
-    "main.js": "bda89ccdc42ead4cc65fdf6ca2b95735dbaa2512025eabf288bf651758b984e2",
+    "main.js": "54c44e7057bcda21cf73fde27811e289c4da6b0394780038cacf6a7d194c6ee4",
     "manifest.json": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
     "map.js": "3ccc9e66bb13f0ec1eaee1759e26b110ec5a05815ce73d74c7960b9f16828b0d",
     "news.js": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
-    "sw.js": "5c9c7bb93b39a91a59f1785fd7b4b56c5fb79a19c3d83c3bfe6f6c4214d7bbb6",
-    "ui.js": "7db6004c11e7eb68e030a66c31991e78498f77ac5985a2fbe718df40106cd362"
+    "sw.js": "8b91b0038eff2b62ece74ea36c2b2e37a0ace6d2e257000f276b8ddb869932f5",
+    "ui.js": "419aa51170acda3fe457e889bf7dc2e57d9f7c6bb47b487cb0f9387cf0b63ff1"
   },
-  "description": "Critical shared-panel ownership, event-bound war view, council ballot identity/ACK, explicit war end reasons and human embargo ownership. Save8 v8 and MP package4 compatibility; no AI strategic or economic rule changes."
+  "description": "BETA-SCALE.0: measured galaxy/AI limits and delayed default automation only for new or transferred colonies. Starting colonies unchanged. Save8 v8, package4, protocol1. Explicit experimental limits; no deployment."
 }

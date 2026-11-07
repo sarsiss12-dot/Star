@@ -1335,6 +1335,7 @@ function buildHabitat(e, sys, pl){
   pl.col = {pop:2, stab:55, grow:0, b:{santral:1}, cap:5,
             name:pl.name + ' Habitatı', f:'sanayi', fcd:0,
             shield:0, garrison:0};
+  initializeColonyAutomation(pl.col);
   /* FAZ 77A: koloni şoku — Öğrenen Sinapslar süreyi kısaltır */
   {
     const kisalt = 1 + ((e.mods && e.mods.colShock) || 0);   // -0.50 → yarı
@@ -1416,6 +1417,7 @@ function initialColony(e, pl){
 function doColonize(e, sys, pl){
   territoryOwnerSet(pl, e.id);
   pl.col = initialColony(e, pl);
+  initializeColonyAutomation(pl.col);
   if (sys.owner < 0) territoryOwnerSet(sys, e.id);
   e.colonies.push({s:sys.id, p:pl.i});
   recalcMods(e);
@@ -3009,10 +3011,14 @@ const DIRECTIVE_PLAN = {
 const DIRECTIVE_ALA_FLOOR = 300;   // bu altında otomasyon uyur
 const DIRECTIVE_MIN_FLOOR = 400;
 
+const COLONY_AUTO_DELAY=60;
+function initializeColonyAutomation(col){if(!col)return;col.auto=true;col.autoAfter=G.day+COLONY_AUTO_DELAY;delete col._dirWarn;}
+function colonyAutoWaiting(col){return Number.isFinite(col?.autoAfter)&&G.day<col.autoAfter;}
 /* Bu koloni şu an otomatik bina dikebilir mi? */
 function directiveStatus(e, col){
   if (!col || !col.auto) return {aktif:false};
-  const plan = DIRECTIVE_PLAN[col.f];
+  if(colonyAutoWaiting(col))return {aktif:true,dur:true,why:'Başlamasına '+Math.ceil((col.autoAfter-G.day)/30)+' ay kaldı',readyAt:col.autoAfter};
+  const plan = DIRECTIVE_PLAN[col.f]||DIRECTIVE_PLAN.sanayi;
   if (!plan) return {aktif:true, dur:true, why:'Bu odağın planı yok'};
   if (col.q && col.q.length) return {aktif:true, dur:true, why:'Zaten inşa sürüyor'};
   const bos = (col.cap || 0) - colonyUsed(col);
@@ -3025,7 +3031,7 @@ function directiveStatus(e, col){
   /* Plandaki ilk uygun binayı seç: az olandan çoğa doğru tamamla */
   for (const k of plan){
     const B = BUILDINGS[k];
-    if (!B) continue;
+    if (!B || B.tech&&!e.techs[B.tech]) continue;
     const mevcut = (col.b && col.b[k]) || 0;
     if (B.max && mevcut >= B.max) continue;
     /* Aynı binadan 3'ten fazlasını yığma — çeşitlilik korunur */

@@ -1,0 +1,50 @@
+{"month":0,"day":0.7467999999999992,"rng":-1328947915,"normal":17,"aliveAI":16,"empires":18,"colonies":17,"fleets":64,"wars":0,"federations":0,"vassals":0,"heapMB":12.059867858886719,"saveBytes":173714}
+{"month":30,"day":900.7468,"rng":1568062705,"normal":17,"aliveAI":16,"empires":18,"colonies":34,"fleets":92,"wars":1,"federations":2,"vassals":0,"heapMB":47.411377906799316,"saveBytes":979853}
+{"month":120,"day":3600.7468,"rng":297591021,"normal":17,"aliveAI":16,"empires":18,"colonies":54,"fleets":149,"wars":2,"federations":2,"vassals":1,"heapMB":52.03390979766846,"saveBytes":1766796}
+{"month":0,"day":0.6131999999999997,"rng":182911913,"normal":25,"aliveAI":24,"empires":26,"colonies":25,"fleets":94,"wars":0,"federations":0,"vassals":0,"heapMB":13.351375579833984,"saveBytes":266764}
+{"month":30,"day":900.6132,"rng":-1985997951,"normal":25,"aliveAI":24,"empires":26,"colonies":51,"fleets":126,"wars":1,"federations":1,"vassals":0,"heapMB":47.17253875732422,"saveBytes":1471113}
+{"month":120,"day":3600.6132,"rng":595672089,"normal":25,"aliveAI":24,"empires":26,"colonies":81,"fleets":211,"wars":26,"federations":3,"vassals":5,"heapMB":126.62252998352051,"saveBytes":2646120}
+{"month":0,"day":0.4598000000000011,"rng":1694771741,"normal":33,"aliveAI":32,"empires":34,"colonies":33,"fleets":131,"wars":0,"federations":0,"vassals":0,"heapMB":16.670276641845703,"saveBytes":401535}
+{"month":30,"day":900.4598,"rng":-350501232,"normal":33,"aliveAI":32,"empires":34,"colonies":76,"fleets":181,"wars":0,"federations":2,"vassals":0,"heapMB":47.31467247009277,"saveBytes":2125739}
+page.evaluate: Target page, context or browser has been closed
+    at /workspace/Star/tests/browser-beta-scale0-campaign.cjs:7:50
+browser.newContext: Target page, context or browser has been closed
+Browser logs:
+
+<launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --no-sandbox --disable-gpu --disable-dev-shm-usage --enable-precise-memory-info --user-data-dir=/tmp/playwright_chromiumdev_profile-uNlMR7 --remote-debugging-pipe --no-startup-window
+<launched> pid=417152
+[pid=417152][err] [417152:417180:1107/181612.141938:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory
+[pid=417152][err] [417152:417180:1107/181612.153488:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[pid=417152][err] [417152:417180:1107/181612.153604:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory
+[pid=417152][err] [417152:417180:1107/181612.153630:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory
+[pid=417152][err] [417152:417180:1107/181612.154793:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory
+[pid=417152][err] [417152:417180:1107/181612.154982:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[pid=417152][err] [417152:417180:1107/181612.154996:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[pid=417152][err] [417152:417180:1107/181612.213949:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[pid=417152][err] [417152:417152:1107/181612.259267:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: 
+[pid=417152][err] [417152:417180:1107/181612.259461:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[pid=417152][err] [417152:417152:1107/181612.260381:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: 
+[pid=417152][err] [417152:417180:1107/181612.260965:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[pid=417152][err] [417152:417152:1107/181612.271836:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: 
+[pid=417152][err] [417152:417180:1107/181612.271935:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[pid=417152][err] [417152:417152:1107/181612.277609:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: 
+[pid=417152][err] [417152:417180:1107/181612.277689:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory
+[pid=417152][err] [417152:417180:1107/181612.277724:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory
+[pid=417152][err] [417152:417152:1107/181612.277778:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: 
+[pid=417152][err] [417152:417180:1107/181612.277845:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[pid=417152][err] [417152:417152:1107/181612.279598:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: 
+[pid=417152][err] [417152:417152:1107/181612.280740:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.Properties.GetAll: object_path= /org/freedesktop/UPower/devices/DisplayDevice: unknown error type: 
+[pid=417152][err] [417152:417152:1107/181612.280782:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: 
+[pid=417152][err] [417152:417180:1107/181612.280884:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[pid=417152][err] [417152:417152:1107/181612.283464:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: 
+[pid=417152][err] [417152:417180:1107/181612.285453:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[pid=417152][err] [417152:417152:1107/181612.285720:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: 
+[pid=417152][err] Warning: vkCreateInstance: Found no drivers!
+[pid=417152][err] Warning: vkCreateInstance failed with VK_ERROR_INCOMPATIBLE_DRIVER
+[pid=417152][err]     at CheckVkSuccessImpl (../../third_party/dawn/src/dawn/native/vulkan/VulkanError.cpp:106)
+[pid=417152][err] 
+[pid=417152][err] [417152:417152:1107/182548.310612:ERROR:chrome/browser/ui/views/user_education/impl/browser_user_education_interface_impl.cc:186] Attempting to show IPH IPH_ExtensionsZeroStatePromo before browser initialization complete; IPH will not be shown.
+[pid=417152] <gracefully close start>
+    at async /workspace/Star/tests/browser-beta-scale0-campaign.cjs:6:184
+browser.newContext: Target page, context or browser has been closed
+    at async /workspace/Star/tests/browser-beta-scale0-campaign.cjs:6:184

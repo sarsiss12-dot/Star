@@ -1,0 +1,30 @@
+{
+  "sourceHead": "66ea8d700bc66b1fdb5f75d3a0f5d8f87251e9a8",
+  "branch": "codex/stars-beta-scale0-galaxy-ai-colonies",
+  "base": "codex/stars-beta-setup1-galaxy-options",
+  "scopeBoardIds": [
+    45,
+    37
+  ],
+  "newGame": {
+    "maxSystems": 500,
+    "maxAI": 16,
+    "experimentalSystems": [
+      1000
+    ],
+    "experimentalAI": [
+      24,
+      32,
+      48,
+      64
+    ]
+  },
+  "save8": 8,
+  "mpPackage": 4,
+  "protocol": 1,
+  "physicalAndroid": "NOT RUN",
+  "realLAN": "NOT RUN",
+  "internet": "NOT RUN",
+  "Render": "NOT RUN",
+  "deploy": "NOT RUN"
+}

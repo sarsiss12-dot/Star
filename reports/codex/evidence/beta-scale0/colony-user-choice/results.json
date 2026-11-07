@@ -1,0 +1,34 @@
+[
+  {
+    "name": "başlangıç kolonileri kaynak sürümdeki otomasyon düzenini korur",
+    "status": "PASS"
+  },
+  {
+    "name": "0 yeni koloni ON, ilk60gün harcamasız, sonra tek gerçek bina",
+    "status": "PASS"
+  },
+  {
+    "name": "1 yeni koloni ON, ilk60gün harcamasız, sonra tek gerçek bina",
+    "status": "PASS"
+  },
+  {
+    "name": "fetih yeni sahibinde ON, odak ve mevcut manuel kuyruk korunur; yeniden fetih gecikmeyi yeniden başlatır",
+    "status": "PASS"
+  },
+  {
+    "name": "odaksız koloni temel planla çalışır, ekonomik odak gizlice değişmez",
+    "status": "PASS"
+  },
+  {
+    "name": "manuel OFF aylar ve Save8 boyunca korunur; gecikme yüklemede sıfırlanmaz",
+    "status": "PASS"
+  },
+  {
+    "name": "eski Save8 manuelOFF/missing alanları geriye dönük açılmaz",
+    "status": "PASS"
+  },
+  {
+    "name": "kaynak yetersizliği bekler, toparlanınca tek sipariş, tech/slot/çift ücret kapıları korunur",
+    "status": "PASS"
+  }
+]

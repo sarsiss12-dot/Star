@@ -1,0 +1,23 @@
+[
+  {
+    "name": "real500/48 full-known mirror passes auth host transport",
+    "status": "PASS",
+    "bytes": 282184
+  },
+  {
+    "name": "client8192-byte command ceiling preserved",
+    "status": "PASS"
+  },
+  {
+    "name": "new host ceiling still rejects oversize",
+    "status": "PASS"
+  },
+  {
+    "name": "actual host burst exceeds byte budget and is rate limited",
+    "status": "PASS"
+  },
+  {
+    "name": "bounded host byte budget configured; no protocol change",
+    "status": "PASS"
+  }
+]

@@ -1,0 +1,5 @@
+compat exit=0
+relay exit=0
+mp1 relay exit=1
+mp5 security exit=0
+ui exit=0

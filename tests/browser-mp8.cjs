@@ -16,6 +16,7 @@ const SCEN=(process.env.MP8_SCEN||'A').toUpperCase(),out=path.resolve(process.en
 const CONF={A:{size:'orta',ai:5,seed:11,months:120,guests:1,every:6},B:{size:'buyuk',ai:8,seed:404,months:240,guests:1,every:12},
   C:{size:'buyuk',ai:6,seed:23,months:120,guests:2,every:6},R:{size:'orta',ai:5,seed:11,months:60,guests:2,every:6},N:{size:'orta',ai:5,seed:22,months:4,guests:2,every:2}}[SCEN];
 if(!CONF)throw Error('MP8_SCEN A|B|C|R|N');
+if(process.env.SCALE0_MP){const c=JSON.parse(process.env.SCALE0_MP);Object.assign(CONF,c);}
 const MONTHS=+(process.env.MP8_MONTHS||CONF.months);
 const results=[],errors=[],metrics={scen:SCEN,conf:{...CONF,months:MONTHS},sync:[],cmds:[],perf:[],notes:[],net:{},resume:{}};
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
@@ -87,7 +88,7 @@ async function room({cutAtStart}={}){
   /* fikstür (açıkça): insan devletler arasında temas — insan–insan diplomasisini sınayabilmek için; kaynak/teknoloji eklenmez */
   await H.evaluate(()=>{const hs=__mp8.humans();for(const a of hs)for(const b of hs)if(a!==b){G.emps[a].contact[b]=true;G.emps[a].rel[b]=Math.max(G.emps[a].rel[b]||0,20);}
     MP1Host.host.local({kind:'speed',value:0});MP1Host.host.publish();});
-  await closeAll();return code;}
+  await closeAll();if(process.env.SCALE0_MP)metrics.scale0=await require('./helpers/beta-scale0-mp.cjs')(H,pg.B,out);return code;}
 
 /* host sayfası kitaplığı: insan koltukları, aday komut planı (motorun KENDİ kapılarıyla), etki yoklaması, durum özeti */
 const HOSTLIB=`window.__mp8={
@@ -298,7 +299,7 @@ async function campaign(fromMonth,toMonth){let round=Math.floor(fromMonth/CONF.e
       for(const k of ['day','r','offers','wars','feds','council','vassal','humans','speed'])assert.equal(now[k],saved.state[k],'resume keeps '+k);
       if(saved.records){const after=await H.evaluate(()=>{const s=JSON.parse(serialize());return {dip:JSON.parse(JSON.stringify(MP1Host.host.dip)),feds:s.world.feds,warLedger:s.warLedger,relations:s.emps.map(e=>({id:e.id,war:e.war,ally:e.ally,nap:e.nap,pact:e.pact,overlord:e.overlord,vassalType:e.vassalType,vassalContract:e.vassalContract}))};});
         fs.writeFileSync(path.join(out,'resume-records.json'),JSON.stringify({before:saved.records,after},null,2));assert.deepEqual(after,saved.records,'full offer/federation/war/diplomatic records preserved');metrics.resume.fullRecordsEqual=true;}
-      await syncCheck('resume');resumeVerified=true;});
+      await syncCheck('resume');if(process.env.SCALE0_MP){const f=metrics.scale0.fixture,st=await H.evaluate(f=>{const c=G.sys[f.sys].planets[f.planet].col;return{auto:c.auto,deadline:c.autoAfter}},f);assert.equal(st.auto,false);assert.equal(st.deadline,metrics.scale0.start.deadline);metrics.scale0.resume=st;}resumeVerified=true;});
     await test('R4 devam eden oyun: bekleyen teklif B tarafından tam bir kez kabul edilir; 6 ay daha kampanya + senkron',async()=>{
       assert(resumeVerified,'R3 must complete before R4 can be accepted');
       if(saved.pending.length){const r=await doAct('B',saved.e.B,{k:'respond',cmd:{kind:'respond',offer:saved.pending[0],action:'accept'}},'resume');assert.equal(r.status,'ok');

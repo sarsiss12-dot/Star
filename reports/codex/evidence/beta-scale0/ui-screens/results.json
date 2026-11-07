@@ -1,0 +1,161 @@
+[
+  {
+    "viewport": [
+      1920,
+      1080
+    ],
+    "mobileEmulation": false,
+    "uiScale": [
+      {
+        "scale": {
+          "preferred": 80,
+          "effective": 80,
+          "limited": false
+        },
+        "viewport": [
+          1920,
+          1080
+        ],
+        "canvas": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "modal": [
+          656,
+          63.96875,
+          608,
+          952.0625
+        ],
+        "hit": true
+      },
+      {
+        "scale": {
+          "preferred": 100,
+          "effective": 100,
+          "limited": false
+        },
+        "viewport": [
+          1920,
+          1080
+        ],
+        "canvas": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "modal": [
+          700,
+          64.796875,
+          520,
+          950.390625
+        ],
+        "hit": true
+      },
+      {
+        "scale": {
+          "preferred": 125,
+          "effective": 125,
+          "limited": false
+        },
+        "viewport": [
+          1920,
+          1080
+        ],
+        "canvas": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "modal": [
+          485,
+          12,
+          950,
+          1056
+        ],
+        "hit": true
+      }
+    ],
+    "status": "PASS",
+    "systems": 200,
+    "aiAtStart": 16,
+    "fixture": "Explicit captureSystem fixture for UI. Pregame and OFF use real click/touch; Save8 load uses engine."
+  },
+  {
+    "viewport": [
+      800,
+      360
+    ],
+    "mobileEmulation": true,
+    "uiScale": [
+      {
+        "scale": {
+          "preferred": 100,
+          "effective": 100,
+          "limited": true
+        },
+        "viewport": [
+          800,
+          360
+        ],
+        "canvas": [
+          0,
+          0,
+          800,
+          360
+        ],
+        "modal": [
+          140,
+          33.921875,
+          520,
+          292.15625
+        ],
+        "hit": true
+      }
+    ],
+    "status": "PASS",
+    "systems": 200,
+    "aiAtStart": 16,
+    "fixture": "Explicit captureSystem fixture for UI. Pregame and OFF use real click/touch; Save8 load uses engine."
+  },
+  {
+    "viewport": [
+      960,
+      540
+    ],
+    "mobileEmulation": true,
+    "uiScale": [
+      {
+        "scale": {
+          "preferred": 100,
+          "effective": 100,
+          "limited": true
+        },
+        "viewport": [
+          960,
+          540
+        ],
+        "canvas": [
+          0,
+          0,
+          960,
+          540
+        ],
+        "modal": [
+          220,
+          44.71875,
+          520,
+          450.546875
+        ],
+        "hit": true
+      }
+    ],
+    "status": "PASS",
+    "systems": 200,
+    "aiAtStart": 16,
+    "fixture": "Explicit captureSystem fixture for UI. Pregame and OFF use real click/touch; Save8 load uses engine."
+  }
+]

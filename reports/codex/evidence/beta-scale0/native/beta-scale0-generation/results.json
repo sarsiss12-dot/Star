@@ -1,0 +1,1194 @@
+[
+  {
+    "seed": 11,
+    "shape": "sarmal",
+    "n": 100,
+    "ai": 9,
+    "research": false,
+    "setupMs": 192.767453,
+    "status": "PASS"
+  },
+  {
+    "seed": 11,
+    "shape": "sarmal",
+    "n": 200,
+    "ai": 16,
+    "research": false,
+    "setupMs": 267.46156499999995,
+    "status": "PASS"
+  },
+  {
+    "seed": 11,
+    "shape": "sarmal",
+    "n": 300,
+    "ai": 24,
+    "research": true,
+    "setupMs": 331.989139,
+    "status": "PASS"
+  },
+  {
+    "seed": 11,
+    "shape": "sarmal",
+    "n": 500,
+    "ai": 32,
+    "research": true,
+    "setupMs": 691.4829010000001,
+    "status": "PASS"
+  },
+  {
+    "seed": 11,
+    "shape": "sarmal",
+    "n": 1000,
+    "ai": 48,
+    "research": true,
+    "setupMs": 1793.1738639999999,
+    "status": "PASS"
+  },
+  {
+    "seed": 11,
+    "shape": "sarmal",
+    "n": 300,
+    "ai": 9,
+    "research": false,
+    "setupMs": 309.3497010000001,
+    "status": "PASS"
+  },
+  {
+    "seed": 11,
+    "shape": "sarmal",
+    "n": 500,
+    "ai": 48,
+    "research": true,
+    "setupMs": 798.1051639999996,
+    "status": "PASS"
+  },
+  {
+    "seed": 11,
+    "shape": "halka",
+    "n": 100,
+    "ai": 9,
+    "research": false,
+    "setupMs": 177.80732100000023,
+    "status": "PASS"
+  },
+  {
+    "seed": 11,
+    "shape": "halka",
+    "n": 200,
+    "ai": 16,
+    "research": false,
+    "setupMs": 312.65873399999964,
+    "status": "PASS"
+  },
+  {
+    "seed": 11,
+    "shape": "halka",
+    "n": 300,
+    "ai": 24,
+    "research": true,
+    "setupMs": 325.0313750000005,
+    "status": "PASS"
+  },
+  {
+    "seed": 11,
+    "shape": "halka",
+    "n": 500,
+    "ai": 32,
+    "research": true,
+    "setupMs": 558.6456399999997,
+    "status": "PASS"
+  },
+  {
+    "seed": 11,
+    "shape": "halka",
+    "n": 1000,
+    "ai": 48,
+    "research": true,
+    "setupMs": 1872.5993360000002,
+    "status": "PASS"
+  },
+  {
+    "seed": 11,
+    "shape": "halka",
+    "n": 300,
+    "ai": 9,
+    "research": false,
+    "setupMs": 327.5566769999996,
+    "status": "PASS"
+  },
+  {
+    "seed": 11,
+    "shape": "halka",
+    "n": 500,
+    "ai": 48,
+    "research": true,
+    "setupMs": 1024.5122039999987,
+    "status": "PASS"
+  },
+  {
+    "seed": 11,
+    "shape": "kume",
+    "n": 100,
+    "ai": 9,
+    "research": false,
+    "setupMs": 290.0248670000001,
+    "status": "PASS"
+  },
+  {
+    "seed": 11,
+    "shape": "kume",
+    "n": 200,
+    "ai": 16,
+    "research": false,
+    "setupMs": 399.20077200000014,
+    "status": "PASS"
+  },
+  {
+    "seed": 11,
+    "shape": "kume",
+    "n": 300,
+    "ai": 24,
+    "research": true,
+    "setupMs": 554.7066899999991,
+    "status": "PASS"
+  },
+  {
+    "seed": 11,
+    "shape": "kume",
+    "n": 500,
+    "ai": 32,
+    "research": true,
+    "setupMs": 1043.0717810000006,
+    "status": "PASS"
+  },
+  {
+    "seed": 11,
+    "shape": "kume",
+    "n": 1000,
+    "ai": 48,
+    "research": true,
+    "setupMs": 1903.7129069999992,
+    "status": "PASS"
+  },
+  {
+    "seed": 11,
+    "shape": "kume",
+    "n": 300,
+    "ai": 9,
+    "research": false,
+    "setupMs": 415.7890869999992,
+    "status": "PASS"
+  },
+  {
+    "seed": 11,
+    "shape": "kume",
+    "n": 500,
+    "ai": 48,
+    "research": true,
+    "setupMs": 1036.1506000000008,
+    "status": "PASS"
+  },
+  {
+    "seed": 23,
+    "shape": "sarmal",
+    "n": 100,
+    "ai": 9,
+    "research": false,
+    "setupMs": 316.2711280000003,
+    "status": "PASS"
+  },
+  {
+    "seed": 23,
+    "shape": "sarmal",
+    "n": 200,
+    "ai": 16,
+    "research": false,
+    "setupMs": 321.8695080000016,
+    "status": "PASS"
+  },
+  {
+    "seed": 23,
+    "shape": "sarmal",
+    "n": 300,
+    "ai": 24,
+    "research": true,
+    "setupMs": 494.896788,
+    "status": "PASS"
+  },
+  {
+    "seed": 23,
+    "shape": "sarmal",
+    "n": 500,
+    "ai": 32,
+    "research": true,
+    "setupMs": 809.3258319999986,
+    "status": "PASS"
+  },
+  {
+    "seed": 23,
+    "shape": "sarmal",
+    "n": 1000,
+    "ai": 48,
+    "research": true,
+    "setupMs": 4997.715248,
+    "status": "PASS"
+  },
+  {
+    "seed": 23,
+    "shape": "sarmal",
+    "n": 300,
+    "ai": 9,
+    "research": false,
+    "setupMs": 300.9524569999994,
+    "status": "PASS"
+  },
+  {
+    "seed": 23,
+    "shape": "sarmal",
+    "n": 500,
+    "ai": 48,
+    "research": true,
+    "setupMs": 820.5250720000004,
+    "status": "PASS"
+  },
+  {
+    "seed": 23,
+    "shape": "halka",
+    "n": 100,
+    "ai": 9,
+    "research": false,
+    "setupMs": 170.33799999999974,
+    "status": "PASS"
+  },
+  {
+    "seed": 23,
+    "shape": "halka",
+    "n": 200,
+    "ai": 16,
+    "research": false,
+    "setupMs": 236.47446800000034,
+    "status": "PASS"
+  },
+  {
+    "seed": 23,
+    "shape": "halka",
+    "n": 300,
+    "ai": 24,
+    "research": true,
+    "setupMs": 350.67895300000237,
+    "status": "PASS"
+  },
+  {
+    "seed": 23,
+    "shape": "halka",
+    "n": 500,
+    "ai": 32,
+    "research": true,
+    "setupMs": 698.3634220000022,
+    "status": "PASS"
+  },
+  {
+    "seed": 23,
+    "shape": "halka",
+    "n": 1000,
+    "ai": 48,
+    "research": true,
+    "setupMs": 1299.6085110000022,
+    "status": "PASS"
+  },
+  {
+    "seed": 23,
+    "shape": "halka",
+    "n": 300,
+    "ai": 9,
+    "research": false,
+    "setupMs": 248.15511200000037,
+    "status": "PASS"
+  },
+  {
+    "seed": 23,
+    "shape": "halka",
+    "n": 500,
+    "ai": 48,
+    "research": true,
+    "setupMs": 588.4336969999968,
+    "status": "PASS"
+  },
+  {
+    "seed": 23,
+    "shape": "kume",
+    "n": 100,
+    "ai": 9,
+    "research": false,
+    "setupMs": 170.28810499999963,
+    "status": "PASS"
+  },
+  {
+    "seed": 23,
+    "shape": "kume",
+    "n": 200,
+    "ai": 16,
+    "research": false,
+    "setupMs": 214.6073780000006,
+    "status": "PASS"
+  },
+  {
+    "seed": 23,
+    "shape": "kume",
+    "n": 300,
+    "ai": 24,
+    "research": true,
+    "setupMs": 306.7516719999985,
+    "status": "PASS"
+  },
+  {
+    "seed": 23,
+    "shape": "kume",
+    "n": 500,
+    "ai": 32,
+    "research": true,
+    "setupMs": 448.1930800000009,
+    "status": "PASS"
+  },
+  {
+    "seed": 23,
+    "shape": "kume",
+    "n": 1000,
+    "ai": 48,
+    "research": true,
+    "setupMs": 1171.1919070000004,
+    "status": "PASS"
+  },
+  {
+    "seed": 23,
+    "shape": "kume",
+    "n": 300,
+    "ai": 9,
+    "research": false,
+    "setupMs": 279.07164300000295,
+    "status": "PASS"
+  },
+  {
+    "seed": 23,
+    "shape": "kume",
+    "n": 500,
+    "ai": 48,
+    "research": true,
+    "setupMs": 1095.753270000001,
+    "status": "PASS"
+  },
+  {
+    "seed": 42,
+    "shape": "sarmal",
+    "n": 100,
+    "ai": 9,
+    "research": false,
+    "setupMs": 190.2856869999996,
+    "status": "PASS"
+  },
+  {
+    "seed": 42,
+    "shape": "sarmal",
+    "n": 200,
+    "ai": 16,
+    "research": false,
+    "setupMs": 273.7666619999982,
+    "status": "PASS"
+  },
+  {
+    "seed": 42,
+    "shape": "sarmal",
+    "n": 300,
+    "ai": 24,
+    "research": true,
+    "setupMs": 357.22700199999963,
+    "status": "PASS"
+  },
+  {
+    "seed": 42,
+    "shape": "sarmal",
+    "n": 500,
+    "ai": 32,
+    "research": true,
+    "setupMs": 662.8218059999999,
+    "status": "PASS"
+  },
+  {
+    "seed": 42,
+    "shape": "sarmal",
+    "n": 1000,
+    "ai": 48,
+    "research": true,
+    "setupMs": 1911.8688599999987,
+    "status": "PASS"
+  },
+  {
+    "seed": 42,
+    "shape": "sarmal",
+    "n": 300,
+    "ai": 9,
+    "research": false,
+    "setupMs": 379.253595999995,
+    "status": "PASS"
+  },
+  {
+    "seed": 42,
+    "shape": "sarmal",
+    "n": 500,
+    "ai": 48,
+    "research": true,
+    "setupMs": 738.9315480000005,
+    "status": "PASS"
+  },
+  {
+    "seed": 42,
+    "shape": "halka",
+    "n": 100,
+    "ai": 9,
+    "research": false,
+    "setupMs": 161.61213699999644,
+    "status": "PASS"
+  },
+  {
+    "seed": 42,
+    "shape": "halka",
+    "n": 200,
+    "ai": 16,
+    "research": false,
+    "setupMs": 222.04515399999946,
+    "status": "PASS"
+  },
+  {
+    "seed": 42,
+    "shape": "halka",
+    "n": 300,
+    "ai": 24,
+    "research": true,
+    "setupMs": 301.3140760000024,
+    "status": "PASS"
+  },
+  {
+    "seed": 42,
+    "shape": "halka",
+    "n": 500,
+    "ai": 32,
+    "research": true,
+    "setupMs": 517.1842170000018,
+    "status": "PASS"
+  },
+  {
+    "seed": 42,
+    "shape": "halka",
+    "n": 1000,
+    "ai": 48,
+    "research": true,
+    "setupMs": 1324.7405080000026,
+    "status": "PASS"
+  },
+  {
+    "seed": 42,
+    "shape": "halka",
+    "n": 300,
+    "ai": 9,
+    "research": false,
+    "setupMs": 244.35786499999813,
+    "status": "PASS"
+  },
+  {
+    "seed": 42,
+    "shape": "halka",
+    "n": 500,
+    "ai": 48,
+    "research": true,
+    "setupMs": 619.9687430000049,
+    "status": "PASS"
+  },
+  {
+    "seed": 42,
+    "shape": "kume",
+    "n": 100,
+    "ai": 9,
+    "research": false,
+    "setupMs": 176.86562799999956,
+    "status": "PASS"
+  },
+  {
+    "seed": 42,
+    "shape": "kume",
+    "n": 200,
+    "ai": 16,
+    "research": false,
+    "setupMs": 226.9487999999983,
+    "status": "PASS"
+  },
+  {
+    "seed": 42,
+    "shape": "kume",
+    "n": 300,
+    "ai": 24,
+    "research": true,
+    "setupMs": 346.3183280000012,
+    "status": "PASS"
+  },
+  {
+    "seed": 42,
+    "shape": "kume",
+    "n": 500,
+    "ai": 32,
+    "research": true,
+    "setupMs": 568.0846489999967,
+    "status": "PASS"
+  },
+  {
+    "seed": 42,
+    "shape": "kume",
+    "n": 1000,
+    "ai": 48,
+    "research": true,
+    "setupMs": 1218.1881120000035,
+    "status": "PASS"
+  },
+  {
+    "seed": 42,
+    "shape": "kume",
+    "n": 300,
+    "ai": 9,
+    "research": false,
+    "setupMs": 236.1437020000012,
+    "status": "PASS"
+  },
+  {
+    "seed": 42,
+    "shape": "kume",
+    "n": 500,
+    "ai": 48,
+    "research": true,
+    "setupMs": 615.1290939999963,
+    "status": "PASS"
+  },
+  {
+    "seed": 99,
+    "shape": "sarmal",
+    "n": 100,
+    "ai": 9,
+    "research": false,
+    "setupMs": 175.61453400000028,
+    "status": "PASS"
+  },
+  {
+    "seed": 99,
+    "shape": "sarmal",
+    "n": 200,
+    "ai": 16,
+    "research": false,
+    "setupMs": 236.93832999999722,
+    "status": "PASS"
+  },
+  {
+    "seed": 99,
+    "shape": "sarmal",
+    "n": 300,
+    "ai": 24,
+    "research": true,
+    "setupMs": 360.8108160000047,
+    "status": "PASS"
+  },
+  {
+    "seed": 99,
+    "shape": "sarmal",
+    "n": 500,
+    "ai": 32,
+    "research": true,
+    "setupMs": 659.7337010000047,
+    "status": "PASS"
+  },
+  {
+    "seed": 99,
+    "shape": "sarmal",
+    "n": 1000,
+    "ai": 48,
+    "research": true,
+    "setupMs": 1923.388371000001,
+    "status": "PASS"
+  },
+  {
+    "seed": 99,
+    "shape": "sarmal",
+    "n": 300,
+    "ai": 9,
+    "research": false,
+    "setupMs": 317.8471700000009,
+    "status": "PASS"
+  },
+  {
+    "seed": 99,
+    "shape": "sarmal",
+    "n": 500,
+    "ai": 48,
+    "research": true,
+    "setupMs": 767.3267720000003,
+    "status": "PASS"
+  },
+  {
+    "seed": 99,
+    "shape": "halka",
+    "n": 100,
+    "ai": 9,
+    "research": false,
+    "setupMs": 155.51219100000162,
+    "status": "PASS"
+  },
+  {
+    "seed": 99,
+    "shape": "halka",
+    "n": 200,
+    "ai": 16,
+    "research": false,
+    "setupMs": 216.3828829999984,
+    "status": "PASS"
+  },
+  {
+    "seed": 99,
+    "shape": "halka",
+    "n": 300,
+    "ai": 24,
+    "research": true,
+    "setupMs": 314.3364010000005,
+    "status": "PASS"
+  },
+  {
+    "seed": 99,
+    "shape": "halka",
+    "n": 500,
+    "ai": 32,
+    "research": true,
+    "setupMs": 484.66093700000056,
+    "status": "PASS"
+  },
+  {
+    "seed": 99,
+    "shape": "halka",
+    "n": 1000,
+    "ai": 48,
+    "research": true,
+    "setupMs": 1304.7177840000004,
+    "status": "PASS"
+  },
+  {
+    "seed": 99,
+    "shape": "halka",
+    "n": 300,
+    "ai": 9,
+    "research": false,
+    "setupMs": 262.4594389999984,
+    "status": "PASS"
+  },
+  {
+    "seed": 99,
+    "shape": "halka",
+    "n": 500,
+    "ai": 48,
+    "research": true,
+    "setupMs": 622.7404170000009,
+    "status": "PASS"
+  },
+  {
+    "seed": 99,
+    "shape": "kume",
+    "n": 100,
+    "ai": 9,
+    "research": false,
+    "setupMs": 157.32846699999936,
+    "status": "PASS"
+  },
+  {
+    "seed": 99,
+    "shape": "kume",
+    "n": 200,
+    "ai": 16,
+    "research": false,
+    "setupMs": 232.61649200000102,
+    "status": "PASS"
+  },
+  {
+    "seed": 99,
+    "shape": "kume",
+    "n": 300,
+    "ai": 24,
+    "research": true,
+    "setupMs": 300.99001199999475,
+    "status": "PASS"
+  },
+  {
+    "seed": 99,
+    "shape": "kume",
+    "n": 500,
+    "ai": 32,
+    "research": true,
+    "setupMs": 496.3065820000047,
+    "status": "PASS"
+  },
+  {
+    "seed": 99,
+    "shape": "kume",
+    "n": 1000,
+    "ai": 48,
+    "research": true,
+    "setupMs": 1187.6227730000028,
+    "status": "PASS"
+  },
+  {
+    "seed": 99,
+    "shape": "kume",
+    "n": 300,
+    "ai": 9,
+    "research": false,
+    "setupMs": 218.48649499999738,
+    "status": "PASS"
+  },
+  {
+    "seed": 99,
+    "shape": "kume",
+    "n": 500,
+    "ai": 48,
+    "research": true,
+    "setupMs": 566.0055070000017,
+    "status": "PASS"
+  },
+  {
+    "seed": 404,
+    "shape": "sarmal",
+    "n": 100,
+    "ai": 9,
+    "research": false,
+    "setupMs": 153.42511700000614,
+    "status": "PASS"
+  },
+  {
+    "seed": 404,
+    "shape": "sarmal",
+    "n": 200,
+    "ai": 16,
+    "research": false,
+    "setupMs": 244.13611899999523,
+    "status": "PASS"
+  },
+  {
+    "seed": 404,
+    "shape": "sarmal",
+    "n": 300,
+    "ai": 24,
+    "research": true,
+    "setupMs": 383.18706999999995,
+    "status": "PASS"
+  },
+  {
+    "seed": 404,
+    "shape": "sarmal",
+    "n": 500,
+    "ai": 32,
+    "research": true,
+    "setupMs": 650.158233999995,
+    "status": "PASS"
+  },
+  {
+    "seed": 404,
+    "shape": "sarmal",
+    "n": 1000,
+    "ai": 48,
+    "research": true,
+    "setupMs": 2365.423557000002,
+    "status": "PASS"
+  },
+  {
+    "seed": 404,
+    "shape": "sarmal",
+    "n": 300,
+    "ai": 9,
+    "research": false,
+    "setupMs": 319.70781599999464,
+    "status": "PASS"
+  },
+  {
+    "seed": 404,
+    "shape": "sarmal",
+    "n": 500,
+    "ai": 48,
+    "research": true,
+    "setupMs": 738.2099549999984,
+    "status": "PASS"
+  },
+  {
+    "seed": 404,
+    "shape": "halka",
+    "n": 100,
+    "ai": 9,
+    "research": false,
+    "setupMs": 179.72421900000336,
+    "status": "PASS"
+  },
+  {
+    "seed": 404,
+    "shape": "halka",
+    "n": 200,
+    "ai": 16,
+    "research": false,
+    "setupMs": 213.35952199999883,
+    "status": "PASS"
+  },
+  {
+    "seed": 404,
+    "shape": "halka",
+    "n": 300,
+    "ai": 24,
+    "research": true,
+    "setupMs": 330.10225999999966,
+    "status": "PASS"
+  },
+  {
+    "seed": 404,
+    "shape": "halka",
+    "n": 500,
+    "ai": 32,
+    "research": true,
+    "setupMs": 751.8273530000006,
+    "status": "PASS"
+  },
+  {
+    "seed": 404,
+    "shape": "halka",
+    "n": 1000,
+    "ai": 48,
+    "research": true,
+    "setupMs": 1696.5089480000024,
+    "status": "PASS"
+  },
+  {
+    "seed": 404,
+    "shape": "halka",
+    "n": 300,
+    "ai": 9,
+    "research": false,
+    "setupMs": 230.56554299999698,
+    "status": "PASS"
+  },
+  {
+    "seed": 404,
+    "shape": "halka",
+    "n": 500,
+    "ai": 48,
+    "research": true,
+    "setupMs": 592.1057969999965,
+    "status": "PASS"
+  },
+  {
+    "seed": 404,
+    "shape": "kume",
+    "n": 100,
+    "ai": 9,
+    "research": false,
+    "setupMs": 344.1532740000039,
+    "status": "PASS"
+  },
+  {
+    "seed": 404,
+    "shape": "kume",
+    "n": 200,
+    "ai": 16,
+    "research": false,
+    "setupMs": 236.97963500000333,
+    "status": "PASS"
+  },
+  {
+    "seed": 404,
+    "shape": "kume",
+    "n": 300,
+    "ai": 24,
+    "research": true,
+    "setupMs": 511.9627679999976,
+    "status": "PASS"
+  },
+  {
+    "seed": 404,
+    "shape": "kume",
+    "n": 500,
+    "ai": 32,
+    "research": true,
+    "setupMs": 505.08041299999604,
+    "status": "PASS"
+  },
+  {
+    "seed": 404,
+    "shape": "kume",
+    "n": 1000,
+    "ai": 48,
+    "research": true,
+    "setupMs": 1360.610934000004,
+    "status": "PASS"
+  },
+  {
+    "seed": 404,
+    "shape": "kume",
+    "n": 300,
+    "ai": 9,
+    "research": false,
+    "setupMs": 252.80373800000234,
+    "status": "PASS"
+  },
+  {
+    "seed": 404,
+    "shape": "kume",
+    "n": 500,
+    "ai": 48,
+    "research": true,
+    "setupMs": 568.1958589999995,
+    "status": "PASS"
+  },
+  {
+    "n": 125,
+    "ai": 16,
+    "step": true,
+    "status": "PASS"
+  },
+  {
+    "n": 150,
+    "ai": 16,
+    "step": true,
+    "status": "PASS"
+  },
+  {
+    "n": 175,
+    "ai": 16,
+    "step": true,
+    "status": "PASS"
+  },
+  {
+    "n": 200,
+    "ai": 16,
+    "step": true,
+    "status": "PASS"
+  },
+  {
+    "n": 225,
+    "ai": 16,
+    "step": true,
+    "status": "PASS"
+  },
+  {
+    "n": 250,
+    "ai": 16,
+    "step": true,
+    "status": "PASS"
+  },
+  {
+    "n": 275,
+    "ai": 16,
+    "step": true,
+    "status": "PASS"
+  },
+  {
+    "n": 300,
+    "ai": 16,
+    "step": true,
+    "status": "PASS"
+  },
+  {
+    "n": 350,
+    "ai": 16,
+    "step": true,
+    "status": "PASS"
+  },
+  {
+    "n": 400,
+    "ai": 16,
+    "step": true,
+    "status": "PASS"
+  },
+  {
+    "n": 450,
+    "ai": 16,
+    "step": true,
+    "status": "PASS"
+  },
+  {
+    "n": 500,
+    "ai": 16,
+    "step": true,
+    "status": "PASS"
+  },
+  {
+    "seed": 11,
+    "size": "kucuk",
+    "legacy": true,
+    "status": "PASS",
+    "rawInitialSaveRngEqual": true
+  },
+  {
+    "seed": 11,
+    "size": "orta",
+    "legacy": true,
+    "status": "PASS",
+    "rawInitialSaveRngEqual": true
+  },
+  {
+    "seed": 11,
+    "size": "buyuk",
+    "legacy": true,
+    "status": "PASS",
+    "rawInitialSaveRngEqual": true
+  },
+  {
+    "seed": 11,
+    "size": "devasa",
+    "legacy": true,
+    "status": "PASS",
+    "rawInitialSaveRngEqual": true
+  },
+  {
+    "seed": 11,
+    "size": "ulu",
+    "legacy": true,
+    "status": "PASS",
+    "rawInitialSaveRngEqual": true
+  },
+  {
+    "seed": 23,
+    "size": "kucuk",
+    "legacy": true,
+    "status": "PASS",
+    "rawInitialSaveRngEqual": true
+  },
+  {
+    "seed": 23,
+    "size": "orta",
+    "legacy": true,
+    "status": "PASS",
+    "rawInitialSaveRngEqual": true
+  },
+  {
+    "seed": 23,
+    "size": "buyuk",
+    "legacy": true,
+    "status": "PASS",
+    "rawInitialSaveRngEqual": true
+  },
+  {
+    "seed": 23,
+    "size": "devasa",
+    "legacy": true,
+    "status": "PASS",
+    "rawInitialSaveRngEqual": true
+  },
+  {
+    "seed": 23,
+    "size": "ulu",
+    "legacy": true,
+    "status": "PASS",
+    "rawInitialSaveRngEqual": true
+  },
+  {
+    "seed": 42,
+    "size": "kucuk",
+    "legacy": true,
+    "status": "PASS",
+    "rawInitialSaveRngEqual": true
+  },
+  {
+    "seed": 42,
+    "size": "orta",
+    "legacy": true,
+    "status": "PASS",
+    "rawInitialSaveRngEqual": true
+  },
+  {
+    "seed": 42,
+    "size": "buyuk",
+    "legacy": true,
+    "status": "PASS",
+    "rawInitialSaveRngEqual": true
+  },
+  {
+    "seed": 42,
+    "size": "devasa",
+    "legacy": true,
+    "status": "PASS",
+    "rawInitialSaveRngEqual": true
+  },
+  {
+    "seed": 42,
+    "size": "ulu",
+    "legacy": true,
+    "status": "PASS",
+    "rawInitialSaveRngEqual": true
+  },
+  {
+    "seed": 99,
+    "size": "kucuk",
+    "legacy": true,
+    "status": "PASS",
+    "rawInitialSaveRngEqual": true
+  },
+  {
+    "seed": 99,
+    "size": "orta",
+    "legacy": true,
+    "status": "PASS",
+    "rawInitialSaveRngEqual": true
+  },
+  {
+    "seed": 99,
+    "size": "buyuk",
+    "legacy": true,
+    "status": "PASS",
+    "rawInitialSaveRngEqual": true
+  },
+  {
+    "seed": 99,
+    "size": "devasa",
+    "legacy": true,
+    "status": "PASS",
+    "rawInitialSaveRngEqual": true
+  },
+  {
+    "seed": 99,
+    "size": "ulu",
+    "legacy": true,
+    "status": "PASS",
+    "rawInitialSaveRngEqual": true
+  },
+  {
+    "seed": 404,
+    "size": "kucuk",
+    "legacy": true,
+    "status": "PASS",
+    "rawInitialSaveRngEqual": true
+  },
+  {
+    "seed": 404,
+    "size": "orta",
+    "legacy": true,
+    "status": "PASS",
+    "rawInitialSaveRngEqual": true
+  },
+  {
+    "seed": 404,
+    "size": "buyuk",
+    "legacy": true,
+    "status": "PASS",
+    "rawInitialSaveRngEqual": true
+  },
+  {
+    "seed": 404,
+    "size": "devasa",
+    "legacy": true,
+    "status": "PASS",
+    "rawInitialSaveRngEqual": true
+  },
+  {
+    "seed": 404,
+    "size": "ulu",
+    "legacy": true,
+    "status": "PASS",
+    "rawInitialSaveRngEqual": true
+  }
+]

@@ -65,6 +65,7 @@ function close(saved){
 /* son düğme (GALAKSİYİ YARAT / VARSAYILANLARLA BAŞLA) MP kurulumundayken oyunu başlatmaz: taslağı kaydeder */
 const sp=window.startGame;
 window.startGame=function(){if(!M.active)return sp.apply(this,arguments);
+  if(M.role==='host'){const why=setupSelectionError(CFG);if(why){UI.setupError=why;safeRenderSetup();return;}UI.setupError='';}
   const d=draft();if(M.storeKey)save(M.storeKey,d);M.swallow++;M.ghostUntil=Date.now()+700;history.back();close(true);};
 /* MP.7.1: kurulum düğmeleri pointerup'ta çalışır (setupClickHandler); kurulum o anda kapanınca tarayıcının ardından ürettiği
    sentetik click AYNI noktadaki lobi düğmesine düşüyordu (yatay telefonda ODAYI KAPAT → "Oda kapatılsın mı?"). Kapanıştan sonraki
