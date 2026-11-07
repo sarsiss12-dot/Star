@@ -1,0 +1,7 @@
+PASS static locator 12 completed, 12 clicks
+PASS static touchscreen 12 completed, 12 clicks
+PASS static sequential 12 completed, 12 clicks
+PASS replace locator 12 completed, 12 clicks
+PASS replace touchscreen 12 completed, 12 clicks
+PASS replace sequential 12 completed, 12 clicks
+GEÇEN: 6 KALAN: 0

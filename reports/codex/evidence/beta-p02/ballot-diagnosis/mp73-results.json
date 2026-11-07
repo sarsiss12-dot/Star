@@ -1,0 +1,162 @@
+{
+  "results": [
+    {
+      "name": "B1 konsey motorun kendi yoluyla kurulur (fikstür: temas); AI insanlar adına oy / sponsor yazmaz; B gerçek \"KONSEY OYLAMASI\" kartından Konsey ekranını açar ve EVET (dokunma) → host kaydeder, oylama açık kalır",
+      "status": "PASS",
+      "ms": 47850
+    },
+    {
+      "name": "B2 C (915×412) HAYIR verir; oylama host oy verene kadar açık; host kendi Konsey ekranından EVET → motor kapatır; tekrar oy reddedilir",
+      "status": "PASS",
+      "ms": 38482
+    },
+    {
+      "name": "B3 tasarı: B Konsey ekranından tasarı sunar (dokunma) → host kampanya sponsoru B; B AI üyeye rüşvet (dokunma) → host 200 mineral aktarır; insan üye C'ye rüşvet reddedilir; C'nin aynasında rüşvetin yönü yok",
+      "status": "PASS",
+      "ms": 4162
+    },
+    {
+      "name": "B4 entrika ve yıkıcı onay: B fısıltı ağını gerçek pencereden açar, iki AI seçer, gönderir → host motoru (B'nin günlüğü ya da motorun gerekçesi); onaysız yutma çağrısı host'a hiçbir şey göndermez",
+      "status": "PASS",
+      "ms": 4548
+    },
+    {
+      "name": "sayfa hataları yok",
+      "status": "PASS",
+      "ms": 0
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "startModal": [
+      "🛰 DANIŞMAN",
+      "",
+      ""
+    ],
+    "p02Ballot": {
+      "canonical": {
+        "key": "ticaretStd",
+        "target": null,
+        "opened": 6.532599999999995,
+        "yes": [
+          7,
+          3,
+          6,
+          4,
+          5,
+          1,
+          0
+        ],
+        "no": [
+          2
+        ],
+        "expired": false,
+        "appliedTarget": null,
+        "ended": 60.05620000000012,
+        "passed": true,
+        "weight": {
+          "yes": 53.44801494331299,
+          "no": 9.105255888325765
+        },
+        "eventKey": "council:ticaretStd:60.05620000000012"
+      },
+      "devices": [
+        {
+          "me": 0,
+          "result": {
+            "key": "ticaretStd",
+            "target": null,
+            "opened": 6.532599999999995,
+            "yes": [
+              7,
+              3,
+              6,
+              4,
+              5,
+              1,
+              0
+            ],
+            "no": [
+              2
+            ],
+            "expired": false,
+            "appliedTarget": null,
+            "ended": 60.05620000000012,
+            "passed": true,
+            "weight": {
+              "yes": 53.44801494331299,
+              "no": 9.105255888325765
+            },
+            "eventKey": "council:ticaretStd:60.05620000000012"
+          }
+        },
+        {
+          "me": 1,
+          "result": {
+            "key": "ticaretStd",
+            "target": null,
+            "appliedTarget": null,
+            "opened": 6.532599999999995,
+            "ended": 60.05620000000012,
+            "yes": [
+              7,
+              3,
+              6,
+              4,
+              5,
+              0,
+              1
+            ],
+            "no": [
+              2
+            ],
+            "passed": true,
+            "expired": false,
+            "weight": {
+              "yes": 53.44801494331299,
+              "no": 9.105255888325765
+            },
+            "eventKey": "council:ticaretStd:60.05620000000012"
+          }
+        },
+        {
+          "me": 2,
+          "result": {
+            "key": "ticaretStd",
+            "target": null,
+            "appliedTarget": null,
+            "opened": 6.532599999999995,
+            "ended": 60.05620000000012,
+            "yes": [
+              7,
+              3,
+              6,
+              4,
+              5,
+              1,
+              2
+            ],
+            "no": [
+              0
+            ],
+            "passed": true,
+            "expired": false,
+            "weight": {
+              "yes": 53.44801494331299,
+              "no": 9.105255888325765
+            },
+            "eventKey": "council:ticaretStd:60.05620000000012"
+          }
+        }
+      ],
+      "reconnect": true,
+      "save8": {
+        "v": 8,
+        "bytes": 114161
+      }
+    },
+    "whisper": 1
+  },
+  "pass": 5,
+  "fail": 0
+}

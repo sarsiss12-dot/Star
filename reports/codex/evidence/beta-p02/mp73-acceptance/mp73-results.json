@@ -1,0 +1,214 @@
+{
+  "results": [
+    {
+      "name": "A1 rehber 1–8: oda, iki farklı devlet, hazır, başlat; iki ekranda galaksi; sürüm işareti lobi / başlangıç / MP çubuğunda ve /mp/version oyun build'iyle aynı",
+      "status": "PASS",
+      "ms": 12215
+    },
+    {
+      "name": "A2 rehber 9–12: misafir filosunu yürütür (gerçek orderMove → host), B → host diplomatik teklif ve host gelen kutusundan kabul eder; zaman iki ekranda ilerler",
+      "status": "PASS",
+      "ms": 5240
+    },
+    {
+      "name": "A3 rehber 13–15: misafir bağlantısı kopar ve döner → aynı devlet; host oyun kaydı alır (MP.4 paketi doğrulanır)",
+      "status": "PASS",
+      "ms": 3342
+    },
+    {
+      "name": "B1 konsey motorun kendi yoluyla kurulur (fikstür: temas); AI insanlar adına oy / sponsor yazmaz; B gerçek \"KONSEY OYLAMASI\" kartından Konsey ekranını açar ve EVET (dokunma) → host kaydeder, oylama açık kalır",
+      "status": "PASS",
+      "ms": 54223
+    },
+    {
+      "name": "B2 C (915×412) HAYIR verir; oylama host oy verene kadar açık; host kendi Konsey ekranından EVET → motor kapatır; tekrar oy reddedilir",
+      "status": "PASS",
+      "ms": 39144
+    },
+    {
+      "name": "B3 tasarı: B Konsey ekranından tasarı sunar (dokunma) → host kampanya sponsoru B; B AI üyeye rüşvet (dokunma) → host 200 mineral aktarır; insan üye C'ye rüşvet reddedilir; C'nin aynasında rüşvetin yönü yok",
+      "status": "PASS",
+      "ms": 5562
+    },
+    {
+      "name": "B4 entrika ve yıkıcı onay: B fısıltı ağını gerçek pencereden açar, iki AI seçer, gönderir → host motoru (B'nin günlüğü ya da motorun gerekçesi); onaysız yutma çağrısı host'a hiçbir şey göndermez",
+      "status": "PASS",
+      "ms": 9474
+    },
+    {
+      "name": "sayfa hataları yok",
+      "status": "PASS",
+      "ms": 0
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "startModal": [
+      "🛰 DANIŞMAN",
+      "",
+      "🛰 DANIŞMAN",
+      "",
+      ""
+    ],
+    "version": {
+      "mp": "MP.8.9b3",
+      "build": "96h10p8",
+      "files": {
+        "mp-core.js": "feabfddce573",
+        "relay.js": "73430a385477",
+        "mp1-host.js": "c8e2251d1811",
+        "join.js": "bc2732493741",
+        "mirror.js": "8162eea8af28",
+        "guest-stars.js": "727534446b38",
+        "mp71-dip.js": "4b7b5e64b5ba",
+        "mp7-setup.js": "4f8fef4ce1a9"
+      }
+    },
+    "unsupported": [
+      "autoEvent",
+      "diagCopy",
+      "joinRebel",
+      "leaveRebel",
+      "mapFix",
+      "physio",
+      "restart",
+      "rollName",
+      "sandbox",
+      "sitPick",
+      "stashNote",
+      "survey",
+      "terra",
+      "toTitle",
+      "tplDel",
+      "tplLoad",
+      "tplSave",
+      "trigCrisis"
+    ],
+    "guestDiag": "STARS MP.8.9b3 · oyun 96h10p8 · misafir · host bağlı · aşama: ready · ayna r5 08:13:38 · kurulum 5 ms · son komut: yok · son hata: yok",
+    "p02Ballot": {
+      "canonical": {
+        "key": "ticaretStd",
+        "target": null,
+        "opened": 8.9402,
+        "yes": [
+          6,
+          4,
+          7,
+          1,
+          0
+        ],
+        "no": [
+          3,
+          5,
+          2
+        ],
+        "expired": false,
+        "appliedTarget": null,
+        "ended": 17.05475999999997,
+        "passed": true,
+        "weight": {
+          "yes": 40.613119002542845,
+          "no": 17.073528797828036
+        },
+        "eventKey": "council:ticaretStd:17.05475999999997"
+      },
+      "devices": [
+        {
+          "me": 0,
+          "result": {
+            "key": "ticaretStd",
+            "target": null,
+            "opened": 8.9402,
+            "yes": [
+              6,
+              4,
+              7,
+              1,
+              0
+            ],
+            "no": [
+              3,
+              5,
+              2
+            ],
+            "expired": false,
+            "appliedTarget": null,
+            "ended": 17.05475999999997,
+            "passed": true,
+            "weight": {
+              "yes": 40.613119002542845,
+              "no": 17.073528797828036
+            },
+            "eventKey": "council:ticaretStd:17.05475999999997"
+          }
+        },
+        {
+          "me": 1,
+          "result": {
+            "key": "ticaretStd",
+            "target": null,
+            "appliedTarget": null,
+            "opened": 8.9402,
+            "ended": 17.05475999999997,
+            "yes": [
+              6,
+              4,
+              7,
+              0,
+              1
+            ],
+            "no": [
+              3,
+              5,
+              2
+            ],
+            "passed": true,
+            "expired": false,
+            "weight": {
+              "yes": 40.613119002542845,
+              "no": 17.073528797828036
+            },
+            "eventKey": "council:ticaretStd:17.05475999999997"
+          }
+        },
+        {
+          "me": 2,
+          "result": {
+            "key": "ticaretStd",
+            "target": null,
+            "appliedTarget": null,
+            "opened": 8.9402,
+            "ended": 17.05475999999997,
+            "yes": [
+              6,
+              4,
+              7,
+              1,
+              2
+            ],
+            "no": [
+              3,
+              5,
+              0
+            ],
+            "passed": true,
+            "expired": false,
+            "weight": {
+              "yes": 40.613119002542845,
+              "no": 17.073528797828036
+            },
+            "eventKey": "council:ticaretStd:17.05475999999997"
+          }
+        }
+      ],
+      "reconnect": true,
+      "save8": {
+        "v": 8,
+        "bytes": 97064
+      }
+    },
+    "whisper": 1
+  },
+  "pass": 8,
+  "fail": 0
+}

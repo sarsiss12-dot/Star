@@ -53,7 +53,7 @@ const VIEW=new Set(['activeWars','activeWarDiplo','noteQuick','noteSwipe','tab',
   'scienceTab','scienceNode','scienceFocus','scienceFilter','scienceMode','scienceQueue','scienceRoute','scienceMove','scienceRemove','scienceZoom',
   'tech','build','sInfo','bInfo','showEv','minModal','restoreModal','openNote','closem','marketPane','mktSel','mute','save','diagShow','opLogMenu',
   /* MP.6.1 — görünüm / taslak */
-  'news','diplomaticInbox','newsDetail','newsEmpire','newsLocation','newsPin','newsUnread','newsPinned','newsReadAll','archiveMore','diplomaticRecord',
+  'news','newsContext','newsReturn','diplomaticInbox','newsDetail','newsEmpire','newsLocation','newsPin','newsUnread','newsPinned','newsReadAll','archiveMore','diplomaticRecord',
   'inboxEmpire','inboxReturn','inboxFederation','deal','dealAdd','dealRm','dealDiscard','dealBack','peace','vsOpen','vsCancel','vsCounter','fedBallot',
   'fedVoteYes','fedVoteNo','fedVoteNow',
   /* MP.6.1 — motor işlevi MP komutuna çevrilen gerçek düğmeler */

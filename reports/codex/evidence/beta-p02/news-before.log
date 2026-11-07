@@ -1,0 +1,90 @@
+FAIL misafir kendi kayıtlı kaybını ve hedefini alır, yabancı hasar/filo/ekonomi almaz AssertionError [ERR_ASSERTION]: knowledge report missing
+    at /workspace/Star/tests/beta_p02_news_test.js:6:219
+    at test (/workspace/Star/tests/beta_p02_news_test.js:3:25)
+    at Object.<anonymous> (/workspace/Star/tests/beta_p02_news_test.js:6:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+FAIL haber sorgusu Save8 baytlarını ve RNG sırasını değiştirmez evalmachine.<anonymous>:1
+var before=serialize(),rs=RND_STATE;var r=warNewsReport(O,front.id);var after=serialize()
+                                          ^
+
+ReferenceError: warNewsReport is not defined
+    at evalmachine.<anonymous>:1:43
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/Star/tests/helpers/runtime.js:112:25)
+    at /workspace/Star/tests/beta_p02_news_test.js:7:90
+    at test (/workspace/Star/tests/beta_p02_news_test.js:3:25)
+    at Object.<anonymous> (/workspace/Star/tests/beta_p02_news_test.js:7:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+FAIL eski savaşta güç/yorgunluk bilinmiyor; aynı çiftin yeni savaşı karışmaz evalmachine.<anonymous>:1
+G.day=90;makePeace(E,O);G.day=120;E.war[1]=O.war[0]=true;var newer=warLedgerOpen(0,1);E.exh[1]=99;O.aiIntel={powers:{0:{value:999999,day:G.day}}};var r=warNewsReport(O,front.id)
+                                                                                                                                                        ^
+
+ReferenceError: warNewsReport is not defined
+    at evalmachine.<anonymous>:1:153
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/Star/tests/helpers/runtime.js:112:25)
+    at /workspace/Star/tests/beta_p02_news_test.js:8:103
+    at test (/workspace/Star/tests/beta_p02_news_test.js:3:25)
+    at Object.<anonymous> (/workspace/Star/tests/beta_p02_news_test.js:8:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+FAIL barış haberi sabit bitmiş savaş panelini açar AssertionError [ERR_ASSERTION]: The input did not match the regular expression /SAVAŞ DURUMU/. Input:
+
+'<div class="mbox archiveShell"><div class="mhd"><span>GALAKTİK HABER AĞI</span><button class="abtn" data-a="closem" aria-label="Haritaya dön">✕</button></div>\n' +
+  '      <nav class="archiveTabs" aria-label="Haber ağı"><button class="abtn pri" data-a="news" aria-pressed="true">Haberler · 2</button><button class="abtn " data-a="diplomaticInbox" aria-pressed="false">Gelen kutusu · 0</button></nav>\n' +
+  `      <div class="mbd archiveDetail archive95e"><h3>Savaş sona erdi</h3><div class="mini">2210.06 · gün 90 · Barış</div><p>Diplomatik barış anlaşması · Savaş #1 · Yüce Nyx Zihni ↔ Muhteşem Xel'Naga Otoritesi · gün 90 · agreement|actor:0</p>\n` +
+  `      <div class="mini">Bilgi kaynağı: Doğrudan katılım</div><div class="ph">İLGİLİ DEVLETLER</div><button class="abtn" data-a="newsEmpire" data-x="2:0">Yüce Nyx Zihni</button><button class="abtn" data-a="newsEmpire" data-x="2:1">Muhteşem Xel'Naga Otoritesi</button>\n` +
+  '      </div><div class="mft"><button class="ch" data-a="newsPin" data-x="2">Sabitle</button><button class="ch" data-a="news">Listeye dön</button><button class="ch" data-a="closem">Haritaya dön</button></div></div>'
+
+    at /workspace/Star/tests/beta_p02_news_test.js:9:204
+    at test (/workspace/Star/tests/beta_p02_news_test.js:3:25)
+    at Object.<anonymous> (/workspace/Star/tests/beta_p02_news_test.js:9:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+FAIL temassız ortak ve görülmemiş hedef/cephe ilerlemesi sızmaz evalmachine.<anonymous>:1
+delete O.contact[2];G.sys[2].seen=[];front.occupation.push({sys:2,planet:null,from:0,to:1,day:G.day});G.warLedger.fronts.push({...front,id:44,sides:[2,0],roles:[0,1]});var r=warNewsReport(O,front.id)
+                                                                                                                                                                              ^
+
+ReferenceError: warNewsReport is not defined
+    at evalmachine.<anonymous>:1:175
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/Star/tests/helpers/runtime.js:112:25)
+    at /workspace/Star/tests/beta_p02_news_test.js:10:90
+    at test (/workspace/Star/tests/beta_p02_news_test.js:3:25)
+    at Object.<anonymous> (/workspace/Star/tests/beta_p02_news_test.js:10:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+FAIL tarihsiz eski kayıt için yeni tarih/güç uydurulmaz evalmachine.<anonymous>:1
+front.legacy=true;front.goals=[];front.metrics=[];var r=warNewsReport(O,front.id)
+                                                        ^
+
+ReferenceError: warNewsReport is not defined
+    at evalmachine.<anonymous>:1:57
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/Star/tests/helpers/runtime.js:112:25)
+    at /workspace/Star/tests/beta_p02_news_test.js:11:82
+    at test (/workspace/Star/tests/beta_p02_news_test.js:3:25)
+    at Object.<anonymous> (/workspace/Star/tests/beta_p02_news_test.js:11:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+GEÇEN: 0 KALAN: 6

@@ -1,0 +1,9 @@
+{
+  "research/mp0/mp-core.js": "feabfddce573d948fd979754ae696d0d8ffcc84a04b819dd14e13c11ec0f66dd",
+  "research/mp1/client/view.js": "88723e5bd8eed24db5704917f40fd8d61a08e29c22006aed72363a1a08848de1",
+  "research/mp1/server/relay.js": "73430a385477a29baa0a65b8b9c6aea1a0937b0377ce84ac92561ec1ed3294b6",
+  "research/mp6/mirror.js": "8162eea8af28285082bc63a152a94737b9af4f663e2bde98781c2a795f6e106b",
+  "research/mp6/client/guest-stars.js": "727534446b380f262614de44f360a698e2bc282fc0ba379d790f0dfbc7bfccc9",
+  "research/mp1/client/join.js": "bc27324937414ab638f81b0c1ba3e70c5e540c196d787e3580948c1028236094",
+  "research/mp1/deploy/Dockerfile": "40b5d05d27b7a315001ab7832bfa6eb52727e99a49ef0fd9f706485802cfd550"
+}

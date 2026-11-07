@@ -1,0 +1,103 @@
+FAIL A1 rehber 1–8: oda, iki farklı devlet, hazır, başlat; iki ekranda galaksi; sürüm işareti lobi / başlangıç / MP çubuğunda ve /mp/version oyun build'iyle aynı
+AssertionError [ERR_ASSERTION]: The input did not match the regular expression /^MP\.8\.9b2$/. Input:
+
+'MP.8.9b3'
+
+    at /workspace/Star/tests/browser-mp73.cjs:101:54
+    at async test (/workspace/Star/tests/browser-mp73.cjs:13:7)
+    at async /workspace/Star/tests/browser-mp73.cjs:97:3
+PASS P01 #1 host ve misafir panel sahipliği / ayna yenilemesi
+PASS P03 #3 tek dokunma, bekleyen gerçek ACK, panel koruması ve yeniden bağlantı
+PASS P04 #4/#21 iki insan savaş bitişi, güvenli haber aynası ve ambargo
+FAIL A2 rehber 9–12: misafir filosunu yürütür (gerçek orderMove → host), B → host diplomatik teklif ve host gelen kutusundan kabul eder; zaman iki ekranda ilerler
+locator.tap: Timeout 8000ms exceeded.
+Call log:
+[2m  - waiting for locator('#diploPane [data-a="dealAdd"][data-x="give:res"]').first()[22m
+[2m    - locator resolved to <button class="abtn" data-a="dealAdd" data-x="give:res">◆ Kaynak</button>[22m
+[2m  - attempting tap action[22m
+[2m    2 × waiting for element to be visible, enabled and stable[22m
+[2m      - element is visible, enabled and stable[22m
+[2m      - scrolling into view if needed[22m
+[2m      - done scrolling[22m
+[2m      - <p>Savaş yorgunluğu: BİLİNMİYOR · tarihsel değer kay…</p> from <div id="modal" class="archiveHost">…</div> subtree intercepts pointer events[22m
+[2m    - retrying tap action[22m
+[2m    - waiting 20ms[22m
+[2m    - waiting for element to be visible, enabled and stable[22m
+[2m    - element is visible, enabled and stable[22m
+[2m    - scrolling into view if needed[22m
+[2m    - done scrolling[22m
+[2m    - <section class="box">…</section> from <div id="modal" class="archiveHost">…</div> subtree intercepts pointer events[22m
+[2m  2 × retrying tap action[22m
+[2m      - waiting 100ms[22m
+[2m      - waiting for element to be visible, enabled and stable[22m
+[2m      - element is visible, enabled and stable[22m
+[2m      - scrolling into view if needed[22m
+[2m      - done scrolling[22m
+[2m      - <span>Saldıran → Savunan</span> from <div id="modal" class="archiveHost">…</div> subtree intercepts pointer events[22m
+[2m  2 × retrying tap action[22m
+[2m      - waiting 500ms[22m
+[2m      - waiting for element to be visible, enabled and stable[22m
+[2m      - element is visible, enabled and stable[22m
+[2m      - scrolling into view if needed[22m
+[2m      - done scrolling[22m
+[2m      - <p>Savaş yorgunluğu: BİLİNMİYOR · tarihsel değer kay…</p> from <div id="modal" class="archiveHost">…</div> subtree intercepts pointer events[22m
+[2m    - retrying tap action[22m
+[2m      - waiting 500ms[22m
+[2m      - waiting for element to be visible, enabled and stable[22m
+[2m      - element is visible, enabled and stable[22m
+[2m      - scrolling into view if needed[22m
+[2m      - done scrolling[22m
+[2m      - <section class="box">…</section> from <div id="modal" class="archiveHost">…</div> subtree intercepts pointer events[22m
+[2m    - retrying tap action[22m
+[2m      - waiting 500ms[22m
+[2m      - waiting for element to be visible, enabled and stable[22m
+[2m      - element is visible, enabled and stable[22m
+[2m      - scrolling into view if needed[22m
+[2m      - done scrolling[22m
+[2m      - <span>Saldıran → Savunan</span> from <div id="modal" class="archiveHost">…</div> subtree intercepts pointer events[22m
+[2m    - retrying tap action[22m
+[2m      - waiting 500ms[22m
+[2m      - waiting for element to be visible, enabled and stable[22m
+[2m      - element is visible, enabled and stable[22m
+[2m      - scrolling into view if needed[22m
+[2m      - done scrolling[22m
+[2m      - <span>Saldıran → Savunan</span> from <div id="modal" class="archiveHost">…</div> subtree intercepts pointer events[22m
+[2m  - retrying tap action[22m
+[2m    - waiting 500ms[22m
+[2m    - waiting for element to be visible, enabled and stable[22m
+[2m    - element is visible, enabled and stable[22m
+[2m    - scrolling into view if needed[22m
+[2m    - done scrolling[22m
+[2m    - <p>Savaş yorgunluğu: BİLİNMİYOR · tarihsel değer kay…</p> from <div id="modal" class="archiveHost">…</div> subtree intercepts pointer events[22m
+[2m  - retrying tap action[22m
+[2m    - waiting 500ms[22m
+[2m    - waiting for element to be visible, enabled and stable[22m
+[2m    - element is visible, enabled and stable[22m
+[2m    - scrolling into view if needed[22m
+[2m    - done scrolling[22m
+[2m    - <section class="box">…</section> from <div id="modal" class="archiveHost">…</div> subtree intercepts pointer events[22m
+[2m  - retrying tap action[22m
+[2m    - waiting 500ms[22m
+
+    at proto.tap (/workspace/Star/tests/helpers/mp88-input-diag.cjs:9:559)
+    at async tap (/workspace/Star/tests/browser-mp73.cjs:20:108)
+    at async addRes (/workspace/Star/tests/browser-mp73.cjs:68:3)
+    at async /workspace/Star/tests/browser-mp73.cjs:131:26
+    at async test (/workspace/Star/tests/browser-mp73.cjs:13:7)
+    at async /workspace/Star/tests/browser-mp73.cjs:128:3
+PASS A3 rehber 13–15: misafir bağlantısı kopar ve döner → aynı devlet; host oyun kaydı alır (MP.4 paketi doğrulanır)
+PASS B1 konsey motorun kendi yoluyla kurulur (fikstür: temas); AI insanlar adına oy / sponsor yazmaz; B gerçek "KONSEY OYLAMASI" kartından Konsey ekranını açar ve EVET (dokunma) → host kaydeder, oylama açık kalır
+FAIL B2 C (915×412) HAYIR verir; oylama host oy verene kadar açık; host kendi Konsey ekranından EVET → motor kapatır; tekrar oy reddedilir
+page.waitForFunction: Timeout 30000ms exceeded.
+    at wait (/workspace/Star/tests/browser-mp73.cjs:17:40)
+    at /workspace/Star/tests/browser-mp73.cjs:169:48
+    at async test (/workspace/Star/tests/browser-mp73.cjs:13:7)
+    at async /workspace/Star/tests/browser-mp73.cjs:167:3
+FAIL B3 tasarı: B Konsey ekranından tasarı sunar (dokunma) → host kampanya sponsoru B; B AI üyeye rüşvet (dokunma) → host 200 mineral aktarır; insan üye C'ye rüşvet reddedilir; C'nin aynasında rüşvetin yönü yok
+page.waitForFunction: Timeout 30000ms exceeded.
+    at /workspace/Star/tests/browser-mp73.cjs:190:88
+    at async test (/workspace/Star/tests/browser-mp73.cjs:13:7)
+    at async /workspace/Star/tests/browser-mp73.cjs:189:3
+PASS B4 entrika ve yıkıcı onay: B fısıltı ağını gerçek pencereden açar, iki AI seçer, gönderir → host motoru (B'nin günlüğü ya da motorun gerekçesi); onaysız yutma çağrısı host'a hiçbir şey göndermez
+PASS sayfa hataları yok
+GEÇEN: 7 KALAN: 4

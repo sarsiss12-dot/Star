@@ -1,0 +1,433 @@
+{
+  "results": [
+    {
+      "name": "A1 rehber 1–8: oda, iki farklı devlet, hazır, başlat; iki ekranda galaksi; sürüm işareti lobi / başlangıç / MP çubuğunda ve /mp/version oyun build'iyle aynı",
+      "status": "PASS",
+      "ms": 11226
+    },
+    {
+      "name": "P01 #1 host ve misafir panel sahipliği / ayna yenilemesi",
+      "status": "PASS",
+      "ms": 25403
+    },
+    {
+      "name": "P03 #3 tek dokunma, bekleyen gerçek ACK, panel koruması ve yeniden bağlantı",
+      "status": "PASS",
+      "ms": 5217
+    },
+    {
+      "name": "P04 #4/#21 iki insan savaş bitişi, güvenli haber aynası ve ambargo",
+      "status": "PASS",
+      "ms": 2207
+    },
+    {
+      "name": "A2 rehber 9–12: misafir filosunu yürütür (gerçek orderMove → host), B → host diplomatik teklif ve host gelen kutusundan kabul eder; zaman iki ekranda ilerler",
+      "status": "FAIL",
+      "error": "page.waitForFunction: Timeout 30000ms exceeded.\n    at wait (/workspace/Star/tests/browser-mp73.cjs:17:40)\n    at /workspace/Star/tests/browser-mp73.cjs:135:87\n    at async test (/workspace/Star/tests/browser-mp73.cjs:13:7)\n    at async /workspace/Star/tests/browser-mp73.cjs:129:3"
+    },
+    {
+      "name": "A3 rehber 13–15: misafir bağlantısı kopar ve döner → aynı devlet; host oyun kaydı alır (MP.4 paketi doğrulanır)",
+      "status": "PASS",
+      "ms": 3288
+    },
+    {
+      "name": "B1 konsey motorun kendi yoluyla kurulur (fikstür: temas); AI insanlar adına oy / sponsor yazmaz; B gerçek \"KONSEY OYLAMASI\" kartından Konsey ekranını açar ve EVET (dokunma) → host kaydeder, oylama açık kalır",
+      "status": "PASS",
+      "ms": 28243
+    },
+    {
+      "name": "B2 C (915×412) HAYIR verir; oylama host oy verene kadar açık; host kendi Konsey ekranından EVET → motor kapatır; tekrar oy reddedilir",
+      "status": "PASS",
+      "ms": 17213
+    },
+    {
+      "name": "B3 tasarı: B Konsey ekranından tasarı sunar (dokunma) → host kampanya sponsoru B; B AI üyeye rüşvet (dokunma) → host 200 mineral aktarır; insan üye C'ye rüşvet reddedilir; C'nin aynasında rüşvetin yönü yok",
+      "status": "PASS",
+      "ms": 8385
+    },
+    {
+      "name": "B4 entrika ve yıkıcı onay: B fısıltı ağını gerçek pencereden açar, iki AI seçer, gönderir → host motoru (B'nin günlüğü ya da motorun gerekçesi); onaysız yutma çağrısı host'a hiçbir şey göndermez",
+      "status": "PASS",
+      "ms": 7573
+    },
+    {
+      "name": "sayfa hataları yok",
+      "status": "PASS",
+      "ms": 0
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "startModal": [
+      "🛰 DANIŞMAN",
+      "",
+      "🛰 DANIŞMAN",
+      "",
+      ""
+    ],
+    "version": {
+      "mp": "MP.8.9b3",
+      "build": "96h10p8",
+      "files": {
+        "mp-core.js": "feabfddce573",
+        "relay.js": "73430a385477",
+        "mp1-host.js": "c8e2251d1811",
+        "join.js": "bc2732493741",
+        "mirror.js": "8162eea8af28",
+        "guest-stars.js": "0a53b1305c6c",
+        "mp71-dip.js": "4b7b5e64b5ba",
+        "mp7-setup.js": "4f8fef4ce1a9"
+      }
+    },
+    "unsupported": [
+      "autoEvent",
+      "diagCopy",
+      "joinRebel",
+      "leaveRebel",
+      "mapFix",
+      "physio",
+      "restart",
+      "rollName",
+      "sandbox",
+      "sitPick",
+      "stashNote",
+      "survey",
+      "terra",
+      "toTitle",
+      "tplDel",
+      "tplLoad",
+      "tplSave",
+      "trigCrisis"
+    ],
+    "guestDiag": "STARS MP.8.9b3 · oyun 96h10p8 · misafir · host bağlı · aşama: ready · ayna r4 08:01:39 · kurulum 7 ms · son komut: yok · son hata: yok",
+    "p01Host": [
+      {
+        "action": "diploPane",
+        "x": null,
+        "beforeHead": "DİPLOMASİ\n      ✕",
+        "beforeKey": "diplo:states:all",
+        "afterHead": "DİPLOMASİ\n      ✕",
+        "afterKey": "diplo:states:all",
+        "stolen": false,
+        "modalUnchanged": true
+      },
+      {
+        "action": "globalPane",
+        "x": "bilim",
+        "beforeHead": "✦ BİLİM✕",
+        "beforeKey": "science",
+        "afterHead": "✦ BİLİM✕",
+        "afterKey": "science",
+        "stolen": false,
+        "modalUnchanged": true
+      },
+      {
+        "action": "globalPane",
+        "x": "imp",
+        "beforeHead": "👑 DEVLET\n        ✕",
+        "beforeKey": "global:imp",
+        "afterHead": "👑 DEVLET\n        ✕",
+        "afterKey": "global:imp",
+        "stolen": false,
+        "modalUnchanged": true
+      },
+      {
+        "action": "globalPane",
+        "x": "ekonomi",
+        "beforeHead": "📊 EKONOMİ MERKEZİ✕",
+        "beforeKey": "economy",
+        "afterHead": "📊 EKONOMİ MERKEZİ✕",
+        "afterKey": "economy",
+        "stolen": false,
+        "modalUnchanged": true
+      },
+      {
+        "action": "fedPane",
+        "x": null,
+        "beforeHead": "🏛 FEDERASYON\n        ✕",
+        "beforeKey": "federation:general",
+        "afterHead": "🏛 FEDERASYON\n        ✕",
+        "afterKey": "federation:general",
+        "stolen": false,
+        "modalUnchanged": true
+      },
+      {
+        "action": "marketPane",
+        "x": null,
+        "beforeHead": "💱 BORSA KAPALI\n          ✕",
+        "beforeKey": "market",
+        "afterHead": "💱 BORSA KAPALI\n          ✕",
+        "afterKey": "market",
+        "stolen": false,
+        "modalUnchanged": true
+      },
+      {
+        "action": "tab",
+        "x": "intel",
+        "beforeHead": "🌐 GALAKTİK KONSEY\n        ✕",
+        "beforeKey": "council",
+        "afterHead": "🌐 GALAKTİK KONSEY\n        ✕",
+        "afterKey": "council",
+        "stolen": false,
+        "modalUnchanged": true
+      },
+      {
+        "action": "news",
+        "x": null,
+        "beforeHead": "🌐 GALAKTİK KONSEY\n        ✕",
+        "beforeKey": "council",
+        "afterHead": "🌐 GALAKTİK KONSEY\n        ✕",
+        "afterKey": "council",
+        "stolen": false,
+        "modalUnchanged": true
+      },
+      {
+        "action": "sidebar:sistem",
+        "current": "sistem",
+        "overlay": false
+      },
+      {
+        "action": "sidebar:filo",
+        "current": "filo",
+        "overlay": false
+      }
+    ],
+    "p01Guest": [
+      {
+        "action": "diploPane",
+        "x": null,
+        "beforeHead": "DİPLOMASİ\n      ✕",
+        "beforeKey": "diplo:states:all",
+        "afterHead": "DİPLOMASİ\n      ✕",
+        "afterKey": "diplo:states:all",
+        "stolen": false,
+        "modalUnchanged": true
+      },
+      {
+        "action": "globalPane",
+        "x": "bilim",
+        "beforeHead": "✦ BİLİM✕",
+        "beforeKey": "science",
+        "afterHead": "✦ BİLİM✕",
+        "afterKey": "science",
+        "stolen": false,
+        "modalUnchanged": true
+      },
+      {
+        "action": "globalPane",
+        "x": "imp",
+        "beforeHead": "👑 DEVLET\n        ✕",
+        "beforeKey": "global:imp",
+        "afterHead": "👑 DEVLET\n        ✕",
+        "afterKey": "global:imp",
+        "stolen": false,
+        "modalUnchanged": true
+      },
+      {
+        "action": "globalPane",
+        "x": "ekonomi",
+        "beforeHead": "📊 EKONOMİ MERKEZİ✕",
+        "beforeKey": "economy",
+        "afterHead": "📊 EKONOMİ MERKEZİ✕",
+        "afterKey": "economy",
+        "stolen": false,
+        "modalUnchanged": true
+      },
+      {
+        "action": "fedPane",
+        "x": null,
+        "beforeHead": "🏛 FEDERASYON\n        ✕",
+        "beforeKey": "federation:general",
+        "afterHead": "🏛 FEDERASYON\n        ✕",
+        "afterKey": "federation:general",
+        "stolen": false,
+        "modalUnchanged": true
+      },
+      {
+        "action": "marketPane",
+        "x": null,
+        "beforeHead": "💱 BORSA KAPALI\n          ✕",
+        "beforeKey": "market",
+        "afterHead": "💱 BORSA KAPALI\n          ✕",
+        "afterKey": "market",
+        "stolen": false,
+        "modalUnchanged": true
+      },
+      {
+        "action": "tab",
+        "x": "intel",
+        "beforeHead": "🌐 GALAKTİK KONSEY\n        ✕",
+        "beforeKey": "council",
+        "afterHead": "🌐 GALAKTİK KONSEY\n        ✕",
+        "afterKey": "council",
+        "stolen": false,
+        "modalUnchanged": true
+      },
+      {
+        "action": "news",
+        "x": null,
+        "beforeHead": "🌐 GALAKTİK KONSEY\n        ✕",
+        "beforeKey": "council",
+        "afterHead": "🌐 GALAKTİK KONSEY\n        ✕",
+        "afterKey": "council",
+        "stolen": false,
+        "modalUnchanged": true
+      },
+      {
+        "action": "sidebar:sistem",
+        "current": "sistem",
+        "overlay": false
+      },
+      {
+        "action": "sidebar:filo",
+        "current": "filo",
+        "overlay": false
+      }
+    ],
+    "p03": {
+      "guestYes": 1,
+      "hostNo": 1,
+      "singleTap": true,
+      "realAckHeldByTest": true,
+      "otherPanelKept": true,
+      "reconnect": true
+    },
+    "p04": {
+      "war": [
+        false,
+        false
+      ],
+      "humanEmbargo": [
+        [],
+        []
+      ],
+      "reason": "exhaustion|actor:auto",
+      "save": true
+    },
+    "p02Ballot": {
+      "canonical": {
+        "key": "ticaretStd",
+        "target": null,
+        "opened": 6.767200000000005,
+        "yes": [
+          3,
+          5,
+          6,
+          4,
+          1,
+          0
+        ],
+        "no": [
+          7,
+          2
+        ],
+        "expired": false,
+        "appliedTarget": null,
+        "ended": 14.462559999999955,
+        "passed": true,
+        "weight": {
+          "yes": 42.15318482807813,
+          "no": 12.7769350101538
+        },
+        "eventKey": "council:ticaretStd:14.462559999999955"
+      },
+      "devices": [
+        {
+          "me": 0,
+          "result": {
+            "key": "ticaretStd",
+            "target": null,
+            "opened": 6.767200000000005,
+            "yes": [
+              3,
+              5,
+              6,
+              4,
+              1,
+              0
+            ],
+            "no": [
+              7,
+              2
+            ],
+            "expired": false,
+            "appliedTarget": null,
+            "ended": 14.462559999999955,
+            "passed": true,
+            "weight": {
+              "yes": 42.15318482807813,
+              "no": 12.7769350101538
+            },
+            "eventKey": "council:ticaretStd:14.462559999999955"
+          }
+        },
+        {
+          "me": 1,
+          "result": {
+            "key": "ticaretStd",
+            "target": null,
+            "appliedTarget": null,
+            "opened": 6.767200000000005,
+            "ended": 14.462559999999955,
+            "yes": [
+              3,
+              5,
+              6,
+              4,
+              0,
+              1
+            ],
+            "no": [
+              7,
+              2
+            ],
+            "passed": true,
+            "expired": false,
+            "weight": {
+              "yes": 42.15318482807813,
+              "no": 12.7769350101538
+            },
+            "eventKey": "council:ticaretStd:14.462559999999955"
+          }
+        },
+        {
+          "me": 2,
+          "result": {
+            "key": "ticaretStd",
+            "target": null,
+            "appliedTarget": null,
+            "opened": 6.767200000000005,
+            "ended": 14.462559999999955,
+            "yes": [
+              3,
+              5,
+              6,
+              4,
+              1,
+              2
+            ],
+            "no": [
+              7,
+              0
+            ],
+            "passed": true,
+            "expired": false,
+            "weight": {
+              "yes": 42.15318482807813,
+              "no": 12.7769350101538
+            },
+            "eventKey": "council:ticaretStd:14.462559999999955"
+          }
+        }
+      ],
+      "reconnect": true,
+      "save8": {
+        "v": 8,
+        "bytes": 58611
+      }
+    },
+    "whisper": 1
+  },
+  "pass": 10,
+  "fail": 1
+}

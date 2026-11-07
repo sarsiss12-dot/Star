@@ -1,0 +1,154 @@
+FAIL aynı misafir odasında deserialize sonrası habere dönüş korunur AssertionError [ERR_ASSERTION]: The input did not match the regular expression /data-a="newsReturn"/. Input:
+
+'<div class="dpBox">\n' +
+  '      <div class="dpHd"><span>🌐 GALAKTİK KONSEY</span>\n' +
+  '        <button class="riX" data-a="closeDiplo">✕</button></div>\n' +
+  '      <div class="dpBody"><div class="envRow"><span>Konsey</span>\n' +
+  '        <b style="color:#6ff2c8">2 üye</b></div><div class="row"><span>Başkan</span>\n' +
+  '        <b style="color:#96b13a">Yüce Nyx Zihni (sen)</b></div><div class="row"><span>Başkanlık dönemin</span><b>0 / 3</b></div><div class="row"><span>Oy ağırlığın</span><b style="color:#6ff2c8">19.0</b></div><div class="mini">Oy ağırlığı toprak, etki ve pasifist ideolojiyle artar.\n' +
+  '        3 dönem başkanlık = <b>Konsey Hâkimiyeti zaferi</b>.</div><div class="row"><span>Sonraki oylama</span><b>12 ay sonra</b></div><div class="ph">DİPLOMATİK AĞIRLIĞIN</div><div class="row"><span>Oy ağırlığı</span>\n' +
+  '          <b style="color:#6ff2c8">19.0</b></div><div class="ph">🏛 KONSEY BAŞKANLIĞI</div><div class="box" style="border-color:#6ff2c8">\n' +
+  '          <div class="bt"><span style="color:#96b13a">Yüce Nyx Zihni (SEN)</span>\n' +
+  '            <span class="tag p">DÖNEM BAŞKANI</span></div>\n' +
+  '          <div class="bd">Seçime <b>15</b> yıl (180 ay) ·\n' +
+  '               dönem 1</div></div><div class="mini" style="color:#7d90ad">Önce bir tam dönem başkanlık yapmalısın</div><div class="ph">📜 TASARI SUN</div><div class="mini">Konseye kendi tasarını sun (120 ◈).\n' +
+  '            <b style="color:#ff9b3d">Risk:</b> reddedilirse prestij kaybedersin\n' +
+  '            ve 5 yıl boyunca konseydeki ağırlığın azalır.</div><div class="act2"><button class="abtn" data-a="bill" data-x="borsaKur">\n' +
+  '                💱 Galaktik Borsayı Kur</button><button class="abtn" data-a="bill" data-x="piyasaReg">\n' +
+  '                ⚖ Piyasa Regülasyonu</button><button class="abtn" data-a="bill" data-x="casusSeffaf">\n' +
+  '                🔍 Casusluk Şeffaflığı</button><button class="abtn" data-a="bill" data-x="ticaretStd">\n' +
+  '                ⚖ Evrensel Ticaret Sta</button><button class="abtn" data-a="bill" data-x="silahsiz">\n' +
+  '                🕊 Silahsızlanma Antlaş</button><button class="abtn" data-a="bill" data-x="serbest">\n' +
+  '                🤝 Serbest Ticaret Bölg</button></div><div class="act2"><button class="abtn dgr" data-a="billPick" data-x="savasYasak">\n' +
+  '                🚫 Savaş Yasağı<br>\n' +
+  '                <span style="font-size:9px">hedef seç</span></button><button class="abtn dgr" data-a="billPick" data-x="yaptirim">\n' +
+  '                ⛔ Yaptırım<br>\n' +
+  '                <span style="font-size:9px">hedef seç</span></button><button class="abtn dgr" data-a="billPick" data-x="ihrac">\n' +
+  '                🚪 Konseyden İhraç<br>\n' +
+  '                <span style="font-size:9px">hedef seç</span></button></div><div class="ph">YÜRÜRLÜKTEKİ KARARLAR</div><div class="mini">Henüz karar alınmadı.</div><div class="ph">ÜYELER</div><div class="dpCard"><div class="dpTop">\n' +
+  '          <canvas class="dpPort" data-ps="2611647982" data-lk="humanoid" data-col="#96b13a"\n' +
+  '            data-pers="yayilmaci"\n' +
+  '            data-mood="0" width="34" height="46"></canvas>\n' +
+  '          <div class="dpName"><b style="color:#96b13a">Yüce Nyx Zihni (sen)</b>\n' +
+  '          <i>Bilimsel · Liyakat · oy ağırlığı 19.0</i></div>\n' +
+  '          <span class="tag p">BAŞKAN</span></div></div><div class="dpCard"><div class="dpTop">\n' +
+  '          <canvas class="dpPort" data-ps="2680984271" data-lk="makine" data-col="#5c9ef5"\n' +
+  '            data-pers="yayilmaci"\n' +
+  '            data-mood="-30" width="34" height="46"></canvas>\n' +
+  `          <div class="dpName"><b style="color:#5c9ef5">Muhteşem Xel'Naga Otoritesi</b>\n` +
+  '          <i>Makine Zekâsı · Asimilasyoncu · oy ağırlığı 5.0</i></div>\n' +
+  '          </div></div><div class="act2" style="margin-top:12px"><button class="abtn dgr" data-a="cncLeave">KONSEYDEN AYRIL</button></div></div></div>'
+
+    at /workspace/Star/tests/beta_p02_news_return_test.js:5:183
+    at test (/workspace/Star/tests/beta_p02_news_return_test.js:3:25)
+    at Object.<anonymous> (/workspace/Star/tests/beta_p02_news_return_test.js:5:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+FAIL başka oda veya oyuncuda eski haber referansı geçersizdir AssertionError [ERR_ASSERTION]: The input was expected to not match the regular expression /data-a="newsReturn"/. Input:
+
+'<div class="dpBox">\n' +
+  '      <div class="dpHd"><span>🌐 GALAKTİK KONSEY</span>\n' +
+  '        <button class="riX" data-a="closeDiplo">✕</button></div>\n' +
+  '      <div class="dpBody"><button class="abtn" data-a="newsReturn">İncelenen habere geri dön</button><div class="envRow"><span>Konsey</span>\n' +
+  '        <b style="color:#6ff2c8">2 üye</b></div><div class="row"><span>Başkan</span>\n' +
+  '        <b style="color:#96b13a">Yüce Nyx Zihni (sen)</b></div><div class="row"><span>Başkanlık dönemin</span><b>0 / 3</b></div><div class="row"><span>Oy ağırlığın</span><b style="color:#6ff2c8">19.0</b></div><div class="mini">Oy ağırlığı toprak, etki ve pasifist ideolojiyle artar.\n' +
+  '        3 dönem başkanlık = <b>Konsey Hâkimiyeti zaferi</b>.</div><div class="row"><span>Sonraki oylama</span><b>12 ay sonra</b></div><div class="ph">DİPLOMATİK AĞIRLIĞIN</div><div class="row"><span>Oy ağırlığı</span>\n' +
+  '          <b style="color:#6ff2c8">19.0</b></div><div class="ph">🏛 KONSEY BAŞKANLIĞI</div><div class="box" style="border-color:#6ff2c8">\n' +
+  '          <div class="bt"><span style="color:#96b13a">Yüce Nyx Zihni (SEN)</span>\n' +
+  '            <span class="tag p">DÖNEM BAŞKANI</span></div>\n' +
+  '          <div class="bd">Seçime <b>15</b> yıl (180 ay) ·\n' +
+  '               dönem 1</div></div><div class="mini" style="color:#7d90ad">Önce bir tam dönem başkanlık yapmalısın</div><div class="ph">📜 TASARI SUN</div><div class="mini">Konseye kendi tasarını sun (120 ◈).\n' +
+  '            <b style="color:#ff9b3d">Risk:</b> reddedilirse prestij kaybedersin\n' +
+  '            ve 5 yıl boyunca konseydeki ağırlığın azalır.</div><div class="act2"><button class="abtn" data-a="bill" data-x="borsaKur">\n' +
+  '                💱 Galaktik Borsayı Kur</button><button class="abtn" data-a="bill" data-x="piyasaReg">\n' +
+  '                ⚖ Piyasa Regülasyonu</button><button class="abtn" data-a="bill" data-x="casusSeffaf">\n' +
+  '                🔍 Casusluk Şeffaflığı</button><button class="abtn" data-a="bill" data-x="ticaretStd">\n' +
+  '                ⚖ Evrensel Ticaret Sta</button><button class="abtn" data-a="bill" data-x="silahsiz">\n' +
+  '                🕊 Silahsızlanma Antlaş</button><button class="abtn" data-a="bill" data-x="serbest">\n' +
+  '                🤝 Serbest Ticaret Bölg</button></div><div class="act2"><button class="abtn dgr" data-a="billPick" data-x="savasYasak">\n' +
+  '                🚫 Savaş Yasağı<br>\n' +
+  '                <span style="font-size:9px">hedef seç</span></button><button class="abtn dgr" data-a="billPick" data-x="yaptirim">\n' +
+  '                ⛔ Yaptırım<br>\n' +
+  '                <span style="font-size:9px">hedef seç</span></button><button class="abtn dgr" data-a="billPick" data-x="ihrac">\n' +
+  '                🚪 Konseyden İhraç<br>\n' +
+  '                <span style="font-size:9px">hedef seç</span></button></div><div class="ph">YÜRÜRLÜKTEKİ KARARLAR</div><div class="mini">Henüz karar alınmadı.</div><div class="ph">ÜYELER</div><div class="dpCard"><div class="dpTop">\n' +
+  '          <canvas class="dpPort" data-ps="2611647982" data-lk="humanoid" data-col="#96b13a"\n' +
+  '            data-pers="yayilmaci"\n' +
+  '            data-mood="0" width="34" height="46"></canvas>\n' +
+  '          <div class="dpName"><b style="color:#96b13a">Yüce Nyx Zihni (sen)</b>\n' +
+  '          <i>Bilimsel · Liyakat · oy ağırlığı 19.0</i></div>\n' +
+  '          <span class="tag p">BAŞKAN</span></div></div><div class="dpCard"><div class="dpTop">\n' +
+  '          <canvas class="dpPort" data-ps="2680984271" data-lk="makine" data-col="#5c9ef5"\n' +
+  '            data-pers="yayilmaci"\n' +
+  '            data-mood="-30" width="34" height="46"></canvas>\n' +
+  `          <div class="dpName"><b style="color:#5c9ef5">Muhteşem Xel'Naga Otoritesi</b>\n` +
+  '          <i>Makine Zekâsı · Asimilasyoncu · oy ağırlığı 5.0</i></div>\n' +
+  '          </div></div><div class="act2" style="margin-top:12px"><button class="abtn dgr" data-a="cncLeave">KONSEYDEN AYRIL</button></div></div></div>'
+
+    at /workspace/Star/tests/beta_p02_news_return_test.js:6:140
+    at test (/workspace/Star/tests/beta_p02_news_return_test.js:3:25)
+    at Object.<anonymous> (/workspace/Star/tests/beta_p02_news_return_test.js:6:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+FAIL aynı sayısal id farklı olayda tekrar kullanılsa yanlış habere gidilmez AssertionError [ERR_ASSERTION]: The input was expected to not match the regular expression /data-a="newsReturn"/. Input:
+
+'<div class="dpBox">\n' +
+  '      <div class="dpHd"><span>🌐 GALAKTİK KONSEY</span>\n' +
+  '        <button class="riX" data-a="closeDiplo">✕</button></div>\n' +
+  '      <div class="dpBody"><button class="abtn" data-a="newsReturn">İncelenen habere geri dön</button><div class="envRow"><span>Konsey</span>\n' +
+  '        <b style="color:#6ff2c8">2 üye</b></div><div class="row"><span>Başkan</span>\n' +
+  '        <b style="color:#96b13a">Yüce Nyx Zihni (sen)</b></div><div class="row"><span>Başkanlık dönemin</span><b>0 / 3</b></div><div class="row"><span>Oy ağırlığın</span><b style="color:#6ff2c8">19.0</b></div><div class="mini">Oy ağırlığı toprak, etki ve pasifist ideolojiyle artar.\n' +
+  '        3 dönem başkanlık = <b>Konsey Hâkimiyeti zaferi</b>.</div><div class="row"><span>Sonraki oylama</span><b>12 ay sonra</b></div><div class="ph">DİPLOMATİK AĞIRLIĞIN</div><div class="row"><span>Oy ağırlığı</span>\n' +
+  '          <b style="color:#6ff2c8">19.0</b></div><div class="ph">🏛 KONSEY BAŞKANLIĞI</div><div class="box" style="border-color:#6ff2c8">\n' +
+  '          <div class="bt"><span style="color:#96b13a">Yüce Nyx Zihni (SEN)</span>\n' +
+  '            <span class="tag p">DÖNEM BAŞKANI</span></div>\n' +
+  '          <div class="bd">Seçime <b>15</b> yıl (180 ay) ·\n' +
+  '               dönem 1</div></div><div class="mini" style="color:#7d90ad">Önce bir tam dönem başkanlık yapmalısın</div><div class="ph">📜 TASARI SUN</div><div class="mini">Konseye kendi tasarını sun (120 ◈).\n' +
+  '            <b style="color:#ff9b3d">Risk:</b> reddedilirse prestij kaybedersin\n' +
+  '            ve 5 yıl boyunca konseydeki ağırlığın azalır.</div><div class="act2"><button class="abtn" data-a="bill" data-x="borsaKur">\n' +
+  '                💱 Galaktik Borsayı Kur</button><button class="abtn" data-a="bill" data-x="piyasaReg">\n' +
+  '                ⚖ Piyasa Regülasyonu</button><button class="abtn" data-a="bill" data-x="casusSeffaf">\n' +
+  '                🔍 Casusluk Şeffaflığı</button><button class="abtn" data-a="bill" data-x="ticaretStd">\n' +
+  '                ⚖ Evrensel Ticaret Sta</button><button class="abtn" data-a="bill" data-x="silahsiz">\n' +
+  '                🕊 Silahsızlanma Antlaş</button><button class="abtn" data-a="bill" data-x="serbest">\n' +
+  '                🤝 Serbest Ticaret Bölg</button></div><div class="act2"><button class="abtn dgr" data-a="billPick" data-x="savasYasak">\n' +
+  '                🚫 Savaş Yasağı<br>\n' +
+  '                <span style="font-size:9px">hedef seç</span></button><button class="abtn dgr" data-a="billPick" data-x="yaptirim">\n' +
+  '                ⛔ Yaptırım<br>\n' +
+  '                <span style="font-size:9px">hedef seç</span></button><button class="abtn dgr" data-a="billPick" data-x="ihrac">\n' +
+  '                🚪 Konseyden İhraç<br>\n' +
+  '                <span style="font-size:9px">hedef seç</span></button></div><div class="ph">YÜRÜRLÜKTEKİ KARARLAR</div><div class="mini">Henüz karar alınmadı.</div><div class="ph">ÜYELER</div><div class="dpCard"><div class="dpTop">\n' +
+  '          <canvas class="dpPort" data-ps="2611647982" data-lk="humanoid" data-col="#96b13a"\n' +
+  '            data-pers="yayilmaci"\n' +
+  '            data-mood="0" width="34" height="46"></canvas>\n' +
+  '          <div class="dpName"><b style="color:#96b13a">Yüce Nyx Zihni (sen)</b>\n' +
+  '          <i>Bilimsel · Liyakat · oy ağırlığı 19.0</i></div>\n' +
+  '          <span class="tag p">BAŞKAN</span></div></div><div class="dpCard"><div class="dpTop">\n' +
+  '          <canvas class="dpPort" data-ps="2680984271" data-lk="makine" data-col="#5c9ef5"\n' +
+  '            data-pers="yayilmaci"\n' +
+  '            data-mood="-30" width="34" height="46"></canvas>\n' +
+  `          <div class="dpName"><b style="color:#5c9ef5">Muhteşem Xel'Naga Otoritesi</b>\n` +
+  '          <i>Makine Zekâsı · Asimilasyoncu · oy ağırlığı 5.0</i></div>\n' +
+  '          </div></div><div class="act2" style="margin-top:12px"><button class="abtn dgr" data-a="cncLeave">KONSEYDEN AYRIL</button></div></div></div>'
+
+    at /workspace/Star/tests/beta_p02_news_return_test.js:7:171
+    at test (/workspace/Star/tests/beta_p02_news_return_test.js:3:25)
+    at Object.<anonymous> (/workspace/Star/tests/beta_p02_news_return_test.js:7:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+GEÇEN: 0 KALAN: 3

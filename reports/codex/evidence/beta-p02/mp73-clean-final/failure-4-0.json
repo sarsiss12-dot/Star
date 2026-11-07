@@ -1,0 +1,299 @@
+{
+  "url": "/",
+  "vote": null,
+  "inbox": [
+    {
+      "kind": "anomaly",
+      "data": {
+        "a": {
+          "id": "a2",
+          "k": "dogal",
+          "n": "Kristal Mezarlık",
+          "t": "Buzun altında, düzenli sıralar hâlinde dizilmiş devasa kristal sütunlar.",
+          "ch": [
+            {
+              "t": "Örnek al",
+              "d": "+150 araştırma"
+            },
+            {
+              "t": "Madencilik başlat",
+              "d": "+300 mineral"
+            }
+          ]
+        },
+        "sys": {
+          "id": 29,
+          "x": 1442.107336305354,
+          "y": 1694.176457148216,
+          "name": "Fenialith",
+          "star": {
+            "n": "G Sarı",
+            "c": "#ffe9a8",
+            "r": 5.5,
+            "w": 20
+          },
+          "planets": [
+            {
+              "i": 0,
+              "t": "cor",
+              "dep": null,
+              "sz": 19,
+              "seed": 3802,
+              "owner": -1,
+              "col": null,
+              "name": "Fenialith I"
+            },
+            {
+              "i": 1,
+              "t": "cor",
+              "dep": "zengin_maden",
+              "sz": 16,
+              "seed": 3819,
+              "owner": -1,
+              "col": null,
+              "name": "Fenialith II"
+            },
+            {
+              "i": 2,
+              "t": "sav",
+              "dep": "jeotermal",
+              "sz": 12,
+              "seed": 3836,
+              "owner": -1,
+              "col": null,
+              "name": "Fenialith III"
+            },
+            {
+              "i": 3,
+              "t": "sav",
+              "dep": null,
+              "sz": 12,
+              "seed": 3853,
+              "owner": -1,
+              "col": null,
+              "name": "Fenialith IV",
+              "lux": "ipek"
+            }
+          ],
+          "lanes": [
+            0,
+            16,
+            8
+          ],
+          "owner": -1,
+          "surv": [
+            1
+          ],
+          "seen": [
+            1
+          ],
+          "def": 0,
+          "queue": [],
+          "anom": false,
+          "pulsar": false,
+          "nebulaS": false,
+          "anomK": "dogal",
+          "_reach": 0,
+          "cr": 0
+        }
+      },
+      "ico": "🔬",
+      "cls": "sci",
+      "pause": true,
+      "title": "Anomali — Fenialith",
+      "sub": "Kristal Mezarlık",
+      "key": "an:29",
+      "uid": 2,
+      "born": 21.17220000000002
+    },
+    {
+      "kind": "anomaly",
+      "data": {
+        "a": {
+          "id": "a11",
+          "k": "sinyal",
+          "n": "Bilinmeyen Sinyal",
+          "t": "Sistemin derinliğinden düzenli aralıklarla bir çağrı geliyor. Kaynağı hiçbir kayıtta yok.",
+          "ch": [
+            {
+              "t": "Sinyale karşılık ver",
+              "d": "büyük ödül · risk var"
+            },
+            {
+              "t": "Kaydet ve uzaklaş",
+              "d": "+140 araştırma"
+            }
+          ]
+        },
+        "sys": {
+          "id": 35,
+          "x": 2419.8515434752685,
+          "y": 761.3179099852869,
+          "name": "Xanutyr",
+          "star": {
+            "n": "K Turuncu",
+            "c": "#ffab5c",
+            "r": 5,
+            "w": 22
+          },
+          "planets": [
+            {
+              "i": 0,
+              "t": "vol",
+              "dep": null,
+              "sz": 19,
+              "seed": 4588,
+              "owner": -1,
+              "col": null,
+              "name": "Xanutyr I"
+            },
+            {
+              "i": 1,
+              "t": "buz",
+              "dep": null,
+              "sz": 17,
+              "seed": 4605,
+              "owner": -1,
+              "col": null,
+              "name": "Xanutyr II"
+            },
+            {
+              "i": 2,
+              "t": "tok",
+              "dep": "zengin_maden",
+              "sz": 20,
+              "seed": 4622,
+              "owner": -1,
+              "col": null,
+              "name": "Xanutyr III"
+            }
+          ],
+          "lanes": [
+            3,
+            10
+          ],
+          "owner": -1,
+          "surv": [
+            0
+          ],
+          "seen": [
+            0,
+            1
+          ],
+          "def": 0,
+          "queue": [],
+          "anom": false,
+          "pulsar": false,
+          "nebulaS": false,
+          "anomK": "sinyal",
+          "_reach": 0,
+          "_shat": false,
+          "cr": 0
+        }
+      },
+      "ico": "🔬",
+      "cls": "sci",
+      "pause": true,
+      "title": "Anomali — Xanutyr",
+      "sub": "Bilinmeyen Sinyal",
+      "key": "an:35",
+      "uid": 3,
+      "born": 33.12652000000028
+    },
+    {
+      "kind": "anomaly",
+      "data": {
+        "a": {
+          "id": "a16",
+          "k": "megayapi",
+          "n": "Dönen Halka",
+          "t": "Yıldızın etrafında hâlâ dönen, kilometrelerce çaplı bir halka. Yüzeyinde tek bir çizik bile yok.",
+          "ch": [
+            {
+              "t": "Malzemeyi incele",
+              "d": "+320 araştırma, +90 alaşım"
+            },
+            {
+              "t": "Sökmeye çalış",
+              "d": "+900 mineral · TEHLİKELİ"
+            }
+          ]
+        },
+        "sys": {
+          "id": 16,
+          "x": 1648.7513346909934,
+          "y": 1382.6695840771924,
+          "name": "Xankar",
+          "star": {
+            "n": "G Sarı",
+            "c": "#ffe9a8",
+            "r": 5.5,
+            "w": 20
+          },
+          "planets": [
+            {
+              "i": 0,
+              "t": "cor",
+              "dep": null,
+              "sz": 11,
+              "seed": 2099,
+              "owner": -1,
+              "col": null,
+              "name": "Xankar I"
+            },
+            {
+              "i": 1,
+              "t": "cor",
+              "dep": "kristal",
+              "sz": 13,
+              "seed": 2116,
+              "owner": -1,
+              "col": null,
+              "name": "Xankar II"
+            },
+            {
+              "i": 2,
+              "t": "buz",
+              "dep": "kalinti",
+              "sz": 10,
+              "seed": 2133,
+              "owner": -1,
+              "col": null,
+              "name": "Xankar III"
+            }
+          ],
+          "lanes": [
+            8,
+            29,
+            43
+          ],
+          "owner": -1,
+          "surv": [
+            1
+          ],
+          "seen": [
+            1
+          ],
+          "def": 0,
+          "queue": [],
+          "anom": false,
+          "pulsar": false,
+          "nebulaS": false,
+          "anomK": "megayapi",
+          "_reach": 0,
+          "cr": 0
+        }
+      },
+      "ico": "🔬",
+      "cls": "sci",
+      "pause": true,
+      "title": "Anomali — Xankar",
+      "sub": "Dönen Halka",
+      "key": "an:16",
+      "uid": 4,
+      "born": 41.078440000000526
+    }
+  ],
+  "modal": "",
+  "pane": ""
+}

@@ -1993,6 +1993,7 @@ const UI = {
     if(wars)add('⚔ Aktif savaşlar listesi · '+wars+' düşman','activeWars',0);   // MP.7.5: sayaçla aynı kanonik liste (temas yoksa "Bilinmeyen düşman")
     const pending=typeof DiplomaticInbox!=='undefined'?DiplomaticInbox.pending():0;
     if(pending)add('✉ '+pending+' bekleyen diplomatik teklif','diplomaticInbox',pending);
+    if(typeof ArchiveUI!=='undefined'&&ArchiveUI.newsReturnRecord())add('📰 İncelenen habere geri dön','newsReturn',0);
     if(typeof ArchiveUI!=='undefined'&&ArchiveUI.returnRecord?.world===G.emps)add('✉ İncelenen teklife geri dön','inboxReturn',0);
     const minimized=this.minimizedEvent(),keys=new Set();
     for(const n of G.inbox||[]){
@@ -3781,6 +3782,7 @@ const UI = {
       ${f?`<nav class="fedTabs" aria-label="Federasyon bölümleri">${Object.entries(tabs).map(([k,n])=>`<button class="abtn ${tab===k?'pri':''}" data-a="fedTab" data-x="${k}" aria-pressed="${tab===k}">${n}</button>`).join('')}</nav>`:''}
       <div class="dpBody dcBody ${f?'fedTabBody':''}" data-fed-tab="${tab}">`;
 
+    h+=typeof ArchiveUI!=='undefined'?ArchiveUI.newsBackButton():'';
     if (!f){
       const allies = G.emps.filter(o=>!o.dead && !o.wild && o.id!==0 && e.ally[o.id]);
       h += `<div class="envRow"><span>DURUM</span><b style="color:#ff9b3d">FEDERASYON YOK</b></div>`;
@@ -4991,6 +4993,7 @@ const UI = {
         <button class="riX" data-a="closeDiplo">✕</button></div>
       <div class="dpBody">`;
 
+    h+=typeof ArchiveUI!=='undefined'?ArchiveUI.newsBackButton():'';
     if (G.cfg && G.cfg.council === 'kapali'){
       h += `<div class="empty">Bu galakside Galaktik Konsey devre dışı bırakıldı.</div>`;
     } else if (!councilExists()){
@@ -5095,6 +5098,9 @@ const UI = {
         else h += `<div class="mini" style="color:#ff9b3d">Üye olmadığın için oy kullanamazsın.</div>`;
         h += `</div>`;
       } else {
+        if(c.lastVote){const v=c.lastVote,names=a=>(a||[]).map(id=>id===e.id?'Sen':e.contact[id]&&G.emps[id]?esc(G.emps[id].name):'Bilinmeyen üye').join(' · ')||'—';
+          h+=`<div class="box" data-council-result="${esc(v.eventKey)}"><div class="bt">SON OYLAMA · ${esc(RESOLUTIONS[v.key]?.n||v.key)} · ${v.passed?'KABUL':'RED'}</div><div class="mini">Gün ${Math.floor(v.ended)}${v.expired?' · Oy süresi doldu':''}</div><p>EVET (${Number(v.weight.yes).toFixed(1)}): ${names(v.yes)}</p><p>HAYIR (${Number(v.weight.no).toFixed(1)}): ${names(v.no)}</p></div>`;
+        }
         const leftM = Math.max(0, c.voteIn === undefined ? 12 : c.voteIn);
         h += `<div class="row"><span>Sonraki oylama</span><b>${leftM} ay sonra</b></div>`;
       }

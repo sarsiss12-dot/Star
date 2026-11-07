@@ -1,0 +1,4 @@
+PASS aynı misafir odasında deserialize sonrası habere dönüş korunur
+PASS başka oda veya oyuncuda eski haber referansı geçersizdir
+PASS aynı sayısal id farklı olayda tekrar kullanılsa yanlış habere gidilmez
+GEÇEN: 3 KALAN: 0

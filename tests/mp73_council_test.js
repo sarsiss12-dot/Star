@@ -66,6 +66,7 @@ test('oy yetkisi: yinelenen oy "voted", eski belirteç "stale", üye olmayan "yo
 test('zaman aşımı: insan hiç oy vermezse motorun 24 ay sınırında oylama kapanır (sonsuz bekleme yok)',()=>{
   const h=world();h.run('for(let i=0;i<26&&G.council.vote&&!G.council.vote.done;i++)step(30);');
   assert.equal(J(h,'!G.council.vote||G.council.vote.done'),true);
+  assert.equal(J(h,'G.council.lastVote.expired'),true);for(const id of [0,A,B]){assert(!J(h,'G.council.lastVote.yes').includes(id));assert(!J(h,'G.council.lastVote.no').includes(id));}
 });
 test('tasarı: A kendi tasarısını sunar (proposeBill; kampanya sponsoru A); açık oylama varken motorun gerekçesi; rüşvet / şantaj insan üyeye reddedilir, AI üyeye motor kuralı',()=>{
   const h=world();assert.equal(code(cmd(h,A,{kind:'bill',key:'bilim',target:null})),'rules:council','vote open → engine reason');
@@ -138,5 +139,12 @@ test('BETA-P0.1: host çift EVET insan oyunu iki kez saymaz',()=>{
 test('BETA-P0.1: aynı yasa ve hedefin yeni oylaması eski belirteci reddeder',()=>{
   const h=world(),old=tok(h);h.run('G.day+=30;G.council.vote={...G.council.vote,opened:G.day,yes:[],no:[],done:false,age:0}');
   assert.equal(code(cmd(h,A,{kind:'councilVote',token:old,yes:true})),'rules:stale');assert(!J(h,'G.council.vote.yes').includes(A));
+});
+test('BETA-P0.2: üç insanın biten oyu ve kamu sonucu kalır, Save8 ve misafir aynasında aynı sonucu verir',()=>{
+  const h=world(),t=tok(h);assert.equal(code(cmd(h,A,{kind:'councilVote',token:t,yes:true})),'ok');assert.equal(code(cmd(h,B,{kind:'councilVote',token:t,yes:false})),'ok');
+  h.run("var beforeVote=JSON.parse(JSON.stringify(G.council.vote));var weight=id=>voteWeight(G.emps[id])+(typeof hegemonyWeight==='function'?hegemonyWeight(G.emps[id]):0);var expectedYes=[...beforeVote.yes,0].reduce((n,id)=>n+weight(id),0),expectedNo=beforeVote.no.reduce((n,id)=>n+weight(id),0),expectedPassed=[...beforeVote.yes,0].some(id=>hasCivic(G.emps[id],'universal'))||expectedYes>expectedNo;var hs=MP.local({kind:'councilVote',token:councilVoteToken(G.council.vote),yes:true});if(!hs||!hs.ok)throw Error(JSON.stringify(hs));");
+  const v=J(h,'G.council.lastVote||null');assert(v,'completed public ballot missing');assert(v.yes.includes(A)&&v.yes.includes(0));assert(v.no.includes(B));assert.equal(v.weight.yes,h.run('expectedYes'));assert.equal(v.weight.no,h.run('expectedNo'));assert.equal(v.passed,h.run('expectedPassed'));
+  h.run('var saved=serialize();if(!deserialize(saved))throw Error("Save8 load")');assert.deepEqual(J(h,'G.council.lastVote'),v);
+  h.run(MIR);const a=J(h,`StarsMirror.build(${A}).world.council.lastVote`),b=J(h,`StarsMirror.build(${B}).world.council.lastVote`);assert.equal(a.passed,v.passed);assert.equal(b.passed,v.passed);assert.deepEqual(a.weight,v.weight);assert.deepEqual(b.weight,v.weight);
 });
 end();

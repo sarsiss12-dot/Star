@@ -1,7 +1,7 @@
 'use strict';
 // Pin the presentation-only delta against the MP.8.8 canonical runtime, not a normalized Save8.
 const fs=require('fs'),assert=require('assert/strict'),crypto=require('crypto'),path=require('path');
-const root=path.resolve(__dirname,'..'),sha=s=>crypto.createHash('sha256').update(s).digest('hex'),read=f=>require('./helpers/beta-p01-preservation.cjs').stripReviewedP01(f,fs.readFileSync(path.join(root,f),'utf8'));
+const root=path.resolve(__dirname,'..'),sha=s=>crypto.createHash('sha256').update(s).digest('hex'),read=f=>require('./helpers/beta-p01-preservation.cjs').stripReviewedP01(f,require('./helpers/beta-p02-preservation.cjs').stripReviewedP02(f,fs.readFileSync(path.join(root,f),'utf8')));
 let ui=read('ui.js').replace(/    \/\* MP\.8\.9: local presentation controls;[\s\S]*?    \/\* END MP\.8\.9 SAVE CONTROLS \*\/\n/,'').replace(/\n\/\* MP\.8\.9: device-local UI scale\.[\s\S]*?\/\* END MP\.8\.9 UI SCALE \*\/\n/,'');
 ui=ui.replace("      // MP.8.9: DOM rectangles are screen CSS pixels; fixed flyouts inherit the tools' local zoom.\n      const zoom = this.getUIScale ? this.getUIScale().effective / 100 : 1;\n",'');
 assert.equal(ui.split("Math.max(1, vx + vw - margin - left) / zoom + 'px'").length,2);ui=ui.replace("Math.max(1, vx + vw - margin - left) / zoom + 'px'","Math.max(1, vx + vw - margin - left) + 'px'");

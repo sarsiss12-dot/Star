@@ -11,5 +11,5 @@ module.exports=async(H,B)=>{
  await wait(B,()=>G.news.records.some(r=>r.key==='war-end:1'));
  await B.evaluate(()=>ArchiveUI.detail(G.news.records.find(r=>r.key==='war-front:1').id));const text=await B.locator('#modal').innerText();assert(text.includes('SONA ERDİ'));assert(text.includes('zorunlu barış'));await B.screenshot({path:process.env.STARS_OUTPUT+'/guest-war-ended.png'});
  const r=await H.evaluate(()=>{const humans=G.emps.filter(e=>e.ai===false);window.__trust=trustOf;trustOf=()=>-100;embargoTick();trustOf=__trust;return {war:[!!G.emps[0].war[1],!!G.emps[1].war[0]],humanEmbargo:humans.map(e=>Object.keys(e.embargo||{})),reason:G.warLedger.fronts.find(f=>f.id===1).endReason,save:StarsMP.validatePackage(MP1Host.host.snapshot({}).pkg).ok};});
- assert.deepEqual(r.war,[false,false]);assert(r.humanEmbargo.every(x=>x.length===0));assert(r.save);return r;
+ assert.deepEqual(r.war,[false,false]);assert(r.humanEmbargo.every(x=>x.length===0));assert(r.save);for(const p of [H,B])await p.evaluate(()=>UI.closeModal());return r;
 };

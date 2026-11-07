@@ -228,6 +228,30 @@ function warLedgerCapture(sys,planet,old,by){
   if(prior && prior.to===by) return;
   f.occupation.push({sys:sys.id,planet,from:old,to:by,day:G.day});
 }
+// BETA-P0.2: read-only, per-observer DTO. Never select a newer war by its empire pair.
+function warNewsReport(viewer,id){
+  const fronts=G.warLedger?.fronts||[],f=fronts.find(x=>x.id===id);
+  if(!viewer||G.emps[viewer.id]!==viewer||!f)return null;
+  const known=n=>n===viewer.id||!!viewer.contact[n],mine=f.sides.indexOf(viewer.id);
+  if(!f.sides.every(known)||(mine<0&&!f.sides.some(n=>intelOf(viewer,n)>=3)))return null;
+  const seen=n=>!!G.sys[n]&&(G.sys[n].seen||[]).includes(viewer.id);
+  const active=f.ended===null,number=n=>Number.isFinite(n)?n:null;
+  const parties=f.sides.map((id,i)=>{const e=G.emps[id],foe=f.sides[1-i],own=id===viewer.id,observed=viewer.aiIntel?.powers?.[id];
+    // Own fleets or a dated observation, never unobserved foreign fleets / a later war's statistics.
+    const power=!active?null:own?{value:G.fleets.filter(x=>x.e===id).reduce((n,x)=>n+fleetPower(x),0),day:G.day,exact:true}:observed&&Number.isFinite(observed.value)&&Number.isFinite(observed.day)&&G.day-observed.day>=0&&G.day-observed.day<=720?{value:observed.value,day:observed.day,exact:false}:null;
+    const m=mine>=0?f.metrics?.[mine]:null;
+    return {id,role:f.roles?.[i]??i,exhaustion:active&&(own||intelOf(viewer,id)>=3)?number(e?.exh?.[foe]):null,power,
+      shipsLost:m?number(own?m.shipsLost:m.shipsDestroyed):null};});
+  const permitted=x=>x.sides.every(known)&&(x.sides.includes(viewer.id)||x.sides.some(n=>intelOf(viewer,n)>=3));
+  const campaign=fronts.filter(x=>x.campaign===f.campaign&&permitted(x)),participants=[];
+  for(const x of campaign)for(let i=0;i<x.sides.length;i++){const id=x.sides[i];if(known(id)&&!participants.some(p=>p.id===id))participants.push({id,role:x.roles?.[i]??i});}
+  const actorMatch=/\|actor:(\d+)$/.exec(f.endReason||''),actor=actorMatch&&known(+actorMatch[1])?+actorMatch[1]:null;
+  return {id:f.id,asOf:G.day,sides:f.sides.slice(),opened:f.legacy?null:f.opened,ended:f.ended,legacy:!!f.legacy,reason:String(f.endReason||'').split('|')[0],actor,
+    parties,participants,goals:(f.goals||[]).filter(g=>g.by===viewer.id).map(g=>({by:g.by,type:String(g.type),day:g.day,targets:(g.targets||[]).filter(seen)})),
+    fronts:active?campaign.filter(x=>x.ended===null&&x.sides.every(known)&&(x.sides.includes(viewer.id)||x.sides.some(n=>intelOf(viewer,n)>=3))).map(x=>({id:x.id,sides:x.sides.slice(),opened:x.legacy?null:x.opened})):[],
+    progress:(f.occupation||[]).filter(x=>mine>=0&&seen(x.sys)&&known(x.from)&&known(x.to)).map(x=>({sys:x.sys,planet:x.planet,from:x.from,to:x.to,day:x.day}))};
+}
+
 function warLedgerView(e,foe){
   if(!e || G.emps[e.id]!==e) return null;
   const fs=G.warLedger && G.warLedger.fronts || [];
@@ -4874,6 +4898,7 @@ function castCouncilVote(e,yes,token){
 function finishCouncilVote(){
   const c = G.council;
   if (!c || !c.vote || c.vote.done) return;
+  const ballot={key:c.vote.key,target:c.vote.target,opened:Number.isFinite(c.vote.opened)?c.vote.opened:null,yes:c.vote.yes.slice(),no:c.vote.no.slice(),expired:(c.vote.age||0)>24};
   c.vote.done = true;
   let yw = 0, nw = 0;
   /* Senyörün oyu, konseydeki vasallarının ağırlığını da taşır */
@@ -4964,7 +4989,9 @@ function finishCouncilVote(){
     say('Konsey: ' + spName + R.n + tName + ' — ' + (passed ? 'KABUL' : 'RED') +
         ' (' + Math.round(yw) + '/' + Math.round(yw+nw) + ' ağırlık)', passed?'win':'');
   }
-  if(c.members.includes(0))recordNews({category:'council',scope:'player',empires:[0,...(Number.isInteger(c.vote.target)&&G.emps[c.vote.target]?[c.vote.target]:[])],key:'council:'+c.vote.key+':'+G.day,title:'Konsey kararı — '+R.n,text:passed?'Kabul edildi':'Reddedildi',important:true});
+  // BETA-P0.2: one bounded public result; original ballot identity and applied target differ for dynamic sanctions.
+  c.lastVote={...ballot,appliedTarget:c.vote.target,ended:G.day,passed,weight:{yes:yw,no:nw},eventKey:'council:'+c.vote.key+':'+G.day};
+  recordNews({category:'council',scope:'public',empires:[],key:c.lastVote.eventKey,title:'Konsey kararı — '+R.n,text:(passed?'Kabul edildi':'Reddedildi')+' · EVET '+yw.toFixed(1)+' / HAYIR '+nw.toFixed(1)+' · gün '+G.day,important:true});
   c.vote = null;
 }
 

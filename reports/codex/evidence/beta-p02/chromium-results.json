@@ -1,0 +1,38 @@
+[
+  {
+    "test": "mp73-final",
+    "status": "FAIL",
+    "exit": 1,
+    "log": "reports/codex/evidence/beta-p02/mp73-final.log"
+  },
+  {
+    "test": "news-final",
+    "status": "PASS",
+    "exit": 0,
+    "log": "reports/codex/evidence/beta-p02/news-final.log"
+  },
+  {
+    "test": "panels-final",
+    "status": "PASS",
+    "exit": 0,
+    "log": "reports/codex/evidence/beta-p02/panels-final.log"
+  },
+  {
+    "test": "mp75-final",
+    "status": "PASS",
+    "exit": 0,
+    "log": "reports/codex/evidence/beta-p02/mp75-final.log"
+  },
+  {
+    "test": "mp8-N-final",
+    "status": "PASS",
+    "exit": 0,
+    "log": "reports/codex/evidence/beta-p02/mp8-N-final.log"
+  },
+  {
+    "test": "mp8-R-final",
+    "status": "PASS",
+    "exit": 0,
+    "log": "reports/codex/evidence/beta-p02/mp8-R-final.log"
+  }
+]

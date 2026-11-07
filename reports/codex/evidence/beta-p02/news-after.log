@@ -1,0 +1,20 @@
+FAIL misafir kendi kayıtlı kaybını ve hedefini alır, yabancı hasar/filo/ekonomi almaz AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert(!JSON.stringify(r).includes('res'))
+
+    at /workspace/Star/tests/beta_p02_news_test.js:6:466
+    at test (/workspace/Star/tests/beta_p02_news_test.js:3:25)
+    at Object.<anonymous> (/workspace/Star/tests/beta_p02_news_test.js:6:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+PASS haber sorgusu Save8 baytlarını ve RNG sırasını değiştirmez
+PASS eski savaşta güç/yorgunluk bilinmiyor; aynı çiftin yeni savaşı karışmaz
+PASS barış haberi sabit bitmiş savaş panelini açar
+PASS temassız ortak ve görülmemiş hedef/cephe ilerlemesi sızmaz
+PASS tarihsiz eski kayıt için yeni tarih/güç uydurulmaz
+GEÇEN: 5 KALAN: 1

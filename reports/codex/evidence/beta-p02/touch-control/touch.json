@@ -1,0 +1,7220 @@
+[
+  {
+    "mode": "static",
+    "method": "locator",
+    "status": "PASS",
+    "samples": [
+      {
+        "i": 0,
+        "ms": 73,
+        "clicks": 1,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 1,
+        "ms": 139,
+        "clicks": 2,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 2,
+        "ms": 50,
+        "clicks": 3,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 3,
+        "ms": 80,
+        "clicks": 4,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 4,
+        "ms": 61,
+        "clicks": 5,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 5,
+        "ms": 61,
+        "clicks": 6,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 6,
+        "ms": 67,
+        "clicks": 7,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 7,
+        "ms": 51,
+        "clicks": 8,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 8,
+        "ms": 48,
+        "clicks": 9,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 9,
+        "ms": 54,
+        "clicks": 10,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 10,
+        "ms": 50,
+        "clicks": 11,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 11,
+        "ms": 73,
+        "clicks": 12,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      }
+    ],
+    "error": null,
+    "after": {
+      "clicks": 12,
+      "ready": "complete",
+      "html": "<button id=\"mp6Conn\">👥</button>"
+    },
+    "events": [
+      {
+        "event": "pointerdown",
+        "at": 613.5,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 614.8999999761581,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 615.5,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 615.6999999880791,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "click",
+        "at": 617.7999999523163,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 753.8999999761581,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 757.3999999761581,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 758.3999999761581,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 758.5999999642372,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "click",
+        "at": 760.2999999523163,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 889.8999999761581,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 890.5999999642372,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 891.1999999880791,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 891.7999999523163,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "click",
+        "at": 892.6999999880791,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 993.8999999761581,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 994.1999999880791,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 994.6999999880791,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 995.1999999880791,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "click",
+        "at": 998.5999999642372,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 1090.0999999642372,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 1090.2999999523163,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 1090.3999999761581,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 1090.3999999761581,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "click",
+        "at": 1091.5999999642372,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 1162.0999999642372,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 1162.699999988079,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 1162.7999999523163,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 1162.8999999761581,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "click",
+        "at": 1165.8999999761581,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 1257.5999999642372,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 1257.8999999761581,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 1258.3999999761581,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 1258.699999988079,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "click",
+        "at": 1260.0999999642372,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 1322.8999999761581,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 1323.5999999642372,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 1323.699999988079,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 1323.8999999761581,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "click",
+        "at": 1325.3999999761581,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 1389.699999988079,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 1389.8999999761581,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 1390,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 1390.0999999642372,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "click",
+        "at": 1390.699999988079,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 1456.3999999761581,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 1456.5,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 1456.699999988079,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 1456.7999999523163,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "click",
+        "at": 1457.5,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 1522.7999999523163,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 1523,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 1523.2999999523163,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 1523.2999999523163,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "click",
+        "at": 1524.199999988079,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 1589.7999999523163,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 1590,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 1590.199999988079,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 1590.199999988079,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "click",
+        "at": 1590.7999999523163,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      }
+    ]
+  },
+  {
+    "mode": "static",
+    "method": "touchscreen",
+    "status": "PASS",
+    "samples": [
+      {
+        "i": 0,
+        "ms": 29,
+        "clicks": 1,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 1,
+        "ms": 26,
+        "clicks": 2,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 2,
+        "ms": 36,
+        "clicks": 3,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 3,
+        "ms": 11,
+        "clicks": 4,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 4,
+        "ms": 14,
+        "clicks": 5,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 5,
+        "ms": 15,
+        "clicks": 6,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 6,
+        "ms": 17,
+        "clicks": 7,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 7,
+        "ms": 10,
+        "clicks": 8,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 8,
+        "ms": 22,
+        "clicks": 9,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 9,
+        "ms": 10,
+        "clicks": 10,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 10,
+        "ms": 23,
+        "clicks": 11,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 11,
+        "ms": 11,
+        "clicks": 12,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      }
+    ],
+    "error": null,
+    "after": {
+      "clicks": 12,
+      "ready": "complete",
+      "html": "<button id=\"mp6Conn\">👥</button>"
+    },
+    "events": [
+      {
+        "event": "pointerdown",
+        "at": 204.60000002384186,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 206.19999998807907,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 208.69999998807907,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 209.10000002384186,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerdown",
+        "at": 286.10000002384186,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchstart",
+        "at": 286.4000000357628,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "pointerup",
+        "at": 287.10000002384186,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchend",
+        "at": 288.4000000357628,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "click",
+        "at": 291.5,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 353,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 353.30000001192093,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 353.4000000357628,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 353.60000002384186,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerdown",
+        "at": 373.60000002384186,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchstart",
+        "at": 373.80000001192093,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "pointerup",
+        "at": 388.4000000357628,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchend",
+        "at": 388.60000002384186,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "click",
+        "at": 389,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 453.10000002384186,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 453.5,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 453.69999998807907,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 453.80000001192093,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerdown",
+        "at": 504.10000002384186,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchstart",
+        "at": 504.4000000357628,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "pointerup",
+        "at": 504.60000002384186,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchend",
+        "at": 508.10000002384186,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "click",
+        "at": 512,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 569.6000000238419,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 569.8000000119209,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 570.3000000119209,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 570.4000000357628,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerdown",
+        "at": 591,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchstart",
+        "at": 591.1000000238419,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "pointerup",
+        "at": 591.1999999880791,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchend",
+        "at": 591.3000000119209,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "click",
+        "at": 593.9000000357628,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 652.6999999880791,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 653.4000000357628,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 653.5,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 653.5,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerdown",
+        "at": 673.1000000238419,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchstart",
+        "at": 673.3000000119209,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "pointerup",
+        "at": 673.4000000357628,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchend",
+        "at": 673.4000000357628,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "click",
+        "at": 674.1000000238419,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 736,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 736.1999999880791,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 736.6000000238419,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 736.8000000119209,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerdown",
+        "at": 764.1999999880791,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchstart",
+        "at": 764.4000000357628,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "pointerup",
+        "at": 764.6999999880791,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchend",
+        "at": 764.9000000357628,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "click",
+        "at": 769.1999999880791,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 819.6000000238419,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 820.1999999880791,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 820.6000000238419,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 820.8000000119209,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerdown",
+        "at": 842.8000000119209,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchstart",
+        "at": 843,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "pointerup",
+        "at": 852.6000000238419,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchend",
+        "at": 852.6000000238419,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "click",
+        "at": 853.4000000357628,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 904.1000000238419,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 904.1999999880791,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 904.4000000357628,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 904.8000000119209,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerdown",
+        "at": 931.6000000238419,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchstart",
+        "at": 931.8000000119209,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "pointerup",
+        "at": 931.9000000357628,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchend",
+        "at": 932,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "click",
+        "at": 932.9000000357628,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 986.1999999880791,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 986.5,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 986.5,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 986.6000000238419,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerdown",
+        "at": 1007.9000000357628,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchstart",
+        "at": 1008.1000000238419,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "pointerup",
+        "at": 1019.6999999880791,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchend",
+        "at": 1020.3000000119209,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "click",
+        "at": 1021.1999999880791,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 1070.1000000238419,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 1070.300000011921,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 1070.5,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 1070.6000000238419,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerdown",
+        "at": 1099.5,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchstart",
+        "at": 1099.6000000238419,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "pointerup",
+        "at": 1099.800000011921,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchend",
+        "at": 1100.199999988079,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "click",
+        "at": 1100.699999988079,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 1152.6000000238419,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 1153.699999988079,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 1153.9000000357628,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 1154.1000000238419,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerdown",
+        "at": 1202.800000011921,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchstart",
+        "at": 1202.800000011921,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "pointerup",
+        "at": 1203,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchend",
+        "at": 1203,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "click",
+        "at": 1203.699999988079,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 1252.699999988079,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 1252.9000000357628,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 1253.300000011921,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 1253.300000011921,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerdown",
+        "at": 1272.699999988079,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchstart",
+        "at": 1273.1000000238419,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "pointerup",
+        "at": 1273.1000000238419,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchend",
+        "at": 1273.300000011921,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "click",
+        "at": 1273.9000000357628,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      }
+    ]
+  },
+  {
+    "mode": "static",
+    "method": "sequential",
+    "status": "PASS",
+    "samples": [
+      {
+        "i": 0,
+        "ms": 24,
+        "clicks": 1,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 1,
+        "ms": 42,
+        "clicks": 2,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 2,
+        "ms": 44,
+        "clicks": 3,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 3,
+        "ms": 28,
+        "clicks": 4,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 4,
+        "ms": 17,
+        "clicks": 5,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 5,
+        "ms": 14,
+        "clicks": 6,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 6,
+        "ms": 16,
+        "clicks": 7,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 7,
+        "ms": 31,
+        "clicks": 8,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 8,
+        "ms": 14,
+        "clicks": 9,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 9,
+        "ms": 18,
+        "clicks": 10,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 10,
+        "ms": 12,
+        "clicks": 11,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 11,
+        "ms": 19,
+        "clicks": 12,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      }
+    ],
+    "error": null,
+    "after": {
+      "clicks": 12,
+      "ready": "complete",
+      "html": "<button id=\"mp6Conn\">👥</button>"
+    },
+    "events": [
+      {
+        "event": "pointerdown",
+        "at": 217.30000001192093,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 218.69999998807907,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 219.0999999642372,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 219.5999999642372,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerdown",
+        "at": 290.5999999642372,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchstart",
+        "at": 290.89999997615814,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "pointerup",
+        "at": 303.0999999642372,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchend",
+        "at": 303.39999997615814,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "click",
+        "at": 307.30000001192093,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 368.30000001192093,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 368.69999998807907,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 368.89999997615814,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 369,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerdown",
+        "at": 417,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchstart",
+        "at": 417.0999999642372,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "pointerup",
+        "at": 434.80000001192093,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchend",
+        "at": 435,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "click",
+        "at": 436,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 509.69999998807907,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 509.89999997615814,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 522,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 522.1999999880791,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerdown",
+        "at": 572.0999999642372,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchstart",
+        "at": 572.1999999880791,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "pointerup",
+        "at": 585.1999999880791,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchend",
+        "at": 585.5,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "click",
+        "at": 588.8000000119209,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 684.0999999642372,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 684.5,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 685.0999999642372,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 685.0999999642372,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerdown",
+        "at": 733.8999999761581,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchstart",
+        "at": 734.0999999642372,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "pointerup",
+        "at": 751.3000000119209,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchend",
+        "at": 751.5,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "click",
+        "at": 752.8000000119209,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 817.0999999642372,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 817.3999999761581,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 817.5999999642372,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 817.5999999642372,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerdown",
+        "at": 844.8999999761581,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchstart",
+        "at": 845.0999999642372,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "pointerup",
+        "at": 850.3999999761581,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchend",
+        "at": 850.5,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "click",
+        "at": 851.5,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 919.8999999761581,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 920.0999999642372,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 920.5,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 920.5999999642372,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerdown",
+        "at": 948.5,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchstart",
+        "at": 948.6999999880791,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "pointerup",
+        "at": 951.8999999761581,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchend",
+        "at": 952.1999999880791,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "click",
+        "at": 953.8000000119209,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 1017.3000000119209,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 1017.5999999642372,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 1018.0999999642372,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 1018.1999999880791,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerdown",
+        "at": 1042.8999999761581,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchstart",
+        "at": 1043,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "pointerup",
+        "at": 1051.699999988079,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchend",
+        "at": 1051.8999999761581,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "click",
+        "at": 1052.300000011921,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 1100.5999999642372,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 1100.699999988079,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 1100.800000011921,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 1101,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerdown",
+        "at": 1128.800000011921,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchstart",
+        "at": 1129,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "pointerup",
+        "at": 1143.699999988079,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchend",
+        "at": 1145,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "click",
+        "at": 1147,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 1201.699999988079,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 1201.8999999761581,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 1202.199999988079,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 1202.300000011921,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerdown",
+        "at": 1229.199999988079,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchstart",
+        "at": 1229.3999999761581,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "pointerup",
+        "at": 1234.0999999642372,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchend",
+        "at": 1234.199999988079,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "click",
+        "at": 1235.699999988079,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 1300.5999999642372,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 1301.300000011921,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 1301.5,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 1301.5,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerdown",
+        "at": 1324.699999988079,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchstart",
+        "at": 1324.8999999761581,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "pointerup",
+        "at": 1333.5999999642372,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchend",
+        "at": 1333.699999988079,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "click",
+        "at": 1335,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 1384.8999999761581,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 1385.699999988079,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 1385.800000011921,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 1386,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerdown",
+        "at": 1411.5999999642372,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchstart",
+        "at": 1411.699999988079,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "pointerup",
+        "at": 1417,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchend",
+        "at": 1417.300000011921,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "click",
+        "at": 1418.199999988079,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 1467.0999999642372,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 1467.3999999761581,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 1467.5,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 1467.5999999642372,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerdown",
+        "at": 1488.5999999642372,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchstart",
+        "at": 1488.5999999642372,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "pointerup",
+        "at": 1500.199999988079,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchend",
+        "at": 1500.300000011921,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "click",
+        "at": 1500.800000011921,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      }
+    ]
+  },
+  {
+    "mode": "replace",
+    "method": "locator",
+    "status": "PASS",
+    "samples": [
+      {
+        "i": 0,
+        "ms": 57,
+        "clicks": 1,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 1,
+        "ms": 55,
+        "clicks": 2,
+        "x": 220,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 2,
+        "ms": 46,
+        "clicks": 3,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 3,
+        "ms": 51,
+        "clicks": 4,
+        "x": 220,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 4,
+        "ms": 58,
+        "clicks": 5,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 5,
+        "ms": 58,
+        "clicks": 6,
+        "x": 220,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 6,
+        "ms": 60,
+        "clicks": 7,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 7,
+        "ms": 58,
+        "clicks": 8,
+        "x": 220,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 8,
+        "ms": 54,
+        "clicks": 9,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 9,
+        "ms": 52,
+        "clicks": 10,
+        "x": 220,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 10,
+        "ms": 52,
+        "clicks": 11,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 11,
+        "ms": 53,
+        "clicks": 12,
+        "x": 220,
+        "y": 181.99999237060547
+      }
+    ],
+    "error": null,
+    "after": {
+      "clicks": 12,
+      "ready": "complete",
+      "html": "<button id=\"mp6Conn\">👥</button>"
+    },
+    "events": [
+      {
+        "event": "pointerdown",
+        "at": 621.5,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 623.5,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 624.6000000238419,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 624.8000000119209,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "click",
+        "at": 626.5,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 686,
+        "trusted": true,
+        "target": {
+          "node": 2,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 686.6000000238419,
+        "trusted": true,
+        "target": {
+          "node": 2,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 687,
+        "trusted": true,
+        "target": {
+          "node": 2,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 687.1999999880791,
+        "trusted": true,
+        "target": {
+          "node": 2,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "click",
+        "at": 689.6999999880791,
+        "trusted": true,
+        "target": {
+          "node": 2,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 752.8999999761581,
+        "trusted": true,
+        "target": {
+          "node": 3,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 753.3000000119209,
+        "trusted": true,
+        "target": {
+          "node": 3,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 753.6999999880791,
+        "trusted": true,
+        "target": {
+          "node": 3,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 753.8000000119209,
+        "trusted": true,
+        "target": {
+          "node": 3,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "click",
+        "at": 754.8000000119209,
+        "trusted": true,
+        "target": {
+          "node": 3,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 820,
+        "trusted": true,
+        "target": {
+          "node": 4,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 820.3000000119209,
+        "trusted": true,
+        "target": {
+          "node": 4,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 820.6000000238419,
+        "trusted": true,
+        "target": {
+          "node": 4,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 820.8999999761581,
+        "trusted": true,
+        "target": {
+          "node": 4,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "click",
+        "at": 822,
+        "trusted": true,
+        "target": {
+          "node": 4,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 885.8000000119209,
+        "trusted": true,
+        "target": {
+          "node": 5,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 886.1000000238419,
+        "trusted": true,
+        "target": {
+          "node": 5,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 886.1999999880791,
+        "trusted": true,
+        "target": {
+          "node": 5,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 886.3000000119209,
+        "trusted": true,
+        "target": {
+          "node": 5,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "click",
+        "at": 887.1000000238419,
+        "trusted": true,
+        "target": {
+          "node": 5,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 952.3999999761581,
+        "trusted": true,
+        "target": {
+          "node": 6,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 952.8999999761581,
+        "trusted": true,
+        "target": {
+          "node": 6,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 953.1999999880791,
+        "trusted": true,
+        "target": {
+          "node": 6,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 953.3000000119209,
+        "trusted": true,
+        "target": {
+          "node": 6,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "click",
+        "at": 955,
+        "trusted": true,
+        "target": {
+          "node": 6,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 1019.1000000238419,
+        "trusted": true,
+        "target": {
+          "node": 7,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 1019.3999999761581,
+        "trusted": true,
+        "target": {
+          "node": 7,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 1019.5,
+        "trusted": true,
+        "target": {
+          "node": 7,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 1019.6000000238419,
+        "trusted": true,
+        "target": {
+          "node": 7,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "click",
+        "at": 1023.3000000119209,
+        "trusted": true,
+        "target": {
+          "node": 7,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 1085.8999999761581,
+        "trusted": true,
+        "target": {
+          "node": 8,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 1086.300000011921,
+        "trusted": true,
+        "target": {
+          "node": 8,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 1086.5,
+        "trusted": true,
+        "target": {
+          "node": 8,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 1086.6000000238419,
+        "trusted": true,
+        "target": {
+          "node": 8,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "click",
+        "at": 1087.300000011921,
+        "trusted": true,
+        "target": {
+          "node": 8,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 1152.6000000238419,
+        "trusted": true,
+        "target": {
+          "node": 9,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 1152.800000011921,
+        "trusted": true,
+        "target": {
+          "node": 9,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 1152.8999999761581,
+        "trusted": true,
+        "target": {
+          "node": 9,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 1153,
+        "trusted": true,
+        "target": {
+          "node": 9,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "click",
+        "at": 1153.699999988079,
+        "trusted": true,
+        "target": {
+          "node": 9,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 1219.199999988079,
+        "trusted": true,
+        "target": {
+          "node": 10,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 1219.5,
+        "trusted": true,
+        "target": {
+          "node": 10,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 1219.800000011921,
+        "trusted": true,
+        "target": {
+          "node": 10,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 1219.800000011921,
+        "trusted": true,
+        "target": {
+          "node": 10,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "click",
+        "at": 1220.800000011921,
+        "trusted": true,
+        "target": {
+          "node": 10,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 1286.1000000238419,
+        "trusted": true,
+        "target": {
+          "node": 11,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 1286.5,
+        "trusted": true,
+        "target": {
+          "node": 11,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 1287.1000000238419,
+        "trusted": true,
+        "target": {
+          "node": 11,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 1287.300000011921,
+        "trusted": true,
+        "target": {
+          "node": 11,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "click",
+        "at": 1288.800000011921,
+        "trusted": true,
+        "target": {
+          "node": 11,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 1352.699999988079,
+        "trusted": true,
+        "target": {
+          "node": 12,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 1353.1000000238419,
+        "trusted": true,
+        "target": {
+          "node": 12,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 1353.300000011921,
+        "trusted": true,
+        "target": {
+          "node": 12,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 1353.3999999761581,
+        "trusted": true,
+        "target": {
+          "node": 12,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "click",
+        "at": 1355.6000000238419,
+        "trusted": true,
+        "target": {
+          "node": 12,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 182
+      }
+    ]
+  },
+  {
+    "mode": "replace",
+    "method": "touchscreen",
+    "status": "PASS",
+    "samples": [
+      {
+        "i": 0,
+        "ms": 19,
+        "clicks": 1,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 1,
+        "ms": 15,
+        "clicks": 2,
+        "x": 220,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 2,
+        "ms": 10,
+        "clicks": 3,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 3,
+        "ms": 26,
+        "clicks": 4,
+        "x": 220,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 4,
+        "ms": 9,
+        "clicks": 5,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 5,
+        "ms": 18,
+        "clicks": 6,
+        "x": 220,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 6,
+        "ms": 24,
+        "clicks": 7,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 7,
+        "ms": 8,
+        "clicks": 8,
+        "x": 220,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 8,
+        "ms": 13,
+        "clicks": 9,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 9,
+        "ms": 9,
+        "clicks": 10,
+        "x": 220,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 10,
+        "ms": 16,
+        "clicks": 11,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 11,
+        "ms": 14,
+        "clicks": 12,
+        "x": 220,
+        "y": 181.99999237060547
+      }
+    ],
+    "error": null,
+    "after": {
+      "clicks": 12,
+      "ready": "complete",
+      "html": "<button id=\"mp6Conn\">👥</button>"
+    },
+    "events": [
+      {
+        "event": "pointerdown",
+        "at": 196.30000001192093,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 197.5,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 197.89999997615814,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 198,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerdown",
+        "at": 272.30000001192093,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchstart",
+        "at": 272.80000001192093,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "pointerup",
+        "at": 273,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchend",
+        "at": 273.5,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "click",
+        "at": 279.80000001192093,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 336.60000002384186,
+        "trusted": true,
+        "target": {
+          "node": 2,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 337,
+        "trusted": true,
+        "target": {
+          "node": 2,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 337.19999998807907,
+        "trusted": true,
+        "target": {
+          "node": 2,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 337.19999998807907,
+        "trusted": true,
+        "target": {
+          "node": 2,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerdown",
+        "at": 377.89999997615814,
+        "trusted": true,
+        "target": {
+          "node": 2,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchstart",
+        "at": 378.19999998807907,
+        "trusted": true,
+        "target": {
+          "node": 2,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "pointerup",
+        "at": 378.39999997615814,
+        "trusted": true,
+        "target": {
+          "node": 2,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchend",
+        "at": 378.5,
+        "trusted": true,
+        "target": {
+          "node": 2,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "click",
+        "at": 379.89999997615814,
+        "trusted": true,
+        "target": {
+          "node": 2,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 448,
+        "trusted": true,
+        "target": {
+          "node": 3,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 448.19999998807907,
+        "trusted": true,
+        "target": {
+          "node": 3,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 448.60000002384186,
+        "trusted": true,
+        "target": {
+          "node": 3,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 448.69999998807907,
+        "trusted": true,
+        "target": {
+          "node": 3,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerdown",
+        "at": 475.5,
+        "trusted": true,
+        "target": {
+          "node": 3,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchstart",
+        "at": 475.69999998807907,
+        "trusted": true,
+        "target": {
+          "node": 3,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "pointerup",
+        "at": 475.80000001192093,
+        "trusted": true,
+        "target": {
+          "node": 3,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchend",
+        "at": 476,
+        "trusted": true,
+        "target": {
+          "node": 3,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "click",
+        "at": 479.19999998807907,
+        "trusted": true,
+        "target": {
+          "node": 3,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 528.8999999761581,
+        "trusted": true,
+        "target": {
+          "node": 4,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 529.1000000238419,
+        "trusted": true,
+        "target": {
+          "node": 4,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 529.8000000119209,
+        "trusted": true,
+        "target": {
+          "node": 4,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 529.8000000119209,
+        "trusted": true,
+        "target": {
+          "node": 4,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerdown",
+        "at": 577.8000000119209,
+        "trusted": true,
+        "target": {
+          "node": 4,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchstart",
+        "at": 577.8999999761581,
+        "trusted": true,
+        "target": {
+          "node": 4,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "pointerup",
+        "at": 578,
+        "trusted": true,
+        "target": {
+          "node": 4,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchend",
+        "at": 578.1999999880791,
+        "trusted": true,
+        "target": {
+          "node": 4,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "click",
+        "at": 579.3999999761581,
+        "trusted": true,
+        "target": {
+          "node": 4,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 627.8000000119209,
+        "trusted": true,
+        "target": {
+          "node": 5,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 628.1999999880791,
+        "trusted": true,
+        "target": {
+          "node": 5,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 628.3000000119209,
+        "trusted": true,
+        "target": {
+          "node": 5,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 628.3999999761581,
+        "trusted": true,
+        "target": {
+          "node": 5,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerdown",
+        "at": 648.5,
+        "trusted": true,
+        "target": {
+          "node": 5,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchstart",
+        "at": 648.6999999880791,
+        "trusted": true,
+        "target": {
+          "node": 5,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "pointerup",
+        "at": 648.8000000119209,
+        "trusted": true,
+        "target": {
+          "node": 5,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchend",
+        "at": 648.8999999761581,
+        "trusted": true,
+        "target": {
+          "node": 5,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "click",
+        "at": 650.3999999761581,
+        "trusted": true,
+        "target": {
+          "node": 5,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 711,
+        "trusted": true,
+        "target": {
+          "node": 6,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 711.3000000119209,
+        "trusted": true,
+        "target": {
+          "node": 6,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 711.3999999761581,
+        "trusted": true,
+        "target": {
+          "node": 6,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 711.5,
+        "trusted": true,
+        "target": {
+          "node": 6,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerdown",
+        "at": 732.6000000238419,
+        "trusted": true,
+        "target": {
+          "node": 6,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchstart",
+        "at": 733.1999999880791,
+        "trusted": true,
+        "target": {
+          "node": 6,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "pointerup",
+        "at": 733.6000000238419,
+        "trusted": true,
+        "target": {
+          "node": 6,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchend",
+        "at": 734.8000000119209,
+        "trusted": true,
+        "target": {
+          "node": 6,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "click",
+        "at": 739.8000000119209,
+        "trusted": true,
+        "target": {
+          "node": 6,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 794.1000000238419,
+        "trusted": true,
+        "target": {
+          "node": 7,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 794.3000000119209,
+        "trusted": true,
+        "target": {
+          "node": 7,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 794.3999999761581,
+        "trusted": true,
+        "target": {
+          "node": 7,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 794.5,
+        "trusted": true,
+        "target": {
+          "node": 7,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerdown",
+        "at": 816.8999999761581,
+        "trusted": true,
+        "target": {
+          "node": 7,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchstart",
+        "at": 817.1000000238419,
+        "trusted": true,
+        "target": {
+          "node": 7,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "pointerup",
+        "at": 817.3999999761581,
+        "trusted": true,
+        "target": {
+          "node": 7,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchend",
+        "at": 817.5,
+        "trusted": true,
+        "target": {
+          "node": 7,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "click",
+        "at": 818.6000000238419,
+        "trusted": true,
+        "target": {
+          "node": 7,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 877.6000000238419,
+        "trusted": true,
+        "target": {
+          "node": 8,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 877.8000000119209,
+        "trusted": true,
+        "target": {
+          "node": 8,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 877.8999999761581,
+        "trusted": true,
+        "target": {
+          "node": 8,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 877.8999999761581,
+        "trusted": true,
+        "target": {
+          "node": 8,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerdown",
+        "at": 904.1999999880791,
+        "trusted": true,
+        "target": {
+          "node": 8,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchstart",
+        "at": 904.3000000119209,
+        "trusted": true,
+        "target": {
+          "node": 8,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "pointerup",
+        "at": 904.3999999761581,
+        "trusted": true,
+        "target": {
+          "node": 8,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchend",
+        "at": 904.5,
+        "trusted": true,
+        "target": {
+          "node": 8,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "click",
+        "at": 905.8000000119209,
+        "trusted": true,
+        "target": {
+          "node": 8,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 961.6000000238419,
+        "trusted": true,
+        "target": {
+          "node": 9,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 963,
+        "trusted": true,
+        "target": {
+          "node": 9,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 963.1999999880791,
+        "trusted": true,
+        "target": {
+          "node": 9,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 963.3000000119209,
+        "trusted": true,
+        "target": {
+          "node": 9,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerdown",
+        "at": 990.1999999880791,
+        "trusted": true,
+        "target": {
+          "node": 9,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchstart",
+        "at": 990.1999999880791,
+        "trusted": true,
+        "target": {
+          "node": 9,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "pointerup",
+        "at": 990.3999999761581,
+        "trusted": true,
+        "target": {
+          "node": 9,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchend",
+        "at": 990.5,
+        "trusted": true,
+        "target": {
+          "node": 9,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "click",
+        "at": 991.6000000238419,
+        "trusted": true,
+        "target": {
+          "node": 9,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 1044,
+        "trusted": true,
+        "target": {
+          "node": 10,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 1044.199999988079,
+        "trusted": true,
+        "target": {
+          "node": 10,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 1044.300000011921,
+        "trusted": true,
+        "target": {
+          "node": 10,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 1044.300000011921,
+        "trusted": true,
+        "target": {
+          "node": 10,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerdown",
+        "at": 1070,
+        "trusted": true,
+        "target": {
+          "node": 10,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchstart",
+        "at": 1070.199999988079,
+        "trusted": true,
+        "target": {
+          "node": 10,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "pointerup",
+        "at": 1070.300000011921,
+        "trusted": true,
+        "target": {
+          "node": 10,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchend",
+        "at": 1070.3999999761581,
+        "trusted": true,
+        "target": {
+          "node": 10,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "click",
+        "at": 1072,
+        "trusted": true,
+        "target": {
+          "node": 10,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 1128,
+        "trusted": true,
+        "target": {
+          "node": 11,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 1128.300000011921,
+        "trusted": true,
+        "target": {
+          "node": 11,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 1128.3999999761581,
+        "trusted": true,
+        "target": {
+          "node": 11,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 1128.3999999761581,
+        "trusted": true,
+        "target": {
+          "node": 11,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerdown",
+        "at": 1157.8999999761581,
+        "trusted": true,
+        "target": {
+          "node": 11,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchstart",
+        "at": 1158.199999988079,
+        "trusted": true,
+        "target": {
+          "node": 11,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "pointerup",
+        "at": 1158.6000000238419,
+        "trusted": true,
+        "target": {
+          "node": 11,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchend",
+        "at": 1158.699999988079,
+        "trusted": true,
+        "target": {
+          "node": 11,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "click",
+        "at": 1161,
+        "trusted": true,
+        "target": {
+          "node": 11,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 1211.1000000238419,
+        "trusted": true,
+        "target": {
+          "node": 12,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 1211.699999988079,
+        "trusted": true,
+        "target": {
+          "node": 12,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 1211.8999999761581,
+        "trusted": true,
+        "target": {
+          "node": 12,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 1211.8999999761581,
+        "trusted": true,
+        "target": {
+          "node": 12,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerdown",
+        "at": 1239.1000000238419,
+        "trusted": true,
+        "target": {
+          "node": 12,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchstart",
+        "at": 1239.300000011921,
+        "trusted": true,
+        "target": {
+          "node": 12,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "pointerup",
+        "at": 1245.1000000238419,
+        "trusted": true,
+        "target": {
+          "node": 12,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchend",
+        "at": 1245.199999988079,
+        "trusted": true,
+        "target": {
+          "node": 12,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "click",
+        "at": 1246.8999999761581,
+        "trusted": true,
+        "target": {
+          "node": 12,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 182
+      }
+    ]
+  },
+  {
+    "mode": "replace",
+    "method": "sequential",
+    "status": "PASS",
+    "samples": [
+      {
+        "i": 0,
+        "ms": 40,
+        "clicks": 1,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 1,
+        "ms": 49,
+        "clicks": 2,
+        "x": 220,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 2,
+        "ms": 26,
+        "clicks": 3,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 3,
+        "ms": 23,
+        "clicks": 4,
+        "x": 220,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 4,
+        "ms": 16,
+        "clicks": 5,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 5,
+        "ms": 20,
+        "clicks": 6,
+        "x": 220,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 6,
+        "ms": 18,
+        "clicks": 7,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 7,
+        "ms": 10,
+        "clicks": 8,
+        "x": 220,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 8,
+        "ms": 20,
+        "clicks": 9,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 9,
+        "ms": 24,
+        "clicks": 10,
+        "x": 220,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 10,
+        "ms": 22,
+        "clicks": 11,
+        "x": 41.99999809265137,
+        "y": 181.99999237060547
+      },
+      {
+        "i": 11,
+        "ms": 22,
+        "clicks": 12,
+        "x": 220,
+        "y": 181.99999237060547
+      }
+    ],
+    "error": null,
+    "after": {
+      "clicks": 12,
+      "ready": "complete",
+      "html": "<button id=\"mp6Conn\">👥</button>"
+    },
+    "events": [
+      {
+        "event": "pointerdown",
+        "at": 282.69999998807907,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 285.89999997615814,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 286.69999998807907,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 287.5999999642372,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerdown",
+        "at": 376.89999997615814,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchstart",
+        "at": 380.39999997615814,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "pointerup",
+        "at": 393.19999998807907,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchend",
+        "at": 393.5,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "click",
+        "at": 397.39999997615814,
+        "trusted": true,
+        "target": {
+          "node": 1,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 451,
+        "trusted": true,
+        "target": {
+          "node": 2,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 451.19999998807907,
+        "trusted": true,
+        "target": {
+          "node": 2,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 451.5,
+        "trusted": true,
+        "target": {
+          "node": 2,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 451.5999999642372,
+        "trusted": true,
+        "target": {
+          "node": 2,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerdown",
+        "at": 503.19999998807907,
+        "trusted": true,
+        "target": {
+          "node": 2,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchstart",
+        "at": 503.39999997615814,
+        "trusted": true,
+        "target": {
+          "node": 2,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "pointerup",
+        "at": 518.3000000119209,
+        "trusted": true,
+        "target": {
+          "node": 2,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchend",
+        "at": 518.5999999642372,
+        "trusted": true,
+        "target": {
+          "node": 2,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "click",
+        "at": 521.0999999642372,
+        "trusted": true,
+        "target": {
+          "node": 2,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 585.3999999761581,
+        "trusted": true,
+        "target": {
+          "node": 3,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 585.5999999642372,
+        "trusted": true,
+        "target": {
+          "node": 3,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 585.8999999761581,
+        "trusted": true,
+        "target": {
+          "node": 3,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 585.8999999761581,
+        "trusted": true,
+        "target": {
+          "node": 3,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerdown",
+        "at": 607,
+        "trusted": true,
+        "target": {
+          "node": 3,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchstart",
+        "at": 607.1999999880791,
+        "trusted": true,
+        "target": {
+          "node": 3,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "pointerup",
+        "at": 624.1999999880791,
+        "trusted": true,
+        "target": {
+          "node": 3,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchend",
+        "at": 624.3999999761581,
+        "trusted": true,
+        "target": {
+          "node": 3,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "click",
+        "at": 625.6999999880791,
+        "trusted": true,
+        "target": {
+          "node": 3,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 684.3999999761581,
+        "trusted": true,
+        "target": {
+          "node": 4,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 684.5999999642372,
+        "trusted": true,
+        "target": {
+          "node": 4,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 685.1999999880791,
+        "trusted": true,
+        "target": {
+          "node": 4,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 685.3999999761581,
+        "trusted": true,
+        "target": {
+          "node": 4,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerdown",
+        "at": 742.3999999761581,
+        "trusted": true,
+        "target": {
+          "node": 4,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchstart",
+        "at": 742.5,
+        "trusted": true,
+        "target": {
+          "node": 4,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "pointerup",
+        "at": 752,
+        "trusted": true,
+        "target": {
+          "node": 4,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchend",
+        "at": 752.0999999642372,
+        "trusted": true,
+        "target": {
+          "node": 4,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "click",
+        "at": 754.8999999761581,
+        "trusted": true,
+        "target": {
+          "node": 4,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 820.0999999642372,
+        "trusted": true,
+        "target": {
+          "node": 5,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 820.3999999761581,
+        "trusted": true,
+        "target": {
+          "node": 5,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 820.3999999761581,
+        "trusted": true,
+        "target": {
+          "node": 5,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 820.5,
+        "trusted": true,
+        "target": {
+          "node": 5,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerdown",
+        "at": 883.5999999642372,
+        "trusted": true,
+        "target": {
+          "node": 5,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchstart",
+        "at": 883.6999999880791,
+        "trusted": true,
+        "target": {
+          "node": 5,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "pointerup",
+        "at": 889.3000000119209,
+        "trusted": true,
+        "target": {
+          "node": 5,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchend",
+        "at": 889.5,
+        "trusted": true,
+        "target": {
+          "node": 5,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "click",
+        "at": 891.3000000119209,
+        "trusted": true,
+        "target": {
+          "node": 5,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 951.3000000119209,
+        "trusted": true,
+        "target": {
+          "node": 6,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 951.5999999642372,
+        "trusted": true,
+        "target": {
+          "node": 6,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 951.6999999880791,
+        "trusted": true,
+        "target": {
+          "node": 6,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 951.8999999761581,
+        "trusted": true,
+        "target": {
+          "node": 6,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerdown",
+        "at": 972.3999999761581,
+        "trusted": true,
+        "target": {
+          "node": 6,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchstart",
+        "at": 972.8000000119209,
+        "trusted": true,
+        "target": {
+          "node": 6,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "pointerup",
+        "at": 984.5,
+        "trusted": true,
+        "target": {
+          "node": 6,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchend",
+        "at": 985.3999999761581,
+        "trusted": true,
+        "target": {
+          "node": 6,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "click",
+        "at": 987,
+        "trusted": true,
+        "target": {
+          "node": 6,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 1035,
+        "trusted": true,
+        "target": {
+          "node": 7,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 1035.300000011921,
+        "trusted": true,
+        "target": {
+          "node": 7,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 1036.0999999642372,
+        "trusted": true,
+        "target": {
+          "node": 7,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 1036.0999999642372,
+        "trusted": true,
+        "target": {
+          "node": 7,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerdown",
+        "at": 1059.0999999642372,
+        "trusted": true,
+        "target": {
+          "node": 7,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchstart",
+        "at": 1059.199999988079,
+        "trusted": true,
+        "target": {
+          "node": 7,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "pointerup",
+        "at": 1067.5999999642372,
+        "trusted": true,
+        "target": {
+          "node": 7,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchend",
+        "at": 1067.800000011921,
+        "trusted": true,
+        "target": {
+          "node": 7,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "click",
+        "at": 1069.3999999761581,
+        "trusted": true,
+        "target": {
+          "node": 7,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 1137,
+        "trusted": true,
+        "target": {
+          "node": 8,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 1138.5,
+        "trusted": true,
+        "target": {
+          "node": 8,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 1138.699999988079,
+        "trusted": true,
+        "target": {
+          "node": 8,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 1138.800000011921,
+        "trusted": true,
+        "target": {
+          "node": 8,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerdown",
+        "at": 1167.0999999642372,
+        "trusted": true,
+        "target": {
+          "node": 8,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchstart",
+        "at": 1167.300000011921,
+        "trusted": true,
+        "target": {
+          "node": 8,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "pointerup",
+        "at": 1168.699999988079,
+        "trusted": true,
+        "target": {
+          "node": 8,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchend",
+        "at": 1169,
+        "trusted": true,
+        "target": {
+          "node": 8,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "click",
+        "at": 1169.8999999761581,
+        "trusted": true,
+        "target": {
+          "node": 8,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 1217.5,
+        "trusted": true,
+        "target": {
+          "node": 9,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 1217.699999988079,
+        "trusted": true,
+        "target": {
+          "node": 9,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 1218,
+        "trusted": true,
+        "target": {
+          "node": 9,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 1218,
+        "trusted": true,
+        "target": {
+          "node": 9,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerdown",
+        "at": 1238.8999999761581,
+        "trusted": true,
+        "target": {
+          "node": 9,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchstart",
+        "at": 1239,
+        "trusted": true,
+        "target": {
+          "node": 9,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "pointerup",
+        "at": 1251.0999999642372,
+        "trusted": true,
+        "target": {
+          "node": 9,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchend",
+        "at": 1251.300000011921,
+        "trusted": true,
+        "target": {
+          "node": 9,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "click",
+        "at": 1252.8999999761581,
+        "trusted": true,
+        "target": {
+          "node": 9,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 1301.199999988079,
+        "trusted": true,
+        "target": {
+          "node": 10,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 1301.800000011921,
+        "trusted": true,
+        "target": {
+          "node": 10,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 1302.0999999642372,
+        "trusted": true,
+        "target": {
+          "node": 10,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 1302.300000011921,
+        "trusted": true,
+        "target": {
+          "node": 10,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerdown",
+        "at": 1317.699999988079,
+        "trusted": true,
+        "target": {
+          "node": 10,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchstart",
+        "at": 1317.699999988079,
+        "trusted": true,
+        "target": {
+          "node": 10,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "pointerup",
+        "at": 1334.3999999761581,
+        "trusted": true,
+        "target": {
+          "node": 10,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchend",
+        "at": 1334.5,
+        "trusted": true,
+        "target": {
+          "node": 10,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "click",
+        "at": 1335.3999999761581,
+        "trusted": true,
+        "target": {
+          "node": 10,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 1384.5999999642372,
+        "trusted": true,
+        "target": {
+          "node": 11,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 1385.0999999642372,
+        "trusted": true,
+        "target": {
+          "node": 11,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 1385.8999999761581,
+        "trusted": true,
+        "target": {
+          "node": 11,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 1386.0999999642372,
+        "trusted": true,
+        "target": {
+          "node": 11,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.98999786376953,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerdown",
+        "at": 1406,
+        "trusted": true,
+        "target": {
+          "node": 11,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchstart",
+        "at": 1406.3999999761581,
+        "trusted": true,
+        "target": {
+          "node": 11,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "pointerup",
+        "at": 1417.3999999761581,
+        "trusted": true,
+        "target": {
+          "node": 11,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchend",
+        "at": 1417.5999999642372,
+        "trusted": true,
+        "target": {
+          "node": 11,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 41.999996185302734,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "click",
+        "at": 1419.0999999642372,
+        "trusted": true,
+        "target": {
+          "node": 11,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 42,
+        "y": 182
+      },
+      {
+        "event": "pointerdown",
+        "at": 1468.199999988079,
+        "trusted": true,
+        "target": {
+          "node": 12,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchstart",
+        "at": 1469.3999999761581,
+        "trusted": true,
+        "target": {
+          "node": 12,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerup",
+        "at": 1469.5999999642372,
+        "trusted": true,
+        "target": {
+          "node": 12,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "touchend",
+        "at": 1469.5999999642372,
+        "trusted": true,
+        "target": {
+          "node": 12,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99000549316406
+      },
+      {
+        "event": "pointerdown",
+        "at": 1485.3999999761581,
+        "trusted": true,
+        "target": {
+          "node": 12,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchstart",
+        "at": 1485.5999999642372,
+        "trusted": true,
+        "target": {
+          "node": 12,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "pointerup",
+        "at": 1501.5999999642372,
+        "trusted": true,
+        "target": {
+          "node": 12,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "touchend",
+        "at": 1501.699999988079,
+        "trusted": true,
+        "target": {
+          "node": 12,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 181.99998474121094
+      },
+      {
+        "event": "click",
+        "at": 1502.699999988079,
+        "trusted": true,
+        "target": {
+          "node": 12,
+          "id": "mp6Conn",
+          "connected": true
+        },
+        "x": 220,
+        "y": 182
+      }
+    ]
+  }
+]

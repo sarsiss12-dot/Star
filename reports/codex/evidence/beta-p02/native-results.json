@@ -1,0 +1,74 @@
+[
+  {
+    "test": "mp73_council_test.js",
+    "status": "PASS",
+    "exit": 0,
+    "log": "reports/codex/evidence/beta-p02/reg-mp73_council_test.js.log"
+  },
+  {
+    "test": "beta_p01_ballot_test.js",
+    "status": "PASS",
+    "exit": 0,
+    "log": "reports/codex/evidence/beta-p02/reg-beta_p01_ballot_test.js.log"
+  },
+  {
+    "test": "beta_p01_war_end_test.js",
+    "status": "PASS",
+    "exit": 0,
+    "log": "reports/codex/evidence/beta-p02/reg-beta_p01_war_end_test.js.log"
+  },
+  {
+    "test": "beta_p01_embargo_test.js",
+    "status": "PASS",
+    "exit": 0,
+    "log": "reports/codex/evidence/beta-p02/reg-beta_p01_embargo_test.js.log"
+  },
+  {
+    "test": "beta_p01_news_test.js",
+    "status": "PASS",
+    "exit": 0,
+    "log": "reports/codex/evidence/beta-p02/reg-beta_p01_news_test.js.log"
+  },
+  {
+    "test": "beta_p01_mirror_test.js",
+    "status": "FAIL",
+    "exit": 1,
+    "log": "reports/codex/evidence/beta-p02/reg-beta_p01_mirror_test.js.log"
+  },
+  {
+    "test": "beta_p02_news_test.js",
+    "status": "PASS",
+    "exit": 0,
+    "log": "reports/codex/evidence/beta-p02/reg-beta_p02_news_test.js.log"
+  },
+  {
+    "test": "beta_p01_compat_test.js",
+    "status": "PASS",
+    "exit": 0,
+    "log": "reports/codex/evidence/beta-p02/reg-beta_p01_compat_test.js.log"
+  },
+  {
+    "test": "mp89_ui_integrity_test.js",
+    "status": "FAIL",
+    "exit": 1,
+    "log": "reports/codex/evidence/beta-p02/reg-mp89_ui_integrity_test.js.log"
+  },
+  {
+    "test": "perf1_equivalence_test.js",
+    "status": "PASS",
+    "exit": 0,
+    "log": "reports/codex/evidence/beta-p02/reg-perf1_equivalence_test.js.log"
+  },
+  {
+    "test": "perf2_equivalence_test.js",
+    "status": "PASS",
+    "exit": 0,
+    "log": "reports/codex/evidence/beta-p02/reg-perf2_equivalence_test.js.log"
+  },
+  {
+    "test": "mp86_nebula_cache_test.js",
+    "status": "PASS",
+    "exit": 0,
+    "log": "reports/codex/evidence/beta-p02/reg-mp86_nebula_cache_test.js.log"
+  }
+]

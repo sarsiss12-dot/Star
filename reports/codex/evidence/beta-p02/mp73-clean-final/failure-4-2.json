@@ -1,0 +1,87 @@
+{
+  "url": "/",
+  "vote": {
+    "name": "Galaktik Birliği",
+    "founder": 1,
+    "members": [
+      1,
+      0,
+      2,
+      3,
+      6,
+      4,
+      5,
+      7
+    ],
+    "laws": {
+      "ticaretStd": true
+    },
+    "targeted": {},
+    "treasury": 0,
+    "president": 1,
+    "terms": {
+      "1": 1
+    },
+    "termAge": 0,
+    "voteIn": 2,
+    "vote": null,
+    "dead": false,
+    "byConvention": true,
+    "firstLaw": null,
+    "pariahs": {},
+    "lastVote": {
+      "key": "ticaretStd",
+      "target": null,
+      "opened": 6.100000000000009,
+      "yes": [
+        3,
+        6,
+        5,
+        7,
+        1,
+        0
+      ],
+      "no": [
+        4,
+        2
+      ],
+      "expired": false,
+      "appliedTarget": null,
+      "ended": 13.728959999999983,
+      "passed": true,
+      "weight": {
+        "yes": 42.466486679072396,
+        "no": 14.00089080693617
+      },
+      "eventKey": "council:ticaretStd:13.728959999999983"
+    }
+  },
+  "inbox": [
+    {
+      "kind": "cncnew",
+      "data": 1,
+      "ico": "🌐",
+      "cls": "sci",
+      "pause": true,
+      "title": "GALAKTİK KONSEY KURULDU",
+      "sub": "Saf Akıl Ağı galaksiyi masaya çağırdı",
+      "key": "cncnew",
+      "uid": 1,
+      "born": 6.100000000000009
+    },
+    {
+      "kind": "cncvote",
+      "data": "ticaretStd",
+      "ico": "🌐",
+      "cls": "sci",
+      "pause": true,
+      "title": "KONSEY OYLAMASI",
+      "sub": "Evrensel Ticaret Standardı",
+      "key": "cnc6.100000000000009",
+      "uid": 2,
+      "born": 6.100000000000009
+    }
+  ],
+  "modal": "",
+  "pane": "<div class=\"dpBox\">\n      <div class=\"dpHd\"><span>🌐 GALAKTİK KONSEY</span>\n        <button class=\"riX\" data-a=\"closeDiplo\">✕</button></div>\n      <div class=\"dpBody\"><button class=\"abtn\" data-a=\"newsReturn\">İncelenen habere geri dön</button><div class=\"envRow\"><span>Galaktik Birliği</span>\n        <b style=\"color:#6ff2c8\">8 üye</b></div><div class=\"row\"><span>Başkan</span>\n        <b style=\"color:#5cf5d6\">Saf Akıl Ağı</b></div><div class=\"row\"><span>Başkanlık dönemin</span><b>0 / 3</b></div><div class=\"row\"><span>Oy ağırlığın</span><b style=\"color:#6ff2c8\">9.1</b></div><div class=\"mini\">Oy ağırlığı toprak, etki ve pasifist ideolojiyle artar.\n        3 dönem başkanlık = <b>Konsey Hâkimiyeti zaferi</b>.</div><div class=\"box\" data-council-result=\"council:ticaretStd:13.728959999999983\"><div class=\"bt\">SON OYLAMA · Evrensel Ticaret Standardı · KABUL</div><div class=\"mini\">Gün 13</div><p>EVET (42.5): Draven ve Bağlı Dünyalar · Özgür Halk Meclisi — Cyrix · Yükselen Konsorsiyumu — Drakis · Altın Zerun Özgür Dünyaları · Saf Akıl Ağı · Sen</p><p>HAYIR (14.0): Birleşik Otonom Düğümleri — Xel'Naga · Okyanus Ticaret Birliği</p></div><div class=\"row\"><span>Sonraki oylama</span><b>2 ay sonra</b></div><div class=\"ph\">DİPLOMATİK AĞIRLIĞIN</div><div class=\"row\"><span>Oy ağırlığı</span>\n          <b style=\"color:#6ff2c8\">9.1</b></div><div class=\"ph\">🏛 KONSEY BAŞKANLIĞI</div><div class=\"box\" style=\"border-color:#6ff2c8\">\n          <div class=\"bt\"><span style=\"color:#5cf5d6\">Saf Akıl Ağı</span>\n            <span class=\"tag p\">DÖNEM BAŞKANI</span></div>\n          <div class=\"bd\">Seçime <b>15</b> yıl (180 ay) ·\n               dönem 1</div></div><div class=\"ph\">📜 TASARI SUN</div><div class=\"mini\">Konseye kendi tasarını sun (120 ◈).\n            <b style=\"color:#ff9b3d\">Risk:</b> reddedilirse prestij kaybedersin\n            ve 5 yıl boyunca konseydeki ağırlığın azalır.</div><div class=\"act2\"><button class=\"abtn\" data-a=\"bill\" data-x=\"borsaKur\">\n                💱 Galaktik Borsayı Kur</button><button class=\"abtn\" data-a=\"bill\" data-x=\"piyasaReg\">\n                ⚖ Piyasa Regülasyonu</button><button class=\"abtn\" data-a=\"bill\" data-x=\"casusSeffaf\">\n                🔍 Casusluk Şeffaflığı</button><button class=\"abtn\" data-a=\"bill\" data-x=\"silahsiz\">\n                🕊 Silahsızlanma Antlaş</button><button class=\"abtn\" data-a=\"bill\" data-x=\"serbest\">\n                🤝 Serbest Ticaret Bölg</button><button class=\"abtn\" data-a=\"bill\" data-x=\"bilim\">\n                🔬 Bilim Ortaklığı</button></div><div class=\"act2\"><button class=\"abtn dgr\" data-a=\"billPick\" data-x=\"savasYasak\">\n                🚫 Savaş Yasağı<br>\n                <span style=\"font-size:9px\">hedef seç</span></button><button class=\"abtn dgr\" data-a=\"billPick\" data-x=\"yaptirim\">\n                ⛔ Yaptırım<br>\n                <span style=\"font-size:9px\">hedef seç</span></button><button class=\"abtn dgr\" data-a=\"billPick\" data-x=\"ihrac\">\n                🚪 Konseyden İhraç<br>\n                <span style=\"font-size:9px\">hedef seç</span></button></div><div class=\"ph\">YÜRÜRLÜKTEKİ KARARLAR</div><div class=\"box\" style=\"border-color:#6ff2c8\"><div class=\"bt\">\n          <span>⚖ Evrensel Ticaret Standardı</span><span class=\"tag p\">YÜRÜRLÜKTE</span></div>\n          <div class=\"bd\">Ortak ölçüler, ortak limanlar, tek muhasebe dili. Tüm üyelerin ticaret geliri %10 artar.</div></div><div class=\"ph\">ÜYELER</div><div class=\"dpCard\"><div class=\"dpTop\">\n          <canvas class=\"dpPort\" data-ps=\"2104971526\" data-lk=\"humanoid\" data-col=\"#5cf5d6\" data-pers=\"teknokrasi\" data-mood=\"40\" width=\"34\" height=\"46\" data-done=\"1\"></canvas>\n          <div class=\"dpName\"><b style=\"color:#5cf5d6\">Saf Akıl Ağı</b>\n          <i>Bilimsel · Liyakat · oy ağırlığı 13.4</i></div>\n          <span class=\"tag p\">BAŞKAN</span></div></div><div class=\"dpCard\"><div class=\"dpTop\">\n          <canvas class=\"dpPort\" data-ps=\"4117493811\" data-lk=\"humanoid\" data-col=\"#983e8f\" data-pers=\"militarist\" data-mood=\"0\" width=\"34\" height=\"46\" data-done=\"1\"></canvas>\n          <div class=\"dpName\"><b style=\"color:#983e8f\">Kızıl Muhafız (sen)</b>\n          <i>Militarist · Yayılmacı · oy ağırlığı 9.1</i></div>\n          </div></div><div class=\"dpCard\"><div class=\"dpTop\">\n          <canvas class=\"dpPort\" data-ps=\"711568029\" data-lk=\"humanoid\" data-col=\"#d65cf5\" data-pers=\"tuccar\" data-mood=\"40\" width=\"34\" height=\"46\" data-done=\"1\"></canvas>\n          <div class=\"dpName\"><b style=\"color:#d65cf5\">Okyanus Ticaret Birliği</b>\n          <i>Megakorporasyon · Tüccar · oy ağırlığı 9.1</i></div>\n          </div></div><div class=\"dpCard\"><div class=\"dpTop\">\n          <canvas class=\"dpPort\" data-ps=\"3006738210\" data-lk=\"bocek\" data-col=\"#3e8f98\" data-pers=\"tuccar\" data-mood=\"0\" width=\"34\" height=\"46\" data-done=\"1\"></canvas>\n          <div class=\"dpName\"><b style=\"color:#3e8f98\">Draven ve Bağlı Dünyalar</b>\n          <i>Megakorporasyon · Tüccar · oy ağırlığı 6.8</i></div>\n          </div></div><div class=\"dpCard\"><div class=\"dpTop\">\n          <canvas class=\"dpPort\" data-ps=\"1289403504\" data-lk=\"kanatli\" data-col=\"#985f3e\" data-pers=\"yayilmaci\" data-mood=\"0\" width=\"34\" height=\"46\" data-done=\"1\"></canvas>\n          <div class=\"dpName\"><b style=\"color:#985f3e\">Özgür Halk Meclisi — Cyrix</b>\n          <i>Bilimci · Kâşif · oy ağırlığı 5.3</i></div>\n          </div></div><div class=\"dpCard\"><div class=\"dpTop\">\n          <canvas class=\"dpPort\" data-ps=\"587642951\" data-lk=\"makine\" data-col=\"#f5c25c\" data-pers=\"izolasyonist\" data-mood=\"-10\" width=\"34\" height=\"46\" data-done=\"1\"></canvas>\n          <div class=\"dpName\"><b style=\"color:#f5c25c\">Birleşik Otonom Düğümleri — Xel'Naga</b>\n          <i>Makine Zekâsı · Asimilasyoncu · oy ağırlığı 5.0</i></div>\n          </div></div><div class=\"dpCard\"><div class=\"dpTop\">\n          <canvas class=\"dpPort\" data-ps=\"396299800\" data-lk=\"akuatik\" data-col=\"#56983e\" data-pers=\"tuccar\" data-mood=\"0\" width=\"34\" height=\"46\" data-done=\"1\"></canvas>\n          <div class=\"dpName\"><b style=\"color:#56983e\">Yükselen Konsorsiyumu — Drakis</b>\n          <i>Bilimsel · Liyakat · oy ağırlığı 4.5</i></div>\n          </div></div><div class=\"dpCard\"><div class=\"dpTop\">\n          <canvas class=\"dpPort\" data-ps=\"1154390358\" data-lk=\"amorf\" data-col=\"#98953e\" data-pers=\"kriminal\" data-mood=\"0\" width=\"34\" height=\"46\" data-done=\"1\"></canvas>\n          <div class=\"dpName\"><b style=\"color:#98953e\">Altın Zerun Özgür Dünyaları</b>\n          <i>Barışçıl · Demokratik · oy ağırlığı 3.4</i></div>\n          </div></div><div class=\"act2\" style=\"margin-top:12px\"><button class=\"abtn dgr\" data-a=\"cncLeave\">KONSEYDEN AYRIL</button></div></div></div>"
+}

@@ -1,0 +1,4 @@
+PASS önceki p6 MP paket4 Save8v8 aynen doğrulanır ve yüklenir
+PASS p6 uyumluluğu bütünlük veya diğer build kapılarını gevşetmez
+PASS opened alanı olmayan eski oylama Save8 yüklemede korunur
+GEÇEN: 3 KALAN: 0

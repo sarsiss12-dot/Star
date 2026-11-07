@@ -1,0 +1,6 @@
+{
+  "selector": "#diploPane [data-a=\"newsReturn\"]",
+  "name": "TimeoutError",
+  "message": "locator.tap: Timeout 8000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#diploPane [data-a=\"newsReturn\"]').first()\u001b[22m\n",
+  "stack": "locator.tap: Timeout 8000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#diploPane [data-a=\"newsReturn\"]').first()\u001b[22m\n\n    at proto.tap (/workspace/Star/tests/helpers/mp88-input-diag.cjs:9:559)\n    at async tap (/workspace/Star/tests/browser-mp73.cjs:20:108)\n    at async /workspace/Star/tests/browser-mp73.cjs:186:9\n    at async test (/workspace/Star/tests/browser-mp73.cjs:13:7)\n    at async /workspace/Star/tests/browser-mp73.cjs:168:3"
+}

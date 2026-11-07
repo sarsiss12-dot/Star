@@ -1,0 +1,30 @@
+{
+  "baseline": {
+    "inputResponses": 132,
+    "maxInputResponseMs": 615,
+    "pendingInput": 0,
+    "tapErrors": [],
+    "maxTapMs": 848
+  },
+  "repeat": {
+    "inputResponses": 150,
+    "maxInputResponseMs": 366,
+    "pendingInput": 0,
+    "tapErrors": [],
+    "maxTapMs": 896
+  },
+  "cpu4": {
+    "inputResponses": 142,
+    "maxInputResponseMs": 2744,
+    "pendingInput": 0,
+    "tapErrors": [],
+    "maxTapMs": 3750
+  },
+  "mp73-baseline-full": {
+    "inputResponses": 166,
+    "maxInputResponseMs": 425,
+    "pendingInput": 0,
+    "tapErrors": [],
+    "maxTapMs": 1054
+  }
+}

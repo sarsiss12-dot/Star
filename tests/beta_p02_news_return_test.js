@@ -1,0 +1,8 @@
+'use strict';
+const assert=require('assert/strict'),{fresh}=require('./helpers/dispatch-fixture');let pass=0,fail=0;
+function test(n,fn){try{fn();pass++;console.log('PASS '+n)}catch(e){fail++;console.error('FAIL '+n+' '+e.stack)}}
+function setup(){const h=fresh();h.run(`G.news=GalacticNews.empty();G.council={name:'Konsey',founder:0,members:[0,1],laws:{},targeted:{},treasury:0,president:0,terms:{},voteIn:12,vote:null,dead:false};var r=recordNews({category:'council',scope:'public',empires:[],key:'council:test:60',title:'Karar',text:'Kabul edildi'});var MP6Stars={S:{started:true}},MP1Join={code:'ABCD1',playerId:'test-player'};ArchiveUI.detail(r.id);ArchiveUI.act('newsContext',String(r.id));`);return h;}
+test('aynı misafir odasında deserialize sonrası habere dönüş korunur',()=>{const h=setup();h.run('var s=serialize();if(!deserialize(s))throw Error("load");UI.openCouncil();');assert.match(h.run("$('diploPane').innerHTML"),/data-a="newsReturn"/);h.run("ArchiveUI.act('newsReturn')");assert.match(h.run("$('modal').innerHTML"),/council:test:60/);});
+test('başka oda veya oyuncuda eski haber referansı geçersizdir',()=>{const h=setup();h.run("MP1Join.code='OTHER';UI.openCouncil()");assert.doesNotMatch(h.run("$('diploPane').innerHTML"),/data-a="newsReturn"/);h.run("MP1Join.code='ABCD1';MP1Join.playerId='someone-else';UI.openCouncil()");assert.doesNotMatch(h.run("$('diploPane').innerHTML"),/data-a="newsReturn"/);});
+test('aynı sayısal id farklı olayda tekrar kullanılsa yanlış habere gidilmez',()=>{const h=setup();h.run("G.news.records[0].key='another-event';UI.openCouncil()");assert.doesNotMatch(h.run("$('diploPane').innerHTML"),/data-a="newsReturn"/);});
+console.log('GEÇEN: '+pass+' KALAN: '+fail);process.exitCode=fail?1:0;

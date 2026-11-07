@@ -1,0 +1,9 @@
+{
+  "number": 34,
+  "state": "DRAFT",
+  "title": "BETA-P0.1: Konsey paneli, oylama, savaş bitişi, ambargo ve haber yönlendirmesi",
+  "headBranch": "codex/stars-beta-p01-critical",
+  "headSha": "71b282ec2972b0872f207449d23006b88d1315f0",
+  "baseBranch": "codex/stars-beta0-stability",
+  "baseSha": "d307864edbc2ab9ca4347e5d065640e150279411"
+}

@@ -1,0 +1,98 @@
+[
+  {
+    "log": "reg-beta_p01_ballot_test.js.log",
+    "status": "PASS",
+    "passed": 3,
+    "failed": 0
+  },
+  {
+    "log": "reg-beta_p01_war_end_test.js.log",
+    "status": "PASS",
+    "passed": 5,
+    "failed": 0
+  },
+  {
+    "log": "reg-beta_p01_embargo_test.js.log",
+    "status": "PASS",
+    "passed": 5,
+    "failed": 0
+  },
+  {
+    "log": "reg-beta_p01_news_test.js.log",
+    "status": "PASS",
+    "passed": 4,
+    "failed": 0
+  },
+  {
+    "log": "mirror-final.log",
+    "status": "PASS",
+    "passed": 3,
+    "failed": 0
+  },
+  {
+    "log": "news-security-last.log",
+    "status": "PASS",
+    "passed": 8,
+    "failed": 0
+  },
+  {
+    "log": "compat-final.log",
+    "status": "PASS",
+    "passed": 4,
+    "failed": 0
+  },
+  {
+    "log": "council-final.log",
+    "status": "PASS",
+    "passed": 14,
+    "failed": 0
+  },
+  {
+    "log": "reg-perf1_equivalence_test.js.log",
+    "status": "PASS",
+    "passed": 4,
+    "failed": 0
+  },
+  {
+    "log": "reg-perf2_equivalence_test.js.log",
+    "status": "PASS",
+    "passed": 5,
+    "failed": 0
+  },
+  {
+    "log": "reg-mp86_nebula_cache_test.js.log",
+    "status": "PASS",
+    "passed": 3,
+    "failed": 0
+  },
+  {
+    "log": "save-boundary-final.log",
+    "status": "PASS",
+    "passed": 19,
+    "failed": 0
+  },
+  {
+    "log": "mp4-core-final.log",
+    "status": "PASS",
+    "passed": 14,
+    "failed": 0
+  },
+  {
+    "log": "mp64-news-final.log",
+    "status": "PASS",
+    "passed": 4,
+    "failed": 0
+  },
+  {
+    "log": "source-integrity-release.log",
+    "status": "PASS",
+    "passed": 1,
+    "failed": 0
+  },
+  {
+    "log": "news-return-after.log",
+    "status": "PASS",
+    "passed": 3,
+    "failed": 0
+  }
+]

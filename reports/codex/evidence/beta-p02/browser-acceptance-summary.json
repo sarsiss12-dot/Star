@@ -1,0 +1,46 @@
+{
+  "mp73_clean": {
+    "pass": 8,
+    "fail": 0,
+    "log": "mp73-acceptance.log"
+  },
+  "p01_regressions": {
+    "pass": 4,
+    "fail": 0,
+    "log": "p01-acceptance.log"
+  },
+  "news_touch": {
+    "pass": 1,
+    "fail": 0,
+    "events": 10,
+    "log": "news-acceptance.log"
+  },
+  "sp_panels": {
+    "pass": 3,
+    "fail": 0,
+    "log": "panels-final.log"
+  },
+  "mp75": {
+    "pass": 6,
+    "fail": 0,
+    "log": "mp75-final.log"
+  },
+  "mp8_N": {
+    "pass": 9,
+    "fail": 0,
+    "log": "mp8-N-final.log"
+  },
+  "mp8_R_and_UI": {
+    "pass": 6,
+    "fail": 0,
+    "log": "mp8-R-final.log"
+  },
+  "prior_failures_preserved": [
+    "mp73-combined-first-fail.log:7/4",
+    "mp73-final.log:10/1",
+    "mp73-clean-final.log:7/1"
+  ],
+  "physicalAndroid": "NOT RUN",
+  "liveRender": "NOT RUN",
+  "realInternet": "NOT RUN"
+}

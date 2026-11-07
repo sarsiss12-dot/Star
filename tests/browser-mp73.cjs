@@ -8,10 +8,10 @@
 const fs=require('fs'),path=require('path'),assert=require('assert/strict'),{execSync}=require('child_process'),{chromium}=require('playwright');
 const root=path.resolve(__dirname,'..'),out=path.resolve(process.env.STARS_OUTPUT||path.join(root,'../evidence/mp73'));fs.mkdirSync(out,{recursive:true});
 const relayMod=require('../research/mp1/server/relay.js'),{selfSigned,startProxy}=require('./helpers/mp11-tls-proxy.js');
-const BUILD=JSON.parse(fs.readFileSync(path.join(root,'RELEASE-MANIFEST.json'),'utf8')).build;const results=[],errors=[],metrics={};
+const BUILD=JSON.parse(fs.readFileSync(path.join(root,'RELEASE-MANIFEST.json'),'utf8')).build;const results=[],errors=[],metrics={},auditPages=new Set();
 async function test(name,fn){if(process.env.MP73_ONLY&&!new RegExp(process.env.MP73_ONLY).test(name))return;const t0=Date.now();
   try{await fn();results.push({name,status:'PASS',ms:Date.now()-t0});console.log('PASS '+name);}
-  catch(e){results.push({name,status:'FAIL',error:String(e&&e.stack||e).slice(0,1800)});console.log('FAIL '+name+'\n'+(e&&e.stack||e));}}
+  catch(e){for(const p of auditPages){try{const tag='failure-'+results.length+'-'+[...auditPages].indexOf(p);await p.screenshot({path:path.join(out,tag+'.png')});fs.writeFileSync(path.join(out,tag+'.json'),JSON.stringify(await p.evaluate(()=>({url:location.pathname,vote:typeof G!=='undefined'?G.council:null,inbox:typeof G!=='undefined'?G.inbox:null,modal:document.getElementById('modal')?.innerHTML,pane:document.getElementById('diploPane')?.innerHTML})),null,2));}catch{}}results.push({name,status:'FAIL',error:String(e&&e.stack||e).slice(0,1800)});console.log('FAIL '+name+'\n'+(e&&e.stack||e));}}
 const PHONE=(w,h)=>({viewport:{width:w,height:h},isMobile:true,hasTouch:true,deviceScaleFactor:2,serviceWorkers:'allow'});
 const freePort=()=>new Promise(res=>{const s=require('net').createServer().listen(0,'127.0.0.1',()=>{const p=s.address().port;s.close(()=>res(p));});});
 const wait=(p,fn,arg,timeout=30000)=>p.waitForFunction(fn,arg,{timeout,polling:100});
@@ -37,6 +37,7 @@ async function design0(p,o){
   catch(e){await shot(p,'design-fail-'+o.mizac);throw Error('kurulum kapanmadı: '+await p.evaluate(()=>(UI.setupError||'')+' | '+(document.querySelector('#setup .err,#setup .setupError')||{}).textContent));}
 }
 async function room(H,cap,guests){
+  for(const p of [H,...guests.map(g=>g[0])])auditPages.add(p);
   await H.goto(base+'/');await wait(H,()=>typeof setupGame==='function'&&document.getElementById('mp1Btn')&&window.MP7Setup&&window.MP71Dip);
   await tap(H,'#mp1Btn');await tap(H,'[data-m="create"]');await wait(H,()=>MP1Host.lobby&&MP1Host.lobby.mode==='design'&&MP1Host.lobby.phase==='waiting');
   if(cap>2){await H.selectOption('#mp7Cap',String(cap));await wait(H,c=>MP1Host.lobby.capacity===c,cap);}
@@ -73,7 +74,7 @@ const openDeal=(p,id)=>p.evaluate(id=>{UI.openDiplo();UI.selectDiplo(id,'deal');
 const cardUid=(p,key)=>wait(p,k=>(G.inbox||[]).some(n=>n.key===k),key).then(()=>p.evaluate(k=>G.inbox.find(n=>n.key===k).uid,key));
 async function openCard(p,key){const uid=await cardUid(p,key);
   /* diplomasi sayfası tam ekran (yatay telefon): kartlara dönmek için oyuncu gibi ✕ ile kapatılır */
-  if(await p.evaluate(()=>document.getElementById('diploPane').classList.contains('show')))await tap(p,'#diploPane [data-a="closeDiplo"]');await tap(p,'#inbox [data-a="openNote"][data-x="'+uid+'"]');await wait(p,()=>document.getElementById('inboxYes')||document.querySelector('#modal .archiveDetail'));}
+  if(await p.evaluate(()=>document.getElementById('diploPane').classList.contains('show')))await tap(p,'#diploPane [data-a="closeDiplo"]');await tap(p,'#inbox [data-a="openNote"][data-x="'+uid+'"]');await wait(p,council=>council?document.querySelector('#diploPane.show [data-a="cncNo"]'):document.getElementById('inboxYes')||document.querySelector('#modal .archiveDetail'),key.startsWith('mp73cnc:'));}
 /* yatay telefon: pencere ekranda, onay/ret düğmeleri görünür ve üst üste binmez */
 async function layout(p,sels){return p.evaluate(sels=>{const vw=innerWidth,vh=innerHeight,m=document.querySelector('#modal .modalBox,#modal > div')||document.getElementById('modal'),rs=sels.map(s=>{const e=document.querySelector(s);if(!e)return null;e.scrollIntoView({block:'nearest'});const r=e.getBoundingClientRect();
   return {s,x:r.x,y:r.y,w:r.width,h:r.height,top:(document.elementFromPoint(r.x+r.width/2,r.y+r.height/2)||{}).id||''};});
@@ -98,16 +99,22 @@ let relay,px,base,tls,bH,bB,bC;
     await room(H,2,[[Bp,'Bora',{name:'Saf Akıl Ağı',mizac:'teknokrasi',origin:'standart',ethics:['mat:2','mil:-1'],civics:['sinyal_avci']}]]);
     for(const p of [H,Bp])assert.equal(await p.evaluate(()=>!!document.getElementById('map')&&!document.getElementById('game').classList.contains('hidden')),true);
     const v=await Bp.evaluate(async()=>{const r=await fetch('/mp/version',{cache:'no-store'});return {s:r.status,j:await r.json(),b:BUILD_ID,line:MP1View.verLine(),chip:(document.getElementById('mp1Mini')||{}).title||''};});
-    metrics.version=v.j;assert.equal(v.s,200);assert.match(v.j.mp,/^MP\.8\.9b2$/);assert.equal(v.j.build,v.b);assert.match(v.line,new RegExp('MP\\.8\\.9b2 · oyun '+BUILD+'$'));   /* PERF.2: build manifestten (sabit liste yerine) */assert.match(v.chip,/MP\.8\.9b2/);
+    metrics.version=v.j;assert.equal(v.s,200);assert.match(v.j.mp,/^MP\.8\.9b3$/);assert.equal(v.j.build,v.b);assert.match(v.line,new RegExp('MP\\.8\\.9b3 · oyun '+BUILD+'$'));   /* PERF.2: build manifestten (sabit liste yerine) */assert.match(v.chip,/MP\.8\.9b3/);
     assert.equal(Object.values(v.j.files).every(x=>/^[0-9a-f]{12}$/.test(x)),true);
     await wait(Bp,()=>MP6Stars.S.unsupported&&MP6Stars.S.unsupported.length>0);metrics.unsupported=await Bp.evaluate(()=>MP6Stars.S.unsupported);
     for(const a of ['bill','billPick','billTarget','cncFound','cncJoin','cncLeave','cncNo','cncPane','cncYes','permanent','reform','throneBuild','veto','bribe','blackmail','bmGo','fundSep','panoptRetarget','revolt','revoltConfirm','whisperBlame','whisperGo','whisperMenu','whisperPick','devour','devourConfirm','colFire'])
       assert(!metrics.unsupported.includes(a),a+' still unsupported');
     assert.equal(metrics.unsupported.length,18,JSON.stringify(metrics.unsupported));
     await tap(Bp,'#mp6Conn');await wait(Bp,()=>document.getElementById('mpVer')&&document.getElementById('mpVer').offsetParent);   // telefonda görünür tanı satırı
-    metrics.guestDiag=await Bp.evaluate(()=>document.getElementById('mpVer').textContent);assert.match(metrics.guestDiag,new RegExp('MP\\.8\\.9b2 · oyun '+BUILD+'( · misafir)? · host bağlı .*son hata: ')   /* MP.8: rol + ayna + son komut eklendi */);
+    metrics.guestDiag=await Bp.evaluate(()=>document.getElementById('mpVer').textContent);assert.match(metrics.guestDiag,new RegExp('MP\\.8\\.9b3 · oyun '+BUILD+'( · misafir)? · host bağlı .*son hata: ')   /* MP.8: rol + ayna + son komut eklendi */);
     assert.doesNotMatch(metrics.guestDiag,/tok|key|anahtar/i);await shot(Bp,'a1-guest-diag');await tap(Bp,'#mp6Conn');
-    assert.match(await H.evaluate(()=>{MP1Host.miniOpen=true;try{document.querySelector('[data-g="toggle"]')&&0;}catch{}return MP1View.verLine();}),/MP\.8\.9b2/);
+    assert.match(await H.evaluate(()=>{MP1Host.miniOpen=true;try{document.querySelector('[data-g="toggle"]')&&0;}catch{}return MP1View.verLine();}),/MP\.8\.9b3/);
+  });
+  if(process.env.BETA02_TOUCH_REPEAT)await test('T02 mp6Conn sınırlı gerçek dokunma tekrarı',async()=>{
+    for(let i=0;i<Number(process.env.BETA02_TOUCH_REPEAT);i++){
+      const old=await Bp.locator('#mp6Conn').getAttribute('aria-expanded');await tap(Bp,'#mp6Conn');
+      assert.notEqual(await Bp.locator('#mp6Conn').getAttribute('aria-expanded'),old,'trusted tap toggles exactly once');
+    }
   });
   if(process.env.BETA_P01_PANELS==='1')await test('P01 #1 host ve misafir panel sahipliği / ayna yenilemesi',async()=>{
     await H.evaluate(()=>{MP1Host.host.local({kind:'speed',value:0});G.cfg.council='acik';G.council={name:'P0.1 Test Konseyi',founder:0,members:[0,1],laws:{},targeted:{},treasury:0,president:0,termStart:G.day,terms:{0:1},voteIn:30,vote:null,dead:false};MP1Host.host.publish();});
@@ -143,21 +150,46 @@ let relay,px,base,tls,bH,bB,bC;
       if(!foundCouncilByConvention())throw Error('council');startCouncilVote();MP1Host.host.publish();});
     const v=await cv();assert(v&&!v.done);for(const id of [1,2])assert(!v.yes.includes(id)&&!v.no.includes(id),'no AI vote for human '+id);
     const key=await (await B2.waitForFunction(()=>{const n=(G.inbox||[]).find(n=>typeof n.key==='string'&&n.key.startsWith('mp73cnc:'));return n?n.key:false;},undefined,{timeout:30000,polling:100})).jsonValue();
-    await openCard(B2,key).catch(()=>{});await wait(B2,()=>{const b=document.querySelector('#diploPane [data-a="cncYes"]'),r=b&&b.getBoundingClientRect();return r&&r.x>=0&&r.right<=innerWidth;});   // panel kayarak açılır
+    await openCard(B2,key);await wait(B2,()=>{const b=document.querySelector('#diploPane [data-a="cncYes"]'),r=b&&b.getBoundingClientRect();return r&&r.x>=0&&r.right<=innerWidth;});   // panel kayarak açılır
     await B2.waitForTimeout(400);await shot(B2,'b1-b-council-vote');
     /* layout() düğmeyi scrollIntoView ile getirir; ilk okuma kaydırma sürerken olabilir → yerleşince yeniden ölç (en çok 3 kez) */
     let L;for(let i=0;i<3;i++){L=await layout(B2,['#diploPane [data-a="cncYes"]','#diploPane [data-a="cncNo"]']);if(!L.bad.length)break;metrics.b1Relayout=(metrics.b1Relayout|0)+1;await B2.waitForTimeout(500);}
     assert.deepEqual(L.bad,[],JSON.stringify(L));
+    if(process.env.BETA02_BALLOT_PROOF)await B2.evaluate(()=>{window.__p02Seen=MP6Stars.S.seenResults;MP6Stars.S.seenResults=1e9;window.__p02Sent=MP6Stars.S.stats.sent.councilVote||0;});
     await tap(B2,'#diploPane [data-a="cncYes"]');await wait(H2,()=>G.council.vote&&G.council.vote.yes.includes(1));assert.equal((await cv()).done,false,'still open for C and host');
+    if(process.env.BETA02_BALLOT_PROOF){
+      await wait(B2,()=>!!UI._councilPending&&document.getElementById('councilVoteStatus').textContent.includes('bekliyor'));
+      assert(await B2.locator('#diploPane [data-a="cncYes"]').isDisabled());
+      await B2.evaluate(()=>{UI.openDiplo();MP6Stars.S.seenResults=window.__p02Seen;});await wait(B2,()=>!!UI._councilAck);
+      assert((await B2.evaluate(()=>$('diploPane')._surfaceKey)).startsWith('diplo:'));assert.equal(await B2.evaluate(()=>(MP6Stars.S.stats.sent.councilVote||0)-window.__p02Sent),1);
+      const t=await H2.evaluate(()=>councilVoteToken(G.council.vote));assert.equal(await cmdOf(B2,{kind:'councilVote',token:t,yes:true}),'rules:voted');
+    }
   });
   await test('B2 C (915×412) HAYIR verir; oylama host oy verene kadar açık; host kendi Konsey ekranından EVET → motor kapatır; tekrar oy reddedilir',async()=>{
     const key=await (await C2.waitForFunction(()=>{const n=(G.inbox||[]).find(n=>typeof n.key==='string'&&n.key.startsWith('mp73cnc:'));return n?n.key:false;},undefined,{timeout:30000,polling:100})).jsonValue();
-    await openCard(C2,key).catch(()=>{});await wait(C2,()=>document.querySelector('#diploPane [data-a="cncNo"]'));await tap(C2,'#diploPane [data-a="cncNo"]');
+    await openCard(C2,key);await wait(C2,()=>document.querySelector('#diploPane [data-a="cncNo"]'));await tap(C2,'#diploPane [data-a="cncNo"]');
     await wait(H2,()=>G.council.vote.no.includes(2));const host0=await H2.evaluate(()=>G.council.members.includes(0));
     if(host0){assert.equal((await cv()).done,false,'waits for the host');await H2.evaluate(()=>{UI.closeModal();UI.openCouncil();});await wait(H2,()=>document.querySelector('#diploPane [data-a="cncYes"]'));
       await shot(H2,'b2-host-council-vote');await tap(H2,'#diploPane [data-a="cncYes"]');}
     await wait(H2,()=>!G.council.vote||G.council.vote.done);
     assert.match(await cmdOf(C2,{kind:'councilVote',token:'x:',yes:true}),/^rules:(no-vote|stale|voted)$/);
+    if(process.env.BETA02_BALLOT_PROOF){
+      const canonical=await H2.evaluate(()=>G.council.lastVote),laws=await H2.evaluate(()=>G.council.laws);assert(canonical);assert(canonical.yes.includes(0)&&canonical.yes.includes(1)&&canonical.no.includes(2));
+      metrics.p02Ballot={canonical,devices:[]};
+      for(const [p,me] of [[H2,0],[B2,1],[C2,2]]){await wait(p,key=>G.council.lastVote?.eventKey===key,canonical.eventKey);
+        const v=await p.evaluate(()=>G.council.lastVote),pi=id=>id===me?0:id===0?me:id;
+        assert.deepEqual(v.yes,canonical.yes.map(pi));assert.deepEqual(v.no,canonical.no.map(pi));assert.deepEqual(v.weight,canonical.weight);assert.equal(v.passed,canonical.passed);assert.deepEqual(await p.evaluate(()=>G.council.laws),laws);
+        await wait(p,key=>G.news.records.some(r=>r.key===key),canonical.eventKey);await p.evaluate(()=>{UI.closeModal();UI.openCouncil();});
+        await wait(p,()=>document.querySelector('[data-council-result]'));await shot(p,'p02-result-'+me);metrics.p02Ballot.devices.push({me,result:v});
+        const rid=await p.evaluate(key=>G.news.records.find(r=>r.key===key).id,canonical.eventKey);await p.evaluate(()=>ArchiveUI.open('news'));
+        await tap(p,'#modal [data-a="newsDetail"][data-x="'+rid+'"]');await tap(p,'#modal [data-a="newsContext"]');await wait(p,()=>$('diploPane')._surfaceKey==='council');
+        await tap(p,'#diploPane [data-a="newsReturn"]');assert((await p.locator('#modal').innerText()).includes(canonical.eventKey));await p.evaluate(()=>UI.closeModal());
+      }
+      await C2.context().setOffline(true);await C2.waitForTimeout(900);await C2.context().setOffline(false);
+      await wait(C2,()=>MP1Join.ws?.readyState===1&&MP1Join.hostOnline);await wait(C2,key=>G.council.lastVote?.eventKey===key,canonical.eventKey);
+      assert.deepEqual(await C2.evaluate(()=>G.council.lastVote.weight),canonical.weight);metrics.p02Ballot.reconnect=true;
+      const stored=await H2.evaluate(()=>{const s=serialize();return {v:JSON.parse(s).v,bytes:s.length};});assert.equal(stored.v,8);metrics.p02Ballot.save8=stored;
+    }
   });
   await test('B3 tasarı: B Konsey ekranından tasarı sunar (dokunma) → host kampanya sponsoru B; B AI üyeye rüşvet (dokunma) → host 200 mineral aktarır; insan üye C\'ye rüşvet reddedilir; C\'nin aynasında rüşvetin yönü yok',async()=>{
     await B2.evaluate(()=>{UI.closeModal();UI.openCouncil();});const k=await (await B2.waitForFunction(()=>{const b=document.querySelector('#diploPane [data-a="bill"]');return b?b.dataset.x:false;},undefined,{timeout:30000,polling:100})).jsonValue();

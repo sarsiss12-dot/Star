@@ -1,0 +1,180 @@
+{
+  "results": [
+    {
+      "name": "A1 rehber 1–8: oda, iki farklı devlet, hazır, başlat; iki ekranda galaksi; sürüm işareti lobi / başlangıç / MP çubuğunda ve /mp/version oyun build'iyle aynı",
+      "status": "PASS",
+      "ms": 11310
+    },
+    {
+      "name": "A2 rehber 9–12: misafir filosunu yürütür (gerçek orderMove → host), B → host diplomatik teklif ve host gelen kutusundan kabul eder; zaman iki ekranda ilerler",
+      "status": "PASS",
+      "ms": 5880
+    },
+    {
+      "name": "A3 rehber 13–15: misafir bağlantısı kopar ve döner → aynı devlet; host oyun kaydı alır (MP.4 paketi doğrulanır)",
+      "status": "PASS",
+      "ms": 3294
+    },
+    {
+      "name": "B1 konsey motorun kendi yoluyla kurulur (fikstür: temas); AI insanlar adına oy / sponsor yazmaz; B gerçek \"KONSEY OYLAMASI\" kartından Konsey ekranını açar ve EVET (dokunma) → host kaydeder, oylama açık kalır",
+      "status": "PASS",
+      "ms": 27114
+    },
+    {
+      "name": "B2 C (915×412) HAYIR verir; oylama host oy verene kadar açık; host kendi Konsey ekranından EVET → motor kapatır; tekrar oy reddedilir",
+      "status": "FAIL",
+      "error": "locator.tap: Timeout 8000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#diploPane [data-a=\"newsReturn\"]').first()\u001b[22m\n\n    at proto.tap (/workspace/Star/tests/helpers/mp88-input-diag.cjs:9:559)\n    at async tap (/workspace/Star/tests/browser-mp73.cjs:20:108)\n    at async /workspace/Star/tests/browser-mp73.cjs:186:9\n    at async test (/workspace/Star/tests/browser-mp73.cjs:13:7)\n    at async /workspace/Star/tests/browser-mp73.cjs:168:3"
+    },
+    {
+      "name": "B3 tasarı: B Konsey ekranından tasarı sunar (dokunma) → host kampanya sponsoru B; B AI üyeye rüşvet (dokunma) → host 200 mineral aktarır; insan üye C'ye rüşvet reddedilir; C'nin aynasında rüşvetin yönü yok",
+      "status": "PASS",
+      "ms": 9519
+    },
+    {
+      "name": "B4 entrika ve yıkıcı onay: B fısıltı ağını gerçek pencereden açar, iki AI seçer, gönderir → host motoru (B'nin günlüğü ya da motorun gerekçesi); onaysız yutma çağrısı host'a hiçbir şey göndermez",
+      "status": "PASS",
+      "ms": 12868
+    },
+    {
+      "name": "sayfa hataları yok",
+      "status": "PASS",
+      "ms": 1
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "startModal": [
+      "🛰 DANIŞMAN",
+      "",
+      "🛰 DANIŞMAN",
+      "",
+      ""
+    ],
+    "version": {
+      "mp": "MP.8.9b3",
+      "build": "96h10p8",
+      "files": {
+        "mp-core.js": "feabfddce573",
+        "relay.js": "73430a385477",
+        "mp1-host.js": "c8e2251d1811",
+        "join.js": "bc2732493741",
+        "mirror.js": "8162eea8af28",
+        "guest-stars.js": "727534446b38",
+        "mp71-dip.js": "4b7b5e64b5ba",
+        "mp7-setup.js": "4f8fef4ce1a9"
+      }
+    },
+    "unsupported": [
+      "autoEvent",
+      "diagCopy",
+      "joinRebel",
+      "leaveRebel",
+      "mapFix",
+      "physio",
+      "restart",
+      "rollName",
+      "sandbox",
+      "sitPick",
+      "stashNote",
+      "survey",
+      "terra",
+      "toTitle",
+      "tplDel",
+      "tplLoad",
+      "tplSave",
+      "trigCrisis"
+    ],
+    "guestDiag": "STARS MP.8.9b3 · oyun 96h10p8 · misafir · host bağlı · aşama: ready · ayna r4 08:10:36 · kurulum 5 ms · son komut: yok · son hata: yok",
+    "p02Ballot": {
+      "canonical": {
+        "key": "ticaretStd",
+        "target": null,
+        "opened": 6.100000000000009,
+        "yes": [
+          3,
+          6,
+          5,
+          7,
+          1,
+          0
+        ],
+        "no": [
+          4,
+          2
+        ],
+        "expired": false,
+        "appliedTarget": null,
+        "ended": 13.728959999999983,
+        "passed": true,
+        "weight": {
+          "yes": 42.466486679072396,
+          "no": 14.00089080693617
+        },
+        "eventKey": "council:ticaretStd:13.728959999999983"
+      },
+      "devices": [
+        {
+          "me": 0,
+          "result": {
+            "key": "ticaretStd",
+            "target": null,
+            "opened": 6.100000000000009,
+            "yes": [
+              3,
+              6,
+              5,
+              7,
+              1,
+              0
+            ],
+            "no": [
+              4,
+              2
+            ],
+            "expired": false,
+            "appliedTarget": null,
+            "ended": 13.728959999999983,
+            "passed": true,
+            "weight": {
+              "yes": 42.466486679072396,
+              "no": 14.00089080693617
+            },
+            "eventKey": "council:ticaretStd:13.728959999999983"
+          }
+        },
+        {
+          "me": 1,
+          "result": {
+            "key": "ticaretStd",
+            "target": null,
+            "appliedTarget": null,
+            "opened": 6.100000000000009,
+            "ended": 13.728959999999983,
+            "yes": [
+              3,
+              6,
+              5,
+              7,
+              0,
+              1
+            ],
+            "no": [
+              4,
+              2
+            ],
+            "passed": true,
+            "expired": false,
+            "weight": {
+              "yes": 42.466486679072396,
+              "no": 14.00089080693617
+            },
+            "eventKey": "council:ticaretStd:13.728959999999983"
+          }
+        }
+      ]
+    },
+    "whisper": 1
+  },
+  "pass": 7,
+  "fail": 1
+}
