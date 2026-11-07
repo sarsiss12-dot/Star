@@ -1,0 +1,14 @@
+{
+  "startCount": 43,
+  "endCount": 43,
+  "task41": {
+    "title": "Pregame `Korsan Tehdidi: KAPALI` olmasına rağmen korsan devleti, yuvaları ve filolarının doğması",
+    "status": "PROMPT HAZIR",
+    "row": "| **41** | Pregame `Korsan Tehdidi: KAPALI` olmasına rağmen korsan devleti, yuvaları ve filolarının doğması | `PROMPT HAZIR` | **BETA-SETUP.0 PROMPT HAZIR (7 Kasım 2026); kullanıcıya gönderilecek, Codex'e teslimi henüz doğrulanmadı. Kod/test/PR yok; #8 isim fazı sırada.** |"
+  },
+  "otherExistingStatusesUnchanged": true,
+  "startBodySha256": "d32dcebaaf539748a1d7b18e7cf67006b20b833e341a9252af22cdacfbbca321",
+  "endBodySha256": "d32dcebaaf539748a1d7b18e7cf67006b20b833e341a9252af22cdacfbbca321",
+  "writeStatus": "BLOCKED: GraphQL Forbidden; append-only comments attempted; no body replacement",
+  "requestedNextStatus": "RAPOR GELDİ / TEST BEKLİYOR; not recorded"
+}

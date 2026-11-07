@@ -1,0 +1,221 @@
+{
+  "count": 43,
+  "bodySha256": "d32dcebaaf539748a1d7b18e7cf67006b20b833e341a9252af22cdacfbbca321",
+  "tasks": {
+    "1": {
+      "title": "Yanlış panel yerine Konsey açılması",
+      "status": "KULLANICI ONAYI BEKLİYOR",
+      "row": "| **1** | Yanlış panel yerine Konsey açılması | `KULLANICI ONAYI BEKLİYOR` | [PR #34](https://github.com/sarsiss12-dot/Star/pull/34) · BETA-P0.1 · HEAD 71b282e · SP 3/0 + 3/0, yerel MP 2/0; fiziksel Android/Render NOT RUN |"
+    },
+    "2": {
+      "title": "Federasyon kabul bildirimi",
+      "status": "PLANLANDI",
+      "row": "| **2** | Federasyon kabul bildirimi | `PLANLANDI` | Atama kaydı yok |"
+    },
+    "3": {
+      "title": "Konsey EVET/HAYIR düğmesi",
+      "status": "TEST BEKLİYOR",
+      "row": "| **3** | Konsey EVET/HAYIR düğmesi | `TEST BEKLİYOR` | [PR #34](https://github.com/sarsiss12-dot/Star/pull/34) · BETA-P0.1 · HEAD 71b282e · çekirdek 13/0, hedefli MP P03 PASS; tam MP73 4/4 FAIL/BLOKE: lobi KATIL timeout · **BETA-P0.2 PROMPT HAZIR** (MP73 KATIL/tap kök neden + 3 insan uçtan uca, ajana teslim doğrulanmadı) |"
+    },
+    "4": {
+      "title": "Savaşın açıklamasız otomatik bitmesi",
+      "status": "KULLANICI ONAYI BEKLİYOR",
+      "row": "| **4** | Savaşın açıklamasız otomatik bitmesi | `KULLANICI ONAYI BEKLİYOR` | [PR #34](https://github.com/sarsiss12-dot/Star/pull/34) · BETA-P0.1 · HEAD 71b282e · bitiş nedenleri native 5/0, MP P04 PASS; eski gerçek vakada kesin tetikleyici bilinmiyor; Android/Render NOT RUN |"
+    },
+    "5": {
+      "title": "Savaş bildirimi oyunu durdurmasın",
+      "status": "PLANLANDI",
+      "row": "| **5** | Savaş bildirimi oyunu durdurmasın | `PLANLANDI` | Atama kaydı yok |"
+    },
+    "6": {
+      "title": "Ortada kısa savaş ilanı duyurusu",
+      "status": "PLANLANDI",
+      "row": "| **6** | Ortada kısa savaş ilanı duyurusu | `PLANLANDI` | Atama kaydı yok |"
+    },
+    "7": {
+      "title": "Gezegen kuşatması ilerleme ve ETA",
+      "status": "PLANLANDI",
+      "row": "| **7** | Gezegen kuşatması ilerleme ve ETA | `PLANLANDI` | Atama kaydı yok |"
+    },
+    "8": {
+      "title": "Üretken özgün kök + **geniş, çeşitli doktrinsel unvan havuzları**; iki kelimeli kısa isimler ([#5](https://github.com/sarsiss12-dot/Star/issues/5))",
+      "status": "PLANLANDI",
+      "row": "| **8** | Üretken özgün kök + **geniş, çeşitli doktrinsel unvan havuzları**; iki kelimeli kısa isimler ([#5](https://github.com/sarsiss12-dot/Star/issues/5)) | `PLANLANDI` | **ÖNE ÇEKİLDİ: BETA-UX.0 · örnek 30 kök + her doktrine 6+ unvan; seed çeşitliliği, aynı seed deterministik; prompt henüz verilmedi.** |"
+    },
+    "9": {
+      "title": "Gezegen isyan nedeni",
+      "status": "PLANLANDI",
+      "row": "| **9** | Gezegen isyan nedeni | `PLANLANDI` | Atama kaydı yok |"
+    },
+    "10": {
+      "title": "MP hız değişikliği yanıt vermiyor",
+      "status": "PLANLANDI",
+      "row": "| **10** | MP hız değişikliği yanıt vermiyor | `PLANLANDI` | Atama kaydı yok |"
+    },
+    "11": {
+      "title": "Federasyon kuruluş daveti",
+      "status": "PLANLANDI",
+      "row": "| **11** | Federasyon kuruluş daveti | `PLANLANDI` | Atama kaydı yok |"
+    },
+    "12": {
+      "title": "İki insanla federasyon kurulması",
+      "status": "PLANLANDI",
+      "row": "| **12** | İki insanla federasyon kurulması | `PLANLANDI` | Atama kaydı yok |"
+    },
+    "13": {
+      "title": "Kurucu ortakları seçme",
+      "status": "PLANLANDI",
+      "row": "| **13** | Kurucu ortakları seçme | `PLANLANDI` | Atama kaydı yok |"
+    },
+    "14": {
+      "title": "MP uzaktan inşa",
+      "status": "PLANLANDI",
+      "row": "| **14** | MP uzaktan inşa | `PLANLANDI` | Atama kaydı yok |"
+    },
+    "15": {
+      "title": "Üretim X ile iptal",
+      "status": "PLANLANDI",
+      "row": "| **15** | Üretim X ile iptal | `PLANLANDI` | Atama kaydı yok |"
+    },
+    "16": {
+      "title": "İnsan müttefiki savaşa davet",
+      "status": "PLANLANDI",
+      "row": "| **16** | İnsan müttefiki savaşa davet | `PLANLANDI` | Atama kaydı yok |"
+    },
+    "17": {
+      "title": "Filo Sahipleri OFF: ikon görünür, SADECE devlet adı gizli",
+      "status": "PLANLANDI",
+      "row": "| **17** | Filo Sahipleri OFF: ikon görünür, SADECE devlet adı gizli | `PLANLANDI` | Atama kaydı yok |"
+    },
+    "18": {
+      "title": "İnsan / AI devlet renklerini ayır",
+      "status": "PLANLANDI",
+      "row": "| **18** | İnsan / AI devlet renklerini ayır | `PLANLANDI` | Atama kaydı yok |"
+    },
+    "19": {
+      "title": "Sol GEZEGENLER paneli; haritaya git ve event ile geri dön",
+      "status": "PLANLANDI",
+      "row": "| **19** | Sol GEZEGENLER paneli; haritaya git ve event ile geri dön | `PLANLANDI` | Atama kaydı yok |"
+    },
+    "20": {
+      "title": "ROTA düğmesi büyütme",
+      "status": "PLANLANDI",
+      "row": "| **20** | ROTA düğmesi büyütme | `PLANLANDI` | Atama kaydı yok |"
+    },
+    "21": {
+      "title": "İnsan adına otomatik ambargo",
+      "status": "KULLANICI ONAYI BEKLİYOR",
+      "row": "| **21** | İnsan adına otomatik ambargo | `KULLANICI ONAYI BEKLİYOR` | [PR #34](https://github.com/sarsiss12-dot/Star/pull/34) · BETA-P0.1 · HEAD 71b282e · ambargo native 5/0, MP P04 PASS; Android/Render NOT RUN |"
+    },
+    "22": {
+      "title": "Boş sınır sisteminden diplomasi",
+      "status": "PLANLANDI",
+      "row": "| **22** | Boş sınır sisteminden diplomasi | `PLANLANDI` | Atama kaydı yok |"
+    },
+    "23": {
+      "title": "Üretim kuyruğu panel kaydırma",
+      "status": "PLANLANDI",
+      "row": "| **23** | Üretim kuyruğu panel kaydırma | `PLANLANDI` | Atama kaydı yok |"
+    },
+    "24": {
+      "title": "Negatif enerji gelirinde artan stok",
+      "status": "PLANLANDI",
+      "row": "| **24** | Negatif enerji gelirinde artan stok | `PLANLANDI` | Atama kaydı yok |"
+    },
+    "25": {
+      "title": "Düşmansız 100K filo kaybı",
+      "status": "PLANLANDI",
+      "row": "| **25** | Düşmansız 100K filo kaybı | `PLANLANDI` | Atama kaydı yok |"
+    },
+    "26": {
+      "title": "Konsey savaş yasağı spamı",
+      "status": "PLANLANDI",
+      "row": "| **26** | Konsey savaş yasağı spamı | `PLANLANDI` | Atama kaydı yok |"
+    },
+    "27": {
+      "title": "Event kartında kısa teklif özeti",
+      "status": "PLANLANDI",
+      "row": "| **27** | Event kartında kısa teklif özeti | `PLANLANDI` | Atama kaydı yok |"
+    },
+    "28": {
+      "title": "Enerji tükenme cezalarını göster",
+      "status": "PLANLANDI",
+      "row": "| **28** | Enerji tükenme cezalarını göster | `PLANLANDI` | Atama kaydı yok |"
+    },
+    "29": {
+      "title": "Alaşım tükenme etkilerini göster",
+      "status": "PLANLANDI",
+      "row": "| **29** | Alaşım tükenme etkilerini göster | `PLANLANDI` | Atama kaydı yok |"
+    },
+    "30": {
+      "title": "Tüm devletlerin bölgelerinde saydam armalar",
+      "status": "PLANLANDI",
+      "row": "| **30** | Tüm devletlerin bölgelerinde saydam armalar | `PLANLANDI` | Atama kaydı yok |"
+    },
+    "31": {
+      "title": "Tek düğmeyle basit savaş ilanı",
+      "status": "PLANLANDI",
+      "row": "| **31** | Tek düğmeyle basit savaş ilanı | `PLANLANDI` | Atama kaydı yok |"
+    },
+    "32": {
+      "title": "MP insan oyuncuya ittifak daveti",
+      "status": "PLANLANDI",
+      "row": "| **32** | MP insan oyuncuya ittifak daveti | `PLANLANDI` | Atama kaydı yok |"
+    },
+    "33": {
+      "title": "Casusluk paneli optimizasyonu (#8)",
+      "status": "PLANLANDI",
+      "row": "| **33** | Casusluk paneli optimizasyonu (#8) | `PLANLANDI` | Atama kaydı yok |"
+    },
+    "34": {
+      "title": "Sağ üst haberler: doğru savaş/olay ayrıntısı",
+      "status": "TEST BEKLİYOR",
+      "row": "| **34** | Sağ üst haberler: doğru savaş/olay ayrıntısı | `TEST BEKLİYOR` | [PR #34](https://github.com/sarsiss12-dot/Star/pull/34) · BETA-P0.1 · HEAD 71b282e · savaş kimliği native 4/0, ayna 3/0, dokunma 1/0; tarihsel güç/kayıp/cephe verisi yok; Android/Render NOT RUN · **BETA-P0.2 PROMPT HAZIR** (haber rotası ve geleceğe dönük kaydedilebilir görünür savaş bilgisi, ajana teslim doğrulanmadı) |"
+    },
+    "35": {
+      "title": "İsyan riski event ve harita simgesi",
+      "status": "PLANLANDI",
+      "row": "| **35** | İsyan riski event ve harita simgesi | `PLANLANDI` | Atama kaydı yok |"
+    },
+    "36": {
+      "title": "Zengin amblem tasarımı ve random",
+      "status": "PLANLANDI",
+      "row": "| **36** | Zengin amblem tasarımı ve random | `PLANLANDI` | Atama kaydı yok |"
+    },
+    "37": {
+      "title": "Yeni/ele geçirilen koloni otomasyonu ON, 2–3 ay bekle",
+      "status": "PLANLANDI",
+      "row": "| **37** | Yeni/ele geçirilen koloni otomasyonu ON, 2–3 ay bekle | `PLANLANDI` | Atama kaydı yok |"
+    },
+    "38": {
+      "title": "Federasyona davet: herkesle ittifak yerine üye oylaması",
+      "status": "PLANLANDI",
+      "row": "| **38** | Federasyona davet: herkesle ittifak yerine üye oylaması | `PLANLANDI` | Atama kaydı yok |"
+    },
+    "39": {
+      "title": "Yağmacı Federasyon: 4. tür, fetih ve saldırı odaklı, kriminal/saldırganlara özgü",
+      "status": "PLANLANDI",
+      "row": "| **39** | Yağmacı Federasyon: 4. tür, fetih ve saldırı odaklı, kriminal/saldırganlara özgü | `PLANLANDI` | Atama kaydı yok |"
+    },
+    "40": {
+      "title": "AI+insan koalisyon pazarlığı, ücretli savaş, tam koruma ve rotaya göre geçiş izinleri",
+      "status": "PLANLANDI",
+      "row": "| **40** | AI+insan koalisyon pazarlığı, ücretli savaş, tam koruma ve rotaya göre geçiş izinleri | `PLANLANDI` | **AI kendi savaşında ve savunmada aktif teklifler/karşı teklifler yapacak, gerçek rota izinlerini müzakere edecek.** |"
+    },
+    "41": {
+      "title": "Pregame `Korsan Tehdidi: KAPALI` olmasına rağmen korsan devleti, yuvaları ve filolarının doğması",
+      "status": "PROMPT HAZIR",
+      "row": "| **41** | Pregame `Korsan Tehdidi: KAPALI` olmasına rağmen korsan devleti, yuvaları ve filolarının doğması | `PROMPT HAZIR` | **BETA-SETUP.0 PROMPT HAZIR (7 Kasım 2026); kullanıcıya gönderilecek, Codex'e teslimi henüz doğrulanmadı. Kod/test/PR yok; #8 isim fazı sırada.** |"
+    },
+    "42": {
+      "title": "Pregame galaksi ayarları gerçek etki ve UI semantiği denetimi: yıldız kapıları + diğer anahtarlar",
+      "status": "PLANLANDI",
+      "row": "| **42** | Pregame galaksi ayarları gerçek etki ve UI semantiği denetimi: yıldız kapıları + diğer anahtarlar | `PLANLANDI` | **P1 inceleme; `gates:false` kullanım yolunu kapatıyor fakat `structAllowed('kapi')` bunu kontrol etmiyor; ayar açıklaması ve diğer toggle'lar test edilecek.** |"
+    },
+    "43": {
+      "title": "Sürmekte olan savaşa üçüncü devletin istediği taraftan **gönüllü veya pazarlıklı katılması** (savaş menüsü → taraf seçimi → teklif/karşı teklif → kabul)",
+      "status": "PLANLANDI",
+      "row": "| **43** | Sürmekte olan savaşa üçüncü devletin istediği taraftan **gönüllü veya pazarlıklı katılması** (savaş menüsü → taraf seçimi → teklif/karşı teklif → kabul) | `PLANLANDI` | **YENİ: BETA-WAR.0 / #40 ile bağlantılı; henüz prompta verilmedi, kod/test yok.** |"
+    }
+  }
+}

@@ -1,14 +1,13 @@
 # Son Codex raporu
 
-- Faz: **BETA-P0.2 — yerel Konsey/haber kabulü teslim edildi; tarihsel dokunma kökü açık, genel beta yayın onayı yok.**
-- Rapor: [BETA-P02-SONUC](reports/codex/BETA-P02-SONUC.md).
-- Dal: `codex/stars-beta-p02-mp-acceptance`; PR tabanı `codex/stars-beta-p01-critical`.
-- Başlangıç: `71b282ec2972b0872f207449d23006b88d1315f0`.
-- Doğrulanmış kod/test ve uzak HEAD: `d8c162914b3c7e460c70e50a8a7b80f789f18e3d`; rapor commit'i bundan sonradır, nihai SHA teslim mesajındadır.
-- Yeni taslak PR tek deneme **Forbidden**, oluşmadı. [Karşılaştırma](https://github.com/sarsiss12-dot/Star/compare/codex/stars-beta-p01-critical...codex/stars-beta-p02-mp-acceptance?expand=1).
-- Son temiz MP73 **8/0**, P01 özel regresyonu **4/0**, MP75 **6/0**, MP8 N **9/0**, R0–R4+UI Scale **6/0**. Konsey14/0, haber gizliliği8/0, geri dönüş3/0; PERF1 4/0, PERF2 5/0, MP86 piksel3/0. Ara FAIL'ler raporda, silinmedi.
-- Save8v8/MP paket4/protokol1; eski p6/p7 uyumluluk4/0, Save8 sınırları19/0. Son oylama için mevcut council'e isteğe bağlı metadata eklenir; bütün dünyalarda P01 ile byte eşitliği iddiası yok. Salt haber sorgusu Save8/RNG eşitliğini korur.
-- Oyun96h10p8/PWA stars-v96h10p8/MP.8.9b3. Deterministik ZIP/hash için [RELEASE-VERIFIED](reports/codex/evidence/beta-p02/RELEASE-VERIFIED.json).
-- #33 yazımı API Forbidden. Gerçek durumda #3/#34 **TEST BEKLİYOR**; #1/#4/#21 **KULLANICI ONAYI BEKLİYOR**. Pano dış güncellemeyle39→40 oldu; yeni #40 ve genişletilen #8 geliştirilmedi. Hiçbir görev TAMAMLANDI yapılmadı.
-- **NOT RUN:** fiziksel Android, gerçek LAN/internet, canlı Render, Docker image build. Render/main/rebase/force-push yok.
-- Sonraki tek öncelik: hata veren gerçek lobi/dokunma akışını kayıtla hedefli kabul; kanıtsız üretim düzeltmesi yok.
+- Faz: **BETA-SETUP.0 / yalnız pano #41 — korsan KAPALI yerel kabul PASS**; fiziksel/canlı yayın onayı yok.
+- Rapor: [BETA-SETUP0-SONUC](reports/codex/BETA-SETUP0-SONUC.md).
+- Dal: `codex/stars-beta-setup0-pirates`; taban `codex/stars-beta-p02-mp-acceptance` @`3fd07944b6764ca6e71f6e8dc8b81404d5c8cfbd`.
+- Doğrulanmış kod/test uzak HEAD: `7aaf23fc7ef19b1ec9b86238ce2a0010d61aefd8`; nihai rapor commit SHA'sı teslim mesajında/uzak daldadır.
+- Seed11/99/404:0/30/120 KAPALI sıfır yuva/korsan filo/doğum/baskın/çağ. AÇIK kontrol-aday363 aylık Save8 SHA/RNG aynı, KAPALI tekrar363 nokta aynı. Teknik wildId/kalıntı/canavar/kriz/kriminal AI/isyan korunur.
+- Hedefli10/0, SP2/0, MP/P0.2 regresyon4/0, Konsey14/0, haber8/0, Save8 sınır19/0, MP4core14/0, PERF1 4/0 PERF2 5/0 piksel3/0. Ara FAIL'ler raporda.
+- Oyun96h10p9/PWA stars-v96h10p9/MP.8.9b4; Save8v8/MP paket4/protokol1. Eski KAPALI kayıt onarımı atomik; mevcut kayıt dosyaları silinmez. [Paket/hash](reports/codex/evidence/beta-setup0/RELEASE-VERIFIED.json).
+- PR bir deneme Forbidden. [Karşılaştırma](https://github.com/sarsiss12-dot/Star/compare/codex/stars-beta-p02-mp-acceptance...codex/stars-beta-setup0-pirates?expand=1).
+- #33 ek yorum yazımları Forbidden; gerçek #41 **PROMPT HAZIR** olarak kaldı. RAPOR GELDİ/TEST BEKLİYOR metni kanıtlarda; hiçbir görev TAMAMLANDI değil. Pano ilk kontrolde43 satırdı; diğer durumlar değiştirilmedi.
+- **NOT RUN:** fiziksel Android, gerçek LAN/internet/Render, Docker build, bu fazda tam MP73/MP75/MP8 N/R. P0.2 tarihsel dokunma riski kapanmış sayılmaz.
+- Sonraki faz: kullanıcı önceliği **#8 / BETA-UX.0 isimler**; bu faza isim/yıldız kapısı geliştirmesi eklenmedi. Main merge/force-push/deploy/restart yok.
