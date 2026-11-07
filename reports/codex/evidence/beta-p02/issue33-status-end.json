@@ -1,0 +1,58 @@
+{
+  "url": "https://github.com/sarsiss12-dot/Star/issues/33",
+  "count": 40,
+  "startBodySha256": "b406bdaa790a73f967b7b7163faf2f46c333225d09ef933e54c5686b516d3909",
+  "endBodySha256": "80d5df867538e9a84cddccf91bce75530a6fc2f24110fee8949e50057180dcfb",
+  "wholeBodyUnchanged": false,
+  "outOfScopeRowsUnchanged": false,
+  "startCount": 39,
+  "externalNewRows": {
+    "40": {
+      "title": "AI+insan koalisyon pazarlığı, ücretli savaş, tam koruma ve rotaya göre geçiş izinleri",
+      "status": "PLANLANDI",
+      "row": "| **40** | AI+insan koalisyon pazarlığı, ücretli savaş, tam koruma ve rotaya göre geçiş izinleri | `PLANLANDI` | **AI kendi savaşında ve savunmada aktif teklifler/karşı teklifler yapacak, gerçek rota izinlerini müzakere edecek.** |"
+    }
+  },
+  "tasks": {
+    "1": {
+      "title": "Yanlış panel yerine Konsey açılması",
+      "status": "KULLANICI ONAYI BEKLİYOR",
+      "row": "| **1** | Yanlış panel yerine Konsey açılması | `KULLANICI ONAYI BEKLİYOR` | [PR #34](https://github.com/sarsiss12-dot/Star/pull/34) · BETA-P0.1 · HEAD 71b282e · SP 3/0 + 3/0, yerel MP 2/0; fiziksel Android/Render NOT RUN |"
+    },
+    "3": {
+      "title": "Konsey EVET/HAYIR düğmesi",
+      "status": "TEST BEKLİYOR",
+      "row": "| **3** | Konsey EVET/HAYIR düğmesi | `TEST BEKLİYOR` | [PR #34](https://github.com/sarsiss12-dot/Star/pull/34) · BETA-P0.1 · HEAD 71b282e · çekirdek 13/0, hedefli MP P03 PASS; tam MP73 4/4 FAIL/BLOKE: lobi KATIL timeout · **BETA-P0.2 PROMPT HAZIR** (MP73 KATIL/tap kök neden + 3 insan uçtan uca, ajana teslim doğrulanmadı) |"
+    },
+    "4": {
+      "title": "Savaşın açıklamasız otomatik bitmesi",
+      "status": "KULLANICI ONAYI BEKLİYOR",
+      "row": "| **4** | Savaşın açıklamasız otomatik bitmesi | `KULLANICI ONAYI BEKLİYOR` | [PR #34](https://github.com/sarsiss12-dot/Star/pull/34) · BETA-P0.1 · HEAD 71b282e · bitiş nedenleri native 5/0, MP P04 PASS; eski gerçek vakada kesin tetikleyici bilinmiyor; Android/Render NOT RUN |"
+    },
+    "21": {
+      "title": "İnsan adına otomatik ambargo",
+      "status": "KULLANICI ONAYI BEKLİYOR",
+      "row": "| **21** | İnsan adına otomatik ambargo | `KULLANICI ONAYI BEKLİYOR` | [PR #34](https://github.com/sarsiss12-dot/Star/pull/34) · BETA-P0.1 · HEAD 71b282e · ambargo native 5/0, MP P04 PASS; Android/Render NOT RUN |"
+    },
+    "34": {
+      "title": "Sağ üst haberler: doğru savaş/olay ayrıntısı",
+      "status": "TEST BEKLİYOR",
+      "row": "| **34** | Sağ üst haberler: doğru savaş/olay ayrıntısı | `TEST BEKLİYOR` | [PR #34](https://github.com/sarsiss12-dot/Star/pull/34) · BETA-P0.1 · HEAD 71b282e · savaş kimliği native 4/0, ayna 3/0, dokunma 1/0; tarihsel güç/kayıp/cephe verisi yok; Android/Render NOT RUN · **BETA-P0.2 PROMPT HAZIR** (haber rotası ve geleceğe dönük kaydedilebilir görünür savaş bilgisi, ajana teslim doğrulanmadı) |"
+    }
+  },
+  "commentWrite": "BLOCKED: GitHub GraphQL Forbidden; body never overwritten",
+  "proposals": {
+    "3": "TEST BEKLİYOR — tarihsel dokunma timeout kökü açık",
+    "34": "KULLANICI ONAYI BEKLİYOR adayı; API nedeniyle kaydedilmedi"
+  },
+  "externalChangedExistingRows": [
+    {
+      "id": "8",
+      "statusBefore": "PLANLANDI",
+      "statusAfter": "PLANLANDI",
+      "titleBefore": "Kısa doktrine uygun rastgele isimler (#5)",
+      "titleAfter": "Üretken özgün kök + **geniş, çeşitli doktrinsel unvan havuzları**; iki kelimeli kısa isimler ([#5](https://github.com/sarsiss12-dot/Star/issues/5))"
+    }
+  ],
+  "existingOutOfScopeStatusesUnchanged": true
+}

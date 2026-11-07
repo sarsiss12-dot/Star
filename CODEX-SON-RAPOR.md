@@ -1,12 +1,14 @@
 # Son Codex raporu
 
-- Faz **BETA-P0.1 — beş kritik oyun görevi**, dal `codex/stars-beta-p01-critical`; yerel hedefli düzeltmeler teslim, genel beta yayın onayı yok.
-- [Sonuç raporu](reports/codex/BETA-P01-SONUC.md) · [#33 durum önerileri](reports/codex/BETA-P01-GOREV-DURUMLARI.md) · [İki cihaz kabul planı](reports/codex/BETA-P01-KABUL-PLANI.md).
-- Main doğrulaması `4296ad2d43fedce6264020b3761f50f1839fd836` (MP4); çalışma başlangıcı BETA0 `d307864edbc2ab9ca4347e5d065640e150279411`. Önceki MP/UI/Save8 kazanımlarını korumak için devam dalı taban alındı. PR tabanı `codex/stars-beta0-stability`.
-- Kod teslimi `66e1a10cd464b6d4df27fb1252f12890d79b21b8` — GitHub uzak dalında doğrulandı; nihai rapor commit SHA'sı sohbet/GitHub geçmişinde.
-- #1 eski panel sahipliği kökü kanıtlandı; SP3/0 ve iki insan MP2/0, son SP tekrar3/0 PASS. #34 sabit savaş kimliği/native4/0/ayna3/0/gerçek dokunma1/0; mevcut olmayan tarihsel güç/cephe verisi üretilmedi. #3 çift oy/eski kimlik kökleri; çekirdek13/0, iki insan tek dokunma/bekleme/ACK/kopma PASS. #4 bitiş nedeni ve #21 insan ambargo sahipliği5/0+5/0 PASS.
-- Yeni regresyon PASS: N9/0, dolu R0–R4+misafir UI6/0, MP75 6/0, eski Save8 sınır19/0, p6 MP paket/legacy oy3/0, MP62 13/0, MP64 news4/0, MP4 core14/0, PERF1 4/0, PERF2 5/0, MP86 cache3/0, eski savaş UI34/0.
-- FAIL'ler korunur: tam MP73 4/4 (ikinci oda KATIL timeout ve bağımlı B2–B4); özel iki insan kritik koşusu2/1 (A1 mp6Conn timeout, iki hedef vaka PASS); ilk haber fikstürü ve iki tanı düzenek hatası. Bu testler kesin çözülmüş sayılmadı. Orijinal Playwright hataları yeni yardımcıyla kaydedilir.
-- Oyun96h10p7 / PWA stars-v96h10p7 / MP8.9b2 / Save8v8 / paket4. Önceki p6 paket4 için dar uyumluluk; eski kayıt silinmez. Yeni opened alanı isteğe bağlıdır; tüm eski/hatalı dünya ile bayt eşitliği iddiası yok, RNG/AI strateji kodu değişmedi.
-- Deterministik ZIP SHA256 `1bfa5fddbaacd0e281796f99292c6d0ddd78962f7cd3943a9b1ea79efa3a7673`, CRC32 `44c4a49f`,779126 bayt; manifest/CRC/iki üretim PASS.
-- Render/fiziksel Android/gerçek LAN NOT RUN. Main/deploy/restart/rebase/force-push yok. #33 yazma Forbidden; hiçbir görev TAMAMLANDI yapılmadı. PR: **BLOKE: tek taslak PR denemesi GitHub GraphQL Forbidden ile reddedildi; PR oluşturulmadı.** [Karşılaştır/PR oluştur](https://github.com/sarsiss12-dot/Star/compare/codex/stars-beta0-stability...codex/stars-beta-p01-critical?expand=1).
+- Faz: **BETA-P0.2 — yerel Konsey/haber kabulü teslim edildi; tarihsel dokunma kökü açık, genel beta yayın onayı yok.**
+- Rapor: [BETA-P02-SONUC](reports/codex/BETA-P02-SONUC.md).
+- Dal: `codex/stars-beta-p02-mp-acceptance`; PR tabanı `codex/stars-beta-p01-critical`.
+- Başlangıç: `71b282ec2972b0872f207449d23006b88d1315f0`.
+- Doğrulanmış kod/test ve uzak HEAD: `d8c162914b3c7e460c70e50a8a7b80f789f18e3d`; rapor commit'i bundan sonradır, nihai SHA teslim mesajındadır.
+- Yeni taslak PR tek deneme **Forbidden**, oluşmadı. [Karşılaştırma](https://github.com/sarsiss12-dot/Star/compare/codex/stars-beta-p01-critical...codex/stars-beta-p02-mp-acceptance?expand=1).
+- Son temiz MP73 **8/0**, P01 özel regresyonu **4/0**, MP75 **6/0**, MP8 N **9/0**, R0–R4+UI Scale **6/0**. Konsey14/0, haber gizliliği8/0, geri dönüş3/0; PERF1 4/0, PERF2 5/0, MP86 piksel3/0. Ara FAIL'ler raporda, silinmedi.
+- Save8v8/MP paket4/protokol1; eski p6/p7 uyumluluk4/0, Save8 sınırları19/0. Son oylama için mevcut council'e isteğe bağlı metadata eklenir; bütün dünyalarda P01 ile byte eşitliği iddiası yok. Salt haber sorgusu Save8/RNG eşitliğini korur.
+- Oyun96h10p8/PWA stars-v96h10p8/MP.8.9b3. Deterministik ZIP/hash için [RELEASE-VERIFIED](reports/codex/evidence/beta-p02/RELEASE-VERIFIED.json).
+- #33 yazımı API Forbidden. Gerçek durumda #3/#34 **TEST BEKLİYOR**; #1/#4/#21 **KULLANICI ONAYI BEKLİYOR**. Pano dış güncellemeyle39→40 oldu; yeni #40 ve genişletilen #8 geliştirilmedi. Hiçbir görev TAMAMLANDI yapılmadı.
+- **NOT RUN:** fiziksel Android, gerçek LAN/internet, canlı Render, Docker image build. Render/main/rebase/force-push yok.
+- Sonraki tek öncelik: hata veren gerçek lobi/dokunma akışını kayıtla hedefli kabul; kanıtsız üretim düzeltmesi yok.

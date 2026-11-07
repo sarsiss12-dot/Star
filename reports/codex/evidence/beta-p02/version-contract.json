@@ -1,0 +1,32 @@
+{
+  "status": "PASS",
+  "source": "mp73-acceptance/mp73-results.json: metrics.version",
+  "version": {
+    "mp": "MP.8.9b3",
+    "build": "96h10p8",
+    "files": {
+      "mp-core.js": "feabfddce573",
+      "relay.js": "73430a385477",
+      "mp1-host.js": "c8e2251d1811",
+      "join.js": "bc2732493741",
+      "mirror.js": "8162eea8af28",
+      "guest-stars.js": "727534446b38",
+      "mp71-dip.js": "4b7b5e64b5ba",
+      "mp7-setup.js": "4f8fef4ce1a9"
+    }
+  },
+  "allServedHashesMatchCurrentFiles": true,
+  "paths": {
+    "mp-core.js": "research/mp0/mp-core.js",
+    "relay.js": "research/mp1/server/relay.js",
+    "mp1-host.js": "research/mp1/client/mp1-host.js",
+    "join.js": "research/mp1/client/join.js",
+    "mirror.js": "research/mp6/mirror.js",
+    "guest-stars.js": "research/mp6/client/guest-stars.js",
+    "mp71-dip.js": "research/mp71/client/mp71-dip.js",
+    "mp7-setup.js": "research/mp7/client/mp7-setup.js"
+  },
+  "save8": 8,
+  "mpPackageVersion": 4,
+  "protocol": 1
+}
