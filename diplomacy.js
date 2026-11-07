@@ -198,7 +198,13 @@ function warLedgerSync(reason='observed',actor=null){
   // Eski kayıt ve declareWar dışındaki mevcut ayaklanma yolları:
   // gerçek başlangıç/katılım zinciri bilinmiyorsa açıkça kısmi kayıt.
   for(let a=0;a<G.emps.length;a++) for(let b=a+1;b<G.emps.length;b++)
-    if(warLedgerPair(a,b) && !warLedgerFind(a,b)) warLedgerOpen(a,b,null,true);
+    if(warLedgerPair(a,b) && !warLedgerFind(a,b)){
+      const f=warLedgerOpen(a,b,null,true);
+      if(!['legacy','load-observed'].includes(reason)){
+        f.entryKind='event';
+        warStartNotice(G.emps[a],G.emps[b]);
+      }
+    }
 }
 function warLedgerBattle(a,b,hitA,hitB,round=true){
   if(!warLedgerPair(a,b)) return;
@@ -247,6 +253,7 @@ function warNewsReport(viewer,id){
   for(const x of campaign)for(let i=0;i<x.sides.length;i++){const id=x.sides[i];if(known(id)&&!participants.some(p=>p.id===id))participants.push({id,role:x.roles?.[i]??i});}
   const actorMatch=/\|actor:(\d+)$/.exec(f.endReason||''),actor=actorMatch&&known(+actorMatch[1])?+actorMatch[1]:null;
   return {id:f.id,asOf:G.day,sides:f.sides.slice(),opened:f.legacy?null:f.opened,ended:f.ended,legacy:!!f.legacy,reason:String(f.endReason||'').split('|')[0],actor,
+    entryKind:f.entryKind||'event',campaign:f.campaign,sponsor:Number.isInteger(f.sponsor)&&known(f.sponsor)?f.sponsor:null,
     parties,participants,goals:(f.goals||[]).filter(g=>g.by===viewer.id).map(g=>({by:g.by,type:String(g.type),day:g.day,targets:(g.targets||[]).filter(seen)})),
     fronts:active?campaign.filter(x=>x.ended===null&&x.sides.every(known)&&(x.sides.includes(viewer.id)||x.sides.some(n=>intelOf(viewer,n)>=3))).map(x=>({id:x.id,sides:x.sides.slice(),opened:x.legacy?null:x.opened})):[],
     progress:(f.occupation||[]).filter(x=>mine>=0&&seen(x.sys)&&known(x.from)&&known(x.to)).map(x=>({sys:x.sys,planet:x.planet,from:x.from,to:x.to,day:x.day}))};
@@ -647,9 +654,10 @@ function warStartNotice(a,b,support=null){
   G.p.contact[foe.id]=true;foe.contact[G.p.id]=true;
   recordNews({category:'war',empires:[a.id,b.id],key:'war-front:'+f.id,title:'Savaş başladı',text:a.name+' → '+b.name,important:true});
   const root=(G.warLedger.fronts||[]).find(x=>x.id===f.campaign)||f;
-  if(root.playerNotified)return false;
-  root.playerNotified=true;f.playerNotified=true;
-  const entry=root.sides.includes(G.p.id)?root:f;
+  // One notice per actual pair/front, not one for the entire coalition.
+  if(f.playerNotified)return false;
+  f.playerNotified=true;
+  const entry=f;
   const data={attacker:entry.sides[0],defender:entry.sides[1],rootAttacker:root.sides[0],rootDefender:root.sides[1],
     front:entry.id,campaign:entry.campaign,reason:entry.entryKind||'declaration',sponsor:entry.sponsor??null,
     day:G.day,year:G.year,month:G.month};
@@ -681,7 +689,22 @@ function warMapConnections(){
 }
 
 /* ---------- diplomasi ---------- */
+/* A peace settles participation in an existing call, not the sponsor's other
+   wars. A new source front still permits a genuinely new obligation. IDs
+   disambiguate two events on the same game day; no new save field/RNG. */
+function warCallSettled(a,b,support){
+  if(!a||!b||!support||support.enemy!==b.id||!Number.isInteger(support.sponsor))return false;
+  if(!['vassal','overlord','federation'].includes(support.kind))return false; // fresh voluntary promises are explicit decisions
+  const source=warLedgerFind(support.sponsor,b.id);
+  if(!source)return false;
+  // Pre-ledger saves may still carry exact bilateral peace/source-war dates.
+  const since=G.emps[support.sponsor]?.warSince?.[b.id],peace=Math.max(a.peaceAt?.[b.id]??-1,b.peaceAt?.[a.id]??-1);
+  if(source.legacy&&Number.isFinite(since)&&since<=peace)return true;
+  return (G.warLedger?.fronts||[]).some(f=>f.ended!==null&&f.sides.includes(a.id)&&f.sides.includes(b.id)&&
+    (f.campaign===source.campaign||source.opened<f.ended||source.opened===f.ended&&source.id<=f.id));
+}
 function declareWar(a, b, support = null){
+  if(warCallSettled(a,b,support))return false;
   const access=warDeclarationAccess(a,b);
   if(!access.ok){if(a?.id===0)say(access.why,'war');return false;}
   const fedDefense = fedDefensiveWar(a,b);
@@ -899,7 +922,10 @@ function makePeace(a, b, reason=a?.ai?'ai-peace':'agreement', actor=a?.id??null)
   if (typeof facEvent === 'function'){ facEvent(a,'peace'); facEvent(b,'peace'); }
   a.rel[b.id] = Math.max(a.rel[b.id], -10);
   b.rel[a.id] = Math.max(b.rel[a.id], -10);
-  if (a.id === 0 || b.id === 0) say('Barış imzalandı — ' + (a.id===0?b.name:a.name), 'win');
+  if (a.id === G.p?.id || b.id === G.p?.id){
+    const rest=G.emps.filter(e=>e!==G.p&&!e.dead&&G.p.war[e.id]).map(e=>e.name);
+    say('Barış imzalandı — '+(a===G.p?b.name:a.name)+(rest.length?' · Savaş devam ediyor: '+rest.join(', '):' · Aktif savaş kalmadı'), 'win');
+  }
   return true;
 }
 /* ---------- ELÇİLER — FAZ 86D ----------
@@ -1398,7 +1424,7 @@ function applyItems(giver, taker, items){
         taker.luxGrant = taker.luxGrant || {};
         taker.luxGrant[it.k] = giver.id;
         break;
-      case 'peace': makePeace(giver, taker); break;
+      case 'peace': if(giver.war[taker.id]||taker.war[giver.id])makePeace(giver, taker); break;
       case 'nap':
         giver.nap = giver.nap || {}; taker.nap = taker.nap || {};
         giver.nap[taker.id] = G.day + 3600; taker.nap[giver.id] = G.day + 3600;
@@ -1411,10 +1437,7 @@ function applyItems(giver, taker, items){
       case 'ally':
         // ittifak savaşı sona erdirir — aksi hâlde müttefikler savaşta kalıyordu
         if (giver.war[taker.id] || taker.war[giver.id]){
-          giver.war[taker.id] = false; taker.war[giver.id] = false;
-          giver.peaceAt = giver.peaceAt || {}; taker.peaceAt = taker.peaceAt || {};
-          giver.peaceAt[taker.id] = G.day; taker.peaceAt[giver.id] = G.day;
-          if (typeof resolveProxyWars === 'function') resolveProxyWars(giver, taker);
+          makePeace(giver, taker);
         }
         recordNews({category:'politics',empires:[giver.id,taker.id],title:'İttifak kuruldu',text:giver.name+' ile '+taker.name+' ittifak imzaladı'});
         giver.ally[taker.id] = true; taker.ally[giver.id] = true;
@@ -1816,7 +1839,7 @@ function dealValidity(offer){
         }
         case 'tech': if (!veren.techs[it.id]) hata = 'teknoloji elinde değil'; else if(!researchAccess(alan,it.id).ok)hata=researchAccess(alan,it.id).why; break;
         case 'lux':  if (!(veren.luxOwn && veren.luxOwn[it.k])) hata = 'lüks mal elinde değil'; break;
-        case 'peace': if (!veren.war[alan.id]) hata = 'zaten savaşta değilsiniz'; break;
+        case 'peace': if (!veren.war[alan.id]) hata = 'zaten savaşta değilsiniz'; else if(!canPeace(veren,alan))hata='barış mümkün değil'; break;
         case 'ally': if (typeof canAlly === 'function' && !canAlly(veren, alan))
                        hata = 'ittifak mümkün değil'; break;
         case 'pact': {const gate=pactAccess(veren,alan);if(!gate.ok)hata=gate.why;break;}
@@ -1867,7 +1890,7 @@ function dealValidity(offer){
     ally:  !!a.ally[b.id]
   };
   for (const it of hepsi){
-    if (it.t === 'peace' || it.t === 'ally') plan.savas = false;
+    if (it.t === 'peace') plan.savas = false;
     if (it.t === 'pact') plan.pact = true;
     if (it.t === 'ally') plan.ally = true;
   }
@@ -1883,6 +1906,7 @@ function dealValidity(offer){
           'Ticaret anlaşması: savaş sürerken imzalanamaz — pakete barış ekle');
         break;
       case 'ally':
+        if (plan.savas) planHata('İttifak: savaş sürerken imzalanamaz — pakete barış ekle');
         if (typeof canAlly === 'function' && !canAlly(a, b) && !plan.savas)
           {/* zaten madde bazlı kontrolde yakalandı */}
         break;

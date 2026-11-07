@@ -129,7 +129,7 @@ function build(meId,o={}){
     const row={...J(r),empires:(r.empires||[]).map(x=>({id:pi(x.id),name:x.name}))};
     const id=+(/^war-(?:front|end):(\d+)$/.exec(r.key||'')?.[1]||0),f=id&&(G.warLedger?.fronts||[]).find(x=>x.id===id);
     const report=f&&warNewsReport(me,f.id);
-    if(report)row.warStatus={...report,sides:report.sides.map(pi),actor:piN(report.actor),parties:report.parties.map(x=>({...x,id:pi(x.id)})),participants:report.participants.map(x=>({...x,id:pi(x.id)})),goals:report.goals.map(x=>({...x,by:pi(x.by)})),fronts:report.fronts.map(x=>({...x,sides:x.sides.map(pi)})),progress:report.progress.map(x=>({...x,from:pi(x.from),to:pi(x.to)}))};
+    if(report)row.warStatus={...report,sponsor:piN(report.sponsor),sides:report.sides.map(pi),actor:piN(report.actor),parties:report.parties.map(x=>({...x,id:pi(x.id)})),participants:report.participants.map(x=>({...x,id:pi(x.id)})),goals:report.goals.map(x=>({...x,by:pi(x.by)})),fronts:report.fronts.map(x=>({...x,sides:x.sides.map(pi)})),progress:report.progress.map(x=>({...x,from:pi(x.from),to:pi(x.to)}))};
     return row;
   }):[];
   const news={v:1,next:nw.reduce((n,r)=>Math.max(n,r.id+1),1),hiddenNext:1,records:nw,hidden:[]};

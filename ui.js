@@ -7343,7 +7343,9 @@ const UI = {
     }
     if(!warNoticeData(data))return;
     this.notify({kind:'warstart',data,ico:'⚔',cls:'war',pause:WAR_PAUSE_ON,
-      title:'SAVAŞA DAHİLSİN',sub:this.warNoticeName(data.attacker)+' → '+this.warNoticeName(data.defender),
+      title:'SAVAŞA DAHİLSİN',sub:this.warNoticeName(data.attacker)+' → '+this.warNoticeName(data.defender)+' · '+
+        ({federation:'Federasyon yükümlülüğü',overlord:'Senyörlük koruması',vassal:'Vasal çağrısı',promise:'Savaş taahhüdü',independence:'Bağımsızlık',independenceSupport:'Bağımsızlık desteği',event:'Oyun olayı (başlatma ayrıntısı kaydedilmemiş)'}[data.reason]||'Yeni savaş ilanı')+
+        (data.sponsor!==null?' · Çağıran: '+this.warNoticeName(data.sponsor):''),
       key:'war:'+data.front});
   },
   warStartOpen(d){

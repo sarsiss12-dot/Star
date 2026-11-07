@@ -5600,6 +5600,8 @@ function ensureCrisisEmpire(){
     c.contact[o.id] = true; o.contact[c.id] = true;
     c.rel[o.id] = -100; o.rel[c.id] = -100;
   }
+  for(const o of G.emps)if(o.id!==c.id&&!o.dead&&!o.wild)recordNews({category:'war',scope:'player',empires:[o.id,c.id],key:'crisis-war:'+c.id+':'+o.id,title:'Galaktik kriz savaşı',text:c.name+' sana saldırdı · Galaktik kriz',important:true});
+  if(typeof UI!=='undefined'&&UI.warDeclared)deferUI(UI.warDeclared.bind(UI),{id:c.id,name:c.name+' · Galaktik kriz saldırısı'});
   return c;
 }
 /* ═══════════════════════════════════════════════════════════════════
@@ -8429,7 +8431,7 @@ function forceRedraw(sebep){
    Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
    Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
 /* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */
-const BUILD_ID = '96h10p12';
+const BUILD_ID = '96h10p13';
 const DIAG_MAX = 40;
 const DIAG = [];
 function logDiag(tur, mesaj){

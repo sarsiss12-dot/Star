@@ -104,7 +104,7 @@ function validatePackage(input,o={}){
   if(!onlyKeys(pkg,KEYS)||KEYS.some(k=>!has(pkg,k)))return fail('fields');
   if(pkg.format!==PKG_FORMAT)return fail('format');
   if(pkg.mpVersion!==PKG_VERSION)return fail('version');
-  const build=has(o,'build')?o.build:(typeof BUILD_ID==='string'?BUILD_ID:null);if(pkg.build!==build&&!((build==='96h10p7'&&pkg.build==='96h10p6')||(build==='96h10p8'&&['96h10p6','96h10p7'].includes(pkg.build))||(build==='96h10p9'&&['96h10p6','96h10p7','96h10p8'].includes(pkg.build))||(build==='96h10p10'&&['96h10p6','96h10p7','96h10p8','96h10p9'].includes(pkg.build))||(build==='96h10p11'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10'].includes(pkg.build))||(build==='96h10p12'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11'].includes(pkg.build))))return fail('build'); // BETA-P0.1: explicit v8/package4 compatibility, all remaining checks still mandatory
+  const build=has(o,'build')?o.build:(typeof BUILD_ID==='string'?BUILD_ID:null);if(pkg.build!==build&&!((build==='96h10p7'&&pkg.build==='96h10p6')||(build==='96h10p8'&&['96h10p6','96h10p7'].includes(pkg.build))||(build==='96h10p9'&&['96h10p6','96h10p7','96h10p8'].includes(pkg.build))||(build==='96h10p10'&&['96h10p6','96h10p7','96h10p8','96h10p9'].includes(pkg.build))||(build==='96h10p11'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10'].includes(pkg.build))||(build==='96h10p12'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11'].includes(pkg.build))||(build==='96h10p13'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12'].includes(pkg.build))))return fail('build'); // BETA-P0.1: explicit v8/package4 compatibility, all remaining checks still mandatory
   if(typeof pkg.save8!=='string')return fail('fields');if(pkg.save8.length>MAX_SAVE8)return fail('too-big');
   if(!Number.isFinite(pkg.createdAt)||typeof pkg.saveId!=='string'||!/^s-[a-f0-9]{16}$/.test(pkg.saveId))return fail('fields');
   const I=pkg.integrity;if(!plain(I)||!onlyKeys(I,['alg','save8','body'])||I.alg!=='SHA-256'||!HEX(I.save8,64)||!HEX(I.body,64))return fail('integrity');
@@ -312,10 +312,10 @@ function createHost(opts){
   const warSeen=new Map();
   function warSweep(){
     for(const [eid] of S.slots){const e=G.emps[eid];if(!remoteHuman(e)||e.dead)continue;
-      const prev=warSeen.get(eid),cur=new Set(G.emps.filter(o=>o!==e&&!o.dead&&e.war[o.id]).map(o=>o.id)),nm=id=>e.contact&&e.contact[id]?G.emps[id].name:'Bilinmeyen devlet';
-      if(prev){for(const id of cur)if(!prev.has(id)){const d=e.warDefense&&e.warDefense[id],why=e.warCause&&e.warCause[id];
+      const prev=warSeen.get(eid),cur=new Map(G.emps.filter(o=>o!==e&&!o.dead&&e.war[o.id]).map(o=>[o.id,warLedgerFind(eid,o.id)?.id||e.warSince?.[o.id]||0])),nm=id=>e.contact&&e.contact[id]?G.emps[id].name:'Bilinmeyen devlet';
+      if(prev){for(const [id,front] of cur)if(!prev.has(id)||prev.get(id)!==front){const d=e.warDefense&&e.warDefense[id],why=e.warCause&&e.warCause[id];
           note(eid,'SAVAŞ BAŞLADI — '+nm(id)+(d&&d.defensive?' (savunma)':'')+(why?' · '+why:''),'war');}
-        for(const id of prev)if(!cur.has(id))note(eid,'Savaş sona erdi — '+nm(id),'win');}
+        for(const [id] of prev)if(!cur.has(id))note(eid,'Savaş sona erdi — '+nm(id)+(cur.size?' · Diğer aktif cepheler ('+cur.size+'): '+[...cur.keys()].map(nm).join(', '):' · Aktif savaş kalmadı'),'win');}
       warSeen.set(eid,cur);}
   }
   /* ═══ MP.6.3 — ortak savaş paylaşımı: görünüm (yalnız katılımcıya), taslak özeti, bildirim taraması ═══
@@ -1008,8 +1008,13 @@ function createHost(opts){
     if(!dipParty(a)||!dipParty(b)||!a.ai)return none;
     const o={from:a.id,to:b.id,give:(give||[]).map(x=>({...x})),want:(want||[]).map(x=>({...x})),born:G.day,expires:G.day+dipLife()};
     const q=dealQuote(o);if(!q.ok)return {...none,karar:'gecersiz',why:(q.reasons&&q.reasons[0])||''};
-    const sig=offerSignature(o),pend=D.offers.filter(r=>r.status==='pending'&&r.from===a.id&&r.to===b.id);
-    if(pend.some(r=>offerSignature(dipOffer(r))===sig)||pend.length>=3)return {...none,karar:'bekle',why:'İnsan oyuncuda bekleyen teklif var'};
+    const terms=x=>canon([x.give.map(canon).sort(),x.want.map(canon).sort()]),sig=terms(o),pend=D.offers.filter(r=>r.status==='pending'&&r.from===a.id&&r.to===b.id);
+    if(pend.some(r=>terms(dipOffer(r))===sig)||pend.length>=3)return {...none,karar:'bekle',why:'İnsan oyuncuda bekleyen teklif var'};
+    // Only AI-origin rejections use the existing SP refusal window. Human
+    // negotiations remain unrestricted; terms/order, not timestamps, identify a repeat.
+    if(D.offers.some(r=>r.by==='ai'&&r.status==='rejected'&&r.from===a.id&&r.to===b.id&&
+      G.day<(r.finished??r.born)+PLAYER_OFFER_REFUSAL_DAYS&&terms(dipOffer(r))===sig))
+      return {...none,karar:'bekle',why:'Reddedilen aynı AI önerisi yeniden değerlendirme bekliyor'};
     dipRecord(a,b,o,null,'ai','pending');stats.aiOffers=(stats.aiOffers||0)+1;dipNotify(b.id,'Yeni teklif — '+a.name,'sci');
     return {tur:1,karar:'bekle',uygulandi:false,why:'İnsan oyuncunun kararı bekleniyor',karsi:null};
   }
