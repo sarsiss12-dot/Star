@@ -645,14 +645,14 @@ function settlementApply(e,id){
 /* 94D.1: edge-triggered notices, never synthesized from loaded war flags.
    Ledger mutations participate in existing deal rollback. UI remains deferred. */
 function warStartNotice(a,b,support=null){
-  if(!a||!b||!G.p||!a.war[b.id]||!b.war[a.id]||!([a.id,b.id].includes(G.p.id)))return false;
+  if(!a||!b||!a.war[b.id]||!b.war[a.id])return false;
   const f=warLedgerFind(a.id,b.id)||warLedgerOpen(a.id,b.id,support);
   if(!f)return false;
-  const foe=a.id===G.p.id?b:a;
-  // A declaration is explicit diplomatic contact, not discovery of any location.
-  G.p.contact=G.p.contact||{};foe.contact=foe.contact||{};
-  G.p.contact[foe.id]=true;foe.contact[G.p.id]=true;
+  // Remote humans deserve the same explicit declaration contact as the host.
+  // This reveals identity, never any location, fleet, stock or intelligence.
+  if(a.ai===false||b.ai===false){a.contact=a.contact||{};b.contact=b.contact||{};a.contact[b.id]=true;b.contact[a.id]=true;}
   recordNews({category:'war',empires:[a.id,b.id],key:'war-front:'+f.id,title:'Savaş başladı',text:a.name+' → '+b.name,important:true});
+  if(!G.p||!([a.id,b.id].includes(G.p.id)))return false;
   const root=(G.warLedger.fronts||[]).find(x=>x.id===f.campaign)||f;
   // One notice per actual pair/front, not one for the entire coalition.
   if(f.playerNotified)return false;
