@@ -880,7 +880,9 @@ const LOOKS = {
   akuatik :{n:'Akuatik',    d:'Solungaçlı, derin su kökenli'}
 };
 const EMP_COLORS = ['#4aa8d8','#ff5f6d','#96b13a','#8b7bff','#f2d452','#ff9b3d',
-                    '#c98d4a','#6ff2c8','#e069c0','#5fd0b0','#ff7b5c','#a9d4ff'];
+                    '#c98d4a','#6ff2c8','#e069c0','#5fd0b0','#ff7b5c','#a9d4ff',
+                    '#e6b8a2','#b8de6f','#c7b4ff','#fff0a6','#78a060','#b45a8d',
+                    '#dcbf7e','#53c2ed','#c36842','#a4b2c8','#e198ff','#d5e6cf'];
 
 /* ---------- ARMA STİLLERİ ---------- */
 const SIGILS = {
@@ -3119,6 +3121,9 @@ function fleetHasRole(f, r){ return f.ships.some(s => SHIPS[s.c].rol === r); }
 function fleetGroup(f){
   return f.ships.some(s => SHIPS[s.c].dmg > 0) ? 'sav' : 'sivil';
 }
+/* Session-only order identity: never written into canonical Save8 or RNG. */
+const SHIP_ORDER_TOKENS=new WeakMap();let SHIP_ORDER_TOKEN_SEQ=0;
+function shipOrderToken(q){let token=SHIP_ORDER_TOKENS.get(q);if(!token){token='order:'+(++SHIP_ORDER_TOKEN_SEQ).toString(36);SHIP_ORDER_TOKENS.set(q,token);}return token;}
 /* belirli bir gemi türünü filodan ayırıp yeni filo kurar */
 function splitType(e, f, cls, count){
   if (!f || f.sys < 0) return null;
@@ -7370,7 +7375,7 @@ const NOTE_CODEC = {
 /* Kimliği bir imparatorluğa bağlı, sade sayısal payload'lar */
 const NOTE_EMP_KINDS  = ['peace','cncnew','wardec','sqOffer'];
 /* Serbest sayısal payload (imparatorluk referansı DEĞİL) */
-const NOTE_NUM_KINDS  = ['fedfound','fedfoundResult','crisis','criswarn','fedvote','crisend'];
+const NOTE_NUM_KINDS  = ['fedagenda','fedfound','fedfoundResult','crisis','criswarn','fedvote','crisend'];
 /* Sade dize payload */
 const NOTE_STR_KINDS  = ['cncvote','facdem','faccoup'];
 
@@ -7937,7 +7942,7 @@ function serialize(){
 function rebuildDerivedStateAfterLoad(deferRender){
   normalizeIdentities();
   if(typeof restoreAIStrategicPlans==='function')restoreAIStrategicPlans();
-  if(typeof fedNormalize==='function')for(const f of G.feds||[])fedNormalize(f);
+  if(typeof fedNormalize==='function')for(const f of G.feds||[]){fedNormalize(f);fedRestoreAgenda(f);}
   /* 1. İmparatorluk geçici önbellekleri */
   for (const x of G.emps){
     x._prof = null;
@@ -8492,7 +8497,7 @@ function forceRedraw(sebep){
    Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
    Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
 /* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */
-const BUILD_ID = '96h10p15';
+const BUILD_ID = '96h10p16';
 const DIAG_MAX = 40;
 const DIAG = [];
 function logDiag(tur, mesaj){

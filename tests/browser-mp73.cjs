@@ -118,16 +118,16 @@ let relay,px,base,tls,bH,bB,bC;
     if(process.env.SETUP0_AUDIT){metrics.setup0=[];for(const [who,p] of [['host',H],['guest',Bp]]){await wait(p,()=>G.cfg.pirates===false);const row=await p.evaluate(()=>({cfg:typeof MP1Join==='undefined'?CFG.pirates:null,game:G.cfg.pirates,nests:(G.nests||[]).length,pirateFleets:G.fleets.filter(f=>f.name==='Korsan Muhafızı'||f.name==='Korsan Akıncısı').length,ownName:G.p.name,ownId:G.p.id}));assert.equal(row.game,false);assert.equal(row.nests+row.pirateFleets,0);metrics.setup0.push({who,...row});}assert.equal(metrics.setup0[0].cfg,false);}
     for(const p of [H,Bp])assert.equal(await p.evaluate(()=>!!document.getElementById('map')&&!document.getElementById('game').classList.contains('hidden')),true);
     const v=await Bp.evaluate(async()=>{const r=await fetch('/mp/version',{cache:'no-store'});return {s:r.status,j:await r.json(),b:BUILD_ID,line:MP1View.verLine(),chip:(document.getElementById('mp1Mini')||{}).title||''};});
-    metrics.version=v.j;assert.equal(v.s,200);assert.match(v.j.mp,/^MP\.8\.9b10$/);assert.equal(v.j.build,v.b);assert.match(v.line,new RegExp('MP\\.8\\.9b10 · oyun '+BUILD+'$'));   /* PERF.2: build manifestten (sabit liste yerine) */assert.match(v.chip,/MP\.8\.9b10/);
+    metrics.version=v.j;assert.equal(v.s,200);assert.match(v.j.mp,/^MP\.8\.9b11$/);assert.equal(v.j.build,v.b);assert.match(v.line,new RegExp('MP\\.8\\.9b11 · oyun '+BUILD+'$'));   /* PERF.2: build manifestten (sabit liste yerine) */assert.match(v.chip,/MP\.8\.9b11/);
     assert.equal(Object.values(v.j.files).every(x=>/^[0-9a-f]{12}$/.test(x)),true);
     await wait(Bp,()=>MP6Stars.S.unsupported&&MP6Stars.S.unsupported.length>0);metrics.unsupported=await Bp.evaluate(()=>MP6Stars.S.unsupported);
     for(const a of ['bill','billPick','billTarget','cncFound','cncJoin','cncLeave','cncNo','cncPane','cncYes','permanent','reform','throneBuild','veto','bribe','blackmail','bmGo','fundSep','panoptRetarget','revolt','revoltConfirm','whisperBlame','whisperGo','whisperMenu','whisperPick','devour','devourConfirm','colFire'])
       assert(!metrics.unsupported.includes(a),a+' still unsupported');
     assert.equal(metrics.unsupported.length,18,JSON.stringify(metrics.unsupported));
     await tap(Bp,'#mp6Conn');await wait(Bp,()=>document.getElementById('mpVer')&&document.getElementById('mpVer').offsetParent);   // telefonda görünür tanı satırı
-    metrics.guestDiag=await Bp.evaluate(()=>document.getElementById('mpVer').textContent);assert.match(metrics.guestDiag,new RegExp('MP\\.8\\.9b10 · oyun '+BUILD+'( · misafir)? · host bağlı .*son hata: ')   /* MP.8: rol + ayna + son komut eklendi */);
+    metrics.guestDiag=await Bp.evaluate(()=>document.getElementById('mpVer').textContent);assert.match(metrics.guestDiag,new RegExp('MP\\.8\\.9b11 · oyun '+BUILD+'( · misafir)? · host bağlı .*son hata: ')   /* MP.8: rol + ayna + son komut eklendi */);
     assert.doesNotMatch(metrics.guestDiag,/tok|key|anahtar/i);await shot(Bp,'a1-guest-diag');await tap(Bp,'#mp6Conn');
-    assert.match(await H.evaluate(()=>{MP1Host.miniOpen=true;try{document.querySelector('[data-g="toggle"]')&&0;}catch{}return MP1View.verLine();}),/MP\.8\.9b10/);
+    assert.match(await H.evaluate(()=>{MP1Host.miniOpen=true;try{document.querySelector('[data-g="toggle"]')&&0;}catch{}return MP1View.verLine();}),/MP\.8\.9b11/);
   });
   if(process.env.BETA02_TOUCH_REPEAT)await test('T02 mp6Conn sınırlı gerçek dokunma tekrarı',async()=>{
     for(let i=0;i<Number(process.env.BETA02_TOUCH_REPEAT);i++){
@@ -246,6 +246,7 @@ let relay,px,base,tls,bH,bB,bC;
   });
   if(process.env.FEDFOUND0_THREE==='1')await test('FD3 üç insan, misafir kurucu, özel davet ret/iptal, yeniden bağlantı ve karma oy',async()=>{metrics.fd3=await require('./helpers/beta-fed-found0-three.cjs')(H2,B2,C2,out);});
   if(process.env.MPP0==='1')await test('P0 katılımcı görüş, sağlık, özel kararlar, rota ve görsel hareket',async()=>{metrics.p0=await require('./helpers/mp-p0-guest-browser.cjs')(H2,B2,C2,out);});
+  if(process.env.BOARD1==='1')await test('BD1 federasyon FIFO, savaş yardımı, geri çekme ve ayrı aday rızası',async()=>{metrics.board1=await require('./helpers/beta-board1-browser.cjs')(H2,B2,C2,out);});
   await test('sayfa hataları yok',async()=>{assert.deepEqual(errors,[]);});
 }catch(e){console.log('FATAL',e);results.push({name:'FATAL',status:'FAIL',error:String(e&&e.stack||e)});}
 finally{fs.writeFileSync(path.join(out,'mp73-results.json'),JSON.stringify({results,errors,metrics,pass:results.filter(r=>r.status==='PASS').length,fail:results.filter(r=>r.status==='FAIL').length},null,2));

@@ -104,7 +104,7 @@ function validatePackage(input,o={}){
   if(!onlyKeys(pkg,KEYS)||KEYS.some(k=>!has(pkg,k)))return fail('fields');
   if(pkg.format!==PKG_FORMAT)return fail('format');
   if(pkg.mpVersion!==PKG_VERSION)return fail('version');
-  const build=has(o,'build')?o.build:(typeof BUILD_ID==='string'?BUILD_ID:null);if(pkg.build!==build&&!((build==='96h10p7'&&pkg.build==='96h10p6')||(build==='96h10p8'&&['96h10p6','96h10p7'].includes(pkg.build))||(build==='96h10p9'&&['96h10p6','96h10p7','96h10p8'].includes(pkg.build))||(build==='96h10p10'&&['96h10p6','96h10p7','96h10p8','96h10p9'].includes(pkg.build))||(build==='96h10p11'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10'].includes(pkg.build))||(build==='96h10p12'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11'].includes(pkg.build))||(build==='96h10p13'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12'].includes(pkg.build))||(build==='96h10p14'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13'].includes(pkg.build))||(build==='96h10p15'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14'].includes(pkg.build))))return fail('build'); // BETA-P0.1: explicit v8/package4 compatibility, all remaining checks still mandatory
+  const build=has(o,'build')?o.build:(typeof BUILD_ID==='string'?BUILD_ID:null);if(pkg.build!==build&&!((build==='96h10p7'&&pkg.build==='96h10p6')||(build==='96h10p8'&&['96h10p6','96h10p7'].includes(pkg.build))||(build==='96h10p9'&&['96h10p6','96h10p7','96h10p8'].includes(pkg.build))||(build==='96h10p10'&&['96h10p6','96h10p7','96h10p8','96h10p9'].includes(pkg.build))||(build==='96h10p11'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10'].includes(pkg.build))||(build==='96h10p12'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11'].includes(pkg.build))||(build==='96h10p13'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12'].includes(pkg.build))||(build==='96h10p14'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13'].includes(pkg.build))||(build==='96h10p15'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14'].includes(pkg.build))||(build==='96h10p16'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15'].includes(pkg.build))))return fail('build'); // BETA-P0.1: explicit v8/package4 compatibility, all remaining checks still mandatory
   if(typeof pkg.save8!=='string')return fail('fields');if(pkg.save8.length>MAX_SAVE8)return fail('too-big');
   if(!Number.isFinite(pkg.createdAt)||typeof pkg.saveId!=='string'||!/^s-[a-f0-9]{16}$/.test(pkg.saveId))return fail('fields');
   const I=pkg.integrity;if(!plain(I)||!onlyKeys(I,['alg','save8','body'])||I.alg!=='SHA-256'||!HEX(I.save8,64)||!HEX(I.body,64))return fail('integrity');
@@ -607,7 +607,7 @@ function createHost(opts){
         claimColony(f,sys,pl.i);if(!orderMove(f,sys.id))return false;f.ord={t:'kol',s:sys.id,p:pl.i};return true;}},
     /* MP.6.1 — ortak oyun hızı: tek yetkili host. Değişiklik herkese yayınlanır (speedOut); aynı hız 'same' (bildirim yok). */
     speed:{keys:['kind','value'],check:c=>int(c.value,0,SPEED_MAX),locate:()=>({}),
-      why(e,at,c){if(sharedSpeed().want===c.value)return 'same';const t=now(),a=(speedRate.get(e.id)||[]).filter(x=>t-x<SPEED_WINDOW);
+      why(e,at,c){if(sharedSpeed().want===c.value&&!sharedSpeed().reason)return 'same';const t=now(),a=(speedRate.get(e.id)||[]).filter(x=>t-x<SPEED_WINDOW);
         if(a.length>=SPEED_BURST||a.length&&t-a[a.length-1]<SPEED_GAP)return 'rate-limited';return null;},
       roots:()=>[],
       apply(e,at,c){const t=now();speedRate.set(e.id,[...(speedRate.get(e.id)||[]).filter(x=>t-x<SPEED_WINDOW),t]);setSpeed(c.value);speedOut(e.id,curActor,false);return true;}},
@@ -721,13 +721,14 @@ function createHost(opts){
       roots:()=>[],apply:(e,at,c)=>proposeFedMotion(e,'admit',{target:c.target})},
     fedReply:{keys:['kind','fed','action'],check:c=>int(c.fed,0,2147483647)&&['accept','reject'].includes(c.action),
       locate(e,c){const f=fedOf(c.fed),inv=f&&f.invites&&f.invites[e.id];return inv?{f,inv}:{err:'no-invite'};},   // davet edilmeyene davet "yok"
-      why(e,{f,inv},c){if(inv.expires<=G.day)return 'expired';if(c.action==='reject')return null;if(inv.terms!==fedCharterKey(f))return 'changed';const g=fedAdmissionGate(f,e);return g.ok?null:polWhy(g);},
+      why(e,{f,inv},c){if(inv.expires<=G.day)return 'expired';if(c.action==='reject')return null;if(inv.terms!==fedCharterKey(f))return 'changed';const g=fedAdmissionGate(f,e,inv.admission==='vote');return g.ok?null:polWhy(g);},
       roots:()=>[],apply:(e,{f},c)=>c.action==='accept'?acceptFedInvite(e,f.id):rejectFedInvite(e,f.id)},
     fedVote:{keys:['kind','fed','token','yes'],check:c=>int(c.fed,0,2147483647)&&typeof c.token==='string'&&c.token.length<=40&&typeof c.yes==='boolean',
       locate(e,c){const f=fedOf(c.fed);return f&&f.members.includes(e.id)?{f}:{err:'no-fed'};},       // üye olmayana federasyon "yok"
       why(e,{f},c){const v=f.vote;if(!v)return 'no-vote';if(fedVoteToken(v)!==c.token)return 'stale';if(Number.isFinite(v.expires)&&G.day>=v.expires)return 'expired';
         return fedVoteCounts(f).waiting.includes(e.id)?null:'voted';},
       roots:()=>[],apply:(e,{f},c)=>castFedVote(e,f.id,c.token,c.yes)},
+    fedAgendaWithdraw:{keys:['kind','fed','id'],check:c=>int(c.fed,0,2147483647)&&int(c.id,1,2147483647),locate:()=>({}),why:()=>null,roots:()=>[],apply:(e,at,c)=>withdrawFedAgenda(e,c.fed,c.id)},
     fedLeave:{keys:['kind'],check:()=>true,locate:()=>({}),why:e=>findFed(e)?null:'no-fed',roots:()=>[],apply:e=>leaveFederation(e)},
     fedLaw:{keys:['kind','law','repeal'],check:c=>typeof c.law==='string'&&(Object.hasOwn(FED_LAWS,c.law)||Object.hasOwn(FED_INNER_LAWS,c.law))&&(c.repeal===undefined||typeof c.repeal==='boolean'),
       locate:()=>({}),why(e,at,c){if(!findFed(e))return 'no-fed';const q=canFedLaw(e,c.law,!!c.repeal);return q.ok?null:polWhy(q);},
@@ -795,9 +796,9 @@ function createHost(opts){
       why(e,at,c){if(c.target&&c.target.fleet!==undefined){const t=G.fleets.find(x=>x.id===c.target.fleet);if(!t||t.e!==e.id)return 'not-owner';}return null;},roots:()=>[],
       apply:(e,{f},c)=>shipmentAction(e,f,c.action,c.target?{...c.target}:undefined)},
     shipCancel:{say:'actor',keys:['kind','sys','orders','all'],check:c=>int(c.sys,0,G.sys.length-1)&&Array.isArray(c.orders)&&c.orders.length>=1&&c.orders.length<=64&&
-        c.orders.every(i=>int(i,0,255))&&new Set(c.orders).size===c.orders.length&&typeof c.all==='boolean',
+        c.orders.every(t=>typeof t==='string'&&/^order:[0-9a-z]{1,16}$/.test(t))&&new Set(c.orders).size===c.orders.length&&typeof c.all==='boolean',
       locate(e,c){const sys=G.sys[c.sys],mineQ=(sys.queue||[]).filter(q=>q.e===e.id);if(!mineQ.length)return {err:'not-owner'};
-        const orders=c.orders.map(i=>mineQ[i]);return orders.every(Boolean)?{sys,orders}:{err:'stale'};},why:()=>null,roots:()=>[],
+        const orders=c.orders.map(token=>mineQ.find(q=>shipOrderToken(q)===token));return orders.every(Boolean)?{sys,orders}:{err:'stale'};},why:()=>null,roots:()=>[],
       apply:(e,{sys,orders},c)=>cancelShipOrders(e,sys,orders,c.all)},
     rally:{say:'actor',keys:['kind','sys','target'],check:c=>int(c.sys,0,G.sys.length-1)&&(c.target===null||int(c.target,0,G.sys.length-1)),
       locate(e,c){const sys=G.sys[c.sys];return sys.owner===e.id?{sys}:{err:'not-owner'};},why:()=>null,roots:()=>[],apply:(e,{sys},c)=>setRally(e,sys,c.target)},

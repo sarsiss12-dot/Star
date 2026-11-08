@@ -2,13 +2,14 @@
 /* 95E — references to existing diplomatic actions, never a second engine. */
 const DiplomaticInbox = {
   historyLimit:256, pendingLimit:512,
-  types:{fedfound:'Federasyon kuruluş daveti',fedfoundResult:'Federasyon kuruluş sonucu',vassal:'Vasallık sözleşmesi / bağımsızlık',fedrequest:'Federasyon üyelik sonucu',aideal:'Diplomatik teklif',pact:'İstihbarat anlaşması',submit:'Vasallık / himaye talebi',peace:'Barış teklifi',sqOffer:'Statüko barışı',fedvote:'Federasyon oylaması',invite:'Federasyona katılım daveti',decision:'Ortak savaş kararı'},
+  types:{fedagenda:'Federasyon gündem sonucu',fedfound:'Federasyon kuruluş daveti',fedfoundResult:'Federasyon kuruluş sonucu',vassal:'Vasallık sözleşmesi / bağımsızlık',fedrequest:'Federasyon üyelik sonucu',aideal:'Diplomatik teklif',pact:'İstihbarat anlaşması',submit:'Vasallık / himaye talebi',peace:'Barış teklifi',sqOffer:'Statüko barışı',fedvote:'Federasyon oylaması',invite:'Federasyona katılım daveti',decision:'Ortak savaş kararı'},
   states:{countered:'Karşı teklif gönderildi',pending:'Bekliyor',accepted:'Kabul edildi',rejected:'Reddedildi',expired:'Süresi doldu',invalid:'Geçersizleşti'},
   empty(){return {v:1,next:1,records:[]};},
   state(){return G.diplomaticInbox||(G.diplomaticInbox=this.empty());},
   supported(kind){return Object.hasOwn(this.types,kind);},
   capture(note){
     if(!this.supported(note.kind)||!G.p)return null;
+    if(note.kind==='fedagenda')return this.state().records.find(r=>r.key===note.key)||null;
     const st=this.state(),kind=note.kind,data=note.data;
     const from=kind==='fedfound'||kind==='fedfoundResult'?fedFoundGet(data)?.by:kind==='aideal'||kind==='pact'||kind==='submit'?data?.from:kind==='fedvote'?fedOf(data)?.vote?.proposer:data;
     if(!Number.isInteger(from)||!G.emps[from])return null;
@@ -60,6 +61,7 @@ const DiplomaticInbox = {
     if(!r||r.status!=='pending')return no('Teklif sonuçlandı',true);
     if(G.day>=r.expires)return no('Teklifin süresi doldu',true,'expired');
     const o=G.emps[r.from];if(!G.p||G.p.dead||!o||o.dead)return no('Taraf artık mevcut değil',true);
+    if(r.kind==='fedagenda')return no('Bilgilendirme — Federasyon gündem kuyruğunu incele',true,'accepted');
     if(r.kind==='fedfoundResult')return no('Kuruluş sonucu — karar Federasyon bölümünde',true,'accepted');
     if(r.kind==='fedfound'){const p=fedFoundGet(r.note?.data);return p&&p.members.includes(G.p.id)&&p.by!==G.p.id&&p.status==='pending'&&p.expires>G.day&&p.replies[G.p.id]?.status==='pending'?{ok:true}:no('Davet sonuçlandı veya geçersiz',true,p?.replies[G.p.id]?.status==='accepted'?'accepted':'invalid');}
     const offer=this.deal(r);if(offer){const q=dealQuote(offer);return {ok:q.ok,why:q.reasons?.join(' · ')||'',quote:q};}
@@ -78,7 +80,7 @@ const DiplomaticInbox = {
     if(r.kind==='invite'){
       const inv=f.invites?.[G.p.id];if(!inv||String(inv.expires)!==r.token)return no('Davet geri çekildi veya sonuçlandı',true,f.members.includes(G.p.id)?'accepted':'invalid');
       if(inv.terms!==fedCharterKey(f))return no('Davetin yükümlülükleri değişti',true);
-      return fedAdmissionGate(f,G.p);
+      return fedAdmissionGate(f,G.p,inv.admission==='vote');
     }
     if(r.kind==='fedvote'){
       if(!f.vote||fedVoteToken(f.vote)!==r.token)return no('Oylama kapandı',true);

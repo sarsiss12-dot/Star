@@ -33,7 +33,7 @@ function build(meId,o={}){
   const sys=G.sys.map(s=>{
     const k=known.has(s.id),v=visible.has(s.id),surv=s.surv.includes(meId),mine=s.owner===meId;
     const x={i:s.id,x:s.x,y:s.y,n:k?s.name:'',st:k?Math.max(0,STARS.indexOf(s.star)):0,p:[],
-      l:s.lanes.filter(n=>k||known.has(n)),o:v||mine?piN(s.owner):k?piN(knowledge.owners[s.id]??-1):-1,sv:surv?[0]:[],se:k?[0]:[],q:mine?(J(s.queue)||[]).map(x=>x&&Number.isInteger(x.e)?{...x,e:piN(x.e)}:x):[],
+      l:s.lanes.filter(n=>k||known.has(n)),o:v||mine?piN(s.owner):k?piN(knowledge.owners[s.id]??-1):-1,sv:surv?[0]:[],se:k?[0]:[],q:mine?(s.queue||[]).map(x=>x&&Number.isInteger(x.e)?{...J(x),e:piN(x.e),...(x.e===meId?{_mpOrderToken:shipOrderToken(x)}:{})}:J(x)):[],
       an:surv?!!s.anom:false,ak:surv?s.anomK:'sinyal',d:v||mine?(s.def||0):0,pu:k?!!s.pulsar:false,nb:k?!!s.nebulaS:false};   // gizli alanlar motorun varsayılan biçiminde
     if(surv||mine)x.p=s.planets.map(p=>{
       const q={i:p.i,t:p.t,dep:p.dep,sz:p.sz,seed:p.seed,name:p.name,owner:-1};
@@ -107,7 +107,8 @@ function build(meId,o={}){
   const vote=v=>v&&{id:v.id,kind:v.kind,law:v.law,motion:v.motion,type:v.type,field:v.field,value:v.value,repeal:!!v.repeal,opened:v.opened,expires:v.expires,
     proposer:piN(v.proposer),target:piN(v.target),sponsor:piN(v.sponsor),yes:(v.yes||[]).map(piN),no:(v.no||[]).map(piN),...(Array.isArray(v.eligible)?{eligible:v.eligible.map(piN)}:{}),
     ...(v.ballotSnapshot?{ballotSnapshot:{mode:v.ballotSnapshot.mode,modern:!!v.ballotSnapshot.modern,source:v.ballotSnapshot.source,weights:remapKeys(v.ballotSnapshot.weights||{})}}:{})};
-  const inv=x=>x&&{expires:x.expires,by:piN(x.by),terms:x.terms};
+  const agendaRow=r=>({...J(r),by:piN(r.by),options:{...J(r.options),...(Number.isInteger(r.options.target)?{target:piN(r.options.target)}:{}),...(Number.isInteger(r.options.sponsor)?{sponsor:piN(r.options.sponsor)}:{}),...(Number.isInteger(r.options.applicant)?{applicant:piN(r.options.applicant)}:{})}});
+  const inv=x=>x&&{expires:x.expires,by:piN(x.by),terms:x.terms,...(x.admission==='vote'?{admission:'vote'}:{})};
   const feds=(G.feds||[]).filter(f=>f.members.some(m=>m===meId||contacted(m))||(f.invites&&f.invites[meId])).map(f=>{
     const member=f.members.includes(meId),invites={},adm={};
     if(member)for(const [id,x] of Object.entries(f.invites||{}))invites[piN(+id)]=inv(x);else if(f.invites&&f.invites[meId])invites[0]=inv(f.invites[meId]);
@@ -116,6 +117,7 @@ function build(meId,o={}){
       yes:Array.isArray(f.lastVote.yes)?f.lastVote.yes.map(piN):f.lastVote.yes,no:Array.isArray(f.lastVote.no)?f.lastVote.no.map(piN):f.lastVote.no,abstain:Array.isArray(f.lastVote.abstain)?f.lastVote.abstain.map(piN):f.lastVote.abstain}:null;
     return {id:f.id,name:f.name,type:f.type,charter:J(f.charter),leader:piN(f.leader),founder:piN(f.founder),members:f.members.map(piN),laws:J(f.laws)||{},fund:{ala:0,ene:0},treasury:0,
       founded:f.founded,typeSince:f.typeSince,dutySince:{defense:0,offense:0},invites,decisions:member?decs(f.decisions):{},dutyConsent:{},cohesion:f.cohesion,nextVote:f.nextVote,politicsVersion:f.politicsVersion,
+      ...(f.agenda&&(member||f.agenda.items.some(r=>r.by===meId)||f.agenda.history.some(r=>r.by===meId))?{agenda:{v:1,next:f.agenda.next,items:f.agenda.items.filter(r=>member||r.by===meId).map(r=>({...agendaRow(r),position:f.agenda.items.indexOf(r)+1})),history:f.agenda.history.filter(r=>member||r.by===meId).map(agendaRow)}}:{}),
       vote:member?vote(f.vote)||null:null,lastVote:lv,...(Object.keys(adm).length?{admissionResults:adm}:{})};});
   /* MP.6.4: federasyonun kabul edilmiş savaş kararları üyeye (gerçek STARS "uygula" düğmesi); kimlikler numaralandırılır */
   function decs(d){const o={};for(const [k,x] of Object.entries(d||{})){if(!x)continue;o[k]={...J(x),sponsor:piN(x.sponsor),target:piN(x.target),by:piN(x.by),approved:(x.approved||[]).map(piN),...(Array.isArray(x.joined)?{joined:x.joined.map(piN)}:{}),...(Array.isArray(x.blocked)?{blocked:x.blocked.map(b=>({...b,id:piN(b.id)}))}:{})};}return o;}

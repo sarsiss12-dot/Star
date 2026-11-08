@@ -1299,6 +1299,7 @@ const UI = {
       }
       case 'fleetFilter': this.fleetFilter=String(x);this.keepScroll=true;this.refresh();break;
       case 'fedTab': this.fedTab=String(x);this.openFed();break;
+      case 'borderDiplo': if(this.diploKnown(+x)){this.openDiplo();this.selectDiploIdentity(+x);}break;
       case 'fedMember': this.closeModal();this.openDiplo();this.selectDiploIdentity(+x);break;
       case 'fedLeave': this.confirmFedLeave();break;
       case 'fedMotion': {
@@ -1306,6 +1307,7 @@ const UI = {
         const opts=kind==='reform'?{type:value}:kind==='charter'?{field:value,value:extra}:kind==='joinWar'?{target:+value,sponsor:+extra}:{target:+value};
         const r=proposeFedMotion(G.p,kind,opts);if(!r.ok)say(r.why,'war');this.openFed();break;
       }
+      case 'fedAgendaWithdraw': {const [fid,id]=String(x).split(':').map(Number);const r=withdrawFedAgenda(G.p,fid,id);if(!r.ok)say(r.why,'war');this.openFed();break;}
       case 'fedInviteAccept': {const r=acceptFedInvite(G.p,+x);if(!r.ok)say(r.why,'war');this.openFed();break;}
       case 'fedInviteReject': {rejectFedInvite(G.p,+x);this.openFed();break;}
       case 'fedExecute': {const [fid,id]=String(x).split(':');const r=executeFedDecision(G.p,+fid,id);if(!r.ok)say(r.why,'war');this.openFed();break;}
@@ -2048,7 +2050,7 @@ const UI = {
   surfaceInput(){
     if(this._surfaceBound)return;this._surfaceBound=true;this._surfaceDirty=new WeakSet();
     this._surfacePointers=new Set();
-    const relevant=t=>t?.closest?.('#diploPane,#panel,#modal,#inbox');
+    const relevant=t=>t?.closest?.('#diploPane,#panel,#modal,#inbox,#seltag');
     document.addEventListener('pointerdown',e=>{if(relevant(e.target))this._surfacePointers.add(e.pointerId);},{passive:true});
     const end=e=>{this._surfacePointers.delete(e.pointerId);this._surfaceUntil=Date.now()+220;};
     document.addEventListener('pointerup',end,{passive:true});document.addEventListener('pointercancel',end,{passive:true});
@@ -2175,10 +2177,16 @@ const UI = {
     if (!View.sel){ t.classList.add('hidden'); return; }
     const f = View.sel;
     t.classList.remove('hidden');
-    t.innerHTML = `<span>${esc(f.name)} · ${isArmed(f)?fmt(fleetPower(f))+' güç':f.ships.length+' gemi'}</span>` +
+    const html = `<span>${esc(f.name)} · ${isArmed(f)?fmt(fleetPower(f))+' güç':f.ships.length+' gemi'}</span>` +
       `<button data-a="route" class="${View.route?'on':''}">${View.route?(View.routed?'+DURAK':'HEDEF SEÇ'):'ROTA'}</button>` +
       `<button data-a="stop">DUR</button>` +
       (f.sys >= 0 ? `<button data-a="selsys" data-x="${f.sys}">SİSTEM ›</button>` : '');
+    this.surfaceRender(t,html,'selection:'+f.id,true);
+    // Screen rectangles and UI-local CSS pixels must use the same zoom conversion.
+    const zoom=this.getUIScale?this.getUIScale().effective/100:1,side=$('sidebar'),sr=side?.getBoundingClientRect(),pod=$('timepod')?.getBoundingClientRect();
+    const right=side&&!side.classList.contains('off')&&sr?.width>0?Math.min(window.innerWidth,sr.left):window.innerWidth;
+    t.style.left=(Math.max(1,right)/2/zoom)+'px';t.style.maxWidth=(Math.max(1,right-20)/zoom)+'px';
+    t.style.bottom=(pod?.height>0?window.innerHeight-pod.top+6:6)/zoom+'px';
   },
 
   /* =============== SİSTEM =============== */
@@ -2193,6 +2201,10 @@ const UI = {
     let h = this.jointPanel(null,'system')+`<div class="ph">${esc(s.name)}</div>`;
     h += `<div class="row"><span>Yıldız</span><b style="color:${s.star.c}">${s.star.n}</b></div>`;
     h += `<div class="row"><span>Sistem hâkimiyeti</span><b style="color:${ownerInfo?ownerInfo.col:'#7d90ad'}">${ownerInfo?esc(ownerInfo.name):pSeen(s)?'Sahipsiz':'Bilinmiyor'}</b></div>`;
+    if(s.owner<0&&pSeen(s)){
+      const neighbors=[...new Set(s.lanes.map(id=>{const n=G.sys[id];return pVis(n)?n.owner:G.p.mapOwners?.[id]??-1;}))].filter(id=>id>=0&&id!==e.id&&e.contact[id]&&G.emps[id]&&!G.emps[id].dead);
+      if(neighbors.length)h+='<div class="mini">Bilinen sınır komşuları</div>'+neighbors.map(id=>`<button class="abtn" data-a="borderDiplo" data-x="${id}">DİPLOMASİ · ${esc(this.diploName(id))}</button>`).join('');
+    }
     const colonyOwners = territoryColonyOwners(s);
     if (colonyOwners.some(o=>o.id!==s.owner)){
       h += `<div class="box"><div class="bt">KARMA HÂKİMİYET</div>
@@ -2717,28 +2729,29 @@ const UI = {
       }
 
 
+      let shipQueueHtml='';
       if (s.queue.length){
         /* ═══ FAZ 60: SÜREKLİ ÜRETİM DÖNGÜSÜ ═══ */
         if (typeof loopBuildStatus === 'function' && s.owner === 0){
           const lb = s.loopBuild;
           const st = lb ? loopBuildStatus(e, s) : null;
-          h += `<div class="ph">🔁 SÜREKLİ ÜRETİM</div>`;
+          shipQueueHtml += `<div class="ph">🔁 SÜREKLİ ÜRETİM</div>`;
           if (!lb){
-            h += `<div class="mini">Bir gemi tipi seç — tersane kaynak
+            shipQueueHtml += `<div class="mini">Bir gemi tipi seç — tersane kaynak
               yettiği sürece durmadan üretsin. Kasa
               ${typeof LOOP_ALA_FLOOR !== 'undefined' ? LOOP_ALA_FLOOR : 400}
               alaşımın altına inerse otomatik duraklar.</div>`;
             const uygun = Object.keys(SHIPS).filter(k =>
               !SHIPS[k].crisisOnly && shipBuildAccess(e, k).ok);
-            h += `<div class="act2">`;
+            shipQueueHtml += `<div class="act2">`;
             uygun.slice(0, 6).forEach(k => {
-              h += `<button class="abtn" data-a="loopSet" data-x="${s.id}:${k}">
+              shipQueueHtml += `<button class="abtn" data-a="loopSet" data-x="${s.id}:${k}">
                 🔁 ${esc(SHIPS[k].n)}</button>`;
             });
-            h += `</div>`;
+            shipQueueHtml += `</div>`;
           } else {
             const renk = st && st.dur ? '#ff9b3d' : '#65e08a';
-            h += `<div class="box" style="border-color:${renk}">
+            shipQueueHtml += `<div class="box" style="border-color:${renk}">
               <div class="bt"><span>🔁 ${esc(SHIPS[lb] ? SHIPS[lb].n : lb)}</span>
                 <span class="tag ${st && st.dur ? 'e' : 'p'}">${
                   st && st.dur ? 'DURAKLADI' : 'ÜRETİYOR'}</span></div>
@@ -2753,18 +2766,18 @@ const UI = {
 
         const slots = yardCount(s);
         const totDays = Math.ceil(s.queue.reduce((a,q)=>a+q.left,0));
-        h += `<div class="row"><span>Tersane yuvası</span><b style="color:#6ff2c8">${slots} paralel</b></div>`;
-        h += `<div class="row"><span>Kuyrukta</span><b>${s.queue.length} gemi</b></div>`;
-        h += `<button class="abtn" data-a="shipCancelAll" data-x="${s.id}">✕ BU TERSANEDEKİ TÜM SİPARİŞLERİ İPTAL ET</button>`;
-        h += `<div class="qbox">`;
+        shipQueueHtml += `<div class="row"><span>Tersane yuvası</span><b style="color:#6ff2c8">${slots} paralel</b></div>`;
+        shipQueueHtml += `<div class="row"><span>Kuyrukta</span><b>${s.queue.length} gemi</b></div>`;
+        shipQueueHtml += `<button class="abtn" data-a="shipCancelAll" data-x="${s.id}">✕ BU TERSANEDEKİ TÜM SİPARİŞLERİ İPTAL ET</button>`;
+        shipQueueHtml += `<div class="qbox">`;
         this._shipCancelRefs=new Map();
         const active = activeShipQueue(s);
         s.queue.forEach((q,i)=>{
           const access = shipBuildAccess(G.emps[q.e], q.cls);
           const act = active.includes(i);
-          const cancelToken=String(this._shipCancelSeq=(this._shipCancelSeq||0)+1);
+          const cancelToken=shipOrderToken(q);
           this._shipCancelRefs.set(cancelToken,{sys:s,order:q});
-          h += `<div class="box" style="${act?'border-color:#ff9b3d':''}">
+          shipQueueHtml += `<div class="box" style="${act?'border-color:#ff9b3d':''}">
                 <div class="bt"><span>${act?'▸ ':''}${SHIPS[q.cls].n}</span>
                 <span class="mono" style="color:${act?'#ff9b3d':'#7d90ad'}">${Math.ceil(q.left)}g</span>
                 ${q.e===G.p.id?`<button class="sBtn shipCancelBtn" data-a="shipCancel" data-x="${cancelToken}" aria-label="${esc(SHIPS[q.cls].n)} siparişini iptal et">✕</button>`:''}</div>
@@ -2772,7 +2785,7 @@ const UI = {
                 <div class="mini">${esc(this.queueDeliveryText(s,q))}</div>
                 ${!access.ok ? '<div class="mini">BEKLİYOR · '+esc(access.why)+'</div>' : ''}</div>`;
         });
-        h += `</div>`;
+        shipQueueHtml += `</div>`;
       }
       const shipments=G.fleets.filter(f=>f.e===0&&f.ships.length&&f.shipment?.origin===s.id);
       if(shipments.length)h+='<details class="dcDetails"><summary>Bu tersanenin sevkiyatları · '+shipments.length+'</summary>'+shipments.map(f=>this.shipmentRow(f)).join('')+'</details>';
@@ -2788,7 +2801,7 @@ const UI = {
              `<span style="font-size:9px">${locked?'<span style="color:#7d90ad">KİLİTLİ</span>':
                Object.entries(cost).map(([r,v])=>`<span style="color:${e.res[r]>=v?RES[r].c:'#ff5f6d'}">${RES[r].ico}${v}</span>`).join(' ')}</span></button>`;
       }
-      h += `</div>`;
+      h += `</div>`+shipQueueHtml;
     } else if (s.owner === 0){
       h += `<div class="mini" style="margin-top:8px">Gemi inşası için bu sistemde Tersane gerekli.</div>`;
     }
@@ -3789,6 +3802,25 @@ const UI = {
     h+=`<div class="mini" role="status">${esc(q.why||'Seçilen şartlar davete uygun')} · ${q.cost} ◈</div><button class="abtn pri" data-a="fedFoundStart" ${q.ok?'':'disabled'}>KURULUŞ DAVETLERİNİ GÖNDER</button>`;
     return h;
   },
+  fedAgendaList(f){
+    const a=f.agenda,rows=a?.items||[],status={active:'Oylama açıldı',resolved:'Sonuçlandı',invalid:'Geçersiz',expired:'Süresi doldu',withdrawn:'Geri çekildi'};
+    const title=r=>fedAgendaLabel(r),who=id=>id===G.p.id?'Sen':this.diploName(id);
+    let h='<div class="ph">GÜNDEM KUYRUĞU</div><p class="mini">Tek aktif oylama; FIFO sıra. En fazla 12 öneri, kişi başına 3. Bekleme sınırı 360 gün. Kuyrukta bedel kesilmez; sıra geldiğinde koşullar ve bütçe yeniden denetlenir. Savaş kararı ayrıca yetkili uygulama gerektirir.</p>';
+    h+=rows.map((r,i)=>`<div class="box"><b>${r.position||i+1}. ${esc(title(r))}</b><div class="mini">Öneren: ${esc(who(r.by))}${Number.isInteger(r.options.target)?' · Hedef: '+esc(this.diploName(r.options.target)):''} · ${Math.max(0,Math.ceil(r.expires-G.day))} gün · Açılış bedeli ${r.kind==='law'?fedLawCost(r.law,!!r.options.repeal):r.kind==='war'?0:r.kind==='application'?60:FED_MOTIONS[r.options.kind]?.c||0} ◈</div>${r.by===G.p.id?`<button class="abtn" data-a="fedAgendaWithdraw" data-x="${f.id}:${r.id}">ÖNERİYİ GERİ ÇEK</button>`:''}</div>`).join('')||'<div class="mini">Bekleyen öneri yok.</div>';
+    for(const r of (a?.history||[]).slice(-8).reverse())h+=`<div class="mini">${esc(title(r))} · ${esc(status[r.status]||r.status)} · ${esc(r.why||'')}</div>`;
+    return h;
+  },
+  fedAgendaCards(){
+    if(!G.p)return;for(const f of G.feds||[]){if(!f.members.includes(G.p.id)&&!f.agenda?.history.some(r=>r.by===G.p.id))continue;
+      for(const r of f.agenda?.history||[]){if(r.by!==G.p.id)continue;const key='agenda:'+f.id+':'+r.id+':'+r.status;
+        if(DiplomaticInbox.state().records.some(n=>n.key===key))continue;
+        const title='FEDERASYON GÜNDEMİ · '+fedAgendaLabel(r),sub=r.why||r.status;
+        DiplomaticInbox.source('fedagenda',key,r.by,f.id,String(r.id),G.day+180,title,sub);
+        const rec=DiplomaticInbox.state().records.find(n=>n.key===key);if(rec){rec.status='accepted';rec.finished=r.updated??G.day;}
+        if(!this.fedResultSeen(key))this.notify({kind:'fedagenda',data:f.id,key,title,sub,pause:false,ico:'🏛'});
+      }
+    }
+  },
   fedResultSeen(key){this._fedResultsSeen=this._fedResultsSeen||new Set();const seen=this._fedResultsSeen.has(key);this._fedResultsSeen.add(key);if(this._fedResultsSeen.size>256)this._fedResultsSeen.delete(this._fedResultsSeen.values().next().value);return seen;},
   fedFoundCards(){
     if(this._fedFoundSync||!G.p)return;if(this._fedNoticeWorld!==G.emps){this._fedNoticeWorld=G.emps;this._fedFoundDismissed=new Set();this._fedResultsSeen=new Set();}this._fedFoundSync=true;
@@ -3826,6 +3858,7 @@ const UI = {
       const allies=G.emps.filter(o=>o!==e&&!o.dead&&!o.wild&&e.ally[o.id]);
       h+=this.fedFoundPanel();
       for(const invitation of G.feds||[]){const inv=invitation.invites?.[e.id];if(!inv||inv.expires<=G.day)continue;h+=`<div class="box"><b>${esc(invitation.name)} · ${fedType(invitation).n}</b><div class="mini">${fedType(invitation).d} Oy rejimi: ${esc(FED_BALLOTS[fedBallot(invitation)]?.n||fedBallot(invitation))}. ${fedDutyText(invitation)} Mevcut yasalar: ${Object.keys(invitation.laws||{}).map(k=>esc((FED_LAWS[k]||FED_INNER_LAWS[k]||{}).n||k)).join(', ')||'yok'}. ${Math.ceil(inv.expires-G.day)} gün kaldı.</div><button class="abtn" data-a="fedInviteAccept" data-x="${invitation.id}">YÜKÜMLÜLÜKLERİ KABUL ET VE KATIL</button><button class="abtn" data-a="fedInviteReject" data-x="${invitation.id}">REDDET</button></div>`;}
+      for(const other of G.feds||[])if(other.agenda?.items.some(r=>r.by===e.id))h+=this.fedAgendaList(other);
       const cands = G.emps.filter(o=>!o.dead && !o.wild && o.id!==0 && !e.ally[o.id] &&
                                      e.contact[o.id] && !e.war[o.id] && canAlly(e,o));
       if (cands.length){
@@ -3844,7 +3877,7 @@ const UI = {
       }
     } else {
       if(tab==='general'){
-      h+=`<div class="envRow"><span>${esc(f.name)} · ${esc(fedType(f).n)}</span><b>${f.members.length} üye</b></div><div class="mini">Başkan: ${esc(G.emps[f.leader]?.name||'—')} · Oy rejimi: ${esc(FED_BALLOTS[fedBallot(f)]?.n||'—')}</div><p class="mini">${esc(fedDutyText(f))}</p><div class="mini">Anayasa: üyelik ${fedCharter(f).admission==='allies'?'ortak müttefikler':'temaslı bağımsız adaylar'} · savunma ${fedCharter(f).defense==='auto'?'otomatik':'oylama'} · saldırı ${fedCharter(f).offense==='auto'?'onaylı taahhüt':'oylama'}.</div><button class="abtn" data-a="fedTab" data-x="votes">${f.vote?'BEKLEYEN OYLAMAYI İNCELE':'Oylamalar ve son karar'}</button>`;
+      h+=`<div class="envRow"><span>${esc(f.name)} · ${esc(fedType(f).n)}</span><b>${f.members.length} üye</b></div><div class="mini">Başkan: ${esc(G.emps[f.leader]?.name||'—')} · Oy rejimi: ${esc(FED_BALLOTS[fedBallot(f)]?.n||'—')}</div><p class="mini">${esc(fedDutyText(f))}</p><div class="mini">Üyelik: üye oylaması ve adayın ayrı rızası; önce bütün üyelerle ittifak gerekmez. Eski doğrudan davet koşulu: ${fedCharter(f).admission==='allies'?'ortak müttefikler':'temaslı bağımsız adaylar'} · savunma ${fedCharter(f).defense==='auto'?'otomatik':'oylama'} · saldırı ${fedCharter(f).offense==='auto'?'onaylı taahhüt':'oylama'}.</div><button class="abtn" data-a="fedTab" data-x="votes">${f.vote?'BEKLEYEN OYLAMAYI İNCELE':'Oylamalar ve son karar'}</button>`;
       const enemies=G.emps.filter(o=>!o.dead&&!o.wild&&f.members.some(id=>G.emps[id]?.war[o.id]));
       h+=`<div class="ph">AKTİF SAVAŞLAR</div><div class="mini">${enemies.map(o=>esc(this.diploName(o.id))).join(', ')||'Yok'}</div>`;
       /* ═══ FAZ 50: FEDERAL FON PANELİ ═══ */
@@ -3892,7 +3925,7 @@ const UI = {
       h+='</tbody></table>';
 
       h += `<div class="ph">İÇ YASA ÖNERİLERİ · UYUM %${fedCohesion(f)}</div>
-        <div class="mini">Öneri bedeli bir kez ödenir, ret halinde iade edilmez. Oyunu ayrıca kullanırsın.
+        <div class="mini">Öneri bedeli oylama açılırken bir kez ödenir, ret halinde iade edilmez. Kuyrukta bedel kesilmez. Oyunu ayrıca kullanırsın.
         Süre 90 gün; kullanılmayan oy çekimserdir. Eşitlikte öneri reddedilir.</div>`;
       for (const category of [...new Set(Object.values(FED_INNER_LAWS).map(L=>L.cat))]){
         const keys = Object.keys(FED_INNER_LAWS).filter(k=>FED_INNER_LAWS[k].cat===category);
@@ -3920,6 +3953,7 @@ const UI = {
         h += '</details>';
       }
       if(tab==='votes'){
+      h+=this.fedAgendaList(f);
       if(typeof ArchiveUI!=='undefined'&&ArchiveUI.returnRecord?.world===G.emps)h+='<button class="abtn" data-a="inboxReturn">KARARA GERİ DÖN</button>';
       h+=this.fedRepresentation(f);
       if (f.lastVote){
@@ -6905,7 +6939,7 @@ const UI = {
       </div>`;
     });
 
-    h += `<div class="ph">AYLIK BİLANÇO</div>`;
+    h += `<div class="ph">AYLIK BİLANÇO</div><details><summary>Enerji ve alaşım yetersizliği</summary><p class="mini">Enerji stoku 0 altına inmez. Net üretim negatifse borç birikmez; aylık kapanışta karşılanamayan enerji tüketimi enerji krizini başlatır. Kriz sürerken istikrar hedefi 22 puan düşer ve nüfus artışı durur. Bu bir aylık hedef etkisidir, anında 22 nüfus/istikrar kaybı değildir.</p><p class="mini">Alaşım stoku da 0 altına inmez. Otomatik donanma üretimi ${NAVY_SLEEP_ALA} alaşımın altında uyur; manuel sipariş ve takviye gerçek kaynak koşullarına tabidir. Önceden ödenmiş siparişin bedeli yeniden kesilmez. İkmalsizlik ve radyasyon kaynaklı gemi kayıpları ayrı mekaniklerdir.</p></details>`;
     for (const k of ['min','ene','yiy','ala','ara','etk']){
       const v = e.inc[k]||0;
       h += `<div class="row"><span><span class="flag" style="background:${RES[k].c}"></span> ${RES[k].n}</span>
@@ -7420,7 +7454,7 @@ const UI = {
     this.drawInbox();
   },
   drawInbox(){
-    if(this._deferInbox)return;this.fedFoundCards();
+    if(this._deferInbox)return;this.fedFoundCards();this.fedAgendaCards();
     G.inbox=(G.inbox||[]).filter(n=>{if(!['invite','fedvote','fedfound','decision'].includes(n.kind))return true;if(n.kind==='fedvote'){const f=fedOf(n.data);if(!f?.vote||n.key!=='fed:'+f.id+':'+fedVoteToken(f.vote)||!fedVoteCounts(f).waiting.includes(G.p.id))return false;}const r=DiplomaticInbox.state().records.find(r=>r.key===n.key||r.note?.key===n.key||r.note?.uid===n.uid);return !r||r.status==='pending'&&!DiplomaticInbox.gate(r).terminal;});
     const box = $('inbox');
     if (!box) return;
@@ -7622,6 +7656,7 @@ const UI = {
       case 'pact':    this.pactOpen(it.data); break;   // FAZ 68
       case 'submit':  this.submitOpen(it.data); break; // FAZ 71
       case 'border':  this.borderOpen(G.emps[it.data.id], it.data.len); break;
+      case 'fedagenda': this.fedTab='votes';this.openFed();break;
       case 'fedvote': this.fedVoteOpen(it.data); break;
       case 'wardec':  this.warDecOpen(it.data); break;
       case 'warstart': this.warStartOpen(it.data); break;
@@ -8742,9 +8777,9 @@ function renderSetup(){
     h += `</div>`;
 
     h += `<div class="ph">RENK</div><div class="grid g4">`;
-    EMP_COLORS.forEach(col=>{
+    EMP_COLORS.forEach((col,index)=>{
       const on = (c.color === col);
-      h += `<button class="opt ${on?'on':''}" data-a="color" data-x="${encodeURIComponent(col)}"
+      h += `<button class="opt ${on?'on':''}" data-a="color" data-x="${encodeURIComponent(col)}" aria-label="Devlet rengi ${index+1}: ${col}" title="${col}"
         style="border-color:${on?col:''}"><span style="color:${col}">████</span></button>`;
     });
     h += `</div></div>`;
@@ -9497,7 +9532,7 @@ const TITLE = {
     effective=small()?100:preferred;
     root.style.setProperty('--ui-scale',effective/100);
     root.toggleAttribute('data-ui-scaled',effective!==100);
-    controls();UI.positionToolMenus();
+    controls();UI.positionToolMenus();UI.seltag();
   }
   UI.getUIScale=()=>({preferred,effective,limited:small()});
   UI.setUIScale=value=>{

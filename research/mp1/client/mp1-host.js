@@ -215,6 +215,8 @@ function closeRoom(){
   API.ws=null;API.host=null;API.lobby=null;API.code=null;API.key=null;API.started=false;go(null,true);
 }
 /* ---------- 4. oyun içi: yayın, keşif belleği, host paneli ---------- */
+// Political UI commits also publish while paused; no simulation day is needed.
+const fedChange0=fedChange;fedChange=function(){const r=fedChange0.apply(this,arguments);if(r?.ok&&API.host&&API.started)API.dirty=true;return r;};
 const month=monthTick;
 monthTick=function(){const r=month.apply(this,arguments);if(API.host&&API.started){API.host.observeHumans();API.dirty=true;autosave();}return r;};
 setInterval(()=>{
@@ -254,7 +256,7 @@ const DEC_KINDS=new Set(['sqOffer','cncnew','cncvote','fedvote','chain','event',
 let pzQuiet=0,pzRaw=null;const PZS={suppressed:0,applied:0,decisions:0};
 const mpOn=()=>!!(PZ&&API.host&&API.started);
 function decisionPause(){try{return localStorage.getItem('mp63:decisionPause')==='pause';}catch{return false;}}
-const isDecision=n=>!!(n&&(n.pause||DEC_KINDS.has(n.kind)));
+const isDecision=n=>!!(n&&!WAR_KINDS.has(n.kind)&&(n.pause||DEC_KINDS.has(n.kind)));
 function decCap(n){if(WAR_KINDS.has(n.kind))return typeof WAR_PAUSE_ON!=='undefined'&&WAR_PAUSE_ON?0:1;return decisionPause()?0:1;}
 const inInbox=uid=>(typeof G!=='undefined'&&G.inbox||[]).some(n=>n.uid===uid);
 const modalOpen=()=>{const m=doc.getElementById('modal');return !!(m&&!m.classList.contains('hidden'));};

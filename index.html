@@ -762,6 +762,10 @@ body.fauxFull canvas#map{width:100vw !important;height:100dvh !important}
   display:flex;gap:10px;align-items:center;white-space:nowrap}
 #seltag button{color:var(--ember);font-family:var(--mono);font-size:10px;
   border:1px solid var(--line);padding:3px 7px}
+#seltag{max-width:calc(100vw - var(--sb) - 26px)}
+#seltag>span{min-width:0;overflow:hidden;text-overflow:ellipsis}
+#seltag button{flex-shrink:0}
+#seltag [data-a="route"],#panel [data-a="route"]{min-width:76px;min-height:44px;padding:8px 10px}
 #seltag button.on{border-color:var(--ember);background:#241a10}
 
 /* ---------- PANEL İÇERİĞİ ---------- */

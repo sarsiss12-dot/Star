@@ -77,7 +77,7 @@ function restoreObservation(m){
 /* ---- 1. eylem kapısı ---- */
 /* Yalnız görünüm/gezinme (dünyayı değiştirmeyen) eylemler yerelde çalışır. MP.6.1: arşiv/gelen kutusu görünümleri, anlaşma,
    vasallık ve federasyon taslak ekranları da görünümdür (gönderim motor işlevinde MP komutuna çevrilir). */
-const VIEW=new Set(['noteOptions','noteChoice','activeWars','activeWarDiplo','noteQuick','noteSwipe','tab','full','cameraReset','cameraFocus','home','fit','topStatus','diploPane','globalPane','advClose','advShow','advNever','planetFold',
+const VIEW=new Set(['borderDiplo','noteOptions','noteChoice','activeWars','activeWarDiplo','noteQuick','noteSwipe','tab','full','cameraReset','cameraFocus','home','fit','topStatus','diploPane','globalPane','advClose','advShow','advNever','planetFold',
   'radarTog','fleetNamesToggle','grpTog','fedLinksToggle','allyLinksToggle','warLinksToggle','logiToggle','mapMode','bgTog','diploView','diploPick',
   'diploRelation','diploNav','diploFilter','bmPick','bmCancel','vsCurrent','vsInspect','vsType','vsEdit','vsBack','fleetFilter','fedTab','fedMember',
   'closeFed','closeDeal','closeMarket','closeDiplo','memTog','intelView','intelGroup','upInfo','crisInfo','selsys','selfleet','route','fedPane',
@@ -89,7 +89,7 @@ const VIEW=new Set(['noteOptions','noteChoice','activeWars','activeWarDiplo','no
   'fedVoteYes','fedVoteNo','fedVoteNow','fedFoundType','fedFoundSelect','fedFoundStart','fedFoundReply','fedFoundCancel','fedFoundFinish',
   /* MP.6.1 — motor işlevi MP komutuna çevrilen gerçek düğmeler */
   'sendhere','ship','focus','cancelBuild','demolish','foundFed','fedDipInvite','fedDipRequest','fedMotion','fedInviteAccept','fedInviteReject',
-  'fedLawPropose','fedLawRepeal','fedLeave','vsSend','vsReply','dealSend',
+  'fedLawPropose','fedLawRepeal','fedAgendaWithdraw','fedLeave','vsSend','vsReply','dealSend',
   /* MP.6.2 — savaş ve ikili siyaset: gerçek pencere açılır, son çağrı MP komutuna iner */
   'war','ally','pact','dealPact','endAlliance','unpact','embargo','unembargo','gift',
   /* MP.6.3 — ortak savaş paylaşımı penceresi (taslak/oy/uygula düğmeleri _hook; son çağrılar MP komutuna iner) */
@@ -238,6 +238,7 @@ function gate(){
   wrap('rejectFedInvite',(o,e,fid)=>mine(e)?r({kind:'fedReply',fed:+fid,action:'reject'}):NOT_MP);
   wrap('castFedVote',(o,e,fid,token,yes)=>mine(e)?r({kind:'fedVote',fed:+fid,token:String(token),yes:!!yes}):NOT_MP);
   wrap('leaveFederation',(o,e)=>mine(e)?r({kind:'fedLeave'}):NOT_MP);
+  wrap('withdrawFedAgenda',(o,e,fid,id)=>mine(e)?r({kind:'fedAgendaWithdraw',fed:fid,id}):NOT_MP);
   wrap('proposeFedLaw',(o,e,law,repeal)=>mine(e)?r({kind:'fedLaw',law:String(law),repeal:!!repeal}):NOT_MP);
   wrap('vassalOffer',(o,e,other,mode,type,terms)=>mine(e)&&other?r({kind:'vassalOffer',to:real(other.id),mode:String(mode),type:String(type),terms:vasTerms(type,terms)}):NOT_MP);
   wrap('vassalReply',(o,actor,sub,id,round,action,terms)=>mine(actor)?r({kind:'vassalReply',sub:real(+sub),id:String(id),round:round|0,action:String(action),...(action==='counter'?{terms:vasTerms(null,terms)}:{})}):NOT_MP);
@@ -362,8 +363,9 @@ function gate(){
   wrap('reinforceFleet',(o,e,f)=>mine(e)&&f?r({kind:'reinforce',fleet:f.id}):NOT_MP);
   wrap('shipmentAction',(o,e,f,action,target)=>{if(!mine(e)||!f)return NOT_MP;const t=target&&target.fleet!==undefined?{fleet:+target.fleet}:target&&Number.isInteger(target.sys)?{sys:target.sys}:undefined;
     return r({kind:'shipment',fleet:f.id,action:String(action),...(t?{target:t}:{})});});
-  wrap('cancelShipOrders',(o,e,sys,orders,all)=>{if(!mine(e)||!sys)return NOT_MP;const own=(sys.queue||[]).filter(q=>q.e===0),idx=(orders||[]).map(q=>own.indexOf(q));
-    if(idx.some(i=>i<0))return {ok:false,why:'Kuyruk değişti; siparişi yeniden seç.'};const x=r({kind:'shipCancel',sys:sys.id,orders:idx,all:!!all});return x.ok?{...x,count:idx.length}:x;});
+  wrap('shipOrderToken',(o,q)=>S.on&&typeof q?._mpOrderToken==='string'?q._mpOrderToken:o(q));
+  wrap('cancelShipOrders',(o,e,sys,orders,all)=>{if(!mine(e)||!sys)return NOT_MP;const own=(sys.queue||[]).filter(q=>q.e===0),tokens=(orders||[]).map(q=>own.includes(q)&&q._mpOrderToken);
+    if(tokens.some(t=>typeof t!=='string'))return {ok:false,why:'Kuyruk değişti; siparişi yeniden seç.'};const x=r({kind:'shipCancel',sys:sys.id,orders:tokens,all:!!all});return x.ok?{...x,count:tokens.length}:x;});
   wrap('setRally',(o,e,sys,t)=>mine(e)&&sys?r({kind:'rally',sys:sys.id,target:t===null||t===undefined?null:+t}):NOT_MP);
   wrap('startTerraform',(o,e,sys,pl)=>mine(e)&&sys&&pl&&sys.planets?r({kind:'terraform',sys:sys.id,planet:pl.i}):NOT_MP);
   wrap('buildHabitat',(o,e,sys,pl)=>mine(e)&&sys&&pl?!!send({kind:'habitat',sys:sys.id,planet:pl.i}):false);

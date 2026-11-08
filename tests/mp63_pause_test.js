@@ -84,7 +84,7 @@ test('mp-core + politika: 3× → host karar penceresi 1× (misafire "decision",
 });
 test('mp-core + politika: tutulan seçim — "same" ortak hıza göre; iletide want/hold; artan n; kayıt paketine ortak hız; dönen oyuncu bildirimsiz güncel durum',()=>{
   const h=world();h.run(`PZ.decPending(9,1);PZ.decOpen(9,1);applySpeed();MP.speedSync(PZ.reason());`);
-  assert.equal(cmd(h,B,{kind:'speed',value:3}).code,'rules:same','shared speed already 3× (only held) → same, no notice');
+  assert.equal(cmd(h,B,{kind:'speed',value:3}).status,'ok','explicit re-selection is acknowledged even while the requested speed is held');assert.equal(J(h,'G.speed'),1,'open decision cap is preserved');h.sb.__now+=1000;
   assert.equal(cmd(h,B,{kind:'speed',value:1}).status,'ok','1× is a real change of the shared speed');assert.equal(J(h,'G.speed'),1);
   h.sb.__now+=1000;const r=cmd(h,B,{kind:'speed',value:4});assert.equal(r.status,'ok');assert.equal(J(h,'G.speed'),1,'held by the open decision window');
   const all=msgs(h,'cA','speed'),last=all.at(-1);assert.deepEqual([last.spd,last.want,last.hold,last.who],[1,4,'decision','Bora']);

@@ -30,8 +30,8 @@ const refused=(h,who,c,code)=>{const s0=st(h);const r=cmd(h,who,c);assert.equal(
 test('gemi siparişi iptali: B kendi sistemindeki siparişini sırasıyla iptal eder (motorun cancelShipOrders\'ı, iade); başkasının sistemi "not-owner", bayat sıra "stale"',()=>{
   const h=world();const hs=home(h,B);const cls=J(h,`Object.keys(SHIPS).find(k=>shipBuildAccess(G.emps[${B}],k).ok)`);
   assert.equal(cmd(h,B,{kind:'ship',sys:hs,key:cls}).status,'ok');const n0=J(h,`G.sys[${hs}].queue.filter(q=>q.e===${B}).length`);assert(n0>=1);
-  refused(h,C,{kind:'shipCancel',sys:hs,orders:[0],all:false},'not-owner');refused(h,B,{kind:'shipCancel',sys:hs,orders:[9],all:false},'stale');
-  const r0=J(h,`G.emps[${B}].res`);assert.equal(cmd(h,B,{kind:'shipCancel',sys:hs,orders:[n0-1],all:false}).status,'ok');
+  refused(h,C,{kind:'shipCancel',sys:hs,orders:[J(h,'shipOrderToken(G.sys['+hs+'].queue.filter(q=>q.e==='+B+')[0])')],all:false},'not-owner');refused(h,B,{kind:'shipCancel',sys:hs,orders:['order:zzzzzz'],all:false},'stale');
+  const r0=J(h,`G.emps[${B}].res`);assert.equal(cmd(h,B,{kind:'shipCancel',sys:hs,orders:[J(h,'shipOrderToken(G.sys['+hs+'].queue.filter(q=>q.e==='+B+')['+(n0-1)+'])')],all:false}).status,'ok');
   assert.equal(J(h,`G.sys[${hs}].queue.filter(q=>q.e===${B}).length`),n0-1);const r1=J(h,`G.emps[${B}].res`);assert(Object.keys(r1).some(k=>r1[k]>r0[k]),'refund applied by the engine');
 });
 test('toplanma noktası ve sürekli üretim: B kendi tersane sistemine ralli/döngü kurar ve kaldırır; C\'nin sistemi reddedilir; erişilemeyen sınıf motor gerekçesiyle',()=>{
