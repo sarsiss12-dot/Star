@@ -9,10 +9,10 @@
 const fs=require('fs'),path=require('path'),assert=require('assert/strict'),{execSync}=require('child_process'),{chromium}=require('playwright');
 const root=path.resolve(__dirname,'..'),out=path.resolve(process.env.STARS_OUTPUT||path.join(root,'../evidence/mp74'));fs.mkdirSync(out,{recursive:true});
 const relayMod=require('../research/mp1/server/relay.js'),{selfSigned,startProxy}=require('./helpers/mp11-tls-proxy.js');
-const results=[],errors=[],metrics={};
+const results=[],errors=[],metrics={};let diagnosticPages=[];
 async function test(name,fn){if(process.env.MP74_ONLY&&!new RegExp(process.env.MP74_ONLY).test(name)){console.log('NOT RUN '+name);return;}const t0=Date.now();
   try{await fn();results.push({name,status:'PASS',ms:Date.now()-t0});console.log('PASS '+name);}
-  catch(e){results.push({name,status:'FAIL',error:String(e&&e.stack||e).slice(0,1800)});console.log('FAIL '+name+'\n'+(e&&e.stack||e));}}
+  catch(e){for(const [who,p] of diagnosticPages)try{const data=await p.evaluate(()=>({audit:window.__cardAudit,inbox:G.inbox,records:DiplomaticInbox.state().records,html:document.getElementById('inbox').innerHTML,modal:document.getElementById('modal').textContent,hidden:document.getElementById('modal').classList.contains('hidden'),view:window.MP1Join?.game?.view?.dip}));fs.writeFileSync(path.join(out,'failure-'+name.slice(0,2)+'-'+who+'.json'),JSON.stringify(data,null,2));}catch{}results.push({name,status:'FAIL',error:String(e&&e.stack||e).slice(0,1800)});console.log('FAIL '+name+'\n'+(e&&e.stack||e));}}
 const PHONE=(w,h)=>({viewport:{width:w,height:h},isMobile:true,hasTouch:true,deviceScaleFactor:2,serviceWorkers:'allow'});
 const freePort=()=>new Promise(res=>{const s=require('net').createServer().listen(0,'127.0.0.1',()=>{const p=s.address().port;s.close(()=>res(p));});});
 const wait=(p,fn,arg,timeout=30000)=>p.waitForFunction(fn,arg,{timeout,polling:100});
@@ -85,6 +85,7 @@ let relay,px,base,tls,bH,bB,bC;
   const launch={executablePath:process.env.STARS_CHROMIUM_PATH||undefined,args:['--no-sandbox','--disable-gpu','--disable-dev-shm-usage','--ignore-certificate-errors-spki-list='+spki]};
   [bH,bB,bC]=await Promise.all([0,1,2].map(()=>chromium.launch(launch)));
   const H=await (await bH.newContext(PHONE(844,390))).newPage(),Bp=await (await bB.newContext(PHONE(800,360))).newPage();
+  diagnosticPages=[['host',H],['B',Bp]];
   for(const [n,p] of [['host',H],['B',Bp]]){p.on('pageerror',e=>errors.push(n+': '+e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|WebSocket connection/.test(m.text()))errors.push(n+' console: '+m.text().slice(0,300));});}
   /* MP.8.1 tanı: misafir sayfasının ana çerçeve gezinmeleri (beklenmeyen sayfa değişimi = MP1Join kaybolur) */
   metrics.nav=[];Bp.on('framenavigated',f=>{if(f===Bp.mainFrame()){const u=new URL(f.url());metrics.nav.push(u.pathname+u.search.replace(/code=[^&]+/,'code=*'));console.log('NAV B '+u.pathname);}});
@@ -115,6 +116,7 @@ let relay,px,base,tls,bH,bB,bC;
       await tap(p,sel);await wait(p,()=>document.getElementById('mp1Mini').classList.contains('mp74-compact'));}
   });
   await test('A3 kaydırma (gerçek dokunma): küçük hareket kartı kapatmaz; sağa kaydırınca teklif kartı kalkar, karar Gelen kutusunda BEKLER, ayna yenilenince kart geri gelmez; host\'ta teklif bekler',async()=>{
+    await Bp.evaluate(()=>{window.__cardAudit=[];const box=document.getElementById('inbox');for(const t of ['pointerdown','pointerup','pointercancel','touchstart','touchend','click'])box.addEventListener(t,e=>__cardAudit.push({t,at:performance.now(),x:e.clientX,y:e.clientY,target:e.target.outerHTML.slice(0,160)}),true);new MutationObserver(ms=>{for(const m of ms)for(const n of m.removedNodes)if(n.nodeType===1)__cardAudit.push({t:'removed',at:performance.now(),node:n.outerHTML.slice(0,160)});}).observe(box,{childList:true});});
     const id=await hostOffer(H,1,11);const key='mp71:'+id;await wait(Bp,k=>(G.inbox||[]).some(n=>n.key===k),key);const uid=await Bp.evaluate(k=>G.inbox.find(n=>n.key===k).uid,key);
     await shot(Bp,'a3-b-card');
     await swipe(Bp,cardSel(uid),30);assert.equal(await Bp.evaluate(k=>G.inbox.some(n=>n.key===k),key),true,'small move keeps the card');

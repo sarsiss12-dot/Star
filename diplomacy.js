@@ -2220,10 +2220,10 @@ function dealPostcondition(giver, taker, it){
 /* 86C.6: begin → apply → postcondition → recalc → log → commit.
    Commit öncesindeki üretim hatası kayıtlı oyun grafiğini geri alır.
    Sonrasında UI/audio ayrı ayrı korunur; bu etkiler tersinir değildir. */
-function executeDeal(offer){
+function executeDeal(offer, inboxKey=null){
   // İç içe işlem desteklenmiyor; dış işlemin tamponunu yayımlayamaz.
   if (_dealTxActive) return false;
-  const archived=typeof DiplomaticInbox!=='undefined'?DiplomaticInbox.findDeal(offer):null;
+  const archived=typeof DiplomaticInbox!=='undefined'?(inboxKey===null?DiplomaticInbox.findDeal(offer):DiplomaticInbox.state().records.find(r=>r.key===inboxKey)):null;
   if(archived&&(archived.status!=='pending'||G.day>=archived.expires))return false;
   _dealTxActive = true;
   let tx = null;

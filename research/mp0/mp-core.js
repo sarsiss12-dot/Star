@@ -366,17 +366,37 @@ function createHost(opts){
     if(self)return 'Doğrudan katılım';
     if(ev.system!==undefined)return 'Görüş / sensör gözlemi';
     return ids.length&&ids.some(id=>intelOf(h,id)>=3)?'Diplomatik istihbarat (seviye 3)':'';}
-  function newsFan(ev){
+  function newsFan(ev,stamp=null,only=null){
     if(!ev||typeof GalacticNews==='undefined'||!Object.hasOwn(GalacticNews.categories,ev.category))return;
     if(typeof _loadTxActive!=='undefined'&&_loadTxActive||G._newsSetup)return;
     const key=String(ev.key||[ev.category,G.day,ev.empires,ev.system,ev.planet,ev.title].join('|')).slice(0,240),text=v=>String(v||'').slice(0,800);
-    for(const [eid] of S.slots){const h=G.emps[eid];if(!remoteHuman(h)||h.dead)continue;const knowledge=newsVis(h,ev);if(!knowledge)continue;
+    for(const [eid] of S.slots){const h=G.emps[eid];if(only!==null&&eid!==only||!remoteHuman(h)||h.dead)continue;const knowledge=newsVis(h,ev);if(!knowledge)continue;
       const st=newsBy.get(eid)||{next:1,records:[]};if(st.records.some(r=>r.key===key))continue;
-      const r={id:st.next++,key,day:G.day,year:G.year,month:G.month,category:ev.category,title:text(ev.title).slice(0,180),text:text(ev.text),important:!!ev.important,read:false,pinned:false,knowledge,
+      const r={id:st.next++,key,day:stamp?stamp.day:G.day,year:stamp?stamp.year:G.year,month:stamp?stamp.month:G.month,category:ev.category,title:text(ev.title).slice(0,180),text:text(ev.text),important:!!ev.important,read:false,pinned:false,knowledge,
         empires:[...new Set(ev.empires||[])].filter(id=>Number.isInteger(id)&&G.emps[id]).slice(0,16).map(id=>({id,name:text(G.emps[id].name).slice(0,120)}))};
       if(Number.isInteger(ev.system)&&G.sys[ev.system]){r.system={id:ev.system,name:text(G.sys[ev.system].name).slice(0,120)};const pl=G.sys[ev.system].planets.find(p=>p.i===ev.planet);if(pl)r.planet={id:pl.i,name:text(pl.name).slice(0,120)};}
       if(ev.federation)r.federation={id:ev.federation.id,name:text(ev.federation.name).slice(0,120)};
       st.records.push(r);while(st.records.length>NEWS_MAX)st.records.shift();newsBy.set(eid,st);}
+  }
+  /* Cold rooms reconstruct only the player's own recorded fronts, not the
+     host's private archive or retrospective third-party intelligence. No new
+     Save8/package field; existing NEWS_MAX bounds the private projection. */
+  function recoverWarNews(){
+    const entry={declaration:'Savaş ilanı',federation:'Federasyon yükümlülüğü',overlord:'Senyörlük koruması',vassal:'Vasal çağrısı',promise:'Savaş taahhüdü',independence:'Bağımsızlık',independenceSupport:'Bağımsızlık desteği',event:'Gözlenen oyun olayı'};
+    for(const [eid] of S.slots){const e=G.emps[eid];if(!remoteHuman(e)||e.dead)continue;const rows=[];
+      for(const f of G.warLedger?.fronts||[]){if(!f.sides.includes(eid)||f.legacy&&f.entryKind!=='event')continue;
+        const names=f.sides.map(id=>G.emps[id]?.name||'Bilinmeyen devlet').join(' ↔ ');
+        rows.push({day:f.opened,key:'war-front:'+f.id,category:'war',empires:f.sides,title:f.legacy?'Önceki savaş gözlemi':'Savaş kaydı',text:names+' · '+(entry[f.entryKind]||'Katılım nedeni kayıtta belirtilmemiş')+(f.legacy?' · Kesin başlangıç tarihi bilinmiyor':'')});
+        if(f.ended!==null)rows.push({day:f.ended,key:'war-end:'+f.id,category:'peace',empires:f.sides,title:'Savaş sona erdi',text:names+' · '+(WAR_END_REASONS[String(f.endReason||'').split('|')[0]]||'Bitiş nedeni kayıtta belirtilmemiş')});
+      }
+      // Crisis declares against everyone. Reuse an actual saved start record
+      // only while this player really is a party; never invent an old date.
+      for(const r of G.news?.records||[]){const m=/^crisis-war:(\d+):0$/.exec(r.key||''),c=m&&G.emps[+m[1]];
+        if(c?.crisisSide&&e.war[c.id])rows.push({day:r.day,key:'crisis-war:'+c.id+':'+eid,category:'war',empires:[eid,c.id],title:'Galaktik kriz savaşı',text:c.name+' sana saldırdı · Galaktik kriz'});
+      }
+      rows.sort((a,b)=>a.day-b.day); // stable source order for events on the same paused day
+      for(const r of rows.slice(-NEWS_MAX))newsFan({...r,scope:'player',important:true},{day:r.day,year:2210+Math.floor(r.day/360),month:Math.floor(r.day%360/30)+1},eid);
+    }
   }
   function fedMotionOpts(c){const o={};for(const k of ['target','sponsor','type','field','value'])if(c[k]!==undefined)o[k]=c[k];return o;}
   const settleSide=(e,c)=>(G.warLedger&&G.warLedger.fronts||[]).some(f=>f.campaign===c&&f.sides.includes(e.id));
@@ -671,7 +691,7 @@ function createHost(opts){
       roots:()=>[],
       apply(e,{r},c){const A=G.emps[r.from];
         if(c.action==='reject'){r.status='rejected';r.finished=G.day;r.why='Reddedildi';dipNotify(A.id,'Teklif reddedildi — '+e.name,'war');return true;}
-        if(!executeDeal(dipOffer(r)))return false;                       // motorun kendi işlemi: başarısızlıkta kendisi geri alır
+        if(!executeDeal(dipOffer(r),'deal:mp71:'+r.id))return false;                       // motorun kendi işlemi: başarısızlıkta kendisi geri alır
         r.status='accepted';r.finished=G.day;stats.deals=(stats.deals||0)+1;
         dipNotify(A.id,'Teklif kabul edildi — '+e.name,'win');dipNotify(e.id,'Anlaşma imzalandı — '+A.name,'win');return true;}},
     counter:{keys:['kind','offer','give','want'],
@@ -1539,6 +1559,7 @@ function createHost(opts){
     D.next=pkg.diplomacy.next;D.offers=JSON.parse(JSON.stringify(pkg.diplomacy.offers));
     SQ.length=0;for(const q of pkg.diplomacy.sq||[])SQ.push({...q,...(q.status==='pending'&&G.day>=q.expires?{status:'expired'}:{})});   // MP.6.3: süresi dolan yapay uzatılmaz
     notes.clear();for(const [k,v] of Object.entries(ss.notes||{}))notes.set(+k,v.slice(-12));
+    newsBy.clear();newsVisCache.clear();warSeen.clear();recoverWarNews();
     if(L){L.phase='resume';L.capacity=ss.capacity;L.settings=ss.settings?{...ss.settings}:null;L.galaxyRev=1;L.seatNext=Math.max(1,...ss.players.map(x=>(x.seat|0)+1));
       L.resume={name:pkg.display.name,year:pkg.display.year,month:pkg.display.month,size:pkg.display.size,createdAt:pkg.createdAt};}
   }

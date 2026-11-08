@@ -169,15 +169,16 @@ function installHost(){
 function hideOther(q,other){if(!q||!other)return q;const pre=String(other.name)+' → ',rs=(q.reasons||[]).map(String),own=rs.filter(r=>!r.startsWith(pre));
   if(own.length===rs.length&&!(q.wantFail||[]).length)return q;const out=own.slice();if(own.length<rs.length)out.push('Karşı taraf bu şartları şu an karşılayamıyor');
   return {...q,wantFail:[],reasons:out,ok:!(q.giveFail||[]).length&&!out.length};}
-/* host: teklif deposundaki kayıt ↔ gelen kutusu kaydı (aynı anahtar: DiplomaticInbox.capture'ın 'deal:' imzası + doğuş günü) */
-const keyOf=o=>'deal:'+offerSignature({from:o.from,to:0,give:o.give,want:o.want})+':'+o.born;
-function offerOfRec(rec){const me=G.p.id;return M.ad.raw().find(o=>o.to===me&&keyOf(o)===rec.key)||null;}
+/* host: canonical MP offer ID; old records migrate only through their exact encoded mp71 note ID. */
+const keyOf=o=>'deal:mp71:'+o.id;
+function offerOfRec(rec){const me=G.p.id;return M.ad.raw().find(o=>o.to===me&&(keyOf(o)===rec.key||rec.note?.key==='mp71:'+o.id))||null;}
 function offerOfData(p){const me=G.p.id,sig=offerSignature({...p,to:0});return M.ad.raw().find(o=>o.to===me&&o.status==='pending'&&o.from===p.from&&o.born===p.born&&offerSignature({from:o.from,to:0,give:o.give,want:o.want})===sig)||null;}
 /* host: insan → host teklifi gerçek bildirim kartı + Gelen kutusu kaydı olur; kayıtların durumu host deposundan */
 function sync(){
   if(!on()||M.ad.role!=='host'||typeof DiplomaticInbox==='undefined')return;
   const me=G.p.id,DI=DiplomaticInbox,recs=new Map(DI.state().records.filter(r=>r.kind==='aideal').map(r=>[r.key,r]));
-  for(const o of M.ad.raw()){if(o.to!==me||!G.emps[o.from])continue;const key=keyOf(o);let r=recs.get(key);
+  for(const o of M.ad.raw()){if(o.to!==me||!G.emps[o.from])continue;const key=keyOf(o);let r=recs.get(key)||DI.state().records.find(r=>r.kind==='aideal'&&r.note?.key==='mp71:'+o.id);
+    if(r&&r.key!==key){recs.delete(r.key);r.key=key;recs.set(key,r);} // exact old note ID, never signature/time guessing
     if(!r&&o.status==='pending'&&G.day<o.expires){const e=G.emps[o.from];
       UI.notify({kind:'aideal',data:{from:o.from,to:0,give:o.give.map(i=>({...i})),want:o.want.map(i=>({...i})),born:o.born,expires:o.expires},ico:'📜',pause:false,
         title:(o.round>1?'Karşı teklif':'Teklif')+' — '+e.name,sub:'Çok oyunculu teklif · '+(o.want.map(dealLabel).join(', ')||'anlaşma')+' istiyor',key:'mp71:'+o.id});

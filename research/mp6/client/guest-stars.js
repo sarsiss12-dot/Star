@@ -484,13 +484,14 @@ function rebuild(){
   const keep={route:View.route,routed:View.routed,note:UI._openNote,offer:UI.pendingOffer,sel:View.sel&&View.sel.id},rg=View.resetGesture;
   /* MP.7.5: kullanıcı dokunurken / kaydırırken (STARS yüzey işaretçisi) ayna uygulanmaz — düğmeler parmağın altında yer değiştirmesin */
   if(S.started&&UI._surfacePointers&&(UI._surfacePointers.size||Date.now()<(UI._surfaceUntil||0))){S.stats.touchHeld=(S.stats.touchHeld||0)+1;S.timer=setTimeout(rebuild,200);return;}
-  const warCards=(G.inbox||[]).filter(n=>n.kind==='warstart'||n.kind==='wardec'),warUid=G.inboxUid||0,cardIds=new Map((G.inbox||[]).filter(n=>n.key).map(n=>[n.key,n.uid]));
+  const initialWorld=!S.started;
+  const warCards=initialWorld?[]:(G.inbox||[]).filter(n=>n.kind==='warstart'||n.kind==='wardec'),warUid=initialWorld?0:G.inboxUid||0,cardIds=new Map((initialWorld?[]:G.inbox||[]).filter(n=>n.key).map(n=>[n.key,n.uid]));
   const oldEmps=typeof G!=='undefined'&&G?G.emps:null;
   const t0=performance.now();S.building=true;let ok=false;
   /* MP.6.4: haber okundu / sabitlendi işaretleri yereldir; ayna yeniden kurulunca anahtarla geri konur */
   const nk=new Map(((typeof G!=='undefined'&&G&&G.news&&G.news.records)||[]).map(r=>[r.key,[r.read,r.pinned]]));
   const dbr=typeof G!=='undefined'&&G&&G.dismissedBattleReports?{...G.dismissedBattleReports}:null;   // MP.7.2: gizlenen savaş raporları yereldir
-  let why='';try{View.resetGesture=S.started?function(){}:rg;ok=deserialize(JSON.stringify(S.mirror));if(!ok)why='kayıt doğrulaması reddetti';if(ok){G.inboxUid=Math.max(G.inboxUid||0,warUid);inboxOffers();setSync();if(dbr)try{G.dismissedBattleReports=cleanBattleDismissals({...(G.dismissedBattleReports||{}),...dbr});}catch{}for(const r of (G.news&&G.news.records)||[]){const k=nk.get(r.key);if(k){r.read=k[0];r.pinned=k[1];}}}S.inboxSig=null;}catch(e){ok=false;why=String(e&&e.message||e).slice(0,160);}
+  let why='';try{View.resetGesture=S.started?function(){}:rg;ok=deserialize(JSON.stringify(S.mirror));if(!ok)why='kayıt doğrulaması reddetti';if(ok){G.inboxUid=Math.max(G.inboxUid||0,warUid);inboxOffers();for(const n of G.inbox)if(cardIds.has(n.key))n.uid=cardIds.get(n.key);setSync();if(dbr)try{G.dismissedBattleReports=cleanBattleDismissals({...(G.dismissedBattleReports||{}),...dbr});}catch{}for(const r of (G.news&&G.news.records)||[]){const k=nk.get(r.key);if(k){r.read=k[0];r.pinned=k[1];}}}S.inboxSig=null;}catch(e){ok=false;why=String(e&&e.message||e).slice(0,160);}
   finally{View.resetGesture=rg;S.building=false;}
   S.lastBuild=Date.now();
   /* MP.7: bozuk/uyumsuz ayna aynı veriyle 1 s'de bir sonsuza dek yeniden kurulmuyordu-kurulmaya çalışılıyordu. Artık ayna bırakılır,
@@ -512,9 +513,7 @@ function rebuild(){
      kurulumda yine aynı veriyle kurulur; yalnız sıklık azalır → misafir zamanının çoğunu deserialize'a harcamaz. */
   {const b=S.stats.buildMs.slice(-5).sort((x,y)=>x-y),med=b[Math.floor(b.length/2)]||0;S.minGap=Math.round(Math.min(3000,Math.max(600,med*4)));}
   if(!S.started)start();else{UI.keepScroll=true;try{UI.refresh();}catch{}}
-  warAlerts(warCards);
-  // Rebuilt offers/council cards retain their live DOM identity as well.
-  for(const n of G.inbox)if(cardIds.has(n.key))n.uid=cardIds.get(n.key);
+  warAlerts(warCards,initialWorld);
   UI.drawInbox();
   paintSpeed();
 }
@@ -522,7 +521,8 @@ function rebuild(){
    Keep undismissed cards across mirror rebuilds; do not replay history on
    initial load/reconnect. The news archive remains the durable read path. */
 let warNewsSeen=null;
-function warAlerts(cards){
+function warAlerts(cards,initialWorld=false){
+  if(initialWorld){warNewsSeen=null;cards=[];}
   const rows=(S.mirror?.news?.records||[]).filter(r=>/^war-front:/.test(r.key)&&r.warStatus?.sides?.includes(0)||/^crisis-war:/.test(r.key)&&r.empires?.some(e=>e.id===0));
   for(const n of cards)if(!G.inbox.some(x=>x.key===n.key)){G.inbox.push(n);G.inboxUid=Math.max(G.inboxUid||0,n.uid||0);}
   if(!warNewsSeen){warNewsSeen=new Set(rows.map(r=>r.key));return;}
@@ -544,7 +544,7 @@ function inboxOffers(){
   for(const o of v.dip.offers.slice().sort((a,b)=>a.id-b.id)){if(o.to!==me||!G.emps[local(o.from)])continue;
     const strip=l=>l.map(({l:_,...i})=>i),data={from:local(o.from),to:0,give:strip(o.give),want:strip(o.want),born:o.born,expires:o.expires};
     let rec=DiplomaticInbox.state().records.find(r=>r.mp===o.id);
-    if(!rec)rec=DiplomaticInbox.capture({kind:'aideal',data,born:o.born,title:(o.round>1?'Karşı teklif':'Teklif')+' — '+o.fn,sub:'Çok oyunculu teklif · tur '+o.round});
+    if(!rec)rec=DiplomaticInbox.capture({kind:'aideal',data,key:'mp71:'+o.id,born:o.born,title:(o.round>1?'Karşı teklif':'Teklif')+' — '+o.fn,sub:'Çok oyunculu teklif · tur '+o.round});
     if(!rec)continue;rec.mp=o.id;
     if(o.status!=='pending'&&rec.status!==o.status){rec.status=Object.hasOwn(DiplomaticInbox.states,o.status)?o.status:'invalid';rec.finished=Math.min(G.day,o.expires);rec.why=String(o.why||'');
       if(window.MP71Dip&&MP71Dip.stateOf(o)==='withdrawn'&&!/geri çekti/.test(rec.sub))rec.sub='Gönderen geri çekti · '+rec.sub;}}
@@ -566,7 +566,9 @@ function inboxOffers(){
     G.inbox.push({kind:'cncvote',data:cv.key,ico:'🌐',cls:'sci',pause:false,uid:G.inboxUid,born:G.day,title:'KONSEY OYLAMASI',sub:R?R.n:cv.key,key:ckey});changed=true;}
   /* MP.7.4: kaydırılarak kapatılan kart ayna yenilenince geri gelmez (karar kaydı gelen kutusunda kalır) */
   if(S.swiped.size){const n2=G.inbox.length;G.inbox=G.inbox.filter(n=>!S.swiped.has(noteSig(n)));if(G.inbox.length!==n2)changed=true;}
-  if(changed)try{UI.drawInbox();UI.topbar();}catch{}
+  // Rebuild restores live UIDs before rendering; an intermediate draw would
+  // detach an unchanged card underneath an active pointer.
+  if(changed&&!S.building)try{UI.drawInbox();UI.topbar();}catch{}
   /* MP.6.2: statüko barışı teklifleri (insan ya da AI → bu oyuncu) → gerçek gelen kutusunda 'sqOffer' */
   for(const q of v.dip.sq||[]){if(q.to!==me||q.status!=='pending'||!G.emps[local(q.from)])continue;
     const rec=DiplomaticInbox.capture({kind:'sqOffer',data:local(q.from),born:q.born,key:'mpsq:'+q.from+':'+q.born,title:'Statüko barışı teklifi — '+q.fn,sub:'Sınırlar fiili durumda donar; kabul edersen host uygular.'});

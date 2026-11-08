@@ -37,8 +37,8 @@ function cmd(h,who,c){const conn=CONN[who],n=h.sb.__out.length,s=h.run(`seq[${JS
   h.run(`MP.onMessage(${JSON.stringify(conn)},${JSON.stringify(JSON.stringify({v:1,type:'cmd',seq:s,cid:'m71'+conn+String(s).padStart(5,'0'),cmd:c}))})`);
   return h.sb.__out.slice(n).filter(([cc])=>cc===conn).map(([,t])=>JSON.parse(t)).find(m=>m.type==='result');}
 const res1=(r,v)=>({t:'res',r,v});
-const rec=(h,id)=>J(h,`(()=>{const o=MP.dip.offers.find(x=>x.id===${id});const k='deal:'+offerSignature({from:o.from,to:0,give:o.give,want:o.want})+':'+o.born;
-  const r=DiplomaticInbox.state().records.find(x=>x.key===k);return r?{id:r.id,status:r.status,why:r.why||'',sub:r.sub,card:(G.inbox||[]).some(n=>n.key==='mp71:${id}')}:null;})()`);
+const rec=(h,id)=>J(h,`(()=>{const o=MP.dip.offers.find(x=>x.id===${id});const k='mp71:'+o.id;
+  const r=DiplomaticInbox.state().records.find(x=>x.note?.key===k);return r?{id:r.id,status:r.status,why:r.why||'',sub:r.sub,card:(G.inbox||[]).some(n=>n.key==='mp71:${id}')}:null;})()`);
 const dip=(h,id)=>J(h,`MP.dip.offers.find(x=>x.id===${id})`);
 
 test('insan → host teklifi host\'un GERÇEK gelen kutusuna girer (bildirim kartı + kayıt, tek kez); kabul MP.3 respond ile: kaynaklar tam bir kez, dünya MP komutuyla aynı, ikinci karar reddedilir',()=>{
@@ -122,5 +122,10 @@ test('Save8 / RNG: insan teklifi yokken köprü (sarmalayıcılar + her gün tic
   const a=world(),b=world({bridge:false});
   a.run('for(let d=0;d<90;d++){step(1);MP.publish();MP71Dip.tick();}');b.run('for(let d=0;d<90;d++){step(1);MP.publish();}');
   assert.equal(a.run('serialize()'),b.run('serialize()'));assert.equal(a.run('RND_STATE'),b.run('RND_STATE'));
+});
+test('eski Save8 MP teklif anahtarı kesin note ID ile taşınır; kayıt kimliği ve RNG korunur',()=>{
+ const h=world(),id=cmd(h,A,{kind:'offer',to:0,give:[res1('min',100)],want:[]}).extra.offer;h.run('MP71Dip.sync()');const rid=rec(h,id).id;
+ h.run(`var row=DiplomaticInbox.state().records.find(r=>r.id===${rid});row.key='deal:'+offerSignature(row.note.data)+':'+row.born;var old=serialize(),rs=RND_STATE;if(!deserialize(old))throw Error('old Save8');MP71Dip.sync();`);
+ assert.equal(rec(h,id).id,rid);assert.equal(rec(h,id).status,'pending');assert.equal(h.run(`DiplomaticInbox.get(${rid}).key`),'deal:mp71:'+id);assert.equal(h.run('RND_STATE'),h.run('rs'));
 });
 end();

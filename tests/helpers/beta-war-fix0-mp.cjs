@@ -21,7 +21,8 @@ module.exports=async(H,B,out)=>{
  await B.evaluate(()=>UI.closeModal());
  if(await B.locator('#diploPane').evaluate(e=>e.classList.contains('show')))await B.locator('#diploPane [data-a="closeDiplo"]').tap({timeout:8000});
  const uid=await B.evaluate(id=>G.inbox.find(n=>n.key==='mp71:'+id)?.uid,deal);assert(uid);
- for(let i=0;i<2;i++){const builds=await B.evaluate(()=>MP6Stars.S.stats.builds);await H.evaluate(()=>{G.emps[1].res.ene+=1;MP1Host.host.publish();});await wait(B,n=>MP6Stars.S.stats.builds>n,builds);assert.equal(await B.evaluate(id=>G.inbox.find(n=>n.key==='mp71:'+id)?.uid,deal),uid,'offer live UID changed under touch target');assert(await B.evaluate(()=>new Set(G.inbox.map(n=>n.uid)).size===G.inbox.length),'duplicate card IDs');}
+ await B.evaluate(uid=>{window.__warfixCard=document.querySelector('#inbox [data-a="openNote"][data-x="'+uid+'"]');if(!window.__warfixCard)throw Error('initial offer DOM missing');},uid);
+ for(let i=0;i<2;i++){const builds=await B.evaluate(()=>MP6Stars.S.stats.builds);await H.evaluate(()=>{G.emps[1].res.ene+=1;MP1Host.host.publish();});await wait(B,n=>MP6Stars.S.stats.builds>n,builds);assert.equal(await B.evaluate(id=>G.inbox.find(n=>n.key==='mp71:'+id)?.uid,deal),uid,'offer live UID changed under touch target');assert(await B.evaluate(()=>new Set(G.inbox.map(n=>n.uid)).size===G.inbox.length),'duplicate card IDs');assert(await B.evaluate(uid=>window.__warfixCard===document.querySelector('#inbox [data-a="openNote"][data-x="'+uid+'"]'),uid),'unchanged offer DOM replaced during mirror rebuild');}
  await B.locator('#inbox [data-a="openNote"][data-x="'+uid+'"]').tap({timeout:8000});
  await B.locator('#inboxYes').tap({timeout:8000});
  await wait(H,id=>MP1Host.host.dip.offers.find(o=>o.id===id)?.status==='accepted'&&!G.emps[0].war[1],deal);
@@ -40,5 +41,8 @@ module.exports=async(H,B,out)=>{
  await B.context().setOffline(true);await B.waitForTimeout(700);await B.context().setOffline(false);await wait(B,()=>MP1Join.ws?.readyState===1&&MP1Join.hostOnline);await wait(B,()=>!G.p.war[1]);
  await B.screenshot({path:path.join(out,'warfix-guest-partial-peace.png')});
  const result={cards,guestInitiallyDidNotKnowSideFront:true,firstPartial,singleTrustedPeaceTap:true,duplicateApplied:false,vassalOldCallStayedPeace:true,newSourceCallAllowed:true,save8:state,reconnect:true};fs.writeFileSync(path.join(out,'warfix-mp.json'),JSON.stringify(result,null,2));return result;
+ }catch(error){
+ for(const [label,page] of [['host',H],['guest',B]]){try{fs.writeFileSync(path.join(out,'warfix-'+label+'-failure.json'),JSON.stringify(await page.evaluate(()=>({day:G.day,player:G.p.id,war:G.p.war,lord:G.p.overlord,inbox:G.inbox,records:DiplomaticInbox.state().records,modal:$('modal').innerHTML,view:typeof MP1Join!=='undefined'?MP1Join.game?.view?.dip:null})),null,2));await page.screenshot({path:path.join(out,'warfix-'+label+'-failure.png')});}catch{}}
+ throw error;
  }finally{await B.evaluate(()=>UI.closeModal());await H.evaluate(txt=>{UI.closeModal();if(!deserialize(txt))throw Error('restore fixture');MP1Host.host.publish();},original);}
 };

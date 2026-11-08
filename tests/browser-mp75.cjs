@@ -11,10 +11,10 @@
 const fs=require('fs'),path=require('path'),assert=require('assert/strict'),{execSync}=require('child_process'),{chromium}=require('playwright');
 const root=path.resolve(__dirname,'..'),out=path.resolve(process.env.STARS_OUTPUT||path.join(root,'../evidence/mp75'));fs.mkdirSync(out,{recursive:true});
 const relayMod=require('../research/mp1/server/relay.js'),{selfSigned,startProxy}=require('./helpers/mp11-tls-proxy.js');
-const results=[],errors=[],metrics={};
+const results=[],errors=[],metrics={};let diagnosticPages=[];
 async function test(name,fn){const t0=Date.now();
   try{await fn();results.push({name,status:'PASS',ms:Date.now()-t0});console.log('PASS '+name);}
-  catch(e){results.push({name,status:'FAIL',error:String(e&&e.stack||e).slice(0,1800)});console.log('FAIL '+name+'\n'+(e&&e.stack||e));}}
+  catch(e){for(const [who,p] of diagnosticPages)try{const data=await p.evaluate(()=>({inbox:G.inbox,records:DiplomaticInbox.state().records,html:document.getElementById('inbox').innerHTML,modal:document.getElementById('modal').textContent,hidden:document.getElementById('modal').classList.contains('hidden'),view:window.MP1Join?.game?.view?.dip}));fs.writeFileSync(path.join(out,'failure-'+name.slice(0,2)+'-'+who+'.json'),JSON.stringify(data,null,2));}catch{}results.push({name,status:'FAIL',error:String(e&&e.stack||e).slice(0,1800)});console.log('FAIL '+name+'\n'+(e&&e.stack||e));}}
 const PHONE=(w,h)=>({viewport:{width:w,height:h},isMobile:true,hasTouch:true,deviceScaleFactor:2,serviceWorkers:'allow'});
 const freePort=()=>new Promise(res=>{const s=require('net').createServer().listen(0,'127.0.0.1',()=>{const p=s.address().port;s.close(()=>res(p));});});
 const wait=(p,fn,arg,timeout=30000)=>p.waitForFunction(fn,arg,{timeout,polling:100});
@@ -84,6 +84,7 @@ let relay,px,base,tls,bH,bB;
   const launch={executablePath:process.env.STARS_CHROMIUM_PATH||undefined,args:['--no-sandbox','--disable-gpu','--disable-dev-shm-usage','--ignore-certificate-errors-spki-list='+spki]};
   [bH,bB]=await Promise.all([0,1].map(()=>chromium.launch(launch)));
   const H=await (await bH.newContext(PHONE(844,390))).newPage(),Bp=await (await bB.newContext(PHONE(915,412))).newPage();
+  diagnosticPages=[['host',H],['B',Bp]];
   for(const [n,p] of [['host',H],['B',Bp]]){p.on('pageerror',e=>errors.push(n+': '+e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|WebSocket connection/.test(m.text()))errors.push(n+' console: '+m.text().slice(0,300));});}
   await test('A1 oda + başlangıç; MP düğmesi host ve misafirde sol araç sütununda (#tools), hız kutusu / kaynak çubuğu / araç düğmeleriyle örtüşmez; açılınca panel, kapanınca sütuna döner',async()=>{
     await room(H,2,[[Bp,'Bora',{name:'Saf Akıl Ağı',mizac:'teknokrasi',origin:'standart',ethics:['mat:2','mil:-1'],civics:['sinyal_avci']},1]]);

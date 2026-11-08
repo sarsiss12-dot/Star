@@ -13,7 +13,8 @@ const DiplomaticInbox = {
     const from=kind==='aideal'||kind==='pact'||kind==='submit'?data?.from:kind==='fedvote'?fedOf(data)?.vote?.proposer:data;
     if(!Number.isInteger(from)||!G.emps[from])return null;
     const f=kind==='fedvote'?fedOf(data):null;
-    const key=kind==='fedvote'?'vote:'+f.id+':'+fedVoteToken(f.vote):kind==='aideal'?'deal:'+offerSignature(data)+':'+data.born:kind+':'+from+':'+(note.key||'')+':'+(note.born??G.day);
+    const mpKey=kind==='aideal'&&/^mp71:[1-9]\d*$/.test(note.key||'')?'deal:'+note.key:null;
+    const key=mpKey||(kind==='fedvote'?'vote:'+f.id+':'+fedVoteToken(f.vote):kind==='aideal'?'deal:'+offerSignature(data)+':'+data.born:kind+':'+from+':'+(note.key||'')+':'+(note.born??G.day));
     let rec=st.records.find(r=>r.key===key);if(rec)return rec;
     if(st.records.filter(r=>r.status==='pending').length>=this.pendingLimit)return null;
     const encoded=encodeNote({...note,uid:note.uid||1,born:note.born??G.day});if(!encoded)return null;

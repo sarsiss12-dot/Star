@@ -7,7 +7,7 @@
    izolasyonist doktrini (isPurifier) her anlaşmayı motor düzeyinde yasaklıyor; bu yüzden seed 22. */
 const fs=require('fs'),path=require('path'),crypto=require('crypto'),assert=require('assert/strict');
 const {runtime}=require('./helpers/runtime'),{harness}=require('./helpers/95e-fixture');
-const {test,end}=harness(),root=path.resolve(__dirname,'..');
+const {test,end}=harness(),root=process.env.STARS_CONTROL_ROOT||path.resolve(__dirname,'..');
 const CORE=fs.readFileSync(path.join(root,'research/mp0/mp-core.js'),'utf8');
 const STEP='function step(days){for(let i=0;i<days*2;i++){const b=Math.floor(G.day/30);G.day+=.5;dailyTick(.5);structTick(.5);colonyBuildTick(.5);autoExploreTick();if(Math.floor(G.day/30)>b){monthTick();MP.observeHumans();}}}';
 const A=1,B=3,C=4,AI=5,CONN={[A]:'cA',[B]:'cB',[C]:'cC'};
@@ -174,12 +174,12 @@ test('AI → remote human: AI diplomacy calls aimed at a human land in that play
   console.log('   doğal AI→insan teklifleri: '+ai.length+' ('+months+' ayda) · türler '+[...new Set(ai.flatMap(r=>r.give.concat(r.want).map(i=>i.t)))].join(','));
 });
 test('privacy: C never receives A–B offer ids, terms, amounts or counter rounds; only the parties get them',()=>{
-  const h=world();const id=cmd(h,A,{kind:'offer',to:B,give:[res1('min',137)],want:[res1('ala',71)]}).extra.offer;
+  const h=world(),ownBefore=new Map([A,B].map(w=>[w,lastView(h,w).dip.offers]));const id=cmd(h,A,{kind:'offer',to:B,give:[res1('min',137)],want:[res1('ala',71)]}).extra.offer;
   const cid=cmd(h,B,{kind:'counter',offer:id,give:[res1('ala',43)],want:[res1('min',137)]}).extra.offer;h.run('MP.publish()');
   const pkC=h.sb.__out.filter(([c])=>c==='cC').map(([,t])=>t);
   for(const t of pkC){const m=JSON.parse(t);const d=(m.view&&m.view.dip)||(m.ops&&m.ops.set&&m.ops.set.dip);if(d)assert.equal(d.offers.length,0,'C sees no offers');
     const am=t.match(/.{0,60}("v":(137|71|43)\b|\b(137|71|43) (Mineral|Alaşım)).{0,20}/);assert(!am,'amounts '+(am&&am[0]));assert(!new RegExp('"id":('+id+'|'+cid+'),"from"').test(t),'offer ids');}
-  for(const w of [A,B])assert.deepEqual(lastView(h,w).dip.offers.map(o=>o.id).sort(),[id,cid].sort());
+  for(const w of [A,B]){const own=lastView(h,w).dip.offers;assert.deepEqual(own.map(o=>o.id).sort((a,b)=>a-b),[...ownBefore.get(w).map(o=>o.id),id,cid].sort((a,b)=>a-b));assert.deepEqual(own.filter(o=>o.id!==id&&o.id!==cid),ownBefore.get(w),'existing legitimate private offers unchanged');}
   // C'nin yanıtı "yok" ile aynı: teklifin varlığı sızmaz
   assert.equal(cmd(h,C,{kind:'respond',offer:id,action:'reject'}).code,cmd(h,C,{kind:'respond',offer:424242,action:'reject'}).code);
 });
