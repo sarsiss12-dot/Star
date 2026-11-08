@@ -7456,8 +7456,7 @@ const UI = {
     if(!this.eventDecisionAuthority())return {ok:false,why:'Kararı yalnız yetkili host uygular'};
     const data=this.noteChoiceData(note),live=(G.inbox||[]).find(n=>n===note||n.uid===note?.uid&&n.key===note?.key&&n.kind===note?.kind);
     if(world!==G.emps||G.p.dead||G.over||Number.isFinite(note?.expires)&&G.day>=note.expires||!data||!Number.isInteger(index)||!data.ch[index]||(!live&&this._openNote!==note))return {ok:false,why:'Olay artık beklemiyor veya oyun kaydı değişti'};
-    const opt=data.ch[index];for(const [r,v]of Object.entries(opt.cost||{}))if((G.p.res[r]||0)<v)return {ok:false,why:'Yetersiz kaynak: '+(RES[r]?.n||r)};
-    const tx=dealTxBegin(),wasOpen=this._openNote;
+    const opt=data.ch[index],tx=dealTxBegin(),wasOpen=this._openNote;
     let result='';
     try{
       G.inbox=(G.inbox||[]).filter(n=>n!==live);if(this._openNote===note)this._openNote=null;if(G.minNote===note.uid)G.minNote=null;

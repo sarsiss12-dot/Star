@@ -21,12 +21,12 @@
     "economy.js": "409f9772017837fbede5cf526968c07e56703627b825f423605e750109a4cae0",
     "inbox.js": "2461dcc6a12c6342ed8bac863bf53c56d91311532c757e7e4428454fc56b9cd5",
     "index.html": "16afdf255ae215a2d14c9287766b9e0edcc0201b1c6c0b4b3ad478d04e4e8535",
-    "main.js": "99e1bcfd8af60e44cdac1adc02a9c48c5b917a73c9c7405bed63a999ece4bc38",
+    "main.js": "cc627be09bee2f1aafeeef1d17c7749e669bcbc78185ef2cc06e09f8af52805e",
     "manifest.json": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
     "map.js": "3ccc9e66bb13f0ec1eaee1759e26b110ec5a05815ce73d74c7960b9f16828b0d",
     "news.js": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
     "sw.js": "046846e70020d6d40b3d3da197e91d6074fc997279dd87ce2d67b7059248c59e",
-    "ui.js": "3b012208a4aba9694d22c12e8f7c3ec0c5e713319fbe2f622b126478018cfe91"
+    "ui.js": "e778ab795af40f929565d37386d42a16b012e79f537a408311c8e282ba986790"
   },
   "description": "BETA-WAR-FIX.0: settled support calls cannot reopen old fronts; per-front notices, explicit peace bundles and guest alerts. Save8 v8, package4/protocol1. No deployment."
 }
