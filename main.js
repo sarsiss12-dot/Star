@@ -1505,14 +1505,14 @@ const ANOMALIES = [
    ch:[{t:'Örnek al', d:'+150 araştırma', f:g=>{g.p.res.ara+=150; return 'Kristal kafes yapısı çözümlendi: +150 araştırma.';}},
        {t:'Madencilik başlat', d:'+300 mineral', f:g=>{g.p.res.min+=300; return 'Kristal hasadı yapıldı: +300 mineral.';}}]},
   {id:'a3', k:'sinyal', n:'Sessiz Sinyal', t:'Gezegenin çekirdeğinden ritmik bir darbe geliyor. Hiçbir dile benzemiyor.',
-   ch:[{t:'Sinyali yanıtla', d:'Riskli: bilinmeyen sonuç', f:(g,r)=>{ if(r()<.5){g.p.res.ara+=320; return 'Sinyal bir arşivdi. Kütüphane açıldı: +320 araştırma.';} g.p.res.etk-=25; return 'Yanıt bir alarmdı. Bilinmeyen bir şey uyandı ve komşuların paniğe kapıldı: −25 etki.';}},
+   ch:[{t:'Sinyali yanıtla', d:'Riskli: bilinmeyen sonuç', uncertain:true, f:(g,r)=>{ if(r()<.5){g.p.res.ara+=320; return 'Sinyal bir arşivdi. Kütüphane açıldı: +320 araştırma.';} g.p.res.etk-=25; return 'Yanıt bir alarmdı. Bilinmeyen bir şey uyandı ve komşuların paniğe kapıldı: −25 etki.';}},
        {t:'Kayıt al ve uzaklaş', d:'+90 araştırma', f:g=>{g.p.res.ara+=90; return 'Sinyal arşivlendi: +90 araştırma.';}}]},
   {id:'a4', k:'megayapi', n:'Savaş Enkazı', t:'Kimliği belirsiz iki filo burada birbirini yok etmiş. Enkaz hâlâ soğumamış.',
    ch:[{t:'Silah sistemlerini incele', d:'+200 araştırma', f:g=>{g.p.res.ara+=200; return 'Yabancı silah mimarisi çözüldü: +200 araştırma.';}},
        {t:'Alaşımı topla', d:'+140 alaşım', f:g=>{g.p.res.ala+=140; return 'Enkaz eritildi: +140 alaşım.';}}]},
   {id:'a5', k:'dogal', n:'Yaşam İzleri', t:'Atmosferde işlenmiş organik bileşikler var. Burada bir şey yaşıyordu.',
    ch:[{t:'Biyosferi haritala', d:'+130 araştırma, +80 yiyecek', f:g=>{g.p.res.ara+=130; g.p.res.yiy+=80; return 'Biyosfer kataloglandı: +130 araştırma, +80 yiyecek.';}},
-       {t:'Karantinaya al', d:'+1.5 etki', f:g=>{g.p.res.etk+=15; return 'İhtiyat komşularınca takdir edildi: +15 etki.';}}]},
+       {t:'Karantinaya al', d:'+15 etki', f:g=>{g.p.res.etk+=15; return 'İhtiyat komşularınca takdir edildi: +15 etki.';}}]},
   {id:'a6', k:'megayapi', n:'Yörünge Deposu', t:'Otomatik bir kargo deposu, yüklerini teslim edeceği imparatorluğu bekliyor. O imparatorluk artık yok.',
    ch:[{t:'Depoyu boşalt', d:'+260 mineral, +120 enerji', f:g=>{g.p.res.min+=260; g.p.res.ene+=120; return 'Kargo devralındı: +260 mineral, +120 enerji.';}},
        {t:'Yazılımı çöz', d:'+170 araştırma', f:g=>{g.p.res.ara+=170; return 'Depo zekâsı incelendi: +170 araştırma.';}}]},
@@ -1523,7 +1523,7 @@ const ANOMALIES = [
    ch:[{t:'Aynayı devral', d:'+3 aylık enerji (kalıcı)', f:g=>{g.p.extra.eneFlat=(g.p.extra.eneFlat||0)+3; recalcMods(g.p); return 'Ayna şebekeye bağlandı: kalıcı +3 enerji/ay.';}},
        {t:'Yapımcıyı ara', d:'+210 araştırma', f:g=>{g.p.res.ara+=210; return 'Yapımcının izi bulunamadı ama teknolojisi anlaşıldı: +210 araştırma.';}}]},
   {id:'a9', k:'kalinti', n:'Kapalı Kapı', t:'Gezegenin yüzeyinde, hiçbir bilinen malzemeden yapılmamış bir kapı. Kilitli.',
-   ch:[{t:'Kapıyı zorla', d:'Riskli', f:(g,r)=>{ if(r()<.45){ g.p.res.ara+=420; return 'Kapı açıldı. İçerideki arşiv paha biçilemez: +420 araştırma.';} g.p.res.min-=60; return 'Kapı ekibi yuttu. Sondaj takımı kayıp: −60 mineral.';}},
+   ch:[{t:'Kapıyı zorla', d:'Riskli', uncertain:true, f:(g,r)=>{ if(r()<.45){ g.p.res.ara+=420; return 'Kapı açıldı. İçerideki arşiv paha biçilemez: +420 araştırma.';} g.p.res.min-=60; return 'Kapı ekibi yuttu. Sondaj takımı kayıp: −60 mineral.';}},
        {t:'Mühürlü bırak', d:'+120 araştırma', f:g=>{g.p.res.ara+=120; return 'Kapı belgelendi ve mühürlü bırakıldı: +120 araştırma.';}}]},
   {id:'a10', k:'megayapi', n:'Terkedilmiş Tersane', t:'Yörüngede, yarım kalmış bir gemi iskeletiyle birlikte duran otomatik bir tersane.',
    ch:[{t:'Tersaneyi kurtar', d:'+180 alaşım', f:g=>{g.p.res.ala+=180; return 'Tersane sökülüp taşındı: +180 alaşım.';}},
@@ -1643,7 +1643,7 @@ const CHAINS = {
     t:'Çekirdek söküldüğü an gemi uyandı. Bir ses tüm frekanslardan tek bir cümle tekrarlıyor: kendi dilimizde, ama kimse ona bu dili öğretmedi.',
     ch:[
       {t:'Cevap ver', d:'Bilinmeyen sonuç',
-       f:(g,r)=>{ if (r() < .55){ g.p.res.ara += 700; g.p.extra.araMul = (g.p.extra.araMul||0)+.05; recalcMods(g.p);
+       uncertain:true, f:(g,r)=>{ if (r() < .55){ g.p.res.ara += 700; g.p.extra.araMul = (g.p.extra.araMul||0)+.05; recalcMods(g.p);
                     return 'Gemi bir öğretmendi. Arşivi açıldı: +700 araştırma ve kalıcı +%5 araştırma.'; }
                   g.p.res.ara += 200; g.p.res.min -= 150;
                   return 'Gemi kendini imha etti. Ekip son anda kaçtı: +200 araştırma, −150 mineral.'; }},
@@ -1712,7 +1712,7 @@ const CHAINS = {
     t:'Yanıtımız gönderildi. Sekiz ay sonra karşılık geldi: bu kez bir görüntü. Kendi galaksimizin haritası — ama üzerinde hiç bilmediğimiz sınırlar çizili.',
     ch:[
       {t:'Sınırları incele', d:'Riskli bilgi',
-       f:(g,r)=>{ if (r()<.5){ g.p.res.ara += 600; return 'Harita gelecekteki bir galaksiyi gösteriyordu. Anlamı belirsiz: +600 araştırma.'; }
+       uncertain:true, f:(g,r)=>{ if (r()<.5){ g.p.res.ara += 600; return 'Harita gelecekteki bir galaksiyi gösteriyordu. Anlamı belirsiz: +600 araştırma.'; }
                   g.emps.forEach(o=>{ if(o.id) g.p.rel[o.id] = clamp(g.p.rel[o.id]-12,-100,100); });
                   return 'Harita sızdı. Diğer imparatorluklar bizim onlarla ilgili planlar yaptığımızı düşünüyor: ilişkiler bozuldu.'; }},
       {t:'İletişimi kes', d:'+250 araştırma',
@@ -1735,7 +1735,7 @@ const CHAINS = {
               if (c){ const pl = g.sys[c.s].planets[c.p]; if (pl.col) pl.col.stab = clamp(pl.col.stab-8,0,100); }
               return 'Salgın söndü. Karantina kalktı, ama izler kaldı.'; }},
       {t:'Erken aç, üretime dön', d:'Risk: nüfus kaybı',
-       f:(g,r)=>{ const c = g.p.colonies[0];
+       uncertain:true, f:(g,r)=>{ const c = g.p.colonies[0];
               if (r()<.45 && c){ const pl = g.sys[c.s].planets[c.p]; if (pl.col) pl.col.pop = Math.max(1, pl.col.pop-3);
                 return 'Salgın geri döndü: 3 nüfus kaybedildi.'; }
               g.p.res.min += 180; return 'Risk tuttu. Üretim erken başladı: +180 mineral.'; }}
@@ -1791,7 +1791,7 @@ const CHAINS = {
       {t:'Tuzağı imha et', d:'+180 alaşım, bölge güvenli',
        f:g=>{ g.p.res.ala += 180; return 'Verici yok edildi. Enkazdan +180 alaşım toplandı.'; }},
       {t:'Tuzağı incele', d:'Kim kurdu?',
-       f:(g,r)=>{ if (r()<.6){ g.p.res.ara += 480; return 'Verici çok eski bir avcı türüne ait. Teknolojisi çözüldü: +480 araştırma.'; }
+       uncertain:true, f:(g,r)=>{ if (r()<.6){ g.p.res.ara += 480; return 'Verici çok eski bir avcı türüne ait. Teknolojisi çözüldü: +480 araştırma.'; }
                   g.p.res.ala -= 60; return 'İnceleme sırasında verici patladı: −60 alaşım.'; }}
     ]},
 
@@ -1875,7 +1875,7 @@ const CHAINS = {
               if (o){ g.p.rel[o.id] = clamp(g.p.rel[o.id]+25,-100,100); o.rel[0] = clamp(o.rel[0]+25,-100,100); }
               return 'Bilim insanı iade edildi. Komşumuz bu jesti unutmayacak.'; }},
       {t:'Verileri al, kendisini iade et', d:'İki tarafı da idare et',
-       f:(g,r)=>{ g.p.res.ara += 320;
+       uncertain:true, f:(g,r)=>{ g.p.res.ara += 320;
               if (r()<.5){ const o = g.emps.find(x=>x.id && !x.dead);
                 if (o){ g.p.rel[o.id] = clamp(g.p.rel[o.id]-30,-100,100); o.rel[0] = clamp(o.rel[0]-30,-100,100); }
                 return 'Veriler kopyalandı ama komşumuz öğrendi: +320 araştırma, ilişki bozuldu.'; }
@@ -1898,14 +1898,14 @@ const CHAINS = {
 const EVENTS = [
   {id:'e1', n:'Bilim Konseyi Talebi', t:'Baş bilimcin, riskli bir hızlandırılmış araştırma programı için bütçe istiyor.',
    ok:g=>g.p.res.min>150,
-   ch:[{t:'Fonu onayla', d:'−150 mineral, +260 araştırma', f:g=>{g.p.res.min-=150; g.p.res.ara+=260; return 'Program başladı: +260 araştırma.';}},
-       {t:'Reddet', d:'−8 etki', f:g=>{g.p.res.etk-=8; return 'Bilim konseyi küstü: −8 etki.';}}]},
+   ch:[{t:'Fonu onayla', d:'−150 mineral, +260 araştırma', cost:{min:150}, f:g=>{g.p.res.min-=150; g.p.res.ara+=260; return 'Program başladı: +260 araştırma.';}},
+       {t:'Reddet', d:'−8 etki', cost:{etk:8}, f:g=>{g.p.res.etk-=8; return 'Bilim konseyi küstü: −8 etki.';}}]},
   {id:'e2', n:'Göçmen Filosu', t:'Yersiz yurtsuz bir mülteci filosu sınırlarında beliriyor. Sığınma istiyorlar.',
-   ch:[{t:'Kabul et', d:'+2 nüfus, −60 yiyecek', f:g=>{ const c=g.p.colonies[0]; if(c){ const pl=g.sys[c.s].planets[c.p]; if(pl.col) pl.col.pop+=2; } g.p.res.yiy-=60; return 'Mülteciler yerleştirildi: +2 nüfus.';}},
-       {t:'Geri çevir', d:'+40 etki, −10 itibar', f:g=>{g.p.res.etk+=40; g.emps.forEach(o=>{ if(o.id) g.p.rel[o.id]=clamp(g.p.rel[o.id]-6,-100,100); }); return 'Sınırlar kapatıldı: +40 etki, komşular soğudu.';}}]},
+   ch:[{t:'Kabul et', d:'+2 nüfus, −60 yiyecek', cost:{yiy:60}, f:g=>{ const c=g.p.colonies[0]; if(c){ const pl=g.sys[c.s].planets[c.p]; if(pl.col) pl.col.pop+=2; } g.p.res.yiy-=60; return 'Mülteciler yerleştirildi: +2 nüfus.';}},
+       {t:'Geri çevir', d:'+40 etki, diğer devletlerle ilişki −6', f:g=>{g.p.res.etk+=40; g.emps.forEach(o=>{ if(o.id) g.p.rel[o.id]=clamp(g.p.rel[o.id]-6,-100,100); }); return 'Sınırlar kapatıldı: +40 etki, komşular soğudu.';}}]},
   {id:'e3', n:'Alaşım Grevi', t:'Dökümhane işçileri üretimi durdurdu. Talepleri pahalı ama makul.',
-   ch:[{t:'Talepleri karşıla', d:'−120 enerji', f:g=>{g.p.res.ene-=120; return 'Grev sona erdi.';}},
-       {t:'Üretimi zorla', d:'−40 alaşım, −6 etki', f:g=>{g.p.res.ala-=40; g.p.res.etk-=6; return 'Zorlama işe yaramadı: −40 alaşım, −6 etki.';}}]},
+   ch:[{t:'Talepleri karşıla', d:'−120 enerji', cost:{ene:120}, f:g=>{g.p.res.ene-=120; return 'Grev sona erdi.';}},
+       {t:'Üretimi zorla', d:'−40 alaşım, −6 etki', cost:{ala:40,etk:6}, f:g=>{g.p.res.ala-=40; g.p.res.etk-=6; return 'Zorlama işe yaramadı: −40 alaşım, −6 etki.';}}]},
   {id:'e4', n:'Kayıp Sonda', t:'Yıllar önce fırlatılan bir sonda geri döndü. Hafızası şaşırtıcı derecede dolu.',
    ch:[{t:'Verileri işle', d:'+200 araştırma', f:g=>{g.p.res.ara+=200; return 'Sonda verileri çözüldü: +200 araştırma.';}},
        {t:'Halka aç', d:'+35 etki', f:g=>{g.p.res.etk+=35; return 'Keşif halkı coşturdu: +35 etki.';}}]},
@@ -6801,6 +6801,7 @@ function serializePoliticalWorld(){
     cncAge: (typeof G.cncAge === 'number') ? G.cncAge : d.cncAge,
     council: G.council ? jsonSafeClone(G.council, null) : null,
     feds: jsonSafeClone(G.feds || [], []),
+    ...(G.fedFounding?{fedFounding:jsonSafeClone(G.fedFounding,null)}:{}),
     fedUid: (typeof G.fedUid === 'number') ? G.fedUid : d.fedUid,
     friction: jsonSafeClone(G.friction || {}, {}),
     rebelAlliance: G.rebelAlliance ? jsonSafeClone(G.rebelAlliance, null) : null,
@@ -6817,6 +6818,7 @@ function serializePoliticalWorld(){
 function resetPoliticalRuntimeState(){
   const d = politicalWorldDefaults();
   G.memAge = d.memAge; G.cncAge = d.cncAge;
+  delete G.fedFounding;
   G.council = d.council; G.feds = d.feds; G.fedUid = d.fedUid;
   G.friction = d.friction; G.rebelAlliance = d.rebelAlliance;
   G.megaWatch = d.megaWatch; G.sandbox = d.sandbox;
@@ -6853,6 +6855,7 @@ function restorePoliticalWorld(data, sv){
   if (has(data,'cncAge') && typeof data.cncAge === 'number') G.cncAge = data.cncAge;
   if (has(data,'council'))  G.council = data.council ? jsonSafeClone(data.council, null) : null;
   if (has(data,'feds') && Array.isArray(data.feds)) G.feds = jsonSafeClone(data.feds, []);
+  if (has(data,'fedFounding')){const x=fedFoundRestore(data.fedFounding);if(x)G.fedFounding=x;}
   if (has(data,'fedUid') && typeof data.fedUid === 'number') G.fedUid = data.fedUid;
   if (has(data,'friction') && data.friction && typeof data.friction === 'object')
     G.friction = jsonSafeClone(data.friction, {});
@@ -7312,7 +7315,7 @@ const NOTE_CODEC = {
 /* Kimliği bir imparatorluğa bağlı, sade sayısal payload'lar */
 const NOTE_EMP_KINDS  = ['peace','cncnew','wardec','sqOffer'];
 /* Serbest sayısal payload (imparatorluk referansı DEĞİL) */
-const NOTE_NUM_KINDS  = ['crisis','criswarn','fedvote','crisend'];
+const NOTE_NUM_KINDS  = ['fedfound','fedfoundResult','crisis','criswarn','fedvote','crisend'];
 /* Sade dize payload */
 const NOTE_STR_KINDS  = ['cncvote','facdem','faccoup'];
 
@@ -7380,6 +7383,7 @@ function encodeNote(it){
   else return null;                                   // bilinmeyen kind
   if (data === null || data === undefined) return null;
   out.data = data;
+  if(['event','anomaly','chain'].includes(kind)&&it.hidden===true)out.hidden=true;
   return out;
 }
 /* Kayıttaki bildirimi runtime biçimine döndürür. Çözülemezse null. */
@@ -7405,6 +7409,7 @@ function decodeNote(rec){
   else return null;
   if (data === null || data === undefined) return null;
   out.data = data;
+  if(['event','anomaly','chain'].includes(kind)&&rec.hidden===true)out.hidden=true;
   return out;
 }
 
@@ -7479,11 +7484,11 @@ function restoreEventsWorld(data, sv){
       if (it.uid > enBuyuk) enBuyuk = it.uid;
       kutu.push(it);                                    // SIRA korunur
     }
-    /* Mevcut azami 6 bildirim politikası korunur. */
-    while (kutu.length > 6){
-      const i = kutu.findIndex(x => !x.pause&&x.uid!==data.minimized);
-      const fallback=kutu.findIndex(x=>x.uid!==data.minimized);
-      kutu.splice(i >= 0 ? i : fallback, 1);
+    /* Six visible cards; pending authored event decisions survive overflow. */
+    while (kutu.filter(n=>!n.hidden).length > 6){
+      const i = kutu.findIndex(x => !x.hidden&&!x.pause&&x.uid!==data.minimized);
+      const fallback=kutu.findIndex(x=>!x.hidden&&x.uid!==data.minimized),chosen=i>=0?i:fallback;
+      if(['event','anomaly','chain'].includes(kutu[chosen].kind))kutu[chosen].hidden=true;else kutu.splice(chosen,1);
     }
     G.inbox = kutu;
     if(Number.isSafeInteger(data.minimized)&&kutu.some(n=>n.uid===data.minimized))G.minNote=data.minimized;
@@ -8431,7 +8436,7 @@ function forceRedraw(sebep){
    Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
    Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
 /* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */
-const BUILD_ID = '96h10p13';
+const BUILD_ID = '96h10p14';
 const DIAG_MAX = 40;
 const DIAG = [];
 function logDiag(tur, mesaj){

@@ -42,7 +42,10 @@ async function design0(p,o){
 /* gerçek dokunma (Chromium CDP Input.dispatchTouchEvent → pointer/touch olayları) */
 async function touch(p){if(!p.__cdp)p.__cdp=await p.context().newCDPSession(p);return p.__cdp;}
 async function tapAt(p,x,y){const c=await touch(p);await c.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x,y}]});await c.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});}
-async function swipe(p,sel,dx){const c=await touch(p),b=await p.locator(sel).first().boundingBox();if(!b)throw Error('no '+sel);const x=b.x+b.width/2,y=b.y+b.height/2;
+async function swipe(p,sel,dx){const c=await touch(p),locator=p.locator(sel).first();
+  const inspect=()=>p.evaluate(sel=>{const el=document.querySelector(sel),r=el?.getBoundingClientRect(),top=r&&document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);return {selector:sel,who:G.p.name,rect:r&&{x:r.x,y:r.y,width:r.width,height:r.height},target:top?.outerHTML.slice(0,240),hit:!!el&&!!top&&(el===top||el.contains(top))};},sel);
+  const before=await inspect();await locator.scrollIntoViewIfNeeded();const after=await inspect();fs.appendFileSync(path.join(out,'swipe-targets.jsonl'),JSON.stringify({before,after})+'\n');assert(after.hit,'swipe must hit the actual visible card '+JSON.stringify(after));
+  const b=await locator.boundingBox();if(!b)throw Error('no '+sel);const x=b.x+b.width/2,y=b.y+b.height/2;
   await c.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x,y}]});
   for(let i=1;i<=8;i++){await c.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:x+dx*i/8,y:y+(i%2)}]});await p.waitForTimeout(16);}
   await c.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});await p.waitForTimeout(350);}

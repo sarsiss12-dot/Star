@@ -2,7 +2,7 @@
 /* 95E — references to existing diplomatic actions, never a second engine. */
 const DiplomaticInbox = {
   historyLimit:256, pendingLimit:512,
-  types:{vassal:'Vasallık sözleşmesi / bağımsızlık',fedrequest:'Federasyon üyelik sonucu',aideal:'Diplomatik teklif',pact:'İstihbarat anlaşması',submit:'Vasallık / himaye talebi',peace:'Barış teklifi',sqOffer:'Statüko barışı',fedvote:'Federasyon oylaması',invite:'Federasyona katılım daveti',decision:'Ortak savaş kararı'},
+  types:{fedfound:'Federasyon kuruluş daveti',fedfoundResult:'Federasyon kuruluş sonucu',vassal:'Vasallık sözleşmesi / bağımsızlık',fedrequest:'Federasyon üyelik sonucu',aideal:'Diplomatik teklif',pact:'İstihbarat anlaşması',submit:'Vasallık / himaye talebi',peace:'Barış teklifi',sqOffer:'Statüko barışı',fedvote:'Federasyon oylaması',invite:'Federasyona katılım daveti',decision:'Ortak savaş kararı'},
   states:{countered:'Karşı teklif gönderildi',pending:'Bekliyor',accepted:'Kabul edildi',rejected:'Reddedildi',expired:'Süresi doldu',invalid:'Geçersizleşti'},
   empty(){return {v:1,next:1,records:[]};},
   state(){return G.diplomaticInbox||(G.diplomaticInbox=this.empty());},
@@ -10,11 +10,11 @@ const DiplomaticInbox = {
   capture(note){
     if(!this.supported(note.kind)||!G.p)return null;
     const st=this.state(),kind=note.kind,data=note.data;
-    const from=kind==='aideal'||kind==='pact'||kind==='submit'?data?.from:kind==='fedvote'?fedOf(data)?.vote?.proposer:data;
+    const from=kind==='fedfound'||kind==='fedfoundResult'?fedFoundGet(data)?.by:kind==='aideal'||kind==='pact'||kind==='submit'?data?.from:kind==='fedvote'?fedOf(data)?.vote?.proposer:data;
     if(!Number.isInteger(from)||!G.emps[from])return null;
     const f=kind==='fedvote'?fedOf(data):null;
     const mpKey=kind==='aideal'&&/^mp71:[1-9]\d*$/.test(note.key||'')?'deal:'+note.key:null;
-    const key=mpKey||(kind==='fedvote'?'vote:'+f.id+':'+fedVoteToken(f.vote):kind==='aideal'?'deal:'+offerSignature(data)+':'+data.born:kind+':'+from+':'+(note.key||'')+':'+(note.born??G.day));
+    const key=mpKey||((kind==='fedfound'||kind==='fedfoundResult')?note.key:kind==='fedvote'?'vote:'+f.id+':'+fedVoteToken(f.vote):kind==='aideal'?'deal:'+offerSignature(data)+':'+data.born:kind+':'+from+':'+(note.key||'')+':'+(note.born??G.day));
     let rec=st.records.find(r=>r.key===key);if(rec)return rec;
     if(st.records.filter(r=>r.status==='pending').length>=this.pendingLimit)return null;
     const encoded=encodeNote({...note,uid:note.uid||1,born:note.born??G.day});if(!encoded)return null;
@@ -60,12 +60,15 @@ const DiplomaticInbox = {
     if(!r||r.status!=='pending')return no('Teklif sonuçlandı',true);
     if(G.day>=r.expires)return no('Teklifin süresi doldu',true,'expired');
     const o=G.emps[r.from];if(!G.p||G.p.dead||!o||o.dead)return no('Taraf artık mevcut değil',true);
+    if(r.kind==='fedfoundResult')return no('Kuruluş sonucu — karar Federasyon bölümünde',true,'accepted');
+    if(r.kind==='fedfound'){const p=fedFoundGet(r.note?.data);return p&&p.members.includes(G.p.id)&&p.by!==G.p.id&&p.status==='pending'&&p.expires>G.day&&p.replies[G.p.id]?.status==='pending'?{ok:true}:no('Davet sonuçlandı veya geçersiz',true,p?.replies[G.p.id]?.status==='accepted'?'accepted':'invalid');}
     const offer=this.deal(r);if(offer){const q=dealQuote(offer);return {ok:q.ok,why:q.reasons?.join(' · ')||'',quote:q};}
     if(r.kind==='submit'){
       if(isVassal(o))return no('Gönderen artık bağımsız değil',true);
       const q=aiProtection(o,G.p);return q.ok&&o.res.etk>=VASSAL_SEEK_COST?{ok:true}:no(q.why||'Gönderenin Etkisi yetersiz');
     }
     if(r.kind==='sqOffer')return G.p.war[o.id]?canStatusQuo(G.p,o):no('Savaş sona erdi',true);
+    if(r.kind==='fedfound'){const result=fedFoundReply(G.p,r.note.data,!!yes);if(result.ok){r.status=yes?'accepted':'rejected';r.finished=G.day;G.inbox=G.inbox.filter(n=>n.key!=='fedfound:'+r.note.data);}return result;}
     if(r.kind==='vassal'){const q=G.emps[r.fid]?.vassalTalk;if(!q||r.token!==q.id+':'+q.round)return no('Bu müzakere turu tamamlandı; güncel tur veya geçmişi incele',true,q&&r.token?.startsWith(q.id+':')?'countered':'invalid');if(q.status!=='pending')return no(q.why||'Müzakere tamamlandı',true,q.status);const g=vassalTalkValid(q);return g.ok?{ok:q.to===G.p.id,why:q.to===G.p.id?'':'Karşı tarafın yanıtı bekleniyor'}:no(g.why,true,G.day>=q.expires?'expired':'invalid');}
     const f=fedOf(r.fid);if(!f)return no('Federasyon artık mevcut değil',true);
     if(r.kind==='fedrequest'){

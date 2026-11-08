@@ -1277,6 +1277,13 @@ const UI = {
         if(Object.hasOwn(FED_BALLOTS,x)&&x!=='weighted')this.fedBallotChoice=x;
         this.openFed();break;
       }
+      case 'noteOptions':{const n=G.inbox.find(n=>n.uid===+x);if(!this.noteChoiceData(n))break;if(this._noteOptionsWorld!==G.emps){this._noteOptionsWorld=G.emps;this._noteOptions=new Set();}if(this._noteOptions.has(+x))this._noteOptions.delete(+x);else this._noteOptions.add(+x);this.drawInbox();break;}
+      case 'noteChoice':{const [uid,index]=String(x).split(':').map(Number),n=G.inbox.find(n=>n.uid===uid);const r=this.applyEventChoice(n,index);if(!r.ok)say(r.why,'war');break;}
+      case 'fedFoundType':this.fedFoundType=x;this.openFed();break;
+      case 'fedFoundSelect':{const ids=this.fedFoundSelected||(this.fedFoundSelected=[]),i=ids.indexOf(+x);if(i<0)ids.push(+x);else ids.splice(i,1);this.openFed();break;}
+      case 'fedFoundStart':{const r=fedFoundPropose(G.p,this.fedFoundType||'askeri',this.fedBallotChoice||'equal',this.fedFoundSelected||[]);say(r.ok?'Kuruluş davetleri gönderildi; açık yanıtlar ve son onay bekleniyor':r.why,r.ok?'sci':'war');this.openFed();break;}
+      case 'fedFoundReply':{const [id,answer]=String(x).split(':');const r=fedFoundReply(G.p,+id,answer==='yes');say(r.ok?'Karar gönderildi / kaydedildi':r.why,r.ok?'sci':'war');this.openFed();break;}
+      case 'fedFoundCancel':case 'fedFoundFinish':{const r=a==='fedFoundCancel'?fedFoundCancel(G.p,+x):fedFoundFinish(G.p,+x);say(r.ok?'Kuruluş işlemi kaydedildi':r.why,r.ok?'sci':'war');this.openFed();break;}
       case 'foundFed': {
         const [type,ballot]=String(x||'askeri').split(':');
         const r = foundFederation(G.p,type,ballot||this.fedBallotChoice||'equal');
@@ -3710,7 +3717,7 @@ const UI = {
   refreshFedPanel(){
     const pane=$('diploPane'),box=pane.querySelector('.fedBox');
     if(!pane.classList.contains('show')||!box)return;
-    const key=JSON.stringify([Math.floor(G.day),G.p.res.etk,findFed(G.p),G.feds?.map(f=>[f.id,f.members,f.invites?.[G.p.id]])]);
+    const key=JSON.stringify([Math.floor(G.day),G.p.res.etk,G.fedFounding,findFed(G.p),G.feds?.map(f=>[f.id,f.members,f.invites?.[G.p.id]])]);
     if(this._fedRefreshKey===key&&this._fedRefreshWorld===G.sys)return;
     this.openFed(true);this._fedRefreshKey=key;this._fedRefreshWorld=G.sys;
   },
@@ -3754,6 +3761,45 @@ const UI = {
     for(const o of G.emps.filter(o=>o!==G.p&&G.p.contact[o.id]&&!o.dead&&!o.wild&&!findFed(o)))h+=`<div class="box"><b>${esc(o.name)}</b>${this.fedMotionButton('admit',{target:o.id},'Üyelik öner · 60 ◈')}</div>`;
     return h+'</details>';
   },
+  fedFoundPanel(){
+    if(this._fedFoundWorld!==G.emps){this._fedFoundWorld=G.emps;this.fedFoundSelected=[];this.fedFoundType='askeri';}
+    const e=G.p,type=Object.hasOwn(FED_TYPES,this.fedFoundType)?this.fedFoundType:'askeri',ballot=Object.hasOwn(FED_BALLOTS,this.fedBallotChoice)&&this.fedBallotChoice!=='weighted'?this.fedBallotChoice:'equal',selected=this.fedFoundSelected||[],q=fedFoundQuote(e,type,ballot,selected);
+    const labels={pending:'BEKLİYOR',accepted:'KABUL EDİLDİ',rejected:'REDDEDİLDİ',founded:'KURULDU',cancelled:'İPTAL',expired:'SÜRESİ DOLDU',invalid:'GEÇERSİZ'};
+    let h='<div class="ph">FEDERASYON KURULUŞU</div><div class="mini">İki açık rızalı insan yeterlidir. Tek insanlı oyunda en az iki AI ortak gerekir. Yalnız seçtiğin ortaklar davet edilir; ücret son onayda bir kez kesilir.</div>';
+    for(const p of G.fedFounding?.proposals||[]){if(!p.members.includes(e.id))continue;const own=p.by===e.id,r=p.replies[e.id];
+      h+=`<div class="box fedFoundation" data-founding="${p.id}"><b>${esc(FED_TYPES[p.type].n)} · ${esc(FED_BALLOTS[p.ballot].n)} · ${labels[p.status]}</b><div class="mini">Öneren: ${esc(G.emps[p.by].name)} · ${Math.max(0,Math.ceil((p.expires-G.day)/30))} ay · ${fedFoundCost(G.emps[p.by])} Etki · yalnız kurucudan</div><div class="mini">${esc(fedDutyText({type:p.type,charter:{...fedDefaultCharter(p.type),ballot:p.ballot},laws:{}}))} Üyeler arasında ittifak oluşur. Önceki savaşlar sessizce kapatılmaz.</div>`;
+      for(const id of p.members)h+=`<div class="mini">${esc(G.emps[id]?.name||'Bilinmeyen kurucu')} — ${labels[p.replies[id]?.status]||'GEÇERSİZ'} · ${esc(p.replies[id]?.why||'')}</div>`;
+      if(p.why)h+=`<div role="status">${esc(p.why)}</div>`;
+      if(p.status==='pending'){
+        if(own)h+=`<button class="abtn pri" data-a="fedFoundFinish" data-x="${p.id}" ${p.members.every(id=>p.replies[id]?.status==='accepted')?'':'disabled'}>SON KURULUŞ ONAYI · ${fedFoundCost(e)} ◈</button><button class="abtn" data-a="fedFoundCancel" data-x="${p.id}">SÜRECİ İPTAL ET</button>`;
+        else if(r?.status==='pending')h+=`<button class="abtn pri" data-a="fedFoundReply" data-x="${p.id}:yes">ŞARTLARI KABUL ET</button><button class="abtn" data-a="fedFoundReply" data-x="${p.id}:no">REDDET</button>`;
+      }
+      h+='</div>';
+    }
+    h+='<div class="ph">TÜR</div>';
+    for(const [key,T]of Object.entries(FED_TYPES))h+=`<button class="abtn ${key===type?'pri':''}" data-a="fedFoundType" data-x="${key}">${T.ico} ${esc(T.n)}</button>`;
+    h+='<div class="ph">OY REJİMİ</div>';
+    for(const [key,B]of Object.entries(FED_BALLOTS))if(key!=='weighted')h+=`<button class="abtn ${key===ballot?'pri':''}" data-a="fedBallot" data-x="${key}">${esc(B.n)}</button>`;
+    h+=`<p class="mini">${esc(FED_TYPES[type].d)} ${esc(FED_BALLOTS[ballot].d)} ${esc(fedDutyText({type,charter:{...fedDefaultCharter(type),ballot},laws:{}}))} Kuruluşta seçilen üyeler birbirleriyle ittifak kurar. Şart değişikliği eski daveti değiştirmez; iptal edip yeni şartları gönder.</p><div class="ph">KURUCU ORTAKLAR · ${selected.length} SEÇİLİ</div>`;
+    for(const c of q.candidates){const o=G.emps[c.id];if(!o)continue;h+=`<div class="box"><button class="abtn ${selected.includes(c.id)?'pri':''}" data-a="fedFoundSelect" data-x="${c.id}" aria-pressed="${selected.includes(c.id)}" ${c.ok?'':'disabled'}>${selected.includes(c.id)?'☑':'☐'} ${esc(o.name)}</button><div class="mini">${c.h?'İnsan — açık yanıt gerekli':'AI — stratejik karar davette verilir'} · İlişki ${Math.round(e.rel[c.id]||0)} · ${esc(c.ok?'Yapısal olarak uygun':c.why)}</div>${c.approach?`<div class="mini">Tür / oy rejimi yaklaşımı: ${esc(c.approach)}</div>`:''}</div>`;}
+    h+=`<div class="mini" role="status">${esc(q.why||'Seçilen şartlar davete uygun')} · ${q.cost} ◈</div><button class="abtn pri" data-a="fedFoundStart" ${q.ok?'':'disabled'}>KURULUŞ DAVETLERİNİ GÖNDER</button>`;
+    return h;
+  },
+  fedFoundCards(){
+    if(this._fedFoundSync||!G.p)return;if(this._fedNoticeWorld!==G.emps){this._fedNoticeWorld=G.emps;this._fedFoundDismissed=new Set();}this._fedFoundSync=true;
+    try{for(const p of G.fedFounding?.proposals||[]){if(!p.members.includes(G.p.id))continue;const me=G.p.id,reply=p.replies[me],key='fedfound:'+p.id,st=DiplomaticInbox.state();
+      let rec=st.records.find(r=>r.key===key);
+      const summary=FED_TYPES[p.type].n+' · '+p.members.length+' kurucu · '+FED_BALLOTS[p.ballot].n+' · '+fedDutyText({type:p.type,charter:{...fedDefaultCharter(p.type),ballot:p.ballot},laws:{}});
+      if(p.by!==me&&!rec){this.notify({kind:'fedfound',data:p.id,key,ico:'🏛',pause:false,title:'FEDERASYON KURULUŞ DAVETİ — '+G.emps[p.by].name,sub:summary});rec=st.records.find(r=>r.key===key);}
+      if(rec){rec.expires=p.expires;if(p.status!=='pending'||reply?.status!=='pending'){rec.status=p.status==='expired'?'expired':reply?.status==='accepted'?'accepted':reply?.status==='rejected'?'rejected':'invalid';rec.finished=p.finished||reply?.day||G.day;rec.why=p.why||reply?.why||p.status;G.inbox=(G.inbox||[]).filter(n=>n.key!==key);}else if(!G.inbox.some(n=>n.key===key)&&!this._fedFoundDismissed?.has(key)&&!(globalThis.MP6Stars?.S.swiped.has(key))){this.notify({kind:'fedfound',data:p.id,key,ico:'🏛',pause:false,title:'FEDERASYON KURULUŞ DAVETİ — '+G.emps[p.by].name,sub:summary});}}
+      const stateKey='fedfound-result:'+p.id+':'+p.status+':'+p.members.map(id=>p.replies[id]?.status||'').join(',');
+      if(!st.records.some(r=>r.key===stateKey)){
+        const count=p.members.filter(id=>p.replies[id]?.status==='accepted').length,f=p.fid?fedOf(p.fid):null;
+        this.notify({kind:'fedfoundResult',data:p.id,key:stateKey,ico:'🏛',pause:false,title:p.status==='founded'?'FEDERASYON KURULDU — '+(f?.name||'Federasyon'):'KURULUŞ SONUCU · '+count+'/'+p.members.length+' onay',sub:summary+(f?' · Lider: '+G.emps[f.leader].name:' · '+p.members.filter(id=>id!==p.by).map(id=>G.emps[id].name+': '+(p.replies[id]?.status==='accepted'?'kabul':p.replies[id]?.status==='rejected'?'ret':'bekliyor')).join(' · '))});
+        const r=st.records.find(r=>r.key===stateKey);if(r){r.status='accepted';r.finished=G.day;}
+      }
+    }}finally{this._fedFoundSync=false;}
+  },
   openFed(automatic=false){
     const old=$('diploPane').querySelector('.fedTabBody');
     if(this._fedTabsWorld!==G.emps){this._fedTabsWorld=G.emps;this._fedOpen={};this._fedScroll={};this.fedTab='general';this._fedRenderedTab=null;}
@@ -3771,31 +3817,9 @@ const UI = {
 
     h+=typeof ArchiveUI!=='undefined'?ArchiveUI.newsBackButton():'';
     if (!f){
-      const allies = G.emps.filter(o=>!o.dead && !o.wild && o.id!==0 && e.ally[o.id]);
-      h += `<div class="envRow"><span>DURUM</span><b style="color:#ff9b3d">FEDERASYON YOK</b></div>`;
-      const ballot=Object.hasOwn(FED_BALLOTS,this.fedBallotChoice)&&this.fedBallotChoice!=='weighted'?this.fedBallotChoice:'equal';
-      const checks=Object.fromEntries(Object.keys(FED_TYPES).map(type=>[type,canFoundFed(e,type,ballot)]));
-      h+='<div class="ph">OY REJİMİ</div><div class="mini">Kurucu ortaklar seçtiğin rejimi kendi çıkarlarıyla değerlendirir. Ağırlıklar1–2;üye çoğunluğu da gerekir.</div>';
-      for(const [key,B]of Object.entries(FED_BALLOTS).filter(([key])=>key!=='weighted')){const preview=checks.askeri.allies.map(o=>o.id),ids=[e.id,...preview],ratings=Object.fromEntries(ids.map(id=>[id,aiFedKnownMandate(e,G.emps[id])])),w=fedWeightsFrom(ids,key,ratings);
-       h+=`<div class="box fedPolitics"><button class="abtn ${ballot===key?'pri':''}" data-a="fedBallot" data-x="${key}" aria-pressed="${ballot===key}">${ballot===key?'✓ ':''}${B.n}</button><div class="mini">${B.d}</div><div class="mini">${preview.length?'Bilinen adaylarla tahmini dağılım: '+ids.map(id=>esc(G.emps[id].name)+' '+w[id]).join(' · '):'Örnek A/B/C (askerî güçlü / ekonomik güçlü / küçük): '+Object.values(fedWeightsFrom([0,1,2],key,{0:{military:90,economic:20},1:{military:30,economic:50},2:{military:10,economic:10}})).join(' / ')}</div></div>`;}
-      h+=`<div class="ph">FEDERASYON KURMA</div><div class="mini">Kurucu dahil en az 3 üye: sen + kabul eden 2 bağımsız AI müttefik. Kuruluş ücreti yalnız başarıda senden kesilir. Aşağıdaki uygunluk, AI'nın mevcut kabul kararını da içerir. Üye daveti kuruluş sonrasında ayrı oylamadır.</div>
-        <div class="row"><span>Toplam müttefik</span><b>${allies.length}</b></div>
-        <div class="row"><span>Gerekli asgari üye / AI ortak</span><b>3 / 2</b></div>
-        <div class="row"><span>Mevcut Etki</span><b>${Math.floor(e.res.etk||0)} ◈</b></div>
-        <button class="abtn" data-a="fedPane">UYGUNLUĞU YENİLE</button>`;
-      for(const [type,T] of Object.entries(FED_TYPES)){
-        const gate=checks[type];
-        h+=`<details class="dcDetails" ${type==='askeri'?'open':''}><summary>${T.ico} ${T.n} · ${gate.allies.length} uygun ortak</summary>
-          <div class="mini">${T.d} ${fedDutyText({type,charter:fedDefaultCharter(type),laws:{}})}</div>
-          <div class="mini">Uygun ve kabul eden AI adaylar: ${gate.allies.map(o=>esc(o.name)).join(', ')||'yok'}.</div>
-          ${gate.reasons.map(reason=>`<div class="mini" role="status">⚠ ${esc(reason)}</div>`).join('')}
-          <button class="abtn ${gate.ok?'pri':''}" data-a="foundFed" data-x="${type}:${ballot}" ${gate.ok?'':'disabled'}>${T.n.toLocaleUpperCase('tr')} KUR · ${gate.cost} ◈</button>
-          <div class="mini">${gate.ok?'AI adaylarının mevcut kabulü uygun; kuruluşta yeniden doğrulanır.':'Eksik koşulları tamamlayıp uygunluğu yenile.'}</div></details>`;
-      }
+      const allies=G.emps.filter(o=>o!==e&&!o.dead&&!o.wild&&e.ally[o.id]);
+      h+=this.fedFoundPanel();
       for(const invitation of G.feds||[]){const inv=invitation.invites?.[e.id];if(!inv||inv.expires<=G.day)continue;h+=`<div class="box"><b>${esc(invitation.name)} · ${fedType(invitation).n}</b><div class="mini">${fedType(invitation).d} Oy rejimi: ${esc(FED_BALLOTS[fedBallot(invitation)]?.n||fedBallot(invitation))}. ${fedDutyText(invitation)} Mevcut yasalar: ${Object.keys(invitation.laws||{}).map(k=>esc((FED_LAWS[k]||FED_INNER_LAWS[k]||{}).n||k)).join(', ')||'yok'}. ${Math.ceil(inv.expires-G.day)} gün kaldı.</div><button class="abtn" data-a="fedInviteAccept" data-x="${invitation.id}">YÜKÜMLÜLÜKLERİ KABUL ET VE KATIL</button><button class="abtn" data-a="fedInviteReject" data-x="${invitation.id}">REDDET</button></div>`;}
-      h+=`<details class="dcDetails"><summary>Müttefiklerin uygunluğu · ${allies.length} devlet</summary>`;
-      h+=allies.map(o=>`<div class="box"><b>${esc(o.name)}</b><div class="mini">İlişki ${Math.round(e.rel[o.id]||0)}</div>${Object.entries(FED_TYPES).map(([type,T])=>{const q=checks[type].candidates.find(c=>c.id===o.id);return `<div class="mini">${T.n}: ${q?.ok?'Uygun · AI kabul ediyor':esc(q?.why||'Kuruluşa uygun değil')}</div>`;}).join('')}</div>`).join('')||'<div class="empty">Henüz müttefikin yok.</div>';
-      h+='</details>';
       const cands = G.emps.filter(o=>!o.dead && !o.wild && o.id!==0 && !e.ally[o.id] &&
                                      e.contact[o.id] && !e.war[o.id] && canAlly(e,o));
       if (cands.length){
@@ -7374,11 +7398,11 @@ const UI = {
     if(typeof DiplomaticInbox!=='undefined'&&DiplomaticInbox.supported(item.kind)&&!DiplomaticInbox.capture(item)){say('Gelen kutusu kapasitesi dolu; yeni teklif alınmadı','war');return false;}
     G.inbox.push(item);
     // kutu şişmesin: en eski duraklatmayan bildirimler düşer
-    while (G.inbox.length > 6){
+    while (G.inbox.filter(n=>!n.hidden).length > 6){
       let i = G.inbox.findIndex(x => !x.pause&&!x.hidden&&x.uid!==G.minNote);   // MP.7.5: gizlenen karar olayı önce düşmez
-      if (i < 0) i = G.inbox.findIndex(x => !x.pause&&x.uid!==G.minNote);
-      const fallback=G.inbox.findIndex(x=>x.uid!==G.minNote);
-      G.inbox.splice(i >= 0 ? i : fallback, 1);
+      if (i < 0) i = G.inbox.findIndex(x => !x.pause&&!x.hidden&&x.uid!==G.minNote);
+      const fallback=G.inbox.findIndex(x=>!x.hidden&&x.uid!==G.minNote);
+      const chosen=i>=0?i:fallback;if(this.noteChoiceData(G.inbox[chosen]))G.inbox[chosen].hidden=true;else G.inbox.splice(chosen,1);
     }
     if (item.pause && G.speed > 0){
       this.prePause = G.speed;
@@ -7387,17 +7411,17 @@ const UI = {
     this.drawInbox();
   },
   drawInbox(){
+    if(this._deferInbox)return;this.fedFoundCards();
     const box = $('inbox');
     if (!box) return;
     const list = (G.inbox || []).filter(n=>!n.hidden);   // MP.7.5: kaydırılarak gizlenen olay kartı çizilmez
     if (!list.length){ if(box.innerHTML)box.innerHTML='';box._inboxMarkup96d=null;box.classList.add('hidden');return; }
     box.classList.remove('hidden');
-    const markup = list.map(it =>
-      `<button class="nCard ${it.cls||''}" data-a="openNote" data-x="${it.uid}">
+    const markup = list.map(it =>{const brief=this.diplomaticBrief(it);return `<button class="nCard ${it.cls||''}" data-a="openNote" data-x="${it.uid}">
          <span class="nIco">${it.ico||'✉'}</span>
-         <span class="nTxt"><b>${esc(it.title)}</b><i>${esc(it.sub||'')}</i></span>
+         <span class="nTxt"><b>${esc(brief?.title||it.title)}</b><i>${esc(brief?.sub||it.sub||'')}</i></span>
          <span class="nGo">›</span>
-       </button>${this.noteQuick(it)}`).join('');
+       </button>${this.noteQuick(it)}`;}).join('');
     // Keep an unchanged decision's DOM node and entrance animation stable during refresh.
     if(box._inboxMarkup96d!==markup){box.innerHTML=markup;box._inboxMarkup96d=markup;}
     this.noteSwipeBind(box);
@@ -7406,6 +7430,46 @@ const UI = {
      Yeni bildirim / karar motoru yok: kart düğmeleri Gelen kutusu penceresinin
      yolunu kullanır (DiplomaticInbox.resolve, karşı teklifte aiDealOpen).
      Kaydırmak yalnız kartı ekrandan kaldırır: karar vermez, kaydı silmez. */
+  diplomaticBrief(it){
+    if(it.kind!=='aideal'||!it.data)return null;const o=it.data,all=[...(o.give||[]),...(o.want||[])],types=[...new Set(all.map(i=>i.t))];
+    const kind=types.includes('peace')?'Barış teklifi':types.includes('ally')?'İttifak teklifi':types.includes('nap')?'Saldırmazlık teklifi':'Diplomatik teklif';
+    const label=l=>l.slice(0,2).map(i=>dealLabel(i)).join(', ')||'yok',extra=Math.max(0,(o.give||[]).length-2)+Math.max(0,(o.want||[]).length-2),duty=types.includes('ally')?' · Karşılıklı ittifak yükümlülüğü':'';
+    return {title:this.diploName(o.from)+' · '+kind,sub:'Veriyor: '+label(o.give||[])+' · İstiyor: '+label(o.want||[])+duty+(extra?' · +'+extra+' koşul · Ayrıntıları gör':'')+(Number.isFinite(o.expires)?' · '+Math.max(0,Math.ceil((o.expires-G.day)/30))+' ay':'')};
+  },
+  noteChoiceData(it){
+    if(!it)return null;if(it.kind==='event')return EVENTS.find(e=>e.id===it.data?.id)||null;
+    if(it.kind==='chain')return CHAINS[it.data]||null;
+    if(it.kind==='anomaly')return ANOMALIES.find(a=>a.id===it.data?.a?.id)||null;
+    return null;
+  },
+  eventDecisionAuthority(){return true;},
+  choiceExplanation(c){if(c.next&&!c.f)return 'Sonraki bölüm · şimdi ödül uygulanmaz · Sonuç belirsiz';return (c.d||'Sonuç koşullara bağlı')+(c.uncertain||/risk|bilinmeyen|ihtimal|şans/i.test(c.d||'')?' · Sonuç belirsiz':'');},
+  noteChoiceMenu(it){
+    const ev=this.noteChoiceData(it);if(!ev)return '';
+    if(!this.eventDecisionAuthority())return '<div class="nOptions"><span class="mini">Bu olayın kararı host yetkisi gerektirir; yerel ödül uygulanmaz.</span></div>';
+    if(this._noteOptionsWorld!==G.emps){this._noteOptionsWorld=G.emps;this._noteOptions=new Set();}
+    const open=this._noteOptions.has(it.uid),toggle=`<button class="abtn" data-a="noteOptions" data-x="${it.uid}" aria-expanded="${open}">${open?'SEÇENEKLERİ GİZLE ▴':'SEÇENEKLER ▾'}</button>`;
+    if(!open)return '<div class="nOptions">'+toggle+'</div>';
+    return `<div class="nOptions expanded">${ev.ch.map((c,i)=>`<button class="ch" data-a="noteChoice" data-x="${it.uid}:${i}"><b>${esc(c.t)}</b><small>${esc(this.choiceExplanation(c))}</small></button>`).join('')}${toggle}</div>`;
+  },
+  applyEventChoice(note,index,world=G.emps){
+    if(!this.eventDecisionAuthority())return {ok:false,why:'Kararı yalnız yetkili host uygular'};
+    const data=this.noteChoiceData(note),live=(G.inbox||[]).find(n=>n===note||n.uid===note?.uid&&n.key===note?.key&&n.kind===note?.kind);
+    if(world!==G.emps||G.p.dead||G.over||Number.isFinite(note?.expires)&&G.day>=note.expires||!data||!Number.isInteger(index)||!data.ch[index]||(!live&&this._openNote!==note))return {ok:false,why:'Olay artık beklemiyor veya oyun kaydı değişti'};
+    const opt=data.ch[index];for(const [r,v]of Object.entries(opt.cost||{}))if((G.p.res[r]||0)<v)return {ok:false,why:'Yetersiz kaynak: '+(RES[r]?.n||r)};
+    const tx=dealTxBegin(),wasOpen=this._openNote;
+    let result='';
+    try{
+      G.inbox=(G.inbox||[]).filter(n=>n!==live);if(this._openNote===note)this._openNote=null;if(G.minNote===note.uid)G.minNote=null;
+      // Exactly the same authored choice callback and random source formerly
+      // used by the full window. Rendering never executes this path.
+      if(opt.f)result=opt.f(G,note.kind==='chain'?rnd:Math.random)||'';
+      if(note.kind==='chain'&&opt.next&&CHAINS[opt.next]){G.chainQueue=G.chainQueue||[];G.chainQueue.push({id:opt.next,at:G.day+60+Math.floor(rnd()*120)});}
+    }catch(error){dealTxRollback(tx);this._openNote=wasOpen;return {ok:false,why:'Olay uygulanamadı; durum korundu: '+String(error.message||error).slice(0,160)};}
+    this._noteOptions?.delete(note.uid);
+    this.openModal(`<div class="mhd"><span>SONUÇ</span></div><div class="mbd">${result||'Karar uygulandı.'}</div><div class="mft"><button class="ch" data-a="closem"><div class="cht">Kapat</div></button></div>`,note.kind==='event'?'':'sci');
+    this.drawInbox();this.refresh();return {ok:true};
+  },
   noteRecord(it){
     if(!it||typeof DiplomaticInbox==='undefined'||!DiplomaticInbox.supported(it.kind))return null;
     const byId=Number.isInteger(it.rec)?DiplomaticInbox.get(it.rec):null;   // çok oyunculu kartın kayıt bağı
@@ -7413,9 +7477,10 @@ const UI = {
     return DiplomaticInbox.state().records.find(r=>r.status==='pending'&&r.note&&r.note.uid===it.uid)||null;
   },
   noteQuick(it){
-    if(!['aideal','pact','invite','fedvote'].includes(it.kind))return '';
+    if(this.noteChoiceData(it))return this.noteChoiceMenu(it);
+    if(!['aideal','pact','invite','fedvote','fedfound'].includes(it.kind))return '';
     const r=this.noteRecord(it);if(!r)return '';
-    if(r._mpWait)return `<div class="nQuick" data-uid="${it.uid}"><span class="nqWait">Karar gönderildi — yanıt bekleniyor…</span></div>`;
+    if(r._mpWait||it.kind==='fedfound'&&this.fedFoundWaiting?.(it.data))return `<div class="nQuick" data-uid="${it.uid}"><span class="nqWait">Karar gönderildi — yanıt bekleniyor…</span></div>`;
     const v=it.kind==='fedvote';
     return `<div class="nQuick" data-uid="${it.uid}"><button class="nq ok" data-a="noteQuick" data-x="${it.uid}:y">${v?'EVET':'KABUL'}</button>`+
       `<button class="nq no" data-a="noteQuick" data-x="${it.uid}:n">${v?'HAYIR':'REDDET'}</button>`+
@@ -7443,6 +7508,7 @@ const UI = {
       it.hidden=true;if(G.minNote===it.uid){G.minNote=null;this.topbar();}
       say('Olay gizlendi — karar bekliyor; üstteki ☰ listesinden aç','sci');this.noteResume();this.drawInbox();this.topbar();return true;
     }
+    if(it.kind==='fedfound'){if(!this._fedFoundDismissed)this._fedFoundDismissed=new Set();this._fedFoundDismissed.add(it.key);}
     if(dip&&!DiplomaticInbox.capture(it)&&!this.noteRecord(it)){say('Gelen kutusu dolu; bildirim kaldırılmadı','war');this.drawInbox();return false;}
     list.splice(i,1);if(G.minNote===it.uid){G.minNote=null;this.topbar();}
     say(dip?'Bildirim kaldırıldı — karar Gelen kutusunda bekliyor':'Bildirim kaldırıldı');
@@ -7891,17 +7957,9 @@ const UI = {
       `<div class="mhd"><span>ANOMALİ · ${esc(sys.name)}</span></div>
        <div class="mbd"><div class="lead">${a.t}</div><b>${a.n}</b></div>
        <div class="mft">${a.ch.map((c,i)=>
-         `<button class="ch" data-a="anomch" data-x="${i}"><div class="cht">${c.t}</div><div class="chd">${c.d}</div></button>`
+         `<button class="ch" data-a="anomch" data-x="${i}"><div class="cht">${c.t}</div><div class="chd">${esc(this.choiceExplanation(c))}</div></button>`
        ).join('')}</div>`, 'sci', true);
-    this._hook('anomch', i=>{
-      if(resolved||world!==G.emps||note&&this._openNote!==note)return;
-      if(!a.ch[i])return;
-      resolved=true;if(this._openNote===note)this._openNote=null;
-      const res = a.ch[i].f(G, Math.random);
-      this.openModal(`<div class="mhd"><span>SONUÇ</span></div><div class="mbd">${res}</div>
-        <div class="mft"><button class="ch" data-a="closem"><div class="cht">Kapat</div></button></div>`,'sci');
-      this.refresh();
-    });
+    this._hook('anomch', i=>{const r=this.applyEventChoice(note,i,world);if(!r.ok)say(r.why,'war');});
   },
   /* olay metnindeki {KOLONI} {SISTEM} {IRK} yer tutucularını doldur
      ve olayın geçtiği yeri haritada göstermek için hedef sakla */
@@ -7909,20 +7967,21 @@ const UI = {
     const e = G.p;
     this.evTarget = null;
     const metin = String(txt);
+    const cosmetic=mulberry32(identityHash('event-text:'+G.seed+':'+(this._openNote?.key||'')+':'+(this._openNote?.born??G.day)+':'+metin));
     /* FAZ 12 DÜZELTMESİ: "Haritada Göster" metinde ADI GEÇEN yeri
        odaklamalı. Eskiden hedef daima rastgele bir KOLONİ sistemiydi;
        olay "{SISTEM}" anlatıyorsa buton bambaşka bir yere götürüyordu.
        Artık hangi yer adı kullanıldıysa hedef odur. */
     let colName = 'Bir', colSys = -1;
     if (e.colonies.length){
-      const c = e.colonies[Math.floor(rnd()*e.colonies.length)];
+      const c = e.colonies[Math.floor(cosmetic()*e.colonies.length)];
       const pl = G.sys[c.s].planets[c.p];
       if (pl.col){ colName = pl.col.name || pl.name; colSys = c.s; }
     }
     let sysName = '—', namedSys = -1;
     const seen = G.sys.filter(sy => sy.seen.includes(0));
     if (seen.length){
-      const sy = seen[Math.floor(rnd()*seen.length)];
+      const sy = seen[Math.floor(cosmetic()*seen.length)];
       sysName = sy.name; namedSys = sy.id;
     }
     /* Öncelik: metin bir SİSTEM adı geçiriyorsa o, yoksa koloni */
@@ -7932,7 +7991,7 @@ const UI = {
     if (sysId < 0) sysId = (colSys >= 0 ? colSys : namedSys);
     let raceName = '—';
     const known = G.emps.filter(o=>!o.dead && !o.wild && o.id!==0 && e.contact[o.id]);
-    if (known.length) raceName = known[Math.floor(rnd()*known.length)].name;
+    if (known.length) raceName = known[Math.floor(cosmetic()*known.length)].name;
     this.evTarget = sysId;
     return metin
       .replace(/\{KOLONI\}/g, colName)
@@ -7954,31 +8013,9 @@ const UI = {
          🔍 OLAYIN GEÇTİĞİ YERİ HARİTADA GÖSTER</button>` : ''}</div>
        <div class="mft">${ev.ch.map((c,i)=>
          `<button class="ch" data-a="chch" data-x="${i}"><div class="cht">${c.t}</div>
-          <div class="chd">${c.d||''}</div></button>`
+          <div class="chd">${esc(this.choiceExplanation(c))}</div></button>`
        ).join('')}</div>`, 'sci', true);
-    this._hook('chch', i=>{
-      if(resolved||world!==G.emps||note&&this._openNote!==note)return;
-
-      const opt = ev.ch[i];
-      if (!opt) return;
-      resolved=true;if(this._openNote===note)this._openNote=null;
-      let res = '';
-      if (opt.f){ try { res = opt.f(G, rnd) || ''; } catch(err){ res = ''; } }
-      if (opt.next && CHAINS[opt.next]){
-        // devamı hemen açılmaz — birkaç ay sonra bildirim olarak gelir
-        const wait = 60 + Math.floor(rnd()*120);          // 2-6 ay
-        G.chainQueue = G.chainQueue || [];
-        G.chainQueue.push({id: opt.next, at: G.day + wait});
-        this.openModal(
-          `<div class="mhd"><span>SONUÇ</span></div>
-           <div class="mbd">${res || 'Karar uygulandı.'}</div>
-           <div class="mft"><button class="ch" data-a="closem"><div class="cht">Kapat</div></button></div>`,'sci');
-      } else {
-        this.openModal(`<div class="mhd"><span>SONUÇ</span></div><div class="mbd">${res||'Karar uygulandı.'}</div>
-          <div class="mft"><button class="ch" data-a="closem"><div class="cht">Kapat</div></button></div>`,'sci');
-      }
-      this.refresh();
-    });
+    this._hook('chch', i=>{const r=this.applyEventChoice(note,i,world);if(!r.ok)say(r.why,'war');});
   },
   eventOpen(ev){
     const note=this._openNote,world=G.emps;let resolved=false;
@@ -7990,17 +8027,9 @@ const UI = {
        ${tgt >= 0 ? `<button class="abtn" data-a="showEv" data-x="${tgt}" style="margin-top:8px">
          🔍 HARİTADA GÖSTER</button>` : ''}</div>
        <div class="mft">${ev.ch.map((c,i)=>
-         `<button class="ch" data-a="evch" data-x="${i}"><div class="cht">${c.t}</div><div class="chd">${c.d}</div></button>`
+         `<button class="ch" data-a="evch" data-x="${i}"><div class="cht">${c.t}</div><div class="chd">${esc(this.choiceExplanation(c))}</div></button>`
        ).join('')}</div>`, '', true);
-    this._hook('evch', i=>{
-      if(resolved||world!==G.emps||note&&this._openNote!==note)return;
-      if(!ev.ch[i])return;
-      resolved=true;if(this._openNote===note)this._openNote=null;
-      const res = ev.ch[i].f(G, Math.random);
-      this.openModal(`<div class="mhd"><span>SONUÇ</span></div><div class="mbd">${res}</div>
-        <div class="mft"><button class="ch" data-a="closem"><div class="cht">Kapat</div></button></div>`);
-      this.refresh();
-    });
+    this._hook('evch', i=>{const r=this.applyEventChoice(note,i,world);if(!r.ok)say(r.why,'war');});
   },
   borderOpen(other, len){
     // Old Save v8 notes can still be opened, but cannot grant/spend resources or alter relations.

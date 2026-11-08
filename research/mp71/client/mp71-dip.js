@@ -160,7 +160,9 @@ function installHost(){
     if(rec.status!=='pending'||o.status!=='pending')return {ok:false,why:o.why||'Teklif sonuçlandı',terminal:true,status:o.status};
     if(G.day>o.expires)return {ok:false,why:'Teklifin süresi doldu',terminal:true,status:'expired'};
     const q=hideOther(dealQuote(this.deal(rec)),G.emps[o.from]);return {ok:q.ok,why:(q.reasons||[]).join(' · '),quote:q};};
-  DI.resolve=function(id,yes,option,world){const rec=this.get(id),o=on()&&rec&&rec.kind==='aideal'?offerOfRec(rec):null;if(!o)return resolve0(id,yes,option,world);
+  DI.resolve=function(id,yes,option,world){const rec=this.get(id);if(on()&&M.ad.role==='host'&&rec?.kind==='fedfound'){
+    if(world!==G.emps)return {ok:false,why:'Oyun kaydı değişti; daveti yeniden aç'};const r=A.exec({kind:'fedFoundReply',id:rec.note.data,accept:!!yes});if(r.ok){rec.status=yes?'accepted':'rejected';rec.finished=G.day;UI.fedFoundCards();}return r.ok?{ok:true}:{ok:false,why:'Host reddetti: '+why(r)};
+  }const o=on()&&rec&&rec.kind==='aideal'?offerOfRec(rec):null;if(!o)return resolve0(id,yes,option,world);
     if(world!==G.emps)return {ok:false,why:'Oyun kaydı değişti; teklifi yeniden aç'};
     M.stats.responds++;const r=A.exec({kind:'respond',offer:o.id,action:yes?'accept':'reject'});
     if(!r.ok)return {ok:false,why:'Host reddetti: '+why(r)};sync();return {ok:true};};

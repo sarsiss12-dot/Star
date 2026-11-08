@@ -46,7 +46,7 @@ const S={swiped:new Set(),decWait:new Map(),warQuote:{},pendingWar:null,counter:
 /* ---- 1. eylem kapısı ---- */
 /* Yalnız görünüm/gezinme (dünyayı değiştirmeyen) eylemler yerelde çalışır. MP.6.1: arşiv/gelen kutusu görünümleri, anlaşma,
    vasallık ve federasyon taslak ekranları da görünümdür (gönderim motor işlevinde MP komutuna çevrilir). */
-const VIEW=new Set(['activeWars','activeWarDiplo','noteQuick','noteSwipe','tab','full','cameraReset','cameraFocus','home','fit','topStatus','diploPane','globalPane','advClose','advShow','advNever','planetFold',
+const VIEW=new Set(['noteOptions','noteChoice','activeWars','activeWarDiplo','noteQuick','noteSwipe','tab','full','cameraReset','cameraFocus','home','fit','topStatus','diploPane','globalPane','advClose','advShow','advNever','planetFold',
   'radarTog','fleetNamesToggle','grpTog','fedLinksToggle','allyLinksToggle','warLinksToggle','logiToggle','mapMode','bgTog','diploView','diploPick',
   'diploRelation','diploNav','diploFilter','bmPick','bmCancel','vsCurrent','vsInspect','vsType','vsEdit','vsBack','fleetFilter','fedTab','fedMember',
   'closeFed','closeDeal','closeMarket','closeDiplo','memTog','intelView','intelGroup','upInfo','crisInfo','selsys','selfleet','route','fedPane',
@@ -55,7 +55,7 @@ const VIEW=new Set(['activeWars','activeWarDiplo','noteQuick','noteSwipe','tab',
   /* MP.6.1 — görünüm / taslak */
   'news','newsContext','newsReturn','diplomaticInbox','newsDetail','newsEmpire','newsLocation','newsPin','newsUnread','newsPinned','newsReadAll','archiveMore','diplomaticRecord',
   'inboxEmpire','inboxReturn','inboxFederation','deal','dealAdd','dealRm','dealDiscard','dealBack','peace','vsOpen','vsCancel','vsCounter','fedBallot',
-  'fedVoteYes','fedVoteNo','fedVoteNow',
+  'fedVoteYes','fedVoteNo','fedVoteNow','fedFoundType','fedFoundSelect','fedFoundStart','fedFoundReply','fedFoundCancel','fedFoundFinish',
   /* MP.6.1 — motor işlevi MP komutuna çevrilen gerçek düğmeler */
   'sendhere','ship','focus','cancelBuild','demolish','foundFed','fedDipInvite','fedDipRequest','fedMotion','fedInviteAccept','fedInviteReject',
   'fedLawPropose','fedLawRepeal','fedLeave','vsSend','vsReply','dealSend',
@@ -172,6 +172,14 @@ function gate(){
   wrap('setFocus',(o,e,sys,pl,k)=>{if(!mine(e)||!sys||!pl)return false;return send({kind:'focus',sys:sys.id,planet:pl.i,key:String(k)})!==null;});
   /* MP.6.1 — federasyon ve vasallık: gerçek STARS pencereleri → MP.3.1 komutları (host motorun kendi işlevini çağırır) */
   const r=c=>send(c)?{ok:true}:{ok:false,why:'Host bağlı değil; karar gönderilmedi.'};
+  wrap('fedFoundPropose',(o,e,type,ballot,members)=>mine(e)?r({kind:'fedFoundStart',type,ballot,members:members.map(real)}):NOT_MP);
+  wrap('fedFoundReply',(o,e,id,accept)=>mine(e)?r({kind:'fedFoundReply',id:+id,accept:!!accept}):NOT_MP);
+  wrap('fedFoundCancel',(o,e,id)=>mine(e)?r({kind:'fedFoundCancel',id:+id}):NOT_MP);
+  wrap('fedFoundFinish',(o,e,id)=>mine(e)?r({kind:'fedFoundFinish',id:+id}):NOT_MP);
+  const fp={q:new Map(),wait:new Set()};
+  wrap('fedFoundQuote',(o,e,type,ballot,members)=>{if(!mine(e))return o(e,type,ballot,members);const k=JSON.stringify([type,ballot,members]),cached=fp.q.get(k);if(cached&&Date.now()-cached.at<1500)return cached.q;
+    if(!fp.wait.has(k)){const cid=send({kind:'fedFoundPlan',type,ballot,members:members.map(real)});if(cid){fp.wait.add(k);waits[cid]=res=>{fp.wait.delete(k);if(res.status==='ok')fp.q.set(k,{at:Date.now(),q:{...res.extra,candidates:res.extra.candidates.map(x=>({...x,id:local(x.id)}))}});if(fp.q.size>32)fp.q.delete(fp.q.keys().next().value);const pane=doc.getElementById('diploPane');if(pane?.classList.contains('show')&&String(pane._surfaceKey).startsWith('federation:')&&!S.building)UI.openFed(true);};}}
+    return cached?.q||{ok:false,why:'Host kuruluş şartlarını denetliyor…',cost:0,min:3,candidates:[],reasons:['Host yanıtı bekleniyor']};});
   wrap('foundFederation',(o,e,type,ballot)=>mine(e)?r({kind:'fedFound',type:String(type),ballot:String(ballot)}):NOT_MP);
   wrap('requestFederation',(o,e,via)=>mine(e)&&via?r({kind:'fedRequest',via:real(via.id)}):NOT_MP);
   wrap('proposeFedMotion',(o,e,kind,opt)=>{if(!mine(e))return NOT_MP;opt=opt||{};
@@ -395,6 +403,7 @@ function gate(){
   UI.aiDealOpen=function(p){if(S.on&&p){const v=S.J&&S.J.game.view,o=v&&v.dip&&v.dip.offers.find(x=>x.status==='pending'&&x.to===S.J.empireId&&local(x.from)===p.from&&x.born===p.born);
     S.counter=o?{offer:o.id,to:p.from}:null;}return aiDealOpen0(p);};
   /* misafirde anlaşma YEREL uygulanmaz (ayna bir sonraki turda ezer; host'a ulaşmaz): yanlış "imzalandı" gösterilmesin */
+  UI.eventDecisionAuthority=()=>!S.on; // No authoritative remote event payload/command exists in the current protocol.
   wrap('executeDeal',()=>{toast('Çok oyunculuda anlaşma kararı gelen kutusundan verilir; host uygular.',true);return false;});
   /* MP.6.1 — gerçek gelen kutusu: karar → MP komutu. MP.3 tekliflerinde uygunluğu host denetler (karşı tarafın stoğu aynada yok). */
   /* MP.7.4: kaydırılan kartın imzası saklanır (ayna G.inbox'ı her kurulumda yeniler) */
@@ -402,13 +411,15 @@ function gate(){
   const DI=DiplomaticInbox,resolve0=DI.resolve.bind(DI),gate0=DI.gate.bind(DI);
   /* MP.8: karar kilidi yalnız aynı bağlantı kuşağında geçerli (bkz. tam ayna) */
   const decBusy=dk=>{const w=S.decWait.get(dk);return !!w&&w.gen===(S.gen|0);};
-  DI.gate=function(rec){if(S.on&&rec&&(rec._mpWait||rec.mp&&decBusy('respond:'+rec.mp+':')))return {ok:false,why:'Karar gönderildi; host yanıtı bekleniyor'};if(S.on&&rec&&rec.mpSq!==undefined){return rec.status==='pending'?{ok:true,why:''}:{ok:false,why:'Teklif sonuçlandı',terminal:true};}
+  UI.fedFoundWaiting=id=>decBusy('fedFoundReply::'+id);
+  DI.gate=function(rec){if(S.on&&rec?.kind==='fedfound'&&decBusy('fedFoundReply::'+rec.note.data))return {ok:false,why:'Karar host yanıtını bekliyor'};if(S.on&&rec&&(rec._mpWait||rec.mp&&decBusy('respond:'+rec.mp+':')))return {ok:false,why:'Karar gönderildi; host yanıtı bekleniyor'};if(S.on&&rec&&rec.mpSq!==undefined){return rec.status==='pending'?{ok:true,why:''}:{ok:false,why:'Teklif sonuçlandı',terminal:true};}
     if(S.on&&rec&&rec.mp){if(rec.status!=='pending')return {ok:false,why:'Teklif sonuçlandı',terminal:true};return {ok:true,why:''};}return gate0(rec);};
   DI.resolve=function(id,yes,option,world){
     if(!S.on)return resolve0(id,yes,option,world);
     const rec=this.get(id);if(!rec||rec.status!=='pending')return {ok:false,why:'Teklif geçersiz'};
     let c=null;
-    if(rec.mpSq!==undefined)c={kind:'statusQuoReply',from:rec.mpSq,accept:!!yes};
+    if(rec.kind==='fedfound')c={kind:'fedFoundReply',id:rec.note.data,accept:!!yes};
+    else if(rec.mpSq!==undefined)c={kind:'statusQuoReply',from:rec.mpSq,accept:!!yes};
     else if(rec.mp)c={kind:'respond',offer:rec.mp,action:yes?'accept':'reject'};
     else if(rec.kind==='invite')c={kind:'fedReply',fed:rec.fid,action:yes?'accept':'reject'};
     else if(rec.kind==='fedvote')c={kind:'fedVote',fed:rec.fid,token:String(rec.token),yes:!!yes};
@@ -491,8 +502,8 @@ function rebuild(){
   /* MP.6.4: haber okundu / sabitlendi işaretleri yereldir; ayna yeniden kurulunca anahtarla geri konur */
   const nk=new Map(((typeof G!=='undefined'&&G&&G.news&&G.news.records)||[]).map(r=>[r.key,[r.read,r.pinned]]));
   const dbr=typeof G!=='undefined'&&G&&G.dismissedBattleReports?{...G.dismissedBattleReports}:null;   // MP.7.2: gizlenen savaş raporları yereldir
-  let why='';try{View.resetGesture=S.started?function(){}:rg;ok=deserialize(JSON.stringify(S.mirror));if(!ok)why='kayıt doğrulaması reddetti';if(ok){G.inboxUid=Math.max(G.inboxUid||0,warUid);inboxOffers();for(const n of G.inbox)if(cardIds.has(n.key))n.uid=cardIds.get(n.key);setSync();if(dbr)try{G.dismissedBattleReports=cleanBattleDismissals({...(G.dismissedBattleReports||{}),...dbr});}catch{}for(const r of (G.news&&G.news.records)||[]){const k=nk.get(r.key);if(k){r.read=k[0];r.pinned=k[1];}}}S.inboxSig=null;}catch(e){ok=false;why=String(e&&e.message||e).slice(0,160);}
-  finally{View.resetGesture=rg;S.building=false;}
+  let why='';try{View.resetGesture=S.started?function(){}:rg;UI._deferInbox=true;ok=deserialize(JSON.stringify(S.mirror));if(!ok)why='kayıt doğrulaması reddetti';if(ok){G.inboxUid=Math.max(G.inboxUid||0,warUid);inboxOffers();if(S.started&&UI._fedNoticeWorld===oldEmps)UI._fedNoticeWorld=G.emps;UI.fedFoundCards();for(const n of G.inbox)if(cardIds.has(n.key))n.uid=cardIds.get(n.key);setSync();if(dbr)try{G.dismissedBattleReports=cleanBattleDismissals({...(G.dismissedBattleReports||{}),...dbr});}catch{}for(const r of (G.news&&G.news.records)||[]){const k=nk.get(r.key);if(k){r.read=k[0];r.pinned=k[1];}}}S.inboxSig=null;}catch(e){ok=false;why=String(e&&e.message||e).slice(0,160);}
+  finally{View.resetGesture=rg;S.building=false;UI._deferInbox=false;}
   S.lastBuild=Date.now();
   /* MP.7: bozuk/uyumsuz ayna aynı veriyle 1 s'de bir sonsuza dek yeniden kurulmuyordu-kurulmaya çalışılıyordu. Artık ayna bırakılır,
      gerçek neden kaydedilir ve host'tan TAM ayna sınırlı geri çekilmeyle (bootTick) yeniden istenir. */
@@ -500,6 +511,8 @@ function rebuild(){
   for(const key of ['_councilPending','_councilAck'])if(UI[key]&&UI[key].gen!==S.gen)UI[key]=null;
   G.autoSave=false;G.speed=0;
   if(S.started&&UI._diploWorld)UI._diploWorld=G.p;   // açık diplomasi sayfası ve taslaklar korunur
+  if(S.started&&UI._noteOptionsWorld===oldEmps)UI._noteOptionsWorld=G.emps;
+  if(S.started&&UI._fedFoundWorld===oldEmps)UI._fedFoundWorld=G.emps;
   if(S.started&&UI._fedTabsWorld)UI._fedTabsWorld=G.emps;
   /* MP.7.5 kök neden (misafirde Konsey / federasyon / ekonomi / sağ panel sürekli yenileniyordu): UI.surfaceRender açık paneli yalnız
      aynı dünya nesnesinde (el._surfaceWorld===G.emps) yerinde günceller; deserialize her kurulumda yeni G.emps yaratınca panel baştan

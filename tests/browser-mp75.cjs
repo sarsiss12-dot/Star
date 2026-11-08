@@ -44,7 +44,10 @@ async function design0(p,o){
 /* gerçek dokunma (Chromium CDP Input.dispatchTouchEvent → pointer/touch olayları) */
 async function touch(p){if(!p.__cdp)p.__cdp=await p.context().newCDPSession(p);return p.__cdp;}
 async function tapAt(p,x,y){const c=await touch(p);await c.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x,y}]});await c.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});}
-async function swipe(p,sel,dx){const c=await touch(p),b=await p.locator(sel).first().boundingBox();if(!b)throw Error('no '+sel);const x=b.x+b.width/2,y=b.y+b.height/2;
+async function swipe(p,sel,dx){const c=await touch(p),locator=p.locator(sel).first();
+  const inspect=()=>p.evaluate(sel=>{const el=document.querySelector(sel),r=el?.getBoundingClientRect(),top=r&&document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);return {selector:sel,who:G.p.name,rect:r&&{x:r.x,y:r.y,width:r.width,height:r.height},target:top?.outerHTML.slice(0,240),hit:!!el&&!!top&&(el===top||el.contains(top))};},sel);
+  const before=await inspect();await locator.scrollIntoViewIfNeeded();const after=await inspect();fs.appendFileSync(path.join(out,'swipe-targets.jsonl'),JSON.stringify({before,after})+'\n');assert(after.hit,'swipe must hit the actual visible card '+JSON.stringify(after));
+  const b=await locator.boundingBox();if(!b)throw Error('no '+sel);const x=b.x+b.width/2,y=b.y+b.height/2;
   await c.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x,y}]});
   for(let i=1;i<=8;i++){await c.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:x+dx*i/8,y:y+(i%2)}]});await p.waitForTimeout(16);}
   await c.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});await p.waitForTimeout(350);}
@@ -106,16 +109,16 @@ let relay,px,base,tls,bH,bB;
     await Bp.evaluate(()=>{UI.closeDiplo?UI.closeDiplo():document.getElementById('diploPane').classList.remove('show');});
   });
   await test('A3 savaş / barış: misafir AI ile savaşta; AI barış teklifi misafirin kartına gelir; KABUL (dokunma) → host\'ta savaş biter; AKTİF SAVAŞLAR üst sayaçla aynı sayıyı gösterir',async()=>{
-    const x=await H.evaluate(()=>{const a=G.emps[1];const o=G.emps.find(e=>e.ai&&!e.dead&&!e.wild&&!a.war[e.id]&&!(a.ally&&a.ally[e.id]));a.contact[o.id]=o.contact[a.id]=true;declareWar(a,o);MP1Host.host.publish();return o.id;});
+    const x=await H.evaluate(()=>{const a=G.emps[1];const o=G.emps.find(e=>e.ai&&!e.dead&&!e.wild&&!a.war[e.id]&&!(a.ally&&a.ally[e.id])&&canPeace(e,a));if(!o)throw Error('MP75 fixture has no peace-eligible AI');a.contact[o.id]=o.contact[a.id]=true;if(!declareWar(a,o))throw Error('MP75 fixture war rejected');MP1Host.host.publish();return o.id;});
     await wait(Bp,()=>UI.topStatusItems().wars>=1);
     const L=await Bp.evaluate(()=>{UI.act('activeWars');return {n:UI.activeWarsList().length,top:UI.topStatusItems().wars,html:document.getElementById('modal').textContent};});
     metrics.activeWars=L;assert.equal(L.n,L.top);assert.match(L.html,/AKTİF SAVAŞLAR/);await shot(Bp,'a3-b-active-wars');await Bp.evaluate(()=>UI.closeModal());
     const id=await H.evaluate(x=>{const e=G.emps[x];e.lastOffer=e.lastOffer||{};e.lastOffer[1]=G.day;UI.peaceOffer(e);MP1Host.host.publish();const o=MP1Host.host.dip.offers.filter(o=>o.from===x&&o.to===1&&o.status==='pending').at(-1);return o?o.id:null;},x);
-    if(!id)metrics.peaceFailure=await H.evaluate(x=>({day:G.day,ai:x,aiIsAI:G.emps[x].ai,guestIsAI:G.emps[1].ai,wars:G.emps[x].war,lastOffer:G.emps[x].lastOffer,offers:MP1Host.host.dip.offers.map(o=>({id:o.id,from:o.from,to:o.to,status:o.status,give:o.give,want:o.want}))}),x);
+    if(!id)metrics.peaceFailure=await H.evaluate(x=>({day:G.day,ai:x,aiIsAI:G.emps[x].ai,guestIsAI:G.emps[1].ai,wars:G.emps[x].war,canPeace:canPeace(G.emps[x],G.emps[1]),civics:G.emps[x].civics,doctrine:G.emps[x].mizac||G.emps[x]._pers,save8:serialize(),lastOffer:G.emps[x].lastOffer,offers:MP1Host.host.dip.offers.map(o=>({id:o.id,from:o.from,to:o.to,status:o.status,give:o.give,want:o.want}))}),x);
     assert(id,'AI peace offer to the guest');const key='mp71:'+id;
     await Bp.waitForFunction(k=>{const n=(G.inbox||[]).find(n=>n.key===k);return n&&document.querySelector('#inbox [data-x="'+n.uid+':y"]');},key,{timeout:30000,polling:100});
-    const b=await Bp.evaluate(k=>{const n=G.inbox.find(n=>n.key===k),r=document.querySelector('#inbox [data-x="'+n.uid+':y"]').getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2};},key);
-    await shot(Bp,'a3-b-peace-card');await tapAt(Bp,b.x,b.y);
+    const inspect=()=>Bp.evaluate(k=>{const n=G.inbox.find(n=>n.key===k),el=document.querySelector('#inbox [data-x="'+n.uid+':y"]'),r=el.getBoundingClientRect(),top=document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);return {uid:n.uid,rect:{x:r.x,y:r.y,width:r.width,height:r.height},target:top?.outerHTML.slice(0,240),hit:!!top&&(el===top||el.contains(top))};},key);
+    const beforeHit=await inspect();await shot(Bp,'a3-b-peace-card');const uid=await Bp.evaluate(k=>G.inbox.find(n=>n.key===k).uid,key),button=Bp.locator('#inbox [data-x="'+uid+':y"]');await button.scrollIntoViewIfNeeded();const afterHit=await inspect();metrics.peaceHit={before:beforeHit,after:afterHit};assert(afterHit.hit,'actual peace button must receive the touch');await button.tap({timeout:8000});
     await wait(H,([id,x])=>MP1Host.host.dip.offers.find(o=>o.id===id).status==='accepted'&&!G.emps[1].war[x]&&!G.emps[x].war[1],[id,x]);
     await wait(Bp,()=>UI.activeWarsList().length===UI.topStatusItems().wars);
     metrics.afterPeace=await Bp.evaluate(()=>({wars:UI.topStatusItems().wars,list:UI.activeWarsList().length}));
