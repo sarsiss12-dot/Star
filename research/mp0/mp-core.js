@@ -104,7 +104,7 @@ function validatePackage(input,o={}){
   if(!onlyKeys(pkg,KEYS)||KEYS.some(k=>!has(pkg,k)))return fail('fields');
   if(pkg.format!==PKG_FORMAT)return fail('format');
   if(pkg.mpVersion!==PKG_VERSION)return fail('version');
-  const build=has(o,'build')?o.build:(typeof BUILD_ID==='string'?BUILD_ID:null);if(pkg.build!==build&&!((build==='96h10p7'&&pkg.build==='96h10p6')||(build==='96h10p8'&&['96h10p6','96h10p7'].includes(pkg.build))||(build==='96h10p9'&&['96h10p6','96h10p7','96h10p8'].includes(pkg.build))||(build==='96h10p10'&&['96h10p6','96h10p7','96h10p8','96h10p9'].includes(pkg.build))||(build==='96h10p11'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10'].includes(pkg.build))||(build==='96h10p12'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11'].includes(pkg.build))||(build==='96h10p13'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12'].includes(pkg.build))||(build==='96h10p14'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13'].includes(pkg.build))))return fail('build'); // BETA-P0.1: explicit v8/package4 compatibility, all remaining checks still mandatory
+  const build=has(o,'build')?o.build:(typeof BUILD_ID==='string'?BUILD_ID:null);if(pkg.build!==build&&!((build==='96h10p7'&&pkg.build==='96h10p6')||(build==='96h10p8'&&['96h10p6','96h10p7'].includes(pkg.build))||(build==='96h10p9'&&['96h10p6','96h10p7','96h10p8'].includes(pkg.build))||(build==='96h10p10'&&['96h10p6','96h10p7','96h10p8','96h10p9'].includes(pkg.build))||(build==='96h10p11'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10'].includes(pkg.build))||(build==='96h10p12'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11'].includes(pkg.build))||(build==='96h10p13'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12'].includes(pkg.build))||(build==='96h10p14'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13'].includes(pkg.build))||(build==='96h10p15'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14'].includes(pkg.build))))return fail('build'); // BETA-P0.1: explicit v8/package4 compatibility, all remaining checks still mandatory
   if(typeof pkg.save8!=='string')return fail('fields');if(pkg.save8.length>MAX_SAVE8)return fail('too-big');
   if(!Number.isFinite(pkg.createdAt)||typeof pkg.saveId!=='string'||!/^s-[a-f0-9]{16}$/.test(pkg.saveId))return fail('fields');
   const I=pkg.integrity;if(!plain(I)||!onlyKeys(I,['alg','save8','body'])||I.alg!=='SHA-256'||!HEX(I.save8,64)||!HEX(I.body,64))return fail('integrity');
@@ -733,6 +733,7 @@ function createHost(opts){
       locate:()=>({}),why(e,at,c){if(!findFed(e))return 'no-fed';const q=canFedLaw(e,c.law,!!c.repeal);return q.ok?null:polWhy(q);},
       roots:()=>[],apply:(e,at,c)=>proposeFedLaw(e,c.law,!!c.repeal)},
     fedFoundStart:{keys:['kind','type','ballot','members'],check:c=>Object.hasOwn(FED_TYPES,c.type)&&Object.hasOwn(FED_BALLOTS,c.ballot)&&c.ballot!=='weighted'&&Array.isArray(c.members)&&c.members.length<=48&&c.members.every(id=>int(id,0,63))&&new Set(c.members).size===c.members.length,locate:()=>({}),why:()=>null,roots:()=>[],apply(e,at,c){const q=fedFoundPropose(e,c.type,c.ballot,c.members);return q.ok?{ok:true,extra:{id:q.id}}:q;}},
+    eventChoice:{keys:['kind','id','choice'],check:c=>int(c.id,1,2147483647)&&int(c.choice,0,32),locate:()=>({}),why:()=>null,roots:()=>[],say:'actor',apply:(e,at,c)=>resolveHumanDecision(e,c.id,c.choice)},
     fedFoundReply:{keys:['kind','id','accept'],check:c=>int(c.id,1,2147483647)&&typeof c.accept==='boolean',locate:()=>({}),why:()=>null,roots:()=>[],apply:(e,at,c)=>fedFoundReply(e,c.id,c.accept)},
     fedFoundCancel:{keys:['kind','id'],check:c=>int(c.id,1,2147483647),locate:()=>({}),why:()=>null,roots:()=>[],apply:(e,at,c)=>fedFoundCancel(e,c.id)},
     fedFoundFinish:{keys:['kind','id'],check:c=>int(c.id,1,2147483647),locate:()=>({}),why:()=>null,roots:()=>[],apply:(e,at,c)=>fedFoundFinish(e,c.id)},
@@ -1449,6 +1450,12 @@ function createHost(opts){
     if(typeof GalacticNews!=='undefined'&&typeof GalacticNews.emit==='function'){const emit0=GalacticNews.emit;
       GalacticNews.emit=function(ev){const r=emit0.apply(this,arguments);try{root.__mpCur.newsFan(ev);}catch{}return r;};}
     const cur=()=>root.__mpCur,RH=e=>cur().remoteHuman(e),NOTE=(id,m,c)=>cur().note(id,m,c),ATH=(...a)=>cur().aiToHuman(...a),ST={get blockedAI(){return cur().stats.blockedAI;},set blockedAI(v){cur().stats.blockedAI=v;}};
+    const vision0=updateVision;
+    updateVision=function(){const result=vision0.apply(this,arguments);for(const e of G.emps)if(RH(e)){
+      const ctx=humanVisionContext(e),k=humanMapKnowledge(e,ctx);for(const id of ctx.known)if(!G.sys[id].seen.includes(e.id))G.sys[id].seen.push(e.id);
+      e.mapHabitats=k.habitats;e.mapOwners=k.owners;
+    }return result;};
+    const month0=monthTick;monthTick=function(){const r=month0.apply(this,arguments);for(const e of G.emps)if(RH(e)&&!e.dead)remoteDecisionTick(e);return r;};
     const neg=aiNegotiate,resp=aiRespond;
     /* MP.2: uzak insanın araştırma bildirimleri (researchTick içindeki say) host günlüğüne değil o oyuncunun
        kendi bildirim listesine gider. Yalnız uzak insan için; tek oyunculu ve AI yolu aynen çalışır. */

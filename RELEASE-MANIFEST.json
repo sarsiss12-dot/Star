@@ -1,11 +1,11 @@
 {
-  "phase": "BETA-FED-FOUND.0",
-  "build": "96h10p14",
+  "phase": "MP-P0-KURTARMA",
+  "build": "96h10p15",
   "scope": "github-runtime-only",
   "save_version": 8,
-  "pwa_cache": "stars-v96h10p14",
-  "parent_commit": "4ef02795042528d82a7e59c484ccff3c6c10875f",
-  "parent_zip_sha256": "e1f0b4a318df37275bcf40ae7e76c1c93752c05c01f5b103d9b3a2e208a13b6d",
+  "pwa_cache": "stars-v96h10p15",
+  "parent_commit": "bf26491828ceb65f9103ecb2def23fe832a3c454",
+  "parent_zip_sha256": "205eeba47747716a32e794ad633e21a9285c295b3648d1e53cf703acf15eae0e",
   "file_count": 19,
   "files": {
     "ai.js": "0d892dd717b8593ee37820729425189087d1c0a50f8d58537164628d522d63b3",
@@ -20,13 +20,13 @@
     "economy-ui.js": "61f6e2dcef7f37143821edccf67552718a210ec555f7b8f9074c68191fd5cbcc",
     "economy.js": "409f9772017837fbede5cf526968c07e56703627b825f423605e750109a4cae0",
     "inbox.js": "2461dcc6a12c6342ed8bac863bf53c56d91311532c757e7e4428454fc56b9cd5",
-    "index.html": "16afdf255ae215a2d14c9287766b9e0edcc0201b1c6c0b4b3ad478d04e4e8535",
-    "main.js": "cc627be09bee2f1aafeeef1d17c7749e669bcbc78185ef2cc06e09f8af52805e",
+    "index.html": "329e8b1fc3d4dd0a95085e309b73f4041558cdc6536fc6134dec20fecebdeccb",
+    "main.js": "44554229a7210a861454815b2bc1c6d4d18f60a233528bfc8c2d8e5cbc863d94",
     "manifest.json": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
-    "map.js": "3ccc9e66bb13f0ec1eaee1759e26b110ec5a05815ce73d74c7960b9f16828b0d",
+    "map.js": "39961f0f017ba727cf8b86a7db7ee3c3ca4542c6deac10c9cbda3978ca7c1570",
     "news.js": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
-    "sw.js": "046846e70020d6d40b3d3da197e91d6074fc997279dd87ce2d67b7059248c59e",
-    "ui.js": "e778ab795af40f929565d37386d42a16b012e79f537a408311c8e282ba986790"
+    "sw.js": "f818decb5af75fbb448410aefa9b5c166f91c3ebe09a1fc105d1bd683d1edecf",
+    "ui.js": "d7ae3aa8a7b00e4b13da27fc21c87c318b917fb231a494db9f1148dccfdf63d2"
   },
   "description": "BETA-WAR-FIX.0: settled support calls cannot reopen old fronts; per-front notices, explicit peace bundles and guest alerts. Save8 v8, package4/protocol1. No deployment."
 }

@@ -12,12 +12,12 @@ const BUILD=JSON.parse(fs.readFileSync(path.join(root,'RELEASE-MANIFEST.json'),'
 async function test(name,fn){if(process.env.MP73_ONLY&&!new RegExp(process.env.MP73_ONLY).test(name))return;const t0=Date.now();
   try{await fn();results.push({name,status:'PASS',ms:Date.now()-t0});console.log('PASS '+name);}
   catch(e){for(const p of auditPages){try{const tag='failure-'+results.length+'-'+[...auditPages].indexOf(p);await p.screenshot({path:path.join(out,tag+'.png')});fs.writeFileSync(path.join(out,tag+'.json'),JSON.stringify(await p.evaluate(()=>({url:location.pathname,vote:typeof G!=='undefined'?G.council:null,inbox:typeof G!=='undefined'?G.inbox:null,modal:document.getElementById('modal')?.innerHTML,pane:document.getElementById('diploPane')?.innerHTML})),null,2));}catch{}}results.push({name,status:'FAIL',error:String(e&&e.stack||e).slice(0,1800)});console.log('FAIL '+name+'\n'+(e&&e.stack||e));}}
-const PHONE=(w,h)=>({viewport:{width:w,height:h},isMobile:true,hasTouch:true,deviceScaleFactor:2,serviceWorkers:'allow'});
+const PHONE=(w,h)=>process.env.MPP0_DESKTOP==='1'?{viewport:{width:1920,height:1080},isMobile:false,hasTouch:false,deviceScaleFactor:1,serviceWorkers:'allow'}:({viewport:{width:w,height:h},isMobile:true,hasTouch:true,deviceScaleFactor:2,serviceWorkers:'allow'});
 const freePort=()=>new Promise(res=>{const s=require('net').createServer().listen(0,'127.0.0.1',()=>{const p=s.address().port;s.close(()=>res(p));});});
 const wait=(p,fn,arg,timeout=30000)=>p.waitForFunction(fn,arg,{timeout,polling:100});
 const shot=(p,n)=>p.screenshot({path:path.join(out,n+'.png')}).catch(()=>{});
 let tapFail=0;
-const tap=async(p,sel)=>{const l=p.locator(sel).first();await l.scrollIntoViewIfNeeded().catch(()=>{});try{await l.tap({timeout:8000});}
+const tap=async(p,sel)=>{const l=p.locator(sel).first();await l.scrollIntoViewIfNeeded().catch(()=>{});try{if(process.env.MPP0_DESKTOP==='1')await l.click({timeout:8000});else await l.tap({timeout:8000});}
   catch(e){const n='tapfail-'+(++tapFail);fs.writeFileSync(path.join(out,n+'-playwright-error.json'),JSON.stringify({selector:sel,name:e.name,message:e.message,stack:e.stack},null,2));await shot(p,n);
     const d=await p.evaluate(sel=>{const el=document.querySelector(sel),r=el?.getBoundingClientRect(),top=r&&document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);return {selector:sel,url:location.pathname,who:G.p?.name,box:r&&[r.x,r.y,r.width,r.height],connected:el?.isConnected,top:top&&(top.id||top.className||top.tagName),viewport:[innerWidth,innerHeight],scroll:[scrollX,scrollY],focus:document.activeElement?.id,modal:document.getElementById('modal')?.className};},sel).catch(x=>({diagnosticError:x.message}));
     fs.writeFileSync(path.join(out,n+'-target.json'),JSON.stringify(d,null,2));throw e;}};
@@ -118,16 +118,16 @@ let relay,px,base,tls,bH,bB,bC;
     if(process.env.SETUP0_AUDIT){metrics.setup0=[];for(const [who,p] of [['host',H],['guest',Bp]]){await wait(p,()=>G.cfg.pirates===false);const row=await p.evaluate(()=>({cfg:typeof MP1Join==='undefined'?CFG.pirates:null,game:G.cfg.pirates,nests:(G.nests||[]).length,pirateFleets:G.fleets.filter(f=>f.name==='Korsan Muhafızı'||f.name==='Korsan Akıncısı').length,ownName:G.p.name,ownId:G.p.id}));assert.equal(row.game,false);assert.equal(row.nests+row.pirateFleets,0);metrics.setup0.push({who,...row});}assert.equal(metrics.setup0[0].cfg,false);}
     for(const p of [H,Bp])assert.equal(await p.evaluate(()=>!!document.getElementById('map')&&!document.getElementById('game').classList.contains('hidden')),true);
     const v=await Bp.evaluate(async()=>{const r=await fetch('/mp/version',{cache:'no-store'});return {s:r.status,j:await r.json(),b:BUILD_ID,line:MP1View.verLine(),chip:(document.getElementById('mp1Mini')||{}).title||''};});
-    metrics.version=v.j;assert.equal(v.s,200);assert.match(v.j.mp,/^MP\.8\.9b9$/);assert.equal(v.j.build,v.b);assert.match(v.line,new RegExp('MP\\.8\\.9b9 · oyun '+BUILD+'$'));   /* PERF.2: build manifestten (sabit liste yerine) */assert.match(v.chip,/MP\.8\.9b9/);
+    metrics.version=v.j;assert.equal(v.s,200);assert.match(v.j.mp,/^MP\.8\.9b10$/);assert.equal(v.j.build,v.b);assert.match(v.line,new RegExp('MP\\.8\\.9b10 · oyun '+BUILD+'$'));   /* PERF.2: build manifestten (sabit liste yerine) */assert.match(v.chip,/MP\.8\.9b10/);
     assert.equal(Object.values(v.j.files).every(x=>/^[0-9a-f]{12}$/.test(x)),true);
     await wait(Bp,()=>MP6Stars.S.unsupported&&MP6Stars.S.unsupported.length>0);metrics.unsupported=await Bp.evaluate(()=>MP6Stars.S.unsupported);
     for(const a of ['bill','billPick','billTarget','cncFound','cncJoin','cncLeave','cncNo','cncPane','cncYes','permanent','reform','throneBuild','veto','bribe','blackmail','bmGo','fundSep','panoptRetarget','revolt','revoltConfirm','whisperBlame','whisperGo','whisperMenu','whisperPick','devour','devourConfirm','colFire'])
       assert(!metrics.unsupported.includes(a),a+' still unsupported');
     assert.equal(metrics.unsupported.length,18,JSON.stringify(metrics.unsupported));
     await tap(Bp,'#mp6Conn');await wait(Bp,()=>document.getElementById('mpVer')&&document.getElementById('mpVer').offsetParent);   // telefonda görünür tanı satırı
-    metrics.guestDiag=await Bp.evaluate(()=>document.getElementById('mpVer').textContent);assert.match(metrics.guestDiag,new RegExp('MP\\.8\\.9b9 · oyun '+BUILD+'( · misafir)? · host bağlı .*son hata: ')   /* MP.8: rol + ayna + son komut eklendi */);
+    metrics.guestDiag=await Bp.evaluate(()=>document.getElementById('mpVer').textContent);assert.match(metrics.guestDiag,new RegExp('MP\\.8\\.9b10 · oyun '+BUILD+'( · misafir)? · host bağlı .*son hata: ')   /* MP.8: rol + ayna + son komut eklendi */);
     assert.doesNotMatch(metrics.guestDiag,/tok|key|anahtar/i);await shot(Bp,'a1-guest-diag');await tap(Bp,'#mp6Conn');
-    assert.match(await H.evaluate(()=>{MP1Host.miniOpen=true;try{document.querySelector('[data-g="toggle"]')&&0;}catch{}return MP1View.verLine();}),/MP\.8\.9b9/);
+    assert.match(await H.evaluate(()=>{MP1Host.miniOpen=true;try{document.querySelector('[data-g="toggle"]')&&0;}catch{}return MP1View.verLine();}),/MP\.8\.9b10/);
   });
   if(process.env.BETA02_TOUCH_REPEAT)await test('T02 mp6Conn sınırlı gerçek dokunma tekrarı',async()=>{
     for(let i=0;i<Number(process.env.BETA02_TOUCH_REPEAT);i++){
@@ -162,7 +162,7 @@ let relay,px,base,tls,bH,bB,bC;
     assert.equal(await H.evaluate(()=>{const s=MP1Host.host.snapshot({});return s.ok&&StarsMP.validatePackage(JSON.stringify(s.pkg)).ok;}),true);
   });
   /* ---------- B: host + 2 misafir — Galaktik Konsey (B 800×360, C 915×412) ---------- */
-  const H2=await (await bH.newContext(PHONE(844,390))).newPage(),B2=await (await bB.newContext(PHONE(800,360))).newPage(),C2=await (await bC.newContext(PHONE(915,412))).newPage();
+  const H2=await (await (process.env.MPP0_REVERSE==='1'?bB:bH).newContext(PHONE(844,390))).newPage(),B2=await (await (process.env.MPP0_REVERSE==='1'?bH:bB).newContext(PHONE(800,360))).newPage(),C2=await (await bC.newContext(PHONE(915,412))).newPage();
   for(const [n,p] of [['host2',H2],['B2',B2],['C2',C2]]){p.on('pageerror',e=>errors.push(n+': '+e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource/.test(m.text()))errors.push(n+' console: '+m.text().slice(0,300));});}
   const cv=()=>H2.evaluate(()=>{const v=G.council&&G.council.vote;return v?{yes:v.yes.slice(),no:v.no.slice(),done:!!v.done,key:v.key}:null;});
   await test('B1 konsey motorun kendi yoluyla kurulur (fikstür: temas); AI insanlar adına oy / sponsor yazmaz; B gerçek "KONSEY OYLAMASI" kartından Konsey ekranını açar ve EVET (dokunma) → host kaydeder, oylama açık kalır',async()=>{
@@ -245,6 +245,7 @@ let relay,px,base,tls,bH,bB,bC;
     assert.equal(await sentW(B2),s0,'no command without a confirmed preview');
   });
   if(process.env.FEDFOUND0_THREE==='1')await test('FD3 üç insan, misafir kurucu, özel davet ret/iptal, yeniden bağlantı ve karma oy',async()=>{metrics.fd3=await require('./helpers/beta-fed-found0-three.cjs')(H2,B2,C2,out);});
+  if(process.env.MPP0==='1')await test('P0 katılımcı görüş, sağlık, özel kararlar, rota ve görsel hareket',async()=>{metrics.p0=await require('./helpers/mp-p0-guest-browser.cjs')(H2,B2,C2,out);});
   await test('sayfa hataları yok',async()=>{assert.deepEqual(errors,[]);});
 }catch(e){console.log('FATAL',e);results.push({name:'FATAL',status:'FAIL',error:String(e&&e.stack||e)});}
 finally{fs.writeFileSync(path.join(out,'mp73-results.json'),JSON.stringify({results,errors,metrics,pass:results.filter(r=>r.status==='PASS').length,fail:results.filter(r=>r.status==='FAIL').length},null,2));

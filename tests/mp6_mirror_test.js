@@ -49,7 +49,7 @@ test('gizlilik (beyaz liste): başka devletin kaynak/teknoloji/araştırma/AI pl
   for(const s of m.sys){if(!known.has(s.i))assert.deepEqual([s.n,s.p.length,s.o,s.st],['',0,-1,0],'unknown '+s.i);
     if(!vis.has(s.i)&&s.o!==-1)assert.equal(s.o,0,'owner only where visible (or own)');
     for(const p of s.p)if(p.col&&p.owner!==0)assert.deepEqual([Object.keys(p.col.b).length,p.col.q.length,p.col.stab],[0,0,0]);}
-  for(const f of m.fl)if(f.e!==0){assert.deepEqual([f.path.length,f.mv],[0,null]);assert(vis.has(f.sys));}
+  for(const f of m.fl)if(f.e!==0){assert.equal(f.path.length,0,'foreign future orders remain private');assert.equal(f.ord,null);for(const ship of f.ships){assert.deepEqual(Object.keys(ship).sort(),['c','h']);assert(Number.isFinite(ship.h)&&ship.h>=0&&ship.h<=1);}if(f.mv){assert.deepEqual(Object.keys(f.mv).sort(),['from','t','to']);assert(vis.has(f.mv.from)&&vis.has(f.mv.to),'current leg only when both endpoints are visible');assert.equal(f.sys,-1);}else assert(vis.has(f.sys));}
   const uncontacted=J(h,`G.emps.filter(o=>o.id!==${me}&&!G.emps[${me}].contact[o.id]).map(o=>o.id)`);
   for(const id of uncontacted){const e=m.emps[id===0?me:id];assert.equal(e.name,'Bilinmeyen devlet');}
   const text=JSON.stringify(m);for(const id of uncontacted)assert(!text.includes(J(h,`G.emps[${id}].name`)),'uncontacted name leaked');

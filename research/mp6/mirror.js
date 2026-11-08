@@ -26,14 +26,14 @@ function build(meId,o={}){
   const pi=id=>id===meId?0:id===0?meId:id;                       // tek yer değiştirme: π = π⁻¹
   const piN=id=>Number.isInteger(id)&&id>=0&&id<N?pi(id):id;
   const remapKeys=m=>{if(!m||typeof m!=='object')return m;const r={};for(const [k,v] of Object.entries(m)){const n=+k;r[/^\d+$/.test(k)&&n<N?pi(n):k]=J(v);}return r;};
-  const ctx=explorationContext(me),known=ctx.known,visible=ctx.visible;
+  const ctx=humanVisionContext(me),known=ctx.known,visible=ctx.visible,knowledge=humanMapKnowledge(me,ctx);
   const contacted=id=>id===meId||!!(me.contact&&me.contact[id]);
   const knownWar=new Set(knownWarPairs(me).map(p=>p.a+':'+p.b));
   /* ---- sistemler ---- */
   const sys=G.sys.map(s=>{
     const k=known.has(s.id),v=visible.has(s.id),surv=s.surv.includes(meId),mine=s.owner===meId;
     const x={i:s.id,x:s.x,y:s.y,n:k?s.name:'',st:k?Math.max(0,STARS.indexOf(s.star)):0,p:[],
-      l:s.lanes.filter(n=>k||known.has(n)),o:v||mine?piN(s.owner):-1,sv:surv?[0]:[],se:k?[0]:[],q:mine?(J(s.queue)||[]).map(x=>x&&Number.isInteger(x.e)?{...x,e:piN(x.e)}:x):[],
+      l:s.lanes.filter(n=>k||known.has(n)),o:v||mine?piN(s.owner):k?piN(knowledge.owners[s.id]??-1):-1,sv:surv?[0]:[],se:k?[0]:[],q:mine?(J(s.queue)||[]).map(x=>x&&Number.isInteger(x.e)?{...x,e:piN(x.e)}:x):[],
       an:surv?!!s.anom:false,ak:surv?s.anomK:'sinyal',d:v||mine?(s.def||0):0,pu:k?!!s.pulsar:false,nb:k?!!s.nebulaS:false};   // gizli alanlar motorun varsayılan biçiminde
     if(surv||mine)x.p=s.planets.map(p=>{
       const q={i:p.i,t:p.t,dep:p.dep,sz:p.sz,seed:p.seed,name:p.name,owner:-1};
@@ -73,6 +73,7 @@ function build(meId,o={}){
     if(x.disclosedWars)x.disclosedWars=Object.fromEntries(Object.entries(x.disclosedWars).map(([id,fr])=>[String(piN(+id)),(fr||[]).map(piN)]));return x;};
   const party=q=>!!q&&(q.lord===meId||q.sub===meId);
   const mine=J(me);for(const k of STRIP_ME)delete mine[k];
+  mine.mapHabitats=knowledge.habitats;mine.mapOwners=Object.fromEntries(Object.entries(knowledge.owners).map(([id,owner])=>[id,piN(owner)]));
   mine.id=0;mine.ai=false;for(const k of EMP_MAPS)if(mine[k])mine[k]=remapKeys(mine[k]);
   /* MP.6.4 gizlilik: mağdur kaydında fail yalnız BİLİNİYORSA (yakalandı / soruşturmayla çözüldü) gider; tespit edilmemiş
      operasyonun faili ve sahte kanıtın gerçek yerleştiricisi (framed: "gerçeği yalnız biz biliriz") misafire gitmez. */
@@ -96,8 +97,8 @@ function build(meId,o={}){
     if(!f.ships.length)continue;
     const at=f.sys>=0?f.sys:(f.mv&&visible.has(f.mv.from)?f.mv.from:f.mv?f.mv.to:-1);
     if(at<0||!visible.has(at))continue;
-    const s=G.sys[at];
-    fl.push({id:f.id,e:pi(f.e),sys:at,x:s.x,y:s.y,ships:f.ships.map(x=>({c:x.c})),path:[],mv:null,ord:null,name:contacted(f.e)?f.name:'Bilinmeyen filo',
+    const s=G.sys[at],moving=f.mv&&visible.has(f.mv.from)&&visible.has(f.mv.to);
+    fl.push({id:f.id,e:pi(f.e),sys:moving?-1:at,x:moving?f.x:s.x,y:moving?f.y:s.y,ships:f.ships.map(x=>({c:x.c,h:Number.isFinite(x.h)?Math.max(0,Math.min(1,x.h)):1})),path:[],mv:moving?{from:f.mv.from,to:f.mv.to,t:f.mv.t}:null,ord:null,name:contacted(f.e)?f.name:'Bilinmeyen filo',
       stance:'savunma',combat:0,surv:0,auto:false,repairing:0,supply:1});
   }
   /* ---- federasyonlar: kamu kabuğu (üyelik haritada görünür). MP.6.1: ÜYE misafire kendi federasyonunun oylaması,
@@ -144,7 +145,7 @@ function build(meId,o={}){
       lastVote:cc.lastVote?{key:cc.lastVote.key,target:piN(cc.lastVote.target),appliedTarget:piN(cc.lastVote.appliedTarget),opened:cc.lastVote.opened,ended:cc.lastVote.ended,yes:m(cc.lastVote.yes),no:m(cc.lastVote.no),passed:!!cc.lastVote.passed,expired:!!cc.lastVote.expired,weight:J(cc.lastVote.weight),eventKey:cc.lastVote.eventKey}:null,
       campaign:cp?{key:cp.key,sponsor:piN(cp.sponsor),left:cp.left,bribed:Object.fromEntries(Object.keys(cp.bribed||{}).map(k=>[pi(+k),1])),
         blackmailed:(cp.blackmailed||[]).map(b=>({id:piN(b&&b.id!==undefined?b.id:b),yon:0})),agenda:null,target:piN(cp.target),...(cp.hedefId!==undefined?{hedefId:piN(cp.hedefId)}:{}),byPlayer:cp.sponsor===meId}:null};})();
-  return {v:8,cfg,day:G.day,year:G.year,month:G.month,seed:o.cosmeticSeed|0,rs:1,log:J(o.log||[]),news,...(economyHistory?{economyHistory}:{}),W:G.W,H:G.H,
+  return {v:8,mpVisible:[...visible],cfg,day:G.day,year:G.year,month:G.month,seed:o.cosmeticSeed|0,rs:1,log:J(o.log||[]),news,...(economyHistory?{economyHistory}:{}),W:G.W,H:G.H,
     world:{...(G.fedFounding?.proposals.some(p=>p.members.includes(meId))?{fedFounding:{v:1,next:Math.max(...G.fedFounding.proposals.filter(p=>p.members.includes(meId)).map(p=>p.id))+1,proposals:G.fedFounding.proposals.filter(p=>p.members.includes(meId)).map(p=>({id:p.id,type:p.type,ballot:p.ballot,opened:p.opened,expires:p.expires,status:p.status,...(Number.isFinite(p.finished)?{finished:p.finished}:{}),...(Number.isInteger(p.fid)?{fid:p.fid}:{}),...(p.why?{why:p.by===meId?String(p.why).slice(0,600):'Kurucu veya ortakların kuruluş koşulları değişti'}:{}),by:piN(p.by),members:p.members.map(piN),replies:Object.fromEntries(Object.entries(p.replies).map(([id,r])=>[piN(+id),{...r,terms:r.terms===fedFoundTerms(p)?fedFoundTerms({...p,members:p.members.map(piN)}):'',why:+id===meId||p.by===meId?r.why:'Karar kaydedildi'}]))}))}}:{}),memAge:G.memAge,cncAge:G.cncAge,council,feds,fedUid:G.fedUid,friction:{},rebelAlliance:null,megaWatch:[],sandbox:false},
     sys,emps,fl,nf:G.nextFleet};
 }

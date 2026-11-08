@@ -2048,7 +2048,7 @@ const UI = {
   surfaceInput(){
     if(this._surfaceBound)return;this._surfaceBound=true;this._surfaceDirty=new WeakSet();
     this._surfacePointers=new Set();
-    const relevant=t=>t?.closest?.('#diploPane,#panel,#modal');
+    const relevant=t=>t?.closest?.('#diploPane,#panel,#modal,#inbox');
     document.addEventListener('pointerdown',e=>{if(relevant(e.target))this._surfacePointers.add(e.pointerId);},{passive:true});
     const end=e=>{this._surfacePointers.delete(e.pointerId);this._surfaceUntil=Date.now()+220;};
     document.addEventListener('pointerup',end,{passive:true});document.addEventListener('pointercancel',end,{passive:true});
@@ -2861,6 +2861,10 @@ const UI = {
   /* =============== FİLO =============== */
   p_filo(){
     this._jointSurface='fleet';
+    if(View.sel&&View.sel.e!==0&&G.fleets.includes(View.sel)&&View.fleetVisible(View.sel)){
+      const f=View.sel,e=G.emps[f.e],ratio=clamp(fleetHealth(f),0,1),groups={};for(const ship of f.ships)(groups[ship.c]??=[]).push(ship);
+      return `<div class="ph">${esc(e?.name||'Bilinmeyen devlet')} · ${esc(f.name)}</div><div class="row"><span>Görülen gövde bütünlüğü</span><b>%${Math.round(ratio*100)}</b></div><div class="bar hp"><i style="width:${ratio*100}%"></i></div>`+Object.entries(groups).map(([c,ships])=>`<div class="box"><b>${esc(SHIPS[c]?.n||c)} ×${ships.length}</b><div class="mini">Gövde %${Math.round(ships.reduce((n,s)=>n+(Number.isFinite(s.h)?s.h:1),0)/ships.length*100)}</div></div>`).join('')+'<div class="mini">Görünen hasar durumu. Yabancı devletin özel kalkan, silah yükseltmeleri ve emirleri açıklanmaz.</div>';
+    }
     const mine = G.fleets.filter(f=>f.e===0);
     let h = this.jointPanel();
     const f = View.sel && View.sel.e===0 ? View.sel : null;
@@ -3176,7 +3180,7 @@ const UI = {
               ${docked ? `<button class="sBtn" data-a="splitOne" data-x="${c}" title="1 gemi ayır">⊟1</button>` : ''}
               ${docked && many ? `<button class="sBtn" data-a="splitAll" data-x="${c}" title="Bu türün tamamını ayır">⊟${arr.length}</button>` : ''}
             </span></div>
-          <div class="bd">gövde ${Math.round(d.hull*(1+G.p.mods.hullMul))} · kalkan ${Math.round(d.sh*(1+G.p.mods.shMul))} · hasar ${Math.round(d.dmg*(1+G.p.mods.dmgMul))}</div>
+          <div class="bd">ortalama gövde ${Math.round(d.hull*(1+G.p.mods.hullMul)*avg)}/${Math.round(d.hull*(1+G.p.mods.hullMul))} · kalkan kapasitesi ${Math.round(d.sh*(1+G.p.mods.shMul))} · hasar ${Math.round(d.dmg*(1+G.p.mods.dmgMul))}</div>
           ${shipBuildAccess(G.p,c).ok?'':`<div class="mini">Mevcut gemi korunuyor · yeni üretim: ${esc(shipBuildAccess(G.p,c).why)}. Bu gemi başlangıçtan, önceki üretimden veya eski kayıttan gelebilir.</div>`}
           <div class="mini" style="color:${rgCol}">◎ ${rgTxt}</div>
           <div class="bar hp"><i style="width:${avg*100}%"></i></div></div>`;
@@ -3785,8 +3789,9 @@ const UI = {
     h+=`<div class="mini" role="status">${esc(q.why||'Seçilen şartlar davete uygun')} · ${q.cost} ◈</div><button class="abtn pri" data-a="fedFoundStart" ${q.ok?'':'disabled'}>KURULUŞ DAVETLERİNİ GÖNDER</button>`;
     return h;
   },
+  fedResultSeen(key){this._fedResultsSeen=this._fedResultsSeen||new Set();const seen=this._fedResultsSeen.has(key);this._fedResultsSeen.add(key);if(this._fedResultsSeen.size>256)this._fedResultsSeen.delete(this._fedResultsSeen.values().next().value);return seen;},
   fedFoundCards(){
-    if(this._fedFoundSync||!G.p)return;if(this._fedNoticeWorld!==G.emps){this._fedNoticeWorld=G.emps;this._fedFoundDismissed=new Set();}this._fedFoundSync=true;
+    if(this._fedFoundSync||!G.p)return;if(this._fedNoticeWorld!==G.emps){this._fedNoticeWorld=G.emps;this._fedFoundDismissed=new Set();this._fedResultsSeen=new Set();}this._fedFoundSync=true;
     try{for(const p of G.fedFounding?.proposals||[]){if(!p.members.includes(G.p.id))continue;const me=G.p.id,reply=p.replies[me],key='fedfound:'+p.id,st=DiplomaticInbox.state();
       let rec=st.records.find(r=>r.key===key);
       const summary=FED_TYPES[p.type].n+' · '+p.members.length+' kurucu · '+FED_BALLOTS[p.ballot].n+' · '+fedDutyText({type:p.type,charter:{...fedDefaultCharter(p.type),ballot:p.ballot},laws:{}});
@@ -3795,7 +3800,8 @@ const UI = {
       const stateKey='fedfound-result:'+p.id+':'+p.status+':'+p.members.map(id=>p.replies[id]?.status||'').join(',');
       if(!st.records.some(r=>r.key===stateKey)){
         const count=p.members.filter(id=>p.replies[id]?.status==='accepted').length,f=p.fid?fedOf(p.fid):null;
-        this.notify({kind:'fedfoundResult',data:p.id,key:stateKey,ico:'🏛',pause:false,title:p.status==='founded'?'FEDERASYON KURULDU — '+(f?.name||'Federasyon'):'KURULUŞ SONUCU · '+count+'/'+p.members.length+' onay',sub:summary+(f?' · Lider: '+G.emps[f.leader].name:' · '+p.members.filter(id=>id!==p.by).map(id=>G.emps[id].name+': '+(p.replies[id]?.status==='accepted'?'kabul':p.replies[id]?.status==='rejected'?'ret':'bekliyor')).join(' · '))});
+        const item={kind:'fedfoundResult',data:p.id,key:stateKey,ico:'🏛',pause:false,title:p.status==='founded'?'FEDERASYON KURULDU — '+(f?.name||'Federasyon'):'KURULUŞ SONUCU · '+count+'/'+p.members.length+' onay',sub:summary+(f?' · Lider: '+G.emps[f.leader].name:' · '+p.members.filter(id=>id!==p.by).map(id=>G.emps[id].name+': '+(p.replies[id]?.status==='accepted'?'kabul':p.replies[id]?.status==='rejected'?'ret':'bekliyor')).join(' · '))};
+        if(!this.fedResultSeen(stateKey))this.notify(item);else DiplomaticInbox.capture({...item,uid:++G.inboxUid,born:G.day});
         const r=st.records.find(r=>r.key===stateKey);if(r){r.status='accepted';r.finished=G.day;}
       }
     }}finally{this._fedFoundSync=false;}
@@ -7209,13 +7215,15 @@ const UI = {
   },
 
   /* ---------- olay giriş noktaları (bildirim üretir) ---------- */
-  chain(id){
+  chain(id,e=G.p){
+    if(e!==G.p)return enqueueDecision(e,'chain',id);
     const c = CHAINS[id];
     if (!c) return;
     this.notify({kind:'chain', data:id, ico:'📖', cls:'sci', pause:true,
       title:c.n, sub:(c.t||'').slice(0,64) + '…', key:'chain:'+id});
   },
-  event(ev){
+  event(ev,e=G.p){
+    if(e!==G.p)return enqueueDecision(e,'event',ev.id);
     /* ═══ FAZ 47: OTOMATİK OLAY ÇÖZÜCÜ ═══
        Yalnız KÜÇÜK olaylar (ekonomi, minör anomali/kalıntı).
        Kriz, savaş ve zincir olayları daima oyuncuya sorulur.
@@ -7234,7 +7242,8 @@ const UI = {
     this.notify({kind:'event', data:ev, ico:'❗', pause:true,
       title:ev.n, sub:(ev.t||'').slice(0,64) + '…', key:'ev:'+ev.id});
   },
-  anomaly(a, sys){
+  anomaly(a, sys,e=G.p){
+    if(e!==G.p){const r=enqueueDecision(e,'anomaly',a.id,sys.id);if(!r.ok&&r.why==='Bekleyen olay sınırı')sys.anom=true;return r;}
     /* ═══ FAZ 47: OTOMATİK ÇÖZÜM — MİNÖR ANOMALİLER ═══
        ÖLÇÜM: kategoriler (dogal/sinyal/kalinti/megayapi) EVENTS'te
        değil ANOMALIES dizisindeymiş; ilk yazdığım kanca yanlış
@@ -7412,10 +7421,11 @@ const UI = {
   },
   drawInbox(){
     if(this._deferInbox)return;this.fedFoundCards();
+    G.inbox=(G.inbox||[]).filter(n=>{if(!['invite','fedvote','fedfound','decision'].includes(n.kind))return true;if(n.kind==='fedvote'){const f=fedOf(n.data);if(!f?.vote||n.key!=='fed:'+f.id+':'+fedVoteToken(f.vote)||!fedVoteCounts(f).waiting.includes(G.p.id))return false;}const r=DiplomaticInbox.state().records.find(r=>r.key===n.key||r.note?.key===n.key||r.note?.uid===n.uid);return !r||r.status==='pending'&&!DiplomaticInbox.gate(r).terminal;});
     const box = $('inbox');
     if (!box) return;
     const list = (G.inbox || []).filter(n=>!n.hidden);   // MP.7.5: kaydırılarak gizlenen olay kartı çizilmez
-    if (!list.length){ if(box.innerHTML)box.innerHTML='';box._inboxMarkup96d=null;box.classList.add('hidden');return; }
+    if (!list.length){this.surfaceReplace(box,'','inbox');box._inboxMarkup96d=null;box.classList.add('hidden');return; }
     box.classList.remove('hidden');
     const markup = list.map(it =>{const brief=this.diplomaticBrief(it);return `<button class="nCard ${it.cls||''}" data-a="openNote" data-x="${it.uid}">
          <span class="nIco">${it.ico||'✉'}</span>
@@ -7423,7 +7433,7 @@ const UI = {
          <span class="nGo">›</span>
        </button>${this.noteQuick(it)}`;}).join('');
     // Keep an unchanged decision's DOM node and entrance animation stable during refresh.
-    if(box._inboxMarkup96d!==markup){box.innerHTML=markup;box._inboxMarkup96d=markup;}
+    this.surfaceRender(box,markup,'inbox',true);box._inboxMarkup96d=markup;
     this.noteSwipeBind(box);
   },
   /* MP.7.4: KAYDIRILABİLİR BİLDİRİM + KARTTAN HIZLI KARAR
@@ -7446,6 +7456,7 @@ const UI = {
   choiceExplanation(c){if(c.next&&!c.f)return 'Sonraki bölüm · şimdi ödül uygulanmaz · Sonuç belirsiz';return (c.d||'Sonuç koşullara bağlı')+(c.uncertain||/risk|bilinmeyen|ihtimal|şans/i.test(c.d||'')?' · Sonuç belirsiz':'');},
   noteChoiceMenu(it){
     const ev=this.noteChoiceData(it);if(!ev)return '';
+    if(it.decisionId&&this.eventChoiceWaiting?.(it.decisionId))return '<div class="nOptions" role="status">Karar gönderildi — host yanıtı bekleniyor…</div>';
     if(!this.eventDecisionAuthority())return '<div class="nOptions"><span class="mini">Bu olayın kararı host yetkisi gerektirir; yerel ödül uygulanmaz.</span></div>';
     if(this._noteOptionsWorld!==G.emps){this._noteOptionsWorld=G.emps;this._noteOptions=new Set();}
     const open=this._noteOptions.has(it.uid),toggle=`<button class="abtn" data-a="noteOptions" data-x="${it.uid}" aria-expanded="${open}">${open?'SEÇENEKLERİ GİZLE ▴':'SEÇENEKLER ▾'}</button>`;
@@ -7462,8 +7473,7 @@ const UI = {
       G.inbox=(G.inbox||[]).filter(n=>n!==live);if(this._openNote===note)this._openNote=null;if(G.minNote===note.uid)G.minNote=null;
       // Exactly the same authored choice callback and random source formerly
       // used by the full window. Rendering never executes this path.
-      if(opt.f)result=opt.f(G,note.kind==='chain'?rnd:Math.random)||'';
-      if(note.kind==='chain'&&opt.next&&CHAINS[opt.next]){G.chainQueue=G.chainQueue||[];G.chainQueue.push({id:opt.next,at:G.day+60+Math.floor(rnd()*120)});}
+      result=authoredDecision(G.p,note.kind,note.kind==='chain'?note.data:note.kind==='event'?note.data.id:note.data.a.id,index,note.data?.sys?.id);
     }catch(error){dealTxRollback(tx);this._openNote=wasOpen;return {ok:false,why:'Olay uygulanamadı; durum korundu: '+String(error.message||error).slice(0,160)};}
     this._noteOptions?.delete(note.uid);
     this.openModal(`<div class="mhd"><span>SONUÇ</span></div><div class="mbd">${result||'Karar uygulandı.'}</div><div class="mft"><button class="ch" data-a="closem"><div class="cht">Kapat</div></button></div>`,note.kind==='event'?'':'sci');
@@ -7473,7 +7483,7 @@ const UI = {
     if(!it||typeof DiplomaticInbox==='undefined'||!DiplomaticInbox.supported(it.kind))return null;
     const byId=Number.isInteger(it.rec)?DiplomaticInbox.get(it.rec):null;   // çok oyunculu kartın kayıt bağı
     if(byId)return byId.status==='pending'?byId:null;
-    return DiplomaticInbox.state().records.find(r=>r.status==='pending'&&r.note&&r.note.uid===it.uid)||null;
+    return DiplomaticInbox.state().records.find(r=>r.status==='pending'&&r.note&&(r.note.uid===it.uid||typeof it.key==='string'&&r.note.key===it.key))||null;
   },
   noteQuick(it){
     if(this.noteChoiceData(it))return this.noteChoiceMenu(it);

@@ -1134,6 +1134,7 @@ const View = {
     }, {passive:false});
   },
 
+  fleetPoint(f){return {x:f.x,y:f.y};},
   hit(sp){
     const w = this.s2w(sp.x, sp.y);
     const R = 34; // hit radius stays in CSS pixels at every zoom
@@ -1142,7 +1143,7 @@ const View = {
     for (const f of G.fleets){
       if (!f.ships.length) continue;
       if (f.e !== 0 && !this.fleetVisible(f)) continue;
-      const fp=this.w2s(f.x,f.y);
+      const fp=this.w2s(this.fleetPoint(f).x,this.fleetPoint(f).y);
       const d = Math.hypot(fp.x-sp.x, fp.y-sp.y);
       if (d < R) near.push({f, d});
     }
@@ -1299,7 +1300,8 @@ const View = {
       }
       return;
     }
-    if (f && f.e === 0){
+    if (f && this.fleetVisible(f)){
+      if(f.e!==0){this.route=false;this.routed=false;}
       this.sel = f; this.selSys = null;
       if (this.hitCount > 1) UI.alert(this.hitCount + ' filo üst üste — tekrar dokun, sıradakine geç');
       UI.tab('filo'); UI.refresh(); return;
@@ -1582,7 +1584,7 @@ const View = {
       if(!f.ships.length||!this.fleetVisible(f)||stacked.has(f.id))continue;
       // Uzak siyasi görünümde duran filolar çizilmez; etiketleri de açılmaz.
       if(this.cam.z<.05&&!f.mv)continue;
-      const p=this.w2s(f.x,f.y);
+      const p=this.w2s(this.fleetPoint(f).x,this.fleetPoint(f).y);
       if(p.x<0||p.y<0||p.x>this.vw||p.y>this.vh)continue;
       let dy=12;
       if(this.cam.z>=.05){
@@ -1880,11 +1882,11 @@ const View = {
       g.setLineDash([]);
     }
 
-    // seçili filo rotası
-    if (this.sel){
+    // seçili kendi filo rotası; yabancı emirler hiçbir görünümde açıklanmaz
+    if (this.sel&&this.sel.e===0){
       const f = this.sel;
       const nodes = [];
-      if (f.mv) nodes.push({x:f.x, y:f.y});
+      if (f.mv) nodes.push(this.fleetPoint(f));
       else if (f.sys>=0) nodes.push({x:G.sys[f.sys].x, y:G.sys[f.sys].y});
       f.path.forEach(id => nodes.push({x:G.sys[id].x, y:G.sys[id].y}));
       if (nodes.length > 1){
@@ -2335,7 +2337,7 @@ const View = {
       for (const f of G.fleets){
         if (!f.mv || !f.ships || !f.ships.length) continue;
         if (!this.fleetVisible(f)) continue;
-        const p0 = this.w2s(f.x, f.y);
+        const p0 = this.w2s(this.fleetPoint(f).x, this.fleetPoint(f).y);
         /* FAZ 64: rota etiketi sağa doğru ~140 px uzayabiliyor */
         if (p0.x < -140 || p0.y < -140 ||
             p0.x > this.vw+140 || p0.y > this.vh+140) continue;
@@ -2478,7 +2480,7 @@ const View = {
       /* FAZ 75: yığına düşen duran filo atlanır */
       if (!f.mv && f !== this.sel && f.sys >= 0 &&
           gizli.has(f.sys + '_' + f.e)) continue;
-      const p = this.w2s(f.x, f.y);
+      const p = this.w2s(this.fleetPoint(f).x, this.fleetPoint(f).y);
       /* FAZ 64: 40 → 120. Filo ikonunun ALTINA güç ve durum
          yazısı düşüyor; 40 px payla o yazılar kenarda kesiliyordu. */
       if (p.x<-120||p.y<-120||p.x>this.vw+120||p.y>this.vh+120) continue;

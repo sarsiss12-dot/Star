@@ -1535,7 +1535,7 @@ const ANOMALIES = [
   {id:'a11', k:'sinyal', n:'Bilinmeyen Sinyal', t:'Sistemin derinliğinden düzenli aralıklarla bir çağrı geliyor. Kaynağı hiçbir kayıtta yok.',
    ch:[{t:'Sinyale karşılık ver', d:'büyük ödül · risk var', f:g=>{
         if (rnd() < .55){ g.p.res.ara += 420; return 'Karşılık verildi: kadim bir zekâ bize bilgi bıraktı — +420 araştırma.'; }
-        for (const c of g.p.colonies){ const pl = G.sys[c.s].planets[c.p];
+        for (const c of g.p.colonies){ const pl = g.sys[c.s].planets[c.p];
           if (pl.col) pl.col.stab = clamp(pl.col.stab - 14, 0, 100); }
         return 'Sinyal bir çağrıymış. Halk arasında kâbuslar başladı: tüm kolonilerde istikrar −14.';}},
        {t:'Kaydet ve uzaklaş', d:'+140 araştırma', f:g=>{g.p.res.ara+=140; return 'Sinyal arşivlendi, temas kurulmadı: +140 araştırma.';}}]},
@@ -1544,7 +1544,7 @@ const ANOMALIES = [
    ch:[{t:'İçeri dal ve söktür', d:'çok mineral · gemi riski', f:g=>{
         if (rnd() < .62){ g.p.res.min += 640; g.p.res.ala += 150;
           return 'Halkanın omurgası söküldü: +640 mineral, +150 alaşım.'; }
-        const f2 = G.fleets.filter(x => x.e === 0 && x.ships.length);
+        const f2 = g.fleets.filter(x => x.e === g.p.id && x.ships.length);
         if (f2.length){ const ff = f2[Math.floor(rnd()*f2.length)];
           const kayip = Math.max(1, Math.floor(ff.ships.length * .35));
           ff.ships.splice(0, kayip);
@@ -1556,7 +1556,7 @@ const ANOMALIES = [
    ch:[{t:'Mühürleri kır', d:'ödül ya da salgın', f:g=>{
         if (rnd() < .58){ g.p.res.ara += 340; g.p.res.etk += 60;
           return 'Mezarlar bir arşiv çıktı: +340 araştırma, +60 etki.'; }
-        for (const c of g.p.colonies){ const pl = G.sys[c.s].planets[c.p];
+        for (const c of g.p.colonies){ const pl = g.sys[c.s].planets[c.p];
           if (pl.col && pl.col.pop > 3) pl.col.pop -= 1; }
         return 'Mühürler bir patojeni serbest bıraktı. Kolonilerde nüfus kaybı.';}},
        {t:'Saygıyla belgele', d:'+180 araştırma, +40 etki', f:g=>{
@@ -1569,9 +1569,9 @@ const ANOMALIES = [
        {t:'Mührü kır', d:'+700 mineral · TEHLİKELİ',
         f:g=>{ g.p.res.min += 700;
           if (rnd() < .45){
-            g.p.crisis = 'salgin'; g.p.crisisAt = G.day;
+            g.p.crisis = 'salgin'; g.p.crisisAt = g.day;
             for (const c of g.p.colonies){
-              const pl = G.sys[c.s].planets[c.p];
+              const pl = g.sys[c.s].planets[c.p];
               if (pl.col) pl.col.stab = clamp(pl.col.stab - 20, 0, 100);
             }
             return 'Lahit açıldı: +700 mineral — ama içeriden bir şey çıktı. Kolonilerinde salgın başladı.';
@@ -1587,11 +1587,11 @@ const ANOMALIES = [
             g.p.res.ara += 620; g.p.res.etk += 140;
             return 'Karşılık geldi — dost bir arşiv zekâsı. Bilgi paylaşıldı: +620 araştırma, +140 etki.';
           }
-          const dusman = G.emps.filter(x => !x.dead && x.id !== 0 && x.contact[0]);
+          const dusman = g.emps.filter(x => !x.dead && x.id !== g.p.id && x.contact[g.p.id]);
           if (dusman.length){
             const d = dusman[Math.floor(rnd() * dusman.length)];
-            d.rel[0] = clamp(d.rel[0] - 35, -100, 100);
-            if (typeof remember === 'function') remember(d, 0, 'casusYakalan');
+            d.rel[g.p.id] = clamp(d.rel[g.p.id] - 35, -100, 100);
+            if (typeof remember === 'function') remember(d, g.p.id, 'casusYakalan');
             return 'Yanıtını ' + d.name + ' dinledi ve konumunu öğrendi. Aranız bozuldu.';
           }
           return 'Yanıt verdin. Karanlıktan cevap gelmedi... henüz.'; }}]},
@@ -1602,12 +1602,12 @@ const ANOMALIES = [
           return 'Alaşım bileşimi çözüldü: +320 araştırma, +90 alaşım.'; }},
        {t:'Sökmeye çalış', d:'+900 mineral · TEHLİKELİ',
         f:g=>{ if (rnd() < .40){
-            const f2 = G.fleets.filter(x => x.e === 0 && x.ships.length);
+            const f2 = g.fleets.filter(x => x.e === g.p.id && x.ships.length);
             if (f2.length){
               const kurban = f2[Math.floor(rnd() * f2.length)];
               const kayip = Math.max(1, Math.floor(kurban.ships.length * .5));
               kurban.ships.splice(0, kayip);
-              if (!kurban.ships.length) G.fleets = G.fleets.filter(x => x !== kurban);
+              if (!kurban.ships.length) g.fleets = g.fleets.filter(x => x !== kurban);
               return 'Halka kendini savundu — ' + kayip + ' gemi kaybedildi. Mineral alınamadı.';
             }
           }
@@ -1627,7 +1627,7 @@ const CHAINS = {
       {t:'Uzaktan tara ve bırak', d:'+180 araştırma, risk yok',
        f:g=>{ g.p.res.ara += 180; return 'Gemi taranıp arşivlendi: +180 araştırma.'; }},
       {t:'Yörüngeden imha et', d:'+120 alaşım, komşular tedirgin olur',
-       f:g=>{ g.p.res.ala += 120; g.emps.forEach(o=>{ if(o.id) g.p.rel[o.id] = clamp(g.p.rel[o.id]-4,-100,100); });
+       f:g=>{ g.p.res.ala += 120; g.emps.forEach(o=>{ if(o.id!==g.p.id) g.p.rel[o.id] = clamp(g.p.rel[o.id]-4,-100,100); });
               return 'Gemi parçalandı: +120 alaşım. Komşular bu aceleciliği not etti.'; }}
     ]},
   hayalet2a:{n:'Sessiz Gemi — Güverte', bas:0,
@@ -1713,7 +1713,7 @@ const CHAINS = {
     ch:[
       {t:'Sınırları incele', d:'Riskli bilgi',
        uncertain:true, f:(g,r)=>{ if (r()<.5){ g.p.res.ara += 600; return 'Harita gelecekteki bir galaksiyi gösteriyordu. Anlamı belirsiz: +600 araştırma.'; }
-                  g.emps.forEach(o=>{ if(o.id) g.p.rel[o.id] = clamp(g.p.rel[o.id]-12,-100,100); });
+                  g.emps.forEach(o=>{ if(o.id!==g.p.id) g.p.rel[o.id] = clamp(g.p.rel[o.id]-12,-100,100); });
                   return 'Harita sızdı. Diğer imparatorluklar bizim onlarla ilgili planlar yaptığımızı düşünüyor: ilişkiler bozuldu.'; }},
       {t:'İletişimi kes', d:'+250 araştırma',
        f:g=>{ g.p.res.ara += 250; return 'Kanal kapatıldı. Eldeki veri yine de öğretici: +250 araştırma.'; }}
@@ -1748,7 +1748,7 @@ const CHAINS = {
               return 'Aşı imparatorluk geneline yayıldı: kalıcı +%6 nüfus artışı.'; }},
       {t:'Formülü sat', d:'+400 enerji, +60 ilişki',
        f:g=>{ g.p.res.ara -= 300; g.p.res.ene += 400;
-              g.emps.forEach(o=>{ if(o.id) g.p.rel[o.id] = clamp(g.p.rel[o.id]+10,-100,100); });
+              g.emps.forEach(o=>{ if(o.id!==g.p.id) g.p.rel[o.id] = clamp(g.p.rel[o.id]+10,-100,100); });
               return 'Formül komşulara satıldı: +400 enerji ve iyi niyet.'; }}
     ]},
   salgin2c:{n:'Yayılma', bas:0,
@@ -1872,12 +1872,12 @@ const CHAINS = {
       {t:'Sığınma hakkı ver', d:'Veriler bizim olur, komşu öfkelenir', next:'kacak2a'},
       {t:'Geri iade et', d:'İlişki +25, veriler gider',
        f:g=>{ const o = g.emps.find(x=>x.id && !x.dead);
-              if (o){ g.p.rel[o.id] = clamp(g.p.rel[o.id]+25,-100,100); o.rel[0] = clamp(o.rel[0]+25,-100,100); }
+              if (o){ g.p.rel[o.id] = clamp(g.p.rel[o.id]+25,-100,100); o.rel[g.p.id] = clamp(o.rel[g.p.id]+25,-100,100); }
               return 'Bilim insanı iade edildi. Komşumuz bu jesti unutmayacak.'; }},
       {t:'Verileri al, kendisini iade et', d:'İki tarafı da idare et',
        uncertain:true, f:(g,r)=>{ g.p.res.ara += 320;
               if (r()<.5){ const o = g.emps.find(x=>x.id && !x.dead);
-                if (o){ g.p.rel[o.id] = clamp(g.p.rel[o.id]-30,-100,100); o.rel[0] = clamp(o.rel[0]-30,-100,100); }
+                if (o){ g.p.rel[o.id] = clamp(g.p.rel[o.id]-30,-100,100); o.rel[g.p.id] = clamp(o.rel[g.p.id]-30,-100,100); }
                 return 'Veriler kopyalandı ama komşumuz öğrendi: +320 araştırma, ilişki bozuldu.'; }
               return 'Kimse fark etmedi: +320 araştırma ve temiz bir sicil.'; }}
     ]},
@@ -1886,7 +1886,7 @@ const CHAINS = {
     ch:[
       {t:'Tasarımları kullan', d:'Kalıcı +%8 gemi hasarı, ilişki −40',
        f:g=>{ g.p.extra.dmgMul = (g.p.extra.dmgMul||0)+.08; recalcMods(g.p);
-              g.emps.forEach(o=>{ if(o.id) g.p.rel[o.id] = clamp(g.p.rel[o.id]-15,-100,100); });
+              g.emps.forEach(o=>{ if(o.id!==g.p.id) g.p.rel[o.id] = clamp(g.p.rel[o.id]-15,-100,100); });
               return 'Tasarımlar donanmamıza uyarlandı: kalıcı +%8 gemi hasarı. Galakside güvenilirliğimiz sarsıldı.'; }},
       {t:'Uyarıya uy ve imha et', d:'+200 etki, kalıcı +%4 kalkan',
        f:g=>{ g.p.res.etk += 200; g.p.extra.shMul = (g.p.extra.shMul||0)+.04; recalcMods(g.p);
@@ -1902,7 +1902,7 @@ const EVENTS = [
        {t:'Reddet', d:'−8 etki', f:g=>{g.p.res.etk-=8; return 'Bilim konseyi küstü: −8 etki.';}}]},
   {id:'e2', n:'Göçmen Filosu', t:'Yersiz yurtsuz bir mülteci filosu sınırlarında beliriyor. Sığınma istiyorlar.',
    ch:[{t:'Kabul et', d:'+2 nüfus, −60 yiyecek', f:g=>{ const c=g.p.colonies[0]; if(c){ const pl=g.sys[c.s].planets[c.p]; if(pl.col) pl.col.pop+=2; } g.p.res.yiy-=60; return 'Mülteciler yerleştirildi: +2 nüfus.';}},
-       {t:'Geri çevir', d:'+40 etki, diğer devletlerle ilişki −6', f:g=>{g.p.res.etk+=40; g.emps.forEach(o=>{ if(o.id) g.p.rel[o.id]=clamp(g.p.rel[o.id]-6,-100,100); }); return 'Sınırlar kapatıldı: +40 etki, komşular soğudu.';}}]},
+       {t:'Geri çevir', d:'+40 etki, diğer devletlerle ilişki −6', f:g=>{g.p.res.etk+=40; g.emps.forEach(o=>{ if(o.id!==g.p.id) g.p.rel[o.id]=clamp(g.p.rel[o.id]-6,-100,100); }); return 'Sınırlar kapatıldı: +40 etki, komşular soğudu.';}}]},
   {id:'e3', n:'Alaşım Grevi', t:'Dökümhane işçileri üretimi durdurdu. Talepleri pahalı ama makul.',
    ch:[{t:'Talepleri karşıla', d:'−120 enerji', f:g=>{g.p.res.ene-=120; return 'Grev sona erdi.';}},
        {t:'Üretimi zorla', d:'−40 alaşım, −6 etki', f:g=>{g.p.res.ala-=40; g.p.res.etk-=6; return 'Zorlama işe yaramadı: −40 alaşım, −6 etki.';}}]},
@@ -3884,7 +3884,7 @@ function doSurvey(f, sys){
        edilen şeyle karşılaşılan şey tutarlı olsun. */
     const havuz = ANOMALIES.filter(x => !sys.anomK || x.k === sys.anomK);
     const a = (havuz.length ? havuz : ANOMALIES)[Math.floor(rnd() * (havuz.length || ANOMALIES.length))];
-    UI.anomaly(a, sys);
+    UI.anomaly(a, sys, e);
   } else if (sys.anom && e.ai){
     sys.anom = false;
     /* FAZ 17: AI de gerçekten keşfeder. Türe göre farklı ödül alır,
@@ -4093,6 +4093,25 @@ function explorationContext(e){
   for(const id of known)for(const n of G.sys[id].lanes)frontier.add(n);
   const gates=[...known].filter(id=>hasUsableGate(e,G.sys[id]));
   return {known,visible,frontier,blocked,pirates,gates,supply:new Map(),supplyNodes:new Map()};
+}
+/* One observer contract for remote humans; native providers never relay third-party vision. */
+function humanVisionContext(e){
+  const ctx=explorationContext(e);
+  for(const id of new Set([...Object.keys(e.visionFrom||{}),...Object.keys(e.shareVis||{})])){
+    const giver=G.emps[id];if(!sensorShareActive(e,giver))continue;
+    for(const sid of nativeSensorVision(giver)){ctx.visible.add(sid);ctx.known.add(sid);}
+    if(e.shareVis?.[id])for(const sys of G.sys)if(sys.seen.includes(+id))ctx.known.add(sys.id);
+  }
+  return ctx;
+}
+function humanMapKnowledge(e,ctx){
+  const habitats={...(e.mapHabitats||{})},owners={...(e.mapOwners||{})};
+  for(const id of ctx.visible){const s=G.sys[id];owners[id]=s.owner;
+    if(!s.surv.includes(e.id))continue;let mask=0;
+    for(const p of s.planets)if(!p.shattered&&PLANETS[p.t]?.k==='hab'&&habOf(e,p)>=35)mask|=p.col&&p.owner>=0?2:p.owner<0&&canColonize(e,s,p)?1:0;
+    const old=habitats[id];habitats[id]=old?.mask===mask?old:{mask,at:G.day};
+  }
+  return {habitats,owners};
 }
 function explorationBlock(e,f,id,ctx,from){
   if(!G.sys[id]||!ctx.frontier.has(id))return 'route';
@@ -4839,29 +4858,65 @@ function checkVictory(e, why){
   }
 }
 
+/* Human event decisions use explicit actor context, never a temporary G.p swap. */
+function decisionContext(e){return e===G.p?G:new Proxy(G,{get:(g,k)=>k==='p'?e:g[k],set:(g,k,v)=>{if(k==='p')throw Error('Olay oyuncusu değiştirilemez');g[k]=v;return true;}});}
+function decisionStore(e){return e.decisions||(e.decisions={v:1,next:1,pending:[],queue:[],seen:{}});}
+function decisionCatalog(kind,id){return kind==='event'?EVENTS.find(x=>x.id===id):kind==='anomaly'?ANOMALIES.find(x=>x.id===id):kind==='chain'&&Object.hasOwn(CHAINS,id)?CHAINS[id]:null;}
+function enqueueDecision(e,kind,id,sys=null){
+ const data=decisionCatalog(kind,id);if(!e||e.ai||e.dead||!data)return {ok:false,why:'Geçersiz olay sahibi'};
+ const st=decisionStore(e),key=kind+':'+id+':'+(sys??'');
+ if(st.pending.some(n=>n.key===key&&n.status==='pending'))return {ok:false,why:'Olay zaten bekliyor'};
+ if(st.pending.filter(n=>n.status==='pending').length>=64)return {ok:false,why:'Bekleyen olay sınırı'};
+ const n={id:st.next++,kind,catalog:id,sys,key,born:G.day,status:'pending'};st.pending.push(n);return {ok:true,id:n.id};
+}
+function authoredDecision(e,kind,id,index,sys=null){
+ const data=decisionCatalog(kind,id),opt=data?.ch[index];if(!opt)throw Error('Geçersiz olay seçeneği');
+ const result=opt.f?opt.f(decisionContext(e),kind==='chain'?rnd:Math.random)||'':'';
+ if(kind==='chain'&&opt.next&&CHAINS[opt.next]){const q=e===G.p?(G.chainQueue=G.chainQueue||[]):decisionStore(e).queue;q.push({id:opt.next,at:G.day+60+Math.floor(rnd()*120)});}
+ return String(result||'Karar uygulandı.');
+}
+function resolveHumanDecision(e,id,index){
+ const n=e?.decisions?.pending.find(x=>x.id===id),data=n&&decisionCatalog(n.kind,n.catalog);
+ if(!e||e.ai||e.dead||G.over||!n||n.status!=='pending'||!Number.isInteger(index)||!data?.ch[index])return {ok:false,why:'Olay artık beklemiyor veya yetkiniz yok'};
+ const tx=dealTxBegin();try{n.status='resolving';const result=authoredDecision(e,n.kind,n.catalog,index,n.sys);n.status='resolved';n.choice=index;n.finished=G.day;n.result=result.slice(0,1200);
+ const terminal=e.decisions.pending.filter(x=>x.status==='resolved');if(terminal.length>64){const drop=new Set(terminal.slice(0,terminal.length-64));e.decisions.pending=e.decisions.pending.filter(x=>!drop.has(x));}return {ok:true,extra:{result:n.result,id:n.id}};
+ }catch(error){dealTxRollback(tx);return {ok:false,why:'Olay uygulanamadı; durum korundu'};}
+}
+function remoteDecisionTick(e){
+ const st=decisionStore(e),month=G.year*12+G.month;if(st.lastMonth===month)return;st.lastMonth=month;
+ if(G.cfg.randomEvents===false){st.queue=[];return;}
+ for(let i=st.queue.length-1;i>=0;i--)if(st.queue[i].at<=G.day){const q=st.queue[i];if(enqueueDecision(e,'chain',q.id).ok)st.queue.splice(i,1);}
+ if(G.month%2===0)maybeEvent(e,mulberry32(identityHash('human-event:'+G.seed+':'+e.id+':'+month)));
+}
+function restoreHumanDecisions(e){
+ if(e.decisions===undefined)return;const raw=e.decisions,valid=n=>n&&Number.isSafeInteger(n.id)&&n.id>0&&['event','anomaly','chain'].includes(n.kind)&&decisionCatalog(n.kind,n.catalog)&&Number.isFinite(n.born)&&n.born>=0&&['pending','resolved'].includes(n.status)&&(n.sys===null||Number.isInteger(n.sys)&&!!G.sys[n.sys]);
+ const ids=new Set(),pending=[];for(const n of Array.isArray(raw?.pending)?raw.pending:[]){if(pending.length>=128||!valid(n)||ids.has(n.id))continue;ids.add(n.id);pending.push({id:n.id,kind:n.kind,catalog:n.catalog,sys:n.sys,key:n.kind+':'+n.catalog+':'+(n.sys??''),born:n.born,status:n.status,...(n.status==='resolved'?{choice:Number.isInteger(n.choice)?n.choice:0,finished:Number.isFinite(n.finished)?n.finished:n.born,result:String(n.result||'').slice(0,1200)}:{})});}
+ e.decisions={v:1,next:Math.max(0,...ids)+1,pending,queue:(Array.isArray(raw?.queue)?raw.queue:[]).filter(q=>q&&CHAINS[q.id]&&Number.isFinite(q.at)&&q.at>=0).slice(0,64).map(q=>({id:q.id,at:q.at})),seen:Object.fromEntries(Object.keys(raw?.seen||{}).filter(id=>CHAINS[id]&&raw.seen[id]).map(id=>[id,true])),...(Number.isInteger(raw?.lastMonth)?{lastMonth:raw.lastMonth}:{})};
+}
+
 /* ---------- rastgele imparatorluk olayları ---------- */
-function maybeEvent(){
+function maybeEvent(e=G.p,random=rnd){
   if (G.cfg && G.cfg.randomEvents === false) return; // Sadece pasif rastgele olaylar
-  G.seenChains = G.seenChains || {};
+  const seen=e===G.p?(G.seenChains = G.seenChains || {}):decisionStore(e).seen;
   // önce hikâye zinciri şansı — bunlar araştırmaya bağlı değil
-  if (rnd() < .11){
+  if (random() < .11){
     const pool = [];
     for (const k in CHAINS){
       const c = CHAINS[k];
-      if (!c.bas || G.seenChains[k]) continue;
+      if (!c.bas || seen[k]) continue;
       for (let i=0;i<(c.w||5);i++) pool.push(k);
     }
     if (pool.length){
-      const pickK = pool[Math.floor(rnd()*pool.length)];
-      G.seenChains[pickK] = true;
-      UI.chain(pickK);
+      const pickK = pool[Math.floor(random()*pool.length)];
+      seen[pickK] = true;
+      UI.chain(pickK,e);
       return;
     }
   }
-  if (rnd() > .16) return;
-  const ok = EVENTS.filter(ev => !ev.ok || ev.ok(G));
+  if (random() > .16) return;
+  const ok = EVENTS.filter(ev => !ev.ok || ev.ok(decisionContext(e)));
   if (!ok.length) return;
-  UI.event(ok[Math.floor(rnd()*ok.length)]);
+  UI.event(ok[Math.floor(random()*ok.length)],e);
 }
 
 /* =====================================================================
@@ -8045,6 +8100,7 @@ function applySaveData(d){
      koordinatlar yeniden üretilmez. */
   restoreWorldBounds(d);
   G.emps = d.emps;
+  G.emps.forEach(restoreHumanDecisions);
   for(const e of G.emps){e.ethics=e.ethics||{};if(!Number.isFinite(e.ethics.ahl))e.ethics.ahl=0;} G.fleets = d.fl; G.nextFleet = d.nf;
   G.p = G.emps[0];
   G._identityViewPrefs=d.viewPrefs;
@@ -8436,7 +8492,7 @@ function forceRedraw(sebep){
    Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
    Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
 /* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */
-const BUILD_ID = '96h10p14';
+const BUILD_ID = '96h10p15';
 const DIAG_MAX = 40;
 const DIAG = [];
 function logDiag(tur, mesaj){

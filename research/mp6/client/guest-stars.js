@@ -43,6 +43,37 @@ const S={swiped:new Set(),decWait:new Map(),warQuote:{},pendingWar:null,counter:
      yeniden istenir (sonsuz bekleme ya da hızlı döngü yok); hata nedeni oyun verisi/jeton/oda anahtarı içermez */
   boot:{since:0,stage:null,tries:0,next:0,fails:0,err:'',failed:false,log:[]}};
 
+/* Presentation-only interpolation: no prediction, no simulation writes, bounded to actual received positions. */
+const motion={rows:new Map(),at:0,
+ point(f,now=performance.now()){const r=this.rows.get(f.id);if(!r||!f.mv||f.combat||now-r.at>3500)return {x:f.x,y:f.y};const t=Math.max(0,Math.min(1,(now-r.at)/r.duration));return {x:r.x+(r.toX-r.x)*t,y:r.y+(r.toY-r.y)*t};},
+ accept(fleets,reset=false,now=performance.now()){
+  const gap=this.at?Math.max(100,Math.min(3000,now-this.at)):700,next=new Map();
+  for(const f of fleets){if(!f.mv||f.combat)continue;const signature=f.e+':'+f.mv.from+':'+f.mv.to,old=this.rows.get(f.id),same=!reset&&old?.signature===signature;
+   const p=same?this.point({...f,x:old.toX,y:old.toY},now):{x:f.x,y:f.y};next.set(f.id,{signature,x:p.x,y:p.y,toX:f.x,toY:f.y,at:now,duration:gap});
+  }this.rows=next;this.at=now;
+ },clear(){this.rows.clear();this.at=0;}
+};
+S.motion=motion;
+const fleetPoint0=View.fleetPoint.bind(View);View.fleetPoint=function(f){if(!S.on)return fleetPoint0(f);if(!S.J?.ws||S.J.ws.readyState!==1||!S.J.hostOnline||S.hostSpd===0){motion.clear();return fleetPoint0(f);}return motion.point(f);};
+
+const noticePrefs={namespace:null,keys:new Set(),ready:false,promise:null};
+function loadNoticePrefs(){
+ const join=S.J||window.MP1Join;
+ const namespace=join?.saveId&&'mp:fed-results:'+join.saveId+':'+join.empireId;
+ if(!namespace)return true;if(noticePrefs.namespace!==namespace){noticePrefs.namespace=namespace;S.resolvedChoices=new Set();S.swiped.clear();noticePrefs.ready=false;noticePrefs.promise=null;noticePrefs.keys=new Set();}
+ if(noticePrefs.ready)return true;
+ if(!noticePrefs.promise)noticePrefs.promise=(async()=>{try{const raw=await storeGet(namespace),keys=JSON.parse(raw||'[]');if(noticePrefs.namespace===namespace&&Array.isArray(keys))for(const k of keys.slice(-192))if(typeof k==='string')noticePrefs.keys.add(k);}catch{}finally{if(noticePrefs.namespace===namespace)noticePrefs.ready=true;}})();
+ return false;
+}
+function restoreObservation(m){
+ if(!m||!G.p)return;G.vis=new Set(m.mpVisible||[]);G._sensorVision=new Map();G._shareVisSet=null;
+ G.p.mapHabitats=JSON.parse(JSON.stringify(m.emps?.[0]?.mapHabitats||{}));
+}
+  const resultSeen0=UI.fedResultSeen.bind(UI);UI.fedResultSeen=function(key){
+    if(!S.on&&!S.building)return resultSeen0(key);const seen=noticePrefs.keys.has(key);noticePrefs.keys.add(key);if(noticePrefs.keys.size>192)noticePrefs.keys.delete(noticePrefs.keys.values().next().value);
+    if(!seen&&noticePrefs.namespace)Promise.resolve(storeSet(noticePrefs.namespace,JSON.stringify([...noticePrefs.keys]))).catch(()=>{});return seen;
+  };
+
 /* ---- 1. eylem kapısı ---- */
 /* Yalnız görünüm/gezinme (dünyayı değiştirmeyen) eylemler yerelde çalışır. MP.6.1: arşiv/gelen kutusu görünümleri, anlaşma,
    vasallık ve federasyon taslak ekranları da görünümdür (gönderim motor işlevinde MP komutuna çevrilir). */
@@ -155,6 +186,7 @@ function gate(){
     for(const k of Object.keys(o))if(typeof o[k]==='function')for(const m of String(o[k]).matchAll(/_hook\('([A-Za-z0-9_]+)'/g))S.hooks.add(m[1]);
   const act=UI.act.bind(UI);
   UI.act=function(a,x,el){if(!S.on)return act(a,x,el);if(ACT[a]){ACT[a](x);return;}if(VIEW.has(a)||S.hooks.has(a))return act(a,x,el);return blocked(a);};
+  const vision0=updateVision;updateVision=function(){if(!S.on&&!S.building)return vision0.apply(this,arguments);restoreObservation(S.mirror);};
   /* misafirde yerel zaman hep durur (tik yok); hız düğmeleri host'un GERÇEK ortak hızını gösterir */
   UI.setSpeed=function(){G.speed=0;paintSpeed();};
   /* motor eylemleri → MP komutu (yalnız misafirin kendi devleti: aynada 0) */
@@ -403,7 +435,19 @@ function gate(){
   UI.aiDealOpen=function(p){if(S.on&&p){const v=S.J&&S.J.game.view,o=v&&v.dip&&v.dip.offers.find(x=>x.status==='pending'&&x.to===S.J.empireId&&local(x.from)===p.from&&x.born===p.born);
     S.counter=o?{offer:o.id,to:p.from}:null;}return aiDealOpen0(p);};
   /* misafirde anlaşma YEREL uygulanmaz (ayna bir sonraki turda ezer; host'a ulaşmaz): yanlış "imzalandı" gösterilmesin */
-  UI.eventDecisionAuthority=()=>!S.on; // No authoritative remote event payload/command exists in the current protocol.
+  UI.eventDecisionAuthority=()=>true; // Visible choices still commit only through the owned host command.
+  const applyChoice0=UI.applyEventChoice.bind(UI);UI.applyEventChoice=function(note,index,world){
+    if(!S.on)return applyChoice0(note,index,world);
+    if(world&&world!==G.emps||!Number.isSafeInteger(note?.decisionId)||!Number.isInteger(index))return {ok:false,why:'Yetkili olay kimliği yok'};
+    const key='eventChoice::'+note.decisionId;if(decBusy(key))return {ok:false,why:'Karar host yanıtını bekliyor'};
+    const cid=send({kind:'eventChoice',id:note.decisionId,choice:index});if(!cid)return {ok:false,why:'Host bağlı değil; karar uygulanmadı'};
+    S.decWait.set(key,{cid,gen:S.gen|0});UI.drawInbox();for(const b of doc.querySelectorAll('#modal [data-a="evch"],#modal [data-a="anomch"],#modal [data-a="chch"]'))b.disabled=true;
+    waits[cid]=res=>{if(S.decWait.get(key)?.cid===cid)S.decWait.delete(key);if(res.status!=='ok'){toast('Host reddetti: '+why(res),true);return;}
+      S.resolvedChoices=S.resolvedChoices||new Set();S.resolvedChoices.add(note.decisionId);if(S.resolvedChoices.size>128)S.resolvedChoices.delete(S.resolvedChoices.values().next().value);
+      G.inbox=(G.inbox||[]).filter(n=>n.decisionId!==note.decisionId);UI._openNote=null;UI.drawInbox();
+      UI.openModal('<div class="mhd"><span>SONUÇ</span></div><div class="mbd">'+esc(res.extra?.result||'Karar host tarafından uygulandı.')+'</div><div class="mft"><button class="ch" data-a="closem"><div class="cht">Kapat</div></button></div>','sci');
+    };return {ok:true,pending:true};
+  };
   wrap('executeDeal',()=>{toast('Çok oyunculuda anlaşma kararı gelen kutusundan verilir; host uygular.',true);return false;});
   /* MP.6.1 — gerçek gelen kutusu: karar → MP komutu. MP.3 tekliflerinde uygunluğu host denetler (karşı tarafın stoğu aynada yok). */
   /* MP.7.4: kaydırılan kartın imzası saklanır (ayna G.inbox'ı her kurulumda yeniler) */
@@ -411,6 +455,7 @@ function gate(){
   const DI=DiplomaticInbox,resolve0=DI.resolve.bind(DI),gate0=DI.gate.bind(DI);
   /* MP.8: karar kilidi yalnız aynı bağlantı kuşağında geçerli (bkz. tam ayna) */
   const decBusy=dk=>{const w=S.decWait.get(dk);return !!w&&w.gen===(S.gen|0);};
+  UI.eventChoiceWaiting=id=>decBusy('eventChoice::'+id);
   UI.fedFoundWaiting=id=>decBusy('fedFoundReply::'+id);
   DI.gate=function(rec){if(S.on&&rec?.kind==='fedfound'&&decBusy('fedFoundReply::'+rec.note.data))return {ok:false,why:'Karar host yanıtını bekliyor'};if(S.on&&rec&&(rec._mpWait||rec.mp&&decBusy('respond:'+rec.mp+':')))return {ok:false,why:'Karar gönderildi; host yanıtı bekleniyor'};if(S.on&&rec&&rec.mpSq!==undefined){return rec.status==='pending'?{ok:true,why:''}:{ok:false,why:'Teklif sonuçlandı',terminal:true};}
     if(S.on&&rec&&rec.mp){if(rec.status!=='pending')return {ok:false,why:'Teklif sonuçlandı',terminal:true};return {ok:true,why:''};}return gate0(rec);};
@@ -475,7 +520,7 @@ function onMessage(m){
   /* MP.8: tam ayna = yeni bağlantı (ya da yeniden eşitleme). Önceki bağlantıda gönderilen kararların yanıtı artık gelmez
      (kopmada kaybolan komut host'a hiç ulaşmamış olabilir); o kuşağın karar kilitleri geçersiz. Gerçek sonuç aynada: uygulandıysa
      kayıt kapalıdır, uygulanmadıysa oyuncu yeniden karar verebilir. Tam bir kez kuralı host'ta (kapalı teklife ikinci yanıt 'closed'). */
-  if(m.type==='mirror'){S.mirror=m.full;S.rev=m.rev;S.mirrorAt=Date.now();S.gen=(S.gen|0)+1;S.stats.mirrors++;schedule();return true;}
+  if(m.type==='mirror'){motion.clear();S.mirror=m.full;S.rev=m.rev;S.mirrorAt=Date.now();S.gen=(S.gen|0)+1;S.stats.mirrors++;schedule();return true;}
   if(m.type==='mirrorDelta'){if(!S.mirror||m.base!==S.rev){S.stats.resyncs++;S.J&&S.J.sendRaw({v:1,type:'resync'});return true;}
     StarsMirror.apply(S.mirror,m.ops);S.rev=m.rev;S.mirrorAt=Date.now();S.stats.deltas++;schedule();return true;}
   if(m.type==='speed'){if(Number.isFinite(m.n)){if(m.n<=(S.speedN||0)){S.stats.staleSpeed=(S.stats.staleSpeed||0)+1;return true;}S.speedN=m.n;}   // MP.6.3: eski hız iletisi yenisini ezmez
@@ -487,6 +532,7 @@ function onMessage(m){
 function holdBuild(){const m=doc.getElementById('modal');return !!(m&&!m.classList.contains('hidden'));}
 function schedule(){if(S.timer)return;const wait=Math.max(0,S.minGap-(Date.now()-S.lastBuild));S.timer=setTimeout(rebuild,wait);}
 function rebuild(){
+  if(!loadNoticePrefs()){S.timer=setTimeout(rebuild,50);return;}
   S.timer=null;if(!S.mirror)return;
   /* MP.6.1: STARS penceresi açıkken ayna bekletilir (onay pencereleri dünya kimliğini denetler; tek oyunculuda da pencere açıkken dünya durur) */
   if(S.started&&holdBuild()){S.held++;S.stats.held++;S.timer=setTimeout(rebuild,250);return;}
@@ -497,18 +543,20 @@ function rebuild(){
   if(S.started&&UI._surfacePointers&&(UI._surfacePointers.size||Date.now()<(UI._surfaceUntil||0))){S.stats.touchHeld=(S.stats.touchHeld||0)+1;S.timer=setTimeout(rebuild,200);return;}
   const initialWorld=!S.started;
   const warCards=initialWorld?[]:(G.inbox||[]).filter(n=>n.kind==='warstart'||n.kind==='wardec'),warUid=initialWorld?0:G.inboxUid||0,cardIds=new Map((initialWorld?[]:G.inbox||[]).filter(n=>n.key).map(n=>[n.key,n.uid]));
+  const cardOrder=new Map((G.inbox||[]).filter(n=>n.key).map((n,i)=>[n.key,i]));
   const oldEmps=typeof G!=='undefined'&&G?G.emps:null;
   const t0=performance.now();S.building=true;let ok=false;
   /* MP.6.4: haber okundu / sabitlendi işaretleri yereldir; ayna yeniden kurulunca anahtarla geri konur */
   const nk=new Map(((typeof G!=='undefined'&&G&&G.news&&G.news.records)||[]).map(r=>[r.key,[r.read,r.pinned]]));
   const dbr=typeof G!=='undefined'&&G&&G.dismissedBattleReports?{...G.dismissedBattleReports}:null;   // MP.7.2: gizlenen savaş raporları yereldir
-  let why='';try{View.resetGesture=S.started?function(){}:rg;UI._deferInbox=true;ok=deserialize(JSON.stringify(S.mirror));if(!ok)why='kayıt doğrulaması reddetti';if(ok){G.inboxUid=Math.max(G.inboxUid||0,warUid);inboxOffers();if(S.started&&UI._fedNoticeWorld===oldEmps)UI._fedNoticeWorld=G.emps;UI.fedFoundCards();for(const n of G.inbox)if(cardIds.has(n.key))n.uid=cardIds.get(n.key);setSync();if(dbr)try{G.dismissedBattleReports=cleanBattleDismissals({...(G.dismissedBattleReports||{}),...dbr});}catch{}for(const r of (G.news&&G.news.records)||[]){const k=nk.get(r.key);if(k){r.read=k[0];r.pinned=k[1];}}}S.inboxSig=null;}catch(e){ok=false;why=String(e&&e.message||e).slice(0,160);}
+  let why='';try{View.resetGesture=S.started?function(){}:rg;UI._deferInbox=true;ok=deserialize(JSON.stringify(S.mirror));if(!ok)why='kayıt doğrulaması reddetti';if(ok){restoreObservation(S.mirror);G.inboxUid=Math.max(G.inboxUid||0,warUid);inboxOffers();personalDecisions();for(const n of warCards)if(!G.inbox.some(x=>x.key===n.key))G.inbox.push(n);if(S.started&&UI._fedNoticeWorld===oldEmps)UI._fedNoticeWorld=G.emps;UI.fedFoundCards();for(const n of G.inbox)if(cardIds.has(n.key))n.uid=cardIds.get(n.key);setSync();if(dbr)try{G.dismissedBattleReports=cleanBattleDismissals({...(G.dismissedBattleReports||{}),...dbr});}catch{}for(const r of (G.news&&G.news.records)||[]){const k=nk.get(r.key);if(k){r.read=k[0];r.pinned=k[1];}}}S.inboxSig=null;}catch(e){ok=false;why=String(e&&e.message||e).slice(0,160);}
   finally{View.resetGesture=rg;S.building=false;UI._deferInbox=false;}
   S.lastBuild=Date.now();
   /* MP.7: bozuk/uyumsuz ayna aynı veriyle 1 s'de bir sonsuza dek yeniden kurulmuyordu-kurulmaya çalışılıyordu. Artık ayna bırakılır,
      gerçek neden kaydedilir ve host'tan TAM ayna sınırlı geri çekilmeyle (bootTick) yeniden istenir. */
   if(!ok){S.stats.fail=(S.stats.fail||0)+1;S.boot.fails++;S.boot.err='Galaksi verisi kurulamadı: '+why;bootLog('deserialize-fail');S.mirror=null;S.rev=0;S.boot.next=Date.now()+1500;return;}
   for(const key of ['_councilPending','_councilAck'])if(UI[key]&&UI[key].gen!==S.gen)UI[key]=null;
+  motion.accept(G.fleets,!S.started||S.hostSpd===0);
   G.autoSave=false;G.speed=0;
   if(S.started&&UI._diploWorld)UI._diploWorld=G.p;   // açık diplomasi sayfası ve taslaklar korunur
   if(S.started&&UI._noteOptionsWorld===oldEmps)UI._noteOptionsWorld=G.emps;
@@ -518,15 +566,17 @@ function rebuild(){
      aynı dünya nesnesinde (el._surfaceWorld===G.emps) yerinde günceller; deserialize her kurulumda yeni G.emps yaratınca panel baştan
      yazılıyordu (titreme, kaydırma ve açık bölüm kaybı, dokunurken düğme kayması). Ayna aynı oyunun yeni hâlidir: önceki dünyaya bağlı
      yüzeyler yeni dünyaya taşınır; motorun kendi yerinde güncelleme (morph) yolu kullanılır. */
-  if(S.started&&oldEmps)for(const el of doc.querySelectorAll('#diploPane,#panel,#modal')){if(el._surfaceWorld===oldEmps){el._surfaceWorld=G.emps;S.stats.surfaceKept=(S.stats.surfaceKept||0)+1;}}   // MP.6.4: federasyon sekmesi / açık bölümler / kaydırma canlı senkronda korunur (openFed dünya kimliği değişince GENEL'e döner)
+  if(S.started&&oldEmps)for(const el of doc.querySelectorAll('#diploPane,#panel,#modal,#inbox')){if(el._surfaceWorld===oldEmps){el._surfaceWorld=G.emps;S.stats.surfaceKept=(S.stats.surfaceKept||0)+1;}}   // MP.6.4: federasyon sekmesi / açık bölümler / kaydırma canlı senkronda korunur (openFed dünya kimliği değişince GENEL'e döner)
   if(S.started){View.route=keep.route;View.routed=keep.routed;UI._openNote=keep.note;UI.pendingOffer=keep.offer;
-    if(keep.sel!==null&&keep.sel!==undefined&&!View.sel){const f=G.fleets.find(x=>x.id===keep.sel);if(f)View.sel=f;}}
+    if(keep.sel!==null&&keep.sel!==undefined)View.sel=G.fleets.find(x=>x.id===keep.sel)||null;}
+  G.inbox.sort((a,b)=>(cardOrder.get(a.key)??1000000)-(cardOrder.get(b.key)??1000000));
   const ms=performance.now()-t0;S.stats.builds++;S.stats.buildMs.push(Math.round(ms*10)/10);if(S.stats.buildMs.length>60)S.stats.buildMs.shift();
   /* MP.7.5: kurulum aralığı ölçülen kurulum süresine uyarlanır (yavaş telefonda deserialize süresinin ~4 katı; 0,6–3 s). Tam ayna her
      kurulumda yine aynı veriyle kurulur; yalnız sıklık azalır → misafir zamanının çoğunu deserialize'a harcamaz. */
   {const b=S.stats.buildMs.slice(-5).sort((x,y)=>x-y),med=b[Math.floor(b.length/2)]||0;S.minGap=Math.round(Math.min(3000,Math.max(600,med*4)));}
   if(!S.started)start();else{UI.keepScroll=true;try{UI.refresh();}catch{}}
   warAlerts(warCards,initialWorld);
+  G.inbox.sort((a,b)=>(cardOrder.get(a.key)??1000000)-(cardOrder.get(b.key)??1000000));
   UI.drawInbox();
   paintSpeed();
 }
@@ -551,6 +601,14 @@ function warAlerts(cards,initialWorld=false){
    Kimlikler aynadaki numaralara çevrilir; kabul/ret DiplomaticInbox.resolve → MP 'respond'. */
 const decKey=c=>c.kind+':'+(c.offer??c.fed??c.from??c.sub??'')+':'+(c.token??c.id??'');
 const noteSig=n=>typeof n.key==='string'&&n.key?n.key:n.kind+':'+JSON.stringify(n.data===undefined?null:n.data);
+function personalDecisions(){
+ const rows=G.p.decisions?.pending||[],live=rows.filter(n=>n.status==='pending'&&!S.resolvedChoices?.has(n.id));
+ const ids=new Set(live.map(n=>n.id));G.inbox=(G.inbox||[]).filter(n=>!n.decisionId||ids.has(n.decisionId));
+ for(const row of live){if(G.inbox.some(n=>n.decisionId===row.id))continue;const ev=decisionCatalog(row.kind,row.catalog),sys=G.sys[row.sys];if(!ev||row.kind==='anomaly'&&!sys)continue;
+  const data=row.kind==='event'?ev:row.kind==='chain'?row.catalog:{a:ev,sys};G.inboxUid=(G.inboxUid||0)+1;
+  G.inbox.push({kind:row.kind,data,decisionId:row.id,uid:G.inboxUid,key:'personal:'+row.id,born:row.born,pause:false,ico:row.kind==='anomaly'?'🔬':'❗',cls:'sci',title:ev.n,sub:ev.t.slice(0,100),hidden:S.swiped.has('personal:'+row.id)});
+ }
+}
 function inboxOffers(){
   const v=S.J&&S.J.game.view,me=S.J&&S.J.empireId;if(!v||!v.dip||typeof DiplomaticInbox==='undefined')return;
   /* MP.7.1: sonuçlanan teklifler de (geçmiş) gerçek gelen kutusunda; durum ve yanıt host'un teklif deposundan. Önce eskiler. */
@@ -712,7 +770,7 @@ function bootTick(){
 function statusNow(){const t=doc.getElementById('jConn');return t?t.outerHTML:'';}
 setInterval(()=>{try{bootTick();if(S.J&&!S.started&&S.J.screen==='game')update(statusNow());}catch{}},1000);
 doc.addEventListener('click',e=>{const el=e.target.closest('[data-g7="retry"]');if(!el)return;const b=S.boot;b.failed=false;b.tries=0;b.fails=0;b.err='';b.next=0;S.mirror=null;bootLog('retry');bootAsk();b.next=Date.now()+8000;update(statusNow());});
-window.MP6Stars={SET,S,onMessage,update,screen,attach(J){S.J=J;},onAssign(){S.uiSent=false;bootLog('assign');},VIEW,ACT,boot:{stage:bootStage,tick:bootTick},dip:{open:dipOpen,seg:seg6,get ui(){return dipUI;},get pol(){return polUI;}}};
+window.MP6Stars={SET,S,restoreObservation,onMessage,update,screen,attach(J){S.J=J;},onAssign(){S.uiSent=false;bootLog('assign');},VIEW,ACT,boot:{stage:bootStage,tick:bootTick},dip:{open:dipOpen,seg:seg6,get ui(){return dipUI;},get pol(){return polUI;}}};
 /* telefon geri tuşu: önce açık MP diplomasi onayı/paneli kapanır (join.js popstate bunu sorar) */
 const prevBack=window.__mpBack;window.__mpBack=()=>{if(prevBack&&prevBack())return true;if(dipEl){dipOpen(false);return true;}return false;};
 })();
