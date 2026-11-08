@@ -1,0 +1,485 @@
+{
+  "results": [
+    {
+      "name": "A1 rehber 1–8: oda, iki farklı devlet, hazır, başlat; iki ekranda galaksi; sürüm işareti lobi / başlangıç / MP çubuğunda ve /mp/version oyun build'iyle aynı",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: [\"autoEvent\",\"borderDiplo\",\"diagCopy\",\"joinRebel\",\"leaveRebel\",\"mapFix\",\"physio\",\"restart\",\"rollName\",\"sandbox\",\"sitPick\",\"stashNote\",\"survey\",\"terra\",\"toTitle\",\"tplDel\",\"tplLoad\",\"tplSave\",\"trigCrisis\"]\n\n19 !== 18\n\n    at /workspace/Star/tests/browser-mp73.cjs:126:12\n    at async test (/workspace/Star/tests/browser-mp73.cjs:13:7)\n    at async /workspace/Star/tests/browser-mp73.cjs:114:3"
+    },
+    {
+      "name": "FD0 gerçek host-misafir kuruluş daveti, tek dokunma ve açık son onay",
+      "status": "PASS",
+      "ms": 9073
+    },
+    {
+      "name": "A2 rehber 9–12: misafir filosunu yürütür (gerçek orderMove → host), B → host diplomatik teklif ve host gelen kutusundan kabul eder; zaman iki ekranda ilerler",
+      "status": "PASS",
+      "ms": 3683
+    },
+    {
+      "name": "A3 rehber 13–15: misafir bağlantısı kopar ve döner → aynı devlet; host oyun kaydı alır (MP.4 paketi doğrulanır)",
+      "status": "PASS",
+      "ms": 3385
+    },
+    {
+      "name": "B1 konsey motorun kendi yoluyla kurulur (fikstür: temas); AI insanlar adına oy / sponsor yazmaz; B gerçek \"KONSEY OYLAMASI\" kartından Konsey ekranını açar ve EVET (dokunma) → host kaydeder, oylama açık kalır",
+      "status": "PASS",
+      "ms": 28876
+    },
+    {
+      "name": "B2 C (915×412) HAYIR verir; oylama host oy verene kadar açık; host kendi Konsey ekranından EVET → motor kapatır; tekrar oy reddedilir",
+      "status": "PASS",
+      "ms": 5136
+    },
+    {
+      "name": "B3 tasarı: B Konsey ekranından tasarı sunar (dokunma) → host kampanya sponsoru B; B AI üyeye rüşvet (dokunma) → host 200 mineral aktarır; insan üye C'ye rüşvet reddedilir; C'nin aynasında rüşvetin yönü yok",
+      "status": "PASS",
+      "ms": 4862
+    },
+    {
+      "name": "B4 entrika ve yıkıcı onay: B fısıltı ağını gerçek pencereden açar, iki AI seçer, gönderir → host motoru (B'nin günlüğü ya da motorun gerekçesi); onaysız yutma çağrısı host'a hiçbir şey göndermez",
+      "status": "PASS",
+      "ms": 6822
+    },
+    {
+      "name": "FD3 üç insan, misafir kurucu, özel davet ret/iptal, yeniden bağlantı ve karma oy",
+      "status": "PASS",
+      "ms": 16752
+    },
+    {
+      "name": "P0 katılımcı görüş, sağlık, özel kararlar, rota ve görsel hareket",
+      "status": "PASS",
+      "ms": 53971
+    },
+    {
+      "name": "BD1 federasyon FIFO, savaş yardımı, geri çekme ve ayrı aday rızası",
+      "status": "FAIL",
+      "error": "locator.tap: Timeout 8000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#timepod [data-a=\"spd\"][data-x=\"3\"]').first()\u001b[22m\n\u001b[2m    - locator resolved to <button class=\"sp\" data-x=\"3\" data-a=\"spd\">▸▸▸</button>\u001b[22m\n\u001b[2m  - attempting tap action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"\" id=\"seltag\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying tap action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"\" id=\"seltag\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying tap action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    9 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"\" id=\"seltag\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying tap action\u001b[22m\n\u001b[2m      - waiting 500ms\u001b[22m\n\n    at hit (/workspace/Star/tests/helpers/beta-board1-browser.cjs:4:498)\n    at async module.exports (/workspace/Star/tests/helpers/beta-board1-browser.cjs:17:327)\n    at async /workspace/Star/tests/browser-mp73.cjs:249:136\n    at async test (/workspace/Star/tests/browser-mp73.cjs:13:7)\n    at async /workspace/Star/tests/browser-mp73.cjs:249:31"
+    },
+    {
+      "name": "sayfa hataları yok",
+      "status": "PASS",
+      "ms": 0
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "startModal": [
+      "🛰 DANIŞMAN",
+      "",
+      "🛰 DANIŞMAN",
+      "",
+      ""
+    ],
+    "version": {
+      "mp": "MP.8.9b11",
+      "build": "96h10p16",
+      "files": {
+        "mp-core.js": "a3ae6a208ad6",
+        "relay.js": "cc85bfa7842c",
+        "mp1-host.js": "c51e44ae76f9",
+        "join.js": "bc2732493741",
+        "mirror.js": "9eb00fba46d7",
+        "guest-stars.js": "3f256f92a435",
+        "mp71-dip.js": "bf0355f27ef6",
+        "mp7-setup.js": "48c0f282a254"
+      }
+    },
+    "unsupported": [
+      "autoEvent",
+      "borderDiplo",
+      "diagCopy",
+      "joinRebel",
+      "leaveRebel",
+      "mapFix",
+      "physio",
+      "restart",
+      "rollName",
+      "sandbox",
+      "sitPick",
+      "stashNote",
+      "survey",
+      "terra",
+      "toTitle",
+      "tplDel",
+      "tplLoad",
+      "tplSave",
+      "trigCrisis"
+    ],
+    "fedfound": [
+      {
+        "reverse": false,
+        "before": {
+          "fed": 0,
+          "cost": 10000,
+          "reply": "pending"
+        },
+        "final": {
+          "members": [
+            0,
+            1
+          ],
+          "by": 0,
+          "cost": 9780,
+          "status": "founded"
+        },
+        "guest": {
+          "members": [
+            1,
+            0
+          ],
+          "name": "Eos Bilgi Topluluğu",
+          "notices": [
+            "FEDERASYON KURULDU — Eos Bilgi Topluluğu"
+          ]
+        },
+        "reconnect": true
+      },
+      {
+        "reverse": true,
+        "before": {
+          "fed": 0,
+          "cost": 10000,
+          "reply": "pending"
+        },
+        "final": {
+          "members": [
+            1,
+            0
+          ],
+          "by": 1,
+          "cost": 9780,
+          "status": "founded"
+        },
+        "guest": {
+          "members": [
+            0,
+            1
+          ],
+          "name": "Orion Gözlemevleri Ağı",
+          "notices": [
+            "FEDERASYON KURULDU — Orion Gözlemevleri Ağı"
+          ]
+        },
+        "reconnect": true
+      }
+    ],
+    "whisper": 1,
+    "fd3": {
+      "guestFounder": 1,
+      "selected": [
+        0,
+        2
+      ],
+      "members": [
+        1,
+        0,
+        2
+      ],
+      "names": [
+        "Kızıl Muhafız",
+        "Okyanus Ticaret Birliği",
+        "Saf Akıl Ağı"
+      ],
+      "rejection": true,
+      "cancel": true,
+      "reconnect": true,
+      "thirdPartyPrivate": true,
+      "cost": 220
+    },
+    "p0": [
+      {
+        "visibility": true,
+        "shared": 1,
+        "habitat": true,
+        "foreignHull": 0.42,
+        "ownHull": 0.55,
+        "privacy": true
+      },
+      {
+        "kind": "anomaly",
+        "decision": 1,
+        "before": {
+          "a": 0,
+          "m": 2800,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":10000}",
+          "p": 0
+        },
+        "after": {
+          "a": 150,
+          "m": 2800,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":10000}",
+          "p": 0
+        },
+        "replay": "rejected"
+      },
+      {
+        "kind": "event",
+        "decision": 2,
+        "before": {
+          "a": 150,
+          "m": 2800,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":10000}",
+          "p": 0
+        },
+        "after": {
+          "a": 410,
+          "m": 2650,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":10000}",
+          "p": 0
+        },
+        "replay": "rejected"
+      },
+      {
+        "kind": "chain",
+        "decision": 3,
+        "before": {
+          "a": 410,
+          "m": 2650,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":10000}",
+          "p": 0
+        },
+        "after": {
+          "a": 410,
+          "m": 2650,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":10000}",
+          "p": 0
+        },
+        "replay": "rejected"
+      },
+      {
+        "CDecision": 1,
+        "CResearch": 180,
+        "BUnchanged": true
+      },
+      {
+        "repeatedFoundingPopups": 0,
+        "mirrors": 3
+      },
+      {
+        "shareEndedLiveRemoved": true,
+        "discoveryRetained": true
+      },
+      {
+        "routes": [
+          {
+            "role": "military",
+            "id": 4,
+            "path": [
+              0
+            ]
+          },
+          {
+            "role": "bilim",
+            "id": 5,
+            "path": [
+              0
+            ]
+          },
+          {
+            "role": "koloni",
+            "id": 6,
+            "path": [
+              0
+            ]
+          },
+          {
+            "role": "insaat",
+            "id": 27,
+            "path": [
+              0
+            ]
+          }
+        ]
+      },
+      {
+        "motion": [
+          {
+            "x": 2747.001141961643,
+            "y": 2678.2313947104217,
+            "actualX": 2697.9755443171657,
+            "actualY": 2634.3878250028024
+          },
+          {
+            "x": 2743.9762203109385,
+            "y": 2675.526208652018,
+            "actualX": 2697.9755443171657,
+            "actualY": 2634.3878250028024
+          },
+          {
+            "x": 2742.671495068393,
+            "y": 2674.3593934601736,
+            "actualX": 2697.9755443171657,
+            "actualY": 2634.3878250028024
+          },
+          {
+            "x": 2741.6801954435364,
+            "y": 2673.4728746558803,
+            "actualX": 2697.9755443171657,
+            "actualY": 2634.3878250028024
+          },
+          {
+            "x": 2740.3025805226607,
+            "y": 2672.240874257809,
+            "actualX": 2697.9755443171657,
+            "actualY": 2634.3878250028024
+          },
+          {
+            "x": 2739.475282674047,
+            "y": 2671.5010221675257,
+            "actualX": 2697.9755443171657,
+            "actualY": 2634.3878250028024
+          },
+          {
+            "x": 2736.73827525405,
+            "y": 2669.0533176748827,
+            "actualX": 2697.9755443171657,
+            "actualY": 2634.3878250028024
+          },
+          {
+            "x": 2734.6463414846694,
+            "y": 2667.182502255014,
+            "actualX": 2697.9755443171657,
+            "actualY": 2634.3878250028024
+          },
+          {
+            "x": 2733.0318351092205,
+            "y": 2665.738649936706,
+            "actualX": 2697.9755443171657,
+            "actualY": 2634.3878250028024
+          },
+          {
+            "x": 2729.5003301949896,
+            "y": 2662.580426695805,
+            "actualX": 2697.9755443171657,
+            "actualY": 2634.3878250028024
+          },
+          {
+            "x": 2727.7072441085006,
+            "y": 2660.976870623019,
+            "actualX": 2697.9755443171657,
+            "actualY": 2634.3878250028024
+          },
+          {
+            "x": 2726.6685661922947,
+            "y": 2660.0479814342903,
+            "actualX": 2697.9755443171657,
+            "actualY": 2634.3878250028024
+          },
+          {
+            "x": 2724.9447252993505,
+            "y": 2658.5063513066425,
+            "actualX": 2697.9755443171657,
+            "actualY": 2634.3878250028024
+          },
+          {
+            "x": 2722.0692274900916,
+            "y": 2655.9347949217804,
+            "actualX": 2697.9755443171657,
+            "actualY": 2634.3878250028024
+          },
+          {
+            "x": 2720.7717912149446,
+            "y": 2654.77449825017,
+            "actualX": 2697.9755443171657,
+            "actualY": 2634.3878250028024
+          },
+          {
+            "x": 2698.6279069373522,
+            "y": 2634.9712325977534,
+            "actualX": 2697.9755443171657,
+            "actualY": 2634.3878250028024
+          },
+          {
+            "x": 2697.9755443171657,
+            "y": 2634.3878250028024,
+            "actualX": 2697.9755443171657,
+            "actualY": 2634.3878250028024
+          },
+          {
+            "x": 2697.9755443171657,
+            "y": 2634.3878250028024,
+            "actualX": 2697.9755443171657,
+            "actualY": 2634.3878250028024
+          },
+          {
+            "x": 2697.9755443171657,
+            "y": 2634.3878250028024,
+            "actualX": 2697.9755443171657,
+            "actualY": 2634.3878250028024
+          },
+          {
+            "x": 2697.9755443171657,
+            "y": 2634.3878250028024,
+            "actualX": 2697.9755443171657,
+            "actualY": 2634.3878250028024
+          },
+          {
+            "x": 2697.9755443171657,
+            "y": 2634.3878250028024,
+            "actualX": 2697.9755443171657,
+            "actualY": 2634.3878250028024
+          },
+          {
+            "x": 2697.9755443171657,
+            "y": 2634.3878250028024,
+            "actualX": 2697.9755443171657,
+            "actualY": 2634.3878250028024
+          },
+          {
+            "x": 2697.9755443171657,
+            "y": 2634.3878250028024,
+            "actualX": 2697.9755443171657,
+            "actualY": 2634.3878250028024
+          },
+          {
+            "x": 2697.9755443171657,
+            "y": 2634.3878250028024,
+            "actualX": 2697.9755443171657,
+            "actualY": 2634.3878250028024
+          },
+          {
+            "x": 2697.9755443171657,
+            "y": 2634.3878250028024,
+            "actualX": 2697.9755443171657,
+            "actualY": 2634.3878250028024
+          },
+          {
+            "x": 2697.9755443171657,
+            "y": 2634.3878250028024,
+            "actualX": 2697.9755443171657,
+            "actualY": 2634.3878250028024
+          },
+          {
+            "x": 2697.9755443171657,
+            "y": 2634.3878250028024,
+            "actualX": 2697.9755443171657,
+            "actualY": 2634.3878250028024
+          },
+          {
+            "x": 2697.9755443171657,
+            "y": 2634.3878250028024,
+            "actualX": 2697.9755443171657,
+            "actualY": 2634.3878250028024
+          },
+          {
+            "x": 2697.9755443171657,
+            "y": 2634.3878250028024,
+            "actualX": 2697.9755443171657,
+            "actualY": 2634.3878250028024
+          },
+          {
+            "x": 2697.9755443171657,
+            "y": 2634.3878250028024,
+            "actualX": 2697.9755443171657,
+            "actualY": 2634.3878250028024
+          }
+        ]
+      },
+      {
+        "reconnect": true
+      }
+    ]
+  },
+  "pass": 10,
+  "fail": 2
+}

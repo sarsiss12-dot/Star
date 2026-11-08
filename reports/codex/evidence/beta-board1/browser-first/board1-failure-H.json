@@ -1,0 +1,113 @@
+{
+  "feds": [
+    {
+      "id": 1,
+      "name": "Ufuk Keşif Birliği",
+      "type": "bilimsel",
+      "charter": {
+        "defense": "vote",
+        "offense": "vote",
+        "admission": "allies",
+        "ballot": "equal"
+      },
+      "politicsVersion": 96,
+      "leader": 0,
+      "founder": 0,
+      "members": [
+        0,
+        1,
+        2
+      ],
+      "laws": {},
+      "treasury": 0,
+      "fund": {
+        "ala": 0,
+        "ene": 0
+      },
+      "nextVote": 71.31515999999995,
+      "vote": null,
+      "founded": 11.31515999999995,
+      "typeSince": 11.31515999999995,
+      "dutySince": {
+        "defense": 11.31515999999995,
+        "offense": 11.31515999999995
+      },
+      "defenseFrontCutoff": 1,
+      "dutyConsent": {
+        "0": {
+          "offense": false,
+          "since": 11.31515999999995
+        },
+        "1": {
+          "offense": false,
+          "since": 11.31515999999995
+        },
+        "2": {
+          "offense": false,
+          "since": 11.31515999999995
+        }
+      },
+      "invites": {},
+      "decisions": {},
+      "cohesion": 70,
+      "identityType": "bilimsel",
+      "emblem": {
+        "v": 1,
+        "shape": "hex",
+        "symbol": "orbit",
+        "pattern": "plain",
+        "primary": "#5cf5d6",
+        "secondary": "#16304d",
+        "federation": true
+      },
+      "history": [
+        {
+          "day": 11.31515999999995,
+          "year": 2210,
+          "month": 1,
+          "event": "founded",
+          "type": "bilimsel",
+          "ballot": "equal"
+        }
+      ]
+    }
+  ],
+  "inbox": [
+    {
+      "kind": "cncnew",
+      "data": 1,
+      "ico": "🌐",
+      "cls": "sci",
+      "pause": true,
+      "title": "GALAKTİK KONSEY KURULDU",
+      "sub": "Saf Akıl Ağı galaksiyi masaya çağırdı",
+      "key": "cncnew",
+      "uid": 1,
+      "born": 7.432600000000004
+    },
+    {
+      "kind": "cncvote",
+      "data": "ticaretStd",
+      "ico": "🌐",
+      "cls": "sci",
+      "pause": true,
+      "title": "KONSEY OYLAMASI",
+      "sub": "Evrensel Ticaret Standardı",
+      "key": "cnc7.432600000000004",
+      "uid": 2,
+      "born": 7.432600000000004
+    },
+    {
+      "kind": "fedfoundResult",
+      "data": 1,
+      "key": "fedfound-result:1:founded:accepted,accepted,accepted",
+      "ico": "🏛",
+      "pause": false,
+      "title": "FEDERASYON KURULDU — Ufuk Keşif Birliği",
+      "sub": "Bilimsel Federasyon · 3 kurucu · Eşit Temsil · Savunma yardımı oylamayla. Otomatik saldırı desteği yok; ayrı oylama/taahhüt gerekir. · Lider: Kızıl Muhafız",
+      "uid": 3,
+      "born": 11.31515999999995
+    }
+  ],
+  "modal": ""
+}

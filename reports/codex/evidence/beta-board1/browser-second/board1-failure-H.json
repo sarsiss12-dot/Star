@@ -1,0 +1,152 @@
+{
+  "feds": [
+    {
+      "id": 1,
+      "name": "Nova Bilgi Topluluğu",
+      "type": "bilimsel",
+      "charter": {
+        "defense": "vote",
+        "offense": "vote",
+        "admission": "allies",
+        "ballot": "equal"
+      },
+      "politicsVersion": 96,
+      "leader": 0,
+      "founder": 0,
+      "members": [
+        0,
+        1,
+        2
+      ],
+      "laws": {},
+      "treasury": 0,
+      "fund": {
+        "ala": 0,
+        "ene": 0
+      },
+      "nextVote": 190.71247999999997,
+      "vote": {
+        "id": 1,
+        "law": "savunma",
+        "kind": "basic",
+        "repeal": false,
+        "proposer": 0,
+        "opened": 10.71247999999998,
+        "expires": 100.71247999999999,
+        "eligible": [
+          0,
+          1,
+          2
+        ],
+        "yes": [],
+        "no": [],
+        "ballotSnapshot": {
+          "mode": "equal",
+          "weights": {
+            "0": 1,
+            "1": 1,
+            "2": 1
+          },
+          "modern": true,
+          "source": "opened"
+        },
+        "reasons": {},
+        "assessments": {}
+      },
+      "founded": 10.71247999999998,
+      "typeSince": 10.71247999999998,
+      "dutySince": {
+        "defense": 10.71247999999998,
+        "offense": 10.71247999999998
+      },
+      "defenseFrontCutoff": 1,
+      "dutyConsent": {
+        "0": {
+          "offense": false,
+          "since": 10.71247999999998
+        },
+        "1": {
+          "offense": false,
+          "since": 10.71247999999998
+        },
+        "2": {
+          "offense": false,
+          "since": 10.71247999999998
+        }
+      },
+      "invites": {},
+      "decisions": {},
+      "cohesion": 70,
+      "identityType": "bilimsel",
+      "emblem": {
+        "v": 1,
+        "shape": "diamond",
+        "symbol": "orbit",
+        "pattern": "stripe",
+        "primary": "#5cf5d6",
+        "secondary": "#f5665c",
+        "federation": true
+      },
+      "history": [
+        {
+          "day": 10.71247999999998,
+          "year": 2210,
+          "month": 1,
+          "event": "founded",
+          "type": "bilimsel",
+          "ballot": "equal"
+        }
+      ],
+      "voteSeq": 1
+    }
+  ],
+  "inbox": [
+    {
+      "kind": "cncnew",
+      "data": 1,
+      "ico": "🌐",
+      "cls": "sci",
+      "pause": true,
+      "title": "GALAKTİK KONSEY KURULDU",
+      "sub": "Saf Akıl Ağı galaksiyi masaya çağırdı",
+      "key": "cncnew",
+      "uid": 1,
+      "born": 7.280399999999999
+    },
+    {
+      "kind": "cncvote",
+      "data": "ticaretStd",
+      "ico": "🌐",
+      "cls": "sci",
+      "pause": true,
+      "title": "KONSEY OYLAMASI",
+      "sub": "Evrensel Ticaret Standardı",
+      "key": "cnc7.280399999999999",
+      "uid": 2,
+      "born": 7.280399999999999
+    },
+    {
+      "kind": "fedfoundResult",
+      "data": 1,
+      "key": "fedfound-result:1:founded:accepted,accepted,accepted",
+      "ico": "🏛",
+      "pause": false,
+      "title": "FEDERASYON KURULDU — Nova Bilgi Topluluğu",
+      "sub": "Bilimsel Federasyon · 3 kurucu · Eşit Temsil · Savunma yardımı oylamayla. Otomatik saldırı desteği yok; ayrı oylama/taahhüt gerekir. · Lider: Kızıl Muhafız",
+      "uid": 3,
+      "born": 10.71247999999998
+    },
+    {
+      "kind": "fedvote",
+      "data": 1,
+      "ico": "🏛",
+      "pause": true,
+      "title": "Federasyon oylaması",
+      "sub": "Savunma Paktı",
+      "key": "fed:1:1",
+      "uid": 4,
+      "born": 10.71247999999998
+    }
+  ],
+  "modal": ""
+}

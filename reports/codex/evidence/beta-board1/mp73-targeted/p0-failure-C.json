@@ -1,0 +1,750 @@
+{
+  "sys": [
+    {
+      "id": 0,
+      "x": 2088.0166244740976,
+      "y": 423.0504417273314,
+      "name": "Galyador",
+      "star": {
+        "n": "G Sarı",
+        "c": "#ffe9a8",
+        "r": 5.5,
+        "w": 20
+      },
+      "planets": [],
+      "lanes": [
+        11,
+        41,
+        14
+      ],
+      "owner": -1,
+      "surv": [],
+      "seen": [
+        0
+      ],
+      "queue": [],
+      "anom": false,
+      "anomK": "sinyal",
+      "def": 0,
+      "pulsar": false,
+      "nebulaS": false,
+      "_reach": 0
+    },
+    {
+      "id": 8,
+      "x": 2554.9944712063043,
+      "y": 3683.6005884388737,
+      "name": "Veraesha",
+      "star": {
+        "n": "K Turuncu",
+        "c": "#ffab5c",
+        "r": 5,
+        "w": 22
+      },
+      "planets": [],
+      "lanes": [
+        36,
+        44,
+        42
+      ],
+      "owner": -1,
+      "surv": [],
+      "seen": [
+        0
+      ],
+      "queue": [],
+      "anom": false,
+      "anomK": "sinyal",
+      "def": 0,
+      "pulsar": false,
+      "nebulaS": false,
+      "_reach": 0,
+      "_shat": false
+    },
+    {
+      "id": 11,
+      "x": 1848.992967367211,
+      "y": 815.7191682145728,
+      "name": "Lyrtyr",
+      "star": {
+        "n": "F Beyaz-Sarı",
+        "c": "#fff6e0",
+        "r": 6,
+        "w": 12
+      },
+      "planets": [],
+      "lanes": [
+        0,
+        9,
+        41
+      ],
+      "owner": -1,
+      "surv": [],
+      "seen": [
+        0
+      ],
+      "queue": [],
+      "anom": false,
+      "anomK": "sinyal",
+      "def": 0,
+      "pulsar": false,
+      "nebulaS": false,
+      "_reach": 0
+    },
+    {
+      "id": 14,
+      "x": 2633.0431878785294,
+      "y": 247.02953450130644,
+      "name": "Draiagath",
+      "star": {
+        "n": "Nötron Yıldızı",
+        "c": "#e2f7ff",
+        "r": 3,
+        "w": 2,
+        "ozel": 1
+      },
+      "planets": [],
+      "lanes": [
+        0,
+        18,
+        29
+      ],
+      "owner": 7,
+      "surv": [],
+      "seen": [
+        0
+      ],
+      "queue": [],
+      "anom": false,
+      "anomK": "sinyal",
+      "def": 0,
+      "pulsar": false,
+      "nebulaS": false,
+      "_reach": 210
+    },
+    {
+      "id": 20,
+      "x": 2892.4533343297694,
+      "y": 3107.0725515884233,
+      "name": "Belogath",
+      "star": {
+        "n": "K Turuncu",
+        "c": "#ffab5c",
+        "r": 5,
+        "w": 22
+      },
+      "planets": [],
+      "lanes": [
+        36,
+        44,
+        25
+      ],
+      "owner": -1,
+      "surv": [],
+      "seen": [
+        0
+      ],
+      "queue": [],
+      "anom": false,
+      "anomK": "sinyal",
+      "def": 0,
+      "pulsar": false,
+      "nebulaS": false,
+      "_reach": 0,
+      "_shat": false
+    },
+    {
+      "id": 36,
+      "x": 2840.426607621602,
+      "y": 3462.887987575179,
+      "name": "Verizil-99",
+      "star": {
+        "n": "K Turuncu",
+        "c": "#ffab5c",
+        "r": 5,
+        "w": 22
+      },
+      "planets": [],
+      "lanes": [
+        8,
+        20,
+        44
+      ],
+      "owner": -1,
+      "surv": [],
+      "seen": [
+        0
+      ],
+      "queue": [],
+      "anom": false,
+      "anomK": "sinyal",
+      "def": 0,
+      "pulsar": false,
+      "nebulaS": false,
+      "_reach": 0,
+      "_shat": false
+    },
+    {
+      "id": 41,
+      "x": 2232.5003301251663,
+      "y": 894.343616347745,
+      "name": "Jorzil-57",
+      "star": {
+        "n": "K Turuncu",
+        "c": "#ffab5c",
+        "r": 5,
+        "w": 22
+      },
+      "planets": [],
+      "lanes": [
+        0,
+        11,
+        29
+      ],
+      "owner": -1,
+      "surv": [],
+      "seen": [
+        0
+      ],
+      "queue": [],
+      "anom": false,
+      "anomK": "sinyal",
+      "def": 0,
+      "pulsar": false,
+      "nebulaS": false,
+      "_reach": 0
+    },
+    {
+      "id": 44,
+      "x": 2517.193730417136,
+      "y": 3295.574726372913,
+      "name": "Corven",
+      "star": {
+        "n": "K Turuncu",
+        "c": "#ffab5c",
+        "r": 5,
+        "w": 22
+      },
+      "planets": [
+        {
+          "i": 0,
+          "t": "col",
+          "dep": "bereket",
+          "sz": 18,
+          "seed": 5767,
+          "name": "Corven I",
+          "owner": 0,
+          "col": {
+            "pop": 12,
+            "stab": 60,
+            "grow": 0,
+            "b": {
+              "maden": 2,
+              "santral": 2,
+              "ciftlik": 2,
+              "lab": 1,
+              "dokum": 1,
+              "fabrika": 2,
+              "tersane": 1,
+              "kale": 0,
+              "liman": 0
+            },
+            "cap": 16,
+            "name": "Corven I",
+            "f": "yonetim",
+            "fcd": 0,
+            "auto": false
+          }
+        },
+        {
+          "i": 1,
+          "t": "sav",
+          "dep": "zengin_maden",
+          "sz": 17,
+          "seed": 5784,
+          "name": "Corven II",
+          "owner": -1
+        },
+        {
+          "i": 2,
+          "t": "tok",
+          "dep": null,
+          "sz": 19,
+          "seed": 5801,
+          "name": "Corven III",
+          "owner": -1
+        },
+        {
+          "i": 3,
+          "t": "cor",
+          "dep": "jeotermal",
+          "sz": 12,
+          "seed": 5818,
+          "name": "Corven IV",
+          "owner": -1
+        }
+      ],
+      "lanes": [
+        8,
+        20,
+        36
+      ],
+      "owner": -1,
+      "surv": [
+        0
+      ],
+      "seen": [
+        0
+      ],
+      "queue": [],
+      "anom": false,
+      "anomK": "kalinti",
+      "def": 0,
+      "pulsar": false,
+      "nebulaS": false,
+      "_reach": 0,
+      "_shat": false
+    }
+  ],
+  "inbox": [
+    {
+      "kind": "cncvote",
+      "data": "ticaretStd",
+      "ico": "🌐",
+      "cls": "sci",
+      "pause": false,
+      "uid": 1,
+      "born": 10.619479999999953,
+      "title": "KONSEY OYLAMASI",
+      "sub": "Evrensel Ticaret Standardı",
+      "key": "mp73cnc:ticaretStd:"
+    },
+    {
+      "kind": "anomaly",
+      "data": {
+        "a": {
+          "id": "a1",
+          "k": "megayapi",
+          "n": "Terk Edilmiş İstasyon",
+          "t": "Yörüngede sürüklenen kadim bir liman. Işıkları hâlâ yanıyor ama içeride kimse yok.",
+          "ch": [
+            {
+              "t": "Sistemleri tara",
+              "d": "+180 araştırma"
+            },
+            {
+              "t": "Gövdeyi sök",
+              "d": "+220 mineral, +60 alaşım"
+            }
+          ]
+        },
+        "sys": {
+          "id": 44,
+          "x": 2517.193730417136,
+          "y": 3295.574726372913,
+          "name": "Corven",
+          "star": {
+            "n": "K Turuncu",
+            "c": "#ffab5c",
+            "r": 5,
+            "w": 22
+          },
+          "planets": [
+            {
+              "i": 0,
+              "t": "col",
+              "dep": "bereket",
+              "sz": 18,
+              "seed": 5767,
+              "name": "Corven I",
+              "owner": 0,
+              "col": {
+                "pop": 12,
+                "stab": 60,
+                "grow": 0,
+                "b": {
+                  "maden": 2,
+                  "santral": 2,
+                  "ciftlik": 2,
+                  "lab": 1,
+                  "dokum": 1,
+                  "fabrika": 2,
+                  "tersane": 1,
+                  "kale": 0,
+                  "liman": 0
+                },
+                "cap": 16,
+                "name": "Corven I",
+                "f": "yonetim",
+                "fcd": 0,
+                "auto": false
+              }
+            },
+            {
+              "i": 1,
+              "t": "sav",
+              "dep": "zengin_maden",
+              "sz": 17,
+              "seed": 5784,
+              "name": "Corven II",
+              "owner": -1
+            },
+            {
+              "i": 2,
+              "t": "tok",
+              "dep": null,
+              "sz": 19,
+              "seed": 5801,
+              "name": "Corven III",
+              "owner": -1
+            },
+            {
+              "i": 3,
+              "t": "cor",
+              "dep": "jeotermal",
+              "sz": 12,
+              "seed": 5818,
+              "name": "Corven IV",
+              "owner": -1
+            }
+          ],
+          "lanes": [
+            8,
+            20,
+            36
+          ],
+          "owner": -1,
+          "surv": [
+            0
+          ],
+          "seen": [
+            0
+          ],
+          "queue": [],
+          "anom": false,
+          "anomK": "kalinti",
+          "def": 0,
+          "pulsar": false,
+          "nebulaS": false,
+          "_reach": 0,
+          "_shat": false
+        }
+      },
+      "decisionId": 1,
+      "uid": 9,
+      "key": "personal:1",
+      "born": 10.619479999999953,
+      "pause": false,
+      "ico": "🔬",
+      "cls": "sci",
+      "title": "Terk Edilmiş İstasyon",
+      "sub": "Yörüngede sürüklenen kadim bir liman. Işıkları hâlâ yanıyor ama içeride kimse yok.",
+      "hidden": false
+    }
+  ],
+  "own": {
+    "id": 0,
+    "race": "lonca",
+    "name": "Okyanus Ticaret Birliği",
+    "ai": false,
+    "col": "#985f3e",
+    "traits": [],
+    "res": {
+      "min": 3000,
+      "ene": 2000,
+      "yiy": 180,
+      "ala": 220,
+      "ara": 0,
+      "tuk": 150,
+      "etk": 3000
+    },
+    "inc": {
+      "min": 3.7369808000000013,
+      "ene": -30.39671039999999,
+      "yiy": 15.074165100000004,
+      "ala": 2.6372826750000002,
+      "ara": 13.870797525,
+      "etk": 7.7925,
+      "tuk": 10.485245640000006
+    },
+    "techs": {},
+    "rq": {
+      "fiz": "f_reaktor",
+      "top": "t_tarim",
+      "muh": "m_robot"
+    },
+    "rp": {
+      "fiz": 0,
+      "top": 0,
+      "muh": 0
+    },
+    "colonies": [
+      {
+        "s": 44,
+        "p": 0
+      }
+    ],
+    "mods": {
+      "minMul": 0.12,
+      "eneMul": 0.6000000000000001,
+      "yiyMul": 0.02,
+      "alaMul": 0.02,
+      "araMul": 0.095,
+      "etkFlat": -0.18,
+      "eneFlat": 0,
+      "dmgMul": -0.08,
+      "shMul": 0,
+      "hullMul": -0.1,
+      "spdMul": 0,
+      "growMul": 0.055,
+      "habFlat": 0,
+      "dipMul": 0.15,
+      "capFlat": 0,
+      "upMul": -0.15,
+      "buildMul": 0,
+      "colCost": 0,
+      "stab": -2,
+      "sensor": 0,
+      "capMul": 0,
+      "colShock": 0,
+      "foeSpd": 0,
+      "warTuk": 0,
+      "eDmgMul": 0,
+      "eShMul": 0,
+      "trustCap": 10,
+      "tradeMul": 0.2,
+      "opCost": 0,
+      "opBonus": 0,
+      "opRisk": 0,
+      "trustStart": 0,
+      "etkMul": 0,
+      "rofMul": 0,
+      "shipSpeed": 0,
+      "militaryBuildMul": 0,
+      "borderMul": 0,
+      "newColStab": 0,
+      "crisisDmg": 0,
+      "shipCost": 0
+    },
+    "cap": 46,
+    "dead": false,
+    "rel": {
+      "1": 40,
+      "2": 40,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": -100
+    },
+    "war": {
+      "1": false,
+      "2": false,
+      "3": false,
+      "4": false,
+      "5": false,
+      "6": false,
+      "7": false,
+      "8": false
+    },
+    "ally": {
+      "1": false,
+      "2": false,
+      "3": false,
+      "4": false,
+      "5": false,
+      "6": false,
+      "7": false,
+      "8": false
+    },
+    "home": 44,
+    "assim": 0,
+    "contact": {
+      "1": true,
+      "2": true,
+      "3": false,
+      "4": false,
+      "5": false,
+      "6": false,
+      "7": false,
+      "8": false
+    },
+    "agr": 0.4,
+    "exp": 0.7,
+    "extra": {
+      "trustCap": 10
+    },
+    "ethics": {
+      "mil": 0,
+      "aut": -1,
+      "mat": 1,
+      "ahl": 0
+    },
+    "civics": [],
+    "origin": "standart",
+    "sigil": "simetrik",
+    "monoRes": "min",
+    "furyUntil": 0,
+    "collapseUntil": 0,
+    "warPend": {},
+    "emblem": {
+      "v": 1,
+      "shape": "star",
+      "symbol": "wing",
+      "pattern": "stripe",
+      "primary": "#985f3e",
+      "secondary": "#d65cf5",
+      "federation": false
+    },
+    "mizac": "tuccar",
+    "_pers": "tuccar",
+    "physio": "humanoid",
+    "look": "humanoid",
+    "portraitVariant": 0,
+    "persLock": "tuccar",
+    "research": {
+      "targets": [],
+      "bank": {},
+      "history": {},
+      "mode": "semi"
+    },
+    "factions": [
+      {
+        "k": "tuccar",
+        "pow": 38,
+        "mood": 50,
+        "leader": "Yüce Aeryn",
+        "demand": null,
+        "log": []
+      },
+      {
+        "k": "bilim",
+        "pow": 31,
+        "mood": 50,
+        "leader": "Sert Thal",
+        "demand": null,
+        "log": []
+      },
+      {
+        "k": "halk",
+        "pow": 31,
+        "mood": 50,
+        "leader": "Baş Aeryn",
+        "demand": null,
+        "log": []
+      }
+    ],
+    "mapHabitats": {
+      "44": {
+        "mask": 3,
+        "at": 0
+      }
+    },
+    "mapOwners": {
+      "0": -1,
+      "8": -1,
+      "11": -1,
+      "14": 7,
+      "20": -1,
+      "36": -1,
+      "41": -1,
+      "44": -1
+    },
+    "fleetAlloyUp": 3.612839999999999,
+    "structs": {
+      "min": 0,
+      "ene": 0,
+      "ara": 0,
+      "role": 0,
+      "sensor": 0,
+      "gate": [],
+      "dyson": 0
+    },
+    "trade": {
+      "links": [],
+      "n": 0,
+      "cap": 8,
+      "cut": 0,
+      "foreign": 0,
+      "vol": 0,
+      "trips": 0,
+      "raided": 0,
+      "ham": 0,
+      "mul": 0
+    },
+    "cgNeed": 7.199999999999999,
+    "fleetUp": 45.356,
+    "adminCost": 2.2,
+    "foodNeed": 13.799999999999999,
+    "luxury": {},
+    "luxOwn": {},
+    "luxImport": {},
+    "overlord": null,
+    "visionFrom": {},
+    "decisions": {
+      "v": 1,
+      "next": 2,
+      "pending": [
+        {
+          "id": 1,
+          "kind": "anomaly",
+          "catalog": "a1",
+          "sys": 44,
+          "key": "anomaly:a1:44",
+          "born": 10.619479999999953,
+          "status": "pending"
+        }
+      ],
+      "queue": [],
+      "seen": {}
+    },
+    "_prof": null,
+    "_powAt": -1,
+    "_supAt": -1,
+    "_gateAt": -1,
+    "_trAt": 10.619479999999953,
+    "_trCache": {
+      "links": [],
+      "n": 0,
+      "cap": 8,
+      "cut": 0,
+      "foreign": 0,
+      "vol": 0,
+      "trips": 0,
+      "raided": 0,
+      "ham": 0,
+      "mul": 0
+    },
+    "_pressAt": -1,
+    "_trSig": "1:0:0:0"
+  },
+  "sel": null,
+  "stats": {
+    "mirrors": 1,
+    "deltas": 12,
+    "bytes": 0,
+    "builds": 13,
+    "buildMs": [
+      120.3,
+      6.8,
+      16.2,
+      19,
+      11.9,
+      6.1,
+      3.9,
+      7.7,
+      7.3,
+      9.6,
+      9.2,
+      9.7,
+      14.6
+    ],
+    "resyncs": 0,
+    "held": 0,
+    "blocked": {},
+    "sent": {},
+    "speedMsgs": 2,
+    "surfaceKept": 24
+  }
+}

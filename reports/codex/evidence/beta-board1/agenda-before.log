@@ -1,0 +1,76 @@
+FAIL aktif yasa sırasında iki insan FIFO önerisi; sıraya girince maliyet/RNG/etki yok; tekrar engeli
+AssertionError [ERR_ASSERTION]: {"to":"B","v":1,"type":"result","seq":1,"cid":"fed0B000001","status":"rejected","code":"rules:fed","rev":1,"detail":["Bir yasa oylaması sürüyor"]}
+
+'rejected' !== 'ok'
+
+    at /workspace/Star/tests/beta_board1_agenda_test.cjs:6:290
+    at test (/workspace/Star/tests/beta_board1_agenda_test.cjs:5:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_board1_agenda_test.cjs:6:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+FAIL savaş yardımı kuyrukta etki uygulamaz; biten savaş sıra geldiğinde gerekçeyle geçersiz
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+'rejected' !== 'ok'
+
+    at /workspace/Star/tests/beta_board1_agenda_test.cjs:7:214
+    at test (/workspace/Star/tests/beta_board1_agenda_test.cjs:5:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_board1_agenda_test.cjs:7:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+FAIL kendi önerisini geri çekme; başka üye yetkisiz; sıra ve ham Save8 yüklemede korunur
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+'rejected' !== 'ok'
+
+    at /workspace/Star/tests/beta_board1_agenda_test.cjs:8:120
+    at test (/workspace/Star/tests/beta_board1_agenda_test.cjs:5:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_board1_agenda_test.cjs:8:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+FAIL üye oylaması bütün üyelerle ittifak gerektirmez; adayın ayrı rızası ve bir kez katılım
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+'rejected' !== 'ok'
+
+    at /workspace/Star/tests/beta_board1_agenda_test.cjs:9:214
+    at test (/workspace/Star/tests/beta_board1_agenda_test.cjs:5:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_board1_agenda_test.cjs:9:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+FAIL aday savaşa girerse rıza yetmez; kuyruk yalnız üyelere ve π ile görünür
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+'rejected' !== 'ok'
+
+    at /workspace/Star/tests/beta_board1_agenda_test.cjs:10:108
+    at test (/workspace/Star/tests/beta_board1_agenda_test.cjs:5:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_board1_agenda_test.cjs:10:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+GEÇEN: 0 KALAN: 5

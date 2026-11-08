@@ -1,0 +1,50 @@
+[
+  {
+    "name": "800x360 24 renk gerçek seçim / yalnız kozmetik",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n12 !== 24\n\n    at /workspace/Star/tests/browser-beta-board1-ui.cjs:5:157\n    at async test (/workspace/Star/tests/browser-beta-board1-ui.cjs:3:41)\n    at async /workspace/Star/tests/browser-beta-board1-ui.cjs:5:1"
+  },
+  {
+    "name": "800x360 tersane 0/1/21 kuyruk üretim konumu / gerçek X ve tek iade",
+    "status": "PASS",
+    "data": {
+      "r0": {
+        "x": 460,
+        "y": 189.5,
+        "w": 79,
+        "h": 38
+      },
+      "r1": {
+        "x": 460,
+        "y": 189.5,
+        "w": 79,
+        "h": 38
+      },
+      "r21": {
+        "x": 460,
+        "y": 189.5,
+        "w": 79,
+        "h": 38
+      },
+      "cancelled": 1,
+      "refund": {
+        "ala": 32
+      }
+    }
+  },
+  {
+    "name": "800x360 ROTA hedefi / sahip etiketi OFF ikonlar korunur / RNG ve Save8 aynı",
+    "status": "FAIL",
+    "error": "TypeError: Cannot read properties of null (reading 'width')\n    at /workspace/Star/tests/browser-beta-board1-ui.cjs:8:408\n    at async test (/workspace/Star/tests/browser-beta-board1-ui.cjs:3:41)\n    at async /workspace/Star/tests/browser-beta-board1-ui.cjs:8:1"
+  },
+  {
+    "name": "800x360 enerji/alaşım açıklaması ve bilinen sınır komşusu diplomasi",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert(await p.locator('#panel [data-a=\"borderDiplo\"]').count())\n\n    at /workspace/Star/tests/browser-beta-board1-ui.cjs:9:404\n    at async test (/workspace/Star/tests/browser-beta-board1-ui.cjs:3:41)\n    at async /workspace/Star/tests/browser-beta-board1-ui.cjs:9:1"
+  },
+  {
+    "name": "JavaScript errors",
+    "status": "PASS",
+    "errors": []
+  }
+]

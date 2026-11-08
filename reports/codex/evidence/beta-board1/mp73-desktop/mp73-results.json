@@ -1,0 +1,71 @@
+{
+  "results": [
+    {
+      "name": "A1 rehber 1–8: oda, iki farklı devlet, hazır, başlat; iki ekranda galaksi; sürüm işareti lobi / başlangıç / MP çubuğunda ve /mp/version oyun build'iyle aynı",
+      "status": "PASS",
+      "ms": 11115
+    },
+    {
+      "name": "B1 konsey motorun kendi yoluyla kurulur (fikstür: temas); AI insanlar adına oy / sponsor yazmaz; B gerçek \"KONSEY OYLAMASI\" kartından Konsey ekranını açar ve EVET (dokunma) → host kaydeder, oylama açık kalır",
+      "status": "PASS",
+      "ms": 37468
+    },
+    {
+      "name": "BD1 federasyon FIFO, savaş yardımı, geri çekme ve ayrı aday rızası",
+      "status": "FAIL",
+      "error": "page.waitForFunction: Timeout 15000ms exceeded.\n    at wait (/workspace/Star/tests/helpers/beta-board1-browser.cjs:4:24)\n    at module.exports (/workspace/Star/tests/helpers/beta-board1-browser.cjs:19:303)\n    at async /workspace/Star/tests/browser-mp73.cjs:249:136\n    at async test (/workspace/Star/tests/browser-mp73.cjs:13:7)\n    at async /workspace/Star/tests/browser-mp73.cjs:249:31"
+    },
+    {
+      "name": "sayfa hataları yok",
+      "status": "PASS",
+      "ms": 1
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "startModal": [
+      "🛰 DANIŞMAN",
+      "",
+      "🛰 DANIŞMAN",
+      "",
+      ""
+    ],
+    "version": {
+      "mp": "MP.8.9b11",
+      "build": "96h10p16",
+      "files": {
+        "mp-core.js": "a3ae6a208ad6",
+        "relay.js": "cc85bfa7842c",
+        "mp1-host.js": "c51e44ae76f9",
+        "join.js": "bc2732493741",
+        "mirror.js": "9eb00fba46d7",
+        "guest-stars.js": "54b6f9eb1c93",
+        "mp71-dip.js": "bf0355f27ef6",
+        "mp7-setup.js": "48c0f282a254"
+      }
+    },
+    "unsupported": [
+      "autoEvent",
+      "diagCopy",
+      "joinRebel",
+      "leaveRebel",
+      "mapFix",
+      "physio",
+      "restart",
+      "rollName",
+      "sandbox",
+      "sitPick",
+      "stashNote",
+      "survey",
+      "terra",
+      "toTitle",
+      "tplDel",
+      "tplLoad",
+      "tplSave",
+      "trigCrisis"
+    ],
+    "guestDiag": "STARS MP.8.9b11 · oyun 96h10p16 · misafir · host bağlı · aşama: ready · ayna r4 20:09:37 · kurulum 19 ms · son komut: yok · son hata: yok"
+  },
+  "pass": 3,
+  "fail": 1
+}

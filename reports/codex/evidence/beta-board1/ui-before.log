@@ -1,0 +1,23 @@
+FAIL 800x360 24 renk gerçek seçim / yalnız kozmetik
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+12 !== 24
+
+    at /workspace/Star/tests/browser-beta-board1-ui.cjs:5:157
+    at async test (/workspace/Star/tests/browser-beta-board1-ui.cjs:3:41)
+    at async /workspace/Star/tests/browser-beta-board1-ui.cjs:5:1
+PASS 800x360 tersane 0/1/21 kuyruk üretim konumu / gerçek X ve tek iade
+FAIL 800x360 ROTA hedefi / sahip etiketi OFF ikonlar korunur / RNG ve Save8 aynı
+TypeError: Cannot read properties of null (reading 'width')
+    at /workspace/Star/tests/browser-beta-board1-ui.cjs:8:408
+    at async test (/workspace/Star/tests/browser-beta-board1-ui.cjs:3:41)
+    at async /workspace/Star/tests/browser-beta-board1-ui.cjs:8:1
+FAIL 800x360 enerji/alaşım açıklaması ve bilinen sınır komşusu diplomasi
+AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert(await p.locator('#panel [data-a="borderDiplo"]').count())
+
+    at /workspace/Star/tests/browser-beta-board1-ui.cjs:9:404
+    at async test (/workspace/Star/tests/browser-beta-board1-ui.cjs:3:41)
+    at async /workspace/Star/tests/browser-beta-board1-ui.cjs:9:1
+GEÇEN: 2 KALAN: 3

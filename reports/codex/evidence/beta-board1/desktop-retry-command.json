@@ -1,0 +1,5 @@
+{
+  "command": "BOARD1=1 MPP0_DESKTOP=1 MP73_ONLY='A1 |B1 |BD1 |sayfa' STARS_CHROMIUM_PATH=/usr/bin/chromium STARS_OUTPUT=reports/codex/evidence/beta-board1/mp73-desktop-final node tests/browser-mp73.cjs",
+  "previous": "mp73-desktop.log",
+  "reason": "Kartı olmayan sentetik cap yerine gerçek event kartı; bütün assertion ve timeoutlar korunur."
+}

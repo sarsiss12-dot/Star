@@ -1,0 +1,206 @@
+[
+  {
+    "command": "node tests/beta_board1_agenda_test.cjs",
+    "status": "PASS",
+    "counts": "13/0",
+    "evidence": "agenda-accepted-final.log"
+  },
+  {
+    "command": "node tests/beta_board1_critical_test.cjs",
+    "status": "PASS",
+    "counts": "5/0",
+    "evidence": "reg-beta_board1_critical_test.cjs.log"
+  },
+  {
+    "command": "node tests/beta_board1_cancel_test.cjs",
+    "status": "PASS",
+    "counts": "2/0",
+    "evidence": "reg-beta_board1_cancel_test.cjs.log"
+  },
+  {
+    "command": "node tests/beta_board1_equivalence.cjs",
+    "status": "PASS",
+    "counts": "6/0",
+    "evidence": "reg-beta_board1_equivalence.cjs.log"
+  },
+  {
+    "command": "node tests/mp_p0_guest_test.cjs",
+    "status": "PASS",
+    "counts": "7/0",
+    "evidence": "reg-mp_p0_guest_test.cjs.log"
+  },
+  {
+    "command": "node tests/mp_p0_decisions_test.cjs",
+    "status": "PASS",
+    "counts": "7/0",
+    "evidence": "reg-mp_p0_decisions_test.cjs.log"
+  },
+  {
+    "command": "node tests/mp_p0_motion_test.cjs",
+    "status": "PASS",
+    "counts": "3/0",
+    "evidence": "reg-mp_p0_motion_test.cjs.log"
+  },
+  {
+    "command": "node tests/mp_p0_notice_test.cjs",
+    "status": "PASS",
+    "counts": "3/0",
+    "evidence": "reg-mp_p0_notice_test.cjs.log"
+  },
+  {
+    "command": "node tests/mp_p0_boot_test.cjs",
+    "status": "PASS",
+    "counts": "1/0",
+    "evidence": "reg-mp_p0_boot_test.cjs.log"
+  },
+  {
+    "command": "node tests/mp_p0_cold_notice_test.cjs",
+    "status": "PASS",
+    "counts": "1/0",
+    "evidence": "reg-mp_p0_cold_notice_test.cjs.log"
+  },
+  {
+    "command": "node tests/perf1_equivalence_test.js",
+    "status": "PASS",
+    "counts": "4/0",
+    "evidence": "reg-perf1_equivalence_test.js.log"
+  },
+  {
+    "command": "node tests/perf2_equivalence_test.js",
+    "status": "PASS",
+    "counts": "5/0",
+    "evidence": "reg-perf2_equivalence_test.js.log"
+  },
+  {
+    "command": "node tests/mp86_nebula_cache_test.js",
+    "status": "PASS",
+    "counts": "3/0",
+    "evidence": "reg-mp86_nebula_cache_test.js.log"
+  },
+  {
+    "command": "node tests/mp61_core_test.js",
+    "status": "PASS",
+    "counts": "9/0",
+    "evidence": "reg-mp61_core_test.js.log"
+  },
+  {
+    "command": "node tests/mp63_pause_test.js",
+    "status": "PASS",
+    "counts": "7/0",
+    "evidence": "reg-mp63_pause_test.js.log"
+  },
+  {
+    "command": "node tests/mp64_ops_test.js",
+    "status": "PASS",
+    "counts": "5/0",
+    "evidence": "reg-mp64_ops_test.js.log"
+  },
+  {
+    "command": "node tests/mp73_council_test.js",
+    "status": "PASS",
+    "counts": "14/0",
+    "evidence": "reg-mp73_council_test.js.log"
+  },
+  {
+    "command": "node tests/mp74_notice_test.js",
+    "status": "PASS",
+    "counts": "6/0",
+    "evidence": "reg-mp74_notice_test.js.log"
+  },
+  {
+    "command": "node tests/mp75_war_test.js",
+    "status": "FAIL",
+    "counts": "3/1",
+    "evidence": "reg-mp75_war_test.js.log"
+  },
+  {
+    "command": "node tests/mp4_core_test.js",
+    "status": "PASS",
+    "counts": "14/0",
+    "evidence": "reg-mp4_core_test.js.log"
+  },
+  {
+    "command": "node tests/mp3_core_test.js",
+    "status": "PASS",
+    "counts": "11/0",
+    "evidence": "reg-mp3_core_test.js.log"
+  },
+  {
+    "command": "node tests/beta_fed_found0_core_test.js",
+    "status": "PASS",
+    "counts": "10/0",
+    "evidence": "reg-beta_fed_found0_core_test.js.log"
+  },
+  {
+    "command": "node tests/beta_fed_found0_mp_test.js",
+    "status": "PASS",
+    "counts": "11/0",
+    "evidence": "reg-beta_fed_found0_mp_test.js.log"
+  },
+  {
+    "command": "node tests/beta_fed_found0_events_test.js",
+    "status": "PASS",
+    "counts": "11/0",
+    "evidence": "reg-beta_fed_found0_events_test.js.log"
+  },
+  {
+    "command": "node tests/beta_war_fix0_test.cjs",
+    "status": "PASS",
+    "counts": "17/0",
+    "evidence": "reg-beta_war_fix0_test.cjs.log"
+  },
+  {
+    "command": "node tests/beta_p01_embargo_test.js",
+    "status": "PASS",
+    "counts": "5/0",
+    "evidence": "reg-beta_p01_embargo_test.js.log"
+  },
+  {
+    "command": "node tests/beta_p02_news_test.js",
+    "status": "PASS",
+    "counts": "8/0",
+    "evidence": "reg-beta_p02_news_test.js.log"
+  },
+  {
+    "command": "node tests/faz93a1_production_panels_test.js",
+    "status": "PASS",
+    "counts": "21/0",
+    "evidence": "reg-faz93a1_production_panels_test.js.log"
+  },
+  {
+    "command": "node tests/faz91d_1_fleet_names_native_canvas_test.js",
+    "status": "PASS",
+    "counts": "30/0",
+    "evidence": "reg-faz91d_1_fleet_names_native_canvas_test.js.log"
+  },
+  {
+    "command": "node tests/beta_setup0_pirates_test.cjs",
+    "status": "PASS",
+    "counts": "10/0",
+    "evidence": "reg-beta_setup0_pirates_test.cjs.log"
+  },
+  {
+    "command": "node tests/beta_setup1_gates_test.cjs",
+    "status": "PASS",
+    "counts": "12/0",
+    "evidence": "reg-beta_setup1_gates_test.cjs.log"
+  },
+  {
+    "command": "node tests/beta_ux0_names_test.cjs",
+    "status": "PASS",
+    "counts": "9/0",
+    "evidence": "reg-beta_ux0_names_test.cjs.log"
+  },
+  {
+    "command": "node tests/beta_scale0_colony_test.cjs",
+    "status": "PASS",
+    "counts": "12/0",
+    "evidence": "reg-beta_scale0_colony_test.cjs.log"
+  },
+  {
+    "command": "node tests/mp6_mirror_test.js",
+    "status": "PASS",
+    "counts": "8/0",
+    "evidence": "mirror-final.log"
+  }
+]

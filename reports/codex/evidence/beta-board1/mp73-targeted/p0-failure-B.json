@@ -1,0 +1,1208 @@
+{
+  "sys": [
+    {
+      "id": 0,
+      "x": 2088.0166244740976,
+      "y": 423.0504417273314,
+      "name": "Galyador",
+      "star": {
+        "n": "G Sarı",
+        "c": "#ffe9a8",
+        "r": 5.5,
+        "w": 20
+      },
+      "planets": [],
+      "lanes": [
+        11,
+        41,
+        14
+      ],
+      "owner": -1,
+      "surv": [],
+      "seen": [
+        0
+      ],
+      "queue": [],
+      "anom": false,
+      "anomK": "sinyal",
+      "def": 0,
+      "pulsar": false,
+      "nebulaS": false,
+      "_reach": 0
+    },
+    {
+      "id": 3,
+      "x": 4133.077390009692,
+      "y": 4034.5713371627826,
+      "name": "Lyrzil-17",
+      "star": {
+        "n": "M Kırmızı Cüce",
+        "c": "#ff7b5c",
+        "r": 4.5,
+        "w": 30
+      },
+      "planets": [],
+      "lanes": [
+        33,
+        15,
+        30,
+        21
+      ],
+      "owner": -1,
+      "surv": [],
+      "seen": [
+        0
+      ],
+      "queue": [],
+      "anom": false,
+      "anomK": "sinyal",
+      "def": 0,
+      "pulsar": false,
+      "nebulaS": false,
+      "_reach": 0,
+      "_shat": false
+    },
+    {
+      "id": 4,
+      "x": 3964.949532223181,
+      "y": 2923.6778293358416,
+      "name": "Hydudex",
+      "star": {
+        "n": "G Sarı",
+        "c": "#ffe9a8",
+        "r": 5.5,
+        "w": 20
+      },
+      "planets": [],
+      "lanes": [
+        32,
+        6,
+        5
+      ],
+      "owner": -1,
+      "surv": [],
+      "seen": [
+        0
+      ],
+      "queue": [],
+      "anom": false,
+      "anomK": "sinyal",
+      "def": 0,
+      "pulsar": false,
+      "nebulaS": false,
+      "_reach": 0,
+      "_shat": false
+    },
+    {
+      "id": 5,
+      "x": 4097.586676394701,
+      "y": 2401.524208936423,
+      "name": "Zorkrim",
+      "star": {
+        "n": "M Kırmızı Cüce",
+        "c": "#ff7b5c",
+        "r": 4.5,
+        "w": 30
+      },
+      "planets": [],
+      "lanes": [
+        32,
+        4,
+        7
+      ],
+      "owner": -1,
+      "surv": [],
+      "seen": [
+        0
+      ],
+      "queue": [],
+      "anom": false,
+      "anomK": "sinyal",
+      "def": 0,
+      "pulsar": false,
+      "nebulaS": false,
+      "_reach": 0,
+      "_shat": false
+    },
+    {
+      "id": 6,
+      "x": 4369.469124798552,
+      "y": 3191.1999566607356,
+      "name": "Coryazil",
+      "star": {
+        "n": "K Turuncu",
+        "c": "#ffab5c",
+        "r": 5,
+        "w": 22
+      },
+      "planets": [
+        {
+          "i": 0,
+          "t": "tro",
+          "dep": "bereket",
+          "sz": 18,
+          "seed": 789,
+          "name": "Coryazil I",
+          "owner": 0,
+          "col": {
+            "pop": 12,
+            "stab": 60,
+            "grow": 0,
+            "b": {
+              "maden": 2,
+              "santral": 2,
+              "ciftlik": 2,
+              "lab": 1,
+              "dokum": 1,
+              "fabrika": 2,
+              "tersane": 1,
+              "kale": 0,
+              "liman": 0
+            },
+            "cap": 16,
+            "name": "Coryazil I",
+            "f": "yonetim",
+            "fcd": 0,
+            "auto": false
+          }
+        },
+        {
+          "i": 1,
+          "t": "gay",
+          "dep": "bereket",
+          "sz": 18,
+          "seed": 789,
+          "name": "Coryazil I",
+          "owner": -1
+        }
+      ],
+      "lanes": [
+        4,
+        33,
+        28
+      ],
+      "owner": 0,
+      "surv": [
+        0
+      ],
+      "seen": [
+        0
+      ],
+      "queue": [],
+      "anom": false,
+      "anomK": "dogal",
+      "def": 0,
+      "pulsar": false,
+      "nebulaS": false,
+      "_reach": 516.0799703922979,
+      "_shat": false
+    },
+    {
+      "id": 7,
+      "x": 3558.8894075874664,
+      "y": 1951.9725242489935,
+      "name": "Moradex",
+      "star": {
+        "n": "G Sarı",
+        "c": "#ffe9a8",
+        "r": 5.5,
+        "w": 20
+      },
+      "planets": [],
+      "lanes": [
+        5,
+        35,
+        31
+      ],
+      "owner": -1,
+      "surv": [],
+      "seen": [
+        0
+      ],
+      "queue": [],
+      "anom": false,
+      "anomK": "sinyal",
+      "def": 0,
+      "pulsar": false,
+      "nebulaS": false,
+      "_reach": 0
+    },
+    {
+      "id": 8,
+      "x": 2554.9944712063043,
+      "y": 3683.6005884388737,
+      "name": "Veraesha",
+      "star": {
+        "n": "K Turuncu",
+        "c": "#ffab5c",
+        "r": 5,
+        "w": 22
+      },
+      "planets": [],
+      "lanes": [
+        36,
+        44,
+        42
+      ],
+      "owner": -1,
+      "surv": [],
+      "seen": [
+        0
+      ],
+      "queue": [],
+      "anom": false,
+      "anomK": "sinyal",
+      "def": 0,
+      "pulsar": false,
+      "nebulaS": false,
+      "_reach": 0
+    },
+    {
+      "id": 11,
+      "x": 1848.992967367211,
+      "y": 815.7191682145728,
+      "name": "Lyrtyr",
+      "star": {
+        "n": "F Beyaz-Sarı",
+        "c": "#fff6e0",
+        "r": 6,
+        "w": 12
+      },
+      "planets": [],
+      "lanes": [
+        0,
+        9,
+        41
+      ],
+      "owner": -1,
+      "surv": [],
+      "seen": [
+        0
+      ],
+      "queue": [],
+      "anom": false,
+      "anomK": "sinyal",
+      "def": 0,
+      "pulsar": false,
+      "nebulaS": false,
+      "_reach": 0
+    },
+    {
+      "id": 14,
+      "x": 2633.0431878785294,
+      "y": 247.02953450130644,
+      "name": "Draiagath",
+      "star": {
+        "n": "Nötron Yıldızı",
+        "c": "#e2f7ff",
+        "r": 3,
+        "w": 2,
+        "ozel": 1
+      },
+      "planets": [],
+      "lanes": [
+        0,
+        18,
+        29
+      ],
+      "owner": 7,
+      "surv": [],
+      "seen": [
+        0
+      ],
+      "queue": [],
+      "anom": false,
+      "anomK": "sinyal",
+      "def": 0,
+      "pulsar": false,
+      "nebulaS": false,
+      "_reach": 210
+    },
+    {
+      "id": 15,
+      "x": 3677.1436928547437,
+      "y": 3735.163230132679,
+      "name": "Elialith",
+      "star": {
+        "n": "M Kırmızı Cüce",
+        "c": "#ff7b5c",
+        "r": 4.5,
+        "w": 30
+      },
+      "planets": [],
+      "lanes": [
+        3,
+        30,
+        28,
+        21
+      ],
+      "owner": -1,
+      "surv": [],
+      "seen": [
+        0
+      ],
+      "queue": [],
+      "anom": false,
+      "anomK": "sinyal",
+      "def": 0,
+      "pulsar": false,
+      "nebulaS": false,
+      "_reach": 0,
+      "_shat": false
+    },
+    {
+      "id": 20,
+      "x": 2892.4533343297694,
+      "y": 3107.0725515884233,
+      "name": "Belogath",
+      "star": {
+        "n": "K Turuncu",
+        "c": "#ffab5c",
+        "r": 5,
+        "w": 22
+      },
+      "planets": [],
+      "lanes": [
+        36,
+        44,
+        25
+      ],
+      "owner": -1,
+      "surv": [],
+      "seen": [
+        0
+      ],
+      "queue": [],
+      "anom": false,
+      "anomK": "sinyal",
+      "def": 0,
+      "pulsar": false,
+      "nebulaS": false,
+      "_reach": 0,
+      "_shat": false
+    },
+    {
+      "id": 21,
+      "x": 3438.919403232102,
+      "y": 4564.533940459847,
+      "name": "Ithudeth",
+      "star": {
+        "n": "K Turuncu",
+        "c": "#ffab5c",
+        "r": 5,
+        "w": 22
+      },
+      "planets": [],
+      "lanes": [
+        30,
+        15,
+        3
+      ],
+      "owner": 5,
+      "surv": [],
+      "seen": [
+        0
+      ],
+      "queue": [],
+      "anom": false,
+      "anomK": "sinyal",
+      "def": 0,
+      "pulsar": false,
+      "nebulaS": false,
+      "_reach": 210
+    },
+    {
+      "id": 28,
+      "x": 4018.2410955564233,
+      "y": 3431.3055309525816,
+      "name": "Yelran",
+      "star": {
+        "n": "K Turuncu",
+        "c": "#ffab5c",
+        "r": 5,
+        "w": 22
+      },
+      "planets": [],
+      "lanes": [
+        6,
+        15,
+        33
+      ],
+      "owner": -1,
+      "surv": [],
+      "seen": [
+        0
+      ],
+      "queue": [],
+      "anom": false,
+      "anomK": "sinyal",
+      "def": 0,
+      "pulsar": false,
+      "nebulaS": false,
+      "_reach": 0,
+      "_shat": false
+    },
+    {
+      "id": 30,
+      "x": 3557.1602700459516,
+      "y": 4163.05950083366,
+      "name": "Ithdeth-27",
+      "star": {
+        "n": "K Turuncu",
+        "c": "#ffab5c",
+        "r": 5,
+        "w": 22
+      },
+      "planets": [],
+      "lanes": [
+        3,
+        15,
+        21
+      ],
+      "owner": -1,
+      "surv": [],
+      "seen": [
+        0
+      ],
+      "queue": [],
+      "anom": false,
+      "anomK": "sinyal",
+      "def": 0,
+      "pulsar": false,
+      "nebulaS": true,
+      "_reach": 0,
+      "_shat": false
+    },
+    {
+      "id": 31,
+      "x": 2998.465702657611,
+      "y": 1630.562198460555,
+      "name": "Coryaven",
+      "star": {
+        "n": "F Beyaz-Sarı",
+        "c": "#fff6e0",
+        "r": 6,
+        "w": 12
+      },
+      "planets": [],
+      "lanes": [
+        7,
+        12,
+        35
+      ],
+      "owner": 3,
+      "surv": [],
+      "seen": [
+        0
+      ],
+      "queue": [],
+      "anom": false,
+      "anomK": "sinyal",
+      "def": 0,
+      "pulsar": false,
+      "nebulaS": false,
+      "_reach": 210
+    },
+    {
+      "id": 32,
+      "x": 4252.2369715755085,
+      "y": 2718.126441898619,
+      "name": "Duneisha",
+      "star": {
+        "n": "K Turuncu",
+        "c": "#ffab5c",
+        "r": 5,
+        "w": 22
+      },
+      "planets": [],
+      "lanes": [
+        4,
+        5
+      ],
+      "owner": -1,
+      "surv": [],
+      "seen": [
+        0
+      ],
+      "queue": [],
+      "anom": false,
+      "anomK": "sinyal",
+      "def": 0,
+      "pulsar": false,
+      "nebulaS": false,
+      "_reach": 0,
+      "_shat": false
+    },
+    {
+      "id": 33,
+      "x": 4353.700074283969,
+      "y": 3600.7957291697303,
+      "name": "Vermir-59",
+      "star": {
+        "n": "K Turuncu",
+        "c": "#ffab5c",
+        "r": 5,
+        "w": 22
+      },
+      "planets": [],
+      "lanes": [
+        3,
+        6,
+        28
+      ],
+      "owner": -1,
+      "surv": [],
+      "seen": [
+        0
+      ],
+      "queue": [],
+      "anom": false,
+      "anomK": "sinyal",
+      "def": 0,
+      "pulsar": false,
+      "nebulaS": false,
+      "_reach": 0,
+      "_shat": false
+    },
+    {
+      "id": 35,
+      "x": 3173.737848051892,
+      "y": 2023.855207176615,
+      "name": "Morran",
+      "star": {
+        "n": "A Beyaz",
+        "c": "#dff0ff",
+        "r": 6.5,
+        "w": 8
+      },
+      "planets": [],
+      "lanes": [
+        7,
+        12,
+        31
+      ],
+      "owner": -1,
+      "surv": [],
+      "seen": [
+        0
+      ],
+      "queue": [],
+      "anom": false,
+      "anomK": "sinyal",
+      "def": 0,
+      "pulsar": false,
+      "nebulaS": false,
+      "_reach": 0,
+      "_shat": false
+    },
+    {
+      "id": 36,
+      "x": 2840.426607621602,
+      "y": 3462.887987575179,
+      "name": "Verizil-99",
+      "star": {
+        "n": "K Turuncu",
+        "c": "#ffab5c",
+        "r": 5,
+        "w": 22
+      },
+      "planets": [],
+      "lanes": [
+        8,
+        20,
+        44
+      ],
+      "owner": -1,
+      "surv": [],
+      "seen": [
+        0
+      ],
+      "queue": [],
+      "anom": false,
+      "anomK": "sinyal",
+      "def": 0,
+      "pulsar": false,
+      "nebulaS": false,
+      "_reach": 0,
+      "_shat": false
+    },
+    {
+      "id": 41,
+      "x": 2232.5003301251663,
+      "y": 894.343616347745,
+      "name": "Jorzil-57",
+      "star": {
+        "n": "K Turuncu",
+        "c": "#ffab5c",
+        "r": 5,
+        "w": 22
+      },
+      "planets": [],
+      "lanes": [
+        0,
+        11,
+        29
+      ],
+      "owner": -1,
+      "surv": [],
+      "seen": [
+        0
+      ],
+      "queue": [],
+      "anom": false,
+      "anomK": "sinyal",
+      "def": 0,
+      "pulsar": false,
+      "nebulaS": false,
+      "_reach": 0
+    },
+    {
+      "id": 44,
+      "x": 2517.193730417136,
+      "y": 3295.574726372913,
+      "name": "Corven",
+      "star": {
+        "n": "K Turuncu",
+        "c": "#ffab5c",
+        "r": 5,
+        "w": 22
+      },
+      "planets": [],
+      "lanes": [
+        8,
+        20,
+        36
+      ],
+      "owner": -1,
+      "surv": [],
+      "seen": [
+        0
+      ],
+      "queue": [],
+      "anom": false,
+      "anomK": "sinyal",
+      "def": 0,
+      "pulsar": false,
+      "nebulaS": false,
+      "_reach": 0
+    }
+  ],
+  "inbox": [
+    {
+      "kind": "anomaly",
+      "data": {
+        "a": {
+          "id": "a5",
+          "k": "dogal",
+          "n": "Yaşam İzleri",
+          "t": "Atmosferde işlenmiş organik bileşikler var. Burada bir şey yaşıyordu.",
+          "ch": [
+            {
+              "t": "Biyosferi haritala",
+              "d": "+130 araştırma, +80 yiyecek"
+            },
+            {
+              "t": "Karantinaya al",
+              "d": "+15 etki"
+            }
+          ]
+        },
+        "sys": {
+          "id": 6,
+          "x": 4369.469124798552,
+          "y": 3191.1999566607356,
+          "name": "Coryazil",
+          "star": {
+            "n": "K Turuncu",
+            "c": "#ffab5c",
+            "r": 5,
+            "w": 22
+          },
+          "planets": [
+            {
+              "i": 0,
+              "t": "tro",
+              "dep": "bereket",
+              "sz": 18,
+              "seed": 789,
+              "name": "Coryazil I",
+              "owner": 0,
+              "col": {
+                "pop": 12,
+                "stab": 60,
+                "grow": 0,
+                "b": {
+                  "maden": 2,
+                  "santral": 2,
+                  "ciftlik": 2,
+                  "lab": 1,
+                  "dokum": 1,
+                  "fabrika": 2,
+                  "tersane": 1,
+                  "kale": 0,
+                  "liman": 0
+                },
+                "cap": 16,
+                "name": "Coryazil I",
+                "f": "yonetim",
+                "fcd": 0,
+                "auto": false
+              }
+            },
+            {
+              "i": 1,
+              "t": "gay",
+              "dep": "bereket",
+              "sz": 18,
+              "seed": 789,
+              "name": "Coryazil I",
+              "owner": -1
+            }
+          ],
+          "lanes": [
+            4,
+            33,
+            28
+          ],
+          "owner": 0,
+          "surv": [
+            0
+          ],
+          "seen": [
+            0
+          ],
+          "queue": [],
+          "anom": false,
+          "anomK": "dogal",
+          "def": 0,
+          "pulsar": false,
+          "nebulaS": false,
+          "_reach": 516.0799703922979,
+          "_shat": false
+        }
+      },
+      "decisionId": 1,
+      "uid": 4,
+      "key": "personal:1",
+      "born": 10.619479999999953,
+      "pause": false,
+      "ico": "🔬",
+      "cls": "sci",
+      "title": "Yaşam İzleri",
+      "sub": "Atmosferde işlenmiş organik bileşikler var. Burada bir şey yaşıyordu.",
+      "hidden": false
+    },
+    {
+      "kind": "event",
+      "data": {
+        "id": "e1",
+        "n": "Bilim Konseyi Talebi",
+        "t": "Baş bilimcin, riskli bir hızlandırılmış araştırma programı için bütçe istiyor.",
+        "ch": [
+          {
+            "t": "Fonu onayla",
+            "d": "−150 mineral, +260 araştırma"
+          },
+          {
+            "t": "Reddet",
+            "d": "−8 etki"
+          }
+        ]
+      },
+      "decisionId": 2,
+      "uid": 5,
+      "key": "personal:2",
+      "born": 10.619479999999953,
+      "pause": false,
+      "ico": "❗",
+      "cls": "sci",
+      "title": "Bilim Konseyi Talebi",
+      "sub": "Baş bilimcin, riskli bir hızlandırılmış araştırma programı için bütçe istiyor.",
+      "hidden": false
+    },
+    {
+      "kind": "chain",
+      "data": "hayalet1",
+      "decisionId": 3,
+      "uid": 6,
+      "key": "personal:3",
+      "born": 10.619479999999953,
+      "pause": false,
+      "ico": "❗",
+      "cls": "sci",
+      "title": "Sessiz Gemi",
+      "sub": "{SISTEM} sınırında, hiçbir imparatorluğa ait olmayan devasa bir gemi sürükleniyor. Motorları soğuk, ",
+      "hidden": false
+    }
+  ],
+  "own": {
+    "id": 0,
+    "race": "teknokrasi",
+    "name": "Saf Akıl Ağı",
+    "ai": false,
+    "col": "#5c9ef5",
+    "traits": [],
+    "res": {
+      "min": 3000,
+      "ene": 2000,
+      "yiy": 180,
+      "ala": 220,
+      "ara": 0,
+      "tuk": 150,
+      "etk": 3000
+    },
+    "inc": {
+      "min": 3.336590000000001,
+      "ene": -16.962870000000002,
+      "yiy": 14.508005000000002,
+      "ala": 4.062674099999999,
+      "ara": 22.67463705,
+      "etk": 6.7625,
+      "tuk": 9.484194000000006
+    },
+    "techs": {},
+    "rq": {
+      "fiz": "f_reaktor",
+      "top": "t_tarim",
+      "muh": "m_robot"
+    },
+    "rp": {
+      "fiz": 0,
+      "top": 0,
+      "muh": 0
+    },
+    "colonies": [
+      {
+        "s": 6,
+        "p": 0
+      }
+    ],
+    "mods": {
+      "minMul": 0,
+      "eneMul": 0,
+      "yiyMul": 0,
+      "alaMul": 0.04,
+      "araMul": 0.79,
+      "etkFlat": -1.21,
+      "eneFlat": 0,
+      "dmgMul": -0.11,
+      "shMul": 0,
+      "hullMul": 0,
+      "spdMul": 0,
+      "growMul": 0,
+      "habFlat": 0,
+      "dipMul": 0.11,
+      "capFlat": 0,
+      "upMul": 0,
+      "buildMul": 0.12,
+      "colCost": 0,
+      "stab": 2,
+      "sensor": 2,
+      "capMul": 0,
+      "colShock": 0,
+      "foeSpd": 0,
+      "warTuk": 0,
+      "eDmgMul": 0,
+      "eShMul": 0,
+      "trustCap": 10,
+      "tradeMul": 0,
+      "opCost": 0,
+      "opBonus": 0,
+      "opRisk": 0,
+      "trustStart": 0,
+      "etkMul": 0,
+      "rofMul": 0,
+      "shipSpeed": -0.2,
+      "militaryBuildMul": 0,
+      "borderMul": 0,
+      "newColStab": 0,
+      "crisisDmg": 0,
+      "shipCost": 0
+    },
+    "cap": 46,
+    "dead": false,
+    "rel": {
+      "1": 40,
+      "2": 40,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": -100
+    },
+    "war": {
+      "1": false,
+      "2": false,
+      "3": false,
+      "4": false,
+      "5": false,
+      "6": false,
+      "7": false,
+      "8": false
+    },
+    "ally": {
+      "1": false,
+      "2": false,
+      "3": false,
+      "4": false,
+      "5": false,
+      "6": false,
+      "7": false,
+      "8": false
+    },
+    "home": 6,
+    "assim": 0,
+    "contact": {
+      "1": true,
+      "2": true,
+      "3": false,
+      "4": false,
+      "5": false,
+      "6": false,
+      "7": false,
+      "8": false
+    },
+    "agr": 0.35,
+    "exp": 0.65,
+    "extra": {
+      "trustCap": 10
+    },
+    "ethics": {
+      "mil": -1,
+      "aut": 0,
+      "mat": 2,
+      "ahl": 0
+    },
+    "civics": [],
+    "origin": "standart",
+    "sigil": "simetrik",
+    "monoRes": "min",
+    "furyUntil": 0,
+    "collapseUntil": 0,
+    "warPend": {},
+    "emblem": {
+      "v": 1,
+      "shape": "hex",
+      "symbol": "wing",
+      "pattern": "corners",
+      "primary": "#5c9ef5",
+      "secondary": "#b2f55c",
+      "federation": false
+    },
+    "mizac": "teknokrasi",
+    "_pers": "teknokrasi",
+    "physio": "humanoid",
+    "look": "humanoid",
+    "portraitVariant": 0,
+    "persLock": "teknokrasi",
+    "research": {
+      "targets": [],
+      "bank": {},
+      "history": {},
+      "mode": "semi"
+    },
+    "factions": [
+      {
+        "k": "bilim",
+        "pow": 47,
+        "mood": 50,
+        "leader": "Kıdemli Ish",
+        "demand": null,
+        "log": []
+      },
+      {
+        "k": "tuccar",
+        "pow": 29,
+        "mood": 50,
+        "leader": "Onurlu Lyssa",
+        "demand": null,
+        "log": []
+      },
+      {
+        "k": "halk",
+        "pow": 24,
+        "mood": 50,
+        "leader": "Yüksek Vorn",
+        "demand": null,
+        "log": []
+      }
+    ],
+    "mapHabitats": {
+      "6": {
+        "mask": 3,
+        "at": 10.619479999999953
+      }
+    },
+    "mapOwners": {
+      "0": -1,
+      "3": -1,
+      "4": -1,
+      "5": -1,
+      "6": 0,
+      "7": -1,
+      "8": -1,
+      "11": -1,
+      "14": 7,
+      "15": -1,
+      "20": -1,
+      "21": 5,
+      "28": -1,
+      "30": -1,
+      "31": 3,
+      "32": -1,
+      "33": -1,
+      "35": -1,
+      "36": -1,
+      "41": -1,
+      "44": -1
+    },
+    "fleetAlloyUp": 2.31,
+    "structs": {
+      "min": 0,
+      "ene": 0,
+      "ara": 0,
+      "role": 0,
+      "sensor": 0,
+      "gate": [],
+      "dyson": 0
+    },
+    "trade": {
+      "links": [],
+      "n": 0,
+      "cap": 8,
+      "cut": 0,
+      "foreign": 0,
+      "vol": 0,
+      "trips": 0,
+      "raided": 0,
+      "ham": 0,
+      "mul": 0
+    },
+    "cgNeed": 7.199999999999999,
+    "fleetUp": 12.2,
+    "adminCost": 2.2,
+    "foodNeed": 13.799999999999999,
+    "luxury": {},
+    "luxOwn": {},
+    "luxImport": {},
+    "overlord": null,
+    "visionFrom": {
+      "2": true
+    },
+    "decisions": {
+      "v": 1,
+      "next": 4,
+      "pending": [
+        {
+          "id": 1,
+          "kind": "anomaly",
+          "catalog": "a5",
+          "sys": 6,
+          "key": "anomaly:a5:6",
+          "born": 10.619479999999953,
+          "status": "pending"
+        },
+        {
+          "id": 2,
+          "kind": "event",
+          "catalog": "e1",
+          "sys": null,
+          "key": "event:e1:",
+          "born": 10.619479999999953,
+          "status": "pending"
+        },
+        {
+          "id": 3,
+          "kind": "chain",
+          "catalog": "hayalet1",
+          "sys": null,
+          "key": "chain:hayalet1:",
+          "born": 10.619479999999953,
+          "status": "pending"
+        }
+      ],
+      "queue": [],
+      "seen": {}
+    },
+    "_prof": null,
+    "_powAt": 10.619479999999953,
+    "_supAt": -1,
+    "_gateAt": -1,
+    "_trAt": 10.619479999999953,
+    "_trCache": {
+      "links": [],
+      "n": 0,
+      "cap": 8,
+      "cut": 0,
+      "foreign": 0,
+      "vol": 0,
+      "trips": 0,
+      "raided": 0,
+      "ham": 0,
+      "mul": 0
+    },
+    "_pressAt": 10.619479999999953,
+    "_trSig": "1:0:0:0",
+    "_powC": 342,
+    "_press": 0.8205720622109844
+  },
+  "sel": {
+    "id": 4,
+    "e": 0,
+    "sys": 6,
+    "x": 4369.469124798552,
+    "y": 3191.1999566607356,
+    "ships": [
+      {
+        "c": "kor",
+        "h": 0.55
+      },
+      {
+        "c": "kor",
+        "h": 0.55
+      },
+      {
+        "c": "kor",
+        "h": 0.55
+      }
+    ],
+    "path": [],
+    "mv": null,
+    "ord": null,
+    "name": "1. Muhafız Filosu",
+    "stance": "agresif",
+    "combat": 0,
+    "surv": 0
+  },
+  "stats": {
+    "mirrors": 1,
+    "deltas": 12,
+    "bytes": 0,
+    "builds": 13,
+    "buildMs": [
+      149.6,
+      30.5,
+      51.1,
+      8.8,
+      22.5,
+      32.8,
+      17.6,
+      9.5,
+      47.2,
+      13.6,
+      5.2,
+      16.9,
+      24.2
+    ],
+    "resyncs": 0,
+    "held": 0,
+    "blocked": {},
+    "sent": {
+      "councilVote": 1
+    },
+    "speedMsgs": 2,
+    "surfaceKept": 31,
+    "touchHeld": 2
+  }
+}

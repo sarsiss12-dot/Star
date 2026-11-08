@@ -1,0 +1,6 @@
+{
+  "attempts": 1,
+  "exit": 1,
+  "base": "codex/stars-mp-p0-guest-playability",
+  "head": "codex/stars-beta-board1-federation-stability-ux"
+}

@@ -1,0 +1,36 @@
+{
+  "feds": [],
+  "inbox": [
+    {
+      "kind": "aideal",
+      "data": {
+        "from": 5,
+        "to": 0,
+        "give": [
+          {
+            "t": "pact"
+          }
+        ],
+        "want": [
+          {
+            "t": "res",
+            "r": "min",
+            "v": 30
+          }
+        ],
+        "born": 60,
+        "expires": 600
+      },
+      "ico": "📜",
+      "cls": "sci",
+      "pause": false,
+      "uid": 112,
+      "born": 60,
+      "rec": 2,
+      "title": "Teklif — Navres Dayanışması",
+      "sub": "Çok oyunculu teklif · ◆ 30 Mineral istiyor",
+      "key": "mp71:3"
+    }
+  ],
+  "modal": ""
+}

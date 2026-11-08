@@ -1,0 +1,266 @@
+{
+  "url": "/mp/play",
+  "vote": null,
+  "inbox": [
+    {
+      "kind": "anomaly",
+      "data": {
+        "a": {
+          "id": "a13",
+          "k": "kalinti",
+          "n": "Antik Kalıntı Mezarlığı",
+          "t": "Yüzeyde binlerce yıl önce gömülmüş bir uygarlığın izleri. Bazı mezarlar mühürlü.",
+          "ch": [
+            {
+              "t": "Mühürleri kır",
+              "d": "ödül ya da salgın"
+            },
+            {
+              "t": "Saygıyla belgele",
+              "d": "+180 araştırma, +40 etki"
+            }
+          ]
+        },
+        "sys": {
+          "id": 12,
+          "x": 1538.3619817399835,
+          "y": 3583.5526755915753,
+          "name": "Solkrim",
+          "star": {
+            "n": "Nötron Yıldızı",
+            "c": "#e2f7ff",
+            "r": 3,
+            "w": 2,
+            "ozel": 1
+          },
+          "planets": [
+            {
+              "i": 0,
+              "t": "buz",
+              "dep": null,
+              "sz": 14,
+              "seed": 1575,
+              "name": "Solkrim I",
+              "owner": -1
+            },
+            {
+              "i": 1,
+              "t": "ast",
+              "dep": null,
+              "sz": 0,
+              "seed": 1592,
+              "name": "Solkrim II",
+              "owner": -1
+            },
+            {
+              "i": 2,
+              "t": "buz",
+              "dep": null,
+              "sz": 15,
+              "seed": 1609,
+              "name": "Solkrim III",
+              "owner": -1
+            }
+          ],
+          "lanes": [
+            21,
+            26,
+            41
+          ],
+          "owner": -1,
+          "surv": [
+            0
+          ],
+          "seen": [
+            0
+          ],
+          "queue": [],
+          "anom": false,
+          "anomK": "kalinti",
+          "def": 0,
+          "pulsar": false,
+          "nebulaS": false,
+          "_reach": 0,
+          "_shat": false
+        }
+      },
+      "decisionId": 1,
+      "uid": 1,
+      "key": "personal:1",
+      "born": 64.84539999999943,
+      "pause": false,
+      "ico": "🔬",
+      "cls": "sci",
+      "title": "Antik Kalıntı Mezarlığı",
+      "sub": "Yüzeyde binlerce yıl önce gömülmüş bir uygarlığın izleri. Bazı mezarlar mühürlü.",
+      "hidden": false
+    },
+    {
+      "kind": "anomaly",
+      "data": {
+        "a": {
+          "id": "a11",
+          "k": "sinyal",
+          "n": "Bilinmeyen Sinyal",
+          "t": "Sistemin derinliğinden düzenli aralıklarla bir çağrı geliyor. Kaynağı hiçbir kayıtta yok.",
+          "ch": [
+            {
+              "t": "Sinyale karşılık ver",
+              "d": "büyük ödül · risk var"
+            },
+            {
+              "t": "Kaydet ve uzaklaş",
+              "d": "+140 araştırma"
+            }
+          ]
+        },
+        "sys": {
+          "id": 26,
+          "x": 1967.7919768170873,
+          "y": 3761.249697077781,
+          "name": "Kalkrim",
+          "star": {
+            "n": "F Beyaz-Sarı",
+            "c": "#fff6e0",
+            "r": 6,
+            "w": 12
+          },
+          "planets": [
+            {
+              "i": 0,
+              "t": "sav",
+              "dep": null,
+              "sz": 11,
+              "seed": 3409,
+              "name": "Kalkrim I",
+              "owner": -1
+            }
+          ],
+          "lanes": [
+            6,
+            12,
+            41
+          ],
+          "owner": -1,
+          "surv": [
+            0
+          ],
+          "seen": [
+            0
+          ],
+          "queue": [],
+          "anom": false,
+          "anomK": "sinyal",
+          "def": 0,
+          "pulsar": false,
+          "nebulaS": false,
+          "_reach": 0,
+          "_shat": false
+        }
+      },
+      "decisionId": 2,
+      "uid": 23,
+      "key": "personal:2",
+      "born": 85.80540000000015,
+      "pause": false,
+      "ico": "🔬",
+      "cls": "sci",
+      "title": "Bilinmeyen Sinyal",
+      "sub": "Sistemin derinliğinden düzenli aralıklarla bir çağrı geliyor. Kaynağı hiçbir kayıtta yok.",
+      "hidden": false
+    },
+    {
+      "kind": "anomaly",
+      "data": {
+        "a": {
+          "id": "a12",
+          "k": "megayapi",
+          "n": "Terk Edilmiş Megayapı",
+          "t": "Bir gezegeni saran, yarısı çökmüş devasa bir halka. İnşa edenler geri dönmemiş.",
+          "ch": [
+            {
+              "t": "İçeri dal ve söktür",
+              "d": "çok mineral · gemi riski"
+            },
+            {
+              "t": "Dıştan haritala",
+              "d": "+300 araştırma"
+            }
+          ]
+        },
+        "sys": {
+          "id": 41,
+          "x": 1759.2785742662977,
+          "y": 4048.0319315160623,
+          "name": "Athmir",
+          "star": {
+            "n": "G Sarı",
+            "c": "#ffe9a8",
+            "r": 5.5,
+            "w": 20
+          },
+          "planets": [
+            {
+              "i": 0,
+              "t": "tok",
+              "dep": "ergi_kaynagi",
+              "sz": 20,
+              "seed": 5374,
+              "name": "Athmir I",
+              "owner": -1
+            },
+            {
+              "i": 1,
+              "t": "vol",
+              "dep": null,
+              "sz": 15,
+              "seed": 5391,
+              "name": "Athmir II",
+              "owner": -1
+            },
+            {
+              "i": 2,
+              "t": "ast",
+              "dep": null,
+              "sz": 0,
+              "seed": 5408,
+              "name": "Athmir III",
+              "owner": -1
+            }
+          ],
+          "lanes": [
+            26,
+            12
+          ],
+          "owner": -1,
+          "surv": [
+            0
+          ],
+          "seen": [
+            0
+          ],
+          "queue": [],
+          "anom": false,
+          "anomK": "megayapi",
+          "def": 0,
+          "pulsar": false,
+          "nebulaS": false,
+          "_reach": 0,
+          "_shat": false
+        }
+      },
+      "decisionId": 3,
+      "uid": 64,
+      "key": "personal:3",
+      "born": 105.6054000000009,
+      "pause": false,
+      "ico": "🔬",
+      "cls": "sci",
+      "title": "Terk Edilmiş Megayapı",
+      "sub": "Bir gezegeni saran, yarısı çökmüş devasa bir halka. İnşa edenler geri dönmemiş.",
+      "hidden": false
+    }
+  ],
+  "modal": "",
+  "pane": ""
+}

@@ -1,0 +1,14 @@
+PASS A1 rehber 1–8: oda, iki farklı devlet, hazır, başlat; iki ekranda galaksi; sürüm işareti lobi / başlangıç / MP çubuğunda ve /mp/version oyun build'iyle aynı
+PASS B1 konsey motorun kendi yoluyla kurulur (fikstür: temas); AI insanlar adına oy / sponsor yazmaz; B gerçek "KONSEY OYLAMASI" kartından Konsey ekranını açar ve EVET (dokunma) → host kaydeder, oylama açık kalır
+FAIL BD1 federasyon FIFO, savaş yardımı, geri çekme ve ayrı aday rızası
+locator.scrollIntoViewIfNeeded: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('[data-a="fedLawPropose"][data-x="savunma"]').first()[22m
+
+    at hit (/workspace/Star/tests/helpers/beta-board1-browser.cjs:4:115)
+    at module.exports (/workspace/Star/tests/helpers/beta-board1-browser.cjs:10:52)
+    at async /workspace/Star/tests/browser-mp73.cjs:249:136
+    at async test (/workspace/Star/tests/browser-mp73.cjs:13:7)
+    at async /workspace/Star/tests/browser-mp73.cjs:249:31
+PASS sayfa hataları yok
+GEÇEN: 3 KALAN: 1

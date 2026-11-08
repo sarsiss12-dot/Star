@@ -1,0 +1,66 @@
+{
+  "feds": [
+    {
+      "id": 1,
+      "name": "Nova Bilgi Topluluğu",
+      "type": "bilimsel",
+      "charter": {
+        "defense": "vote",
+        "offense": "vote",
+        "admission": "allies",
+        "ballot": "equal"
+      },
+      "leader": 1,
+      "founder": 1,
+      "members": [
+        1,
+        0,
+        2
+      ],
+      "laws": {},
+      "fund": {
+        "ala": 0,
+        "ene": 0
+      },
+      "treasury": 0,
+      "founded": 10.71247999999998,
+      "typeSince": 10.71247999999998,
+      "dutySince": {
+        "defense": 0,
+        "offense": 0
+      },
+      "invites": {},
+      "decisions": {},
+      "dutyConsent": {},
+      "cohesion": 70,
+      "nextVote": 70.71247999999999,
+      "politicsVersion": 96,
+      "vote": null,
+      "lastVote": null,
+      "identityType": "bilimsel",
+      "emblem": {
+        "v": 1,
+        "shape": "star",
+        "symbol": "orbit",
+        "pattern": "corners",
+        "primary": "#5cf5d6",
+        "secondary": "#d65cf5",
+        "federation": true
+      }
+    }
+  ],
+  "inbox": [
+    {
+      "kind": "fedfoundResult",
+      "data": 1,
+      "key": "fedfound-result:1:founded:accepted,accepted,accepted",
+      "ico": "🏛",
+      "pause": false,
+      "title": "FEDERASYON KURULDU — Nova Bilgi Topluluğu",
+      "sub": "Bilimsel Federasyon · 3 kurucu · Eşit Temsil · Savunma yardımı oylamayla. Otomatik saldırı desteği yok; ayrı oylama/taahhüt gerekir. · Lider: Kızıl Muhafız",
+      "uid": 7,
+      "born": 10.71247999999998
+    }
+  ],
+  "modal": ""
+}

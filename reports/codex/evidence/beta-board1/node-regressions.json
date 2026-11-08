@@ -1,0 +1,167 @@
+[
+  {
+    "command": "node tests/beta_board1_agenda_test.cjs",
+    "exit": 0,
+    "seconds": 4.33
+  },
+  {
+    "command": "node tests/beta_board1_critical_test.cjs",
+    "exit": 0,
+    "seconds": 1.05
+  },
+  {
+    "command": "node tests/beta_board1_cancel_test.cjs",
+    "exit": 0,
+    "seconds": 0.61
+  },
+  {
+    "command": "node tests/beta_board1_equivalence.cjs",
+    "exit": 0,
+    "seconds": 5.01
+  },
+  {
+    "command": "node tests/mp_p0_guest_test.cjs",
+    "exit": 0,
+    "seconds": 1.47
+  },
+  {
+    "command": "node tests/mp_p0_decisions_test.cjs",
+    "exit": 0,
+    "seconds": 1.84
+  },
+  {
+    "command": "node tests/mp_p0_motion_test.cjs",
+    "exit": 0,
+    "seconds": 0.05
+  },
+  {
+    "command": "node tests/mp_p0_notice_test.cjs",
+    "exit": 0,
+    "seconds": 0.63
+  },
+  {
+    "command": "node tests/mp_p0_boot_test.cjs",
+    "exit": 0,
+    "seconds": 0.37
+  },
+  {
+    "command": "node tests/mp_p0_cold_notice_test.cjs",
+    "exit": 0,
+    "seconds": 0.44
+  },
+  {
+    "command": "node tests/perf1_equivalence_test.js",
+    "exit": 0,
+    "seconds": 2.03
+  },
+  {
+    "command": "node tests/perf2_equivalence_test.js",
+    "exit": 0,
+    "seconds": 3.12
+  },
+  {
+    "command": "node tests/mp86_nebula_cache_test.js",
+    "exit": 0,
+    "seconds": 2.47
+  },
+  {
+    "command": "node tests/mp61_core_test.js",
+    "exit": 0,
+    "seconds": 3.76
+  },
+  {
+    "command": "node tests/mp63_pause_test.js",
+    "exit": 0,
+    "seconds": 0.76
+  },
+  {
+    "command": "node tests/mp64_ops_test.js",
+    "exit": 0,
+    "seconds": 1.23
+  },
+  {
+    "command": "node tests/mp73_council_test.js",
+    "exit": 0,
+    "seconds": 11.79
+  },
+  {
+    "command": "node tests/mp74_notice_test.js",
+    "exit": 0,
+    "seconds": 1.1
+  },
+  {
+    "command": "node tests/mp75_war_test.js",
+    "exit": 1,
+    "seconds": 0.86
+  },
+  {
+    "command": "node tests/mp4_core_test.js",
+    "exit": 0,
+    "seconds": 10.18
+  },
+  {
+    "command": "node tests/mp3_core_test.js",
+    "exit": 0,
+    "seconds": 12.1
+  },
+  {
+    "command": "node tests/beta_fed_found0_core_test.js",
+    "exit": 0,
+    "seconds": 3.46
+  },
+  {
+    "command": "node tests/beta_fed_found0_mp_test.js",
+    "exit": 0,
+    "seconds": 4.17
+  },
+  {
+    "command": "node tests/beta_fed_found0_events_test.js",
+    "exit": 0,
+    "seconds": 4.19
+  },
+  {
+    "command": "node tests/beta_war_fix0_test.cjs",
+    "exit": 0,
+    "seconds": 4.1
+  },
+  {
+    "command": "node tests/beta_p01_embargo_test.js",
+    "exit": 0,
+    "seconds": 1.08
+  },
+  {
+    "command": "node tests/beta_p02_news_test.js",
+    "exit": 0,
+    "seconds": 1.36
+  },
+  {
+    "command": "node tests/faz93a1_production_panels_test.js",
+    "exit": 0,
+    "seconds": 5.22
+  },
+  {
+    "command": "node tests/faz91d_1_fleet_names_native_canvas_test.js",
+    "exit": 0,
+    "seconds": 1.71
+  },
+  {
+    "command": "node tests/beta_setup0_pirates_test.cjs",
+    "exit": 0,
+    "seconds": 1.8
+  },
+  {
+    "command": "node tests/beta_setup1_gates_test.cjs",
+    "exit": 0,
+    "seconds": 2.29
+  },
+  {
+    "command": "node tests/beta_ux0_names_test.cjs",
+    "exit": 0,
+    "seconds": 4.26
+  },
+  {
+    "command": "node tests/beta_scale0_colony_test.cjs",
+    "exit": 0,
+    "seconds": 2.79
+  }
+]

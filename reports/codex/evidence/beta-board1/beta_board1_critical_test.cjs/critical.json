@@ -1,0 +1,73 @@
+[
+  {
+    "name": "#10 istenen hızla aynı seçim bekleyen karar tutmasını temizleyebilir; gerçek aynı hız sessiz",
+    "status": "PASS"
+  },
+  {
+    "name": "#5 savaş bildirimi MP karar tutması oluşturmaz; gerçek kararlar korunur",
+    "status": "PASS"
+  },
+  {
+    "name": "#24 enerji stok0 ve negatif net üretim: gerçek aylık clamp; kendi MP aynası aynı",
+    "status": "PASS",
+    "data": {
+      "prior": {
+        "min": 400,
+        "ene": 0,
+        "yiy": 180,
+        "ala": 220,
+        "ara": 900,
+        "tuk": 150,
+        "etk": 10000
+      },
+      "net": {
+        "min": 7.95998616,
+        "ene": -8505.634127399608,
+        "yiy": 13.203588120000008,
+        "ala": -1917.4998527899622,
+        "ara": 32.749788329999994,
+        "etk": 8.092500000000001,
+        "tuk": 13.021243128000002
+      },
+      "after": {
+        "min": 407.95998615999997,
+        "ene": 0,
+        "yiy": 193.20358812,
+        "ala": 0,
+        "ara": 0,
+        "tuk": 163.021243128,
+        "etk": 10008.0925
+      },
+      "crisis": "enerji",
+      "mirror": {
+        "min": 407.95998615999997,
+        "ene": 0,
+        "yiy": 193.20358812,
+        "ala": 0,
+        "ara": 0,
+        "tuk": 163.021243128,
+        "etk": 10008.0925
+      },
+      "admin": 2.2
+    }
+  },
+  {
+    "name": "#25 düşmansız kendi sistemindeki büyük filo korunur; split/merge ve Save8 kayıp üretmez",
+    "status": "PASS",
+    "data": {
+      "ships": 500,
+      "owner": 1,
+      "power": 53280,
+      "knownEnemy": false
+    }
+  },
+  {
+    "name": "#25 meşru radyasyon kaybı korunur ve host ile ayna aynı; olay nedeni ayrı",
+    "status": "PASS",
+    "data": {
+      "cause": "radiation",
+      "legitimateLoss": true,
+      "originalUserCase": "NOT REPRODUCED"
+    }
+  }
+]

@@ -1,0 +1,21 @@
+PASS 800x360 24 renk gerçek seçim / yalnız kozmetik
+PASS 800x360 tersane 0/1/21 kuyruk üretim konumu / gerçek X ve tek iade
+PASS 800x360 ROTA hedefi / sahip etiketi OFF ikonlar korunur / RNG ve Save8 aynı
+PASS 800x360 enerji/alaşım açıklaması ve bilinen sınır komşusu diplomasi
+PASS 960x540 24 renk gerçek seçim / yalnız kozmetik
+PASS 960x540 tersane 0/1/21 kuyruk üretim konumu / gerçek X ve tek iade
+PASS 960x540 ROTA hedefi / sahip etiketi OFF ikonlar korunur / RNG ve Save8 aynı
+PASS 960x540 enerji/alaşım açıklaması ve bilinen sınır komşusu diplomasi
+PASS 915x412 24 renk gerçek seçim / yalnız kozmetik
+PASS 915x412 tersane 0/1/21 kuyruk üretim konumu / gerçek X ve tek iade
+PASS 915x412 ROTA hedefi / sahip etiketi OFF ikonlar korunur / RNG ve Save8 aynı
+PASS 915x412 enerji/alaşım açıklaması ve bilinen sınır komşusu diplomasi
+PASS 1920x1080 24 renk gerçek seçim / yalnız kozmetik
+FAIL 1920x1080 tersane 0/1/21 kuyruk üretim konumu / gerçek X ve tek iade
+AssertionError [ERR_ASSERTION]: long queue moved production control
+    at /workspace/Star/tests/browser-beta-board1-ui.cjs:7:714
+    at async test (/workspace/Star/tests/browser-beta-board1-ui.cjs:3:41)
+    at async /workspace/Star/tests/browser-beta-board1-ui.cjs:7:1
+PASS 1920x1080 ROTA hedefi / sahip etiketi OFF ikonlar korunur / RNG ve Save8 aynı
+PASS 1920x1080 enerji/alaşım açıklaması ve bilinen sınır komşusu diplomasi
+GEÇEN: 16 KALAN: 1

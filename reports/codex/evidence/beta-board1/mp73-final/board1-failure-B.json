@@ -1,0 +1,66 @@
+{
+  "feds": [],
+  "inbox": [
+    {
+      "kind": "aideal",
+      "data": {
+        "from": 6,
+        "to": 0,
+        "give": [
+          {
+            "t": "pact"
+          }
+        ],
+        "want": [
+          {
+            "t": "res",
+            "r": "min",
+            "v": 30
+          }
+        ],
+        "born": 30,
+        "expires": 570
+      },
+      "ico": "📜",
+      "cls": "sci",
+      "pause": false,
+      "uid": 108,
+      "born": 30,
+      "rec": 1,
+      "title": "Teklif — Kraveva Karargâhı",
+      "sub": "Çok oyunculu teklif · ◆ 30 Mineral istiyor",
+      "key": "mp71:2"
+    },
+    {
+      "kind": "aideal",
+      "data": {
+        "from": 7,
+        "to": 0,
+        "give": [
+          {
+            "t": "pact"
+          }
+        ],
+        "want": [
+          {
+            "t": "res",
+            "r": "min",
+            "v": 30
+          }
+        ],
+        "born": 60,
+        "expires": 600
+      },
+      "ico": "📜",
+      "cls": "sci",
+      "pause": false,
+      "uid": 139,
+      "born": 60,
+      "rec": 2,
+      "title": "Teklif — Kalori Meclisi",
+      "sub": "Çok oyunculu teklif · ◆ 30 Mineral istiyor",
+      "key": "mp71:4"
+    }
+  ],
+  "modal": ""
+}

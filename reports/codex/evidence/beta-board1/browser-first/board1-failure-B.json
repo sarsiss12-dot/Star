@@ -1,0 +1,66 @@
+{
+  "feds": [
+    {
+      "id": 1,
+      "name": "Ufuk Keşif Birliği",
+      "type": "bilimsel",
+      "charter": {
+        "defense": "vote",
+        "offense": "vote",
+        "admission": "allies",
+        "ballot": "equal"
+      },
+      "leader": 1,
+      "founder": 1,
+      "members": [
+        1,
+        0,
+        2
+      ],
+      "laws": {},
+      "fund": {
+        "ala": 0,
+        "ene": 0
+      },
+      "treasury": 0,
+      "founded": 11.31515999999995,
+      "typeSince": 11.31515999999995,
+      "dutySince": {
+        "defense": 0,
+        "offense": 0
+      },
+      "invites": {},
+      "decisions": {},
+      "dutyConsent": {},
+      "cohesion": 70,
+      "nextVote": 71.31515999999995,
+      "politicsVersion": 96,
+      "vote": null,
+      "lastVote": null,
+      "identityType": "bilimsel",
+      "emblem": {
+        "v": 1,
+        "shape": "ring",
+        "symbol": "orbit",
+        "pattern": "corners",
+        "primary": "#5cf5d6",
+        "secondary": "#16304d",
+        "federation": true
+      }
+    }
+  ],
+  "inbox": [
+    {
+      "kind": "fedfoundResult",
+      "data": 1,
+      "key": "fedfound-result:1:founded:accepted,accepted,accepted",
+      "ico": "🏛",
+      "pause": false,
+      "title": "FEDERASYON KURULDU — Ufuk Keşif Birliği",
+      "sub": "Bilimsel Federasyon · 3 kurucu · Eşit Temsil · Savunma yardımı oylamayla. Otomatik saldırı desteği yok; ayrı oylama/taahhüt gerekir. · Lider: Kızıl Muhafız",
+      "uid": 8,
+      "born": 11.31515999999995
+    }
+  ],
+  "modal": ""
+}

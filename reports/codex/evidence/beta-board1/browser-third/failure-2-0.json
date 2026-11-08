@@ -1,0 +1,33 @@
+{
+  "url": "/",
+  "vote": null,
+  "inbox": [
+    {
+      "kind": "event",
+      "data": {
+        "id": "e2",
+        "n": "Göçmen Filosu",
+        "t": "Yersiz yurtsuz bir mülteci filosu sınırlarında beliriyor. Sığınma istiyorlar.",
+        "ch": [
+          {
+            "t": "Kabul et",
+            "d": "+2 nüfus, −60 yiyecek"
+          },
+          {
+            "t": "Geri çevir",
+            "d": "+40 etki, diğer devletlerle ilişki −6"
+          }
+        ]
+      },
+      "ico": "❗",
+      "pause": true,
+      "title": "Göçmen Filosu",
+      "sub": "Yersiz yurtsuz bir mülteci filosu sınırlarında beliriyor. Sığınm…",
+      "key": "ev:e2",
+      "uid": 1,
+      "born": 30.004015999999936
+    }
+  ],
+  "modal": "",
+  "pane": ""
+}

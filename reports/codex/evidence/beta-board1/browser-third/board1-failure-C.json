@@ -1,0 +1,112 @@
+{
+  "feds": [
+    {
+      "id": 1,
+      "name": "Ekinoks Keşif Birliği",
+      "type": "bilimsel",
+      "charter": {
+        "defense": "vote",
+        "offense": "vote",
+        "admission": "allies",
+        "ballot": "equal"
+      },
+      "leader": 2,
+      "founder": 2,
+      "members": [
+        2,
+        1,
+        0
+      ],
+      "laws": {},
+      "fund": {
+        "ala": 0,
+        "ene": 0
+      },
+      "treasury": 0,
+      "founded": 11.05271999999998,
+      "typeSince": 11.05271999999998,
+      "dutySince": {
+        "defense": 0,
+        "offense": 0
+      },
+      "invites": {},
+      "decisions": {},
+      "dutyConsent": {},
+      "cohesion": 70,
+      "nextVote": 191.05271999999997,
+      "politicsVersion": 96,
+      "agenda": {
+        "v": 1,
+        "next": 2,
+        "items": [
+          {
+            "id": 1,
+            "by": 1,
+            "kind": "law",
+            "law": "arastirma",
+            "options": {
+              "repeal": false
+            },
+            "key": "[\"law\",\"arastirma\",false,\"\",null,null,null,null,null]",
+            "created": 11.05271999999998,
+            "expires": 371.05271999999997,
+            "status": "waiting"
+          }
+        ],
+        "history": []
+      },
+      "vote": {
+        "id": 1,
+        "kind": "basic",
+        "law": "savunma",
+        "repeal": false,
+        "opened": 11.05271999999998,
+        "expires": 101.05271999999998,
+        "proposer": 2,
+        "yes": [],
+        "no": [],
+        "eligible": [
+          2,
+          1,
+          0
+        ],
+        "ballotSnapshot": {
+          "mode": "equal",
+          "modern": true,
+          "source": "opened",
+          "weights": {
+            "0": 1,
+            "1": 1,
+            "2": 1
+          }
+        }
+      },
+      "lastVote": null,
+      "identityType": "bilimsel",
+      "emblem": {
+        "v": 1,
+        "shape": "ring",
+        "symbol": "orbit",
+        "pattern": "corners",
+        "primary": "#5cf5d6",
+        "secondary": "#f5c25c",
+        "federation": true
+      }
+    }
+  ],
+  "inbox": [
+    {
+      "kind": "cncvote",
+      "data": "ticaretStd",
+      "ico": "🌐",
+      "cls": "sci",
+      "pause": false,
+      "uid": 1,
+      "born": 11.05271999999998,
+      "title": "KONSEY OYLAMASI",
+      "sub": "Evrensel Ticaret Standardı",
+      "key": "mp73cnc:ticaretStd:"
+    }
+  ],
+  "modal": ""
+}

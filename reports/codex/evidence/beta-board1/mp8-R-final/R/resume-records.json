@@ -1,0 +1,1338 @@
+{
+  "before": {
+    "dip": {
+      "next": 6,
+      "offers": [
+        {
+          "id": 1,
+          "from": 0,
+          "to": 1,
+          "give": [
+            {
+              "t": "res",
+              "r": "min",
+              "v": 6
+            }
+          ],
+          "want": [
+            {
+              "t": "res",
+              "r": "ene",
+              "v": 5
+            }
+          ],
+          "born": 181.606616,
+          "expires": 721.606616,
+          "round": 1,
+          "prev": null,
+          "status": "accepted",
+          "why": "",
+          "by": "human",
+          "cost": 0,
+          "finished": 181.606616
+        },
+        {
+          "id": 2,
+          "from": 1,
+          "to": 0,
+          "give": [
+            {
+              "t": "res",
+              "r": "min",
+              "v": 6
+            }
+          ],
+          "want": [
+            {
+              "t": "res",
+              "r": "ene",
+              "v": 5
+            }
+          ],
+          "born": 181.606616,
+          "expires": 721.606616,
+          "round": 1,
+          "prev": null,
+          "status": "pending",
+          "why": "",
+          "by": "human",
+          "cost": 0
+        },
+        {
+          "id": 3,
+          "from": 2,
+          "to": 0,
+          "give": [
+            {
+              "t": "res",
+              "r": "min",
+              "v": 6
+            }
+          ],
+          "want": [
+            {
+              "t": "res",
+              "r": "ene",
+              "v": 5
+            }
+          ],
+          "born": 181.606616,
+          "expires": 721.606616,
+          "round": 1,
+          "prev": null,
+          "status": "pending",
+          "why": "",
+          "by": "human",
+          "cost": 0
+        },
+        {
+          "id": 4,
+          "from": 2,
+          "to": 4,
+          "give": [
+            {
+              "t": "res",
+              "r": "min",
+              "v": 20
+            }
+          ],
+          "want": [
+            {
+              "t": "res",
+              "r": "ene",
+              "v": 10
+            }
+          ],
+          "born": 181.606616,
+          "expires": 721.606616,
+          "round": 1,
+          "prev": null,
+          "status": "accepted",
+          "why": "Kabul edildi",
+          "by": "human",
+          "cost": 0,
+          "finished": 181.606616
+        },
+        {
+          "id": 5,
+          "from": 2,
+          "to": 1,
+          "give": [
+            {
+              "t": "res",
+              "r": "min",
+              "v": 7
+            }
+          ],
+          "want": [
+            {
+              "t": "res",
+              "r": "ene",
+              "v": 3
+            }
+          ],
+          "born": 181.606616,
+          "expires": 721.606616,
+          "round": 1,
+          "prev": null,
+          "status": "pending",
+          "why": "",
+          "by": "human",
+          "cost": 0
+        }
+      ]
+    },
+    "feds": [
+      {
+        "id": 2,
+        "name": "Zenit Keşif Birliği",
+        "type": "bilimsel",
+        "charter": {
+          "defense": "vote",
+          "offense": "vote",
+          "admission": "allies",
+          "ballot": "equal"
+        },
+        "politicsVersion": 96,
+        "leader": 0,
+        "founder": 0,
+        "members": [
+          0,
+          1,
+          2
+        ],
+        "laws": {},
+        "treasury": 0,
+        "fund": {
+          "ala": 0,
+          "ene": 0
+        },
+        "nextVote": 361.60661600000003,
+        "vote": {
+          "id": 1,
+          "law": "savunma",
+          "kind": "basic",
+          "repeal": false,
+          "proposer": 0,
+          "opened": 181.606616,
+          "expires": 271.60661600000003,
+          "eligible": [
+            0,
+            1,
+            2
+          ],
+          "yes": [],
+          "no": [],
+          "ballotSnapshot": {
+            "mode": "equal",
+            "weights": {
+              "0": 1,
+              "1": 1,
+              "2": 1
+            },
+            "modern": true,
+            "source": "opened"
+          },
+          "reasons": {},
+          "assessments": {}
+        },
+        "founded": 181.606616,
+        "typeSince": 181.606616,
+        "dutySince": {
+          "defense": 181.606616,
+          "offense": 181.606616
+        },
+        "defenseFrontCutoff": 2,
+        "dutyConsent": {
+          "0": {
+            "offense": false,
+            "since": 181.606616
+          },
+          "1": {
+            "offense": false,
+            "since": 181.606616
+          },
+          "2": {
+            "offense": false,
+            "since": 181.606616
+          }
+        },
+        "invites": {},
+        "decisions": {},
+        "cohesion": 70,
+        "identityType": "bilimsel",
+        "emblem": {
+          "v": 1,
+          "shape": "shield",
+          "symbol": "orbit",
+          "pattern": "split",
+          "primary": "#5cf5d6",
+          "secondary": "#202537",
+          "federation": true
+        },
+        "history": [
+          {
+            "day": 181.606616,
+            "year": 2210,
+            "month": 7,
+            "event": "founded",
+            "type": "bilimsel",
+            "ballot": "equal"
+          }
+        ],
+        "voteSeq": 1,
+        "agenda": {
+          "v": 1,
+          "next": 3,
+          "items": [
+            {
+              "id": 1,
+              "by": 1,
+              "kind": "law",
+              "law": "arastirma",
+              "options": {
+                "repeal": false
+              },
+              "key": "[\"law\",\"arastirma\",false,\"\",null,null,null,null,null]",
+              "created": 181.606616,
+              "expires": 541.606616,
+              "status": "waiting"
+            },
+            {
+              "id": 2,
+              "by": 2,
+              "kind": "motion",
+              "law": "motion",
+              "options": {
+                "kind": "joinWar",
+                "target": 3,
+                "sponsor": 2
+              },
+              "key": "[\"motion\",\"motion\",false,\"joinWar\",3,2,null,null,null]",
+              "created": 181.606616,
+              "expires": 541.606616,
+              "status": "waiting"
+            }
+          ],
+          "history": []
+        }
+      }
+    ],
+    "warLedger": {
+      "v": 1,
+      "next": 3,
+      "fronts": [
+        {
+          "id": 1,
+          "campaign": 1,
+          "parent": null,
+          "reason": "declaration",
+          "sides": [
+            3,
+            0
+          ],
+          "roles": [
+            0,
+            1
+          ],
+          "opened": 181.606616,
+          "legacy": false,
+          "ended": null,
+          "endReason": null,
+          "entryKind": "declaration",
+          "sponsor": null,
+          "membership": [
+            {
+              "id": 3,
+              "day": 181.606616,
+              "fed": null,
+              "lord": null
+            },
+            {
+              "id": 0,
+              "day": 181.606616,
+              "fed": 1,
+              "lord": null
+            },
+            {
+              "id": 0,
+              "day": 181.606616,
+              "fed": 2,
+              "lord": null
+            }
+          ],
+          "goals": [],
+          "metrics": [
+            {
+              "rounds": 0,
+              "shipsLost": 0,
+              "shipsDestroyed": 0,
+              "damageDealt": 0,
+              "damageTaken": 0,
+              "groundLost": 0,
+              "groundDestroyed": 0,
+              "garrisonLost": 0,
+              "garrisonReduced": 0,
+              "systems": [],
+              "planets": []
+            },
+            {
+              "rounds": 0,
+              "shipsLost": 0,
+              "shipsDestroyed": 0,
+              "damageDealt": 0,
+              "damageTaken": 0,
+              "groundLost": 0,
+              "groundDestroyed": 0,
+              "garrisonLost": 0,
+              "garrisonReduced": 0,
+              "systems": [],
+              "planets": []
+            }
+          ],
+          "occupation": [],
+          "playerNotified": true
+        },
+        {
+          "id": 2,
+          "campaign": 2,
+          "parent": null,
+          "reason": "observed",
+          "sides": [
+            2,
+            3
+          ],
+          "roles": [
+            0,
+            1
+          ],
+          "opened": 181.606616,
+          "legacy": true,
+          "ended": null,
+          "endReason": null,
+          "entryKind": "event",
+          "sponsor": null,
+          "membership": [
+            {
+              "id": 2,
+              "day": 181.606616,
+              "fed": 2,
+              "lord": null
+            },
+            {
+              "id": 3,
+              "day": 181.606616,
+              "fed": null,
+              "lord": null
+            }
+          ],
+          "goals": [],
+          "metrics": [
+            {
+              "rounds": 0,
+              "shipsLost": 0,
+              "shipsDestroyed": 0,
+              "damageDealt": 0,
+              "damageTaken": 0,
+              "groundLost": 0,
+              "groundDestroyed": 0,
+              "garrisonLost": 0,
+              "garrisonReduced": 0,
+              "systems": [],
+              "planets": []
+            },
+            {
+              "rounds": 0,
+              "shipsLost": 0,
+              "shipsDestroyed": 0,
+              "damageDealt": 0,
+              "damageTaken": 0,
+              "groundLost": 0,
+              "groundDestroyed": 0,
+              "garrisonLost": 0,
+              "garrisonReduced": 0,
+              "systems": [],
+              "planets": []
+            }
+          ],
+          "occupation": []
+        }
+      ]
+    },
+    "relations": [
+      {
+        "id": 0,
+        "war": {
+          "1": false,
+          "2": false,
+          "3": true,
+          "4": false,
+          "5": false,
+          "6": false,
+          "7": false,
+          "8": false
+        },
+        "ally": {
+          "1": true,
+          "2": true,
+          "3": false,
+          "4": false,
+          "5": false,
+          "6": false,
+          "7": false,
+          "8": false
+        },
+        "overlord": null
+      },
+      {
+        "id": 1,
+        "war": {
+          "0": false,
+          "2": false,
+          "3": false,
+          "4": false,
+          "5": false,
+          "6": false,
+          "7": false,
+          "8": false
+        },
+        "ally": {
+          "0": true,
+          "2": true,
+          "3": false,
+          "4": false,
+          "5": false,
+          "6": false,
+          "7": false,
+          "8": false
+        },
+        "overlord": null
+      },
+      {
+        "id": 2,
+        "war": {
+          "0": false,
+          "1": false,
+          "3": true,
+          "4": false,
+          "5": false,
+          "6": false,
+          "7": false,
+          "8": false
+        },
+        "ally": {
+          "0": true,
+          "1": true,
+          "3": false,
+          "4": false,
+          "5": false,
+          "6": false,
+          "7": false,
+          "8": false
+        },
+        "overlord": null
+      },
+      {
+        "id": 3,
+        "war": {
+          "0": true,
+          "1": false,
+          "2": true,
+          "4": false,
+          "5": false,
+          "6": false,
+          "7": false,
+          "8": false
+        },
+        "ally": {
+          "0": false,
+          "1": false,
+          "2": false,
+          "4": false,
+          "5": false,
+          "6": false,
+          "7": false,
+          "8": false
+        }
+      },
+      {
+        "id": 4,
+        "war": {
+          "0": false,
+          "1": false,
+          "2": false,
+          "3": false,
+          "5": false,
+          "6": false,
+          "7": false,
+          "8": false
+        },
+        "ally": {
+          "0": false,
+          "1": false,
+          "2": false,
+          "3": false,
+          "5": false,
+          "6": false,
+          "7": false,
+          "8": false
+        },
+        "nap": {
+          "5": 3720.106616
+        },
+        "overlord": 0,
+        "vassalType": "haracguzar",
+        "vassalContract": {
+          "v": 1,
+          "lord": 0,
+          "sub": 4,
+          "type": "haracguzar",
+          "terms": {
+            "tax": {
+              "ene": 0.2,
+              "min": 0.2,
+              "ala": 0.2,
+              "yiy": 0,
+              "tuk": 0
+            },
+            "science": 0,
+            "defense": true,
+            "war": "none",
+            "autonomy": "free",
+            "duration": 0,
+            "renegotiate": 24,
+            "sensors": false
+          },
+          "started": 181.606616,
+          "expires": null,
+          "status": "active",
+          "source": "forced",
+          "revision": 1
+        }
+      },
+      {
+        "id": 5,
+        "war": {
+          "0": false,
+          "1": false,
+          "2": false,
+          "3": false,
+          "4": false,
+          "6": false,
+          "7": false,
+          "8": false
+        },
+        "ally": {
+          "0": false,
+          "1": false,
+          "2": false,
+          "3": false,
+          "4": false,
+          "6": false,
+          "7": false,
+          "8": false
+        },
+        "nap": {
+          "4": 3720.106616
+        }
+      },
+      {
+        "id": 6,
+        "war": {
+          "0": false,
+          "1": false,
+          "2": false,
+          "3": false,
+          "4": false,
+          "5": false,
+          "7": false,
+          "8": false
+        },
+        "ally": {
+          "0": false,
+          "1": false,
+          "2": false,
+          "3": false,
+          "4": false,
+          "5": false,
+          "7": false,
+          "8": false
+        }
+      },
+      {
+        "id": 7,
+        "war": {
+          "0": false,
+          "1": false,
+          "2": false,
+          "3": false,
+          "4": false,
+          "5": false,
+          "6": false,
+          "8": false
+        },
+        "ally": {
+          "0": false,
+          "1": false,
+          "2": false,
+          "3": false,
+          "4": false,
+          "5": false,
+          "6": false,
+          "8": false
+        }
+      },
+      {
+        "id": 8,
+        "war": {
+          "0": false,
+          "1": false,
+          "2": false,
+          "3": false,
+          "4": false,
+          "5": false,
+          "6": false,
+          "7": false
+        },
+        "ally": {
+          "0": false,
+          "1": false,
+          "2": false,
+          "3": false,
+          "4": false,
+          "5": false,
+          "6": false,
+          "7": false
+        }
+      }
+    ]
+  },
+  "after": {
+    "dip": {
+      "next": 6,
+      "offers": [
+        {
+          "id": 1,
+          "from": 0,
+          "to": 1,
+          "give": [
+            {
+              "t": "res",
+              "r": "min",
+              "v": 6
+            }
+          ],
+          "want": [
+            {
+              "t": "res",
+              "r": "ene",
+              "v": 5
+            }
+          ],
+          "born": 181.606616,
+          "expires": 721.606616,
+          "round": 1,
+          "prev": null,
+          "status": "accepted",
+          "why": "",
+          "by": "human",
+          "cost": 0,
+          "finished": 181.606616
+        },
+        {
+          "id": 2,
+          "from": 1,
+          "to": 0,
+          "give": [
+            {
+              "t": "res",
+              "r": "min",
+              "v": 6
+            }
+          ],
+          "want": [
+            {
+              "t": "res",
+              "r": "ene",
+              "v": 5
+            }
+          ],
+          "born": 181.606616,
+          "expires": 721.606616,
+          "round": 1,
+          "prev": null,
+          "status": "pending",
+          "why": "",
+          "by": "human",
+          "cost": 0
+        },
+        {
+          "id": 3,
+          "from": 2,
+          "to": 0,
+          "give": [
+            {
+              "t": "res",
+              "r": "min",
+              "v": 6
+            }
+          ],
+          "want": [
+            {
+              "t": "res",
+              "r": "ene",
+              "v": 5
+            }
+          ],
+          "born": 181.606616,
+          "expires": 721.606616,
+          "round": 1,
+          "prev": null,
+          "status": "pending",
+          "why": "",
+          "by": "human",
+          "cost": 0
+        },
+        {
+          "id": 4,
+          "from": 2,
+          "to": 4,
+          "give": [
+            {
+              "t": "res",
+              "r": "min",
+              "v": 20
+            }
+          ],
+          "want": [
+            {
+              "t": "res",
+              "r": "ene",
+              "v": 10
+            }
+          ],
+          "born": 181.606616,
+          "expires": 721.606616,
+          "round": 1,
+          "prev": null,
+          "status": "accepted",
+          "why": "Kabul edildi",
+          "by": "human",
+          "cost": 0,
+          "finished": 181.606616
+        },
+        {
+          "id": 5,
+          "from": 2,
+          "to": 1,
+          "give": [
+            {
+              "t": "res",
+              "r": "min",
+              "v": 7
+            }
+          ],
+          "want": [
+            {
+              "t": "res",
+              "r": "ene",
+              "v": 3
+            }
+          ],
+          "born": 181.606616,
+          "expires": 721.606616,
+          "round": 1,
+          "prev": null,
+          "status": "pending",
+          "why": "",
+          "by": "human",
+          "cost": 0
+        }
+      ]
+    },
+    "feds": [
+      {
+        "id": 2,
+        "name": "Zenit Keşif Birliği",
+        "type": "bilimsel",
+        "charter": {
+          "defense": "vote",
+          "offense": "vote",
+          "admission": "allies",
+          "ballot": "equal"
+        },
+        "politicsVersion": 96,
+        "leader": 0,
+        "founder": 0,
+        "members": [
+          0,
+          1,
+          2
+        ],
+        "laws": {},
+        "treasury": 0,
+        "fund": {
+          "ala": 0,
+          "ene": 0
+        },
+        "nextVote": 361.60661600000003,
+        "vote": {
+          "id": 1,
+          "law": "savunma",
+          "kind": "basic",
+          "repeal": false,
+          "proposer": 0,
+          "opened": 181.606616,
+          "expires": 271.60661600000003,
+          "eligible": [
+            0,
+            1,
+            2
+          ],
+          "yes": [],
+          "no": [],
+          "ballotSnapshot": {
+            "mode": "equal",
+            "weights": {
+              "0": 1,
+              "1": 1,
+              "2": 1
+            },
+            "modern": true,
+            "source": "opened"
+          },
+          "reasons": {},
+          "assessments": {}
+        },
+        "founded": 181.606616,
+        "typeSince": 181.606616,
+        "dutySince": {
+          "defense": 181.606616,
+          "offense": 181.606616
+        },
+        "defenseFrontCutoff": 2,
+        "dutyConsent": {
+          "0": {
+            "offense": false,
+            "since": 181.606616
+          },
+          "1": {
+            "offense": false,
+            "since": 181.606616
+          },
+          "2": {
+            "offense": false,
+            "since": 181.606616
+          }
+        },
+        "invites": {},
+        "decisions": {},
+        "cohesion": 70,
+        "identityType": "bilimsel",
+        "emblem": {
+          "v": 1,
+          "shape": "shield",
+          "symbol": "orbit",
+          "pattern": "split",
+          "primary": "#5cf5d6",
+          "secondary": "#202537",
+          "federation": true
+        },
+        "history": [
+          {
+            "day": 181.606616,
+            "year": 2210,
+            "month": 7,
+            "event": "founded",
+            "type": "bilimsel",
+            "ballot": "equal"
+          }
+        ],
+        "voteSeq": 1,
+        "agenda": {
+          "v": 1,
+          "next": 3,
+          "items": [
+            {
+              "id": 1,
+              "by": 1,
+              "kind": "law",
+              "law": "arastirma",
+              "options": {
+                "repeal": false
+              },
+              "key": "[\"law\",\"arastirma\",false,\"\",null,null,null,null,null]",
+              "created": 181.606616,
+              "expires": 541.606616,
+              "status": "waiting"
+            },
+            {
+              "id": 2,
+              "by": 2,
+              "kind": "motion",
+              "law": "motion",
+              "options": {
+                "target": 3,
+                "sponsor": 2,
+                "kind": "joinWar"
+              },
+              "key": "[\"motion\",\"motion\",false,\"joinWar\",3,2,null,null,null]",
+              "created": 181.606616,
+              "expires": 541.606616,
+              "status": "waiting"
+            }
+          ],
+          "history": []
+        }
+      }
+    ],
+    "warLedger": {
+      "v": 1,
+      "next": 3,
+      "fronts": [
+        {
+          "id": 1,
+          "campaign": 1,
+          "parent": null,
+          "reason": "declaration",
+          "sides": [
+            3,
+            0
+          ],
+          "roles": [
+            0,
+            1
+          ],
+          "opened": 181.606616,
+          "legacy": false,
+          "ended": null,
+          "endReason": null,
+          "entryKind": "declaration",
+          "sponsor": null,
+          "membership": [
+            {
+              "id": 3,
+              "day": 181.606616,
+              "fed": null,
+              "lord": null
+            },
+            {
+              "id": 0,
+              "day": 181.606616,
+              "fed": 1,
+              "lord": null
+            },
+            {
+              "id": 0,
+              "day": 181.606616,
+              "fed": 2,
+              "lord": null
+            }
+          ],
+          "goals": [],
+          "metrics": [
+            {
+              "rounds": 0,
+              "shipsLost": 0,
+              "shipsDestroyed": 0,
+              "damageDealt": 0,
+              "damageTaken": 0,
+              "groundLost": 0,
+              "groundDestroyed": 0,
+              "garrisonLost": 0,
+              "garrisonReduced": 0,
+              "systems": [],
+              "planets": []
+            },
+            {
+              "rounds": 0,
+              "shipsLost": 0,
+              "shipsDestroyed": 0,
+              "damageDealt": 0,
+              "damageTaken": 0,
+              "groundLost": 0,
+              "groundDestroyed": 0,
+              "garrisonLost": 0,
+              "garrisonReduced": 0,
+              "systems": [],
+              "planets": []
+            }
+          ],
+          "occupation": [],
+          "playerNotified": true
+        },
+        {
+          "id": 2,
+          "campaign": 2,
+          "parent": null,
+          "reason": "observed",
+          "sides": [
+            2,
+            3
+          ],
+          "roles": [
+            0,
+            1
+          ],
+          "opened": 181.606616,
+          "legacy": true,
+          "ended": null,
+          "endReason": null,
+          "entryKind": "event",
+          "sponsor": null,
+          "membership": [
+            {
+              "id": 2,
+              "day": 181.606616,
+              "fed": 2,
+              "lord": null
+            },
+            {
+              "id": 3,
+              "day": 181.606616,
+              "fed": null,
+              "lord": null
+            }
+          ],
+          "goals": [],
+          "metrics": [
+            {
+              "rounds": 0,
+              "shipsLost": 0,
+              "shipsDestroyed": 0,
+              "damageDealt": 0,
+              "damageTaken": 0,
+              "groundLost": 0,
+              "groundDestroyed": 0,
+              "garrisonLost": 0,
+              "garrisonReduced": 0,
+              "systems": [],
+              "planets": []
+            },
+            {
+              "rounds": 0,
+              "shipsLost": 0,
+              "shipsDestroyed": 0,
+              "damageDealt": 0,
+              "damageTaken": 0,
+              "groundLost": 0,
+              "groundDestroyed": 0,
+              "garrisonLost": 0,
+              "garrisonReduced": 0,
+              "systems": [],
+              "planets": []
+            }
+          ],
+          "occupation": []
+        }
+      ]
+    },
+    "relations": [
+      {
+        "id": 0,
+        "war": {
+          "1": false,
+          "2": false,
+          "3": true,
+          "4": false,
+          "5": false,
+          "6": false,
+          "7": false,
+          "8": false
+        },
+        "ally": {
+          "1": true,
+          "2": true,
+          "3": false,
+          "4": false,
+          "5": false,
+          "6": false,
+          "7": false,
+          "8": false
+        },
+        "overlord": null
+      },
+      {
+        "id": 1,
+        "war": {
+          "0": false,
+          "2": false,
+          "3": false,
+          "4": false,
+          "5": false,
+          "6": false,
+          "7": false,
+          "8": false
+        },
+        "ally": {
+          "0": true,
+          "2": true,
+          "3": false,
+          "4": false,
+          "5": false,
+          "6": false,
+          "7": false,
+          "8": false
+        },
+        "overlord": null
+      },
+      {
+        "id": 2,
+        "war": {
+          "0": false,
+          "1": false,
+          "3": true,
+          "4": false,
+          "5": false,
+          "6": false,
+          "7": false,
+          "8": false
+        },
+        "ally": {
+          "0": true,
+          "1": true,
+          "3": false,
+          "4": false,
+          "5": false,
+          "6": false,
+          "7": false,
+          "8": false
+        },
+        "overlord": null
+      },
+      {
+        "id": 3,
+        "war": {
+          "0": true,
+          "1": false,
+          "2": true,
+          "4": false,
+          "5": false,
+          "6": false,
+          "7": false,
+          "8": false
+        },
+        "ally": {
+          "0": false,
+          "1": false,
+          "2": false,
+          "4": false,
+          "5": false,
+          "6": false,
+          "7": false,
+          "8": false
+        }
+      },
+      {
+        "id": 4,
+        "war": {
+          "0": false,
+          "1": false,
+          "2": false,
+          "3": false,
+          "5": false,
+          "6": false,
+          "7": false,
+          "8": false
+        },
+        "ally": {
+          "0": false,
+          "1": false,
+          "2": false,
+          "3": false,
+          "5": false,
+          "6": false,
+          "7": false,
+          "8": false
+        },
+        "nap": {
+          "5": 3720.106616
+        },
+        "overlord": 0,
+        "vassalType": "haracguzar",
+        "vassalContract": {
+          "v": 1,
+          "lord": 0,
+          "sub": 4,
+          "type": "haracguzar",
+          "terms": {
+            "tax": {
+              "ene": 0.2,
+              "min": 0.2,
+              "ala": 0.2,
+              "yiy": 0,
+              "tuk": 0
+            },
+            "science": 0,
+            "defense": true,
+            "war": "none",
+            "autonomy": "free",
+            "duration": 0,
+            "renegotiate": 24,
+            "sensors": false
+          },
+          "started": 181.606616,
+          "expires": null,
+          "status": "active",
+          "source": "forced",
+          "revision": 1
+        }
+      },
+      {
+        "id": 5,
+        "war": {
+          "0": false,
+          "1": false,
+          "2": false,
+          "3": false,
+          "4": false,
+          "6": false,
+          "7": false,
+          "8": false
+        },
+        "ally": {
+          "0": false,
+          "1": false,
+          "2": false,
+          "3": false,
+          "4": false,
+          "6": false,
+          "7": false,
+          "8": false
+        },
+        "nap": {
+          "4": 3720.106616
+        }
+      },
+      {
+        "id": 6,
+        "war": {
+          "0": false,
+          "1": false,
+          "2": false,
+          "3": false,
+          "4": false,
+          "5": false,
+          "7": false,
+          "8": false
+        },
+        "ally": {
+          "0": false,
+          "1": false,
+          "2": false,
+          "3": false,
+          "4": false,
+          "5": false,
+          "7": false,
+          "8": false
+        }
+      },
+      {
+        "id": 7,
+        "war": {
+          "0": false,
+          "1": false,
+          "2": false,
+          "3": false,
+          "4": false,
+          "5": false,
+          "6": false,
+          "8": false
+        },
+        "ally": {
+          "0": false,
+          "1": false,
+          "2": false,
+          "3": false,
+          "4": false,
+          "5": false,
+          "6": false,
+          "8": false
+        }
+      },
+      {
+        "id": 8,
+        "war": {
+          "0": false,
+          "1": false,
+          "2": false,
+          "3": false,
+          "4": false,
+          "5": false,
+          "6": false,
+          "7": false
+        },
+        "ally": {
+          "0": false,
+          "1": false,
+          "2": false,
+          "3": false,
+          "4": false,
+          "5": false,
+          "6": false,
+          "7": false
+        }
+      }
+    ]
+  }
+}

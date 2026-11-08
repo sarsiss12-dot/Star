@@ -1,0 +1,23 @@
+✓ politika: 3× → karar penceresi 1× → misafir duraklatır → pencere kapanır, oyun DURAKLI kalır → duraklatma kaldırılınca seçilen hız
+✓ politika: karar bitince önceki geçerli hız döner; otomatik duraklatma açıksa 0; aynı pencere iki kez açılınca birikmez
+✓ politika: birden çok neden — bir pencerenin kapanması başkasının nedenini silmez; arka plan/ağ birbirinden bağımsız
+✓ politika: açık hız komutu bekleyen kararları "görüldü" sayar, ekrandaki karar penceresi kapanana dek tutar; küçültülen karar yeniden bekler
+✓ mp-core + politika: 3× → host karar penceresi 1× (misafire "decision", ad yok) → misafir duraklatır → pencere kapanır, herkes duraklı → misafir 3× seçer
+✗ mp-core + politika: tutulan seçim — "same" ortak hıza göre; iletide want/hold; artan n; kayıt paketine ortak hız; dönen oyuncu bildirimsiz güncel durum — AssertionError [ERR_ASSERTION]: shared speed already 3× (only held) → same, no notice
++ actual - expected
+
++ null
+- 'rules:same'
+
+    at /workspace/Star/tests/mp63_pause_test.js:87:10
+    at test (/workspace/Star/tests/helpers/95e-fixture.js:13:60)
+    at Object.<anonymous> (/workspace/Star/tests/mp63_pause_test.js:85:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+✓ politika yoksa (opts.speedInfo verilmez) MP.6.1 davranışı aynen: same G.speed'e göre, iletide want/hold yok
+GEÇEN: 6 KALAN: 1

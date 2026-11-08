@@ -1,0 +1,156 @@
+{
+  "url": "/mp/play",
+  "vote": null,
+  "inbox": [
+    {
+      "kind": "anomaly",
+      "data": {
+        "a": {
+          "id": "a1",
+          "k": "megayapi",
+          "n": "Terk Edilmiş İstasyon",
+          "t": "Yörüngede sürüklenen kadim bir liman. Işıkları hâlâ yanıyor ama içeride kimse yok.",
+          "ch": [
+            {
+              "t": "Sistemleri tara",
+              "d": "+180 araştırma"
+            },
+            {
+              "t": "Gövdeyi sök",
+              "d": "+220 mineral, +60 alaşım"
+            }
+          ]
+        },
+        "sys": {
+          "id": 10,
+          "x": 3869.9811292467766,
+          "y": 3684.3155671204877,
+          "name": "Yelakar-42",
+          "star": {
+            "n": "M Kırmızı Cüce",
+            "c": "#ff7b5c",
+            "r": 4.5,
+            "w": 30
+          },
+          "planets": [
+            {
+              "i": 0,
+              "t": "vol",
+              "dep": null,
+              "sz": 17,
+              "seed": 1313,
+              "name": "Yelakar-42 I",
+              "owner": -1
+            }
+          ],
+          "lanes": [
+            14,
+            18,
+            35
+          ],
+          "owner": -1,
+          "surv": [
+            0
+          ],
+          "seen": [
+            0
+          ],
+          "queue": [],
+          "anom": false,
+          "anomK": "megayapi",
+          "def": 0,
+          "pulsar": false,
+          "nebulaS": false,
+          "_reach": 0,
+          "_shat": false
+        }
+      },
+      "decisionId": 1,
+      "uid": 1,
+      "key": "personal:1",
+      "born": 20.238415999999972,
+      "pause": false,
+      "ico": "🔬",
+      "cls": "sci",
+      "title": "Terk Edilmiş İstasyon",
+      "sub": "Yörüngede sürüklenen kadim bir liman. Işıkları hâlâ yanıyor ama içeride kimse yok.",
+      "hidden": false
+    },
+    {
+      "kind": "anomaly",
+      "data": {
+        "a": {
+          "id": "a2",
+          "k": "dogal",
+          "n": "Kristal Mezarlık",
+          "t": "Buzun altında, düzenli sıralar hâlinde dizilmiş devasa kristal sütunlar.",
+          "ch": [
+            {
+              "t": "Örnek al",
+              "d": "+150 araştırma"
+            },
+            {
+              "t": "Madencilik başlat",
+              "d": "+300 mineral"
+            }
+          ]
+        },
+        "sys": {
+          "id": 18,
+          "x": 4267.1721090421215,
+          "y": 3429.6060550145257,
+          "name": "Orrgath",
+          "star": {
+            "n": "M Kırmızı Cüce",
+            "c": "#ff7b5c",
+            "r": 4.5,
+            "w": 30
+          },
+          "planets": [
+            {
+              "i": 0,
+              "t": "vol",
+              "dep": null,
+              "sz": 13,
+              "seed": 2361,
+              "name": "Orrgath I",
+              "owner": -1
+            }
+          ],
+          "lanes": [
+            10,
+            26,
+            14
+          ],
+          "owner": -1,
+          "surv": [
+            0
+          ],
+          "seen": [
+            0
+          ],
+          "queue": [],
+          "anom": false,
+          "anomK": "dogal",
+          "def": 0,
+          "pulsar": false,
+          "nebulaS": false,
+          "_reach": 0,
+          "_shat": false
+        }
+      },
+      "decisionId": 2,
+      "uid": 22,
+      "key": "personal:2",
+      "born": 41.1931360000002,
+      "pause": false,
+      "ico": "🔬",
+      "cls": "sci",
+      "title": "Kristal Mezarlık",
+      "sub": "Buzun altında, düzenli sıralar hâlinde dizilmiş devasa kristal sütunlar.",
+      "hidden": false
+    }
+  ],
+  "modal": "",
+  "pane": ""
+}

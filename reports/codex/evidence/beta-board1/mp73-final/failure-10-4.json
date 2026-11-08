@@ -1,0 +1,38 @@
+{
+  "url": "/mp/play",
+  "vote": null,
+  "inbox": [
+    {
+      "kind": "aideal",
+      "data": {
+        "from": 5,
+        "to": 0,
+        "give": [
+          {
+            "t": "pact"
+          }
+        ],
+        "want": [
+          {
+            "t": "res",
+            "r": "min",
+            "v": 30
+          }
+        ],
+        "born": 60,
+        "expires": 600
+      },
+      "ico": "📜",
+      "cls": "sci",
+      "pause": false,
+      "uid": 112,
+      "born": 60,
+      "rec": 2,
+      "title": "Teklif — Navres Dayanışması",
+      "sub": "Çok oyunculu teklif · ◆ 30 Mineral istiyor",
+      "key": "mp71:3"
+    }
+  ],
+  "modal": "",
+  "pane": "<div class=\"dpBox dcBox fedBox\">\n      <div class=\"dpHd\"><span>🏛 FEDERASYON</span>\n        <button class=\"riX\" data-a=\"closeFed\">✕</button></div>\n      \n      <div class=\"dpBody dcBody \" data-fed-tab=\"military\"><div class=\"ph\">FEDERASYON KURULUŞU</div><div class=\"mini\">İki açık rızalı insan yeterlidir. Tek insanlı oyunda en az iki AI ortak gerekir. Yalnız seçtiğin ortaklar davet edilir; ücret son onayda bir kez kesilir.</div><div class=\"ph\">TÜR</div><button class=\"abtn pri\" data-a=\"fedFoundType\" data-x=\"askeri\">🛡 Askerî Federasyon</button><button class=\"abtn \" data-a=\"fedFoundType\" data-x=\"bilimsel\">🔬 Bilimsel Federasyon</button><button class=\"abtn \" data-a=\"fedFoundType\" data-x=\"ticaret\">🤝 Ticaret Federasyonu</button><div class=\"ph\">OY REJİMİ</div><button class=\"abtn pri\" data-a=\"fedBallot\" data-x=\"equal\">Eşit Temsil</button><button class=\"abtn \" data-a=\"fedBallot\" data-x=\"hegemonic\">Hegemonik</button><button class=\"abtn \" data-a=\"fedBallot\" data-x=\"economic\">Ekonomik Temsil</button><button class=\"abtn \" data-a=\"fedBallot\" data-x=\"mixed\">Karma Konsey</button><p class=\"mini\">+12 filo kapasitesi; bakım +4 yüzde puan. Varsayılan ortak savunma; saldırı için ayrı karar. Her üye 1 oy. Küçük devletleri korur; büyük katkıya ek oy vermez. Yeni saldırılara ortak savunma yükümlülüğü. Otomatik saldırı desteği yok; ayrı oylama/taahhüt gerekir. Kuruluşta seçilen üyeler birbirleriyle ittifak kurar. Şart değişikliği eski daveti değiştirmez; iptal edip yeni şartları gönder.</p><div class=\"ph\">KURUCU ORTAKLAR · 0 SEÇİLİ</div><div class=\"box\"><button class=\"abtn \" data-a=\"fedFoundSelect\" data-x=\"2\" aria-pressed=\"false\" disabled=\"\">☐ Kızıl Muhafız</button><div class=\"mini\">İnsan — açık yanıt gerekli · İlişki 80 · Başka federasyonun üyesi · Karşılıklı ittifak gerekli</div></div><div class=\"box\"><button class=\"abtn \" data-a=\"fedFoundSelect\" data-x=\"1\" aria-pressed=\"false\" disabled=\"\">☐ Saf Akıl Ağı</button><div class=\"mini\">İnsan — açık yanıt gerekli · İlişki 80 · Başka federasyonun üyesi · Karşılıklı ittifak gerekli</div></div><div class=\"box\"><button class=\"abtn \" data-a=\"fedFoundSelect\" data-x=\"3\" aria-pressed=\"false\" disabled=\"\">☐ Qiroel Loncası</button><div class=\"mini\">AI — stratejik karar davette verilir · İlişki 80 · Karşılıklı ittifak gerekli</div></div><div class=\"box\"><button class=\"abtn \" data-a=\"fedFoundSelect\" data-x=\"4\" aria-pressed=\"false\" disabled=\"\">☐ Sovvas Sığınağı</button><div class=\"mini\">AI — stratejik karar davette verilir · İlişki 80 · Bağımsız, yaşayan ve uygun ortak gerekli</div></div><div class=\"box\"><button class=\"abtn \" data-a=\"fedFoundSelect\" data-x=\"5\" aria-pressed=\"false\" disabled=\"\">☐ Navres Dayanışması</button><div class=\"mini\">AI — stratejik karar davette verilir · İlişki 80 · Karşılıklı ittifak gerekli</div></div><div class=\"box\"><button class=\"abtn \" data-a=\"fedFoundSelect\" data-x=\"6\" aria-pressed=\"false\" disabled=\"\">☐ Kraveva Karargâhı</button><div class=\"mini\">AI — stratejik karar davette verilir · İlişki 80 · Karşılıklı ittifak gerekli</div></div><div class=\"box\"><button class=\"abtn \" data-a=\"fedFoundSelect\" data-x=\"7\" aria-pressed=\"false\" disabled=\"\">☐ Kalori Meclisi</button><div class=\"mini\">AI — stratejik karar davette verilir · İlişki 80 · Karşılıklı ittifak gerekli</div></div><div class=\"mini\" role=\"status\">Tek insanlı kuruluşta en az iki AI ortak gerekli · 220 ◈</div><button class=\"abtn pri\" data-a=\"fedFoundStart\" disabled=\"\">KURULUŞ DAVETLERİNİ GÖNDER</button><div class=\"box\"><b>Aster Keşif Birliği · Bilimsel Federasyon</b><div class=\"mini\">Pozitif araştırma +%8; pozitif enerji −%3. Savaş yardımı varsayılan olarak oylamayla. Oy rejimi: Eşit Temsil. Savunma yardımı oylamayla. Otomatik saldırı desteği yok; ayrı oylama/taahhüt gerekir. Mevcut yasalar: yok. 180 gün kaldı.</div><button class=\"abtn\" data-a=\"fedInviteAccept\" data-x=\"3\">YÜKÜMLÜLÜKLERİ KABUL ET VE KATIL</button><button class=\"abtn\" data-a=\"fedInviteReject\" data-x=\"3\">REDDET</button></div><div class=\"ph\">İTTİFAK ADAYLARI</div><div class=\"dpCard\"><div class=\"dpTop\">\n            <div class=\"dpName\"><b style=\"color:#98953e\">Saf Akıl Ağı</b>\n              <i>ilişki 80</i></div></div>\n            <div class=\"act2\">\n              <button class=\"abtn pri\" data-a=\"ally\" data-x=\"1\">⚑ İTTİFAK · 90◈</button>\n              <button class=\"abtn\" data-a=\"envoy\" data-x=\"1\">🎓 ELÇİ</button>\n            </div></div><div class=\"dpCard\"><div class=\"dpTop\">\n            <div class=\"dpName\"><b style=\"color:#d65cf5\">Kızıl Muhafız</b>\n              <i>ilişki 80</i></div></div>\n            <div class=\"act2\">\n              <button class=\"abtn pri\" data-a=\"ally\" data-x=\"2\">⚑ İTTİFAK · 90◈</button>\n              <button class=\"abtn\" data-a=\"envoy\" data-x=\"2\">🎓 ELÇİ</button>\n            </div></div><div class=\"dpCard\"><div class=\"dpTop\">\n            <div class=\"dpName\"><b style=\"color:#5c9ef5\">Qiroel Loncası</b>\n              <i>ilişki 80</i></div></div>\n            <div class=\"act2\">\n              <button class=\"abtn pri\" data-a=\"ally\" data-x=\"3\">⚑ İTTİFAK · 90◈</button>\n              <button class=\"abtn\" data-a=\"envoy\" data-x=\"3\">🎓 ELÇİ</button>\n            </div></div><div class=\"dpCard\"><div class=\"dpTop\">\n            <div class=\"dpName\"><b style=\"color:#5cf5d6\">Sovvas Sığınağı</b>\n              <i>ilişki 80</i></div></div>\n            <div class=\"act2\">\n              <button class=\"abtn pri\" data-a=\"ally\" data-x=\"4\">⚑ İTTİFAK · 90◈</button>\n              <button class=\"abtn\" data-a=\"envoy\" data-x=\"4\">🎓 ELÇİ</button>\n            </div></div><div class=\"dpCard\"><div class=\"dpTop\">\n            <div class=\"dpName\"><b style=\"color:#985f3e\">Navres Dayanışması</b>\n              <i>ilişki 80</i></div></div>\n            <div class=\"act2\">\n              <button class=\"abtn pri\" data-a=\"ally\" data-x=\"5\">⚑ İTTİFAK · 90◈</button>\n              <button class=\"abtn\" data-a=\"envoy\" data-x=\"5\">🎓 ELÇİ</button>\n            </div></div><div class=\"dpCard\"><div class=\"dpTop\">\n            <div class=\"dpName\"><b style=\"color:#3e4a98\">Kraveva Karargâhı</b>\n              <i>ilişki 80</i></div></div>\n            <div class=\"act2\">\n              <button class=\"abtn pri\" data-a=\"ally\" data-x=\"6\">⚑ İTTİFAK · 90◈</button>\n              <button class=\"abtn\" data-a=\"envoy\" data-x=\"6\">🎓 ELÇİ</button>\n            </div></div><div class=\"dpCard\"><div class=\"dpTop\">\n            <div class=\"dpName\"><b style=\"color:#983e8f\">Kalori Meclisi</b>\n              <i>ilişki 80</i></div></div>\n            <div class=\"act2\">\n              <button class=\"abtn pri\" data-a=\"ally\" data-x=\"7\">⚑ İTTİFAK · 90◈</button>\n              <button class=\"abtn\" data-a=\"envoy\" data-x=\"7\">🎓 ELÇİ</button>\n            </div></div></div></div>"
+}

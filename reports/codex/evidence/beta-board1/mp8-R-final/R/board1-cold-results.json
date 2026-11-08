@@ -1,0 +1,40 @@
+{
+  "v": 1,
+  "next": 3,
+  "items": [],
+  "history": [
+    {
+      "id": 1,
+      "by": 1,
+      "kind": "law",
+      "law": "arastirma",
+      "options": {
+        "repeal": false
+      },
+      "key": "[\"law\",\"arastirma\",false,\"\",null,null,null,null,null]",
+      "created": 181.606616,
+      "expires": 541.606616,
+      "status": "resolved",
+      "vote": "2",
+      "why": "Gerekli üye ve oy çoğunluğu sağlandı",
+      "updated": 181.606616
+    },
+    {
+      "id": 2,
+      "by": 2,
+      "kind": "motion",
+      "law": "motion",
+      "options": {
+        "target": 3,
+        "sponsor": 2,
+        "kind": "joinWar"
+      },
+      "key": "[\"motion\",\"motion\",false,\"joinWar\",3,2,null,null,null]",
+      "created": 181.606616,
+      "expires": 541.606616,
+      "status": "invalid",
+      "why": "Savaş veya desteklenen üye artık geçerli değil",
+      "updated": 181.606616
+    }
+  ]
+}

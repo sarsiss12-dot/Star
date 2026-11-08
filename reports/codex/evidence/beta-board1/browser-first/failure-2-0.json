@@ -1,0 +1,103 @@
+{
+  "url": "/",
+  "vote": null,
+  "inbox": [
+    {
+      "kind": "anomaly",
+      "data": {
+        "a": {
+          "id": "a15",
+          "k": "sinyal",
+          "n": "Tekrarlayan Çağrı",
+          "t": "Aynı 11 saniyelik ses döngüsü, 4.000 yıldır boşluğa yayınlanıyor. Sinyal bir konum bildiriyor.",
+          "ch": [
+            {
+              "t": "Sinyali çöz",
+              "d": "+260 araştırma, +80 etki"
+            },
+            {
+              "t": "Sinyali yanıtla",
+              "d": "??? · TEHLİKELİ"
+            }
+          ]
+        },
+        "sys": {
+          "id": 12,
+          "x": 2826.5105626727045,
+          "y": 299.4961370664364,
+          "name": "Eshpol",
+          "star": {
+            "n": "A Beyaz",
+            "c": "#dff0ff",
+            "r": 6.5,
+            "w": 8
+          },
+          "planets": [
+            {
+              "i": 0,
+              "t": "sav",
+              "dep": null,
+              "sz": 19,
+              "seed": 1575,
+              "owner": -1,
+              "col": null,
+              "name": "Eshpol I",
+              "lux": "ozsu"
+            },
+            {
+              "i": 1,
+              "t": "buz",
+              "dep": "jeotermal",
+              "sz": 18,
+              "seed": 1592,
+              "owner": -1,
+              "col": null,
+              "name": "Eshpol II"
+            },
+            {
+              "i": 2,
+              "t": "vol",
+              "dep": "ergi_kaynagi",
+              "sz": 13,
+              "seed": 1609,
+              "owner": -1,
+              "col": null,
+              "name": "Eshpol III"
+            }
+          ],
+          "lanes": [
+            5,
+            6,
+            28
+          ],
+          "owner": -1,
+          "surv": [
+            0
+          ],
+          "seen": [
+            0
+          ],
+          "def": 0,
+          "queue": [],
+          "anom": false,
+          "pulsar": false,
+          "nebulaS": false,
+          "anomK": "sinyal",
+          "_reach": 0,
+          "_shat": false,
+          "cr": 0
+        }
+      },
+      "ico": "🔬",
+      "cls": "sci",
+      "pause": true,
+      "title": "Anomali — Eshpol",
+      "sub": "Tekrarlayan Çağrı",
+      "key": "an:12",
+      "uid": 1,
+      "born": 33.64619999999993
+    }
+  ],
+  "modal": "",
+  "pane": ""
+}

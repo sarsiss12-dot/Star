@@ -1,0 +1,183 @@
+{
+  "feds": [],
+  "inbox": [
+    {
+      "kind": "fedfoundResult",
+      "data": 1,
+      "key": "fedfound-result:1:founded:accepted,accepted",
+      "ico": "🏛",
+      "pause": false,
+      "title": "FEDERASYON KURULDU — Aster Keşif Birliği",
+      "sub": "Bilimsel Federasyon · 2 kurucu · Eşit Temsil · Savunma yardımı oylamayla. Otomatik saldırı desteği yok; ayrı oylama/taahhüt gerekir. · Lider: Kızıl Muhafız",
+      "uid": 11,
+      "born": 17.56127999999993
+    },
+    {
+      "kind": "pact",
+      "data": {
+        "from": 3,
+        "tur": "spynet"
+      },
+      "ico": "🕸",
+      "cls": "sci",
+      "pause": false,
+      "title": "Casusluk Ağı Paktı",
+      "sub": "Qiroel Loncası istihbarat ağlarını seninle birleştirmek istiyor",
+      "key": "pact:3",
+      "uid": 13,
+      "born": 30.04113000000002
+    },
+    {
+      "kind": "pact",
+      "data": {
+        "from": 5,
+        "tur": "spynet"
+      },
+      "ico": "🕸",
+      "cls": "sci",
+      "pause": false,
+      "title": "Casusluk Ağı Paktı",
+      "sub": "Navres Dayanışması istihbarat ağlarını seninle birleştirmek istiyor",
+      "key": "pact:5",
+      "uid": 14,
+      "born": 30.04113000000002
+    },
+    {
+      "kind": "pact",
+      "data": {
+        "from": 6,
+        "tur": "spynet"
+      },
+      "ico": "🕸",
+      "cls": "sci",
+      "pause": false,
+      "title": "Casusluk Ağı Paktı",
+      "sub": "Kraveva Karargâhı istihbarat ağlarını seninle birleştirmek istiyor",
+      "key": "pact:6",
+      "uid": 15,
+      "born": 30.04113000000002
+    },
+    {
+      "kind": "pact",
+      "data": {
+        "from": 7,
+        "tur": "spynet"
+      },
+      "ico": "🕸",
+      "cls": "sci",
+      "pause": false,
+      "title": "Casusluk Ağı Paktı",
+      "sub": "Kalori Meclisi istihbarat ağlarını seninle birleştirmek istiyor",
+      "key": "pact:7",
+      "uid": 16,
+      "born": 30.04113000000002
+    },
+    {
+      "kind": "anomaly",
+      "data": {
+        "a": {
+          "id": "a7",
+          "k": "dogal",
+          "n": "Boşluk Balinası İskeleti",
+          "t": "Kilometrelerce uzunlukta, uzayda yüzerek ölmüş bir canlının kalıntısı.",
+          "ch": [
+            {
+              "t": "Kemik yapısını incele",
+              "d": "+240 araştırma"
+            },
+            {
+              "t": "Cesedi hasat et",
+              "d": "+200 yiyecek, +90 mineral"
+            }
+          ]
+        },
+        "sys": {
+          "id": 10,
+          "x": 2004.8715449877868,
+          "y": 2670.734160017732,
+          "name": "Quoootar",
+          "star": {
+            "n": "G Sarı",
+            "c": "#ffe9a8",
+            "r": 5.5,
+            "w": 20
+          },
+          "planets": [
+            {
+              "i": 0,
+              "t": "kur",
+              "dep": null,
+              "sz": 16,
+              "seed": 1313,
+              "owner": -1,
+              "col": null,
+              "name": "Quoootar I"
+            },
+            {
+              "i": 1,
+              "t": "vol",
+              "dep": null,
+              "sz": 10,
+              "seed": 1330,
+              "owner": -1,
+              "col": null,
+              "name": "Quoootar II"
+            },
+            {
+              "i": 2,
+              "t": "col",
+              "dep": null,
+              "sz": 17,
+              "seed": 1347,
+              "owner": -1,
+              "col": null,
+              "name": "Quoootar III"
+            },
+            {
+              "i": 3,
+              "t": "sav",
+              "dep": null,
+              "sz": 14,
+              "seed": 1364,
+              "owner": -1,
+              "col": null,
+              "name": "Quoootar IV"
+            }
+          ],
+          "lanes": [
+            0,
+            42,
+            21,
+            20
+          ],
+          "owner": -1,
+          "surv": [
+            0
+          ],
+          "seen": [
+            0,
+            1
+          ],
+          "queue": [],
+          "anom": false,
+          "anomK": "dogal",
+          "def": 0,
+          "pulsar": false,
+          "nebulaS": false,
+          "_reach": 0,
+          "_shat": false,
+          "cr": 0
+        }
+      },
+      "ico": "🔬",
+      "cls": "sci",
+      "pause": true,
+      "title": "Anomali — Quoootar",
+      "sub": "Boşluk Balinası İskeleti",
+      "key": "an:10",
+      "uid": 17,
+      "born": 67.58733000000022
+    }
+  ],
+  "modal": ""
+}

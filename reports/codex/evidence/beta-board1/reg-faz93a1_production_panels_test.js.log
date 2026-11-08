@@ -1,0 +1,22 @@
+✓ Active ship cancellation returns original payment even after discount changes
+✓ Second cancellation, duplicate selection and foreign ownership cannot refund twice
+✓ Completed order identity cannot cancel the next order
+✓ Bulk cancel affects only selected yard orders and stops its production loop
+✓ Single cancellation leaves loop preference; snapshot excludes later orders
+✓ Legacy orders quote missing receipt explicitly and cannot create a refund
+✓ Invalid receipts cannot inject negative or nonfinite resource refunds
+✓ v8 round trip preserves receipt and private fleet destination
+✓ Real ship panel offers individual and all cancellation; confirm is single-use
+✓ Confirmation becomes invalid across world reload
+✓ Closing or replacing the cancellation dialog invalidates its confirmation
+✓ Civilian orders refund every paid resource after partial construction
+✓ Cancellation confirm or dismissal restores paused or running game speed exactly
+✓ Colony starts expanded; folds to summary; reopening restores real controls
+✓ Two colonies fold independently; state survives panel refresh but new world starts open
+✓ Collapsed colony still shows live population, morale and pending construction count
+✓ 450ms hold opens real building details and capture guard prevents follow-up construction
+✓ Scroll, pointer cancel, background and secondary finger cancel pending hold
+✓ Ordinary short press is not swallowed by the hold guard
+✓ Reinforcement selects dominant military class, subtracts pending and explains actual purpose
+✓ Layer off/on styles share exactly the same opacity selector
+GEÇEN: 21 KALAN: 0

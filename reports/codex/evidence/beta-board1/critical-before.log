@@ -1,0 +1,41 @@
+FAIL #10 istenen hızla aynı seçim bekleyen karar tutmasını temizleyebilir; gerçek aynı hız sessiz
+AssertionError [ERR_ASSERTION]: {"to":"B","v":1,"type":"result","seq":1,"cid":"fed0B000001","status":"rejected","code":"rules:same","rev":1}
+
+'rejected' !== 'ok'
+
+    at /workspace/Star/tests/beta_board1_critical_test.cjs:4:297
+    at test (/workspace/Star/tests/beta_board1_critical_test.cjs:3:35)
+    at Object.<anonymous> (/workspace/Star/tests/beta_board1_critical_test.cjs:4:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+FAIL #5 savaş bildirimi MP karar tutması oluşturmaz; gerçek kararlar korunur
+AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
+  [
+-   false,
+-   false,
+    true,
++   true,
++   true
+  ]
+
+    at /workspace/Star/tests/beta_board1_critical_test.cjs:5:495
+    at test (/workspace/Star/tests/beta_board1_critical_test.cjs:3:35)
+    at Object.<anonymous> (/workspace/Star/tests/beta_board1_critical_test.cjs:5:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+PASS #24 enerji stok0 ve negatif net üretim: gerçek aylık clamp; kendi MP aynası aynı
+PASS #25 düşmansız kendi sistemindeki büyük filo korunur; split/merge ve Save8 kayıp üretmez
+PASS #25 meşru radyasyon kaybı korunur ve host ile ayna aynı; olay nedeni ayrı
+GEÇEN: 3 KALAN: 2

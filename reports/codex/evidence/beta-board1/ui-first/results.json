@@ -1,0 +1,161 @@
+[
+  {
+    "name": "800x360 24 renk gerçek seçim / yalnız kozmetik",
+    "status": "PASS",
+    "data": {
+      "color": "#d5e6cf",
+      "choices": 24
+    }
+  },
+  {
+    "name": "800x360 tersane 0/1/21 kuyruk üretim konumu / gerçek X ve tek iade",
+    "status": "PASS",
+    "data": {
+      "r0": {
+        "x": 460,
+        "y": 189.5,
+        "w": 79,
+        "h": 38
+      },
+      "r1": {
+        "x": 460,
+        "y": 189.5,
+        "w": 79,
+        "h": 38
+      },
+      "r21": {
+        "x": 460,
+        "y": 189.5,
+        "w": 79,
+        "h": 38
+      },
+      "cancelled": 1,
+      "refund": {
+        "ala": 32
+      }
+    }
+  },
+  {
+    "name": "800x360 ROTA hedefi / sahip etiketi OFF ikonlar korunur / RNG ve Save8 aynı",
+    "status": "PASS",
+    "data": {
+      "rect": {
+        "x": 406.203125,
+        "y": 303,
+        "width": 76,
+        "height": 44
+      },
+      "iconsUnchanged": true
+    }
+  },
+  {
+    "name": "800x360 enerji/alaşım açıklaması ve bilinen sınır komşusu diplomasi",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert(text.includes('Enerji stoku 0')&&text.includes('500'))\n\n    at /workspace/Star/tests/browser-beta-board1-ui.cjs:9:755\n    at async test (/workspace/Star/tests/browser-beta-board1-ui.cjs:3:41)\n    at async /workspace/Star/tests/browser-beta-board1-ui.cjs:9:1"
+  },
+  {
+    "name": "960x540 24 renk gerçek seçim / yalnız kozmetik",
+    "status": "PASS",
+    "data": {
+      "color": "#d5e6cf",
+      "choices": 24
+    }
+  },
+  {
+    "name": "960x540 tersane 0/1/21 kuyruk üretim konumu / gerçek X ve tek iade",
+    "status": "FAIL",
+    "error": "locator.scrollIntoViewIfNeeded: Element is not attached to the DOM\nCall log:\n\u001b[2m  - attempting scroll into view action\u001b[22m\n\u001b[2m    - waiting for element to be stable\u001b[22m\n\n    at hit (/workspace/Star/tests/browser-beta-board1-ui.cjs:4:758)\n    at /workspace/Star/tests/browser-beta-board1-ui.cjs:7:600\n    at async test (/workspace/Star/tests/browser-beta-board1-ui.cjs:3:41)\n    at async /workspace/Star/tests/browser-beta-board1-ui.cjs:7:1"
+  },
+  {
+    "name": "960x540 ROTA hedefi / sahip etiketi OFF ikonlar korunur / RNG ve Save8 aynı",
+    "status": "FAIL",
+    "error": "locator.scrollIntoViewIfNeeded: Element is not attached to the DOM\nCall log:\n\u001b[2m  - attempting scroll into view action\u001b[22m\n\u001b[2m    - waiting for element to be stable\u001b[22m\n\u001b[2m    - element is not stable\u001b[22m\n\u001b[2m  - retrying scroll into view action\u001b[22m\n\u001b[2m    - waiting for element to be stable\u001b[22m\n\n    at hit (/workspace/Star/tests/browser-beta-board1-ui.cjs:4:758)\n    at /workspace/Star/tests/browser-beta-board1-ui.cjs:8:683\n    at async test (/workspace/Star/tests/browser-beta-board1-ui.cjs:3:41)\n    at async /workspace/Star/tests/browser-beta-board1-ui.cjs:8:1"
+  },
+  {
+    "name": "960x540 enerji/alaşım açıklaması ve bilinen sınır komşusu diplomasi",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert(text.includes('Enerji stoku 0')&&text.includes('500'))\n\n    at /workspace/Star/tests/browser-beta-board1-ui.cjs:9:755\n    at async test (/workspace/Star/tests/browser-beta-board1-ui.cjs:3:41)\n    at async /workspace/Star/tests/browser-beta-board1-ui.cjs:9:1"
+  },
+  {
+    "name": "915x412 24 renk gerçek seçim / yalnız kozmetik",
+    "status": "PASS",
+    "data": {
+      "color": "#d5e6cf",
+      "choices": 24
+    }
+  },
+  {
+    "name": "915x412 tersane 0/1/21 kuyruk üretim konumu / gerçek X ve tek iade",
+    "status": "PASS",
+    "data": {
+      "r0": {
+        "x": 575,
+        "y": 217.5,
+        "w": 79,
+        "h": 38
+      },
+      "r1": {
+        "x": 575,
+        "y": 217.5,
+        "w": 79,
+        "h": 38
+      },
+      "r21": {
+        "x": 575,
+        "y": 217.5,
+        "w": 79,
+        "h": 38
+      },
+      "cancelled": 1,
+      "refund": {
+        "ala": 32
+      }
+    }
+  },
+  {
+    "name": "915x412 ROTA hedefi / sahip etiketi OFF ikonlar korunur / RNG ve Save8 aynı",
+    "status": "PASS",
+    "data": {
+      "rect": {
+        "x": 463.703125,
+        "y": 355,
+        "width": 76,
+        "height": 44
+      },
+      "iconsUnchanged": true
+    }
+  },
+  {
+    "name": "915x412 enerji/alaşım açıklaması ve bilinen sınır komşusu diplomasi",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert(text.includes('Enerji stoku 0')&&text.includes('500'))\n\n    at /workspace/Star/tests/browser-beta-board1-ui.cjs:9:755\n    at async test (/workspace/Star/tests/browser-beta-board1-ui.cjs:3:41)\n    at async /workspace/Star/tests/browser-beta-board1-ui.cjs:9:1"
+  },
+  {
+    "name": "1920x1080 24 renk gerçek seçim / yalnız kozmetik",
+    "status": "PASS",
+    "data": {
+      "color": "#d5e6cf",
+      "choices": 24
+    }
+  },
+  {
+    "name": "1920x1080 tersane 0/1/21 kuyruk üretim konumu / gerçek X ve tek iade",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: long queue moved production control\n    at /workspace/Star/tests/browser-beta-board1-ui.cjs:7:714\n    at async test (/workspace/Star/tests/browser-beta-board1-ui.cjs:3:41)\n    at async /workspace/Star/tests/browser-beta-board1-ui.cjs:7:1"
+  },
+  {
+    "name": "1920x1080 ROTA hedefi / sahip etiketi OFF ikonlar korunur / RNG ve Save8 aynı",
+    "status": "FAIL",
+    "error": "locator.scrollIntoViewIfNeeded: Element is not attached to the DOM\nCall log:\n\u001b[2m  - attempting scroll into view action\u001b[22m\n\u001b[2m    - waiting for element to be stable\u001b[22m\n\n    at hit (/workspace/Star/tests/browser-beta-board1-ui.cjs:4:758)\n    at /workspace/Star/tests/browser-beta-board1-ui.cjs:8:683\n    at async test (/workspace/Star/tests/browser-beta-board1-ui.cjs:3:41)\n    at async /workspace/Star/tests/browser-beta-board1-ui.cjs:8:1"
+  },
+  {
+    "name": "1920x1080 enerji/alaşım açıklaması ve bilinen sınır komşusu diplomasi",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert(text.includes('Enerji stoku 0')&&text.includes('500'))\n\n    at /workspace/Star/tests/browser-beta-board1-ui.cjs:9:755\n    at async test (/workspace/Star/tests/browser-beta-board1-ui.cjs:3:41)\n    at async /workspace/Star/tests/browser-beta-board1-ui.cjs:9:1"
+  },
+  {
+    "name": "JavaScript errors",
+    "status": "PASS",
+    "errors": []
+  }
+]

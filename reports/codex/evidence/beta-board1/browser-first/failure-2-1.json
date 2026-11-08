@@ -1,0 +1,90 @@
+{
+  "url": "/mp/play",
+  "vote": null,
+  "inbox": [
+    {
+      "kind": "anomaly",
+      "data": {
+        "a": {
+          "id": "a5",
+          "k": "dogal",
+          "n": "Yaşam İzleri",
+          "t": "Atmosferde işlenmiş organik bileşikler var. Burada bir şey yaşıyordu.",
+          "ch": [
+            {
+              "t": "Biyosferi haritala",
+              "d": "+130 araştırma, +80 yiyecek"
+            },
+            {
+              "t": "Karantinaya al",
+              "d": "+15 etki"
+            }
+          ]
+        },
+        "sys": {
+          "id": 23,
+          "x": 2761.3688414509147,
+          "y": 3582.467289778453,
+          "name": "Galphor",
+          "star": {
+            "n": "K Turuncu",
+            "c": "#ffab5c",
+            "r": 5,
+            "w": 22
+          },
+          "planets": [
+            {
+              "i": 0,
+              "t": "cor",
+              "dep": "nadir",
+              "sz": 15,
+              "seed": 3016,
+              "name": "Galphor I",
+              "owner": -1
+            },
+            {
+              "i": 1,
+              "t": "oky",
+              "dep": null,
+              "sz": 17,
+              "seed": 3033,
+              "name": "Galphor II",
+              "owner": -1
+            }
+          ],
+          "lanes": [
+            34,
+            25,
+            27
+          ],
+          "owner": -1,
+          "surv": [
+            0
+          ],
+          "seen": [
+            0
+          ],
+          "queue": [],
+          "anom": false,
+          "anomK": "dogal",
+          "def": 0,
+          "pulsar": false,
+          "nebulaS": false,
+          "_reach": 0
+        }
+      },
+      "decisionId": 1,
+      "uid": 1,
+      "key": "personal:1",
+      "born": 19.973199999999974,
+      "pause": false,
+      "ico": "🔬",
+      "cls": "sci",
+      "title": "Yaşam İzleri",
+      "sub": "Atmosferde işlenmiş organik bileşikler var. Burada bir şey yaşıyordu.",
+      "hidden": false
+    }
+  ],
+  "modal": "",
+  "pane": ""
+}

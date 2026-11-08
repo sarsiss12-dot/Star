@@ -1,0 +1,32 @@
+[
+  {
+    "name": "mp8-N",
+    "command": "MP8_SCEN=N STARS_CHROMIUM_PATH=/usr/bin/chromium STARS_OUTPUT=reports/codex/evidence/beta-board1/mp8-N node tests/browser-mp8.cjs",
+    "exit": 0,
+    "seconds": 119.07
+  },
+  {
+    "name": "ui-final",
+    "command": " STARS_CHROMIUM_PATH=/usr/bin/chromium STARS_OUTPUT=reports/codex/evidence/beta-board1/ui-final node tests/browser-beta-board1-ui.cjs",
+    "exit": 0,
+    "seconds": 52.8
+  },
+  {
+    "name": "mp74-final",
+    "command": " STARS_CHROMIUM_PATH=/usr/bin/chromium STARS_OUTPUT=reports/codex/evidence/beta-board1/mp74-final node tests/browser-mp74.cjs",
+    "exit": 0,
+    "seconds": 49.99
+  },
+  {
+    "name": "mp75-final",
+    "command": " STARS_CHROMIUM_PATH=/usr/bin/chromium STARS_OUTPUT=reports/codex/evidence/beta-board1/mp75-final node tests/browser-mp75.cjs",
+    "exit": 0,
+    "seconds": 37.19
+  },
+  {
+    "name": "mp73-desktop",
+    "command": "BOARD1=1 MPP0_DESKTOP=1 MP73_ONLY=A1 |B1 |BD1 |sayfa STARS_CHROMIUM_PATH=/usr/bin/chromium STARS_OUTPUT=reports/codex/evidence/beta-board1/mp73-desktop node tests/browser-mp73.cjs",
+    "exit": 1,
+    "seconds": 166.62
+  }
+]

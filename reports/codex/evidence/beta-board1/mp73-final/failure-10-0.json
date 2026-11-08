@@ -1,0 +1,248 @@
+{
+  "url": "/",
+  "vote": null,
+  "inbox": [
+    {
+      "kind": "anomaly",
+      "data": {
+        "a": {
+          "id": "a16",
+          "k": "megayapi",
+          "n": "Dönen Halka",
+          "t": "Yıldızın etrafında hâlâ dönen, kilometrelerce çaplı bir halka. Yüzeyinde tek bir çizik bile yok.",
+          "ch": [
+            {
+              "t": "Malzemeyi incele",
+              "d": "+320 araştırma, +90 alaşım"
+            },
+            {
+              "t": "Sökmeye çalış",
+              "d": "+900 mineral · TEHLİKELİ"
+            }
+          ]
+        },
+        "sys": {
+          "id": 44,
+          "x": 1762.8313559915598,
+          "y": 2329.222999457247,
+          "name": "Ulvzil",
+          "star": {
+            "n": "K Turuncu",
+            "c": "#ffab5c",
+            "r": 5,
+            "w": 22
+          },
+          "planets": [
+            {
+              "i": 0,
+              "t": "cor",
+              "dep": null,
+              "sz": 13,
+              "seed": 5767,
+              "owner": -1,
+              "col": null,
+              "name": "Ulvzil I"
+            }
+          ],
+          "lanes": [
+            13,
+            29,
+            10
+          ],
+          "owner": -1,
+          "surv": [
+            0
+          ],
+          "seen": [
+            0,
+            1
+          ],
+          "queue": [],
+          "anom": false,
+          "anomK": "megayapi",
+          "def": 0,
+          "pulsar": false,
+          "nebulaS": false,
+          "_reach": 0,
+          "_shat": false,
+          "cr": 0
+        }
+      },
+      "ico": "🔬",
+      "cls": "sci",
+      "pause": true,
+      "title": "Anomali — Ulvzil",
+      "sub": "Dönen Halka",
+      "key": "an:44",
+      "uid": 2,
+      "born": 33.15859999999995
+    },
+    {
+      "kind": "anomaly",
+      "data": {
+        "a": {
+          "id": "a14",
+          "k": "kalinti",
+          "n": "Mühürlü Lahit",
+          "t": "Asteroidin göbeğine oyulmuş, dışarıdan mühürlenmiş bir oda. Mühürler İÇERİDEN değil, dışarıdan vurulmuş.",
+          "ch": [
+            {
+              "t": "Mührü kırma, uzaktan tara",
+              "d": "+140 araştırma · güvenli"
+            },
+            {
+              "t": "Mührü kır",
+              "d": "+700 mineral · TEHLİKELİ"
+            }
+          ]
+        },
+        "sys": {
+          "id": 29,
+          "x": 2003.19790031063,
+          "y": 2700.3672484612625,
+          "name": "Nexeigath",
+          "star": {
+            "n": "A Beyaz",
+            "c": "#dff0ff",
+            "r": 6.5,
+            "w": 8
+          },
+          "planets": [
+            {
+              "i": 0,
+              "t": "tok",
+              "dep": null,
+              "sz": 14,
+              "seed": 3802,
+              "owner": -1,
+              "col": null,
+              "name": "Nexeigath I"
+            },
+            {
+              "i": 1,
+              "t": "tro",
+              "dep": "bereket",
+              "sz": 16,
+              "seed": 3819,
+              "owner": -1,
+              "col": null,
+              "name": "Nexeigath II",
+              "lux": "tuz"
+            }
+          ],
+          "lanes": [
+            44,
+            30,
+            13
+          ],
+          "owner": -1,
+          "surv": [
+            0
+          ],
+          "seen": [
+            0,
+            1
+          ],
+          "queue": [],
+          "anom": false,
+          "anomK": "kalinti",
+          "def": 0,
+          "pulsar": false,
+          "nebulaS": false,
+          "_reach": 0,
+          "_shat": false,
+          "cr": 0
+        }
+      },
+      "ico": "🔬",
+      "cls": "sci",
+      "pause": true,
+      "title": "Anomali — Nexeigath",
+      "sub": "Mühürlü Lahit",
+      "key": "an:29",
+      "uid": 3,
+      "born": 66.76580000000061
+    },
+    {
+      "kind": "anomaly",
+      "data": {
+        "a": {
+          "id": "a2",
+          "k": "dogal",
+          "n": "Kristal Mezarlık",
+          "t": "Buzun altında, düzenli sıralar hâlinde dizilmiş devasa kristal sütunlar.",
+          "ch": [
+            {
+              "t": "Örnek al",
+              "d": "+150 araştırma"
+            },
+            {
+              "t": "Madencilik başlat",
+              "d": "+300 mineral"
+            }
+          ]
+        },
+        "sys": {
+          "id": 30,
+          "x": 2519.7459399933027,
+          "y": 2452.215094692976,
+          "name": "Lyrgath",
+          "star": {
+            "n": "M Kırmızı Cüce",
+            "c": "#ff7b5c",
+            "r": 4.5,
+            "w": 30
+          },
+          "planets": [
+            {
+              "i": 0,
+              "t": "kur",
+              "dep": null,
+              "sz": 11,
+              "seed": 3933,
+              "owner": -1,
+              "col": null,
+              "name": "Lyrgath I",
+              "lux": "filiz"
+            }
+          ],
+          "lanes": [
+            0,
+            14,
+            21,
+            29,
+            41
+          ],
+          "owner": -1,
+          "surv": [
+            0
+          ],
+          "seen": [
+            0,
+            1,
+            3
+          ],
+          "queue": [],
+          "anom": false,
+          "anomK": "dogal",
+          "def": 0,
+          "pulsar": false,
+          "nebulaS": false,
+          "_reach": 0,
+          "_shat": false,
+          "cr": 0
+        }
+      },
+      "ico": "🔬",
+      "cls": "sci",
+      "pause": true,
+      "title": "Anomali — Lyrgath",
+      "sub": "Kristal Mezarlık",
+      "key": "an:30",
+      "uid": 4,
+      "born": 101.74596000000167
+    }
+  ],
+  "modal": "",
+  "pane": "<div class=\"dpBox dcBox fedBox\">\n      <div class=\"dpHd\"><span>🏛 FEDERASYON</span>\n        <button class=\"riX\" data-a=\"closeFed\">✕</button></div>\n      \n      <div class=\"dpBody dcBody \" data-fed-tab=\"general\"><div class=\"ph\">FEDERASYON KURULUŞU</div><div class=\"mini\">İki açık rızalı insan yeterlidir. Tek insanlı oyunda en az iki AI ortak gerekir. Yalnız seçtiğin ortaklar davet edilir; ücret son onayda bir kez kesilir.</div><div class=\"box fedFoundation\" data-founding=\"1\"><b>Bilimsel Federasyon · Eşit Temsil · BEKLİYOR</b><div class=\"mini\">Öneren: Saf Akıl Ağı · 5 ay · 220 Etki · yalnız kurucudan</div><div class=\"mini\">Savunma yardımı oylamayla. Otomatik saldırı desteği yok; ayrı oylama/taahhüt gerekir. Üyeler arasında ittifak oluşur. Önceki savaşlar sessizce kapatılmaz.</div><div class=\"mini\">Saf Akıl Ağı — KABUL EDİLDİ · Kuruluş şartlarını önerdi</div><div class=\"mini\">Kızıl Muhafız — BEKLİYOR · İnsan yanıtı bekleniyor</div><button class=\"abtn pri\" data-a=\"fedFoundReply\" data-x=\"1:yes\">ŞARTLARI KABUL ET</button><button class=\"abtn\" data-a=\"fedFoundReply\" data-x=\"1:no\">REDDET</button></div><div class=\"ph\">TÜR</div><button class=\"abtn \" data-a=\"fedFoundType\" data-x=\"askeri\">🛡 Askerî Federasyon</button><button class=\"abtn pri\" data-a=\"fedFoundType\" data-x=\"bilimsel\">🔬 Bilimsel Federasyon</button><button class=\"abtn \" data-a=\"fedFoundType\" data-x=\"ticaret\">🤝 Ticaret Federasyonu</button><div class=\"ph\">OY REJİMİ</div><button class=\"abtn pri\" data-a=\"fedBallot\" data-x=\"equal\">Eşit Temsil</button><button class=\"abtn \" data-a=\"fedBallot\" data-x=\"hegemonic\">Hegemonik</button><button class=\"abtn \" data-a=\"fedBallot\" data-x=\"economic\">Ekonomik Temsil</button><button class=\"abtn \" data-a=\"fedBallot\" data-x=\"mixed\">Karma Konsey</button><p class=\"mini\">Pozitif araştırma +%8; pozitif enerji −%3. Savaş yardımı varsayılan olarak oylamayla. Her üye 1 oy. Küçük devletleri korur; büyük katkıya ek oy vermez. Savunma yardımı oylamayla. Otomatik saldırı desteği yok; ayrı oylama/taahhüt gerekir. Kuruluşta seçilen üyeler birbirleriyle ittifak kurar. Şart değişikliği eski daveti değiştirmez; iptal edip yeni şartları gönder.</p><div class=\"ph\">KURUCU ORTAKLAR · 1 SEÇİLİ</div><div class=\"box\"><button class=\"abtn pri\" data-a=\"fedFoundSelect\" data-x=\"1\" aria-pressed=\"true\">☑ Saf Akıl Ağı</button><div class=\"mini\">İnsan — açık yanıt gerekli · İlişki 45 · Yapısal olarak uygun</div></div><div class=\"mini\" role=\"status\">Seçilen şartlar davete uygun · 220 ◈</div><button class=\"abtn pri\" data-a=\"fedFoundStart\">KURULUŞ DAVETLERİNİ GÖNDER</button></div></div>"
+}

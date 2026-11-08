@@ -1,0 +1,30 @@
+PASS aktif yasa sırasında iki insan FIFO önerisi; sıraya girince maliyet/RNG/etki yok; tekrar engeli
+PASS savaş yardımı kuyrukta etki uygulamaz; biten savaş sıra geldiğinde gerekçeyle geçersiz
+PASS kendi önerisini geri çekme; başka üye yetkisiz; sıra ve ham Save8 yüklemede korunur
+PASS üye oylaması bütün üyelerle ittifak gerektirmez; adayın ayrı rızası ve bir kez katılım
+PASS aday savaşa girerse rıza yetmez; kuyruk yalnız üyelere ve π ile görünür
+PASS kuyruk açılışında bütçe, süre ve üyelik yeniden doğrulanır; bedelsiz iptal
+PASS aynı ağ paketi ikinci kuyruk/ödeme üretmez; bozuk satırlar yüklemede güvenle elenir
+PASS açılışta motor hatası ücret ve RNG geri alınır, öneri açık gerekçeyle kapanır
+PASS eski doğrudan davet ittifak koşulu korunur; ret ve değişen şart kabulü engeller
+PASS dış başvuru kendi sahibine ait; yalnız kendi kuyruğunu görür/geri çeker, ücret yok
+PASS AI mevcut stratejik değerlendirmeyle sıraya önerir; aktif oy değişmez ve spam yok
+PASS aynı adayın farklı aracıdan başvurusu tek sıra; farklı üyelerin savaş izni ayrı yetki
+FAIL kesirli gerçek oyun gününde 360 günlük kuyruk Save8 yüklemede korunur
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ '{"v":1,"next":2,"items":[],"history":[]}'
+- '{"v":1,"next":2,"items":[{"id":1,"by":1,"kind":"law","law":"arastirma","options":{"repeal":false},"key":"[\\"law\\",\\"arastirma\\",false,\\"\\",null,null,null,null,null]","created":152.0152,"expires":512.0152,"status":"waiting"}],"history":[]}'
+
+    at /workspace/Star/tests/beta_board1_agenda_test.cjs:18:322
+    at test (/workspace/Star/tests/beta_board1_agenda_test.cjs:5:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_board1_agenda_test.cjs:18:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+GEÇEN: 12 KALAN: 1

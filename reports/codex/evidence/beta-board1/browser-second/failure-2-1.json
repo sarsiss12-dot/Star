@@ -1,0 +1,98 @@
+{
+  "url": "/mp/play",
+  "vote": null,
+  "inbox": [
+    {
+      "kind": "anomaly",
+      "data": {
+        "a": {
+          "id": "a8",
+          "k": "megayapi",
+          "n": "Yörüngesel Ayna",
+          "t": "Yıldızın ışığını gezegene odaklayan devasa bir yapay ayna. Kim, neden?",
+          "ch": [
+            {
+              "t": "Aynayı devral",
+              "d": "+3 aylık enerji (kalıcı)"
+            },
+            {
+              "t": "Yapımcıyı ara",
+              "d": "+210 araştırma"
+            }
+          ]
+        },
+        "sys": {
+          "id": 42,
+          "x": 267.85152433106805,
+          "y": 2128.5327171303566,
+          "name": "Rhadeth",
+          "star": {
+            "n": "A Beyaz",
+            "c": "#dff0ff",
+            "r": 6.5,
+            "w": 8
+          },
+          "planets": [
+            {
+              "i": 0,
+              "t": "oky",
+              "dep": "zengin_maden",
+              "sz": 18,
+              "seed": 5505,
+              "name": "Rhadeth I",
+              "owner": -1
+            },
+            {
+              "i": 1,
+              "t": "ast",
+              "dep": null,
+              "sz": 0,
+              "seed": 5522,
+              "name": "Rhadeth II",
+              "owner": -1
+            },
+            {
+              "i": 2,
+              "t": "cor",
+              "dep": "nadir",
+              "sz": 11,
+              "seed": 5539,
+              "name": "Rhadeth III",
+              "owner": -1
+            }
+          ],
+          "lanes": [
+            13,
+            26
+          ],
+          "owner": -1,
+          "surv": [
+            0
+          ],
+          "seen": [
+            0
+          ],
+          "queue": [],
+          "anom": false,
+          "anomK": "megayapi",
+          "def": 0,
+          "pulsar": true,
+          "nebulaS": false,
+          "_reach": 0
+        }
+      },
+      "decisionId": 1,
+      "uid": 1,
+      "key": "personal:1",
+      "born": 41.73099999999983,
+      "pause": false,
+      "ico": "🔬",
+      "cls": "sci",
+      "title": "Yörüngesel Ayna",
+      "sub": "Yıldızın ışığını gezegene odaklayan devasa bir yapay ayna. Kim, neden?",
+      "hidden": false
+    }
+  ],
+  "modal": "",
+  "pane": ""
+}

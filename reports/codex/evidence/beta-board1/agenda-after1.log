@@ -1,0 +1,6 @@
+PASS aktif yasa sırasında iki insan FIFO önerisi; sıraya girince maliyet/RNG/etki yok; tekrar engeli
+PASS savaş yardımı kuyrukta etki uygulamaz; biten savaş sıra geldiğinde gerekçeyle geçersiz
+PASS kendi önerisini geri çekme; başka üye yetkisiz; sıra ve ham Save8 yüklemede korunur
+PASS üye oylaması bütün üyelerle ittifak gerektirmez; adayın ayrı rızası ve bir kez katılım
+PASS aday savaşa girerse rıza yetmez; kuyruk yalnız üyelere ve π ile görünür
+GEÇEN: 5 KALAN: 0

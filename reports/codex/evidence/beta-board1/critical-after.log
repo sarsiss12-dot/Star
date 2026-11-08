@@ -1,0 +1,6 @@
+PASS #10 istenen hızla aynı seçim bekleyen karar tutmasını temizleyebilir; gerçek aynı hız sessiz
+PASS #5 savaş bildirimi MP karar tutması oluşturmaz; gerçek kararlar korunur
+PASS #24 enerji stok0 ve negatif net üretim: gerçek aylık clamp; kendi MP aynası aynı
+PASS #25 düşmansız kendi sistemindeki büyük filo korunur; split/merge ve Save8 kayıp üretmez
+PASS #25 meşru radyasyon kaybı korunur ve host ile ayna aynı; olay nedeni ayrı
+GEÇEN: 5 KALAN: 0

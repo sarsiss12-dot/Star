@@ -1,0 +1,16 @@
+[
+  {
+    "threeHumans": true,
+    "queued": 2,
+    "nativeWithdraw": true,
+    "openingFee": 60,
+    "endedWarInvalid": true,
+    "hostNotInWar": true
+  },
+  {
+    "twoMemberBallot": true,
+    "noBilateralAlliesRequired": true,
+    "candidateSeparateConsent": true,
+    "joinedExactlyOnce": true
+  }
+]

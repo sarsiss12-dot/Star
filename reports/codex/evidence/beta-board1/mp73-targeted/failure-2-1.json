@@ -1,0 +1,275 @@
+{
+  "url": "/mp/play",
+  "vote": null,
+  "inbox": [
+    {
+      "kind": "anomaly",
+      "data": {
+        "a": {
+          "id": "a15",
+          "k": "sinyal",
+          "n": "Tekrarlayan Çağrı",
+          "t": "Aynı 11 saniyelik ses döngüsü, 4.000 yıldır boşluğa yayınlanıyor. Sinyal bir konum bildiriyor.",
+          "ch": [
+            {
+              "t": "Sinyali çöz",
+              "d": "+260 araştırma, +80 etki"
+            },
+            {
+              "t": "Sinyali yanıtla",
+              "d": "??? · TEHLİKELİ"
+            }
+          ]
+        },
+        "sys": {
+          "id": 2,
+          "x": 3756.9555188932604,
+          "y": 4188.191801906011,
+          "name": "Ulvphor",
+          "star": {
+            "n": "A Beyaz",
+            "c": "#dff0ff",
+            "r": 6.5,
+            "w": 8
+          },
+          "planets": [
+            {
+              "i": 0,
+              "t": "tro",
+              "dep": null,
+              "sz": 17,
+              "seed": 265,
+              "name": "Ulvphor I",
+              "owner": -1
+            },
+            {
+              "i": 1,
+              "t": "kut",
+              "dep": null,
+              "sz": 10,
+              "seed": 282,
+              "name": "Ulvphor II",
+              "owner": -1
+            }
+          ],
+          "lanes": [
+            13,
+            30,
+            19
+          ],
+          "owner": -1,
+          "surv": [
+            0
+          ],
+          "seen": [
+            0
+          ],
+          "queue": [],
+          "anom": false,
+          "anomK": "sinyal",
+          "def": 0,
+          "pulsar": false,
+          "nebulaS": false,
+          "_reach": 0,
+          "_shat": false
+        }
+      },
+      "decisionId": 1,
+      "uid": 1,
+      "key": "personal:1",
+      "born": 19.819148000000013,
+      "pause": false,
+      "ico": "🔬",
+      "cls": "sci",
+      "title": "Tekrarlayan Çağrı",
+      "sub": "Aynı 11 saniyelik ses döngüsü, 4.000 yıldır boşluğa yayınlanıyor. Sinyal bir konum bildiriyor.",
+      "hidden": false
+    },
+    {
+      "kind": "anomaly",
+      "data": {
+        "a": {
+          "id": "a14",
+          "k": "kalinti",
+          "n": "Mühürlü Lahit",
+          "t": "Asteroidin göbeğine oyulmuş, dışarıdan mühürlenmiş bir oda. Mühürler İÇERİDEN değil, dışarıdan vurulmuş.",
+          "ch": [
+            {
+              "t": "Mührü kırma, uzaktan tara",
+              "d": "+140 araştırma · güvenli"
+            },
+            {
+              "t": "Mührü kır",
+              "d": "+700 mineral · TEHLİKELİ"
+            }
+          ]
+        },
+        "sys": {
+          "id": 30,
+          "x": 3724.7969356967433,
+          "y": 3799.437876349177,
+          "name": "Cormir-41",
+          "star": {
+            "n": "G Sarı",
+            "c": "#ffe9a8",
+            "r": 5.5,
+            "w": 20
+          },
+          "planets": [
+            {
+              "i": 0,
+              "t": "col",
+              "dep": null,
+              "sz": 15,
+              "seed": 3933,
+              "name": "Cormir-41 I",
+              "owner": -1
+            },
+            {
+              "i": 1,
+              "t": "cor",
+              "dep": null,
+              "sz": 20,
+              "seed": 3950,
+              "name": "Cormir-41 II",
+              "owner": -1
+            },
+            {
+              "i": 2,
+              "t": "ast",
+              "dep": "zengin_maden",
+              "sz": 0,
+              "seed": 3967,
+              "name": "Cormir-41 III",
+              "owner": -1
+            },
+            {
+              "i": 3,
+              "t": "buz",
+              "dep": null,
+              "sz": 10,
+              "seed": 3984,
+              "name": "Cormir-41 IV",
+              "owner": -1
+            }
+          ],
+          "lanes": [
+            2,
+            18,
+            19
+          ],
+          "owner": -1,
+          "surv": [
+            0
+          ],
+          "seen": [
+            0
+          ],
+          "queue": [],
+          "anom": false,
+          "anomK": "kalinti",
+          "def": 0,
+          "pulsar": false,
+          "nebulaS": false,
+          "_reach": 0,
+          "_shat": false
+        }
+      },
+      "decisionId": 2,
+      "uid": 17,
+      "key": "personal:2",
+      "born": 39.98594799999984,
+      "pause": false,
+      "ico": "🔬",
+      "cls": "sci",
+      "title": "Mühürlü Lahit",
+      "sub": "Asteroidin göbeğine oyulmuş, dışarıdan mühürlenmiş bir oda. Mühürler İÇERİDEN değil, dışarıdan vurul",
+      "hidden": false
+    },
+    {
+      "kind": "anomaly",
+      "data": {
+        "a": {
+          "id": "a2",
+          "k": "dogal",
+          "n": "Kristal Mezarlık",
+          "t": "Buzun altında, düzenli sıralar hâlinde dizilmiş devasa kristal sütunlar.",
+          "ch": [
+            {
+              "t": "Örnek al",
+              "d": "+150 araştırma"
+            },
+            {
+              "t": "Madencilik başlat",
+              "d": "+300 mineral"
+            }
+          ]
+        },
+        "sys": {
+          "id": 18,
+          "x": 4081.2060875003144,
+          "y": 3614.804649078688,
+          "name": "Fendex",
+          "star": {
+            "n": "M Kırmızı Cüce",
+            "c": "#ff7b5c",
+            "r": 4.5,
+            "w": 30
+          },
+          "planets": [
+            {
+              "i": 0,
+              "t": "cor",
+              "dep": "nadir",
+              "sz": 19,
+              "seed": 2361,
+              "name": "Fendex I",
+              "owner": -1
+            },
+            {
+              "i": 1,
+              "t": "kut",
+              "dep": null,
+              "sz": 15,
+              "seed": 2378,
+              "name": "Fendex II",
+              "owner": -1
+            }
+          ],
+          "lanes": [
+            13,
+            30,
+            44
+          ],
+          "owner": -1,
+          "surv": [
+            0
+          ],
+          "seen": [
+            0
+          ],
+          "queue": [],
+          "anom": false,
+          "anomK": "dogal",
+          "def": 0,
+          "pulsar": false,
+          "nebulaS": false,
+          "_reach": 0,
+          "_shat": false
+        }
+      },
+      "decisionId": 3,
+      "uid": 48,
+      "key": "personal:3",
+      "born": 60.22514799999982,
+      "pause": false,
+      "ico": "🔬",
+      "cls": "sci",
+      "title": "Kristal Mezarlık",
+      "sub": "Buzun altında, düzenli sıralar hâlinde dizilmiş devasa kristal sütunlar.",
+      "hidden": false
+    }
+  ],
+  "modal": "",
+  "pane": ""
+}

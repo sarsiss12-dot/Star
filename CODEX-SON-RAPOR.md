@@ -1,13 +1,13 @@
 # Son Codex raporu
 
-- Faz: **MP-P0 KURTARMA — yerel geliştirici doğrulaması, gerçek PC kullanıcı kabulü bekliyor**.
-- [Tam Türkçe rapor](reports/codex/MP-P0-KURTARMA-SONUC.md), [kanıt dizini](reports/codex/evidence/mp-p0/README.md).
-- Dal: `codex/stars-mp-p0-guest-playability`; PR tabanı `codex/stars-beta-fed-found0-founder-invites-events`.
-- Başlangıç HEAD: `bf26491828ceb65f9103ecb2def23fe832a3c454`; doğrulanmış son kod/paket commit’i **`466946186f80b09c6d7e126a13ecce48574ef95a`**. Nihai rapor commit SHA’sı son sohbet/uzak HEAD ile doğrulanır.
-- Misafir gözlem/sensör/harita bilgisi, izinli filo gövdesi, host yetkili kişisel event/anomaly/chain, dört rol rota, görsel ara hareket ve federasyon bildirim kararlılığı geliştirildi.
-- Yerel PASS: MP73 11/0, masaüstü4/0, MP74 7/0, MP75 Chromium6/0, MP8N9/0, yeni süreçli R0–R4 5/0, dört viewport kart24/0. Hedef7/0, karar7/0, hareket3/0, bildirim3/0, boot1/0, cold1/0; PERF1 4/0, PERF2 5/0; beş seed×üçay p14 ham SP Save8/RNG aynı,98 authored seçim aynı. İlk FAIL’ler korunur.
-- **FAIL açık:** MP75 Node3/1, değişmemiş p14’te de aynı3/1. Kullanıcının özgün rota/kendi-can kaybının tüm nedenleri kesinleşmiş değil. Eski sahipsiz bilim olayları tahminen başka devlete aktarılmaz.
-- 96h10p15 / stars-v96h10p15 / MP.8.9b10; Save8v8/paket4/protokol1. [ZIP](releases/stars-faz96h10p15.zip),797321bayt; SHA256 `f75b021b15e59664bc743d1e5ce1f1538fc94280c27718e8961f9fc4e2770676`; CRC32 `0536E3FD`. İki deterministik ZIP eşit; manifest19runtime dosyası doğrulandı. MP istemci/relay kaynakları ayrıca Git commit’indedir; ZIP tek başına tam MP dağıtımı değildir.
-- PR tek deneme ve #33 okuma/yazımları `Post "https://api.github.com/graphql": Forbidden`. [Compare](https://github.com/sarsiss12-dot/Star/compare/codex/stars-beta-fed-found0-founder-invites-events...codex/stars-mp-p0-guest-playability?expand=1). Pano değişti denemez; hiçbir görev TAMAMLANDI değil.
-- **NOT RUN:** fiziksel PC/Android, gerçek LAN/internet/Render, Docker build/deploy, yeni uzun kampanya. Main/deploy/restart/izin değişikliği yok.
-- Sonraki tek hedef: p15 üzerinde gerçek iki/üç PC katılımcı kabulü; hata olursa aynı kullanıcı Save8’iyle yeniden üretim. #10/#24/#25/#48 ve geçmişB1/A3 açık kalır.
+- Faz: **BETA-BOARD.1 — yerel geliştirici kabulü; gerçek kullanıcı PC onayı bekliyor**.
+- [Tek parça ayrıntılı Türkçe rapor](reports/codex/BETA-BOARD1-SONUC.md), [gerçek görev envanteri](reports/codex/BETA-BOARD1-GOREV-ENVANTERI.md), [kanıtlar](reports/codex/evidence/beta-board1/README.md).
+- Dal: `codex/stars-beta-board1-federation-stability-ux`; taban `codex/stars-mp-p0-guest-playability`, başlangıç `955c2445bb9f7837653bc372f9e8262ded6803d1`. Kod/test/paket bitiş HEAD’i **`48dcc2bd84d9df5caf0d8798e7ca6907ab63fb3a`**, push ve uzak SHA doğrulandı. Nihai rapor HEAD’i son sohbet/uzak dal ile verilir.
+- Geliştirme: tek federasyon FIFO kuyruğu ve ayrı aday rızası; paused-host siyasi yayın; hız/savaş bildirimi düzeltmesi; kararlı sipariş iptal belirteci; sabit tersane kontrolleri,24renk, bilinen sınır diplomasisi,76×44 ROTA ve kaynak krizi açıklaması.
+- Yerel PASS: gündem13/0, hız/inceleme5/0, iptal2/0; p15 beş seed×üçay15ham Save8/RNG örneği aynı; MP73 hedef5/0 ve gerçek event kartlı masaüstü4/0, MP74 7/0, MP75 Chromium6/0; yeni odalı R0–R4 5/0, N9/0; dört viewport UI17/0, mirror8/0; PERF1 4/0, PERF2 5/0, nebula3/0. İlk FAIL’ler korunur.
+- **AÇIK/FAIL:** MP75 Node3/1, p15’te de bilinen aynı özel wild adı/temas assertion’ı. Özgün #24 enerji/#25 büyük filo kaybı/#26 Konsey spamı yeniden üretilemedi; çözülmüş değil. D/E geniş işleri ve WAR-CENTER uygulanmadı. Gerçek görev kapsamı envanterde.
+- 96h10p16 / stars-v96h10p16 / MP.8.9b11; Save8v8, paket4/protokol1. Yeni iptal komutu için p16/MPb11 host+istemci birlikte kullanılmalı; eski Save8 kayıtları yüklenir.
+- [ZIP](releases/stars-faz96h10p16.zip):801627bayt; SHA256 `d74abd9d4ab3119e54c84e12dfedb75dd77c91dcb333d06e9c1856429f906604`; CRC32 `679C012A`. İki deterministik ZIP eşit,19runtime manifesti doğru. Oyun ZIP’i MP istemci/relay kaynaklarının yerine geçmez.
+- PR tek deneme ve Issue #33 okuma/yazımı: `Post "https://api.github.com/graphql": Forbidden`. [Compare](https://github.com/sarsiss12-dot/Star/compare/codex/stars-mp-p0-guest-playability...codex/stars-beta-board1-federation-stability-ux?expand=1); PR/pano güncellendi denemez, hiçbir görev TAMAMLANDI değil.
+- **NOT RUN:** fiziksel PC/Android, gerçek LAN/internet/Render, Docker build/deploy; yeni120ay/büyük galaksi kampanyası ve D/E yeni kabulü. Main/izin/deploy/restart değişikliği yok.
+- Sonraki tek hedef: p16 gerçek PC host/katılımcı kabulü; kusur çıkarsa aynı kullanıcı Save8’iyle hedefli düzeltme.
