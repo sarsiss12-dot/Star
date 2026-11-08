@@ -1,0 +1,62 @@
+[
+  {
+    "file": "archive-ui.js",
+    "before": "d3b2daa874065bb7ef611dc21b89fe0615bc25e57a3220b6b58c2ea4c9ca1100",
+    "after": "48acaa99c7eafe46105889e906a682afada2820740acbfeba456e3032a12e3ec"
+  },
+  {
+    "file": "diplomacy.js",
+    "before": "9237d139d1678db31116b682da949e76b96afc872246cb057b3ad4e28fed7fdc",
+    "after": "4803ef1de4bcca05e244e5ebef85026d5f62684b1888c83bf12c8e69a5e4df0d"
+  },
+  {
+    "file": "inbox.js",
+    "before": "e97f82d178f6908a89df792af28bebd4ba22315917e3e2c0bc15a874291ceb49",
+    "after": "f83b378bd51304868b49468cd87315a4ba2e13ec1cb5646aa8ff8ebe64c8e1a9"
+  },
+  {
+    "file": "main.js",
+    "before": "54c44e7057bcda21cf73fde27811e289c4da6b0394780038cacf6a7d194c6ee4",
+    "after": "77fc4cbd7788c6542cad14a9b5e68c012a5192e57a61ef238fe045e7bea59cc0"
+  },
+  {
+    "file": "research/mp0/mp-core.js",
+    "before": "182c8e4b3f16284ae120bd6e2a0261ea7d72a75d7383da36e8e5a4c016b43906",
+    "after": "2a322174f791de1ed97281e58ea75b49dc511ab074b9266b13b95fbeac8db828"
+  },
+  {
+    "file": "research/mp1/client/view.js",
+    "before": "ff1c7ca4a6bd34bef160c3ea6e34d46ff8690d9aec21584ace8071d3be7b1b94",
+    "after": "d1244399e974e64685ff1acce5519dd2370d3102e884e0e1cd493f0dadb242e8"
+  },
+  {
+    "file": "research/mp1/server/relay.js",
+    "before": "83a96cd3978c7b783597ba5b09f09b25505231f586df3571a434a690a31a054f",
+    "after": "67374585c6c2a253b18cb460d37ee8c2f7bf34af47116a608c4266f8794c2612"
+  },
+  {
+    "file": "research/mp6/client/guest-stars.js",
+    "before": "727534446b380f262614de44f360a698e2bc282fc0ba379d790f0dfbc7bfccc9",
+    "after": "c1058564ba838d30910656a41835cae580c0cd29d55e62e84821da23054666bb"
+  },
+  {
+    "file": "research/mp6/mirror.js",
+    "before": "c56eeb3a3180d625520ea738fbd058540ce6fc7628d46b87790740d2dc595a75",
+    "after": "8681c5410a2f0f5443d1588cef48efb0f20a6293183de3623f82c79f008ba565"
+  },
+  {
+    "file": "research/mp71/client/mp71-dip.js",
+    "before": "4b7b5e64b5bafb6ce313130fd1722ecd13f27232ceb709490602d02a88297276",
+    "after": "358005b72980a69e39b2f9c819551ad8da98ce4eb90640b2a3848f7c5d3f6850"
+  },
+  {
+    "file": "sw.js",
+    "before": "8b91b0038eff2b62ece74ea36c2b2e37a0ace6d2e257000f276b8ddb869932f5",
+    "after": "07f757cdfabed4a7433b3c320538ccca2602775d72a8412d4a500a0909d4596f"
+  },
+  {
+    "file": "ui.js",
+    "before": "419aa51170acda3fe457e889bf7dc2e57d9f7c6bb47b487cb0f9387cf0b63ff1",
+    "after": "3d0b5214dbc97f3a9cbf174b49b688f634181d0b38fc1ac4970f9a229a16d02c"
+  }
+]

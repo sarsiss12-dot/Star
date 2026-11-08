@@ -1,0 +1,92 @@
+{
+  "results": [
+    {
+      "name": "A1 rehber 1–8: oda, iki farklı devlet, hazır, başlat; iki ekranda galaksi; sürüm işareti lobi / başlangıç / MP çubuğunda ve /mp/version oyun build'iyle aynı",
+      "status": "PASS",
+      "ms": 10359
+    },
+    {
+      "name": "A2 rehber 9–12: misafir filosunu yürütür (gerçek orderMove → host), B → host diplomatik teklif ve host gelen kutusundan kabul eder; zaman iki ekranda ilerler",
+      "status": "PASS",
+      "ms": 3333
+    },
+    {
+      "name": "A3 rehber 13–15: misafir bağlantısı kopar ve döner → aynı devlet; host oyun kaydı alır (MP.4 paketi doğrulanır)",
+      "status": "PASS",
+      "ms": 3322
+    },
+    {
+      "name": "B1 konsey motorun kendi yoluyla kurulur (fikstür: temas); AI insanlar adına oy / sponsor yazmaz; B gerçek \"KONSEY OYLAMASI\" kartından Konsey ekranını açar ve EVET (dokunma) → host kaydeder, oylama açık kalır",
+      "status": "PASS",
+      "ms": 23145
+    },
+    {
+      "name": "B2 C (915×412) HAYIR verir; oylama host oy verene kadar açık; host kendi Konsey ekranından EVET → motor kapatır; tekrar oy reddedilir",
+      "status": "PASS",
+      "ms": 5219
+    },
+    {
+      "name": "B3 tasarı: B Konsey ekranından tasarı sunar (dokunma) → host kampanya sponsoru B; B AI üyeye rüşvet (dokunma) → host 200 mineral aktarır; insan üye C'ye rüşvet reddedilir; C'nin aynasında rüşvetin yönü yok",
+      "status": "PASS",
+      "ms": 6890
+    },
+    {
+      "name": "B4 entrika ve yıkıcı onay: B fısıltı ağını gerçek pencereden açar, iki AI seçer, gönderir → host motoru (B'nin günlüğü ya da motorun gerekçesi); onaysız yutma çağrısı host'a hiçbir şey göndermez",
+      "status": "PASS",
+      "ms": 5898
+    },
+    {
+      "name": "sayfa hataları yok",
+      "status": "PASS",
+      "ms": 1
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "startModal": [
+      "🛰 DANIŞMAN",
+      "",
+      "🛰 DANIŞMAN",
+      "",
+      ""
+    ],
+    "version": {
+      "mp": "MP.8.9b8",
+      "build": "96h10p13",
+      "files": {
+        "mp-core.js": "946ca1f52d51",
+        "relay.js": "67374585c6c2",
+        "mp1-host.js": "a85647bc9b81",
+        "join.js": "bc2732493741",
+        "mirror.js": "8681c5410a2f",
+        "guest-stars.js": "d2519368c089",
+        "mp71-dip.js": "4b7b5e64b5ba",
+        "mp7-setup.js": "48c0f282a254"
+      }
+    },
+    "unsupported": [
+      "autoEvent",
+      "diagCopy",
+      "joinRebel",
+      "leaveRebel",
+      "mapFix",
+      "physio",
+      "restart",
+      "rollName",
+      "sandbox",
+      "sitPick",
+      "stashNote",
+      "survey",
+      "terra",
+      "toTitle",
+      "tplDel",
+      "tplLoad",
+      "tplSave",
+      "trigCrisis"
+    ],
+    "guestDiag": "STARS MP.8.9b8 · oyun 96h10p13 · misafir · host bağlı · aşama: ready · ayna r4 20:36:04 · kurulum 8 ms · son komut: yok · son hata: yok",
+    "whisper": 1
+  },
+  "pass": 8,
+  "fail": 0
+}

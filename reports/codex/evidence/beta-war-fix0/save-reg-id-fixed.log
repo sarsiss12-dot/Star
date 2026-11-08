@@ -1,0 +1,17 @@
+Error: spawnSync git EPERM
+    at Object.spawnSync (node:internal/child_process:1191:20)
+    at spawnSync (node:child_process:929:24)
+    at execFileSync (node:child_process:972:15)
+    at archived (/workspace/Star/tests/beta-war-fix0-save-regression.cjs:3:431)
+    at Object.<anonymous> (/workspace/Star/tests/beta-war-fix0-save-regression.cjs:4:18)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+[
+  {
+    "status": "FAIL",
+    "error": "Error: spawnSync git EPERM\n    at Object.spawnSync (node:internal/child_process:1191:20)\n    at spawnSync (node:child_process:929:24)\n    at execFileSync (node:child_process:972:15)\n    at archived (/workspace/Star/tests/beta-war-fix0-save-regression.cjs:3:431)\n    at Object.<anonymous> (/workspace/Star/tests/beta-war-fix0-save-regression.cjs:4:18)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n    at Module.load (node:internal/modules/cjs/loader:1651:32)\n    at Module._load (node:internal/modules/cjs/loader:1443:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)"
+  }
+]

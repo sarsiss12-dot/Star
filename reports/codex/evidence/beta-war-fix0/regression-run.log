@@ -1,0 +1,14 @@
+{"name": "mp73", "command": ["node", "tests/browser-mp73.cjs"], "env": {"WARFIX0": "1", "BETA_P01_PANELS": "1", "BETA_P01_VOTES": "1", "BETA_P01_WAR": "1"}, "exit": 1, "status": "FAIL", "seconds": 152.45, "error": null}
+{"name": "mp74", "command": ["node", "tests/browser-mp74.cjs"], "env": {}, "exit": 0, "status": "PASS", "seconds": 45.91, "error": null}
+{"name": "mp75", "command": ["node", "tests/browser-mp75.cjs"], "env": {}, "exit": 0, "status": "PASS", "seconds": 33.9, "error": null}
+{"name": "mp8-N", "command": ["node", "tests/browser-mp8.cjs"], "env": {"MP8_SCEN": "N"}, "exit": 0, "status": "PASS", "seconds": 125.41, "error": null}
+{"name": "mp8-R", "command": ["node", "tests/browser-mp8.cjs"], "env": {"MP8_SCEN": "R", "MP8_MONTHS": "6", "MP89_R_STATE": "1"}, "exit": 0, "status": "PASS", "seconds": 64.04, "error": null}
+{"name": "perf1", "command": ["node", "tests/perf1_equivalence_test.js"], "env": {}, "exit": 0, "status": "PASS", "seconds": 2.48, "error": null}
+{"name": "perf2", "command": ["node", "tests/perf2_equivalence_test.js"], "env": {}, "exit": 0, "status": "PASS", "seconds": 3.23, "error": null}
+{"name": "nebula", "command": ["node", "tests/mp86_nebula_cache_test.js"], "env": {}, "exit": 0, "status": "PASS", "seconds": 2.78, "error": null}
+{"name": "war-end", "command": ["node", "tests/beta_p01_war_end_test.js"], "env": {}, "exit": 0, "status": "PASS", "seconds": 1.17, "error": null}
+{"name": "council", "command": ["node", "tests/mp73_council_test.js"], "env": {}, "exit": 0, "status": "PASS", "seconds": 10.25, "error": null}
+{"name": "pirates", "command": ["node", "tests/beta_setup0_pirates_test.cjs"], "env": {}, "exit": 0, "status": "PASS", "seconds": 2.17, "error": null}
+{"name": "gates", "command": ["node", "tests/beta_setup1_gates_test.cjs"], "env": {}, "exit": 0, "status": "PASS", "seconds": 2.94, "error": null}
+{"name": "names", "command": ["node", "tests/beta_ux0_names_test.cjs"], "env": {}, "exit": 0, "status": "PASS", "seconds": 4.79, "error": null}
+{"name": "mirror", "command": ["node", "tests/beta_setup1_mirror_test.cjs"], "env": {}, "exit": 0, "status": "PASS", "seconds": 0.57, "error": null}

@@ -1,0 +1,1626 @@
+[
+  {
+    "n": 100,
+    "ai": 9,
+    "seed": 99,
+    "target": 150,
+    "status": "FAIL",
+    "samples": [
+      {
+        "month": 1,
+        "rng": 438676789,
+        "sha256": "1eb013801954ac2a7634f7d56647d3788f9db18f513c70d0fbb1a16f84f9708e",
+        "ms": 219.888106,
+        "active": 1
+      },
+      {
+        "month": 2,
+        "rng": -512864866,
+        "sha256": "cac2cce39614a4e8b77cc7f89903413805b77967032b714438782219ec3c7e01",
+        "ms": 162.85849799999994,
+        "active": 1
+      },
+      {
+        "month": 3,
+        "rng": 367159292,
+        "sha256": "5cfedd629683b31cf437221c7fe6a0f08cffbec9f35350938a131419991e0433",
+        "ms": 149.25268900000003,
+        "active": 1
+      },
+      {
+        "month": 4,
+        "rng": 1295972047,
+        "sha256": "f0310a8ca4e55ae35ef7a369075c3832b68987e81731fd076c115a731c62db8b",
+        "ms": 168.91139199999998,
+        "active": 1
+      },
+      {
+        "month": 5,
+        "rng": 1513855335,
+        "sha256": "d22fd71a8d667da7353396736adccd6d92339b6b6ae4019f50c91733a863f8aa",
+        "ms": 193.27838700000007,
+        "active": 1
+      },
+      {
+        "month": 6,
+        "rng": -765298857,
+        "sha256": "46b568d9e87290264a5880e494c34bfecf2f73ab1315a6d4c0042f2bb5b36140",
+        "ms": 162.5731330000001,
+        "active": 1
+      },
+      {
+        "month": 7,
+        "rng": 1803256120,
+        "sha256": "34f5ffade96546752b6bca449259ce0987b9c552dfaf5280b398a33612da9e41",
+        "ms": 164.75473999999986,
+        "active": 1
+      },
+      {
+        "month": 8,
+        "rng": 1163844150,
+        "sha256": "1caa435946bb602f092bcd8bf9f49ed81b5458beee8a6a22ed0fcaf8fc467f09",
+        "ms": 263.406845,
+        "active": 1
+      },
+      {
+        "month": 9,
+        "rng": 1092326653,
+        "sha256": "c8667a0ec6339ffbc0e59e2dffd5bf9f108a13e3ab9d9f3ce883c9255515ed13",
+        "ms": 257.56673599999976,
+        "active": 1
+      },
+      {
+        "month": 10,
+        "rng": 325032289,
+        "sha256": "7484238698a779f3fe92f72888b3002ef87b553cd394286d12433d1994ec6943",
+        "ms": 262.88032299999986,
+        "active": 1
+      },
+      {
+        "month": 11,
+        "rng": -833485557,
+        "sha256": "2c6b8e5e00e6f4125b2beb62873a9e74d436577edfb037c86cc995766dd15b5c",
+        "ms": 282.7936420000001,
+        "active": 1
+      },
+      {
+        "month": 12,
+        "rng": 271998189,
+        "sha256": "343d9c9a09cc3bc6006343de6fadac889aa4816a2be4627beb685a8003645700",
+        "ms": 230.82489599999963,
+        "active": 1
+      },
+      {
+        "month": 13,
+        "rng": 1904164111,
+        "sha256": "76a04704454edc2b8ae13a2e7fb7e9448ccd55a621a7c0e49e6d9b6c47985925",
+        "ms": 243.30711199999996,
+        "active": 1
+      },
+      {
+        "month": 14,
+        "rng": 1441423132,
+        "sha256": "1f59691c68b416378559e7c22bf2fe99b380e77916662a0c1eb6bace3791a0da",
+        "ms": 251.81506899999977,
+        "active": 1
+      },
+      {
+        "month": 15,
+        "rng": 1226870641,
+        "sha256": "8a5e28437142662a088e6cca06711ffb6ac495e6870b17d6534c7a159d6ad7b5",
+        "ms": 289.4658099999997,
+        "active": 1
+      },
+      {
+        "month": 16,
+        "rng": -1939884009,
+        "sha256": "c40ad79756801deb9bf770aaf6e4a003255fac2a35d2be90c22abd48497663fd",
+        "ms": 250.70611000000054,
+        "active": 1
+      },
+      {
+        "month": 17,
+        "rng": -1571389427,
+        "sha256": "2cd5cdbad08bba57c4530c4b07e529999b5fa9c06245c8b0c614c5b6cc688911",
+        "ms": 245.8383130000002,
+        "active": 2
+      },
+      {
+        "month": 18,
+        "rng": 526848271,
+        "sha256": "8c515efad01a75a2bda57273fc53058af295702a5d2bf89d5306296cd169f7fe",
+        "ms": 280.6545189999997,
+        "active": 2
+      },
+      {
+        "month": 19,
+        "rng": 391389577,
+        "sha256": "a97aede7a4caa8628585c3f0e7482fd5f214361d4db63a732d76d7b60f916682",
+        "ms": 246.12640499999998,
+        "active": 1
+      },
+      {
+        "month": 20,
+        "rng": 1455661026,
+        "sha256": "014006ac127bc0aaacf7dec550b09ba4b6505fa50e3231009beaa5538194358d",
+        "ms": 256.2799920000007,
+        "active": 2
+      },
+      {
+        "month": 21,
+        "rng": -1214716648,
+        "sha256": "a0d513632bf91b4ea77ecd11391510c7bce1477df7763bf7012ccdb2f8b2760b",
+        "ms": 277.50925199999983,
+        "active": 2
+      },
+      {
+        "month": 22,
+        "rng": 473814171,
+        "sha256": "06c5a8222bde6799d6054e591b3c0c8220aa02537c24bd4720315928848fce0c",
+        "ms": 287.5709590000006,
+        "active": 2
+      },
+      {
+        "month": 23,
+        "rng": -323785393,
+        "sha256": "4ea03ed936e4ebae47e9a6b188a41e499c5ce1f29f4ecf11894e2b333982e73b",
+        "ms": 316.3939610000007,
+        "active": 2
+      },
+      {
+        "month": 24,
+        "rng": -858043869,
+        "sha256": "b3becbbf2e9d6eb5019757a0494ca7320d2832a990a39fe349edc1baf707840c",
+        "ms": 290.13238699999965,
+        "active": 2
+      },
+      {
+        "month": 25,
+        "rng": -1712008330,
+        "sha256": "025141fde760c18618cb25f53f5d6842112572ec2d8b951e684ef8a9a1396bca",
+        "ms": 347.1131540000006,
+        "active": 2
+      },
+      {
+        "month": 26,
+        "rng": 186829477,
+        "sha256": "e3945643116205181d43b17c9b4fc9c082e6ea4049b66e48c37d5926712a3c1e",
+        "ms": 354.2813669999996,
+        "active": 2
+      },
+      {
+        "month": 27,
+        "rng": 1818995399,
+        "sha256": "1599c8dc031256c9b288e9e8448443c39fcd7a9161bba51f023a585c2e89cd46",
+        "ms": 391.3112169999995,
+        "active": 2
+      },
+      {
+        "month": 28,
+        "rng": -1411700448,
+        "sha256": "86b7c6f9dd672a725dd380633357d0045b24311502191fa99a19bdb58a60a6b8",
+        "ms": 277.5956350000006,
+        "active": 2
+      },
+      {
+        "month": 29,
+        "rng": -802593678,
+        "sha256": "c6c62cfbde59aa48b23211288a598c368e6b7d034f55ee1e88f2ab694d04c96d",
+        "ms": 321.536161,
+        "active": 2
+      },
+      {
+        "month": 30,
+        "rng": -938052372,
+        "sha256": "8c17f314eac9d9b8926a983048536a1c715406a2a193457746b58426da2d6f53",
+        "ms": 347.7525110000006,
+        "active": 2
+      },
+      {
+        "month": 31,
+        "rng": -1769287933,
+        "sha256": "dfd3d40ec47d12ec93b54b0cddbb8cc264a433b04e0a491b454b0359e916976e",
+        "ms": 468.55688700000064,
+        "active": 2
+      },
+      {
+        "month": 32,
+        "rng": -1262003860,
+        "sha256": "c62d6b9d604995e7e1f8a7d906d38e785ac8ebe68f5a038f66fcdbe35c7f622f",
+        "ms": 374.91750200000024,
+        "active": 2
+      },
+      {
+        "month": 33,
+        "rng": -829568081,
+        "sha256": "6e21badf0ee24cb460e6475804356f68b849e3ec19a7ecbccd2c4ae187ebad90",
+        "ms": 293.1555039999985,
+        "active": 2
+      },
+      {
+        "month": 34,
+        "rng": 35303477,
+        "sha256": "5c6bbc442bfc9e2432314c11dc9d4ba73f094ea4b1e83cc79628c04a927c6f48",
+        "ms": 341.6153809999996,
+        "active": 2
+      },
+      {
+        "month": 35,
+        "rng": -875025881,
+        "sha256": "059779ead90b8761c0807263fa508f8e039a2ba1dc599dd003f4e3155cc78954",
+        "ms": 569.7046730000002,
+        "active": 2
+      },
+      {
+        "month": 36,
+        "rng": 189245568,
+        "sha256": "ea98ba92cad4909fccf2f0060fd62cc3e751a9a095e44265ee207e5ddfff18e5",
+        "ms": 580.854378,
+        "active": 2
+      },
+      {
+        "month": 37,
+        "rng": -1273825663,
+        "sha256": "15d0f2b907eefd05af9304b8cf69616af2f7c79cb5ba3031a9cd2bc988a2ce4b",
+        "ms": 585.1480910000009,
+        "active": 2
+      },
+      {
+        "month": 38,
+        "rng": 1422611708,
+        "sha256": "240f2667d0d0c7b6488b332cd65790d6c59d7be5ce4db9e537d3bfeff3ff3b92",
+        "ms": 347.63696399999935,
+        "active": 2
+      },
+      {
+        "month": 39,
+        "rng": 1001083026,
+        "sha256": "a8ba52f65c2d2a4d6c3e22de884e5fd2216c8613b79015e9384c03b92b263997",
+        "ms": 335.06255299999975,
+        "active": 1
+      },
+      {
+        "month": 40,
+        "rng": 1779284487,
+        "sha256": "6bd922fc66feba20550fed26aa76fd8e46a271529aca5efcdc270baaff9b1ef2",
+        "ms": 347.68756199999916,
+        "active": 1
+      },
+      {
+        "month": 41,
+        "rng": -402292511,
+        "sha256": "cdedb2baf004a4453ef6ac08e95fbaea609fa9a60c4adb96cb7e834da5a47dff",
+        "ms": 377.46835699999974,
+        "active": 1
+      },
+      {
+        "month": 42,
+        "rng": -97739126,
+        "sha256": "d8d9f7d1d7756c8a349de68f8523519cb2c1a51a5323912d07768c8905356abe",
+        "ms": 394.33571699999993,
+        "active": 1
+      },
+      {
+        "month": 43,
+        "rng": -425021411,
+        "sha256": "542231907ed406ee22818b00a5589b11042146ca50ccd95232a83af560e2eb94",
+        "ms": 438.7010599999994,
+        "active": 1
+      },
+      {
+        "month": 44,
+        "rng": -1463233163,
+        "sha256": "fdde634ebcb32d8aad0e6e15e725c9ef1a183b7f97c6a46c4ce9e4b57cd2dd4b",
+        "ms": 359.4601590000002,
+        "active": 1
+      },
+      {
+        "month": 45,
+        "rng": 41050365,
+        "sha256": "dee27ecec3af90d74a6679f352ae76fb3cb0d21f955d7da51469a98b5792ba74",
+        "ms": 373.41407300000174,
+        "active": 1
+      },
+      {
+        "month": 46,
+        "rng": -2117797733,
+        "sha256": "adef43ed9054da049ddbd12c241f62f2e60569f6ec826d99c74e2cb6d48f7718",
+        "ms": 387.5496010000006,
+        "active": 1
+      },
+      {
+        "month": 47,
+        "rng": -1196561278,
+        "sha256": "b7568d7d43118e73538e5ce22b0d5119bb51a46f2e6a4b82db6ccdaaba182c86",
+        "ms": 396.2346429999998,
+        "active": 1
+      },
+      {
+        "month": 48,
+        "rng": -260172223,
+        "sha256": "7b5a7fd917dbd871f9ec891f4413a868f0c6a5b57be5489f7b1741d244b22cf0",
+        "ms": 362.1997790000005,
+        "active": 1
+      },
+      {
+        "month": 49,
+        "rng": -1787184651,
+        "sha256": "3f375e2a9eaa6d0033a7e7cc0cf9c0d9a8cc43d223999d86d256606decd26a9d",
+        "ms": 445.28770000000077,
+        "active": 1
+      },
+      {
+        "month": 50,
+        "rng": 2093830263,
+        "sha256": "32fb19b15bbc7be041b07a5898c84d8991dd31e28eea8e3d83c06c2df3557b50",
+        "ms": 338.281989000001,
+        "active": 1
+      },
+      {
+        "month": 51,
+        "rng": -448665017,
+        "sha256": "095a1600926ab63e5a036ffa16e8680b4e6e30f52d7edd468998316b21a62496",
+        "ms": 333.11151299999983,
+        "active": 1
+      },
+      {
+        "month": 52,
+        "rng": -166840532,
+        "sha256": "02f5afa9867a0ec6d5c1175cee2cd560ae187557564d8c93081e205f1aed6141",
+        "ms": 352.4810189999989,
+        "active": 1
+      },
+      {
+        "month": 53,
+        "rng": 2033219863,
+        "sha256": "51490d2ebe5ecaea16d28a55c228be009b3426a7fd72337d374e75e6da924281",
+        "ms": 344.5064580000035,
+        "active": 1
+      },
+      {
+        "month": 54,
+        "rng": -629581511,
+        "sha256": "af2daf8c5742ef41f8dcf213acb298032d774ff32ab371524b4b1a4d05f78fd3",
+        "ms": 337.02587199999834,
+        "active": 1
+      },
+      {
+        "month": 55,
+        "rng": -1788099357,
+        "sha256": "b006e55a184568eeb90517104ca03227abbbff77afa7b19e14497872e2125d00",
+        "ms": 323.02518000000055,
+        "active": 1
+      },
+      {
+        "month": 56,
+        "rng": 1675632378,
+        "sha256": "e7c51ef27ae3403abb45fefe6881fc212d0a4f11cbccadf181f57d65259880b9",
+        "ms": 309.34483900000123,
+        "active": 1
+      },
+      {
+        "month": 57,
+        "rng": 445597035,
+        "sha256": "512c0c96babdf878aae1c0bf422f369cbc9945c9d092a3d278ec2d793c33f1ba",
+        "ms": 309.63598400000046,
+        "active": 1
+      },
+      {
+        "month": 58,
+        "rng": 1502292184,
+        "sha256": "289de9dedce872df446e2de48d80c0cc4e21da2689616d12e6fc29bcafff695d",
+        "ms": 315.60555600000225,
+        "active": 0
+      },
+      {
+        "month": 59,
+        "rng": 1607445678,
+        "sha256": "012c2455b8b4d98538c57db5cc938daf610b78e2481c5c6214c5d11ab043f9cb",
+        "ms": 359.15754399999787,
+        "active": 0
+      },
+      {
+        "month": 60,
+        "rng": 1344104590,
+        "sha256": "225fefa9bc515fe706751c13c5e2a67636ca287837c9a39de158b7f2fc031953",
+        "ms": 387.7094090000028,
+        "active": 0
+      },
+      {
+        "month": 61,
+        "rng": 1584716778,
+        "sha256": "8ca834c330ba1302c5fe2dde973624b071a5b2bff5343fbeb60bcf9367c9efa8",
+        "ms": 397.8292340000007,
+        "active": 0
+      },
+      {
+        "month": 62,
+        "rng": -525342723,
+        "sha256": "1c5919102913ae90f9d3a67f3016491e8286c23c791ab003333dc653fdbeea16",
+        "ms": 345.4412230000016,
+        "active": 0
+      },
+      {
+        "month": 63,
+        "rng": -220789338,
+        "sha256": "f81704adf61a0098ed8478ce845c8ac48b1d01020cc2e9d73a6d926ec13a6760",
+        "ms": 295.3078990000031,
+        "active": 0
+      },
+      {
+        "month": 64,
+        "rng": 1283494190,
+        "sha256": "249ecf30f7b9de4c94b563f633d7638e0e756225f14f7f17c83b760c5521b16c",
+        "ms": 293.13695799999914,
+        "active": 0
+      },
+      {
+        "month": 65,
+        "rng": 493470926,
+        "sha256": "5b990d26091b41119406bae399ac5767719814c2f17cb2dd3f0a6739b2a977d6",
+        "ms": 308.86896400000114,
+        "active": 0
+      },
+      {
+        "month": 66,
+        "rng": 1110153996,
+        "sha256": "f01258bae4db9d7bedffdae97ea2d4942a697b6ec000eac0cefb9005499699bf",
+        "ms": 305.7761160000009,
+        "active": 0
+      },
+      {
+        "month": 67,
+        "rng": -1112635299,
+        "sha256": "ec45adab9505e2fdfa58842c45f5328cd9c2fe128422e0ea2021c1210a77412f",
+        "ms": 313.8579580000005,
+        "active": 0
+      },
+      {
+        "month": 68,
+        "rng": -240187441,
+        "sha256": "9b1adbbd24fcd549708023a74dae6fe2ed7364260369c4845d5e5ce13ace6229",
+        "ms": 332.6893510000009,
+        "active": 0
+      },
+      {
+        "month": 69,
+        "rng": 1320460984,
+        "sha256": "fafe578184344b62bb7f17c2c617613b6e3998185ff4daaafc08118404e8bb59",
+        "ms": 320.2013110000007,
+        "active": 0
+      },
+      {
+        "month": 70,
+        "rng": 361343029,
+        "sha256": "4f1a9da3d6fde3bc4cdb02da53037907e91d6ca9a4297cd1b9a0bd35edb78822",
+        "ms": 328.9909549999975,
+        "active": 0
+      },
+      {
+        "month": 71,
+        "rng": 1722591563,
+        "sha256": "91d934a51dfacd94f41edc0fa5af3de580e6aa80ccdd161e666833e115bdaf31",
+        "ms": 421.3966590000018,
+        "active": 0
+      },
+      {
+        "month": 72,
+        "rng": -1083244805,
+        "sha256": "b520e4f5944d9b18ef3f2675b86bde46481766de570f530ff874bbe487dc264c",
+        "ms": 386.17643899999894,
+        "active": 0
+      },
+      {
+        "month": 73,
+        "rng": 1853804754,
+        "sha256": "0242e2425329796dd16f5388dc8bfb3531054d62a8a64749dad9f2a6df4a4f15",
+        "ms": 579.9250150000007,
+        "active": 0
+      },
+      {
+        "month": 74,
+        "rng": -448078338,
+        "sha256": "c0b83eb1b89a8c79a0fd344f78c2e519140e257c583e25892ec30b5f2ca70073",
+        "ms": 537.5566489999983,
+        "active": 0
+      },
+      {
+        "month": 75,
+        "rng": 1496217269,
+        "sha256": "c14c0d27f3d7338d56943f40ef4fafd07858d1b1751703482ea385ed7b488ef9",
+        "ms": 633.353149999999,
+        "active": 0
+      },
+      {
+        "month": 76,
+        "rng": -2054184563,
+        "sha256": "a6f44304bbb723b1d30921c9fce869ab8ce3a828e03676a3a953d4cead8e4b3d",
+        "ms": 566.629020999997,
+        "active": 0
+      },
+      {
+        "month": 77,
+        "rng": 1138629784,
+        "sha256": "375c87bab41994500446f9c1d62272abfc8308173259a87fe12ebdbe917087fd",
+        "ms": 566.7499979999993,
+        "active": 0
+      },
+      {
+        "month": 78,
+        "rng": 484065214,
+        "sha256": "e1ce3aef13de6b4be5e67c6cb3ad73163484afb1d708ff8cf9de3a6e3baca296",
+        "ms": 527.7161569999989,
+        "active": 0
+      },
+      {
+        "month": 79,
+        "rng": -1625994287,
+        "sha256": "834c512acbe8f5484de1cd5dde954c0c34b34f04de538d79f2fe84fbff0cd67b",
+        "ms": 752.94067,
+        "active": 0
+      },
+      {
+        "month": 80,
+        "rng": -385051847,
+        "sha256": "d7f85ceaa8360347c4ad01d20f05b4dbf518adb48625a011419cde80e4fd3a76",
+        "ms": 617.1421699999992,
+        "active": 0
+      },
+      {
+        "month": 81,
+        "rng": 1559243760,
+        "sha256": "359b91ec3796f34251b40d1ae50f8b3de926e26fced5295a2e9bc1c237c7b4ff",
+        "ms": 478.21982699999717,
+        "active": 0
+      },
+      {
+        "month": 82,
+        "rng": 1920162042,
+        "sha256": "2015700111162c9f0a99e37aaa802831cbc46ac05aebb2afcd5db43b089d9c62",
+        "ms": 588.7521770000021,
+        "active": 0
+      },
+      {
+        "month": 83,
+        "rng": 1081350181,
+        "sha256": "294bbabab2631f29c7c59c8a69c9ad698c5a3805435598b0f619b262bd4a4732",
+        "ms": 653.6305280000015,
+        "active": 0
+      },
+      {
+        "month": 84,
+        "rng": 1626515754,
+        "sha256": "6befc3c35a1c9397ab76e98be64e8cf33cfcf20589916e8a570e336d3425520a",
+        "ms": 605.6764360000016,
+        "active": 0
+      },
+      {
+        "month": 85,
+        "rng": 396480411,
+        "sha256": "b78ababb175c0092ddcd9ea0d9be73b5b757ebf7b1f468bfca5f6d7ae50485c0",
+        "ms": 573.8206500000015,
+        "active": 0
+      },
+      {
+        "month": 86,
+        "rng": -186566662,
+        "sha256": "79839420282a9c0bd037b514b1162bd01608babd951ab3603c8e1469021c0382",
+        "ms": 691.472485000002,
+        "active": 0
+      },
+      {
+        "month": 87,
+        "rng": -897496129,
+        "sha256": "2ec1704779d1ce987f1d58a0a6c672a3571738ae530ae2c9056518dd8e639784",
+        "ms": 679.9338720000014,
+        "active": 0
+      },
+      {
+        "month": 88,
+        "rng": -1807825487,
+        "sha256": "711ebde3b41757d8ce32fe98ec0fab7eef52293e91adc49d55495991c96b0cdc",
+        "ms": 561.1628720000008,
+        "active": 0
+      },
+      {
+        "month": 89,
+        "rng": 873459284,
+        "sha256": "4514e13ca47307d503dd8ecebbaa274f666030a94ae214af5f44bfd07f016ab7",
+        "ms": 596.5856290000011,
+        "active": 0
+      },
+      {
+        "month": 90,
+        "rng": -341423459,
+        "sha256": "24cb708014c9baff27c2931163ac19334adcaf5dfffcb934678c4807dfd3670a",
+        "ms": 520.0937629999971,
+        "active": 0
+      },
+      {
+        "month": 91,
+        "rng": 147377217,
+        "sha256": "a3019fa4c543771c541369d3dcaeb73011f655bdd04ed06139da3df338e97823",
+        "ms": 659.1559630000047,
+        "active": 0
+      },
+      {
+        "month": 92,
+        "rng": 764060287,
+        "sha256": "caad7ec1c5e22932967a3caf4ad74bc18ce1551191a19b7fa581ffdbc0704e43",
+        "ms": 788.0616969999974,
+        "active": 0
+      },
+      {
+        "month": 93,
+        "rng": 1316802160,
+        "sha256": "746d007779ad69fafb640cc105913f85c19b902af1705e871779a4842b9f312c",
+        "ms": 567.286546000003,
+        "active": 0
+      },
+      {
+        "month": 94,
+        "rng": -25962977,
+        "sha256": "6970d05308c991c4cde455a39ee838867861aff7f186902af315b70b33931c11",
+        "ms": 557.4162510000024,
+        "active": 0
+      },
+      {
+        "month": 95,
+        "rng": 1158614566,
+        "sha256": "49c190f1c78a40b00dad4dfc3b9b9e01d097a53fb6489f1825416f1483367de0",
+        "ms": 627.1559199999974,
+        "active": 0
+      },
+      {
+        "month": 96,
+        "rng": -1319939517,
+        "sha256": "34835b82a01e310a26789994051dc16d9c117b1ade8ac0d17e5a28180a534fef",
+        "ms": 658.7890410000036,
+        "active": 0
+      },
+      {
+        "month": 97,
+        "rng": 1128309366,
+        "sha256": "0c7f1b532300c96380c7872ac6bc07bd2e8eba96ea4766e57171ce0dd2ace2bf",
+        "ms": 750.0343569999968,
+        "active": 0
+      },
+      {
+        "month": 98,
+        "rng": 1289827757,
+        "sha256": "e9e2e1686998780a65b23e340a71a7584b1e62196c8bb57805fe2da46499c460",
+        "ms": 674.7093500000046,
+        "active": 0
+      },
+      {
+        "month": 99,
+        "rng": 2147123015,
+        "sha256": "4fb4005aa9adf4c20fbf13cc3da54d11808774974ff3605738e7e8ce488f4841",
+        "ms": 586.1239459999997,
+        "active": 0
+      },
+      {
+        "month": 100,
+        "rng": 1372252351,
+        "sha256": "597d97d670170ddba1e0885a955e80e6a5e8e8e35ed6abe044aecae0d92ddd51",
+        "ms": 629.7902860000031,
+        "active": 0
+      },
+      {
+        "month": 101,
+        "rng": 1142547260,
+        "sha256": "ccbbe1f5ecf2d22f76d248d23f28bda668871819bbe6c544c51bc1038220c59f",
+        "ms": 769.6767460000046,
+        "active": 0
+      },
+      {
+        "month": 102,
+        "rng": -1591771611,
+        "sha256": "805bc1990d6d9baf898c01e9496b75a1ae1e90fbbc5e8aba855308f2b91cfbbf",
+        "ms": 664.7503920000017,
+        "active": 0
+      },
+      {
+        "month": 103,
+        "rng": 160700405,
+        "sha256": "a69a8eebb70880d21799b7eaae885ccb7d9a3ec2671d75eab782791339743127",
+        "ms": 681.2272879999946,
+        "active": 0
+      },
+      {
+        "month": 104,
+        "rng": 1777713727,
+        "sha256": "b0fc2d826ebf1a56e0dbc1aba0fa270490bcab2582b81c36b56cd42935687c16",
+        "ms": 784.6266210000031,
+        "active": 0
+      },
+      {
+        "month": 105,
+        "rng": -1396617223,
+        "sha256": "f95794e7c3e8a22862a78d6e9ff2efab23fb5165d2ed1af9182dcfe9689f2b5a",
+        "ms": 719.8528379999989,
+        "active": 0
+      },
+      {
+        "month": 106,
+        "rng": -1946028299,
+        "sha256": "6c5ca4242027eb99abb94a6e44077217c44d372e1c2317e384d9df758d8a1027",
+        "ms": 717.4282129999992,
+        "active": 0
+      },
+      {
+        "month": 107,
+        "rng": -1735721311,
+        "sha256": "ecf6bd21f3e84e1214702ec881898724ef5e19e9c02a9f78d357f0b88beac69b",
+        "ms": 875.5544040000023,
+        "active": 0
+      },
+      {
+        "month": 108,
+        "rng": 520703981,
+        "sha256": "d84a4e9818e2a91e7c9cf2867a7acd6847adeeae7dd3f21e6bc9a2fe15dda2bd",
+        "ms": 872.7839509999976,
+        "active": 0
+      },
+      {
+        "month": 109,
+        "rng": 1577399130,
+        "sha256": "ff40223e9377fa61ebddc27db8590d4bf5a2588e54c13ae8112844d95cd20d87",
+        "ms": 861.2111959999966,
+        "active": 0
+      },
+      {
+        "month": 110,
+        "rng": -1916637805,
+        "sha256": "2f35e9241b91cd9f8b922453565fedb428a37aa17b937767d5785e071236826b",
+        "ms": 812.5738529999944,
+        "active": 0
+      },
+      {
+        "month": 111,
+        "rng": 971623157,
+        "sha256": "35a28f2937482d70f141397ab24b203c4f85daad881aee30f84dda3b769af883",
+        "ms": 711.5124419999993,
+        "active": 0
+      },
+      {
+        "month": 112,
+        "rng": -1841789511,
+        "sha256": "69e8c836d2989ba4c8fcd695d17a728029b56bc9824c306bc216692e821fa25f",
+        "ms": 812.1265679999997,
+        "active": 0
+      },
+      {
+        "month": 113,
+        "rng": -288717386,
+        "sha256": "7b13df97749f42aa5a9a13d2e8a7fb5cf9254b55fb8dc016a2148d619d691964",
+        "ms": 800.1859579999946,
+        "active": 0
+      },
+      {
+        "month": 114,
+        "rng": -559634774,
+        "sha256": "1007378b0ed29c3f831c77c304a7a7e8cdc861e333a3f0549b9577f9775c4eec",
+        "ms": 934.9638629999972,
+        "active": 0
+      },
+      {
+        "month": 115,
+        "rng": 1696790518,
+        "sha256": "063fdc7aeb996f2b09b01a096c99ac912439b5bb1b61fdccd2be00d8f1f66117",
+        "ms": 806.8763330000002,
+        "active": 0
+      },
+      {
+        "month": 116,
+        "rng": -349327786,
+        "sha256": "9b8e1e6f4a51c1e2e4180b6189d1b01dbce1f6501d84a82d6b37e56576bd3ee1",
+        "ms": 974.0246239999979,
+        "active": 0
+      },
+      {
+        "month": 117,
+        "rng": -1899069114,
+        "sha256": "c2a27dbe7b1c9195cc6ca25f6e73904796a6d96d6a82a79a1d50a7fcb6dda60f",
+        "ms": 940.691138000002,
+        "active": 0
+      },
+      {
+        "month": 118,
+        "rng": -466303083,
+        "sha256": "26eff0f0addb418998ac85b83837c0382b699d3be39737ac895433ebd45cd38a",
+        "ms": 871.2360880000051,
+        "active": 0
+      },
+      {
+        "month": 119,
+        "rng": 2023158097,
+        "sha256": "456d15a200711292569993860745a11370a985518e2871359790ac8050db7ac9",
+        "ms": 991.3898279999994,
+        "active": 0
+      },
+      {
+        "month": 120,
+        "rng": 1752240709,
+        "sha256": "3044c589fd500396e9fa5f0ec8edd3e65d0d1fa08cd5d197fc88851e5547596e",
+        "ms": 713.7449679999991,
+        "active": 0
+      },
+      {
+        "month": 121,
+        "rng": -1061171959,
+        "sha256": "e83643f7e7deb2a132497c0a509966b9bebf9dac7e3597c829a30eac65d462d6",
+        "ms": 701.37601,
+        "active": 1
+      },
+      {
+        "month": 122,
+        "rng": -1851195223,
+        "sha256": "93ebc7e0a64c9bcd821b1526e3890136e59e23d6d6119ab21525c6d5b310bf1e",
+        "ms": 618.2072880000051,
+        "active": 2
+      },
+      {
+        "month": 123,
+        "rng": 1597383912,
+        "sha256": "abaf88b53cb12f41879481e9d017f7ed7bc5b0073068023ea6d3910ea2f6ce3a",
+        "ms": 596.522014000002,
+        "active": 2
+      },
+      {
+        "month": 124,
+        "rng": 2119820585,
+        "sha256": "73a8cd8ba5a923c6c0a718a0d7e601ee71ef3898e4c107d13e3445de7954027e",
+        "ms": 782.9688240000032,
+        "active": 2
+      },
+      {
+        "month": 125,
+        "rng": -1084815565,
+        "sha256": "338392c8c50126948ad26175069d8a8a85f9988ba74e0d8609f1094f88ac18d3",
+        "ms": 871.3455469999972,
+        "active": 2
+      },
+      {
+        "month": 126,
+        "rng": -1841202832,
+        "sha256": "fd07eb820c31d270f3fc0ee4bdeb227594c5a17437082850fd43cec2a531408e",
+        "ms": 843.7051169999977,
+        "active": 2
+      },
+      {
+        "month": 127,
+        "rng": -1157247768,
+        "sha256": "9d678cc9811ddf849e81853649b05330cb2d9542d1b884c2e64ffd0e3a276036",
+        "ms": 870.524599000004,
+        "active": 2
+      },
+      {
+        "month": 128,
+        "rng": 549766448,
+        "sha256": "90422fdcdb8c3bbcbdd0516235da4515ef8034147667345aa3699a1fdcc78556",
+        "ms": 788.7191269999967,
+        "active": 2
+      },
+      {
+        "month": 129,
+        "rng": 1865557182,
+        "sha256": "c98d6d914698132290964fc68c591edb2db7269ad019961121caa71456c1030c",
+        "ms": 701.2937939999974,
+        "active": 1
+      }
+    ],
+    "events": [
+      {
+        "id": 1,
+        "campaign": 1,
+        "sides": [
+          0,
+          2
+        ],
+        "opened": 0,
+        "entry": "declaration",
+        "sponsor": null
+      },
+      {
+        "id": 2,
+        "campaign": 2,
+        "sides": [
+          9,
+          0
+        ],
+        "opened": 510,
+        "entry": "declaration",
+        "sponsor": null
+      },
+      {
+        "id": 3,
+        "campaign": 1,
+        "sides": [
+          9,
+          2
+        ],
+        "opened": 600,
+        "entry": "overlord",
+        "sponsor": 0
+      },
+      {
+        "id": 4,
+        "campaign": 4,
+        "sides": [
+          4,
+          5
+        ],
+        "opened": 3630,
+        "entry": "declaration",
+        "sponsor": null
+      },
+      {
+        "id": 5,
+        "campaign": 5,
+        "sides": [
+          9,
+          5
+        ],
+        "opened": 3660,
+        "entry": "declaration",
+        "sponsor": null
+      }
+    ],
+    "runtimeSha256": {
+      "main.js": "77fc4cbd7788c6542cad14a9b5e68c012a5192e57a61ef238fe045e7bea59cc0",
+      "diplomacy.js": "c80210f440a9057d14baa470fcbd2407d5493dbc6e435300dbe00856f566512d",
+      "ui.js": "3d0b5214dbc97f3a9cbf174b49b688f634181d0b38fc1ac4970f9a229a16d02c",
+      "ai.js": "0d892dd717b8593ee37820729425189087d1c0a50f8d58537164628d522d63b3",
+      "economy.js": "409f9772017837fbede5cf526968c07e56703627b825f423605e750109a4cae0"
+    },
+    "controlledEnemy": 2,
+    "controlledPeace": {
+      "day": 1800,
+      "wasAtWar": false,
+      "ok": true
+    },
+    "error": "AssertionError [ERR_ASSERTION]: asymmetric war\n\n2 !== 0\n\n    at Object.<anonymous> (/workspace/Star/tests/beta-war-fix0-campaign.cjs:13:360)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n    at Module.load (node:internal/modules/cjs/loader:1651:32)\n    at Module._load (node:internal/modules/cjs/loader:1443:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47",
+    "failureState": {
+      "day": 3900,
+      "emps": [
+        {
+          "id": 0,
+          "name": "Yeni Hanedan",
+          "dead": false,
+          "war": {
+            "1": false,
+            "2": false,
+            "3": false,
+            "4": false,
+            "6": false,
+            "7": false,
+            "8": false,
+            "9": false,
+            "10": false
+          }
+        },
+        {
+          "id": 1,
+          "name": "Brakvoth Komutanlığı",
+          "dead": false,
+          "war": {
+            "0": false,
+            "2": false,
+            "3": false,
+            "4": false,
+            "6": false,
+            "7": false,
+            "8": false,
+            "9": false,
+            "10": false
+          }
+        },
+        {
+          "id": 2,
+          "name": "Velroar Kumpanyası",
+          "dead": false,
+          "war": {
+            "0": false,
+            "1": false,
+            "3": false,
+            "4": false,
+            "6": false,
+            "7": false,
+            "8": false,
+            "9": false,
+            "10": false
+          }
+        },
+        {
+          "id": 3,
+          "name": "Turraar Teşkilatı",
+          "dead": false,
+          "war": {
+            "0": false,
+            "1": false,
+            "2": false,
+            "4": false,
+            "6": false,
+            "7": false,
+            "8": false,
+            "9": false,
+            "10": false
+          }
+        },
+        {
+          "id": 4,
+          "name": "Arkrek Birliği",
+          "dead": false,
+          "war": {
+            "0": false,
+            "1": false,
+            "2": false,
+            "3": false,
+            "6": false,
+            "7": false,
+            "8": false,
+            "9": false,
+            "10": false
+          }
+        },
+        {
+          "id": 5,
+          "name": "Vorul Ordusu",
+          "dead": true,
+          "war": {
+            "0": false,
+            "1": false,
+            "2": false,
+            "3": false,
+            "4": false,
+            "6": false,
+            "7": false,
+            "8": false,
+            "9": true,
+            "10": false
+          }
+        },
+        {
+          "id": 6,
+          "name": "Ziruk Pazarı",
+          "dead": false,
+          "war": {
+            "0": false,
+            "1": false,
+            "2": false,
+            "3": false,
+            "4": false,
+            "7": false,
+            "8": false,
+            "9": false,
+            "10": false
+          }
+        },
+        {
+          "id": 7,
+          "name": "Veenar Cemiyeti",
+          "dead": false,
+          "war": {
+            "0": false,
+            "1": false,
+            "2": false,
+            "3": false,
+            "4": false,
+            "6": false,
+            "8": false,
+            "9": false,
+            "10": false
+          }
+        },
+        {
+          "id": 8,
+          "name": "Lyreryn Şurası",
+          "dead": false,
+          "war": {
+            "0": false,
+            "1": false,
+            "2": false,
+            "3": false,
+            "4": false,
+            "6": false,
+            "7": false,
+            "9": false,
+            "10": false
+          }
+        },
+        {
+          "id": 9,
+          "name": "Vorvira Armadası",
+          "dead": false,
+          "war": {
+            "0": false,
+            "1": false,
+            "2": false,
+            "3": false,
+            "4": false,
+            "6": false,
+            "7": false,
+            "8": false,
+            "10": false
+          }
+        },
+        {
+          "id": 10,
+          "name": "Kayıp Filo Yağmacıları",
+          "dead": false,
+          "wild": true,
+          "war": {
+            "0": false,
+            "1": false,
+            "2": false,
+            "3": false,
+            "4": false,
+            "6": false,
+            "7": false,
+            "8": false,
+            "9": false
+          }
+        },
+        {
+          "id": 11,
+          "name": "Ardıl Hanedan (Nexsha I)",
+          "dead": false,
+          "war": {}
+        },
+        {
+          "id": 12,
+          "name": "Küllerden Doğan Konfederasyon (Nexsha III)",
+          "dead": false,
+          "war": {}
+        }
+      ],
+      "ledger": {
+        "v": 1,
+        "next": 6,
+        "fronts": [
+          {
+            "id": 1,
+            "campaign": 1,
+            "parent": null,
+            "reason": "declaration",
+            "sides": [
+              0,
+              2
+            ],
+            "roles": [
+              0,
+              1
+            ],
+            "opened": 0,
+            "legacy": false,
+            "ended": 1740,
+            "endReason": "exhaustion|actor:auto",
+            "entryKind": "declaration",
+            "sponsor": null,
+            "membership": [
+              {
+                "id": 0,
+                "day": 0,
+                "fed": null,
+                "lord": null
+              },
+              {
+                "id": 2,
+                "day": 0,
+                "fed": null,
+                "lord": null
+              },
+              {
+                "id": 0,
+                "day": 570,
+                "fed": null,
+                "lord": 9
+              }
+            ],
+            "goals": [],
+            "metrics": [
+              {
+                "rounds": 0,
+                "shipsLost": 0,
+                "shipsDestroyed": 0,
+                "damageDealt": 0,
+                "damageTaken": 0,
+                "groundLost": 0,
+                "groundDestroyed": 0,
+                "garrisonLost": 0,
+                "garrisonReduced": 0,
+                "systems": [],
+                "planets": []
+              },
+              {
+                "rounds": 0,
+                "shipsLost": 0,
+                "shipsDestroyed": 0,
+                "damageDealt": 0,
+                "damageTaken": 0,
+                "groundLost": 0,
+                "groundDestroyed": 0,
+                "garrisonLost": 0,
+                "garrisonReduced": 0,
+                "systems": [],
+                "planets": []
+              }
+            ],
+            "occupation": [],
+            "playerNotified": true
+          },
+          {
+            "id": 2,
+            "campaign": 2,
+            "parent": null,
+            "reason": "declaration",
+            "sides": [
+              9,
+              0
+            ],
+            "roles": [
+              0,
+              1
+            ],
+            "opened": 510,
+            "legacy": false,
+            "ended": 570,
+            "endReason": "proxy-peace|actor:auto",
+            "entryKind": "declaration",
+            "sponsor": null,
+            "membership": [
+              {
+                "id": 9,
+                "day": 510,
+                "fed": null,
+                "lord": null
+              },
+              {
+                "id": 0,
+                "day": 510,
+                "fed": null,
+                "lord": null
+              }
+            ],
+            "goals": [
+              {
+                "by": 9,
+                "day": 510,
+                "type": "boyun",
+                "targets": []
+              }
+            ],
+            "metrics": [
+              {
+                "rounds": 0,
+                "shipsLost": 0,
+                "shipsDestroyed": 0,
+                "damageDealt": 0,
+                "damageTaken": 0,
+                "groundLost": 0,
+                "groundDestroyed": 0,
+                "garrisonLost": 0,
+                "garrisonReduced": 0,
+                "systems": [],
+                "planets": []
+              },
+              {
+                "rounds": 0,
+                "shipsLost": 0,
+                "shipsDestroyed": 0,
+                "damageDealt": 0,
+                "damageTaken": 0,
+                "groundLost": 0,
+                "groundDestroyed": 0,
+                "garrisonLost": 0,
+                "garrisonReduced": 0,
+                "systems": [],
+                "planets": []
+              }
+            ],
+            "occupation": [],
+            "playerNotified": true
+          },
+          {
+            "id": 3,
+            "campaign": 1,
+            "parent": 1,
+            "reason": "overlord",
+            "sides": [
+              9,
+              2
+            ],
+            "roles": [
+              0,
+              1
+            ],
+            "opened": 600,
+            "legacy": false,
+            "ended": 1170,
+            "endReason": "ai-peace|actor:2",
+            "entryKind": "overlord",
+            "sponsor": 0,
+            "membership": [
+              {
+                "id": 9,
+                "day": 600,
+                "fed": null,
+                "lord": null
+              },
+              {
+                "id": 2,
+                "day": 600,
+                "fed": null,
+                "lord": null
+              },
+              {
+                "id": 9,
+                "day": 1020,
+                "fed": 1,
+                "lord": null
+              }
+            ],
+            "goals": [],
+            "metrics": [
+              {
+                "rounds": 0,
+                "shipsLost": 0,
+                "shipsDestroyed": 0,
+                "damageDealt": 0,
+                "damageTaken": 0,
+                "groundLost": 0,
+                "groundDestroyed": 0,
+                "garrisonLost": 0,
+                "garrisonReduced": 0,
+                "systems": [],
+                "planets": []
+              },
+              {
+                "rounds": 0,
+                "shipsLost": 0,
+                "shipsDestroyed": 0,
+                "damageDealt": 0,
+                "damageTaken": 0,
+                "groundLost": 0,
+                "groundDestroyed": 0,
+                "garrisonLost": 0,
+                "garrisonReduced": 0,
+                "systems": [],
+                "planets": []
+              }
+            ],
+            "occupation": []
+          },
+          {
+            "id": 4,
+            "campaign": 4,
+            "parent": null,
+            "reason": "declaration",
+            "sides": [
+              4,
+              5
+            ],
+            "roles": [
+              0,
+              1
+            ],
+            "opened": 3630,
+            "legacy": false,
+            "ended": 3870,
+            "endReason": "proxy-peace|actor:auto",
+            "entryKind": "declaration",
+            "sponsor": null,
+            "membership": [
+              {
+                "id": 4,
+                "day": 3630,
+                "fed": 1,
+                "lord": null
+              },
+              {
+                "id": 5,
+                "day": 3630,
+                "fed": null,
+                "lord": null
+              },
+              {
+                "id": 5,
+                "day": 3870,
+                "fed": null,
+                "lord": 4
+              }
+            ],
+            "goals": [
+              {
+                "by": 4,
+                "day": 3630,
+                "type": "boyun",
+                "targets": []
+              }
+            ],
+            "metrics": [
+              {
+                "rounds": 10,
+                "shipsLost": 1,
+                "shipsDestroyed": 3,
+                "damageDealt": 139.54460110188694,
+                "damageTaken": 85.51982656965748,
+                "groundLost": 0,
+                "groundDestroyed": 0,
+                "garrisonLost": 0,
+                "garrisonReduced": 0,
+                "systems": [
+                  "39",
+                  "95"
+                ],
+                "planets": [
+                  "95:0"
+                ]
+              },
+              {
+                "rounds": 10,
+                "shipsLost": 3,
+                "shipsDestroyed": 1,
+                "damageDealt": 85.51982656965748,
+                "damageTaken": 139.54460110188694,
+                "groundLost": 0,
+                "groundDestroyed": 0,
+                "garrisonLost": 0,
+                "garrisonReduced": 0,
+                "systems": [
+                  "39"
+                ],
+                "planets": []
+              }
+            ],
+            "occupation": [
+              {
+                "sys": 39,
+                "planet": null,
+                "from": 5,
+                "to": 4,
+                "day": 3630.5
+              },
+              {
+                "sys": 39,
+                "planet": null,
+                "from": 4,
+                "to": 5,
+                "day": 3636.5
+              },
+              {
+                "sys": 95,
+                "planet": null,
+                "from": 5,
+                "to": 4,
+                "day": 3870
+              },
+              {
+                "sys": 95,
+                "planet": 0,
+                "from": 5,
+                "to": 4,
+                "day": 3870
+              }
+            ]
+          },
+          {
+            "id": 5,
+            "campaign": 5,
+            "parent": null,
+            "reason": "declaration",
+            "sides": [
+              9,
+              5
+            ],
+            "roles": [
+              0,
+              1
+            ],
+            "opened": 3660,
+            "legacy": false,
+            "ended": 3900,
+            "endReason": "eliminated|actor:auto",
+            "entryKind": "declaration",
+            "sponsor": null,
+            "membership": [
+              {
+                "id": 9,
+                "day": 3660,
+                "fed": 1,
+                "lord": null
+              },
+              {
+                "id": 5,
+                "day": 3660,
+                "fed": null,
+                "lord": null
+              },
+              {
+                "id": 5,
+                "day": 3870,
+                "fed": null,
+                "lord": 4
+              }
+            ],
+            "goals": [
+              {
+                "by": 9,
+                "day": 3660,
+                "type": "yikim",
+                "targets": []
+              }
+            ],
+            "metrics": [
+              {
+                "rounds": 415,
+                "shipsLost": 14,
+                "shipsDestroyed": 32,
+                "damageDealt": 2895.725398898114,
+                "damageTaken": 1512.4359314574644,
+                "groundLost": 0,
+                "groundDestroyed": 0,
+                "garrisonLost": 0,
+                "garrisonReduced": 0,
+                "systems": [
+                  "52"
+                ],
+                "planets": [
+                  "52:3"
+                ]
+              },
+              {
+                "rounds": 415,
+                "shipsLost": 32,
+                "shipsDestroyed": 14,
+                "damageDealt": 1512.4359314574644,
+                "damageTaken": 2895.725398898114,
+                "groundLost": 0,
+                "groundDestroyed": 0,
+                "garrisonLost": 0,
+                "garrisonReduced": 0,
+                "systems": [
+                  "52"
+                ],
+                "planets": [
+                  "52:3"
+                ]
+              }
+            ],
+            "occupation": [
+              {
+                "sys": 52,
+                "planet": null,
+                "from": 9,
+                "to": 5,
+                "day": 3760.5
+              },
+              {
+                "sys": 52,
+                "planet": 3,
+                "from": 9,
+                "to": 5,
+                "day": 3760.5
+              },
+              {
+                "sys": 52,
+                "planet": null,
+                "from": 5,
+                "to": 9,
+                "day": 3900
+              },
+              {
+                "sys": 52,
+                "planet": 3,
+                "from": 5,
+                "to": 9,
+                "day": 3900
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+]

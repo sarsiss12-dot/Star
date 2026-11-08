@@ -1,0 +1,156 @@
+{
+  "day": 3900,
+  "pairs": [
+    {
+      "a": {
+        "id": 5,
+        "name": "Vorul Ordusu",
+        "dead": true,
+        "war": {
+          "0": false,
+          "1": false,
+          "2": false,
+          "3": false,
+          "4": false,
+          "6": false,
+          "7": false,
+          "8": false,
+          "9": true,
+          "10": false
+        }
+      },
+      "b": {
+        "id": 9,
+        "name": "Vorvira Armadası",
+        "dead": false,
+        "war": {
+          "0": false,
+          "1": false,
+          "2": false,
+          "3": false,
+          "4": false,
+          "6": false,
+          "7": false,
+          "8": false,
+          "10": false
+        }
+      },
+      "fronts": [
+        {
+          "id": 5,
+          "campaign": 5,
+          "parent": null,
+          "reason": "declaration",
+          "sides": [
+            9,
+            5
+          ],
+          "roles": [
+            0,
+            1
+          ],
+          "opened": 3660,
+          "legacy": false,
+          "ended": 3900,
+          "endReason": "eliminated|actor:auto",
+          "entryKind": "declaration",
+          "sponsor": null,
+          "membership": [
+            {
+              "id": 9,
+              "day": 3660,
+              "fed": 1,
+              "lord": null
+            },
+            {
+              "id": 5,
+              "day": 3660,
+              "fed": null,
+              "lord": null
+            },
+            {
+              "id": 5,
+              "day": 3870,
+              "fed": null,
+              "lord": 4
+            }
+          ],
+          "goals": [
+            {
+              "by": 9,
+              "day": 3660,
+              "type": "yikim",
+              "targets": []
+            }
+          ],
+          "metrics": [
+            {
+              "rounds": 415,
+              "shipsLost": 14,
+              "shipsDestroyed": 32,
+              "damageDealt": 2895.725398898114,
+              "damageTaken": 1512.4359314574644,
+              "groundLost": 0,
+              "groundDestroyed": 0,
+              "garrisonLost": 0,
+              "garrisonReduced": 0,
+              "systems": [
+                "52"
+              ],
+              "planets": [
+                "52:3"
+              ]
+            },
+            {
+              "rounds": 415,
+              "shipsLost": 32,
+              "shipsDestroyed": 14,
+              "damageDealt": 1512.4359314574644,
+              "damageTaken": 2895.725398898114,
+              "groundLost": 0,
+              "groundDestroyed": 0,
+              "garrisonLost": 0,
+              "garrisonReduced": 0,
+              "systems": [
+                "52"
+              ],
+              "planets": [
+                "52:3"
+              ]
+            }
+          ],
+          "occupation": [
+            {
+              "sys": 52,
+              "planet": null,
+              "from": 9,
+              "to": 5,
+              "day": 3760.5
+            },
+            {
+              "sys": 52,
+              "planet": 3,
+              "from": 9,
+              "to": 5,
+              "day": 3760.5
+            },
+            {
+              "sys": 52,
+              "planet": null,
+              "from": 5,
+              "to": 9,
+              "day": 3900
+            },
+            {
+              "sys": 52,
+              "planet": 3,
+              "from": 5,
+              "to": 9,
+              "day": 3900
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "day": 6.5131999999999906,
+  "player": 0,
+  "war": {
+    "1": true
+  },
+  "lord": null,
+  "inbox": [
+    {
+      "kind": "warstart",
+      "data": {
+        "attacker": 0,
+        "defender": 1,
+        "rootAttacker": 0,
+        "rootDefender": 1,
+        "front": 1,
+        "campaign": 1,
+        "reason": "declaration",
+        "sponsor": null,
+        "day": 6.5131999999999906,
+        "year": 2210,
+        "month": 1
+      },
+      "ico": "⚔",
+      "cls": "war",
+      "pause": true,
+      "title": "SAVAŞA DAHİLSİN",
+      "sub": "Kızıl Muhafız → Saf Akıl Ağı · Yeni savaş ilanı",
+      "key": "war:1",
+      "uid": 1,
+      "born": 6.5131999999999906
+    }
+  ],
+  "records": [],
+  "modal": "",
+  "view": null
+}

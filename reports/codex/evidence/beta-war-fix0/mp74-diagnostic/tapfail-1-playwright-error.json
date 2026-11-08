@@ -1,0 +1,6 @@
+{
+  "selector": "#mp1Mini [data-g=\"toggle\"]",
+  "name": "Error",
+  "message": "locator.tap: Target page, context or browser has been closed",
+  "stack": "locator.tap: Target page, context or browser has been closed\n    at tap (/workspace/Star/tests/browser-mp74.cjs:21:116)\n    at async /workspace/Star/tests/browser-mp74.cjs:115:7\n    at async test (/workspace/Star/tests/browser-mp74.cjs:14:7)\n    at async /workspace/Star/tests/browser-mp74.cjs:105:3"
+}

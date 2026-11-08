@@ -1,0 +1,37 @@
+[
+  {
+    "name": "mp74-dom-fixed",
+    "cmd": [
+      "node",
+      "tests/browser-mp74.cjs"
+    ],
+    "env": {},
+    "exit": 0,
+    "seconds": 45.22
+  },
+  {
+    "name": "mp75-dom-fixed",
+    "cmd": [
+      "node",
+      "tests/browser-mp75.cjs"
+    ],
+    "env": {},
+    "exit": 0,
+    "seconds": 23.8
+  },
+  {
+    "name": "mp8-R-history-fixed",
+    "cmd": [
+      "node",
+      "tests/browser-mp8.cjs"
+    ],
+    "env": {
+      "MP8_SCEN": "R",
+      "MP8_MONTHS": "6",
+      "MP89_R_STATE": "1",
+      "WARFIX0_HISTORY": "1"
+    },
+    "exit": 0,
+    "seconds": 62.29
+  }
+]

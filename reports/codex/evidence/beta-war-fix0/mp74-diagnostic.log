@@ -1,0 +1,34 @@
+NAV B /mp/play
+NAV B /mp/play
+NAV B /mp/play
+NAV B /mp/play
+NAV B /mp/play
+NAV B /mp/play
+PASS A1 5 karakterli kod: host kodu 5 karakter ve tiresiz; davet bağlantısı kodu taşır; yanlış kod reddedilir; KATIL'a hızlı ÜÇ dokunma (600 ms gecikmeli ağ) tek koltuk, "oda dolu" yok; iki telefon oyuna girer
+FAIL A2 küçük çok oyunculu düğmesi: host ve misafirde varsayılan "👥 n" (haritayı ve hız kutusunu kapatmaz); dokununca mevcut panel (kod, durum, KAYDET), tekrar dokununca kapanır
+page.evaluate: Target page, context or browser has been closed
+    at tap (/workspace/Star/tests/browser-mp74.cjs:22:259)
+    at async /workspace/Star/tests/browser-mp74.cjs:115:7
+    at async test (/workspace/Star/tests/browser-mp74.cjs:14:7)
+    at async /workspace/Star/tests/browser-mp74.cjs:105:3
+FAIL A3 kaydırma (gerçek dokunma): küçük hareket kartı kapatmaz; sağa kaydırınca teklif kartı kalkar, karar Gelen kutusunda BEKLER, ayna yenilenince kart geri gelmez; host'ta teklif bekler
+page.evaluate: Target page, context or browser has been closed
+    at hostOffer (/workspace/Star/tests/browser-mp74.cjs:76:50)
+    at /workspace/Star/tests/browser-mp74.cjs:118:20
+    at test (/workspace/Star/tests/browser-mp74.cjs:14:13)
+    at /workspace/Star/tests/browser-mp74.cjs:117:9
+FAIL A4 karttan hızlı karar (misafir): KABUL gerçek dokunmayla → host kabul eder, kaynak bir kez aktarılır; ÇİFT dokunma tek "respond"; REDDET; KARŞI TEKLİF gerçek anlaşma penceresini açar
+page.evaluate: Target page, context or browser has been closed
+    at /workspace/Star/tests/browser-mp74.cjs:131:14
+    at test (/workspace/Star/tests/browser-mp74.cjs:14:13)
+    at /workspace/Star/tests/browser-mp74.cjs:130:9
+FAIL A5 host karttan hızlı karar: B → host teklifi host kartında KABUL (dokunma) → kabul, bir kez
+page.evaluate: Target page, context or browser has been closed
+    at /workspace/Star/tests/browser-mp74.cjs:159:22
+    at test (/workspace/Star/tests/browser-mp74.cjs:14:13)
+    at /workspace/Star/tests/browser-mp74.cjs:158:9
+FATAL browser.newContext: Target page, context or browser has been closed
+    at async /workspace/Star/tests/browser-mp74.cjs:176:19 {
+  log: []
+}
+GEÇEN: 1 KALAN: 5

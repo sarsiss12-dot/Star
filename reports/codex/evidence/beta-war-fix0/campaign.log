@@ -1,0 +1,34 @@
+{"n":100,"ai":9,"seed":11,"month":30,"wars":1,"ms":8119.569909,"rssMB":209.33203125}
+{"n":100,"ai":9,"seed":11,"month":120,"wars":2,"ms":49032.541675,"rssMB":369.8046875}
+{"n":100,"ai":9,"seed":11,"month":150,"wars":3,"ms":70980.066249,"rssMB":345.60546875}
+100/9 seed 11 PASS
+{"n":100,"ai":9,"seed":23,"month":30,"wars":1,"ms":7121.548337999993,"rssMB":363.6328125}
+{"n":100,"ai":9,"seed":23,"month":120,"wars":2,"ms":39626.596355999995,"rssMB":421.16796875}
+{"n":100,"ai":9,"seed":23,"month":150,"wars":3,"ms":52856.19155199999,"rssMB":356.859375}
+100/9 seed 23 PASS
+{"n":100,"ai":9,"seed":42,"month":30,"wars":1,"ms":8408.854687999992,"rssMB":379.0703125}
+{"n":100,"ai":9,"seed":42,"month":120,"wars":1,"ms":61308.33565600001,"rssMB":335.25390625}
+{"n":100,"ai":9,"seed":42,"month":150,"wars":1,"ms":81193.82882699999,"rssMB":362.65625}
+100/9 seed 42 PASS
+{"n":100,"ai":9,"seed":99,"month":30,"wars":3,"ms":7820.970891999983,"rssMB":391.58984375}
+{"n":100,"ai":9,"seed":99,"month":120,"wars":3,"ms":58464.59732099998,"rssMB":400.29296875}
+AssertionError [ERR_ASSERTION]: asymmetric war
+
+2 !== 0
+
+    at Object.<anonymous> (/workspace/Star/tests/beta-war-fix0-campaign.cjs:12:360)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+100/9 seed 99 FAIL
+{"n":100,"ai":9,"seed":404,"month":30,"wars":2,"ms":8554.655823000008,"rssMB":341.76953125}
+{"n":100,"ai":9,"seed":404,"month":120,"wars":3,"ms":49701.00459299999,"rssMB":389.17578125}
+{"n":100,"ai":9,"seed":404,"month":150,"wars":4,"ms":69550.36869999999,"rssMB":401.09375}
+100/9 seed 404 PASS
+{"n":200,"ai":16,"seed":11,"month":30,"wars":2,"ms":26634.435669000028,"rssMB":404.0390625}
+200/16 seed 11 BLOCKED-budget
+{"n":200,"ai":16,"seed":23,"month":30,"wars":2,"ms":19694.985464000027,"rssMB":483.21484375}

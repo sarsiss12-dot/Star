@@ -1,0 +1,64 @@
+{
+  "first": {
+    "tur": 1,
+    "karar": "bekle",
+    "uygulandi": false,
+    "why": "İnsan oyuncunun kararı bekleniyor",
+    "karsi": null
+  },
+  "second": {
+    "tur": 1,
+    "karar": "bekle",
+    "uygulandi": false,
+    "why": "İnsan oyuncunun kararı bekleniyor",
+    "karsi": null
+  },
+  "offers": [
+    {
+      "id": 1,
+      "status": "rejected",
+      "by": "ai"
+    },
+    {
+      "id": 2,
+      "status": "pending",
+      "by": "ai"
+    }
+  ],
+  "ack": [
+    {
+      "v": 1,
+      "type": "result",
+      "seq": 1,
+      "cid": "reject00001",
+      "status": "ok",
+      "code": null,
+      "rev": 1
+    }
+  ]
+}
+node:assert:152
+  throw new AssertionError(obj);
+  ^
+
+AssertionError [ERR_ASSERTION]: same rejected AI terms immediately recreated
+
+2 !== 1
+
+    at Object.<anonymous> (/workspace/Star/tests/beta-war-fix0-mp-cooldown.cjs:6:100)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 2,
+  expected: 1,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.22.1

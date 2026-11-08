@@ -1,0 +1,982 @@
+[
+  {
+    "name": "aynı seferin yeni insan cephesi ayrı ve yalnız bir kez bildirilir",
+    "status": "FAIL",
+    "detail": {
+      "notices": [
+        {
+          "attacker": 1,
+          "defender": 0,
+          "rootAttacker": 1,
+          "rootDefender": 0,
+          "front": 1,
+          "campaign": 1,
+          "reason": "declaration",
+          "sponsor": null,
+          "day": 180,
+          "year": 2210,
+          "month": 6
+        }
+      ],
+      "fronts": [
+        {
+          "id": 1,
+          "campaign": 1,
+          "parent": null,
+          "reason": "declaration",
+          "sides": [
+            1,
+            0
+          ],
+          "roles": [
+            0,
+            1
+          ],
+          "opened": 180,
+          "legacy": false,
+          "ended": null,
+          "endReason": null,
+          "entryKind": "declaration",
+          "sponsor": null,
+          "membership": [
+            {
+              "id": 1,
+              "day": 180,
+              "fed": null,
+              "lord": null
+            },
+            {
+              "id": 0,
+              "day": 180,
+              "fed": null,
+              "lord": null
+            }
+          ],
+          "goals": [],
+          "metrics": [
+            {
+              "rounds": 0,
+              "shipsLost": 0,
+              "shipsDestroyed": 0,
+              "damageDealt": 0,
+              "damageTaken": 0,
+              "groundLost": 0,
+              "groundDestroyed": 0,
+              "garrisonLost": 0,
+              "garrisonReduced": 0,
+              "systems": [],
+              "planets": []
+            },
+            {
+              "rounds": 0,
+              "shipsLost": 0,
+              "shipsDestroyed": 0,
+              "damageDealt": 0,
+              "damageTaken": 0,
+              "groundLost": 0,
+              "groundDestroyed": 0,
+              "garrisonLost": 0,
+              "garrisonReduced": 0,
+              "systems": [],
+              "planets": []
+            }
+          ],
+          "occupation": [],
+          "playerNotified": true
+        },
+        {
+          "id": 2,
+          "campaign": 1,
+          "parent": 1,
+          "reason": "federation",
+          "sides": [
+            2,
+            0
+          ],
+          "roles": [
+            0,
+            1
+          ],
+          "opened": 180,
+          "legacy": false,
+          "ended": null,
+          "endReason": null,
+          "entryKind": "federation",
+          "sponsor": 1,
+          "membership": [
+            {
+              "id": 2,
+              "day": 180,
+              "fed": null,
+              "lord": null
+            },
+            {
+              "id": 0,
+              "day": 180,
+              "fed": null,
+              "lord": null
+            }
+          ],
+          "goals": [],
+          "metrics": [
+            {
+              "rounds": 0,
+              "shipsLost": 0,
+              "shipsDestroyed": 0,
+              "damageDealt": 0,
+              "damageTaken": 0,
+              "groundLost": 0,
+              "groundDestroyed": 0,
+              "garrisonLost": 0,
+              "garrisonReduced": 0,
+              "systems": [],
+              "planets": []
+            },
+            {
+              "rounds": 0,
+              "shipsLost": 0,
+              "shipsDestroyed": 0,
+              "damageDealt": 0,
+              "damageTaken": 0,
+              "groundLost": 0,
+              "groundDestroyed": 0,
+              "garrisonLost": 0,
+              "garrisonReduced": 0,
+              "systems": [],
+              "planets": []
+            }
+          ],
+          "occupation": []
+        }
+      ]
+    },
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n1 !== 2\n\n    at /workspace/Star/tests/beta_war_fix0_test.cjs:6:278\n    at test (/workspace/Star/tests/beta_war_fix0_test.cjs:5:40)\n    at Object.<anonymous> (/workspace/Star/tests/beta_war_fix0_test.cjs:6:1)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n    at Module.load (node:internal/modules/cjs/loader:1651:32)\n    at Module._load (node:internal/modules/cjs/loader:1443:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47"
+  },
+  {
+    "name": "aylık vasal çağrısı aynı eski cephede imzalanan barışı geri açmaz",
+    "status": "FAIL",
+    "detail": {
+      "war": true,
+      "lordWar": true,
+      "fronts": [
+        {
+          "id": 1,
+          "campaign": 1,
+          "parent": null,
+          "reason": "declaration",
+          "sides": [
+            2,
+            1
+          ],
+          "roles": [
+            0,
+            1
+          ],
+          "opened": 180,
+          "legacy": false,
+          "ended": null,
+          "endReason": null,
+          "entryKind": "declaration",
+          "sponsor": null,
+          "membership": [
+            {
+              "id": 2,
+              "day": 180,
+              "fed": null,
+              "lord": null
+            },
+            {
+              "id": 1,
+              "day": 180,
+              "fed": null,
+              "lord": null
+            }
+          ],
+          "goals": [],
+          "metrics": [
+            {
+              "rounds": 0,
+              "shipsLost": 0,
+              "shipsDestroyed": 0,
+              "damageDealt": 0,
+              "damageTaken": 0,
+              "groundLost": 0,
+              "groundDestroyed": 0,
+              "garrisonLost": 0,
+              "garrisonReduced": 0,
+              "systems": [],
+              "planets": []
+            },
+            {
+              "rounds": 0,
+              "shipsLost": 0,
+              "shipsDestroyed": 0,
+              "damageDealt": 0,
+              "damageTaken": 0,
+              "groundLost": 0,
+              "groundDestroyed": 0,
+              "garrisonLost": 0,
+              "garrisonReduced": 0,
+              "systems": [],
+              "planets": []
+            }
+          ],
+          "occupation": [],
+          "playerNotified": true
+        },
+        {
+          "id": 2,
+          "campaign": 1,
+          "parent": 1,
+          "reason": "vassal",
+          "sides": [
+            0,
+            1
+          ],
+          "roles": [
+            0,
+            1
+          ],
+          "opened": 180,
+          "legacy": false,
+          "ended": 210,
+          "endReason": "agreement|actor:0",
+          "entryKind": "vassal",
+          "sponsor": 2,
+          "membership": [
+            {
+              "id": 0,
+              "day": 180,
+              "fed": null,
+              "lord": 2
+            },
+            {
+              "id": 1,
+              "day": 180,
+              "fed": null,
+              "lord": null
+            }
+          ],
+          "goals": [],
+          "metrics": [
+            {
+              "rounds": 0,
+              "shipsLost": 0,
+              "shipsDestroyed": 0,
+              "damageDealt": 0,
+              "damageTaken": 0,
+              "groundLost": 0,
+              "groundDestroyed": 0,
+              "garrisonLost": 0,
+              "garrisonReduced": 0,
+              "systems": [],
+              "planets": []
+            },
+            {
+              "rounds": 0,
+              "shipsLost": 0,
+              "shipsDestroyed": 0,
+              "damageDealt": 0,
+              "damageTaken": 0,
+              "groundLost": 0,
+              "groundDestroyed": 0,
+              "garrisonLost": 0,
+              "garrisonReduced": 0,
+              "systems": [],
+              "planets": []
+            }
+          ],
+          "occupation": [],
+          "playerNotified": true
+        },
+        {
+          "id": 3,
+          "campaign": 1,
+          "parent": 1,
+          "reason": "vassal",
+          "sides": [
+            0,
+            1
+          ],
+          "roles": [
+            0,
+            1
+          ],
+          "opened": 240,
+          "legacy": false,
+          "ended": null,
+          "endReason": null,
+          "entryKind": "vassal",
+          "sponsor": 2,
+          "membership": [
+            {
+              "id": 0,
+              "day": 240,
+              "fed": null,
+              "lord": 2
+            },
+            {
+              "id": 1,
+              "day": 240,
+              "fed": null,
+              "lord": null
+            }
+          ],
+          "goals": [],
+          "metrics": [
+            {
+              "rounds": 0,
+              "shipsLost": 0,
+              "shipsDestroyed": 0,
+              "damageDealt": 0,
+              "damageTaken": 0,
+              "groundLost": 0,
+              "groundDestroyed": 0,
+              "garrisonLost": 0,
+              "garrisonReduced": 0,
+              "systems": [],
+              "planets": []
+            },
+            {
+              "rounds": 0,
+              "shipsLost": 0,
+              "shipsDestroyed": 0,
+              "damageDealt": 0,
+              "damageTaken": 0,
+              "groundLost": 0,
+              "groundDestroyed": 0,
+              "garrisonLost": 0,
+              "garrisonReduced": 0,
+              "systems": [],
+              "planets": []
+            }
+          ],
+          "occupation": []
+        }
+      ]
+    },
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\ntrue !== false\n\n    at /workspace/Star/tests/beta_war_fix0_test.cjs:7:444\n    at test (/workspace/Star/tests/beta_war_fix0_test.cjs:5:40)\n    at Object.<anonymous> (/workspace/Star/tests/beta_war_fix0_test.cjs:7:1)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n    at Module.load (node:internal/modules/cjs/loader:1651:32)\n    at Module._load (node:internal/modules/cjs/loader:1443:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47"
+  },
+  {
+    "name": "koruma güvenlik ağı senyörün imzaladığı eski cephe barışını geri açmaz",
+    "status": "FAIL",
+    "detail": {
+      "war": true,
+      "subjectWar": true,
+      "fronts": [
+        {
+          "id": 1,
+          "campaign": 1,
+          "parent": null,
+          "reason": "declaration",
+          "sides": [
+            1,
+            0
+          ],
+          "roles": [
+            0,
+            1
+          ],
+          "opened": 180,
+          "legacy": false,
+          "ended": null,
+          "endReason": null,
+          "entryKind": "declaration",
+          "sponsor": null,
+          "membership": [
+            {
+              "id": 1,
+              "day": 180,
+              "fed": null,
+              "lord": null
+            },
+            {
+              "id": 0,
+              "day": 180,
+              "fed": null,
+              "lord": 2
+            }
+          ],
+          "goals": [],
+          "metrics": [
+            {
+              "rounds": 0,
+              "shipsLost": 0,
+              "shipsDestroyed": 0,
+              "damageDealt": 0,
+              "damageTaken": 0,
+              "groundLost": 0,
+              "groundDestroyed": 0,
+              "garrisonLost": 0,
+              "garrisonReduced": 0,
+              "systems": [],
+              "planets": []
+            },
+            {
+              "rounds": 0,
+              "shipsLost": 0,
+              "shipsDestroyed": 0,
+              "damageDealt": 0,
+              "damageTaken": 0,
+              "groundLost": 0,
+              "groundDestroyed": 0,
+              "garrisonLost": 0,
+              "garrisonReduced": 0,
+              "systems": [],
+              "planets": []
+            }
+          ],
+          "occupation": [],
+          "playerNotified": true
+        },
+        {
+          "id": 2,
+          "campaign": 1,
+          "parent": 1,
+          "reason": "overlord",
+          "sides": [
+            2,
+            1
+          ],
+          "roles": [
+            1,
+            0
+          ],
+          "opened": 180,
+          "legacy": false,
+          "ended": 210,
+          "endReason": "agreement|actor:2",
+          "entryKind": "overlord",
+          "sponsor": 0,
+          "membership": [
+            {
+              "id": 2,
+              "day": 180,
+              "fed": null,
+              "lord": null
+            },
+            {
+              "id": 1,
+              "day": 180,
+              "fed": null,
+              "lord": null
+            }
+          ],
+          "goals": [],
+          "metrics": [
+            {
+              "rounds": 0,
+              "shipsLost": 0,
+              "shipsDestroyed": 0,
+              "damageDealt": 0,
+              "damageTaken": 0,
+              "groundLost": 0,
+              "groundDestroyed": 0,
+              "garrisonLost": 0,
+              "garrisonReduced": 0,
+              "systems": [],
+              "planets": []
+            },
+            {
+              "rounds": 0,
+              "shipsLost": 0,
+              "shipsDestroyed": 0,
+              "damageDealt": 0,
+              "damageTaken": 0,
+              "groundLost": 0,
+              "groundDestroyed": 0,
+              "garrisonLost": 0,
+              "garrisonReduced": 0,
+              "systems": [],
+              "planets": []
+            }
+          ],
+          "occupation": []
+        },
+        {
+          "id": 3,
+          "campaign": 1,
+          "parent": 1,
+          "reason": "overlord",
+          "sides": [
+            2,
+            1
+          ],
+          "roles": [
+            1,
+            0
+          ],
+          "opened": 240,
+          "legacy": false,
+          "ended": null,
+          "endReason": null,
+          "entryKind": "overlord",
+          "sponsor": 0,
+          "membership": [
+            {
+              "id": 2,
+              "day": 240,
+              "fed": null,
+              "lord": null
+            },
+            {
+              "id": 1,
+              "day": 240,
+              "fed": null,
+              "lord": null
+            }
+          ],
+          "goals": [],
+          "metrics": [
+            {
+              "rounds": 0,
+              "shipsLost": 0,
+              "shipsDestroyed": 0,
+              "damageDealt": 0,
+              "damageTaken": 0,
+              "groundLost": 0,
+              "groundDestroyed": 0,
+              "garrisonLost": 0,
+              "garrisonReduced": 0,
+              "systems": [],
+              "planets": []
+            },
+            {
+              "rounds": 0,
+              "shipsLost": 0,
+              "shipsDestroyed": 0,
+              "damageDealt": 0,
+              "damageTaken": 0,
+              "groundLost": 0,
+              "groundDestroyed": 0,
+              "garrisonLost": 0,
+              "garrisonReduced": 0,
+              "systems": [],
+              "planets": []
+            }
+          ],
+          "occupation": []
+        }
+      ]
+    },
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\ntrue !== false\n\n    at /workspace/Star/tests/beta_war_fix0_test.cjs:8:438\n    at test (/workspace/Star/tests/beta_war_fix0_test.cjs:5:40)\n    at Object.<anonymous> (/workspace/Star/tests/beta_war_fix0_test.cjs:8:1)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n    at Module.load (node:internal/modules/cjs/loader:1651:32)\n    at Module._load (node:internal/modules/cjs/loader:1443:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47"
+  },
+  {
+    "name": "savaşta bağımsız ittifak ve NAP reddedilir; açık barışlı paket iki sırada geçerli",
+    "status": "FAIL",
+    "detail": {
+      "ally": true
+    },
+    "error": "AssertionError [ERR_ASSERTION]: ally standalone\n\ntrue !== false\n\n    at /workspace/Star/tests/beta_war_fix0_test.cjs:9:266\n    at test (/workspace/Star/tests/beta_war_fix0_test.cjs:5:40)\n    at Object.<anonymous> (/workspace/Star/tests/beta_war_fix0_test.cjs:9:1)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n    at Module.load (node:internal/modules/cjs/loader:1651:32)\n    at Module._load (node:internal/modules/cjs/loader:1443:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47"
+  },
+  {
+    "name": "eski barış teklifi güncel savaş koşulunda yeniden doğrulanır",
+    "status": "FAIL",
+    "detail": {
+      "before": true,
+      "after": true,
+      "applied": true
+    },
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\ntrue !== false\n\n    at /workspace/Star/tests/beta_war_fix0_test.cjs:10:376\n    at test (/workspace/Star/tests/beta_war_fix0_test.cjs:5:40)\n    at Object.<anonymous> (/workspace/Star/tests/beta_war_fix0_test.cjs:10:1)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n    at Module.load (node:internal/modules/cjs/loader:1651:32)\n    at Module._load (node:internal/modules/cjs/loader:1443:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47"
+  },
+  {
+    "name": "rutin savaş AI teklifi barış içerir; aynı teklif ve ret soğuması korunur",
+    "status": "PASS",
+    "detail": {
+      "off": {
+        "from": 1,
+        "to": 0,
+        "give": [
+          {
+            "t": "res",
+            "r": "ene",
+            "v": 600
+          }
+        ],
+        "want": [
+          {
+            "t": "peace"
+          }
+        ]
+      },
+      "n1": true,
+      "n2": false,
+      "n3": false,
+      "wait": 810
+    }
+  },
+  {
+    "name": "aynı gün gerçekten yeni kaynak savaşı yeni yükümlülüğü engellemez",
+    "status": "PASS",
+    "detail": null
+  },
+  {
+    "name": "Save8 barışı ve eski çağrının kapanışını korur; kaynak savaşı devam eder",
+    "status": "FAIL",
+    "detail": null,
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\ntrue !== false\n\n    at /workspace/Star/tests/beta_war_fix0_test.cjs:14:379\n    at test (/workspace/Star/tests/beta_war_fix0_test.cjs:5:40)\n    at Object.<anonymous> (/workspace/Star/tests/beta_war_fix0_test.cjs:14:1)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n    at Module.load (node:internal/modules/cjs/loader:1651:32)\n    at Module._load (node:internal/modules/cjs/loader:1443:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47"
+  },
+  {
+    "name": "kısmi barış diğer cepheyi açık bırakır ve bunu açıkça bildirir",
+    "status": "FAIL",
+    "detail": null,
+    "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert(h.run('G.log.some(l=>l.m.includes(\"Savaş devam ediyor: \"+L.name))'))\n\n    at /workspace/Star/tests/beta_war_fix0_test.cjs:15:208\n    at test (/workspace/Star/tests/beta_war_fix0_test.cjs:5:40)\n    at Object.<anonymous> (/workspace/Star/tests/beta_war_fix0_test.cjs:15:1)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n    at Module.load (node:internal/modules/cjs/loader:1651:32)\n    at Module._load (node:internal/modules/cjs/loader:1443:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47"
+  },
+  {
+    "name": "vekil savaşı sponsor barışı bitirir; canlı destek kaydı kendiliğinden geri açılmaz",
+    "status": "PASS",
+    "detail": null
+  },
+  {
+    "name": "açık barış+ittifak+NAP paketinin sırası sonucu ve RNG tüketimini değiştirmez",
+    "status": "PASS",
+    "detail": null
+  },
+  {
+    "name": "declareWar dışı başlangıç görünür; yüklemede tarihsel savaş bildirimi tekrarlanmaz",
+    "status": "FAIL",
+    "detail": null,
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n0 !== 1\n\n    at /workspace/Star/tests/beta_war_fix0_test.cjs:18:272\n    at test (/workspace/Star/tests/beta_war_fix0_test.cjs:5:40)\n    at Object.<anonymous> (/workspace/Star/tests/beta_war_fix0_test.cjs:18:1)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n    at Module.load (node:internal/modules/cjs/loader:1651:32)\n    at Module._load (node:internal/modules/cjs/loader:1443:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47"
+  },
+  {
+    "name": "galaktik kriz doğrudan savaş yolu haber ve üst kart üretir",
+    "status": "FAIL",
+    "detail": null,
+    "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert(h.run('G.news.records.some(r=>r.key===\"crisis-war:\"+c.id+\":\"+G.p.id)'))\n\n    at /workspace/Star/tests/beta_war_fix0_test.cjs:19:156\n    at test (/workspace/Star/tests/beta_war_fix0_test.cjs:5:40)\n    at Object.<anonymous> (/workspace/Star/tests/beta_war_fix0_test.cjs:19:1)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n    at Module.load (node:internal/modules/cjs/loader:1651:32)\n    at Module._load (node:internal/modules/cjs/loader:1443:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47"
+  },
+  {
+    "name": "eski Save8 kapalı cephe geçmişi yokken bilinen kaynak savaş günü ve peaceAt eski çağrıyı tanımlar",
+    "status": "FAIL",
+    "detail": null,
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\ntrue !== false\n\n    at /workspace/Star/tests/beta_war_fix0_test.cjs:20:466\n    at test (/workspace/Star/tests/beta_war_fix0_test.cjs:5:40)\n    at Object.<anonymous> (/workspace/Star/tests/beta_war_fix0_test.cjs:20:1)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n    at Module.load (node:internal/modules/cjs/loader:1651:32)\n    at Module._load (node:internal/modules/cjs/loader:1443:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47"
+  },
+  {
+    "name": "yeni gönüllü savaş taahhüdü otomatik eski çağrı sanılmaz",
+    "status": "PASS",
+    "detail": null
+  },
+  {
+    "name": "federasyon savunması eski cephe barışını tekrarlamaz; yeni saldırı yükümlülüğü korunur",
+    "status": "FAIL",
+    "detail": null,
+    "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert(h.run('settled'))\n\n    at /workspace/Star/tests/beta_war_fix0_test.cjs:22:396\n    at test (/workspace/Star/tests/beta_war_fix0_test.cjs:5:40)\n    at Object.<anonymous> (/workspace/Star/tests/beta_war_fix0_test.cjs:22:1)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n    at Module.load (node:internal/modules/cjs/loader:1651:32)\n    at Module._load (node:internal/modules/cjs/loader:1443:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47"
+  },
+  {
+    "name": "bağımsız insan sırayla iki AI ile barışınca aylık yükümlülükler toplu savaşı geri getirmez",
+    "status": "FAIL",
+    "detail": {
+      "stages": [
+        {
+          "label": "initial",
+          "day": 180,
+          "enemy1": true,
+          "enemy2": true,
+          "notices": 1
+        },
+        {
+          "label": "peace-subject",
+          "day": 210,
+          "enemy1": false,
+          "enemy2": true,
+          "notices": 1
+        },
+        {
+          "label": "monthly-after-first-peace",
+          "day": 240,
+          "enemy1": true,
+          "enemy2": true,
+          "notices": 1
+        },
+        {
+          "label": "peace-lord",
+          "day": 270,
+          "enemy1": true,
+          "enemy2": false,
+          "notices": 1
+        },
+        {
+          "label": "monthly-after-both",
+          "day": 300,
+          "enemy1": true,
+          "enemy2": true,
+          "notices": 1
+        }
+      ],
+      "notices": [
+        {
+          "attacker": 0,
+          "defender": 2,
+          "rootAttacker": 0,
+          "rootDefender": 2,
+          "front": 1,
+          "campaign": 1,
+          "reason": "declaration",
+          "sponsor": null,
+          "day": 180,
+          "year": 2210,
+          "month": 6
+        }
+      ],
+      "fronts": [
+        {
+          "id": 1,
+          "campaign": 1,
+          "parent": null,
+          "reason": "declaration",
+          "sides": [
+            0,
+            2
+          ],
+          "roles": [
+            0,
+            1
+          ],
+          "opened": 180,
+          "legacy": false,
+          "ended": 270,
+          "endReason": "agreement|actor:0",
+          "entryKind": "declaration",
+          "sponsor": null,
+          "membership": [
+            {
+              "id": 0,
+              "day": 180,
+              "fed": null,
+              "lord": null
+            },
+            {
+              "id": 2,
+              "day": 180,
+              "fed": null,
+              "lord": null
+            }
+          ],
+          "goals": [],
+          "metrics": [
+            {
+              "rounds": 0,
+              "shipsLost": 0,
+              "shipsDestroyed": 0,
+              "damageDealt": 0,
+              "damageTaken": 0,
+              "groundLost": 0,
+              "groundDestroyed": 0,
+              "garrisonLost": 0,
+              "garrisonReduced": 0,
+              "systems": [],
+              "planets": []
+            },
+            {
+              "rounds": 0,
+              "shipsLost": 0,
+              "shipsDestroyed": 0,
+              "damageDealt": 0,
+              "damageTaken": 0,
+              "groundLost": 0,
+              "groundDestroyed": 0,
+              "garrisonLost": 0,
+              "garrisonReduced": 0,
+              "systems": [],
+              "planets": []
+            }
+          ],
+          "occupation": [],
+          "playerNotified": true
+        },
+        {
+          "id": 2,
+          "campaign": 1,
+          "parent": 1,
+          "reason": "vassal",
+          "sides": [
+            1,
+            0
+          ],
+          "roles": [
+            1,
+            0
+          ],
+          "opened": 180,
+          "legacy": false,
+          "ended": 210,
+          "endReason": "agreement|actor:0",
+          "entryKind": "vassal",
+          "sponsor": 2,
+          "membership": [
+            {
+              "id": 1,
+              "day": 180,
+              "fed": null,
+              "lord": 2
+            },
+            {
+              "id": 0,
+              "day": 180,
+              "fed": null,
+              "lord": null
+            }
+          ],
+          "goals": [],
+          "metrics": [
+            {
+              "rounds": 0,
+              "shipsLost": 0,
+              "shipsDestroyed": 0,
+              "damageDealt": 0,
+              "damageTaken": 0,
+              "groundLost": 0,
+              "groundDestroyed": 0,
+              "garrisonLost": 0,
+              "garrisonReduced": 0,
+              "systems": [],
+              "planets": []
+            },
+            {
+              "rounds": 0,
+              "shipsLost": 0,
+              "shipsDestroyed": 0,
+              "damageDealt": 0,
+              "damageTaken": 0,
+              "groundLost": 0,
+              "groundDestroyed": 0,
+              "garrisonLost": 0,
+              "garrisonReduced": 0,
+              "systems": [],
+              "planets": []
+            }
+          ],
+          "occupation": []
+        },
+        {
+          "id": 3,
+          "campaign": 1,
+          "parent": 1,
+          "reason": "vassal",
+          "sides": [
+            1,
+            0
+          ],
+          "roles": [
+            1,
+            0
+          ],
+          "opened": 240,
+          "legacy": false,
+          "ended": null,
+          "endReason": null,
+          "entryKind": "vassal",
+          "sponsor": 2,
+          "membership": [
+            {
+              "id": 1,
+              "day": 240,
+              "fed": null,
+              "lord": 2
+            },
+            {
+              "id": 0,
+              "day": 240,
+              "fed": null,
+              "lord": null
+            }
+          ],
+          "goals": [],
+          "metrics": [
+            {
+              "rounds": 0,
+              "shipsLost": 0,
+              "shipsDestroyed": 0,
+              "damageDealt": 0,
+              "damageTaken": 0,
+              "groundLost": 0,
+              "groundDestroyed": 0,
+              "garrisonLost": 0,
+              "garrisonReduced": 0,
+              "systems": [],
+              "planets": []
+            },
+            {
+              "rounds": 0,
+              "shipsLost": 0,
+              "shipsDestroyed": 0,
+              "damageDealt": 0,
+              "damageTaken": 0,
+              "groundLost": 0,
+              "groundDestroyed": 0,
+              "garrisonLost": 0,
+              "garrisonReduced": 0,
+              "systems": [],
+              "planets": []
+            }
+          ],
+          "occupation": []
+        },
+        {
+          "id": 4,
+          "campaign": 1,
+          "parent": 3,
+          "reason": "overlord",
+          "sides": [
+            2,
+            0
+          ],
+          "roles": [
+            1,
+            0
+          ],
+          "opened": 300,
+          "legacy": false,
+          "ended": null,
+          "endReason": null,
+          "entryKind": "overlord",
+          "sponsor": 1,
+          "membership": [
+            {
+              "id": 2,
+              "day": 300,
+              "fed": null,
+              "lord": null
+            },
+            {
+              "id": 0,
+              "day": 300,
+              "fed": null,
+              "lord": null
+            }
+          ],
+          "goals": [],
+          "metrics": [
+            {
+              "rounds": 0,
+              "shipsLost": 0,
+              "shipsDestroyed": 0,
+              "damageDealt": 0,
+              "damageTaken": 0,
+              "groundLost": 0,
+              "groundDestroyed": 0,
+              "garrisonLost": 0,
+              "garrisonReduced": 0,
+              "systems": [],
+              "planets": []
+            },
+            {
+              "rounds": 0,
+              "shipsLost": 0,
+              "shipsDestroyed": 0,
+              "damageDealt": 0,
+              "damageTaken": 0,
+              "groundLost": 0,
+              "groundDestroyed": 0,
+              "garrisonLost": 0,
+              "garrisonReduced": 0,
+              "systems": [],
+              "planets": []
+            }
+          ],
+          "occupation": []
+        }
+      ]
+    },
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\ntrue !== false\n\n    at /workspace/Star/tests/beta_war_fix0_test.cjs:23:693\n    at test (/workspace/Star/tests/beta_war_fix0_test.cjs:5:40)\n    at Object.<anonymous> (/workspace/Star/tests/beta_war_fix0_test.cjs:23:1)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n    at Module.load (node:internal/modules/cjs/loader:1651:32)\n    at Module._load (node:internal/modules/cjs/loader:1443:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47"
+  }
+]

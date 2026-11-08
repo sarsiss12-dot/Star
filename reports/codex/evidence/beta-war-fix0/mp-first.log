@@ -1,0 +1,11 @@
+PASS A1 rehber 1–8: oda, iki farklı devlet, hazır, başlat; iki ekranda galaksi; sürüm işareti lobi / başlangıç / MP çubuğunda ve /mp/version oyun build'iyle aynı
+FAIL PWF barış / yeni yan cephe / gerçek misafir dokunması / Save8 / tekrar bağlantı
+page.evaluate: Error: {"ok":false,"code":"unknown-kind"}
+    at eval (eval at evaluate (:311:30), <anonymous>:1:152)
+    at UtilityScript.evaluate (<anonymous>:313:16)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+    at module.exports (/workspace/Star/tests/helpers/beta-war-fix0-mp.cjs:18:21)
+    at async /workspace/Star/tests/browser-mp73.cjs:147:150
+    at async test (/workspace/Star/tests/browser-mp73.cjs:13:7)
+    at async /workspace/Star/tests/browser-mp73.cjs:147:32
+GEÇEN: 1 KALAN: 1

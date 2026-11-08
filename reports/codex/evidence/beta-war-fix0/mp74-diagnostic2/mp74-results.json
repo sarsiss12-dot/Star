@@ -1,0 +1,176 @@
+{
+  "results": [
+    {
+      "name": "A1 5 karakterli kod: host kodu 5 karakter ve tiresiz; davet bağlantısı kodu taşır; yanlış kod reddedilir; KATIL'a hızlı ÜÇ dokunma (600 ms gecikmeli ağ) tek koltuk, \"oda dolu\" yok; iki telefon oyuna girer",
+      "status": "PASS",
+      "ms": 9792
+    },
+    {
+      "name": "A2 küçük çok oyunculu düğmesi: host ve misafirde varsayılan \"👥 n\" (haritayı ve hız kutusunu kapatmaz); dokununca mevcut panel (kod, durum, KAYDET), tekrar dokununca kapanır",
+      "status": "PASS",
+      "ms": 2994
+    },
+    {
+      "name": "A3 kaydırma (gerçek dokunma): küçük hareket kartı kapatmaz; sağa kaydırınca teklif kartı kalkar, karar Gelen kutusunda BEKLER, ayna yenilenince kart geri gelmez; host'ta teklif bekler",
+      "status": "FAIL",
+      "error": "page.waitForFunction: Timeout 30000ms exceeded.\n    at wait (/workspace/Star/tests/browser-mp74.cjs:18:40)\n    at /workspace/Star/tests/browser-mp74.cjs:122:44\n    at async test (/workspace/Star/tests/browser-mp74.cjs:14:7)\n    at async /workspace/Star/tests/browser-mp74.cjs:118:3"
+    },
+    {
+      "name": "A4 karttan hızlı karar (misafir): KABUL gerçek dokunmayla → host kabul eder, kaynak bir kez aktarılır; ÇİFT dokunma tek \"respond\"; REDDET; KARŞI TEKLİF gerçek anlaşma penceresini açar",
+      "status": "FAIL",
+      "error": "page.waitForFunction: Timeout 30000ms exceeded.\n    at wait (/workspace/Star/tests/browser-mp74.cjs:18:40)\n    at /workspace/Star/tests/browser-mp74.cjs:144:11\n    at async test (/workspace/Star/tests/browser-mp74.cjs:14:7)\n    at async /workspace/Star/tests/browser-mp74.cjs:131:3"
+    },
+    {
+      "name": "A5 host karttan hızlı karar: B → host teklifi host kartında KABUL (dokunma) → kabul, bir kez",
+      "status": "PASS",
+      "ms": 833
+    },
+    {
+      "name": "B1 kapasite 3: host + 2 misafir (ikisi de çift dokunmayla) girer, tek koltuk tutar; dördüncü telefon \"Oda dolu.\" görür; host küçük düğmede 👥 3",
+      "status": "PASS",
+      "ms": 15563
+    },
+    {
+      "name": "sayfa hataları yok",
+      "status": "PASS",
+      "ms": 0
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "nav": [
+      "/mp/play",
+      "/mp/play?code=*",
+      "/mp/play?code=*",
+      "/mp/play?code=*",
+      "/mp/play?code=*",
+      "/mp/play?code=*",
+      "host2 /",
+      "host2 /",
+      "host2 /",
+      "host2 /",
+      "host2 /",
+      "host2 /",
+      "B2 /mp/play",
+      "B2 /mp/play",
+      "B2 /mp/play",
+      "B2 /mp/play",
+      "C2 /mp/play",
+      "C2 /mp/play",
+      "C2 /mp/play",
+      "C2 /mp/play",
+      "C2 /mp/play",
+      "B2 /mp/play",
+      "host2 /"
+    ],
+    "joinErrors_Bora": [],
+    "designEntry_Bora": {
+      "fromBurst": false,
+      "audit": {
+        "clicks": 1,
+        "opens": 1,
+        "unexpected": 0
+      },
+      "active": true,
+      "role": "guest",
+      "screen": "lobby",
+      "path": "/mp/play",
+      "head": true,
+      "menu": true
+    },
+    "relayClients": 1,
+    "relayDenied": {
+      "invalid-code": 1
+    },
+    "ghostSeats": 0,
+    "link": "https://localhost:33697/mp/play?code=…",
+    "pill_host": {
+      "w": 32,
+      "h": 42,
+      "text": "👥 2",
+      "overlap": false
+    },
+    "pill_B": {
+      "w": 32,
+      "h": 42,
+      "text": "👥 2",
+      "overlap": false
+    },
+    "quickButtons": [
+      [
+        "KABUL",
+        true,
+        44
+      ],
+      [
+        "REDDET",
+        true,
+        44
+      ],
+      [
+        "KARŞI TEKLİF",
+        true,
+        44
+      ]
+    ],
+    "a5pre": {
+      "id": 3,
+      "uidKey": "mp71:3",
+      "inbox": [
+        {
+          "uid": 1,
+          "kind": "aideal",
+          "key": "mp71:3",
+          "hidden": false
+        }
+      ],
+      "dom": [
+        "1",
+        "1:y",
+        "1:n",
+        "1:c"
+      ],
+      "recs": [
+        {
+          "id": 1,
+          "key": "deal:mp71:3",
+          "status": "pending",
+          "note": 1
+        }
+      ],
+      "offer": "pending",
+      "stats": {
+        "offers": 0,
+        "counters": 0,
+        "withdraws": 0,
+        "responds": 0,
+        "notified": 1,
+        "synced": 0,
+        "sentRenders": 0,
+        "dealBoxes": 0,
+        "blocked": 0
+      },
+      "speed": 0,
+      "modal": false,
+      "day": 74.31719999999952
+    },
+    "joinErrors_Cem": [],
+    "designEntry_Cem": {
+      "fromBurst": false,
+      "audit": {
+        "clicks": 1,
+        "opens": 1,
+        "unexpected": 0
+      },
+      "active": true,
+      "role": "guest",
+      "screen": "lobby",
+      "path": "/mp/play",
+      "head": true,
+      "menu": true
+    },
+    "fourth": "Oda dolu."
+  },
+  "pass": 5,
+  "fail": 2
+}

@@ -1,0 +1,1 @@
+Initial candidate campaign stopped after packet-order/idempotency and guest-card fixes; retained, not final-candidate acceptance.

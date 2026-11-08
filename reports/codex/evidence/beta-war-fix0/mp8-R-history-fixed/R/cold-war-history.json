@@ -1,0 +1,45 @@
+[
+  {
+    "guest": "B",
+    "eid": 1,
+    "expected": [
+      "war-front:2"
+    ],
+    "records": [
+      {
+        "id": 1,
+        "key": "war-front:2",
+        "day": 181.353216,
+        "year": 2210,
+        "month": 7,
+        "category": "war",
+        "title": "Savaş kaydı",
+        "text": "Kelank Hanedanı ↔ Saf Akıl Ağı · Savaş ilanı",
+        "important": true,
+        "read": false,
+        "pinned": false,
+        "knowledge": "Doğrudan katılım",
+        "empires": [
+          {
+            "id": 3,
+            "name": "Kelank Hanedanı"
+          },
+          {
+            "id": 1,
+            "name": "Saf Akıl Ağı"
+          }
+        ]
+      }
+    ],
+    "guestKeys": [
+      "war-front:2"
+    ]
+  },
+  {
+    "guest": "C",
+    "eid": 2,
+    "expected": [],
+    "records": [],
+    "guestKeys": []
+  }
+]

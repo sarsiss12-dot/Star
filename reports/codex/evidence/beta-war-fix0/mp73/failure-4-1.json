@@ -1,0 +1,56 @@
+{
+  "url": "/mp/play",
+  "vote": null,
+  "inbox": [
+    {
+      "kind": "warstart",
+      "data": {
+        "attacker": 1,
+        "defender": 0,
+        "rootAttacker": 1,
+        "rootDefender": 0,
+        "front": 1,
+        "campaign": 1,
+        "reason": "declaration",
+        "sponsor": null,
+        "day": 7.706399999999996,
+        "year": 2210,
+        "month": 1
+      },
+      "ico": "⚔",
+      "cls": "war",
+      "pause": true,
+      "title": "SAVAŞA DAHİLSİN",
+      "sub": "Kızıl Muhafız → Saf Akıl Ağı · Yeni savaş ilanı",
+      "key": "war:1",
+      "uid": 2,
+      "born": 7.706399999999996
+    },
+    {
+      "kind": "warstart",
+      "data": {
+        "attacker": 2,
+        "defender": 0,
+        "rootAttacker": 2,
+        "rootDefender": 0,
+        "front": 2,
+        "campaign": 1,
+        "reason": "federation",
+        "sponsor": 1,
+        "day": 7.706399999999996,
+        "year": 2210,
+        "month": 1
+      },
+      "ico": "⚔",
+      "cls": "war",
+      "pause": true,
+      "title": "SAVAŞA DAHİLSİN",
+      "sub": "Kyiron Komutanlığı → Saf Akıl Ağı · Federasyon yükümlülüğü · Çağıran: Kızıl Muhafız",
+      "key": "war:2",
+      "uid": 3,
+      "born": 7.706399999999996
+    }
+  ],
+  "modal": "<div class=\"mbox archiveShell\"><div class=\"mhd\"><span>⚔ SAVAŞ DURUMU</span><button class=\"abtn\" data-a=\"closem\" aria-label=\"Haritaya dön\">✕</button></div>\n      <nav class=\"archiveTabs\" aria-label=\"Haber ağı\"><button class=\"abtn \" data-a=\"news\" aria-pressed=\"false\">Haberler · 4</button><button class=\"abtn pri\" data-a=\"diplomaticInbox\" aria-pressed=\"true\">Gelen kutusu · 0</button><button class=\"abtn \" data-mp71=\"sent\" id=\"mp71SentTab\" aria-pressed=\"false\">Gönderilen · 0</button></nav>\n      <div class=\"mbd archiveDetail\" data-war-status=\"war-front:1\"><div class=\"mini\">Olay: war-front:1</div><h3>Savaş ilanı</h3><div class=\"row\"><span>Saldıran → Savunan</span><b>Kızıl Muhafız → Saf Akıl Ağı</b></div><p>Başlangıç / haber tarihi: 2210.01 · gün 7</p><p><b>AKTİF</b></p><p>Bilgi güncellemesi: 2210.01 · gün 7</p><p>Bilinen savaş ortakları: Kızıl Muhafız (saldıran) · Saf Akıl Ağı (savunan)</p><section class=\"box\"><b>Kızıl Muhafız</b><p>Savaş yorgunluğu: BİLİNMİYOR · tarihsel değer kaydedilmedi veya istihbarat yetersiz</p><p>Askerî güç: BİLİNMİYOR</p><p>Kayıtlı gemi kaybı: 0 · yalnız senin imha ettiklerin</p><p>Filo kaybı: BİLİNMİYOR · ayrı sayaç yok</p></section><section class=\"box\"><b>Saf Akıl Ağı</b><p>Savaş yorgunluğu: BİLİNMİYOR · tarihsel değer kaydedilmedi veya istihbarat yetersiz</p><p>Askerî güç: 361 · kendi filo gücün · 2210.01 · gün 7</p><p>Kayıtlı gemi kaybı: 0</p><p>Filo kaybı: BİLİNMİYOR · ayrı sayaç yok</p></section><p>Kayıtlı kendi savaş hedeflerin: BİLİNMİYOR</p><p>Bilinen aktif cepheler: #1 · Kızıl Muhafız ↔ Saf Akıl Ağı</p><p>Kayıtlı ilerleme: BİLİNMİYOR · görünür bir ele geçirme kaydı yok</p><p>Gizli filo konumları verilmez. Geçmiş güç ve yorgunluk anlık görüntüleri kaydedilmedi; BİLİNMİYOR alanları başka bir savaşın güncel verileriyle doldurulmaz.</p></div><div class=\"mft\"><button class=\"ch\" data-a=\"wdDiplo\">Kızıl Muhafız · Güncel diplomasi</button><button class=\"ch\" data-a=\"news\">Haber listesine dön</button><button class=\"ch\" data-a=\"closem\">Haritaya dön</button></div></div>",
+  "pane": "<div class=\"dpBox dcBox\"><div class=\"dpHd\"><span>DİPLOMASİ</span>\n      <button class=\"riX\" data-a=\"closeDiplo\" aria-label=\"Diplomasiyi kapat\">✕</button></div>\n      <div class=\"dcNav\" role=\"tablist\" aria-label=\"Diplomasi bölümleri\"><button role=\"tab\" aria-selected=\"true\" class=\"on\" data-a=\"diploNav\" data-x=\"states\">DEVLETLER</button><button role=\"tab\" aria-selected=\"false\" class=\"\" data-a=\"diploNav\" data-x=\"relation\" disabled=\"\">İLİŞKİ</button><button role=\"tab\" aria-selected=\"false\" class=\"\" data-a=\"diploNav\" data-x=\"deal\" disabled=\"\">MÜZAKERE</button></div><div class=\"dpBody dcBody\" role=\"tabpanel\"><div class=\"dcOverview\"><span>1 temas</span><span>400 ◈</span>\n      <span>Elçi 0/2</span></div><div class=\"dcFilters\"><button class=\"abtn pri\" aria-pressed=\"true\" data-a=\"diploFilter\" data-x=\"all\">Tümü</button><button class=\"abtn \" aria-pressed=\"false\" data-a=\"diploFilter\" data-x=\"war\">Savaş</button><button class=\"abtn \" aria-pressed=\"false\" data-a=\"diploFilter\" data-x=\"ally\">Müttefik</button><button class=\"abtn \" aria-pressed=\"false\" data-a=\"diploFilter\" data-x=\"envoy\">Elçi var</button></div><div class=\"dpList\"><article class=\"dcState \"><button class=\"dcSelect\" data-a=\"diploPick\" data-x=\"1\">\n        <b>Kızıl Muhafız</b><span>Barış · +40 ›</span></button>\n        </article></div><div class=\"ph\">GALAKTİK İŞLER</div><div class=\"act2\"><button class=\"abtn\" data-a=\"fedPane\">🏛 FEDERASYON</button><button class=\"abtn\" data-a=\"cncPane\">🌐 KONSEY</button></div><details class=\"dcDetails\"><summary>Gizli diplomasi</summary><div class=\"act2\"><button class=\"abtn\" data-a=\"whisperMenu\">🕸 FISILTI AĞI</button><button class=\"abtn\" data-a=\"opLogMenu\">📁 İSTİHBARAT DOSYASI</button></div></details><details class=\"dcDetails\"><summary>Lüks mal ağın</summary><div class=\"luxRow\"><span class=\"luxChip miss\">✿ Zerrin Baharatı · yok</span><span class=\"luxChip miss\">❈ Canlı Kristal · yok</span><span class=\"luxChip miss\">❋ Yankı Mercanı · yok</span><span class=\"luxChip miss\">✤ Yıldız Filizi · yok</span><span class=\"luxChip miss\">◆ Işıyan Cevher · yok</span><span class=\"luxChip miss\">≋ Vakum İpeği · yok</span><span class=\"luxChip miss\">❂ Kadim Özsu · yok</span><span class=\"luxChip miss\">✦ Boşluk Tuzu · yok</span></div></details></div></div>"
+}

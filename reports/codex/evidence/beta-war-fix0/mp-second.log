@@ -1,0 +1,22 @@
+PASS A1 rehber 1–8: oda, iki farklı devlet, hazır, başlat; iki ekranda galaksi; sürüm işareti lobi / başlangıç / MP çubuğunda ve /mp/version oyun build'iyle aynı
+FAIL PWF barış / yeni yan cephe / gerçek misafir dokunması / Save8 / tekrar bağlantı
+locator.tap: Error: strict mode violation: locator('#inbox [data-a="openNote"][data-x="1"]') resolved to 2 elements:
+    1) <button data-x="1" class="nCard sci" data-a="openNote">…</button> aka getByRole('button', { name: '📜 Teklif — Kızıl Muhafız Çok' })
+    2) <button data-x="1" class="nCard war" data-a="openNote">…</button> aka getByRole('button', { name: '⚔ SAVAŞA DAHİLSİN Kızıl Muhaf' })
+
+Call log:
+[2m  - waiting for locator('#inbox [data-a="openNote"][data-x="1"]')[22m
+[2m    - locator resolved to <button data-x="1" class="nCard sci" data-a="openNote">…</button>[22m
+[2m  - attempting tap action[22m
+[2m    2 × waiting for element to be visible, enabled and stable[22m
+[2m      - element is not stable[22m
+[2m    - retrying tap action[22m
+[2m    - waiting 20ms[22m
+[2m    - waiting for element to be visible, enabled and stable[22m
+[2m  - element was detached from the DOM, retrying[22m
+
+    at module.exports (/workspace/Star/tests/helpers/beta-war-fix0-mp.cjs:22:156)
+    at async /workspace/Star/tests/browser-mp73.cjs:147:150
+    at async test (/workspace/Star/tests/browser-mp73.cjs:13:7)
+    at async /workspace/Star/tests/browser-mp73.cjs:147:32
+GEÇEN: 1 KALAN: 1

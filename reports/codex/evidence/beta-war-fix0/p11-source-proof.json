@@ -1,0 +1,22 @@
+{
+  "main.js": {
+    "canonical_p11_sha256": "bda89ccdc42ead4cc65fdf6ca2b95735dbaa2512025eabf288bf651758b984e2",
+    "test_root_sha256": "bda89ccdc42ead4cc65fdf6ca2b95735dbaa2512025eabf288bf651758b984e2",
+    "exact": true
+  },
+  "diplomacy.js": {
+    "canonical_p11_sha256": "9237d139d1678db31116b682da949e76b96afc872246cb057b3ad4e28fed7fdc",
+    "test_root_sha256": "9237d139d1678db31116b682da949e76b96afc872246cb057b3ad4e28fed7fdc",
+    "exact": true
+  },
+  "ui.js": {
+    "canonical_p11_sha256": "7db6004c11e7eb68e030a66c31991e78498f77ac5985a2fbe718df40106cd362",
+    "test_root_sha256": "7db6004c11e7eb68e030a66c31991e78498f77ac5985a2fbe718df40106cd362",
+    "exact": true
+  },
+  "ai.js": {
+    "canonical_p11_sha256": "4f0cf937934b6e171b54497cc2605bb783c264a1f8374963b4d64a1052cfabfb",
+    "test_root_sha256": "4f0cf937934b6e171b54497cc2605bb783c264a1f8374963b4d64a1052cfabfb",
+    "exact": true
+  }
+}

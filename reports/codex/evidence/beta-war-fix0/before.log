@@ -1,0 +1,22 @@
+FAIL aynı seferin yeni insan cephesi ayrı ve yalnız bir kez bildirilir Expected values to be strictly equal:
+
+1 !== 2
+
+FAIL aylık vasal çağrısı aynı eski cephede imzalanan barışı geri açmaz Expected values to be strictly equal:
+
+true !== false
+
+FAIL koruma güvenlik ağı senyörün imzaladığı eski cephe barışını geri açmaz Expected values to be strictly equal:
+
+true !== false
+
+FAIL savaşta bağımsız ittifak ve NAP reddedilir; açık barışlı paket iki sırada geçerli ally standalone
+
+true !== false
+
+FAIL eski barış teklifi güncel savaş koşulunda yeniden doğrulanır Expected values to be strictly equal:
+
+true !== false
+
+PASS rutin savaş AI teklifi barış içerir; aynı teklif ve ret soğuması korunur
+{"pass":1,"fail":5}

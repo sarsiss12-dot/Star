@@ -1,0 +1,72 @@
+{
+  "results": [
+    {
+      "name": "A1 oda + başlangıç; MP düğmesi host ve misafirde sol araç sütununda (#tools), hız kutusu / kaynak çubuğu / araç düğmeleriyle örtüşmez; açılınca panel, kapanınca sütuna döner",
+      "status": "PASS",
+      "ms": 12331
+    },
+    {
+      "name": "A2 misafirde açık panel yerinde güncellenir: diplomasi sayfası açıkken oyun ilerler, ayna birçok kez kurulur, panel baştan yazılmaz (surfaceKept)",
+      "status": "PASS",
+      "ms": 4115
+    },
+    {
+      "name": "A3 savaş / barış: misafir AI ile savaşta; AI barış teklifi misafirin kartına gelir; KABUL (dokunma) → host'ta savaş biter; AKTİF SAVAŞLAR üst sayaçla aynı sayıyı gösterir",
+      "status": "FAIL",
+      "error": "page.waitForFunction: Timeout 30000ms exceeded.\n    at wait (/workspace/Star/tests/browser-mp75.cjs:20:40)\n    at /workspace/Star/tests/browser-mp75.cjs:118:11\n    at async test (/workspace/Star/tests/browser-mp75.cjs:16:7)\n    at async /workspace/Star/tests/browser-mp75.cjs:107:3"
+    },
+    {
+      "name": "A4 dokunmatik miktar: filo bileşimi penceresinde SIFIR / −50 / −10 / +10 / +50 (dokunma), klavye açılmaz; anlaşma miktarında pencerenin kendi düğmeleri korunur (çift kontrol yok)",
+      "status": "FAIL",
+      "error": "Error: tap #diploPane [data-a=\"dealAdd\"][data-x=\"give:res\"] [tapfail-1] {\"who\":\"Saf Akıl Ağı\",\"modal\":\"⚔ SAVAŞ DURUMU✕\\n      Haberler · 1Gelen kutusu · 1Gönderilen · 0\\n      Olay: war-front:1Savaş bildirimiSaldıran → SavunanSaf Akıl Ağı / Veirva Federasyonu · tar\",\"sheet\":\"\",\"diplo\":true,\"box\":[22,243.9375,207,44],\"top\":\"mbd archiveDetail\",\"vw\":[915,412]}\n    at tap (/workspace/Star/tests/browser-mp75.cjs:24:207)\n    at async /workspace/Star/tests/browser-mp75.cjs:124:5\n    at async test (/workspace/Star/tests/browser-mp75.cjs:16:7)\n    at async /workspace/Star/tests/browser-mp75.cjs:122:3"
+    },
+    {
+      "name": "A5 karar bekleyen olay kaydırılınca gizlenir (silinmez), ☰ durum listesinde kalır ve oradan aynı karar penceresi açılır",
+      "status": "PASS",
+      "ms": 1292
+    },
+    {
+      "name": "sayfa hataları yok",
+      "status": "PASS",
+      "ms": 1
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "joinErrors_Bora": [],
+    "dock_host": {
+      "m": [
+        6,
+        224,
+        32,
+        42
+      ],
+      "overlap": [],
+      "inView": true
+    },
+    "dock_B": {
+      "m": [
+        6,
+        269,
+        32,
+        42
+      ],
+      "overlap": [],
+      "inView": true
+    },
+    "pane": {
+      "builds": 6,
+      "rewrites": 0,
+      "kept": 18,
+      "minGap": 600,
+      "open": true
+    },
+    "activeWars": {
+      "n": 1,
+      "top": 1,
+      "html": "⚔ AKTİF SAVAŞLAR✕\n      Savaştığın devlet1Aktif savaş cephesi1\n      \n      ⚔ Veirva Federasyonu\n      0 aydır savaşta · Gerekçesiz Saldırı · aktif cephe\n      \n      Statüko barışı: Henüz iki taraf da yeterince yorulmadı (0/85)\n      Diplomasi · barış görüşmesi\n      GELEN KUTUSUKAPAT"
+    }
+  },
+  "pass": 4,
+  "fail": 2
+}

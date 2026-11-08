@@ -1,0 +1,348 @@
+{
+  "url": "/",
+  "vote": {
+    "name": "Yıldızlar Meclis",
+    "founder": 1,
+    "members": [
+      1,
+      0,
+      2,
+      7,
+      3,
+      5,
+      6,
+      4
+    ],
+    "laws": {},
+    "targeted": {},
+    "treasury": 0,
+    "president": 1,
+    "terms": {
+      "1": 1
+    },
+    "termAge": 1,
+    "voteIn": 2,
+    "vote": {
+      "key": "ticaretStd",
+      "target": null,
+      "opened": 6.992599999999986,
+      "yes": [
+        7,
+        3,
+        5,
+        4
+      ],
+      "no": [
+        6
+      ],
+      "speeches": [
+        {
+          "id": 6,
+          "txt": "Silahlarımızı bırakırsak bizi kim koruyacak?",
+          "yes": false
+        }
+      ],
+      "done": false,
+      "age": 1,
+      "sponsor": null
+    },
+    "dead": false,
+    "byConvention": true,
+    "firstLaw": null,
+    "pariahs": {},
+    "agenda": [
+      {
+        "key": "savunmaPakti",
+        "backers": [
+          7
+        ],
+        "age": 0,
+        "target": null,
+        "by": 7
+      }
+    ]
+  },
+  "inbox": [
+    {
+      "kind": "cncnew",
+      "data": 1,
+      "ico": "🌐",
+      "cls": "sci",
+      "pause": true,
+      "title": "GALAKTİK KONSEY KURULDU",
+      "sub": "Saf Akıl Ağı galaksiyi masaya çağırdı",
+      "key": "cncnew",
+      "uid": 1,
+      "born": 6.992599999999986
+    },
+    {
+      "kind": "cncvote",
+      "data": "ticaretStd",
+      "ico": "🌐",
+      "cls": "sci",
+      "pause": true,
+      "title": "KONSEY OYLAMASI",
+      "sub": "Evrensel Ticaret Standardı",
+      "key": "cnc6.992599999999986",
+      "uid": 2,
+      "born": 6.992599999999986
+    },
+    {
+      "kind": "anomaly",
+      "data": {
+        "a": {
+          "id": "a11",
+          "k": "sinyal",
+          "n": "Bilinmeyen Sinyal",
+          "t": "Sistemin derinliğinden düzenli aralıklarla bir çağrı geliyor. Kaynağı hiçbir kayıtta yok.",
+          "ch": [
+            {
+              "t": "Sinyale karşılık ver",
+              "d": "büyük ödül · risk var"
+            },
+            {
+              "t": "Kaydet ve uzaklaş",
+              "d": "+140 araştırma"
+            }
+          ]
+        },
+        "sys": {
+          "id": 1,
+          "x": 1605.1337816037894,
+          "y": 1212.9175023753926,
+          "name": "Elootyr-85",
+          "star": {
+            "n": "F Beyaz-Sarı",
+            "c": "#fff6e0",
+            "r": 6,
+            "w": 12
+          },
+          "planets": [
+            {
+              "i": 0,
+              "t": "tro",
+              "dep": "bereket",
+              "sz": 13,
+              "seed": 134,
+              "owner": -1,
+              "col": null,
+              "name": "Elootyr-85 I",
+              "lux": "kristal"
+            },
+            {
+              "i": 1,
+              "t": "tok",
+              "dep": null,
+              "sz": 14,
+              "seed": 151,
+              "owner": -1,
+              "col": null,
+              "name": "Elootyr-85 II"
+            },
+            {
+              "i": 2,
+              "t": "cor",
+              "dep": null,
+              "sz": 14,
+              "seed": 168,
+              "owner": -1,
+              "col": null,
+              "name": "Elootyr-85 III"
+            }
+          ],
+          "lanes": [
+            35,
+            29,
+            20,
+            32
+          ],
+          "owner": -1,
+          "surv": [
+            1
+          ],
+          "seen": [
+            1,
+            6
+          ],
+          "def": 0,
+          "queue": [],
+          "anom": false,
+          "pulsar": false,
+          "nebulaS": false,
+          "anomK": "sinyal",
+          "_reach": 0,
+          "cr": 0
+        }
+      },
+      "ico": "🔬",
+      "cls": "sci",
+      "pause": true,
+      "title": "Anomali — Elootyr-85",
+      "sub": "Bilinmeyen Sinyal",
+      "key": "an:1",
+      "uid": 3,
+      "born": 20.003079999999823
+    },
+    {
+      "kind": "anomaly",
+      "data": {
+        "a": {
+          "id": "a14",
+          "k": "kalinti",
+          "n": "Mühürlü Lahit",
+          "t": "Asteroidin göbeğine oyulmuş, dışarıdan mühürlenmiş bir oda. Mühürler İÇERİDEN değil, dışarıdan vurulmuş.",
+          "ch": [
+            {
+              "t": "Mührü kırma, uzaktan tara",
+              "d": "+140 araştırma · güvenli"
+            },
+            {
+              "t": "Mührü kır",
+              "d": "+700 mineral · TEHLİKELİ"
+            }
+          ]
+        },
+        "sys": {
+          "id": 24,
+          "x": 2374.353921086602,
+          "y": 2532.131382861299,
+          "name": "Orrnar",
+          "star": {
+            "n": "K Turuncu",
+            "c": "#ffab5c",
+            "r": 5,
+            "w": 22
+          },
+          "planets": [
+            {
+              "i": 0,
+              "t": "tok",
+              "dep": null,
+              "sz": 19,
+              "seed": 3147,
+              "owner": -1,
+              "col": null,
+              "name": "Orrnar I"
+            }
+          ],
+          "lanes": [
+            10,
+            43,
+            27
+          ],
+          "owner": -1,
+          "surv": [
+            2
+          ],
+          "seen": [
+            2
+          ],
+          "def": 0,
+          "queue": [],
+          "anom": false,
+          "pulsar": false,
+          "nebulaS": false,
+          "anomK": "kalinti",
+          "_reach": 0,
+          "cr": 0
+        }
+      },
+      "ico": "🔬",
+      "cls": "sci",
+      "pause": true,
+      "title": "Anomali — Orrnar",
+      "sub": "Mühürlü Lahit",
+      "key": "an:24",
+      "uid": 4,
+      "born": 32.935959999999696
+    },
+    {
+      "kind": "anomaly",
+      "data": {
+        "a": {
+          "id": "a15",
+          "k": "sinyal",
+          "n": "Tekrarlayan Çağrı",
+          "t": "Aynı 11 saniyelik ses döngüsü, 4.000 yıldır boşluğa yayınlanıyor. Sinyal bir konum bildiriyor.",
+          "ch": [
+            {
+              "t": "Sinyali çöz",
+              "d": "+260 araştırma, +80 etki"
+            },
+            {
+              "t": "Sinyali yanıtla",
+              "d": "??? · TEHLİKELİ"
+            }
+          ]
+        },
+        "sys": {
+          "id": 22,
+          "x": 1264.6890921475363,
+          "y": 3701.657425284332,
+          "name": "Moralith",
+          "star": {
+            "n": "B Mavi",
+            "c": "#a9d4ff",
+            "r": 7.5,
+            "w": 4
+          },
+          "planets": [
+            {
+              "i": 0,
+              "t": "buz",
+              "dep": null,
+              "sz": 12,
+              "seed": 2885,
+              "owner": -1,
+              "col": null,
+              "name": "Moralith I"
+            },
+            {
+              "i": 1,
+              "t": "vol",
+              "dep": null,
+              "sz": 14,
+              "seed": 2902,
+              "owner": -1,
+              "col": null,
+              "name": "Moralith II"
+            }
+          ],
+          "lanes": [
+            11,
+            14,
+            41,
+            23,
+            26
+          ],
+          "owner": -1,
+          "surv": [
+            0
+          ],
+          "seen": [
+            0
+          ],
+          "def": 0,
+          "queue": [],
+          "anom": false,
+          "pulsar": false,
+          "nebulaS": true,
+          "anomK": "sinyal",
+          "_reach": 0,
+          "_shat": false,
+          "cr": 0
+        }
+      },
+      "ico": "🔬",
+      "cls": "sci",
+      "pause": true,
+      "title": "Anomali — Moralith",
+      "sub": "Tekrarlayan Çağrı",
+      "key": "an:22",
+      "uid": 5,
+      "born": 35.89843999999973
+    }
+  ],
+  "modal": "",
+  "pane": ""
+}

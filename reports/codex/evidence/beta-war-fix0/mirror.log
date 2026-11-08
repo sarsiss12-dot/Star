@@ -1,0 +1,2 @@
+PASS actor 1 structures/work use guest IDs, host state unchanged
+PASS actor 2 structures/work use guest IDs, host state unchanged

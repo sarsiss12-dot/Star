@@ -1,0 +1,3 @@
+PASS cold MP package restores only own front history with exact days; Save8/RNG unchanged
+PASS crisis history reuses an actual saved event only for its own participants
+PASS controlled history-limit fixture: 80 own rows; other player history isolated

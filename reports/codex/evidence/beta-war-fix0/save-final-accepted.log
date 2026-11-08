@@ -1,0 +1,24 @@
+[
+  {
+    "name": "real parent p12 package accepted; tampered integrity rejected",
+    "status": "PASS"
+  },
+  {
+    "name": "existing 500/16 seed11 Save8 m120->121 same-code exact repeat",
+    "status": "PASS",
+    "sourceSaveSha256": "7020892bd634e2fdd718986ebf9a7dc69d9912f8f06265c72da91706749cdf84",
+    "rawSaveSha256": "db693ce84fcf680807d45f1206488cfb9bfec57af511a84fa95f5efe71395dd8",
+    "rng": -1581262004,
+    "months": [
+      120,
+      121
+    ],
+    "n": 2,
+    "preOfferIdControl": "002cad426f0e165d828ef3e32a63502d8a36e6bb",
+    "controlExactSave8Rng": "PASS",
+    "ms": [
+      6665.761614999999,
+      6102.361517999999
+    ]
+  }
+]

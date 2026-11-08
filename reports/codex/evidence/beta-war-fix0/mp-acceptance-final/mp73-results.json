@@ -1,0 +1,58 @@
+{
+  "results": [
+    {
+      "name": "A1 rehber 1–8: oda, iki farklı devlet, hazır, başlat; iki ekranda galaksi; sürüm işareti lobi / başlangıç / MP çubuğunda ve /mp/version oyun build'iyle aynı",
+      "status": "PASS",
+      "ms": 11006
+    },
+    {
+      "name": "PWF barış / yeni yan cephe / gerçek misafir dokunması / Save8 / tekrar bağlantı",
+      "status": "FAIL",
+      "error": "locator.tap: Timeout 8000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#inboxYes')\u001b[22m\n\n    at module.exports (/workspace/Star/tests/helpers/beta-war-fix0-mp.cjs:37:295)\n    at async /workspace/Star/tests/browser-mp73.cjs:147:150\n    at async test (/workspace/Star/tests/browser-mp73.cjs:13:7)\n    at async /workspace/Star/tests/browser-mp73.cjs:147:32"
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "startModal": [
+      "🛰 DANIŞMAN",
+      ""
+    ],
+    "version": {
+      "mp": "MP.8.9b8",
+      "build": "96h10p13",
+      "files": {
+        "mp-core.js": "946ca1f52d51",
+        "relay.js": "67374585c6c2",
+        "mp1-host.js": "a85647bc9b81",
+        "join.js": "bc2732493741",
+        "mirror.js": "8681c5410a2f",
+        "guest-stars.js": "6a94d8e337e9",
+        "mp71-dip.js": "4b7b5e64b5ba",
+        "mp7-setup.js": "48c0f282a254"
+      }
+    },
+    "unsupported": [
+      "autoEvent",
+      "diagCopy",
+      "joinRebel",
+      "leaveRebel",
+      "mapFix",
+      "physio",
+      "restart",
+      "rollName",
+      "sandbox",
+      "sitPick",
+      "stashNote",
+      "survey",
+      "terra",
+      "toTitle",
+      "tplDel",
+      "tplLoad",
+      "tplSave",
+      "trigCrisis"
+    ],
+    "guestDiag": "STARS MP.8.9b8 · oyun 96h10p13 · misafir · host bağlı · aşama: ready · ayna r4 21:18:51 · kurulum 7 ms · son komut: yok · son hata: yok"
+  },
+  "pass": 1,
+  "fail": 1
+}

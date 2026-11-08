@@ -1,0 +1,153 @@
+{
+  "contact": false,
+  "news": [
+    {
+      "id": 1,
+      "key": "war-front:1",
+      "day": 155.67336000000412,
+      "year": 2210,
+      "month": 6,
+      "category": "war",
+      "title": "Savaş ilanı",
+      "text": "Yüce Nyx Zihni → Muhteşem Xel'Naga Otoritesi",
+      "important": true,
+      "read": false,
+      "pinned": false,
+      "knowledge": "Doğrudan katılım",
+      "empires": [
+        {
+          "id": 0,
+          "name": "Yüce Nyx Zihni"
+        },
+        {
+          "id": 1,
+          "name": "Muhteşem Xel'Naga Otoritesi"
+        }
+      ]
+    }
+  ],
+  "seen": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99
+  ]
+}
+node:internal/assert/utils:77
+    throw err;
+    ^
+
+AssertionError [ERR_ASSERTION]: explicit new war must identify the guest opponent
+    at Object.<anonymous> (/workspace/Star/tests/beta-war-fix0-mp-contact.cjs:5:194)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+
+Node.js v24.22.1

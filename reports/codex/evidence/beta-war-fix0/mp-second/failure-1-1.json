@@ -1,0 +1,56 @@
+{
+  "url": "/mp/play",
+  "vote": null,
+  "inbox": [
+    {
+      "kind": "warstart",
+      "data": {
+        "attacker": 1,
+        "defender": 0,
+        "rootAttacker": 1,
+        "rootDefender": 0,
+        "front": 1,
+        "campaign": 1,
+        "reason": "declaration",
+        "sponsor": null,
+        "day": 7.2667999999999955,
+        "year": 2210,
+        "month": 1
+      },
+      "ico": "⚔",
+      "cls": "war",
+      "pause": true,
+      "title": "SAVAŞA DAHİLSİN",
+      "sub": "Kızıl Muhafız → Saf Akıl Ağı · Yeni savaş ilanı",
+      "key": "war:1",
+      "uid": 1,
+      "born": 7.2667999999999955
+    },
+    {
+      "kind": "warstart",
+      "data": {
+        "attacker": 2,
+        "defender": 0,
+        "rootAttacker": 2,
+        "rootDefender": 0,
+        "front": 2,
+        "campaign": 1,
+        "reason": "federation",
+        "sponsor": 1,
+        "day": 7.2667999999999955,
+        "year": 2210,
+        "month": 1
+      },
+      "ico": "⚔",
+      "cls": "war",
+      "pause": true,
+      "title": "SAVAŞA DAHİLSİN",
+      "sub": "Luyra Konsorsiyumu → Saf Akıl Ağı · Federasyon yükümlülüğü · Çağıran: Kızıl Muhafız",
+      "key": "war:2",
+      "uid": 2,
+      "born": 7.2667999999999955
+    }
+  ],
+  "modal": "",
+  "pane": ""
+}

@@ -1,0 +1,33 @@
+✓ contact is natural (exploration) and A, B, C are human; resources trade A→B through executeDeal: same Save8 as calling the engine directly
+✓ counter-offer: B answers 60 instead of 100 alloy; the old round can no longer be accepted; only the new terms are applied when A accepts
+✓ reject moves nothing; accept-vs-reject race resolves once; duplicate cid and stale seq never apply twice; withdraw by the sender only
+✓ authorization and validation: third party, forged empire, bad items, self/AI-wild/no-contact targets, own stock and Etki, expiry, paused host — no side effects; no hint of private offers
+✓ preview (quote): cost and blockers come from the host dealQuote; read-only — no state, journal, revision or broadcast; the other human's stock stays hidden
+✓ atomicity: a failure injected inside executeDeal rolls everything back; the offer stays pending and can still be accepted once
+✓ peace between humans: proposing does not end the war; acceptance runs the engine (makePeace via executeDeal); an old peace offer after peace is refused
+   insan→AI tek taraflı istek (yiy): red / -
+✓ human → AI uses the single-player path (dealQuote → aiRespond → executeDeal): accept equals the engine; an unattractive offer is refused or countered, and an AI counter can be accepted
+   doğal AI→insan teklifleri: 2 (0 ayda) · türler nap,pact,res
+✓ AI → remote human: AI diplomacy calls aimed at a human land in that player's inbox (natural AI turns, no fixture); AI never decides; human accept runs executeDeal
+✗ privacy: C never receives A–B offer ids, terms, amounts or counter rounds; only the parties get them — AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
+  [
++   1,
++   2,
+    3,
+    4
+  ]
+
+    at /workspace/Star/tests/mp3_core_test.js:182:31
+    at test (/workspace/Star/tests/helpers/95e-fixture.js:13:60)
+    at Object.<anonymous> (/workspace/Star/tests/mp3_core_test.js:176:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+✓ single player and AI–AI diplomacy untouched: lobby host without remote humans and the MP.3 guards keeps Save8/RNG identical to the plain engine over 120 days
+GEÇEN: 10 KALAN: 1

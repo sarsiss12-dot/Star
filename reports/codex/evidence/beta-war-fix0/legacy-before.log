@@ -1,0 +1,18 @@
+PASS aynı seferin yeni insan cephesi ayrı ve yalnız bir kez bildirilir
+PASS aylık vasal çağrısı aynı eski cephede imzalanan barışı geri açmaz
+PASS koruma güvenlik ağı senyörün imzaladığı eski cephe barışını geri açmaz
+PASS savaşta bağımsız ittifak ve NAP reddedilir; açık barışlı paket iki sırada geçerli
+PASS eski barış teklifi güncel savaş koşulunda yeniden doğrulanır
+PASS rutin savaş AI teklifi barış içerir; aynı teklif ve ret soğuması korunur
+PASS aynı gün gerçekten yeni kaynak savaşı yeni yükümlülüğü engellemez
+PASS Save8 barışı ve eski çağrının kapanışını korur; kaynak savaşı devam eder
+PASS kısmi barış diğer cepheyi açık bırakır ve bunu açıkça bildirir
+PASS vekil savaşı sponsor barışı bitirir; canlı destek kaydı kendiliğinden geri açılmaz
+PASS açık barış+ittifak+NAP paketinin sırası sonucu ve RNG tüketimini değiştirmez
+PASS declareWar dışı başlangıç görünür; yüklemede tarihsel savaş bildirimi tekrarlanmaz
+PASS galaktik kriz doğrudan savaş yolu haber ve üst kart üretir
+FAIL eski Save8 kapalı cephe geçmişi yokken bilinen kaynak savaş günü ve peaceAt eski çağrıyı tanımlar Expected values to be strictly equal:
+
+true !== false
+
+{"pass":13,"fail":1}

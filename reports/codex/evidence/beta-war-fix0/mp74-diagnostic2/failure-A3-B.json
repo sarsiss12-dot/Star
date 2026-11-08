@@ -1,0 +1,115 @@
+{
+  "inbox": [
+    {
+      "kind": "aideal",
+      "data": {
+        "from": 1,
+        "to": 0,
+        "give": [
+          {
+            "t": "res",
+            "r": "ene",
+            "v": 11
+          }
+        ],
+        "want": [],
+        "born": 9,
+        "expires": 549
+      },
+      "ico": "📜",
+      "cls": "sci",
+      "pause": false,
+      "uid": 1,
+      "born": 9,
+      "rec": 1,
+      "title": "Teklif — Kızıl Muhafız",
+      "sub": "Çok oyunculu teklif · anlaşma istiyor",
+      "key": "mp71:1"
+    }
+  ],
+  "records": [
+    {
+      "id": 1,
+      "key": "deal:mp71:1",
+      "kind": "aideal",
+      "from": 1,
+      "name": "Kızıl Muhafız",
+      "title": "Teklif — Kızıl Muhafız",
+      "sub": "Çok oyunculu teklif · tur 1",
+      "born": 9,
+      "year": 2210,
+      "month": 3,
+      "expires": 549,
+      "status": "pending",
+      "note": {
+        "uid": 1,
+        "kind": "aideal",
+        "title": "Teklif — Kızıl Muhafız",
+        "sub": "Çok oyunculu teklif · tur 1",
+        "key": "mp71:1",
+        "born": 9,
+        "data": {
+          "from": 1,
+          "to": 0,
+          "give": [
+            {
+              "t": "res",
+              "r": "ene",
+              "v": 11
+            }
+          ],
+          "want": [],
+          "born": 9,
+          "expires": 549
+        }
+      },
+      "mp": 1
+    }
+  ],
+  "html": "<button class=\"nCard sci\" data-a=\"openNote\" data-x=\"1\">\n         <span class=\"nIco\">📜</span>\n         <span class=\"nTxt\"><b>Teklif — Kızıl Muhafız</b><i>Çok oyunculu teklif · anlaşma istiyor</i></span>\n         <span class=\"nGo\">›</span>\n       </button><div class=\"nQuick\" data-uid=\"1\"><button class=\"nq ok\" data-a=\"noteQuick\" data-x=\"1:y\">KABUL</button><button class=\"nq no\" data-a=\"noteQuick\" data-x=\"1:n\">REDDET</button><button class=\"nq\" data-a=\"noteQuick\" data-x=\"1:c\">KARŞI TEKLİF</button></div>",
+  "modal": "",
+  "hidden": true,
+  "view": {
+    "offers": [
+      {
+        "id": 1,
+        "from": 0,
+        "to": 1,
+        "fn": "Kızıl Muhafız",
+        "tn": "Saf Akıl Ağı",
+        "give": [
+          {
+            "t": "res",
+            "r": "ene",
+            "v": 11,
+            "l": "⚡ 11 Enerji"
+          }
+        ],
+        "want": [],
+        "born": 9,
+        "expires": 549,
+        "round": 1,
+        "prev": null,
+        "status": "pending",
+        "why": "",
+        "by": "human",
+        "cost": 0
+      }
+    ],
+    "contacts": [
+      {
+        "id": 0,
+        "n": "Kızıl Muhafız",
+        "col": "#98953e",
+        "h": 1,
+        "rel": 40,
+        "bl": 0,
+        "war": 0,
+        "peace": 0
+      }
+    ],
+    "life": 540,
+    "rounds": 6,
+    "sq": []
+  }
+}

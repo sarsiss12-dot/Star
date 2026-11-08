@@ -1,0 +1,15 @@
+{
+  "selector": "#inbox [data-a=\"openNote\"][data-x=\"11\"]",
+  "url": "/mp/play",
+  "who": "Okyanus Ticaret Birliği",
+  "viewport": [
+    915,
+    412
+  ],
+  "scroll": [
+    0,
+    0
+  ],
+  "focus": "",
+  "modal": "hidden"
+}

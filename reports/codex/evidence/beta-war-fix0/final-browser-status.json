@@ -1,0 +1,28 @@
+[
+  {
+    "name": "mp73-clean",
+    "env": {},
+    "exit": 0,
+    "seconds": 62.75
+  },
+  {
+    "name": "mp73-critical",
+    "env": {
+      "MP73_ONLY": "A1|P01|P03|P04",
+      "BETA_P01_PANELS": "1",
+      "BETA_P01_VOTES": "1",
+      "BETA_P01_WAR": "1"
+    },
+    "exit": 0,
+    "seconds": 48.05
+  },
+  {
+    "name": "mp-warfix-clean",
+    "env": {
+      "MP73_ONLY": "A1|PWF",
+      "WARFIX0": "1"
+    },
+    "exit": 0,
+    "seconds": 20.91
+  }
+]

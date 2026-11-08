@@ -1,0 +1,142 @@
+[
+  {
+    "name": "unit-final",
+    "cmd": [
+      "node",
+      "tests/beta_war_fix0_test.cjs"
+    ],
+    "env": {},
+    "exit": 0,
+    "seconds": 3.38
+  },
+  {
+    "name": "history-final",
+    "cmd": [
+      "node",
+      "tests/beta-war-fix0-history.cjs"
+    ],
+    "env": {},
+    "exit": 0,
+    "seconds": 0.82
+  },
+  {
+    "name": "mp71-final",
+    "cmd": [
+      "node",
+      "tests/mp71_bridge_test.js"
+    ],
+    "env": {},
+    "exit": 0,
+    "seconds": 9.87
+  },
+  {
+    "name": "mp3-final-accepted",
+    "cmd": [
+      "node",
+      "tests/mp3_core_test.js"
+    ],
+    "env": {},
+    "exit": 0,
+    "seconds": 11.35
+  },
+  {
+    "name": "mp4-final-accepted",
+    "cmd": [
+      "node",
+      "tests/mp4_core_test.js"
+    ],
+    "env": {},
+    "exit": 0,
+    "seconds": 8.04
+  },
+  {
+    "name": "save-final-accepted",
+    "cmd": [
+      "node",
+      "tests/beta-war-fix0-save-regression.cjs"
+    ],
+    "env": {
+      "STARS_CONTROL_ROOT": "/tmp/stars-beta-war-fix0",
+      "STARS_EQUIV_CONTROL_ROOT": "/tmp/stars-beta-war-fix0/pre-offer-id"
+    },
+    "exit": 0,
+    "seconds": 20.49
+  },
+  {
+    "name": "perf1-accepted",
+    "cmd": [
+      "node",
+      "tests/perf1_equivalence_test.js"
+    ],
+    "env": {},
+    "exit": 0,
+    "seconds": 2.11
+  },
+  {
+    "name": "perf2-accepted",
+    "cmd": [
+      "node",
+      "tests/perf2_equivalence_test.js"
+    ],
+    "env": {},
+    "exit": 0,
+    "seconds": 2.92
+  },
+  {
+    "name": "mp73-accepted",
+    "cmd": [
+      "node",
+      "tests/browser-mp73.cjs"
+    ],
+    "env": {},
+    "exit": 0,
+    "seconds": 60.57
+  },
+  {
+    "name": "mp74-accepted",
+    "cmd": [
+      "node",
+      "tests/browser-mp74.cjs"
+    ],
+    "env": {},
+    "exit": 1,
+    "seconds": 65.05
+  },
+  {
+    "name": "mp75-accepted",
+    "cmd": [
+      "node",
+      "tests/browser-mp75.cjs"
+    ],
+    "env": {},
+    "exit": 1,
+    "seconds": 59.74
+  },
+  {
+    "name": "mp8-N-accepted",
+    "cmd": [
+      "node",
+      "tests/browser-mp8.cjs"
+    ],
+    "env": {
+      "MP8_SCEN": "N"
+    },
+    "exit": 0,
+    "seconds": 110.55
+  },
+  {
+    "name": "mp8-R-accepted",
+    "cmd": [
+      "node",
+      "tests/browser-mp8.cjs"
+    ],
+    "env": {
+      "MP8_SCEN": "R",
+      "MP8_MONTHS": "6",
+      "MP89_R_STATE": "1",
+      "WARFIX0_HISTORY": "1"
+    },
+    "exit": 1,
+    "seconds": 63.95
+  }
+]

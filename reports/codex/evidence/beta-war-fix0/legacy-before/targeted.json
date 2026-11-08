@@ -1,0 +1,530 @@
+[
+  {
+    "name": "aynı seferin yeni insan cephesi ayrı ve yalnız bir kez bildirilir",
+    "status": "PASS",
+    "detail": {
+      "notices": [
+        {
+          "attacker": 1,
+          "defender": 0,
+          "rootAttacker": 1,
+          "rootDefender": 0,
+          "front": 1,
+          "campaign": 1,
+          "reason": "declaration",
+          "sponsor": null,
+          "day": 180,
+          "year": 2210,
+          "month": 6
+        },
+        {
+          "attacker": 2,
+          "defender": 0,
+          "rootAttacker": 1,
+          "rootDefender": 0,
+          "front": 2,
+          "campaign": 1,
+          "reason": "federation",
+          "sponsor": 1,
+          "day": 180,
+          "year": 2210,
+          "month": 6
+        }
+      ],
+      "fronts": [
+        {
+          "id": 1,
+          "campaign": 1,
+          "parent": null,
+          "reason": "declaration",
+          "sides": [
+            1,
+            0
+          ],
+          "roles": [
+            0,
+            1
+          ],
+          "opened": 180,
+          "legacy": false,
+          "ended": null,
+          "endReason": null,
+          "entryKind": "declaration",
+          "sponsor": null,
+          "membership": [
+            {
+              "id": 1,
+              "day": 180,
+              "fed": null,
+              "lord": null
+            },
+            {
+              "id": 0,
+              "day": 180,
+              "fed": null,
+              "lord": null
+            }
+          ],
+          "goals": [],
+          "metrics": [
+            {
+              "rounds": 0,
+              "shipsLost": 0,
+              "shipsDestroyed": 0,
+              "damageDealt": 0,
+              "damageTaken": 0,
+              "groundLost": 0,
+              "groundDestroyed": 0,
+              "garrisonLost": 0,
+              "garrisonReduced": 0,
+              "systems": [],
+              "planets": []
+            },
+            {
+              "rounds": 0,
+              "shipsLost": 0,
+              "shipsDestroyed": 0,
+              "damageDealt": 0,
+              "damageTaken": 0,
+              "groundLost": 0,
+              "groundDestroyed": 0,
+              "garrisonLost": 0,
+              "garrisonReduced": 0,
+              "systems": [],
+              "planets": []
+            }
+          ],
+          "occupation": [],
+          "playerNotified": true
+        },
+        {
+          "id": 2,
+          "campaign": 1,
+          "parent": 1,
+          "reason": "federation",
+          "sides": [
+            2,
+            0
+          ],
+          "roles": [
+            0,
+            1
+          ],
+          "opened": 180,
+          "legacy": false,
+          "ended": null,
+          "endReason": null,
+          "entryKind": "federation",
+          "sponsor": 1,
+          "membership": [
+            {
+              "id": 2,
+              "day": 180,
+              "fed": null,
+              "lord": null
+            },
+            {
+              "id": 0,
+              "day": 180,
+              "fed": null,
+              "lord": null
+            }
+          ],
+          "goals": [],
+          "metrics": [
+            {
+              "rounds": 0,
+              "shipsLost": 0,
+              "shipsDestroyed": 0,
+              "damageDealt": 0,
+              "damageTaken": 0,
+              "groundLost": 0,
+              "groundDestroyed": 0,
+              "garrisonLost": 0,
+              "garrisonReduced": 0,
+              "systems": [],
+              "planets": []
+            },
+            {
+              "rounds": 0,
+              "shipsLost": 0,
+              "shipsDestroyed": 0,
+              "damageDealt": 0,
+              "damageTaken": 0,
+              "groundLost": 0,
+              "groundDestroyed": 0,
+              "garrisonLost": 0,
+              "garrisonReduced": 0,
+              "systems": [],
+              "planets": []
+            }
+          ],
+          "occupation": [],
+          "playerNotified": true
+        }
+      ]
+    }
+  },
+  {
+    "name": "aylık vasal çağrısı aynı eski cephede imzalanan barışı geri açmaz",
+    "status": "PASS",
+    "detail": {
+      "war": false,
+      "lordWar": true,
+      "fronts": [
+        {
+          "id": 1,
+          "campaign": 1,
+          "parent": null,
+          "reason": "declaration",
+          "sides": [
+            2,
+            1
+          ],
+          "roles": [
+            0,
+            1
+          ],
+          "opened": 180,
+          "legacy": false,
+          "ended": null,
+          "endReason": null,
+          "entryKind": "declaration",
+          "sponsor": null,
+          "membership": [
+            {
+              "id": 2,
+              "day": 180,
+              "fed": null,
+              "lord": null
+            },
+            {
+              "id": 1,
+              "day": 180,
+              "fed": null,
+              "lord": null
+            }
+          ],
+          "goals": [],
+          "metrics": [
+            {
+              "rounds": 0,
+              "shipsLost": 0,
+              "shipsDestroyed": 0,
+              "damageDealt": 0,
+              "damageTaken": 0,
+              "groundLost": 0,
+              "groundDestroyed": 0,
+              "garrisonLost": 0,
+              "garrisonReduced": 0,
+              "systems": [],
+              "planets": []
+            },
+            {
+              "rounds": 0,
+              "shipsLost": 0,
+              "shipsDestroyed": 0,
+              "damageDealt": 0,
+              "damageTaken": 0,
+              "groundLost": 0,
+              "groundDestroyed": 0,
+              "garrisonLost": 0,
+              "garrisonReduced": 0,
+              "systems": [],
+              "planets": []
+            }
+          ],
+          "occupation": []
+        },
+        {
+          "id": 2,
+          "campaign": 1,
+          "parent": 1,
+          "reason": "vassal",
+          "sides": [
+            0,
+            1
+          ],
+          "roles": [
+            0,
+            1
+          ],
+          "opened": 180,
+          "legacy": false,
+          "ended": 210,
+          "endReason": "agreement|actor:0",
+          "entryKind": "vassal",
+          "sponsor": 2,
+          "membership": [
+            {
+              "id": 0,
+              "day": 180,
+              "fed": null,
+              "lord": 2
+            },
+            {
+              "id": 1,
+              "day": 180,
+              "fed": null,
+              "lord": null
+            }
+          ],
+          "goals": [],
+          "metrics": [
+            {
+              "rounds": 0,
+              "shipsLost": 0,
+              "shipsDestroyed": 0,
+              "damageDealt": 0,
+              "damageTaken": 0,
+              "groundLost": 0,
+              "groundDestroyed": 0,
+              "garrisonLost": 0,
+              "garrisonReduced": 0,
+              "systems": [],
+              "planets": []
+            },
+            {
+              "rounds": 0,
+              "shipsLost": 0,
+              "shipsDestroyed": 0,
+              "damageDealt": 0,
+              "damageTaken": 0,
+              "groundLost": 0,
+              "groundDestroyed": 0,
+              "garrisonLost": 0,
+              "garrisonReduced": 0,
+              "systems": [],
+              "planets": []
+            }
+          ],
+          "occupation": [],
+          "playerNotified": true
+        }
+      ]
+    }
+  },
+  {
+    "name": "koruma güvenlik ağı senyörün imzaladığı eski cephe barışını geri açmaz",
+    "status": "PASS",
+    "detail": {
+      "war": false,
+      "subjectWar": true,
+      "fronts": [
+        {
+          "id": 1,
+          "campaign": 1,
+          "parent": null,
+          "reason": "declaration",
+          "sides": [
+            1,
+            0
+          ],
+          "roles": [
+            0,
+            1
+          ],
+          "opened": 180,
+          "legacy": false,
+          "ended": null,
+          "endReason": null,
+          "entryKind": "declaration",
+          "sponsor": null,
+          "membership": [
+            {
+              "id": 1,
+              "day": 180,
+              "fed": null,
+              "lord": null
+            },
+            {
+              "id": 0,
+              "day": 180,
+              "fed": null,
+              "lord": 2
+            }
+          ],
+          "goals": [],
+          "metrics": [
+            {
+              "rounds": 0,
+              "shipsLost": 0,
+              "shipsDestroyed": 0,
+              "damageDealt": 0,
+              "damageTaken": 0,
+              "groundLost": 0,
+              "groundDestroyed": 0,
+              "garrisonLost": 0,
+              "garrisonReduced": 0,
+              "systems": [],
+              "planets": []
+            },
+            {
+              "rounds": 0,
+              "shipsLost": 0,
+              "shipsDestroyed": 0,
+              "damageDealt": 0,
+              "damageTaken": 0,
+              "groundLost": 0,
+              "groundDestroyed": 0,
+              "garrisonLost": 0,
+              "garrisonReduced": 0,
+              "systems": [],
+              "planets": []
+            }
+          ],
+          "occupation": [],
+          "playerNotified": true
+        },
+        {
+          "id": 2,
+          "campaign": 1,
+          "parent": 1,
+          "reason": "overlord",
+          "sides": [
+            2,
+            1
+          ],
+          "roles": [
+            1,
+            0
+          ],
+          "opened": 180,
+          "legacy": false,
+          "ended": 210,
+          "endReason": "agreement|actor:2",
+          "entryKind": "overlord",
+          "sponsor": 0,
+          "membership": [
+            {
+              "id": 2,
+              "day": 180,
+              "fed": null,
+              "lord": null
+            },
+            {
+              "id": 1,
+              "day": 180,
+              "fed": null,
+              "lord": null
+            }
+          ],
+          "goals": [],
+          "metrics": [
+            {
+              "rounds": 0,
+              "shipsLost": 0,
+              "shipsDestroyed": 0,
+              "damageDealt": 0,
+              "damageTaken": 0,
+              "groundLost": 0,
+              "groundDestroyed": 0,
+              "garrisonLost": 0,
+              "garrisonReduced": 0,
+              "systems": [],
+              "planets": []
+            },
+            {
+              "rounds": 0,
+              "shipsLost": 0,
+              "shipsDestroyed": 0,
+              "damageDealt": 0,
+              "damageTaken": 0,
+              "groundLost": 0,
+              "groundDestroyed": 0,
+              "garrisonLost": 0,
+              "garrisonReduced": 0,
+              "systems": [],
+              "planets": []
+            }
+          ],
+          "occupation": []
+        }
+      ]
+    }
+  },
+  {
+    "name": "savaşta bağımsız ittifak ve NAP reddedilir; açık barışlı paket iki sırada geçerli",
+    "status": "PASS",
+    "detail": {
+      "ally": false,
+      "nap": false
+    }
+  },
+  {
+    "name": "eski barış teklifi güncel savaş koşulunda yeniden doğrulanır",
+    "status": "PASS",
+    "detail": {
+      "before": true,
+      "after": false,
+      "applied": false
+    }
+  },
+  {
+    "name": "rutin savaş AI teklifi barış içerir; aynı teklif ve ret soğuması korunur",
+    "status": "PASS",
+    "detail": {
+      "off": {
+        "from": 1,
+        "to": 0,
+        "give": [
+          {
+            "t": "res",
+            "r": "ene",
+            "v": 600
+          }
+        ],
+        "want": [
+          {
+            "t": "peace"
+          }
+        ]
+      },
+      "n1": true,
+      "n2": false,
+      "n3": false,
+      "wait": 810
+    }
+  },
+  {
+    "name": "aynı gün gerçekten yeni kaynak savaşı yeni yükümlülüğü engellemez",
+    "status": "PASS",
+    "detail": null
+  },
+  {
+    "name": "Save8 barışı ve eski çağrının kapanışını korur; kaynak savaşı devam eder",
+    "status": "PASS",
+    "detail": null
+  },
+  {
+    "name": "kısmi barış diğer cepheyi açık bırakır ve bunu açıkça bildirir",
+    "status": "PASS",
+    "detail": null
+  },
+  {
+    "name": "vekil savaşı sponsor barışı bitirir; canlı destek kaydı kendiliğinden geri açılmaz",
+    "status": "PASS",
+    "detail": null
+  },
+  {
+    "name": "açık barış+ittifak+NAP paketinin sırası sonucu ve RNG tüketimini değiştirmez",
+    "status": "PASS",
+    "detail": null
+  },
+  {
+    "name": "declareWar dışı başlangıç görünür; yüklemede tarihsel savaş bildirimi tekrarlanmaz",
+    "status": "PASS",
+    "detail": null
+  },
+  {
+    "name": "galaktik kriz doğrudan savaş yolu haber ve üst kart üretir",
+    "status": "PASS",
+    "detail": null
+  },
+  {
+    "name": "eski Save8 kapalı cephe geçmişi yokken bilinen kaynak savaş günü ve peaceAt eski çağrıyı tanımlar",
+    "status": "FAIL",
+    "detail": null,
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\ntrue !== false\n\n    at /workspace/Star/tests/beta_war_fix0_test.cjs:20:466\n    at test (/workspace/Star/tests/beta_war_fix0_test.cjs:5:40)\n    at Object.<anonymous> (/workspace/Star/tests/beta_war_fix0_test.cjs:20:1)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n    at Module.load (node:internal/modules/cjs/loader:1651:32)\n    at Module._load (node:internal/modules/cjs/loader:1443:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47"
+  }
+]

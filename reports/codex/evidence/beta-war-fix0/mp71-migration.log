@@ -1,0 +1,10 @@
+✓ insan → host teklifi host'un GERÇEK gelen kutusuna girer (bildirim kartı + kayıt, tek kez); kabul MP.3 respond ile: kaynaklar tam bir kez, dünya MP komutuyla aynı, ikinci karar reddedilir
+✓ ret: MP.3 respond reject — gönderene ilişki cezası ve 27 aylık tekrar yasağı (tek oyunculu AI ret yaptırımı) UYGULANMAZ; kayıt Reddedildi
+✓ geri çekme ve süre dolumu host'un gelen kutusu kaydına yansır (Geçersizleşti · Gönderen geri çekti / Süresi doldu), kart kalkar; kayıt artık kabul edilemez
+✓ gizlilik: gelen kutusu kapısı gönderenin kendi stok satırlarını göstermez (MP.3 dipReasons ile aynı); kabul host'ta yine tam denetlenir
+✓ host'un GERÇEK anlaşma penceresi (UI.dealSend) insan hedefe MP.3 offer gönderir (AI yolu / aiRespond yok); desteklenmeyen madde gönderilmez; AI hedefte tek oyunculu yol aynen
+✓ MP.4 paketi: teklif deposu (durumlar) ve host'un gelen kutusu kaydı korunur; yüklenen dünyada kayıt yine MP teklifine bağlıdır ve kararı respond'dan geçer
+✓ vasallık (host paneli yok): misafir A host'tan himaye ister (MP.3.1 vassalOffer); talep host'un GERÇEK gelen kutusunda vasallık kaydı olur, AI karar vermez; host kararı gelen kutusundan (motorun vassalReply'ı) verir
+✓ Save8 / RNG: insan teklifi yokken köprü (sarmalayıcılar + her gün tick) 90 günde dünyayı değiştirmez; AI kararları (dealQuote) aynı
+✓ eski Save8 MP teklif anahtarı kesin note ID ile taşınır; kayıt kimliği ve RNG korunur
+GEÇEN: 9 KALAN: 0

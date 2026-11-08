@@ -1,0 +1,9 @@
+{"name": "save-reg-final", "cmd": ["node", "tests/beta-war-fix0-save-regression.cjs"], "env": {}, "exit": 0, "seconds": 12.15}
+{"name": "perf1-final", "cmd": ["node", "tests/perf1_equivalence_test.js"], "env": {}, "exit": 0, "seconds": 1.96}
+{"name": "perf2-final", "cmd": ["node", "tests/perf2_equivalence_test.js"], "env": {}, "exit": 0, "seconds": 2.38}
+{"name": "nebula-final", "cmd": ["node", "tests/mp86_nebula_cache_test.js"], "env": {}, "exit": 0, "seconds": 2.03}
+{"name": "mp3-final", "cmd": ["node", "tests/mp3_core_test.js"], "env": {}, "exit": 1, "seconds": 9.28}
+{"name": "mp4-final", "cmd": ["node", "tests/mp4_core_test.js"], "env": {}, "exit": 0, "seconds": 8.82}
+{"name": "mp-acceptance-final", "cmd": ["node", "tests/browser-mp73.cjs"], "env": {"MP73_ONLY": "A1|PWF", "WARFIX0": "1"}, "exit": 1, "seconds": 31.78}
+{"name": "sp-panels-final", "cmd": ["node", "tests/browser-beta-p01-panels.cjs"], "env": {}, "exit": 0, "seconds": 23.19}
+{"name": "sp-news-final", "cmd": ["node", "tests/browser-beta-p01-panels.cjs"], "env": {"BETA_P01_NEWS": "1", "BETA02_NEWS": "1"}, "exit": 0, "seconds": 4.81}

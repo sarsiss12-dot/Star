@@ -1,0 +1,73 @@
+{
+  "url": "/mp/play",
+  "vote": {
+    "name": "Yıldızlar Meclis",
+    "founder": 0,
+    "members": [
+      0,
+      1,
+      2,
+      7,
+      3,
+      5,
+      6,
+      4
+    ],
+    "laws": {},
+    "targeted": {},
+    "treasury": 0,
+    "president": 0,
+    "terms": {
+      "0": 1
+    },
+    "termAge": 0,
+    "voteIn": 2,
+    "dead": false,
+    "byConvention": true,
+    "firstLaw": null,
+    "pariahs": {},
+    "agenda": [],
+    "vote": {
+      "key": "ticaretStd",
+      "opened": 6.992599999999986,
+      "target": null,
+      "yes": [
+        7,
+        3,
+        5,
+        4
+      ],
+      "no": [
+        6
+      ],
+      "speeches": [
+        {
+          "id": 6,
+          "txt": "Silahlarımızı bırakırsak bizi kim koruyacak?",
+          "yes": false
+        }
+      ],
+      "done": false,
+      "age": 0,
+      "sponsor": null
+    },
+    "lastVote": null,
+    "campaign": null
+  },
+  "inbox": [
+    {
+      "kind": "cncvote",
+      "data": "ticaretStd",
+      "ico": "🌐",
+      "cls": "sci",
+      "pause": false,
+      "uid": 20,
+      "born": 25.016439999999776,
+      "title": "KONSEY OYLAMASI",
+      "sub": "Evrensel Ticaret Standardı",
+      "key": "mp73cnc:ticaretStd:"
+    }
+  ],
+  "modal": "",
+  "pane": ""
+}

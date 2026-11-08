@@ -1,0 +1,58 @@
+[
+  {
+    "name": "#34 SP gerçek haber dokunması",
+    "status": "PASS",
+    "data": [
+      {
+        "type": "old",
+        "expect": "SONA ERDİ",
+        "status": "PASS"
+      },
+      {
+        "type": "current",
+        "expect": "AKTİF",
+        "status": "PASS"
+      },
+      {
+        "type": "legacy",
+        "expect": "kesin savaş durumu / bitiş tarihi bilinmiyor",
+        "status": "PASS"
+      },
+      {
+        "type": "peace",
+        "status": "PASS",
+        "event": "war-end:1"
+      },
+      {
+        "type": "council",
+        "status": "PASS",
+        "event": "p02:council"
+      },
+      {
+        "type": "federation",
+        "status": "PASS",
+        "event": "p02:federation"
+      },
+      {
+        "type": "politics",
+        "status": "PASS",
+        "event": "p02:politics"
+      },
+      {
+        "type": "colony",
+        "status": "PASS",
+        "event": "p02:colony"
+      },
+      {
+        "type": "territory",
+        "status": "PASS",
+        "event": "p02:territory"
+      },
+      {
+        "type": "construction",
+        "status": "PASS",
+        "event": "p02:construction"
+      }
+    ]
+  }
+]

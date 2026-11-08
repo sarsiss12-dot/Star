@@ -1,0 +1,58 @@
+{
+  "results": [
+    {
+      "name": "A1 rehber 1–8: oda, iki farklı devlet, hazır, başlat; iki ekranda galaksi; sürüm işareti lobi / başlangıç / MP çubuğunda ve /mp/version oyun build'iyle aynı",
+      "status": "PASS",
+      "ms": 11661
+    },
+    {
+      "name": "PWF barış / yeni yan cephe / gerçek misafir dokunması / Save8 / tekrar bağlantı",
+      "status": "FAIL",
+      "error": "page.evaluate: Error: {\"ok\":false,\"code\":\"unknown-kind\"}\n    at eval (eval at evaluate (:311:30), <anonymous>:1:152)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at module.exports (/workspace/Star/tests/helpers/beta-war-fix0-mp.cjs:18:21)\n    at async /workspace/Star/tests/browser-mp73.cjs:147:150\n    at async test (/workspace/Star/tests/browser-mp73.cjs:13:7)\n    at async /workspace/Star/tests/browser-mp73.cjs:147:32"
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "startModal": [
+      "🛰 DANIŞMAN",
+      ""
+    ],
+    "version": {
+      "mp": "MP.8.9b7",
+      "build": "96h10p12",
+      "files": {
+        "mp-core.js": "115a0b76a5da",
+        "relay.js": "83a96cd3978c",
+        "mp1-host.js": "a85647bc9b81",
+        "join.js": "bc2732493741",
+        "mirror.js": "8681c5410a2f",
+        "guest-stars.js": "0988176f15d2",
+        "mp71-dip.js": "4b7b5e64b5ba",
+        "mp7-setup.js": "48c0f282a254"
+      }
+    },
+    "unsupported": [
+      "autoEvent",
+      "diagCopy",
+      "joinRebel",
+      "leaveRebel",
+      "mapFix",
+      "physio",
+      "restart",
+      "rollName",
+      "sandbox",
+      "sitPick",
+      "stashNote",
+      "survey",
+      "terra",
+      "toTitle",
+      "tplDel",
+      "tplLoad",
+      "tplSave",
+      "trigCrisis"
+    ],
+    "guestDiag": "STARS MP.8.9b7 · oyun 96h10p12 · misafir · host bağlı · aşama: ready · ayna r4 20:22:15 · kurulum 9 ms · son komut: yok · son hata: yok"
+  },
+  "pass": 1,
+  "fail": 1
+}

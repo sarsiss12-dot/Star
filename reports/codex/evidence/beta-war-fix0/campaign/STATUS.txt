@@ -1,0 +1,1 @@
+Matrix interrupted during 200/16 seed23 after new seed99 raw-war asymmetry; complete retained rows and initial failures are not final acceptance.

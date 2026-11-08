@@ -1,14 +1,15 @@
 # Son Codex raporu
 
-- Faz: **BETA-SCALE.0 — #37 yerel kabul PASS; #45 kısmî hedef.** Kullanıcı/yayın onayı yok.
-- [Ana rapor](reports/codex/BETA-SCALE0-SONUC.md) · [Kanıtlar](reports/codex/evidence/beta-scale0/README.md).
-- Dal: `codex/stars-beta-scale0-galaxy-ai-colonies`; taban `codex/stars-beta-setup1-galaxy-options` @ `66ea8d700bc66b1fdb5f75d3a0f5d8f87251e9a8`.
-- Doğrulanmış kod/test/paket uzak HEAD: `fcb14ddd20f1ca41691487518c8f196b9e8e804c`. Nihai rapor commit SHA'sı son mesajda ve uzak dal HEAD'indedir.
-- **Yeni oyun: 30–500 sistem / 1–16 AI.** 1000 sistem ve 24/32/48 AI uzun kabulü geçmedi, pasif. 64 AI kimlik sınırına sığmaz. Son motorla 500/16 SP 120 ay ve iki bağımsız 120→121 Save8/RNG devamı PASS.
-- Kullanıcı kararıyla başlangıç kolonileri korunur. Sonradan kurulan/el değiştiren koloniler ON + 60 gün; manuel OFF ve eski kayıtlar korunur, odak bonusu değişmez. Koloni 12/0, renk 8/0, üretim/legacy 142/0.
-- Yerel 3 insan + 16 AI / 500 sistem R0–R4 **5/0**; MP8 N 9/0, MP74 7/0, MP75 6/0, MP73 yalnız A1 1/0. PERF.1 4/0, PERF.2 son 5/0, piksel 3/0. İlk FAIL kayıtları korunur.
-- 500/16 tam ay standart medyanı **2.533,7 ms**, p95 **3.555,6 ms** (n=120). 120. ay duraklatılmış rAF≈24,8/s, fiziksel FPS değildir. İkmal düğümü çağrısı ≈%80,9 azaldı; süre oynaklığı nedeniyle kararlı genel hızlanma yüzdesi yok. Erken görünürlük atlaması Save8 farkı nedeniyle geri alındı. [Standart istatistik özeti](reports/codex/evidence/beta-scale0/PERFORMANCE-SUMMARY.json).
-- Oyun **96h10p12**, PWA **stars-v96h10p12**, MP **MP.8.9b7**; Save8 v8 / paket4 / protokol1. [ZIP/hash](reports/codex/evidence/beta-scale0/RELEASE-VERIFIED.json): SHA256 `09f8a58c16380d0eae0a187dcd9b259597fb4b5d5b750296b427446cfe35a365`, CRC32 `E1ABA448`, 787.216 bayt.
-- PR bir deneme **Forbidden**. [Karşılaştırma](https://github.com/sarsiss12-dot/Star/compare/codex/stars-beta-setup1-galaxy-options...codex/stars-beta-scale0-galaxy-ai-colonies?expand=1). #33 başlangıç/sonuç yorumları da Forbidden; son kamu okumasında #37/#45 PROMPT HAZIR. Diğer 43 göreve ve TAMAMLANDI durumuna dokunulmadı.
-- **NOT RUN:** fiziksel Android/PC kabulü, gerçek LAN/internet/Render ve deploy. Main merge/rebase/force-push yapılmadı.
-- Sonraki tek faz: **BETA-SCALE.1 — geç oyun keşif/ikmal/sınır performansı**, aynı Save8/RNG ve 240 ay kabulü. Yüksek AI/1000 henüz açılmamalı. #25/#24/#10 ve tarihsel B1/A3 ayrı açık.
+- Faz: **BETA-WAR-FIX.0** — yalnız pano #48 / #4 / #47 / #6. Kullanıcı/yayın kabulü verilmedi.
+- [Tek parça sonuç raporu](reports/codex/BETA-WAR-FIX0-SONUC.md) · [Kanıt dizini](reports/codex/evidence/beta-war-fix0/README.md) · [Üç kullanıcı PC testi](reports/codex/evidence/beta-war-fix0/KULLANICI-KABULU.md).
+- Dal: `codex/stars-beta-war-fix0-peace-notices`; PR tabanı `codex/stars-beta-scale0-galaxy-ai-colonies` @ `731c8df9900e446d7e7de25cc5701e05a1071647`. Önceki SCALE raporu bu tabanda zaten tamamlanmıştı.
+- Doğrulanmış kod/test/paket uzak HEAD: `05ffb5f657b9f8e9f86f529b65af033fb6b0020f`. Nihai rapor commit SHA'sı son mesajda ve uzak dal HEAD'indedir.
+- Kanıtlanan düzeltmeler: barışın eski otomatik vasal/senyör/federasyon çağrısıyla açılması; cephe bildirimlerinin sefer kilidinde kaybı; temassız uzak insanın savaş haberi; savaşta bağımsız ittifak/örtük barış; MP AI ret tekrarı. Ek kabul düzeltmeleri: kesin teklif ID, canlı kartın ara DOM çizimi, soğuk odada kendi savaş geçmişi.
+- Son yerel kabul: motor 17/0; MP3 11/0; MP4 14/0; MP71 9/0; tam MP73 8/0; ayrı kritik 4/0; PWF gerçek iki barış/DOM/reconnect 2/0; MP74 **7/0**; MP75 **6/0**; MP8 N **9/0**, R0–R4 **5/0** (3 insan, 5 AI, 6+6 ay; yeni süreç/relay/oda ve kendi geçmişi). İlk MP74 5/2, MP75 4/2 ve R 3/2 FAIL kayıtları korunur.
+- On kampanya (100/9 ve 200/16 × seed 11/23/42/99/404) gerçek 120 ay PASS. Kaydedilmiş motor kaynağı `002cad4`; son MP kimlik değişikliğinin SP etkisizliği gerçek 500/16 m120→121 kontrol–aday ham Save8/RNG ile ayrıca PASS. Yeni performans yüzdesi iddiası yok.
+- PERF.1 4/0; PERF.2 5/0; MP.8.6 native piksel 3/0; Konsey 14/0; savaş bitiş 5/0; haber görünürlük 34/0; korsan 10/0; kapı/kriz 12/0; isim 9/0. Save8 v8 / paket4 / protokol1 korunur.
+- Oyun **96h10p13**, PWA **stars-v96h10p13**, MP **MP.8.9b8**. [ZIP](releases/stars-faz96h10p13.zip): 788.306 bayt; SHA256 `e1f0b4a318df37275bcf40ae7e76c1c93752c05c01f5b103d9b3a2e208a13b6d`; CRC32 `267D32F9`. İki deterministik paket bayt bayt eşit; [manifest/hash doğrulaması](reports/codex/evidence/beta-war-fix0/RELEASE-VERIFIED.json).
+- PR tek denemesi ve #33 başlangıç/sonuç yazımları **Forbidden**. [Karşılaştırma](https://github.com/sarsiss12-dot/Star/compare/codex/stars-beta-scale0-galaxy-ai-colonies...codex/stars-beta-war-fix0-peace-notices?expand=1). Uzaktaki görev durumları değiştirilemedi/doğrulanamadı; öneri yalnız dört görev için RAPOR GELDİ / TEST BEKLİYOR. Diğer 44 görev/TAMAMLANDI değiştirilmedi.
+- Açık: kullanıcının özgün 140. ay kaydı yok; 5/20 saniye olayının kesin teşhisi ve gerçek NAP kartının kökeni bilinmiyor. Tarihsiz eski kayıt çağrısı eşlemesi, yeni siyasi yükümlülüklerin aynı devam eden cephede kapsamlı kabulü, tarihsel B1/A3 ve #25/#24/#10 açık kalır.
+- **NOT RUN:** fiziksel Android/kullanıcı PC'si, gerçek LAN/internet/Render, Docker build/deploy. Main merge/rebase/force-push yapılmadı.
+- Sonraki tek hedef: **aynı sorunlu kullanıcı Save8'iyle barış/çağrı zinciri kabulü**. Yeni büyük sistem önerilmez.

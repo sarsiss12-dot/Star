@@ -1,0 +1,56 @@
+{
+  "url": "/mp/play",
+  "vote": null,
+  "inbox": [
+    {
+      "kind": "warstart",
+      "data": {
+        "attacker": 2,
+        "defender": 0,
+        "rootAttacker": 2,
+        "rootDefender": 0,
+        "front": 2,
+        "campaign": 1,
+        "reason": "federation",
+        "sponsor": 1,
+        "day": 6.679600000000001,
+        "year": 2210,
+        "month": 1
+      },
+      "ico": "⚔",
+      "cls": "war",
+      "pause": true,
+      "title": "SAVAŞA DAHİLSİN",
+      "sub": "Selyra Taburları → Saf Akıl Ağı · Federasyon yükümlülüğü · Çağıran: Kızıl Muhafız",
+      "key": "war:2",
+      "uid": 2,
+      "born": 6.679600000000001
+    },
+    {
+      "kind": "warstart",
+      "data": {
+        "attacker": 0,
+        "defender": 1,
+        "rootAttacker": 0,
+        "rootDefender": 1,
+        "front": 4,
+        "campaign": 3,
+        "reason": "vassal",
+        "sponsor": 3,
+        "day": 6.679600000000001,
+        "year": 2210,
+        "month": 1
+      },
+      "ico": "⚔",
+      "cls": "war",
+      "pause": true,
+      "title": "SAVAŞA DAHİLSİN",
+      "sub": "Saf Akıl Ağı → Kızıl Muhafız · Vasal çağrısı · Çağıran: Naorni Dayanışması",
+      "key": "war:4",
+      "uid": 8,
+      "born": 6.679600000000001
+    }
+  ],
+  "modal": "",
+  "pane": ""
+}

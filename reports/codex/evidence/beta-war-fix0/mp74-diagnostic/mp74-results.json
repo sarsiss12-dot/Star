@@ -1,0 +1,74 @@
+{
+  "results": [
+    {
+      "name": "A1 5 karakterli kod: host kodu 5 karakter ve tiresiz; davet bağlantısı kodu taşır; yanlış kod reddedilir; KATIL'a hızlı ÜÇ dokunma (600 ms gecikmeli ağ) tek koltuk, \"oda dolu\" yok; iki telefon oyuna girer",
+      "status": "PASS",
+      "ms": 12504
+    },
+    {
+      "name": "A2 küçük çok oyunculu düğmesi: host ve misafirde varsayılan \"👥 n\" (haritayı ve hız kutusunu kapatmaz); dokununca mevcut panel (kod, durum, KAYDET), tekrar dokununca kapanır",
+      "status": "FAIL",
+      "error": "page.evaluate: Target page, context or browser has been closed\n    at tap (/workspace/Star/tests/browser-mp74.cjs:22:259)\n    at async /workspace/Star/tests/browser-mp74.cjs:115:7\n    at async test (/workspace/Star/tests/browser-mp74.cjs:14:7)\n    at async /workspace/Star/tests/browser-mp74.cjs:105:3"
+    },
+    {
+      "name": "A3 kaydırma (gerçek dokunma): küçük hareket kartı kapatmaz; sağa kaydırınca teklif kartı kalkar, karar Gelen kutusunda BEKLER, ayna yenilenince kart geri gelmez; host'ta teklif bekler",
+      "status": "FAIL",
+      "error": "page.evaluate: Target page, context or browser has been closed\n    at hostOffer (/workspace/Star/tests/browser-mp74.cjs:76:50)\n    at /workspace/Star/tests/browser-mp74.cjs:118:20\n    at test (/workspace/Star/tests/browser-mp74.cjs:14:13)\n    at /workspace/Star/tests/browser-mp74.cjs:117:9"
+    },
+    {
+      "name": "A4 karttan hızlı karar (misafir): KABUL gerçek dokunmayla → host kabul eder, kaynak bir kez aktarılır; ÇİFT dokunma tek \"respond\"; REDDET; KARŞI TEKLİF gerçek anlaşma penceresini açar",
+      "status": "FAIL",
+      "error": "page.evaluate: Target page, context or browser has been closed\n    at /workspace/Star/tests/browser-mp74.cjs:131:14\n    at test (/workspace/Star/tests/browser-mp74.cjs:14:13)\n    at /workspace/Star/tests/browser-mp74.cjs:130:9"
+    },
+    {
+      "name": "A5 host karttan hızlı karar: B → host teklifi host kartında KABUL (dokunma) → kabul, bir kez",
+      "status": "FAIL",
+      "error": "page.evaluate: Target page, context or browser has been closed\n    at /workspace/Star/tests/browser-mp74.cjs:159:22\n    at test (/workspace/Star/tests/browser-mp74.cjs:14:13)\n    at /workspace/Star/tests/browser-mp74.cjs:158:9"
+    },
+    {
+      "name": "FATAL",
+      "status": "FAIL",
+      "error": "browser.newContext: Target page, context or browser has been closed\n    at async /workspace/Star/tests/browser-mp74.cjs:176:19"
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "nav": [
+      "/mp/play",
+      "/mp/play?code=*",
+      "/mp/play?code=*",
+      "/mp/play?code=*",
+      "/mp/play?code=*",
+      "/mp/play?code=*"
+    ],
+    "joinErrors_Bora": [],
+    "designEntry_Bora": {
+      "fromBurst": false,
+      "audit": {
+        "clicks": 1,
+        "opens": 1,
+        "unexpected": 0
+      },
+      "active": true,
+      "role": "guest",
+      "screen": "lobby",
+      "path": "/mp/play",
+      "head": true,
+      "menu": true
+    },
+    "relayClients": 1,
+    "relayDenied": {
+      "invalid-code": 1
+    },
+    "ghostSeats": 0,
+    "link": "https://localhost:41315/mp/play?code=…",
+    "pill_host": {
+      "w": 32,
+      "h": 42,
+      "text": "👥 2",
+      "overlap": false
+    }
+  },
+  "pass": 1,
+  "fail": 5
+}

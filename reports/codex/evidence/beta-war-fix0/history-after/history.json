@@ -1,0 +1,77 @@
+{
+  "B": [
+    {
+      "id": 1,
+      "key": "war-front:1",
+      "day": 30,
+      "year": 2210,
+      "month": 2,
+      "category": "war",
+      "title": "Savaş kaydı",
+      "text": "Yeni Hanedan ↔ Karvar Egemenliği · Savaş ilanı",
+      "important": true,
+      "read": false,
+      "pinned": false,
+      "knowledge": "Doğrudan katılım",
+      "empires": [
+        {
+          "id": 0,
+          "name": "Yeni Hanedan"
+        },
+        {
+          "id": 1,
+          "name": "Karvar Egemenliği"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "key": "war-front:2",
+      "day": 60,
+      "year": 2210,
+      "month": 3,
+      "category": "war",
+      "title": "Savaş kaydı",
+      "text": "Tharaeth Lejyonu ↔ Karvar Egemenliği · Savaş ilanı",
+      "important": true,
+      "read": false,
+      "pinned": false,
+      "knowledge": "Doğrudan katılım",
+      "empires": [
+        {
+          "id": 2,
+          "name": "Tharaeth Lejyonu"
+        },
+        {
+          "id": 1,
+          "name": "Karvar Egemenliği"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "key": "war-end:1",
+      "day": 90,
+      "year": 2210,
+      "month": 4,
+      "category": "peace",
+      "title": "Savaş sona erdi",
+      "text": "Yeni Hanedan ↔ Karvar Egemenliği · Diplomatik barış anlaşması",
+      "important": true,
+      "read": false,
+      "pinned": false,
+      "knowledge": "Doğrudan katılım",
+      "empires": [
+        {
+          "id": 0,
+          "name": "Yeni Hanedan"
+        },
+        {
+          "id": 1,
+          "name": "Karvar Egemenliği"
+        }
+      ]
+    }
+  ],
+  "C": []
+}

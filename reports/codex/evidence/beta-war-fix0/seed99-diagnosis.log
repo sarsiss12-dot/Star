@@ -1,0 +1,15 @@
+{"n":100,"ai":9,"seed":99,"month":30,"wars":3,"ms":8407.311813999999,"rssMB":193.96875}
+{"n":100,"ai":9,"seed":99,"month":120,"wars":3,"ms":57704.35718,"rssMB":349.89453125}
+AssertionError [ERR_ASSERTION]: asymmetric war
+
+2 !== 0
+
+    at Object.<anonymous> (/workspace/Star/tests/beta-war-fix0-campaign.cjs:13:360)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+100/9 seed 99 FAIL

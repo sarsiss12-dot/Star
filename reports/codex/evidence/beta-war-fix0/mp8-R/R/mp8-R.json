@@ -1,0 +1,912 @@
+{
+ "results": [
+  {
+   "name": "R0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 11; misafir gerçek STARS arayüzünde",
+   "status": "PASS",
+   "ms": 12390
+  },
+  {
+   "name": "R1 6 ay kampanya + bekleyen insan teklifi (C → B), savaş, federasyon/konsey denemeleri; senkron",
+   "status": "PASS",
+   "ms": 9512
+  },
+  {
+   "name": "R2 kayıt: OYUNU KAYDET (IndexedDB); Save8/RNG değişmez; misafir cihazında kayıt kimliği; tüm tarayıcı süreçleri + relay süreci kapanır",
+   "status": "PASS",
+   "ms": 1142
+  },
+  {
+   "name": "R3 devam: yeni host süreci aynı profil → KAYITLI OYUNA DEVAM ET → yeni oda; misafirler yeni kodla gerçek STARS arayüzünden döner → aynı devletler; dünya, teklifler, savaşlar, federasyon, konsey, hız aynı",
+   "status": "PASS",
+   "ms": 32775
+  },
+  {
+   "name": "R4 devam eden oyun: bekleyen teklif B tarafından tam bir kez kabul edilir; 6 ay daha kampanya + senkron",
+   "status": "PASS",
+   "ms": 4967
+  }
+ ],
+ "metrics": {
+  "scen": "R",
+  "conf": {
+   "size": "orta",
+   "ai": 5,
+   "seed": 11,
+   "months": 6,
+   "guests": 2,
+   "every": 6
+  },
+  "sync": [
+   {
+    "label": "m0",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 575,
+    "buildMs": 644,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m0",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 703,
+    "buildMs": 767,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m6",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     13,
+     13
+    ],
+    "mirrorEq": true,
+    "revMs": 505,
+    "buildMs": 564,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m6",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     12,
+     12
+    ],
+    "mirrorEq": true,
+    "revMs": 632,
+    "buildMs": 683,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m6-pre-save",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     15,
+     15
+    ],
+    "mirrorEq": true,
+    "revMs": 498,
+    "buildMs": 526,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m6-pre-save",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     13,
+     13
+    ],
+    "mirrorEq": true,
+    "revMs": 650,
+    "buildMs": 713,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "resume",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     1,
+     1
+    ],
+    "mirrorEq": true,
+    "revMs": 248,
+    "buildMs": 255,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "resume",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     1,
+     1
+    ],
+    "mirrorEq": true,
+    "revMs": 270,
+    "buildMs": 276,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m12",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     7,
+     7
+    ],
+    "mirrorEq": true,
+    "revMs": 623,
+    "buildMs": 627,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m12",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     7,
+     7
+    ],
+    "mirrorEq": true,
+    "revMs": 639,
+    "buildMs": 647,
+    "diff": [],
+    "leak": []
+   }
+  ],
+  "cmds": [
+   {
+    "label": "m6",
+    "who": "H",
+    "k": "offerHuman",
+    "status": "ok",
+    "before": 0,
+    "after": 1,
+    "res": true
+   },
+   {
+    "label": "m6",
+    "who": "B",
+    "k": "research",
+    "status": "ok",
+    "code": null,
+    "ms": 103,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m6",
+    "who": "B",
+    "k": "move",
+    "status": "ok",
+    "code": null,
+    "ms": 41,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m6",
+    "who": "B",
+    "k": "build",
+    "status": "ok",
+    "code": null,
+    "ms": 46,
+    "before": 0,
+    "after": 1
+   },
+   {
+    "label": "m6",
+    "who": "B",
+    "k": "ship",
+    "status": "ok",
+    "code": null,
+    "ms": 45,
+    "before": 0,
+    "after": 1
+   },
+   {
+    "label": "m6",
+    "who": "B",
+    "k": "offerHuman",
+    "status": "ok",
+    "code": null,
+    "ms": 43,
+    "before": 0,
+    "after": 1
+   },
+   {
+    "label": "m6",
+    "who": "B",
+    "k": "offerAI",
+    "status": "skip",
+    "why": "quote"
+   },
+   {
+    "label": "m6",
+    "who": "B",
+    "k": "respond",
+    "status": "ok",
+    "code": null,
+    "ms": 55,
+    "before": "pending",
+    "after": "accepted"
+   },
+   {
+    "label": "m6",
+    "who": "B",
+    "k": "fedFound",
+    "status": "skip",
+    "why": "fed"
+   },
+   {
+    "label": "m6",
+    "who": "B",
+    "k": "councilVote",
+    "status": "skip",
+    "why": "no-council"
+   },
+   {
+    "label": "m6",
+    "who": "C",
+    "k": "research",
+    "status": "ok",
+    "code": null,
+    "ms": 21,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m6",
+    "who": "C",
+    "k": "move",
+    "status": "ok",
+    "code": null,
+    "ms": 64,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m6",
+    "who": "C",
+    "k": "build",
+    "status": "ok",
+    "code": null,
+    "ms": 70,
+    "before": 0,
+    "after": 1
+   },
+   {
+    "label": "m6",
+    "who": "C",
+    "k": "ship",
+    "status": "ok",
+    "code": null,
+    "ms": 94,
+    "before": 0,
+    "after": 1
+   },
+   {
+    "label": "m6",
+    "who": "C",
+    "k": "offerHuman",
+    "status": "ok",
+    "code": null,
+    "ms": 30,
+    "before": 0,
+    "after": 1
+   },
+   {
+    "label": "m6",
+    "who": "C",
+    "k": "offerAI",
+    "status": "ok",
+    "code": null,
+    "ms": 40,
+    "before": 0,
+    "after": 1
+   },
+   {
+    "label": "m6",
+    "who": "C",
+    "k": "respond",
+    "status": "skip",
+    "why": "none"
+   },
+   {
+    "label": "m6",
+    "who": "C",
+    "k": "fedFound",
+    "status": "skip",
+    "why": "fed"
+   },
+   {
+    "label": "m6",
+    "who": "C",
+    "k": "councilVote",
+    "status": "skip",
+    "why": "no-council"
+   },
+   {
+    "label": "resume",
+    "who": "B",
+    "k": "respond",
+    "status": "ok",
+    "code": null,
+    "ms": 24,
+    "before": "pending",
+    "after": "accepted"
+   },
+   {
+    "label": "m12",
+    "who": "H",
+    "k": "offerHuman",
+    "status": "ok",
+    "before": 1,
+    "after": 2,
+    "res": true
+   },
+   {
+    "label": "m12",
+    "who": "B",
+    "k": "research",
+    "status": "ok",
+    "code": null,
+    "ms": 6,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m12",
+    "who": "B",
+    "k": "move",
+    "status": "ok",
+    "code": null,
+    "ms": 21,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m12",
+    "who": "B",
+    "k": "build",
+    "status": "ok",
+    "code": null,
+    "ms": 8,
+    "before": 0,
+    "after": 1
+   },
+   {
+    "label": "m12",
+    "who": "B",
+    "k": "ship",
+    "status": "ok",
+    "code": null,
+    "ms": 7,
+    "before": 0,
+    "after": 1
+   },
+   {
+    "label": "m12",
+    "who": "B",
+    "k": "offerHuman",
+    "status": "ok",
+    "code": null,
+    "ms": 7,
+    "before": 1,
+    "after": 2
+   },
+   {
+    "label": "m12",
+    "who": "B",
+    "k": "offerAI",
+    "status": "skip",
+    "why": "quote"
+   },
+   {
+    "label": "m12",
+    "who": "B",
+    "k": "respond",
+    "status": "ok",
+    "code": null,
+    "ms": 14,
+    "before": "pending",
+    "after": "accepted"
+   },
+   {
+    "label": "m12",
+    "who": "B",
+    "k": "war",
+    "status": "ok",
+    "code": null,
+    "ms": 8,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m12",
+    "who": "B",
+    "k": "councilVote",
+    "status": "skip",
+    "why": "no-council"
+   },
+   {
+    "label": "m12",
+    "who": "C",
+    "k": "research",
+    "status": "ok",
+    "code": null,
+    "ms": 9,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m12",
+    "who": "C",
+    "k": "move",
+    "status": "ok",
+    "code": null,
+    "ms": 12,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m12",
+    "who": "C",
+    "k": "build",
+    "status": "ok",
+    "code": null,
+    "ms": 44,
+    "before": 0,
+    "after": 1
+   },
+   {
+    "label": "m12",
+    "who": "C",
+    "k": "ship",
+    "status": "ok",
+    "code": null,
+    "ms": 5,
+    "before": 0,
+    "after": 1
+   },
+   {
+    "label": "m12",
+    "who": "C",
+    "k": "offerHuman",
+    "status": "ok",
+    "code": null,
+    "ms": 6,
+    "before": 1,
+    "after": 2
+   },
+   {
+    "label": "m12",
+    "who": "C",
+    "k": "offerAI",
+    "status": "ok",
+    "code": null,
+    "ms": 7,
+    "before": 1,
+    "after": 2
+   },
+   {
+    "label": "m12",
+    "who": "C",
+    "k": "respond",
+    "status": "ok",
+    "code": null,
+    "ms": 11,
+    "before": "pending",
+    "after": "accepted"
+   },
+   {
+    "label": "m12",
+    "who": "C",
+    "k": "councilVote",
+    "status": "skip",
+    "why": "no-council"
+   }
+  ],
+  "perf": [
+   {
+    "label": "m0",
+    "month": 0,
+    "host": {
+     "monthTick": {
+      "n": 0
+     },
+     "publish": {
+      "n": 2,
+      "med": 8.5,
+      "p95": 8.5,
+      "max": 8.5
+     },
+     "longtask": {
+      "n": 3,
+      "med": 65,
+      "p95": 68,
+      "max": 68
+     },
+     "heapMB": 15,
+     "dom": 720,
+     "intervals": 2,
+     "timeouts": 2,
+     "offers": 0,
+     "notes": 0,
+     "inbox": 0,
+     "log": 1,
+     "news": 0
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 2,
+       "med": 92.5,
+       "p95": 92.5,
+       "max": 92.5
+      },
+      "refresh": {
+       "n": 1,
+       "med": 6.4,
+       "p95": 6.4,
+       "max": 6.4
+      },
+      "longtask": {
+       "n": 0
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 14,
+      "dom": 696,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 26,
+      "joinErrors": 0
+     },
+     "C": {
+      "build": {
+       "n": 2,
+       "med": 66.8,
+       "p95": 66.8,
+       "max": 66.8
+      },
+      "refresh": {
+       "n": 1,
+       "med": 2.8,
+       "p95": 2.8,
+       "max": 2.8
+      },
+      "longtask": {
+       "n": 1,
+       "med": 78,
+       "p95": 78,
+       "max": 78
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 13,
+      "dom": 695,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 22,
+      "joinErrors": 0
+     }
+    }
+   },
+   {
+    "label": "m6",
+    "month": 6,
+    "host": {
+     "monthTick": {
+      "n": 6,
+      "med": 103,
+      "p95": 158.6,
+      "max": 158.6
+     },
+     "publish": {
+      "n": 186,
+      "med": 5.8,
+      "p95": 23.6,
+      "max": 89.9
+     },
+     "longtask": {
+      "n": 9,
+      "med": 64,
+      "p95": 111,
+      "max": 111
+     },
+     "heapMB": 21,
+     "dom": 765,
+     "intervals": 2,
+     "timeouts": 5,
+     "offers": 4,
+     "notes": 0,
+     "inbox": 3,
+     "log": 22,
+     "news": 1
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 11,
+       "med": 10,
+       "p95": 41.1,
+       "max": 41.1
+      },
+      "refresh": {
+       "n": 15,
+       "med": 13.2,
+       "p95": 31.2,
+       "max": 31.2
+      },
+      "longtask": {
+       "n": 14,
+       "med": 72,
+       "p95": 155,
+       "max": 155
+      },
+      "builds": 13,
+      "deltas": 12,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 14,
+      "dom": 727,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 6,
+      "packets": 245,
+      "joinErrors": 0
+     },
+     "C": {
+      "build": {
+       "n": 10,
+       "med": 8.4,
+       "p95": 11.4,
+       "max": 11.4
+      },
+      "refresh": {
+       "n": 14,
+       "med": 10.4,
+       "p95": 23.8,
+       "max": 23.8
+      },
+      "longtask": {
+       "n": 16,
+       "med": 58,
+       "p95": 125,
+       "max": 125
+      },
+      "builds": 12,
+      "deltas": 11,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 14,
+      "dom": 726,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 6,
+      "packets": 240,
+      "joinErrors": 0
+     }
+    }
+   },
+   {
+    "label": "m12",
+    "month": 12,
+    "host": {
+     "monthTick": {
+      "n": 6,
+      "med": 54,
+      "p95": 568.4,
+      "max": 568.4
+     },
+     "publish": {
+      "n": 188,
+      "med": 4.4,
+      "p95": 12.4,
+      "max": 56.3
+     },
+     "longtask": {
+      "n": 2,
+      "med": 170,
+      "p95": 170,
+      "max": 170
+     },
+     "heapMB": 28,
+     "dom": 642,
+     "intervals": 2,
+     "timeouts": 17,
+     "offers": 11,
+     "notes": 0,
+     "inbox": 6,
+     "log": 42,
+     "news": 2
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 7,
+       "med": 21.6,
+       "p95": 62.7,
+       "max": 62.7
+      },
+      "refresh": {
+       "n": 7,
+       "med": 12.5,
+       "p95": 28.4,
+       "max": 28.4
+      },
+      "longtask": {
+       "n": 7,
+       "med": 53,
+       "p95": 357,
+       "max": 357
+      },
+      "builds": 7,
+      "deltas": 6,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 15,
+      "dom": 624,
+      "intervals": 3,
+      "timeouts": 2,
+      "notes": 0,
+      "results": 9,
+      "packets": 235,
+      "joinErrors": 0
+     },
+     "C": {
+      "build": {
+       "n": 7,
+       "med": 18.7,
+       "p95": 67.3,
+       "max": 67.3
+      },
+      "refresh": {
+       "n": 9,
+       "med": 14.3,
+       "p95": 19.5,
+       "max": 19.5
+      },
+      "longtask": {
+       "n": 6,
+       "med": 54,
+       "p95": 271,
+       "max": 271
+      },
+      "builds": 7,
+      "deltas": 6,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 17,
+      "dom": 626,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 7,
+      "packets": 231,
+      "joinErrors": 0
+     }
+    }
+   }
+  ],
+  "notes": [],
+  "net": {},
+  "resume": {
+   "explicitFixture": {
+    "explicitFixture": true,
+    "day": 181.6266,
+    "seed": 11,
+    "humanIds": [
+     0,
+     1,
+     2
+    ],
+    "aiCount": 5,
+    "federation": {
+     "id": 1,
+     "members": [
+      0,
+      1
+     ]
+    },
+    "war": [
+     3,
+     0
+    ],
+    "vassal": {
+     "lord": 0,
+     "subject": 4,
+     "type": "haracguzar"
+    },
+    "rng": -1622594203
+   },
+   "pendingOffer": {
+    "status": "ok",
+    "code": null,
+    "ms": 108,
+    "cid": "jmw6v2xy6ci8ejio5"
+   },
+   "pkgBytes": 210927,
+   "after": {
+    "day": 181,
+    "r": "-1622594203",
+    "offers": "1:accepted:0>1,2:pending:1>0,3:pending:2>0,4:accepted:2>4,5:pending:2>1",
+    "wars": "0:3|1:|2:",
+    "feds": "1:0.1:",
+    "council": "",
+    "vassal": "4<0",
+    "humans": "0:Kızıl Muhafız:ai=false:col=1:fl=3|1:Saf Akıl Ağı:ai=false:col=1:fl=3|2:Yeşil Birlik:ai=false:col=1:fl=3",
+    "speed": 0,
+    "inbox": 3
+   },
+   "before": {
+    "day": 181,
+    "r": "-1622594203",
+    "offers": "1:accepted:0>1,2:pending:1>0,3:pending:2>0,4:accepted:2>4,5:pending:2>1",
+    "wars": "0:3|1:|2:",
+    "feds": "1:0.1:",
+    "council": "",
+    "vassal": "4<0",
+    "humans": "0:Kızıl Muhafız:ai=false:col=1:fl=3|1:Saf Akıl Ağı:ai=false:col=1:fl=3|2:Yeşil Birlik:ai=false:col=1:fl=3",
+    "speed": 0,
+    "inbox": 3
+   },
+   "fullRecordsEqual": true,
+   "secondAccept": "rules:closed"
+  },
+  "relayPid1": 439001,
+  "actualWorld": {
+   "seed": 11,
+   "size": "orta",
+   "systems": 45,
+   "states": 8
+  },
+  "seats": [
+   {
+    "e": 1,
+    "conn": true
+   },
+   {
+    "e": 2,
+    "conn": true
+   }
+  ],
+  "relayPid2": 439476,
+  "errors": []
+ }
+}

@@ -1,0 +1,54 @@
+⚔ SAVAŞ DURUMU
+✕
+Haberler · 7
+Gelen kutusu · 0
+Olay: war-end:1
+Savaş sona erdi
+Saldıran → Savunan
+Yüce Nyx Zihni → Muhteşem Xel'Naga Otoritesi
+
+Saldıran taraf
+
+Savaş ilanı
+
+Başlangıç / haber tarihi: 2210.03 · gün 60
+
+SONA ERDİ · Bitiş 2210.04 · gün 90 · Neden: Diplomatik barış anlaşması
+
+Bilgi güncellemesi: 2210.05 · gün 120
+
+Bilinen savaş ortakları: Yüce Nyx Zihni (saldıran) · Muhteşem Xel'Naga Otoritesi (savunan)
+
+Bitişi başlatan: Yüce Nyx Zihni
+
+Yüce Nyx Zihni
+
+Savaş yorgunluğu: BİLİNMİYOR · tarihsel değer kaydedilmedi veya istihbarat yetersiz
+
+Askerî güç: BİLİNMİYOR
+
+Kayıtlı gemi kaybı: 0
+
+Filo kaybı: BİLİNMİYOR · ayrı sayaç yok
+
+Muhteşem Xel'Naga Otoritesi
+
+Savaş yorgunluğu: BİLİNMİYOR · tarihsel değer kaydedilmedi veya istihbarat yetersiz
+
+Askerî güç: BİLİNMİYOR
+
+Kayıtlı gemi kaybı: 0 · yalnız senin imha ettiklerin
+
+Filo kaybı: BİLİNMİYOR · ayrı sayaç yok
+
+Kayıtlı kendi savaş hedeflerin: BİLİNMİYOR
+
+Bilinen aktif cepheler: Bu tarihsel savaş sona erdi
+
+Kayıtlı ilerleme: BİLİNMİYOR · görünür bir ele geçirme kaydı yok
+
+Gizli filo konumları verilmez. Geçmiş güç ve yorgunluk anlık görüntüleri kaydedilmedi; BİLİNMİYOR alanları başka bir savaşın güncel verileriyle doldurulmaz.
+
+Muhteşem Xel'Naga Otoritesi · Güncel diplomasi
+Haber listesine dön
+Haritaya dön

@@ -1,0 +1,331 @@
+{
+  "results": [
+    {
+      "name": "A1 rehber 1–8: oda, iki farklı devlet, hazır, başlat; iki ekranda galaksi; sürüm işareti lobi / başlangıç / MP çubuğunda ve /mp/version oyun build'iyle aynı",
+      "status": "PASS",
+      "ms": 10430
+    },
+    {
+      "name": "P01 #1 host ve misafir panel sahipliği / ayna yenilemesi",
+      "status": "PASS",
+      "ms": 24901
+    },
+    {
+      "name": "P03 #3 tek dokunma, bekleyen gerçek ACK, panel koruması ve yeniden bağlantı",
+      "status": "PASS",
+      "ms": 2987
+    },
+    {
+      "name": "PWF barış / yeni yan cephe / gerçek misafir dokunması / Save8 / tekrar bağlantı",
+      "status": "PASS",
+      "ms": 7101
+    },
+    {
+      "name": "P04 #4/#21 iki insan savaş bitişi, güvenli haber aynası ve ambargo",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert(text.includes('SONA ERDİ'))\n\n    at module.exports (/workspace/Star/tests/helpers/beta-p01-war-mp.cjs:12:140)\n    at async /workspace/Star/tests/browser-mp73.cjs:148:139\n    at async test (/workspace/Star/tests/browser-mp73.cjs:13:7)\n    at async /workspace/Star/tests/browser-mp73.cjs:148:37"
+    },
+    {
+      "name": "A2 rehber 9–12: misafir filosunu yürütür (gerçek orderMove → host), B → host diplomatik teklif ve host gelen kutusundan kabul eder; zaman iki ekranda ilerler",
+      "status": "FAIL",
+      "error": "locator.tap: Timeout 8000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#diploPane [data-a=\"dealAdd\"][data-x=\"give:res\"]').first()\u001b[22m\n\u001b[2m    - locator resolved to <button class=\"abtn\" data-a=\"dealAdd\" data-x=\"give:res\">◆ Kaynak</button>\u001b[22m\n\u001b[2m  - attempting tap action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <p>Savaş yorgunluğu: BİLİNMİYOR · tarihsel değer kay…</p> from <div id=\"modal\" class=\"archiveHost\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying tap action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is visible, enabled and stable\u001b[22m\n\u001b[2m    - scrolling into view if needed\u001b[22m\n\u001b[2m    - done scrolling\u001b[22m\n\u001b[2m    - <section class=\"box\">…</section> from <div id=\"modal\" class=\"archiveHost\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m  2 × retrying tap action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m      - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <span>Saldıran → Savunan</span> from <div id=\"modal\" class=\"archiveHost\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m  2 × retrying tap action\u001b[22m\n\u001b[2m      - waiting 500ms\u001b[22m\n\u001b[2m      - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <p>Savaş yorgunluğu: BİLİNMİYOR · tarihsel değer kay…</p> from <div id="
+    },
+    {
+      "name": "A3 rehber 13–15: misafir bağlantısı kopar ve döner → aynı devlet; host oyun kaydı alır (MP.4 paketi doğrulanır)",
+      "status": "PASS",
+      "ms": 3327
+    },
+    {
+      "name": "B1 konsey motorun kendi yoluyla kurulur (fikstür: temas); AI insanlar adına oy / sponsor yazmaz; B gerçek \"KONSEY OYLAMASI\" kartından Konsey ekranını açar ve EVET (dokunma) → host kaydeder, oylama açık kalır",
+      "status": "FAIL",
+      "error": "locator.tap: Timeout 8000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#inbox [data-a=\"openNote\"][data-x=\"1\"]').first()\u001b[22m\n\u001b[2m    - locator resolved to <button data-x=\"1\" class=\"nCard sci\" data-a=\"openNote\">…</button>\u001b[22m\n\u001b[2m  - attempting tap action\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m  - element was detached from the DOM, retrying\u001b[22m\n\n    at tap (/workspace/Star/tests/browser-mp73.cjs:20:116)\n    at async openCard (/workspace/Star/tests/browser-mp73.cjs:93:140)\n    at async /workspace/Star/tests/browser-mp73.cjs:173:5\n    at async test (/workspace/Star/tests/browser-mp73.cjs:13:7)\n    at async /workspace/Star/tests/browser-mp73.cjs:167:3"
+    },
+    {
+      "name": "B2 C (915×412) HAYIR verir; oylama host oy verene kadar açık; host kendi Konsey ekranından EVET → motor kapatır; tekrar oy reddedilir",
+      "status": "FAIL",
+      "error": "locator.tap: Timeout 8000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#inbox [data-a=\"openNote\"][data-x=\"11\"]').first()\u001b[22m\n\n    at tap (/workspace/Star/tests/browser-mp73.cjs:20:116)\n    at async openCard (/workspace/Star/tests/browser-mp73.cjs:93:140)\n    at async /workspace/Star/tests/browser-mp73.cjs:190:5\n    at async test (/workspace/Star/tests/browser-mp73.cjs:13:7)\n    at async /workspace/Star/tests/browser-mp73.cjs:188:3"
+    },
+    {
+      "name": "B3 tasarı: B Konsey ekranından tasarı sunar (dokunma) → host kampanya sponsoru B; B AI üyeye rüşvet (dokunma) → host 200 mineral aktarır; insan üye C'ye rüşvet reddedilir; C'nin aynasında rüşvetin yönü yok",
+      "status": "FAIL",
+      "error": "page.waitForFunction: Timeout 30000ms exceeded.\n    at /workspace/Star/tests/browser-mp73.cjs:215:88\n    at async test (/workspace/Star/tests/browser-mp73.cjs:13:7)\n    at async /workspace/Star/tests/browser-mp73.cjs:214:3"
+    },
+    {
+      "name": "B4 entrika ve yıkıcı onay: B fısıltı ağını gerçek pencereden açar, iki AI seçer, gönderir → host motoru (B'nin günlüğü ya da motorun gerekçesi); onaysız yutma çağrısı host'a hiçbir şey göndermez",
+      "status": "PASS",
+      "ms": 6156
+    },
+    {
+      "name": "sayfa hataları yok",
+      "status": "PASS",
+      "ms": 1
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "startModal": [
+      "🛰 DANIŞMAN",
+      "",
+      "🛰 DANIŞMAN",
+      "",
+      ""
+    ],
+    "version": {
+      "mp": "MP.8.9b8",
+      "build": "96h10p13",
+      "files": {
+        "mp-core.js": "ecd0803bde88",
+        "relay.js": "67374585c6c2",
+        "mp1-host.js": "a85647bc9b81",
+        "join.js": "bc2732493741",
+        "mirror.js": "8681c5410a2f",
+        "guest-stars.js": "ead69e30feb9",
+        "mp71-dip.js": "4b7b5e64b5ba",
+        "mp7-setup.js": "48c0f282a254"
+      }
+    },
+    "unsupported": [
+      "autoEvent",
+      "diagCopy",
+      "joinRebel",
+      "leaveRebel",
+      "mapFix",
+      "physio",
+      "restart",
+      "rollName",
+      "sandbox",
+      "sitPick",
+      "stashNote",
+      "survey",
+      "terra",
+      "toTitle",
+      "tplDel",
+      "tplLoad",
+      "tplSave",
+      "trigCrisis"
+    ],
+    "guestDiag": "STARS MP.8.9b8 · oyun 96h10p13 · misafir · host bağlı · aşama: ready · ayna r4 20:27:56 · kurulum 3 ms · son komut: yok · son hata: yok",
+    "p01Host": [
+      {
+        "action": "diploPane",
+        "x": null,
+        "beforeHead": "DİPLOMASİ\n      ✕",
+        "beforeKey": "diplo:states:all",
+        "afterHead": "DİPLOMASİ\n      ✕",
+        "afterKey": "diplo:states:all",
+        "stolen": false,
+        "modalUnchanged": true
+      },
+      {
+        "action": "globalPane",
+        "x": "bilim",
+        "beforeHead": "✦ BİLİM✕",
+        "beforeKey": "science",
+        "afterHead": "✦ BİLİM✕",
+        "afterKey": "science",
+        "stolen": false,
+        "modalUnchanged": true
+      },
+      {
+        "action": "globalPane",
+        "x": "imp",
+        "beforeHead": "👑 DEVLET\n        ✕",
+        "beforeKey": "global:imp",
+        "afterHead": "👑 DEVLET\n        ✕",
+        "afterKey": "global:imp",
+        "stolen": false,
+        "modalUnchanged": true
+      },
+      {
+        "action": "globalPane",
+        "x": "ekonomi",
+        "beforeHead": "📊 EKONOMİ MERKEZİ✕",
+        "beforeKey": "economy",
+        "afterHead": "📊 EKONOMİ MERKEZİ✕",
+        "afterKey": "economy",
+        "stolen": false,
+        "modalUnchanged": true
+      },
+      {
+        "action": "fedPane",
+        "x": null,
+        "beforeHead": "🏛 FEDERASYON\n        ✕",
+        "beforeKey": "federation:general",
+        "afterHead": "🏛 FEDERASYON\n        ✕",
+        "afterKey": "federation:general",
+        "stolen": false,
+        "modalUnchanged": true
+      },
+      {
+        "action": "marketPane",
+        "x": null,
+        "beforeHead": "💱 BORSA KAPALI\n          ✕",
+        "beforeKey": "market",
+        "afterHead": "💱 BORSA KAPALI\n          ✕",
+        "afterKey": "market",
+        "stolen": false,
+        "modalUnchanged": true
+      },
+      {
+        "action": "tab",
+        "x": "intel",
+        "beforeHead": "🌐 GALAKTİK KONSEY\n        ✕",
+        "beforeKey": "council",
+        "afterHead": "🌐 GALAKTİK KONSEY\n        ✕",
+        "afterKey": "council",
+        "stolen": false,
+        "modalUnchanged": true
+      },
+      {
+        "action": "news",
+        "x": null,
+        "beforeHead": "🌐 GALAKTİK KONSEY\n        ✕",
+        "beforeKey": "council",
+        "afterHead": "🌐 GALAKTİK KONSEY\n        ✕",
+        "afterKey": "council",
+        "stolen": false,
+        "modalUnchanged": true
+      },
+      {
+        "action": "sidebar:sistem",
+        "current": "sistem",
+        "overlay": false
+      },
+      {
+        "action": "sidebar:filo",
+        "current": "filo",
+        "overlay": false
+      }
+    ],
+    "p01Guest": [
+      {
+        "action": "diploPane",
+        "x": null,
+        "beforeHead": "DİPLOMASİ\n      ✕",
+        "beforeKey": "diplo:states:all",
+        "afterHead": "DİPLOMASİ\n      ✕",
+        "afterKey": "diplo:states:all",
+        "stolen": false,
+        "modalUnchanged": true
+      },
+      {
+        "action": "globalPane",
+        "x": "bilim",
+        "beforeHead": "✦ BİLİM✕",
+        "beforeKey": "science",
+        "afterHead": "✦ BİLİM✕",
+        "afterKey": "science",
+        "stolen": false,
+        "modalUnchanged": true
+      },
+      {
+        "action": "globalPane",
+        "x": "imp",
+        "beforeHead": "👑 DEVLET\n        ✕",
+        "beforeKey": "global:imp",
+        "afterHead": "👑 DEVLET\n        ✕",
+        "afterKey": "global:imp",
+        "stolen": false,
+        "modalUnchanged": true
+      },
+      {
+        "action": "globalPane",
+        "x": "ekonomi",
+        "beforeHead": "📊 EKONOMİ MERKEZİ✕",
+        "beforeKey": "economy",
+        "afterHead": "📊 EKONOMİ MERKEZİ✕",
+        "afterKey": "economy",
+        "stolen": false,
+        "modalUnchanged": true
+      },
+      {
+        "action": "fedPane",
+        "x": null,
+        "beforeHead": "🏛 FEDERASYON\n        ✕",
+        "beforeKey": "federation:general",
+        "afterHead": "🏛 FEDERASYON\n        ✕",
+        "afterKey": "federation:general",
+        "stolen": false,
+        "modalUnchanged": true
+      },
+      {
+        "action": "marketPane",
+        "x": null,
+        "beforeHead": "💱 BORSA KAPALI\n          ✕",
+        "beforeKey": "market",
+        "afterHead": "💱 BORSA KAPALI\n          ✕",
+        "afterKey": "market",
+        "stolen": false,
+        "modalUnchanged": true
+      },
+      {
+        "action": "tab",
+        "x": "intel",
+        "beforeHead": "🌐 GALAKTİK KONSEY\n        ✕",
+        "beforeKey": "council",
+        "afterHead": "🌐 GALAKTİK KONSEY\n        ✕",
+        "afterKey": "council",
+        "stolen": false,
+        "modalUnchanged": true
+      },
+      {
+        "action": "news",
+        "x": null,
+        "beforeHead": "🌐 GALAKTİK KONSEY\n        ✕",
+        "beforeKey": "council",
+        "afterHead": "🌐 GALAKTİK KONSEY\n        ✕",
+        "afterKey": "council",
+        "stolen": false,
+        "modalUnchanged": true
+      },
+      {
+        "action": "sidebar:sistem",
+        "current": "sistem",
+        "overlay": false
+      },
+      {
+        "action": "sidebar:filo",
+        "current": "filo",
+        "overlay": false
+      }
+    ],
+    "p03": {
+      "guestYes": 1,
+      "hostNo": 1,
+      "singleTap": true,
+      "realAckHeldByTest": true,
+      "otherPanelKept": true,
+      "reconnect": true
+    },
+    "warfix": {
+      "cards": [
+        {
+          "front": 1,
+          "campaign": 1,
+          "title": "SAVAŞA DAHİLSİN",
+          "sub": "Kızıl Muhafız → Saf Akıl Ağı · Yeni savaş ilanı",
+          "key": "war:1"
+        },
+        {
+          "front": 2,
+          "campaign": 1,
+          "title": "SAVAŞA DAHİLSİN",
+          "sub": "Kyiron Komutanlığı → Saf Akıl Ağı · Federasyon yükümlülüğü · Çağıran: Kızıl Muhafız",
+          "key": "war:2"
+        }
+      ],
+      "singleTrustedPeaceTap": true,
+      "duplicateApplied": false,
+      "save8": {
+        "hostWar": false,
+        "guestOtherWar": true,
+        "ended": "agreement|actor:0",
+        "pkg": true
+      },
+      "reconnect": true
+    },
+    "whisper": 1
+  },
+  "pass": 7,
+  "fail": 5
+}

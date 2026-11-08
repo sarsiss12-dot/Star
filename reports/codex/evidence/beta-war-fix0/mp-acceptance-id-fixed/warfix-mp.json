@@ -1,0 +1,34 @@
+{
+  "cards": [
+    {
+      "front": 1,
+      "campaign": 1,
+      "title": "SAVAŞA DAHİLSİN",
+      "sub": "Kızıl Muhafız → Saf Akıl Ağı · Yeni savaş ilanı",
+      "key": "war:1"
+    },
+    {
+      "front": 2,
+      "campaign": 1,
+      "title": "SAVAŞA DAHİLSİN",
+      "sub": "Nivrel Sendikası → Saf Akıl Ağı · Federasyon yükümlülüğü · Çağıran: Kızıl Muhafız",
+      "key": "war:2"
+    }
+  ],
+  "guestInitiallyDidNotKnowSideFront": true,
+  "firstPartial": {
+    "peaceWithHost": true,
+    "otherEnemyStillActive": true
+  },
+  "singleTrustedPeaceTap": true,
+  "duplicateApplied": false,
+  "vassalOldCallStayedPeace": true,
+  "newSourceCallAllowed": true,
+  "save8": {
+    "hostWar": false,
+    "sourceWar": true,
+    "ended": "agreement|actor:0",
+    "pkg": true
+  },
+  "reconnect": true
+}

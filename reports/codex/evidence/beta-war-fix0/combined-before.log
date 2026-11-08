@@ -1,0 +1,54 @@
+FAIL aynı seferin yeni insan cephesi ayrı ve yalnız bir kez bildirilir Expected values to be strictly equal:
+
+1 !== 2
+
+FAIL aylık vasal çağrısı aynı eski cephede imzalanan barışı geri açmaz Expected values to be strictly equal:
+
+true !== false
+
+FAIL koruma güvenlik ağı senyörün imzaladığı eski cephe barışını geri açmaz Expected values to be strictly equal:
+
+true !== false
+
+FAIL savaşta bağımsız ittifak ve NAP reddedilir; açık barışlı paket iki sırada geçerli ally standalone
+
+true !== false
+
+FAIL eski barış teklifi güncel savaş koşulunda yeniden doğrulanır Expected values to be strictly equal:
+
+true !== false
+
+PASS rutin savaş AI teklifi barış içerir; aynı teklif ve ret soğuması korunur
+PASS aynı gün gerçekten yeni kaynak savaşı yeni yükümlülüğü engellemez
+FAIL Save8 barışı ve eski çağrının kapanışını korur; kaynak savaşı devam eder Expected values to be strictly equal:
+
+true !== false
+
+FAIL kısmi barış diğer cepheyi açık bırakır ve bunu açıkça bildirir The expression evaluated to a falsy value:
+
+  assert(h.run('G.log.some(l=>l.m.includes("Savaş devam ediyor: "+L.name))'))
+
+PASS vekil savaşı sponsor barışı bitirir; canlı destek kaydı kendiliğinden geri açılmaz
+PASS açık barış+ittifak+NAP paketinin sırası sonucu ve RNG tüketimini değiştirmez
+FAIL declareWar dışı başlangıç görünür; yüklemede tarihsel savaş bildirimi tekrarlanmaz Expected values to be strictly equal:
+
+0 !== 1
+
+FAIL galaktik kriz doğrudan savaş yolu haber ve üst kart üretir The expression evaluated to a falsy value:
+
+  assert(h.run('G.news.records.some(r=>r.key==="crisis-war:"+c.id+":"+G.p.id)'))
+
+FAIL eski Save8 kapalı cephe geçmişi yokken bilinen kaynak savaş günü ve peaceAt eski çağrıyı tanımlar Expected values to be strictly equal:
+
+true !== false
+
+PASS yeni gönüllü savaş taahhüdü otomatik eski çağrı sanılmaz
+FAIL federasyon savunması eski cephe barışını tekrarlamaz; yeni saldırı yükümlülüğü korunur The expression evaluated to a falsy value:
+
+  assert(h.run('settled'))
+
+FAIL bağımsız insan sırayla iki AI ile barışınca aylık yükümlülükler toplu savaşı geri getirmez Expected values to be strictly equal:
+
+true !== false
+
+{"pass":5,"fail":12}

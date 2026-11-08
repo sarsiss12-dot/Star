@@ -1,0 +1,35 @@
+{
+  "first": {
+    "tur": 1,
+    "karar": "bekle",
+    "uygulandi": false,
+    "why": "İnsan oyuncunun kararı bekleniyor",
+    "karsi": null
+  },
+  "second": {
+    "tur": 0,
+    "karar": "bekle",
+    "uygulandi": false,
+    "why": "Reddedilen aynı AI önerisi yeniden değerlendirme bekliyor",
+    "karsi": null
+  },
+  "offers": [
+    {
+      "id": 1,
+      "status": "rejected",
+      "by": "ai"
+    }
+  ],
+  "ack": [
+    {
+      "v": 1,
+      "type": "result",
+      "seq": 1,
+      "cid": "reject00001",
+      "status": "ok",
+      "code": null,
+      "rev": 1
+    }
+  ]
+}
+PASS MP AI rejected terms cooldown and later reconsideration

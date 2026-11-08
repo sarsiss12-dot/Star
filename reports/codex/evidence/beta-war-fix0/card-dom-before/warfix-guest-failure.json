@@ -1,0 +1,176 @@
+{
+  "day": 6.5131999999999906,
+  "player": 0,
+  "war": {
+    "1": true,
+    "2": true
+  },
+  "lord": null,
+  "inbox": [
+    {
+      "kind": "aideal",
+      "data": {
+        "from": 1,
+        "to": 0,
+        "give": [
+          {
+            "t": "peace"
+          }
+        ],
+        "want": [],
+        "born": 6,
+        "expires": 546
+      },
+      "ico": "📜",
+      "cls": "sci",
+      "pause": false,
+      "uid": 3,
+      "born": 6,
+      "rec": 1,
+      "title": "Teklif — Kızıl Muhafız",
+      "sub": "Çok oyunculu teklif · anlaşma istiyor",
+      "key": "mp71:1"
+    },
+    {
+      "kind": "warstart",
+      "data": {
+        "attacker": 1,
+        "defender": 0,
+        "rootAttacker": 1,
+        "rootDefender": 0,
+        "front": 1,
+        "campaign": 1,
+        "reason": "declaration",
+        "sponsor": null,
+        "day": 6.5131999999999906,
+        "year": 2210,
+        "month": 1
+      },
+      "ico": "⚔",
+      "cls": "war",
+      "pause": true,
+      "title": "SAVAŞA DAHİLSİN",
+      "sub": "Kızıl Muhafız → Saf Akıl Ağı · Yeni savaş ilanı",
+      "key": "war:1",
+      "uid": 1,
+      "born": 6.5131999999999906
+    },
+    {
+      "kind": "warstart",
+      "data": {
+        "attacker": 2,
+        "defender": 0,
+        "rootAttacker": 2,
+        "rootDefender": 0,
+        "front": 2,
+        "campaign": 1,
+        "reason": "federation",
+        "sponsor": 1,
+        "day": 6.5131999999999906,
+        "year": 2210,
+        "month": 1
+      },
+      "ico": "⚔",
+      "cls": "war",
+      "pause": true,
+      "title": "SAVAŞA DAHİLSİN",
+      "sub": "Ulvor Korporasyonu → Saf Akıl Ağı · Federasyon yükümlülüğü · Çağıran: Kızıl Muhafız",
+      "key": "war:2",
+      "uid": 2,
+      "born": 6.5131999999999906
+    }
+  ],
+  "records": [
+    {
+      "id": 1,
+      "key": "deal:mp71:1",
+      "kind": "aideal",
+      "from": 1,
+      "name": "Kızıl Muhafız",
+      "title": "Teklif — Kızıl Muhafız",
+      "sub": "Çok oyunculu teklif · tur 1",
+      "born": 6,
+      "year": 2210,
+      "month": 1,
+      "expires": 546,
+      "status": "pending",
+      "note": {
+        "uid": 1,
+        "kind": "aideal",
+        "title": "Teklif — Kızıl Muhafız",
+        "sub": "Çok oyunculu teklif · tur 1",
+        "key": "mp71:1",
+        "born": 6,
+        "data": {
+          "from": 1,
+          "to": 0,
+          "give": [
+            {
+              "t": "peace"
+            }
+          ],
+          "want": [],
+          "born": 6,
+          "expires": 546
+        }
+      },
+      "mp": 1
+    }
+  ],
+  "modal": "",
+  "view": {
+    "offers": [
+      {
+        "id": 1,
+        "from": 0,
+        "to": 1,
+        "fn": "Kızıl Muhafız",
+        "tn": "Saf Akıl Ağı",
+        "give": [
+          {
+            "t": "peace",
+            "l": "🕊 Barış"
+          }
+        ],
+        "want": [],
+        "born": 6,
+        "expires": 546,
+        "round": 1,
+        "prev": null,
+        "status": "pending",
+        "why": "",
+        "by": "human",
+        "cost": 30
+      }
+    ],
+    "contacts": [
+      {
+        "id": 0,
+        "n": "Kızıl Muhafız",
+        "col": "#985f3e",
+        "h": 1,
+        "rel": -76,
+        "bl": 0,
+        "war": 1,
+        "peace": 1,
+        "sq": 0,
+        "sqw": "Henüz iki taraf da yeterince yorulmadı (0/85)"
+      },
+      {
+        "id": 2,
+        "n": "Ulvor Korporasyonu",
+        "col": "#f5665c",
+        "h": 0,
+        "rel": -76,
+        "bl": 0,
+        "war": 1,
+        "peace": 1,
+        "sq": 0,
+        "sqw": "Henüz iki taraf da yeterince yorulmadı (0/85)"
+      }
+    ],
+    "life": 540,
+    "rounds": 6,
+    "sq": []
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "results": [
+    {
+      "name": "A1 rehber 1–8: oda, iki farklı devlet, hazır, başlat; iki ekranda galaksi; sürüm işareti lobi / başlangıç / MP çubuğunda ve /mp/version oyun build'iyle aynı",
+      "status": "PASS",
+      "ms": 9204
+    },
+    {
+      "name": "PWF barış / yeni yan cephe / gerçek misafir dokunması / Save8 / tekrar bağlantı",
+      "status": "PASS",
+      "ms": 12472
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "startModal": [
+      "🛰 DANIŞMAN",
+      ""
+    ],
+    "version": {
+      "mp": "MP.8.9b8",
+      "build": "96h10p13",
+      "files": {
+        "mp-core.js": "c0977d143c2e",
+        "relay.js": "67374585c6c2",
+        "mp1-host.js": "a85647bc9b81",
+        "join.js": "bc2732493741",
+        "mirror.js": "8681c5410a2f",
+        "guest-stars.js": "9087ba51ea72",
+        "mp71-dip.js": "dab9a9d9774f",
+        "mp7-setup.js": "48c0f282a254"
+      }
+    },
+    "unsupported": [
+      "autoEvent",
+      "diagCopy",
+      "joinRebel",
+      "leaveRebel",
+      "mapFix",
+      "physio",
+      "restart",
+      "rollName",
+      "sandbox",
+      "sitPick",
+      "stashNote",
+      "survey",
+      "terra",
+      "toTitle",
+      "tplDel",
+      "tplLoad",
+      "tplSave",
+      "trigCrisis"
+    ],
+    "guestDiag": "STARS MP.8.9b8 · oyun 96h10p13 · misafir · host bağlı · aşama: ready · ayna r4 21:30:59 · kurulum 6 ms · son komut: yok · son hata: yok",
+    "warfix": {
+      "cards": [
+        {
+          "front": 1,
+          "campaign": 1,
+          "title": "SAVAŞA DAHİLSİN",
+          "sub": "Kızıl Muhafız → Saf Akıl Ağı · Yeni savaş ilanı",
+          "key": "war:1"
+        },
+        {
+          "front": 2,
+          "campaign": 1,
+          "title": "SAVAŞA DAHİLSİN",
+          "sub": "Nivrel Sendikası → Saf Akıl Ağı · Federasyon yükümlülüğü · Çağıran: Kızıl Muhafız",
+          "key": "war:2"
+        }
+      ],
+      "guestInitiallyDidNotKnowSideFront": true,
+      "firstPartial": {
+        "peaceWithHost": true,
+        "otherEnemyStillActive": true
+      },
+      "singleTrustedPeaceTap": true,
+      "duplicateApplied": false,
+      "vassalOldCallStayedPeace": true,
+      "newSourceCallAllowed": true,
+      "save8": {
+        "hostWar": false,
+        "sourceWar": true,
+        "ended": "agreement|actor:0",
+        "pkg": true
+      },
+      "reconnect": true
+    }
+  },
+  "pass": 2,
+  "fail": 0
+}
