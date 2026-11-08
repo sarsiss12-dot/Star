@@ -1,0 +1,62 @@
+{
+  "inbox": [
+    {
+      "kind": "warstart",
+      "data": {
+        "attacker": 0,
+        "defender": 2,
+        "rootAttacker": 0,
+        "rootDefender": 2,
+        "front": 1,
+        "campaign": 1,
+        "reason": "declaration",
+        "sponsor": null,
+        "day": 22.176870000000086,
+        "year": 2210,
+        "month": 1
+      },
+      "ico": "⚔",
+      "cls": "war",
+      "pause": true,
+      "title": "SAVAŞA DAHİLSİN",
+      "sub": "Saf Akıl Ağı → Zeraron Kalesi · Yeni savaş ilanı",
+      "key": "war:1",
+      "uid": 1,
+      "born": 22.176870000000086
+    }
+  ],
+  "records": [],
+  "html": "<button class=\"nCard war\" data-a=\"openNote\" data-x=\"1\">\n         <span class=\"nIco\">⚔</span>\n         <span class=\"nTxt\"><b>SAVAŞA DAHİLSİN</b><i>Saf Akıl Ağı → Zeraron Kalesi · Yeni savaş ilanı</i></span>\n         <span class=\"nGo\">›</span>\n       </button>",
+  "modal": "",
+  "hidden": true,
+  "view": {
+    "offers": [],
+    "contacts": [
+      {
+        "id": 0,
+        "n": "Kızıl Muhafız",
+        "col": "#5c9ef5",
+        "h": 1,
+        "rel": 40,
+        "bl": 0,
+        "war": 0,
+        "peace": 0
+      },
+      {
+        "id": 2,
+        "n": "Zeraron Kalesi",
+        "col": "#3e4a98",
+        "h": 0,
+        "rel": -60,
+        "bl": 1,
+        "war": 1,
+        "peace": 0,
+        "sq": 0,
+        "sqw": "Henüz iki taraf da yeterince yorulmadı (0/85)"
+      }
+    ],
+    "life": 540,
+    "rounds": 6,
+    "sq": []
+  }
+}

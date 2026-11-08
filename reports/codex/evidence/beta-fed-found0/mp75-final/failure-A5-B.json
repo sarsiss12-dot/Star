@@ -1,0 +1,96 @@
+{
+  "inbox": [],
+  "records": [
+    {
+      "id": 1,
+      "key": "deal:mp71:1",
+      "kind": "aideal",
+      "from": 2,
+      "name": "Orali Federasyonu",
+      "title": "Teklif — Orali Federasyonu",
+      "sub": "Çok oyunculu teklif · tur 1",
+      "born": 23,
+      "year": 2210,
+      "month": 1,
+      "expires": 563,
+      "status": "accepted",
+      "note": {
+        "uid": 1,
+        "kind": "aideal",
+        "title": "Teklif — Orali Federasyonu",
+        "sub": "Çok oyunculu teklif · tur 1",
+        "key": "mp71:1",
+        "born": 23,
+        "data": {
+          "from": 2,
+          "to": 0,
+          "give": [
+            {
+              "t": "peace"
+            }
+          ],
+          "want": [],
+          "born": 23,
+          "expires": 563
+        }
+      },
+      "mp": 1,
+      "finished": 23.216000000000108,
+      "why": ""
+    }
+  ],
+  "html": "",
+  "modal": "",
+  "hidden": true,
+  "view": {
+    "offers": [
+      {
+        "id": 1,
+        "from": 2,
+        "to": 1,
+        "fn": "Orali Federasyonu",
+        "tn": "Saf Akıl Ağı",
+        "give": [
+          {
+            "t": "peace",
+            "l": "🕊 Barış"
+          }
+        ],
+        "want": [],
+        "born": 23,
+        "expires": 563,
+        "round": 1,
+        "prev": null,
+        "status": "accepted",
+        "why": "",
+        "by": "ai",
+        "cost": 21
+      }
+    ],
+    "contacts": [
+      {
+        "id": 0,
+        "n": "Kızıl Muhafız",
+        "col": "#5c9ef5",
+        "h": 1,
+        "rel": 40,
+        "bl": 0,
+        "war": 0,
+        "peace": 0
+      },
+      {
+        "id": 2,
+        "n": "Orali Federasyonu",
+        "col": "#f5c25c",
+        "h": 0,
+        "rel": -10,
+        "bl": 0,
+        "war": 0,
+        "peace": 0
+      }
+    ],
+    "life": 540,
+    "rounds": 6,
+    "sq": []
+  }
+}

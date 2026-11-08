@@ -1,0 +1,17 @@
+{"command": "node tests/beta_fed_found0_core_test.js", "exit": 0, "seconds": 5.55}
+{"command": "node tests/beta_fed_found0_mp_test.js", "exit": 0, "seconds": 6.0}
+{"command": "node tests/beta_fed_found0_events_test.js", "exit": 0, "seconds": 4.28}
+{"command": "node tests/mp3_core_test.js", "exit": 0, "seconds": 18.19}
+{"command": "node tests/mp4_core_test.js", "exit": 0, "seconds": 14.2}
+{"command": "node tests/mp31_core_test.js", "exit": 0, "seconds": 14.98}
+{"command": "node tests/mp71_bridge_test.js", "exit": 0, "seconds": 20.8}
+{"command": "node tests/beta_war_fix0_test.cjs", "exit": 0, "seconds": 4.5}
+{"command": "node tests/beta-war-fix0-history.cjs", "exit": 0, "seconds": 1.52}
+{"command": "node tests/beta-war-fix0-offer-identity.cjs", "exit": 0, "seconds": 0.61}
+{"command": "node tests/beta_p01_ballot_test.js", "exit": 0, "seconds": 1.08}
+{"command": "node tests/beta_p01_war_end_test.js", "exit": 0, "seconds": 2.62}
+{"command": "node tests/beta_p01_embargo_test.js", "exit": 0, "seconds": 1.59}
+{"command": "node tests/beta_p02_news_test.js", "exit": 0, "seconds": 2.83}
+{"command": "node tests/perf1_equivalence_test.js", "exit": 0, "seconds": 4.26}
+{"command": "node tests/perf2_equivalence_test.js", "exit": 0, "seconds": 6.14}
+{"command": "node tests/faz96c3_ui_test.js", "exit": 0, "seconds": 8.47}

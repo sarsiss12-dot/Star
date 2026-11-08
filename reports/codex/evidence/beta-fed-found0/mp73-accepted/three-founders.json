@@ -1,0 +1,22 @@
+{
+  "guestFounder": 1,
+  "selected": [
+    0,
+    2
+  ],
+  "members": [
+    1,
+    0,
+    2
+  ],
+  "names": [
+    "Kızıl Muhafız",
+    "Okyanus Ticaret Birliği",
+    "Saf Akıl Ağı"
+  ],
+  "rejection": true,
+  "cancel": true,
+  "reconnect": true,
+  "thirdPartyPrivate": true,
+  "cost": 220
+}

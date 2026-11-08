@@ -1,0 +1,60 @@
+[
+  {
+    "path": ".emps.0._powAt",
+    "before": -1,
+    "after": 180
+  },
+  {
+    "path": ".emps.0._pressAt",
+    "before": -1,
+    "after": 180
+  },
+  {
+    "path": ".emps.0._powC",
+    "after": 373
+  },
+  {
+    "path": ".emps.0._press",
+    "after": 0.8230147461832695
+  },
+  {
+    "path": ".emps.1._powAt",
+    "before": 0,
+    "after": 180
+  },
+  {
+    "path": ".emps.1._pressAt",
+    "before": 0,
+    "after": 180
+  },
+  {
+    "path": ".emps.2._powAt",
+    "before": 0,
+    "after": 180
+  },
+  {
+    "path": ".emps.2._pressAt",
+    "before": 0,
+    "after": 180
+  },
+  {
+    "path": ".emps.4._powAt",
+    "before": 0,
+    "after": 180
+  },
+  {
+    "path": ".emps.4._pressAt",
+    "before": 0,
+    "after": 180
+  },
+  {
+    "path": ".emps.5._powAt",
+    "before": 0,
+    "after": 180
+  },
+  {
+    "path": ".emps.5._pressAt",
+    "before": 0,
+    "after": 180
+  }
+]

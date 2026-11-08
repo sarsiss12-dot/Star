@@ -1,0 +1,53 @@
+⚔ SAVAŞ DURUMU
+✕
+Haberler · 1
+Gelen kutusu · 0
+Gönderilen · 0
+Olay: war-front:2
+Savaş başladı
+Saldıran → Savunan
+Mirvia Donanması → Saf Akıl Ağı
+
+Federasyon savunma paktı
+
+Çağıran devlet: Kızıl Muhafız
+
+Başlangıç / haber tarihi: 2210.01 · gün 7
+
+AKTİF
+
+Bilgi güncellemesi: 2210.01 · gün 7
+
+Bilinen savaş ortakları: Kızıl Muhafız (saldıran) · Saf Akıl Ağı (savunan) · Mirvia Donanması (saldıran)
+
+Mirvia Donanması
+
+Savaş yorgunluğu: BİLİNMİYOR · tarihsel değer kaydedilmedi veya istihbarat yetersiz
+
+Askerî güç: BİLİNMİYOR
+
+Kayıtlı gemi kaybı: 0 · yalnız senin imha ettiklerin
+
+Filo kaybı: BİLİNMİYOR · ayrı sayaç yok
+
+Saf Akıl Ağı
+
+Savaş yorgunluğu: BİLİNMİYOR · tarihsel değer kaydedilmedi veya istihbarat yetersiz
+
+Askerî güç: 361 · kendi filo gücün · 2210.01 · gün 7
+
+Kayıtlı gemi kaybı: 0
+
+Filo kaybı: BİLİNMİYOR · ayrı sayaç yok
+
+Kayıtlı kendi savaş hedeflerin: BİLİNMİYOR
+
+Bilinen aktif cepheler: #1 · Kızıl Muhafız ↔ Saf Akıl Ağı / #2 · Mirvia Donanması ↔ Saf Akıl Ağı
+
+Kayıtlı ilerleme: BİLİNMİYOR · görünür bir ele geçirme kaydı yok
+
+Gizli filo konumları verilmez. Geçmiş güç ve yorgunluk anlık görüntüleri kaydedilmedi; BİLİNMİYOR alanları başka bir savaşın güncel verileriyle doldurulmaz.
+
+Mirvia Donanması · Güncel diplomasi
+Haber listesine dön
+Haritaya dön

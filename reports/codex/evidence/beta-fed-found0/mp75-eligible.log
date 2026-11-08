@@ -1,0 +1,17 @@
+PASS A1 oda + başlangıç; MP düğmesi host ve misafirde sol araç sütununda (#tools), hız kutusu / kaynak çubuğu / araç düğmeleriyle örtüşmez; açılınca panel, kapanınca sütuna döner
+PASS A2 misafirde açık panel yerinde güncellenir: diplomasi sayfası açıkken oyun ilerler, ayna birçok kez kurulur, panel baştan yazılmaz (surfaceKept)
+FAIL A3 savaş / barış: misafir AI ile savaşta; AI barış teklifi misafirin kartına gelir; KABUL (dokunma) → host'ta savaş biter; AKTİF SAVAŞLAR üst sayaçla aynı sayıyı gösterir
+page.waitForFunction: Timeout 30000ms exceeded.
+    at wait (/workspace/Star/tests/browser-mp75.cjs:20:40)
+    at /workspace/Star/tests/browser-mp75.cjs:122:11
+    at async test (/workspace/Star/tests/browser-mp75.cjs:16:7)
+    at async /workspace/Star/tests/browser-mp75.cjs:111:3
+FAIL A4 dokunmatik miktar: filo bileşimi penceresinde SIFIR / −50 / −10 / +10 / +50 (dokunma), klavye açılmaz; anlaşma miktarında pencerenin kendi düğmeleri korunur (çift kontrol yok)
+Error: tap #diploPane [data-a="dealAdd"][data-x="give:res"] [tapfail-1] {"who":"Saf Akıl Ağı","modal":"⚔ SAVAŞ DURUMU✕\n      Haberler · 1Gelen kutusu · 1Gönderilen · 0\n      Olay: war-front:1Savaş bildirimiSaldıran → SavunanSaf Akıl Ağı / Veliri Muhafızlığı · tar","sheet":"","diplo":true,"box":[22,119.9375,207,44],"top":"SPAN","vw":[915,412]}
+    at tap (/workspace/Star/tests/browser-mp75.cjs:24:207)
+    at async /workspace/Star/tests/browser-mp75.cjs:128:5
+    at async test (/workspace/Star/tests/browser-mp75.cjs:16:7)
+    at async /workspace/Star/tests/browser-mp75.cjs:126:3
+PASS A5 karar bekleyen olay kaydırılınca gizlenir (silinmez), ☰ durum listesinde kalır ve oradan aynı karar penceresi açılır
+PASS sayfa hataları yok
+GEÇEN: 4 KALAN: 2

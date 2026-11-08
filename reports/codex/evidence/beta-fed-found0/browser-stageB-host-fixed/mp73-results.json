@@ -1,0 +1,116 @@
+{
+  "results": [
+    {
+      "name": "A1 rehber 1–8: oda, iki farklı devlet, hazır, başlat; iki ekranda galaksi; sürüm işareti lobi / başlangıç / MP çubuğunda ve /mp/version oyun build'iyle aynı",
+      "status": "PASS",
+      "ms": 11467
+    },
+    {
+      "name": "FD0 gerçek host-misafir kuruluş daveti, tek dokunma ve açık son onay",
+      "status": "PASS",
+      "ms": 12706
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "startModal": [
+      "🛰 DANIŞMAN",
+      ""
+    ],
+    "version": {
+      "mp": "MP.8.9b8",
+      "build": "96h10p13",
+      "files": {
+        "mp-core.js": "84b8665b1580",
+        "relay.js": "67374585c6c2",
+        "mp1-host.js": "0938cb8d7030",
+        "join.js": "bc2732493741",
+        "mirror.js": "4d114baa720a",
+        "guest-stars.js": "2d1127a35b5a",
+        "mp71-dip.js": "bf0355f27ef6",
+        "mp7-setup.js": "48c0f282a254"
+      }
+    },
+    "unsupported": [
+      "autoEvent",
+      "diagCopy",
+      "joinRebel",
+      "leaveRebel",
+      "mapFix",
+      "physio",
+      "restart",
+      "rollName",
+      "sandbox",
+      "sitPick",
+      "stashNote",
+      "survey",
+      "terra",
+      "toTitle",
+      "tplDel",
+      "tplLoad",
+      "tplSave",
+      "trigCrisis"
+    ],
+    "guestDiag": "STARS MP.8.9b8 · oyun 96h10p13 · misafir · host bağlı · aşama: ready · ayna r5 08:48:20 · kurulum 8 ms · son komut: yok · son hata: yok",
+    "fedfound": [
+      {
+        "reverse": false,
+        "before": {
+          "fed": 0,
+          "cost": 10000,
+          "reply": "pending"
+        },
+        "final": {
+          "members": [
+            0,
+            1
+          ],
+          "by": 0,
+          "cost": 9780,
+          "status": "founded"
+        },
+        "guest": {
+          "members": [
+            1,
+            0
+          ],
+          "name": "Helis Gözlemevleri Ağı",
+          "notices": [
+            "FEDERASYON KURULDU — Helis Gözlemevleri Ağı"
+          ]
+        },
+        "reconnect": true
+      },
+      {
+        "reverse": true,
+        "before": {
+          "fed": 0,
+          "cost": 10000,
+          "reply": "pending"
+        },
+        "final": {
+          "members": [
+            1,
+            0
+          ],
+          "by": 1,
+          "cost": 9780,
+          "status": "founded"
+        },
+        "guest": {
+          "members": [
+            0,
+            1
+          ],
+          "name": "Ekinoks Keşif Birliği",
+          "notices": [
+            "FEDERASYON KURULDU — Ekinoks Keşif Birliği"
+          ]
+        },
+        "reconnect": true
+      }
+    ]
+  },
+  "pass": 2,
+  "fail": 0
+}

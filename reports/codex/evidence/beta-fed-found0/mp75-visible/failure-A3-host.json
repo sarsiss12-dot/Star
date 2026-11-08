@@ -1,0 +1,112 @@
+{
+  "inbox": [
+    {
+      "kind": "anomaly",
+      "data": {
+        "a": {
+          "id": "a2",
+          "k": "dogal",
+          "n": "Kristal Mezarlık",
+          "t": "Buzun altında, düzenli sıralar hâlinde dizilmiş devasa kristal sütunlar.",
+          "ch": [
+            {
+              "t": "Örnek al",
+              "d": "+150 araştırma"
+            },
+            {
+              "t": "Madencilik başlat",
+              "d": "+300 mineral"
+            }
+          ]
+        },
+        "sys": {
+          "id": 32,
+          "x": 2842.843194452084,
+          "y": 332.56666394410513,
+          "name": "Vereityr",
+          "star": {
+            "n": "M Kırmızı Cüce",
+            "c": "#ff7b5c",
+            "r": 4.5,
+            "w": 30
+          },
+          "planets": [
+            {
+              "i": 0,
+              "t": "kut",
+              "dep": "zengin_maden",
+              "sz": 15,
+              "seed": 4195,
+              "owner": -1,
+              "col": null,
+              "name": "Vereityr I"
+            },
+            {
+              "i": 1,
+              "t": "kur",
+              "dep": null,
+              "sz": 16,
+              "seed": 4212,
+              "owner": -1,
+              "col": null,
+              "name": "Vereityr II"
+            },
+            {
+              "i": 2,
+              "t": "cor",
+              "dep": "kristal",
+              "sz": 13,
+              "seed": 4229,
+              "owner": -1,
+              "col": null,
+              "name": "Vereityr III"
+            },
+            {
+              "i": 3,
+              "t": "sav",
+              "dep": null,
+              "sz": 16,
+              "seed": 4246,
+              "owner": -1,
+              "col": null,
+              "name": "Vereityr IV",
+              "lux": "cevher"
+            }
+          ],
+          "lanes": [
+            10,
+            23,
+            43
+          ],
+          "owner": -1,
+          "surv": [
+            1
+          ],
+          "seen": [
+            1
+          ],
+          "def": 0,
+          "queue": [],
+          "anom": false,
+          "pulsar": false,
+          "nebulaS": false,
+          "anomK": "dogal",
+          "_reach": 0,
+          "cr": 0
+        }
+      },
+      "ico": "🔬",
+      "cls": "sci",
+      "pause": true,
+      "title": "Anomali — Vereityr",
+      "sub": "Kristal Mezarlık",
+      "key": "an:32",
+      "uid": 1,
+      "born": 20.168950000000038
+    }
+  ],
+  "records": [],
+  "html": "<button class=\"nCard sci\" data-a=\"openNote\" data-x=\"1\">\n         <span class=\"nIco\">🔬</span>\n         <span class=\"nTxt\"><b>Anomali — Vereityr</b><i>Kristal Mezarlık</i></span>\n         <span class=\"nGo\">›</span>\n       </button><div class=\"nOptions\"><button class=\"abtn\" data-a=\"noteOptions\" data-x=\"1\" aria-expanded=\"false\">SEÇENEKLER ▾</button></div>",
+  "modal": "",
+  "hidden": true
+}

@@ -1,0 +1,205 @@
+{
+  "proposals": {
+    "v": 1,
+    "next": 2,
+    "proposals": [
+      {
+        "id": 1,
+        "by": 1,
+        "type": "bilimsel",
+        "ballot": "equal",
+        "members": [
+          1,
+          0
+        ],
+        "opened": 7.419799999999993,
+        "expires": 157.41979999999998,
+        "status": "pending",
+        "replies": {
+          "0": {
+            "status": "pending",
+            "terms": "bilimsel|equal|1,0",
+            "day": 7.419799999999993,
+            "why": "İnsan yanıtı bekleniyor"
+          },
+          "1": {
+            "status": "accepted",
+            "terms": "bilimsel|equal|1,0",
+            "day": 7.419799999999993,
+            "why": "Karar kaydedildi"
+          }
+        }
+      }
+    ]
+  },
+  "mirror": {
+    "fedFounding": {
+      "v": 1,
+      "next": 2,
+      "proposals": [
+        {
+          "id": 1,
+          "by": 1,
+          "type": "bilimsel",
+          "ballot": "equal",
+          "members": [
+            1,
+            0
+          ],
+          "opened": 7.419799999999993,
+          "expires": 157.41979999999998,
+          "status": "pending",
+          "replies": {
+            "0": {
+              "terms": "bilimsel|equal|1,0",
+              "status": "pending",
+              "day": 7.419799999999993,
+              "why": "İnsan yanıtı bekleniyor"
+            },
+            "1": {
+              "status": "accepted",
+              "terms": "bilimsel|equal|1,0",
+              "day": 7.419799999999993,
+              "why": "Karar kaydedildi"
+            }
+          }
+        }
+      ]
+    },
+    "memAge": 0,
+    "cncAge": 0,
+    "council": null,
+    "feds": [],
+    "fedUid": 0,
+    "friction": {},
+    "rebelAlliance": null,
+    "megaWatch": [],
+    "sandbox": false
+  },
+  "stats": {
+    "mirrors": 1,
+    "deltas": 7,
+    "bytes": 0,
+    "builds": 8,
+    "buildMs": [
+      66.4,
+      13.6,
+      6.3,
+      7.1,
+      5.3,
+      7.5,
+      18.6,
+      11
+    ],
+    "resyncs": 0,
+    "held": 0,
+    "blocked": {},
+    "sent": {
+      "fedFoundPlan": 2
+    },
+    "speedMsgs": 1,
+    "surfaceKept": 9
+  },
+  "boot": {
+    "since": 0,
+    "stage": "ready",
+    "tries": 0,
+    "next": 0,
+    "fails": 0,
+    "err": "",
+    "failed": false,
+    "log": [
+      {
+        "t": 822,
+        "what": "assign"
+      },
+      {
+        "t": 3273,
+        "what": "assign"
+      },
+      {
+        "t": 3641,
+        "what": "ready"
+      }
+    ]
+  },
+  "inbox": [
+    {
+      "kind": "fedfound",
+      "data": 1,
+      "key": "fedfound:1",
+      "ico": "🏛",
+      "pause": false,
+      "title": "FEDERASYON KURULUŞ DAVETİ — Kızıl Muhafız",
+      "sub": "Bilimsel Federasyon · 2 kurucu · Eşit Temsil · Savunma yardımı oylamayla. Otomatik saldırı desteği yok; ayrı oylama/taahhüt gerekir.",
+      "uid": 1,
+      "born": 7.419799999999993
+    },
+    {
+      "kind": "fedfoundResult",
+      "data": 1,
+      "key": "fedfound-result:1:pending:accepted,pending",
+      "ico": "🏛",
+      "pause": false,
+      "title": "KURULUŞ SONUCU · 1/2 onay",
+      "sub": "Bilimsel Federasyon · 2 kurucu · Eşit Temsil · Savunma yardımı oylamayla. Otomatik saldırı desteği yok; ayrı oylama/taahhüt gerekir. · Saf Akıl Ağı: bekliyor",
+      "uid": 2,
+      "born": 7.419799999999993
+    }
+  ],
+  "records": [
+    {
+      "id": 1,
+      "key": "fedfound:1",
+      "kind": "fedfound",
+      "from": 1,
+      "name": "Kızıl Muhafız",
+      "title": "FEDERASYON KURULUŞ DAVETİ — Kızıl Muhafız",
+      "sub": "Bilimsel Federasyon · 2 kurucu · Eşit Temsil · Savunma yardımı oylamayla. Otomatik saldırı desteği yok; ayrı oylama/taahhüt gerekir.",
+      "born": 7.419799999999993,
+      "year": 2210,
+      "month": 1,
+      "expires": 157.41979999999998,
+      "status": "pending",
+      "note": {
+        "uid": 1,
+        "kind": "fedfound",
+        "ico": "🏛",
+        "pause": false,
+        "title": "FEDERASYON KURULUŞ DAVETİ — Kızıl Muhafız",
+        "sub": "Bilimsel Federasyon · 2 kurucu · Eşit Temsil · Savunma yardımı oylamayla. Otomatik saldırı desteği yok; ayrı oylama/taahhüt gerekir.",
+        "key": "fedfound:1",
+        "born": 7.419799999999993,
+        "data": 1
+      }
+    },
+    {
+      "id": 2,
+      "key": "fedfound-result:1:pending:accepted,pending",
+      "kind": "fedfoundResult",
+      "from": 1,
+      "name": "Kızıl Muhafız",
+      "title": "KURULUŞ SONUCU · 1/2 onay",
+      "sub": "Bilimsel Federasyon · 2 kurucu · Eşit Temsil · Savunma yardımı oylamayla. Otomatik saldırı desteği yok; ayrı oylama/taahhüt gerekir. · Saf Akıl Ağı: bekliyor",
+      "born": 7.419799999999993,
+      "year": 2210,
+      "month": 1,
+      "expires": 187.41979999999998,
+      "status": "accepted",
+      "note": {
+        "uid": 2,
+        "kind": "fedfoundResult",
+        "ico": "🏛",
+        "pause": false,
+        "title": "KURULUŞ SONUCU · 1/2 onay",
+        "sub": "Bilimsel Federasyon · 2 kurucu · Eşit Temsil · Savunma yardımı oylamayla. Otomatik saldırı desteği yok; ayrı oylama/taahhüt gerekir. · Saf Akıl Ağı: bekliyor",
+        "key": "fedfound-result:1:pending:accepted,pending",
+        "born": 7.419799999999993,
+        "data": 1
+      },
+      "finished": 7.419799999999993
+    }
+  ],
+  "pane": "<div class=\"dpBox dcBox fedBox\">\n      <div class=\"dpHd\"><span>🏛 FEDERASYON</span>\n        <button class=\"riX\" data-a=\"closeFed\">✕</button></div>\n      \n      <div class=\"dpBody dcBody \" data-fed-tab=\"general\"><div class=\"ph\">FEDERASYON KURULUŞU</div><div class=\"mini\">İki açık rızalı insan yeterlidir. Tek insanlı oyunda en az iki AI ortak gerekir. Yalnız seçtiğin ortaklar davet edilir; ücret son onayda bir kez kesilir.</div><div class=\"box fedFoundation\" data-founding=\"1\"><b>Bilimsel Federasyon · Eşit Temsil · BEKLİYOR</b><div class=\"mini\">Öneren: Kızıl Muhafız · 5 ay · 220 Etki · yalnız kurucudan</div><div class=\"mini\">Savunma yardımı oylamayla. Otomatik saldırı desteği yok; ayrı oylama/taahhüt gerekir. Üyeler arasında ittifak oluşur. Önceki savaşlar sessizce kapatılmaz.</div><div class=\"mini\">Kızıl Muhafız — KABUL EDİLDİ · Karar kaydedildi</div><div class=\"mini\">Saf Akıl Ağı — BEKLİYOR · İnsan yanıtı bekleniyor</div><button class=\"abtn pri\" data-a=\"fedFoundReply\" data-x=\"1:yes\">ŞARTLARI KABUL ET</button><button class=\"abtn\" data-a=\"fedFoundReply\" data-x=\"1:no\">REDDET</button></div><div class=\"ph\">TÜR</div><button class=\"abtn pri\" data-a=\"fedFoundType\" data-x=\"askeri\">🛡 Askerî Federasyon</button><button class=\"abtn \" data-a=\"fedFoundType\" data-x=\"bilimsel\">🔬 Bilimsel Federasyon</button><button class=\"abtn \" data-a=\"fedFoundType\" data-x=\"ticaret\">🤝 Ticaret Federasyonu</button><div class=\"ph\">OY REJİMİ</div><button class=\"abtn pri\" data-a=\"fedBallot\" data-x=\"equal\">Eşit Temsil</button><button class=\"abtn \" data-a=\"fedBallot\" data-x=\"hegemonic\">Hegemonik</button><button class=\"abtn \" data-a=\"fedBallot\" data-x=\"economic\">Ekonomik Temsil</button><button class=\"abtn \" data-a=\"fedBallot\" data-x=\"mixed\">Karma Konsey</button><p class=\"mini\">+12 filo kapasitesi; bakım +4 yüzde puan. Varsayılan ortak savunma; saldırı için ayrı karar. Her üye 1 oy. Küçük devletleri korur; büyük katkıya ek oy vermez. Yeni saldırılara ortak savunma yükümlülüğü. Otomatik saldırı desteği yok; ayrı oylama/taahhüt gerekir. Kuruluşta seçilen üyeler birbirleriyle ittifak kurar. Şart değişikliği eski daveti değiştirmez; iptal edip yeni şartları gönder.</p><div class=\"ph\">KURUCU ORTAKLAR · 0 SEÇİLİ</div><div class=\"box\"><button class=\"abtn \" data-a=\"fedFoundSelect\" data-x=\"1\" aria-pressed=\"false\">☐ Kızıl Muhafız</button><div class=\"mini\">İnsan — açık yanıt gerekli · İlişki 40 · Yapısal olarak uygun</div></div><div class=\"mini\" role=\"status\">Tek insanlı kuruluşta en az iki AI ortak gerekli · 220 ◈</div><button class=\"abtn pri\" data-a=\"fedFoundStart\" disabled=\"\">KURULUŞ DAVETLERİNİ GÖNDER</button></div></div>",
+  "modal": ""
+}

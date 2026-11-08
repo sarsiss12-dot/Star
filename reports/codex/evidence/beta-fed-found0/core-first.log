@@ -1,0 +1,9 @@
+PASS iki insan yalnız açık davet, karşı onay ve son kuruluş; tek ücret, seçilmeyen ortak yok
+PASS misafir kurucu ve üç insan; insan adına AI yanıt vermez
+PASS ret, iptal, süre sonu ve yetkisiz yanıt ikinci işlemi engeller
+PASS savaş, vasallık, ölüm ve başka federasyon son onayda tekrar denetlenir
+PASS eşzamanlı kuruluş, mükerrer davet ve eski şartlar yeni rejime taşınmaz
+PASS Save8 bekleyen rıza ve son karar korunur; eski kayda alan sızmaz; quote RNG tüketmez
+AI assessment rejected Bilinen yardım/iş birliği rotası yetersiz
+PASS SP asgari iki AI korunur, AI gerçek stratejik kararla kabul veya ret verir
+GEÇEN: 7 KALAN: 0

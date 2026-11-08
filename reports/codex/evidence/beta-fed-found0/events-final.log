@@ -1,0 +1,26 @@
+PASS kart çizimi, seçenekleri aç/kapat, özet ve tam metin stratejik RNG/Save8/hızı değiştirmez
+PASS event tam pencere ve hızlı yol aynı ham Save8/RNG, gerçek etki ve tek karar
+PASS anomaly tam pencere ve hızlı yol aynı ham Save8/RNG, gerçek etki ve tek karar
+PASS chain tam pencere ve hızlı yol aynı ham Save8/RNG, gerçek etki ve tek karar
+PASS yetersiz kaynak kararı reddedilir, not kalır; sonraki geçerli kaynakla bir kez ödenir
+PASS eski dünya / geçersiz seçenek / MP yetkisiz yerel karar kaynak değiştirmez
+PASS gizleme, altı kart sınırı ve Save8 bekleyen olayları silmez
+PASS anomali a5 açıklaması ve gerçek ödül 15; zincir gelecekteki ödülü şimdiki gibi göstermez
+PASS karar içi arıza kaynak, bekleyen not, zincir ve RNG için atomik geri alınır
+FAIL rastgele anomali iki kontrollü dalda tam/hızlı aynı; görüntüleme Math.random çağırmaz
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+0 !== 1
+
+    at /workspace/Star/tests/beta_fed_found0_events_test.js:13:508
+    at test (/workspace/Star/tests/beta_fed_found0_events_test.js:5:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_fed_found0_events_test.js:13:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+PASS diplomatik özet gerçek miktarlar ve gizli stok yok; görünmeyen koşul sayısı doğru
+GEÇEN: 10 KALAN: 1

@@ -1,0 +1,223 @@
+{
+  "rows": [
+    {
+      "name": "p13",
+      "rngBefore": -1449254009,
+      "rngAfterText": -2081089679,
+      "anomalyDescription": "+1.5 etki",
+      "realInfluenceDelta": 15,
+      "automaticChoices": [
+        {
+          "id": "e1",
+          "auto": true,
+          "choice": 1
+        },
+        {
+          "id": "e2",
+          "auto": true,
+          "choice": 1
+        },
+        {
+          "id": "e3",
+          "auto": true,
+          "choice": 0
+        },
+        {
+          "id": "e4",
+          "auto": true,
+          "choice": 0
+        },
+        {
+          "id": "a1",
+          "auto": false,
+          "choice": 0
+        },
+        {
+          "id": "a2",
+          "auto": true,
+          "choice": 0
+        },
+        {
+          "id": "a3",
+          "auto": true,
+          "choice": 1
+        },
+        {
+          "id": "a4",
+          "auto": false,
+          "choice": 0
+        },
+        {
+          "id": "a5",
+          "auto": true,
+          "choice": 0
+        },
+        {
+          "id": "a6",
+          "auto": false,
+          "choice": 0
+        },
+        {
+          "id": "a7",
+          "auto": true,
+          "choice": 0
+        },
+        {
+          "id": "a8",
+          "auto": false,
+          "choice": 0
+        },
+        {
+          "id": "a9",
+          "auto": true,
+          "choice": 1
+        },
+        {
+          "id": "a10",
+          "auto": false,
+          "choice": 0
+        },
+        {
+          "id": "a11",
+          "auto": true,
+          "choice": 0
+        },
+        {
+          "id": "a12",
+          "auto": false,
+          "choice": 0
+        },
+        {
+          "id": "a13",
+          "auto": true,
+          "choice": 0
+        },
+        {
+          "id": "a14",
+          "auto": true,
+          "choice": 0
+        },
+        {
+          "id": "a15",
+          "auto": true,
+          "choice": 0
+        },
+        {
+          "id": "a16",
+          "auto": false,
+          "choice": 0
+        }
+      ]
+    },
+    {
+      "name": "p14",
+      "rngBefore": -1449254009,
+      "rngAfterText": -1449254009,
+      "anomalyDescription": "+15 etki",
+      "realInfluenceDelta": 15,
+      "automaticChoices": [
+        {
+          "id": "e1",
+          "auto": true,
+          "choice": 1
+        },
+        {
+          "id": "e2",
+          "auto": true,
+          "choice": 1
+        },
+        {
+          "id": "e3",
+          "auto": true,
+          "choice": 0
+        },
+        {
+          "id": "e4",
+          "auto": true,
+          "choice": 0
+        },
+        {
+          "id": "a1",
+          "auto": false,
+          "choice": 0
+        },
+        {
+          "id": "a2",
+          "auto": true,
+          "choice": 0
+        },
+        {
+          "id": "a3",
+          "auto": true,
+          "choice": 1
+        },
+        {
+          "id": "a4",
+          "auto": false,
+          "choice": 0
+        },
+        {
+          "id": "a5",
+          "auto": true,
+          "choice": 0
+        },
+        {
+          "id": "a6",
+          "auto": false,
+          "choice": 0
+        },
+        {
+          "id": "a7",
+          "auto": true,
+          "choice": 0
+        },
+        {
+          "id": "a8",
+          "auto": false,
+          "choice": 0
+        },
+        {
+          "id": "a9",
+          "auto": true,
+          "choice": 1
+        },
+        {
+          "id": "a10",
+          "auto": false,
+          "choice": 0
+        },
+        {
+          "id": "a11",
+          "auto": true,
+          "choice": 0
+        },
+        {
+          "id": "a12",
+          "auto": false,
+          "choice": 0
+        },
+        {
+          "id": "a13",
+          "auto": true,
+          "choice": 0
+        },
+        {
+          "id": "a14",
+          "auto": true,
+          "choice": 0
+        },
+        {
+          "id": "a15",
+          "auto": true,
+          "choice": 0
+        },
+        {
+          "id": "a16",
+          "auto": false,
+          "choice": 0
+        }
+      ]
+    }
+  ],
+  "automaticChoiceEquivalence": "PASS"
+}

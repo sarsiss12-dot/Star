@@ -1,0 +1,28 @@
+PASS kanonik MP davet 0 → 1; yalnız doğru devlet yanıtlar ve son onay kurucudan
+PASS kanonik MP davet 1 → 0; yalnız doğru devlet yanıtlar ve son onay kurucudan
+PASS kanonik MP davet 1 → 3; yalnız doğru devlet yanıtlar ve son onay kurucudan
+PASS üçüncü insan özel daveti görmez; mirror IDs permüte ve salt okunur
+PASS bekleyen ve kabul edilen davet MP paket / yeni host ile kalır; tekrar kabul ve çift ücret reddedilir
+PASS bilinmeyen ve fazladan komut alanları/kimlik taklidi kurucu yetkisini aşamaz
+PASS iki üyeli equal oy: açık insan oyları, eşitlikte ret, çoğunlukta kabul
+PASS iki üyeli hegemonic oy: açık insan oyları, eşitlikte ret, çoğunlukta kabul
+PASS iki üyeli economic oy: açık insan oyları, eşitlikte ret, çoğunlukta kabul
+PASS iki üyeli mixed oy: açık insan oyları, eşitlikte ret, çoğunlukta kabul
+FAIL iki insan ve gerçek stratejik AI kabulü; yalnız seçili üç kurucu
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ 'rejected'
+- 'accepted'
+
+    at /workspace/Star/tests/beta_fed_found0_mp_test.js:10:416
+    at test (/workspace/Star/tests/beta_fed_found0_mp_test.js:4:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_fed_found0_mp_test.js:10:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+GEÇEN: 10 KALAN: 1

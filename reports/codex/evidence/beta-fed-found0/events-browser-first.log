@@ -1,0 +1,66 @@
+FAIL 800x360 ayrı seçenek hedefi / aç-kapat RNG ve hız / başlık normal pencere
+locator.tap: Timeout 8000ms exceeded.
+Call log:
+[2m  - waiting for locator('#inbox [data-a="noteOptions"]').first()[22m
+
+    at hit (/workspace/Star/tests/browser-beta-fed-found0-events.cjs:5:446)
+    at /workspace/Star/tests/browser-beta-fed-found0-events.cjs:7:243
+    at async test (/workspace/Star/tests/browser-beta-fed-found0-events.cjs:3:45)
+    at async /workspace/Star/tests/browser-beta-fed-found0-events.cjs:7:1
+FAIL 800x360 event gerçek hızlı seçim / etkiler / çift karar engeli
+locator.tap: Timeout 8000ms exceeded.
+Call log:
+[2m  - waiting for locator('#inbox [data-a="noteOptions"]').first()[22m
+
+    at hit (/workspace/Star/tests/browser-beta-fed-found0-events.cjs:5:446)
+    at /workspace/Star/tests/browser-beta-fed-found0-events.cjs:8:354
+    at async test (/workspace/Star/tests/browser-beta-fed-found0-events.cjs:3:45)
+    at async /workspace/Star/tests/browser-beta-fed-found0-events.cjs:8:96
+FAIL 800x360 anomaly gerçek hızlı seçim / etkiler / çift karar engeli
+locator.tap: Timeout 8000ms exceeded.
+Call log:
+[2m  - waiting for locator('#inbox [data-a="noteOptions"]').first()[22m
+
+    at hit (/workspace/Star/tests/browser-beta-fed-found0-events.cjs:5:446)
+    at /workspace/Star/tests/browser-beta-fed-found0-events.cjs:8:354
+    at async test (/workspace/Star/tests/browser-beta-fed-found0-events.cjs:3:45)
+    at async /workspace/Star/tests/browser-beta-fed-found0-events.cjs:8:96
+FAIL 800x360 chain gerçek hızlı seçim / etkiler / çift karar engeli
+locator.tap: Timeout 8000ms exceeded.
+Call log:
+[2m  - waiting for locator('#inbox [data-a="noteOptions"]').first()[22m
+
+    at hit (/workspace/Star/tests/browser-beta-fed-found0-events.cjs:5:446)
+    at /workspace/Star/tests/browser-beta-fed-found0-events.cjs:8:354
+    at async test (/workspace/Star/tests/browser-beta-fed-found0-events.cjs:3:45)
+    at async /workspace/Star/tests/browser-beta-fed-found0-events.cjs:8:96
+FAIL 800x360 kartı kaydır / durum listesinden geri aç / eski Save8 ve bekleyen not
+locator.tap: Timeout 8000ms exceeded.
+Call log:
+[2m  - waiting for locator('#modal [data-a="openNote"][data-x="1"]').first()[22m
+
+    at hit (/workspace/Star/tests/browser-beta-fed-found0-events.cjs:5:446)
+    at /workspace/Star/tests/browser-beta-fed-found0-events.cjs:9:877
+    at async test (/workspace/Star/tests/browser-beta-fed-found0-events.cjs:3:45)
+    at async /workspace/Star/tests/browser-beta-fed-found0-events.cjs:9:1
+FAIL 960x540 ayrı seçenek hedefi / aç-kapat RNG ve hız / başlık normal pencere
+locator.tap: Timeout 8000ms exceeded.
+Call log:
+[2m  - waiting for locator('#inbox [data-a="noteOptions"]').first()[22m
+
+    at hit (/workspace/Star/tests/browser-beta-fed-found0-events.cjs:5:446)
+    at /workspace/Star/tests/browser-beta-fed-found0-events.cjs:7:243
+    at async test (/workspace/Star/tests/browser-beta-fed-found0-events.cjs:3:45)
+    at async /workspace/Star/tests/browser-beta-fed-found0-events.cjs:7:1
+FAIL 960x540 event gerçek hızlı seçim / etkiler / çift karar engeli
+locator.tap: Target page, context or browser has been closed
+Call log:
+[2m  - waiting for locator('#inbox [data-a="noteOptions"]').first()[22m
+
+    at hit (/workspace/Star/tests/browser-beta-fed-found0-events.cjs:5:446)
+    at /workspace/Star/tests/browser-beta-fed-found0-events.cjs:8:354
+    at async test (/workspace/Star/tests/browser-beta-fed-found0-events.cjs:3:45)
+    at async /workspace/Star/tests/browser-beta-fed-found0-events.cjs:8:96
+page.screenshot: Target page, context or browser has been closed
+    at test (/workspace/Star/tests/browser-beta-fed-found0-events.cjs:3:225)
+    at async /workspace/Star/tests/browser-beta-fed-found0-events.cjs:8:96

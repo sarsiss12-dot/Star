@@ -1,0 +1,121 @@
+{
+  "inbox": [
+    {
+      "kind": "aideal",
+      "data": {
+        "from": 2,
+        "to": 0,
+        "give": [
+          {
+            "t": "peace"
+          }
+        ],
+        "want": [],
+        "born": 27,
+        "expires": 567
+      },
+      "ico": "📜",
+      "cls": "sci",
+      "pause": false,
+      "uid": 2,
+      "born": 27,
+      "rec": 1,
+      "title": "Teklif — Veliri Muhafızlığı",
+      "sub": "Çok oyunculu teklif · anlaşma istiyor",
+      "key": "mp71:1"
+    }
+  ],
+  "records": [
+    {
+      "id": 1,
+      "key": "deal:mp71:1",
+      "kind": "aideal",
+      "from": 2,
+      "name": "Veliri Muhafızlığı",
+      "title": "Teklif — Veliri Muhafızlığı",
+      "sub": "Çok oyunculu teklif · tur 1",
+      "born": 27,
+      "year": 2210,
+      "month": 1,
+      "expires": 567,
+      "status": "pending",
+      "note": {
+        "uid": 1,
+        "kind": "aideal",
+        "title": "Teklif — Veliri Muhafızlığı",
+        "sub": "Çok oyunculu teklif · tur 1",
+        "key": "mp71:1",
+        "born": 27,
+        "data": {
+          "from": 2,
+          "to": 0,
+          "give": [
+            {
+              "t": "peace"
+            }
+          ],
+          "want": [],
+          "born": 27,
+          "expires": 567
+        }
+      },
+      "mp": 1
+    }
+  ],
+  "html": "<button class=\"nCard sci\" data-a=\"openNote\" data-x=\"2\">\n         <span class=\"nIco\">📜</span>\n         <span class=\"nTxt\"><b>Veliri Muhafızlığı · Barış teklifi</b><i>Veriyor: 🕊 Barış · İstiyor: yok · 18 ay</i></span>\n         <span class=\"nGo\">›</span>\n       </button><div class=\"nQuick\" data-uid=\"2\"><button class=\"nq ok\" data-a=\"noteQuick\" data-x=\"2:y\">KABUL</button><button class=\"nq no\" data-a=\"noteQuick\" data-x=\"2:n\">REDDET</button><button class=\"nq\" data-a=\"noteQuick\" data-x=\"2:c\">KARŞI TEKLİF</button></div>",
+  "modal": "⚔ SAVAŞ DURUMU✕\n      Haberler · 1Gelen kutusu · 1Gönderilen · 0\n      Olay: war-front:1Savaş bildirimiSaldıran → SavunanSaf Akıl Ağı / Veliri Muhafızlığı · tarihsel taraf rolü kesin bilinmiyorSavaş ilanıBaşlangıç / haber tarihi: 2210.01 · gün 27Bu haberin kesin savaş durumu / bitiş tarihi bilinmiyor. Güncel başka bir savaş bu tarihsel kayda bağlanmaz.Gizli filo konumları verilmez. Geçmiş güç ve yorgunluk anlık görüntüleri kaydedilmedi; BİLİNMİYOR alanları başka bir savaşın güncel verileriyle doldurulmaz.Veliri Muhafızlığı · Güncel diplomasiHaber listesine dönHaritaya dön",
+  "hidden": false,
+  "view": {
+    "offers": [
+      {
+        "id": 1,
+        "from": 2,
+        "to": 1,
+        "fn": "Veliri Muhafızlığı",
+        "tn": "Saf Akıl Ağı",
+        "give": [
+          {
+            "t": "peace",
+            "l": "🕊 Barış"
+          }
+        ],
+        "want": [],
+        "born": 27,
+        "expires": 567,
+        "round": 1,
+        "prev": null,
+        "status": "pending",
+        "why": "",
+        "by": "ai",
+        "cost": 30
+      }
+    ],
+    "contacts": [
+      {
+        "id": 0,
+        "n": "Kızıl Muhafız",
+        "col": "#b2f55c",
+        "h": 1,
+        "rel": 40,
+        "bl": 0,
+        "war": 0,
+        "peace": 0
+      },
+      {
+        "id": 2,
+        "n": "Veliri Muhafızlığı",
+        "col": "#3e8f98",
+        "h": 0,
+        "rel": -60,
+        "bl": 0,
+        "war": 1,
+        "peace": 1,
+        "sq": 0,
+        "sqw": "Henüz iki taraf da yeterince yorulmadı (0/85)"
+      }
+    ],
+    "life": 540,
+    "rounds": 6,
+    "sq": []
+  }
+}

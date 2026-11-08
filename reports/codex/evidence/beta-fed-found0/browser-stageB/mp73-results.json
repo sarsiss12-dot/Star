@@ -1,0 +1,58 @@
+{
+  "results": [
+    {
+      "name": "A1 rehber 1–8: oda, iki farklı devlet, hazır, başlat; iki ekranda galaksi; sürüm işareti lobi / başlangıç / MP çubuğunda ve /mp/version oyun build'iyle aynı",
+      "status": "PASS",
+      "ms": 12063
+    },
+    {
+      "name": "FD0 gerçek host-misafir kuruluş daveti, tek dokunma ve açık son onay",
+      "status": "FAIL",
+      "error": "page.waitForFunction: Timeout 15000ms exceeded.\n    at wait (/workspace/Star/tests/helpers/beta-fed-found0-browser.cjs:4:24)\n    at module.exports (/workspace/Star/tests/helpers/beta-fed-found0-browser.cjs:14:62)\n    at async /workspace/Star/tests/browser-mp73.cjs:147:143\n    at async test (/workspace/Star/tests/browser-mp73.cjs:13:7)\n    at async /workspace/Star/tests/browser-mp73.cjs:147:34"
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "startModal": [
+      "🛰 DANIŞMAN",
+      ""
+    ],
+    "version": {
+      "mp": "MP.8.9b8",
+      "build": "96h10p13",
+      "files": {
+        "mp-core.js": "84b8665b1580",
+        "relay.js": "67374585c6c2",
+        "mp1-host.js": "a85647bc9b81",
+        "join.js": "bc2732493741",
+        "mirror.js": "4d114baa720a",
+        "guest-stars.js": "2d1127a35b5a",
+        "mp71-dip.js": "358005b72980",
+        "mp7-setup.js": "48c0f282a254"
+      }
+    },
+    "unsupported": [
+      "autoEvent",
+      "diagCopy",
+      "joinRebel",
+      "leaveRebel",
+      "mapFix",
+      "physio",
+      "restart",
+      "rollName",
+      "sandbox",
+      "sitPick",
+      "stashNote",
+      "survey",
+      "terra",
+      "toTitle",
+      "tplDel",
+      "tplLoad",
+      "tplSave",
+      "trigCrisis"
+    ],
+    "guestDiag": "STARS MP.8.9b8 · oyun 96h10p13 · misafir · host bağlı · aşama: ready · ayna r4 08:44:44 · kurulum 5 ms · son komut: yok · son hata: yok"
+  },
+  "pass": 1,
+  "fail": 1
+}

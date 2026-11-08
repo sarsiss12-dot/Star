@@ -1,0 +1,93 @@
+{
+  "inbox": [
+    {
+      "kind": "anomaly",
+      "data": {
+        "a": {
+          "id": "a15",
+          "k": "sinyal",
+          "n": "Tekrarlayan Çağrı",
+          "t": "Aynı 11 saniyelik ses döngüsü, 4.000 yıldır boşluğa yayınlanıyor. Sinyal bir konum bildiriyor.",
+          "ch": [
+            {
+              "t": "Sinyali çöz",
+              "d": "+260 araştırma, +80 etki"
+            },
+            {
+              "t": "Sinyali yanıtla",
+              "d": "??? · TEHLİKELİ"
+            }
+          ]
+        },
+        "sys": {
+          "id": 25,
+          "x": 3259.373096009406,
+          "y": 644.4582571541528,
+          "name": "Kaleran",
+          "star": {
+            "n": "A Beyaz",
+            "c": "#dff0ff",
+            "r": 6.5,
+            "w": 8
+          },
+          "planets": [
+            {
+              "i": 0,
+              "t": "oky",
+              "dep": null,
+              "sz": 17,
+              "seed": 3278,
+              "owner": -1,
+              "col": null,
+              "name": "Kaleran I",
+              "lux": "ozsu"
+            }
+          ],
+          "lanes": [
+            11,
+            22,
+            38
+          ],
+          "owner": -1,
+          "surv": [
+            1
+          ],
+          "seen": [
+            1
+          ],
+          "def": 0,
+          "queue": [],
+          "anom": false,
+          "pulsar": false,
+          "nebulaS": false,
+          "anomK": "sinyal",
+          "_reach": 0,
+          "cr": 0
+        }
+      },
+      "ico": "🔬",
+      "cls": "sci",
+      "pause": true,
+      "title": "Anomali — Kaleran",
+      "sub": "Tekrarlayan Çağrı",
+      "key": "an:25",
+      "uid": 1,
+      "born": 20.199216000000032
+    },
+    {
+      "kind": "wardec",
+      "data": 3,
+      "ico": "⚔",
+      "pause": false,
+      "title": "SAVAŞ İLANI",
+      "sub": "deneme",
+      "key": "wd:t74",
+      "uid": 2,
+      "born": 23.74849600000014
+    }
+  ],
+  "records": [],
+  "html": "<button class=\"nCard sci\" data-a=\"openNote\" data-x=\"1\">\n         <span class=\"nIco\">🔬</span>\n         <span class=\"nTxt\"><b>Anomali — Kaleran</b><i>Tekrarlayan Çağrı</i></span>\n         <span class=\"nGo\">›</span>\n       </button><div class=\"nOptions\"><button class=\"abtn\" data-a=\"noteOptions\" data-x=\"1\" aria-expanded=\"false\">SEÇENEKLER ▾</button></div><button class=\"nCard \" data-a=\"openNote\" data-x=\"2\">\n         <span class=\"nIco\">⚔</span>\n         <span class=\"nTxt\"><b>SAVAŞ İLANI</b><i>deneme</i></span>\n         <span class=\"nGo\">›</span>\n       </button>",
+  "modal": "",
+  "hidden": true
+}

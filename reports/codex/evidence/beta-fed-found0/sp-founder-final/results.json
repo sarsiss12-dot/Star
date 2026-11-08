@@ -1,0 +1,20 @@
+[
+  {
+    "name": "960x540 SP seçilen iki AI, üçüncü uygun AI dışarıda ve tek son onay",
+    "status": "PASS",
+    "data": {
+      "selected": [
+        1,
+        2
+      ],
+      "excluded": 4,
+      "realAIConsent": true,
+      "cost": 220
+    }
+  },
+  {
+    "name": "JavaScript errors",
+    "status": "PASS",
+    "errors": []
+  }
+]

@@ -1,0 +1,72 @@
+[
+  {
+    "file": "archive-ui.js",
+    "before": "48acaa99c7eafe46105889e906a682afada2820740acbfeba456e3032a12e3ec",
+    "after": "54935d98436997705219b9d8ac44118363f8c7e1ef6c099bea0d6df52448368d"
+  },
+  {
+    "file": "diplomacy.js",
+    "before": "4803ef1de4bcca05e244e5ebef85026d5f62684b1888c83bf12c8e69a5e4df0d",
+    "after": "3821bcf58cdd403fb77abeccedab4839f66fcd474607a1d9587d5d5235792993"
+  },
+  {
+    "file": "inbox.js",
+    "before": "f83b378bd51304868b49468cd87315a4ba2e13ec1cb5646aa8ff8ebe64c8e1a9",
+    "after": "2461dcc6a12c6342ed8bac863bf53c56d91311532c757e7e4428454fc56b9cd5"
+  },
+  {
+    "file": "index.html",
+    "before": "ae85599b00da6a7cc30035de6398337384d9e30d9cd5f8c3488b1ada6caf135c",
+    "after": "16afdf255ae215a2d14c9287766b9e0edcc0201b1c6c0b4b3ad478d04e4e8535"
+  },
+  {
+    "file": "main.js",
+    "before": "77fc4cbd7788c6542cad14a9b5e68c012a5192e57a61ef238fe045e7bea59cc0",
+    "after": "cc627be09bee2f1aafeeef1d17c7749e669bcbc78185ef2cc06e09f8af52805e"
+  },
+  {
+    "file": "research/mp0/mp-core.js",
+    "before": "2a322174f791de1ed97281e58ea75b49dc511ab074b9266b13b95fbeac8db828",
+    "after": "8700e44932112f55b7cc95dd6279fb38e575aed8a595f0745b5969e1fd4555f0"
+  },
+  {
+    "file": "research/mp1/client/mp1-host.js",
+    "before": "a85647bc9b810ab2a28c82576588f2484629ed9847ebf3da48c901087cd28f43",
+    "after": "0938cb8d7030c6249be03a513b66f602738303c3a03a6fc2d029bda06c03205c"
+  },
+  {
+    "file": "research/mp1/client/view.js",
+    "before": "d1244399e974e64685ff1acce5519dd2370d3102e884e0e1cd493f0dadb242e8",
+    "after": "e2a50a4d3a33cd997a64db17ef69f10945a9d41d6197f5cf2bacc2e598882c96"
+  },
+  {
+    "file": "research/mp1/server/relay.js",
+    "before": "67374585c6c2a253b18cb460d37ee8c2f7bf34af47116a608c4266f8794c2612",
+    "after": "63e9462064c52b01c2b4eef312a6596f4fd85a9297d2657fe05e25baf517955e"
+  },
+  {
+    "file": "research/mp6/client/guest-stars.js",
+    "before": "c1058564ba838d30910656a41835cae580c0cd29d55e62e84821da23054666bb",
+    "after": "6a6fefc6a98653a6724ee64547ea0aa23a4c99d631751e41275aa4affc622bc1"
+  },
+  {
+    "file": "research/mp6/mirror.js",
+    "before": "8681c5410a2f0f5443d1588cef48efb0f20a6293183de3623f82c79f008ba565",
+    "after": "7509cf77fc65511f9a514dd4ea0601d03340a79273dfb211aedc9f2ca66ee3d0"
+  },
+  {
+    "file": "research/mp71/client/mp71-dip.js",
+    "before": "358005b72980a69e39b2f9c819551ad8da98ce4eb90640b2a3848f7c5d3f6850",
+    "after": "bf0355f27ef6492e40016686e5a85302f4a62b4704dcf8f934feb187c63f9363"
+  },
+  {
+    "file": "sw.js",
+    "before": "07f757cdfabed4a7433b3c320538ccca2602775d72a8412d4a500a0909d4596f",
+    "after": "046846e70020d6d40b3d3da197e91d6074fc997279dd87ce2d67b7059248c59e"
+  },
+  {
+    "file": "ui.js",
+    "before": "3d0b5214dbc97f3a9cbf174b49b688f634181d0b38fc1ac4970f9a229a16d02c",
+    "after": "e778ab795af40f929565d37386d42a16b012e79f537a408311c8e282ba986790"
+  }
+]

@@ -1,0 +1,12 @@
+[
+  {
+    "name": "960x540 SP seçilen iki AI, üçüncü uygun AI dışarıda ve tek son onay",
+    "status": "FAIL",
+    "error": "locator.tap: Timeout 8000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-a=\"fedFoundType\"][data-x=\"bilimsel\"]').first()\u001b[22m\n\u001b[2m    - locator resolved to <button class=\"abtn \" data-x=\"bilimsel\" data-a=\"fedFoundType\">🔬 Bilimsel Federasyon</button>\u001b[22m\n\u001b[2m  - attempting tap action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"tWrap\">…</div> from <div id=\"title\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying tap action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"tWrap\">…</div> from <div id=\"title\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying tap action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    15 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <div class=\"tWrap\">…</div> from <div id=\"title\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m     - retrying tap action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n    at hit (/workspace/Star/tests/browser-beta-fed-found0-events.cjs:5:446)\n    at /workspace/Star/tests/browser-beta-fed-found0-events.cjs:10:471\n    at async test (/workspace/Star/tests/browser-beta-fed-found0-events.cjs:3:153)\n    at async /workspace/Star/tests/browser-beta-fed-found0-events.cjs:10:16"
+  },
+  {
+    "name": "JavaScript errors",
+    "status": "PASS",
+    "errors": []
+  }
+]

@@ -1,0 +1,8 @@
+{
+  "file": "releases/stars-faz96h10p14.zip",
+  "bytes": 794540,
+  "sha256": "205eeba47747716a32e794ad633e21a9285c295b3648d1e53cf703acf15eae0e",
+  "crc32": "D0083B93",
+  "manifest_sha256": "33377014735a5d6a0bf8a7c4f95681f95fc156225ea76d50546681833b529c84",
+  "deterministic_two_builds": "PASS"
+}

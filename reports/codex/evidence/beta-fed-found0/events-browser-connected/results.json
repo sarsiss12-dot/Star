@@ -1,0 +1,323 @@
+[
+  {
+    "name": "800x360 ayrı seçenek hedefi / aç-kapat RNG ve hız / başlık normal pencere",
+    "status": "PASS",
+    "data": {
+      "trusted": "touch",
+      "fullWindow": true,
+      "once": true
+    }
+  },
+  {
+    "name": "800x360 event gerçek hızlı seçim / etkiler / çift karar engeli",
+    "status": "PASS",
+    "data": {
+      "before": {
+        "ara": 520,
+        "min": 1000,
+        "rng": -951432214,
+        "chain": 0,
+        "day": 155.67336000000412
+      },
+      "after": {
+        "ara": 780,
+        "min": 850,
+        "rng": -951432214,
+        "chain": [],
+        "notes": 0
+      }
+    }
+  },
+  {
+    "name": "800x360 anomaly gerçek hızlı seçim / etkiler / çift karar engeli",
+    "status": "PASS",
+    "data": {
+      "before": {
+        "ara": 520,
+        "min": 1000,
+        "rng": -951432214,
+        "chain": 0,
+        "day": 155.67336000000412
+      },
+      "after": {
+        "ara": 700,
+        "min": 1000,
+        "rng": -951432214,
+        "chain": [],
+        "notes": 0
+      }
+    }
+  },
+  {
+    "name": "800x360 chain gerçek hızlı seçim / etkiler / çift karar engeli",
+    "status": "PASS",
+    "data": {
+      "before": {
+        "ara": 520,
+        "min": 1000,
+        "rng": -951432214,
+        "chain": 0,
+        "day": 155.67336000000412
+      },
+      "after": {
+        "ara": 520,
+        "min": 1000,
+        "rng": 880133599,
+        "chain": [
+          {
+            "id": "hayalet2a",
+            "at": 299.6733600000041
+          }
+        ],
+        "notes": 0
+      }
+    }
+  },
+  {
+    "name": "800x360 kartı kaydır / durum listesinden geri aç / eski Save8 ve bekleyen not",
+    "status": "FAIL",
+    "error": "locator.tap: Timeout 8000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#modal [data-a=\"openNote\"][data-x=\"1\"]').first()\u001b[22m\n\n    at hit (/workspace/Star/tests/browser-beta-fed-found0-events.cjs:5:446)\n    at /workspace/Star/tests/browser-beta-fed-found0-events.cjs:9:877\n    at async test (/workspace/Star/tests/browser-beta-fed-found0-events.cjs:3:45)\n    at async /workspace/Star/tests/browser-beta-fed-found0-events.cjs:9:1"
+  },
+  {
+    "name": "960x540 ayrı seçenek hedefi / aç-kapat RNG ve hız / başlık normal pencere",
+    "status": "PASS",
+    "data": {
+      "trusted": "touch",
+      "fullWindow": true,
+      "once": true
+    }
+  },
+  {
+    "name": "960x540 event gerçek hızlı seçim / etkiler / çift karar engeli",
+    "status": "PASS",
+    "data": {
+      "before": {
+        "ara": 520,
+        "min": 1000,
+        "rng": -951432214,
+        "chain": 0,
+        "day": 155.67336000000412
+      },
+      "after": {
+        "ara": 780,
+        "min": 850,
+        "rng": -951432214,
+        "chain": [],
+        "notes": 0
+      }
+    }
+  },
+  {
+    "name": "960x540 anomaly gerçek hızlı seçim / etkiler / çift karar engeli",
+    "status": "PASS",
+    "data": {
+      "before": {
+        "ara": 520,
+        "min": 1000,
+        "rng": -951432214,
+        "chain": 0,
+        "day": 155.67336000000412
+      },
+      "after": {
+        "ara": 700,
+        "min": 1000,
+        "rng": -951432214,
+        "chain": [],
+        "notes": 0
+      }
+    }
+  },
+  {
+    "name": "960x540 chain gerçek hızlı seçim / etkiler / çift karar engeli",
+    "status": "PASS",
+    "data": {
+      "before": {
+        "ara": 520,
+        "min": 1000,
+        "rng": -951432214,
+        "chain": 0,
+        "day": 155.67336000000412
+      },
+      "after": {
+        "ara": 520,
+        "min": 1000,
+        "rng": 880133599,
+        "chain": [
+          {
+            "id": "hayalet2a",
+            "at": 299.6733600000041
+          }
+        ],
+        "notes": 0
+      }
+    }
+  },
+  {
+    "name": "960x540 kartı kaydır / durum listesinden geri aç / eski Save8 ve bekleyen not",
+    "status": "FAIL",
+    "error": "locator.tap: Timeout 8000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#topStatusBtn').first()\u001b[22m\n\u001b[2m    2 × locator resolved to <button id=\"topStatusBtn\" data-a=\"topStatus\" class=\"topStatusBtn  \" title=\"Savaş, olay ve kriz listesi\" aria-label=\"1 önemli durum; listeyi aç\">☰ +1</button>\u001b[22m\n\u001b[2m    - attempting tap action\u001b[22m\n\u001b[2m      - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element was detached from the DOM, retrying\u001b[22m\n\u001b[2m    - locator resolved to <button id=\"topStatusBtn\" data-a=\"topStatus\" class=\"topStatusBtn  \" title=\"Savaş, olay ve kriz listesi\" aria-label=\"1 önemli durum; listeyi aç\">☰ +1</button>\u001b[22m\n\u001b[2m  - attempting tap action\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is visible, enabled and stable\u001b[22m\n\u001b[2m    - scrolling into view if needed\u001b[22m\n\u001b[2m    - done scrolling\u001b[22m\n\u001b[2m    - element is not visible\u001b[22m\n\u001b[2m  - retrying tap action\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m  - element was detached from the DOM, retrying\u001b[22m\n\u001b[2m    - locator resolved to <button id=\"topStatusBtn\" data-a=\"topStatus\" class=\"topStatusBtn  \" title=\"Savaş, olay ve kriz listesi\" aria-label=\"1 önemli durum; listeyi aç\">☰ +1</button>\u001b[22m\n\u001b[2m  - attempting tap action\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is not stable\u001b[22m\n\u001b[2m  - retrying tap action\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m  - element was detached from the DOM, retrying\u001b[22m\n\u001b[2m    - locator resolved to <button id=\"topStatusBtn\" data-a=\"topStatus\" class=\"topStatusBtn  \" title=\"Savaş, olay ve kriz listesi\" aria-label=\"1 önemli durum; listeyi aç\">☰ +1</button>\u001b[22m\n\u001b[2m  - attempting tap action\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is visible, enabled and stable\u001b[22m\n\u001b[2m    - scrolling into view if needed\u001b[22m\n\u001b[2m    - done scrolling\u001b[22m\n\u001b[2m    - element is not visible\u001b[22m\n\u001b[2m  2 × retrying tap action\u001b[22m\n\u001b[2m      - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element was detached from the DOM, retrying\u001b[22m\n\u001b[2m      - locator resolved to <button id=\"topStatusBtn\" data-a=\"topStatus\" class=\"topStatusBtn  \" title=\"Savaş, olay ve kriz listesi\" aria-label=\"1 önemli durum; listeyi aç\">☰ +1</button>\u001b[22m\n\u001b[2m    - attempting tap action\u001b[22m\n\u001b[2m      - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element was detached from the DOM, retrying\u001b[22m\n\u001b[2m      - locator resolved to <button id=\"topStatusBtn\" data-a=\"topStatus\" class=\"topStatusBtn  \" title=\"Savaş, olay ve kriz listesi\" aria-label=\"1 önemli durum; listeyi aç\">☰ +1</button>\u001b[22m\n\u001b[2m    - attempting tap action\u001b[22m\n\u001b[2m      - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - performing tap action\u001b[22m\n\u001b[2m      - <html lang=\"tr\">…</html> intercepts pointer events\u001b[22m\n\u001b[2m  - retrying tap action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element was detached from the DOM, retrying\u001b[22m\n\u001b[2m      - locator resolved to <button id=\"topStatusBtn\" data-a=\"topStatus\" class=\"topStatusBtn  \" title=\"Savaş, olay ve kriz listesi\" aria-label=\"1 önemli durum; listeyi aç\">☰ +1</button>\u001b[22m\n\u001b[2m    - attempting tap action\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is not stable\u001b[22m\n\u001b[2m  - retrying tap action\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m  - element was detached from the DOM, retrying\u001b[22m\n\u001b[2m    - locator resolved to <button id=\"topStatusBtn\" data-a=\"topStatus\" class=\"topStatusBtn  \" title=\"Savaş, olay ve kriz listesi\" aria-label=\"1 önemli durum; listeyi aç\">☰ +1</button>\u001b[22m\n\u001b[2m  - attempting tap action\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is visible, enabled and stable\u001b[22m\n\u001b[2m    - scrolling into view if needed\u001b[22m\n\u001b[2m    - done scrolling\u001b[22m\n\u001b[2m    - element is not visible\u001b[22m\n\u001b[2m  - retrying tap action\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m  - element was detached from the DOM, retrying\u001b[22m\n\n    at hit (/workspace/Star/tests/browser-beta-fed-found0-events.cjs:5:446)\n    at /workspace/Star/tests/browser-beta-fed-found0-events.cjs:9:850\n    at async test (/workspace/Star/tests/browser-beta-fed-found0-events.cjs:3:45)\n    at async /workspace/Star/tests/browser-beta-fed-found0-events.cjs:9:1"
+  },
+  {
+    "name": "915x412 ayrı seçenek hedefi / aç-kapat RNG ve hız / başlık normal pencere",
+    "status": "PASS",
+    "data": {
+      "trusted": "touch",
+      "fullWindow": true,
+      "once": true
+    }
+  },
+  {
+    "name": "915x412 event gerçek hızlı seçim / etkiler / çift karar engeli",
+    "status": "PASS",
+    "data": {
+      "before": {
+        "ara": 520,
+        "min": 1000,
+        "rng": -951432214,
+        "chain": 0,
+        "day": 155.67336000000412
+      },
+      "after": {
+        "ara": 780,
+        "min": 850,
+        "rng": -951432214,
+        "chain": [],
+        "notes": 0
+      }
+    }
+  },
+  {
+    "name": "915x412 anomaly gerçek hızlı seçim / etkiler / çift karar engeli",
+    "status": "PASS",
+    "data": {
+      "before": {
+        "ara": 520,
+        "min": 1000,
+        "rng": -951432214,
+        "chain": 0,
+        "day": 155.67336000000412
+      },
+      "after": {
+        "ara": 700,
+        "min": 1000,
+        "rng": -951432214,
+        "chain": [],
+        "notes": 0
+      }
+    }
+  },
+  {
+    "name": "915x412 chain gerçek hızlı seçim / etkiler / çift karar engeli",
+    "status": "PASS",
+    "data": {
+      "before": {
+        "ara": 520,
+        "min": 1000,
+        "rng": -951432214,
+        "chain": 0,
+        "day": 155.67336000000412
+      },
+      "after": {
+        "ara": 520,
+        "min": 1000,
+        "rng": 880133599,
+        "chain": [
+          {
+            "id": "hayalet2a",
+            "at": 299.6733600000041
+          }
+        ],
+        "notes": 0
+      }
+    }
+  },
+  {
+    "name": "915x412 kartı kaydır / durum listesinden geri aç / eski Save8 ve bekleyen not",
+    "status": "FAIL",
+    "error": "locator.tap: Timeout 8000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#modal [data-a=\"openNote\"][data-x=\"1\"]').first()\u001b[22m\n\n    at hit (/workspace/Star/tests/browser-beta-fed-found0-events.cjs:5:446)\n    at /workspace/Star/tests/browser-beta-fed-found0-events.cjs:9:877\n    at async test (/workspace/Star/tests/browser-beta-fed-found0-events.cjs:3:45)\n    at async /workspace/Star/tests/browser-beta-fed-found0-events.cjs:9:1"
+  },
+  {
+    "name": "1920x1080 ayrı seçenek hedefi / aç-kapat RNG ve hız / başlık normal pencere",
+    "status": "PASS",
+    "data": {
+      "trusted": "mouse",
+      "fullWindow": true,
+      "once": true
+    }
+  },
+  {
+    "name": "1920x1080 event gerçek hızlı seçim / etkiler / çift karar engeli",
+    "status": "PASS",
+    "data": {
+      "before": {
+        "ara": 520,
+        "min": 1000,
+        "rng": -951432214,
+        "chain": 0,
+        "day": 155.67336000000412
+      },
+      "after": {
+        "ara": 780,
+        "min": 850,
+        "rng": -951432214,
+        "chain": [],
+        "notes": 0
+      }
+    }
+  },
+  {
+    "name": "1920x1080 anomaly gerçek hızlı seçim / etkiler / çift karar engeli",
+    "status": "PASS",
+    "data": {
+      "before": {
+        "ara": 520,
+        "min": 1000,
+        "rng": -951432214,
+        "chain": 0,
+        "day": 155.67336000000412
+      },
+      "after": {
+        "ara": 700,
+        "min": 1000,
+        "rng": -951432214,
+        "chain": [],
+        "notes": 0
+      }
+    }
+  },
+  {
+    "name": "1920x1080 chain gerçek hızlı seçim / etkiler / çift karar engeli",
+    "status": "PASS",
+    "data": {
+      "before": {
+        "ara": 520,
+        "min": 1000,
+        "rng": -951432214,
+        "chain": 0,
+        "day": 155.67336000000412
+      },
+      "after": {
+        "ara": 520,
+        "min": 1000,
+        "rng": 880133599,
+        "chain": [
+          {
+            "id": "hayalet2a",
+            "at": 299.6733600000041
+          }
+        ],
+        "notes": 0
+      }
+    }
+  },
+  {
+    "name": "1920x1080 kartı kaydır / durum listesinden geri aç / eski Save8 ve bekleyen not",
+    "status": "FAIL",
+    "error": "locator.click: Timeout 8000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#topStatusBtn').first()\u001b[22m\n\u001b[2m    2 × locator resolved to <button id=\"topStatusBtn\" data-a=\"topStatus\" class=\"topStatusBtn  \" title=\"Savaş, olay ve kriz listesi\" aria-label=\"1 önemli durum; listeyi aç\">☰ +1</button>\u001b[22m\n\u001b[2m    - attempting click action\u001b[22m\n\u001b[2m      - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element was detached from the DOM, retrying\u001b[22m\n\u001b[2m    - locator resolved to <button id=\"topStatusBtn\" data-a=\"topStatus\" class=\"topStatusBtn  \" title=\"Savaş, olay ve kriz listesi\" aria-label=\"1 önemli durum; listeyi aç\">☰ +1</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is not stable\u001b[22m\n\u001b[2m  - retrying click action\u001b[22m\n\u001b[2m    5 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element was detached from the DOM, retrying\u001b[22m\n\u001b[2m      - locator resolved to <button id=\"topStatusBtn\" data-a=\"topStatus\" class=\"topStatusBtn  \" title=\"Savaş, olay ve kriz listesi\" aria-label=\"1 önemli durum; listeyi aç\">☰ +1</button>\u001b[22m\n\u001b[2m    - attempting click action\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is visible, enabled and stable\u001b[22m\n\u001b[2m    - scrolling into view if needed\u001b[22m\n\u001b[2m    - done scrolling\u001b[22m\n\n    at hit (/workspace/Star/tests/browser-beta-fed-found0-events.cjs:5:487)\n    at /workspace/Star/tests/browser-beta-fed-found0-events.cjs:9:850\n    at async test (/workspace/Star/tests/browser-beta-fed-found0-events.cjs:3:45)\n    at async /workspace/Star/tests/browser-beta-fed-found0-events.cjs:9:1"
+  },
+  {
+    "name": "JavaScript errors",
+    "status": "PASS",
+    "errors": []
+  }
+]

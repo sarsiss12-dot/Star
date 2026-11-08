@@ -1,0 +1,58 @@
+[
+  {
+    "reverse": false,
+    "before": {
+      "fed": 0,
+      "cost": 10000,
+      "reply": "pending"
+    },
+    "final": {
+      "members": [
+        0,
+        1
+      ],
+      "by": 0,
+      "cost": 9780,
+      "status": "founded"
+    },
+    "guest": {
+      "members": [
+        1,
+        0
+      ],
+      "name": "Orion Keşif Birliği",
+      "notices": [
+        "FEDERASYON KURULDU — Orion Keşif Birliği"
+      ]
+    },
+    "reconnect": true
+  },
+  {
+    "reverse": true,
+    "before": {
+      "fed": 0,
+      "cost": 10000,
+      "reply": "pending"
+    },
+    "final": {
+      "members": [
+        1,
+        0
+      ],
+      "by": 1,
+      "cost": 9780,
+      "status": "founded"
+    },
+    "guest": {
+      "members": [
+        0,
+        1
+      ],
+      "name": "Ekinoks Gözlemevleri Ağı",
+      "notices": [
+        "FEDERASYON KURULDU — Ekinoks Gözlemevleri Ağı"
+      ]
+    },
+    "reconnect": true
+  }
+]

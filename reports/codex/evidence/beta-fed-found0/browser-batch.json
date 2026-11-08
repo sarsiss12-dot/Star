@@ -1,0 +1,86 @@
+[
+  {
+    "name": "sp-founder-final",
+    "cmd": [
+      "node",
+      "tests/browser-beta-fed-found0-events.cjs"
+    ],
+    "env": {
+      "FD0_CASE": "SP se\u00e7ilen"
+    },
+    "exit": 0,
+    "seconds": 5.88
+  },
+  {
+    "name": "mp73-final",
+    "cmd": [
+      "node",
+      "tests/browser-mp73.cjs"
+    ],
+    "env": {
+      "FEDFOUND0": "1",
+      "FEDFOUND0_THREE": "1"
+    },
+    "exit": 1,
+    "seconds": 141.84
+  },
+  {
+    "name": "mp74-final",
+    "cmd": [
+      "node",
+      "tests/browser-mp74.cjs"
+    ],
+    "env": {},
+    "exit": 1,
+    "seconds": 85.31
+  },
+  {
+    "name": "mp75-final",
+    "cmd": [
+      "node",
+      "tests/browser-mp75.cjs"
+    ],
+    "env": {},
+    "exit": 1,
+    "seconds": 63.45
+  },
+  {
+    "name": "mp8-N-final",
+    "cmd": [
+      "node",
+      "tests/browser-mp8.cjs"
+    ],
+    "env": {
+      "MP8_SCEN": "N"
+    },
+    "exit": 0,
+    "seconds": 119.21
+  },
+  {
+    "name": "mp8-R-final",
+    "cmd": [
+      "node",
+      "tests/browser-mp8.cjs"
+    ],
+    "env": {
+      "MP8_SCEN": "R",
+      "MP8_MONTHS": "6",
+      "FEDFOUND0_R": "1"
+    },
+    "exit": 0,
+    "seconds": 89.57
+  },
+  {
+    "name": "war-mp-final",
+    "cmd": [
+      "node",
+      "tests/browser-mp73.cjs"
+    ],
+    "env": {
+      "MP73_ONLY": "A1|PWF",
+      "WARFIX0": "1"
+    },
+    "exit": 0,
+    "seconds": 27.73
+  }
+]

@@ -1,0 +1,11 @@
+PASS kanonik MP davet 0 → 1; yalnız doğru devlet yanıtlar ve son onay kurucudan
+PASS kanonik MP davet 1 → 0; yalnız doğru devlet yanıtlar ve son onay kurucudan
+PASS kanonik MP davet 1 → 3; yalnız doğru devlet yanıtlar ve son onay kurucudan
+PASS üçüncü insan özel daveti görmez; mirror IDs permüte ve salt okunur
+PASS bekleyen ve kabul edilen davet MP paket / yeni host ile kalır; tekrar kabul ve çift ücret reddedilir
+PASS bilinmeyen ve fazladan komut alanları/kimlik taklidi kurucu yetkisini aşamaz
+PASS iki üyeli equal oy: açık insan oyları, eşitlikte ret, çoğunlukta kabul
+PASS iki üyeli hegemonic oy: açık insan oyları, eşitlikte ret, çoğunlukta kabul
+PASS iki üyeli economic oy: açık insan oyları, eşitlikte ret, çoğunlukta kabul
+PASS iki üyeli mixed oy: açık insan oyları, eşitlikte ret, çoğunlukta kabul
+GEÇEN: 10 KALAN: 0

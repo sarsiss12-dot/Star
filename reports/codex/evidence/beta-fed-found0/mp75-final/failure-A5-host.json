@@ -1,0 +1,121 @@
+{
+  "inbox": [
+    {
+      "kind": "anomaly",
+      "data": {
+        "a": {
+          "id": "a8",
+          "k": "megayapi",
+          "n": "Yörüngesel Ayna",
+          "t": "Yıldızın ışığını gezegene odaklayan devasa bir yapay ayna. Kim, neden?",
+          "ch": [
+            {
+              "t": "Aynayı devral",
+              "d": "+3 aylık enerji (kalıcı)"
+            },
+            {
+              "t": "Yapımcıyı ara",
+              "d": "+210 araştırma"
+            }
+          ]
+        },
+        "sys": {
+          "id": 22,
+          "x": 4232.804705321365,
+          "y": 2759.623447706411,
+          "name": "Cynomir",
+          "star": {
+            "n": "M Kırmızı Cüce",
+            "c": "#ff7b5c",
+            "r": 4.5,
+            "w": 30
+          },
+          "planets": [
+            {
+              "i": 0,
+              "t": "col",
+              "dep": null,
+              "sz": 20,
+              "seed": 2885,
+              "owner": -1,
+              "col": null,
+              "name": "Cynomir I"
+            },
+            {
+              "i": 1,
+              "t": "tok",
+              "dep": null,
+              "sz": 20,
+              "seed": 2902,
+              "owner": -1,
+              "col": null,
+              "name": "Cynomir II"
+            },
+            {
+              "i": 2,
+              "t": "buz",
+              "dep": null,
+              "sz": 20,
+              "seed": 2919,
+              "owner": -1,
+              "col": null,
+              "name": "Cynomir III"
+            },
+            {
+              "i": 3,
+              "t": "cor",
+              "dep": null,
+              "sz": 10,
+              "seed": 2936,
+              "owner": -1,
+              "col": null,
+              "name": "Cynomir IV"
+            }
+          ],
+          "lanes": [
+            13,
+            29
+          ],
+          "owner": -1,
+          "surv": [
+            1
+          ],
+          "seen": [
+            1
+          ],
+          "def": 0,
+          "queue": [],
+          "anom": false,
+          "pulsar": false,
+          "nebulaS": false,
+          "anomK": "megayapi",
+          "_reach": 0,
+          "cr": 0
+        }
+      },
+      "ico": "🔬",
+      "cls": "sci",
+      "pause": true,
+      "title": "Anomali — Cynomir",
+      "sub": "Yörüngesel Ayna",
+      "key": "an:22",
+      "uid": 1,
+      "born": 19.92280000000002
+    },
+    {
+      "kind": "criswarn",
+      "data": 2400,
+      "ico": "🔮",
+      "pause": false,
+      "title": "KRİZ KEHANETİ",
+      "sub": "deneme",
+      "key": "cw:t75",
+      "uid": 2,
+      "born": 23.216000000000108
+    }
+  ],
+  "records": [],
+  "html": "<button class=\"nCard sci\" data-a=\"openNote\" data-x=\"1\">\n         <span class=\"nIco\">🔬</span>\n         <span class=\"nTxt\"><b>Anomali — Cynomir</b><i>Yörüngesel Ayna</i></span>\n         <span class=\"nGo\">›</span>\n       </button><div class=\"nOptions\"><button class=\"abtn\" data-a=\"noteOptions\" data-x=\"1\" aria-expanded=\"false\">SEÇENEKLER ▾</button></div><button class=\"nCard \" data-a=\"openNote\" data-x=\"2\">\n         <span class=\"nIco\">🔮</span>\n         <span class=\"nTxt\"><b>KRİZ KEHANETİ</b><i>deneme</i></span>\n         <span class=\"nGo\">›</span>\n       </button>",
+  "modal": "",
+  "hidden": true
+}

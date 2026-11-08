@@ -1,0 +1,15 @@
+{
+  "selector": "#diploPane [data-a=\"closeDiplo\"]",
+  "url": "/",
+  "who": "Kızıl Muhafız",
+  "viewport": [
+    844,
+    390
+  ],
+  "scroll": [
+    0,
+    0
+  ],
+  "focus": "",
+  "modal": "hidden"
+}

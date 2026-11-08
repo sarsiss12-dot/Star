@@ -1,0 +1,17 @@
+[
+  {
+    "name": "960x540 event iki gerçek hızlı dokunma tek kaynak işlemi",
+    "status": "PASS",
+    "data": {
+      "trustedTouches": 2,
+      "mineral": 150,
+      "research": 260,
+      "applied": 1
+    }
+  },
+  {
+    "name": "JavaScript errors",
+    "status": "PASS",
+    "errors": []
+  }
+]

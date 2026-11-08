@@ -1,0 +1,10 @@
+PASS kart çizimi, seçenekleri aç/kapat, özet ve tam metin stratejik RNG/Save8/hızı değiştirmez
+PASS event tam pencere ve hızlı yol aynı ham Save8/RNG, gerçek etki ve tek karar
+PASS anomaly tam pencere ve hızlı yol aynı ham Save8/RNG, gerçek etki ve tek karar
+PASS chain tam pencere ve hızlı yol aynı ham Save8/RNG, gerçek etki ve tek karar
+PASS yetersiz kaynak kararı reddedilir, not kalır; sonraki geçerli kaynakla bir kez ödenir
+PASS eski dünya / geçersiz seçenek / MP yetkisiz yerel karar kaynak değiştirmez
+PASS gizleme, altı kart sınırı ve Save8 bekleyen olayları silmez
+PASS anomali a5 açıklaması ve gerçek ödül 15; zincir gelecekteki ödülü şimdiki gibi göstermez
+PASS karar içi arıza kaynak, bekleyen not, zincir ve RNG için atomik geri alınır
+GEÇEN: 9 KALAN: 0

@@ -1,0 +1,4 @@
+{"name": "mp73-accepted", "cmd": ["node", "tests/browser-mp73.cjs"], "env": {"FEDFOUND0": "1", "FEDFOUND0_THREE": "1"}, "exit": 0, "seconds": 110.63}
+{"name": "mp75-eligible", "cmd": ["node", "tests/browser-mp75.cjs"], "env": {}, "exit": 1, "seconds": 62.88}
+{"name": "event-rapid", "cmd": ["node", "tests/browser-beta-fed-found0-events.cjs"], "env": {"FD0_CASE": "iki ger\u00e7ek h\u0131zl\u0131"}, "exit": 0, "seconds": 5.1}
+{"name": "mp8-R-accepted", "cmd": ["node", "tests/browser-mp8.cjs"], "env": {"MP8_SCEN": "R", "MP8_MONTHS": "6", "FEDFOUND0_R": "1"}, "exit": 0, "seconds": 83.77}

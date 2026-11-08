@@ -1,15 +1,12 @@
 # Son Codex raporu
 
-- Faz: **BETA-WAR-FIX.0** — yalnız pano #48 / #4 / #47 / #6. Kullanıcı/yayın kabulü verilmedi.
-- [Tek parça sonuç raporu](reports/codex/BETA-WAR-FIX0-SONUC.md) · [Kanıt dizini](reports/codex/evidence/beta-war-fix0/README.md) · [Üç kullanıcı PC testi](reports/codex/evidence/beta-war-fix0/KULLANICI-KABULU.md).
-- Dal: `codex/stars-beta-war-fix0-peace-notices`; PR tabanı `codex/stars-beta-scale0-galaxy-ai-colonies` @ `731c8df9900e446d7e7de25cc5701e05a1071647`. Önceki SCALE raporu bu tabanda zaten tamamlanmıştı.
-- Doğrulanmış kod/test/paket uzak HEAD: `05ffb5f657b9f8e9f86f529b65af033fb6b0020f`. Nihai rapor commit SHA'sı son mesajda ve uzak dal HEAD'indedir.
-- Kanıtlanan düzeltmeler: barışın eski otomatik vasal/senyör/federasyon çağrısıyla açılması; cephe bildirimlerinin sefer kilidinde kaybı; temassız uzak insanın savaş haberi; savaşta bağımsız ittifak/örtük barış; MP AI ret tekrarı. Ek kabul düzeltmeleri: kesin teklif ID, canlı kartın ara DOM çizimi, soğuk odada kendi savaş geçmişi.
-- Son yerel kabul: motor 17/0; MP3 11/0; MP4 14/0; MP71 9/0; tam MP73 8/0; ayrı kritik 4/0; PWF gerçek iki barış/DOM/reconnect 2/0; MP74 **7/0**; MP75 **6/0**; MP8 N **9/0**, R0–R4 **5/0** (3 insan, 5 AI, 6+6 ay; yeni süreç/relay/oda ve kendi geçmişi). İlk MP74 5/2, MP75 4/2 ve R 3/2 FAIL kayıtları korunur.
-- On kampanya (100/9 ve 200/16 × seed 11/23/42/99/404) gerçek 120 ay PASS. Kaydedilmiş motor kaynağı `002cad4`; son MP kimlik değişikliğinin SP etkisizliği gerçek 500/16 m120→121 kontrol–aday ham Save8/RNG ile ayrıca PASS. Yeni performans yüzdesi iddiası yok.
-- PERF.1 4/0; PERF.2 5/0; MP.8.6 native piksel 3/0; Konsey 14/0; savaş bitiş 5/0; haber görünürlük 34/0; korsan 10/0; kapı/kriz 12/0; isim 9/0. Save8 v8 / paket4 / protokol1 korunur.
-- Oyun **96h10p13**, PWA **stars-v96h10p13**, MP **MP.8.9b8**. [ZIP](releases/stars-faz96h10p13.zip): 788.306 bayt; SHA256 `e1f0b4a318df37275bcf40ae7e76c1c93752c05c01f5b103d9b3a2e208a13b6d`; CRC32 `267D32F9`. İki deterministik paket bayt bayt eşit; [manifest/hash doğrulaması](reports/codex/evidence/beta-war-fix0/RELEASE-VERIFIED.json).
-- PR tek denemesi ve #33 başlangıç/sonuç yazımları **Forbidden**. [Karşılaştırma](https://github.com/sarsiss12-dot/Star/compare/codex/stars-beta-scale0-galaxy-ai-colonies...codex/stars-beta-war-fix0-peace-notices?expand=1). Uzaktaki görev durumları değiştirilemedi/doğrulanamadı; öneri yalnız dört görev için RAPOR GELDİ / TEST BEKLİYOR. Diğer 44 görev/TAMAMLANDI değiştirilmedi.
-- Açık: kullanıcının özgün 140. ay kaydı yok; 5/20 saniye olayının kesin teşhisi ve gerçek NAP kartının kökeni bilinmiyor. Tarihsiz eski kayıt çağrısı eşlemesi, yeni siyasi yükümlülüklerin aynı devam eden cephede kapsamlı kabulü, tarihsel B1/A3 ve #25/#24/#10 açık kalır.
-- **NOT RUN:** fiziksel Android/kullanıcı PC'si, gerçek LAN/internet/Render, Docker build/deploy. Main merge/rebase/force-push yapılmadı.
-- Sonraki tek hedef: **aynı sorunlu kullanıcı Save8'iyle barış/çağrı zinciri kabulü**. Yeni büyük sistem önerilmez.
+- Son geliştirilen faz: **BETA-FED-FOUND.0 — kullanıcı kabulü bekliyor, #27 kısmen**.
+- [Tam Türkçe rapor](reports/codex/BETA-FED-FOUND0-SONUC.md), [kanıtlar](reports/codex/evidence/beta-fed-found0/README.md).
+- Dal: `codex/stars-beta-fed-found0-founder-invites-events`. PR tabanı: `codex/stars-beta-war-fix0-peace-notices`.
+- Kaynak HEAD: `4ef02795042528d82a7e59c484ccff3c6c10875f`. Doğrulanmış son kod/paket commit'i: `618df01768394c7c262e89dc0de979fdb0564bcb`. Nihai rapor commit'i uzak dal ve son sohbet mesajında doğrulanır.
+- #11/#12/#13/#2: seçili kurucu, gerçek rıza ve final, iki/üç insan, özel davet, AI kabul/ret, kayıt/yeni oda yerel PASS. #27: diplomatik özet + SP/host event/anomaly/chain hızlı karar PASS; misafir typed-event host komutu **eksik, TEST BEKLİYOR**.
+- Son testler: core10/0, MP11/0, event11/0; dört viewport Chromium23/0; MP73 10/0, MP74 7/0, MP75 6/0; MP8 N9/0, iki bağımsız R5/0. İlk FAIL'ler korunur. PERF1 4/0, PERF2 5/0, native bulutsu3/0. Beş seed × üç ay gerçek p13 ham Save8/RNG aynı; Save8v8/paket4/protokol1 korunur.
+- Build96h10p14 / PWAstars-v96h10p14 / MP.8.9b9. [ZIP](releases/stars-faz96h10p14.zip): 794540 bayt; SHA256 `205eeba47747716a32e794ad633e21a9285c295b3648d1e53cf703acf15eae0e`; CRC32 `D0083B93`. İki deterministik paket eşit; [bütünlük](reports/codex/evidence/beta-fed-found0/RELEASE-VERIFIED.json).
+- PR tek deneme ve #33 başlangıç/sonuç yazımları `Post "https://api.github.com/graphql": Forbidden`; PR oluşturulmadı, pano değiştirilemedi. [Compare](https://github.com/sarsiss12-dot/Star/compare/codex/stars-beta-war-fix0-peace-notices...codex/stars-beta-fed-found0-founder-invites-events?expand=1). Hiçbir görev TAMAMLANDI değil, diğer görevler değiştirilmedi.
+- **NOT RUN:** fiziksel Android/kullanıcı PC, gerçek LAN/internet/Render, Docker build/deploy, yeni120ay kampanya. Main merge/rebase/force-push ve deploy yok.
+- Açık: #27 misafir typed karar; tarihselB1/A3 ve #25/#24/#10; gerçek cihaz kabulü. Sonraki tek hedef: #27'yi host yetkili olay kimliği/komut ve kayıt devamıyla tamamlamak.

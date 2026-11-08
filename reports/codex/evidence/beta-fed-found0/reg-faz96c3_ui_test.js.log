@@ -1,0 +1,25 @@
+✓ 43 ordinary news have zero urgent count and retain news access
+✓ pending inbox plus notification counts the actual offer only once
+✓ two pending offers count as two decisions
+✓ resolved and expired offers leave no urgent or minimized duplicate
+✓ minimized typed event save preserves UID, not raw HTML
+✓ minimized queue entry cannot be pushed out by incoming cards
+✓ typed minimized offer appears once and clears when opened
+✓ unknown and unminimized ordinary cards are not urgent
+✓ same event update key is not counted twice
+✓ discovered foreign endpoint outside radar supports known war
+✓ unseen capital falls back to discovered owned system
+✓ no discovered endpoint means no free location disclosure
+✓ third party war still requires actual diplomatic intelligence
+✓ ended battle close preferences survive v8 without deleting report
+✓ new battle never inherits previous report dismissal
+✓ foreign and active reports have no persistent dismissal identity
+✓ malformed view preferences cannot hide any other report
+✓ raw modal markup and functions are never serialized or restored
+✓ UI observation does not change RNG, stocks or diplomatic decisions
+✓ real cargo debit, arrival, no duplication remain unchanged
+✓ PWA cache and build are phase96e1, save remains v8
+✓ resolved real event is not resurrected by save and old choice cannot pay twice
+✓ old typed event choice cannot act on replacement save world
+✓ orientation screen has no injected game buttons
+GEÇEN: 24 KALAN: 0

@@ -1,0 +1,15 @@
+/workspace/Star/tests/faz95b_federation_reform_test.js:16
+for(const type of ['askeri','bilimsel','ticaret'])test('found '+type+' charges existing cost, explicit type and default obligations',()=>{const h=world(type);h.run('G.feds=[];var stock=E.res.etk;var p=fedFoundPropose(E,type,'equal',[1,2]);var r=p.ok?fedFoundFinish(E,p.id):p;F=r.fed');eq(h.run('r.ok'));eq(h.run('stock-E.res.etk'),220);eq(h.run('F.type'),type);eq(h.run('F.leader'),0);eq(h.run('fedDuty(F,"offense")'),false);eq(h.run('fedDuty(F,"defense")'),type==='askeri');});
+                                                                                                                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+SyntaxError: missing ) after argument list
+    at wrapSafe (node:internal/modules/cjs/loader:1861:18)
+    at Module._compile (node:internal/modules/cjs/loader:1903:20)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+
+Node.js v24.22.1

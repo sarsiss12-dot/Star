@@ -1,0 +1,23 @@
+NOT RUN 800x360 ayrı seçenek hedefi / aç-kapat RNG ve hız / başlık normal pencere
+NOT RUN 800x360 event gerçek hızlı seçim / etkiler / çift karar engeli
+NOT RUN 800x360 anomaly gerçek hızlı seçim / etkiler / çift karar engeli
+NOT RUN 800x360 chain gerçek hızlı seçim / etkiler / çift karar engeli
+NOT RUN 800x360 kartı kaydır / durum listesinden geri aç / eski Save8 ve bekleyen not
+NOT RUN 960x540 ayrı seçenek hedefi / aç-kapat RNG ve hız / başlık normal pencere
+NOT RUN 960x540 event gerçek hızlı seçim / etkiler / çift karar engeli
+NOT RUN 960x540 anomaly gerçek hızlı seçim / etkiler / çift karar engeli
+NOT RUN 960x540 chain gerçek hızlı seçim / etkiler / çift karar engeli
+NOT RUN 960x540 kartı kaydır / durum listesinden geri aç / eski Save8 ve bekleyen not
+PASS 960x540 event iki gerçek hızlı dokunma tek kaynak işlemi
+NOT RUN 960x540 SP seçilen iki AI, üçüncü uygun AI dışarıda ve tek son onay
+NOT RUN 915x412 ayrı seçenek hedefi / aç-kapat RNG ve hız / başlık normal pencere
+NOT RUN 915x412 event gerçek hızlı seçim / etkiler / çift karar engeli
+NOT RUN 915x412 anomaly gerçek hızlı seçim / etkiler / çift karar engeli
+NOT RUN 915x412 chain gerçek hızlı seçim / etkiler / çift karar engeli
+NOT RUN 915x412 kartı kaydır / durum listesinden geri aç / eski Save8 ve bekleyen not
+NOT RUN 1920x1080 ayrı seçenek hedefi / aç-kapat RNG ve hız / başlık normal pencere
+NOT RUN 1920x1080 event gerçek hızlı seçim / etkiler / çift karar engeli
+NOT RUN 1920x1080 anomaly gerçek hızlı seçim / etkiler / çift karar engeli
+NOT RUN 1920x1080 chain gerçek hızlı seçim / etkiler / çift karar engeli
+NOT RUN 1920x1080 kartı kaydır / durum listesinden geri aç / eski Save8 ve bekleyen not
+GEÇEN: 2 KALAN: 0

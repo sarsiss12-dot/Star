@@ -1,0 +1,26 @@
+PASS iki insan yalnız açık davet, karşı onay ve son kuruluş; tek ücret, seçilmeyen ortak yok
+PASS misafir kurucu ve üç insan; insan adına AI yanıt vermez
+PASS ret, iptal, süre sonu ve yetkisiz yanıt ikinci işlemi engeller
+PASS savaş, vasallık, ölüm ve başka federasyon son onayda tekrar denetlenir
+PASS eşzamanlı kuruluş, mükerrer davet ve eski şartlar yeni rejime taşınmaz
+PASS Save8 bekleyen rıza ve son karar korunur; eski kayda alan sızmaz; quote RNG tüketmez
+AI assessment rejected Bilinen yardım/iş birliği rotası yetersiz
+PASS SP asgari iki AI korunur, AI gerçek stratejik kararla kabul veya ret verir
+PASS SP seçilen iki AI gerçek kabul verir; üçüncü uygun AI dışarıda, değişen şart rızası reddedilir
+PASS kuruluş arızası ücret, kimlik, teklif ve RNG için atomik geri alınır
+FAIL insan tanımı yalnız devlet 0 veya uzak misafire bağlı değildir
+AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert(h.run('q.ok'))
+
+    at /workspace/Star/tests/beta_fed_found0_core_test.js:15:232
+    at test (/workspace/Star/tests/beta_fed_found0_core_test.js:5:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_fed_found0_core_test.js:15:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+GEÇEN: 9 KALAN: 1

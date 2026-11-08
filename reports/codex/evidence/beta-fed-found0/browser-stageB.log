@@ -1,0 +1,9 @@
+PASS A1 rehber 1–8: oda, iki farklı devlet, hazır, başlat; iki ekranda galaksi; sürüm işareti lobi / başlangıç / MP çubuğunda ve /mp/version oyun build'iyle aynı
+FAIL FD0 gerçek host-misafir kuruluş daveti, tek dokunma ve açık son onay
+page.waitForFunction: Timeout 15000ms exceeded.
+    at wait (/workspace/Star/tests/helpers/beta-fed-found0-browser.cjs:4:24)
+    at module.exports (/workspace/Star/tests/helpers/beta-fed-found0-browser.cjs:14:62)
+    at async /workspace/Star/tests/browser-mp73.cjs:147:143
+    at async test (/workspace/Star/tests/browser-mp73.cjs:13:7)
+    at async /workspace/Star/tests/browser-mp73.cjs:147:34
+GEÇEN: 1 KALAN: 1
