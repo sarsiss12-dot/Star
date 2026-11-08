@@ -1,0 +1,187 @@
+{
+  "results": [
+    {
+      "name": "A1 rehber 1–8: oda, iki farklı devlet, hazır, başlat; iki ekranda galaksi; sürüm işareti lobi / başlangıç / MP çubuğunda ve /mp/version oyun build'iyle aynı",
+      "status": "PASS",
+      "ms": 12142
+    },
+    {
+      "name": "FD0 gerçek host-misafir kuruluş daveti, tek dokunma ve açık son onay",
+      "status": "PASS",
+      "ms": 10583
+    },
+    {
+      "name": "A2 rehber 9–12: misafir filosunu yürütür (gerçek orderMove → host), B → host diplomatik teklif ve host gelen kutusundan kabul eder; zaman iki ekranda ilerler",
+      "status": "PASS",
+      "ms": 3897
+    },
+    {
+      "name": "A3 rehber 13–15: misafir bağlantısı kopar ve döner → aynı devlet; host oyun kaydı alır (MP.4 paketi doğrulanır)",
+      "status": "PASS",
+      "ms": 3319
+    },
+    {
+      "name": "B1 konsey motorun kendi yoluyla kurulur (fikstür: temas); AI insanlar adına oy / sponsor yazmaz; B gerçek \"KONSEY OYLAMASI\" kartından Konsey ekranını açar ve EVET (dokunma) → host kaydeder, oylama açık kalır",
+      "status": "PASS",
+      "ms": 25498
+    },
+    {
+      "name": "B2 C (915×412) HAYIR verir; oylama host oy verene kadar açık; host kendi Konsey ekranından EVET → motor kapatır; tekrar oy reddedilir",
+      "status": "PASS",
+      "ms": 5399
+    },
+    {
+      "name": "B3 tasarı: B Konsey ekranından tasarı sunar (dokunma) → host kampanya sponsoru B; B AI üyeye rüşvet (dokunma) → host 200 mineral aktarır; insan üye C'ye rüşvet reddedilir; C'nin aynasında rüşvetin yönü yok",
+      "status": "PASS",
+      "ms": 7979
+    },
+    {
+      "name": "B4 entrika ve yıkıcı onay: B fısıltı ağını gerçek pencereden açar, iki AI seçer, gönderir → host motoru (B'nin günlüğü ya da motorun gerekçesi); onaysız yutma çağrısı host'a hiçbir şey göndermez",
+      "status": "PASS",
+      "ms": 6746
+    },
+    {
+      "name": "FD3 üç insan, misafir kurucu, özel davet ret/iptal, yeniden bağlantı ve karma oy",
+      "status": "PASS",
+      "ms": 23911
+    },
+    {
+      "name": "P0 katılımcı görüş, sağlık, özel kararlar, rota ve görsel hareket",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n6 !== 1\n\n    at module.exports (/workspace/Star/tests/helpers/mp-p0-guest-browser.cjs:23:9)\n    at async /workspace/Star/tests/browser-mp73.cjs:248:129\n    at async test (/workspace/Star/tests/browser-mp73.cjs:13:7)\n    at async /workspace/Star/tests/browser-mp73.cjs:248:29"
+    },
+    {
+      "name": "sayfa hataları yok",
+      "status": "PASS",
+      "ms": 1
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "startModal": [
+      "🛰 DANIŞMAN",
+      "",
+      "🛰 DANIŞMAN",
+      "",
+      ""
+    ],
+    "version": {
+      "mp": "MP.8.9b10",
+      "build": "96h10p15",
+      "files": {
+        "mp-core.js": "12bca8717474",
+        "relay.js": "81252c42194e",
+        "mp1-host.js": "0938cb8d7030",
+        "join.js": "bc2732493741",
+        "mirror.js": "960a4ef046b8",
+        "guest-stars.js": "6134e602fd01",
+        "mp71-dip.js": "bf0355f27ef6",
+        "mp7-setup.js": "48c0f282a254"
+      }
+    },
+    "unsupported": [
+      "autoEvent",
+      "diagCopy",
+      "joinRebel",
+      "leaveRebel",
+      "mapFix",
+      "physio",
+      "restart",
+      "rollName",
+      "sandbox",
+      "sitPick",
+      "stashNote",
+      "survey",
+      "terra",
+      "toTitle",
+      "tplDel",
+      "tplLoad",
+      "tplSave",
+      "trigCrisis"
+    ],
+    "guestDiag": "STARS MP.8.9b10 · oyun 96h10p15 · misafir · host bağlı · aşama: ready · ayna r5 15:11:31 · kurulum 6 ms · son komut: yok · son hata: yok",
+    "fedfound": [
+      {
+        "reverse": false,
+        "before": {
+          "fed": 0,
+          "cost": 10000,
+          "reply": "pending"
+        },
+        "final": {
+          "members": [
+            0,
+            1
+          ],
+          "by": 0,
+          "cost": 9780,
+          "status": "founded"
+        },
+        "guest": {
+          "members": [
+            1,
+            0
+          ],
+          "name": "Helis Bilgi Topluluğu",
+          "notices": [
+            "FEDERASYON KURULDU — Helis Bilgi Topluluğu"
+          ]
+        },
+        "reconnect": true
+      },
+      {
+        "reverse": true,
+        "before": {
+          "fed": 0,
+          "cost": 10000,
+          "reply": "pending"
+        },
+        "final": {
+          "members": [
+            1,
+            0
+          ],
+          "by": 1,
+          "cost": 9780,
+          "status": "founded"
+        },
+        "guest": {
+          "members": [
+            0,
+            1
+          ],
+          "name": "Ekinoks Keşif Birliği",
+          "notices": [
+            "FEDERASYON KURULDU — Ekinoks Keşif Birliği"
+          ]
+        },
+        "reconnect": true
+      }
+    ],
+    "whisper": 1,
+    "fd3": {
+      "guestFounder": 1,
+      "selected": [
+        0,
+        2
+      ],
+      "members": [
+        1,
+        0,
+        2
+      ],
+      "names": [
+        "Kızıl Muhafız",
+        "Okyanus Ticaret Birliği",
+        "Saf Akıl Ağı"
+      ],
+      "rejection": true,
+      "cancel": true,
+      "reconnect": true,
+      "thirdPartyPrivate": true,
+      "cost": 220
+    }
+  },
+  "pass": 10,
+  "fail": 1
+}

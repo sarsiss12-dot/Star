@@ -1,0 +1,48 @@
+FAIL katılımcı müttefik yerel sensörünü alır, üçüncü taraf zincir görüşünü almaz
+AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert(h.run('ctx.visible.has(sid)'))
+
+    at /workspace/Star/tests/mp_p0_guest_test.cjs:5:429
+    at test (/workspace/Star/tests/mp_p0_guest_test.cjs:4:28)
+    at Object.<anonymous> (/workspace/Star/tests/mp_p0_guest_test.cjs:5:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+PASS katılımcı taranmış uygun gezegen için harita işaretini alır; gizli sistem açıklanmaz
+PASS görünen yabancı askeri filo gövde oranı sonlu, özel stok ve emirler taşınmaz
+FAIL bilim gemisinin anomalisi host yerine kendi insan devletinin karar deposuna yazılır
+AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert(h.run('G.emps[1].decisions?.pending?.some(n=>n.kind==="anomaly")'))
+
+    at /workspace/Star/tests/mp_p0_guest_test.cjs:8:264
+    at test (/workspace/Star/tests/mp_p0_guest_test.cjs:4:28)
+    at Object.<anonymous> (/workspace/Star/tests/mp_p0_guest_test.cjs:8:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+FAIL kuruluş sonucu aynı mirror yenilenmesinde yeniden kart üretmez
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+1 !== 0
+
+    at /workspace/Star/tests/mp_p0_guest_test.cjs:9:596
+    at test (/workspace/Star/tests/mp_p0_guest_test.cjs:4:28)
+    at Object.<anonymous> (/workspace/Star/tests/mp_p0_guest_test.cjs:9:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+GEÇEN: 2 KALAN: 3

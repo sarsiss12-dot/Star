@@ -1,0 +1,106 @@
+{
+  "url": "/",
+  "vote": null,
+  "inbox": [
+    {
+      "kind": "event",
+      "data": {
+        "id": "e1",
+        "n": "Bilim Konseyi Talebi",
+        "t": "Baş bilimcin, riskli bir hızlandırılmış araştırma programı için bütçe istiyor.",
+        "ch": [
+          {
+            "t": "Fonu onayla",
+            "d": "−150 mineral, +260 araştırma"
+          },
+          {
+            "t": "Reddet",
+            "d": "−8 etki"
+          }
+        ]
+      },
+      "ico": "❗",
+      "pause": true,
+      "title": "Bilim Konseyi Talebi",
+      "sub": "Baş bilimcin, riskli bir hızlandırılmış araştırma programı için …",
+      "key": "ev:e1",
+      "uid": 2,
+      "born": 30.01900000000003
+    },
+    {
+      "kind": "anomaly",
+      "data": {
+        "a": {
+          "id": "a4",
+          "k": "megayapi",
+          "n": "Savaş Enkazı",
+          "t": "Kimliği belirsiz iki filo burada birbirini yok etmiş. Enkaz hâlâ soğumamış.",
+          "ch": [
+            {
+              "t": "Silah sistemlerini incele",
+              "d": "+200 araştırma"
+            },
+            {
+              "t": "Alaşımı topla",
+              "d": "+140 alaşım"
+            }
+          ]
+        },
+        "sys": {
+          "id": 20,
+          "x": 3066.7753316181615,
+          "y": 3357.416423484813,
+          "name": "Elpol",
+          "star": {
+            "n": "M Kırmızı Cüce",
+            "c": "#ff7b5c",
+            "r": 4.5,
+            "w": 30
+          },
+          "planets": [
+            {
+              "i": 0,
+              "t": "cor",
+              "dep": null,
+              "sz": 13,
+              "seed": 2623,
+              "owner": -1,
+              "col": null,
+              "name": "Elpol I"
+            }
+          ],
+          "lanes": [
+            22,
+            31
+          ],
+          "owner": -1,
+          "surv": [
+            0
+          ],
+          "seen": [
+            0
+          ],
+          "def": 0,
+          "queue": [],
+          "anom": false,
+          "pulsar": false,
+          "nebulaS": false,
+          "anomK": "megayapi",
+          "_reach": 0,
+          "_shat": false,
+          "cr": 0
+        }
+      },
+      "ico": "🔬",
+      "cls": "sci",
+      "pause": true,
+      "title": "Anomali — Elpol",
+      "sub": "Savaş Enkazı",
+      "key": "an:20",
+      "uid": 3,
+      "born": 33.160120000000084
+    }
+  ],
+  "modal": "",
+  "pane": ""
+}

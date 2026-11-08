@@ -1,0 +1,74 @@
+{
+  "url": "/mp/play",
+  "vote": {
+    "name": "Evrensel Forumu",
+    "founder": 0,
+    "members": [
+      0,
+      2,
+      1,
+      3,
+      6,
+      4,
+      5,
+      7
+    ],
+    "laws": {
+      "ticaretStd": true
+    },
+    "targeted": {},
+    "treasury": 0,
+    "president": 0,
+    "terms": {
+      "0": 1
+    },
+    "termAge": 0,
+    "voteIn": 2,
+    "dead": false,
+    "byConvention": true,
+    "firstLaw": null,
+    "pariahs": {},
+    "agenda": [],
+    "vote": null,
+    "lastVote": {
+      "key": "ticaretStd",
+      "target": null,
+      "appliedTarget": null,
+      "opened": 5.406800000000021,
+      "ended": 11.75336,
+      "yes": [
+        3,
+        6,
+        4,
+        7,
+        0,
+        1
+      ],
+      "no": [
+        5,
+        2
+      ],
+      "passed": true,
+      "expired": false,
+      "weight": {
+        "yes": 42.99803529806991,
+        "no": 13.563723393402665
+      },
+      "eventKey": "council:ticaretStd:11.75336"
+    },
+    "campaign": {
+      "key": "borsaKur",
+      "sponsor": 0,
+      "left": 3,
+      "bribed": {
+        "3": 1
+      },
+      "blackmailed": [],
+      "agenda": null,
+      "byPlayer": true
+    }
+  },
+  "inbox": [],
+  "modal": "",
+  "pane": "<div class=\"dpBox dcBox\"><div class=\"dpHd\"><span>DİPLOMASİ</span>\n      <button class=\"riX\" data-a=\"closeDiplo\" aria-label=\"Diplomasiyi kapat\">✕</button></div>\n      <div class=\"dcNav\" role=\"tablist\" aria-label=\"Diplomasi bölümleri\"><button role=\"tab\" aria-selected=\"true\" class=\"on\" data-a=\"diploNav\" data-x=\"states\">DEVLETLER</button><button role=\"tab\" aria-selected=\"false\" class=\"\" data-a=\"diploNav\" data-x=\"relation\" disabled=\"\">İLİŞKİ</button><button role=\"tab\" aria-selected=\"false\" class=\"\" data-a=\"diploNav\" data-x=\"deal\" disabled=\"\">MÜZAKERE</button></div><div class=\"dpBody dcBody\" role=\"tabpanel\"><div class=\"dcOverview\"><span>7 temas</span><span>2880 ◈</span>\n      <span>Elçi 0/2</span></div><div class=\"dcFilters\"><button class=\"abtn pri\" aria-pressed=\"true\" data-a=\"diploFilter\" data-x=\"all\">Tümü</button><button class=\"abtn \" aria-pressed=\"false\" data-a=\"diploFilter\" data-x=\"war\">Savaş</button><button class=\"abtn \" aria-pressed=\"false\" data-a=\"diploFilter\" data-x=\"ally\">Müttefik</button><button class=\"abtn \" aria-pressed=\"false\" data-a=\"diploFilter\" data-x=\"envoy\">Elçi var</button></div><div class=\"dpList\"><article class=\"dcState \"><button class=\"dcSelect\" data-a=\"diploPick\" data-x=\"1\">\n        <b>Kızıl Muhafız</b><span>Barış · +40 ›</span></button>\n        </article><article class=\"dcState \"><button class=\"dcSelect\" data-a=\"diploPick\" data-x=\"2\">\n        <b>Okyanus Ticaret Birliği</b><span>Barış · +40 ›</span></button>\n        </article><article class=\"dcState \"><button class=\"dcSelect\" data-a=\"diploPick\" data-x=\"3\">\n        <b>Dalun Loncası</b><span>Barış · 0 ›</span></button>\n        </article><article class=\"dcState \"><button class=\"dcSelect\" data-a=\"diploPick\" data-x=\"4\">\n        <b>Lilava Sultanlığı</b><span>Barış · 0 ›</span></button>\n        </article><article class=\"dcState \"><button class=\"dcSelect\" data-a=\"diploPick\" data-x=\"5\">\n        <b>Syniex Donanması</b><span>Barış · 0 ›</span></button>\n        </article><article class=\"dcState \"><button class=\"dcSelect\" data-a=\"diploPick\" data-x=\"6\">\n        <b>Vekvaon Odası</b><span>Barış · -25 ›</span></button>\n        </article><article class=\"dcState \"><button class=\"dcSelect\" data-a=\"diploPick\" data-x=\"7\">\n        <b>Velys Örgütü</b><span>Barış · 0 ›</span></button>\n        </article></div><div class=\"ph\">GALAKTİK İŞLER</div><div class=\"act2\"><button class=\"abtn\" data-a=\"fedPane\">🏛 FEDERASYON</button><button class=\"abtn\" data-a=\"cncPane\">🌐 KONSEY</button></div><details class=\"dcDetails\"><summary>Gizli diplomasi</summary><div class=\"act2\"><button class=\"abtn\" data-a=\"whisperMenu\">🕸 FISILTI AĞI</button><button class=\"abtn\" data-a=\"opLogMenu\">📁 İSTİHBARAT DOSYASI</button></div></details><details class=\"dcDetails\"><summary>Lüks mal ağın</summary><div class=\"luxRow\"><span class=\"luxChip miss\">✿ Zerrin Baharatı · yok</span><span class=\"luxChip miss\">❈ Canlı Kristal · yok</span><span class=\"luxChip miss\">❋ Yankı Mercanı · yok</span><span class=\"luxChip miss\">✤ Yıldız Filizi · yok</span><span class=\"luxChip miss\">◆ Işıyan Cevher · yok</span><span class=\"luxChip miss\">≋ Vakum İpeği · yok</span><span class=\"luxChip miss\">❂ Kadim Özsu · yok</span><span class=\"luxChip miss\">✦ Boşluk Tuzu · yok</span></div></details></div></div>"
+}

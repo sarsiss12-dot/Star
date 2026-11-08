@@ -1,0 +1,480 @@
+{
+  "results": [
+    {
+      "name": "A1 rehber 1–8: oda, iki farklı devlet, hazır, başlat; iki ekranda galaksi; sürüm işareti lobi / başlangıç / MP çubuğunda ve /mp/version oyun build'iyle aynı",
+      "status": "PASS",
+      "ms": 9572
+    },
+    {
+      "name": "FD0 gerçek host-misafir kuruluş daveti, tek dokunma ve açık son onay",
+      "status": "PASS",
+      "ms": 9096
+    },
+    {
+      "name": "A2 rehber 9–12: misafir filosunu yürütür (gerçek orderMove → host), B → host diplomatik teklif ve host gelen kutusundan kabul eder; zaman iki ekranda ilerler",
+      "status": "PASS",
+      "ms": 3587
+    },
+    {
+      "name": "A3 rehber 13–15: misafir bağlantısı kopar ve döner → aynı devlet; host oyun kaydı alır (MP.4 paketi doğrulanır)",
+      "status": "PASS",
+      "ms": 3301
+    },
+    {
+      "name": "B1 konsey motorun kendi yoluyla kurulur (fikstür: temas); AI insanlar adına oy / sponsor yazmaz; B gerçek \"KONSEY OYLAMASI\" kartından Konsey ekranını açar ve EVET (dokunma) → host kaydeder, oylama açık kalır",
+      "status": "PASS",
+      "ms": 23903
+    },
+    {
+      "name": "B2 C (915×412) HAYIR verir; oylama host oy verene kadar açık; host kendi Konsey ekranından EVET → motor kapatır; tekrar oy reddedilir",
+      "status": "PASS",
+      "ms": 5668
+    },
+    {
+      "name": "B3 tasarı: B Konsey ekranından tasarı sunar (dokunma) → host kampanya sponsoru B; B AI üyeye rüşvet (dokunma) → host 200 mineral aktarır; insan üye C'ye rüşvet reddedilir; C'nin aynasında rüşvetin yönü yok",
+      "status": "PASS",
+      "ms": 5745
+    },
+    {
+      "name": "B4 entrika ve yıkıcı onay: B fısıltı ağını gerçek pencereden açar, iki AI seçer, gönderir → host motoru (B'nin günlüğü ya da motorun gerekçesi); onaysız yutma çağrısı host'a hiçbir şey göndermez",
+      "status": "PASS",
+      "ms": 6256
+    },
+    {
+      "name": "FD3 üç insan, misafir kurucu, özel davet ret/iptal, yeniden bağlantı ve karma oy",
+      "status": "PASS",
+      "ms": 20262
+    },
+    {
+      "name": "P0 katılımcı görüş, sağlık, özel kararlar, rota ve görsel hareket",
+      "status": "PASS",
+      "ms": 50775
+    },
+    {
+      "name": "sayfa hataları yok",
+      "status": "PASS",
+      "ms": 1
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "startModal": [
+      "🛰 DANIŞMAN",
+      "",
+      "🛰 DANIŞMAN",
+      "",
+      ""
+    ],
+    "version": {
+      "mp": "MP.8.9b10",
+      "build": "96h10p15",
+      "files": {
+        "mp-core.js": "12bca8717474",
+        "relay.js": "81252c42194e",
+        "mp1-host.js": "0938cb8d7030",
+        "join.js": "bc2732493741",
+        "mirror.js": "bf4cef8667ca",
+        "guest-stars.js": "631a7c300a3d",
+        "mp71-dip.js": "bf0355f27ef6",
+        "mp7-setup.js": "48c0f282a254"
+      }
+    },
+    "unsupported": [
+      "autoEvent",
+      "diagCopy",
+      "joinRebel",
+      "leaveRebel",
+      "mapFix",
+      "physio",
+      "restart",
+      "rollName",
+      "sandbox",
+      "sitPick",
+      "stashNote",
+      "survey",
+      "terra",
+      "toTitle",
+      "tplDel",
+      "tplLoad",
+      "tplSave",
+      "trigCrisis"
+    ],
+    "guestDiag": "STARS MP.8.9b10 · oyun 96h10p15 · misafir · host bağlı · aşama: ready · ayna r4 15:51:26 · kurulum 6 ms · son komut: yok · son hata: yok",
+    "fedfound": [
+      {
+        "reverse": false,
+        "before": {
+          "fed": 0,
+          "cost": 10000,
+          "reply": "pending"
+        },
+        "final": {
+          "members": [
+            0,
+            1
+          ],
+          "by": 0,
+          "cost": 9780,
+          "status": "founded"
+        },
+        "guest": {
+          "members": [
+            1,
+            0
+          ],
+          "name": "Kutupyıldızı Araştırma Konseyi",
+          "notices": [
+            "FEDERASYON KURULDU — Kutupyıldızı Araştırma Konseyi"
+          ]
+        },
+        "reconnect": true
+      },
+      {
+        "reverse": true,
+        "before": {
+          "fed": 0,
+          "cost": 10000,
+          "reply": "pending"
+        },
+        "final": {
+          "members": [
+            1,
+            0
+          ],
+          "by": 1,
+          "cost": 9780,
+          "status": "founded"
+        },
+        "guest": {
+          "members": [
+            0,
+            1
+          ],
+          "name": "Meridyen Keşif Birliği",
+          "notices": [
+            "FEDERASYON KURULDU — Meridyen Keşif Birliği"
+          ]
+        },
+        "reconnect": true
+      }
+    ],
+    "whisper": 1,
+    "fd3": {
+      "guestFounder": 1,
+      "selected": [
+        0,
+        2
+      ],
+      "members": [
+        1,
+        0,
+        2
+      ],
+      "names": [
+        "Kızıl Muhafız",
+        "Okyanus Ticaret Birliği",
+        "Saf Akıl Ağı"
+      ],
+      "rejection": true,
+      "cancel": true,
+      "reconnect": true,
+      "thirdPartyPrivate": true,
+      "cost": 220
+    },
+    "p0": [
+      {
+        "visibility": true,
+        "shared": 0,
+        "habitat": true,
+        "foreignHull": 0.42,
+        "ownHull": 0.55,
+        "privacy": true
+      },
+      {
+        "kind": "anomaly",
+        "decision": 1,
+        "before": {
+          "a": 0,
+          "m": 2800,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":81,\"ala\":99,\"ara\":0,\"tuk\":68,\"etk\":10000}",
+          "p": 0
+        },
+        "after": {
+          "a": 240,
+          "m": 2800,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":81,\"ala\":99,\"ara\":0,\"tuk\":68,\"etk\":10000}",
+          "p": 0
+        },
+        "replay": "rejected"
+      },
+      {
+        "kind": "event",
+        "decision": 2,
+        "before": {
+          "a": 240,
+          "m": 2800,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":81,\"ala\":99,\"ara\":0,\"tuk\":68,\"etk\":10000}",
+          "p": 0
+        },
+        "after": {
+          "a": 500,
+          "m": 2650,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":81,\"ala\":99,\"ara\":0,\"tuk\":68,\"etk\":10000}",
+          "p": 0
+        },
+        "replay": "rejected"
+      },
+      {
+        "kind": "chain",
+        "decision": 3,
+        "before": {
+          "a": 500,
+          "m": 2650,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":81,\"ala\":99,\"ara\":0,\"tuk\":68,\"etk\":10000}",
+          "p": 0
+        },
+        "after": {
+          "a": 500,
+          "m": 2650,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":81,\"ala\":99,\"ara\":0,\"tuk\":68,\"etk\":10000}",
+          "p": 0
+        },
+        "replay": "rejected"
+      },
+      {
+        "CDecision": 1,
+        "CResearch": 180,
+        "BUnchanged": true
+      },
+      {
+        "repeatedFoundingPopups": 0,
+        "mirrors": 3
+      },
+      {
+        "shareEndedLiveRemoved": true,
+        "discoveryRetained": true
+      },
+      {
+        "routes": [
+          {
+            "role": "military",
+            "id": 4,
+            "path": [
+              7
+            ]
+          },
+          {
+            "role": "bilim",
+            "id": 5,
+            "path": [
+              7
+            ]
+          },
+          {
+            "role": "koloni",
+            "id": 6,
+            "path": [
+              7
+            ]
+          },
+          {
+            "role": "insaat",
+            "id": 26,
+            "path": [
+              7
+            ]
+          }
+        ]
+      },
+      {
+        "motion": [
+          {
+            "x": 3522.519970560376,
+            "y": 1986.17692325102,
+            "actualX": 3589.510204082558,
+            "actualY": 2015.1896334672026
+          },
+          {
+            "x": 3524.551018283716,
+            "y": 1987.0565469802461,
+            "actualX": 3589.510204082558,
+            "actualY": 2015.1896334672026
+          },
+          {
+            "x": 3527.1217163715655,
+            "y": 1988.1698871606677,
+            "actualX": 3589.510204082558,
+            "actualY": 2015.1896334672026
+          },
+          {
+            "x": 3530.6834087562706,
+            "y": 1989.712415729439,
+            "actualX": 3589.510204082558,
+            "actualY": 2015.1896334672026
+          },
+          {
+            "x": 3532.5280318115842,
+            "y": 1990.5113010497028,
+            "actualX": 3589.510204082558,
+            "actualY": 2015.1896334672026
+          },
+          {
+            "x": 3533.7005448687673,
+            "y": 1991.0191031540419,
+            "actualX": 3589.510204082558,
+            "actualY": 2015.1896334672026
+          },
+          {
+            "x": 3535.530450186362,
+            "y": 1991.8116143890543,
+            "actualX": 3589.510204082558,
+            "actualY": 2015.1896334672026
+          },
+          {
+            "x": 3540.181255121332,
+            "y": 1993.8258252486955,
+            "actualX": 3589.510204082558,
+            "actualY": 2015.1896334672026
+          },
+          {
+            "x": 3542.1681496344395,
+            "y": 1994.686326723434,
+            "actualX": 3589.510204082558,
+            "actualY": 2015.1896334672026
+          },
+          {
+            "x": 3544.007866776206,
+            "y": 1995.483087348192,
+            "actualX": 3589.510204082558,
+            "actualY": 2015.1896334672026
+          },
+          {
+            "x": 3545.823054356082,
+            "y": 1996.2692244979528,
+            "actualX": 3589.510204082558,
+            "actualY": 2015.1896334672026
+          },
+          {
+            "x": 3549.3798408301636,
+            "y": 1997.8096283724847,
+            "actualX": 3589.510204082558,
+            "actualY": 2015.1896334672026
+          },
+          {
+            "x": 3552.6668021234523,
+            "y": 1999.233174022052,
+            "actualX": 3589.510204082558,
+            "actualY": 2015.1896334672026
+          },
+          {
+            "x": 3554.084610799537,
+            "y": 1999.847210876359,
+            "actualX": 3589.510204082558,
+            "actualY": 2015.1896334672026
+          },
+          {
+            "x": 3556.306989107376,
+            "y": 2000.8096977113196,
+            "actualX": 3589.510204082558,
+            "actualY": 2015.1896334672026
+          },
+          {
+            "x": 3559.4909262424803,
+            "y": 2002.1886247666605,
+            "actualX": 3589.510204082558,
+            "actualY": 2015.1896334672026
+          },
+          {
+            "x": 3561.026476814469,
+            "y": 2002.8536543004452,
+            "actualX": 3589.510204082558,
+            "actualY": 2015.1896334672026
+          },
+          {
+            "x": 3562.758263884503,
+            "y": 2003.6036716354706,
+            "actualX": 3589.510204082558,
+            "actualY": 2015.1896334672026
+          },
+          {
+            "x": 3564.9070535066708,
+            "y": 2004.534288045441,
+            "actualX": 3589.510204082558,
+            "actualY": 2015.1896334672026
+          },
+          {
+            "x": 3566.898853933326,
+            "y": 2005.3969142156855,
+            "actualX": 3589.510204082558,
+            "actualY": 2015.1896334672026
+          },
+          {
+            "x": 3571.809672221993,
+            "y": 2007.5237339092791,
+            "actualX": 3589.510204082558,
+            "actualY": 2015.1896334672026
+          },
+          {
+            "x": 3574.7777492107093,
+            "y": 2008.8091743838884,
+            "actualX": 3589.510204082558,
+            "actualY": 2015.1896334672026
+          },
+          {
+            "x": 3579.399118670241,
+            "y": 2010.810637073027,
+            "actualX": 3589.510204082558,
+            "actualY": 2015.1896334672026
+          },
+          {
+            "x": 3580.7825859631885,
+            "y": 2011.409801063858,
+            "actualX": 3589.510204082558,
+            "actualY": 2015.1896334672026
+          },
+          {
+            "x": 3583.7800984244186,
+            "y": 2012.7079897077035,
+            "actualX": 3589.510204082558,
+            "actualY": 2015.1896334672026
+          },
+          {
+            "x": 3588.5878925549014,
+            "y": 2014.7901908070708,
+            "actualX": 3589.510204082558,
+            "actualY": 2015.1896334672026
+          },
+          {
+            "x": 3589.510204082558,
+            "y": 2015.1896334672026,
+            "actualX": 3589.510204082558,
+            "actualY": 2015.1896334672026
+          },
+          {
+            "x": 3590.082713650306,
+            "y": 2015.4375808665732,
+            "actualX": 3669.7177722720753,
+            "actualY": 2049.92662139331
+          },
+          {
+            "x": 3598.2256399222783,
+            "y": 2018.9641898634243,
+            "actualX": 3669.7177722720753,
+            "actualY": 2049.92662139331
+          },
+          {
+            "x": 3605.8216150863295,
+            "y": 2022.253920539926,
+            "actualX": 3669.7177722720753,
+            "actualY": 2049.92662139331
+          }
+        ]
+      },
+      {
+        "reconnect": true
+      }
+    ]
+  },
+  "pass": 11,
+  "fail": 0
+}

@@ -1,0 +1,27 @@
+[
+  {
+    "name": "800x360 MPP0 çoklu kart seçenekleri çakışmaz",
+    "status": "PASS",
+    "data": {
+      "button": [
+        62,
+        89,
+        370,
+        55
+      ],
+      "options": [
+        57,
+        84,
+        380,
+        172
+      ],
+      "action": "noteChoice",
+      "value": "1:0"
+    }
+  },
+  {
+    "name": "JavaScript errors",
+    "status": "PASS",
+    "errors": []
+  }
+]

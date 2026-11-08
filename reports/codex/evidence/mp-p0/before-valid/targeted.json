@@ -1,0 +1,27 @@
+[
+  {
+    "name": "katılımcı müttefik yerel sensörünü alır, üçüncü taraf zincir görüşünü almaz",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert(h.run('ctx.visible.has(sid)'))\n\n    at /workspace/Star/tests/mp_p0_guest_test.cjs:5:429\n    at test (/workspace/Star/tests/mp_p0_guest_test.cjs:4:28)\n    at Object.<anonymous> (/workspace/Star/tests/mp_p0_guest_test.cjs:5:1)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n    at Module.load (node:internal/modules/cjs/loader:1651:32)\n    at Module._load (node:internal/modules/cjs/loader:1443:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47"
+  },
+  {
+    "name": "katılımcı taranmış uygun gezegen için harita işaretini alır; gizli sistem açıklanmaz",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert(h.run('m.emps[0].mapHabitats?.[G.emps[1].home]?.mask&1'))\n\n    at /workspace/Star/tests/mp_p0_guest_test.cjs:6:278\n    at test (/workspace/Star/tests/mp_p0_guest_test.cjs:4:28)\n    at Object.<anonymous> (/workspace/Star/tests/mp_p0_guest_test.cjs:6:1)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n    at Module.load (node:internal/modules/cjs/loader:1651:32)\n    at Module._load (node:internal/modules/cjs/loader:1443:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47"
+  },
+  {
+    "name": "görünen yabancı askeri filo gövde oranı sonlu, özel stok ve emirler taşınmaz",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ undefined\n- 0.42\n\n    at /workspace/Star/tests/mp_p0_guest_test.cjs:7:310\n    at test (/workspace/Star/tests/mp_p0_guest_test.cjs:4:28)\n    at Object.<anonymous> (/workspace/Star/tests/mp_p0_guest_test.cjs:7:1)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n    at Module.load (node:internal/modules/cjs/loader:1651:32)\n    at Module._load (node:internal/modules/cjs/loader:1443:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47"
+  },
+  {
+    "name": "bilim gemisinin anomalisi host yerine kendi insan devletinin karar deposuna yazılır",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert(h.run('G.emps[1].decisions?.pending?.some(n=>n.kind===\"anomaly\")'))\n\n    at /workspace/Star/tests/mp_p0_guest_test.cjs:8:264\n    at test (/workspace/Star/tests/mp_p0_guest_test.cjs:4:28)\n    at Object.<anonymous> (/workspace/Star/tests/mp_p0_guest_test.cjs:8:1)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n    at Module.load (node:internal/modules/cjs/loader:1651:32)\n    at Module._load (node:internal/modules/cjs/loader:1443:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47"
+  },
+  {
+    "name": "kuruluş sonucu aynı mirror yenilenmesinde yeniden kart üretmez",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n1 !== 0\n\n    at /workspace/Star/tests/mp_p0_guest_test.cjs:9:596\n    at test (/workspace/Star/tests/mp_p0_guest_test.cjs:4:28)\n    at Object.<anonymous> (/workspace/Star/tests/mp_p0_guest_test.cjs:9:1)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n    at Module.load (node:internal/modules/cjs/loader:1651:32)\n    at Module._load (node:internal/modules/cjs/loader:1443:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47"
+  }
+]

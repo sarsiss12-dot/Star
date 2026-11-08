@@ -1,0 +1,18 @@
+PASS UID mirror sonrası değişse de sonuçlanmış federasyon savunma/izin kartı yeniden aktif kalmaz
+PASS farklı yeni bekleyen event kartı korunur; çizmek karar/RNG veya kaynak tüketmez
+FAIL kart UID korunup kayıt UID değişince hızlı karar bağı tam anahtarla bulunur
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+undefined !== 1
+
+    at /workspace/Star/tests/mp_p0_notice_test.cjs:6:342
+    at test (/workspace/Star/tests/mp_p0_notice_test.cjs:2:119)
+    at Object.<anonymous> (/workspace/Star/tests/mp_p0_notice_test.cjs:6:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+GEÇEN: 2 KALAN: 1

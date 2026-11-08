@@ -1,0 +1,6 @@
+{"name": "mp74-stable", "command": "node tests/browser-mp74.cjs", "env": {}, "exit": 0, "seconds": 52.47}
+{"name": "mp8-R-stable", "command": "node tests/browser-mp8.cjs", "env": {"MP8_SCEN": "R", "MP8_MONTHS": "6", "MPP0_R": "1", "FEDFOUND0_R": "1"}, "exit": 1, "seconds": 88.27}
+{"name": "mp73-stable", "command": "node tests/browser-mp73.cjs", "env": {"MPP0": "1", "FEDFOUND0": "1", "FEDFOUND0_THREE": "1", "MPP0_REVERSE": "1"}, "exit": 0, "seconds": 142.15}
+{"name": "desktop-stable", "command": "node tests/browser-mp73.cjs", "env": {"MPP0": "1", "MPP0_DESKTOP": "1", "MP73_ONLY": "A1 |B1 |P0 |sayfa"}, "exit": 0, "seconds": 122.27}
+{"name": "mp75-stable", "command": "node tests/browser-mp75.cjs", "env": {}, "exit": 0, "seconds": 40.33}
+{"name": "sp-ui-stable", "command": "node tests/browser-beta-fed-found0-events.cjs", "env": {}, "exit": 1, "seconds": 26.06}

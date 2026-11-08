@@ -1,0 +1,113 @@
+{
+  "url": "/",
+  "vote": null,
+  "inbox": [
+    {
+      "kind": "anomaly",
+      "data": {
+        "a": {
+          "id": "a7",
+          "k": "dogal",
+          "n": "Boşluk Balinası İskeleti",
+          "t": "Kilometrelerce uzunlukta, uzayda yüzerek ölmüş bir canlının kalıntısı.",
+          "ch": [
+            {
+              "t": "Kemik yapısını incele",
+              "d": "+240 araştırma"
+            },
+            {
+              "t": "Cesedi hasat et",
+              "d": "+200 yiyecek, +90 mineral"
+            }
+          ]
+        },
+        "sys": {
+          "id": 13,
+          "x": 2652.866268449046,
+          "y": 2490.7690478997433,
+          "name": "Belven",
+          "star": {
+            "n": "K Turuncu",
+            "c": "#ffab5c",
+            "r": 5,
+            "w": 22
+          },
+          "planets": [
+            {
+              "i": 0,
+              "t": "alp",
+              "dep": "jeotermal",
+              "sz": 13,
+              "seed": 1706,
+              "owner": -1,
+              "col": null,
+              "name": "Belven I"
+            },
+            {
+              "i": 1,
+              "t": "sul",
+              "dep": "zengin_maden",
+              "sz": 12,
+              "seed": 1723,
+              "owner": -1,
+              "col": null,
+              "name": "Belven II"
+            },
+            {
+              "i": 2,
+              "t": "tok",
+              "dep": null,
+              "sz": 19,
+              "seed": 1740,
+              "owner": -1,
+              "col": null,
+              "name": "Belven III"
+            },
+            {
+              "i": 3,
+              "t": "gay",
+              "dep": null,
+              "sz": 16,
+              "seed": 1757,
+              "owner": -1,
+              "col": null,
+              "name": "Belven IV",
+              "lux": "filiz"
+            }
+          ],
+          "lanes": [
+            0,
+            8,
+            17
+          ],
+          "owner": -1,
+          "surv": [
+            0
+          ],
+          "seen": [
+            0
+          ],
+          "def": 0,
+          "queue": [],
+          "anom": false,
+          "pulsar": false,
+          "nebulaS": true,
+          "anomK": "dogal",
+          "_reach": 0,
+          "_shat": false,
+          "cr": 0
+        }
+      },
+      "ico": "🔬",
+      "cls": "sci",
+      "pause": true,
+      "title": "Anomali — Belven",
+      "sub": "Boşluk Balinası İskeleti",
+      "key": "an:13",
+      "uid": 2,
+      "born": 103.44820000000051
+    }
+  ],
+  "modal": "",
+  "pane": ""
+}

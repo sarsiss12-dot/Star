@@ -1,0 +1,7 @@
+{
+  "url": "/mp/play",
+  "vote": null,
+  "inbox": [],
+  "modal": "",
+  "pane": "<div class=\"dpBox\">\n      <div class=\"dpHd\"><span>🌐 GALAKTİK KONSEY</span>\n        <button class=\"riX\" data-a=\"closeDiplo\">✕</button></div>\n      <div class=\"dpBody\"><div class=\"envRow\"><span>DURUM</span><b style=\"color:#7d90ad\">KONSEY YOK</b></div><div class=\"mini\" style=\"margin-bottom:10px\">Galaktik Konsey, tüm galaksiyi bağlayan\n        kararlar alan bir meclistir: silahsızlanma, serbest ticaret, yaptırım, savaş yasağı.\n        Yalnızca <b>Pasifist 2 veya üstü</b> bir devlet kurabilir — barışı savunanlar masayı kurar.</div><div class=\"row\"><span>Senin askerî duruşun</span>\n        <b style=\"color:#ff5f6d\">DENGELİ</b></div><div class=\"row\"><span>Kuruluş bedeli</span><b>350 ◈</b></div><div class=\"row\"><span>Etkin</span><b>10.0K ◈</b></div><div class=\"mini\" style=\"color:#ff9b3d\">Konseyi yalnızca Pasifist 2 veya üstü bir devlet kurabilir.</div><div class=\"act2\"><button class=\"abtn dis\" data-a=\"cncFound\">\n        🌐 KONSEYİ KUR</button></div><div class=\"mini\" style=\"margin-top:8px\">Kurulduğunda barış hâlindeki tüm tanıdıkların\n        kurucu üye olur. İdeolojini Pasifist'e çekmek için DEVLET panelindeki reformu kullanabilirsin.</div></div></div>"
+}

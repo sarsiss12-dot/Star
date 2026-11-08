@@ -1,0 +1,168 @@
+{
+  "url": "/",
+  "vote": null,
+  "inbox": [
+    {
+      "kind": "anomaly",
+      "data": {
+        "a": {
+          "id": "a3",
+          "k": "sinyal",
+          "n": "Sessiz Sinyal",
+          "t": "Gezegenin çekirdeğinden ritmik bir darbe geliyor. Hiçbir dile benzemiyor.",
+          "ch": [
+            {
+              "t": "Sinyali yanıtla",
+              "d": "Riskli: bilinmeyen sonuç",
+              "uncertain": true
+            },
+            {
+              "t": "Kayıt al ve uzaklaş",
+              "d": "+90 araştırma"
+            }
+          ]
+        },
+        "sys": {
+          "id": 36,
+          "x": 3427.902787093479,
+          "y": 1703.9642907589105,
+          "name": "Ulvonex-25",
+          "star": {
+            "n": "M Kırmızı Cüce",
+            "c": "#ff7b5c",
+            "r": 4.5,
+            "w": 30
+          },
+          "planets": [
+            {
+              "i": 0,
+              "t": "tok",
+              "dep": null,
+              "sz": 11,
+              "seed": 4719,
+              "owner": -1,
+              "col": null,
+              "name": "Ulvonex-25 I"
+            },
+            {
+              "i": 1,
+              "t": "col",
+              "dep": null,
+              "sz": 13,
+              "seed": 4736,
+              "owner": -1,
+              "col": null,
+              "name": "Ulvonex-25 II"
+            }
+          ],
+          "lanes": [
+            14,
+            24,
+            39
+          ],
+          "owner": -1,
+          "surv": [
+            0
+          ],
+          "seen": [
+            0
+          ],
+          "def": 0,
+          "queue": [],
+          "anom": false,
+          "pulsar": false,
+          "nebulaS": false,
+          "anomK": "sinyal",
+          "_reach": 0,
+          "_shat": false,
+          "cr": 0
+        }
+      },
+      "ico": "🔬",
+      "cls": "sci",
+      "pause": true,
+      "title": "Anomali — Ulvonex-25",
+      "sub": "Sessiz Sinyal",
+      "key": "an:36",
+      "uid": 2,
+      "born": 33.591752000000014
+    },
+    {
+      "kind": "anomaly",
+      "data": {
+        "a": {
+          "id": "a14",
+          "k": "kalinti",
+          "n": "Mühürlü Lahit",
+          "t": "Asteroidin göbeğine oyulmuş, dışarıdan mühürlenmiş bir oda. Mühürler İÇERİDEN değil, dışarıdan vurulmuş.",
+          "ch": [
+            {
+              "t": "Mührü kırma, uzaktan tara",
+              "d": "+140 araştırma · güvenli"
+            },
+            {
+              "t": "Mührü kır",
+              "d": "+700 mineral · TEHLİKELİ"
+            }
+          ]
+        },
+        "sys": {
+          "id": 39,
+          "x": 3195.489406165914,
+          "y": 2004.5164491143537,
+          "name": "Hydkar",
+          "star": {
+            "n": "K Turuncu",
+            "c": "#ffab5c",
+            "r": 5,
+            "w": 22
+          },
+          "planets": [
+            {
+              "i": 0,
+              "t": "tro",
+              "dep": null,
+              "sz": 14,
+              "seed": 5112,
+              "owner": -1,
+              "col": null,
+              "name": "Hydkar I"
+            }
+          ],
+          "lanes": [
+            12,
+            14,
+            24,
+            36
+          ],
+          "owner": -1,
+          "surv": [
+            0
+          ],
+          "seen": [
+            0
+          ],
+          "def": 0,
+          "queue": [],
+          "anom": false,
+          "pulsar": false,
+          "nebulaS": false,
+          "anomK": "kalinti",
+          "_reach": 0,
+          "_shat": false,
+          "cr": 0
+        }
+      },
+      "ico": "🔬",
+      "cls": "sci",
+      "pause": true,
+      "title": "Anomali — Hydkar",
+      "sub": "Mühürlü Lahit",
+      "key": "an:39",
+      "uid": 3,
+      "born": 66.58551200000072
+    }
+  ],
+  "modal": "",
+  "pane": ""
+}

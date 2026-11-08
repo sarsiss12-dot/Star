@@ -1,0 +1,358 @@
+[
+  {
+    "name": "800x360 ayrı seçenek hedefi / aç-kapat RNG ve hız / başlık normal pencere",
+    "status": "PASS",
+    "data": {
+      "trusted": "touch",
+      "fullWindow": true,
+      "once": true
+    }
+  },
+  {
+    "name": "800x360 event gerçek hızlı seçim / etkiler / çift karar engeli",
+    "status": "PASS",
+    "data": {
+      "before": {
+        "ara": 520,
+        "min": 1000,
+        "rng": -951432214,
+        "chain": 0,
+        "day": 155.67336000000412
+      },
+      "after": {
+        "ara": 780,
+        "min": 850,
+        "rng": -951432214,
+        "chain": [],
+        "notes": 0
+      }
+    }
+  },
+  {
+    "name": "800x360 anomaly gerçek hızlı seçim / etkiler / çift karar engeli",
+    "status": "PASS",
+    "data": {
+      "before": {
+        "ara": 520,
+        "min": 1000,
+        "rng": -951432214,
+        "chain": 0,
+        "day": 155.67336000000412
+      },
+      "after": {
+        "ara": 700,
+        "min": 1000,
+        "rng": -951432214,
+        "chain": [],
+        "notes": 0
+      }
+    }
+  },
+  {
+    "name": "800x360 chain gerçek hızlı seçim / etkiler / çift karar engeli",
+    "status": "PASS",
+    "data": {
+      "before": {
+        "ara": 520,
+        "min": 1000,
+        "rng": -951432214,
+        "chain": 0,
+        "day": 155.67336000000412
+      },
+      "after": {
+        "ara": 520,
+        "min": 1000,
+        "rng": 880133599,
+        "chain": [
+          {
+            "id": "hayalet2a",
+            "at": 299.6733600000041
+          }
+        ],
+        "notes": 0
+      }
+    }
+  },
+  {
+    "name": "800x360 kartı kaydır / durum listesinden geri aç / eski Save8 ve bekleyen not",
+    "status": "PASS",
+    "data": {
+      "pendingSurvives": true,
+      "hiddenSurvives": true
+    }
+  },
+  {
+    "name": "960x540 ayrı seçenek hedefi / aç-kapat RNG ve hız / başlık normal pencere",
+    "status": "PASS",
+    "data": {
+      "trusted": "touch",
+      "fullWindow": true,
+      "once": true
+    }
+  },
+  {
+    "name": "960x540 event gerçek hızlı seçim / etkiler / çift karar engeli",
+    "status": "PASS",
+    "data": {
+      "before": {
+        "ara": 520,
+        "min": 1000,
+        "rng": -951432214,
+        "chain": 0,
+        "day": 155.67336000000412
+      },
+      "after": {
+        "ara": 780,
+        "min": 850,
+        "rng": -951432214,
+        "chain": [],
+        "notes": 0
+      }
+    }
+  },
+  {
+    "name": "960x540 anomaly gerçek hızlı seçim / etkiler / çift karar engeli",
+    "status": "PASS",
+    "data": {
+      "before": {
+        "ara": 520,
+        "min": 1000,
+        "rng": -951432214,
+        "chain": 0,
+        "day": 155.67336000000412
+      },
+      "after": {
+        "ara": 700,
+        "min": 1000,
+        "rng": -951432214,
+        "chain": [],
+        "notes": 0
+      }
+    }
+  },
+  {
+    "name": "960x540 chain gerçek hızlı seçim / etkiler / çift karar engeli",
+    "status": "PASS",
+    "data": {
+      "before": {
+        "ara": 520,
+        "min": 1000,
+        "rng": -951432214,
+        "chain": 0,
+        "day": 155.67336000000412
+      },
+      "after": {
+        "ara": 520,
+        "min": 1000,
+        "rng": 880133599,
+        "chain": [
+          {
+            "id": "hayalet2a",
+            "at": 299.6733600000041
+          }
+        ],
+        "notes": 0
+      }
+    }
+  },
+  {
+    "name": "960x540 kartı kaydır / durum listesinden geri aç / eski Save8 ve bekleyen not",
+    "status": "PASS",
+    "data": {
+      "pendingSurvives": true,
+      "hiddenSurvives": true
+    }
+  },
+  {
+    "name": "960x540 event iki gerçek hızlı dokunma tek kaynak işlemi",
+    "status": "PASS",
+    "data": {
+      "trustedTouches": 2,
+      "mineral": 150,
+      "research": 260,
+      "applied": 1
+    }
+  },
+  {
+    "name": "960x540 SP seçilen iki AI, üçüncü uygun AI dışarıda ve tek son onay",
+    "status": "PASS",
+    "data": {
+      "selected": [
+        1,
+        2
+      ],
+      "excluded": 4,
+      "realAIConsent": true,
+      "cost": 220
+    }
+  },
+  {
+    "name": "915x412 ayrı seçenek hedefi / aç-kapat RNG ve hız / başlık normal pencere",
+    "status": "PASS",
+    "data": {
+      "trusted": "touch",
+      "fullWindow": true,
+      "once": true
+    }
+  },
+  {
+    "name": "915x412 event gerçek hızlı seçim / etkiler / çift karar engeli",
+    "status": "PASS",
+    "data": {
+      "before": {
+        "ara": 520,
+        "min": 1000,
+        "rng": -951432214,
+        "chain": 0,
+        "day": 155.67336000000412
+      },
+      "after": {
+        "ara": 780,
+        "min": 850,
+        "rng": -951432214,
+        "chain": [],
+        "notes": 0
+      }
+    }
+  },
+  {
+    "name": "915x412 anomaly gerçek hızlı seçim / etkiler / çift karar engeli",
+    "status": "PASS",
+    "data": {
+      "before": {
+        "ara": 520,
+        "min": 1000,
+        "rng": -951432214,
+        "chain": 0,
+        "day": 155.67336000000412
+      },
+      "after": {
+        "ara": 700,
+        "min": 1000,
+        "rng": -951432214,
+        "chain": [],
+        "notes": 0
+      }
+    }
+  },
+  {
+    "name": "915x412 chain gerçek hızlı seçim / etkiler / çift karar engeli",
+    "status": "PASS",
+    "data": {
+      "before": {
+        "ara": 520,
+        "min": 1000,
+        "rng": -951432214,
+        "chain": 0,
+        "day": 155.67336000000412
+      },
+      "after": {
+        "ara": 520,
+        "min": 1000,
+        "rng": 880133599,
+        "chain": [
+          {
+            "id": "hayalet2a",
+            "at": 299.6733600000041
+          }
+        ],
+        "notes": 0
+      }
+    }
+  },
+  {
+    "name": "915x412 kartı kaydır / durum listesinden geri aç / eski Save8 ve bekleyen not",
+    "status": "PASS",
+    "data": {
+      "pendingSurvives": true,
+      "hiddenSurvives": true
+    }
+  },
+  {
+    "name": "1920x1080 ayrı seçenek hedefi / aç-kapat RNG ve hız / başlık normal pencere",
+    "status": "PASS",
+    "data": {
+      "trusted": "mouse",
+      "fullWindow": true,
+      "once": true
+    }
+  },
+  {
+    "name": "1920x1080 event gerçek hızlı seçim / etkiler / çift karar engeli",
+    "status": "PASS",
+    "data": {
+      "before": {
+        "ara": 520,
+        "min": 1000,
+        "rng": -951432214,
+        "chain": 0,
+        "day": 155.67336000000412
+      },
+      "after": {
+        "ara": 780,
+        "min": 850,
+        "rng": -951432214,
+        "chain": [],
+        "notes": 0
+      }
+    }
+  },
+  {
+    "name": "1920x1080 anomaly gerçek hızlı seçim / etkiler / çift karar engeli",
+    "status": "PASS",
+    "data": {
+      "before": {
+        "ara": 520,
+        "min": 1000,
+        "rng": -951432214,
+        "chain": 0,
+        "day": 155.67336000000412
+      },
+      "after": {
+        "ara": 700,
+        "min": 1000,
+        "rng": -951432214,
+        "chain": [],
+        "notes": 0
+      }
+    }
+  },
+  {
+    "name": "1920x1080 chain gerçek hızlı seçim / etkiler / çift karar engeli",
+    "status": "PASS",
+    "data": {
+      "before": {
+        "ara": 520,
+        "min": 1000,
+        "rng": -951432214,
+        "chain": 0,
+        "day": 155.67336000000412
+      },
+      "after": {
+        "ara": 520,
+        "min": 1000,
+        "rng": 880133599,
+        "chain": [
+          {
+            "id": "hayalet2a",
+            "at": 299.6733600000041
+          }
+        ],
+        "notes": 0
+      }
+    }
+  },
+  {
+    "name": "1920x1080 kartı kaydır / durum listesinden geri aç / eski Save8 ve bekleyen not",
+    "status": "PASS",
+    "data": {
+      "pendingSurvives": true,
+      "hiddenSurvives": true
+    }
+  },
+  {
+    "name": "JavaScript errors",
+    "status": "PASS",
+    "errors": []
+  }
+]

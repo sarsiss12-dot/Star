@@ -1,0 +1,13 @@
+PASS A1 rehber 1–8: oda, iki farklı devlet, hazır, başlat; iki ekranda galaksi; sürüm işareti lobi / başlangıç / MP çubuğunda ve /mp/version oyun build'iyle aynı
+PASS B1 konsey motorun kendi yoluyla kurulur (fikstür: temas); AI insanlar adına oy / sponsor yazmaz; B gerçek "KONSEY OYLAMASI" kartından Konsey ekranını açar ve EVET (dokunma) → host kaydeder, oylama açık kalır
+FAIL P0 katılımcı görüş, sağlık, özel kararlar, rota ve görsel hareket
+page.evaluate: Error: missing real fleet role insaat
+    at eval (eval at evaluate (:311:30), <anonymous>:1:175)
+    at UtilityScript.evaluate (<anonymous>:313:16)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+    at module.exports (/workspace/Star/tests/helpers/mp-p0-guest-browser.cjs:50:20)
+    at async /workspace/Star/tests/browser-mp73.cjs:248:129
+    at async test (/workspace/Star/tests/browser-mp73.cjs:13:7)
+    at async /workspace/Star/tests/browser-mp73.cjs:248:29
+PASS sayfa hataları yok
+GEÇEN: 3 KALAN: 1

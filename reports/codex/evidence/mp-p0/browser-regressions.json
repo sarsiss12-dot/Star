@@ -1,0 +1,55 @@
+[
+  {
+    "name": "desktop-accepted",
+    "command": "node tests/browser-mp73.cjs",
+    "env": {
+      "MPP0": "1",
+      "MPP0_DESKTOP": "1",
+      "MP73_ONLY": "A1 |B1 |P0 |sayfa"
+    },
+    "exit": 0,
+    "seconds": 100.09
+  },
+  {
+    "name": "mp74",
+    "command": "node tests/browser-mp74.cjs",
+    "env": {},
+    "exit": 1,
+    "seconds": 80.91
+  },
+  {
+    "name": "mp75",
+    "command": "node tests/browser-mp75.cjs",
+    "env": {},
+    "exit": 0,
+    "seconds": 29.48
+  },
+  {
+    "name": "mp8-N",
+    "command": "node tests/browser-mp8.cjs",
+    "env": {
+      "MP8_SCEN": "N"
+    },
+    "exit": 0,
+    "seconds": 120.09
+  },
+  {
+    "name": "mp8-R",
+    "command": "node tests/browser-mp8.cjs",
+    "env": {
+      "MP8_SCEN": "R",
+      "MP8_MONTHS": "6",
+      "MPP0_R": "1",
+      "FEDFOUND0_R": "1"
+    },
+    "exit": 1,
+    "seconds": 73.02
+  },
+  {
+    "name": "sp-ui",
+    "command": "node tests/browser-beta-fed-found0-events.cjs",
+    "env": {},
+    "exit": 0,
+    "seconds": 26.1
+  }
+]

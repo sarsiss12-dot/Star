@@ -1,0 +1,1014 @@
+{
+  "sys": [
+    {
+      "id": 3,
+      "x": 2278.5039821916525,
+      "y": 3694.1551081633907,
+      "name": "Ithenar-53",
+      "star": {
+        "n": "F Beyaz-Sarı",
+        "c": "#fff6e0",
+        "r": 6,
+        "w": 12
+      },
+      "planets": [
+        {
+          "i": 0,
+          "t": "oky",
+          "dep": null,
+          "sz": 11,
+          "seed": 396,
+          "owner": -1,
+          "col": null,
+          "name": "Ithenar-53 I",
+          "lux": "kristal"
+        },
+        {
+          "i": 1,
+          "t": "kut",
+          "dep": "jeotermal",
+          "sz": 20,
+          "seed": 413,
+          "owner": -1,
+          "col": null,
+          "name": "Ithenar-53 II"
+        },
+        {
+          "i": 2,
+          "t": "vol",
+          "dep": "ergi_kaynagi",
+          "sz": 15,
+          "seed": 430,
+          "owner": -1,
+          "col": null,
+          "name": "Ithenar-53 III"
+        },
+        {
+          "i": 3,
+          "t": "sul",
+          "dep": "jeotermal",
+          "sz": 17,
+          "seed": 447,
+          "owner": -1,
+          "col": null,
+          "name": "Ithenar-53 IV",
+          "lux": "zerrin"
+        },
+        {
+          "i": 4,
+          "t": "buz",
+          "dep": null,
+          "sz": 12,
+          "seed": 464,
+          "owner": -1,
+          "col": null,
+          "name": "Ithenar-53 V"
+        }
+      ],
+      "lanes": [
+        36,
+        24,
+        13
+      ],
+      "owner": -1,
+      "surv": [],
+      "seen": [
+        0
+      ],
+      "def": 0,
+      "queue": [],
+      "anom": true,
+      "pulsar": false,
+      "nebulaS": false,
+      "anomK": "sinyal",
+      "_reach": 0,
+      "_shat": false
+    },
+    {
+      "id": 5,
+      "x": 2893.1454587350368,
+      "y": 2806.0703289814464,
+      "name": "Drakrim",
+      "star": {
+        "n": "G Sarı",
+        "c": "#ffe9a8",
+        "r": 5.5,
+        "w": 20
+      },
+      "planets": [
+        {
+          "i": 0,
+          "t": "cor",
+          "dep": null,
+          "sz": 11,
+          "seed": 658,
+          "owner": -1,
+          "col": null,
+          "name": "Drakrim I"
+        },
+        {
+          "i": 1,
+          "t": "cor",
+          "dep": "nadir",
+          "sz": 19,
+          "seed": 675,
+          "owner": -1,
+          "col": null,
+          "name": "Drakrim II"
+        },
+        {
+          "i": 2,
+          "t": "tok",
+          "dep": "ergi_kaynagi",
+          "sz": 15,
+          "seed": 692,
+          "owner": -1,
+          "col": null,
+          "name": "Drakrim III"
+        },
+        {
+          "i": 3,
+          "t": "tok",
+          "dep": "nadir",
+          "sz": 18,
+          "seed": 709,
+          "owner": -1,
+          "col": null,
+          "name": "Drakrim IV"
+        }
+      ],
+      "lanes": [
+        32,
+        15,
+        13
+      ],
+      "owner": -1,
+      "surv": [],
+      "seen": [
+        0
+      ],
+      "def": 0,
+      "queue": [],
+      "anom": true,
+      "pulsar": false,
+      "nebulaS": false,
+      "anomK": "dogal",
+      "_reach": 0,
+      "_shat": false
+    },
+    {
+      "id": 13,
+      "x": 2718.0791670919307,
+      "y": 3386.9787217531975,
+      "name": "Verran",
+      "star": {
+        "n": "F Beyaz-Sarı",
+        "c": "#fff6e0",
+        "r": 6,
+        "w": 12
+      },
+      "planets": [
+        {
+          "i": 0,
+          "t": "kur",
+          "dep": "bereket",
+          "sz": 18,
+          "seed": 1706,
+          "owner": 0,
+          "col": {
+            "pop": 12,
+            "stab": 60,
+            "grow": 0,
+            "b": {
+              "maden": 2,
+              "santral": 2,
+              "ciftlik": 2,
+              "lab": 1,
+              "dokum": 1,
+              "fabrika": 2,
+              "tersane": 1,
+              "kale": 1,
+              "liman": 0
+            },
+            "cap": 16,
+            "name": "Verran I",
+            "f": "yonetim",
+            "fcd": 0
+          },
+          "name": "Verran I",
+          "shareRev": 1
+        },
+        {
+          "i": 1,
+          "t": "col",
+          "dep": "bereket",
+          "sz": 20,
+          "seed": 1723,
+          "owner": -1,
+          "col": null,
+          "name": "Verran II",
+          "lux": "ozsu"
+        }
+      ],
+      "lanes": [
+        5,
+        32,
+        24,
+        3
+      ],
+      "owner": 0,
+      "surv": [
+        0
+      ],
+      "seen": [
+        0
+      ],
+      "def": 270,
+      "queue": [],
+      "anom": false,
+      "pulsar": false,
+      "nebulaS": false,
+      "anomK": "kalinti",
+      "shareRev": 1,
+      "_reach": 572.3786375524262,
+      "cr": 0,
+      "_shat": false
+    },
+    {
+      "id": 14,
+      "x": 4162.898315102635,
+      "y": 2674.5751064890687,
+      "name": "Solulith-72",
+      "star": {
+        "n": "M Kırmızı Cüce",
+        "c": "#ff7b5c",
+        "r": 4.5,
+        "w": 30
+      },
+      "planets": [
+        {
+          "i": 0,
+          "t": "kut",
+          "dep": null,
+          "sz": 15,
+          "seed": 1837,
+          "owner": -1,
+          "col": null,
+          "name": "Solulith-72 I"
+        },
+        {
+          "i": 1,
+          "t": "col",
+          "dep": null,
+          "sz": 10,
+          "seed": 1854,
+          "owner": -1,
+          "col": null,
+          "name": "Solulith-72 II",
+          "lux": "filiz"
+        }
+      ],
+      "lanes": [
+        35,
+        23,
+        34,
+        26
+      ],
+      "owner": -1,
+      "surv": [],
+      "seen": [
+        1,
+        0
+      ],
+      "def": 0,
+      "queue": [],
+      "anom": true,
+      "pulsar": false,
+      "nebulaS": false,
+      "anomK": "megayapi",
+      "_reach": 0,
+      "_shat": false
+    },
+    {
+      "id": 18,
+      "x": 3261.3856098804945,
+      "y": 1679.3526689865482,
+      "name": "Draoovos-92",
+      "star": {
+        "n": "M Kırmızı Cüce",
+        "c": "#ff7b5c",
+        "r": 4.5,
+        "w": 30
+      },
+      "planets": [
+        {
+          "i": 0,
+          "t": "gay",
+          "dep": "bereket",
+          "sz": 18,
+          "seed": 2361,
+          "owner": -1,
+          "col": null,
+          "name": "Draoovos-92 I"
+        },
+        {
+          "i": 1,
+          "t": "ast",
+          "dep": null,
+          "sz": 0,
+          "seed": 2378,
+          "owner": -1,
+          "col": null,
+          "name": "Draoovos-92 II"
+        }
+      ],
+      "lanes": [
+        25,
+        20,
+        26
+      ],
+      "owner": -1,
+      "surv": [],
+      "seen": [
+        1,
+        0
+      ],
+      "def": 0,
+      "queue": [],
+      "anom": false,
+      "pulsar": false,
+      "nebulaS": false,
+      "anomK": "megayapi",
+      "_reach": 0
+    },
+    {
+      "id": 24,
+      "x": 2660.625575113372,
+      "y": 3765.880007166861,
+      "name": "Belrus",
+      "star": {
+        "n": "B Mavi",
+        "c": "#a9d4ff",
+        "r": 7.5,
+        "w": 4
+      },
+      "planets": [
+        {
+          "i": 0,
+          "t": "buz",
+          "dep": null,
+          "sz": 18,
+          "seed": 3147,
+          "owner": -1,
+          "col": null,
+          "name": "Belrus I"
+        },
+        {
+          "i": 1,
+          "t": "cor",
+          "dep": null,
+          "sz": 20,
+          "seed": 3164,
+          "owner": -1,
+          "col": null,
+          "name": "Belrus II"
+        },
+        {
+          "i": 2,
+          "t": "cor",
+          "dep": "zengin_maden",
+          "sz": 18,
+          "seed": 3181,
+          "owner": -1,
+          "col": null,
+          "name": "Belrus III"
+        },
+        {
+          "i": 3,
+          "t": "tok",
+          "dep": null,
+          "sz": 13,
+          "seed": 3198,
+          "owner": -1,
+          "col": null,
+          "name": "Belrus IV"
+        },
+        {
+          "i": 4,
+          "t": "ast",
+          "dep": null,
+          "sz": 0,
+          "seed": 3215,
+          "owner": -1,
+          "col": null,
+          "name": "Belrus V"
+        }
+      ],
+      "lanes": [
+        3,
+        13,
+        32
+      ],
+      "owner": -1,
+      "surv": [],
+      "seen": [
+        0
+      ],
+      "def": 0,
+      "queue": [],
+      "anom": false,
+      "pulsar": false,
+      "nebulaS": false,
+      "anomK": "sinyal",
+      "_reach": 0,
+      "_shat": false
+    },
+    {
+      "id": 25,
+      "x": 3749.1208479833094,
+      "y": 1965.2609229629768,
+      "name": "Elnar",
+      "star": {
+        "n": "M Kırmızı Cüce",
+        "c": "#ff7b5c",
+        "r": 4.5,
+        "w": 30
+      },
+      "planets": [
+        {
+          "i": 0,
+          "t": "vol",
+          "dep": "ergi_kaynagi",
+          "sz": 15,
+          "seed": 3278,
+          "owner": -1,
+          "col": null,
+          "name": "Elnar I"
+        },
+        {
+          "i": 1,
+          "t": "buz",
+          "dep": null,
+          "sz": 15,
+          "seed": 3295,
+          "owner": -1,
+          "col": null,
+          "name": "Elnar II"
+        },
+        {
+          "i": 2,
+          "t": "cor",
+          "dep": "nadir",
+          "sz": 17,
+          "seed": 3312,
+          "owner": -1,
+          "col": null,
+          "name": "Elnar III"
+        }
+      ],
+      "lanes": [
+        18,
+        35,
+        26
+      ],
+      "owner": -1,
+      "surv": [],
+      "seen": [
+        1,
+        0
+      ],
+      "def": 0,
+      "queue": [],
+      "anom": true,
+      "pulsar": false,
+      "nebulaS": false,
+      "anomK": "kalinti",
+      "_reach": 0
+    },
+    {
+      "id": 26,
+      "x": 3625.548223820101,
+      "y": 2384.842617587187,
+      "name": "Kalaepol",
+      "star": {
+        "n": "M Kırmızı Cüce",
+        "c": "#ff7b5c",
+        "r": 4.5,
+        "w": 30
+      },
+      "planets": [
+        {
+          "i": 0,
+          "t": "oky",
+          "dep": "bereket",
+          "sz": 18,
+          "seed": 3409,
+          "owner": 1,
+          "col": {
+            "pop": 12,
+            "stab": 60,
+            "grow": 0,
+            "b": {
+              "maden": 2,
+              "santral": 2,
+              "ciftlik": 2,
+              "lab": 1,
+              "dokum": 1,
+              "fabrika": 2,
+              "tersane": 1,
+              "kale": 0,
+              "liman": 0
+            },
+            "cap": 16,
+            "name": "Kalaepol I",
+            "f": "yonetim",
+            "fcd": 0,
+            "auto": false
+          },
+          "name": "Kalaepol I",
+          "lux": "ipek",
+          "shareRev": 1
+        },
+        {
+          "i": 1,
+          "t": "tok",
+          "dep": "ergi_kaynagi",
+          "sz": 17,
+          "seed": 3426,
+          "owner": -1,
+          "col": null,
+          "name": "Kalaepol II"
+        },
+        {
+          "i": 2,
+          "t": "gay",
+          "dep": "bereket",
+          "sz": 18,
+          "seed": 3409,
+          "owner": -1,
+          "col": null,
+          "name": "Kalaepol I",
+          "lux": "ipek",
+          "shareRev": 1,
+          "shattered": false
+        }
+      ],
+      "lanes": [
+        18,
+        25,
+        35,
+        14
+      ],
+      "owner": 1,
+      "surv": [
+        1
+      ],
+      "seen": [
+        1,
+        0
+      ],
+      "def": 0,
+      "queue": [],
+      "anom": false,
+      "pulsar": false,
+      "nebulaS": false,
+      "anomK": "dogal",
+      "shareRev": 1,
+      "_reach": 559.0866345916561,
+      "cr": 0,
+      "_shat": false
+    },
+    {
+      "id": 32,
+      "x": 3065.1759950692185,
+      "y": 3262.2510974359707,
+      "name": "Jorrus",
+      "star": {
+        "n": "B Mavi",
+        "c": "#a9d4ff",
+        "r": 7.5,
+        "w": 4
+      },
+      "planets": [
+        {
+          "i": 0,
+          "t": "tok",
+          "dep": null,
+          "sz": 18,
+          "seed": 4195,
+          "owner": -1,
+          "col": null,
+          "name": "Jorrus I"
+        },
+        {
+          "i": 1,
+          "t": "vol",
+          "dep": null,
+          "sz": 19,
+          "seed": 4212,
+          "owner": -1,
+          "col": null,
+          "name": "Jorrus II"
+        },
+        {
+          "i": 2,
+          "t": "tok",
+          "dep": "nadir",
+          "sz": 11,
+          "seed": 4229,
+          "owner": -1,
+          "col": null,
+          "name": "Jorrus III"
+        },
+        {
+          "i": 3,
+          "t": "ast",
+          "dep": null,
+          "sz": 0,
+          "seed": 4246,
+          "owner": -1,
+          "col": null,
+          "name": "Jorrus IV"
+        }
+      ],
+      "lanes": [
+        5,
+        13,
+        24
+      ],
+      "owner": -1,
+      "surv": [],
+      "seen": [
+        0
+      ],
+      "def": 0,
+      "queue": [],
+      "anom": true,
+      "pulsar": false,
+      "nebulaS": false,
+      "anomK": "megayapi",
+      "_reach": 0,
+      "_shat": false,
+      "cr": 0
+    },
+    {
+      "id": 35,
+      "x": 3961.0330812128714,
+      "y": 2259.2383421768855,
+      "name": "Quoran",
+      "star": {
+        "n": "K Turuncu",
+        "c": "#ffab5c",
+        "r": 5,
+        "w": 22
+      },
+      "planets": [
+        {
+          "i": 0,
+          "t": "buz",
+          "dep": "jeotermal",
+          "sz": 11,
+          "seed": 4588,
+          "owner": -1,
+          "col": null,
+          "name": "Quoran I"
+        },
+        {
+          "i": 1,
+          "t": "kur",
+          "dep": null,
+          "sz": 10,
+          "seed": 4605,
+          "owner": -1,
+          "col": null,
+          "name": "Quoran II",
+          "lux": "mercan"
+        },
+        {
+          "i": 2,
+          "t": "tok",
+          "dep": "zengin_maden",
+          "sz": 13,
+          "seed": 4622,
+          "owner": -1,
+          "col": null,
+          "name": "Quoran III"
+        }
+      ],
+      "lanes": [
+        14,
+        25,
+        26
+      ],
+      "owner": -1,
+      "surv": [],
+      "seen": [
+        1,
+        0
+      ],
+      "def": 0,
+      "queue": [],
+      "anom": true,
+      "pulsar": false,
+      "nebulaS": true,
+      "anomK": "megayapi",
+      "_reach": 0,
+      "cr": 0,
+      "_shat": false
+    }
+  ],
+  "inbox": [
+    {
+      "kind": "cncnew",
+      "data": 1,
+      "ico": "🌐",
+      "cls": "sci",
+      "pause": true,
+      "title": "GALAKTİK KONSEY KURULDU",
+      "sub": "Saf Akıl Ağı galaksiyi masaya çağırdı",
+      "key": "cncnew",
+      "uid": 1,
+      "born": 5.926200000000017
+    },
+    {
+      "kind": "cncvote",
+      "data": "ticaretStd",
+      "ico": "🌐",
+      "cls": "sci",
+      "pause": true,
+      "title": "KONSEY OYLAMASI",
+      "sub": "Evrensel Ticaret Standardı",
+      "key": "cnc5.926200000000017",
+      "uid": 2,
+      "born": 5.926200000000017
+    }
+  ],
+  "own": {
+    "id": 0,
+    "race": "klan",
+    "name": "Kızıl Muhafız",
+    "ai": false,
+    "col": "#d65cf5",
+    "traits": [],
+    "res": {
+      "min": 3000,
+      "ene": 2000,
+      "yiy": 180,
+      "ala": 220,
+      "ara": 0,
+      "tuk": 150,
+      "etk": 3000
+    },
+    "inc": {
+      "min": 3.336590000000001,
+      "ene": -19.462870000000002,
+      "yiy": 14.508005000000002,
+      "ala": 3.817571249999999,
+      "ara": 10.3872639,
+      "etk": 7.9725,
+      "tuk": 9.484194000000006
+    },
+    "techs": {},
+    "rq": {
+      "fiz": "f_lazer1",
+      "top": "t_doktrin",
+      "muh": "m_zirh1"
+    },
+    "rp": {
+      "fiz": 0,
+      "top": 0,
+      "muh": 0
+    },
+    "colonies": [
+      {
+        "s": 13,
+        "p": 0
+      }
+    ],
+    "mods": {
+      "minMul": 0,
+      "eneMul": 0,
+      "yiyMul": 0,
+      "alaMul": 0,
+      "araMul": -0.18,
+      "etkFlat": 0,
+      "eneFlat": 0,
+      "dmgMul": 0.43999999999999995,
+      "shMul": 0,
+      "hullMul": 0.16,
+      "spdMul": 0,
+      "growMul": 0,
+      "habFlat": 0,
+      "dipMul": -0.49,
+      "capFlat": 0,
+      "upMul": 0,
+      "buildMul": 0.25,
+      "colCost": 0,
+      "stab": 0,
+      "sensor": 0,
+      "capMul": 0,
+      "colShock": 0,
+      "foeSpd": 0,
+      "warTuk": 0,
+      "eDmgMul": 0,
+      "eShMul": 0,
+      "trustCap": 10,
+      "tradeMul": 0,
+      "opCost": 0,
+      "opBonus": 0,
+      "opRisk": 0,
+      "trustStart": 0,
+      "etkMul": 0,
+      "rofMul": 0,
+      "shipSpeed": 0,
+      "militaryBuildMul": 0,
+      "borderMul": 0,
+      "newColStab": 0,
+      "crisisDmg": 0,
+      "shipCost": 0
+    },
+    "cap": 46,
+    "dead": false,
+    "rel": {
+      "1": 40,
+      "2": 31,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": -100
+    },
+    "war": {
+      "1": false,
+      "2": false,
+      "3": false,
+      "4": false,
+      "5": false,
+      "6": false,
+      "7": false,
+      "8": false
+    },
+    "ally": {
+      "1": false,
+      "2": false,
+      "3": false,
+      "4": false,
+      "5": false,
+      "6": false,
+      "7": false,
+      "8": false
+    },
+    "home": 13,
+    "assim": 0,
+    "contact": {
+      "1": true,
+      "2": true,
+      "3": false,
+      "4": false,
+      "5": false,
+      "6": false,
+      "7": false,
+      "8": false
+    },
+    "agr": 0.9,
+    "exp": 0.8,
+    "extra": {
+      "trustCap": 10
+    },
+    "ethics": {
+      "mil": 2,
+      "aut": 0,
+      "mat": 0,
+      "ahl": 0
+    },
+    "civics": [],
+    "origin": "standart",
+    "sigil": "simetrik",
+    "monoRes": "min",
+    "furyUntil": 0,
+    "collapseUntil": 0,
+    "warPend": {},
+    "emblem": {
+      "v": 1,
+      "shape": "shield",
+      "symbol": "sword",
+      "pattern": "stripe",
+      "primary": "#d65cf5",
+      "secondary": "#b2f55c",
+      "federation": false
+    },
+    "mizac": "militarist",
+    "_pers": "militarist",
+    "physio": "humanoid",
+    "look": "humanoid",
+    "portraitVariant": 0,
+    "_persAt": 0,
+    "_prof": {
+      "war": 1.3792,
+      "exp": 0.8,
+      "sci": 0.437,
+      "eco": 0.5,
+      "dip": 0,
+      "turtle": 0.5288,
+      "spy": 0.25
+    },
+    "research": {
+      "targets": [],
+      "bank": {},
+      "history": {},
+      "mode": "semi"
+    },
+    "factions": [
+      {
+        "k": "asker",
+        "pow": 50,
+        "mood": 50,
+        "leader": "Kadim Oram",
+        "demand": null,
+        "log": []
+      },
+      {
+        "k": "bilim",
+        "pow": 25,
+        "mood": 50,
+        "leader": "Baş Lyssa",
+        "demand": null,
+        "log": []
+      },
+      {
+        "k": "halk",
+        "pow": 25,
+        "mood": 50,
+        "leader": "Sert Aeryn",
+        "demand": null,
+        "log": []
+      }
+    ],
+    "mapHabitats": {
+      "13": {
+        "mask": 3,
+        "at": 0
+      }
+    },
+    "_trAt": 0,
+    "_powAt": 16.478519999999975,
+    "_pressAt": 16.478519999999975,
+    "fleetAlloyUp": 2.31,
+    "structs": {
+      "min": 0,
+      "ene": 0,
+      "ara": 0,
+      "role": 0,
+      "sensor": 0,
+      "gate": [],
+      "dyson": 0
+    },
+    "_trCache": {
+      "links": [],
+      "n": 0,
+      "cap": 8,
+      "cut": 0,
+      "foreign": 0,
+      "vol": 0,
+      "trips": 0,
+      "raided": 0,
+      "ham": 0,
+      "mul": 0
+    },
+    "_trSig": "1:0:0:0",
+    "trade": {
+      "links": [],
+      "n": 0,
+      "cap": 8,
+      "cut": 0,
+      "foreign": 0,
+      "vol": 0,
+      "trips": 0,
+      "raided": 0,
+      "ham": 0,
+      "mul": 0
+    },
+    "cgNeed": 7.199999999999999,
+    "fleetUp": 11.5,
+    "adminCost": 2.2,
+    "foodNeed": 13.799999999999999,
+    "luxury": {},
+    "luxOwn": {},
+    "luxImport": {},
+    "_powC": 421,
+    "_press": 0.8267290496017291,
+    "persLock": "militarist",
+    "mem": {
+      "2": [
+        {
+          "k": "sinirGergin",
+          "v": -18.2,
+          "t": 0
+        }
+      ]
+    },
+    "overlord": null
+  },
+  "sel": null
+}

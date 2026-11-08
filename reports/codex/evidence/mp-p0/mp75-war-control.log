@@ -1,0 +1,20 @@
+✓ aynı devletten ikinci barış teklifi eskisinin yerine geçer; kabul savaşı bitirir, kalan barış kaydı "Savaş sona erdi" ile kapanır, kartı kalkar
+✓ savaş başka yoldan bittiyse (motorun makePeace'i) bekleyen barış kaydı ve kartı kapanır
+✓ savaş sürerken bekleyen tek barış kaydı açık kalır (yanlışlıkla kapanmaz)
+✗ AKTİF SAVAŞLAR: üst sayaç ile aynı liste; temas kurulmamış düşman "Bilinmeyen düşman"; cephe / tek taraflı durum / barış teklifi gösterilir — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ 'Primordial Qadesh Ağı'
+- 'Bilinmeyen düşman'
+
+    at eq (/tmp/stars-mp-p0-control/tests/mp75_war_test.js:8:50)
+    at /tmp/stars-mp-p0-control/tests/mp75_war_test.js:31:3
+    at test (/tmp/stars-mp-p0-control/tests/helpers/95e-fixture.js:13:60)
+    at Object.<anonymous> (/tmp/stars-mp-p0-control/tests/mp75_war_test.js:26:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+GEÇEN: 3 KALAN: 1

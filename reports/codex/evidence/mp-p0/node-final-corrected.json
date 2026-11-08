@@ -1,0 +1,12 @@
+[
+  {
+    "command": "node tests/mp_p0_guest_test.cjs",
+    "exit": 0,
+    "seconds": 1.87
+  },
+  {
+    "command": "node tests/mp_p0_motion_test.cjs",
+    "exit": 0,
+    "seconds": 0.06
+  }
+]

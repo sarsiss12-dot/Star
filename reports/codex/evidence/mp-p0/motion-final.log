@@ -1,0 +1,4 @@
+PASS ara kareler yalnız alınmış iki konum arasında; gerçek filo ve simülasyon değişmez
+PASS rota değişimi, savaş, varış ve kaldırılan filo görseli sıfırlar
+PASS uzun kare boşluğu tahminle öne atlamaz, en son kanonik konumda kalır
+GEÇEN: 3 KALAN: 0

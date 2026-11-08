@@ -1,0 +1,116 @@
+{
+  "before": {
+    "v": 1,
+    "next": 6,
+    "pending": [
+      {
+        "id": 1,
+        "kind": "anomaly",
+        "catalog": "a11",
+        "sys": 27,
+        "key": "anomaly:a11:27",
+        "born": 20.6796,
+        "status": "pending"
+      },
+      {
+        "id": 2,
+        "kind": "anomaly",
+        "catalog": "a15",
+        "sys": 26,
+        "key": "anomaly:a15:26",
+        "born": 49.6796,
+        "status": "pending"
+      },
+      {
+        "id": 3,
+        "kind": "event",
+        "catalog": "e3",
+        "sys": null,
+        "key": "event:e3:",
+        "born": 90.1796,
+        "status": "pending"
+      },
+      {
+        "id": 4,
+        "kind": "event",
+        "catalog": "e4",
+        "sys": null,
+        "key": "event:e4:",
+        "born": 181.6796,
+        "status": "pending"
+      },
+      {
+        "id": 5,
+        "kind": "event",
+        "catalog": "e1",
+        "sys": null,
+        "key": "event:e1:",
+        "born": 181.6796,
+        "status": "resolved",
+        "choice": 1,
+        "finished": 181.6796,
+        "result": "Bilim konseyi küstü: −8 etki."
+      }
+    ],
+    "queue": [],
+    "seen": {},
+    "lastMonth": 26527
+  },
+  "after": {
+    "v": 1,
+    "next": 6,
+    "pending": [
+      {
+        "id": 1,
+        "kind": "anomaly",
+        "catalog": "a11",
+        "sys": 27,
+        "key": "anomaly:a11:27",
+        "born": 20.6796,
+        "status": "pending"
+      },
+      {
+        "id": 2,
+        "kind": "anomaly",
+        "catalog": "a15",
+        "sys": 26,
+        "key": "anomaly:a15:26",
+        "born": 49.6796,
+        "status": "pending"
+      },
+      {
+        "id": 3,
+        "kind": "event",
+        "catalog": "e3",
+        "sys": null,
+        "key": "event:e3:",
+        "born": 90.1796,
+        "status": "pending"
+      },
+      {
+        "id": 4,
+        "kind": "event",
+        "catalog": "e4",
+        "sys": null,
+        "key": "event:e4:",
+        "born": 181.6796,
+        "status": "pending"
+      },
+      {
+        "id": 5,
+        "kind": "event",
+        "catalog": "e1",
+        "sys": null,
+        "key": "event:e1:",
+        "born": 181.6796,
+        "status": "resolved",
+        "choice": 1,
+        "finished": 181.6796,
+        "result": "Bilim konseyi küstü: −8 etki."
+      }
+    ],
+    "queue": [],
+    "seen": {},
+    "lastMonth": 26527
+  }
+}

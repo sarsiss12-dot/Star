@@ -1,0 +1,31 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[11,11],"mirrorEq":true,"revMs":501,"buildMs":543,"diff":[],"leak":[]}
+SYNC {"label":"m0","who":"C","e":2,"rev":[4,4],"mirrorEq":true,"revMs":657,"buildMs":689,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":2,"med":8,"p95":8,"max":8},"longtask":{"n":1,"med":51,"p95":51,"max":51},"heapMB":17,"dom":715,"intervals":2,"timeouts":1,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":11,"med":7.5,"p95":60.5,"max":60.5},"refresh":{"n":2,"med":3.7,"p95":3.7,"max":3.7},"longtask":{"n":0},"builds":11,"deltas":10,"resyncs":0,"minGap":600,"heapMB":18,"dom":703,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":51,"joinErrors":0},"C":{"build":{"n":2,"med":74.7,"p95":74.7,"max":74.7},"refresh":{"n":1,"med":7.8,"p95":7.8,"max":7.8},"longtask":{"n":2,"med":51,"p95":51,"max":51},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":14,"dom":710,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":26,"joinErrors":0}}}
+PASS N0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+SYNC {"label":"N1","who":"B","e":1,"rev":[13,13],"mirrorEq":true,"revMs":773,"buildMs":945,"diff":[],"leak":[]}
+SYNC {"label":"N1","who":"C","e":2,"rev":[4,4],"mirrorEq":true,"revMs":1020,"buildMs":1203,"diff":[],"leak":[]}
+PASS N1 misafir B 5 s kopar → aynı devlete döner; ayna yeniden eşitlenir; başka koltuk açılmaz
+SYNC {"label":"N2","who":"B","e":1,"rev":[16,16],"mirrorEq":true,"revMs":658,"buildMs":703,"diff":[],"leak":[]}
+SYNC {"label":"N2","who":"C","e":2,"rev":[6,6],"mirrorEq":true,"revMs":805,"buildMs":910,"diff":[],"leak":[]}
+PASS N2 misafir B 30 s kopar (host 10 gün ilerler) → aynı devlet; kaçırılan farklar tam aynayla kapanır
+SYNC {"label":"N3","who":"B","e":1,"rev":[19,19],"mirrorEq":true,"revMs":812,"buildMs":951,"diff":[],"leak":[]}
+SYNC {"label":"N3","who":"C","e":2,"rev":[6,6],"mirrorEq":true,"revMs":1020,"buildMs":1106,"diff":[],"leak":[]}
+PASS N3 teklif açıkken kopma: C → B teklif; B kopar/döner; teklif hâlâ bekliyor; B tam bir kez kabul eder
+SYNC {"label":"N4","who":"B","e":1,"rev":[22,22],"mirrorEq":true,"revMs":150,"buildMs":197,"diff":[],"leak":[]}
+SYNC {"label":"N4","who":"C","e":2,"rev":[8,8],"mirrorEq":true,"revMs":272,"buildMs":321,"diff":[],"leak":[]}
+PASS N4 komuttan hemen sonra kopma: B bina komutu gönderir ve hat aynı anda kesilir → host tam bir kez uygular (ya da hiç), yanıt kaybı yeniden eşitlemeyle görünür
+SYNC {"label":"N5","who":"B","e":1,"rev":[27,27],"mirrorEq":true,"revMs":705,"buildMs":1265,"diff":[],"leak":[]}
+SYNC {"label":"N5","who":"C","e":2,"rev":[12,12],"mirrorEq":true,"revMs":1338,"buildMs":1418,"diff":[],"leak":[]}
+PASS N5 host 8 s kopar: misafirler "host yok" görür, komut gönderilmez; host'ta zaman durur; dönünce aynı oda, senkron
+SYNC {"label":"N6","who":"B","e":1,"rev":[27,27],"mirrorEq":true,"revMs":245,"buildMs":435,"diff":[],"leak":[]}
+SYNC {"label":"N6","who":"C","e":2,"rev":[12,12],"mirrorEq":true,"revMs":587,"buildMs":616,"diff":[],"leak":[]}
+PASS N6 aynı oyuncu iki sekme: B aynı profilde ikinci sekmeyle aynı odaya gelir → tek koltuk, başka devlet açılmaz; komut yalnız kendi devletine
+SYNC {"label":"N8a","who":"B","e":1,"rev":[28,28],"mirrorEq":true,"revMs":846,"buildMs":911,"diff":[],"leak":[]}
+SYNC {"label":"N8a","who":"C","e":2,"rev":[12,12],"mirrorEq":true,"revMs":950,"buildMs":1004,"diff":[],"leak":[]}
+SYNC {"label":"N8b","who":"B","e":1,"rev":[30,30],"mirrorEq":true,"revMs":866,"buildMs":974,"diff":[],"leak":[]}
+SYNC {"label":"N8b","who":"C","e":2,"rev":[12,12],"mirrorEq":true,"revMs":1058,"buildMs":1099,"diff":[],"leak":[]}
+SYNC {"label":"N8c","who":"B","e":1,"rev":[31,31],"mirrorEq":true,"revMs":553,"buildMs":688,"diff":[],"leak":[]}
+SYNC {"label":"N8c","who":"C","e":2,"rev":[13,13],"mirrorEq":true,"revMs":785,"buildMs":892,"diff":[],"leak":[]}
+PASS N8 karar ölü sokete gider (sessiz kopma): host komutu hiç almaz; yeniden bağlanınca teklif hâlâ bekliyor ve misafir gerçek gelen kutusu yolundan (DiplomaticInbox.resolve) YENİDEN karar verebilir; host tam bir kez uygular
+PASS N7 relay yeniden başlatma: oda kaybolur (bellekte); misafirler açık hata görür; host dünyası değişmez (duraklar) — devam yalnız kayıt + yeni oda ile (R senaryosu)
+GEÇEN: 9 KALAN: 0

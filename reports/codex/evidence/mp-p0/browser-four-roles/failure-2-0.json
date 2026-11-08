@@ -1,0 +1,102 @@
+{
+  "url": "/",
+  "vote": null,
+  "inbox": [
+    {
+      "kind": "anomaly",
+      "data": {
+        "a": {
+          "id": "a3",
+          "k": "sinyal",
+          "n": "Sessiz Sinyal",
+          "t": "Gezegenin çekirdeğinden ritmik bir darbe geliyor. Hiçbir dile benzemiyor.",
+          "ch": [
+            {
+              "t": "Sinyali yanıtla",
+              "d": "Riskli: bilinmeyen sonuç",
+              "uncertain": true
+            },
+            {
+              "t": "Kayıt al ve uzaklaş",
+              "d": "+90 araştırma"
+            }
+          ]
+        },
+        "sys": {
+          "id": 29,
+          "x": 3187.2159828218387,
+          "y": 4717.546569859018,
+          "name": "Jormir",
+          "star": {
+            "n": "G Sarı",
+            "c": "#ffe9a8",
+            "r": 5.5,
+            "w": 20
+          },
+          "planets": [
+            {
+              "i": 0,
+              "t": "buz",
+              "dep": null,
+              "sz": 16,
+              "seed": 3802,
+              "owner": -1,
+              "col": null,
+              "name": "Jormir I"
+            },
+            {
+              "i": 1,
+              "t": "cor",
+              "dep": null,
+              "sz": 10,
+              "seed": 3819,
+              "owner": -1,
+              "col": null,
+              "name": "Jormir II"
+            },
+            {
+              "i": 2,
+              "t": "vol",
+              "dep": null,
+              "sz": 11,
+              "seed": 3836,
+              "owner": -1,
+              "col": null,
+              "name": "Jormir III"
+            }
+          ],
+          "lanes": [
+            12,
+            16
+          ],
+          "owner": -1,
+          "surv": [
+            0
+          ],
+          "seen": [
+            0
+          ],
+          "def": 0,
+          "queue": [],
+          "anom": false,
+          "pulsar": false,
+          "nebulaS": true,
+          "anomK": "sinyal",
+          "_reach": 0,
+          "_shat": false,
+          "cr": 0
+        }
+      },
+      "ico": "🔬",
+      "cls": "sci",
+      "pause": true,
+      "title": "Anomali — Jormir",
+      "sub": "Sessiz Sinyal",
+      "key": "an:29",
+      "uid": 1,
+      "born": 103.21640000000022
+    }
+  ],
+  "modal": "",
+  "pane": ""
+}

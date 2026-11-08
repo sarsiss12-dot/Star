@@ -1,0 +1,349 @@
+{
+  "audit": [
+    {
+      "t": "removed",
+      "at": 9559.699999988079,
+      "node": "<button class=\"nCard sci\" data-a=\"openNote\" data-x=\"1\">\n         <span class=\"nIco\">📜</span>\n         <span class=\"nTxt\"><b>Kızıl Muhafız · Diplomatik teklif</"
+    },
+    {
+      "t": "removed",
+      "at": 9559.699999988079,
+      "node": "<div class=\"nQuick\" data-uid=\"1\"><button class=\"nq ok\" data-a=\"noteQuick\" data-x=\"1:y\">KABUL</button><button class=\"nq no\" data-a=\"noteQuick\" data-x=\"1:n\">REDDE"
+    },
+    {
+      "t": "pointerdown",
+      "at": 10026.199999988079,
+      "x": 247,
+      "y": 58,
+      "target": "<span class=\"nTxt\"><b>Kızıl Muhafız · Diplomatik teklif</b><i>Veriyor: ⚡ 11 Enerji · İstiyor: yok · 18 ay</i></span>"
+    },
+    {
+      "t": "touchstart",
+      "at": 10026.5,
+      "target": "<span class=\"nTxt\"><b>Kızıl Muhafız · Diplomatik teklif</b><i>Veriyor: ⚡ 11 Enerji · İstiyor: yok · 18 ay</i></span>"
+    },
+    {
+      "t": "pointerup",
+      "at": 10592.800000011921,
+      "x": 277,
+      "y": 58,
+      "target": "<button class=\"nCard sci\" data-a=\"openNote\" data-x=\"1\" style=\"transition: none; transform: translateX(30px); opacity: 0.884615;\">\n         <span class=\"nIco\">📜"
+    },
+    {
+      "t": "touchend",
+      "at": 10593.699999988079,
+      "target": "<span class=\"nTxt\"><b>Kızıl Muhafız · Diplomatik teklif</b><i>Veriyor: ⚡ 11 Enerji · İstiyor: yok · 18 ay</i></span>"
+    },
+    {
+      "t": "pointerdown",
+      "at": 11274.100000023842,
+      "x": 247,
+      "y": 58,
+      "target": "<span class=\"nTxt\"><b>Kızıl Muhafız · Diplomatik teklif</b><i>Veriyor: ⚡ 11 Enerji · İstiyor: yok · 18 ay</i></span>"
+    },
+    {
+      "t": "touchstart",
+      "at": 11274.400000035763,
+      "target": "<span class=\"nTxt\"><b>Kızıl Muhafız · Diplomatik teklif</b><i>Veriyor: ⚡ 11 Enerji · İstiyor: yok · 18 ay</i></span>"
+    },
+    {
+      "t": "pointerup",
+      "at": 11742.600000023842,
+      "x": 477,
+      "y": 58,
+      "target": "<button class=\"nCard sci\" data-a=\"openNote\" data-x=\"1\" style=\"transition: none; transform: translateX(230px); opacity: 0.25;\">\n         <span class=\"nIco\">📜</s"
+    },
+    {
+      "t": "touchend",
+      "at": 11743,
+      "target": "<span class=\"nTxt\"><b>Kızıl Muhafız · Diplomatik teklif</b><i>Veriyor: ⚡ 11 Enerji · İstiyor: yok · 18 ay</i></span>"
+    },
+    {
+      "t": "removed",
+      "at": 11930.199999988079,
+      "node": "<button class=\"nCard sci\" data-a=\"openNote\" data-x=\"1\" style=\"transition: transform 0.18s, opacity 0.18s; transform: translateX(380px); opacity: 0;\">\n         <"
+    },
+    {
+      "t": "removed",
+      "at": 11930.300000011921,
+      "node": "<div class=\"nQuick\" data-uid=\"1\"><button class=\"nq ok\" data-a=\"noteQuick\" data-x=\"1:y\">KABUL</button><button class=\"nq no\" data-a=\"noteQuick\" data-x=\"1:n\">REDDE"
+    },
+    {
+      "t": "removed",
+      "at": 16952.100000023842,
+      "node": "<button class=\"nCard sci\" data-a=\"openNote\" data-x=\"11\">\n         <span class=\"nIco\">🔬</span>\n         <span class=\"nTxt\"><b>Kristal Mezarlık</b><i>Buzun altın"
+    },
+    {
+      "t": "removed",
+      "at": 16952.19999998808,
+      "node": "<div class=\"nOptions\"><button class=\"abtn\" data-a=\"noteOptions\" data-x=\"11\" aria-expanded=\"false\">SEÇENEKLER ▾</button></div>"
+    },
+    {
+      "t": "removed",
+      "at": 17251,
+      "node": "<button class=\"nCard sci\" data-a=\"openNote\" data-x=\"11\">\n         <span class=\"nIco\">🔬</span>\n         <span class=\"nTxt\"><b>Kristal Mezarlık</b><i>Buzun altın"
+    },
+    {
+      "t": "removed",
+      "at": 17251.100000023842,
+      "node": "<div class=\"nOptions\"><button class=\"abtn\" data-a=\"noteOptions\" data-x=\"11\" aria-expanded=\"false\">SEÇENEKLER ▾</button></div>"
+    },
+    {
+      "t": "removed",
+      "at": 17251.100000023842,
+      "node": "<button class=\"nCard sci\" data-a=\"openNote\" data-x=\"23\">\n         <span class=\"nIco\">📜</span>\n         <span class=\"nTxt\"><b>Kızıl Muhafız · Diplomatik teklif<"
+    },
+    {
+      "t": "removed",
+      "at": 17251.100000023842,
+      "node": "<div class=\"nQuick\" data-uid=\"23\"><button class=\"nq ok\" data-a=\"noteQuick\" data-x=\"23:y\">KABUL</button><button class=\"nq no\" data-a=\"noteQuick\" data-x=\"23:n\">RE"
+    }
+  ],
+  "inbox": [
+    {
+      "kind": "aideal",
+      "data": {
+        "from": 1,
+        "to": 0,
+        "give": [
+          {
+            "t": "res",
+            "r": "ene",
+            "v": 13
+          }
+        ],
+        "want": [],
+        "born": 24,
+        "expires": 564
+      },
+      "ico": "📜",
+      "cls": "sci",
+      "pause": false,
+      "uid": 23,
+      "born": 24,
+      "rec": 2,
+      "title": "Teklif — Kızıl Muhafız",
+      "sub": "Çok oyunculu teklif · anlaşma istiyor",
+      "key": "mp71:2"
+    },
+    {
+      "kind": "anomaly",
+      "data": {
+        "a": {
+          "id": "a2",
+          "k": "dogal",
+          "n": "Kristal Mezarlık",
+          "t": "Buzun altında, düzenli sıralar hâlinde dizilmiş devasa kristal sütunlar.",
+          "ch": [
+            {
+              "t": "Örnek al",
+              "d": "+150 araştırma"
+            },
+            {
+              "t": "Madencilik başlat",
+              "d": "+300 mineral"
+            }
+          ]
+        },
+        "sys": {
+          "id": 44,
+          "x": 3307.559389485553,
+          "y": 4309.280218573654,
+          "name": "Athvos",
+          "star": {
+            "n": "A Beyaz",
+            "c": "#dff0ff",
+            "r": 6.5,
+            "w": 8
+          },
+          "planets": [
+            {
+              "i": 0,
+              "t": "tun",
+              "dep": "zengin_maden",
+              "sz": 12,
+              "seed": 5767,
+              "name": "Athvos I",
+              "owner": -1
+            }
+          ],
+          "lanes": [
+            31,
+            24
+          ],
+          "owner": -1,
+          "surv": [
+            0
+          ],
+          "seen": [
+            0
+          ],
+          "queue": [],
+          "anom": false,
+          "anomK": "dogal",
+          "def": 0,
+          "pulsar": false,
+          "nebulaS": false,
+          "_reach": 0,
+          "_shat": false
+        }
+      },
+      "decisionId": 1,
+      "uid": 11,
+      "key": "personal:1",
+      "born": 20.038800000000013,
+      "pause": false,
+      "ico": "🔬",
+      "cls": "sci",
+      "title": "Kristal Mezarlık",
+      "sub": "Buzun altında, düzenli sıralar hâlinde dizilmiş devasa kristal sütunlar.",
+      "hidden": false
+    }
+  ],
+  "records": [
+    {
+      "id": 1,
+      "key": "deal:mp71:1",
+      "kind": "aideal",
+      "from": 1,
+      "name": "Kızıl Muhafız",
+      "title": "Teklif — Kızıl Muhafız",
+      "sub": "Çok oyunculu teklif · tur 1",
+      "born": 11,
+      "year": 2210,
+      "month": 1,
+      "expires": 551,
+      "status": "pending",
+      "note": {
+        "uid": 1,
+        "kind": "aideal",
+        "title": "Teklif — Kızıl Muhafız",
+        "sub": "Çok oyunculu teklif · tur 1",
+        "key": "mp71:1",
+        "born": 11,
+        "data": {
+          "from": 1,
+          "to": 0,
+          "give": [
+            {
+              "t": "res",
+              "r": "ene",
+              "v": 11
+            }
+          ],
+          "want": [],
+          "born": 11,
+          "expires": 551
+        }
+      },
+      "mp": 1
+    },
+    {
+      "id": 2,
+      "key": "deal:mp71:2",
+      "kind": "aideal",
+      "from": 1,
+      "name": "Kızıl Muhafız",
+      "title": "Teklif — Kızıl Muhafız",
+      "sub": "Çok oyunculu teklif · tur 1",
+      "born": 24,
+      "year": 2210,
+      "month": 1,
+      "expires": 564,
+      "status": "pending",
+      "note": {
+        "uid": 1,
+        "kind": "aideal",
+        "title": "Teklif — Kızıl Muhafız",
+        "sub": "Çok oyunculu teklif · tur 1",
+        "key": "mp71:2",
+        "born": 24,
+        "data": {
+          "from": 1,
+          "to": 0,
+          "give": [
+            {
+              "t": "res",
+              "r": "ene",
+              "v": 13
+            }
+          ],
+          "want": [],
+          "born": 24,
+          "expires": 564
+        }
+      },
+      "mp": 2
+    }
+  ],
+  "html": "<button class=\"nCard sci\" data-a=\"openNote\" data-x=\"23\">\n         <span class=\"nIco\">📜</span>\n         <span class=\"nTxt\"><b>Kızıl Muhafız · Diplomatik teklif</b><i>Veriyor: ⚡ 13 Enerji · İstiyor: yok · 18 ay</i></span>\n         <span class=\"nGo\">›</span>\n       </button><div class=\"nQuick\" data-uid=\"23\"><button class=\"nq ok\" data-a=\"noteQuick\" data-x=\"23:y\">KABUL</button><button class=\"nq no\" data-a=\"noteQuick\" data-x=\"23:n\">REDDET</button><button class=\"nq\" data-a=\"noteQuick\" data-x=\"23:c\">KARŞI TEKLİF</button></div><button class=\"nCard sci\" data-a=\"openNote\" data-x=\"11\">\n         <span class=\"nIco\">🔬</span>\n         <span class=\"nTxt\"><b>Kristal Mezarlık</b><i>Buzun altında, düzenli sıralar hâlinde dizilmiş devasa kristal sütunlar.</i></span>\n         <span class=\"nGo\">›</span>\n       </button><div class=\"nOptions\"><button class=\"abtn\" data-a=\"noteOptions\" data-x=\"11\" aria-expanded=\"false\">SEÇENEKLER ▾</button></div>",
+  "modal": "",
+  "hidden": true,
+  "view": {
+    "offers": [
+      {
+        "id": 1,
+        "from": 0,
+        "to": 1,
+        "fn": "Kızıl Muhafız",
+        "tn": "Saf Akıl Ağı",
+        "give": [
+          {
+            "t": "res",
+            "r": "ene",
+            "v": 11,
+            "l": "⚡ 11 Enerji"
+          }
+        ],
+        "want": [],
+        "born": 11,
+        "expires": 551,
+        "round": 1,
+        "prev": null,
+        "status": "pending",
+        "why": "",
+        "by": "human",
+        "cost": 0
+      },
+      {
+        "id": 2,
+        "from": 0,
+        "to": 1,
+        "fn": "Kızıl Muhafız",
+        "tn": "Saf Akıl Ağı",
+        "give": [
+          {
+            "t": "res",
+            "r": "ene",
+            "v": 13,
+            "l": "⚡ 13 Enerji"
+          }
+        ],
+        "want": [],
+        "born": 24,
+        "expires": 564,
+        "round": 1,
+        "prev": null,
+        "status": "pending",
+        "why": "",
+        "by": "human",
+        "cost": 0
+      }
+    ],
+    "contacts": [
+      {
+        "id": 0,
+        "n": "Kızıl Muhafız",
+        "col": "#98953e",
+        "h": 1,
+        "rel": 40,
+        "bl": 0,
+        "war": 0,
+        "peace": 0
+      }
+    ],
+    "life": 540,
+    "rounds": 6,
+    "sq": []
+  }
+}

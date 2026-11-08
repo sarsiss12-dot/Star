@@ -1,0 +1,57 @@
+[
+  {
+    "command": "node tests/mp_p0_guest_test.cjs",
+    "exit": 1,
+    "seconds": 4.22
+  },
+  {
+    "command": "node tests/mp_p0_decisions_test.cjs",
+    "exit": 0,
+    "seconds": 4.87
+  },
+  {
+    "command": "node tests/mp_p0_motion_test.cjs",
+    "exit": 1,
+    "seconds": 0.16
+  },
+  {
+    "command": "node tests/mp_p0_notice_test.cjs",
+    "exit": 0,
+    "seconds": 1.57
+  },
+  {
+    "command": "node tests/mp_p0_boot_test.cjs",
+    "exit": 0,
+    "seconds": 1.08
+  },
+  {
+    "command": "node tests/mp_p0_cold_notice_test.cjs",
+    "exit": 0,
+    "seconds": 1.18
+  },
+  {
+    "command": "node tests/beta_fed_found0_events_test.js",
+    "exit": 0,
+    "seconds": 6.93
+  },
+  {
+    "command": "node tests/perf1_equivalence_test.js",
+    "exit": 0,
+    "seconds": 3.27
+  },
+  {
+    "command": "node tests/perf2_equivalence_test.js",
+    "exit": 0,
+    "seconds": 4.6
+  },
+  {
+    "command": "node tests/mp_p0_compat_test.cjs",
+    "exit": 0,
+    "seconds": 6.14
+  },
+  {
+    "command": "node tests/mp_p0_catalog_equivalence.cjs",
+    "exit": 0,
+    "seconds": 32.89
+  }
+]

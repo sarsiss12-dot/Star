@@ -1,0 +1,20 @@
+PASS A1 rehber 1–8: oda, iki farklı devlet, hazır, başlat; iki ekranda galaksi; sürüm işareti lobi / başlangıç / MP çubuğunda ve /mp/version oyun build'iyle aynı
+PASS FD0 gerçek host-misafir kuruluş daveti, tek dokunma ve açık son onay
+PASS A2 rehber 9–12: misafir filosunu yürütür (gerçek orderMove → host), B → host diplomatik teklif ve host gelen kutusundan kabul eder; zaman iki ekranda ilerler
+PASS A3 rehber 13–15: misafir bağlantısı kopar ve döner → aynı devlet; host oyun kaydı alır (MP.4 paketi doğrulanır)
+PASS B1 konsey motorun kendi yoluyla kurulur (fikstür: temas); AI insanlar adına oy / sponsor yazmaz; B gerçek "KONSEY OYLAMASI" kartından Konsey ekranını açar ve EVET (dokunma) → host kaydeder, oylama açık kalır
+PASS B2 C (915×412) HAYIR verir; oylama host oy verene kadar açık; host kendi Konsey ekranından EVET → motor kapatır; tekrar oy reddedilir
+PASS B3 tasarı: B Konsey ekranından tasarı sunar (dokunma) → host kampanya sponsoru B; B AI üyeye rüşvet (dokunma) → host 200 mineral aktarır; insan üye C'ye rüşvet reddedilir; C'nin aynasında rüşvetin yönü yok
+PASS B4 entrika ve yıkıcı onay: B fısıltı ağını gerçek pencereden açar, iki AI seçer, gönderir → host motoru (B'nin günlüğü ya da motorun gerekçesi); onaysız yutma çağrısı host'a hiçbir şey göndermez
+PASS FD3 üç insan, misafir kurucu, özel davet ret/iptal, yeniden bağlantı ve karma oy
+FAIL P0 katılımcı görüş, sağlık, özel kararlar, rota ve görsel hareket
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+6 !== 1
+
+    at module.exports (/workspace/Star/tests/helpers/mp-p0-guest-browser.cjs:23:9)
+    at async /workspace/Star/tests/browser-mp73.cjs:248:129
+    at async test (/workspace/Star/tests/browser-mp73.cjs:13:7)
+    at async /workspace/Star/tests/browser-mp73.cjs:248:29
+PASS sayfa hataları yok
+GEÇEN: 10 KALAN: 1

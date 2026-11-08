@@ -1,0 +1,5 @@
+FAIL AssertionError [ERR_ASSERTION]: cold initial hydration replayed a persisted founded result before guest gate installed
+
+1 !== 0
+
+    at /workspace/Star/tests/mp_p0_cold_notice_test.cjs:3:1278

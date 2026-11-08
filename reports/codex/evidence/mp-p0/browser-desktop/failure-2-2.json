@@ -1,0 +1,93 @@
+{
+  "url": "/",
+  "vote": {
+    "name": "Büyük Meclis",
+    "founder": 1,
+    "members": [
+      1,
+      0,
+      2,
+      7,
+      5,
+      4,
+      6,
+      3
+    ],
+    "laws": {},
+    "targeted": {},
+    "treasury": 0,
+    "president": 1,
+    "terms": {
+      "1": 1
+    },
+    "termAge": 0,
+    "voteIn": 2,
+    "vote": {
+      "key": "ticaretStd",
+      "target": null,
+      "opened": 2.8600000000000017,
+      "yes": [
+        7,
+        5,
+        6,
+        3,
+        1
+      ],
+      "no": [
+        4
+      ],
+      "speeches": [
+        {
+          "id": 7,
+          "txt": "Bu masada oturmak bile bir zaferdir. Onu harcamayalım.",
+          "yes": true
+        },
+        {
+          "id": 5,
+          "txt": "Geleceği anlayan onu yönetir.",
+          "yes": true
+        },
+        {
+          "id": 6,
+          "txt": "Galaksi savaşla değil sözle birleşir.",
+          "yes": true
+        }
+      ],
+      "done": false,
+      "age": 0,
+      "sponsor": null
+    },
+    "dead": false,
+    "byConvention": true,
+    "firstLaw": null,
+    "pariahs": {}
+  },
+  "inbox": [
+    {
+      "uid": 1,
+      "kind": "cncnew",
+      "ico": "🌐",
+      "cls": "sci",
+      "pause": true,
+      "title": "GALAKTİK KONSEY KURULDU",
+      "sub": "Saf Akıl Ağı galaksiyi masaya çağırdı",
+      "key": "cncnew",
+      "born": 2.8600000000000017,
+      "data": 1
+    },
+    {
+      "uid": 2,
+      "kind": "cncvote",
+      "ico": "🌐",
+      "cls": "sci",
+      "pause": true,
+      "title": "KONSEY OYLAMASI",
+      "sub": "Evrensel Ticaret Standardı",
+      "key": "cnc2.8600000000000017",
+      "born": 2.8600000000000017,
+      "data": "ticaretStd"
+    }
+  ],
+  "modal": "",
+  "pane": ""
+}

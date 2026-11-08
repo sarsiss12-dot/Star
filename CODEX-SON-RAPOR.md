@@ -1,12 +1,13 @@
 # Son Codex raporu
 
-- Son geliştirilen faz: **BETA-FED-FOUND.0 — kullanıcı kabulü bekliyor, #27 kısmen**.
-- [Tam Türkçe rapor](reports/codex/BETA-FED-FOUND0-SONUC.md), [kanıtlar](reports/codex/evidence/beta-fed-found0/README.md).
-- Dal: `codex/stars-beta-fed-found0-founder-invites-events`. PR tabanı: `codex/stars-beta-war-fix0-peace-notices`.
-- Kaynak HEAD: `4ef02795042528d82a7e59c484ccff3c6c10875f`. Doğrulanmış son kod/paket commit'i: `618df01768394c7c262e89dc0de979fdb0564bcb`. Nihai rapor commit'i uzak dal ve son sohbet mesajında doğrulanır.
-- #11/#12/#13/#2: seçili kurucu, gerçek rıza ve final, iki/üç insan, özel davet, AI kabul/ret, kayıt/yeni oda yerel PASS. #27: diplomatik özet + SP/host event/anomaly/chain hızlı karar PASS; misafir typed-event host komutu **eksik, TEST BEKLİYOR**.
-- Son testler: core10/0, MP11/0, event11/0; dört viewport Chromium23/0; MP73 10/0, MP74 7/0, MP75 6/0; MP8 N9/0, iki bağımsız R5/0. İlk FAIL'ler korunur. PERF1 4/0, PERF2 5/0, native bulutsu3/0. Beş seed × üç ay gerçek p13 ham Save8/RNG aynı; Save8v8/paket4/protokol1 korunur.
-- Build96h10p14 / PWAstars-v96h10p14 / MP.8.9b9. [ZIP](releases/stars-faz96h10p14.zip): 794540 bayt; SHA256 `205eeba47747716a32e794ad633e21a9285c295b3648d1e53cf703acf15eae0e`; CRC32 `D0083B93`. İki deterministik paket eşit; [bütünlük](reports/codex/evidence/beta-fed-found0/RELEASE-VERIFIED.json).
-- PR tek deneme ve #33 başlangıç/sonuç yazımları `Post "https://api.github.com/graphql": Forbidden`; PR oluşturulmadı, pano değiştirilemedi. [Compare](https://github.com/sarsiss12-dot/Star/compare/codex/stars-beta-war-fix0-peace-notices...codex/stars-beta-fed-found0-founder-invites-events?expand=1). Hiçbir görev TAMAMLANDI değil, diğer görevler değiştirilmedi.
-- **NOT RUN:** fiziksel Android/kullanıcı PC, gerçek LAN/internet/Render, Docker build/deploy, yeni120ay kampanya. Main merge/rebase/force-push ve deploy yok.
-- Açık: #27 misafir typed karar; tarihselB1/A3 ve #25/#24/#10; gerçek cihaz kabulü. Sonraki tek hedef: #27'yi host yetkili olay kimliği/komut ve kayıt devamıyla tamamlamak.
+- Faz: **MP-P0 KURTARMA — yerel geliştirici doğrulaması, gerçek PC kullanıcı kabulü bekliyor**.
+- [Tam Türkçe rapor](reports/codex/MP-P0-KURTARMA-SONUC.md), [kanıt dizini](reports/codex/evidence/mp-p0/README.md).
+- Dal: `codex/stars-mp-p0-guest-playability`; PR tabanı `codex/stars-beta-fed-found0-founder-invites-events`.
+- Başlangıç HEAD: `bf26491828ceb65f9103ecb2def23fe832a3c454`; doğrulanmış son kod/paket commit’i **`466946186f80b09c6d7e126a13ecce48574ef95a`**. Nihai rapor commit SHA’sı son sohbet/uzak HEAD ile doğrulanır.
+- Misafir gözlem/sensör/harita bilgisi, izinli filo gövdesi, host yetkili kişisel event/anomaly/chain, dört rol rota, görsel ara hareket ve federasyon bildirim kararlılığı geliştirildi.
+- Yerel PASS: MP73 11/0, masaüstü4/0, MP74 7/0, MP75 Chromium6/0, MP8N9/0, yeni süreçli R0–R4 5/0, dört viewport kart24/0. Hedef7/0, karar7/0, hareket3/0, bildirim3/0, boot1/0, cold1/0; PERF1 4/0, PERF2 5/0; beş seed×üçay p14 ham SP Save8/RNG aynı,98 authored seçim aynı. İlk FAIL’ler korunur.
+- **FAIL açık:** MP75 Node3/1, değişmemiş p14’te de aynı3/1. Kullanıcının özgün rota/kendi-can kaybının tüm nedenleri kesinleşmiş değil. Eski sahipsiz bilim olayları tahminen başka devlete aktarılmaz.
+- 96h10p15 / stars-v96h10p15 / MP.8.9b10; Save8v8/paket4/protokol1. [ZIP](releases/stars-faz96h10p15.zip),797321bayt; SHA256 `f75b021b15e59664bc743d1e5ce1f1538fc94280c27718e8961f9fc4e2770676`; CRC32 `0536E3FD`. İki deterministik ZIP eşit; manifest19runtime dosyası doğrulandı. MP istemci/relay kaynakları ayrıca Git commit’indedir; ZIP tek başına tam MP dağıtımı değildir.
+- PR tek deneme ve #33 okuma/yazımları `Post "https://api.github.com/graphql": Forbidden`. [Compare](https://github.com/sarsiss12-dot/Star/compare/codex/stars-beta-fed-found0-founder-invites-events...codex/stars-mp-p0-guest-playability?expand=1). Pano değişti denemez; hiçbir görev TAMAMLANDI değil.
+- **NOT RUN:** fiziksel PC/Android, gerçek LAN/internet/Render, Docker build/deploy, yeni uzun kampanya. Main/deploy/restart/izin değişikliği yok.
+- Sonraki tek hedef: p15 üzerinde gerçek iki/üç PC katılımcı kabulü; hata olursa aynı kullanıcı Save8’iyle yeniden üretim. #10/#24/#25/#48 ve geçmişB1/A3 açık kalır.

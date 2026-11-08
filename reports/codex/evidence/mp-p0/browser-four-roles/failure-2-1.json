@@ -1,0 +1,100 @@
+{
+  "url": "/mp/play",
+  "vote": null,
+  "inbox": [
+    {
+      "kind": "anomaly",
+      "data": {
+        "a": {
+          "id": "a11",
+          "k": "sinyal",
+          "n": "Bilinmeyen Sinyal",
+          "t": "Sistemin derinliğinden düzenli aralıklarla bir çağrı geliyor. Kaynağı hiçbir kayıtta yok.",
+          "ch": [
+            {
+              "t": "Sinyale karşılık ver",
+              "d": "büyük ödül · risk var"
+            },
+            {
+              "t": "Kaydet ve uzaklaş",
+              "d": "+140 araştırma"
+            }
+          ]
+        },
+        "sys": {
+          "id": 1,
+          "x": 399.34000268095406,
+          "y": 3369.532359008337,
+          "name": "Xanaedeth",
+          "star": {
+            "n": "M Kırmızı Cüce",
+            "c": "#ff7b5c",
+            "r": 4.5,
+            "w": 30
+          },
+          "planets": [
+            {
+              "i": 0,
+              "t": "vol",
+              "dep": null,
+              "sz": 19,
+              "seed": 134,
+              "name": "Xanaedeth I",
+              "owner": -1
+            },
+            {
+              "i": 1,
+              "t": "bzd",
+              "dep": null,
+              "sz": 31,
+              "seed": 151,
+              "name": "Xanaedeth II",
+              "owner": -1
+            },
+            {
+              "i": 2,
+              "t": "ast",
+              "dep": "zengin_maden",
+              "sz": 0,
+              "seed": 168,
+              "name": "Xanaedeth III",
+              "owner": -1
+            }
+          ],
+          "lanes": [
+            39,
+            27,
+            43
+          ],
+          "owner": -1,
+          "surv": [
+            0
+          ],
+          "seen": [
+            0
+          ],
+          "queue": [],
+          "anom": false,
+          "anomK": "sinyal",
+          "def": 0,
+          "pulsar": false,
+          "nebulaS": false,
+          "_reach": 0,
+          "_shat": false
+        }
+      },
+      "decisionId": 1,
+      "uid": 1,
+      "key": "personal:1",
+      "born": 40.86459999999986,
+      "pause": false,
+      "ico": "🔬",
+      "cls": "sci",
+      "title": "Bilinmeyen Sinyal",
+      "sub": "Sistemin derinliğinden düzenli aralıklarla bir çağrı geliyor. Kaynağı hiçbir kayıtta yok.",
+      "hidden": false
+    }
+  ],
+  "modal": "",
+  "pane": ""
+}

@@ -1,0 +1,42 @@
+[
+  {
+    "command": "node tests/mp_p0_guest_test.cjs",
+    "exit": 0,
+    "seconds": 1.72
+  },
+  {
+    "command": "node tests/mp_p0_decisions_test.cjs",
+    "exit": 0,
+    "seconds": 2.15
+  },
+  {
+    "command": "node tests/mp_p0_motion_test.cjs",
+    "exit": 0,
+    "seconds": 0.05
+  },
+  {
+    "command": "node tests/beta_fed_found0_core_test.js",
+    "exit": 0,
+    "seconds": 3.5
+  },
+  {
+    "command": "node tests/beta_fed_found0_mp_test.js",
+    "exit": 0,
+    "seconds": 4.66
+  },
+  {
+    "command": "node tests/beta_fed_found0_events_test.js",
+    "exit": 0,
+    "seconds": 4.09
+  },
+  {
+    "command": "node tests/perf1_equivalence_test.js",
+    "exit": 0,
+    "seconds": 2.62
+  },
+  {
+    "command": "node tests/perf2_equivalence_test.js",
+    "exit": 0,
+    "seconds": 3.32
+  }
+]

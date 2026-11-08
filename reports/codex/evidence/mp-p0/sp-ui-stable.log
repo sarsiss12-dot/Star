@@ -1,0 +1,51 @@
+FAIL 800x360 ayrı seçenek hedefi / aç-kapat RNG ve hız / başlık normal pencere
+AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert(await p.locator('#inbox [data-a="noteChoice"]').count()>=2)
+
+    at /workspace/Star/tests/browser-beta-fed-found0-events.cjs:7:280
+    at async test (/workspace/Star/tests/browser-beta-fed-found0-events.cjs:3:153)
+    at async /workspace/Star/tests/browser-beta-fed-found0-events.cjs:7:1
+PASS 800x360 event gerçek hızlı seçim / etkiler / çift karar engeli
+PASS 800x360 anomaly gerçek hızlı seçim / etkiler / çift karar engeli
+PASS 800x360 chain gerçek hızlı seçim / etkiler / çift karar engeli
+PASS 800x360 kartı kaydır / durum listesinden geri aç / eski Save8 ve bekleyen not
+FAIL 960x540 ayrı seçenek hedefi / aç-kapat RNG ve hız / başlık normal pencere
+AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert(await p.locator('#inbox [data-a="noteChoice"]').count()>=2)
+
+    at /workspace/Star/tests/browser-beta-fed-found0-events.cjs:7:280
+    at async test (/workspace/Star/tests/browser-beta-fed-found0-events.cjs:3:153)
+    at async /workspace/Star/tests/browser-beta-fed-found0-events.cjs:7:1
+PASS 960x540 event gerçek hızlı seçim / etkiler / çift karar engeli
+PASS 960x540 anomaly gerçek hızlı seçim / etkiler / çift karar engeli
+PASS 960x540 chain gerçek hızlı seçim / etkiler / çift karar engeli
+PASS 960x540 kartı kaydır / durum listesinden geri aç / eski Save8 ve bekleyen not
+PASS 960x540 event iki gerçek hızlı dokunma tek kaynak işlemi
+PASS 960x540 SP seçilen iki AI, üçüncü uygun AI dışarıda ve tek son onay
+FAIL 915x412 ayrı seçenek hedefi / aç-kapat RNG ve hız / başlık normal pencere
+AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert(await p.locator('#inbox [data-a="noteChoice"]').count()>=2)
+
+    at /workspace/Star/tests/browser-beta-fed-found0-events.cjs:7:280
+    at async test (/workspace/Star/tests/browser-beta-fed-found0-events.cjs:3:153)
+    at async /workspace/Star/tests/browser-beta-fed-found0-events.cjs:7:1
+PASS 915x412 event gerçek hızlı seçim / etkiler / çift karar engeli
+PASS 915x412 anomaly gerçek hızlı seçim / etkiler / çift karar engeli
+PASS 915x412 chain gerçek hızlı seçim / etkiler / çift karar engeli
+PASS 915x412 kartı kaydır / durum listesinden geri aç / eski Save8 ve bekleyen not
+FAIL 1920x1080 ayrı seçenek hedefi / aç-kapat RNG ve hız / başlık normal pencere
+AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert(await p.locator('#inbox [data-a="noteChoice"]').count()>=2)
+
+    at /workspace/Star/tests/browser-beta-fed-found0-events.cjs:7:280
+    at async test (/workspace/Star/tests/browser-beta-fed-found0-events.cjs:3:153)
+    at async /workspace/Star/tests/browser-beta-fed-found0-events.cjs:7:1
+PASS 1920x1080 event gerçek hızlı seçim / etkiler / çift karar engeli
+PASS 1920x1080 anomaly gerçek hızlı seçim / etkiler / çift karar engeli
+PASS 1920x1080 chain gerçek hızlı seçim / etkiler / çift karar engeli
+PASS 1920x1080 kartı kaydır / durum listesinden geri aç / eski Save8 ve bekleyen not
+GEÇEN: 19 KALAN: 4

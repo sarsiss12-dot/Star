@@ -1,0 +1,10 @@
+✓ ortak hız: misafirin hız komutu host hızını değiştirir ve HERKESE yayınlanır; ad alıcının bakışından (temas → devlet adı, yoksa lobi adı); kendine "self"; host da aynı bildirimi alır; RNG tüketmez
+✓ ortak hız: aynı hız "same" ile reddedilir ve bildirim üretmez; oyuncu başına spam koruması (en az 700 ms, 20 s'de en çok 8); başka oyuncu etkilenmez
+✓ ortak hız: host'un kendi düğmesi (local) aynı yoldan; host'un iç duraklatması (speedSync) "auto" + neden; değişmeyince yayın yok; dönen oyuncu güncel hızı bildirimsiz alır; duraklatılmış oturumda komut reddi
+✓ filo: duruş / böl / tür ayır / birleştir / dur / otomatik keşif yalnız kendi filosunda; başkasının filosu "not-owner"; reddedilen komut dünyayı değiştirmez
+✓ koloni / tersane: gemi üretimi, yıkım, iptal, odak — ağdan = doğrudan motor (queueShip / queueDemolish / cancelBuild / setFocus; Save8 + RNG); başkasının sistemi reddedilir
+✓ kolonileştir: tek oyunculu düğmenin mantığı (oradaki koloni gemisi; hedef kilidi; tek gemi harcanır); yalnız kendi gemisiyle; "Koloni kuruldu" bildirimi host günlüğüne değil oyuncunun kendi listesine
+✓ ayna: vasal ve senyör misafir — vasallık sözleşmesi ve müzakere yeniden numaralandırılır, motorun deserialize'ı (restoreVassalContracts) kabul eder; müzakere yalnız taraflara; gerçek gelen kutusunda "vassal" kaydı
+✓ ayna: federasyon oylaması yalnız üyeye (oy kimliği host'unkiyle aynı → gerçek gelen kutusu kaydı); davet yalnız davet edilene; AI değerlendirmeleri girmez
+✓ ayna: ekonomi geçmişi yalnız misafirin kendi satırı (devlet 0); motorun EconomyLedger.restore'u kabul eder; host Save8/RNG değişmez
+GEÇEN: 9 KALAN: 0

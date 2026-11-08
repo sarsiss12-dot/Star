@@ -1,0 +1,455 @@
+{
+  "results": [
+    {
+      "name": "A1 rehber 1–8: oda, iki farklı devlet, hazır, başlat; iki ekranda galaksi; sürüm işareti lobi / başlangıç / MP çubuğunda ve /mp/version oyun build'iyle aynı",
+      "status": "PASS",
+      "ms": 11581
+    },
+    {
+      "name": "FD0 gerçek host-misafir kuruluş daveti, tek dokunma ve açık son onay",
+      "status": "PASS",
+      "ms": 10037
+    },
+    {
+      "name": "A2 rehber 9–12: misafir filosunu yürütür (gerçek orderMove → host), B → host diplomatik teklif ve host gelen kutusundan kabul eder; zaman iki ekranda ilerler",
+      "status": "PASS",
+      "ms": 3958
+    },
+    {
+      "name": "A3 rehber 13–15: misafir bağlantısı kopar ve döner → aynı devlet; host oyun kaydı alır (MP.4 paketi doğrulanır)",
+      "status": "PASS",
+      "ms": 3283
+    },
+    {
+      "name": "B1 konsey motorun kendi yoluyla kurulur (fikstür: temas); AI insanlar adına oy / sponsor yazmaz; B gerçek \"KONSEY OYLAMASI\" kartından Konsey ekranını açar ve EVET (dokunma) → host kaydeder, oylama açık kalır",
+      "status": "PASS",
+      "ms": 25295
+    },
+    {
+      "name": "B2 C (915×412) HAYIR verir; oylama host oy verene kadar açık; host kendi Konsey ekranından EVET → motor kapatır; tekrar oy reddedilir",
+      "status": "PASS",
+      "ms": 7171
+    },
+    {
+      "name": "B3 tasarı: B Konsey ekranından tasarı sunar (dokunma) → host kampanya sponsoru B; B AI üyeye rüşvet (dokunma) → host 200 mineral aktarır; insan üye C'ye rüşvet reddedilir; C'nin aynasında rüşvetin yönü yok",
+      "status": "PASS",
+      "ms": 8142
+    },
+    {
+      "name": "B4 entrika ve yıkıcı onay: B fısıltı ağını gerçek pencereden açar, iki AI seçer, gönderir → host motoru (B'nin günlüğü ya da motorun gerekçesi); onaysız yutma çağrısı host'a hiçbir şey göndermez",
+      "status": "PASS",
+      "ms": 7964
+    },
+    {
+      "name": "FD3 üç insan, misafir kurucu, özel davet ret/iptal, yeniden bağlantı ve karma oy",
+      "status": "PASS",
+      "ms": 19091
+    },
+    {
+      "name": "P0 katılımcı görüş, sağlık, özel kararlar, rota ve görsel hareket",
+      "status": "PASS",
+      "ms": 32460
+    },
+    {
+      "name": "sayfa hataları yok",
+      "status": "PASS",
+      "ms": 0
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "startModal": [
+      "🛰 DANIŞMAN",
+      "",
+      "🛰 DANIŞMAN",
+      "",
+      ""
+    ],
+    "version": {
+      "mp": "MP.8.9b10",
+      "build": "96h10p15",
+      "files": {
+        "mp-core.js": "12bca8717474",
+        "relay.js": "81252c42194e",
+        "mp1-host.js": "0938cb8d7030",
+        "join.js": "bc2732493741",
+        "mirror.js": "bf4cef8667ca",
+        "guest-stars.js": "6134e602fd01",
+        "mp71-dip.js": "bf0355f27ef6",
+        "mp7-setup.js": "48c0f282a254"
+      }
+    },
+    "unsupported": [
+      "autoEvent",
+      "diagCopy",
+      "joinRebel",
+      "leaveRebel",
+      "mapFix",
+      "physio",
+      "restart",
+      "rollName",
+      "sandbox",
+      "sitPick",
+      "stashNote",
+      "survey",
+      "terra",
+      "toTitle",
+      "tplDel",
+      "tplLoad",
+      "tplSave",
+      "trigCrisis"
+    ],
+    "guestDiag": "STARS MP.8.9b10 · oyun 96h10p15 · misafir · host bağlı · aşama: ready · ayna r4 15:16:54 · kurulum 8 ms · son komut: yok · son hata: yok",
+    "fedfound": [
+      {
+        "reverse": false,
+        "before": {
+          "fed": 0,
+          "cost": 10000,
+          "reply": "pending"
+        },
+        "final": {
+          "members": [
+            0,
+            1
+          ],
+          "by": 0,
+          "cost": 9780,
+          "status": "founded"
+        },
+        "guest": {
+          "members": [
+            1,
+            0
+          ],
+          "name": "Helis Araştırma Konseyi",
+          "notices": [
+            "FEDERASYON KURULDU — Helis Araştırma Konseyi"
+          ]
+        },
+        "reconnect": true
+      },
+      {
+        "reverse": true,
+        "before": {
+          "fed": 0,
+          "cost": 10000,
+          "reply": "pending"
+        },
+        "final": {
+          "members": [
+            1,
+            0
+          ],
+          "by": 1,
+          "cost": 9780,
+          "status": "founded"
+        },
+        "guest": {
+          "members": [
+            0,
+            1
+          ],
+          "name": "Ufuk Gözlemevleri Ağı",
+          "notices": [
+            "FEDERASYON KURULDU — Ufuk Gözlemevleri Ağı"
+          ]
+        },
+        "reconnect": true
+      }
+    ],
+    "whisper": 1,
+    "fd3": {
+      "guestFounder": 1,
+      "selected": [
+        0,
+        2
+      ],
+      "members": [
+        1,
+        0,
+        2
+      ],
+      "names": [
+        "Kızıl Muhafız",
+        "Okyanus Ticaret Birliği",
+        "Saf Akıl Ağı"
+      ],
+      "rejection": true,
+      "cancel": true,
+      "reconnect": true,
+      "thirdPartyPrivate": true,
+      "cost": 220
+    },
+    "p0": [
+      {
+        "visibility": true,
+        "shared": 0,
+        "habitat": true,
+        "foreignHull": 0.42,
+        "ownHull": 0.55,
+        "privacy": true
+      },
+      {
+        "kind": "anomaly",
+        "decision": 1,
+        "before": {
+          "a": 0,
+          "m": 2800,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":10000}",
+          "p": 0
+        },
+        "after": {
+          "a": 130,
+          "m": 2800,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":10000}",
+          "p": 0
+        },
+        "replay": "rejected"
+      },
+      {
+        "kind": "event",
+        "decision": 2,
+        "before": {
+          "a": 130,
+          "m": 2800,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":10000}",
+          "p": 0
+        },
+        "after": {
+          "a": 390,
+          "m": 2650,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":10000}",
+          "p": 0
+        },
+        "replay": "rejected"
+      },
+      {
+        "kind": "chain",
+        "decision": 3,
+        "before": {
+          "a": 390,
+          "m": 2650,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":10000}",
+          "p": 0
+        },
+        "after": {
+          "a": 390,
+          "m": 2650,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":10000}",
+          "p": 0
+        },
+        "replay": "rejected"
+      },
+      {
+        "CDecision": 1,
+        "CResearch": 180,
+        "BUnchanged": true
+      },
+      {
+        "repeatedFoundingPopups": 0,
+        "mirrors": 3
+      },
+      {
+        "shareEndedLiveRemoved": true,
+        "discoveryRetained": true
+      },
+      {
+        "route": true,
+        "selectedId": 4,
+        "path": [
+          25
+        ]
+      },
+      {
+        "motion": [
+          {
+            "x": 3709.0372632402336,
+            "y": 1773.807059510932,
+            "actualX": 3721.4410672239683,
+            "actualY": 1856.127941458774
+          },
+          {
+            "x": 3709.4643587940272,
+            "y": 1776.6415837190211,
+            "actualX": 3721.4410672239683,
+            "actualY": 1856.127941458774
+          },
+          {
+            "x": 3709.8373555777866,
+            "y": 1779.1170681948363,
+            "actualX": 3721.4410672239683,
+            "actualY": 1856.127941458774
+          },
+          {
+            "x": 3710.0974093147593,
+            "y": 1780.8429784889265,
+            "actualX": 3721.4410672239683,
+            "actualY": 1856.127941458774
+          },
+          {
+            "x": 3710.474202503215,
+            "y": 1783.3436587339786,
+            "actualX": 3721.4410672239683,
+            "actualY": 1856.127941458774
+          },
+          {
+            "x": 3711.357815749179,
+            "y": 1789.2079743748823,
+            "actualX": 3721.4410672239683,
+            "actualY": 1856.127941458774
+          },
+          {
+            "x": 3711.727965229133,
+            "y": 1791.6645620218928,
+            "actualX": 3721.4410672239683,
+            "actualY": 1856.127941458774
+          },
+          {
+            "x": 3712.0838781906277,
+            "y": 1794.0266655286337,
+            "actualX": 3721.4410672239683,
+            "actualY": 1856.127941458774
+          },
+          {
+            "x": 3712.5479886921903,
+            "y": 1797.1068484999219,
+            "actualX": 3721.4410672239683,
+            "actualY": 1856.127941458774
+          },
+          {
+            "x": 3713.014946497558,
+            "y": 1800.2059283000149,
+            "actualX": 3721.4410672239683,
+            "actualY": 1856.127941458774
+          },
+          {
+            "x": 3713.3718085605096,
+            "y": 1802.5743307509422,
+            "actualX": 3721.4410672239683,
+            "actualY": 1856.127941458774
+          },
+          {
+            "x": 3713.9441166027063,
+            "y": 1806.3725931905324,
+            "actualX": 3721.4410672239683,
+            "actualY": 1856.127941458774
+          },
+          {
+            "x": 3714.722379611841,
+            "y": 1811.537726191939,
+            "actualX": 3721.4410672239683,
+            "actualY": 1856.127941458774
+          },
+          {
+            "x": 3715.165609886443,
+            "y": 1814.479332424916,
+            "actualX": 3721.4410672239683,
+            "actualY": 1856.127941458774
+          },
+          {
+            "x": 3715.500642620976,
+            "y": 1816.7028591933456,
+            "actualX": 3721.4410672239683,
+            "actualY": 1856.127941458774
+          },
+          {
+            "x": 3715.87933401178,
+            "y": 1819.216137323016,
+            "actualX": 3721.4410672239683,
+            "actualY": 1856.127941458774
+          },
+          {
+            "x": 3716.2532798969964,
+            "y": 1821.697920743018,
+            "actualX": 3721.4410672239683,
+            "actualY": 1856.127941458774
+          },
+          {
+            "x": 3716.9451746939158,
+            "y": 1826.2898499586202,
+            "actualX": 3721.4410672239683,
+            "actualY": 1856.127941458774
+          },
+          {
+            "x": 3717.619036567679,
+            "y": 1830.7620992647162,
+            "actualX": 3721.4410672239683,
+            "actualY": 1856.127941458774
+          },
+          {
+            "x": 3717.9388836822955,
+            "y": 1832.8848429486898,
+            "actualX": 3721.4410672239683,
+            "actualY": 1856.127941458774
+          },
+          {
+            "x": 3718.6269820745183,
+            "y": 1837.4515763950553,
+            "actualX": 3721.4410672239683,
+            "actualY": 1856.127941458774
+          },
+          {
+            "x": 3718.9553711005506,
+            "y": 1839.6310105654434,
+            "actualX": 3721.4410672239683,
+            "actualY": 1856.127941458774
+          },
+          {
+            "x": 3719.3720265405805,
+            "y": 1842.3962464024996,
+            "actualX": 3721.4410672239683,
+            "actualY": 1856.127941458774
+          },
+          {
+            "x": 3719.7345832105766,
+            "y": 1844.802442507282,
+            "actualX": 3721.4410672239683,
+            "actualY": 1856.127941458774
+          },
+          {
+            "x": 3720.4397654250643,
+            "y": 1849.482556922722,
+            "actualX": 3721.4410672239683,
+            "actualY": 1856.127941458774
+          },
+          {
+            "x": 3720.9114687365854,
+            "y": 1852.6131314362383,
+            "actualX": 3721.4410672239683,
+            "actualY": 1856.127941458774
+          },
+          {
+            "x": 3721.5315480260692,
+            "y": 1856.728439454233,
+            "actualX": 3733.4397295877466,
+            "actualY": 1935.7600018553942
+          },
+          {
+            "x": 3721.8091727869346,
+            "y": 1858.5709641502806,
+            "actualX": 3733.4397295877466,
+            "actualY": 1935.7600018553942
+          },
+          {
+            "x": 3722.344342530266,
+            "y": 1862.1227491769264,
+            "actualX": 3733.4397295877466,
+            "actualY": 1935.7600018553942
+          },
+          {
+            "x": 3722.928402168263,
+            "y": 1865.9990039591733,
+            "actualX": 3733.4397295877466,
+            "actualY": 1935.7600018553942
+          }
+        ]
+      },
+      {
+        "reconnect": true
+      }
+    ]
+  },
+  "pass": 11,
+  "fail": 0
+}

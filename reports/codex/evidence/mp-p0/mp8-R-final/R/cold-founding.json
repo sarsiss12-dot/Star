@@ -1,0 +1,101 @@
+{
+  "before": {
+    "v": 1,
+    "next": 2,
+    "proposals": [
+      {
+        "id": 1,
+        "by": 0,
+        "type": "bilimsel",
+        "ballot": "mixed",
+        "members": [
+          0,
+          1
+        ],
+        "opened": 181.57999999999998,
+        "expires": 331.58,
+        "status": "pending",
+        "replies": {
+          "0": {
+            "status": "accepted",
+            "terms": "bilimsel|mixed|0,1",
+            "day": 181.57999999999998,
+            "why": "Kuruluş şartlarını önerdi"
+          },
+          "1": {
+            "terms": "bilimsel|mixed|0,1",
+            "status": "pending",
+            "day": 181.57999999999998,
+            "why": "İnsan yanıtı bekleniyor"
+          }
+        }
+      }
+    ]
+  },
+  "after": {
+    "v": 1,
+    "next": 2,
+    "proposals": [
+      {
+        "id": 1,
+        "by": 0,
+        "type": "bilimsel",
+        "ballot": "mixed",
+        "members": [
+          0,
+          1
+        ],
+        "opened": 181.57999999999998,
+        "expires": 331.58,
+        "status": "pending",
+        "replies": {
+          "0": {
+            "status": "accepted",
+            "terms": "bilimsel|mixed|0,1",
+            "day": 181.57999999999998,
+            "why": "Kuruluş şartlarını önerdi"
+          },
+          "1": {
+            "status": "pending",
+            "terms": "bilimsel|mixed|0,1",
+            "day": 181.57999999999998,
+            "why": "İnsan yanıtı bekleniyor"
+          }
+        }
+      }
+    ]
+  },
+  "guest": {
+    "v": 1,
+    "next": 2,
+    "proposals": [
+      {
+        "id": 1,
+        "by": 1,
+        "type": "bilimsel",
+        "ballot": "mixed",
+        "members": [
+          1,
+          0
+        ],
+        "opened": 181.57999999999998,
+        "expires": 331.58,
+        "status": "pending",
+        "replies": {
+          "0": {
+            "status": "pending",
+            "terms": "bilimsel|mixed|1,0",
+            "day": 181.57999999999998,
+            "why": "İnsan yanıtı bekleniyor"
+          },
+          "1": {
+            "status": "accepted",
+            "terms": "bilimsel|mixed|1,0",
+            "day": 181.57999999999998,
+            "why": "Karar kaydedildi"
+          }
+        }
+      }
+    ]
+  }
+}

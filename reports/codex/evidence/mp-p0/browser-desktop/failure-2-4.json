@@ -1,0 +1,84 @@
+{
+  "url": "/mp/play",
+  "vote": {
+    "name": "Büyük Meclis",
+    "founder": 1,
+    "members": [
+      1,
+      2,
+      0,
+      7,
+      5,
+      4,
+      6,
+      3
+    ],
+    "laws": {},
+    "targeted": {},
+    "treasury": 0,
+    "president": 1,
+    "terms": {
+      "1": 1
+    },
+    "termAge": 0,
+    "voteIn": 2,
+    "dead": false,
+    "byConvention": true,
+    "firstLaw": null,
+    "pariahs": {},
+    "agenda": [],
+    "vote": {
+      "key": "ticaretStd",
+      "opened": 2.8600000000000017,
+      "target": null,
+      "yes": [
+        7,
+        5,
+        6,
+        3,
+        1
+      ],
+      "no": [
+        4
+      ],
+      "speeches": [
+        {
+          "id": 7,
+          "txt": "Bu masada oturmak bile bir zaferdir. Onu harcamayalım.",
+          "yes": true
+        },
+        {
+          "id": 5,
+          "txt": "Geleceği anlayan onu yönetir.",
+          "yes": true
+        },
+        {
+          "id": 6,
+          "txt": "Galaksi savaşla değil sözle birleşir.",
+          "yes": true
+        }
+      ],
+      "done": false,
+      "age": 0,
+      "sponsor": null
+    },
+    "lastVote": null,
+    "campaign": null
+  },
+  "inbox": [
+    {
+      "kind": "cncvote",
+      "data": "ticaretStd",
+      "ico": "🌐",
+      "cls": "sci",
+      "pause": false,
+      "uid": 1,
+      "born": 5.004000000000003,
+      "title": "KONSEY OYLAMASI",
+      "sub": "Evrensel Ticaret Standardı",
+      "key": "mp73cnc:ticaretStd:"
+    }
+  ],
+  "modal": "",
+  "pane": ""
+}

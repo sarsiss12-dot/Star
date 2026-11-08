@@ -1,0 +1,17 @@
+bf26491828ceb65f9103ecb2def23fe832a3c454	refs/heads/codex/stars-beta-fed-found0-founder-invites-events
+71b282ec2972b0872f207449d23006b88d1315f0	refs/heads/codex/stars-beta-p01-critical
+3fd07944b6764ca6e71f6e8dc8b81404d5c8cfbd	refs/heads/codex/stars-beta-p02-mp-acceptance
+731c8df9900e446d7e7de25cc5701e05a1071647	refs/heads/codex/stars-beta-scale0-galaxy-ai-colonies
+fec9a8b4345b14cca9fa5c2eb496fc84e24f7ad2	refs/heads/codex/stars-beta-setup0-pirates
+66ea8d700bc66b1fdb5f75d3a0f5d8f87251e9a8	refs/heads/codex/stars-beta-setup1-galaxy-options
+eea55b2ddfae7de8f631eb43eb606585224f64d6	refs/heads/codex/stars-beta-ux0-names
+4ef02795042528d82a7e59c484ccff3c6c10875f	refs/heads/codex/stars-beta-war-fix0-peace-notices
+d307864edbc2ab9ca4347e5d065640e150279411	refs/heads/codex/stars-beta0-stability
+e000bb0c488c046b3ede9d8fab86eb00ffe8889a	refs/heads/codex/stars-mp82-test-stability
+3017fbe7e38d6261f3f7f4683e3fcafa66299294	refs/heads/codex/stars-mp83-join-stability
+3a2a82a20271e6b8141dc965fb08b329bbfb1921	refs/heads/codex/stars-mp84-notice-persistence
+c005f82c240ab26375f5307405d11a883207a453	refs/heads/codex/stars-mp85-live-mobile-audit
+0dfb449e52bcdd6a9c1c73838f2f476ae37b2216	refs/heads/codex/stars-mp86-performance
+cdf58527d7fac51b97746b366f7c38f128db8e39	refs/heads/codex/stars-mp87-frame-performance
+8ce738b42636cd792a8d552230ca8194a4da053f	refs/heads/codex/stars-mp88-stability
+74a57bc0eeac0f2b4db9106b247fe26c1d4eb865	refs/heads/codex/stars-mp89-pc-ui-stability

@@ -1,0 +1,98 @@
+{
+  "url": "/",
+  "vote": {
+    "name": "Kadim Divanı",
+    "founder": 1,
+    "members": [
+      1,
+      0,
+      2,
+      7,
+      3,
+      5,
+      4,
+      6
+    ],
+    "laws": {},
+    "targeted": {},
+    "treasury": 0,
+    "president": 1,
+    "terms": {
+      "1": 1
+    },
+    "termAge": 0,
+    "voteIn": 2,
+    "vote": {
+      "key": "ticaretStd",
+      "target": null,
+      "opened": 6.559999999999993,
+      "yes": [
+        7,
+        3,
+        4,
+        6,
+        1
+      ],
+      "no": [
+        5
+      ],
+      "speeches": [
+        {
+          "id": 7,
+          "txt": "Geleceği anlayan onu yönetir.",
+          "yes": true
+        },
+        {
+          "id": 3,
+          "txt": "Bu masada oturmak bile bir zaferdir. Onu harcamayalım.",
+          "yes": true
+        },
+        {
+          "id": 4,
+          "txt": "Zayıflık davettir. Bu meclis güçlüye saygı duymalı.",
+          "yes": true
+        },
+        {
+          "id": 6,
+          "txt": "Refah paylaşıldıkça büyür.",
+          "yes": true
+        }
+      ],
+      "done": false,
+      "age": 0,
+      "sponsor": null
+    },
+    "dead": false,
+    "byConvention": true,
+    "firstLaw": null,
+    "pariahs": {}
+  },
+  "inbox": [
+    {
+      "uid": 1,
+      "kind": "cncnew",
+      "ico": "🌐",
+      "cls": "sci",
+      "pause": true,
+      "title": "GALAKTİK KONSEY KURULDU",
+      "sub": "Saf Akıl Ağı galaksiyi masaya çağırdı",
+      "key": "cncnew",
+      "born": 6.559999999999993,
+      "data": 1
+    },
+    {
+      "uid": 2,
+      "kind": "cncvote",
+      "ico": "🌐",
+      "cls": "sci",
+      "pause": true,
+      "title": "KONSEY OYLAMASI",
+      "sub": "Evrensel Ticaret Standardı",
+      "key": "cnc6.559999999999993",
+      "born": 6.559999999999993,
+      "data": "ticaretStd"
+    }
+  ],
+  "modal": "",
+  "pane": ""
+}
