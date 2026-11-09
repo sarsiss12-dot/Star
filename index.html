@@ -1309,7 +1309,7 @@ body.fauxFull canvas#map{width:100vw !important;height:100dvh !important}
    Viewport constraints are divided by scale. Never zoom #app, #game or any map Canvas. */
 html[data-ui-scaled] :is(#topbar,#tools,#sidebar,#sbToggle,#timepod,#inbox,#alerts,#seltag,#mapToast,.tWrap,#menu .mwrap,.dpBox,.mbox,.riBox){zoom:var(--ui-scale)}
 html[data-ui-scaled] :is(#mp1,#mp6App) .mp1-wrap{zoom:var(--ui-scale);max-width:min(560px,calc((100vw - 32px) / var(--ui-scale)))}
-html[data-ui-scaled] #topbar{width:calc(100% / var(--ui-scale));right:auto}
+html[data-ui-scaled] #topbar{width:auto;right:0}
 html[data-ui-scaled] #sidebar{height:calc((100dvh - var(--top)*var(--ui-scale)) / var(--ui-scale));top:var(--top);bottom:auto;max-width:calc(65vw / var(--ui-scale))}
 html[data-ui-scaled] #sbToggle{right:min(var(--sb),calc(65vw / var(--ui-scale)))}
 html[data-ui-scaled] #sbToggle.off{right:0}

@@ -2242,6 +2242,8 @@ function aiRespond(ai, offer){
                   'Teklif uygulanabilir değil';
     return {v:'red', why:neden, quote:q};
   }
+  const join=(offer.want||[]).find(x=>x.t==='warJoin');
+  if(join){const enemy=G.emps[join.target],sender=G.emps[offer.from];if(!enemy||!warSupportReach(ai,enemy,sender,offer.give)||aiKnownPower(ai,enemy)>Math.max(1,aiKnownPower(ai,ai)+aiKnownPower(ai,sender))*2.5)return {v:'red',why:'Bilinen güç veya askerî erişim desteği karşılamıyor'};}
   const ev = evalOffer(ai, offer);
   /* ═══ FAZ 86C: SERT KİLİT PARA İLE AŞILAMAZ ═══ */
   if (ev.hardLock)

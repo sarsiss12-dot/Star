@@ -246,6 +246,7 @@ let relay,px,base,tls,bH,bB,bC;
   });
   if(process.env.FEDFOUND0_THREE==='1')await test('FD3 üç insan, misafir kurucu, özel davet ret/iptal, yeniden bağlantı ve karma oy',async()=>{metrics.fd3=await require('./helpers/beta-fed-found0-three.cjs')(H2,B2,C2,out);});
   if(process.env.MPP0==='1')await test('P0 katılımcı görüş, sağlık, özel kararlar, rota ve görsel hareket',async()=>{metrics.p0=await require('./helpers/mp-p0-guest-browser.cjs')(H2,B2,C2,out);});
+  if(process.env.WAR_CENTER0==='1')await test('WC0 üç insan koşullu koalisyon, karşı teklif, ücret ve savaş merkezi',async()=>{metrics.warCenter=await require('./helpers/beta-war-center0-browser.cjs')(H2,B2,C2,out,{tap,wait,openCard,addRes});});
   if(process.env.BOARD2==='1')await test('BD2 koloni paneli ve yetkili uzaktan inşa',async()=>{metrics.board2=await require('./helpers/beta-board2-browser.cjs')(H2,B2,C2,out);});
   if(process.env.BOARD1==='1')await test('BD1 federasyon FIFO, savaş yardımı, geri çekme ve ayrı aday rızası',async()=>{metrics.board1=await require('./helpers/beta-board1-browser.cjs')(H2,B2,C2,out);});
   await test('sayfa hataları yok',async()=>{assert.deepEqual(errors,[]);});

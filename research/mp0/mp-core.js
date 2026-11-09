@@ -88,10 +88,11 @@ function sha256(str){
 function canon(v){if(Array.isArray(v))return '['+v.map(x=>x===undefined?'null':canon(x)).join(',')+']';
   if(v&&typeof v==='object')return '{'+Object.keys(v).filter(k=>v[k]!==undefined).sort().map(k=>JSON.stringify(k)+':'+canon(v[k])).join(',')+'}';return JSON.stringify(v);}
 const HEX=(s,n)=>typeof s==='string'&&s.length===n&&/^[a-f0-9]+$/.test(s);
-const ITEM_T=['res','peace','nap','pact','ally','intel','spynet','passage','tech','sys','lux','freight','tribute','warOn','peaceWith'];
+const ITEM_T=['res','peace','nap','pact','ally','intel','spynet','passage','tech','sys','lux','freight','tribute','warOn','peaceWith','warJoin'];
 const RES_K=['min','ene','yiy','ala','tuk','ara','etk'];
 function pkgItem(it){if(!plain(it)||!ITEM_T.includes(it.t)||Object.keys(it).length>8)return 'items';
   for(const [k,v] of Object.entries(it))if(!['number','string','boolean'].includes(typeof v)||typeof v==='number'&&!Number.isFinite(v)||typeof v==='string'&&v.length>40)return 'items';
+  if(it.t==='warJoin'&&(!onlyKeys(it,['t','target','front','plan'])||!int(it.target,0,63)||!((int(it.front,1,2147483647)&&!has(it,'plan'))||(int(it.plan,1,2147483647)&&!has(it,'front')))))return 'items';
   if(it.t==='res'&&(!RES_K.includes(it.r)||!Number.isFinite(it.v)||it.v<=0||it.v>1e7))return 'amount';return null;}
 /* Paketi doğrula (yan etkisiz). Metin ya da nesne alır. Önce boyut ve bütünlük, sonra şema. */
 const SQ_LIFE=180;   // MP.6.2 statüko teklifinin ömrü (gün)
@@ -104,7 +105,7 @@ function validatePackage(input,o={}){
   if(!onlyKeys(pkg,KEYS)||KEYS.some(k=>!has(pkg,k)))return fail('fields');
   if(pkg.format!==PKG_FORMAT)return fail('format');
   if(pkg.mpVersion!==PKG_VERSION)return fail('version');
-  const build=has(o,'build')?o.build:(typeof BUILD_ID==='string'?BUILD_ID:null);if(pkg.build!==build&&!((build==='96h10p7'&&pkg.build==='96h10p6')||(build==='96h10p8'&&['96h10p6','96h10p7'].includes(pkg.build))||(build==='96h10p9'&&['96h10p6','96h10p7','96h10p8'].includes(pkg.build))||(build==='96h10p10'&&['96h10p6','96h10p7','96h10p8','96h10p9'].includes(pkg.build))||(build==='96h10p11'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10'].includes(pkg.build))||(build==='96h10p12'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11'].includes(pkg.build))||(build==='96h10p13'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12'].includes(pkg.build))||(build==='96h10p14'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13'].includes(pkg.build))||(build==='96h10p15'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14'].includes(pkg.build))||(build==='96h10p16'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15'].includes(pkg.build))||(build==='96h10p17'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16'].includes(pkg.build))))return fail('build'); // BETA-P0.1: explicit v8/package4 compatibility, all remaining checks still mandatory
+  const build=has(o,'build')?o.build:(typeof BUILD_ID==='string'?BUILD_ID:null);if(pkg.build!==build&&!((build==='96h10p7'&&pkg.build==='96h10p6')||(build==='96h10p8'&&['96h10p6','96h10p7'].includes(pkg.build))||(build==='96h10p9'&&['96h10p6','96h10p7','96h10p8'].includes(pkg.build))||(build==='96h10p10'&&['96h10p6','96h10p7','96h10p8','96h10p9'].includes(pkg.build))||(build==='96h10p11'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10'].includes(pkg.build))||(build==='96h10p12'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11'].includes(pkg.build))||(build==='96h10p13'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12'].includes(pkg.build))||(build==='96h10p14'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13'].includes(pkg.build))||(build==='96h10p15'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14'].includes(pkg.build))||(build==='96h10p16'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15'].includes(pkg.build))||(build==='96h10p17'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16'].includes(pkg.build))||(build==='96h10p18'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17'].includes(pkg.build))))return fail('build'); // BETA-P0.1: explicit v8/package4 compatibility, all remaining checks still mandatory
   if(typeof pkg.save8!=='string')return fail('fields');if(pkg.save8.length>MAX_SAVE8)return fail('too-big');
   if(!Number.isFinite(pkg.createdAt)||typeof pkg.saveId!=='string'||!/^s-[a-f0-9]{16}$/.test(pkg.saveId))return fail('fields');
   const I=pkg.integrity;if(!plain(I)||!onlyKeys(I,['alg','save8','body'])||I.alg!=='SHA-256'||!HEX(I.save8,64)||!HEX(I.body,64))return fail('integrity');
@@ -627,7 +628,7 @@ function createHost(opts){
         const own=(m,cl)=>{if(remoteHuman(e))note(e.id,m,cl);};   // ilan edene özel iletiler; motorun kamu iletileri (gerekçesiz savaş…) host günlüğüne motorun yazdığı gibi
         if(council){own('KONSEY YASAĞI: '+o.name+' korunuyor. Yine de saldırırsan konsey sana döner.','war');councilPunish(e);councilBlocksWar=()=>false;}
         let ok;try{ok=declareWar(e,o);}finally{if(council)councilBlocksWar=cb0;}
-        if(!ok)return false;if(setWarGoal(e,o,c.goal))own('Savaş hedefi: '+WAR_GOALS[c.goal].n,'war');return true;}},
+        if(!ok)return false;if(setWarGoal(e,o,c.goal))own('Savaş hedefi: '+WAR_GOALS[c.goal].n,'war');return {ok:true,extra:{front:warLedgerFind(e.id,o.id)?.id||0}};}},
     /* ittifakı sonlandır (canEndAlliance / endAlliance), ticaret anlaşmasını feshet (tek oyunculu unpactYes satırları),
        ambargo (setEmbargo), hediye (tek oyunculu giftDo satırları) */
     endAlliance:{say:'actor',keys:['kind','target'],check:c=>int(c.target,0,63),locate:(e,c)=>{const o=diploTarget(e,c);return o?{o}:{err:'no-target'};},
@@ -663,6 +664,10 @@ function createHost(opts){
         const r=statusQuoPeace(e,o);if(!(r&&r.ok))return {ok:false,why:(r&&r.why)||'Barış uygulanamadı'};q.status='accepted';dipNotify(o.id,'Statüko barışı imzalandı — '+e.name,'win');return true;}},
     /* ═══ MP.3 — diplomasi. Yeni motor yok: dealQuote / executeDeal / aiRespond. Teklif kaydı Save8 dışında,
        oturumdadır (dipView yalnız taraflara gönderir). Taraf olmayan teklif kimliği "yok" ile aynı kodu alır. */
+    warPrepare:{keys:['kind','target','goal'],check:c=>int(c.target,0,63)&&typeof c.goal==='string'&&has(WAR_GOALS,c.goal),locate:()=>({}),why:()=>null,roots:()=>[],apply(e,at,c){const r=warPrepareCreate(e,c.target,c.goal);return r.ok?{ok:true,extra:{id:r.id}}:r;}},
+    warLaunch:{keys:['kind','id','stamp'],check:c=>int(c.id,1,2147483647)&&typeof c.stamp==='string'&&c.stamp.length<=20000,locate:()=>({}),why:()=>null,roots:()=>[],apply(e,at,c){const r=warPrepareLaunch(e,c.id,c.stamp);return r.ok?{ok:true,extra:{front:r.front}}:r;}},
+    warPrepareWithdraw:{keys:['kind','id','member'],check:c=>int(c.id,1,2147483647)&&(c.member===null||int(c.member,0,63)),locate:()=>({}),why:()=>null,roots:()=>[],apply:(e,at,c)=>warPrepareWithdraw(e,c.id,c.member)},
+    warCenterRead:{ro:true,keys:['kind','front'],check:c=>int(c.front,0,2147483647),locate:()=>({}),why:(e,at,c)=>c.front&&!warCenterIndex(e).some(x=>x.id===c.front)?'no-target':null,roots:()=>[],apply(e,at,c){return {ok:true,extra:pure(()=>c.front?{report:warNewsReport(e,c.front)}:{index:warCenterIndex(e),preparations:warPrepareView(e)})};}},
     offer:{keys:['kind','to','give','want'],
       check:c=>int(c.to,0,63)&&dipCheck(c),
       locate:()=>({}),
@@ -981,6 +986,7 @@ function createHost(opts){
     if(!Array.isArray(list)||list.length>8)return null;const out=[];
     for(const it of list){if(!plain(it))return null;
       if(it.t==='res'&&onlyKeys(it,['t','r','v'])&&DIP_RES.includes(it.r)&&int(it.v,1,10000000))out.push({t:'res',r:it.r,v:it.v});
+      else if(it.t==='warJoin'&&onlyKeys(it,['t','target','front','plan'])&&int(it.target,0,63)&&((int(it.front,1,2147483647)&&!has(it,'plan'))||(int(it.plan,1,2147483647)&&!has(it,'front'))))out.push({t:'warJoin',target:it.target,...(it.plan?{plan:it.plan}:{front:it.front})});
       else if(DIP_TREATY.includes(it.t)&&onlyKeys(it,['t']))out.push({t:it.t});   // MP.6.2: barış + antlaşmalar (motorun dealQuote / executeDeal'i)
       else return null;}
     return out;
@@ -996,6 +1002,7 @@ function createHost(opts){
   /* Gönderim kapısı: insan alıcıda yalnız GÖNDERENİN kendi yükümlülükleri denetlenir (karşı tarafın stoğu gizli kalır,
      kabulde dealQuote tam denetler); AI alıcıda tek oyunculu dealSend gibi tam quote. */
   function dipGate(q,A,B){
+    for(const it of q.norm.give||[])if(it.t==='warJoin'){const known=it.front&&warCenterIndex(A).some(f=>f.id===it.front),invited=D.offers.some(r=>r.from===B.id&&r.to===A.id&&r.expires>G.day&&r.give.concat(r.want).some(x=>x.t==='warJoin'&&x.target===it.target&&(it.plan?x.plan===it.plan:x.front===it.front)));if(!known&&!invited)return {code:'no-target',detail:['Bu savaş için bilinen kayıt veya sana gönderilmiş davet gerekli']};}
     if(isHumanActor(B)){const pre=String(B.name)+' → ',bad=(q.reasons||[]).map(String).filter(x=>!x.startsWith(pre));return bad.length?{code:'quote',detail:bad.slice(0,4)}:null;}
     return q.ok?null:{code:'quote',detail:(q.reasons||[]).slice(0,4).map(String)};
   }
@@ -1055,6 +1062,7 @@ function createHost(opts){
       if(G.day>r.expires){r.status='expired';r.finished=G.day;r.why='Süre doldu';dipNotify(r.from,'Teklif süresi doldu — '+(b?b.name:''));dipNotify(r.to,'Teklif süresi doldu — '+(a?a.name:''));}
       else if(!dipParty(a)||!dipParty(b)||!a.contact[b.id]||!b.contact[a.id]){r.status='invalid';r.finished=G.day;r.why='Taraflardan biri artık anlaşma yapamaz';
         dipNotify(r.from,'Teklif geçersizleşti');dipNotify(r.to,'Teklif geçersizleşti');}
+      else if([[a,b,r.give],[b,a,r.want]].some(([giver,taker,items])=>items.some(it=>it.t==='warJoin'&&!warSupportGate(giver,taker,it).ok))){r.status='invalid';r.finished=G.day;r.why='Hedef savaş veya katılım koşulları değişti';dipNotify(r.from,r.why);dipNotify(r.to,r.why);}
       else if(r.give.concat(r.want).some(it=>it.t!=='res'&&treatyAlreadyActive(a,b,it))){r.status='invalid';r.finished=G.day;r.why='Bu anlaşma artık yürürlükte';   // ör. barış başka teklifle imzalandı
         dipNotify(r.from,'Teklif geçersizleşti — anlaşma zaten yürürlükte');dipNotify(r.to,'Teklif geçersizleşti — anlaşma zaten yürürlükte');}}
   }

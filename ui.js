@@ -358,6 +358,7 @@ const UI = {
   },
 
   act(a, x, el){
+    if(typeof WarCenterUI!=='undefined'&&WarCenterUI.act(a,x))return;
     if(typeof ColonyUI!=='undefined'&&ColonyUI.act(a,x))return;
     if(typeof ArchiveUI!=='undefined'&&ArchiveUI.act(a,x,el))return;
     /* FAZ 19: her arayüz eylemi yumuşak bir dokunuş sesi verir.
@@ -401,7 +402,7 @@ const UI = {
         if(key&&pSeen(s)&&el?.dataset.report===key){G.dismissedBattleReports=cleanBattleDismissals({...G.dismissedBattleReports,[s.id]:key});this.refresh();}
         break;
       }
-      case 'activeWars': this.activeWarsOpen(); break;   // MP.7.5
+      case 'activeWars': WarCenterUI.open(); break;   // MP.7.5
       case 'diploPane':
         if (typeof closeAllGroups === 'function') closeAllGroups();
         this.openDiplo(); break;
@@ -1988,7 +1989,7 @@ const UI = {
     const add=(label,action,count=1,x)=>items.push({label,action,count,x});
     if(battles)add('⚔ '+battles+' çatışma','gobattle');
     if(wars)add('⚔ '+wars+' savaş · Diplomasi','diploPane');
-    if(wars)add('⚔ Aktif savaşlar listesi · '+wars+' düşman','activeWars',0);   // MP.7.5: sayaçla aynı kanonik liste (temas yoksa "Bilinmeyen düşman")
+    add('⚔ Savaş Merkezi · '+wars+' düşman','activeWars',0);   // MP.7.5: sayaçla aynı kanonik liste (temas yoksa "Bilinmeyen düşman")
     const pending=typeof DiplomaticInbox!=='undefined'?DiplomaticInbox.pending():0;
     if(pending)add('✉ '+pending+' bekleyen diplomatik teklif','diplomaticInbox',pending);
     if(typeof ArchiveUI!=='undefined'&&ArchiveUI.newsReturnRecord())add('📰 İncelenen habere geri dön','newsReturn',0);
@@ -2037,11 +2038,12 @@ const UI = {
     const e=G.p,r=e.res,inc=e.inc,{count,minimized,wars,battles}=this.topStatusItems();
     const previous=$('resourceStrip'),left=previous?previous.scrollLeft:0;
     const cell=k=>{const d=RES[k],v=inc[k]||0;return `<div class="res" title="${d.n}"><em style="color:${d.c}">${d.ico}</em><u style="color:${d.c}">${d.k}</u><b>${fmt(r[k])}</b><s class="${v>=0?'p':'n'}">${sgn(v)}</s></div>`;};
-    $('topbar').innerHTML=`<div id="resourceStrip" aria-label="Kaynaklar; yatay kaydırılabilir" tabindex="0">`+
+    const html=`<div id="resourceStrip" aria-label="Kaynaklar; yatay kaydırılabilir" tabindex="0">`+
       ['min','ene','yiy','tuk','ala','etk'].map(cell).join('<div class="tsep"></div>')+
       `<div class="tsep"></div><div class="res" title="Aylık araştırma: ${inc.ara}"><em style="color:${RES.ara.c}">${RES.ara.ico}</em><u>ARŞ</u><b>${fmt(inc.ara)}</b><s>/ay</s></div>
       <div class="tsep"></div><div class="res" title="Filo kapasitesi"><em>⛴</em><u>FİLO</u><b>${fleetUsage(e)}/${Math.round(e.cap)}</b></div></div>
       <button id="topStatusBtn" class="topStatusBtn ${wars||battles?'hot':''} ${minimized?'hasMinimized':''}" data-a="topStatus" aria-label="${count} önemli durum${minimized?'; küçültülen olayı geri aç':'; listeyi aç'}" title="Savaş, olay ve kriz listesi">${wars||battles?'⚔':'☰'} +${count}</button>`;
+    const bar=$('topbar');if(bar._topHTML!==html||!bar.querySelector('#topStatusBtn')){bar.innerHTML=html;bar._topHTML=html;}
     $('resourceStrip').scrollLeft=left;
   },
 
@@ -2172,6 +2174,7 @@ const UI = {
     this.paintSprites();
     this.seltag();
     if(typeof ColonyUI!=='undefined')ColonyUI.refresh();
+    if(typeof WarCenterUI!=='undefined')WarCenterUI.refresh();
     this.positionToolMenus();
     $('stardate').textContent = G.year + '.' + String(G.month).padStart(2,'0');
   },
@@ -5503,6 +5506,7 @@ const UI = {
     let h=this.diploHeader('deal',o);
     h+=`<div class="mini">Taslak bu oturumda saklanır; sekme değiştirirken kaybolmaz.
       Yalnız TEKLİFİ SUN düğmesi karşı tarafa gönderir.</div>`;
+    const wcJoin=d.give.concat(d.want).find(i=>i.t==='warJoin');if(wcJoin)h+=`<p class="mini">${wcJoin.plan?'KOŞULLU KABUL: Son savaş onayına kadar ödeme, geçiş veya savaş yok. Kaynaklar rezerve edilmez.':'Kabulde belirli cepheye katılım ve ödeme birlikte uygulanır.'} Geçiş maddesi mevcut süresiz sınır iznidir; savaş bitince otomatik kalkmaz.</p>`;
     // değer yeterli olsa bile taraflar sözünü tutamayabilir
     /* ═══ FAZ 86C.1: TEK DOĞRULUK KAYNAĞI ═══
        Eskiden iki bağımsız canDeliver boolean'ından genel uygulanabilirlik
@@ -5796,7 +5800,7 @@ const UI = {
       if (executeDeal(q.norm)){
         $('diploPane').classList.remove('show');
         this.forgetDeal(d.to);
-        say('ANLAŞMA İMZALANDI — ' + o.name, 'win');
+        say((d.give.concat(d.want).some(i=>i.t==='warJoin'&&i.plan)?'KOŞULLU KABUL — Savaş Merkezi son onayını bekliyor · ':'ANLAŞMA İMZALANDI — ') + o.name, 'win');
         this.refresh();
         return;
       }
@@ -5828,13 +5832,15 @@ const UI = {
     const group=(title,items)=>`<div class="ph">${title}</div>${items.length?items.map(v=>`<div class="mini">${esc(v.name)} · ${esc(v.side==='defense'?'Hedefin yanında':'Senin yanında')} · ${esc(v.why)}</div>`).join(''):'<div class="mini">Bilinen katılımcı yok.</div>'}`;
     this.openModal(`<div class="mhd">SAVAŞ İLANI ÖNİZLEMESİ</div><div class="mbd"><div class="lead">Hedef: ${esc(p.target.name)} · ${esc(WAR_GOALS[key]?.n||'Geçersiz hedef')}</div>
       <div class="mini">Etki bedeli: ${p.cost} ◈. Son onaya kadar savaş başlamaz. İttifak tek başına otomatik savaş katılımı değildir.</div>
+      <details><summary>İsteğe bağlı: Müttefikleri savaşa çağır</summary><p class="mini">İlan sonrasında seçilenlere ayrı gönüllü destek teklifi gönderilir. Ret, ilanını geri almaz. En fazla 8 davet.</p>${G.emps.filter(e=>e.id!==G.p.id&&e.id!==id&&!e.dead&&!e.wild&&!e.crisisSide&&G.p.contact[e.id]).map(e=>`<label class="row"><span>${esc(e.name)}</span><input type="checkbox" data-war-invite="${e.id}"></label>`).join('')}</details>
       ${group('KESİN KATILACAKLAR',p.certain)}${group('KOŞULLU KATILABİLECEKLER',p.conditional)}
       <div class="ph">BİLİNMEYENLER</div><div class="mini">İstihbarat kapsamı dışındaki siyasi bağlantılar ve gizli taahhütler belirlenemez. Bu bölüm gizli devlet sayısını göstermez.</div>
       ${p.risks.map(v=>`<div class="mini">⚠ ${esc(v)}</div>`).join('')}${p.blockers.map(v=>`<div class="mini">Engel: ${esc(v)}</div>`).join('')}
-      </div><div class="mft"><button id="warFinalConfirm" data-a="warFinalConfirm" class="ch" ${p.ok?'':'disabled'}>ONAYLA · SAVAŞ İLAN ET</button><button class="ch" data-a="closem">Vazgeç</button></div>`,'war');
+      </div><div class="mft"><button class="ch" data-a="warPrepare" data-x="${id}:${key}" ${p.ok?'':'disabled'}>ÖNCE KOALİSYON HAZIRLA</button><button id="warFinalConfirm" data-a="warFinalConfirm" class="ch" ${p.ok?'':'disabled'}>ONAYLA · SAVAŞ İLAN ET</button><button class="ch" data-a="closem">Vazgeç</button></div>`,'war');
     const pending={world:G.sys,player:G.p,id,key,signature:p.signature};this._warPreview=pending;
     this._hook('warFinalConfirm',()=>{
       if(this._warPreview!==pending||G.sys!==pending.world||G.p!==pending.player)return;
+      const invites=[...document.querySelectorAll('[data-war-invite]:checked')].map(e=>+e.dataset.warInvite);if(invites.length>8){say('En fazla 8 davet seç');return;}this._warInvites=invites;
       this._devourPending=null;
     this._warPreview=null;const current=warDeclarationPreview(G.p,G.emps[id],key);
       if(current.signature!==pending.signature||!current.ok){this.warDeclarationPreview(id,key);say('Koşullar değişti; güncel önizlemeyi yeniden onayla.','war');return;}
@@ -5842,6 +5848,7 @@ const UI = {
       const actor=G.p,target=G.emps[id];
       if(!warDeclarationAccess(actor,target).ok||!declareWar(actor,target)){say('Savaş ilanı uygulanamadı; koşullar değişti.','war');return;}
       if(setWarGoal(actor,target,key))say('Savaş hedefi: '+WAR_GOALS[key].n,'war');
+      if(!(typeof MP6Stars!=='undefined'&&MP6Stars.S?.started)){this._warInvites=null;const f=warLedgerFind(actor.id,target.id);if(f)WarCenterUI.sendInvites(f.id,target.id,invites);}
       this.closeModal();this.openDiplo();
     });
   },
@@ -7810,6 +7817,7 @@ const UI = {
   },
 
   openModal(html, cls, stashable, art){
+    const modalSurface=$('modal');if(modalSurface._surfaceTimer)clearTimeout(modalSurface._surfaceTimer);modalSurface._surfaceTimer=null;modalSurface._surfacePending=null;modalSurface._surfaceKey=null;modalSurface._surfaceHTML=null;
     this._demolitionToken=null;
     this._warPreview=null;
     this._amountToken=null;this._jointSendToken=null;
@@ -7975,6 +7983,7 @@ const UI = {
   },
 
   closeModal(){
+    const modalSurface=$('modal');if(modalSurface._surfaceTimer)clearTimeout(modalSurface._surfaceTimer);modalSurface._surfaceTimer=null;modalSurface._surfacePending=null;modalSurface._surfaceKey=null;modalSurface._surfaceHTML=null;
     this._demolitionToken=null;
     this._warPreview=null;
     this._amountToken=null;this._jointSendToken=null;

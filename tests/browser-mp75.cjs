@@ -108,11 +108,13 @@ let relay,px,base,tls,bH,bB;
     assert(metrics.pane.builds>=6);assert.equal(metrics.pane.open,true);assert(metrics.pane.rewrites<=1,JSON.stringify(metrics.pane));assert(metrics.pane.kept>=6);
     await Bp.evaluate(()=>{UI.closeDiplo?UI.closeDiplo():document.getElementById('diploPane').classList.remove('show');});
   });
-  await test('A3 savaş / barış: misafir AI ile savaşta; AI barış teklifi misafirin kartına gelir; KABUL (dokunma) → host\'ta savaş biter; AKTİF SAVAŞLAR üst sayaçla aynı sayıyı gösterir',async()=>{
+  await test('A3 savaş / barış: misafir AI ile savaşta; AI barış teklifi misafirin kartına gelir; KABUL (dokunma) → host\'ta savaş biter; SAVAŞ MERKEZİ üst sayaçla aynı savaşları gösterir',async()=>{
     const x=await H.evaluate(()=>{const a=G.emps[1];const o=G.emps.find(e=>e.ai&&!e.dead&&!e.wild&&!a.war[e.id]&&!(a.ally&&a.ally[e.id])&&canPeace(e,a));if(!o)throw Error('MP75 fixture has no peace-eligible AI');a.contact[o.id]=o.contact[a.id]=true;if(!declareWar(a,o))throw Error('MP75 fixture war rejected');MP1Host.host.publish();return o.id;});
     await wait(Bp,()=>UI.topStatusItems().wars>=1);
-    const L=await Bp.evaluate(()=>{UI.act('activeWars');return {n:UI.activeWarsList().length,top:UI.topStatusItems().wars,html:document.getElementById('modal').textContent};});
-    metrics.activeWars=L;assert.equal(L.n,L.top);assert.match(L.html,/AKTİF SAVAŞLAR/);await shot(Bp,'a3-b-active-wars');await Bp.evaluate(()=>UI.closeModal());
+    await Bp.evaluate(()=>{WarCenterUI.tab='mine';UI.act('activeWars');});
+    await wait(Bp,()=>document.querySelector('#warCenterRoot [data-a="warCenterTab"]')&&WarCenterUI.index.some(f=>f.mine&&f.ended===null));
+    const L=await Bp.evaluate(()=>({n:UI.activeWarsList().length,top:UI.topStatusItems().wars,html:document.getElementById('modal').textContent,rows:document.querySelectorAll('#warCenterRoot > section.box').length,rendered:[...document.querySelectorAll('#warCenterRoot [data-a="warCenterDetail"]')].map(e=>+e.dataset.x).sort((a,b)=>a-b),expected:WarCenterUI.index.filter(f=>f.mine&&f.ended===null).map(f=>f.id).sort((a,b)=>a-b)}));
+    metrics.activeWars=L;assert.equal(L.n,L.top);assert.equal(L.rows,L.top);assert.deepEqual(L.rendered,L.expected);assert.match(L.html,/SAVAŞ MERKEZİ/);await shot(Bp,'a3-b-active-wars');await Bp.evaluate(()=>UI.closeModal());
     const id=await H.evaluate(x=>{const e=G.emps[x];e.lastOffer=e.lastOffer||{};e.lastOffer[1]=G.day;UI.peaceOffer(e);MP1Host.host.publish();const o=MP1Host.host.dip.offers.filter(o=>o.from===x&&o.to===1&&o.status==='pending').at(-1);return o?o.id:null;},x);
     if(!id)metrics.peaceFailure=await H.evaluate(x=>({day:G.day,ai:x,aiIsAI:G.emps[x].ai,guestIsAI:G.emps[1].ai,wars:G.emps[x].war,canPeace:canPeace(G.emps[x],G.emps[1]),civics:G.emps[x].civics,doctrine:G.emps[x].mizac||G.emps[x]._pers,save8:serialize(),lastOffer:G.emps[x].lastOffer,offers:MP1Host.host.dip.offers.map(o=>({id:o.id,from:o.from,to:o.to,status:o.status,give:o.give,want:o.want}))}),x);
     assert(id,'AI peace offer to the guest');const key='mp71:'+id;

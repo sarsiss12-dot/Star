@@ -59,7 +59,7 @@ const ArchiveUI = {
     const emps=r.empires||[{id:r.attacker,name:UI.warNoticeName(r.attacker)},{id:r.defender,name:UI.warNoticeName(r.defender)}];
     const known=emps.filter(e=>GalacticNews.known(e.id));
     const exact=front&&front.sides.every(id=>emps.some(e=>e.id===id));
-    const f=exact?front:null,meta=guest?MP6Stars.S.mirror?.news?.records?.find(x=>x.key===r.key)?.warStatus:null,status=(f?warNewsReport(G.p,id):meta),active=status&&status.ended===null;
+    const f=exact?front:null,meta=guest?MP6Stars.S.mirror?.news?.records?.find(x=>x.key===r.key)?.warStatus:null,status=(f?ColonyInfo.read(()=>warNewsReport(G.p,id)):meta|| (typeof WarCenterUI!=='undefined'&&WarCenterUI.status?.id===id?WarCenterUI.status:null)),active=status&&status.ended===null;
     const day=d=>Number.isFinite(d)?(2210+Math.floor(d/360))+'.'+String(Math.floor(d%360/30)+1).padStart(2,'0')+' · gün '+Math.floor(d):'kesin tarih bilinmiyor';
     const label=id=>esc(known.find(e=>e.id===id)?.name||'Bilinmeyen devlet');
     let h=`<div class="mbd archiveDetail" data-war-status="${esc(r.key||'war-front:'+id)}"><div class="mini">Olay: ${esc(r.key||'war-front:'+id)}</div><h3>${esc(r.title||'Savaş bildirimi')}</h3>`;
@@ -81,9 +81,10 @@ const ArchiveUI = {
       h+='<p>Bilinen aktif cepheler: '+((status.fronts||[]).map(x=>'#'+x.id+' · '+x.sides.map(name).join(' ↔ ')).join(' / ')||(active?'BİLİNMİYOR':'Bu tarihsel savaş sona erdi'))+'</p>';
       h+='<p>Kayıtlı ilerleme: '+((status.progress||[]).map(x=>esc(G.sys[x.sys]?.name||'Bilinmeyen sistem')+' · '+name(x.from)+' → '+name(x.to)+' · '+day(x.day)).join(' / ')||'BİLİNMİYOR · görünür bir ele geçirme kaydı yok')+'</p>';
     }
+    if(typeof WarCenterUI!=='undefined'&&status){WarCenterUI.front=status.id;WarCenterUI.plan=0;WarCenterUI.status=status;WarCenterUI.last=Date.now();WarCenterUI.request++;if(Number.isInteger(r.id))WarCenterUI.backNews=r;h+=WarCenterUI.extras(status);}
     h+='<p>Gizli filo konumları verilmez. Geçmiş güç ve yorgunluk anlık görüntüleri kaydedilmedi; BİLİNMİYOR alanları başka bir savaşın güncel verileriyle doldurulmaz.</p>';
     const foe=known.some(e=>e.id===G.p.id)?known.find(e=>e.id!==G.p.id):null;
-    this.shell(h+'</div>',(foe?'<button class="ch" data-a="wdDiplo">'+esc(foe.name)+' · Güncel diplomasi</button>':'')+'<button class="ch" data-a="news">Haber listesine dön</button>',false,'⚔ SAVAŞ DURUMU');
+    this.shell(h+'</div>',(foe?'<button class="ch" data-a="warCenterPeace" data-x="'+foe.id+'">'+esc(foe.name)+' · Güncel diplomasi</button>':'')+'<button class="ch" data-a="news">Haber listesine dön</button>',false,'⚔ SAVAŞ DURUMU');
     if(foe){const world=G.emps,player=G.p,marker='data-war-status="'+esc(r.key||'war-front:'+id)+'"';UI._hook('wdDiplo',()=>{if(G.emps!==world||G.p!==player||!$('modal').innerHTML.includes(marker))return;UI.closeModal();UI.selectDiplo(foe.id,'relation');});}
 
   },
@@ -118,8 +119,8 @@ const ArchiveUI = {
     if(r.kind==='vassal'){UI.vsRecord(r.fid,r.id);return;}
     const gate=DiplomaticInbox.gate(r),offer=DiplomaticInbox.deal(r),f=r.fid!==undefined?fedOf(r.fid):null;
     const terms=offer?'<div class="ph">SANA VERİYOR</div>'+offer.give.map(i=>'<p>'+esc(dealLabel(i))+'</p>').join('')+'<div class="ph">SENDEN İSTİYOR</div>'+offer.want.map(i=>'<p>'+esc(dealLabel(i))+'</p>').join('')+`<div class="mini">İmza maliyeti: ${gate.quote?.cost??0} Etki · gönderen öder</div>`:r.kind==='fedvote'&&f?.vote&&fedVoteToken(f.vote)===r.token?UI.fedAgendaContext(f.vote):'';
-    const counterOK=gate.ok&&r.kind==='aideal';
-    this.shell(`<div class="mbd archiveDetail archive95e"><h3>KARAR · ${esc(r.title)}</h3><div class="mini">${esc(this.date(r))} · ${esc(GalacticNews.known(r.from)?r.name:'Bilinmeyen devlet')} · ${esc(DiplomaticInbox.types[r.kind])} · ${esc(DiplomaticInbox.states[r.status])}</div><p>${esc(r.sub)}</p>${this.decisionContext(r,f)}${terms}
+    const counterOK=gate.ok&&r.kind==='aideal',conditional=offer?.give.concat(offer.want).some(i=>i.t==='warJoin'&&i.plan)?'<p>KOŞULLU KABUL · Son savaş onayına kadar ödeme, geçiş veya savaş uygulanmaz.</p>':'';
+    this.shell(`<div class="mbd archiveDetail archive95e"><h3>KARAR · ${esc(r.title)}</h3><div class="mini">${esc(this.date(r))} · ${esc(GalacticNews.known(r.from)?r.name:'Bilinmeyen devlet')} · ${esc(DiplomaticInbox.types[r.kind])} · ${esc(DiplomaticInbox.states[r.status])}</div><p>${esc(r.sub)}</p>${this.decisionContext(r,f)}${conditional}${terms}
       <div class="mini">${Math.max(0,Math.ceil(r.expires-G.day))} gün · son gün ${Math.floor(r.expires)}</div>${gate.why?'<p id="inboxReason" role="status">'+esc(gate.why)+'</p>':''}
       ${GalacticNews.known(r.from)?`<button class="abtn" data-a="inboxEmpire" data-x="${r.id}">Devleti incele · teklif saklanır</button>`:''}
       ${f?`<button class="abtn" data-a="inboxFederation" data-x="${r.id}">Federasyon bölümünü aç · karar saklanır</button>`:''}
@@ -166,3 +167,87 @@ const ArchiveUI = {
     return true;
   }
 };
+
+/* BETA-WAR-CENTER.0: shared presentation over authoritative warLedger IDs.
+   The guest asks for a per-observer read DTO only while this view is open. */
+const WarCenterUI={
+ tab:'mine',front:0,plan:0,confirmPlan:0,preparations:[],status:null,index:[],backNews:null,request:0,last:0,sig:'',
+ guest(){return typeof MP6Stars!=='undefined'&&MP6Stars.S?.started;},
+ read(front,done){if(this.guest())return MP6Stars.warCenterRead(front,done);done(front?{report:ColonyInfo.read(()=>warNewsReport(G.p,front))}:{index:warCenterIndex(G.p),preparations:warPrepareView(G.p)});return true;},
+ open(front=0,news=null,plan=0){this.front=+front||0;this.plan=plan;this.confirmPlan=0;this.backNews=news;this.status=null;this.sig='';this.last=0;const req=++this.request;
+  UI.openModal('<div class="mhd">⚔ SAVAŞ MERKEZİ<button class="riX" data-a="closem">✕</button></div><div class="mbd" id="warCenterRoot">Host bilgisi hazırlanıyor…</div>','war');
+  UI.surfaceReplace($('modal'),$('modal').innerHTML,'war-center-loading');
+  this.load(req);
+ },
+ load(req=this.request){this.last=Date.now();const front=this.front;this.read(front,data=>{if(req!==this.request||!$('warCenterRoot')||$('modal').classList.contains('hidden')||front!==this.front)return;
+   if(data.error){$('warCenterRoot').textContent='Bilgi alınamadı: '+data.error;return;}
+   const sig=JSON.stringify(data);if(sig===this.sig)return;this.sig=sig;
+   if(front&&data.report){this.status=data.report;this.detail(data.report);}else if(front){$('warCenterRoot').textContent='Bu tarihsel cephe için yetkili bilgi bulunamadı.';}else{this.index=data.index||[];this.preparations=data.preparations||[];if(this.plan)this.planDetail();else this.list();}
+  });},
+ refresh(){if(this.confirmPlan||$('modal').classList.contains('hidden')||!$('warCenterRoot')||Date.now()-this.last<1400)return;this.load();},
+ label(id){return id===0?G.p.name:UI.diploKnown(id)?G.emps[id]?.name||'Bilinmeyen devlet':'Bilinmeyen devlet';},
+ list(){const rows=this.index.filter(r=>this.tab==='past'?r.ended!==null:r.ended===null&&(this.tab==='mine'?r.mine:!r.mine));
+  const tabs=[['mine','Benim Savaşlarım'],['known','Bilinen Savaşlar'],['past','Geçmiş Savaşlar']].map(([k,n])=>`<button class="abtn ${this.tab===k?'pri':''}" data-a="warCenterTab" data-x="${k}">${n}</button>`).join('');
+  let h=`<div class="mhd"><span>⚔ SAVAŞ MERKEZİ</span><button class="riX" data-a="closem">✕</button></div><div class="mbd" id="warCenterRoot"><nav class="act2">${tabs}</nav><p class="mini">Yalnız yetkili olduğun savaş kayıtları. Bilinmeyen güç, kayıp ve tarih uydurulmaz.</p>`;
+  if(this.tab==='mine'){const unknown=UI.activeWarsList().filter(x=>!this.index.some(f=>f.ended===null&&f.sides.includes(x.id)));for(const x of unknown)h+=`<section class="box"><b>${esc(x.name)}</b><p>Cephe ayrıntısı bilinmiyor · ${x.months??'?'} ay</p></section>`;}
+  h+=rows.map(r=>`<section class="box"><div class="bt">${r.sides.map(id=>esc(this.label(id))).join(' ↔ ')}</div><div class="mini">Sefer #${r.campaign} · Cephe #${r.id} · ${r.opened===null?'Başlangıç bilinmiyor':'Başlangıç günü '+Math.floor(r.opened)} · ${r.ended===null?'AKTİF':'Bitiş günü '+Math.floor(r.ended)}</div><button class="abtn" data-a="warCenterDetail" data-x="${r.id}">SAVAŞ AYRINTISI</button></section>`).join('')||'<p>Bu bölümde bilinen kayıt yok.</p>';
+  if(this.tab==='mine')for(const p of this.preparations)h+=`<section class="box"><b>KOALİSYON HAZIRLIĞI #${p.id}</b><p>${esc(this.label(p.owner))} → ${esc(this.label(p.target))} · ${esc(WAR_GOALS[p.goal]?.n||p.goal)} · ${esc(p.state)}</p><button class="abtn" data-a="warPreparation" data-x="${p.id}">KABULLER / SON ONAY</button></section>`;
+  h+='</div><div class="mft"><button class="ch" data-a="diplomaticInbox">TEKLİFLER / GELEN KUTUSU</button><button class="ch" data-a="news">HABERLER</button></div>';
+  UI.surfaceRender($('modal'),h,'war-center',true);
+ },
+ detail(r){
+  const record=this.backNews||{front:r.id,key:'war-front:'+r.id,title:'Savaş ayrıntısı',empires:r.sides.map(id=>({id,name:this.label(id)}))};
+  ArchiveUI.warStatus(record);
+ },
+ extras(status){if(!status)return '';const mine=status.sides.includes(0),open=status.ended===null;
+  let h='<section class="box" id="warCenterRoot"><b>SAVAŞ MERKEZİ · Cephe #'+status.id+'</b><p>Katılım yalnız karşılıklı anlaşma ve host doğrulamasıyla gerçekleşir. Bu, ayrı filo kontrolü veya garanti zafer sözü değildir.</p>';
+  if(open){if(mine)h+=`<button class="abtn pri" data-a="warCenterSupport" data-x="${status.id}:0">ASKERÎ DESTEK İSTE</button>`;
+   else for(const id of status.sides)h+=`<button class="abtn" data-a="warCenterCompose" data-x="${status.id}:${id}:0">${esc(this.label(id))} tarafına katılmayı öner</button>`;
+   if(mine){const foe=status.sides.find(id=>id!==0);h+=`<button class="abtn" data-a="warCenterPeace" data-x="${foe}">BARIŞ / STATÜKO GÖRÜŞMESİ</button>`;}}
+  h+='<button class="abtn" data-a="warCenter">SAVAŞ MERKEZİ LİSTESİNE DÖN</button>';
+  if(this.backNews)h+=`<button class="abtn" data-a="newsDetail" data-x="${this.backNews.id}">HABERE DÖN</button>`;
+  return h+'</section>';
+ },
+ support(front,sponsor){this.front=front;const enemy=this.status?.sides.find(id=>id!==sponsor);if(!Number.isInteger(enemy))return;
+  const candidates=G.emps.filter(e=>e.id!==sponsor&&e.id!==enemy&&!e.dead&&!e.wild&&!e.crisisSide&&G.p.contact[e.id]&&!e.war[enemy]&&e.contact?.[enemy]!==false);
+  UI.openModal(`<div class="mhd">DESTEK DAVETİ<button class="riX" data-a="closem">✕</button></div><div class="mbd"><p>Yalnız seçtiğin devletle teklif hazırlanır; göndermek veya kabul etmek diğer adayları savaşa sokmaz.</p>${candidates.map(e=>`<button class="abtn" data-a="warCenterCompose" data-x="${front}:${sponsor}:${e.id}">${esc(e.name)}</button>`).join('')||'Bilinen uygun aday yok.'}</div>`,'war');
+ },
+ compose(front,sponsor,joiner){if(sponsor!==0&&joiner!==0)return;const r=this.status||this.index.find(x=>x.id===front),enemy=r?.sides.find(id=>id!==sponsor);if(!Number.isInteger(enemy))return;
+  const to=sponsor===0?joiner:sponsor;this.request++;UI.closeModal();UI.openDeal(to);UI.deal.give=sponsor===0?[]:[{t:'warJoin',front,target:enemy}];UI.deal.want=sponsor===0?[{t:'warJoin',front,target:enemy}]:[];
+  UI.dealMsg='Cephe #'+front+' · Kaynak ve geçiş şartlarını mevcut masada düzenle. Kabulde ödeme ve katılım birlikte, bir kez uygulanır. Karşı teklif aynı cephe kimliğini korur.';UI.drawDeal();
+ },
+ act(a,x){if(this.prepAct(a,x))return true;if(!['warCenter','warCenterTab','warCenterDetail','warCenterSupport','warCenterCompose','warCenterPeace'].includes(a))return false;
+  if(a==='warCenterPeace'){UI.closeModal();UI.selectDiplo(+x,'relation');}
+  if(a==='warCenter')this.open();if(a==='warCenterTab'&&['mine','known','past'].includes(x)){this.tab=x;this.list();}
+  if(a==='warCenterDetail')this.open(+x);if(a==='warCenterSupport'){const[f,s]=String(x).split(':').map(Number);this.support(f,s);}
+  if(a==='warCenterCompose')this.compose(...String(x).split(':').map(Number));return true;
+ }
+};
+
+Object.assign(WarCenterUI,{
+ command(c,done){
+  if(this.guest()){if(!MP6Stars.warCommand(c,done))done({ok:false,why:'Host bağlı değil'});return;}
+  if(typeof MP1Host!=='undefined'&&MP1Host.host&&MP1Host.started){done(MP1Host.host.local(c));return;}
+  if(c.kind==='offer'){const o={from:G.p.id,to:c.to,give:c.give,want:c.want,born:G.day,expires:G.day+180},q=dealQuote(o),b=G.emps[c.to];if(!q.ok||!b?.ai){done({ok:false,why:q.reasons?.[0]||'Bu insan bağlı değil'});return;}const r=aiRespond(b,q.norm);if(r.v==='kabul'){done({ok:executeDeal(o),extra:{ai:r.v}});return;}if(r.v==='karsi')UI.aiOffer({from:b.id,to:0,give:o.want,want:o.give.concat(r.add||[]),born:G.day,expires:G.day+180});done({ok:true,extra:{ai:r.v,why:r.why}});return;}
+  const e=G.p,r=c.kind==='warPrepare'?warPrepareCreate(e,c.target,c.goal):c.kind==='warLaunch'?warPrepareLaunch(e,c.id,c.stamp):warPrepareWithdraw(e,c.id,c.member);
+  done(r.ok?{ok:true,extra:r}:r);
+ },
+ planDetail(){const p=this.preparations.find(x=>x.id===this.plan);if(!p){$('warCenterRoot').textContent='Bu hazırlık için yetkili kayıt yok.';return;}
+  let h=`<div class="mhd">KOALİSYON HAZIRLIĞI #${p.id}<button class="riX" data-a="closem">✕</button></div><div class="mbd" id="warCenterRoot"><p>${esc(this.label(p.owner))} → ${esc(this.label(p.target))} · ${esc(WAR_GOALS[p.goal]?.n||p.goal)}</p><p>Durum: ${esc(p.state)} · Son gün ${p.expires}</p><p>Kabul, koşullu taahhüttür. Son savaş onayına kadar ödeme, geçiş izni veya savaş uygulanmaz. Kaynaklar rezerve edilmez; son onayda tekrar denetlenir.</p>`;
+  for(const c of p.commitments)h+=`<section class="box"><b>${esc(this.label(c.member))} · ${esc(c.state)}</b><p>Veren: ${c.terms.give.map(x=>esc(dealLabel(x))).join(' · ')||'—'}</p><p>İstenen: ${c.terms.want.map(x=>esc(dealLabel(x))).join(' · ')||'—'}</p>${p.state==='pending'&&c.state==='accepted'?`<button class="abtn" data-a="warPrepareWithdraw" data-x="${p.id}:${c.member}">BU KABULÜ GERİ ÇEK</button>`:''}</section>`;
+  if(p.owner===0&&p.state==='pending'){h+=`<button class="abtn" data-a="warPrepareInvite" data-x="${p.id}">KATILIM TEKLİFİ HAZIRLA</button><p>${esc(p.quote?.why||'Host son koşulları denetler')}</p><button class="abtn pri" data-a="warPrepareLaunchAsk" data-x="${p.id}" ${p.quote?.ok?'':'disabled'}>SON SAVAŞ ONAYI</button><button class="abtn" data-a="warPrepareWithdraw" data-x="${p.id}:cancel">HAZIRLIĞI İPTAL ET</button>`;}
+  h+='<button class="abtn" data-a="warCenter">SAVAŞ MERKEZİNE DÖN</button></div>';UI.surfaceRender($('modal'),h,'war-center-plan',true);
+ },
+ prepAct(a,x){if(!['warPrepare','warPreparation','warPrepareInvite','warPrepareCompose','warPrepareLaunchAsk','warPrepareLaunch','warPrepareWithdraw'].includes(a))return false;
+  if(a==='warPrepare'){const[target,goal]=String(x).split(':');const request=++this.request;UI.openModal('<div class="mhd">KOALİSYON HAZIRLIĞI</div><div class="mbd" id="warCenterRoot">Host onayı bekleniyor…</div>','war');this.confirmPlan=-1;this.command({kind:'warPrepare',target:+target,goal},r=>{if(this.request!==request||!$('warCenterRoot'))return;this.confirmPlan=0;if(r.ok)this.open(0,null,r.extra.id);else $('warCenterRoot').textContent=r.why||r.code||'Hazırlık reddedildi';});}
+  if(a==='warPreparation')this.open(0,null,+x);
+  if(a==='warPrepareInvite'){const p=this.preparations.find(p=>p.id===+x);if(!p||p.owner!==0)return true;UI.openModal(`<div class="mhd">KATILIM ADAYI<button class="riX" data-a="closem">✕</button></div><div class="mbd">${G.emps.filter(e=>e.id!==0&&e.id!==p.target&&!e.dead&&!e.wild&&!e.crisisSide&&G.p.contact[e.id]).map(e=>`<button class="abtn" data-a="warPrepareCompose" data-x="${p.id}:${e.id}">${esc(e.name)}</button>`).join('')}</div>`,'war');}
+  if(a==='warPrepareCompose'){const[id,member]=String(x).split(':').map(Number),p=this.preparations.find(p=>p.id===id);if(!p||p.owner!==0)return true;this.request++;UI.closeModal();UI.openDeal(member);UI.deal.give=[];UI.deal.want=[{t:'warJoin',plan:id,target:p.target}];UI.dealMsg='Hazırlık #'+id+' için müzakere. Katılım maddesini kaldırırsan taslak normal bir anlaşma olur.';UI.drawDeal();}
+  if(a==='warPrepareLaunchAsk'){const p=this.preparations.find(p=>p.id===+x);if(!p?.quote?.ok)return true;this.confirmPlan=p.id;UI.openModal(`<div class="mhd">SON SAVAŞ ONAYI<button class="riX" data-a="closem">✕</button></div><div class="mbd" id="warCenterRoot"><p>${esc(this.label(p.target))} karşısında ${esc(WAR_GOALS[p.goal]?.n||p.goal)}</p><p>${p.commitments.filter(c=>c.state==='accepted').map(c=>esc(this.label(c.member))).join(' · ')}</p><p>Bütün katılımlar ve anlaşma bedelleri birlikte uygulanır. Koşul değişmişse bütün işlem geri alınır.</p><button class="abtn pri" data-a="warPrepareLaunch" data-x="${p.id}">ONAYLA · SAVAŞI BAŞLAT</button></div>`,'war');}
+  if(a==='warPrepareLaunch'){const p=this.preparations.find(p=>p.id===+x);if(!p?.quote?.ok||this.confirmPlan!==p.id)return true;const request=this.request;this.command({kind:'warLaunch',id:p.id,stamp:p.quote.stamp},r=>{if(request!==this.request||!$('warCenterRoot'))return;this.confirmPlan=0;if(r.ok)this.open(r.extra.front);else{say(r.why||r.code||'Koşullar değişti');this.open(0,null,p.id);}});}
+  if(a==='warPrepareWithdraw'){const[id,m]=String(x).split(':');this.command({kind:'warPrepareWithdraw',id:+id,member:m==='cancel'?null:+m},r=>{if(r.ok)this.open(0,null,+id);else say(r.why||r.code||'İşlem reddedildi');});}
+  return true;
+ }
+});
+
+WarCenterUI.sendInvites=function(front,enemy,ids){for(const to of ids.slice(0,8))this.command({kind:'offer',to,give:[],want:[{t:'warJoin',front,target:enemy}]},r=>say((this.label(to)||'Devlet')+' · '+(r.ok?(r.extra?.ai||'Katılım daveti gönderildi'):r.why||r.code||'Davet reddedildi'),'dip'));};

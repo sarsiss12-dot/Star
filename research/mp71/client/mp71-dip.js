@@ -136,8 +136,8 @@ function installHost(){
   /* TEKLİFİ SUN → 'offer' (karşı teklif bağlamında 'counter') */
   const ds0=UI.dealSend;
   UI.dealSend=function(){if(!on())return ds0.apply(this,arguments);this.ensureDiploWorld();const d=this.deal;if(!d||!A.human(d.to))return ds0.apply(this,arguments);
-    const items=l=>(l||[]).map(i=>i&&i.t==='res'&&Number.isInteger(i.v)?{t:'res',r:i.r,v:i.v}:i&&TREATY.includes(i.t)?{t:i.t}:null),give=items(d.give),want=items(d.want);
-    if(give.includes(null)||want.includes(null)){this.dealMsg='Çok oyunculuda kaynak, barış ve antlaşma maddeleri (saldırmazlık, ticaret, ittifak, sensör, geçiş) gönderilebilir; teknoloji, sistem, haraç, lüks, savaş sözü ve casusluk ağı henüz yok.';M.stats.blocked++;this.drawDeal();return;}
+    const items=l=>(l||[]).map(i=>i&&i.t==='res'&&Number.isInteger(i.v)?{t:'res',r:i.r,v:i.v}:i&&i.t==='warJoin'?{t:'warJoin',target:A.real(i.target),...(i.plan?{plan:i.plan}:{front:i.front})}:i&&TREATY.includes(i.t)?{t:i.t}:null),give=items(d.give),want=items(d.want);
+    if(give.includes(null)||want.includes(null)){this.dealMsg='Çok oyunculuda kaynak, barış ve antlaşma maddeleri (saldırmazlık, ticaret, ittifak, sensör, geçiş) ve cephe kimliğine bağlı savaş desteği gönderilebilir; teknoloji, sistem, haraç, lüks, savaş sözü ve casusluk ağı henüz yok.';M.stats.blocked++;this.drawDeal();return;}
     if(!give.length&&!want.length){this.dealMsg='Teklif boş.';this.drawDeal();return;}
     const ctr=M.counter&&M.counter.to===d.to?M.counter:null,to=d.to,o=G.emps[to];
     const cmd=ctr?{kind:'counter',offer:ctr.offer,give,want}:{kind:'offer',to:A.real(to),give,want};

@@ -3001,6 +3001,7 @@ function runModule95E(key,fn){
   }
 }
 function recordNews(event){
+  if(typeof _warLaunchBuffer!=='undefined'&&_warLaunchBuffer){_warLaunchBuffer.push({tur:'ui',fn:recordNews,args:[event]});return;}
   if(typeof GalacticNews==='undefined')return;
   return runModule95E('haber',()=>GalacticNews.emit(event));
 }
@@ -7394,6 +7395,7 @@ function encodeOffer(o){
          target. `v` (miktar) ve `target` beyaz listede olmazsa teklif
          tutarı ve savaş/barış hedefi kayıtta KAYBOLURDU. */
       const e = {t};
+      if(t==='warJoin'){if(Number.isSafeInteger(it.front))e.front=it.front;if(Number.isSafeInteger(it.plan))e.plan=it.plan;}
       if(t==='freight')for(const k of ['source','every','months'])if(_num(it[k])!==null)e[k]=it[k];
       if (_str(it.r) !== null) e.r = it.r;
       if (_num(it.v) !== null) e.v = it.v;
@@ -7419,7 +7421,7 @@ function encodeOffer(o){
 function offerSignature(o){
   const e = encodeOffer(o);
   if (!e) return null;
-  const p = l => l.map(x => (x.t==='freight'?JSON.stringify(x):x.t + ':' + (x.r || x.k || x.id || x.target || '') +
+  const p = l => l.map(x => (['freight','warJoin'].includes(x.t)?JSON.stringify(x):x.t + ':' + (x.r || x.k || x.id || x.target || '') +
                             ':' + (x.v !== undefined ? x.v : (x.n || 0)))).join('+');
   return e.from + '|' + p(e.give) + '>' + p(e.want);
 }
@@ -8497,7 +8499,7 @@ function forceRedraw(sebep){
    Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
    Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
 /* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */
-const BUILD_ID = '96h10p17';
+const BUILD_ID = '96h10p18';
 const DIAG_MAX = 40;
 const DIAG = [];
 function logDiag(tur, mesaj){
