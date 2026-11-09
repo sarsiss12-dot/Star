@@ -40,8 +40,8 @@ const RemoteConstruction = {
     st.history.push(t);if(st.history.length>this.historyLimit)st.history.shift();
     if(state==='done'){st.metrics.completed++;if(G.emps[t.empire]?.ai)st.metrics.aiCompleted++;}
     if(state==='failed'||state==='lost')st.metrics.failed++;
-    if(t.empire===0){say('İnşaat görevi · '+STRUCTS[t.key].n+' · '+t.systemName+' — '+why,state==='done'?'win':'');
-      recordNews({category:'construction',scope:'player',empires:[0],system:t.system,key:'construction:'+t.id,title:STRUCTS[t.key].n+' — '+this.labels[state],text:why});}
+    if(G.emps[t.empire]?.ai===false){if(t.empire===0)say('İnşaat görevi · '+STRUCTS[t.key].n+' · '+t.systemName+' — '+why,state==='done'?'win':'');
+      recordNews({category:'construction',scope:'player',empires:[t.empire],system:t.system,key:'construction:'+t.id,title:STRUCTS[t.key].n+' — '+this.labels[state],text:why});}
   },
   completed(sys,w){
     const st=this.state(),t=Object.values(st.queues).flat().find(t=>t.id===w.remoteTask),f=t&&G.fleets.find(f=>f.id===t.fleet);

@@ -2105,6 +2105,8 @@ const View = {
         if(mask&&(!habitatCells.has(cell)||s===this.selSys)){habitatCells.add(cell);drawHabitatMarker(g,x,y,clamp(3+z,3,5),mask);this._habitatDraws++;}
       }
 
+      if(z>.2&&s.planets.some(pl=>pl.owner===0&&pl.col&&(pl.col.secede||0)>0)){g.fillStyle='#ff9b3d';g.font='bold 12px ui-monospace';g.fillText('!',p.x-sr-9,p.y-sr-5);}
+
       if (s.owner >= 0){
         g.strokeStyle = G.emps[s.owner].col; g.lineWidth = 1.4;
         g.beginPath(); g.arc(p.x,p.y, sr+6, 0, Math.PI*2); g.stroke();

@@ -82,3 +82,72 @@ const economyModal96C=UI.openModal;UI.openModal=function(){
  return economyModal96C.apply(this,arguments);
 };
 EconomyLedger.install();
+
+/* BETA-BOARD.2: own-colony presentation. All yields come from colonyOutput's
+   existing trace; empire-wide modifiers/shared costs are explicitly unallocated. */
+const ColonyInfo={
+ keys:['min','ene','yiy','ala','ara','etk','tuk'],
+ read(fn){const keys=['_powAt','_powC','_pressAt','_press'],saved=G.emps.map(e=>keys.map(k=>[k,Object.hasOwn(e,k),e[k]]));try{return fn();}finally{G.emps.forEach((e,i)=>saved[i].forEach(([k,has,v])=>{if(has)e[k]=v;else delete e[k];}));}},
+ economy(e,s,p,detail=true){
+  if(!e||p?.owner!==e.id||!p.col)return null;
+  const rows=[],trace={colony(sys,pl,o){let prior={...o};return label=>{const delta={};for(const k of ColonyInfo.keys)delta[k]=(o[k]||0)-(prior[k]||0);rows.push({label,delta});prior={...o};};}};
+  const {o,use}=colonyOutput(e,s,p,detail?trace:null),maintenance=Object.entries(p.col.b).reduce((n,[k,v])=>n+(BUILDINGS[k]?.up||0)*v*1.6,0);
+  const net=Object.fromEntries(this.keys.map(k=>[k,(o[k]||0)-(use[k]||0)-(k==='ene'?maintenance:0)]));
+  const buildings=(detail?Object.entries(p.col.b):[]).filter(([k,n])=>n&&BUILDINGS[k]).map(([k,n])=>{const b=BUILDINGS[k],r=rows.find(r=>r.label==='Bina üretimi: '+b.n);return {key:k,name:b.n,count:n,production:r?.delta||{},input:Object.fromEntries(Object.entries(b.u||{}).map(([r,v])=>[r,v*n*colonyStaffing(p.col)])),maintenance:(b.up||0)*n*1.6,effects:b.d||''};});
+  return {production:o,input:use,maintenance,net,buildings,rows,scope:'Yerel koloni neti: üretim − bina girdileri − bina enerji bakımı. Devlet çarpanları, nüfus tüketimi, donanma, yönetim ve ortak gelir/giderler ayrıca devlet bilançosundadır; kolonilere keyfî dağıtılmaz.'};
+ },
+ known(e,s,p){return !!(e&&s&&p&&(p.owner===e.id||s.surv.includes(e.id)&&this.read(()=>humanVisionContext(e).visible.has(s.id))));},
+ colonize(e,s,p){return this.read(()=>{
+  if(!this.known(e,s,p))return {allowed:false,why:['Tarama veya canlı görüş bilgisi yetersiz']};
+  const why=[];if(p.shattered)why.push('Parçalanmış dünya');if(p.owner>=0)why.push('Gezegen zaten sahipli');
+  const hab=habOf(e,p);if(hab<35)why.push('Yaşanabilirlik %35 altında');if(s.owner>=0&&s.owner!==e.id)why.push('Yabancı sistem hâkimiyeti');
+  const claim=claimOf(s);if(claim>=0&&claim!==e.id&&!e.war[claim])why.push('Başka devletin barış zamanı sistem hakkı');
+  const ships=G.fleets.filter(f=>f.e===e.id&&fleetHasRole(f,'koloni'));if(!ships.length)why.push('Koloni gemisi yok');else if(!ships.some(f=>f.sys===s.id&&!f.mv))why.push('Koloni gemisi henüz bu sistemde değil');
+  return {allowed:canColonize(e,s,p),hab,ship:ships.some(f=>f.sys===s.id&&!f.mv),why,cost:'Kolonileştirme anında ayrı kaynak bedeli yok; mevcut koloni gemisi tüketilir. Gemi üretim bedeli ayrıdır.'};
+ });},
+ rebellion(e,s,p,systemCount=null){
+  if(!e||p?.owner!==e.id||!p.col)return null;const c=p.col,small=(systemCount??G.sys.filter(s=>s.owner===e.id).length)<SECESSION_SIZE;
+  const reasons=[];if(e.home===s.id)reasons.push('Anavatan ayrılmaz');if(p.martial_law>0||p.recent_conquest>0)reasons.push('Fetih/sıkıyönetim koruması; sayaç ayda 2 azalır');if(small&&!c.unrest)reasons.push('Küçük devlet: doğal ayrılık işlemez');
+  const rising=!reasons.length&&c.stab<SECESSION_STAB,factors=[];
+  if(e.crisis)factors.push('Kaynak krizi istikrar hedefini 22 düşürür');if(e.shortage&&!hasPerk(e,'faith'))factors.push('Tüketim malı kıtlığı');if(c.unrest||c.incited>(G.memAge||0))factors.push('Yerel huzursuzluk; kaynağı bu görünümde açıklanmaz');if(c.scorched)factors.push('Bombardıman izleri');if(c.bombed>=(G.memAge||0)&&c.bombed)factors.push('Bombardıman toparlanmayı engelleyebilir');
+  return {stability:c.stab,counter:c.secede||0,limit:SECESSION_LIMIT,rising,reasons,factors,advice:'Haritadaki ! devam eden ayrılık sayacını gösterir. İstikrarı 40 ve üzerine çıkar; kaynak krizini ve tüketim malı kıtlığını gider. Koruma koşulları yoksa sağlıklı ayda sayaç 2 azalır. Bu kesin isyan tarihi değildir.'};
+ },
+ conquest(e,s,p){
+  if(!this.known(e,s,p)||!p.col)return null;
+  const own=G.fleets.filter(f=>f.e===e.id&&f.sys===s.id&&!f.mv),armed=own.some(isArmed),ground=own.reduce((n,f)=>n+(isTransport(f)?groundPower(f):0),0),war=!!e.war[p.owner],shield=p.col.shield||0,blockers=[];
+  if(!war)blockers.push('Gezegen sahibiyle savaş yok');if(!armed&&!ground)blockers.push('Sistemde askerî filo veya kara ordusu yok');if(shield>5)blockers.push('Kalkan 5 üstünde; kara çıkarması engelli');if(!ground)blockers.push('Kara ordusu yok; yalnız bombardıman yolu mümkün');
+  const contested=G.fleets.some(f=>f.e!==e.id&&e.war[f.e]&&f.sys===s.id&&!f.mv&&isArmed(f));if(contested)blockers.push('Yörüngede görülebilen düşman askerî gücü var');
+  return {war,armed,ground,shield,garrison:p.col.garrison||0,siege:p.col.siege??null,contested,blockers,eta:null,mode:war&&ground&&shield<=5?'Motorun aylık yüzey savaşı koşulları mevcut':war&&armed?'Bombardıman koşulları mevcut':'Aktif fetih koşulu yok',note:'Taarruz ordusu çıkarma koşulunda motor tarafından otomatik uygulanır; ayrı istila emri yok. Yalnız bombardımanda kalkan ve garnizon sıfır kalırsa 6 aylık kuşatma gerekir. Kesin ETA bilinmiyor.'};
+ }
+};
+const ColonyUI={sort:'name',reverse:false,selected:null,details:false,
+ vector(o){return ColonyInfo.keys.filter(k=>Math.abs(o[k]||0)>1e-8).map(k=>`<span class="${o[k]<0?'n':'p'}">${RES[k].ico} ${EconomyUI.signed(o[k])}</span>`).join(' · ')||'0';},
+ rows(detail=false){const e=G.p,count=G.sys.filter(s=>s.owner===e.id).length;return e.colonies.map(c=>{const s=G.sys[c.s],p=s?.planets[c.p];if(!p?.col||p.owner!==e.id)return null;return {s,p,id:s.id+':'+p.i,econ:ColonyInfo.economy(e,s,p,detail),risk:ColonyInfo.rebellion(e,s,p,count)};}).filter(Boolean);},
+ html(){let rows=this.rows();const value=r=>this.sort==='name'?(r.p.col.name||r.p.name):this.sort==='pop'?r.p.col.pop:this.sort==='stab'?r.p.col.stab:this.sort==='build'?(r.p.col.q||[]).length:r.econ.net[this.sort]||0;
+  rows.sort((a,b)=>{const x=value(a),y=value(b),n=typeof x==='string'?x.localeCompare(y,'tr'):x-y;return (this.reverse?-1:1)*n||a.s.id-b.s.id||a.p.i-b.p.i;});
+  let h='<div class="dpBox"><div class="dpHd"><span>GEZEGENLER / HABİTATLAR · '+rows.length+'</span><button class="riX" data-a="closeDiplo">✕</button></div><div class="dpBody"><div class="mini">Yerel koloni neti; devletin ortak giderleri ve genel çarpanları ayrı bilançodadır. İnşa bedeli aylık gider değildir. Tablo yatay kaydırılır; sağdaki mevcut yönetim paneli korunur.</div><div class="colonySort">';
+  for(const [k,n]of Object.entries({name:'Ad',pop:'Nüfus',stab:'İstikrar',build:'İnşa',min:'Maden',ene:'Enerji',ala:'Alaşım',ara:'Bilim',yiy:'Gıda',tuk:'Tüketim',etk:'Etki'}))h+=`<button class="abtn" data-a="colonySort" data-x="${k}">${n}${k===this.sort?(this.reverse?' ▾':' ▴'):''}</button>`;
+  h+='</div><div id="colonyTable" class="colonyTable"><table><thead><tr><th>Koloni / Tür</th><th>Nüfus</th><th>İstikrar</th><th>İnşa / Otomasyon</th><th>Yerel aylık net</th></tr></thead><tbody>';
+  for(const r of rows){const c=r.p.col,ds=directiveStatus(G.p,c);h+=`<tr class="${this.selected===r.id?'selected':''}"><td><button data-a="colonySelect" data-x="${r.id}">${esc(c.name||r.p.name)}</button><small>${esc(PLANETS[r.p.t].n)}${r.p.hab?' · Habitat':''}</small><button data-a="colonyMap" data-x="${r.id}">Haritada Gör</button></td><td>${c.pop.toFixed(1)}</td><td>${Math.round(c.stab)}${r.risk.rising?' ⚠ '+r.risk.counter+'/'+r.risk.limit:''}</td><td>${c.q?.length?esc(BUILDINGS[c.q[0].k]?.n||c.q[0].k)+' · '+c.q.length:'Boş'}<small>${c.auto?'AÇIK · '+esc(ds.text||ds.why||(ds.bina?'Sıradaki: '+BUILDINGS[ds.bina].n:'Otomatik')):'KAPALI · Manuel'}</small></td><td>${this.vector(r.econ.net)}</td></tr>`;}
+  h+='</tbody></table></div><button class="abtn" data-a="colonyDetails">'+(this.details?'EKONOMİ AYRINTISINI GİZLE':'SEÇİLİ KOLONİ EKONOMİSİ')+'</button>';
+  const selected=rows.find(r=>r.id===this.selected);if(this.details&&selected){const q=ColonyInfo.economy(G.p,selected.s,selected.p);h+='<section class="box"><b>'+esc(selected.p.name)+' · GERÇEK YEREL ÜRETİM</b><p>'+this.vector(q.production)+'</p><p>Bina girdileri: '+this.vector(Object.fromEntries(Object.entries(q.input).map(([k,n])=>[k,-n])))+' · Enerji bakımı −'+EconomyUI.number(q.maintenance)+'</p><p class="mini">'+esc(q.scope)+'</p>';
+   for(const b of q.buildings)h+='<details><summary>'+esc(b.name)+' ×'+b.count+'</summary><p>Çıplak bina üretimi (sonraki çarpanlar hariç): '+this.vector(b.production)+'</p><p>Girdi: '+this.vector(Object.fromEntries(Object.entries(b.input).map(([k,n])=>[k,-n])))+' · Enerji bakımı −'+EconomyUI.number(b.maintenance)+'</p><p>'+esc(b.effects)+'</p></details>';
+   h+='<details><summary>Motor çarpan adımları</summary>'+q.rows.map(r=>'<p>'+esc(r.label)+': '+this.vector(r.delta)+'</p>').join('')+'</details></section>';}
+  return h+'</div></div>';
+ },
+ layout(){const p=$('diploPane');if(!p.classList.contains('colonyWorkspace')||p._surfaceKey!=='colony-workspace')return;const side=$('sidebar'),right=side.classList.contains('off')?innerWidth:side.getBoundingClientRect().left,z=UI.getUIScale().effective/100;p.style.width=Math.max(1,Math.min(620,(right-12)/z))+'px';},
+ open(){const p=$('diploPane');p.classList.add('colonyWorkspace');UI.surfaceReplace(p,this.html(),'colony-workspace');p.classList.add('show');this.layout();},
+ refresh(){const p=$('diploPane');this.layout();if(p.classList.contains('show')&&p.classList.contains('colonyWorkspace')&&p._surfaceKey==='colony-workspace')UI.surfaceRender(p,this.html(),'colony-workspace',true);},
+ act(a,x){if(a==='colonies'){this.open();return true;}if(!['colonySelect','colonyMap','colonySort','colonyDetails'].includes(a))return false;
+  if(a==='colonySort'){if(['name','pop','stab','build',...ColonyInfo.keys].includes(x)){this.reverse=this.sort===x?!this.reverse:false;this.sort=x;}}
+  else if(a==='colonyDetails')this.details=!this.details;
+  else{const[sid,pid]=String(x).split(':').map(Number),s=G.sys[sid],p=s?.planets[pid];if(!p?.col||p.owner!==G.p.id)return true;this.selected=x;View.sel=null;View.selSys=s;UI.tab('sistem');for(const pl of s.planets)if(pl.col){const key=sid+':'+pl.i;if(pl.i===pid)UI.planetFolds().delete(key);else UI.planetFolds().add(key);}UI.refresh();if(a==='colonyMap'){View.center(s.x,s.y);UI.pulse(s);}requestAnimationFrame(()=>document.querySelector('[data-colony-planet="'+x+'"]')?.scrollIntoView({block:'nearest'}));}
+  this.refresh();return true;
+ },
+ planet(e,s,p){if(!ColonyInfo.known(e,s,p))return '';let h='<details class="colonyExplanation"><summary>'+(p.col?'FETİH / KUŞATMA VE KOLONİ DURUMU':'KOLONİLEŞTİRME KOŞULLARI')+'</summary>';
+  if(p.col&&p.owner===e.id){const r=ColonyInfo.rebellion(e,s,p);h+='<p>İstikrar '+Math.round(r.stability)+' · Ayrılık sayacı '+r.counter+'/'+r.limit+' · '+(r.rising?'Risk artıyor; kesin isyan değildir':esc(r.reasons.join(' · ')||'Risk artmıyor'))+'</p><p>'+esc(r.factors.join(' · ')||'Bilinen etkin istikrarsızlık faktörü yok')+'</p><p>'+esc(r.advice)+'</p>';}
+  else if(!p.col){const q=ColonyInfo.colonize(e,s,p);h+='<p>Motor uygunluğu: '+(q.allowed?'UYGUN':'ENGELLİ')+' · Yaşanabilirlik %'+q.hab+'</p><p>'+esc(q.why.join(' · ')||'Koloni gemisi yerinde; yerleşim mümkün')+'</p><p>'+esc(q.cost)+'</p>';}
+  else{const q=ColonyInfo.conquest(e,s,p);if(q)h+='<p>'+esc(q.mode)+'</p><p>Kalkan '+q.shield+' · Garnizon '+q.garrison+' · Kendi kara gücü '+EconomyUI.number(q.ground)+' · Kuşatma '+(q.siege??'Bilinmiyor')+'/6 ay</p><p>'+esc(q.blockers.join(' · ')||'Görünen engel yok; sonuç motorun aylık savaş hesabına bağlı')+'</p><p>'+esc(q.note)+'</p>';}
+  return h+'</details>';
+ }
+};

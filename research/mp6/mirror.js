@@ -38,8 +38,8 @@ function build(meId,o={}){
     if(surv||mine)x.p=s.planets.map(p=>{
       const q={i:p.i,t:p.t,dep:p.dep,sz:p.sz,seed:p.seed,name:p.name,owner:-1};
       if(v||mine){q.owner=piN(p.owner);if(p.col){
-        if(p.owner===meId){q.col=J(p.col);if(q.col.conflictNotice&&Number.isInteger(q.col.conflictNotice.owner))q.col.conflictNotice.owner=piN(q.col.conflictNotice.owner);}
-        else q.col={pop:Math.round(p.col.pop||0),stab:0,grow:0,b:{},cap:p.col.cap||0,name:p.col.name||p.name,f:null,fcd:0,shield:p.col.shield||0,
+        if(p.owner===meId){q.col=J(p.col);delete q.col.inciteBy;if(q.col.unrest)delete q.col.unrest.by;if(Number.isInteger(q.col.secessionNotice))q.col.secessionNotice=piN(q.col.secessionNotice);if(q.col.conflictNotice&&Number.isInteger(q.col.conflictNotice.owner))q.col.conflictNotice.owner=piN(q.col.conflictNotice.owner);}
+        else q.col={...(me.war[p.owner]&&G.fleets.some(f=>f.e===meId&&f.sys===s.id&&!f.mv)?{siege:p.col.siege||0}:{}),pop:Math.round(p.col.pop||0),stab:0,grow:0,b:{},cap:p.col.cap||0,name:p.col.name||p.name,f:null,fcd:0,shield:p.col.shield||0,
           garrisonBase:p.col.garrisonBase||0,garrison:p.col.garrison||0,auto:false,hist:{peace:0,own:0,flips:0,sieges:0,crises:0},q:[]};}}
       return q;});
     if(mine){x.b=J(s.built);x.w=J(s.work);if(Array.isArray(x.w))for(const w of x.w)if(w&&Number.isInteger(w.e))w.e=piN(w.e);
@@ -147,7 +147,9 @@ function build(meId,o={}){
       lastVote:cc.lastVote?{key:cc.lastVote.key,target:piN(cc.lastVote.target),appliedTarget:piN(cc.lastVote.appliedTarget),opened:cc.lastVote.opened,ended:cc.lastVote.ended,yes:m(cc.lastVote.yes),no:m(cc.lastVote.no),passed:!!cc.lastVote.passed,expired:!!cc.lastVote.expired,weight:J(cc.lastVote.weight),eventKey:cc.lastVote.eventKey}:null,
       campaign:cp?{key:cp.key,sponsor:piN(cp.sponsor),left:cp.left,bribed:Object.fromEntries(Object.keys(cp.bribed||{}).map(k=>[pi(+k),1])),
         blackmailed:(cp.blackmailed||[]).map(b=>({id:piN(b&&b.id!==undefined?b.id:b),yon:0})),agenda:null,target:piN(cp.target),...(cp.hedefId!==undefined?{hedefId:piN(cp.hedefId)}:{}),byPlayer:cp.sponsor===meId}:null};})();
-  return {v:8,mpVisible:[...visible],cfg,day:G.day,year:G.year,month:G.month,seed:o.cosmeticSeed|0,rs:1,log:J(o.log||[]),news,...(economyHistory?{economyHistory}:{}),W:G.W,H:G.H,
+  const construction=RemoteConstruction.empty(),tasks=Object.values(G.construction?.queues||{}).flat().filter(t=>t.empire===meId),history=(G.construction?.history||[]).filter(t=>t.empire===meId).slice(-128);
+  for(const t of tasks)(construction.queues[t.fleet]||(construction.queues[t.fleet]=[])).push({...J(t),empire:0});construction.history=history.map(t=>({...J(t),empire:0}));construction.next=Math.max(0,...tasks.map(t=>t.id),...history.map(t=>t.id))+1;
+  return {v:8,construction,mpVisible:[...visible],cfg,day:G.day,year:G.year,month:G.month,seed:o.cosmeticSeed|0,rs:1,log:J(o.log||[]),news,...(economyHistory?{economyHistory}:{}),W:G.W,H:G.H,
     world:{...(G.fedFounding?.proposals.some(p=>p.members.includes(meId))?{fedFounding:{v:1,next:Math.max(...G.fedFounding.proposals.filter(p=>p.members.includes(meId)).map(p=>p.id))+1,proposals:G.fedFounding.proposals.filter(p=>p.members.includes(meId)).map(p=>({id:p.id,type:p.type,ballot:p.ballot,opened:p.opened,expires:p.expires,status:p.status,...(Number.isFinite(p.finished)?{finished:p.finished}:{}),...(Number.isInteger(p.fid)?{fid:p.fid}:{}),...(p.why?{why:p.by===meId?String(p.why).slice(0,600):'Kurucu veya ortakların kuruluş koşulları değişti'}:{}),by:piN(p.by),members:p.members.map(piN),replies:Object.fromEntries(Object.entries(p.replies).map(([id,r])=>[piN(+id),{...r,terms:r.terms===fedFoundTerms(p)?fedFoundTerms({...p,members:p.members.map(piN)}):'',why:+id===meId||p.by===meId?r.why:'Karar kaydedildi'}]))}))}}:{}),memAge:G.memAge,cncAge:G.cncAge,council,feds,fedUid:G.fedUid,friction:{},rebelAlliance:null,megaWatch:[],sandbox:false},
     sys,emps,fl,nf:G.nextFleet};
 }

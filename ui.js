@@ -358,6 +358,7 @@ const UI = {
   },
 
   act(a, x, el){
+    if(typeof ColonyUI!=='undefined'&&ColonyUI.act(a,x))return;
     if(typeof ArchiveUI!=='undefined'&&ArchiveUI.act(a,x,el))return;
     /* FAZ 19: her arayüz eylemi yumuşak bir dokunuş sesi verir.
        Mute butonu hariç — kendi geri bildirimini kendi veriyor. */
@@ -2060,6 +2061,7 @@ const UI = {
   },
   // BETA-P0.1: every replacement takes ownership of the shared panel.
   surfaceReplace(el,html,key){
+    if(el?.id==='diploPane'&&key!=='colony-workspace'){el.classList.remove('colonyWorkspace');el.style.width='';}
     if(el._surfaceTimer)clearTimeout(el._surfaceTimer);
     el._surfaceTimer=null;el._surfacePending=null;
     el._surfaceKey=key;el._surfaceWorld=G.emps;el._surfaceHTML=html;
@@ -2067,6 +2069,7 @@ const UI = {
   },
   surfaceRender(el,html,key,automatic=false){
     if(!el)return false;
+    if(el.id==='diploPane'&&key!=='colony-workspace'){el.classList.remove('colonyWorkspace');el.style.width='';}
     // Non-browser regression hosts do not implement a native DOM parser.
     if(!document.createElement('template').content){el.innerHTML=html;return true;}
     this.surfaceInput();
@@ -2168,6 +2171,7 @@ const UI = {
        done bayrağı olmayanlar hemen boyanmalı yoksa siyah kalıyor. */
     this.paintSprites();
     this.seltag();
+    if(typeof ColonyUI!=='undefined')ColonyUI.refresh();
     this.positionToolMenus();
     $('stardate').textContent = G.year + '.' + String(G.month).padStart(2,'0');
   },
@@ -2347,7 +2351,8 @@ const UI = {
       const hab = habOf(e, pl);
       const dep = pl.dep ? DEPOSITS.find(d=>d.id===pl.dep) : null;
       const mine = pl.owner === 0;
-      h += `<div class="box">`;
+      h += `<div class="box" data-colony-planet="${s.id}:${pl.i}">`;
+      if(typeof ColonyUI!=='undefined')h+=ColonyUI.planet(e,s,pl);
       if(hasCivic(e,'devourer')){const q=canDevour(e,s,pl);h+=`<button class="abtn dgr" data-a="devour" data-x="${s.id}:${pl.i}" ${q.ok?'':'disabled'}>🌟 Gezegeni Tüket</button><div class="mini">${esc(q.ok?'Kalıcı işlem; onay ekranında kayıpları incele.':q.why)}</div>`;}
       if(pl.col){
         const folded=folds.has(s.id+':'+pl.i),owner=territoryOwnerInfo(pl.owner);
@@ -4116,7 +4121,8 @@ const UI = {
   },
   intelOperations(){
     const e = G.p;
-    let h = '';
+    let h = '<div class="ph">HEDEFİ DEĞİŞTİR</div><div class="spyQuickTargets">'+G.emps.filter(o=>spyTargetCheck(e,o).ok).map(o=>`<button class="abtn ${this.spyTarget===o.id?'pri':''}" data-a="spySel" data-x="${o.id}">${esc(o.name)}</button>`).join('')+'</div>';
+
     const id = this.spyTarget;
     const o  = (id !== undefined && id !== null) ? G.emps[id] : null;
     if (!spyTargetCheck(e, o).ok){
@@ -6607,7 +6613,7 @@ const UI = {
 
   p_imp(){
     const e = G.p, race = RACES[e.race];
-    let h = `<div class="ph">${esc(e.name)}</div>`;
+    let h = `<button class="abtn pri" data-a="colonies">GEZEGENLER / HABİTATLAR TABLOSU</button><div class="ph">${esc(e.name)}</div>`;
     h += `<div style="display:flex;gap:10px;align-items:center;margin-bottom:8px">
       <canvas id="empPortrait" width="46" height="46" style="image-rendering:pixelated;flex:0 0 46px;
         background:var(--void);border:1px solid ${e.col}"></canvas>
@@ -9532,7 +9538,7 @@ const TITLE = {
     effective=small()?100:preferred;
     root.style.setProperty('--ui-scale',effective/100);
     root.toggleAttribute('data-ui-scaled',effective!==100);
-    controls();UI.positionToolMenus();UI.seltag();
+    controls();UI.positionToolMenus();UI.seltag();if(typeof ColonyUI!=='undefined')ColonyUI.layout();
   }
   UI.getUIScale=()=>({preferred,effective,limited:small()});
   UI.setUIScale=value=>{

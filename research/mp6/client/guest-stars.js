@@ -77,7 +77,7 @@ function restoreObservation(m){
 /* ---- 1. eylem kapısı ---- */
 /* Yalnız görünüm/gezinme (dünyayı değiştirmeyen) eylemler yerelde çalışır. MP.6.1: arşiv/gelen kutusu görünümleri, anlaşma,
    vasallık ve federasyon taslak ekranları da görünümdür (gönderim motor işlevinde MP komutuna çevrilir). */
-const VIEW=new Set(['borderDiplo','noteOptions','noteChoice','activeWars','activeWarDiplo','noteQuick','noteSwipe','tab','full','cameraReset','cameraFocus','home','fit','topStatus','diploPane','globalPane','advClose','advShow','advNever','planetFold',
+const VIEW=new Set(['colonies','colonySelect','colonyMap','colonySort','colonyDetails','borderDiplo','noteOptions','noteChoice','activeWars','activeWarDiplo','noteQuick','noteSwipe','tab','full','cameraReset','cameraFocus','home','fit','topStatus','diploPane','globalPane','advClose','advShow','advNever','planetFold',
   'radarTog','fleetNamesToggle','grpTog','fedLinksToggle','allyLinksToggle','warLinksToggle','logiToggle','mapMode','bgTog','diploView','diploPick',
   'diploRelation','diploNav','diploFilter','bmPick','bmCancel','vsCurrent','vsInspect','vsType','vsEdit','vsBack','fleetFilter','fedTab','fedMember',
   'closeFed','closeDeal','closeMarket','closeDiplo','memTog','intelView','intelGroup','upInfo','crisInfo','selsys','selfleet','route','fedPane',
@@ -118,6 +118,9 @@ const VIEW=new Set(['borderDiplo','noteOptions','noteChoice','activeWars','activ
 /* MP.6.1 — UI.act kapısında doğrudan MP komutuna çevrilen düğmeler (tek oyunculu kodları dünyayı yerelde değiştirir) */
 const sel=()=>View.sel&&View.sel.e===0&&G.fleets.includes(View.sel)?View.sel:null;
 const ACT={
+  remoteBuild:x=>{S.remoteFleet=+x;ArchiveUI.build(+x);},
+  remoteConfirm:()=>{const token=UI._constructionToken,fleet=S.remoteFleet,sys=+doc.getElementById('remoteTarget')?.value,key=doc.getElementById('remoteStructure')?.value,b=doc.getElementById('remoteConfirm');const cid=send({kind:'remoteBuild',fleet,sys,key});if(!cid)return;if(b)b.disabled=true;waits[cid]=res=>{toast(res.status==='ok'?'Host onayladı; kaynaklar inşa başladığında kesilir.':'Host reddetti: '+why(res),res.status!=='ok');if(res.status==='ok'){if(UI._constructionToken===token)UI.closeModal();}else if(b?.isConnected&&UI._constructionToken===token)b.disabled=false;};},
+  remoteCancel:x=>{const[fleet,id]=String(x).split(':').map(Number);send({kind:'remoteCancel',fleet,id});},
   spd:x=>send({kind:'speed',value:+x|0}),
   stop:()=>{const f=sel();return f&&send({kind:'stop',fleet:f.id});},
   stance:()=>{const f=sel();return f&&send({kind:'stance',fleet:f.id});},
@@ -772,7 +775,7 @@ function bootTick(){
 function statusNow(){const t=doc.getElementById('jConn');return t?t.outerHTML:'';}
 setInterval(()=>{try{bootTick();if(S.J&&!S.started&&S.J.screen==='game')update(statusNow());}catch{}},1000);
 doc.addEventListener('click',e=>{const el=e.target.closest('[data-g7="retry"]');if(!el)return;const b=S.boot;b.failed=false;b.tries=0;b.fails=0;b.err='';b.next=0;S.mirror=null;bootLog('retry');bootAsk();b.next=Date.now()+8000;update(statusNow());});
-window.MP6Stars={SET,S,restoreObservation,onMessage,update,screen,attach(J){S.J=J;},onAssign(){S.uiSent=false;bootLog('assign');},VIEW,ACT,boot:{stage:bootStage,tick:bootTick},dip:{open:dipOpen,seg:seg6,get ui(){return dipUI;},get pol(){return polUI;}}};
+window.MP6Stars={remoteQuote(fleet,sys,key,done){const cid=send({kind:'remoteQuote',fleet,sys,key});if(cid)waits[cid]=res=>done(res.status==='ok'?res.extra:{ok:false,why:why(res)});},SET,S,restoreObservation,onMessage,update,screen,attach(J){S.J=J;},onAssign(){S.uiSent=false;bootLog('assign');},VIEW,ACT,boot:{stage:bootStage,tick:bootTick},dip:{open:dipOpen,seg:seg6,get ui(){return dipUI;},get pol(){return polUI;}}};
 /* telefon geri tuşu: önce açık MP diplomasi onayı/paneli kapanır (join.js popstate bunu sorar) */
 const prevBack=window.__mpBack;window.__mpBack=()=>{if(prevBack&&prevBack())return true;if(dipEl){dipOpen(false);return true;}return false;};
 })();

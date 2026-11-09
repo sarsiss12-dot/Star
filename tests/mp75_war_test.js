@@ -24,7 +24,7 @@ test('savaş sürerken bekleyen tek barış kaydı açık kalır (yanlışlıkla
   const h=world();atWar(h,3);h.run(`UI.peaceOffer(G.emps[3]);DiplomaticInbox.sync();`);eq(J(h,`DiplomaticInbox.state().records.find(r=>r.kind==='peace').status`),'pending');
 });
 test('AKTİF SAVAŞLAR: üst sayaç ile aynı liste; temas kurulmamış düşman "Bilinmeyen düşman"; cephe / tek taraflı durum / barış teklifi gösterilir',()=>{
-  const h=world();atWar(h,1);atWar(h,2);h.run(`G.p.contact[2]=false;G.emps[2].contact[0]=false;G.p.war[3]=true;UI.peaceOffer(G.emps[1]);warLedgerSync&&warLedgerSync('test');`);
+  const h=world();atWar(h,1);atWar(h,2);h.run(`G.p.contact[2]=false;G.emps[2].contact[0]=false;G.p.war[3]=true;UI.peaceOffer(G.emps[1]);warLedgerSync&&warLedgerSync('legacy');`);
   const L=J(h,'UI.activeWarsList()'),top=J(h,'UI.topStatusItems().wars');
   eq(L.length,top,'same count as the top counter');
   const byId=Object.fromEntries(L.map(w=>[w.id,w]));
@@ -33,4 +33,5 @@ test('AKTİF SAVAŞLAR: üst sayaç ile aynı liste; temas kurulmamış düşman
   assert.match(html,/AKTİF SAVAŞLAR/);assert.match(html,/Bilinmeyen düşman/);assert.doesNotMatch(html,new RegExp(J(h,'G.emps[2].name')));
   eq(J(h,`UI.topStatusItems().items?1:1`),1);
 });
+test('yeni savaş bildirimi kimliği açıklar; stok/özel istihbarat açmaz, eski bilinmeyenle karışmaz',()=>{const h=world();atWar(h,2);h.run('G.p.contact[2]=false;warLedgerSync("test")');eq(h.run('G.p.contact[2]'),true);eq(h.run('UI.activeWarsList().find(x=>x.id===2).name'),h.run('G.emps[2].name'));h.run('G.emps[2].wild=true;G.p.contact[2]=false');eq(h.run('UI.activeWarsList().find(x=>x.id===2).special'),true);eq(h.run('UI.activeWarsList().find(x=>x.id===2).name'),h.run('G.emps[2].name'));});
 end();

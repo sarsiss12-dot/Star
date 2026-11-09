@@ -2674,6 +2674,7 @@ function secessionTick(){
       const pl = sys && sys.planets[c.p];
       if (!pl || !pl.col) continue;
       const col = pl.col;
+      if(!(col.secede>0)&&col.secessionNotice!==undefined)delete col.secessionNotice;
 
       /* Sıkıyönetim ve yeni fetih dokunulmazlığı sayacı dondurur */
       if (pl.martial_law > 0 || (pl.recent_conquest || 0) > 0){
@@ -2693,9 +2694,12 @@ function secessionTick(){
         /* Sayaç tavanı: kışkırtma üst üste binerse şişmesin */
         col.secede = Math.min(SECESSION_LIMIT + 4, (col.secede || 0) + 1);
         /* Oyuncuya uyarı — müdahale şansı */
-        if (e.id === 0 && col.secede === Math.round(SECESSION_LIMIT * .5))
-          say('⚠ AYRILIKÇI HAREKET — ' + (col.name || pl.name) +
-              ' halkı kopmaktan söz ediyor. İstikrarı düzelt!', 'war');
+        if (!e.ai && col.secede >= Math.round(SECESSION_LIMIT * .5) && col.secessionNotice!==e.id){
+          col.secessionNotice=e.id;
+          const text='⚠ AYRILIKÇI HAREKET — '+(col.name||pl.name)+' halkı kopmaktan söz ediyor. İstikrarı düzelt!';
+          if(e.id===0)say(text,'war');
+          recordNews({category:'colony',scope:'player',empires:[e.id],system:sys.id,planet:pl.i,key:'secession:'+e.id+':'+sys.id+':'+pl.i+':'+G.day,title:'Ayrılıkçı hareket',text});
+        }
         if (col.secede >= SECESSION_LIMIT){
           secede(e, sys, pl);
           break;                          // ayda bir kopma yeter
@@ -2705,6 +2709,7 @@ function secessionTick(){
            güven bir kez sarsıldı. */
         const onceki = col.secede;
         col.secede = Math.max(0, col.secede - 2);
+        if(col.secede===0)delete col.secessionNotice;
         /* ═══ FAZ 44: İSYAN BASTIRILDI BİLDİRİMİ ═══
            Sayaç sıfıra indiği AN bildirilir — oyuncu istikrarı
            toparlamak için harcadığı emeğin karşılığını görsün. */
