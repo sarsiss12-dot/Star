@@ -1,0 +1,102 @@
+{
+  "url": "/",
+  "vote": null,
+  "inbox": [
+    {
+      "kind": "anomaly",
+      "data": {
+        "a": {
+          "id": "a1",
+          "k": "megayapi",
+          "n": "Terk Edilmiş İstasyon",
+          "t": "Yörüngede sürüklenen kadim bir liman. Işıkları hâlâ yanıyor ama içeride kimse yok.",
+          "ch": [
+            {
+              "t": "Sistemleri tara",
+              "d": "+180 araştırma"
+            },
+            {
+              "t": "Gövdeyi sök",
+              "d": "+220 mineral, +60 alaşım"
+            }
+          ]
+        },
+        "sys": {
+          "id": 43,
+          "x": 3530.7207499705987,
+          "y": 4533.869971314103,
+          "name": "Coraetar",
+          "star": {
+            "n": "G Sarı",
+            "c": "#ffe9a8",
+            "r": 5.5,
+            "w": 20
+          },
+          "planets": [
+            {
+              "i": 0,
+              "t": "alp",
+              "dep": "jeotermal",
+              "sz": 10,
+              "seed": 5636,
+              "owner": -1,
+              "col": null,
+              "name": "Coraetar I",
+              "lux": "cevher"
+            },
+            {
+              "i": 1,
+              "t": "gaz",
+              "dep": "nadir",
+              "sz": 28,
+              "seed": 5653,
+              "owner": -1,
+              "col": null,
+              "name": "Coraetar II"
+            },
+            {
+              "i": 2,
+              "t": "ast",
+              "dep": "ergi_kaynagi",
+              "sz": 0,
+              "seed": 5670,
+              "owner": -1,
+              "col": null,
+              "name": "Coraetar III"
+            }
+          ],
+          "lanes": [
+            12,
+            23
+          ],
+          "owner": -1,
+          "surv": [
+            0
+          ],
+          "seen": [
+            0
+          ],
+          "def": 0,
+          "queue": [],
+          "anom": false,
+          "pulsar": false,
+          "nebulaS": false,
+          "anomK": "megayapi",
+          "_reach": 0,
+          "_shat": false,
+          "cr": 0
+        }
+      },
+      "ico": "🔬",
+      "cls": "sci",
+      "pause": true,
+      "title": "Anomali — Coraetar",
+      "sub": "Terk Edilmiş İstasyon",
+      "key": "an:43",
+      "uid": 1,
+      "born": 33.07839999999984
+    }
+  ],
+  "modal": "",
+  "pane": ""
+}

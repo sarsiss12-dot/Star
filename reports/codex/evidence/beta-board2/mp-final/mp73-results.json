@@ -1,0 +1,397 @@
+{
+  "results": [
+    {
+      "name": "A1 rehber 1–8: oda, iki farklı devlet, hazır, başlat; iki ekranda galaksi; sürüm işareti lobi / başlangıç / MP çubuğunda ve /mp/version oyun build'iyle aynı",
+      "status": "PASS",
+      "ms": 17560
+    },
+    {
+      "name": "B1 konsey motorun kendi yoluyla kurulur (fikstür: temas); AI insanlar adına oy / sponsor yazmaz; B gerçek \"KONSEY OYLAMASI\" kartından Konsey ekranını açar ve EVET (dokunma) → host kaydeder, oylama açık kalır",
+      "status": "PASS",
+      "ms": 29846
+    },
+    {
+      "name": "P0 katılımcı görüş, sağlık, özel kararlar, rota ve görsel hareket",
+      "status": "PASS",
+      "ms": 51180
+    },
+    {
+      "name": "BD2 koloni paneli ve yetkili uzaktan inşa",
+      "status": "PASS",
+      "ms": 16968
+    },
+    {
+      "name": "BD1 federasyon FIFO, savaş yardımı, geri çekme ve ayrı aday rızası",
+      "status": "FAIL",
+      "error": "locator.tap: Timeout 8000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#diploPane [data-a=\"fedTab\"][data-x=\"laws\"]').first()\u001b[22m\n\u001b[2m    - locator resolved to <button class=\"abtn \" data-x=\"laws\" data-a=\"fedTab\" aria-pressed=\"false\">YASALAR</button>\u001b[22m\n\u001b[2m  - attempting tap action\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m  - element was detached from the DOM, retrying\u001b[22m\n\n    at hit (/workspace/Star/tests/helpers/beta-board1-browser.cjs:4:498)\n    at async open (/workspace/Star/tests/helpers/beta-board1-browser.cjs:5:82)\n    at async module.exports (/workspace/Star/tests/helpers/beta-board1-browser.cjs:11:2)\n    at async /workspace/Star/tests/browser-mp73.cjs:250:136\n    at async test (/workspace/Star/tests/browser-mp73.cjs:13:7)\n    at async /workspace/Star/tests/browser-mp73.cjs:250:31"
+    },
+    {
+      "name": "sayfa hataları yok",
+      "status": "PASS",
+      "ms": 0
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "startModal": [
+      "🛰 DANIŞMAN",
+      "",
+      "🛰 DANIŞMAN",
+      "",
+      ""
+    ],
+    "version": {
+      "mp": "MP.8.9b12",
+      "build": "96h10p17",
+      "files": {
+        "mp-core.js": "e047fa4dd51a",
+        "relay.js": "2962a3667e0f",
+        "mp1-host.js": "c51e44ae76f9",
+        "join.js": "bc2732493741",
+        "mirror.js": "dd70e923ff6c",
+        "guest-stars.js": "bd668b96b3a1",
+        "mp71-dip.js": "bf0355f27ef6",
+        "mp7-setup.js": "48c0f282a254"
+      }
+    },
+    "unsupported": [
+      "autoEvent",
+      "diagCopy",
+      "joinRebel",
+      "leaveRebel",
+      "mapFix",
+      "physio",
+      "restart",
+      "rollName",
+      "sandbox",
+      "sitPick",
+      "stashNote",
+      "survey",
+      "terra",
+      "toTitle",
+      "tplDel",
+      "tplLoad",
+      "tplSave",
+      "trigCrisis"
+    ],
+    "guestDiag": "STARS MP.8.9b12 · oyun 96h10p17 · misafir · host bağlı · aşama: ready · ayna r6 05:50:11 · kurulum 3 ms · son komut: yok · son hata: yok",
+    "p0": [
+      {
+        "visibility": true,
+        "shared": 0,
+        "habitat": true,
+        "foreignHull": 0.42,
+        "ownHull": 0.55,
+        "privacy": true
+      },
+      {
+        "kind": "anomaly",
+        "decision": 1,
+        "before": {
+          "a": 0,
+          "m": 3000,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":3000}",
+          "p": 0
+        },
+        "after": {
+          "a": 240,
+          "m": 3000,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":3000}",
+          "p": 0
+        },
+        "replay": "rejected"
+      },
+      {
+        "kind": "event",
+        "decision": 2,
+        "before": {
+          "a": 240,
+          "m": 3000,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":3000}",
+          "p": 0
+        },
+        "after": {
+          "a": 500,
+          "m": 2850,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":3000}",
+          "p": 0
+        },
+        "replay": "rejected"
+      },
+      {
+        "kind": "chain",
+        "decision": 3,
+        "before": {
+          "a": 500,
+          "m": 2850,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":3000}",
+          "p": 0
+        },
+        "after": {
+          "a": 500,
+          "m": 2850,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":3000}",
+          "p": 0
+        },
+        "replay": "rejected"
+      },
+      {
+        "CDecision": 1,
+        "CResearch": 180,
+        "BUnchanged": true
+      },
+      {
+        "foundingNotification": "NOT RUN: no founded proposal in this filtered case"
+      },
+      {
+        "shareEndedLiveRemoved": true,
+        "discoveryRetained": true
+      },
+      {
+        "routes": [
+          {
+            "role": "military",
+            "id": 4,
+            "path": [
+              1
+            ]
+          },
+          {
+            "role": "bilim",
+            "id": 5,
+            "path": [
+              1
+            ]
+          },
+          {
+            "role": "koloni",
+            "id": 6,
+            "path": [
+              1
+            ]
+          },
+          {
+            "role": "insaat",
+            "id": 28,
+            "path": [
+              1
+            ]
+          }
+        ]
+      },
+      {
+        "motion": [
+          {
+            "x": 3180.196135534081,
+            "y": 1878.4341788409897,
+            "actualX": 3134.271570243264,
+            "actualY": 1872.3352234257256
+          },
+          {
+            "x": 3177.094439037633,
+            "y": 1878.0222618522555,
+            "actualX": 3134.271570243264,
+            "actualY": 1872.3352234257256
+          },
+          {
+            "x": 3172.8424823997407,
+            "y": 1877.4575859800307,
+            "actualX": 3134.271570243264,
+            "actualY": 1872.3352234257256
+          },
+          {
+            "x": 3167.93241672989,
+            "y": 1876.8055107471612,
+            "actualX": 3134.271570243264,
+            "actualY": 1872.3352234257256
+          },
+          {
+            "x": 3160.1495620507435,
+            "y": 1875.7719183028778,
+            "actualX": 3134.271570243264,
+            "actualY": 1872.3352234257256
+          },
+          {
+            "x": 3156.6415547571814,
+            "y": 1875.3060417084153,
+            "actualX": 3134.271570243264,
+            "actualY": 1872.3352234257256
+          },
+          {
+            "x": 3148.0746919235385,
+            "y": 1874.1683300253496,
+            "actualX": 3134.271570243264,
+            "actualY": 1872.3352234257256
+          },
+          {
+            "x": 3136.8868383222652,
+            "y": 1872.682540886692,
+            "actualX": 3134.271570243264,
+            "actualY": 1872.3352234257256
+          },
+          {
+            "x": 3134.288738302327,
+            "y": 1872.3375034086962,
+            "actualX": 3134.271570243264,
+            "actualY": 1872.3352234257256
+          },
+          {
+            "x": 3134.271570243264,
+            "y": 1872.3352234257256,
+            "actualX": 3134.271570243264,
+            "actualY": 1872.3352234257256
+          },
+          {
+            "x": 3134.271570243264,
+            "y": 1872.3352234257256,
+            "actualX": 3134.271570243264,
+            "actualY": 1872.3352234257256
+          },
+          {
+            "x": 3134.271570243264,
+            "y": 1872.3352234257256,
+            "actualX": 3134.271570243264,
+            "actualY": 1872.3352234257256
+          },
+          {
+            "x": 3132.7662509623956,
+            "y": 1872.1353113498765,
+            "actualX": 3043.435943920843,
+            "actualY": 1860.2719097819315
+          },
+          {
+            "x": 3131.204246015922,
+            "y": 1871.927871203919,
+            "actualX": 3043.435943920843,
+            "actualY": 1860.2719097819315
+          },
+          {
+            "x": 3126.0899395008378,
+            "y": 1871.2486720167744,
+            "actualX": 3043.435943920843,
+            "actualY": 1860.2719097819315
+          },
+          {
+            "x": 3124.4964425191683,
+            "y": 1871.0370496098117,
+            "actualX": 3043.435943920843,
+            "actualY": 1860.2719097819315
+          },
+          {
+            "x": 3123.054107308692,
+            "y": 1870.845502055973,
+            "actualX": 3043.435943920843,
+            "actualY": 1860.2719097819315
+          },
+          {
+            "x": 3119.4829105182134,
+            "y": 1870.3712336580832,
+            "actualX": 3043.435943920843,
+            "actualY": 1860.2719097819315
+          },
+          {
+            "x": 3115.3070666504696,
+            "y": 1869.8166658486941,
+            "actualX": 3043.435943920843,
+            "actualY": 1860.2719097819315
+          },
+          {
+            "x": 3111.150118004594,
+            "y": 1869.264607396008,
+            "actualX": 3043.435943920843,
+            "actualY": 1860.2719097819315
+          },
+          {
+            "x": 3106.489296795582,
+            "y": 1868.6456327672383,
+            "actualX": 3043.435943920843,
+            "actualY": 1860.2719097819315
+          },
+          {
+            "x": 3104.9524854757633,
+            "y": 1868.4415384298857,
+            "actualX": 3043.435943920843,
+            "actualY": 1860.2719097819315
+          },
+          {
+            "x": 3100.9152065658855,
+            "y": 1867.9053725693182,
+            "actualX": 3043.435943920843,
+            "actualY": 1860.2719097819315
+          },
+          {
+            "x": 3097.9486568489183,
+            "y": 1867.511403582429,
+            "actualX": 3043.435943920843,
+            "actualY": 1860.2719097819315
+          },
+          {
+            "x": 3096.1221188075488,
+            "y": 1867.2688324441276,
+            "actualX": 3043.435943920843,
+            "actualY": 1860.2719097819315
+          },
+          {
+            "x": 3090.535431764524,
+            "y": 1866.526899341905,
+            "actualX": 3043.435943920843,
+            "actualY": 1860.2719097819315
+          },
+          {
+            "x": 3088.3939733711945,
+            "y": 1866.2425055935516,
+            "actualX": 3043.435943920843,
+            "actualY": 1860.2719097819315
+          },
+          {
+            "x": 3085.8368201117755,
+            "y": 1865.90290599973,
+            "actualX": 3043.435943920843,
+            "actualY": 1860.2719097819315
+          },
+          {
+            "x": 3081.8247348285527,
+            "y": 1865.3700859477674,
+            "actualX": 3043.435943920843,
+            "actualY": 1860.2719097819315
+          },
+          {
+            "x": 3076.414403183377,
+            "y": 1864.6515735072737,
+            "actualX": 3043.435943920843,
+            "actualY": 1860.2719097819315
+          }
+        ]
+      },
+      {
+        "reconnect": true
+      }
+    ],
+    "board2": [
+      {
+        "guestOwnList": true,
+        "rightPanel": true
+      },
+      {
+        "nativeRemote": true,
+        "travel": true,
+        "task": 1,
+        "realCost": {
+          "min": 241,
+          "ala": 48
+        },
+        "completed": true,
+        "duplicateRejected": true,
+        "CPrivate": true
+      },
+      {
+        "reconnect": true
+      },
+      {
+        "guestSpyTarget": true
+      }
+    ]
+  },
+  "pass": 5,
+  "fail": 1
+}

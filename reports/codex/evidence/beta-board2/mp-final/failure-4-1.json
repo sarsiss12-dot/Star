@@ -1,0 +1,293 @@
+{
+  "url": "/mp/play",
+  "vote": null,
+  "inbox": [
+    {
+      "kind": "anomaly",
+      "data": {
+        "a": {
+          "id": "a1",
+          "k": "megayapi",
+          "n": "Terk Edilmiş İstasyon",
+          "t": "Yörüngede sürüklenen kadim bir liman. Işıkları hâlâ yanıyor ama içeride kimse yok.",
+          "ch": [
+            {
+              "t": "Sistemleri tara",
+              "d": "+180 araştırma"
+            },
+            {
+              "t": "Gövdeyi sök",
+              "d": "+220 mineral, +60 alaşım"
+            }
+          ]
+        },
+        "sys": {
+          "id": 41,
+          "x": 1328.677835711615,
+          "y": 1268.1689246860212,
+          "name": "Yeluran-82",
+          "star": {
+            "n": "M Kırmızı Cüce",
+            "c": "#ff7b5c",
+            "r": 4.5,
+            "w": 30
+          },
+          "planets": [
+            {
+              "i": 0,
+              "t": "cor",
+              "dep": "zengin_maden",
+              "sz": 16,
+              "seed": 5374,
+              "name": "Yeluran-82 I",
+              "owner": -1
+            },
+            {
+              "i": 1,
+              "t": "vol",
+              "dep": null,
+              "sz": 13,
+              "seed": 5391,
+              "name": "Yeluran-82 II",
+              "owner": -1
+            },
+            {
+              "i": 2,
+              "t": "kur",
+              "dep": null,
+              "sz": 20,
+              "seed": 5408,
+              "name": "Yeluran-82 III",
+              "owner": -1
+            }
+          ],
+          "lanes": [
+            9,
+            17,
+            12
+          ],
+          "owner": -1,
+          "surv": [
+            0
+          ],
+          "seen": [
+            0
+          ],
+          "queue": [],
+          "anom": false,
+          "anomK": "megayapi",
+          "def": 0,
+          "pulsar": false,
+          "nebulaS": false,
+          "_reach": 0,
+          "_shat": false
+        }
+      },
+      "decisionId": 1,
+      "uid": 1,
+      "key": "personal:1",
+      "born": 40.25179999999973,
+      "pause": false,
+      "ico": "🔬",
+      "cls": "sci",
+      "title": "Terk Edilmiş İstasyon",
+      "sub": "Yörüngede sürüklenen kadim bir liman. Işıkları hâlâ yanıyor ama içeride kimse yok.",
+      "hidden": false
+    },
+    {
+      "kind": "anomaly",
+      "data": {
+        "a": {
+          "id": "a11",
+          "k": "sinyal",
+          "n": "Bilinmeyen Sinyal",
+          "t": "Sistemin derinliğinden düzenli aralıklarla bir çağrı geliyor. Kaynağı hiçbir kayıtta yok.",
+          "ch": [
+            {
+              "t": "Sinyale karşılık ver",
+              "d": "büyük ödül · risk var"
+            },
+            {
+              "t": "Kaydet ve uzaklaş",
+              "d": "+140 araştırma"
+            }
+          ]
+        },
+        "sys": {
+          "id": 17,
+          "x": 1751.1487358070574,
+          "y": 1159.4399583221473,
+          "name": "Pyrunex",
+          "star": {
+            "n": "G Sarı",
+            "c": "#ffe9a8",
+            "r": 5.5,
+            "w": 20
+          },
+          "planets": [
+            {
+              "i": 0,
+              "t": "sav",
+              "dep": null,
+              "sz": 19,
+              "seed": 2230,
+              "name": "Pyrunex I",
+              "owner": -1
+            },
+            {
+              "i": 1,
+              "t": "vol",
+              "dep": null,
+              "sz": 17,
+              "seed": 2247,
+              "name": "Pyrunex II",
+              "owner": -1
+            }
+          ],
+          "lanes": [
+            12,
+            41,
+            3
+          ],
+          "owner": -1,
+          "surv": [
+            0
+          ],
+          "seen": [
+            0
+          ],
+          "queue": [],
+          "anom": false,
+          "anomK": "sinyal",
+          "def": 0,
+          "pulsar": false,
+          "nebulaS": true,
+          "_reach": 0,
+          "_shat": false
+        }
+      },
+      "decisionId": 2,
+      "uid": 23,
+      "key": "personal:2",
+      "born": 65.26499999999952,
+      "pause": false,
+      "ico": "🔬",
+      "cls": "sci",
+      "title": "Bilinmeyen Sinyal",
+      "sub": "Sistemin derinliğinden düzenli aralıklarla bir çağrı geliyor. Kaynağı hiçbir kayıtta yok.",
+      "hidden": false
+    },
+    {
+      "kind": "anomaly",
+      "data": {
+        "a": {
+          "id": "a11",
+          "k": "sinyal",
+          "n": "Bilinmeyen Sinyal",
+          "t": "Sistemin derinliğinden düzenli aralıklarla bir çağrı geliyor. Kaynağı hiçbir kayıtta yok.",
+          "ch": [
+            {
+              "t": "Sinyale karşılık ver",
+              "d": "büyük ödül · risk var"
+            },
+            {
+              "t": "Kaydet ve uzaklaş",
+              "d": "+140 araştırma"
+            }
+          ]
+        },
+        "sys": {
+          "id": 3,
+          "x": 1943.5976089451501,
+          "y": 690.8369695113897,
+          "name": "Wyndex",
+          "star": {
+            "n": "G Sarı",
+            "c": "#ffe9a8",
+            "r": 5.5,
+            "w": 20
+          },
+          "planets": [
+            {
+              "i": 0,
+              "t": "alp",
+              "dep": null,
+              "sz": 12,
+              "seed": 396,
+              "name": "Wyndex I",
+              "owner": -1
+            },
+            {
+              "i": 1,
+              "t": "sul",
+              "dep": "kalinti",
+              "sz": 19,
+              "seed": 413,
+              "name": "Wyndex II",
+              "owner": -1
+            },
+            {
+              "i": 2,
+              "t": "vol",
+              "dep": null,
+              "sz": 15,
+              "seed": 430,
+              "name": "Wyndex III",
+              "owner": -1
+            },
+            {
+              "i": 3,
+              "t": "ast",
+              "dep": null,
+              "sz": 0,
+              "seed": 447,
+              "name": "Wyndex IV",
+              "owner": -1
+            },
+            {
+              "i": 4,
+              "t": "cor",
+              "dep": null,
+              "sz": 20,
+              "seed": 464,
+              "name": "Wyndex V",
+              "owner": -1
+            }
+          ],
+          "lanes": [
+            10,
+            37,
+            17
+          ],
+          "owner": -1,
+          "surv": [
+            0
+          ],
+          "seen": [
+            0
+          ],
+          "queue": [],
+          "anom": false,
+          "anomK": "sinyal",
+          "def": 0,
+          "pulsar": false,
+          "nebulaS": false,
+          "_reach": 0,
+          "_shat": false
+        }
+      },
+      "decisionId": 3,
+      "uid": 66,
+      "key": "personal:3",
+      "born": 86.57244000000017,
+      "pause": false,
+      "ico": "🔬",
+      "cls": "sci",
+      "title": "Bilinmeyen Sinyal",
+      "sub": "Sistemin derinliğinden düzenli aralıklarla bir çağrı geliyor. Kaynağı hiçbir kayıtta yok.",
+      "hidden": false
+    }
+  ],
+  "modal": "",
+  "pane": ""
+}

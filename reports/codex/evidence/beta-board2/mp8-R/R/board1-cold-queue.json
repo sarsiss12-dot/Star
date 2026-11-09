@@ -1,0 +1,141 @@
+{
+  "before": {
+    "gateBeforeContact": {
+      "ok": false,
+      "why": "Bilinen yaşayan dış hedef gerekli"
+    },
+    "fid": 2,
+    "B": 1,
+    "C": 2,
+    "target": 3,
+    "law": "arastirma",
+    "vote": {
+      "id": 1,
+      "law": "savunma",
+      "kind": "basic",
+      "repeal": false,
+      "proposer": 0,
+      "opened": 182.0198,
+      "expires": 272.01980000000003,
+      "eligible": [
+        0,
+        1,
+        2
+      ],
+      "yes": [],
+      "no": [],
+      "ballotSnapshot": {
+        "mode": "equal",
+        "weights": {
+          "0": 1,
+          "1": 1,
+          "2": 1
+        },
+        "modern": true,
+        "source": "opened"
+      },
+      "reasons": {},
+      "assessments": {}
+    },
+    "agenda": {
+      "v": 1,
+      "next": 3,
+      "items": [
+        {
+          "id": 1,
+          "by": 1,
+          "kind": "law",
+          "law": "arastirma",
+          "options": {
+            "repeal": false
+          },
+          "key": "[\"law\",\"arastirma\",false,\"\",null,null,null,null,null]",
+          "created": 182.0198,
+          "expires": 542.0198,
+          "status": "waiting"
+        },
+        {
+          "id": 2,
+          "by": 2,
+          "kind": "motion",
+          "law": "motion",
+          "options": {
+            "kind": "joinWar",
+            "target": 3,
+            "sponsor": 2
+          },
+          "key": "[\"motion\",\"motion\",false,\"joinWar\",3,2,null,null,null]",
+          "created": 182.0198,
+          "expires": 542.0198,
+          "status": "waiting"
+        }
+      ],
+      "history": []
+    }
+  },
+  "after": {
+    "vote": {
+      "id": 1,
+      "law": "savunma",
+      "kind": "basic",
+      "repeal": false,
+      "proposer": 0,
+      "opened": 182.0198,
+      "expires": 272.01980000000003,
+      "eligible": [
+        0,
+        1,
+        2
+      ],
+      "yes": [],
+      "no": [],
+      "ballotSnapshot": {
+        "mode": "equal",
+        "weights": {
+          "0": 1,
+          "1": 1,
+          "2": 1
+        },
+        "modern": true,
+        "source": "opened"
+      },
+      "reasons": {},
+      "assessments": {}
+    },
+    "agenda": {
+      "v": 1,
+      "next": 3,
+      "items": [
+        {
+          "id": 1,
+          "by": 1,
+          "kind": "law",
+          "law": "arastirma",
+          "options": {
+            "repeal": false
+          },
+          "key": "[\"law\",\"arastirma\",false,\"\",null,null,null,null,null]",
+          "created": 182.0198,
+          "expires": 542.0198,
+          "status": "waiting"
+        },
+        {
+          "id": 2,
+          "by": 2,
+          "kind": "motion",
+          "law": "motion",
+          "options": {
+            "target": 3,
+            "sponsor": 2,
+            "kind": "joinWar"
+          },
+          "key": "[\"motion\",\"motion\",false,\"joinWar\",3,2,null,null,null]",
+          "created": 182.0198,
+          "expires": 542.0198,
+          "status": "waiting"
+        }
+      ],
+      "history": []
+    }
+  }
+}

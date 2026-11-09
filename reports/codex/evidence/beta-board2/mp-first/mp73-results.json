@@ -1,0 +1,71 @@
+{
+  "results": [
+    {
+      "name": "A1 rehber 1–8: oda, iki farklı devlet, hazır, başlat; iki ekranda galaksi; sürüm işareti lobi / başlangıç / MP çubuğunda ve /mp/version oyun build'iyle aynı",
+      "status": "PASS",
+      "ms": 12894
+    },
+    {
+      "name": "B1 konsey motorun kendi yoluyla kurulur (fikstür: temas); AI insanlar adına oy / sponsor yazmaz; B gerçek \"KONSEY OYLAMASI\" kartından Konsey ekranını açar ve EVET (dokunma) → host kaydeder, oylama açık kalır",
+      "status": "PASS",
+      "ms": 26383
+    },
+    {
+      "name": "BD2 koloni paneli ve yetkili uzaktan inşa",
+      "status": "FAIL",
+      "error": "locator.tap: Timeout 8000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#panel [data-a=\"selfleet\"][data-x=\"28\"]').first()\u001b[22m\n\u001b[2m    - locator resolved to <div data-x=\"28\" class=\"pchip\" data-a=\"selfleet\">…</div>\u001b[22m\n\u001b[2m  - attempting tap action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying tap action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying tap action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    10 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is not visible\u001b[22m\n\u001b[2m     - retrying tap action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n    at hit (/workspace/Star/tests/helpers/beta-board2-browser.cjs:2:197)\n    at async module.exports (/workspace/Star/tests/helpers/beta-board2-browser.cjs:5:113)\n    at async /workspace/Star/tests/browser-mp73.cjs:249:111\n    at async test (/workspace/Star/tests/browser-mp73.cjs:13:7)\n    at async /workspace/Star/tests/browser-mp73.cjs:249:31"
+    },
+    {
+      "name": "sayfa hataları yok",
+      "status": "PASS",
+      "ms": 0
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "startModal": [
+      "🛰 DANIŞMAN",
+      "",
+      "🛰 DANIŞMAN",
+      "",
+      ""
+    ],
+    "version": {
+      "mp": "MP.8.9b12",
+      "build": "96h10p17",
+      "files": {
+        "mp-core.js": "cca442a6ebf3",
+        "relay.js": "2962a3667e0f",
+        "mp1-host.js": "c51e44ae76f9",
+        "join.js": "bc2732493741",
+        "mirror.js": "657d1d9768d4",
+        "guest-stars.js": "bd668b96b3a1",
+        "mp71-dip.js": "bf0355f27ef6",
+        "mp7-setup.js": "48c0f282a254"
+      }
+    },
+    "unsupported": [
+      "autoEvent",
+      "diagCopy",
+      "joinRebel",
+      "leaveRebel",
+      "mapFix",
+      "physio",
+      "restart",
+      "rollName",
+      "sandbox",
+      "sitPick",
+      "stashNote",
+      "survey",
+      "terra",
+      "toTitle",
+      "tplDel",
+      "tplLoad",
+      "tplSave",
+      "trigCrisis"
+    ],
+    "guestDiag": "STARS MP.8.9b12 · oyun 96h10p17 · misafir · host bağlı · aşama: ready · ayna r5 05:40:02 · kurulum 5 ms · son komut: yok · son hata: yok"
+  },
+  "pass": 3,
+  "fail": 1
+}

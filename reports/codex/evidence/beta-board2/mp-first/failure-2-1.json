@@ -1,0 +1,22 @@
+{
+  "url": "/mp/play",
+  "vote": null,
+  "inbox": [
+    {
+      "kind": "chain",
+      "data": "lab1",
+      "decisionId": 1,
+      "uid": 1,
+      "key": "personal:1",
+      "born": 30.012199999999886,
+      "pause": false,
+      "ico": "❗",
+      "cls": "sci",
+      "title": "Yörüngedeki Laboratuvar",
+      "sub": "{SISTEM} sisteminde, hâlâ enerji üreten kapalı bir araştırma istasyonu bulundu. Kimin olduğu belirsi",
+      "hidden": false
+    }
+  ],
+  "modal": "",
+  "pane": ""
+}

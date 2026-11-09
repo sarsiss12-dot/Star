@@ -1,0 +1,19 @@
+[
+  {
+    "name": "1920x1080 1 colony",
+    "status": "PASS"
+  },
+  {
+    "name": "1920x1080 10 colony",
+    "status": "PASS"
+  },
+  {
+    "name": "1920x1080 32 colony",
+    "status": "PASS"
+  },
+  {
+    "name": "browser",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: workspace covers right panel {\"l\":{\"x\":0,\"y\":0,\"width\":486,\"height\":360},\"r\":{\"x\":450,\"y\":30,\"width\":350,\"height\":330},\"scale\":100}\n    at /workspace/Star/tests/browser-beta-board2-colonies.cjs:4:1876"
+  }
+]

@@ -1,0 +1,629 @@
+{
+ "results": [
+  {
+   "name": "R0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 11; misafir gerçek STARS arayüzünde",
+   "status": "PASS",
+   "ms": 15291
+  },
+  {
+   "name": "R1 6 ay kampanya + bekleyen insan teklifi (C → B), savaş, federasyon/konsey denemeleri; senkron",
+   "status": "PASS",
+   "ms": 10585
+  },
+  {
+   "name": "R2 kayıt: OYUNU KAYDET (IndexedDB); Save8/RNG değişmez; misafir cihazında kayıt kimliği; tüm tarayıcı süreçleri + relay süreci kapanır",
+   "status": "PASS",
+   "ms": 1122
+  },
+  {
+   "name": "R3 devam: yeni host süreci aynı profil → KAYITLI OYUNA DEVAM ET → yeni oda; misafirler yeni kodla gerçek STARS arayüzünden döner → aynı devletler; dünya, teklifler, savaşlar, federasyon, konsey, hız aynı",
+   "status": "PASS",
+   "ms": 39087
+  },
+  {
+   "name": "R4 devam eden oyun: bekleyen teklif B tarafından tam bir kez kabul edilir; 6 ay daha kampanya + senkron",
+   "status": "FAIL",
+   "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n234 !== 241\n\n    at exports.finish (/workspace/Star/tests/helpers/beta-board2-resume.cjs:4:439)\n    at async /workspace/Star/tests/browser-mp8.cjs:317:45\n    at async test (/workspace/Star/tests/browser-mp8.cjs:23:162)\n    at async /workspace/Star/tests/browser-mp8.cjs:308:5"
+  }
+ ],
+ "metrics": {
+  "scen": "R",
+  "conf": {
+   "size": "orta",
+   "ai": 5,
+   "seed": 11,
+   "months": 6,
+   "guests": 2,
+   "every": 6
+  },
+  "sync": [
+   {
+    "label": "m0",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     3,
+     3
+    ],
+    "mirrorEq": true,
+    "revMs": 326,
+    "buildMs": 404,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m0",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     3,
+     3
+    ],
+    "mirrorEq": true,
+    "revMs": 528,
+    "buildMs": 608,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m6",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     14,
+     14
+    ],
+    "mirrorEq": true,
+    "revMs": 206,
+    "buildMs": 283,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m6",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     14,
+     14
+    ],
+    "mirrorEq": true,
+    "revMs": 357,
+    "buildMs": 473,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m6-pre-save",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     16,
+     16
+    ],
+    "mirrorEq": true,
+    "revMs": 767,
+    "buildMs": 836,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m6-pre-save",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     16,
+     16
+    ],
+    "mirrorEq": true,
+    "revMs": 950,
+    "buildMs": 1021,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "resume",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     1,
+     1
+    ],
+    "mirrorEq": true,
+    "revMs": 150,
+    "buildMs": 155,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "resume",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     1,
+     1
+    ],
+    "mirrorEq": true,
+    "revMs": 167,
+    "buildMs": 174,
+    "diff": [],
+    "leak": []
+   }
+  ],
+  "cmds": [
+   {
+    "label": "m6",
+    "who": "H",
+    "k": "offerHuman",
+    "status": "ok",
+    "before": 0,
+    "after": 1,
+    "res": true
+   },
+   {
+    "label": "m6",
+    "who": "B",
+    "k": "research",
+    "status": "ok",
+    "code": null,
+    "ms": 49,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m6",
+    "who": "B",
+    "k": "move",
+    "status": "ok",
+    "code": null,
+    "ms": 123,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m6",
+    "who": "B",
+    "k": "build",
+    "status": "ok",
+    "code": null,
+    "ms": 35,
+    "before": 0,
+    "after": 1
+   },
+   {
+    "label": "m6",
+    "who": "B",
+    "k": "ship",
+    "status": "ok",
+    "code": null,
+    "ms": 45,
+    "before": 0,
+    "after": 1
+   },
+   {
+    "label": "m6",
+    "who": "B",
+    "k": "offerHuman",
+    "status": "ok",
+    "code": null,
+    "ms": 60,
+    "before": 0,
+    "after": 1
+   },
+   {
+    "label": "m6",
+    "who": "B",
+    "k": "offerAI",
+    "status": "skip",
+    "why": "quote"
+   },
+   {
+    "label": "m6",
+    "who": "B",
+    "k": "respond",
+    "status": "ok",
+    "code": null,
+    "ms": 32,
+    "before": "pending",
+    "after": "accepted"
+   },
+   {
+    "label": "m6",
+    "who": "B",
+    "k": "fedFound",
+    "status": "skip",
+    "why": "fed"
+   },
+   {
+    "label": "m6",
+    "who": "B",
+    "k": "councilVote",
+    "status": "skip",
+    "why": "no-council"
+   },
+   {
+    "label": "m6",
+    "who": "C",
+    "k": "research",
+    "status": "ok",
+    "code": null,
+    "ms": 68,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m6",
+    "who": "C",
+    "k": "move",
+    "status": "ok",
+    "code": null,
+    "ms": 80,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m6",
+    "who": "C",
+    "k": "build",
+    "status": "ok",
+    "code": null,
+    "ms": 57,
+    "before": 0,
+    "after": 1
+   },
+   {
+    "label": "m6",
+    "who": "C",
+    "k": "ship",
+    "status": "ok",
+    "code": null,
+    "ms": 49,
+    "before": 0,
+    "after": 1
+   },
+   {
+    "label": "m6",
+    "who": "C",
+    "k": "offerHuman",
+    "status": "ok",
+    "code": null,
+    "ms": 85,
+    "before": 0,
+    "after": 1
+   },
+   {
+    "label": "m6",
+    "who": "C",
+    "k": "offerAI",
+    "status": "ok",
+    "code": null,
+    "ms": 47,
+    "before": 0,
+    "after": 1
+   },
+   {
+    "label": "m6",
+    "who": "C",
+    "k": "respond",
+    "status": "skip",
+    "why": "none"
+   },
+   {
+    "label": "m6",
+    "who": "C",
+    "k": "fedFound",
+    "status": "skip",
+    "why": "fed"
+   },
+   {
+    "label": "m6",
+    "who": "C",
+    "k": "councilVote",
+    "status": "skip",
+    "why": "no-council"
+   },
+   {
+    "label": "resume",
+    "who": "B",
+    "k": "respond",
+    "status": "ok",
+    "code": null,
+    "ms": 23,
+    "before": "pending",
+    "after": "accepted"
+   }
+  ],
+  "perf": [
+   {
+    "label": "m0",
+    "month": 0,
+    "host": {
+     "monthTick": {
+      "n": 0
+     },
+     "publish": {
+      "n": 3,
+      "med": 6.3,
+      "p95": 6.4,
+      "max": 6.4
+     },
+     "longtask": {
+      "n": 7,
+      "med": 59,
+      "p95": 182,
+      "max": 182
+     },
+     "heapMB": 16,
+     "dom": 740,
+     "intervals": 2,
+     "timeouts": 2,
+     "offers": 0,
+     "notes": 0,
+     "inbox": 0,
+     "log": 1,
+     "news": 0
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 3,
+       "med": 41.9,
+       "p95": 113,
+       "max": 113
+      },
+      "refresh": {
+       "n": 1,
+       "med": 6.5,
+       "p95": 6.5,
+       "max": 6.5
+      },
+      "longtask": {
+       "n": 2,
+       "med": 136,
+       "p95": 136,
+       "max": 136
+      },
+      "builds": 3,
+      "deltas": 2,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 15,
+      "dom": 711,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 29,
+      "joinErrors": 0
+     },
+     "C": {
+      "build": {
+       "n": 3,
+       "med": 15.6,
+       "p95": 146.6,
+       "max": 146.6
+      },
+      "refresh": {
+       "n": 1,
+       "med": 4.3,
+       "p95": 4.3,
+       "max": 4.3
+      },
+      "longtask": {
+       "n": 4,
+       "med": 72,
+       "p95": 144,
+       "max": 144
+      },
+      "builds": 3,
+      "deltas": 2,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 14,
+      "dom": 710,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 25,
+      "joinErrors": 0
+     }
+    }
+   },
+   {
+    "label": "m6",
+    "month": 6,
+    "host": {
+     "monthTick": {
+      "n": 6,
+      "med": 156.8,
+      "p95": 224.7,
+      "max": 224.7
+     },
+     "publish": {
+      "n": 187,
+      "med": 4.2,
+      "p95": 19.4,
+      "max": 47
+     },
+     "longtask": {
+      "n": 13,
+      "med": 57,
+      "p95": 173,
+      "max": 173
+     },
+     "heapMB": 22,
+     "dom": 774,
+     "intervals": 2,
+     "timeouts": 8,
+     "offers": 4,
+     "notes": 0,
+     "inbox": 3,
+     "log": 22,
+     "news": 1
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 11,
+       "med": 11.5,
+       "p95": 29.2,
+       "max": 29.2
+      },
+      "refresh": {
+       "n": 15,
+       "med": 8.1,
+       "p95": 50.7,
+       "max": 50.7
+      },
+      "longtask": {
+       "n": 32,
+       "med": 66,
+       "p95": 143,
+       "max": 224
+      },
+      "builds": 14,
+      "deltas": 13,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 13,
+      "dom": 766,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 6,
+      "packets": 249,
+      "joinErrors": 0
+     },
+     "C": {
+      "build": {
+       "n": 11,
+       "med": 12.4,
+       "p95": 34.7,
+       "max": 34.7
+      },
+      "refresh": {
+       "n": 15,
+       "med": 12.3,
+       "p95": 165.8,
+       "max": 165.8
+      },
+      "longtask": {
+       "n": 36,
+       "med": 63,
+       "p95": 145,
+       "max": 172
+      },
+      "builds": 14,
+      "deltas": 13,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 15,
+      "dom": 746,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 6,
+      "packets": 245,
+      "joinErrors": 0
+     }
+    }
+   }
+  ],
+  "notes": [],
+  "net": {},
+  "resume": {
+   "explicitFixture": {
+    "explicitFixture": true,
+    "day": 182.0198,
+    "seed": 11,
+    "humanIds": [
+     0,
+     1,
+     2
+    ],
+    "aiCount": 5,
+    "federation": {
+     "id": 1,
+     "members": [
+      0,
+      1
+     ]
+    },
+    "war": [
+     3,
+     0
+    ],
+    "vassal": {
+     "lord": 0,
+     "subject": 4,
+     "type": "haracguzar"
+    },
+    "rng": -1622594203
+   },
+   "pendingOffer": {
+    "status": "ok",
+    "code": null,
+    "ms": 70,
+    "cid": "jmw8u7boldqzt1b7x"
+   },
+   "pkgBytes": 220374,
+   "after": {
+    "day": 182,
+    "r": "-1622594203",
+    "offers": "1:accepted:0>1,2:pending:1>0,3:pending:2>0,4:accepted:2>4,5:pending:2>1",
+    "wars": "0:3|1:|2:3",
+    "feds": "2:0.1.2:{\"id\":1,\"law\":\"savunma\",\"kind\":\"basic\",\"repeal\":false,\"proposer\":0,\"opened\":182.0198,\"expires\":272.01980000000003,\"eligible\":[0,1,2],\"yes\":[],\"no\":[],\"ballotSnapshot\":{\"mode\":\"equal\",\"weights\":{\"0\":1,\"1\":1,\"2\":1},\"modern\":true,\"source\":\"opened\"},\"reasons\":{},\"assessments\":{}}",
+    "council": "",
+    "vassal": "4<0",
+    "humans": "0:Kızıl Muhafız:ai=false:col=1:fl=3|1:Saf Akıl Ağı:ai=false:col=1:fl=4|2:Yeşil Birlik:ai=false:col=1:fl=3",
+    "speed": 0,
+    "inbox": 4
+   },
+   "before": {
+    "day": 182,
+    "r": "-1622594203",
+    "offers": "1:accepted:0>1,2:pending:1>0,3:pending:2>0,4:accepted:2>4,5:pending:2>1",
+    "wars": "0:3|1:|2:3",
+    "feds": "2:0.1.2:{\"id\":1,\"law\":\"savunma\",\"kind\":\"basic\",\"repeal\":false,\"proposer\":0,\"opened\":182.0198,\"expires\":272.01980000000003,\"eligible\":[0,1,2],\"yes\":[],\"no\":[],\"ballotSnapshot\":{\"mode\":\"equal\",\"weights\":{\"0\":1,\"1\":1,\"2\":1},\"modern\":true,\"source\":\"opened\"},\"reasons\":{},\"assessments\":{}}",
+    "council": "",
+    "vassal": "4<0",
+    "humans": "0:Kızıl Muhafız:ai=false:col=1:fl=3|1:Saf Akıl Ağı:ai=false:col=1:fl=4|2:Yeşil Birlik:ai=false:col=1:fl=3",
+    "speed": 0,
+    "inbox": 4
+   },
+   "fullRecordsEqual": true,
+   "secondAccept": "rules:closed",
+   "personal": {
+    "id": 4,
+    "research": 200,
+    "persisted": true
+   },
+   "board1": {
+    "queueRestored": true,
+    "orderPreserved": true,
+    "openingFee": 60,
+    "expiredWarNotApplied": true
+   }
+  },
+  "relayPid1": 619025,
+  "actualWorld": {
+   "seed": 11,
+   "size": "orta",
+   "systems": 45,
+   "states": 8
+  },
+  "seats": [
+   {
+    "e": 1,
+    "conn": true
+   },
+   {
+    "e": 2,
+    "conn": true
+   }
+  ],
+  "relayPid2": 619671,
+  "errors": []
+ }
+}

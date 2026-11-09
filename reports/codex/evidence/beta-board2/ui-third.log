@@ -1,0 +1,6 @@
+page.evaluate: TypeError: Cannot read properties of undefined (reading 'col')
+    at eval (eval at evaluate (:311:30), <anonymous>:1:88)
+    at UtilityScript.evaluate (<anonymous>:313:16)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+    at /workspace/Star/tests/browser-beta-board2-colonies.cjs:4:942
+GEÇEN: 1 KALAN: 1

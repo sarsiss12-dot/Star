@@ -1,0 +1,6 @@
+AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert((await p.locator('#diploPane').innerText()).includes('Bina girdileri'))
+
+    at /workspace/Star/tests/browser-beta-board2-colonies.cjs:4:1497
+GEÇEN: 0 KALAN: 1

@@ -1,0 +1,66 @@
+[
+  {
+    "name": "1920x1080 1 colony",
+    "status": "PASS"
+  },
+  {
+    "name": "1920x1080 10 colony",
+    "status": "PASS"
+  },
+  {
+    "name": "1920x1080 32 colony",
+    "status": "PASS"
+  },
+  {
+    "name": "1920 spy target no cost/RNG",
+    "status": "PASS"
+  },
+  {
+    "name": "800x360 1 colony",
+    "status": "PASS"
+  },
+  {
+    "name": "800x360 10 colony",
+    "status": "PASS"
+  },
+  {
+    "name": "800x360 32 colony",
+    "status": "PASS"
+  },
+  {
+    "name": "800 spy target no cost/RNG",
+    "status": "PASS"
+  },
+  {
+    "name": "915x412 1 colony",
+    "status": "PASS"
+  },
+  {
+    "name": "915x412 10 colony",
+    "status": "PASS"
+  },
+  {
+    "name": "915x412 32 colony",
+    "status": "PASS"
+  },
+  {
+    "name": "915 spy target no cost/RNG",
+    "status": "PASS"
+  },
+  {
+    "name": "960x540 1 colony",
+    "status": "PASS"
+  },
+  {
+    "name": "960x540 10 colony",
+    "status": "PASS"
+  },
+  {
+    "name": "960x540 32 colony",
+    "status": "PASS"
+  },
+  {
+    "name": "960 spy target no cost/RNG",
+    "status": "PASS"
+  }
+]

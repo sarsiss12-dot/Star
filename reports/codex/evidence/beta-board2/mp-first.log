@@ -1,0 +1,28 @@
+PASS A1 rehber 1–8: oda, iki farklı devlet, hazır, başlat; iki ekranda galaksi; sürüm işareti lobi / başlangıç / MP çubuğunda ve /mp/version oyun build'iyle aynı
+PASS B1 konsey motorun kendi yoluyla kurulur (fikstür: temas); AI insanlar adına oy / sponsor yazmaz; B gerçek "KONSEY OYLAMASI" kartından Konsey ekranını açar ve EVET (dokunma) → host kaydeder, oylama açık kalır
+FAIL BD2 koloni paneli ve yetkili uzaktan inşa
+locator.tap: Timeout 8000ms exceeded.
+Call log:
+[2m  - waiting for locator('#panel [data-a="selfleet"][data-x="28"]').first()[22m
+[2m    - locator resolved to <div data-x="28" class="pchip" data-a="selfleet">…</div>[22m
+[2m  - attempting tap action[22m
+[2m    2 × waiting for element to be visible, enabled and stable[22m
+[2m      - element is not visible[22m
+[2m    - retrying tap action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible, enabled and stable[22m
+[2m      - element is not visible[22m
+[2m    - retrying tap action[22m
+[2m      - waiting 100ms[22m
+[2m    10 × waiting for element to be visible, enabled and stable[22m
+[2m       - element is not visible[22m
+[2m     - retrying tap action[22m
+[2m       - waiting 500ms[22m
+
+    at hit (/workspace/Star/tests/helpers/beta-board2-browser.cjs:2:197)
+    at async module.exports (/workspace/Star/tests/helpers/beta-board2-browser.cjs:5:113)
+    at async /workspace/Star/tests/browser-mp73.cjs:249:111
+    at async test (/workspace/Star/tests/browser-mp73.cjs:13:7)
+    at async /workspace/Star/tests/browser-mp73.cjs:249:31
+PASS sayfa hataları yok
+GEÇEN: 3 KALAN: 1

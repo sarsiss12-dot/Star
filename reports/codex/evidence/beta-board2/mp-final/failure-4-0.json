@@ -1,0 +1,113 @@
+{
+  "url": "/",
+  "vote": null,
+  "inbox": [
+    {
+      "kind": "anomaly",
+      "data": {
+        "a": {
+          "id": "a4",
+          "k": "megayapi",
+          "n": "Savaş Enkazı",
+          "t": "Kimliği belirsiz iki filo burada birbirini yok etmiş. Enkaz hâlâ soğumamış.",
+          "ch": [
+            {
+              "t": "Silah sistemlerini incele",
+              "d": "+200 araştırma"
+            },
+            {
+              "t": "Alaşımı topla",
+              "d": "+140 alaşım"
+            }
+          ]
+        },
+        "sys": {
+          "id": 43,
+          "x": 1562.9950867083344,
+          "y": 4036.228202275302,
+          "name": "Xanonar",
+          "star": {
+            "n": "K Turuncu",
+            "c": "#ffab5c",
+            "r": 5,
+            "w": 22
+          },
+          "planets": [
+            {
+              "i": 0,
+              "t": "tok",
+              "dep": "kristal",
+              "sz": 17,
+              "seed": 5636,
+              "owner": -1,
+              "col": null,
+              "name": "Xanonar I"
+            },
+            {
+              "i": 1,
+              "t": "cor",
+              "dep": "zengin_maden",
+              "sz": 10,
+              "seed": 5653,
+              "owner": -1,
+              "col": null,
+              "name": "Xanonar II"
+            },
+            {
+              "i": 2,
+              "t": "buz",
+              "dep": null,
+              "sz": 16,
+              "seed": 5670,
+              "owner": -1,
+              "col": null,
+              "name": "Xanonar III"
+            },
+            {
+              "i": 3,
+              "t": "ast",
+              "dep": null,
+              "sz": 0,
+              "seed": 5687,
+              "owner": -1,
+              "col": null,
+              "name": "Xanonar IV"
+            }
+          ],
+          "lanes": [
+            13,
+            18,
+            22
+          ],
+          "owner": -1,
+          "surv": [
+            0
+          ],
+          "seen": [
+            0,
+            4
+          ],
+          "def": 0,
+          "queue": [],
+          "anom": false,
+          "pulsar": false,
+          "nebulaS": false,
+          "anomK": "megayapi",
+          "_reach": 0,
+          "_shat": false,
+          "cr": 0
+        }
+      },
+      "ico": "🔬",
+      "cls": "sci",
+      "pause": true,
+      "title": "Anomali — Xanonar",
+      "sub": "Savaş Enkazı",
+      "key": "an:43",
+      "uid": 1,
+      "born": 67.15139999999957
+    }
+  ],
+  "modal": "",
+  "pane": ""
+}

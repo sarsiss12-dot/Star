@@ -1,0 +1,3 @@
+PASS uzaktan inşa host önizleme, yetki, gerçek ödeme ve tamamlama; tekrar bedeli yok
+PASS bekleyen görev Save8 korur; kendi iptali ve çift iptal/başkasının yetkisi reddedilir
+GEÇEN: 2 KALAN: 0

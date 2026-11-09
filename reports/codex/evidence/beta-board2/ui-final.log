@@ -1,0 +1,3 @@
+AssertionError [ERR_ASSERTION]: workspace covers right panel {"l":{"x":0,"y":0,"width":486,"height":360},"r":{"x":450,"y":30,"width":350,"height":330},"scale":100}
+    at /workspace/Star/tests/browser-beta-board2-colonies.cjs:4:1876
+GEÇEN: 3 KALAN: 1

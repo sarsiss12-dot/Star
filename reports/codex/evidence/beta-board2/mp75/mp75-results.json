@@ -1,0 +1,108 @@
+{
+  "results": [
+    {
+      "name": "A1 oda + başlangıç; MP düğmesi host ve misafirde sol araç sütununda (#tools), hız kutusu / kaynak çubuğu / araç düğmeleriyle örtüşmez; açılınca panel, kapanınca sütuna döner",
+      "status": "PASS",
+      "ms": 16745
+    },
+    {
+      "name": "A2 misafirde açık panel yerinde güncellenir: diplomasi sayfası açıkken oyun ilerler, ayna birçok kez kurulur, panel baştan yazılmaz (surfaceKept)",
+      "status": "PASS",
+      "ms": 4123
+    },
+    {
+      "name": "A3 savaş / barış: misafir AI ile savaşta; AI barış teklifi misafirin kartına gelir; KABUL (dokunma) → host'ta savaş biter; AKTİF SAVAŞLAR üst sayaçla aynı sayıyı gösterir",
+      "status": "PASS",
+      "ms": 2924
+    },
+    {
+      "name": "A4 dokunmatik miktar: filo bileşimi penceresinde SIFIR / −50 / −10 / +10 / +50 (dokunma), klavye açılmaz; anlaşma miktarında pencerenin kendi düğmeleri korunur (çift kontrol yok)",
+      "status": "PASS",
+      "ms": 3531
+    },
+    {
+      "name": "A5 karar bekleyen olay kaydırılınca gizlenir (silinmez), ☰ durum listesinde kalır ve oradan aynı karar penceresi açılır",
+      "status": "PASS",
+      "ms": 2334
+    },
+    {
+      "name": "sayfa hataları yok",
+      "status": "PASS",
+      "ms": 0
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "joinErrors_Bora": [],
+    "dock_host": {
+      "m": [
+        6,
+        224,
+        32,
+        42
+      ],
+      "overlap": [],
+      "inView": true
+    },
+    "dock_B": {
+      "m": [
+        6,
+        269,
+        32,
+        42
+      ],
+      "overlap": [],
+      "inView": true
+    },
+    "pane": {
+      "builds": 6,
+      "rewrites": 0,
+      "kept": 38,
+      "minGap": 600,
+      "open": true
+    },
+    "activeWars": {
+      "n": 1,
+      "top": 1,
+      "html": "⚔ AKTİF SAVAŞLAR✕\n      Savaştığın devlet1Aktif savaş cephesi1\n      \n      ⚔ Vaanni Meclisi\n      0 aydır savaşta · Gerekçesiz Saldırı · aktif cephe\n      \n      Statüko barışı: Henüz iki taraf da yeterince yorulmadı (0/85)\n      Diplomasi · barış görüşmesi\n      GELEN KUTUSUKAPAT"
+    },
+    "peaceHit": {
+      "before": {
+        "uid": 2,
+        "rect": {
+          "x": 271.34375,
+          "y": 134,
+          "width": 64,
+          "height": 44
+        },
+        "target": "<button class=\"nq ok\" data-a=\"noteQuick\" data-x=\"2:y\">KABUL</button>",
+        "hit": true
+      },
+      "after": {
+        "uid": 2,
+        "rect": {
+          "x": 271.34375,
+          "y": 120,
+          "width": 64,
+          "height": 44
+        },
+        "target": "<button class=\"nq ok\" data-a=\"noteQuick\" data-x=\"2:y\">KABUL</button>",
+        "hit": true
+      }
+    },
+    "afterPeace": {
+      "wars": 1,
+      "list": 1
+    },
+    "fleetSteps": [
+      "SIFIR",
+      "−50",
+      "−10",
+      "+10",
+      "+50",
+      "MAKS"
+    ]
+  },
+  "pass": 6,
+  "fail": 0
+}

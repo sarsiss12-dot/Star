@@ -1,0 +1,5 @@
+{"name": "mp-final", "file": "tests/browser-mp73.cjs", "env": {"BOARD1": "1", "BOARD2": "1", "MPP0": "1", "MP73_ONLY": "A1 |B1 |P0 |BD1 |BD2 |sayfa"}, "exit": 1, "seconds": 143.3}
+{"name": "mp74", "file": "tests/browser-mp74.cjs", "env": {}, "exit": 0, "seconds": 48.81}
+{"name": "mp75", "file": "tests/browser-mp75.cjs", "env": {}, "exit": 0, "seconds": 31.72}
+{"name": "mp8-N", "file": "tests/browser-mp8.cjs", "env": {"MP8_SCEN": "N"}, "exit": 0, "seconds": 126.68}
+{"name": "old-panels", "file": "tests/browser-beta-p01-panels.cjs", "env": {}, "exit": 0, "seconds": 37.02}

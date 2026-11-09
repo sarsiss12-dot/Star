@@ -1,0 +1,22 @@
+PASS A1 rehber 1–8: oda, iki farklı devlet, hazır, başlat; iki ekranda galaksi; sürüm işareti lobi / başlangıç / MP çubuğunda ve /mp/version oyun build'iyle aynı
+PASS B1 konsey motorun kendi yoluyla kurulur (fikstür: temas); AI insanlar adına oy / sponsor yazmaz; B gerçek "KONSEY OYLAMASI" kartından Konsey ekranını açar ve EVET (dokunma) → host kaydeder, oylama açık kalır
+PASS P0 katılımcı görüş, sağlık, özel kararlar, rota ve görsel hareket
+PASS BD2 koloni paneli ve yetkili uzaktan inşa
+BD1 fixture ready
+FAIL BD1 federasyon FIFO, savaş yardımı, geri çekme ve ayrı aday rızası
+locator.tap: Timeout 8000ms exceeded.
+Call log:
+[2m  - waiting for locator('#diploPane [data-a="fedTab"][data-x="laws"]').first()[22m
+[2m    - locator resolved to <button class="abtn " data-x="laws" data-a="fedTab" aria-pressed="false">YASALAR</button>[22m
+[2m  - attempting tap action[22m
+[2m    - waiting for element to be visible, enabled and stable[22m
+[2m  - element was detached from the DOM, retrying[22m
+
+    at hit (/workspace/Star/tests/helpers/beta-board1-browser.cjs:4:498)
+    at async open (/workspace/Star/tests/helpers/beta-board1-browser.cjs:5:82)
+    at async module.exports (/workspace/Star/tests/helpers/beta-board1-browser.cjs:11:2)
+    at async /workspace/Star/tests/browser-mp73.cjs:250:136
+    at async test (/workspace/Star/tests/browser-mp73.cjs:13:7)
+    at async /workspace/Star/tests/browser-mp73.cjs:250:31
+PASS sayfa hataları yok
+GEÇEN: 5 KALAN: 1

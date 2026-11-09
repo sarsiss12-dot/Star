@@ -1,0 +1,11 @@
+[
+  {
+    "name": "1920x1080 1 colony",
+    "status": "PASS"
+  },
+  {
+    "name": "browser",
+    "status": "FAIL",
+    "error": "page.evaluate: TypeError: Cannot read properties of undefined (reading 'col')\n    at eval (eval at evaluate (:311:30), <anonymous>:1:88)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at /workspace/Star/tests/browser-beta-board2-colonies.cjs:4:942"
+  }
+]

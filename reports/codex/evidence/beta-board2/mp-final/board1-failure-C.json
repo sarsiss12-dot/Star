@@ -1,0 +1,92 @@
+{
+  "feds": [
+    {
+      "id": 1,
+      "name": "Meridyen Bilgi Topluluğu",
+      "type": "bilimsel",
+      "charter": {
+        "defense": "vote",
+        "offense": "vote",
+        "admission": "allies",
+        "ballot": "equal"
+      },
+      "leader": 2,
+      "founder": 2,
+      "members": [
+        2,
+        1,
+        0
+      ],
+      "laws": {},
+      "fund": {
+        "ala": 0,
+        "ene": 0
+      },
+      "treasury": 0,
+      "founded": 10.296079999999975,
+      "typeSince": 10.296079999999975,
+      "dutySince": {
+        "defense": 0,
+        "offense": 0
+      },
+      "invites": {},
+      "decisions": {},
+      "dutyConsent": {},
+      "cohesion": 70,
+      "nextVote": 190.29607999999996,
+      "politicsVersion": 96,
+      "vote": {
+        "id": 1,
+        "kind": "basic",
+        "law": "savunma",
+        "repeal": false,
+        "opened": 10.296079999999975,
+        "expires": 100.29607999999998,
+        "proposer": 2,
+        "yes": [],
+        "no": [],
+        "eligible": [
+          2,
+          1,
+          0
+        ],
+        "ballotSnapshot": {
+          "mode": "equal",
+          "modern": true,
+          "source": "opened",
+          "weights": {
+            "0": 1,
+            "1": 1,
+            "2": 1
+          }
+        }
+      },
+      "lastVote": null,
+      "identityType": "bilimsel",
+      "emblem": {
+        "v": 1,
+        "shape": "diamond",
+        "symbol": "orbit",
+        "pattern": "rays",
+        "primary": "#5cf5d6",
+        "secondary": "#5c9ef5",
+        "federation": true
+      }
+    }
+  ],
+  "inbox": [
+    {
+      "kind": "cncvote",
+      "data": "ticaretStd",
+      "ico": "🌐",
+      "cls": "sci",
+      "pause": false,
+      "uid": 1,
+      "born": 10.296079999999975,
+      "title": "KONSEY OYLAMASI",
+      "sub": "Evrensel Ticaret Standardı",
+      "key": "mp73cnc:ticaretStd:"
+    }
+  ],
+  "modal": ""
+}

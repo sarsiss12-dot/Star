@@ -1,0 +1,95 @@
+{
+  "results": [
+    {
+      "name": "A1 rehber 1–8: oda, iki farklı devlet, hazır, başlat; iki ekranda galaksi; sürüm işareti lobi / başlangıç / MP çubuğunda ve /mp/version oyun build'iyle aynı",
+      "status": "PASS",
+      "ms": 13247
+    },
+    {
+      "name": "B1 konsey motorun kendi yoluyla kurulur (fikstür: temas); AI insanlar adına oy / sponsor yazmaz; B gerçek \"KONSEY OYLAMASI\" kartından Konsey ekranını açar ve EVET (dokunma) → host kaydeder, oylama açık kalır",
+      "status": "PASS",
+      "ms": 42368
+    },
+    {
+      "name": "BD2 koloni paneli ve yetkili uzaktan inşa",
+      "status": "PASS",
+      "ms": 30262
+    },
+    {
+      "name": "sayfa hataları yok",
+      "status": "PASS",
+      "ms": 9
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "startModal": [
+      "🛰 DANIŞMAN",
+      "",
+      "🛰 DANIŞMAN",
+      "",
+      ""
+    ],
+    "version": {
+      "mp": "MP.8.9b12",
+      "build": "96h10p17",
+      "files": {
+        "mp-core.js": "e047fa4dd51a",
+        "relay.js": "2962a3667e0f",
+        "mp1-host.js": "c51e44ae76f9",
+        "join.js": "bc2732493741",
+        "mirror.js": "e25752b9f767",
+        "guest-stars.js": "cea8b4d82e77",
+        "mp71-dip.js": "bf0355f27ef6",
+        "mp7-setup.js": "48c0f282a254"
+      }
+    },
+    "unsupported": [
+      "autoEvent",
+      "diagCopy",
+      "joinRebel",
+      "leaveRebel",
+      "mapFix",
+      "physio",
+      "restart",
+      "rollName",
+      "sandbox",
+      "sitPick",
+      "stashNote",
+      "survey",
+      "terra",
+      "toTitle",
+      "tplDel",
+      "tplLoad",
+      "tplSave",
+      "trigCrisis"
+    ],
+    "guestDiag": "STARS MP.8.9b12 · oyun 96h10p17 · misafir · host bağlı · aşama: ready · ayna r5 06:14:19 · kurulum 5 ms · son komut: yok · son hata: yok",
+    "board2": [
+      {
+        "guestOwnList": true,
+        "rightPanel": true
+      },
+      {
+        "nativeRemote": true,
+        "travel": true,
+        "task": 1,
+        "realCost": {
+          "min": 241,
+          "ala": 48
+        },
+        "completed": true,
+        "duplicateRejected": true,
+        "CPrivate": true
+      },
+      {
+        "reconnect": true
+      },
+      {
+        "guestSpyTarget": true
+      }
+    ]
+  },
+  "pass": 4,
+  "fail": 0
+}

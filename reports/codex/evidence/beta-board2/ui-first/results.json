@@ -1,0 +1,7 @@
+[
+  {
+    "name": "browser",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert((await p.locator('#diploPane').innerText()).includes('Bina girdileri'))\n\n    at /workspace/Star/tests/browser-beta-board2-colonies.cjs:4:1497"
+  }
+]

@@ -1,0 +1,79 @@
+{
+  "url": "/mp/play",
+  "vote": {
+    "name": "Evrensel Konsey",
+    "founder": 1,
+    "members": [
+      1,
+      2,
+      0,
+      3,
+      7,
+      4,
+      6,
+      5
+    ],
+    "laws": {},
+    "targeted": {},
+    "treasury": 0,
+    "president": 1,
+    "terms": {
+      "1": 1
+    },
+    "termAge": 0,
+    "voteIn": 2,
+    "dead": false,
+    "byConvention": true,
+    "firstLaw": null,
+    "pariahs": {},
+    "agenda": [],
+    "vote": {
+      "key": "ticaretStd",
+      "opened": 6.613599999999999,
+      "target": null,
+      "yes": [
+        3,
+        4,
+        6,
+        1
+      ],
+      "no": [
+        7,
+        5
+      ],
+      "speeches": [
+        {
+          "id": 4,
+          "txt": "Bu masada oturmak bile bir zaferdir. Onu harcamayalım.",
+          "yes": true
+        },
+        {
+          "id": 6,
+          "txt": "Zayıflık davettir. Bu meclis güçlüye saygı duymalı.",
+          "yes": true
+        }
+      ],
+      "done": false,
+      "age": 0,
+      "sponsor": null
+    },
+    "lastVote": null,
+    "campaign": null
+  },
+  "inbox": [
+    {
+      "kind": "cncvote",
+      "data": "ticaretStd",
+      "ico": "🌐",
+      "cls": "sci",
+      "pause": false,
+      "uid": 1,
+      "born": 10.296079999999975,
+      "title": "KONSEY OYLAMASI",
+      "sub": "Evrensel Ticaret Standardı",
+      "key": "mp73cnc:ticaretStd:"
+    }
+  ],
+  "modal": "",
+  "pane": ""
+}

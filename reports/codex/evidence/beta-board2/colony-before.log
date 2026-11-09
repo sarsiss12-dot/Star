@@ -1,0 +1,65 @@
+FAIL koloni özeti salt okunur; gerçek üretim, girdi ve bakım ayrıdır
+evalmachine.<anonymous>:1
+var s=G.sys[G.p.home],p=s.planets.find(p=>p.col&&p.owner===0),before=serialize(),rng=RND_STATE,q=ColonyInfo.economy(G.p,s,p),o=colonyOutput(G.p,s,p);
+                                                                                                 ^
+
+ReferenceError: ColonyInfo is not defined
+    at evalmachine.<anonymous>:1:98
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/Star/tests/helpers/runtime.js:112:25)
+    at /workspace/Star/tests/beta_board2_colony_test.cjs:5:95
+    at test (/workspace/Star/tests/beta_board2_colony_test.cjs:3:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_board2_colony_test.cjs:5:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+FAIL kolonileştirme motor kapısı ile aynı; gemi/mesafe ayrı gerekçe ve yabancı ekonomi yok
+evalmachine.<anonymous>:1
+var s=G.sys[G.p.home],p=s.planets.find(p=>!p.col);if(!p){p={...s.planets[0],i:s.planets.length,owner:-1,col:null,t:"gay"};s.planets.push(p);}var before=serialize(),q=ColonyInfo.colonize(G.p,s,p);
+                                                                                                                                                                      ^
+
+ReferenceError: ColonyInfo is not defined
+    at evalmachine.<anonymous>:1:167
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/Star/tests/helpers/runtime.js:112:25)
+    at /workspace/Star/tests/beta_board2_colony_test.cjs:6:117
+    at test (/workspace/Star/tests/beta_board2_colony_test.cjs:3:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_board2_colony_test.cjs:6:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+FAIL isyan sayacı gerçek eşik/başkent/fetih koşullarını izler; gizli aktör döndürülmez
+evalmachine.<anonymous>:1
+var s=G.sys[G.p.home],p=s.planets.find(p=>p.col),c=p.col;c.stab=15;c.secede=18;c.unrest={left:5,hit:25,by:3};var before=serialize(),q=ColonyInfo.rebellion(G.p,s,p);
+                                                                                                                                      ^
+
+ReferenceError: ColonyInfo is not defined
+    at evalmachine.<anonymous>:1:135
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/Star/tests/helpers/runtime.js:112:25)
+    at /workspace/Star/tests/beta_board2_colony_test.cjs:7:113
+    at test (/workspace/Star/tests/beta_board2_colony_test.cjs:3:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_board2_colony_test.cjs:7:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+FAIL fetih açıklaması savaş, ordu ve kalkanı ayırır; sahte ETA yok
+evalmachine.<anonymous>:1
+var s=G.sys[G.p.home],p=s.planets.find(p=>p.col);p.owner=1;p.col.shield=80;var before=serialize(),q=ColonyInfo.conquest(G.p,s,p);
+                                                                                                    ^
+
+ReferenceError: ColonyInfo is not defined
+    at evalmachine.<anonymous>:1:101
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/Star/tests/helpers/runtime.js:112:25)
+    at /workspace/Star/tests/beta_board2_colony_test.cjs:8:93
+    at test (/workspace/Star/tests/beta_board2_colony_test.cjs:3:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_board2_colony_test.cjs:8:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+GEÇEN: 0 KALAN: 4

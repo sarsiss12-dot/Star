@@ -1,0 +1,8 @@
+✓ casus ağı: B, C'ye casus yerleştirir/geri çeker (motorun spyAssignQuote/assignSpy); kapasite motorun; temassız hedef "yok"; RNG tüketmez
+✓ istihbarat ilerlemesi motorun: eşiğin altındaki intelP bir aylık spyTick ile seviye atlar; B kendi listesinde görür (motor yalnız devlet 0'a söylüyordu)
+✓ operasyon teklifi (spyQuote): değerler host'un opQuote'u — maliyet, ifşa yüzdesi, seviye, uygunluk; kesin risk ve hedefin gizli verisi yok
+✓ operasyon (spyOp): zar host'ta, maliyet BİR kez, sonuç yalnız B'ye; bayat onay "stale"; yetersiz seviye motor gerekçesiyle; reddedilen komut Save8/RNG değiştirmez; aynı cid ikinci kez uygulanmaz
+✓ gizlilik (3 insan): B, C'ye operasyonlar yürütür; C yalnız motorun izin verdiğini görür — yakalanmayanda fail adı yok, yakalananda B; A hiçbir şey görmez; C'nin aynasında bilinmeyen failin kimliği yok
+✓ özel operasyonlar (spySpecial): teknoloji çalma / kışkırtma / soruşturma motorun işlevleriyle; geçersiz tür "bad-op"; başkası adına değil
+✓ MP.4 kayıt/yükleme: casus ağı ve istihbarat seviyeleri Save8 ile korunur; B yeni süreçte aynı devlete döner ve operasyon yürütür
+GEÇEN: 7 KALAN: 0

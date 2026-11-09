@@ -1,0 +1,30 @@
+[
+  {
+    "name": "katılımcı müttefik yerel sensörünü alır, üçüncü taraf zincir görüşünü almaz",
+    "status": "PASS"
+  },
+  {
+    "name": "katılımcı taranmış uygun gezegen için harita işaretini alır; gizli sistem açıklanmaz",
+    "status": "PASS"
+  },
+  {
+    "name": "görünen yabancı askeri filo gövde oranı sonlu, özel stok ve emirler taşınmaz",
+    "status": "PASS"
+  },
+  {
+    "name": "bilim gemisinin anomalisi host yerine kendi insan devletinin karar deposuna yazılır",
+    "status": "PASS"
+  },
+  {
+    "name": "kuruluş sonucu aynı mirror yenilenmesinde yeniden kart üretmez",
+    "status": "PASS"
+  },
+  {
+    "name": "sensör paylaşımı tek yönlü ve transitive olmayan görüş; bittiğinde canlı görüş gider keşif kalır",
+    "status": "PASS"
+  },
+  {
+    "name": "iki ucu da görünen yabancı hareket konumu taşınır; sonraki emir yolu ve gizli uç aktarılmaz",
+    "status": "PASS"
+  }
+]

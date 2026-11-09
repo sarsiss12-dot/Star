@@ -1,0 +1,152 @@
+{
+  "feds": [
+    {
+      "id": 1,
+      "name": "Meridyen Bilgi Topluluğu",
+      "type": "bilimsel",
+      "charter": {
+        "defense": "vote",
+        "offense": "vote",
+        "admission": "allies",
+        "ballot": "equal"
+      },
+      "politicsVersion": 96,
+      "leader": 0,
+      "founder": 0,
+      "members": [
+        0,
+        1,
+        2
+      ],
+      "laws": {},
+      "treasury": 0,
+      "fund": {
+        "ala": 0,
+        "ene": 0
+      },
+      "nextVote": 190.29607999999996,
+      "vote": {
+        "id": 1,
+        "law": "savunma",
+        "kind": "basic",
+        "repeal": false,
+        "proposer": 0,
+        "opened": 10.296079999999975,
+        "expires": 100.29607999999998,
+        "eligible": [
+          0,
+          1,
+          2
+        ],
+        "yes": [],
+        "no": [],
+        "ballotSnapshot": {
+          "mode": "equal",
+          "weights": {
+            "0": 1,
+            "1": 1,
+            "2": 1
+          },
+          "modern": true,
+          "source": "opened"
+        },
+        "reasons": {},
+        "assessments": {}
+      },
+      "founded": 10.296079999999975,
+      "typeSince": 10.296079999999975,
+      "dutySince": {
+        "defense": 10.296079999999975,
+        "offense": 10.296079999999975
+      },
+      "defenseFrontCutoff": 1,
+      "dutyConsent": {
+        "0": {
+          "offense": false,
+          "since": 10.296079999999975
+        },
+        "1": {
+          "offense": false,
+          "since": 10.296079999999975
+        },
+        "2": {
+          "offense": false,
+          "since": 10.296079999999975
+        }
+      },
+      "invites": {},
+      "decisions": {},
+      "cohesion": 70,
+      "identityType": "bilimsel",
+      "emblem": {
+        "v": 1,
+        "shape": "hex",
+        "symbol": "orbit",
+        "pattern": "rays",
+        "primary": "#5cf5d6",
+        "secondary": "#202537",
+        "federation": true
+      },
+      "history": [
+        {
+          "day": 10.296079999999975,
+          "year": 2210,
+          "month": 1,
+          "event": "founded",
+          "type": "bilimsel",
+          "ballot": "equal"
+        }
+      ],
+      "voteSeq": 1
+    }
+  ],
+  "inbox": [
+    {
+      "uid": 1,
+      "kind": "cncnew",
+      "ico": "🌐",
+      "cls": "sci",
+      "pause": true,
+      "title": "GALAKTİK KONSEY KURULDU",
+      "sub": "Saf Akıl Ağı galaksiyi masaya çağırdı",
+      "key": "cncnew",
+      "born": 6.613599999999999,
+      "data": 1
+    },
+    {
+      "uid": 2,
+      "kind": "cncvote",
+      "ico": "🌐",
+      "cls": "sci",
+      "pause": true,
+      "title": "KONSEY OYLAMASI",
+      "sub": "Evrensel Ticaret Standardı",
+      "key": "cnc6.613599999999999",
+      "born": 6.613599999999999,
+      "data": "ticaretStd"
+    },
+    {
+      "kind": "fedfoundResult",
+      "data": 1,
+      "key": "fedfound-result:1:founded:accepted,accepted,accepted",
+      "ico": "🏛",
+      "pause": false,
+      "title": "FEDERASYON KURULDU — Meridyen Bilgi Topluluğu",
+      "sub": "Bilimsel Federasyon · 3 kurucu · Eşit Temsil · Savunma yardımı oylamayla. Otomatik saldırı desteği yok; ayrı oylama/taahhüt gerekir. · Lider: Kızıl Muhafız",
+      "uid": 3,
+      "born": 10.296079999999975
+    },
+    {
+      "kind": "fedvote",
+      "data": 1,
+      "ico": "🏛",
+      "pause": true,
+      "title": "Federasyon oylaması",
+      "sub": "Savunma Paktı",
+      "key": "fed:1:1",
+      "uid": 4,
+      "born": 10.296079999999975
+    }
+  ],
+  "modal": ""
+}

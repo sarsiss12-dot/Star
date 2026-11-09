@@ -1,0 +1,66 @@
+{
+  "url": "/mp/play",
+  "vote": {
+    "name": "Evrensel Divanı",
+    "founder": 0,
+    "members": [
+      0,
+      1,
+      2,
+      5,
+      7,
+      3,
+      6,
+      4
+    ],
+    "laws": {},
+    "targeted": {},
+    "treasury": 0,
+    "president": 0,
+    "terms": {
+      "0": 1
+    },
+    "termAge": 0,
+    "voteIn": 2,
+    "dead": false,
+    "byConvention": true,
+    "firstLaw": null,
+    "pariahs": {},
+    "agenda": [],
+    "vote": {
+      "key": "ticaretStd",
+      "opened": 7.586600000000016,
+      "target": null,
+      "yes": [
+        5,
+        7,
+        3,
+        6,
+        0
+      ],
+      "no": [
+        4
+      ],
+      "speeches": [
+        {
+          "id": 5,
+          "txt": "Bu masada oturmak bile bir zaferdir. Onu harcamayalım.",
+          "yes": true
+        },
+        {
+          "id": 6,
+          "txt": "Barış güzeldir ama sınırlarımız kanla çizildi.",
+          "yes": true
+        }
+      ],
+      "done": false,
+      "age": 0,
+      "sponsor": null
+    },
+    "lastVote": null,
+    "campaign": null
+  },
+  "inbox": [],
+  "modal": "",
+  "pane": "<div class=\"dpBox\"><div class=\"dpHd\"><span>GEZEGENLER / HABİTATLAR · 1</span><button class=\"riX\" data-a=\"closeDiplo\">✕</button></div><div class=\"dpBody\"><div class=\"mini\">Yerel koloni neti; devletin ortak giderleri ve genel çarpanları ayrı bilançodadır. İnşa bedeli aylık gider değildir. Tablo yatay kaydırılır; sağdaki mevcut yönetim paneli korunur.</div><div class=\"colonySort\"><button class=\"abtn\" data-a=\"colonySort\" data-x=\"name\">Ad ▴</button><button class=\"abtn\" data-a=\"colonySort\" data-x=\"pop\">Nüfus</button><button class=\"abtn\" data-a=\"colonySort\" data-x=\"stab\">İstikrar</button><button class=\"abtn\" data-a=\"colonySort\" data-x=\"build\">İnşa</button><button class=\"abtn\" data-a=\"colonySort\" data-x=\"min\">Maden</button><button class=\"abtn\" data-a=\"colonySort\" data-x=\"ene\">Enerji</button><button class=\"abtn\" data-a=\"colonySort\" data-x=\"ala\">Alaşım</button><button class=\"abtn\" data-a=\"colonySort\" data-x=\"ara\">Bilim</button><button class=\"abtn\" data-a=\"colonySort\" data-x=\"yiy\">Gıda</button><button class=\"abtn\" data-a=\"colonySort\" data-x=\"tuk\">Tüketim</button><button class=\"abtn\" data-a=\"colonySort\" data-x=\"etk\">Etki</button></div><div class=\"colonyTable\"><table><thead><tr><th>Koloni / Tür</th><th>Nüfus</th><th>İstikrar</th><th>İnşa / Otomasyon</th><th>Yerel aylık net</th></tr></thead><tbody><tr class=\"selected\"><td><button data-a=\"colonySelect\" data-x=\"15:0\">Arran I</button><small>Tropik</small><button data-a=\"colonyMap\" data-x=\"15:0\">Haritada Gör</button></td><td>12.0</td><td>60</td><td>Boş<small>KAPALI · Manuel</small></td><td><span class=\"p\">◆ +3,3</span> · <span class=\"n\">⚡ -2,6</span> · <span class=\"p\">❋ +28,3</span> · <span class=\"p\">▰ +6,1</span> · <span class=\"p\">✦ +12,7</span> · <span class=\"p\">◈ +2</span> · <span class=\"p\">❖ +16,7</span></td></tr></tbody></table></div><button class=\"abtn\" data-a=\"colonyDetails\">SEÇİLİ KOLONİ EKONOMİSİ</button></div></div>"
+}

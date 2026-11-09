@@ -1,0 +1,6 @@
+{
+  "attempts": 1,
+  "exit": 1,
+  "base": "codex/stars-beta-board1-federation-stability-ux",
+  "head": "codex/stars-beta-board2-colony-politics-ux"
+}

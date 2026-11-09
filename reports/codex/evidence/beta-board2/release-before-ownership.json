@@ -1,0 +1,181 @@
+{
+  "file": "releases/stars-faz96h10p17.zip",
+  "bytes": 806940,
+  "sha256": "532474a2a01c311ac18c249c9e34c5e4a83ad9fba12f227a92aa887b8074bbfb",
+  "crc32": "38EBDE20",
+  "deterministic": true,
+  "changedFiles": [
+    {
+      "file": "archive-ui.js",
+      "before": "54935d98436997705219b9d8ac44118363f8c7e1ef6c099bea0d6df52448368d",
+      "after": "005d046b0824cdb185eab4cde0c9a0d3e82ed36b1b6953c208c399cbefce6574"
+    },
+    {
+      "file": "construction.js",
+      "before": "7c1d4912eb3aaf1c51f10e18c31f9178bc0a5dc6fcec9fd9ac47cff9d128439e",
+      "after": "19244de7be9ad0d0aaf5bf67cbccd85bd4f2988cd9d670bbe2a7dd4a91905bf5"
+    },
+    {
+      "file": "economy-ui.js",
+      "before": "61f6e2dcef7f37143821edccf67552718a210ec555f7b8f9074c68191fd5cbcc",
+      "after": "0c27cd92a301c4f2006377af07d80cae0d9f1dc34a6ff6b794ca9dcbf18539db"
+    },
+    {
+      "file": "economy.js",
+      "before": "409f9772017837fbede5cf526968c07e56703627b825f423605e750109a4cae0",
+      "after": "8392cf97c2d1d1b3f346c74a8c0cbe3bfaf4d671257cbd925f9a3ee7d04eab7b"
+    },
+    {
+      "file": "index.html",
+      "before": "a2a98a9554f29178c187fcc3e517416748d4975df8c0634e171fdbfbaf8cf055",
+      "after": "dca85e28d3310c89999a5d5521ef4049ebbe22957040dab82ca4b1890852fbfd"
+    },
+    {
+      "file": "main.js",
+      "before": "962bfe0fd6ec07095e587e2265ec9115fec3b4d32f7fc9eb1b2e3b10f710172b",
+      "after": "60a78ad335098181727fdfa681db81c32c47c84a35627d840f914556adbe8d70"
+    },
+    {
+      "file": "map.js",
+      "before": "39961f0f017ba727cf8b86a7db7ee3c3ca4542c6deac10c9cbda3978ca7c1570",
+      "after": "400dbc524750443528b88bfbd0d82aa301fd7b1f12b03d8ea5fa3d73c07603fc"
+    },
+    {
+      "file": "research/mp0/mp-core.js",
+      "before": "a3ae6a208ad68bef32165bbb249a4128267e3179d786589f44134f9b5892bbdc",
+      "after": "e047fa4dd51ad903b517bf76b770909923a54cc5a17ab2b0857c365d53cf3916"
+    },
+    {
+      "file": "research/mp1/client/view.js",
+      "before": "595c95e53c1f38a63f18ae1a95c2b45174f65571a53072fe176db47c562e0bec",
+      "after": "1f88576f898cdb228c77fcd2188476ba212aec5a04956898c62bb5fd11dd6c84"
+    },
+    {
+      "file": "research/mp1/server/relay.js",
+      "before": "cc85bfa7842ca68a475f1ed6953a091b04c8b761f83aa2c750502720ca8ec3e3",
+      "after": "2962a3667e0f2238d4baa39bd31d5cda91463d7451f8a7e2428254a5035d7f36"
+    },
+    {
+      "file": "research/mp6/client/guest-stars.js",
+      "before": "54b6f9eb1c937a58cff48086e5dad5093b7a5758e07357052668c1552f262918",
+      "after": "bd668b96b3a193325a7756788172475fbdacd16a98dc4248c98ce78c1c54e75a"
+    },
+    {
+      "file": "research/mp6/mirror.js",
+      "before": "9eb00fba46d7d2ea6a7fb2cab5b0465fc6cd1081c75dbe8a98f11d0a4eec80ee",
+      "after": "e25752b9f7676b146c22bee9609a215f502506314c7a4b174b1d6f31d7bbf7e6"
+    },
+    {
+      "file": "sw.js",
+      "before": "483b9709b14c59bb728c7061d7d5086e9ebea7903b77938b448514e33fbd34fa",
+      "after": "6d7177f0fd6a2e8641be374377979c829ae2cfce3372a9a2e248ce7b086e8e9b"
+    },
+    {
+      "file": "ui.js",
+      "before": "f97a6a84db79ea97ff8d1263648a1e33098b09880e8880f8b7102daea4a70e6c",
+      "after": "ddc8fd0a9ee3bf98aa055366ea86ed7fe3012c1f9b14efae38f8b0f5b756d857"
+    }
+  ],
+  "members": [
+    {
+      "file": "RELEASE-MANIFEST.json",
+      "sha256": "45c8b4c26d252949f00d33a4a8582f44dade9ff2f9fa4f83f1d50f65dd060156",
+      "crc32": "472BDCBA"
+    },
+    {
+      "file": "ai.js",
+      "sha256": "1fcac7757bc4c249662f7e993215c2e4c4a602a42765abb0ec4d681f1aa91c6e",
+      "crc32": "6162C653"
+    },
+    {
+      "file": "archive-ui.js",
+      "sha256": "005d046b0824cdb185eab4cde0c9a0d3e82ed36b1b6953c208c399cbefce6574",
+      "crc32": "ADD5A9B1"
+    },
+    {
+      "file": "audio.js",
+      "sha256": "6ddf6e388fa404394fee6220c2bfeeb3d1f9601c51a35ccdfe3181a8781942f7",
+      "crc32": "8E4EBBB4"
+    },
+    {
+      "file": "combat.js",
+      "sha256": "b4e21fcdb6fdaaa93da07313131470de3e8a3c28b5650226a9c4a2713bde73a5",
+      "crc32": "60F044A8"
+    },
+    {
+      "file": "commerce-ui.js",
+      "sha256": "cc7fef5ab43176093251916aaafbdd873424da0630ec46fe6d3d5106a690b8d4",
+      "crc32": "1D6711A6"
+    },
+    {
+      "file": "commerce.js",
+      "sha256": "978e4f6b01faed1babeade20070447cbcfaa4e2ea70793a78e50f20fbe66be01",
+      "crc32": "8C20977C"
+    },
+    {
+      "file": "construction.js",
+      "sha256": "19244de7be9ad0d0aaf5bf67cbccd85bd4f2988cd9d670bbe2a7dd4a91905bf5",
+      "crc32": "B8616443"
+    },
+    {
+      "file": "diplomacy.js",
+      "sha256": "6ce09931c7ab58b003da2b51f726dcae9f19d577b61481a4e60acedc7d7f1dc0",
+      "crc32": "486FD1F4"
+    },
+    {
+      "file": "economic-ledger.js",
+      "sha256": "309837d46e3d533f17d0ecb76a5c531474662cb57e05802ca52ffa904d5c5c3c",
+      "crc32": "A513EE94"
+    },
+    {
+      "file": "economy-ui.js",
+      "sha256": "0c27cd92a301c4f2006377af07d80cae0d9f1dc34a6ff6b794ca9dcbf18539db",
+      "crc32": "DD5F4D4E"
+    },
+    {
+      "file": "economy.js",
+      "sha256": "8392cf97c2d1d1b3f346c74a8c0cbe3bfaf4d671257cbd925f9a3ee7d04eab7b",
+      "crc32": "56DE1370"
+    },
+    {
+      "file": "inbox.js",
+      "sha256": "67acb5a714504e83708cc388c36e0995e425ee278930abff26c0939f71666208",
+      "crc32": "5F53C2AF"
+    },
+    {
+      "file": "index.html",
+      "sha256": "dca85e28d3310c89999a5d5521ef4049ebbe22957040dab82ca4b1890852fbfd",
+      "crc32": "69C2C470"
+    },
+    {
+      "file": "main.js",
+      "sha256": "60a78ad335098181727fdfa681db81c32c47c84a35627d840f914556adbe8d70",
+      "crc32": "107B3857"
+    },
+    {
+      "file": "manifest.json",
+      "sha256": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
+      "crc32": "641AE79B"
+    },
+    {
+      "file": "map.js",
+      "sha256": "400dbc524750443528b88bfbd0d82aa301fd7b1f12b03d8ea5fa3d73c07603fc",
+      "crc32": "7355DCC7"
+    },
+    {
+      "file": "news.js",
+      "sha256": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
+      "crc32": "A13FF379"
+    },
+    {
+      "file": "sw.js",
+      "sha256": "6d7177f0fd6a2e8641be374377979c829ae2cfce3372a9a2e248ce7b086e8e9b",
+      "crc32": "35444AB0"
+    },
+    {
+      "file": "ui.js",
+      "sha256": "ddc8fd0a9ee3bf98aa055366ea86ed7fe3012c1f9b14efae38f8b0f5b756d857",
+      "crc32": "E661F144"
+    }
+  ]
+}

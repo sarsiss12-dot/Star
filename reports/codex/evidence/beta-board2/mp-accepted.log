@@ -1,0 +1,9 @@
+PASS A1 rehber 1–8: oda, iki farklı devlet, hazır, başlat; iki ekranda galaksi; sürüm işareti lobi / başlangıç / MP çubuğunda ve /mp/version oyun build'iyle aynı
+PASS B1 konsey motorun kendi yoluyla kurulur (fikstür: temas); AI insanlar adına oy / sponsor yazmaz; B gerçek "KONSEY OYLAMASI" kartından Konsey ekranını açar ve EVET (dokunma) → host kaydeder, oylama açık kalır
+PASS P0 katılımcı görüş, sağlık, özel kararlar, rota ve görsel hareket
+PASS BD2 koloni paneli ve yetkili uzaktan inşa
+BD1 fixture ready
+BD1 two native proposals queued
+PASS BD1 federasyon FIFO, savaş yardımı, geri çekme ve ayrı aday rızası
+PASS sayfa hataları yok
+GEÇEN: 6 KALAN: 0

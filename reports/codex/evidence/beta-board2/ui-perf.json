@@ -1,0 +1,14 @@
+{
+  "seed": 11,
+  "day": 0,
+  "colonies": 32,
+  "cpuThrottle": 1,
+  "htmlMs": {
+    "n": 30,
+    "median": 12.5,
+    "p95": 27.599999964237213
+  },
+  "rawSaveEqual": true,
+  "rngEqual": true,
+  "limit": "String/quote maliyeti; Canvas/FPS veya DOM layout ölçümü değildir."
+}
