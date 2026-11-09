@@ -1,0 +1,57 @@
+{
+  "results": [
+    {
+      "name": "B1 konsey motorun kendi yoluyla kurulur (fikstür: temas); AI insanlar adına oy / sponsor yazmaz; B gerçek \"KONSEY OYLAMASI\" kartından Konsey ekranını açar ve EVET (dokunma) → host kaydeder, oylama açık kalır",
+      "status": "PASS",
+      "ms": 26646
+    },
+    {
+      "name": "WC0 üç insan koşullu koalisyon, karşı teklif, ücret ve savaş merkezi",
+      "status": "PASS",
+      "ms": 31923
+    },
+    {
+      "name": "sayfa hataları yok",
+      "status": "PASS",
+      "ms": 0
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "startModal": [
+      "🛰 DANIŞMAN",
+      "",
+      ""
+    ],
+    "warCenter": [
+      {
+        "conditionalAccepted": true,
+        "noWar": true,
+        "noPayment": true,
+        "thirdPartyPrivate": true
+      },
+      {
+        "front": 1,
+        "campaign": 1,
+        "realPayment": 150,
+        "joined": true
+      },
+      {
+        "immediateDeclaration": true,
+        "optionalInvite": true,
+        "rejectDoesNotUndoWar": true
+      },
+      {
+        "knownThirdPartyWar": true,
+        "nativeVoluntaryOffer": true,
+        "nativeHostAccept": true
+      },
+      {
+        "reconnected": true,
+        "tabs": true
+      }
+    ]
+  },
+  "pass": 3,
+  "fail": 0
+}

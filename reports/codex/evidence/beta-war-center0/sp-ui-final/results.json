@@ -1,0 +1,7 @@
+[
+  {
+    "name": "browser",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert((await p.locator('#modal [data-a=\"pickOne\"][data-x=\"0\"]').innerText()).includes('Savaş Merkezi'))\n\n    at /workspace/Star/tests/browser-beta-war-center0.cjs:14:31"
+  }
+]

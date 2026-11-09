@@ -1,0 +1,15 @@
+{
+  "selector": "[data-a=\"warCenterTab\"][data-x=\"known\"]",
+  "url": "/mp/play",
+  "who": "Saf Akıl Ağı",
+  "viewport": [
+    800,
+    360
+  ],
+  "scroll": [
+    0,
+    0
+  ],
+  "focus": "",
+  "modal": ""
+}

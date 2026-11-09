@@ -1,0 +1,174 @@
+{
+  "file": "releases/stars-faz96h10p18.zip",
+  "bytes": 816462,
+  "sha256": "6bb4d0c2714a98f816615217aeb8e418faaea06a41d5aaa81dc294b43e9c2d88",
+  "crc32": "9A066EF0",
+  "deterministic": true,
+  "manifestFileCount": 19,
+  "members": [
+    {
+      "file": "RELEASE-MANIFEST.json",
+      "bytes": 2075,
+      "crc32": "73C418B9"
+    },
+    {
+      "file": "ai.js",
+      "bytes": 285064,
+      "crc32": "3A2046B3"
+    },
+    {
+      "file": "archive-ui.js",
+      "bytes": 38567,
+      "crc32": "92F16014"
+    },
+    {
+      "file": "audio.js",
+      "bytes": 20197,
+      "crc32": "8E4EBBB4"
+    },
+    {
+      "file": "combat.js",
+      "bytes": 16353,
+      "crc32": "60F044A8"
+    },
+    {
+      "file": "commerce-ui.js",
+      "bytes": 11105,
+      "crc32": "1D6711A6"
+    },
+    {
+      "file": "commerce.js",
+      "bytes": 29743,
+      "crc32": "8C20977C"
+    },
+    {
+      "file": "construction.js",
+      "bytes": 8982,
+      "crc32": "B8616443"
+    },
+    {
+      "file": "diplomacy.js",
+      "bytes": 544417,
+      "crc32": "DB62958E"
+    },
+    {
+      "file": "economic-ledger.js",
+      "bytes": 17942,
+      "crc32": "A513EE94"
+    },
+    {
+      "file": "economy-ui.js",
+      "bytes": 28944,
+      "crc32": "AE0913B6"
+    },
+    {
+      "file": "economy.js",
+      "bytes": 215022,
+      "crc32": "56DE1370"
+    },
+    {
+      "file": "inbox.js",
+      "bytes": 13184,
+      "crc32": "5F53C2AF"
+    },
+    {
+      "file": "index.html",
+      "bytes": 96807,
+      "crc32": "E25C9F30"
+    },
+    {
+      "file": "main.js",
+      "bytes": 498322,
+      "crc32": "E765FA18"
+    },
+    {
+      "file": "manifest.json",
+      "bytes": 1922,
+      "crc32": "641AE79B"
+    },
+    {
+      "file": "map.js",
+      "bytes": 147220,
+      "crc32": "7355DCC7"
+    },
+    {
+      "file": "news.js",
+      "bytes": 6039,
+      "crc32": "A13FF379"
+    },
+    {
+      "file": "sw.js",
+      "bytes": 2804,
+      "crc32": "B683B08C"
+    },
+    {
+      "file": "ui.js",
+      "bytes": 582455,
+      "crc32": "AFCAAE31"
+    }
+  ],
+  "changedRuntimeAndMP": [
+    {
+      "file": "ai.js",
+      "before": "1fcac7757bc4c249662f7e993215c2e4c4a602a42765abb0ec4d681f1aa91c6e",
+      "after": "f75d2b961b7d996ddcc43e42f48aadaed0f87860dbeb7d37621b801a5d029c1e"
+    },
+    {
+      "file": "archive-ui.js",
+      "before": "005d046b0824cdb185eab4cde0c9a0d3e82ed36b1b6953c208c399cbefce6574",
+      "after": "83ef4b95ab1b503c17e8b655745487fa693dc5501632b633b3df4bf5cf9f966d"
+    },
+    {
+      "file": "diplomacy.js",
+      "before": "6ce09931c7ab58b003da2b51f726dcae9f19d577b61481a4e60acedc7d7f1dc0",
+      "after": "094704840a38ea2d1b277e7b56df81507410f3fe7e51ea82802392a1db50b6c5"
+    },
+    {
+      "file": "index.html",
+      "before": "dca85e28d3310c89999a5d5521ef4049ebbe22957040dab82ca4b1890852fbfd",
+      "after": "a9cfced642ea6bfd8141ed27d21d671bd0645ba31b0a4177a08b06e072a8146e"
+    },
+    {
+      "file": "main.js",
+      "before": "60a78ad335098181727fdfa681db81c32c47c84a35627d840f914556adbe8d70",
+      "after": "d0a1814eda8df37c975d82d669a9afd43116347caf9d8542137e674ad8c73111"
+    },
+    {
+      "file": "sw.js",
+      "before": "6d7177f0fd6a2e8641be374377979c829ae2cfce3372a9a2e248ce7b086e8e9b",
+      "after": "cb0e882abefa87c2042bff80b61ae93ef4e025205ac037f75b12a917e084f64e"
+    },
+    {
+      "file": "ui.js",
+      "before": "fb2cc2394c3f5314a01e5787d8ec965cb90a51f569cb7c1f4c8352df5722812c",
+      "after": "e33323e11f09e38217b5f71759b27d5763e948ba6d855f2e6ec1af45d3f19db3"
+    },
+    {
+      "file": "research/mp0/mp-core.js",
+      "before": "e047fa4dd51ad903b517bf76b770909923a54cc5a17ab2b0857c365d53cf3916",
+      "after": "9f7dda832dd99363539b82b0083d91572d0d32e0bfec546ff688e0e75c265340"
+    },
+    {
+      "file": "research/mp6/client/guest-stars.js",
+      "before": "cea8b4d82e772345a1630adfd1723577129b12af6b973b11817d561a19a10670",
+      "after": "8280dbfb1c0217883f1a642e3a1c1ba5fa56b6646dc41ab95fc3444ff5d0f065"
+    },
+    {
+      "file": "research/mp71/client/mp71-dip.js",
+      "before": "bf0355f27ef6492e40016686e5a85302f4a62b4704dcf8f934feb187c63f9363",
+      "after": "791d18e17978994a3e233c3add994180f207f45fa4927775ab1f0de8958b2369"
+    },
+    {
+      "file": "research/mp1/client/view.js",
+      "before": "1f88576f898cdb228c77fcd2188476ba212aec5a04956898c62bb5fd11dd6c84",
+      "after": "fabe5a036301637959cbab2ffda27ac6ba9714e449db25cb9bc42c5089f95be0"
+    },
+    {
+      "file": "research/mp1/server/relay.js",
+      "before": "2962a3667e0f2238d4baa39bd31d5cda91463d7451f8a7e2428254a5035d7f36",
+      "after": "574b21b98728079db2b79397e8c059c371db105d5a0f13939f67bd177e85215a"
+    }
+  ],
+  "mpSourcesInGameZIP": false,
+  "base": "10ab6f9c7f4d030f3df055f1b2c326f499e2f0b0"
+}

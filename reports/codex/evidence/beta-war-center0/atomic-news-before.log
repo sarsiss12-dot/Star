@@ -1,0 +1,24 @@
+PASS iki misafir teklif/karşı teklif, gerçek katılım ve tek ödeme, üçüncü oyuncudan gizli
+PASS barışta bekleyen katılım kapanır, yeni savaş eski teklifi canlandırmaz
+PASS host salt-okunur savaş DTOsu ve yetki/gizlilik, paket tekrarında çift etki yok
+PASS ret ve geri çekme savaşı/ödemeyi başlatmaz
+PASS MP koşullu karşı teklif: kabul savaş/ödeme üretmez, yalnız sahibi son onay verir
+PASS bilinmeyen üçüncü savaşın kimliği tahminle teklif/quote üzerinden yoklanamaz
+FAIL başarısız toplu ilan özel MP haber kanalına hayalet savaş kaydı bırakmaz
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ '[[{"id":1,"key":"war-front:1","day":900,"year":2210,"month":1,"category":"war","title":"Savaş ilanı","text":"Niveva Konfederasyonu → Tekerix Lejyonu","important":true,"read":false,"pinned":false,"knowledge":"Doğrudan katılım","empires":[{"id":1,"name":"Niveva Konfederasyonu"},{"id":2,"name":"Tekerix Lejyonu"}]},{"id":2,"key":"war-end:1","day":900,"year":2210,"month":1,"category":"peace","title":"Savaş sona erdi","text":"Diplomatik barış anlaşması · Savaş #1 · Niveva Konfederasyonu ↔ Tekerix Lejyonu · gün 900 · agreement|actor:1","important":true,"read":false,"pinned":false,"knowledge":"Doğrudan katılım","empires":[{"id":1,"name":"Niveva Konfederasyonu"},{"id":2,"name":"Tekerix Lejyonu"}]},{"id":3,"key":"peace:1:2:900","day":900,"year":2210,"month":1,"category":"peace","title":"Barış anlaşması","text":"Niveva Konfederasyonu ile Tekerix Lejyonu arasındaki savaş sona erdi","important":true,"read":false,"pinned":false,"knowledge":"Doğrudan katılım","empires":[{"id":1,"name":"Niveva Konfederasyonu"},{"id":2,"name":"Tekerix Lejyonu"}]},{"id":4,"key":"war-front:2","day":900,"year":2210,"month":1,"category":"war","title":"Savaş ilanı","text":"Niveva Konfederasyonu → Tekerix Lejyonu","important":true,"read":false,"pinned":false,"knowledge":"Doğrudan katılım","empires":[{"id":1,"name":"Niveva Konfederasyonu"},{"id":2,"name":"Tekerix Lejyonu"}]}],[{"id":1,"key":"war-front:3","day":900,"year":2210,"month":1,"category":"war","title":"Savaşa yeni katılım","text":"Oyrraeth Ortaklığı → Tekerix Lejyonu","important":true,"read":false,"pinned":false,"knowledge":"Doğrudan katılım","empires":[{"id":3,"name":"Oyrraeth Ortaklığı"},{"id":2,"name":"Tekerix Lejyonu"}]}],[{"id":1,"key":"war-front:4","day":900,"year":2210,"month":1,"category":"war","title":"Savaşa yeni katılım","text":"Navero Komünü → Tekerix Lejyonu","important":true,"read":false,"pinned":false,"knowledge":"Doğrudan katılım","empires":[{"id":4,"name":"Navero Komünü"},{"id":2,"name":"Tekerix Lejyonu"}]}]]'
+- '[[{"id":1,"key":"war-front:1","day":900,"year":2210,"month":1,"category":"war","title":"Savaş ilanı","text":"Niveva Konfederasyonu → Tekerix Lejyonu","important":true,"read":false,"pinned":false,"knowledge":"Doğrudan katılım","empires":[{"id":1,"name":"Niveva Konfederasyonu"},{"id":2,"name":"Tekerix Lejyonu"}]},{"id":2,"key":"war-end:1","day":900,"year":2210,"month":1,"category":"peace","title":"Savaş sona erdi","text":"Diplomatik barış anlaşması · Savaş #1 · Niveva Konfederasyonu ↔ Tekerix Lejyonu · gün 900 · agreement|actor:1","important":true,"read":false,"pinned":false,"knowledge":"Doğrudan katılım","empires":[{"id":1,"name":"Niveva Konfederasyonu"},{"id":2,"name":"Tekerix Lejyonu"}]},{"id":3,"key":"peace:1:2:900","day":900,"year":2210,"month":1,"category":"peace","title":"Barış anlaşması","text":"Niveva Konfederasyonu ile Tekerix Lejyonu arasındaki savaş sona erdi","important":true,"read":false,"pinned":false,"knowledge":"Doğrudan katılım","empires":[{"id":1,"name":"Niveva Konfederasyonu"},{"id":2,"name":"Tekerix Lejyonu"}]}],[],[]]'
+
+    at /workspace/Star/tests/beta_war_center0_mp_test.cjs:12:974
+    at test (/workspace/Star/tests/beta_war_center0_mp_test.cjs:3:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_war_center0_mp_test.cjs:12:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+GEÇEN: 6 KALAN: 1

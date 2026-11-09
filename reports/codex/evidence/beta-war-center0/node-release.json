@@ -1,0 +1,50 @@
+[
+  {
+    "name": "core-release",
+    "command": "node tests/beta_war_center0_test.cjs",
+    "exit": 0,
+    "seconds": 3.34
+  },
+  {
+    "name": "prepare-release",
+    "command": "node tests/beta_war_center0_prepare_test.cjs",
+    "exit": 0,
+    "seconds": 2.02
+  },
+  {
+    "name": "mp-core-release",
+    "command": "node tests/beta_war_center0_mp_test.cjs",
+    "exit": 0,
+    "seconds": 2.66
+  },
+  {
+    "name": "ai-release",
+    "command": "node tests/beta_war_center0_ai_test.cjs",
+    "exit": 0,
+    "seconds": 2.05
+  },
+  {
+    "name": "equivalence-release",
+    "command": "node tests/beta_war_center0_equivalence.cjs",
+    "exit": 0,
+    "seconds": 6.14
+  },
+  {
+    "name": "perf2-release",
+    "command": "node tests/perf2_equivalence_test.js",
+    "exit": 0,
+    "seconds": 3.71
+  },
+  {
+    "name": "mirror-release",
+    "command": "node tests/mp6_mirror_test.js",
+    "exit": 0,
+    "seconds": 7.0
+  },
+  {
+    "name": "warfix-release",
+    "command": "node tests/beta_war_fix0_test.cjs",
+    "exit": 0,
+    "seconds": 4.15
+  }
+]

@@ -1,0 +1,308 @@
+{
+  "frames": [
+    {
+      "at": 52216,
+      "same": true,
+      "connected": true,
+      "rect": [
+        -342.5552978515625,
+        897,
+        384.5,
+        44
+      ]
+    },
+    {
+      "at": 52256.39999997616,
+      "same": true,
+      "connected": true,
+      "rect": [
+        -130.79344177246094,
+        897,
+        384.5,
+        44
+      ]
+    },
+    {
+      "at": 52292.59999996424,
+      "same": true,
+      "connected": true,
+      "rect": [
+        -43.916839599609375,
+        897,
+        384.5,
+        44
+      ]
+    },
+    {
+      "at": 52319.5,
+      "same": true,
+      "connected": true,
+      "rect": [
+        -6.710132598876953,
+        897,
+        384.5,
+        44
+      ]
+    },
+    {
+      "at": 52355.5,
+      "same": true,
+      "connected": true,
+      "rect": [
+        8.275232315063477,
+        897,
+        384.5,
+        44
+      ]
+    },
+    {
+      "at": 52386.80000001192,
+      "same": true,
+      "connected": true,
+      "rect": [
+        11.99999713897705,
+        897,
+        384.5,
+        44
+      ]
+    },
+    {
+      "at": 52413.09999996424,
+      "same": true,
+      "connected": true,
+      "rect": [
+        12,
+        897,
+        384.5,
+        44
+      ]
+    },
+    {
+      "at": 52460.39999997616,
+      "same": true,
+      "connected": true,
+      "rect": [
+        12,
+        897,
+        384.5,
+        44
+      ]
+    },
+    {
+      "at": 52492.89999997616,
+      "same": true,
+      "connected": true,
+      "rect": [
+        12,
+        897,
+        384.5,
+        44
+      ]
+    },
+    {
+      "at": 52518.69999998808,
+      "same": true,
+      "connected": true,
+      "rect": [
+        12,
+        897,
+        384.5,
+        44
+      ]
+    },
+    {
+      "at": 52541.89999997616,
+      "same": true,
+      "connected": true,
+      "rect": [
+        12,
+        218,
+        384.5,
+        44
+      ],
+      "top": "dealSend"
+    },
+    {
+      "at": 52564.89999997616,
+      "same": true,
+      "connected": true,
+      "rect": [
+        12,
+        218,
+        384.5,
+        44
+      ],
+      "top": "dealSend"
+    },
+    {
+      "at": 52586.80000001192,
+      "same": true,
+      "connected": true,
+      "rect": [
+        12,
+        218,
+        384.5,
+        44
+      ],
+      "top": "dealSend"
+    },
+    {
+      "at": 52609.69999998808,
+      "same": true,
+      "connected": true,
+      "rect": [
+        12,
+        218,
+        384.5,
+        44
+      ],
+      "top": "dealSend"
+    },
+    {
+      "at": 52653.5,
+      "same": true,
+      "connected": true,
+      "rect": [
+        12,
+        218,
+        384.5,
+        44
+      ],
+      "top": "dealSend"
+    },
+    {
+      "at": 52677.69999998808,
+      "same": true,
+      "connected": true,
+      "rect": [
+        12,
+        218,
+        384.5,
+        44
+      ],
+      "top": "dealSend"
+    },
+    {
+      "at": 52705.09999996424,
+      "same": true,
+      "connected": true,
+      "rect": [
+        12,
+        218,
+        384.5,
+        44
+      ],
+      "top": "dealSend"
+    },
+    {
+      "at": 52733.39999997616,
+      "same": true,
+      "connected": true,
+      "rect": [
+        12,
+        218,
+        384.5,
+        44
+      ],
+      "top": "dealSend"
+    },
+    {
+      "at": 52765.69999998808,
+      "same": true,
+      "connected": true,
+      "rect": [
+        12,
+        218,
+        384.5,
+        44
+      ],
+      "top": "dealSend"
+    },
+    {
+      "at": 52789.19999998808,
+      "same": true,
+      "connected": true,
+      "rect": [
+        12,
+        218,
+        384.5,
+        44
+      ],
+      "top": "dealSend"
+    },
+    {
+      "at": 52820.09999996424,
+      "same": true,
+      "connected": true,
+      "rect": [
+        12,
+        218,
+        384.5,
+        44
+      ],
+      "top": "dealSend"
+    },
+    {
+      "at": 52866.09999996424,
+      "same": true,
+      "connected": true,
+      "rect": [
+        12,
+        218,
+        384.5,
+        44
+      ],
+      "top": "dealSend"
+    },
+    {
+      "at": 52919.5,
+      "same": false,
+      "connected": true,
+      "rect": [
+        -788,
+        317.9375,
+        384.5,
+        44
+      ]
+    },
+    {
+      "at": 52967.59999996424,
+      "same": false,
+      "connected": true,
+      "rect": [
+        -788,
+        317.9375,
+        384.5,
+        44
+      ]
+    }
+  ],
+  "events": [
+    {
+      "t": "pointerdown",
+      "at": 52861.89999997616,
+      "target": "dealSend"
+    },
+    {
+      "t": "touchstart",
+      "at": 52862.19999998808,
+      "target": "dealSend"
+    },
+    {
+      "t": "pointerup",
+      "at": 52862.30000001192,
+      "target": "dealSend"
+    },
+    {
+      "t": "touchend",
+      "at": 52862.5,
+      "target": "dealSend"
+    },
+    {
+      "t": "click",
+      "at": 52896.39999997616,
+      "target": "dealSend"
+    }
+  ],
+  "mutations": 2
+}

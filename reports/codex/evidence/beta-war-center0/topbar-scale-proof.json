@@ -1,0 +1,92 @@
+[
+  {
+    "scale": 80,
+    "fix": false,
+    "width": 1920,
+    "button": {
+      "x": 2344.015625,
+      "width": 51.1875,
+      "right": 2395.203125
+    },
+    "bar": {
+      "x": 0,
+      "width": 2400,
+      "right": 2400
+    }
+  },
+  {
+    "scale": 100,
+    "fix": false,
+    "width": 1920,
+    "button": {
+      "x": 1850,
+      "width": 64,
+      "right": 1914
+    },
+    "bar": {
+      "x": 0,
+      "width": 1920,
+      "right": 1920
+    }
+  },
+  {
+    "scale": 125,
+    "fix": false,
+    "width": 1920,
+    "button": {
+      "x": 1448.5,
+      "width": 80,
+      "right": 1528.5
+    },
+    "bar": {
+      "x": 0,
+      "width": 1536,
+      "right": 1536
+    }
+  },
+  {
+    "scale": 80,
+    "fix": true,
+    "width": 1920,
+    "button": {
+      "x": 1864.015625,
+      "width": 51.1875,
+      "right": 1915.203125
+    },
+    "bar": {
+      "x": 0,
+      "width": 1920,
+      "right": 1920
+    }
+  },
+  {
+    "scale": 100,
+    "fix": true,
+    "width": 1920,
+    "button": {
+      "x": 1850,
+      "width": 64,
+      "right": 1914
+    },
+    "bar": {
+      "x": 0,
+      "width": 1920,
+      "right": 1920
+    }
+  },
+  {
+    "scale": 125,
+    "fix": true,
+    "width": 1920,
+    "button": {
+      "x": 1832.5,
+      "width": 80,
+      "right": 1912.5
+    },
+    "bar": {
+      "x": 0,
+      "width": 1920,
+      "right": 1920
+    }
+  }
+]

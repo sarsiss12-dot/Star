@@ -1,0 +1,93 @@
+{
+  "url": "/",
+  "vote": {
+    "name": "Kadim Birliği",
+    "founder": 1,
+    "members": [
+      1,
+      0,
+      2,
+      6,
+      3,
+      7,
+      4,
+      5
+    ],
+    "laws": {},
+    "targeted": {},
+    "treasury": 0,
+    "president": 1,
+    "terms": {
+      "1": 1
+    },
+    "termAge": 0,
+    "voteIn": 2,
+    "vote": {
+      "key": "ticaretStd",
+      "target": null,
+      "opened": 5.746683999999991,
+      "yes": [
+        6,
+        5,
+        1
+      ],
+      "no": [
+        3,
+        7,
+        4
+      ],
+      "speeches": [
+        {
+          "id": 6,
+          "txt": "Refah paylaşıldıkça büyür.",
+          "yes": true
+        },
+        {
+          "id": 7,
+          "txt": "Barış güzeldir ama sınırlarımız kanla çizildi.",
+          "yes": false
+        },
+        {
+          "id": 4,
+          "txt": "Silahlarımızı bırakırsak bizi kim koruyacak?",
+          "yes": false
+        }
+      ],
+      "done": false,
+      "age": 0,
+      "sponsor": null
+    },
+    "dead": false,
+    "byConvention": true,
+    "firstLaw": null,
+    "pariahs": {}
+  },
+  "inbox": [
+    {
+      "uid": 1,
+      "kind": "cncnew",
+      "ico": "🌐",
+      "cls": "sci",
+      "pause": true,
+      "title": "GALAKTİK KONSEY KURULDU",
+      "sub": "Saf Akıl Ağı galaksiyi masaya çağırdı",
+      "key": "cncnew",
+      "born": 5.746683999999991,
+      "data": 1
+    },
+    {
+      "uid": 2,
+      "kind": "cncvote",
+      "ico": "🌐",
+      "cls": "sci",
+      "pause": true,
+      "title": "KONSEY OYLAMASI",
+      "sub": "Evrensel Ticaret Standardı",
+      "key": "cnc5.746683999999991",
+      "born": 5.746683999999991,
+      "data": "ticaretStd"
+    }
+  ],
+  "modal": "",
+  "pane": ""
+}

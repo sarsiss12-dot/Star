@@ -1,0 +1,7 @@
+[
+  {
+    "name": "browser",
+    "status": "FAIL",
+    "error": "locator.scrollIntoViewIfNeeded: Element is not attached to the DOM\nCall log:\n\u001b[2m  - attempting scroll into view action\u001b[22m\n\u001b[2m    - waiting for element to be stable\u001b[22m\n\n    at hit (/workspace/Star/tests/browser-beta-war-center0.cjs:9:60)\n    at /workspace/Star/tests/browser-beta-war-center0.cjs:13:10"
+  }
+]

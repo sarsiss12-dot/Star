@@ -1,0 +1,47 @@
+{
+  "target": 4,
+  "goal": "boyun",
+  "B": 1,
+  "C": 2,
+  "id": 1,
+  "accepted": 5,
+  "pending": 6,
+  "state": [
+    {
+      "id": 1,
+      "owner": 1,
+      "target": 4,
+      "goal": "boyun",
+      "opened": 182.1328,
+      "expires": 362.1328,
+      "state": "pending",
+      "commitments": [
+        {
+          "member": 2,
+          "terms": {
+            "from": 1,
+            "to": 2,
+            "give": [
+              {
+                "t": "res",
+                "r": "min",
+                "v": 150
+              }
+            ],
+            "want": [
+              {
+                "t": "warJoin",
+                "plan": 1,
+                "target": 4
+              }
+            ],
+            "born": 182.1328,
+            "expires": 722.1328
+          },
+          "at": 182.1328,
+          "state": "accepted"
+        }
+      ]
+    }
+  ]
+}

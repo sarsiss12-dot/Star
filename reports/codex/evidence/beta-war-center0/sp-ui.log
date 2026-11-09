@@ -1,0 +1,8 @@
+locator.scrollIntoViewIfNeeded: Element is not attached to the DOM
+Call log:
+[2m  - attempting scroll into view action[22m
+[2m    - waiting for element to be stable[22m
+
+    at hit (/workspace/Star/tests/browser-beta-war-center0.cjs:9:60)
+    at /workspace/Star/tests/browser-beta-war-center0.cjs:13:10
+GEÇEN: 0 KALAN: 1

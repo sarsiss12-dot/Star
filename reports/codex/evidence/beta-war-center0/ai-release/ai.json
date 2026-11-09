@@ -1,0 +1,128 @@
+[
+  {
+    "seed": 11,
+    "responses": [
+      {
+        "payment": 0,
+        "response": "red",
+        "why": "⚔ Cephe #1 · Feniava Hanedanı karşısında destek için elindekiler yetersiz. Yaklaşık 159 değerinde daha fazlasını masaya koymalısın — ya da daha az şey istemelisin.",
+        "add": []
+      },
+      {
+        "payment": 250,
+        "response": "red",
+        "why": "⚔ Cephe #1 · Feniava Hanedanı karşısında destek için elindekiler yetersiz. Yaklaşık 76 değerinde daha fazlasını masaya koymalısın — ya da daha az şey istemelisin.",
+        "add": []
+      },
+      {
+        "payment": 2000,
+        "response": "kabul",
+        "why": "",
+        "add": []
+      }
+    ],
+    "unreachable": "Bilinen güç veya askerî erişim desteği karşılamıyor"
+  },
+  {
+    "seed": 23,
+    "responses": [
+      {
+        "payment": 0,
+        "response": "red",
+        "why": "⚔ Cephe #1 · Tekerix Lejyonu karşısında destek için elindekiler yetersiz. Yaklaşık 129 değerinde daha fazlasını masaya koymalısın — ya da daha az şey istemelisin.",
+        "add": []
+      },
+      {
+        "payment": 250,
+        "response": "red",
+        "why": "⚔ Cephe #1 · Tekerix Lejyonu karşısında destek için elindekiler yetersiz. Yaklaşık 29 değerinde daha fazlasını masaya koymalısın — ya da daha az şey istemelisin.",
+        "add": []
+      },
+      {
+        "payment": 2000,
+        "response": "kabul",
+        "why": "",
+        "add": []
+      }
+    ],
+    "unreachable": "Bilinen güç veya askerî erişim desteği karşılamıyor"
+  },
+  {
+    "seed": 42,
+    "responses": [
+      {
+        "payment": 0,
+        "response": "red",
+        "why": "⚔ Cephe #1 · Synelar Komutanlığı karşısında destek için elindekiler yetersiz. Yaklaşık 154 değerinde daha fazlasını masaya koymalısın — ya da daha az şey istemelisin.",
+        "add": []
+      },
+      {
+        "payment": 250,
+        "response": "red",
+        "why": "⚔ Cephe #1 · Synelar Komutanlığı karşısında destek için elindekiler yetersiz. Yaklaşık 72 değerinde daha fazlasını masaya koymalısın — ya da daha az şey istemelisin.",
+        "add": []
+      },
+      {
+        "payment": 2000,
+        "response": "kabul",
+        "why": "",
+        "add": []
+      }
+    ],
+    "unreachable": "Bilinen güç veya askerî erişim desteği karşılamıyor"
+  },
+  {
+    "seed": 99,
+    "responses": [
+      {
+        "payment": 0,
+        "response": "red",
+        "why": "⚔ Cephe #1 · Velroar Kumpanyası karşısında destek için elindekiler yetersiz. Yaklaşık 145 değerinde daha fazlasını masaya koymalısın — ya da daha az şey istemelisin.",
+        "add": []
+      },
+      {
+        "payment": 250,
+        "response": "red",
+        "why": "⚔ Cephe #1 · Velroar Kumpanyası karşısında destek için elindekiler yetersiz. Yaklaşık 61 değerinde daha fazlasını masaya koymalısın — ya da daha az şey istemelisin.",
+        "add": []
+      },
+      {
+        "payment": 2000,
+        "response": "kabul",
+        "why": "",
+        "add": []
+      }
+    ],
+    "unreachable": "Bilinen güç veya askerî erişim desteği karşılamıyor"
+  },
+  {
+    "seed": 404,
+    "responses": [
+      {
+        "payment": 0,
+        "response": "red",
+        "why": "⚔ Cephe #1 · Orenar İmparatorluğu karşısında destek için elindekiler yetersiz. Yaklaşık 160 değerinde daha fazlasını masaya koymalısın — ya da daha az şey istemelisin.",
+        "add": []
+      },
+      {
+        "payment": 250,
+        "response": "red",
+        "why": "⚔ Cephe #1 · Orenar İmparatorluğu karşısında destek için elindekiler yetersiz. Yaklaşık 52 değerinde daha fazlasını masaya koymalısın — ya da daha az şey istemelisin.",
+        "add": []
+      },
+      {
+        "payment": 2000,
+        "response": "kabul",
+        "why": "",
+        "add": []
+      }
+    ],
+    "unreachable": "Bilinen güç veya askerî erişim desteği karşılamıyor"
+  },
+  {
+    "months": 20,
+    "offers": 1,
+    "humanAutoJoin": false,
+    "refusalWait": 1
+  }
+]

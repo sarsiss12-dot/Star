@@ -1,0 +1,23 @@
+[
+  {
+    "name": "mp75-adapted",
+    "command": " node tests/browser-mp75.cjs",
+    "output": "reports/codex/evidence/beta-war-center0/mp75-adapted",
+    "exit": 0,
+    "seconds": 34.07
+  },
+  {
+    "name": "p01-panels-release",
+    "command": " node tests/browser-beta-p01-panels.cjs",
+    "output": "reports/codex/evidence/beta-war-center0/p01-panels-release",
+    "exit": 0,
+    "seconds": 26.17
+  },
+  {
+    "name": "colony-ui-release",
+    "command": " node tests/browser-beta-board2-colonies.cjs",
+    "output": "reports/codex/evidence/beta-war-center0/colony-ui-release",
+    "exit": 0,
+    "seconds": 62.29
+  }
+]

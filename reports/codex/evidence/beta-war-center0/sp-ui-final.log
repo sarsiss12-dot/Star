@@ -1,0 +1,6 @@
+AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert((await p.locator('#modal [data-a="pickOne"][data-x="0"]').innerText()).includes('Savaş Merkezi'))
+
+    at /workspace/Star/tests/browser-beta-war-center0.cjs:14:31
+GEÇEN: 0 KALAN: 1

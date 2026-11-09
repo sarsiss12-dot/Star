@@ -1,0 +1,77 @@
+FAIL kabul yalnız koşullu taahhüt, son onay savaş/ücret/geçişi bir kez uygular
+AssertionError [ERR_ASSERTION]: ["Qiraror Ordusu → Belirli Savaşa Destek: o devlete savaş açamaz"]
+    at /workspace/Star/tests/beta_war_center0_prepare_test.cjs:5:157
+    at test (/workspace/Star/tests/beta_war_center0_prepare_test.cjs:3:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_war_center0_prepare_test.cjs:5:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+FAIL toplam çoklu taahhüt bütçesi ve değişen stok savaştan önce yeniden denetlenir
+evalmachine.<anonymous>:1
+off.give[0].v=3000;if(!executeDeal(off))throw Error("fixture consent absent");if(!executeDeal({...off,to:2}))throw Error("second consent absent");var before=serialize(),q=warPrepareQuote(A,id),r=warPrepareLaunch(A,id,q.stamp)
+                                        ^
+
+Error: fixture consent absent
+    at evalmachine.<anonymous>:1:47
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/Star/tests/helpers/runtime.js:112:25)
+    at /workspace/Star/tests/beta_war_center0_prepare_test.cjs:6:109
+    at test (/workspace/Star/tests/beta_war_center0_prepare_test.cjs:3:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_war_center0_prepare_test.cjs:6:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+FAIL son katılım hatası ilk ilanı, önceki katılımı, bütün bedelleri ve RNGyi geri alır
+evalmachine.<anonymous>:1
+if(!executeDeal(off))throw Error("fixture consent absent");if(!executeDeal({...off,to:2}))throw Error("second consent absent");var q=warPrepareQuote(A,id),before=serialize(),rs=RND_STATE,n=0;G._dealFailInject=x=>{if(x==="after:warJoin"&&++n===2)throw Error("second join")};var r=warPrepareLaunch(A,id,q.stamp);delete G._dealFailInject;
+                     ^
+
+Error: fixture consent absent
+    at evalmachine.<anonymous>:1:28
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/Star/tests/helpers/runtime.js:112:25)
+    at /workspace/Star/tests/beta_war_center0_prepare_test.cjs:7:113
+    at test (/workspace/Star/tests/beta_war_center0_prepare_test.cjs:3:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_war_center0_prepare_test.cjs:7:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+FAIL iptal, kabulü geri çekme ve süre dolması ücret veya savaş üretmez
+evalmachine.<anonymous>:1
+if(!executeDeal(off))throw Error("fixture consent absent");warPrepareWithdraw(A,id);var q=warPrepareQuote(A,id)
+                     ^
+
+Error: fixture consent absent
+    at evalmachine.<anonymous>:1:28
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/Star/tests/helpers/runtime.js:112:25)
+    at /workspace/Star/tests/beta_war_center0_prepare_test.cjs:8:189
+    at test (/workspace/Star/tests/beta_war_center0_prepare_test.cjs:3:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_war_center0_prepare_test.cjs:8:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+FAIL Save8 bekleyen sözleşmeyi korur; bozuk hazırlık yüklemesi geri alınır
+evalmachine.<anonymous>:1
+if(!executeDeal(off))throw Error("fixture consent absent");var save=serialize(),terms=JSON.stringify(G.warLedger.preparations);if(!deserialize(save))throw Error("load");
+                     ^
+
+Error: fixture consent absent
+    at evalmachine.<anonymous>:1:28
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/Star/tests/helpers/runtime.js:112:25)
+    at /workspace/Star/tests/beta_war_center0_prepare_test.cjs:9:101
+    at test (/workspace/Star/tests/beta_war_center0_prepare_test.cjs:3:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_war_center0_prepare_test.cjs:9:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+GEÇEN: 0 KALAN: 5

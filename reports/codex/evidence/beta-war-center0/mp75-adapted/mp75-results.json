@@ -1,0 +1,115 @@
+{
+  "results": [
+    {
+      "name": "A1 oda + başlangıç; MP düğmesi host ve misafirde sol araç sütununda (#tools), hız kutusu / kaynak çubuğu / araç düğmeleriyle örtüşmez; açılınca panel, kapanınca sütuna döner",
+      "status": "PASS",
+      "ms": 20118
+    },
+    {
+      "name": "A2 misafirde açık panel yerinde güncellenir: diplomasi sayfası açıkken oyun ilerler, ayna birçok kez kurulur, panel baştan yazılmaz (surfaceKept)",
+      "status": "PASS",
+      "ms": 3889
+    },
+    {
+      "name": "A3 savaş / barış: misafir AI ile savaşta; AI barış teklifi misafirin kartına gelir; KABUL (dokunma) → host'ta savaş biter; SAVAŞ MERKEZİ üst sayaçla aynı savaşları gösterir",
+      "status": "PASS",
+      "ms": 2644
+    },
+    {
+      "name": "A4 dokunmatik miktar: filo bileşimi penceresinde SIFIR / −50 / −10 / +10 / +50 (dokunma), klavye açılmaz; anlaşma miktarında pencerenin kendi düğmeleri korunur (çift kontrol yok)",
+      "status": "PASS",
+      "ms": 3465
+    },
+    {
+      "name": "A5 karar bekleyen olay kaydırılınca gizlenir (silinmez), ☰ durum listesinde kalır ve oradan aynı karar penceresi açılır",
+      "status": "PASS",
+      "ms": 1717
+    },
+    {
+      "name": "sayfa hataları yok",
+      "status": "PASS",
+      "ms": 1
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "joinErrors_Bora": [],
+    "dock_host": {
+      "m": [
+        6,
+        224,
+        32,
+        42
+      ],
+      "overlap": [],
+      "inView": true
+    },
+    "dock_B": {
+      "m": [
+        6,
+        269,
+        32,
+        42
+      ],
+      "overlap": [],
+      "inView": true
+    },
+    "pane": {
+      "builds": 6,
+      "rewrites": 0,
+      "kept": 38,
+      "minGap": 600,
+      "open": true
+    },
+    "activeWars": {
+      "n": 1,
+      "top": 1,
+      "html": "⚔ SAVAŞ MERKEZİ✕Benim SavaşlarımBilinen SavaşlarGeçmiş SavaşlarYalnız yetkili olduğun savaş kayıtları. Bilinmeyen güç, kayıp ve tarih uydurulmaz.Saf Akıl Ağı ↔ Dalas OdasıSefer #1 · Cephe #1 · Başlangıç günü 28 · AKTİFSAVAŞ AYRINTISITEKLİFLER / GELEN KUTUSUHABERLER",
+      "rows": 1,
+      "rendered": [
+        1
+      ],
+      "expected": [
+        1
+      ]
+    },
+    "peaceHit": {
+      "before": {
+        "uid": 2,
+        "rect": {
+          "x": 271.34375,
+          "y": 134,
+          "width": 64,
+          "height": 44
+        },
+        "target": "<button class=\"nq ok\" data-a=\"noteQuick\" data-x=\"2:y\">KABUL</button>",
+        "hit": true
+      },
+      "after": {
+        "uid": 2,
+        "rect": {
+          "x": 271.34375,
+          "y": 120,
+          "width": 64,
+          "height": 44
+        },
+        "target": "<button class=\"nq ok\" data-a=\"noteQuick\" data-x=\"2:y\">KABUL</button>",
+        "hit": true
+      }
+    },
+    "afterPeace": {
+      "wars": 1,
+      "list": 1
+    },
+    "fleetSteps": [
+      "SIFIR",
+      "−50",
+      "−10",
+      "+10",
+      "+50",
+      "MAKS"
+    ]
+  },
+  "pass": 6,
+  "fail": 0
+}

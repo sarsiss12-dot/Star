@@ -1,0 +1,38 @@
+[
+  {
+    "action": "pr-create",
+    "command": [
+      "gh",
+      "pr",
+      "create",
+      "--repo",
+      "sarsiss12-dot/Star",
+      "--draft",
+      "--base",
+      "codex/stars-beta-board2-colony-politics-ux",
+      "--head",
+      "codex/stars-beta-war-center0-coalitions",
+      "--title",
+      "BETA-WAR-CENTER.0: Savaş Merkezi ve koşullu koalisyon diplomasisi",
+      "--body-file",
+      "/tmp/stars-war-center-pr.md"
+    ],
+    "exit": 1,
+    "output": "Post \"https://api.github.com/graphql\": Forbidden\n"
+  },
+  {
+    "action": "issue-comment",
+    "command": [
+      "gh",
+      "issue",
+      "comment",
+      "33",
+      "--repo",
+      "sarsiss12-dot/Star",
+      "--body-file",
+      "/tmp/stars-war-center-issue.md"
+    ],
+    "exit": 1,
+    "output": "Post \"https://api.github.com/graphql\": Forbidden\n"
+  }
+]

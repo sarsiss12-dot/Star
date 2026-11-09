@@ -1,0 +1,23 @@
+{
+  "selector": "#diploPane [data-a=\"dealSend\"]",
+  "url": "/mp/play",
+  "who": "Okyanus Ticaret Birliği",
+  "box": [
+    12,
+    244,
+    442,
+    44
+  ],
+  "connected": true,
+  "top": "abtn pri",
+  "viewport": [
+    915,
+    412
+  ],
+  "scroll": [
+    0,
+    0
+  ],
+  "focus": "",
+  "modal": "hidden"
+}

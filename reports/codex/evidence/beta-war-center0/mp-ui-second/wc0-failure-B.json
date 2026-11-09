@@ -1,0 +1,436 @@
+{
+  "modal": "⚔ SAVAŞ DURUMU\n✕\nHaberler · 0\nGelen kutusu · 0\nGönderilen · 0\nOlay: war-front:1\nSavaş ayrıntısı\nSaldıran → Savunan\nSaf Akıl Ağı → Fenroen Egemenliği\n\nSavaş ilanı\n\nBaşlangıç / haber tarihi: 2212.07 · gün 900\n\nAKTİF\n\nBilgi güncellemesi: 2212.07 · gün 900\n\nBilinen savaş ortakları: Saf Akıl Ağı (saldıran) · Fenroen Egemenliği (savunan)\n\nSaf Akıl Ağı\n\nSavaş yorgunluğu: BİLİNMİYOR · tarihsel değer kaydedilmedi veya istihbarat yetersiz\n\nAskerî güç: 394 · kendi filo gücün · 2212.07 · gün 900\n\nKayıtlı gemi kaybı: 0\n\nFilo kaybı: BİLİNMİYOR · ayrı sayaç yok\n\nFenroen Egemenliği\n\nSavaş yorgunluğu: BİLİNMİYOR · tarihsel değer kaydedilmedi veya istihbarat yetersiz\n\nAskerî güç: BİLİNMİYOR\n\nKayıtlı gemi kaybı: 0 · yalnız senin imha ettiklerin\n\nFilo kaybı: BİLİNMİYOR · ayrı sayaç yok\n\nKayıtlı kendi savaş hedeflerin: boyun · 2212.07 · gün 900\n\nBilinen aktif cepheler: #1 · Saf Akıl Ağı ↔ Fenroen Egemenliği\n\nKayıtlı ilerleme: BİLİNMİYOR · görünür bir ele geçirme kaydı yok\n\nSAVAŞ MERKEZİ · Cephe #1\n\nKatılım yalnız karşılıklı anlaşma ve host doğrulamasıyla gerçekleşir. Bu, ayrı filo kontrolü veya garanti zafer sözü değildir.\n\nASKERÎ DESTEK İSTEBARIŞ / STATÜKO GÖRÜŞMESİSAVAŞ MERKEZİ LİSTESİNE DÖN\n\nGizli filo konumları verilmez. Geçmiş güç ve yorgunluk anlık görüntüleri kaydedilmedi; BİLİNMİYOR alanları başka bir savaşın güncel verileriyle doldurulmaz.\n\nFenroen Egemenliği · Güncel diplomasi\nHaber listesine dön\nHaritaya dön",
+  "pane": "DİPLOMASİ ·  Okyanus Ticaret Birliği\n      ✕\n      DEVLETLERİLİŞKİMÜZAKERETaslak bu oturumda saklanır; sekme değiştirirken kaybolmaz.\n      Yalnız TEKLİFİ SUN düğmesi karşı tarafa gönderir.Teklif hazır değil; tutum tahmini yapılmadı.UYGULANABİLİRLİK\n        Teklif boş — hiçbir madde yokTeklif host'a gönderildi; yanıt gelen kutuna ve bildirimlere düşer.SEN VERİYORSUN— boş —\n      ◆ Kaynak\n      ✦ Teknoloji\n      ★ Sistem\n      ⏳ Haraç\n      ❖ Lüks mal\n      👁 İstihbarat\n      ⚔ Savaş sözü\n      🤲 Barıştırma\n      🚪 Geçiş izni\n    SEN İSTİYORSUN— boş —\n      ◆ Kaynak\n      ✦ Teknoloji\n      ★ Sistem\n      ⏳ Haraç\n      ❖ Lüks mal\n      👁 İstihbarat\n      ⚔ Savaş sözü\n      🤲 Barıştırma\n      🚪 Geçiş izni\n    ANLAŞMA MADDELERİ🕊 Barış🛡 Saldırmazlık🤝 Ticaret⚑ İttifak🕸 Casusluk ağıSimetrik antlaşmalar iki tarafı da bağlar ve\n      teklifte TEK madde olarak durur.🔒 Barış: Bütün maddeler zaten yürürlükte — yeni etki yokTEKLİF ÖZETİİmzalama maliyeti\n        0 ◈Maliyet YALNIZ imza gerçekleşirse ve teklifi\n        GÖNDEREN taraftan (sen) tek kez düşer. Ret, iptal ve karşı teklifte\n        Etki harcanmaz. Çok maddeli teklifte en pahalı benzersiz\n        antlaşma ücreti tam, diğerlerinin %25'i eklenir; toplam en\n        fazla 160 ◈. Zaten yürürlükteki maddeler ücretlendirilmez.🔒 Teklif boş — hiçbir madde yok\n      TEKLİFİ SUN\n      TASLAĞI TEMİZLE",
+  "prep": [
+    {
+      "id": 1,
+      "owner": 0,
+      "target": 3,
+      "goal": "boyun",
+      "opened": 900,
+      "expires": 1080,
+      "state": "pending",
+      "commitments": [
+        {
+          "member": 2,
+          "state": "accepted",
+          "terms": {
+            "from": 2,
+            "to": 0,
+            "give": [
+              {
+                "t": "warJoin",
+                "plan": 1,
+                "target": 3
+              }
+            ],
+            "want": [
+              {
+                "t": "res",
+                "r": "min",
+                "v": 150
+              }
+            ],
+            "born": 900,
+            "expires": 1440
+          }
+        }
+      ],
+      "quote": {
+        "ok": true,
+        "why": "Son onayda ilan, bütün katılımlar ve bedeller birlikte uygulanır",
+        "stamp": "[1,\"boyun\",3,\"{\\\"ok\\\":true,\\\"target\\\":{\\\"id\\\":3,\\\"name\\\":\\\"Fenroen Egemenliği\\\"},\\\"cost\\\":45,\\\"certain\\\":[],\\\"conditional\\\":[],\\\"risks\\\":[],\\\"blockers\\\":[]}\",[{\"from\":2,\"to\":1,\"give\":[{\"t\":\"warJoin\",\"plan\":1,\"target\":3}],\"want\":[{\"t\":\"res\",\"r\":\"min\",\"v\":150}],\"born\":900,\"expires\":1440}]]",
+        "members": [
+          2
+        ]
+      }
+    }
+  ],
+  "results": [
+    {
+      "v": 1,
+      "type": "result",
+      "seq": 20,
+      "cid": "jmw9eh6kmp8nnkv4a",
+      "status": "ok",
+      "code": null,
+      "rev": 27,
+      "extra": {
+        "report": {
+          "id": 1,
+          "asOf": 900,
+          "sides": [
+            1,
+            3
+          ],
+          "opened": 900,
+          "ended": null,
+          "legacy": false,
+          "reason": "",
+          "actor": null,
+          "entryKind": "declaration",
+          "campaign": 1,
+          "sponsor": null,
+          "parties": [
+            {
+              "id": 1,
+              "role": 0,
+              "exhaustion": null,
+              "power": {
+                "value": 394,
+                "day": 900,
+                "exact": true
+              },
+              "shipsLost": 0
+            },
+            {
+              "id": 3,
+              "role": 1,
+              "exhaustion": null,
+              "power": null,
+              "shipsLost": 0
+            }
+          ],
+          "participants": [
+            {
+              "id": 1,
+              "role": 0
+            },
+            {
+              "id": 3,
+              "role": 1
+            }
+          ],
+          "goals": [
+            {
+              "by": 1,
+              "type": "boyun",
+              "day": 900,
+              "targets": []
+            }
+          ],
+          "fronts": [
+            {
+              "id": 1,
+              "sides": [
+                1,
+                3
+              ],
+              "opened": 900
+            }
+          ],
+          "progress": []
+        }
+      },
+      "ms": 25
+    },
+    {
+      "v": 1,
+      "type": "result",
+      "seq": 21,
+      "cid": "jmw9eh8apf1t5b7m1",
+      "status": "ok",
+      "code": null,
+      "rev": 27,
+      "extra": {
+        "report": {
+          "id": 1,
+          "asOf": 900,
+          "sides": [
+            1,
+            3
+          ],
+          "opened": 900,
+          "ended": null,
+          "legacy": false,
+          "reason": "",
+          "actor": null,
+          "entryKind": "declaration",
+          "campaign": 1,
+          "sponsor": null,
+          "parties": [
+            {
+              "id": 1,
+              "role": 0,
+              "exhaustion": null,
+              "power": {
+                "value": 394,
+                "day": 900,
+                "exact": true
+              },
+              "shipsLost": 0
+            },
+            {
+              "id": 3,
+              "role": 1,
+              "exhaustion": null,
+              "power": null,
+              "shipsLost": 0
+            }
+          ],
+          "participants": [
+            {
+              "id": 1,
+              "role": 0
+            },
+            {
+              "id": 3,
+              "role": 1
+            }
+          ],
+          "goals": [
+            {
+              "by": 1,
+              "type": "boyun",
+              "day": 900,
+              "targets": []
+            }
+          ],
+          "fronts": [
+            {
+              "id": 1,
+              "sides": [
+                1,
+                3
+              ],
+              "opened": 900
+            }
+          ],
+          "progress": []
+        }
+      },
+      "ms": 74
+    },
+    {
+      "v": 1,
+      "type": "result",
+      "seq": 22,
+      "cid": "jmw9eha19m9ihepb7",
+      "status": "ok",
+      "code": null,
+      "rev": 27,
+      "extra": {
+        "report": {
+          "id": 1,
+          "asOf": 900,
+          "sides": [
+            1,
+            3
+          ],
+          "opened": 900,
+          "ended": null,
+          "legacy": false,
+          "reason": "",
+          "actor": null,
+          "entryKind": "declaration",
+          "campaign": 1,
+          "sponsor": null,
+          "parties": [
+            {
+              "id": 1,
+              "role": 0,
+              "exhaustion": null,
+              "power": {
+                "value": 394,
+                "day": 900,
+                "exact": true
+              },
+              "shipsLost": 0
+            },
+            {
+              "id": 3,
+              "role": 1,
+              "exhaustion": null,
+              "power": null,
+              "shipsLost": 0
+            }
+          ],
+          "participants": [
+            {
+              "id": 1,
+              "role": 0
+            },
+            {
+              "id": 3,
+              "role": 1
+            }
+          ],
+          "goals": [
+            {
+              "by": 1,
+              "type": "boyun",
+              "day": 900,
+              "targets": []
+            }
+          ],
+          "fronts": [
+            {
+              "id": 1,
+              "sides": [
+                1,
+                3
+              ],
+              "opened": 900
+            }
+          ],
+          "progress": []
+        }
+      },
+      "ms": 21
+    },
+    {
+      "v": 1,
+      "type": "result",
+      "seq": 23,
+      "cid": "jmw9ehbqrjrrn82o7",
+      "status": "ok",
+      "code": null,
+      "rev": 27,
+      "extra": {
+        "report": {
+          "id": 1,
+          "asOf": 900,
+          "sides": [
+            1,
+            3
+          ],
+          "opened": 900,
+          "ended": null,
+          "legacy": false,
+          "reason": "",
+          "actor": null,
+          "entryKind": "declaration",
+          "campaign": 1,
+          "sponsor": null,
+          "parties": [
+            {
+              "id": 1,
+              "role": 0,
+              "exhaustion": null,
+              "power": {
+                "value": 394,
+                "day": 900,
+                "exact": true
+              },
+              "shipsLost": 0
+            },
+            {
+              "id": 3,
+              "role": 1,
+              "exhaustion": null,
+              "power": null,
+              "shipsLost": 0
+            }
+          ],
+          "participants": [
+            {
+              "id": 1,
+              "role": 0
+            },
+            {
+              "id": 3,
+              "role": 1
+            }
+          ],
+          "goals": [
+            {
+              "by": 1,
+              "type": "boyun",
+              "day": 900,
+              "targets": []
+            }
+          ],
+          "fronts": [
+            {
+              "id": 1,
+              "sides": [
+                1,
+                3
+              ],
+              "opened": 900
+            }
+          ],
+          "progress": []
+        }
+      },
+      "ms": 34
+    },
+    {
+      "v": 1,
+      "type": "result",
+      "seq": 24,
+      "cid": "jmw9ehdi2uxuunt2q",
+      "status": "ok",
+      "code": null,
+      "rev": 27,
+      "extra": {
+        "report": {
+          "id": 1,
+          "asOf": 900,
+          "sides": [
+            1,
+            3
+          ],
+          "opened": 900,
+          "ended": null,
+          "legacy": false,
+          "reason": "",
+          "actor": null,
+          "entryKind": "declaration",
+          "campaign": 1,
+          "sponsor": null,
+          "parties": [
+            {
+              "id": 1,
+              "role": 0,
+              "exhaustion": null,
+              "power": {
+                "value": 394,
+                "day": 900,
+                "exact": true
+              },
+              "shipsLost": 0
+            },
+            {
+              "id": 3,
+              "role": 1,
+              "exhaustion": null,
+              "power": null,
+              "shipsLost": 0
+            }
+          ],
+          "participants": [
+            {
+              "id": 1,
+              "role": 0
+            },
+            {
+              "id": 3,
+              "role": 1
+            }
+          ],
+          "goals": [
+            {
+              "by": 1,
+              "type": "boyun",
+              "day": 900,
+              "targets": []
+            }
+          ],
+          "fronts": [
+            {
+              "id": 1,
+              "sides": [
+                1,
+                3
+              ],
+              "opened": 900
+            }
+          ],
+          "progress": []
+        }
+      },
+      "ms": 42
+    }
+  ]
+}

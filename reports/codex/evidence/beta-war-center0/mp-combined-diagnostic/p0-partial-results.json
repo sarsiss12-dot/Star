@@ -1,0 +1,73 @@
+[
+  {
+    "visibility": true,
+    "shared": 1,
+    "habitat": true,
+    "foreignHull": 0.42,
+    "ownHull": 0.55,
+    "privacy": true
+  },
+  {
+    "kind": "anomaly",
+    "decision": 1,
+    "before": {
+      "a": 0,
+      "m": 3000,
+      "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":3000}",
+      "p": 0
+    },
+    "after": {
+      "a": 240,
+      "m": 3000,
+      "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":3000}",
+      "p": 0
+    },
+    "replay": "rejected"
+  },
+  {
+    "kind": "event",
+    "decision": 2,
+    "before": {
+      "a": 240,
+      "m": 3000,
+      "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":3000}",
+      "p": 0
+    },
+    "after": {
+      "a": 500,
+      "m": 2850,
+      "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":3000}",
+      "p": 0
+    },
+    "replay": "rejected"
+  },
+  {
+    "kind": "chain",
+    "decision": 3,
+    "before": {
+      "a": 500,
+      "m": 2850,
+      "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":3000}",
+      "p": 0
+    },
+    "after": {
+      "a": 500,
+      "m": 2850,
+      "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":3000}",
+      "p": 0
+    },
+    "replay": "rejected"
+  },
+  {
+    "CDecision": 1,
+    "CResearch": 180,
+    "BUnchanged": true
+  },
+  {
+    "foundingNotification": "NOT RUN: no founded proposal in this filtered case"
+  },
+  {
+    "shareEndedLiveRemoved": true,
+    "discoveryRetained": true
+  }
+]

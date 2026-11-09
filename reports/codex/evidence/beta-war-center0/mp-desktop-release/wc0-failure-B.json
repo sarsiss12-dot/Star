@@ -1,0 +1,60 @@
+{
+  "modal": "",
+  "pane": "\n      🌐 GALAKTİK KONSEY\n        ✕\n      Galaktik Divanı\n        8 üyeBaşkan\n        Saf Akıl Ağı (sen)Başkanlık dönemin1 / 3Oy ağırlığın13.4Oy ağırlığı toprak, etki ve pasifist ideolojiyle artar.\n        3 dönem başkanlık = Konsey Hâkimiyeti zaferi.SON OYLAMA · Evrensel Ticaret Standardı · KABULGün 9EVET (38.8): Kavira Loncası · Zhavoa Federasyonu · Qeloon Borsası · Sen · Kızıl MuhafızHAYIR (20.5): Nivuar Dominyonu · Maryri Birliği · Okyanus Ticaret BirliğiSonraki oylama2 ay sonraDİPLOMATİK AĞIRLIĞINOy ağırlığı\n          13.4🏛 KONSEY BAŞKANLIĞI\n          Saf Akıl Ağı (SEN)\n            DÖNEM BAŞKANI\n          Seçime 15 yıl (180 ay) ·\n               dönem 1Seçimleri kaldırıp tahtı kalıcı kıl.\n              Risk: reddedilirse galaksi seni diktatör\n              adayı sayar (−22 ilişki, +30 tehdit, 5 yıl ağırlık cezası).\n              \n              👑 DAİMİ HÜKÜMDARLIK200 ◈\n              📜 TASARI SUNKonseye kendi tasarını sun (120 ◈).\n            Risk: reddedilirse prestij kaybedersin\n            ve 5 yıl boyunca konseydeki ağırlığın azalır.\n                💱 Galaktik Borsayı Kur\n                ⚖ Piyasa Regülasyonu\n                🔍 Casusluk Şeffaflığı\n                🕊 Silahsızlanma Antlaş\n                🤝 Serbest Ticaret Bölg\n                🔬 Bilim Ortaklığı\n                🚫 Savaş Yasağı\n                hedef seç\n                ⛔ Yaptırım\n                hedef seç\n                🚪 Konseyden İhraç\n                hedef seçYÜRÜRLÜKTEKİ KARARLAR\n          ⚖ Evrensel Ticaret StandardıYÜRÜRLÜKTE\n          Ortak ölçüler, ortak limanlar, tek muhasebe dili. Tüm üyelerin ticaret geliri %10 artar.ÜYELER\n          \n          Saf Akıl Ağı (sen)\n          Bilimsel · Liyakat · oy ağırlığı 13.4\n          BAŞKAN\n          \n          Nivuar Dominyonu\n          Bilimci · Kâşif · oy ağırlığı 4.0\n          \n          \n          Maryri Birliği\n          Makine Zekâsı · Asimilasyoncu · oy ağırlığı 3.2\n          \n          \n          Kavira Loncası\n          Bilimsel · Liyakat · oy ağırlığı 2.6\n          \n          \n          Kızıl Muhafız\n          Militarist · Yayılmacı · oy ağırlığı 1.0\n          \n          \n          Okyanus Ticaret Birliği\n          Megakorporasyon · Tüccar · oy ağırlığı 1.0\n          \n          \n          Zhavoa Federasyonu\n          Kovan Zihni · Yayılmacı · oy ağırlığı 1.0\n          \n          \n          Qeloon Borsası\n          Megakorporasyon · Tüccar · oy ağırlığı 1.0\n          KONSEYDEN AYRIL",
+  "prep": [],
+  "results": [
+    {
+      "v": 1,
+      "type": "result",
+      "seq": 7,
+      "cid": "jmw9gbod57n975oeq",
+      "status": "rejected",
+      "code": "rules:engine",
+      "rev": 27,
+      "detail": [
+        "Olay artık beklemiyor veya yetkiniz yok"
+      ],
+      "ms": 72
+    },
+    {
+      "v": 1,
+      "type": "result",
+      "seq": 8,
+      "cid": "jmw9gbskvp275ttkh",
+      "status": "ok",
+      "code": null,
+      "rev": 31,
+      "ms": 82
+    },
+    {
+      "v": 1,
+      "type": "result",
+      "seq": 9,
+      "cid": "jmw9gbv72fr88yhmz",
+      "status": "ok",
+      "code": null,
+      "rev": 33,
+      "ms": 84
+    },
+    {
+      "v": 1,
+      "type": "result",
+      "seq": 10,
+      "cid": "jmw9gbyfkg5q4ss88",
+      "status": "ok",
+      "code": null,
+      "rev": 35,
+      "ms": 95
+    },
+    {
+      "v": 1,
+      "type": "result",
+      "seq": 11,
+      "cid": "jmw9gc1inzwmo20wd",
+      "status": "ok",
+      "code": null,
+      "rev": 37,
+      "ms": 88
+    }
+  ]
+}

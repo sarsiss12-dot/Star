@@ -1,0 +1,83 @@
+{
+  "url": "/",
+  "vote": {
+    "name": "Kadim Meclis",
+    "founder": 1,
+    "members": [
+      1,
+      0,
+      2,
+      5,
+      6,
+      4,
+      7,
+      3
+    ],
+    "laws": {},
+    "targeted": {},
+    "treasury": 0,
+    "president": 1,
+    "terms": {
+      "1": 1
+    },
+    "termAge": 0,
+    "voteIn": 2,
+    "vote": {
+      "key": "ticaretStd",
+      "target": null,
+      "opened": 6.806199999999984,
+      "yes": [
+        5,
+        6,
+        4,
+        7,
+        1
+      ],
+      "no": [
+        3
+      ],
+      "speeches": [
+        {
+          "id": 4,
+          "txt": "Galaksi savaşla değil sözle birleşir.",
+          "yes": true
+        }
+      ],
+      "done": false,
+      "age": 0,
+      "sponsor": null
+    },
+    "dead": false,
+    "byConvention": true,
+    "firstLaw": null,
+    "pariahs": {}
+  },
+  "inbox": [
+    {
+      "uid": 1,
+      "kind": "cncnew",
+      "ico": "🌐",
+      "cls": "sci",
+      "pause": true,
+      "title": "GALAKTİK KONSEY KURULDU",
+      "sub": "Saf Akıl Ağı galaksiyi masaya çağırdı",
+      "key": "cncnew",
+      "born": 6.806199999999984,
+      "data": 1
+    },
+    {
+      "uid": 2,
+      "kind": "cncvote",
+      "ico": "🌐",
+      "cls": "sci",
+      "pause": true,
+      "title": "KONSEY OYLAMASI",
+      "sub": "Evrensel Ticaret Standardı",
+      "key": "cnc6.806199999999984",
+      "born": 6.806199999999984,
+      "data": "ticaretStd"
+    }
+  ],
+  "modal": "",
+  "pane": ""
+}

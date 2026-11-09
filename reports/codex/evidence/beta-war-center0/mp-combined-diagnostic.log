@@ -1,0 +1,22 @@
+PASS B1 konsey motorun kendi yoluyla kurulur (fikstür: temas); AI insanlar adına oy / sponsor yazmaz; B gerçek "KONSEY OYLAMASI" kartından Konsey ekranını açar ve EVET (dokunma) → host kaydeder, oylama açık kalır
+PASS B2 C (915×412) HAYIR verir; oylama host oy verene kadar açık; host kendi Konsey ekranından EVET → motor kapatır; tekrar oy reddedilir
+FAIL P0 katılımcı görüş, sağlık, özel kararlar, rota ve görsel hareket
+locator.click: Timeout 8000ms exceeded.
+Call log:
+[2m  - waiting for locator('#panel [data-a="selfleet"][data-x="25"]').first()[22m
+[2m    - locator resolved to <div data-x="25" class="pchip" data-a="selfleet">…</div>[22m
+[2m  - attempting click action[22m
+[2m    - waiting for element to be visible, enabled and stable[22m
+[2m    - element is visible, enabled and stable[22m
+[2m    - scrolling into view if needed[22m
+
+    at hit (/workspace/Star/tests/helpers/mp-p0-guest-browser.cjs:4:436)
+    at async module.exports (/workspace/Star/tests/helpers/mp-p0-guest-browser.cjs:52:3)
+    at async /workspace/Star/tests/browser-mp73.cjs:248:129
+    at async test (/workspace/Star/tests/browser-mp73.cjs:13:7)
+    at async /workspace/Star/tests/browser-mp73.cjs:248:29
+WC0 koşullu karşı teklif kabul edildi; savaş ve ödeme yok
+WC0 son onay: gerçek cephe ve tek ödeme doğrulandı
+PASS WC0 üç insan koşullu koalisyon, karşı teklif, ücret ve savaş merkezi
+PASS sayfa hataları yok
+GEÇEN: 4 KALAN: 1

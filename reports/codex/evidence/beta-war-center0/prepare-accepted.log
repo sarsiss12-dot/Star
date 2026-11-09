@@ -1,0 +1,6 @@
+PASS kabul yalnız koşullu taahhüt, son onay savaş/ücret/geçişi bir kez uygular
+PASS toplam çoklu taahhüt bütçesi ve değişen stok savaştan önce yeniden denetlenir
+PASS son katılım hatası ilk ilanı, önceki katılımı, bütün bedelleri ve RNGyi geri alır
+PASS iptal, kabulü geri çekme ve süre dolması ücret veya savaş üretmez
+PASS Save8 bekleyen sözleşmeyi korur; bozuk hazırlık yüklemesi geri alınır
+GEÇEN: 5 KALAN: 0

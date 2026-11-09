@@ -1,0 +1,31 @@
+[
+  {
+    "name": "1920x1080 scale80 open/reopen/tabs/detail/close",
+    "status": "PASS"
+  },
+  {
+    "name": "1920x1080 scale100 open/reopen/tabs/detail/close",
+    "status": "PASS"
+  },
+  {
+    "name": "1920x1080 scale125 open/reopen/tabs/detail/close",
+    "status": "PASS"
+  },
+  {
+    "name": "1920 historical news stable ID",
+    "status": "PASS"
+  },
+  {
+    "name": "800x360 scale100 open/reopen/tabs/detail/close",
+    "status": "PASS"
+  },
+  {
+    "name": "800 historical news stable ID",
+    "status": "PASS"
+  },
+  {
+    "name": "browser",
+    "status": "FAIL",
+    "error": "locator.tap: Timeout 8000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#topStatusBtn').first()\u001b[22m\n\u001b[2m    - locator resolved to <button id=\"topStatusBtn\" data-a=\"topStatus\" class=\"topStatusBtn hot \" title=\"Savaş, olay ve kriz listesi\" aria-label=\"7 önemli durum; listeyi aç\">⚔ +7</button>\u001b[22m\n\u001b[2m  - attempting tap action\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\n    at hit (/workspace/Star/tests/browser-beta-war-center0.cjs:9:70)\n    at /workspace/Star/tests/browser-beta-war-center0.cjs:14:10"
+  }
+]

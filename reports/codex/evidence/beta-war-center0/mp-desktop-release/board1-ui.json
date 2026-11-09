@@ -1,0 +1,45 @@
+[
+  {
+    "threeHumans": true,
+    "queued": 2,
+    "nativeWithdraw": true,
+    "openingFee": 60,
+    "endedWarInvalid": true,
+    "hostNotInWar": true
+  },
+  {
+    "twoMemberBallot": true,
+    "noBilateralAlliesRequired": true,
+    "candidateSeparateConsent": true,
+    "joinedExactlyOnce": true
+  },
+  {
+    "humanAllianceNativeSend": true,
+    "candidateAccepted": true,
+    "noAutomaticConsent": true
+  },
+  {
+    "guestNativeOrders": 21,
+    "stableProductionButtons": {
+      "r0": {
+        "x": 1507.609375,
+        "y": 768.5
+      },
+      "r21": {
+        "x": 1507.609375,
+        "y": 768.5
+      }
+    },
+    "nativeCancel": 1,
+    "refund": {
+      "ala": 32
+    }
+  },
+  {
+    "sameRequestedSpeedClearsPendingHold": true,
+    "realPendingCard": true,
+    "allPlayersSpeed": 3,
+    "actorNotice": true,
+    "warNoticeDoesNotSlow": true
+  }
+]

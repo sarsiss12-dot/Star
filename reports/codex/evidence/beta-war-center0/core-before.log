@@ -1,0 +1,47 @@
+FAIL kimlik bağlı ücretli katılım aynı sefere girer, ödeme ve gerçek geçiş bir kez
+AssertionError [ERR_ASSERTION]: ["Bilinmeyen madde türü: warJoin"]
+    at /workspace/Star/tests/beta_war_center0_test.cjs:5:107
+    at test (/workspace/Star/tests/beta_war_center0_test.cjs:3:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_war_center0_test.cjs:5:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+PASS barış ve aynı çiftin yeni savaşı eski katılım teklifini geçerli yapmaz
+PASS katılım veya ödeme sonrası hata bütün grafiği ve RNGyi geri alır
+PASS kaynak, yetki, çakışan taraf, NAP ve Konsey kapıları korunur
+FAIL Save8 ve teklif codec cephe kimliğini korur, geçmiş yeni savaşa bağlanmaz
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+undefined !== 1
+
+    at /workspace/Star/tests/beta_war_center0_test.cjs:9:212
+    at test (/workspace/Star/tests/beta_war_center0_test.cjs:3:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_war_center0_test.cjs:9:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+FAIL Savaş Merkezi bilinen/özel bilgi filtresi; salt okuma
+evalmachine.<anonymous>:1
+G.p.contact={};var before=serialize(),rs=RND_STATE,index=warCenterIndex(G.p)
+                                                         ^
+
+ReferenceError: warCenterIndex is not defined
+    at evalmachine.<anonymous>:1:58
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/Star/tests/helpers/runtime.js:112:25)
+    at /workspace/Star/tests/beta_war_center0_test.cjs:10:85
+    at test (/workspace/Star/tests/beta_war_center0_test.cjs:3:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_war_center0_test.cjs:10:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+GEÇEN: 3 KALAN: 3

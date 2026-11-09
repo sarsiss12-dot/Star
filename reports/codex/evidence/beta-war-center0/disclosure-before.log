@@ -1,0 +1,21 @@
+PASS iki misafir teklif/karşı teklif, gerçek katılım ve tek ödeme, üçüncü oyuncudan gizli
+PASS barışta bekleyen katılım kapanır, yeni savaş eski teklifi canlandırmaz
+PASS host salt-okunur savaş DTOsu ve yetki/gizlilik, paket tekrarında çift etki yok
+PASS ret ve geri çekme savaşı/ödemeyi başlatmaz
+PASS MP koşullu karşı teklif: kabul savaş/ödeme üretmez, yalnız sahibi son onay verir
+FAIL bilinmeyen üçüncü savaşın kimliği tahminle teklif/quote üzerinden yoklanamaz
+AssertionError [ERR_ASSERTION]: {"to":"C","v":1,"type":"result","seq":1,"cid":"fed0C000001","status":"ok","code":null,"rev":3,"extra":{"ok":true,"cost":0,"etk":5000,"life":540,"reasons":[]}}
+
+true !== false
+
+    at /workspace/Star/tests/beta_war_center0_mp_test.cjs:11:363
+    at test (/workspace/Star/tests/beta_war_center0_mp_test.cjs:3:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_war_center0_mp_test.cjs:11:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+GEÇEN: 5 KALAN: 1

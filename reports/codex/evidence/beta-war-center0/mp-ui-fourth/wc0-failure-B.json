@@ -1,0 +1,112 @@
+{
+  "modal": "",
+  "pane": "DİPLOMASİ ·\nOkyanus Ticaret Birliği\n✕\nDEVLETLER\nİLİŞKİ\nMÜZAKERE\nTaslak bu oturumda saklanır; sekme değiştirirken kaybolmaz. Yalnız TEKLİFİ SUN düğmesi karşı tarafa gönderir.\nTeklif hazır değil; tutum tahmini yapılmadı.\nUYGULANABİLİRLİK\nTeklif boş — hiçbir madde yok\nTeklif host'a gönderildi; yanıt gelen kutuna ve bildirimlere düşer.\nSEN VERİYORSUN\n— boş —\n◆ Kaynak\n✦ Teknoloji\n★ Sistem\n⏳ Haraç\n❖ Lüks mal\n👁 İstihbarat\n⚔ Savaş sözü\n🤲 Barıştırma\n🚪 Geçiş izni\nSEN İSTİYORSUN\n— boş —\n◆ Kaynak\n✦ Teknoloji\n★ Sistem\n⏳ Haraç\n❖ Lüks mal\n👁 İstihbarat\n⚔ Savaş sözü\n🤲 Barıştırma\n🚪 Geçiş izni\nANLAŞMA MADDELERİ\n🕊 Barış\n🛡 Saldırmazlık\n🤝 Ticaret\n⚑ İttifak\n🕸 Casusluk ağı\nSimetrik antlaşmalar iki tarafı da bağlar ve teklifte TEK madde olarak durur.\n🔒 Barış: Bütün maddeler zaten yürürlükte — yeni etki yok\nTEKLİF ÖZETİ\nİmzalama maliyeti\n0 ◈\nMaliyet YALNIZ imza gerçekleşirse ve teklifi GÖNDEREN taraftan (sen) tek kez düşer. Ret, iptal ve karşı teklifte Etki harcanmaz. Çok maddeli teklifte en pahalı benzersiz antlaşma ücreti tam, diğerlerinin %25'i eklenir; toplam en fazla 160 ◈. Zaten yürürlükteki maddeler ücretlendirilmez.\n🔒 Teklif boş — hiçbir madde yok\nTEKLİFİ SUN\nTASLAĞI TEMİZLE\nÇOK OYUNCULU\nBu devleti bir insan oyuncu yönetiyor. TEKLİFİ SUN teklifini onun gelen kutusuna gönderir; kararı o verir, host uygular. Karşı tarafın stoğu sana gösterilmez; kabulde host denetler.\nBEKLEYEN TEKLİFLERİN (1)\nVeriyorsun: ◆ 100 Mineral · İstiyorsun: ⚔ Hazırlık #1 · Karroro Donanması karşısında destek · 540 gün\nGERİ ÇEKGönderilen teklifler · durum ve geçmiş",
+  "prep": [
+    {
+      "id": 1,
+      "owner": 0,
+      "target": 3,
+      "goal": "boyun",
+      "opened": 900,
+      "expires": 1080,
+      "state": "pending",
+      "commitments": [],
+      "quote": {
+        "ok": false,
+        "why": "En az bir açık kabul gerekli; basit ilan yolu ayrı kullanılabilir",
+        "stamp": ""
+      }
+    }
+  ],
+  "results": [
+    {
+      "v": 1,
+      "type": "result",
+      "seq": 1,
+      "cid": "jmw9et9nd3rex10fe",
+      "status": "ok",
+      "code": null,
+      "rev": 13,
+      "ms": 422
+    },
+    {
+      "v": 1,
+      "type": "result",
+      "seq": 2,
+      "cid": "jmw9eteqkcrswxat7",
+      "status": "ok",
+      "code": null,
+      "rev": 18,
+      "extra": {
+        "ok": true,
+        "target": {
+          "id": 3,
+          "name": "Karroro Donanması"
+        },
+        "cost": 45,
+        "certain": [],
+        "conditional": [],
+        "risks": [],
+        "blockers": [],
+        "signature": "{\"ok\":true,\"target\":{\"id\":3,\"name\":\"Karroro Donanması\"},\"cost\":45,\"certain\":[],\"conditional\":[],\"risks\":[],\"blockers\":[]}"
+      },
+      "ms": 91
+    },
+    {
+      "v": 1,
+      "type": "result",
+      "seq": 3,
+      "cid": "jmw9etfmiy1a6242r",
+      "status": "ok",
+      "code": null,
+      "rev": 19,
+      "extra": {
+        "id": 1
+      },
+      "ms": 386
+    },
+    {
+      "v": 1,
+      "type": "result",
+      "seq": 4,
+      "cid": "jmw9etfxbn6de1rnq",
+      "status": "ok",
+      "code": null,
+      "rev": 20,
+      "extra": {
+        "index": [],
+        "preparations": [
+          {
+            "id": 1,
+            "owner": 1,
+            "target": 3,
+            "goal": "boyun",
+            "opened": 900,
+            "expires": 1080,
+            "state": "pending",
+            "commitments": [],
+            "quote": {
+              "ok": false,
+              "why": "En az bir açık kabul gerekli; basit ilan yolu ayrı kullanılabilir",
+              "stamp": ""
+            }
+          }
+        ]
+      },
+      "ms": 433
+    },
+    {
+      "v": 1,
+      "type": "result",
+      "seq": 5,
+      "cid": "jmw9etp19ufcqaojf",
+      "status": "ok",
+      "code": null,
+      "rev": 21,
+      "extra": {
+        "offer": 1
+      },
+      "ms": 90
+    }
+  ]
+}

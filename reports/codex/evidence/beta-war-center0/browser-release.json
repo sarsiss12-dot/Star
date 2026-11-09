@@ -1,0 +1,30 @@
+[
+  {
+    "name": "cold-r",
+    "command": "WAR_CENTER0_R=1 MPP0_R=1 BOARD2_R=1 MP8_SCEN=R MP8_MONTHS=6 node tests/browser-mp8.cjs",
+    "output": "reports/codex/evidence/beta-war-center0/cold-r",
+    "exit": 0,
+    "seconds": 140.95
+  },
+  {
+    "name": "recovery-n",
+    "command": "MP8_SCEN=N node tests/browser-mp8.cjs",
+    "output": "reports/codex/evidence/beta-war-center0/recovery-n",
+    "exit": 0,
+    "seconds": 132.05
+  },
+  {
+    "name": "mp74-release",
+    "command": " node tests/browser-mp74.cjs",
+    "output": "reports/codex/evidence/beta-war-center0/mp74-release",
+    "exit": 0,
+    "seconds": 51.34
+  },
+  {
+    "name": "mp75-release",
+    "command": " node tests/browser-mp75.cjs",
+    "output": "reports/codex/evidence/beta-war-center0/mp75-release",
+    "exit": 1,
+    "seconds": 30.56
+  }
+]

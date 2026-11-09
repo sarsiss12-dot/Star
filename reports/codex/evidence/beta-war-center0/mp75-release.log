@@ -1,0 +1,19 @@
+PASS A1 oda + başlangıç; MP düğmesi host ve misafirde sol araç sütununda (#tools), hız kutusu / kaynak çubuğu / araç düğmeleriyle örtüşmez; açılınca panel, kapanınca sütuna döner
+PASS A2 misafirde açık panel yerinde güncellenir: diplomasi sayfası açıkken oyun ilerler, ayna birçok kez kurulur, panel baştan yazılmaz (surfaceKept)
+FAIL A3 savaş / barış: misafir AI ile savaşta; AI barış teklifi misafirin kartına gelir; KABUL (dokunma) → host'ta savaş biter; AKTİF SAVAŞLAR üst sayaçla aynı sayıyı gösterir
+AssertionError [ERR_ASSERTION]: The input did not match the regular expression /AKTİF SAVAŞLAR/. Input:
+
+'⚔ SAVAŞ MERKEZİ✕Host bilgisi hazırlanıyor…'
+
+    at /workspace/Star/tests/browser-mp75.cjs:115:57
+    at async test (/workspace/Star/tests/browser-mp75.cjs:16:7)
+    at async /workspace/Star/tests/browser-mp75.cjs:111:3
+FAIL A4 dokunmatik miktar: filo bileşimi penceresinde SIFIR / −50 / −10 / +10 / +50 (dokunma), klavye açılmaz; anlaşma miktarında pencerenin kendi düğmeleri korunur (çift kontrol yok)
+Error: tap #diploPane [data-a="dealAdd"][data-x="give:res"] [tapfail-1] {"who":"Saf Akıl Ağı","modal":"⚔ SAVAŞ MERKEZİ✕Benim SavaşlarımBilinen SavaşlarGeçmiş SavaşlarYalnız yetkili olduğun savaş kayıtları. Bilinmeyen güç, kayıp ve tarih uydurulmaz.Saf Akıl Ağı ↔ ","sheet":"","diplo":true,"box":[22,119.9375,207,44],"top":"modal","vw":[915,412]}
+    at tap (/workspace/Star/tests/browser-mp75.cjs:24:207)
+    at async /workspace/Star/tests/browser-mp75.cjs:128:5
+    at async test (/workspace/Star/tests/browser-mp75.cjs:16:7)
+    at async /workspace/Star/tests/browser-mp75.cjs:126:3
+PASS A5 karar bekleyen olay kaydırılınca gizlenir (silinmez), ☰ durum listesinde kalır ve oradan aynı karar penceresi açılır
+PASS sayfa hataları yok
+GEÇEN: 4 KALAN: 2

@@ -1,0 +1,16 @@
+PASS B1 konsey motorun kendi yoluyla kurulur (fikstür: temas); AI insanlar adına oy / sponsor yazmaz; B gerçek "KONSEY OYLAMASI" kartından Konsey ekranını açar ve EVET (dokunma) → host kaydeder, oylama açık kalır
+PASS B2 C (915×412) HAYIR verir; oylama host oy verene kadar açık; host kendi Konsey ekranından EVET → motor kapatır; tekrar oy reddedilir
+PASS P0 katılımcı görüş, sağlık, özel kararlar, rota ve görsel hareket
+FAIL WC0 üç insan koşullu koalisyon, karşı teklif, ücret ve savaş merkezi
+page.waitForFunction: Timeout 30000ms exceeded.
+    at wait (/workspace/Star/tests/browser-mp73.cjs:17:40)
+    at module.exports (/workspace/Star/tests/helpers/beta-war-center0-browser.cjs:8:69)
+    at async /workspace/Star/tests/browser-mp73.cjs:249:146
+    at async test (/workspace/Star/tests/browser-mp73.cjs:13:7)
+    at async /workspace/Star/tests/browser-mp73.cjs:249:36
+PASS BD2 koloni paneli ve yetkili uzaktan inşa
+BD1 fixture ready
+BD1 two native proposals queued
+PASS BD1 federasyon FIFO, savaş yardımı, geri çekme ve ayrı aday rızası
+PASS sayfa hataları yok
+GEÇEN: 6 KALAN: 1

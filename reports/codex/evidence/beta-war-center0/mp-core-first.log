@@ -1,0 +1,5 @@
+PASS iki misafir teklif/karşı teklif, gerçek katılım ve tek ödeme, üçüncü oyuncudan gizli
+PASS barışta bekleyen katılım kapanır, yeni savaş eski teklifi canlandırmaz
+PASS host salt-okunur savaş DTOsu ve yetki/gizlilik, paket tekrarında çift etki yok
+PASS ret ve geri çekme savaşı/ödemeyi başlatmaz
+GEÇEN: 4 KALAN: 0

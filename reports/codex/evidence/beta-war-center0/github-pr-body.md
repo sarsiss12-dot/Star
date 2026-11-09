@@ -1,0 +1,7 @@
+Savaş ayrıntıları artık Benim/Bilinen/Geçmiş sekmelerinden mevcut warLedger kimlikleriyle açılır. Aynı mevcut teklif/karşı teklif motoruna eklenen warJoin maddesi, aktif cepheye katılımı veya savaş öncesi koşullu taahhüdü kaynak ve geçiş şartlarıyla bağlar. Koşullu kabul ödeme/savaş başlatmaz; sahibinin son onayında ilan, katılımlar ve bedeller tek geri alınabilir işlemde uygulanır.
+
+Host yetkisi, Save8v8/paket4/protokol1 korunur. Gizli cephe quote yoklaması, başarısız toplu işlemin ekonomi/özel haber yan etkileri ve modal/HUD hedef kararlılığı düzeltildi. AI yeni şartları değerlendirir; sıfırdan otonom savaş öncesi plan ve genel ücretli gönüllü taraması kapsamı tamamlanmadı.
+
+Doğrulama: yeni motor7/0, hazırlık5/0, MP9/0, AI6/0; gerçek p17 beşseed×üçay ham Save8/RNG6/0. Native üç insan akışı3/0; yeni odalı soğuk R0–R4 iki kez5/0, ikinci koşuda asıl alıcı tekrar kabulü rules:closed. SP UI10/0; N9/0, MP74 7/0, MP75 uyarlama6/0, Konsey panel3/0, koloniUI20/0. Birleşik PC6/1 ve ek tanı4/1 aralıklı etkileşim FAIL'leri açık ve kanıtları saklıdır. Fiziksel PC/Android/LAN/internet/Render NOT RUN.
+
+Ayrıntılı Türkçe rapor ve kanıtlar rapor commit'iyle aynı dala eklenecek: reports/codex/BETA-WAR-CENTER0-SONUC.md. 96h10p18 ZIP SHA256 6bb4d0c2714a98f816615217aeb8e418faaea06a41d5aaa81dc294b43e9c2d88, CRC32 9A066EF0; deterministik iki üretim eşit. Oyun ZIP'i MP relay/istemci kaynağının yerine geçmez. Kullanıcı kabulü, main merge veya deploy içermez.

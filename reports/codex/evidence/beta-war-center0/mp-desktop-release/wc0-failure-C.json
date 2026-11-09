@@ -1,0 +1,41 @@
+{
+  "modal": "",
+  "pane": "\n      🌐 GALAKTİK KONSEY\n        ✕\n      Galaktik Divanı\n        8 üyeBaşkan\n        Saf Akıl AğıBaşkanlık dönemin0 / 3Oy ağırlığın9.1Oy ağırlığı toprak, etki ve pasifist ideolojiyle artar.\n        3 dönem başkanlık = Konsey Hâkimiyeti zaferi.SON OYLAMA · Evrensel Ticaret Standardı · KABULGün 9EVET (38.8): Kavira Loncası · Zhavoa Federasyonu · Qeloon Borsası · Saf Akıl Ağı · Kızıl MuhafızHAYIR (20.5): Nivuar Dominyonu · Maryri Birliği · SenSonraki oylama2 ay sonraDİPLOMATİK AĞIRLIĞINOy ağırlığı\n          9.1🏛 KONSEY BAŞKANLIĞI\n          Saf Akıl Ağı\n            DÖNEM BAŞKANI\n          Seçime 15 yıl (180 ay) ·\n               dönem 1📜 TASARI SUNKonseye kendi tasarını sun (120 ◈).\n            Risk: reddedilirse prestij kaybedersin\n            ve 5 yıl boyunca konseydeki ağırlığın azalır.\n                💱 Galaktik Borsayı Kur\n                ⚖ Piyasa Regülasyonu\n                🔍 Casusluk Şeffaflığı\n                🕊 Silahsızlanma Antlaş\n                🤝 Serbest Ticaret Bölg\n                🔬 Bilim Ortaklığı\n                🚫 Savaş Yasağı\n                hedef seç\n                ⛔ Yaptırım\n                hedef seç\n                🚪 Konseyden İhraç\n                hedef seçYÜRÜRLÜKTEKİ KARARLAR\n          ⚖ Evrensel Ticaret StandardıYÜRÜRLÜKTE\n          Ortak ölçüler, ortak limanlar, tek muhasebe dili. Tüm üyelerin ticaret geliri %10 artar.ÜYELER\n          \n          Okyanus Ticaret Birliği (sen)\n          Megakorporasyon · Tüccar · oy ağırlığı 9.1\n          \n          \n          Kavira Loncası\n          Bilimsel · Liyakat · oy ağırlığı 2.6\n          \n          \n          Saf Akıl Ağı\n          Bilimsel · Liyakat · oy ağırlığı 2.4\n          BAŞKAN\n          \n          Nivuar Dominyonu\n          Bilimci · Kâşif · oy ağırlığı 1.8\n          \n          \n          Kızıl Muhafız\n          Militarist · Yayılmacı · oy ağırlığı 1.0\n          \n          \n          Maryri Birliği\n          Makine Zekâsı · Asimilasyoncu · oy ağırlığı 1.0\n          \n          \n          Zhavoa Federasyonu\n          Kovan Zihni · Yayılmacı · oy ağırlığı 1.0\n          \n          \n          Qeloon Borsası\n          Megakorporasyon · Tüccar · oy ağırlığı 1.0\n          KONSEYDEN AYRIL",
+  "prep": [],
+  "results": [
+    {
+      "v": 1,
+      "type": "result",
+      "seq": 1,
+      "cid": "jmw9gb7alzq4cwzd8",
+      "status": "ok",
+      "code": null,
+      "rev": 14,
+      "ms": 117
+    },
+    {
+      "v": 1,
+      "type": "result",
+      "seq": 2,
+      "cid": "jmw9gb9irix61bt2u",
+      "status": "rejected",
+      "code": "rules:no-vote",
+      "rev": 16,
+      "ms": 3
+    },
+    {
+      "v": 1,
+      "type": "result",
+      "seq": 3,
+      "cid": "jmw9gbqk4re5wbtvr",
+      "status": "ok",
+      "code": null,
+      "rev": 28,
+      "extra": {
+        "result": "Veri bankaları çözüldü: +180 araştırma.",
+        "id": 1
+      },
+      "ms": 98
+    }
+  ]
+}

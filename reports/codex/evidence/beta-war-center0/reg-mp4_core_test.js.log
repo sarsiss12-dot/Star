@@ -1,0 +1,17 @@
+✓ senaryo hazır: gerçek komutlar, bekleyen MP.3 karşı teklifi, insan oyu bekleyen federasyon gündemi ve vasallık karşı teklifi
+✓ kayıt: paket Save8 + oturum + teklif deposu; jeton YOK (yalnız tuzlu SHA-256 özeti); kayıt almak Save8 ve RNG'yi değiştirmez; yarım işlem sırasında kayıt reddedilir
+✓ yükleme yeni süreçte: aynı galaksi, devam lobisi; B ve C cihazlarındaki jetonla AYNI devlete (3 ve 5) döner, jeton yenilenir; host başlatana kadar oyun ilerlemez
+✓ kimlik güvenliği: uydurma jeton, başka kaydın jetonu, eski (yenilenmiş) jeton ve jetonsuz kişi devleti alamaz; ziyaretçi talep/komut yapamaz ve devamda çıkarılır; host yalnız bağlı olmayan koltuk için onaylı kurtarma yapabilir
+✓ DEVAM ET sonrası geç dönüş: C bağlanmadan oyun sürer (devleti AI'ya geçmez); jetonsuz yabancıya yalnız kayıt kimliği sorulur, oyuncu kaydı açılmaz; uydurma jeton reddedilir; C cihazındaki jetonla kendi devletine döner
+✓ MP.3 teklif kalıcılığı: karşı teklif turu, kimlik, süre ve geçmiş yüklenir; B karşı teklifi kabul eder → kaynaklar tam bir kez; eski tur ve ikinci kabul reddedilir; sıra/komut tekrarı geçmez
+✓ federasyon: yükleme sonrası B'nin bekleyen oyu AI tarafından verilmez; B kendi oyunu verir; korumalar YENİ host örneğine bağlı (aynı sayfada ikinci host dahil)
+✓ vasallık: bekleyen karşı teklif yüklenir; B kabul eder → gerçek sözleşme; sonraki ay vergi motorla akar; eski tur reddedilir
+   kesintisiz vs yüklenmiş (önbellek dışı farklar): yok
+✓ Save8 ve RNG eşitliği: kayıttan devam = kapanmadan devam (aynı komutlar, 60 gün). Motorun yükleme normalleştirmesi uygulanan kontrolle Save8 bayt bayt aynı; hiç yüklenmemiş dünyayla RNG aynı ve oyun durumu önbellek alanları dışında aynı
+✓ bozuk/sahte kayıt güvenle reddedilir: JSON, alan, biçim, sürüm, build, boyut, Save8 bozulması, bütünlük, Save sürümü, oyuncu eşlemesi, host, jeton özeti, teklif, tur, miktar; yükleme hatası önceki dünyayı korur
+✓ eski MP.0 meta (mpMeta:1) güvenle yükseltilir: FNV eşleşmesi zorunlu, açık jetonlar tuzlu özete çevrilir, teklif deposu boş; uyumsuz eski kayıt açık gerekçeyle reddedilir
+✓ aynı kayıt iki bağımsız oda dalı olarak açılabilir; global saveId kilidi vaat edilmez
+✓ SHA-256 standart test vektörleri (FIPS 180-4) ve Node crypto ile aynı
+   45 sistem: 58 KB, kayıt 7 ms, doğrulama 10 ms, yükleme 136 ms · 60 sistem: 76 KB, kayıt 10 ms, doğrulama 13 ms, yükleme 131 ms · 100 sistem: 117 KB, kayıt 18 ms, doğrulama 4 ms, yükleme 141 ms
+✓ performans: 45 / 60 / 100 sistemde kayıt alma, doğrulama ve yükleme süresi, paket boyutu
+GEÇEN: 14 KALAN: 0

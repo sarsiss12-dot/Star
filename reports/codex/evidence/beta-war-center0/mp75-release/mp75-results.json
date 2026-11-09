@@ -1,0 +1,72 @@
+{
+  "results": [
+    {
+      "name": "A1 oda + başlangıç; MP düğmesi host ve misafirde sol araç sütununda (#tools), hız kutusu / kaynak çubuğu / araç düğmeleriyle örtüşmez; açılınca panel, kapanınca sütuna döner",
+      "status": "PASS",
+      "ms": 13071
+    },
+    {
+      "name": "A2 misafirde açık panel yerinde güncellenir: diplomasi sayfası açıkken oyun ilerler, ayna birçok kez kurulur, panel baştan yazılmaz (surfaceKept)",
+      "status": "PASS",
+      "ms": 3641
+    },
+    {
+      "name": "A3 savaş / barış: misafir AI ile savaşta; AI barış teklifi misafirin kartına gelir; KABUL (dokunma) → host'ta savaş biter; AKTİF SAVAŞLAR üst sayaçla aynı sayıyı gösterir",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: The input did not match the regular expression /AKTİF SAVAŞLAR/. Input:\n\n'⚔ SAVAŞ MERKEZİ✕Host bilgisi hazırlanıyor…'\n\n    at /workspace/Star/tests/browser-mp75.cjs:115:57\n    at async test (/workspace/Star/tests/browser-mp75.cjs:16:7)\n    at async /workspace/Star/tests/browser-mp75.cjs:111:3"
+    },
+    {
+      "name": "A4 dokunmatik miktar: filo bileşimi penceresinde SIFIR / −50 / −10 / +10 / +50 (dokunma), klavye açılmaz; anlaşma miktarında pencerenin kendi düğmeleri korunur (çift kontrol yok)",
+      "status": "FAIL",
+      "error": "Error: tap #diploPane [data-a=\"dealAdd\"][data-x=\"give:res\"] [tapfail-1] {\"who\":\"Saf Akıl Ağı\",\"modal\":\"⚔ SAVAŞ MERKEZİ✕Benim SavaşlarımBilinen SavaşlarGeçmiş SavaşlarYalnız yetkili olduğun savaş kayıtları. Bilinmeyen güç, kayıp ve tarih uydurulmaz.Saf Akıl Ağı ↔ \",\"sheet\":\"\",\"diplo\":true,\"box\":[22,119.9375,207,44],\"top\":\"modal\",\"vw\":[915,412]}\n    at tap (/workspace/Star/tests/browser-mp75.cjs:24:207)\n    at async /workspace/Star/tests/browser-mp75.cjs:128:5\n    at async test (/workspace/Star/tests/browser-mp75.cjs:16:7)\n    at async /workspace/Star/tests/browser-mp75.cjs:126:3"
+    },
+    {
+      "name": "A5 karar bekleyen olay kaydırılınca gizlenir (silinmez), ☰ durum listesinde kalır ve oradan aynı karar penceresi açılır",
+      "status": "PASS",
+      "ms": 1997
+    },
+    {
+      "name": "sayfa hataları yok",
+      "status": "PASS",
+      "ms": 0
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "joinErrors_Bora": [],
+    "dock_host": {
+      "m": [
+        6,
+        224,
+        32,
+        42
+      ],
+      "overlap": [],
+      "inView": true
+    },
+    "dock_B": {
+      "m": [
+        6,
+        269,
+        32,
+        42
+      ],
+      "overlap": [],
+      "inView": true
+    },
+    "pane": {
+      "builds": 6,
+      "rewrites": 0,
+      "kept": 32,
+      "minGap": 600,
+      "open": true
+    },
+    "activeWars": {
+      "n": 1,
+      "top": 1,
+      "html": "⚔ SAVAŞ MERKEZİ✕Host bilgisi hazırlanıyor…"
+    }
+  },
+  "pass": 4,
+  "fail": 2
+}
