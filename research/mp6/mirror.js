@@ -38,7 +38,7 @@ function build(meId,o={}){
     if(surv||mine)x.p=s.planets.map(p=>{
       const q={i:p.i,t:p.t,dep:p.dep,sz:p.sz,seed:p.seed,name:p.name,owner:-1};
       if(v||mine){q.owner=piN(p.owner);if(p.col){
-        if(p.owner===meId){q.col=J(p.col);if(q.col.crisisPolicy)q.col.crisisPolicy.owner=piN(q.col.crisisPolicy.owner);if(q.col.internalWarning)q.col.internalWarning.owner=piN(q.col.internalWarning.owner);delete q.col.inciteBy;if(q.col.unrest)delete q.col.unrest.by;if(Number.isInteger(q.col.secessionNotice))q.col.secessionNotice=piN(q.col.secessionNotice);if(q.col.conflictNotice&&Number.isInteger(q.col.conflictNotice.owner))q.col.conflictNotice.owner=piN(q.col.conflictNotice.owner);}
+        if(p.owner===meId){for(const k of ['martial_law','recent_conquest'])if(Number.isFinite(p[k]))q[k]=p[k];q.col=J(p.col);if(q.col.crisisPolicy)q.col.crisisPolicy.owner=piN(q.col.crisisPolicy.owner);if(q.col.internalWarning)q.col.internalWarning.owner=piN(q.col.internalWarning.owner);delete q.col.inciteBy;if(q.col.unrest)delete q.col.unrest.by;if(Number.isInteger(q.col.secessionNotice))q.col.secessionNotice=piN(q.col.secessionNotice);if(q.col.conflictNotice&&Number.isInteger(q.col.conflictNotice.owner))q.col.conflictNotice.owner=piN(q.col.conflictNotice.owner);}
         else q.col={...(me.war[p.owner]&&G.fleets.some(f=>f.e===meId&&f.sys===s.id&&!f.mv)?{siege:p.col.siege||0}:{}),pop:Math.round(p.col.pop||0),stab:0,grow:0,b:{},cap:p.col.cap||0,name:p.col.name||p.name,f:null,fcd:0,shield:p.col.shield||0,
           garrisonBase:p.col.garrisonBase||0,garrison:p.col.garrison||0,auto:false,hist:{peace:0,own:0,flips:0,sieges:0,crises:0},q:[]};}}
       return q;});
