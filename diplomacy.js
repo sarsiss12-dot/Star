@@ -9390,6 +9390,7 @@ function fedFundTick(){
           if (!en || fl.ships.length < en.ships.length) en = fl;
         }
         if (en){
+          fleetLost(en,'disband');
           en.ships.length = 0;
           if (f.leader === 0) say('⚠ Federal fon tükendi — bir donanma dağıtıldı', 'war');
         }

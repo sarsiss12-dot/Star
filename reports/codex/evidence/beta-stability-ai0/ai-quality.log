@@ -1,0 +1,4 @@
+PASS measured off all-AI 24 months; final colonies 8 / policies 0
+PASS measured p21 all-AI 24 months; final colonies 8 / policies 2
+PASS measured candidate all-AI 24 months; final colonies 8 / policies 2
+PASS positive / insufficient budget negative; original ruins event unchanged

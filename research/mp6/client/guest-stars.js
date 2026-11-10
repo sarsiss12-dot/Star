@@ -101,7 +101,7 @@ const VIEW=new Set(['warCenter','warCenterTab','warCenterDetail','warCenterSuppo
   /* MP.6.4 — Galaktik Borsa (seçim görünüm, TAKAS ET → 'market') */
   'mktTrade',
   /* MP.6.4 — kalan filo / koloni işlemleri (motor işlevi MP komutuna iner) */
-  'reinf','shipmentMenu','shipmentApply','shipCancel','shipCancelAll','shipCancelConfirm','rallySysSet','rallySysClear','rallySysCancel','terraform','habitat','ldrAssign','ldrHire',
+  'fleetRecovery','fleetRecoveryDo','reinf','shipmentMenu','shipmentApply','shipCancel','shipCancelAll','shipCancelConfirm','rallySysSet','rallySysClear','rallySysCancel','terraform','habitat','ldrAssign','ldrHire',
   /* MP.7.1 — Ekonomi Merkezi görünüm eylemleri (runtime economy-ui.js UI.act sarmalayıcısında; kaynak seçimi, süzgeç, kendi sistemine / filosuna git) */
   'ecoPick','ecoFilter','ecoSystem','ecoFleet',
   /* MP.7.1 — salt gezinme: karşı teklif kartında "Düzenlemeye dön", eski diplomasi bağlantıları (ilişki / istihbarat sayfası) */
@@ -531,16 +531,17 @@ function onMessage(m){
   /* MP.8: tam ayna = yeni bağlantı (ya da yeniden eşitleme). Önceki bağlantıda gönderilen kararların yanıtı artık gelmez
      (kopmada kaybolan komut host'a hiç ulaşmamış olabilir); o kuşağın karar kilitleri geçersiz. Gerçek sonuç aynada: uygulandıysa
      kayıt kapalıdır, uygulanmadıysa oyuncu yeniden karar verebilir. Tam bir kez kuralı host'ta (kapalı teklife ikinci yanıt 'closed'). */
-  if(m.type==='mirror'){motion.clear();S.mirror=m.full;S.rev=m.rev;S.mirrorAt=Date.now();S.gen=(S.gen|0)+1;S.stats.mirrors++;schedule();return true;}
+  if(m.type==='mirror'){motion.clear();S.appliedRev=0;S.appliedWorldRev=0;S.appliedGeneration=-1;S.mirrorWorldRev=Number.isSafeInteger(m.worldRev)?m.worldRev:0;S.mirror=m.full;S.rev=m.rev;S.mirrorAt=Date.now();S.gen=(S.gen|0)+1;S.stats.mirrors++;schedule();return true;}
   if(m.type==='mirrorDelta'){if(!S.mirror||m.base!==S.rev){S.stats.resyncs++;S.J&&S.J.sendRaw({v:1,type:'resync'});return true;}
-    StarsMirror.apply(S.mirror,m.ops);S.rev=m.rev;S.mirrorAt=Date.now();S.stats.deltas++;schedule();return true;}
+    StarsMirror.apply(S.mirror,m.ops);S.mirrorWorldRev=Number.isSafeInteger(m.worldRev)?m.worldRev:0;S.rev=m.rev;S.mirrorAt=Date.now();S.stats.deltas++;schedule();return true;}
   if(m.type==='speed'){if(Number.isFinite(m.n)){if(m.n<=(S.speedN||0)){S.stats.staleSpeed=(S.stats.staleSpeed||0)+1;return true;}S.speedN=m.n;}   // MP.6.3: eski hız iletisi yenisini ezmez
     S.hostSpd=m.spd|0;S.hostWant=Number.isInteger(m.want)?m.want:S.hostSpd;S.stats.speedMsgs++;paintSpeed();if(window.MP61)MP61.speed(m);return true;}
   return false;
 }
 /* ayna bekletme: yalnız gerçek onay penceresi (#modal) açıkken. MP.6.2: diplomasi sayfası açıkken de ayna uygulanır; sayfa,
    hedef ve anlaşma taslağı yeni dünyaya taşınır (ensureDiploWorld G.p kimliği değişince bunları sıfırlıyordu). */
-function holdBuild(){const m=doc.getElementById('modal');if(doc.getElementById('warCenterRoot')&&typeof WarCenterUI!=='undefined'&&!WarCenterUI.confirmPlan)return false;return !!(m&&!m.classList.contains('hidden'));}
+function fleetRecoveryApplied(a){if(S.appliedGeneration===S.gen&&S.appliedWorldRev>=a.rev)return true;const x=a.extra;if(!x||!Number.isSafeInteger(x.group)||!(x.afterStamp===null||typeof x.afterStamp==='string'))return false;const g=fleetRecoveryGroups(G.p).find(g=>g.id===x.group);return (g?fleetRecoveryStamp(g):null)===x.afterStamp;}
+function holdBuild(){const m=doc.getElementById('modal');if(m?.querySelector('#fleetRecoveryResult'))return false;if(doc.getElementById('warCenterRoot')&&typeof WarCenterUI!=='undefined'&&!WarCenterUI.confirmPlan)return false;return !!(m&&!m.classList.contains('hidden'));}
 function schedule(){if(S.timer)return;const wait=Math.max(0,S.minGap-(Date.now()-S.lastBuild));S.timer=setTimeout(rebuild,wait);}
 function rebuild(){
   if(!loadNoticePrefs()){S.timer=setTimeout(rebuild,50);return;}
@@ -579,7 +580,7 @@ function rebuild(){
      yüzeyler yeni dünyaya taşınır; motorun kendi yerinde güncelleme (morph) yolu kullanılır. */
   if(S.started&&oldEmps)for(const el of doc.querySelectorAll('#diploPane,#panel,#modal,#inbox')){if(el._surfaceWorld===oldEmps){el._surfaceWorld=G.emps;S.stats.surfaceKept=(S.stats.surfaceKept||0)+1;}}   // MP.6.4: federasyon sekmesi / açık bölümler / kaydırma canlı senkronda korunur (openFed dünya kimliği değişince GENEL'e döner)
   if(S.started){View.route=keep.route;View.routed=keep.routed;UI._openNote=keep.note;UI.pendingOffer=keep.offer;
-    if(keep.sel!==null&&keep.sel!==undefined)View.sel=G.fleets.find(x=>x.id===keep.sel)||null;}
+    if(keep.sel!==null&&keep.sel!==undefined){let id=keep.sel;const seen=new Set();while(!seen.has(id)){seen.add(id);const r=(G.fleetJournal||[]).findLast(r=>r.owner===0&&r.fleet===id&&['merge','split'].includes(r.reason));if(!r)break;id=r.replacement;}View.sel=G.fleets.find(x=>x.id===keep.sel)||G.fleets.find(x=>x.id===id&&x.e===0)||null;}}
   G.inbox.sort((a,b)=>(cardOrder.get(a.key)??1000000)-(cardOrder.get(b.key)??1000000));
   const ms=performance.now()-t0;S.stats.builds++;S.stats.buildMs.push(Math.round(ms*10)/10);if(S.stats.buildMs.length>60)S.stats.buildMs.shift();
   /* MP.7.5: kurulum aralığı ölçülen kurulum süresine uyarlanır (yavaş telefonda deserialize süresinin ~4 katı; 0,6–3 s). Tam ayna her
@@ -588,6 +589,8 @@ function rebuild(){
   if(!S.started)start();else{UI.keepScroll=true;try{UI.refresh();}catch{}}
   warAlerts(warCards,initialWorld);
   G.inbox.sort((a,b)=>(cardOrder.get(a.key)??1000000)-(cardOrder.get(b.key)??1000000));
+  S.appliedRev=S.rev;S.appliedWorldRev=S.mirrorWorldRev;S.appliedGeneration=S.gen;
+  const recovery=S.fleetRecoveryAcks||[];S.fleetRecoveryAcks=[];for(const a of recovery){if(fleetRecoveryApplied(a))a.done({ok:true});else if(a.gen!==S.gen)a.done({ok:false,why:'Bağlantı yenilendi; kurtarma durumunu yeniden aç'});else S.fleetRecoveryAcks.push(a);}
   UI.drawInbox();
   paintSpeed();
 }
@@ -781,7 +784,7 @@ function bootTick(){
 function statusNow(){const t=doc.getElementById('jConn');return t?t.outerHTML:'';}
 setInterval(()=>{try{bootTick();if(S.J&&!S.started&&S.J.screen==='game')update(statusNow());}catch{}},1000);
 doc.addEventListener('click',e=>{const el=e.target.closest('[data-g7="retry"]');if(!el)return;const b=S.boot;b.failed=false;b.tries=0;b.fails=0;b.err='';b.next=0;S.mirror=null;bootLog('retry');bootAsk();b.next=Date.now()+8000;update(statusNow());});
-window.MP6Stars={warCommand(c,done){const cmd={...c};if(cmd.to!==undefined)cmd.to=real(cmd.to);for(const k of ['give','want'])if(cmd[k])cmd[k]=cmd[k].map(i=>i.t==='warJoin'?{...i,target:real(i.target)}:i);if(cmd.target!==undefined)cmd.target=real(cmd.target);if(cmd.member!==undefined&&cmd.member!==null)cmd.member=real(cmd.member);const cid=send(cmd);if(cid)waits[cid]=res=>done(res.status==='ok'?{ok:true,extra:res.extra||{}}:{ok:false,why:why(res)});return cid;},warCenterRead(front,done){const cid=send({kind:'warCenterRead',front});if(cid)waits[cid]=res=>{if(res.status!=='ok'){done({error:why(res)});return;}const m=id=>Number.isInteger(id)?local(id):id,part=x=>({...x,id:m(x.id)}),r=res.extra.report;done(r?{report:{...r,sides:r.sides.map(m),sponsor:m(r.sponsor),actor:m(r.actor),parties:r.parties.map(part),participants:r.participants.map(part),goals:r.goals.map(x=>({...x,by:m(x.by)})),fronts:r.fronts.map(x=>({...x,sides:x.sides.map(m)})),progress:r.progress.map(x=>({...x,from:m(x.from),to:m(x.to)}))}}:{preparations:(res.extra.preparations||[]).map(p=>({...p,owner:m(p.owner),target:m(p.target),commitments:p.commitments.map(c=>({...c,member:m(c.member),terms:{...c.terms,from:m(c.terms.from),to:m(c.terms.to),give:c.terms.give.map(i=>i.t==='warJoin'?{...i,target:m(i.target)}:i),want:c.terms.want.map(i=>i.t==='warJoin'?{...i,target:m(i.target)}:i)}}))})),index:(res.extra.index||[]).map(x=>({...x,sides:x.sides.map(m),sponsor:m(x.sponsor)}))});};return cid;},remoteQuote(fleet,sys,key,done){const cid=send({kind:'remoteQuote',fleet,sys,key});if(cid)waits[cid]=res=>done(res.status==='ok'?res.extra:{ok:false,why:why(res)});},SET,S,restoreObservation,onMessage,update,screen,attach(J){S.J=J;},onAssign(){S.uiSent=false;bootLog('assign');},VIEW,ACT,boot:{stage:bootStage,tick:bootTick},dip:{open:dipOpen,seg:seg6,get ui(){return dipUI;},get pol(){return polUI;}}};
+window.MP6Stars={fleetRecovery(c,done){const cid=send({kind:'fleetRecovery',...c});if(cid)waits[cid]=res=>{if(res.status!=='ok'){done({ok:false,why:why(res)});return;}const applied={rev:res.rev,gen:S.gen,extra:res.extra};if(fleetRecoveryApplied(applied))done({ok:true});else{S.fleetRecoveryAcks=S.fleetRecoveryAcks||[];if(S.fleetRecoveryAcks.length>=16)S.fleetRecoveryAcks.shift().done({ok:false,why:'Durumu yeniden aç'});S.fleetRecoveryAcks.push({...applied,done});schedule();}};return cid;},warCommand(c,done){const cmd={...c};if(cmd.to!==undefined)cmd.to=real(cmd.to);for(const k of ['give','want'])if(cmd[k])cmd[k]=cmd[k].map(i=>i.t==='warJoin'?{...i,target:real(i.target)}:i);if(cmd.target!==undefined)cmd.target=real(cmd.target);if(cmd.member!==undefined&&cmd.member!==null)cmd.member=real(cmd.member);const cid=send(cmd);if(cid)waits[cid]=res=>done(res.status==='ok'?{ok:true,extra:res.extra||{}}:{ok:false,why:why(res)});return cid;},warCenterRead(front,done){const cid=send({kind:'warCenterRead',front});if(cid)waits[cid]=res=>{if(res.status!=='ok'){done({error:why(res)});return;}const m=id=>Number.isInteger(id)?local(id):id,part=x=>({...x,id:m(x.id)}),r=res.extra.report;done(r?{report:{...r,sides:r.sides.map(m),sponsor:m(r.sponsor),actor:m(r.actor),parties:r.parties.map(part),participants:r.participants.map(part),goals:r.goals.map(x=>({...x,by:m(x.by)})),fronts:r.fronts.map(x=>({...x,sides:x.sides.map(m)})),progress:r.progress.map(x=>({...x,from:m(x.from),to:m(x.to)}))}}:{preparations:(res.extra.preparations||[]).map(p=>({...p,owner:m(p.owner),target:m(p.target),commitments:p.commitments.map(c=>({...c,member:m(c.member),terms:{...c.terms,from:m(c.terms.from),to:m(c.terms.to),give:c.terms.give.map(i=>i.t==='warJoin'?{...i,target:m(i.target)}:i),want:c.terms.want.map(i=>i.t==='warJoin'?{...i,target:m(i.target)}:i)}}))})),index:(res.extra.index||[]).map(x=>({...x,sides:x.sides.map(m),sponsor:m(x.sponsor)}))});};return cid;},remoteQuote(fleet,sys,key,done){const cid=send({kind:'remoteQuote',fleet,sys,key});if(cid)waits[cid]=res=>done(res.status==='ok'?res.extra:{ok:false,why:why(res)});},SET,S,restoreObservation,onMessage,update,screen,attach(J){S.J=J;},onAssign(){S.uiSent=false;bootLog('assign');},VIEW,ACT,boot:{stage:bootStage,tick:bootTick},dip:{open:dipOpen,seg:seg6,get ui(){return dipUI;},get pol(){return polUI;}}};
 /* telefon geri tuşu: önce açık MP diplomasi onayı/paneli kapanır (join.js popstate bunu sorar) */
 const prevBack=window.__mpBack;window.__mpBack=()=>{if(prevBack&&prevBack())return true;if(dipEl){dipOpen(false);return true;}return false;};
 })();

@@ -1767,6 +1767,7 @@ function aiTurn(e){
     }
   }
 
+  aiRecoverShipments(e);
   /* --- 4b. aynı sistemdeki boştaki savaş filolarını birleştir --- */
   const byS = {};
   for (const f of G.fleets){
@@ -1779,7 +1780,7 @@ function aiTurn(e){
     if (arr.length < 2) continue;
     const main = arr.reduce((a,b)=> a.ships.length >= b.ships.length ? a : b);
     for (const f of arr) if (f !== main && main.ships.length < 26){
-      main.ships.push(...f.ships); f.ships = [];
+      mergeFleetInto(e,main,[f]);
     }
     G.fleets = G.fleets.filter(f => f.ships.length);
   }
@@ -3286,6 +3287,7 @@ function aiDisbandTick(){
           /* Savaştaysa son savunma gücünü tamamen eritme */
           if (savasta && fleetPower(f) < 400) break;
           const sz = SHIPS[cls].sz || 1;
+          if(f.ships.length===1)fleetLost(f,'disband');
           f.ships.splice(i, 1);
           kesilen += SHIPS[cls].up * (1 + (e.mods ? e.mods.upMul : 0));
           kesilenSz += sz;

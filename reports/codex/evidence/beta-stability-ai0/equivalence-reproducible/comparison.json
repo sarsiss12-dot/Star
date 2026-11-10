@@ -1,0 +1,108 @@
+[
+  {
+    "seed": 11,
+    "status": "PASS",
+    "samples": [
+      {
+        "month": 0,
+        "rawSaveEqual": true,
+        "strategySaveSha256": "e50886641038f7e819231ddd2d079f6728602f13c247b3c4f62aee28bd922588",
+        "journalEntries": 0,
+        "rng": -1449254009
+      },
+      {
+        "month": 1,
+        "rawSaveEqual": false,
+        "strategySaveSha256": "ba2720cb23cf0979d0c555ba53f5f391712d150959ac3edc9960d21f543986e0",
+        "journalEntries": 1,
+        "rng": 822323883
+      },
+      {
+        "month": 2,
+        "rawSaveEqual": false,
+        "strategySaveSha256": "999cc5bf2d62b91cf8e9dba83238ea90f591d6d064529511c2d4cb076b9d1b17",
+        "journalEntries": 4,
+        "rng": 1262335962
+      },
+      {
+        "month": 3,
+        "rawSaveEqual": false,
+        "strategySaveSha256": "b69161c1c3882b4428a9e3fefee073c75e3f59f0c8ed2707dc12c8982da1a665",
+        "journalEntries": 7,
+        "rng": -824994639
+      }
+    ]
+  },
+  {
+    "seed": 42,
+    "status": "PASS",
+    "samples": [
+      {
+        "month": 0,
+        "rawSaveEqual": true,
+        "strategySaveSha256": "750bc1a430d0887f1426005a1d2a8a727630bb78c010dc895bd52a159b48ecd8",
+        "journalEntries": 0,
+        "rng": 950206310
+      },
+      {
+        "month": 1,
+        "rawSaveEqual": false,
+        "strategySaveSha256": "4cb838a48911f85e5eb6c674d58d8f482353468041a25c6a41383e2a21c82537",
+        "journalEntries": 4,
+        "rng": -441347424
+      },
+      {
+        "month": 2,
+        "rawSaveEqual": false,
+        "strategySaveSha256": "289b83668860b8e278db3845e6f6a52a426858075a3773f6ad0939123f525682",
+        "journalEntries": 6,
+        "rng": -569229818
+      },
+      {
+        "month": 3,
+        "rawSaveEqual": false,
+        "strategySaveSha256": "a718911061ebb5ddcbfa164c41292f8038c1f742d8a92f0c2cc42bbed9de5768",
+        "journalEntries": 6,
+        "rng": -1960783552
+      }
+    ]
+  },
+  {
+    "seed": 99,
+    "status": "PASS",
+    "samples": [
+      {
+        "month": 0,
+        "rawSaveEqual": true,
+        "strategySaveSha256": "c141533ecf2071e047e8f40ec585f6777ee4e75780cedc271dba471b54f3debb",
+        "journalEntries": 0,
+        "rng": 950206365
+      },
+      {
+        "month": 1,
+        "rawSaveEqual": true,
+        "strategySaveSha256": "00e87b9324bba31cba63b95aa23a5f6c7b0807e8bf40b9cae28363c08f85b528",
+        "journalEntries": 0,
+        "rng": 1958112917
+      },
+      {
+        "month": 2,
+        "rawSaveEqual": false,
+        "strategySaveSha256": "33501efbe316edd184d6760ec53c657ba49ad249de3d9d88100e0e45385a9565",
+        "journalEntries": 1,
+        "rng": -1328947827
+      },
+      {
+        "month": 3,
+        "rawSaveEqual": false,
+        "strategySaveSha256": "fd3992af27436e9564ebc5211bd6490c155c25e05d4263fe9125a3e439759265",
+        "journalEntries": 8,
+        "rng": 1382642144
+      }
+    ]
+  },
+  {
+    "name": "p21 package4 / protocol1 integrity",
+    "status": "PASS"
+  }
+]

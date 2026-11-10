@@ -1,0 +1,16 @@
+'use strict';
+const fs=require('fs'),assert=require('assert/strict'),{runtime}=require('./helpers/runtime');
+const out=process.env.STARS_OUTPUT||'/tmp/stability-perf';fs.mkdirSync(out,{recursive:true});
+const base=runtime({root:require('./helpers/beta-stability0-control.cjs').root()});base.run(`setupGame({...CFG,size:'s300',aiCount:16,seed:99});G.autoSave=false;for(const f of G.fleets){f.path=[];f.mv=null;f.combat=0;f.surv=0;f.auto=false;}while(G.fleets.length<253){const e=G.emps[G.fleets.length%17];newFleet(e,e.home,[{c:'kor'}]);}`);
+const save=base.run('serialize()'),candidate=runtime();candidate.sb.save=save;assert(candidate.run('deserialize(save)'));
+const samples=[];for(let round=0;round<7;round++){
+ const row={round};for(const [name,h]of (round%2?[['candidate',candidate],['p21',base]]:[['p21',base],['candidate',candidate]])){
+  const t=process.hrtime.bigint();h.run('for(let i=0;i<100;i++)stepFleets(.001);');row[name+'Ms']=Number(process.hrtime.bigint()-t)/1e6;
+ }samples.push(row);
+}
+const med=a=>a.slice().sort((a,b)=>a-b)[Math.floor(a.length/2)],controlMs=med(samples.slice(1).map(r=>r.p21Ms)),candidateMs=med(samples.slice(1).map(r=>r.candidateMs));
+const before=candidate.run('serialize()'),rng=candidate.run('RND_STATE'),t=process.hrtime.bigint();candidate.run('for(let n=0;n<200;n++)for(const e of G.emps)aiRecoverShipments(e);');const aiIdleMs=Number(process.hrtime.bigint()-t)/1e6;assert.equal(candidate.run('serialize()'),before);assert.equal(candidate.run('RND_STATE'),rng);
+candidate.run(`var own=G.emps[0],yard=G.sys[own.home];yard.queue=[];for(let i=0;i<112;i++){const f=G.fleets[i];f.e=i<27?0:1;f.shipment={fleet:2147000000,state:'lost',attempts:0,next:0};}for(let i=0;i<117;i++)yard.queue.push({cls:'kor',e:0,left:31,tot:60,paid:{ala:100},delivery:{fleet:2147000000,hold:true}});`);
+const queryBefore=candidate.run('serialize()'),queryRng=candidate.run('RND_STATE'),qt=process.hrtime.bigint();candidate.run('for(let i=0;i<200;i++)fleetRecoveryGroups(G.emps[0]);');const queryMs=Number(process.hrtime.bigint()-qt)/1e6;assert.equal(candidate.run('serialize()'),queryBefore);assert.equal(candidate.run('RND_STATE'),queryRng);assert(candidate.run('fleetRecoveryGroups(G.emps[0])[0].ships.length===27&&fleetRecoveryGroups(G.emps[0])[0].jobs.length===117'));
+const result={systems:base.run('G.sys.length'),empires:base.run('G.emps.length'),normalEmpires:base.run('G.emps.filter(e=>!e.wild&&!e.crisisSide).length'),wildEmpires:base.run('G.emps.filter(e=>e.wild).length'),fleets:base.run('G.fleets.length'),sameInitialSave:true,samples,warmupExcluded:true,median100Steps:{p21Ms:controlMs,candidateMs,ratio:candidateMs/controlMs},idleRecoveryChecks:200*candidate.run('G.emps.length'),idleRecoveryMs:aiIdleMs,controlledOrphanQuery:{queries:200,ms:queryMs,shipments:112,ownShipments:27,paidJobs:117,pure:true},noIdleStateRngChange:true,scope:'Local CPU; 253 controlled fleets / 300 systems / 17 normal states + pirates; idle movement and recovery query only; not a user save or campaign'};
+fs.writeFileSync(out+'/performance.json',JSON.stringify(result,null,2));assert.equal(result.systems,300);assert.equal(result.normalEmpires,17);assert.equal(result.wildEmpires,1);assert.equal(result.empires,18);console.log(JSON.stringify(result));

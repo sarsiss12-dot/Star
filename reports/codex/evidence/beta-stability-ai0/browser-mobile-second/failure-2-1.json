@@ -1,0 +1,144 @@
+{
+  "url": "/mp/play",
+  "vote": null,
+  "inbox": [
+    {
+      "kind": "anomaly",
+      "data": {
+        "a": {
+          "id": "a14",
+          "k": "kalinti",
+          "n": "Mühürlü Lahit",
+          "t": "Asteroidin göbeğine oyulmuş, dışarıdan mühürlenmiş bir oda. Mühürler İÇERİDEN değil, dışarıdan vurulmuş.",
+          "ch": [
+            {
+              "t": "Mührü kırma, uzaktan tara",
+              "d": "+140 araştırma · güvenli"
+            },
+            {
+              "t": "Mührü kır",
+              "d": "+700 mineral · TEHLİKELİ"
+            }
+          ]
+        },
+        "sys": {
+          "id": 22,
+          "x": 2842.8887064987393,
+          "y": 2844.1307960380873,
+          "name": "Moreizil",
+          "star": {
+            "n": "K Turuncu",
+            "c": "#ffab5c",
+            "r": 5,
+            "w": 22
+          },
+          "planets": [
+            {
+              "i": 0,
+              "t": "cor",
+              "dep": "nadir",
+              "sz": 19,
+              "seed": 2885,
+              "name": "Moreizil I",
+              "owner": -1
+            },
+            {
+              "i": 1,
+              "t": "oky",
+              "dep": "kalinti",
+              "sz": 19,
+              "seed": 2902,
+              "name": "Moreizil II",
+              "owner": -1
+            },
+            {
+              "i": 2,
+              "t": "vol",
+              "dep": "jeotermal",
+              "sz": 18,
+              "seed": 2919,
+              "name": "Moreizil III",
+              "owner": -1
+            },
+            {
+              "i": 3,
+              "t": "cor",
+              "dep": null,
+              "sz": 12,
+              "seed": 2936,
+              "name": "Moreizil IV",
+              "owner": -1
+            },
+            {
+              "i": 4,
+              "t": "cor",
+              "dep": "jeotermal",
+              "sz": 19,
+              "seed": 2953,
+              "name": "Moreizil V",
+              "owner": -1
+            }
+          ],
+          "lanes": [
+            1,
+            11
+          ],
+          "owner": -1,
+          "surv": [
+            0
+          ],
+          "seen": [
+            0
+          ],
+          "queue": [],
+          "anom": false,
+          "anomK": "kalinti",
+          "def": 0,
+          "pulsar": false,
+          "nebulaS": false,
+          "_reach": 0
+        }
+      },
+      "decisionId": 1,
+      "uid": 1,
+      "key": "personal:1",
+      "born": 61.745799999999825,
+      "pause": false,
+      "ico": "🔬",
+      "cls": "sci",
+      "title": "Mühürlü Lahit",
+      "sub": "Asteroidin göbeğine oyulmuş, dışarıdan mühürlenmiş bir oda. Mühürler İÇERİDEN değil, dışarıdan vurul",
+      "hidden": false
+    },
+    {
+      "kind": "event",
+      "data": {
+        "id": "e3",
+        "n": "Alaşım Grevi",
+        "t": "Dökümhane işçileri üretimi durdurdu. Talepleri pahalı ama makul.",
+        "ch": [
+          {
+            "t": "Talepleri karşıla",
+            "d": "−120 enerji"
+          },
+          {
+            "t": "Üretimi zorla",
+            "d": "−40 alaşım, −6 etki"
+          }
+        ]
+      },
+      "decisionId": 2,
+      "uid": 30,
+      "key": "personal:2",
+      "born": 90.01280000000052,
+      "pause": false,
+      "ico": "❗",
+      "cls": "sci",
+      "title": "Alaşım Grevi",
+      "sub": "Dökümhane işçileri üretimi durdurdu. Talepleri pahalı ama makul.",
+      "hidden": false
+    }
+  ],
+  "modal": "",
+  "pane": ""
+}

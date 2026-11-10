@@ -1,0 +1,314 @@
+{
+  "url": "/mp/play",
+  "vote": null,
+  "inbox": [
+    {
+      "kind": "anomaly",
+      "data": {
+        "a": {
+          "id": "a4",
+          "k": "megayapi",
+          "n": "Savaş Enkazı",
+          "t": "Kimliği belirsiz iki filo burada birbirini yok etmiş. Enkaz hâlâ soğumamış.",
+          "ch": [
+            {
+              "t": "Silah sistemlerini incele",
+              "d": "+200 araştırma"
+            },
+            {
+              "t": "Alaşımı topla",
+              "d": "+140 alaşım"
+            }
+          ]
+        },
+        "sys": {
+          "id": 15,
+          "x": 3909.303561043632,
+          "y": 4036.3167270643307,
+          "name": "Taraeran",
+          "star": {
+            "n": "K Turuncu",
+            "c": "#ffab5c",
+            "r": 5,
+            "w": 22
+          },
+          "planets": [
+            {
+              "i": 0,
+              "t": "cor",
+              "dep": null,
+              "sz": 18,
+              "seed": 1968,
+              "name": "Taraeran I",
+              "owner": -1
+            },
+            {
+              "i": 1,
+              "t": "sul",
+              "dep": null,
+              "sz": 12,
+              "seed": 1985,
+              "name": "Taraeran II",
+              "owner": -1
+            },
+            {
+              "i": 2,
+              "t": "tro",
+              "dep": null,
+              "sz": 19,
+              "seed": 2002,
+              "name": "Taraeran III",
+              "owner": -1
+            },
+            {
+              "i": 3,
+              "t": "vol",
+              "dep": null,
+              "sz": 18,
+              "seed": 2019,
+              "name": "Taraeran IV",
+              "owner": -1
+            }
+          ],
+          "lanes": [
+            43,
+            28,
+            34,
+            30
+          ],
+          "owner": -1,
+          "surv": [
+            0
+          ],
+          "seen": [
+            0
+          ],
+          "queue": [],
+          "anom": false,
+          "anomK": "megayapi",
+          "def": 0,
+          "pulsar": false,
+          "nebulaS": false,
+          "_reach": 0,
+          "_shat": false
+        }
+      },
+      "decisionId": 1,
+      "uid": 1,
+      "key": "personal:1",
+      "born": 20.02560000000002,
+      "pause": false,
+      "ico": "🔬",
+      "cls": "sci",
+      "title": "Savaş Enkazı",
+      "sub": "Kimliği belirsiz iki filo burada birbirini yok etmiş. Enkaz hâlâ soğumamış.",
+      "hidden": false
+    },
+    {
+      "kind": "anomaly",
+      "data": {
+        "a": {
+          "id": "a11",
+          "k": "sinyal",
+          "n": "Bilinmeyen Sinyal",
+          "t": "Sistemin derinliğinden düzenli aralıklarla bir çağrı geliyor. Kaynağı hiçbir kayıtta yok.",
+          "ch": [
+            {
+              "t": "Sinyale karşılık ver",
+              "d": "büyük ödül · risk var"
+            },
+            {
+              "t": "Kaydet ve uzaklaş",
+              "d": "+140 araştırma"
+            }
+          ]
+        },
+        "sys": {
+          "id": 28,
+          "x": 3810.057547583903,
+          "y": 3438.1566133146484,
+          "name": "Joraedex-87",
+          "star": {
+            "n": "K Turuncu",
+            "c": "#ffab5c",
+            "r": 5,
+            "w": 22
+          },
+          "planets": [
+            {
+              "i": 0,
+              "t": "tro",
+              "dep": null,
+              "sz": 13,
+              "seed": 3671,
+              "name": "Joraedex-87 I",
+              "owner": -1
+            },
+            {
+              "i": 1,
+              "t": "vol",
+              "dep": null,
+              "sz": 16,
+              "seed": 3688,
+              "name": "Joraedex-87 II",
+              "owner": -1
+            }
+          ],
+          "lanes": [
+            15,
+            29,
+            43
+          ],
+          "owner": -1,
+          "surv": [
+            0
+          ],
+          "seen": [
+            0
+          ],
+          "queue": [],
+          "anom": false,
+          "anomK": "sinyal",
+          "def": 0,
+          "pulsar": false,
+          "nebulaS": false,
+          "_reach": 0,
+          "_shat": false
+        }
+      },
+      "decisionId": 2,
+      "uid": 19,
+      "key": "personal:2",
+      "born": 42.41819999999986,
+      "pause": false,
+      "ico": "🔬",
+      "cls": "sci",
+      "title": "Bilinmeyen Sinyal",
+      "sub": "Sistemin derinliğinden düzenli aralıklarla bir çağrı geliyor. Kaynağı hiçbir kayıtta yok.",
+      "hidden": false
+    },
+    {
+      "kind": "anomaly",
+      "data": {
+        "a": {
+          "id": "a9",
+          "k": "kalinti",
+          "n": "Kapalı Kapı",
+          "t": "Gezegenin yüzeyinde, hiçbir bilinen malzemeden yapılmamış bir kapı. Kilitli.",
+          "ch": [
+            {
+              "t": "Kapıyı zorla",
+              "d": "Riskli",
+              "uncertain": true
+            },
+            {
+              "t": "Mühürlü bırak",
+              "d": "+120 araştırma"
+            }
+          ]
+        },
+        "sys": {
+          "id": 17,
+          "x": 4190.686222174975,
+          "y": 2820.967532416407,
+          "name": "Orromir",
+          "star": {
+            "n": "M Kırmızı Cüce",
+            "c": "#ff7b5c",
+            "r": 4.5,
+            "w": 30
+          },
+          "planets": [
+            {
+              "i": 0,
+              "t": "tro",
+              "dep": "jeotermal",
+              "sz": 10,
+              "seed": 2230,
+              "name": "Orromir I",
+              "owner": -1
+            },
+            {
+              "i": 1,
+              "t": "cor",
+              "dep": null,
+              "sz": 19,
+              "seed": 2247,
+              "name": "Orromir II",
+              "owner": -1
+            }
+          ],
+          "lanes": [
+            19,
+            29
+          ],
+          "owner": -1,
+          "surv": [
+            0
+          ],
+          "seen": [
+            0
+          ],
+          "queue": [],
+          "anom": false,
+          "anomK": "kalinti",
+          "def": 0,
+          "pulsar": false,
+          "nebulaS": false,
+          "_reach": 0,
+          "_shat": false
+        }
+      },
+      "decisionId": 3,
+      "uid": 98,
+      "key": "personal:3",
+      "born": 86.32799999999993,
+      "pause": false,
+      "ico": "🔬",
+      "cls": "sci",
+      "title": "Kapalı Kapı",
+      "sub": "Gezegenin yüzeyinde, hiçbir bilinen malzemeden yapılmamış bir kapı. Kilitli.",
+      "hidden": false
+    },
+    {
+      "kind": "aideal",
+      "data": {
+        "from": 2,
+        "to": 0,
+        "give": [
+          {
+            "t": "nap"
+          }
+        ],
+        "want": [],
+        "born": 90,
+        "expires": 630
+      },
+      "ico": "📜",
+      "cls": "sci",
+      "pause": false,
+      "uid": 105,
+      "born": 90,
+      "rec": 1,
+      "title": "Teklif — Soyra Uzlaşısı",
+      "sub": "Çok oyunculu teklif · anlaşma istiyor",
+      "key": "mp71:1"
+    },
+    {
+      "kind": "chain",
+      "data": "kayip1",
+      "decisionId": 4,
+      "uid": 110,
+      "key": "personal:4",
+      "born": 90.02912000000006,
+      "pause": false,
+      "ico": "❗",
+      "cls": "sci",
+      "title": "Kayıp Koloni Sinyali",
+      "sub": "{SISTEM} yakınlarından, kayıtlarımızda olmayan bir koloniden imdat çağrısı geliyor. Bizim dilimizi k",
+      "hidden": false
+    }
+  ],
+  "modal": "",
+  "pane": ""
+}

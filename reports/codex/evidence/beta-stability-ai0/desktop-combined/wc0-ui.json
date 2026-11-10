@@ -1,0 +1,28 @@
+[
+  {
+    "conditionalAccepted": true,
+    "noWar": true,
+    "noPayment": true,
+    "thirdPartyPrivate": true
+  },
+  {
+    "front": 1,
+    "campaign": 1,
+    "realPayment": 150,
+    "joined": true
+  },
+  {
+    "immediateDeclaration": true,
+    "optionalInvite": true,
+    "rejectDoesNotUndoWar": true
+  },
+  {
+    "knownThirdPartyWar": true,
+    "nativeVoluntaryOffer": true,
+    "nativeHostAccept": true
+  },
+  {
+    "reconnected": true,
+    "tabs": true
+  }
+]

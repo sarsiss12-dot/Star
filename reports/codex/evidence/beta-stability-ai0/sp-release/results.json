@@ -1,0 +1,63 @@
+[
+  {
+    "viewport": [
+      1920,
+      1080
+    ],
+    "status": "PASS",
+    "native": "mouse",
+    "pureOpen": true,
+    "realCauseVisible": true,
+    "holdMergeRetarget": true,
+    "duplicateNoExtraShips": true,
+    "paidOrders": 2,
+    "reinforcementHulls": 27
+  },
+  {
+    "viewport": [
+      800,
+      360
+    ],
+    "status": "PASS",
+    "native": "touch",
+    "pureOpen": true,
+    "realCauseVisible": true,
+    "holdMergeRetarget": true,
+    "duplicateNoExtraShips": true,
+    "paidOrders": 2,
+    "reinforcementHulls": 27
+  },
+  {
+    "viewport": [
+      915,
+      412
+    ],
+    "status": "PASS",
+    "native": "touch",
+    "pureOpen": true,
+    "realCauseVisible": true,
+    "holdMergeRetarget": true,
+    "duplicateNoExtraShips": true,
+    "paidOrders": 2,
+    "reinforcementHulls": 27
+  },
+  {
+    "viewport": [
+      960,
+      540
+    ],
+    "status": "PASS",
+    "native": "touch",
+    "pureOpen": true,
+    "realCauseVisible": true,
+    "holdMergeRetarget": true,
+    "duplicateNoExtraShips": true,
+    "paidOrders": 2,
+    "reinforcementHulls": 27
+  },
+  {
+    "name": "page errors",
+    "status": "PASS",
+    "errors": []
+  }
+]

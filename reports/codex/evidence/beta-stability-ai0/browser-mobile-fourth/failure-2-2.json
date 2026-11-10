@@ -1,0 +1,93 @@
+{
+  "url": "/",
+  "vote": {
+    "name": "Yıldızlar Konsey",
+    "founder": 1,
+    "members": [
+      1,
+      0,
+      2,
+      7,
+      5,
+      4,
+      6,
+      3
+    ],
+    "laws": {},
+    "targeted": {},
+    "treasury": 0,
+    "president": 1,
+    "terms": {
+      "1": 1
+    },
+    "termAge": 0,
+    "voteIn": 2,
+    "vote": {
+      "key": "ticaretStd",
+      "target": null,
+      "opened": 6.966000000000017,
+      "yes": [
+        7,
+        5,
+        4,
+        3,
+        1
+      ],
+      "no": [
+        6
+      ],
+      "speeches": [
+        {
+          "id": 7,
+          "txt": "Bu sorunun cevabı laboratuvarda, mecliste değil.",
+          "yes": true
+        },
+        {
+          "id": 5,
+          "txt": "Ticaret yolları kapalıyken kimse zengin olmaz.",
+          "yes": true
+        },
+        {
+          "id": 4,
+          "txt": "Zayıflık davettir. Bu meclis güçlüye saygı duymalı.",
+          "yes": true
+        }
+      ],
+      "done": false,
+      "age": 0,
+      "sponsor": null
+    },
+    "dead": false,
+    "byConvention": true,
+    "firstLaw": null,
+    "pariahs": {}
+  },
+  "inbox": [
+    {
+      "uid": 1,
+      "kind": "cncnew",
+      "ico": "🌐",
+      "cls": "sci",
+      "pause": true,
+      "title": "GALAKTİK KONSEY KURULDU",
+      "sub": "Saf Akıl Ağı galaksiyi masaya çağırdı",
+      "key": "cncnew",
+      "born": 6.966000000000017,
+      "data": 1
+    },
+    {
+      "uid": 2,
+      "kind": "cncvote",
+      "ico": "🌐",
+      "cls": "sci",
+      "pause": true,
+      "title": "KONSEY OYLAMASI",
+      "sub": "Evrensel Ticaret Standardı",
+      "key": "cnc6.966000000000017",
+      "born": 6.966000000000017,
+      "data": "ticaretStd"
+    }
+  ],
+  "modal": "",
+  "pane": ""
+}

@@ -145,7 +145,7 @@ const UI = {
     const target=d?.fleet!==undefined?G.fleets.find(f=>f.id===d.fleet&&f.e===q.e&&f.ships.length):null;
     const label=d?.fleet!==undefined?(target?.name||'Hedef filo bulunamadı'):d?.sys!==undefined?(G.sys[d.sys]?.name||'Geçersiz sistem'):'Tersanede kalır';
     const access=shipBuildAccess(G.emps[q.e],q.cls);
-    return 'Kaynak tersane: '+sys.name+' · Hedef: '+label+' · '+(access.ok?'Üretim sürüyor':access.why)+(d?.fleet!==undefined?' · Özel filo hedefi; genel ralli gerekmez':'');
+    return 'Kaynak tersane: '+sys.name+' · Hedef: '+label+' · '+(d?.hold?'BEKLETİLİYOR — ödenmiş sipariş korunuyor':access.ok?'Üretim sürüyor':access.why)+(d?.fleet!==undefined?' · Özel filo hedefi; genel ralli gerekmez':'');
   },
   shipmentRow(f,action=true){
     const d=f.shipment||{},target=d.fleet??f.joinFleet,main=G.fleets.find(x=>x.id===target&&x.e===f.e&&x.ships.length);
@@ -1385,14 +1385,8 @@ const UI = {
                                           q.ships.length && isArmed(q));
         if (sav2.length < 2){ say('Birleşecek savaş filosu yok', 'war'); break; }
         const ana = sav2[0];
-        let kac = 0;
-        for (let i = 1; i < sav2.length; i++){
-          ana.ships.push(...sav2[i].ships);
-          if (sav2[i].ord && !ana.ord) ana.ord = sav2[i].ord;
-          sav2[i].ships.length = 0;
-          kac++;
-        }
-        G.fleets = G.fleets.filter(q => q.ships.length);
+        const kac=sav2.length-1,result=mergeFleetInto(G.p,ana,sav2.slice(1));
+        if(!result.ok){say(result.why,'war');break;}
         View.sel = ana;
         say('⚑ ' + (kac+1) + ' savaş filosu birleşti — ' + esc(ana.name) +
             ' · ' + ana.ships.length + ' gemi', 'win');
@@ -2014,6 +2008,7 @@ const UI = {
     const risk=internalRiskSummary(e),n=risk.colonies.length;
     const riskLabels=[...(n?[n+' KOLONİDE İSYAN RİSKİ']:[]),...(risk.schism.counter?['İDEOLOJİK BÖLÜNME']:[]),...(risk.subjects.length||risk.ownVassal?.anger>=50?['VASAL BAĞIMSIZLIK RİSKİ']:[])];
     if(riskLabels.length)add('⚠ '+riskLabels.join(' · ')+' · İç istikrar','internalRisk',Math.max(1,n));
+    const recover=this.fleetRecoverySummary();if(recover.length)add('⚠ '+recover.length+' kayıp takviye hedefi · Toplu kurtarma','fleetRecovery',recover.length);else if(G.fleetJournal?.some(r=>r.owner===0))add('⚓ Son filo işlemleri / takviye kurtarma','fleetRecovery',0);
     if(e.crisis)add('⚠ '+e.crisis.toUpperCase()+' KRİZİ');
     if(e.shortage)add('⚠ Mal kıtlığı · ekonomi / kaynak üretimini kontrol et');
     // Navigation survives, ordinary galactic news is never an urgent count.
@@ -7117,7 +7112,7 @@ const UI = {
            koloni gemisi taşıyan filo tek yerleşimde üçünü birden
            kaybediyordu. Artık yalnız ilk bulunan çıkarılıyor. */
         const kIx = f.ships.findIndex(sh => sh.c === 'kol');
-        if (kIx >= 0) f.ships.splice(kIx, 1);
+        if (kIx >= 0){if(f.ships.length===1)fleetLost(f,'colonization');f.ships.splice(kIx, 1);}
         if (!f.ships.length){ G.fleets = G.fleets.filter(x=>x!==f); View.sel = null; }
       }
     } else {
@@ -7150,8 +7145,7 @@ const UI = {
                         : 'Bu sistemde birleşecek başka sivil filo yok');
       return;
     }
-    others.forEach(o=>{ f.ships.push(...o.ships); if(o.ord&&!f.ord) f.ord=o.ord; });
-    G.fleets = G.fleets.filter(x=>x===f || !others.includes(x));
+    const result=mergeFleetInto(G.p,f,others);if(!result.ok){say(result.why,'war');return;}
     say('Filolar birleşti — ' + f.ships.length + ' gemi');
     this.refresh();
   },
@@ -9561,3 +9555,50 @@ const TITLE = {
   UI.uiScaleReady=storeGet(key).then(v=>{if(revision===initial){preferred=valid(v);apply();}}).catch(()=>{});
 })();
 /* END MP.8.9 UI SCALE */
+
+/* BETA-STABILITY-AI.0 — the same recovery panel for host and guest; mutations await the host ACK. */
+Object.assign(UI,{
+  fleetRecoverySummary(){
+    const c=this._fleetRecoveryCache,now=performance.now();
+    if(c&&c.world===G.emps&&c.fleets===G.fleets&&now-c.at<1000)return c.rows;
+    const rows=fleetRecoveryGroups(G.p);this._fleetRecoveryCache={world:G.emps,fleets:G.fleets,at:now,rows};return rows;
+  },
+  fleetRecoveryOpen(id){
+    this._fleetRecoveryCache=null;
+    const rows=fleetRecoveryGroups(G.p),g=rows.find(g=>g.id===+id)||rows[0],token=(this._fleetRecoverySeq=(this._fleetRecoverySeq||0)+1);
+    const history=(G.fleetJournal||[]).filter(r=>r.owner===0).slice(-32).reverse();
+    if(!g){this.openModal('<div class="mhd">TAKVİYE KURTARMA</div><div class="mbd">Kayıp hedefli sevkiyat / sipariş yok.'+history.map(r=>`<div class="box">Gün ${Math.floor(r.day)} · Filo ${r.fleet}: ${esc(({merge:'Birleşme',split:'Tam ayırma',combat:'Savaşta tam kayıp',attrition:'İkmalsizlik',disband:'Terhis',colonization:'Koloni gemisi kullanıldı',radiation:'Radyasyon',rule:'Oyun kuralı','empty-cleanup':'Boş filo temizliği — önceki neden bilinmiyor'})[r.reason]||r.reason)}${r.detail?' · '+esc(r.detail):''}${r.replacement!==undefined?' → '+r.replacement:''} · ${r.ships} gemi · ${Math.round(r.power)} güç · ${r.jobs} sipariş / ${r.shipments} sevkiyat</div>`).join('')+'</div><div class="mft"><button class="ch" data-a="closem">KAPAT</button></div>');return;}
+    const choices=G.fleets.filter(f=>f.e===0&&f.ships.length&&!hasShipment(f)).map(f=>({label:'Filo: '+f.name+' (#'+f.id+')',target:{fleet:f.id}}));
+    for(const s of G.sys)if(s.owner===0&&s.seen.includes(0))choices.push({label:'Toplanma: '+s.name,target:{sys:s.id}});
+    const last=history.find(r=>r.fleet===g.id),cause=last?({merge:'Birleşme',split:'Tam ayırma',combat:'Savaşta tam kayıp',attrition:'İkmalsizlik',disband:'Terhis',colonization:'Koloni gemisi kullanıldı',radiation:'Radyasyon',rule:'Oyun kuralı','empty-cleanup':'Boş filo temizliği; önceki neden bilinmiyor'})[last.reason]||last.reason:null;
+    const paid={};for(const {q} of g.jobs)for(const [k,v] of Object.entries(q.paid||{}))if(RES[k]&&Number.isFinite(v)&&v>=0)paid[k]=(paid[k]||0)+v;
+    this.openModal(`<div class="mhd">⚠ ANA FİLO BULUNAMADI · #${g.id}</div><div class="mbd">
+      <div class="mini">${cause?'Kayıtlı neden: '+esc(cause)+(last.detail?' · '+esc(last.detail):'')+' · Gün '+Math.floor(last.day)+' · '+last.ships+' gemi / '+Math.round(last.power)+' güç.':'Eski filonun kayıp nedeni kayıtta yok; kesin neden bilinmiyor.'} Mevcut gemiler korunur; eski filo yeniden yaratılmaz.</div>
+      ${rows.map(x=>`<button class="ch" data-a="fleetRecovery" data-x="${x.id}">Hedef #${x.id} · ${x.ships.reduce((n,f)=>n+f.ships.length,0)} gemi / ${x.jobs.length} sipariş</button>`).join('')}
+      <div class="box">${g.ships.length} sevkiyat · ${g.ships.reduce((n,f)=>n+f.ships.length,0)} gemi · ${g.jobs.length} ödenmiş üretim siparişi<br>
+      Kayıtlı ödeme: ${esc(Object.entries(paid).map(([k,v])=>k+' '+Math.round(v)).join(' · ')||'Makbuz yok')}<br>
+      ${esc([...new Set(g.ships.map(f=>G.sys[f.sys]?.name||'Yolda'))].join(' · '))}</div>
+      <div class="mini">Yeni hedef seçmek ödeme yapmaz. Siparişlerin ilerlemesi korunur. Kapalı rotada gemiler bekler; başlamış yol bacağı tamamlanır. Toplanma yalnız bilinen kendi sistemlerinden seçilir.</div>
+      <button class="abtn" data-a="fleetRecoveryDo" data-x="${token}:hold">HEPSİNİ BEKLET</button>
+      <button class="abtn" data-a="fleetRecoveryDo" data-x="${token}:merge">AYNI SİSTEMDE DURAN TAKVİYELERİ BİRLEŞTİR</button>
+      <div class="ph">YENİ HEDEF</div>
+      ${choices.map((x,i)=>`<button class="abtn" data-a="fleetRecoveryDo" data-x="${token}:${i}">${esc(x.label)}</button>`).join('')}
+      <div id="fleetRecoveryResult" class="mini" role="status"></div></div><div class="mft"><button class="ch" data-a="closem">KAPAT</button></div>`);
+    this._fleetRecoveryPending={token,id:g.id,stamp:fleetRecoveryStamp(g),choices,busy:false};
+  },
+  fleetRecoveryDo(value){
+    const [token,choice]=String(value).split(':'),p=this._fleetRecoveryPending;
+    if(!p||+token!==p.token||p.busy)return;
+    const target=p.choices[+choice]?.target,action=['hold','merge'].includes(choice)?choice:'retarget';
+    if(action==='retarget'&&!target)return;
+    p.busy=true;const box=$('fleetRecoveryResult');box.textContent='Host doğrulaması bekleniyor…';
+    const done=r=>{if(this._fleetRecoveryPending!==p||!box.isConnected)return;p.busy=false;this._fleetRecoveryCache=null;
+      box.textContent=r.ok?'UYGULANDI — gemiler ve ödenmiş siparişler korundu.':r.why||'İşlem reddedildi';
+      if(r.ok){p.busy=true;box.insertAdjacentHTML('beforeend','<button class="abtn" data-a="fleetRecovery">GÜNCEL DURUMU AÇ</button>');}};
+    if(window.MP6Stars?.S.on&&MP6Stars.S.started){
+      if(!MP6Stars.fleetRecovery({id:p.id,action,stamp:p.stamp,...(target?{target}: {})},done)){p.busy=false;box.textContent='Host bağlı değil; işlem uygulanmadı.';}
+    }else done(fleetRecoveryAction(G.p,p.id,action,target,p.stamp));
+  }
+});
+const stabilityFleetAct=UI.act;
+UI.act=function(a,x){if(a==='fleetRecovery')return this.fleetRecoveryOpen(x);if(a==='fleetRecoveryDo')return this.fleetRecoveryDo(x);return stabilityFleetAct.call(this,a,x);};

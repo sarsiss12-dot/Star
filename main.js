@@ -1549,6 +1549,7 @@ const ANOMALIES = [
         const f2 = g.fleets.filter(x => x.e === g.p.id && x.ships.length);
         if (f2.length){ const ff = f2[Math.floor(rnd()*f2.length)];
           const kayip = Math.max(1, Math.floor(ff.ships.length * .35));
+          if(kayip>=ff.ships.length)fleetLost(ff,'rule','Kalıntı sökümünde çöküş');
           ff.ships.splice(0, kayip);
           return 'Yapı çöktü — ' + kayip + ' gemi enkazın altında kaldı.'; }
         return 'Yapı çöktü, kıl payı kurtulduk.';}},
@@ -1608,6 +1609,7 @@ const ANOMALIES = [
             if (f2.length){
               const kurban = f2[Math.floor(rnd() * f2.length)];
               const kayip = Math.max(1, Math.floor(kurban.ships.length * .5));
+              if(kayip>=kurban.ships.length)fleetLost(kurban,'rule','Kalıntı savunma olayı');
               kurban.ships.splice(0, kayip);
               if (!kurban.ships.length) g.fleets = g.fleets.filter(x => x !== kurban);
               return 'Halka kendini savundu — ' + kayip + ' gemi kaybedildi. Mineral alınamadı.';
@@ -2528,7 +2530,7 @@ function humanDraftsError(cfg){
 }
 function setupGame(cfg){
   const invalid=setupConfigError(cfg)||humanDraftsError(cfg);if(invalid)throw new RangeError(invalid);
-  G._newsSetup=true;G._95eFaults={};
+  G._newsSetup=true;G._95eFaults={};G.fleetJournal=undefined;FLEET_RECOVERY_DIRTY.clear();
   if(typeof GalacticNews!=='undefined')G.news=GalacticNews.empty();
   if(typeof DiplomaticInbox!=='undefined')G.diplomaticInbox=DiplomaticInbox.empty();
   if(typeof RemoteConstruction!=='undefined')G.construction=RemoteConstruction.empty();
@@ -3136,7 +3138,7 @@ function splitType(e, f, cls, count){
   const nf = newFleet(e, f.sys, taken.map(s=>({c:s.c})));
   taken.forEach((s,i)=>{ if (nf.ships[i]) nf.ships[i].h = s.h; });
   nf.stance = f.stance;
-  if (!f.ships.length) G.fleets = G.fleets.filter(x => x !== f);
+  if (!f.ships.length){fleetRemovalRecord({...f,ships:taken},'split',nf.id);redirectFleetReferences(e.id,f.id,nf.id);if(f.composition)nf.composition=f.composition;if(f.capTarget)nf.capTarget=f.capTarget;G.fleets = G.fleets.filter(x => x !== f);}
   return nf;
 }
 
@@ -3391,6 +3393,7 @@ function attritionTick(){
     /* sh.h 0–1 arası ORANDIR (mutlak gövde değil); doğrudan azaltılır.
        Gövde teknolojisi dayanıklılık kazandırır. */
     let kayip = 0;
+    if(f.ships.every(s=>s.h-oran<=.06))fleetLost(f,'attrition');
     for (let i = f.ships.length - 1; i >= 0; i--){
       const sh = f.ships[i];
       sh.h -= oran;
@@ -3659,6 +3662,7 @@ function shipmentRecord(f){
   };
   return f.shipment;
 }
+const FLEET_RECOVERY_DIRTY=new Set();
 function holdShipment(f,reason,detail){
   const d=shipmentRecord(f); if(!d)return;
   f.path=f.mv?[f.mv.to]:[];
@@ -3669,7 +3673,7 @@ function holdShipment(f,reason,detail){
     d.next=G.day+5*Math.pow(2,d.attempts-1);
     if(d.attempts>=SHIPMENT_MAX_ATTEMPTS)d.state='paused';
   }
-  if(reason==='lost'){delete f.joinFleet;delete f.rallyTo;}
+  if(reason==='lost'){FLEET_RECOVERY_DIRTY.add(f.e);delete f.joinFleet;delete f.rallyTo;}
 }
 function followRallyFleet(f,budget){
   const d=shipmentRecord(f);
@@ -3686,6 +3690,7 @@ function followRallyFleet(f,budget){
     if(ana){
       d.state='waiting';
       if(ana.mv || ana.combat || ana.retreating)return;
+      fleetRemovalRecord(f,'merge',ana.id);redirectFleetReferences(f.e,f.id,ana.id);
       ana.ships.push(...f.ships);f.ships.length=0;
       clearShipment(f);
       if(!empOf(f).ai)say('⚓ İkmal ' + (ana.name || 'filoya') + ' katıldı');
@@ -3743,6 +3748,136 @@ function restoreShipments(){
     if(d.state==='lost'){delete f.rallyTo;f.path=f.mv?[f.mv.to]:[];}
   }
 }
+/* BETA-STABILITY-AI.0: stable fleet identity, paid-order holds and bounded evidence.
+   No historical reconstruction: a missing ID loaded from a save has no known cause. */
+function fleetDelivery(sys,q){return Object.hasOwn(q,'delivery')?q.delivery:sys.rally?.[q.e];}
+function validDeliveryFleet(owner,id){return G.fleets.find(f=>f.id===id&&f.e===owner&&f.ships.length&&!hasShipment(f));}
+function fleetReferences(owner,id){
+  const ships=G.fleets.filter(f=>f.e===owner&&(f.shipment?.fleet??f.joinFleet)===id&&f.ships.length);
+  const jobs=[];for(const sys of G.sys)for(const q of sys.queue||[])if(q.e===owner&&fleetDelivery(sys,q)?.fleet===id)jobs.push({sys,q});
+  return {ships,jobs};
+}
+function fleetRemovalRecord(f,reason,replacement,detail){
+  if(!f||!G.emps[f.e])return;
+  const refs=fleetReferences(f.e,f.id),classes={};for(const s of f.ships)classes[s.c]=(classes[s.c]||0)+1;
+  const journal=G.fleetJournal||(G.fleetJournal=[]);
+  journal.push({id:(journal.at(-1)?.id||0)+1,day:G.day,owner:f.e,fleet:f.id,reason,...(detail?{detail}:{}),
+    ...(replacement!==undefined?{replacement}:{}),sys:f.sys,to:f.mv?.to??null,
+    power:f.ships.length?fleetPower(f):0,ships:f.ships.length,classes,supply:G.emps[f.e].wild||G.emps[f.e].crisisSide?null:fleetSupply(G.emps[f.e],f),
+    order:typeof f.ord?.t==='string'?f.ord.t.slice(0,30):null,combat:!!f.combat,
+    wars:Object.keys(G.emps[f.e].war||{}).filter(k=>G.emps[f.e].war[k]).map(Number),
+    shipments:refs.ships.length,jobs:refs.jobs.length});
+  if(journal.length>256)journal.splice(0,journal.length-256);
+}
+function cleanFleetJournal(raw){
+  if(!Array.isArray(raw))return undefined;
+  const reasons=['merge','split','combat','attrition','disband','colonization','radiation','rule','empty-cleanup'];
+  return raw.slice(-256).filter(r=>r&&Number.isSafeInteger(r.id)&&r.id>0&&Number.isFinite(r.day)&&Number.isInteger(r.owner)&&G.emps[r.owner]&&
+    Number.isSafeInteger(r.fleet)&&r.fleet>=0&&reasons.includes(r.reason)&&Number.isInteger(r.sys)&&Number.isFinite(r.power)&&r.power>=0&&
+    Number.isInteger(r.ships)&&r.ships>=0&&r.ships<=100000&&r.classes&&typeof r.classes==='object'&&!Array.isArray(r.classes)&&
+    Object.entries(r.classes).every(([c,n])=>SHIPS[c]&&Number.isInteger(n)&&n>=0)&&
+    Array.isArray(r.wars)&&r.wars.length<=G.emps.length&&r.wars.every(id=>Number.isInteger(id)&&G.emps[id])&&
+    Number.isInteger(r.shipments)&&r.shipments>=0&&Number.isInteger(r.jobs)&&r.jobs>=0&&
+    (r.replacement===undefined||Number.isSafeInteger(r.replacement)&&r.replacement>=0)&&
+    (r.to===null||Number.isInteger(r.to))&&(r.supply===null||Number.isFinite(r.supply))&&
+    (r.detail===undefined||typeof r.detail==='string'&&r.detail.length<=80)&&(r.order===null||typeof r.order==='string'&&r.order.length<=30)&&typeof r.combat==='boolean')
+    .map(r=>({id:r.id,day:r.day,owner:r.owner,fleet:r.fleet,reason:r.reason,...(r.replacement!==undefined?{replacement:r.replacement}:{}),
+      ...(r.detail?{detail:r.detail}:{}),sys:r.sys,to:r.to,power:r.power,ships:r.ships,classes:{...r.classes},supply:r.supply,order:r.order,combat:r.combat,
+      wars:r.wars.slice(),shipments:r.shipments,jobs:r.jobs}));
+}
+function holdFleetReferences(owner,id){
+  FLEET_RECOVERY_DIRTY.add(owner);
+  const refs=fleetReferences(owner,id);
+  for(const f of refs.ships)holdShipment(f,'lost');
+  for(const {q,sys} of refs.jobs)q.delivery={...fleetDelivery(sys,q),hold:true};
+  for(const sys of G.sys)if(sys.rally?.[owner]?.fleet===id)sys.rally[owner]={...sys.rally[owner],hold:true};
+}
+function fleetLost(f,reason,detail){fleetRemovalRecord(f,reason,undefined,detail);holdFleetReferences(f.e,f.id);}
+function redirectFleetReferences(owner,oldId,newId){
+  for(const f of G.fleets)if(f.e===owner){
+    if(f.shipment?.fleet===oldId){f.shipment.fleet=newId;f.joinFleet=newId;f.path=f.mv?[f.mv.to]:[];delete f.rallyTo;f.shipment.state='ready';f.shipment.attempts=0;f.shipment.next=0;delete f.shipment.reason;}
+    if(f.joinFleet===oldId)f.joinFleet=newId;
+  }
+  for(const sys of G.sys){
+    if(sys.rally?.[owner]?.fleet===oldId){sys.rally[owner]={...sys.rally[owner],fleet:newId};delete sys.rally[owner].hold;}
+    for(const q of sys.queue||[])if(q.e===owner&&q.delivery?.fleet===oldId){q.delivery={...q.delivery,fleet:newId};delete q.delivery.hold;}
+  }
+}
+function mergeFleetInto(e,main,others,allowLost=false){
+  if(!e||G.emps[e.id]!==e||!main||main.e!==e.id||!G.fleets.includes(main)||main.sys<0||!main.ships.length||main.mv||main.combat||main.retreating||
+    !Array.isArray(others)||!others.length||new Set(others).size!==others.length)return {ok:false,why:'Duran kendi filolarını seç'};
+  const all=[main,...others];
+  if(new Set(all).size!==all.length||all.some(f=>!G.fleets.includes(f)||f.e!==e.id||f.sys!==main.sys||!f.ships.length||f.mv||f.combat||f.retreating||
+    fleetGroup(f)!==fleetGroup(main)||hasShipment(f)&&!(allowLost&&f.shipment?.state==='lost')))return {ok:false,why:'Filo durumu değişti; hareket / savaş / sevkiyat sürüyor'};
+  const plans=all.filter(f=>f.composition),counts={};
+  for(const f of plans)for(const [c,n] of Object.entries(f.composition.counts||{}))counts[c]=(counts[c]||0)+n;
+  if(Object.values(counts).reduce((a,b)=>a+b,0)>300)return {ok:false,why:'Birleşik bileşim 300 gemi sınırını aşıyor; önce bileşimi düzenle'};
+  for(const f of others){
+    fleetRemovalRecord(f,'merge',main.id);redirectFleetReferences(e.id,f.id,main.id);
+    main.ships.push(...f.ships);if(f.ord&&!main.ord)main.ord=f.ord;
+    f.ships=[];
+  }
+  if(plans.length)main.composition={...plans[0].composition,counts,auto:plans.some(f=>f.composition.auto)};
+  if(all.some(f=>f.capTarget))main.capTarget=all.reduce((n,f)=>n+(f.capTarget||0),0);
+  if(allowLost)clearShipment(main);
+  G.fleets=G.fleets.filter(f=>!others.includes(f));
+  if(typeof View!=='undefined'&&others.includes(View.sel))View.sel=main;
+  return {ok:true};
+}
+/* Load-time repair touches references only. No ships, payments, durations or IDs are recreated. */
+function restoreFleetReferences(){
+  FLEET_RECOVERY_DIRTY.clear();
+  const live=new Map(G.fleets.filter(f=>f.ships.length&&!hasShipment(f)).map(f=>[f.id,f.e]));
+  for(const f of G.fleets){const id=f.shipment?.fleet??f.joinFleet;if(id!==undefined&&live.get(id)!==f.e)holdShipment(f,'lost');}
+  for(const sys of G.sys){
+    for(const q of sys.queue||[]){const d=fleetDelivery(sys,q);if(d&&Object.hasOwn(d,'hold')&&d.hold!==true)delete d.hold;if(d?.fleet!==undefined&&live.get(d.fleet)!==q.e){q.delivery={...d,hold:true};FLEET_RECOVERY_DIRTY.add(q.e);}}
+    for(const [owner,d] of Object.entries(sys.rally||{}))if(d?.fleet!==undefined&&live.get(d.fleet)!==+owner){sys.rally[owner]={...d,hold:true};FLEET_RECOVERY_DIRTY.add(+owner);}
+  }
+}
+function fleetRecoveryGroups(e){
+  if(!e||G.emps[e.id]!==e)return [];
+  const live=new Set(G.fleets.filter(f=>f.e===e.id&&f.ships.length&&!hasShipment(f)).map(f=>f.id)),groups=new Map();
+  const group=id=>{if(!groups.has(id))groups.set(id,{id,ships:[],jobs:[],rallies:[]});return groups.get(id);};
+  for(const f of G.fleets){const id=f.shipment?.fleet??f.joinFleet;if(f.e===e.id&&f.ships.length&&Number.isSafeInteger(id)&&!live.has(id))group(id).ships.push(f);}
+  for(const sys of G.sys){
+    for(const q of sys.queue||[]){const d=fleetDelivery(sys,q);if(q.e===e.id&&Number.isSafeInteger(d?.fleet)&&!live.has(d.fleet))group(d.fleet).jobs.push({sys,q});}
+    const d=sys.rally?.[e.id];if(Number.isSafeInteger(d?.fleet)&&!live.has(d.fleet))group(d.fleet).rallies.push(sys);
+  }
+  return [...groups.values()].sort((a,b)=>a.id-b.id);
+}
+function fleetRecoveryStamp(g){
+  const text=JSON.stringify([g.id,g.ships.map(f=>[f.id,f.ships.length]),g.jobs.map(({sys,q})=>[sys.id,shipOrderToken(q),q.cls]),g.rallies.map(s=>s.id)]);
+  let h=2166136261;for(let i=0;i<text.length;i++)h=Math.imul(h^text.charCodeAt(i),16777619);return (h>>>0).toString(16);
+}
+function fleetRecoveryAction(e,id,action,target,stamp){
+  const g=fleetRecoveryGroups(e).find(g=>g.id===id);
+  if(!g||stamp!==undefined&&fleetRecoveryStamp(g)!==stamp)return {ok:false,why:'Kayıp hedef grubu değişti; yeniden aç'};
+  if(action==='hold'){holdFleetReferences(e.id,id);return {ok:true};}
+  if(action==='merge'){
+    const bySys=new Map();
+    for(const f of g.ships)if(f.sys>=0&&!f.mv&&!f.combat&&!f.retreating&&!f.path.length){const k=f.sys+':'+fleetGroup(f);if(!bySys.has(k))bySys.set(k,[]);bySys.get(k).push(f);}
+    let merged=0;for(const list of bySys.values())if(list.length>1){const r=mergeFleetInto(e,list[0],list.slice(1),true);if(r.ok){merged+=list.length-1;list[0].shipment={fleet:id,state:'lost',attempts:0,next:0};}}
+    return merged?{ok:true,merged}:{ok:false,why:'Aynı sistemde duran uygun takviye yok'};
+  }
+  if(action!=='retarget'||!target||Object.keys(target).length!==1)return {ok:false,why:'Geçersiz işlem'};
+  const f=target.fleet!==undefined?validDeliveryFleet(e.id,target.fleet):null,s=G.sys[target.sys];
+  if(target.fleet!==undefined?!f:!s||s.owner!==e.id||!s.seen.includes(e.id))return {ok:false,why:'Kendi geçerli filonu veya bilinen kendi toplanma sistemini seç'};
+  // Validation before any mutation. Existing movement/route engine handles closed routes without teleporting.
+  const d=f?{fleet:f.id}:{sys:s.id};
+  for(const {q} of g.jobs)q.delivery={...d};
+  for(const sys of g.rallies)sys.rally[e.id]={...d};
+  for(const n of g.ships)shipmentAction(e,n,'retarget',d);
+  return {ok:true,ships:g.ships.reduce((n,f)=>n+f.ships.length,0),jobs:g.jobs.length};
+}
+function aiRecoverShipments(e){
+  if(!e.ai||e.dead||!FLEET_RECOVERY_DIRTY.has(e.id))return;
+  const groups=fleetRecoveryGroups(e);if(!groups.length){FLEET_RECOVERY_DIRTY.delete(e.id);return;}
+  const target=G.fleets.find(f=>f.e===e.id&&f.ships.length&&!hasShipment(f)&&f.sys>=0&&!f.combat&&!f.mv&&isArmed(f));
+  const home=G.sys[e.home];
+  if(target)fleetRecoveryAction(e,groups[0].id,'retarget',{fleet:target.id});
+  else if(home?.owner===e.id&&home.seen.includes(e.id))fleetRecoveryAction(e,groups[0].id,'retarget',{sys:home.id});
+}
+
 function shipmentStatus(f){
   const d=f.shipment;
   if(!d)return 'Teslimat sürüyor';
@@ -3941,7 +4076,7 @@ function stepFleets(dt){
   const safeThreats=new Map(),exploreChecks=new Map();
   for (let i=G.fleets.length-1;i>=0;i--){
     const f = G.fleets[i];
-    if (!f.ships.length){ if(sensorShareActive(G.p,G.emps[f.e]))sharedSensorsMoved=true;G.fleets.splice(i,1); continue; }
+    if (!f.ships.length){ if(!(G.fleetJournal||[]).some(r=>r.fleet===f.id))fleetLost(f,'empty-cleanup'); if(sensorShareActive(G.p,G.emps[f.e]))sharedSensorsMoved=true;G.fleets.splice(i,1); continue; }
     if (f.combat > 0) continue;
 
     // tarama görevi
@@ -4305,7 +4440,7 @@ function arrive(f, sys){
       delete pl.colonyClaim;                    // FAZ 76: kilit çözüldü
       /* FAZ 77E: yalnız BİR koloni gemisi harcanır (bkz. ui.js) */
       const kIx2 = f.ships.findIndex(sh => sh.c === 'kol');
-      if (kIx2 >= 0) f.ships.splice(kIx2, 1);
+      if (kIx2 >= 0){if(f.ships.length===1)fleetLost(f,'colonization');f.ships.splice(kIx2, 1);}
       if (!f.ships.length){ G.fleets = G.fleets.filter(x=>x!==f); return; }
     } else {
       /* ═══ FAZ 76: BUHARLAŞMA ONARIMI ═══
@@ -4400,7 +4535,7 @@ function repairDisabledPirates(){
   for(const s of G.sys){delete s.nest;delete s.nestPow;}
   G.nests=[];
   if(G.upheaval?.k==='korsanCagi')G.upheaval=null;
-  if(validWildId(G.wildId)!==null)G.fleets=G.fleets.filter(f=>f.e!==G.wildId||f.monster);
+  if(validWildId(G.wildId)!==null){for(const f of G.fleets)if(f.e===G.wildId&&!f.monster)fleetLost(f,'rule','Korsan KAPALI temizliği');G.fleets=G.fleets.filter(f=>f.e!==G.wildId||f.monster);}
 }
 function raidTick(){
   G.raids=G.raids||{};
@@ -4544,6 +4679,7 @@ function applyDamage(victim, fleets, amount, attacker){
   const targets = [];
   for (const f of fleets) for (let i=0;i<f.ships.length;i++) targets.push({f, i});
   if (!targets.length) return {killed:0,damage:0};
+  const before=new Map(fleets.filter(f=>f.ships.length&&f.ships.reduce((n,s)=>n+maxHull(s.c,victim)*s.h,0)<=amount).map(f=>[f,{...f,ships:f.ships.map(s=>({...s}))}]));
   let killed = 0;
   // öncelik: silahlı gemiler
   targets.sort((a,b)=> (SHIPS[b.f.ships[b.i].c].dmg||0) - (SHIPS[a.f.ships[a.i].c].dmg||0));
@@ -4568,6 +4704,7 @@ function applyDamage(victim, fleets, amount, attacker){
       const S = SHIPS[sh.c];
       if (S && S.cost && S.cost.ala) enkaz += S.cost.ala * .15;
     }
+    if(f.ships.length&&f.ships.every(s=>s.dead)){fleetRemovalRecord(before.get(f)||f,'combat');holdFleetReferences(f.e,f.id);}
     f.ships = f.ships.filter(s => !s.dead);
   }
   /* Enkazı hasarı veren taraf toplar; kendi kaybından ödül çıkmaz. */
@@ -4650,6 +4787,7 @@ function purgeEmpire(e){
   if (!e) return;
   recordNews({category:'politics',empires:[e.id],key:'empire-end:'+e.id,title:'Devletin sonu',text:e.name+' siyasi varlığını kaybetti',important:true});
   /* Filoları haritadan kaldır */
+  for(const f of G.fleets)if(f.e===e.id&&f.ships.length)fleetLost(f,'rule','Devletin kaldırılması');
   G.fleets = G.fleets.filter(f => f.e !== e.id);
   /* Diplomatik bağları sil */
   for (const o of G.emps){
@@ -5692,6 +5830,7 @@ function swarmCap(){
       const yer = SWARM_FLEET_SHIPS - hedef.ships.length;
       hedef.ships.push(...k.ships.slice(0, yer));
     }
+    fleetLost(k,'rule','Kriz filo tavanı');
     k.ships.length = 0;
   }
   G.fleets = G.fleets.filter(f => f.ships && f.ships.length);
@@ -5859,6 +5998,7 @@ function crisisResolved(){
   }
   UI.crisisEnd(win);
   // vahşi kriz filoları temizlenir
+  for(const f of G.fleets)if(f.e===G.crisisId&&f.ships.length)fleetLost(f,'rule','Krizin sona ermesi');
   G.fleets = G.fleets.filter(f => f.e !== G.crisisId);
 }
 /* kriz filosu yok edildiğinde katkı kaydı */
@@ -7898,7 +8038,7 @@ function serialize(){
        sınırı 5212'ye düşüp 30 sistemi ERİŞİLEMEZ yapıyordu.
        v8 KALIR — ek alan, okunamadığında deterministik olarak
        yeniden türetilir. */
-    W:G.W, H:G.H, warLedger:G.warLedger, settlements:G.settlements, jointOps:G.jointOps,
+    W:G.W, H:G.H, ...(G.fleetJournal?.length?{fleetJournal:G.fleetJournal}:{}), warLedger:G.warLedger, settlements:G.settlements, jointOps:G.jointOps,
     viewPrefs:{federations:FED_LINKS_ON,alliances:ALLY_LINKS_ON,wars:WAR_LINKS_ON,dismissedBattles:cleanBattleDismissals(G.dismissedBattleReports)},
     /* FAZ 85A: politik küresel durum tek alt nesnede */
     world: serializePoliticalWorld(),
@@ -8114,6 +8254,7 @@ function applySaveData(d){
   G.p = G.emps[0];
   G._identityViewPrefs=d.viewPrefs;
   restoreShipments();
+  restoreFleetReferences();
   restoreFleetTemplates();
   restoreExploration();
   restoreResearch();
@@ -8151,6 +8292,7 @@ function applySaveData(d){
   /* FAZ 85F: konumsal simülasyon — campaign'den SONRA, events'ten
      ÖNCE (bildirim payload'ları sistem/devlet referansı çözebilsin),
      her ikisi de türetilmiş durumdan ve gerçek tikten ÖNCE. */
+  G.fleetJournal=cleanFleetJournal(d.fleetJournal);
   G._loadSimInfo = restoreSimulationWorld(d.simulation, d.v);
   loadCheckpoint('after:simulation');
   G._loadEventsInfo = restoreEventsWorld(d.events, d.v);
@@ -8501,7 +8643,7 @@ function forceRedraw(sebep){
    Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
    Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
 /* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */
-const BUILD_ID = '96h10p21';
+const BUILD_ID = '96h10p22';
 const DIAG_MAX = 40;
 const DIAG = [];
 function logDiag(tur, mesaj){
@@ -9343,6 +9485,7 @@ function monthTick(){
       mine.sort((a, b) => fleetPower(a) - fleetPower(b));
       const kes = mine.length - WILD_FLEET_CAP;
       const dagit = new Set(mine.slice(0, kes));
+      for(const f of dagit)fleetLost(f,'rule','Korsan filo tavanı');
       G.fleets = G.fleets.filter(f => !dagit.has(f));
     }
   }

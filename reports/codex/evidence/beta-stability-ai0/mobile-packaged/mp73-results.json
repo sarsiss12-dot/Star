@@ -1,0 +1,63 @@
+{
+  "results": [
+    {
+      "name": "A1 rehber 1–8: oda, iki farklı devlet, hazır, başlat; iki ekranda galaksi; sürüm işareti lobi / başlangıç / MP çubuğunda ve /mp/version oyun build'iyle aynı",
+      "status": "PASS",
+      "ms": 12891
+    },
+    {
+      "name": "B1 konsey motorun kendi yoluyla kurulur (fikstür: temas); AI insanlar adına oy / sponsor yazmaz; B gerçek \"KONSEY OYLAMASI\" kartından Konsey ekranını açar ve EVET (dokunma) → host kaydeder, oylama açık kalır",
+      "status": "FAIL",
+      "error": "locator.tap: Timeout 8000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-j=\"go\"]').first()\u001b[22m\n\u001b[2m    - locator resolved to <button data-j=\"go\" class=\"mp1-btn pri\">KATIL</button>\u001b[22m\n\u001b[2m  - attempting tap action\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is visible, enabled and stable\u001b[22m\n\u001b[2m    - scrolling into view if needed\u001b[22m\n\u001b[2m    - done scrolling\u001b[22m\n\u001b[2m    - performing tap action\u001b[22m\n\n    at tap (/workspace/Star/tests/browser-mp73.cjs:21:185)\n    at async room (/workspace/Star/tests/browser-mp73.cjs:63:149)\n    at async /workspace/Star/tests/browser-mp73.cjs:170:5\n    at async test (/workspace/Star/tests/browser-mp73.cjs:14:7)\n    at async /workspace/Star/tests/browser-mp73.cjs:169:3"
+    },
+    {
+      "name": "ST0 gerçek üç insan filo kaybı, native seçim / toplu kurtarma / ACK",
+      "status": "FAIL",
+      "error": "page.evaluate: Error: restore\n    at eval (eval at evaluate (:311:30), <anonymous>:1:30)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at module.exports (/workspace/Star/tests/helpers/beta-stability0-browser.cjs:45:703)\n    at async /workspace/Star/tests/browser-mp73.cjs:251:144\n    at async test (/workspace/Star/tests/browser-mp73.cjs:14:7)\n    at async /workspace/Star/tests/browser-mp73.cjs:251:35"
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "startModal": [
+      "🛰 DANIŞMAN",
+      ""
+    ],
+    "version": {
+      "mp": "MP.8.9b17",
+      "build": "96h10p22",
+      "files": {
+        "mp-core.js": "fb2324e86b48",
+        "relay.js": "35974ba78c75",
+        "mp1-host.js": "58355968ecef",
+        "join.js": "bc2732493741",
+        "mirror.js": "0be83dc59fd8",
+        "guest-stars.js": "27e779c107d5",
+        "mp71-dip.js": "791d18e17978",
+        "mp7-setup.js": "48c0f282a254"
+      }
+    },
+    "unsupported": [
+      "autoEvent",
+      "diagCopy",
+      "joinRebel",
+      "leaveRebel",
+      "mapFix",
+      "physio",
+      "restart",
+      "rollName",
+      "sandbox",
+      "sitPick",
+      "stashNote",
+      "survey",
+      "terra",
+      "toTitle",
+      "tplDel",
+      "tplLoad",
+      "tplSave",
+      "trigCrisis"
+    ],
+    "guestDiag": "STARS MP.8.9b17 · oyun 96h10p22 · misafir · host bağlı · aşama: ready · ayna r4 16:06:06 · kurulum 10 ms · son komut: yok · son hata: yok"
+  },
+  "pass": 1,
+  "fail": 2
+}

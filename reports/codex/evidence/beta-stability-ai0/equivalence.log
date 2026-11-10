@@ -1,0 +1,4 @@
+PASS p21 seed 11 3 months exact strategic Save8/RNG (diagnostic field explicitly separated)
+PASS p21 seed 42 3 months exact strategic Save8/RNG (diagnostic field explicitly separated)
+PASS p21 seed 99 3 months exact strategic Save8/RNG (diagnostic field explicitly separated)
+PASS p21 package accepted, bad integrity rejected

@@ -1,0 +1,23 @@
+[
+  {
+    "name": "desktop-combined",
+    "command": "STABILITY0=1 MPP0_DESKTOP=1 FEDAI0_AUDIT=1 MPP0=1 WAR_CENTER0=1 FEDAI0=1 ER0=1 BOARD1=1 MP73_ONLY='^(A1|B1|ST0|P0 |WC0|FAI0|ER0|BD1)' STARS_CHROMIUM_PATH=/usr/bin/chromium STARS_OUTPUT=reports/codex/evidence/beta-stability-ai0/desktop-combined node tests/browser-mp73.cjs",
+    "exit": 0,
+    "seconds": 264.97,
+    "log": "reports/codex/evidence/beta-stability-ai0/desktop-combined.log"
+  },
+  {
+    "name": "mobile-release",
+    "command": "STABILITY0=1 MP73_ONLY='^(A1|B1|ST0)' STARS_CHROMIUM_PATH=/usr/bin/chromium STARS_OUTPUT=reports/codex/evidence/beta-stability-ai0/mobile-release node tests/browser-mp73.cjs",
+    "exit": 0,
+    "seconds": 78.98,
+    "log": "reports/codex/evidence/beta-stability-ai0/mobile-release.log"
+  },
+  {
+    "name": "cold-release",
+    "command": "STABILITY0_R=1 MP8_SCEN=R MP8_MONTHS=2 STARS_CHROMIUM_PATH=/usr/bin/chromium STARS_OUTPUT=reports/codex/evidence/beta-stability-ai0/cold-release node tests/browser-mp8.cjs",
+    "exit": 0,
+    "seconds": 63.06,
+    "log": "reports/codex/evidence/beta-stability-ai0/cold-release.log"
+  }
+]

@@ -1,0 +1,6312 @@
+{
+  "control": "838f2c392b2cffa9198b88388d1f905e5c744604",
+  "checkpointSha256": "f4b76d743f9ae2b6c85d0c123f69618091f51e16507e4285fbb4f61522a56675",
+  "shock": [
+    {
+      "day": 1007,
+      "system": 35,
+      "actor": 3,
+      "min": 520,
+      "stability": -12
+    }
+  ],
+  "rows": [
+    {
+      "mode": "off",
+      "allAIActive": true,
+      "months": 24,
+      "ms": 7219,
+      "samples": [
+        {
+          "month": 0,
+          "day": 1020,
+          "rng": -975605953,
+          "schism": 0,
+          "resources": {
+            "min": 2272.7003568615387,
+            "ene": 5145.1387540307705,
+            "yiy": 4723.756382615095,
+            "ala": 4651.168303653847,
+            "ara": 0,
+            "tuk": 4829.93244632,
+            "etk": 4720.868461538462
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 60,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 28,
+              "counter": 9,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 28,
+              "counter": 9,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 28,
+              "counter": 9,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 28,
+              "counter": 9,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 28,
+              "counter": 9,
+              "policy": null
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 28,
+              "counter": 9,
+              "policy": null
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 47,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 1,
+          "day": 1050,
+          "rng": -479228977,
+          "schism": 0,
+          "resources": {
+            "min": 956.9641815692312,
+            "ene": 5243.612333434498,
+            "yiy": 4652.7828265025955,
+            "ala": 4538.796036634616,
+            "ara": 0,
+            "tuk": 4785.73819124,
+            "etk": 4732.309793846154
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 63,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 31,
+              "counter": 10,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 31,
+              "counter": 10,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 31,
+              "counter": 10,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 31,
+              "counter": 10,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 31,
+              "counter": 10,
+              "policy": null
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 31,
+              "counter": 10,
+              "policy": null
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 2,
+          "day": 1080,
+          "rng": 1280819339,
+          "schism": 0,
+          "resources": {
+            "min": 1034.0038752307696,
+            "ene": 5343.773436870238,
+            "yiy": 4583.299007802596,
+            "ala": 4510.824300961539,
+            "ara": 0,
+            "tuk": 4742.0140292,
+            "etk": 4743.870184615385
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 66,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 34,
+              "counter": 11,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 34,
+              "counter": 11,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 34,
+              "counter": 11,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 34,
+              "counter": 11,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 34,
+              "counter": 11,
+              "policy": null
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 34,
+              "counter": 11,
+              "policy": null
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 53,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 3,
+          "day": 1110,
+          "rng": 1209301842,
+          "schism": 0,
+          "resources": {
+            "min": 1065.579787615385,
+            "ene": 5448.333210477486,
+            "yiy": 4514.462507258846,
+            "ala": 4482.517612259616,
+            "ara": 0,
+            "tuk": 4698.323398699999,
+            "etk": 4755.574383846155
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 69,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 37,
+              "counter": 12,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 37,
+              "counter": 12,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 37,
+              "counter": 12,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 37,
+              "counter": 12,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 37,
+              "counter": 12,
+              "policy": null
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 37,
+              "counter": 12,
+              "policy": null
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 56,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 4,
+          "day": 1140,
+          "rng": -1325617138,
+          "schism": 0,
+          "resources": {
+            "min": 7.595611523077196,
+            "ene": 5551.542637342634,
+            "yiy": 4447.173303896346,
+            "ala": 4408.617226153847,
+            "ara": 0,
+            "tuk": 4689.692977462307,
+            "etk": 4767.6011190384625
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 72,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 40,
+              "counter": 13,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 40,
+              "counter": 13,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 40,
+              "counter": 13,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 40,
+              "counter": 13,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 40,
+              "counter": 13,
+              "policy": null
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 40,
+              "counter": 13,
+              "policy": null
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 59,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 5,
+          "day": 1170,
+          "rng": -197404492,
+          "schism": 0,
+          "resources": {
+            "min": 184.31348340000028,
+            "ene": 5661.791425508552,
+            "yiy": 4389.226501196345,
+            "ala": 4379.399200769231,
+            "ara": 0,
+            "tuk": 4682.428603776153,
+            "etk": 4689.793979807693
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 75,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 43,
+              "counter": 11,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 43,
+              "counter": 11,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 43,
+              "counter": 11,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 43,
+              "counter": 11,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 43,
+              "counter": 11,
+              "policy": null
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 43,
+              "counter": 11,
+              "policy": null
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 62,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 6,
+          "day": 1200,
+          "rng": -2100487802,
+          "schism": 0,
+          "resources": {
+            "min": 215.40266028205156,
+            "ene": 5778.196064948552,
+            "yiy": 4333.296997296346,
+            "ala": 4349.87507860577,
+            "ara": 0,
+            "tuk": 4677.180248161538,
+            "etk": 4702.144765705129
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 78,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 46,
+              "counter": 9,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 46,
+              "counter": 9,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 46,
+              "counter": 9,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 46,
+              "counter": 9,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 46,
+              "counter": 9,
+              "policy": null
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 46,
+              "counter": 9,
+              "policy": null
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 65,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 7,
+          "day": 1230,
+          "rng": -276498289,
+          "schism": 0,
+          "resources": {
+            "min": 9.898713005128513,
+            "ene": 5909.169916603759,
+            "yiy": 4278.560902558846,
+            "ala": 4238.168801538462,
+            "ara": 0,
+            "tuk": 4672.752782348461,
+            "etk": 4504.639032532053
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 81,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 49,
+              "counter": 7,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 49,
+              "counter": 7,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 49,
+              "counter": 7,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 49,
+              "counter": 7,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 49,
+              "counter": 7,
+              "policy": null
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 49,
+              "counter": 7,
+              "policy": null
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 68,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 8,
+          "day": 1260,
+          "rng": -915910259,
+          "schism": 0,
+          "resources": {
+            "min": 71.45973485128238,
+            "ene": 6098.029815921732,
+            "yiy": 4241.219166008846,
+            "ala": 4142.156741442308,
+            "ara": 0,
+            "tuk": 4695.554867925383,
+            "etk": 4298.190090608976
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 81.5,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 52,
+              "counter": 5,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 52,
+              "counter": 5,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 52,
+              "counter": 5,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 52,
+              "counter": 5,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 5,
+              "policy": null
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 5,
+              "policy": null
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 69.5,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 9,
+          "day": 1290,
+          "rng": 212302387,
+          "schism": 0,
+          "resources": {
+            "min": 24.722076874193334,
+            "ene": 6387.389250187057,
+            "yiy": 4201.042081225512,
+            "ala": 4031.1143934615384,
+            "ara": 0,
+            "tuk": 4722.302905705796,
+            "etk": 4121.931341250001
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 81.5,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 3,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 55,
+              "counter": 3,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 55,
+              "counter": 3,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 55,
+              "counter": 3,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 3,
+              "policy": null
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 3,
+              "policy": null
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 69.5,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 10,
+          "day": 1320,
+          "rng": -1754722120,
+          "schism": 0,
+          "resources": {
+            "min": 86.87159941560225,
+            "ene": 6620.898366815275,
+            "yiy": 4177.198927625513,
+            "ala": 3867.362045480769,
+            "ara": 0,
+            "tuk": 4754.738907628504,
+            "etk": 4135.781588942309
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 81.5,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 1,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 58,
+              "counter": 1,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 58,
+              "counter": 1,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 58,
+              "counter": 1,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 1,
+              "policy": null
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 1,
+              "policy": null
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 69.5,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 11,
+          "day": 1350,
+          "rng": -58615001,
+          "schism": 0,
+          "resources": {
+            "min": 136.34900143235635,
+            "ene": 6893.088373994948,
+            "yiy": 4138.259064992179,
+            "ala": 3706.92403125,
+            "ara": 0,
+            "tuk": 4824.470968883564,
+            "etk": 4109.80703945513
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 81.5,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 59.5,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 55,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 61,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 69.5,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 12,
+          "day": 1380,
+          "rng": -130132498,
+          "schism": 0,
+          "resources": {
+            "min": 81.89866015522105,
+            "ene": 7113.770716303396,
+            "yiy": 4132.424647125513,
+            "ala": 3551.6003507692308,
+            "ara": 0,
+            "tuk": 4897.733736455412,
+            "etk": 4123.971365096155
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 81.5,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 59.5,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 52,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 58,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 69.5,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 13,
+          "day": 1410,
+          "rng": -201649995,
+          "schism": 0,
+          "resources": {
+            "min": 21.089727618373757,
+            "ene": 7315.041796628969,
+            "yiy": 4094.193805400513,
+            "ala": 3329.2966702884614,
+            "ara": 0,
+            "tuk": 4975.634449733554,
+            "etk": 4138.134986826924
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 81.5,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 59.5,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 55,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 69.5,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 14,
+          "day": 1440,
+          "rng": 2126292794,
+          "schism": 0,
+          "resources": {
+            "min": 72.09023381632356,
+            "ene": 7501.706949086564,
+            "yiy": 4099.315831600513,
+            "ala": 3153.3373235576923,
+            "ara": 0,
+            "tuk": 5053.928178888962,
+            "etk": 4152.35721195513
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 81.5,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 59.5,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 52,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 69.5,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 15,
+          "day": 1470,
+          "rng": 1295057233,
+          "schism": 0,
+          "resources": {
+            "min": 13.02831901431746,
+            "ene": 7673.118343920614,
+            "yiy": 4072.742526750513,
+            "ala": 2948.3979768269232,
+            "ara": 0,
+            "tuk": 5132.016776327858,
+            "etk": 4166.576962596156
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 81.5,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 59.5,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 69.5,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 16,
+          "day": 1500,
+          "rng": 527762869,
+          "schism": 0,
+          "resources": {
+            "min": 64.60617724727581,
+            "ene": 7824.804720059696,
+            "yiy": 4109.556903600513,
+            "ala": 2765.508630096154,
+            "ara": 0,
+            "tuk": 5209.641422629158,
+            "etk": 4180.812023750002
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 81.5,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 59.5,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 69.5,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 17,
+          "day": 1530,
+          "rng": -303472692,
+          "schism": 0,
+          "resources": {
+            "min": 6.463192907618307,
+            "ene": 7983.415807276504,
+            "yiy": 4114.78625839218,
+            "ala": 2552.8692833653845,
+            "ara": 0,
+            "tuk": 5287.412699669365,
+            "etk": 4115.055800993591
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 81.5,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 59.5,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 69.5,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 18,
+          "day": 1560,
+          "rng": -438931386,
+          "schism": 0,
+          "resources": {
+            "min": 70.6170151263296,
+            "ene": 8158.88676651409,
+            "yiy": 4152.058665258846,
+            "ala": 2348.979936634615,
+            "ara": 0,
+            "tuk": 5364.965640181451,
+            "etk": 4129.3230450961555
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 81.5,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 59.5,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 69.5,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 19,
+          "day": 1590,
+          "rng": -134378001,
+          "schism": 0,
+          "resources": {
+            "min": 149.11007782143454,
+            "ene": 8494.757923841606,
+            "yiy": 4143.6773112050005,
+            "ala": 2129.288282211538,
+            "ara": 0,
+            "tuk": 5456.08827118167,
+            "etk": 4013.614352596155
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 81.5,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 59.5,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 69.5,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 20,
+          "day": 1620,
+          "rng": -1533508035,
+          "schism": 0,
+          "resources": {
+            "min": 110.99009660946416,
+            "ene": 8639.996438034519,
+            "yiy": 4192.5175800550005,
+            "ala": 1912.9989354807685,
+            "ara": 6.726786110905346,
+            "tuk": 5533.588378097401,
+            "etk": 3967.9149727243603
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 84.5,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 53,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 62.5,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 53,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 53,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 53,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 53,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 72.5,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 21,
+          "day": 1650,
+          "rng": 666552360,
+          "schism": 0,
+          "resources": {
+            "min": 206.4012592865078,
+            "ene": 8827.686685862041,
+            "yiy": 4183.381784793462,
+            "ala": 1704.580943942307,
+            "ara": 6.739656801243579,
+            "tuk": 5628.557841701826,
+            "etk": 3982.4007511858986
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 87.5,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 56,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 65.5,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 56,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 56,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 56,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 56,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 75.5,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 22,
+          "day": 1680,
+          "rng": -1996249014,
+          "schism": 0,
+          "resources": {
+            "min": 7.404842355054143,
+            "ene": 8964.313532991182,
+            "yiy": 4251.569894593463,
+            "ala": 1640.8929524038454,
+            "ara": 6.810105633997732,
+            "tuk": 5711.414110734611,
+            "etk": 3996.9892519551295
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 90.5,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 59,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 68.5,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 59,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 59,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 59,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 59,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 78.5,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 23,
+          "day": 1710,
+          "rng": -428024289,
+          "schism": 0,
+          "resources": {
+            "min": 7.658031258807938,
+            "ene": 9143.29878174607,
+            "yiy": 4285.656364183206,
+            "ala": 1579.2741916346145,
+            "ara": 6.854407049362314,
+            "tuk": 5828.3951697353195,
+            "etk": 4011.6649182371807
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 90.5,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 59,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 68.5,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 59,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 59,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 59,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 59,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 78.5,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 24,
+          "day": 1740,
+          "rng": -1259259850,
+          "schism": 0,
+          "resources": {
+            "min": 9.51249311800774,
+            "ene": 9394.142849441188,
+            "yiy": 4303.5047512601295,
+            "ala": 1518.0554308653836,
+            "ara": 6.903405704210364,
+            "tuk": 5945.349113826006,
+            "etk": 4026.3687223397446
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 90.5,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 59,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 68.5,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 59,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 59,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 59,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 59,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 78.5,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        }
+      ],
+      "policies": []
+    },
+    {
+      "mode": "p21",
+      "allAIActive": true,
+      "months": 24,
+      "ms": 8695,
+      "samples": [
+        {
+          "month": 0,
+          "day": 1020,
+          "rng": -975605953,
+          "schism": 0,
+          "resources": {
+            "min": 2272.7003568615387,
+            "ene": 5145.1387540307705,
+            "yiy": 4723.756382615095,
+            "ala": 4651.168303653847,
+            "ara": 0,
+            "tuk": 4829.93244632,
+            "etk": 4720.868461538462
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 60,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 28,
+              "counter": 9,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 28,
+              "counter": 9,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 28,
+              "counter": 9,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 28,
+              "counter": 9,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 28,
+              "counter": 9,
+              "policy": null
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 28,
+              "counter": 9,
+              "policy": null
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 47,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 1,
+          "day": 1050,
+          "rng": -479228977,
+          "schism": 0,
+          "resources": {
+            "min": 956.9641815692312,
+            "ene": 5243.612333434498,
+            "yiy": 4652.7828265025955,
+            "ala": 4538.796036634616,
+            "ara": 0,
+            "tuk": 4785.73819124,
+            "etk": 4652.309793846154
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 63,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 31,
+              "counter": 10,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 31,
+              "counter": 10,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 31,
+              "counter": 10,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 31,
+              "counter": 10,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 31,
+              "counter": 10,
+              "policy": "autonomy"
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 31,
+              "counter": 10,
+              "policy": null
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 2,
+          "day": 1080,
+          "rng": 1280819339,
+          "schism": 0,
+          "resources": {
+            "min": 1032.3242629230774,
+            "ene": 5341.116038609883,
+            "yiy": 4582.859897802596,
+            "ala": 4510.5877625,
+            "ara": 0,
+            "tuk": 4742.0140292,
+            "etk": 4583.8143615384615
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 66,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 34,
+              "counter": 11,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 34,
+              "counter": 11,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 34,
+              "counter": 11,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 34,
+              "counter": 11,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 34,
+              "counter": 11,
+              "policy": "autonomy"
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 34,
+              "counter": 11,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 53,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 3,
+          "day": 1110,
+          "rng": 1209301842,
+          "schism": 0,
+          "resources": {
+            "min": 1060.4426319230774,
+            "ene": 5439.049658110623,
+            "yiy": 4513.119473258846,
+            "ala": 4482.037612259615,
+            "ara": 0,
+            "tuk": 4698.323398699999,
+            "etk": 4595.403646923077
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 69,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 37,
+              "counter": 12,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 37,
+              "counter": 12,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 37,
+              "counter": 12,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 37,
+              "counter": 12,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 37,
+              "counter": 12,
+              "policy": "autonomy"
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 37,
+              "counter": 12,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 56,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 4,
+          "day": 1140,
+          "rng": -1325617138,
+          "schism": 0,
+          "resources": {
+            "min": 58.90259367692374,
+            "ene": 5535.184485387605,
+            "yiy": 4444.900641896345,
+            "ala": 4407.886841538461,
+            "ara": 0,
+            "tuk": 4687.813891000768,
+            "etk": 4607.312200576923
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 72,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 40,
+              "counter": 13,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 40,
+              "counter": 13,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 40,
+              "counter": 13,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 40,
+              "counter": 13,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 40,
+              "counter": 13,
+              "policy": "autonomy"
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 40,
+              "counter": 13,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 59,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 5,
+          "day": 1170,
+          "rng": -197404492,
+          "schism": 0,
+          "resources": {
+            "min": 231.9662846307699,
+            "ene": 5638.160336247013,
+            "yiy": 4385.867383196345,
+            "ala": 4378.411508461539,
+            "ara": 0,
+            "tuk": 4678.618474545384,
+            "etk": 4529.3836121153845
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 75,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 43,
+              "counter": 11,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 43,
+              "counter": 11,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 43,
+              "counter": 11,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 43,
+              "counter": 11,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 43,
+              "counter": 11,
+              "policy": "autonomy"
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 43,
+              "counter": 11,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 62,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 6,
+          "day": 1200,
+          "rng": -2100487802,
+          "schism": 0,
+          "resources": {
+            "min": 259.3029618205135,
+            "ene": 5747.094487279913,
+            "yiy": 4328.822191296345,
+            "ala": 4348.623155528846,
+            "ara": 0,
+            "tuk": 4671.387119853845,
+            "etk": 4541.609681089743
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 78,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 46,
+              "counter": 9,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 46,
+              "counter": 9,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 46,
+              "counter": 9,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 46,
+              "counter": 9,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 46,
+              "counter": 9,
+              "policy": "autonomy"
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 46,
+              "counter": 9,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 65,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 7,
+          "day": 1230,
+          "rng": -276498289,
+          "schism": 0,
+          "resources": {
+            "min": 49.948196082051936,
+            "ene": 5869.837015905534,
+            "yiy": 4272.941176558846,
+            "ala": 4236.645724615384,
+            "ara": 0,
+            "tuk": 4664.924698656153,
+            "etk": 4343.975963301282
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 81,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 49,
+              "counter": 7,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 49,
+              "counter": 7,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 49,
+              "counter": 7,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 49,
+              "counter": 7,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 49,
+              "counter": 7,
+              "policy": "autonomy"
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 49,
+              "counter": 7,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 68,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 8,
+          "day": 1260,
+          "rng": -915910259,
+          "schism": 0,
+          "resources": {
+            "min": 107.56008069743656,
+            "ene": 6048.947192201614,
+            "yiy": 4234.425288008845,
+            "ala": 4140.355587596154,
+            "ara": 0,
+            "tuk": 4683.55296084846,
+            "etk": 4137.395769070513
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 81.5,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 52,
+              "counter": 5,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 52,
+              "counter": 5,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 52,
+              "counter": 5,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 52,
+              "counter": 5,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 52,
+              "counter": 5,
+              "policy": "autonomy"
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 52,
+              "counter": 5,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 69.5,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 9,
+          "day": 1290,
+          "rng": 212302387,
+          "schism": 0,
+          "resources": {
+            "min": 162.59930451350328,
+            "ene": 6329.702416648135,
+            "yiy": 4197.774739225511,
+            "ala": 4029.059008846153,
+            "ara": 0,
+            "tuk": 4706.478041872272,
+            "etk": 3961.017022788462
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 81.5,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 3,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 55,
+              "counter": 3,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 55,
+              "counter": 3,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 55,
+              "counter": 3,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 55,
+              "counter": 3,
+              "policy": "autonomy"
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 55,
+              "counter": 3,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 69.5,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 10,
+          "day": 1320,
+          "rng": -1754722120,
+          "schism": 0,
+          "resources": {
+            "min": 109.08448782780243,
+            "ene": 6554.531222158602,
+            "yiy": 4177.623769625511,
+            "ala": 3847.091660865384,
+            "ara": 0,
+            "tuk": 4735.680840504135,
+            "etk": 3974.7657904807697
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 81.5,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 1,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 58,
+              "counter": 1,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 58,
+              "counter": 1,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 58,
+              "counter": 1,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 58,
+              "counter": 1,
+              "policy": "autonomy"
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 58,
+              "counter": 1,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 69.5,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 11,
+          "day": 1350,
+          "rng": -58615001,
+          "schism": 0,
+          "resources": {
+            "min": 151.45644489096705,
+            "ene": 6819.623728172739,
+            "yiy": 4142.541738992178,
+            "ala": 3686.4778774038455,
+            "ara": 0,
+            "tuk": 4801.447823584645,
+            "etk": 3948.708277916667
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 81.5,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 59.5,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 55,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 61,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 61,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 61,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 69.5,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 12,
+          "day": 1380,
+          "rng": -130132498,
+          "schism": 0,
+          "resources": {
+            "min": 90.45966685576681,
+            "ene": 7034.791865854121,
+            "yiy": 4140.73080112551,
+            "ala": 3531.017658461538,
+            "ara": 0,
+            "tuk": 4871.630335157838,
+            "etk": 3962.8081574038465
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 81.5,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 59.5,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 52,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 58,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 62,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 62,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 69.5,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 13,
+          "day": 1410,
+          "rng": -201649995,
+          "schism": 0,
+          "resources": {
+            "min": 29.98414666454738,
+            "ene": 7237.890209839003,
+            "yiy": 4116.75456327551,
+            "ala": 3308.898593365384,
+            "ara": 0,
+            "tuk": 4944.469939851585,
+            "etk": 3976.986211442308
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 81.5,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 59.5,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 55,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 59,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 62,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 69.5,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 14,
+          "day": 1440,
+          "rng": 2126292794,
+          "schism": 0,
+          "resources": {
+            "min": 83.18585097026472,
+            "ene": 7434.595880587131,
+            "yiy": 4125.614583808842,
+            "ala": 3133.077708173076,
+            "ara": 0,
+            "tuk": 5020.311651946903,
+            "etk": 3991.2846827243593
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 81.5,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 59.5,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 52,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 56,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 59,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 69.5,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 15,
+          "day": 1470,
+          "rng": 1295057233,
+          "schism": 0,
+          "resources": {
+            "min": 25.667651727003147,
+            "ene": 7614.183991085053,
+            "yiy": 4102.806539575508,
+            "ala": 2928.230669134615,
+            "ara": 0,
+            "tuk": 5094.772597630884,
+            "etk": 4005.5588949038465
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 81.5,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 59.5,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 53,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 56,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 69.5,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 16,
+          "day": 1500,
+          "rng": 527762869,
+          "schism": 0,
+          "resources": {
+            "min": 78.1316106957981,
+            "ene": 7772.182730047376,
+            "yiy": 4143.786973475508,
+            "ala": 2745.3874762499995,
+            "ara": 0,
+            "tuk": 5167.3682875145005,
+            "etk": 4019.82663298077
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 81.5,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 59.5,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 53,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 69.5,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 17,
+          "day": 1530,
+          "rng": -303472692,
+          "schism": 0,
+          "resources": {
+            "min": 20.216981561304067,
+            "ene": 7935.296797387021,
+            "yiy": 4153.217522925507,
+            "ala": 2532.74812951923,
+            "ara": 0,
+            "tuk": 5238.929972137668,
+            "etk": 3954.0813025320517
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 81.5,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 59.5,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 69.5,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 18,
+          "day": 1560,
+          "rng": -438931386,
+          "schism": 0,
+          "resources": {
+            "min": 72.87045078070261,
+            "ene": 8114.120076624607,
+            "yiy": 4206.51297485884,
+            "ala": 2328.8587827884608,
+            "ara": 0,
+            "tuk": 5309.3782538675805,
+            "etk": 3968.348546634616
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 81.5,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 59.5,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 69.5,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 19,
+          "day": 1590,
+          "rng": 497457669,
+          "schism": 0,
+          "resources": {
+            "min": 151.2635841004893,
+            "ene": 8453.343553952122,
+            "yiy": 4203.244781381916,
+            "ala": 2109.1671283653836,
+            "ara": 0,
+            "tuk": 5391.889079435538,
+            "etk": 3852.639854134616
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 81.5,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 59.5,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 69.5,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 20,
+          "day": 1620,
+          "rng": 1561729118,
+          "schism": 0,
+          "resources": {
+            "min": 113.04409374820324,
+            "ene": 8601.934388145035,
+            "yiy": 4257.688888615249,
+            "ala": 1892.8777816346142,
+            "ara": 6.726786110905346,
+            "tuk": 5461.751861080156,
+            "etk": 3806.940474262821
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 84.5,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 53,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 62.5,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 53,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 53,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 53,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 53,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 72.5,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 21,
+          "day": 1650,
+          "rng": 1994164897,
+          "schism": 0,
+          "resources": {
+            "min": 212.95616415805372,
+            "ene": 8792.976955972557,
+            "yiy": 4249.675502215249,
+            "ala": 1684.4597900961526,
+            "ara": 6.739656801243579,
+            "tuk": 5547.283870312061,
+            "etk": 3821.4262527243595
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 87.5,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 56,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 65.5,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 56,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 56,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 56,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 56,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 75.5,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 22,
+          "day": 1680,
+          "rng": -1804425423,
+          "schism": 0,
+          "resources": {
+            "min": 88.46106849754443,
+            "ene": 8826.100923101698,
+            "yiy": 4320.626768215249,
+            "ala": 1620.771798557691,
+            "ara": 6.810105633997732,
+            "tuk": 5621.337605634621,
+            "etk": 3836.0147534935904
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 90.5,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 59,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 68.5,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 59,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 59,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 59,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 59,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 78.5,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 23,
+          "day": 1710,
+          "rng": 1091411839,
+          "schism": 0,
+          "resources": {
+            "min": 18.11598890207503,
+            "ene": 9008.438491856585,
+            "yiy": 4356.812377056275,
+            "ala": 1559.15303778846,
+            "ara": 6.854407049362314,
+            "tuk": 5726.805192126022,
+            "etk": 3850.6904197756417
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 90.5,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 59,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 68.5,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 59,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 59,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 59,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 59,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 78.5,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 24,
+          "day": 1740,
+          "rng": -1571389535,
+          "schism": 0,
+          "resources": {
+            "min": 41.17258921004546,
+            "ene": 9249.560804790588,
+            "yiy": 4377.349221897301,
+            "ala": 1513.0342770192292,
+            "ara": 6.903405704210364,
+            "tuk": 5831.680779020085,
+            "etk": 3865.3942238782056
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 90.5,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 59,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 68.5,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 59,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 59,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 59,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 59,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 78.5,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        }
+      ],
+      "policies": [
+        {
+          "day": 1050,
+          "system": 7,
+          "kind": "autonomy",
+          "paid": {
+            "etk": 80
+          },
+          "stab": 31,
+          "counter": 10
+        },
+        {
+          "day": 1080,
+          "system": 8,
+          "kind": "autonomy",
+          "paid": {
+            "etk": 80
+          },
+          "stab": 34,
+          "counter": 11
+        }
+      ]
+    },
+    {
+      "mode": "candidate",
+      "allAIActive": true,
+      "months": 24,
+      "ms": 10855,
+      "samples": [
+        {
+          "month": 0,
+          "day": 1020,
+          "rng": -975605953,
+          "schism": 0,
+          "resources": {
+            "min": 2272.7003568615387,
+            "ene": 5145.1387540307705,
+            "yiy": 4723.756382615095,
+            "ala": 4651.168303653847,
+            "ara": 0,
+            "tuk": 4829.93244632,
+            "etk": 4720.868461538462
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 60,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 28,
+              "counter": 9,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 28,
+              "counter": 9,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 28,
+              "counter": 9,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 28,
+              "counter": 9,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 28,
+              "counter": 9,
+              "policy": null
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 28,
+              "counter": 9,
+              "policy": null
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 47,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 1,
+          "day": 1050,
+          "rng": -479228977,
+          "schism": 0,
+          "resources": {
+            "min": 956.9641815692312,
+            "ene": 5243.612333434498,
+            "yiy": 4652.7828265025955,
+            "ala": 4538.796036634616,
+            "ara": 0,
+            "tuk": 4785.73819124,
+            "etk": 4652.309793846154
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 63,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 31,
+              "counter": 10,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 31,
+              "counter": 10,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 31,
+              "counter": 10,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 31,
+              "counter": 10,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 31,
+              "counter": 10,
+              "policy": "autonomy"
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 31,
+              "counter": 10,
+              "policy": null
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 2,
+          "day": 1080,
+          "rng": 1280819339,
+          "schism": 0,
+          "resources": {
+            "min": 1032.3242629230774,
+            "ene": 5341.116038609883,
+            "yiy": 4582.859897802596,
+            "ala": 4510.5877625,
+            "ara": 0,
+            "tuk": 4742.0140292,
+            "etk": 4583.8143615384615
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 66,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 34,
+              "counter": 11,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 34,
+              "counter": 11,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 34,
+              "counter": 11,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 34,
+              "counter": 11,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 34,
+              "counter": 11,
+              "policy": "autonomy"
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 34,
+              "counter": 11,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 53,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 3,
+          "day": 1110,
+          "rng": 1209301842,
+          "schism": 0,
+          "resources": {
+            "min": 1060.4426319230774,
+            "ene": 5439.049658110623,
+            "yiy": 4513.119473258846,
+            "ala": 4482.037612259615,
+            "ara": 0,
+            "tuk": 4698.323398699999,
+            "etk": 4595.403646923077
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 69,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 37,
+              "counter": 12,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 37,
+              "counter": 12,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 37,
+              "counter": 12,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 37,
+              "counter": 12,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 37,
+              "counter": 12,
+              "policy": "autonomy"
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 37,
+              "counter": 12,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 56,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 4,
+          "day": 1140,
+          "rng": -1325617138,
+          "schism": 0,
+          "resources": {
+            "min": 58.90259367692374,
+            "ene": 5535.184485387605,
+            "yiy": 4444.900641896345,
+            "ala": 4407.886841538461,
+            "ara": 0,
+            "tuk": 4687.813891000768,
+            "etk": 4607.312200576923
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 72,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 40,
+              "counter": 13,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 40,
+              "counter": 13,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 40,
+              "counter": 13,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 40,
+              "counter": 13,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 40,
+              "counter": 13,
+              "policy": "autonomy"
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 40,
+              "counter": 13,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 59,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 5,
+          "day": 1170,
+          "rng": -197404492,
+          "schism": 0,
+          "resources": {
+            "min": 231.9662846307699,
+            "ene": 5638.160336247013,
+            "yiy": 4385.867383196345,
+            "ala": 4378.411508461539,
+            "ara": 0,
+            "tuk": 4678.618474545384,
+            "etk": 4529.3836121153845
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 75,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 43,
+              "counter": 11,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 43,
+              "counter": 11,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 43,
+              "counter": 11,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 43,
+              "counter": 11,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 43,
+              "counter": 11,
+              "policy": "autonomy"
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 43,
+              "counter": 11,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 62,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 6,
+          "day": 1200,
+          "rng": -2100487802,
+          "schism": 0,
+          "resources": {
+            "min": 259.3029618205135,
+            "ene": 5747.094487279913,
+            "yiy": 4328.822191296345,
+            "ala": 4348.623155528846,
+            "ara": 0,
+            "tuk": 4671.387119853845,
+            "etk": 4541.609681089743
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 78,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 46,
+              "counter": 9,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 46,
+              "counter": 9,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 46,
+              "counter": 9,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 46,
+              "counter": 9,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 46,
+              "counter": 9,
+              "policy": "autonomy"
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 46,
+              "counter": 9,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 65,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 7,
+          "day": 1230,
+          "rng": -276498289,
+          "schism": 0,
+          "resources": {
+            "min": 49.948196082051936,
+            "ene": 5869.837015905534,
+            "yiy": 4272.941176558846,
+            "ala": 4236.645724615384,
+            "ara": 0,
+            "tuk": 4664.924698656153,
+            "etk": 4343.975963301282
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 81,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 49,
+              "counter": 7,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 49,
+              "counter": 7,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 49,
+              "counter": 7,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 49,
+              "counter": 7,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 49,
+              "counter": 7,
+              "policy": "autonomy"
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 49,
+              "counter": 7,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 68,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 8,
+          "day": 1260,
+          "rng": -915910259,
+          "schism": 0,
+          "resources": {
+            "min": 107.56008069743656,
+            "ene": 6048.947192201614,
+            "yiy": 4234.425288008845,
+            "ala": 4140.355587596154,
+            "ara": 0,
+            "tuk": 4683.55296084846,
+            "etk": 4137.395769070513
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 81.5,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 52,
+              "counter": 5,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 52,
+              "counter": 5,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 52,
+              "counter": 5,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 52,
+              "counter": 5,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 52,
+              "counter": 5,
+              "policy": "autonomy"
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 52,
+              "counter": 5,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 69.5,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 9,
+          "day": 1290,
+          "rng": 212302387,
+          "schism": 0,
+          "resources": {
+            "min": 162.59930451350328,
+            "ene": 6329.702416648135,
+            "yiy": 4197.774739225511,
+            "ala": 4029.059008846153,
+            "ara": 0,
+            "tuk": 4706.478041872272,
+            "etk": 3961.017022788462
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 81.5,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 3,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 55,
+              "counter": 3,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 55,
+              "counter": 3,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 55,
+              "counter": 3,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 55,
+              "counter": 3,
+              "policy": "autonomy"
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 55,
+              "counter": 3,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 69.5,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 10,
+          "day": 1320,
+          "rng": -1754722120,
+          "schism": 0,
+          "resources": {
+            "min": 109.08448782780243,
+            "ene": 6554.531222158602,
+            "yiy": 4177.623769625511,
+            "ala": 3847.091660865384,
+            "ara": 0,
+            "tuk": 4735.680840504135,
+            "etk": 3974.7657904807697
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 81.5,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 1,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 58,
+              "counter": 1,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 58,
+              "counter": 1,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 58,
+              "counter": 1,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 58,
+              "counter": 1,
+              "policy": "autonomy"
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 58,
+              "counter": 1,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 69.5,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 11,
+          "day": 1350,
+          "rng": -58615001,
+          "schism": 0,
+          "resources": {
+            "min": 151.45644489096705,
+            "ene": 6819.623728172739,
+            "yiy": 4142.541738992178,
+            "ala": 3686.4778774038455,
+            "ara": 0,
+            "tuk": 4801.447823584645,
+            "etk": 3948.708277916667
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 81.5,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 59.5,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 55,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 61,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 61,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 61,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 69.5,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 12,
+          "day": 1380,
+          "rng": -130132498,
+          "schism": 0,
+          "resources": {
+            "min": 90.45966685576681,
+            "ene": 7034.791865854121,
+            "yiy": 4140.73080112551,
+            "ala": 3531.017658461538,
+            "ara": 0,
+            "tuk": 4871.630335157838,
+            "etk": 3962.8081574038465
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 81.5,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 59.5,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 52,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 58,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 62,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 62,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 69.5,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 13,
+          "day": 1410,
+          "rng": -201649995,
+          "schism": 0,
+          "resources": {
+            "min": 29.98414666454738,
+            "ene": 7237.890209839003,
+            "yiy": 4116.75456327551,
+            "ala": 3308.898593365384,
+            "ara": 0,
+            "tuk": 4944.469939851585,
+            "etk": 3976.986211442308
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 81.5,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 59.5,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 55,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 59,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 62,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 69.5,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 14,
+          "day": 1440,
+          "rng": 2126292794,
+          "schism": 0,
+          "resources": {
+            "min": 83.18585097026472,
+            "ene": 7434.595880587131,
+            "yiy": 4125.614583808842,
+            "ala": 3133.077708173076,
+            "ara": 0,
+            "tuk": 5020.311651946903,
+            "etk": 3991.2846827243593
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 81.5,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 59.5,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 52,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 56,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 59,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 69.5,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 15,
+          "day": 1470,
+          "rng": 1295057233,
+          "schism": 0,
+          "resources": {
+            "min": 25.667651727003147,
+            "ene": 7614.183991085053,
+            "yiy": 4102.806539575508,
+            "ala": 2928.230669134615,
+            "ara": 0,
+            "tuk": 5094.772597630884,
+            "etk": 4005.5588949038465
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 81.5,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 59.5,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 53,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 56,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 69.5,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 16,
+          "day": 1500,
+          "rng": 527762869,
+          "schism": 0,
+          "resources": {
+            "min": 78.1316106957981,
+            "ene": 7772.182730047376,
+            "yiy": 4143.786973475508,
+            "ala": 2745.3874762499995,
+            "ara": 0,
+            "tuk": 5167.3682875145005,
+            "etk": 4019.82663298077
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 81.5,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 59.5,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 53,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 69.5,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 17,
+          "day": 1530,
+          "rng": -303472692,
+          "schism": 0,
+          "resources": {
+            "min": 20.216981561304067,
+            "ene": 7935.296797387021,
+            "yiy": 4153.217522925507,
+            "ala": 2532.74812951923,
+            "ara": 0,
+            "tuk": 5238.929972137668,
+            "etk": 3954.0813025320517
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 81.5,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 59.5,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 69.5,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 18,
+          "day": 1560,
+          "rng": -438931386,
+          "schism": 0,
+          "resources": {
+            "min": 72.87045078070261,
+            "ene": 8114.120076624607,
+            "yiy": 4206.51297485884,
+            "ala": 2328.8587827884608,
+            "ara": 0,
+            "tuk": 5309.3782538675805,
+            "etk": 3968.348546634616
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 81.5,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 59.5,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 69.5,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 19,
+          "day": 1590,
+          "rng": 497457669,
+          "schism": 0,
+          "resources": {
+            "min": 151.2635841004893,
+            "ene": 8453.343553952122,
+            "yiy": 4203.244781381916,
+            "ala": 2109.1671283653836,
+            "ara": 0,
+            "tuk": 5391.889079435538,
+            "etk": 3852.639854134616
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 81.5,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 59.5,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 50,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 69.5,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 20,
+          "day": 1620,
+          "rng": 1561729118,
+          "schism": 0,
+          "resources": {
+            "min": 113.04409374820324,
+            "ene": 8601.934388145035,
+            "yiy": 4257.688888615249,
+            "ala": 1892.8777816346142,
+            "ara": 6.726786110905346,
+            "tuk": 5461.751861080156,
+            "etk": 3806.940474262821
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 84.5,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 53,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 62.5,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 53,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 53,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 53,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 53,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 72.5,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 21,
+          "day": 1650,
+          "rng": 1994164897,
+          "schism": 0,
+          "resources": {
+            "min": 212.95616415805372,
+            "ene": 8792.976955972557,
+            "yiy": 4249.675502215249,
+            "ala": 1684.4597900961526,
+            "ara": 6.739656801243579,
+            "tuk": 5547.283870312061,
+            "etk": 3821.4262527243595
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 87.5,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 56,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 65.5,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 56,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 56,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 56,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 56,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 75.5,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 22,
+          "day": 1680,
+          "rng": -1804425423,
+          "schism": 0,
+          "resources": {
+            "min": 88.46106849754443,
+            "ene": 8826.100923101698,
+            "yiy": 4320.626768215249,
+            "ala": 1620.771798557691,
+            "ara": 6.810105633997732,
+            "tuk": 5621.337605634621,
+            "etk": 3836.0147534935904
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 90.5,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 59,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 68.5,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 59,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 59,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 59,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 59,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 78.5,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 23,
+          "day": 1710,
+          "rng": 1091411839,
+          "schism": 0,
+          "resources": {
+            "min": 18.11598890207503,
+            "ene": 9008.438491856585,
+            "yiy": 4356.812377056275,
+            "ala": 1559.15303778846,
+            "ara": 6.854407049362314,
+            "tuk": 5726.805192126022,
+            "etk": 3850.6904197756417
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 90.5,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 59,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 68.5,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 59,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 59,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 59,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 59,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 78.5,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        },
+        {
+          "month": 24,
+          "day": 1740,
+          "rng": -1571389535,
+          "schism": 0,
+          "resources": {
+            "min": 41.17258921004546,
+            "ene": 9249.560804790588,
+            "yiy": 4377.349221897301,
+            "ala": 1513.0342770192292,
+            "ara": 6.903405704210364,
+            "tuk": 5831.680779020085,
+            "etk": 3865.3942238782056
+          },
+          "crisis": null,
+          "shortage": false,
+          "colonies": [
+            {
+              "s": 12,
+              "p": 0,
+              "owner": 3,
+              "stab": 90.5,
+              "counter": 0,
+              "policy": null
+            },
+            {
+              "s": 0,
+              "p": 0,
+              "owner": 3,
+              "stab": 59,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 4,
+              "p": 0,
+              "owner": 3,
+              "stab": 68.5,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 0,
+              "owner": 3,
+              "stab": 59,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 6,
+              "p": 0,
+              "owner": 3,
+              "stab": 59,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 7,
+              "p": 0,
+              "owner": 3,
+              "stab": 59,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "owner": 3,
+              "stab": 59,
+              "counter": 0,
+              "policy": "autonomy"
+            },
+            {
+              "s": 5,
+              "p": 1,
+              "owner": 3,
+              "stab": 78.5,
+              "counter": 0,
+              "policy": null
+            }
+          ]
+        }
+      ],
+      "policies": [
+        {
+          "day": 1050,
+          "system": 7,
+          "kind": "autonomy",
+          "paid": {
+            "etk": 80
+          },
+          "stab": 31,
+          "counter": 10
+        },
+        {
+          "day": 1080,
+          "system": 8,
+          "kind": "autonomy",
+          "paid": {
+            "etk": 80
+          },
+          "stab": 34,
+          "counter": 11
+        }
+      ]
+    }
+  ],
+  "positive": true,
+  "negative": true,
+  "aiCrisisRulesChanged": false
+}

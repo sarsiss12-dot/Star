@@ -1,0 +1,12 @@
+{
+  "received": false,
+  "expectedFile": "stars-2224-10.sav",
+  "expectedBytes": 3122149,
+  "expectedSha256": "37fc6db0579c891d508a4251613aea92cb7a6ba797ca2f459711899070964ffe",
+  "expectedCRC32": "DCE544EB",
+  "actualSha256": null,
+  "actualCRC32": null,
+  "realSaveS1S2S3S9": "NOT RUN",
+  "numbersOrigin": "User provided; synthetic fixture independently exercises these counts",
+  "historicalMainFleetCause": "BELİRLENEMEDİ"
+}

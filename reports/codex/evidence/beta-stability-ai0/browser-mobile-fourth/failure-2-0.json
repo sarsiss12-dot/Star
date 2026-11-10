@@ -1,0 +1,93 @@
+{
+  "url": "/",
+  "vote": null,
+  "inbox": [
+    {
+      "kind": "anomaly",
+      "data": {
+        "a": {
+          "id": "a16",
+          "k": "megayapi",
+          "n": "Dönen Halka",
+          "t": "Yıldızın etrafında hâlâ dönen, kilometrelerce çaplı bir halka. Yüzeyinde tek bir çizik bile yok.",
+          "ch": [
+            {
+              "t": "Malzemeyi incele",
+              "d": "+320 araştırma, +90 alaşım"
+            },
+            {
+              "t": "Sökmeye çalış",
+              "d": "+900 mineral · TEHLİKELİ"
+            }
+          ]
+        },
+        "sys": {
+          "id": 39,
+          "x": 422.31840628492546,
+          "y": 2953.011339640457,
+          "name": "Lyrrus",
+          "star": {
+            "n": "M Kırmızı Cüce",
+            "c": "#ff7b5c",
+            "r": 4.5,
+            "w": 30
+          },
+          "planets": [
+            {
+              "i": 0,
+              "t": "vol",
+              "dep": "nadir",
+              "sz": 11,
+              "seed": 5112,
+              "owner": -1,
+              "col": null,
+              "name": "Lyrrus I"
+            },
+            {
+              "i": 1,
+              "t": "buz",
+              "dep": null,
+              "sz": 17,
+              "seed": 5129,
+              "owner": -1,
+              "col": null,
+              "name": "Lyrrus II"
+            }
+          ],
+          "lanes": [
+            9,
+            25,
+            36,
+            38
+          ],
+          "owner": -1,
+          "surv": [
+            0
+          ],
+          "seen": [
+            0
+          ],
+          "def": 0,
+          "queue": [],
+          "anom": false,
+          "pulsar": false,
+          "nebulaS": false,
+          "anomK": "megayapi",
+          "_reach": 0,
+          "_shat": false,
+          "cr": 0
+        }
+      },
+      "ico": "🔬",
+      "cls": "sci",
+      "pause": true,
+      "title": "Anomali — Lyrrus",
+      "sub": "Dönen Halka",
+      "key": "an:39",
+      "uid": 1,
+      "born": 83.4907999999998
+    }
+  ],
+  "modal": "",
+  "pane": ""
+}

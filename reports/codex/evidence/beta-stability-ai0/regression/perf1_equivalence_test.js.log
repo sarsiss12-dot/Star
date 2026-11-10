@@ -1,0 +1,20 @@
+✓ arındırılmış kaynaklar PERF.1 öncesi baytların kendisi: economy.js 96H.9/96H.10 özeti, economic-ledger.js MP.6.4 özeti
+✗ kontrol ve aday aynı geç oyun Save8'inden 3 ay: her ay Save8 ve RNG birebir; aday ticaret rotasını yeniden hesaplamaz — AssertionError [ERR_ASSERTION]: Save8 month 1
++ actual - expected
+
++ '3b329e9c7151ae7c6a69aa6ca7b03e0f91e8bc629ee0844519aa75e809030e3f'
+- '59f9ce55d9264e273a8985f0a050c103f89959378bc00ffbf04dead34a2a2f68'
+
+    at /workspace/Star/tests/perf1_equivalence_test.js:33:14
+    at test (/workspace/Star/tests/helpers/95e-fixture.js:13:60)
+    at Object.<anonymous> (/workspace/Star/tests/perf1_equivalence_test.js:28:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+✓ ticaret rotası önbelleği: her saklı rota taze findPath ile aynı; radyasyon, şerit dizisi ve yeni dünya önbelleği sıfırlar
+✓ EconomyLedger: stock / snapshot / changedSince eski ifadelerle aynı (anahtar sırası, clean kuralı, eksik devlet, NaN/sonsuz)
+GEÇEN: 3 KALAN: 1

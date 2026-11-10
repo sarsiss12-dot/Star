@@ -1,0 +1,101 @@
+{
+  "url": "/mp/play",
+  "vote": null,
+  "inbox": [
+    {
+      "kind": "anomaly",
+      "data": {
+        "a": {
+          "id": "a1",
+          "k": "megayapi",
+          "n": "Terk Edilmiş İstasyon",
+          "t": "Yörüngede sürüklenen kadim bir liman. Işıkları hâlâ yanıyor ama içeride kimse yok.",
+          "ch": [
+            {
+              "t": "Sistemleri tara",
+              "d": "+180 araştırma"
+            },
+            {
+              "t": "Gövdeyi sök",
+              "d": "+220 mineral, +60 alaşım"
+            }
+          ]
+        },
+        "sys": {
+          "id": 33,
+          "x": 1376.1029809309496,
+          "y": 3849.1396676679637,
+          "name": "Kalvos",
+          "star": {
+            "n": "Nötron Yıldızı",
+            "c": "#e2f7ff",
+            "r": 3,
+            "w": 2,
+            "ozel": 1
+          },
+          "planets": [
+            {
+              "i": 0,
+              "t": "buz",
+              "dep": null,
+              "sz": 14,
+              "seed": 4326,
+              "name": "Kalvos I",
+              "owner": -1
+            },
+            {
+              "i": 1,
+              "t": "cor",
+              "dep": "ergi_kaynagi",
+              "sz": 10,
+              "seed": 4343,
+              "name": "Kalvos II",
+              "owner": -1
+            },
+            {
+              "i": 2,
+              "t": "buz",
+              "dep": null,
+              "sz": 10,
+              "seed": 4360,
+              "name": "Kalvos III",
+              "owner": -1
+            }
+          ],
+          "lanes": [
+            3,
+            12,
+            27
+          ],
+          "owner": -1,
+          "surv": [
+            0
+          ],
+          "seen": [
+            0
+          ],
+          "queue": [],
+          "anom": false,
+          "anomK": "megayapi",
+          "def": 0,
+          "pulsar": false,
+          "nebulaS": false,
+          "_reach": 0,
+          "_shat": false
+        }
+      },
+      "decisionId": 1,
+      "uid": 1,
+      "key": "personal:1",
+      "born": 20.600000000000037,
+      "pause": false,
+      "ico": "🔬",
+      "cls": "sci",
+      "title": "Terk Edilmiş İstasyon",
+      "sub": "Yörüngede sürüklenen kadim bir liman. Işıkları hâlâ yanıyor ama içeride kimse yok.",
+      "hidden": false
+    }
+  ],
+  "modal": "",
+  "pane": ""
+}

@@ -1,0 +1,71 @@
+{
+  "url": "/mp/play",
+  "vote": {
+    "name": "Yıldızlar Konsey",
+    "founder": 0,
+    "members": [
+      0,
+      1,
+      2,
+      7,
+      5,
+      4,
+      6,
+      3
+    ],
+    "laws": {},
+    "targeted": {},
+    "treasury": 0,
+    "president": 0,
+    "terms": {
+      "0": 1
+    },
+    "termAge": 0,
+    "voteIn": 2,
+    "dead": false,
+    "byConvention": true,
+    "firstLaw": null,
+    "pariahs": {},
+    "agenda": [],
+    "vote": {
+      "key": "ticaretStd",
+      "opened": 6.966000000000017,
+      "target": null,
+      "yes": [
+        7,
+        5,
+        4,
+        3,
+        0
+      ],
+      "no": [
+        6
+      ],
+      "speeches": [
+        {
+          "id": 7,
+          "txt": "Bu sorunun cevabı laboratuvarda, mecliste değil.",
+          "yes": true
+        },
+        {
+          "id": 5,
+          "txt": "Ticaret yolları kapalıyken kimse zengin olmaz.",
+          "yes": true
+        },
+        {
+          "id": 4,
+          "txt": "Zayıflık davettir. Bu meclis güçlüye saygı duymalı.",
+          "yes": true
+        }
+      ],
+      "done": false,
+      "age": 0,
+      "sponsor": null
+    },
+    "lastVote": null,
+    "campaign": null
+  },
+  "inbox": [],
+  "modal": "",
+  "pane": "<div class=\"dpBox\">\n      <div class=\"dpHd\"><span>🌐 GALAKTİK KONSEY</span>\n        <button class=\"riX\" data-a=\"closeDiplo\">✕</button></div>\n      <div class=\"dpBody\"><div class=\"envRow\"><span>Yıldızlar Konsey</span>\n        <b style=\"color:#6ff2c8\">8 üye</b></div><div class=\"row\"><span>Başkan</span>\n        <b style=\"color:#985f3e\">Saf Akıl Ağı (sen)</b></div><div class=\"row\"><span>Başkanlık dönemin</span><b>1 / 3</b></div><div class=\"row\"><span>Oy ağırlığın</span><b style=\"color:#6ff2c8\">13.4</b></div><div class=\"mini\">Oy ağırlığı toprak, etki ve pasifist ideolojiyle artar.\n        3 dönem başkanlık = <b>Konsey Hâkimiyeti zaferi</b>.</div><div class=\"ph\">AÇIK OYLAMA</div><div class=\"box\" style=\"border-color:#ff9b3d\">\n          <div class=\"bt\"><span>⚖ Evrensel Ticaret Standardı</span></div>\n          <div class=\"bd\">Ortak ölçüler, ortak limanlar, tek muhasebe dili. Tüm üyelerin ticaret geliri %10 artar.</div><div class=\"ph\" style=\"margin-top:8px\">MECLİS KÜRSÜSÜ</div><div class=\"mini\" style=\"border-left:2px solid #f5665c;padding-left:8px;margin:5px 0\">\n              <b style=\"color:#f5665c\">Sylraen Komünü</b>\n              <span class=\"tag p\">EVET</span><br>\n              <i>\"Bu sorunun cevabı laboratuvarda, mecliste değil.\"</i></div><div class=\"mini\" style=\"border-left:2px solid #5c9ef5;padding-left:8px;margin:5px 0\">\n              <b style=\"color:#5c9ef5\">Ziror Konsorsiyumu</b>\n              <span class=\"tag p\">EVET</span><br>\n              <i>\"Ticaret yolları kapalıyken kimse zengin olmaz.\"</i></div><div class=\"mini\" style=\"border-left:2px solid #56983e;padding-left:8px;margin:5px 0\">\n              <b style=\"color:#56983e\">Talik Ordusu</b>\n              <span class=\"tag p\">EVET</span><br>\n              <i>\"Zayıflık davettir. Bu meclis güçlüye saygı duymalı.\"</i></div><div class=\"act2\">\n          <button class=\"abtn pri\" data-a=\"cncYes\" data-x=\"ticaretStd::6.966000000000017\" disabled=\"\">EVET</button>\n          <button class=\"abtn dgr\" data-a=\"cncNo\" data-x=\"ticaretStd::6.966000000000017\" disabled=\"\">HAYIR</button></div>\n          <div role=\"status\" id=\"councilVoteStatus\">Oyun kaydedildi: EVET</div></div><div class=\"ph\">DİPLOMATİK AĞIRLIĞIN</div><div class=\"row\"><span>Oy ağırlığı</span>\n          <b style=\"color:#6ff2c8\">13.4</b></div><div class=\"ph\">🏛 KONSEY BAŞKANLIĞI</div><div class=\"box\" style=\"border-color:#6ff2c8\">\n          <div class=\"bt\"><span style=\"color:#985f3e\">Saf Akıl Ağı (SEN)</span>\n            <span class=\"tag p\">DÖNEM BAŞKANI</span></div>\n          <div class=\"bd\">Seçime <b>15</b> yıl (180 ay) ·\n               dönem 1</div></div><div class=\"mini\" style=\"color:#7d90ad\">Halihazırda bir oylama sürüyor</div><div class=\"ph\">📜 TASARI SUN</div><div class=\"mini\" style=\"color:#7d90ad\">Halihazırda bir oylama sürüyor</div><div class=\"ph\">YÜRÜRLÜKTEKİ KARARLAR</div><div class=\"mini\">Henüz karar alınmadı.</div><div class=\"ph\">ÜYELER</div><div class=\"dpCard\"><div class=\"dpTop\">\n          <canvas class=\"dpPort\" data-ps=\"4117493811\" data-lk=\"humanoid\" data-col=\"#985f3e\" data-pers=\"teknokrasi\" data-mood=\"0\" width=\"34\" height=\"46\" data-done=\"1\"></canvas>\n          <div class=\"dpName\"><b style=\"color:#985f3e\">Saf Akıl Ağı (sen)</b>\n          <i>Bilimsel · Liyakat · oy ağırlığı 13.4</i></div>\n          <span class=\"tag p\">BAŞKAN</span></div></div><div class=\"dpCard\"><div class=\"dpTop\">\n          <canvas class=\"dpPort\" data-ps=\"521540809\" data-lk=\"kanatli\" data-col=\"#f5665c\" data-pers=\"pasifist\" data-mood=\"0\" width=\"34\" height=\"46\" data-done=\"1\"></canvas>\n          <div class=\"dpName\"><b style=\"color:#f5665c\">Sylraen Komünü</b>\n          <i>Bilimci · Kâşif · oy ağırlığı 2.6</i></div>\n          </div></div><div class=\"dpCard\"><div class=\"dpTop\">\n          <canvas class=\"dpPort\" data-ps=\"2104971526\" data-lk=\"humanoid\" data-col=\"#3e4a98\" data-pers=\"militarist\" data-mood=\"40\" width=\"34\" height=\"46\" data-done=\"1\"></canvas>\n          <div class=\"dpName\"><b style=\"color:#3e4a98\">Kızıl Muhafız</b>\n          <i>Militarist · Yayılmacı · oy ağırlığı 1.0</i></div>\n          </div></div><div class=\"dpCard\"><div class=\"dpTop\">\n          <canvas class=\"dpPort\" data-ps=\"711568029\" data-lk=\"humanoid\" data-col=\"#983e8f\" data-pers=\"tuccar\" data-mood=\"40\" width=\"34\" height=\"46\" data-done=\"1\"></canvas>\n          <div class=\"dpName\"><b style=\"color:#983e8f\">Okyanus Ticaret Birliği</b>\n          <i>Megakorporasyon · Tüccar · oy ağırlığı 1.0</i></div>\n          </div></div><div class=\"dpCard\"><div class=\"dpTop\">\n          <canvas class=\"dpPort\" data-ps=\"582044444\" data-lk=\"kanatli\" data-col=\"#5c9ef5\" data-pers=\"tuccar\" data-mood=\"0\" width=\"34\" height=\"46\" data-done=\"1\"></canvas>\n          <div class=\"dpName\"><b style=\"color:#5c9ef5\">Ziror Konsorsiyumu</b>\n          <i>Megakorporasyon · Tüccar · oy ağırlığı 1.0</i></div>\n          </div></div><div class=\"dpCard\"><div class=\"dpTop\">\n          <canvas class=\"dpPort\" data-ps=\"3126780974\" data-lk=\"kanatli\" data-col=\"#56983e\" data-pers=\"militarist\" data-mood=\"0\" width=\"34\" height=\"46\" data-done=\"1\"></canvas>\n          <div class=\"dpName\"><b style=\"color:#56983e\">Talik Ordusu</b>\n          <i>Militarist · Yayılmacı · oy ağırlığı 1.0</i></div>\n          </div></div><div class=\"dpCard\"><div class=\"dpTop\">\n          <canvas class=\"dpPort\" data-ps=\"3253581651\" data-lk=\"akuatik\" data-col=\"#98953e\" data-pers=\"pasifist\" data-mood=\"0\" width=\"34\" height=\"46\" data-done=\"1\"></canvas>\n          <div class=\"dpName\"><b style=\"color:#98953e\">Syluor Cemiyeti</b>\n          <i>Barışçıl · Demokratik · oy ağırlığı 1.0</i></div>\n          </div></div><div class=\"dpCard\"><div class=\"dpTop\">\n          <canvas class=\"dpPort\" data-ps=\"827656942\" data-lk=\"humanoid\" data-col=\"#d65cf5\" data-pers=\"tuccar\" data-mood=\"0\" width=\"34\" height=\"46\" data-done=\"1\"></canvas>\n          <div class=\"dpName\"><b style=\"color:#d65cf5\">Searon Ortaklığı</b>\n          <i>Bilimsel · Liyakat · oy ağırlığı 0.8</i></div>\n          </div></div><div class=\"act2\" style=\"margin-top:12px\"><button class=\"abtn dgr\" data-a=\"cncLeave\">KONSEYDEN AYRIL</button></div></div></div>"
+}

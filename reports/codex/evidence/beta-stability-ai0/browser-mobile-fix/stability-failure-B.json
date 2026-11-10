@@ -1,0 +1,75 @@
+{
+  "modal": "⚠ ANA FİLO BULUNAMADI · #27\nEski filonun kayıp nedeni kayıtlı değilse kesin neden bilinmez. Mevcut gemiler korunur; eski filo yeniden yaratılmaz.\nHedef #27 · 27 gemi / 2 sipariş\n27 sevkiyat · 27 gemi · 2 ödenmiş üretim siparişi\nKayıtlı ödeme: ala 64\nYelegath\nYeni hedef seçmek ödeme yapmaz. Siparişlerin ilerlemesi korunur. Kapalı rotada gemiler bekler; başlamış yol bacağı tamamlanır. Toplanma yalnız bilinen kendi sistemlerinden seçilir.\nHEPSİNİ BEKLET AYNI SİSTEMDE DURAN TAKVİYELERİ BİRLEŞTİR\nYENİ HEDEF\nFilo: 1. Muhafız Filosu (#4)Filo: Kâşif Vela (#5)Filo: Yerleşim Konvoyu (#6)Filo: Kurtarma Hedef (#28)Toplanma: Yelegath\nHost doğrulaması bekleniyor…\nKAPAT",
+  "pending": {
+    "token": 13,
+    "id": 27,
+    "stamp": "527216bc",
+    "choices": [
+      {
+        "label": "Filo: 1. Muhafız Filosu (#4)",
+        "target": {
+          "fleet": 4
+        }
+      },
+      {
+        "label": "Filo: Kâşif Vela (#5)",
+        "target": {
+          "fleet": 5
+        }
+      },
+      {
+        "label": "Filo: Yerleşim Konvoyu (#6)",
+        "target": {
+          "fleet": 6
+        }
+      },
+      {
+        "label": "Filo: Kurtarma Hedef (#28)",
+        "target": {
+          "fleet": 28
+        }
+      },
+      {
+        "label": "Toplanma: Yelegath",
+        "target": {
+          "sys": 33
+        }
+      }
+    ],
+    "busy": true
+  },
+  "groups": [
+    {
+      "id": 27,
+      "ships": [
+        29
+      ],
+      "jobs": 2,
+      "stamp": "663fdb19"
+    }
+  ],
+  "results": [
+    {
+      "v": 1,
+      "type": "result",
+      "seq": 1,
+      "cid": "jmwav5f0rlkeu6iki",
+      "status": "ok",
+      "code": null,
+      "rev": 14,
+      "ms": 50
+    },
+    {
+      "v": 1,
+      "type": "result",
+      "seq": 2,
+      "cid": "jmwav5ubetjspmg1v",
+      "status": "ok",
+      "code": null,
+      "rev": 20,
+      "ms": 69
+    }
+  ],
+  "rev": 14,
+  "appliedRev": 14
+}

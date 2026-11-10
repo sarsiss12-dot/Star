@@ -1,0 +1,53 @@
+{
+  "systems": 300,
+  "empires": 18,
+  "fleets": 70,
+  "sameInitialSave": true,
+  "samples": [
+    {
+      "round": 0,
+      "p21Ms": 8.283785,
+      "candidateMs": 8.107137
+    },
+    {
+      "round": 1,
+      "candidateMs": 6.916319,
+      "p21Ms": 6.213981
+    },
+    {
+      "round": 2,
+      "p21Ms": 6.317566,
+      "candidateMs": 21.312641
+    },
+    {
+      "round": 3,
+      "candidateMs": 6.415133,
+      "p21Ms": 6.11611
+    },
+    {
+      "round": 4,
+      "p21Ms": 6.1779,
+      "candidateMs": 5.753658
+    },
+    {
+      "round": 5,
+      "candidateMs": 6.954095,
+      "p21Ms": 7.466803
+    },
+    {
+      "round": 6,
+      "p21Ms": 6.527882,
+      "candidateMs": 9.934499
+    }
+  ],
+  "warmupExcluded": true,
+  "median100Steps": {
+    "p21Ms": 6.317566,
+    "candidateMs": 6.954095,
+    "ratio": 1.1007554175136436
+  },
+  "idleRecoveryChecks": 3600,
+  "idleRecoveryMs": 1.139622,
+  "noIdleStateRngChange": true,
+  "scope": "Local CPU; idle stepFleets only; not a full campaign or 300-system user save"
+}

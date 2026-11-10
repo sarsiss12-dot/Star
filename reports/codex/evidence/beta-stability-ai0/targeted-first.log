@@ -1,0 +1,25 @@
+PASS merge references owner 0
+PASS merge references owner 1
+PASS full split transfers references; partial keeps original
+PASS missing target holds paid orders on load without changing hulls, cost or RNG
+PASS reported-size synthetic fixture: 112 shipments, 117 paid orders preserved; no historical ships invented
+PASS real combat kills target once; audit and paid jobs remain
+FAIL real zero-supply attrition leaves reinforcements alive
+evalmachine.<anonymous>:1
+supply<1&&!G.fleets.includes(A)&&Y.queue[0].delivery.hold
+                                            ^
+
+TypeError: Cannot read properties of undefined (reading 'delivery')
+    at evalmachine.<anonymous>:1:45
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/Star/tests/helpers/runtime.js:112:25)
+    at yes (/workspace/Star/tests/beta_stability0_fleet_test.cjs:6:36)
+    at /workspace/Star/tests/beta_stability0_fleet_test.cjs:50:2
+    at test (/workspace/Star/tests/beta_stability0_fleet_test.cjs:5:28)
+    at Object.<anonymous> (/workspace/Star/tests/beta_stability0_fleet_test.cjs:48:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+PASS ownership, stale group, foreign target and unknown system rejected atomically
+PASS bounded audit validator / old saves; pure UI does not mutate canonical state or RNG
+{"pass":8,"fail":1}

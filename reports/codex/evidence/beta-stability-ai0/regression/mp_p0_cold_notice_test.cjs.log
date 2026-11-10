@@ -1,0 +1,1 @@
+PASS actual initial rebuild reads device preference before founding notifications; zero repeated result

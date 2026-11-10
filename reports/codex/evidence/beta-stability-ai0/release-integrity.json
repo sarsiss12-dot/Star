@@ -1,0 +1,24 @@
+{
+  "build": "96h10p22",
+  "pwa": "stars-v96h10p22",
+  "mp": "MP.8.9b17",
+  "save": 8,
+  "package": 4,
+  "protocol": 1,
+  "zip": "releases/stars-faz96h10p22.zip",
+  "bytes": 835907,
+  "sha256": "14271929b85ec9af6ae946b556a013b6b01579d64fe6f5129eb459f02c6e9cf9",
+  "crc32": "A99A49EC",
+  "deterministicEqual": true,
+  "runtimeFiles": 19,
+  "zipEntries": 20,
+  "mpFiles": {
+    "research/mp0/mp-core.js": "fb2324e86b48b2bc9aea9839c1a65be229de8e9f1194e57594cff545e3cdf358",
+    "research/mp6/mirror.js": "0be83dc59fd89918d3ba149bd2eb7179b69bc037a091218090757bae4efeeb8d",
+    "research/mp6/client/guest-stars.js": "27e779c107d54eb9ace5ab9f781d7854e5dafd7869cba145175854bbd9a93d29",
+    "research/mp1/server/relay.js": "35974ba78c75e2773da662dda2d1fb15265da55ef699dee42a91eab9075b1fc9",
+    "research/mp1/client/view.js": "f99d86338f7a94a29934111ddfc1c7bede4a99bde035cc555d7a2d7a4d04989f",
+    "research/mp1/client/mp1-host.js": "58355968ecef766e4dfefd77bd4df42d2283386d86edd219a41df832fde87447",
+    "research/mp1/client/join.js": "bc27324937414ab638f81b0c1ba3e70c5e540c196d787e3580948c1028236094"
+  }
+}

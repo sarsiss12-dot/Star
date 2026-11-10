@@ -267,6 +267,7 @@ function battleRound(sys, A, fa, B, fb, def, band, exchange=null){
     for (const f of lf){
       // silahsız kalanlar imha
       sonKayip += f.ships.length;
+      fleetLost(f,'combat');
       f.ships = [];
     }
     battleReportLoss(report, loser, sonKayip);

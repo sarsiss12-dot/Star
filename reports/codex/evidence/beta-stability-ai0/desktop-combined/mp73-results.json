@@ -1,0 +1,757 @@
+{
+  "results": [
+    {
+      "name": "A1 rehber 1–8: oda, iki farklı devlet, hazır, başlat; iki ekranda galaksi; sürüm işareti lobi / başlangıç / MP çubuğunda ve /mp/version oyun build'iyle aynı",
+      "status": "PASS",
+      "ms": 10769
+    },
+    {
+      "name": "B1 konsey motorun kendi yoluyla kurulur (fikstür: temas); AI insanlar adına oy / sponsor yazmaz; B gerçek \"KONSEY OYLAMASI\" kartından Konsey ekranını açar ve EVET (dokunma) → host kaydeder, oylama açık kalır",
+      "status": "PASS",
+      "ms": 26564
+    },
+    {
+      "name": "P0 katılımcı görüş, sağlık, özel kararlar, rota ve görsel hareket",
+      "status": "PASS",
+      "ms": 56959
+    },
+    {
+      "name": "ST0 gerçek üç insan filo kaybı, native seçim / toplu kurtarma / ACK",
+      "status": "PASS",
+      "ms": 11779
+    },
+    {
+      "name": "ER0 katılımcı casusluk, hedef güvenliği ve gerçek isyan müdahalesi",
+      "status": "PASS",
+      "ms": 14584
+    },
+    {
+      "name": "FAI0 misafir taslak düzenleme ve üç insan acil savunma sırası",
+      "status": "PASS",
+      "ms": 31407
+    },
+    {
+      "name": "WC0 üç insan koşullu koalisyon, karşı teklif, ücret ve savaş merkezi",
+      "status": "PASS",
+      "ms": 36542
+    },
+    {
+      "name": "BD1 federasyon FIFO, savaş yardımı, geri çekme ve ayrı aday rızası",
+      "status": "PASS",
+      "ms": 50985
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "startModal": [
+      "🛰 DANIŞMAN",
+      "",
+      "🛰 DANIŞMAN",
+      "",
+      ""
+    ],
+    "version": {
+      "mp": "MP.8.9b17",
+      "build": "96h10p22",
+      "files": {
+        "mp-core.js": "fb2324e86b48",
+        "relay.js": "35974ba78c75",
+        "mp1-host.js": "58355968ecef",
+        "join.js": "bc2732493741",
+        "mirror.js": "1bf310f85a12",
+        "guest-stars.js": "27e779c107d5",
+        "mp71-dip.js": "791d18e17978",
+        "mp7-setup.js": "48c0f282a254"
+      }
+    },
+    "unsupported": [
+      "autoEvent",
+      "diagCopy",
+      "joinRebel",
+      "leaveRebel",
+      "mapFix",
+      "physio",
+      "restart",
+      "rollName",
+      "sandbox",
+      "sitPick",
+      "stashNote",
+      "survey",
+      "terra",
+      "toTitle",
+      "tplDel",
+      "tplLoad",
+      "tplSave",
+      "trigCrisis"
+    ],
+    "guestDiag": "STARS MP.8.9b17 · oyun 96h10p22 · misafir · host bağlı · aşama: ready · ayna r4 15:56:05 · kurulum 7 ms · son komut: yok · son hata: yok",
+    "p0": [
+      {
+        "visibility": true,
+        "shared": 1,
+        "habitat": true,
+        "foreignHull": 0.42,
+        "ownHull": 0.55,
+        "privacy": true
+      },
+      {
+        "kind": "anomaly",
+        "decision": 1,
+        "before": {
+          "a": 0,
+          "m": 3000,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":3000}",
+          "p": 0
+        },
+        "after": {
+          "a": 150,
+          "m": 3000,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":3000}",
+          "p": 0
+        },
+        "replay": "rejected"
+      },
+      {
+        "kind": "event",
+        "decision": 2,
+        "before": {
+          "a": 150,
+          "m": 3000,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":3000}",
+          "p": 0
+        },
+        "after": {
+          "a": 410,
+          "m": 2850,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":3000}",
+          "p": 0
+        },
+        "replay": "rejected"
+      },
+      {
+        "kind": "chain",
+        "decision": 3,
+        "before": {
+          "a": 410,
+          "m": 2850,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":3000}",
+          "p": 0
+        },
+        "after": {
+          "a": 410,
+          "m": 2850,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":3000}",
+          "p": 0
+        },
+        "replay": "rejected"
+      },
+      {
+        "CDecision": 1,
+        "CResearch": 180,
+        "BUnchanged": true
+      },
+      {
+        "foundingNotification": "NOT RUN: no founded proposal in this filtered case"
+      },
+      {
+        "shareEndedLiveRemoved": true,
+        "discoveryRetained": true
+      },
+      {
+        "routes": [
+          {
+            "role": "military",
+            "id": 4,
+            "path": [
+              43
+            ]
+          },
+          {
+            "role": "bilim",
+            "id": 5,
+            "path": [
+              43
+            ]
+          },
+          {
+            "role": "koloni",
+            "id": 6,
+            "path": [
+              43
+            ]
+          },
+          {
+            "role": "insaat",
+            "id": 29,
+            "path": [
+              43
+            ]
+          }
+        ]
+      },
+      {
+        "motion": [
+          {
+            "x": 3082.707090400554,
+            "y": 1583.8407715473338,
+            "actualX": 3137.0520324240933,
+            "actualY": 1643.364625466123
+          },
+          {
+            "x": 3083.7600005598947,
+            "y": 1584.9940209240108,
+            "actualX": 3137.0520324240933,
+            "actualY": 1643.364625466123
+          },
+          {
+            "x": 3085.8381127208336,
+            "y": 1587.2701710143176,
+            "actualX": 3137.0520324240933,
+            "actualY": 1643.364625466123
+          },
+          {
+            "x": 3091.3274075125983,
+            "y": 1593.2825793293475,
+            "actualX": 3137.0520324240933,
+            "actualY": 1643.364625466123
+          },
+          {
+            "x": 3095.591385798377,
+            "y": 1597.9529021072365,
+            "actualX": 3137.0520324240933,
+            "actualY": 1643.364625466123
+          },
+          {
+            "x": 3103.0725895777578,
+            "y": 1606.1470424323413,
+            "actualX": 3137.0520324240933,
+            "actualY": 1643.364625466123
+          },
+          {
+            "x": 3108.9344052132137,
+            "y": 1612.5674717233069,
+            "actualX": 3137.0520324240933,
+            "actualY": 1643.364625466123
+          },
+          {
+            "x": 3113.675579624838,
+            "y": 1617.7604660034144,
+            "actualX": 3137.0520324240933,
+            "actualY": 1643.364625466123
+          },
+          {
+            "x": 3119.0140188642054,
+            "y": 1623.6076426790432,
+            "actualX": 3137.0520324240933,
+            "actualY": 1643.364625466123
+          },
+          {
+            "x": 3123.093276069012,
+            "y": 1628.0756410044605,
+            "actualX": 3137.0520324240933,
+            "actualY": 1643.364625466123
+          },
+          {
+            "x": 3126.507537381584,
+            "y": 1631.8152713001755,
+            "actualX": 3137.0520324240933,
+            "actualY": 1643.364625466123
+          },
+          {
+            "x": 3130.3712866585893,
+            "y": 1636.0472244310424,
+            "actualX": 3137.0520324240933,
+            "actualY": 1643.364625466123
+          },
+          {
+            "x": 3134.4936454482217,
+            "y": 1640.5624317945658,
+            "actualX": 3137.0520324240933,
+            "actualY": 1643.364625466123
+          },
+          {
+            "x": 3137.0520324240933,
+            "y": 1643.364625466123,
+            "actualX": 3137.0520324240933,
+            "actualY": 1643.364625466123
+          },
+          {
+            "x": 3137.0520324240933,
+            "y": 1643.364625466123,
+            "actualX": 3137.0520324240933,
+            "actualY": 1643.364625466123
+          },
+          {
+            "x": 3137.0520324240933,
+            "y": 1643.364625466123,
+            "actualX": 3137.0520324240933,
+            "actualY": 1643.364625466123
+          },
+          {
+            "x": 3139.9642408808,
+            "y": 1646.5543587569045,
+            "actualX": 3192.4001336279616,
+            "actualY": 1703.9872366617412
+          },
+          {
+            "x": 3143.0217138940584,
+            "y": 1649.9031998859098,
+            "actualX": 3192.4001336279616,
+            "actualY": 1703.9872366617412
+          },
+          {
+            "x": 3147.810832633767,
+            "y": 1655.1487074464603,
+            "actualX": 3192.4001336279616,
+            "actualY": 1703.9872366617412
+          },
+          {
+            "x": 3152.8605052565663,
+            "y": 1660.6795989028728,
+            "actualX": 3192.4001336279616,
+            "actualY": 1703.9872366617412
+          },
+          {
+            "x": 3159.0330959449784,
+            "y": 1667.440419188197,
+            "actualX": 3192.4001336279616,
+            "actualY": 1703.9872366617412
+          },
+          {
+            "x": 3161.9199407514407,
+            "y": 1670.602371748044,
+            "actualX": 3192.4001336279616,
+            "actualY": 1703.9872366617412
+          },
+          {
+            "x": 3166.490009762754,
+            "y": 1675.6079547903516,
+            "actualX": 3192.4001336279616,
+            "actualY": 1703.9872366617412
+          },
+          {
+            "x": 3170.2046319529522,
+            "y": 1679.6765694650544,
+            "actualX": 3192.4001336279616,
+            "actualY": 1703.9872366617412
+          },
+          {
+            "x": 3172.5196416844988,
+            "y": 1682.212192762278,
+            "actualX": 3192.4001336279616,
+            "actualY": 1703.9872366617412
+          },
+          {
+            "x": 3175.71085032138,
+            "y": 1685.707514123442,
+            "actualX": 3192.4001336279616,
+            "actualY": 1703.9872366617412
+          },
+          {
+            "x": 3178.332529667732,
+            "y": 1688.5790317407866,
+            "actualX": 3192.4001336279616,
+            "actualY": 1703.9872366617412
+          },
+          {
+            "x": 3181.9987303390794,
+            "y": 1692.5946104694149,
+            "actualX": 3192.4001336279616,
+            "actualY": 1703.9872366617412
+          },
+          {
+            "x": 3188.8089662177076,
+            "y": 1700.0538416415882,
+            "actualX": 3249.5433569012002,
+            "actualY": 1766.5760397391603
+          },
+          {
+            "x": 3194.24430694852,
+            "y": 1706.0071542335786,
+            "actualX": 3249.5433569012002,
+            "actualY": 1766.5760397391603
+          }
+        ]
+      },
+      {
+        "reconnect": true
+      }
+    ],
+    "stability": [
+      {
+        "viewport": {
+          "width": 800,
+          "height": 360
+        },
+        "requestedScale": 80,
+        "scale": {
+          "preferred": 100,
+          "effective": 100,
+          "limited": true
+        },
+        "modalBox": {
+          "x": 0,
+          "y": 0,
+          "width": 800,
+          "height": 360
+        }
+      },
+      {
+        "viewport": {
+          "width": 800,
+          "height": 360
+        },
+        "requestedScale": 100,
+        "scale": {
+          "preferred": 100,
+          "effective": 100,
+          "limited": true
+        },
+        "modalBox": {
+          "x": 0,
+          "y": 0,
+          "width": 800,
+          "height": 360
+        }
+      },
+      {
+        "viewport": {
+          "width": 800,
+          "height": 360
+        },
+        "requestedScale": 125,
+        "scale": {
+          "preferred": 100,
+          "effective": 100,
+          "limited": true
+        },
+        "modalBox": {
+          "x": 0,
+          "y": 0,
+          "width": 800,
+          "height": 360
+        }
+      },
+      {
+        "viewport": {
+          "width": 915,
+          "height": 412
+        },
+        "requestedScale": 80,
+        "scale": {
+          "preferred": 100,
+          "effective": 100,
+          "limited": true
+        },
+        "modalBox": {
+          "x": 0,
+          "y": 0,
+          "width": 915,
+          "height": 412
+        }
+      },
+      {
+        "viewport": {
+          "width": 915,
+          "height": 412
+        },
+        "requestedScale": 100,
+        "scale": {
+          "preferred": 100,
+          "effective": 100,
+          "limited": true
+        },
+        "modalBox": {
+          "x": 0,
+          "y": 0,
+          "width": 915,
+          "height": 412
+        }
+      },
+      {
+        "viewport": {
+          "width": 915,
+          "height": 412
+        },
+        "requestedScale": 125,
+        "scale": {
+          "preferred": 100,
+          "effective": 100,
+          "limited": true
+        },
+        "modalBox": {
+          "x": 0,
+          "y": 0,
+          "width": 915,
+          "height": 412
+        }
+      },
+      {
+        "viewport": {
+          "width": 960,
+          "height": 540
+        },
+        "requestedScale": 80,
+        "scale": {
+          "preferred": 100,
+          "effective": 100,
+          "limited": true
+        },
+        "modalBox": {
+          "x": 0,
+          "y": 0,
+          "width": 960,
+          "height": 540
+        }
+      },
+      {
+        "viewport": {
+          "width": 960,
+          "height": 540
+        },
+        "requestedScale": 100,
+        "scale": {
+          "preferred": 100,
+          "effective": 100,
+          "limited": true
+        },
+        "modalBox": {
+          "x": 0,
+          "y": 0,
+          "width": 960,
+          "height": 540
+        }
+      },
+      {
+        "viewport": {
+          "width": 960,
+          "height": 540
+        },
+        "requestedScale": 125,
+        "scale": {
+          "preferred": 100,
+          "effective": 100,
+          "limited": true
+        },
+        "modalBox": {
+          "x": 0,
+          "y": 0,
+          "width": 960,
+          "height": 540
+        }
+      },
+      {
+        "viewport": {
+          "width": 1920,
+          "height": 1080
+        },
+        "requestedScale": 80,
+        "scale": {
+          "preferred": 80,
+          "effective": 80,
+          "limited": false
+        },
+        "modalBox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        }
+      },
+      {
+        "viewport": {
+          "width": 1920,
+          "height": 1080
+        },
+        "requestedScale": 100,
+        "scale": {
+          "preferred": 100,
+          "effective": 100,
+          "limited": false
+        },
+        "modalBox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        }
+      },
+      {
+        "viewport": {
+          "width": 1920,
+          "height": 1080
+        },
+        "requestedScale": 125,
+        "scale": {
+          "preferred": 125,
+          "effective": 125,
+          "limited": false
+        },
+        "modalBox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        }
+      },
+      {
+        "fixture": {
+          "actor": 1,
+          "sys": 3,
+          "lost": 29,
+          "target": 30,
+          "paid": [
+            {
+              "ala": 32
+            },
+            {
+              "ala": 32
+            }
+          ],
+          "orderCount": 2,
+          "shipCount": 27
+        },
+        "realCombat": true,
+        "nativeSelfleet": true,
+        "nativeBulkMerge": true,
+        "shipsBefore": 27,
+        "shipsAfter": 28,
+        "includedOriginalTargetShip": 1,
+        "paidJobs": 2,
+        "sameResources": true,
+        "hostAck": true,
+        "thirdPartyPrivate": true
+      }
+    ],
+    "er0": [
+      {
+        "spyNative": true,
+        "target": 3,
+        "authoritativeCost": 70
+      },
+      {
+        "oldPreviewInvalid": true,
+        "newTarget": 4,
+        "noOldCommand": true
+      },
+      {
+        "lateRealHostAck": true,
+        "newTarget": 3,
+        "otherModalPreserved": true
+      },
+      {
+        "ownRisk": true,
+        "realPolicy": "relief",
+        "actualCosts": {
+          "min": 160,
+          "yiy": 80,
+          "etk": 25
+        },
+        "thirdPartyPrivate": true
+      }
+    ],
+    "fedAI0": [
+      {
+        "federationType": "yagmaci",
+        "guestFounder": true,
+        "fiveInvitations": true,
+        "fourAcceptedOneRejected": true,
+        "replacedCandidate": true,
+        "revision": 1,
+        "allHumanConsentRenewed": true,
+        "oneFee": 220,
+        "originalExpiry": 1050
+      },
+      {
+        "threeHumans": true,
+        "activeVoteNotInterrupted": true,
+        "normalQueue": 2,
+        "defenseFirst": true,
+        "sourceIdentityMirrored": true
+      },
+      {
+        "aiIndependentPaidOffer": 1,
+        "actualAiTurn": true,
+        "nativeHumanConsent": true,
+        "price": 188,
+        "realWarParticipation": true,
+        "thirdPlayerPrivate": true
+      }
+    ],
+    "warCenter": [
+      {
+        "conditionalAccepted": true,
+        "noWar": true,
+        "noPayment": true,
+        "thirdPartyPrivate": true
+      },
+      {
+        "front": 1,
+        "campaign": 1,
+        "realPayment": 150,
+        "joined": true
+      },
+      {
+        "immediateDeclaration": true,
+        "optionalInvite": true,
+        "rejectDoesNotUndoWar": true
+      },
+      {
+        "knownThirdPartyWar": true,
+        "nativeVoluntaryOffer": true,
+        "nativeHostAccept": true
+      },
+      {
+        "reconnected": true,
+        "tabs": true
+      }
+    ],
+    "board1": [
+      {
+        "threeHumans": true,
+        "queued": 2,
+        "nativeWithdraw": true,
+        "openingFee": 60,
+        "endedWarInvalid": true,
+        "hostNotInWar": true
+      },
+      {
+        "twoMemberBallot": true,
+        "noBilateralAlliesRequired": true,
+        "candidateSeparateConsent": true,
+        "joinedExactlyOnce": true
+      },
+      {
+        "humanAllianceNativeSend": true,
+        "candidateAccepted": true,
+        "noAutomaticConsent": true
+      },
+      {
+        "guestNativeOrders": 21,
+        "stableProductionButtons": {
+          "r0": {
+            "x": 620,
+            "y": 281.5
+          },
+          "r21": {
+            "x": 620,
+            "y": 281.5
+          }
+        },
+        "nativeCancel": 1,
+        "refund": {
+          "ala": 32
+        }
+      },
+      {
+        "sameRequestedSpeedClearsPendingHold": true,
+        "realPendingCard": true,
+        "allPlayersSpeed": 3,
+        "actorNotice": true,
+        "warNoticeDoesNotSlow": true
+      }
+    ]
+  },
+  "pass": 8,
+  "fail": 0
+}

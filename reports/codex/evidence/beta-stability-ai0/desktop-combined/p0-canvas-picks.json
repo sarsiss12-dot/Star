@@ -1,0 +1,37 @@
+[
+  {
+    "point": {
+      "x": 384,
+      "y": 540
+    },
+    "top": "map",
+    "expected": 4
+  },
+  {
+    "point": {
+      "x": 384,
+      "y": 540
+    },
+    "top": "map",
+    "expected": 6,
+    "selected": 4
+  },
+  {
+    "point": {
+      "x": 384,
+      "y": 540
+    },
+    "top": "map",
+    "expected": 29,
+    "selected": 6
+  },
+  {
+    "point": {
+      "x": 384,
+      "y": 540
+    },
+    "top": "map",
+    "expected": 1,
+    "selected": 29
+  }
+]

@@ -1,0 +1,176 @@
+{
+  "url": "/mp/play",
+  "vote": null,
+  "inbox": [
+    {
+      "kind": "anomaly",
+      "data": {
+        "a": {
+          "id": "a14",
+          "k": "kalinti",
+          "n": "Mühürlü Lahit",
+          "t": "Asteroidin göbeğine oyulmuş, dışarıdan mühürlenmiş bir oda. Mühürler İÇERİDEN değil, dışarıdan vurulmuş.",
+          "ch": [
+            {
+              "t": "Mührü kırma, uzaktan tara",
+              "d": "+140 araştırma · güvenli"
+            },
+            {
+              "t": "Mührü kır",
+              "d": "+700 mineral · TEHLİKELİ"
+            }
+          ]
+        },
+        "sys": {
+          "id": 29,
+          "x": 1371.9247951360826,
+          "y": 1441.4962740830986,
+          "name": "Nexkar",
+          "star": {
+            "n": "F Beyaz-Sarı",
+            "c": "#fff6e0",
+            "r": 6,
+            "w": 12
+          },
+          "planets": [
+            {
+              "i": 0,
+              "t": "sav",
+              "dep": null,
+              "sz": 14,
+              "seed": 3802,
+              "name": "Nexkar I",
+              "owner": -1
+            },
+            {
+              "i": 1,
+              "t": "tok",
+              "dep": "jeotermal",
+              "sz": 14,
+              "seed": 3819,
+              "name": "Nexkar II",
+              "owner": -1
+            }
+          ],
+          "lanes": [
+            0,
+            44,
+            31
+          ],
+          "owner": -1,
+          "surv": [
+            0
+          ],
+          "seen": [
+            0
+          ],
+          "queue": [],
+          "anom": false,
+          "anomK": "kalinti",
+          "def": 0,
+          "pulsar": false,
+          "nebulaS": false,
+          "_reach": 0
+        }
+      },
+      "decisionId": 1,
+      "uid": 1,
+      "key": "personal:1",
+      "born": 20.279599999999945,
+      "pause": false,
+      "ico": "🔬",
+      "cls": "sci",
+      "title": "Mühürlü Lahit",
+      "sub": "Asteroidin göbeğine oyulmuş, dışarıdan mühürlenmiş bir oda. Mühürler İÇERİDEN değil, dışarıdan vurul",
+      "hidden": false
+    },
+    {
+      "kind": "chain",
+      "data": "sinyal1",
+      "decisionId": 2,
+      "uid": 10,
+      "key": "personal:2",
+      "born": 30.01939999999987,
+      "pause": false,
+      "ico": "❗",
+      "cls": "sci",
+      "title": "Derin Uzay Sinyali",
+      "sub": "{SISTEM} dinleme istasyonumuz galaksinin dışından bir yayın yakaladı. Tekrarlanan bir matematik dizi",
+      "hidden": false
+    },
+    {
+      "kind": "anomaly",
+      "data": {
+        "a": {
+          "id": "a11",
+          "k": "sinyal",
+          "n": "Bilinmeyen Sinyal",
+          "t": "Sistemin derinliğinden düzenli aralıklarla bir çağrı geliyor. Kaynağı hiçbir kayıtta yok.",
+          "ch": [
+            {
+              "t": "Sinyale karşılık ver",
+              "d": "büyük ödül · risk var"
+            },
+            {
+              "t": "Kaydet ve uzaklaş",
+              "d": "+140 araştırma"
+            }
+          ]
+        },
+        "sys": {
+          "id": 6,
+          "x": 1814.3073746767923,
+          "y": 765.9961474487479,
+          "name": "Kalasha",
+          "star": {
+            "n": "F Beyaz-Sarı",
+            "c": "#fff6e0",
+            "r": 6,
+            "w": 12
+          },
+          "planets": [
+            {
+              "i": 0,
+              "t": "vol",
+              "dep": null,
+              "sz": 14,
+              "seed": 789,
+              "name": "Kalasha I",
+              "owner": -1
+            }
+          ],
+          "lanes": [
+            21,
+            44
+          ],
+          "owner": -1,
+          "surv": [
+            0
+          ],
+          "seen": [
+            0
+          ],
+          "queue": [],
+          "anom": false,
+          "anomK": "sinyal",
+          "def": 0,
+          "pulsar": false,
+          "nebulaS": false,
+          "_reach": 0
+        }
+      },
+      "decisionId": 3,
+      "uid": 75,
+      "key": "personal:3",
+      "born": 61.347880000000394,
+      "pause": false,
+      "ico": "🔬",
+      "cls": "sci",
+      "title": "Bilinmeyen Sinyal",
+      "sub": "Sistemin derinliğinden düzenli aralıklarla bir çağrı geliyor. Kaynağı hiçbir kayıtta yok.",
+      "hidden": false
+    }
+  ],
+  "modal": "",
+  "pane": ""
+}

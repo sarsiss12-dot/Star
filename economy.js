@@ -1071,7 +1071,7 @@ function activeShipQueue(sys){
   if (sys.yardLock && sys.yardLock > (G.memAge || 0)) return active;
   for (let i=0; i<sys.queue.length && active.length<slots; i++){
     const q=sys.queue[i], e=G.emps[q.e];
-    if (e && sys.owner===e.id && shipBuildAccess(e,q.cls).ok) active.push(i);
+    if (e && sys.owner===e.id && !fleetDelivery(sys,q)?.hold && shipBuildAccess(e,q.cls).ok) active.push(i);
   }
   return active;
 }
@@ -1909,11 +1909,12 @@ function invasionTick(){
               const birim = S.ground * tf.ships[i].h;
               if (kalanKayip >= birim){
                 kalanKayip -= birim;
+                if(tf.ships.length===1)fleetLost(tf,'combat');
                 tf.ships.splice(i, 1);
               } else {
                 tf.ships[i].h -= kalanKayip / S.ground;
                 kalanKayip = 0;
-                if (tf.ships[i].h <= .05) tf.ships.splice(i, 1);
+                if (tf.ships[i].h <= .05){if(tf.ships.length===1)fleetLost(tf,'combat');tf.ships.splice(i, 1);}
               }
             }
           }
@@ -1924,7 +1925,7 @@ function invasionTick(){
           if (col.garrison <= 0){
             const kalanGuc = K.tf.reduce((t, f) => t + groundPower(f), 0);
             /* Taarruz filoları görevini tamamlar ve dağılır */
-            for (const tf of K.tf) tf.ships.length = 0;
+            for (const tf of K.tf){if(tf.ships.length)fleetLost(tf,'rule','Kara ordusu işgal görevini tamamladı');tf.ships.length = 0;}
             G.fleets = G.fleets.filter(f => f.ships.length);
 
             const eskiSahip = pl.owner;
@@ -2564,6 +2565,7 @@ function radiationTick(){
     if (!vuruldu) continue;
 
     let oldu = false;
+    if(f.ships.length&&f.ships.every(s=>(s.h??1)<=.05))fleetLost(f,'radiation');
     for (let i = f.ships.length - 1; i >= 0; i--){
       const sh = f.ships[i];
       sh.h = (sh.h !== undefined ? sh.h : 1) - .05;

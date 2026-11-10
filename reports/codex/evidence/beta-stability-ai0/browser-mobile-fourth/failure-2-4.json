@@ -1,0 +1,84 @@
+{
+  "url": "/mp/play",
+  "vote": {
+    "name": "Yıldızlar Konsey",
+    "founder": 1,
+    "members": [
+      1,
+      2,
+      0,
+      7,
+      5,
+      4,
+      6,
+      3
+    ],
+    "laws": {},
+    "targeted": {},
+    "treasury": 0,
+    "president": 1,
+    "terms": {
+      "1": 1
+    },
+    "termAge": 0,
+    "voteIn": 2,
+    "dead": false,
+    "byConvention": true,
+    "firstLaw": null,
+    "pariahs": {},
+    "agenda": [],
+    "vote": {
+      "key": "ticaretStd",
+      "opened": 6.966000000000017,
+      "target": null,
+      "yes": [
+        7,
+        5,
+        4,
+        3,
+        1
+      ],
+      "no": [
+        6
+      ],
+      "speeches": [
+        {
+          "id": 7,
+          "txt": "Bu sorunun cevabı laboratuvarda, mecliste değil.",
+          "yes": true
+        },
+        {
+          "id": 5,
+          "txt": "Ticaret yolları kapalıyken kimse zengin olmaz.",
+          "yes": true
+        },
+        {
+          "id": 4,
+          "txt": "Zayıflık davettir. Bu meclis güçlüye saygı duymalı.",
+          "yes": true
+        }
+      ],
+      "done": false,
+      "age": 0,
+      "sponsor": null
+    },
+    "lastVote": null,
+    "campaign": null
+  },
+  "inbox": [
+    {
+      "kind": "cncvote",
+      "data": "ticaretStd",
+      "ico": "🌐",
+      "cls": "sci",
+      "pause": false,
+      "uid": 1,
+      "born": 10.941359999999996,
+      "title": "KONSEY OYLAMASI",
+      "sub": "Evrensel Ticaret Standardı",
+      "key": "mp73cnc:ticaretStd:"
+    }
+  ],
+  "modal": "",
+  "pane": ""
+}

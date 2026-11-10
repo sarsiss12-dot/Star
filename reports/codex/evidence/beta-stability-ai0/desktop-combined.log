@@ -1,0 +1,14 @@
+PASS A1 rehber 1–8: oda, iki farklı devlet, hazır, başlat; iki ekranda galaksi; sürüm işareti lobi / başlangıç / MP çubuğunda ve /mp/version oyun build'iyle aynı
+PASS B1 konsey motorun kendi yoluyla kurulur (fikstür: temas); AI insanlar adına oy / sponsor yazmaz; B gerçek "KONSEY OYLAMASI" kartından Konsey ekranını açar ve EVET (dokunma) → host kaydeder, oylama açık kalır
+PASS P0 katılımcı görüş, sağlık, özel kararlar, rota ve görsel hareket
+PASS ST0 gerçek üç insan filo kaybı, native seçim / toplu kurtarma / ACK
+PASS ER0 katılımcı casusluk, hedef güvenliği ve gerçek isyan müdahalesi
+PASS FAI0 misafir taslak düzenleme ve üç insan acil savunma sırası
+WC0 fixture pause {"ok":false,"code":"rules:same"}
+WC0 koşullu karşı teklif kabul edildi; savaş ve ödeme yok
+WC0 son onay: gerçek cephe ve tek ödeme doğrulandı
+PASS WC0 üç insan koşullu koalisyon, karşı teklif, ücret ve savaş merkezi
+BD1 fixture ready
+BD1 two native proposals queued
+PASS BD1 federasyon FIFO, savaş yardımı, geri çekme ve ayrı aday rızası
+GEÇEN: 8 KALAN: 0

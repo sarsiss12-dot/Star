@@ -1,0 +1,79 @@
+{
+  "url": "/mp/play",
+  "vote": {
+    "name": "Yıldızlar Konsey",
+    "founder": 1,
+    "members": [
+      1,
+      2,
+      0,
+      6,
+      3,
+      5,
+      4,
+      7
+    ],
+    "laws": {},
+    "targeted": {},
+    "treasury": 0,
+    "president": 1,
+    "terms": {
+      "1": 1
+    },
+    "termAge": 0,
+    "voteIn": 2,
+    "dead": false,
+    "byConvention": true,
+    "firstLaw": null,
+    "pariahs": {},
+    "agenda": [],
+    "vote": {
+      "key": "ticaretStd",
+      "opened": 7.047,
+      "target": null,
+      "yes": [
+        6,
+        3,
+        4,
+        7,
+        1
+      ],
+      "no": [
+        5
+      ],
+      "speeches": [
+        {
+          "id": 4,
+          "txt": "Silahlarımızı bırakırsak bizi kim koruyacak?",
+          "yes": true
+        },
+        {
+          "id": 7,
+          "txt": "Bu sorunun cevabı laboratuvarda, mecliste değil.",
+          "yes": true
+        }
+      ],
+      "done": false,
+      "age": 0,
+      "sponsor": null
+    },
+    "lastVote": null,
+    "campaign": null
+  },
+  "inbox": [
+    {
+      "kind": "cncvote",
+      "data": "ticaretStd",
+      "ico": "🌐",
+      "cls": "sci",
+      "pause": false,
+      "uid": 1,
+      "born": 11.068199999999964,
+      "title": "KONSEY OYLAMASI",
+      "sub": "Evrensel Ticaret Standardı",
+      "key": "mp73cnc:ticaretStd:"
+    }
+  ],
+  "modal": "",
+  "pane": ""
+}

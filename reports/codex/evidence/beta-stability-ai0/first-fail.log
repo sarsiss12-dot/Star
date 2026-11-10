@@ -1,0 +1,47 @@
+FAIL merge references owner 0
+AssertionError [ERR_ASSERTION]: Y.queue[0].delivery.fleet===B.id&&Y.rally[E.id].fleet===B.id&&N.shipment.fleet===B.id&&N.joinFleet===B.id
+
+false !== true
+
+    at yes (/workspace/Star/tests/beta_stability0_fleet_test.cjs:6:28)
+    at /workspace/Star/tests/beta_stability0_fleet_test.cjs:11:2
+    at test (/workspace/Star/tests/beta_stability0_fleet_test.cjs:5:28)
+    at Object.<anonymous> (/workspace/Star/tests/beta_stability0_fleet_test.cjs:7:26)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+FAIL merge references owner 1
+evalmachine.<anonymous>:2
+ mergeFleetInto(E,B,[A]);
+ ^
+
+ReferenceError: mergeFleetInto is not defined
+    at evalmachine.<anonymous>:2:2
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/Star/tests/helpers/runtime.js:112:25)
+    at /workspace/Star/tests/beta_stability0_fleet_test.cjs:8:25
+    at test (/workspace/Star/tests/beta_stability0_fleet_test.cjs:5:28)
+    at Object.<anonymous> (/workspace/Star/tests/beta_stability0_fleet_test.cjs:7:26)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+FAIL full split transfers references; partial keeps original
+AssertionError [ERR_ASSERTION]: !G.fleets.includes(A)&&Y.queue[0].delivery.fleet===nf.id
+
+false !== true
+
+    at yes (/workspace/Star/tests/beta_stability0_fleet_test.cjs:6:28)
+    at /workspace/Star/tests/beta_stability0_fleet_test.cjs:15:2
+    at test (/workspace/Star/tests/beta_stability0_fleet_test.cjs:5:28)
+    at Object.<anonymous> (/workspace/Star/tests/beta_stability0_fleet_test.cjs:13:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+{"pass":0,"fail":3}

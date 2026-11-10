@@ -1,0 +1,11 @@
+PASS A1 rehber 1–8: oda, iki farklı devlet, hazır, başlat; iki ekranda galaksi; sürüm işareti lobi / başlangıç / MP çubuğunda ve /mp/version oyun build'iyle aynı
+FAIL ST0 gerçek üç insan filo kaybı, native seçim / toplu kurtarma / ACK
+page.evaluate: ReferenceError: serialize is not defined
+    at eval (eval at evaluate (:311:30), <anonymous>:1:5)
+    at UtilityScript.evaluate (<anonymous>:313:16)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+    at module.exports (/workspace/Star/tests/helpers/beta-stability0-browser.cjs:4:25)
+    at /workspace/Star/tests/browser-mp73.cjs:251:198
+    at test (/workspace/Star/tests/browser-mp73.cjs:14:13)
+    at /workspace/Star/tests/browser-mp73.cjs:251:41
+GEÇEN: 1 KALAN: 1

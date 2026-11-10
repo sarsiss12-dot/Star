@@ -1,0 +1,134 @@
+{
+  "frames": [
+    {
+      "at": 158465.5,
+      "same": true,
+      "connected": true,
+      "rect": [
+        -407,
+        1169.203125,
+        444,
+        44
+      ]
+    },
+    {
+      "at": 158529.30000007153,
+      "same": true,
+      "connected": true,
+      "rect": [
+        348.7606506347656,
+        1169.203125,
+        443.9999694824219,
+        44
+      ]
+    },
+    {
+      "at": 158644.89999997616,
+      "same": true,
+      "connected": true,
+      "rect": [
+        512.0453491210938,
+        1169.203125,
+        444,
+        44
+      ]
+    },
+    {
+      "at": 158714.70000004768,
+      "same": true,
+      "connected": true,
+      "rect": [
+        513,
+        1169.203125,
+        444,
+        44
+      ]
+    },
+    {
+      "at": 158807.5,
+      "same": true,
+      "connected": true,
+      "rect": [
+        513,
+        1169.203125,
+        444,
+        44
+      ]
+    },
+    {
+      "at": 158883.5,
+      "same": true,
+      "connected": true,
+      "rect": [
+        513,
+        1169.203125,
+        444,
+        44
+      ]
+    },
+    {
+      "at": 158926,
+      "same": true,
+      "connected": true,
+      "rect": [
+        513,
+        1169.203125,
+        444,
+        44
+      ]
+    },
+    {
+      "at": 159006,
+      "same": true,
+      "connected": true,
+      "rect": [
+        513,
+        866.203125,
+        444,
+        44
+      ],
+      "top": "dealSend"
+    },
+    {
+      "at": 159044.39999997616,
+      "same": true,
+      "connected": true,
+      "rect": [
+        513,
+        866.203125,
+        444,
+        44
+      ],
+      "top": "dealSend"
+    },
+    {
+      "at": 159110.39999997616,
+      "same": false,
+      "connected": true,
+      "rect": [
+        -407,
+        881.140625,
+        444,
+        44
+      ]
+    }
+  ],
+  "events": [
+    {
+      "t": "pointerdown",
+      "at": 159083.60000002384,
+      "target": "dealSend"
+    },
+    {
+      "t": "pointerup",
+      "at": 159084.89999997616,
+      "target": "dealSend"
+    },
+    {
+      "t": "click",
+      "at": 159085,
+      "target": "dealSend"
+    }
+  ],
+  "mutations": 2
+}

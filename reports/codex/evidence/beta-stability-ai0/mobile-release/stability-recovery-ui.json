@@ -1,0 +1,246 @@
+[
+  {
+    "viewport": {
+      "width": 800,
+      "height": 360
+    },
+    "requestedScale": 80,
+    "scale": {
+      "preferred": 100,
+      "effective": 100,
+      "limited": true
+    },
+    "modalBox": {
+      "x": 0,
+      "y": 0,
+      "width": 800,
+      "height": 360
+    }
+  },
+  {
+    "viewport": {
+      "width": 800,
+      "height": 360
+    },
+    "requestedScale": 100,
+    "scale": {
+      "preferred": 100,
+      "effective": 100,
+      "limited": true
+    },
+    "modalBox": {
+      "x": 0,
+      "y": 0,
+      "width": 800,
+      "height": 360
+    }
+  },
+  {
+    "viewport": {
+      "width": 800,
+      "height": 360
+    },
+    "requestedScale": 125,
+    "scale": {
+      "preferred": 100,
+      "effective": 100,
+      "limited": true
+    },
+    "modalBox": {
+      "x": 0,
+      "y": 0,
+      "width": 800,
+      "height": 360
+    }
+  },
+  {
+    "viewport": {
+      "width": 915,
+      "height": 412
+    },
+    "requestedScale": 80,
+    "scale": {
+      "preferred": 100,
+      "effective": 100,
+      "limited": true
+    },
+    "modalBox": {
+      "x": 0,
+      "y": 0,
+      "width": 915,
+      "height": 412
+    }
+  },
+  {
+    "viewport": {
+      "width": 915,
+      "height": 412
+    },
+    "requestedScale": 100,
+    "scale": {
+      "preferred": 100,
+      "effective": 100,
+      "limited": true
+    },
+    "modalBox": {
+      "x": 0,
+      "y": 0,
+      "width": 915,
+      "height": 412
+    }
+  },
+  {
+    "viewport": {
+      "width": 915,
+      "height": 412
+    },
+    "requestedScale": 125,
+    "scale": {
+      "preferred": 100,
+      "effective": 100,
+      "limited": true
+    },
+    "modalBox": {
+      "x": 0,
+      "y": 0,
+      "width": 915,
+      "height": 412
+    }
+  },
+  {
+    "viewport": {
+      "width": 960,
+      "height": 540
+    },
+    "requestedScale": 80,
+    "scale": {
+      "preferred": 100,
+      "effective": 100,
+      "limited": true
+    },
+    "modalBox": {
+      "x": 0,
+      "y": 0,
+      "width": 960,
+      "height": 540
+    }
+  },
+  {
+    "viewport": {
+      "width": 960,
+      "height": 540
+    },
+    "requestedScale": 100,
+    "scale": {
+      "preferred": 100,
+      "effective": 100,
+      "limited": true
+    },
+    "modalBox": {
+      "x": 0,
+      "y": 0,
+      "width": 960,
+      "height": 540
+    }
+  },
+  {
+    "viewport": {
+      "width": 960,
+      "height": 540
+    },
+    "requestedScale": 125,
+    "scale": {
+      "preferred": 100,
+      "effective": 100,
+      "limited": true
+    },
+    "modalBox": {
+      "x": 0,
+      "y": 0,
+      "width": 960,
+      "height": 540
+    }
+  },
+  {
+    "viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "requestedScale": 80,
+    "scale": {
+      "preferred": 80,
+      "effective": 80,
+      "limited": false
+    },
+    "modalBox": {
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080
+    }
+  },
+  {
+    "viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "requestedScale": 100,
+    "scale": {
+      "preferred": 100,
+      "effective": 100,
+      "limited": false
+    },
+    "modalBox": {
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080
+    }
+  },
+  {
+    "viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "requestedScale": 125,
+    "scale": {
+      "preferred": 125,
+      "effective": 125,
+      "limited": false
+    },
+    "modalBox": {
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080
+    }
+  },
+  {
+    "fixture": {
+      "actor": 1,
+      "sys": 20,
+      "lost": 26,
+      "target": 27,
+      "paid": [
+        {
+          "ala": 32
+        },
+        {
+          "ala": 32
+        }
+      ],
+      "orderCount": 2,
+      "shipCount": 27
+    },
+    "realCombat": true,
+    "nativeSelfleet": true,
+    "nativeBulkMerge": true,
+    "shipsBefore": 27,
+    "shipsAfter": 28,
+    "includedOriginalTargetShip": 1,
+    "paidJobs": 2,
+    "sameResources": true,
+    "hostAck": true,
+    "thirdPartyPrivate": true
+  }
+]

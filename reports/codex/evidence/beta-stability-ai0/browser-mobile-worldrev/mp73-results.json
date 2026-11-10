@@ -1,0 +1,252 @@
+{
+  "results": [
+    {
+      "name": "A1 rehber 1–8: oda, iki farklı devlet, hazır, başlat; iki ekranda galaksi; sürüm işareti lobi / başlangıç / MP çubuğunda ve /mp/version oyun build'iyle aynı",
+      "status": "PASS",
+      "ms": 13441
+    },
+    {
+      "name": "B1 konsey motorun kendi yoluyla kurulur (fikstür: temas); AI insanlar adına oy / sponsor yazmaz; B gerçek \"KONSEY OYLAMASI\" kartından Konsey ekranını açar ve EVET (dokunma) → host kaydeder, oylama açık kalır",
+      "status": "PASS",
+      "ms": 34433
+    },
+    {
+      "name": "ST0 gerçek üç insan filo kaybı, native seçim / toplu kurtarma / ACK",
+      "status": "PASS",
+      "ms": 48263
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "startModal": [
+      "🛰 DANIŞMAN",
+      "",
+      "🛰 DANIŞMAN",
+      "",
+      ""
+    ],
+    "version": {
+      "mp": "MP.8.9b16",
+      "build": "96h10p21",
+      "files": {
+        "mp-core.js": "e7963140404f",
+        "relay.js": "419082626658",
+        "mp1-host.js": "58355968ecef",
+        "join.js": "bc2732493741",
+        "mirror.js": "1bf310f85a12",
+        "guest-stars.js": "27e779c107d5",
+        "mp71-dip.js": "791d18e17978",
+        "mp7-setup.js": "48c0f282a254"
+      }
+    },
+    "unsupported": [
+      "autoEvent",
+      "diagCopy",
+      "joinRebel",
+      "leaveRebel",
+      "mapFix",
+      "physio",
+      "restart",
+      "rollName",
+      "sandbox",
+      "sitPick",
+      "stashNote",
+      "survey",
+      "terra",
+      "toTitle",
+      "tplDel",
+      "tplLoad",
+      "tplSave",
+      "trigCrisis"
+    ],
+    "guestDiag": "STARS MP.8.9b16 · oyun 96h10p21 · misafir · host bağlı · aşama: ready · ayna r5 15:49:52 · kurulum 6 ms · son komut: yok · son hata: yok",
+    "stability": [
+      {
+        "viewport": {
+          "width": 800,
+          "height": 360
+        },
+        "scale": 80,
+        "modalBox": {
+          "x": 0,
+          "y": 0,
+          "width": 800,
+          "height": 360
+        }
+      },
+      {
+        "viewport": {
+          "width": 800,
+          "height": 360
+        },
+        "scale": 100,
+        "modalBox": {
+          "x": 0,
+          "y": 0,
+          "width": 800,
+          "height": 360
+        }
+      },
+      {
+        "viewport": {
+          "width": 800,
+          "height": 360
+        },
+        "scale": 125,
+        "modalBox": {
+          "x": 0,
+          "y": 0,
+          "width": 800,
+          "height": 360
+        }
+      },
+      {
+        "viewport": {
+          "width": 915,
+          "height": 412
+        },
+        "scale": 80,
+        "modalBox": {
+          "x": 0,
+          "y": 0,
+          "width": 915,
+          "height": 412
+        }
+      },
+      {
+        "viewport": {
+          "width": 915,
+          "height": 412
+        },
+        "scale": 100,
+        "modalBox": {
+          "x": 0,
+          "y": 0,
+          "width": 915,
+          "height": 412
+        }
+      },
+      {
+        "viewport": {
+          "width": 915,
+          "height": 412
+        },
+        "scale": 125,
+        "modalBox": {
+          "x": 0,
+          "y": 0,
+          "width": 915,
+          "height": 412
+        }
+      },
+      {
+        "viewport": {
+          "width": 960,
+          "height": 540
+        },
+        "scale": 80,
+        "modalBox": {
+          "x": 0,
+          "y": 0,
+          "width": 960,
+          "height": 540
+        }
+      },
+      {
+        "viewport": {
+          "width": 960,
+          "height": 540
+        },
+        "scale": 100,
+        "modalBox": {
+          "x": 0,
+          "y": 0,
+          "width": 960,
+          "height": 540
+        }
+      },
+      {
+        "viewport": {
+          "width": 960,
+          "height": 540
+        },
+        "scale": 125,
+        "modalBox": {
+          "x": 0,
+          "y": 0,
+          "width": 960,
+          "height": 540
+        }
+      },
+      {
+        "viewport": {
+          "width": 1920,
+          "height": 1080
+        },
+        "scale": 80,
+        "modalBox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        }
+      },
+      {
+        "viewport": {
+          "width": 1920,
+          "height": 1080
+        },
+        "scale": 100,
+        "modalBox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        }
+      },
+      {
+        "viewport": {
+          "width": 1920,
+          "height": 1080
+        },
+        "scale": 125,
+        "modalBox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        }
+      },
+      {
+        "fixture": {
+          "actor": 1,
+          "sys": 21,
+          "lost": 26,
+          "target": 27,
+          "paid": [
+            {
+              "ala": 32
+            },
+            {
+              "ala": 32
+            }
+          ],
+          "orderCount": 2,
+          "shipCount": 27
+        },
+        "realCombat": true,
+        "nativeSelfleet": true,
+        "nativeBulkMerge": true,
+        "shipsBefore": 27,
+        "shipsAfter": 28,
+        "includedOriginalTargetShip": 1,
+        "paidJobs": 2,
+        "sameResources": true,
+        "hostAck": true,
+        "thirdPartyPrivate": true
+      }
+    ]
+  },
+  "pass": 3,
+  "fail": 0
+}

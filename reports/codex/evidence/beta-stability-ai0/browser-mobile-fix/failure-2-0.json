@@ -1,0 +1,196 @@
+{
+  "url": "/",
+  "vote": null,
+  "inbox": [
+    {
+      "kind": "anomaly",
+      "data": {
+        "a": {
+          "id": "a7",
+          "k": "dogal",
+          "n": "Boşluk Balinası İskeleti",
+          "t": "Kilometrelerce uzunlukta, uzayda yüzerek ölmüş bir canlının kalıntısı.",
+          "ch": [
+            {
+              "t": "Kemik yapısını incele",
+              "d": "+240 araştırma"
+            },
+            {
+              "t": "Cesedi hasat et",
+              "d": "+200 yiyecek, +90 mineral"
+            }
+          ]
+        },
+        "sys": {
+          "id": 30,
+          "x": 760.7573936287338,
+          "y": 3258.468759200768,
+          "name": "Verookrim",
+          "star": {
+            "n": "F Beyaz-Sarı",
+            "c": "#fff6e0",
+            "r": 6,
+            "w": 12
+          },
+          "planets": [
+            {
+              "i": 0,
+              "t": "kur",
+              "dep": null,
+              "sz": 19,
+              "seed": 3933,
+              "owner": -1,
+              "col": null,
+              "name": "Verookrim I",
+              "lux": "ipek"
+            },
+            {
+              "i": 1,
+              "t": "buz",
+              "dep": null,
+              "sz": 11,
+              "seed": 3950,
+              "owner": -1,
+              "col": null,
+              "name": "Verookrim II"
+            }
+          ],
+          "lanes": [
+            15,
+            20
+          ],
+          "owner": -1,
+          "surv": [
+            0
+          ],
+          "seen": [
+            0
+          ],
+          "def": 0,
+          "queue": [],
+          "anom": false,
+          "pulsar": false,
+          "nebulaS": false,
+          "anomK": "dogal",
+          "_reach": 0,
+          "_shat": false,
+          "cr": 0
+        }
+      },
+      "ico": "🔬",
+      "cls": "sci",
+      "pause": true,
+      "title": "Anomali — Verookrim",
+      "sub": "Boşluk Balinası İskeleti",
+      "key": "an:30",
+      "uid": 1,
+      "born": 34.492199999999826
+    },
+    {
+      "kind": "anomaly",
+      "data": {
+        "a": {
+          "id": "a5",
+          "k": "dogal",
+          "n": "Yaşam İzleri",
+          "t": "Atmosferde işlenmiş organik bileşikler var. Burada bir şey yaşıyordu.",
+          "ch": [
+            {
+              "t": "Biyosferi haritala",
+              "d": "+130 araştırma, +80 yiyecek"
+            },
+            {
+              "t": "Karantinaya al",
+              "d": "+15 etki"
+            }
+          ]
+        },
+        "sys": {
+          "id": 15,
+          "x": 844.0642081346584,
+          "y": 3619.767670793563,
+          "name": "Moriagath",
+          "star": {
+            "n": "F Beyaz-Sarı",
+            "c": "#fff6e0",
+            "r": 6,
+            "w": 12
+          },
+          "planets": [
+            {
+              "i": 0,
+              "t": "buz",
+              "dep": "ergi_kaynagi",
+              "sz": 11,
+              "seed": 1968,
+              "owner": -1,
+              "col": null,
+              "name": "Moriagath I"
+            },
+            {
+              "i": 1,
+              "t": "buz",
+              "dep": "ergi_kaynagi",
+              "sz": 11,
+              "seed": 1985,
+              "owner": -1,
+              "col": null,
+              "name": "Moriagath II"
+            },
+            {
+              "i": 2,
+              "t": "cor",
+              "dep": "zengin_maden",
+              "sz": 14,
+              "seed": 2002,
+              "owner": -1,
+              "col": null,
+              "name": "Moriagath III"
+            },
+            {
+              "i": 3,
+              "t": "col",
+              "dep": null,
+              "sz": 11,
+              "seed": 2019,
+              "owner": -1,
+              "col": null,
+              "name": "Moriagath IV"
+            }
+          ],
+          "lanes": [
+            13,
+            30,
+            20
+          ],
+          "owner": -1,
+          "surv": [
+            0
+          ],
+          "seen": [
+            0
+          ],
+          "def": 0,
+          "queue": [],
+          "anom": false,
+          "pulsar": false,
+          "nebulaS": false,
+          "anomK": "dogal",
+          "_reach": 0,
+          "_shat": false,
+          "cr": 0
+        }
+      },
+      "ico": "🔬",
+      "cls": "sci",
+      "pause": true,
+      "title": "Anomali — Moriagath",
+      "sub": "Yaşam İzleri",
+      "key": "an:15",
+      "uid": 2,
+      "born": 67.36892000000043
+    }
+  ],
+  "modal": "",
+  "pane": ""
+}

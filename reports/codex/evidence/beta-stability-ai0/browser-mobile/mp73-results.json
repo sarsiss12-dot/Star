@@ -1,0 +1,58 @@
+{
+  "results": [
+    {
+      "name": "A1 rehber 1–8: oda, iki farklı devlet, hazır, başlat; iki ekranda galaksi; sürüm işareti lobi / başlangıç / MP çubuğunda ve /mp/version oyun build'iyle aynı",
+      "status": "PASS",
+      "ms": 14165
+    },
+    {
+      "name": "ST0 gerçek üç insan filo kaybı, native seçim / toplu kurtarma / ACK",
+      "status": "FAIL",
+      "error": "page.evaluate: ReferenceError: serialize is not defined\n    at eval (eval at evaluate (:311:30), <anonymous>:1:5)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at module.exports (/workspace/Star/tests/helpers/beta-stability0-browser.cjs:4:25)\n    at /workspace/Star/tests/browser-mp73.cjs:251:198\n    at test (/workspace/Star/tests/browser-mp73.cjs:14:13)\n    at /workspace/Star/tests/browser-mp73.cjs:251:41"
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "startModal": [
+      "🛰 DANIŞMAN",
+      ""
+    ],
+    "version": {
+      "mp": "MP.8.9b16",
+      "build": "96h10p21",
+      "files": {
+        "mp-core.js": "36682571529b",
+        "relay.js": "419082626658",
+        "mp1-host.js": "58355968ecef",
+        "join.js": "bc2732493741",
+        "mirror.js": "1bf310f85a12",
+        "guest-stars.js": "d336106204f0",
+        "mp71-dip.js": "791d18e17978",
+        "mp7-setup.js": "48c0f282a254"
+      }
+    },
+    "unsupported": [
+      "autoEvent",
+      "diagCopy",
+      "joinRebel",
+      "leaveRebel",
+      "mapFix",
+      "physio",
+      "restart",
+      "rollName",
+      "sandbox",
+      "sitPick",
+      "stashNote",
+      "survey",
+      "terra",
+      "toTitle",
+      "tplDel",
+      "tplLoad",
+      "tplSave",
+      "trigCrisis"
+    ],
+    "guestDiag": "STARS MP.8.9b16 · oyun 96h10p21 · misafir · host bağlı · aşama: ready · ayna r5 15:37:31 · kurulum 9 ms · son komut: yok · son hata: yok"
+  },
+  "pass": 1,
+  "fail": 1
+}

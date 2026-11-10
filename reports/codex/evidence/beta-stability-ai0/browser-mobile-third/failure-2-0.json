@@ -1,0 +1,113 @@
+{
+  "url": "/",
+  "vote": null,
+  "inbox": [
+    {
+      "kind": "anomaly",
+      "data": {
+        "a": {
+          "id": "a11",
+          "k": "sinyal",
+          "n": "Bilinmeyen Sinyal",
+          "t": "Sistemin derinliğinden düzenli aralıklarla bir çağrı geliyor. Kaynağı hiçbir kayıtta yok.",
+          "ch": [
+            {
+              "t": "Sinyale karşılık ver",
+              "d": "büyük ödül · risk var"
+            },
+            {
+              "t": "Kaydet ve uzaklaş",
+              "d": "+140 araştırma"
+            }
+          ]
+        },
+        "sys": {
+          "id": 19,
+          "x": 4179.984066635008,
+          "y": 3536.5261747911063,
+          "name": "Dunmir",
+          "star": {
+            "n": "B Mavi",
+            "c": "#a9d4ff",
+            "r": 7.5,
+            "w": 4
+          },
+          "planets": [
+            {
+              "i": 0,
+              "t": "alp",
+              "dep": "jeotermal",
+              "sz": 20,
+              "seed": 2492,
+              "owner": -1,
+              "col": null,
+              "name": "Dunmir I",
+              "lux": "zerrin"
+            },
+            {
+              "i": 1,
+              "t": "vol",
+              "dep": null,
+              "sz": 11,
+              "seed": 2509,
+              "owner": -1,
+              "col": null,
+              "name": "Dunmir II"
+            },
+            {
+              "i": 2,
+              "t": "cor",
+              "dep": null,
+              "sz": 15,
+              "seed": 2526,
+              "owner": -1,
+              "col": null,
+              "name": "Dunmir III"
+            },
+            {
+              "i": 3,
+              "t": "ast",
+              "dep": "kristal",
+              "sz": 0,
+              "seed": 2543,
+              "owner": -1,
+              "col": null,
+              "name": "Dunmir IV"
+            }
+          ],
+          "lanes": [
+            14,
+            38,
+            24
+          ],
+          "owner": -1,
+          "surv": [
+            0
+          ],
+          "seen": [
+            0
+          ],
+          "def": 0,
+          "queue": [],
+          "anom": false,
+          "pulsar": false,
+          "nebulaS": false,
+          "anomK": "sinyal",
+          "_reach": 0,
+          "_shat": false,
+          "cr": 0
+        }
+      },
+      "ico": "🔬",
+      "cls": "sci",
+      "pause": true,
+      "title": "Anomali — Dunmir",
+      "sub": "Bilinmeyen Sinyal",
+      "key": "an:19",
+      "uid": 1,
+      "born": 33.32640000000007
+    }
+  ],
+  "modal": "",
+  "pane": ""
+}

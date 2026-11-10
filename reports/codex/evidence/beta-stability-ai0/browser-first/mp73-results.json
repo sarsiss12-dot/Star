@@ -1,0 +1,13 @@
+{
+  "results": [
+    {
+      "name": "FATAL",
+      "status": "FAIL",
+      "error": "browserType.launch: Executable doesn't exist at /home/agent/.cache/ms-playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell\n╔════════════════════════════════════════════════════════════╗\n║ Looks like Playwright was just installed or updated.       ║\n║ Please run the following command to download new browsers: ║\n║                                                            ║\n║     npx playwright install                                 ║\n║                                                            ║\n║ <3 Playwright Team                                         ║\n╚════════════════════════════════════════════════════════════╝\n    at /workspace/Star/tests/browser-mp73.cjs:109:57\n    at /workspace/Star/tests/browser-mp73.cjs:109:40"
+    }
+  ],
+  "errors": [],
+  "metrics": {},
+  "pass": 0,
+  "fail": 1
+}

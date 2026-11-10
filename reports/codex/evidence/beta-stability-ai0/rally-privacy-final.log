@@ -1,0 +1,4 @@
+PASS B host-authorized merge redirects paid jobs; duplicate has no second effect
+PASS B bulk recovery: exact ACK, replay, C ownership, private mirror and rally π
+PASS untrusted extra actor keys and foreign destination rejected
+{"pass":3,"fail":0}

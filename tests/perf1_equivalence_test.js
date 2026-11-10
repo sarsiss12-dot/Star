@@ -12,9 +12,11 @@ const {test,end}=harness(),root=path.resolve(__dirname,'..');
 const sha=s=>crypto.createHash('sha256').update(s).digest('hex');
 const SAVE=fs.readFileSync(path.join(__dirname,'fixtures/96h10/seed11-month228-occupied-colony.save'),'utf8');
 const FILES=['main.js','map.js','combat.js','ai.js','diplomacy.js','economy.js','commerce.js','news.js','inbox.js','construction.js','ui.js','archive-ui.js','commerce-ui.js','economic-ledger.js','economy-ui.js','audio.js'];
+// Keep current gameplay/diagnostics in both worlds; remove only the PERF.1 optimization.
+// Historical full-source restoration remains asserted separately below (same approach as PERF.2).
 function controlRoot(){
   const dir=fs.mkdtempSync(path.join(os.tmpdir(),'perf1-control-'));
-  for(const f of FILES)fs.writeFileSync(path.join(dir,f),P.stripReviewedP1(f,fs.readFileSync(path.join(root,f),'utf8')));
+  for(const f of FILES)fs.writeFileSync(path.join(dir,f),originalStrip(f,fs.readFileSync(path.join(root,f),'utf8')));
   return dir;
 }
 const STEP=`G.autoSave=false;function __step(){const b=Math.floor(G.day/30);for(let i=0;i<60;i++){G.day+=.5;dailyTick(.5);structTick(.5);colonyBuildTick(.5);autoExploreTick();if(Math.floor(G.day/30)>b){monthTick();break;}}}`;

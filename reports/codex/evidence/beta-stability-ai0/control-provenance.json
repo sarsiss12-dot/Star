@@ -1,0 +1,27 @@
+{
+  "commit": "838f2c392b2cffa9198b88388d1f905e5c744604",
+  "build": "96h10p21",
+  "exactSameControlBytes": true,
+  "files": {
+    "ai.js": "61d4666ad045b4bd2af6f2a2564545be2450dcdfbd6b30bb76ad7bdf867fd0be",
+    "archive-ui.js": "83ef4b95ab1b503c17e8b655745487fa693dc5501632b633b3df4bf5cf9f966d",
+    "audio.js": "6ddf6e388fa404394fee6220c2bfeeb3d1f9601c51a35ccdfe3181a8781942f7",
+    "combat.js": "b4e21fcdb6fdaaa93da07313131470de3e8a3c28b5650226a9c4a2713bde73a5",
+    "commerce-ui.js": "cc7fef5ab43176093251916aaafbdd873424da0630ec46fe6d3d5106a690b8d4",
+    "commerce.js": "978e4f6b01faed1babeade20070447cbcfaa4e2ea70793a78e50f20fbe66be01",
+    "construction.js": "19244de7be9ad0d0aaf5bf67cbccd85bd4f2988cd9d670bbe2a7dd4a91905bf5",
+    "diplomacy.js": "3b813073136181fd82c94560618fb29355d59dbab28b3f6e95b6005048d8dd10",
+    "economic-ledger.js": "309837d46e3d533f17d0ecb76a5c531474662cb57e05802ca52ffa904d5c5c3c",
+    "economy-ui.js": "797431b367504c669c91dda97a1fc7524f42a77d8f10f92a24fd10153457dbcd",
+    "economy.js": "b4c7c9cdc6bbe8bec1b4478d77cfdea743550ac41bfcda95530d03b482394a7b",
+    "inbox.js": "77c15604629491740a3e9f256293165692a9e2c0d28f0e15ff384966be605cc7",
+    "index.html": "2c828257cb3a797f8abdfebb804db3e95b9c3ab772531e222a98adf7042601ff",
+    "main.js": "98daa67073372c785c6b81f70846564276d431e6763e56b90673ac5372f18443",
+    "manifest.json": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
+    "map.js": "400dbc524750443528b88bfbd0d82aa301fd7b1f12b03d8ea5fa3d73c07603fc",
+    "news.js": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
+    "sw.js": "2e94486166f427586c73c577167e307fdee9776fd8c0c02fcf7ef8a56a9e6496",
+    "ui.js": "ff6e035e2586dd65da7ec62471902915d14cf54b13ec398ff6668acc42468f1f",
+    "research/mp0/mp-core.js": "6d6e5adf283e5208c7d2ab5b139a6e73713823673af8f4a2ee6eddbfd2f67e8d"
+  }
+}

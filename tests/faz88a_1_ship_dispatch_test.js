@@ -23,8 +23,10 @@ test('başarısız sevk gemiyi tersanede bırakır, sevk ilan etmez',()=>{
 test('üretimde hareketli hedefin güncel varışı seçilir',()=>{
  const h=fresh();h.run('reinforceFleet(E,A);orderMove(A,3);stepFleets(.01);finish();var N=G.fleets.find(f=>f!==A&&f!==B);');eq(h.run('N.path.at(-1)'),3);eq(h.run('N.joinFleet'),h.run('A.id'));
 });
-test('yok olmuş filo siparişi eski konuma yollanmaz',()=>{
- const h=fresh();h.run('reinforceFleet(E,A);A.ships=[];finish();var N=G.fleets.find(f=>f!==A&&f!==B);');eq(h.run('N.sys'),0);eq(h.run('N.path.length'),0);eq(h.run('N.joinFleet===undefined'));
+test('yok olmuş filo siparişi bekler; gerçek bedel ve ilerleme korunur',()=>{
+ const h=fresh();h.run('reinforceFleet(E,A);var q=Y.queue[0],paid=JSON.stringify(q.paid),left=q.left,res=JSON.stringify(E.res);A.ships=[];dailyTick(.001);');
+ eq(h.run('Y.queue.length'),1);eq(h.run('Y.queue[0]===q&&q.delivery.hold===true&&q.left===left&&JSON.stringify(q.paid)===paid&&JSON.stringify(E.res)===res'));
+ eq(h.run('G.fleets.some(f=>f!==B)'),false);eq(h.run('fleetRecoveryGroups(E).find(g=>g.id===A.id).jobs.length'),1);
 });
 test('genel rally yabancı filo id içerirse yabancıya gemi verilmez',()=>{
  const h=fresh();h.run('A.e=O.id;A.sys=0;Y.rally[E.id]={fleet:A.id,sys:0};queueShip(E,Y,"kor");finish();');eq(h.run('A.ships.length'),1);eq(h.run('G.fleets.some(f=>f.e===E.id&&f.sys===0&&f.ships.length===1)'));

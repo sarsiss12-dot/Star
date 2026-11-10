@@ -1,0 +1,186 @@
+[
+  {
+    "viewport": {
+      "width": 800,
+      "height": 360
+    },
+    "scale": 80,
+    "modalBox": {
+      "x": 0,
+      "y": 0,
+      "width": 800,
+      "height": 360
+    }
+  },
+  {
+    "viewport": {
+      "width": 800,
+      "height": 360
+    },
+    "scale": 100,
+    "modalBox": {
+      "x": 0,
+      "y": 0,
+      "width": 800,
+      "height": 360
+    }
+  },
+  {
+    "viewport": {
+      "width": 800,
+      "height": 360
+    },
+    "scale": 125,
+    "modalBox": {
+      "x": 0,
+      "y": 0,
+      "width": 800,
+      "height": 360
+    }
+  },
+  {
+    "viewport": {
+      "width": 915,
+      "height": 412
+    },
+    "scale": 80,
+    "modalBox": {
+      "x": 0,
+      "y": 0,
+      "width": 915,
+      "height": 412
+    }
+  },
+  {
+    "viewport": {
+      "width": 915,
+      "height": 412
+    },
+    "scale": 100,
+    "modalBox": {
+      "x": 0,
+      "y": 0,
+      "width": 915,
+      "height": 412
+    }
+  },
+  {
+    "viewport": {
+      "width": 915,
+      "height": 412
+    },
+    "scale": 125,
+    "modalBox": {
+      "x": 0,
+      "y": 0,
+      "width": 915,
+      "height": 412
+    }
+  },
+  {
+    "viewport": {
+      "width": 960,
+      "height": 540
+    },
+    "scale": 80,
+    "modalBox": {
+      "x": 0,
+      "y": 0,
+      "width": 960,
+      "height": 540
+    }
+  },
+  {
+    "viewport": {
+      "width": 960,
+      "height": 540
+    },
+    "scale": 100,
+    "modalBox": {
+      "x": 0,
+      "y": 0,
+      "width": 960,
+      "height": 540
+    }
+  },
+  {
+    "viewport": {
+      "width": 960,
+      "height": 540
+    },
+    "scale": 125,
+    "modalBox": {
+      "x": 0,
+      "y": 0,
+      "width": 960,
+      "height": 540
+    }
+  },
+  {
+    "viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "scale": 80,
+    "modalBox": {
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080
+    }
+  },
+  {
+    "viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "scale": 100,
+    "modalBox": {
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080
+    }
+  },
+  {
+    "viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "scale": 125,
+    "modalBox": {
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080
+    }
+  },
+  {
+    "fixture": {
+      "actor": 1,
+      "sys": 21,
+      "lost": 26,
+      "target": 27,
+      "paid": [
+        {
+          "ala": 32
+        },
+        {
+          "ala": 32
+        }
+      ],
+      "orderCount": 2,
+      "shipCount": 27
+    },
+    "realCombat": true,
+    "nativeSelfleet": true,
+    "nativeBulkMerge": true,
+    "shipsBefore": 27,
+    "shipsAfter": 28,
+    "includedOriginalTargetShip": 1,
+    "paidJobs": 2,
+    "sameResources": true,
+    "hostAck": true,
+    "thirdPartyPrivate": true
+  }
+]
