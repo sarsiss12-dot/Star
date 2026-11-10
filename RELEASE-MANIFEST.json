@@ -1,11 +1,11 @@
 {
   "phase": "BETA-ESPIONAGE-REBELLION.0",
-  "build": "96h10p20",
+  "build": "96h10p21",
   "scope": "github-runtime-only",
   "save_version": 8,
-  "pwa_cache": "stars-v96h10p20",
-  "parent_commit": "6648bf90a5c7226fa93d0e1cc6703776425d62cd",
-  "parent_zip_sha256": "501d4e27e2435402adf3b88ef43095d95946af9ca0278860bf7ea01bac220583",
+  "pwa_cache": "stars-v96h10p21",
+  "parent_commit": "3aacf7d648fcea9603e2c57232f2689c0feabfb4",
+  "parent_zip_sha256": "8cbb9aa19d66ff5a415db3e4ebf8a5e699c5f9817e4602a31eb2bf2e1f6594ad",
   "file_count": 19,
   "files": {
     "ai.js": "61d4666ad045b4bd2af6f2a2564545be2450dcdfbd6b30bb76ad7bdf867fd0be",
@@ -21,12 +21,12 @@
     "economy.js": "b4c7c9cdc6bbe8bec1b4478d77cfdea743550ac41bfcda95530d03b482394a7b",
     "inbox.js": "77c15604629491740a3e9f256293165692a9e2c0d28f0e15ff384966be605cc7",
     "index.html": "2c828257cb3a797f8abdfebb804db3e95b9c3ab772531e222a98adf7042601ff",
-    "main.js": "54c04efa7908c8a0bc0e876a7ec55907dbda38704f1e33a03817a18d5e70e58a",
+    "main.js": "98daa67073372c785c6b81f70846564276d431e6763e56b90673ac5372f18443",
     "manifest.json": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
     "map.js": "400dbc524750443528b88bfbd0d82aa301fd7b1f12b03d8ea5fa3d73c07603fc",
     "news.js": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
-    "sw.js": "6156d50e9f1e5174b9d58a658992d65fc542a68c3f01ce9d579411a3240edce0",
-    "ui.js": "ac13e2cc27084a0c0e005c30175400bae9b7a49583198243297699dae662c443"
+    "sw.js": "2e94486166f427586c73c577167e307fdee9776fd8c0c02fcf7ef8a56a9e6496",
+    "ui.js": "ff6e035e2586dd65da7ec62471902915d14cf54b13ec398ff6668acc42468f1f"
   },
   "description": "Ortak casusluk çalışma alanı; gerçek iç riskler, kalıcı erken uyarı ve sınırlı maliyetli kriz müdahaleleri."
 }

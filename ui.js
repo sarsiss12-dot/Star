@@ -2012,7 +2012,8 @@ const UI = {
       const U=upheavalInfo();add(U.ico+' '+U.n+' · '+G.upheaval.left+' tur','upInfo');
     }
     const risk=internalRiskSummary(e),n=risk.colonies.length;
-    if(n||risk.schism.counter||risk.subjects.length||risk.ownVassal?.anger>=50)add('⚠ '+n+' KOLONİDE İSYAN RİSKİ · İç istikrar','internalRisk',Math.max(1,n));
+    const riskLabels=[...(n?[n+' KOLONİDE İSYAN RİSKİ']:[]),...(risk.schism.counter?['İDEOLOJİK BÖLÜNME']:[]),...(risk.subjects.length||risk.ownVassal?.anger>=50?['VASAL BAĞIMSIZLIK RİSKİ']:[])];
+    if(riskLabels.length)add('⚠ '+riskLabels.join(' · ')+' · İç istikrar','internalRisk',Math.max(1,n));
     if(e.crisis)add('⚠ '+e.crisis.toUpperCase()+' KRİZİ');
     if(e.shortage)add('⚠ Mal kıtlığı · ekonomi / kaynak üretimini kontrol et');
     // Navigation survives, ordinary galactic news is never an urgent count.
