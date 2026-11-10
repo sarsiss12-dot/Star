@@ -674,7 +674,7 @@ function aiStrategicDiplomacyBias(e,o,n){
  return 0;
 }
 function aiStrategicWarReady(e,o){
- const s=e.aiStrategy;if(!s?.objective)return true;
+ const s=e.aiStrategy;if(!s?.objective)return true;if(warPreparationState(warPreparation(s.coalition?.plan)||{state:'none'})==='pending'&&warPreparation(s.coalition.plan)?.target===o.id)return false;
  if(s.plan?.stage==='stabilize'||s.objective.kind==='recovery')return false;
  const wars=Object.keys(e.war||{}).filter(id=>e.war[id]&&G.emps[id]&&!G.emps[id].wild&&!G.emps[id].dead);if(wars.length)return false;
  if(['regional','contain'].includes(s.objective.kind))return s.plan?.enemy===o.id&&s.plan.stage==='ready';
@@ -1617,7 +1617,7 @@ function aiTurn(e){
   if (e.dead) return;
   if (e.crisisSide){ crisisFleetTurn(e); return; }
   if (e.wild){ wildTurn(e); return; }
-  aiObserve(e);aiCivicActions(e);aiUpdateStrategy(e);aiStrategicDiplomacy(e);
+  aiObserve(e);aiCivicActions(e);aiUpdateStrategy(e);aiStrategicDiplomacy(e);aiCoalitionDiplomacy(e);
   const race = RACES[e.race];
   const prof = aiProfile(e);
   const my = G.sys.filter(s => s.owner === e.id);
@@ -1788,6 +1788,7 @@ function aiTurn(e){
   const myPow = totalPower(e);
   for (const o of G.emps){
     if (o.dead || o.id === e.id || !e.contact[o.id] || e.war[o.id] || e.ally[o.id]) continue;
+    if(warPreparationState(warPreparation(e.aiStrategy?.coalition?.plan)||{state:'none'})==='pending'&&warPreparation(e.aiStrategy.coalition.plan)?.target===o.id)continue;
     if (!canDeclareWarOn(e, o)) continue;              // sürgüne dokunulmaz
     const oPow = aiKnownPower(e,o) + 1;
     const border = aiKnownSystems(e,o.id).some(s=>s.lanes.some(l=>G.sys[l].owner===e.id));
@@ -4599,6 +4600,10 @@ function aiSubmitTick(){
   for (const e of G.emps){
     if (e.dead || e.wild || e.crisisSide || !e.ai) continue;
     if (isVassal(e)||(e.res.etk||0)<VASSAL_SEEK_COST) continue;
+    if(!Object.keys(e.war||{}).some(id=>e.war[id]&&!G.emps[id]?.wild)){
+      if(['regional','contain'].includes(e.aiStrategy?.objective?.kind)&&Number.isInteger(e.aiStrategy?.plan?.enemy))aiCoalitionDiplomacy(e);
+      if(aiPendingPoliticalCommitment(e)||warPreparationState(warPreparation(e.aiStrategy?.coalition?.plan)||{state:'none'})==='pending')continue;
+    }
     if (typeof isPurifier === 'function' && isPurifier(e)) continue;  // FAZ 73
     if (e._submitCd && e._submitCd > (G.memAge || 0)) continue;
     if (typeof vassalsOf === 'function' && vassalsOf(e).length) continue;
@@ -4770,6 +4775,7 @@ function aiFedLawTick(){
 function aiFedAffinity(e,type){
  const p=e._prof||aiProfile({...e}),war=Object.keys(e.war||{}).some(id=>e.war[id]&&!G.emps[id]?.wild);
  const doctrine=researchDoctrine(e);
+ if(type==='yagmaci')return .25+p.war*.5+(doctrine==='kriminal'?.45:doctrine==='militarist'?.35:doctrine==='yayilmaci'?.25:0)+(['regional','contain'].includes(e.aiStrategy?.objective?.kind)?.15:0)-p.dip*.1-(e.aiStrategy?.objective?.kind==='recovery'?.8:0);
  if(type==='askeri')return .35+p.war*.45+(war?.2:0)+(doctrine==='militarist'?.25:0);
  if(type==='bilimsel')return .35+p.sci*.45+(doctrine==='teknokrasi'?.3:0)+((e.factions||[]).some(x=>x.k==='bilim'&&x.mood<40)?.15:0);
  return .35+p.eco*.45+(['tuccar','kriminal'].includes(doctrine)?.25:0)+((e.inc.ene||0)<5?.1:0);
@@ -4929,6 +4935,7 @@ function aiFedVoteWant(e,f,v){
  if(v.motion==='joinWar'||v.motion==='newWar'){
   const target=G.emps[v.target];if(!target||!e.contact[target.id]||e.ally[target.id]||(e.nap?.[target.id]||0)>G.day)return .01;
   if(!e.war[target.id]&&(!fedSupportGate(e,target).ok||!aiFedHelp(e,target,true)))return .01;
+  if(f.type==='yagmaci'&&v.motion==='newWar'&&!e.war[target.id]){const shown=shownPower(e,target),combined=aiKnownPower(e,e)+f.members.filter(id=>id!==e.id).reduce((n,id)=>n+aiKnownPower(e,G.emps[id])*.75,0);if(combined<shown.v*(1+shown.band)*1.1)return .02;}
   const ratio=totalPower({...e})/(aiKnownPower(e,target)+1);
   want=.3+aiProfile({...e}).war*.35-(e.rel[target.id]||0)/250+((e.war[target.id]||aiObservedThreat(e,e.home)>0)?.25:0)-clamp(.8-ratio,0,.8)*.35;
   if(!e.war[target.id]){
@@ -4943,6 +4950,8 @@ function aiFederationPolitics(){
  for(const e of G.emps){
   if(!e.ai||e.dead||e.wild||e.crisisSide||isPurifier(e)||isVassal(e))continue;
   const month=G.year*12+G.month;if(e._fedPoliticsMonth===month)continue;e._fedPoliticsMonth=month;
+  if(aiFederationEmergency(e))continue;
+  if(aiRaiderPending(e))continue;
   if((e._fedPoliticsAfter||0)>G.day)continue;
   let f=findFed(e);
   if(!f){
@@ -4952,6 +4961,7 @@ function aiFederationPolitics(){
    const partner=G.emps.filter(o=>o!==e&&e.contact[o.id]&&findFed(o)&&canRequestFederation(e,o).ok&&aiFedWilling(e,o,findFed(o).type,findFed(o)).ok).sort((a,b)=>(e.rel[b.id]||0)-(e.rel[a.id]||0)||a.id-b.id)[0];
    if(partner){const result=requestFederation(e,partner);if(result.ok){e._fedPoliticsAfter=G.day+360;e.aiFedReason={day:G.day,kind:'apply',why:'Bilinen erişim, ilişki ve ortak çıkar'};}continue;}
    const type=aiFedType(e),ids=[e.id,...G.emps.filter(o=>o!==e&&e.contact[o.id]&&e.ally[o.id]&&!o.dead&&!o.wild&&!findFed(o)).map(o=>o.id)],ballot=aiFedBallot(e,ids),gate=canFoundFed(e,type,ballot);
+   if(type==='yagmaci'){aiRaiderFound(e,ids,ballot);continue;}
    if(gate.ok){const result=foundFederation(e,type,ballot);e.aiFedReason={day:G.day,kind:'found',type,ballot,why:'Kabul eden müttefikler, bilinen rota ve doktrin uyumu'};if(result.ok)e._fedPoliticsAfter=G.day+360;}
    continue;
   }
@@ -4964,11 +4974,110 @@ function aiFederationPolitics(){
   if(hostile!==undefined&&offer('expel',{target:hostile}))continue;
   const preferred=aiFedType(e);
   if(G.day-f.founded>=720&&preferred!==f.type&&aiFedAffinity(e,preferred)>aiFedAffinity(e,f.type)+.2&&offer('reform',{type:preferred}))continue;
+  if(f.type==='yagmaci'&&aiRaiderMilitaryProposal(e,f,offer))continue;
   const candidate=G.emps.find(o=>o!==e&&e.contact[o.id]&&(e.rel[o.id]||0)>45&&fedAdmissionGate(f,o,true).ok&&aiFedWilling(o,e,f.type,f).ok);
   if(candidate&&offer('admit',{target:candidate.id}))continue;
-  if(f.type==='askeri'){
+  if(f.type==='askeri'||f.type==='yagmaci'){
    const enemy=G.emps.find(o=>e.war[o.id]&&!o.dead&&!o.wild&&!o.crisisSide&&f.members.some(id=>!G.emps[id].war[o.id]));
    if(enemy)offer('joinWar',{target:enemy.id,sponsor:e.id});
+
   }
  }
+}
+
+/* BETA-FED-AI.0: extend the existing long-term plan with canonical p18
+   preparation IDs. No second combat/deal engine, no extra strategic RNG. */
+function aiCoalitionSend(e,o,give,want){
+ const offer={from:e.id,to:o.id,give,want,born:G.day,expires:G.day+180};if(!dealQuote(offer).ok)return {karar:'gecersiz',uygulandi:false};
+ if(o.id===0)return {karar:UI.aiOffer(offer)?'bekliyor':'bekle',uygulandi:false};
+ return aiNegotiate(e,o,give,want,true);
+}
+function aiPendingPoliticalCommitment(e){
+ return !!G.fedFounding?.proposals.some(p=>p.status==='pending'&&G.day<p.expires&&(p.by===e.id||p.members.includes(e.id)&&p.replies[e.id]?.status==='accepted'));
+}
+function aiCoalitionSafe(e){
+ if(!e?.ai||e.dead||e.wild||e.crisisSide||isPurifier(e)||isVassal(e)||!e.aiStrategy?.objective||['recovery'].includes(e.aiStrategy.objective.kind))return false;
+ if(Object.keys(e.war||{}).some(id=>e.war[id]&&!G.emps[id]?.wild)||Math.max(0,...Object.values(e.exh||{}))>45)return false;
+ if(aiPendingPoliticalCommitment(e))return false;
+ return !aiFedWarBurden(e).short&&!aiEconomyPlan(e).critical;
+}
+function aiCoalitionDiplomacy(e){
+ const s=e.aiStrategy;if(!e.ai||!s?.objective||e.dead||e.wild||e.crisisSide)return;
+ const memory=s.coalition,p=memory&&warPreparation(memory.plan);
+ if(p&&warPreparationState(p)==='pending'){
+  if(!aiCoalitionSafe(e)){warPrepareWithdraw(e,p.id);aiPlanEvent(e,'coalition-cancel',{plan:p.id,why:'Savunma yükü, ekonomi veya toparlanma önceliği'});return;}
+  const enemy=G.emps[p.target],members=p.commitments.filter(c=>c.state==='accepted').map(c=>G.emps[c.member]);
+  const force=aiKnownPower(e,e)+members.reduce((v,o)=>v+aiKnownPower(e,o)*.75,0),known=aiKnownPower(e,enemy);
+  if(G.day-p.opened>=30&&members.length&&force>=known*1.2&&warSupportReach(e,enemy,e,[])){
+   memory.ready=true;
+  }else if(G.day-p.opened>=90&&!members.length){warPrepareWithdraw(e,p.id);aiPlanEvent(e,'coalition-cancel',{plan:p.id,why:'Geçerli destek kabulü gelmedi'});}
+  return;
+ }
+ if(!aiCoalitionSafe(e)||(memory?.after||0)>G.day)return;
+ const plan=s.plan,enemy=G.emps[plan?.enemy];
+ if(['regional','contain'].includes(s.objective.kind)&&['arm','ready'].includes(plan?.stage)&&enemy&&!e.war[enemy.id]&&e.contact[enemy.id]&&(e.rel[enemy.id]||0)<-25){
+  const own=aiKnownPower(e,e),power=aiKnownPower(e,enemy),goal=aiProfile({...e}).eco>.7?'harac':'fetih';
+  if(!e.ally[enemy.id]&&!(e.nap?.[enemy.id]>G.day)&&G.day-(e.peaceAt?.[enemy.id]??-9999)>=720-grudgeOf(e,enemy.id)*5&&power>own*.8&&own>power*.3&&aiWarBudget(e,enemy).ok&&warSupportReach(e,enemy,e,[])){
+   const friends=G.emps.filter(o=>o!==e&&!o.dead&&!o.wild&&!o.crisisSide&&e.ally[o.id]&&e.contact[o.id]&&(e.rel[o.id]||0)>25&&trustOf(e,o.id)>-20&&!isVassal(o)&&!isPurifier(o));
+   const eligible=friends.filter(o=>!aiKnownWar(e,o,enemy)&&aiFedHelp(e,o)).sort((a,b)=>aiKnownPower(e,b)-aiKnownPower(e,a)||a.id-b.id).slice(0,3);
+   if(eligible.length){const created=aiCoalitionAuthorize(e,enemy,()=>warPrepareCreate(e,enemy.id,goal));if(created.ok){s.coalition={plan:created.id,after:G.day+360};aiPlanEvent(e,'coalition-prepare',{plan:created.id,target:enemy.id,why:'Mevcut bölgesel hedef için tek başına yetersiz, bilinen müttefik desteği erişilebilir'});
+    const payment=Math.min(750,Math.floor(Math.max(0,e.res.min||0)*.06));
+    for(const o of eligible){const give=[...(payment>=20?[{t:'res',r:'min',v:payment}]:[]),{t:'passage'}],want=[{t:'warJoin',plan:created.id,target:enemy.id}];const r=aiCoalitionSend(e,o,give,want);aiPlanEvent(e,'coalition-offer',{plan:created.id,other:o.id,result:r.karar,applied:!!r.uygulandi});}return;}}
+  }
+ }
+ // Only wars already known through the existing observer/ledger model.
+ const candidates=warCenterIndex(e).filter(f=>f.ended===null&&!f.mine).sort((a,b)=>a.id-b.id);
+ for(const f of candidates)for(const side of f.sides){const sponsor=G.emps[side],enemy=G.emps[f.sides.find(id=>id!==side)];
+  if(!sponsor||!enemy||!e.ally[sponsor.id]||(e.rel[enemy.id]||0)>-25||!warSupportGate(e,sponsor,{front:f.id,target:enemy.id}).ok||!aiWarBudget(e,enemy).ok)continue;
+  const signature=[f.id,sponsor.id,Math.floor(aiKnownPower(e,e)/100),Math.floor(aiKnownPower(e,enemy)/100),Math.floor((e.rel[sponsor.id]||0)/20)].join(':');
+  if(s.supportOpportunity?.signature===signature||(s.supportOpportunity?.after||0)>G.day)continue;
+  const reachable=warSupportReach(e,enemy,sponsor,[]),via=reachable||warSupportReach(e,enemy,sponsor,[{t:'passage'}]);if(!via)continue;
+  const ask=Math.min(240,Math.max(40,Math.ceil(fleetUpkeep(e)*3))),give=[{t:'warJoin',front:f.id,target:enemy.id}],want=[{t:'res',r:'min',v:ask},...(!reachable?[{t:'passage'}]:[])];
+  s.supportOpportunity={signature,front:f.id,after:G.day+360};const r=aiCoalitionSend(e,sponsor,give,want);aiPlanEvent(e,'support-opportunity',{front:f.id,other:sponsor.id,payment:ask,passage:!reachable,result:r.karar,applied:!!r.uygulandi});return;
+ }
+}
+
+function aiCoalitionAuthorize(e,enemy,fn){
+ const cb=warAppetite(e,enemy).cb;if(!cb)return {ok:false,why:'Geçerli Casus Belli yok'};
+ const had=Object.hasOwn(G,'_warAuth'),auth=G._warAuth,whyHad=Object.hasOwn(G,'_warWhy'),why=G._warWhy;
+ warAuthorize(e,enemy,cb);try{return fn();}finally{if(had)G._warAuth=auth;else delete G._warAuth;if(whyHad)G._warWhy=why;else delete G._warWhy;}
+}
+function aiCoalitionCommit(e){
+ const memory=e.aiStrategy?.coalition,p=memory&&warPreparation(memory.plan);if(!p||warPreparationState(p)!=='pending'||!memory.ready||!aiCoalitionSafe(e))return false;
+ const enemy=G.emps[p.target],members=p.commitments.filter(c=>c.state==='accepted');
+ if(aiKnownPower(e,e)+members.reduce((n,c)=>n+aiKnownPower(e,G.emps[c.member])*.75,0)<aiKnownPower(e,enemy)*1.2||!warSupportReach(e,enemy,e,[]))return false;
+ const r=aiCoalitionAuthorize(e,enemy,()=>{const q=warPrepareQuote(e,p.id);return q.ok?warPrepareLaunch(e,p.id,q.stamp):q;});
+ aiPlanEvent(e,'coalition-launch',{plan:p.id,front:r.front||null,ok:r.ok,why:r.why||'Geçerli CB, güncel rıza ve ortak kuvvet'});return !!r.ok;
+}
+
+function aiRaiderFound(e,ids,ballot){
+ if(!aiCoalitionSafe(e)||warPreparationState(warPreparation(e.aiStrategy?.coalition?.plan)||{state:'none'})==='pending'||!['regional','contain','federation'].includes(e.aiStrategy?.objective?.kind))return false;
+ const members=ids.filter(id=>id!==e.id&&fedFoundCandidate(e,G.emps[id]).ok).slice(0,3);if(members.length<2)return false;
+ const q=fedFoundPropose(e,'yagmaci',ballot,members);if(q.ok){e._fedPoliticsAfter=G.day+360;aiPlanEvent(e,'raider-founding',{proposal:q.id,members,why:'Uygun müttefikler, gerçek davet ve bağımsız yanıtlar'});}return q.ok;
+}
+function aiRaiderPending(e){
+ const p=G.fedFounding?.proposals.find(p=>p.by===e.id&&p.type==='yagmaci'&&p.status==='pending');
+ if(p){
+  const q=fedFoundValid(p);if(!q.ok){fedFoundTick();return true;}
+  if(p.members.every(id=>p.replies[id]?.status==='accepted')&&G.day-p.opened>=30){const r=fedFoundFinish(e,p.id,p.revision||0);aiPlanEvent(e,'raider-founded',{proposal:p.id,ok:r.ok,fed:r.fed?.id||null,why:r.why||'Bütün güncel rızalar alındı'});}
+  else if(p.members.some(id=>p.replies[id]?.status==='rejected')&&G.day-p.opened>=30){const keep=p.members.filter(id=>id!==e.id&&p.replies[id]?.status!=='rejected'),extra=G.emps.find(o=>!p.members.includes(o.id)&&fedFoundCandidate(e,o).ok);if(extra)keep.push(extra.id);if(keep.length>=2)fedFoundUpdate(e,p.id,p.revision||0,p.type,p.ballot,keep);else fedFoundCancel(e,p.id);}
+  return true;
+ }
+ const f=findFed(e);if(f?.type==='yagmaci')for(const d of Object.values(f.decisions||{}))if(d.state==='ready'&&(d.by===e.id||f.leader===e.id)&&!(d.kind==='newWar'&&(aiEconomyPlan(e).critical||aiObservedThreat(e,e.home)>0)))executeFedDecision(e,f.id,d.id);
+ return false;
+}
+
+function aiFederationEmergency(e){
+ const f=findFed(e);if(!f)return false;
+ for(const id of Object.keys(e.war||{})){if(!e.war[id]||!fedEmergencyId(f,e,'joinWar',{target:+id,sponsor:e.id}))continue;
+  const q=canFedMotion(e,'joinWar',{target:+id,sponsor:e.id});if(!q.ok)continue;
+  const r=proposeFedMotion(e,'joinWar',{target:+id,sponsor:e.id});if(r.ok){aiPlanEvent(e,'emergency-defense',{front:q.defenseFront,fed:f.id,enemy:+id,queued:!!r.queued});return true;}
+ }return false;
+}
+
+function aiRaiderMilitaryProposal(e,f,offer){
+ const ongoing=G.emps.find(o=>e.war[o.id]&&!o.dead&&!o.wild&&!o.crisisSide&&f.members.some(id=>!G.emps[id].war[o.id]));
+ if(ongoing)return offer('joinWar',{target:ongoing.id,sponsor:e.id});
+ const target=G.emps[e.aiStrategy?.plan?.enemy]||aiStrategicFacts(e).enemies.find(o=>warAppetite(e,o).cb);
+ return !!(target&&e.contact[target.id]&&!e.ally[target.id]&&!e.war[target.id]&&warAppetite(e,target).cb&&aiFedVoteAssessment(e,f,{kind:'motion',motion:'newWar',target:target.id,proposer:e.id}).score>=.5&&offer('newWar',{target:target.id}));
 }

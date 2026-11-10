@@ -86,7 +86,7 @@ const VIEW=new Set(['warCenter','warCenterTab','warCenterDetail','warCenterSuppo
   /* MP.6.1 — görünüm / taslak */
   'news','newsContext','newsReturn','diplomaticInbox','newsDetail','newsEmpire','newsLocation','newsPin','newsUnread','newsPinned','newsReadAll','archiveMore','diplomaticRecord',
   'inboxEmpire','inboxReturn','inboxFederation','deal','dealAdd','dealRm','dealDiscard','dealBack','peace','vsOpen','vsCancel','vsCounter','fedBallot',
-  'fedVoteYes','fedVoteNo','fedVoteNow','fedFoundType','fedFoundSelect','fedFoundStart','fedFoundReply','fedFoundCancel','fedFoundFinish',
+  'fedVoteYes','fedVoteNo','fedVoteNow','fedFoundType','fedFoundSelect','fedFoundEdit','fedFoundEditStop','fedFoundUpdate','fedFoundStart','fedFoundReply','fedFoundCancel','fedFoundFinish',
   /* MP.6.1 — motor işlevi MP komutuna çevrilen gerçek düğmeler */
   'sendhere','ship','focus','cancelBuild','demolish','foundFed','fedDipInvite','fedDipRequest','fedMotion','fedInviteAccept','fedInviteReject',
   'fedLawPropose','fedLawRepeal','fedAgendaWithdraw','fedLeave','vsSend','vsReply','dealSend',
@@ -208,9 +208,10 @@ function gate(){
   /* MP.6.1 — federasyon ve vasallık: gerçek STARS pencereleri → MP.3.1 komutları (host motorun kendi işlevini çağırır) */
   const r=c=>send(c)?{ok:true}:{ok:false,why:'Host bağlı değil; karar gönderilmedi.'};
   wrap('fedFoundPropose',(o,e,type,ballot,members)=>mine(e)?r({kind:'fedFoundStart',type,ballot,members:members.map(real)}):NOT_MP);
-  wrap('fedFoundReply',(o,e,id,accept)=>mine(e)?r({kind:'fedFoundReply',id:+id,accept:!!accept}):NOT_MP);
+  wrap('fedFoundReply',(o,e,id,accept,revision=0)=>mine(e)?r({kind:'fedFoundReply',id:+id,accept:!!accept,revision}):NOT_MP);
+  wrap('fedFoundUpdate',(o,e,id,revision,type,ballot,members)=>mine(e)?r({kind:'fedFoundUpdate',id,revision,type,ballot,members:members.map(real)}):NOT_MP);
   wrap('fedFoundCancel',(o,e,id)=>mine(e)?r({kind:'fedFoundCancel',id:+id}):NOT_MP);
-  wrap('fedFoundFinish',(o,e,id)=>mine(e)?r({kind:'fedFoundFinish',id:+id}):NOT_MP);
+  wrap('fedFoundFinish',(o,e,id,revision=0)=>mine(e)?r({kind:'fedFoundFinish',id:+id,revision}):NOT_MP);
   const fp={q:new Map(),wait:new Set()};
   wrap('fedFoundQuote',(o,e,type,ballot,members)=>{if(!mine(e))return o(e,type,ballot,members);const k=JSON.stringify([type,ballot,members]),cached=fp.q.get(k);if(cached&&Date.now()-cached.at<1500)return cached.q;
     if(!fp.wait.has(k)){const cid=send({kind:'fedFoundPlan',type,ballot,members:members.map(real)});if(cid){fp.wait.add(k);waits[cid]=res=>{fp.wait.delete(k);if(res.status==='ok')fp.q.set(k,{at:Date.now(),q:{...res.extra,candidates:res.extra.candidates.map(x=>({...x,id:local(x.id)}))}});if(fp.q.size>32)fp.q.delete(fp.q.keys().next().value);const pane=doc.getElementById('diploPane');if(pane?.classList.contains('show')&&String(pane._surfaceKey).startsWith('federation:')&&!S.building)UI.openFed(true);};}}
@@ -469,7 +470,7 @@ function gate(){
     if(!S.on)return resolve0(id,yes,option,world);
     const rec=this.get(id);if(!rec||rec.status!=='pending')return {ok:false,why:'Teklif geçersiz'};
     let c=null;
-    if(rec.kind==='fedfound')c={kind:'fedFoundReply',id:rec.note.data,accept:!!yes};
+    if(rec.kind==='fedfound')c={kind:'fedFoundReply',id:rec.note.data,accept:!!yes,revision:fedFoundRecordRevision(rec)};
     else if(rec.mpSq!==undefined)c={kind:'statusQuoReply',from:rec.mpSq,accept:!!yes};
     else if(rec.mp)c={kind:'respond',offer:rec.mp,action:yes?'accept':'reject'};
     else if(rec.kind==='invite')c={kind:'fedReply',fed:rec.fid,action:yes?'accept':'reject'};

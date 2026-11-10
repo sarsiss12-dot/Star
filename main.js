@@ -4734,6 +4734,7 @@ function captureSystem(sys, byId, cause = 'conquest', onlyPlanet = null){
   const oldPlanets = sys.planets.filter(pl=>pl.col&&(!onlyPlanet||pl===onlyPlanet)).map(pl=>({i:pl.i,owner:pl.owner}));
   if (e && e.wild) return;                  // vahşiler sistem sahiplenmez
   if (old === byId) return;
+  fedRaiderLoot(sys,e,oldPlanets,cause);
   sys.shareRev = (sys.shareRev || 0) + 1;
   territoryOwnerSet(sys, byId);
   /* Kolonisi olmayan sistemin devri "uzay" sayılır */
@@ -8499,7 +8500,7 @@ function forceRedraw(sebep){
    Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
    Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
 /* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */
-const BUILD_ID = '96h10p18';
+const BUILD_ID = '96h10p19';
 const DIAG_MAX = 40;
 const DIAG = [];
 function logDiag(tur, mesaj){
@@ -9660,7 +9661,7 @@ function stateEmblem(e){const cached=STATE_EMBLEM_CACHE.get(e);if(cached&&cached
 function federationIdentity(f){
  if(f.emblem&&Object.hasOwn(FED_TYPES,f.identityType)&&f.emblem.federation===true&&Object.hasOwn(EMBLEM_SHAPES,f.emblem.shape)&&Object.hasOwn(EMBLEM_SYMBOLS,f.emblem.symbol)&&Object.hasOwn(EMBLEM_PATTERNS,f.emblem.pattern)&&/^#[0-9a-f]{6}$/i.test(f.emblem.primary)&&/^#[0-9a-f]{6}$/i.test(f.emblem.secondary))return;
  f.identityType=f.identityType||f.type||'askeri';
- const colors={askeri:'#f5c25c',bilimsel:'#5cf5d6',ticaret:'#b2f55c'},col=colors[f.identityType]||'#f5c25c';
+ const colors={askeri:'#f5c25c',bilimsel:'#5cf5d6',ticaret:'#b2f55c',yagmaci:'#ef7658'},col=colors[f.identityType]||'#f5c25c';
  const base=makeEmblem('federation:'+G.seed+':'+f.id,col,true);
  base.symbol=f.identityType==='bilimsel'?'orbit':f.identityType==='ticaret'?'planet':'sword';
  f.emblem=uniqueEmblem(f.emblem||base,col,(G.feds||[]).filter(x=>x!==f).map(x=>x.emblem),'federation:'+G.seed+':'+f.id,true);

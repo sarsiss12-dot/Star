@@ -229,10 +229,10 @@ setInterval(()=>{
 /* MP.6.1: host'un STARS hız düğmeleri de ortak hız komutundan geçer (host.local: misafirle aynı kurallar, aynı bildirim).
    Oyun dışında (lobi, tek oyunculu) düğme olduğu gibi çalışır. */
 if(typeof UI!=='undefined'){const act0=UI.act.bind(UI);UI.act=function(a,x,el){
-  if(API.host&&API.started&&['fedFoundStart','fedFoundReply','fedFoundCancel','fedFoundFinish'].includes(a)){
-    const c={kind:a};if(a==='fedFoundStart')Object.assign(c,{type:UI.fedFoundType||'askeri',ballot:UI.fedBallotChoice||'equal',members:UI.fedFoundSelected||[]});
-    else if(a==='fedFoundReply'){const [id,value]=String(x).split(':');Object.assign(c,{id:+id,accept:value==='yes'});}else c.id=+x;
-    const r=API.host.local(c);dipToast(r.ok?'Kuruluş işlemi host tarafından kaydedildi.':(r.detail||[]).join(' · ')||r.code,!r.ok);UI.openFed();return;
+  if(API.host&&API.started&&['fedFoundUpdate','fedFoundStart','fedFoundReply','fedFoundCancel','fedFoundFinish'].includes(a)){
+    const c={kind:a};if(a==='fedFoundStart'||a==='fedFoundUpdate')Object.assign(c,{type:UI.fedFoundType||'askeri',ballot:UI.fedBallotChoice||'equal',members:UI.fedFoundSelected||[]});
+    else if(a==='fedFoundReply'){const [id,value,revision]=String(x).split(':');Object.assign(c,{id:+id,accept:value==='yes',revision:+revision||0});}else {const[id,revision]=String(x).split(':');c.id=+id;if(a==='fedFoundFinish')c.revision=+revision||0;}if(a==='fedFoundUpdate'){if(!UI.fedFoundEditing)return;Object.assign(c,UI.fedFoundEditing);}
+    const r=API.host.local(c);if(r.ok&&a==='fedFoundUpdate')UI.fedFoundEditing=null;dipToast(r.ok?'Kuruluş işlemi host tarafından kaydedildi.':(r.detail||[]).join(' · ')||r.code,!r.ok);UI.openFed();return;
   }
   if(a==='spd'&&API.host&&API.started){const r=API.host.local({kind:'speed',value:+x});
     if(!r.ok&&r.code!=='rules:same')dipToast(r.code==='rules:rate-limited'?'Hız çok sık değiştiriliyor; biraz bekle.':r.code==='paused'?'Bağlantı yok — oyun duraklatıldı.':'Hız değiştirilemedi.',true);
