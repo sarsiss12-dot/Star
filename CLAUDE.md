@@ -2,6 +2,16 @@
 
 Tarayıcıda çalışan, harici bağımlılığı olmayan Türkçe 4X uzay strateji oyunu (PWA). Belgeler, commit'ler ve raporlar Türkçedir.
 
+## Son teslim — BETA-STABILITY-AI.0 (p22, 10 Kasım 2026)
+
+- Güncel geliştirme zinciri: `codex/stars-beta-stability-ai0-save-fleet-recovery`, kod/paket `b6dd2c6ab570debc29e02e5e60b48eb591fc9a23`; p21 `838f2c3` tabanlı. Son ayrıntı `CODEX-SON-RAPOR.md` ve `reports/codex/BETA-STABILITY-AI0-SONUC.md`.
+- Birleşme/tam ayırmada aynı sahipte takviye/sipariş/ralli ID geçişi; kayıp hedefli ücretli işleri koruyarak bekletme; host yetkili toplu kurtarma; en fazla256 terminal filo olayı. Misafire kendi son32 kaydı ve yalnız kendi ralli ayarı gider. Yeni kurtarma modalı ACK dünya revizyonu ile ayna sıra revizyonunu karıştırmaz.
+- Gerçek `stars-2224-10.sav` eki yok: özgün20K filo kayıp nedeni BELİRLENEMEDİ; gerçek dosya SHA/CRC ve S1–S3/S9 NOT RUN.27/85/117/11.805 yalnız ayrı sentetik ölçek kanıtıdır. Geçmiş gemiler yaratılmadı, kullanıcı kayıtlarına yazılmadı.
+- Motor10/0, MP3/0, birleşik Chromium8/0, son mobil3/0, SP5/0, soğuk5/0 ve yeni odada native kurtarma/tekrar reddi. KATIL tap aralıklı FAIL'i ve eski özgün P0 vakaları açık; fiziksel kullanıcı kabulü yok. İlk FAIL'leri silme.
+- Kriz AI kuralları değiştirilmedi: aynı p21 şok sonrası başlangıçtan24ay×3 dal ölçüldü; p21/aday aynı iki yeni politika,160etki, sıfır koloni kaybı. Meşru kalıntı+520min/−12istikrar ve eski6ay FAIL korunur.
+- p22 / stars-v96h10p22 / MP.8.9b17; Save8v8, paket4/protokol1. Yeni alanlar isteğe bağlıdır. Rapor açıkça yeni tanı alanı nedeniyle hamSave8 farkını ayırır; stratejik alan/RNG eşitliği ve PERF1/PERF2 aynı mekanikli A/B korunur.
+- PR/Issue33 GraphQLForbidden; pano değiştirilmedi. Main/Render/force-push/kullanıcı kayıtlarına işlem yapılmadı. Hiçbir görev kullanıcı onayı olmadan TAMAMLANDI değildir.
+
 ## Kanonik durum
 
 - Güncel durum: `PROJE-DURUMU.md`. Reddedilmiş AI adayları: `AI-RED-KARARLARI.md`.

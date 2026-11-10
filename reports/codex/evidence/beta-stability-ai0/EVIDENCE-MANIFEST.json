@@ -448,6 +448,10 @@
       "bytes": 743,
       "sha256": "d2a9146c29137400df1c23c4b82ae780ac2b7b8c8683a7278ed03ad4acdd4d6f"
     },
+    "changed-files-code.txt": {
+      "bytes": 25939,
+      "sha256": "1013b63287107040e823950f4a6df15bbb54609726aa9d69926adc02e03ac2c5"
+    },
     "cold-packaged/R/b-start.png": {
       "bytes": 378565,
       "sha256": "6957c4b91d96870411fab1e6fd11845f84e4640ad28997feedd9acae0bde3181"
@@ -1032,6 +1036,10 @@
       "bytes": 248,
       "sha256": "1f974e7be045ecd608dbced6e2360eb4f6ee27c9c4d9395f9502ff453a21c33b"
     },
+    "package-final.json": {
+      "bytes": 206,
+      "sha256": "8e368e66d85ff2a0ba7c8e87b46ffe98a326205fdc342dcf9aca9ecbac18558a"
+    },
     "package-first.json": {
       "bytes": 203,
       "sha256": "892031bccdcf7a3f55c6345c0086746d23b07f449cd84ee52fa296fca8af3205"
@@ -1063,6 +1071,10 @@
     "performance.log": {
       "bytes": 883,
       "sha256": "24977cef6620fbfe57250fbdc860cd5c174a12a06618dc98cd3c675957057328"
+    },
+    "pr-attempt.log": {
+      "bytes": 49,
+      "sha256": "682deed6ccd21e66582c7f0e0efdffb3363feeac4c8b58f35a46d43dc240c725"
     },
     "rally-privacy-final.log": {
       "bytes": 248,
@@ -1215,6 +1227,10 @@
     "release-integrity.json": {
       "bytes": 1101,
       "sha256": "18b8e8229c1dba40814d93f1be8c9fdf5983a03fc798dc6cc5fe1fedc4f97993"
+    },
+    "remote-code-head.txt": {
+      "bytes": 103,
+      "sha256": "96aed5998bcac96693ca4d6e9f91701977c113bf578c4e4381cd57e742d05159"
     },
     "remote-verify.txt": {
       "bytes": 150,
